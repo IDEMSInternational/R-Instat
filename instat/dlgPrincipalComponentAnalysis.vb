@@ -22,7 +22,7 @@ Public Class dlgPrincipalComponentAnalysis
     Private clsPCAFunction As New RFunction
     Private clsREigenValues, clsREigenVectors, clsRRotation, clsRRotationCoord, clsRRotationEig As New RFunction
     Private clsRScreePlotFunction, clsRScreePlotTheme, clsRVariablesPlotFunction, clsRVariablesPlotTheme, clsRIndividualsPlotFunction, clsRIndividualsPlotTheme, clsRBiplotFunction, clsRBiplotTheme, clsRBarPlotFunction As New RFunction
-    Private clsRFactor, clsRMelt, clsRBarPlotGeom, clsRBarPlotAes, clsRBarPlotFacet As New RFunction
+    Private clsRFactor, clsRMelt, clsRBarPlotGeom, clsRBarPlotAes, clsRBarPlotFacet, clsRVariablesPlotFunctionValue, clsRIndividualsFunctionValue, clsRBiplotFunctionValue As New RFunction
     Private clsRScreePlot, clsRVariablesPlot, clsRIndividualsPlot, clsRBiplot As New RSyntax
     Dim clsRBarPlot, clsRBarPlot0, clsRScreePlotOp As New ROperator
     ' call all classes in the sub dialog
@@ -72,7 +72,7 @@ Public Class dlgPrincipalComponentAnalysis
         ucrSaveResult.SetDataFrameSelector(ucrSelectorPCA.ucrAvailableDataFrames)
         ucrSaveResult.SetCheckBoxText("Save Result")
         ucrSaveResult.SetIsComboBox()
-        ucrSaveResult.SetAssignToIfUncheckedValue("last_PCA")
+        ucrSaveResult.SetAssignToIfUncheckedValue("last_model")
     End Sub
 
     Private Sub SetDefaults()
@@ -102,15 +102,19 @@ Public Class dlgPrincipalComponentAnalysis
         clsRBarPlotFacet = New RFunction
         clsRBarPlot0 = New ROperator
         clsRBarPlot = New ROperator
+        clsRVariablesPlotFunctionValue = New RFunction
+        clsRIndividualsFunctionValue = New RFunction
+        clsRBiplotFunctionValue = New RFunction
         ' package name, r command and defaults for sdg
 
         ucrSelectorPCA.Reset()
+        ucrSaveResult.Reset()
 
         clsPCAFunction.SetPackageName("FactoMineR")
         clsPCAFunction.SetRCommand("PCA")
         clsPCAFunction.AddParameter("ncp", 2)
-        clsPCAFunction.AddParameter("graph", "FALSE") ' I don't know what this is for, but it's in there?
-        clsPCAFunction.SetAssignTo("last_PCA", strTempModel:="last_PCA", strTempDataframe:=ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
+        clsPCAFunction.AddParameter("graph", "FALSE")
+        clsPCAFunction.SetAssignTo("last_model", strTempModel:="last_model", strTempDataframe:=ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
 
         clsREigenValues.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
         clsREigenValues.AddParameter("value1", Chr(34) & "eig" & Chr(34))
@@ -157,6 +161,10 @@ Public Class dlgPrincipalComponentAnalysis
         clsRVariablesPlotTheme.SetRCommand("theme_minimal")
         clsRVariablesPlot.SetOperatorParameter(True, clsRFunc:=clsRVariablesPlotFunction)
         clsRVariablesPlot.SetOperatorParameter(False, clsRFunc:=clsRVariablesPlotTheme)
+        clsRVariablesPlotFunctionValue.SetRCommand("c")
+        clsRVariablesPlotFunctionValue.AddParameter("first_dim", 1, bIncludeArgumentName:=False, iPosition:=0)
+        clsRVariablesPlotFunctionValue.AddParameter("second_dim", 2, bIncludeArgumentName:=False, iPosition:=1)
+        clsRVariablesPlotFunction.AddParameter("axes", clsRFunctionParameter:=clsRVariablesPlotFunctionValue, iPosition:=1)
 
         ' Individual Plot
         clsRIndividualsPlot.SetOperation("+")
@@ -168,6 +176,10 @@ Public Class dlgPrincipalComponentAnalysis
         clsRIndividualsPlotTheme.SetRCommand("theme_minimal")
         clsRIndividualsPlot.SetOperatorParameter(True, clsRFunc:=clsRIndividualsPlotFunction)
         clsRIndividualsPlot.SetOperatorParameter(False, clsRFunc:=clsRIndividualsPlotTheme)
+        clsRIndividualsFunctionValue.SetRCommand("c")
+        clsRIndividualsFunctionValue.AddParameter("first_dim", 1, bIncludeArgumentName:=False, iPosition:=0)
+        clsRIndividualsFunctionValue.AddParameter("second_dim", 2, bIncludeArgumentName:=False, iPosition:=1)
+        clsRIndividualsPlotFunction.AddParameter("axes", clsRFunctionParameter:=clsRIndividualsFunctionValue, iPosition:=1)
 
         ' Biplot
         clsRBiplot.SetOperation("+")
@@ -179,6 +191,10 @@ Public Class dlgPrincipalComponentAnalysis
         clsRBiplotTheme.SetRCommand("theme_minimal")
         clsRBiplot.SetOperatorParameter(True, clsRFunc:=clsRBiplotFunction)
         clsRBiplot.SetOperatorParameter(False, clsRFunc:=clsRBiplotTheme)
+        clsRBiplotFunctionValue.SetRCommand("c")
+        clsRBiplotFunctionValue.AddParameter("first_dim", 1, bIncludeArgumentName:=False, iPosition:=0)
+        clsRBiplotFunctionValue.AddParameter("second_dim", 2, bIncludeArgumentName:=False, iPosition:=1)
+        clsRBiplotFunction.AddParameter("axes", clsRFunctionParameter:=clsRBiplotFunctionValue, iPosition:=1)
 
         ' Barplot
         clsRBarPlot0.SetOperation("+")
@@ -214,13 +230,15 @@ Public Class dlgPrincipalComponentAnalysis
         ucrBase.clsRsyntax.AddToAfterCodes(clsREigenValues, iPosition:=2)
         ucrBase.clsRsyntax.AddToAfterCodes(clsREigenVectors, iPosition:=3)
         ucrBase.clsRsyntax.AddToAfterCodes(clsRRotation, iPosition:=4)
-        Modelname()
+        ModelName()
         bResetSubdialog = True
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
         ucrSelectorPCA.AddAdditionalCodeParameterPair(clsREigenVectors, ucrSelectorPCA.GetParameter, iAdditionalPairNo:=1)
         ucrSelectorPCA.AddAdditionalCodeParameterPair(clsRRotationCoord, ucrSelectorPCA.GetParameter, iAdditionalPairNo:=2)
+        ucrSelectorPCA.AddAdditionalCodeParameterPair(clsRRotationEig, ucrSelectorPCA.GetParameter, iAdditionalPairNo:=3)
+        '        ucrSaveResult.AddAdditionalCodeParameterPair(clsRRotationEig, New RParameter("model_name", 0), iAdditionalPairNo:=1)
 
         ucrSelectorPCA.SetRCode(clsREigenValues, bReset)
         ucrReceiverMultiplePCA.SetRCode(clsPCAFunction, bReset)
@@ -230,7 +248,7 @@ Public Class dlgPrincipalComponentAnalysis
     End Sub
 
     Private Sub TestOKEnabled() ' add in if the sdg has a clear nud, etc
-        If ucrSaveResult.IsComplete AndAlso Not ucrReceiverMultiplePCA.IsEmpty() AndAlso ucrNudNumberOfComp.GetText <> "" Then
+        If ucrSaveResult.IsComplete AndAlso ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count > 1 AndAlso ucrNudNumberOfComp.GetText <> "" Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -244,22 +262,22 @@ Public Class dlgPrincipalComponentAnalysis
     End Sub
 
     Private Sub cmdPCAOptions_Click(sender As Object, e As EventArgs) Handles cmdPCAOptions.Click
-        sdgPrincipalComponentAnalysis.SetRFunction(ucrBase.clsRsyntax, clsREigenValues, clsREigenVectors, clsRRotation, clsRScreePlotFunction, clsRVariablesPlotFunction, clsRIndividualsPlotFunction, clsRBiplotFunction, clsRFactor, bResetSubdialog)
+        sdgPrincipalComponentAnalysis.SetRFunction(ucrBase.clsRsyntax, clsREigenValues, clsREigenVectors, clsRRotation, clsRScreePlotFunction, clsRVariablesPlotFunction, clsRIndividualsPlotFunction, clsRBiplotFunction, clsRFactor, clsRVariablesPlotFunctionValue, clsRIndividualsFunctionValue, clsRBiplotFunctionValue, bResetSubdialog)
         bResetSubdialog = False
         sdgPrincipalComponentAnalysis.ShowDialog()
     End Sub
 
-    Private Sub Modelname()
+    Private Sub ModelName()
         If ucrSaveResult.ucrChkSave.Checked Then
             clsREigenValues.AddParameter("model_name", Chr(34) & ucrSaveResult.GetText & Chr(34))
             clsREigenVectors.AddParameter("model_name", Chr(34) & ucrSaveResult.GetText & Chr(34))
             clsRRotationCoord.AddParameter("model_name", Chr(34) & ucrSaveResult.GetText & Chr(34))
             clsRRotationEig.AddParameter("model_name", Chr(34) & ucrSaveResult.GetText & Chr(34))
         Else
-            clsREigenValues.AddParameter("model_name", Chr(34) & "last_PCA" & Chr(34))
-            clsREigenVectors.AddParameter("model_name", Chr(34) & "last_PCA" & Chr(34))
-            clsRRotationCoord.AddParameter("model_name", Chr(34) & "last_PCA" & Chr(34))
-            clsRRotationEig.AddParameter("model_name", Chr(34) & "last_PCA" & Chr(34))
+            clsREigenValues.AddParameter("model_name", Chr(34) & "last_model" & Chr(34))
+            clsREigenVectors.AddParameter("model_name", Chr(34) & "last_model" & Chr(34))
+            clsRRotationCoord.AddParameter("model_name", Chr(34) & "last_model" & Chr(34))
+            clsRRotationEig.AddParameter("model_name", Chr(34) & "last_model" & Chr(34))
         End If
     End Sub
 
@@ -281,7 +299,13 @@ Public Class dlgPrincipalComponentAnalysis
 
     Private Sub ucrSelectorPCA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorPCA.ControlValueChanged
         clsRRotationEig.AddParameter("data_name", Chr(34) & ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        Modelname()
+        clsRRotation.AddParameter("STATS", "sqrt(" & clsRRotationEig.ToScript.ToString & "[,1])")
+        ModelName()
+    End Sub
+
+    Private Sub ucrSaveResult_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlValueChanged
+        clsRRotation.AddParameter("STATS", "sqrt(" & clsRRotationEig.ToScript.ToString & "[,1])")
+        ModelName()
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverMultiplePCA.ControlContentsChanged, ucrNudNumberOfComp.ControlContentsChanged

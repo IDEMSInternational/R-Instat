@@ -46,7 +46,7 @@ Partial Class dlgReorderObjects
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 246)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 229)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 3
@@ -54,7 +54,7 @@ Partial Class dlgReorderObjects
         'lblObjectsToReoder
         '
         Me.lblObjectsToReoder.AutoSize = True
-        Me.lblObjectsToReoder.Location = New System.Drawing.Point(198, 18)
+        Me.lblObjectsToReoder.Location = New System.Drawing.Point(182, 33)
         Me.lblObjectsToReoder.Name = "lblObjectsToReoder"
         Me.lblObjectsToReoder.Size = New System.Drawing.Size(99, 13)
         Me.lblObjectsToReoder.TabIndex = 1
@@ -72,10 +72,10 @@ Partial Class dlgReorderObjects
         '
         'ucrReorderObjects
         '
-        Me.ucrReorderObjects.Location = New System.Drawing.Point(201, 34)
+        Me.ucrReorderObjects.Location = New System.Drawing.Point(182, 45)
         Me.ucrReorderObjects.Name = "ucrReorderObjects"
         Me.ucrReorderObjects.Size = New System.Drawing.Size(209, 195)
-        Me.ucrReorderObjects.TabIndex = 4
+        Me.ucrReorderObjects.TabIndex = 2
         Me.ucrReorderObjects.ucrDataFrameList = Nothing
         Me.ucrReorderObjects.ucrReceiver = Nothing
         '
@@ -83,11 +83,11 @@ Partial Class dlgReorderObjects
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(422, 300)
-        Me.Controls.Add(Me.ucrReorderObjects)
+        Me.ClientSize = New System.Drawing.Size(418, 287)
         Me.Controls.Add(Me.lblObjectsToReoder)
         Me.Controls.Add(Me.ucrDataFrameReorder)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.ucrReorderObjects)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False

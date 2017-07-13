@@ -22,6 +22,7 @@ Public Class sdgPrincipalComponentAnalysis
     ' to do:
     Public clsRScores, clsPCAModel, clsRVariablesPlotFunction, clsRVariablesPlotTheme, clsRCoord, clsRContrib, clsREig, clsRFactor, clsRMelt As New RFunction
     Public clsRScreePlotFunction, clsRScreePlotTheme, clsRIndividualsPlotFunction, clsRIndividualsPlotTheme, clsRBiplotFunction, clsRBiplotTheme, clsRBarPlotFunction, clsRBarPlotGeom, clsRBarPlotFacet, clsRBarPlotAes As New RFunction
+    Public clsRVariablesPlotFunctionValue, clsRIndividualsPlotFunctionValue, clsRBiplotFunctionValue As New RFunction
     'Public clsRScreePlot, clsRVariablesPlot, clsRIndividualsPlot, clsRBiplot As New RSyntax
     Private clsRsyntax As RSyntax
     Dim clsRBarPlot, clsRBarPlot0 As New ROperator
@@ -33,6 +34,7 @@ Public Class sdgPrincipalComponentAnalysis
     Private Sub InitialiseControls()
         Dim dctLabelOptionsChoice As New Dictionary(Of String, String)
         Dim dctOptionsForLabel As New Dictionary(Of String, String)
+
         ucrChkEigenvalues.SetParameter(New RParameter("value1", 2))
         ucrChkEigenvalues.SetText("Eigenvalues")
         ucrChkEigenvalues.SetValueIfChecked(Chr(34) & "eig" & Chr(34))
@@ -51,7 +53,10 @@ Public Class sdgPrincipalComponentAnalysis
         ucrChkRotation.AddParameterPresentCondition(True, "MARGIN")
         ucrChkRotation.AddParameterPresentCondition(False, "MARGIN", False)
 
+        ucrNudDim1.SetParameter(New RParameter("first_dim", 0, bNewIncludeArgumentName:=False))
         ucrNudDim1.SetMinMax(1, 2)
+
+        ucrNudDim2.SetParameter(New RParameter("second_dim", 1, bNewIncludeArgumentName:=False))
         ucrNudDim2.SetMinMax(1, 2)
 
         ucrPnlGraphics.AddRadioButton(rdoScreePlot)
@@ -140,7 +145,7 @@ Public Class sdgPrincipalComponentAnalysis
         rdoBarPlot.Enabled = False
     End Sub
 
-    Public Sub SetRFunction(clsNewRsyntax As RSyntax, clsNewREigenValues As RFunction, clsNewREigenVectors As RFunction, clsNewRRotation As RFunction, clsNewScreePlotFunction As RFunction, clsNewVariablesPlotFunction As RFunction, clsNewIndividualsPlotFunction As RFunction, clsNewBiplotFunction As RFunction, clsNewBarPlotFunction As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsNewRsyntax As RSyntax, clsNewREigenValues As RFunction, clsNewREigenVectors As RFunction, clsNewRRotation As RFunction, clsNewScreePlotFunction As RFunction, clsNewVariablesPlotFunction As RFunction, clsNewIndividualsPlotFunction As RFunction, clsNewBiplotFunction As RFunction, clsNewBarPlotFunction As RFunction, clsNewVariablesPlotFunctionValue As RFunction, clsNewIndividualsPlotFunctionValue As RFunction, clsNewBiplotFunctionValue As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
@@ -153,11 +158,17 @@ Public Class sdgPrincipalComponentAnalysis
         clsRIndividualsPlotFunction = clsNewIndividualsPlotFunction
         clsRBiplotFunction = clsNewBiplotFunction
         clsRFactor = clsNewBarPlotFunction
+        clsRVariablesPlotFunctionValue = clsNewVariablesPlotFunctionValue
+        clsRIndividualsPlotFunctionValue = clsNewIndividualsPlotFunctionValue
+        clsRBiplotFunctionValue = clsNewBiplotFunctionValue
 
         ucrInputLabel2.AddAdditionalCodeParameterPair(clsRVariablesPlotFunction, New RParameter("label"), iAdditionalPairNo:=1)
         ucrInputLabel2.AddAdditionalCodeParameterPair(clsRIndividualsPlotFunction, New RParameter("label"), iAdditionalPairNo:=2)
         ucrInputLabel2.AddAdditionalCodeParameterPair(clsRBiplotFunction, New RParameter("label"), iAdditionalPairNo:=3)
-
+        ucrNudDim1.AddAdditionalCodeParameterPair(clsRVariablesPlotFunctionValue, New RParameter("first_dim", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrNudDim1.AddAdditionalCodeParameterPair(clsRBiplotFunctionValue, New RParameter("first_dim", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
+        ucrNudDim2.AddAdditionalCodeParameterPair(clsRVariablesPlotFunctionValue, New RParameter("second_dim", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrNudDim2.AddAdditionalCodeParameterPair(clsRBiplotFunctionValue, New RParameter("second_dim", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
         ucrPnlIndividualPlot.AddAdditionalCodeParameterPair(clsRBiplotFunction, New RParameter("geom"), iAdditionalPairNo:=1)
 
         ucrPnlVariablesPlot.SetRCode(clsRVariablesPlotFunction, bReset, bCloneIfNeeded:=True)
@@ -171,11 +182,9 @@ Public Class sdgPrincipalComponentAnalysis
         ucrChkRotation.SetRCode(clsRRotation, bReset, bCloneIfNeeded:=True)
         ucrPnlGraphics.SetRSyntax(clsRsyntax, bReset)
         ucrPnlScreePlot.SetRCode(clsRScreePlotFunction, bReset)
+        ucrNudDim1.SetRCode(clsRIndividualsPlotFunctionValue, bReset, bCloneIfNeeded:=True)
+        ucrNudDim2.SetRCode(clsRIndividualsPlotFunctionValue, bReset, bCloneIfNeeded:=True)
 
-        'Not sure how this can be passed by the control.
-        clsRVariablesPlotFunction.AddParameter("axes", "c(" & ucrNudDim1.Value & ", " & ucrNudDim2.Value & ")")
-        clsRIndividualsPlotFunction.AddParameter("axes", "c(" & ucrNudDim1.Value & "," & ucrNudDim2.Value & ")")
-        clsRBiplotFunction.AddParameter("axes", "c(" & ucrNudDim1.Value & "," & ucrNudDim2.Value & ")")
         Dimensions()
         If bReset Then
             tbRegOptions.SelectedIndex = 0
