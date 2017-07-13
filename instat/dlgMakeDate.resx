@@ -117,4 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="txtTextDateFormats.Text" xml:space="preserve">
+    <value>Or construct your own format using:
+Day:
+%d - Day of the Month (1-31)
+%j - Day of the year	(1-365/366)
+
+Month:
+%m - Number (1-12)
+%b - Abbreviated month
+%B - Full month
+
+Year:
+%Y - 4-digit
+%y - 2-digit
+
+Click 'Help' to see the full list
+
+Examples:
+%d/%m/%y (24/12/93)
+%m:%d:%Y (12:24:1993)
+%Y-%b-%d (1993-Dec-24)</value>
+  </data>
 </root>
