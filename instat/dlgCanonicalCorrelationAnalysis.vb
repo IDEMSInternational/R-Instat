@@ -82,19 +82,26 @@ Public Class dlgCanonicalCorrelationAnalysis
 
         clsRCanCorFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
         clsRCanCorFunction.iCallType = 2
+        clsRCanCorFunction.AddParameter("data_name", Chr(34) & ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+
         clsRXCoefFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
         clsRXCoefFunction.iCallType = 2
+        clsRXCoefFunction.AddParameter("data_name", Chr(34) & ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+
         clsRYCoefFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
         clsRYCoefFunction.iCallType = 2
+        clsRYCoefFunction.AddParameter("data_name", Chr(34) & ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+
         clsRGraphicsFunction.SetPackageName("GGally")
         clsRGraphicsFunction.SetRCommand("ggpairs")
         clsRGraphicsFunction.iCallType = 3
-
         clsRCanCorFunction.AddParameter("value1", Chr(34) & "cor" & Chr(34))
         clsRXCoefFunction.AddParameter("value1", Chr(34) & "xcoef" & Chr(34))
         clsRYCoefFunction.AddParameter("value1", Chr(34) & "ycoef" & Chr(34))
 
         ucrBase.clsRsyntax.ClearCodes()
+        ucrBase.clsRsyntax.AddToAfterCodes(clsRXCoefFunction, 1)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsRCanCorFunction, 2)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
         bResetSubdialog = True
     End Sub
@@ -142,9 +149,26 @@ Public Class dlgCanonicalCorrelationAnalysis
         clsRYCoefFunction.AddParameter("data_name", Chr(34) & ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
         clsRXCoefFunction.AddParameter("data_name", Chr(34) & ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
         clsRCanCorFunction.AddParameter("data_name", Chr(34) & ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        ColumnsParameter()
     End Sub
 
     Private Sub ucrSaveResult_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverXVariables.ControlContentsChanged, ucrReceiverYVariables.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Public Sub ColumnsParameter()
+        If sdgCanonicalCorrelation.ucrChkPairwisePlot.Checked Then
+            If sdgCanonicalCorrelation.rdoXVariables.Checked Then
+                clsRGraphicsFunction.AddParameter("columns", ucrReceiverXVariables.GetVariableNames)
+                ucrBase.clsRsyntax.AddToAfterCodes(clsRGraphicsFunction, iPosition:=2)
+            ElseIf sdgCanonicalCorrelation.rdoYVariables.Checked Then
+                clsRGraphicsFunction.AddParameter("columns", ucrReceiverYVariables.GetVariableNames)
+                ucrBase.clsRsyntax.AddToAfterCodes(clsRGraphicsFunction, iPosition:=2)
+            Else
+                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRGraphicsFunction)
+            End If
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRGraphicsFunction)
+        End If
     End Sub
 End Class
