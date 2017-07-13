@@ -82,6 +82,10 @@ Public Class dlgCorrelation
         ucrPnlCompletePairwise.SetParameter(New RParameter("use", 5))
         ucrPnlCompletePairwise.AddRadioButton(rdoPairwise, Chr(34) & "pairwise.complete.obs" & Chr(34))
         ucrPnlCompletePairwise.AddRadioButton(rdoCompleteRowsOnly, Chr(34) & "complete.obs" & Chr(34))
+        ucrPnlCompletePairwise.AddParameterValuesCondition(rdoCompleteRowsOnly, "use", Chr(34) & "complete.obs" & Chr(34))
+        ucrPnlCompletePairwise.AddParameterValuesCondition(rdoCompleteRowsOnly, "use", Chr(34) & "pairwise.complete.obs" & Chr(34), False)
+        ucrPnlCompletePairwise.AddParameterValuesCondition(rdoPairwise, "use", Chr(34) & "pairwise.complete.obs" & Chr(34))
+        ucrPnlCompletePairwise.AddParameterValuesCondition(rdoPairwise, "use", Chr(34) & "complete.obs" & Chr(34), False)
 
         'ucrChk
         ucrChkCorrelationMatrix.SetText("Correlation Matrix")
@@ -130,12 +134,14 @@ Public Class dlgCorrelation
         clsRGGscatMatrixFunction.AddParameter("data", clsRFunctionParameter:=clsTempFunc)
 
         clsCorrelationTestFunction.SetRCommand("cor.test")
+        clsCorrelationTestFunction.iCallType = 2
         clsCorrelationTestFunction.AddParameter("alternative", Chr(34) & "two.sided" & Chr(34))
         clsCorrelationTestFunction.AddParameter("exact", "NULL")
         clsCorrelationTestFunction.AddParameter("conf.level", "0.95")
         clsCorrelationTestFunction.AddParameter("method", Chr(34) & "pearson" & Chr(34))
 
         clsCorrelationFunction.SetRCommand("cor")
+        clsCorrelationFunction.iCallType = 2
         clsCorrelationFunction.AddParameter("use", Chr(34) & "pairwise.complete.obs" & Chr(34))
 
         clsRGGcorrGraphicsFunction.SetPackageName("GGally")
@@ -215,7 +221,7 @@ Public Class dlgCorrelation
         End If
     End Sub
 
-    ' this is here because otherwise the panel cannot be set up correctly if you reopen the dialog when on the 2-variable rdo button
+    ' This is here because otherwise the panel cannot be set up correctly if you reopen the dialog when on the 2-variable rdo button
     Private Sub ucrPnlPairwise_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlCompletePairwise.ControlValueChanged
         If rdoPairwise.Checked Then
             clsCorrelationFunction.AddParameter("use", Chr(34) & "pairwise.complete.obs" & Chr(34))
