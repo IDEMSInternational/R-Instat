@@ -494,7 +494,7 @@ Partial Class sdgPlots
         Me.tbpTheme.Size = New System.Drawing.Size(499, 330)
         Me.tbpTheme.TabIndex = 1
         Me.tbpTheme.Tag = "Theme"
-        Me.tbpTheme.Text = "Theme"
+        Me.tbpTheme.Text = "Themes"
         Me.tbpTheme.UseVisualStyleBackColor = True
         '
         'urChkSelectTheme

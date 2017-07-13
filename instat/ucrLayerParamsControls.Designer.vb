@@ -56,7 +56,7 @@ Partial Class ucrLayerParamsControls
         Me.ucrChkParamName.Location = New System.Drawing.Point(0, 0)
         Me.ucrChkParamName.Name = "ucrChkParamName"
         Me.ucrChkParamName.Size = New System.Drawing.Size(100, 25)
-        Me.ucrChkParamName.TabIndex = 2
+        Me.ucrChkParamName.TabIndex = 0
         '
         'ucrLayerParamsControls
         '
