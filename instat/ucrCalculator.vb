@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Public Class ucrCalculator
     Public iHelpCalcID As Integer
     Public Event NameChanged()
@@ -22,21 +23,34 @@ Public Class ucrCalculator
     Public Event SaveResultsCheckedChanged()
     Public Event TryCommadClick()
     Public bFirstLoad As Boolean = True
+    Public bControlsInitialised As Boolean = False
+
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        InitialiseControls()
+    End Sub
 
     Private Sub ucrCalculator_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
-            InitialiseControl()
+            If Not bControlsInitialised Then
+                InitialiseControls()
+            End If
             bFirstLoad = False
         End If
     End Sub
 
-    Public Sub InitialiseControl()
+    Public Sub InitialiseControls()
         ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Statistics", "Strings (Character Columns)", "Probability", "Dates", "Rows"}) ' "Rows" is a temp. name
         ucrInputCalOptions.SetDropDownStyleAsNonEditable()
         ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
         cmdTry.Enabled = False
         cmdDoy.Enabled = False ' temp
         cmdDek.Enabled = False ' temp
+        bControlsInitialised = True
     End Sub
 
     Public Sub Reset()
@@ -968,5 +982,10 @@ Public Class ucrCalculator
         Else
             Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
         End If
+    End Sub
+
+    Public Sub SetAsCurrentReceiver()
+        ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
+        ucrReceiverForCalculation.SetMeAsReceiver()
     End Sub
 End Class

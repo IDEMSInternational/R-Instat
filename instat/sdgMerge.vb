@@ -1,5 +1,5 @@
-﻿' Instat+R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class sdgMerge
@@ -90,16 +90,16 @@ Public Class sdgMerge
             tbcMergeOptions.SelectedIndex = 0
         End If
 
-        ucrPnlMergeByOptions.SetRCode(clsMerge, bReset)
-        ucrChkMergeWithSubsetFirst.SetRCode(clsMerge, bReset)
-        ucrChkMergeWithSubsetSecond.SetRCode(clsMerge, bReset)
+        ucrPnlMergeByOptions.SetRCode(clsMerge, bReset, bCloneIfNeeded:=True)
+        ucrChkMergeWithSubsetFirst.SetRCode(clsMerge, bReset, bCloneIfNeeded:=True)
+        ucrChkMergeWithSubsetSecond.SetRCode(clsMerge, bReset, bCloneIfNeeded:=True)
         If ucrChkMergeWithSubsetFirst.Checked Then
-            ucrReceiverFirstSelected.SetRCode(clsMerge, bReset)
+            ucrReceiverFirstSelected.SetRCode(clsMerge, bReset, bCloneIfNeeded:=True)
         Else
             ucrReceiverFirstSelected.Clear()
         End If
         If ucrChkMergeWithSubsetSecond.Checked Then
-            ucrReceiverSecondSelected.SetRCode(clsMerge, bReset)
+            ucrReceiverSecondSelected.SetRCode(clsMerge, bReset, bCloneIfNeeded:=True)
         Else
             ucrReceiverSecondSelected.Clear()
         End If

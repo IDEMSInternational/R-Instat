@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgFitCorruptionModel
     Inherits System.Windows.Forms.Form
 
@@ -22,85 +38,28 @@ Partial Class dlgFitCorruptionModel
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrSelectorFitModel = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrReceiverControlVariables = New instat.ucrReceiverMultiple()
-        Me.ucrReceiverIndicators = New instat.ucrReceiverMultiple()
-        Me.ucrReceiverOutput = New instat.ucrReceiverSingle()
         Me.cmdDisplayOptions = New System.Windows.Forms.Button()
-        Me.ucrInputModelPreview = New instat.ucrInputTextBox()
         Me.lblModelPreview = New System.Windows.Forms.Label()
-        Me.ucrSaveCorruptionModel = New instat.ucrSave()
         Me.lblControlVariables = New System.Windows.Forms.Label()
         Me.lblCorruptionOutput = New System.Windows.Forms.Label()
         Me.lblIndicators = New System.Windows.Forms.Label()
+        Me.ucrSaveCorruptionModel = New instat.ucrSave()
+        Me.ucrInputModelPreview = New instat.ucrInputTextBox()
+        Me.ucrReceiverOutput = New instat.ucrReceiverSingle()
+        Me.ucrReceiverIndicators = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverControlVariables = New instat.ucrReceiverMultiple()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSelectorFitModel = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
-        '
-        'ucrSelectorFitModel
-        '
-        Me.ucrSelectorFitModel.bShowHiddenColumns = False
-        Me.ucrSelectorFitModel.bUseCurrentFilter = True
-        Me.ucrSelectorFitModel.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorFitModel.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorFitModel.Name = "ucrSelectorFitModel"
-        Me.ucrSelectorFitModel.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorFitModel.TabIndex = 0
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 351)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 11
-        '
-        'ucrReceiverControlVariables
-        '
-        Me.ucrReceiverControlVariables.frmParent = Me
-        Me.ucrReceiverControlVariables.Location = New System.Drawing.Point(265, 81)
-        Me.ucrReceiverControlVariables.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverControlVariables.Name = "ucrReceiverControlVariables"
-        Me.ucrReceiverControlVariables.Selector = Nothing
-        Me.ucrReceiverControlVariables.Size = New System.Drawing.Size(120, 85)
-        Me.ucrReceiverControlVariables.TabIndex = 4
-        '
-        'ucrReceiverIndicators
-        '
-        Me.ucrReceiverIndicators.frmParent = Me
-        Me.ucrReceiverIndicators.Location = New System.Drawing.Point(265, 191)
-        Me.ucrReceiverIndicators.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverIndicators.Name = "ucrReceiverIndicators"
-        Me.ucrReceiverIndicators.Selector = Nothing
-        Me.ucrReceiverIndicators.Size = New System.Drawing.Size(120, 85)
-        Me.ucrReceiverIndicators.TabIndex = 6
-        '
-        'ucrReceiverOutput
-        '
-        Me.ucrReceiverOutput.frmParent = Me
-        Me.ucrReceiverOutput.Location = New System.Drawing.Point(265, 36)
-        Me.ucrReceiverOutput.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverOutput.Name = "ucrReceiverOutput"
-        Me.ucrReceiverOutput.Selector = Nothing
-        Me.ucrReceiverOutput.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverOutput.TabIndex = 2
         '
         'cmdDisplayOptions
         '
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(305, 293)
+        Me.cmdDisplayOptions.Location = New System.Drawing.Point(9, 262)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
         Me.cmdDisplayOptions.Size = New System.Drawing.Size(105, 23)
         Me.cmdDisplayOptions.TabIndex = 9
-        Me.cmdDisplayOptions.Text = "Display Options"
+        Me.cmdDisplayOptions.Text = "Display Options..."
         Me.cmdDisplayOptions.UseVisualStyleBackColor = True
-        '
-        'ucrInputModelPreview
-        '
-        Me.ucrInputModelPreview.AddQuotesIfUnrecognised = True
-        Me.ucrInputModelPreview.IsMultiline = False
-        Me.ucrInputModelPreview.IsReadOnly = False
-        Me.ucrInputModelPreview.Location = New System.Drawing.Point(96, 294)
-        Me.ucrInputModelPreview.Name = "ucrInputModelPreview"
-        Me.ucrInputModelPreview.Size = New System.Drawing.Size(200, 21)
-        Me.ucrInputModelPreview.TabIndex = 8
         '
         'lblModelPreview
         '
@@ -110,13 +69,6 @@ Partial Class dlgFitCorruptionModel
         Me.lblModelPreview.Size = New System.Drawing.Size(80, 13)
         Me.lblModelPreview.TabIndex = 7
         Me.lblModelPreview.Text = "Model Preview:"
-        '
-        'ucrSaveCorruptionModel
-        '
-        Me.ucrSaveCorruptionModel.Location = New System.Drawing.Point(10, 323)
-        Me.ucrSaveCorruptionModel.Name = "ucrSaveCorruptionModel"
-        Me.ucrSaveCorruptionModel.Size = New System.Drawing.Size(288, 24)
-        Me.ucrSaveCorruptionModel.TabIndex = 10
         '
         'lblControlVariables
         '
@@ -144,6 +96,76 @@ Partial Class dlgFitCorruptionModel
         Me.lblIndicators.Size = New System.Drawing.Size(56, 13)
         Me.lblIndicators.TabIndex = 5
         Me.lblIndicators.Text = "Indicators:"
+        '
+        'ucrSaveCorruptionModel
+        '
+        Me.ucrSaveCorruptionModel.Location = New System.Drawing.Point(10, 323)
+        Me.ucrSaveCorruptionModel.Name = "ucrSaveCorruptionModel"
+        Me.ucrSaveCorruptionModel.Size = New System.Drawing.Size(288, 24)
+        Me.ucrSaveCorruptionModel.TabIndex = 10
+        '
+        'ucrInputModelPreview
+        '
+        Me.ucrInputModelPreview.AddQuotesIfUnrecognised = True
+        Me.ucrInputModelPreview.IsMultiline = False
+        Me.ucrInputModelPreview.IsReadOnly = False
+        Me.ucrInputModelPreview.Location = New System.Drawing.Point(91, 295)
+        Me.ucrInputModelPreview.Name = "ucrInputModelPreview"
+        Me.ucrInputModelPreview.Size = New System.Drawing.Size(315, 21)
+        Me.ucrInputModelPreview.TabIndex = 8
+        '
+        'ucrReceiverOutput
+        '
+        Me.ucrReceiverOutput.frmParent = Me
+        Me.ucrReceiverOutput.Location = New System.Drawing.Point(265, 36)
+        Me.ucrReceiverOutput.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverOutput.Name = "ucrReceiverOutput"
+        Me.ucrReceiverOutput.Selector = Nothing
+        Me.ucrReceiverOutput.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverOutput.strNcFilePath = ""
+        Me.ucrReceiverOutput.TabIndex = 2
+        Me.ucrReceiverOutput.ucrSelector = Nothing
+        '
+        'ucrReceiverIndicators
+        '
+        Me.ucrReceiverIndicators.frmParent = Me
+        Me.ucrReceiverIndicators.Location = New System.Drawing.Point(265, 191)
+        Me.ucrReceiverIndicators.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverIndicators.Name = "ucrReceiverIndicators"
+        Me.ucrReceiverIndicators.Selector = Nothing
+        Me.ucrReceiverIndicators.Size = New System.Drawing.Size(120, 85)
+        Me.ucrReceiverIndicators.strNcFilePath = ""
+        Me.ucrReceiverIndicators.TabIndex = 6
+        Me.ucrReceiverIndicators.ucrSelector = Nothing
+        '
+        'ucrReceiverControlVariables
+        '
+        Me.ucrReceiverControlVariables.frmParent = Me
+        Me.ucrReceiverControlVariables.Location = New System.Drawing.Point(265, 81)
+        Me.ucrReceiverControlVariables.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverControlVariables.Name = "ucrReceiverControlVariables"
+        Me.ucrReceiverControlVariables.Selector = Nothing
+        Me.ucrReceiverControlVariables.Size = New System.Drawing.Size(120, 85)
+        Me.ucrReceiverControlVariables.strNcFilePath = ""
+        Me.ucrReceiverControlVariables.TabIndex = 4
+        Me.ucrReceiverControlVariables.ucrSelector = Nothing
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 351)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 11
+        '
+        'ucrSelectorFitModel
+        '
+        Me.ucrSelectorFitModel.bShowHiddenColumns = False
+        Me.ucrSelectorFitModel.bUseCurrentFilter = True
+        Me.ucrSelectorFitModel.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorFitModel.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorFitModel.Name = "ucrSelectorFitModel"
+        Me.ucrSelectorFitModel.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorFitModel.TabIndex = 0
         '
         'dlgFitCorruptionModel
         '

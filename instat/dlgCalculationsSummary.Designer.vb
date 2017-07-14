@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgCalculationsSummary
     Inherits System.Windows.Forms.Form
 
@@ -26,7 +42,7 @@ Partial Class dlgCalculationsSummary
         Me.cmdEdit = New System.Windows.Forms.Button()
         Me.cmdAdd = New System.Windows.Forms.Button()
         Me.lblCalculations = New System.Windows.Forms.Label()
-        Me.lstLayers = New System.Windows.Forms.ListView()
+        Me.lstCalculations = New System.Windows.Forms.ListView()
         Me.cmdDuplicate = New System.Windows.Forms.Button()
         Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
@@ -67,15 +83,15 @@ Partial Class dlgCalculationsSummary
         Me.lblCalculations.TabIndex = 10
         Me.lblCalculations.Text = "Calculations:"
         '
-        'lstLayers
+        'lstCalculations
         '
-        Me.lstLayers.FullRowSelect = True
-        Me.lstLayers.Location = New System.Drawing.Point(12, 36)
-        Me.lstLayers.Name = "lstLayers"
-        Me.lstLayers.Size = New System.Drawing.Size(125, 149)
-        Me.lstLayers.TabIndex = 9
-        Me.lstLayers.UseCompatibleStateImageBehavior = False
-        Me.lstLayers.View = System.Windows.Forms.View.List
+        Me.lstCalculations.FullRowSelect = True
+        Me.lstCalculations.Location = New System.Drawing.Point(12, 36)
+        Me.lstCalculations.Name = "lstCalculations"
+        Me.lstCalculations.Size = New System.Drawing.Size(125, 149)
+        Me.lstCalculations.TabIndex = 9
+        Me.lstCalculations.UseCompatibleStateImageBehavior = False
+        Me.lstCalculations.View = System.Windows.Forms.View.List
         '
         'cmdDuplicate
         '
@@ -103,7 +119,7 @@ Partial Class dlgCalculationsSummary
         Me.Controls.Add(Me.cmdEdit)
         Me.Controls.Add(Me.cmdAdd)
         Me.Controls.Add(Me.lblCalculations)
-        Me.Controls.Add(Me.lstLayers)
+        Me.Controls.Add(Me.lstCalculations)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -121,6 +137,6 @@ Partial Class dlgCalculationsSummary
     Friend WithEvents cmdEdit As Button
     Friend WithEvents cmdAdd As Button
     Friend WithEvents lblCalculations As Label
-    Friend WithEvents lstLayers As ListView
+    Friend WithEvents lstCalculations As ListView
     Friend WithEvents cmdDuplicate As Button
 End Class

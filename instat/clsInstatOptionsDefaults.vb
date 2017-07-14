@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class clsInstatOptionsDefaults
@@ -38,4 +38,8 @@ Public Class clsInstatOptionsDefaults
     Public Shared ReadOnly DEFAULTlstColourPalette As List(Of Color) = ({Color.Aqua, Color.Gray, Color.LightGreen, Color.AliceBlue, Color.Maroon, Color.Green, Color.LightPink, Color.LightSkyBlue, Color.Brown, Color.MediumPurple, Color.White}).ToList
     Public Shared ReadOnly DEFAULTiDigits As Integer = 4
     Public Shared ReadOnly DEFAULTbShowSignifStars As Boolean = False
+    Public Shared ReadOnly DEFAULTbAutoSaveData As Boolean = True
+    Public Shared ReadOnly DEFAULTiAutoSaveDataMinutes As Integer = 5
+    Public Shared ReadOnly DEFAULTbShowWaitDialog As Boolean = True
+    Public Shared ReadOnly DEFAULTiWaitTimeDelaySeconds As Integer = 2
 End Class
