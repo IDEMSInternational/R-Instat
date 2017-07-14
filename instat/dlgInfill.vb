@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Public Class dlgInfill
     Private bFirstLoad As Boolean = True
@@ -40,12 +41,15 @@ Public Class dlgInfill
         ucrReceiverDate.SetDataType("Date")
         ucrReceiverDate.SetParameter(New RParameter("date_name", 1))
         ucrReceiverDate.SetParameterIsString()
+        ucrReceiverDate.strSelectorHeading = "Date"
 
         'Set ucrreceiver factors
         ucrReceiverFactors.SetIncludedDataTypes({"factor"})
         ucrReceiverFactors.Selector = ucrInfillSelector
+        ucrReceiverFactors.strSelectorHeading = "Factors"
         ucrReceiverFactors.SetParameter(New RParameter("factors", 2))
         ucrReceiverFactors.SetParameterIsString()
+        ucrReceiverFactors.strSelectorHeading = "Factors"
 
         'Set data frame parameter
         ucrInfillSelector.SetParameter(New RParameter("data_name", 0))

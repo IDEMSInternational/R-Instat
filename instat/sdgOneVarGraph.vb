@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,9 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
+
 Imports instat.Translations
 Public Class sdgOneVarGraph
     Public bControlsInitialised As Boolean = False
@@ -27,7 +27,7 @@ Public Class sdgOneVarGraph
         Dim dctNumericPairs As New Dictionary(Of String, String)
         Dim dctCategoricalPairs As New Dictionary(Of String, String)
 
-        ucrInputNumeric.SetParameter(New RParameter("numeric"))
+        ucrInputNumeric.SetParameter(New RParameter("numeric", 2))
         dctNumericPairs.Add("Boxplot", Chr(34) & "geom_boxplot" & Chr(34))
         dctNumericPairs.Add("Histogram", Chr(34) & "geom_histogram" & Chr(34))
         dctNumericPairs.Add("Dotplot", Chr(34) & "geom_dotplot" & Chr(34))
@@ -42,14 +42,19 @@ Public Class sdgOneVarGraph
         ucrInputNumeric.SetItems(dctNumericPairs)
         ucrInputNumeric.SetDropDownStyleAsNonEditable()
 
-        ucrInputCategorical.SetParameter(New RParameter("categorical"))
+        ucrInputCategorical.SetParameter(New RParameter("categorical", 3))
         dctCategoricalPairs.Add("Bar Chart", Chr(34) & "geom_bar" & Chr(34))
         dctCategoricalPairs.Add("Pie Chart", Chr(34) & "pie_chart" & Chr(34))
         dctCategoricalPairs.Add("Dot Plot", Chr(34) & "geom_dotplot" & Chr(34))
         ucrInputCategorical.SetItems(dctCategoricalPairs)
         ucrInputCategorical.SetDropDownStyleAsNonEditable()
 
-        ucrNudNumberofColumns.SetParameter(New RParameter("ncol"))
+        ucrChkFreeScaleAxisforFacets.SetParameter(New RParameter("free_scale_axis", 5))
+        ucrChkFreeScaleAxisforFacets.SetText("Free Scale Axis for Facets")
+        ucrChkFreeScaleAxisforFacets.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkFreeScaleAxisforFacets.SetRDefault("FALSE")
+
+        ucrNudNumberofColumns.SetParameter(New RParameter("ncol", 6))
         ucrNudNumberofColumns.SetMinMax(1, 10)
         ucrNudNumberofColumns.bAddRemoveParameter = False
         ucrNudNumberofColumns.SetLinkedDisplayControl(lblNumberofColumns)
@@ -58,11 +63,6 @@ Public Class sdgOneVarGraph
         ucrChkSpecifyLayout.AddToLinkedControls(ucrLinked:=ucrNudNumberofColumns, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrChkSpecifyLayout.AddParameterPresentCondition(True, "ncol")
         ucrChkSpecifyLayout.AddParameterPresentCondition(False, "ncol", False)
-
-        ucrChkFreeScaleAxisforFacets.SetText("Free Scale Axis for Facets")
-        ucrChkFreeScaleAxisforFacets.SetParameter(New RParameter("free_scale_axis"))
-        ucrChkFreeScaleAxisforFacets.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkFreeScaleAxisforFacets.SetRDefault("FALSE")
 
         bControlsInitialised = True
     End Sub

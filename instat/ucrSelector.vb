@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports RDotNet
@@ -22,7 +22,7 @@ Public Class ucrSelector
     Public Event ResetReceivers()
     Public Event VariablesInReceiversChanged()
     Public Event DataFrameChanged()
-    Public lstVariablesInReceivers As List(Of String)
+    Public lstVariablesInReceivers As List(Of Tuple(Of String, String))
     Public bFirstLoad As Boolean
     Public bIncludeOverall As Boolean
     Public strCurrentDataFrame As String
@@ -41,7 +41,7 @@ Public Class ucrSelector
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        lstVariablesInReceivers = New List(Of String)
+        lstVariablesInReceivers = New List(Of Tuple(Of String, String))
         bFirstLoad = True
         bIncludeOverall = False
         strCurrentDataFrame = ""
@@ -80,7 +80,7 @@ Public Class ucrSelector
         If CurrentReceiver IsNot Nothing Then
             lstCombinedMetadataLists = CombineMetadataLists(CurrentReceiver.lstIncludedMetadataProperties, CurrentReceiver.lstExcludedMetadataProperties)
             If CurrentReceiver.bExcludeFromSelector Then
-                strExclud = lstVariablesInReceivers.ToArray
+                strExclud = GetVariablesInReceiver().ToArray
             End If
             If CurrentReceiver.bTypeSet Then
                 strCurrentType = CurrentReceiver.GetItemType()
@@ -95,6 +95,15 @@ Public Class ucrSelector
             'frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=strType, lstIncludedDataTypes:=lstIncludedMetadataProperties, lstExcludedDataTypes:=lstExcludedMetadataProperties, strDataFrameName:=strCurrentDataFrame)
         End If
     End Sub
+
+    Private Function GetVariablesInReceiver() As List(Of String)
+        Dim lstVars As New List(Of String)
+
+        For Each tplTemp As Tuple(Of String, String) In lstVariablesInReceivers
+            lstVars.Add(tplTemp.Item1)
+        Next
+        Return lstVars
+    End Function
 
     Public Overridable Sub Reset()
         RaiseEvent ResetReceivers()
@@ -161,6 +170,7 @@ Public Class ucrSelector
     'End Sub
 
     Public Sub ShowDataOptionsDialog()
+        sdgDataOptions.SetCurrentDataFrame(strCurrentDataFrame, False)
         sdgDataOptions.ShowDialog()
         SetDataOptionsSettings()
     End Sub
@@ -207,7 +217,7 @@ Public Class ucrSelector
 
     Public Sub AddToVariablesList(strVariable As String, Optional strDataFrame As String = "")
         If strDataFrame = "" OrElse strDataFrame = strCurrentDataFrame Then
-            lstVariablesInReceivers.Add(strVariable)
+            lstVariablesInReceivers.Add(New Tuple(Of String, String)(strVariable, strDataFrame))
             If ucrLinkedSelector IsNot Nothing Then
                 ucrLinkedSelector.AddToVariablesList(strVariable, strCurrentDataFrame)
             End If
@@ -217,7 +227,11 @@ Public Class ucrSelector
 
     Public Sub RemoveFromVariablesList(strVariable As String, Optional strDataFrame As String = "")
         If strDataFrame = "" OrElse strDataFrame = strCurrentDataFrame Then
-            lstVariablesInReceivers.Remove(strVariable)
+            For i As Integer = lstVariablesInReceivers.Count - 1 To 0 Step -1
+                If lstVariablesInReceivers(i).Item1 = strVariable AndAlso (strDataFrame = "" OrElse lstVariablesInReceivers(i).Item2 = strDataFrame) Then
+                    lstVariablesInReceivers.RemoveAt(i)
+                End If
+            Next
             If ucrLinkedSelector IsNot Nothing Then
                 ucrLinkedSelector.RemoveFromVariablesList(strVariable, strCurrentDataFrame)
             End If

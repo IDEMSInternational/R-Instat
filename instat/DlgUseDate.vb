@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -49,6 +49,7 @@ Public Class dlgUseDate
         ucrReceiverUseDate.SetMeAsReceiver()
         ucrReceiverUseDate.bUseFilteredData = False
         ucrReceiverUseDate.SetIncludedDataTypes({"Date"})
+        ucrReceiverUseDate.strSelectorHeading = "Dates"
         ucrReceiverUseDate.bAutoFill = True
         ucrReceiverUseDate.SetParameterIsString()
 

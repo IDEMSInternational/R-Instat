@@ -1,5 +1,5 @@
-﻿' Instat+R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
@@ -45,12 +45,12 @@ Public Class ucrDistributions
         strDataType = ""
         CreateDistributions()
         bFirstLoad = True
+        ucrInputDistributions.SetDropDownStyleAsNonEditable()
     End Sub
 
     Private Sub ucrDistributions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             SetDistributions()
-            ucrInputDistributions.SetDropDownStyleAsNonEditable()
             bFirstLoad = False
         End If
     End Sub
@@ -596,6 +596,11 @@ Public Class ucrDistributions
         SetDistributions()
     End Sub
 
+    Public Sub SetDataType(strNewDataType As String)
+        strDataType = strNewDataType
+        SetDistributions()
+    End Sub
+
     Public Sub SetParameterIsDistName()
         bParameterIsDistName = True
         bParameterIsDistFunction = False
@@ -622,8 +627,6 @@ Public Class ucrDistributions
             clsTempParam = New RParameter
         End If
         If bParameterIsDistName Then
-            'TODO this currently only works with one value to ignore. Also may need option not to set parameter value to strValuesToIgnore
-            '     although this currently can be done with bAddParameterIfEmpty = True
             clsTempParam.SetArgumentValue(Chr(34) & clsCurrDistribution.strRName & Chr(34))
         ElseIf bParameterIsDistFunction Then
             clsTempParam.SetArgument(clsCurrRFunction)
@@ -637,6 +640,7 @@ Public Class ucrDistributions
         Dim lstCurrentVariables As String() = Nothing
         Dim clsTempParameter As RParameter
         Dim clsNewCurrentDist As Distribution = Nothing
+        Dim bErrorIfNotFound As Boolean = True
 
         clsTempParameter = GetParameter()
         If bParameterIsDistName AndAlso clsTempParameter IsNot Nothing AndAlso clsTempParameter.bIsString Then
@@ -653,12 +657,17 @@ Public Class ucrDistributions
                         clsNewCurrentDist = clsTempDist
                     End If
                 Next
+            Else
+                ucrInputDistributions.SetName("")
+                bErrorIfNotFound = False
             End If
         End If
         If clsNewCurrentDist IsNot Nothing Then
             ucrInputDistributions.SetName(translate(clsNewCurrentDist.strNameTag))
         Else
-            MsgBox("Developer error: Cannot set value of " & Name & " because cannot find a distribution matching the function and parameter given")
+            If bErrorIfNotFound Then
+                MsgBox("Developer error: Cannot set value of " & Name & " because cannot find a distribution matching the function and parameter given")
+            End If
         End If
     End Sub
 End Class
