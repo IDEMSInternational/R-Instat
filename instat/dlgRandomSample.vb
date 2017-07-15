@@ -65,7 +65,7 @@ Public Class dlgRandomSample
         clsSetSeed = New RFunction
         clsMultipleSamplesFunction = New RFunction
         clsDistributionFunction = New RFunction
-
+        ucrBase.clsRsyntax.ClearCodes()
         ucrSelectorRandomSamples.Reset()
         ucrSaveRandomSamples.Reset()
         SetNewColumName()
