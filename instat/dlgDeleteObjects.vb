@@ -14,11 +14,11 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgDeleteObjects
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private clsDefaultFunction As New RFunction
 
     Private Sub dlgDeleteObjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -33,6 +33,7 @@ Public Class dlgDeleteObjects
         SetRCodeforControls(bReset)
         bReset = False
         autoTranslate(Me)
+        TestOKEnabled()
     End Sub
 
     Private Sub ReopenDialog()
@@ -57,12 +58,12 @@ Public Class dlgDeleteObjects
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        clsDefaultFunction = New RFunction
 
         ucrSelectorDeleteObject.Reset()
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$delete_objects")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
