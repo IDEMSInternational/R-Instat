@@ -91,8 +91,8 @@ Partial Class dlgOpenSST
         Me.lblSSTName.Name = "lblSSTName"
         Me.lblSSTName.Size = New System.Drawing.Size(114, 13)
         Me.lblSSTName.TabIndex = 3
-        Me.lblSSTName.Tag = "SST_Dataframe_Name:"
-        Me.lblSSTName.Text = "SST Dataframe Name:"
+        Me.lblSSTName.Tag = "SST_Data_Frame_Name:"
+        Me.lblSSTName.Text = "SST Data Frame Name:"
         '
         'grpCSV
         '
@@ -266,8 +266,8 @@ Partial Class dlgOpenSST
         Me.lblLocationName.Name = "lblLocationName"
         Me.lblLocationName.Size = New System.Drawing.Size(134, 13)
         Me.lblLocationName.TabIndex = 7
-        Me.lblLocationName.Tag = "Location_Dataframe_Name:"
-        Me.lblLocationName.Text = "Location Dataframe Name:"
+        Me.lblLocationName.Tag = "Location_Data_Frame_Name:"
+        Me.lblLocationName.Text = "Location Data Frame Name:"
         '
         'ucrInputNameLocation
         '
