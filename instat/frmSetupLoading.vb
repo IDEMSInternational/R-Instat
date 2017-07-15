@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,17 +11,18 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Public Class frmSetupLoading
     Private strHyperlink As String = ""
 
     Private Sub frmSetupLoading_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Eventually have multiple messages and rotate what is shown each time
-        lblMessage.Text = "Did you know that R-Instat was developed in Africa by African Maths Initiative (AMI)?" & Environment.NewLine & "Click here to find out more AMI and the partners who helped make R-Instat a success."
+        lblMessage.Text = "Did you know that R-Instat was developed in Africa by African Maths Initiative (AMI)?" & Environment.NewLine & "Click here to find out more about AMI and the partners who helped make R-Instat a success."
 
         'Optional hyperlink when clicking on the message
-        strHyperlink = "https://chuffed.org/project/africandatainitiative"
+        strHyperlink = "http://africandata.org"
         lblMessage.Cursor = Cursors.Hand
     End Sub
 

@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports RDotNet
 Imports System.IO
 Imports System.Globalization
@@ -89,7 +90,7 @@ Public Class ucrDataView
         'TODO This should be an option in dialog
         clsInsertColumns.AddParameter("col_name", Chr(34) & "X" & Chr(34))
         clsInsertColumns.AddParameter("use_col_name_as_prefix", "TRUE")
-        frmMain.clsRLink.RunScript(clsInsertColumns.ToScript(), strComment:="Right click menu: Insert Column(s) Before")
+        RunScriptFromDataView(clsInsertColumns.ToScript(), strComment:="Right click menu: Insert Column(s) Before")
     End Sub
 
     Private Sub mnuInsertColsAfter_Click(sender As Object, e As EventArgs) Handles mnuInsertColsAfter.Click
@@ -105,7 +106,7 @@ Public Class ucrDataView
         'but should be added if user wants to change from default
         'clsInsertColumns.AddParameter("col_name", Chr(34) & "X" & Chr(34))
         'clsInsertColumns.AddParameter("use_col_name_as_prefix", "TRUE")
-        frmMain.clsRLink.RunScript(clsInsertColumns.ToScript(), strComment:="Right click menu: Insert Column(s) After")
+        RunScriptFromDataView(clsInsertColumns.ToScript(), strComment:="Right click menu: Insert Column(s) After")
     End Sub
 
     Private Sub mnuDeleteCol_Click(sender As Object, e As EventArgs) Handles mnuDeleteCol.Click
@@ -115,7 +116,7 @@ Public Class ucrDataView
             Dim deleteCol = MsgBox("Are you sure you want to delete these column(s)?" & Environment.NewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Column")
             If deleteCol = DialogResult.Yes Then
                 clsDeleteColumns.AddParameter("cols", SelectedColumns())
-                frmMain.clsRLink.RunScript(clsDeleteColumns.ToScript(), strComment:="Right click menu: Delete Column(s)")
+                RunScriptFromDataView(clsDeleteColumns.ToScript(), strComment:="Right click menu: Delete Column(s)")
             End If
         End If
     End Sub
@@ -128,7 +129,7 @@ Public Class ucrDataView
         clsAppendVariablesMetaData.AddParameter("col_names", SelectedColumns())
         clsAppendVariablesMetaData.AddParameter("property", "is_hidden_label")
         clsAppendVariablesMetaData.AddParameter("new_val", "TRUE")
-        frmMain.clsRLink.RunScript(clsAppendVariablesMetaData.ToScript(), strComment:="Right click menu: Hide column(s)" & SelectedColumns())
+        RunScriptFromDataView(clsAppendVariablesMetaData.ToScript(), strComment:="Right click menu: Hide column(s)" & SelectedColumns())
         'grdData.DoAction(New unvell.ReoGrid.Actions.HideColumnsAction(grdData.CurrentWorksheet.SelectionRange.Col, grdData.CurrentWorksheet.SelectionRange.Cols))
     End Sub
 
@@ -138,7 +139,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub mnuUnhideAllColumns_Click(sender As Object, e As EventArgs) Handles mnuUnhideAllColumns.Click
-        frmMain.clsRLink.RunScript(clsUnhideAllColumns.ToScript(), strComment:="Right click menu: Unhide all columns")
+        RunScriptFromDataView(clsUnhideAllColumns.ToScript(), strComment:="Right click menu: Unhide all columns")
     End Sub
 
     'Private Sub groupColumnsToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles groupColumnsToolStripMenuItem1.Click
@@ -229,21 +230,21 @@ Public Class ucrDataView
         Else
             clsInsertRows.RemoveParameterByName("before")
         End If
-        frmMain.clsRLink.RunScript(clsInsertRows.ToScript(), strComment:="Right Click menu: Insert row(s) After")
+        RunScriptFromDataView(clsInsertRows.ToScript(), strComment:="Right Click menu: Insert row(s) After")
     End Sub
 
     Private Sub mnuInsertRowsBefore_Click(sender As Object, e As EventArgs) Handles mnuInsertRowsBefore.Click
         clsInsertRows.AddParameter("start_row", grdCurrSheet.RowHeaders(grdCurrSheet.SelectionRange.Row).Text)
         clsInsertRows.AddParameter("number_rows", grdData.CurrentWorksheet.SelectionRange.Rows)
         clsInsertRows.AddParameter("before", "TRUE")
-        frmMain.clsRLink.RunScript(clsInsertRows.ToScript(), strComment:="Right Click menu: Insert row(s) Before")
+        RunScriptFromDataView(clsInsertRows.ToScript(), strComment:="Right Click menu: Insert row(s) Before")
     End Sub
 
     Private Sub mnuDeleteRows_Click(sender As Object, e As EventArgs) Handles mnuDeleteRows.Click
         Dim Delete = MsgBox("Are you sure you want to delete these row(s)?" & Environment.NewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Row(s)")
         If Delete = DialogResult.Yes Then
             clsDeleteRows.AddParameter("row_names", SelectedRows())
-            frmMain.clsRLink.RunScript(clsDeleteRows.ToScript(), strComment:="Right Click menu: Delete row(s)")
+            RunScriptFromDataView(clsDeleteRows.ToScript(), strComment:="Right Click menu: Delete row(s)")
         End If
     End Sub
 
@@ -300,7 +301,7 @@ Public Class ucrDataView
         If grdData.Worksheets.Count > 0 Then
             If Delete = DialogResult.Yes Then
                 strScript = frmMain.clsRLink.strInstatDataObject & "$delete_dataframe(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ")"
-                frmMain.clsRLink.RunScript(strScript)
+                RunScriptFromDataView(strScript)
             End If
         End If
     End Sub
@@ -334,6 +335,7 @@ Public Class ucrDataView
             frmMain.tstatus.Text = grdCurrSheet.Name
             grdCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
             grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
+            grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToFillSerial, False)
             iRowCount = frmMain.clsRLink.GetDataFrameLength(grdCurrSheet.Name, True)
             iColumnCount = frmMain.clsRLink.GetDataFrameColumnCount(grdCurrSheet.Name)
             lblRowDisplay.Text = "Showing " & grdCurrSheet.RowCount & " of " & iRowCount & " rows"
@@ -437,7 +439,7 @@ Public Class ucrDataView
         End If
 
         If bValid Then
-            frmMain.clsRLink.RunScript(clsReplaceValue.ToScript(), strComment:="Replace Value in Data")
+            RunScriptFromDataView(clsReplaceValue.ToScript(), strComment:="Replace Value in Data")
         End If
     End Sub
 
@@ -454,19 +456,19 @@ Public Class ucrDataView
     Private Sub mnuConvertVariate_Click(sender As Object, e As EventArgs) Handles mnuConvertVariate.Click
         clsConvertTo.AddParameter("to_type", Chr(34) & "numeric" & Chr(34))
         clsConvertTo.AddParameter("col_names", SelectedColumns())
-        frmMain.clsRLink.RunScript(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
+        RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
     End Sub
 
     Private Sub mnuConvertText_Click(sender As Object, e As EventArgs) Handles mnuConvertText.Click
         clsConvertTo.AddParameter("to_type", Chr(34) & "character" & Chr(34))
         clsConvertTo.AddParameter("col_names", SelectedColumns())
-        frmMain.clsRLink.RunScript(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Character")
+        RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Character")
     End Sub
 
     Private Sub mnuConvertToFactor_Click(sender As Object, e As EventArgs) Handles mnuConvertToFactor.Click
         clsConvertTo.AddParameter("to_type", Chr(34) & "factor" & Chr(34))
         clsConvertTo.AddParameter("col_names", SelectedColumns())
-        frmMain.clsRLink.RunScript(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Factor")
+        RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Factor")
     End Sub
 
     Private Function SelectedColumns(Optional bWithQuotes As Boolean = True) As String
@@ -594,11 +596,11 @@ Public Class ucrDataView
     End Sub
 
     Private Sub mnuRemoveCurrentFilter_Click(sender As Object, e As EventArgs) Handles mnuRemoveCurrentFilter.Click
-        frmMain.clsRLink.RunScript(clsRemoveFilter.ToScript(), strComment:="Right click menu: Remove Current Filter")
+        RunScriptFromDataView(clsRemoveFilter.ToScript(), strComment:="Right click menu: Remove Current Filter")
     End Sub
 
     Private Sub clearColumnFilterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles clearColumnFilterToolStripMenuItem.Click
-        frmMain.clsRLink.RunScript(clsRemoveFilter.ToScript(), strComment:="Right click menu: Remove Current Filter")
+        RunScriptFromDataView(clsRemoveFilter.ToScript(), strComment:="Right click menu: Remove Current Filter")
     End Sub
 
     Private Sub SortToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SortToolStripMenuItem.Click
@@ -613,12 +615,12 @@ Public Class ucrDataView
         If strSelectedColumns.Length <> 0 Then
             strLastSelectedColumn = strSelectedColumns(strSelectedColumns.Length - 1)
             clsFreezeColumns.AddParameter("column", Chr(34) & strLastSelectedColumn & Chr(34))
-            frmMain.clsRLink.RunScript(clsFreezeColumns.ToScript(), strComment:="Right click menu: Freeze columns")
+            RunScriptFromDataView(clsFreezeColumns.ToScript(), strComment:="Right click menu: Freeze columns")
         End If
     End Sub
 
     Private Sub UnfreezeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UnfreezeToolStripMenuItem.Click
-        frmMain.clsRLink.RunScript(clsUnfreezeColumns.ToScript(), strComment:="Right click menu: Freeze columns")
+        RunScriptFromDataView(clsUnfreezeColumns.ToScript(), strComment:="Right click menu: Freeze columns")
     End Sub
 
     Private Sub grdCurrSheet_BeforeCut(sender As Object, e As BeforeRangeOperationEventArgs) Handles grdCurrSheet.BeforeCut
@@ -659,7 +661,7 @@ Public Class ucrDataView
     Private Sub ViewSheet_Click(sender As Object, e As EventArgs) Handles ViewSheet.Click
         clsViewDataFrame.AddParameter("x", clsRFunctionParameter:=clsGetDataFrame)
         clsViewDataFrame.AddParameter("title", Chr(34) & grdCurrSheet.Name & Chr(34))
-        frmMain.clsRLink.RunScript(clsViewDataFrame.ToScript, strComment:="Right Click Menu: View R Data Frame", bSeparateThread:=False)
+        RunScriptFromDataView(clsViewDataFrame.ToScript, strComment:="Right Click Menu: View R Data Frame", bSeparateThread:=False)
     End Sub
 
     Private Sub mnuConvertDate_Click(sender As Object, e As EventArgs) Handles mnuConvertToDate.Click
@@ -670,7 +672,7 @@ Public Class ucrDataView
     Private Sub mnuCovertToOrderedFactors_Click(sender As Object, e As EventArgs) Handles mnuCovertToOrderedFactors.Click
         clsConvertOrderedFactor.AddParameter("col_names", SelectedColumns())
         clsConvertOrderedFactor.AddParameter("to_type", Chr(34) & "ordered_factor" & Chr(34))
-        frmMain.clsRLink.RunScript(clsConvertOrderedFactor.ToScript, strComment:="Right Click Menu: Convert to Ordered Factor")
+        RunScriptFromDataView(clsConvertOrderedFactor.ToScript, strComment:="Right Click Menu: Convert to Ordered Factor")
     End Sub
 
     Private Sub mnuDuplicateColumn_Click(sender As Object, e As EventArgs) Handles mnuDuplicateColumn.Click
@@ -696,5 +698,13 @@ Public Class ucrDataView
                 grdData.CurrentWorksheet = grdWorksheet
             End If
         End If
+    End Sub
+
+    Private Sub RunScriptFromDataView(strScript As String, Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing)
+        Cursor = Cursors.WaitCursor
+        grdData.Enabled = False
+        frmMain.clsRLink.RunScript(strScript:=strScript, iCallType:=iCallType, strComment:=strComment, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+        grdData.Enabled = True
+        Cursor = Cursors.Default
     End Sub
 End Class

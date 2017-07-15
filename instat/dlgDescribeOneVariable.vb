@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 
 Public Class dlgDescribeOneVariable
@@ -43,15 +44,25 @@ Public Class dlgDescribeOneVariable
         ucrSelectorDescribeOneVar.SetParameter(New RParameter("data_name", 0))
         ucrSelectorDescribeOneVar.SetParameterIsString()
 
+        ucrReceiverDescribeOneVar.SetParameter(New RParameter("object", 0))
+        ucrReceiverDescribeOneVar.SetParameterIsRFunction()
         ucrReceiverDescribeOneVar.Selector = ucrSelectorDescribeOneVar
         ucrReceiverDescribeOneVar.SetMeAsReceiver()
 
+        ucrNudMaxSum.SetParameter(New RParameter("maxsum", 2))
+        ucrNudMaxSum.SetRDefault("7")
+
+        ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 3))
         ucrChkOmitMissing.SetText("Omit Missing Values")
         ucrChkOmitMissing.SetRDefault("FALSE")
+        ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkOmitMissing.bUpdateRCodeFromControl = True
 
         ucrChkCustomise.SetText("Customise")
         ucrChkCustomise.AddFunctionNamesCondition(True, frmMain.clsRLink.strInstatDataObject & "$summary")
         ucrChkCustomise.AddFunctionNamesCondition(False, "summary")
+        ucrChkCustomise.AddToLinkedControls(ucrNudMaxSum, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudMaxSum.SetLinkedDisplayControl(lblMaxSum)
 
         ucrChkSaveResult.SetText("Save Result") 'this is disabled in the initial implementation
         ucrChkSaveResult.Enabled = False
@@ -74,19 +85,11 @@ Public Class dlgDescribeOneVariable
         clsSummariesList.AddParameter("summary_sum", Chr(34) & "summary_sum" & Chr(34), bIncludeArgumentName:=False)
 
         clsSummaryFunction.SetRCommand("summary")
+        clsSummaryFunction.AddParameter("maxsum", 7)
 
         clsInstatSummaryFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary")
         clsInstatSummaryFunction.AddParameter("return_output", "TRUE")
         clsInstatSummaryFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList)
-
-        'These two controls go in both functions and their parameter name is different for each function
-        'So setting their parameter is done in SetDefaults because it depends on the default function (unlike for the selector)
-        ucrReceiverDescribeOneVar.SetParameter(New RParameter("object", 0))
-        ucrReceiverDescribeOneVar.SetParameterIsRFunction()
-
-        ucrChkOmitMissing.SetParameter(New RParameter("na.rm"))
-        ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkOmitMissing.bUpdateRCodeFromControl = True
 
         ucrBaseDescribeOneVar.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
         bResetSubdialog = True
@@ -94,9 +97,8 @@ Public Class dlgDescribeOneVariable
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsInstatSummaryFunction, ucrChkOmitMissing.GetParameter(), iAdditionalPairNo:=1)
-        ucrReceiverDescribeOneVar.AddAdditionalCodeParameterPair(clsInstatSummaryFunction, New RParameter("columns_to_summarise", 0), iAdditionalPairNo:=1)
+        ucrNudMaxSum.SetRCode(clsSummaryFunction, bReset)
         ucrReceiverDescribeOneVar.SetRCode(clsSummaryFunction, bReset)
-        ucrReceiverDescribeOneVar.SetRCode(ucrBaseDescribeOneVar.clsRsyntax.clsBaseFunction, bReset) 'for now
         ucrChkOmitMissing.SetRCode(clsSummaryFunction, bReset)
         ucrChkCustomise.SetRCode(ucrBaseDescribeOneVar.clsRsyntax.clsBaseFunction, bReset)
         ucrSelectorDescribeOneVar.SetRCode(clsInstatSummaryFunction, bReset)
@@ -104,7 +106,7 @@ Public Class dlgDescribeOneVariable
 
     Public Sub TestOKEnabled()
         'We cannot test the values on the sub dialog because the sub dialog may not be in sync with the main dialog code. This only happens once the sub dialog has been opened.
-        If ucrReceiverDescribeOneVar.IsEmpty() OrElse (ucrChkCustomise.Checked AndAlso clsSummariesList.clsParameters.Count = 0) Then
+        If ucrReceiverDescribeOneVar.IsEmpty() OrElse (ucrChkCustomise.Checked AndAlso clsSummariesList.clsParameters.Count = 0) OrElse ucrNudMaxSum.GetText = "" Then
             ucrBaseDescribeOneVar.OKEnabled(False)
         Else
             ucrBaseDescribeOneVar.OKEnabled(True)
@@ -127,26 +129,28 @@ Public Class dlgDescribeOneVariable
     Private Sub ChangeBaseFunction()
         If ucrChkCustomise.Checked Then
             ucrBaseDescribeOneVar.clsRsyntax.SetBaseRFunction(clsInstatSummaryFunction)
-            ucrReceiverDescribeOneVar.SetParameterIsString()
-            'For the receiver we set the parameter as new because the value will be different to the current value (one is string and one is RFunction)
-            'For the checkbox we just change the parameter name, because we want to keep the same value in the control for the new function.
-            'Changing the parameter name should be used very cautiously. Normally it is safer to set a new parameter.
             cmdSummaries.Enabled = True
         Else
             ucrBaseDescribeOneVar.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
-            ucrReceiverDescribeOneVar.SetParameterIsRFunction()
             cmdSummaries.Enabled = False
         End If
         'We need to update the base function to include the 
         'ucrBaseDescribeOneVar.clsRsyntax.clsBaseFunction.AddParameter(ucrChkOmitMissing.GetParameter())
-        SetRCodeForControls(False)
+    End Sub
+
+    Private Sub ucrReceiverDescribeOneVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDescribeOneVar.ControlValueChanged
+        If Not ucrReceiverDescribeOneVar.IsEmpty Then
+            clsInstatSummaryFunction.AddParameter("columns_to_summarise", ucrReceiverDescribeOneVar.GetVariableNames())
+        Else
+            clsInstatSummaryFunction.RemoveParameterByName("columns_to_summarise")
+        End If
     End Sub
 
     Private Sub ucrChkCustomise_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCustomise.ControlValueChanged
         ChangeBaseFunction()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDescribeOneVar.ControlContentsChanged, ucrChkCustomise.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDescribeOneVar.ControlContentsChanged, ucrChkCustomise.ControlContentsChanged, ucrNudMaxSum.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class

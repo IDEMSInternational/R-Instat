@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ucrAdditionalLayers
     Inherits System.Windows.Forms.UserControl
 
@@ -61,9 +77,9 @@ Partial Class ucrAdditionalLayers
         Me.lblLayers.AutoSize = True
         Me.lblLayers.Location = New System.Drawing.Point(4, 13)
         Me.lblLayers.Name = "lblLayers"
-        Me.lblLayers.Size = New System.Drawing.Size(90, 13)
+        Me.lblLayers.Size = New System.Drawing.Size(41, 13)
         Me.lblLayers.TabIndex = 5
-        Me.lblLayers.Text = "Additional Layers:"
+        Me.lblLayers.Text = "Layers:"
         '
         'lstLayers
         '
@@ -73,6 +89,7 @@ Partial Class ucrAdditionalLayers
         Me.lstLayers.TabIndex = 4
         Me.lstLayers.UseCompatibleStateImageBehavior = False
         Me.lstLayers.View = System.Windows.Forms.View.List
+        Me.lstLayers.FullRowSelect = True
         '
         'ucrAdditionalLayers
         '
