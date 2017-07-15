@@ -253,7 +253,7 @@ Public Class dlgFourVariableModelling
     End Sub
 
     Public Sub TestOKEnabled()
-        If (Not ucrReceiverResponse.IsEmpty()) AndAlso (Not ucrReceiverFirstExplanatory.IsEmpty()) AndAlso (Not ucrReceiverSecondExplanatory.IsEmpty()) AndAlso (Not ucrReceiverThirdExplanatory.IsEmpty()) AndAlso (ucrInputModelOperators1.GetText <> "") AndAlso (ucrInputModelOperators2.GetText <> "") Then
+        If (Not ucrReceiverResponse.IsEmpty()) AndAlso (Not ucrReceiverFirstExplanatory.IsEmpty()) AndAlso (Not ucrReceiverSecondExplanatory.IsEmpty()) AndAlso (Not ucrReceiverThirdExplanatory.IsEmpty()) AndAlso (ucrInputModelOperators1.GetText <> "") AndAlso (ucrInputModelOperators2.GetText <> "") AndAlso Not ucrDistributionChoice.ucrInputDistributions.IsEmpty Then
             ucrBaseFourVariableModelling.OKEnabled(True)
             UpdatePreview()
         Else
