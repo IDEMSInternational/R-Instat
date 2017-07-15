@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 
 Public Class dlgRandomSample
@@ -43,9 +42,12 @@ Public Class dlgRandomSample
         ucrBase.iHelpTopicID = 376
 
         ucrNudNumberOfSamples.SetParameter(New RParameter("n", 0))
-        ucrSampleSize.SetDataFrameSelector(ucrSelectorRandomSamples)
         ucrNudNumberOfSamples.SetMinMax(1, Integer.MaxValue)
+
+        ucrSampleSize.SetDataFrameSelector(ucrSelectorRandomSamples)
+
         ucrSelectorRandomSamples.bUseCurrentFilter = False
+
         ucrChkSetSeed.SetText("Set Seed")
         ucrChkSetSeed.AddRSyntaxContainsFunctionNamesCondition(True, {"set.seed"})
         ucrChkSetSeed.AddRSyntaxContainsFunctionNamesCondition(False, {"set.seed"}, False)
@@ -65,6 +67,7 @@ Public Class dlgRandomSample
         clsDistributionFunction = New RFunction
 
         ucrSelectorRandomSamples.Reset()
+        ucrSaveRandomSamples.Reset()
         SetNewColumName()
 
         clsSetSeed.SetRCommand("set.seed")
