@@ -38,17 +38,11 @@ Partial Class dlgFitModel
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectorByDataFrameAddRemoveForFitModel = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblResponseVariable = New System.Windows.Forms.Label()
-        Me.ucrReceiverResponseVar = New instat.ucrReceiverSingle()
         Me.cmdModelOptions = New System.Windows.Forms.Button()
-        Me.ucrFamily = New instat.ucrDistributions()
         Me.lblModelPreview = New System.Windows.Forms.Label()
-        Me.ucrInputModelPreview = New instat.ucrInputTextBox()
         Me.cmdDisplayOptions = New System.Windows.Forms.Button()
         Me.lblExplanatoryModel = New System.Windows.Forms.Label()
-        Me.ucrReceiverExpressionFitModel = New instat.ucrReceiverExpression()
         Me.cmdDiv = New System.Windows.Forms.Button()
         Me.grpFirstCalc = New System.Windows.Forms.GroupBox()
         Me.cmdMultiply = New System.Windows.Forms.Button()
@@ -68,29 +62,17 @@ Partial Class dlgFitModel
         Me.cmdLog = New System.Windows.Forms.Button()
         Me.cmdTan = New System.Windows.Forms.Button()
         Me.cmdExp = New System.Windows.Forms.Button()
-        Me.ucrModelName = New instat.ucrInputComboBox()
-        Me.chkSaveModel = New System.Windows.Forms.CheckBox()
-        Me.chkConvertToVariate = New System.Windows.Forms.CheckBox()
+        Me.ucrReceiverExpressionFitModel = New instat.ucrReceiverExpression()
+        Me.ucrInputModelPreview = New instat.ucrInputTextBox()
+        Me.ucrFamily = New instat.ucrDistributions()
+        Me.ucrReceiverResponseVar = New instat.ucrReceiverSingle()
+        Me.ucrSelectorByDataFrameAddRemoveForFitModel = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrConvertToVariate = New instat.ucrCheck()
+        Me.ucrModelName = New instat.ucrSave()
         Me.grpFirstCalc.SuspendLayout()
         Me.grpSecondCalc.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 298)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 0
-        '
-        'ucrSelectorByDataFrameAddRemoveForFitModel
-        '
-        Me.ucrSelectorByDataFrameAddRemoveForFitModel.bShowHiddenColumns = False
-        Me.ucrSelectorByDataFrameAddRemoveForFitModel.bUseCurrentFilter = True
-        Me.ucrSelectorByDataFrameAddRemoveForFitModel.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorByDataFrameAddRemoveForFitModel.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorByDataFrameAddRemoveForFitModel.Name = "ucrSelectorByDataFrameAddRemoveForFitModel"
-        Me.ucrSelectorByDataFrameAddRemoveForFitModel.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorByDataFrameAddRemoveForFitModel.TabIndex = 1
         '
         'lblResponseVariable
         '
@@ -101,15 +83,6 @@ Partial Class dlgFitModel
         Me.lblResponseVariable.TabIndex = 2
         Me.lblResponseVariable.Text = "Response Variable:"
         '
-        'ucrReceiverResponseVar
-        '
-        Me.ucrReceiverResponseVar.Location = New System.Drawing.Point(243, 43)
-        Me.ucrReceiverResponseVar.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverResponseVar.Name = "ucrReceiverResponseVar"
-        Me.ucrReceiverResponseVar.Selector = Nothing
-        Me.ucrReceiverResponseVar.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverResponseVar.TabIndex = 3
-        '
         'cmdModelOptions
         '
         Me.cmdModelOptions.Location = New System.Drawing.Point(303, 243)
@@ -119,13 +92,6 @@ Partial Class dlgFitModel
         Me.cmdModelOptions.Text = "Model options"
         Me.cmdModelOptions.UseVisualStyleBackColor = True
         '
-        'ucrFamily
-        '
-        Me.ucrFamily.Location = New System.Drawing.Point(10, 193)
-        Me.ucrFamily.Name = "ucrFamily"
-        Me.ucrFamily.Size = New System.Drawing.Size(207, 43)
-        Me.ucrFamily.TabIndex = 5
-        '
         'lblModelPreview
         '
         Me.lblModelPreview.AutoSize = True
@@ -134,14 +100,6 @@ Partial Class dlgFitModel
         Me.lblModelPreview.Size = New System.Drawing.Size(80, 13)
         Me.lblModelPreview.TabIndex = 6
         Me.lblModelPreview.Text = "Model Preview:"
-        '
-        'ucrInputModelPreview
-        '
-        Me.ucrInputModelPreview.IsReadOnly = False
-        Me.ucrInputModelPreview.Location = New System.Drawing.Point(90, 245)
-        Me.ucrInputModelPreview.Name = "ucrInputModelPreview"
-        Me.ucrInputModelPreview.Size = New System.Drawing.Size(200, 21)
-        Me.ucrInputModelPreview.TabIndex = 7
         '
         'cmdDisplayOptions
         '
@@ -160,14 +118,6 @@ Partial Class dlgFitModel
         Me.lblExplanatoryModel.Size = New System.Drawing.Size(97, 13)
         Me.lblExplanatoryModel.TabIndex = 10
         Me.lblExplanatoryModel.Text = "Explanatory Model:"
-        '
-        'ucrReceiverExpressionFitModel
-        '
-        Me.ucrReceiverExpressionFitModel.Location = New System.Drawing.Point(243, 89)
-        Me.ucrReceiverExpressionFitModel.Name = "ucrReceiverExpressionFitModel"
-        Me.ucrReceiverExpressionFitModel.Selector = Nothing
-        Me.ucrReceiverExpressionFitModel.Size = New System.Drawing.Size(256, 30)
-        Me.ucrReceiverExpressionFitModel.TabIndex = 11
         '
         'cmdDiv
         '
@@ -372,44 +322,85 @@ Partial Class dlgFitModel
         Me.cmdExp.Text = "exp"
         Me.cmdExp.UseVisualStyleBackColor = True
         '
+        'ucrReceiverExpressionFitModel
+        '
+        Me.ucrReceiverExpressionFitModel.frmParent = Me
+        Me.ucrReceiverExpressionFitModel.Location = New System.Drawing.Point(243, 89)
+        Me.ucrReceiverExpressionFitModel.Name = "ucrReceiverExpressionFitModel"
+        Me.ucrReceiverExpressionFitModel.Selector = Nothing
+        Me.ucrReceiverExpressionFitModel.Size = New System.Drawing.Size(256, 30)
+        Me.ucrReceiverExpressionFitModel.strNcFilePath = ""
+        Me.ucrReceiverExpressionFitModel.TabIndex = 11
+        Me.ucrReceiverExpressionFitModel.ucrSelector = Nothing
+        '
+        'ucrInputModelPreview
+        '
+        Me.ucrInputModelPreview.AddQuotesIfUnrecognised = True
+        Me.ucrInputModelPreview.IsMultiline = False
+        Me.ucrInputModelPreview.IsReadOnly = False
+        Me.ucrInputModelPreview.Location = New System.Drawing.Point(90, 245)
+        Me.ucrInputModelPreview.Name = "ucrInputModelPreview"
+        Me.ucrInputModelPreview.Size = New System.Drawing.Size(200, 21)
+        Me.ucrInputModelPreview.TabIndex = 7
+        '
+        'ucrFamily
+        '
+        Me.ucrFamily.Location = New System.Drawing.Point(10, 193)
+        Me.ucrFamily.Name = "ucrFamily"
+        Me.ucrFamily.Size = New System.Drawing.Size(207, 43)
+        Me.ucrFamily.TabIndex = 5
+        '
+        'ucrReceiverResponseVar
+        '
+        Me.ucrReceiverResponseVar.frmParent = Me
+        Me.ucrReceiverResponseVar.Location = New System.Drawing.Point(243, 43)
+        Me.ucrReceiverResponseVar.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverResponseVar.Name = "ucrReceiverResponseVar"
+        Me.ucrReceiverResponseVar.Selector = Nothing
+        Me.ucrReceiverResponseVar.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverResponseVar.strNcFilePath = ""
+        Me.ucrReceiverResponseVar.TabIndex = 3
+        Me.ucrReceiverResponseVar.ucrSelector = Nothing
+        '
+        'ucrSelectorByDataFrameAddRemoveForFitModel
+        '
+        Me.ucrSelectorByDataFrameAddRemoveForFitModel.bShowHiddenColumns = False
+        Me.ucrSelectorByDataFrameAddRemoveForFitModel.bUseCurrentFilter = True
+        Me.ucrSelectorByDataFrameAddRemoveForFitModel.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorByDataFrameAddRemoveForFitModel.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorByDataFrameAddRemoveForFitModel.Name = "ucrSelectorByDataFrameAddRemoveForFitModel"
+        Me.ucrSelectorByDataFrameAddRemoveForFitModel.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorByDataFrameAddRemoveForFitModel.TabIndex = 1
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(9, 298)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 0
+        '
+        'ucrConvertToVariate
+        '
+        Me.ucrConvertToVariate.Checked = False
+        Me.ucrConvertToVariate.Location = New System.Drawing.Point(378, 43)
+        Me.ucrConvertToVariate.Name = "ucrConvertToVariate"
+        Me.ucrConvertToVariate.Size = New System.Drawing.Size(100, 20)
+        Me.ucrConvertToVariate.TabIndex = 166
+        '
         'ucrModelName
         '
-        Me.ucrModelName.IsReadOnly = False
-        Me.ucrModelName.Location = New System.Drawing.Point(90, 271)
+        Me.ucrModelName.Location = New System.Drawing.Point(13, 271)
         Me.ucrModelName.Name = "ucrModelName"
-        Me.ucrModelName.Size = New System.Drawing.Size(200, 21)
-        Me.ucrModelName.TabIndex = 164
-        '
-        'chkSaveModel
-        '
-        Me.chkSaveModel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.chkSaveModel.Location = New System.Drawing.Point(9, 271)
-        Me.chkSaveModel.Name = "chkSaveModel"
-        Me.chkSaveModel.Size = New System.Drawing.Size(104, 24)
-        Me.chkSaveModel.TabIndex = 163
-        Me.chkSaveModel.Tag = "Save_Model"
-        Me.chkSaveModel.Text = "Save Model"
-        Me.chkSaveModel.UseVisualStyleBackColor = True
-        '
-        'chkConvertToVariate
-        '
-        Me.chkConvertToVariate.AutoSize = True
-        Me.chkConvertToVariate.Location = New System.Drawing.Point(380, 45)
-        Me.chkConvertToVariate.Name = "chkConvertToVariate"
-        Me.chkConvertToVariate.Size = New System.Drawing.Size(111, 17)
-        Me.chkConvertToVariate.TabIndex = 165
-        Me.chkConvertToVariate.Tag = "Convert_to_Variate"
-        Me.chkConvertToVariate.Text = "Convert to Variate"
-        Me.chkConvertToVariate.UseVisualStyleBackColor = True
+        Me.ucrModelName.Size = New System.Drawing.Size(277, 24)
+        Me.ucrModelName.TabIndex = 167
         '
         'dlgFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(510, 357)
-        Me.Controls.Add(Me.chkConvertToVariate)
         Me.Controls.Add(Me.ucrModelName)
-        Me.Controls.Add(Me.chkSaveModel)
+        Me.Controls.Add(Me.ucrConvertToVariate)
         Me.Controls.Add(Me.grpSecondCalc)
         Me.Controls.Add(Me.grpFirstCalc)
         Me.Controls.Add(Me.ucrReceiverExpressionFitModel)
@@ -467,7 +458,6 @@ Partial Class dlgFitModel
     Friend WithEvents cmdTan As Button
     Friend WithEvents cmdExp As Button
     Friend WithEvents cmdPower As Button
-    Friend WithEvents ucrModelName As ucrInputComboBox
-    Friend WithEvents chkSaveModel As CheckBox
-    Friend WithEvents chkConvertToVariate As CheckBox
+    Friend WithEvents ucrConvertToVariate As ucrCheck
+    Friend WithEvents ucrModelName As ucrSave
 End Class
