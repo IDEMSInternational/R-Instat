@@ -1,4 +1,20 @@
-﻿Imports System.IO
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Imports System.IO
 Public Class clsRecentFiles
     Public mnuItems As New List(Of Form)
     Private strRecentFilesPath As String
@@ -133,7 +149,7 @@ Public Class clsRecentFiles
                 ' hook into the click event handler so we can open the file later...
                 AddHandler clsItem.Click, AddressOf mnuFileMRU_Click
                 ' insert into DropDownItems list...
-                mnuFile.DropDownItems.Insert(mnuFile.DropDownItems.Count - 2, clsItem)
+                mnuFile.DropDownItems.Insert(mnuFile.DropDownItems.Count - 1, clsItem)
             Next
 
             ' show separator
@@ -153,7 +169,7 @@ Public Class clsRecentFiles
             dlgImportDataset.strFileToOpenOn = DirectCast(sender, ToolStripItem).Tag.ToString().Substring(4)
             dlgImportDataset.ShowDialog()
         Else
-            iResult = MessageBox.Show(frmMain, "Error: File not accessible. It may have been renamed, moved or deleted." & Environment.NewLine & Environment.NewLine & "Would you like to remove this file from the list?", "Error accessing file", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
+            iResult = MessageBox.Show(frmMain, "File not accessible. It may have been renamed, moved or deleted." & Environment.NewLine & Environment.NewLine & "Would you like to remove this file from the list?", "Cannot access file", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
             'removes the path to the non existent file
             If iResult = DialogResult.Yes Then
                 strListMRU.RemoveAt(strListMRU.FindLastIndex(Function(value As String)

@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat
 Imports instat.Translations
 Public Class dlgClimdex
@@ -51,24 +52,29 @@ Public Class dlgClimdex
         'ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {"date"})
         ucrReceiverDate.bAutoFill = True
         ucrReceiverDate.SetParameterIsString()
+        ucrReceiverDate.strSelectorHeading = "Date"
 
         ucrReceiverTmax.SetParameter(New RParameter("col_name"))
         ucrReceiverTmax.Selector = ucrSelectorClimdex
         ucrReceiverTmax.SetClimaticType("temp_max")
         ucrReceiverTmax.bAutoFill = True
         ucrReceiverTmax.SetParameterIsString()
+        ucrReceiverTmax.strSelectorHeading = "Numerics"
 
         ucrReceiverTmin.SetParameter(New RParameter("col_name"))
         ucrReceiverTmin.Selector = ucrSelectorClimdex
         ucrReceiverTmin.SetClimaticType("temp_min")
         ucrReceiverTmin.bAutoFill = True
         ucrReceiverTmin.SetParameterIsString()
+        ucrReceiverTmin.strSelectorHeading = "Numerics"
+
 
         ucrReceiverPrec.SetParameter(New RParameter("col_name"))
         ucrReceiverPrec.Selector = ucrSelectorClimdex
         ucrReceiverPrec.SetClimaticType("rain")
         ucrReceiverPrec.bAutoFill = True
         ucrReceiverPrec.SetParameterIsString()
+        ucrReceiverPrec.strSelectorHeading = "Numerics"
 
         ucrChkSave.SetText("Save Indices")
         ucrChkSave.bChangeParameterValue = False

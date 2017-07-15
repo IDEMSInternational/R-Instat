@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Public Class dlgColumnStats
     Public bFirstLoad As Boolean = True
@@ -20,6 +21,9 @@ Public Class dlgColumnStats
     Private clsSummariesList As New RFunction
     Private bResetSubdialog As Boolean = False
     Private clsDefaultFunction As New RFunction
+    Public strDefaultDataFrame As String = ""
+    Public strDefaultVariables() As String
+    Public strDefaultFactors() As String
 
     Private Sub dlgColumnStats_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -30,6 +34,7 @@ Public Class dlgColumnStats
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetDefaultColumns()
         bReset = False
         autoTranslate(Me)
         TestOKEnabled()
@@ -91,6 +96,8 @@ Public Class dlgColumnStats
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
         clsDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList)
+        'Prevents an error if user chooses non count summaries with no columns to summarise
+        clsDefaultFunction.AddParameter("silent", "TRUE")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
         bResetSubdialog = True
     End Sub
@@ -99,8 +106,27 @@ Public Class dlgColumnStats
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
+    Private Sub SetDefaultColumns()
+        If strDefaultDataFrame <> "" Then
+            ucrSelectorForColumnStatistics.SetDataframe(strDefaultDataFrame)
+        End If
+        If strDefaultVariables IsNot Nothing AndAlso strDefaultVariables.Count > 0 Then
+            For Each strVar As String In strDefaultVariables
+                ucrReceiverSelectedVariables.Add(strVar, strDefaultDataFrame)
+            Next
+        End If
+        If strDefaultFactors IsNot Nothing AndAlso strDefaultFactors.Count > 0 Then
+            For Each strVar As String In strDefaultFactors
+                ucrReceiverByFactor.Add(strVar, strDefaultDataFrame)
+            Next
+        End If
+        strDefaultDataFrame = ""
+        strDefaultVariables = Nothing
+        strDefaultFactors = Nothing
+    End Sub
+
     Public Sub TestOKEnabled()
-        If Not ucrReceiverSelectedVariables.IsEmpty AndAlso Not ucrReceiverByFactor.IsEmpty AndAlso Not clsSummariesList.clsParameters.Count = 0 Then
+        If Not ucrReceiverByFactor.IsEmpty AndAlso Not clsSummariesList.clsParameters.Count = 0 Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)

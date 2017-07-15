@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgUseGraph
     Inherits System.Windows.Forms.Form
 
@@ -41,18 +57,18 @@ Partial Class dlgUseGraph
         '
         'cmdPlotOptions
         '
-        Me.cmdPlotOptions.Location = New System.Drawing.Point(10, 202)
+        Me.cmdPlotOptions.Location = New System.Drawing.Point(10, 198)
         Me.cmdPlotOptions.Name = "cmdPlotOptions"
-        Me.cmdPlotOptions.Size = New System.Drawing.Size(108, 23)
+        Me.cmdPlotOptions.Size = New System.Drawing.Size(120, 23)
         Me.cmdPlotOptions.TabIndex = 3
         Me.cmdPlotOptions.Text = "Options"
         Me.cmdPlotOptions.UseVisualStyleBackColor = True
         '
         'ucrSaveGraph
         '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 231)
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 227)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(276, 24)
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(255, 24)
         Me.ucrSaveGraph.TabIndex = 4
         '
         'ucrGraphReceiver
@@ -79,7 +95,7 @@ Partial Class dlgUseGraph
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 261)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 254)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 5
@@ -88,7 +104,7 @@ Partial Class dlgUseGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(416, 319)
+        Me.ClientSize = New System.Drawing.Size(414, 311)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.cmdPlotOptions)
         Me.Controls.Add(Me.lblGraphtoUse)
