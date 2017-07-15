@@ -38,7 +38,7 @@ Public Class dlgCorrelation
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 421
-
+        ucrBase.clsRsyntax.iCallType = 2
         ucrReceiverFirstColumn.SetParameter(New RParameter("x", 0))
         ucrReceiverFirstColumn.SetParameterIsRFunction()
         ucrReceiverFirstColumn.Selector = ucrSelectorCorrelation
@@ -71,7 +71,11 @@ Public Class dlgCorrelation
         ucrPnlColumns.AddRadioButton(rdoTwoColumns)
         ucrPnlColumns.AddRadioButton(rdoMultipleColumns)
         ucrPnlColumns.AddFunctionNamesCondition(rdoTwoColumns, "cor.test")
+        ucrPnlColumns.AddParameterPresentCondition(rdoTwoColumns, "method")
+        ucrPnlColumns.AddParameterPresentCondition(rdoMultipleColumns, "method", False)
         ucrPnlColumns.AddFunctionNamesCondition(rdoMultipleColumns, "cor")
+        ucrPnlColumns.AddParameterPresentCondition(rdoMultipleColumns, "use")
+        ucrPnlColumns.AddParameterPresentCondition(rdoTwoColumns, "use", False)
 
         ucrPnlMethod.SetParameter(New RParameter("method", 4))
         ucrPnlMethod.AddRadioButton(rdoPearson, Chr(34) & "pearson" & Chr(34))
@@ -83,9 +87,7 @@ Public Class dlgCorrelation
         ucrPnlCompletePairwise.AddRadioButton(rdoPairwise, Chr(34) & "pairwise.complete.obs" & Chr(34))
         ucrPnlCompletePairwise.AddRadioButton(rdoCompleteRowsOnly, Chr(34) & "complete.obs" & Chr(34))
         ucrPnlCompletePairwise.AddParameterValuesCondition(rdoCompleteRowsOnly, "use", Chr(34) & "complete.obs" & Chr(34))
-        ucrPnlCompletePairwise.AddParameterValuesCondition(rdoCompleteRowsOnly, "use", Chr(34) & "pairwise.complete.obs" & Chr(34), False)
         ucrPnlCompletePairwise.AddParameterValuesCondition(rdoPairwise, "use", Chr(34) & "pairwise.complete.obs" & Chr(34))
-        ucrPnlCompletePairwise.AddParameterValuesCondition(rdoPairwise, "use", Chr(34) & "complete.obs" & Chr(34), False)
 
         'ucrChk
         ucrChkCorrelationMatrix.SetText("Correlation Matrix")
@@ -147,6 +149,7 @@ Public Class dlgCorrelation
         clsRGGcorrGraphicsFunction.SetPackageName("GGally")
         clsRGGcorrGraphicsFunction.SetRCommand("ggcorr")
         clsRGGcorrGraphicsFunction.iCallType = 3
+
         clsRGGcorrGraphicsFunction.AddParameter("cor_matrix", clsRFunctionParameter:=clsCorrelationFunction)
         clsRGGcorrGraphicsFunction.AddParameter("data", "NULL")
 
@@ -154,7 +157,6 @@ Public Class dlgCorrelation
         clsCorrelationFunction.SetAssignTo("last_model", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model")
         clsRGGcorrGraphicsFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         clsRGraphicsFuction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
-        ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationFunction)
     End Sub
