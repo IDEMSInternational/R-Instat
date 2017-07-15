@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class ucrElementRectControl
@@ -63,7 +63,7 @@ Public Class ucrElementRectControl
     End Sub
 
 
-    Public Sub SetRCodeForControl(strNewLegend As String, clsNewElementLine As RFunction, clsNewThemeFunction As RFunction, clsNewBaseOperator As ROperator, Optional bReset As Boolean = False)
+    Public Sub SetRCodeForControl(strNewLegend As String, clsNewElementLine As RFunction, clsNewThemeFunction As RFunction, clsNewBaseOperator As ROperator, Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
         If Not bInitialiseControls Then
             InitialiseControl()
         End If
@@ -73,17 +73,17 @@ Public Class ucrElementRectControl
         clsThemeFunction = clsNewThemeFunction
         clsElementLine = clsNewElementLine
 
-        ucrNudRectSize.SetRCode(clsElementLine, bReset)
-        ucrChkRectSize.SetRCode(clsElementLine, bReset)
+        ucrNudRectSize.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrChkRectSize.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
-        ucrRectColors.SetRCode(clsElementLine, bReset)
-        ucrChkRectColour.SetRCode(clsElementLine, bReset)
+        ucrRectColors.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrChkRectColour.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
-        ucrRectFill.SetRCode(clsElementLine, bReset)
-        ucrChkRectFill.SetRCode(clsElementLine, bReset)
+        ucrRectFill.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrChkRectFill.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
-        ucrInputRectLineType.SetRCode(clsElementLine, bReset)
-        ucrChkRectLineType.SetRCode(clsElementLine, bReset)
+        ucrInputRectLineType.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrChkRectLineType.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
         AddRemoveElementLineAxis()
     End Sub

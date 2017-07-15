@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports RDotNet
@@ -70,7 +70,7 @@ Public Class ucrReceiverMultiple
             lstSelectedVariables.SelectedItems.CopyTo(tempObjects, 0)
             For Each objItem In tempObjects
                 lstSelectedVariables.Items.Remove(objItem)
-                Selector.RemoveFromVariablesList(objItem.Text)
+                Selector.RemoveFromVariablesList(objItem.Text, objItem.Tag)
             Next
         End If
         OnSelectionChanged()
@@ -84,6 +84,7 @@ Public Class ucrReceiverMultiple
         If strItems.Count > 0 Then
             For Each strTempItem In strItems
                 lstSelectedVariables.Items.RemoveByKey(strTempItem)
+                'TODO pass data frame for variables
                 Selector.RemoveFromVariablesList(strTempItem)
             Next
             OnSelectionChanged()
@@ -321,7 +322,7 @@ Public Class ucrReceiverMultiple
                 lstSelectedVariables.Items.Add(kvpTempItem.Value).Group = grpCurr
                 lstSelectedVariables.Items(lstSelectedVariables.Items.Count - 1).Tag = kvpTempItem.Key
                 lstSelectedVariables.Items(lstSelectedVariables.Items.Count - 1).Name = kvpTempItem.Value
-                Selector.AddToVariablesList(kvpTempItem.Value)
+                Selector.AddToVariablesList(kvpTempItem.Value, kvpTempItem.Key)
             End If
         Next
         OnSelectionChanged()
@@ -352,6 +353,7 @@ Public Class ucrReceiverMultiple
         Dim strDataTypes As New List(Of String)
         Dim strDataFrame As String
         Dim strCurrentType As String
+        Dim expTypes As SymbolicExpression
 
         If Selector IsNot Nothing Then
             If bTypeSet Then
@@ -366,7 +368,10 @@ Public Class ucrReceiverMultiple
                 clsGetDataType.AddParameter("property", "data_type_label")
                 clsGetDataType.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
                 clsGetDataType.AddParameter("column", GetVariableNames())
-                strDataTypes = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript()).AsCharacter.ToList()
+                expTypes = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript(), bSilent:=True)
+                If expTypes IsNot Nothing AndAlso expTypes.Type <> Internals.SymbolicExpressionType.Null Then
+                    strDataTypes = expTypes.AsCharacter.ToList()
+                End If
                 If bUnique Then
                     strDataTypes = strDataTypes.Distinct().ToList()
                 End If

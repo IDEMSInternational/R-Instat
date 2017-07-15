@@ -1,5 +1,5 @@
-﻿'' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
@@ -47,22 +47,27 @@ Public Class dlgTransformClimatic
         ucrReceiverData.bWithQuotes = False
         ucrReceiverData.SetParameterIncludeArgumentName(False)
         ucrReceiverData.Selector = ucrSelectorTransform
+        ucrReceiverData.strSelectorHeading = "Numerics"
 
         ucrReceiverStation.Selector = ucrSelectorTransform
         ucrReceiverStation.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "station" & Chr(34)})
         ucrReceiverStation.bAutoFill = True
+        ucrReceiverStation.strSelectorHeading = "Factors"
 
         ucrReceiverYear.Selector = ucrSelectorTransform
         ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
         ucrReceiverYear.bAutoFill = True
+        ucrReceiverYear.strSelectorHeading = "Numerics"
 
         ucrReceiverDate.Selector = ucrSelectorTransform
         ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
         ucrReceiverDate.bAutoFill = True
+        ucrReceiverDate.strSelectorHeading = "Date"
 
         ucrReceiverDOY.Selector = ucrSelectorTransform
         ucrReceiverDOY.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "doy" & Chr(34)})
         ucrReceiverDOY.bAutoFill = True
+        ucrReceiverDOY.strSelectorHeading = "Numerics"
 
         'clsRTransform.SetRCommand("instat_calculation$new")
         'clsRTransform.SetAssignTo("transform_calculation")

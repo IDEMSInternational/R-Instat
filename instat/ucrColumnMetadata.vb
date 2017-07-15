@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Imports unvell.ReoGrid.Events
 
@@ -41,8 +42,7 @@ Public Class ucrColumnMetadata
     Private Sub grdVariables_CurrentWorksheetChanged(sender As Object, e As EventArgs) Handles grdVariables.CurrentWorksheetChanged, Me.Load, grdVariables.WorksheetInserted
         grdCurrSheet = grdVariables.CurrentWorksheet
         grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
-        'grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
-        grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
+        grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToFillSerial, False)
         grdCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
     End Sub
 
@@ -106,7 +106,7 @@ Public Class ucrColumnMetadata
                 strComment = "Edited variables metadata value"
             End If
             Try
-                frmMain.clsRLink.RunScript(strScript, strComment:=strComment)
+                RunScriptFromColumnMetadata(strScript, strComment:=strComment)
             Catch
                 e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
             End Try
@@ -154,6 +154,20 @@ Public Class ucrColumnMetadata
     Public Sub SelectAllText()
         If grdCurrSheet IsNot Nothing Then
             grdCurrSheet.SelectAll()
+        End If
+    End Sub
+
+    Private Sub RunScriptFromColumnMetadata(strScript As String, Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing)
+        Cursor = Cursors.WaitCursor
+        grdVariables.Enabled = False
+        frmMain.clsRLink.RunScript(strScript:=strScript, iCallType:=iCallType, strComment:=strComment, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+        grdVariables.Enabled = True
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub grdVariables_VisibleChanged(sender As Object, e As EventArgs) Handles grdVariables.VisibleChanged
+        If grdVariables.Visible Then
+            grdVariables.SheetTabWidth = Math.Max(grdVariables.SheetTabWidth, 300)
         End If
     End Sub
 End Class

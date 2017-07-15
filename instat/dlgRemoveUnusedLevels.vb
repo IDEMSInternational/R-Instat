@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports RDotNet
@@ -44,6 +44,7 @@ Public Class dlgRemoveUnusedLevels
         ucrReceiverFactorColumn.Selector = ucrSelectorFactorColumn
         ucrReceiverFactorColumn.SetMeAsReceiver()
         ucrReceiverFactorColumn.SetIncludedDataTypes({"factor"})
+        ucrReceiverFactorColumn.strSelectorHeading = "Factors"
 
         ucrRemoveUnusedFactorLevels.SetReceiver(ucrReceiverFactorColumn)
         ucrRemoveUnusedFactorLevels.SetIncludeLevels(False)
@@ -103,6 +104,8 @@ Public Class dlgRemoveUnusedLevels
 
     Private Sub ucrReceiverFactorColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactorColumn.ControlValueChanged, ucrRemoveUnusedFactorLevels.ControlValueChanged
         Dim iNumOutput As Integer
+        Dim expNum As SymbolicExpression
+        Dim bClear As Boolean = False
 
         If Not ucrReceiverFactorColumn.IsEmpty Then
             clstable.AddParameter("x", clsRFunctionParameter:=clsFactorColumn)
@@ -112,16 +115,24 @@ Public Class dlgRemoveUnusedLevels
 
             clsSum.AddParameter("x", clsROperatorParameter:=clsTableOperation)
 
-            iNumOutput = frmMain.clsRLink.RunInternalScriptGetValue(clsSum.ToScript).AsNumeric(0)
-            ucrInputUnusedLevels.txtInput.BackColor = Color.Green
-            If iNumOutput = 0 Then
-                ucrInputUnusedLevels.SetName("no unused levels to remove")
-                ucrInputUnusedLevels.txtInput.BackColor = Color.Red
-            Else
-                ucrInputUnusedLevels.SetName(iNumOutput & " unused levels will be removed")
+            expNum = frmMain.clsRLink.RunInternalScriptGetValue(clsSum.ToScript, bSilent:=True)
+            If expNum IsNot Nothing AndAlso expNum.Type <> Internals.SymbolicExpressionType.Null Then
+                iNumOutput = expNum.AsNumeric(0)
                 ucrInputUnusedLevels.txtInput.BackColor = Color.Green
+                If iNumOutput = 0 Then
+                    ucrInputUnusedLevels.SetName("No unused levels to remove")
+                    ucrInputUnusedLevels.txtInput.BackColor = Color.LightCoral
+                Else
+                    ucrInputUnusedLevels.SetName(iNumOutput & " unused level(s) will be removed")
+                    ucrInputUnusedLevels.txtInput.BackColor = Color.LightGreen
+                End If
+            Else
+                bClear = True
             End If
         Else
+            bClear = True
+        End If
+        If bClear Then
             ucrInputUnusedLevels.txtInput.BackColor = Color.White
             clstable.RemoveParameterByName("x")
             ucrInputUnusedLevels.ResetText()
