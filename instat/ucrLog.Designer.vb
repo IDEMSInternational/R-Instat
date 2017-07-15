@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ucrLog
     Inherits System.Windows.Forms.UserControl
 
@@ -22,8 +38,13 @@ Partial Class ucrLog
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.txtLog = New System.Windows.Forms.TextBox()
+        Me.mnuContextLogFile = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.mnuOpenLogFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCopy = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblHeader = New System.Windows.Forms.Label()
+        Me.mnuContextLogFile.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtLog
@@ -31,6 +52,7 @@ Partial Class ucrLog
         Me.txtLog.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtLog.ContextMenuStrip = Me.mnuContextLogFile
         Me.txtLog.Location = New System.Drawing.Point(0, 20)
         Me.txtLog.Multiline = True
         Me.txtLog.Name = "txtLog"
@@ -39,6 +61,24 @@ Partial Class ucrLog
         Me.txtLog.Size = New System.Drawing.Size(531, 395)
         Me.txtLog.TabIndex = 0
         Me.txtLog.TabStop = False
+        '
+        'mnuContextLogFile
+        '
+        Me.mnuContextLogFile.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOpenLogFile, Me.mnuCopy})
+        Me.mnuContextLogFile.Name = "mnuContextLogFile"
+        Me.mnuContextLogFile.Size = New System.Drawing.Size(148, 48)
+        '
+        'mnuOpenLogFile
+        '
+        Me.mnuOpenLogFile.Name = "mnuOpenLogFile"
+        Me.mnuOpenLogFile.Size = New System.Drawing.Size(147, 22)
+        Me.mnuOpenLogFile.Text = "Open Log File"
+        '
+        'mnuCopy
+        '
+        Me.mnuCopy.Name = "mnuCopy"
+        Me.mnuCopy.Size = New System.Drawing.Size(147, 22)
+        Me.mnuCopy.Text = "Copy"
         '
         'lblHeader
         '
@@ -61,6 +101,7 @@ Partial Class ucrLog
         Me.Controls.Add(Me.txtLog)
         Me.Name = "ucrLog"
         Me.Size = New System.Drawing.Size(531, 415)
+        Me.mnuContextLogFile.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -68,4 +109,7 @@ Partial Class ucrLog
 
     Friend WithEvents txtLog As TextBox
     Friend WithEvents lblHeader As Label
+    Friend WithEvents mnuContextLogFile As ContextMenuStrip
+    Friend WithEvents mnuOpenLogFile As ToolStripMenuItem
+    Friend WithEvents mnuCopy As ToolStripMenuItem
 End Class
