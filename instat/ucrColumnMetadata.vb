@@ -25,6 +25,7 @@ Public Class ucrColumnMetadata
 
     Private Sub frmVariables_Load(sender As Object, e As EventArgs) Handles Me.Load
         loadForm()
+        grdVariables.RowHeaderContextMenuStrip = frmMain.ucrDataViewer.grdData.ColumnHeaderContextMenuStrip
     End Sub
 
     Private Sub loadForm()
