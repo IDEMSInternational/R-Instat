@@ -23,32 +23,32 @@ Public Class sdgDescribeDisplay
     End Sub
 
     Public Sub InitialiseControls()
+        ucrChkAddMargins.SetParameter(New RParameter("addmargins", 2), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkAddMargins.SetText("Add Margins")
-        ucrChkAddMargins.SetParameter(New RParameter("addmargins"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkAddMargins.SetRDefault("FALSE")
 
-        ucrChkPercentages.SetText("Percentages")
-        ucrChkPercentages.SetParameter(New RParameter("percentages"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkPercentages.SetRDefault("FALSE")
-
+        ucrChkProportions.SetParameter(New RParameter("proportions", 3), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkProportions.SetText("Proportions")
-        ucrChkProportions.SetParameter(New RParameter("proportions"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkProportions.SetRDefault("FALSE")
 
+        ucrChkPercentages.SetParameter(New RParameter("percentages", 4), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkPercentages.SetText("Percentages")
+        ucrChkPercentages.SetRDefault("FALSE")
+
+        ucrChkTranspose.SetParameter(New RParameter("transpose", 5), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkTranspose.SetText("Transpose")
-        ucrChkTranspose.SetParameter(New RParameter("transpose"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkTranspose.SetRDefault("FALSE")
 
-        ucrChkSignifLevel.SetText("Significance Level")
-        ucrChkSignifLevel.SetParameter(New RParameter("sign_level"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkSignifLevel.SetRDefault("FALSE")
-
+        ucrChkSignifStars.SetParameter(New RParameter("signif.stars", 2), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkSignifStars.SetText("Significance Stars")
-        ucrChkSignifStars.SetParameter(New RParameter("signif.stars"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkSignifStars.SetRDefault("FALSE")
 
+        ucrChkSignifLevel.SetParameter(New RParameter("sign_level", 3), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkSignifLevel.SetText("Significance Level")
+        ucrChkSignifLevel.SetRDefault("FALSE")
+
+        ucrChkMeans.SetParameter(New RParameter("means", 4), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkMeans.SetText("Means")
-        ucrChkMeans.SetParameter(New RParameter("means"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkMeans.SetRDefault("FALSE")
     End Sub
 

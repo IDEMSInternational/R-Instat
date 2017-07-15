@@ -294,7 +294,7 @@ Public Class frmEditor
 
     Private Sub deleteSheet_Click(sender As Object, e As EventArgs) Handles deleteSheet.Click
         Dim strScript As String
-        Dim Delete = MsgBox("Are you sure you want to delete this dataframe?" & Environment.NewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Sheet")
+        Dim Delete = MsgBox("Are you sure you want to delete this data frame?" & Environment.NewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Sheet")
         If grdData.Worksheets.Count > 0 Then
             If Delete = DialogResult.Yes Then
                 strScript = frmMain.clsRLink.strInstatDataObject & "$delete_dataframe(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ")"
