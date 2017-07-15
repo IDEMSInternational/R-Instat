@@ -89,6 +89,7 @@ Public Class sdgCorrPlot
         ucrInputComboGeom.SetItems(dctGeom)
         ucrInputComboGeom.SetRDefault(Chr(34) & "tile" & Chr(34))
         ucrInputComboGeom.SetDropDownStyleAsNonEditable()
+        ucrInputComboGeom.SetLinkedDisplayControl(lblGeom)
 
         ucrPnlGraphType.AddRadioButton(rdoNone)
         ucrPnlGraphType.AddRadioButton(rdoCorrelationPlot)

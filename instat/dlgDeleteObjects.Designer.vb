@@ -46,9 +46,10 @@ Partial Class dlgDeleteObjects
         '
         'lblObjectsToDelete
         '
-        Me.lblObjectsToDelete.Location = New System.Drawing.Point(270, 43)
+        Me.lblObjectsToDelete.AutoSize = True
+        Me.lblObjectsToDelete.Location = New System.Drawing.Point(254, 45)
         Me.lblObjectsToDelete.Name = "lblObjectsToDelete"
-        Me.lblObjectsToDelete.Size = New System.Drawing.Size(100, 23)
+        Me.lblObjectsToDelete.Size = New System.Drawing.Size(92, 13)
         Me.lblObjectsToDelete.TabIndex = 1
         Me.lblObjectsToDelete.Tag = "Objects_to_Delete"
         Me.lblObjectsToDelete.Text = "Objects to Delete:"
@@ -56,12 +57,14 @@ Partial Class dlgDeleteObjects
         'ucrReceiverObjectsToDelete
         '
         Me.ucrReceiverObjectsToDelete.frmParent = Me
-        Me.ucrReceiverObjectsToDelete.Location = New System.Drawing.Point(269, 60)
+        Me.ucrReceiverObjectsToDelete.Location = New System.Drawing.Point(254, 60)
         Me.ucrReceiverObjectsToDelete.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverObjectsToDelete.Name = "ucrReceiverObjectsToDelete"
         Me.ucrReceiverObjectsToDelete.Selector = Nothing
         Me.ucrReceiverObjectsToDelete.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverObjectsToDelete.strNcFilePath = ""
         Me.ucrReceiverObjectsToDelete.TabIndex = 2
+        Me.ucrReceiverObjectsToDelete.ucrSelector = Nothing
         '
         'ucrSelectorDeleteObject
         '
@@ -80,11 +83,11 @@ Partial Class dlgDeleteObjects
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 3
         '
-        'dlgDeleteDescriptive
+        'dlgDeleteObjects
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(415, 264)
+        Me.ClientSize = New System.Drawing.Size(416, 260)
         Me.Controls.Add(Me.ucrReceiverObjectsToDelete)
         Me.Controls.Add(Me.lblObjectsToDelete)
         Me.Controls.Add(Me.ucrSelectorDeleteObject)
@@ -92,11 +95,12 @@ Partial Class dlgDeleteObjects
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgDeleteDescriptive"
+        Me.Name = "dlgDeleteObjects"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Delete_Objects"
         Me.Text = "Delete Objects"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
