@@ -36,7 +36,6 @@ Public Class dlgUseGraph
             InitialiseDialog()
             bFirstLoad = False
         End If
-
         If bReset Then
             SetDefaults()
         End If
