@@ -117,7 +117,7 @@ Public Class dlgImportDataset
 
         'RDS Controls
 
-        ucrChkImportChangesLogRDS.SetText("Import Changes log")
+        ucrChkImportChangesLogRDS.SetText("Import changes log")
         ucrChkImportChangesLogRDS.SetParameter(New RParameter("include_logs"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkImportChangesLogRDS.SetRDefault("TRUE")
         'ucrChkImportChangesLog.AddParameterPresentCondition(True, frmMain.clsRLink.strInstatDataObject & "$import_RDS")
