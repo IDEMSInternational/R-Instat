@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgSplitText
     Public bFirstLoad As Boolean = True
@@ -40,6 +39,9 @@ Public Class dlgSplitText
         Dim dctPatternPairs As New Dictionary(Of String, String)
         ucrBase.iHelpTopicID = 344
 
+        ucrPnlSplitText.AddRadioButton(rdoTextComponents)
+        ucrPnlSplitText.AddRadioButton(rdoBinaryColumns)
+
         ucrPnlSplitText.AddFunctionNamesCondition(rdoTextComponents, "str_split_fixed")
         ucrPnlSplitText.AddFunctionNamesCondition(rdoBinaryColumns, "multi.split")
 
@@ -51,8 +53,6 @@ Public Class dlgSplitText
         ucrReceiverSplitTextColumn.Selector = ucrSelectorSplitTextColumn
         ucrReceiverSplitTextColumn.SetMeAsReceiver()
         ucrReceiverSplitTextColumn.bUseFilteredData = False
-        ucrReceiverSplitTextColumn.SetIncludedDataTypes({"factor", "character"})
-        ucrReceiverSplitTextColumn.strSelectorHeading = "Characters"
 
         ucrInputPattern.SetParameter(New RParameter("pattern", 1))
         dctPatternPairs.Add("Space ( )", Chr(34) & " " & Chr(34))
@@ -63,7 +63,7 @@ Public Class dlgSplitText
         dctPatternPairs.Add("Hyphen -", Chr(34) & "-" & Chr(34))
         dctPatternPairs.Add("Underscore _", Chr(34) & "_" & Chr(34))
         ucrInputPattern.SetItems(dctPatternPairs)
-        ucrInputPattern.SetRDefault(Chr(34) & " " & Chr(34))
+        'ucrInputPattern.SetRDefault(Chr(34) & " " & Chr(34)) 'This is the default for clsTextComponents
         ucrInputPattern.bAllowNonConditionValues = True
 
         ucrNudPieces.SetParameter(New RParameter("n", 2))
