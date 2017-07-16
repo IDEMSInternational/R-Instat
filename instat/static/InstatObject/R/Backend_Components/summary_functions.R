@@ -511,7 +511,8 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
     else return(out)
   }
   else {
-    margin_name <- ifelse(length(summaries) == 1, summaries_display, "MARGIN")
+    #margin_name <- ifelse(length(summaries) == 1, summaries_display, "MARGIN")
+    margin_name <- "All"
     cell_values <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = store_results, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, perc_return_all = FALSE)
     for(i in seq_along(factors)) {
       levels(cell_values[[i]]) <- c(levels(cell_values[[i]]), na_level_display)
