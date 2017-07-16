@@ -63,7 +63,7 @@ Public Class sdgDescribeTwoVarGraph
         ucrNumericByNumeric.SetItems({"Scatter plot", "Line plot", "Scatter and line plot"})
         ucrNumericByNumeric.SetName("Scatter plot")
         ucrNumericByNumeric.SetDropDownStyleAsNonEditable()
-        ucrNumericByCategorical.SetItems({"Box plot", "Histogram", "Density plot", "Frequency polygon", "Dot plot", "Point plot""Violin plot", "Jitter plot", "Box plot + Jitter", "Violin Plot + Jitter plot", "Violin plot + Box plot"})
+        ucrNumericByCategorical.SetItems({"Box plot", "Histogram", "Density plot", "Frequency polygon", "Dot plot", "Point plot", "Violin plot", "Jitter plot", "Box plot + Jitter", "Violin Plot + Jitter plot", "Violin plot + Box plot"})
         'How different is the point plot from the summary plot?
         ucrNumericByCategorical.SetName("Box plot")
         ucrNumericByCategorical.SetDropDownStyleAsNonEditable()
