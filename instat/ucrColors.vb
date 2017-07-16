@@ -42,6 +42,7 @@ Public Class ucrColors
             dctColours.Add("Pink", Chr(34) & "pink" & Chr(34))
         End If
         bAllowNonConditionValues = True
+        SetDropDownStyleAsNonEditable()
     End Sub
 
     Private Sub ucrColors_Load(sender As Object, e As EventArgs) Handles Me.Load
