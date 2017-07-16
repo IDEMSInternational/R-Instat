@@ -80,7 +80,7 @@ Public Class RLink
         If strScript = "" Then
             strScript = GetRSetupScript()
             iCallType = 0
-            strComment = "Setting working directory, sources R code and loading R packages"
+            strComment = "Setting working directory, sourcing R code and loading R packages"
             bSeparateThread = True
         End If
         bInstatObjectExists = True
