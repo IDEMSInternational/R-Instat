@@ -28,7 +28,6 @@ Public Class sdgCorrPlot
 
     Public Sub InitialiseControls()
         Dim dctGeom As New Dictionary(Of String, String)
-        dlgCorrelation.ucrBase.clsRsyntax.iCallType = 0
 
         ucrNudMaximumSize.SetParameter(New RParameter("max_size", 1))
         ucrNudMaximumSize.SetMinMax(1, 10)
@@ -39,6 +38,7 @@ Public Class sdgCorrPlot
         ucrNudMinimunSize.SetRDefault("2")
 
         ucrChkLabel.SetParameter(New RParameter("label", 4))
+        ucrChkLabel.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkLabel.SetText("Label")
         ucrChkLabel.SetRDefault("FALSE")
 
@@ -63,16 +63,17 @@ Public Class sdgCorrPlot
 
         ucrSelectFactor.Reset()
 
-        ucrPnlGraphType.AddToLinkedControls(ucrInputComboGeom, {rdoCorrelationPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlGraphType.AddToLinkedControls(ucrInputComboGeom, {rdoCorrelationPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="tile")
         ucrPnlGraphType.AddToLinkedControls(ucrNudMinimunSize, {rdoCorrelationPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGraphType.AddToLinkedControls(ucrNudMaximumSize, {rdoCorrelationPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlGraphType.AddToLinkedControls(ucrNudAlphaCorr, {rdoCorrelationPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlGraphType.AddToLinkedControls(ucrNudAlphaCorr, {rdoCorrelationPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrPnlGraphType.AddToLinkedControls(ucrChkLabel, {rdoCorrelationPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGraphType.AddToLinkedControls(ucrSaveGraph, {rdoPairwisePlot, rdoCorrelationPlot, rdoScatterPlotMatrix}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudMinimunSize.SetLinkedDisplayControl(lblMinimumSize)
         ucrNudMaximumSize.SetLinkedDisplayControl(lblMaximumSize)
         ucrNudAlphaCorr.SetLinkedDisplayControl(lblLabelAlpha)
         ucrPnlGraphType.SetLinkedDisplayControl(grpOptions)
+        ucrInputComboGeom.SetLinkedDisplayControl(lblGeom)
 
         ucrPnlGraphType.AddToLinkedControls(ucrSelectFactor, {rdoScatterPlotMatrix}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGraphType.AddToLinkedControls(ucrReceiveFactor, {rdoScatterPlotMatrix}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -87,7 +88,6 @@ Public Class sdgCorrPlot
         dctGeom.Add("Text", Chr(34) & "text" & Chr(34))
         dctGeom.Add("Blank", Chr(34) & "blank" & Chr(34))
         ucrInputComboGeom.SetItems(dctGeom)
-        ucrInputComboGeom.SetRDefault(Chr(34) & "tile" & Chr(34))
         ucrInputComboGeom.SetDropDownStyleAsNonEditable()
         ucrInputComboGeom.SetLinkedDisplayControl(lblGeom)
 
@@ -118,22 +118,13 @@ Public Class sdgCorrPlot
         ucrNudMinimunSize.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputComboGeom.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
         ucrNudAlphaCorr.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkLabel.SetRSyntax(clsRsyntax, bReset)
+        ucrChkLabel.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
         ucrSaveGraph.AddAdditionalRCode(clsRGraphicsFuction, 1)
         ucrSaveGraph.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
         ucrChkColor.SetRSyntax(clsRsyntax, bReset)
         ucrPnlGraphType.SetRSyntax(clsRsyntax, bReset)
         clsRGraphicsFuction.AddParameter("columns", clsColFunction)
-        clsCorrelationFunction.iCallType = 2
         Visibility()
-    End Sub
-
-    Private Sub ucrChkLabel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabel.ControlValueChanged
-        If ucrChkLabel.Checked Then
-            clsRGGcorrGraphicsFunction.AddParameter("label", "TRUE")
-        Else
-            clsRGGcorrGraphicsFunction.AddParameter("label", "FALSE")
-        End If
     End Sub
 
     Private Sub Visibility()
@@ -156,20 +147,16 @@ Public Class sdgCorrPlot
 
     Private Sub ucrPnlGraphType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGraphType.ControlValueChanged
         If rdoCorrelationPlot.Checked Then
-            dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
-            clsRGGcorrGraphicsFunction.iCallType = 3
             clsRsyntax.AddToAfterCodes(clsRGGcorrGraphicsFunction, iPosition:=1)
             clsRsyntax.RemoveFromAfterCodes(clsRGraphicsFuction)
             clsRsyntax.RemoveFromAfterCodes(clsRGGscatmatrixFunction)
         ElseIf rdoPairwisePlot.Checked Then
-            dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
-            clsRGraphicsFuction.iCallType = 3
             clsRsyntax.AddToAfterCodes(clsRGraphicsFuction, iPosition:=2)
+            clsRsyntax.RemoveFromAfterCodes(clsRGGscatmatrixFunction)
             clsRsyntax.RemoveFromAfterCodes(clsRGGcorrGraphicsFunction)
         ElseIf rdoScatterPlotMatrix.Checked Then
-            dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
-            clsRGGscatmatrixFunction.iCallType = 3
             clsRsyntax.AddToAfterCodes(clsRGGscatmatrixFunction, iPosition:=3)
+            clsRsyntax.RemoveFromAfterCodes(clsRGraphicsFuction)
             clsRsyntax.RemoveFromAfterCodes(clsRGGcorrGraphicsFunction)
         ElseIf rdoNone.Checked Then
             clsRsyntax.RemoveFromAfterCodes(clsRGGcorrGraphicsFunction)
