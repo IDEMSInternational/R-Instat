@@ -117,7 +117,6 @@ Partial Class dlgCorrelation
         Me.rdoPearson.AutoSize = True
         Me.rdoPearson.Checked = True
         Me.rdoPearson.Location = New System.Drawing.Point(15, 18)
-        Me.rdoPearson.Location = New System.Drawing.Point(15, 24)
         Me.rdoPearson.Name = "rdoPearson"
         Me.rdoPearson.Size = New System.Drawing.Size(64, 17)
         Me.rdoPearson.TabIndex = 1
@@ -171,7 +170,6 @@ Partial Class dlgCorrelation
         Me.rdoCompleteRowsOnly.AutoSize = True
         Me.rdoCompleteRowsOnly.Checked = True
         Me.rdoCompleteRowsOnly.Location = New System.Drawing.Point(6, 18)
-        Me.rdoCompleteRowsOnly.Location = New System.Drawing.Point(6, 22)
         Me.rdoCompleteRowsOnly.Name = "rdoCompleteRowsOnly"
         Me.rdoCompleteRowsOnly.Size = New System.Drawing.Size(116, 17)
         Me.rdoCompleteRowsOnly.TabIndex = 1

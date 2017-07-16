@@ -253,7 +253,7 @@ Public Class dlgCorrelation
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRGraphicsFuction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRGGscatMatrixFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRGGcorrGraphicsFunction)
-        'Else ' in future we'll have to add these back and have whatever they checked as checked here.
+            'Else ' in future we'll have to add these back and have whatever they checked as checked here.
         End If
         'strColFunction = ucrReceiverMultipleColumns.GetVariableNames()
     End Sub
