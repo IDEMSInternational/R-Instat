@@ -92,7 +92,7 @@ Partial Class dlgBoxplot
         Me.cmdBoxPlotOptions.Name = "cmdBoxPlotOptions"
         Me.cmdBoxPlotOptions.Size = New System.Drawing.Size(120, 25)
         Me.cmdBoxPlotOptions.TabIndex = 10
-        Me.cmdBoxPlotOptions.Tag = "BoxPlot_Options"
+        Me.cmdBoxPlotOptions.Tag = "Boxplot_Options"
         Me.cmdBoxPlotOptions.Text = "Boxplot Options"
         Me.cmdBoxPlotOptions.UseVisualStyleBackColor = True
         '
@@ -103,6 +103,7 @@ Partial Class dlgBoxplot
         Me.ucrVariablesAsFactorForBoxplot.Name = "ucrVariablesAsFactorForBoxplot"
         Me.ucrVariablesAsFactorForBoxplot.Selector = Nothing
         Me.ucrVariablesAsFactorForBoxplot.Size = New System.Drawing.Size(120, 130)
+        Me.ucrVariablesAsFactorForBoxplot.strNcFilePath = ""
         Me.ucrVariablesAsFactorForBoxplot.TabIndex = 5
         Me.ucrVariablesAsFactorForBoxplot.ucrSelector = Nothing
         Me.ucrVariablesAsFactorForBoxplot.ucrVariableSelector = Nothing
@@ -115,6 +116,7 @@ Partial Class dlgBoxplot
         Me.ucrSecondFactorReceiver.Name = "ucrSecondFactorReceiver"
         Me.ucrSecondFactorReceiver.Selector = Nothing
         Me.ucrSecondFactorReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrSecondFactorReceiver.strNcFilePath = ""
         Me.ucrSecondFactorReceiver.TabIndex = 9
         Me.ucrSecondFactorReceiver.ucrSelector = Nothing
         '
@@ -136,6 +138,7 @@ Partial Class dlgBoxplot
         Me.ucrByFactorsReceiver.Name = "ucrByFactorsReceiver"
         Me.ucrByFactorsReceiver.Selector = Nothing
         Me.ucrByFactorsReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrByFactorsReceiver.strNcFilePath = ""
         Me.ucrByFactorsReceiver.TabIndex = 7
         Me.ucrByFactorsReceiver.ucrSelector = Nothing
         '
