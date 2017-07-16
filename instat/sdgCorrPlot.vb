@@ -17,7 +17,6 @@
 Imports instat.Translations
 Public Class sdgCorrPlot
     Public clsRGGscatmatrixFunction, clsRGGcorrGraphicsFunction, clsCorrelationFunction, clsRGraphicsFuction, clsRTempFunction As New RFunction
-    Private clsColFunction As String
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
     Private clsRsyntax As RSyntax
@@ -103,7 +102,7 @@ Public Class sdgCorrPlot
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewcorrelationFunction As RFunction, clsNewRGGcorrGraphicsFunction As RFunction, clsNewRGraphicsFuction As RFunction, clsNewRTempFunction As RFunction, clsNewRGGscatmatrixFunction As RFunction, clsNewColFunction As String, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewcorrelationFunction As RFunction, clsNewRGGcorrGraphicsFunction As RFunction, clsNewRGraphicsFuction As RFunction, clsNewRTempFunction As RFunction, clsNewRGGscatmatrixFunction As RFunction, strColFunction As String, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
@@ -112,7 +111,6 @@ Public Class sdgCorrPlot
         clsRGGcorrGraphicsFunction = clsNewRGGcorrGraphicsFunction
         clsRGraphicsFuction = clsNewRGraphicsFuction
         clsRTempFunction = clsNewRTempFunction
-        clsColFunction = clsNewColFunction
         clsRGGscatmatrixFunction = clsNewRGGscatmatrixFunction
         ucrNudMaximumSize.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
         ucrNudMinimunSize.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
@@ -123,7 +121,6 @@ Public Class sdgCorrPlot
         ucrSaveGraph.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
         ucrChkColor.SetRSyntax(clsRsyntax, bReset)
         ucrPnlGraphType.SetRSyntax(clsRsyntax, bReset)
-        '        clsRGraphicsFuction.AddParameter("columns", clsColFunction)
         Visibility()
     End Sub
 
