@@ -111,6 +111,7 @@ Public Class sdgCorrPlot
         clsRGGcorrGraphicsFunction = clsNewRGGcorrGraphicsFunction
         clsRGraphicsFuction = clsNewRGraphicsFuction
         clsRTempFunction = clsNewRTempFunction
+        clsColFunction = clsNewColFunction
         clsRGGscatmatrixFunction = clsNewRGGscatmatrixFunction
         ucrNudMaximumSize.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
         ucrNudMinimunSize.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
@@ -121,6 +122,7 @@ Public Class sdgCorrPlot
         ucrSaveGraph.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
         ucrChkColor.SetRSyntax(clsRsyntax, bReset)
         ucrPnlGraphType.SetRSyntax(clsRsyntax, bReset)
+        '        clsRGraphicsFuction.AddParameter("columns", clsColFunction)
         Visibility()
     End Sub
 

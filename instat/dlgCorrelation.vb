@@ -19,7 +19,7 @@ Public Class dlgCorrelation
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private clsCorrelationTestFunction, clsRGGcorrGraphicsFunction, clsRGraphicsFuction, clsRGGscatMatrixFunction, clsCorrelationFunction, clsRTempFunction, clsTempFunc As New RFunction
-    Private strColFunction As String
+    Private clsColFunction As String
     Private bResetSubdialog As Boolean = False
     Private Sub dlgCorrelation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -39,6 +39,7 @@ Public Class dlgCorrelation
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 421
         ucrBase.clsRsyntax.iCallType = 2
+
         ucrReceiverFirstColumn.SetParameter(New RParameter("x", 0))
         ucrReceiverFirstColumn.SetParameterIsRFunction()
         ucrReceiverFirstColumn.Selector = ucrSelectorCorrelation
@@ -167,7 +168,7 @@ Public Class dlgCorrelation
         ucrNudConfidenceInterval.SetRCode(clsCorrelationTestFunction, bReset)
         ucrReceiverFirstColumn.SetRCode(clsCorrelationTestFunction, bReset)
         ucrReceiverSecondColumn.SetRCode(clsCorrelationTestFunction, bReset)
-        ucrPnlColumns.SetRCode(clsCorrelationFunction, bReset)
+        ucrPnlColumns.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlMethod.SetRCode(clsCorrelationTestFunction, bReset)
         ucrPnlCompletePairwise.SetRCode(clsCorrelationFunction, bReset)
         ucrSaveModel.AddAdditionalRCode(clsCorrelationTestFunction, 1)
@@ -203,7 +204,7 @@ Public Class dlgCorrelation
     End Sub
 
     Private Sub cmdPlots_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgCorrPlot.SetRCode(ucrBase.clsRsyntax, clsCorrelationFunction, clsRGGcorrGraphicsFunction, clsRGraphicsFuction, clsRTempFunction, clsRGGscatMatrixFunction, strColFunction, bReset:=bResetSubdialog)
+        sdgCorrPlot.SetRCode(ucrBase.clsRsyntax, clsCorrelationFunction, clsRGGcorrGraphicsFunction, clsRGraphicsFuction, clsRTempFunction, clsRGGscatMatrixFunction, clsColFunction, bReset:=bResetSubdialog)
         sdgCorrPlot.ShowDialog()
         bResetSubdialog = False
     End Sub
@@ -255,7 +256,6 @@ Public Class dlgCorrelation
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRGGcorrGraphicsFunction)
             'Else ' in future we'll have to add these back and have whatever they checked as checked here.
         End If
-        'strColFunction = ucrReceiverMultipleColumns.GetVariableNames()
     End Sub
 
     Private Sub ucrReceiverFirstColumn_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstColumn.ControlContentsChanged, ucrReceiverSecondColumn.ControlContentsChanged, ucrReceiverMultipleColumns.ControlContentsChanged, ucrPnlColumns.ControlContentsChanged, ucrPnlCompletePairwise.ControlContentsChanged, ucrPnlMethod.ControlContentsChanged
