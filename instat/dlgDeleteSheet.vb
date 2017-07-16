@@ -72,17 +72,18 @@ Public Class dlgDeleteSheet
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        Dim strScript As String
-        Dim Delete = MsgBox("Are you sure you want to delete this data frame?" & Environment.NewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Sheet")
-        If Delete = DialogResult.Yes Then
-            ' run base code
-            strScript = frmMain.clsRLink.strInstatDataObject & "$delete_dataframe"
-            frmMain.clsRLink.RunScript(strScript)
-        Else
-            'return to dialog
-        End If
-    End Sub
+    ' To be fixed and implemented in future versions
+    'Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+    '    Dim strScript As String
+    '    Dim Delete = MsgBox("Are you sure you want to delete this data frame?" & Environment.NewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Sheet")
+    '    If Delete = DialogResult.Yes Then
+    '        ' run base code
+    ''        strScript = frmMain.clsRLink.strInstatDataObject & "$delete_dataframe"
+    ''        frmMain.clsRLink.RunScript(strScript)
+    '    Else
+    '        'return to dialog
+    '    End If
+    'End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameToDelete.ControlContentsChanged
         TestOKEnabled()
