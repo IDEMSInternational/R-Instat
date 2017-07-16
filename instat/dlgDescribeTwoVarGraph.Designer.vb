@@ -46,6 +46,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrReceiverMultipleTwoVar = New instat.ucrVariablesAsFactor()
         Me.ucrSelectorTwoVarGraph = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrSaveGraph = New instat.ucrSave()
+        Me.ucrFlipCordinates = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -125,11 +126,20 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrSaveGraph.Size = New System.Drawing.Size(255, 24)
         Me.ucrSaveGraph.TabIndex = 6
         '
+        'ucrFlipCordinates
+        '
+        Me.ucrFlipCordinates.Checked = False
+        Me.ucrFlipCordinates.Location = New System.Drawing.Point(261, 215)
+        Me.ucrFlipCordinates.Name = "ucrFlipCordinates"
+        Me.ucrFlipCordinates.Size = New System.Drawing.Size(120, 20)
+        Me.ucrFlipCordinates.TabIndex = 8
+        '
         'dlgDescribeTwoVarGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(420, 315)
+        Me.Controls.Add(Me.ucrFlipCordinates)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.lblFirstVariables)
         Me.Controls.Add(Me.ucrReceiverMultipleTwoVar)
@@ -157,4 +167,5 @@ Partial Class dlgDescribeTwoVarGraph
     Friend WithEvents ucrReceiverMultipleTwoVar As ucrVariablesAsFactor
     Friend WithEvents lblFirstVariables As Label
     Friend WithEvents ucrSaveGraph As ucrSave
+    Friend WithEvents ucrFlipCordinates As ucrCheck
 End Class
