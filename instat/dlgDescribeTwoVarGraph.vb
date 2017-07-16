@@ -27,6 +27,8 @@ Public Class dlgDescribeTwoVarGraph
     Private clsBaseOperator As New ROperator
     Private clsRJitterPlotGeom As New RFunction
     Private clsRJitterAesFunction As New RFunction
+    Private clsRViolinPlotGeom As New RFunction
+    Private clsRJitterAesFunction2 As New RFunction
     Private Sub dlgDescribeTwoVarGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -80,6 +82,8 @@ Public Class dlgDescribeTwoVarGraph
         clsRGGplotFunction = New RFunction
         clsRBoxPlotGeom = New RFunction
         clsRJitterPlotGeom = New RFunction
+        clsRViolinPlotGeom = New RFunction
+        clsRJitterAesFunction2 = New RFunction
         clsRScatterPlotGeom = New RFunction
         clsRLinePlotGeom = New RFunction
         clsRSummaryAesFunction = New RFunction
@@ -216,14 +220,43 @@ Public Class dlgDescribeTwoVarGraph
                     DotPlot()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRDotAesFunction, iPosition:=0)
                     clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRDotPlotGeom, iPosition:=1)
+
                 Case "Point plot"
                     ScatterLinePlot()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRScatterAesFunction, iPosition:=0)
                     clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRScatterPlotGeom, iPosition:=1)
+
+                Case "Violin plot"
+                    ViolinPlot()
+                    clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRBoxAesFunction, iPosition:=0)
+                    clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRViolinPlotGeom, iPosition:=1)
+
                 Case "Jitter plot"
                     JitterPlot()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRJitterAesFunction, iPosition:=0)
                     clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRJitterPlotGeom, iPosition:=1)
+
+                Case "Box plot + Jitter"
+                    BoxPlot()
+                    clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRBoxAesFunction, iPosition:=0)
+                    clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRBoxPlotGeom, iPosition:=1)
+                    JitterPlot()
+                    clsBaseOperator.AddParameter("geom1", clsRFunctionParameter:=clsRJitterPlotGeom, iPosition:=2)
+
+                Case "Violin Plot + Jitter plot"
+                    ViolinPlot()
+                    clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRBoxAesFunction, iPosition:=0)
+                    clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRViolinPlotGeom, iPosition:=1)
+                    JitterPlot()
+                    clsBaseOperator.AddParameter("geom1", clsRFunctionParameter:=clsRJitterPlotGeom, iPosition:=2)
+
+                Case "Violin plot + Box plot"
+                    BoxPlot()
+                    clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRBoxAesFunction, iPosition:=0)
+                    clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRBoxPlotGeom, iPosition:=1)
+                    ViolinPlot()
+                    clsBaseOperator.AddParameter("geom1", clsRFunctionParameter:=clsRViolinPlotGeom, iPosition:=2)
+
             End Select
             'categorical by numeric case
         ElseIf (strVarType <> "numeric" AndAlso strVarType <> "integer") AndAlso (strSecondVarType = "numeric" OrElse strSecondVarType = "integer") Then
@@ -256,19 +289,35 @@ Public Class dlgDescribeTwoVarGraph
                     clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRScatterPlotGeom, iPosition:=1)
 
                 Case "Violin plot"
-                    ScatterLinePlot()
-                    clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRScatterAesFunction2, iPosition:=0)
-                    clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRScatterPlotGeom, iPosition:=1)
+                    ViolinPlot()
+                    clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRBoxAesFunction2, iPosition:=0)
+                    clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRViolinPlotGeom, iPosition:=1)
 
                 Case "Jitter plot"
                     JitterPlot()
-                    clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRJitterAesFunction, iPosition:=0)
+                    clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRJitterAesFunction2, iPosition:=0)
                     clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRJitterPlotGeom, iPosition:=1)
 
-                    'Case "Box plot + Jitter"
-                    'Case "Violin Plot + Jitter plot"
-                    'Case "Violin plot + Box plot"
+                Case "Box plot + Jitter"
+                    BoxPlot()
+                    clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRBoxAesFunction2, iPosition:=0)
+                    clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRBoxPlotGeom, iPosition:=1)
+                    JitterPlot()
+                    clsBaseOperator.AddParameter("geom1", clsRFunctionParameter:=clsRJitterPlotGeom, iPosition:=1)
 
+                Case "Violin Plot + Jitter plot"
+                    ViolinPlot()
+                    clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRBoxAesFunction2, iPosition:=0)
+                    clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRViolinPlotGeom, iPosition:=1)
+                    JitterPlot()
+                    clsBaseOperator.AddParameter("geom1", clsRFunctionParameter:=clsRJitterPlotGeom, iPosition:=2)
+
+                Case "Violin plot + Box plot"
+                    BoxPlot()
+                    clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRBoxAesFunction2, iPosition:=0)
+                    clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRBoxPlotGeom, iPosition:=1)
+                    ViolinPlot()
+                    clsBaseOperator.AddParameter("geom1", clsRFunctionParameter:=clsRViolinPlotGeom, iPosition:=2)
             End Select
             'catogerical by cateogrical case
         ElseIf (strVarType <> "numeric" AndAlso strVarType <> "integer") AndAlso (strVarType <> "numeric" AndAlso strVarType <> "integer") Then
@@ -291,15 +340,26 @@ Public Class dlgDescribeTwoVarGraph
         End If
     End Sub
 
+    Private Sub ViolinPlot()
+        clsRViolinPlotGeom.SetPackageName("ggplot2")
+        clsRViolinPlotGeom.SetRCommand("geom_violin")
+        'clsRJitterAesFunction.SetPackageName("ggplot2")
+        'clsRJitterAesFunction.SetRCommand("aes")
+        'clsRJitterAesFunction.AddParameter("y", "value")
+        'clsRJitterAesFunction.SetPackageName("ggplot2")
+        'clsRJitterAesFunction.SetRCommand("aes")
+        'clsRJitterAesFunction.AddParameter("x", "value")
+    End Sub
+
     Private Sub JitterPlot()
         clsRJitterPlotGeom.SetPackageName("ggplot2")
         clsRJitterPlotGeom.SetRCommand("geom_jitter")
         clsRJitterAesFunction.SetPackageName("ggplot2")
         clsRJitterAesFunction.SetRCommand("aes")
         clsRJitterAesFunction.AddParameter("y", "value")
-        clsRJitterAesFunction.SetPackageName("ggplot2")
-        clsRJitterAesFunction.SetRCommand("aes")
-        clsRJitterAesFunction.AddParameter("x", "value")
+        clsRJitterAesFunction2.SetPackageName("ggplot2")
+        clsRJitterAesFunction2.SetRCommand("aes")
+        clsRJitterAesFunction2.AddParameter("x", "value")
     End Sub
 
     Private Sub BoxPlot()
