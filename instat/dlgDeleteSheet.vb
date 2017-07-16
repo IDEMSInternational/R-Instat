@@ -14,11 +14,12 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgDeleteSheet
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private clsDefaultFunction As New RFunction
+
     Private Sub dlgDeleteSheet_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -34,6 +35,25 @@ Public Class dlgDeleteSheet
         TestOKEnabled()
     End Sub
 
+    Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 63
+        ucrBase.clsRsyntax.iCallType = 0
+
+        ucrDataFrameToDelete.SetParameter(New RParameter("data_name", 0))
+        ucrDataFrameToDelete.SetParameterIsString()
+    End Sub
+
+    Private Sub SetDefaults()
+        clsDefaultFunction = New RFunction
+        ucrDataFrameToDelete.Reset()
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$delete_dataframe")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
     Private Sub TestOKEnabled()
         If ucrDataFrameToDelete.cboAvailableDataFrames.Text <> "" Then
             ucrBase.OKEnabled(True)
@@ -46,28 +66,22 @@ Public Class dlgDeleteSheet
         ucrDataFrameToDelete.Reset()
     End Sub
 
-    Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 63
-        ucrBase.clsRsyntax.iCallType = 0
-        ucrDataFrameToDelete.SetParameter(New RParameter("data_name"))
-        ucrDataFrameToDelete.SetParameterIsString()
-    End Sub
-
-    Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
-        ucrDataFrameToDelete.Reset()
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$delete_dataframe")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-    End Sub
-
-    Public Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-    End Sub
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+        Dim strScript As String
+        Dim Delete = MsgBox("Are you sure you want to delete this data frame?" & Environment.NewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Sheet")
+        If Delete = DialogResult.Yes Then
+            ' run base code
+            strScript = frmMain.clsRLink.strInstatDataObject & "$delete_dataframe"
+            frmMain.clsRLink.RunScript(strScript)
+        Else
+            'return to dialog
+        End If
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameToDelete.ControlContentsChanged
