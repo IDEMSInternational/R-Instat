@@ -40,6 +40,9 @@ Public Class dlgDescribeTwoVarGraph
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim clsCoordFlipFunc As New RFunction
+        Dim clsCoordFlipParam As New RParameter
+
         ucrBase.iHelpTopicID = 416
         ucrBase.clsRsyntax.iCallType = 3
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
@@ -55,6 +58,13 @@ Public Class dlgDescribeTwoVarGraph
         ucrSecondVariableReceiver.Selector = ucrSelectorTwoVarGraph
         ucrSecondVariableReceiver.SetParameterIsString()
         ucrSecondVariableReceiver.bWithQuotes = False
+
+        clsCoordFlipFunc.SetPackageName("ggplot2")
+        clsCoordFlipFunc.SetRCommand("coord_flip")
+        clsCoordFlipParam.SetArgumentName("coord_flip")
+        clsCoordFlipParam.SetArgument(clsCoordFlipFunc)
+        ucrFlipCordinates.SetText("Flip Cordinates")
+        ucrFlipCordinates.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         ucrSaveGraph.SetPrefix("two_var")
         ucrSaveGraph.SetSaveTypeAsGraph()
@@ -117,6 +127,7 @@ Public Class dlgDescribeTwoVarGraph
         ucrSelectorTwoVarGraph.SetRCode(clsRGGplotFunction, bReset)
         ucrSecondVariableReceiver.SetRCode(clsRBarAesFunction, bReset)
         ucrSaveGraph.SetRCode(clsBaseOperator, bReset)
+        ucrFlipCordinates.SetRCode(clsBaseOperator, bReset)
         ucrSecondVariableReceiver.AddAdditionalCodeParameterPair(clsRScatterAesFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
         ucrSecondVariableReceiver.AddAdditionalCodeParameterPair(clsRBoxAesFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
         ucrSecondVariableReceiver.AddAdditionalCodeParameterPair(clsRDotAesFunction, New RParameter("y", 0), iAdditionalPairNo:=3)
