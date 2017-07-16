@@ -120,7 +120,7 @@ Partial Class dlgStringDistance
         Me.lblColumnString.Name = "lblColumnString"
         Me.lblColumnString.Size = New System.Drawing.Size(54, 13)
         Me.lblColumnString.TabIndex = 6
-        Me.lblColumnString.Text = "Column 2:"
+        Me.lblColumnString.Text = "Matching Column:"
         '
         'ucrReceiverColumn
         '
