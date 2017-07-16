@@ -41,12 +41,12 @@ Partial Class dlgDescribeTwoVarGraph
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.lblSecondVariable = New System.Windows.Forms.Label()
         Me.lblFirstVariables = New System.Windows.Forms.Label()
-        Me.ucrSecondVariableReceiver = New instat.ucrReceiverSingle()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrReceiverMultipleTwoVar = New instat.ucrVariablesAsFactor()
-        Me.ucrSelectorTwoVarGraph = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrFlipCoordinates = New instat.ucrCheck()
         Me.ucrSaveGraph = New instat.ucrSave()
-        Me.ucrFlipCordinates = New instat.ucrCheck()
+        Me.ucrReceiverMultipleTwoVar = New instat.ucrVariablesAsFactor()
+        Me.ucrSecondVariableReceiver = New instat.ucrReceiverSingle()
+        Me.ucrSelectorTwoVarGraph = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -78,24 +78,20 @@ Partial Class dlgDescribeTwoVarGraph
         Me.lblFirstVariables.Tag = "First_Variable(s)"
         Me.lblFirstVariables.Text = "First Variable(s):"
         '
-        'ucrSecondVariableReceiver
+        'ucrFlipCoordinates
         '
-        Me.ucrSecondVariableReceiver.frmParent = Me
-        Me.ucrSecondVariableReceiver.Location = New System.Drawing.Point(261, 191)
-        Me.ucrSecondVariableReceiver.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSecondVariableReceiver.Name = "ucrSecondVariableReceiver"
-        Me.ucrSecondVariableReceiver.Selector = Nothing
-        Me.ucrSecondVariableReceiver.Size = New System.Drawing.Size(120, 20)
-        Me.ucrSecondVariableReceiver.strNcFilePath = ""
-        Me.ucrSecondVariableReceiver.TabIndex = 4
-        Me.ucrSecondVariableReceiver.ucrSelector = Nothing
+        Me.ucrFlipCoordinates.Checked = False
+        Me.ucrFlipCoordinates.Location = New System.Drawing.Point(10, 226)
+        Me.ucrFlipCoordinates.Name = "ucrFlipCoordinates"
+        Me.ucrFlipCoordinates.Size = New System.Drawing.Size(120, 20)
+        Me.ucrFlipCoordinates.TabIndex = 6
         '
-        'ucrBase
+        'ucrSaveGraph
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 257)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 7
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 252)
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(255, 24)
+        Me.ucrSaveGraph.TabIndex = 7
         '
         'ucrReceiverMultipleTwoVar
         '
@@ -109,6 +105,18 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrReceiverMultipleTwoVar.ucrSelector = Nothing
         Me.ucrReceiverMultipleTwoVar.ucrVariableSelector = Nothing
         '
+        'ucrSecondVariableReceiver
+        '
+        Me.ucrSecondVariableReceiver.frmParent = Me
+        Me.ucrSecondVariableReceiver.Location = New System.Drawing.Point(261, 191)
+        Me.ucrSecondVariableReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSecondVariableReceiver.Name = "ucrSecondVariableReceiver"
+        Me.ucrSecondVariableReceiver.Selector = Nothing
+        Me.ucrSecondVariableReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrSecondVariableReceiver.strNcFilePath = ""
+        Me.ucrSecondVariableReceiver.TabIndex = 4
+        Me.ucrSecondVariableReceiver.ucrSelector = Nothing
+        '
         'ucrSelectorTwoVarGraph
         '
         Me.ucrSelectorTwoVarGraph.bShowHiddenColumns = False
@@ -119,27 +127,19 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrSelectorTwoVarGraph.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorTwoVarGraph.TabIndex = 0
         '
-        'ucrSaveGraph
+        'ucrBase
         '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 230)
-        Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(255, 24)
-        Me.ucrSaveGraph.TabIndex = 6
-        '
-        'ucrFlipCordinates
-        '
-        Me.ucrFlipCordinates.Checked = False
-        Me.ucrFlipCordinates.Location = New System.Drawing.Point(261, 215)
-        Me.ucrFlipCordinates.Name = "ucrFlipCordinates"
-        Me.ucrFlipCordinates.Size = New System.Drawing.Size(120, 20)
-        Me.ucrFlipCordinates.TabIndex = 8
+        Me.ucrBase.Location = New System.Drawing.Point(10, 278)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 8
         '
         'dlgDescribeTwoVarGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 315)
-        Me.Controls.Add(Me.ucrFlipCordinates)
+        Me.ClientSize = New System.Drawing.Size(416, 334)
+        Me.Controls.Add(Me.ucrFlipCoordinates)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.lblFirstVariables)
         Me.Controls.Add(Me.ucrReceiverMultipleTwoVar)
@@ -167,5 +167,5 @@ Partial Class dlgDescribeTwoVarGraph
     Friend WithEvents ucrReceiverMultipleTwoVar As ucrVariablesAsFactor
     Friend WithEvents lblFirstVariables As Label
     Friend WithEvents ucrSaveGraph As ucrSave
-    Friend WithEvents ucrFlipCordinates As ucrCheck
+    Friend WithEvents ucrFlipCoordinates As ucrCheck
 End Class
