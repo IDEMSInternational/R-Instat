@@ -19,6 +19,7 @@ Imports instat.Translations
 Public Class dlgFitModel
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Public bRCodeSet As Boolean = False
     Public clsFormulaOperator As New ROperator
 
     Public clsRestpvalFunction, clsFamilyFunction, clsRCIFunction, clsRConvert, clsAutoPlot, clsVisReg As New RFunction
@@ -67,7 +68,6 @@ Public Class dlgFitModel
         ucrReceiverExpressionFitModel.SetParameterIsString()
         ucrReceiverExpressionFitModel.bWithQuotes = False
 
-        ucrConvertToVariate.AddFunctionNamesCondition(True, "as.numeric")
         ucrConvertToVariate.SetText("Convert to Variate")
 
         ucrBase.iHelpTopicID = 371
@@ -77,14 +77,16 @@ Public Class dlgFitModel
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        bRCodeSet = False
         ucrModelName.AddAdditionalRCode(clsGLM, 1)
         ucrSelectorByDataFrameAddRemoveForFitModel.AddAdditionalCodeParameterPair(clsGLM, ucrSelectorByDataFrameAddRemoveForFitModel.GetParameter(), 1)
-        ucrReceiverResponseVar.SetRCode(clsRConvert, bReset)
         ucrConvertToVariate.SetRCode(clsFormulaOperator, bReset)
+        ucrReceiverResponseVar.SetRCode(clsRConvert, bReset)
         ucrReceiverExpressionFitModel.SetRCode(clsFormulaOperator, bReset)
         ucrSelectorByDataFrameAddRemoveForFitModel.SetRCode(clsLM, bReset)
         ucrModelName.SetRCode(clsLM, bReset)
         ucrFamily.SetRCode(clsFamilyFunction, bReset)
+        bRCodeSet = True
     End Sub
 
     Private Sub SetDefaults()
@@ -158,15 +160,6 @@ Public Class dlgFitModel
         'Anova + Pvalue
         clsRestpvalFunction = clsRegressionDefaults.clsDefaultRaovPValueFunction.Clone
         clsRestpvalFunction.iCallType = 2
-        'sdgSimpleRegOptions.SetRModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
-
-        sdgSimpleRegOptions.SetRDataFrame(ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames)
-
-        ResponseConvert()
-
-        ' sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
-        sdgSimpleRegOptions.lblConfLevel.Enabled = True
-        'sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
 
         bResetSubDialog = True
         bResetOptionsSubDialog = True
@@ -197,11 +190,6 @@ Public Class dlgFitModel
             ucrBase.OKEnabled(False)
         End If
     End Sub
-
-    'Private Sub ucrReceiverExpressionFitModel_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverExpressionFitModel.SelectionChanged
-    '    clsLM.AddParameter(strParameterValue:=ucrReceiverExpressionFitModel.GetVariableNames(False))
-    '    TestOKEnabled()
-    'End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
@@ -301,34 +289,38 @@ Public Class dlgFitModel
     End Sub
 
     Public Sub ResponseConvert()
-        If Not ucrReceiverResponseVar.IsEmpty Then
-            ucrFamily.RecieverDatatype(ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverResponseVar.GetVariableNames(bWithQuotes:=False))
-
-            If ucrFamily.strDataType = "numeric" Then
-                ucrConvertToVariate.Checked = False
-                ucrConvertToVariate.Visible = False
-            Else
-                ucrConvertToVariate.Visible = True
-            End If
-
-            If ucrConvertToVariate.Checked Then
-                ' clsRConvert.AddParameter("x", ucrReceiverResponseVar.GetVariableNames(bWithQuotes:=False))
-                clsFormulaOperator.AddParameter("x", clsRFunctionParameter:=clsRConvert, iPosition:=0)
-                ucrFamily.RecieverDatatype("numeric")
-            Else
-                clsFormulaOperator.AddParameter("x", strParameterValue:=ucrReceiverResponseVar.GetVariableNames(bWithQuotes:=False), iPosition:=0)
+        If bRCodeSet Then
+            If Not ucrReceiverResponseVar.IsEmpty Then
                 ucrFamily.RecieverDatatype(ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverResponseVar.GetVariableNames(bWithQuotes:=False))
-            End If
-            sdgModelOptions.ucrDistributionChoice.RecieverDatatype(ucrFamily.strDataType)
-        End If
 
-        If ucrFamily.lstCurrentDistributions.Count = 0 Or ucrReceiverResponseVar.IsEmpty() Then
-            ucrFamily.Enabled = False
-            ucrFamily.ucrInputDistributions.SetName("")
-            cmdModelOptions.Enabled = False
-        Else
-            ucrFamily.Enabled = True
-            cmdModelOptions.Enabled = True
+                If ucrFamily.strDataType = "numeric" Then
+                    ucrConvertToVariate.Checked = False
+                    ucrConvertToVariate.Visible = False
+                Else
+                    ucrConvertToVariate.Visible = True
+                End If
+
+                If ucrConvertToVariate.Checked Then
+                    ' clsRConvert.AddParameter("x", ucrReceiverResponseVar.GetVariableNames(bWithQuotes:=False))
+                    clsFormulaOperator.AddParameter("x", clsRFunctionParameter:=clsRConvert, iPosition:=0)
+                    ucrFamily.RecieverDatatype("numeric")
+                Else
+                    clsFormulaOperator.AddParameter("x", strParameterValue:=ucrReceiverResponseVar.GetVariableNames(bWithQuotes:=False), iPosition:=0)
+                    ucrFamily.RecieverDatatype(ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverResponseVar.GetVariableNames(bWithQuotes:=False))
+                End If
+                sdgModelOptions.ucrDistributionChoice.RecieverDatatype(ucrFamily.strDataType)
+            End If
+
+            If ucrFamily.lstCurrentDistributions.Count = 0 Or ucrReceiverResponseVar.IsEmpty() Then
+                ucrFamily.Enabled = False
+                ucrFamily.ucrInputDistributions.SetName("")
+                cmdModelOptions.Enabled = False
+            Else
+                ucrFamily.Enabled = True
+                cmdModelOptions.Enabled = True
+            End If
+            UpdatePreview()
+            TestOKEnabled()
         End If
     End Sub
 
