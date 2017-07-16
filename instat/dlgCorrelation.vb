@@ -19,7 +19,7 @@ Public Class dlgCorrelation
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private clsCorrelationTestFunction, clsRGGcorrGraphicsFunction, clsRGraphicsFuction, clsRGGscatMatrixFunction, clsCorrelationFunction, clsRTempFunction, clsTempFunc As New RFunction
-    Private strColFunction As String
+    Private clsColFunction As String
     Private bResetSubdialog As Boolean = False
     Private Sub dlgCorrelation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -39,6 +39,7 @@ Public Class dlgCorrelation
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 421
         ucrBase.clsRsyntax.iCallType = 2
+
         ucrReceiverFirstColumn.SetParameter(New RParameter("x", 0))
         ucrReceiverFirstColumn.SetParameterIsRFunction()
         ucrReceiverFirstColumn.Selector = ucrSelectorCorrelation
@@ -82,18 +83,13 @@ Public Class dlgCorrelation
         ucrPnlCompletePairwise.SetParameter(New RParameter("use", 5))
         ucrPnlCompletePairwise.AddRadioButton(rdoCompleteRowsOnly, Chr(34) & "complete.obs" & Chr(34))
         ucrPnlCompletePairwise.AddRadioButton(rdoPairwise, Chr(34) & "pairwise.complete.obs" & Chr(34))
+        ucrPnlCompletePairwise.AddParameterValuesCondition(rdoCompleteRowsOnly, "use", Chr(34) & "complete.obs" & Chr(34))
+        ucrPnlCompletePairwise.AddParameterValuesCondition(rdoPairwise, "use", Chr(34) & "pairwise.complete.obs" & Chr(34))
 
         'ucrChk
         ucrChkCorrelationMatrix.SetText("Correlation Matrix")
         ucrChkCorrelationMatrix.Enabled = False
 
-        ucrSaveModel.SetPrefix("Cor")
-        ucrSaveModel.SetSaveTypeAsModel()
-        ucrSaveModel.SetDataFrameSelector(ucrSelectorCorrelation.ucrAvailableDataFrames)
-        ucrSaveModel.SetCheckBoxText("Result Name")
-        ucrSaveModel.SetIsComboBox()
-        ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
-        ucrSaveModel.Reset()
         ucrPnlColumns.AddToLinkedControls({ucrReceiverFirstColumn, ucrNudConfidenceInterval, ucrReceiverSecondColumn}, {rdoTwoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverFirstColumn.SetLinkedDisplayControl(lblFirstColumn)
         ucrReceiverSecondColumn.SetLinkedDisplayControl(lblSecondColumn)
@@ -102,6 +98,14 @@ Public Class dlgCorrelation
         ucrNudConfidenceInterval.SetLinkedDisplayControl(lblConfInterval)
         ucrPnlColumns.AddToLinkedControls(ucrPnlCompletePairwise, {rdoMultipleColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlCompletePairwise.SetLinkedDisplayControl(grpMissing)
+
+        ucrSaveModel.SetPrefix("Cor")
+        ucrSaveModel.SetSaveTypeAsModel()
+        ucrSaveModel.SetDataFrameSelector(ucrSelectorCorrelation.ucrAvailableDataFrames)
+        ucrSaveModel.SetCheckBoxText("Result Name")
+        ucrSaveModel.SetIsComboBox()
+        ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
+        ucrSaveModel.Reset()
     End Sub
 
     Private Sub SetDefaults()
@@ -122,11 +126,13 @@ Public Class dlgCorrelation
         clsRGraphicsFuction.SetPackageName("GGally")
         clsRGraphicsFuction.SetRCommand("ggpairs")
         clsRGraphicsFuction.iCallType = 3
+        clsRGraphicsFuction.bExcludeAssignedFunctionOutput = False
         clsRGraphicsFuction.AddParameter("data", clsRFunctionParameter:=clsTempFunc)
 
         clsRGGscatMatrixFunction.SetPackageName("GGally")
         clsRGGscatMatrixFunction.SetRCommand("ggscatmat")
         clsRGGscatMatrixFunction.iCallType = 3
+        clsRGGscatMatrixFunction.bExcludeAssignedFunctionOutput = False
         clsRGGscatMatrixFunction.AddParameter("data", clsRFunctionParameter:=clsTempFunc)
 
         clsCorrelationTestFunction.SetRCommand("cor.test")
@@ -143,7 +149,7 @@ Public Class dlgCorrelation
         clsRGGcorrGraphicsFunction.SetPackageName("GGally")
         clsRGGcorrGraphicsFunction.SetRCommand("ggcorr")
         clsRGGcorrGraphicsFunction.iCallType = 3
-
+        clsRGGcorrGraphicsFunction.bExcludeAssignedFunctionOutput = False
         clsRGGcorrGraphicsFunction.AddParameter("cor_matrix", clsRFunctionParameter:=clsCorrelationFunction)
         clsRGGcorrGraphicsFunction.AddParameter("data", "NULL")
 
@@ -157,11 +163,12 @@ Public Class dlgCorrelation
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrPnlMethod.AddAdditionalCodeParameterPair(clsCorrelationFunction, New RParameter("method", 4), iAdditionalPairNo:=1)
+        '        ucrReceiverMultipleColumns.AddAdditionalCodeParameterPair(clsRGraphicsFuction, New RParameter("columns", 1), iAdditionalPairNo:=1) ' this has to be done manually for now as it needs to be a string for this function but r function for another
         ucrReceiverMultipleColumns.SetRCode(clsCorrelationFunction, bReset)
         ucrNudConfidenceInterval.SetRCode(clsCorrelationTestFunction, bReset)
         ucrReceiverFirstColumn.SetRCode(clsCorrelationTestFunction, bReset)
         ucrReceiverSecondColumn.SetRCode(clsCorrelationTestFunction, bReset)
-        ucrPnlColumns.SetRCode(clsCorrelationFunction, bReset)
+        ucrPnlColumns.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlMethod.SetRCode(clsCorrelationTestFunction, bReset)
         ucrPnlCompletePairwise.SetRCode(clsCorrelationFunction, bReset)
         ucrSaveModel.AddAdditionalRCode(clsCorrelationTestFunction, 1)
@@ -197,12 +204,13 @@ Public Class dlgCorrelation
     End Sub
 
     Private Sub cmdPlots_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgCorrPlot.SetRCode(ucrBase.clsRsyntax, clsCorrelationFunction, clsRGGcorrGraphicsFunction, clsRGraphicsFuction, clsRTempFunction, clsRGGscatMatrixFunction, strColFunction, bReset:=bResetSubdialog)
+        sdgCorrPlot.SetRCode(ucrBase.clsRsyntax, clsCorrelationFunction, clsRGGcorrGraphicsFunction, clsRGraphicsFuction, clsRTempFunction, clsRGGscatMatrixFunction, clsColFunction, bReset:=bResetSubdialog)
         sdgCorrPlot.ShowDialog()
         bResetSubdialog = False
     End Sub
 
     Private Sub ReopenDialog()
+        ucrPnlCompletePairwise.bAllowNonConditionValues = True ' temp fix. Otherwise developer error if you close and reopen on the "Two Columns" radio button since this won't be visible
         If rdoMultipleColumns.Checked Then
             grpMissing.Visible = True
         Else
@@ -238,10 +246,23 @@ Public Class dlgCorrelation
     End Sub
 
     Private Sub ucrReceiverMultipleColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleColumns.ControlValueChanged
-        strColFunction = ucrReceiverMultipleColumns.GetVariableNames()
+        clsRGraphicsFuction.AddParameter("columns", ucrReceiverMultipleColumns.GetVariableNames())
+    End Sub
+
+    Private Sub ucrPnlGraphType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumns.ControlValueChanged
+        If rdoTwoColumns.Checked Then
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRGraphicsFuction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRGGscatMatrixFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRGGcorrGraphicsFunction)
+            'Else ' in future we'll have to add these back and have whatever they checked as checked here.
+        End If
     End Sub
 
     Private Sub ucrReceiverFirstColumn_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstColumn.ControlContentsChanged, ucrReceiverSecondColumn.ControlContentsChanged, ucrReceiverMultipleColumns.ControlContentsChanged, ucrPnlColumns.ControlContentsChanged, ucrPnlCompletePairwise.ControlContentsChanged, ucrPnlMethod.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrSelectorCorrelation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorCorrelation.ControlContentsChanged
+        clsTempFunc = ucrSelectorCorrelation.ucrAvailableDataFrames.clsCurrDataFrame
     End Sub
 End Class
