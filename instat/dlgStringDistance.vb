@@ -57,7 +57,7 @@ Public Class dlgStringDistance
         ucrPnlStringDist.AddRadioButton(rdoColumn)
 
         ucrPnlStringDist.AddParameterIsRFunctionCondition(rdoColumn, "b", True)
-        ucrPnlStringDist.AddParameterIsStringCondition(rdoString, "b", True)
+        ucrPnlStringDist.AddParameterIsRFunctionCondition(rdoString, "b", False)
 
         ucrPnlStringDist.AddToLinkedControls(ucrReceiverColumn, {rdoColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStringDist.AddToLinkedControls(ucrInputPatternStringDistance, {rdoString}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
