@@ -71,11 +71,7 @@ Public Class dlgCorrelation
         ucrPnlColumns.AddRadioButton(rdoTwoColumns)
         ucrPnlColumns.AddRadioButton(rdoMultipleColumns)
         ucrPnlColumns.AddFunctionNamesCondition(rdoTwoColumns, "cor.test")
-        ucrPnlColumns.AddParameterPresentCondition(rdoTwoColumns, "method")
-        ucrPnlColumns.AddParameterPresentCondition(rdoMultipleColumns, "method", False)
         ucrPnlColumns.AddFunctionNamesCondition(rdoMultipleColumns, "cor")
-        ucrPnlColumns.AddParameterPresentCondition(rdoMultipleColumns, "use")
-        ucrPnlColumns.AddParameterPresentCondition(rdoTwoColumns, "use", False)
 
         ucrPnlMethod.SetParameter(New RParameter("method", 4))
         ucrPnlMethod.AddRadioButton(rdoPearson, Chr(34) & "pearson" & Chr(34))
@@ -84,10 +80,8 @@ Public Class dlgCorrelation
         ucrPnlMethod.SetRDefault(Chr(34) & "pearson" & Chr(34))
 
         ucrPnlCompletePairwise.SetParameter(New RParameter("use", 5))
-        ucrPnlCompletePairwise.AddRadioButton(rdoPairwise, Chr(34) & "pairwise.complete.obs" & Chr(34))
         ucrPnlCompletePairwise.AddRadioButton(rdoCompleteRowsOnly, Chr(34) & "complete.obs" & Chr(34))
-        ucrPnlCompletePairwise.AddParameterValuesCondition(rdoCompleteRowsOnly, "use", Chr(34) & "complete.obs" & Chr(34))
-        ucrPnlCompletePairwise.AddParameterValuesCondition(rdoPairwise, "use", Chr(34) & "pairwise.complete.obs" & Chr(34))
+        ucrPnlCompletePairwise.AddRadioButton(rdoPairwise, Chr(34) & "pairwise.complete.obs" & Chr(34))
 
         'ucrChk
         ucrChkCorrelationMatrix.SetText("Correlation Matrix")
@@ -144,7 +138,7 @@ Public Class dlgCorrelation
 
         clsCorrelationFunction.SetRCommand("cor")
         clsCorrelationFunction.iCallType = 2
-        clsCorrelationFunction.AddParameter("use", Chr(34) & "pairwise.complete.obs" & Chr(34))
+        clsCorrelationFunction.AddParameter("use", Chr(34) & "complete.obs" & Chr(34))
 
         clsRGGcorrGraphicsFunction.SetPackageName("GGally")
         clsRGGcorrGraphicsFunction.SetRCommand("ggcorr")
@@ -153,6 +147,7 @@ Public Class dlgCorrelation
         clsRGGcorrGraphicsFunction.AddParameter("cor_matrix", clsRFunctionParameter:=clsCorrelationFunction)
         clsRGGcorrGraphicsFunction.AddParameter("data", "NULL")
 
+        clsRGraphicsFuction.AddParameter("columns", ucrReceiverMultipleColumns.GetVariableNames())
         clsCorrelationTestFunction.SetAssignTo("last_model", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model")
         clsCorrelationFunction.SetAssignTo("last_model", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model")
         clsRGGcorrGraphicsFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
@@ -162,11 +157,12 @@ Public Class dlgCorrelation
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrPnlMethod.AddAdditionalCodeParameterPair(clsCorrelationFunction, New RParameter("method", 4), iAdditionalPairNo:=1)
         ucrReceiverMultipleColumns.SetRCode(clsCorrelationFunction, bReset)
         ucrNudConfidenceInterval.SetRCode(clsCorrelationTestFunction, bReset)
         ucrReceiverFirstColumn.SetRCode(clsCorrelationTestFunction, bReset)
         ucrReceiverSecondColumn.SetRCode(clsCorrelationTestFunction, bReset)
-        ucrPnlColumns.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrPnlColumns.SetRCode(clsCorrelationFunction, bReset)
         ucrPnlMethod.SetRCode(clsCorrelationTestFunction, bReset)
         ucrPnlCompletePairwise.SetRCode(clsCorrelationFunction, bReset)
         ucrSaveModel.AddAdditionalRCode(clsCorrelationTestFunction, 1)
@@ -242,9 +238,9 @@ Public Class dlgCorrelation
         End If
     End Sub
 
-    Private Sub ucrReceiverMultipleColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleColumns.ControlValueChanged
-        clsColFunction = ucrReceiverMultipleColumns.GetVariableNames()
-    End Sub
+    'Private Sub ucrReceiverMultipleColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleColumns.ControlValueChanged
+    'clsColFunction = ucrReceiverMultipleColumns.GetVariableNames()
+    ' End Sub
 
     Private Sub ucrReceiverFirstColumn_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstColumn.ControlContentsChanged, ucrReceiverSecondColumn.ControlContentsChanged, ucrReceiverMultipleColumns.ControlContentsChanged, ucrPnlColumns.ControlContentsChanged, ucrPnlCompletePairwise.ControlContentsChanged, ucrPnlMethod.ControlContentsChanged
         TestOKEnabled()

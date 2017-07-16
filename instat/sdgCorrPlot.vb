@@ -123,7 +123,6 @@ Public Class sdgCorrPlot
         ucrSaveGraph.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
         ucrChkColor.SetRSyntax(clsRsyntax, bReset)
         ucrPnlGraphType.SetRSyntax(clsRsyntax, bReset)
-        clsRGraphicsFuction.AddParameter("columns", clsColFunction)
         Visibility()
     End Sub
 
