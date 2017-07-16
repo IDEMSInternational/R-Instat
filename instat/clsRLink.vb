@@ -349,11 +349,15 @@ Public Class RLink
                         clsPNGFunction.AddParameter("width", 4000)
                         clsPNGFunction.AddParameter("height", 4000)
                         clsPNGFunction.AddParameter("res", 500)
-                        Evaluate(clsPNGFunction.ToScript())
+                        Evaluate(clsPNGFunction.ToScript(), bSilent:=False, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
                         'need to boost resolution of the devices, it's not as good as with ggsave.
                     End If
                 End If
-                Evaluate(strScript, bSilent:=False, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                If iCallType = 3 AndAlso strGraphDisplayOption = "view_R_viewer" Then
+                    Evaluate(strScript, bSilent:=False, bSeparateThread:=False, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                Else
+                    Evaluate(strScript, bSilent:=False, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                End If
                 If iCallType = 3 Then
                     If strGraphDisplayOption = "view_output_window" OrElse strGraphDisplayOption = "view_separate_window" Then
                         'add an R script (maybe in the form of one of our methods) that copies divices to the temp directory, using the default device production... use dev.list() and dev.copy() with arguments device = the devices in the list and which = jpeg devices with different paths leading to the temp directory, using a paste() method to find different names for the files
