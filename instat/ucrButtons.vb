@@ -205,9 +205,9 @@ Public Class ucrButtons
         'TODO default text should be translatable
         'This is needed only so that the designer displays correctly in VS
         If frmMain.clsInstatOptions IsNot Nothing Then
-            txtComment.Text = ParentForm.Name & " " & frmMain.clsInstatOptions.strComment & " " & ParentForm.Text
+            txtComment.Text = frmMain.clsInstatOptions.strComment & " " & ParentForm.Text
         Else
-            txtComment.Text = ParentForm.Name & " " & ParentForm.Text
+            txtComment.Text = ParentForm.Text
         End If
     End Sub
 
