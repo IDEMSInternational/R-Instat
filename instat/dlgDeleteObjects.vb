@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgDeleteObjects
     Public bFirstLoad As Boolean = True
@@ -33,10 +32,7 @@ Public Class dlgDeleteObjects
         SetRCodeforControls(bReset)
         bReset = False
         autoTranslate(Me)
-    End Sub
-
-    Private Sub ReopenDialog()
-        ucrSelectorDeleteObject.Reset() ' temporary fix
+        TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -75,6 +71,10 @@ Public Class dlgDeleteObjects
         Else
             ucrBase.OKEnabled(False)
         End If
+    End Sub
+
+    Private Sub ReopenDialog()
+        ucrSelectorDeleteObject.Reset() ' temporary fix
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
