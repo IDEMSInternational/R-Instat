@@ -674,8 +674,9 @@ Public Class ucrGeom
 
         clsgeom_jitter.SetGeomName("geom_jitter")
         'Mandatory aesthetics : here x and y are mandatory, however, when not filled, default values "" are given. Alternatively, if we want to have at least on filled, could add bIsDependentlyMandatory:=True in both. Planning on refining the mandatory aes methods to include the "" cases systematically.
-        clsgeom_jitter.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"})
-        clsgeom_jitter.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"})
+        'I am currently making these two mandatory
+        clsgeom_jitter.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
+        clsgeom_jitter.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
         'optional
         clsgeom_jitter.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_jitter.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
