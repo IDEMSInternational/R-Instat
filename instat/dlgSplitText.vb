@@ -45,7 +45,8 @@ Public Class dlgSplitText
         ucrPnlSplitText.AddFunctionNamesCondition(rdoTextComponents, "str_split_fixed")
         ucrPnlSplitText.AddFunctionNamesCondition(rdoBinaryColumns, "multi.split")
 
-        ucrPnlSplitText.AddToLinkedControls(ucrNudPieces, {rdoTextComponents}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlSplitText.AddToLinkedControls(ucrNudPieces, {rdoTextComponents}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
+        ucrPnlSplitText.AddToLinkedControls(ucrSaveColumn, {rdoTextComponents}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudPieces.SetLinkedDisplayControl(lblNumberofPiecesToReturn)
 
         ucrReceiverSplitTextColumn.SetParameter(New RParameter("string", 0))
@@ -87,8 +88,8 @@ Public Class dlgSplitText
 
         clsTextComponents.SetPackageName("stringr")
         clsTextComponents.SetRCommand("str_split_fixed")
-        clsTextComponents.AddParameter("pattern", Chr(34) & "," & Chr(34))
-        clsTextComponents.AddParameter("n", 2)
+        clsTextComponents.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
+        clsTextComponents.AddParameter("n", strParameterValue:=2, iPosition:=2)
         clsTextComponents.SetAssignTo(strTemp:="Split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="Split", bAssignToIsPrefix:=True)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponents)
@@ -97,18 +98,15 @@ Public Class dlgSplitText
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverSplitTextColumn.AddAdditionalCodeParameterPair(clsBinaryColumns, New RParameter("var", 0), iAdditionalPairNo:=1)
         ucrInputPattern.AddAdditionalCodeParameterPair(clsBinaryColumns, New RParameter("split.char", 1), iAdditionalPairNo:=1)
-        ucrSaveColumn.AddAdditionalRCode(clsBinaryColumns, bReset)
-
         ucrReceiverSplitTextColumn.SetRCode(clsTextComponents, bReset)
         ucrInputPattern.SetRCode(clsTextComponents, bReset)
         ucrNudPieces.SetRCode(clsTextComponents, bReset)
-
-        ucrPnlSplitText.SetRCode(clsTextComponents)
-        ucrSaveColumn.SetRCode(clsTextComponents)
+        ucrPnlSplitText.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrSaveColumn.SetRCode(clsTextComponents, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverSplitTextColumn.IsEmpty() AndAlso ucrNudPieces.GetText <> "" AndAlso Not ucrInputPattern.IsEmpty AndAlso ucrSaveColumn.IsComplete() Then
+        If Not ucrReceiverSplitTextColumn.IsEmpty() AndAlso Not ucrInputPattern.IsEmpty AndAlso ((rdoTextComponents.Checked AndAlso ucrNudPieces.GetText <> "" AndAlso ucrSaveColumn.IsComplete()) OrElse rdoBinaryColumns.Checked) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -124,13 +122,16 @@ Public Class dlgSplitText
     Private Sub ucrPnlSplitText_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlSplitText.ControlContentsChanged
         If rdoBinaryColumns.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsBinaryColumns)
+            clsBinaryColumns.SetAssignTo("Split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
         ElseIf rdoTextComponents.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponents)
+            clsTextComponents.SetAssignTo("Split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="Split", bAssignToIsPrefix:=True)
+            ucrSaveColumn.SetName("Split")
         Else
         End If
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputPattern.ControlContentsChanged, ucrReceiverSplitTextColumn.ControlContentsChanged, ucrNudPieces.ControlContentsChanged, ucrSaveColumn.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputPattern.ControlContentsChanged, ucrReceiverSplitTextColumn.ControlContentsChanged, ucrNudPieces.ControlContentsChanged, ucrSaveColumn.ControlContentsChanged, ucrPnlSplitText.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
