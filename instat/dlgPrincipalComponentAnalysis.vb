@@ -201,12 +201,13 @@ Public Class dlgPrincipalComponentAnalysis
         clsRBarPlot.SetOperation("+")
         clsRFactor.SetRCommand("cbind")
 
+        clsRMelt.SetPackageName("reshape2")
         clsRMelt.SetRCommand("melt")
         clsRMelt.AddParameter("", clsRFunctionParameter:=clsREigenVectors) ' not sure if this will work!
         clsRFactor.AddParameter("", clsRFunctionParameter:=clsRMelt)
         clsRBarPlotFunction.SetPackageName("ggplot2")
         clsRBarPlotFunction.SetRCommand("ggplot")
-        clsRBarPlot.iCallType = 3
+        clsRBarPlotFunction.iCallType = 3
         clsRBarPlotFunction.AddParameter("data", clsRFunctionParameter:=clsRFactor)
         clsRBarPlotGeom.SetPackageName("ggplot2")
         clsRBarPlotGeom.SetRCommand("geom_bar")
@@ -262,7 +263,7 @@ Public Class dlgPrincipalComponentAnalysis
     End Sub
 
     Private Sub cmdPCAOptions_Click(sender As Object, e As EventArgs) Handles cmdPCAOptions.Click
-        sdgPrincipalComponentAnalysis.SetRFunction(ucrBase.clsRsyntax, clsREigenValues, clsREigenVectors, clsRRotation, clsRScreePlotFunction, clsRVariablesPlotFunction, clsRIndividualsPlotFunction, clsRBiplotFunction, clsRFactor, clsRVariablesPlotFunctionValue, clsRIndividualsFunctionValue, clsRBiplotFunctionValue, bResetSubdialog)
+        sdgPrincipalComponentAnalysis.SetRFunction(ucrBase.clsRsyntax, clsREigenValues, clsREigenVectors, clsRRotation, clsRScreePlotFunction, clsRVariablesPlotFunction, clsRIndividualsPlotFunction, clsRBiplotFunction, clsRBarPlotFunction, clsRVariablesPlotFunctionValue, clsRIndividualsFunctionValue, clsRBiplotFunctionValue, clsRFactor, bResetSubdialog)
         bResetSubdialog = False
         sdgPrincipalComponentAnalysis.ShowDialog()
     End Sub
