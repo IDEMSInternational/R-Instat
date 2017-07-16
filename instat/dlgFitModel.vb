@@ -14,14 +14,17 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgFitModel
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Public clsFormulaOperator As New ROperator
 
-    Public clsRestpvalFunction, clsFamilyFunction, clsLM, clsConfint, clsAnovaFunction, clsSummaryFunction, clsFormulaFunction, clsRCIFunction, clsRConvert, clsAutoPlot, clsVisReg, clsGLM, clsLMOrGLM As New RFunction
+    Public clsRestpvalFunction, clsFamilyFunction, clsRCIFunction, clsRConvert, clsAutoPlot, clsVisReg As New RFunction
     Public bResetModelOptions As Boolean = False
+    Public clsRSingleModelFunction, clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As RFunction
+    Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric As RFunction
     Public bResetSubDialog As Boolean = False
     Public bResetOptionsSubDialog As Boolean = False
 
@@ -117,9 +120,6 @@ Public Class dlgFitModel
         ucrInputModelPreview.SetName("")
         ucrInputModelPreview.IsReadOnly = True
 
-        clsFamilyFunction = ucrFamily.clsCurrRFunction
-        clsLM.AddParameter("family", clsRFunctionParameter:=clsFamilyFunction)
-
         clsGLM = clsRegressionDefaults.clsDefaultGlmFunction.Clone()
         clsGLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=0)
 
@@ -157,7 +157,6 @@ Public Class dlgFitModel
 
         'Anova + Pvalue
         clsRestpvalFunction = clsRegressionDefaults.clsDefaultRaovPValueFunction.Clone
-        clsRestpvalFunction.AddParameter("", clsRFunctionParameter:=clsLM)
         clsRestpvalFunction.iCallType = 2
         'sdgSimpleRegOptions.SetRModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
 
@@ -165,7 +164,6 @@ Public Class dlgFitModel
 
         ResponseConvert()
 
-        ChooseRFunction()
         ' sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
         sdgSimpleRegOptions.lblConfLevel.Enabled = True
         'sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
@@ -355,7 +353,7 @@ Public Class dlgFitModel
         End If
     End Sub
 
-    Public Sub ucrFamily_cboDistributionsIndexChanged() Handles ucrFamily.ControlValueChanged
+    Public Sub ucrFamily_cboDistributionsIndexChanged() Handles ucrFamily.DistributionsIndexChanged
         ChooseRFunction()
         clsFamilyFunction.RemoveParameterByName("link")
     End Sub
@@ -377,5 +375,9 @@ Public Class dlgFitModel
     Private Sub ucrReceiverExpressionFitModel_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionFitModel.ControlContentsChanged, ucrReceiverResponseVar.ControlContentsChanged
         UpdatePreview()
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrSelectorByDataFrameAddRemoveForFitModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorByDataFrameAddRemoveForFitModel.ControlValueChanged
+        ChooseRFunction()
     End Sub
 End Class
