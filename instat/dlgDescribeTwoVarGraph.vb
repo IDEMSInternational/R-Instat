@@ -25,6 +25,8 @@ Public Class dlgDescribeTwoVarGraph
     Private bReset As Boolean = True
     ' Private bResetSubdialog As Boolean = False
     Private clsBaseOperator As New ROperator
+    Private clsRJitterPlotGeom As New RFunction
+    Private clsRJitterAesFunction As New RFunction
     Private Sub dlgDescribeTwoVarGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -77,6 +79,7 @@ Public Class dlgDescribeTwoVarGraph
     Private Sub SetDefaults()
         clsRGGplotFunction = New RFunction
         clsRBoxPlotGeom = New RFunction
+        clsRJitterPlotGeom = New RFunction
         clsRScatterPlotGeom = New RFunction
         clsRLinePlotGeom = New RFunction
         clsRSummaryAesFunction = New RFunction
@@ -217,6 +220,10 @@ Public Class dlgDescribeTwoVarGraph
                     ScatterLinePlot()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRScatterAesFunction, iPosition:=0)
                     clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRScatterPlotGeom, iPosition:=1)
+                Case "Jitter plot"
+                    JitterPlot()
+                    clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRJitterAesFunction, iPosition:=0)
+                    clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRJitterPlotGeom, iPosition:=1)
             End Select
             'categorical by numeric case
         ElseIf (strVarType <> "numeric" AndAlso strVarType <> "integer") AndAlso (strSecondVarType = "numeric" OrElse strSecondVarType = "integer") Then
@@ -247,6 +254,21 @@ Public Class dlgDescribeTwoVarGraph
                     ScatterLinePlot()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRScatterAesFunction2, iPosition:=0)
                     clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRScatterPlotGeom, iPosition:=1)
+
+                Case "Violin plot"
+                    ScatterLinePlot()
+                    clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRScatterAesFunction2, iPosition:=0)
+                    clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRScatterPlotGeom, iPosition:=1)
+
+                Case "Jitter plot"
+                    JitterPlot()
+                    clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRJitterAesFunction, iPosition:=0)
+                    clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRJitterPlotGeom, iPosition:=1)
+
+                    'Case "Box plot + Jitter"
+                    'Case "Violin Plot + Jitter plot"
+                    'Case "Violin plot + Box plot"
+
             End Select
             'catogerical by cateogrical case
         ElseIf (strVarType <> "numeric" AndAlso strVarType <> "integer") AndAlso (strVarType <> "numeric" AndAlso strVarType <> "integer") Then
@@ -267,6 +289,17 @@ Public Class dlgDescribeTwoVarGraph
             MsgBox("Developer error: Unrecognised column types. Graph may be blank or produce an error.", MsgBoxStyle.Critical)
             ucrBase.clsRsyntax.RemoveOperatorParameter("right")
         End If
+    End Sub
+
+    Private Sub JitterPlot()
+        clsRJitterPlotGeom.SetPackageName("ggplot2")
+        clsRJitterPlotGeom.SetRCommand("geom_jitter")
+        clsRJitterAesFunction.SetPackageName("ggplot2")
+        clsRJitterAesFunction.SetRCommand("aes")
+        clsRJitterAesFunction.AddParameter("y", "value")
+        clsRJitterAesFunction.SetPackageName("ggplot2")
+        clsRJitterAesFunction.SetRCommand("aes")
+        clsRJitterAesFunction.AddParameter("x", "value")
     End Sub
 
     Private Sub BoxPlot()
