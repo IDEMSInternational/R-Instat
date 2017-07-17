@@ -70,7 +70,7 @@ Public Class ucrReceiverMultiple
             lstSelectedVariables.SelectedItems.CopyTo(tempObjects, 0)
             For Each objItem In tempObjects
                 lstSelectedVariables.Items.Remove(objItem)
-                Selector.RemoveFromVariablesList(objItem.Text)
+                Selector.RemoveFromVariablesList(objItem.Text, objItem.Tag)
             Next
         End If
         OnSelectionChanged()
@@ -84,6 +84,7 @@ Public Class ucrReceiverMultiple
         If strItems.Count > 0 Then
             For Each strTempItem In strItems
                 lstSelectedVariables.Items.RemoveByKey(strTempItem)
+                'TODO pass data frame for variables
                 Selector.RemoveFromVariablesList(strTempItem)
             Next
             OnSelectionChanged()
@@ -321,7 +322,7 @@ Public Class ucrReceiverMultiple
                 lstSelectedVariables.Items.Add(kvpTempItem.Value).Group = grpCurr
                 lstSelectedVariables.Items(lstSelectedVariables.Items.Count - 1).Tag = kvpTempItem.Key
                 lstSelectedVariables.Items(lstSelectedVariables.Items.Count - 1).Name = kvpTempItem.Value
-                Selector.AddToVariablesList(kvpTempItem.Value)
+                Selector.AddToVariablesList(kvpTempItem.Value, kvpTempItem.Key)
             End If
         Next
         OnSelectionChanged()
@@ -373,6 +374,9 @@ Public Class ucrReceiverMultiple
                 End If
                 If bUnique Then
                     strDataTypes = strDataTypes.Distinct().ToList()
+                End If
+                If strDataTypes.Count = 2 AndAlso strDataTypes.Contains("ordered") AndAlso strDataTypes.Contains("factor") Then
+                    strDataTypes = {"factor"}.ToList
                 End If
             End If
         End If

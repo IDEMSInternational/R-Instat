@@ -42,7 +42,7 @@ Partial Class dlgCalculationsSummary
         Me.cmdEdit = New System.Windows.Forms.Button()
         Me.cmdAdd = New System.Windows.Forms.Button()
         Me.lblCalculations = New System.Windows.Forms.Label()
-        Me.lstLayers = New System.Windows.Forms.ListView()
+        Me.lstCalculations = New System.Windows.Forms.ListView()
         Me.cmdDuplicate = New System.Windows.Forms.Button()
         Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
@@ -83,15 +83,15 @@ Partial Class dlgCalculationsSummary
         Me.lblCalculations.TabIndex = 10
         Me.lblCalculations.Text = "Calculations:"
         '
-        'lstLayers
+        'lstCalculations
         '
-        Me.lstLayers.FullRowSelect = True
-        Me.lstLayers.Location = New System.Drawing.Point(12, 36)
-        Me.lstLayers.Name = "lstLayers"
-        Me.lstLayers.Size = New System.Drawing.Size(125, 149)
-        Me.lstLayers.TabIndex = 9
-        Me.lstLayers.UseCompatibleStateImageBehavior = False
-        Me.lstLayers.View = System.Windows.Forms.View.List
+        Me.lstCalculations.FullRowSelect = True
+        Me.lstCalculations.Location = New System.Drawing.Point(12, 36)
+        Me.lstCalculations.Name = "lstCalculations"
+        Me.lstCalculations.Size = New System.Drawing.Size(125, 149)
+        Me.lstCalculations.TabIndex = 9
+        Me.lstCalculations.UseCompatibleStateImageBehavior = False
+        Me.lstCalculations.View = System.Windows.Forms.View.List
         '
         'cmdDuplicate
         '
@@ -119,7 +119,7 @@ Partial Class dlgCalculationsSummary
         Me.Controls.Add(Me.cmdEdit)
         Me.Controls.Add(Me.cmdAdd)
         Me.Controls.Add(Me.lblCalculations)
-        Me.Controls.Add(Me.lstLayers)
+        Me.Controls.Add(Me.lstCalculations)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -137,6 +137,6 @@ Partial Class dlgCalculationsSummary
     Friend WithEvents cmdEdit As Button
     Friend WithEvents cmdAdd As Button
     Friend WithEvents lblCalculations As Label
-    Friend WithEvents lstLayers As ListView
+    Friend WithEvents lstCalculations As ListView
     Friend WithEvents cmdDuplicate As Button
 End Class

@@ -80,7 +80,7 @@ Public Class RLink
         If strScript = "" Then
             strScript = GetRSetupScript()
             iCallType = 0
-            strComment = "Setting working directory, sources R code and loading R packages"
+            strComment = "Setting working directory, sourcing R code and loading R packages"
             bSeparateThread = True
         End If
         bInstatObjectExists = True
@@ -300,7 +300,7 @@ Public Class RLink
         End Try
     End Sub
 
-    Public Sub RunScript(strScript As String, Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True)
+    Public Sub RunScript(strScript As String, Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing, Optional bUpdateGrids As Boolean = True)
         Dim strCapturedScript As String
         Dim expTemp As RDotNet.SymbolicExpression
         Dim strTemp As String = ""
@@ -349,15 +349,19 @@ Public Class RLink
                         clsPNGFunction.AddParameter("width", 4000)
                         clsPNGFunction.AddParameter("height", 4000)
                         clsPNGFunction.AddParameter("res", 500)
-                        Evaluate(clsPNGFunction.ToScript())
+                        Evaluate(clsPNGFunction.ToScript(), bSilent:=False, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
                         'need to boost resolution of the devices, it's not as good as with ggsave.
                     End If
                 End If
-                Evaluate(strScript, bSilent:=False, bSeparateThread:=bSeparateThread)
+                If iCallType = 3 AndAlso strGraphDisplayOption = "view_R_viewer" Then
+                    Evaluate(strScript, bSilent:=False, bSeparateThread:=False, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                Else
+                    Evaluate(strScript, bSilent:=False, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                End If
                 If iCallType = 3 Then
                     If strGraphDisplayOption = "view_output_window" OrElse strGraphDisplayOption = "view_separate_window" Then
                         'add an R script (maybe in the form of one of our methods) that copies divices to the temp directory, using the default device production... use dev.list() and dev.copy() with arguments device = the devices in the list and which = jpeg devices with different paths leading to the temp directory, using a paste() method to find different names for the files
-                        Evaluate("graphics.off()", bSilent:=False, bSeparateThread:=bSeparateThread) 'not quite sure if this would work, otherwise find the right way to close the appropriate devices.
+                        Evaluate("graphics.off()", bSilent:=False, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride) 'not quite sure if this would work, otherwise find the right way to close the appropriate devices.
                         'clsEngine.Evaluate("ggsave(" & Chr(34) & strTempGraphsDirectory.Replace("\", "/") & "Graph.jpg" & Chr(34) & ")")
                         'This sub is used to display graphics in the output window when necessary.
                         'This sub is checking the temp directory "R_Instat_Temp_Graphs", created during setup to see if there are any graphs to display. If there are some, then it sends them to the output window, and removes them from the directory.
@@ -397,7 +401,7 @@ Public Class RLink
             Try
                 'TODO check this is valid syntax in all cases
                 '     i.e. this is potentially: x <- y <- 1
-                Evaluate(strTempAssignTo & " <- " & strScript, bSilent:=False, bSeparateThread:=bSeparateThread)
+                Evaluate(strTempAssignTo & " <- " & strScript, bSilent:=False, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
                 expTemp = GetSymbol(strTempAssignTo)
                 If expTemp IsNot Nothing Then
                     strTemp = String.Join(Environment.NewLine, expTemp.AsCharacter())
@@ -413,7 +417,7 @@ Public Class RLink
                 strSplitScript = Left(strScript, strScript.Trim(Environment.NewLine.ToCharArray).LastIndexOf(Environment.NewLine.ToCharArray))
                 If strSplitScript <> "" Then
                     Try
-                        Evaluate(strSplitScript, bSilent:=False, bSeparateThread:=bSeparateThread)
+                        Evaluate(strSplitScript, bSilent:=False, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
                     Catch e As Exception
                         MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
                     End Try
@@ -422,7 +426,7 @@ Public Class RLink
                 strCapturedScript = "capture.output(" & strSplitScript & ")"
             End If
             Try
-                Evaluate(strTempAssignTo & " <- " & strCapturedScript, bSilent:=False, bSeparateThread:=bSeparateThread)
+                Evaluate(strTempAssignTo & " <- " & strCapturedScript, bSilent:=False, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
                 expTemp = GetSymbol(strTempAssignTo)
                 If expTemp IsNot Nothing Then
                     strTemp = String.Join(Environment.NewLine, expTemp.AsCharacter())
@@ -440,17 +444,19 @@ Public Class RLink
             End If
         End If
         AppendToAutoSaveLog(strScriptWithComment & Environment.NewLine)
-        frmMain.clsGrids.UpdateGrids()
+        If bUpdateGrids Then
+            frmMain.clsGrids.UpdateGrids()
+        End If
     End Sub
 
-    Public Function RunInternalScriptGetValue(strScript As String, Optional strVariableName As String = ".temp_value", Optional bSilent As Boolean = False, Optional bSeparateThread As Boolean = True) As SymbolicExpression
+    Public Function RunInternalScriptGetValue(strScript As String, Optional strVariableName As String = ".temp_value", Optional bSilent As Boolean = False, Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing) As SymbolicExpression
         Dim expTemp As SymbolicExpression
         Dim strCommand As String
 
         expTemp = Nothing
         strCommand = strVariableName & "<-" & strScript
         If clsEngine IsNot Nothing Then
-            Evaluate(strCommand, bSilent:=bSilent, bSeparateThread:=bSeparateThread)
+            Evaluate(strCommand, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
             expTemp = GetSymbol(strVariableName, bSilent:=True)
             'Very important to remove the variable after getting it othewise could be returning wrong variable later if a command gives an error
             Evaluate("rm(" & strVariableName & ")", bSilent:=bSilent, bSeparateThread:=bSeparateThread)
@@ -458,11 +464,11 @@ Public Class RLink
         Return expTemp
     End Function
 
-    Public Function RunInternalScriptGetOutput(strScript As String, Optional bSilent As Boolean = False, Optional bSeparateThread As Boolean = True) As CharacterVector
+    Public Function RunInternalScriptGetOutput(strScript As String, Optional bSilent As Boolean = False, Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing) As CharacterVector
         Dim chrTemp As CharacterVector
         Dim expTemp As SymbolicExpression
 
-        expTemp = RunInternalScriptGetValue("capture.output(" & strScript & ")", bSilent:=bSilent, bSeparateThread:=bSeparateThread)
+        expTemp = RunInternalScriptGetValue("capture.output(" & strScript & ")", bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
         Try
             chrTemp = expTemp.AsCharacter()
         Catch ex As Exception
@@ -474,7 +480,7 @@ Public Class RLink
         Return chrTemp
     End Function
 
-    Public Function RunInternalScript(strScript As String, Optional strVariableName As String = "", Optional bSilent As Boolean = False, Optional bSeparateThread As Boolean = True) As Boolean
+    Public Function RunInternalScript(strScript As String, Optional strVariableName As String = "", Optional bSilent As Boolean = False, Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing) As Boolean
         Dim strCommand As String
         Dim bReturn As Boolean
 
@@ -484,14 +490,14 @@ Public Class RLink
             strCommand = strScript
         End If
         If clsEngine IsNot Nothing Then
-            bReturn = Evaluate(strCommand, bSilent:=bSilent, bSeparateThread:=bSeparateThread)
+            bReturn = Evaluate(strCommand, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
             Return bReturn
         Else
             Return False
         End If
     End Function
 
-    Private Function Evaluate(strScript As String, Optional bSilent As Boolean = False, Optional bSeparateThread As Boolean = True) As Boolean
+    Private Function Evaluate(strScript As String, Optional bSilent As Boolean = False, Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing) As Boolean
         Dim thrRScript As Threading.Thread
         Dim thrDelay As Threading.Thread
         Dim thrWaitDisplay As Threading.Thread
@@ -501,7 +507,13 @@ Public Class RLink
         Dim i As Integer = 1
         Dim strTempFile As String
         Dim bErrorMessageOpen As Boolean = False
+        Dim bCurrentShowWaiting As Boolean
 
+        If bShowWaitDialogOverride.HasValue Then
+            bCurrentShowWaiting = bShowWaitDialogOverride
+        Else
+            bCurrentShowWaiting = bShowWaitDialog
+        End If
         While bRCodeRunning
             Threading.Thread.Sleep(5)
         End While
@@ -574,7 +586,7 @@ Public Class RLink
                                                     End Sub)
                     thrDelay.IsBackground = True
                     thrWaitDisplay = New Threading.Thread(Sub()
-                                                              If bShowWaitDialog Then
+                                                              If bCurrentShowWaiting Then
                                                                   frmSetupLoading.Show()
                                                               End If
                                                               While thrRScript.IsAlive
@@ -1063,6 +1075,22 @@ Public Class RLink
         Return strColumn
     End Function
 
+    Public Function GetCRIColumnNames(strDataName As String) As String()
+        Dim clsGetColumnName As New RFunction
+        Dim strColumn() As String
+        Dim expColumn As SymbolicExpression
+
+        clsGetColumnName.SetRCommand(strInstatDataObject & "$get_CRI_column_names")
+        clsGetColumnName.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
+        expColumn = RunInternalScriptGetValue(clsGetColumnName.ToScript(), bSilent:=True)
+        If expColumn IsNot Nothing AndAlso Not expColumn.Type = Internals.SymbolicExpressionType.Null Then
+            strColumn = expColumn.AsCharacter.ToArray()
+        Else
+            strColumn = Nothing
+        End If
+        Return strColumn
+    End Function
+
     Public Function IsBinary(strDataName As String, strColumn As String) As Boolean
         Dim clsGetColumn As New RFunction
         Dim clsIsBinary As New RFunction
@@ -1113,5 +1141,22 @@ Public Class RLink
             iTimeInSeconds = 2
         End If
         iWaitDelay = iTimeInSeconds
+    End Sub
+
+    Public Sub CloseData()
+        Dim clsRm As New RFunction
+        Dim clsCreateIO As New ROperator
+
+        clsRm.SetRCommand("rm")
+        clsRm.AddParameter("x", strInstatDataObject)
+
+        clsCreateIO.SetOperation("<-")
+        clsCreateIO.AddParameter("left", strInstatDataObject, iPosition:=0)
+        clsCreateIO.AddParameter("right", "instat_object$new()", iPosition:=1)
+
+        bInstatObjectExists = False
+        RunScript(clsRm.ToScript(), strComment:="Closing data")
+        bInstatObjectExists = True
+        RunScript(clsCreateIO.ToScript(), strComment:="Creating New Instat Object")
     End Sub
 End Class
