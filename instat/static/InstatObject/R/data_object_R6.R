@@ -247,6 +247,7 @@ data_object$set("public", "get_data_frame", function(convert_to_character = FALS
       out <- private$data[!hidden]
     }
     else out <- private$data
+    nam <- names(out)
     if(use_current_filter && self$filter_applied()) {
       if(filter_name != "") {
         out <- out[self$current_filter & self$get_filter_as_logical(filter_name = filter_name), ]
@@ -259,6 +260,10 @@ data_object$set("public", "get_data_frame", function(convert_to_character = FALS
       if(filter_name != "") {
         out <- out[self$get_filter_as_logical(filter_name = filter_name), ]
       }
+    }
+    if(!is.data.frame(out)) {
+      out <- data.frame(out)
+      if(length(nam) == length(out)) names(out) <- nam
     }
     # This is needed as some R function misinterpret the class of a column
     # when there are extra attributes on columns
