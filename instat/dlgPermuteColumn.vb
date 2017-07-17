@@ -44,16 +44,16 @@ Public Class dlgPermuteColumn
         ucrReceiverPermuteRows.SetParameterIsRFunction()
         ucrReceiverPermuteRows.bUseFilteredData = False
         ucrReceiverPermuteRows.Selector = ucrPermuteRowsSelector
-        ucrReceiverPermuteRows.strSelectorHeading = "Columns to Permute:"
         ucrReceiverPermuteRows.SetMeAsReceiver()
 
         ucrNudNumberofColumns.SetParameter(New RParameter("n", 1))
         ucrNudNumberofColumns.Maximum = Integer.MaxValue
         ucrNudNumberofColumns.Minimum = 1
 
-        ucrChkSetSeed.AddToLinkedControls(ucrNudSetSeed, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkSetSeed.AddRSyntaxContainsFunctionNamesCondition(True, {"set.seed"})
+        ucrChkSetSeed.AddRSyntaxContainsFunctionNamesCondition(False, {"set.seed"}, False)
+        ucrChkSetSeed.AddToLinkedControls(ucrNudSetSeed, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
         ucrChkSetSeed.SetText("Set Seed")
-        ucrChkSetSeed.AddFunctionNamesCondition(False, "set.seed")
 
         ucrNudSetSeed.SetParameter(New RParameter("seed", 0))
         ucrNudSetSeed.Maximum = Integer.MaxValue
@@ -68,6 +68,7 @@ Public Class dlgPermuteColumn
         clsSetSampleFunction = New RFunction
         clsOverallFunction = New RFunction
 
+        ucrBase.clsRsyntax.ClearCodes()
         ucrPermuteRowsSelector.Reset()
         ucrSavePermute.Reset()
         SetNewColumName()
@@ -77,12 +78,10 @@ Public Class dlgPermuteColumn
         clsSetSampleFunction.AddParameter("size", ucrPermuteRowsSelector.ucrAvailableDataFrames.iDataFrameLength)
 
         clsSetSeedFunction.SetRCommand("set.seed")
-        clsSetSeedFunction.AddParameter("seed", 5)
 
         clsOverallFunction.SetRCommand("replicate")
         clsOverallFunction.AddParameter("expr", clsRFunctionParameter:=clsSetSampleFunction)
         clsOverallFunction.AddParameter("n", 1)
-
         ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSavePermute.GetText, strTempDataframe:=ucrPermuteRowsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSavePermute.GetText, bAssignToIsPrefix:=True)
     End Sub
@@ -92,6 +91,7 @@ Public Class dlgPermuteColumn
         ucrReceiverPermuteRows.SetRCode(clsSetSampleFunction, bReset)
         ucrNudSetSeed.SetRCode(clsSetSeedFunction, bReset)
         ucrChkSetSeed.SetRCode(clsSetSeedFunction, bReset)
+        ucrChkSetSeed.SetRSyntax(ucrBase.clsRsyntax, bReset)
         ucrSavePermute.SetRCode(clsOverallFunction, bReset)
     End Sub
 
@@ -111,7 +111,10 @@ Public Class dlgPermuteColumn
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         If ucrChkSetSeed.Checked Then
-            frmMain.clsRLink.RunScript(clsSetSeedFunction.ToScript, strComment:="dlgPermuteColumn:Setting the seed for the random generator")
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsSetSeedFunction, iPosition:=0)
+        Else
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSetSeedFunction)
+
         End If
     End Sub
 

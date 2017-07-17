@@ -71,7 +71,6 @@ Public Class dlgRandomSample
         SetNewColumName()
 
         clsSetSeed.SetRCommand("set.seed")
-        clsSetSeed.AddParameter("seed", 5)
 
         ucrDistWithParameters.SetRDistributions()
         ucrDistWithParameters.SetParameters()
