@@ -41,8 +41,8 @@ Partial Class dlgCanonicalCorrelationAnalysis
         Me.lblYVariables = New System.Windows.Forms.Label()
         Me.lblXVariables = New System.Windows.Forms.Label()
         Me.cmdCCAOptions = New System.Windows.Forms.Button()
-        Me.ucrReceiverXvariables = New instat.ucrReceiverMultiple()
-        Me.ucrReceiverYvariables = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverXVariables = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverYVariables = New instat.ucrReceiverMultiple()
         Me.ucrSelectorCCA = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSaveResult = New instat.ucrSave()
@@ -50,51 +50,57 @@ Partial Class dlgCanonicalCorrelationAnalysis
         '
         'lblYVariables
         '
-        Me.lblYVariables.Location = New System.Drawing.Point(267, 168)
+        Me.lblYVariables.AutoSize = True
+        Me.lblYVariables.Location = New System.Drawing.Point(266, 168)
         Me.lblYVariables.Name = "lblYVariables"
-        Me.lblYVariables.Size = New System.Drawing.Size(100, 19)
-        Me.lblYVariables.TabIndex = 1
+        Me.lblYVariables.Size = New System.Drawing.Size(63, 13)
+        Me.lblYVariables.TabIndex = 3
         Me.lblYVariables.Tag = "Y_Variables:"
         Me.lblYVariables.Text = "Y Variables:"
         '
         'lblXVariables
         '
-        Me.lblXVariables.Location = New System.Drawing.Point(269, 45)
+        Me.lblXVariables.AutoSize = True
+        Me.lblXVariables.Location = New System.Drawing.Point(266, 45)
         Me.lblXVariables.Name = "lblXVariables"
-        Me.lblXVariables.Size = New System.Drawing.Size(100, 23)
-        Me.lblXVariables.TabIndex = 3
+        Me.lblXVariables.Size = New System.Drawing.Size(63, 13)
+        Me.lblXVariables.TabIndex = 1
         Me.lblXVariables.Tag = "X_Variables:"
         Me.lblXVariables.Text = "X Variables:"
         '
         'cmdCCAOptions
         '
-        Me.cmdCCAOptions.Location = New System.Drawing.Point(10, 204)
+        Me.cmdCCAOptions.Location = New System.Drawing.Point(289, 290)
         Me.cmdCCAOptions.Name = "cmdCCAOptions"
         Me.cmdCCAOptions.Size = New System.Drawing.Size(120, 23)
-        Me.cmdCCAOptions.TabIndex = 5
-        Me.cmdCCAOptions.Tag = "CCA_Options..."
-        Me.cmdCCAOptions.Text = "CCA Options.."
+        Me.cmdCCAOptions.TabIndex = 6
+        Me.cmdCCAOptions.Tag = "Options"
+        Me.cmdCCAOptions.Text = "Options"
         Me.cmdCCAOptions.UseVisualStyleBackColor = True
         '
-        'ucrReceiverXvariables
+        'ucrReceiverXVariables
         '
-        Me.ucrReceiverXvariables.frmParent = Me
-        Me.ucrReceiverXvariables.Location = New System.Drawing.Point(266, 60)
-        Me.ucrReceiverXvariables.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverXvariables.Name = "ucrReceiverXvariables"
-        Me.ucrReceiverXvariables.Selector = Nothing
-        Me.ucrReceiverXvariables.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverXvariables.TabIndex = 4
+        Me.ucrReceiverXVariables.frmParent = Me
+        Me.ucrReceiverXVariables.Location = New System.Drawing.Point(266, 60)
+        Me.ucrReceiverXVariables.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverXVariables.Name = "ucrReceiverXVariables"
+        Me.ucrReceiverXVariables.Selector = Nothing
+        Me.ucrReceiverXVariables.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverXVariables.strNcFilePath = ""
+        Me.ucrReceiverXVariables.TabIndex = 2
+        Me.ucrReceiverXVariables.ucrSelector = Nothing
         '
-        'ucrReceiverYvariables
+        'ucrReceiverYVariables
         '
-        Me.ucrReceiverYvariables.frmParent = Me
-        Me.ucrReceiverYvariables.Location = New System.Drawing.Point(266, 183)
-        Me.ucrReceiverYvariables.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverYvariables.Name = "ucrReceiverYvariables"
-        Me.ucrReceiverYvariables.Selector = Nothing
-        Me.ucrReceiverYvariables.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverYvariables.TabIndex = 2
+        Me.ucrReceiverYVariables.frmParent = Me
+        Me.ucrReceiverYVariables.Location = New System.Drawing.Point(266, 183)
+        Me.ucrReceiverYVariables.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverYVariables.Name = "ucrReceiverYVariables"
+        Me.ucrReceiverYVariables.Selector = Nothing
+        Me.ucrReceiverYVariables.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverYVariables.strNcFilePath = ""
+        Me.ucrReceiverYVariables.TabIndex = 4
+        Me.ucrReceiverYVariables.ucrSelector = Nothing
         '
         'ucrSelectorCCA
         '
@@ -108,26 +114,26 @@ Partial Class dlgCanonicalCorrelationAnalysis
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 299)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 316)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 7
         '
         'ucrSaveResult
         '
-        Me.ucrSaveResult.Location = New System.Drawing.Point(10, 274)
+        Me.ucrSaveResult.Location = New System.Drawing.Point(10, 290)
         Me.ucrSaveResult.Name = "ucrSaveResult"
-        Me.ucrSaveResult.Size = New System.Drawing.Size(253, 24)
-        Me.ucrSaveResult.TabIndex = 6
+        Me.ucrSaveResult.Size = New System.Drawing.Size(255, 24)
+        Me.ucrSaveResult.TabIndex = 5
         '
         'dlgCanonicalCorrelationAnalysis
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 358)
+        Me.ClientSize = New System.Drawing.Size(416, 371)
         Me.Controls.Add(Me.ucrSaveResult)
-        Me.Controls.Add(Me.ucrReceiverYvariables)
-        Me.Controls.Add(Me.ucrReceiverXvariables)
+        Me.Controls.Add(Me.ucrReceiverYVariables)
+        Me.Controls.Add(Me.ucrReceiverXVariables)
         Me.Controls.Add(Me.lblYVariables)
         Me.Controls.Add(Me.cmdCCAOptions)
         Me.Controls.Add(Me.ucrSelectorCCA)
@@ -141,13 +147,14 @@ Partial Class dlgCanonicalCorrelationAnalysis
         Me.Tag = "Canonical_Correlation_Analysis"
         Me.Text = "Canonical Correlations"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSelectorCCA As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrReceiverYvariables As ucrReceiverMultiple
-    Friend WithEvents ucrReceiverXvariables As ucrReceiverMultiple
+    Friend WithEvents ucrReceiverYVariables As ucrReceiverMultiple
+    Friend WithEvents ucrReceiverXVariables As ucrReceiverMultiple
     Friend WithEvents lblYVariables As Label
     Friend WithEvents lblXVariables As Label
     Friend WithEvents cmdCCAOptions As Button
