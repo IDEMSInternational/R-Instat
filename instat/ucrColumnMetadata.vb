@@ -238,6 +238,7 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Sub mnuConvertDate_Click(sender As Object, e As EventArgs) Handles mnuConvertToDate.Click
+        dlgMakeDate.SetCurrentColumn(GetSelectedVariableNamesAsArray()(0), grdCurrSheet.Name)
         dlgMakeDate.ShowDialog()
     End Sub
 
@@ -248,6 +249,7 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Sub mnuDuplicateColumn_Click(sender As Object, e As EventArgs) Handles mnuDuplicateColumn.Click
+        dlgDuplicateColumns.SetCurrentColumn(GetSelectedVariableNamesAsArray()(0), grdCurrSheet.Name)
         dlgDuplicateColumns.ShowDialog()
     End Sub
 
@@ -301,6 +303,15 @@ Public Class ucrColumnMetadata
         Return strVars
     End Function
 
+    Private Function GetSelectedVariableNamesAsArray() As String()
+        Dim lstSelectedVars As New List(Of String)
+
+        For i As Integer = grdVariables.CurrentWorksheet.SelectionRange.Row To grdVariables.CurrentWorksheet.SelectionRange.Row + grdVariables.CurrentWorksheet.SelectionRange.Rows - 1
+            lstSelectedVars.Add(grdVariables.CurrentWorksheet(i, 0))
+        Next
+        Return lstSelectedVars.ToArray
+    End Function
+
     Private Sub UpdateRFunctionDataFrameParameters()
         If grdCurrSheet IsNot Nothing Then
             clsAppendVariablesMetaData.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
@@ -347,6 +358,7 @@ Public Class ucrColumnMetadata
         End If
     End Sub
     Private Sub mnuColumnRename_Click(sender As Object, e As EventArgs) Handles mnuColumnRename.Click
+        dlgName.SetCurrentColumn(GetSelectedVariableNamesAsArray()(0), grdCurrSheet.Name)
         dlgName.ShowDialog()
     End Sub
 
@@ -354,5 +366,4 @@ Public Class ucrColumnMetadata
         'TODO Selected column should automatically appear in dialog
         dlgConvertColumns.ShowDialog()
     End Sub
-
 End Class
