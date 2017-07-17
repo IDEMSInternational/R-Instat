@@ -25,6 +25,8 @@ Public Class ucrReorder
     Dim selectedIndex As Integer
     Dim itemsCount As Integer
     Public bWithQuotes As Boolean = True
+    Public bIsDataType As Boolean = True
+    Public Event SelectedIndexChanged(sender As Object, e As EventArgs)
 
     Public Sub New()
 
@@ -168,30 +170,32 @@ Public Class ucrReorder
 
     Public Sub LoadList()
         Dim vecNames As CharacterVector = Nothing
-        Select Case strDataType
-            Case "column"
-                If ucrDataFrameList IsNot Nothing AndAlso ucrDataFrameList.cboAvailableDataFrames.Text <> "" Then
-                    vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_column_names(data_name = " & Chr(34) & ucrDataFrameList.cboAvailableDataFrames.SelectedItem & Chr(34) & ")").AsCharacter
-                End If
-            Case "factor"
-                'Using Contains means ordered factors will also be shown.
-                If ucrReceiver IsNot Nothing AndAlso Not ucrReceiver.IsEmpty() AndAlso ucrReceiver.strCurrDataType.Contains("factor") Then
-                    vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels(data_name = " & Chr(34) & ucrReceiver.GetDataName() & Chr(34) & ", col_name = " & ucrReceiver.GetVariableNames() & ")").AsCharacter
-                End If
-            Case "data frame"
-                vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_data_names()").AsCharacter
-            Case "metadata"
-                If ucrDataFrameList IsNot Nothing AndAlso ucrDataFrameList.cboAvailableDataFrames.Text <> "" Then
-                    vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_metadata_fields(data_name = " & Chr(34) & ucrDataFrameList.cboAvailableDataFrames.Text & Chr(34) & ")").AsCharacter
-                End If
-            Case "object"
-                If ucrDataFrameList IsNot Nothing AndAlso ucrDataFrameList.cboAvailableDataFrames.Text <> "" Then
-                    vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_object_names(data_name = " & Chr(34) & ucrDataFrameList.cboAvailableDataFrames.Text & Chr(34) & ")").AsCharacter
-                End If
-            Case Else
-                vecNames = Nothing
-        End Select
-        FillListView(vecNames)
+        If bIsDataType Then
+            Select Case strDataType
+                Case "column"
+                    If ucrDataFrameList IsNot Nothing AndAlso ucrDataFrameList.cboAvailableDataFrames.Text <> "" Then
+                        vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_column_names(data_name = " & Chr(34) & ucrDataFrameList.cboAvailableDataFrames.SelectedItem & Chr(34) & ")").AsCharacter
+                    End If
+                Case "factor"
+                    'Using Contains means ordered factors will also be shown.
+                    If ucrReceiver IsNot Nothing AndAlso Not ucrReceiver.IsEmpty() AndAlso ucrReceiver.strCurrDataType.Contains("factor") Then
+                        vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels(data_name = " & Chr(34) & ucrReceiver.GetDataName() & Chr(34) & ", col_name = " & ucrReceiver.GetVariableNames() & ")").AsCharacter
+                    End If
+                Case "data frame"
+                    vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_data_names()").AsCharacter
+                Case "metadata"
+                    If ucrDataFrameList IsNot Nothing AndAlso ucrDataFrameList.cboAvailableDataFrames.Text <> "" Then
+                        vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_metadata_fields(data_name = " & Chr(34) & ucrDataFrameList.cboAvailableDataFrames.Text & Chr(34) & ")").AsCharacter
+                    End If
+                Case "object"
+                    If ucrDataFrameList IsNot Nothing AndAlso ucrDataFrameList.cboAvailableDataFrames.Text <> "" Then
+                        vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_object_names(data_name = " & Chr(34) & ucrDataFrameList.cboAvailableDataFrames.Text & Chr(34) & ")").AsCharacter
+                    End If
+                Case Else
+                    vecNames = Nothing
+            End Select
+            FillListView(vecNames)
+        End If
     End Sub
 
     Private Sub FillListView(vecNames As CharacterVector)
@@ -282,5 +286,9 @@ Public Class ucrReorder
 
     Private Sub ucrReorder_Load(sender As Object, e As EventArgs) Handles Me.Load
         LoadList()
+    End Sub
+
+    Private Sub lstAvailableData_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstAvailableData.SelectedIndexChanged
+        RaiseEvent SelectedIndexChanged(sender, e)
     End Sub
 End Class

@@ -24,7 +24,11 @@ Public Class ucrSelectorAddRemove
         ShowDataOptionsDialog()
     End Sub
 
-    Private Sub ucrSelectorAddRemove_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+    Public Overrides Sub EnableDataOptions(strCurrentType As String)
+        If strCurrentType = "column" Then
+            cmdOptions.Enabled = True
+        Else
+            cmdOptions.Enabled = False
+        End If
     End Sub
 End Class

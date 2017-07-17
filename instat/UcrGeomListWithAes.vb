@@ -346,7 +346,7 @@ Public Class ucrGeomListWithParameters
             If (clsGlobalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 OrElse ucrChkIgnoreGlobalAes.Checked) AndAlso clsLocalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 Then
                 clsCurrentAesFunction.AddParameter("x", Chr(34) & Chr(34))
             End If
-        ElseIf clsGeomFunction.strRCommand = "geom_point" OrElse clsGeomFunction.strRCommand = "geom_line" Then
+        ElseIf clsGeomFunction.strRCommand = "geom_point" OrElse clsGeomFunction.strRCommand = "geom_line" OrElse clsGeomFunction.strRCommand = "geom_jitter" Then
             If (clsGlobalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 OrElse ucrChkIgnoreGlobalAes.Checked) AndAlso clsLocalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 Then
                 clsCurrentAesFunction.AddParameter("x", Chr(34) & Chr(34))
             End If

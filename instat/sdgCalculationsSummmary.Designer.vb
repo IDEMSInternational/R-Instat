@@ -41,19 +41,20 @@ Partial Class sdgCalculationsSummmary
         Me.tbSummaryCalcs = New System.Windows.Forms.TabControl()
         Me.tbMain = New System.Windows.Forms.TabPage()
         Me.ucrReceiverByOrSort = New instat.ucrReceiverMultiple()
-        Me.ucrCalculationName = New instat.ucrInputComboBox()
+        Me.ucrInputCalculationName = New instat.ucrInputTextBox()
         Me.lblReceiverLabel = New System.Windows.Forms.Label()
-        Me.ucrResultName = New instat.ucrInputComboBox()
+        Me.ucrInputResultName = New instat.ucrInputTextBox()
         Me.lblResultName = New System.Windows.Forms.Label()
         Me.lblCalcName = New System.Windows.Forms.Label()
         Me.rdoSaveCalcAndResult = New System.Windows.Forms.RadioButton()
         Me.rdoSaveCalculation = New System.Windows.Forms.RadioButton()
         Me.rdoDoNotSave = New System.Windows.Forms.RadioButton()
         Me.lblType = New System.Windows.Forms.Label()
-        Me.ucrType = New instat.ucrInputComboBox()
+        Me.ucrInputType = New instat.ucrInputComboBox()
         Me.ucrSelectorBy = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrCalcSummary = New instat.ucrCalculator()
         Me.ucrDefineFilter = New instat.ucrFilter()
+        Me.ucrPnlSave = New instat.UcrPanel()
         Me.tbManipulations = New System.Windows.Forms.TabPage()
         Me.ucrManipulations = New instat.ucrReorder()
         Me.cmdManipDuplicate = New System.Windows.Forms.Button()
@@ -68,7 +69,7 @@ Partial Class sdgCalculationsSummmary
         Me.cmdSubCalcAdd = New System.Windows.Forms.Button()
         Me.lblSubCalcs = New System.Windows.Forms.Label()
         Me.cmdSubCalcEdit = New System.Windows.Forms.Button()
-        Me.ucrBaseSummmaryCalcSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.ucrBaseSubDialog = New instat.ucrButtonsSubdialogue()
         Me.tbSummaryCalcs.SuspendLayout()
         Me.tbMain.SuspendLayout()
         Me.tbManipulations.SuspendLayout()
@@ -89,19 +90,20 @@ Partial Class sdgCalculationsSummmary
         'tbMain
         '
         Me.tbMain.Controls.Add(Me.ucrReceiverByOrSort)
-        Me.tbMain.Controls.Add(Me.ucrCalculationName)
+        Me.tbMain.Controls.Add(Me.ucrInputCalculationName)
         Me.tbMain.Controls.Add(Me.lblReceiverLabel)
-        Me.tbMain.Controls.Add(Me.ucrResultName)
+        Me.tbMain.Controls.Add(Me.ucrInputResultName)
         Me.tbMain.Controls.Add(Me.lblResultName)
         Me.tbMain.Controls.Add(Me.lblCalcName)
         Me.tbMain.Controls.Add(Me.rdoSaveCalcAndResult)
         Me.tbMain.Controls.Add(Me.rdoSaveCalculation)
         Me.tbMain.Controls.Add(Me.rdoDoNotSave)
         Me.tbMain.Controls.Add(Me.lblType)
-        Me.tbMain.Controls.Add(Me.ucrType)
+        Me.tbMain.Controls.Add(Me.ucrInputType)
         Me.tbMain.Controls.Add(Me.ucrSelectorBy)
         Me.tbMain.Controls.Add(Me.ucrCalcSummary)
         Me.tbMain.Controls.Add(Me.ucrDefineFilter)
+        Me.tbMain.Controls.Add(Me.ucrPnlSave)
         Me.tbMain.Location = New System.Drawing.Point(4, 22)
         Me.tbMain.Name = "tbMain"
         Me.tbMain.Padding = New System.Windows.Forms.Padding(3)
@@ -112,20 +114,25 @@ Partial Class sdgCalculationsSummmary
         '
         'ucrReceiverByOrSort
         '
+        Me.ucrReceiverByOrSort.frmParent = Nothing
         Me.ucrReceiverByOrSort.Location = New System.Drawing.Point(239, 143)
         Me.ucrReceiverByOrSort.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverByOrSort.Name = "ucrReceiverByOrSort"
         Me.ucrReceiverByOrSort.Selector = Nothing
         Me.ucrReceiverByOrSort.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverByOrSort.strNcFilePath = ""
         Me.ucrReceiverByOrSort.TabIndex = 18
+        Me.ucrReceiverByOrSort.ucrSelector = Nothing
         '
-        'ucrCalculationName
+        'ucrInputCalculationName
         '
-        Me.ucrCalculationName.IsReadOnly = False
-        Me.ucrCalculationName.Location = New System.Drawing.Point(112, 421)
-        Me.ucrCalculationName.Name = "ucrCalculationName"
-        Me.ucrCalculationName.Size = New System.Drawing.Size(137, 21)
-        Me.ucrCalculationName.TabIndex = 12
+        Me.ucrInputCalculationName.AddQuotesIfUnrecognised = True
+        Me.ucrInputCalculationName.IsMultiline = False
+        Me.ucrInputCalculationName.IsReadOnly = False
+        Me.ucrInputCalculationName.Location = New System.Drawing.Point(373, 439)
+        Me.ucrInputCalculationName.Name = "ucrInputCalculationName"
+        Me.ucrInputCalculationName.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputCalculationName.TabIndex = 12
         '
         'lblReceiverLabel
         '
@@ -136,18 +143,20 @@ Partial Class sdgCalculationsSummmary
         Me.lblReceiverLabel.TabIndex = 15
         Me.lblReceiverLabel.Text = "Factors:"
         '
-        'ucrResultName
+        'ucrInputResultName
         '
-        Me.ucrResultName.IsReadOnly = False
-        Me.ucrResultName.Location = New System.Drawing.Point(112, 444)
-        Me.ucrResultName.Name = "ucrResultName"
-        Me.ucrResultName.Size = New System.Drawing.Size(137, 21)
-        Me.ucrResultName.TabIndex = 13
+        Me.ucrInputResultName.AddQuotesIfUnrecognised = True
+        Me.ucrInputResultName.IsMultiline = False
+        Me.ucrInputResultName.IsReadOnly = False
+        Me.ucrInputResultName.Location = New System.Drawing.Point(102, 439)
+        Me.ucrInputResultName.Name = "ucrInputResultName"
+        Me.ucrInputResultName.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputResultName.TabIndex = 13
         '
         'lblResultName
         '
         Me.lblResultName.AutoSize = True
-        Me.lblResultName.Location = New System.Drawing.Point(12, 448)
+        Me.lblResultName.Location = New System.Drawing.Point(12, 442)
         Me.lblResultName.Name = "lblResultName"
         Me.lblResultName.Size = New System.Drawing.Size(71, 13)
         Me.lblResultName.TabIndex = 10
@@ -156,7 +165,7 @@ Partial Class sdgCalculationsSummmary
         'lblCalcName
         '
         Me.lblCalcName.AutoSize = True
-        Me.lblCalcName.Location = New System.Drawing.Point(12, 425)
+        Me.lblCalcName.Location = New System.Drawing.Point(273, 442)
         Me.lblCalcName.Name = "lblCalcName"
         Me.lblCalcName.Size = New System.Drawing.Size(93, 13)
         Me.lblCalcName.TabIndex = 9
@@ -165,7 +174,7 @@ Partial Class sdgCalculationsSummmary
         'rdoSaveCalcAndResult
         '
         Me.rdoSaveCalcAndResult.AutoSize = True
-        Me.rdoSaveCalcAndResult.Location = New System.Drawing.Point(262, 471)
+        Me.rdoSaveCalcAndResult.Location = New System.Drawing.Point(12, 476)
         Me.rdoSaveCalcAndResult.Name = "rdoSaveCalcAndResult"
         Me.rdoSaveCalcAndResult.Size = New System.Drawing.Size(159, 17)
         Me.rdoSaveCalcAndResult.TabIndex = 8
@@ -176,23 +185,23 @@ Partial Class sdgCalculationsSummmary
         'rdoSaveCalculation
         '
         Me.rdoSaveCalculation.AutoSize = True
-        Me.rdoSaveCalculation.Location = New System.Drawing.Point(139, 471)
+        Me.rdoSaveCalculation.Location = New System.Drawing.Point(186, 476)
         Me.rdoSaveCalculation.Name = "rdoSaveCalculation"
-        Me.rdoSaveCalculation.Size = New System.Drawing.Size(105, 17)
+        Me.rdoSaveCalculation.Size = New System.Drawing.Size(129, 17)
         Me.rdoSaveCalculation.TabIndex = 7
         Me.rdoSaveCalculation.TabStop = True
-        Me.rdoSaveCalculation.Text = "Save Calculation"
+        Me.rdoSaveCalculation.Text = "Save Calculation Only"
         Me.rdoSaveCalculation.UseVisualStyleBackColor = True
         '
         'rdoDoNotSave
         '
         Me.rdoDoNotSave.AutoSize = True
-        Me.rdoDoNotSave.Location = New System.Drawing.Point(15, 471)
+        Me.rdoDoNotSave.Location = New System.Drawing.Point(330, 476)
         Me.rdoDoNotSave.Name = "rdoDoNotSave"
-        Me.rdoDoNotSave.Size = New System.Drawing.Size(87, 17)
+        Me.rdoDoNotSave.Size = New System.Drawing.Size(90, 17)
         Me.rdoDoNotSave.TabIndex = 6
         Me.rdoDoNotSave.TabStop = True
-        Me.rdoDoNotSave.Text = "Do Not Save"
+        Me.rdoDoNotSave.Text = "Save Nothing"
         Me.rdoDoNotSave.UseVisualStyleBackColor = True
         '
         'lblType
@@ -204,13 +213,14 @@ Partial Class sdgCalculationsSummmary
         Me.lblType.TabIndex = 4
         Me.lblType.Text = "Type:"
         '
-        'ucrType
+        'ucrInputType
         '
-        Me.ucrType.IsReadOnly = False
-        Me.ucrType.Location = New System.Drawing.Point(8, 28)
-        Me.ucrType.Name = "ucrType"
-        Me.ucrType.Size = New System.Drawing.Size(120, 21)
-        Me.ucrType.TabIndex = 3
+        Me.ucrInputType.AddQuotesIfUnrecognised = True
+        Me.ucrInputType.IsReadOnly = False
+        Me.ucrInputType.Location = New System.Drawing.Point(8, 28)
+        Me.ucrInputType.Name = "ucrInputType"
+        Me.ucrInputType.Size = New System.Drawing.Size(120, 21)
+        Me.ucrInputType.TabIndex = 3
         '
         'ucrSelectorBy
         '
@@ -235,6 +245,13 @@ Partial Class sdgCalculationsSummmary
         Me.ucrDefineFilter.Name = "ucrDefineFilter"
         Me.ucrDefineFilter.Size = New System.Drawing.Size(770, 359)
         Me.ucrDefineFilter.TabIndex = 19
+        '
+        'ucrPnlSave
+        '
+        Me.ucrPnlSave.Location = New System.Drawing.Point(3, 466)
+        Me.ucrPnlSave.Name = "ucrPnlSave"
+        Me.ucrPnlSave.Size = New System.Drawing.Size(427, 38)
+        Me.ucrPnlSave.TabIndex = 20
         '
         'tbManipulations
         '
@@ -376,19 +393,19 @@ Partial Class sdgCalculationsSummmary
         Me.cmdSubCalcEdit.Text = "Edit"
         Me.cmdSubCalcEdit.UseVisualStyleBackColor = True
         '
-        'ucrBaseSummmaryCalcSubdialog
+        'ucrBaseSubDialog
         '
-        Me.ucrBaseSummmaryCalcSubdialog.Location = New System.Drawing.Point(312, 533)
-        Me.ucrBaseSummmaryCalcSubdialog.Name = "ucrBaseSummmaryCalcSubdialog"
-        Me.ucrBaseSummmaryCalcSubdialog.Size = New System.Drawing.Size(142, 30)
-        Me.ucrBaseSummmaryCalcSubdialog.TabIndex = 0
+        Me.ucrBaseSubDialog.Location = New System.Drawing.Point(332, 533)
+        Me.ucrBaseSubDialog.Name = "ucrBaseSubDialog"
+        Me.ucrBaseSubDialog.Size = New System.Drawing.Size(142, 30)
+        Me.ucrBaseSubDialog.TabIndex = 0
         '
         'sdgCalculationsSummmary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(806, 565)
-        Me.Controls.Add(Me.ucrBaseSummmaryCalcSubdialog)
+        Me.Controls.Add(Me.ucrBaseSubDialog)
         Me.Controls.Add(Me.tbSummaryCalcs)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -407,7 +424,7 @@ Partial Class sdgCalculationsSummmary
 
     End Sub
 
-    Friend WithEvents ucrBaseSummmaryCalcSubdialog As ucrButtonsSubdialogue
+    Friend WithEvents ucrBaseSubDialog As ucrButtonsSubdialogue
     Friend WithEvents tbSummaryCalcs As TabControl
     Friend WithEvents tbMain As TabPage
     Friend WithEvents lblResultName As Label
@@ -416,11 +433,11 @@ Partial Class sdgCalculationsSummmary
     Friend WithEvents rdoSaveCalculation As RadioButton
     Friend WithEvents rdoDoNotSave As RadioButton
     Friend WithEvents lblType As Label
-    Friend WithEvents ucrType As ucrInputComboBox
+    Friend WithEvents ucrInputType As ucrInputComboBox
     Friend WithEvents tbManipulations As TabPage
     Friend WithEvents tbSubCalcs As TabPage
-    Friend WithEvents ucrResultName As ucrInputComboBox
-    Friend WithEvents ucrCalculationName As ucrInputComboBox
+    Friend WithEvents ucrInputResultName As ucrInputTextBox
+    Friend WithEvents ucrInputCalculationName As ucrInputTextBox
     Friend WithEvents lblReceiverLabel As Label
     Friend WithEvents ucrSelectorBy As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrCalcSummary As ucrCalculator
@@ -438,4 +455,5 @@ Partial Class sdgCalculationsSummmary
     Friend WithEvents cmdSubCalcEdit As Button
     Friend WithEvents ucrReceiverByOrSort As ucrReceiverMultiple
     Friend WithEvents ucrDefineFilter As ucrFilter
+    Friend WithEvents ucrPnlSave As UcrPanel
 End Class
