@@ -50,7 +50,7 @@ Public Class dlgFromLibrary
         lstCollection.HideSelection = False
 
         'This is now a static list because packages are not loaded in R.
-        lstAvailablePackages = {"agridat", "candisc", "CircStats", "circular", "climdex.pcic", "DAAG", "dae", "datasets", "dplyr", "EnvStats", "Evapotranspiration", "extRemes", "factoextra", "FactoMineR", "faraway", "fitdistrplus", "gapminder", "GGally", "ggplot2", "ggthemes", "htmlTable", "lme4", "lubridate", "openair", "plotly", "plotrix", "plyr", "reshape2", "sjmisc", "stringr", "survival"}.ToList()
+        lstAvailablePackages = {"agridat", "candisc", "CircStats", "circular", "climdex.pcic", "DAAG", "dae", "datasets", "dplyr", "EnvStats", "Evapotranspiration", "extRemes", "factoextra", "FactoMineR", "faraway", "fitdistrplus", "gapminder", "GGally", "ggplot2", "ggthemes", "htmlTable", "lme4", "lubridate", "openair", "plotly", "plotrix", "plyr", "questionr", "reshape2", "sjmisc", "stringr", "survival"}.ToList()
         'TODO possibly don't want to be running this much R code in initialse.
         '     alternatively have to make sure all packages have some data
         For i = lstAvailablePackages.Count - 1 To 0 Step -1
