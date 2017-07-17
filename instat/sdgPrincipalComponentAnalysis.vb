@@ -55,6 +55,8 @@ Public Class sdgPrincipalComponentAnalysis
 
         ucrNudDim1.SetParameter(New RParameter("first_dim", 0, bNewIncludeArgumentName:=False))
         ucrNudDim1.SetMinMax(1, 2)
+        'temp fix to prevent clearing value
+        ucrNudDim1.bUpdateRCodeFromControl = True
 
         ucrNudDim2.SetParameter(New RParameter("second_dim", 1, bNewIncludeArgumentName:=False))
         ucrNudDim2.SetMinMax(1, 2)
@@ -95,6 +97,7 @@ Public Class sdgPrincipalComponentAnalysis
         dctLabelOptionsChoice.Add("Variance", Chr(34) & "variance" & Chr(34))
         dctLabelOptionsChoice.Add("Eigenvalue", Chr(34) & "eigenvalue" & Chr(34))
         ' our default is variance. not sure r-default. check.
+        ucrInputLabel1.SetRDefault(Chr(34) & "variance" & Chr(34))
         ucrInputLabel1.SetDropDownStyleAsNonEditable()
         ucrInputLabel1.SetItems(dctLabelOptionsChoice)
 
@@ -107,7 +110,7 @@ Public Class sdgPrincipalComponentAnalysis
         dctOptionsForLabel.Add("Variables", Chr(34) & "var" & Chr(34))
         dctOptionsForLabel.Add("None", Chr(34) & "none" & Chr(34))
         ucrInputLabel2.SetItems(dctOptionsForLabel)
-        ucrInputLabel2.SetRDefault("all")
+        ucrInputLabel2.SetRDefault(Chr(34) & "all" & Chr(34))
         ucrInputLabel2.SetDropDownStyleAsNonEditable()
 
         ucrReceiverFactor.SetParameter(New RParameter("factor_col", 7))

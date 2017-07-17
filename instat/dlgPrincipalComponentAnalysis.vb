@@ -141,6 +141,7 @@ Public Class dlgPrincipalComponentAnalysis
         clsRScreePlotFunction.SetPackageName("factoextra")
         clsRScreePlotFunction.SetRCommand("fviz_screeplot")
         clsRScreePlotFunction.AddParameter("X", clsRFunctionParameter:=clsPCAFunction)
+        clsRScreePlotFunction.iCallType = 3
 
         clsRThemeMinimal.SetPackageName("ggplot2")
         clsRThemeMinimal.SetRCommand("theme_minimal")
@@ -153,6 +154,7 @@ Public Class dlgPrincipalComponentAnalysis
         clsRVariablesPlotFunctionValue.AddParameter("first_dim", 1, bIncludeArgumentName:=False, iPosition:=0)
         clsRVariablesPlotFunctionValue.AddParameter("second_dim", 2, bIncludeArgumentName:=False, iPosition:=1)
         clsRVariablesPlotFunction.AddParameter("axes", clsRFunctionParameter:=clsRVariablesPlotFunctionValue, iPosition:=1)
+        clsRVariablesPlotFunction.iCallType = 3
 
         ' Individual Plot
         clsRIndividualsPlotFunction.SetPackageName("factoextra")
@@ -162,6 +164,7 @@ Public Class dlgPrincipalComponentAnalysis
         clsRIndividualsFunctionValue.AddParameter("first_dim", 1, bIncludeArgumentName:=False, iPosition:=0)
         clsRIndividualsFunctionValue.AddParameter("second_dim", 2, bIncludeArgumentName:=False, iPosition:=1)
         clsRIndividualsPlotFunction.AddParameter("axes", clsRFunctionParameter:=clsRIndividualsFunctionValue, iPosition:=1)
+        clsRIndividualsPlotFunction.iCallType = 3
 
         ' Biplot
         clsRBiplotFunction.SetPackageName("factoextra")
@@ -171,6 +174,7 @@ Public Class dlgPrincipalComponentAnalysis
         clsRBiplotFunctionValue.AddParameter("first_dim", 1, bIncludeArgumentName:=False, iPosition:=0)
         clsRBiplotFunctionValue.AddParameter("second_dim", 2, bIncludeArgumentName:=False, iPosition:=1)
         clsRBiplotFunction.AddParameter("axes", clsRFunctionParameter:=clsRBiplotFunctionValue, iPosition:=1)
+        clsRBiplotFunction.iCallType = 3
 
         ' Barplot
         clsRBarPlot0.SetOperation("+")
