@@ -213,37 +213,49 @@ Public Class dlgDescribeTwoVarGraph
                     BoxPlot()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRBoxAesFunction, iPosition:=0)
                     clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRBoxPlotGeom, iPosition:=1)
+                    clsBaseOperator.RemoveParameterByName("geom1")
+
                 Case "Frequency polygon"
                     FrequencyPolygon()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRFreqPolyAesFunction, iPosition:=0)
                     clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRFrequencyPolygonGeom, iPosition:=1)
+                    clsBaseOperator.RemoveParameterByName("geom1")
+
                 Case "Histogram"
                     Histogram()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRHistAesFunction, iPosition:=0)
                     clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRHistogramGeom, iPosition:=1)
+                    clsBaseOperator.RemoveParameterByName("geom1")
+
                 Case "Density plot"
                     DensityPlot()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRDensityAesFunction, iPosition:=0)
                     clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRDensityPlotGeom, iPosition:=1)
+                    clsBaseOperator.RemoveParameterByName("geom1")
+
                 Case "Dot plot"
                     DotPlot()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRDotAesFunction, iPosition:=0)
                     clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRDotPlotGeom, iPosition:=1)
+                    clsBaseOperator.RemoveParameterByName("geom1")
 
                 Case "Point plot"
                     ScatterLinePlot()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRScatterAesFunction, iPosition:=0)
                     clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRScatterPlotGeom, iPosition:=1)
+                    clsBaseOperator.RemoveParameterByName("geom1")
 
                 Case "Violin plot"
                     ViolinPlot()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRViolinAesFunction, iPosition:=0)
                     clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRViolinPlotGeom, iPosition:=1)
+                    clsBaseOperator.RemoveParameterByName("geom1")
 
                 Case "Jitter plot"
                     JitterPlot()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRJitterAesFunction, iPosition:=0)
                     clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRJitterPlotGeom, iPosition:=1)
+                    clsBaseOperator.RemoveParameterByName("geom1")
 
                 Case "Boxplot + Jitter"
                     BoxPlot()
@@ -276,36 +288,51 @@ Public Class dlgDescribeTwoVarGraph
                     BoxPlot()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRBoxAesFunction2, iPosition:=0)
                     clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRBoxPlotGeom, iPosition:=1)
+                    clsBaseOperator.RemoveParameterByName("geom1")
+
                 Case "Frequency polygon"
                     FrequencyPolygon()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRFreqPolyAesFunction2, iPosition:=0)
                     clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRFrequencyPolygonGeom, iPosition:=1)
+                    clsBaseOperator.RemoveParameterByName("geom1")
+
                 Case "Histogram"
                     Histogram()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRHistAesFunction2, iPosition:=0)
                     clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRHistogramGeom, iPosition:=1)
+                    clsBaseOperator.RemoveParameterByName("geom1")
+
                 Case "Density plot"
                     DensityPlot()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRDensityAesFunction2, iPosition:=0)
                     clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRDensityPlotGeom, iPosition:=1)
+                    clsBaseOperator.RemoveParameterByName("geom1")
+
                 Case "Dot plot"
                     DotPlot()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRDotAesFunction2, iPosition:=0)
                     clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRDotPlotGeom, iPosition:=1)
+                    clsBaseOperator.RemoveParameterByName("geom1")
+
                 Case "Point plot"
                     ScatterLinePlot()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRScatterAesFunction2, iPosition:=0)
                     clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRScatterPlotGeom, iPosition:=1)
+                    clsBaseOperator.RemoveParameterByName("geom1")
 
                 Case "Violin plot"
                     ViolinPlot()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRViolinAesFunction2, iPosition:=0)
                     clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRViolinPlotGeom, iPosition:=1)
+                    clsBaseOperator.RemoveParameterByName("geom1")
+
 
                 Case "Jitter plot"
                     JitterPlot()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRJitterAesFunction2, iPosition:=0)
                     clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRJitterPlotGeom, iPosition:=1)
+                    clsBaseOperator.RemoveParameterByName("geom1")
+
 
                 Case "Boxplot + Jitter"
                     BoxPlot()
@@ -314,19 +341,19 @@ Public Class dlgDescribeTwoVarGraph
                     JitterPlot()
                     clsBaseOperator.AddParameter("geom1", clsRFunctionParameter:=clsRJitterPlotGeom, iPosition:=1)
 
-                Case "Violin Plot + Jitter plot"
+                Case "Violin plot + Jitter plot"
                     ViolinPlot()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRViolinAesFunction2, iPosition:=0)
                     clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRViolinPlotGeom, iPosition:=1)
                     JitterPlot()
-                    clsBaseOperator.AddParameter("geom1", clsRFunctionParameter:=clsRJitterPlotGeom, iPosition:=2)
+                    clsBaseOperator.AddParameter("geom1", clsRFunctionParameter:=clsRJitterPlotGeom, iPosition:=1)
 
                 Case "Violin plot + Boxplot"
                     BoxPlot()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRBoxAesFunction2, iPosition:=0)
                     clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRBoxPlotGeom, iPosition:=1)
                     ViolinPlot()
-                    clsBaseOperator.AddParameter("geom1", clsRFunctionParameter:=clsRViolinAesFunction2, iPosition:=2)
+                    clsBaseOperator.AddParameter("geom1", clsRFunctionParameter:=clsRViolinPlotGeom, iPosition:=2)
             End Select
             'catogerical by cateogrical case
         ElseIf (strVarType <> "numeric" AndAlso strVarType <> "integer") AndAlso (strVarType <> "numeric" AndAlso strVarType <> "integer") Then
