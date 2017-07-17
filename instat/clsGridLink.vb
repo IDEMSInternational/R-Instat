@@ -72,6 +72,7 @@ Public Class clsGridLink
         Dim clsGetCombinedMetadata As New RFunction
         Dim clsSetMetadataChanged As New RFunction
         Dim expVarMetadata As SymbolicExpression
+        Dim expTemp As SymbolicExpression
 
         clsDataChanged.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_changed")
         clsMetadataChanged.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_metadata_changed")
@@ -92,9 +93,24 @@ Public Class clsGridLink
         clsSetMetadataChanged.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_metadata_changed")
 
         If frmMain.clsRLink.bInstatObjectExists Then
-            bRDataChanged = frmMain.clsRLink.RunInternalScriptGetValue(clsDataChanged.ToScript()).AsLogical(0)
-            bRMetadataChanged = frmMain.clsRLink.RunInternalScriptGetValue(clsMetadataChanged.ToScript()).AsLogical(0)
-            bRVariablesMetadataChanged = frmMain.clsRLink.RunInternalScriptGetValue(clsVariablesMetadataChanged.ToScript()).AsLogical(0)
+            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsDataChanged.ToScript())
+            If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
+                bRDataChanged = expTemp.AsLogical(0)
+            Else
+                bRDataChanged = False
+            End If
+            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsMetadataChanged.ToScript())
+            If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
+                bRMetadataChanged = expTemp.AsLogical(0)
+            Else
+                bRMetadataChanged = False
+            End If
+            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsVariablesMetadataChanged.ToScript())
+            If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
+                bRVariablesMetadataChanged = expTemp.AsLogical(0)
+            Else
+                bRVariablesMetadataChanged = False
+            End If
 
             If (bGrdDataExists And (bGrdDataChanged Or bRDataChanged)) Or (bGrdVariablesMetadataExists And (bGrdVariablesMetadataChanged Or bRVariablesMetadataChanged)) Then
                 lstDataNames = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataNames.ToScript()).AsList
