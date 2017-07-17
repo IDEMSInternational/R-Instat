@@ -98,7 +98,11 @@ Public Class ucrReceiverSingle
                     Else
                         expColumnType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript(), bSilent:=True)
                         If expColumnType IsNot Nothing AndAlso expColumnType.Type <> Internals.SymbolicExpressionType.Null Then
-                            strCurrDataType = expColumnType.AsCharacter(0)
+                            If expColumnType.AsCharacter.Count > 1 Then
+                                strCurrDataType = Join(expColumnType.AsCharacter.ToArray, ",")
+                            Else
+                                strCurrDataType = expColumnType.AsCharacter(0)
+                            End If
                         Else
                             strCurrDataType = ""
                             bRemove = True
