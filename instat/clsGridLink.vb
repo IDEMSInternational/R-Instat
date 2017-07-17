@@ -72,6 +72,7 @@ Public Class clsGridLink
         Dim clsGetCombinedMetadata As New RFunction
         Dim clsSetMetadataChanged As New RFunction
         Dim expVarMetadata As SymbolicExpression
+        Dim expTemp As SymbolicExpression
 
         clsDataChanged.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_changed")
         clsMetadataChanged.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_metadata_changed")
@@ -92,9 +93,24 @@ Public Class clsGridLink
         clsSetMetadataChanged.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_metadata_changed")
 
         If frmMain.clsRLink.bInstatObjectExists Then
-            bRDataChanged = frmMain.clsRLink.RunInternalScriptGetValue(clsDataChanged.ToScript()).AsLogical(0)
-            bRMetadataChanged = frmMain.clsRLink.RunInternalScriptGetValue(clsMetadataChanged.ToScript()).AsLogical(0)
-            bRVariablesMetadataChanged = frmMain.clsRLink.RunInternalScriptGetValue(clsVariablesMetadataChanged.ToScript()).AsLogical(0)
+            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsDataChanged.ToScript())
+            If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
+                bRDataChanged = expTemp.AsLogical(0)
+            Else
+                bRDataChanged = False
+            End If
+            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsMetadataChanged.ToScript())
+            If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
+                bRMetadataChanged = expTemp.AsLogical(0)
+            Else
+                bRMetadataChanged = False
+            End If
+            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsVariablesMetadataChanged.ToScript())
+            If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
+                bRVariablesMetadataChanged = expTemp.AsLogical(0)
+            Else
+                bRVariablesMetadataChanged = False
+            End If
 
             If (bGrdDataExists And (bGrdDataChanged Or bRDataChanged)) Or (bGrdVariablesMetadataExists And (bGrdVariablesMetadataChanged Or bRVariablesMetadataChanged)) Then
                 lstDataNames = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataNames.ToScript()).AsList
@@ -131,61 +147,61 @@ Public Class clsGridLink
                         End If
                     End If
                 Next
-                'delete old sheets
-                'TODO look at this code to improve it (simplify)
-                If bGrdDataExists Then
-                    k = 0
-                    For i = 0 To grdData.Worksheets.Count - 1
-                        ' look up convert genericvector to string list to avoid this loop
-                        bFoundName = False
-                        For j = 0 To lstDataNames.Length - 1
-                            strDataName = lstDataNames.AsCharacter(j)
-                            If strDataName = grdData.Worksheets(i - k).Name Then
-                                bFoundName = True
-                                Exit For
+                    'delete old sheets
+                    'TODO look at this code to improve it (simplify)
+                    If bGrdDataExists Then
+                        k = 0
+                        For i = 0 To grdData.Worksheets.Count - 1
+                            ' look up convert genericvector to string list to avoid this loop
+                            bFoundName = False
+                            For j = 0 To lstDataNames.Length - 1
+                                strDataName = lstDataNames.AsCharacter(j)
+                                If strDataName = grdData.Worksheets(i - k).Name Then
+                                    bFoundName = True
+                                    Exit For
+                                End If
+                            Next
+                            If Not bFoundName Then
+                                shtTemp = grdData.Worksheets(i - k)
+                                grdData.Worksheets.Remove(shtTemp)
+                                k = k + 1
                             End If
                         Next
-                        If Not bFoundName Then
-                            shtTemp = grdData.Worksheets(i - k)
-                            grdData.Worksheets.Remove(shtTemp)
-                            k = k + 1
-                        End If
-                    Next
-                End If
+                    End If
 
-                If bGrdVariablesMetadataExists Then
-                    k = 0
-                    For i = 0 To grdVariablesMetadata.Worksheets.Count - 1
-                        ' look up convert genericvector to string list to avoid this loop
-                        bFoundName = False
-                        For j = 0 To lstDataNames.Length - 1
-                            strDataName = lstDataNames.AsCharacter(j)
-                            If strDataName = grdVariablesMetadata.Worksheets(i - k).Name Then
-                                bFoundName = True
-                                Exit For
+                    If bGrdVariablesMetadataExists Then
+                        k = 0
+                        For i = 0 To grdVariablesMetadata.Worksheets.Count - 1
+                            ' look up convert genericvector to string list to avoid this loop
+                            bFoundName = False
+                            For j = 0 To lstDataNames.Length - 1
+                                strDataName = lstDataNames.AsCharacter(j)
+                                If strDataName = grdVariablesMetadata.Worksheets(i - k).Name Then
+                                    bFoundName = True
+                                    Exit For
+                                End If
+                            Next
+                            If Not bFoundName Then
+                                shtTemp = grdVariablesMetadata.Worksheets(i - k)
+                                grdVariablesMetadata.Worksheets.Remove(shtTemp)
+                                k = k + 1
                             End If
                         Next
-                        If Not bFoundName Then
-                            shtTemp = grdVariablesMetadata.Worksheets(i - k)
-                            grdVariablesMetadata.Worksheets.Remove(shtTemp)
-                            k = k + 1
-                        End If
-                    Next
+                    End If
                 End If
-            End If
 
-            If bGrdMetadataExists And (bGrdMetadataChanged Or bRMetadataChanged) Then
-                clsGetCombinedMetadata.AddParameter("convert_to_character", "TRUE")
-                dfTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetCombinedMetadata.ToScript()).AsDataFrame()
-                'TODO test if column limit is needed for stability in metadata grids
-                FillSheet(dfTemp, "metadata", grdMetadata, iColMax:=iMaxCols)
-                clsSetMetadataChanged.AddParameter("new_val", "TRUE")
-                frmMain.clsRLink.RunInternalScript(clsSetMetadataChanged.ToScript())
-            End If
+                If bGrdMetadataExists And (bGrdMetadataChanged Or bRMetadataChanged) Then
+                    clsGetCombinedMetadata.AddParameter("convert_to_character", "TRUE")
+                    dfTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetCombinedMetadata.ToScript()).AsDataFrame()
+                    'TODO test if column limit is needed for stability in metadata grids
+                    FillSheet(dfTemp, "metadata", grdMetadata, iColMax:=iMaxCols)
+                    clsSetMetadataChanged.AddParameter("new_val", "TRUE")
+                    frmMain.clsRLink.RunInternalScript(clsSetMetadataChanged.ToScript())
+                End If
 
-            frmMain.clsRLink.RunInternalScript(frmMain.clsRLink.strInstatDataObject & "$data_objects_changed <- FALSE")
-        Else
-            grdData.Worksheets.Clear()
+                frmMain.clsRLink.RunInternalScript(frmMain.clsRLink.strInstatDataObject & "$data_objects_changed <- FALSE")
+            Else
+                grdData.Worksheets.Clear()
         End If
 
         If grdData.Worksheets.Count = 0 Then
