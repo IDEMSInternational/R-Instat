@@ -775,12 +775,13 @@ instat_object$set("public", "rename_dataframe", function(data_name, new_value = 
       private$.links[[i]]$to_data_frame <- new_value
     }
   }
-  data_obj$set_data_changed(TRUE)
   if(label != "") {
     data_obj$append_to_metadata(property = "label" , new_val = label)
-    data_obj$set_metadata_changed(TRUE)
   }
-} 
+  data_obj$set_data_changed(TRUE)
+  data_obj$set_metadata_changed(TRUE)
+  data_obj$set_variables_metadata_changed(TRUE)
+}
 )
 
 instat_object$set("public", "convert_column_to_type", function(data_name, col_names = c(), to_type, factor_values = NULL, set_digits, set_decimals = FALSE, keep_attr = TRUE, ignore_labels = FALSE) {

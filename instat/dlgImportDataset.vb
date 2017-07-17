@@ -117,7 +117,7 @@ Public Class dlgImportDataset
 
         'RDS Controls
 
-        ucrChkImportChangesLogRDS.SetText("Import Changes log")
+        ucrChkImportChangesLogRDS.SetText("Import changes log")
         ucrChkImportChangesLogRDS.SetParameter(New RParameter("include_logs"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkImportChangesLogRDS.SetRDefault("TRUE")
         'ucrChkImportChangesLog.AddParameterPresentCondition(True, frmMain.clsRLink.strInstatDataObject & "$import_RDS")
@@ -684,9 +684,6 @@ Public Class dlgImportDataset
         ' add the item to the MRU (Most Recently Used) list...
         'Disabled until implemented correctly
         frmMain.clsRecentItems.addToMenu(strFilePathSystem)
-        If strFileType = "RDS" Then
-            frmMain.strSaveFilePath = strFilePathSystem
-        End If
     End Sub
 
     Private Sub CSVControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkStringsAsFactorsCSV.ControlValueChanged, ucrInputNAStringsCSV.ControlValueChanged, ucrInputEncodingCSV.ControlValueChanged, ucrInputSeparatorCSV.ControlValueChanged, ucrInputHeadersCSV.ControlValueChanged, ucrInputDecimalCSV.ControlValueChanged, ucrNudLinesToSkipCSV.ControlValueChanged, ucrPnlRowNamesCSV.ControlValueChanged
