@@ -204,15 +204,17 @@ Public Class dlgPrincipalComponentAnalysis
         clsRBarPlot0.AddParameter(clsRFunctionParameter:=clsRBarPlotGeom)
         clsRBarPlot.AddParameter(iPosition:=0, clsROperatorParameter:=clsRBarPlot0)
         clsRBarPlot.AddParameter(clsRFunctionParameter:=clsRBarPlotFacet)
-        ucrBase.clsRsyntax.ClearCodes()
         clsRScreePlotFunction.AddParameter("choice", Chr(34) & "variance" & Chr(34))
         clsBaseOperator.AddParameter("plot", clsRFunctionParameter:=clsRScreePlotFunction, iPosition:=0)
         clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsRThemeMinimal, iPosition:=1)
-        ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
         clsBaseOperator.iCallType = 3
+
+        ucrBase.clsRsyntax.ClearCodes()
+        ucrBase.clsRsyntax.SetBaseRFunction(clsPCAFunction)
         ucrBase.clsRsyntax.AddToAfterCodes(clsREigenValues, iPosition:=1)
         ucrBase.clsRsyntax.AddToAfterCodes(clsREigenVectors, iPosition:=2)
         ucrBase.clsRsyntax.AddToAfterCodes(clsRRotation, iPosition:=3)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsBaseOperator, iPosition:=4)
         ModelName()
         bResetSubdialog = True
     End Sub
@@ -290,7 +292,7 @@ Public Class dlgPrincipalComponentAnalysis
         clsRRotation.AddParameter("STATS", "sqrt(" & clsRRotationEig.ToScript.ToString & "[,1])")
         ModelName()
     End Sub
-    
+
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverMultiplePCA.ControlContentsChanged, ucrNudNumberOfComp.ControlContentsChanged
         TestOKEnabled()
     End Sub
