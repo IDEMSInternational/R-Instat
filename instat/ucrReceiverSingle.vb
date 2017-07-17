@@ -57,7 +57,7 @@ Public Class ucrReceiverSingle
         'If RemoveSelected() later contains other things, this may need to be updated.
         'RemoveSelected()
         If Selector IsNot Nothing Then
-            Selector.RemoveFromVariablesList(txtReceiverSingle.Text)
+            Selector.RemoveFromVariablesList(txtReceiverSingle.Text, strDataFrame)
         End If
         MyBase.Add(strItem, strDataFrame)
 
@@ -98,7 +98,11 @@ Public Class ucrReceiverSingle
                     Else
                         expColumnType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript(), bSilent:=True)
                         If expColumnType IsNot Nothing AndAlso expColumnType.Type <> Internals.SymbolicExpressionType.Null Then
-                            strCurrDataType = expColumnType.AsCharacter(0)
+                            If expColumnType.AsCharacter.Count > 1 Then
+                                strCurrDataType = Join(expColumnType.AsCharacter.ToArray, ",")
+                            Else
+                                strCurrDataType = expColumnType.AsCharacter(0)
+                            End If
                         Else
                             strCurrDataType = ""
                             bRemove = True
@@ -110,7 +114,7 @@ Public Class ucrReceiverSingle
             End If
             strDataFrameName = strDataFrame
             txtReceiverSingle.Text = strItem
-            Selector.AddToVariablesList(strItem)
+            Selector.AddToVariablesList(strItem, strDataFrameName)
             If bRemove Then
                 RemoveSelected()
             End If
@@ -120,7 +124,7 @@ Public Class ucrReceiverSingle
     Public Overrides Sub RemoveSelected()
         If txtReceiverSingle.Enabled Then
             If Selector IsNot Nothing Then
-                Selector.RemoveFromVariablesList(txtReceiverSingle.Text)
+                Selector.RemoveFromVariablesList(txtReceiverSingle.Text, strDataFrameName)
             End If
             txtReceiverSingle.Text = ""
             strDataFrameName = ""

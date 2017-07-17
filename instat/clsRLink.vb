@@ -80,7 +80,7 @@ Public Class RLink
         If strScript = "" Then
             strScript = GetRSetupScript()
             iCallType = 0
-            strComment = "Setting working directory, sources R code and loading R packages"
+            strComment = "Setting working directory, sourcing R code and loading R packages"
             bSeparateThread = True
         End If
         bInstatObjectExists = True
@@ -300,7 +300,7 @@ Public Class RLink
         End Try
     End Sub
 
-    Public Sub RunScript(strScript As String, Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing)
+    Public Sub RunScript(strScript As String, Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing, Optional bUpdateGrids As Boolean = True)
         Dim strCapturedScript As String
         Dim expTemp As RDotNet.SymbolicExpression
         Dim strTemp As String = ""
@@ -349,11 +349,15 @@ Public Class RLink
                         clsPNGFunction.AddParameter("width", 4000)
                         clsPNGFunction.AddParameter("height", 4000)
                         clsPNGFunction.AddParameter("res", 500)
-                        Evaluate(clsPNGFunction.ToScript())
+                        Evaluate(clsPNGFunction.ToScript(), bSilent:=False, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
                         'need to boost resolution of the devices, it's not as good as with ggsave.
                     End If
                 End If
-                Evaluate(strScript, bSilent:=False, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                If iCallType = 3 AndAlso strGraphDisplayOption = "view_R_viewer" Then
+                    Evaluate(strScript, bSilent:=False, bSeparateThread:=False, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                Else
+                    Evaluate(strScript, bSilent:=False, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                End If
                 If iCallType = 3 Then
                     If strGraphDisplayOption = "view_output_window" OrElse strGraphDisplayOption = "view_separate_window" Then
                         'add an R script (maybe in the form of one of our methods) that copies divices to the temp directory, using the default device production... use dev.list() and dev.copy() with arguments device = the devices in the list and which = jpeg devices with different paths leading to the temp directory, using a paste() method to find different names for the files
@@ -440,7 +444,9 @@ Public Class RLink
             End If
         End If
         AppendToAutoSaveLog(strScriptWithComment & Environment.NewLine)
-        frmMain.clsGrids.UpdateGrids()
+        If bUpdateGrids Then
+            frmMain.clsGrids.UpdateGrids()
+        End If
     End Sub
 
     Public Function RunInternalScriptGetValue(strScript As String, Optional strVariableName As String = ".temp_value", Optional bSilent As Boolean = False, Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing) As SymbolicExpression
@@ -1135,5 +1141,22 @@ Public Class RLink
             iTimeInSeconds = 2
         End If
         iWaitDelay = iTimeInSeconds
+    End Sub
+
+    Public Sub CloseData()
+        Dim clsRm As New RFunction
+        Dim clsCreateIO As New ROperator
+
+        clsRm.SetRCommand("rm")
+        clsRm.AddParameter("x", strInstatDataObject)
+
+        clsCreateIO.SetOperation("<-")
+        clsCreateIO.AddParameter("left", strInstatDataObject, iPosition:=0)
+        clsCreateIO.AddParameter("right", "instat_object$new()", iPosition:=1)
+
+        bInstatObjectExists = False
+        RunScript(clsRm.ToScript(), strComment:="Closing data")
+        bInstatObjectExists = True
+        RunScript(clsCreateIO.ToScript(), strComment:="Creating New Instat Object")
     End Sub
 End Class
