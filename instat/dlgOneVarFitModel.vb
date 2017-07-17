@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 
 Public Class dlgOneVarFitModel
@@ -57,9 +56,9 @@ Public Class dlgOneVarFitModel
         ucrReceiverVariable.SetParameter(New RParameter("x"))
         ucrReceiverVariable.SetParameterIsRFunction()
 
-        ucrChkConvertVariate.SetText("Convert to Variate")
-        ucrChkConvertVariate.AddParameterIsRFunctionCondition(True, "data", True)
-        ucrChkConvertVariate.AddParameterIsRFunctionCondition(False, "data", False)
+        ucrChkConvertVariate.SetText("Convert to Numeric")
+        ucrChkConvertVariate.AddParameterValueFunctionNamesCondition(True, "data", "as.numeric", True)
+        ucrChkConvertVariate.AddParameterValueFunctionNamesCondition(False, "data", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data", True)
 
         ucrNudHyp.SetParameter(New RParameter("mu"))
 
@@ -222,26 +221,32 @@ Public Class dlgOneVarFitModel
         clsRplotFunction.SetPackageName("graphics")
         clsRplotFunction.SetRCommand("plot")
         clsRplotFunction.iCallType = 3
+        clsRplotFunction.bExcludeAssignedFunctionOutput = False
 
         clsRplotPPComp.SetPackageName("fitdistrplus")
         clsRplotPPComp.SetRCommand("ppcomp")
         clsRplotPPComp.iCallType = 3
+        clsRplotPPComp.bExcludeAssignedFunctionOutput = False
 
         clsRplotCdfcomp.SetPackageName("fitdistrplus")
         clsRplotCdfcomp.SetRCommand("cdfcomp")
         clsRplotCdfcomp.iCallType = 3
+        clsRplotCdfcomp.bExcludeAssignedFunctionOutput = False
 
         clsRplotQqComp.SetPackageName("fitdistrplus")
         clsRplotQqComp.SetRCommand("qqcomp")
         clsRplotQqComp.iCallType = 3
+        clsRplotQqComp.bExcludeAssignedFunctionOutput = False
 
         clsRplotDenscomp.SetPackageName("fitdistrplus")
         clsRplotDenscomp.SetRCommand("denscomp")
         clsRplotDenscomp.iCallType = 3
+        clsRplotDenscomp.bExcludeAssignedFunctionOutput = False
 
         clsRLogLikFunction.SetPackageName("fitdistrplus")
         clsRLogLikFunction.SetRCommand("llplot")
         clsRLogLikFunction.iCallType = 3
+        clsRLogLikFunction.bExcludeAssignedFunctionOutput = False
 
         SetDataParameter()
         EnableOptions()
@@ -250,8 +255,8 @@ Public Class dlgOneVarFitModel
         SetDistributions()
 
         clsROneVarFitModel.SetAssignTo("last_model", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model")
-        clsRLogLikFunction.SetAssignTo("last_likelihood", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_likelihood")
-        clsRplotFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_graph")
+        clsRLogLikFunction.SetAssignTo("last_likelihood", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_likelihood")
+        clsRplotFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
@@ -320,7 +325,7 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrSaveModel.IsComplete() AndAlso Not ucrReceiverVariable.IsEmpty AndAlso Not ucrDistributionChoice.ucrInputDistributions.IsEmpty Then
+        If ucrSaveModel.IsComplete() AndAlso Not ucrReceiverVariable.IsEmpty AndAlso ucrDistributionChoice.ucrInputDistributions.cboInput.SelectedItem <> "" Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -366,7 +371,6 @@ Public Class dlgOneVarFitModel
             ucrDistributionChoice.Enabled = True
         End If
     End Sub
-
 
     Public Sub ResponseConvert()
         If bRCodeSet Then
@@ -625,7 +629,7 @@ Public Class dlgOneVarFitModel
         SetDataParameter()
         PlotResiduals()
         DataTypeAccepted()
-
+        TestOKEnabled()
     End Sub
 
     Private Sub lbls_VisibleChanged(sender As Object, e As EventArgs) Handles lblEquals.VisibleChanged, lblSuccessIf.VisibleChanged

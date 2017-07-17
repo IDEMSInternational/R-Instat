@@ -176,7 +176,8 @@ Public Class dlgThreeVariableModelling
         clsVisReg.SetPackageName("visreg")
         clsVisReg.SetRCommand("visreg")
         clsVisReg.AddParameter("type", Chr(34) & "conditional" & Chr(34))
-        clsVisReg.AddParameter("gg", "TRUE")
+        'changed gg parameter to FALSE since when TRUE no plot is given (not compatible with ggplot2 package)
+        clsVisReg.AddParameter("gg", "FALSE")
         clsVisReg.iCallType = 3
 
         clsLM.SetAssignTo(ucrSaveModel.GetText, strTempDataframe:=ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:=ucrSaveModel.GetText, bAssignToIsPrefix:=True)
