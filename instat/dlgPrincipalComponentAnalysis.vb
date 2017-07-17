@@ -183,7 +183,6 @@ Public Class dlgPrincipalComponentAnalysis
         clsRFactor.AddParameter("", clsRFunctionParameter:=clsRMelt)
         clsRBarPlotFunction.SetPackageName("ggplot2")
         clsRBarPlotFunction.SetRCommand("ggplot")
-        clsRBarPlotFunction.iCallType = 3
         clsRBarPlotFunction.AddParameter("data", clsRFunctionParameter:=clsRFactor)
         clsRBarPlotGeom.SetPackageName("ggplot2")
         clsRBarPlotGeom.SetRCommand("geom_bar")
@@ -202,11 +201,14 @@ Public Class dlgPrincipalComponentAnalysis
         clsRBarPlot.AddParameter(iPosition:=0, clsROperatorParameter:=clsRBarPlot0)
         clsRBarPlot.AddParameter(clsRFunctionParameter:=clsRBarPlotFacet)
         ucrBase.clsRsyntax.ClearCodes()
-        ucrBase.clsRsyntax.AddToAfterCodes(clsBaseOperator, iPosition:=1)
+        clsRScreePlotFunction.AddParameter("choice", Chr(34) & "variance" & Chr(34))
+        clsBaseOperator.AddParameter("plot", clsRFunctionParameter:=clsRScreePlotFunction, iPosition:=0)
+        clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsRThemeMinimal, iPosition:=1)
+        ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
         clsBaseOperator.iCallType = 3
-        ucrBase.clsRsyntax.AddToAfterCodes(clsREigenValues, iPosition:=2)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsREigenVectors, iPosition:=3)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsRRotation, iPosition:=4)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsREigenValues, iPosition:=1)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsREigenVectors, iPosition:=2)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsRRotation, iPosition:=3)
         ModelName()
         bResetSubdialog = True
     End Sub

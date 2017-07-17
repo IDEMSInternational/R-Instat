@@ -65,11 +65,11 @@ Public Class sdgPrincipalComponentAnalysis
         ucrPnlGraphics.AddRadioButton(rdoBiplot)
         ucrPnlGraphics.AddRadioButton(rdoBarPlot)
 
-        ucrPnlGraphics.AddFunctionNamesCondition(rdoScreePlot, "fviz_screeplot") ' need to link these rdos with their class. This will be like "Add additional base function"
-        ucrPnlGraphics.AddFunctionNamesCondition(rdoVariablesPlot, "fviz_pca_var")
-        ucrPnlGraphics.AddFunctionNamesCondition(rdoIndividualsPlot, "fviz_pca_ind")
-        ucrPnlGraphics.AddFunctionNamesCondition(rdoBiplot, "fviz_pca_biplot")
-        ucrPnlGraphics.AddFunctionNamesCondition(rdoBarPlot, "ggplot")
+        ucrPnlGraphics.AddParameterValueFunctionNamesCondition(rdoScreePlot, "plot", "fviz_screeplot") ' need to link these rdos with their class. This will be like "Add additional base function"
+        ucrPnlGraphics.AddParameterValueFunctionNamesCondition(rdoVariablesPlot, "plot", "fviz_pca_var")
+        ucrPnlGraphics.AddParameterValueFunctionNamesCondition(rdoIndividualsPlot, "plot", "fviz_pca_ind")
+        ucrPnlGraphics.AddParameterValueFunctionNamesCondition(rdoBiplot, "plot", "fviz_pca_biplot")
+        ucrPnlGraphics.AddParameterValueFunctionNamesCondition(rdoBarPlot, "plot", "ggplot")
 
         ucrPnlScreePlot.SetParameter(New RParameter("geom", 3))
         ucrPnlScreePlot.AddRadioButton(rdoBar, Chr(34) & "bar" & Chr(34))
@@ -127,7 +127,7 @@ Public Class sdgPrincipalComponentAnalysis
         ucrPnlGraphics.AddToLinkedControls(ucrInputLabel2, {rdoVariablesPlot, rdoIndividualsPlot, rdoBiplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="all")
         ucrInputLabel2.SetLinkedDisplayControl(lblLabel)
 
-        ucrPnlGraphics.AddToLinkedControls(ucrInputLabel1, {rdoScreePlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Variance")
+        ucrPnlGraphics.AddToLinkedControls(ucrInputLabel1, {rdoScreePlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrInputLabel1.SetLinkedDisplayControl(lblChoice)
 
         ucrPnlGraphics.AddToLinkedControls(ucrChkIncludePercentage, {rdoScreePlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
@@ -165,10 +165,10 @@ Public Class sdgPrincipalComponentAnalysis
         clsRBiplotFunctionValue = clsNewBiplotFunctionValue
         ucrInputLabel2.AddAdditionalCodeParameterPair(clsRIndividualsPlotFunction, New RParameter("label"), iAdditionalPairNo:=1)
         ucrInputLabel2.AddAdditionalCodeParameterPair(clsRBiplotFunction, New RParameter("label"), iAdditionalPairNo:=2)
-        ucrNudDim1.AddAdditionalCodeParameterPair(clsRVariablesPlotFunctionValue, New RParameter("first_dim", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
-        ucrNudDim1.AddAdditionalCodeParameterPair(clsRBiplotFunctionValue, New RParameter("first_dim", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
-        ucrNudDim2.AddAdditionalCodeParameterPair(clsRVariablesPlotFunctionValue, New RParameter("second_dim", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
-        ucrNudDim2.AddAdditionalCodeParameterPair(clsRBiplotFunctionValue, New RParameter("second_dim", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
+        ucrNudDim1.AddAdditionalCodeParameterPair(clsRVariablesPlotFunctionValue, ucrNudDim1.GetParameter(), iAdditionalPairNo:=1)
+        ucrNudDim1.AddAdditionalCodeParameterPair(clsRBiplotFunctionValue, ucrNudDim1.GetParameter(), iAdditionalPairNo:=2)
+        ucrNudDim2.AddAdditionalCodeParameterPair(clsRVariablesPlotFunctionValue, ucrNudDim2.GetParameter(), iAdditionalPairNo:=1)
+        ucrNudDim2.AddAdditionalCodeParameterPair(clsRBiplotFunctionValue, ucrNudDim2.GetParameter(), iAdditionalPairNo:=2)
         ucrPnlIndividualPlot.AddAdditionalCodeParameterPair(clsRBiplotFunction, New RParameter("geom"), iAdditionalPairNo:=1)
 
         ucrPnlVariablesPlot.SetRCode(clsRVariablesPlotFunction, bReset, bCloneIfNeeded:=True)
@@ -238,7 +238,6 @@ Public Class sdgPrincipalComponentAnalysis
         ElseIf rdoBarPlot.Checked Then
             clsBaseOperator.AddParameter("plot", clsRFunctionParameter:=clsRBarPlotFunction, iPosition:=0)
         End If
-        clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsRThemeMinimal, iPosition:=1)
     End Sub
 
     ' Here, the minimum and maximum dimensions selected rely on a few things
