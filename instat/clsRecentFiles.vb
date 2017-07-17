@@ -149,7 +149,7 @@ Public Class clsRecentFiles
                 ' hook into the click event handler so we can open the file later...
                 AddHandler clsItem.Click, AddressOf mnuFileMRU_Click
                 ' insert into DropDownItems list...
-                mnuFile.DropDownItems.Insert(mnuFile.DropDownItems.Count - 2, clsItem)
+                mnuFile.DropDownItems.Insert(mnuFile.DropDownItems.Count - 1, clsItem)
             Next
 
             ' show separator
@@ -169,7 +169,7 @@ Public Class clsRecentFiles
             dlgImportDataset.strFileToOpenOn = DirectCast(sender, ToolStripItem).Tag.ToString().Substring(4)
             dlgImportDataset.ShowDialog()
         Else
-            iResult = MessageBox.Show(frmMain, "Error: File not accessible. It may have been renamed, moved or deleted." & Environment.NewLine & Environment.NewLine & "Would you like to remove this file from the list?", "Error accessing file", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
+            iResult = MessageBox.Show(frmMain, "File not accessible. It may have been renamed, moved or deleted." & Environment.NewLine & Environment.NewLine & "Would you like to remove this file from the list?", "Cannot access file", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
             'removes the path to the non existent file
             If iResult = DialogResult.Yes Then
                 strListMRU.RemoveAt(strListMRU.FindLastIndex(Function(value As String)

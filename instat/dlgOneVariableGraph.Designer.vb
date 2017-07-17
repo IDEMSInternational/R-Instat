@@ -56,7 +56,7 @@ Partial Class dlgOneVariableGraph
         'lblSelectedVariables
         '
         Me.lblSelectedVariables.AutoSize = True
-        Me.lblSelectedVariables.Location = New System.Drawing.Point(238, 33)
+        Me.lblSelectedVariables.Location = New System.Drawing.Point(259, 45)
         Me.lblSelectedVariables.Name = "lblSelectedVariables"
         Me.lblSelectedVariables.Size = New System.Drawing.Size(98, 13)
         Me.lblSelectedVariables.TabIndex = 1
@@ -66,7 +66,7 @@ Partial Class dlgOneVariableGraph
         '
         Me.cmdGraphOptions.Location = New System.Drawing.Point(10, 201)
         Me.cmdGraphOptions.Name = "cmdGraphOptions"
-        Me.cmdGraphOptions.Size = New System.Drawing.Size(101, 23)
+        Me.cmdGraphOptions.Size = New System.Drawing.Size(120, 23)
         Me.cmdGraphOptions.TabIndex = 3
         Me.cmdGraphOptions.Text = "Graph Options"
         Me.cmdGraphOptions.UseVisualStyleBackColor = True
@@ -77,10 +77,10 @@ Partial Class dlgOneVariableGraph
         Me.grpOutput.Controls.Add(Me.rdoCombine)
         Me.grpOutput.Controls.Add(Me.rdoFacets)
         Me.grpOutput.Controls.Add(Me.ucrPnlOutput)
-        Me.grpOutput.Location = New System.Drawing.Point(237, 160)
+        Me.grpOutput.Location = New System.Drawing.Point(259, 172)
         Me.grpOutput.Name = "grpOutput"
         Me.grpOutput.Size = New System.Drawing.Size(123, 91)
-        Me.grpOutput.TabIndex = 13
+        Me.grpOutput.TabIndex = 4
         Me.grpOutput.TabStop = False
         Me.grpOutput.Text = "Output"
         '
@@ -128,22 +128,22 @@ Partial Class dlgOneVariableGraph
         'ucrChkFlip
         '
         Me.ucrChkFlip.Checked = False
-        Me.ucrChkFlip.Location = New System.Drawing.Point(10, 231)
+        Me.ucrChkFlip.Location = New System.Drawing.Point(10, 238)
         Me.ucrChkFlip.Name = "ucrChkFlip"
         Me.ucrChkFlip.Size = New System.Drawing.Size(145, 20)
-        Me.ucrChkFlip.TabIndex = 9
+        Me.ucrChkFlip.TabIndex = 5
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 283)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 292)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 7
         '
         'ucrReceiverOneVarGraph
         '
         Me.ucrReceiverOneVarGraph.frmParent = Me
-        Me.ucrReceiverOneVarGraph.Location = New System.Drawing.Point(237, 48)
+        Me.ucrReceiverOneVarGraph.Location = New System.Drawing.Point(259, 60)
         Me.ucrReceiverOneVarGraph.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverOneVarGraph.Name = "ucrReceiverOneVarGraph"
         Me.ucrReceiverOneVarGraph.Selector = Nothing
@@ -164,16 +164,16 @@ Partial Class dlgOneVariableGraph
         '
         'ucrSaveGraph
         '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 257)
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 266)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(294, 24)
-        Me.ucrSaveGraph.TabIndex = 4
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(255, 24)
+        Me.ucrSaveGraph.TabIndex = 6
         '
         'dlgOneVariableGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(418, 337)
+        Me.ClientSize = New System.Drawing.Size(417, 348)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.grpOutput)
         Me.Controls.Add(Me.ucrChkFlip)
