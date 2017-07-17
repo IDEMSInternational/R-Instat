@@ -62,6 +62,7 @@ Partial Class dlgFourVariableModelling
         Me.cmdFirstExplanatoryFunction = New System.Windows.Forms.Button()
         Me.cmdSecondExplanatoryFunction = New System.Windows.Forms.Button()
         Me.cmdThirdExplanatoryFunction = New System.Windows.Forms.Button()
+        Me.UcrDialogDisabled1 = New instat.ucrDialogDisabled()
         Me.SuspendLayout()
         '
         'cmdModelOptions
@@ -300,11 +301,20 @@ Partial Class dlgFourVariableModelling
         Me.cmdThirdExplanatoryFunction.Text = "Function..."
         Me.cmdThirdExplanatoryFunction.UseVisualStyleBackColor = True
         '
+        'UcrDialogDisabled1
+        '
+        Me.UcrDialogDisabled1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.UcrDialogDisabled1.Location = New System.Drawing.Point(125, 143)
+        Me.UcrDialogDisabled1.Name = "UcrDialogDisabled1"
+        Me.UcrDialogDisabled1.Size = New System.Drawing.Size(218, 117)
+        Me.UcrDialogDisabled1.TabIndex = 24
+        '
         'dlgFourVariableModelling
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(546, 460)
+        Me.Controls.Add(Me.UcrDialogDisabled1)
         Me.Controls.Add(Me.cmdThirdExplanatoryFunction)
         Me.Controls.Add(Me.cmdSecondExplanatoryFunction)
         Me.Controls.Add(Me.cmdFirstExplanatoryFunction)
@@ -365,4 +375,5 @@ Partial Class dlgFourVariableModelling
     Friend WithEvents cmdFirstExplanatoryFunction As Button
     Friend WithEvents cmdThirdExplanatoryFunction As Button
     Friend WithEvents cmdSecondExplanatoryFunction As Button
+    Friend WithEvents UcrDialogDisabled1 As ucrDialogDisabled
 End Class
