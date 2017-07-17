@@ -21,6 +21,7 @@ Public Class dlgRenameObjects
     Dim bUseSelectedColumn As Boolean = False
     Dim strSelectedColumn As String = ""
     Dim strSelectedDataFrame As String = ""
+    Private clsDefaultFunction As New RFunction
 
     Private Sub dlgRenameObjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -35,8 +36,9 @@ Public Class dlgRenameObjects
         SetRCodeforControls(bReset)
         bReset = False
         autoTranslate(Me)
+        TestOKEnabled()
         If bUseSelectedColumn Then
-            Setdefaultcolumn()
+            SetDefaultColumn()
         End If
     End Sub
 
@@ -69,13 +71,13 @@ Public Class dlgRenameObjects
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        clsDefaultFunction = New RFunction
 
         ucrSelectorForRenameObject.Reset()
         ucrInputNewName.Reset()
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_object")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
@@ -90,26 +92,22 @@ Public Class dlgRenameObjects
         End If
     End Sub
 
-    Private Sub ucrs_ContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrSelectorForRenameObject.ControlContentsChanged, ucrReceiverCurrentName.ControlContentsChanged
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeforControls(True)
         TestOKEnabled()
     End Sub
 
-    Public Sub Setcurrentcolumn(strcolumn As String, strdataframe As String)
+    Public Sub SetCurrentColumn(strcolumn As String, strdataframe As String)
         strSelectedColumn = strcolumn
         strSelectedDataFrame = strdataframe
         bUseSelectedColumn = True
     End Sub
 
-    Private Sub Setdefaultcolumn()
+    Private Sub SetDefaultColumn()
         ucrSelectorForRenameObject.SetDataframe(strSelectedDataFrame)
         ucrReceiverCurrentName.Add(strSelectedColumn, strSelectedDataFrame)
         bUseSelectedColumn = False
-    End Sub
-
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-        SetRCodeforControls(True)
-        TestOKEnabled()
     End Sub
 
     Private Sub ucrInputNewName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverCurrentName.ControlValueChanged
@@ -120,5 +118,9 @@ Public Class dlgRenameObjects
         If Not ucrReceiverCurrentName.IsEmpty AndAlso Not ucrInputNewName.bUserTyped Then
             ucrInputNewName.SetName(ucrReceiverCurrentName.GetVariableNames(bWithQuotes:=False) & "1")
         End If
+    End Sub
+
+    Private Sub CoreControls_ContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrSelectorForRenameObject.ControlContentsChanged, ucrReceiverCurrentName.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class

@@ -527,7 +527,7 @@ Public Class frmMain
         Else
             clsSaveRDS.SetRCommand("saveRDS")
             clsSaveRDS.AddParameter("object", clsRLink.strInstatDataObject)
-            clsSaveRDS.AddParameter("file", Chr(34) & strSaveFilePath & Chr(34))
+            clsSaveRDS.AddParameter("file", Chr(34) & Replace(strSaveFilePath, "\", "/") & Chr(34))
             clsRLink.RunScript(clsSaveRDS.ToScript(), strComment:="File > Save: save file")
         End If
     End Sub
@@ -1642,6 +1642,7 @@ Public Class frmMain
         bClose = MsgBox("Are you sure you want to close you data?" & Environment.NewLine & "Any unsaved changes will be lost.", MessageBoxButtons.YesNo, "Close Data")
         If bClose = DialogResult.Yes Then
             clsRLink.CloseData()
+            strSaveFilePath = ""
         End If
     End Sub
 End Class
