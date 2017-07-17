@@ -452,6 +452,8 @@ Partial Class frmMain
         Me.DefineContractValueCategoriesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RecodeNumericIntoQuantilesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementDescribe = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementDescribeOneVar = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementDescribeTwoVar = New System.Windows.Forms.ToolStripMenuItem()
         Me.DefineOutputsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementModelFitModelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -472,14 +474,12 @@ Partial Class frmMain
         Me.splOverall = New System.Windows.Forms.SplitContainer()
         Me.splExtraWindows = New System.Windows.Forms.SplitContainer()
         Me.splMetadata = New System.Windows.Forms.SplitContainer()
-        Me.splLogScript = New System.Windows.Forms.SplitContainer()
-        Me.splDataOutput = New System.Windows.Forms.SplitContainer()
-        Me.mnuProcurementDescribeOneVar = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuProcurementDescribeTwoVar = New System.Windows.Forms.ToolStripMenuItem()
         Me.ucrColumnMeta = New instat.ucrColumnMetadata()
         Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
+        Me.splLogScript = New System.Windows.Forms.SplitContainer()
         Me.ucrLogWindow = New instat.ucrLog()
         Me.ucrScriptWindow = New instat.ucrScript()
+        Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
         Me.stsStrip.SuspendLayout()
@@ -1444,6 +1444,7 @@ Partial Class frmMain
         '
         'OpenNetCDFToolStripMenuItem
         '
+        Me.OpenNetCDFToolStripMenuItem.Enabled = False
         Me.OpenNetCDFToolStripMenuItem.Name = "OpenNetCDFToolStripMenuItem"
         Me.OpenNetCDFToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
         Me.OpenNetCDFToolStripMenuItem.Text = "Open NetCDF..."
@@ -1547,6 +1548,7 @@ Partial Class frmMain
         '
         'mnuCimaticPrepareTransform
         '
+        Me.mnuCimaticPrepareTransform.Enabled = False
         Me.mnuCimaticPrepareTransform.Name = "mnuCimaticPrepareTransform"
         Me.mnuCimaticPrepareTransform.Size = New System.Drawing.Size(224, 22)
         Me.mnuCimaticPrepareTransform.Text = "Transform..."
@@ -1577,12 +1579,14 @@ Partial Class frmMain
         '
         'mnuClimaticPrepareExtremes
         '
+        Me.mnuClimaticPrepareExtremes.Enabled = False
         Me.mnuClimaticPrepareExtremes.Name = "mnuClimaticPrepareExtremes"
         Me.mnuClimaticPrepareExtremes.Size = New System.Drawing.Size(224, 22)
         Me.mnuClimaticPrepareExtremes.Text = "Extremes..."
         '
         'mnuClimaticPrepareEndOfRains
         '
+        Me.mnuClimaticPrepareEndOfRains.Enabled = False
         Me.mnuClimaticPrepareEndOfRains.Name = "mnuClimaticPrepareEndOfRains"
         Me.mnuClimaticPrepareEndOfRains.Size = New System.Drawing.Size(224, 22)
         Me.mnuClimaticPrepareEndOfRains.Text = "End of Rains..."
@@ -1664,6 +1668,7 @@ Partial Class frmMain
         '
         'DisplayDailyToolStripMenuItem
         '
+        Me.DisplayDailyToolStripMenuItem.Enabled = False
         Me.DisplayDailyToolStripMenuItem.Name = "DisplayDailyToolStripMenuItem"
         Me.DisplayDailyToolStripMenuItem.Size = New System.Drawing.Size(162, 22)
         Me.DisplayDailyToolStripMenuItem.Text = "Display Daily..."
@@ -2756,6 +2761,7 @@ Partial Class frmMain
         '
         'mnuPreparePrepareToShareJitter
         '
+        Me.mnuPreparePrepareToShareJitter.Enabled = False
         Me.mnuPreparePrepareToShareJitter.Name = "mnuPreparePrepareToShareJitter"
         Me.mnuPreparePrepareToShareJitter.Size = New System.Drawing.Size(245, 22)
         Me.mnuPreparePrepareToShareJitter.Text = "Jitter..."
@@ -3396,6 +3402,18 @@ Partial Class frmMain
         Me.mnuProcurementDescribe.Size = New System.Drawing.Size(292, 22)
         Me.mnuProcurementDescribe.Text = "Describe"
         '
+        'mnuProcurementDescribeOneVar
+        '
+        Me.mnuProcurementDescribeOneVar.Name = "mnuProcurementDescribeOneVar"
+        Me.mnuProcurementDescribeOneVar.Size = New System.Drawing.Size(320, 22)
+        Me.mnuProcurementDescribeOneVar.Text = "One Variable Frequencies..."
+        '
+        'mnuProcurementDescribeTwoVar
+        '
+        Me.mnuProcurementDescribeTwoVar.Name = "mnuProcurementDescribeTwoVar"
+        Me.mnuProcurementDescribeTwoVar.Size = New System.Drawing.Size(320, 22)
+        Me.mnuProcurementDescribeTwoVar.Text = "Two Variable Frequencies by Sector (or other)..."
+        '
         'DefineOutputsToolStripMenuItem
         '
         Me.DefineOutputsToolStripMenuItem.Name = "DefineOutputsToolStripMenuItem"
@@ -3575,6 +3593,24 @@ Partial Class frmMain
         Me.splMetadata.SplitterWidth = 5
         Me.splMetadata.TabIndex = 0
         '
+        'ucrColumnMeta
+        '
+        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrColumnMeta.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrColumnMeta.Location = New System.Drawing.Point(0, 0)
+        Me.ucrColumnMeta.Name = "ucrColumnMeta"
+        Me.ucrColumnMeta.Size = New System.Drawing.Size(75, 194)
+        Me.ucrColumnMeta.TabIndex = 0
+        '
+        'ucrDataFrameMeta
+        '
+        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrDataFrameMeta.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrDataFrameMeta.Location = New System.Drawing.Point(0, 0)
+        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
+        Me.ucrDataFrameMeta.Size = New System.Drawing.Size(176, 194)
+        Me.ucrDataFrameMeta.TabIndex = 0
+        '
         'splLogScript
         '
         Me.splLogScript.BackColor = System.Drawing.Color.LightGray
@@ -3596,6 +3632,25 @@ Partial Class frmMain
         Me.splLogScript.SplitterWidth = 5
         Me.splLogScript.TabIndex = 0
         '
+        'ucrLogWindow
+        '
+        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrLogWindow.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrLogWindow.Location = New System.Drawing.Point(0, 0)
+        Me.ucrLogWindow.Name = "ucrLogWindow"
+        Me.ucrLogWindow.Size = New System.Drawing.Size(182, 194)
+        Me.ucrLogWindow.TabIndex = 0
+        '
+        'ucrScriptWindow
+        '
+        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrScriptWindow.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrScriptWindow.Location = New System.Drawing.Point(0, 0)
+        Me.ucrScriptWindow.Name = "ucrScriptWindow"
+        Me.ucrScriptWindow.Size = New System.Drawing.Size(386, 194)
+        Me.ucrScriptWindow.TabIndex = 0
+        Me.ucrScriptWindow.Tag = "Script_Window"
+        '
         'splDataOutput
         '
         Me.splDataOutput.BackColor = System.Drawing.Color.LightGray
@@ -3616,55 +3671,6 @@ Partial Class frmMain
         Me.splDataOutput.SplitterDistance = 385
         Me.splDataOutput.SplitterWidth = 5
         Me.splDataOutput.TabIndex = 0
-        '
-        'mnuProcurementDescribeOneVar
-        '
-        Me.mnuProcurementDescribeOneVar.Name = "mnuProcurementDescribeOneVar"
-        Me.mnuProcurementDescribeOneVar.Size = New System.Drawing.Size(320, 22)
-        Me.mnuProcurementDescribeOneVar.Text = "One Variable Frequencies..."
-        '
-        'mnuProcurementDescribeTwoVar
-        '
-        Me.mnuProcurementDescribeTwoVar.Name = "mnuProcurementDescribeTwoVar"
-        Me.mnuProcurementDescribeTwoVar.Size = New System.Drawing.Size(320, 22)
-        Me.mnuProcurementDescribeTwoVar.Text = "Two Variable Frequencies by Sector (or other)..."
-        '
-        'ucrColumnMeta
-        '
-        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrColumnMeta.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrColumnMeta.Location = New System.Drawing.Point(0, 0)
-        Me.ucrColumnMeta.Name = "ucrColumnMeta"
-        Me.ucrColumnMeta.Size = New System.Drawing.Size(75, 194)
-        Me.ucrColumnMeta.TabIndex = 0
-        '
-        'ucrDataFrameMeta
-        '
-        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrDataFrameMeta.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrDataFrameMeta.Location = New System.Drawing.Point(0, 0)
-        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
-        Me.ucrDataFrameMeta.Size = New System.Drawing.Size(176, 194)
-        Me.ucrDataFrameMeta.TabIndex = 0
-        '
-        'ucrLogWindow
-        '
-        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrLogWindow.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrLogWindow.Location = New System.Drawing.Point(0, 0)
-        Me.ucrLogWindow.Name = "ucrLogWindow"
-        Me.ucrLogWindow.Size = New System.Drawing.Size(182, 194)
-        Me.ucrLogWindow.TabIndex = 0
-        '
-        'ucrScriptWindow
-        '
-        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrScriptWindow.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrScriptWindow.Location = New System.Drawing.Point(0, 0)
-        Me.ucrScriptWindow.Name = "ucrScriptWindow"
-        Me.ucrScriptWindow.Size = New System.Drawing.Size(386, 194)
-        Me.ucrScriptWindow.TabIndex = 0
-        Me.ucrScriptWindow.Tag = "Script_Window"
         '
         'ucrDataViewer
         '

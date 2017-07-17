@@ -172,9 +172,9 @@ Public Class sdgPlots
         ucrYAxis.InitialiseControl()
 
         'themes tab
-        urChkSelectTheme.SetText("Select Theme:")
+        urChkSelectTheme.SetText("Select Theme")
         ucrInputThemes.SetParameter(New RParameter("theme_name"))
-        urChkSelectTheme.AddToLinkedControls(ucrInputThemes, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="theme_grey")
+        urChkSelectTheme.AddToLinkedControls(ucrInputThemes, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="grey")
         urChkSelectTheme.AddParameterPresentCondition(True, "theme_name")
         urChkSelectTheme.AddParameterPresentCondition(False, "theme_name", False)
         strThemes = GgplotDefaults.strThemes
@@ -187,7 +187,7 @@ Public Class sdgPlots
             End If
         Next
         ucrInputThemes.SetItems(dctThemes)
-        ucrInputThemes.SetRDefault("theme_grey()")
+        ' ucrInputThemes.SetRDefault("theme_grey()")
         ucrInputThemes.SetDropDownStyleAsNonEditable()
 
         InitialiseTabs()
