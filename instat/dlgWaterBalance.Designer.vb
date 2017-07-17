@@ -304,7 +304,7 @@ Partial Class dlgWaterBalance
         'ucrReceiverEvaporation
         '
         Me.ucrReceiverEvaporation.frmParent = Me
-        Me.ucrReceiverEvaporation.Location = New System.Drawing.Point(209, 343)
+        Me.ucrReceiverEvaporation.Location = New System.Drawing.Point(209, 332)
         Me.ucrReceiverEvaporation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverEvaporation.Name = "ucrReceiverEvaporation"
         Me.ucrReceiverEvaporation.Selector = Nothing
