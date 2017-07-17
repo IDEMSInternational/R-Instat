@@ -158,7 +158,7 @@ Public Class dlgCorrelation
         clsRGGcorrGraphicsFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         clsRGraphicsFuction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.ClearCodes()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationTestFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
