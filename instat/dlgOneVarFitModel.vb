@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 
 Public Class dlgOneVarFitModel
@@ -222,26 +221,32 @@ Public Class dlgOneVarFitModel
         clsRplotFunction.SetPackageName("graphics")
         clsRplotFunction.SetRCommand("plot")
         clsRplotFunction.iCallType = 3
+        clsRplotFunction.bExcludeAssignedFunctionOutput = False
 
         clsRplotPPComp.SetPackageName("fitdistrplus")
         clsRplotPPComp.SetRCommand("ppcomp")
         clsRplotPPComp.iCallType = 3
+        clsRplotPPComp.bExcludeAssignedFunctionOutput = False
 
         clsRplotCdfcomp.SetPackageName("fitdistrplus")
         clsRplotCdfcomp.SetRCommand("cdfcomp")
         clsRplotCdfcomp.iCallType = 3
+        clsRplotCdfcomp.bExcludeAssignedFunctionOutput = False
 
         clsRplotQqComp.SetPackageName("fitdistrplus")
         clsRplotQqComp.SetRCommand("qqcomp")
         clsRplotQqComp.iCallType = 3
+        clsRplotQqComp.bExcludeAssignedFunctionOutput = False
 
         clsRplotDenscomp.SetPackageName("fitdistrplus")
         clsRplotDenscomp.SetRCommand("denscomp")
         clsRplotDenscomp.iCallType = 3
+        clsRplotDenscomp.bExcludeAssignedFunctionOutput = False
 
         clsRLogLikFunction.SetPackageName("fitdistrplus")
         clsRLogLikFunction.SetRCommand("llplot")
         clsRLogLikFunction.iCallType = 3
+        clsRLogLikFunction.bExcludeAssignedFunctionOutput = False
 
         SetDataParameter()
         EnableOptions()
@@ -250,8 +255,8 @@ Public Class dlgOneVarFitModel
         SetDistributions()
 
         clsROneVarFitModel.SetAssignTo("last_model", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model")
-        clsRLogLikFunction.SetAssignTo("last_likelihood", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_likelihood")
-        clsRplotFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_graph")
+        clsRLogLikFunction.SetAssignTo("last_likelihood", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_likelihood")
+        clsRplotFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
@@ -366,7 +371,6 @@ Public Class dlgOneVarFitModel
             ucrDistributionChoice.Enabled = True
         End If
     End Sub
-
 
     Public Sub ResponseConvert()
         If bRCodeSet Then
@@ -674,7 +678,7 @@ Public Class dlgOneVarFitModel
         SetBinomialTest()
     End Sub
 
-    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveModel.ControlContentsChanged, ucrReceiverVariable.ControlContentsChanged
+    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveModel.ControlContentsChanged, ucrReceiverVariable.ControlContentsChanged, ucrDistributionChoice.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
