@@ -195,14 +195,18 @@ Public Class dlgDescribeTwoVarGraph
                 Case "Scatter plot"
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRScatterAesFunction, iPosition:=0)
                     clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRScatterPlotGeom, iPosition:=1)
+                    clsBaseOperator.RemoveParameterByName("geom1")
+
                 Case "Line plot"
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRScatterAesFunction, iPosition:=0)
                     clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRLinePlotGeom, iPosition:=1)
+                    clsBaseOperator.RemoveParameterByName("geom1")
 
                 Case "Scatter and line plot"
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRScatterAesFunction, iPosition:=0)
                     clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRLinePlotGeom, iPosition:=1)
                     clsBaseOperator.AddParameter("geom_line", clsRFunctionParameter:=clsRScatterPlotGeom, iPosition:=2)
+                    clsBaseOperator.RemoveParameterByName("geom1")
             End Select
             'numeric by categorical case
         ElseIf (strVarType = "numeric" OrElse strVarType = "integer") AndAlso (strSecondVarType <> "numeric" AndAlso strSecondVarType <> "integer") Then
