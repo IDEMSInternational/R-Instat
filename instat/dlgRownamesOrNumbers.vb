@@ -56,15 +56,24 @@ Public Class dlgRowNamesOrNumbers
         ucrPnlOverallOptions.AddRadioButton(rdoSortbyRowNames)
 
         ucrPnlOverallOptions.AddFunctionNamesCondition(rdoCopytoFirstColumn, frmMain.clsRLink.strInstatDataObject & "$get_row_names")
+
         ucrPnlOverallOptions.AddFunctionNamesCondition(rdoCopyfromColumn, frmMain.clsRLink.strInstatDataObject & "$set_row_names")
         ucrPnlOverallOptions.AddParameterPresentCondition(rdoCopyfromColumn, "row_names")
+
         ucrPnlOverallOptions.AddFunctionNamesCondition(rdoResetintoPositiveIntegers, frmMain.clsRLink.strInstatDataObject & "$set_row_names")
+        ucrPnlOverallOptions.AddParameterPresentCondition(rdoResetintoPositiveIntegers, "row_names", bNewIsPositive:=False)
+
         ucrPnlOverallOptions.AddFunctionNamesCondition(rdoSortbyRowNames, frmMain.clsRLink.strInstatDataObject & "$sort_dataframe")
 
         ucrPnlOverallOptions.AddToLinkedControls(ucrNewColumnName, {rdoCopytoFirstColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOverallOptions.AddToLinkedControls(ucrReceiverRowNames, {rdoCopyfromColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOverallOptions.AddToLinkedControls(ucrPnlSortOptions, {rdoSortbyRowNames}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOverallOptions.AddToLinkedControls(ucrChkAsNumeric, {rdoSortbyRowNames}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        'temp hidden as not working
+        rdoSortbyRowNames.Visible = False
+        rdoSortAscending.Visible = False
+        rdoSortDescending.Visible = False
 
         'ucrPnlSortOptions
         ucrPnlSortOptions.SetParameter(New RParameter("decreasing", 2))
