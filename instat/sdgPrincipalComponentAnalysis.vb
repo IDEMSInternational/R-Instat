@@ -21,11 +21,11 @@ Public Class sdgPrincipalComponentAnalysis
 
     ' to do:
     Public clsRScores, clsPCAModel, clsRVariablesPlotFunction, clsRVariablesPlotTheme, clsRCoord, clsRContrib, clsREig, clsRFactor, clsRMelt As New RFunction
-    Public clsRScreePlotFunction, clsRScreePlotTheme, clsRIndividualsPlotFunction, clsRIndividualsPlotTheme, clsRBiplotFunction, clsRBiplotTheme, clsRBarPlotFunction, clsRBarPlotGeom, clsRBarPlotFacet, clsRBarPlotAes As New RFunction
+    Public clsRScreePlotFunction, clsRThemeMinimal, clsRIndividualsPlotFunction, clsRIndividualsPlotTheme, clsRBiplotFunction, clsRBiplotTheme, clsRBarPlotFunction, clsRBarPlotGeom, clsRBarPlotFacet, clsRBarPlotAes As New RFunction
     Public clsRVariablesPlotFunctionValue, clsRIndividualsPlotFunctionValue, clsRBiplotFunctionValue As New RFunction
     'Public clsRScreePlot, clsRVariablesPlot, clsRIndividualsPlot, clsRBiplot As New RSyntax
     Private clsRsyntax As RSyntax
-    Dim clsRBarPlot, clsRBarPlot0 As New ROperator
+    Dim clsRBarPlot, clsRBarPlot0, clsBaseOperator As New ROperator
 
     Private Sub sdgPrincipalComponentAnalysis_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -65,11 +65,11 @@ Public Class sdgPrincipalComponentAnalysis
         ucrPnlGraphics.AddRadioButton(rdoBiplot)
         ucrPnlGraphics.AddRadioButton(rdoBarPlot)
 
-        ucrPnlGraphics.AddRSyntaxContainsFunctionNamesCondition(rdoScreePlot, {"fviz_screeplot"}) ' need to link these rdos with their class. This will be like "Add additional base function"
-        ucrPnlGraphics.AddRSyntaxContainsFunctionNamesCondition(rdoVariablesPlot, {"fviz_pca_var"})
-        ucrPnlGraphics.AddRSyntaxContainsFunctionNamesCondition(rdoIndividualsPlot, {"fviz_pca_ind"})
-        ucrPnlGraphics.AddRSyntaxContainsFunctionNamesCondition(rdoBiplot, {"fviz_pca_biplot"})
-        ucrPnlGraphics.AddRSyntaxContainsFunctionNamesCondition(rdoBarPlot, {"ggplot"})
+        ucrPnlGraphics.AddFunctionNamesCondition(rdoScreePlot, "fviz_screeplot") ' need to link these rdos with their class. This will be like "Add additional base function"
+        ucrPnlGraphics.AddFunctionNamesCondition(rdoVariablesPlot, "fviz_pca_var")
+        ucrPnlGraphics.AddFunctionNamesCondition(rdoIndividualsPlot, "fviz_pca_ind")
+        ucrPnlGraphics.AddFunctionNamesCondition(rdoBiplot, "fviz_pca_biplot")
+        ucrPnlGraphics.AddFunctionNamesCondition(rdoBarPlot, "ggplot")
 
         ucrPnlScreePlot.SetParameter(New RParameter("geom", 3))
         ucrPnlScreePlot.AddRadioButton(rdoBar, Chr(34) & "bar" & Chr(34))
@@ -144,7 +144,7 @@ Public Class sdgPrincipalComponentAnalysis
         rdoBarPlot.Enabled = False
     End Sub
 
-    Public Sub SetRFunction(clsNewRsyntax As RSyntax, clsNewREigenValues As RFunction, clsNewREigenVectors As RFunction, clsNewRRotation As RFunction, clsNewScreePlotFunction As RFunction, clsNewVariablesPlotFunction As RFunction, clsNewIndividualsPlotFunction As RFunction, clsNewBiplotFunction As RFunction, clsNewBarPlotFunction As RFunction, clsNewVariablesPlotFunctionValue As RFunction, clsNewIndividualsPlotFunctionValue As RFunction, clsNewBiplotFunctionValue As RFunction, clsNewRFactor As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsNewRsyntax As RSyntax, clsNewREigenValues As RFunction, clsNewREigenVectors As RFunction, clsNewRRotation As RFunction, clsNewScreePlotFunction As RFunction, clsNewVariablesPlotFunction As RFunction, clsNewIndividualsPlotFunction As RFunction, clsNewBiplotFunction As RFunction, clsNewBarPlotFunction As RFunction, clsNewVariablesPlotFunctionValue As RFunction, clsNewIndividualsPlotFunctionValue As RFunction, clsNewBiplotFunctionValue As RFunction, clsNewRFactor As RFunction, clsNewBaseOperator As ROperator, clsNewRThemeMinimal As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
@@ -158,6 +158,8 @@ Public Class sdgPrincipalComponentAnalysis
         clsRBiplotFunction = clsNewBiplotFunction
         clsRBarPlotFunction = clsNewBarPlotFunction
         clsRFactor = clsNewRFactor
+        clsBaseOperator = clsNewBaseOperator
+        clsRThemeMinimal = clsNewRThemeMinimal
         clsRVariablesPlotFunctionValue = clsNewVariablesPlotFunctionValue
         clsRIndividualsPlotFunctionValue = clsNewIndividualsPlotFunctionValue
         clsRBiplotFunctionValue = clsNewBiplotFunctionValue
@@ -172,14 +174,16 @@ Public Class sdgPrincipalComponentAnalysis
 
         ucrPnlVariablesPlot.SetRCode(clsRVariablesPlotFunction, bReset, bCloneIfNeeded:=True)
         ucrPnlIndividualPlot.SetRCode(clsRIndividualsPlotFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputLabel1.SetRSyntax(clsRsyntax, bReset, bCloneIfNeeded:=True)
+        ucrInputLabel1.SetRCode(clsRScreePlotFunction, bReset, bCloneIfNeeded:=True)
         ucrInputLabel2.SetRCode(clsRVariablesPlotFunction, bReset, bCloneIfNeeded:=True)
         ucrReceiverFactor.SetRCode(clsRFactor, bReset, bCloneIfNeeded:=True)
         ucrChkIncludePercentage.SetRCode(clsRScreePlotFunction, bReset, bCloneIfNeeded:=True)
         ucrChkEigenvalues.SetRCode(clsREigenValues, bReset, bCloneIfNeeded:=True)
         ucrChkEigenvectors.SetRCode(clsREigenVectors, bReset, bCloneIfNeeded:=True)
         ucrChkRotation.SetRCode(clsRRotation, bReset, bCloneIfNeeded:=True)
-        ucrPnlGraphics.SetRSyntax(clsRsyntax, bReset)
+        ChangeBaseOperator()
+        ucrPnlGraphics.SetRCode(clsRScreePlotFunction, bReset)
+
         ucrPnlScreePlot.SetRCode(clsRScreePlotFunction, bReset, bCloneIfNeeded:=True)
         ucrNudDim1.SetRCode(clsRIndividualsPlotFunctionValue, bReset, bCloneIfNeeded:=True)
         ucrNudDim2.SetRCode(clsRIndividualsPlotFunctionValue, bReset, bCloneIfNeeded:=True)
@@ -225,38 +229,19 @@ Public Class sdgPrincipalComponentAnalysis
         End If
     End Sub
 
-    Private Sub ucrPnlGraphics_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGraphics.ControlValueChanged
+    Private Sub ChangeBaseOperator()
         If rdoScreePlot.Checked Then
-            clsRsyntax.AddToAfterCodes(clsRScreePlotFunction, iPosition:=4)
-            clsRsyntax.RemoveFromAfterCodes(clsRVariablesPlotFunction)
-            clsRsyntax.RemoveFromAfterCodes(clsRIndividualsPlotFunction)
-            clsRsyntax.RemoveFromAfterCodes(clsRBiplotFunction)
-            clsRsyntax.RemoveFromAfterCodes(clsRBarPlotFunction)
+            clsBaseOperator.AddParameter("plot", clsRFunctionParameter:=clsRScreePlotFunction, iPosition:=0)
         ElseIf rdoVariablesPlot.Checked Then
-            clsRsyntax.AddToAfterCodes(clsRVariablesPlotFunction, iPosition:=5)
-            clsRsyntax.RemoveFromAfterCodes(clsRScreePlotFunction)
-            clsRsyntax.RemoveFromAfterCodes(clsRIndividualsPlotFunction)
-            clsRsyntax.RemoveFromAfterCodes(clsRBiplotFunction)
-            clsRsyntax.RemoveFromAfterCodes(clsRBarPlotFunction)
+            clsBaseOperator.AddParameter("plot", clsRFunctionParameter:=clsRVariablesPlotFunction, iPosition:=0)
         ElseIf rdoIndividualsPlot.Checked Then
-            clsRsyntax.AddToAfterCodes(clsRIndividualsPlotFunction, iPosition:=6)
-            clsRsyntax.RemoveFromAfterCodes(clsRVariablesPlotFunction)
-            clsRsyntax.RemoveFromAfterCodes(clsRScreePlotFunction)
-            clsRsyntax.RemoveFromAfterCodes(clsRBiplotFunction)
-            clsRsyntax.RemoveFromAfterCodes(clsRBarPlotFunction)
+            clsBaseOperator.AddParameter("plot", clsRFunctionParameter:=clsRIndividualsPlotFunction, iPosition:=0)
         ElseIf rdoBiplot.Checked Then
-            clsRsyntax.AddToAfterCodes(clsRBiplotFunction, iPosition:=7)
-            clsRsyntax.RemoveFromAfterCodes(clsRVariablesPlotFunction)
-            clsRsyntax.RemoveFromAfterCodes(clsRIndividualsPlotFunction)
-            clsRsyntax.RemoveFromAfterCodes(clsRScreePlotFunction)
-            clsRsyntax.RemoveFromAfterCodes(clsRBarPlotFunction)
+            clsBaseOperator.AddParameter("plot", clsRFunctionParameter:=clsRBiplotFunction, iPosition:=0)
         ElseIf rdoBarPlot.Checked Then
-            clsRsyntax.AddToAfterCodes(clsRBarPlotFunction, iPosition:=8)
-            clsRsyntax.RemoveFromAfterCodes(clsRVariablesPlotFunction)
-            clsRsyntax.RemoveFromAfterCodes(clsRIndividualsPlotFunction)
-            clsRsyntax.RemoveFromAfterCodes(clsRBiplotFunction)
-            clsRsyntax.RemoveFromAfterCodes(clsRScreePlotFunction)
+            clsBaseOperator.AddParameter("plot", clsRFunctionParameter:=clsRBarPlotFunction, iPosition:=0)
         End If
+        clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsRThemeMinimal, iPosition:=1)
     End Sub
 
     ' Here, the minimum and maximum dimensions selected rely on a few things

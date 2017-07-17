@@ -21,10 +21,10 @@ Public Class dlgPrincipalComponentAnalysis
     Private bResetSubdialog As Boolean = False
     Private clsPCAFunction As New RFunction
     Private clsREigenValues, clsREigenVectors, clsRRotation, clsRRotationCoord, clsRRotationEig As New RFunction
-    Private clsRScreePlotFunction, clsRScreePlotTheme, clsRVariablesPlotFunction, clsRVariablesPlotTheme, clsRIndividualsPlotFunction, clsRIndividualsPlotTheme, clsRBiplotFunction, clsRBiplotTheme, clsRBarPlotFunction As New RFunction
+    Private clsRScreePlotFunction, clsRThemeMinimal, clsRVariablesPlotFunction, clsRVariablesPlotTheme, clsRIndividualsPlotFunction, clsRIndividualsPlotTheme, clsRBiplotFunction, clsRBiplotTheme, clsRBarPlotFunction As New RFunction
     Private clsRFactor, clsRMelt, clsRBarPlotGeom, clsRBarPlotAes, clsRBarPlotFacet, clsRVariablesPlotFunctionValue, clsRIndividualsFunctionValue, clsRBiplotFunctionValue As New RFunction
     Private clsRScreePlot, clsRVariablesPlot, clsRIndividualsPlot, clsRBiplot As New RSyntax
-    Dim clsRBarPlot, clsRBarPlot0, clsRScreePlotOp As New ROperator
+    Dim clsRBarPlot, clsRBarPlot0, clsBaseOperator As New ROperator
     ' call all classes in the sub dialog
 
     Private Sub dlgPrincipalComponentAnalysis_oad(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -43,9 +43,6 @@ Public Class dlgPrincipalComponentAnalysis
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 422
-        ucrBase.clsRsyntax.iCallType = 0
-        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-
         ucrSelectorPCA.SetParameter(New RParameter("data_name", 0))
         ucrSelectorPCA.SetParameterIsString()
 
@@ -82,8 +79,8 @@ Public Class dlgPrincipalComponentAnalysis
         clsRRotation = New RFunction
         clsRRotationEig = New RFunction
         clsRRotationCoord = New RFunction
-        clsRScreePlotTheme = New RFunction
-        clsRScreePlotOp = New ROperator
+        clsRThemeMinimal = New RFunction
+        clsBaseOperator = New ROperator
         clsRScreePlotFunction = New RFunction
         clsRVariablesPlotFunction = New RFunction
         clsRVariablesPlotTheme = New RFunction
@@ -140,16 +137,14 @@ Public Class dlgPrincipalComponentAnalysis
         clsRRotation.iCallType = 2
 
         ' Scree Function
-        clsRScreePlotOp.SetOperation("+")
+        clsBaseOperator.SetOperation("+")
         clsRScreePlotFunction.SetPackageName("factoextra")
         clsRScreePlotFunction.SetRCommand("fviz_screeplot")
         clsRScreePlotFunction.iCallType = 3
         clsRScreePlotFunction.AddParameter("X", clsRFunctionParameter:=clsPCAFunction)
 
-        clsRScreePlotTheme.SetPackageName("ggplot2")
-        clsRScreePlotTheme.SetRCommand("theme_minimal")
-        clsRScreePlot.AddOperatorParameter(True, clsRFunc:=clsRScreePlotFunction)
-        clsRScreePlot.AddOperatorParameter(True, clsRFunc:=clsRScreePlotTheme)
+        clsRThemeMinimal.SetPackageName("ggplot2")
+        clsRThemeMinimal.SetRCommand("theme_minimal")
 
         ' Variables Function
         clsRVariablesPlot.SetOperation("+")
@@ -157,40 +152,27 @@ Public Class dlgPrincipalComponentAnalysis
         clsRVariablesPlotFunction.SetRCommand("fviz_pca_var")
         clsRVariablesPlotFunction.iCallType = 3
         clsRVariablesPlotFunction.AddParameter("X", clsRFunctionParameter:=clsPCAFunction)
-        clsRVariablesPlotTheme.SetPackageName("ggplot2")
-        clsRVariablesPlotTheme.SetRCommand("theme_minimal")
-        clsRVariablesPlot.SetOperatorParameter(True, clsRFunc:=clsRVariablesPlotFunction)
-        clsRVariablesPlot.SetOperatorParameter(False, clsRFunc:=clsRVariablesPlotTheme)
         clsRVariablesPlotFunctionValue.SetRCommand("c")
         clsRVariablesPlotFunctionValue.AddParameter("first_dim", 1, bIncludeArgumentName:=False, iPosition:=0)
         clsRVariablesPlotFunctionValue.AddParameter("second_dim", 2, bIncludeArgumentName:=False, iPosition:=1)
         clsRVariablesPlotFunction.AddParameter("axes", clsRFunctionParameter:=clsRVariablesPlotFunctionValue, iPosition:=1)
 
         ' Individual Plot
-        clsRIndividualsPlot.SetOperation("+")
+        'clsRIndividualsPlot.SetOperation("+")
         clsRIndividualsPlotFunction.SetPackageName("factoextra")
         clsRIndividualsPlotFunction.SetRCommand("fviz_pca_ind")
         clsRIndividualsPlotFunction.iCallType = 3
         clsRIndividualsPlotFunction.AddParameter("X", clsRFunctionParameter:=clsPCAFunction)
-        clsRIndividualsPlotTheme.SetPackageName("ggplot2")
-        clsRIndividualsPlotTheme.SetRCommand("theme_minimal")
-        clsRIndividualsPlot.SetOperatorParameter(True, clsRFunc:=clsRIndividualsPlotFunction)
-        clsRIndividualsPlot.SetOperatorParameter(False, clsRFunc:=clsRIndividualsPlotTheme)
         clsRIndividualsFunctionValue.SetRCommand("c")
         clsRIndividualsFunctionValue.AddParameter("first_dim", 1, bIncludeArgumentName:=False, iPosition:=0)
         clsRIndividualsFunctionValue.AddParameter("second_dim", 2, bIncludeArgumentName:=False, iPosition:=1)
         clsRIndividualsPlotFunction.AddParameter("axes", clsRFunctionParameter:=clsRIndividualsFunctionValue, iPosition:=1)
 
         ' Biplot
-        clsRBiplot.SetOperation("+")
         clsRBiplotFunction.SetPackageName("factoextra")
         clsRBiplotFunction.SetRCommand("fviz_pca_biplot")
         clsRBiplotFunction.iCallType = 3
         clsRBiplotFunction.AddParameter("X", clsRFunctionParameter:=clsPCAFunction)
-        clsRBiplotTheme.SetPackageName("ggplot2")
-        clsRBiplotTheme.SetRCommand("theme_minimal")
-        clsRBiplot.SetOperatorParameter(True, clsRFunc:=clsRBiplotFunction)
-        clsRBiplot.SetOperatorParameter(False, clsRFunc:=clsRBiplotTheme)
         clsRBiplotFunctionValue.SetRCommand("c")
         clsRBiplotFunctionValue.AddParameter("first_dim", 1, bIncludeArgumentName:=False, iPosition:=0)
         clsRBiplotFunctionValue.AddParameter("second_dim", 2, bIncludeArgumentName:=False, iPosition:=1)
@@ -226,8 +208,8 @@ Public Class dlgPrincipalComponentAnalysis
         clsRBarPlot.AddParameter(iPosition:=0, clsROperatorParameter:=clsRBarPlot0)
         clsRBarPlot.AddParameter(clsRFunctionParameter:=clsRBarPlotFacet)
         ucrBase.clsRsyntax.ClearCodes()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsPCAFunction)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsRScreePlotFunction, iPosition:=1)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsBaseOperator, iPosition:=1)
+        clsBaseOperator.iCallType = 3
         ucrBase.clsRsyntax.AddToAfterCodes(clsREigenValues, iPosition:=2)
         ucrBase.clsRsyntax.AddToAfterCodes(clsREigenVectors, iPosition:=3)
         ucrBase.clsRsyntax.AddToAfterCodes(clsRRotation, iPosition:=4)
@@ -263,7 +245,7 @@ Public Class dlgPrincipalComponentAnalysis
     End Sub
 
     Private Sub cmdPCAOptions_Click(sender As Object, e As EventArgs) Handles cmdPCAOptions.Click
-        sdgPrincipalComponentAnalysis.SetRFunction(ucrBase.clsRsyntax, clsREigenValues, clsREigenVectors, clsRRotation, clsRScreePlotFunction, clsRVariablesPlotFunction, clsRIndividualsPlotFunction, clsRBiplotFunction, clsRBarPlotFunction, clsRVariablesPlotFunctionValue, clsRIndividualsFunctionValue, clsRBiplotFunctionValue, clsRFactor, bResetSubdialog)
+        sdgPrincipalComponentAnalysis.SetRFunction(ucrBase.clsRsyntax, clsREigenValues, clsREigenVectors, clsRRotation, clsRScreePlotFunction, clsRVariablesPlotFunction, clsRIndividualsPlotFunction, clsRBiplotFunction, clsRBarPlotFunction, clsRVariablesPlotFunctionValue, clsRIndividualsFunctionValue, clsRBiplotFunctionValue, clsRFactor, clsBaseOperator, clsRThemeMinimal, bResetSubdialog)
         bResetSubdialog = False
         sdgPrincipalComponentAnalysis.ShowDialog()
     End Sub
@@ -282,7 +264,7 @@ Public Class dlgPrincipalComponentAnalysis
         End If
     End Sub
 
-    Private Sub ucrReceiverMultiplePCA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultiplePCA.ControlValueChanged, ucrNudNumberOfComp.ControlValueChanged
+    Private Sub ucrReceiverMultiplePCA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultiplePCA.ControlValueChanged
         If ucrReceiverMultiplePCA.IsEmpty Then
             ucrNudNumberOfComp.Minimum = 0
             ucrNudNumberOfComp.Value = 0
@@ -308,7 +290,7 @@ Public Class dlgPrincipalComponentAnalysis
         clsRRotation.AddParameter("STATS", "sqrt(" & clsRRotationEig.ToScript.ToString & "[,1])")
         ModelName()
     End Sub
-
+    
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverMultiplePCA.ControlContentsChanged, ucrNudNumberOfComp.ControlContentsChanged
         TestOKEnabled()
     End Sub
