@@ -375,6 +375,9 @@ Public Class ucrReceiverMultiple
                 If bUnique Then
                     strDataTypes = strDataTypes.Distinct().ToList()
                 End If
+                If strDataTypes.Count = 2 AndAlso strDataTypes.Contains("ordered") AndAlso strDataTypes.Contains("factor") Then
+                    strDataTypes = {"factor"}.ToList
+                End If
             End If
         End If
         Return strDataTypes

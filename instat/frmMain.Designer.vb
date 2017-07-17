@@ -2435,7 +2435,7 @@ Partial Class frmMain
         Me.EditLastDialogueToolStrip.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.EditLastDialogueToolStrip.Name = "EditLastDialogueToolStrip"
         Me.EditLastDialogueToolStrip.Size = New System.Drawing.Size(23, 22)
-        Me.EditLastDialogueToolStrip.Text = "&Edit last dialogue"
+        Me.EditLastDialogueToolStrip.Text = "&Edit last dialog"
         '
         'mnuTbShowLast10
         '
@@ -2445,7 +2445,7 @@ Partial Class frmMain
         Me.mnuTbShowLast10.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.mnuTbShowLast10.Name = "mnuTbShowLast10"
         Me.mnuTbShowLast10.Size = New System.Drawing.Size(29, 22)
-        Me.mnuTbShowLast10.Text = "&Show last 10 dialogues"
+        Me.mnuTbShowLast10.Text = "&Show last 10 dialogs"
         '
         'sepStart
         '
