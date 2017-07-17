@@ -60,6 +60,9 @@ Public Class RCodeStructure
     ' When True, assignment cannot be used for the function or its parameters
     Public bToScriptAsRString As Boolean = False
 
+    'Tag object for any use
+    Public Tag As Object
+
     Public Event ParametersChanged()
 
     'Public ReadOnly Property OrderedIndices As List(Of Integer)
@@ -273,7 +276,7 @@ Public Class RCodeStructure
             Else
                 If clsNewParam.bIsString AndAlso clsNewParam.strArgumentValue IsNot Nothing Then
                     clsParameters(i).SetArgumentValue(clsNewParam.strArgumentValue)
-                ElseIf (clsNewParam.bIsString OrElse clsNewParam.bIsFunction) AndAlso clsNewParam.clsArgumentCodeStructure IsNot Nothing Then
+                ElseIf (clsNewParam.bIsOperator OrElse clsNewParam.bIsFunction) AndAlso clsNewParam.clsArgumentCodeStructure IsNot Nothing Then
                     clsParameters(i).SetArgument(clsNewParam.clsArgumentCodeStructure)
                 Else
                     'message
@@ -425,6 +428,7 @@ Public Class RCodeStructure
         clsTempCode.bExcludeAssignedFunctionOutput = bExcludeAssignedFunctionOutput
         clsTempCode.bClearFromGlobal = bClearFromGlobal
         clsTempCode.bToScriptAsRString = bToScriptAsRString
+        clsTempCode.Tag = Tag
         For Each clsRParam In clsParameters
             clsTempCode.AddParameter(clsRParam.Clone)
         Next

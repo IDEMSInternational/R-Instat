@@ -51,8 +51,8 @@ Public Class dlgDescribeTwoVarGraph
         ucrReceiverMultipleTwoVar.SetSingleTypeStatus(True)
         ucrReceiverMultipleTwoVar.SetMultipleOnlyStatus(True)
 
-        ucrSecondVariableReceiver.Selector = ucrSelectorTwoVarGraph
         ucrSecondVariableReceiver.SetParameter(New RParameter("fill", 0))
+        ucrSecondVariableReceiver.Selector = ucrSelectorTwoVarGraph
         ucrSecondVariableReceiver.SetParameterIsString()
         ucrSecondVariableReceiver.bWithQuotes = False
 
