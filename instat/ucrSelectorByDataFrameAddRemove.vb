@@ -41,4 +41,11 @@ Public Class ucrSelectorByDataFrameAddRemove
         btnDataOptions.Visible = bVisible
     End Sub
 
+    Public Overrides Sub EnableDataOptions(strCurrentType As String)
+        If strCurrentType = "column" Then
+            btnDataOptions.Enabled = True
+        Else
+            btnDataOptions.Enabled = False
+        End If
+    End Sub
 End Class

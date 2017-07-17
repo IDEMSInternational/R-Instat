@@ -38,17 +38,11 @@ Partial Class dlgFitModel
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectorByDataFrameAddRemoveForFitModel = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblResponseVariable = New System.Windows.Forms.Label()
-        Me.ucrReceiverResponseVar = New instat.ucrReceiverSingle()
         Me.cmdModelOptions = New System.Windows.Forms.Button()
-        Me.ucrFamily = New instat.ucrDistributions()
         Me.lblModelPreview = New System.Windows.Forms.Label()
-        Me.ucrInputModelPreview = New instat.ucrInputTextBox()
         Me.cmdDisplayOptions = New System.Windows.Forms.Button()
         Me.lblExplanatoryModel = New System.Windows.Forms.Label()
-        Me.ucrReceiverExpressionFitModel = New instat.ucrReceiverExpression()
         Me.cmdDiv = New System.Windows.Forms.Button()
         Me.grpFirstCalc = New System.Windows.Forms.GroupBox()
         Me.cmdMultiply = New System.Windows.Forms.Button()
@@ -68,29 +62,17 @@ Partial Class dlgFitModel
         Me.cmdLog = New System.Windows.Forms.Button()
         Me.cmdTan = New System.Windows.Forms.Button()
         Me.cmdExp = New System.Windows.Forms.Button()
-        Me.ucrModelName = New instat.ucrInputComboBox()
-        Me.chkSaveModel = New System.Windows.Forms.CheckBox()
-        Me.chkConvertToVariate = New System.Windows.Forms.CheckBox()
+        Me.ucrReceiverExpressionFitModel = New instat.ucrReceiverExpression()
+        Me.ucrInputModelPreview = New instat.ucrInputTextBox()
+        Me.ucrFamily = New instat.ucrDistributions()
+        Me.ucrReceiverResponseVar = New instat.ucrReceiverSingle()
+        Me.ucrSelectorByDataFrameAddRemoveForFitModel = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrChkConvertToVariate = New instat.ucrCheck()
+        Me.ucrModelName = New instat.ucrSave()
         Me.grpFirstCalc.SuspendLayout()
         Me.grpSecondCalc.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 298)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 0
-        '
-        'ucrSelectorByDataFrameAddRemoveForFitModel
-        '
-        Me.ucrSelectorByDataFrameAddRemoveForFitModel.bShowHiddenColumns = False
-        Me.ucrSelectorByDataFrameAddRemoveForFitModel.bUseCurrentFilter = True
-        Me.ucrSelectorByDataFrameAddRemoveForFitModel.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorByDataFrameAddRemoveForFitModel.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorByDataFrameAddRemoveForFitModel.Name = "ucrSelectorByDataFrameAddRemoveForFitModel"
-        Me.ucrSelectorByDataFrameAddRemoveForFitModel.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorByDataFrameAddRemoveForFitModel.TabIndex = 1
         '
         'lblResponseVariable
         '
@@ -98,33 +80,17 @@ Partial Class dlgFitModel
         Me.lblResponseVariable.Location = New System.Drawing.Point(244, 28)
         Me.lblResponseVariable.Name = "lblResponseVariable"
         Me.lblResponseVariable.Size = New System.Drawing.Size(99, 13)
-        Me.lblResponseVariable.TabIndex = 2
+        Me.lblResponseVariable.TabIndex = 1
         Me.lblResponseVariable.Text = "Response Variable:"
-        '
-        'ucrReceiverResponseVar
-        '
-        Me.ucrReceiverResponseVar.Location = New System.Drawing.Point(243, 43)
-        Me.ucrReceiverResponseVar.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverResponseVar.Name = "ucrReceiverResponseVar"
-        Me.ucrReceiverResponseVar.Selector = Nothing
-        Me.ucrReceiverResponseVar.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverResponseVar.TabIndex = 3
         '
         'cmdModelOptions
         '
         Me.cmdModelOptions.Location = New System.Drawing.Point(303, 243)
         Me.cmdModelOptions.Name = "cmdModelOptions"
         Me.cmdModelOptions.Size = New System.Drawing.Size(105, 23)
-        Me.cmdModelOptions.TabIndex = 4
-        Me.cmdModelOptions.Text = "Model options"
+        Me.cmdModelOptions.TabIndex = 11
+        Me.cmdModelOptions.Text = "Model Options"
         Me.cmdModelOptions.UseVisualStyleBackColor = True
-        '
-        'ucrFamily
-        '
-        Me.ucrFamily.Location = New System.Drawing.Point(10, 193)
-        Me.ucrFamily.Name = "ucrFamily"
-        Me.ucrFamily.Size = New System.Drawing.Size(207, 43)
-        Me.ucrFamily.TabIndex = 5
         '
         'lblModelPreview
         '
@@ -132,24 +98,16 @@ Partial Class dlgFitModel
         Me.lblModelPreview.Location = New System.Drawing.Point(7, 248)
         Me.lblModelPreview.Name = "lblModelPreview"
         Me.lblModelPreview.Size = New System.Drawing.Size(80, 13)
-        Me.lblModelPreview.TabIndex = 6
+        Me.lblModelPreview.TabIndex = 9
         Me.lblModelPreview.Text = "Model Preview:"
-        '
-        'ucrInputModelPreview
-        '
-        Me.ucrInputModelPreview.IsReadOnly = False
-        Me.ucrInputModelPreview.Location = New System.Drawing.Point(90, 245)
-        Me.ucrInputModelPreview.Name = "ucrInputModelPreview"
-        Me.ucrInputModelPreview.Size = New System.Drawing.Size(200, 21)
-        Me.ucrInputModelPreview.TabIndex = 7
         '
         'cmdDisplayOptions
         '
         Me.cmdDisplayOptions.Location = New System.Drawing.Point(303, 271)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
         Me.cmdDisplayOptions.Size = New System.Drawing.Size(105, 23)
-        Me.cmdDisplayOptions.TabIndex = 9
-        Me.cmdDisplayOptions.Text = "Display options"
+        Me.cmdDisplayOptions.TabIndex = 13
+        Me.cmdDisplayOptions.Text = "Display Options"
         Me.cmdDisplayOptions.UseVisualStyleBackColor = True
         '
         'lblExplanatoryModel
@@ -158,16 +116,8 @@ Partial Class dlgFitModel
         Me.lblExplanatoryModel.Location = New System.Drawing.Point(245, 73)
         Me.lblExplanatoryModel.Name = "lblExplanatoryModel"
         Me.lblExplanatoryModel.Size = New System.Drawing.Size(97, 13)
-        Me.lblExplanatoryModel.TabIndex = 10
+        Me.lblExplanatoryModel.TabIndex = 4
         Me.lblExplanatoryModel.Text = "Explanatory Model:"
-        '
-        'ucrReceiverExpressionFitModel
-        '
-        Me.ucrReceiverExpressionFitModel.Location = New System.Drawing.Point(243, 89)
-        Me.ucrReceiverExpressionFitModel.Name = "ucrReceiverExpressionFitModel"
-        Me.ucrReceiverExpressionFitModel.Selector = Nothing
-        Me.ucrReceiverExpressionFitModel.Size = New System.Drawing.Size(256, 30)
-        Me.ucrReceiverExpressionFitModel.TabIndex = 11
         '
         'cmdDiv
         '
@@ -175,7 +125,7 @@ Partial Class dlgFitModel
         Me.cmdDiv.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdDiv.Name = "cmdDiv"
         Me.cmdDiv.Size = New System.Drawing.Size(29, 30)
-        Me.cmdDiv.TabIndex = 156
+        Me.cmdDiv.TabIndex = 3
         Me.cmdDiv.Text = "/"
         Me.cmdDiv.UseVisualStyleBackColor = True
         '
@@ -195,7 +145,7 @@ Partial Class dlgFitModel
         Me.grpFirstCalc.Location = New System.Drawing.Point(243, 125)
         Me.grpFirstCalc.Name = "grpFirstCalc"
         Me.grpFirstCalc.Size = New System.Drawing.Size(131, 111)
-        Me.grpFirstCalc.TabIndex = 161
+        Me.grpFirstCalc.TabIndex = 6
         Me.grpFirstCalc.TabStop = False
         '
         'cmdMultiply
@@ -204,7 +154,7 @@ Partial Class dlgFitModel
         Me.cmdMultiply.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdMultiply.Name = "cmdMultiply"
         Me.cmdMultiply.Size = New System.Drawing.Size(29, 30)
-        Me.cmdMultiply.TabIndex = 167
+        Me.cmdMultiply.TabIndex = 2
         Me.cmdMultiply.Text = "*"
         Me.cmdMultiply.UseVisualStyleBackColor = True
         '
@@ -214,7 +164,7 @@ Partial Class dlgFitModel
         Me.cmdColon.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdColon.Name = "cmdColon"
         Me.cmdColon.Size = New System.Drawing.Size(29, 30)
-        Me.cmdColon.TabIndex = 166
+        Me.cmdColon.TabIndex = 1
         Me.cmdColon.Text = ":"
         Me.cmdColon.UseVisualStyleBackColor = True
         '
@@ -224,7 +174,7 @@ Partial Class dlgFitModel
         Me.cmdPlus.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdPlus.Name = "cmdPlus"
         Me.cmdPlus.Size = New System.Drawing.Size(29, 30)
-        Me.cmdPlus.TabIndex = 165
+        Me.cmdPlus.TabIndex = 0
         Me.cmdPlus.Text = "+"
         Me.cmdPlus.UseVisualStyleBackColor = True
         '
@@ -234,7 +184,7 @@ Partial Class dlgFitModel
         Me.cmdPower.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdPower.Name = "cmdPower"
         Me.cmdPower.Size = New System.Drawing.Size(29, 32)
-        Me.cmdPower.TabIndex = 164
+        Me.cmdPower.TabIndex = 7
         Me.cmdPower.Text = "^"
         Me.cmdPower.UseVisualStyleBackColor = True
         '
@@ -244,7 +194,7 @@ Partial Class dlgFitModel
         Me.cmdClosingBracket.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdClosingBracket.Name = "cmdClosingBracket"
         Me.cmdClosingBracket.Size = New System.Drawing.Size(29, 32)
-        Me.cmdClosingBracket.TabIndex = 164
+        Me.cmdClosingBracket.TabIndex = 6
         Me.cmdClosingBracket.Text = ")"
         Me.cmdClosingBracket.UseVisualStyleBackColor = True
         '
@@ -254,7 +204,7 @@ Partial Class dlgFitModel
         Me.cmdOpeningBracket.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdOpeningBracket.Name = "cmdOpeningBracket"
         Me.cmdOpeningBracket.Size = New System.Drawing.Size(29, 32)
-        Me.cmdOpeningBracket.TabIndex = 163
+        Me.cmdOpeningBracket.TabIndex = 5
         Me.cmdOpeningBracket.Text = "("
         Me.cmdOpeningBracket.UseVisualStyleBackColor = True
         '
@@ -264,7 +214,7 @@ Partial Class dlgFitModel
         Me.cmdDoubleBracket.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdDoubleBracket.Name = "cmdDoubleBracket"
         Me.cmdDoubleBracket.Size = New System.Drawing.Size(29, 32)
-        Me.cmdDoubleBracket.TabIndex = 162
+        Me.cmdDoubleBracket.TabIndex = 4
         Me.cmdDoubleBracket.Text = "( )"
         Me.cmdDoubleBracket.UseVisualStyleBackColor = True
         '
@@ -274,7 +224,7 @@ Partial Class dlgFitModel
         Me.cmdClear.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdClear.Name = "cmdClear"
         Me.cmdClear.Size = New System.Drawing.Size(60, 30)
-        Me.cmdClear.TabIndex = 161
+        Me.cmdClear.TabIndex = 10
         Me.cmdClear.Text = "Clear"
         Me.cmdClear.UseVisualStyleBackColor = True
         '
@@ -284,7 +234,7 @@ Partial Class dlgFitModel
         Me.cmdZero.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdZero.Name = "cmdZero"
         Me.cmdZero.Size = New System.Drawing.Size(29, 30)
-        Me.cmdZero.TabIndex = 160
+        Me.cmdZero.TabIndex = 9
         Me.cmdZero.Text = "0"
         Me.cmdZero.UseVisualStyleBackColor = True
         '
@@ -294,7 +244,7 @@ Partial Class dlgFitModel
         Me.cmdMinus.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdMinus.Name = "cmdMinus"
         Me.cmdMinus.Size = New System.Drawing.Size(29, 30)
-        Me.cmdMinus.TabIndex = 159
+        Me.cmdMinus.TabIndex = 8
         Me.cmdMinus.Text = "-"
         Me.cmdMinus.UseVisualStyleBackColor = True
         '
@@ -309,7 +259,7 @@ Partial Class dlgFitModel
         Me.grpSecondCalc.Location = New System.Drawing.Point(373, 125)
         Me.grpSecondCalc.Name = "grpSecondCalc"
         Me.grpSecondCalc.Size = New System.Drawing.Size(126, 111)
-        Me.grpSecondCalc.TabIndex = 162
+        Me.grpSecondCalc.TabIndex = 7
         Me.grpSecondCalc.TabStop = False
         '
         'cmdCos
@@ -318,7 +268,7 @@ Partial Class dlgFitModel
         Me.cmdCos.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdCos.Name = "cmdCos"
         Me.cmdCos.Size = New System.Drawing.Size(56, 30)
-        Me.cmdCos.TabIndex = 164
+        Me.cmdCos.TabIndex = 1
         Me.cmdCos.Text = "cos"
         Me.cmdCos.UseVisualStyleBackColor = True
         '
@@ -328,7 +278,7 @@ Partial Class dlgFitModel
         Me.cmdSqrt.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdSqrt.Name = "cmdSqrt"
         Me.cmdSqrt.Size = New System.Drawing.Size(56, 30)
-        Me.cmdSqrt.TabIndex = 163
+        Me.cmdSqrt.TabIndex = 0
         Me.cmdSqrt.Text = "sqrt"
         Me.cmdSqrt.UseVisualStyleBackColor = True
         '
@@ -338,7 +288,7 @@ Partial Class dlgFitModel
         Me.cmdSin.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdSin.Name = "cmdSin"
         Me.cmdSin.Size = New System.Drawing.Size(56, 30)
-        Me.cmdSin.TabIndex = 162
+        Me.cmdSin.TabIndex = 3
         Me.cmdSin.Text = "sin"
         Me.cmdSin.UseVisualStyleBackColor = True
         '
@@ -348,7 +298,7 @@ Partial Class dlgFitModel
         Me.cmdLog.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdLog.Name = "cmdLog"
         Me.cmdLog.Size = New System.Drawing.Size(56, 30)
-        Me.cmdLog.TabIndex = 161
+        Me.cmdLog.TabIndex = 2
         Me.cmdLog.Text = "log"
         Me.cmdLog.UseVisualStyleBackColor = True
         '
@@ -358,7 +308,7 @@ Partial Class dlgFitModel
         Me.cmdTan.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdTan.Name = "cmdTan"
         Me.cmdTan.Size = New System.Drawing.Size(56, 30)
-        Me.cmdTan.TabIndex = 160
+        Me.cmdTan.TabIndex = 5
         Me.cmdTan.Text = "tan"
         Me.cmdTan.UseVisualStyleBackColor = True
         '
@@ -368,48 +318,89 @@ Partial Class dlgFitModel
         Me.cmdExp.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdExp.Name = "cmdExp"
         Me.cmdExp.Size = New System.Drawing.Size(56, 30)
-        Me.cmdExp.TabIndex = 159
+        Me.cmdExp.TabIndex = 4
         Me.cmdExp.Text = "exp"
         Me.cmdExp.UseVisualStyleBackColor = True
         '
+        'ucrReceiverExpressionFitModel
+        '
+        Me.ucrReceiverExpressionFitModel.frmParent = Me
+        Me.ucrReceiverExpressionFitModel.Location = New System.Drawing.Point(243, 89)
+        Me.ucrReceiverExpressionFitModel.Name = "ucrReceiverExpressionFitModel"
+        Me.ucrReceiverExpressionFitModel.Selector = Nothing
+        Me.ucrReceiverExpressionFitModel.Size = New System.Drawing.Size(256, 30)
+        Me.ucrReceiverExpressionFitModel.strNcFilePath = ""
+        Me.ucrReceiverExpressionFitModel.TabIndex = 5
+        Me.ucrReceiverExpressionFitModel.ucrSelector = Nothing
+        '
+        'ucrInputModelPreview
+        '
+        Me.ucrInputModelPreview.AddQuotesIfUnrecognised = True
+        Me.ucrInputModelPreview.IsMultiline = False
+        Me.ucrInputModelPreview.IsReadOnly = False
+        Me.ucrInputModelPreview.Location = New System.Drawing.Point(90, 245)
+        Me.ucrInputModelPreview.Name = "ucrInputModelPreview"
+        Me.ucrInputModelPreview.Size = New System.Drawing.Size(200, 21)
+        Me.ucrInputModelPreview.TabIndex = 10
+        '
+        'ucrFamily
+        '
+        Me.ucrFamily.Location = New System.Drawing.Point(10, 199)
+        Me.ucrFamily.Name = "ucrFamily"
+        Me.ucrFamily.Size = New System.Drawing.Size(207, 43)
+        Me.ucrFamily.TabIndex = 8
+        '
+        'ucrReceiverResponseVar
+        '
+        Me.ucrReceiverResponseVar.frmParent = Me
+        Me.ucrReceiverResponseVar.Location = New System.Drawing.Point(243, 43)
+        Me.ucrReceiverResponseVar.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverResponseVar.Name = "ucrReceiverResponseVar"
+        Me.ucrReceiverResponseVar.Selector = Nothing
+        Me.ucrReceiverResponseVar.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverResponseVar.strNcFilePath = ""
+        Me.ucrReceiverResponseVar.TabIndex = 2
+        Me.ucrReceiverResponseVar.ucrSelector = Nothing
+        '
+        'ucrSelectorByDataFrameAddRemoveForFitModel
+        '
+        Me.ucrSelectorByDataFrameAddRemoveForFitModel.bShowHiddenColumns = False
+        Me.ucrSelectorByDataFrameAddRemoveForFitModel.bUseCurrentFilter = True
+        Me.ucrSelectorByDataFrameAddRemoveForFitModel.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorByDataFrameAddRemoveForFitModel.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorByDataFrameAddRemoveForFitModel.Name = "ucrSelectorByDataFrameAddRemoveForFitModel"
+        Me.ucrSelectorByDataFrameAddRemoveForFitModel.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorByDataFrameAddRemoveForFitModel.TabIndex = 0
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 300)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 14
+        '
+        'ucrChkConvertToVariate
+        '
+        Me.ucrChkConvertToVariate.Checked = False
+        Me.ucrChkConvertToVariate.Location = New System.Drawing.Point(378, 43)
+        Me.ucrChkConvertToVariate.Name = "ucrChkConvertToVariate"
+        Me.ucrChkConvertToVariate.Size = New System.Drawing.Size(120, 20)
+        Me.ucrChkConvertToVariate.TabIndex = 3
+        '
         'ucrModelName
         '
-        Me.ucrModelName.IsReadOnly = False
-        Me.ucrModelName.Location = New System.Drawing.Point(90, 271)
+        Me.ucrModelName.Location = New System.Drawing.Point(10, 272)
         Me.ucrModelName.Name = "ucrModelName"
-        Me.ucrModelName.Size = New System.Drawing.Size(200, 21)
-        Me.ucrModelName.TabIndex = 164
-        '
-        'chkSaveModel
-        '
-        Me.chkSaveModel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.chkSaveModel.Location = New System.Drawing.Point(9, 271)
-        Me.chkSaveModel.Name = "chkSaveModel"
-        Me.chkSaveModel.Size = New System.Drawing.Size(104, 24)
-        Me.chkSaveModel.TabIndex = 163
-        Me.chkSaveModel.Tag = "Save_Model"
-        Me.chkSaveModel.Text = "Save Model"
-        Me.chkSaveModel.UseVisualStyleBackColor = True
-        '
-        'chkConvertToVariate
-        '
-        Me.chkConvertToVariate.AutoSize = True
-        Me.chkConvertToVariate.Location = New System.Drawing.Point(380, 45)
-        Me.chkConvertToVariate.Name = "chkConvertToVariate"
-        Me.chkConvertToVariate.Size = New System.Drawing.Size(111, 17)
-        Me.chkConvertToVariate.TabIndex = 165
-        Me.chkConvertToVariate.Tag = "Convert_to_Variate"
-        Me.chkConvertToVariate.Text = "Convert to Variate"
-        Me.chkConvertToVariate.UseVisualStyleBackColor = True
+        Me.ucrModelName.Size = New System.Drawing.Size(277, 24)
+        Me.ucrModelName.TabIndex = 12
         '
         'dlgFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(510, 357)
-        Me.Controls.Add(Me.chkConvertToVariate)
         Me.Controls.Add(Me.ucrModelName)
-        Me.Controls.Add(Me.chkSaveModel)
+        Me.Controls.Add(Me.ucrChkConvertToVariate)
         Me.Controls.Add(Me.grpSecondCalc)
         Me.Controls.Add(Me.grpFirstCalc)
         Me.Controls.Add(Me.ucrReceiverExpressionFitModel)
@@ -467,7 +458,6 @@ Partial Class dlgFitModel
     Friend WithEvents cmdTan As Button
     Friend WithEvents cmdExp As Button
     Friend WithEvents cmdPower As Button
-    Friend WithEvents ucrModelName As ucrInputComboBox
-    Friend WithEvents chkSaveModel As CheckBox
-    Friend WithEvents chkConvertToVariate As CheckBox
+    Friend WithEvents ucrChkConvertToVariate As ucrCheck
+    Friend WithEvents ucrModelName As ucrSave
 End Class
