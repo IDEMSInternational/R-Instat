@@ -317,7 +317,7 @@ Public Class sdgSimpleRegOptions
         If bReset Then
             tbpRegOptions.SelectedIndex = 0
         End If
-
+        GroupBoxDisplay()
         bRCodeSet = True
     End Sub
 
@@ -366,9 +366,33 @@ Public Class sdgSimpleRegOptions
 
     Private Sub ucrChkFittedModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFittedModel.ControlValueChanged
         If ucrChkFittedModel.Checked Then
+            grpPlotType.Show()
+            grpScale.Show()
             clsRSyntax.AddToAfterCodes(clsVisReg, iPosition:=4)
         Else
+            grpPlotType.Hide()
+            grpScale.Hide()
             clsRSyntax.RemoveFromAfterCodes(clsVisReg)
+        End If
+    End Sub
+
+    Private Sub GroupBoxDisplay()
+        If ucrChkFittedModel.Checked Then
+            grpPlotType.Show()
+            grpScale.Show()
+        Else
+            grpPlotType.Hide()
+            grpScale.Hide()
+        End If
+        If ucrChkRugs.Checked Then
+            grpRugs.Show()
+        Else
+            grpRugs.Hide()
+        End If
+        If ucrChkResidualPlots.Checked Then
+            grpMultiplePlots.Show()
+        Else
+            grpMultiplePlots.Hide()
         End If
     End Sub
 
