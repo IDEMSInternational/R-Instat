@@ -163,8 +163,8 @@ Public Class sdgPrincipalComponentAnalysis
         clsRVariablesPlotFunctionValue = clsNewVariablesPlotFunctionValue
         clsRIndividualsPlotFunctionValue = clsNewIndividualsPlotFunctionValue
         clsRBiplotFunctionValue = clsNewBiplotFunctionValue
-        ucrInputLabel2.AddAdditionalCodeParameterPair(clsRIndividualsPlotFunction, New RParameter("label"), iAdditionalPairNo:=2)
-        ucrInputLabel2.AddAdditionalCodeParameterPair(clsRBiplotFunction, New RParameter("label"), iAdditionalPairNo:=3)
+        ucrInputLabel2.AddAdditionalCodeParameterPair(clsRIndividualsPlotFunction, New RParameter("label"), iAdditionalPairNo:=1)
+        ucrInputLabel2.AddAdditionalCodeParameterPair(clsRBiplotFunction, New RParameter("label"), iAdditionalPairNo:=2)
         ucrNudDim1.AddAdditionalCodeParameterPair(clsRVariablesPlotFunctionValue, New RParameter("first_dim", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrNudDim1.AddAdditionalCodeParameterPair(clsRBiplotFunctionValue, New RParameter("first_dim", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
         ucrNudDim2.AddAdditionalCodeParameterPair(clsRVariablesPlotFunctionValue, New RParameter("second_dim", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
