@@ -312,7 +312,7 @@ Public Class sdgSimpleRegOptions
         ucrSaveFittedColumnName.SetRCode(clsRWriteFitted, bReset)
         ucrSaveResidualsColumnName.SetRCode(clsRWriteResiduals, bReset)
         ucrSaveStdResidualsColumnName.SetRCode(clsRWriteStdResiduals, bReset)
-        ucrSaveLeverageColumnName.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
+        ucrSaveLeverageColumnName.SetRCode(clsRWriteLeverage, bReset, bCloneIfNeeded:=True)
 
         If bReset Then
             tbpRegOptions.SelectedIndex = 0
