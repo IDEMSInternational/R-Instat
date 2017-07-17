@@ -71,11 +71,13 @@ Partial Class dlgRenameObjects
         Me.ucrReceiverCurrentName.Name = "ucrReceiverCurrentName"
         Me.ucrReceiverCurrentName.Selector = Nothing
         Me.ucrReceiverCurrentName.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverCurrentName.strNcFilePath = ""
         Me.ucrReceiverCurrentName.TabIndex = 2
+        Me.ucrReceiverCurrentName.ucrSelector = Nothing
         '
         'lblCurrentName
         '
-        Me.lblCurrentName.Location = New System.Drawing.Point(262, 45)
+        Me.lblCurrentName.Location = New System.Drawing.Point(262, 44)
         Me.lblCurrentName.Name = "lblCurrentName"
         Me.lblCurrentName.Size = New System.Drawing.Size(100, 15)
         Me.lblCurrentName.TabIndex = 1
@@ -93,6 +95,7 @@ Partial Class dlgRenameObjects
         '
         'ucrInputNewName
         '
+        Me.ucrInputNewName.AddQuotesIfUnrecognised = True
         Me.ucrInputNewName.IsMultiline = False
         Me.ucrInputNewName.IsReadOnly = False
         Me.ucrInputNewName.Location = New System.Drawing.Point(262, 107)
@@ -100,7 +103,7 @@ Partial Class dlgRenameObjects
         Me.ucrInputNewName.Size = New System.Drawing.Size(120, 21)
         Me.ucrInputNewName.TabIndex = 4
         '
-        'dlgRenameDescriptive
+        'dlgRenameObjects
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -114,7 +117,7 @@ Partial Class dlgRenameObjects
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgRenameDescriptive"
+        Me.Name = "dlgRenameObjects"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Rename_Object"
         Me.Text = "Rename Objects"
