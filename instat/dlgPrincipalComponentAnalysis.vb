@@ -140,17 +140,14 @@ Public Class dlgPrincipalComponentAnalysis
         clsBaseOperator.SetOperation("+")
         clsRScreePlotFunction.SetPackageName("factoextra")
         clsRScreePlotFunction.SetRCommand("fviz_screeplot")
-        clsRScreePlotFunction.iCallType = 3
         clsRScreePlotFunction.AddParameter("X", clsRFunctionParameter:=clsPCAFunction)
 
         clsRThemeMinimal.SetPackageName("ggplot2")
         clsRThemeMinimal.SetRCommand("theme_minimal")
 
         ' Variables Function
-        clsRVariablesPlot.SetOperation("+")
         clsRVariablesPlotFunction.SetPackageName("factoextra")
         clsRVariablesPlotFunction.SetRCommand("fviz_pca_var")
-        clsRVariablesPlotFunction.iCallType = 3
         clsRVariablesPlotFunction.AddParameter("X", clsRFunctionParameter:=clsPCAFunction)
         clsRVariablesPlotFunctionValue.SetRCommand("c")
         clsRVariablesPlotFunctionValue.AddParameter("first_dim", 1, bIncludeArgumentName:=False, iPosition:=0)
@@ -158,10 +155,8 @@ Public Class dlgPrincipalComponentAnalysis
         clsRVariablesPlotFunction.AddParameter("axes", clsRFunctionParameter:=clsRVariablesPlotFunctionValue, iPosition:=1)
 
         ' Individual Plot
-        'clsRIndividualsPlot.SetOperation("+")
         clsRIndividualsPlotFunction.SetPackageName("factoextra")
         clsRIndividualsPlotFunction.SetRCommand("fviz_pca_ind")
-        clsRIndividualsPlotFunction.iCallType = 3
         clsRIndividualsPlotFunction.AddParameter("X", clsRFunctionParameter:=clsPCAFunction)
         clsRIndividualsFunctionValue.SetRCommand("c")
         clsRIndividualsFunctionValue.AddParameter("first_dim", 1, bIncludeArgumentName:=False, iPosition:=0)
@@ -171,7 +166,6 @@ Public Class dlgPrincipalComponentAnalysis
         ' Biplot
         clsRBiplotFunction.SetPackageName("factoextra")
         clsRBiplotFunction.SetRCommand("fviz_pca_biplot")
-        clsRBiplotFunction.iCallType = 3
         clsRBiplotFunction.AddParameter("X", clsRFunctionParameter:=clsPCAFunction)
         clsRBiplotFunctionValue.SetRCommand("c")
         clsRBiplotFunctionValue.AddParameter("first_dim", 1, bIncludeArgumentName:=False, iPosition:=0)

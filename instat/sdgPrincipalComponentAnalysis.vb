@@ -163,7 +163,6 @@ Public Class sdgPrincipalComponentAnalysis
         clsRVariablesPlotFunctionValue = clsNewVariablesPlotFunctionValue
         clsRIndividualsPlotFunctionValue = clsNewIndividualsPlotFunctionValue
         clsRBiplotFunctionValue = clsNewBiplotFunctionValue
-        ucrInputLabel2.AddAdditionalCodeParameterPair(clsRVariablesPlotFunction, New RParameter("label"), iAdditionalPairNo:=1)
         ucrInputLabel2.AddAdditionalCodeParameterPair(clsRIndividualsPlotFunction, New RParameter("label"), iAdditionalPairNo:=2)
         ucrInputLabel2.AddAdditionalCodeParameterPair(clsRBiplotFunction, New RParameter("label"), iAdditionalPairNo:=3)
         ucrNudDim1.AddAdditionalCodeParameterPair(clsRVariablesPlotFunctionValue, New RParameter("first_dim", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
@@ -181,9 +180,7 @@ Public Class sdgPrincipalComponentAnalysis
         ucrChkEigenvalues.SetRCode(clsREigenValues, bReset, bCloneIfNeeded:=True)
         ucrChkEigenvectors.SetRCode(clsREigenVectors, bReset, bCloneIfNeeded:=True)
         ucrChkRotation.SetRCode(clsRRotation, bReset, bCloneIfNeeded:=True)
-        ChangeBaseOperator()
-        ucrPnlGraphics.SetRCode(clsRScreePlotFunction, bReset)
-
+        ucrPnlGraphics.SetRCode(clsBaseOperator, bReset)
         ucrPnlScreePlot.SetRCode(clsRScreePlotFunction, bReset, bCloneIfNeeded:=True)
         ucrNudDim1.SetRCode(clsRIndividualsPlotFunctionValue, bReset, bCloneIfNeeded:=True)
         ucrNudDim2.SetRCode(clsRIndividualsPlotFunctionValue, bReset, bCloneIfNeeded:=True)
@@ -229,7 +226,7 @@ Public Class sdgPrincipalComponentAnalysis
         End If
     End Sub
 
-    Private Sub ChangeBaseOperator()
+    Private Sub ucrPnlGraphics_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGraphics.ControlValueChanged
         If rdoScreePlot.Checked Then
             clsBaseOperator.AddParameter("plot", clsRFunctionParameter:=clsRScreePlotFunction, iPosition:=0)
         ElseIf rdoVariablesPlot.Checked Then
@@ -274,4 +271,5 @@ Public Class sdgPrincipalComponentAnalysis
             End If
         End If
     End Sub
+
 End Class
