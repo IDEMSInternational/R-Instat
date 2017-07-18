@@ -210,10 +210,10 @@ Public Class dlgOneVarUseModel
     Private Sub ucrChkProduceBootstrap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkProduceBootstrap.ControlValueChanged
         If ucrChkProduceBootstrap.Checked Then
             clsQuantileFunction.AddParameter("x", clsRFunctionParameter:=clsRBootFunction)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsRBootFunction, iPosition:=0)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsRBootFunction, iPosition:=0)
         Else
             clsQuantileFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverObject.GetVariables())
-            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRBootFunction)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsRBootFunction)
         End If
         ucrBase.clsRsyntax.SetBaseRFunction(clsQuantileFunction)
         sdgOneVarUseModFit.SetPlotOptions()
