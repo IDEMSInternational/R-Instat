@@ -67,7 +67,7 @@ Public Class sdgOneVarFitModDisplay
         ucrSaveLikelihood.SetCheckBoxText("Save Graph")
         ucrSaveLikelihood.SetIsComboBox()
         ucrSaveLikelihood.SetAssignToIfUncheckedValue("last_likelihood")
-
+        InitialiseTabs()
         bControlsInitialised = True
     End Sub
 
@@ -94,6 +94,9 @@ Public Class sdgOneVarFitModDisplay
         ucrChkPLotLogLik.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
         ucrSaveLikelihood.SetRCode(clsRLogLikFunction, bReset, bCloneIfNeeded:=True)
         SetPlotOptions()
+        If bReset Then
+            tbcPlots.SelectedIndex = 0
+        End If
     End Sub
 
     Private Sub ucrPnlPlots_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPlots.ControlValueChanged
@@ -161,5 +164,12 @@ Public Class sdgOneVarFitModDisplay
         Else
             clsRSyntax.RemoveFromAfterCodes(clsRLogLikFunction)
         End If
+    End Sub
+
+    Private Sub InitialiseTabs()
+        For i = 0 To tbcPlots.TabCount - 1
+            tbcPlots.SelectedIndex = i
+        Next
+        tbcPlots.SelectedIndex = 0
     End Sub
 End Class
