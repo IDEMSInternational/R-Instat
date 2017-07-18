@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class dlgClimaticSummary
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
+    Private bResetSubdialog As Boolean = False
     Private Sub dlgClimaticSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
@@ -97,6 +98,7 @@ Public Class dlgClimaticSummary
     End Sub
 
     Private Sub SetDefaults()
+        bResetSubdialog = True
 
     End Sub
 
@@ -112,5 +114,11 @@ Public Class dlgClimaticSummary
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
+    End Sub
+
+    Private Sub cmdSummary_Click(sender As Object, e As EventArgs) Handles cmdSummary.Click
+        sdgClimaticSummary.SetRCode(bReset:=bResetSubdialog)
+        bResetSubdialog = False
+        sdgClimaticSummary.ShowDialog()
     End Sub
 End Class
