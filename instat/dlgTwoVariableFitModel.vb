@@ -49,6 +49,7 @@ Public Class dlgTwoVariableFitModel
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
+        TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()

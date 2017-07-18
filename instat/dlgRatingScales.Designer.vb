@@ -61,6 +61,7 @@ Partial Class dlgRatingScales
         Me.ucrReceiverOrderedFactors = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorRatingScale = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.UcrDialogDisabled1 = New instat.ucrDialogDisabled()
         Me.grpSort.SuspendLayout()
         Me.grpLikertType.SuspendLayout()
         Me.SuspendLayout()
@@ -312,11 +313,20 @@ Partial Class dlgRatingScales
         Me.ucrSelectorRatingScale.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorRatingScale.TabIndex = 4
         '
+        'UcrDialogDisabled1
+        '
+        Me.UcrDialogDisabled1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.UcrDialogDisabled1.Location = New System.Drawing.Point(87, 192)
+        Me.UcrDialogDisabled1.Name = "UcrDialogDisabled1"
+        Me.UcrDialogDisabled1.Size = New System.Drawing.Size(240, 50)
+        Me.UcrDialogDisabled1.TabIndex = 16
+        '
         'dlgRatingScales
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(419, 470)
+        Me.Controls.Add(Me.UcrDialogDisabled1)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.rdoStacked)
         Me.Controls.Add(Me.rdoLikert)
@@ -369,4 +379,5 @@ Partial Class dlgRatingScales
     Friend WithEvents ucrPnlGraphType As UcrPanel
     Friend WithEvents ucrChkNumberOfCategories As ucrCheck
     Friend WithEvents ucrSaveGraph As ucrSave
+    Friend WithEvents UcrDialogDisabled1 As ucrDialogDisabled
 End Class
