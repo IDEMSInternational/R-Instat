@@ -38,39 +38,32 @@ Partial Class dlgClimaticSummary
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
         Me.rdoAnnual = New System.Windows.Forms.RadioButton()
         Me.rdoAnnualVariable = New System.Windows.Forms.RadioButton()
         Me.rdoWithinYear = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlAnnual = New instat.UcrPanel()
-        Me.ucrSelectorVariable = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
-        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
-        Me.ucrReceiverYear = New instat.ucrReceiverSingle()
-        Me.ucrReceiverDay = New instat.ucrReceiverSingle()
-        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.lblStation = New System.Windows.Forms.Label()
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lblDay = New System.Windows.Forms.Label()
         Me.lblElement = New System.Windows.Forms.Label()
-        Me.ucrNudFrom = New instat.ucrNud()
-        Me.ucrNudTo = New instat.ucrNud()
         Me.lblTo = New System.Windows.Forms.Label()
         Me.lblFrom = New System.Windows.Forms.Label()
-        Me.ucrReceiverTo = New instat.ucrReceiverSingle()
-        Me.ucrReceiverFrom = New instat.ucrReceiverSingle()
         Me.lblReceiverTo = New System.Windows.Forms.Label()
         Me.lblReceiverFrom = New System.Windows.Forms.Label()
         Me.cmdSummary = New System.Windows.Forms.Button()
+        Me.ucrReceiverFrom = New instat.ucrReceiverSingle()
+        Me.ucrReceiverTo = New instat.ucrReceiverSingle()
+        Me.ucrNudTo = New instat.ucrNud()
+        Me.ucrNudFrom = New instat.ucrNud()
+        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
+        Me.ucrReceiverDay = New instat.ucrReceiverSingle()
+        Me.ucrReceiverYear = New instat.ucrReceiverSingle()
+        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
+        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
+        Me.ucrSelectorVariable = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrPnlAnnual = New instat.UcrPanel()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 388)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(399, 52)
-        Me.ucrBase.TabIndex = 12
         '
         'rdoAnnual
         '
@@ -120,83 +113,6 @@ Partial Class dlgClimaticSummary
         Me.rdoWithinYear.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoWithinYear.UseVisualStyleBackColor = True
         '
-        'ucrPnlAnnual
-        '
-        Me.ucrPnlAnnual.Location = New System.Drawing.Point(28, 12)
-        Me.ucrPnlAnnual.Name = "ucrPnlAnnual"
-        Me.ucrPnlAnnual.Size = New System.Drawing.Size(381, 64)
-        Me.ucrPnlAnnual.TabIndex = 18
-        '
-        'ucrSelectorVariable
-        '
-        Me.ucrSelectorVariable.bShowHiddenColumns = False
-        Me.ucrSelectorVariable.bUseCurrentFilter = True
-        Me.ucrSelectorVariable.Location = New System.Drawing.Point(10, 93)
-        Me.ucrSelectorVariable.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorVariable.Name = "ucrSelectorVariable"
-        Me.ucrSelectorVariable.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorVariable.TabIndex = 19
-        '
-        'ucrReceiverStation
-        '
-        Me.ucrReceiverStation.frmParent = Me
-        Me.ucrReceiverStation.Location = New System.Drawing.Point(291, 93)
-        Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverStation.Name = "ucrReceiverStation"
-        Me.ucrReceiverStation.Selector = Nothing
-        Me.ucrReceiverStation.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverStation.strNcFilePath = ""
-        Me.ucrReceiverStation.TabIndex = 20
-        Me.ucrReceiverStation.ucrSelector = Nothing
-        '
-        'ucrReceiverDate
-        '
-        Me.ucrReceiverDate.frmParent = Me
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(291, 132)
-        Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverDate.Name = "ucrReceiverDate"
-        Me.ucrReceiverDate.Selector = Nothing
-        Me.ucrReceiverDate.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverDate.strNcFilePath = ""
-        Me.ucrReceiverDate.TabIndex = 21
-        Me.ucrReceiverDate.ucrSelector = Nothing
-        '
-        'ucrReceiverYear
-        '
-        Me.ucrReceiverYear.frmParent = Me
-        Me.ucrReceiverYear.Location = New System.Drawing.Point(291, 180)
-        Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverYear.Name = "ucrReceiverYear"
-        Me.ucrReceiverYear.Selector = Nothing
-        Me.ucrReceiverYear.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverYear.strNcFilePath = ""
-        Me.ucrReceiverYear.TabIndex = 22
-        Me.ucrReceiverYear.ucrSelector = Nothing
-        '
-        'ucrReceiverDay
-        '
-        Me.ucrReceiverDay.frmParent = Me
-        Me.ucrReceiverDay.Location = New System.Drawing.Point(291, 226)
-        Me.ucrReceiverDay.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverDay.Name = "ucrReceiverDay"
-        Me.ucrReceiverDay.Selector = Nothing
-        Me.ucrReceiverDay.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverDay.strNcFilePath = ""
-        Me.ucrReceiverDay.TabIndex = 23
-        Me.ucrReceiverDay.ucrSelector = Nothing
-        '
-        'ucrReceiverElement
-        '
-        Me.ucrReceiverElement.frmParent = Me
-        Me.ucrReceiverElement.Location = New System.Drawing.Point(291, 265)
-        Me.ucrReceiverElement.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverElement.Name = "ucrReceiverElement"
-        Me.ucrReceiverElement.Selector = Nothing
-        Me.ucrReceiverElement.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverElement.strNcFilePath = ""
-        Me.ucrReceiverElement.TabIndex = 24
-        Me.ucrReceiverElement.ucrSelector = Nothing
-        '
         'lblStation
         '
         Me.lblStation.AutoSize = True
@@ -242,30 +158,6 @@ Partial Class dlgClimaticSummary
         Me.lblElement.TabIndex = 30
         Me.lblElement.Text = "Element:"
         '
-        'ucrNudFrom
-        '
-        Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudFrom.Location = New System.Drawing.Point(118, 295)
-        Me.ucrNudFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFrom.Name = "ucrNudFrom"
-        Me.ucrNudFrom.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudFrom.TabIndex = 31
-        Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudTo
-        '
-        Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTo.Location = New System.Drawing.Point(238, 295)
-        Me.ucrNudTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTo.Name = "ucrNudTo"
-        Me.ucrNudTo.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudTo.TabIndex = 32
-        Me.ucrNudTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'lblTo
         '
         Me.lblTo.AutoSize = True
@@ -278,40 +170,16 @@ Partial Class dlgClimaticSummary
         'lblFrom
         '
         Me.lblFrom.AutoSize = True
-        Me.lblFrom.Location = New System.Drawing.Point(82, 298)
+        Me.lblFrom.Location = New System.Drawing.Point(49, 298)
         Me.lblFrom.Name = "lblFrom"
         Me.lblFrom.Size = New System.Drawing.Size(33, 13)
         Me.lblFrom.TabIndex = 34
         Me.lblFrom.Text = "From:"
         '
-        'ucrReceiverTo
-        '
-        Me.ucrReceiverTo.frmParent = Me
-        Me.ucrReceiverTo.Location = New System.Drawing.Point(238, 318)
-        Me.ucrReceiverTo.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverTo.Name = "ucrReceiverTo"
-        Me.ucrReceiverTo.Selector = Nothing
-        Me.ucrReceiverTo.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverTo.strNcFilePath = ""
-        Me.ucrReceiverTo.TabIndex = 35
-        Me.ucrReceiverTo.ucrSelector = Nothing
-        '
-        'ucrReceiverFrom
-        '
-        Me.ucrReceiverFrom.frmParent = Me
-        Me.ucrReceiverFrom.Location = New System.Drawing.Point(67, 318)
-        Me.ucrReceiverFrom.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFrom.Name = "ucrReceiverFrom"
-        Me.ucrReceiverFrom.Selector = Nothing
-        Me.ucrReceiverFrom.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverFrom.strNcFilePath = ""
-        Me.ucrReceiverFrom.TabIndex = 36
-        Me.ucrReceiverFrom.ucrSelector = Nothing
-        '
         'lblReceiverTo
         '
         Me.lblReceiverTo.AutoSize = True
-        Me.lblReceiverTo.Location = New System.Drawing.Point(212, 322)
+        Me.lblReceiverTo.Location = New System.Drawing.Point(212, 298)
         Me.lblReceiverTo.Name = "lblReceiverTo"
         Me.lblReceiverTo.Size = New System.Drawing.Size(23, 13)
         Me.lblReceiverTo.TabIndex = 37
@@ -320,7 +188,7 @@ Partial Class dlgClimaticSummary
         'lblReceiverFrom
         '
         Me.lblReceiverFrom.AutoSize = True
-        Me.lblReceiverFrom.Location = New System.Drawing.Point(31, 321)
+        Me.lblReceiverFrom.Location = New System.Drawing.Point(48, 299)
         Me.lblReceiverFrom.Name = "lblReceiverFrom"
         Me.lblReceiverFrom.Size = New System.Drawing.Size(33, 13)
         Me.lblReceiverFrom.TabIndex = 38
@@ -335,6 +203,138 @@ Partial Class dlgClimaticSummary
         Me.cmdSummary.Tag = "Summary"
         Me.cmdSummary.Text = "Summary"
         Me.cmdSummary.UseVisualStyleBackColor = True
+        '
+        'ucrReceiverFrom
+        '
+        Me.ucrReceiverFrom.frmParent = Me
+        Me.ucrReceiverFrom.Location = New System.Drawing.Point(85, 295)
+        Me.ucrReceiverFrom.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFrom.Name = "ucrReceiverFrom"
+        Me.ucrReceiverFrom.Selector = Nothing
+        Me.ucrReceiverFrom.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverFrom.strNcFilePath = ""
+        Me.ucrReceiverFrom.TabIndex = 36
+        Me.ucrReceiverFrom.ucrSelector = Nothing
+        '
+        'ucrReceiverTo
+        '
+        Me.ucrReceiverTo.frmParent = Me
+        Me.ucrReceiverTo.Location = New System.Drawing.Point(238, 295)
+        Me.ucrReceiverTo.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverTo.Name = "ucrReceiverTo"
+        Me.ucrReceiverTo.Selector = Nothing
+        Me.ucrReceiverTo.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverTo.strNcFilePath = ""
+        Me.ucrReceiverTo.TabIndex = 35
+        Me.ucrReceiverTo.ucrSelector = Nothing
+        '
+        'ucrNudTo
+        '
+        Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudTo.Location = New System.Drawing.Point(238, 295)
+        Me.ucrNudTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTo.Name = "ucrNudTo"
+        Me.ucrNudTo.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudTo.TabIndex = 32
+        Me.ucrNudTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudFrom
+        '
+        Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudFrom.Location = New System.Drawing.Point(85, 295)
+        Me.ucrNudFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFrom.Name = "ucrNudFrom"
+        Me.ucrNudFrom.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudFrom.TabIndex = 31
+        Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrReceiverElement
+        '
+        Me.ucrReceiverElement.frmParent = Me
+        Me.ucrReceiverElement.Location = New System.Drawing.Point(291, 265)
+        Me.ucrReceiverElement.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverElement.Name = "ucrReceiverElement"
+        Me.ucrReceiverElement.Selector = Nothing
+        Me.ucrReceiverElement.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverElement.strNcFilePath = ""
+        Me.ucrReceiverElement.TabIndex = 24
+        Me.ucrReceiverElement.ucrSelector = Nothing
+        '
+        'ucrReceiverDay
+        '
+        Me.ucrReceiverDay.frmParent = Me
+        Me.ucrReceiverDay.Location = New System.Drawing.Point(291, 226)
+        Me.ucrReceiverDay.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverDay.Name = "ucrReceiverDay"
+        Me.ucrReceiverDay.Selector = Nothing
+        Me.ucrReceiverDay.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverDay.strNcFilePath = ""
+        Me.ucrReceiverDay.TabIndex = 23
+        Me.ucrReceiverDay.ucrSelector = Nothing
+        '
+        'ucrReceiverYear
+        '
+        Me.ucrReceiverYear.frmParent = Me
+        Me.ucrReceiverYear.Location = New System.Drawing.Point(291, 180)
+        Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverYear.Name = "ucrReceiverYear"
+        Me.ucrReceiverYear.Selector = Nothing
+        Me.ucrReceiverYear.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverYear.strNcFilePath = ""
+        Me.ucrReceiverYear.TabIndex = 22
+        Me.ucrReceiverYear.ucrSelector = Nothing
+        '
+        'ucrReceiverDate
+        '
+        Me.ucrReceiverDate.frmParent = Me
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(291, 132)
+        Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverDate.Name = "ucrReceiverDate"
+        Me.ucrReceiverDate.Selector = Nothing
+        Me.ucrReceiverDate.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverDate.strNcFilePath = ""
+        Me.ucrReceiverDate.TabIndex = 21
+        Me.ucrReceiverDate.ucrSelector = Nothing
+        '
+        'ucrReceiverStation
+        '
+        Me.ucrReceiverStation.frmParent = Me
+        Me.ucrReceiverStation.Location = New System.Drawing.Point(291, 93)
+        Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverStation.Name = "ucrReceiverStation"
+        Me.ucrReceiverStation.Selector = Nothing
+        Me.ucrReceiverStation.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverStation.strNcFilePath = ""
+        Me.ucrReceiverStation.TabIndex = 20
+        Me.ucrReceiverStation.ucrSelector = Nothing
+        '
+        'ucrSelectorVariable
+        '
+        Me.ucrSelectorVariable.bShowHiddenColumns = False
+        Me.ucrSelectorVariable.bUseCurrentFilter = True
+        Me.ucrSelectorVariable.Location = New System.Drawing.Point(10, 93)
+        Me.ucrSelectorVariable.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorVariable.Name = "ucrSelectorVariable"
+        Me.ucrSelectorVariable.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorVariable.TabIndex = 19
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 388)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(399, 52)
+        Me.ucrBase.TabIndex = 12
+        '
+        'ucrPnlAnnual
+        '
+        Me.ucrPnlAnnual.Location = New System.Drawing.Point(28, 12)
+        Me.ucrPnlAnnual.Name = "ucrPnlAnnual"
+        Me.ucrPnlAnnual.Size = New System.Drawing.Size(381, 64)
+        Me.ucrPnlAnnual.TabIndex = 18
         '
         'dlgClimaticSummary
         '
