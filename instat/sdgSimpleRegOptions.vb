@@ -82,7 +82,7 @@ Public Class sdgSimpleRegOptions
         ucrChkFittedModel.AddRSyntaxContainsFunctionNamesCondition(True, {"visreg"}, True)
         ucrChkFittedModel.AddRSyntaxContainsFunctionNamesCondition(False, {"visreg"}, False)
         ucrChkFittedModel.AddToLinkedControls(ucrNudWhiteSpace, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkFittedModel.AddToLinkedControls(ucrNudGraphicsCLevel, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkFittedModel.AddToLinkedControls(ucrNudGraphicsCLevel, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.95)
         ucrChkFittedModel.AddToLinkedControls(ucrChkPartial, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkFittedModel.AddToLinkedControls(ucrChkRugs, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkFittedModel.AddToLinkedControls(ucrChkJitter, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -312,12 +312,12 @@ Public Class sdgSimpleRegOptions
         ucrSaveFittedColumnName.SetRCode(clsRWriteFitted, bReset)
         ucrSaveResidualsColumnName.SetRCode(clsRWriteResiduals, bReset)
         ucrSaveStdResidualsColumnName.SetRCode(clsRWriteStdResiduals, bReset)
-        ucrSaveLeverageColumnName.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
+        ucrSaveLeverageColumnName.SetRCode(clsRWriteLeverage, bReset, bCloneIfNeeded:=True)
 
         If bReset Then
             tbpRegOptions.SelectedIndex = 0
         End If
-
+        GroupBoxDisplay()
         bRCodeSet = True
     End Sub
 
@@ -366,9 +366,33 @@ Public Class sdgSimpleRegOptions
 
     Private Sub ucrChkFittedModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFittedModel.ControlValueChanged
         If ucrChkFittedModel.Checked Then
+            grpPlotType.Show()
+            grpScale.Show()
             clsRSyntax.AddToAfterCodes(clsVisReg, iPosition:=4)
         Else
+            grpPlotType.Hide()
+            grpScale.Hide()
             clsRSyntax.RemoveFromAfterCodes(clsVisReg)
+        End If
+    End Sub
+
+    Private Sub GroupBoxDisplay()
+        If ucrChkFittedModel.Checked Then
+            grpPlotType.Show()
+            grpScale.Show()
+        Else
+            grpPlotType.Hide()
+            grpScale.Hide()
+        End If
+        If ucrChkRugs.Checked Then
+            grpRugs.Show()
+        Else
+            grpRugs.Hide()
+        End If
+        If ucrChkResidualPlots.Checked Then
+            grpMultiplePlots.Show()
+        Else
+            grpMultiplePlots.Hide()
         End If
     End Sub
 

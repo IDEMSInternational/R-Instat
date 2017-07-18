@@ -62,14 +62,14 @@ Partial Class dlgFitModel
         Me.cmdLog = New System.Windows.Forms.Button()
         Me.cmdTan = New System.Windows.Forms.Button()
         Me.cmdExp = New System.Windows.Forms.Button()
+        Me.ucrModelName = New instat.ucrSave()
+        Me.ucrChkConvertToVariate = New instat.ucrCheck()
         Me.ucrReceiverExpressionFitModel = New instat.ucrReceiverExpression()
         Me.ucrInputModelPreview = New instat.ucrInputTextBox()
         Me.ucrFamily = New instat.ucrDistributions()
         Me.ucrReceiverResponseVar = New instat.ucrReceiverSingle()
         Me.ucrSelectorByDataFrameAddRemoveForFitModel = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkConvertToVariate = New instat.ucrCheck()
-        Me.ucrModelName = New instat.ucrSave()
         Me.grpFirstCalc.SuspendLayout()
         Me.grpSecondCalc.SuspendLayout()
         Me.SuspendLayout()
@@ -85,7 +85,7 @@ Partial Class dlgFitModel
         '
         'cmdModelOptions
         '
-        Me.cmdModelOptions.Location = New System.Drawing.Point(303, 243)
+        Me.cmdModelOptions.Location = New System.Drawing.Point(394, 243)
         Me.cmdModelOptions.Name = "cmdModelOptions"
         Me.cmdModelOptions.Size = New System.Drawing.Size(105, 23)
         Me.cmdModelOptions.TabIndex = 11
@@ -103,7 +103,7 @@ Partial Class dlgFitModel
         '
         'cmdDisplayOptions
         '
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(303, 271)
+        Me.cmdDisplayOptions.Location = New System.Drawing.Point(394, 271)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
         Me.cmdDisplayOptions.Size = New System.Drawing.Size(105, 23)
         Me.cmdDisplayOptions.TabIndex = 13
@@ -142,7 +142,7 @@ Partial Class dlgFitModel
         Me.grpFirstCalc.Controls.Add(Me.cmdClear)
         Me.grpFirstCalc.Controls.Add(Me.cmdZero)
         Me.grpFirstCalc.Controls.Add(Me.cmdMinus)
-        Me.grpFirstCalc.Location = New System.Drawing.Point(243, 125)
+        Me.grpFirstCalc.Location = New System.Drawing.Point(244, 125)
         Me.grpFirstCalc.Name = "grpFirstCalc"
         Me.grpFirstCalc.Size = New System.Drawing.Size(131, 111)
         Me.grpFirstCalc.TabIndex = 6
@@ -256,7 +256,7 @@ Partial Class dlgFitModel
         Me.grpSecondCalc.Controls.Add(Me.cmdLog)
         Me.grpSecondCalc.Controls.Add(Me.cmdTan)
         Me.grpSecondCalc.Controls.Add(Me.cmdExp)
-        Me.grpSecondCalc.Location = New System.Drawing.Point(373, 125)
+        Me.grpSecondCalc.Location = New System.Drawing.Point(374, 125)
         Me.grpSecondCalc.Name = "grpSecondCalc"
         Me.grpSecondCalc.Size = New System.Drawing.Size(126, 111)
         Me.grpSecondCalc.TabIndex = 7
@@ -322,6 +322,21 @@ Partial Class dlgFitModel
         Me.cmdExp.Text = "exp"
         Me.cmdExp.UseVisualStyleBackColor = True
         '
+        'ucrModelName
+        '
+        Me.ucrModelName.Location = New System.Drawing.Point(10, 272)
+        Me.ucrModelName.Name = "ucrModelName"
+        Me.ucrModelName.Size = New System.Drawing.Size(277, 24)
+        Me.ucrModelName.TabIndex = 12
+        '
+        'ucrChkConvertToVariate
+        '
+        Me.ucrChkConvertToVariate.Checked = False
+        Me.ucrChkConvertToVariate.Location = New System.Drawing.Point(378, 43)
+        Me.ucrChkConvertToVariate.Name = "ucrChkConvertToVariate"
+        Me.ucrChkConvertToVariate.Size = New System.Drawing.Size(120, 20)
+        Me.ucrChkConvertToVariate.TabIndex = 3
+        '
         'ucrReceiverExpressionFitModel
         '
         Me.ucrReceiverExpressionFitModel.frmParent = Me
@@ -340,7 +355,7 @@ Partial Class dlgFitModel
         Me.ucrInputModelPreview.IsReadOnly = False
         Me.ucrInputModelPreview.Location = New System.Drawing.Point(90, 245)
         Me.ucrInputModelPreview.Name = "ucrInputModelPreview"
-        Me.ucrInputModelPreview.Size = New System.Drawing.Size(200, 21)
+        Me.ucrInputModelPreview.Size = New System.Drawing.Size(298, 21)
         Me.ucrInputModelPreview.TabIndex = 10
         '
         'ucrFamily
@@ -378,21 +393,6 @@ Partial Class dlgFitModel
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 14
-        '
-        'ucrChkConvertToVariate
-        '
-        Me.ucrChkConvertToVariate.Checked = False
-        Me.ucrChkConvertToVariate.Location = New System.Drawing.Point(378, 43)
-        Me.ucrChkConvertToVariate.Name = "ucrChkConvertToVariate"
-        Me.ucrChkConvertToVariate.Size = New System.Drawing.Size(120, 20)
-        Me.ucrChkConvertToVariate.TabIndex = 3
-        '
-        'ucrModelName
-        '
-        Me.ucrModelName.Location = New System.Drawing.Point(10, 272)
-        Me.ucrModelName.Name = "ucrModelName"
-        Me.ucrModelName.Size = New System.Drawing.Size(277, 24)
-        Me.ucrModelName.TabIndex = 12
         '
         'dlgFitModel
         '
