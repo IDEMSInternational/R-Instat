@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat
@@ -48,6 +48,10 @@ Public Class ucrReceiver
 
     'Should columns be forced as a data frame object when bParameterIsRFunction = True
     Public bForceAsDataFrame As Boolean = False
+
+    'Currently no distinction in between selector resetting and data frame changed
+    'Need option to not reset receiver when data frame changed e.g. calculations dialog
+    Public bResetWhenSelectorResets As Boolean = True
 
     Public Sub New()
         ' This call is required by the designer.
@@ -296,7 +300,9 @@ Public Class ucrReceiver
     End Sub
 
     Protected Overridable Sub Selector_ResetAll() Handles ucrSelector.ResetReceivers
-        Clear()
+        If bResetWhenSelectorResets Then
+            Clear()
+        End If
     End Sub
 
     Protected Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean

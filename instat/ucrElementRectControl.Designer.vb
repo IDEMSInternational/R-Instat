@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ucrElementRectControl
     Inherits instat.ucrCore
 
@@ -58,7 +74,7 @@ Partial Class ucrElementRectControl
         Me.ucrRectFill.Location = New System.Drawing.Point(105, 93)
         Me.ucrRectFill.Name = "ucrRectFill"
         Me.ucrRectFill.Size = New System.Drawing.Size(137, 21)
-        Me.ucrRectFill.TabIndex = 98
+        Me.ucrRectFill.TabIndex = 7
         '
         'ucrRectColors
         '
@@ -67,7 +83,7 @@ Partial Class ucrElementRectControl
         Me.ucrRectColors.Location = New System.Drawing.Point(105, 68)
         Me.ucrRectColors.Name = "ucrRectColors"
         Me.ucrRectColors.Size = New System.Drawing.Size(137, 21)
-        Me.ucrRectColors.TabIndex = 95
+        Me.ucrRectColors.TabIndex = 5
         '
         'ucrChkRectFill
         '
@@ -75,7 +91,7 @@ Partial Class ucrElementRectControl
         Me.ucrChkRectFill.Location = New System.Drawing.Point(6, 94)
         Me.ucrChkRectFill.Name = "ucrChkRectFill"
         Me.ucrChkRectFill.Size = New System.Drawing.Size(88, 20)
-        Me.ucrChkRectFill.TabIndex = 94
+        Me.ucrChkRectFill.TabIndex = 6
         '
         'ucrChkRectSize
         '
@@ -83,7 +99,7 @@ Partial Class ucrElementRectControl
         Me.ucrChkRectSize.Location = New System.Drawing.Point(8, 19)
         Me.ucrChkRectSize.Name = "ucrChkRectSize"
         Me.ucrChkRectSize.Size = New System.Drawing.Size(88, 20)
-        Me.ucrChkRectSize.TabIndex = 93
+        Me.ucrChkRectSize.TabIndex = 0
         '
         'ucrChkRectLineType
         '
@@ -91,7 +107,7 @@ Partial Class ucrElementRectControl
         Me.ucrChkRectLineType.Location = New System.Drawing.Point(8, 44)
         Me.ucrChkRectLineType.Name = "ucrChkRectLineType"
         Me.ucrChkRectLineType.Size = New System.Drawing.Size(88, 20)
-        Me.ucrChkRectLineType.TabIndex = 92
+        Me.ucrChkRectLineType.TabIndex = 2
         '
         'ucrChkRectColour
         '
@@ -99,7 +115,7 @@ Partial Class ucrElementRectControl
         Me.ucrChkRectColour.Location = New System.Drawing.Point(6, 69)
         Me.ucrChkRectColour.Name = "ucrChkRectColour"
         Me.ucrChkRectColour.Size = New System.Drawing.Size(88, 20)
-        Me.ucrChkRectColour.TabIndex = 91
+        Me.ucrChkRectColour.TabIndex = 4
         '
         'ucrNudRectSize
         '
@@ -110,7 +126,7 @@ Partial Class ucrElementRectControl
         Me.ucrNudRectSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRectSize.Name = "ucrNudRectSize"
         Me.ucrNudRectSize.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudRectSize.TabIndex = 89
+        Me.ucrNudRectSize.TabIndex = 1
         Me.ucrNudRectSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrInputRectLineType
@@ -121,7 +137,7 @@ Partial Class ucrElementRectControl
         Me.ucrInputRectLineType.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputRectLineType.Name = "ucrInputRectLineType"
         Me.ucrInputRectLineType.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputRectLineType.TabIndex = 88
+        Me.ucrInputRectLineType.TabIndex = 3
         '
         'ucrElementRectControl
         '

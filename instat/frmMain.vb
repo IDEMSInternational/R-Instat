@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports RDotNet
 Imports System.IO
 Imports System.Globalization
@@ -36,7 +37,7 @@ Public Class frmMain
     Private mnuItems As New List(Of Form)
     Private ctrActive As Control
     Private WithEvents timer As New System.Windows.Forms.Timer
-    Private iAutoSaveDataTime As Integer = 300000
+    Private iAutoSaveDataMilliseconds As Integer
 
     Public strAutoSaveDataFolderPath As String = Path.Combine(Path.GetTempPath, "R-Instat_data_auto_save")
     Public strAutoSaveLogFolderPath As String = Path.Combine(Path.GetTempPath, "R-Instat_log_auto_save")
@@ -60,6 +61,8 @@ Public Class frmMain
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        SetMainMenusEnabled(False)
+        Cursor = Cursors.WaitCursor
         'temporary
         mnuHelpAboutRInstat.Visible = False
 
@@ -80,7 +83,8 @@ Public Class frmMain
         LoadInstatOptions()
 
         'Do this after loading options because interval depends on options
-        timer.Interval = iAutoSaveDataTime
+        'Interval is in milliseconds and option is in minutes
+        timer.Interval = (clsInstatOptions.iAutoSaveDataMinutes * 60 * 1000)
         timer.Start()
 
         AddHandler System.Windows.Forms.Application.Idle, AddressOf Application_Idle
@@ -89,11 +93,28 @@ Public Class frmMain
         clsRecentItems.setToolStripItems(mnuFile, mnuTbShowLast10, sepStart, sepEnd)
         'checks existence of MRU list
         clsRecentItems.checkOnLoad()
+        Cursor = Cursors.Default
+        SetMainMenusEnabled(True)
+    End Sub
+
+    Private Sub SetMainMenusEnabled(bEnabled As Boolean)
+        mnuFile.Enabled = bEnabled
+        mnuEdit.Enabled = bEnabled
+        mnuPrepare.Enabled = bEnabled
+        mnuDescribe.Enabled = bEnabled
+        mnuModel.Enabled = bEnabled
+        mnuClimatic.Enabled = bEnabled
+        mnuProcurement.Enabled = bEnabled
+        mnuTools.Enabled = bEnabled
+        mnuView.Enabled = bEnabled
+        mnuHelp.Enabled = bEnabled
+        Tool_strip.Enabled = bEnabled
     End Sub
 
     Private Sub Application_Idle(sender As Object, e As EventArgs)
-        If Not timer.Enabled AndAlso (ActiveForm Is Nothing OrElse ActiveForm.Equals(Me)) AndAlso Not clsRLink.bRCodeRunning Then
+        If clsInstatOptions.bAutoSaveData AndAlso Not timer.Enabled AndAlso (ActiveForm Is Nothing OrElse ActiveForm.Equals(Me)) AndAlso Not clsRLink.bRCodeRunning Then
             AutoSaveData()
+            timer.Interval = (clsInstatOptions.iAutoSaveDataMinutes * 60 * 1000)
             timer.Start()
         End If
     End Sub
@@ -123,7 +144,7 @@ Public Class frmMain
                 strAutoSavedDataFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveDataFolderPath).ToArray
                 iDataFiles = strAutoSavedDataFilePaths.Count
             End If
-            If iLogFiles > 0 OrElse iDataFiles > 0 Then
+            If iLogFiles > 0 OrElse iDataFiles > 0 OrElse iInternalLogFiles > 0 Then
                 If MsgBox("We have detected that R-Instat may have closed unexpectedly last time." & Environment.NewLine & "Would you like to see auto recovery options?", MessageBoxButtons.YesNo, "Auto Recovery") = MsgBoxResult.Yes Then
                     dlgAutoSaveRecovery.strAutoSavedLogFilePaths = strAutoSavedLogFilePaths
                     dlgAutoSaveRecovery.strAutoSavedDataFilePaths = strAutoSavedDataFilePaths
@@ -453,8 +474,8 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareSheetColumnMetadata_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameColumnMetadata.Click
-        frmVariables.Visible = True
-        frmVariables.BringToFront()
+        mnuViewColumnMetadata.Checked = True
+        UpdateLayout()
     End Sub
 
     Private Sub mnuPrepareSheetInsertColumnsRows_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameInsertColumnsRows.Click
@@ -506,7 +527,7 @@ Public Class frmMain
         Else
             clsSaveRDS.SetRCommand("saveRDS")
             clsSaveRDS.AddParameter("object", clsRLink.strInstatDataObject)
-            clsSaveRDS.AddParameter("file", Chr(34) & strSaveFilePath & Chr(34))
+            clsSaveRDS.AddParameter("file", Chr(34) & Replace(strSaveFilePath, "\", "/") & Chr(34))
             clsRLink.RunScript(clsSaveRDS.ToScript(), strComment:="File > Save: save file")
         End If
     End Sub
@@ -701,7 +722,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuModelTwoVariablesFitModel_Click(sender As Object, e As EventArgs) Handles mnuModelTwoVariablesFitModel.Click
-        dlgRegressionSimple.ShowDialog()
+        dlgTwoVariableFitModel.ShowDialog()
     End Sub
 
     Private Sub mnuModelOtherOneVariableExactResults_Click(sender As Object, e As EventArgs) Handles mnuModelOtherOneVariableExactResults.Click
@@ -717,7 +738,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuModelOtherTwoVariablesSimpleRegression_Click(sender As Object, e As EventArgs) Handles mnuModelOtherTwoVariablesSimpleRegression.Click
-        dlgRegressionSimple.ShowDialog()
+        dlgTwoVariableFitModel.ShowDialog()
     End Sub
 
     Private Sub mnuModelOtherTwoVariablesOneWayANOVA_Click(sender As Object, e As EventArgs) Handles mnuModelOtherTwoVariablesOneWayANOVA.Click
@@ -843,7 +864,7 @@ Public Class frmMain
         Dim bClose As DialogResult = DialogResult.Yes
 
         If e.CloseReason = CloseReason.UserClosing Then
-            bClose = MsgBox("Are you sure you want to exit R-Instat?", MessageBoxButtons.YesNo, "Exit")
+            bClose = MsgBox("Are you sure you want to exit R-Instat?" & Environment.NewLine & "Any unsaved changes will be lost.", MessageBoxButtons.YesNo, "Exit")
         End If
         If bClose = DialogResult.Yes Then
             Try
@@ -868,8 +889,12 @@ Public Class frmMain
         Dim clsSaveRDS As New RFunction
         Dim strTempFile As String
         Dim i As Integer = 0
+        Dim strCurrentStatus As String
 
+        strCurrentStatus = tstatus.Text
         If clsRLink.bInstatObjectExists Then
+            tstatus.Text = "Auto saving data..."
+            Cursor = Cursors.WaitCursor
             If Not Directory.Exists(strAutoSaveDataFolderPath) Then
                 Directory.CreateDirectory(strAutoSaveDataFolderPath)
             End If
@@ -879,12 +904,14 @@ Public Class frmMain
                     i = i + 1
                     strTempFile = "data" & i & ".rds"
                 End While
-                strCurrentAutoSaveDataFilePath = strTempFile
+                strCurrentAutoSaveDataFilePath = Path.Combine(strAutoSaveDataFolderPath, strTempFile)
             End If
             clsSaveRDS.SetRCommand("saveRDS")
             clsSaveRDS.AddParameter("object", clsRLink.strInstatDataObject)
             clsSaveRDS.AddParameter("file", Chr(34) & strCurrentAutoSaveDataFilePath.Replace("\", "/") & Chr(34))
-            clsRLink.RunInternalScript(clsSaveRDS.ToScript())
+            clsRLink.RunInternalScript(clsSaveRDS.ToScript(), bSilent:=True, bShowWaitDialogOverride:=False)
+            tstatus.Text = strCurrentStatus
+            Cursor = Cursors.Default
         End If
     End Sub
 
@@ -1337,7 +1364,7 @@ Public Class frmMain
         dlgRestrict.ShowDialog()
     End Sub
 
-    Private Sub AaToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles AaToolStripMenuItem1.Click
+    Private Sub mnuProcurementModelFitModelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuProcurementModelFitModelToolStripMenuItem.Click
         dlgFitCorruptionModel.ShowDialog()
     End Sub
 
@@ -1373,7 +1400,7 @@ Public Class frmMain
         dlgDefineCorruptionOutputs.ShowDialog()
     End Sub
 
-    Private Sub DefineCorruptionFreeCategoriesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DefineCorruptionFreeCategoriesToolStripMenuItem.Click
+    Private Sub DefineCorruptionFreeCategoriesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SetRefLevelToolStripMenuItem.Click
         Dim lstDataNames As List(Of String)
 
         lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
@@ -1419,20 +1446,6 @@ Public Class frmMain
         dlgUseDate.ShowDialog()
     End Sub
 
-    Private Sub UseSignatureDateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UseSignatureDateToolStripMenuItem.Click
-        Dim lstDataNames As List(Of String)
-
-        lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
-        If lstDataNames.Count > 0 Then
-            dlgUseDate.strDefaultDataFrame = lstDataNames(0)
-            dlgUseDate.strDefaultColumn = clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_signature_date_label")
-        Else
-            dlgUseDate.strDefaultDataFrame = ""
-            dlgUseDate.strDefaultColumn = ""
-        End If
-        dlgUseDate.ShowDialog()
-    End Sub
-
     Private Sub mnuDescribeOneVariableFrequencies_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableFrequencies.Click
         dlgOneWayFrequencies.ShowDialog()
     End Sub
@@ -1442,6 +1455,16 @@ Public Class frmMain
     End Sub
 
     Private Sub CountryNamesCorrectionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CountryNamesCorrectionsToolStripMenuItem.Click
+        Dim lstDataNames As List(Of String)
+
+        lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
+        If lstDataNames.Count > 0 Then
+            dlgStandardiseCountryNames.strDefaultDataFrame = lstDataNames(0)
+            dlgStandardiseCountryNames.strDefaultColumn = clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_country_label")
+        Else
+            dlgStandardiseCountryNames.strDefaultDataFrame = ""
+            dlgStandardiseCountryNames.strDefaultColumn = ""
+        End If
         dlgStandardiseCountryNames.ShowDialog()
     End Sub
 
@@ -1561,13 +1584,65 @@ Public Class frmMain
         timer.Stop()
     End Sub
 
-    'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
-    '    'TEST temporary 
-    '    'TESTING TO BE ERASED !!!!!!!
-    '    Dim clsTestStargizer As New RFunction
-    '    clsTestStargizer.SetRCommand("stargazer::stargazer")
-    '    clsTestStargizer.AddParameter("None", "attitude", bIncludeArgumentName:=False)
-    '    clsTestStargizer.AddParameter("type", Chr(34) & "html" & Chr(34))
-    '    clsRLink.RunScript(clsTestStargizer.ToScript(), True, "Helloooooooo Stargizer power", True)
-    'End Sub
+    Private Sub mnuProcurementUseCRISummariseCRIbyCountry_Click(sender As Object, e As EventArgs) Handles mnuProcurementUseCRISummariseCRIbyCountry.Click
+        Dim lstDataNames As List(Of String)
+
+        lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
+        If lstDataNames.Count > 0 Then
+            dlgColumnStats.strDefaultDataFrame = lstDataNames(0)
+            dlgColumnStats.strDefaultVariables = clsRLink.GetCRIColumnNames(lstDataNames(0))
+            dlgColumnStats.strDefaultFactors = {clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_country_label")}
+        Else
+            dlgColumnStats.strDefaultDataFrame = ""
+            dlgColumnStats.strDefaultVariables = Nothing
+            dlgColumnStats.strDefaultFactors = Nothing
+        End If
+        dlgColumnStats.ShowDialog()
+    End Sub
+
+    Private Sub mnuProcurementDescribeOneVar_Click(sender As Object, e As EventArgs) Handles mnuProcurementDescribeOneVar.Click
+        Dim lstDataNames As List(Of String)
+        Dim lstColumns As New List(Of String)
+
+        lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
+        If lstDataNames.Count > 0 Then
+            dlgOneWayFrequencies.strDefaultDataFrame = lstDataNames(0)
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_country_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_single_bidder_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_all_bids_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_procurement_type_3_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_tax_haven_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_contract_sector_label"))
+            lstColumns.RemoveAll(Function(x) x = "")
+            dlgOneWayFrequencies.strDefaultColumns = lstColumns.ToArray()
+        Else
+            dlgOneWayFrequencies.strDefaultDataFrame = ""
+            dlgOneWayFrequencies.strDefaultColumns = Nothing
+        End If
+        dlgOneWayFrequencies.ShowDialog()
+    End Sub
+
+    Private Sub mnuProcurementDescribeTwoVar_Click(sender As Object, e As EventArgs) Handles mnuProcurementDescribeTwoVar.Click
+        Dim lstDataNames As List(Of String)
+
+        lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
+        If lstDataNames.Count > 0 Then
+            dlgTwoWayFrequencies.strDefaultDataFrame = lstDataNames(0)
+            dlgTwoWayFrequencies.strDefaultColumnVariable = clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_contract_sector_label")
+        Else
+            dlgTwoWayFrequencies.strDefaultDataFrame = ""
+            dlgTwoWayFrequencies.strDefaultColumnVariable = Nothing
+        End If
+        dlgTwoWayFrequencies.ShowDialog()
+    End Sub
+
+    Private Sub mnuFileCloseData_Click(sender As Object, e As EventArgs) Handles mnuFileCloseData.Click
+        Dim bClose As DialogResult
+
+        bClose = MsgBox("Are you sure you want to close you data?" & Environment.NewLine & "Any unsaved changes will be lost.", MessageBoxButtons.YesNo, "Close Data")
+        If bClose = DialogResult.Yes Then
+            clsRLink.CloseData()
+            strSaveFilePath = ""
+        End If
+    End Sub
 End Class

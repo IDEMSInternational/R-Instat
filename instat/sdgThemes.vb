@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
@@ -225,7 +225,7 @@ Public Class sdgThemes
             InitialiseControls()
         End If
         clsThemeFunction = clsNewThemeFunction
-        clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
+        clsBaseOperator.AddParameter("theme_name", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
 
         dctThemeFunctions = dctNewThemeFunctions
         dctThemeFunctions.TryGetValue("axis.text", clsElementTickText)
@@ -358,20 +358,20 @@ Public Class sdgThemes
 
         ucrPlotMargin.SetRCodeForControl("plot.margin", clsUnitPlotMargin, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
-        urChkLegendPosition.SetRCode(clsThemeFunction, bReset)
-        ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset)
+        urChkLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
 
-        ucrChkLegendBox.SetRCode(clsThemeFunction, bReset)
-        ucrInputLegendBox.SetRCode(clsThemeFunction, bReset)
+        ucrChkLegendBox.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLegendBox.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
 
-        urChkLegendBoxJust.SetRCode(clsThemeFunction, bReset)
-        ucrInputLegendBoxJust.SetRCode(clsThemeFunction, bReset)
+        urChkLegendBoxJust.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLegendBoxJust.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
 
-        ucrChkLegendDirection.SetRCode(clsThemeFunction, bReset)
-        ucrInputLegendDirection.SetRCode(clsThemeFunction, bReset)
+        ucrChkLegendDirection.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLegendDirection.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
 
-        ucrChkLegendJustification.SetRCode(clsThemeFunction, bReset)
-        ucrInputLegendJustification.SetRCode(clsThemeFunction, bReset)
+        ucrChkLegendJustification.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLegendJustification.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         AddRemoveElementParameters()
     End Sub
 
@@ -411,9 +411,9 @@ Public Class sdgThemes
 
     Private Sub AddRemoveTheme()
         If clsThemeFunction.iParameterCount > 0 Then
-            clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
+            clsBaseOperator.AddParameter("theme_name", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
         Else
-            clsBaseOperator.RemoveParameterByName("theme")
+            clsBaseOperator.RemoveParameterByName("theme_name")
         End If
     End Sub
 

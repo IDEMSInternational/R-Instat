@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class ucrGridUnit
@@ -47,7 +47,7 @@ Public Class ucrGridUnit
         strUnit = strNewAxis
     End Sub
 
-    Public Sub SetRCodeForControl(strNewUnit As String, clsNewUnit As RFunction, clsNewThemeFunction As RFunction, clsNewBaseOperator As ROperator, Optional bReset As Boolean = False)
+    Public Sub SetRCodeForControl(strNewUnit As String, clsNewUnit As RFunction, clsNewThemeFunction As RFunction, clsNewBaseOperator As ROperator, Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
         If Not bInitialiseControls Then
             InitialiseControl()
         End If
@@ -57,10 +57,10 @@ Public Class ucrGridUnit
         clsThemeFunction = clsNewThemeFunction
         clsUnit = clsNewUnit
 
-        ucrChkUnits.SetRCode(clsUnit, bReset)
-        ucrInputUnits.SetRCode(clsUnit, bReset)
-        ucrInputData.SetRCode(clsUnit, bReset)
-        ucrInputVector.SetRCode(clsUnit, bReset)
+        ucrChkUnits.SetRCode(clsUnit, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrInputUnits.SetRCode(clsUnit, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrInputData.SetRCode(clsUnit, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrInputVector.SetRCode(clsUnit, bReset, bCloneIfNeeded:=bCloneIfNeeded)
     End Sub
 
     Private Sub AddRemoveElementLineAxis()

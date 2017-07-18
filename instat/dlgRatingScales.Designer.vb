@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgRatingScales
     Inherits System.Windows.Forms.Form
 
@@ -45,6 +61,7 @@ Partial Class dlgRatingScales
         Me.ucrReceiverOrderedFactors = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorRatingScale = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.UcrDialogDisabled1 = New instat.ucrDialogDisabled()
         Me.grpSort.SuspendLayout()
         Me.grpLikertType.SuspendLayout()
         Me.SuspendLayout()
@@ -296,11 +313,20 @@ Partial Class dlgRatingScales
         Me.ucrSelectorRatingScale.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorRatingScale.TabIndex = 4
         '
+        'UcrDialogDisabled1
+        '
+        Me.UcrDialogDisabled1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.UcrDialogDisabled1.Location = New System.Drawing.Point(87, 192)
+        Me.UcrDialogDisabled1.Name = "UcrDialogDisabled1"
+        Me.UcrDialogDisabled1.Size = New System.Drawing.Size(240, 50)
+        Me.UcrDialogDisabled1.TabIndex = 16
+        '
         'dlgRatingScales
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(419, 470)
+        Me.Controls.Add(Me.UcrDialogDisabled1)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.rdoStacked)
         Me.Controls.Add(Me.rdoLikert)
@@ -353,4 +379,5 @@ Partial Class dlgRatingScales
     Friend WithEvents ucrPnlGraphType As UcrPanel
     Friend WithEvents ucrChkNumberOfCategories As ucrCheck
     Friend WithEvents ucrSaveGraph As ucrSave
+    Friend WithEvents UcrDialogDisabled1 As ucrDialogDisabled
 End Class

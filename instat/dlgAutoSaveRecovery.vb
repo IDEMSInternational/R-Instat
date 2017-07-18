@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
@@ -120,7 +120,6 @@ Public Class dlgAutoSaveRecovery
                 If Not ucrInputSavedPathData.IsEmpty() Then
                     File.Copy(strAutoSavedDataFilePaths(0), ucrInputSavedPathData.GetText(), True)
                 End If
-                File.Delete(strAutoSavedDataFilePaths(0))
             Catch ex As Exception
                 MsgBox("Could not copy and/or delete data file." & Environment.NewLine & ex.Message, "Error copying/deleting file")
             End Try
@@ -130,7 +129,6 @@ Public Class dlgAutoSaveRecovery
                 If Not ucrInputSavedPathLog.IsEmpty() Then
                     File.Copy(strAutoSavedLogFilePaths(0), ucrInputSavedPathLog.GetText(), True)
                 End If
-                File.Delete(strAutoSavedLogFilePaths(0))
             Catch ex As Exception
                 MsgBox("Could not copy and/or delete log file." & Environment.NewLine & ex.Message, "Error copying/deleting file")
             End Try
@@ -140,7 +138,6 @@ Public Class dlgAutoSaveRecovery
                 If Not ucrInputSavedPathInternalLog.IsEmpty() Then
                     File.Copy(strAutoSavedInternalLogFilePaths(0), ucrInputSavedPathInternalLog.GetText(), True)
                 End If
-                File.Delete(strAutoSavedInternalLogFilePaths(0))
             Catch ex As Exception
                 MsgBox("Could not copy and/or delete internal log file." & Environment.NewLine & ex.Message, "Error copying/deleting file")
             End Try
@@ -185,6 +182,19 @@ Public Class dlgAutoSaveRecovery
             If MsgBox("Are you sure you are finished?" & Environment.NewLine & "You cannot return to this dialog after leaving and any unsaved recovered files will be lost.", MessageBoxButtons.YesNo, "Are you finished?") = MsgBoxResult.No Then
                 e.Cancel = True
             End If
+        End If
+        DeleteTempFiles()
+    End Sub
+
+    Private Sub DeleteTempFiles()
+        If strAutoSavedInternalLogFilePaths IsNot Nothing AndAlso strAutoSavedInternalLogFilePaths.Count > 0 AndAlso File.Exists(strAutoSavedInternalLogFilePaths(0)) Then
+            File.Delete(strAutoSavedInternalLogFilePaths(0))
+        End If
+        If strAutoSavedLogFilePaths IsNot Nothing AndAlso strAutoSavedLogFilePaths.Count > 0 AndAlso File.Exists(strAutoSavedLogFilePaths(0)) Then
+            File.Delete(strAutoSavedLogFilePaths(0))
+        End If
+        If strAutoSavedDataFilePaths IsNot Nothing AndAlso strAutoSavedDataFilePaths.Count > 0 AndAlso File.Exists(strAutoSavedDataFilePaths(0)) Then
+            File.Delete(strAutoSavedDataFilePaths(0))
         End If
     End Sub
 End Class

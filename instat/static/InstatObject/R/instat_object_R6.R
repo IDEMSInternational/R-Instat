@@ -276,8 +276,8 @@ instat_object$set("public", "get_combined_metadata", function(convert_to_charact
       if(length(templist[[j]]) > 1 || is.list(templist[[j]])) templist[[j]] <- paste(as.character(templist[[j]]), collapse = ",")
       retlist[i, names(templist[j])] = templist[[j]]
     }
-    if(all(c(data_name_label, label_label) %in% names(retlist))) retlist <- retlist[ ,c(c(data_name_label, label_label), setdiff(names(retlist), c(data_name_label, label_label)))]
-    else if(data_name_label %in% names(retlist)) retlist <- retlist[ ,c(data_name_label, setdiff(names(retlist), data_name_label))]
+    if(all(c(data_name_label, label_label) %in% names(retlist))) retlist <- retlist[ ,c(c(data_name_label, label_label), sort(setdiff(names(retlist), c(data_name_label, label_label))))]
+    else if(data_name_label %in% names(retlist)) retlist <- retlist[ ,c(data_name_label, sort(setdiff(names(retlist), data_name_label)))]
     i = i + 1
   }
   if(convert_to_character) return(convert_to_character_matrix(retlist, FALSE))
@@ -383,9 +383,9 @@ instat_object$set("public", "set_metadata_changed", function(data_name = "", new
 } 
 )
 
-instat_object$set("public", "add_columns_to_data", function(data_name, col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before = FALSE, adjacent_column, num_cols) {
-  if(missing(use_col_name_as_prefix)) self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, hidden = hidden, before = before, adjacent_column = adjacent_column, num_cols = num_cols)
-  else self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, use_col_name_as_prefix = use_col_name_as_prefix, hidden = hidden, before = before, adjacent_column = adjacent_column, num_cols = num_cols)
+instat_object$set("public", "add_columns_to_data", function(data_name, col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before = FALSE, adjacent_column, num_cols, require_correct_length = TRUE) {
+  if(missing(use_col_name_as_prefix)) self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, hidden = hidden, before = before, adjacent_column = adjacent_column, num_cols = num_cols, require_correct_length = require_correct_length)
+  else self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, use_col_name_as_prefix = use_col_name_as_prefix, hidden = hidden, before = before, adjacent_column = adjacent_column, num_cols = num_cols, require_correct_length = require_correct_length)
 }
 )
 
@@ -643,6 +643,11 @@ instat_object$set("public", "filter_string", function(data_name, filter_name) {
 }
 )
 
+instat_object$set("public", "get_filter_as_instat_calculation", function(data_name, filter_name) {
+  self$get_data_objects(data_name)$get_filter_as_instat_calculation(filter_name)
+}
+)
+
 instat_object$set("public", "replace_value_in_data", function(data_name, col_names, rows, old_value, old_is_missing = FALSE, start_value = NA, end_value = NA, new_value, new_is_missing = FALSE, closed_start_value = TRUE, closed_end_value = TRUE, locf = FALSE, from_last = FALSE) {
   self$get_data_objects(data_name)$replace_value_in_data(col_names, rows, old_value, old_is_missing, start_value, end_value, new_value, new_is_missing, closed_start_value, closed_end_value, locf, from_last)
 }
@@ -663,8 +668,8 @@ instat_object$set("public", "anova_tables", function(data_name, x_col_names, y_c
 } 
 )
 
-instat_object$set("public", "remove_columns_in_data", function(data_name, cols) {
-  self$get_data_objects(data_name)$remove_columns_in_data(cols = cols)
+instat_object$set("public", "remove_columns_in_data", function(data_name, cols, allow_delete_all = FALSE) {
+  self$get_data_objects(data_name)$remove_columns_in_data(cols = cols, allow_delete_all = allow_delete_all)
 } 
 )
 
@@ -770,12 +775,13 @@ instat_object$set("public", "rename_dataframe", function(data_name, new_value = 
       private$.links[[i]]$to_data_frame <- new_value
     }
   }
-  data_obj$set_data_changed(TRUE)
   if(label != "") {
     data_obj$append_to_metadata(property = "label" , new_val = label)
-    data_obj$set_metadata_changed(TRUE)
   }
-} 
+  data_obj$set_data_changed(TRUE)
+  data_obj$set_metadata_changed(TRUE)
+  data_obj$set_variables_metadata_changed(TRUE)
+}
 )
 
 instat_object$set("public", "convert_column_to_type", function(data_name, col_names = c(), to_type, factor_values = NULL, set_digits, set_decimals = FALSE, keep_attr = TRUE, ignore_labels = FALSE) {

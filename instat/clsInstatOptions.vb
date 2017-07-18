@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Threading
@@ -38,6 +38,10 @@ Imports RDotNet
     Public iDigits As Nullable(Of Integer)
     Public bShowSignifStars As Nullable(Of Boolean)
     Public bChangeDataFrame As Nullable(Of Boolean)
+    Public bAutoSaveData As Nullable(Of Boolean)
+    Public iAutoSaveDataMinutes As Nullable(Of Integer)
+    Public bShowWaitDialog As Nullable(Of Boolean)
+    Public iWaitTimeDelaySeconds As Nullable(Of Integer)
 
     Public Sub New(Optional bSetOptions As Boolean = True)
         'TODO Is this sensible to do in constructor?
@@ -62,6 +66,11 @@ Imports RDotNet
         lstColourPalette = clsInstatOptionsDefaults.DEFAULTlstColourPalette
         iDigits = clsInstatOptionsDefaults.DEFAULTiDigits
         bShowSignifStars = clsInstatOptionsDefaults.DEFAULTbShowSignifStars
+        bChangeDataFrame = clsInstatOptionsDefaults.DEFAULTbChangeDataFrame
+        bAutoSaveData = clsInstatOptionsDefaults.DEFAULTbAutoSaveData
+        iAutoSaveDataMinutes = clsInstatOptionsDefaults.DEFAULTiAutoSaveDataMinutes
+        bShowWaitDialog = clsInstatOptionsDefaults.DEFAULTbShowWaitDialog
+        iWaitTimeDelaySeconds = clsInstatOptionsDefaults.DEFAULTiWaitTimeDelaySeconds
         If bSetOptions Then
             SetOptions()
         End If
@@ -175,20 +184,40 @@ Imports RDotNet
         Else
             SetColorPalette(clsInstatOptionsDefaults.DEFAULTlstColourPalette)
         End If
+
+        If bAutoSaveData.HasValue Then
+            SetAutoSaveData(bAutoSaveData)
+        Else
+            SetAutoSaveData(clsInstatOptionsDefaults.DEFAULTbAutoSaveData)
+        End If
+
+        If iAutoSaveDataMinutes.HasValue Then
+            SetAutoSaveDataMinutes(iAutoSaveDataMinutes)
+        Else
+            SetAutoSaveDataMinutes(clsInstatOptionsDefaults.DEFAULTiAutoSaveDataMinutes)
+        End If
+
+        If bShowWaitDialog.HasValue Then
+            SetShowWaitDialog(bShowWaitDialog)
+        Else
+            SetShowWaitDialog(clsInstatOptionsDefaults.DEFAULTbShowWaitDialog)
+        End If
+
+        If iWaitTimeDelaySeconds.HasValue Then
+            SetWaitTimeDelaySeconds(iWaitTimeDelaySeconds)
+        Else
+            SetWaitTimeDelaySeconds(clsInstatOptionsDefaults.DEFAULTiWaitTimeDelaySeconds)
+        End If
     End Sub
 
     Public Sub SetMaxRows(iRows As Integer)
-        If (iMaxRows.HasValue AndAlso iRows <> iMaxRows) OrElse Not iMaxRows.HasValue Then
-            iMaxRows = iRows
-            frmMain.clsGrids.SetMaxRows(iMaxRows)
-        End If
+        iMaxRows = iRows
+        frmMain.clsGrids.SetMaxRows(iMaxRows)
     End Sub
 
     Public Sub SetMaxCols(iCols As Integer)
-        If (iMaxCols.HasValue AndAlso iCols <> iMaxCols) OrElse Not iMaxCols.HasValue Then
-            iMaxCols = iCols
-            frmMain.clsGrids.SetMaxCols(iMaxCols)
-        End If
+        iMaxCols = iCols
+        frmMain.clsGrids.SetMaxCols(iMaxCols)
     End Sub
 
     Public Sub SetFormatOutput(fntNew As Font, clrNew As Color)
@@ -324,5 +353,23 @@ Imports RDotNet
 
     Public Sub SetIncludeRDefaultParameters(bNewInclude As Boolean)
         bIncludeRDefaultParameters = bNewInclude
+    End Sub
+
+    Public Sub SetAutoSaveData(bNewAutoSave As Boolean)
+        bAutoSaveData = bNewAutoSave
+    End Sub
+
+    Public Sub SetAutoSaveDataMinutes(iNewMinutes As Integer)
+        iAutoSaveDataMinutes = iNewMinutes
+    End Sub
+
+    Public Sub SetShowWaitDialog(bNewShow As Boolean)
+        bShowWaitDialog = bNewShow
+        frmMain.clsRLink.SetShowWaitDialog(bShowWaitDialog)
+    End Sub
+
+    Public Sub SetWaitTimeDelaySeconds(iNewTimeInSeconds As Integer)
+        iWaitTimeDelaySeconds = iNewTimeInSeconds
+        frmMain.clsRLink.SetWaitDelayTime(iWaitTimeDelaySeconds)
     End Sub
 End Class
