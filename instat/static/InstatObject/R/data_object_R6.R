@@ -247,6 +247,7 @@ data_object$set("public", "get_data_frame", function(convert_to_character = FALS
       out <- private$data[!hidden]
     }
     else out <- private$data
+    nam <- names(out)
     if(use_current_filter && self$filter_applied()) {
       if(filter_name != "") {
         out <- out[self$current_filter & self$get_filter_as_logical(filter_name = filter_name), ]
@@ -259,6 +260,10 @@ data_object$set("public", "get_data_frame", function(convert_to_character = FALS
       if(filter_name != "") {
         out <- out[self$get_filter_as_logical(filter_name = filter_name), ]
       }
+    }
+    if(!is.data.frame(out)) {
+      out <- data.frame(out)
+      if(length(nam) == length(out)) names(out) <- nam
     }
     # This is needed as some R function misinterpret the class of a column
     # when there are extra attributes on columns
@@ -1457,6 +1462,9 @@ data_object$set("public", "get_filter_as_logical", function(filter_name) {
   else {
     result = matrix(nrow = nrow(self$get_data_frame(use_current_filter = FALSE)), ncol = length(curr_filter$filter_conditions))
     for(condition in curr_filter$filter_conditions) {
+      # Prevents crash if column no longer exists
+      # TODO still shows filter is applied
+      if(!condition[["column"]] %in% self$get_column_names()) return(TRUE)
       func = match.fun(condition[["operation"]])
       # TODO Have better hanlding and dealing with NA values in filter
       # and special options for NA in the dialog

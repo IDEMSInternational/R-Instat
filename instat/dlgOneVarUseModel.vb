@@ -40,6 +40,8 @@ Public Class dlgOneVarUseModel
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrNewDataFrameName.Visible = False ' TODO: Discuss this, do we want this?
+
         'Temp fix: Bugs on second running- an inifinite loop is created
         sdgOneVarUseModFit.rdoCIcdf.Enabled = False
         ucrBase.iHelpTopicID = 375
@@ -174,7 +176,6 @@ Public Class dlgOneVarUseModel
         SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
-
 
     'Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
     '    If ucrChkProduceBootstrap.Checked Then
