@@ -247,6 +247,7 @@ data_object$set("public", "get_data_frame", function(convert_to_character = FALS
       out <- private$data[!hidden]
     }
     else out <- private$data
+    nam <- names(out)
     if(use_current_filter && self$filter_applied()) {
       if(filter_name != "") {
         out <- out[self$current_filter & self$get_filter_as_logical(filter_name = filter_name), ]
@@ -259,6 +260,10 @@ data_object$set("public", "get_data_frame", function(convert_to_character = FALS
       if(filter_name != "") {
         out <- out[self$get_filter_as_logical(filter_name = filter_name), ]
       }
+    }
+    if(!is.data.frame(out)) {
+      out <- data.frame(out)
+      if(length(nam) == length(out)) names(out) <- nam
     }
     # This is needed as some R function misinterpret the class of a column
     # when there are extra attributes on columns
@@ -352,8 +357,8 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
     #rbind.fill safer alternative currently
     out <- plyr::rbind.fill(out)
     out <- as.data.frame(out)
-    if(all(c(name_label, label_label) %in% names(out))) out <- out[c(c(name_label, label_label), setdiff(names(out), c(name_label, label_label)))]
-    else if(name_label %in% names(out)) out <- out[c(name_label, setdiff(names(out), name_label))]
+    if(all(c(name_label, label_label) %in% names(out))) out <- out[c(c(name_label, label_label), sort(setdiff(names(out), c(name_label, label_label))))]
+    else if(name_label %in% names(out)) out <- out[c(name_label, sort(setdiff(names(out), name_label)))]
     #row.names(out) <- self$get_column_names()
     row.names(out) <- cols
     if(data_type != "all") {
@@ -445,7 +450,7 @@ data_object$set("public", "get_calculation_names", function() {
 }
 )
 
-data_object$set("public", "add_columns_to_data", function(col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before = FALSE, adjacent_column, num_cols) {
+data_object$set("public", "add_columns_to_data", function(col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before = FALSE, adjacent_column, num_cols, require_correct_length = TRUE) {
   # Column name must be character
   if(!is.character(col_name)) stop("Column name must be of type: character")
   if(missing(num_cols)) {
@@ -500,8 +505,13 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
     }
     else curr_col = col_data[,i]
     if(is.matrix(curr_col) || is.data.frame(curr_col)) curr_col = curr_col[,1]
+    if(self$get_data_frame_length() %% length(curr_col) != 0) {
+      if(require_correct_length) stop("Length of new column must be divisible by the length of the data frame")
+      else curr_col <- rep(curr_col, length.out = self$get_data_frame_length())
+    }
     if(use_col_name_as_prefix) curr_col_name = self$get_next_default_column_name(col_name)
     else curr_col_name = col_name[[i]]
+    curr_col_name <- make.names(curr_col_name)
     new_col_names <- c(new_col_names, curr_col_name)
     if(curr_col_name %in% self$get_column_names()) {
       message(paste("A column named", curr_col_name, "already exists. The column will be replaced in the data"))
@@ -625,8 +635,15 @@ data_object$set("public", "rename_column_in_data", function(curr_col_name = "", 
 }
 )
 
-data_object$set("public", "remove_columns_in_data", function(cols=c()) {
-  if(length(cols) == self$get_column_count()) stop("Cannot delete all columns through this function. Use delete_dataframe to delete the data.")
+data_object$set("public", "remove_columns_in_data", function(cols=c(), allow_delete_all = FALSE) {
+  if(length(cols) == self$get_column_count()) {
+    if(allow_delete_all) {
+      warning("You are deleting all columns in the data frame.")
+    }
+    else {
+      stop("Cannot delete all columns through this function. Use delete_dataframe to delete the data.")
+    }
+  }
   for(col_name in cols) {
     # Column name must be character
     if(!is.character(col_name)) {
@@ -1445,6 +1462,9 @@ data_object$set("public", "get_filter_as_logical", function(filter_name) {
   else {
     result = matrix(nrow = nrow(self$get_data_frame(use_current_filter = FALSE)), ncol = length(curr_filter$filter_conditions))
     for(condition in curr_filter$filter_conditions) {
+      # Prevents crash if column no longer exists
+      # TODO still shows filter is applied
+      if(!condition[["column"]] %in% self$get_column_names()) return(TRUE)
       func = match.fun(condition[["operation"]])
       # TODO Have better hanlding and dealing with NA values in filter
       # and special options for NA in the dialog
@@ -1479,13 +1499,27 @@ data_object$set("public", "filter_string", function(filter_name) {
   for(condition in curr_filter$filter_conditions) {
     if(i != 1) out = paste(out, "&&")
     out = paste0(out, " (", condition[["column"]], " ", condition[["operation"]])
-    if(condition[["operation"]] == "%in%") out = paste0(out, " c(", paste(condition[["value"]], collapse = ","), ")")
+    if(condition[["operation"]] == "%in%") out = paste0(out, " c(", paste(paste0("'", condition[["value"]], "'"), collapse = ","), ")")
     else out = paste(out, condition[["value"]])
     out = paste0(out , ")")
     i = i + 1
   }
   out = paste(out, ")")
   return(out)
+}
+)
+
+data_object$set("public", "get_filter_as_instat_calculation", function(filter_name) {
+  if(!filter_name %in% names(private$filters)) stop(filter_name, " not found.")
+  curr_filter <- self$get_filter(filter_name)
+  filter_string <- self$filter_string(filter_name)
+  calc_from <- list()
+  for(condition in curr_filter$filter_conditions) {
+    calc_from[[length(calc_from) + 1]] <- condition[["column"]]
+  }
+  names(calc_from) <- rep(self$get_metadata(data_name_label), length(calc_from))
+  calc <- instat_calculation$new(type="filter", function_exp = filter_string, calculated_from = calc_from)
+  return(calc)
 }
 )
 
@@ -2414,15 +2448,15 @@ all_primary_corruption_country_level_column_types <- c(corruption_country_label,
 )
 
 # Column metadata for corruption colums
-corruption_type_label = "Corruption_Type"
-corruption_output_label = "Is_Corruption_Output"
+corruption_type_label = "Procurement_Type"
+corruption_output_label = "Is_Corruption_Risk_Output"
 corruption_red_flag_label = "Is_Corruption_Red_Flag"
-corruption_index_label = "Is_Corruption_Index"
+corruption_index_label = "Is_CRI_Component"
 
 # Data frame metadata for corruption dataframes
-corruption_data_label = "Is_Corruption_Data"
-corruption_contract_level_label = "Contract Level"
-corruption_country_level_label = "Country Level"
+corruption_data_label = "Is_Procurement_Data"
+corruption_contract_level_label = "Contract_Level"
+corruption_country_level_label = "Country_Level"
 
 
 instat_object$set("public","define_corruption_outputs", function(data_name, output_columns = c()) {
@@ -2458,18 +2492,18 @@ data_object$set("public","define_red_flags", function(red_flags = c()) {
 }
 )
 
-instat_object$set("public","define_as_corruption", function(data_name, primary_types = c(), calculated_types = c(), country_data_name, country_types, auto_generate = TRUE) {
+instat_object$set("public","define_as_procurement", function(data_name, primary_types = c(), calculated_types = c(), country_data_name, country_types, auto_generate = TRUE) {
   self$append_to_dataframe_metadata(data_name, corruption_data_label, corruption_contract_level_label)
-  self$get_data_objects(data_name)$set_corruption_types(primary_types, calculated_types, auto_generate)
+  self$get_data_objects(data_name)$set_procurement_types(primary_types, calculated_types, auto_generate)
   if(!missing(country_data_name)) {
-    self$define_as_corruption_country_level_data(data_name = country_data_name, contract_level_data_name = data_name, types = country_types, auto_generate = auto_generate)
+    self$define_as_procurement_country_level_data(data_name = country_data_name, contract_level_data_name = data_name, types = country_types, auto_generate = auto_generate)
   }
 }
 )
 
-instat_object$set("public","define_as_corruption_country_level_data", function(data_name, contract_level_data_name, types = c(), auto_generate = TRUE) {
+instat_object$set("public","define_as_procurement_country_level_data", function(data_name, contract_level_data_name, types = c(), auto_generate = TRUE) {
   self$append_to_dataframe_metadata(data_name, corruption_data_label, corruption_country_level_label)
-  self$get_data_objects(data_name)$define_as_corruption_country_level_data(types, auto_generate)
+  self$get_data_objects(data_name)$define_as_procurement_country_level_data(types, auto_generate)
   contract_level_country_name <- self$get_corruption_column_name(contract_level_data_name, corruption_country_label)
   country_level_country_name <- self$get_corruption_column_name(data_name, corruption_country_label)
   if(contract_level_country_name == "" || country_level_country_name == "") stop("country column must be defined in the contract level data and country level data.")
@@ -2479,13 +2513,26 @@ instat_object$set("public","define_as_corruption_country_level_data", function(d
 }
 )
 
-data_object$set("public","define_as_corruption_country_level_data", function(types = c(), auto_generate = TRUE) {
+data_object$set("public","define_as_procurement_country_level_data", function(types = c(), auto_generate = TRUE) {
   invisible(sapply(names(types), function(x) self$append_to_variables_metadata(types[[x]], corruption_type_label, x)))
 }
 )
 
 data_object$set("public","is_corruption_type_present", function(type) {
   return(self$is_metadata(corruption_data_label) && !is.na(self$get_metadata(corruption_data_label)) && self$is_variables_metadata(corruption_type_label) && (type %in% self$get_variables_metadata(property = corruption_type_label)))
+}
+)
+
+instat_object$set("public","get_CRI_column_names", function(data_name) {
+  self$get_data_objects(data_name)$get_CRI_column_names()
+}
+)
+
+# Temporary since metadata not added to CRI columns when calculated
+data_object$set("public","get_CRI_column_names", function() {
+  col_names <- self$get_column_names()
+  CRI_cols <- col_names[startsWith(col_names, "CRI")]
+  return(CRI_cols)
 }
 )
 
@@ -2505,7 +2552,7 @@ data_object$set("public","get_corruption_column_name", function(type) {
 }
 )
 
-data_object$set("public","set_corruption_types", function(primary_types = c(), calculated_types = c(), auto_generate = TRUE) {
+data_object$set("public","set_procurement_types", function(primary_types = c(), calculated_types = c(), auto_generate = TRUE) {
   if(!all(names(primary_types) %in% all_primary_corruption_column_types)) stop("Cannot recognise the following primary corruption data types: ", paste(names(primary_types)[!names(primary_types) %in% all_primary_corruption_column_types], collapse = ", "))
   if(!all(names(calculated_types) %in% all_calculated_corruption_column_types)) stop("Cannot recognise the following calculated corruption data types: ", paste(names(calculated_types)[!names(calculated_types) %in% all_calculated_corruption_column_types], collapse = ", "))
   if(!all(c(primary_types, calculated_types) %in% self$get_column_names())) stop("The following columns do not exist in the data:", paste(c(primary_types, calculated_types)[!(c(primary_types, calculated_types) %in% self$get_column_names())], collapse = ", "))

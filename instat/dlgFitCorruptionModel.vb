@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,18 +11,22 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
+
 Public Class dlgFitCorruptionModel
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private bResetDisplayOptions As Boolean = True
     Dim bUseSelectedColumn As Boolean = False
     Dim strSelectedColumn As String = ""
     Dim strSelectedDataFrame As String = ""
-    Private bResetSubdialog As Boolean = False
     Private clsCorruptionModel, clsBinomialModel As New RFunction
-    Private clsModel, clsModel1 As New ROperator
+    Private clsFormula, clsExplanatoryVariables As New ROperator
+    'Function for display sub dialog
+    Public clsVisReg, clsAutoPlot, clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As RFunction
 
     Private Sub dlgFitCorruptionModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -43,25 +47,20 @@ Public Class dlgFitCorruptionModel
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 529
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-
+        ucrBase.clsRsyntax.iCallType = 2
         ucrInputModelPreview.IsReadOnly = True
-
-        clsBinomialModel.SetRCommand("binomial")
-        clsBinomialModel.AddParameter("link", Chr(34) & "logit" & Chr(34))
-
-        clsModel.SetOperation("~")
-        clsModel.AddParameter("input", clsROperatorParameter:=clsModel1, iPosition:=1)
 
         'Selector
         ucrSelectorFitModel.SetParameter(New RParameter("data", 0))
         ucrSelectorFitModel.SetParameterIsrfunction()
 
         'Receivers
-        ucrReceiverOutput.SetParameter(New RParameter("y", 1))
+        ucrReceiverOutput.SetParameter(New RParameter("output", 0))
         ucrReceiverOutput.SetParameterIsRFunction()
         ucrReceiverOutput.Selector = ucrSelectorFitModel
         ucrReceiverOutput.SetIncludedDataTypes({"integer", "numeric", "logical"})
-        ucrReceiverOutput.AddIncludedMetadataProperty("Is_Corruption_Output", {"TRUE"})
+        ucrReceiverOutput.strSelectorHeading = "Numeric & Logical Output Variables"
+        ucrReceiverOutput.AddIncludedMetadataProperty("Is_Corruption_Risk_Output", {"TRUE"})
 
         ucrReceiverControlVariables.SetParameter(New RParameter("x", 2))
         ucrReceiverControlVariables.SetParameterIsString()
@@ -82,6 +81,27 @@ Public Class dlgFitCorruptionModel
 
     Private Sub SetDefaults()
         clsCorruptionModel = New RFunction
+        clsFormulaFunction = New RFunction
+        clsSummaryFunction = New RFunction
+        clsConfint = New RFunction
+        clsVisReg = New RFunction
+        clsAutoPlot = New RFunction
+        clsAnovaFunction = New RFunction
+        clsBinomialModel = New RFunction
+        clsExplanatoryVariables = New ROperator
+        clsFormula = New ROperator
+
+        clsBinomialModel.SetRCommand("binomial")
+        clsBinomialModel.AddParameter("link", Chr(34) & "logit" & Chr(34))
+
+        clsExplanatoryVariables.SetOperation("+")
+
+        clsFormula.SetOperation("~")
+        clsFormula.AddParameter("input", clsROperatorParameter:=clsExplanatoryVariables, iPosition:=1)
+
+        'Residual Plots
+        clsAutoPlot = clsRegressionDefaults.clsDefaultAutoplot.Clone
+
         ucrReceiverOutput.SetMeAsReceiver()
 
         'Reset 
@@ -89,13 +109,52 @@ Public Class dlgFitCorruptionModel
         ucrSaveCorruptionModel.Reset()
         ucrInputModelPreview.SetName("")
 
+        'Residual Plots
+        clsAutoPlot = clsRegressionDefaults.clsDefaultAutoplot.Clone
+        clsAutoPlot.AddParameter("object", clsRFunctionParameter:=clsCorruptionModel, iPosition:=0)
+
+        'Display formula
+        clsFormulaFunction = clsRegressionDefaults.clsDefaultFormulaFunction.Clone
+        clsFormulaFunction.iCallType = 2
+        clsFormulaFunction.AddParameter("x", clsRFunctionParameter:=clsCorruptionModel, iPosition:=0)
+
+        'Summary
+        clsSummaryFunction = clsRegressionDefaults.clsDefaultSummary.Clone
+        clsSummaryFunction.iCallType = 2
+        clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsCorruptionModel, iPosition:=0)
+
+        'ANOVA
+        clsAnovaFunction = clsRegressionDefaults.clsDefaultAnovaFunction.Clone
+        clsAnovaFunction.iCallType = 2
+        clsAnovaFunction.AddParameter("object", clsRFunctionParameter:=clsCorruptionModel, iPosition:=0)
+
+        'Confidence Interval
+        clsConfint = clsRegressionDefaults.clsDefaultConfint.Clone
+        clsConfint.iCallType = 2
+        clsConfint.AddParameter("object", clsRFunctionParameter:=clsCorruptionModel, iPosition:=0)
+
+        'FitModel
+        clsVisReg.SetPackageName("visreg")
+        clsVisReg.SetRCommand("visreg")
+        clsVisReg.AddParameter("type", Chr(34) & "conditional" & Chr(34))
+        clsVisReg.AddParameter("gg", "TRUE")
+        clsVisReg.iCallType = 3
+        clsVisReg.AddParameter("fit", clsRFunctionParameter:=clsCorruptionModel, iPosition:=0)
+
+
         clsCorruptionModel.SetRCommand("glm")
+        clsCorruptionModel.AddParameter("formula", clsROperatorParameter:=clsFormula)
         clsCorruptionModel.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsCorruptionModel)
-        bResetSubdialog = True
-        ChangeBaseFunction()
-        LoadSubdialog()
+
+        ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, 2)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsAutoPlot, 5)
+
+        bResetDisplayOptions = True
+        SetBaseFunction()
+        UpdateModelPreview()
     End Sub
 
     Private Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
@@ -113,6 +172,7 @@ Public Class dlgFitCorruptionModel
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrSelectorFitModel.SetRCode(clsCorruptionModel, bReset)
+        ucrReceiverOutput.SetRCode(clsFormula, bReset)
         ucrSaveCorruptionModel.SetRCode(clsCorruptionModel, bReset)
     End Sub
 
@@ -124,7 +184,7 @@ Public Class dlgFitCorruptionModel
         End If
     End Sub
 
-    Private Sub ChangeBaseFunction()
+    Private Sub SetBaseFunction()
         If Not ucrReceiverOutput.IsEmpty Then
             If frmMain.clsRLink.IsBinary(ucrSelectorFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverOutput.GetVariableNames(False)) Then
                 clsCorruptionModel.SetRCommand("glm")
@@ -139,21 +199,24 @@ Public Class dlgFitCorruptionModel
     Private Sub SetFormula()
         Dim i As Integer = 0
         If Not ucrReceiverOutput.IsEmpty AndAlso (Not ucrReceiverIndicators.IsEmpty OrElse Not ucrReceiverControlVariables.IsEmpty) Then
-            clsCorruptionModel.AddParameter("formula", clsROperatorParameter:=clsModel)
-
-            clsModel.AddParameter("output", ucrReceiverOutput.GetVariableNames(False), iPosition:=0)
-
-            clsModel1.SetOperation("+")
-            clsModel1.ClearParameters()
+            clsExplanatoryVariables.ClearParameters()
             For Each strControlVar As String In ucrReceiverControlVariables.GetVariableNamesAsList
-                clsModel1.AddParameter(i, strControlVar, iPosition:=i)
+                clsExplanatoryVariables.AddParameter(i, strControlVar, iPosition:=i)
                 i = i + 1
             Next
             For Each strIndicatorVar As String In ucrReceiverIndicators.GetVariableNamesAsList
-                clsModel1.AddParameter(i, strIndicatorVar, iPosition:=i)
+                clsExplanatoryVariables.AddParameter(i, strIndicatorVar, iPosition:=i)
                 i = i + 1
             Next
-            ucrInputModelPreview.SetName(clsModel.ToScript)
+        End If
+        UpdateModelPreview()
+    End Sub
+
+    Private Sub UpdateModelPreview()
+        If Not ucrReceiverOutput.IsEmpty Then
+            ucrInputModelPreview.SetName(clsFormula.ToScript)
+        Else
+            ucrInputModelPreview.SetName("")
         End If
     End Sub
 
@@ -168,27 +231,13 @@ Public Class dlgFitCorruptionModel
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        'sdgSimpleRegOptions.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubdialog)
-        'bResetSubdialog = False
+        sdgSimpleRegOptions.SetRCode(ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, clsNewAutoplot:=clsAutoPlot, bReset:=bResetDisplayOptions)
         sdgSimpleRegOptions.ShowDialog()
-    End Sub
-
-    Private Sub LoadSubdialog()
-        'sdgSimpleRegOptions.SetRModelFunction(clsCorruptionModel)
-        sdgSimpleRegOptions.SetRDataFrame(ucrSelectorFitModel.ucrAvailableDataFrames)
-        ' sdgSimpleRegOptions.SetRYVariable(ucrReceiverOutput)
-        ' sdgSimpleRegOptions.SetDefaults()
-        ' sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
-        sdgSimpleRegOptions.lblConfLevel.Enabled = True
-        ' sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
+        bResetDisplayOptions = False
     End Sub
 
     Private Sub ucrReceiverOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOutput.ControlValueChanged, ucrReceiverControlVariables.ControlValueChanged, ucrReceiverIndicators.ControlValueChanged
-        ChangeBaseFunction()
+        SetBaseFunction()
         SetFormula()
-    End Sub
-
-    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        'sdgSimpleRegOptions.RegOptions()
     End Sub
 End Class

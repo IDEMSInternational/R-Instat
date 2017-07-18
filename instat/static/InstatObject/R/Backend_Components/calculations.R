@@ -172,7 +172,7 @@ c_has_filter_label <- "has_filter"
 # This method is called recursively, and it would not be called by a user, another function would always handle the output and display
 # results to the user (usually only the $data part of the list)
 instat_object$set("public", "apply_instat_calculation", function(calc, curr_data_list, previous_manipulations = list()) {
-  
+
   # apply each manipulation first, and recursively store the output and pass to the next manipulation
   # because of this, manipulations are dependant on each other
   for(manipulation in calc$manipulations) {
@@ -310,14 +310,14 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
             additional_cols <- intersect(names(sub_calc_results[[c_data_label]]), names(curr_sub_calc[[c_data_label]]))
             additional_cols <- additional_cols[!additional_cols %in% by]
             if(length(additional_cols) > 0) by <- c(by, additional_cols)
-            sub_calc_results[[c_data_label]] <- full_join(curr_sub_calc[[c_data_label]], sub_calc_results[[c_data_label]], by = by)
+            sub_calc_results[[c_data_label]] <- dplyr::full_join(curr_sub_calc[[c_data_label]], sub_calc_results[[c_data_label]], by = by)
             joined <- TRUE
           }
           else if(overall_has_filter) {
             # If the overall data has a filter and current does not, then we should merge the overall into the current
             # We subset the current data to only have by and the output columns so that merge doesn't produce duplicate columns
             # Overall sub data should be full data so we don't lose any data by subsetting the current sub calc
-            sub_calc_results[[c_data_label]] <- full_join(curr_sub_calc[[c_data_label]][c(as.vector(by), sub_calc$result_name)], sub_calc_results[[c_data_label]], by = by)
+            sub_calc_results[[c_data_label]] <- dplyr::full_join(curr_sub_calc[[c_data_label]][c(as.vector(by), sub_calc$result_name)], sub_calc_results[[c_data_label]], by = by)
             # Current data has no filter so output now does not
             sub_calc_results[[c_has_filter_label]] <- FALSE
             joined <- TRUE
@@ -326,15 +326,15 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
             # If the current data has a filter and overall does not, then we should merge the current into the overall
             # We subset the current data to only have by and output columns so that merge doesn't produce duplicate columns
             # Overall sub data should be full data so we don't lose any data by subsetting the current sub calc
-            sub_calc_results[[c_data_label]] <- full_join(sub_calc_results[[c_data_label]], curr_sub_calc[[c_data_label]][c(as.vector(by), sub_calc$result_name)], by = by)
+            sub_calc_results[[c_data_label]] <- dplyr::full_join(sub_calc_results[[c_data_label]], curr_sub_calc[[c_data_label]][c(as.vector(by), sub_calc$result_name)], by = by)
             # Overall data has no filter so output does even though current does
             joined <- TRUE
           }
         }
         if(!joined) {
-          if(join_into_overall) sub_calc_results[[c_data_label]] <- full_join(sub_calc_results[[c_data_label]], curr_sub_calc[[c_data_label]], by = by)
+          if(join_into_overall) sub_calc_results[[c_data_label]] <- dplyr::full_join(sub_calc_results[[c_data_label]], curr_sub_calc[[c_data_label]], by = by)
           else {
-            sub_calc_results[[c_data_label]] <- full_join(curr_sub_calc[[c_data_label]], sub_calc_results[[c_data_label]], by = by)
+            sub_calc_results[[c_data_label]] <- dplyr::full_join(curr_sub_calc[[c_data_label]], sub_calc_results[[c_data_label]], by = by)
             # The overall data will be joined into the current sub calc, so this becomes the new link
             sub_calc_results[[c_link_label]] <- curr_sub_calc[[c_link_label]]
           }
@@ -421,7 +421,7 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
       if(length(by) == 0) {
         stop("Cannot find linking columns to merge output from sub calculations with data for calculated_from.")
       }
-      if(join_into_overall) curr_data_list[[c_data_label]] <- full_join(curr_data_list[[c_data_label]], self$get_data_frame(data_frame_name, use_current_filter = FALSE), by = by)
+      if(join_into_overall) curr_data_list[[c_data_label]] <- dplyr::full_join(curr_data_list[[c_data_label]], self$get_data_frame(data_frame_name, use_current_filter = FALSE), by = by)
       else {
         curr_groups <- dplyr::groups(curr_data_list[[c_data_label]])
         curr_data_list[[c_data_label]] <- dplyr::full_join(self$get_data_frame(data_frame_name, use_current_filter = FALSE), curr_data_list[[c_data_label]], by = by)
@@ -629,7 +629,7 @@ instat_object$set("public", "save_calc_output", function(calc, curr_data_list, p
           #     Delete is needed because merge will not replace
           #     If not wanting to replace, this should be checked when calculation is defined.
           warning("A column named ", calc$result_name, " already exists in ", to_data_name, ". It will be replaced by the output from the calculation.")
-          self$remove_columns_in_data(to_data_name, calc$result_name)
+          suppressWarnings(self$remove_columns_in_data(to_data_name, calc$result_name, TRUE))
         }
         if(length(calc_link_cols) > 0) {
           # merge_data merges into to_data_frame in instat object
@@ -641,7 +641,7 @@ instat_object$set("public", "save_calc_output", function(calc, curr_data_list, p
           self$get_data_objects(to_data_name)$merge_data(curr_data_list[[c_data_label]][c(calc_link_cols, calc$result_name)], by = by, type = "full")
         }
         else {
-          self$get_data_objects(to_data_name)$add_columns_to_data(calc$result_name, curr_data_list[[c_data_label]])
+          self$get_data_objects(to_data_name)$add_columns_to_data(calc$result_name, curr_data_list[[c_data_label]][calc$result_name])
         }
       }
       else {

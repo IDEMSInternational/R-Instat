@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class sdgLayerOptions
     Inherits System.Windows.Forms.Form
 
@@ -37,11 +53,11 @@ Partial Class sdgLayerOptions
         '
         Me.tbcLayers.Controls.Add(Me.tbpAesthetics)
         Me.tbcLayers.Controls.Add(Me.tbpGeomParameters)
-        Me.tbcLayers.Location = New System.Drawing.Point(13, 13)
+        Me.tbcLayers.Location = New System.Drawing.Point(6, 8)
         Me.tbcLayers.Name = "tbcLayers"
         Me.tbcLayers.SelectedIndex = 0
         Me.tbcLayers.Size = New System.Drawing.Size(482, 511)
-        Me.tbcLayers.TabIndex = 1
+        Me.tbcLayers.TabIndex = 0
         '
         'tbpAesthetics
         '
@@ -51,12 +67,12 @@ Partial Class sdgLayerOptions
         Me.tbpAesthetics.Padding = New System.Windows.Forms.Padding(3)
         Me.tbpAesthetics.Size = New System.Drawing.Size(474, 485)
         Me.tbpAesthetics.TabIndex = 0
-        Me.tbpAesthetics.Text = "Layer Dimensions(Aesthetics)"
+        Me.tbpAesthetics.Text = "Layer Dimensions (Aesthetics)"
         Me.tbpAesthetics.UseVisualStyleBackColor = True
         '
         'ucrGeomWithAes
         '
-        Me.ucrGeomWithAes.Location = New System.Drawing.Point(6, 6)
+        Me.ucrGeomWithAes.Location = New System.Drawing.Point(3, 3)
         Me.ucrGeomWithAes.Name = "ucrGeomWithAes"
         Me.ucrGeomWithAes.Size = New System.Drawing.Size(467, 399)
         Me.ucrGeomWithAes.TabIndex = 0
@@ -69,7 +85,7 @@ Partial Class sdgLayerOptions
         Me.tbpGeomParameters.Padding = New System.Windows.Forms.Padding(3)
         Me.tbpGeomParameters.Size = New System.Drawing.Size(474, 485)
         Me.tbpGeomParameters.TabIndex = 1
-        Me.tbpGeomParameters.Text = "Layer Parameters(Geom Parameters)"
+        Me.tbpGeomParameters.Text = "Layer Parameters (Geom Parameters)"
         Me.tbpGeomParameters.UseVisualStyleBackColor = True
         '
         'ucrLayerParameter
@@ -82,16 +98,16 @@ Partial Class sdgLayerOptions
         '
         'ucrSdgLayerBase
         '
-        Me.ucrSdgLayerBase.Location = New System.Drawing.Point(186, 533)
+        Me.ucrSdgLayerBase.Location = New System.Drawing.Point(173, 524)
         Me.ucrSdgLayerBase.Name = "ucrSdgLayerBase"
         Me.ucrSdgLayerBase.Size = New System.Drawing.Size(142, 30)
-        Me.ucrSdgLayerBase.TabIndex = 0
+        Me.ucrSdgLayerBase.TabIndex = 1
         '
         'sdgLayerOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(507, 568)
+        Me.ClientSize = New System.Drawing.Size(492, 562)
         Me.Controls.Add(Me.tbcLayers)
         Me.Controls.Add(Me.ucrSdgLayerBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
