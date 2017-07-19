@@ -50,7 +50,7 @@ Partial Class dlgDeleteSheet
         Me.ucrBase.Location = New System.Drawing.Point(10, 178)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 4
         '
         'lblDataframes
         '
@@ -58,7 +58,7 @@ Partial Class dlgDeleteSheet
         Me.lblDataframes.Location = New System.Drawing.Point(14, 12)
         Me.lblDataframes.Name = "lblDataframes"
         Me.lblDataframes.Size = New System.Drawing.Size(70, 13)
-        Me.lblDataframes.TabIndex = 4
+        Me.lblDataframes.TabIndex = 0
         Me.lblDataframes.Text = "Data Frames:"
         '
         'lblAppendToDataframe
@@ -67,7 +67,7 @@ Partial Class dlgDeleteSheet
         Me.lblAppendToDataframe.Location = New System.Drawing.Point(254, 40)
         Me.lblAppendToDataframe.Name = "lblAppendToDataframe"
         Me.lblAppendToDataframe.Size = New System.Drawing.Size(115, 13)
-        Me.lblAppendToDataframe.TabIndex = 6
+        Me.lblAppendToDataframe.TabIndex = 2
         Me.lblAppendToDataframe.Text = "Selected Data Frames:"
         '
         'ucrReceiverDataframes
@@ -79,7 +79,7 @@ Partial Class dlgDeleteSheet
         Me.ucrReceiverDataframes.Selector = Nothing
         Me.ucrReceiverDataframes.Size = New System.Drawing.Size(122, 104)
         Me.ucrReceiverDataframes.strNcFilePath = ""
-        Me.ucrReceiverDataframes.TabIndex = 7
+        Me.ucrReceiverDataframes.TabIndex = 3
         Me.ucrReceiverDataframes.ucrSelector = Nothing
         '
         'ucrSelectorDataFramesToDelete
@@ -89,7 +89,7 @@ Partial Class dlgDeleteSheet
         Me.ucrSelectorDataFramesToDelete.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDataFramesToDelete.Name = "ucrSelectorDataFramesToDelete"
         Me.ucrSelectorDataFramesToDelete.Size = New System.Drawing.Size(216, 150)
-        Me.ucrSelectorDataFramesToDelete.TabIndex = 5
+        Me.ucrSelectorDataFramesToDelete.TabIndex = 1
         '
         'dlgDeleteSheet
         '
