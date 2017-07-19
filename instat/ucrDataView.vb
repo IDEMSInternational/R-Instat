@@ -295,7 +295,7 @@ Public Class ucrDataView
         dlgNewDataFrame.ShowDialog()
     End Sub
 
-    Private Sub deleteSheet_Click(sender As Object, e As EventArgs) Handles deleteSheet.Click
+    Private Sub deleteSheet_Click(sender As Object, e As EventArgs) Handles deleteDataFrame.Click
         'Dim strScript As String
         'Dim Delete = MsgBox("Are you sure you want to delete this dataframe?" & Environment.NewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Sheet")
         'If grdData.Worksheets.Count > 0 Then
@@ -304,6 +304,7 @@ Public Class ucrDataView
         '        RunScriptFromDataView(strScript)
         '    End If
         'End If
+        dlgDeleteDataFrames.SetCurrentDataframe(grdCurrSheet.Name)
         dlgDeleteDataFrames.ShowDialog()
     End Sub
 
