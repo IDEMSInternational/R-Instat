@@ -115,6 +115,7 @@ Public Class RFunction
         clsRFunction.bExcludeAssignedFunctionOutput = bExcludeAssignedFunctionOutput
         clsRFunction.bClearFromGlobal = bClearFromGlobal
         clsRFunction.bToScriptAsRString = bToScriptAsRString
+        clsRFunction.Tag = Tag
         For Each clsRParam In clsParameters
             clsRFunction.AddParameter(clsRParam.Clone)
         Next

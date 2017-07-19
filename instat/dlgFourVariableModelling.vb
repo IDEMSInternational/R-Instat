@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgFourVariableModelling
     Public bFirstLoad As Boolean = True
@@ -185,7 +184,7 @@ Public Class dlgFourVariableModelling
         clsVisReg.SetPackageName("visreg")
         clsVisReg.SetRCommand("visreg")
         clsVisReg.AddParameter("type", Chr(34) & "conditional" & Chr(34))
-        clsVisReg.AddParameter("gg", "TRUE")
+        clsVisReg.AddParameter("gg", "FALSE")
         clsVisReg.iCallType = 3
 
         clsFirstPowerOperator.SetOperation("^")
@@ -253,11 +252,12 @@ Public Class dlgFourVariableModelling
     End Sub
 
     Public Sub TestOKEnabled()
+        ucrBaseFourVariableModelling.OKEnabled(False) ' temp. disabled
         If (Not ucrReceiverResponse.IsEmpty()) AndAlso (Not ucrReceiverFirstExplanatory.IsEmpty()) AndAlso (Not ucrReceiverSecondExplanatory.IsEmpty()) AndAlso (Not ucrReceiverThirdExplanatory.IsEmpty()) AndAlso (ucrInputModelOperators1.GetText <> "") AndAlso (ucrInputModelOperators2.GetText <> "") Then
-            ucrBaseFourVariableModelling.OKEnabled(True)
+            '            ucrBaseFourVariableModelling.OKEnabled(True)
             UpdatePreview()
-        Else
-            ucrBaseFourVariableModelling.OKEnabled(False)
+            '        Else
+            '            ucrBaseFourVariableModelling.OKEnabled(False)
         End If
     End Sub
 
