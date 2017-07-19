@@ -92,7 +92,7 @@ Partial Class dlgStringHandling
         Me.lblColumn.Location = New System.Drawing.Point(259, 129)
         Me.lblColumn.Name = "lblColumn"
         Me.lblColumn.Size = New System.Drawing.Size(45, 13)
-        Me.lblColumn.TabIndex = 8
+        Me.lblColumn.TabIndex = 11
         Me.lblColumn.Text = "Column:"
         '
         'lblReplaceBy
@@ -101,7 +101,7 @@ Partial Class dlgStringHandling
         Me.lblReplaceBy.Location = New System.Drawing.Point(259, 218)
         Me.lblReplaceBy.Name = "lblReplaceBy"
         Me.lblReplaceBy.Size = New System.Drawing.Size(65, 13)
-        Me.lblReplaceBy.TabIndex = 13
+        Me.lblReplaceBy.TabIndex = 15
         Me.lblReplaceBy.Text = "Replace By:"
         '
         'lblPattern
@@ -110,7 +110,7 @@ Partial Class dlgStringHandling
         Me.lblPattern.Location = New System.Drawing.Point(259, 170)
         Me.lblPattern.Name = "lblPattern"
         Me.lblPattern.Size = New System.Drawing.Size(44, 13)
-        Me.lblPattern.TabIndex = 11
+        Me.lblPattern.TabIndex = 13
         Me.lblPattern.Text = "Pattern:"
         '
         'rdoCount
@@ -482,7 +482,7 @@ Partial Class dlgStringHandling
         Me.rdoFixed.Location = New System.Drawing.Point(262, 96)
         Me.rdoFixed.Name = "rdoFixed"
         Me.rdoFixed.Size = New System.Drawing.Size(50, 17)
-        Me.rdoFixed.TabIndex = 183
+        Me.rdoFixed.TabIndex = 9
         Me.rdoFixed.TabStop = True
         Me.rdoFixed.Text = "Fixed"
         Me.rdoFixed.UseVisualStyleBackColor = True
@@ -493,7 +493,7 @@ Partial Class dlgStringHandling
         Me.rdoRegex.Location = New System.Drawing.Point(318, 96)
         Me.rdoRegex.Name = "rdoRegex"
         Me.rdoRegex.Size = New System.Drawing.Size(56, 17)
-        Me.rdoRegex.TabIndex = 184
+        Me.rdoRegex.TabIndex = 10
         Me.rdoRegex.TabStop = True
         Me.rdoRegex.Text = "Regex"
         Me.rdoRegex.UseVisualStyleBackColor = True
@@ -503,7 +503,7 @@ Partial Class dlgStringHandling
         Me.ucrSaveStringHandling.Location = New System.Drawing.Point(10, 271)
         Me.ucrSaveStringHandling.Name = "ucrSaveStringHandling"
         Me.ucrSaveStringHandling.Size = New System.Drawing.Size(293, 24)
-        Me.ucrSaveStringHandling.TabIndex = 186
+        Me.ucrSaveStringHandling.TabIndex = 18
         '
         'ucrReceiverForRegexExpression
         '
@@ -514,7 +514,7 @@ Partial Class dlgStringHandling
         Me.ucrReceiverForRegexExpression.Selector = Nothing
         Me.ucrReceiverForRegexExpression.Size = New System.Drawing.Size(138, 28)
         Me.ucrReceiverForRegexExpression.strNcFilePath = ""
-        Me.ucrReceiverForRegexExpression.TabIndex = 182
+        Me.ucrReceiverForRegexExpression.TabIndex = 14
         Me.ucrReceiverForRegexExpression.ucrSelector = Nothing
         '
         'ucrPnlFixedRegex
@@ -522,7 +522,7 @@ Partial Class dlgStringHandling
         Me.ucrPnlFixedRegex.Location = New System.Drawing.Point(259, 87)
         Me.ucrPnlFixedRegex.Name = "ucrPnlFixedRegex"
         Me.ucrPnlFixedRegex.Size = New System.Drawing.Size(116, 32)
-        Me.ucrPnlFixedRegex.TabIndex = 185
+        Me.ucrPnlFixedRegex.TabIndex = 8
         '
         'ucrChkIncludeRegularExpressions
         '
@@ -530,7 +530,7 @@ Partial Class dlgStringHandling
         Me.ucrChkIncludeRegularExpressions.Location = New System.Drawing.Point(9, 242)
         Me.ucrChkIncludeRegularExpressions.Name = "ucrChkIncludeRegularExpressions"
         Me.ucrChkIncludeRegularExpressions.Size = New System.Drawing.Size(239, 20)
-        Me.ucrChkIncludeRegularExpressions.TabIndex = 10
+        Me.ucrChkIncludeRegularExpressions.TabIndex = 17
         '
         'ucrReceiverStringHandling
         '
@@ -541,7 +541,7 @@ Partial Class dlgStringHandling
         Me.ucrReceiverStringHandling.Selector = Nothing
         Me.ucrReceiverStringHandling.Size = New System.Drawing.Size(138, 20)
         Me.ucrReceiverStringHandling.strNcFilePath = ""
-        Me.ucrReceiverStringHandling.TabIndex = 9
+        Me.ucrReceiverStringHandling.TabIndex = 12
         Me.ucrReceiverStringHandling.ucrSelector = Nothing
         '
         'ucrInputReplaceBy
@@ -552,7 +552,7 @@ Partial Class dlgStringHandling
         Me.ucrInputReplaceBy.Location = New System.Drawing.Point(259, 233)
         Me.ucrInputReplaceBy.Name = "ucrInputReplaceBy"
         Me.ucrInputReplaceBy.Size = New System.Drawing.Size(138, 20)
-        Me.ucrInputReplaceBy.TabIndex = 14
+        Me.ucrInputReplaceBy.TabIndex = 16
         '
         'ucrInputPattern
         '
@@ -579,7 +579,7 @@ Partial Class dlgStringHandling
         Me.ucrBase.Location = New System.Drawing.Point(9, 301)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(406, 52)
-        Me.ucrBase.TabIndex = 16
+        Me.ucrBase.TabIndex = 19
         '
         'ucrPnlStringHandling
         '
