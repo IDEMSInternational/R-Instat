@@ -77,6 +77,9 @@ Public Class dlgView
 
         ucrPnlVewData.AddRadioButton(rdoViewAll)
         ucrPnlVewData.AddRadioButton(rdoViewSelectedColumnsRows)
+        ucrPnlVewData.AddParameterIsRFunctionCondition(rdoViewSelectedColumnsRows, "x")
+        '  ucrPnlVewData.AddParameterIsRFunctionConditi(rdoViewSelectedColumnsRows, "x")
+
         ucrPnlVewData.AddToLinkedControls(ucrReceiverView, {rdoViewSelectedColumnsRows}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrReceiverView.SetLinkedDisplayControl(lblSelected)
         ucrPnlVewData.AddToLinkedControls(ucrPnlDisplayWindow, {rdoViewSelectedColumnsRows}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
@@ -124,15 +127,15 @@ Public Class dlgView
         clsHTMLFunction.AddParameter("describe", "FALSE", iPosition:=1)
         clsHTMLFunction.AddParameter("altr.row.col", "TRUE", iPosition:=2)
         clsHTMLFunction.AddParameter("hide.progress", "TRUE", iPosition:=4)
-
+        ChangeFunctionParameters()
         clsSeparateWindowFunction.SetPackageName("utils")
         clsSeparateWindowFunction.SetRCommand("View")
 
         clsViewDataFrame.SetPackageName("utils")
         clsViewDataFrame.SetRCommand("View")
-        ' clsViewDataFrame.AddParameter("x", Chr(34) & ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        clsViewDataFrame.AddParameter("x", Chr(34) & ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsViewDataFrame)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSeparateWindowFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -199,11 +202,13 @@ Public Class dlgView
                     ucrBase.clsRsyntax.SetBaseRFunction(ucrReceiverView.GetVariables(True))
                 End If
             ElseIf rdoDispSepOutputWindow.Checked Then
+                clsSeparateWindowFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsSeparateWindowFunction)
             Else
                 ucrBase.clsRsyntax.SetBaseRFunction(clsHTMLFunction)
             End If
         Else
+            clsViewDataFrame.AddParameter("x", ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
             ucrBase.clsRsyntax.SetBaseRFunction(clsViewDataFrame)
         End If
     End Sub
