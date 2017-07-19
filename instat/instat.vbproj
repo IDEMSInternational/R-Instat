@@ -890,10 +890,10 @@
     <Compile Include="dlgDeleteRowsOrColums.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgDeleteSheet.Designer.vb">
-      <DependentUpon>dlgDeleteSheet.vb</DependentUpon>
+    <Compile Include="dlgDeleteDataFrames.Designer.vb">
+      <DependentUpon>dlgDeleteDataFrames.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgDeleteSheet.vb">
+    <Compile Include="dlgDeleteDataFrames.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgExportDataset.Designer.vb">
@@ -2472,14 +2472,14 @@
     <EmbeddedResource Include="dlgDeleteRowsOrColums.sw-KE.resx">
       <DependentUpon>dlgDeleteRowsOrColums.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteSheet.fr-FR.resx">
-      <DependentUpon>dlgDeleteSheet.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDeleteDataFrames.fr-FR.resx">
+      <DependentUpon>dlgDeleteDataFrames.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteSheet.resx">
-      <DependentUpon>dlgDeleteSheet.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDeleteDataFrames.resx">
+      <DependentUpon>dlgDeleteDataFrames.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteSheet.sw-KE.resx">
-      <DependentUpon>dlgDeleteSheet.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDeleteDataFrames.sw-KE.resx">
+      <DependentUpon>dlgDeleteDataFrames.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCorruptionDescribe.resx">
       <DependentUpon>dlgCorruptionDescribe.vb</DependentUpon>
