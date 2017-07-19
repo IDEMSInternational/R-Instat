@@ -66,6 +66,14 @@ Public Class dlgClimaticSummary
         ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
         ucrReceiverYear.bAutoFill = True
 
+        ucrReceiverMonth.SetParameter(New RParameter("month", 0))
+        ucrReceiverMonth.SetParameterIsRFunction()
+        ucrReceiverMonth.bWithQuotes = False
+        ucrReceiverMonth.strSelectorHeading = "Month Variables"
+        ucrReceiverMonth.Selector = ucrSelectorVariable
+        ucrReceiverMonth.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "month" & Chr(34)})
+        ucrReceiverMonth.bAutoFill = True
+
         ucrReceiverElement.SetParameter(New RParameter("data", 0))
         ucrReceiverElement.SetParameterIsRFunction()
         ucrReceiverElement.bWithQuotes = False
@@ -90,10 +98,12 @@ Public Class dlgClimaticSummary
         'linking controls
         ucrPnlAnnual.AddToLinkedControls({ucrNudFrom, ucrNudTo}, {rdoAnnual}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlAnnual.AddToLinkedControls({ucrReceiverFrom, ucrReceiverTo}, {rdoAnnualVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlAnnual.AddToLinkedControls({ucrReceiverMonth}, {rdoWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudFrom.SetLinkedDisplayControl(lblFrom)
         ucrNudTo.SetLinkedDisplayControl(lblTo)
         ucrReceiverFrom.SetLinkedDisplayControl(lblReceiverFrom)
         ucrReceiverTo.SetLinkedDisplayControl(lblReceiverTo)
+        ucrReceiverMonth.SetLinkedDisplayControl(lblMonth)
 
     End Sub
 

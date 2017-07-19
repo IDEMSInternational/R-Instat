@@ -63,6 +63,8 @@ Partial Class dlgClimaticSummary
         Me.ucrSelectorVariable = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlAnnual = New instat.UcrPanel()
+        Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
+        Me.lblMonth = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'rdoAnnual
@@ -125,7 +127,7 @@ Partial Class dlgClimaticSummary
         'lblDate
         '
         Me.lblDate.AutoSize = True
-        Me.lblDate.Location = New System.Drawing.Point(288, 119)
+        Me.lblDate.Location = New System.Drawing.Point(288, 117)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(33, 13)
         Me.lblDate.TabIndex = 27
@@ -134,7 +136,7 @@ Partial Class dlgClimaticSummary
         'lblYear
         '
         Me.lblYear.AutoSize = True
-        Me.lblYear.Location = New System.Drawing.Point(288, 167)
+        Me.lblYear.Location = New System.Drawing.Point(288, 154)
         Me.lblYear.Name = "lblYear"
         Me.lblYear.Size = New System.Drawing.Size(32, 13)
         Me.lblYear.TabIndex = 28
@@ -143,7 +145,7 @@ Partial Class dlgClimaticSummary
         'lblDay
         '
         Me.lblDay.AutoSize = True
-        Me.lblDay.Location = New System.Drawing.Point(288, 213)
+        Me.lblDay.Location = New System.Drawing.Point(288, 193)
         Me.lblDay.Name = "lblDay"
         Me.lblDay.Size = New System.Drawing.Size(107, 13)
         Me.lblDay.TabIndex = 29
@@ -152,7 +154,7 @@ Partial Class dlgClimaticSummary
         'lblElement
         '
         Me.lblElement.AutoSize = True
-        Me.lblElement.Location = New System.Drawing.Point(288, 252)
+        Me.lblElement.Location = New System.Drawing.Point(288, 249)
         Me.lblElement.Name = "lblElement"
         Me.lblElement.Size = New System.Drawing.Size(48, 13)
         Me.lblElement.TabIndex = 30
@@ -161,7 +163,7 @@ Partial Class dlgClimaticSummary
         'lblTo
         '
         Me.lblTo.AutoSize = True
-        Me.lblTo.Location = New System.Drawing.Point(212, 298)
+        Me.lblTo.Location = New System.Drawing.Point(180, 342)
         Me.lblTo.Name = "lblTo"
         Me.lblTo.Size = New System.Drawing.Size(23, 13)
         Me.lblTo.TabIndex = 33
@@ -170,7 +172,7 @@ Partial Class dlgClimaticSummary
         'lblFrom
         '
         Me.lblFrom.AutoSize = True
-        Me.lblFrom.Location = New System.Drawing.Point(49, 298)
+        Me.lblFrom.Location = New System.Drawing.Point(21, 341)
         Me.lblFrom.Name = "lblFrom"
         Me.lblFrom.Size = New System.Drawing.Size(33, 13)
         Me.lblFrom.TabIndex = 34
@@ -179,7 +181,7 @@ Partial Class dlgClimaticSummary
         'lblReceiverTo
         '
         Me.lblReceiverTo.AutoSize = True
-        Me.lblReceiverTo.Location = New System.Drawing.Point(212, 298)
+        Me.lblReceiverTo.Location = New System.Drawing.Point(180, 342)
         Me.lblReceiverTo.Name = "lblReceiverTo"
         Me.lblReceiverTo.Size = New System.Drawing.Size(23, 13)
         Me.lblReceiverTo.TabIndex = 37
@@ -188,7 +190,7 @@ Partial Class dlgClimaticSummary
         'lblReceiverFrom
         '
         Me.lblReceiverFrom.AutoSize = True
-        Me.lblReceiverFrom.Location = New System.Drawing.Point(48, 299)
+        Me.lblReceiverFrom.Location = New System.Drawing.Point(21, 341)
         Me.lblReceiverFrom.Name = "lblReceiverFrom"
         Me.lblReceiverFrom.Size = New System.Drawing.Size(33, 13)
         Me.lblReceiverFrom.TabIndex = 38
@@ -196,7 +198,7 @@ Partial Class dlgClimaticSummary
         '
         'cmdSummary
         '
-        Me.cmdSummary.Location = New System.Drawing.Point(285, 357)
+        Me.cmdSummary.Location = New System.Drawing.Point(275, 402)
         Me.cmdSummary.Name = "cmdSummary"
         Me.cmdSummary.Size = New System.Drawing.Size(120, 25)
         Me.cmdSummary.TabIndex = 39
@@ -207,7 +209,7 @@ Partial Class dlgClimaticSummary
         'ucrReceiverFrom
         '
         Me.ucrReceiverFrom.frmParent = Me
-        Me.ucrReceiverFrom.Location = New System.Drawing.Point(85, 295)
+        Me.ucrReceiverFrom.Location = New System.Drawing.Point(57, 338)
         Me.ucrReceiverFrom.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFrom.Name = "ucrReceiverFrom"
         Me.ucrReceiverFrom.Selector = Nothing
@@ -219,7 +221,7 @@ Partial Class dlgClimaticSummary
         'ucrReceiverTo
         '
         Me.ucrReceiverTo.frmParent = Me
-        Me.ucrReceiverTo.Location = New System.Drawing.Point(238, 295)
+        Me.ucrReceiverTo.Location = New System.Drawing.Point(206, 341)
         Me.ucrReceiverTo.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTo.Name = "ucrReceiverTo"
         Me.ucrReceiverTo.Selector = Nothing
@@ -232,7 +234,7 @@ Partial Class dlgClimaticSummary
         '
         Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTo.Location = New System.Drawing.Point(238, 295)
+        Me.ucrNudTo.Location = New System.Drawing.Point(206, 341)
         Me.ucrNudTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTo.Name = "ucrNudTo"
@@ -244,7 +246,7 @@ Partial Class dlgClimaticSummary
         '
         Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudFrom.Location = New System.Drawing.Point(85, 295)
+        Me.ucrNudFrom.Location = New System.Drawing.Point(57, 338)
         Me.ucrNudFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudFrom.Name = "ucrNudFrom"
@@ -255,7 +257,7 @@ Partial Class dlgClimaticSummary
         'ucrReceiverElement
         '
         Me.ucrReceiverElement.frmParent = Me
-        Me.ucrReceiverElement.Location = New System.Drawing.Point(291, 265)
+        Me.ucrReceiverElement.Location = New System.Drawing.Point(291, 262)
         Me.ucrReceiverElement.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverElement.Name = "ucrReceiverElement"
         Me.ucrReceiverElement.Selector = Nothing
@@ -267,7 +269,7 @@ Partial Class dlgClimaticSummary
         'ucrReceiverDay
         '
         Me.ucrReceiverDay.frmParent = Me
-        Me.ucrReceiverDay.Location = New System.Drawing.Point(291, 226)
+        Me.ucrReceiverDay.Location = New System.Drawing.Point(291, 206)
         Me.ucrReceiverDay.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDay.Name = "ucrReceiverDay"
         Me.ucrReceiverDay.Selector = Nothing
@@ -279,7 +281,7 @@ Partial Class dlgClimaticSummary
         'ucrReceiverYear
         '
         Me.ucrReceiverYear.frmParent = Me
-        Me.ucrReceiverYear.Location = New System.Drawing.Point(291, 180)
+        Me.ucrReceiverYear.Location = New System.Drawing.Point(291, 167)
         Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverYear.Name = "ucrReceiverYear"
         Me.ucrReceiverYear.Selector = Nothing
@@ -291,7 +293,7 @@ Partial Class dlgClimaticSummary
         'ucrReceiverDate
         '
         Me.ucrReceiverDate.frmParent = Me
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(291, 132)
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(291, 130)
         Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing
@@ -324,7 +326,7 @@ Partial Class dlgClimaticSummary
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 388)
+        Me.ucrBase.Location = New System.Drawing.Point(0, 433)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(399, 52)
         Me.ucrBase.TabIndex = 12
@@ -336,11 +338,34 @@ Partial Class dlgClimaticSummary
         Me.ucrPnlAnnual.Size = New System.Drawing.Size(381, 64)
         Me.ucrPnlAnnual.TabIndex = 18
         '
+        'ucrReceiverMonth
+        '
+        Me.ucrReceiverMonth.frmParent = Me
+        Me.ucrReceiverMonth.Location = New System.Drawing.Point(289, 302)
+        Me.ucrReceiverMonth.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMonth.Name = "ucrReceiverMonth"
+        Me.ucrReceiverMonth.Selector = Nothing
+        Me.ucrReceiverMonth.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverMonth.strNcFilePath = ""
+        Me.ucrReceiverMonth.TabIndex = 40
+        Me.ucrReceiverMonth.ucrSelector = Nothing
+        '
+        'lblMonth
+        '
+        Me.lblMonth.AutoSize = True
+        Me.lblMonth.Location = New System.Drawing.Point(288, 289)
+        Me.lblMonth.Name = "lblMonth"
+        Me.lblMonth.Size = New System.Drawing.Size(40, 13)
+        Me.lblMonth.TabIndex = 41
+        Me.lblMonth.Text = "Month:"
+        '
         'dlgClimaticSummary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(428, 452)
+        Me.ClientSize = New System.Drawing.Size(428, 497)
+        Me.Controls.Add(Me.lblMonth)
+        Me.Controls.Add(Me.ucrReceiverMonth)
         Me.Controls.Add(Me.cmdSummary)
         Me.Controls.Add(Me.lblReceiverFrom)
         Me.Controls.Add(Me.lblReceiverTo)
@@ -402,4 +427,6 @@ Partial Class dlgClimaticSummary
     Friend WithEvents ucrReceiverFrom As ucrReceiverSingle
     Friend WithEvents ucrReceiverTo As ucrReceiverSingle
     Friend WithEvents cmdSummary As Button
+    Friend WithEvents lblMonth As Label
+    Friend WithEvents ucrReceiverMonth As ucrReceiverSingle
 End Class

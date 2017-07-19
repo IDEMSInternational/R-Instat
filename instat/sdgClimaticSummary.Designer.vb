@@ -39,6 +39,7 @@ Partial Class sdgClimaticSummary
         Me.ucrInputProportions = New instat.ucrInputComboBox()
         Me.ucrChkPercentages = New instat.ucrCheck()
         Me.ucrNudValue = New instat.ucrNud()
+        Me.ucrBaseSdgClimaticSummary = New instat.ucrButtonsSubdialogue()
         Me.SuspendLayout()
         '
         'rdoTotals
@@ -155,25 +156,25 @@ Partial Class sdgClimaticSummary
         '
         Me.ucrPnlSummary.Location = New System.Drawing.Point(12, 12)
         Me.ucrPnlSummary.Name = "ucrPnlSummary"
-        Me.ucrPnlSummary.Size = New System.Drawing.Size(425, 83)
+        Me.ucrPnlSummary.Size = New System.Drawing.Size(410, 83)
         Me.ucrPnlSummary.TabIndex = 19
         '
         'ucrInputOptions
         '
         Me.ucrInputOptions.AddQuotesIfUnrecognised = True
         Me.ucrInputOptions.IsReadOnly = False
-        Me.ucrInputOptions.Location = New System.Drawing.Point(12, 115)
+        Me.ucrInputOptions.Location = New System.Drawing.Point(26, 115)
         Me.ucrInputOptions.Name = "ucrInputOptions"
-        Me.ucrInputOptions.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputOptions.Size = New System.Drawing.Size(51, 21)
         Me.ucrInputOptions.TabIndex = 20
         '
         'ucrInputPercentiles
         '
         Me.ucrInputPercentiles.AddQuotesIfUnrecognised = True
         Me.ucrInputPercentiles.IsReadOnly = False
-        Me.ucrInputPercentiles.Location = New System.Drawing.Point(171, 115)
+        Me.ucrInputPercentiles.Location = New System.Drawing.Point(111, 115)
         Me.ucrInputPercentiles.Name = "ucrInputPercentiles"
-        Me.ucrInputPercentiles.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputPercentiles.Size = New System.Drawing.Size(118, 21)
         Me.ucrInputPercentiles.TabIndex = 21
         '
         'ucrInputNumbers
@@ -181,33 +182,33 @@ Partial Class sdgClimaticSummary
         Me.ucrInputNumbers.AddQuotesIfUnrecognised = True
         Me.ucrInputNumbers.IsMultiline = False
         Me.ucrInputNumbers.IsReadOnly = False
-        Me.ucrInputNumbers.Location = New System.Drawing.Point(326, 142)
+        Me.ucrInputNumbers.Location = New System.Drawing.Point(326, 115)
         Me.ucrInputNumbers.Name = "ucrInputNumbers"
-        Me.ucrInputNumbers.Size = New System.Drawing.Size(77, 21)
+        Me.ucrInputNumbers.Size = New System.Drawing.Size(62, 21)
         Me.ucrInputNumbers.TabIndex = 22
         '
         'ucrInputProportions
         '
         Me.ucrInputProportions.AddQuotesIfUnrecognised = True
         Me.ucrInputProportions.IsReadOnly = False
-        Me.ucrInputProportions.Location = New System.Drawing.Point(326, 115)
+        Me.ucrInputProportions.Location = New System.Drawing.Point(258, 115)
         Me.ucrInputProportions.Name = "ucrInputProportions"
-        Me.ucrInputProportions.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputProportions.Size = New System.Drawing.Size(62, 21)
         Me.ucrInputProportions.TabIndex = 23
         '
         'ucrChkPercentages
         '
         Me.ucrChkPercentages.Checked = False
-        Me.ucrChkPercentages.Location = New System.Drawing.Point(409, 143)
+        Me.ucrChkPercentages.Location = New System.Drawing.Point(258, 151)
         Me.ucrChkPercentages.Name = "ucrChkPercentages"
-        Me.ucrChkPercentages.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkPercentages.Size = New System.Drawing.Size(137, 20)
         Me.ucrChkPercentages.TabIndex = 24
         '
         'ucrNudValue
         '
         Me.ucrNudValue.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudValue.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudValue.Location = New System.Drawing.Point(23, 142)
+        Me.ucrNudValue.Location = New System.Drawing.Point(27, 142)
         Me.ucrNudValue.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudValue.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudValue.Name = "ucrNudValue"
@@ -215,11 +216,19 @@ Partial Class sdgClimaticSummary
         Me.ucrNudValue.TabIndex = 25
         Me.ucrNudValue.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
+        'ucrBaseSdgClimaticSummary
+        '
+        Me.ucrBaseSdgClimaticSummary.Location = New System.Drawing.Point(161, 185)
+        Me.ucrBaseSdgClimaticSummary.Name = "ucrBaseSdgClimaticSummary"
+        Me.ucrBaseSdgClimaticSummary.Size = New System.Drawing.Size(142, 30)
+        Me.ucrBaseSdgClimaticSummary.TabIndex = 26
+        '
         'sdgClimaticSummary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(498, 389)
+        Me.ClientSize = New System.Drawing.Size(431, 227)
+        Me.Controls.Add(Me.ucrBaseSdgClimaticSummary)
         Me.Controls.Add(Me.ucrNudValue)
         Me.Controls.Add(Me.ucrChkPercentages)
         Me.Controls.Add(Me.ucrInputProportions)
@@ -241,6 +250,7 @@ Partial Class sdgClimaticSummary
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgClimaticSummary"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Climatic Summary"
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -264,4 +274,5 @@ Partial Class sdgClimaticSummary
     Friend WithEvents ucrInputProportions As ucrInputComboBox
     Friend WithEvents ucrChkPercentages As ucrCheck
     Friend WithEvents ucrNudValue As ucrNud
+    Friend WithEvents ucrBaseSdgClimaticSummary As ucrButtonsSubdialogue
 End Class
