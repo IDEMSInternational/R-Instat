@@ -15,12 +15,12 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgDeleteSheet
+Public Class dlgDeleteDataFrames
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsDeleteFunction As New RFunction
 
-    Private Sub dlgDeleteSheet_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Private Sub dlgDeleteDataFrames_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
