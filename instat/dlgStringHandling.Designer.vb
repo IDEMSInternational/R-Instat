@@ -73,12 +73,12 @@ Partial Class dlgStringHandling
         Me.cmdOr = New System.Windows.Forms.Button()
         Me.rdoFixed = New System.Windows.Forms.RadioButton()
         Me.rdoRegex = New System.Windows.Forms.RadioButton()
+        Me.ucrSaveStringHandling = New instat.ucrSave()
         Me.ucrReceiverForRegexExpression = New instat.ucrReceiverExpression()
         Me.ucrPnlFixedRegex = New instat.UcrPanel()
         Me.ucrChkIncludeRegularExpressions = New instat.ucrCheck()
         Me.ucrReceiverStringHandling = New instat.ucrReceiverSingle()
         Me.ucrInputReplaceBy = New instat.ucrInputTextBox()
-        Me.ucrSaveStringHandling = New instat.ucrSave()
         Me.ucrInputPattern = New instat.ucrInputTextBox()
         Me.ucrSelectorStringHandling = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
@@ -498,6 +498,13 @@ Partial Class dlgStringHandling
         Me.rdoRegex.Text = "Regex"
         Me.rdoRegex.UseVisualStyleBackColor = True
         '
+        'ucrSaveStringHandling
+        '
+        Me.ucrSaveStringHandling.Location = New System.Drawing.Point(10, 271)
+        Me.ucrSaveStringHandling.Name = "ucrSaveStringHandling"
+        Me.ucrSaveStringHandling.Size = New System.Drawing.Size(293, 24)
+        Me.ucrSaveStringHandling.TabIndex = 186
+        '
         'ucrReceiverForRegexExpression
         '
         Me.ucrReceiverForRegexExpression.frmParent = Me
@@ -547,13 +554,6 @@ Partial Class dlgStringHandling
         Me.ucrInputReplaceBy.Size = New System.Drawing.Size(138, 20)
         Me.ucrInputReplaceBy.TabIndex = 14
         '
-        'ucrSaveStringHandling
-        '
-        Me.ucrSaveStringHandling.Location = New System.Drawing.Point(9, 268)
-        Me.ucrSaveStringHandling.Name = "ucrSaveStringHandling"
-        Me.ucrSaveStringHandling.Size = New System.Drawing.Size(224, 24)
-        Me.ucrSaveStringHandling.TabIndex = 15
-        '
         'ucrInputPattern
         '
         Me.ucrInputPattern.AddQuotesIfUnrecognised = True
@@ -576,7 +576,7 @@ Partial Class dlgStringHandling
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 293)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 301)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(406, 52)
         Me.ucrBase.TabIndex = 16
@@ -592,7 +592,8 @@ Partial Class dlgStringHandling
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(669, 351)
+        Me.ClientSize = New System.Drawing.Size(669, 368)
+        Me.Controls.Add(Me.ucrSaveStringHandling)
         Me.Controls.Add(Me.rdoRegex)
         Me.Controls.Add(Me.rdoFixed)
         Me.Controls.Add(Me.ucrReceiverForRegexExpression)
@@ -610,7 +611,6 @@ Partial Class dlgStringHandling
         Me.Controls.Add(Me.lblReplaceBy)
         Me.Controls.Add(Me.lblColumn)
         Me.Controls.Add(Me.ucrInputReplaceBy)
-        Me.Controls.Add(Me.ucrSaveStringHandling)
         Me.Controls.Add(Me.ucrInputPattern)
         Me.Controls.Add(Me.ucrSelectorStringHandling)
         Me.Controls.Add(Me.ucrBase)
@@ -630,7 +630,6 @@ Partial Class dlgStringHandling
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSelectorStringHandling As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrInputPattern As ucrInputTextBox
-    Friend WithEvents ucrSaveStringHandling As ucrSave
     Friend WithEvents ucrInputReplaceBy As ucrInputTextBox
     Friend WithEvents lblColumn As Label
     Friend WithEvents lblReplaceBy As Label
@@ -672,4 +671,5 @@ Partial Class dlgStringHandling
     Friend WithEvents rdoRegex As RadioButton
     Friend WithEvents rdoFixed As RadioButton
     Friend WithEvents ucrPnlFixedRegex As UcrPanel
+    Friend WithEvents ucrSaveStringHandling As ucrSave
 End Class
