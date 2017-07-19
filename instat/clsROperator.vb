@@ -127,6 +127,7 @@ Public Class ROperator
         clsTempROperator.bExcludeAssignedFunctionOutput = bExcludeAssignedFunctionOutput
         clsTempROperator.bClearFromGlobal = bClearFromGlobal
         clsTempROperator.bToScriptAsRString = bToScriptAsRString
+        clsTempROperator.Tag = Tag
         For Each clsRParam In clsParameters
             clsTempROperator.AddParameter(clsRParam.Clone)
         Next

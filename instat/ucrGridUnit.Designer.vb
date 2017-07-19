@@ -61,7 +61,7 @@ Partial Class ucrGridUnit
         Me.grpUnits.Location = New System.Drawing.Point(3, 0)
         Me.grpUnits.Name = "grpUnits"
         Me.grpUnits.Size = New System.Drawing.Size(246, 119)
-        Me.grpUnits.TabIndex = 108
+        Me.grpUnits.TabIndex = 0
         Me.grpUnits.TabStop = False
         Me.grpUnits.Text = "Units"
         '
@@ -71,7 +71,7 @@ Partial Class ucrGridUnit
         Me.lblVector.Location = New System.Drawing.Point(18, 47)
         Me.lblVector.Name = "lblVector"
         Me.lblVector.Size = New System.Drawing.Size(74, 13)
-        Me.lblVector.TabIndex = 114
+        Me.lblVector.TabIndex = 1
         Me.lblVector.Text = "Value(Vector):"
         '
         'lblUnits
@@ -80,7 +80,7 @@ Partial Class ucrGridUnit
         Me.lblUnits.Location = New System.Drawing.Point(18, 71)
         Me.lblUnits.Name = "lblUnits"
         Me.lblUnits.Size = New System.Drawing.Size(34, 13)
-        Me.lblUnits.TabIndex = 113
+        Me.lblUnits.TabIndex = 3
         Me.lblUnits.Text = "Units:"
         '
         'lblData
@@ -89,7 +89,7 @@ Partial Class ucrGridUnit
         Me.lblData.Location = New System.Drawing.Point(18, 96)
         Me.lblData.Name = "lblData"
         Me.lblData.Size = New System.Drawing.Size(81, 13)
-        Me.lblData.TabIndex = 112
+        Me.lblData.TabIndex = 5
         Me.lblData.Text = "Data (Optional):"
         '
         'ucrInputData
@@ -100,7 +100,7 @@ Partial Class ucrGridUnit
         Me.ucrInputData.Location = New System.Drawing.Point(105, 92)
         Me.ucrInputData.Name = "ucrInputData"
         Me.ucrInputData.Size = New System.Drawing.Size(137, 23)
-        Me.ucrInputData.TabIndex = 111
+        Me.ucrInputData.TabIndex = 6
         '
         'ucrInputVector
         '
@@ -110,7 +110,7 @@ Partial Class ucrGridUnit
         Me.ucrInputVector.Location = New System.Drawing.Point(105, 43)
         Me.ucrInputVector.Name = "ucrInputVector"
         Me.ucrInputVector.Size = New System.Drawing.Size(137, 23)
-        Me.ucrInputVector.TabIndex = 110
+        Me.ucrInputVector.TabIndex = 2
         '
         'ucrInputUnits
         '
@@ -120,7 +120,7 @@ Partial Class ucrGridUnit
         Me.ucrInputUnits.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputUnits.Name = "ucrInputUnits"
         Me.ucrInputUnits.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputUnits.TabIndex = 109
+        Me.ucrInputUnits.TabIndex = 4
         '
         'ucrChkUnits
         '
@@ -128,7 +128,7 @@ Partial Class ucrGridUnit
         Me.ucrChkUnits.Location = New System.Drawing.Point(8, 19)
         Me.ucrChkUnits.Name = "ucrChkUnits"
         Me.ucrChkUnits.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkUnits.TabIndex = 108
+        Me.ucrChkUnits.TabIndex = 0
         '
         'ucrGridUnit
         '
