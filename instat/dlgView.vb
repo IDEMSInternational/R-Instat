@@ -78,13 +78,10 @@ Public Class dlgView
         ucrPnlVewData.AddFunctionNamesCondition(rdoViewAll, "View")
         ucrPnlVewData.AddFunctionNamesCondition(rdoViewAll, {"head", "tail", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data"}, False)
         ucrPnlVewData.AddFunctionNamesCondition(rdoViewAll, "sjt.df", False)
-        ucrPnlVewData.AddParameterPresentCondition(rdoViewAll, "x")
+        ucrPnlVewData.AddParameterIsRFunctionCondition(rdoViewAll, "x")
         ucrPnlVewData.AddParameterPresentCondition(rdoViewAll, "title")
         ucrPnlVewData.AddFunctionNamesCondition(rdoViewSelectedColumnsRows, "View")
-        'ucrPnlVewData.AddFunctionNamesCondition(rdoViewSelectedColumnsRows, {"head", "tail", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data"})
-        'ucrPnlVewData.AddFunctionNamesCondition(rdoViewSelectedColumnsRows, "sjt.df")
-        ucrPnlVewData.AddParameterIsRFunctionCondition(rdoViewSelectedColumnsRows, "x")
-        ''ucrPnlVewData.AddParameterPresentCondition(rdoViewSelectedColumnsRows, "title")
+        ucrPnlVewData.AddParameterPresentCondition(rdoViewSelectedColumnsRows, "x")
 
         ucrPnlVewData.AddToLinkedControls(ucrReceiverView, {rdoViewSelectedColumnsRows}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrReceiverView.SetLinkedDisplayControl(lblSelected)
@@ -149,8 +146,7 @@ Public Class dlgView
         ucrReceiverView.AddAdditionalCodeParameterPair(clsHTMLFunction, New RParameter("mydf"), iAdditionalPairNo:=1)
         ucrReceiverView.AddAdditionalCodeParameterPair(clsOutputWindowFunction, New RParameter("x"), iAdditionalPairNo:=2)
         DataFrameLength()
-        ChangeFunctionParameters()
-        ucrPnlVewData.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset, bReset)
+        ucrPnlVewData.SetRCode(clsSeparateWindowFunction, bReset, bReset)
         bControlsUpdated = True
     End Sub
 
@@ -208,6 +204,7 @@ Public Class dlgView
                 ucrBase.clsRsyntax.SetBaseRFunction(clsHTMLFunction)
             End If
         Else
+            clsSeparateWindowFunction.AddParameter("x", ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
             ucrBase.clsRsyntax.SetBaseRFunction(clsSeparateWindowFunction)
         End If
     End Sub
@@ -237,7 +234,7 @@ Public Class dlgView
 
     Private Sub DataParameter()
         If rdoViewAll.Checked Then
-            clsSeparateWindowFunction.AddParameter("x", ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem,iPosition:=0)
+            'clsSeparateWindowFunction.AddParameter("x", ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem,iPosition:=0)
         Else
         End If
     End Sub
