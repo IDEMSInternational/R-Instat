@@ -626,6 +626,12 @@
     <Compile Include="sdgAddNewDistribution.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgClimaticSummary.Designer.vb">
+      <DependentUpon>sdgClimaticSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgClimaticSummary.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgClimdexIndices.Designer.vb">
       <DependentUpon>sdgClimdexIndices.vb</DependentUpon>
     </Compile>
@@ -3134,6 +3140,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgCanonicalCorrelation.sw-KE.resx">
       <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgClimaticSummary.resx">
+      <DependentUpon>sdgClimaticSummary.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgClimdexIndices.resx">
       <DependentUpon>sdgClimdexIndices.vb</DependentUpon>
