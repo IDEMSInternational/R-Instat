@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 
 Public Class dlgOneVarFitModel
@@ -26,6 +27,7 @@ Public Class dlgOneVarFitModel
     Public bReset As Boolean = True
     Private bResetFittingOptions As Boolean = False
     Private bResetFitModDisplay As Boolean = False
+
     Private Sub dlgOneVarFitModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bfirstload Then
@@ -222,32 +224,26 @@ Public Class dlgOneVarFitModel
         clsRplotFunction.SetPackageName("graphics")
         clsRplotFunction.SetRCommand("plot")
         clsRplotFunction.iCallType = 3
-        clsRplotFunction.bExcludeAssignedFunctionOutput = False
 
         clsRplotPPComp.SetPackageName("fitdistrplus")
         clsRplotPPComp.SetRCommand("ppcomp")
         clsRplotPPComp.iCallType = 3
-        clsRplotPPComp.bExcludeAssignedFunctionOutput = False
 
         clsRplotCdfcomp.SetPackageName("fitdistrplus")
         clsRplotCdfcomp.SetRCommand("cdfcomp")
         clsRplotCdfcomp.iCallType = 3
-        clsRplotCdfcomp.bExcludeAssignedFunctionOutput = False
 
         clsRplotQqComp.SetPackageName("fitdistrplus")
         clsRplotQqComp.SetRCommand("qqcomp")
         clsRplotQqComp.iCallType = 3
-        clsRplotQqComp.bExcludeAssignedFunctionOutput = False
 
         clsRplotDenscomp.SetPackageName("fitdistrplus")
         clsRplotDenscomp.SetRCommand("denscomp")
         clsRplotDenscomp.iCallType = 3
-        clsRplotDenscomp.bExcludeAssignedFunctionOutput = False
 
         clsRLogLikFunction.SetPackageName("fitdistrplus")
         clsRLogLikFunction.SetRCommand("llplot")
         clsRLogLikFunction.iCallType = 3
-        clsRLogLikFunction.bExcludeAssignedFunctionOutput = False
 
         SetDataParameter()
         EnableOptions()
@@ -373,6 +369,7 @@ Public Class dlgOneVarFitModel
             ucrDistributionChoice.Enabled = True
         End If
     End Sub
+
 
     Public Sub ResponseConvert()
         If bRCodeSet Then
