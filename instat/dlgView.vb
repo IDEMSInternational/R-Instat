@@ -77,12 +77,17 @@ Public Class dlgView
 
         ucrPnlVewData.AddRadioButton(rdoViewAll)
         ucrPnlVewData.AddRadioButton(rdoViewSelectedColumnsRows)
-        ucrPnlVewData.AddFunctionNamesCondition(rdoViewAll, "View")
-        ' ucrPnlVewData.AddFunctionNamesC(rdoViewAll, "title")
-        ucrPnlVewData.AddFunctionNamesCondition(rdoHTMLOutputWindow, "sjt.df")
 
+        ucrPnlVewData.AddFunctionNamesCondition(rdoViewAll, "View")
+        ucrPnlVewData.AddFunctionNamesCondition(rdoViewAll, {"head", "tail", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data"}, False)
+        ucrPnlVewData.AddFunctionNamesCondition(rdoViewAll, "sjt.df", False)
+        ucrPnlVewData.AddParameterPresentCondition(rdoViewAll, "x")
+        ucrPnlVewData.AddParameterPresentCondition(rdoViewAll, "title")
+        ucrPnlVewData.AddFunctionNamesCondition(rdoViewSelectedColumnsRows, "View")
+        ucrPnlVewData.AddFunctionNamesCondition(rdoViewSelectedColumnsRows, {"head", "tail", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data"})
+        ucrPnlVewData.AddFunctionNamesCondition(rdoViewSelectedColumnsRows, "sjt.df")
         ucrPnlVewData.AddParameterIsRFunctionCondition(rdoViewSelectedColumnsRows, "x")
-        '  ucrPnlVewData.AddParameterIsRFunctionConditi(rdoViewSelectedColumnsRows, "x")
+        ucrPnlVewData.AddParameterPresentCondition(rdoViewSelectedColumnsRows, "title")
 
         ucrPnlVewData.AddToLinkedControls(ucrReceiverView, {rdoViewSelectedColumnsRows}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrReceiverView.SetLinkedDisplayControl(lblSelected)
@@ -120,11 +125,12 @@ Public Class dlgView
         ucrSelectorForView.Reset()
         ucrReceiverView.SetMeAsReceiver()
 
+
         clsOutputWindowFunction.SetPackageName("utils")
         clsSeparateWindowFunction.AddParameter("title", Chr(34) & ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
 
-        ' clsViewDataFrame.SetPackageName("utils")
-        ' clsViewDataFrame.AddParameter("title", Chr(34) & ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        clsViewDataFrame.SetPackageName("utils")
+        clsViewDataFrame.AddParameter("title", Chr(34) & ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
 
         clsHTMLFunction.SetPackageName("sjPlot")
         clsHTMLFunction.SetRCommand("sjt.df")
@@ -135,9 +141,9 @@ Public Class dlgView
         clsSeparateWindowFunction.SetPackageName("utils")
         clsSeparateWindowFunction.SetRCommand("View")
 
-        ' clsViewDataFrame.SetPackageName("utils")
-        ' clsViewDataFrame.SetRCommand("View")
-        '  clsViewDataFrame.AddParameter("x", Chr(34) & ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        clsViewDataFrame.SetPackageName("utils")
+        clsViewDataFrame.SetRCommand("View")
+        clsViewDataFrame.AddParameter("x", Chr(34) & ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSeparateWindowFunction)
     End Sub
@@ -158,6 +164,7 @@ Public Class dlgView
         ucrReceiverView.AddAdditionalCodeParameterPair(clsOutputWindowFunction, New RParameter("x"), iAdditionalPairNo:=2)
         DataFrameLength()
         ChangeFunctionParameters()
+        ucrPnlVewData.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         bControlsUpdated = True
     End Sub
 
@@ -216,8 +223,8 @@ Public Class dlgView
                 ucrBase.clsRsyntax.SetBaseRFunction(clsHTMLFunction)
             End If
         Else
-            clsSeparateWindowFunction.AddParameter("x", ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
-            ucrBase.clsRsyntax.SetBaseRFunction(clsSeparateWindowFunction)
+            clsViewDataFrame.AddParameter("x", ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsViewDataFrame)
         End If
     End Sub
 
