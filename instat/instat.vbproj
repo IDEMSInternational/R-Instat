@@ -289,6 +289,12 @@
     <Compile Include="dlgDrySpells.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgDuplicatesConstructed.Designer.vb">
+      <DependentUpon>dlgDuplicatesConstructed.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDuplicatesConstructed.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgEnter.Designer.vb">
       <DependentUpon>dlgEnter.vb</DependentUpon>
     </Compile>
@@ -2510,6 +2516,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDisplayDailyClimaticData.resx">
       <DependentUpon>dlgDisplayDailyClimaticData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDuplicatesConstructed.resx">
+      <DependentUpon>dlgDuplicatesConstructed.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgEnter.resx">
       <DependentUpon>dlgEnter.vb</DependentUpon>
