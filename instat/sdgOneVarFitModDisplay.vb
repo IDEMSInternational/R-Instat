@@ -36,6 +36,7 @@ Public Class sdgOneVarFitModDisplay
         ucrPnlLikelihood.SetRDefault("TRUE")
 
         ucrChkPLotLogLik.AddToLinkedControls(ucrPnlLikelihood, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkPLotLogLik.AddToLinkedControls(ucrSaveLikelihood, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkPLotLogLik.AddRSyntaxContainsFunctionNamesCondition(True, {"llplot"})
         ucrChkPLotLogLik.AddRSyntaxContainsFunctionNamesCondition(False, {"llplot"}, False)
         ucrChkPLotLogLik.SetText("Plot Likelihood")
@@ -172,6 +173,7 @@ Public Class sdgOneVarFitModDisplay
             clsRSyntax.RemoveFromAfterCodes(clsRLogLikFunction)
         End If
     End Sub
+
     Private Sub InitialiseTabs()
         For i = 0 To tbcPlots.TabCount - 1
             tbcPlots.SelectedIndex = i
