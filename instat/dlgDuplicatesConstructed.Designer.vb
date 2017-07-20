@@ -32,7 +32,7 @@ Partial Class dlgDuplicatesConstructed
         Me.ucrReceiverMultipleForDuplicates = New instat.ucrReceiverMultiple()
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectorForDuplicates = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSelectorDuplicateswithVariables = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrSelectDataFrameDuplicates = New instat.ucrDataFrame()
         Me.SuspendLayout()
         '
@@ -141,15 +141,15 @@ Partial Class dlgDuplicatesConstructed
         Me.ucrBase.Size = New System.Drawing.Size(388, 52)
         Me.ucrBase.TabIndex = 12
         '
-        'ucrSelectorForDuplicates
+        'ucrSelectorDuplicateswithVariables
         '
-        Me.ucrSelectorForDuplicates.bShowHiddenColumns = False
-        Me.ucrSelectorForDuplicates.bUseCurrentFilter = True
-        Me.ucrSelectorForDuplicates.Location = New System.Drawing.Point(10, 50)
-        Me.ucrSelectorForDuplicates.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorForDuplicates.Name = "ucrSelectorForDuplicates"
-        Me.ucrSelectorForDuplicates.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorForDuplicates.TabIndex = 18
+        Me.ucrSelectorDuplicateswithVariables.bShowHiddenColumns = False
+        Me.ucrSelectorDuplicateswithVariables.bUseCurrentFilter = True
+        Me.ucrSelectorDuplicateswithVariables.Location = New System.Drawing.Point(10, 50)
+        Me.ucrSelectorDuplicateswithVariables.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorDuplicateswithVariables.Name = "ucrSelectorDuplicateswithVariables"
+        Me.ucrSelectorDuplicateswithVariables.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorDuplicateswithVariables.TabIndex = 18
         '
         'ucrSelectDataFrameDuplicates
         '
@@ -175,7 +175,7 @@ Partial Class dlgDuplicatesConstructed
         Me.Controls.Add(Me.rdoSelectedVariables)
         Me.Controls.Add(Me.ucrPnlOptions)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.ucrSelectorForDuplicates)
+        Me.Controls.Add(Me.ucrSelectorDuplicateswithVariables)
         Me.Controls.Add(Me.ucrSelectDataFrameDuplicates)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -192,7 +192,7 @@ Partial Class dlgDuplicatesConstructed
     Friend WithEvents rdoDataframe As RadioButton
     Friend WithEvents rdoSelectedVariables As RadioButton
     Friend WithEvents ucrPnlOptions As UcrPanel
-    Friend WithEvents ucrSelectorForDuplicates As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectorDuplicateswithVariables As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverMultipleForDuplicates As ucrReceiverMultiple
     Friend WithEvents ucrNewColumnName As ucrSave
     Friend WithEvents rdoIndexnumberofduplicates As RadioButton
