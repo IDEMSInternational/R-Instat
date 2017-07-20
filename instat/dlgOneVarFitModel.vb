@@ -222,21 +222,26 @@ Public Class dlgOneVarFitModel
         clsRplotFunction.SetPackageName("graphics")
         clsRplotFunction.SetRCommand("plot")
         clsRplotFunction.iCallType = 3
+        clsRplotFunction.bExcludeAssignedFunctionOutput = False
 
         clsRplotPPComp.SetPackageName("fitdistrplus")
         clsRplotPPComp.SetRCommand("ppcomp")
+        clsRplotPPComp.bExcludeAssignedFunctionOutput = False
         clsRplotPPComp.iCallType = 3
 
         clsRplotCdfcomp.SetPackageName("fitdistrplus")
         clsRplotCdfcomp.SetRCommand("cdfcomp")
+        clsRplotCdfcomp.bExcludeAssignedFunctionOutput = False
         clsRplotCdfcomp.iCallType = 3
 
         clsRplotQqComp.SetPackageName("fitdistrplus")
         clsRplotQqComp.SetRCommand("qqcomp")
+        clsRplotQqComp.bExcludeAssignedFunctionOutput = False
         clsRplotQqComp.iCallType = 3
 
         clsRplotDenscomp.SetPackageName("fitdistrplus")
         clsRplotDenscomp.SetRCommand("denscomp")
+        clsRplotDenscomp.bExcludeAssignedFunctionOutput = False
         clsRplotDenscomp.iCallType = 3
 
         clsRLogLikFunction.SetPackageName("fitdistrplus")
