@@ -482,6 +482,7 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
+        Me.DuplicatesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -2754,7 +2755,7 @@ Partial Class frmMain
         'mnuPrepareCheckData
         '
         Me.mnuPrepareCheckData.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.mnuPrepareCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPreparePrepareToShareJitter, Me.mnuPrepareCheckDataExportOpenRefine, Me.mnuPrepareCheckDataImportOpenRefine, Me.mnuCheckDataPrePareToShareSdcPackage})
+        Me.mnuPrepareCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DuplicatesToolStripMenuItem, Me.mnuPreparePrepareToShareJitter, Me.mnuPrepareCheckDataExportOpenRefine, Me.mnuPrepareCheckDataImportOpenRefine, Me.mnuCheckDataPrePareToShareSdcPackage})
         Me.mnuPrepareCheckData.Name = "mnuPrepareCheckData"
         Me.mnuPrepareCheckData.Size = New System.Drawing.Size(172, 22)
         Me.mnuPrepareCheckData.Text = "Check Data"
@@ -3692,6 +3693,12 @@ Partial Class frmMain
         Me.ucrOutput.Size = New System.Drawing.Size(444, 231)
         Me.ucrOutput.TabIndex = 0
         '
+        'DuplicatesToolStripMenuItem
+        '
+        Me.DuplicatesToolStripMenuItem.Name = "DuplicatesToolStripMenuItem"
+        Me.DuplicatesToolStripMenuItem.Size = New System.Drawing.Size(245, 22)
+        Me.DuplicatesToolStripMenuItem.Text = "Duplicates..."
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -4182,4 +4189,5 @@ Partial Class frmMain
     Friend WithEvents mnuProcurementUseCRISummariseCRIbyCountry As ToolStripMenuItem
     Friend WithEvents mnuProcurementDescribeOneVar As ToolStripMenuItem
     Friend WithEvents mnuProcurementDescribeTwoVar As ToolStripMenuItem
+    Friend WithEvents DuplicatesToolStripMenuItem As ToolStripMenuItem
 End Class
