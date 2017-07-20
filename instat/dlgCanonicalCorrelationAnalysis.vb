@@ -89,7 +89,7 @@ Public Class dlgCanonicalCorrelationAnalysis
         '        clsRXCoefFunction.AddParameter("data_name", Chr(34) & ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
 
         clsRYCoefFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
-        'clsRYCoefFunction.iCallType = 2
+        clsRYCoefFunction.iCallType = 2
         '        clsRYCoefFunction.AddParameter("data_name", Chr(34) & ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
 
         clsRGraphicsFunction.SetPackageName("GGally")
