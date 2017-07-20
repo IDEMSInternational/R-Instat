@@ -229,21 +229,13 @@ Public Class dlgView
 
     Private Sub ucrSelectorForView_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForView.ControlValueChanged
         DataFrameLength()
-        DataParameter()
     End Sub
 
-    Private Sub DataParameter()
-        If rdoViewAll.Checked Then
-            'clsSeparateWindowFunction.AddParameter("x", ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem,iPosition:=0)
-        Else
-        End If
-    End Sub
     Private Sub ucrReceiverView_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverView.ControlContentsChanged, ucrPnlDisplayWindow.ControlContentsChanged, ucrChkSpecifyRows.ControlContentsChanged, ucrNudNumberRows.ControlContentsChanged, ucrPnlDisplayFrom.ControlContentsChanged, ucrChkSortColumn.ControlContentsChanged, ucrReceiverSortCol.ControlContentsChanged, ucrPnlVewData.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
     Private Sub ucrPnlVewData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlVewData.ControlValueChanged
-        DataParameter()
         ChangeFunctionParameters()
     End Sub
 End Class
