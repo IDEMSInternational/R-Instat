@@ -46,6 +46,9 @@ Partial Class dlgView
         Me.lblDisplayFrom = New System.Windows.Forms.Label()
         Me.lblNumberofRows = New System.Windows.Forms.Label()
         Me.rdoHTMLOutputWindow = New System.Windows.Forms.RadioButton()
+        Me.rdoViewAll = New System.Windows.Forms.RadioButton()
+        Me.rdoViewSelectedColumnsRows = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlVewData = New instat.UcrPanel()
         Me.ucrReceiverSortCol = New instat.ucrReceiverSingle()
         Me.ucrChkSortColumn = New instat.ucrCheck()
         Me.ucrNudNumberRows = New instat.ucrNud()
@@ -55,9 +58,6 @@ Partial Class dlgView
         Me.ucrReceiverView = New instat.ucrReceiverMultiple()
         Me.ucrSelectorForView = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.rdoViewAll = New System.Windows.Forms.RadioButton()
-        Me.rdoViewSelectedColumnsRows = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlVewData = New instat.UcrPanel()
         Me.SuspendLayout()
         '
         'lblSelected
@@ -66,7 +66,7 @@ Partial Class dlgView
         Me.lblSelected.Location = New System.Drawing.Point(248, 80)
         Me.lblSelected.Name = "lblSelected"
         Me.lblSelected.Size = New System.Drawing.Size(97, 13)
-        Me.lblSelected.TabIndex = 1
+        Me.lblSelected.TabIndex = 4
         Me.lblSelected.Tag = ""
         Me.lblSelected.Text = "Variable(s) to View:"
         '
@@ -76,7 +76,7 @@ Partial Class dlgView
         Me.rdoDispSepOutputWindow.Location = New System.Drawing.Point(10, 238)
         Me.rdoDispSepOutputWindow.Name = "rdoDispSepOutputWindow"
         Me.rdoDispSepOutputWindow.Size = New System.Drawing.Size(158, 17)
-        Me.rdoDispSepOutputWindow.TabIndex = 4
+        Me.rdoDispSepOutputWindow.TabIndex = 6
         Me.rdoDispSepOutputWindow.TabStop = True
         Me.rdoDispSepOutputWindow.Text = "Display in Separate Window"
         Me.rdoDispSepOutputWindow.UseVisualStyleBackColor = True
@@ -87,7 +87,7 @@ Partial Class dlgView
         Me.rdoDispOutputWindow.Location = New System.Drawing.Point(10, 261)
         Me.rdoDispOutputWindow.Name = "rdoDispOutputWindow"
         Me.rdoDispOutputWindow.Size = New System.Drawing.Size(147, 17)
-        Me.rdoDispOutputWindow.TabIndex = 5
+        Me.rdoDispOutputWindow.TabIndex = 8
         Me.rdoDispOutputWindow.TabStop = True
         Me.rdoDispOutputWindow.Text = "Display in Output Window"
         Me.rdoDispOutputWindow.UseVisualStyleBackColor = True
@@ -98,7 +98,7 @@ Partial Class dlgView
         Me.rdoBottom.Location = New System.Drawing.Point(325, 301)
         Me.rdoBottom.Name = "rdoBottom"
         Me.rdoBottom.Size = New System.Drawing.Size(58, 17)
-        Me.rdoBottom.TabIndex = 13
+        Me.rdoBottom.TabIndex = 16
         Me.rdoBottom.TabStop = True
         Me.rdoBottom.Text = "Bottom"
         Me.rdoBottom.UseVisualStyleBackColor = True
@@ -109,7 +109,7 @@ Partial Class dlgView
         Me.rdoTop.Location = New System.Drawing.Point(325, 278)
         Me.rdoTop.Name = "rdoTop"
         Me.rdoTop.Size = New System.Drawing.Size(44, 17)
-        Me.rdoTop.TabIndex = 12
+        Me.rdoTop.TabIndex = 15
         Me.rdoTop.TabStop = True
         Me.rdoTop.Text = "Top"
         Me.rdoTop.UseVisualStyleBackColor = True
@@ -120,7 +120,7 @@ Partial Class dlgView
         Me.lblDisplayFrom.Location = New System.Drawing.Point(248, 279)
         Me.lblDisplayFrom.Name = "lblDisplayFrom"
         Me.lblDisplayFrom.Size = New System.Drawing.Size(70, 13)
-        Me.lblDisplayFrom.TabIndex = 11
+        Me.lblDisplayFrom.TabIndex = 14
         Me.lblDisplayFrom.Tag = ""
         Me.lblDisplayFrom.Text = "Display From:"
         '
@@ -130,7 +130,7 @@ Partial Class dlgView
         Me.lblNumberofRows.Location = New System.Drawing.Point(248, 258)
         Me.lblNumberofRows.Name = "lblNumberofRows"
         Me.lblNumberofRows.Size = New System.Drawing.Size(89, 13)
-        Me.lblNumberofRows.TabIndex = 8
+        Me.lblNumberofRows.TabIndex = 11
         Me.lblNumberofRows.Tag = "Number_of_rows"
         Me.lblNumberofRows.Text = "Number of Rows:"
         '
@@ -140,10 +140,47 @@ Partial Class dlgView
         Me.rdoHTMLOutputWindow.Location = New System.Drawing.Point(10, 284)
         Me.rdoHTMLOutputWindow.Name = "rdoHTMLOutputWindow"
         Me.rdoHTMLOutputWindow.Size = New System.Drawing.Size(180, 17)
-        Me.rdoHTMLOutputWindow.TabIndex = 6
+        Me.rdoHTMLOutputWindow.TabIndex = 9
         Me.rdoHTMLOutputWindow.TabStop = True
         Me.rdoHTMLOutputWindow.Text = "Display HTML in Output Window"
         Me.rdoHTMLOutputWindow.UseVisualStyleBackColor = True
+        '
+        'rdoViewAll
+        '
+        Me.rdoViewAll.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoViewAll.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoViewAll.FlatAppearance.BorderSize = 2
+        Me.rdoViewAll.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoViewAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoViewAll.Location = New System.Drawing.Point(218, 9)
+        Me.rdoViewAll.Name = "rdoViewAll"
+        Me.rdoViewAll.Size = New System.Drawing.Size(165, 28)
+        Me.rdoViewAll.TabIndex = 2
+        Me.rdoViewAll.Text = "View All"
+        Me.rdoViewAll.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoViewAll.UseVisualStyleBackColor = True
+        '
+        'rdoViewSelectedColumnsRows
+        '
+        Me.rdoViewSelectedColumnsRows.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoViewSelectedColumnsRows.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoViewSelectedColumnsRows.FlatAppearance.BorderSize = 2
+        Me.rdoViewSelectedColumnsRows.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoViewSelectedColumnsRows.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoViewSelectedColumnsRows.Location = New System.Drawing.Point(56, 9)
+        Me.rdoViewSelectedColumnsRows.Name = "rdoViewSelectedColumnsRows"
+        Me.rdoViewSelectedColumnsRows.Size = New System.Drawing.Size(164, 28)
+        Me.rdoViewSelectedColumnsRows.TabIndex = 1
+        Me.rdoViewSelectedColumnsRows.Text = "View Selected Columns/Rows"
+        Me.rdoViewSelectedColumnsRows.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoViewSelectedColumnsRows.UseVisualStyleBackColor = True
+        '
+        'ucrPnlVewData
+        '
+        Me.ucrPnlVewData.Location = New System.Drawing.Point(48, 5)
+        Me.ucrPnlVewData.Name = "ucrPnlVewData"
+        Me.ucrPnlVewData.Size = New System.Drawing.Size(335, 35)
+        Me.ucrPnlVewData.TabIndex = 0
         '
         'ucrReceiverSortCol
         '
@@ -154,7 +191,7 @@ Partial Class dlgView
         Me.ucrReceiverSortCol.Selector = Nothing
         Me.ucrReceiverSortCol.Size = New System.Drawing.Size(119, 20)
         Me.ucrReceiverSortCol.strNcFilePath = ""
-        Me.ucrReceiverSortCol.TabIndex = 9
+        Me.ucrReceiverSortCol.TabIndex = 12
         Me.ucrReceiverSortCol.ucrSelector = Nothing
         '
         'ucrChkSortColumn
@@ -163,7 +200,7 @@ Partial Class dlgView
         Me.ucrChkSortColumn.Location = New System.Drawing.Point(248, 235)
         Me.ucrChkSortColumn.Name = "ucrChkSortColumn"
         Me.ucrChkSortColumn.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkSortColumn.TabIndex = 7
+        Me.ucrChkSortColumn.TabIndex = 10
         '
         'ucrNudNumberRows
         '
@@ -174,7 +211,7 @@ Partial Class dlgView
         Me.ucrNudNumberRows.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberRows.Name = "ucrNudNumberRows"
         Me.ucrNudNumberRows.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudNumberRows.TabIndex = 10
+        Me.ucrNudNumberRows.TabIndex = 13
         Me.ucrNudNumberRows.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrPnlDisplayFrom
@@ -197,7 +234,7 @@ Partial Class dlgView
         Me.ucrPnlDisplayWindow.Location = New System.Drawing.Point(10, 235)
         Me.ucrPnlDisplayWindow.Name = "ucrPnlDisplayWindow"
         Me.ucrPnlDisplayWindow.Size = New System.Drawing.Size(180, 83)
-        Me.ucrPnlDisplayWindow.TabIndex = 3
+        Me.ucrPnlDisplayWindow.TabIndex = 7
         '
         'ucrReceiverView
         '
@@ -208,7 +245,7 @@ Partial Class dlgView
         Me.ucrReceiverView.Selector = Nothing
         Me.ucrReceiverView.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverView.strNcFilePath = ""
-        Me.ucrReceiverView.TabIndex = 2
+        Me.ucrReceiverView.TabIndex = 5
         Me.ucrReceiverView.ucrSelector = Nothing
         '
         'ucrSelectorForView
@@ -219,51 +256,14 @@ Partial Class dlgView
         Me.ucrSelectorForView.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForView.Name = "ucrSelectorForView"
         Me.ucrSelectorForView.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorForView.TabIndex = 0
+        Me.ucrSelectorForView.TabIndex = 3
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(10, 324)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
-        Me.ucrBase.TabIndex = 14
-        '
-        'rdoViewAll
-        '
-        Me.rdoViewAll.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoViewAll.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoViewAll.FlatAppearance.BorderSize = 2
-        Me.rdoViewAll.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoViewAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoViewAll.Location = New System.Drawing.Point(218, 9)
-        Me.rdoViewAll.Name = "rdoViewAll"
-        Me.rdoViewAll.Size = New System.Drawing.Size(165, 28)
-        Me.rdoViewAll.TabIndex = 17
-        Me.rdoViewAll.Text = "View All"
-        Me.rdoViewAll.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoViewAll.UseVisualStyleBackColor = True
-        '
-        'rdoViewSelectedColumnsRows
-        '
-        Me.rdoViewSelectedColumnsRows.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoViewSelectedColumnsRows.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoViewSelectedColumnsRows.FlatAppearance.BorderSize = 2
-        Me.rdoViewSelectedColumnsRows.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoViewSelectedColumnsRows.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoViewSelectedColumnsRows.Location = New System.Drawing.Point(56, 9)
-        Me.rdoViewSelectedColumnsRows.Name = "rdoViewSelectedColumnsRows"
-        Me.rdoViewSelectedColumnsRows.Size = New System.Drawing.Size(164, 28)
-        Me.rdoViewSelectedColumnsRows.TabIndex = 16
-        Me.rdoViewSelectedColumnsRows.Text = "View Selected Columns/Rows"
-        Me.rdoViewSelectedColumnsRows.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoViewSelectedColumnsRows.UseVisualStyleBackColor = True
-        '
-        'ucrPnlVewData
-        '
-        Me.ucrPnlVewData.Location = New System.Drawing.Point(48, 5)
-        Me.ucrPnlVewData.Name = "ucrPnlVewData"
-        Me.ucrPnlVewData.Size = New System.Drawing.Size(335, 35)
-        Me.ucrPnlVewData.TabIndex = 15
+        Me.ucrBase.TabIndex = 17
         '
         'dlgView
         '
