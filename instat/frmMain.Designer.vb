@@ -1556,7 +1556,6 @@ Partial Class frmMain
         '
         'mnuClimaticPrepareClimaticSummaries
         '
-        Me.mnuClimaticPrepareClimaticSummaries.Enabled = False
         Me.mnuClimaticPrepareClimaticSummaries.Name = "mnuClimaticPrepareClimaticSummaries"
         Me.mnuClimaticPrepareClimaticSummaries.Size = New System.Drawing.Size(224, 22)
         Me.mnuClimaticPrepareClimaticSummaries.Text = "Climatic Summaries..."
