@@ -146,6 +146,7 @@ Public Class dlgView
         ucrReceiverView.AddAdditionalCodeParameterPair(clsHTMLFunction, New RParameter("mydf"), iAdditionalPairNo:=1)
         ucrReceiverView.AddAdditionalCodeParameterPair(clsOutputWindowFunction, New RParameter("x"), iAdditionalPairNo:=2)
         DataFrameLength()
+        ChangeFunctionParameters()
         ucrPnlVewData.SetRCode(clsSeparateWindowFunction, bReset, bReset)
         bControlsUpdated = True
     End Sub
@@ -199,6 +200,7 @@ Public Class dlgView
                     ucrBase.clsRsyntax.SetBaseRFunction(ucrReceiverView.GetVariables(True))
                 End If
             ElseIf rdoDispSepOutputWindow.Checked Then
+                clsSeparateWindowFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables, iPosition:=0)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsSeparateWindowFunction)
             Else
                 ucrBase.clsRsyntax.SetBaseRFunction(clsHTMLFunction)
