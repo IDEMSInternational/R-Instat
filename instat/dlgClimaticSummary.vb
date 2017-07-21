@@ -20,6 +20,7 @@ Public Class dlgClimaticSummary
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
     Private clsGroupByFunction, clsFilterFunction As RFunction
+    Dim strCurrDataName As String = ""
     Private Sub dlgClimaticSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
@@ -96,6 +97,8 @@ Public Class dlgClimaticSummary
         ucrPnlAnnual.AddRadioButton(rdoAnnualVariable)
         ucrPnlAnnual.AddRadioButton(rdoWithinYear)
 
+        ucrInputSave.SetParameter(New RParameter("result_data_frame", 0))
+
         'linking controls
         ucrPnlAnnual.AddToLinkedControls({ucrNudFrom, ucrNudTo}, {rdoAnnual}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlAnnual.AddToLinkedControls({ucrReceiverFrom, ucrReceiverTo}, {rdoAnnualVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -116,7 +119,6 @@ Public Class dlgClimaticSummary
         clsGroupByFunction.SetRCommand("instat_calculation$new")
         clsGroupByFunction.AddParameter("type", Chr(34) & "by" & Chr(34))
         clsGroupByFunction.SetAssignTo("grouping")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsGroupByFunction)
 
         clsFilterFunction.SetRCommand("instat_calculation$new")
         clsFilterFunction.SetAssignTo("Annual_filter")
@@ -125,11 +127,12 @@ Public Class dlgClimaticSummary
         clsFilterFunction.SetAssignTo("grouping")
 
         SetGroupByFunction()
+        ucrBase.clsRsyntax.SetBaseRFunction(clsGroupByFunction)
 
     End Sub
 
     Private Sub SetGroupByFunction()
-        Dim strCurrDataName As String = ""
+        'Dim strCurrDataName As String = ""
         Dim strGroupByCalcFrom As String = ""
 
         strCurrDataName = Chr(34) & ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
@@ -150,6 +153,7 @@ Public Class dlgClimaticSummary
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrInputSave.AddAdditionalCodeParameterPair(clsFilterFunction, New RParameter("result_data_frame"), iAdditionalPairNo:=1)
 
     End Sub
 
@@ -174,8 +178,20 @@ Public Class dlgClimaticSummary
     End Sub
 
     Private Sub ucrPnlAnnual_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlAnnual.ControlContentsChanged
-        'If rdoAnnual.Checked Then
-        'SetGroupByFunction()
-        'End If
+        If rdoAnnual.Checked Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsFilterFunction, iPosition:=1)
+        ElseIf rdoAnnualVariable.Checked Then
+
+        ElseIf rdoWithinYear.Checked Then
+
+        End If
+    End Sub
+
+    Private Sub ucrReceiverElement_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged
+        clsFilterFunction.AddParameter("function_exp", Chr(34) & ucrReceiverElement.GetVariableNames(False) & ucrNudFrom.GetText & ucrNudTo.GetText & Chr(34))
+    End Sub
+
+    Private Sub ucrSelectorVariable_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorVariable.ControlContentsChanged
+        clsFilterFunction.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames() & ")")
     End Sub
 End Class
