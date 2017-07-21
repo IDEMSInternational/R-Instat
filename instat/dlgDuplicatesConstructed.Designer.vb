@@ -33,7 +33,6 @@ Partial Class dlgDuplicatesConstructed
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorDuplicateswithVariables = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrSelectDataFrameDuplicates = New instat.ucrDataFrame()
         Me.SuspendLayout()
         '
         'rdoDataframe
@@ -145,20 +144,11 @@ Partial Class dlgDuplicatesConstructed
         '
         Me.ucrSelectorDuplicateswithVariables.bShowHiddenColumns = False
         Me.ucrSelectorDuplicateswithVariables.bUseCurrentFilter = True
-        Me.ucrSelectorDuplicateswithVariables.Location = New System.Drawing.Point(10, 50)
+        Me.ucrSelectorDuplicateswithVariables.Location = New System.Drawing.Point(17, 47)
         Me.ucrSelectorDuplicateswithVariables.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDuplicateswithVariables.Name = "ucrSelectorDuplicateswithVariables"
         Me.ucrSelectorDuplicateswithVariables.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorDuplicateswithVariables.TabIndex = 18
-        '
-        'ucrSelectDataFrameDuplicates
-        '
-        Me.ucrSelectDataFrameDuplicates.bUseCurrentFilter = True
-        Me.ucrSelectDataFrameDuplicates.Location = New System.Drawing.Point(10, 50)
-        Me.ucrSelectDataFrameDuplicates.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectDataFrameDuplicates.Name = "ucrSelectDataFrameDuplicates"
-        Me.ucrSelectDataFrameDuplicates.Size = New System.Drawing.Size(120, 40)
-        Me.ucrSelectDataFrameDuplicates.TabIndex = 19
         '
         'dlgDuplicatesConstructed
         '
@@ -176,7 +166,6 @@ Partial Class dlgDuplicatesConstructed
         Me.Controls.Add(Me.ucrPnlOptions)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSelectorDuplicateswithVariables)
-        Me.Controls.Add(Me.ucrSelectDataFrameDuplicates)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -199,5 +188,4 @@ Partial Class dlgDuplicatesConstructed
     Friend WithEvents rdoDuplicatesonly As RadioButton
     Friend WithEvents rdoAllduplicatecases As RadioButton
     Friend WithEvents ucrPnlDuplicates As UcrPanel
-    Friend WithEvents ucrSelectDataFrameDuplicates As ucrDataFrame
 End Class
