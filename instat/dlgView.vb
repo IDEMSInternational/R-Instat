@@ -82,6 +82,7 @@ Public Class dlgView
         ucrPnlVewData.AddParameterPresentCondition(rdoViewAll, "title")
         ucrPnlVewData.AddFunctionNamesCondition(rdoViewSelectedColumnsRows, "View")
         ucrPnlVewData.AddParameterPresentCondition(rdoViewSelectedColumnsRows, "x")
+        ucrPnlVewData.bAllowNonConditionValues = True
 
         ucrPnlVewData.AddToLinkedControls(ucrReceiverView, {rdoViewSelectedColumnsRows}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrReceiverView.SetLinkedDisplayControl(lblSelected)
@@ -147,7 +148,7 @@ Public Class dlgView
         ucrReceiverView.AddAdditionalCodeParameterPair(clsOutputWindowFunction, New RParameter("x"), iAdditionalPairNo:=2)
         DataFrameLength()
         ChangeFunctionParameters()
-        ucrPnlVewData.SetRCode(clsSeparateWindowFunction, bReset, bReset)
+        ucrPnlVewData.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset, bReset)
         bControlsUpdated = True
     End Sub
 
@@ -233,11 +234,20 @@ Public Class dlgView
         DataFrameLength()
     End Sub
 
+    Private Sub SelectorAndDataframe()
+        If rdoViewAll.Checked Then
+            ucrSelectorForView.SetVariablesVisible(False)
+        Else
+            ucrSelectorForView.SetVariablesVisible(True)
+        End If
+    End Sub
+
     Private Sub ucrReceiverView_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverView.ControlContentsChanged, ucrPnlDisplayWindow.ControlContentsChanged, ucrChkSpecifyRows.ControlContentsChanged, ucrNudNumberRows.ControlContentsChanged, ucrPnlDisplayFrom.ControlContentsChanged, ucrChkSortColumn.ControlContentsChanged, ucrReceiverSortCol.ControlContentsChanged, ucrPnlVewData.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
     Private Sub ucrPnlVewData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlVewData.ControlValueChanged
         ChangeFunctionParameters()
+        SelectorAndDataframe()
     End Sub
 End Class
