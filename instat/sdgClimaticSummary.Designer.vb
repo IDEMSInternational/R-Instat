@@ -218,7 +218,7 @@ Partial Class sdgClimaticSummary
         '
         'ucrBaseSdgClimaticSummary
         '
-        Me.ucrBaseSdgClimaticSummary.Location = New System.Drawing.Point(161, 185)
+        Me.ucrBaseSdgClimaticSummary.Location = New System.Drawing.Point(132, 185)
         Me.ucrBaseSdgClimaticSummary.Name = "ucrBaseSdgClimaticSummary"
         Me.ucrBaseSdgClimaticSummary.Size = New System.Drawing.Size(142, 30)
         Me.ucrBaseSdgClimaticSummary.TabIndex = 26
