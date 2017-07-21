@@ -65,6 +65,8 @@ Partial Class dlgClimaticSummary
         Me.ucrPnlAnnual = New instat.UcrPanel()
         Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
         Me.lblMonth = New System.Windows.Forms.Label()
+        Me.lblNewColName = New System.Windows.Forms.Label()
+        Me.ucrInputSave = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
         'rdoAnnual
@@ -181,7 +183,7 @@ Partial Class dlgClimaticSummary
         'lblReceiverTo
         '
         Me.lblReceiverTo.AutoSize = True
-        Me.lblReceiverTo.Location = New System.Drawing.Point(180, 342)
+        Me.lblReceiverTo.Location = New System.Drawing.Point(180, 341)
         Me.lblReceiverTo.Name = "lblReceiverTo"
         Me.lblReceiverTo.Size = New System.Drawing.Size(23, 13)
         Me.lblReceiverTo.TabIndex = 37
@@ -198,9 +200,9 @@ Partial Class dlgClimaticSummary
         '
         'cmdSummary
         '
-        Me.cmdSummary.Location = New System.Drawing.Point(275, 402)
+        Me.cmdSummary.Location = New System.Drawing.Point(292, 397)
         Me.cmdSummary.Name = "cmdSummary"
-        Me.cmdSummary.Size = New System.Drawing.Size(120, 25)
+        Me.cmdSummary.Size = New System.Drawing.Size(120, 21)
         Me.cmdSummary.TabIndex = 39
         Me.cmdSummary.Tag = "Summary"
         Me.cmdSummary.Text = "Summary"
@@ -221,7 +223,7 @@ Partial Class dlgClimaticSummary
         'ucrReceiverTo
         '
         Me.ucrReceiverTo.frmParent = Me
-        Me.ucrReceiverTo.Location = New System.Drawing.Point(206, 341)
+        Me.ucrReceiverTo.Location = New System.Drawing.Point(206, 338)
         Me.ucrReceiverTo.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTo.Name = "ucrReceiverTo"
         Me.ucrReceiverTo.Selector = Nothing
@@ -234,7 +236,7 @@ Partial Class dlgClimaticSummary
         '
         Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTo.Location = New System.Drawing.Point(206, 341)
+        Me.ucrNudTo.Location = New System.Drawing.Point(206, 338)
         Me.ucrNudTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTo.Name = "ucrNudTo"
@@ -359,11 +361,32 @@ Partial Class dlgClimaticSummary
         Me.lblMonth.TabIndex = 41
         Me.lblMonth.Text = "Month:"
         '
+        'lblNewColName
+        '
+        Me.lblNewColName.AutoSize = True
+        Me.lblNewColName.Location = New System.Drawing.Point(10, 401)
+        Me.lblNewColName.Name = "lblNewColName"
+        Me.lblNewColName.Size = New System.Drawing.Size(101, 13)
+        Me.lblNewColName.TabIndex = 42
+        Me.lblNewColName.Text = "New Column Name:"
+        '
+        'ucrInputSave
+        '
+        Me.ucrInputSave.AddQuotesIfUnrecognised = True
+        Me.ucrInputSave.IsMultiline = False
+        Me.ucrInputSave.IsReadOnly = False
+        Me.ucrInputSave.Location = New System.Drawing.Point(113, 398)
+        Me.ucrInputSave.Name = "ucrInputSave"
+        Me.ucrInputSave.Size = New System.Drawing.Size(170, 21)
+        Me.ucrInputSave.TabIndex = 43
+        '
         'dlgClimaticSummary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(428, 497)
+        Me.Controls.Add(Me.lblNewColName)
+        Me.Controls.Add(Me.ucrInputSave)
         Me.Controls.Add(Me.lblMonth)
         Me.Controls.Add(Me.ucrReceiverMonth)
         Me.Controls.Add(Me.cmdSummary)
@@ -429,4 +452,6 @@ Partial Class dlgClimaticSummary
     Friend WithEvents cmdSummary As Button
     Friend WithEvents lblMonth As Label
     Friend WithEvents ucrReceiverMonth As ucrReceiverSingle
+    Friend WithEvents lblNewColName As Label
+    Friend WithEvents ucrInputSave As ucrInputTextBox
 End Class

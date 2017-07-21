@@ -19,6 +19,7 @@ Public Class dlgClimaticSummary
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
+    Private clsGroupByFunction As RFunction
     Private Sub dlgClimaticSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
@@ -109,6 +110,33 @@ Public Class dlgClimaticSummary
 
     Private Sub SetDefaults()
         bResetSubdialog = True
+        clsGroupByFunction = New RFunction
+
+        clsGroupByFunction.SetRCommand("instat_calculation$new")
+        clsGroupByFunction.AddParameter("type", Chr(34) & "by" & Chr(34))
+        clsGroupByFunction.SetAssignTo("grouping")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsGroupByFunction)
+        SetGroupByFunction()
+    End Sub
+
+    Private Sub SetGroupByFunction()
+        Dim strCurrDataName As String = ""
+        Dim strGroupByCalcFrom As String = ""
+
+        strCurrDataName = Chr(34) & ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
+
+        If Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverStation.IsEmpty Then
+            strGroupByCalcFrom = "list(" & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames() & ", " & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames() & ")"
+        ElseIf Not ucrReceiverYear.IsEmpty Then
+            strGroupByCalcFrom = "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames() & ")"
+        ElseIf Not ucrReceiverStation.IsEmpty Then
+            strGroupByCalcFrom = "list(" & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames() & ")"
+        End If
+        If strGroupByCalcFrom <> "" Then
+            clsGroupByFunction.AddParameter("calculated_from", strGroupByCalcFrom)
+        Else
+            clsGroupByFunction.RemoveParameterByName("calculated_from")
+        End If
 
     End Sub
 
@@ -130,5 +158,15 @@ Public Class dlgClimaticSummary
         sdgClimaticSummary.SetRCode(bReset:=bResetSubdialog)
         bResetSubdialog = False
         sdgClimaticSummary.ShowDialog()
+    End Sub
+
+    Private Sub ucrReceiverYear_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlContentsChanged
+        SetGroupByFunction()
+    End Sub
+
+    Private Sub ucrPnlAnnual_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlAnnual.ControlContentsChanged
+        'If rdoAnnual.Checked Then
+        'SetGroupByFunction()
+        'End If
     End Sub
 End Class
