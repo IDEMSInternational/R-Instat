@@ -19,7 +19,7 @@ Public Class dlgClimaticSummary
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
-    Private clsGroupByFunction As RFunction
+    Private clsGroupByFunction, clsFilterFunction As RFunction
     Private Sub dlgClimaticSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
@@ -111,12 +111,21 @@ Public Class dlgClimaticSummary
     Private Sub SetDefaults()
         bResetSubdialog = True
         clsGroupByFunction = New RFunction
+        clsFilterFunction = New RFunction
 
         clsGroupByFunction.SetRCommand("instat_calculation$new")
         clsGroupByFunction.AddParameter("type", Chr(34) & "by" & Chr(34))
         clsGroupByFunction.SetAssignTo("grouping")
         ucrBase.clsRsyntax.SetBaseRFunction(clsGroupByFunction)
+
+        clsFilterFunction.SetRCommand("instat_calculation$new")
+        clsFilterFunction.SetAssignTo("Annual_filter")
+        clsFilterFunction.AddParameter("type", Chr(34) & "filter" & Chr(34))
+        clsFilterFunction.AddParameter("save", 2)
+        clsFilterFunction.SetAssignTo("grouping")
+
         SetGroupByFunction()
+
     End Sub
 
     Private Sub SetGroupByFunction()

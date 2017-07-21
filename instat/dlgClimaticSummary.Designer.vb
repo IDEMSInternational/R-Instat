@@ -328,7 +328,7 @@ Partial Class dlgClimaticSummary
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(0, 433)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 433)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(399, 52)
         Me.ucrBase.TabIndex = 12
