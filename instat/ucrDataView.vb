@@ -304,6 +304,7 @@ Public Class ucrDataView
         '        RunScriptFromDataView(strScript)
         '    End If
         'End If
+        dlgDeleteDataFrames.SetCurrentDataframe(grdCurrSheet.Name)
         dlgDeleteDataFrames.ShowDialog()
     End Sub
 

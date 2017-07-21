@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class dlgDeleteDataFrames
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Dim strSelectedDataFrame As String = ""
     Private clsDeleteFunction As New RFunction
 
     Private Sub dlgDeleteDataFrames_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -57,6 +58,11 @@ Public Class dlgDeleteDataFrames
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+    Public Sub SetCurrentDataframe(strDataFrame As String)
+        strSelectedDataFrame = strDataFrame
+        ucrDataFrameCopySheets.SetDataframe(strSelectedDataFrame)
     End Sub
 
     Private Sub TestOKEnabled()
