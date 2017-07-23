@@ -19,7 +19,8 @@ Public Class dlgClimaticSummary
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
-    Private clsGroupByFunction, clsFilterFunction As RFunction
+    Private clsGroupByFunction, clsDayFromAndTo, clsMonthFunction As RFunction
+    Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator, clsMonthOperator As ROperator
     Dim strCurrDataName As String = ""
     Private Sub dlgClimaticSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -68,13 +69,13 @@ Public Class dlgClimaticSummary
         ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
         ucrReceiverYear.bAutoFill = True
 
-        ucrReceiverMonth.SetParameter(New RParameter("month", 0))
-        ucrReceiverMonth.SetParameterIsRFunction()
-        ucrReceiverMonth.bWithQuotes = False
-        ucrReceiverMonth.strSelectorHeading = "Month Variables"
-        ucrReceiverMonth.Selector = ucrSelectorVariable
-        ucrReceiverMonth.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "month" & Chr(34)})
-        ucrReceiverMonth.bAutoFill = True
+        'ucrReceiverMonth.SetParameter(New RParameter("month", 0))
+        'ucrReceiverMonth.SetParameterIsRFunction()
+        'ucrReceiverMonth.bWithQuotes = False
+        'ucrReceiverMonth.strSelectorHeading = "Month Variables"
+        'ucrReceiverMonth.Selector = ucrSelectorVariable
+        'ucrReceiverMonth.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "month" & Chr(34)})
+        'ucrReceiverMonth.bAutoFill = True
 
         ucrReceiverElement.SetParameter(New RParameter("data", 0))
         ucrReceiverElement.SetParameterIsRFunction()
@@ -88,47 +89,79 @@ Public Class dlgClimaticSummary
         ucrReceiverTo.Selector = ucrSelectorVariable
 
         'setting up Nuds
-        ucrNudFrom.SetMinMax(1, 366)
+        ucrNudFrom.SetParameter(New RParameter("from", 1))
+        ucrNudFrom.SetMinMax(1, 365)
 
-        ucrNudTo.SetMinMax(1, 366)
+        ucrNudTo.SetParameter(New RParameter("to", 1))
+        ucrNudTo.SetMinMax(2, 366)
+
+        ucrNudMonth.SetMinMax(1, 12)
 
         'panel setting
         ucrPnlAnnual.AddRadioButton(rdoAnnual)
         ucrPnlAnnual.AddRadioButton(rdoAnnualVariable)
         ucrPnlAnnual.AddRadioButton(rdoWithinYear)
 
-        ucrInputSave.SetParameter(New RParameter("result_data_frame", 0))
+        'ucrInputSave.SetParameter(New RParameter("result_data_frame", 0))
 
         'linking controls
         ucrPnlAnnual.AddToLinkedControls({ucrNudFrom, ucrNudTo}, {rdoAnnual}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlAnnual.AddToLinkedControls({ucrReceiverFrom, ucrReceiverTo}, {rdoAnnualVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlAnnual.AddToLinkedControls({ucrReceiverMonth}, {rdoWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlAnnual.AddToLinkedControls({ucrNudMonth}, {rdoWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudFrom.SetLinkedDisplayControl(lblFrom)
         ucrNudTo.SetLinkedDisplayControl(lblTo)
         ucrReceiverFrom.SetLinkedDisplayControl(lblReceiverFrom)
         ucrReceiverTo.SetLinkedDisplayControl(lblReceiverTo)
-        ucrReceiverMonth.SetLinkedDisplayControl(lblMonth)
+        ucrNudMonth.SetLinkedDisplayControl(lblMonth)
 
     End Sub
 
     Private Sub SetDefaults()
         bResetSubdialog = True
         clsGroupByFunction = New RFunction
-        clsFilterFunction = New RFunction
+        clsDayFromAndTo = New RFunction
+        clsMonthFunction = New RFunction
+        clsDayFromOperator = New ROperator
+        clsDayToOperator = New ROperator
+        clsDayFromAndToOperator = New ROperator
+        clsMonthOperator = New ROperator
+
+        clsDayFromAndTo.Clear()
+        clsGroupByFunction.Clear()
+        clsDayFromAndToOperator.Clear()
+        clsDayFromOperator.Clear()
+        clsDayToOperator.Clear()
 
         clsGroupByFunction.SetRCommand("instat_calculation$new")
         clsGroupByFunction.AddParameter("type", Chr(34) & "by" & Chr(34))
         clsGroupByFunction.SetAssignTo("grouping")
 
-        clsFilterFunction.SetRCommand("instat_calculation$new")
-        clsFilterFunction.SetAssignTo("Annual_filter")
-        clsFilterFunction.AddParameter("type", Chr(34) & "filter" & Chr(34))
-        clsFilterFunction.AddParameter("save", 2)
-        clsFilterFunction.SetAssignTo("grouping")
+        clsDayFromAndToOperator.bToScriptAsRString = True
+        clsDayFromAndTo.SetRCommand("instat_calculation$new")
+        clsDayFromAndTo.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
+        clsDayFromAndTo.AddParameter("function_exp", clsROperatorParameter:=clsDayFromAndToOperator, iPosition:=1)
+        clsDayFromAndToOperator.SetOperation("&")
+        clsDayFromAndToOperator.AddParameter("from", clsROperatorParameter:=clsDayFromOperator, iPosition:=0)
+        clsDayFromOperator.SetOperation(">=")
+        clsDayFromOperator.AddParameter("from", 1)
+        clsDayFromAndToOperator.AddParameter("to", clsROperatorParameter:=clsDayToOperator, iPosition:=1)
+        clsDayToOperator.SetOperation("<=")
+        clsDayToOperator.AddParameter("to", 366)
+        clsDayFromAndTo.SetAssignTo("Day_From_and_To")
+
+        clsMonthFunction.SetRCommand("instat_calculation$new")
+        clsMonthFunction.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
+        clsMonthFunction.AddParameter("function_exp", clsROperatorParameter:=clsMonthOperator, iPosition:=0)
+        clsMonthOperator.SetOperation("==")
+        clsMonthFunction.SetAssignTo("Month")
 
         SetGroupByFunction()
         ucrBase.clsRsyntax.SetBaseRFunction(clsGroupByFunction)
+    End Sub
 
+    Private Sub DayBoundaries()
+        clsMonthFunction.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverDay.GetVariableNames() & ")")
+        clsDayFromAndTo.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverDay.GetVariableNames() & ")")
     End Sub
 
     Private Sub SetGroupByFunction()
@@ -153,8 +186,13 @@ Public Class dlgClimaticSummary
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrInputSave.AddAdditionalCodeParameterPair(clsFilterFunction, New RParameter("result_data_frame"), iAdditionalPairNo:=1)
-
+        'ucrInputSave.AddAdditionalCodeParameterPair(clsFilterFunction, New RParameter("result_data_frame"), iAdditionalPairNo:=1)
+        'ucrReceiverDay.AddAdditionalCodeParameterPair(clsDayFromOperator, New RParameter("doy", 0), iAdditionalPairNo:=1)
+        ucrReceiverDay.AddAdditionalCodeParameterPair(clsDayFromOperator, New RParameter("doy", 0), iAdditionalPairNo:=1)
+        ucrReceiverDay.SetRCode(clsDayToOperator, bReset)
+        ucrNudFrom.SetRCode(clsDayFromOperator, bReset)
+        ucrNudTo.SetRCode(clsDayToOperator, bReset)
+        ucrNudMonth.SetRCode(clsMonthOperator, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -179,19 +217,25 @@ Public Class dlgClimaticSummary
 
     Private Sub ucrPnlAnnual_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlAnnual.ControlContentsChanged
         If rdoAnnual.Checked Then
-            ucrBase.clsRsyntax.AddToAfterCodes(clsFilterFunction, iPosition:=1)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsDayFromAndTo, iPosition:=1)
         ElseIf rdoAnnualVariable.Checked Then
-
+            ucrBase.clsRsyntax.AddToAfterCodes(clsMonthFunction, iPosition:=2)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDayFromAndTo)
         ElseIf rdoWithinYear.Checked Then
-
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDayFromAndTo)
         End If
     End Sub
 
     Private Sub ucrReceiverElement_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged
-        clsFilterFunction.AddParameter("function_exp", Chr(34) & ucrReceiverElement.GetVariableNames(False) & ucrNudFrom.GetText & ucrNudTo.GetText & Chr(34))
+        'clsFilterFunction.AddParameter("function_exp", Chr(34) & ucrReceiverElement.GetVariableNames(False) & ucrNudFrom.GetText & ucrNudTo.GetText & Chr(34))
     End Sub
 
     Private Sub ucrSelectorVariable_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorVariable.ControlContentsChanged
-        clsFilterFunction.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames() & ")")
+        DayBoundaries()
+        'clsFilterFunction.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames() & ")")
+    End Sub
+
+    Private Sub ucrReceiverDay_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDay.ControlValueChanged
+        DayBoundaries()
     End Sub
 End Class
