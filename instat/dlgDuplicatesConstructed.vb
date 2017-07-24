@@ -13,9 +13,8 @@
 '
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
-Imports instat.Translations
 
+Imports instat.Translations
 Public Class dlgDuplicatesConstructed
     Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
@@ -131,7 +130,6 @@ Public Class dlgDuplicatesConstructed
             clsDuplicated.AddParameter("x", ucrReceiverMultipleForDuplicates.GetVariableNames)
             ucrSelectorDuplicateswithVariables.SetVariablesVisible(True)
             ucrReceiverMultipleForDuplicates.Visible = True
-
         End If
     End Sub
 
@@ -142,6 +140,7 @@ Public Class dlgDuplicatesConstructed
             ucrBase.clsRsyntax.SetBaseRFunction(clsDuplicated)
         End If
     End Sub
+
     Private Sub ucrNewColumnName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlContentsChanged, ucrReceiverMultipleForDuplicates.ControlContentsChanged, ucrSelectorDuplicateswithVariables.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
         TestOKEnabled()
     End Sub
