@@ -22,11 +22,13 @@ Partial Class dlgDuplicatesConstructed
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.rdoDataframe = New System.Windows.Forms.RadioButton()
         Me.rdoSelectedVariables = New System.Windows.Forms.RadioButton()
         Me.rdoIndexnumberofduplicates = New System.Windows.Forms.RadioButton()
         Me.rdoDuplicatesonly = New System.Windows.Forms.RadioButton()
         Me.rdoAllduplicatecases = New System.Windows.Forms.RadioButton()
+        Me.ttDuplicates = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrPnlDuplicates = New instat.UcrPanel()
         Me.ucrNewColumnName = New instat.ucrSave()
         Me.ucrReceiverMultipleForDuplicates = New instat.ucrReceiverMultiple()
@@ -154,7 +156,7 @@ Partial Class dlgDuplicatesConstructed
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(410, 412)
+        Me.ClientSize = New System.Drawing.Size(410, 461)
         Me.Controls.Add(Me.rdoIndexnumberofduplicates)
         Me.Controls.Add(Me.rdoDuplicatesonly)
         Me.Controls.Add(Me.rdoAllduplicatecases)
@@ -188,4 +190,5 @@ Partial Class dlgDuplicatesConstructed
     Friend WithEvents rdoDuplicatesonly As RadioButton
     Friend WithEvents rdoAllduplicatecases As RadioButton
     Friend WithEvents ucrPnlDuplicates As UcrPanel
+    Friend WithEvents ttDuplicates As ToolTip
 End Class
