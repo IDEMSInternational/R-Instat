@@ -14,12 +14,17 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat.Translations
 Public Class sdgClimaticSummary
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
+    Private clsSummariseFunction, clsSumFunction, clsMinimaFunction, clsMaximaFunction, clsMeanFunction, clsMedianFunction, clsSdFunction As New RFunction
+    Private clsRSyntax As RSyntax
+
     Private Sub sdgClimaticSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'autoTranslate(Me)
+        autoTranslate(Me)
     End Sub
+
     Public Sub InitialiseControls()
         Dim dctOptions As New Dictionary(Of String, String)
         Dim dctPercentiles As New Dictionary(Of String, String)
@@ -76,10 +81,51 @@ Public Class sdgClimaticSummary
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewSummariseFunction As RFunction, clsNewSumFunction As RFunction, clsNewMinimaFunction As RFunction, clsNewMaximaFunction As RFunction, clsNewMeanFunction As RFunction, clsNewMedianFunction As RFunction, clsNewSdFunction As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
+        clsRSyntax = clsNewRSyntax
+        clsSummariseFunction = clsNewSummariseFunction
+        clsSumFunction = clsNewSumFunction
+        clsMinimaFunction = clsNewMinimaFunction
+        clsMaximaFunction = clsNewMaximaFunction
+        clsMeanFunction = clsNewMeanFunction
+        clsMedianFunction = clsNewMedianFunction
+        clsSdFunction = clsNewSdFunction
 
+
+    End Sub
+
+    Private Sub ucrPnlSummary_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlSummary.ControlContentsChanged
+        If rdoTotals.Checked Then
+            clsSummariseFunction.AddParameter("result_name", Chr(34) & "sum" & Chr(34))
+            clsSummariseFunction.AddParameter("function_exp", Chr(34) & clsSumFunction.ToScript() & Chr(34))
+            'clsRSyntax.AddToAfterCodes(clsSummariseFunction, iPosition:=1)
+        ElseIf rdoCounts.Checked Then
+            clsSummariseFunction.AddParameter("result_name", Chr(34) & "count" & Chr(34))
+            'clsSummariseFunction.AddParameter("function_exp", Chr(34) & clsSumFunction.ToScript() & Chr(34))
+            'clsRSyntax.AddToAfterCodes(clsSummariseFunction, iPosition:=1)
+        ElseIf rdoMaxima.Checked Then
+            clsSummariseFunction.AddParameter("result_name", Chr(34) & "max" & Chr(34))
+            clsSummariseFunction.AddParameter("function_exp", Chr(34) & clsMaximaFunction.ToScript() & Chr(34))
+            'clsRSyntax.AddToAfterCodes(clsSummariseFunction, iPosition:=1)
+        ElseIf rdoMinima.Checked Then
+            clsSummariseFunction.AddParameter("result_name", Chr(34) & "min" & Chr(34))
+            clsSummariseFunction.AddParameter("function_exp", Chr(34) & clsMinimaFunction.ToScript() & Chr(34))
+            'clsRSyntax.AddToAfterCodes(clsSummariseFunction, iPosition:=1)
+        ElseIf rdoMeans.Checked Then
+            clsSummariseFunction.AddParameter("result_name", Chr(34) & "mean" & Chr(34))
+            clsSummariseFunction.AddParameter("function_exp", Chr(34) & clsMeanFunction.ToScript() & Chr(34))
+            ' clsRSyntax.AddToAfterCodes(clsSummariseFunction, iPosition:=1)
+        ElseIf rdoMedians.Checked Then
+            clsSummariseFunction.AddParameter("result_name", Chr(34) & "median" & Chr(34))
+            clsSummariseFunction.AddParameter("function_exp", Chr(34) & clsMedianFunction.ToScript() & Chr(34))
+            'clsRSyntax.AddToAfterCodes(clsSummariseFunction, iPosition:=1)
+        ElseIf rdoStd.Checked Then
+            clsSummariseFunction.AddParameter("result_name", Chr(34) & "sd" & Chr(34))
+            clsSummariseFunction.AddParameter("function_exp", Chr(34) & clsSdFunction.ToScript() & Chr(34))
+            'clsRSyntax.AddToAfterCodes(clsSummariseFunction, iPosition:=1)
+        End If
     End Sub
 End Class
