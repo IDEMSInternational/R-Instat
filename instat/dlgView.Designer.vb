@@ -48,7 +48,7 @@ Partial Class dlgView
         Me.rdoHTMLOutputWindow = New System.Windows.Forms.RadioButton()
         Me.rdoViewAll = New System.Windows.Forms.RadioButton()
         Me.rdoViewSelectedColumnsRows = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlVewData = New instat.UcrPanel()
+        Me.ucrPnlViewData = New instat.UcrPanel()
         Me.ucrReceiverSortCol = New instat.ucrReceiverSingle()
         Me.ucrChkSortColumn = New instat.ucrCheck()
         Me.ucrNudNumberRows = New instat.ucrNud()
@@ -175,12 +175,12 @@ Partial Class dlgView
         Me.rdoViewSelectedColumnsRows.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoViewSelectedColumnsRows.UseVisualStyleBackColor = True
         '
-        'ucrPnlVewData
+        'ucrPnlViewData
         '
-        Me.ucrPnlVewData.Location = New System.Drawing.Point(48, 5)
-        Me.ucrPnlVewData.Name = "ucrPnlVewData"
-        Me.ucrPnlVewData.Size = New System.Drawing.Size(335, 35)
-        Me.ucrPnlVewData.TabIndex = 0
+        Me.ucrPnlViewData.Location = New System.Drawing.Point(52, 5)
+        Me.ucrPnlViewData.Name = "ucrPnlViewData"
+        Me.ucrPnlViewData.Size = New System.Drawing.Size(335, 35)
+        Me.ucrPnlViewData.TabIndex = 0
         '
         'ucrReceiverSortCol
         '
@@ -272,7 +272,7 @@ Partial Class dlgView
         Me.ClientSize = New System.Drawing.Size(416, 386)
         Me.Controls.Add(Me.rdoViewAll)
         Me.Controls.Add(Me.rdoViewSelectedColumnsRows)
-        Me.Controls.Add(Me.ucrPnlVewData)
+        Me.Controls.Add(Me.ucrPnlViewData)
         Me.Controls.Add(Me.ucrReceiverSortCol)
         Me.Controls.Add(Me.ucrChkSortColumn)
         Me.Controls.Add(Me.rdoHTMLOutputWindow)
@@ -320,5 +320,5 @@ Partial Class dlgView
     Friend WithEvents ucrReceiverSortCol As ucrReceiverSingle
     Friend WithEvents rdoViewAll As RadioButton
     Friend WithEvents rdoViewSelectedColumnsRows As RadioButton
-    Friend WithEvents ucrPnlVewData As UcrPanel
+    Friend WithEvents ucrPnlViewData As UcrPanel
 End Class
