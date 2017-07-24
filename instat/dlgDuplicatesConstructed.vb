@@ -95,10 +95,18 @@ Public Class dlgDuplicatesConstructed
     End Sub
 
     Private Sub TestOKEnabled()
-        If (Not ucrReceiverMultipleForDuplicates.IsEmpty OrElse ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "") AndAlso ucrNewColumnName.IsComplete Then
-            ucrBase.OKEnabled(True)
+        If rdoDataframe.Checked Then
+            If ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso ucrNewColumnName.IsComplete Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
         Else
-            ucrBase.OKEnabled(False)
+            If Not ucrReceiverMultipleForDuplicates.IsEmpty AndAlso ucrNewColumnName.IsComplete Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
         End If
     End Sub
 
@@ -134,7 +142,7 @@ Public Class dlgDuplicatesConstructed
             ucrBase.clsRsyntax.SetBaseRFunction(clsDuplicated)
         End If
     End Sub
-    Private Sub ucrNewColumnName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlContentsChanged, ucrReceiverMultipleForDuplicates.ControlContentsChanged
+    Private Sub ucrNewColumnName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlContentsChanged, ucrReceiverMultipleForDuplicates.ControlContentsChanged, ucrSelectorDuplicateswithVariables.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
