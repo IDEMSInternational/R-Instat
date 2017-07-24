@@ -72,21 +72,21 @@ Public Class dlgView
         ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispOutputWindow, {"head", "tail", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data"})
         ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoHTMLOutputWindow, "sjt.df")
 
-        ucrPnlVewData.AddRadioButton(rdoViewAll)
-        ucrPnlVewData.AddRadioButton(rdoViewSelectedColumnsRows)
+        ucrPnlViewData.AddRadioButton(rdoViewAll)
+        ucrPnlViewData.AddRadioButton(rdoViewSelectedColumnsRows)
 
-        ucrPnlVewData.AddFunctionNamesCondition(rdoViewAll, "View")
-        ucrPnlVewData.AddFunctionNamesCondition(rdoViewAll, {"head", "tail", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data"}, False)
-        ucrPnlVewData.AddFunctionNamesCondition(rdoViewAll, "sjt.df", False)
-        ucrPnlVewData.AddParameterIsRFunctionCondition(rdoViewAll, "x")
-        ucrPnlVewData.AddParameterPresentCondition(rdoViewAll, "title")
-        ucrPnlVewData.AddFunctionNamesCondition(rdoViewSelectedColumnsRows, "View")
-        ucrPnlVewData.AddParameterPresentCondition(rdoViewSelectedColumnsRows, "x")
-        ucrPnlVewData.bAllowNonConditionValues = True
+        ucrPnlViewData.AddFunctionNamesCondition(rdoViewAll, "View")
+        ucrPnlViewData.AddFunctionNamesCondition(rdoViewAll, {"head", "tail", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data"}, False)
+        ucrPnlViewData.AddFunctionNamesCondition(rdoViewAll, "sjt.df", False)
+        ucrPnlViewData.AddParameterIsRFunctionCondition(rdoViewAll, "x")
+        ucrPnlViewData.AddParameterPresentCondition(rdoViewAll, "title")
+        ucrPnlViewData.AddFunctionNamesCondition(rdoViewSelectedColumnsRows, "View")
+        ucrPnlViewData.AddParameterPresentCondition(rdoViewSelectedColumnsRows, "x")
+        ucrPnlViewData.bAllowNonConditionValues = True
 
-        ucrPnlVewData.AddToLinkedControls(ucrReceiverView, {rdoViewSelectedColumnsRows}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlViewData.AddToLinkedControls(ucrReceiverView, {rdoViewSelectedColumnsRows}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrReceiverView.SetLinkedDisplayControl(lblSelected)
-        ucrPnlVewData.AddToLinkedControls(ucrPnlDisplayWindow, {rdoViewSelectedColumnsRows}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlViewData.AddToLinkedControls(ucrPnlDisplayWindow, {rdoViewSelectedColumnsRows}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
         ucrChkSortColumn.Visible = False
         'ucrPnlDisplayWindow.AddToLinkedControls(ucrChkSortColumn, {rdoHTMLOutputWindow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
@@ -148,7 +148,7 @@ Public Class dlgView
         ucrReceiverView.AddAdditionalCodeParameterPair(clsOutputWindowFunction, New RParameter("x"), iAdditionalPairNo:=2)
         DataFrameLength()
         ChangeFunctionParameters()
-        ucrPnlVewData.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset, bReset)
+        ucrPnlViewData.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset, bReset)
         bControlsUpdated = True
     End Sub
 
@@ -242,11 +242,11 @@ Public Class dlgView
         End If
     End Sub
 
-    Private Sub ucrReceiverView_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverView.ControlContentsChanged, ucrPnlDisplayWindow.ControlContentsChanged, ucrChkSpecifyRows.ControlContentsChanged, ucrNudNumberRows.ControlContentsChanged, ucrPnlDisplayFrom.ControlContentsChanged, ucrChkSortColumn.ControlContentsChanged, ucrReceiverSortCol.ControlContentsChanged, ucrPnlVewData.ControlContentsChanged
+    Private Sub ucrReceiverView_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverView.ControlContentsChanged, ucrPnlDisplayWindow.ControlContentsChanged, ucrChkSpecifyRows.ControlContentsChanged, ucrNudNumberRows.ControlContentsChanged, ucrPnlDisplayFrom.ControlContentsChanged, ucrChkSortColumn.ControlContentsChanged, ucrReceiverSortCol.ControlContentsChanged, ucrPnlViewData.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrPnlVewData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlVewData.ControlValueChanged
+    Private Sub ucrPnlVewData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlViewData.ControlValueChanged
         ChangeFunctionParameters()
         SelectorAndDataframe()
     End Sub
