@@ -138,7 +138,7 @@ Partial Class dlgClimaticSummary
         'lblYear
         '
         Me.lblYear.AutoSize = True
-        Me.lblYear.Location = New System.Drawing.Point(288, 154)
+        Me.lblYear.Location = New System.Drawing.Point(288, 156)
         Me.lblYear.Name = "lblYear"
         Me.lblYear.Size = New System.Drawing.Size(32, 13)
         Me.lblYear.TabIndex = 28
@@ -147,7 +147,7 @@ Partial Class dlgClimaticSummary
         'lblDay
         '
         Me.lblDay.AutoSize = True
-        Me.lblDay.Location = New System.Drawing.Point(288, 193)
+        Me.lblDay.Location = New System.Drawing.Point(288, 203)
         Me.lblDay.Name = "lblDay"
         Me.lblDay.Size = New System.Drawing.Size(107, 13)
         Me.lblDay.TabIndex = 29
@@ -211,7 +211,7 @@ Partial Class dlgClimaticSummary
         'lblMonth
         '
         Me.lblMonth.AutoSize = True
-        Me.lblMonth.Location = New System.Drawing.Point(294, 289)
+        Me.lblMonth.Location = New System.Drawing.Point(293, 289)
         Me.lblMonth.Name = "lblMonth"
         Me.lblMonth.Size = New System.Drawing.Size(40, 13)
         Me.lblMonth.TabIndex = 41
@@ -299,7 +299,7 @@ Partial Class dlgClimaticSummary
         'ucrReceiverDay
         '
         Me.ucrReceiverDay.frmParent = Me
-        Me.ucrReceiverDay.Location = New System.Drawing.Point(291, 206)
+        Me.ucrReceiverDay.Location = New System.Drawing.Point(291, 219)
         Me.ucrReceiverDay.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDay.Name = "ucrReceiverDay"
         Me.ucrReceiverDay.Selector = Nothing
@@ -311,7 +311,7 @@ Partial Class dlgClimaticSummary
         'ucrReceiverYear
         '
         Me.ucrReceiverYear.frmParent = Me
-        Me.ucrReceiverYear.Location = New System.Drawing.Point(291, 167)
+        Me.ucrReceiverYear.Location = New System.Drawing.Point(291, 171)
         Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverYear.Name = "ucrReceiverYear"
         Me.ucrReceiverYear.Selector = Nothing
@@ -348,7 +348,7 @@ Partial Class dlgClimaticSummary
         '
         Me.ucrSelectorVariable.bShowHiddenColumns = False
         Me.ucrSelectorVariable.bUseCurrentFilter = True
-        Me.ucrSelectorVariable.Location = New System.Drawing.Point(10, 93)
+        Me.ucrSelectorVariable.Location = New System.Drawing.Point(10, 87)
         Me.ucrSelectorVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorVariable.Name = "ucrSelectorVariable"
         Me.ucrSelectorVariable.Size = New System.Drawing.Size(210, 180)
