@@ -289,6 +289,12 @@
     <Compile Include="dlgDrySpells.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgDuplicatesConstructed.Designer.vb">
+      <DependentUpon>dlgDuplicatesConstructed.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDuplicatesConstructed.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgEnter.Designer.vb">
       <DependentUpon>dlgEnter.vb</DependentUpon>
     </Compile>
@@ -624,6 +630,12 @@
       <DependentUpon>sdgAddNewDistribution.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgAddNewDistribution.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgClimaticSummary.Designer.vb">
+      <DependentUpon>sdgClimaticSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgClimaticSummary.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgClimdexIndices.Designer.vb">
@@ -2505,6 +2517,9 @@
     <EmbeddedResource Include="dlgDisplayDailyClimaticData.resx">
       <DependentUpon>dlgDisplayDailyClimaticData.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgDuplicatesConstructed.resx">
+      <DependentUpon>dlgDuplicatesConstructed.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgEnter.resx">
       <DependentUpon>dlgEnter.vb</DependentUpon>
     </EmbeddedResource>
@@ -3134,6 +3149,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgCanonicalCorrelation.sw-KE.resx">
       <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgClimaticSummary.resx">
+      <DependentUpon>sdgClimaticSummary.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgClimdexIndices.resx">
       <DependentUpon>sdgClimdexIndices.vb</DependentUpon>
