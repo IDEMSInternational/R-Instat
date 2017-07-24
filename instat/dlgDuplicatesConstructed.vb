@@ -54,6 +54,10 @@ Public Class dlgDuplicatesConstructed
         ucrPnlDuplicates.AddFunctionNamesCondition(rdoDuplicatesonly, "duplicated")
         rdoIndexnumberofduplicates.Enabled = False 'for now until it's working properly
 
+        ttDuplicates.SetToolTip(rdoAllduplicatecases, "All cases are given as being duplicate rows")
+        ttDuplicates.SetToolTip(rdoDuplicatesonly, "The first occurrence is not indicated, but further instances are considered duplicates")
+        ttDuplicates.SetToolTip(rdoIndexnumberofduplicates, "Any duplicates are given their index number")
+
         ucrNewColumnName.SetPrefix("Dup")
         ucrNewColumnName.SetDataFrameSelector(ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames)
         ucrNewColumnName.SetIsComboBox()
