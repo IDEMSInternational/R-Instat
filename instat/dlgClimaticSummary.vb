@@ -242,6 +242,7 @@ Public Class dlgClimaticSummary
         ucrNudMonth.SetRCode(clsMonthOperator, bReset)
         ucrReceiverElement.SetRCode(clsSumFunction, bReset)
         ucrInputSave.SetRCode(clsSummariseFunction, bReset)
+        'ucrPnlAnnual.SetRCode(clsDayFromAndTo, bReset)
     End Sub
 
     Private Sub SetAssignName()
@@ -285,14 +286,15 @@ Public Class dlgClimaticSummary
         SetAssignName()
         If rdoAnnual.Checked Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsDayFromAndTo, iPosition:=2)
-        ElseIf rdoAnnualVariable.Checked Then
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsMonthFunction)
+        ElseIf rdoAnnualVariable.Checked Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsMonthFunction, iPosition:=3)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsMonthFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDayFromAndTo)
         ElseIf rdoWithinYear.Checked Then
-            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDayFromAndTo)
             ucrBase.clsRsyntax.AddToAfterCodes(clsMonthFunction, iPosition:=3)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDayFromAndTo)
+
         End If
     End Sub
 

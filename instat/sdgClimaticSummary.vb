@@ -54,7 +54,6 @@ Public Class sdgClimaticSummary
         dctOptions.Add("<=", "<=")
         ucrInputComboOptions.SetItems(dctOptions)
         ucrInputComboOptions.SetDropDownStyleAsNonEditable()
-        'ucrInputComboCount.SetName("<")
 
         ucrInputPercentiles.SetParameter(New RParameter("function_exp"))
         dctPercentiles.Add("50", "50")
@@ -74,10 +73,10 @@ Public Class sdgClimaticSummary
         'ucrInputComboProportions.SetDropDownStyleAsNonEditable()
 
         'linking controls
-        ucrPnlSummary.AddToLinkedControls({ucrInputComboOptions, ucrNudValue}, {rdoCounts}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="<")
+        ucrPnlSummary.AddToLinkedControls({ucrInputComboOptions}, {rdoCounts, rdoProportions}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="<")
         ucrPnlSummary.AddToLinkedControls(ucrInputPercentiles, {rdoPercentiles}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlSummary.AddToLinkedControls({ucrInputComboOptions, ucrInputNumbers, ucrChkPercentages}, {rdoProportions}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrPnlSummary.AddToLinkedControls(ucrInputOptions, {rdoCounts}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlSummary.AddToLinkedControls({ucrInputNumbers, ucrChkPercentages}, {rdoProportions}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlSummary.AddToLinkedControls(ucrNudValue, {rdoCounts}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         'ucrPnlSummary.AddToLinkedControls(ucrInputOptions, {rdoCounts}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         bControlsInitialised = True
@@ -98,6 +97,8 @@ Public Class sdgClimaticSummary
         clsSdFunction = clsNewSdFunction
         clsCountFunction = clsNewCountFunction
         CountFuncExp()
+        ucrInputComboOptions.SetRCode(clsCountFunction, bReset)
+        'ucrPnlSummary.SetRCode(clsSumFunction, bReset)
     End Sub
 
     Private Sub CountFuncExp()
