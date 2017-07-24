@@ -18,8 +18,9 @@ Imports instat.Translations
 Public Class sdgClimaticSummary
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
-    Private clsSummariseFunction, clsSumFunction, clsMinimaFunction, clsMaximaFunction, clsMeanFunction, clsMedianFunction, clsSdFunction As New RFunction
+    Private clsSummariseFunction, clsSumFunction, clsMinimaFunction, clsMaximaFunction, clsMeanFunction, clsMedianFunction, clsSdFunction, clsCountFunction As New RFunction
     Private clsRSyntax As RSyntax
+    Private strTempFuc As String
 
     Private Sub sdgClimaticSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -45,14 +46,15 @@ Public Class sdgClimaticSummary
 
         ucrInputNumbers.SetValidationTypeAsNumeric()
 
-        ucrInputOptions.SetParameter(New RParameter("function_exp"))
+        ucrInputComboOptions.SetParameter(New RParameter("function_exp"))
         dctOptions.Add(">", ">")
         dctOptions.Add(">=", ">=")
         dctOptions.Add("=", "=")
         dctOptions.Add("<", "<")
         dctOptions.Add("<=", "<=")
-        ucrInputOptions.SetItems(dctOptions)
-        ucrInputOptions.SetDropDownStyleAsNonEditable()
+        ucrInputComboOptions.SetItems(dctOptions)
+        ucrInputComboOptions.SetDropDownStyleAsNonEditable()
+        'ucrInputComboCount.SetName("<")
 
         ucrInputPercentiles.SetParameter(New RParameter("function_exp"))
         dctPercentiles.Add("50", "50")
@@ -62,30 +64,31 @@ Public Class sdgClimaticSummary
         dctPercentiles.Add("80,90,95", "80,90,95")
         ucrInputPercentiles.SetItems(dctPercentiles)
 
-        ucrInputProportions.SetParameter(New RParameter("function_exp"))
-        dctProportions.Add(">", ">")
-        dctProportions.Add(">=", ">=")
-        dctProportions.Add("=", "=")
-        dctProportions.Add("<", "<")
-        dctProportions.Add("<=", "<=")
-        ucrInputProportions.SetItems(dctProportions)
-        ucrInputProportions.SetDropDownStyleAsNonEditable()
+        'ucrInputComboProportions.SetParameter(New RParameter("function_exp"))
+        'dctProportions.Add(">", ">")
+        'dctProportions.Add(">=", ">=")
+        'dctProportions.Add("=", "=")
+        'dctProportions.Add("<", "<")
+        'dctProportions.Add("<=", "<=")
+        'ucrInputComboProportions.SetItems(dctProportions)
+        'ucrInputComboProportions.SetDropDownStyleAsNonEditable()
 
         'linking controls
-        ucrPnlSummary.AddToLinkedControls({ucrInputOptions, ucrNudValue}, {rdoCounts}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlSummary.AddToLinkedControls({ucrInputComboOptions, ucrNudValue}, {rdoCounts}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="<")
         ucrPnlSummary.AddToLinkedControls(ucrInputPercentiles, {rdoPercentiles}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlSummary.AddToLinkedControls({ucrInputProportions, ucrInputNumbers, ucrChkPercentages}, {rdoProportions}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlSummary.AddToLinkedControls({ucrInputComboOptions, ucrInputNumbers, ucrChkPercentages}, {rdoProportions}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         'ucrPnlSummary.AddToLinkedControls(ucrInputOptions, {rdoCounts}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         'ucrPnlSummary.AddToLinkedControls(ucrInputOptions, {rdoCounts}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewSummariseFunction As RFunction, clsNewSumFunction As RFunction, clsNewMinimaFunction As RFunction, clsNewMaximaFunction As RFunction, clsNewMeanFunction As RFunction, clsNewMedianFunction As RFunction, clsNewSdFunction As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewSummariseFunction As RFunction, clsNewSumFunction As RFunction, clsNewMinimaFunction As RFunction, clsNewMaximaFunction As RFunction, clsNewMeanFunction As RFunction, clsNewMedianFunction As RFunction, clsNewSdFunction As RFunction, clsNewCountFunction As RFunction, strNewTempFuc As String, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
         clsRSyntax = clsNewRSyntax
+        strTempFuc = strNewTempFuc
         clsSummariseFunction = clsNewSummariseFunction
         clsSumFunction = clsNewSumFunction
         clsMinimaFunction = clsNewMinimaFunction
@@ -93,39 +96,40 @@ Public Class sdgClimaticSummary
         clsMeanFunction = clsNewMeanFunction
         clsMedianFunction = clsNewMedianFunction
         clsSdFunction = clsNewSdFunction
+        clsCountFunction = clsNewCountFunction
+        CountFuncExp()
+    End Sub
 
-
+    Private Sub CountFuncExp()
+        clsCountFunction.AddParameter("", Chr(34) & strTempFuc & ucrInputComboOptions.cboInput.SelectedItem & ucrNudValue.GetText & Chr(34))
     End Sub
 
     Private Sub ucrPnlSummary_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlSummary.ControlContentsChanged
         If rdoTotals.Checked Then
             clsSummariseFunction.AddParameter("result_name", Chr(34) & "sum" & Chr(34))
             clsSummariseFunction.AddParameter("function_exp", Chr(34) & clsSumFunction.ToScript() & Chr(34))
-            'clsRSyntax.AddToAfterCodes(clsSummariseFunction, iPosition:=1)
         ElseIf rdoCounts.Checked Then
             clsSummariseFunction.AddParameter("result_name", Chr(34) & "count" & Chr(34))
-            'clsSummariseFunction.AddParameter("function_exp", Chr(34) & clsSumFunction.ToScript() & Chr(34))
-            'clsRSyntax.AddToAfterCodes(clsSummariseFunction, iPosition:=1)
+            clsSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsCountFunction)
         ElseIf rdoMaxima.Checked Then
             clsSummariseFunction.AddParameter("result_name", Chr(34) & "max" & Chr(34))
             clsSummariseFunction.AddParameter("function_exp", Chr(34) & clsMaximaFunction.ToScript() & Chr(34))
-            'clsRSyntax.AddToAfterCodes(clsSummariseFunction, iPosition:=1)
         ElseIf rdoMinima.Checked Then
             clsSummariseFunction.AddParameter("result_name", Chr(34) & "min" & Chr(34))
             clsSummariseFunction.AddParameter("function_exp", Chr(34) & clsMinimaFunction.ToScript() & Chr(34))
-            'clsRSyntax.AddToAfterCodes(clsSummariseFunction, iPosition:=1)
         ElseIf rdoMeans.Checked Then
             clsSummariseFunction.AddParameter("result_name", Chr(34) & "mean" & Chr(34))
             clsSummariseFunction.AddParameter("function_exp", Chr(34) & clsMeanFunction.ToScript() & Chr(34))
-            ' clsRSyntax.AddToAfterCodes(clsSummariseFunction, iPosition:=1)
         ElseIf rdoMedians.Checked Then
             clsSummariseFunction.AddParameter("result_name", Chr(34) & "median" & Chr(34))
             clsSummariseFunction.AddParameter("function_exp", Chr(34) & clsMedianFunction.ToScript() & Chr(34))
-            'clsRSyntax.AddToAfterCodes(clsSummariseFunction, iPosition:=1)
         ElseIf rdoStd.Checked Then
             clsSummariseFunction.AddParameter("result_name", Chr(34) & "sd" & Chr(34))
             clsSummariseFunction.AddParameter("function_exp", Chr(34) & clsSdFunction.ToScript() & Chr(34))
-            'clsRSyntax.AddToAfterCodes(clsSummariseFunction, iPosition:=1)
         End If
+    End Sub
+
+    Private Sub ucrInputComboOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboOptions.ControlValueChanged
+        CountFuncExp()
     End Sub
 End Class
