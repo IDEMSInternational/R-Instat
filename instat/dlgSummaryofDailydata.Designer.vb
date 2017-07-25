@@ -33,6 +33,13 @@ Partial Class dlgSummaryofDailydata
         Me.lblData = New System.Windows.Forms.Label()
         Me.ucrReceiverData = New instat.ucrReceiverSingle()
         Me.ucrSelectorSummaryofDailyData = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrChkStoreResults = New instat.ucrCheck()
+        Me.ucrChkOmitMissing = New instat.ucrCheck()
+        Me.ucrChkPrintOutput = New instat.ucrCheck()
+        Me.ucrChkDropUnusedLevels = New instat.ucrCheck()
+        Me.cmdSummaries = New System.Windows.Forms.Button()
+        Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblStation
@@ -150,11 +157,68 @@ Partial Class dlgSummaryofDailydata
         Me.ucrSelectorSummaryofDailyData.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorSummaryofDailyData.TabIndex = 11
         '
+        'grpOptions
+        '
+        Me.grpOptions.Controls.Add(Me.ucrChkStoreResults)
+        Me.grpOptions.Controls.Add(Me.ucrChkOmitMissing)
+        Me.grpOptions.Controls.Add(Me.ucrChkPrintOutput)
+        Me.grpOptions.Controls.Add(Me.ucrChkDropUnusedLevels)
+        Me.grpOptions.Location = New System.Drawing.Point(9, 238)
+        Me.grpOptions.Name = "grpOptions"
+        Me.grpOptions.Size = New System.Drawing.Size(160, 121)
+        Me.grpOptions.TabIndex = 22
+        Me.grpOptions.TabStop = False
+        Me.grpOptions.Text = "Options"
+        '
+        'ucrChkStoreResults
+        '
+        Me.ucrChkStoreResults.Checked = False
+        Me.ucrChkStoreResults.Location = New System.Drawing.Point(6, 17)
+        Me.ucrChkStoreResults.Name = "ucrChkStoreResults"
+        Me.ucrChkStoreResults.Size = New System.Drawing.Size(148, 20)
+        Me.ucrChkStoreResults.TabIndex = 0
+        '
+        'ucrChkOmitMissing
+        '
+        Me.ucrChkOmitMissing.Checked = False
+        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(6, 92)
+        Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
+        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(148, 20)
+        Me.ucrChkOmitMissing.TabIndex = 3
+        '
+        'ucrChkPrintOutput
+        '
+        Me.ucrChkPrintOutput.Checked = False
+        Me.ucrChkPrintOutput.Location = New System.Drawing.Point(6, 42)
+        Me.ucrChkPrintOutput.Name = "ucrChkPrintOutput"
+        Me.ucrChkPrintOutput.Size = New System.Drawing.Size(148, 20)
+        Me.ucrChkPrintOutput.TabIndex = 1
+        '
+        'ucrChkDropUnusedLevels
+        '
+        Me.ucrChkDropUnusedLevels.Checked = False
+        Me.ucrChkDropUnusedLevels.Location = New System.Drawing.Point(6, 67)
+        Me.ucrChkDropUnusedLevels.Name = "ucrChkDropUnusedLevels"
+        Me.ucrChkDropUnusedLevels.Size = New System.Drawing.Size(148, 20)
+        Me.ucrChkDropUnusedLevels.TabIndex = 2
+        '
+        'cmdSummaries
+        '
+        Me.cmdSummaries.Location = New System.Drawing.Point(263, 247)
+        Me.cmdSummaries.Name = "cmdSummaries"
+        Me.cmdSummaries.Size = New System.Drawing.Size(77, 23)
+        Me.cmdSummaries.TabIndex = 23
+        Me.cmdSummaries.Tag = "Summaries"
+        Me.cmdSummaries.Text = "Summaries..."
+        Me.cmdSummaries.UseVisualStyleBackColor = True
+        '
         'dlgSummaryofDailydata
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(426, 463)
+        Me.ClientSize = New System.Drawing.Size(426, 368)
+        Me.Controls.Add(Me.grpOptions)
+        Me.Controls.Add(Me.cmdSummaries)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrReceiverStation)
         Me.Controls.Add(Me.ucrReceiverYear)
@@ -172,6 +236,7 @@ Partial Class dlgSummaryofDailydata
         Me.Name = "dlgSummaryofDailydata"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Summary of Daily Data"
+        Me.grpOptions.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -188,4 +253,10 @@ Partial Class dlgSummaryofDailydata
     Friend WithEvents lblData As Label
     Friend WithEvents ucrReceiverData As ucrReceiverSingle
     Friend WithEvents ucrSelectorSummaryofDailyData As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents grpOptions As GroupBox
+    Friend WithEvents ucrChkStoreResults As ucrCheck
+    Friend WithEvents ucrChkOmitMissing As ucrCheck
+    Friend WithEvents ucrChkPrintOutput As ucrCheck
+    Friend WithEvents ucrChkDropUnusedLevels As ucrCheck
+    Friend WithEvents cmdSummaries As Button
 End Class
