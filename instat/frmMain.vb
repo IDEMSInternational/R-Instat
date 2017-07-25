@@ -1653,4 +1653,8 @@ Public Class frmMain
     Private Sub BoxplotsConceptualisedAndConstructedToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BoxplotsConceptualisedAndConstructedToolStripMenuItem.Click
         dlgCliBoxplot.ShowDialog()
     End Sub
+
+    Private Sub SummaryOfDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SummaryOfDailyDataToolStripMenuItem.Click
+        dlgSummaryofDailydata.ShowDialog()
+    End Sub
 End Class
