@@ -1645,4 +1645,8 @@ Public Class frmMain
             strSaveFilePath = ""
         End If
     End Sub
+
+    Private Sub DuplicatesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DuplicatesToolStripMenuItem.Click
+        dlgDuplicatesConstructed.ShowDialog()
+    End Sub
 End Class
