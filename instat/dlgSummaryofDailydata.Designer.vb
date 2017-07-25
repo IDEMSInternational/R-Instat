@@ -39,6 +39,7 @@ Partial Class dlgSummaryofDailydata
         Me.ucrChkPrintOutput = New instat.ucrCheck()
         Me.ucrChkDropUnusedLevels = New instat.ucrCheck()
         Me.cmdSummaries = New System.Windows.Forms.Button()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -212,11 +213,19 @@ Partial Class dlgSummaryofDailydata
         Me.cmdSummaries.Text = "Summaries..."
         Me.cmdSummaries.UseVisualStyleBackColor = True
         '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(9, 372)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(402, 53)
+        Me.ucrBase.TabIndex = 24
+        '
         'dlgSummaryofDailydata
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(426, 368)
+        Me.ClientSize = New System.Drawing.Size(426, 437)
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.cmdSummaries)
         Me.Controls.Add(Me.lblStation)
@@ -259,4 +268,5 @@ Partial Class dlgSummaryofDailydata
     Friend WithEvents ucrChkPrintOutput As ucrCheck
     Friend WithEvents ucrChkDropUnusedLevels As ucrCheck
     Friend WithEvents cmdSummaries As Button
+    Friend WithEvents ucrBase As ucrButtons
 End Class
