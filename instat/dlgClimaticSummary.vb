@@ -20,7 +20,7 @@ Public Class dlgClimaticSummary
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
     Private clsGroupByFunction, clsDayFromAndTo, clsMonthFunction, clsSummariseFunction, clsManipulationsFunction, clsRunCalcFunction As RFunction
-    Private clsSumFunction, clsMaximaFunction, clsMinimaFunction, clsMeanFunction, clsMedianFunction, clsSdFunction, clsCountFunction As RFunction
+    Private clsSumFunction, clsMaximaFunction, clsMinimaFunction, clsMeanFunction, clsMedianFunction, clsSdFunction, clsCountFunction, clsLengthFunction, clsPropFunction As RFunction
     Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator, clsMonthOperator As ROperator
     Dim strCurrDataName As String = ""
     Private strTempFuc As String = ""
@@ -82,6 +82,14 @@ Public Class dlgClimaticSummary
         ucrReceiverFrom.Selector = ucrSelectorVariable
         ucrReceiverTo.Selector = ucrSelectorVariable
 
+        ucrReceiverMonth.SetParameter(New RParameter("month", 0))
+        ucrReceiverMonth.SetParameterIsRFunction()
+        ucrReceiverMonth.bWithQuotes = False
+        ucrReceiverMonth.strSelectorHeading = "Variables"
+        ucrReceiverMonth.Selector = ucrSelectorVariable
+        ucrReceiverMonth.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "month" & Chr(34)})
+        ucrReceiverMonth.bAutoFill = True
+
         'setting up Nuds
         ucrNudFrom.SetParameter(New RParameter("from", 1))
         ucrNudFrom.SetMinMax(1, 365)
@@ -89,7 +97,7 @@ Public Class dlgClimaticSummary
         ucrNudTo.SetParameter(New RParameter("to", 1))
         ucrNudTo.SetMinMax(2, 366)
 
-        ucrNudMonth.SetMinMax(1, 12)
+        'ucrNudMonth.SetMinMax(1, 12)
 
         'panel setting
         ucrPnlAnnual.AddRadioButton(rdoAnnual)
@@ -101,12 +109,12 @@ Public Class dlgClimaticSummary
         'linking controls
         ucrPnlAnnual.AddToLinkedControls({ucrNudFrom, ucrNudTo}, {rdoAnnual}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlAnnual.AddToLinkedControls({ucrReceiverFrom, ucrReceiverTo}, {rdoAnnualVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlAnnual.AddToLinkedControls({ucrNudMonth}, {rdoWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlAnnual.AddToLinkedControls({ucrReceiverMonth}, {rdoWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudFrom.SetLinkedDisplayControl(lblFrom)
         ucrNudTo.SetLinkedDisplayControl(lblTo)
         ucrReceiverFrom.SetLinkedDisplayControl(lblReceiverFrom)
         ucrReceiverTo.SetLinkedDisplayControl(lblReceiverTo)
-        ucrNudMonth.SetLinkedDisplayControl(lblMonth)
+        ucrReceiverElement.SetLinkedDisplayControl(lblMonth)
 
     End Sub
 
@@ -125,6 +133,8 @@ Public Class dlgClimaticSummary
         clsMedianFunction = New RFunction
         clsSdFunction = New RFunction
         clsCountFunction = New RFunction
+        clsLengthFunction = New RFunction
+        clsPropFunction = New RFunction
 
         clsDayFromOperator = New ROperator
         clsDayToOperator = New ROperator
@@ -170,7 +180,8 @@ Public Class dlgClimaticSummary
         clsMeanFunction.SetRCommand("mean")
         clsMedianFunction.SetRCommand("median")
         clsSdFunction.SetRCommand("sd")
-        clsCountFunction.SetRCommand("sum")
+        clsCountFunction.SetRCommand("which")
+        clsLengthFunction.SetRCommand("length")
 
         clsSumFunction.AddParameter("na.rm", "TRUE")
         clsMaximaFunction.AddParameter("na.rm", "TRUE")
@@ -239,7 +250,7 @@ Public Class dlgClimaticSummary
         ucrReceiverDay.SetRCode(clsDayToOperator, bReset)
         ucrNudFrom.SetRCode(clsDayFromOperator, bReset)
         ucrNudTo.SetRCode(clsDayToOperator, bReset)
-        ucrNudMonth.SetRCode(clsMonthOperator, bReset)
+        ucrReceiverMonth.SetRCode(clsMonthOperator, bReset)
         ucrReceiverElement.SetRCode(clsSumFunction, bReset)
         ucrInputSave.SetRCode(clsSummariseFunction, bReset)
         'ucrPnlAnnual.SetRCode(clsDayFromAndTo, bReset)
@@ -248,7 +259,6 @@ Public Class dlgClimaticSummary
     Private Sub SetAssignName()
         If Not ucrInputSave.bUserTyped Then
             If rdoAnnual.Checked Then
-                'If rdoMax.Checked Then
                 ucrInputSave.SetName("Annual_summarry")
             ElseIf rdoAnnualVariable.Checked Then
                 ucrInputSave.SetName("Annual_variable_summary")
@@ -273,7 +283,7 @@ Public Class dlgClimaticSummary
     End Sub
 
     Private Sub cmdSummary_Click(sender As Object, e As EventArgs) Handles cmdSummary.Click
-        sdgClimaticSummary.SetRCode(ucrBase.clsRsyntax, clsSummariseFunction, clsSumFunction, clsMinimaFunction, clsMaximaFunction, clsMeanFunction, clsMedianFunction, clsSdFunction, clsCountFunction, strTempFuc, bReset:=bResetSubdialog)
+        sdgClimaticSummary.SetRCode(ucrBase.clsRsyntax, clsSummariseFunction, clsSumFunction, clsMinimaFunction, clsMaximaFunction, clsMeanFunction, clsMedianFunction, clsSdFunction, clsCountFunction, strTempFuc, clsLengthFunction, bReset:=bResetSubdialog)
         bResetSubdialog = False
         sdgClimaticSummary.ShowDialog()
     End Sub
@@ -294,7 +304,6 @@ Public Class dlgClimaticSummary
         ElseIf rdoWithinYear.Checked Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsMonthFunction, iPosition:=3)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDayFromAndTo)
-
         End If
     End Sub
 
@@ -309,7 +318,7 @@ Public Class dlgClimaticSummary
 
     Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlValueChanged
         SetSummaryParams()
-        strTempFuc = ucrReceiverElement.GetVariableNames(False)
+        strTempFuc = ucrReceiverElement.GetVariableNames()
     End Sub
 
     Private Sub ucrReceiverDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDay.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged
