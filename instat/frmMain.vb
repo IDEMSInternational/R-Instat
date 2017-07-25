@@ -1649,4 +1649,8 @@ Public Class frmMain
     Private Sub DuplicatesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DuplicatesToolStripMenuItem.Click
         dlgDuplicatesConstructed.ShowDialog()
     End Sub
+
+    Private Sub BoxplotsConceptualisedAndConstructedToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BoxplotsConceptualisedAndConstructedToolStripMenuItem.Click
+        dlgCliBoxplot.ShowDialog()
+    End Sub
 End Class
