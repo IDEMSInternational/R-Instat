@@ -66,7 +66,7 @@ Partial Class dlgClimaticSummary
         Me.ucrSelectorVariable = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlAnnual = New instat.UcrPanel()
-        Me.ucrNudMonth = New instat.ucrNud()
+        Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
         'rdoAnnual
@@ -368,24 +368,24 @@ Partial Class dlgClimaticSummary
         Me.ucrPnlAnnual.Size = New System.Drawing.Size(381, 64)
         Me.ucrPnlAnnual.TabIndex = 18
         '
-        'ucrNudMonth
+        'ucrReceiverMonth
         '
-        Me.ucrNudMonth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMonth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMonth.Location = New System.Drawing.Point(292, 305)
-        Me.ucrNudMonth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudMonth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMonth.Name = "ucrNudMonth"
-        Me.ucrNudMonth.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudMonth.TabIndex = 44
-        Me.ucrNudMonth.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrReceiverMonth.frmParent = Me
+        Me.ucrReceiverMonth.Location = New System.Drawing.Point(291, 302)
+        Me.ucrReceiverMonth.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMonth.Name = "ucrReceiverMonth"
+        Me.ucrReceiverMonth.Selector = Nothing
+        Me.ucrReceiverMonth.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverMonth.strNcFilePath = ""
+        Me.ucrReceiverMonth.TabIndex = 44
+        Me.ucrReceiverMonth.ucrSelector = Nothing
         '
         'dlgClimaticSummary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(428, 497)
-        Me.Controls.Add(Me.ucrNudMonth)
+        Me.Controls.Add(Me.ucrReceiverMonth)
         Me.Controls.Add(Me.lblNewColName)
         Me.Controls.Add(Me.ucrInputSave)
         Me.Controls.Add(Me.lblMonth)
@@ -453,5 +453,5 @@ Partial Class dlgClimaticSummary
     Friend WithEvents lblMonth As Label
     Friend WithEvents lblNewColName As Label
     Friend WithEvents ucrInputSave As ucrInputTextBox
-    Friend WithEvents ucrNudMonth As ucrNud
+    Friend WithEvents ucrReceiverMonth As ucrReceiverSingle
 End Class
