@@ -259,7 +259,7 @@ Partial Class dlgTransformClimatic
         'ucrChkValuesUnderThreshold
         '
         Me.ucrChkValuesUnderThreshold.Checked = False
-        Me.ucrChkValuesUnderThreshold.Location = New System.Drawing.Point(16, 46)
+        Me.ucrChkValuesUnderThreshold.Location = New System.Drawing.Point(12, 315)
         Me.ucrChkValuesUnderThreshold.Name = "ucrChkValuesUnderThreshold"
         Me.ucrChkValuesUnderThreshold.Size = New System.Drawing.Size(186, 20)
         Me.ucrChkValuesUnderThreshold.TabIndex = 0
@@ -278,7 +278,7 @@ Partial Class dlgTransformClimatic
         '
         Me.ucrNudCountOver.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCountOver.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudCountOver.Location = New System.Drawing.Point(81, 19)
+        Me.ucrNudCountOver.Location = New System.Drawing.Point(224, 323)
         Me.ucrNudCountOver.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudCountOver.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCountOver.Name = "ucrNudCountOver"
@@ -298,18 +298,14 @@ Partial Class dlgTransformClimatic
         '
         'grpTransform
         '
-        Me.grpTransform.Controls.Add(Me.ucrInputSpellLower)
         Me.grpTransform.Controls.Add(Me.ucrInputSpellUpper)
         Me.grpTransform.Controls.Add(Me.lblSpellAnd)
-        Me.grpTransform.Controls.Add(Me.ucrChkValuesUnderThreshold)
         Me.grpTransform.Controls.Add(Me.lblSumRows)
         Me.grpTransform.Controls.Add(Me.ucrInputEvaporation)
-        Me.grpTransform.Controls.Add(Me.lblValuesBetween)
         Me.grpTransform.Controls.Add(Me.lblWBEvaporation)
         Me.grpTransform.Controls.Add(Me.lblCountRows)
         Me.grpTransform.Controls.Add(Me.ucrNudSumOver)
         Me.grpTransform.Controls.Add(Me.lblWBCapacity)
-        Me.grpTransform.Controls.Add(Me.ucrNudCountOver)
         Me.grpTransform.Controls.Add(Me.ucrNudWBCapacity)
         Me.grpTransform.Controls.Add(Me.lblSumOver)
         Me.grpTransform.Controls.Add(Me.ucrInputSum)
@@ -326,7 +322,7 @@ Partial Class dlgTransformClimatic
         Me.ucrInputSpellLower.AddQuotesIfUnrecognised = True
         Me.ucrInputSpellLower.IsMultiline = False
         Me.ucrInputSpellLower.IsReadOnly = False
-        Me.ucrInputSpellLower.Location = New System.Drawing.Point(103, 18)
+        Me.ucrInputSpellLower.Location = New System.Drawing.Point(112, 234)
         Me.ucrInputSpellLower.Name = "ucrInputSpellLower"
         Me.ucrInputSpellLower.Size = New System.Drawing.Size(63, 21)
         Me.ucrInputSpellLower.TabIndex = 1
@@ -364,7 +360,7 @@ Partial Class dlgTransformClimatic
         'lblValuesBetween
         '
         Me.lblValuesBetween.AutoSize = True
-        Me.lblValuesBetween.Location = New System.Drawing.Point(16, 22)
+        Me.lblValuesBetween.Location = New System.Drawing.Point(25, 235)
         Me.lblValuesBetween.Name = "lblValuesBetween"
         Me.lblValuesBetween.Size = New System.Drawing.Size(84, 13)
         Me.lblValuesBetween.TabIndex = 0
@@ -395,7 +391,7 @@ Partial Class dlgTransformClimatic
         '
         Me.ucrNudWBCapacity.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWBCapacity.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudWBCapacity.Location = New System.Drawing.Point(81, 19)
+        Me.ucrNudWBCapacity.Location = New System.Drawing.Point(215, 46)
         Me.ucrNudWBCapacity.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudWBCapacity.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWBCapacity.Name = "ucrNudWBCapacity"
@@ -512,12 +508,16 @@ Partial Class dlgTransformClimatic
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(479, 419)
+        Me.Controls.Add(Me.ucrInputSpellLower)
         Me.Controls.Add(Me.ucrInputThreshold)
+        Me.Controls.Add(Me.ucrChkValuesUnderThreshold)
         Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.lblNewColName)
         Me.Controls.Add(Me.ucrInputColName)
         Me.Controls.Add(Me.lblThreshold)
         Me.Controls.Add(Me.rdoWaterBalance)
+        Me.Controls.Add(Me.ucrNudCountOver)
+        Me.Controls.Add(Me.lblValuesBetween)
         Me.Controls.Add(Me.rdoSpell)
         Me.Controls.Add(Me.rdoMoving)
         Me.Controls.Add(Me.rdoCount)
