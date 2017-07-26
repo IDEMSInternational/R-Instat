@@ -31,7 +31,7 @@ Public Class dlgWaterBalance
     Private clsDifference, clsDifferenceList As New RFunction
 
     'EoR
-    Private clsEndRainFilter, clsEndRainLastInstance, clsEndRainLastInstanceFunction, clsEndRainLastInstanceList, clsEndRainFilterList, clsEndRainRollingSum, clsRollingSumFunction As New RFunction
+    Private clsEndRainFilter, clsEndRainLastInstance, clsEndRainLastInstanceFunction, clsEndRainLastInstanceList, clsEndRainFilterList, clsEndRainRollingSum, clsRollingSumFunction, clsEndRainLastInstanceManipulationList As New RFunction
     Private clsEndRainFilterOperator, clsEndRainLastInstanceOperator, clsEndRainLastInstanceOperator2 As New ROperator
 
     Private strCurrDataName As String = ""
@@ -106,7 +106,7 @@ Public Class dlgWaterBalance
         ucrChkEndOfSeason.AddFunctionNamesCondition(True, {frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation"})
         ucrChkEndOfSeason.AddFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation"}, False)
         ucrChkEndOfSeason.AddToLinkedControls(ucrNudCapacity, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=60)
-        ucrChkEndOfSeason.AddToLinkedControls(ucrNudWBLessThan, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=40)
+        ucrChkEndOfSeason.AddToLinkedControls(ucrNudWBLessThan, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.5)
         ucrChkEndOfSeason.AddToLinkedControls(ucrChkEvaporationAsReceiver, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=False)
         ucrChkEndOfSeason.AddToLinkedControls(ucrInputWBColName, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
 
@@ -119,9 +119,10 @@ Public Class dlgWaterBalance
         ucrNudWBLessThan.SetLinkedDisplayControl(lblWaterBalanceLessThan)
         ucrChkEvaporationAsReceiver.SetLinkedDisplayControl(lblEvaporation)
 
-        ucrNudWBLessThan.SetParameter(New RParameter("rightMax", 1))
-        ucrNudWBLessThan.SetMinMax(1, Integer.MaxValue)
-        ucrNudWBLessThan.Increment = 10
+        ucrNudWBLessThan.SetParameter(New RParameter("rightMax", 1, False))
+        ucrNudWBLessThan.SetMinMax(0, Integer.MaxValue)
+        ucrNudWBLessThan.Increment = 0.5
+        ucrNudWBLessThan.DecimalPlaces = 2
 
         ucrNudCapacity.SetParameter(New RParameter("capacity", 1), False)
         ucrNudCapacity.SetMinMax(1, Integer.MaxValue)
@@ -151,8 +152,8 @@ Public Class dlgWaterBalance
 
         ucrNudThreshold.SetParameter(New RParameter("threshold", 1, False))
         ucrNudThreshold.SetMinMax() ' min and max
-        ucrNudThreshold.DecimalPlaces = 5
-        ucrNudThreshold.Increment = 0.5
+        ucrNudThreshold.DecimalPlaces = 2
+        ucrNudThreshold.Increment = 0.1
 
         ucrNudTotalOverDays.SetParameter(New RParameter("width", 1))
         ucrNudTotalOverDays.SetMinMax(1, 366)
@@ -224,6 +225,7 @@ Public Class dlgWaterBalance
         clsEndRainFilterList.Clear()
         clsEndRainRollingSum.Clear()
         clsRollingSumFunction.Clear()
+        clsEndRainLastInstanceManipulationList.Clear()
 
         ucrSelectorForWaterBalance.Reset()
         ucrReceiverDate.SetMeAsReceiver()
@@ -304,7 +306,7 @@ Public Class dlgWaterBalance
         clsWBWaterFilterMaxList.AddParameter("sub1", clsRFunctionParameter:=clsWBWaterBalanceMax)
         clsWBWaterFilterMaxOperator.SetOperation("<=")
         clsWBWaterFilterMaxOperator.AddParameter("x", strWaterBalanceMax, iPosition:=0)
-        clsWBWaterFilterMaxOperator.AddParameter("rightMax", 40, iPosition:=1)
+        clsWBWaterFilterMaxOperator.AddParameter("rightMax", 0.5, iPosition:=1)
         clsWBWaterFilterMax.SetAssignTo("Water_Filter_Max")
 
         clsWBFirstWaterBalanceMaxOperator.bToScriptAsRString = True
@@ -318,9 +320,9 @@ Public Class dlgWaterBalance
         clsWBFirstWaterBalanceMax.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")", iPosition:=4)
         clsWBFirstWaterBalanceManipulationMax.SetRCommand("list")
         clsWBFirstWaterBalanceMax.AddParameter("manipulations", clsRFunctionParameter:=clsWBFirstWaterBalanceManipulationMax, iPosition:=5)
-        clsWBFirstWaterBalanceManipulationMax.AddParameter("sub2", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False)
-        clsWBFirstWaterBalanceManipulationMax.AddParameter("sub3", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False)
-        clsWBFirstWaterBalanceManipulationMax.AddParameter("sub1", clsRFunctionParameter:=clsWBWaterFilterMax, bIncludeArgumentName:=False)
+        clsWBFirstWaterBalanceManipulationMax.AddParameter("sub2", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False, iPosition:=2)
+        clsWBFirstWaterBalanceManipulationMax.AddParameter("sub3", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False, iPosition:=1)
+        clsWBFirstWaterBalanceManipulationMax.AddParameter("sub1", clsRFunctionParameter:=clsWBWaterFilterMax, bIncludeArgumentName:=False, iPosition:=0)
         clsWBFirstWaterBalanceMax.SetAssignTo("First_Water_Balance_Max")
 
         ' For Minimum Capacity:
@@ -368,7 +370,7 @@ Public Class dlgWaterBalance
         clsWBWaterFilterMin.AddParameter("function_exp", clsROperatorParameter:=clsWBWaterFilterMinOperator, iPosition:=1)
         clsWBWaterFilterMinOperator.SetOperation("<=")
         clsWBWaterFilterMinOperator.AddParameter("x", strWaterBalanceMin, iPosition:=0)
-        clsWBWaterFilterMinOperator.AddParameter("rightMin", 40, iPosition:=1)
+        clsWBWaterFilterMinOperator.AddParameter("rightMin", 0.5, iPosition:=1)
         clsWBWaterFilterMin.AddParameter("sub_calculations", clsRFunctionParameter:=clsWBWaterFilterMinList)
         clsWBWaterFilterMinList.AddParameter("sub1", clsRFunctionParameter:=clsWBWaterBalanceMin)
         clsWBWaterFilterMin.SetAssignTo("Water_Filter_Min")
@@ -385,9 +387,9 @@ Public Class dlgWaterBalance
         clsWBFirstWaterBalanceMin.SetAssignTo("First_Water_Balance_Min")
         clsWBFirstWaterBalanceMin.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")", iPosition:=4)
         clsWBFirstWaterBalanceMin.AddParameter("manipulations", clsRFunctionParameter:=clsWBFirstWaterBalanceMinList, iPosition:=5)
-        clsWBFirstWaterBalanceMinList.AddParameter("sub1", clsRFunctionParameter:=clsWBWaterFilterMin, bIncludeArgumentName:=False)
-        clsWBFirstWaterBalanceMinList.AddParameter("sub2", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False)
-        clsWBFirstWaterBalanceMinList.AddParameter("sub3", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False)
+        clsWBFirstWaterBalanceMinList.AddParameter("sub1", clsRFunctionParameter:=clsWBWaterFilterMin, bIncludeArgumentName:=False, iPosition:=0)
+        clsWBFirstWaterBalanceMinList.AddParameter("sub2", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False, iPosition:=2)
+        clsWBFirstWaterBalanceMinList.AddParameter("sub3", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False, iPosition:=1)
 
         clsDifferenceOperation.bToScriptAsRString = True
         clsDifferenceList.SetRCommand("list")
@@ -422,7 +424,6 @@ Public Class dlgWaterBalance
         clsWaterBalance.AddParameter("save", "2", iPosition:=6)
         clsWaterBalance.SetAssignTo("Water_Balance")
 
-        'TODO: only run this is End of Season is checked
         clsWaterEndRainsBase.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsWaterEndRainsBase.AddParameter("display", "FALSE")
         clsWaterEndRainsBase.AddParameter("calc", clsRFunctionParameter:=clsWaterBalance)
@@ -457,26 +458,33 @@ Public Class dlgWaterBalance
         clsEndRainFilter.AddParameter("save", "0", iPosition:=6)
         clsEndRainFilter.SetAssignTo("Rain_Above_Threshold")
 
-        clsEndRainLastInstanceOperator.bToScriptAsRString = True
+        'clsEndRainLastInstanceOperator.bToScriptAsRString = True
         clsEndRainLastInstanceList.SetRCommand("list")
         clsEndRainLastInstance.SetRCommand("instat_calculation$new")
         clsEndRainLastInstance.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
-        'todo: run this as a string
-        clsEndRainLastInstance.AddParameter("function_exp", clsROperatorParameter:=clsEndRainLastInstanceOperator, iPosition:=1)
-        clsEndRainLastInstanceOperator.SetOperation("[")
-        'left = doy column
-        clsEndRainLastInstanceOperator.AddParameter("right", clsROperatorParameter:=clsEndRainLastInstanceOperator2, iPosition:=1)
-        clsEndRainLastInstanceOperator2.SetOperation("]")
-        clsEndRainLastInstanceOperator2.AddParameter("left", clsRFunctionParameter:=clsEndRainLastInstanceFunction, iPosition:=0)
-        clsEndRainLastInstanceFunction.SetRCommand("length")
+        'todo: fix this
+        clsEndRainLastInstance.AddParameter("function_exp", ucrReceiverDOY.GetVariableNames & "[ length" & ucrReceiverDOY.GetVariableNames & "]", iPosition:=1)
+        'clsEndRainLastInstance.AddParameter("function_exp", clsROperatorParameter:=clsEndRainLastInstanceOperator, iPosition:=1)
+        'clsEndRainLastInstanceOperator.SetOperation("[")
+        ''left = doy column
+        'clsEndRainLastInstanceOperator.AddParameter("right", clsROperatorParameter:=clsEndRainLastInstanceOperator2, iPosition:=1)
+        'clsEndRainLastInstanceOperator2.SetOperation("]")
+        'clsEndRainLastInstanceOperator2.AddParameter("left", clsRFunctionParameter:=clsEndRainLastInstanceFunction, iPosition:=0)
+        'clsEndRainLastInstanceFunction.SetRCommand("length")
         ' x = doy column
-        clsEndRainLastInstance.AddParameter("sub_calculations", clsRFunctionParameter:=clsEndRainLastInstanceList, iPosition:=3)
-        clsEndRainLastInstanceList.AddParameter("sub1", clsRFunctionParameter:=clsEndRainFilter, iPosition:=0, bIncludeArgumentName:=False)
+        'clsEndRainLastInstance.AddParameter("sub_calculations", clsRFunctionParameter:=clsEndRainLastInstanceList, iPosition:=3)
+        clsEndRainLastInstance.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")", iPosition:=3)
+        'clsEndRainLastInstanceList.AddParameter("sub1", clsRFunctionParameter:=clsEndRainFilter, iPosition:=0, bIncludeArgumentName:=False)
+        clsEndRainLastInstance.AddParameter("manipulations", clsRFunctionParameter:=clsEndRainLastInstanceManipulationList, iPosition:=5)
+        clsEndRainLastInstanceManipulationList.SetRCommand("list")
+        clsEndRainLastInstanceManipulationList.AddParameter("sub1", clsRFunctionParameter:=clsEndRainFilter, bIncludeArgumentName:=False, iPosition:=0)
+        clsEndRainLastInstanceManipulationList.AddParameter("sub2", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False, iPosition:=1)
+        clsEndRainLastInstanceManipulationList.AddParameter("sub3", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False, iPosition:=2)
+
         clsEndRainLastInstance.AddParameter("result_name", Chr(34) & ucrInputEndRainColName.GetText() & Chr(34), iPosition:=3) ' the result name of this is what is in the save, see how it's done in Start of Rains and Spells. This needs to be implemented properly in End of Season too as well as here, iPosition:=2)
         clsEndRainLastInstance.AddParameter("save", "2", iPosition:=6)
         clsEndRainLastInstance.SetAssignTo("End_of_Rains")
 
-        'TODO: only run this if end of rains is checked:
         clsEndRainBase.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsEndRainBase.AddParameter("display", "FALSE")
         clsEndRainBase.AddParameter("calc", clsRFunctionParameter:=clsEndRainLastInstance)
@@ -486,13 +494,13 @@ Public Class dlgWaterBalance
         ucrReceiverDOY.AddAdditionalCodeParameterPair(clsDayFromOperator, New RParameter("doy", 0), iAdditionalPairNo:=1)
         ucrReceiverDOY.AddAdditionalCodeParameterPair(clsWBFirstWaterBalanceMaxOperator, New RParameter("left", 0), iAdditionalPairNo:=2)
         ucrReceiverDOY.AddAdditionalCodeParameterPair(clsWBFirstWaterBalanceMinOperator, New RParameter("left", 0), iAdditionalPairNo:=3)
-        ucrReceiverDOY.AddAdditionalCodeParameterPair(clsEndRainLastInstanceOperator, New RParameter("left", 0, False), iAdditionalPairNo:=4)
-        ucrReceiverDOY.AddAdditionalCodeParameterPair(clsEndRainLastInstanceFunction, New RParameter("left", 0, False), iAdditionalPairNo:=5)
+        'ucrReceiverDOY.AddAdditionalCodeParameterPair(clsEndRainLastInstanceOperator, New RParameter("left", 0, False), iAdditionalPairNo:=4)
+        'ucrReceiverDOY.AddAdditionalCodeParameterPair(clsEndRainLastInstanceFunction, New RParameter("left", 0, False), iAdditionalPairNo:=5)
         ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsWBReplaceNAMaxFunctionList, New RParameter("x", 0, False), iAdditionalPairNo:=1)
         ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsWBReplaceNAMinFunctionList, New RParameter("x", 0, False), iAdditionalPairNo:=2)
         ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsWBReplaceNAMinFunction, New RParameter("x", 0), iAdditionalPairNo:=3)
         ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsRollingSumFunction, New RParameter("data", 0), iAdditionalPairNo:=4)
-        ucrNudWBLessThan.AddAdditionalCodeParameterPair(clsWBWaterFilterMinOperator, New RParameter("rightMin", 0), iAdditionalPairNo:=1)
+        ucrNudWBLessThan.AddAdditionalCodeParameterPair(clsWBWaterFilterMinOperator, New RParameter("rightMin", 1), iAdditionalPairNo:=1)
         ucrInputEvaporation.AddAdditionalCodeParameterPair(clsPMaxOperatorMin, New RParameter("evaporation", 1), iAdditionalPairNo:=1)
         ucrNudCapacity.AddAdditionalCodeParameterPair(clsWBReplaceNAMaxFunction, New RParameter("values", 1), iAdditionalPairNo:=1)
         ucrNudCapacity.AddAdditionalCodeParameterPair(clsPMinFunctionMin, New RParameter("capacity", 1), iAdditionalPairNo:=2)
@@ -562,6 +570,7 @@ Public Class dlgWaterBalance
 
     Private Sub DayBoundaries()
         clsDayFromAndTo.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")")
+        clsEndRainLastInstance.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")", iPosition:=3)
     End Sub
 
     Private Sub EndSeason()
@@ -579,6 +588,7 @@ Public Class dlgWaterBalance
 
     Private Sub ucrReceiverDOY_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDOY.ControlValueChanged
         DayBoundaries()
+        clsEndRainLastInstance.AddParameter("function_exp", Chr(34) & ucrReceiverDOY.GetVariableNames(False) & "[ length(" & ucrReceiverDOY.GetVariableNames(False) & ")]" & Chr(34), iPosition:=1)
     End Sub
 
     Private Sub ucrSelectorForSpells_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRainfall.ControlContentsChanged, ucrSelectorForWaterBalance.ControlContentsChanged
@@ -591,5 +601,18 @@ Public Class dlgWaterBalance
 
     Private Sub ucrChkEndOfRains_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkEndOfRains.ControlContentsChanged, ucrChkEndOfSeason.ControlContentsChanged, ucrReceiverRainfall.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrNudTo.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrNudCapacity.ControlContentsChanged, ucrNudWBLessThan.ControlContentsChanged, ucrInputWBColName.ControlContentsChanged, ucrChkEvaporationAsReceiver.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged, ucrReceiverEvaporation.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        If ucrChkEndOfSeason.Checked Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsWaterEndRainsBase, iPosition:=0)
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsWaterEndRainsBase)
+        End If
+        If ucrChkEndOfRains.Checked Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsEndRainBase, iPosition:=0)
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsEndRainBase)
+        End If
     End Sub
 End Class
