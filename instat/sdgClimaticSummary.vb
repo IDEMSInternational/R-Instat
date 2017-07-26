@@ -98,50 +98,59 @@ Public Class sdgClimaticSummary
         clsCountFunction = clsNewCountFunction
         clsLengthFunction = clsNewLengthFunction
         clsLengthFunction.AddParameter("x", clsRFunctionParameter:=clsCountFunction, bIncludeArgumentName:=False)
-        CountFuncExp()
+        FuncExpression()
         ' ucrInputComboOptions.SetRCode(clsCountFunction, bReset)
         'ucrPnlSummary.SetRCode(clsSumFunction, bReset)
     End Sub
 
-    Private Sub CountFuncExp()
+    Private Sub FuncExpression()
         clsCountFunction.AddParameter("x", strTempFuc & ucrInputComboOptions.cboInput.SelectedItem & ucrNudValue.Value, bIncludeArgumentName:=False)
         If rdoTotals.Checked Then
+            clsSummariseFunction.bToScriptAsRString = True
             clsSummariseFunction.AddParameter("result_name", Chr(34) & "Sums" & Chr(34))
-            clsSummariseFunction.AddParameter("function_exp", Chr(34) & clsSumFunction.ToScript() & Chr(34))
+            clsSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsSumFunction, iPosition:=1)
         ElseIf rdoCounts.Checked Then
             clsSummariseFunction.AddParameter("result_name", Chr(34) & "Counts" & Chr(34))
-            clsSummariseFunction.AddParameter("function_exp", clsLengthFunction.ToScript())
+            clsSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsLengthFunction, iPosition:=1)
         ElseIf rdoMaxima.Checked Then
-            clsSummariseFunction.AddParameter("result_name", Chr(34) & "Maximums" & Chr(34))
-            clsSummariseFunction.AddParameter("function_exp", Chr(34) & clsMaximaFunction.ToScript() & Chr(34))
+            clsSummariseFunction.AddParameter("result_name", Chr(34) & "Maxima" & Chr(34))
+            clsSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsMaximaFunction, iPosition:=1)
+            'clsSummariseFunction.AddParameter("function_exp", Chr(34) & clsMaximaFunction.ToScript() & Chr(34))
         ElseIf rdoMinima.Checked Then
-            clsSummariseFunction.AddParameter("result_name", Chr(34) & "Minimums" & Chr(34))
-            clsSummariseFunction.AddParameter("function_exp", Chr(34) & clsMinimaFunction.ToScript() & Chr(34))
+            clsSummariseFunction.AddParameter("result_name", Chr(34) & "Minima" & Chr(34))
+            clsSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsMinimaFunction, iPosition:=1)
+            'clsSummariseFunction.AddParameter("function_exp", Chr(34) & clsMinimaFunction.ToScript() & Chr(34))
         ElseIf rdoMeans.Checked Then
             clsSummariseFunction.AddParameter("result_name", Chr(34) & "Means" & Chr(34))
-            clsSummariseFunction.AddParameter("function_exp", Chr(34) & clsMeanFunction.ToScript() & Chr(34))
+            clsSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsMeanFunction, iPosition:=1)
+            'clsSummariseFunction.AddParameter("function_exp", Chr(34) & clsMeanFunction.ToScript() & Chr(34))
         ElseIf rdoMedians.Checked Then
             clsSummariseFunction.AddParameter("result_name", Chr(34) & "Medians" & Chr(34))
-            clsSummariseFunction.AddParameter("function_exp", Chr(34) & clsMedianFunction.ToScript() & Chr(34))
+            clsSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsMedianFunction, iPosition:=1)
+            'clsSummariseFunction.AddParameter("function_exp", Chr(34) & clsMedianFunction.ToScript() & Chr(34))
         ElseIf rdoStd.Checked Then
             clsSummariseFunction.AddParameter("result_name", Chr(34) & "Std.dev's" & Chr(34))
-            clsSummariseFunction.AddParameter("function_exp", Chr(34) & clsSdFunction.ToScript() & Chr(34))
+            clsSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsSdFunction, iPosition:=1)
+            'clsSummariseFunction.AddParameter("function_exp", Chr(34) & clsSdFunction.ToScript() & Chr(34))
         ElseIf rdoPercentiles.Checked Then
             clsSummariseFunction.AddParameter("result_name", Chr(34) & "Percentiles" & Chr(34))
+            'clsSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsSumFunction, iPosition:=1)
             'clsSummariseFunction.AddParameter("function_exp", Chr(34) &  & Chr(34))
         ElseIf rdoProportions.Checked Then
             clsSummariseFunction.AddParameter("result_name", Chr(34) & "Proportions" & Chr(34))
-            clsSummariseFunction.AddParameter("function_exp", Chr(34) & clsSdFunction.ToScript() & Chr(34))
+            clsSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsSumFunction, iPosition:=1)
+            'clsSummariseFunction.AddParameter("function_exp", Chr(34) & clsSdFunction.ToScript() & Chr(34))
         ElseIf rdoMissing.Checked Then
             clsSummariseFunction.AddParameter("result_name", Chr(34) & "Missing" & Chr(34))
+            'clsSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsSumFunction, iPosition:=1)
         End If
     End Sub
 
     Private Sub ucrPnlSummary_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlSummary.ControlContentsChanged
-        CountFuncExp()
+        FuncExpression()
     End Sub
 
     Private Sub ucrInputComboOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboOptions.ControlValueChanged, ucrNudValue.ControlValueChanged
-        CountFuncExp()
+        FuncExpression()
     End Sub
 End Class

@@ -20,7 +20,7 @@ Public Class dlgClimaticSummary
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
     Private clsGroupByFunction, clsDayFromAndTo, clsMonthFunction, clsSummariseFunction, clsManipulationsFunction, clsRunCalcFunction As RFunction
-    Private clsSumFunction, clsMaximaFunction, clsMinimaFunction, clsMeanFunction, clsMedianFunction, clsSdFunction, clsCountFunction, clsLengthFunction, clsPropFunction As RFunction
+    Private clsSumFunction, clsMaximaFunction, clsMinimaFunction, clsMeanFunction, clsMedianFunction, clsSdFunction, clsCountFunction, clsLengthFunction, clsProportionFunction, clsPercentileFunction As RFunction
     Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator, clsMonthOperator As ROperator
     Dim strCurrDataName As String = ""
     Private strTempFuc As String = ""
@@ -97,8 +97,6 @@ Public Class dlgClimaticSummary
         ucrNudTo.SetParameter(New RParameter("to", 1))
         ucrNudTo.SetMinMax(2, 366)
 
-        'ucrNudMonth.SetMinMax(1, 12)
-
         'panel setting
         ucrPnlAnnual.AddRadioButton(rdoAnnual)
         ucrPnlAnnual.AddRadioButton(rdoAnnualVariable)
@@ -134,7 +132,8 @@ Public Class dlgClimaticSummary
         clsSdFunction = New RFunction
         clsCountFunction = New RFunction
         clsLengthFunction = New RFunction
-        clsPropFunction = New RFunction
+        clsProportionFunction = New RFunction
+        clsPercentileFunction = New RFunction
 
         clsDayFromOperator = New ROperator
         clsDayToOperator = New ROperator
@@ -162,7 +161,7 @@ Public Class dlgClimaticSummary
 
         clsGroupByFunction.SetRCommand("instat_calculation$new")
         clsGroupByFunction.AddParameter("type", Chr(34) & "by" & Chr(34))
-        clsGroupByFunction.SetAssignTo("grouping")
+        clsGroupByFunction.SetAssignTo("Grouping")
 
         clsManipulationsFunction.SetRCommand("list")
         clsManipulationsFunction.AddParameter("sub_1", clsRFunctionParameter:=clsGroupByFunction, bIncludeArgumentName:=False)
@@ -182,6 +181,7 @@ Public Class dlgClimaticSummary
         clsSdFunction.SetRCommand("sd")
         clsCountFunction.SetRCommand("which")
         clsLengthFunction.SetRCommand("length")
+        clsPercentileFunction.SetRCommand("")
 
         clsSumFunction.AddParameter("na.rm", "TRUE")
         clsMaximaFunction.AddParameter("na.rm", "TRUE")
