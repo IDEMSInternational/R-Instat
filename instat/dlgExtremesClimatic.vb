@@ -20,7 +20,8 @@ Public Class dlgExtremesClimatic
     Private bReset As Boolean = True
     Private clsExtreme As New RFunction
     Private strCurrDataName As String = ""
-    Private clsGroupByFunction, clsRunCalcFunction As New RFunction
+    Private clsGroupByFunction, clsRunCalcFunction, clsDayFromAndTo, clsDayManipulation As New RFunction
+    Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator As New ROperator
     Private clsCurrCalc As RFunction
     ' Min/Max Options
     Private clsMinMaxSummariseFunction, clsMinMaxManipulationsFunction, clsMinMaxFuncExp As New RFunction
@@ -45,6 +46,8 @@ Public Class dlgExtremesClimatic
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 203
+        'disabling control for now.
+        ucrChkDayNumber.Enabled = False
 
         ucrReceiverYear.Selector = ucrSelectorClimaticExtremes
         ucrReceiverYear.SetClimaticType("year")
@@ -66,11 +69,13 @@ Public Class dlgExtremesClimatic
         ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
         ucrReceiverDate.strSelectorHeading = "Date Variables"
 
-        ucrReceiverDOY.SetClimaticType("doy")
+        ucrReceiverDOY.SetParameter(New RParameter("day", 0))
+        ucrReceiverDOY.SetParameterIsString()
+        ucrReceiverDOY.bWithQuotes = False
         ucrReceiverDOY.Selector = ucrSelectorClimaticExtremes
         ucrReceiverDOY.bAutoFill = True
         ucrReceiverDOY.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "doy" & Chr(34)})
-        ucrReceiverDOY.strSelectorHeading = "Day variables"
+        ucrReceiverDOY.strSelectorHeading = "Day Variables"
 
         ucrReceiverElement.SetParameter(New RParameter("x", 0, bNewIncludeArgumentName:=False))
         ucrReceiverElement.Selector = ucrSelectorClimaticExtremes
@@ -78,20 +83,18 @@ Public Class dlgExtremesClimatic
         ucrReceiverElement.bWithQuotes = False
         ucrReceiverElement.strSelectorHeading = "Numerics"
 
-        ' Panel Options:
+        'to/from
+        ucrNudFrom.SetParameter(New RParameter("from", 1))
+        ucrNudFrom.SetMinMax(1, 366)
+
+        ucrNudTo.SetParameter(New RParameter("to", 1))
+        ucrNudTo.SetMinMax(2, 366)
+
+        ' Panel Options
         ucrPnlExtremesType.AddRadioButton(rdoMinMax)
         ucrPnlExtremesType.AddRadioButton(rdoPeaks)
         ucrPnlExtremesType.AddParameterValuesCondition(rdoPeaks, "type", Chr(34) & "filter" & Chr(34))
         ucrPnlExtremesType.AddParameterValuesCondition(rdoMinMax, "type", Chr(34) & "summary" & Chr(34))
-
-        ucrPnlExtremesType.AddToLinkedControls(ucrInputThresholdOperator, {rdoPeaks}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=">=")
-        ucrPnlExtremesType.AddToLinkedControls(ucrInputThresholdValue, {rdoPeaks}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.85")
-        ucrPnlExtremesType.AddToLinkedControls(ucrPnlMaxMin, {rdoMinMax}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlExtremesType.AddToLinkedControls(ucrChkMissingValues, {rdoMinMax}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
-        ucrPnlMaxMin.SetLinkedDisplayControl(lblNewColName)
-
-        'to/from
 
         ' Min/Max Option
         ucrPnlMaxMin.AddRadioButton(rdoMax)
@@ -121,13 +124,23 @@ Public Class dlgExtremesClimatic
         ucrInputThresholdOperator.AddQuotesIfUnrecognised = False
 
         ucrInputSave.SetParameter(New RParameter("result_name", 4))
-        'disabling control for now.
-        ucrChkDayNumber.Enabled = False
+        ucrInputSave.SetValidationTypeAsRVariable()
+
+        ucrPnlExtremesType.AddToLinkedControls(ucrInputThresholdOperator, {rdoPeaks}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=">=")
+        ucrPnlExtremesType.AddToLinkedControls(ucrInputThresholdValue, {rdoPeaks}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlExtremesType.AddToLinkedControls(ucrPnlMaxMin, {rdoMinMax}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlExtremesType.AddToLinkedControls(ucrChkMissingValues, {rdoMinMax}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMaxMin.SetLinkedDisplayControl(lblNewColName)
     End Sub
 
     Private Sub SetDefaults()
         clsGroupByFunction.Clear()
         clsRunCalcFunction.Clear()
+        clsDayFromAndTo.Clear()
+        clsDayFromAndToOperator.Clear()
+        clsDayFromOperator.Clear()
+        clsDayToOperator.Clear()
+        clsDayManipulation.Clear()
         clsMinMaxSummariseFunction.Clear()
         clsMinMaxFuncExp.Clear()
         clsMinMaxManipulationsFunction.Clear()
@@ -138,13 +151,26 @@ Public Class dlgExtremesClimatic
         ucrInputThresholdValue.Reset()
         SetCalculationValues()
 
+        ' Days
+        clsDayFromAndToOperator.bToScriptAsRString = True
+        clsDayFromAndTo.SetRCommand("instat_calculation$new")
+        clsDayFromAndTo.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
+        clsDayFromAndTo.AddParameter("function_exp", clsROperatorParameter:=clsDayFromAndToOperator, iPosition:=1)
+        clsDayFromAndToOperator.SetOperation("&")
+        clsDayFromAndToOperator.AddParameter("from_operator", clsROperatorParameter:=clsDayFromOperator, iPosition:=0)
+        clsDayFromOperator.SetOperation(">=")
+        clsDayFromOperator.AddParameter("from", 1, iPosition:=1)
+        clsDayFromAndToOperator.AddParameter("to_operator", clsROperatorParameter:=clsDayToOperator, iPosition:=1)
+        clsDayToOperator.SetOperation("<=")
+        clsDayToOperator.AddParameter("to", 366, iPosition:=1)
+        clsDayFromAndTo.SetAssignTo("Day_From_and_To")
+
         ' For the Min/Max option:
         clsGroupByFunction.SetRCommand("instat_calculation$new")
         clsGroupByFunction.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=0)
         clsGroupByFunction.SetAssignTo("grouping")
 
         clsMinMaxManipulationsFunction.SetRCommand("list")
-        clsMinMaxManipulationsFunction.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, bIncludeArgumentName:=False)
         clsMinMaxFuncExp.bToScriptAsRString = True
         clsMinMaxSummariseFunction.SetRCommand("instat_calculation$new")
         clsMinMaxSummariseFunction.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
@@ -154,10 +180,13 @@ Public Class dlgExtremesClimatic
         clsMinMaxFuncExp.AddParameter("na.rm", "TRUE", iPosition:=1)
         clsMinMaxSummariseFunction.AddParameter("result_name", "max", iPosition:=2)
         clsMinMaxSummariseFunction.AddParameter("manipulations", clsRFunctionParameter:=clsMinMaxManipulationsFunction, iPosition:=3)
+        clsMinMaxManipulationsFunction.AddParameter("sub1", clsRFunctionParameter:=clsGroupByFunction, bIncludeArgumentName:=False, iPosition:=0)
+        clsMinMaxManipulationsFunction.AddParameter("sub2", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False, iPosition:=1)
         clsMinMaxSummariseFunction.AddParameter("save", 2, iPosition:=4)
         clsMinMaxSummariseFunction.SetAssignTo("min_max_summary")
 
         ' For the Peaks option:
+        clsDayManipulation.SetRCommand("list")
         clsPeaksFilterOperator.bToScriptAsRString = True
         clsPeaksFilterFunction.SetRCommand("instat_calculation$new")
         clsPeaksFilterFunction.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
@@ -165,7 +194,9 @@ Public Class dlgExtremesClimatic
         clsPeaksFilterOperator.SetOperation(">=") ' this value changes depending what is selected in the combo box. Temp. fix in a sub, but needs a proper fix.
         clsPeaksFilterOperator.AddParameter("left", iPosition:=0)
         clsPeaksFilterOperator.AddParameter("right", "0.85", iPosition:=1)
-        clsPeaksFilterFunction.AddParameter("save", 2, iPosition:=2)
+        clsPeaksFilterFunction.AddParameter("manipulations", clsRFunctionParameter:=clsDayManipulation, iPosition:=2)
+        clsDayManipulation.AddParameter("sub1", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False, iPosition:=0)
+        clsPeaksFilterFunction.AddParameter("save", 2, iPosition:=3)
         clsPeaksFilterFunction.SetAssignTo("peak_filter")
 
         'Overall Calculation
@@ -178,8 +209,14 @@ Public Class dlgExtremesClimatic
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
+        ucrReceiverDOY.AddAdditionalCodeParameterPair(clsDayFromOperator, New RParameter("doy", 0), iAdditionalPairNo:=1)
         ucrInputSave.AddAdditionalCodeParameterPair(clsPeaksFilterFunction, New RParameter("result_data_frame"), iAdditionalPairNo:=1)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsPeaksFilterOperator, New RParameter("left"), iAdditionalPairNo:=1)
+
+        ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
+        ucrNudFrom.SetRCode(clsDayFromOperator, bReset)
+        ucrNudTo.SetRCode(clsDayToOperator, bReset)
+
         '        ucrInputThresholdOperator.SetRCode(clsPeaksFilterFunction, bReset)
         ucrInputThresholdValue.SetRCode(clsPeaksFilterOperator, bReset)
 
@@ -192,7 +229,7 @@ Public Class dlgExtremesClimatic
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverDate.IsEmpty() AndAlso Not ucrReceiverDOY.IsEmpty() AndAlso Not ucrReceiverElement.IsEmpty() AndAlso Not ucrReceiverYear.IsEmpty() AndAlso Not ucrInputSave.IsEmpty AndAlso ((rdoPeaks.Checked AndAlso Not ucrInputThresholdValue.IsEmpty) OrElse rdoMinMax.Checked) Then
+        If Not ucrReceiverDate.IsEmpty() AndAlso Not ucrReceiverDOY.IsEmpty() AndAlso Not ucrReceiverElement.IsEmpty() AndAlso Not ucrReceiverYear.IsEmpty() AndAlso Not ucrInputSave.IsEmpty AndAlso ucrNudFrom.GetText <> "" AndAlso ucrNudTo.GetText <> "" AndAlso ((rdoPeaks.Checked AndAlso Not ucrInputThresholdValue.IsEmpty) OrElse rdoMinMax.Checked) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -255,12 +292,16 @@ Public Class dlgExtremesClimatic
         End If
     End Sub
 
+    Private Sub DayOfYear()
+        clsDayFromAndTo.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")", iPosition:=2)
+    End Sub
+
     Private Sub MinMaxFunction()
-        clsMinMaxSummariseFunction.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames() & ")", iPosition:=1)
+        clsMinMaxSummariseFunction.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames() & ")", iPosition:=2)
     End Sub
 
     Private Sub PeaksFunction()
-        clsPeaksFilterFunction.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames() & ")", iPosition:=1)
+        clsPeaksFilterFunction.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames() & ")", iPosition:=2)
     End Sub
 
     Private Sub ucrPnlMinMaxPeaks_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlExtremesType.ControlValueChanged, ucrPnlMaxMin.ControlValueChanged
@@ -274,24 +315,28 @@ Public Class dlgExtremesClimatic
         PeaksFunction()
     End Sub
 
-    Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlValueChanged ', ucrInputThresholdOperator.ControlContentsChanged, ucrInputThresholdValue.ControlValueChanged
+    Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlValueChanged
         MinMaxFunction()
+        PeaksFunction()
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
         GroupByOptions()
     End Sub
 
+    Private Sub ucrReceiverDOY_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDOY.ControlValueChanged
+        DayOfYear()
+    End Sub
+
     Private Sub ucrReceiverYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlValueChanged
         GroupByOptions()
-        PeaksFunction()
     End Sub
 
     Private Sub ucrInputThresholdOperator_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputThresholdOperator.ControlValueChanged
         SetCalculationValues()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrInputSave.ControlContentsChanged, ucrInputThresholdValue.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrInputSave.ControlContentsChanged, ucrInputThresholdValue.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrNudTo.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
