@@ -262,27 +262,27 @@ Public Class dlgExtremesClimatic
 
             If rdoMin.Checked Then
                 clsMinMaxFuncExp.SetRCommand("min")
-            Else
+            ElseIf rdoMax.Checked Then
                 clsMinMaxFuncExp.SetRCommand("max")
+            Else
             End If
-            clsMinMaxSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsMinMaxFuncExp, iPosition:=1) ' TODO1: fix this so that we don't lose the function_exp when we change the r function. Should we do two bases here clsMaxFuncExp and clsMinFuncExp and then the problem is similar to TODO1. We want to change the class being called for function_exp when the radio buttons are changed
         ElseIf rdoPeaks.Checked Then
             clsCurrCalc = clsPeaksFilterFunction
 
-            ' TODO2: Fix that this is automatically done. This is an operation which is also associated to a ucrInput
+            ' TODO1: Fix so that this is automatically done. This is an operation which is also associated to a ucrInput
             If ucrInputThresholdOperator.GetText = ">=" Then
                 clsPeaksFilterOperator.SetOperation(">=")
             ElseIf ucrInputThresholdOperator.GetText = ">" Then
                 clsPeaksFilterOperator.SetOperation(">")
             ElseIf ucrInputThresholdOperator.GetText = "<" Then
                 clsPeaksFilterOperator.SetOperation("<")
-            Else
+            ElseIf ucrInputThresholdOperator.GetText = "<=" Then
                 clsPeaksFilterOperator.SetOperation("<=")
+            Else
             End If
-            clsPeaksFilterFunction.AddParameter("function_exp", clsROperatorParameter:=clsPeaksFilterOperator, iPosition:=1) ' TODO1 to apply here too
         Else
         End If
-        clsRunCalcFunction.AddParameter("calc", clsRFunctionParameter:=clsCurrCalc) ' TODO3: fix this so that the new class runs with the change of the radio button. The class that runs should change depending which rdo is checked. Also a problem in dlgStringDistance
+        clsRunCalcFunction.AddParameter("calc", clsRFunctionParameter:=clsCurrCalc) ' TODO2: fix this so that the new class runs with the change of the radio button. The class that runs should change depending which rdo is checked. Also a problem in dlgStringDistance
     End Sub
 
     Private Sub GroupByOptions()
@@ -313,6 +313,8 @@ Public Class dlgExtremesClimatic
     Private Sub ucrSelectorClimaticExtremes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorClimaticExtremes.ControlValueChanged
         strCurrDataName = Chr(34) & ucrSelectorClimaticExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
         GroupByOptions()
+        DayOfYear()
+        MinMaxFunction()
         PeaksFunction()
     End Sub
 
