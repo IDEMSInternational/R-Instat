@@ -127,7 +127,7 @@ Public Class dlgExtremesClimatic
         ucrInputSave.SetValidationTypeAsRVariable()
 
         ucrPnlExtremesType.AddToLinkedControls(ucrInputThresholdOperator, {rdoPeaks}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=">=")
-        ucrPnlExtremesType.AddToLinkedControls(ucrInputThresholdValue, {rdoPeaks}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlExtremesType.AddToLinkedControls(ucrInputThresholdValue, {rdoPeaks}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.85")
         ucrPnlExtremesType.AddToLinkedControls(ucrPnlMaxMin, {rdoMinMax}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlExtremesType.AddToLinkedControls(ucrChkMissingValues, {rdoMinMax}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMaxMin.SetLinkedDisplayControl(lblNewColName)
@@ -266,7 +266,7 @@ Public Class dlgExtremesClimatic
                 clsMinMaxFuncExp.SetRCommand("max")
             End If
             clsMinMaxSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsMinMaxFuncExp, iPosition:=1) ' TODO1: fix this so that we don't lose the function_exp when we change the r function. Should we do two bases here clsMaxFuncExp and clsMinFuncExp and then the problem is similar to TODO1. We want to change the class being called for function_exp when the radio buttons are changed
-        Else
+        ElseIf rdoPeaks.Checked Then
             clsCurrCalc = clsPeaksFilterFunction
 
             ' TODO2: Fix that this is automatically done. This is an operation which is also associated to a ucrInput
@@ -280,6 +280,7 @@ Public Class dlgExtremesClimatic
                 clsPeaksFilterOperator.SetOperation("<=")
             End If
             clsPeaksFilterFunction.AddParameter("function_exp", clsROperatorParameter:=clsPeaksFilterOperator, iPosition:=1) ' TODO1 to apply here too
+        Else
         End If
         clsRunCalcFunction.AddParameter("calc", clsRFunctionParameter:=clsCurrCalc) ' TODO3: fix this so that the new class runs with the change of the radio button. The class that runs should change depending which rdo is checked. Also a problem in dlgStringDistance
     End Sub
