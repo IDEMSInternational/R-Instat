@@ -132,7 +132,7 @@ Public Class dlgSummaryofDailydata
     End Sub
 
     Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
-        ' sdgSummaries.SetRFunction(clsSummariesList, bResetSubdialog)
+        sdgSummaries.SetRFunction(clsSummariesList, bResetSubdialog)
         bResetSubdialog = False
         sdgSummaries.ShowDialog()
         TestOKEnabled()
