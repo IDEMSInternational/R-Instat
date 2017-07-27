@@ -92,7 +92,7 @@ Partial Class dlgClimaticSummary
         Me.rdoAnnualVariable.FlatAppearance.BorderSize = 2
         Me.rdoAnnualVariable.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoAnnualVariable.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoAnnualVariable.Location = New System.Drawing.Point(163, 31)
+        Me.rdoAnnualVariable.Location = New System.Drawing.Point(277, 31)
         Me.rdoAnnualVariable.Name = "rdoAnnualVariable"
         Me.rdoAnnualVariable.Size = New System.Drawing.Size(118, 27)
         Me.rdoAnnualVariable.TabIndex = 16
@@ -108,7 +108,7 @@ Partial Class dlgClimaticSummary
         Me.rdoWithinYear.FlatAppearance.BorderSize = 2
         Me.rdoWithinYear.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoWithinYear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoWithinYear.Location = New System.Drawing.Point(281, 31)
+        Me.rdoWithinYear.Location = New System.Drawing.Point(162, 31)
         Me.rdoWithinYear.Name = "rdoWithinYear"
         Me.rdoWithinYear.Size = New System.Drawing.Size(118, 27)
         Me.rdoWithinYear.TabIndex = 17

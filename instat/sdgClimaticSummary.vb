@@ -55,7 +55,7 @@ Public Class sdgClimaticSummary
         ucrInputComboOptions.SetItems(dctOptions)
         ucrInputComboOptions.SetDropDownStyleAsNonEditable()
 
-        ucrInputPercentiles.SetParameter(New RParameter("probs"))
+        ucrInputPercentiles.SetParameter(New RParameter("function_exp"))
         dctPercentiles.Add("0.5", "0.5")
         dctPercentiles.Add("0.2,0.5", "0.2,0.5,0.8")
         dctPercentiles.Add("0.25,0.5,0.8", "0.25,0.5,0.8")
@@ -94,8 +94,8 @@ Public Class sdgClimaticSummary
         clsPercentileFunction.AddParameter("x", strTempFuc)
         clsPercentileFunction.AddParameter("probs", clsRFunctionParameter:=clsConcFunction)
         FuncExpression()
-        'ucrInputPercentiles.SetRCode(clsConcFunction, bReset)
-        ucrPnlSummary.SetRCode(clsSumFunction, bReset)
+        ucrInputPercentiles.SetRCode(clsConcFunction, bReset)
+        'ucrPnlSummary.SetRCode(clsSumFunction, bReset)
     End Sub
 
     Private Sub FuncExpression()
