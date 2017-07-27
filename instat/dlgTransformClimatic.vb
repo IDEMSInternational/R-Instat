@@ -92,7 +92,7 @@ Public Class dlgTransformClimatic
         ucrNudSumOver.Increment = 1
         ucrNudSumOver.SetLinkedDisplayControl(lblSumRows)
 
-        ucrNudCountOver.SetParameter(New RParameter("width"))
+        ucrNudCountOver.SetParameter(New RParameter("width", 2))
         ucrNudCountOver.SetMinMax(1, 366)
         ucrNudCountOver.Increment = 1
         ucrNudCountOver.SetLinkedDisplayControl(lblCountOver)
@@ -192,8 +192,8 @@ Public Class dlgTransformClimatic
         clsRCountFunction.bToScriptAsRString = True
         clsRCountFunction.SetPackageName("zoo")
         clsRCountFunction.SetRCommand("rollapply")
-        clsRCountFunction.AddParameter("width", 1, iPosition:=1) ' TODO: put correct width nud here
-        clsRCountFunction.AddParameter("FUN", "function(x) length(which(x" & strValuesUnder & ucrInputThreshold.GetText() & "))", iPosition:=2) ' TODO: Fix this FUN = 
+        clsRCountFunction.AddParameter("FUN", "function(x) length(which(x" & strValuesUnder & ucrInputThreshold.GetText() & "))", iPosition:=1) ' TODO: Fix this FUN = 
+        clsRCountFunction.AddParameter("width", 1, iPosition:=2)
         clsRCountFunction.AddParameter("fill", "NA", iPosition:=3)
         clsRCountFunction.AddParameter("align", Chr(39) & "right" & Chr(39), iPosition:=4)
 
