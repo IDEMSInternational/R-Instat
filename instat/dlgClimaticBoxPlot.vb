@@ -33,6 +33,34 @@ Public Class dlgClimaticBoxPlot
 
     Private Sub InitialiseDialog()
 
+        ucrReceiverStation.Selector = ucrSelectorClimaticBoxPlot
+        ucrReceiverStation.SetClimaticType("station")
+        ucrReceiverStation.bAutoFill = True
+        ucrReceiverStation.SetMeAsReceiver()
+
+        ucrReceiverDate.Selector = ucrSelectorClimaticBoxPlot
+        ucrReceiverDate.SetClimaticType("date")
+        ucrReceiverDate.bAutoFill = True
+
+        ucrReceiverYear.Selector = ucrSelectorClimaticBoxPlot
+        ucrReceiverYear.SetClimaticType("year")
+        ucrReceiverYear.bAutoFill = True
+
+        ucrPnlPlots.AddRadioButton(rdoViolin)
+        ucrPnlPlots.AddRadioButton(rdoBoxplot)
+        ucrPnlPlots.AddRadioButton(rdoJitter)
+
+        ucrChkVarWidth.SetParameter(New RParameter("varwidth", 1))
+        ucrChkVarWidth.SetText("Variable Width")
+        ucrChkVarWidth.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkVarWidth.SetRDefault("FALSE")
+
+        ucrSaveBoxplot.SetPrefix("boxplot")
+        ucrSaveBoxplot.SetIsComboBox()
+        ucrSaveBoxplot.SetCheckBoxText("Save Graph")
+        ucrSaveBoxplot.SetSaveTypeAsGraph()
+        ucrSaveBoxplot.SetDataFrameSelector(ucrSelectorClimaticBoxPlot.ucrAvailableDataFrames)
+        ucrSaveBoxplot.SetAssignToIfUncheckedValue("last_graph")
     End Sub
 
     Private Sub SetDefaults()
