@@ -53,6 +53,7 @@ Partial Class dlgClimaticSummary
         Me.cmdSummary = New System.Windows.Forms.Button()
         Me.lblMonth = New System.Windows.Forms.Label()
         Me.lblNewColName = New System.Windows.Forms.Label()
+        Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
         Me.ucrInputSave = New instat.ucrInputTextBox()
         Me.ucrReceiverFrom = New instat.ucrReceiverSingle()
         Me.ucrReceiverTo = New instat.ucrReceiverSingle()
@@ -63,10 +64,9 @@ Partial Class dlgClimaticSummary
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
-        Me.ucrSelectorVariable = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlAnnual = New instat.UcrPanel()
-        Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
+        Me.ucrSelectorVariable = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
         '
         'rdoAnnual
@@ -200,7 +200,7 @@ Partial Class dlgClimaticSummary
         '
         'cmdSummary
         '
-        Me.cmdSummary.Location = New System.Drawing.Point(292, 397)
+        Me.cmdSummary.Location = New System.Drawing.Point(292, 374)
         Me.cmdSummary.Name = "cmdSummary"
         Me.cmdSummary.Size = New System.Drawing.Size(120, 21)
         Me.cmdSummary.TabIndex = 39
@@ -220,18 +220,30 @@ Partial Class dlgClimaticSummary
         'lblNewColName
         '
         Me.lblNewColName.AutoSize = True
-        Me.lblNewColName.Location = New System.Drawing.Point(10, 401)
+        Me.lblNewColName.Location = New System.Drawing.Point(10, 377)
         Me.lblNewColName.Name = "lblNewColName"
         Me.lblNewColName.Size = New System.Drawing.Size(101, 13)
         Me.lblNewColName.TabIndex = 42
         Me.lblNewColName.Text = "New Column Name:"
+        '
+        'ucrReceiverMonth
+        '
+        Me.ucrReceiverMonth.frmParent = Me
+        Me.ucrReceiverMonth.Location = New System.Drawing.Point(291, 302)
+        Me.ucrReceiverMonth.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMonth.Name = "ucrReceiverMonth"
+        Me.ucrReceiverMonth.Selector = Nothing
+        Me.ucrReceiverMonth.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverMonth.strNcFilePath = ""
+        Me.ucrReceiverMonth.TabIndex = 44
+        Me.ucrReceiverMonth.ucrSelector = Nothing
         '
         'ucrInputSave
         '
         Me.ucrInputSave.AddQuotesIfUnrecognised = True
         Me.ucrInputSave.IsMultiline = False
         Me.ucrInputSave.IsReadOnly = False
-        Me.ucrInputSave.Location = New System.Drawing.Point(113, 398)
+        Me.ucrInputSave.Location = New System.Drawing.Point(113, 374)
         Me.ucrInputSave.Name = "ucrInputSave"
         Me.ucrInputSave.Size = New System.Drawing.Size(170, 21)
         Me.ucrInputSave.TabIndex = 43
@@ -344,19 +356,9 @@ Partial Class dlgClimaticSummary
         Me.ucrReceiverStation.TabIndex = 20
         Me.ucrReceiverStation.ucrSelector = Nothing
         '
-        'ucrSelectorVariable
-        '
-        Me.ucrSelectorVariable.bShowHiddenColumns = False
-        Me.ucrSelectorVariable.bUseCurrentFilter = True
-        Me.ucrSelectorVariable.Location = New System.Drawing.Point(10, 87)
-        Me.ucrSelectorVariable.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorVariable.Name = "ucrSelectorVariable"
-        Me.ucrSelectorVariable.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorVariable.TabIndex = 19
-        '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 433)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 411)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(399, 52)
         Me.ucrBase.TabIndex = 12
@@ -368,23 +370,22 @@ Partial Class dlgClimaticSummary
         Me.ucrPnlAnnual.Size = New System.Drawing.Size(381, 64)
         Me.ucrPnlAnnual.TabIndex = 18
         '
-        'ucrReceiverMonth
+        'ucrSelectorVariable
         '
-        Me.ucrReceiverMonth.frmParent = Me
-        Me.ucrReceiverMonth.Location = New System.Drawing.Point(291, 302)
-        Me.ucrReceiverMonth.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverMonth.Name = "ucrReceiverMonth"
-        Me.ucrReceiverMonth.Selector = Nothing
-        Me.ucrReceiverMonth.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverMonth.strNcFilePath = ""
-        Me.ucrReceiverMonth.TabIndex = 44
-        Me.ucrReceiverMonth.ucrSelector = Nothing
+        Me.ucrSelectorVariable.bShowHiddenColumns = False
+        Me.ucrSelectorVariable.bUseCurrentFilter = True
+        Me.ucrSelectorVariable.Location = New System.Drawing.Point(10, 82)
+        Me.ucrSelectorVariable.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorVariable.Name = "ucrSelectorVariable"
+        Me.ucrSelectorVariable.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorVariable.TabIndex = 45
         '
         'dlgClimaticSummary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(428, 497)
+        Me.ClientSize = New System.Drawing.Size(428, 473)
+        Me.Controls.Add(Me.ucrSelectorVariable)
         Me.Controls.Add(Me.ucrReceiverMonth)
         Me.Controls.Add(Me.lblNewColName)
         Me.Controls.Add(Me.ucrInputSave)
@@ -408,7 +409,6 @@ Partial Class dlgClimaticSummary
         Me.Controls.Add(Me.ucrReceiverYear)
         Me.Controls.Add(Me.ucrReceiverDate)
         Me.Controls.Add(Me.ucrReceiverStation)
-        Me.Controls.Add(Me.ucrSelectorVariable)
         Me.Controls.Add(Me.rdoWithinYear)
         Me.Controls.Add(Me.rdoAnnualVariable)
         Me.Controls.Add(Me.rdoAnnual)
@@ -430,7 +430,6 @@ Partial Class dlgClimaticSummary
     Friend WithEvents rdoAnnualVariable As RadioButton
     Friend WithEvents rdoWithinYear As RadioButton
     Friend WithEvents ucrPnlAnnual As UcrPanel
-    Friend WithEvents ucrSelectorVariable As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
     Friend WithEvents ucrReceiverElement As ucrReceiverSingle
     Friend WithEvents ucrReceiverDay As ucrReceiverSingle
@@ -454,4 +453,5 @@ Partial Class dlgClimaticSummary
     Friend WithEvents lblNewColName As Label
     Friend WithEvents ucrInputSave As ucrInputTextBox
     Friend WithEvents ucrReceiverMonth As ucrReceiverSingle
+    Friend WithEvents ucrSelectorVariable As ucrSelectorByDataFrameAddRemove
 End Class
