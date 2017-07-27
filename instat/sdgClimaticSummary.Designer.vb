@@ -40,12 +40,13 @@ Partial Class sdgClimaticSummary
         Me.ucrInputComboOptions = New instat.ucrInputComboBox()
         Me.ucrPnlSummary = New instat.UcrPanel()
         Me.grpSummary = New System.Windows.Forms.GroupBox()
+        Me.grpSummary.SuspendLayout()
         Me.SuspendLayout()
         '
         'rdoTotals
         '
         Me.rdoTotals.AutoSize = True
-        Me.rdoTotals.Location = New System.Drawing.Point(36, 45)
+        Me.rdoTotals.Location = New System.Drawing.Point(20, 33)
         Me.rdoTotals.Name = "rdoTotals"
         Me.rdoTotals.Size = New System.Drawing.Size(54, 17)
         Me.rdoTotals.TabIndex = 9
@@ -56,7 +57,7 @@ Partial Class sdgClimaticSummary
         'rdoCounts
         '
         Me.rdoCounts.AutoSize = True
-        Me.rdoCounts.Location = New System.Drawing.Point(280, 81)
+        Me.rdoCounts.Location = New System.Drawing.Point(263, 33)
         Me.rdoCounts.Name = "rdoCounts"
         Me.rdoCounts.Size = New System.Drawing.Size(58, 17)
         Me.rdoCounts.TabIndex = 10
@@ -67,7 +68,7 @@ Partial Class sdgClimaticSummary
         'rdoMissing
         '
         Me.rdoMissing.AutoSize = True
-        Me.rdoMissing.Location = New System.Drawing.Point(280, 45)
+        Me.rdoMissing.Location = New System.Drawing.Point(343, 33)
         Me.rdoMissing.Name = "rdoMissing"
         Me.rdoMissing.Size = New System.Drawing.Size(60, 17)
         Me.rdoMissing.TabIndex = 11
@@ -78,7 +79,7 @@ Partial Class sdgClimaticSummary
         'rdoMinima
         '
         Me.rdoMinima.AutoSize = True
-        Me.rdoMinima.Location = New System.Drawing.Point(36, 81)
+        Me.rdoMinima.Location = New System.Drawing.Point(20, 69)
         Me.rdoMinima.Name = "rdoMinima"
         Me.rdoMinima.Size = New System.Drawing.Size(58, 17)
         Me.rdoMinima.TabIndex = 12
@@ -89,7 +90,7 @@ Partial Class sdgClimaticSummary
         'rdoMeans
         '
         Me.rdoMeans.AutoSize = True
-        Me.rdoMeans.Location = New System.Drawing.Point(113, 45)
+        Me.rdoMeans.Location = New System.Drawing.Point(97, 33)
         Me.rdoMeans.Name = "rdoMeans"
         Me.rdoMeans.Size = New System.Drawing.Size(57, 17)
         Me.rdoMeans.TabIndex = 13
@@ -100,7 +101,7 @@ Partial Class sdgClimaticSummary
         'rdoPercentiles
         '
         Me.rdoPercentiles.AutoSize = True
-        Me.rdoPercentiles.Location = New System.Drawing.Point(358, 81)
+        Me.rdoPercentiles.Location = New System.Drawing.Point(341, 69)
         Me.rdoPercentiles.Name = "rdoPercentiles"
         Me.rdoPercentiles.Size = New System.Drawing.Size(77, 17)
         Me.rdoPercentiles.TabIndex = 14
@@ -111,7 +112,7 @@ Partial Class sdgClimaticSummary
         'rdoMedians
         '
         Me.rdoMedians.AutoSize = True
-        Me.rdoMedians.Location = New System.Drawing.Point(188, 45)
+        Me.rdoMedians.Location = New System.Drawing.Point(172, 33)
         Me.rdoMedians.Name = "rdoMedians"
         Me.rdoMedians.Size = New System.Drawing.Size(65, 17)
         Me.rdoMedians.TabIndex = 15
@@ -122,7 +123,7 @@ Partial Class sdgClimaticSummary
         'rdoStd
         '
         Me.rdoStd.AutoSize = True
-        Me.rdoStd.Location = New System.Drawing.Point(188, 81)
+        Me.rdoStd.Location = New System.Drawing.Point(172, 69)
         Me.rdoStd.Name = "rdoStd"
         Me.rdoStd.Size = New System.Drawing.Size(69, 17)
         Me.rdoStd.TabIndex = 16
@@ -133,7 +134,7 @@ Partial Class sdgClimaticSummary
         'rdoMaxima
         '
         Me.rdoMaxima.AutoSize = True
-        Me.rdoMaxima.Location = New System.Drawing.Point(109, 81)
+        Me.rdoMaxima.Location = New System.Drawing.Point(93, 69)
         Me.rdoMaxima.Name = "rdoMaxima"
         Me.rdoMaxima.Size = New System.Drawing.Size(61, 17)
         Me.rdoMaxima.TabIndex = 17
@@ -144,7 +145,7 @@ Partial Class sdgClimaticSummary
         'rdoProportions
         '
         Me.rdoProportions.AutoSize = True
-        Me.rdoProportions.Location = New System.Drawing.Point(357, 45)
+        Me.rdoProportions.Location = New System.Drawing.Point(259, 69)
         Me.rdoProportions.Name = "rdoProportions"
         Me.rdoProportions.Size = New System.Drawing.Size(78, 17)
         Me.rdoProportions.TabIndex = 18
@@ -209,14 +210,25 @@ Partial Class sdgClimaticSummary
         '
         'ucrPnlSummary
         '
-        Me.ucrPnlSummary.Location = New System.Drawing.Point(25, 40)
+        Me.ucrPnlSummary.Location = New System.Drawing.Point(6, 19)
         Me.ucrPnlSummary.Name = "ucrPnlSummary"
-        Me.ucrPnlSummary.Size = New System.Drawing.Size(421, 71)
+        Me.ucrPnlSummary.Size = New System.Drawing.Size(426, 89)
         Me.ucrPnlSummary.TabIndex = 19
         '
         'grpSummary
         '
-        Me.grpSummary.Location = New System.Drawing.Point(15, 12)
+        Me.grpSummary.Controls.Add(Me.rdoProportions)
+        Me.grpSummary.Controls.Add(Me.rdoMissing)
+        Me.grpSummary.Controls.Add(Me.rdoCounts)
+        Me.grpSummary.Controls.Add(Me.rdoMeans)
+        Me.grpSummary.Controls.Add(Me.rdoTotals)
+        Me.grpSummary.Controls.Add(Me.rdoMaxima)
+        Me.grpSummary.Controls.Add(Me.rdoMinima)
+        Me.grpSummary.Controls.Add(Me.rdoPercentiles)
+        Me.grpSummary.Controls.Add(Me.rdoStd)
+        Me.grpSummary.Controls.Add(Me.rdoMedians)
+        Me.grpSummary.Controls.Add(Me.ucrPnlSummary)
+        Me.grpSummary.Location = New System.Drawing.Point(12, 12)
         Me.grpSummary.Name = "grpSummary"
         Me.grpSummary.Size = New System.Drawing.Size(455, 114)
         Me.grpSummary.TabIndex = 27
@@ -234,17 +246,6 @@ Partial Class sdgClimaticSummary
         Me.Controls.Add(Me.ucrInputNumbers)
         Me.Controls.Add(Me.ucrInputPercentiles)
         Me.Controls.Add(Me.ucrInputComboOptions)
-        Me.Controls.Add(Me.rdoProportions)
-        Me.Controls.Add(Me.rdoMaxima)
-        Me.Controls.Add(Me.rdoStd)
-        Me.Controls.Add(Me.rdoMedians)
-        Me.Controls.Add(Me.rdoPercentiles)
-        Me.Controls.Add(Me.rdoMeans)
-        Me.Controls.Add(Me.rdoMinima)
-        Me.Controls.Add(Me.rdoMissing)
-        Me.Controls.Add(Me.rdoCounts)
-        Me.Controls.Add(Me.rdoTotals)
-        Me.Controls.Add(Me.ucrPnlSummary)
         Me.Controls.Add(Me.grpSummary)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -252,8 +253,9 @@ Partial Class sdgClimaticSummary
         Me.Name = "sdgClimaticSummary"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Climatic Summary"
+        Me.grpSummary.ResumeLayout(False)
+        Me.grpSummary.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
