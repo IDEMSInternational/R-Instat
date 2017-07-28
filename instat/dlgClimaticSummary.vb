@@ -41,6 +41,7 @@ Public Class dlgClimaticSummary
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 510
+
         'setting selector
         ucrSelectorVariable.SetParameter(New RParameter("data_name", 0))
         ucrSelectorVariable.SetParameterIsString()
@@ -146,6 +147,9 @@ Public Class dlgClimaticSummary
         clsDayFromAndToOperator = New ROperator
         clsMonthOperator = New ROperator
 
+        ucrSelectorVariable.Reset()
+        ucrReceiverStation.SetMeAsReceiver()
+
         clsDayFromAndToOperator.bToScriptAsRString = True
         clsDayFromAndTo.SetRCommand("instat_calculation$new")
         clsDayFromAndTo.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
@@ -153,10 +157,10 @@ Public Class dlgClimaticSummary
         clsDayFromAndToOperator.SetOperation("&")
         clsDayFromAndToOperator.AddParameter("from", clsROperatorParameter:=clsDayFromOperator, iPosition:=0)
         clsDayFromOperator.SetOperation(">=")
-        clsDayFromOperator.AddParameter("from", 1)
+        clsDayFromOperator.AddParameter("from", 1, iPosition:=1)
         clsDayFromAndToOperator.AddParameter("to", clsROperatorParameter:=clsDayToOperator, iPosition:=1)
         clsDayToOperator.SetOperation("<=")
-        clsDayToOperator.AddParameter("to", 366)
+        clsDayToOperator.AddParameter("to", 366, iPosition:=1)
         clsDayFromAndTo.SetAssignTo("Day_From_and_To")
 
         clsGroupByFunction.SetRCommand("instat_calculation$new")
@@ -168,9 +172,9 @@ Public Class dlgClimaticSummary
 
         clsSummariseFunction.SetRCommand("instat_calculation$new")
         clsSummariseFunction.SetAssignTo("summary")
-        clsSummariseFunction.AddParameter("type", Chr(34) & "summary" & Chr(34))
-        clsSummariseFunction.AddParameter("save", 2)
-        clsSummariseFunction.AddParameter("manipulations", clsRFunctionParameter:=clsManipulationsFunction)
+        clsSummariseFunction.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
+        clsSummariseFunction.AddParameter("save", 2, iPosition:=3)
+        clsSummariseFunction.AddParameter("manipulations", clsRFunctionParameter:=clsManipulationsFunction, iPosition:=5)
 
         clsKeyFunction.SetRCommand("InstatDataObject$add_key")
 
@@ -185,17 +189,18 @@ Public Class dlgClimaticSummary
         clsPercentileFunction.SetRCommand("quantile")
         'clsConcFunction.SetRCommand("c")
 
-        clsSumFunction.AddParameter("na.rm", "TRUE")
-        clsMaximaFunction.AddParameter("na.rm", "TRUE")
-        clsMinimaFunction.AddParameter("na.rm", "TRUE")
-        clsMeanFunction.AddParameter("na.rm", "TRUE")
-        clsMedianFunction.AddParameter("na.rm", "TRUE")
-        clsSdFunction.AddParameter("na.rm", "TRUE")
+        clsSumFunction.AddParameter("na.rm", "TRUE", iPosition:=1)
+        clsMaximaFunction.AddParameter("na.rm", "TRUE", iPosition:=1)
+        clsMinimaFunction.AddParameter("na.rm", "TRUE", iPosition:=1)
+        clsMeanFunction.AddParameter("na.rm", "TRUE", iPosition:=1)
+        clsMedianFunction.AddParameter("na.rm", "TRUE", iPosition:=1)
+        clsSdFunction.AddParameter("na.rm", "TRUE", iPosition:=1)
         clsPercentileFunction.AddParameter("na.rm", "TRUE", iPosition:=2)
 
         clsRunCalcFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsRunCalcFunction.AddParameter("calc", clsRFunctionParameter:=clsSummariseFunction, iPosition:=0)
         clsRunCalcFunction.AddParameter("display", "FALSE", iPosition:=1)
+
         SetGroupByOptions()
         DayBoundaries()
         ucrBase.clsRsyntax.ClearCodes()
@@ -229,7 +234,7 @@ Public Class dlgClimaticSummary
     Private Sub SetSummaryParams()
         strCurrDataName = Chr(34) & ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
         If Not ucrReceiverElement.IsEmpty() Then
-            clsSummariseFunction.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames() & ")")
+            clsSummariseFunction.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames() & ")", iPosition:=4)
         Else
             clsSummariseFunction.RemoveParameterByName("calculated_from")
             clsSummariseFunction.RemoveParameterByName("function_exp")
