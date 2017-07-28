@@ -44,6 +44,10 @@ Public Class sdgClimaticSummary
 
         ucrChkPercentages.SetText("Percentages")
 
+        ucrNudPercentile.SetParameter(New RParameter("probs", 1))
+        ucrNudPercentile.DecimalPlaces = 2
+        ucrNudPercentile.Increment = 0.1
+
         ucrInputNumbers.SetValidationTypeAsNumeric()
 
         ucrInputComboOptions.SetParameter(New RParameter("function_exp"))
@@ -55,17 +59,17 @@ Public Class sdgClimaticSummary
         ucrInputComboOptions.SetItems(dctOptions)
         ucrInputComboOptions.SetDropDownStyleAsNonEditable()
 
-        ucrInputPercentiles.SetParameter(New RParameter("function_exp"))
-        dctPercentiles.Add("0.5", "0.5")
-        dctPercentiles.Add("0.2,0.5", "0.2,0.5,0.8")
-        dctPercentiles.Add("0.25,0.5,0.8", "0.25,0.5,0.8")
-        dctPercentiles.Add("0.1,0.2,0.5,0.8,0.9", "0.1,0.2,0.5,0.8,0.9")
-        dctPercentiles.Add("0.8,0.9,0.95", "0.8,0.9,0.95")
-        ucrInputPercentiles.SetItems(dctPercentiles)
+        'ucrInputPercentiles.SetParameter(New RParameter("function_exp"))
+        'dctPercentiles.Add("0.5", "0.5")
+        'dctPercentiles.Add("0.2,0.5", "0.2,0.5,0.8")
+        'dctPercentiles.Add("0.25,0.5,0.8", "0.25,0.5,0.8")
+        'dctPercentiles.Add("0.1,0.2,0.5,0.8,0.9", "0.1,0.2,0.5,0.8,0.9")
+        'dctPercentiles.Add("0.8,0.9,0.95", "0.8,0.9,0.95")
+        'ucrInputPercentiles.SetItems(dctPercentiles)
 
         'linking controls
         ucrPnlSummary.AddToLinkedControls({ucrInputComboOptions}, {rdoCounts, rdoProportions}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="<")
-        ucrPnlSummary.AddToLinkedControls(ucrInputPercentiles, {rdoPercentiles}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.5")
+        ucrPnlSummary.AddToLinkedControls({ucrNudPercentile}, {rdoPercentiles}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.5")
         ucrPnlSummary.AddToLinkedControls({ucrInputNumbers, ucrChkPercentages}, {rdoProportions}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlSummary.AddToLinkedControls(ucrNudValue, {rdoCounts}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
@@ -89,12 +93,12 @@ Public Class sdgClimaticSummary
         clsLengthFunction = clsNewLengthFunction
         clsProportionFunction = clsNewProportionFunction
         clsPercentileFunction = clsNewPercentileFunction
-        clsConcFunction = clsNewConcFunction
+        'clsConcFunction = clsNewConcFunction
         clsLengthFunction.AddParameter("x", clsRFunctionParameter:=clsCountFunction, bIncludeArgumentName:=False)
-        clsPercentileFunction.AddParameter("x", strTempFuc)
-        clsPercentileFunction.AddParameter("probs", clsRFunctionParameter:=clsConcFunction)
+        clsPercentileFunction.AddParameter("x", strTempFuc, iPosition:=0)
+        'clsPercentileFunction.AddParameter("probs", clsRFunctionParameter:=clsConcFunction)
         FuncExpression()
-        ucrInputPercentiles.SetRCode(clsConcFunction, bReset)
+        ucrNudPercentile.SetRCode(clsPercentileFunction, bReset)
         'ucrPnlSummary.SetRCode(clsSumFunction, bReset)
     End Sub
 
