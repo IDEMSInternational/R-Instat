@@ -74,7 +74,7 @@ Public Class dlgClimaticSummary
 
         ucrReceiverElement.SetParameter(New RParameter("x", 0))
         ucrReceiverElement.SetParameterIsRFunction()
-        ucrReceiverElement.bWithQuotes = False
+        'ucrReceiverElement.bWithQuotes = False
         ucrReceiverElement.strSelectorHeading = "Variables"
         ucrReceiverElement.Selector = ucrSelectorVariable
         ucrReceiverElement.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "rain" & Chr(34)})
@@ -191,12 +191,13 @@ Public Class dlgClimaticSummary
         clsMeanFunction.AddParameter("na.rm", "TRUE")
         clsMedianFunction.AddParameter("na.rm", "TRUE")
         clsSdFunction.AddParameter("na.rm", "TRUE")
-        clsPercentileFunction.AddParameter("na.rm", "TRUE")
+        clsPercentileFunction.AddParameter("na.rm", "TRUE", iPosition:=2)
 
         clsRunCalcFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsRunCalcFunction.AddParameter("calc", clsRFunctionParameter:=clsSummariseFunction, iPosition:=0)
         clsRunCalcFunction.AddParameter("display", "FALSE", iPosition:=1)
         SetGroupByOptions()
+        DayBoundaries()
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.AddToAfterCodes(clsKeyFunction, iPosition:=0)
         ucrBase.clsRsyntax.SetBaseRFunction(clsRunCalcFunction)
@@ -325,7 +326,7 @@ Public Class dlgClimaticSummary
 
     Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlValueChanged, ucrReceiverMonth.ControlContentsChanged
         SetSummaryParams()
-        strTempFuc = ucrReceiverElement.GetVariableNames()
+        strTempFuc = ucrReceiverElement.GetVariableNames(bWithQuotes:=False)
     End Sub
 
     Private Sub ucrReceiverDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrPnlAnnual.ControlContentsChanged
