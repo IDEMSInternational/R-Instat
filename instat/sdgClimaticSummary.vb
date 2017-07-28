@@ -14,12 +14,18 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat.Translations
 Public Class sdgClimaticSummary
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
+    Private clsSummariseFunction, clsSumFunction, clsMinimaFunction, clsMaximaFunction, clsMeanFunction, clsMedianFunction, clsSdFunction, clsCountFunction, clsLengthFunction, clsProportionFunction, clsPercentileFunction, clsConcFunction As New RFunction
+    Private clsRSyntax As RSyntax
+    Private strTempFuc As String
+
     Private Sub sdgClimaticSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'autoTranslate(Me)
+        autoTranslate(Me)
     End Sub
+
     Public Sub InitialiseControls()
         Dim dctOptions As New Dictionary(Of String, String)
         Dim dctPercentiles As New Dictionary(Of String, String)
@@ -40,46 +46,100 @@ Public Class sdgClimaticSummary
 
         ucrInputNumbers.SetValidationTypeAsNumeric()
 
-        ucrInputOptions.SetParameter(New RParameter("function_exp"))
+        ucrInputComboOptions.SetParameter(New RParameter("function_exp"))
         dctOptions.Add(">", ">")
         dctOptions.Add(">=", ">=")
-        dctOptions.Add("=", "=")
+        dctOptions.Add("==", "==")
         dctOptions.Add("<", "<")
         dctOptions.Add("<=", "<=")
-        ucrInputOptions.SetItems(dctOptions)
-        ucrInputOptions.SetDropDownStyleAsNonEditable()
+        ucrInputComboOptions.SetItems(dctOptions)
+        ucrInputComboOptions.SetDropDownStyleAsNonEditable()
 
-        ucrInputPercentiles.SetParameter(New RParameter("function_exp"))
-        dctPercentiles.Add("50", "50")
-        dctPercentiles.Add("20,50", "20,50,80")
-        dctPercentiles.Add("25,50,80", "25,50,80")
-        dctPercentiles.Add("10,20,50,80,90", "10,20,50,80,90")
-        dctPercentiles.Add("80,90,95", "80,90,95")
+        ucrInputPercentiles.SetParameter(New RParameter("probs"))
+        dctPercentiles.Add("0.5", "0.5")
+        dctPercentiles.Add("0.2,0.5", "0.2,0.5,0.8")
+        dctPercentiles.Add("0.25,0.5,0.8", "0.25,0.5,0.8")
+        dctPercentiles.Add("0.1,0.2,0.5,0.8,0.9", "0.1,0.2,0.5,0.8,0.9")
+        dctPercentiles.Add("0.8,0.9,0.95", "0.8,0.9,0.95")
         ucrInputPercentiles.SetItems(dctPercentiles)
 
-        ucrInputProportions.SetParameter(New RParameter("function_exp"))
-        dctProportions.Add(">", ">")
-        dctProportions.Add(">=", ">=")
-        dctProportions.Add("=", "=")
-        dctProportions.Add("<", "<")
-        dctProportions.Add("<=", "<=")
-        ucrInputProportions.SetItems(dctProportions)
-        ucrInputProportions.SetDropDownStyleAsNonEditable()
-
         'linking controls
-        ucrPnlSummary.AddToLinkedControls({ucrInputOptions, ucrNudValue}, {rdoCounts}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlSummary.AddToLinkedControls(ucrInputPercentiles, {rdoPercentiles}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlSummary.AddToLinkedControls({ucrInputProportions, ucrInputNumbers, ucrChkPercentages}, {rdoProportions}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrPnlSummary.AddToLinkedControls(ucrInputOptions, {rdoCounts}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrPnlSummary.AddToLinkedControls(ucrInputOptions, {rdoCounts}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlSummary.AddToLinkedControls({ucrInputComboOptions}, {rdoCounts, rdoProportions}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="<")
+        ucrPnlSummary.AddToLinkedControls(ucrInputPercentiles, {rdoPercentiles}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.5")
+        ucrPnlSummary.AddToLinkedControls({ucrInputNumbers, ucrChkPercentages}, {rdoProportions}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlSummary.AddToLinkedControls(ucrNudValue, {rdoCounts}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewSummariseFunction As RFunction, clsNewSumFunction As RFunction, clsNewMinimaFunction As RFunction, clsNewMaximaFunction As RFunction, clsNewMeanFunction As RFunction, clsNewMedianFunction As RFunction, clsNewSdFunction As RFunction, clsNewCountFunction As RFunction, strNewTempFuc As String, clsNewLengthFunction As RFunction, clsNewProportionFunction As RFunction, clsNewPercentileFunction As RFunction, clsNewConcFunction As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
+        clsRSyntax = clsNewRSyntax
+        strTempFuc = strNewTempFuc
+        clsSummariseFunction = clsNewSummariseFunction
+        clsSumFunction = clsNewSumFunction
+        clsMinimaFunction = clsNewMinimaFunction
+        clsMaximaFunction = clsNewMaximaFunction
+        clsMeanFunction = clsNewMeanFunction
+        clsMedianFunction = clsNewMedianFunction
+        clsSdFunction = clsNewSdFunction
+        clsCountFunction = clsNewCountFunction
+        clsLengthFunction = clsNewLengthFunction
+        clsProportionFunction = clsNewProportionFunction
+        clsPercentileFunction = clsNewPercentileFunction
+        clsConcFunction = clsNewConcFunction
+        clsLengthFunction.AddParameter("x", clsRFunctionParameter:=clsCountFunction, bIncludeArgumentName:=False)
+        clsPercentileFunction.AddParameter("x", strTempFuc)
+        clsPercentileFunction.AddParameter("probs", clsRFunctionParameter:=clsConcFunction)
+        FuncExpression()
+        'ucrInputPercentiles.SetRCode(clsConcFunction, bReset)
+        ucrPnlSummary.SetRCode(clsSumFunction, bReset)
+    End Sub
 
+    Private Sub FuncExpression()
+        clsCountFunction.AddParameter("x", strTempFuc & ucrInputComboOptions.cboInput.SelectedItem & ucrNudValue.Value, bIncludeArgumentName:=False)
+        If rdoTotals.Checked Then
+            clsSumFunction.bToScriptAsRString = True
+            clsSummariseFunction.AddParameter("result_name", Chr(34) & "Sums" & Chr(34))
+            clsSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsSumFunction, iPosition:=1)
+        ElseIf rdoCounts.Checked Then
+            clsLengthFunction.bToScriptAsRString = True
+            clsSummariseFunction.AddParameter("result_name", Chr(34) & "Counts" & Chr(34))
+            clsSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsLengthFunction, iPosition:=1)
+        ElseIf rdoMaxima.Checked Then
+            clsMaximaFunction.bToScriptAsRString = True
+            clsSummariseFunction.AddParameter("result_name", Chr(34) & "Maxima" & Chr(34))
+            clsSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsMaximaFunction, iPosition:=1)
+        ElseIf rdoMinima.Checked Then
+            clsMinimaFunction.bToScriptAsRString = True
+            clsSummariseFunction.AddParameter("result_name", Chr(34) & "Minima" & Chr(34))
+            clsSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsMinimaFunction, iPosition:=1)
+        ElseIf rdoMeans.Checked Then
+            clsMeanFunction.bToScriptAsRString = True
+            clsSummariseFunction.AddParameter("result_name", Chr(34) & "Means" & Chr(34))
+            clsSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsMeanFunction, iPosition:=1)
+        ElseIf rdoMedians.Checked Then
+            clsMedianFunction.bToScriptAsRString = True
+            clsSummariseFunction.AddParameter("result_name", Chr(34) & "Medians" & Chr(34))
+            clsSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsMedianFunction, iPosition:=1)
+        ElseIf rdoStd.Checked Then
+            clsSdFunction.bToScriptAsRString = True
+            clsSummariseFunction.AddParameter("result_name", Chr(34) & "Std.dev's" & Chr(34))
+            clsSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsSdFunction, iPosition:=1)
+        ElseIf rdoPercentiles.Checked Then
+            clsPercentileFunction.bToScriptAsRString = True
+            clsSummariseFunction.AddParameter("result_name", Chr(34) & "Percentiles" & Chr(34))
+            clsSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsPercentileFunction, iPosition:=1)
+        ElseIf rdoProportions.Checked Then
+            clsSummariseFunction.AddParameter("result_name", Chr(34) & "Proportions" & Chr(34))
+        ElseIf rdoMissing.Checked Then
+            clsSummariseFunction.AddParameter("result_name", Chr(34) & "Missing" & Chr(34))
+        End If
+    End Sub
+
+    Private Sub ucrPnlSummary_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlSummary.ControlContentsChanged, ucrInputComboOptions.ControlValueChanged, ucrNudValue.ControlValueChanged
+        FuncExpression()
     End Sub
 End Class
