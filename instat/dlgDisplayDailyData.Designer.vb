@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class dlgDisplayDailyClimaticData
+Partial Class dlgDisplayDailyData
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -135,9 +135,9 @@ Partial Class dlgDisplayDailyClimaticData
         '
         'ucrPnlFrequencyDisplay
         '
-        Me.ucrPnlFrequencyDisplay.Location = New System.Drawing.Point(10, 11)
+        Me.ucrPnlFrequencyDisplay.Location = New System.Drawing.Point(55, 11)
         Me.ucrPnlFrequencyDisplay.Name = "ucrPnlFrequencyDisplay"
-        Me.ucrPnlFrequencyDisplay.Size = New System.Drawing.Size(406, 29)
+        Me.ucrPnlFrequencyDisplay.Size = New System.Drawing.Size(317, 29)
         Me.ucrPnlFrequencyDisplay.TabIndex = 0
         '
         'lblStation
@@ -318,7 +318,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.lblYaxisLower.TabIndex = 0
         Me.lblYaxisLower.Text = "Y-axis Lower:"
         '
-        'dlgDisplayDailyClimaticData
+        'dlgDisplayDailyData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -343,7 +343,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgDisplayDailyClimaticData"
+        Me.Name = "dlgDisplayDailyData"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Display Daily Climatic Data"
         Me.grpGraph.ResumeLayout(False)

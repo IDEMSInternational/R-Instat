@@ -1654,7 +1654,7 @@ Public Class frmMain
         dlgCliBoxplot.ShowDialog()
     End Sub
 
-    Private Sub SummaryOfDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SummaryOfDailyDataToolStripMenuItem.Click
+    Private Sub SummaryOfDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) 
         dlgSummaryofDailydata.ShowDialog()
     End Sub
 End Class

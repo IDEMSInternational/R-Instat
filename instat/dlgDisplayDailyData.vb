@@ -15,9 +15,10 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgDisplayDailyClimaticData
+Public Class dlgDisplayDailyData
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private clsSummaryTable As RFunction
     Private Sub dlgDisplayDailyClimaticData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -42,10 +43,16 @@ Public Class dlgDisplayDailyClimaticData
         ucrReceiverYear.Selector = ucrSelectorDisplayDailyClimaticData
         ucrReceiverYear.SetClimaticType("year")
         ucrReceiverYear.bAutoFill = True
+        ucrReceiverYear.strSelectorHeading = "Year Variables"
+        ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
+        ucrReceiverYear.bAutoFill = True
 
         ucrReceiverDate.Selector = ucrSelectorDisplayDailyClimaticData
         ucrReceiverDate.SetClimaticType("date")
+        ucrReceiverDate.SetParameterIsString()
+        ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
         ucrReceiverDate.bAutoFill = True
+        ucrReceiverDate.strSelectorHeading = "Date Variables"
 
         ucrReceiverElements.Selector = ucrSelectorDisplayDailyClimaticData
         ucrReceiverElements.SetParameter(New RParameter("x", 0))
@@ -72,8 +79,12 @@ Public Class dlgDisplayDailyClimaticData
     End Sub
 
     Private Sub SetDefaults()
+        clsSummaryTable = New RFunction
+
         ucrSelectorDisplayDailyClimaticData.Reset()
-        rdoTable.Enabled = False 'for now
+
+        clsSummaryTable.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
+
 
     End Sub
 

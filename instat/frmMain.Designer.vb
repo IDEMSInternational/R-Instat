@@ -485,7 +485,6 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
-        Me.SummaryOfDailyDataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1537,7 +1536,7 @@ Partial Class frmMain
         '
         'mnuClimaticPrepare
         '
-        Me.mnuClimaticPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DispalyClimaticDataToolStripMenuItem, Me.mnuCimaticPrepareTransform, Me.SummaryOfDailyDataToolStripMenuItem, Me.mnuClimaticPrepareClimaticSummaries, Me.ToolStripSeparator37, Me.mnuClimaticPrepareStartoftheRains, Me.mnuClimaticPrepareSpells, Me.mnuClimaticPrepareExtremes, Me.mnuClimaticPrepareEndOfRains, Me.mnuClimaticPrepareSummary, Me.mnuClimaticPrepareNewWorksheet, Me.mnuClimaticPrepareImportDailyData, Me.mnuClimaticPrepareMakeFactor, Me.mnuClimaticPrepareShiftDailyData, Me.mnuClimaticPrepareUnstackDailyData, Me.mnuClimaticPrepareStackDailyData})
+        Me.mnuClimaticPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DispalyClimaticDataToolStripMenuItem, Me.mnuCimaticPrepareTransform, Me.mnuClimaticPrepareClimaticSummaries, Me.ToolStripSeparator37, Me.mnuClimaticPrepareStartoftheRains, Me.mnuClimaticPrepareSpells, Me.mnuClimaticPrepareExtremes, Me.mnuClimaticPrepareEndOfRains, Me.mnuClimaticPrepareSummary, Me.mnuClimaticPrepareNewWorksheet, Me.mnuClimaticPrepareImportDailyData, Me.mnuClimaticPrepareMakeFactor, Me.mnuClimaticPrepareShiftDailyData, Me.mnuClimaticPrepareUnstackDailyData, Me.mnuClimaticPrepareStackDailyData})
         Me.mnuClimaticPrepare.Name = "mnuClimaticPrepare"
         Me.mnuClimaticPrepare.Size = New System.Drawing.Size(212, 22)
         Me.mnuClimaticPrepare.Tag = "Prepare"
@@ -1545,7 +1544,6 @@ Partial Class frmMain
         '
         'DispalyClimaticDataToolStripMenuItem
         '
-        Me.DispalyClimaticDataToolStripMenuItem.Enabled = False
         Me.DispalyClimaticDataToolStripMenuItem.Name = "DispalyClimaticDataToolStripMenuItem"
         Me.DispalyClimaticDataToolStripMenuItem.Size = New System.Drawing.Size(224, 22)
         Me.DispalyClimaticDataToolStripMenuItem.Text = "Display Daily Climatic Data..."
@@ -3714,12 +3712,6 @@ Partial Class frmMain
         Me.ucrOutput.Size = New System.Drawing.Size(444, 231)
         Me.ucrOutput.TabIndex = 0
         '
-        'SummaryOfDailyDataToolStripMenuItem
-        '
-        Me.SummaryOfDailyDataToolStripMenuItem.Name = "SummaryOfDailyDataToolStripMenuItem"
-        Me.SummaryOfDailyDataToolStripMenuItem.Size = New System.Drawing.Size(224, 22)
-        Me.SummaryOfDailyDataToolStripMenuItem.Text = "Summary of Daily Data..."
-        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -4213,5 +4205,4 @@ Partial Class frmMain
     Friend WithEvents DuplicatesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CheckToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents BoxplotsConceptualisedAndConstructedToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents SummaryOfDailyDataToolStripMenuItem As ToolStripMenuItem
 End Class
