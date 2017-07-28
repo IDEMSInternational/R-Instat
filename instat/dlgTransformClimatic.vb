@@ -54,6 +54,43 @@ Public Class dlgTransformClimatic
         Dim dctInputSumPairs As New Dictionary(Of String, String)
         ucrBase.iHelpTopicID = 358
 
+        'Overall Panel
+        ucrPnlTransform.AddRadioButton(rdoMoving)
+        ucrPnlTransform.AddRadioButton(rdoCount)
+        ucrPnlTransform.AddRadioButton(rdoSpell)
+        ucrPnlTransform.AddRadioButton(rdoWaterBalance)
+
+        ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoMoving, "function_exp", "rollapply")
+        ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoCount, "function_exp", "rollapply")
+        ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoSpell, "function_exp", Chr(34) & "cumsum(" & strRainDay & ")-cummax((" & strRainDay & "==0)*cumsum(" & strRainDay & "))" & Chr(34))
+        ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoWaterBalance, "function_exp", "Reduce")
+
+
+        ' I'm not sure about this at all! it's not FUN = "sum" thta changes between the rdo's!?
+        'ucrPnlTransform.AddParameterValuesCondition(rdoMoving, "FUN", Chr(39) & "sum" & Chr(39))
+        'ucrPnlTransform.AddParameterValuesCondition(rdoCount, "FUN", Chr(39) & "sum" & Chr(39), False)
+        'ucrPnlTransform.AddParameterValuesCondition(rdoSpell, "FUN", Chr(39) & "sum" & Chr(39), False)
+        'ucrPnlTransform.AddParameterValuesCondition(rdoWaterBalance, "FUN", Chr(39) & "sum" & Chr(39), False)
+
+        ' run this
+        If rdoMoving.Checked Then
+            clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRMovingFunction, iPosition:=1)
+            clsRTransform.RemoveParameterByName("sub_calculations")
+            ' no sub calculation here.
+        ElseIf rdoCount.Checked Then
+            clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRCountFunction, iPosition:=1)
+            clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsRTransformCountSpellSub)
+            clsRTransformCountSpellSub.AddParameter("sub1", clsRFunctionParameter:=clsRRainday, bIncludeArgumentName:=False, iPosition:=0)
+        ElseIf rdoSpell.Checked Then
+            clsRTransform.AddParameter("function_exp", Chr(34) & "cumsum(" & strRainDay & ")-cummax((" & strRainDay & "==0)*cumsum(" & strRainDay & "))" & Chr(34), iPosition:=1)
+            clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsRTransformCountSpellSub)
+            clsRTransformCountSpellSub.AddParameter("sub1", clsRFunctionParameter:=clsRRainday, bIncludeArgumentName:=False, iPosition:=0)
+        ElseIf rdoWaterBalance.Checked Then
+            clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRWaterBalanceFunction, iPosition:=1)
+            clsRTransform.RemoveParameterByName("sub_calculations")
+        End If
+
+
         ' Setting receivers
         ucrReceiverData.SetParameter(New RParameter("data", 0))
         ucrReceiverData.SetParameterIsString()
@@ -133,18 +170,6 @@ Public Class dlgTransformClimatic
         ucrInputColName.SetParameter(New RParameter("result_name", 4))
         ucrInputColName.SetName("moving_" & ucrInputSum.cboInput.SelectedItem)
         ucrInputColName.bUserTyped = False
-
-        'Overall Panel
-        ucrPnlTransform.AddRadioButton(rdoMoving)
-        ucrPnlTransform.AddRadioButton(rdoCount)
-        ucrPnlTransform.AddRadioButton(rdoSpell)
-        ucrPnlTransform.AddRadioButton(rdoWaterBalance)
-
-        ' I'm not sure about this at all! it's not FUN = "sum" thta changes between the rdo's!?
-        'ucrPnlTransform.AddParameterValuesCondition(rdoMoving, "FUN", Chr(39) & "sum" & Chr(39))
-        'ucrPnlTransform.AddParameterValuesCondition(rdoCount, "FUN", Chr(39) & "sum" & Chr(39), False)
-        'ucrPnlTransform.AddParameterValuesCondition(rdoSpell, "FUN", Chr(39) & "sum" & Chr(39), False)
-        'ucrPnlTransform.AddParameterValuesCondition(rdoWaterBalance, "FUN", Chr(39) & "sum" & Chr(39), False)
 
         'temporary fix for now
         ucrPnlTransform.bAllowNonConditionValues = True
@@ -234,28 +259,6 @@ Public Class dlgTransformClimatic
         ' this is run as a string Chr(34) & "cumsum(" & strRainDay & ")-cummax((" & strRainDay & "==0)*cumsum(" & strRainDay & "))" & Chr(34))
 
         ' Water Balance
-        ' replace NA values?
-        'clsReplaceNA.SetRCommand("instat_calculation$new")
-        'clsReplaceNA.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
-        'clsReplaceNA.AddParameter("function_exp", clsRFunctionParameter:=clsReplaceNAFunction, iPosition:=1)
-        'clsReplaceNAFunction.SetRCommand("replace")
-        'clsReplaceNAFunction.AddParameter("x", iPosition:=0)
-        'clsReplaceNAFunction.AddParameter("list", clsRFunctionParameter:=clsReplaceNAasElement, iPosition:=1)
-        'clsReplaceNAasElement.SetRCommand("is.na")
-        'clsReplaceNAasElement.AddParameter("element", iPosition:=0)
-        'clsReplaceNAFunction.AddParameter("values", 60, iPosition:=1)
-        'clsReplaceNA.AddParameter("result_name", Chr(34) & "replace_NA" & Chr(34), iPosition:=3)
-        'clsReplaceNA.AddParameter("calculated_from", " list(" & strCurrDataName & "= " & ucrReceiverData.GetVariableNames() & ")", iPosition:=0)
-        'clsReplaceNA.AddParameter("save", "0", iPosition:=4)
-        'clsReplaceNA.SetAssignTo("replace_NA")
-        'clsWaterBalance60.SetRCommand("instat_calculation$new")
-        'clsWaterBalance60.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
-        'clsWaterBalance60.AddParameter("result_name", Chr(34) & "Water_Balance_60" & Chr(34), iPosition:=2)
-        'clsWaterBalance60.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubCalcList, iPosition:=3) ' TODO: sub_calculations need to be done differently, see Start of Rains
-        'clsSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsReplaceNA, iPosition:=0)
-        'clsWaterBalance60.AddParameter("save", "2", iPosition:=4)
-        'clsWaterBalance60.SetAssignTo("water_balance_60")
-
         clsRWaterBalanceFunction.bToScriptAsRString = True
         clsRWaterBalanceFunction.SetRCommand("Reduce")
         clsRWaterBalanceFunction.AddParameter("x", clsRFunctionParameter:=clsPMinFunctionMax, iPosition:=0, bIncludeArgumentName:=False)
@@ -307,7 +310,7 @@ Public Class dlgTransformClimatic
         ucrReceiverData.AddAdditionalCodeParameterPair(clsRWaterBalanceFunction, New RParameter("replace_na", 1, False), iAdditionalPairNo:=4)
 
         ' Moving
-        ucrPnlTransform.SetRCode(clsRMovingFunction, bReset) ' TODO, check this.
+        ucrPnlTransform.SetRCode(clsRMovingFunction, bReset)
         ucrNudSumOver.SetRCode(clsRMovingFunction, bReset)
         ucrInputSum.SetRCode(clsRMovingFunction, bReset)
         ucrReceiverData.SetRCode(clsRMovingFunction, bReset)
@@ -386,8 +389,6 @@ Public Class dlgTransformClimatic
             clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRWaterBalanceFunction, iPosition:=1)
             clsRTransform.RemoveParameterByName("sub_calculations")
         End If
-        clsOverallTransformFunction.AddParameter("calc", clsRFunctionParameter:=clsRTransform, iPosition:=1)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsOverallTransformFunction)
     End Sub
 
     Private Sub SetAssignName()

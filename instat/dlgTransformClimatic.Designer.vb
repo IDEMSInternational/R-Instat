@@ -194,7 +194,7 @@ Partial Class dlgTransformClimatic
         'lblSumRows
         '
         Me.lblSumRows.AutoSize = True
-        Me.lblSumRows.Location = New System.Drawing.Point(244, 25)
+        Me.lblSumRows.Location = New System.Drawing.Point(245, 24)
         Me.lblSumRows.Name = "lblSumRows"
         Me.lblSumRows.Size = New System.Drawing.Size(34, 13)
         Me.lblSumRows.TabIndex = 5
@@ -216,7 +216,7 @@ Partial Class dlgTransformClimatic
         'lblSumOver
         '
         Me.lblSumOver.AutoSize = True
-        Me.lblSumOver.Location = New System.Drawing.Point(157, 25)
+        Me.lblSumOver.Location = New System.Drawing.Point(157, 24)
         Me.lblSumOver.Name = "lblSumOver"
         Me.lblSumOver.Size = New System.Drawing.Size(30, 13)
         Me.lblSumOver.TabIndex = 3
