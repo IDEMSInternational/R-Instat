@@ -55,41 +55,11 @@ Public Class dlgTransformClimatic
         ucrBase.iHelpTopicID = 358
 
         'Overall Panel
-        ucrPnlTransform.AddRadioButton(rdoMoving)
-        ucrPnlTransform.AddRadioButton(rdoCount)
-        ucrPnlTransform.AddRadioButton(rdoSpell)
-        ucrPnlTransform.AddRadioButton(rdoWaterBalance)
-
-        ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoMoving, "function_exp", "rollapply")
-        ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoCount, "function_exp", "rollapply")
-        ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoSpell, "function_exp", Chr(34) & "cumsum(" & strRainDay & ")-cummax((" & strRainDay & "==0)*cumsum(" & strRainDay & "))" & Chr(34))
-        ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoWaterBalance, "function_exp", "Reduce")
-
-
-        ' I'm not sure about this at all! it's not FUN = "sum" thta changes between the rdo's!?
-        'ucrPnlTransform.AddParameterValuesCondition(rdoMoving, "FUN", Chr(39) & "sum" & Chr(39))
-        'ucrPnlTransform.AddParameterValuesCondition(rdoCount, "FUN", Chr(39) & "sum" & Chr(39), False)
-        'ucrPnlTransform.AddParameterValuesCondition(rdoSpell, "FUN", Chr(39) & "sum" & Chr(39), False)
-        'ucrPnlTransform.AddParameterValuesCondition(rdoWaterBalance, "FUN", Chr(39) & "sum" & Chr(39), False)
-
-        ' run this
-        If rdoMoving.Checked Then
-            clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRMovingFunction, iPosition:=1)
-            clsRTransform.RemoveParameterByName("sub_calculations")
-            ' no sub calculation here.
-        ElseIf rdoCount.Checked Then
-            clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRCountFunction, iPosition:=1)
-            clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsRTransformCountSpellSub)
-            clsRTransformCountSpellSub.AddParameter("sub1", clsRFunctionParameter:=clsRRainday, bIncludeArgumentName:=False, iPosition:=0)
-        ElseIf rdoSpell.Checked Then
-            clsRTransform.AddParameter("function_exp", Chr(34) & "cumsum(" & strRainDay & ")-cummax((" & strRainDay & "==0)*cumsum(" & strRainDay & "))" & Chr(34), iPosition:=1)
-            clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsRTransformCountSpellSub)
-            clsRTransformCountSpellSub.AddParameter("sub1", clsRFunctionParameter:=clsRRainday, bIncludeArgumentName:=False, iPosition:=0)
-        ElseIf rdoWaterBalance.Checked Then
-            clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRWaterBalanceFunction, iPosition:=1)
-            clsRTransform.RemoveParameterByName("sub_calculations")
-        End If
-
+        ucrPnlTransform.SetParameter(New RParameter("function_exp", 1))
+        ucrPnlTransform.AddRadioButton(rdoMoving, "rollapply")
+        ucrPnlTransform.AddRadioButton(rdoCount, "rollapply")
+        ucrPnlTransform.AddRadioButton(rdoSpell, Chr(34) & "cumsum(" & strRainDay & ")-cummax((" & strRainDay & "==0)*cumsum(" & strRainDay & "))" & Chr(34))
+        ucrPnlTransform.AddRadioButton(rdoWaterBalance, "Reduce")
 
         ' Setting receivers
         ucrReceiverData.SetParameter(New RParameter("data", 0))
@@ -123,10 +93,10 @@ Public Class dlgTransformClimatic
 
         ' Moving
         ucrInputSum.SetParameter(New RParameter("FUN", 0))
-        dctInputSumPairs.Add("sum", "sum")
-        dctInputSumPairs.Add("max", "max")
-        dctInputSumPairs.Add("min", "min")
-        dctInputSumPairs.Add("mean", "mean")
+        dctInputSumPairs.Add("Sum", "sum")
+        dctInputSumPairs.Add("Maximum", "max")
+        dctInputSumPairs.Add("Minimum", "min")
+        dctInputSumPairs.Add("Mean", "mean")
         ucrInputSum.SetItems(dctInputSumPairs)
         ucrInputSum.SetDropDownStyleAsNonEditable()
         ucrInputSum.SetLinkedDisplayControl(lblSumOver)
@@ -169,22 +139,17 @@ Public Class dlgTransformClimatic
         ' Save Options
         ucrInputColName.SetParameter(New RParameter("result_name", 4))
         ucrInputColName.SetName("moving_" & ucrInputSum.cboInput.SelectedItem)
-        ucrInputColName.bUserTyped = False
 
-        'temporary fix for now
-        ucrPnlTransform.bAllowNonConditionValues = True
+        ucrPnlTransform.AddToLinkedControls(ucrInputSum, {rdoMoving}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Sum")
+        ucrPnlTransform.AddToLinkedControls(ucrNudSumOver, {rdoMoving}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
 
-        ucrPnlTransform.AddToLinkedControls(ucrInputSum, {rdoMoving}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="sum")
-        ucrPnlTransform.AddToLinkedControls(ucrNudSumOver, {rdoMoving}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
+        ucrPnlTransform.AddToLinkedControls({ucrNudCountOver}, {rdoCount}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
+        ucrPnlTransform.AddToLinkedControls({ucrInputCondition}, {rdoCount, rdoSpell}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Between")
+        ucrPnlTransform.AddToLinkedControls({ucrInputSpellLower}, {rdoCount, rdoSpell}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrPnlTransform.AddToLinkedControls({ucrInputSpellUpper}, {rdoCount, rdoSpell}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.85)
 
-        ucrPnlTransform.AddToLinkedControls({ucrNudCountOver}, {rdoCount}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
-        ucrPnlTransform.AddToLinkedControls({ucrInputCondition}, {rdoCount, rdoSpell}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="between")
-        ucrPnlTransform.AddToLinkedControls({ucrInputSpellLower}, {rdoCount, rdoSpell}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
-        ucrPnlTransform.AddToLinkedControls({ucrInputSpellUpper}, {rdoCount, rdoSpell}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.85)
-
-        ucrPnlTransform.AddToLinkedControls(ucrInputEvaporation, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
-        ucrPnlTransform.AddToLinkedControls(ucrNudWBCapacity, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=60)
-
+        ucrPnlTransform.AddToLinkedControls(ucrInputEvaporation, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
+        ucrPnlTransform.AddToLinkedControls(ucrNudWBCapacity, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=60)
     End Sub
 
     Private Sub SetDefaults()
@@ -214,6 +179,7 @@ Public Class dlgTransformClimatic
 
         ucrSelectorTransform.Reset()
         ucrReceiverDate.SetMeAsReceiver()
+        ucrInputColName.bUserTyped = False
 
         ' Moving
         clsRMovingFunction.bToScriptAsRString = True
@@ -302,15 +268,13 @@ Public Class dlgTransformClimatic
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        'ucrReceiverData.AddAdditionalCodeParameterPair(clsReplaceNAFunction, New RParameter("x", 0, False), iAdditionalPairNo:=1)
         ucrReceiverData.AddAdditionalCodeParameterPair(clsReplaceNAasElement, New RParameter("element", 0, False), iAdditionalPairNo:=1)
-        'ucrReceiverData.AddAdditionalCodeParameterPair(clsRCountFunction, New RParameter("data", 0), iAdditionalPairNo:=2)
         ucrReceiverData.AddAdditionalCodeParameterPair(clsRRaindayLowerOperator, New RParameter("rain", 0), iAdditionalPairNo:=2)
         ucrReceiverData.AddAdditionalCodeParameterPair(clsRRaindayUpperOperator, New RParameter("rain", 0), iAdditionalPairNo:=3)
         ucrReceiverData.AddAdditionalCodeParameterPair(clsRWaterBalanceFunction, New RParameter("replace_na", 1, False), iAdditionalPairNo:=4)
 
         ' Moving
-        ucrPnlTransform.SetRCode(clsRMovingFunction, bReset)
+        ucrPnlTransform.SetRCode(clsRTransform, bReset)
         ucrNudSumOver.SetRCode(clsRMovingFunction, bReset)
         ucrInputSum.SetRCode(clsRMovingFunction, bReset)
         ucrReceiverData.SetRCode(clsRMovingFunction, bReset)
@@ -367,16 +331,10 @@ Public Class dlgTransformClimatic
         End Select
     End Sub
 
-    ' todo: connect these with their respective rdo
-    ' Do I:
-    ''' Run four different base functions and change the base function depending what is checked? Probably shouldn't.
-    ''' Connect the function_exp = cls to the radio buttons and also connect the sub = stuff to the radio buttons.
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        'SetGroupByFuncCalcFrom()
+    Private Sub ucrPnlTransform_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransform.ControlValueChanged
         If rdoMoving.Checked Then
             clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRMovingFunction, iPosition:=1)
             clsRTransform.RemoveParameterByName("sub_calculations")
-            ' no sub calculation here.
         ElseIf rdoCount.Checked Then
             clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRCountFunction, iPosition:=1)
             clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsRTransformCountSpellSub)
@@ -441,8 +399,8 @@ Public Class dlgTransformClimatic
         GroupByOptions()
     End Sub
 
-    Private Sub ucrInputColName_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputColName.ControlContentsChanged, ucrPnlTransform.ControlContentsChanged
-        'SetAssignName() ' The MovingColNames() sub called in this currently causes a crash.
+    Private Sub ucrPnlTransform_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrPnlTransform.ControlContentsChanged
+        SetAssignName()
         TestOkEnabled()
     End Sub
 
@@ -451,7 +409,7 @@ Public Class dlgTransformClimatic
         TestOkEnabled()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverData.ControlContentsChanged, ucrNudSumOver.ControlContentsChanged, ucrNudCountOver.ControlContentsChanged, ucrInputSpellLower.ControlContentsChanged, ucrInputSpellUpper.ControlContentsChanged, ucrInputCondition.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged, ucrNudWBCapacity.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverData.ControlContentsChanged, ucrNudSumOver.ControlContentsChanged, ucrNudCountOver.ControlContentsChanged, ucrInputSpellLower.ControlContentsChanged, ucrInputSpellUpper.ControlContentsChanged, ucrInputCondition.ControlContentsChanged, ucrInputColName.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged, ucrNudWBCapacity.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
