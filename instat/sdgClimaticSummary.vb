@@ -130,7 +130,7 @@ Public Class sdgClimaticSummary
             clsSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsMedianFunction, iPosition:=1)
         ElseIf rdoStd.Checked Then
             clsSdFunction.bToScriptAsRString = True
-            clsSummariseFunction.AddParameter("result_name", Chr(34) & "Std.dev's" & Chr(34))
+            clsSummariseFunction.AddParameter("result_name", Chr(34) & "StdDev" & Chr(34))
             clsSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsSdFunction, iPosition:=1)
         ElseIf rdoPercentiles.Checked Then
             clsPercentileFunction.bToScriptAsRString = True
