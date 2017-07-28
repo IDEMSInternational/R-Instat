@@ -174,7 +174,11 @@ Public Class dlgView
                 ucrBase.OKEnabled(False)
             End If
         Else
-            ucrBase.OKEnabled(True)
+            If ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
         End If
     End Sub
 
