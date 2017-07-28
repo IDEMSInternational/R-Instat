@@ -60,7 +60,7 @@ Partial Class dlgClimaticSummary
         Me.ucrNudTo = New instat.ucrNud()
         Me.ucrNudFrom = New instat.ucrNud()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
-        Me.ucrReceiverDay = New instat.ucrReceiverSingle()
+        Me.ucrReceiverDOY = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
@@ -92,7 +92,7 @@ Partial Class dlgClimaticSummary
         Me.rdoAnnualVariable.FlatAppearance.BorderSize = 2
         Me.rdoAnnualVariable.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoAnnualVariable.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoAnnualVariable.Location = New System.Drawing.Point(163, 31)
+        Me.rdoAnnualVariable.Location = New System.Drawing.Point(277, 31)
         Me.rdoAnnualVariable.Name = "rdoAnnualVariable"
         Me.rdoAnnualVariable.Size = New System.Drawing.Size(118, 27)
         Me.rdoAnnualVariable.TabIndex = 16
@@ -108,7 +108,7 @@ Partial Class dlgClimaticSummary
         Me.rdoWithinYear.FlatAppearance.BorderSize = 2
         Me.rdoWithinYear.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoWithinYear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoWithinYear.Location = New System.Drawing.Point(281, 31)
+        Me.rdoWithinYear.Location = New System.Drawing.Point(162, 31)
         Me.rdoWithinYear.Name = "rdoWithinYear"
         Me.rdoWithinYear.Size = New System.Drawing.Size(118, 27)
         Me.rdoWithinYear.TabIndex = 17
@@ -149,9 +149,9 @@ Partial Class dlgClimaticSummary
         Me.lblDay.AutoSize = True
         Me.lblDay.Location = New System.Drawing.Point(288, 203)
         Me.lblDay.Name = "lblDay"
-        Me.lblDay.Size = New System.Drawing.Size(107, 13)
+        Me.lblDay.Size = New System.Drawing.Size(33, 13)
         Me.lblDay.TabIndex = 29
-        Me.lblDay.Text = "Day In Year Column :"
+        Me.lblDay.Text = "DOY:"
         '
         'lblElement
         '
@@ -211,7 +211,7 @@ Partial Class dlgClimaticSummary
         'lblMonth
         '
         Me.lblMonth.AutoSize = True
-        Me.lblMonth.Location = New System.Drawing.Point(293, 289)
+        Me.lblMonth.Location = New System.Drawing.Point(289, 289)
         Me.lblMonth.Name = "lblMonth"
         Me.lblMonth.Size = New System.Drawing.Size(40, 13)
         Me.lblMonth.TabIndex = 41
@@ -308,17 +308,17 @@ Partial Class dlgClimaticSummary
         Me.ucrReceiverElement.TabIndex = 24
         Me.ucrReceiverElement.ucrSelector = Nothing
         '
-        'ucrReceiverDay
+        'ucrReceiverDOY
         '
-        Me.ucrReceiverDay.frmParent = Me
-        Me.ucrReceiverDay.Location = New System.Drawing.Point(291, 219)
-        Me.ucrReceiverDay.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverDay.Name = "ucrReceiverDay"
-        Me.ucrReceiverDay.Selector = Nothing
-        Me.ucrReceiverDay.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverDay.strNcFilePath = ""
-        Me.ucrReceiverDay.TabIndex = 23
-        Me.ucrReceiverDay.ucrSelector = Nothing
+        Me.ucrReceiverDOY.frmParent = Me
+        Me.ucrReceiverDOY.Location = New System.Drawing.Point(291, 219)
+        Me.ucrReceiverDOY.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverDOY.Name = "ucrReceiverDOY"
+        Me.ucrReceiverDOY.Selector = Nothing
+        Me.ucrReceiverDOY.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverDOY.strNcFilePath = ""
+        Me.ucrReceiverDOY.TabIndex = 23
+        Me.ucrReceiverDOY.ucrSelector = Nothing
         '
         'ucrReceiverYear
         '
@@ -405,7 +405,7 @@ Partial Class dlgClimaticSummary
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrReceiverElement)
-        Me.Controls.Add(Me.ucrReceiverDay)
+        Me.Controls.Add(Me.ucrReceiverDOY)
         Me.Controls.Add(Me.ucrReceiverYear)
         Me.Controls.Add(Me.ucrReceiverDate)
         Me.Controls.Add(Me.ucrReceiverStation)
@@ -432,7 +432,7 @@ Partial Class dlgClimaticSummary
     Friend WithEvents ucrPnlAnnual As UcrPanel
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
     Friend WithEvents ucrReceiverElement As ucrReceiverSingle
-    Friend WithEvents ucrReceiverDay As ucrReceiverSingle
+    Friend WithEvents ucrReceiverDOY As ucrReceiverSingle
     Friend WithEvents ucrReceiverYear As ucrReceiverSingle
     Friend WithEvents ucrReceiverDate As ucrReceiverSingle
     Friend WithEvents lblStation As Label
