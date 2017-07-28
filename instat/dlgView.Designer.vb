@@ -152,9 +152,9 @@ Partial Class dlgView
         Me.rdoViewAll.FlatAppearance.BorderSize = 2
         Me.rdoViewAll.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoViewAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoViewAll.Location = New System.Drawing.Point(218, 9)
+        Me.rdoViewAll.Location = New System.Drawing.Point(205, 9)
         Me.rdoViewAll.Name = "rdoViewAll"
-        Me.rdoViewAll.Size = New System.Drawing.Size(165, 28)
+        Me.rdoViewAll.Size = New System.Drawing.Size(140, 28)
         Me.rdoViewAll.TabIndex = 2
         Me.rdoViewAll.Text = "View All"
         Me.rdoViewAll.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -167,17 +167,17 @@ Partial Class dlgView
         Me.rdoViewSelectedColumnsRows.FlatAppearance.BorderSize = 2
         Me.rdoViewSelectedColumnsRows.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoViewSelectedColumnsRows.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoViewSelectedColumnsRows.Location = New System.Drawing.Point(56, 9)
+        Me.rdoViewSelectedColumnsRows.Location = New System.Drawing.Point(67, 9)
         Me.rdoViewSelectedColumnsRows.Name = "rdoViewSelectedColumnsRows"
-        Me.rdoViewSelectedColumnsRows.Size = New System.Drawing.Size(164, 28)
+        Me.rdoViewSelectedColumnsRows.Size = New System.Drawing.Size(140, 28)
         Me.rdoViewSelectedColumnsRows.TabIndex = 1
-        Me.rdoViewSelectedColumnsRows.Text = "View Selected Columns/Rows"
+        Me.rdoViewSelectedColumnsRows.Text = "Selected Columns/Rows"
         Me.rdoViewSelectedColumnsRows.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoViewSelectedColumnsRows.UseVisualStyleBackColor = True
         '
         'ucrPnlViewData
         '
-        Me.ucrPnlViewData.Location = New System.Drawing.Point(52, 5)
+        Me.ucrPnlViewData.Location = New System.Drawing.Point(47, 5)
         Me.ucrPnlViewData.Name = "ucrPnlViewData"
         Me.ucrPnlViewData.Size = New System.Drawing.Size(335, 35)
         Me.ucrPnlViewData.TabIndex = 0
