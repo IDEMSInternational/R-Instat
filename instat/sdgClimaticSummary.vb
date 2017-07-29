@@ -147,7 +147,7 @@ Public Class sdgClimaticSummary
             clsRSyntax.RemoveFromAfterCodes(clsProportionFunction)
             clsRSyntax.AddToAfterCodes(clsSummariseFunction, iPosition:=3)
         ElseIf rdoProportions.Checked Then
-            'clsSummariseFunction.AddParameter("result_name", Chr(34) & "Proportions" & Chr(34))
+            ucrInputNumbers.Visible = True
             clsRSyntax.AddToAfterCodes(clsProportionFunction, iPosition:=3)
             clsRSyntax.RemoveFromAfterCodes(clsSummariseFunction)
         ElseIf rdoMissing.Checked Then

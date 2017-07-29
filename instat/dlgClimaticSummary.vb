@@ -23,7 +23,7 @@ Public Class dlgClimaticSummary
     Private clsSumFunction, clsMaximaFunction, clsMinimaFunction, clsMeanFunction, clsMedianFunction, clsSdFunction, clsCountFunction, clsLengthFunction, clsProportionFunction, clsPercentileFunction As New RFunction
     Private clsAboveFuction, clsTotalFunction, clsSubcalcFunction, clslengthTotalFunction As New RFunction
     Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator, clsMonthOperator As ROperator
-    Dim strCurrDataName As String = ""
+    Private strCurrDataName As String = ""
     'Dim strGroupByCalcFrom As String = ""
     Private strTempFuc As String = ""
     Private Sub dlgClimaticSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -76,7 +76,6 @@ Public Class dlgClimaticSummary
 
         ucrReceiverElement.SetParameter(New RParameter("x", 0))
         ucrReceiverElement.SetParameterIsRFunction()
-        'ucrReceiverElement.bWithQuotes = False
         ucrReceiverElement.strSelectorHeading = "Variables"
         ucrReceiverElement.Selector = ucrSelectorVariable
         ucrReceiverElement.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "rain" & Chr(34)})
@@ -142,7 +141,6 @@ Public Class dlgClimaticSummary
         clsProportionFunction = New RFunction
         clsPercentileFunction = New RFunction
 
-
         clsAboveFuction = New RFunction
         clsTotalFunction = New RFunction
         clsSubcalcFunction = New RFunction
@@ -181,8 +179,6 @@ Public Class dlgClimaticSummary
         clsAboveFuction.AddParameter("type", Chr(34) & "summary" & Chr(34))
         clsAboveFuction.AddParameter("save", 0, iPosition:=1)
         clsAboveFuction.AddParameter("function_exp", clsRFunctionParameter:=clsLengthFunction, iPosition:=1)
-        'clsLengthFunction.AddParameter("x", clsRFunctionParameter:=clsCountFunction, bIncludeArgumentName:=False)
-        'clsAboveFuction.AddParameter("x", strTempFuc, iPosition:=0)
         clsAboveFuction.AddParameter("result_name", Chr(34) & strElementAboveHold & Chr(34))
         clsAboveFuction.SetAssignTo("Element_Above_Hold")
 
@@ -214,7 +210,6 @@ Public Class dlgClimaticSummary
         clsSummariseFunction.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
         clsSummariseFunction.AddParameter("save", 2, iPosition:=3)
         clsSummariseFunction.AddParameter("manipulations", clsRFunctionParameter:=clsManipulationsFunction, iPosition:=5)
-
 
         clsKeyFunction.SetRCommand("InstatDataObject$add_key")
 
@@ -302,7 +297,7 @@ Public Class dlgClimaticSummary
         ucrReceiverElement.SetRCode(clsSumFunction, bReset)
         ucrSelectorVariable.SetRCode(clsKeyFunction, bReset)
         ucrReceiverDate.SetRCode(clsKeyFunction, bReset)
-        'ucrPnlAnnual.SetRCode(clsGroupByFunction, bReset)
+        'ucrPnlAnnual.SetRCode(clsSummariseFunction, bReset)
     End Sub
 
     'Private Sub SetAssignName()
