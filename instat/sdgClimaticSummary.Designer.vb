@@ -33,13 +33,12 @@ Partial Class sdgClimaticSummary
         Me.rdoMaxima = New System.Windows.Forms.RadioButton()
         Me.rdoProportions = New System.Windows.Forms.RadioButton()
         Me.grpSummary = New System.Windows.Forms.GroupBox()
+        Me.ucrNudPercentile = New instat.ucrNud()
         Me.ucrBaseSdgClimaticSummary = New instat.ucrButtonsSubdialogue()
-        Me.ucrNudValue = New instat.ucrNud()
         Me.ucrChkPercentages = New instat.ucrCheck()
         Me.ucrInputNumbers = New instat.ucrInputTextBox()
         Me.ucrInputComboOptions = New instat.ucrInputComboBox()
         Me.ucrPnlSummary = New instat.UcrPanel()
-        Me.ucrNudPercentile = New instat.ucrNud()
         Me.grpSummary.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -173,24 +172,24 @@ Partial Class sdgClimaticSummary
         Me.grpSummary.TabStop = False
         Me.grpSummary.Text = "Summary"
         '
+        'ucrNudPercentile
+        '
+        Me.ucrNudPercentile.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPercentile.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudPercentile.Location = New System.Drawing.Point(344, 132)
+        Me.ucrNudPercentile.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudPercentile.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPercentile.Name = "ucrNudPercentile"
+        Me.ucrNudPercentile.Size = New System.Drawing.Size(62, 21)
+        Me.ucrNudPercentile.TabIndex = 28
+        Me.ucrNudPercentile.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'ucrBaseSdgClimaticSummary
         '
         Me.ucrBaseSdgClimaticSummary.Location = New System.Drawing.Point(132, 185)
         Me.ucrBaseSdgClimaticSummary.Name = "ucrBaseSdgClimaticSummary"
         Me.ucrBaseSdgClimaticSummary.Size = New System.Drawing.Size(142, 30)
         Me.ucrBaseSdgClimaticSummary.TabIndex = 26
-        '
-        'ucrNudValue
-        '
-        Me.ucrNudValue.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudValue.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudValue.Location = New System.Drawing.Point(344, 132)
-        Me.ucrNudValue.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudValue.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudValue.Name = "ucrNudValue"
-        Me.ucrNudValue.Size = New System.Drawing.Size(62, 21)
-        Me.ucrNudValue.TabIndex = 25
-        Me.ucrNudValue.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkPercentages
         '
@@ -226,18 +225,6 @@ Partial Class sdgClimaticSummary
         Me.ucrPnlSummary.Size = New System.Drawing.Size(426, 89)
         Me.ucrPnlSummary.TabIndex = 19
         '
-        'ucrNudPercentile
-        '
-        Me.ucrNudPercentile.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPercentile.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPercentile.Location = New System.Drawing.Point(344, 132)
-        Me.ucrNudPercentile.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudPercentile.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPercentile.Name = "ucrNudPercentile"
-        Me.ucrNudPercentile.Size = New System.Drawing.Size(62, 21)
-        Me.ucrNudPercentile.TabIndex = 28
-        Me.ucrNudPercentile.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'sdgClimaticSummary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -245,7 +232,6 @@ Partial Class sdgClimaticSummary
         Me.ClientSize = New System.Drawing.Size(479, 227)
         Me.Controls.Add(Me.ucrNudPercentile)
         Me.Controls.Add(Me.ucrBaseSdgClimaticSummary)
-        Me.Controls.Add(Me.ucrNudValue)
         Me.Controls.Add(Me.ucrChkPercentages)
         Me.Controls.Add(Me.ucrInputNumbers)
         Me.Controls.Add(Me.ucrInputComboOptions)
@@ -276,7 +262,6 @@ Partial Class sdgClimaticSummary
     Friend WithEvents ucrInputComboOptions As ucrInputComboBox
     Friend WithEvents ucrInputNumbers As ucrInputTextBox
     Friend WithEvents ucrChkPercentages As ucrCheck
-    Friend WithEvents ucrNudValue As ucrNud
     Friend WithEvents ucrBaseSdgClimaticSummary As ucrButtonsSubdialogue
     Friend WithEvents grpSummary As GroupBox
     Friend WithEvents ucrNudPercentile As ucrNud
