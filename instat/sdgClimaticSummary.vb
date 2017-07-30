@@ -19,7 +19,8 @@ Public Class sdgClimaticSummary
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
     Private clsSummariseFunction, clsSumFunction, clsMinimaFunction, clsMaximaFunction, clsMeanFunction, clsMedianFunction, clsSdFunction, clsCountFunction, clsLengthFunction, clsProportionFunction, clsPercentileFunction As New RFunction
-    Private clsAboveFuction, clsTotalFunction As New RFunction
+    Private clsAboveFuction, clsTotalFunction, clsWhichAboveFunction, clsRunCalcFunction As New RFunction
+    Private clsMultipyOperator As New ROperator
     Private clsRSyntax As RSyntax
     Private strTempFuc As String
 
@@ -61,16 +62,16 @@ Public Class sdgClimaticSummary
         ucrInputComboOptions.SetDropDownStyleAsNonEditable()
 
         'linking controls
-        ucrPnlSummary.AddToLinkedControls(ucrInputNumbers, {rdoCounts}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlSummary.AddToLinkedControls({ucrInputComboOptions}, {rdoCounts, rdoProportions}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="<")
+        'ucrPnlSummary.AddToLinkedControls(ucrInputNumbers, {rdoCounts, rdoProportions}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlSummary.AddToLinkedControls({ucrInputComboOptions, ucrInputNumbers}, {rdoCounts, rdoProportions}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="<")
         ucrPnlSummary.AddToLinkedControls({ucrNudPercentile}, {rdoPercentiles}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.5")
-        ucrPnlSummary.AddToLinkedControls({ucrInputNumbers, ucrChkPercentages}, {rdoProportions}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlSummary.AddToLinkedControls({ucrChkPercentages}, {rdoProportions}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         FuncExpression()
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewSummariseFunction As RFunction, clsNewSumFunction As RFunction, clsNewMinimaFunction As RFunction, clsNewMaximaFunction As RFunction, clsNewMeanFunction As RFunction, clsNewMedianFunction As RFunction, clsNewSdFunction As RFunction, clsNewCountFunction As RFunction, strNewTempFuc As String, clsNewLengthFunction As RFunction, clsNewProportionFunction As RFunction, clsNewPercentileFunction As RFunction, clsNewAboveFuction As RFunction, clsNewTotalFunction As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewSummariseFunction As RFunction, clsNewSumFunction As RFunction, clsNewMinimaFunction As RFunction, clsNewMaximaFunction As RFunction, clsNewMeanFunction As RFunction, clsNewMedianFunction As RFunction, clsNewSdFunction As RFunction, clsNewCountFunction As RFunction, strNewTempFuc As String, clsNewLengthFunction As RFunction, clsNewProportionFunction As RFunction, clsNewPercentileFunction As RFunction, clsNewAboveFuction As RFunction, clsNewTotalFunction As RFunction, clsNewWhichAboveFunction As RFunction, clsNewRunCalcFunction As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
@@ -89,15 +90,18 @@ Public Class sdgClimaticSummary
         clsPercentileFunction = clsNewPercentileFunction
         clsAboveFuction = clsNewAboveFuction
         clsTotalFunction = clsNewTotalFunction
+        clsWhichAboveFunction = clsNewWhichAboveFunction
+        clsRunCalcFunction = clsNewRunCalcFunction
         clsLengthFunction.AddParameter("x", clsRFunctionParameter:=clsCountFunction, bIncludeArgumentName:=False)
         clsPercentileFunction.AddParameter("x", strTempFuc, iPosition:=0)
-        'FuncExpression()
+        clsMultipyOperator.SetOperation("*")
+        FuncExpression()
+        CalcParam()
         ucrNudPercentile.SetRCode(clsPercentileFunction, bReset)
         'ucrPnlSummary.SetRCode(clsSumFunction, bReset)
     End Sub
 
     Private Sub FuncExpression()
-        clsCountFunction.AddParameter("x", strTempFuc & ucrInputComboOptions.cboInput.SelectedItem & ucrInputNumbers.GetText, bIncludeArgumentName:=False)
         If rdoTotals.Checked Then
             clsSumFunction.bToScriptAsRString = True
             clsSummariseFunction.AddParameter("result_name", Chr(34) & "Sums" & Chr(34))
@@ -153,11 +157,28 @@ Public Class sdgClimaticSummary
         ElseIf rdoMissing.Checked Then
             clsRSyntax.RemoveFromAfterCodes(clsProportionFunction)
             clsRSyntax.RemoveFromAfterCodes(clsSummariseFunction)
-            clsSummariseFunction.AddParameter("result_name", Chr(34) & "Missing" & Chr(34))
         End If
     End Sub
 
-    Private Sub ucrPnlSummary_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlSummary.ControlContentsChanged, ucrInputComboOptions.ControlValueChanged, ucrInputNumbers.ControlValueChanged
+    Private Sub ucrPnlSummary_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlSummary.ControlContentsChanged
         FuncExpression()
+        CalcParam()
+    End Sub
+
+    Private Sub CalcParam()
+        If rdoProportions.Checked Then
+            clsRunCalcFunction.AddParameter("calc", clsRFunctionParameter:=clsProportionFunction, iPosition:=0)
+        Else
+            clsRunCalcFunction.AddParameter("calc", clsRFunctionParameter:=clsSummariseFunction, iPosition:=0)
+        End If
+    End Sub
+
+    Private Sub ucrInputComboOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboOptions.ControlValueChanged, ucrInputNumbers.ControlValueChanged
+        clsWhichAboveFunction.AddParameter("x", strTempFuc & ucrInputComboOptions.cboInput.SelectedItem & ucrInputNumbers.GetText, bIncludeArgumentName:=False)
+        clsCountFunction.AddParameter("x", strTempFuc & ucrInputComboOptions.cboInput.SelectedItem & ucrInputNumbers.GetText, bIncludeArgumentName:=False)
+    End Sub
+
+    Private Sub ucrChkPercentages_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkPercentages.ControlContentsChanged
+        'clsProportionFunction.AddParameter("function_exp", clsROperatorParameter:=clsMultipyOperator)
     End Sub
 End Class

@@ -21,8 +21,8 @@ Public Class dlgClimaticSummary
     Private bResetSubdialog As Boolean = False
     Private clsKeyFunction, clsGroupByFunction, clsDayFromAndTo, clsSummariseFunction, clsManipulationsFunction, clsRunCalcFunction As New RFunction
     Private clsSumFunction, clsMaximaFunction, clsMinimaFunction, clsMeanFunction, clsMedianFunction, clsSdFunction, clsCountFunction, clsLengthFunction, clsProportionFunction, clsPercentileFunction As New RFunction
-    Private clsAboveFuction, clsTotalFunction, clsSubcalcFunction, clslengthTotalFunction As New RFunction
-    Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator, clsMonthOperator As ROperator
+    Private clsAboveFuction, clsTotalFunction, clsSubcalcFunction, clslengthTotalFunction, clsLengthAboveFunction, clsWhichAboveFunction As New RFunction
+    Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator, clsDivideOperator As New ROperator
     Private strCurrDataName As String = ""
     'Dim strGroupByCalcFrom As String = ""
     Private strTempFuc As String = ""
@@ -124,12 +124,17 @@ Public Class dlgClimaticSummary
 
     Private Sub SetDefaults()
         bResetSubdialog = True
+        Dim strElementAboveHold As String = "Element_Above_Hold"
+        Dim strElementTotal As String = "Total_for_Element"
+        Dim strProprtions As String = "Proportions"
+
         clsKeyFunction = New RFunction
         clsGroupByFunction = New RFunction
         clsDayFromAndTo = New RFunction
         clsRunCalcFunction = New RFunction
         clsSummariseFunction = New RFunction
         clsManipulationsFunction = New RFunction
+
         clsMinimaFunction = New RFunction
         clsMaximaFunction = New RFunction
         clsSumFunction = New RFunction
@@ -145,15 +150,13 @@ Public Class dlgClimaticSummary
         clsTotalFunction = New RFunction
         clsSubcalcFunction = New RFunction
         clslengthTotalFunction = New RFunction
+        clsLengthAboveFunction = New RFunction
+        clsWhichAboveFunction = New RFunction
 
         clsDayFromOperator = New ROperator
         clsDayToOperator = New ROperator
         clsDayFromAndToOperator = New ROperator
-        clsMonthOperator = New ROperator
-
-        Dim strElementAboveHold As String = "Element_Above_Hold"
-        Dim strElementTotal As String = "Total_for_Element"
-        Dim strProprtions As String = "Proportions"
+        clsDivideOperator = New ROperator
 
         ucrSelectorVariable.Reset()
         ucrReceiverStation.SetMeAsReceiver()
@@ -175,6 +178,7 @@ Public Class dlgClimaticSummary
         clsGroupByFunction.AddParameter("type", Chr(34) & "by" & Chr(34))
         clsGroupByFunction.SetAssignTo("Grouping")
 
+        clsLengthFunction.bToScriptAsRString = True
         clsAboveFuction.SetRCommand("instat_calculation$new")
         clsAboveFuction.AddParameter("type", Chr(34) & "summary" & Chr(34))
         clsAboveFuction.AddParameter("save", 0, iPosition:=1)
@@ -182,21 +186,27 @@ Public Class dlgClimaticSummary
         clsAboveFuction.AddParameter("result_name", Chr(34) & strElementAboveHold & Chr(34))
         clsAboveFuction.SetAssignTo("Element_Above_Hold")
 
+        clsLengthAboveFunction.bToScriptAsRString = True
         clsTotalFunction.SetRCommand("instat_calculation$new")
         clsTotalFunction.AddParameter("type", Chr(34) & "summary" & Chr(34))
         clsTotalFunction.AddParameter("save", 0, iPosition:=1)
-        clsTotalFunction.AddParameter("function_exp", clsRFunctionParameter:=clslengthTotalFunction, iPosition:=1)
+        clsTotalFunction.AddParameter("function_exp", clsRFunctionParameter:=clsLengthAboveFunction, iPosition:=1)
+        clsLengthAboveFunction.AddParameter("which", clsRFunctionParameter:=clsWhichAboveFunction, bIncludeArgumentName:=False)
         clsTotalFunction.AddParameter("result_name", Chr(34) & strElementTotal & Chr(34))
         clslengthTotalFunction.AddParameter("length", strTempFuc, bIncludeArgumentName:=False)
         clsTotalFunction.SetAssignTo("Total_for_Element")
 
         clsProportionFunction.SetRCommand("instat_calculation$new")
         clsProportionFunction.AddParameter("type", Chr(34) & "summary" & Chr(34))
-        'clsProportionFunction.AddParameter("function_exp", strElementAboveHold / strElementTotal, iPosition:=1)
+        clsProportionFunction.AddParameter("function_exp", clsROperatorParameter:=clsDivideOperator, iPosition:=1)
         clsProportionFunction.AddParameter("save", 2, iPosition:=1)
         clsProportionFunction.AddParameter("result_name", Chr(34) & strProprtions & Chr(34))
         clsProportionFunction.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubcalcFunction)
         clsProportionFunction.AddParameter("manipulations", clsRFunctionParameter:=clsManipulationsFunction)
+        clsDivideOperator.SetOperation("/")
+        clsDivideOperator.AddParameter("sub_1", clsRFunctionParameter:=clsAboveFuction, bIncludeArgumentName:=False, iPosition:=0)
+        clsDivideOperator.AddParameter("sub_2", clsRFunctionParameter:=clsTotalFunction, bIncludeArgumentName:=False, iPosition:=1)
+        clsProportionFunction.SetAssignTo("proportions")
 
         clsSubcalcFunction.SetRCommand("list")
         clsSubcalcFunction.AddParameter("sub_1", clsRFunctionParameter:=clsAboveFuction, bIncludeArgumentName:=False)
@@ -206,7 +216,7 @@ Public Class dlgClimaticSummary
         clsManipulationsFunction.AddParameter("sub_1", clsRFunctionParameter:=clsGroupByFunction, bIncludeArgumentName:=False)
 
         clsSummariseFunction.SetRCommand("instat_calculation$new")
-        'clsSummariseFunction.SetAssignTo("summary")
+        clsSummariseFunction.SetAssignTo("summary")
         clsSummariseFunction.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
         clsSummariseFunction.AddParameter("save", 2, iPosition:=3)
         clsSummariseFunction.AddParameter("manipulations", clsRFunctionParameter:=clsManipulationsFunction, iPosition:=5)
@@ -222,6 +232,9 @@ Public Class dlgClimaticSummary
         clsCountFunction.SetRCommand("which")
         clsLengthFunction.SetRCommand("length")
         clslengthTotalFunction.SetRCommand("length")
+        clsLengthAboveFunction.SetRCommand("length")
+        clsWhichAboveFunction.SetRCommand("which")
+
         clsPercentileFunction.SetRCommand("quantile")
 
         clsSumFunction.AddParameter("na.rm", "TRUE", iPosition:=1)
@@ -233,7 +246,6 @@ Public Class dlgClimaticSummary
         clsPercentileFunction.AddParameter("na.rm", "TRUE", iPosition:=2)
 
         clsRunCalcFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
-        clsRunCalcFunction.AddParameter("calc", clsRFunctionParameter:=clsSummariseFunction, iPosition:=0)
         clsRunCalcFunction.AddParameter("display", "FALSE", iPosition:=1)
 
         SetGroupByOptions()
@@ -241,7 +253,6 @@ Public Class dlgClimaticSummary
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.AddToAfterCodes(clsKeyFunction, iPosition:=0)
         ucrBase.clsRsyntax.SetBaseRFunction(clsRunCalcFunction)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsGroupByFunction, iPosition:=1)
     End Sub
 
     Private Sub DayBoundaries()
@@ -258,6 +269,7 @@ Public Class dlgClimaticSummary
                 strGroupByCalcFrom = "list(" & strCurrDataName & "=" & ucrReceiverMonth.GetVariableNames() & ", " & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames() & ")"
             End If
         ElseIf rdoAnnual.Checked Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsGroupByFunction, iPosition:=1)
             If Not ucrReceiverYear.IsEmpty Then
                 strGroupByCalcFrom = "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames() & ")"
             ElseIf Not ucrReceiverStation.IsEmpty Then
@@ -293,7 +305,7 @@ Public Class dlgClimaticSummary
         ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
         ucrNudFrom.SetRCode(clsDayFromOperator, bReset)
         ucrNudTo.SetRCode(clsDayToOperator, bReset)
-        ucrReceiverMonth.SetRCode(clsMonthOperator, bReset)
+        'ucrReceiverMonth.SetRCode(clsMonthOperator, bReset)
         ucrReceiverElement.SetRCode(clsSumFunction, bReset)
         ucrSelectorVariable.SetRCode(clsKeyFunction, bReset)
         ucrReceiverDate.SetRCode(clsKeyFunction, bReset)
@@ -335,7 +347,7 @@ Public Class dlgClimaticSummary
     End Sub
 
     Private Sub cmdSummary_Click(sender As Object, e As EventArgs) Handles cmdSummary.Click
-        sdgClimaticSummary.SetRCode(ucrBase.clsRsyntax, clsSummariseFunction, clsSumFunction, clsMinimaFunction, clsMaximaFunction, clsMeanFunction, clsMedianFunction, clsSdFunction, clsCountFunction, strTempFuc, clsLengthFunction, clsProportionFunction, clsPercentileFunction, clsAboveFuction, clsTotalFunction, bReset:=bResetSubdialog)
+        sdgClimaticSummary.SetRCode(ucrBase.clsRsyntax, clsSummariseFunction, clsSumFunction, clsMinimaFunction, clsMaximaFunction, clsMeanFunction, clsMedianFunction, clsSdFunction, clsCountFunction, strTempFuc, clsLengthFunction, clsProportionFunction, clsPercentileFunction, clsAboveFuction, clsTotalFunction, clsWhichAboveFunction, clsRunCalcFunction, bReset:=bResetSubdialog)
         bResetSubdialog = False
         sdgClimaticSummary.ShowDialog()
     End Sub
