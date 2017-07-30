@@ -115,8 +115,9 @@ Public Class dlgClimaticSummary
         ucrReceiverFrom.SetLinkedDisplayControl(lblReceiverFrom)
         ucrReceiverTo.SetLinkedDisplayControl(lblReceiverTo)
         ucrReceiverMonth.SetLinkedDisplayControl(lblMonth)
+
         'TODO:Disabled for now
-        rdoAnnualVariable.Visible = False
+        rdoAnnualVariable.Enabled = False
 
         ucrPnlAnnual.AddParameterValuesCondition(rdoAnnual, "type", "filter")
         ucrPnlAnnual.AddParameterValuesCondition(rdoWithinYear, "type", "filter")
@@ -196,6 +197,7 @@ Public Class dlgClimaticSummary
         clslengthTotalFunction.AddParameter("length", strTempFuc, bIncludeArgumentName:=False)
         clsTotalFunction.SetAssignTo("Total_for_Element")
 
+        clsDivideOperator.bToScriptAsRString = True
         clsProportionFunction.SetRCommand("instat_calculation$new")
         clsProportionFunction.AddParameter("type", Chr(34) & "summary" & Chr(34))
         clsProportionFunction.AddParameter("function_exp", clsROperatorParameter:=clsDivideOperator, iPosition:=1)
@@ -234,7 +236,6 @@ Public Class dlgClimaticSummary
         clslengthTotalFunction.SetRCommand("length")
         clsLengthAboveFunction.SetRCommand("length")
         clsWhichAboveFunction.SetRCommand("which")
-
         clsPercentileFunction.SetRCommand("quantile")
 
         clsSumFunction.AddParameter("na.rm", "TRUE", iPosition:=1)
@@ -305,11 +306,10 @@ Public Class dlgClimaticSummary
         ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
         ucrNudFrom.SetRCode(clsDayFromOperator, bReset)
         ucrNudTo.SetRCode(clsDayToOperator, bReset)
-        'ucrReceiverMonth.SetRCode(clsMonthOperator, bReset)
         ucrReceiverElement.SetRCode(clsSumFunction, bReset)
         ucrSelectorVariable.SetRCode(clsKeyFunction, bReset)
         ucrReceiverDate.SetRCode(clsKeyFunction, bReset)
-        'ucrPnlAnnual.SetRCode(clsSummariseFunction, bReset)
+        'ucrPnlAnnual.SetRCode(clsDayFromAndTo, bReset)
     End Sub
 
     'Private Sub SetAssignName()
@@ -347,7 +347,7 @@ Public Class dlgClimaticSummary
     End Sub
 
     Private Sub cmdSummary_Click(sender As Object, e As EventArgs) Handles cmdSummary.Click
-        sdgClimaticSummary.SetRCode(ucrBase.clsRsyntax, clsSummariseFunction, clsSumFunction, clsMinimaFunction, clsMaximaFunction, clsMeanFunction, clsMedianFunction, clsSdFunction, clsCountFunction, strTempFuc, clsLengthFunction, clsProportionFunction, clsPercentileFunction, clsAboveFuction, clsTotalFunction, clsWhichAboveFunction, clsRunCalcFunction, bReset:=bResetSubdialog)
+        sdgClimaticSummary.SetRCode(ucrBase.clsRsyntax, clsSummariseFunction, clsSumFunction, clsMinimaFunction, clsMaximaFunction, clsMeanFunction, clsMedianFunction, clsSdFunction, clsCountFunction, strTempFuc, clsLengthFunction, clsProportionFunction, clsPercentileFunction, clsAboveFuction, clsTotalFunction, clsWhichAboveFunction, clsRunCalcFunction, clsDivideOperator, bReset:=bResetSubdialog)
         bResetSubdialog = False
         sdgClimaticSummary.ShowDialog()
     End Sub
