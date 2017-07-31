@@ -46,6 +46,11 @@ Partial Class dlgSpells
         Me.lblFrom = New System.Windows.Forms.Label()
         Me.lblThreshold = New System.Windows.Forms.Label()
         Me.grpRainParameters = New System.Windows.Forms.GroupBox()
+        Me.ucrNudTo = New instat.ucrNud()
+        Me.ucrNudFrom = New instat.ucrNud()
+        Me.ucrInputSpellLower = New instat.ucrInputTextBox()
+        Me.ucrInputCondition = New instat.ucrInputComboBox()
+        Me.ucrInputSpellUpper = New instat.ucrInputTextBox()
         Me.lblStation = New System.Windows.Forms.Label()
         Me.lblNewColumnName = New System.Windows.Forms.Label()
         Me.ucrInputNewColumnName = New instat.ucrInputTextBox()
@@ -54,11 +59,6 @@ Partial Class dlgSpells
         Me.ucrReceiverDOY = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
-        Me.ucrNudTo = New instat.ucrNud()
-        Me.ucrNudFrom = New instat.ucrNud()
-        Me.ucrInputSpellLower = New instat.ucrInputTextBox()
-        Me.ucrInputCondition = New instat.ucrInputComboBox()
-        Me.ucrInputSpellUpper = New instat.ucrInputTextBox()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrSelectorForSpells = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
@@ -68,7 +68,7 @@ Partial Class dlgSpells
         'lblElement
         '
         Me.lblElement.AutoSize = True
-        Me.lblElement.Location = New System.Drawing.Point(243, 200)
+        Me.lblElement.Location = New System.Drawing.Point(247, 204)
         Me.lblElement.Name = "lblElement"
         Me.lblElement.Size = New System.Drawing.Size(48, 13)
         Me.lblElement.TabIndex = 9
@@ -77,28 +77,28 @@ Partial Class dlgSpells
         'lblDate
         '
         Me.lblDate.AutoSize = True
-        Me.lblDate.Location = New System.Drawing.Point(247, 70)
+        Me.lblDate.Location = New System.Drawing.Point(247, 44)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(33, 13)
-        Me.lblDate.TabIndex = 3
+        Me.lblDate.TabIndex = 1
         Me.lblDate.Text = "Date:"
         '
         'lblYear
         '
         Me.lblYear.AutoSize = True
-        Me.lblYear.Location = New System.Drawing.Point(248, 114)
+        Me.lblYear.Location = New System.Drawing.Point(247, 84)
         Me.lblYear.Name = "lblYear"
         Me.lblYear.Size = New System.Drawing.Size(32, 13)
-        Me.lblYear.TabIndex = 5
+        Me.lblYear.TabIndex = 3
         Me.lblYear.Text = "Year:"
         '
         'lblDOY
         '
         Me.lblDOY.AutoSize = True
-        Me.lblDOY.Location = New System.Drawing.Point(247, 154)
+        Me.lblDOY.Location = New System.Drawing.Point(247, 124)
         Me.lblDOY.Name = "lblDOY"
         Me.lblDOY.Size = New System.Drawing.Size(66, 13)
-        Me.lblDOY.TabIndex = 7
+        Me.lblDOY.TabIndex = 5
         Me.lblDOY.Text = "Day of Year:"
         '
         'lblTo
@@ -140,95 +140,11 @@ Partial Class dlgSpells
         Me.grpRainParameters.Controls.Add(Me.lblThreshold)
         Me.grpRainParameters.Controls.Add(Me.lblFrom)
         Me.grpRainParameters.Controls.Add(Me.lblTo)
-        Me.grpRainParameters.Location = New System.Drawing.Point(9, 244)
+        Me.grpRainParameters.Location = New System.Drawing.Point(9, 242)
         Me.grpRainParameters.Name = "grpRainParameters"
-        Me.grpRainParameters.Size = New System.Drawing.Size(380, 74)
+        Me.grpRainParameters.Size = New System.Drawing.Size(304, 74)
         Me.grpRainParameters.TabIndex = 11
         Me.grpRainParameters.TabStop = False
-        '
-        'lblStation
-        '
-        Me.lblStation.AutoSize = True
-        Me.lblStation.Location = New System.Drawing.Point(247, 30)
-        Me.lblStation.Name = "lblStation"
-        Me.lblStation.Size = New System.Drawing.Size(43, 13)
-        Me.lblStation.TabIndex = 1
-        Me.lblStation.Text = "Station:"
-        '
-        'lblNewColumnName
-        '
-        Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(6, 352)
-        Me.lblNewColumnName.Name = "lblNewColumnName"
-        Me.lblNewColumnName.Size = New System.Drawing.Size(101, 13)
-        Me.lblNewColumnName.TabIndex = 13
-        Me.lblNewColumnName.Text = "New Column Name:"
-        '
-        'ucrInputNewColumnName
-        '
-        Me.ucrInputNewColumnName.AddQuotesIfUnrecognised = True
-        Me.ucrInputNewColumnName.IsMultiline = False
-        Me.ucrInputNewColumnName.IsReadOnly = False
-        Me.ucrInputNewColumnName.Location = New System.Drawing.Point(113, 350)
-        Me.ucrInputNewColumnName.Name = "ucrInputNewColumnName"
-        Me.ucrInputNewColumnName.Size = New System.Drawing.Size(187, 21)
-        Me.ucrInputNewColumnName.TabIndex = 14
-        '
-        'ucrChkConditional
-        '
-        Me.ucrChkConditional.Checked = False
-        Me.ucrChkConditional.Location = New System.Drawing.Point(9, 323)
-        Me.ucrChkConditional.Name = "ucrChkConditional"
-        Me.ucrChkConditional.Size = New System.Drawing.Size(193, 20)
-        Me.ucrChkConditional.TabIndex = 12
-        '
-        'ucrReceiverStation
-        '
-        Me.ucrReceiverStation.frmParent = Me
-        Me.ucrReceiverStation.Location = New System.Drawing.Point(246, 45)
-        Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverStation.Name = "ucrReceiverStation"
-        Me.ucrReceiverStation.Selector = Nothing
-        Me.ucrReceiverStation.Size = New System.Drawing.Size(143, 20)
-        Me.ucrReceiverStation.strNcFilePath = ""
-        Me.ucrReceiverStation.TabIndex = 2
-        Me.ucrReceiverStation.ucrSelector = Nothing
-        '
-        'ucrReceiverDOY
-        '
-        Me.ucrReceiverDOY.frmParent = Me
-        Me.ucrReceiverDOY.Location = New System.Drawing.Point(246, 169)
-        Me.ucrReceiverDOY.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverDOY.Name = "ucrReceiverDOY"
-        Me.ucrReceiverDOY.Selector = Nothing
-        Me.ucrReceiverDOY.Size = New System.Drawing.Size(143, 20)
-        Me.ucrReceiverDOY.strNcFilePath = ""
-        Me.ucrReceiverDOY.TabIndex = 8
-        Me.ucrReceiverDOY.ucrSelector = Nothing
-        '
-        'ucrReceiverYear
-        '
-        Me.ucrReceiverYear.frmParent = Me
-        Me.ucrReceiverYear.Location = New System.Drawing.Point(246, 128)
-        Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverYear.Name = "ucrReceiverYear"
-        Me.ucrReceiverYear.Selector = Nothing
-        Me.ucrReceiverYear.Size = New System.Drawing.Size(143, 20)
-        Me.ucrReceiverYear.strNcFilePath = ""
-        Me.ucrReceiverYear.TabIndex = 6
-        Me.ucrReceiverYear.ucrSelector = Nothing
-        '
-        'ucrReceiverDate
-        '
-        Me.ucrReceiverDate.frmParent = Me
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(246, 85)
-        Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverDate.Name = "ucrReceiverDate"
-        Me.ucrReceiverDate.Selector = Nothing
-        Me.ucrReceiverDate.Size = New System.Drawing.Size(143, 20)
-        Me.ucrReceiverDate.strNcFilePath = ""
-        Me.ucrReceiverDate.TabIndex = 4
-        Me.ucrReceiverDate.ucrSelector = Nothing
         '
         'ucrNudTo
         '
@@ -270,7 +186,7 @@ Partial Class dlgSpells
         Me.ucrInputCondition.IsReadOnly = False
         Me.ucrInputCondition.Location = New System.Drawing.Point(132, 44)
         Me.ucrInputCondition.Name = "ucrInputCondition"
-        Me.ucrInputCondition.Size = New System.Drawing.Size(155, 21)
+        Me.ucrInputCondition.Size = New System.Drawing.Size(86, 21)
         Me.ucrInputCondition.TabIndex = 6
         '
         'ucrInputSpellUpper
@@ -278,15 +194,99 @@ Partial Class dlgSpells
         Me.ucrInputSpellUpper.AddQuotesIfUnrecognised = True
         Me.ucrInputSpellUpper.IsMultiline = False
         Me.ucrInputSpellUpper.IsReadOnly = False
-        Me.ucrInputSpellUpper.Location = New System.Drawing.Point(293, 44)
+        Me.ucrInputSpellUpper.Location = New System.Drawing.Point(224, 44)
         Me.ucrInputSpellUpper.Name = "ucrInputSpellUpper"
         Me.ucrInputSpellUpper.Size = New System.Drawing.Size(63, 21)
         Me.ucrInputSpellUpper.TabIndex = 7
         '
+        'lblStation
+        '
+        Me.lblStation.AutoSize = True
+        Me.lblStation.Location = New System.Drawing.Point(247, 164)
+        Me.lblStation.Name = "lblStation"
+        Me.lblStation.Size = New System.Drawing.Size(43, 13)
+        Me.lblStation.TabIndex = 7
+        Me.lblStation.Text = "Station:"
+        '
+        'lblNewColumnName
+        '
+        Me.lblNewColumnName.AutoSize = True
+        Me.lblNewColumnName.Location = New System.Drawing.Point(6, 352)
+        Me.lblNewColumnName.Name = "lblNewColumnName"
+        Me.lblNewColumnName.Size = New System.Drawing.Size(101, 13)
+        Me.lblNewColumnName.TabIndex = 13
+        Me.lblNewColumnName.Text = "New Column Name:"
+        '
+        'ucrInputNewColumnName
+        '
+        Me.ucrInputNewColumnName.AddQuotesIfUnrecognised = True
+        Me.ucrInputNewColumnName.IsMultiline = False
+        Me.ucrInputNewColumnName.IsReadOnly = False
+        Me.ucrInputNewColumnName.Location = New System.Drawing.Point(113, 349)
+        Me.ucrInputNewColumnName.Name = "ucrInputNewColumnName"
+        Me.ucrInputNewColumnName.Size = New System.Drawing.Size(187, 21)
+        Me.ucrInputNewColumnName.TabIndex = 14
+        '
+        'ucrChkConditional
+        '
+        Me.ucrChkConditional.Checked = False
+        Me.ucrChkConditional.Location = New System.Drawing.Point(9, 322)
+        Me.ucrChkConditional.Name = "ucrChkConditional"
+        Me.ucrChkConditional.Size = New System.Drawing.Size(193, 20)
+        Me.ucrChkConditional.TabIndex = 12
+        '
+        'ucrReceiverStation
+        '
+        Me.ucrReceiverStation.frmParent = Me
+        Me.ucrReceiverStation.Location = New System.Drawing.Point(247, 179)
+        Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverStation.Name = "ucrReceiverStation"
+        Me.ucrReceiverStation.Selector = Nothing
+        Me.ucrReceiverStation.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverStation.strNcFilePath = ""
+        Me.ucrReceiverStation.TabIndex = 8
+        Me.ucrReceiverStation.ucrSelector = Nothing
+        '
+        'ucrReceiverDOY
+        '
+        Me.ucrReceiverDOY.frmParent = Me
+        Me.ucrReceiverDOY.Location = New System.Drawing.Point(247, 139)
+        Me.ucrReceiverDOY.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverDOY.Name = "ucrReceiverDOY"
+        Me.ucrReceiverDOY.Selector = Nothing
+        Me.ucrReceiverDOY.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverDOY.strNcFilePath = ""
+        Me.ucrReceiverDOY.TabIndex = 6
+        Me.ucrReceiverDOY.ucrSelector = Nothing
+        '
+        'ucrReceiverYear
+        '
+        Me.ucrReceiverYear.frmParent = Me
+        Me.ucrReceiverYear.Location = New System.Drawing.Point(247, 99)
+        Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverYear.Name = "ucrReceiverYear"
+        Me.ucrReceiverYear.Selector = Nothing
+        Me.ucrReceiverYear.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverYear.strNcFilePath = ""
+        Me.ucrReceiverYear.TabIndex = 4
+        Me.ucrReceiverYear.ucrSelector = Nothing
+        '
+        'ucrReceiverDate
+        '
+        Me.ucrReceiverDate.frmParent = Me
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(247, 59)
+        Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverDate.Name = "ucrReceiverDate"
+        Me.ucrReceiverDate.Selector = Nothing
+        Me.ucrReceiverDate.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverDate.strNcFilePath = ""
+        Me.ucrReceiverDate.TabIndex = 2
+        Me.ucrReceiverDate.ucrSelector = Nothing
+        '
         'ucrReceiverElement
         '
         Me.ucrReceiverElement.frmParent = Me
-        Me.ucrReceiverElement.Location = New System.Drawing.Point(243, 215)
+        Me.ucrReceiverElement.Location = New System.Drawing.Point(247, 219)
         Me.ucrReceiverElement.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverElement.Name = "ucrReceiverElement"
         Me.ucrReceiverElement.Selector = Nothing
@@ -307,7 +307,7 @@ Partial Class dlgSpells
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 372)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 376)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 15
@@ -316,7 +316,7 @@ Partial Class dlgSpells
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(412, 428)
+        Me.ClientSize = New System.Drawing.Size(414, 432)
         Me.Controls.Add(Me.lblNewColumnName)
         Me.Controls.Add(Me.ucrInputNewColumnName)
         Me.Controls.Add(Me.ucrChkConditional)
