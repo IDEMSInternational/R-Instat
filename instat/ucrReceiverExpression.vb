@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports RDotNet
@@ -66,7 +66,7 @@ Public Class ucrReceiverExpression
             kvpItem = New KeyValuePair(Of String, String)(strDataFrame, strItem)
             AddToItemsInExpressionList(kvpItem)
             AddToReceiverAtCursorPosition(strItem)
-            Selector.AddToVariablesList(strItem)
+            Selector.AddToVariablesList(strItem, strDataFrame)
             OnSelectionChanged()
         End If
     End Sub
@@ -101,7 +101,7 @@ Public Class ucrReceiverExpression
         If cboExpression.Enabled Then
             If Selector IsNot Nothing Then
                 For Each kvpItem In lstItemsInExpression
-                    Selector.RemoveFromVariablesList(kvpItem.Value)
+                    Selector.RemoveFromVariablesList(kvpItem.Value, kvpItem.Key)
                 Next
             End If
             cboExpression.Text = ""
@@ -152,5 +152,26 @@ Public Class ucrReceiverExpression
             cboExpression.SelectionStart = iCurrentPosition
         End If
         cboExpression.SelectionLength = 0
+    End Sub
+
+    Protected Overrides Sub SetControlValue()
+        Dim clsTempParameter As RParameter
+        Dim strCurrentExpression As String = ""
+
+        clsTempParameter = GetParameter()
+        If clsTempParameter IsNot Nothing Then
+            If bChangeParameterValue Then
+                If bParameterIsString AndAlso clsTempParameter.bIsString Then
+                    If strValuesToIgnore Is Nothing OrElse (Not strValuesToIgnore.Contains(clsTempParameter.strArgumentValue)) Then
+                        strCurrentExpression = clsTempParameter.strArgumentValue
+                    End If
+                ElseIf bParameterIsRFunction AndAlso clsTempParameter.bIsFunction Then
+                End If
+                Clear()
+                If Selector IsNot Nothing AndAlso strCurrentExpression.Trim(Chr(34)) <> "" Then
+                    Add(strCurrentExpression, Selector.strCurrentDataFrame)
+                End If
+            End If
+        End If
     End Sub
 End Class

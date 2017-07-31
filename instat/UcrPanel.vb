@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,11 +11,13 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat
 Public Class UcrPanel
-    Private dctRadioButtonValues As New Dictionary(Of RadioButton, String)
+    Public dctRadioButtonValues As New Dictionary(Of RadioButton, String)
+    Public bSetToFirstIfNoValue As Boolean = True
 
     Public Sub New()
 
@@ -70,7 +72,11 @@ Public Class UcrPanel
             If strNewValue <> "" Then
                 clsTempParam.SetArgumentValue(strNewValue)
             Else
-                MsgBox("Developer error: No parameter value is associated to the currently checked radio button. Cannot update parameter.")
+                If Not bAllowNonConditionValues Then
+                    'Removed because some radio buttons may not set a value for the parameter (but other radio buttons do)
+                    'e.g. Insert Rows/Columns dialog
+                    'MsgBox("Developer error: No parameter value is associated to the currently checked radio button. Cannot update parameter.")
+                End If
             End If
         End If
     End Sub
@@ -87,7 +93,8 @@ Public Class UcrPanel
             End If
         Else
             'If no value reset to a default value
-            If pnlRadios.Controls.Count > 0 AndAlso TypeOf pnlRadios.Controls(0) Is RadioButton Then
+            'Need this not to happen sometimes so set bSetToFirstIfNoValue = False e.g. sdgModelOptions
+            If bSetToFirstIfNoValue AndAlso pnlRadios.Controls.Count > 0 AndAlso TypeOf pnlRadios.Controls(0) Is RadioButton Then
                 rdoTemp = DirectCast(pnlRadios.Controls(0), RadioButton)
                 rdoTemp.Checked = True
             End If

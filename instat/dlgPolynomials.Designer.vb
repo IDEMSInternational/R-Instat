@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgPolynomials
     Inherits System.Windows.Forms.Form
 
@@ -24,7 +40,7 @@ Partial Class dlgPolynomials
     Private Sub InitializeComponent()
         Me.lblDegree = New System.Windows.Forms.Label()
         Me.grpType = New System.Windows.Forms.GroupBox()
-        Me.rdoCentered = New System.Windows.Forms.RadioButton()
+        Me.rdoCentred = New System.Windows.Forms.RadioButton()
         Me.rdoOrthogonal = New System.Windows.Forms.RadioButton()
         Me.rdoSimple = New System.Windows.Forms.RadioButton()
         Me.ucrPnlType = New instat.UcrPanel()
@@ -49,7 +65,7 @@ Partial Class dlgPolynomials
         '
         'grpType
         '
-        Me.grpType.Controls.Add(Me.rdoCentered)
+        Me.grpType.Controls.Add(Me.rdoCentred)
         Me.grpType.Controls.Add(Me.rdoOrthogonal)
         Me.grpType.Controls.Add(Me.rdoSimple)
         Me.grpType.Controls.Add(Me.ucrPnlType)
@@ -60,18 +76,18 @@ Partial Class dlgPolynomials
         Me.grpType.TabStop = False
         Me.grpType.Text = "Type"
         '
-        'rdoCentered
+        'rdoCentred
         '
-        Me.rdoCentered.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.rdoCentred.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.rdoCentered.AutoSize = True
-        Me.rdoCentered.Location = New System.Drawing.Point(13, 43)
-        Me.rdoCentered.Name = "rdoCentered"
-        Me.rdoCentered.Size = New System.Drawing.Size(68, 17)
-        Me.rdoCentered.TabIndex = 2
-        Me.rdoCentered.Tag = "Centered"
-        Me.rdoCentered.Text = "Centered"
-        Me.rdoCentered.UseVisualStyleBackColor = True
+        Me.rdoCentred.AutoSize = True
+        Me.rdoCentred.Location = New System.Drawing.Point(13, 43)
+        Me.rdoCentred.Name = "rdoCentred"
+        Me.rdoCentred.Size = New System.Drawing.Size(62, 17)
+        Me.rdoCentred.TabIndex = 2
+        Me.rdoCentred.Tag = "Centred"
+        Me.rdoCentred.Text = "Centred"
+        Me.rdoCentred.UseVisualStyleBackColor = True
         '
         'rdoOrthogonal
         '
@@ -143,6 +159,7 @@ Partial Class dlgPolynomials
         Me.ucrReceiverPolynomial.Name = "ucrReceiverPolynomial"
         Me.ucrReceiverPolynomial.Selector = Nothing
         Me.ucrReceiverPolynomial.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverPolynomial.strNcFilePath = ""
         Me.ucrReceiverPolynomial.TabIndex = 2
         Me.ucrReceiverPolynomial.ucrSelector = Nothing
         '
@@ -195,7 +212,7 @@ Partial Class dlgPolynomials
     Friend WithEvents ucrSavePoly As ucrSave
     Friend WithEvents ucrNudDegree As ucrNud
     Friend WithEvents grpType As GroupBox
-    Friend WithEvents rdoCentered As RadioButton
+    Friend WithEvents rdoCentred As RadioButton
     Friend WithEvents rdoOrthogonal As RadioButton
     Friend WithEvents rdoSimple As RadioButton
     Friend WithEvents ucrPnlType As UcrPanel

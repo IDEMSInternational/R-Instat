@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
@@ -20,7 +20,7 @@ Public Class dlgDescribeTwoVariable
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
     Public strVarType, strSecondVarType As String
-    Public clsGetDataType, clsGetSecondDataType, clsRCorelation, clsRCustomSummary, clsRAnova, clsRFreqTables As New RFunction
+    Public clsGetDataType, clsGetSecondDataType, clsRCorrelation, clsRCustomSummary, clsRAnova, clsRFreqTables As New RFunction
     Private clsSummariesList As New RFunction
     Private Sub dlgDescribeTwoVariable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -36,18 +36,93 @@ Public Class dlgDescribeTwoVariable
         autoTranslate(Me)
     End Sub
 
+    Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 414
+        ucrBase.clsRsyntax.iCallType = 2
+
+        ucrSelectorDescribeTwoVar.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorDescribeTwoVar.SetParameterIsString()
+
+        ucrReceiverFirstVar.SetParameter(New RParameter("factors", 2))
+        ucrReceiverFirstVar.SetParameterIsString()
+        ucrReceiverFirstVar.Selector = ucrSelectorDescribeTwoVar
+
+        ucrReceiverSecondVar.SetParameter(New RParameter("columns_to_summarise", 1))
+        ucrReceiverSecondVar.SetParameterIsString()
+        ucrReceiverSecondVar.Selector = ucrSelectorDescribeTwoVar
+        ucrReceiverSecondVar.SetSingleTypeStatus(True)
+
+        ucrChkSaveResult.SetParameter(New RParameter("store_results", 4))
+        ucrChkSaveResult.SetText("Save Result")
+        ucrChkSaveResult.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+
+        ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 6))
+        ucrChkOmitMissing.SetText("Omit Missing Values")
+        ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkOmitMissing.bUpdateRCodeFromControl = True
+
+        clsGetDataType.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
+        clsGetDataType.AddParameter("property", "data_type_label")
+
+        clsGetSecondDataType.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
+        clsGetSecondDataType.AddParameter("property", "data_type_label")
+    End Sub
+
+    Private Sub SetDefaults()
+        clsRFreqTables = New RFunction
+        clsRAnova = New RFunction
+        clsRCorrelation = New RFunction
+        clsSummariesList = New RFunction
+        clsRCustomSummary = New RFunction
+
+        ucrSelectorDescribeTwoVar.Reset()
+        ucrReceiverFirstVar.SetMeAsReceiver()
+
+        clsRFreqTables.AddParameter("addmargins", "FALSE", iPosition:=2)
+        clsRFreqTables.AddParameter("proportions", "FALSE", iPosition:=3)
+        clsRFreqTables.AddParameter("percentages", "FALSE", iPosition:=4)
+        clsRFreqTables.AddParameter("transpose", "FALSE", iPosition:=5)
+
+        clsRAnova.AddParameter("signif.stars", "FALSE", iPosition:=2)
+        clsRAnova.AddParameter("sign_level", "FALSE", iPosition:=3)
+        clsRAnova.AddParameter("means", "FALSE", iPosition:=4)
+
+        clsRCorrelation.AddParameter("use", Chr(34) & "pairwise.complete.obs" & Chr(34), iPosition:=2)
+        clsRCorrelation.AddParameter("method", Chr(34) & "pearson" & Chr(34), iPosition:=3)
+
+        clsSummariesList.SetRCommand("c")
+        clsSummariesList.AddParameter("summary_count_non_missing", Chr(34) & "summary_count_non_missing" & Chr(34), bIncludeArgumentName:=False)
+        clsSummariesList.AddParameter("summary_count", Chr(34) & "summary_count" & Chr(34), bIncludeArgumentName:=False)
+        clsSummariesList.AddParameter("summary_sum", Chr(34) & "summary_sum" & Chr(34), bIncludeArgumentName:=False)
+
+        clsRCustomSummary.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
+        clsRCustomSummary.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList)
+
+        clsRCustomSummary.AddParameter("store_results", "FALSE", iPosition:=4)
+        clsRCustomSummary.AddParameter("drop", "TRUE", iPosition:=5)
+        clsRCustomSummary.AddParameter("na.rm", "FALSE", iPosition:=6)
+        clsRCustomSummary.AddParameter("return_output", "TRUE", iPosition:=7)
+
+        clsRCorrelation.SetRCommand("cor")
+        clsRFreqTables.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$frequency_tables")
+        clsRAnova.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$anova_tables")
+
+        Results()
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRCustomSummary)
+        bResetSubdialog = True
+    End Sub
+
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverFirstVar.AddAdditionalCodeParameterPair(clsRAnova, New RParameter("y_col_name", 2), iAdditionalPairNo:=1)
         ucrReceiverFirstVar.AddAdditionalCodeParameterPair(clsRCustomSummary, New RParameter("factors", 2), iAdditionalPairNo:=2)
         ucrReceiverFirstVar.AddAdditionalCodeParameterPair(clsRFreqTables, New RParameter("y_col_name", 2), iAdditionalPairNo:=3)
         'ucrReceiverFirstVar.AddAdditionalCodeParameterPair(clsRCorelation, New RParameter("y", 1), iAdditionalPairNo:=4)
 
-
         ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsRAnova, New RParameter("x_col_names", 1), iAdditionalPairNo:=1)
         ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsRCustomSummary, New RParameter("columns_to_summarise", 1), iAdditionalPairNo:=2)
         ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsRFreqTables, New RParameter("x_col_names", 1), iAdditionalPairNo:=3)
         ' ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsRCorelation, New RParameter("x", 0), iAdditionalPairNo:=4)
-
 
         ucrSelectorDescribeTwoVar.AddAdditionalCodeParameterPair(clsRAnova, New RParameter("data_name", 0), iAdditionalPairNo:=1)
         ucrSelectorDescribeTwoVar.AddAdditionalCodeParameterPair(clsRCustomSummary, New RParameter("data_name", 0), iAdditionalPairNo:=2)
@@ -60,7 +135,7 @@ Public Class dlgDescribeTwoVariable
 
     Public Sub TestOKEnabled()
         If ((Not ucrReceiverFirstVar.IsEmpty()) AndAlso (Not ucrReceiverSecondVar.IsEmpty())) Then
-            If ((strSecondVarType = "numeric" OrElse strSecondVarType = "integer") AndAlso (strVarType = "factor")) AndAlso sdgSummaries.strSummariesParameter = "c()" Then
+            If ((strSecondVarType = "numeric" OrElse strSecondVarType = "integer") AndAlso (strVarType = "factor")) AndAlso clsSummariesList.clsParameters.Count = 0 Then
                 ucrBase.OKEnabled(False)
             Else
                 ucrBase.OKEnabled(True)
@@ -70,92 +145,13 @@ Public Class dlgDescribeTwoVariable
         End If
     End Sub
 
-    Private Sub ReopenDialog()
-
-    End Sub
-
-    Private Sub SetDefaults()
-        ucrSelectorDescribeTwoVar.Reset()
-        ucrReceiverFirstVar.SetMeAsReceiver()
-        clsRFreqTables = New RFunction
-        clsRAnova = New RFunction
-        clsRCorelation = New RFunction
-
-        clsRFreqTables.AddParameter("addmargins", "FALSE")
-        clsRFreqTables.AddParameter("transpose", "FALSE")
-        clsRFreqTables.AddParameter("proportions", "FALSE")
-        clsRFreqTables.AddParameter("percentages", "FALSE")
-        clsRAnova.AddParameter("means", "FALSE")
-        clsRAnova.AddParameter("signif.stars", "FALSE")
-        clsRAnova.AddParameter("sign_level", "FALSE")
-        clsRCorelation.AddParameter("method", Chr(34) & "pearson" & Chr(34))
-        clsRCorelation.AddParameter("use", Chr(34) & "pairwise.complete.obs" & Chr(34))
-
-        clsSummariesList = New RFunction
-        clsSummariesList.SetRCommand("c")
-        clsSummariesList.AddParameter("summary_count_non_missing", Chr(34) & "summary_count_non_missing" & Chr(34), bIncludeArgumentName:=False)
-        clsSummariesList.AddParameter("summary_count", Chr(34) & "summary_count" & Chr(34), bIncludeArgumentName:=False)
-        clsSummariesList.AddParameter("summary_sum", Chr(34) & "summary_sum" & Chr(34), bIncludeArgumentName:=False)
-
-        clsRCustomSummary = New RFunction
-        clsRCustomSummary.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
-        clsRCustomSummary.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList)
-
-        ucrReceiverFirstVar.SetParameter(New RParameter("factors", 2))
-        ucrReceiverFirstVar.SetParameterIsString()
-
-        ucrReceiverSecondVar.SetParameter(New RParameter("columns_to_summarise", 1))
-        ucrReceiverSecondVar.SetParameterIsString()
-
-        clsRCustomSummary.AddParameter("drop", "TRUE")
-        clsRCustomSummary.AddParameter("store_results", "FALSE")
-        clsRCustomSummary.AddParameter("return_output", "TRUE")
-        clsRCustomSummary.AddParameter("na.rm", "FALSE")
-
-        clsRCorelation.SetRCommand("cor")
-        clsRFreqTables.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$frequency_tables")
-        clsRAnova.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$anova_tables")
-
-        cmdSummaries.Visible = False
-        cmdDisplayOptions.Visible = False
-
-        ucrBase.clsRsyntax.SetBaseRFunction(clsRCustomSummary)
-        bResetSubdialog = True
-    End Sub
-
-    Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 414
-        ucrBase.clsRsyntax.iCallType = 2
-
-        ucrSelectorDescribeTwoVar.SetParameter(New RParameter("data_name", 0))
-        ucrSelectorDescribeTwoVar.SetParameterIsString()
-
-        ucrReceiverSecondVar.Selector = ucrSelectorDescribeTwoVar
-        ucrReceiverSecondVar.SetSingleTypeStatus(True)
-
-        ucrChkOmitMissing.SetText("Omit Missing Values")
-        ucrChkOmitMissing.SetParameter(New RParameter("na.rm"))
-        ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkOmitMissing.bUpdateRCodeFromControl = True
-
-        ucrChkSaveResult.SetText("Save Result")
-        ucrChkSaveResult.SetParameter(New RParameter("store_results"))
-        ucrChkSaveResult.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-
-        ucrReceiverFirstVar.Selector = ucrSelectorDescribeTwoVar
-        clsGetDataType.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
-        clsGetDataType.AddParameter("property", "data_type_label")
-        clsGetSecondDataType.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
-        clsGetSecondDataType.AddParameter("property", "data_type_label")
-    End Sub
-
     Private Sub ucrBaseDescribeTwoVar_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
 
-    Private Sub cmdSummaries_click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
+    Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
         sdgSummaries.SetRFunction(clsSummariesList, bResetSubdialog)
         bResetSubdialog = False
         sdgSummaries.ShowDialog()
@@ -187,12 +183,12 @@ Public Class dlgDescribeTwoVariable
             cmdDisplayOptions.Visible = False
             ucrChkOmitMissing.Visible = False
 
-            clsRCorelation.RemoveParameterByName("data_name")
-            ucrBase.clsRsyntax.SetBaseRFunction(clsRCorelation)
+            clsRCorrelation.RemoveParameterByName("data_name")
+            ucrBase.clsRsyntax.SetBaseRFunction(clsRCorrelation)
             'Temporary Fix- Only one of the receivers gets variables (the last variable of the two)
             'ie, when ucrReceiverFirstVar and ucrReceiverSecondVar are set from SetParameterIsString to SetParameterIsRFunction only the second (ucrReceiverSecondVar) changes to SetParameterIsRFunction the first one remains as SetParameterIsString which is not needed
-            clsRCorelation.AddParameter("x", clsRFunctionParameter:=ucrReceiverSecondVar.GetVariables)
-            clsRCorelation.AddParameter("y", clsRFunctionParameter:=ucrReceiverFirstVar.GetVariables)
+            clsRCorrelation.AddParameter("x", clsRFunctionParameter:=ucrReceiverSecondVar.GetVariables)
+            clsRCorrelation.AddParameter("y", clsRFunctionParameter:=ucrReceiverFirstVar.GetVariables)
             ' ucrReceiverFirstVar.SetParameterIsRFunction()
             ' ucrReceiverSecondVar.SetParameterIsRFunction()
         ElseIf ((strVarType = "numeric" OrElse strVarType = "integer") AndAlso (strSecondVarType = "factor")) Then

@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat
@@ -32,6 +32,7 @@ Public Class ucrGeom
     Private bFirstLoad As Boolean = True
     Public strGlobalDataFrame As String = ""
     Protected ucrBaseSelector As ucrSelectorByDataFrame
+    Private iCurrentGeomIndex As Integer = -1
 
     Public Sub New()
 
@@ -673,6 +674,7 @@ Public Class ucrGeom
 
         clsgeom_jitter.SetGeomName("geom_jitter")
         'Mandatory aesthetics : here x and y are mandatory, however, when not filled, default values "" are given. Alternatively, if we want to have at least on filled, could add bIsDependentlyMandatory:=True in both. Planning on refining the mandatory aes methods to include the "" cases systematically.
+        'I am currently making these two mandatory
         clsgeom_jitter.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_jitter.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"})
         'optional
@@ -1173,18 +1175,20 @@ Public Class ucrGeom
 
     Private Sub ucrInputGeoms_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputGeoms.ControlValueChanged
         Dim clsParam As New LayerParameter
-        Dim iGeomIndex As Integer
-        Dim iPreviousGeomIndex As Integer
+        Dim iNewGeomIndex As Integer
 
-        iGeomIndex = lstAllGeoms.FindIndex(Function(x) x.strGeomName = ucrInputGeoms.GetText())
-        iPreviousGeomIndex = lstAllGeoms.FindIndex(Function(x) x.strGeomName = clsGeomFunction.strRCommand)
-        If iGeomIndex <> -1 Then
-            clsCurrGeom = lstAllGeoms(iGeomIndex)
-            If clsGeomFunction.strRCommand <> clsCurrGeom.strGeomName Then
-                For Each clsParam In lstAllGeoms(iPreviousGeomIndex).clsLayerParameters
+        iNewGeomIndex = lstAllGeoms.FindIndex(Function(x) x.strGeomName = ucrInputGeoms.GetText())
+        If iCurrentGeomIndex = -1 Then
+            iCurrentGeomIndex = lstAllGeoms.FindIndex(Function(x) x.strGeomName = clsGeomFunction.strRCommand)
+        End If
+        If iNewGeomIndex <> -1 Then
+            clsCurrGeom = lstAllGeoms(iNewGeomIndex)
+            If iNewGeomIndex <> iCurrentGeomIndex Then
+                For Each clsParam In lstAllGeoms(iCurrentGeomIndex).clsLayerParameters
                     clsGeomFunction.RemoveParameterByName(clsParam.strLayerParameterName)
                 Next
                 clsGeomFunction.SetRCommand(clsCurrGeom.strGeomName)
+                iCurrentGeomIndex = iNewGeomIndex
                 RaiseEvent GeomChanged()
             Else
                 clsGeomFunction.SetRCommand(clsCurrGeom.strGeomName)

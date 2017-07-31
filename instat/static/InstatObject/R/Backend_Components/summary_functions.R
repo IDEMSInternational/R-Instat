@@ -3,7 +3,7 @@ data_object$set("public", "merge_data", function(new_data, by = NULL, type = "le
   #TODO how to use match argument with dplyr join functions
   old_metadata <- attributes(private$data)
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
-  
+
   if(type == "left") {
     new_data <- dplyr::left_join(curr_data, new_data, by)
   }
@@ -83,13 +83,23 @@ instat_object$set("public", "append_summaries_to_data_object", function(out, dat
 } 
 )
 
-instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), store_results = TRUE, drop = TRUE, na.rm = FALSE, return_output = FALSE, summary_name = NA, weights = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, perc_return_all = FALSE, ...) {
+instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), store_results = TRUE, drop = TRUE, na.rm = FALSE, return_output = FALSE, summary_name = NA, weights = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, perc_return_all = FALSE, silent = FALSE, ...) {
   include_columns_to_summarise <- TRUE
   if(is.null(columns_to_summarise) || length(columns_to_summarise) == 0) {
     # temporary fix for doing counts of a data frame
     # dplyr cannot count data frame groups without passing a column (https://stackoverflow.com/questions/44217265/passing-correct-data-frame-from-within-dplyrsummarise)
     # This is a known issue (https://github.com/tidyverse/dplyr/issues/2752)
-    if(length(summaries) != 1 || summaries != count_label) stop("When there are no columns to summarise can only use count function as summary")
+    if(length(summaries) != 1 || summaries != count_label) {
+      mes <- "When there are no columns to summarise can only use count function as summary"
+      if(silent) {
+        warning(mes, "Continuing summaries by using count only.")
+        columns_to_summarise <- self$get_column_names(data_name)[1]
+        summaries <- count_label
+      }
+      else {
+        stop(mes)
+      }
+    }
     else columns_to_summarise <- self$get_column_names(data_name)[1]
     include_columns_to_summarise <- FALSE
   }
@@ -100,7 +110,7 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
   if(!store_results) save <- 0
   else save <- 2
   
-  summaries_display <- sapply(summaries, function(x) ifelse(startsWith(x, "summary_"), substring(x, 9), x))
+  summaries_display <- as.vector(sapply(summaries, function(x) ifelse(startsWith(x, "summary_"), substring(x, 9), x)))
   
   if(percentage_type == "factors") {
     manip_factors <- intersect(factors, perc_total_factors)
@@ -178,12 +188,19 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
         if(!perc_decimal) {
           function_exp <- paste0("(", function_exp, ") * 100")
         }
-        summary_calculation <- instat_calculation$new(type = "calculation", result_name = paste0("perc_", result_name),
+        perc_result_name <- paste0("perc_", result_name)
+        summary_calculation <- instat_calculation$new(type = "calculation", result_name = perc_result_name,
                                                       function_exp = function_exp,
                                                       calculated_from = list(), save = save, sub_calculations = list(totals_calculation, values_calculation))
       }
       sub_calculations[[length(sub_calculations) + 1]] <- summary_calculation
     }
+  }
+  if(self$filter_applied(data_name)) {
+    curr_filter <- self$get_current_filter(data_name)
+    curr_filter_name <- curr_filter[["name"]]
+    curr_filter_calc <- self$get_filter_as_instat_calculation(data_name, curr_filter_name)
+    manipulations <- c(curr_filter_calc, manipulations)
   }
   combined_calc_sum <- instat_calculation$new(type="combination", sub_calculations = sub_calculations, manipulations = manipulations)
   out <- self$apply_instat_calculation(combined_calc_sum)
@@ -228,33 +245,33 @@ instat_object$set("public", "summary", function(data_name, columns_to_summarise,
     else if(col_data_type == "Date") {
       #To be defined
     }
-    if(length(column_summaries) != 0) {
-      calc <- calculation$new(type = "summary", parameters = list(data_name = data_name, columns_to_summarise = col_new, summaries = column_summaries, factors = factors, store_results = store_results, drop = drop, return_output = return_output, summary_name = summary_name, add_cols = add_cols, ... = ...),  filters = filter_names, calculated_from = calculated_from)
-      results <- self$apply_calculation(calc)
-      if(!is.null(results)) {
-        results <- as.data.frame(t(results[,-1]))
-        #row_names(results) <- get_summary_calculation_names(calc, column_summaries, col_new, calc_filters)
-        names(results) <- col_new
-        #use summaries as row names for now. This needs to change in the long run
-        row.names(results) <- column_summaries
-        if(i == 1) {
-          calc_columns <- results
-        }
-        else {
-          calc_columns <- merge(calc_columns, results, by=0, all=TRUE, sort = FALSE)#Sort should be user defined
-          #we need to clarify which filters are being used
-          rownames(calc_columns)=calc_columns$Row.names
-          calc_columns<-calc_columns[,-1]
-        }
-        i = i + 1
-      }
-      else {
-        warning("There is no output to return")
-        calc_columns <- NULL
-      }
+    if(length(column_summaries) == 0) {
+      results <- data.frame(matrix(ncol = length(summaries) + 1))
+      names(results) <- c(".id", summaries)
+      column_summaries <- summaries
     }
     else {
-      warning("There is no output to return")
+      calc <- calculation$new(type = "summary", parameters = list(data_name = data_name, columns_to_summarise = col_new, summaries = column_summaries, factors = factors, store_results = store_results, drop = drop, return_output = return_output, summary_name = summary_name, add_cols = add_cols, ... = ...),  filters = filter_names, calculated_from = calculated_from)
+      results <- self$apply_calculation(calc)
+    }
+    if(!is.null(results)) {
+      results <- as.data.frame(t(results[,-1]))
+      #row_names(results) <- get_summary_calculation_names(calc, column_summaries, col_new, calc_filters)
+      names(results) <- col_new
+      #use summaries as row names for now. This needs to change in the long run
+      row.names(results) <- column_summaries
+      if(i == 1) {
+        calc_columns <- results
+      }
+      else {
+        calc_columns <- merge(calc_columns, results, by=0, all=TRUE, sort = FALSE)#Sort should be user defined
+        #we need to clarify which filters are being used
+        rownames(calc_columns)=calc_columns$Row.names
+        calc_columns<-calc_columns[,-1]
+      }
+      i = i + 1
+    }
+    else {
       calc_columns <- NULL
     }
   }
@@ -494,7 +511,8 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
     else return(out)
   }
   else {
-    margin_name <- ifelse(length(summaries) == 1, summaries_display, "MARGIN")
+    #margin_name <- ifelse(length(summaries) == 1, summaries_display, "MARGIN")
+    margin_name <- "All"
     cell_values <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = store_results, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, perc_return_all = FALSE)
     for(i in seq_along(factors)) {
       levels(cell_values[[i]]) <- c(levels(cell_values[[i]]), na_level_display)

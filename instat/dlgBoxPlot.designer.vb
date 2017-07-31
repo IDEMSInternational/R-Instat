@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgBoxplot
     Inherits System.Windows.Forms.Form
 
@@ -76,7 +92,7 @@ Partial Class dlgBoxplot
         Me.cmdBoxPlotOptions.Name = "cmdBoxPlotOptions"
         Me.cmdBoxPlotOptions.Size = New System.Drawing.Size(120, 25)
         Me.cmdBoxPlotOptions.TabIndex = 10
-        Me.cmdBoxPlotOptions.Tag = "BoxPlot_Options"
+        Me.cmdBoxPlotOptions.Tag = "Boxplot_Options"
         Me.cmdBoxPlotOptions.Text = "Boxplot Options"
         Me.cmdBoxPlotOptions.UseVisualStyleBackColor = True
         '
@@ -87,6 +103,7 @@ Partial Class dlgBoxplot
         Me.ucrVariablesAsFactorForBoxplot.Name = "ucrVariablesAsFactorForBoxplot"
         Me.ucrVariablesAsFactorForBoxplot.Selector = Nothing
         Me.ucrVariablesAsFactorForBoxplot.Size = New System.Drawing.Size(120, 130)
+        Me.ucrVariablesAsFactorForBoxplot.strNcFilePath = ""
         Me.ucrVariablesAsFactorForBoxplot.TabIndex = 5
         Me.ucrVariablesAsFactorForBoxplot.ucrSelector = Nothing
         Me.ucrVariablesAsFactorForBoxplot.ucrVariableSelector = Nothing
@@ -99,6 +116,7 @@ Partial Class dlgBoxplot
         Me.ucrSecondFactorReceiver.Name = "ucrSecondFactorReceiver"
         Me.ucrSecondFactorReceiver.Selector = Nothing
         Me.ucrSecondFactorReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrSecondFactorReceiver.strNcFilePath = ""
         Me.ucrSecondFactorReceiver.TabIndex = 9
         Me.ucrSecondFactorReceiver.ucrSelector = Nothing
         '
@@ -120,6 +138,7 @@ Partial Class dlgBoxplot
         Me.ucrByFactorsReceiver.Name = "ucrByFactorsReceiver"
         Me.ucrByFactorsReceiver.Selector = Nothing
         Me.ucrByFactorsReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrByFactorsReceiver.strNcFilePath = ""
         Me.ucrByFactorsReceiver.TabIndex = 7
         Me.ucrByFactorsReceiver.ucrSelector = Nothing
         '

@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Public Class sdgDescribeTwoVarGraph
     ' Public bControlsInitialised As Boolean = False
@@ -62,13 +63,13 @@ Public Class sdgDescribeTwoVarGraph
         ucrNumericByNumeric.SetItems({"Scatter plot", "Line plot", "Scatter and line plot"})
         ucrNumericByNumeric.SetName("Scatter plot")
         ucrNumericByNumeric.SetDropDownStyleAsNonEditable()
-        ucrNumericByCategorical.SetItems({"Box plot", "Histogram", "Density plot", "Frequency polygon", "Dot plot", "Point plot"})
+        ucrNumericByCategorical.SetItems({"Boxplot", "Histogram", "Density plot", "Frequency polygon", "Dot plot", "Point plot", "Violin plot", "Jitter plot", "Boxplot + Jitter", "Violin plot + Jitter plot", "Violin plot + Boxplot"})
         'How different is the point plot from the summary plot?
-        ucrNumericByCategorical.SetName("Box plot")
+        ucrNumericByCategorical.SetName("Boxplot")
         ucrNumericByCategorical.SetDropDownStyleAsNonEditable()
         'ucrCategoricalByNumeric.SetItems({"Summary plot"})
-        ucrCategoricalByNumeric.SetItems({"Box plot", "Histogram", "Density plot", "Frequency polygon", "Dot plot", "Point plot"})
-        ucrCategoricalByNumeric.SetName("Box plot")
+        ucrCategoricalByNumeric.SetItems({"Boxplot", "Histogram", "Density plot", "Frequency polygon", "Dot plot", "Point plot", "Violin plot", "Jitter plot", "Boxplot + Jitter", "Violin plot + Jitter plot", "Violin plot + Boxplot"})
+        ucrCategoricalByNumeric.SetName("Boxplot")
         ucrCategoricalByNumeric.SetDropDownStyleAsNonEditable()
         ucrCategoricalByCategorical.SetItems({"Bar plot", "Dot plot"})
         ucrCategoricalByCategorical.SetName("Bar plot")

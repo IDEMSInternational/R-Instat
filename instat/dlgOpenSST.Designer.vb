@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgOpenSST
     Inherits System.Windows.Forms.Form
 
@@ -75,8 +91,8 @@ Partial Class dlgOpenSST
         Me.lblSSTName.Name = "lblSSTName"
         Me.lblSSTName.Size = New System.Drawing.Size(114, 13)
         Me.lblSSTName.TabIndex = 3
-        Me.lblSSTName.Tag = "SST_Dataframe_Name:"
-        Me.lblSSTName.Text = "SST Dataframe Name:"
+        Me.lblSSTName.Tag = "SST_Data_Frame_Name:"
+        Me.lblSSTName.Text = "SST Data Frame Name:"
         '
         'grpCSV
         '
@@ -250,8 +266,8 @@ Partial Class dlgOpenSST
         Me.lblLocationName.Name = "lblLocationName"
         Me.lblLocationName.Size = New System.Drawing.Size(134, 13)
         Me.lblLocationName.TabIndex = 7
-        Me.lblLocationName.Tag = "Location_Dataframe_Name:"
-        Me.lblLocationName.Text = "Location Dataframe Name:"
+        Me.lblLocationName.Tag = "Location_Data_Frame_Name:"
+        Me.lblLocationName.Text = "Location Data Frame Name:"
         '
         'ucrInputNameLocation
         '

@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
@@ -62,19 +62,33 @@ Public Class DlgDefineClimaticData
         ucrSelectorDefineClimaticData.SetParameter(New RParameter("data_name", 0))
         ucrSelectorDefineClimaticData.SetParameterIsString()
         ucrReceiverDate.Tag = "date"
+        ucrReceiverDate.strSelectorHeading = "Date"
         ucrReceiverCloudCover.Tag = "cloud_cover"
+        ucrReceiverCloudCover.strSelectorHeading = "Numerics"
         ucrReceiverStationName.Tag = "station"
+        ucrReceiverStationName.strSelectorHeading = "Factors"
         ucrReceiverMaxTemp.Tag = "temp_max"
+        ucrReceiverMaxTemp.strSelectorHeading = "Numerics"
         ucrReceiverMinTemp.Tag = "temp_min"
+        ucrReceiverMinTemp.strSelectorHeading = "Numerics"
         ucrReceiverRadiation.Tag = "radiation"
+        ucrReceiverRadiation.strSelectorHeading = "Numerics"
         ucrReceiverRain.Tag = "rain"
+        ucrReceiverRain.strSelectorHeading = "Numerics"
         ucrReceiverSunshine.Tag = "sunshine_hours"
+        ucrReceiverSunshine.strSelectorHeading = "Numerics"
         ucrReceiverWindDirection.Tag = "wind_direction"
+        ucrReceiverWindDirection.strSelectorHeading = "Numerics"
         ucrReceiverWindSpeed.Tag = "wind_speed"
+        ucrReceiverWindSpeed.strSelectorHeading = "Numerics"
         ucrReceiverYear.Tag = "year"
+        ucrReceiverYear.strSelectorHeading = "Numerics"
         ucrReceiverMonth.Tag = "month"
+        ucrReceiverMonth.strSelectorHeading = "Numerics"
         ucrReceiverDay.Tag = "day"
+        ucrReceiverDay.strSelectorHeading = "Numerics"
         ucrReceiverDOY.Tag = "doy"
+        ucrReceiverDOY.strSelectorHeading = "Numerics"
 
         SetRSelector()
     End Sub
