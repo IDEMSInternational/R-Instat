@@ -54,6 +54,8 @@ Public Class sdgClimaticSummary
         ucrPnlSummary.AddParameterValuesCondition(rdoPercentiles, "result_name", "percentiles")
         ucrPnlSummary.AddParameterValuesCondition(rdoProportions, "result_name", "proportions")
 
+        'ucrChkPercentages.SetParameter(New RParameter("sub_1"))
+        'ucrChkPercentages.SetValueIfChecked("*100")
         ucrChkPercentages.SetText("Percentages")
 
         ucrNudPercentile.SetParameter(New RParameter("probs", 1))
@@ -82,7 +84,7 @@ Public Class sdgClimaticSummary
         rdoMissing.Enabled = False
     End Sub
 
-    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewSummariseFunction As RFunction, clsNewSumFunction As RFunction, clsNewMinimaFunction As RFunction, clsNewMaximaFunction As RFunction, clsNewMeanFunction As RFunction, clsNewMedianFunction As RFunction, clsNewSdFunction As RFunction, clsNewCountFunction As RFunction, strNewTempFuc As String, clsNewLengthFunction As RFunction, clsNewProportionFunction As RFunction, clsNewPercentileFunction As RFunction, clsNewAboveFuction As RFunction, clsNewTotalFunction As RFunction, clsNewWhichAboveFunction As RFunction, clsNewRunCalcFunction As RFunction, clsNewDivideOperator As ROperator, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewSummariseFunction As RFunction, clsNewSumFunction As RFunction, clsNewMinimaFunction As RFunction, clsNewMaximaFunction As RFunction, clsNewMeanFunction As RFunction, clsNewMedianFunction As RFunction, clsNewSdFunction As RFunction, clsNewCountFunction As RFunction, strNewTempFuc As String, clsNewLengthFunction As RFunction, clsNewProportionFunction As RFunction, clsNewPercentileFunction As RFunction, clsNewAboveFuction As RFunction, clsNewTotalFunction As RFunction, clsNewWhichAboveFunction As RFunction, clsNewRunCalcFunction As RFunction, clsNewMultipyOperator As ROperator, clsNewDivideOperator As ROperator, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
@@ -103,13 +105,14 @@ Public Class sdgClimaticSummary
         clsTotalFunction = clsNewTotalFunction
         clsWhichAboveFunction = clsNewWhichAboveFunction
         clsRunCalcFunction = clsNewRunCalcFunction
+        clsMultipyOperator = clsNewMultipyOperator
         clsDivideOperator = clsNewDivideOperator
         clsLengthFunction.AddParameter("x", clsRFunctionParameter:=clsCountFunction, bIncludeArgumentName:=False)
         clsPercentileFunction.AddParameter("x", strTempFuc, iPosition:=0)
-        clsMultipyOperator.SetOperation("*")
         FuncExpression()
         CalcParam()
         ucrNudPercentile.SetRCode(clsPercentileFunction, bReset)
+        'ucrChkPercentages.SetRCode(clsDivideOperator, bReset)
         'ucrPnlSummary.SetRCode(clsSummariseFunction, bReset)
     End Sub
 
@@ -118,56 +121,55 @@ Public Class sdgClimaticSummary
             clsSumFunction.bToScriptAsRString = True
             clsSummariseFunction.AddParameter("result_name", Chr(34) & "Sums" & Chr(34))
             clsSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsSumFunction, iPosition:=1)
-            clsRSyntax.RemoveFromAfterCodes(clsProportionFunction)
+            clsRSyntax.RemoveFromAfterCodes(clsDivideOperator)
             clsRSyntax.AddToAfterCodes(clsSummariseFunction, iPosition:=3)
         ElseIf rdoCounts.Checked Then
             clsLengthFunction.bToScriptAsRString = True
             clsSummariseFunction.AddParameter("result_name", Chr(34) & "Counts" & Chr(34))
             clsSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsLengthFunction, iPosition:=1)
-            clsRSyntax.RemoveFromAfterCodes(clsProportionFunction)
+            clsRSyntax.RemoveFromAfterCodes(clsDivideOperator)
             clsRSyntax.AddToAfterCodes(clsSummariseFunction, iPosition:=3)
         ElseIf rdoMaxima.Checked Then
             clsMaximaFunction.bToScriptAsRString = True
             clsSummariseFunction.AddParameter("result_name", Chr(34) & "Maxima" & Chr(34))
             clsSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsMaximaFunction, iPosition:=1)
-            clsRSyntax.RemoveFromAfterCodes(clsProportionFunction)
+            clsRSyntax.RemoveFromAfterCodes(clsDivideOperator)
             clsRSyntax.AddToAfterCodes(clsSummariseFunction, iPosition:=3)
         ElseIf rdoMinima.Checked Then
             clsMinimaFunction.bToScriptAsRString = True
             clsSummariseFunction.AddParameter("result_name", Chr(34) & "Minima" & Chr(34))
             clsSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsMinimaFunction, iPosition:=1)
-            clsRSyntax.RemoveFromAfterCodes(clsProportionFunction)
+            clsRSyntax.RemoveFromAfterCodes(clsDivideOperator)
             clsRSyntax.AddToAfterCodes(clsSummariseFunction, iPosition:=3)
         ElseIf rdoMeans.Checked Then
             clsMeanFunction.bToScriptAsRString = True
             clsSummariseFunction.AddParameter("result_name", Chr(34) & "Means" & Chr(34))
             clsSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsMeanFunction, iPosition:=1)
-            clsRSyntax.RemoveFromAfterCodes(clsProportionFunction)
+            clsRSyntax.RemoveFromAfterCodes(clsDivideOperator)
             clsRSyntax.AddToAfterCodes(clsSummariseFunction, iPosition:=3)
         ElseIf rdoMedians.Checked Then
             clsMedianFunction.bToScriptAsRString = True
             clsSummariseFunction.AddParameter("result_name", Chr(34) & "Medians" & Chr(34))
             clsSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsMedianFunction, iPosition:=1)
-            clsRSyntax.RemoveFromAfterCodes(clsProportionFunction)
+            clsRSyntax.RemoveFromAfterCodes(clsDivideOperator)
             clsRSyntax.AddToAfterCodes(clsSummariseFunction, iPosition:=3)
         ElseIf rdoStd.Checked Then
             clsSdFunction.bToScriptAsRString = True
             clsSummariseFunction.AddParameter("result_name", Chr(34) & "StdDev" & Chr(34))
             clsSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsSdFunction, iPosition:=1)
-            clsRSyntax.RemoveFromAfterCodes(clsProportionFunction)
+            clsRSyntax.RemoveFromAfterCodes(clsDivideOperator)
             clsRSyntax.AddToAfterCodes(clsSummariseFunction, iPosition:=3)
         ElseIf rdoPercentiles.Checked Then
             clsPercentileFunction.bToScriptAsRString = True
             clsSummariseFunction.AddParameter("result_name", Chr(34) & "Percentiles" & Chr(34))
             clsSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsPercentileFunction, iPosition:=1)
-            clsRSyntax.RemoveFromAfterCodes(clsProportionFunction)
+            clsRSyntax.RemoveFromAfterCodes(clsDivideOperator)
             clsRSyntax.AddToAfterCodes(clsSummariseFunction, iPosition:=3)
         ElseIf rdoProportions.Checked Then
-            ucrInputNumbers.Visible = True
-            clsRSyntax.AddToAfterCodes(clsProportionFunction, iPosition:=3)
+            clsRSyntax.AddToAfterCodes(clsDivideOperator)
             clsRSyntax.RemoveFromAfterCodes(clsSummariseFunction)
         ElseIf rdoMissing.Checked Then
-            clsRSyntax.RemoveFromAfterCodes(clsProportionFunction)
+            clsRSyntax.RemoveFromAfterCodes(clsDivideOperator)
             clsRSyntax.RemoveFromAfterCodes(clsSummariseFunction)
         End If
     End Sub
@@ -192,10 +194,9 @@ Public Class sdgClimaticSummary
 
     Private Sub ucrChkPercentages_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkPercentages.ControlContentsChanged
         If ucrChkPercentages.Checked Then
-            clsDivideOperator.AddParameter("function_exp", clsROperatorParameter:=clsMultipyOperator, bIncludeArgumentName:=False)
-            clsMultipyOperator.AddParameter("sub_1", "* 100", bIncludeArgumentName:=False)
+            'clsRSyntax.AddToAfterCodes(clsMultipyOperator)
         Else
-
+            'clsRSyntax.RemoveFromAfterCodes(clsMultipyOperator)
         End If
     End Sub
 End Class
