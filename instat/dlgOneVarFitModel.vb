@@ -15,7 +15,6 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-
 Public Class dlgOneVarFitModel
     Public clsROneVarFitModel, clsFamilyFunction, clsRLogLikFunction, clsRLength, clsRMean, clsRTTest, clsVarTest, clsREnormTest, clsRNonSignTest, clsRWilcoxTest, clsRBinomTest, clsRPoissonTest, clsRplot, clsRfitdist, clsRStartValues, clsRBinomStart, clsRConvertVector, clsRConvertInteger, clsRConvertNumeric As New RFunction
     Public clsRplotFunction, clsRplotPPComp, clsRplotCdfcomp, clsRplotQqComp, clsRplotDenscomp As RFunction
@@ -24,7 +23,9 @@ Public Class dlgOneVarFitModel
     Public bfirstload As Boolean = True
     Public bRCodeSet As Boolean = False
     Public bReset As Boolean = True
-    Private bResetSubdialog As Boolean = False
+    Private bResetFittingOptions As Boolean = False
+    Private bResetFitModDisplay As Boolean = False
+
     Private Sub dlgOneVarFitModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bfirstload Then
@@ -225,28 +226,27 @@ Public Class dlgOneVarFitModel
 
         clsRplotPPComp.SetPackageName("fitdistrplus")
         clsRplotPPComp.SetRCommand("ppcomp")
-        clsRplotPPComp.iCallType = 3
         clsRplotPPComp.bExcludeAssignedFunctionOutput = False
+        clsRplotPPComp.iCallType = 3
 
         clsRplotCdfcomp.SetPackageName("fitdistrplus")
         clsRplotCdfcomp.SetRCommand("cdfcomp")
-        clsRplotCdfcomp.iCallType = 3
         clsRplotCdfcomp.bExcludeAssignedFunctionOutput = False
+        clsRplotCdfcomp.iCallType = 3
 
         clsRplotQqComp.SetPackageName("fitdistrplus")
         clsRplotQqComp.SetRCommand("qqcomp")
-        clsRplotQqComp.iCallType = 3
         clsRplotQqComp.bExcludeAssignedFunctionOutput = False
+        clsRplotQqComp.iCallType = 3
 
         clsRplotDenscomp.SetPackageName("fitdistrplus")
         clsRplotDenscomp.SetRCommand("denscomp")
-        clsRplotDenscomp.iCallType = 3
         clsRplotDenscomp.bExcludeAssignedFunctionOutput = False
+        clsRplotDenscomp.iCallType = 3
 
         clsRLogLikFunction.SetPackageName("fitdistrplus")
         clsRLogLikFunction.SetRCommand("llplot")
         clsRLogLikFunction.iCallType = 3
-        clsRLogLikFunction.bExcludeAssignedFunctionOutput = False
 
         SetDataParameter()
         EnableOptions()
@@ -264,7 +264,8 @@ Public Class dlgOneVarFitModel
         clsRplotFunction.AddParameter("x", clsRFunctionParameter:=clsROneVarFitModel)
         ucrBase.clsRsyntax.AddToAfterCodes(clsRplotFunction, iPosition:=1)
         ucrBase.clsRsyntax.AddToAfterCodes(clsRLogLikFunction, iPosition:=2)
-        bResetSubdialog = True
+        bResetFittingOptions = True
+        bResetFitModDisplay = True
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -371,6 +372,7 @@ Public Class dlgOneVarFitModel
             ucrDistributionChoice.Enabled = True
         End If
     End Sub
+
 
     Public Sub ResponseConvert()
         If bRCodeSet Then
@@ -526,8 +528,8 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgOneVarFitModDisplay.SetRCode(ucrBase.clsRsyntax, clsRNewOneVarFitModel:=clsROneVarFitModel, clsNewRLogLikFunction:=clsRLogLikFunction, clsNewRplotFunction:=clsRplotFunction, clsNewRplotPPComp:=clsRplotPPComp, clsNewRplotCdfcomp:=clsRplotCdfcomp, clsNewRplotQqComp:=clsRplotQqComp, clsNewRplotDenscomp:=clsRplotDenscomp, ucrNewDistribution:=ucrDistribution, bReset:=bResetSubdialog)
-        bResetSubdialog = False
+        sdgOneVarFitModDisplay.SetRCode(ucrBase.clsRsyntax, clsRNewOneVarFitModel:=clsROneVarFitModel, clsNewRLogLikFunction:=clsRLogLikFunction, clsNewRplotFunction:=clsRplotFunction, clsNewRplotPPComp:=clsRplotPPComp, clsNewRplotCdfcomp:=clsRplotCdfcomp, clsNewRplotQqComp:=clsRplotQqComp, clsNewRplotDenscomp:=clsRplotDenscomp, ucrNewDistribution:=ucrDistribution, bReset:=bResetFitModDisplay)
+        bResetFitModDisplay = False
         sdgOneVarFitModDisplay.ShowDialog()
         Display()
         EnableOptions()
@@ -535,8 +537,8 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub cmdFittingOptions_Click(sender As Object, e As EventArgs) Handles cmdFittingOptions.Click
-        sdgOneVarFitModel.SetRCode(ucrBase.clsRsyntax, clsROneVarFitModel, clsNewRLogLikFunction:=clsRLogLikFunction, ucrNewDistribution:=ucrDistribution, bReset:=bResetSubdialog)
-        bResetSubdialog = False
+        sdgOneVarFitModel.SetRCode(ucrBase.clsRsyntax, clsROneVarFitModel, clsNewRLogLikFunction:=clsRLogLikFunction, ucrNewDistribution:=ucrDistribution, bReset:=bResetFittingOptions)
+        bResetFittingOptions = False
         sdgOneVarFitModel.ShowDialog()
         EnableOptions()
         Display()
