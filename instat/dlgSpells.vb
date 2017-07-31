@@ -54,6 +54,7 @@ Public Class dlgSpells
         ucrReceiverElement.Selector = ucrSelectorForSpells
         'ucrReceiverElement.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "rain" & Chr(34)})
         ucrReceiverElement.bAutoFill = True
+        ucrReceiverElement.SetDataType("numeric")
         ucrReceiverElement.strSelectorHeading = "Variables"
 
         ucrReceiverStation.SetParameter(New RParameter("station", 1, False))
