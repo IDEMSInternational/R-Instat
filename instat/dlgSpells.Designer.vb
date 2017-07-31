@@ -38,7 +38,7 @@ Partial Class dlgSpells
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.lblRainfall = New System.Windows.Forms.Label()
+        Me.lblElement = New System.Windows.Forms.Label()
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lblDOY = New System.Windows.Forms.Label()
@@ -65,14 +65,14 @@ Partial Class dlgSpells
         Me.grpRainParameters.SuspendLayout()
         Me.SuspendLayout()
         '
-        'lblRainfall
+        'lblElement
         '
-        Me.lblRainfall.AutoSize = True
-        Me.lblRainfall.Location = New System.Drawing.Point(246, 112)
-        Me.lblRainfall.Name = "lblRainfall"
-        Me.lblRainfall.Size = New System.Drawing.Size(70, 13)
-        Me.lblRainfall.TabIndex = 3
-        Me.lblRainfall.Text = "Rain Column:"
+        Me.lblElement.AutoSize = True
+        Me.lblElement.Location = New System.Drawing.Point(243, 200)
+        Me.lblElement.Name = "lblElement"
+        Me.lblElement.Size = New System.Drawing.Size(48, 13)
+        Me.lblElement.TabIndex = 3
+        Me.lblElement.Text = "Element:"
         '
         'lblDate
         '
@@ -86,7 +86,7 @@ Partial Class dlgSpells
         'lblYear
         '
         Me.lblYear.AutoSize = True
-        Me.lblYear.Location = New System.Drawing.Point(248, 155)
+        Me.lblYear.Location = New System.Drawing.Point(248, 114)
         Me.lblYear.Name = "lblYear"
         Me.lblYear.Size = New System.Drawing.Size(32, 13)
         Me.lblYear.TabIndex = 5
@@ -95,7 +95,7 @@ Partial Class dlgSpells
         'lblDOY
         '
         Me.lblDOY.AutoSize = True
-        Me.lblDOY.Location = New System.Drawing.Point(247, 196)
+        Me.lblDOY.Location = New System.Drawing.Point(247, 154)
         Me.lblDOY.Name = "lblDOY"
         Me.lblDOY.Size = New System.Drawing.Size(66, 13)
         Me.lblDOY.TabIndex = 7
@@ -223,7 +223,7 @@ Partial Class dlgSpells
         'ucrReceiverDOY
         '
         Me.ucrReceiverDOY.frmParent = Me
-        Me.ucrReceiverDOY.Location = New System.Drawing.Point(246, 211)
+        Me.ucrReceiverDOY.Location = New System.Drawing.Point(246, 169)
         Me.ucrReceiverDOY.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDOY.Name = "ucrReceiverDOY"
         Me.ucrReceiverDOY.Selector = Nothing
@@ -235,7 +235,7 @@ Partial Class dlgSpells
         'ucrReceiverYear
         '
         Me.ucrReceiverYear.frmParent = Me
-        Me.ucrReceiverYear.Location = New System.Drawing.Point(246, 169)
+        Me.ucrReceiverYear.Location = New System.Drawing.Point(246, 128)
         Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverYear.Name = "ucrReceiverYear"
         Me.ucrReceiverYear.Selector = Nothing
@@ -259,7 +259,7 @@ Partial Class dlgSpells
         'ucrReceiverRainfall
         '
         Me.ucrReceiverRainfall.frmParent = Me
-        Me.ucrReceiverRainfall.Location = New System.Drawing.Point(246, 127)
+        Me.ucrReceiverRainfall.Location = New System.Drawing.Point(243, 215)
         Me.ucrReceiverRainfall.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverRainfall.Name = "ucrReceiverRainfall"
         Me.ucrReceiverRainfall.Selector = Nothing
@@ -329,7 +329,7 @@ Partial Class dlgSpells
         Me.Controls.Add(Me.ucrReceiverDate)
         Me.Controls.Add(Me.lblDOY)
         Me.Controls.Add(Me.grpRainParameters)
-        Me.Controls.Add(Me.lblRainfall)
+        Me.Controls.Add(Me.lblElement)
         Me.Controls.Add(Me.ucrReceiverRainfall)
         Me.Controls.Add(Me.ucrSelectorForSpells)
         Me.Controls.Add(Me.ucrBase)
@@ -350,7 +350,7 @@ Partial Class dlgSpells
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSelectorForSpells As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverRainfall As ucrReceiverSingle
-    Friend WithEvents lblRainfall As Label
+    Friend WithEvents lblElement As Label
     Friend WithEvents lblDate As Label
     Friend WithEvents ucrReceiverDate As ucrReceiverSingle
     Friend WithEvents ucrReceiverYear As ucrReceiverSingle
