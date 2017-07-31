@@ -210,6 +210,8 @@ Public Class dlgExtremesClimatic
         clsRunCalcFunction.AddParameter("calc", clsRFunctionParameter:=clsMinMaxSummariseFunction)
         clsRunCalcFunction.AddParameter("display", "FALSE")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRunCalcFunction)
+
+        ucrInputSave.bUserTyped = False
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
