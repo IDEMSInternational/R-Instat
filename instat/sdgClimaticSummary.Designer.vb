@@ -33,12 +33,12 @@ Partial Class sdgClimaticSummary
         Me.rdoMaxima = New System.Windows.Forms.RadioButton()
         Me.rdoProportions = New System.Windows.Forms.RadioButton()
         Me.grpSummary = New System.Windows.Forms.GroupBox()
+        Me.ucrPnlSummary = New instat.UcrPanel()
         Me.ucrNudPercentile = New instat.ucrNud()
         Me.ucrBaseSdgClimaticSummary = New instat.ucrButtonsSubdialogue()
         Me.ucrChkPercentages = New instat.ucrCheck()
         Me.ucrInputNumbers = New instat.ucrInputTextBox()
         Me.ucrInputComboOptions = New instat.ucrInputComboBox()
-        Me.ucrPnlSummary = New instat.UcrPanel()
         Me.grpSummary.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -172,11 +172,18 @@ Partial Class sdgClimaticSummary
         Me.grpSummary.TabStop = False
         Me.grpSummary.Text = "Summary"
         '
+        'ucrPnlSummary
+        '
+        Me.ucrPnlSummary.Location = New System.Drawing.Point(6, 19)
+        Me.ucrPnlSummary.Name = "ucrPnlSummary"
+        Me.ucrPnlSummary.Size = New System.Drawing.Size(426, 89)
+        Me.ucrPnlSummary.TabIndex = 19
+        '
         'ucrNudPercentile
         '
         Me.ucrNudPercentile.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPercentile.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPercentile.Location = New System.Drawing.Point(344, 132)
+        Me.ucrNudPercentile.Location = New System.Drawing.Point(344, 185)
         Me.ucrNudPercentile.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudPercentile.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPercentile.Name = "ucrNudPercentile"
@@ -217,13 +224,6 @@ Partial Class sdgClimaticSummary
         Me.ucrInputComboOptions.Name = "ucrInputComboOptions"
         Me.ucrInputComboOptions.Size = New System.Drawing.Size(51, 21)
         Me.ucrInputComboOptions.TabIndex = 20
-        '
-        'ucrPnlSummary
-        '
-        Me.ucrPnlSummary.Location = New System.Drawing.Point(6, 19)
-        Me.ucrPnlSummary.Name = "ucrPnlSummary"
-        Me.ucrPnlSummary.Size = New System.Drawing.Size(426, 89)
-        Me.ucrPnlSummary.TabIndex = 19
         '
         'sdgClimaticSummary
         '
