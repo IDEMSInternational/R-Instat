@@ -17,6 +17,21 @@ Imports instat.Translations
 Public Class dlgClimaticBoxPlot
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private clsRggplotFunction As New RFunction
+    Private clsRgeomPlotFunction As New RFunction
+    Private clsRaesFunction As New RFunction
+    Private clsBaseOperator As New ROperator
+    Private clsLocalRaesFunction As New RFunction
+    Private clsLabsFunction As New RFunction
+    Private clsXlabsFunction As New RFunction
+    Private clsYlabFunction As New RFunction
+    Private clsXScaleContinuousFunction As New RFunction
+    Private clsYScaleContinuousFunction As New RFunction
+    Private clsRFacetFunction As New RFunction
+    Private clsThemeFunction As New RFunction
+    Private dctThemeFunctions As Dictionary(Of String, RFunction)
+    Private bResetSubdialog As Boolean = True
+    Private bResetBoxLayerSubdialog As Boolean = True
     Private Sub dlgClimaticBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -31,47 +46,171 @@ Public Class dlgClimaticBoxPlot
         TestOKEnabled()
     End Sub
 
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrSavePlot.SetRCode(clsBaseOperator, bReset)
+        ucrSelectorClimaticBoxPlot.SetRCode(clsRggplotFunction, bReset)
+        ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
+        ucrChkVarWidth.SetRCode(clsRgeomPlotFunction, bReset)
+        ucrPnlPlots.SetRCode(clsRgeomPlotFunction, bReset)
+
+        ucrReceiverData.SetRCode(clsRaesFunction, bReset)
+        ucrReceiverYear.SetRCode(clsRaesFunction, bReset)
+    End Sub
+
     Private Sub InitialiseDialog()
+        Dim clsCoordFlipFunc As New RFunction
+        Dim clsCoordFlipParam As New RParameter
 
-        ucrReceiverStation.Selector = ucrSelectorClimaticBoxPlot
-        ucrReceiverStation.SetClimaticType("station")
-        ucrReceiverStation.bAutoFill = True
-        ucrReceiverStation.SetMeAsReceiver()
-
-        ucrReceiverDate.Selector = ucrSelectorClimaticBoxPlot
-        ucrReceiverDate.SetClimaticType("date")
-        ucrReceiverDate.bAutoFill = True
-
-        ucrReceiverYear.Selector = ucrSelectorClimaticBoxPlot
-        ucrReceiverYear.SetClimaticType("year")
-        ucrReceiverYear.bAutoFill = True
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        ' ucrBase.iHelpTopicID = ""
+        ucrBase.clsRsyntax.iCallType = 3
 
         ucrPnlPlots.AddRadioButton(rdoViolin)
         ucrPnlPlots.AddRadioButton(rdoBoxplot)
         ucrPnlPlots.AddRadioButton(rdoJitter)
 
-        ucrChkVarWidth.SetParameter(New RParameter("varwidth", 1))
+        ucrPnlPlots.AddFunctionNamesCondition(rdoBoxplot, "geom_boxplot")
+        ucrPnlPlots.AddFunctionNamesCondition(rdoJitter, "geom_jitter")
+        ucrPnlPlots.AddFunctionNamesCondition(rdoViolin, "geom_violin")
+        ucrPnlPlots.AddToLinkedControls(ucrChkVarWidth, {rdoBoxplot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrSelectorClimaticBoxPlot.SetParameter(New RParameter("data", 0))
+        ucrSelectorClimaticBoxPlot.SetParameterIsrfunction()
+
+        ucrReceiverStation.Selector = ucrSelectorClimaticBoxPlot
+        ucrReceiverStation.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "station" & Chr(34)})
+        ucrReceiverStation.bAutoFill = True
+        ucrReceiverStation.SetMeAsReceiver()
+
+        ucrReceiverDate.Selector = ucrSelectorClimaticBoxPlot
+        ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
+        ucrReceiverDate.bAutoFill = True
+
+        ucrReceiverYear.Selector = ucrSelectorClimaticBoxPlot
+        ucrReceiverYear.SetParameter(New RParameter("x", 1))
+        ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
+        ucrReceiverYear.bAutoFill = True
+        ucrReceiverYear.SetParameterIsString()
+        ucrReceiverYear.bWithQuotes = False
+
+        ucrReceiverData.Selector = ucrSelectorClimaticBoxPlot
+        ucrReceiverData.SetParameter(New RParameter("y"))
+        ucrReceiverData.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "rain" & Chr(34)})
+        ucrReceiverData.bAutoFill = True
+        ucrReceiverData.SetParameterIsString()
+        ucrReceiverData.bWithQuotes = False
+
+        ucrChkVarWidth.SetParameter(New RParameter("varwidth"))
         ucrChkVarWidth.SetText("Variable Width")
         ucrChkVarWidth.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkVarWidth.SetRDefault("FALSE")
 
-        ucrSaveBoxplot.SetPrefix("boxplot")
-        ucrSaveBoxplot.SetIsComboBox()
-        ucrSaveBoxplot.SetCheckBoxText("Save Graph")
-        ucrSaveBoxplot.SetSaveTypeAsGraph()
-        ucrSaveBoxplot.SetDataFrameSelector(ucrSelectorClimaticBoxPlot.ucrAvailableDataFrames)
-        ucrSaveBoxplot.SetAssignToIfUncheckedValue("last_graph")
+        clsCoordFlipFunc.SetPackageName("ggplot2")
+        clsCoordFlipFunc.SetRCommand("coord_flip")
+        clsCoordFlipParam.SetArgumentName("coord_flip")
+        clsCoordFlipParam.SetArgument(clsCoordFlipFunc)
+        ucrChkHorizontalBoxplot.SetText("Horizontal Plot")
+        ucrChkHorizontalBoxplot.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
+        ucrChkMoreData.SetText("More Data")
+        ucrChkMoreData.AddToLinkedControls(ucrReceiverMoreData, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkMargins.SetText("Margins")
+        ucrChkHorizontalBoxplot.SetText("Horizontal Boxplot")
+        ucrChkStation.SetText("Station")
+        ucrChk2ndXVariable.SetText("2nd XVariable")
+        ucrChkMonth.SetText("Month")
+        ucrChkXVariable.SetText("XVariable")
+
+        ucrSavePlot.SetPrefix("boxplot")
+        ucrSavePlot.SetIsComboBox()
+        ucrSavePlot.SetCheckBoxText("Save Graph")
+        ucrSavePlot.SetSaveTypeAsGraph()
+        ucrSavePlot.SetDataFrameSelector(ucrSelectorClimaticBoxPlot.ucrAvailableDataFrames)
+        ucrSavePlot.SetAssignToIfUncheckedValue("last_graph")
     End Sub
 
     Private Sub SetDefaults()
+        clsBaseOperator = New ROperator
+        clsRggplotFunction = New RFunction
+        clsRgeomPlotFunction = New RFunction
+        clsRaesFunction = New RFunction
 
-    End Sub
+        ucrSelectorClimaticBoxPlot.Reset()
+        ucrSavePlot.Reset()
+        sdgPlots.Reset()
+        bResetSubdialog = True
+        bResetBoxLayerSubdialog = True
 
-    Private Sub SetRCodeForControls(bReset As Boolean)
+        clsBaseOperator.SetOperation("+")
+        clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
+        clsBaseOperator.AddParameter("geomfunc", clsRFunctionParameter:=clsRgeomPlotFunction, iPosition:=2)
 
+        clsRggplotFunction.SetPackageName("ggplot2")
+        clsRggplotFunction.SetRCommand("ggplot")
+        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction, iPosition:=1)
+
+        clsRaesFunction.SetPackageName("ggplot2")
+        clsRaesFunction.SetRCommand("aes")
+
+        clsRgeomPlotFunction.SetPackageName("ggplot2")
+        clsRgeomPlotFunction.SetRCommand("geom_boxplot")
+        clsRgeomPlotFunction.AddParameter("varwidth", "FALSE")
+
+        clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
+        clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
+        clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
+        clsXScaleContinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
+        clsYScaleContinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
+        clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
+        clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
+        clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()
+        dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
+        clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
+
+        clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorClimaticBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
+        TestOKEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
+        If Not ucrReceiverData.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso ucrSavePlot.IsComplete Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
 
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
+    End Sub
+
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrSelectorClimaticBoxPlot, bReset:=bResetSubdialog)
+        sdgPlots.ShowDialog()
+        bResetSubdialog = False
+    End Sub
+
+    Private Sub ucrPnlPlots_ControlValueChanged() Handles ucrPnlPlots.ControlValueChanged
+        If rdoBoxplot.Checked Then
+            clsRgeomPlotFunction.SetRCommand("geom_boxplot")
+            ucrSavePlot.SetPrefix("boxplot")
+            cmdBoxPlotOptions.Text = "Boxplot Options"
+        ElseIf rdoJitter.Checked Then
+            clsRgeomPlotFunction.SetRCommand("geom_jitter")
+            ucrSavePlot.SetPrefix("jitter")
+            cmdBoxPlotOptions.Text = "Jitter Options"
+        Else
+            clsRgeomPlotFunction.SetRCommand("geom_violin")
+            ucrSavePlot.SetPrefix("violin")
+            cmdBoxPlotOptions.Text = "Violin Options"
+        End If
+    End Sub
+
+    Private Sub ucrSavePlot_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrSavePlot.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
