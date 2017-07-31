@@ -48,13 +48,13 @@ Public Class dlgSpells
         ucrSelectorForSpells.SetParameterIsString()
 
         ' Setting receivers
-        ucrReceiverRainfall.SetParameter(New RParameter("rain", 0))
-        ucrReceiverRainfall.SetParameterIsRFunction()
-        ucrReceiverRainfall.bWithQuotes = False
-        ucrReceiverRainfall.Selector = ucrSelectorForSpells
-        ucrReceiverRainfall.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "rain" & Chr(34)})
-        ucrReceiverRainfall.bAutoFill = True
-        ucrReceiverRainfall.strSelectorHeading = "Rain Variables"
+        ucrReceiverElement.SetParameter(New RParameter("rain", 0))
+        ucrReceiverElement.SetParameterIsRFunction()
+        ucrReceiverElement.bWithQuotes = False
+        ucrReceiverElement.Selector = ucrSelectorForSpells
+        'ucrReceiverElement.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "rain" & Chr(34)})
+        ucrReceiverElement.bAutoFill = True
+        ucrReceiverElement.strSelectorHeading = "Variables"
 
         ucrReceiverStation.SetParameter(New RParameter("station", 1, False))
         ucrReceiverStation.SetParameterIsString()
@@ -243,7 +243,7 @@ Public Class dlgSpells
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrNudFrom.AddAdditionalCodeParameterPair(clsAdditionalConditionReplaceOperator2, New RParameter("list", 0), iAdditionalPairNo:=1)
         ucrReceiverDOY.AddAdditionalCodeParameterPair(clsDayFromOperator, New RParameter("doy", 0), iAdditionalPairNo:=1)
-        ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsRRaindayLowerOperator, New RParameter("rain", 0), iAdditionalPairNo:=1)
+        ucrReceiverElement.AddAdditionalCodeParameterPair(clsRRaindayLowerOperator, New RParameter("rain", 0), iAdditionalPairNo:=1)
 
         ucrSelectorForSpells.SetRCode(clsAddKey, bReset)
         ucrReceiverStation.SetRCode(clsAddKeyColName, bReset)
@@ -253,7 +253,7 @@ Public Class dlgSpells
         ucrNudFrom.SetRCode(clsDayFromOperator, bReset)
         ucrNudTo.SetRCode(clsDayToOperator, bReset)
 
-        ucrReceiverRainfall.SetRCode(clsRRaindayUpperOperator, bReset)
+        ucrReceiverElement.SetRCode(clsRRaindayUpperOperator, bReset)
         ucrInputSpellLower.SetRCode(clsRRaindayLowerOperator, bReset)
         ucrInputSpellUpper.SetRCode(clsRRaindayUpperOperator, bReset)
         ucrInputNewColumnName.SetRCode(clsMaxValue, bReset)
@@ -261,7 +261,7 @@ Public Class dlgSpells
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverRainfall.IsEmpty AndAlso Not ucrInputNewColumnName.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso ucrInputSpellLower.Text <> "" AndAlso ucrNudFrom.GetText <> "" AndAlso ucrNudTo.GetText <> "" AndAlso ((ucrInputCondition.GetText = "Between" AndAlso ucrInputSpellUpper.Text <> "") OrElse ucrInputCondition.GetText <> "Between") Then
+        If Not ucrReceiverElement.IsEmpty AndAlso Not ucrInputNewColumnName.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso ucrInputSpellLower.Text <> "" AndAlso ucrNudFrom.GetText <> "" AndAlso ucrNudTo.GetText <> "" AndAlso ((ucrInputCondition.GetText = "Between" AndAlso ucrInputSpellUpper.Text <> "") OrElse ucrInputCondition.GetText <> "Between") Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -309,7 +309,7 @@ Public Class dlgSpells
     End Sub
 
     Private Sub RainDays()
-        clsRRainday.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames() & ")", iPosition:=0)
+        clsRRainday.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames() & ")", iPosition:=0)
     End Sub
 
     Private Sub GroupByOptions()
@@ -340,7 +340,7 @@ Public Class dlgSpells
         GroupByOptions()
     End Sub
 
-    Private Sub ucrReceiverRainfall_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRainfall.ControlValueChanged
+    Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlValueChanged
         RainDays()
     End Sub
 
@@ -352,7 +352,7 @@ Public Class dlgSpells
         clsAdditionalConditionReplaceFunction.AddParameter("list", ucrNudFrom.Value - 1, iPosition:=1)
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRainfall.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrInputNewColumnName.ControlContentsChanged, ucrInputCondition.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrNudTo.ControlContentsChanged, ucrInputSpellLower.ControlContentsChanged, ucrInputSpellUpper.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrInputNewColumnName.ControlContentsChanged, ucrInputCondition.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrNudTo.ControlContentsChanged, ucrInputSpellLower.ControlContentsChanged, ucrInputSpellUpper.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class

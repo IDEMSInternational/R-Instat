@@ -191,6 +191,7 @@ Partial Class frmMain
         Me.mnuClimaticPrepare = New System.Windows.Forms.ToolStripMenuItem()
         Me.DispalyClimaticDataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCimaticPrepareTransform = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SummaryOfDailyDataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareClimaticSummaries = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator37 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticPrepareStartoftheRains = New System.Windows.Forms.ToolStripMenuItem()
@@ -485,7 +486,6 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
-        Me.SummaryOfDailyDataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1557,6 +1557,12 @@ Partial Class frmMain
         Me.mnuCimaticPrepareTransform.Size = New System.Drawing.Size(224, 22)
         Me.mnuCimaticPrepareTransform.Text = "Transform..."
         '
+        'SummaryOfDailyDataToolStripMenuItem
+        '
+        Me.SummaryOfDailyDataToolStripMenuItem.Name = "SummaryOfDailyDataToolStripMenuItem"
+        Me.SummaryOfDailyDataToolStripMenuItem.Size = New System.Drawing.Size(224, 22)
+        Me.SummaryOfDailyDataToolStripMenuItem.Text = "Summary of Daily Data..."
+        '
         'mnuClimaticPrepareClimaticSummaries
         '
         Me.mnuClimaticPrepareClimaticSummaries.Name = "mnuClimaticPrepareClimaticSummaries"
@@ -1578,7 +1584,7 @@ Partial Class frmMain
         '
         Me.mnuClimaticPrepareSpells.Name = "mnuClimaticPrepareSpells"
         Me.mnuClimaticPrepareSpells.Size = New System.Drawing.Size(224, 22)
-        Me.mnuClimaticPrepareSpells.Text = "Dry Spells..."
+        Me.mnuClimaticPrepareSpells.Text = "Spells..."
         '
         'mnuClimaticPrepareExtremes
         '
@@ -2189,8 +2195,8 @@ Partial Class frmMain
         'BoxplotsConceptualisedAndConstructedToolStripMenuItem
         '
         Me.BoxplotsConceptualisedAndConstructedToolStripMenuItem.Name = "BoxplotsConceptualisedAndConstructedToolStripMenuItem"
-        Me.BoxplotsConceptualisedAndConstructedToolStripMenuItem.Size = New System.Drawing.Size(300, 22)
-        Me.BoxplotsConceptualisedAndConstructedToolStripMenuItem.Text = "Boxplots conceptualised and constructed..."
+        Me.BoxplotsConceptualisedAndConstructedToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.BoxplotsConceptualisedAndConstructedToolStripMenuItem.Text = "Boxplot"
         '
         'mnuFileSave
         '
@@ -3713,12 +3719,6 @@ Partial Class frmMain
         Me.ucrOutput.Name = "ucrOutput"
         Me.ucrOutput.Size = New System.Drawing.Size(444, 231)
         Me.ucrOutput.TabIndex = 0
-        '
-        'SummaryOfDailyDataToolStripMenuItem
-        '
-        Me.SummaryOfDailyDataToolStripMenuItem.Name = "SummaryOfDailyDataToolStripMenuItem"
-        Me.SummaryOfDailyDataToolStripMenuItem.Size = New System.Drawing.Size(224, 22)
-        Me.SummaryOfDailyDataToolStripMenuItem.Text = "Summary of Daily Data..."
         '
         'frmMain
         '
