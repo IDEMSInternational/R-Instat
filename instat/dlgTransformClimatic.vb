@@ -61,6 +61,11 @@ Public Class dlgTransformClimatic
         ucrPnlTransform.AddRadioButton(rdoSpell, Chr(34) & "cumsum(" & strRainDay & ")-cummax((" & strRainDay & "==0)*cumsum(" & strRainDay & "))" & Chr(34))
         ucrPnlTransform.AddRadioButton(rdoWaterBalance, "Reduce")
 
+        'ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoMoving, "sub1", "instat_calculation$new", False) ' clsRRainday
+        'ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoCount, "sub1", "instat_calculation$new")
+        'ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoSpell, "sub1", "instat_calculation$new")
+        'ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoWaterBalance, "sub1", "instat_calculation$new", False)
+
         ' Setting receivers
         ucrReceiverData.SetParameter(New RParameter("data", 0))
         ucrReceiverData.SetParameterIsString()
