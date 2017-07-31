@@ -71,7 +71,7 @@ Partial Class dlgSpells
         Me.lblElement.Location = New System.Drawing.Point(243, 200)
         Me.lblElement.Name = "lblElement"
         Me.lblElement.Size = New System.Drawing.Size(48, 13)
-        Me.lblElement.TabIndex = 3
+        Me.lblElement.TabIndex = 9
         Me.lblElement.Text = "Element:"
         '
         'lblDate
@@ -80,7 +80,7 @@ Partial Class dlgSpells
         Me.lblDate.Location = New System.Drawing.Point(247, 70)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(33, 13)
-        Me.lblDate.TabIndex = 1
+        Me.lblDate.TabIndex = 3
         Me.lblDate.Text = "Date:"
         '
         'lblYear
@@ -107,7 +107,7 @@ Partial Class dlgSpells
         Me.lblTo.Location = New System.Drawing.Point(186, 16)
         Me.lblTo.Name = "lblTo"
         Me.lblTo.Size = New System.Drawing.Size(45, 13)
-        Me.lblTo.TabIndex = 4
+        Me.lblTo.TabIndex = 2
         Me.lblTo.Tag = ""
         Me.lblTo.Text = "To Day:"
         '
@@ -117,7 +117,7 @@ Partial Class dlgSpells
         Me.lblFrom.Location = New System.Drawing.Point(6, 16)
         Me.lblFrom.Name = "lblFrom"
         Me.lblFrom.Size = New System.Drawing.Size(55, 13)
-        Me.lblFrom.TabIndex = 2
+        Me.lblFrom.TabIndex = 0
         Me.lblFrom.Text = "From Day:"
         '
         'lblThreshold
@@ -126,7 +126,7 @@ Partial Class dlgSpells
         Me.lblThreshold.Location = New System.Drawing.Point(6, 47)
         Me.lblThreshold.Name = "lblThreshold"
         Me.lblThreshold.Size = New System.Drawing.Size(54, 13)
-        Me.lblThreshold.TabIndex = 0
+        Me.lblThreshold.TabIndex = 4
         Me.lblThreshold.Tag = "Threshold"
         Me.lblThreshold.Text = "Condition:"
         '
@@ -143,7 +143,7 @@ Partial Class dlgSpells
         Me.grpRainParameters.Location = New System.Drawing.Point(9, 244)
         Me.grpRainParameters.Name = "grpRainParameters"
         Me.grpRainParameters.Size = New System.Drawing.Size(380, 74)
-        Me.grpRainParameters.TabIndex = 9
+        Me.grpRainParameters.TabIndex = 11
         Me.grpRainParameters.TabStop = False
         '
         'ucrNudTo
@@ -155,7 +155,7 @@ Partial Class dlgSpells
         Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTo.Name = "ucrNudTo"
         Me.ucrNudTo.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudTo.TabIndex = 20
+        Me.ucrNudTo.TabIndex = 3
         Me.ucrNudTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudFrom
@@ -167,7 +167,7 @@ Partial Class dlgSpells
         Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudFrom.Name = "ucrNudFrom"
         Me.ucrNudFrom.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudFrom.TabIndex = 19
+        Me.ucrNudFrom.TabIndex = 1
         Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrInputSpellLower
@@ -178,7 +178,7 @@ Partial Class dlgSpells
         Me.ucrInputSpellLower.Location = New System.Drawing.Point(63, 44)
         Me.ucrInputSpellLower.Name = "ucrInputSpellLower"
         Me.ucrInputSpellLower.Size = New System.Drawing.Size(63, 21)
-        Me.ucrInputSpellLower.TabIndex = 17
+        Me.ucrInputSpellLower.TabIndex = 5
         '
         'ucrInputCondition
         '
@@ -187,7 +187,7 @@ Partial Class dlgSpells
         Me.ucrInputCondition.Location = New System.Drawing.Point(132, 44)
         Me.ucrInputCondition.Name = "ucrInputCondition"
         Me.ucrInputCondition.Size = New System.Drawing.Size(155, 21)
-        Me.ucrInputCondition.TabIndex = 10
+        Me.ucrInputCondition.TabIndex = 6
         '
         'ucrInputSpellUpper
         '
@@ -197,7 +197,7 @@ Partial Class dlgSpells
         Me.ucrInputSpellUpper.Location = New System.Drawing.Point(293, 44)
         Me.ucrInputSpellUpper.Name = "ucrInputSpellUpper"
         Me.ucrInputSpellUpper.Size = New System.Drawing.Size(63, 21)
-        Me.ucrInputSpellUpper.TabIndex = 18
+        Me.ucrInputSpellUpper.TabIndex = 7
         '
         'lblStation
         '
@@ -205,7 +205,7 @@ Partial Class dlgSpells
         Me.lblStation.Location = New System.Drawing.Point(247, 30)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(43, 13)
-        Me.lblStation.TabIndex = 15
+        Me.lblStation.TabIndex = 1
         Me.lblStation.Text = "Station:"
         '
         'ucrReceiverStation
@@ -217,7 +217,7 @@ Partial Class dlgSpells
         Me.ucrReceiverStation.Selector = Nothing
         Me.ucrReceiverStation.Size = New System.Drawing.Size(143, 20)
         Me.ucrReceiverStation.strNcFilePath = ""
-        Me.ucrReceiverStation.TabIndex = 16
+        Me.ucrReceiverStation.TabIndex = 2
         Me.ucrReceiverStation.ucrSelector = Nothing
         '
         'ucrReceiverDOY
@@ -229,7 +229,7 @@ Partial Class dlgSpells
         Me.ucrReceiverDOY.Selector = Nothing
         Me.ucrReceiverDOY.Size = New System.Drawing.Size(143, 20)
         Me.ucrReceiverDOY.strNcFilePath = ""
-        Me.ucrReceiverDOY.TabIndex = 12
+        Me.ucrReceiverDOY.TabIndex = 8
         Me.ucrReceiverDOY.ucrSelector = Nothing
         '
         'ucrReceiverYear
@@ -253,7 +253,7 @@ Partial Class dlgSpells
         Me.ucrReceiverDate.Selector = Nothing
         Me.ucrReceiverDate.Size = New System.Drawing.Size(143, 20)
         Me.ucrReceiverDate.strNcFilePath = ""
-        Me.ucrReceiverDate.TabIndex = 2
+        Me.ucrReceiverDate.TabIndex = 4
         Me.ucrReceiverDate.ucrSelector = Nothing
         '
         'ucrReceiverRainfall
@@ -265,7 +265,7 @@ Partial Class dlgSpells
         Me.ucrReceiverRainfall.Selector = Nothing
         Me.ucrReceiverRainfall.Size = New System.Drawing.Size(143, 20)
         Me.ucrReceiverRainfall.strNcFilePath = ""
-        Me.ucrReceiverRainfall.TabIndex = 4
+        Me.ucrReceiverRainfall.TabIndex = 10
         Me.ucrReceiverRainfall.ucrSelector = Nothing
         '
         'ucrSelectorForSpells
@@ -283,7 +283,7 @@ Partial Class dlgSpells
         Me.ucrBase.Location = New System.Drawing.Point(9, 372)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
-        Me.ucrBase.TabIndex = 11
+        Me.ucrBase.TabIndex = 15
         '
         'ucrChkConditional
         '
@@ -291,7 +291,7 @@ Partial Class dlgSpells
         Me.ucrChkConditional.Location = New System.Drawing.Point(9, 323)
         Me.ucrChkConditional.Name = "ucrChkConditional"
         Me.ucrChkConditional.Size = New System.Drawing.Size(193, 20)
-        Me.ucrChkConditional.TabIndex = 17
+        Me.ucrChkConditional.TabIndex = 12
         '
         'ucrInputNewColumnName
         '
@@ -301,7 +301,7 @@ Partial Class dlgSpells
         Me.ucrInputNewColumnName.Location = New System.Drawing.Point(113, 350)
         Me.ucrInputNewColumnName.Name = "ucrInputNewColumnName"
         Me.ucrInputNewColumnName.Size = New System.Drawing.Size(187, 21)
-        Me.ucrInputNewColumnName.TabIndex = 18
+        Me.ucrInputNewColumnName.TabIndex = 14
         '
         'lblNewColumnName
         '
@@ -309,7 +309,7 @@ Partial Class dlgSpells
         Me.lblNewColumnName.Location = New System.Drawing.Point(6, 352)
         Me.lblNewColumnName.Name = "lblNewColumnName"
         Me.lblNewColumnName.Size = New System.Drawing.Size(101, 13)
-        Me.lblNewColumnName.TabIndex = 21
+        Me.lblNewColumnName.TabIndex = 13
         Me.lblNewColumnName.Text = "New Column Name:"
         '
         'dlgSpells
