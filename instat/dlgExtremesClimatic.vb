@@ -113,13 +113,17 @@ Public Class dlgExtremesClimatic
         ucrInputThresholdValue.SetLinkedDisplayControl(lblValues)
         ucrInputThresholdValue.AddQuotesIfUnrecognised = False
 
-        ucrInputThresholdOperator.SetParameter(New RParameter("function_exp", 1))
-        Dim dctThreshold As New Dictionary(Of String, String)
-        dctThreshold.Add(">", Chr(34) & ">" & Chr(34))
-        dctThreshold.Add("<", Chr(34) & "<" & Chr(34))
-        dctThreshold.Add(">=", Chr(34) & ">=" & Chr(34))
-        dctThreshold.Add("<=", Chr(34) & "<=" & Chr(34))
-        ucrInputThresholdOperator.SetItems(dctThreshold)
+        ucrInputThresholdOperator.SetParameter(New RParameter("function_exp", 1)) ' is it function_exp = OPERATOR?
+
+        ' This is adding a new operator, this has been done before with functions, e.g. dlgScatterplot has a checkbox which adds or removes a function (geom_smooth)
+        ' But here, the function added changes depending on which is selected from the combo box.
+
+        ucrInputThresholdOperator.SetItems({"<", "<=", ">=", ">"})
+
+        ucrInputThresholdOperator.AddParameterIsROperatorCondition("<", "<", True)
+        ucrInputThresholdOperator.AddParameterIsROperatorCondition("<=", "<=", True)
+        ucrInputThresholdOperator.AddParameterIsROperatorCondition(">", ">=", True)
+        ucrInputThresholdOperator.AddParameterIsROperatorCondition(">", ">=", True)
         ucrInputThresholdOperator.SetDropDownStyleAsNonEditable()
         ucrInputThresholdOperator.AddQuotesIfUnrecognised = False
 
