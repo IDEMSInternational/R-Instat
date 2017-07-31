@@ -100,10 +100,10 @@ Public Class dlgSpells
         ucrInputSpellUpper.SetValidationTypeAsNumeric()
         ucrInputSpellUpper.AddQuotesIfUnrecognised = False
 
-        ucrInputCondition.SetItems({"<= Amount of Rain", "Between", ">= Amount of Rain"})
+        ucrInputCondition.SetItems({"<=", "Between", ">="})
         ucrInputCondition.SetDropDownStyleAsNonEditable()
 
-        ucrChkConditional.SetText("Conditional on Rain at Start of Spell")
+        ucrChkConditional.SetText("Conditional on Rain etc at Start of Spell")
         ucrChkConditional.AddFunctionNamesCondition({True}, "sub1")
         ucrChkConditional.AddFunctionNamesCondition({False}, "sub1")
 
@@ -280,7 +280,7 @@ Public Class dlgSpells
 
     Private Sub ucrInputSpellLower_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSpellLower.ControlValueChanged, ucrInputSpellUpper.ControlValueChanged, ucrInputCondition.ControlValueChanged
         Select Case ucrInputCondition.GetText
-            Case "<= Amount of Rain"
+            Case "<="
                 ucrInputSpellUpper.Visible = False
                 clsRRaindayAndOperator.RemoveParameterByName("upper")
                 clsRRaindayUpperOperator.RemoveParameterByName("max")
