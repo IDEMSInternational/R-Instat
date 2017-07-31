@@ -162,7 +162,6 @@ Public Class dlgClimaticSummary
         clsMultipyOperator = New ROperator
 
         ucrSelectorVariable.Reset()
-        ucrReceiverStation.SetMeAsReceiver()
 
         clsDayFromAndToOperator.bToScriptAsRString = True
         clsDayFromAndTo.SetRCommand("instat_calculation$new")
@@ -253,12 +252,20 @@ Public Class dlgClimaticSummary
 
         clsRunCalcFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsRunCalcFunction.AddParameter("display", "FALSE", iPosition:=1)
-
+        ReceiverFocus()
         SetGroupByOptions()
         DayBoundaries()
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.AddToAfterCodes(clsKeyFunction, iPosition:=0)
         ucrBase.clsRsyntax.SetBaseRFunction(clsRunCalcFunction)
+    End Sub
+
+    Private Sub ReceiverFocus()
+        If rdoAnnual.Checked Then
+            ucrReceiverStation.SetMeAsReceiver()
+        ElseIf rdoWithinYear.Checked Then
+            ucrReceiverMonth.SetMeAsReceiver()
+        End If
     End Sub
 
     Private Sub DayBoundaries()
@@ -363,6 +370,7 @@ Public Class dlgClimaticSummary
 
     Private Sub ucrPnlAnnual_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlAnnual.ControlContentsChanged
         SetGroupByOptions()
+        ReceiverFocus()
         If rdoAnnual.Checked Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsDayFromAndTo)
         ElseIf rdoWithinYear.Checked Then
