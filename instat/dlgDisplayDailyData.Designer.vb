@@ -40,7 +40,6 @@ Partial Class dlgDisplayDailyData
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorDisplayDailyClimaticData = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.rdoBoth = New System.Windows.Forms.RadioButton()
         Me.rdoTable = New System.Windows.Forms.RadioButton()
         Me.rdoGraph = New System.Windows.Forms.RadioButton()
         Me.ucrPnlFrequencyDisplay = New instat.UcrPanel()
@@ -81,24 +80,6 @@ Partial Class dlgDisplayDailyData
         Me.ucrSelectorDisplayDailyClimaticData.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorDisplayDailyClimaticData.TabIndex = 4
         '
-        'rdoBoth
-        '
-        Me.rdoBoth.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoBoth.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.rdoBoth.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoBoth.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoBoth.FlatAppearance.BorderSize = 2
-        Me.rdoBoth.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoBoth.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoBoth.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoBoth.Location = New System.Drawing.Point(262, 11)
-        Me.rdoBoth.Name = "rdoBoth"
-        Me.rdoBoth.Size = New System.Drawing.Size(100, 28)
-        Me.rdoBoth.TabIndex = 3
-        Me.rdoBoth.Text = "Both"
-        Me.rdoBoth.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.rdoBoth.UseVisualStyleBackColor = True
-        '
         'rdoTable
         '
         Me.rdoTable.Appearance = System.Windows.Forms.Appearance.Button
@@ -107,7 +88,7 @@ Partial Class dlgDisplayDailyData
         Me.rdoTable.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoTable.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.rdoTable.Location = New System.Drawing.Point(66, 11)
+        Me.rdoTable.Location = New System.Drawing.Point(133, 12)
         Me.rdoTable.Name = "rdoTable"
         Me.rdoTable.Size = New System.Drawing.Size(100, 28)
         Me.rdoTable.TabIndex = 1
@@ -125,7 +106,7 @@ Partial Class dlgDisplayDailyData
         Me.rdoGraph.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoGraph.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoGraph.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoGraph.Location = New System.Drawing.Point(164, 11)
+        Me.rdoGraph.Location = New System.Drawing.Point(231, 12)
         Me.rdoGraph.Name = "rdoGraph"
         Me.rdoGraph.Size = New System.Drawing.Size(100, 28)
         Me.rdoGraph.TabIndex = 2
@@ -135,9 +116,9 @@ Partial Class dlgDisplayDailyData
         '
         'ucrPnlFrequencyDisplay
         '
-        Me.ucrPnlFrequencyDisplay.Location = New System.Drawing.Point(55, 11)
+        Me.ucrPnlFrequencyDisplay.Location = New System.Drawing.Point(122, 12)
         Me.ucrPnlFrequencyDisplay.Name = "ucrPnlFrequencyDisplay"
-        Me.ucrPnlFrequencyDisplay.Size = New System.Drawing.Size(317, 29)
+        Me.ucrPnlFrequencyDisplay.Size = New System.Drawing.Size(214, 29)
         Me.ucrPnlFrequencyDisplay.TabIndex = 0
         '
         'lblStation
@@ -334,7 +315,6 @@ Partial Class dlgDisplayDailyData
         Me.Controls.Add(Me.lblElement)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrReceiverStations)
-        Me.Controls.Add(Me.rdoBoth)
         Me.Controls.Add(Me.rdoTable)
         Me.Controls.Add(Me.rdoGraph)
         Me.Controls.Add(Me.ucrPnlFrequencyDisplay)
@@ -355,7 +335,6 @@ Partial Class dlgDisplayDailyData
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSelectorDisplayDailyClimaticData As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents rdoBoth As RadioButton
     Friend WithEvents rdoTable As RadioButton
     Friend WithEvents rdoGraph As RadioButton
     Friend WithEvents ucrPnlFrequencyDisplay As UcrPanel
