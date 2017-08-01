@@ -110,7 +110,7 @@ Public Class dlgSpells
 
         ucrInputNewColumnName.SetParameter(New RParameter("result_name", 2))
         ucrInputNewColumnName.SetDataFrameSelector(ucrSelectorForSpells.ucrAvailableDataFrames)
-        ucrInputNewColumnName.SetName("Spells")
+        ucrInputNewColumnName.SetName("spells")
     End Sub
 
     Private Sub SetDefaults()
@@ -144,7 +144,7 @@ Public Class dlgSpells
         ucrSelectorForSpells.Reset()
         ucrReceiverDate.SetMeAsReceiver()
         ucrInputCondition.SetName("Between")
-        ucrInputNewColumnName.SetName("Spells")
+        ucrInputNewColumnName.SetName("spells")
 
         ' key
         clsAddKey.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
@@ -231,7 +231,7 @@ Public Class dlgSpells
         clsMaxValueList.AddParameter("sub1", clsRFunctionParameter:=clsSpellLength, bIncludeArgumentName:=False, iPosition:=0)
         clsMaxValueManipulation.AddParameter("sub2", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False)
         clsMaxValueManipulation.AddParameter("sub3", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False)
-        clsMaxValue.SetAssignTo("Spells")
+        clsMaxValue.SetAssignTo("spells")
 
         clsApplyInstatFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsApplyInstatFunction.AddParameter("calc", clsRFunctionParameter:=clsMaxValue, iPosition:=0)
@@ -276,7 +276,7 @@ Public Class dlgSpells
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        frmMain.clsRLink.RunScript(clsAddKey.ToScript, strComment:="Spells: Defining column(s) as key")
+        frmMain.clsRLink.RunScript(clsAddKey.ToScript, strComment:="spells: Defining column(s) as key")
     End Sub
 
     Private Sub ucrInputSpellLower_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSpellLower.ControlValueChanged, ucrInputSpellUpper.ControlValueChanged, ucrInputCondition.ControlValueChanged
