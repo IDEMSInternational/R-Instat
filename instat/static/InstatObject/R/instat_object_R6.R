@@ -1385,3 +1385,24 @@ instat_object$set("public", "export_workspace", function(data_names, file, inclu
   save(list = ls(all.names = TRUE, envir = e), envir = e, file = file)
 } 
 )
+
+
+instat_object$set("public", "daily_climatic_data", function(data_name, station, year, rain, day) {
+  # pdf("Daily Rainfall Plot.pdf", width = 28, height = 18) 
+  for (station in station){
+    for (first_year in year){
+      sub_data<-subset(subset(data_name,station==station), year >= first_year & year < first_year + 10)
+      if (nrow(sub_data) != 0){
+        if (nrow(subset(sub_data,rain > 100)) !=0){
+          print(ggplot(sub_data, aes(x=day, y=rain)) + geom_bar(stat="identity", fill="blue") + geom_rug(data=subset(sub_data, is.na(rain)==1), mapping = aes(x=day), sides="b", color="red") + theme_minimal() + coord_cartesian(ylim=c(0,100)) + scale_x_continuous(breaks=c(1,32, 61, 92, 122, 153, 183, 214, 245, 275, 306, 336, 367), labels = c(month.abb,""), limits =c(0,367)) + facet_wrap(~year,ncol=2) + ggtitle(paste0(station, " Daily Rainfall")) + theme(panel.grid.minor = element_blank(), plot.title = element_text(hjust = 0.5, size=20), axis.title = element_text(size=16)) + xlab("Day of the year") + ylab("Rain amount in mm") + geom_text(data= subset(sub_data,rain>100), mapping= aes(y=100, label=rain), size = 3))
+        } else {
+          print(ggplot(sub_data, aes(x=day, y=rain)) + geom_bar(stat="identity", fill="blue") + geom_rug(data=subset(sub_data, is.na(rain)==1), mapping = aes(x=day), sides="b", color="red") + theme_minimal() + coord_cartesian(ylim=c(0,100)) + scale_x_continuous(breaks=c(1,32, 61, 92, 122, 153, 183, 214, 245, 275, 306, 336, 367), labels = c(month.abb,""), limits =c(0,367)) + facet_wrap(~year,ncol=2) + ggtitle(paste0(station, " Daily Rainfall")) + theme(panel.grid.minor = element_blank(), plot.title = element_text(hjust = 0.5, size=20), axis.title = element_text(size=16)) + xlab("Day of the year") + ylab("Rain amount in mm"))
+        }
+      }
+    }
+  }
+  # dev.off()
+}
+)
+
+

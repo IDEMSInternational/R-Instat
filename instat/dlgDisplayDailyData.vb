@@ -19,6 +19,7 @@ Public Class dlgDisplayDailyData
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsSummaryTable As RFunction
+    Private clsDailyClimaticData As RFunction
     Private Sub dlgDisplayDailyClimaticData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -35,10 +36,29 @@ Public Class dlgDisplayDailyData
 
     Private Sub InitialiseDialog()
 
+        ucrSelectorDisplayDailyClimaticData.SetParameter(New RParameter("data_names"))
+        ucrSelectorDisplayDailyClimaticData.SetParameterIsrfunction()
+
         ucrReceiverStations.Selector = ucrSelectorDisplayDailyClimaticData
         ucrReceiverStations.SetClimaticType("station")
         ucrReceiverStations.bAutoFill = True
         ucrReceiverStations.SetMeAsReceiver()
+
+        ucrReceiverStations.SetParameter(New RParameter("station"))
+        ucrReceiverStations.SetParameterIsString()
+        ucrReceiverStations.bWithQuotes = False
+
+        ucrReceiverYear.SetParameter(New RParameter("year"))
+        ucrReceiverYear.SetParameterIsString()
+        ucrReceiverYear.bWithQuotes = False
+
+        ucrReceiverDate.SetParameter(New RParameter("rain"))
+        ucrReceiverDate.SetParameterIsString()
+        ucrReceiverDate.bWithQuotes = False
+
+        ucrReceiverStations.SetParameter(New RParameter("doy"))
+        ucrReceiverStations.SetParameterIsString()
+        ucrReceiverStations.bWithQuotes = False
 
         ucrReceiverYear.Selector = ucrSelectorDisplayDailyClimaticData
         ucrReceiverYear.SetClimaticType("year")
@@ -69,8 +89,7 @@ Public Class dlgDisplayDailyData
 
         ucrPnlFrequencyDisplay.AddRadioButton(rdoTable)
         ucrPnlFrequencyDisplay.AddRadioButton(rdoGraph)
-        ucrPnlFrequencyDisplay.AddRadioButton(rdoBoth)
-        ucrPnlFrequencyDisplay.AddToLinkedControls({ucrNudLowerYaxis, ucrNudUpperYaxis, ucrReceiverXaxis, ucrChkMissingRugPlot, ucrChkValuesOutsideYrange}, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFrequencyDisplay.AddToLinkedControls({ucrNudLowerYaxis, ucrNudUpperYaxis, ucrReceiverXaxis, ucrChkMissingRugPlot, ucrChkValuesOutsideYrange}, {rdoGraph}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.SetLinkedDisplayControl(grpGraph)
         ucrChkMissingRugPlot.SetLinkedDisplayControl(grpGraph)
         ucrChkMissingRugPlot.SetText("Indicate Missing Rug Plot")
@@ -80,16 +99,17 @@ Public Class dlgDisplayDailyData
 
     Private Sub SetDefaults()
         clsSummaryTable = New RFunction
-
+        clsDailyClimaticData = New RFunction
         ucrSelectorDisplayDailyClimaticData.Reset()
 
         clsSummaryTable.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
+        clsDailyClimaticData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$daily_climatic_data")
 
-
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDailyClimaticData)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Object)
-
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -101,4 +121,5 @@ Public Class dlgDisplayDailyData
         SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
+
 End Class
