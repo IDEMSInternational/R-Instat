@@ -142,7 +142,7 @@ Public Class dlgOneVarUseModel
         clsQuantileFunction.SetAssignTo(ucrNewDataFrameName.GetText, strTempModel:="last_model", strTempDataframe:=ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         'clsRBootFunction.SetAssignTo(ucrSaveObjects.GetText, strTempModel:="last_bootstrap", strTempDataframe:=ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         ucrBase.clsRsyntax.ClearCodes()
-        ucrBase.clsRsyntax.AddToAfterCodes(clsRPlotAllFunction, iPosition:=1)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsRPlotAllFunction, iPosition:=2)
         ucrBase.clsRsyntax.SetBaseRFunction(clsQuantileFunction)
 
         bResetSubdialog = True
@@ -210,7 +210,7 @@ Public Class dlgOneVarUseModel
     Private Sub ucrChkProduceBootstrap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkProduceBootstrap.ControlValueChanged
         If ucrChkProduceBootstrap.Checked Then
             clsQuantileFunction.AddParameter("x", clsRFunctionParameter:=clsRBootFunction)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsRBootFunction, iPosition:=0)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsRBootFunction, iPosition:=1)
         Else
             clsQuantileFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverObject.GetVariables())
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRBootFunction)
