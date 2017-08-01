@@ -130,7 +130,7 @@ Public Class dlgView
 
         clsSeparateWindowFunction.SetPackageName("utils")
         clsSeparateWindowFunction.SetRCommand("View")
-
+        SetSelectorParameterType()
         clsSeparateWindowFunction.AddParameter("x", ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
         ucrBase.clsRsyntax.SetBaseRFunction(clsSeparateWindowFunction)
     End Sub
@@ -144,14 +144,23 @@ Public Class dlgView
         ucrNudNumberRows.SetRCode(clsOutputWindowFunction, bReset)
         ucrChkSpecifyRows.SetRCode(clsOutputWindowFunction, bReset)
         ucrSelectorForView.SetRCode(clsSeparateWindowFunction, bReset)
+        ucrSelectorForView.AddAdditionalCodeParameterPair(clsSeparateWindowFunction, New RParameter("x"), iAdditionalPairNo:=1)
         ucrReceiverView.AddAdditionalCodeParameterPair(clsHTMLFunction, New RParameter("mydf"), iAdditionalPairNo:=1)
         ucrReceiverView.AddAdditionalCodeParameterPair(clsOutputWindowFunction, New RParameter("x"), iAdditionalPairNo:=2)
         DataFrameLength()
         ChangeFunctionParameters()
         ucrPnlViewData.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset, bReset)
         bControlsUpdated = True
+        SetSelectorParameterType()
     End Sub
 
+    Private Sub SetSelectorParameterType()
+        If rdoViewAll.Checked Then
+            ucrSelectorForView.SetParameterIsString()
+        Else
+            ucrSelectorForView.SetParameterIsrfunction()
+        End If
+    End Sub
     Private Sub TestOKEnabled()
         If rdoViewSelectedColumnsRows.Checked Then
             If Not ucrReceiverView.IsEmpty Then
@@ -201,13 +210,11 @@ Public Class dlgView
                     ucrBase.clsRsyntax.SetBaseRFunction(ucrReceiverView.GetVariables(True))
                 End If
             ElseIf rdoDispSepOutputWindow.Checked Then
-                clsSeparateWindowFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables, iPosition:=0)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsSeparateWindowFunction)
             Else
                 ucrBase.clsRsyntax.SetBaseRFunction(clsHTMLFunction)
             End If
         Else
-            clsSeparateWindowFunction.AddParameter("x", ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
             ucrBase.clsRsyntax.SetBaseRFunction(clsSeparateWindowFunction)
         End If
     End Sub
