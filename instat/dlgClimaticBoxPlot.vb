@@ -98,12 +98,33 @@ Public Class dlgClimaticBoxPlot
         ucrReceiverYear.SetParameterIsString()
         ucrReceiverYear.bWithQuotes = False
 
+        ucrReceiverWithinYear.Selector = ucrSelectorClimaticBoxPlot
+        ucrReceiverWithinYear.SetParameter(New RParameter(""))
+        ucrReceiverWithinYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "month" & Chr(34)})
+        ucrReceiverWithinYear.bAutoFill = True
+        ucrReceiverWithinYear.SetParameterIsString()
+        ucrReceiverWithinYear.bWithQuotes = False
+
         ucrReceiverData.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiverData.SetParameter(New RParameter("y"))
         ucrReceiverData.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "rain" & Chr(34)})
         ucrReceiverData.bAutoFill = True
         ucrReceiverData.SetParameterIsString()
         ucrReceiverData.bWithQuotes = False
+
+        ucrReceiverFacet.Selector = ucrSelectorClimaticBoxPlot
+        ucrReceiverFacet.SetParameter(New RParameter(""))
+        ucrReceiverFacet.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "month" & Chr(34)})
+        ucrReceiverFacet.bAutoFill = True
+        ucrReceiverFacet.SetParameterIsString()
+        ucrReceiverFacet.bWithQuotes = False
+
+        ucrReceiver2ndFacet.Selector = ucrSelectorClimaticBoxPlot
+        ucrReceiver2ndFacet.SetParameter(New RParameter(""))
+        ucrReceiver2ndFacet.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "station" & Chr(34)})
+        ucrReceiver2ndFacet.bAutoFill = True
+        ucrReceiver2ndFacet.SetParameterIsString()
+        ucrReceiver2ndFacet.bWithQuotes = False
 
         ucrChkVarWidth.SetParameter(New RParameter("varwidth"))
         ucrChkVarWidth.SetText("Variable Width")
