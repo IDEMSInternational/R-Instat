@@ -49,14 +49,18 @@ Public Class dlgClimaticBoxPlot
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrSavePlot.SetRCode(clsBaseOperator, bReset)
+
         ucrSelectorClimaticBoxPlot.SetRCode(clsRggplotFunction, bReset)
         ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
         ucrChkMargins.SetRCode(clsRgeomPlotFunction, bReset)
+
         ucrChkVarWidth.SetRCode(clsRgeomPlotFunction, bReset)
         ucrPnlPlots.SetRCode(clsRgeomPlotFunction, bReset)
 
         ucrReceiverData.SetRCode(clsRaesFunction, bReset)
         ucrReceiverYear.SetRCode(clsRaesFunction, bReset)
+        ucrChkMoreData.SetRCode(clsRaesFunction, bReset)
+        ucrReceiverMoreData.SetRCode(clsRaesFunction, bReset)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -64,7 +68,7 @@ Public Class dlgClimaticBoxPlot
         Dim clsCoordFlipParam As New RParameter
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        ' ucrBase.iHelpTopicID = ""
+        'ucrBase.iHelpTopicID = ""
         ucrBase.clsRsyntax.iCallType = 3
 
         ucrPnlPlots.AddRadioButton(rdoViolin)
@@ -139,7 +143,14 @@ Public Class dlgClimaticBoxPlot
         ucrChkHorizontalBoxplot.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         ucrChkMoreData.SetText("More Data")
+        ucrChkMoreData.AddParameterPresentCondition(True, "fill", True)
+        ucrChkMoreData.AddParameterPresentCondition(False, "fill", False)
         ucrChkMoreData.AddToLinkedControls(ucrReceiverMoreData, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrReceiverMoreData.Selector = ucrSelectorClimaticBoxPlot
+        ucrReceiverMoreData.SetParameter(New RParameter("fill"))
+        ucrReceiverMoreData.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "" & Chr(34)})
+        ucrReceiverMoreData.SetParameterIsString()
+        ucrReceiverMoreData.bWithQuotes = False
 
         ucrChkFacet.SetText("Facet")
         ucrChkFacet.AddToLinkedControls(ucrReceiverFacet, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
