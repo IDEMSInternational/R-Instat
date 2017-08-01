@@ -134,7 +134,7 @@ Public Class dlgFitModel
         clsVisReg.SetPackageName("visreg")
         clsVisReg.SetRCommand("visreg")
         clsVisReg.AddParameter("type", Chr(34) & "conditional" & Chr(34))
-        clsVisReg.AddParameter("gg", "TRUE")
+        clsVisReg.AddParameter("gg", "FALSE")
         clsVisReg.iCallType = 3
 
         'Confidence Interval
