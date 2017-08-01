@@ -29,6 +29,7 @@ Public Class dlgClimaticBoxPlot
     Private clsYScaleContinuousFunction As New RFunction
     Private clsRFacetFunction As New RFunction
     Private clsThemeFunction As New RFunction
+    Private clsFacetFunction As New RFunction
     Private dctThemeFunctions As Dictionary(Of String, RFunction)
     Private bResetSubdialog As Boolean = True
     Private bResetBoxLayerSubdialog As Boolean = True
@@ -50,6 +51,7 @@ Public Class dlgClimaticBoxPlot
         ucrSavePlot.SetRCode(clsBaseOperator, bReset)
         ucrSelectorClimaticBoxPlot.SetRCode(clsRggplotFunction, bReset)
         ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
+        ucrChkMargins.SetRCode(clsRgeomPlotFunction, bReset)
         ucrChkVarWidth.SetRCode(clsRgeomPlotFunction, bReset)
         ucrPnlPlots.SetRCode(clsRgeomPlotFunction, bReset)
 
@@ -68,6 +70,9 @@ Public Class dlgClimaticBoxPlot
         ucrPnlPlots.AddRadioButton(rdoViolin)
         ucrPnlPlots.AddRadioButton(rdoBoxplot)
         ucrPnlPlots.AddRadioButton(rdoJitter)
+
+        ucrPnlLayoutOptions.AddRadioButton(rdoDataThenYear)
+        ucrPnlLayoutOptions.AddRadioButton(rdoYearThenData)
 
         ucrPnlPlots.AddFunctionNamesCondition(rdoBoxplot, "geom_boxplot")
         ucrPnlPlots.AddFunctionNamesCondition(rdoJitter, "geom_jitter")
@@ -115,12 +120,16 @@ Public Class dlgClimaticBoxPlot
         ucrChkMoreData.SetText("More Data")
         ucrChkMoreData.AddToLinkedControls(ucrReceiverMoreData, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
+        ucrChkFacet.SetText("Facet")
+        ucrChkFacet.AddToLinkedControls(ucrReceiverFacet, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChk2ndFacet.SetText("2nd Facet")
+        ucrChk2ndFacet.AddToLinkedControls(ucrReceiver2ndFacet, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
         ucrChkMargins.SetText("Margins")
-        ucrChkHorizontalBoxplot.SetText("Horizontal Boxplot")
-        ucrChkStation.SetText("Station")
-        ucrChk2ndXVariable.SetText("2nd XVariable")
-        ucrChkMonth.SetText("Month")
-        ucrChkXVariable.SetText("XVariable")
+        ucrChkMargins.SetParameter(New RParameter("margins"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=False)
+        ucrChkMargins.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkMargins.SetRDefault("FALSE")
 
         ucrSavePlot.SetPrefix("boxplot")
         ucrSavePlot.SetIsComboBox()
@@ -135,6 +144,7 @@ Public Class dlgClimaticBoxPlot
         clsRggplotFunction = New RFunction
         clsRgeomPlotFunction = New RFunction
         clsRaesFunction = New RFunction
+        clsFacetFunction = New RFunction
 
         ucrSelectorClimaticBoxPlot.Reset()
         ucrSavePlot.Reset()
@@ -212,5 +222,9 @@ Public Class dlgClimaticBoxPlot
 
     Private Sub ucrSavePlot_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrSavePlot.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrPnlPlots_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPlots.ControlValueChanged
+
     End Sub
 End Class
