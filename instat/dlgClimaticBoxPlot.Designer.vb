@@ -40,7 +40,7 @@ Partial Class dlgClimaticBoxPlot
         Me.ucrReceiverMoreData = New instat.ucrReceiverSingle()
         Me.ucrChkMoreData = New instat.ucrCheck()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
-        Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
+        Me.ucrReceiverWithinYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrReceiverData = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
@@ -250,17 +250,17 @@ Partial Class dlgClimaticBoxPlot
         Me.ucrReceiverStation.TabIndex = 23
         Me.ucrReceiverStation.ucrSelector = Nothing
         '
-        'ucrReceiverMonth
+        'ucrReceiverWithinYear
         '
-        Me.ucrReceiverMonth.frmParent = Me
-        Me.ucrReceiverMonth.Location = New System.Drawing.Point(263, 221)
-        Me.ucrReceiverMonth.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverMonth.Name = "ucrReceiverMonth"
-        Me.ucrReceiverMonth.Selector = Nothing
-        Me.ucrReceiverMonth.Size = New System.Drawing.Size(143, 20)
-        Me.ucrReceiverMonth.strNcFilePath = ""
-        Me.ucrReceiverMonth.TabIndex = 29
-        Me.ucrReceiverMonth.ucrSelector = Nothing
+        Me.ucrReceiverWithinYear.frmParent = Me
+        Me.ucrReceiverWithinYear.Location = New System.Drawing.Point(263, 221)
+        Me.ucrReceiverWithinYear.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverWithinYear.Name = "ucrReceiverWithinYear"
+        Me.ucrReceiverWithinYear.Selector = Nothing
+        Me.ucrReceiverWithinYear.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverWithinYear.strNcFilePath = ""
+        Me.ucrReceiverWithinYear.TabIndex = 29
+        Me.ucrReceiverWithinYear.ucrSelector = Nothing
         '
         'ucrReceiverDate
         '
@@ -407,7 +407,7 @@ Partial Class dlgClimaticBoxPlot
         Me.Controls.Add(Me.ucrChkMoreData)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrReceiverStation)
-        Me.Controls.Add(Me.ucrReceiverMonth)
+        Me.Controls.Add(Me.ucrReceiverWithinYear)
         Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.ucrReceiverDate)
@@ -439,7 +439,7 @@ Partial Class dlgClimaticBoxPlot
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblStation As Label
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
-    Friend WithEvents ucrReceiverMonth As ucrReceiverSingle
+    Friend WithEvents ucrReceiverWithinYear As ucrReceiverSingle
     Friend WithEvents lblYear As Label
     Friend WithEvents lblDate As Label
     Friend WithEvents ucrReceiverDate As ucrReceiverSingle
