@@ -325,7 +325,7 @@ Partial Class dlgDisplayDailyData
         Me.MinimizeBox = False
         Me.Name = "dlgDisplayDailyData"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Display Daily Climatic Data"
+        Me.Text = "Display Daily Data"
         Me.grpGraph.ResumeLayout(False)
         Me.grpGraph.PerformLayout()
         Me.ResumeLayout(False)

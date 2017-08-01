@@ -20,7 +20,7 @@ Public Class dlgDisplayDailyData
     Private bReset As Boolean = True
     Private clsSummaryTable As RFunction
     Private clsDailyClimaticData As RFunction
-    Private Sub dlgDisplayDailyClimaticData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgDisplayDailyData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
