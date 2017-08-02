@@ -28,12 +28,17 @@ Partial Class dlgClimaticBoxPlot
         Me.lblDOY = New System.Windows.Forms.Label()
         Me.lblRainfall = New System.Windows.Forms.Label()
         Me.grpLayout = New System.Windows.Forms.GroupBox()
+        Me.rdoDataThenYear = New System.Windows.Forms.RadioButton()
+        Me.rdoYearThenData = New System.Windows.Forms.RadioButton()
         Me.cmdBoxPlotOptions = New System.Windows.Forms.Button()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.rdoViolin = New System.Windows.Forms.RadioButton()
         Me.rdoJitter = New System.Windows.Forms.RadioButton()
         Me.rdoBoxplot = New System.Windows.Forms.RadioButton()
         Me.ucrPnlPlots = New instat.UcrPanel()
+        Me.ucrReceiver2ndFacet = New instat.ucrReceiverSingle()
+        Me.ucrReceiverFacet = New instat.ucrReceiverSingle()
+        Me.ucrPnlLayoutOptions = New instat.UcrPanel()
         Me.ucrChkMargins = New instat.ucrCheck()
         Me.ucrChk2ndFacet = New instat.ucrCheck()
         Me.ucrChkFacet = New instat.ucrCheck()
@@ -49,11 +54,6 @@ Partial Class dlgClimaticBoxPlot
         Me.ucrChkHorizontalBoxplot = New instat.ucrCheck()
         Me.ucrChkVarWidth = New instat.ucrCheck()
         Me.ucrSelectorClimaticBoxPlot = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrPnlLayoutOptions = New instat.UcrPanel()
-        Me.rdoYearThenData = New System.Windows.Forms.RadioButton()
-        Me.rdoDataThenYear = New System.Windows.Forms.RadioButton()
-        Me.ucrReceiverFacet = New instat.ucrReceiverSingle()
-        Me.ucrReceiver2ndFacet = New instat.ucrReceiverSingle()
         Me.grpLayout.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -118,6 +118,28 @@ Partial Class dlgClimaticBoxPlot
         Me.grpLayout.TabIndex = 34
         Me.grpLayout.TabStop = False
         Me.grpLayout.Text = "Layout"
+        '
+        'rdoDataThenYear
+        '
+        Me.rdoDataThenYear.AutoSize = True
+        Me.rdoDataThenYear.Location = New System.Drawing.Point(158, 19)
+        Me.rdoDataThenYear.Name = "rdoDataThenYear"
+        Me.rdoDataThenYear.Size = New System.Drawing.Size(101, 17)
+        Me.rdoDataThenYear.TabIndex = 39
+        Me.rdoDataThenYear.TabStop = True
+        Me.rdoDataThenYear.Text = "Data Then Year"
+        Me.rdoDataThenYear.UseVisualStyleBackColor = True
+        '
+        'rdoYearThenData
+        '
+        Me.rdoYearThenData.AutoSize = True
+        Me.rdoYearThenData.Location = New System.Drawing.Point(16, 19)
+        Me.rdoYearThenData.Name = "rdoYearThenData"
+        Me.rdoYearThenData.Size = New System.Drawing.Size(101, 17)
+        Me.rdoYearThenData.TabIndex = 39
+        Me.rdoYearThenData.TabStop = True
+        Me.rdoYearThenData.Text = "Year Then Data"
+        Me.rdoYearThenData.UseVisualStyleBackColor = True
         '
         'cmdBoxPlotOptions
         '
@@ -193,6 +215,37 @@ Partial Class dlgClimaticBoxPlot
         Me.ucrPnlPlots.Name = "ucrPnlPlots"
         Me.ucrPnlPlots.Size = New System.Drawing.Size(322, 35)
         Me.ucrPnlPlots.TabIndex = 37
+        '
+        'ucrReceiver2ndFacet
+        '
+        Me.ucrReceiver2ndFacet.frmParent = Nothing
+        Me.ucrReceiver2ndFacet.Location = New System.Drawing.Point(158, 77)
+        Me.ucrReceiver2ndFacet.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiver2ndFacet.Name = "ucrReceiver2ndFacet"
+        Me.ucrReceiver2ndFacet.Selector = Nothing
+        Me.ucrReceiver2ndFacet.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiver2ndFacet.strNcFilePath = ""
+        Me.ucrReceiver2ndFacet.TabIndex = 40
+        Me.ucrReceiver2ndFacet.ucrSelector = Nothing
+        '
+        'ucrReceiverFacet
+        '
+        Me.ucrReceiverFacet.frmParent = Nothing
+        Me.ucrReceiverFacet.Location = New System.Drawing.Point(158, 53)
+        Me.ucrReceiverFacet.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFacet.Name = "ucrReceiverFacet"
+        Me.ucrReceiverFacet.Selector = Nothing
+        Me.ucrReceiverFacet.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverFacet.strNcFilePath = ""
+        Me.ucrReceiverFacet.TabIndex = 40
+        Me.ucrReceiverFacet.ucrSelector = Nothing
+        '
+        'ucrPnlLayoutOptions
+        '
+        Me.ucrPnlLayoutOptions.Location = New System.Drawing.Point(6, 17)
+        Me.ucrPnlLayoutOptions.Name = "ucrPnlLayoutOptions"
+        Me.ucrPnlLayoutOptions.Size = New System.Drawing.Size(248, 29)
+        Me.ucrPnlLayoutOptions.TabIndex = 38
         '
         'ucrChkMargins
         '
@@ -337,59 +390,6 @@ Partial Class dlgClimaticBoxPlot
         Me.ucrSelectorClimaticBoxPlot.Name = "ucrSelectorClimaticBoxPlot"
         Me.ucrSelectorClimaticBoxPlot.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorClimaticBoxPlot.TabIndex = 15
-        '
-        'ucrPnlLayoutOptions
-        '
-        Me.ucrPnlLayoutOptions.Location = New System.Drawing.Point(6, 17)
-        Me.ucrPnlLayoutOptions.Name = "ucrPnlLayoutOptions"
-        Me.ucrPnlLayoutOptions.Size = New System.Drawing.Size(248, 29)
-        Me.ucrPnlLayoutOptions.TabIndex = 38
-        '
-        'rdoYearThenData
-        '
-        Me.rdoYearThenData.AutoSize = True
-        Me.rdoYearThenData.Location = New System.Drawing.Point(16, 19)
-        Me.rdoYearThenData.Name = "rdoYearThenData"
-        Me.rdoYearThenData.Size = New System.Drawing.Size(101, 17)
-        Me.rdoYearThenData.TabIndex = 39
-        Me.rdoYearThenData.TabStop = True
-        Me.rdoYearThenData.Text = "Year Then Data"
-        Me.rdoYearThenData.UseVisualStyleBackColor = True
-        '
-        'rdoDataThenYear
-        '
-        Me.rdoDataThenYear.AutoSize = True
-        Me.rdoDataThenYear.Location = New System.Drawing.Point(158, 19)
-        Me.rdoDataThenYear.Name = "rdoDataThenYear"
-        Me.rdoDataThenYear.Size = New System.Drawing.Size(101, 17)
-        Me.rdoDataThenYear.TabIndex = 39
-        Me.rdoDataThenYear.TabStop = True
-        Me.rdoDataThenYear.Text = "Data Then Year"
-        Me.rdoDataThenYear.UseVisualStyleBackColor = True
-        '
-        'ucrReceiverFacet
-        '
-        Me.ucrReceiverFacet.frmParent = Me
-        Me.ucrReceiverFacet.Location = New System.Drawing.Point(158, 53)
-        Me.ucrReceiverFacet.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFacet.Name = "ucrReceiverFacet"
-        Me.ucrReceiverFacet.Selector = Nothing
-        Me.ucrReceiverFacet.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverFacet.strNcFilePath = ""
-        Me.ucrReceiverFacet.TabIndex = 40
-        Me.ucrReceiverFacet.ucrSelector = Nothing
-        '
-        'ucrReceiver2ndFacet
-        '
-        Me.ucrReceiver2ndFacet.frmParent = Me
-        Me.ucrReceiver2ndFacet.Location = New System.Drawing.Point(158, 77)
-        Me.ucrReceiver2ndFacet.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiver2ndFacet.Name = "ucrReceiver2ndFacet"
-        Me.ucrReceiver2ndFacet.Selector = Nothing
-        Me.ucrReceiver2ndFacet.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiver2ndFacet.strNcFilePath = ""
-        Me.ucrReceiver2ndFacet.TabIndex = 40
-        Me.ucrReceiver2ndFacet.ucrSelector = Nothing
         '
         'dlgClimaticBoxPlot
         '
