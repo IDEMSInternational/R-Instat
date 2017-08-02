@@ -65,7 +65,7 @@ Partial Class dlgSplitText
         'lblSplitBy
         '
         Me.lblSplitBy.AutoSize = True
-        Me.lblSplitBy.Location = New System.Drawing.Point(252, 120)
+        Me.lblSplitBy.Location = New System.Drawing.Point(252, 123)
         Me.lblSplitBy.Name = "lblSplitBy"
         Me.lblSplitBy.Size = New System.Drawing.Size(44, 13)
         Me.lblSplitBy.TabIndex = 6
@@ -96,7 +96,7 @@ Partial Class dlgSplitText
         Me.rdoTextComponents.FlatAppearance.BorderSize = 2
         Me.rdoTextComponents.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoTextComponents.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoTextComponents.Location = New System.Drawing.Point(91, 12)
+        Me.rdoTextComponents.Location = New System.Drawing.Point(82, 12)
         Me.rdoTextComponents.Name = "rdoTextComponents"
         Me.rdoTextComponents.Size = New System.Drawing.Size(125, 27)
         Me.rdoTextComponents.TabIndex = 1
@@ -112,7 +112,7 @@ Partial Class dlgSplitText
         Me.rdoBinaryColumns.FlatAppearance.BorderSize = 2
         Me.rdoBinaryColumns.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoBinaryColumns.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoBinaryColumns.Location = New System.Drawing.Point(214, 12)
+        Me.rdoBinaryColumns.Location = New System.Drawing.Point(205, 12)
         Me.rdoBinaryColumns.Name = "rdoBinaryColumns"
         Me.rdoBinaryColumns.Size = New System.Drawing.Size(125, 27)
         Me.rdoBinaryColumns.TabIndex = 2
@@ -123,7 +123,7 @@ Partial Class dlgSplitText
         '
         'ucrPnlSplitText
         '
-        Me.ucrPnlSplitText.Location = New System.Drawing.Point(47, 8)
+        Me.ucrPnlSplitText.Location = New System.Drawing.Point(38, 8)
         Me.ucrPnlSplitText.Name = "ucrPnlSplitText"
         Me.ucrPnlSplitText.Size = New System.Drawing.Size(309, 36)
         Me.ucrPnlSplitText.TabIndex = 0
@@ -139,7 +139,7 @@ Partial Class dlgSplitText
         '
         Me.ucrNudPieces.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPieces.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPieces.Location = New System.Drawing.Point(252, 186)
+        Me.ucrNudPieces.Location = New System.Drawing.Point(252, 185)
         Me.ucrNudPieces.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudPieces.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPieces.Name = "ucrNudPieces"
@@ -151,7 +151,7 @@ Partial Class dlgSplitText
         '
         Me.ucrInputPattern.AddQuotesIfUnrecognised = True
         Me.ucrInputPattern.IsReadOnly = False
-        Me.ucrInputPattern.Location = New System.Drawing.Point(252, 135)
+        Me.ucrInputPattern.Location = New System.Drawing.Point(252, 138)
         Me.ucrInputPattern.Name = "ucrInputPattern"
         Me.ucrInputPattern.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputPattern.TabIndex = 7
