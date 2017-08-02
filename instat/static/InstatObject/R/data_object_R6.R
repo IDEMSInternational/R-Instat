@@ -2072,12 +2072,12 @@ data_object$set("public","split_date", function(col_name = "", week = FALSE, mon
     if(s_doy) {
       col_name <- next_default_item(prefix = "s_doy", existing_names = self$get_column_names(), include_index = FALSE)
       self$add_columns_to_data(col_name = col_name, col_data = temp_s_doy)
-      self$append_to_variables_metadata(col_names = col_name, property = labels_label, new_val = "Shifted day of year by 214 days")
+      self$append_to_variables_metadata(col_names = col_name, property = label_label, new_val = paste("Shifted day of year by", (s_start_day - 1), "days"))
     }
     if(s_year) {
       col_name <- next_default_item(prefix = "s_year", existing_names = self$get_column_names(), include_index = FALSE)
       self$add_columns_to_data(col_name = col_name, col_data = temp_s_year)
-      self$append_to_variables_metadata(col_names = col_name, property = labels_label, new_val = paste("Shifted year starting",s_start_day_in_month,month.name[s_start_month]))
+      self$append_to_variables_metadata(col_names = col_name, property = label_label, new_val = paste("Shifted year starting",s_start_day_in_month,month.name[s_start_month]))
     }
   }
  }
