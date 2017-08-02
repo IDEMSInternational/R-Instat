@@ -50,6 +50,10 @@ Public Class dlgView
         ucrPnlDisplayWindow.AddRadioButton(rdoDispSepOutputWindow)
         ucrPnlDisplayWindow.AddRadioButton(rdoHTMLOutputWindow)
 
+        ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispSepOutputWindow, "View")
+        ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispOutputWindow, {"head", "tail", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data"})
+        ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoHTMLOutputWindow, "sjt.df")
+
         ucrPnlDisplayWindow.AddToLinkedControls(ucrChkSpecifyRows, {rdoDispOutputWindow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
 
         ucrPnlDisplayFrom.AddRadioButton(rdoBottom)
@@ -57,8 +61,6 @@ Public Class dlgView
         ucrPnlDisplayFrom.SetLinkedDisplayControl(lblDisplayFrom)
         ucrPnlDisplayFrom.AddFunctionNamesCondition(rdoTop, "head")
         ucrPnlDisplayFrom.AddFunctionNamesCondition(rdoBottom, "tail")
-
-        '  ucrPnlDisplayFrom.bAllowNonConditionValues = True
 
         ' This linking only applies if rdoDispOutputWindow is checked
         ucrChkSpecifyRows.SetText("Specify Rows")
@@ -68,14 +70,12 @@ Public Class dlgView
         ucrChkSpecifyRows.AddFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data"})
         '   ucrChkSpecifyRows.bAllowNonConditionValues = True
 
-        ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispSepOutputWindow, "View")
-        ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispOutputWindow, {"head", "tail", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data"})
-        ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoHTMLOutputWindow, "sjt.df")
-
         ucrPnlViewData.AddRadioButton(rdoViewAll)
         ucrPnlViewData.AddRadioButton(rdoViewSelectedColumnsRows)
 
         ucrPnlViewData.AddFunctionNamesCondition(rdoViewAll, "View")
+        ucrPnlViewData.AddFunctionNamesCondition(rdoViewAll, {"head", "tail", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data"}, False)
+        ucrPnlViewData.AddFunctionNamesCondition(rdoViewAll, "sjt.df", False)
         ucrPnlViewData.AddParameterIsRFunctionCondition(rdoViewAll, "x")
         ucrPnlViewData.AddParameterPresentCondition(rdoViewAll, "title")
         ucrPnlViewData.AddFunctionNamesCondition(rdoViewSelectedColumnsRows, "View")
@@ -129,12 +129,16 @@ Public Class dlgView
         clsSeparateWindowFunction.SetPackageName("utils")
         clsSeparateWindowFunction.SetRCommand("View")
         clsSeparateWindowFunction.AddParameter("x", ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsSeparateWindowFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         bControlsUpdated = False
         ucrNudNumberRows.Maximum = Decimal.MaxValue
+        ucrReceiverView.AddAdditionalCodeParameterPair(clsHTMLFunction, New RParameter("mydf"), iAdditionalPairNo:=1)
+        ucrReceiverView.AddAdditionalCodeParameterPair(clsOutputWindowFunction, New RParameter("x"), iAdditionalPairNo:=2)
+
         ucrReceiverView.SetRCode(clsSeparateWindowFunction, bReset)
         ucrPnlDisplayWindow.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlDisplayFrom.SetRCode(clsOutputWindowFunction, bReset)
@@ -142,8 +146,7 @@ Public Class dlgView
         ucrChkSpecifyRows.SetRCode(clsOutputWindowFunction, bReset)
         ucrSelectorForView.SetRCode(clsSeparateWindowFunction, bReset)
         ucrSelectorForView.AddAdditionalCodeParameterPair(clsSeparateWindowFunction, New RParameter("x"), iAdditionalPairNo:=1)
-        ucrReceiverView.AddAdditionalCodeParameterPair(clsHTMLFunction, New RParameter("mydf"), iAdditionalPairNo:=1)
-        ucrReceiverView.AddAdditionalCodeParameterPair(clsOutputWindowFunction, New RParameter("x"), iAdditionalPairNo:=2)
+
         DataFrameLength()
         ChangeFunctionParameters()
         SetSelectorParameterType()
@@ -181,7 +184,11 @@ Public Class dlgView
                 ucrBase.OKEnabled(False)
             End If
         Else
-            ucrBase.OKEnabled(True)
+            If ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
         End If
     End Sub
 
