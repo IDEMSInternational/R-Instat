@@ -76,8 +76,6 @@ Public Class dlgView
         ucrPnlViewData.AddRadioButton(rdoViewSelectedColumnsRows)
 
         ucrPnlViewData.AddFunctionNamesCondition(rdoViewAll, "View")
-        ucrPnlViewData.AddFunctionNamesCondition(rdoViewAll, {"head", "tail", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data"}, False)
-        ucrPnlViewData.AddFunctionNamesCondition(rdoViewAll, "sjt.df", False)
         ucrPnlViewData.AddParameterIsRFunctionCondition(rdoViewAll, "x")
         ucrPnlViewData.AddParameterPresentCondition(rdoViewAll, "title")
         ucrPnlViewData.AddFunctionNamesCondition(rdoViewSelectedColumnsRows, "View")
@@ -130,7 +128,6 @@ Public Class dlgView
 
         clsSeparateWindowFunction.SetPackageName("utils")
         clsSeparateWindowFunction.SetRCommand("View")
-        SetSelectorParameterType()
         clsSeparateWindowFunction.AddParameter("x", ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
         ucrBase.clsRsyntax.SetBaseRFunction(clsSeparateWindowFunction)
     End Sub
@@ -149,16 +146,15 @@ Public Class dlgView
         ucrReceiverView.AddAdditionalCodeParameterPair(clsOutputWindowFunction, New RParameter("x"), iAdditionalPairNo:=2)
         DataFrameLength()
         ChangeFunctionParameters()
+        SetSelectorParameterType()
         ucrPnlViewData.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset, bReset)
         bControlsUpdated = True
-        SetSelectorParameterType()
     End Sub
 
     Private Sub SetSelectorParameterType()
         If rdoViewAll.Checked Then
-            ucrSelectorForView.SetParameterIsString()
+            clsSeparateWindowFunction.AddParameter("x", ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
         Else
-            ucrSelectorForView.SetParameterIsrfunction()
         End If
     End Sub
     Private Sub TestOKEnabled()
@@ -239,6 +235,7 @@ Public Class dlgView
 
     Private Sub ucrSelectorForView_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForView.ControlValueChanged
         DataFrameLength()
+        SetSelectorParameterType()
     End Sub
 
     Private Sub SelectorAndDataframe()
@@ -256,5 +253,6 @@ Public Class dlgView
     Private Sub ucrPnlVewData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlViewData.ControlValueChanged
         ChangeFunctionParameters()
         SelectorAndDataframe()
+        SetSelectorParameterType()
     End Sub
 End Class
