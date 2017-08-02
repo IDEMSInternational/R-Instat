@@ -231,7 +231,7 @@ Public Class dlgImportDataset
         ucrInputMissingValueStringExcel.SetRDefault(Chr(34) & "" & Chr(34))
 
         ucrChkTrimWSExcel.SetParameter(New RParameter("trim_ws"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkTrimWSExcel.SetText("Trim Trailing WhiteSpace")
+        ucrChkTrimWSExcel.SetText("Trim Trailing White Space")
 
         ucrNudRowsToSkipExcel.SetParameter(New RParameter("skip"))
         ucrNudRowsToSkipExcel.Minimum = 0
@@ -244,6 +244,7 @@ Public Class dlgImportDataset
 
         ucrInputMaxRowsExcel.SetParameter(New RParameter("n_max"))
         ucrInputMaxRowsExcel.AddQuotesIfUnrecognised = False
+        ucrInputMaxRowsExcel.SetValidationTypeAsNumeric()
 
         'hide since no longer using openxlsx package
         ucrInputNamedRegions.Hide()
