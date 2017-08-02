@@ -26,6 +26,7 @@ Public Class dlgFromLibrary
     Private clsDataFunction As New RFunction
     Private dctPackages As New Dictionary(Of String, String)
     Private lstAvailablePackages As List(Of String)
+    Dim strDataName As String
 
     Private Sub dlgFromLibrary_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
@@ -78,21 +79,29 @@ Public Class dlgFromLibrary
         ucrPnlOptions.AddRSyntaxContainsFunctionNamesCondition(rdoDefaultDatasets, {"data"})
         ucrPnlOptions.AddRSyntaxContainsFunctionNamesCondition(rdoInstatCollection, {"data"}, False)
         ucrPnlOptions.AddToLinkedControls(ucrInputPackages, {rdoDefaultDatasets}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrPnlOptions.AddToLinkedControls(ucrNewDataFrameName, {rdoDefaultDatasets}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True)
+
+        ucrNewDataFrameName.SetLabelText("New Data Frame Name:")
+        ucrNewDataFrameName.SetIsTextBox()
+        ucrNewDataFrameName.SetSaveTypeAsDataFrame()
     End Sub
 
     Private Sub SetDefaults()
         'TODO this should be the new clear method
         clsDataFunction.ClearParameters()
 
+        ucrNewDataFrameName.Reset()
+
         clsDataFunction.SetPackageName("utils")
         clsDataFunction.SetRCommand("data")
         clsDataFunction.AddParameter("package", Chr(34) & "datasets" & Chr(34))
-
         ucrBase.clsRsyntax.AddToBeforeCodes(clsDataFunction)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
         ucrInputPackages.SetRCode(clsDataFunction, bReset)
+        ucrNewDataFrameName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlOptions.SetRSyntax(ucrBase.clsRsyntax, bReset)
     End Sub
 
@@ -158,19 +167,19 @@ Public Class dlgFromLibrary
     End Sub
 
     Private Sub lstCollection_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstCollection.SelectedIndexChanged
-        Dim strDataName As String
-
         If lstCollection.SelectedItems.Count > 0 Then
             strDataName = CheckString(lstCollection.SelectedItems(0).SubItems(0).Text)
             ucrBase.clsRsyntax.SetCommandString(strDataName)
-            ucrBase.clsRsyntax.SetAssignTo(strDataName, strTempDataframe:=strDataName)
+            If ucrNewDataFrameName.bUserTyped = False Then
+                ucrNewDataFrameName.SetName(strDataName)
+            End If
             clsDataFunction.AddParameter("X", strDataName)
-        End If
-        TestOkEnabled()
+            End If
+            TestOkEnabled()
     End Sub
 
     Private Sub TestOkEnabled()
-        If rdoDefaultDatasets.Checked AndAlso lstCollection.SelectedItems.Count > 0 Then
+        If rdoDefaultDatasets.Checked AndAlso lstCollection.SelectedItems.Count > 0 AndAlso ucrNewDataFrameName.IsComplete Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -203,5 +212,10 @@ Public Class dlgFromLibrary
         Else
             cmdHelp.Enabled = False
         End If
+    End Sub
+
+    Private Sub ucrNewDataFrameName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewDataFrameName.ControlContentsChanged
+        ucrBase.clsRsyntax.SetAssignTo(ucrNewDataFrameName.GetText, strTempDataframe:=ucrNewDataFrameName.GetText)
+        TestOkEnabled()
     End Sub
 End Class
