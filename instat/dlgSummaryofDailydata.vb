@@ -71,6 +71,7 @@ Public Class dlgSummaryofDailydata
         ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "Year" & Chr(34)})
         ucrReceiverYear.bAutoFill = True
 
+        ucrReceiverWithinYear.SetParameter(New RParameter("factors", 2))
         ucrReceiverWithinYear.SetParameterIsRFunction()
         ucrReceiverWithinYear.bWithQuotes = False
         ucrReceiverWithinYear.strSelectorHeading = "Variables"
