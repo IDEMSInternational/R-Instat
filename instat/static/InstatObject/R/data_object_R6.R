@@ -1969,7 +1969,7 @@ data_object$set("public","set_contrasts_of_factor", function(col_name, new_contr
 )
 
 #This method gets a date column and extracts part of the information such as year, month, week, weekday etc(depending on which parameters are set) and creates their respective new column(s)
-data_object$set("public","split_date", function(col_name = "", week = FALSE, month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, year = FALSE, day = FALSE, day_in_month = FALSE, day_in_year = FALSE, leap_year = FALSE, day_in_year_366 = FALSE, dekade = FALSE, pentad = FALSE, shift_day = FALSE, shift_year = FALSE, shift_start_day_in_month = 1, shift_start_month = 8) {
+data_object$set("public","split_date", function(col_name = "", week = FALSE, month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, year = FALSE, day = FALSE, day_in_month = FALSE, day_in_year = FALSE, leap_year = FALSE, day_in_year_366 = FALSE, dekade = FALSE, pentad = FALSE, s_doy = FALSE, s_year = FALSE, s_start_day_in_month = 1, s_start_month = 8) {
   col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
   if(!lubridate::is.Date(col_data)) stop("This column must be a date or time!")
   if(day) {
@@ -2050,36 +2050,37 @@ data_object$set("public","split_date", function(col_name = "", week = FALSE, mon
 	  col_name <- next_default_item(prefix = "leap_year", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = leap_year_vector)
 	}
-  if(shift_day || shift_year) {
-    if(shift_start_month %% 1 != 0 || shift_start_month < 1 || shift_start_month > 12) stop("shift_start_month must be an integer between 1 and 12. ", shift_start_month, " is invalid.")
+  if(s_doy || s_year) {
+    if(s_start_month %% 1 != 0 || s_start_month < 1 || s_start_month > 12) stop("shift_start_month must be an integer between 1 and 12. ", s_start_month, " is invalid.")
     # TODO better checks on day in relation to month selected
-    if(shift_start_day_in_month %% 1 != 0 || shift_start_day_in_month < 1 || shift_start_day_in_month > 31) stop("shift_start_day_in_month must be an integer between 1 and 31. ", shift_start_day_in_month, " is invalid.")
-    if(shift_start_day_in_month == 1 && shift_start_month == 1) stop("shift year must start after 1 Jan.")
+    if(s_start_day_in_month %% 1 != 0 || s_start_day_in_month < 1 || s_start_day_in_month > 31) stop("shift_start_day_in_month must be an integer between 1 and 31. ", s_start_day_in_month, " is invalid.")
+    if(s_start_day_in_month == 1 && s_start_month == 1) stop("shift year must start after 1 Jan.")
     # using a leap year as year to ensure consistent day of year across years
-    shift_start_day <- lubridate::yday(as.Date(paste("2000", shift_start_month, shift_start_day_in_month), format = "%Y %m %d"))
-    if(is.na(shift_start_day)) stop("Could not identify starting day for shift year with shift_start_month = ", shift_start_month, " and shift_start_day = ", shift_start_day_in_month)
-    if(shift_start_day %% 1 != 0 || shift_start_day < 2 || shift_start_day > 366) stop("shift_start_day must be an integer between 2 and 366")
+    s_start_day <- lubridate::yday(as.Date(paste("2000", s_start_month, s_start_day_in_month), format = "%Y %m %d"))
+    if(is.na(s_start_day)) stop("Could not identify starting day for shift year with shift_start_month = ", s_start_month, " and shift_start_day = ", s_start_day_in_month)
+    if(s_start_day %% 1 != 0 || s_start_day < 2 || s_start_day > 366) stop("shift_start_day must be an integer between 2 and 366")
     doy_col <- as.integer(yday_366(col_data))
     year_col <- lubridate::year(col_data)
-    temp_shift_day <- doy_col - shift_start_day + 1
-    temp_shift_year <- year_col
-    temp_shift_year[temp_shift_day < 1] <- paste(year_col[temp_shift_day < 1] - 1, year_col[temp_shift_day < 1], sep = "-")
-    temp_shift_year[temp_shift_day > 0] <- paste(year_col[temp_shift_day > 0], year_col[temp_shift_day > 0] + 1, sep = "-")
-    temp_shift_year <- factor(temp_shift_year)
-    temp_shift_day[temp_shift_day < 1] <- temp_shift_day[temp_shift_day < 1] + 366
-    shift_year_labs <- c(min(year_col) -1, sort(unique(year_col)))
-    names(shift_year_labs) <- paste(shift_year_labs, shift_year_labs + 1, sep = "-")
-    if(shift_day) {
-      col_name <- next_default_item(prefix = paste0("shift_", shift_start_day), existing_names = self$get_column_names(), include_index = FALSE)
-      self$add_columns_to_data(col_name = col_name, col_data = temp_shift_day)
+    temp_s_doy <- doy_col - s_start_day + 1
+    temp_s_year <- year_col
+    temp_s_year[temp_s_doy < 1] <- paste(year_col[temp_s_doy < 1] - 1, year_col[temp_s_doy < 1], sep = "-")
+    temp_s_year[temp_s_doy > 0] <- paste(year_col[temp_s_doy > 0], year_col[temp_s_doy > 0] + 1, sep = "-")
+    temp_s_year <- factor(temp_s_year)
+    temp_s_doy[temp_s_doy < 1] <- temp_s_doy[temp_s_doy < 1] + 366
+    s_year_labs <- c(min(year_col) -1, sort(unique(year_col)))
+    names(s_year_labs) <- paste(s_year_labs, s_year_labs + 1, sep = "-")
+    if(s_doy) {
+      col_name <- next_default_item(prefix = "s_doy", existing_names = self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name = col_name, col_data = temp_s_doy)
+      self$append_to_variables_metadata(col_names = col_name, property = label_label, new_val = paste("Shifted day of year by", (s_start_day - 1), "days"))
     }
-    if(shift_year) {
-      col_name <- next_default_item(prefix = "shift_year", existing_names = self$get_column_names(), include_index = FALSE)
-      self$add_columns_to_data(col_name = col_name, col_data = temp_shift_year)
-      self$append_to_variables_metadata(col_names = col_name, property = labels_label, new_val = shift_year_labs)
+    if(s_year) {
+      col_name <- next_default_item(prefix = "s_year", existing_names = self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name = col_name, col_data = temp_s_year)
+      self$append_to_variables_metadata(col_names = col_name, property = label_label, new_val = paste("Shifted year starting",s_start_day_in_month,month.name[s_start_month]))
     }
   }
-}
+ }
 )
 
 

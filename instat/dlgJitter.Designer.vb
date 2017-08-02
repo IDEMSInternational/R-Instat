@@ -193,17 +193,6 @@ Partial Class dlgJitter
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 6
         '
-        'ucrInputNewColName
-        '
-
-        Me.ucrInputNewColumnName.AddQuotesIfUnrecognised = True
-        Me.ucrInputNewColumnName.IsReadOnly = False
-        Me.ucrInputNewColumnName.Location = New System.Drawing.Point(115, 219)
-        Me.ucrInputNewColumnName.Name = "ucrInputNewColumnName"
-        Me.ucrInputNewColumnName.Size = New System.Drawing.Size(193, 21)
-        Me.ucrInputNewColumnName.TabIndex = 5
-
-        '
         'dlgJitter
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
