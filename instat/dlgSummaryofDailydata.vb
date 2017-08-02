@@ -48,7 +48,6 @@ Public Class dlgSummaryofDailydata
         ucrReceiverStation.bAutoFill = True
         ucrReceiverStation.strSelectorHeading = "Station Variables"
 
-        'ucrReceiverDate.SetParameter(New RParameter("date", 0, False))
         ucrReceiverDate.SetParameterIsString()
         ucrReceiverDate.Selector = ucrSelectorClimaticSummary
         ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
@@ -57,23 +56,20 @@ Public Class dlgSummaryofDailydata
 
         ucrReceiverData.SetParameter(New RParameter("columns_to_summarise", 1))
         ucrReceiverData.SetParameterIsString()
-        'ucrReceiverData.bWithQuotes = False
         ucrReceiverData.strSelectorHeading = "Rain Variables"
         ucrReceiverData.Selector = ucrSelectorClimaticSummary
         ucrReceiverData.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "rain" & Chr(34)})
         ucrReceiverData.bAutoFill = True
 
         ucrReceiverYear.SetParameter(New RParameter("factors", 2))
-        ucrReceiverYear.SetParameterIsRFunction()
-        ucrReceiverYear.bWithQuotes = False
+        ucrReceiverYear.SetParameterIsString()
         ucrReceiverYear.strSelectorHeading = "Variables"
         ucrReceiverYear.Selector = ucrSelectorClimaticSummary
-        ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "Year" & Chr(34)})
+        ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
         ucrReceiverYear.bAutoFill = True
 
         ucrReceiverWithinYear.SetParameter(New RParameter("factors", 2))
-        ucrReceiverWithinYear.SetParameterIsRFunction()
-        ucrReceiverWithinYear.bWithQuotes = False
+        ucrReceiverWithinYear.SetParameterIsString()
         ucrReceiverWithinYear.strSelectorHeading = "Variables"
         ucrReceiverWithinYear.Selector = ucrSelectorClimaticSummary
         ucrReceiverWithinYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "month" & Chr(34)})
