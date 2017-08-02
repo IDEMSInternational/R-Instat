@@ -163,12 +163,12 @@ Public Class dlgSpells
         clsDayFromAndToOperator.AddParameter("to", clsROperatorParameter:=clsDayToOperator, iPosition:=1)
         clsDayToOperator.SetOperation("<=")
         clsDayToOperator.AddParameter("to", 366)
-        clsDayFromAndTo.SetAssignTo("Day_From_and_To")
+        clsDayFromAndTo.SetAssignTo("day_from_and_to")
 
         ' group
         clsGroupBy.SetRCommand("instat_calculation$new")
         clsGroupBy.AddParameter("type", Chr(34) & "by" & Chr(34))
-        clsGroupBy.SetAssignTo("Grouping")
+        clsGroupBy.SetAssignTo("grouping")
 
         ' rain_day
         clsRRaindayMatch.bToScriptAsRString = True
@@ -198,7 +198,7 @@ Public Class dlgSpells
         clsSpellLength.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubSpellLength1, iPosition:=5)
         clsSubSpellLength1.AddParameter("sub1", clsRFunctionParameter:=clsRRainday, bIncludeArgumentName:=False)
         clsSpellLength.AddParameter("save", 0, iPosition:=6)
-        clsSpellLength.SetAssignTo("Spell_Length")
+        clsSpellLength.SetAssignTo("spell_length")
         clsMaxValueManipulation.SetRCommand("list")
 
         ' Additional Checkbox
@@ -208,7 +208,7 @@ Public Class dlgSpells
         clsAdditionalCondition.AddParameter("function_exp", clsRFunctionParameter:=clsAdditionalConditionReplaceFunction, iPosition:=1)
         clsAdditionalCondition.AddParameter("result_name", Chr(34) & strRainDay & Chr(34), iPosition:=2)
         clsAdditionalCondition.AddParameter("save", 0, iPosition:=6)
-        clsAdditionalCondition.SetAssignTo("Additional_Condition")
+        clsAdditionalCondition.SetAssignTo("additional_condition")
         clsAdditionalConditionReplaceFunction.SetRCommand("replace")
         clsAdditionalConditionReplaceFunction.AddParameter("x", strRainDay, iPosition:=0)
         clsAdditionalConditionReplaceFunction.AddParameter("list", ucrNudFrom.Value - 1, iPosition:=1)
@@ -276,7 +276,7 @@ Public Class dlgSpells
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        frmMain.clsRLink.RunScript(clsAddKey.ToScript, strComment:="spells: Defining column(s) as key")
+        frmMain.clsRLink.RunScript(clsAddKey.ToScript, strComment:="Spells: Defining column(s) as key")
     End Sub
 
     Private Sub ucrInputSpellLower_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSpellLower.ControlValueChanged, ucrInputSpellUpper.ControlValueChanged, ucrInputCondition.ControlValueChanged
