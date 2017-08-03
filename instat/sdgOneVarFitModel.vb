@@ -43,6 +43,7 @@ Public Class sdgOneVarFitModel
         ucrPnlOptimisation.AddRadioButton(rdoCG, Chr(34) & "CG" & Chr(34))
         ucrPnlOptimisation.AddRadioButton(rdoSANN, Chr(34) & "SANN" & Chr(34))
         ucrPnlOptimisation.SetRDefault(Chr(34) & "default" & Chr(34))
+        InitialiseTabs()
         bControlsInitialised = True
     End Sub
 
@@ -56,6 +57,9 @@ Public Class sdgOneVarFitModel
         clsROneVarFitModel = clsRNewOneVarFitModel
         ucrPnlOptimisation.SetRCode(clsROneVarFitModel, bReset)
         ucrPnlFitMethod.SetRCode(clsROneVarFitModel, bReset)
+        If bReset Then
+            tbFittingOptions.SelectedIndex = 0
+        End If
     End Sub
 
     Private Sub ucrDistribution_cboDistributionsIndexChanged() Handles ucrDistribution.DistributionsIndexChanged
@@ -86,5 +90,12 @@ Public Class sdgOneVarFitModel
         Else
             clsRSyntax.RemoveFromAfterCodes(clsRLogLikFunction)
         End If
+    End Sub
+
+    Private Sub InitialiseTabs()
+        For i = 0 To tbFittingOptions.TabCount - 1
+            tbFittingOptions.SelectedIndex = i
+        Next
+        tbFittingOptions.SelectedIndex = 0
     End Sub
 End Class
