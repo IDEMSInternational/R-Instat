@@ -26,7 +26,6 @@ Public Class dlgFromLibrary
     Private clsDataFunction As New RFunction
     Private dctPackages As New Dictionary(Of String, String)
     Private lstAvailablePackages As List(Of String)
-    Dim strDataName As String
 
     Private Sub dlgFromLibrary_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
@@ -167,15 +166,17 @@ Public Class dlgFromLibrary
     End Sub
 
     Private Sub lstCollection_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstCollection.SelectedIndexChanged
+        Dim strDataName As String
+
         If lstCollection.SelectedItems.Count > 0 Then
             strDataName = CheckString(lstCollection.SelectedItems(0).SubItems(0).Text)
             ucrBase.clsRsyntax.SetCommandString(strDataName)
-            If ucrNewDataFrameName.bUserTyped = False Then
+            If Not ucrNewDataFrameName.bUserTyped Then
                 ucrNewDataFrameName.SetName(strDataName)
             End If
             clsDataFunction.AddParameter("X", strDataName)
-            End If
-            TestOkEnabled()
+        End If
+        TestOkEnabled()
     End Sub
 
     Private Sub TestOkEnabled()
