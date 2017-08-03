@@ -122,6 +122,7 @@ Partial Class dlgClimaticBoxPlot
         'rdoDataThenYear
         '
         Me.rdoDataThenYear.AutoSize = True
+        Me.rdoDataThenYear.Enabled = False
         Me.rdoDataThenYear.Location = New System.Drawing.Point(158, 19)
         Me.rdoDataThenYear.Name = "rdoDataThenYear"
         Me.rdoDataThenYear.Size = New System.Drawing.Size(101, 17)
@@ -133,6 +134,7 @@ Partial Class dlgClimaticBoxPlot
         'rdoYearThenData
         '
         Me.rdoYearThenData.AutoSize = True
+        Me.rdoYearThenData.Enabled = False
         Me.rdoYearThenData.Location = New System.Drawing.Point(16, 19)
         Me.rdoYearThenData.Name = "rdoYearThenData"
         Me.rdoYearThenData.Size = New System.Drawing.Size(101, 17)

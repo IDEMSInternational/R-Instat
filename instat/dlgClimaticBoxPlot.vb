@@ -245,6 +245,8 @@ Public Class dlgClimaticBoxPlot
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsFacetFunction, ucrNewBaseSelector:=ucrSelectorClimaticBoxPlot, bReset:=bResetSubdialog)
+        'this is a temporaly fix because we have facets done on the main dialog
+        sdgPlots.tbpFacet.Enabled = False
         sdgPlots.ShowDialog()
         bResetSubdialog = False
     End Sub
@@ -280,7 +282,7 @@ Public Class dlgClimaticBoxPlot
         clsFacetFunction.AddParameter(clsROperatorParameter:=clsFacetOp)
     End Sub
 
-    Private Sub ucrChkFacet_ControlvalueChanged() Handles ucrChkFacet.ControlValueChanged, ucrReceiverFacet.ControlValueChanged
+    Private Sub ucrChkFacet_ControlvalueChanged() Handles ucrChkFacet.ControlValueChanged, ucrReceiverFacet.ControlValueChanged, ucrChk2ndFacet.ControlValueChanged, ucrReceiver2ndFacet.ControlValueChanged
         SetFacets()
         AddRemoveFacets()
     End Sub
@@ -291,5 +293,29 @@ Public Class dlgClimaticBoxPlot
         Else
             clsBaseOperator.RemoveParameterByName("facets")
         End If
+    End Sub
+
+    Private Sub cmdBoxPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdBoxPlotOptions.Click
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomPlotFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorClimaticBoxPlot, bApplyAesGlobally:=True, bReset:=bResetBoxLayerSubdialog)
+        sdgLayerOptions.ShowDialog()
+        bResetBoxLayerSubdialog = False
+        For Each clsParam In clsRaesFunction.clsParameters
+            If clsParam.strArgumentName = "x" Then
+                ucrReceiverYear.Add(clsParam.strArgumentValue)
+            ElseIf clsParam.strArgumentName = "y" Then
+                ucrReceiverData.Add(clsParam.strArgumentValue)
+            ElseIf clsParam.strArgumentName = "fill" Then
+                ucrReceiverMoreData.Add(clsParam.strArgumentValue)
+            End If
+        Next
+        'TODO need to check for the variable width from the geom function in a way that when we check the var width checkbox, it triggers controlvaluechanged
+    End Sub
+
+    Private Sub ucrPnlPlots_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPlots.ControlValueChanged
+
+    End Sub
+
+    Private Sub ucrChkFacet_ControlvalueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFacet.ControlValueChanged, ucrReceiver2ndFacet.ControlValueChanged, ucrChkFacet.ControlValueChanged, ucrChk2ndFacet.ControlValueChanged
+
     End Sub
 End Class
