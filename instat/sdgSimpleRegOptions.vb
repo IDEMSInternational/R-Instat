@@ -316,6 +316,7 @@ Public Class sdgSimpleRegOptions
 
         If bReset Then
             tbpRegOptions.SelectedIndex = 0
+            tcGraphics.SelectedIndex = 0
         End If
         GroupBoxDisplay()
         bRCodeSet = True
@@ -471,6 +472,10 @@ Public Class sdgSimpleRegOptions
         Next
         tbpRegOptions.TabPages(2).Enabled = False
         tbpRegOptions.SelectedIndex = 0
+        For j = 0 To tcGraphics.TabCount - 1
+            tcGraphics.SelectedIndex = j
+        Next
+        tcGraphics.SelectedIndex = 0
     End Sub
 
 End Class
