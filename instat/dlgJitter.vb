@@ -45,9 +45,9 @@ Public Class dlgJitter
         ucrBase.clsRsyntax.SetOperation("+")
         clsRunif.SetRCommand("runif")
         ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRunif)
-        ucrInputNewColumnName.SetItemsTypeAsColumns()
-        ucrInputNewColumnName.SetDefaultTypeAsColumn()
-        ucrInputNewColumnName.SetDataFrameSelector(ucrSelectorForJitter.ucrAvailableDataFrames)
+        'ucrInputNewColumnName.SetItemsTypeAsColumns()
+        'ucrInputNewColumnName.SetDefaultTypeAsColumn()
+        'ucrInputNewColumnName.SetDataFrameSelector(ucrSelectorForJitter.ucrAvailableDataFrames)
 
         ucrReceiverJitter.SetIncludedDataTypes({"numeric"})
         ucrReceiverJitter.SetParameterIsRFunction()
@@ -154,9 +154,9 @@ Public Class dlgJitter
         End If
     End Sub
 
-    Private Sub ucrSelectorForJitter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForJitter.ControlValueChanged
-        clsRunif.AddParameter("n", ucrSelectorForJitter.ucrAvailableDataFrames.iDataFrameLength)
-    End Sub
+    'Private Sub ucrSelectorForJitter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForJitter.ControlValueChanged
+    '    clsRunif.AddParameter("n", ucrSelectorForJitter.ucrAvailableDataFrames.iDataFrameLength)
+    'End Sub
 
     Private Sub ucrForDistance_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputMaximum.ControlValueChanged, ucrInputMaximumDistanceFromZero.ControlValueChanged, ucrInputMinimum.ControlValueChanged, ucrPnlDistance.ControlValueChanged
         Distance()
@@ -169,7 +169,7 @@ Public Class dlgJitter
 
 
     Private Sub ucrSelectorForJitter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForJitter.ControlValueChanged
-        LengthOfDataset()
+        'LengthOfDataset()
 
     End Sub
 
