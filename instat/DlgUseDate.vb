@@ -74,18 +74,18 @@ Public Class dlgUseDate
         ucrChkDayYear366.SetText("Day in Year (366)")
         ucrChkDayYear366.SetRDefault("FALSE")
 
-        ucrChkShiftYear.SetParameter(New RParameter("shift_year", 7))
+        ucrChkShiftYear.SetParameter(New RParameter("s_year", 7))
         ucrChkShiftYear.SetText("Shift Year")
         ucrChkShiftYear.SetRDefault("FALSE")
 
-        ucrChkShiftDay.SetParameter(New RParameter("shift_day", 8))
+        ucrChkShiftDay.SetParameter(New RParameter("s_doy", 8))
         ucrChkShiftDay.SetText("Shift Day")
         ucrChkShiftDay.SetRDefault("FALSE")
 
-        ucrNudShiftStartDay.SetParameter(New RParameter("shift_start_day", 9))
+        ucrNudShiftStartDay.SetParameter(New RParameter("s_start_day", 9))
         ucrNudShiftStartDay.SetRDefault(1)
 
-        ucrInputComboBoxMonth.SetParameter(New RParameter("shift_start_month", 10))
+        ucrInputComboBoxMonth.SetParameter(New RParameter("s_start_month", 10))
         Dim dctMonth As New Dictionary(Of String, String)
         dctMonth.Add("January", 1)
         dctMonth.Add("February", 2)
