@@ -160,5 +160,7 @@ Public Class ucrNud
                 MsgBox("Developer error: The value given cannot be converted to a decimal or is outside the range of the control. Value will be unchanged.")
             End If
         End If
+        'Ensures Text is set correctly if it has been cleared by user.
+        nudUpDown.Text = nudUpDown.Value
     End Sub
 End Class
