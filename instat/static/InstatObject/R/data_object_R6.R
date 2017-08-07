@@ -103,6 +103,10 @@ data_object <- R6::R6Class("data_object",
 
 data_object$set("public", "set_data", function(new_data, messages=TRUE, check_names = TRUE) {
   if(is.matrix(new_data)) new_data <- as.data.frame(new_data)
+  #This case could happen when removing rows
+  #as.data.frame preserves column and data frame attributes so no issue with this
+  else if(tibble::is.tibble(new_data)) new_data <- as.data.frame(new_data)
+  #TODO convert ts objects correctly
   else if(is.ts(new_data)) {
     ind <- zoo::index(new_data)
     new_data <- data.frame(index = ind, value = new_data)
@@ -113,7 +117,7 @@ data_object$set("public", "set_data", function(new_data, messages=TRUE, check_na
   else if(is.vector(new_data) && !is.list(new_data)) {
     new_data <- as.data.frame(new_data)
   }
-  #TODO convert ts objects correctly
+  
   if(!is.data.frame(new_data)) {
     stop("Data set must be of type: data.frame")
   }
@@ -132,7 +136,6 @@ data_object$set("public", "set_data", function(new_data, messages=TRUE, check_na
     self$append_to_changes(list(Set_property, "data"))
     self$data_changed <- TRUE
     self$variables_metadata_changed <- TRUE
-    #      is_data_split<<-FALSE
   }
 }
 )
@@ -909,6 +912,10 @@ data_object$set("public", "remove_rows_in_data", function(row_names) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
   if(!all(row_names %in% rownames(curr_data))) stop("Some of the row_names not found in data")
   rows_to_remove <- which(rownames(curr_data) %in% row_names)
+  #Prefer not to use dplyr::slice as it produces a tibble
+  #tibbles remove row names e.g. for filtering
+  #but cannot use standard curr_data[-rows_to_remove, ] 
+  #since it removes column attributes
   self$set_data(dplyr::slice(curr_data, -rows_to_remove))
   self$append_to_changes(list(Removed_row, row_names))
   self$data_changed <- TRUE
@@ -1470,7 +1477,7 @@ data_object$set("public", "get_filter_as_logical", function(filter_name) {
       # and special options for NA in the dialog
       if(condition[["operation"]] == "==" && is.na(condition[["value"]])) result[ ,i] <- is.na(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE))
       else if(condition[["operation"]] == "!=" && is.na(condition[["value"]])) result[ ,i] <- !is.na(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE))
-      else if(is.na(condition[["value"]])) stop("Cannot create a filter on missing values with operation: ", condition[["operation"]])
+      else if(any(is.na(condition[["value"]])) && condition[["operation"]] != "%in%") stop("Cannot create a filter on missing values with operation: ", condition[["operation"]])
       else result[ ,i] <- func(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE), condition[["value"]])
       i = i + 1
     }
