@@ -43,6 +43,7 @@ Partial Class ucrDataFrame
         Me.lblDataFrame = New System.Windows.Forms.Label()
         Me.mnuRightClick = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuRightClickCopy = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuRightClickSetData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuRightClick.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -66,7 +67,7 @@ Partial Class ucrDataFrame
         '
         'mnuRightClick
         '
-        Me.mnuRightClick.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuRightClickCopy})
+        Me.mnuRightClick.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuRightClickCopy, Me.mnuRightClickSetData})
         Me.mnuRightClick.Name = "mnuRightClick"
         Me.mnuRightClick.Size = New System.Drawing.Size(103, 26)
         '
@@ -75,6 +76,12 @@ Partial Class ucrDataFrame
         Me.mnuRightClickCopy.Name = "mnuRightClickCopy"
         Me.mnuRightClickCopy.Size = New System.Drawing.Size(102, 22)
         Me.mnuRightClickCopy.Text = "Copy"
+        '
+        'mnuRightClickSetData
+        '
+        Me.mnuRightClickSetData.Name = "mnuRightClickSetData"
+        Me.mnuRightClickSetData.Size = New System.Drawing.Size(102, 22)
+        Me.mnuRightClickSetData.Text = "View Data Frame"
         '
         'ucrDataFrame
         '
@@ -94,4 +101,5 @@ Partial Class ucrDataFrame
     Friend WithEvents lblDataFrame As Label
     Friend WithEvents mnuRightClick As ContextMenuStrip
     Friend WithEvents mnuRightClickCopy As ToolStripMenuItem
+    Friend WithEvents mnuRightClickSetData As ToolStripMenuItem
 End Class
