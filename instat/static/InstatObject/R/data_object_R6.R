@@ -399,8 +399,8 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
 )
 
 data_object$set("public", "get_column_data_types", function(columns) {
-  if(missing(columns)) return(as.vector(sapply(private$data, class)))
-  else return(as.vector(sapply(private$data[columns], class, USE.NAMES = FALSE)))
+  if(missing(columns)) return(as.vector(sapply(private$data, function(x) paste(class(x), collapse = ","))))
+  else return(as.vector(sapply(private$data[columns], function(x) paste(class(x), collapse = ","), USE.NAMES = FALSE)))
 }
 )
 
