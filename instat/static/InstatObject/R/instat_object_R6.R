@@ -724,19 +724,21 @@ instat_object$set("public", "get_next_default_dataframe_name", function(prefix, 
 } 
 )
 
-instat_object$set("public", "delete_dataframe", function(data_name) {
+instat_object$set("public", "delete_dataframes", function(data_names) {
   # TODO need a set or append
-  private$.data_objects[[data_name]] <- NULL
-  data_objects_changed <- TRUE
-  link_names <- c()
-  for(i in seq_along(private$.links)) {
-    if(private$.links[[i]]$from_data_frame == data_name || private$.links[[i]]$to_data_frame == data_name) {
-      link_names <- c(link_names, names(private$.links)[i])
+  for(name in data_names) {
+    private$.data_objects[[name]] <- NULL
+    data_objects_changed <- TRUE
+    link_names <- c()
+    for(i in seq_along(private$.links)) {
+      if(private$.links[[i]]$from_data_frame == name || private$.links[[i]]$to_data_frame == name) {
+        link_names <- c(link_names, names(private$.links)[i])
+      }
     }
-  }
-  for(name in link_names) {
-    #TODO Should we be able to disable links instead of deleting?
-    self$remove_link(name)
+    for(link_name in link_names) {
+      #TODO Should we be able to disable links instead of deleting?
+      self$remove_link(link_name)
+    }
   }
 } 
 )
