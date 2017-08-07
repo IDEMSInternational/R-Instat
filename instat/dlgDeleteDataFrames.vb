@@ -15,12 +15,12 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgDeleteSheet
+Public Class dlgDeleteDataFrames
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDefaultFunction As New RFunction
+    Private clsDeleteFunction As New RFunction
 
-    Private Sub dlgDeleteSheet_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Private Sub dlgDeleteDataFrames_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
@@ -39,15 +39,20 @@ Public Class dlgDeleteSheet
         ucrBase.iHelpTopicID = 63
         ucrBase.clsRsyntax.iCallType = 0
 
-        ucrDataFrameToDelete.SetParameter(New RParameter("data_name", 0))
-        ucrDataFrameToDelete.SetParameterIsString()
+        ucrReceiverDataframes.SetParameter(New RParameter("data_name", 0))
+        ucrReceiverDataframes.SetParameterIsString()
+        ucrReceiverDataframes.GetParameter().bIncludeArgumentName = False
+        ucrReceiverDataframes.Selector = ucrSelectorDataFramesToDelete
+        ucrReceiverDataframes.SetMeAsReceiver()
+        ucrReceiverDataframes.SetItemType("dataframe")
+        ucrReceiverDataframes.strSelectorHeading = "Data Frames"
     End Sub
 
     Private Sub SetDefaults()
-        clsDefaultFunction = New RFunction
-        ucrDataFrameToDelete.Reset()
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$delete_dataframe")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+        clsDeleteFunction = New RFunction
+        ucrSelectorDataFramesToDelete.Reset()
+        clsDeleteFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$delete_dataframe")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDeleteFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -55,7 +60,7 @@ Public Class dlgDeleteSheet
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrDataFrameToDelete.cboAvailableDataFrames.Text <> "" Then
+        If Not ucrReceiverDataframes.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -63,7 +68,7 @@ Public Class dlgDeleteSheet
     End Sub
 
     Private Sub ReopenDialog()
-        ucrDataFrameToDelete.Reset()
+        ucrSelectorDataFramesToDelete.Reset()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -85,7 +90,7 @@ Public Class dlgDeleteSheet
     '    End If
     'End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameToDelete.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDataframes.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
