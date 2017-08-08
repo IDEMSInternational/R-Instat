@@ -114,7 +114,7 @@ Public Class dlgStartofRains
         ucrNudTRAmount.SetMinMax(1, Integer.MaxValue)
 
         ucrChkTotalRainfall.SetParameter(New RParameter("TRSub", clsTRRollingSum, 1, False), False)
-        ucrChkNumberOfRainyDays.AddAdditionalCodeParameterPair(clsCombineOperator, New RParameter("TotalRainfall", clsTRCombineOperator, 1, False), iAdditionalPairNo:=1)
+        ucrChkTotalRainfall.AddAdditionalCodeParameterPair(clsCombineOperator, New RParameter("TotalRainfall", clsTRCombineOperator, 1, False), iAdditionalPairNo:=1)
         ucrChkTotalRainfall.SetText("Total Rainfall")
         ucrChkTotalRainfall.AddToLinkedControls(ucrNudTROverDays, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
         ucrNudTROverDays.SetLinkedDisplayControl(lblTROverDays)
