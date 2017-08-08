@@ -81,7 +81,7 @@ Partial Class dlgTransformText
         'lblColumnToTransform
         '
         Me.lblColumnToTransform.AutoSize = True
-        Me.lblColumnToTransform.Location = New System.Drawing.Point(250, 85)
+        Me.lblColumnToTransform.Location = New System.Drawing.Point(253, 85)
         Me.lblColumnToTransform.Name = "lblColumnToTransform"
         Me.lblColumnToTransform.Size = New System.Drawing.Size(107, 13)
         Me.lblColumnToTransform.TabIndex = 8
