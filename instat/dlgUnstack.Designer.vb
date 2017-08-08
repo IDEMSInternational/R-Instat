@@ -51,27 +51,30 @@ Partial Class dlgUnstack
         '
         'lblFactorToUnstackBy
         '
-        Me.lblFactorToUnstackBy.Location = New System.Drawing.Point(268, 43)
+        Me.lblFactorToUnstackBy.AutoSize = True
+        Me.lblFactorToUnstackBy.Location = New System.Drawing.Point(268, 45)
         Me.lblFactorToUnstackBy.Name = "lblFactorToUnstackBy"
-        Me.lblFactorToUnstackBy.Size = New System.Drawing.Size(121, 16)
+        Me.lblFactorToUnstackBy.Size = New System.Drawing.Size(109, 13)
         Me.lblFactorToUnstackBy.TabIndex = 1
         Me.lblFactorToUnstackBy.Tag = "Factor_to_Unstack_By"
         Me.lblFactorToUnstackBy.Text = "Factor to Unstack by:"
         '
         'lblColumnToUnstack
         '
-        Me.lblColumnToUnstack.Location = New System.Drawing.Point(268, 88)
+        Me.lblColumnToUnstack.AutoSize = True
+        Me.lblColumnToUnstack.Location = New System.Drawing.Point(268, 91)
         Me.lblColumnToUnstack.Name = "lblColumnToUnstack"
-        Me.lblColumnToUnstack.Size = New System.Drawing.Size(119, 17)
+        Me.lblColumnToUnstack.Size = New System.Drawing.Size(100, 13)
         Me.lblColumnToUnstack.TabIndex = 3
         Me.lblColumnToUnstack.Tag = "Column_to_Unstack:"
         Me.lblColumnToUnstack.Text = "Column to Unstack:"
         '
         'lblIDColumns
         '
-        Me.lblIDColumns.Location = New System.Drawing.Point(268, 135)
+        Me.lblIDColumns.AutoSize = True
+        Me.lblIDColumns.Location = New System.Drawing.Point(268, 137)
         Me.lblIDColumns.Name = "lblIDColumns"
-        Me.lblIDColumns.Size = New System.Drawing.Size(100, 16)
+        Me.lblIDColumns.Size = New System.Drawing.Size(64, 13)
         Me.lblIDColumns.TabIndex = 5
         Me.lblIDColumns.Tag = "ID_Columns"
         Me.lblIDColumns.Text = "ID Columns:"
@@ -167,6 +170,7 @@ Partial Class dlgUnstack
         Me.Tag = "Unstack_Columns"
         Me.Text = "Unstack Columns"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents ucrBase As ucrButtons
