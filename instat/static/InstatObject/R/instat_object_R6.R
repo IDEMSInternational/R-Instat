@@ -724,19 +724,21 @@ instat_object$set("public", "get_next_default_dataframe_name", function(prefix, 
 } 
 )
 
-instat_object$set("public", "delete_dataframe", function(data_name) {
+instat_object$set("public", "delete_dataframes", function(data_names) {
   # TODO need a set or append
-  private$.data_objects[[data_name]] <- NULL
-  data_objects_changed <- TRUE
-  link_names <- c()
-  for(i in seq_along(private$.links)) {
-    if(private$.links[[i]]$from_data_frame == data_name || private$.links[[i]]$to_data_frame == data_name) {
-      link_names <- c(link_names, names(private$.links)[i])
+  for(name in data_names) {
+    private$.data_objects[[name]] <- NULL
+    data_objects_changed <- TRUE
+    link_names <- c()
+    for(i in seq_along(private$.links)) {
+      if(private$.links[[i]]$from_data_frame == name || private$.links[[i]]$to_data_frame == name) {
+        link_names <- c(link_names, names(private$.links)[i])
+      }
     }
-  }
-  for(name in link_names) {
-    #TODO Should we be able to disable links instead of deleting?
-    self$remove_link(name)
+    for(link_name in link_names) {
+      #TODO Should we be able to disable links instead of deleting?
+      self$remove_link(link_name)
+    }
   }
 } 
 )
@@ -763,16 +765,18 @@ instat_object$set("public", "sort_dataframe", function(data_name, col_names = c(
 )
 
 instat_object$set("public", "rename_dataframe", function(data_name, new_value = "", label = "") {
-  if(new_value %in% names(private$.data_objects)) stop("Cannot rename data frame since ", new_value, " is an existing data frame.")
   data_obj <- self$get_data_objects(data_name)
-  names(private$.data_objects)[names(private$.data_objects) == data_name] <- new_value
-  data_obj$append_to_metadata(data_name_label, new_value)
-  for(i in seq_along(private$.links)) {
-    if(private$.links[[i]]$from_data_frame == data_name) {
-      private$.links[[i]]$from_data_frame <- new_value
-    }
-    if(private$.links[[i]]$to_data_frame == data_name) {
-      private$.links[[i]]$to_data_frame <- new_value
+  if(data_name != new_value) {
+    if(new_value %in% names(private$.data_objects)) stop("Cannot rename data frame since ", new_value, " is an existing data frame.")
+    names(private$.data_objects)[names(private$.data_objects) == data_name] <- new_value
+    data_obj$append_to_metadata(data_name_label, new_value)
+    for(i in seq_along(private$.links)) {
+      if(private$.links[[i]]$from_data_frame == data_name) {
+        private$.links[[i]]$from_data_frame <- new_value
+      }
+      if(private$.links[[i]]$to_data_frame == data_name) {
+        private$.links[[i]]$to_data_frame <- new_value
+      }
     }
   }
   if(label != "") {
@@ -1103,8 +1107,8 @@ instat_object$set("public", "import_SST", function(dataset, data_from = 5, data_
 }
 )
 
-instat_object$set("public","make_inventory_plot", function(data_name, date_col, station_col = NULL, year_col = NULL, doy_col = NULL, element_cols = NULL, add_to_data = FALSE, year_doy_plot = FALSE, coord_flip = FALSE, facet_by = NULL, graph_title = "Inventory Plot") {
-  self$get_data_objects(data_name)$make_inventory_plot(date_col = date_col, station_col = station_col, year_col = year_col, doy_col = doy_col, element_cols = element_cols, add_to_data = add_to_data, year_doy_plot = year_doy_plot, coord_flip = coord_flip, facet_by = facet_by, graph_title = graph_title)
+instat_object$set("public","make_inventory_plot", function(data_name, date_col, station_col = NULL, year_col = NULL, doy_col = NULL, element_cols = NULL, add_to_data = FALSE, year_doy_plot = FALSE, coord_flip = FALSE, facet_by = NULL, graph_title = "Inventory Plot", key_colours = c("red", "grey"), display_rain_days = FALSE, rain_cats = list(breaks = c(0, 0.85, Inf), labels = c("Dry", "Rain"), key_colours = c("tan3", "blue"))) {
+  self$get_data_objects(data_name)$make_inventory_plot(date_col = date_col, station_col = station_col, year_col = year_col, doy_col = doy_col, element_cols = element_cols, add_to_data = add_to_data, year_doy_plot = year_doy_plot, coord_flip = coord_flip, facet_by = facet_by, graph_title = graph_title, key_colours = key_colours, display_rain_days = display_rain_days, rain_cats = rain_cats)
 }
 )
 
