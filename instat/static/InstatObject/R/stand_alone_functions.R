@@ -228,6 +228,62 @@ pentad <- function(date) {
   return(temp_pentad)
 }
 
+nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = TRUE, replace_missing = TRUE) {
+  dim_names <- ncdf4.helpers::nc.get.dim.names(nc, vars[1])
+  
+  dim_values <- list()
+  for(dim_name in dim_names) {
+    #why no wrapper for this in ncdf4.helper?
+    dim_values[[length(dim_values) + 1]] <- nc$dim[[dim_name]]$vals
+    #This is not recommended but appears in tutorials
+    #ncdf4::ncvar_get(nc, dim_name)
+  }
+  var_data <- expand.grid(dim_values, KEEP.OUT.ATTRS = FALSE)
+  names(var_data) <- dim_names
+  included_vars <- dim_names
+  for(var in vars) {
+    curr_dim_names <- ncdf4.helpers::nc.get.dim.names(nc, var)
+    if(!setequal(curr_dim_names, dim_names)) {
+      warning("The dimensions of", var, "do not match the other variables.", var, "will be dropped.")
+    }
+    else {
+      included_vars <- c(included_vars, var)
+      var_data[[var]] <- as.vector(ncvar_get(nc, var))
+    }
+  }
+  
+  dim_axes <- ncdf4.helpers::nc.get.dim.axes(nc)
+  time_dims <- names(dim_axes[which(dim_axes == "T" & names(dim_axes) %in% dim_names)])
+  if(length(time_dims) == 1) {
+    time_var <- time_dims
+    raw_time <- nc$dim[[time_var]]$vals
+    pcict_time <- ncdf4.helpers::nc.get.time.series(nc, time.dim.name = time_var)
+    posixct_time <- PCICt::as.POSIXlt.PCICt(pcict_time)
+    date_time <- as.Date(posixct_time)
+    time_df <- data.frame(raw_time, posixct_time, date_time)
+    names(time_df) <- c(time_var, paste0(time_var, "_full"), paste0(time_var, "_date"))
+    var_data <- dplyr::full_join(var_data, time_df, by = time_var)
+    if(!keep_raw_time) {
+      var_data[[time_var]] <- NULL
+      included_vars <- included_vars[-which(included_vars == time_var)]
+    }
+  }
+  
+  if(include_metadata) {
+    for(col_name in included_vars) {
+      col_attr <- ncdf4::ncatt_get(nc, col_name)
+      for(i in seq_along(col_attr)) {
+        attr(var_data[[col_name]], names(col_attr)[i]) <- col_attr[[i]]
+      }
+    }
+    global_attr <- ncdf4::ncatt_get(nc, 0)
+    for(i in seq_along(global_attr)) {
+      attr(var_data, names(global_attr)[i]) <- global_attr[[i]]
+    }
+  }
+  return(var_data)
+}
+
 open_NetCDF <- function(nc_data, latitude_col_name, longitude_col_name, default_names){
   variables = names(nc_data$var)
   lat_lon_names = names(nc_data$dim)
