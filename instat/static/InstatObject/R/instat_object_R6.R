@@ -1112,7 +1112,7 @@ instat_object$set("public","make_inventory_plot", function(data_name, date_col, 
 }
 )
 
-instat_object$set("public", "import_NetCDF", function(nc, name, only_data_vars = TRUE, keep_raw_time = TRUE, include_metadata = TRUE, replace_missing = TRUE, close = TRUE) {
+instat_object$set("public", "import_NetCDF", function(nc, name, only_data_vars = TRUE, keep_raw_time = TRUE, include_metadata = TRUE, replace_missing = TRUE) {
   if(only_data_vars) {
     all_var_names <- ncdf4.helpers::nc.get.variable.list(nc)
   }
@@ -1157,7 +1157,6 @@ instat_object$set("public", "import_NetCDF", function(nc, name, only_data_vars =
       }
     }
   }
-  if(close) ncdf4::nc_close(nc)
 }
 )
 
