@@ -228,18 +228,21 @@ pentad <- function(date) {
   return(temp_pentad)
 }
 
-open_NetCDF <- function(nc_data, latitude_col_name, longitude_col_name, default_names){
+open_NetCDF <- function(nc_data, latitude_col_name, longitude_col_name, time_col_name, default_names, add_date_time){
   variables = names(nc_data$var)
   lat_lon_names = names(nc_data$dim)
   #we may need to add latitude_col_name, longitude_col_name to the character vector of valid names
-  lat_names = c("lat", "latitude", "LAT", "Lat", "LATITUDE")
-  lon_names = c("lon", "longitude", "LON", "Lon", "LONGITUDE")
-  time_names = c("time", "TIME", "Time", "period", "Period", "PERIOD")
+  lat_names = c("lat", "latitude", "LAT", "Lat", "LATITUDE", "Y")
+  lon_names = c("lon", "longitude", "LON", "Lon", "LONGITUDE", "X")
+  time_names = c("time", "TIME", "Time", "period", "Period", "PERIOD", "T")
   if (stringr::str_trim(latitude_col_name) != ""){
     lat_names <- c(lat_names, latitude_col_name)
   }
-  if (str_trim(longitude_col_name) != ""){
+  if (stringr::str_trim(longitude_col_name) != ""){
     lon_names <- c(lon_names, longitude_col_name)
+  }
+  if (stringr::str_trim(time_col_name) != ""){
+    time_names <- c(time_names, time_col_name)
   }
   lat_in <- which(lat_lon_names %in% lat_names)
   lat_found <- (length(lat_in) == 1)
@@ -284,13 +287,20 @@ open_NetCDF <- function(nc_data, latitude_col_name, longitude_col_name, default_
   lat_lon_df <- cbind(lat_lon, station)
   my_data <- cbind(period, lat_lon_df)
   
+  if (add_date_time && time_found){
+    time_units <- as.character(strsplit(ncdf4::ncatt_get(nc_data, lat_lon_names[time_in])$units, " ")[[1]])
+    units <- time_units[1]
+    new_origin <- stringr::str_c(time_units[3:length(time_units)], collapse = " ")
+    my_data$date_time <- as.character(ncdf.tools::convertDateNcdf2R(my_data$period, units = units, origin = as.POSIXct(new_origin, tz = "UTC")))
+  }
+  
   for (current_var in variables){
     dataset <- ncdf4::ncvar_get(nc_data, current_var)
     if(length(dim(dataset)) == 1) {
       nc_value = dataset
     }
     else if(length(dim(dataset)) == 2) {
-      nc_value = as.vector(t(dataset))
+      nc_value = as.vector(dataset)
     }
     else if(length(dim(dataset)) == 3) {
       lonIdx <- which(!is.na(lon))

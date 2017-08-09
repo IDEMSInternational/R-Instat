@@ -20,6 +20,11 @@ Public Class ucrInput
     Public bUserTyped As Boolean = False
     Public Event NameChanged()
     Public Event ContentsChanged()
+    'Only raised when NameChanged and new text is different from only text
+    'Needed in dialogs where a 'reset' is done on strict name changed.
+    'Potentialy remove in future and make NameChanged have this behaviour instead.
+    'Needs proper testing before doing this.
+    Public Event StrictNameChanged()
     Protected strValidationType As String = "None"
     Dim strReservedWords() As String = ({"if", "else", "repeat", "while", "function", "for", "in", "next", "break", "TRUE", "FALSE", "NULL", "Inf", "NaN", "NA", "NA_integer_", "NA_real_", "NA_complex_", "NA_character_"})
     Public clsRList As New RFunction
@@ -54,13 +59,21 @@ Public Class ucrInput
         Return ""
     End Function
 
-    Public Overridable Sub Reset()
+    Public Overridable Sub Reset(Optional bClearText As Boolean = True)
         bUserTyped = False
+        If bClearText Then
+            SetName("")
+        End If
     End Sub
 
     Public Sub OnNameChanged()
+        Dim bStrict As Boolean
+        bStrict = (Me.Text <> Me.GetText())
         Me.Text = Me.GetText()
         RaiseEvent NameChanged()
+        If bStrict Then
+            RaiseEvent StrictNameChanged()
+        End If
         OnControlValueChanged()
     End Sub
 

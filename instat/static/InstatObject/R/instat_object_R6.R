@@ -1112,8 +1112,8 @@ instat_object$set("public","make_inventory_plot", function(data_name, date_col, 
 }
 )
 
-instat_object$set("public", "import_NetCDF", function(nc_data, main_data_name, loc_data_name, latitude_col_name = "", longitude_col_name = "") {
-  nc_result <- open_NetCDF(nc_data = nc_data, latitude_col_name = latitude_col_name, longitude_col_name = longitude_col_name)
+instat_object$set("public", "import_NetCDF", function(nc_data, main_data_name, loc_data_name, latitude_col_name = "", longitude_col_name = "", time_col_name = "", add_date_time = TRUE) {
+  nc_result <- open_NetCDF(nc_data = nc_data, latitude_col_name = latitude_col_name, longitude_col_name = longitude_col_name, time_col_name = time_col_name, add_date_time = add_date_time)
   if(length(nc_result) != 3)stop("Output from open_NetCDF should be a list of length 3")
   
   data_list = nc_result[c(1,2)]
@@ -1252,7 +1252,7 @@ instat_object$set("public", "get_nc_variable_names", function(file = "", as_list
     vars <- ""
   }
   else {
-    nc_file <- nc_open(file)
+    nc_file <- ncdf4::nc_open(file)
     vars <- names(nc_file$dim)
   }
   if(as_list) {

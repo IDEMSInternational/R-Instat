@@ -106,12 +106,15 @@ Public Class ucrReceiver
         Get
             Return strPrvNcFilePath
         End Get
+
         Set(strFilePath As String)
             strPrvNcFilePath = strFilePath
+            Me.Clear()
             If IsCurrentReceiver() Then
                 Selector.LoadList()
             End If
         End Set
+
     End Property
 
     Public Overridable Function GetVariables(Optional bForceAsDataFrame As Boolean = False) As RFunction
