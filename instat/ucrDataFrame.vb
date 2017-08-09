@@ -225,4 +225,8 @@ Public Class ucrDataFrame
     Public Sub SetLabelText(strText As String)
         lblDataFrame.Text = strText
     End Sub
+
+    Private Sub mnuRightClickSetData_Click(sender As Object, e As EventArgs) Handles mnuRightClickSetData.Click
+        frmMain.SetCurrentDataFrame(cboAvailableDataFrames.Text)
+    End Sub
 End Class

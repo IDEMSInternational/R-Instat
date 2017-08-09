@@ -490,7 +490,7 @@ Public Class frmMain
         dlgPermuteColumn.ShowDialog()
     End Sub
     Private Sub mnuPrepareDataFileDeleteSheets_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataObjectDeleteDataFrame.Click
-        dlgDeleteSheet.ShowDialog()
+        dlgDeleteDataFrames.ShowDialog()
     End Sub
 
 
@@ -1651,7 +1651,7 @@ Public Class frmMain
     End Sub
 
     Private Sub BoxplotsConceptualisedAndConstructedToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BoxplotsConceptualisedAndConstructedToolStripMenuItem.Click
-        dlgCliBoxplot.ShowDialog()
+        dlgClimaticBoxPlot.ShowDialog()
     End Sub
 
     Private Sub SummaryOfDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SummaryOfDailyDataToolStripMenuItem.Click
