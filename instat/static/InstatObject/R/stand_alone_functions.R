@@ -239,6 +239,9 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
     #ncdf4::ncvar_get(nc, dim_name)
   }
   var_data <- expand.grid(dim_values, KEEP.OUT.ATTRS = FALSE)
+  for(i in seq_along(var_data)) {
+    attr(var_data[[i]], "dim") <- NULL
+  }
   names(var_data) <- dim_names
   included_vars <- dim_names
   for(var in vars) {
@@ -248,7 +251,7 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
     }
     else {
       included_vars <- c(included_vars, var)
-      var_data[[var]] <- as.vector(ncvar_get(nc, var))
+      var_data[[var]] <- as.vector(ncdf4::ncvar_get(nc, var))
     }
   }
   
@@ -257,6 +260,7 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
   if(length(time_dims) == 1) {
     time_var <- time_dims
     raw_time <- nc$dim[[time_var]]$vals
+    attr(raw_time, "dim") <- NULL
     pcict_time <- ncdf4.helpers::nc.get.time.series(nc, time.dim.name = time_var)
     posixct_time <- PCICt::as.POSIXlt.PCICt(pcict_time)
     date_time <- as.Date(posixct_time)
@@ -266,6 +270,48 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
     if(!keep_raw_time) {
       var_data[[time_var]] <- NULL
       included_vars <- included_vars[-which(included_vars == time_var)]
+    }
+  }
+  # Following conventions in http://www.unidata.ucar.edu/software/netcdf/docs/attribute_conventions.html
+  if(replace_missing) {
+    for(inc_var in included_vars) {
+      
+      numeric_var <- is.numeric(var_data[[inc_var]])
+      integer_var <- is.integer(var_data[[inc_var]])
+      valid_range <- ncdf4::ncatt_get(nc, var, "valid_range")
+      valid_min <- ncdf4::ncatt_get(nc, var, "valid_min")
+      valid_max <- ncdf4::ncatt_get(nc, var, "valid_max")
+      fill_value <- ncdf4::ncatt_get(nc, var, "_FillValue")
+      missing_value <- ncdf4::ncatt_get(nc, var, "missing_value")
+
+      if(numeric_var && valid_range[[1]]) {
+        var_data[[inc_var]][var_data[[inc_var]] < valid_range[[2]][1] | var_data[[inc_var]] > valid_range[[2]][2]] <- NA
+      }
+      else if(numeric_var && (valid_min[[1]] || valid_max[[1]])) {
+        if(valid_min[[1]]) {
+          var_data[[inc_var]][var_data[[inc_var]] < valid_min[[2]]] <- NA
+        }
+        if(valid_max[[2]]) {
+          var_data[[inc_var]][var_data[[inc_var]] > valid_max[[2]]] <- NA
+        }
+      }
+      else if(fill_value[[1]]) {
+        val <- fill_value[[2]]
+        if(numeric_var) {
+          # Not sure this is safe if 'integer' types from file do not import as
+          # 'integer' types in R.
+          if(integer_var) width <- 1
+          else width <- 2 * .Machine$double.xmin
+          
+          if(val > 0) var_data[[inc_var]][var_data[[inc_var]] > val + width] <- NA
+          else var_data[[inc_var]][var_data[[inc_var]] < val - width] <- NA
+        }
+        else {
+          # Should we do this? Non numeric not mentioned in convention
+          var_data[[inc_var]][var_data[[inc_var]] %in% val] <- NA
+        }
+      }
+      if(missing_value[[1]]) var_data[[inc_var]][var_data[[inc_var]] %in% missing_value[[2]]] <- NA
     }
   }
   

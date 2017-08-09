@@ -1136,15 +1136,26 @@ instat_object$set("public", "import_NetCDF", function(nc, name, only_data_vars =
   }
   
   data_list <- list()
-  use_prefix = (length(seq_along(var_groups)) > 1)
+  use_prefix <- (length(seq_along(var_groups)) > 1)
+  data_names <- c()
   for(i in seq_along(var_groups)) {
     if(use_prefix) curr_name <- paste0(name, "_", i)
     else curr_name <- name
+    data_names <- c(data_names, curr_name)
     data_list[[curr_name]] <- nc_as_data_frame(nc, var_groups[[i]], keep_raw_time = keep_raw_time, include_metadata = include_metadata, replace_missing = replace_missing)
     tmp_list <- list()
     tmp_list[[curr_name]] <- data_list[[curr_name]]
     self$import_data(data_tables = tmp_list)
     self$add_key(curr_name, dim_groups[[i]])
+  }
+  for(i in seq_along(data_names)) {
+    for(j in seq_along(data_names)) {
+      if(i != j && !self$link_exists_between(data_names[i], data_names[j]) && all(dim_groups[[i]] %in% dim_groups[[j]])) {
+        pairs <- dim_groups[[i]]
+        names(pairs) <- pairs
+        self$add_link(data_names[j], data_names[i], pairs, keyed_link_label)
+      }
+    }
   }
   if(close) ncdf4::nc_close(nc)
 }
