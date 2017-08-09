@@ -92,7 +92,6 @@ Partial Class sdgClimdexIndices
         Me.lblBaseFrom = New System.Windows.Forms.Label()
         Me.ucrNudLowerBase = New instat.ucrNud()
         Me.ucrChkCentreMean = New instat.ucrCheck()
-        Me.ucrChkSpellDISpanYear = New instat.ucrCheck()
         Me.ucrChkNHemisphere = New instat.ucrCheck()
         Me.ucrChkMaxSpellSpanYears = New instat.ucrCheck()
         Me.ucrNudN = New instat.ucrNud()
@@ -521,7 +520,6 @@ Partial Class sdgClimdexIndices
         Me.tbpSettings.Controls.Add(Me.ucrInputGSLMode)
         Me.tbpSettings.Controls.Add(Me.grpBaseRange)
         Me.tbpSettings.Controls.Add(Me.ucrChkCentreMean)
-        Me.tbpSettings.Controls.Add(Me.ucrChkSpellDISpanYear)
         Me.tbpSettings.Controls.Add(Me.ucrChkNHemisphere)
         Me.tbpSettings.Controls.Add(Me.ucrChkMaxSpellSpanYears)
         Me.tbpSettings.Controls.Add(Me.ucrNudN)
@@ -649,14 +647,6 @@ Partial Class sdgClimdexIndices
         Me.ucrChkCentreMean.Name = "ucrChkCentreMean"
         Me.ucrChkCentreMean.Size = New System.Drawing.Size(212, 20)
         Me.ucrChkCentreMean.TabIndex = 13
-        '
-        'ucrChkSpellDISpanYear
-        '
-        Me.ucrChkSpellDISpanYear.Checked = False
-        Me.ucrChkSpellDISpanYear.Location = New System.Drawing.Point(11, 160)
-        Me.ucrChkSpellDISpanYear.Name = "ucrChkSpellDISpanYear"
-        Me.ucrChkSpellDISpanYear.Size = New System.Drawing.Size(212, 20)
-        Me.ucrChkSpellDISpanYear.TabIndex = 11
         '
         'ucrChkNHemisphere
         '
@@ -940,7 +930,6 @@ Partial Class sdgClimdexIndices
     Friend WithEvents lblBaseFrom As Label
     Friend WithEvents ucrNudLowerBase As ucrNud
     Friend WithEvents ucrChkCentreMean As ucrCheck
-    Friend WithEvents ucrChkSpellDISpanYear As ucrCheck
     Friend WithEvents ucrChkNHemisphere As ucrCheck
     Friend WithEvents ucrChkMaxSpellSpanYears As ucrCheck
     Friend WithEvents ucrNudN As ucrNud
