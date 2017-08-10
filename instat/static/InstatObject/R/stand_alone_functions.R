@@ -228,85 +228,187 @@ pentad <- function(date) {
   return(temp_pentad)
 }
 
-open_NetCDF <- function(nc_data, latitude_col_name, longitude_col_name, default_names){
-  variables = names(nc_data$var)
-  lat_lon_names = names(nc_data$dim)
-  #we may need to add latitude_col_name, longitude_col_name to the character vector of valid names
-  lat_names = c("lat", "latitude", "LAT", "Lat", "LATITUDE")
-  lon_names = c("lon", "longitude", "LON", "Lon", "LONGITUDE")
-  time_names = c("time", "TIME", "Time", "period", "Period", "PERIOD")
-  if (stringr::str_trim(latitude_col_name) != ""){
-    lat_names <- c(lat_names, latitude_col_name)
-  }
-  if (str_trim(longitude_col_name) != ""){
-    lon_names <- c(lon_names, longitude_col_name)
-  }
-  lat_in <- which(lat_lon_names %in% lat_names)
-  lat_found <- (length(lat_in) == 1)
-  if(lat_found) {
-    lat <- as.numeric(ncdf4::ncvar_get(nc_data, lat_lon_names[lat_in]))
-  }
+nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = TRUE) {
+  dim_names <- ncdf4.helpers::nc.get.dim.names(nc, vars[1])
   
-  lon_in <- which(lat_lon_names %in% lon_names)
-  lon_found <- (length(lon_in) == 1)
-  if(lon_found) {
-    lon <- as.numeric(ncdf4::ncvar_get(nc_data, lat_lon_names[lon_in]))
+  dim_values <- list()
+  for(dim_name in dim_names) {
+    #why no wrapper for this in ncdf4.helper?
+    dim_values[[length(dim_values) + 1]] <- nc$dim[[dim_name]]$vals
+    #This is not recommended but appears in tutorials
+    #ncdf4::ncvar_get(nc, dim_name)
   }
-  
-  time_in <- which(lat_lon_names %in% time_names)
-  time_found <- (length(time_in) == 1)
-  if(time_found) {
-    time <- as.numeric(ncdf4::ncvar_get(nc_data, lat_lon_names[time_in]))
+  var_data <- expand.grid(dim_values, KEEP.OUT.ATTRS = FALSE)
+  for(i in seq_along(var_data)) {
+    attr(var_data[[i]], "dim") <- NULL
   }
-  
-  if(!lon_found || (!lat_found)) stop("Latitude and longitude names could not be recognised.")
-  if(!time_found) {
-    warning("Time variable could not be found/recognised. Time will be set to 1.")
-    time = 1
-  } 
-  period <- rep(time, each = (length(lat)*length(lon)))
-  lat_rep <- rep(lat, each = length(lon))
-  lon_rep <- rep(lon, length(lat))
-  # if (!default_names){
-  #   #we need to check if the names are valid
-  #   new_lat_lon_column_names <- c(latitude_col_name, longitude_col_name)
-  # }
-  # else{
-  new_lat_lon_column_names <- c(lat_lon_names[lat_in], lat_lon_names[lon_in])
-  #}
-  lat_lon <- as.data.frame(cbind(lat_rep, lon_rep))
-  names(lat_lon) = new_lat_lon_column_names
-  station = ifelse(lat_rep >= 0 & lon_rep >= 0, paste(paste("N", lat_rep, sep = ""), paste("E", lon_rep, sep = ""), sep = "_"), 
-                   ifelse(lat_rep < 0 & lon_rep >= 0, paste(paste("S", abs(lat_rep), sep = ""), paste("E", lon_rep, sep = ""), sep = "_"), 
-                          ifelse(lat_rep >= 0 & lon_rep < 0, paste(paste("N", lat_rep, sep = ""), paste("W", abs(lon_rep), sep = ""), sep = "_") , 
-                                 paste(paste("S", abs(lat_rep), sep = ""), paste("W", abs(lon_rep), sep = ""), sep = "_"))))
-  
-  lat_lon_df <- cbind(lat_lon, station)
-  my_data <- cbind(period, lat_lon_df)
-  
-  for (current_var in variables){
-    dataset <- ncdf4::ncvar_get(nc_data, current_var)
-    if(length(dim(dataset)) == 1) {
-      nc_value = dataset
-    }
-    else if(length(dim(dataset)) == 2) {
-      nc_value = as.vector(t(dataset))
-    }
-    else if(length(dim(dataset)) == 3) {
-      lonIdx <- which(!is.na(lon))
-      latIdx <- which(!is.na(lat))
-      timeIdx <- which(!is.na(time))
-      new_dataset <- dataset[lonIdx, latIdx, timeIdx]
-      nc_value = as.vector(new_dataset)
+  names(var_data) <- dim_names
+  included_vars <- dim_names
+  for(var in vars) {
+    curr_dim_names <- ncdf4.helpers::nc.get.dim.names(nc, var)
+    if(!setequal(curr_dim_names, dim_names)) {
+      warning("The dimensions of", var, "do not match the other variables.", var, "will be dropped.")
     }
     else {
-      stop("The format of the data cannot be recognised")
+      included_vars <- c(included_vars, var)
+      var_data[[var]] <- as.vector(ncdf4::ncvar_get(nc, var))
     }
-    my_data = cbind(my_data, nc_value)
-    names(my_data)[length(names(my_data))] <- current_var
   }
-  return(list(my_data, lat_lon_df, new_lat_lon_column_names))
+  
+  dim_axes <- ncdf4.helpers::nc.get.dim.axes(nc)
+  time_dims <- names(dim_axes[which(dim_axes == "T" & names(dim_axes) %in% dim_names)])
+  if(length(time_dims) == 1) {
+    time_var <- time_dims
+    raw_time <- nc$dim[[time_var]]$vals
+    attr(raw_time, "dim") <- NULL
+    pcict_time <- ncdf4.helpers::nc.get.time.series(nc, time.dim.name = time_var)
+    posixct_time <- PCICt::as.POSIXlt.PCICt(pcict_time)
+    date_time <- as.Date(posixct_time)
+    time_df <- data.frame(raw_time, posixct_time, date_time)
+    names(time_df) <- c(time_var, paste0(time_var, "_full"), paste0(time_var, "_date"))
+    var_data <- dplyr::full_join(var_data, time_df, by = time_var)
+    if(!keep_raw_time) {
+      var_data[[time_var]] <- NULL
+      included_vars <- included_vars[-which(included_vars == time_var)]
+    }
+  }
+  # # Following conventions in http://www.unidata.ucar.edu/software/netcdf/docs/attribute_conventions.html
+  # if(replace_missing) {
+  #   for(inc_var in included_vars) {
+  #     
+  #     numeric_var <- is.numeric(var_data[[inc_var]])
+  #     integer_var <- is.integer(var_data[[inc_var]])
+  #     valid_range <- ncdf4::ncatt_get(nc, var, "valid_range")
+  #     valid_min <- ncdf4::ncatt_get(nc, var, "valid_min")
+  #     valid_max <- ncdf4::ncatt_get(nc, var, "valid_max")
+  #     fill_value <- ncdf4::ncatt_get(nc, var, "_FillValue")
+  #     missing_value <- ncdf4::ncatt_get(nc, var, "missing_value")
+  # 
+  #     if(numeric_var && valid_range[[1]]) {
+  #       var_data[[inc_var]][var_data[[inc_var]] < valid_range[[2]][1] | var_data[[inc_var]] > valid_range[[2]][2]] <- NA
+  #     }
+  #     else if(numeric_var && (valid_min[[1]] || valid_max[[1]])) {
+  #       if(valid_min[[1]]) {
+  #         var_data[[inc_var]][var_data[[inc_var]] < valid_min[[2]]] <- NA
+  #       }
+  #       if(valid_max[[2]]) {
+  #         var_data[[inc_var]][var_data[[inc_var]] > valid_max[[2]]] <- NA
+  #       }
+  #     }
+  #     else if(fill_value[[1]]) {
+  #       val <- fill_value[[2]]
+  #       if(numeric_var) {
+  #         # Not sure this is safe if 'integer' types from file do not import as
+  #         # 'integer' types in R.
+  #         if(integer_var) width <- 1
+  #         else width <- 2 * .Machine$double.xmin
+  #         
+  #         if(val > 0) var_data[[inc_var]][var_data[[inc_var]] > val + width] <- NA
+  #         else var_data[[inc_var]][var_data[[inc_var]] < val - width] <- NA
+  #       }
+  #       else {
+  #         # Should we do this? Non numeric not mentioned in convention
+  #         var_data[[inc_var]][var_data[[inc_var]] %in% val] <- NA
+  #       }
+  #     }
+  #     if(missing_value[[1]]) var_data[[inc_var]][var_data[[inc_var]] %in% missing_value[[2]]] <- NA
+  #   }
+  # }
+  
+  if(include_metadata) {
+    for(col_name in included_vars) {
+      col_attr <- ncdf4::ncatt_get(nc, col_name)
+      for(i in seq_along(col_attr)) {
+        attr(var_data[[col_name]], names(col_attr)[i]) <- col_attr[[i]]
+      }
+    }
+    global_attr <- ncdf4::ncatt_get(nc, 0)
+    for(i in seq_along(global_attr)) {
+      attr(var_data, names(global_attr)[i]) <- global_attr[[i]]
+    }
+  }
+  return(var_data)
 }
+
+# open_NetCDF <- function(nc_data, latitude_col_name, longitude_col_name, default_names){
+#   variables = names(nc_data$var)
+#   lat_lon_names = names(nc_data$dim)
+#   #we may need to add latitude_col_name, longitude_col_name to the character vector of valid names
+#   lat_names = c("lat", "latitude", "LAT", "Lat", "LATITUDE")
+#   lon_names = c("lon", "longitude", "LON", "Lon", "LONGITUDE")
+#   time_names = c("time", "TIME", "Time", "period", "Period", "PERIOD")
+#   if (stringr::str_trim(latitude_col_name) != ""){
+#     lat_names <- c(lat_names, latitude_col_name)
+#   }
+#   if (str_trim(longitude_col_name) != ""){
+#     lon_names <- c(lon_names, longitude_col_name)
+#   }
+#   lat_in <- which(lat_lon_names %in% lat_names)
+#   lat_found <- (length(lat_in) == 1)
+#   if(lat_found) {
+#     lat <- as.numeric(ncdf4::ncvar_get(nc_data, lat_lon_names[lat_in]))
+#   }
+#   
+#   lon_in <- which(lat_lon_names %in% lon_names)
+#   lon_found <- (length(lon_in) == 1)
+#   if(lon_found) {
+#     lon <- as.numeric(ncdf4::ncvar_get(nc_data, lat_lon_names[lon_in]))
+#   }
+#   
+#   time_in <- which(lat_lon_names %in% time_names)
+#   time_found <- (length(time_in) == 1)
+#   if(time_found) {
+#     time <- as.numeric(ncdf4::ncvar_get(nc_data, lat_lon_names[time_in]))
+#   }
+#   
+#   if(!lon_found || (!lat_found)) stop("Latitude and longitude names could not be recognised.")
+#   if(!time_found) {
+#     warning("Time variable could not be found/recognised. Time will be set to 1.")
+#     time = 1
+#   } 
+#   period <- rep(time, each = (length(lat)*length(lon)))
+#   lat_rep <- rep(lat, each = length(lon))
+#   lon_rep <- rep(lon, length(lat))
+#   # if (!default_names){
+#   #   #we need to check if the names are valid
+#   #   new_lat_lon_column_names <- c(latitude_col_name, longitude_col_name)
+#   # }
+#   # else{
+#   new_lat_lon_column_names <- c(lat_lon_names[lat_in], lat_lon_names[lon_in])
+#   #}
+#   lat_lon <- as.data.frame(cbind(lat_rep, lon_rep))
+#   names(lat_lon) = new_lat_lon_column_names
+#   station = ifelse(lat_rep >= 0 & lon_rep >= 0, paste(paste("N", lat_rep, sep = ""), paste("E", lon_rep, sep = ""), sep = "_"), 
+#                    ifelse(lat_rep < 0 & lon_rep >= 0, paste(paste("S", abs(lat_rep), sep = ""), paste("E", lon_rep, sep = ""), sep = "_"), 
+#                           ifelse(lat_rep >= 0 & lon_rep < 0, paste(paste("N", lat_rep, sep = ""), paste("W", abs(lon_rep), sep = ""), sep = "_") , 
+#                                  paste(paste("S", abs(lat_rep), sep = ""), paste("W", abs(lon_rep), sep = ""), sep = "_"))))
+#   
+#   lat_lon_df <- cbind(lat_lon, station)
+#   my_data <- cbind(period, lat_lon_df)
+#   
+#   for (current_var in variables){
+#     dataset <- ncdf4::ncvar_get(nc_data, current_var)
+#     if(length(dim(dataset)) == 1) {
+#       nc_value = dataset
+#     }
+#     else if(length(dim(dataset)) == 2) {
+#       nc_value = as.vector(t(dataset))
+#     }
+#     else if(length(dim(dataset)) == 3) {
+#       lonIdx <- which(!is.na(lon))
+#       latIdx <- which(!is.na(lat))
+#       timeIdx <- which(!is.na(time))
+#       new_dataset <- dataset[lonIdx, latIdx, timeIdx]
+#       nc_value = as.vector(new_dataset)
+#     }
+#     else {
+#       stop("The format of the data cannot be recognised")
+#     }
+#     my_data = cbind(my_data, nc_value)
+#     names(my_data)[length(names(my_data))] <- current_var
+#   }
+#   return(list(my_data, lat_lon_df, new_lat_lon_column_names))
+# }
 
 
 import_from_iri <- function(download_from, data_file, path, X1, X2,Y1,Y2, get_area_point){
