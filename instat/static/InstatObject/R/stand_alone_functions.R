@@ -228,7 +228,7 @@ pentad <- function(date) {
   return(temp_pentad)
 }
 
-nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = TRUE, replace_missing = TRUE) {
+nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = TRUE) {
   dim_names <- ncdf4.helpers::nc.get.dim.names(nc, vars[1])
   
   dim_values <- list()
@@ -272,48 +272,48 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
       included_vars <- included_vars[-which(included_vars == time_var)]
     }
   }
-  # Following conventions in http://www.unidata.ucar.edu/software/netcdf/docs/attribute_conventions.html
-  if(replace_missing) {
-    for(inc_var in included_vars) {
-      
-      numeric_var <- is.numeric(var_data[[inc_var]])
-      integer_var <- is.integer(var_data[[inc_var]])
-      valid_range <- ncdf4::ncatt_get(nc, var, "valid_range")
-      valid_min <- ncdf4::ncatt_get(nc, var, "valid_min")
-      valid_max <- ncdf4::ncatt_get(nc, var, "valid_max")
-      fill_value <- ncdf4::ncatt_get(nc, var, "_FillValue")
-      missing_value <- ncdf4::ncatt_get(nc, var, "missing_value")
-
-      if(numeric_var && valid_range[[1]]) {
-        var_data[[inc_var]][var_data[[inc_var]] < valid_range[[2]][1] | var_data[[inc_var]] > valid_range[[2]][2]] <- NA
-      }
-      else if(numeric_var && (valid_min[[1]] || valid_max[[1]])) {
-        if(valid_min[[1]]) {
-          var_data[[inc_var]][var_data[[inc_var]] < valid_min[[2]]] <- NA
-        }
-        if(valid_max[[2]]) {
-          var_data[[inc_var]][var_data[[inc_var]] > valid_max[[2]]] <- NA
-        }
-      }
-      else if(fill_value[[1]]) {
-        val <- fill_value[[2]]
-        if(numeric_var) {
-          # Not sure this is safe if 'integer' types from file do not import as
-          # 'integer' types in R.
-          if(integer_var) width <- 1
-          else width <- 2 * .Machine$double.xmin
-          
-          if(val > 0) var_data[[inc_var]][var_data[[inc_var]] > val + width] <- NA
-          else var_data[[inc_var]][var_data[[inc_var]] < val - width] <- NA
-        }
-        else {
-          # Should we do this? Non numeric not mentioned in convention
-          var_data[[inc_var]][var_data[[inc_var]] %in% val] <- NA
-        }
-      }
-      if(missing_value[[1]]) var_data[[inc_var]][var_data[[inc_var]] %in% missing_value[[2]]] <- NA
-    }
-  }
+  # # Following conventions in http://www.unidata.ucar.edu/software/netcdf/docs/attribute_conventions.html
+  # if(replace_missing) {
+  #   for(inc_var in included_vars) {
+  #     
+  #     numeric_var <- is.numeric(var_data[[inc_var]])
+  #     integer_var <- is.integer(var_data[[inc_var]])
+  #     valid_range <- ncdf4::ncatt_get(nc, var, "valid_range")
+  #     valid_min <- ncdf4::ncatt_get(nc, var, "valid_min")
+  #     valid_max <- ncdf4::ncatt_get(nc, var, "valid_max")
+  #     fill_value <- ncdf4::ncatt_get(nc, var, "_FillValue")
+  #     missing_value <- ncdf4::ncatt_get(nc, var, "missing_value")
+  # 
+  #     if(numeric_var && valid_range[[1]]) {
+  #       var_data[[inc_var]][var_data[[inc_var]] < valid_range[[2]][1] | var_data[[inc_var]] > valid_range[[2]][2]] <- NA
+  #     }
+  #     else if(numeric_var && (valid_min[[1]] || valid_max[[1]])) {
+  #       if(valid_min[[1]]) {
+  #         var_data[[inc_var]][var_data[[inc_var]] < valid_min[[2]]] <- NA
+  #       }
+  #       if(valid_max[[2]]) {
+  #         var_data[[inc_var]][var_data[[inc_var]] > valid_max[[2]]] <- NA
+  #       }
+  #     }
+  #     else if(fill_value[[1]]) {
+  #       val <- fill_value[[2]]
+  #       if(numeric_var) {
+  #         # Not sure this is safe if 'integer' types from file do not import as
+  #         # 'integer' types in R.
+  #         if(integer_var) width <- 1
+  #         else width <- 2 * .Machine$double.xmin
+  #         
+  #         if(val > 0) var_data[[inc_var]][var_data[[inc_var]] > val + width] <- NA
+  #         else var_data[[inc_var]][var_data[[inc_var]] < val - width] <- NA
+  #       }
+  #       else {
+  #         # Should we do this? Non numeric not mentioned in convention
+  #         var_data[[inc_var]][var_data[[inc_var]] %in% val] <- NA
+  #       }
+  #     }
+  #     if(missing_value[[1]]) var_data[[inc_var]][var_data[[inc_var]] %in% missing_value[[2]]] <- NA
+  #   }
+  # }
   
   if(include_metadata) {
     for(col_name in included_vars) {
