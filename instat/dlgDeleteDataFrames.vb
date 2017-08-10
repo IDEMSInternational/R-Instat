@@ -19,6 +19,8 @@ Public Class dlgDeleteDataFrames
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsDeleteFunction As New RFunction
+    Private bUseSelectedDataFrame As Boolean = False
+    Private strSelectedDataFrame As String = ""
 
     Private Sub dlgDeleteDataFrames_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
@@ -29,29 +31,32 @@ Public Class dlgDeleteDataFrames
         If bReset Then
             SetDefaults()
         End If
+        ReopenDialog()
+        If bUseSelectedDataFrame Then
+            SetDefaultDataFrame()
+        End If
         SetRCodeForControls(bReset)
         bReset = False
-        ReopenDialog()
         TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 63
-        ucrBase.clsRsyntax.iCallType = 0
 
-        ucrReceiverDataframes.SetParameter(New RParameter("data_name", 0))
-        ucrReceiverDataframes.SetParameterIsString()
-        ucrReceiverDataframes.GetParameter().bIncludeArgumentName = False
-        ucrReceiverDataframes.Selector = ucrSelectorDataFramesToDelete
-        ucrReceiverDataframes.SetMeAsReceiver()
-        ucrReceiverDataframes.SetItemType("dataframe")
-        ucrReceiverDataframes.strSelectorHeading = "Data Frames"
+        ucrReceiverDataFrames.SetParameter(New RParameter("data_names", 0))
+        ucrReceiverDataFrames.SetParameterIsString()
+        ucrReceiverDataFrames.Selector = ucrSelectorDataFramesToDelete
+        ucrReceiverDataFrames.SetMeAsReceiver()
+        ucrReceiverDataFrames.SetItemType("dataframe")
+        ucrReceiverDataFrames.strSelectorHeading = "Data Frames"
     End Sub
 
     Private Sub SetDefaults()
         clsDeleteFunction = New RFunction
+
         ucrSelectorDataFramesToDelete.Reset()
-        clsDeleteFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$delete_dataframe")
+
+        clsDeleteFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$delete_dataframes")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDeleteFunction)
     End Sub
 
@@ -60,21 +65,31 @@ Public Class dlgDeleteDataFrames
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverDataframes.IsEmpty Then
+        If Not ucrReceiverDataFrames.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub ReopenDialog()
-        ucrSelectorDataFramesToDelete.Reset()
-    End Sub
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
+    End Sub
+
+    Private Sub ReopenDialog()
+        ucrSelectorDataFramesToDelete.Reset()
+    End Sub
+
+    Private Sub SetDefaultDataFrame()
+        ucrReceiverDataFrames.Add(strSelectedDataFrame)
+        bUseSelectedDataFrame = False
+    End Sub
+
+    Public Sub SetDataFrameToAdd(strNewSelectedDataFrame As String)
+        strSelectedDataFrame = strNewSelectedDataFrame
+        bUseSelectedDataFrame = True
     End Sub
 
     ' To be fixed and implemented in future versions
@@ -90,7 +105,7 @@ Public Class dlgDeleteDataFrames
     '    End If
     'End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDataframes.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDataFrames.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
