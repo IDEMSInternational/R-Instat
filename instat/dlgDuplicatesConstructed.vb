@@ -38,7 +38,7 @@ Public Class dlgDuplicatesConstructed
         ucrPnlOptions.AddRadioButton(rdoSelectedVariables)
 
         ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoDataFrame, "x", frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
-        ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoSelectedVariables, "x", frmMain.clsRLink.strInstatDataObject & "$get_column_names")
+        ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoSelectedVariables, "x", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
 
         ucrPnlOptions.AddToLinkedControls(ucrReceiverMultipleForDuplicates, {rdoSelectedVariables}, bNewLinkedHideIfParameterMissing:=True)
 
