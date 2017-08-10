@@ -29,11 +29,11 @@ Partial Class dlgDuplicatesConstructed
         Me.rdoDuplicatesOnly = New System.Windows.Forms.RadioButton()
         Me.rdoAllDuplicateCases = New System.Windows.Forms.RadioButton()
         Me.ttDuplicates = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ucrPnlDuplicates = New instat.UcrPanel()
         Me.ucrNewColumnName = New instat.ucrSave()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrPnlDuplicates = New instat.UcrPanel()
         Me.ucrReceiverMultipleForDuplicates = New instat.ucrReceiverMultiple()
         Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorDuplicateswithVariables = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
         '
@@ -44,7 +44,7 @@ Partial Class dlgDuplicatesConstructed
         Me.rdoDataFrame.FlatAppearance.BorderSize = 2
         Me.rdoDataFrame.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoDataFrame.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoDataFrame.Location = New System.Drawing.Point(99, 12)
+        Me.rdoDataFrame.Location = New System.Drawing.Point(99, 13)
         Me.rdoDataFrame.Name = "rdoDataFrame"
         Me.rdoDataFrame.Size = New System.Drawing.Size(109, 27)
         Me.rdoDataFrame.TabIndex = 1
@@ -60,7 +60,7 @@ Partial Class dlgDuplicatesConstructed
         Me.rdoSelectedVariables.FlatAppearance.BorderSize = 2
         Me.rdoSelectedVariables.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSelectedVariables.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoSelectedVariables.Location = New System.Drawing.Point(206, 12)
+        Me.rdoSelectedVariables.Location = New System.Drawing.Point(206, 13)
         Me.rdoSelectedVariables.Name = "rdoSelectedVariables"
         Me.rdoSelectedVariables.Size = New System.Drawing.Size(109, 27)
         Me.rdoSelectedVariables.TabIndex = 2
@@ -72,7 +72,7 @@ Partial Class dlgDuplicatesConstructed
         'rdoIndexNumberOfDuplicates
         '
         Me.rdoIndexNumberOfDuplicates.AutoSize = True
-        Me.rdoIndexNumberOfDuplicates.Location = New System.Drawing.Point(17, 284)
+        Me.rdoIndexNumberOfDuplicates.Location = New System.Drawing.Point(10, 284)
         Me.rdoIndexNumberOfDuplicates.Name = "rdoIndexNumberOfDuplicates"
         Me.rdoIndexNumberOfDuplicates.Size = New System.Drawing.Size(156, 17)
         Me.rdoIndexNumberOfDuplicates.TabIndex = 8
@@ -83,7 +83,7 @@ Partial Class dlgDuplicatesConstructed
         'rdoDuplicatesOnly
         '
         Me.rdoDuplicatesOnly.AutoSize = True
-        Me.rdoDuplicatesOnly.Location = New System.Drawing.Point(17, 262)
+        Me.rdoDuplicatesOnly.Location = New System.Drawing.Point(10, 262)
         Me.rdoDuplicatesOnly.Name = "rdoDuplicatesOnly"
         Me.rdoDuplicatesOnly.Size = New System.Drawing.Size(99, 17)
         Me.rdoDuplicatesOnly.TabIndex = 7
@@ -94,7 +94,7 @@ Partial Class dlgDuplicatesConstructed
         'rdoAllDuplicateCases
         '
         Me.rdoAllDuplicateCases.AutoSize = True
-        Me.rdoAllDuplicateCases.Location = New System.Drawing.Point(17, 240)
+        Me.rdoAllDuplicateCases.Location = New System.Drawing.Point(10, 240)
         Me.rdoAllDuplicateCases.Name = "rdoAllDuplicateCases"
         Me.rdoAllDuplicateCases.Size = New System.Drawing.Size(116, 17)
         Me.rdoAllDuplicateCases.TabIndex = 6
@@ -102,19 +102,26 @@ Partial Class dlgDuplicatesConstructed
         Me.rdoAllDuplicateCases.Text = "All Duplicate Cases"
         Me.rdoAllDuplicateCases.UseVisualStyleBackColor = True
         '
-        'ucrPnlDuplicates
-        '
-        Me.ucrPnlDuplicates.Location = New System.Drawing.Point(10, 235)
-        Me.ucrPnlDuplicates.Name = "ucrPnlDuplicates"
-        Me.ucrPnlDuplicates.Size = New System.Drawing.Size(154, 69)
-        Me.ucrPnlDuplicates.TabIndex = 5
-        '
         'ucrNewColumnName
         '
-        Me.ucrNewColumnName.Location = New System.Drawing.Point(10, 322)
+        Me.ucrNewColumnName.Location = New System.Drawing.Point(10, 310)
         Me.ucrNewColumnName.Name = "ucrNewColumnName"
         Me.ucrNewColumnName.Size = New System.Drawing.Size(294, 24)
         Me.ucrNewColumnName.TabIndex = 9
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 335)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(401, 52)
+        Me.ucrBase.TabIndex = 10
+        '
+        'ucrPnlDuplicates
+        '
+        Me.ucrPnlDuplicates.Location = New System.Drawing.Point(3, 235)
+        Me.ucrPnlDuplicates.Name = "ucrPnlDuplicates"
+        Me.ucrPnlDuplicates.Size = New System.Drawing.Size(180, 69)
+        Me.ucrPnlDuplicates.TabIndex = 5
         '
         'ucrReceiverMultipleForDuplicates
         '
@@ -130,23 +137,16 @@ Partial Class dlgDuplicatesConstructed
         '
         'ucrPnlOptions
         '
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(89, 8)
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(89, 9)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         Me.ucrPnlOptions.Size = New System.Drawing.Size(254, 36)
         Me.ucrPnlOptions.TabIndex = 0
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 349)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(401, 52)
-        Me.ucrBase.TabIndex = 10
         '
         'ucrSelectorDuplicateswithVariables
         '
         Me.ucrSelectorDuplicateswithVariables.bShowHiddenColumns = False
         Me.ucrSelectorDuplicateswithVariables.bUseCurrentFilter = True
-        Me.ucrSelectorDuplicateswithVariables.Location = New System.Drawing.Point(17, 47)
+        Me.ucrSelectorDuplicateswithVariables.Location = New System.Drawing.Point(10, 47)
         Me.ucrSelectorDuplicateswithVariables.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDuplicateswithVariables.Name = "ucrSelectorDuplicateswithVariables"
         Me.ucrSelectorDuplicateswithVariables.Size = New System.Drawing.Size(210, 180)
@@ -156,7 +156,7 @@ Partial Class dlgDuplicatesConstructed
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 407)
+        Me.ClientSize = New System.Drawing.Size(418, 393)
         Me.Controls.Add(Me.rdoIndexNumberOfDuplicates)
         Me.Controls.Add(Me.rdoDuplicatesOnly)
         Me.Controls.Add(Me.rdoAllDuplicateCases)
