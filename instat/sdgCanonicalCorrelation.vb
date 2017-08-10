@@ -54,9 +54,9 @@ Public Class sdgCanonicalCorrelation
         clsRYCoefFunction = clsNewRYCoefFunction
         clsRGraphicsFunction = clsNewRGraphicsFunction
 
-        ucrChkCanonicalCorrelations.SetRSyntax(clsRSyntax, bReset)
-        ucrChkCoefficients.SetRSyntax(clsRSyntax, bReset)
-        ucrChkPairwisePlot.SetRSyntax(clsRSyntax, bReset)
+        ucrChkCanonicalCorrelations.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
+        ucrChkCoefficients.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
+        ucrChkPairwisePlot.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
 
         bControlsInitialised = True
     End Sub
