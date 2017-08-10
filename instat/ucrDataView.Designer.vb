@@ -360,7 +360,7 @@ Partial Class ucrDataView
         '
         Me.deleteDataFrame.Name = "deleteDataFrame"
         Me.deleteDataFrame.Size = New System.Drawing.Size(162, 22)
-        Me.deleteDataFrame.Text = "Delete"
+        Me.deleteDataFrame.Text = "Delete..."
         '
         'renameSheet
         '

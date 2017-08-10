@@ -2195,7 +2195,7 @@ Partial Class frmMain
         'BoxplotsConceptualisedAndConstructedToolStripMenuItem
         '
         Me.BoxplotsConceptualisedAndConstructedToolStripMenuItem.Name = "BoxplotsConceptualisedAndConstructedToolStripMenuItem"
-        Me.BoxplotsConceptualisedAndConstructedToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.BoxplotsConceptualisedAndConstructedToolStripMenuItem.Size = New System.Drawing.Size(114, 22)
         Me.BoxplotsConceptualisedAndConstructedToolStripMenuItem.Text = "Boxplot"
         '
         'mnuFileSave
@@ -3280,7 +3280,7 @@ Partial Class frmMain
         Me.mnuPrepareDataObjectDeleteDataFrame.Name = "mnuPrepareDataObjectDeleteDataFrame"
         Me.mnuPrepareDataObjectDeleteDataFrame.Size = New System.Drawing.Size(196, 22)
         Me.mnuPrepareDataObjectDeleteDataFrame.Tag = "Delete_Data_Frame..."
-        Me.mnuPrepareDataObjectDeleteDataFrame.Text = "Delete Data Frame..."
+        Me.mnuPrepareDataObjectDeleteDataFrame.Text = "Delete Data Frames..."
         '
         'ToolStripSeparator21
         '
