@@ -57,16 +57,16 @@ Public Class dlgOpenNetCDF
         ucrInputFilePath.SetParameter(New RParameter("filename", 0))
         ucrInputFilePath.IsReadOnly = True
 
-        ucrChkOnlyDataVariables.SetText("Only Data Variables")
         ucrChkOnlyDataVariables.SetParameter(New RParameter("only_data_vars", 2))
+        ucrChkOnlyDataVariables.SetText("Only Data Variables")
         ucrChkOnlyDataVariables.SetRDefault("TRUE")
 
-        ucrChkKeepRawTime.SetText("Keep Raw Time")
         ucrChkKeepRawTime.SetParameter(New RParameter("keep_raw_time", 3))
+        ucrChkKeepRawTime.SetText("Keep Raw Time")
         ucrChkKeepRawTime.SetRDefault("TRUE")
 
-        ucrChkIncludeMetadata.SetText("Include Metadata")
         ucrChkIncludeMetadata.SetParameter(New RParameter("include_metadata", 4))
+        ucrChkIncludeMetadata.SetText("Include Metadata")
         ucrChkIncludeMetadata.SetRDefault("TRUE")
 
         ucrInputDataName.SetParameter(New RParameter("name", 1))
