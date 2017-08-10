@@ -86,9 +86,9 @@ Public Class dlgDuplicatesConstructed
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverMultipleForDuplicates.AddAdditionalCodeParameterPair(clsDuplicate2, ucrReceiverMultipleForDuplicates.GetParameter, iAdditionalPairNo:=1)
-        ucrSelectorDuplicateswithVariables.AddAdditionalCodeParameterPair(clsDuplicated2, ucrSelectorDuplicateswithVariables.GetParameter, iAdditionalPairNo:=1)
+        ucrSelectorDuplicateswithVariables.AddAdditionalCodeParameterPair(clsDuplicate2, ucrSelectorDuplicateswithVariables.GetParameter, iAdditionalPairNo:=1)
         ucrNewColumnName.AddAdditionalRCode(clsDuplicate2, 1)
-        ucrSelectorDuplicateswithVariables.SetRCode(clsDuplicate, bReset)
+        ucrSelectorDuplicateswithVariables.SetRCode(clsDuplicated, bReset)
         ucrReceiverMultipleForDuplicates.SetRCode(clsDuplicated, bReset)
         ucrNewColumnName.SetRCode(clsDuplicated, bReset)
         ucrPnlDuplicates.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
