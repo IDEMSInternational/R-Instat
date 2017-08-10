@@ -330,85 +330,85 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
   return(var_data)
 }
 
-open_NetCDF <- function(nc_data, latitude_col_name, longitude_col_name, default_names){
-  variables = names(nc_data$var)
-  lat_lon_names = names(nc_data$dim)
-  #we may need to add latitude_col_name, longitude_col_name to the character vector of valid names
-  lat_names = c("lat", "latitude", "LAT", "Lat", "LATITUDE")
-  lon_names = c("lon", "longitude", "LON", "Lon", "LONGITUDE")
-  time_names = c("time", "TIME", "Time", "period", "Period", "PERIOD")
-  if (stringr::str_trim(latitude_col_name) != ""){
-    lat_names <- c(lat_names, latitude_col_name)
-  }
-  if (str_trim(longitude_col_name) != ""){
-    lon_names <- c(lon_names, longitude_col_name)
-  }
-  lat_in <- which(lat_lon_names %in% lat_names)
-  lat_found <- (length(lat_in) == 1)
-  if(lat_found) {
-    lat <- as.numeric(ncdf4::ncvar_get(nc_data, lat_lon_names[lat_in]))
-  }
-  
-  lon_in <- which(lat_lon_names %in% lon_names)
-  lon_found <- (length(lon_in) == 1)
-  if(lon_found) {
-    lon <- as.numeric(ncdf4::ncvar_get(nc_data, lat_lon_names[lon_in]))
-  }
-  
-  time_in <- which(lat_lon_names %in% time_names)
-  time_found <- (length(time_in) == 1)
-  if(time_found) {
-    time <- as.numeric(ncdf4::ncvar_get(nc_data, lat_lon_names[time_in]))
-  }
-  
-  if(!lon_found || (!lat_found)) stop("Latitude and longitude names could not be recognised.")
-  if(!time_found) {
-    warning("Time variable could not be found/recognised. Time will be set to 1.")
-    time = 1
-  } 
-  period <- rep(time, each = (length(lat)*length(lon)))
-  lat_rep <- rep(lat, each = length(lon))
-  lon_rep <- rep(lon, length(lat))
-  # if (!default_names){
-  #   #we need to check if the names are valid
-  #   new_lat_lon_column_names <- c(latitude_col_name, longitude_col_name)
-  # }
-  # else{
-  new_lat_lon_column_names <- c(lat_lon_names[lat_in], lat_lon_names[lon_in])
-  #}
-  lat_lon <- as.data.frame(cbind(lat_rep, lon_rep))
-  names(lat_lon) = new_lat_lon_column_names
-  station = ifelse(lat_rep >= 0 & lon_rep >= 0, paste(paste("N", lat_rep, sep = ""), paste("E", lon_rep, sep = ""), sep = "_"), 
-                   ifelse(lat_rep < 0 & lon_rep >= 0, paste(paste("S", abs(lat_rep), sep = ""), paste("E", lon_rep, sep = ""), sep = "_"), 
-                          ifelse(lat_rep >= 0 & lon_rep < 0, paste(paste("N", lat_rep, sep = ""), paste("W", abs(lon_rep), sep = ""), sep = "_") , 
-                                 paste(paste("S", abs(lat_rep), sep = ""), paste("W", abs(lon_rep), sep = ""), sep = "_"))))
-  
-  lat_lon_df <- cbind(lat_lon, station)
-  my_data <- cbind(period, lat_lon_df)
-  
-  for (current_var in variables){
-    dataset <- ncdf4::ncvar_get(nc_data, current_var)
-    if(length(dim(dataset)) == 1) {
-      nc_value = dataset
-    }
-    else if(length(dim(dataset)) == 2) {
-      nc_value = as.vector(t(dataset))
-    }
-    else if(length(dim(dataset)) == 3) {
-      lonIdx <- which(!is.na(lon))
-      latIdx <- which(!is.na(lat))
-      timeIdx <- which(!is.na(time))
-      new_dataset <- dataset[lonIdx, latIdx, timeIdx]
-      nc_value = as.vector(new_dataset)
-    }
-    else {
-      stop("The format of the data cannot be recognised")
-    }
-    my_data = cbind(my_data, nc_value)
-    names(my_data)[length(names(my_data))] <- current_var
-  }
-  return(list(my_data, lat_lon_df, new_lat_lon_column_names))
-}
+# open_NetCDF <- function(nc_data, latitude_col_name, longitude_col_name, default_names){
+#   variables = names(nc_data$var)
+#   lat_lon_names = names(nc_data$dim)
+#   #we may need to add latitude_col_name, longitude_col_name to the character vector of valid names
+#   lat_names = c("lat", "latitude", "LAT", "Lat", "LATITUDE")
+#   lon_names = c("lon", "longitude", "LON", "Lon", "LONGITUDE")
+#   time_names = c("time", "TIME", "Time", "period", "Period", "PERIOD")
+#   if (stringr::str_trim(latitude_col_name) != ""){
+#     lat_names <- c(lat_names, latitude_col_name)
+#   }
+#   if (str_trim(longitude_col_name) != ""){
+#     lon_names <- c(lon_names, longitude_col_name)
+#   }
+#   lat_in <- which(lat_lon_names %in% lat_names)
+#   lat_found <- (length(lat_in) == 1)
+#   if(lat_found) {
+#     lat <- as.numeric(ncdf4::ncvar_get(nc_data, lat_lon_names[lat_in]))
+#   }
+#   
+#   lon_in <- which(lat_lon_names %in% lon_names)
+#   lon_found <- (length(lon_in) == 1)
+#   if(lon_found) {
+#     lon <- as.numeric(ncdf4::ncvar_get(nc_data, lat_lon_names[lon_in]))
+#   }
+#   
+#   time_in <- which(lat_lon_names %in% time_names)
+#   time_found <- (length(time_in) == 1)
+#   if(time_found) {
+#     time <- as.numeric(ncdf4::ncvar_get(nc_data, lat_lon_names[time_in]))
+#   }
+#   
+#   if(!lon_found || (!lat_found)) stop("Latitude and longitude names could not be recognised.")
+#   if(!time_found) {
+#     warning("Time variable could not be found/recognised. Time will be set to 1.")
+#     time = 1
+#   } 
+#   period <- rep(time, each = (length(lat)*length(lon)))
+#   lat_rep <- rep(lat, each = length(lon))
+#   lon_rep <- rep(lon, length(lat))
+#   # if (!default_names){
+#   #   #we need to check if the names are valid
+#   #   new_lat_lon_column_names <- c(latitude_col_name, longitude_col_name)
+#   # }
+#   # else{
+#   new_lat_lon_column_names <- c(lat_lon_names[lat_in], lat_lon_names[lon_in])
+#   #}
+#   lat_lon <- as.data.frame(cbind(lat_rep, lon_rep))
+#   names(lat_lon) = new_lat_lon_column_names
+#   station = ifelse(lat_rep >= 0 & lon_rep >= 0, paste(paste("N", lat_rep, sep = ""), paste("E", lon_rep, sep = ""), sep = "_"), 
+#                    ifelse(lat_rep < 0 & lon_rep >= 0, paste(paste("S", abs(lat_rep), sep = ""), paste("E", lon_rep, sep = ""), sep = "_"), 
+#                           ifelse(lat_rep >= 0 & lon_rep < 0, paste(paste("N", lat_rep, sep = ""), paste("W", abs(lon_rep), sep = ""), sep = "_") , 
+#                                  paste(paste("S", abs(lat_rep), sep = ""), paste("W", abs(lon_rep), sep = ""), sep = "_"))))
+#   
+#   lat_lon_df <- cbind(lat_lon, station)
+#   my_data <- cbind(period, lat_lon_df)
+#   
+#   for (current_var in variables){
+#     dataset <- ncdf4::ncvar_get(nc_data, current_var)
+#     if(length(dim(dataset)) == 1) {
+#       nc_value = dataset
+#     }
+#     else if(length(dim(dataset)) == 2) {
+#       nc_value = as.vector(t(dataset))
+#     }
+#     else if(length(dim(dataset)) == 3) {
+#       lonIdx <- which(!is.na(lon))
+#       latIdx <- which(!is.na(lat))
+#       timeIdx <- which(!is.na(time))
+#       new_dataset <- dataset[lonIdx, latIdx, timeIdx]
+#       nc_value = as.vector(new_dataset)
+#     }
+#     else {
+#       stop("The format of the data cannot be recognised")
+#     }
+#     my_data = cbind(my_data, nc_value)
+#     names(my_data)[length(names(my_data))] <- current_var
+#   }
+#   return(list(my_data, lat_lon_df, new_lat_lon_column_names))
+# }
 
 
 import_from_iri <- function(download_from, data_file, path, X1, X2,Y1,Y2, get_area_point){
