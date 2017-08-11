@@ -19,7 +19,7 @@ Public Class dlgCanonicalCorrelationAnalysis
     Public bFirstLoad As Boolean = True
     Private bResetSubdialog As Boolean = False
     Private bReset As Boolean = True
-    Private clsDefaultFunction, clsRCanCorFunction, clsRXCoefFunction, clsRYCoefFunction, clsRGraphicsFunction As New RFunction
+    Private clsDefaultFunction, clsRCanCorFunction, clsRCoefFunction, clsRGraphicsFunction As New RFunction
 
     Private Sub dlgCanonicalCorrelationAnalysis_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -69,8 +69,7 @@ Public Class dlgCanonicalCorrelationAnalysis
         clsDefaultFunction = New RFunction
         clsRGraphicsFunction = New RFunction
         clsRCanCorFunction = New RFunction
-        clsRXCoefFunction = New RFunction
-        clsRYCoefFunction = New RFunction
+        clsRCoefFunction = New RFunction
 
         ucrSelectorCCA.Reset()
         ucrSaveResult.Reset()
@@ -84,13 +83,8 @@ Public Class dlgCanonicalCorrelationAnalysis
         clsRCanCorFunction.AddParameter("value1", Chr(34) & "cor" & Chr(34))
         clsRCanCorFunction.iCallType = 2
 
-        clsRXCoefFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
-        clsRXCoefFunction.AddParameter("value1", Chr(34) & "xcoef" & Chr(34))
-        clsRXCoefFunction.iCallType = 2
-
-        clsRYCoefFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
-        clsRYCoefFunction.AddParameter("value1", Chr(34) & "ycoef" & Chr(34))
-        clsRYCoefFunction.iCallType = 2
+        clsRCoefFunction.SetRCommand("cancor_coef")
+        clsRCoefFunction.iCallType = 2
 
         clsRGraphicsFunction.SetPackageName("GGally")
         clsRGraphicsFunction.SetRCommand("ggpairs")
@@ -99,17 +93,14 @@ Public Class dlgCanonicalCorrelationAnalysis
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.AddToAfterCodes(clsRCanCorFunction, iPosition:=0)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsRXCoefFunction, iPosition:=1)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsRYCoefFunction, iPosition:=2)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsRCoefFunction, iPosition:=1)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
         bResetSubdialog = True
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
-        ucrSelectorCCA.AddAdditionalCodeParameterPair(clsRCanCorFunction, ucrSelectorCCA.GetParameter, iAdditionalPairNo:=1)
-        ucrSelectorCCA.AddAdditionalCodeParameterPair(clsRXCoefFunction, ucrSelectorCCA.GetParameter, iAdditionalPairNo:=2)
-
-        ucrSelectorCCA.SetRCode(clsRYCoefFunction, bReset)
+        'ucrSelectorCCA.AddAdditionalCodeParameterPair(clsRCanCorFunction, ucrSelectorCCA.GetParameter, iAdditionalPairNo:=1)
+        ucrSelectorCCA.SetRCode(clsRCanCorFunction, bReset)
         ucrSaveResult.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverXVariables.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverYVariables.SetRCode(clsDefaultFunction, bReset)
@@ -130,7 +121,7 @@ Public Class dlgCanonicalCorrelationAnalysis
     End Sub
 
     Private Sub cmdCCAOptions_Click(sender As Object, e As EventArgs) Handles cmdCCAOptions.Click
-        sdgCanonicalCorrelation.SetRFunction(ucrBase.clsRsyntax, clsRCanCorFunction, clsRXCoefFunction, clsRYCoefFunction, clsRGraphicsFunction, bResetSubdialog)
+        sdgCanonicalCorrelation.SetRFunction(ucrBase.clsRsyntax, clsRCanCorFunction, clsRCoefFunction, clsRGraphicsFunction, bResetSubdialog)
         bResetSubdialog = False
         sdgCanonicalCorrelation.ShowDialog()
     End Sub
@@ -138,12 +129,10 @@ Public Class dlgCanonicalCorrelationAnalysis
     Private Sub ucrSaveResult_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlValueChanged
         If ucrSaveResult.ucrChkSave.Checked Then
             clsRCanCorFunction.AddParameter("model_name", Chr(34) & ucrSaveResult.GetText & Chr(34))
-            clsRXCoefFunction.AddParameter("model_name", Chr(34) & ucrSaveResult.GetText & Chr(34))
-            clsRYCoefFunction.AddParameter("model_name", Chr(34) & ucrSaveResult.GetText & Chr(34))
+            clsRCoefFunction.AddParameter("object", Chr(34) & ucrSaveResult.GetText & Chr(34))
         Else
             clsRCanCorFunction.AddParameter("model_name", Chr(34) & "last_CCA" & Chr(34))
-            clsRXCoefFunction.AddParameter("model_name", Chr(34) & "last_CCA" & Chr(34))
-            clsRYCoefFunction.AddParameter("model_name", Chr(34) & "last_CCA" & Chr(34))
+            clsRCoefFunction.AddParameter("object", clsRFunctionParameter:=ucrBase.clsRsyntax.clsBaseFunction)
         End If
     End Sub
 
