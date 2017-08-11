@@ -81,21 +81,21 @@ Public Class dlgCanonicalCorrelationAnalysis
         clsDefaultFunction.SetAssignTo("last_CCA", strTempModel:="last_CCA", strTempDataframe:=ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
 
         clsRCanCorFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsRCanCorFunction.AddParameter("value1", Chr(34) & "cor" & Chr(34))
         clsRCanCorFunction.iCallType = 2
 
         clsRXCoefFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsRXCoefFunction.AddParameter("value1", Chr(34) & "xcoef" & Chr(34))
         clsRXCoefFunction.iCallType = 2
 
         clsRYCoefFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsRYCoefFunction.AddParameter("value1", Chr(34) & "ycoef" & Chr(34))
         clsRYCoefFunction.iCallType = 2
 
         clsRGraphicsFunction.SetPackageName("GGally")
         clsRGraphicsFunction.SetRCommand("ggpairs")
         clsRGraphicsFunction.iCallType = 3
         clsRGraphicsFunction.bExcludeAssignedFunctionOutput = False
-        clsRCanCorFunction.AddParameter("value1", Chr(34) & "cor" & Chr(34))
-        clsRXCoefFunction.AddParameter("value1", Chr(34) & "xcoef" & Chr(34))
-        clsRYCoefFunction.AddParameter("value1", Chr(34) & "ycoef" & Chr(34))
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.AddToAfterCodes(clsRCanCorFunction, iPosition:=0)
