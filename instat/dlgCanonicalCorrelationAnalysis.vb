@@ -129,11 +129,10 @@ Public Class dlgCanonicalCorrelationAnalysis
     Private Sub ucrSaveResult_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlValueChanged
         If ucrSaveResult.ucrChkSave.Checked Then
             clsRCanCorFunction.AddParameter("model_name", Chr(34) & ucrSaveResult.GetText & Chr(34))
-            clsRCoefFunction.AddParameter("object", Chr(34) & ucrSaveResult.GetText & Chr(34))
         Else
             clsRCanCorFunction.AddParameter("model_name", Chr(34) & "last_CCA" & Chr(34))
-            clsRCoefFunction.AddParameter("object", clsRFunctionParameter:=ucrBase.clsRsyntax.clsBaseFunction)
         End If
+        clsRCoefFunction.AddParameter("object", clsRFunctionParameter:=ucrBase.clsRsyntax.clsBaseFunction)
     End Sub
 
     Private Sub ucrSelectorCCA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorCCA.ControlValueChanged
