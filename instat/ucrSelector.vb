@@ -35,6 +35,7 @@ Public Class ucrSelector
     'Does the selector have its own parameter
     'Usually False as the parameter comes from the data frame selector
     Public bHasOwnParameter As Boolean = False
+    Private clsGgplotOperator As ROperator = Nothing
 
     Public Sub New()
         ' This call is required by the designer.
@@ -67,6 +68,13 @@ Public Class ucrSelector
 
     Protected Sub OnDataFrameChanged()
         RaiseEvent DataFrameChanged()
+        ClearGgplotOptions()
+    End Sub
+
+    Protected Sub ClearGgplotOptions()
+        If clsGgplotOperator IsNot Nothing Then
+            clsGgplotOperator.RemoveParameterByName("facets")
+        End If
     End Sub
 
     Public Overridable Sub EnableDataOptions(strCurrentType As String)
@@ -388,4 +396,8 @@ Public Class ucrSelector
     Public Function HasStackedVariables() As Boolean
         Return bIsStacked OrElse (ucrLinkedSelector IsNot Nothing AndAlso ucrLinkedSelector.bIsStacked)
     End Function
+
+    Public Sub SetGgplotFunction(clsNewGgplotFunction As ROperator)
+        clsGgplotOperator = clsNewGgplotFunction
+    End Sub
 End Class
