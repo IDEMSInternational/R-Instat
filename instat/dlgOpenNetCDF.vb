@@ -55,6 +55,7 @@ Public Class dlgOpenNetCDF
 
     Private Sub InitialiseDialog()
         'ucrBase.iHelpTopicID = 
+        cmdOptions.Enabled = False ' Temporarily disabled until we run in the sub
         ucrInputFilePath.SetParameter(New RParameter("filename", 0))
         ucrInputFilePath.IsReadOnly = True
 
