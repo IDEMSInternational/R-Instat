@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class sdgCanonicalCorrelation
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
-    Public clsRCanCorFunction, clsRXCoefFunction, clsRYCoefFunction, clsRGraphicsFunction As New RFunction
+    Public clsRCanCorFunction, clsRCoefFunction, clsRGraphicsFunction As New RFunction
     Private clsRSyntax As RSyntax
     Private Sub sdgCanonicalCorrelation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -34,11 +34,9 @@ Public Class sdgCanonicalCorrelation
         ucrChkCanonicalCorrelations.AddParameterPresentCondition(True, "value1")
         ucrChkCanonicalCorrelations.AddParameterPresentCondition(False, "value1", False)
 
-        ucrChkCoefficients.SetParameter(New RParameter("value1", 2))
         ucrChkCoefficients.SetText("Coefficients")
-        ucrChkCoefficients.SetValueIfChecked(Chr(34) & "xcoef" & Chr(34))
-        ucrChkCoefficients.AddParameterPresentCondition(True, "value1")
-        ucrChkCoefficients.AddParameterPresentCondition(False, "value1", False)
+        ucrChkCoefficients.AddRSyntaxContainsFunctionNamesCondition(True, {"cancor_coef"})
+        ucrChkCoefficients.AddRSyntaxContainsFunctionNamesCondition(False, {"cancor_coef"}, False)
 
         ucrChkPairwisePlot.AddRSyntaxContainsFunctionNamesCondition(True, {"ggpairs"})
         ucrChkPairwisePlot.AddRSyntaxContainsFunctionNamesCondition(False, {"ggpairs"}, False)
@@ -47,21 +45,18 @@ Public Class sdgCanonicalCorrelation
         ucrChkPairwisePlot.AddToLinkedControls(ucrPnlVariables, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoXVariables)
     End Sub
 
-    Public Sub SetRFunction(clsNewRSyntax As RSyntax, clsNewRCanCorFunction As RFunction, clsNewRXCoefFunction As RFunction, clsNewRYCoefFunction As RFunction, clsNewRGraphicsFunction As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsNewRSyntax As RSyntax, clsNewRCanCorFunction As RFunction, clsNewRCoefFunction As RFunction, clsNewRGraphicsFunction As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
         '  Dim clsTempFunc As RFunction
         clsRSyntax = clsNewRSyntax
         clsRCanCorFunction = clsNewRCanCorFunction
-        clsRXCoefFunction = clsNewRXCoefFunction
-        clsRYCoefFunction = clsNewRYCoefFunction
+        clsRCoefFunction = clsNewRCoefFunction
         clsRGraphicsFunction = clsNewRGraphicsFunction
 
-        ucrChkCoefficients.AddAdditionalCodeParameterPair(clsRYCoefFunction, ucrChkCoefficients.GetParameter, iAdditionalPairNo:=1)
-
         ucrChkCanonicalCorrelations.SetRCode(clsRCanCorFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkCoefficients.SetRCode(clsRXCoefFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkCoefficients.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
         ucrChkPairwisePlot.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
 
         bControlsInitialised = True
@@ -77,11 +72,9 @@ Public Class sdgCanonicalCorrelation
 
     Private Sub ucrChkCoefficients_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCoefficients.ControlValueChanged
         If ucrChkCoefficients.Checked Then
-            clsRSyntax.AddToAfterCodes(clsRXCoefFunction, iPosition:=1)
-            clsRSyntax.AddToAfterCodes(clsRYCoefFunction, iPosition:=2)
+            clsRSyntax.AddToAfterCodes(clsRCoefFunction, iPosition:=1)
         Else
-            clsRSyntax.RemoveFromAfterCodes(clsRYCoefFunction)
-            clsRSyntax.RemoveFromAfterCodes(clsRXCoefFunction)
+            clsRSyntax.RemoveFromAfterCodes(clsRCoefFunction)
         End If
     End Sub
 

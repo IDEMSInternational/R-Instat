@@ -589,3 +589,7 @@ split_items_in_groups <- function(items, num) {
   x <- split(items, rep(1:num, each = length(items)/num))
   return(x)
 }
+
+cancor_coef <- function(object) {
+  object[c("xcoef", "ycoef")]
+}
