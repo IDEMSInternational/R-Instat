@@ -20,7 +20,7 @@ Imports System.IO
 Public Class dlgOpenNetCDF
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsRDefaultFunction, clsRCDF As New RFunction
+    Private clsRDefaultFunction, clsRCDF, clsRClose As New RFunction
     Dim strFileType As String
     Dim bComponentsInitialised As Boolean
     Public bStartOpenDialog As Boolean
@@ -43,66 +43,80 @@ Public Class dlgOpenNetCDF
         If bReset Then
             SetDefaults()
         End If
+        SetRCodeForControls(bReset)
         If bStartOpenDialog Then
             GetFileFromOpenDialog()
             bStartOpenDialog = False
         End If
-        SetRCodeForControls(bReset)
         bReset = False
         TestOkEnabled()
     End Sub
 
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrInputDataName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrInputLocDataName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrInputFilePath.SetRCode(clsRCDF, bReset)
-        ucrInputLatColName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrInputLonColName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    Private Sub InitialiseDialog()
+        'ucrBase.iHelpTopicID = 
+        ucrInputFilePath.SetParameter(New RParameter("filename", 0))
+        ucrInputFilePath.IsReadOnly = True
+
+        ucrChkOnlyDataVariables.SetParameter(New RParameter("only_data_vars", 2))
+        ucrChkOnlyDataVariables.SetText("Only Data Variables")
+        ucrChkOnlyDataVariables.SetRDefault("TRUE")
+
+        ucrChkKeepRawTime.SetParameter(New RParameter("keep_raw_time", 3))
+        ucrChkKeepRawTime.SetText("Keep Raw Time")
+        ucrChkKeepRawTime.SetRDefault("TRUE")
+
+        ucrChkIncludeMetadata.SetParameter(New RParameter("include_metadata", 4))
+        ucrChkIncludeMetadata.SetText("Include Metadata")
+        ucrChkIncludeMetadata.SetRDefault("TRUE")
+
+        ucrInputDataName.SetParameter(New RParameter("name", 1))
+        ucrInputDataName.SetValidationTypeAsRVariable()
     End Sub
 
     Private Sub SetDefaults()
         clsRDefaultFunction = New RFunction
-        ucrInputLocDataName.SetName("lat_lon_data")
-        ucrInputDataName.SetName("")
-        ucrInputLatColName.SetName("")
-        ucrInputLonColName.SetName("")
-        ucrInputFilePath.IsReadOnly = True
+        clsRCDF = New RFunction
+        clsRClose = New RFunction
+
         ucrInputFilePath.SetName("")
+        'ucrInputDataName.SetName("") ' technically this clears anyway as it updates to what is in the ucrInputFilePath, which is nothing.
+
         clsRDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_NetCDF")
-        clsRDefaultFunction.AddParameter("nc_data", clsRFunctionParameter:=clsRCDF)
+        clsRDefaultFunction.AddParameter("nc", clsRFunctionParameter:=clsRCDF, iPosition:=0)
+
+        clsRCDF.SetPackageName("ncdf4")
+        clsRCDF.SetRCommand("nc_open")
+        clsRCDF.SetAssignTo("nc")
+
+        clsRClose.SetPackageName("ncdf4")
+        clsRClose.SetRCommand("nc_close")
+        clsRClose.AddParameter("nc", clsRFunctionParameter:=clsRCDF, iPosition:=0)
+
+        ucrBase.clsRsyntax.AddToAfterCodes(clsRClose, iPosition:=0)
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsRDefaultFunction)
     End Sub
 
-    Private Sub InitialiseDialog()
-        'ucrBase.iHelpTopicID = 
-        ucrInputLocDataName.SetDefaultTypeAsDataFrame()
-        ucrInputDataName.SetValidationTypeAsRVariable()
-        ucrInputLocDataName.SetValidationTypeAsRVariable()
-        ucrInputFilePath.SetParameter(New RParameter("filename", 0))
-        ucrInputDataName.SetParameter(New RParameter("main_data_name", 1))
-        ucrInputLocDataName.SetParameter(New RParameter("loc_data_name", 2))
-        ucrInputLatColName.SetParameter(New RParameter("latitude_col_name", 3))
-        ucrInputLatColName.SetLinkedDisplayControl(lblLatColName)
-        ucrInputLonColName.SetParameter(New RParameter("longitude_col_name", 4))
-        ucrInputLonColName.SetLinkedDisplayControl(lblLonColName)
-    End Sub
-
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-        SetRCodeForControls(True)
-        TestOkEnabled()
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrInputDataName.SetRCode(clsRDefaultFunction, bReset)
+        ucrChkOnlyDataVariables.SetRCode(clsRDefaultFunction, bReset)
+        ucrChkKeepRawTime.SetRCode(clsRDefaultFunction, bReset)
+        ucrChkIncludeMetadata.SetRCode(clsRDefaultFunction, bReset)
+        ucrInputFilePath.SetRCode(clsRCDF, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        If (ucrInputDataName.Text <> "" AndAlso ucrInputLocDataName.Text <> "" AndAlso ucrInputFilePath.Text <> "" AndAlso (Not ucrInputDataName.Text = ucrInputLocDataName.Text)) Then
+        If ucrInputDataName.Text <> "" AndAlso ucrInputFilePath.Text <> "" Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub ucrInputFilePath_Load(sender As Object, e As EventArgs) Handles ucrInputFilePath.Load
-
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
     End Sub
 
     'Loads the open dialog on load and click
@@ -131,7 +145,6 @@ Public Class dlgOpenNetCDF
                     lblMainDataName.Show()
 
                     If strFileExt = ".nc" Then
-                        clsRCDF.SetRCommand("nc_open")
                         clsRCDF.AddParameter("filename", Chr(34) & strFilePath & Chr(34))
                         strFileType = "nc"
                         ucrInputDataName.SetName(strFileName, bSilent:=True)
@@ -144,10 +157,9 @@ Public Class dlgOpenNetCDF
 
     Private Sub cmdOpenDataSet_Click(sender As Object, e As EventArgs) Handles cmdOpenDataSet.Click
         GetFileFromOpenDialog()
-        TestOkEnabled()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFilePath.ControlContentsChanged, ucrInputDataName.ControlContentsChanged, ucrInputLocDataName.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFilePath.ControlContentsChanged, ucrInputDataName.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
