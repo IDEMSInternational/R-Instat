@@ -1143,6 +1143,15 @@ instat_object$set("public", "remove_key", function(data_name, key_name) {
 )
 
 instat_object$set("public", "add_climdex_indices", function(data_name, indices = list(), freq = "annual") {
+  for(i in seq_along(indices)) {
+    l <- list(indices[[i]])
+    names(l) <- names(indices)[i]
+    self$add_single_climdex_index(data_name = data_name, indices = l)
+  }
+}
+)
+
+instat_object$set("public", "add_single_climdex_index", function(data_name, indices = list(), freq = "annual") {
   if(!self$get_data_objects(data_name)$get_metadata(is_climatic_label))stop("Define data as climatic.")
   mix_monthly_annual = c("Monthly_Minimum_of_Daily_Minimum_Temperature", "Percentage_of_Days_When_Tmax_is_Above_90th_Percentile","Percentage_of_Days_When_Tmin_is_Above_90th_Percentile","Percentage_of_Days_When_Tmax_is_Below_10th_Percentile","Percentage_of_Days_When_Tmin_is_Below_10th_Percentile", "Monthly_Maximum_Consecutive_5day_Precipitation", "Monthly_Maximum_1day_Precipitation","Monthly_Maximum_of_Daily_Maximum_Temperature", "Monthly_Maximum_of_Daily_Minimum_Temperature","Monthly_Minimum_of_Daily_Maximum_Temperature", "Mean_Diurnal_Temperature_Range")
   

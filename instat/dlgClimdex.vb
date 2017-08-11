@@ -151,7 +151,6 @@ Public Class dlgClimdex
         clsRPrecQTiles.SetRCommand("c")
         clsRPrecQTiles.AddParameter("x", "0.95, 0.99", bIncludeArgumentName:=False, iPosition:=0)
 
-
         clsRPCIct.SetPackageName("PCICt")
         clsRPCIct.SetRCommand("as.PCICt")
         clsRPCIct.AddParameter("x", clsRFunctionParameter:=clsRChar, iPosition:=0)
