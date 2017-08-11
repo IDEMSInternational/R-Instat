@@ -125,6 +125,8 @@ Public Class dlgBoxplot
         clsRaesFunction = New RFunction
 
         ucrSelectorBoxPlot.Reset()
+        ucrSelectorBoxPlot.SetGgplotFunction(clsBaseOperator)
+
         ucrSaveBoxplot.Reset()
         sdgPlots.Reset()
         bResetSubdialog = True
@@ -273,10 +275,5 @@ Public Class dlgBoxplot
 
     Private Sub ucrSaveBoxplot_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveBoxplot.ControlContentsChanged, ucrVariablesAsFactorForBoxplot.ControlContentsChanged
         TestOkEnabled()
-    End Sub
-
-    Private Sub ucrSelectorBoxPlot_DataFrameChanged() Handles ucrSelectorBoxPlot.DataFrameChanged
-        'TODO Should we clear all general options when the data frame changes? e.g. title, axes options etc.
-        clsRggplotFunction.RemoveParameterByName("facets")
     End Sub
 End Class
