@@ -53,6 +53,7 @@ Partial Class dlgClimaticSummary
         Me.cmdSummary = New System.Windows.Forms.Button()
         Me.lblMonth = New System.Windows.Forms.Label()
         Me.lblNewColName = New System.Windows.Forms.Label()
+        Me.ucrSelectorVariable = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
         Me.ucrInputSave = New instat.ucrInputTextBox()
         Me.ucrReceiverFrom = New instat.ucrReceiverSingle()
@@ -66,7 +67,6 @@ Partial Class dlgClimaticSummary
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlAnnual = New instat.UcrPanel()
-        Me.ucrSelectorVariable = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
         '
         'rdoAnnual
@@ -200,12 +200,12 @@ Partial Class dlgClimaticSummary
         '
         'cmdSummary
         '
-        Me.cmdSummary.Location = New System.Drawing.Point(303, 348)
+        Me.cmdSummary.Location = New System.Drawing.Point(303, 346)
         Me.cmdSummary.Name = "cmdSummary"
-        Me.cmdSummary.Size = New System.Drawing.Size(105, 21)
+        Me.cmdSummary.Size = New System.Drawing.Size(105, 26)
         Me.cmdSummary.TabIndex = 39
-        Me.cmdSummary.Tag = "Summary"
-        Me.cmdSummary.Text = "Summary Options"
+        Me.cmdSummary.Tag = "Summaries"
+        Me.cmdSummary.Text = "Summaries"
         Me.cmdSummary.UseVisualStyleBackColor = True
         '
         'lblMonth
@@ -225,6 +225,16 @@ Partial Class dlgClimaticSummary
         Me.lblNewColName.Size = New System.Drawing.Size(101, 13)
         Me.lblNewColName.TabIndex = 42
         Me.lblNewColName.Text = "New Column Name:"
+        '
+        'ucrSelectorVariable
+        '
+        Me.ucrSelectorVariable.bShowHiddenColumns = False
+        Me.ucrSelectorVariable.bUseCurrentFilter = True
+        Me.ucrSelectorVariable.Location = New System.Drawing.Point(9, 59)
+        Me.ucrSelectorVariable.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorVariable.Name = "ucrSelectorVariable"
+        Me.ucrSelectorVariable.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorVariable.TabIndex = 45
         '
         'ucrReceiverMonth
         '
@@ -369,16 +379,6 @@ Partial Class dlgClimaticSummary
         Me.ucrPnlAnnual.Name = "ucrPnlAnnual"
         Me.ucrPnlAnnual.Size = New System.Drawing.Size(381, 35)
         Me.ucrPnlAnnual.TabIndex = 18
-        '
-        'ucrSelectorVariable
-        '
-        Me.ucrSelectorVariable.bShowHiddenColumns = False
-        Me.ucrSelectorVariable.bUseCurrentFilter = True
-        Me.ucrSelectorVariable.Location = New System.Drawing.Point(9, 59)
-        Me.ucrSelectorVariable.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorVariable.Name = "ucrSelectorVariable"
-        Me.ucrSelectorVariable.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorVariable.TabIndex = 45
         '
         'dlgClimaticSummary
         '
