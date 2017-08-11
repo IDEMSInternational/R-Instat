@@ -28,13 +28,17 @@ Public Class sdgCanonicalCorrelation
         ucrPnlVariables.AddRadioButton(rdoXVariables)
         ucrPnlVariables.AddRadioButton(rdoYVariables)
 
-        ucrChkCanonicalCorrelations.AddRSyntaxContainsFunctionNamesCondition(True, {frmMain.clsRLink.strInstatDataObject & "$get_from_model"})
-        ucrChkCanonicalCorrelations.AddRSyntaxContainsFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$get_from_model"}, False)
+        ucrChkCanonicalCorrelations.SetParameter(New RParameter("value1", 2))
         ucrChkCanonicalCorrelations.SetText("Canonical Correlations")
+        ucrChkCanonicalCorrelations.SetValueIfChecked(Chr(34) & "cor" & Chr(34))
+        ucrChkCanonicalCorrelations.AddParameterPresentCondition(True, "value1")
+        ucrChkCanonicalCorrelations.AddParameterPresentCondition(False, "value1", False)
 
-        ucrChkCoefficients.AddRSyntaxContainsFunctionNamesCondition(True, {frmMain.clsRLink.strInstatDataObject & "$get_from_model"})
-        ucrChkCoefficients.AddRSyntaxContainsFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$get_from_model"}, False)
+        ucrChkCoefficients.SetParameter(New RParameter("value1", 2))
         ucrChkCoefficients.SetText("Coefficients")
+        ucrChkCoefficients.SetValueIfChecked(Chr(34) & "xcoef" & Chr(34))
+        ucrChkCoefficients.AddParameterPresentCondition(True, "value1")
+        ucrChkCoefficients.AddParameterPresentCondition(False, "value1", False)
 
         ucrChkPairwisePlot.AddRSyntaxContainsFunctionNamesCondition(True, {"ggpairs"})
         ucrChkPairwisePlot.AddRSyntaxContainsFunctionNamesCondition(False, {"ggpairs"}, False)
@@ -54,8 +58,10 @@ Public Class sdgCanonicalCorrelation
         clsRYCoefFunction = clsNewRYCoefFunction
         clsRGraphicsFunction = clsNewRGraphicsFunction
 
-        ucrChkCanonicalCorrelations.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
-        ucrChkCoefficients.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
+        ucrChkCoefficients.AddAdditionalCodeParameterPair(clsRYCoefFunction, ucrChkCoefficients.GetParameter, iAdditionalPairNo:=1)
+
+        ucrChkCanonicalCorrelations.SetRCode(clsRCanCorFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkCoefficients.SetRCode(clsRXCoefFunction, bReset, bCloneIfNeeded:=True)
         ucrChkPairwisePlot.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
 
         bControlsInitialised = True
