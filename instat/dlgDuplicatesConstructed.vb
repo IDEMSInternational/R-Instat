@@ -45,7 +45,7 @@ Public Class dlgDuplicatesConstructed
         ucrSelectorDuplicateswithVariables.SetParameter(New RParameter("x", 0))
         ucrSelectorDuplicateswithVariables.SetParameterIsrfunction()
 
-        ucrReceiverMultipleForDuplicates.SetParameter(New RParameter("x", 1))
+        ucrReceiverMultipleForDuplicates.SetParameter(New RParameter("x", 0))
         ucrReceiverMultipleForDuplicates.SetParameterIsRFunction()
         ucrReceiverMultipleForDuplicates.Selector = ucrSelectorDuplicateswithVariables
 
@@ -125,8 +125,8 @@ Public Class dlgDuplicatesConstructed
     Private Sub DataFrameParameter()
         If rdoDataFrame.Checked Then
             ucrSelectorDuplicateswithVariables.SetVariablesVisible(False)
-            clsDuplicated.AddParameter("x", clsRFunctionParameter:=ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.clsCurrDataFrame)
-            clsDuplicate2.AddParameter("x", clsRFunctionParameter:=ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.clsCurrDataFrame)
+            clsDuplicated.AddParameter("x", clsRFunctionParameter:=ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+            clsDuplicate2.AddParameter("x", clsRFunctionParameter:=ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         ElseIf rdoSelectedVariables.Checked Then
             ucrSelectorDuplicateswithVariables.SetVariablesVisible(True)
             clsDuplicated.AddParameter("x", clsRFunctionParameter:=ucrReceiverMultipleForDuplicates.GetVariables, iPosition:=0)
