@@ -76,7 +76,7 @@ Partial Class dlgClimaticSummary
         Me.rdoAnnual.FlatAppearance.BorderSize = 2
         Me.rdoAnnual.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoAnnual.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoAnnual.Location = New System.Drawing.Point(46, 14)
+        Me.rdoAnnual.Location = New System.Drawing.Point(36, 14)
         Me.rdoAnnual.Name = "rdoAnnual"
         Me.rdoAnnual.Size = New System.Drawing.Size(118, 27)
         Me.rdoAnnual.TabIndex = 15
@@ -92,7 +92,7 @@ Partial Class dlgClimaticSummary
         Me.rdoAnnualVariable.FlatAppearance.BorderSize = 2
         Me.rdoAnnualVariable.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoAnnualVariable.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoAnnualVariable.Location = New System.Drawing.Point(278, 14)
+        Me.rdoAnnualVariable.Location = New System.Drawing.Point(268, 14)
         Me.rdoAnnualVariable.Name = "rdoAnnualVariable"
         Me.rdoAnnualVariable.Size = New System.Drawing.Size(118, 27)
         Me.rdoAnnualVariable.TabIndex = 16
@@ -108,7 +108,7 @@ Partial Class dlgClimaticSummary
         Me.rdoWithinYear.FlatAppearance.BorderSize = 2
         Me.rdoWithinYear.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoWithinYear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoWithinYear.Location = New System.Drawing.Point(162, 14)
+        Me.rdoWithinYear.Location = New System.Drawing.Point(152, 14)
         Me.rdoWithinYear.Name = "rdoWithinYear"
         Me.rdoWithinYear.Size = New System.Drawing.Size(118, 27)
         Me.rdoWithinYear.TabIndex = 17
@@ -365,7 +365,7 @@ Partial Class dlgClimaticSummary
         '
         'ucrPnlAnnual
         '
-        Me.ucrPnlAnnual.Location = New System.Drawing.Point(28, 10)
+        Me.ucrPnlAnnual.Location = New System.Drawing.Point(18, 10)
         Me.ucrPnlAnnual.Name = "ucrPnlAnnual"
         Me.ucrPnlAnnual.Size = New System.Drawing.Size(381, 35)
         Me.ucrPnlAnnual.TabIndex = 18
