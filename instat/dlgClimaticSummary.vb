@@ -14,18 +14,14 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgClimaticSummary
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
-    Private clsDefaultFunction, clsSummariesList, clsDefaultFactors As New RFunction
-    Private clsKeyFunction, clsAddKeyColName, clsDayFromAndTo As New RFunction
+    Private clsDefaultFunction, clsSummariesList, clsDefaultFactors, clsDayFromAndTo As New RFunction
     Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator As New ROperator
     Private strCurrDataName As String = ""
-    'Dim strGroupByCalcFrom As String = ""
-    Private strTempFuc As String = ""
     Private Sub dlgClimaticSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
@@ -60,7 +56,6 @@ Public Class dlgClimaticSummary
 
         ucrPnlAnnual.AddParameterPresentCondition(rdoWithinYear, "within_variable", True)
         ucrPnlAnnual.AddParameterPresentCondition(rdoAnnual, "within_variable", False)
-        ucrPnlAnnual.AddParameterPresentCondition(rdoAnnualVariable, "within_variable", False)
 
         'receivers:
         ' by receivers
@@ -82,15 +77,13 @@ Public Class dlgClimaticSummary
         ucrReceiverWithinYear.SetParameterIsString()
         ucrReceiverWithinYear.strSelectorHeading = "Variables"
         ucrReceiverWithinYear.Selector = ucrSelectorVariable
-        ucrReceiverWithinYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "month" & Chr(34)}) ' TODO: fix this and allow others, e.g., dekad, weekly, day, doy, etc.
-        ucrReceiverWithinYear.bAutoFill = True
 
         ' summary
         ucrReceiverElement.SetParameter(New RParameter("columns_to_summarise", 0))
         ucrReceiverElement.SetParameterIsString()
         ucrReceiverElement.strSelectorHeading = "Variables"
         ucrReceiverElement.Selector = ucrSelectorVariable
-        ucrReceiverElement.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "rain" & Chr(34)}) ' TODO: fix this and allow others, e.g., temps
+        ucrReceiverElement.SetIncludedDataTypes({"numeric"})
         ucrReceiverElement.bAutoFill = True
 
         ' others
@@ -137,8 +130,8 @@ Public Class dlgClimaticSummary
         ucrChkDropUnusedLevels.SetRDefault("FALSE")
 
         'linking controls
-        ucrPnlAnnual.AddToLinkedControls(ucrNudFrom, {rdoAnnual}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlAnnual.AddToLinkedControls(ucrNudTo, {rdoAnnual}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=366)
+        'ucrPnlAnnual.AddToLinkedControls(ucrNudFrom, {rdoAnnual, rdoWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        'ucrPnlAnnual.AddToLinkedControls(ucrNudTo, {rdoAnnual, rdoWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=366)
         ucrPnlAnnual.AddToLinkedControls({ucrReceiverFrom, ucrReceiverTo}, {rdoAnnualVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlAnnual.AddToLinkedControls({ucrReceiverWithinYear}, {rdoWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
@@ -158,16 +151,10 @@ Public Class dlgClimaticSummary
         clsDayFromAndTo = New RFunction
         clsDayFromOperator = New ROperator
         clsDayToOperator = New ROperator
-        clsKeyFunction = New RFunction
-        clsAddKeyColName = New RFunction
 
         bResetSubdialog = True
         ucrSelectorVariable.Reset()
         ucrReceiverStation.SetMeAsReceiver()
-
-        clsKeyFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
-        clsKeyFunction.AddParameter("col_name", clsRFunctionParameter:=clsAddKeyColName)
-        clsAddKeyColName.SetRCommand("c")
 
         'TODO: this changes to from >= receiver and to <= receiver if annual-variable is checekd.
         clsDayFromAndToOperator.bToScriptAsRString = True
@@ -176,10 +163,10 @@ Public Class dlgClimaticSummary
         clsDayFromAndTo.AddParameter("function_exp", clsROperatorParameter:=clsDayFromAndToOperator, iPosition:=1)
         clsDayFromAndToOperator.SetOperation("&")
         clsDayFromAndToOperator.AddParameter("from", clsROperatorParameter:=clsDayFromOperator, iPosition:=0)
-        clsDayFromOperator.SetOperation(">=") ' doy = DOY_receiver in position 0. This is always the case
+        clsDayFromOperator.SetOperation(">=") ' doy = DOYreceiver in position 0. This is always the case
         clsDayFromOperator.AddParameter("from", 1, iPosition:=1)
         clsDayFromAndToOperator.AddParameter("to", clsROperatorParameter:=clsDayToOperator, iPosition:=1)
-        clsDayToOperator.SetOperation("<=") ' doy = DOY_receiver in position 0. This is always the case
+        clsDayToOperator.SetOperation("<=") ' doy = DOYreceiver in position 0. This is always the case
         clsDayToOperator.AddParameter("to", 366, iPosition:=1)
         clsDayFromAndTo.SetAssignTo("day_from_and_to")
 
@@ -193,19 +180,16 @@ Public Class dlgClimaticSummary
         clsDefaultFunction.AddParameter("factors", clsRFunctionParameter:=clsDefaultFactors, iPosition:=1)
         clsDefaultFunction.AddParameter("additional_filter", clsRFunctionParameter:=clsDayFromAndTo, iPosition:=5)
         clsDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList)
-        clsDefaultFunction.AddParameter("silent", "TRUE") 'Prevents an error if user chooses non count summaries with no columns to summarise
+        clsDefaultFunction.AddParameter("silent", "TRUE")
 
         clsDefaultFactors.SetRCommand("c")
 
-        ucrBase.clsRsyntax.AddToAfterCodes(clsKeyFunction, iPosition:=0)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
         bResetSubdialog = True
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverDOY.AddAdditionalCodeParameterPair(clsDayFromOperator, New RParameter("doy", 0), iAdditionalPairNo:=1)
-        ucrSelectorVariable.AddAdditionalCodeParameterPair(clsKeyFunction, ucrSelectorVariable.GetParameter, iAdditionalPairNo:=1)
-        ucrReceiverStation.AddAdditionalCodeParameterPair(clsAddKeyColName, ucrReceiverStation.GetParameter, iAdditionalPairNo:=1)
 
         ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
         ucrNudTo.SetRCode(clsDayToOperator, bReset)
@@ -213,7 +197,6 @@ Public Class dlgClimaticSummary
 
         ucrSelectorVariable.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverElement.SetRCode(clsDefaultFunction, bReset)
-        ucrReceiverDate.SetRCode(clsAddKeyColName, bReset)
 
         ucrPnlAnnual.SetRCode(clsDefaultFactors, bReset)
         ucrReceiverStation.SetRCode(clsDefaultFactors, bReset)
@@ -270,7 +253,15 @@ Public Class dlgClimaticSummary
         DayBoundaries()
     End Sub
 
-    Private Sub ucrReceiverDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverWithinYear.ControlContentsChanged, ucrPnlAnnual.ControlContentsChanged
+    Private Sub ucrPnlAnnual_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlAnnual.ControlValueChanged
+        If rdoWithinYear.Checked Then
+            clsDefaultFactors.AddParameter("within_variable", ucrReceiverWithinYear.GetVariableNames, bIncludeArgumentName:=False, iPosition:=2)
+        Else
+            clsDefaultFactors.RemoveParameterByName("within_variable")
+        End If
+    End Sub
+
+    Private Sub ucrReceiverDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverWithinYear.ControlContentsChanged, ucrPnlAnnual.ControlContentsChanged, ucrNudTo.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrReceiverFrom.ControlContentsChanged, ucrReceiverTo.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
