@@ -261,12 +261,16 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
     time_var <- time_dims
     raw_time <- nc$dim[[time_var]]$vals
     attr(raw_time, "dim") <- NULL
-    pcict_time <- ncdf4.helpers::nc.get.time.series(nc, time.dim.name = time_var)
-    posixct_time <- PCICt::as.POSIXlt.PCICt(pcict_time)
-    date_time <- as.Date(posixct_time)
-    time_df <- data.frame(raw_time, posixct_time, date_time)
-    names(time_df) <- c(time_var, paste0(time_var, "_full"), paste0(time_var, "_date"))
-    var_data <- dplyr::full_join(var_data, time_df, by = time_var)
+    df_names <- time_var
+    time_df <- data.frame(raw_time)
+    names(time_df) <- time_var
+    try({
+      pcict_time <- ncdf4.helpers::nc.get.time.series(nc, time.dim.name = time_var)
+      posixct_time <- PCICt::as.POSIXct.PCICt(pcict_time)
+      time_df[[paste0(time_var, "_full")]] <- posixct_time
+      time_df[[paste0(time_var, "_date")]] <- as.Date(posixct_time)
+    })
+    if(ncol(var_data) > 1) var_data <- dplyr::full_join(var_data, time_df, by = time_var)
     if(!keep_raw_time) {
       var_data[[time_var]] <- NULL
       included_vars <- included_vars[-which(included_vars == time_var)]
