@@ -47,6 +47,7 @@ Partial Class dlgOpenNetCDF
         Me.ucrChkIncludeMetadata = New instat.ucrCheck()
         Me.ucrChkKeepRawTime = New instat.ucrCheck()
         Me.ucrChkOnlyDataVariables = New instat.ucrCheck()
+        Me.cmdOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'cmdOpenDataSet
@@ -103,7 +104,7 @@ Partial Class dlgOpenNetCDF
         Me.ucrBase.Location = New System.Drawing.Point(10, 161)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 8
+        Me.ucrBase.TabIndex = 9
         '
         'ucrChkIncludeMetadata
         '
@@ -129,11 +130,21 @@ Partial Class dlgOpenNetCDF
         Me.ucrChkOnlyDataVariables.Size = New System.Drawing.Size(162, 20)
         Me.ucrChkOnlyDataVariables.TabIndex = 3
         '
+        'cmdOptions
+        '
+        Me.cmdOptions.Location = New System.Drawing.Point(319, 134)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(85, 23)
+        Me.cmdOptions.TabIndex = 8
+        Me.cmdOptions.Text = "Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
+        '
         'dlgOpenNetCDF
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(416, 220)
+        Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrChkOnlyDataVariables)
         Me.Controls.Add(Me.ucrChkKeepRawTime)
         Me.Controls.Add(Me.ucrChkIncludeMetadata)
@@ -163,5 +174,6 @@ Partial Class dlgOpenNetCDF
     Friend WithEvents ucrChkIncludeMetadata As ucrCheck
     Friend WithEvents ucrChkKeepRawTime As ucrCheck
     Friend WithEvents ucrChkOnlyDataVariables As ucrCheck
+    Friend WithEvents cmdOptions As Button
 End Class
 
