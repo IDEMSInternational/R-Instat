@@ -164,7 +164,7 @@ Public Class dlgStartofRains
         ucrChkDryPeriod.AddAdditionalCodeParameterPair(clsCombineOperator, New RParameter("dryperiod", clsDPCombineOperator, 4, False), iAdditionalPairNo:=1)
         ucrChkDryPeriod.SetText("Dry Period")
 
-        ucrNudDPRainPeriod.SetParameter(New RParameter("width", 1))
+        ucrNudDPRainPeriod.SetParameter(New RParameter("width", 0))
         ucrNudDPRainPeriod.SetLinkedDisplayControl(lblDPLength)
         ucrNudDPRainPeriod.SetMinMax(1, 366)
 
@@ -434,7 +434,7 @@ Public Class dlgStartofRains
         clsDPOverallIntervalFunctionOperator.AddParameter("Overall", 45, iPosition:=0)
         clsDPOverallIntervalFunctionOperator.AddParameter("right", clsROperatorParameter:=clsDPOverallIntervalFunctionOperatorRight, iPosition:=1)
         clsDPOverallIntervalFunctionOperatorRight.SetOperation("+")
-        clsDPOverallIntervalFunctionOperatorRight.AddParameter("Rain", 30, iPosition:=0)
+        clsDPOverallIntervalFunctionOperatorRight.AddParameter("width", 30, iPosition:=0)
         clsDPOverallIntervalFunctionOperatorRight.AddParameter("1", 1, iPosition:=1)
         clsDPOverallIntervalFunction.AddParameter("FUN", "sum", iPosition:=2)
         clsDPOverallIntervalFunction.AddParameter("na.rm", "FALSE", iPosition:=3)
@@ -512,7 +512,7 @@ Public Class dlgStartofRains
         ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsRainCombineOperator, New RParameter("rain", 0), iAdditionalPairNo:=3)
         ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsTRRollingSumFunction, New RParameter("data", 0), iAdditionalPairNo:=4)
         ucrNudThreshold.AddAdditionalCodeParameterPair(clsRainCombineOperator, New RParameter("rainThreshold", 1), iAdditionalPairNo:=1)
-        ucrNudDPRainPeriod.AddAdditionalCodeParameterPair(clsDPOverallIntervalFunctionOperatorRight, New RParameter("Rain", 0), iAdditionalPairNo:=1)
+        ucrNudDPRainPeriod.AddAdditionalCodeParameterPair(clsDPOverallIntervalFunctionOperatorRight, ucrNudDPRainPeriod.GetParameter(), iAdditionalPairNo:=1)
 
         ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
         ucrNudFrom.SetRCode(clsDayFromOperator, bReset)
