@@ -270,7 +270,7 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
       time_df[[paste0(time_var, "_full")]] <- posixct_time
       time_df[[paste0(time_var, "_date")]] <- as.Date(posixct_time)
     })
-    if(ncol(var_data) > 1) var_data <- dplyr::full_join(var_data, time_df, by = time_var)
+    if(ncol(time_df) > 1) var_data <- dplyr::full_join(var_data, time_df, by = time_var)
     if(!keep_raw_time) {
       var_data[[time_var]] <- NULL
       included_vars <- included_vars[-which(included_vars == time_var)]
@@ -592,4 +592,8 @@ split_items_in_groups <- function(items, num) {
   if(length(items) %% num != 0) stop("The number of items must be divisible by the number of groups")
   x <- split(items, rep(1:num, each = length(items)/num))
   return(x)
+}
+
+cancor_coef <- function(object) {
+  object[c("xcoef", "ycoef")]
 }
