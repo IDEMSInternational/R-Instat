@@ -24,6 +24,7 @@ Public Class dlgOpenNetCDF
     Dim strFileType As String
     Dim bComponentsInitialised As Boolean
     Public bStartOpenDialog As Boolean
+    Private bResetSubdialog As Boolean = False
 
     Public Sub New()
         ' This call is required by the designer.
@@ -54,6 +55,7 @@ Public Class dlgOpenNetCDF
 
     Private Sub InitialiseDialog()
         'ucrBase.iHelpTopicID = 
+        cmdOptions.Enabled = False ' Temporarily disabled until we run in the sub
         ucrInputFilePath.SetParameter(New RParameter("filename", 0))
         ucrInputFilePath.IsReadOnly = True
 
@@ -93,8 +95,8 @@ Public Class dlgOpenNetCDF
         clsRClose.AddParameter("nc", clsRFunctionParameter:=clsRCDF, iPosition:=0)
 
         ucrBase.clsRsyntax.AddToAfterCodes(clsRClose, iPosition:=0)
-
         ucrBase.clsRsyntax.SetBaseRFunction(clsRDefaultFunction)
+        bResetSubdialog = True
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -153,6 +155,12 @@ Public Class dlgOpenNetCDF
                 End If
             End If
         End Using
+    End Sub
+
+    Private Sub cmdMoreOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        'sdgOpenNetCDF.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubdialog)
+        bResetSubdialog = False
+        sdgOpenNetCDF.ShowDialog()
     End Sub
 
     Private Sub cmdOpenDataSet_Click(sender As Object, e As EventArgs) Handles cmdOpenDataSet.Click
