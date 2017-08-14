@@ -1112,20 +1112,68 @@ instat_object$set("public","make_inventory_plot", function(data_name, date_col, 
 }
 )
 
-instat_object$set("public", "import_NetCDF", function(nc_data, main_data_name, loc_data_name, latitude_col_name = "", longitude_col_name = "") {
-  nc_result <- open_NetCDF(nc_data = nc_data, latitude_col_name = latitude_col_name, longitude_col_name = longitude_col_name)
-  if(length(nc_result) != 3)stop("Output from open_NetCDF should be a list of length 3")
+instat_object$set("public", "import_NetCDF", function(nc, name, only_data_vars = TRUE, keep_raw_time = TRUE, include_metadata = TRUE) {
+  if(only_data_vars) {
+    all_var_names <- ncdf4.helpers::nc.get.variable.list(nc)
+  }
+  else {
+    all_var_names <- names(nc$var)
+  }
+  remaining_var_names <- all_var_names
+  var_groups <- list()
+  dim_groups <- list()
+  while(length(remaining_var_names) > 0) {
+    grp <- remaining_var_names[1]
+    dim_names <- ncdf4.helpers::nc.get.dim.names(nc, remaining_var_names[1])
+    dim_groups[[length(dim_groups) + 1]] <- dim_names
+    for(curr_var_name in remaining_var_names[-1]) {
+      if(setequal(ncdf4.helpers::nc.get.dim.names(nc, curr_var_name), dim_names)) {
+        grp <- c(grp, curr_var_name)
+      }
+    }
+    remaining_var_names <- remaining_var_names[-which(remaining_var_names %in% grp)]
+    var_groups[[length(var_groups) + 1]] <- grp
+  }
   
-  data_list = nc_result[c(1,2)]
-  
-  names(data_list) = c(main_data_name, next_default_item(prefix = loc_data_name, existing_names = self$get_data_names(), include_index = FALSE))
-  self$import_data(data_tables = data_list)
-  self$add_key(names(data_list)[2], nc_result[3][[1]])
-  named_char_vec  <- nc_result[3][[1]]
-  names(named_char_vec) <- named_char_vec
-  self$add_link(from_data_frame = names(data_list)[1], to_data_frame = names(data_list)[2], link_pairs = named_char_vec, type = keyed_link_label)
+  data_list <- list()
+  use_prefix <- (length(seq_along(var_groups)) > 1)
+  data_names <- c()
+  for(i in seq_along(var_groups)) {
+    if(use_prefix) curr_name <- paste0(name, "_", i)
+    else curr_name <- name
+    data_names <- c(data_names, curr_name)
+    data_list[[curr_name]] <- nc_as_data_frame(nc, var_groups[[i]], keep_raw_time = keep_raw_time, include_metadata = include_metadata)
+    tmp_list <- list()
+    tmp_list[[curr_name]] <- data_list[[curr_name]]
+    self$import_data(data_tables = tmp_list)
+    self$add_key(curr_name, dim_groups[[i]])
+  }
+  for(i in seq_along(data_names)) {
+    for(j in seq_along(data_names)) {
+      if(i != j && !self$link_exists_between(data_names[i], data_names[j]) && all(dim_groups[[i]] %in% dim_groups[[j]])) {
+        pairs <- dim_groups[[i]]
+        names(pairs) <- pairs
+        self$add_link(data_names[j], data_names[i], pairs, keyed_link_label)
+      }
+    }
+  }
 }
 )
+
+# instat_object$set("public", "import_NetCDF", function(nc_data, main_data_name, loc_data_name, latitude_col_name = "", longitude_col_name = "") {
+#   nc_result <- open_NetCDF(nc_data = nc_data, latitude_col_name = latitude_col_name, longitude_col_name = longitude_col_name)
+#   if(length(nc_result) != 3)stop("Output from open_NetCDF should be a list of length 3")
+#   
+#   data_list = nc_result[c(1,2)]
+#   
+#   names(data_list) = c(main_data_name, next_default_item(prefix = loc_data_name, existing_names = self$get_data_names(), include_index = FALSE))
+#   self$import_data(data_tables = data_list)
+#   self$add_key(names(data_list)[2], nc_result[3][[1]])
+#   named_char_vec  <- nc_result[3][[1]]
+#   names(named_char_vec) <- named_char_vec
+#   self$add_link(from_data_frame = names(data_list)[1], to_data_frame = names(data_list)[2], link_pairs = named_char_vec, type = keyed_link_label)
+# }
+# )
 
 instat_object$set("public", "infill_missing_dates", function(data_name, date_name, factors) {
   self$get_data_objects(data_name)$infill_missing_dates(date_name = date_name, factor = factors)

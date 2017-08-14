@@ -74,7 +74,7 @@ success <- invisible(mapply(function(p, v) length(find.package(p, quiet = TRUE))
 if(!all(success)) install.packages(names(success)[!success], repos = paste0("file:///", getwd(), "/extras"), type = "win.binary")
 
 # ggthemes temp added because themes list doesn't contain package names
-for(pack in c("plyr", "dplyr", "ggplot2", "ggthemes", "svglite", "ggfortify")) {
+for(pack in c("plyr", "dplyr", "ggplot2", "ggthemes", "svglite", "ggfortify", "PCICt")) {
  library(pack, character.only = TRUE)
 }
 
