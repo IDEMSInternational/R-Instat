@@ -125,6 +125,8 @@ Public Class dlgBoxplot
         clsRaesFunction = New RFunction
 
         ucrSelectorBoxPlot.Reset()
+        ucrSelectorBoxPlot.SetGgplotFunction(clsBaseOperator)
+
         ucrSaveBoxplot.Reset()
         sdgPlots.Reset()
         bResetSubdialog = True
