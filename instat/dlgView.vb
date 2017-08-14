@@ -19,7 +19,7 @@ Imports instat.Translations
 Public Class dlgView
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsOutputWindowFunction, clsSeparateWindowFunction, clsHTMLFunction As New RFunction
+    Private clsOutputWindowFunction, clsSeparateWindowFunction, clsHTMLFunction, clsViewAllFunction As New RFunction
     Private bControlsUpdated As Boolean = False
 
     Private Sub dlgView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -76,11 +76,16 @@ Public Class dlgView
         ucrPnlViewData.AddFunctionNamesCondition(rdoViewAll, "View")
         ucrPnlViewData.AddFunctionNamesCondition(rdoViewAll, {"head", "tail", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data"}, False)
         ucrPnlViewData.AddFunctionNamesCondition(rdoViewAll, "sjt.df", False)
-        ucrPnlViewData.AddParameterIsRFunctionCondition(rdoViewAll, "x")
-        ucrPnlViewData.AddParameterPresentCondition(rdoViewAll, "title")
-        ucrPnlViewData.AddFunctionNamesCondition(rdoViewSelectedColumnsRows, "View")
-        ucrPnlViewData.AddParameterPresentCondition(rdoViewSelectedColumnsRows, "x")
-        ucrPnlViewData.bAllowNonConditionValues = True
+
+        'ucrPnlViewData.AddParameterIsRFunctionCondition(rdoViewAll, "x")
+        'ucrPnlViewData.AddParameterPresentCondition(rdoViewAll, "title")
+        ucrPnlViewData.AddFunctionNamesCondition(rdoViewSelectedColumnsRows, {"head", "tail", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data"})
+        ucrPnlViewData.AddFunctionNamesCondition(rdoViewSelectedColumnsRows, "sjt.df")
+        'ucrPnlViewData.AddParameterPresentCondition(rdoViewSelectedColumnsRows, "x")
+        'ucrPnlViewData.bAllowNonConditionValues = True
+
+        clsViewAllFunction.AddParameter("x", clsRFunctionParameter:=ucrSelectorForView.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+
 
         ucrPnlViewData.AddToLinkedControls(ucrReceiverView, {rdoViewSelectedColumnsRows}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrReceiverView.SetLinkedDisplayControl(lblSelected)
@@ -113,12 +118,12 @@ Public Class dlgView
         clsOutputWindowFunction = New RFunction
         clsSeparateWindowFunction = New RFunction
         clsHTMLFunction = New RFunction
+        clsViewAllFunction = New RFunction
 
         ucrSelectorForView.Reset()
         ucrReceiverView.SetMeAsReceiver()
 
         clsOutputWindowFunction.SetPackageName("utils")
-        clsSeparateWindowFunction.AddParameter("title", Chr(34) & ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34), iPosition:=1)
 
         clsHTMLFunction.SetPackageName("sjPlot")
         clsHTMLFunction.SetRCommand("sjt.df")
@@ -128,7 +133,10 @@ Public Class dlgView
 
         clsSeparateWindowFunction.SetPackageName("utils")
         clsSeparateWindowFunction.SetRCommand("View")
-        clsSeparateWindowFunction.AddParameter("x", ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+        clsSeparateWindowFunction.AddParameter("title", Chr(34) & ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34), iPosition:=1)
+
+        clsViewAllFunction.SetPackageName("utils")
+        clsViewAllFunction.SetRCommand("View")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSeparateWindowFunction)
     End Sub
@@ -144,22 +152,20 @@ Public Class dlgView
         ucrPnlDisplayFrom.SetRCode(clsOutputWindowFunction, bReset)
         ucrNudNumberRows.SetRCode(clsOutputWindowFunction, bReset)
         ucrChkSpecifyRows.SetRCode(clsOutputWindowFunction, bReset)
-        ucrSelectorForView.SetRCode(clsSeparateWindowFunction, bReset)
-        ucrSelectorForView.AddAdditionalCodeParameterPair(clsSeparateWindowFunction, New RParameter("x"), iAdditionalPairNo:=1)
+        ucrSelectorForView.SetRCode(clsViewAllFunction, bReset)
 
         DataFrameLength()
         ChangeFunctionParameters()
-        SetSelectorParameterType()
         ucrPnlViewData.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset, bReset)
         bControlsUpdated = True
     End Sub
 
     Private Sub SetSelectorParameterType()
-        If rdoViewAll.Checked Then
-            clsSeparateWindowFunction.AddParameter("x", ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
-        Else
-        End If
+        clsViewAllFunction.AddParameter("x", clsRFunctionParameter:=ucrSelectorForView.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsViewAllFunction.AddParameter("title", Chr(34) & ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34), iPosition:=1)
+        clsSeparateWindowFunction.AddParameter("title", Chr(34) & ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34), iPosition:=1)
     End Sub
+
     Private Sub TestOKEnabled()
         If rdoViewSelectedColumnsRows.Checked Then
             If Not ucrReceiverView.IsEmpty Then
@@ -218,7 +224,7 @@ Public Class dlgView
                 ucrBase.clsRsyntax.SetBaseRFunction(clsHTMLFunction)
             End If
         Else
-            ucrBase.clsRsyntax.SetBaseRFunction(clsSeparateWindowFunction)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsViewAllFunction)
         End If
     End Sub
 
@@ -245,7 +251,7 @@ Public Class dlgView
         SetSelectorParameterType()
     End Sub
 
-    Private Sub SelectorAndDataframe()
+    Private Sub SelectorAndDataFrame()
         If rdoViewAll.Checked Then
             ucrSelectorForView.SetVariablesVisible(False)
         Else
@@ -257,9 +263,8 @@ Public Class dlgView
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrPnlVewData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlViewData.ControlValueChanged
+    Private Sub ucrPnlViewData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlViewData.ControlValueChanged
         ChangeFunctionParameters()
-        SelectorAndDataframe()
-        SetSelectorParameterType()
+        SelectorAndDataFrame()
     End Sub
 End Class
