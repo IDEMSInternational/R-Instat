@@ -65,17 +65,19 @@ Public Class dlgInventoryPlot
         ucrChkFlipCoordinates.SetRDefault("FALSE")
 
         ucrInputTitle.SetParameter(New RParameter("graph_title", 5))
-        ucrChkTitle.SetParameter(ucrInputTitle.GetParameter(), bNewChangeParameterValue:=False)
-        ucrChkTitle.SetText("Title")
-        ucrChkTitle.AddToLinkedControls(ucrInputTitle, objValues:={True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrInputTitle.SetRDefault("Inventory Plot")
+
+        ucrChkDisplayRainDays.SetParameter(New RParameter("display_rain_days", 13), bNewChangeParameterValue:=True)
+        ucrChkDisplayRainDays.SetText("Display Rain Days")
+        ucrChkDisplayRainDays.SetRDefault("FALSE")
 
         ucrChkShowNonMissing.SetText("Show Non Missing")
         ucrChkShowNonMissing.Enabled = False ' this currently has no parameter associated with it
 
-        ucrPnlPlotLayout.SetParameter(New RParameter("year_doy_plot"))
-        ucrPnlPlotLayout.AddRadioButton(rdoyear_doy_plot, "TRUE")
-        ucrPnlPlotLayout.AddRadioButton(rdoDatePlot, "FALSE")
-        ucrPnlPlotLayout.SetRDefault("FALSE")
+        ucrPnlPlotType.SetParameter(New RParameter("year_doy_plot"))
+        ucrPnlPlotType.AddRadioButton(rdoyear_doy_plot, "TRUE")
+        ucrPnlPlotType.AddRadioButton(rdoDatePlot, "FALSE")
+        ucrPnlPlotType.SetRDefault("FALSE")
 
         Dim dctFacetByPairs As New Dictionary(Of String, String)
         ucrInputFacetBy.SetParameter(New RParameter("facet_by"))
@@ -86,6 +88,7 @@ Public Class dlgInventoryPlot
         dctFacetByPairs.Add("Elements-Stations", Chr(34) & "elements-stations" & Chr(34))
         ucrInputFacetBy.SetItems(dctFacetByPairs)
         ucrInputFacetBy.SetRDefault("NULL")
+        ucrInputFacetBy.SetDropDownStyleAsNonEditable()
 
         ucrSaveGraph.SetPrefix("Inventory")
         ucrSaveGraph.SetSaveTypeAsGraph()
@@ -101,8 +104,6 @@ Public Class dlgInventoryPlot
         ucrInventoryPlotSelector.Reset()
         ucrSaveGraph.Reset()
         ucrReceiverDate.SetMeAsReceiver()
-        ucrChkTitle.Checked = False
-        ucrInputTitle.SetName("Inventory Plot")
 
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot")
         clsDefaultRFunction.AddParameter("coord_flip", "FALSE")
@@ -119,7 +120,7 @@ Public Class dlgInventoryPlot
     End Sub
 
     Private Sub TestOkEnabled()
-        If (Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty AndAlso ucrSaveGraph.IsComplete) AndAlso (ucrChkTitle.Checked AndAlso Not ucrInputTitle.IsEmpty OrElse ucrChkTitle.Checked = False) Then
+        If (Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty AndAlso ucrSaveGraph.IsComplete) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -138,7 +139,7 @@ Public Class dlgInventoryPlot
         TestOkEnabled()
     End Sub
 
-    Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveGraph.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged, ucrChkTitle.ControlContentsChanged, ucrInputTitle.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged
+    Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveGraph.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged, ucrInputTitle.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
