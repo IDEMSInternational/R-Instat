@@ -128,13 +128,12 @@ Public Class dlgClimdex
         clsDefaultFunction.AddParameter("tmax.dates", clsRFunctionParameter:=clsRPCIct)
         clsDefaultFunction.AddParameter("tmin.dates", clsRFunctionParameter:=clsRPCIct)
         clsDefaultFunction.AddParameter("prec.dates", clsRFunctionParameter:=clsRPCIct)
-        clsDefaultFunction.AddParameter("northern.hemisphere", "TRUE", iPosition:=9) ' R-default
-        clsDefaultFunction.AddParameter("min.base.data.fraction.present", 0.1, iPosition:=16) ' r-default
-        clsDefaultFunction.AddParameter("max.missing.days", clsRFunctionParameter:=clsRMaxMissingDays, iPosition:=15)
         clsDefaultFunction.AddParameter("base.range", clsRFunctionParameter:=clsRBaseRange, iPosition:=7)
+        clsDefaultFunction.AddParameter("northern.hemisphere", "TRUE", iPosition:=9) ' r-default
         clsDefaultFunction.AddParameter("temp.qtiles", clsRFunctionParameter:=clsRTempQTiles, iPosition:=13)
         clsDefaultFunction.AddParameter("prec.qtiles", clsRFunctionParameter:=clsRPrecQTiles, iPosition:=14)
-
+        clsDefaultFunction.AddParameter("max.missing.days", clsRFunctionParameter:=clsRMaxMissingDays, iPosition:=15)
+        clsDefaultFunction.AddParameter("min.base.data.fraction.present", 0.1, iPosition:=16) ' r-default
         clsDefaultFunction.SetAssignTo("climdex_input")
 
         clsRMaxMissingDays.SetRCommand("c")
@@ -159,9 +158,9 @@ Public Class dlgClimdex
         clsRChar.SetRCommand("as.character")
 
         ' For the sub dialog
-        clsRWriteDf.SetRCommand("InstatDataObject$add_climdex_indices")
+        clsRWriteDf.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_climdex_indices")
         clsRWriteDf.AddParameter("indices", clsRFunctionParameter:=clsRWriteDfIndicesList, iPosition:=1)
-        clsRWriteDf.AddParameter("freq", "annual", iPosition:=2) ' todo: can remove this as it's the r-default
+        clsRWriteDf.AddParameter("freq", Chr(34) & "annual" & Chr(34), iPosition:=2) ' todo: can remove this as it's the r-default
         clsRWriteDfIndicesList.SetRCommand("list")
 
         clsFrostDays.SetPackageName("climdex.pcic")
@@ -285,6 +284,7 @@ Public Class dlgClimdex
 
         'ucrBaseClimdex.clsRsyntax.AddParameter("temp.qtiles", "c(0.1,0.9)")
         'ucrBaseClimdex.clsRsyntax.AddParameter("prec.qtiles", "c(0.95, 0.99)")
+        ucrBase.clsRsyntax.AddToAfterCodes(clsRWriteDf, iPosition:=1)
         bResetSubdialog = True
     End Sub
 
