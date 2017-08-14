@@ -89,7 +89,6 @@ Partial Class sdgCanonicalCorrelation
         'rdoXVariables
         '
         Me.rdoXVariables.AutoSize = True
-        Me.rdoXVariables.Checked = True
         Me.rdoXVariables.Location = New System.Drawing.Point(46, 44)
         Me.rdoXVariables.Name = "rdoXVariables"
         Me.rdoXVariables.Size = New System.Drawing.Size(78, 17)
