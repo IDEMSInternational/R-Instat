@@ -1448,7 +1448,6 @@ Partial Class frmMain
         '
         'OpenNetCDFToolStripMenuItem
         '
-        Me.OpenNetCDFToolStripMenuItem.Enabled = False
         Me.OpenNetCDFToolStripMenuItem.Name = "OpenNetCDFToolStripMenuItem"
         Me.OpenNetCDFToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
         Me.OpenNetCDFToolStripMenuItem.Text = "Open NetCDF..."
