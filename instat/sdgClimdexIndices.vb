@@ -33,165 +33,165 @@ Public Class sdgClimdexIndices
         Dim dctCategoricalPairs As New Dictionary(Of String, String)
 
         'Annual for Max and Min Temperatures
-        ucrChkFrostDays.SetParameter(New RParameter("Frost_Days", clsFrostDays, 0, False), False)
+        ucrChkFrostDays.SetParameter(New RParameter("Frost_Days", clsFrostDays, 0, False), bNewChangeParameterValue:=False)
         ucrChkFrostDays.SetText("Frost Days [1]")
         'dctInputindicesTriples.Add(ucrChkFrostDays.chkCheck.Text, {"Frost_Days", "climdex.fd"}.ToList)
         ucrChkFrostDays.AddParameterPresentCondition(True, "list", True)
         ucrChkFrostDays.AddParameterPresentCondition(False, "list", False)
 
-        ucrChkSummerDays.SetParameter(New RParameter("Summer_Days", clsSummerDays, 1, False), False)
+        ucrChkSummerDays.SetParameter(New RParameter("Summer_Days", clsSummerDays, 1, False), bNewChangeParameterValue:=False)
         ucrChkSummerDays.SetText("Summer Days [2]")
         '        dctInputindicesTriples.Add(ucrChkSummerDays.chkCheck.Text, {"Summer_Days", "climdex.su"}.ToList)
         ucrChkSummerDays.AddParameterPresentCondition(True, "list", True)
         ucrChkSummerDays.AddParameterPresentCondition(False, "list", False)
 
-        ucrChkIcingDays.SetParameter(New RParameter("Icing_Days", clsIcingDays, 2, False), False)
+        ucrChkIcingDays.SetParameter(New RParameter("Icing_Days", clsIcingDays, 2, False), bNewChangeParameterValue:=False)
         ucrChkIcingDays.SetText("Icing Days [3]")
         '        dctInputindicesTriples.Add(ucrChkIcingDays.chkCheck.Text, {"Icing_Days", "climdex.id"}.ToList)
         ucrChkIcingDays.AddParameterPresentCondition(True, "list", True)
         ucrChkIcingDays.AddParameterPresentCondition(False, "list", False)
 
-        ucrChkTropicalNights.SetParameter(New RParameter("Tropical_Nights", clsTropicalNights, 3, False), False)
+        ucrChkTropicalNights.SetParameter(New RParameter("Tropical_Nights", clsTropicalNights, 3, False), bNewChangeParameterValue:=False)
         ucrChkTropicalNights.SetText("Tropical Nights [4]")
         '        dctInputindicesTriples.Add(ucrChkTropicalNights.chkCheck.Text, {"Tropical_Nights", "climdex.tr"}.ToList)
         ucrChkTropicalNights.AddParameterPresentCondition(True, "list", True)
         ucrChkTropicalNights.AddParameterPresentCondition(False, "list", False)
 
-        ucrChkWarmSpellDI.SetParameter(New RParameter("Warm_Spell_Duration_Index", clsWarmSpellDI, 4, False), False)
+        ucrChkWarmSpellDI.SetParameter(New RParameter("Warm_Spell_Duration_Index", clsWarmSpellDI, 4, False), bNewChangeParameterValue:=False)
         ucrChkWarmSpellDI.SetText("Warm Spell Duration Index [14]")
         '        dctInputindicesTriples.Add(ucrChkWarmSpellDI.chkCheck.Text, {"Warm_Spell_Duration_Index", "climdex.wsdi"}.ToList)
         ucrChkWarmSpellDI.AddParameterPresentCondition(True, "list", True)
         ucrChkWarmSpellDI.AddParameterPresentCondition(False, "list", False)
 
-        ucrChkColdSpellDI.SetParameter(New RParameter("Cold_Spell_Duration_Index", clsColdSpellDI, 5, False), False)
+        ucrChkColdSpellDI.SetParameter(New RParameter("Cold_Spell_Duration_Index", clsColdSpellDI, 5, False), bNewChangeParameterValue:=False)
         ucrChkColdSpellDI.SetText("Cold Spell Duration Index [15]")
         '        dctInputindicesTriples.Add(ucrChkColdSpellDI.chkCheck.Text, {"Cold_Spell_Duration_Index", "climdex.csdi"}.ToList)
         ucrChkColdSpellDI.AddParameterPresentCondition(True, "list", True)
         ucrChkColdSpellDI.AddParameterPresentCondition(False, "list", False)
 
-        ucrChkGrowingSeasonLength.SetParameter(New RParameter("Growing_Season_Length", clsGrowingSeasonLength, 6, False), False)
+        ucrChkGrowingSeasonLength.SetParameter(New RParameter("Growing_Season_Length", clsGrowingSeasonLength, 6, False), bNewChangeParameterValue:=False)
         ucrChkGrowingSeasonLength.SetText("Growing Season Length [5]")
         '        dctInputindicesTriples.Add(ucrChkGrowingSeasonLength.chkCheck.Text, {"Growing_Season_Length", "climdex.gsl"}.ToList)
         ucrChkGrowingSeasonLength.AddParameterPresentCondition(True, "list", True)
         ucrChkGrowingSeasonLength.AddParameterPresentCondition(False, "list", False)
 
         ' Annual/Monthly
-        ucrChkMonthlyMaxDailyTMax.SetParameter(New RParameter("Monthly_Maximum_of_Daily_Maximum_Temperature", clsMonthlyMaxDailyTMax, 7, False), False)
+        ucrChkMonthlyMaxDailyTMax.SetParameter(New RParameter("Monthly_Maximum_of_Daily_Maximum_Temperature", clsMonthlyMaxDailyTMax, 7, False), bNewChangeParameterValue:=False)
         ucrChkMonthlyMaxDailyTMax.SetText("Monthly Maximum of Daily Maximum Temperature [6]")
         '        dctInputindicesTriples.Add(ucrChkMonthlyMaxDailyTMax.chkCheck.Text, {"Monthly_Maximum_of_Daily_Maximum_Temperature", "climdex.txx"}.ToList)
         ucrChkMonthlyMaxDailyTMax.AddParameterPresentCondition(True, "list", True)
         ucrChkMonthlyMaxDailyTMax.AddParameterPresentCondition(False, "list", False)
 
-        ucrChkMonthlyMaxDailyTMin.SetParameter(New RParameter("Monthly_Maximum_of_Daily_Minimum_Temperature", clsMonthlyMaxDailyTMin, 8, False), False)
+        ucrChkMonthlyMaxDailyTMin.SetParameter(New RParameter("Monthly_Maximum_of_Daily_Minimum_Temperature", clsMonthlyMaxDailyTMin, 8, False), bNewChangeParameterValue:=False)
         ucrChkMonthlyMaxDailyTMin.SetText("Monthly Maximum of Daily Minimum Temperature [7]")
         '        dctInputindicesTriples.Add(ucrChkMonthlyMaxDailyTMin.chkCheck.Text, {"Monthly_Maximum_of_Daily_Minimum_Temperature", "climdex.txn"}.ToList)
         ucrChkMonthlyMaxDailyTMin.AddParameterPresentCondition(True, "list", True)
         ucrChkMonthlyMaxDailyTMin.AddParameterPresentCondition(False, "list", False)
 
-        ucrChkMonthlyMinDailyTMax.SetParameter(New RParameter("Monthly_Minimum_of_Daily_Maximum_Temperature", clsMonthlyMinDailyTMax, 9, False), False)
+        ucrChkMonthlyMinDailyTMax.SetParameter(New RParameter("Monthly_Minimum_of_Daily_Maximum_Temperature", clsMonthlyMinDailyTMax, 9, False), bNewChangeParameterValue:=False)
         ucrChkMonthlyMinDailyTMax.SetText("Monthly Minimum of Daily Maximum Temperature [8]")
         '        dctInputindicesTriples.Add(ucrChkMonthlyMinDailyTMax.chkCheck.Text, {"Monthly_Minimum_of_Daily_Maximum_Temperature", "climdex.tnx"}.ToList)
         ucrChkMonthlyMinDailyTMax.AddParameterPresentCondition(True, "list", True)
         ucrChkMonthlyMinDailyTMax.AddParameterPresentCondition(False, "list", False)
 
-        ucrChkMonthlyMinDailyTMin.SetParameter(New RParameter("Monthly_Minimum_of_Daily_Minimum_Temperature", clsMonthlyMinDailyTMin, 10, False), False)
+        ucrChkMonthlyMinDailyTMin.SetParameter(New RParameter("Monthly_Minimum_of_Daily_Minimum_Temperature", clsMonthlyMinDailyTMin, 10, False), bNewChangeParameterValue:=False)
         ucrChkMonthlyMinDailyTMin.SetText("Monthly Minimum of Daily Minimum Temperature [9]")
         '        dctInputindicesTriples.Add(ucrChkMonthlyMinDailyTMin.chkCheck.Text, {"Monthly_Minimum_of_Daily_Minimum_Temperature", "climdex.tnn"}.ToList)
         ucrChkMonthlyMinDailyTMin.AddParameterPresentCondition(True, "list", True)
         ucrChkMonthlyMinDailyTMin.AddParameterPresentCondition(False, "list", False)
 
-        ucrChkTminBelow10Percent.SetParameter(New RParameter("Percentage_of_Days_When_Tmin_is_Below_10th_Percentile", clsTminBelow10Percent, 11, False), False)
+        ucrChkTminBelow10Percent.SetParameter(New RParameter("Percentage_of_Days_When_Tmin_is_Below_10th_Percentile", clsTminBelow10Percent, 11, False), bNewChangeParameterValue:=False)
         ucrChkTminBelow10Percent.SetText("Percentage of Days When Tmin is Below 10th Percentile [10]")
         '        dctInputindicesTriples.Add(ucrChkTminBelow10Percent.chkCheck.Text, {"Percentage_of_Days_When_Tmin_is_Below_10th_Percentile", "climdex.tn10p"}.ToList)
         ucrChkTminBelow10Percent.AddParameterPresentCondition(True, "list", True)
         ucrChkTminBelow10Percent.AddParameterPresentCondition(False, "list", False)
 
-        ucrChkTmaxBelow10Percent.SetParameter(New RParameter("Percentage_of_Days_When_Tmax_is_Below_10th_Percentile", clsTmaxBelow10Percent, 12, False), False)
+        ucrChkTmaxBelow10Percent.SetParameter(New RParameter("Percentage_of_Days_When_Tmax_is_Below_10th_Percentile", clsTmaxBelow10Percent, 12, False), bNewChangeParameterValue:=False)
         ucrChkTmaxBelow10Percent.SetText("Percentage of Days When Tmax is Below 10th Percentile [11]")
         '        dctInputindicesTriples.Add(ucrChkTmaxBelow10Percent.chkCheck.Text, {"Percentage_of_Days_When_Tmax_is_Below_10th_Percentile", "climdex.tx10p"}.ToList)
         ucrChkTmaxBelow10Percent.AddParameterPresentCondition(True, "list", True)
         ucrChkTmaxBelow10Percent.AddParameterPresentCondition(False, "list", False)
 
-        ucrChkTminAbove90Percent.SetParameter(New RParameter("Percentage_of_Days_When_Tmin_is_Above_90th_Percentile", clsTminAbove90Percent, 13, False), False)
+        ucrChkTminAbove90Percent.SetParameter(New RParameter("Percentage_of_Days_When_Tmin_is_Above_90th_Percentile", clsTminAbove90Percent, 13, False), bNewChangeParameterValue:=False)
         ucrChkTminAbove90Percent.SetText("Percentage of Days When Tmin is Above 90th Percentile [12]")
         '        dctInputindicesTriples.Add(ucrChkTminAbove90Percent.chkCheck.Text, {"Percentage_of_Days_When_Tmin_is_Above_90th_Percentile", "climdex.tn90p"}.ToList)
         ucrChkTminAbove90Percent.AddParameterPresentCondition(True, "list", True)
         ucrChkTminAbove90Percent.AddParameterPresentCondition(False, "list", False)
 
-        ucrChkTmaxAbove90Percent.SetParameter(New RParameter("Percentage_of_Days_When_Tmax_is_Above_90th_Percentile", clsTmaxAbove90Percent, 14, False), False)
+        ucrChkTmaxAbove90Percent.SetParameter(New RParameter("Percentage_of_Days_When_Tmax_is_Above_90th_Percentile", clsTmaxAbove90Percent, 14, False), bNewChangeParameterValue:=False)
         ucrChkTmaxAbove90Percent.SetText("Percentage of Days When Tmax is Above 90th Percentile [13]")
         '        dctInputindicesTriples.Add(ucrChkTmaxAbove90Percent.chkCheck.Text, {"Percentage_of_Days_When_Tmax_is_Above_90th_Percentile", "climdex.tx90p"}.ToList)
         ucrChkTmaxAbove90Percent.AddParameterPresentCondition(True, "list", True)
         ucrChkTmaxAbove90Percent.AddParameterPresentCondition(False, "list", False)
 
-        ucrChkMeanDiurnalTempRange.SetParameter(New RParameter("Mean_Diurnal_Temperature_Range", clsMeanDiurnalTempRange, 15, False), False)
+        ucrChkMeanDiurnalTempRange.SetParameter(New RParameter("Mean_Diurnal_Temperature_Range", clsMeanDiurnalTempRange, 15, False), bNewChangeParameterValue:=False)
         ucrChkMeanDiurnalTempRange.SetText("Mean Diurnal Temperature Range [16]")
         '        dctInputindicesTriples.Add(ucrChkMeanDiurnalTempRange.chkCheck.Text, {"Mean_Diurnal_Temperature_Range", "climdex.dtr"}.ToList)
         ucrChkMeanDiurnalTempRange.AddParameterPresentCondition(True, "list", True)
         ucrChkMeanDiurnalTempRange.AddParameterPresentCondition(False, "list", False)
 
         ' Precipitation tab:
-        ucrChkMonthlyMax1dayPrec.SetParameter(New RParameter("Monthly_Maximum_1day_Precipitation", clsMonthlyMax1DayPrec, 16, False), False)
+        ucrChkMonthlyMax1dayPrec.SetParameter(New RParameter("Monthly_Maximum_1day_Precipitation", clsMonthlyMax1DayPrec, 16, False), bNewChangeParameterValue:=False)
         ucrChkMonthlyMax1dayPrec.SetText("Monthly Maximum 1-day Precipitation [17]")
         '        dctInputindicesTriples.Add(ucrChkMonthlyMax1dayPrec.chkCheck.Text, {"Monthly_Maximum_1day_Precipitation", "climdex.rx1day"}.ToList)
         ucrChkMonthlyMax1dayPrec.AddParameterPresentCondition(True, "list", True)
         ucrChkMonthlyMax1dayPrec.AddParameterPresentCondition(False, "list", False)
 
-        ucrChkMonthlyMax5dayPrec.SetParameter(New RParameter("Monthly_Maximum_5day_Precipitation", clsMonthlyMax5DayPrec, 17, False), False)
+        ucrChkMonthlyMax5dayPrec.SetParameter(New RParameter("Monthly_Maximum_5day_Precipitation", clsMonthlyMax5DayPrec, 17, False), bNewChangeParameterValue:=False)
         ucrChkMonthlyMax5dayPrec.SetText("Monthly Maximum Consecutive 5-day Precipitation [18]")
         '        dctInputindicesTriples.Add(ucrChkMonthlyMax5dayPrec.chkCheck.Text, {"Monthly_Maximum_Consecutive_5day_Precipitation", "climdex.rx5day"}.ToList)
         ucrChkMonthlyMax5dayPrec.AddParameterPresentCondition(True, "list", True)
         ucrChkMonthlyMax5dayPrec.AddParameterPresentCondition(False, "list", False)
 
-        ucrChkSimplePrecII.SetParameter(New RParameter("Simple_Precipitation_Intensity_Index", clsSimplePrecII, 18, False), False)
+        ucrChkSimplePrecII.SetParameter(New RParameter("Simple_Precipitation_Intensity_Index", clsSimplePrecII, 18, False), bNewChangeParameterValue:=False)
         ucrChkSimplePrecII.SetText("Simple Precipitation Intensity Index [19]")
         '        dctInputindicesTriples.Add(ucrChkSimplePrecII.chkCheck.Text, {"Simple_Precipitation_Intensity_Index", "climdex.sdii"}.ToList)
         ucrChkSimplePrecII.AddParameterPresentCondition(True, "list", True)
         ucrChkSimplePrecII.AddParameterPresentCondition(False, "list", False)
 
-        ucrChkPrecExceed10mm.SetParameter(New RParameter("Precipitation_Exceeding_10mm_Per_Day", clsPrecExceed10mm, 19, False), False)
+        ucrChkPrecExceed10mm.SetParameter(New RParameter("Precipitation_Exceeding_10mm_Per_Day", clsPrecExceed10mm, 19, False), bNewChangeParameterValue:=False)
         ucrChkPrecExceed10mm.SetText("Precipitation Exceeding 10mm Per Day [20]")
         '        dctInputindicesTriples.Add(ucrChkPrecExceed10mm.chkCheck.Text, {"Precipitation_Exceeding_10mm_Per_Day", "climdex.r10mm"}.ToList)
         ucrChkPrecExceed10mm.AddParameterPresentCondition(True, "list", True)
         ucrChkPrecExceed10mm.AddParameterPresentCondition(False, "list", False)
 
-        ucrChkPrecExceed20mm.SetParameter(New RParameter("Precipitation_Exceeding_20mm_Per_Day", clsPrecExceed20mm, 20, False), False)
+        ucrChkPrecExceed20mm.SetParameter(New RParameter("Precipitation_Exceeding_20mm_Per_Day", clsPrecExceed20mm, 20, False), bNewChangeParameterValue:=False)
         ucrChkPrecExceed20mm.SetText("Precipitation Exceeding 20mm Per Day [21]")
         '        dctInputindicesTriples.Add(ucrChkPrecExceed20mm.chkCheck.Text, {"Precipitation_Exceeding_20mm_Per_Day", "climdex.r20mm"}.ToList)
         ucrChkPrecExceed20mm.AddParameterPresentCondition(True, "list", True)
         ucrChkPrecExceed20mm.AddParameterPresentCondition(False, "list", False)
 
-        ucrChkPrecExceedSpecifiedA.SetParameter(New RParameter("Precipitation_Exceeding_a_Specified_Amount_Per_Day", clsPrecExceedSpecifiedA, 21, False), False)
+        ucrChkPrecExceedSpecifiedA.SetParameter(New RParameter("Precipitation_Exceeding_a_Specified_Amount_Per_Day", clsPrecExceedSpecifiedA, 21, False), bNewChangeParameterValue:=False)
         ucrChkPrecExceedSpecifiedA.SetText("Precipitation Exceeding a Specified Amount Per Day [22]")
         '        dctInputindicesTriples.Add(ucrChkPrecExceedSpecifiedA.chkCheck.Text, {"Precipitation_Exceeding_a_Specified_Amount_Per_Day", "climdex.rnnmm"}.ToList)
         ucrChkPrecExceedSpecifiedA.AddParameterPresentCondition(True, "list", True)
         ucrChkPrecExceedSpecifiedA.AddParameterPresentCondition(False, "list", False)
 
-        ucrChkMaxDrySpell.SetParameter(New RParameter("Maximum_Length_of_Dry_Spell", clsMaxDrySpell, 22, False), False)
+        ucrChkMaxDrySpell.SetParameter(New RParameter("Maximum_Length_of_Dry_Spell", clsMaxDrySpell, 22, False), bNewChangeParameterValue:=False)
         ucrChkMaxDrySpell.SetText("Maximum Length of Dry Spell [23]")
         '        dctInputindicesTriples.Add(ucrChkMaxDrySpell.chkCheck.Text, {"Maximum_Length_of_Dry_Spell", "climdex.cdd"}.ToList)
         ucrChkMaxDrySpell.AddParameterPresentCondition(True, "list", True)
         ucrChkMaxDrySpell.AddParameterPresentCondition(False, "list", False)
 
-        ucrChkMaxWetSpell.SetParameter(New RParameter("Maximum_Length_of_Wet_Spell", clsMaxWetSpell, 23, False), False)
+        ucrChkMaxWetSpell.SetParameter(New RParameter("Maximum_Length_of_Wet_Spell", clsMaxWetSpell, 23, False), bNewChangeParameterValue:=False)
         ucrChkMaxWetSpell.SetText("Maximum Length of Wet Spell [24]")
         '        dctInputindicesTriples.Add(ucrChkMaxWetSpell.chkCheck.Text, {"Maximum_Length_of_Wet_Spell", "climdex.cwd"}.ToList)
         ucrChkMaxWetSpell.AddParameterPresentCondition(True, "list", True)
         ucrChkMaxWetSpell.AddParameterPresentCondition(False, "list", False)
 
-        ucrChkPrecExceed95Percent.SetParameter(New RParameter("Total_Daily_Precipitation_Exceeding_95th_Percentile_Threshold", clsPrecExceed95Percent, 24, False), False)
+        ucrChkPrecExceed95Percent.SetParameter(New RParameter("Total_Daily_Precipitation_Exceeding_95th_Percentile_Threshold", clsPrecExceed95Percent, 24, False), bNewChangeParameterValue:=False)
         ucrChkPrecExceed95Percent.SetText("Total Daily Precipitation Exceeding 95th Percentile Threshold [25]")
         '        dctInputindicesTriples.Add(ucrChkPrecExceed95Percent.chkCheck.Text, {"Total_Daily_Precipitation_Exceeding_95th_Percentile_Threshold", "climdex.r95ptot"}.ToList)
         ucrChkPrecExceed95Percent.AddParameterPresentCondition(True, "list", True)
         ucrChkPrecExceed95Percent.AddParameterPresentCondition(False, "list", False)
 
-        ucrChkPrecExceed99Percent.SetParameter(New RParameter("Total_Daily_Precipitation_Exceeding_99th_Percentile_Threshold", clsPrecExceed99Percent, 25, False), False)
+        ucrChkPrecExceed99Percent.SetParameter(New RParameter("Total_Daily_Precipitation_Exceeding_99th_Percentile_Threshold", clsPrecExceed99Percent, 25, False), bNewChangeParameterValue:=False)
         ucrChkPrecExceed99Percent.SetText("Total Daily Precipitation Exceeding 99th Percentile Threshold [26]")
         '        dctInputindicesTriples.Add(ucrChkPrecExceed99Percent.chkCheck.Text, {"Total_Daily_Precipitation_Exceeding_99th_Percentile_Threshold", "climdex.r99ptot"}.ToList)
         ucrChkPrecExceed99Percent.AddParameterPresentCondition(True, "list", True)
         ucrChkPrecExceed99Percent.AddParameterPresentCondition(False, "list", False)
 
-        ucrChkTotalDailyPrec.SetParameter(New RParameter("Total_Daily_Precipitation", clsTotalDailyPrec, 26, False), False)
+        ucrChkTotalDailyPrec.SetParameter(New RParameter("Total_Daily_Precipitation", clsTotalDailyPrec, 26, False), bNewChangeParameterValue:=False)
         ucrChkTotalDailyPrec.SetText("Total Daily Precipitation [27]")
         '        dctInputindicesTriples.Add(ucrChkTotalDailyPrec.chkCheck.Text, {"Total_Daily_Precipitation", "climdex.prcptot"}.ToList)
         ucrChkTotalDailyPrec.AddParameterPresentCondition(True, "list", True)
@@ -369,80 +369,80 @@ Public Class sdgClimdexIndices
         ucrChkIcingDays.SetParameterValue(clsIcingDays)
         ucrChkIcingDays.SetRCode(clsRWriteDfIndicesList, bReset, bCloneIfNeeded:=True)
 
-        ucrChkIcingDays.SetParameterValue(clsTropicalNights)
+        ucrChkTropicalNights.SetParameterValue(clsTropicalNights)
         ucrChkTropicalNights.SetRCode(clsRWriteDfIndicesList, bReset, bCloneIfNeeded:=True)
 
-        ucrChkIcingDays.SetParameterValue(clsWarmSpellDI)
+        ucrChkWarmSpellDI.SetParameterValue(clsWarmSpellDI)
         ucrChkWarmSpellDI.SetRCode(clsRWriteDfIndicesList, bReset, bCloneIfNeeded:=True)
         ucrChkMaxSpellSpanYears.SetRCode(clsWarmSpellDI, bReset, bCloneIfNeeded:=True)
 
-        ucrChkIcingDays.SetParameterValue(clsColdSpellDI)
+        ucrChkColdSpellDI.SetParameterValue(clsColdSpellDI)
         ucrChkColdSpellDI.SetRCode(clsRWriteDfIndicesList, bReset, bCloneIfNeeded:=True)
 
-        ucrChkIcingDays.SetParameterValue(clsGrowingSeasonLength)
+        ucrChkGrowingSeasonLength.SetParameterValue(clsGrowingSeasonLength)
         ucrChkGrowingSeasonLength.SetRCode(clsRWriteDfIndicesList, bReset, bCloneIfNeeded:=True)
         ucrInputGSLMode.SetRCode(clsGrowingSeasonLength, bReset, bCloneIfNeeded:=True)
 
-        ucrChkIcingDays.SetParameterValue(clsMonthlyMaxDailyTMax)
+        ucrChkMonthlyMaxDailyTMax.SetParameterValue(clsMonthlyMaxDailyTMax)
         ucrChkMonthlyMaxDailyTMax.SetRCode(clsRWriteDfIndicesList, bReset, bCloneIfNeeded:=True)
 
-        ucrChkIcingDays.SetParameterValue(clsMonthlyMaxDailyTMin)
+        ucrChkMonthlyMaxDailyTMin.SetParameterValue(clsMonthlyMaxDailyTMin)
         ucrChkMonthlyMaxDailyTMin.SetRCode(clsRWriteDfIndicesList, bReset, bCloneIfNeeded:=True)
 
-        ucrChkIcingDays.SetParameterValue(clsMonthlyMinDailyTMax)
+        ucrChkMonthlyMinDailyTMax.SetParameterValue(clsMonthlyMinDailyTMax)
         ucrChkMonthlyMinDailyTMax.SetRCode(clsRWriteDfIndicesList, bReset, bCloneIfNeeded:=True)
 
-        ucrChkIcingDays.SetParameterValue(clsMonthlyMinDailyTMin)
+        ucrChkMonthlyMinDailyTMin.SetParameterValue(clsMonthlyMinDailyTMin)
         ucrChkMonthlyMinDailyTMin.SetRCode(clsRWriteDfIndicesList, bReset, bCloneIfNeeded:=True)
 
-        ucrChkIcingDays.SetParameterValue(clsTminBelow10Percent)
+        ucrChkTminBelow10Percent.SetParameterValue(clsTminBelow10Percent)
         ucrChkTminBelow10Percent.SetRCode(clsRWriteDfIndicesList, bReset, bCloneIfNeeded:=True)
 
-        ucrChkIcingDays.SetParameterValue(clsTmaxBelow10Percent)
+        ucrChkTmaxBelow10Percent.SetParameterValue(clsTmaxBelow10Percent)
         ucrChkTmaxBelow10Percent.SetRCode(clsRWriteDfIndicesList, bReset, bCloneIfNeeded:=True)
 
-        ucrChkIcingDays.SetParameterValue(clsTminAbove90Percent)
+        ucrChkTminAbove90Percent.SetParameterValue(clsTminAbove90Percent)
         ucrChkTminAbove90Percent.SetRCode(clsRWriteDfIndicesList, bReset, bCloneIfNeeded:=True)
 
-        ucrChkIcingDays.SetParameterValue(clsTmaxAbove90Percent)
+        ucrChkTmaxAbove90Percent.SetParameterValue(clsTmaxAbove90Percent)
         ucrChkTmaxAbove90Percent.SetRCode(clsRWriteDfIndicesList, bReset, bCloneIfNeeded:=True)
 
-        ucrChkIcingDays.SetParameterValue(clsMeanDiurnalTempRange)
+        ucrChkMeanDiurnalTempRange.SetParameterValue(clsMeanDiurnalTempRange)
         ucrChkMeanDiurnalTempRange.SetRCode(clsRWriteDfIndicesList, bReset, bCloneIfNeeded:=True)
 
-        ucrChkIcingDays.SetParameterValue(clsMonthlyMax1DayPrec)
+        ucrChkMonthlyMax1dayPrec.SetParameterValue(clsMonthlyMax1DayPrec)
         ucrChkMonthlyMax1dayPrec.SetRCode(clsRWriteDfIndicesList, bReset, bCloneIfNeeded:=True)
 
-        ucrChkIcingDays.SetParameterValue(clsMonthlyMax5DayPrec)
+        ucrChkMonthlyMax5dayPrec.SetParameterValue(clsMonthlyMax5DayPrec)
         ucrChkMonthlyMax5dayPrec.SetRCode(clsRWriteDfIndicesList, bReset, bCloneIfNeeded:=True)
         ucrChkCentreMean.SetRCode(clsMonthlyMax5DayPrec, bReset, bCloneIfNeeded:=True)
 
-        ucrChkIcingDays.SetParameterValue(clsSimplePrecII)
+        ucrChkSimplePrecII.SetParameterValue(clsSimplePrecII)
         ucrChkSimplePrecII.SetRCode(clsRWriteDfIndicesList, bReset, bCloneIfNeeded:=True)
 
-        ucrChkIcingDays.SetParameterValue(clsPrecExceed10mm)
+        ucrChkPrecExceed10mm.SetParameterValue(clsPrecExceed10mm)
         ucrChkPrecExceed10mm.SetRCode(clsRWriteDfIndicesList, bReset, bCloneIfNeeded:=True)
 
-        ucrChkIcingDays.SetParameterValue(clsPrecExceed20mm)
+        ucrChkPrecExceed20mm.SetParameterValue(clsPrecExceed20mm)
         ucrChkPrecExceed20mm.SetRCode(clsRWriteDfIndicesList, bReset, bCloneIfNeeded:=True)
 
-        ucrChkIcingDays.SetParameterValue(clsPrecExceedSpecifiedA)
+        ucrChkPrecExceedSpecifiedA.SetParameterValue(clsPrecExceedSpecifiedA)
         ucrChkPrecExceedSpecifiedA.SetRCode(clsRWriteDfIndicesList, bReset, bCloneIfNeeded:=True)
         ucrNudThreshold.SetRCode(clsPrecExceedSpecifiedA, bReset, bCloneIfNeeded:=True)
 
-        ucrChkIcingDays.SetParameterValue(clsMaxDrySpell)
+        ucrChkMaxDrySpell.SetParameterValue(clsMaxDrySpell)
         ucrChkMaxDrySpell.SetRCode(clsRWriteDfIndicesList, bReset, bCloneIfNeeded:=True)
 
-        ucrChkIcingDays.SetParameterValue(clsMaxWetSpell)
+        ucrChkMaxWetSpell.SetParameterValue(clsMaxWetSpell)
         ucrChkMaxWetSpell.SetRCode(clsRWriteDfIndicesList, bReset, bCloneIfNeeded:=True)
 
-        ucrChkIcingDays.SetParameterValue(clsPrecExceed95Percent)
+        ucrChkPrecExceed95Percent.SetParameterValue(clsPrecExceed95Percent)
         ucrChkPrecExceed95Percent.SetRCode(clsRWriteDfIndicesList, bReset, bCloneIfNeeded:=True)
 
-        ucrChkIcingDays.SetParameterValue(clsPrecExceed99Percent)
+        ucrChkPrecExceed99Percent.SetParameterValue(clsPrecExceed99Percent)
         ucrChkPrecExceed99Percent.SetRCode(clsRWriteDfIndicesList, bReset, bCloneIfNeeded:=True)
 
-        ucrChkIcingDays.SetParameterValue(clsTotalDailyPrec)
+        ucrChkTotalDailyPrec.SetParameterValue(clsTotalDailyPrec)
         ucrChkTotalDailyPrec.SetRCode(clsRWriteDfIndicesList, bReset, bCloneIfNeeded:=True)
 
         ' For base the function
@@ -466,13 +466,6 @@ Public Class sdgClimdexIndices
         ucrInputPrecQtiles.SetRCode(clsRPrecQTiles, bReset, bCloneIfNeeded:=True)
 
         IndicesType()
-
-        'clsRListDF.AddParameter(dctInputindicesTriples.Item(ucrchkTemp.chkCheck.Text)(0), clsRFunctionParameter:=clsIndex)
-        'If bSave Then
-        '    frmMain.clsRLink.RunScript(clsRWriteDf.ToScript(), 0)
-        'Else
-        '    frmMain.clsRLink.RunScript(clsIndex.ToScript(), 2)
-        'End If
 
         If bReset Then
             tbpClimdex.SelectedIndex = 0
@@ -561,7 +554,7 @@ Public Class sdgClimdexIndices
             clsHelp.RemoveParameterByName("topic")
         End If
         clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
-        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="dlgClimdexIndices Opening help page climdex indices")
+        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Opening help page climdex indices generated by sub dialog Climdex Indices")
     End Sub
 
     Public ReadOnly Property IndicesCount As Integer
