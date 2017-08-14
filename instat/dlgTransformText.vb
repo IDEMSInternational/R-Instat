@@ -286,8 +286,8 @@ Public Class dlgTransformText
     End Sub
 
     Private Sub NewDefaultName()
-        If (Not ucrNewColName.bUserTyped) AndAlso ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-            ucrNewColName.SetName(ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_Transformed")
+        If (Not ucrNewColName.bUserTyped) AndAlso Not ucrReceiverTransformText.IsEmpty Then
+            ucrNewColName.SetName(ucrReceiverTransformText.GetVariableNames(bWithQuotes:=False) & "_transformed")
         End If
     End Sub
 
@@ -393,7 +393,7 @@ Public Class dlgTransformText
         DialogSize()
     End Sub
 
-    Private Sub ucrSelector_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForTransformText.ControlValueChanged
+    Private Sub ucrReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverTransformText.ControlValueChanged
         NewDefaultName()
     End Sub
 

@@ -80,7 +80,7 @@ Partial Class frmEditor
         Me.mnuRemoveCurrentFilter = New System.Windows.Forms.ToolStripMenuItem()
         Me.statusColumnMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.insertSheet = New System.Windows.Forms.ToolStripMenuItem()
-        Me.deleteSheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.deleteDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.renameSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.reorderSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.CopySheet = New System.Windows.Forms.ToolStripMenuItem()
@@ -112,6 +112,7 @@ Partial Class frmEditor
         Me.grdData.SheetTabNewButtonVisible = False
         Me.grdData.SheetTabVisible = True
         Me.grdData.SheetTabWidth = 200
+        Me.grdData.ShowScrollEndSpacing = True
         Me.grdData.Size = New System.Drawing.Size(441, 261)
         Me.grdData.TabIndex = 0
         '
@@ -344,7 +345,7 @@ Partial Class frmEditor
         '
         'statusColumnMenu
         '
-        Me.statusColumnMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.insertSheet, Me.deleteSheet, Me.renameSheet, Me.reorderSheet, Me.CopySheet, Me.HideSheet, Me.unhideSheet, Me.ViewSheet})
+        Me.statusColumnMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.insertSheet, Me.deleteDataFrame, Me.renameSheet, Me.reorderSheet, Me.CopySheet, Me.HideSheet, Me.unhideSheet, Me.ViewSheet})
         Me.statusColumnMenu.Name = "statusColumnMenu"
         Me.statusColumnMenu.Size = New System.Drawing.Size(163, 180)
         '
@@ -354,11 +355,11 @@ Partial Class frmEditor
         Me.insertSheet.Size = New System.Drawing.Size(162, 22)
         Me.insertSheet.Text = "Insert..."
         '
-        'deleteSheet
+        'deleteDataFrame
         '
-        Me.deleteSheet.Name = "deleteSheet"
-        Me.deleteSheet.Size = New System.Drawing.Size(162, 22)
-        Me.deleteSheet.Text = "Delete"
+        Me.deleteDataFrame.Name = "deleteDataFrame"
+        Me.deleteDataFrame.Size = New System.Drawing.Size(162, 22)
+        Me.deleteDataFrame.Text = "Delete"
         '
         'renameSheet
         '
@@ -462,7 +463,7 @@ Partial Class frmEditor
     Private WithEvents mnuDeleteRows As ToolStripMenuItem
     Friend WithEvents statusColumnMenu As ContextMenuStrip
     Friend WithEvents insertSheet As ToolStripMenuItem
-    Friend WithEvents deleteSheet As ToolStripMenuItem
+    Friend WithEvents deleteDataFrame As ToolStripMenuItem
     Friend WithEvents renameSheet As ToolStripMenuItem
     Friend WithEvents mnuColumnRename As ToolStripMenuItem
     Friend WithEvents mnuConvertText As ToolStripMenuItem

@@ -29,6 +29,7 @@ Public Class dlgRenameDataFrame
             SetDefaults()
         End If
         SetRCodeforControls(bReset)
+        CheckAutoName()
         bReset = False
         autoTranslate(Me)
     End Sub
@@ -53,8 +54,6 @@ Public Class dlgRenameDataFrame
         ucrInputNewName.Reset()
         ucrDataFrameToRename.Reset()
         ucrInputLabel.Reset()
-        ucrInputLabel.SetName("")
-        CheckAutoName()
 
         clsRename.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_dataframe")
 
@@ -66,7 +65,7 @@ Public Class dlgRenameDataFrame
     End Sub
 
     Private Sub TestOKEnabled()
-        If ((Not ucrInputNewName.IsEmpty) AndAlso (ucrDataFrameToRename.cboAvailableDataFrames.Text <> "")) AndAlso (Not ucrDataFrameToRename.cboAvailableDataFrames.Items.Contains(ucrInputNewName.GetText)) Then
+        If ((Not ucrInputNewName.IsEmpty) AndAlso (ucrDataFrameToRename.cboAvailableDataFrames.Text <> "")) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -76,6 +75,7 @@ Public Class dlgRenameDataFrame
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeforControls(True)
+        CheckAutoName()
         TestOKEnabled()
     End Sub
 
