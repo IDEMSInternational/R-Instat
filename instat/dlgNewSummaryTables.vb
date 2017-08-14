@@ -61,7 +61,7 @@ Public Class dlgNewSummaryTables
         ucrReceiverFactors.SetDataType("factor")
 
         ucrNudColumnFactors.SetParameter(New RParameter("n_column_factors", 4))
-        ucrNudColumnFactors.SetRDefault(0)
+        ucrNudColumnFactors.SetRDefault(1)
 
         ucrChkStoreResults.SetParameter(New RParameter("store_results", 5))
         ucrChkStoreResults.SetText("Store Results in Data Frame")
@@ -250,6 +250,6 @@ Public Class dlgNewSummaryTables
     End Sub
 
     Private Sub SetMaxColumnFactors()
-        ucrNudColumnFactors.Maximum = ucrReceiverFactors.lstSelectedVariables.Items.Count
+        ucrNudColumnFactors.Maximum = Math.Max(1, ucrReceiverFactors.lstSelectedVariables.Items.Count)
     End Sub
 End Class

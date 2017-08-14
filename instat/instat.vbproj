@@ -193,6 +193,12 @@
     <Compile Include="dlgCliData.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgClimaticBoxPlot.Designer.vb">
+      <DependentUpon>dlgClimaticBoxPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticBoxPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgClimaticSummary.Designer.vb">
       <DependentUpon>dlgClimaticSummary.vb</DependentUpon>
     </Compile>
@@ -341,6 +347,12 @@
       <DependentUpon>dlgExtremesClimatic.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgExtremesClimatic.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgSummaryofDailydata.Designer.vb">
+      <DependentUpon>dlgSummaryofDailydata.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSummaryofDailydata.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgViewLabelsAndLevels.Designer.vb">
@@ -746,6 +758,12 @@
     <Compile Include="sdgOneWayFrequencies.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgOpenNetCDF.Designer.vb">
+      <DependentUpon>sdgOpenNetCDF.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgOpenNetCDF.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgThemes.Designer.vb">
       <DependentUpon>sdgThemes.vb</DependentUpon>
     </Compile>
@@ -902,10 +920,10 @@
     <Compile Include="dlgDeleteRowsOrColums.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgDeleteSheet.Designer.vb">
-      <DependentUpon>dlgDeleteSheet.vb</DependentUpon>
+    <Compile Include="dlgDeleteDataFrames.Designer.vb">
+      <DependentUpon>dlgDeleteDataFrames.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgDeleteSheet.vb">
+    <Compile Include="dlgDeleteDataFrames.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgExportDataset.Designer.vb">
@@ -2349,6 +2367,9 @@
     <EmbeddedResource Include="dlgCliData.resx">
       <DependentUpon>dlgCliData.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticBoxPlot.resx">
+      <DependentUpon>dlgClimaticBoxPlot.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgClimaticSummary.resx">
       <DependentUpon>dlgClimaticSummary.vb</DependentUpon>
     </EmbeddedResource>
@@ -2484,14 +2505,14 @@
     <EmbeddedResource Include="dlgDeleteRowsOrColums.sw-KE.resx">
       <DependentUpon>dlgDeleteRowsOrColums.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteSheet.fr-FR.resx">
-      <DependentUpon>dlgDeleteSheet.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDeleteDataFrames.fr-FR.resx">
+      <DependentUpon>dlgDeleteDataFrames.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteSheet.resx">
-      <DependentUpon>dlgDeleteSheet.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDeleteDataFrames.resx">
+      <DependentUpon>dlgDeleteDataFrames.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteSheet.sw-KE.resx">
-      <DependentUpon>dlgDeleteSheet.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDeleteDataFrames.sw-KE.resx">
+      <DependentUpon>dlgDeleteDataFrames.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCorruptionDescribe.resx">
       <DependentUpon>dlgCorruptionDescribe.vb</DependentUpon>
@@ -2552,6 +2573,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExtremesClimatic.resx">
       <DependentUpon>dlgExtremesClimatic.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSummaryofDailydata.resx">
+      <DependentUpon>dlgSummaryofDailydata.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgViewLabelsAndLevels.resx">
       <DependentUpon>dlgViewLabelsAndLevels.vb</DependentUpon>
@@ -3239,6 +3263,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgOneWayFrequencies.resx">
       <DependentUpon>sdgOneWayFrequencies.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgOpenNetCDF.resx">
+      <DependentUpon>sdgOpenNetCDF.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSummaries.fr-FR.resx">
       <DependentUpon>sdgSummaries.vb</DependentUpon>
