@@ -117,7 +117,7 @@ Public Class clsGridLink
 
             If (bGrdDataExists AndAlso (bGrdDataChanged OrElse bRDataChanged)) OrElse (bGrdVariablesMetadataExists AndAlso (bGrdVariablesMetadataChanged OrElse bRVariablesMetadataChanged)) Then
                 expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataNames.ToScript(), bSilent:=True)
-                If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
+                If expTemp IsNot Nothing Then
                     lstDataNames = expTemp.AsList
                 Else
                     MsgBox("Error: Could not retrieve data frames from R. Data displayed in spreadsheet may not be up to date." & Environment.NewLine & "We strongly suggest restarting R-Instat before continuing.", MsgBoxStyle.Exclamation, "Cannot retrieve data")
