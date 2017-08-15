@@ -77,15 +77,11 @@ Public Class dlgView
         ucrPnlViewData.AddFunctionNamesCondition(rdoViewAll, {"head", "tail", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data"}, False)
         ucrPnlViewData.AddFunctionNamesCondition(rdoViewAll, "sjt.df", False)
 
-        'ucrPnlViewData.AddParameterIsRFunctionCondition(rdoViewAll, "x")
-        'ucrPnlViewData.AddParameterPresentCondition(rdoViewAll, "title")
+        ucrPnlViewData.AddParameterValueFunctionNamesCondition(rdoViewAll, "x", frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+        ucrPnlViewData.AddParameterValueFunctionNamesCondition(rdoViewSelectedColumnsRows, "x", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
         ucrPnlViewData.AddFunctionNamesCondition(rdoViewSelectedColumnsRows, {"head", "tail", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data"})
         ucrPnlViewData.AddFunctionNamesCondition(rdoViewSelectedColumnsRows, "sjt.df")
-        'ucrPnlViewData.AddParameterPresentCondition(rdoViewSelectedColumnsRows, "x")
-        'ucrPnlViewData.bAllowNonConditionValues = True
-
-        clsViewAllFunction.AddParameter("x", clsRFunctionParameter:=ucrSelectorForView.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-
+        ucrPnlViewData.bAllowNonConditionValues = True
 
         ucrPnlViewData.AddToLinkedControls(ucrReceiverView, {rdoViewSelectedColumnsRows}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrReceiverView.SetLinkedDisplayControl(lblSelected)
@@ -137,6 +133,7 @@ Public Class dlgView
 
         clsViewAllFunction.SetPackageName("utils")
         clsViewAllFunction.SetRCommand("View")
+        clsViewAllFunction.AddParameter("x", clsRFunctionParameter:=ucrSelectorForView.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSeparateWindowFunction)
     End Sub
@@ -156,7 +153,7 @@ Public Class dlgView
 
         DataFrameLength()
         ChangeFunctionParameters()
-        ucrPnlViewData.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset, bReset)
+        ucrPnlViewData.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         bControlsUpdated = True
     End Sub
 
