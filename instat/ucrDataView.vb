@@ -606,6 +606,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub SortToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SortToolStripMenuItem.Click
+        dlgSort.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
         dlgSort.SetCurrentDataframe(grdCurrSheet.Name)
         dlgSort.ShowDialog()
     End Sub
