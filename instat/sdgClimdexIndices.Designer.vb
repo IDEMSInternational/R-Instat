@@ -43,7 +43,6 @@ Partial Class sdgClimdexIndices
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.tbpPrecipitation = New System.Windows.Forms.TabPage()
         Me.grpPrecAnnual = New System.Windows.Forms.GroupBox()
-        Me.ucrNudThreshold = New instat.ucrNud()
         Me.lblThreshold = New System.Windows.Forms.Label()
         Me.ucrChkPrecExceedSpecifiedA = New instat.ucrCheck()
         Me.ucrChkMaxDrySpell = New instat.ucrCheck()
@@ -111,6 +110,7 @@ Partial Class sdgClimdexIndices
         Me.lblN = New System.Windows.Forms.Label()
         Me.tbpClimdex = New System.Windows.Forms.TabControl()
         Me.ucrButtonsClimdexIndices = New instat.ucrButtonsSubdialogue()
+        Me.ucrInputThreshold = New instat.ucrInputTextBox()
         Me.tbpPrecipitation.SuspendLayout()
         Me.grpPrecAnnual.SuspendLayout()
         Me.grpPrecAnnualMonthly.SuspendLayout()
@@ -153,7 +153,7 @@ Partial Class sdgClimdexIndices
         '
         'grpPrecAnnual
         '
-        Me.grpPrecAnnual.Controls.Add(Me.ucrNudThreshold)
+        Me.grpPrecAnnual.Controls.Add(Me.ucrInputThreshold)
         Me.grpPrecAnnual.Controls.Add(Me.lblThreshold)
         Me.grpPrecAnnual.Controls.Add(Me.ucrChkPrecExceedSpecifiedA)
         Me.grpPrecAnnual.Controls.Add(Me.ucrChkMaxDrySpell)
@@ -170,18 +170,6 @@ Partial Class sdgClimdexIndices
         Me.grpPrecAnnual.TabIndex = 1
         Me.grpPrecAnnual.TabStop = False
         Me.grpPrecAnnual.Text = "Annual"
-        '
-        'ucrNudThreshold
-        '
-        Me.ucrNudThreshold.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudThreshold.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudThreshold.Location = New System.Drawing.Point(371, 89)
-        Me.ucrNudThreshold.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudThreshold.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudThreshold.Name = "ucrNudThreshold"
-        Me.ucrNudThreshold.Size = New System.Drawing.Size(50, 21)
-        Me.ucrNudThreshold.TabIndex = 5
-        Me.ucrNudThreshold.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblThreshold
         '
@@ -845,6 +833,16 @@ Partial Class sdgClimdexIndices
         Me.ucrButtonsClimdexIndices.Size = New System.Drawing.Size(142, 30)
         Me.ucrButtonsClimdexIndices.TabIndex = 2
         '
+        'ucrInputThreshold
+        '
+        Me.ucrInputThreshold.AddQuotesIfUnrecognised = True
+        Me.ucrInputThreshold.IsMultiline = False
+        Me.ucrInputThreshold.IsReadOnly = False
+        Me.ucrInputThreshold.Location = New System.Drawing.Point(371, 88)
+        Me.ucrInputThreshold.Name = "ucrInputThreshold"
+        Me.ucrInputThreshold.Size = New System.Drawing.Size(68, 21)
+        Me.ucrInputThreshold.TabIndex = 12
+        '
         'sdgClimdexIndices
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -958,8 +956,8 @@ Partial Class sdgClimdexIndices
     Friend WithEvents ucrChkColdSpellDI As ucrCheck
     Friend WithEvents ucrChkTropicalNights As ucrCheck
     Friend WithEvents ucrChkFrostDays As ucrCheck
-    Friend WithEvents ucrNudThreshold As ucrNud
     Friend WithEvents lblThreshold As Label
     Friend WithEvents lblGSLMode As Label
     Friend WithEvents ucrInputGSLMode As ucrInputComboBox
+    Friend WithEvents ucrInputThreshold As ucrInputTextBox
 End Class
