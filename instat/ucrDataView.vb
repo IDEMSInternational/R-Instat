@@ -606,6 +606,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub SortToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SortToolStripMenuItem.Click
+        dlgSort.SetCurrentDataframe(grdCurrSheet.Name)
         dlgSort.ShowDialog()
     End Sub
 
@@ -709,4 +710,5 @@ Public Class ucrDataView
         grdData.Enabled = True
         Cursor = Cursors.Default
     End Sub
+
 End Class
