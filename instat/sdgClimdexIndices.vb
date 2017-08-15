@@ -136,14 +136,12 @@ Public Class sdgClimdexIndices
         ucrChkPrecExceedSpecifiedA.SetParameter(New RParameter("rain_above_amount", "Precipitation_Exceeding_a_Specified_Amount_Per_Day", 21), bNewChangeParameterValue:=False)
         ucrChkPrecExceedSpecifiedA.SetText("Precipitation Exceeding a Specified Amount Per Day [22]")
         '        dctInputindicesTriples.Add(ucrChkPrecExceedSpecifiedA.chkCheck.Text, {"Precipitation_Exceeding_a_Specified_Amount_Per_Day", "climdex.rnnmm"}.ToList)
-        ucrChkPrecExceedSpecifiedA.AddToLinkedControls(ucrNudThreshold, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkPrecExceedSpecifiedA.AddToLinkedControls(ucrInputThreshold, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrNudThreshold.SetParameter(New RParameter("threshold", 1))
-        ucrNudThreshold.SetRDefault(1)
-        ucrNudThreshold.DecimalPlaces = 2
-        ' ucrNudThreshold.SetMinMax(0, 1)
-        ucrNudThreshold.Increment = 0.01
-        ucrNudThreshold.SetLinkedDisplayControl(lblThreshold)
+        ucrInputThreshold.SetParameter(New RParameter("threshold", 1))
+        ucrInputThreshold.SetRDefault(1)
+        ucrInputThreshold.SetValidationTypeAsNumeric()
+        ucrInputThreshold.SetLinkedDisplayControl(lblThreshold)
 
         ucrChkMaxDrySpell.SetParameter(New RParameter("max_dry_spell_length", "Maximum_Length_of_Dry_Spell", 22), bNewChangeParameterValue:=False)
         ucrChkMaxDrySpell.SetText("Maximum Length of Dry Spell [23]")
@@ -388,7 +386,7 @@ Public Class sdgClimdexIndices
 
         ucrChkPrecExceedSpecifiedA.SetParameterValue(clsPrecExceedSpecifiedA)
         ucrChkPrecExceedSpecifiedA.SetRCode(clsRWriteDfIndicesList, bReset, bCloneIfNeeded:=False)
-        ucrNudThreshold.SetRCode(clsPrecExceedSpecifiedA, bReset, bCloneIfNeeded:=True)
+        ucrInputThreshold.SetRCode(clsPrecExceedSpecifiedA, bReset, bCloneIfNeeded:=True)
 
         ucrChkMaxDrySpell.SetParameterValue(clsMaxDrySpell)
         ucrChkMaxDrySpell.SetRCode(clsRWriteDfIndicesList, bReset, bCloneIfNeeded:=False)
