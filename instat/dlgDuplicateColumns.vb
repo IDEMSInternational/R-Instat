@@ -32,9 +32,9 @@ Public Class dlgDuplicateColumns
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsDefaultFunction As New RFunction
-    Dim bUseSelectedColumn As Boolean = False
-    Dim strSelectedColumn As String = ""
-    Dim strSelectedDataFrame As String = ""
+    Public strSelectedDataFrame As String = ""
+    Private bUseSelectedColumn As Boolean = False
+    Private strSelectedColumn As String = ""
 
     Private Sub dlgCopySheet_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -45,6 +45,9 @@ Public Class dlgDuplicateColumns
         End If
         If bReset Then
             SetDefaults()
+        End If
+        If bUseSelectedColumn Then
+            SetDefaultColumn()
         End If
         SetRCodeforControls(bReset)
         bReset = False
@@ -129,6 +132,11 @@ Public Class dlgDuplicateColumns
         ucrSelectorForDuplicateColumn.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = strSelectedDataFrame
         ucrReceiverDuplicateColumns.Add(strSelectedColumn, strSelectedDataFrame)
         bUseSelectedColumn = False
+    End Sub
+
+    Public Sub SetCurrentDataframe(strDataFrame As String)
+        strSelectedDataFrame = strDataFrame
+        ucrSelectorForDuplicateColumn.SetDataframe(strSelectedDataFrame)
     End Sub
 
     Private Sub PositionOfDuplicatedColumn()

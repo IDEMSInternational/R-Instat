@@ -680,6 +680,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub mnuDuplicateColumn_Click(sender As Object, e As EventArgs) Handles mnuDuplicateColumn.Click
+        dlgDuplicateColumns.SetCurrentDataframe(grdCurrSheet.Name)
         dlgDuplicateColumns.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
         dlgDuplicateColumns.ShowDialog()
     End Sub
