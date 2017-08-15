@@ -49,14 +49,15 @@ Partial Class dlgFromLibrary
         Me.ucrInputPackages = New instat.ucrInputComboBox()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.ucrNewDataFrameName = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'cmdLibraryCollection
         '
-        Me.cmdLibraryCollection.Location = New System.Drawing.Point(129, 52)
+        Me.cmdLibraryCollection.Location = New System.Drawing.Point(157, 51)
         Me.cmdLibraryCollection.Name = "cmdLibraryCollection"
         Me.cmdLibraryCollection.Size = New System.Drawing.Size(117, 23)
-        Me.cmdLibraryCollection.TabIndex = 2
+        Me.cmdLibraryCollection.TabIndex = 5
         Me.cmdLibraryCollection.Text = "Browse"
         Me.cmdLibraryCollection.UseVisualStyleBackColor = True
         '
@@ -71,7 +72,7 @@ Partial Class dlgFromLibrary
         Me.lstCollection.ShowItemToolTips = True
         Me.lstCollection.Size = New System.Drawing.Size(397, 173)
         Me.lstCollection.Sorting = System.Windows.Forms.SortOrder.Ascending
-        Me.lstCollection.TabIndex = 4
+        Me.lstCollection.TabIndex = 6
         Me.lstCollection.UseCompatibleStateImageBehavior = False
         Me.lstCollection.View = System.Windows.Forms.View.Details
         '
@@ -88,10 +89,10 @@ Partial Class dlgFromLibrary
         'lblFromPackage
         '
         Me.lblFromPackage.AutoSize = True
-        Me.lblFromPackage.Location = New System.Drawing.Point(7, 52)
+        Me.lblFromPackage.Location = New System.Drawing.Point(11, 56)
         Me.lblFromPackage.Name = "lblFromPackage"
         Me.lblFromPackage.Size = New System.Drawing.Size(79, 13)
-        Me.lblFromPackage.TabIndex = 15
+        Me.lblFromPackage.TabIndex = 3
         Me.lblFromPackage.Text = "From Package:"
         '
         'cmdHelp
@@ -99,7 +100,7 @@ Partial Class dlgFromLibrary
         Me.cmdHelp.Location = New System.Drawing.Point(332, 258)
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(75, 23)
-        Me.cmdHelp.TabIndex = 17
+        Me.cmdHelp.TabIndex = 8
         Me.cmdHelp.Text = "Help"
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
@@ -111,10 +112,10 @@ Partial Class dlgFromLibrary
         Me.rdoDefaultDatasets.FlatAppearance.BorderSize = 2
         Me.rdoDefaultDatasets.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoDefaultDatasets.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoDefaultDatasets.Location = New System.Drawing.Point(69, 12)
+        Me.rdoDefaultDatasets.Location = New System.Drawing.Point(71, 12)
         Me.rdoDefaultDatasets.Name = "rdoDefaultDatasets"
-        Me.rdoDefaultDatasets.Size = New System.Drawing.Size(135, 28)
-        Me.rdoDefaultDatasets.TabIndex = 20
+        Me.rdoDefaultDatasets.Size = New System.Drawing.Size(145, 28)
+        Me.rdoDefaultDatasets.TabIndex = 1
         Me.rdoDefaultDatasets.TabStop = True
         Me.rdoDefaultDatasets.Tag = ""
         Me.rdoDefaultDatasets.Text = "Load from R"
@@ -129,10 +130,10 @@ Partial Class dlgFromLibrary
         Me.rdoInstatCollection.FlatAppearance.BorderSize = 2
         Me.rdoInstatCollection.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoInstatCollection.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoInstatCollection.Location = New System.Drawing.Point(202, 12)
+        Me.rdoInstatCollection.Location = New System.Drawing.Point(214, 12)
         Me.rdoInstatCollection.Name = "rdoInstatCollection"
-        Me.rdoInstatCollection.Size = New System.Drawing.Size(157, 28)
-        Me.rdoInstatCollection.TabIndex = 21
+        Me.rdoInstatCollection.Size = New System.Drawing.Size(145, 28)
+        Me.rdoInstatCollection.TabIndex = 2
         Me.rdoInstatCollection.TabStop = True
         Me.rdoInstatCollection.Tag = ""
         Me.rdoInstatCollection.Text = "Load from Instat collection"
@@ -146,29 +147,36 @@ Partial Class dlgFromLibrary
         Me.ucrInputPackages.Location = New System.Drawing.Point(92, 52)
         Me.ucrInputPackages.Name = "ucrInputPackages"
         Me.ucrInputPackages.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputPackages.TabIndex = 18
+        Me.ucrInputPackages.TabIndex = 4
         '
         'ucrBase
         '
-        Me.ucrBase.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ucrBase.Location = New System.Drawing.Point(7, 292)
+        Me.ucrBase.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.ucrBase.Location = New System.Drawing.Point(10, 287)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(400, 53)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.Size = New System.Drawing.Size(400, 59)
+        Me.ucrBase.TabIndex = 9
         '
         'ucrPnlOptions
         '
         Me.ucrPnlOptions.Location = New System.Drawing.Point(59, 2)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         Me.ucrPnlOptions.Size = New System.Drawing.Size(316, 44)
-        Me.ucrPnlOptions.TabIndex = 19
+        Me.ucrPnlOptions.TabIndex = 0
+        '
+        'ucrNewDataFrameName
+        '
+        Me.ucrNewDataFrameName.Location = New System.Drawing.Point(10, 259)
+        Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
+        Me.ucrNewDataFrameName.Size = New System.Drawing.Size(264, 24)
+        Me.ucrNewDataFrameName.TabIndex = 7
         '
         'dlgFromLibrary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(431, 351)
+        Me.ClientSize = New System.Drawing.Size(418, 348)
+        Me.Controls.Add(Me.ucrNewDataFrameName)
         Me.Controls.Add(Me.rdoDefaultDatasets)
         Me.Controls.Add(Me.rdoInstatCollection)
         Me.Controls.Add(Me.cmdLibraryCollection)
@@ -200,4 +208,5 @@ Partial Class dlgFromLibrary
     Friend WithEvents ucrPnlOptions As UcrPanel
     Friend WithEvents rdoDefaultDatasets As RadioButton
     Friend WithEvents rdoInstatCollection As RadioButton
+    Friend WithEvents ucrNewDataFrameName As ucrSave
 End Class
