@@ -24,6 +24,7 @@ Public Class dlgSort
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsSortFunction As New RFunction
+    Public strSelectedDataFrame As String = ""
     Private Sub dlgSort_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -76,6 +77,11 @@ Public Class dlgSort
 
         ' Set default RFunction as the base function
         ucrBase.clsRsyntax.SetBaseRFunction(clsSortFunction)
+    End Sub
+
+    Public Sub SetCurrentDataframe(strDataFrame As String)
+        strSelectedDataFrame = strDataFrame
+        ucrSelectForSort.SetDataframe(strSelectedDataFrame)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
