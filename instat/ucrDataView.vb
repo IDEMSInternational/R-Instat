@@ -655,6 +655,7 @@ Public Class ucrDataView
 
     Private Sub mnuConvert_Click(sender As Object, e As EventArgs) Handles mnuConvert.Click
         'TODO Selected column should automatically appear in dialog
+        dlgConvertColumns.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
         dlgConvertColumns.ShowDialog()
     End Sub
 
