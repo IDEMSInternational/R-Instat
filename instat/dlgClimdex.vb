@@ -356,6 +356,5 @@ Public Class dlgClimdex
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorClimdex.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverPrec.ControlContentsChanged, ucrReceiverTmax.ControlContentsChanged, ucrReceiverTmin.ControlContentsChanged
         TestOkEnabled()
-        sdgClimdexIndices.IndicesType() 'is this the right implementation?
     End Sub
 End Class
