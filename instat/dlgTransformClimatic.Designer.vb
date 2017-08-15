@@ -40,7 +40,6 @@ Partial Class dlgTransformClimatic
     Private Sub InitializeComponent()
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lblDate = New System.Windows.Forms.Label()
-        Me.lblDOY = New System.Windows.Forms.Label()
         Me.lblStation = New System.Windows.Forms.Label()
         Me.lblData = New System.Windows.Forms.Label()
         Me.rdoSpell = New System.Windows.Forms.RadioButton()
@@ -52,60 +51,50 @@ Partial Class dlgTransformClimatic
         Me.lblNewColName = New System.Windows.Forms.Label()
         Me.lblCountOver = New System.Windows.Forms.Label()
         Me.grpTransform = New System.Windows.Forms.GroupBox()
-        Me.lblCondition = New System.Windows.Forms.Label()
-        Me.lblWBEvaporation = New System.Windows.Forms.Label()
-        Me.lblWBCapacity = New System.Windows.Forms.Label()
         Me.ucrInputSpellUpper = New instat.ucrInputTextBox()
         Me.ucrInputCondition = New instat.ucrInputComboBox()
         Me.ucrInputEvaporation = New instat.ucrInputTextBox()
+        Me.lblCondition = New System.Windows.Forms.Label()
+        Me.lblWBEvaporation = New System.Windows.Forms.Label()
         Me.ucrInputSpellLower = New instat.ucrInputTextBox()
         Me.ucrNudSumOver = New instat.ucrNud()
+        Me.lblWBCapacity = New System.Windows.Forms.Label()
         Me.ucrNudWBCapacity = New instat.ucrNud()
         Me.ucrInputSum = New instat.ucrInputComboBox()
         Me.ucrNudCountOver = New instat.ucrNud()
         Me.ucrInputColName = New instat.ucrInputTextBox()
         Me.ucrPnlTransform = New instat.UcrPanel()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
-        Me.ucrSelectorTransform = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
-        Me.ucrReceiverDOY = New instat.ucrReceiverSingle()
         Me.ucrReceiverData = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSelectorTransform = New instat.ucrSelectorByDataFrameAddRemove()
         Me.grpTransform.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblYear
         '
         Me.lblYear.AutoSize = True
-        Me.lblYear.Location = New System.Drawing.Point(262, 170)
+        Me.lblYear.Location = New System.Drawing.Point(242, 172)
         Me.lblYear.Name = "lblYear"
         Me.lblYear.Size = New System.Drawing.Size(32, 13)
-        Me.lblYear.TabIndex = 10
+        Me.lblYear.TabIndex = 12
         Me.lblYear.Text = "Year:"
         '
         'lblDate
         '
         Me.lblDate.AutoSize = True
-        Me.lblDate.Location = New System.Drawing.Point(261, 128)
+        Me.lblDate.Location = New System.Drawing.Point(242, 129)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(33, 13)
         Me.lblDate.TabIndex = 8
         Me.lblDate.Text = "Date:"
         '
-        'lblDOY
-        '
-        Me.lblDOY.AutoSize = True
-        Me.lblDOY.Location = New System.Drawing.Point(261, 212)
-        Me.lblDOY.Name = "lblDOY"
-        Me.lblDOY.Size = New System.Drawing.Size(66, 13)
-        Me.lblDOY.TabIndex = 12
-        Me.lblDOY.Text = "Day of Year:"
-        '
         'lblStation
         '
         Me.lblStation.AutoSize = True
-        Me.lblStation.Location = New System.Drawing.Point(261, 86)
+        Me.lblStation.Location = New System.Drawing.Point(242, 86)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(43, 13)
         Me.lblStation.TabIndex = 6
@@ -114,10 +103,10 @@ Partial Class dlgTransformClimatic
         'lblData
         '
         Me.lblData.AutoSize = True
-        Me.lblData.Location = New System.Drawing.Point(260, 254)
+        Me.lblData.Location = New System.Drawing.Point(242, 215)
         Me.lblData.Name = "lblData"
         Me.lblData.Size = New System.Drawing.Size(48, 13)
-        Me.lblData.TabIndex = 14
+        Me.lblData.TabIndex = 16
         Me.lblData.Text = "Element:"
         '
         'rdoSpell
@@ -130,9 +119,9 @@ Partial Class dlgTransformClimatic
         Me.rdoSpell.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSpell.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSpell.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoSpell.Location = New System.Drawing.Point(223, 10)
+        Me.rdoSpell.Location = New System.Drawing.Point(207, 10)
         Me.rdoSpell.Name = "rdoSpell"
-        Me.rdoSpell.Size = New System.Drawing.Size(100, 28)
+        Me.rdoSpell.Size = New System.Drawing.Size(91, 28)
         Me.rdoSpell.TabIndex = 3
         Me.rdoSpell.Text = "Spell"
         Me.rdoSpell.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -147,10 +136,10 @@ Partial Class dlgTransformClimatic
         Me.rdoMoving.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoMoving.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoMoving.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.rdoMoving.Location = New System.Drawing.Point(27, 10)
+        Me.rdoMoving.Location = New System.Drawing.Point(118, 10)
         Me.rdoMoving.Name = "rdoMoving"
-        Me.rdoMoving.Size = New System.Drawing.Size(100, 28)
-        Me.rdoMoving.TabIndex = 1
+        Me.rdoMoving.Size = New System.Drawing.Size(91, 28)
+        Me.rdoMoving.TabIndex = 2
         Me.rdoMoving.Text = "Moving"
         Me.rdoMoving.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoMoving.UseVisualStyleBackColor = True
@@ -165,10 +154,10 @@ Partial Class dlgTransformClimatic
         Me.rdoCount.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoCount.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoCount.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoCount.Location = New System.Drawing.Point(125, 10)
+        Me.rdoCount.Location = New System.Drawing.Point(29, 10)
         Me.rdoCount.Name = "rdoCount"
-        Me.rdoCount.Size = New System.Drawing.Size(100, 28)
-        Me.rdoCount.TabIndex = 2
+        Me.rdoCount.Size = New System.Drawing.Size(91, 28)
+        Me.rdoCount.TabIndex = 1
         Me.rdoCount.Text = "Count"
         Me.rdoCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoCount.UseVisualStyleBackColor = True
@@ -183,9 +172,9 @@ Partial Class dlgTransformClimatic
         Me.rdoWaterBalance.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoWaterBalance.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoWaterBalance.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoWaterBalance.Location = New System.Drawing.Point(321, 10)
+        Me.rdoWaterBalance.Location = New System.Drawing.Point(296, 10)
         Me.rdoWaterBalance.Name = "rdoWaterBalance"
-        Me.rdoWaterBalance.Size = New System.Drawing.Size(100, 28)
+        Me.rdoWaterBalance.Size = New System.Drawing.Size(91, 28)
         Me.rdoWaterBalance.TabIndex = 4
         Me.rdoWaterBalance.Text = "Water Balance"
         Me.rdoWaterBalance.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -214,7 +203,7 @@ Partial Class dlgTransformClimatic
         'lblNewColName
         '
         Me.lblNewColName.AutoSize = True
-        Me.lblNewColName.Location = New System.Drawing.Point(6, 392)
+        Me.lblNewColName.Location = New System.Drawing.Point(6, 352)
         Me.lblNewColName.Name = "lblNewColName"
         Me.lblNewColName.Size = New System.Drawing.Size(101, 13)
         Me.lblNewColName.TabIndex = 19
@@ -247,42 +236,12 @@ Partial Class dlgTransformClimatic
         Me.grpTransform.Controls.Add(Me.ucrInputSum)
         Me.grpTransform.Controls.Add(Me.lblSumOver)
         Me.grpTransform.Controls.Add(Me.ucrNudCountOver)
-        Me.grpTransform.Location = New System.Drawing.Point(9, 301)
+        Me.grpTransform.Location = New System.Drawing.Point(9, 262)
         Me.grpTransform.Name = "grpTransform"
         Me.grpTransform.Size = New System.Drawing.Size(376, 82)
-        Me.grpTransform.TabIndex = 0
+        Me.grpTransform.TabIndex = 18
         Me.grpTransform.TabStop = False
         Me.grpTransform.Text = "Options"
-        '
-        'lblCondition
-        '
-        Me.lblCondition.AutoSize = True
-        Me.lblCondition.Location = New System.Drawing.Point(12, 50)
-        Me.lblCondition.Name = "lblCondition"
-        Me.lblCondition.Size = New System.Drawing.Size(54, 13)
-        Me.lblCondition.TabIndex = 10
-        Me.lblCondition.Tag = "Condition:"
-        Me.lblCondition.Text = "Condition:"
-        '
-        'lblWBEvaporation
-        '
-        Me.lblWBEvaporation.AutoSize = True
-        Me.lblWBEvaporation.Location = New System.Drawing.Point(13, 50)
-        Me.lblWBEvaporation.Name = "lblWBEvaporation"
-        Me.lblWBEvaporation.Size = New System.Drawing.Size(67, 13)
-        Me.lblWBEvaporation.TabIndex = 6
-        Me.lblWBEvaporation.Tag = "Evaporation"
-        Me.lblWBEvaporation.Text = "Evaporation:"
-        '
-        'lblWBCapacity
-        '
-        Me.lblWBCapacity.AutoSize = True
-        Me.lblWBCapacity.Location = New System.Drawing.Point(13, 25)
-        Me.lblWBCapacity.Name = "lblWBCapacity"
-        Me.lblWBCapacity.Size = New System.Drawing.Size(51, 13)
-        Me.lblWBCapacity.TabIndex = 1
-        Me.lblWBCapacity.Tag = "Capacity"
-        Me.lblWBCapacity.Text = "Capacity:"
         '
         'ucrInputSpellUpper
         '
@@ -313,6 +272,26 @@ Partial Class dlgTransformClimatic
         Me.ucrInputEvaporation.Size = New System.Drawing.Size(98, 21)
         Me.ucrInputEvaporation.TabIndex = 7
         '
+        'lblCondition
+        '
+        Me.lblCondition.AutoSize = True
+        Me.lblCondition.Location = New System.Drawing.Point(12, 50)
+        Me.lblCondition.Name = "lblCondition"
+        Me.lblCondition.Size = New System.Drawing.Size(54, 13)
+        Me.lblCondition.TabIndex = 10
+        Me.lblCondition.Tag = "Condition:"
+        Me.lblCondition.Text = "Condition:"
+        '
+        'lblWBEvaporation
+        '
+        Me.lblWBEvaporation.AutoSize = True
+        Me.lblWBEvaporation.Location = New System.Drawing.Point(13, 50)
+        Me.lblWBEvaporation.Name = "lblWBEvaporation"
+        Me.lblWBEvaporation.Size = New System.Drawing.Size(67, 13)
+        Me.lblWBEvaporation.TabIndex = 6
+        Me.lblWBEvaporation.Tag = "Evaporation"
+        Me.lblWBEvaporation.Text = "Evaporation:"
+        '
         'ucrInputSpellLower
         '
         Me.ucrInputSpellLower.AddQuotesIfUnrecognised = True
@@ -334,6 +313,16 @@ Partial Class dlgTransformClimatic
         Me.ucrNudSumOver.Size = New System.Drawing.Size(50, 20)
         Me.ucrNudSumOver.TabIndex = 4
         Me.ucrNudSumOver.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblWBCapacity
+        '
+        Me.lblWBCapacity.AutoSize = True
+        Me.lblWBCapacity.Location = New System.Drawing.Point(13, 25)
+        Me.lblWBCapacity.Name = "lblWBCapacity"
+        Me.lblWBCapacity.Size = New System.Drawing.Size(51, 13)
+        Me.lblWBCapacity.TabIndex = 1
+        Me.lblWBCapacity.Tag = "Capacity"
+        Me.lblWBCapacity.Text = "Capacity:"
         '
         'ucrNudWBCapacity
         '
@@ -373,22 +362,22 @@ Partial Class dlgTransformClimatic
         Me.ucrInputColName.AddQuotesIfUnrecognised = True
         Me.ucrInputColName.IsMultiline = False
         Me.ucrInputColName.IsReadOnly = False
-        Me.ucrInputColName.Location = New System.Drawing.Point(112, 389)
+        Me.ucrInputColName.Location = New System.Drawing.Point(112, 349)
         Me.ucrInputColName.Name = "ucrInputColName"
         Me.ucrInputColName.Size = New System.Drawing.Size(181, 21)
         Me.ucrInputColName.TabIndex = 20
         '
         'ucrPnlTransform
         '
-        Me.ucrPnlTransform.Location = New System.Drawing.Point(3, 9)
+        Me.ucrPnlTransform.Location = New System.Drawing.Point(8, 9)
         Me.ucrPnlTransform.Name = "ucrPnlTransform"
-        Me.ucrPnlTransform.Size = New System.Drawing.Size(446, 29)
+        Me.ucrPnlTransform.Size = New System.Drawing.Size(409, 29)
         Me.ucrPnlTransform.TabIndex = 0
         '
         'ucrReceiverStation
         '
         Me.ucrReceiverStation.frmParent = Me
-        Me.ucrReceiverStation.Location = New System.Drawing.Point(260, 101)
+        Me.ucrReceiverStation.Location = New System.Drawing.Point(242, 101)
         Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStation.Name = "ucrReceiverStation"
         Me.ucrReceiverStation.Selector = Nothing
@@ -396,6 +385,49 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverStation.strNcFilePath = ""
         Me.ucrReceiverStation.TabIndex = 7
         Me.ucrReceiverStation.ucrSelector = Nothing
+        '
+        'ucrReceiverYear
+        '
+        Me.ucrReceiverYear.frmParent = Me
+        Me.ucrReceiverYear.Location = New System.Drawing.Point(242, 187)
+        Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverYear.Name = "ucrReceiverYear"
+        Me.ucrReceiverYear.Selector = Nothing
+        Me.ucrReceiverYear.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverYear.strNcFilePath = ""
+        Me.ucrReceiverYear.TabIndex = 13
+        Me.ucrReceiverYear.ucrSelector = Nothing
+        '
+        'ucrReceiverDate
+        '
+        Me.ucrReceiverDate.frmParent = Me
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(242, 144)
+        Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverDate.Name = "ucrReceiverDate"
+        Me.ucrReceiverDate.Selector = Nothing
+        Me.ucrReceiverDate.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverDate.strNcFilePath = ""
+        Me.ucrReceiverDate.TabIndex = 9
+        Me.ucrReceiverDate.ucrSelector = Nothing
+        '
+        'ucrReceiverData
+        '
+        Me.ucrReceiverData.frmParent = Me
+        Me.ucrReceiverData.Location = New System.Drawing.Point(242, 230)
+        Me.ucrReceiverData.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverData.Name = "ucrReceiverData"
+        Me.ucrReceiverData.Selector = Nothing
+        Me.ucrReceiverData.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverData.strNcFilePath = ""
+        Me.ucrReceiverData.TabIndex = 17
+        Me.ucrReceiverData.ucrSelector = Nothing
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(9, 376)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(402, 52)
+        Me.ucrBase.TabIndex = 21
         '
         'ucrSelectorTransform
         '
@@ -407,66 +439,11 @@ Partial Class dlgTransformClimatic
         Me.ucrSelectorTransform.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorTransform.TabIndex = 5
         '
-        'ucrReceiverYear
-        '
-        Me.ucrReceiverYear.frmParent = Me
-        Me.ucrReceiverYear.Location = New System.Drawing.Point(260, 185)
-        Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverYear.Name = "ucrReceiverYear"
-        Me.ucrReceiverYear.Selector = Nothing
-        Me.ucrReceiverYear.Size = New System.Drawing.Size(143, 20)
-        Me.ucrReceiverYear.strNcFilePath = ""
-        Me.ucrReceiverYear.TabIndex = 11
-        Me.ucrReceiverYear.ucrSelector = Nothing
-        '
-        'ucrReceiverDate
-        '
-        Me.ucrReceiverDate.frmParent = Me
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(260, 143)
-        Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverDate.Name = "ucrReceiverDate"
-        Me.ucrReceiverDate.Selector = Nothing
-        Me.ucrReceiverDate.Size = New System.Drawing.Size(143, 20)
-        Me.ucrReceiverDate.strNcFilePath = ""
-        Me.ucrReceiverDate.TabIndex = 9
-        Me.ucrReceiverDate.ucrSelector = Nothing
-        '
-        'ucrReceiverDOY
-        '
-        Me.ucrReceiverDOY.frmParent = Me
-        Me.ucrReceiverDOY.Location = New System.Drawing.Point(260, 227)
-        Me.ucrReceiverDOY.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverDOY.Name = "ucrReceiverDOY"
-        Me.ucrReceiverDOY.Selector = Nothing
-        Me.ucrReceiverDOY.Size = New System.Drawing.Size(143, 20)
-        Me.ucrReceiverDOY.strNcFilePath = ""
-        Me.ucrReceiverDOY.TabIndex = 13
-        Me.ucrReceiverDOY.ucrSelector = Nothing
-        '
-        'ucrReceiverData
-        '
-        Me.ucrReceiverData.frmParent = Me
-        Me.ucrReceiverData.Location = New System.Drawing.Point(260, 269)
-        Me.ucrReceiverData.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverData.Name = "ucrReceiverData"
-        Me.ucrReceiverData.Selector = Nothing
-        Me.ucrReceiverData.Size = New System.Drawing.Size(143, 20)
-        Me.ucrReceiverData.strNcFilePath = ""
-        Me.ucrReceiverData.TabIndex = 15
-        Me.ucrReceiverData.ucrSelector = Nothing
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 416)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(402, 52)
-        Me.ucrBase.TabIndex = 21
-        '
         'dlgTransformClimatic
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(447, 478)
+        Me.ClientSize = New System.Drawing.Size(417, 434)
         Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.lblNewColName)
         Me.Controls.Add(Me.ucrInputColName)
@@ -482,8 +459,6 @@ Partial Class dlgTransformClimatic
         Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.ucrReceiverDate)
-        Me.Controls.Add(Me.ucrReceiverDOY)
-        Me.Controls.Add(Me.lblDOY)
         Me.Controls.Add(Me.lblData)
         Me.Controls.Add(Me.ucrReceiverData)
         Me.Controls.Add(Me.ucrBase)
@@ -505,8 +480,6 @@ Partial Class dlgTransformClimatic
     Friend WithEvents lblYear As Label
     Friend WithEvents lblDate As Label
     Friend WithEvents ucrReceiverDate As ucrReceiverSingle
-    Friend WithEvents ucrReceiverDOY As ucrReceiverSingle
-    Friend WithEvents lblDOY As Label
     Friend WithEvents lblStation As Label
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
     Friend WithEvents ucrSelectorTransform As ucrSelectorByDataFrameAddRemove
