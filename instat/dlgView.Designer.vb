@@ -156,7 +156,7 @@ Partial Class dlgView
         Me.rdoViewAll.Name = "rdoViewAll"
         Me.rdoViewAll.Size = New System.Drawing.Size(140, 28)
         Me.rdoViewAll.TabIndex = 2
-        Me.rdoViewAll.Text = "View All"
+        Me.rdoViewAll.Text = "All Columns"
         Me.rdoViewAll.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoViewAll.UseVisualStyleBackColor = True
         '
@@ -171,7 +171,7 @@ Partial Class dlgView
         Me.rdoViewSelectedColumnsRows.Name = "rdoViewSelectedColumnsRows"
         Me.rdoViewSelectedColumnsRows.Size = New System.Drawing.Size(140, 28)
         Me.rdoViewSelectedColumnsRows.TabIndex = 1
-        Me.rdoViewSelectedColumnsRows.Text = "Selected Columns/Rows"
+        Me.rdoViewSelectedColumnsRows.Text = "Choose Columns"
         Me.rdoViewSelectedColumnsRows.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoViewSelectedColumnsRows.UseVisualStyleBackColor = True
         '
