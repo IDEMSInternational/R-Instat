@@ -100,6 +100,7 @@ Public Class dlgHistogram
         clsRaesFunction = New RFunction
 
         ucrHistogramSelector.Reset()
+        ucrHistogramSelector.SetGgplotFunction(clsBaseOperator)
         ucrSaveHist.Reset()
         bResetSubdialog = True
         bResetHistLayerSubdialog = True
