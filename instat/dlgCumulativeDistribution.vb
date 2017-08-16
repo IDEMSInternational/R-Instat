@@ -109,6 +109,7 @@ Public Class dlgCumulativeDistribution
         clsRggplotFunction = New RFunction
 
         ucrCumDistSelector.Reset()
+        ucrCumDistSelector.SetGgplotFunction(clsBaseOperator)
         ucrCumDistSelector.Focus()
         ucrSaveCumDist.Reset()
         sdgPlots.Reset()

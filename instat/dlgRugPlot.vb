@@ -97,6 +97,7 @@ Public Class dlgRugPlot
 
         ucrSaveGraph.Reset()
         ucrRugPlotSelector.Reset()
+        ucrRugPlotSelector.SetGgplotFunction(clsBaseOperator)
         bResetSubdialog = True
         bResetRugLayerSubdialog = True
 
