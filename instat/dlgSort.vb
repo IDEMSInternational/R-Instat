@@ -36,11 +36,11 @@ Public Class dlgSort
         If bReset Then
             SetDefaults()
         End If
+        SetRCodeForControls(bReset)
+        bReset = False
         If bUseSelectedColumn Then
             SetDefaultColumn()
         End If
-        SetRCodeForControls(bReset)
-        bReset = False
     End Sub
 
     Private Sub InitialiseDialog()
@@ -82,11 +82,6 @@ Public Class dlgSort
 
         ' Set default RFunction as the base function
         ucrBase.clsRsyntax.SetBaseRFunction(clsSortFunction)
-    End Sub
-
-    Public Sub SetCurrentDataframe(strDataFrame As String)
-        strSelectedDataFrame = strDataFrame
-        ucrSelectForSort.SetDataframe(strSelectedDataFrame)
     End Sub
 
     Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)

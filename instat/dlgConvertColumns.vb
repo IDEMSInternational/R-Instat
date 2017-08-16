@@ -34,10 +34,11 @@ Public Class dlgConvertColumns
         If bReset Then
             SetDefaults()
         End If
+        SetRCodeForControls(bReset)
+        bReset = False
         If bUseSelectedColumn Then
             SetDefaultColumn()
         End If
-        SetRCodeForControls(bReset)
         ReopenDialog()
         TestOKEnabled()
     End Sub
