@@ -126,6 +126,7 @@ Public Class dlgDotPlot
         clsRaesFunction = New RFunction
 
         ucrDotPlotSelector.Reset()
+        ucrDotPlotSelector.SetGgplotFunction(clsBaseOperator)
         ucrSaveDotPlot.Reset()
         bResetSubdialog = True
         bResetDotLayerSubdialog = True
