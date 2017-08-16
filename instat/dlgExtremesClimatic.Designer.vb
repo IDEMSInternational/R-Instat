@@ -43,18 +43,11 @@ Partial Class dlgExtremesClimatic
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lblDayOfYear = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
-        Me.ucrInputThresholdValue = New instat.ucrInputTextBox()
-        Me.ucrInputThresholdOperator = New instat.ucrInputComboBox()
         Me.lblValues = New System.Windows.Forms.Label()
-        Me.ucrNudTo = New instat.ucrNud()
-        Me.ucrChkMissingValues = New instat.ucrCheck()
-        Me.ucrNudFrom = New instat.ucrNud()
         Me.lblFrom = New System.Windows.Forms.Label()
         Me.lblTo = New System.Windows.Forms.Label()
         Me.rdoMin = New System.Windows.Forms.RadioButton()
         Me.rdoMax = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlMaxMin = New instat.UcrPanel()
-        Me.ucrChkDayNumber = New instat.ucrCheck()
         Me.rdoMinMax = New System.Windows.Forms.RadioButton()
         Me.rdoPeaks = New System.Windows.Forms.RadioButton()
         Me.lblElement = New System.Windows.Forms.Label()
@@ -62,6 +55,13 @@ Partial Class dlgExtremesClimatic
         Me.lblNewDFName = New System.Windows.Forms.Label()
         Me.ucrInputSave = New instat.ucrInputTextBox()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
+        Me.ucrInputThresholdValue = New instat.ucrInputTextBox()
+        Me.ucrInputThresholdOperator = New instat.ucrInputComboBox()
+        Me.ucrNudTo = New instat.ucrNud()
+        Me.ucrChkMissingValues = New instat.ucrCheck()
+        Me.ucrNudFrom = New instat.ucrNud()
+        Me.ucrPnlMaxMin = New instat.UcrPanel()
+        Me.ucrChkDayNumber = New instat.ucrCheck()
         Me.ucrReceiverDOY = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
@@ -78,7 +78,7 @@ Partial Class dlgExtremesClimatic
         Me.lblStations.Location = New System.Drawing.Point(251, 78)
         Me.lblStations.Name = "lblStations"
         Me.lblStations.Size = New System.Drawing.Size(43, 13)
-        Me.lblStations.TabIndex = 5
+        Me.lblStations.TabIndex = 4
         Me.lblStations.Text = "Station:"
         '
         'lblDate
@@ -87,7 +87,7 @@ Partial Class dlgExtremesClimatic
         Me.lblDate.Location = New System.Drawing.Point(251, 120)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(33, 13)
-        Me.lblDate.TabIndex = 7
+        Me.lblDate.TabIndex = 6
         Me.lblDate.Text = "Date:"
         '
         'lblYear
@@ -96,7 +96,7 @@ Partial Class dlgExtremesClimatic
         Me.lblYear.Location = New System.Drawing.Point(251, 162)
         Me.lblYear.Name = "lblYear"
         Me.lblYear.Size = New System.Drawing.Size(32, 13)
-        Me.lblYear.TabIndex = 9
+        Me.lblYear.TabIndex = 8
         Me.lblYear.Text = "Year:"
         '
         'lblDayOfYear
@@ -105,7 +105,7 @@ Partial Class dlgExtremesClimatic
         Me.lblDayOfYear.Location = New System.Drawing.Point(251, 205)
         Me.lblDayOfYear.Name = "lblDayOfYear"
         Me.lblDayOfYear.Size = New System.Drawing.Size(66, 13)
-        Me.lblDayOfYear.TabIndex = 11
+        Me.lblDayOfYear.TabIndex = 10
         Me.lblDayOfYear.Text = "Day of Year:"
         '
         'grpOptions
@@ -125,9 +125,139 @@ Partial Class dlgExtremesClimatic
         Me.grpOptions.Location = New System.Drawing.Point(10, 237)
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.Size = New System.Drawing.Size(210, 148)
-        Me.grpOptions.TabIndex = 15
+        Me.grpOptions.TabIndex = 14
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
+        '
+        'lblValues
+        '
+        Me.lblValues.AutoSize = True
+        Me.lblValues.Location = New System.Drawing.Point(7, 48)
+        Me.lblValues.Name = "lblValues"
+        Me.lblValues.Size = New System.Drawing.Size(37, 13)
+        Me.lblValues.TabIndex = 5
+        Me.lblValues.Text = "Value:"
+        '
+        'lblFrom
+        '
+        Me.lblFrom.AutoSize = True
+        Me.lblFrom.Location = New System.Drawing.Point(6, 21)
+        Me.lblFrom.Name = "lblFrom"
+        Me.lblFrom.Size = New System.Drawing.Size(33, 13)
+        Me.lblFrom.TabIndex = 0
+        Me.lblFrom.Text = "From:"
+        '
+        'lblTo
+        '
+        Me.lblTo.AutoSize = True
+        Me.lblTo.Location = New System.Drawing.Point(127, 21)
+        Me.lblTo.Name = "lblTo"
+        Me.lblTo.Size = New System.Drawing.Size(23, 13)
+        Me.lblTo.TabIndex = 2
+        Me.lblTo.Tag = ""
+        Me.lblTo.Text = "To:"
+        '
+        'rdoMin
+        '
+        Me.rdoMin.AutoSize = True
+        Me.rdoMin.Location = New System.Drawing.Point(10, 46)
+        Me.rdoMin.Name = "rdoMin"
+        Me.rdoMin.Size = New System.Drawing.Size(101, 17)
+        Me.rdoMin.TabIndex = 4
+        Me.rdoMin.TabStop = True
+        Me.rdoMin.Text = "Minimum Values"
+        Me.rdoMin.UseVisualStyleBackColor = True
+        '
+        'rdoMax
+        '
+        Me.rdoMax.AutoSize = True
+        Me.rdoMax.Location = New System.Drawing.Point(10, 70)
+        Me.rdoMax.Name = "rdoMax"
+        Me.rdoMax.Size = New System.Drawing.Size(104, 17)
+        Me.rdoMax.TabIndex = 9
+        Me.rdoMax.TabStop = True
+        Me.rdoMax.Text = "Maximum Values"
+        Me.rdoMax.UseVisualStyleBackColor = True
+        '
+        'rdoMinMax
+        '
+        Me.rdoMinMax.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoMinMax.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMinMax.FlatAppearance.BorderSize = 2
+        Me.rdoMinMax.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMinMax.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoMinMax.Location = New System.Drawing.Point(121, 12)
+        Me.rdoMinMax.Name = "rdoMinMax"
+        Me.rdoMinMax.Size = New System.Drawing.Size(88, 27)
+        Me.rdoMinMax.TabIndex = 1
+        Me.rdoMinMax.TabStop = True
+        Me.rdoMinMax.Text = "Min/Max"
+        Me.rdoMinMax.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoMinMax.UseVisualStyleBackColor = True
+        '
+        'rdoPeaks
+        '
+        Me.rdoPeaks.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoPeaks.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoPeaks.FlatAppearance.BorderSize = 2
+        Me.rdoPeaks.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoPeaks.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoPeaks.Location = New System.Drawing.Point(207, 12)
+        Me.rdoPeaks.Name = "rdoPeaks"
+        Me.rdoPeaks.Size = New System.Drawing.Size(87, 27)
+        Me.rdoPeaks.TabIndex = 2
+        Me.rdoPeaks.TabStop = True
+        Me.rdoPeaks.Text = "Peaks"
+        Me.rdoPeaks.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoPeaks.UseVisualStyleBackColor = True
+        '
+        'lblElement
+        '
+        Me.lblElement.AutoSize = True
+        Me.lblElement.Location = New System.Drawing.Point(251, 248)
+        Me.lblElement.Name = "lblElement"
+        Me.lblElement.Size = New System.Drawing.Size(48, 13)
+        Me.lblElement.TabIndex = 12
+        Me.lblElement.Text = "Element:"
+        '
+        'lblNewColName
+        '
+        Me.lblNewColName.Location = New System.Drawing.Point(10, 394)
+        Me.lblNewColName.Name = "lblNewColName"
+        Me.lblNewColName.Size = New System.Drawing.Size(119, 13)
+        Me.lblNewColName.TabIndex = 15
+        Me.lblNewColName.Text = "New Column Name:"
+        '
+        'lblNewDFName
+        '
+        Me.lblNewDFName.AutoSize = True
+        Me.lblNewDFName.Location = New System.Drawing.Point(10, 394)
+        Me.lblNewDFName.Name = "lblNewDFName"
+        Me.lblNewDFName.Size = New System.Drawing.Size(121, 13)
+        Me.lblNewDFName.TabIndex = 18
+        Me.lblNewDFName.Text = "New Data Frame Name:"
+        '
+        'ucrInputSave
+        '
+        Me.ucrInputSave.AddQuotesIfUnrecognised = True
+        Me.ucrInputSave.IsMultiline = False
+        Me.ucrInputSave.IsReadOnly = False
+        Me.ucrInputSave.Location = New System.Drawing.Point(131, 391)
+        Me.ucrInputSave.Name = "ucrInputSave"
+        Me.ucrInputSave.Size = New System.Drawing.Size(170, 21)
+        Me.ucrInputSave.TabIndex = 16
+        '
+        'ucrReceiverElement
+        '
+        Me.ucrReceiverElement.frmParent = Me
+        Me.ucrReceiverElement.Location = New System.Drawing.Point(251, 263)
+        Me.ucrReceiverElement.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverElement.Name = "ucrReceiverElement"
+        Me.ucrReceiverElement.Selector = Nothing
+        Me.ucrReceiverElement.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverElement.strNcFilePath = ""
+        Me.ucrReceiverElement.TabIndex = 13
+        Me.ucrReceiverElement.ucrSelector = Nothing
         '
         'ucrInputThresholdValue
         '
@@ -137,7 +267,7 @@ Partial Class dlgExtremesClimatic
         Me.ucrInputThresholdValue.Location = New System.Drawing.Point(126, 44)
         Me.ucrInputThresholdValue.Name = "ucrInputThresholdValue"
         Me.ucrInputThresholdValue.Size = New System.Drawing.Size(77, 21)
-        Me.ucrInputThresholdValue.TabIndex = 9
+        Me.ucrInputThresholdValue.TabIndex = 8
         '
         'ucrInputThresholdOperator
         '
@@ -146,16 +276,7 @@ Partial Class dlgExtremesClimatic
         Me.ucrInputThresholdOperator.Location = New System.Drawing.Point(46, 43)
         Me.ucrInputThresholdOperator.Name = "ucrInputThresholdOperator"
         Me.ucrInputThresholdOperator.Size = New System.Drawing.Size(72, 21)
-        Me.ucrInputThresholdOperator.TabIndex = 8
-        '
-        'lblValues
-        '
-        Me.lblValues.AutoSize = True
-        Me.lblValues.Location = New System.Drawing.Point(7, 48)
-        Me.lblValues.Name = "lblValues"
-        Me.lblValues.Size = New System.Drawing.Size(37, 13)
-        Me.lblValues.TabIndex = 7
-        Me.lblValues.Text = "Value:"
+        Me.ucrInputThresholdOperator.TabIndex = 6
         '
         'ucrNudTo
         '
@@ -189,53 +310,12 @@ Partial Class dlgExtremesClimatic
         Me.ucrNudFrom.TabIndex = 1
         Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'lblFrom
-        '
-        Me.lblFrom.AutoSize = True
-        Me.lblFrom.Location = New System.Drawing.Point(6, 21)
-        Me.lblFrom.Name = "lblFrom"
-        Me.lblFrom.Size = New System.Drawing.Size(33, 13)
-        Me.lblFrom.TabIndex = 0
-        Me.lblFrom.Text = "From:"
-        '
-        'lblTo
-        '
-        Me.lblTo.AutoSize = True
-        Me.lblTo.Location = New System.Drawing.Point(127, 21)
-        Me.lblTo.Name = "lblTo"
-        Me.lblTo.Size = New System.Drawing.Size(23, 13)
-        Me.lblTo.TabIndex = 2
-        Me.lblTo.Tag = ""
-        Me.lblTo.Text = "To:"
-        '
-        'rdoMin
-        '
-        Me.rdoMin.AutoSize = True
-        Me.rdoMin.Location = New System.Drawing.Point(10, 46)
-        Me.rdoMin.Name = "rdoMin"
-        Me.rdoMin.Size = New System.Drawing.Size(101, 17)
-        Me.rdoMin.TabIndex = 5
-        Me.rdoMin.TabStop = True
-        Me.rdoMin.Text = "Minimum Values"
-        Me.rdoMin.UseVisualStyleBackColor = True
-        '
-        'rdoMax
-        '
-        Me.rdoMax.AutoSize = True
-        Me.rdoMax.Location = New System.Drawing.Point(10, 70)
-        Me.rdoMax.Name = "rdoMax"
-        Me.rdoMax.Size = New System.Drawing.Size(104, 17)
-        Me.rdoMax.TabIndex = 6
-        Me.rdoMax.TabStop = True
-        Me.rdoMax.Text = "Maximum Values"
-        Me.rdoMax.UseVisualStyleBackColor = True
-        '
         'ucrPnlMaxMin
         '
         Me.ucrPnlMaxMin.Location = New System.Drawing.Point(6, 40)
         Me.ucrPnlMaxMin.Name = "ucrPnlMaxMin"
         Me.ucrPnlMaxMin.Size = New System.Drawing.Size(131, 49)
-        Me.ucrPnlMaxMin.TabIndex = 4
+        Me.ucrPnlMaxMin.TabIndex = 7
         '
         'ucrChkDayNumber
         '
@@ -244,86 +324,6 @@ Partial Class dlgExtremesClimatic
         Me.ucrChkDayNumber.Name = "ucrChkDayNumber"
         Me.ucrChkDayNumber.Size = New System.Drawing.Size(194, 20)
         Me.ucrChkDayNumber.TabIndex = 10
-        '
-        'rdoMinMax
-        '
-        Me.rdoMinMax.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoMinMax.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoMinMax.FlatAppearance.BorderSize = 2
-        Me.rdoMinMax.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoMinMax.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoMinMax.Location = New System.Drawing.Point(113, 12)
-        Me.rdoMinMax.Name = "rdoMinMax"
-        Me.rdoMinMax.Size = New System.Drawing.Size(88, 27)
-        Me.rdoMinMax.TabIndex = 1
-        Me.rdoMinMax.TabStop = True
-        Me.rdoMinMax.Text = "Min/Max"
-        Me.rdoMinMax.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoMinMax.UseVisualStyleBackColor = True
-        '
-        'rdoPeaks
-        '
-        Me.rdoPeaks.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoPeaks.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoPeaks.FlatAppearance.BorderSize = 2
-        Me.rdoPeaks.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoPeaks.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoPeaks.Location = New System.Drawing.Point(199, 12)
-        Me.rdoPeaks.Name = "rdoPeaks"
-        Me.rdoPeaks.Size = New System.Drawing.Size(87, 27)
-        Me.rdoPeaks.TabIndex = 3
-        Me.rdoPeaks.TabStop = True
-        Me.rdoPeaks.Text = "Peaks"
-        Me.rdoPeaks.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoPeaks.UseVisualStyleBackColor = True
-        '
-        'lblElement
-        '
-        Me.lblElement.AutoSize = True
-        Me.lblElement.Location = New System.Drawing.Point(251, 248)
-        Me.lblElement.Name = "lblElement"
-        Me.lblElement.Size = New System.Drawing.Size(48, 13)
-        Me.lblElement.TabIndex = 13
-        Me.lblElement.Text = "Element:"
-        '
-        'lblNewColName
-        '
-        Me.lblNewColName.Location = New System.Drawing.Point(10, 394)
-        Me.lblNewColName.Name = "lblNewColName"
-        Me.lblNewColName.Size = New System.Drawing.Size(119, 13)
-        Me.lblNewColName.TabIndex = 15
-        Me.lblNewColName.Text = "New Column Name:"
-        '
-        'lblNewDFName
-        '
-        Me.lblNewDFName.AutoSize = True
-        Me.lblNewDFName.Location = New System.Drawing.Point(10, 394)
-        Me.lblNewDFName.Name = "lblNewDFName"
-        Me.lblNewDFName.Size = New System.Drawing.Size(121, 13)
-        Me.lblNewDFName.TabIndex = 18
-        Me.lblNewDFName.Text = "New Data Frame Name:"
-        '
-        'ucrInputSave
-        '
-        Me.ucrInputSave.AddQuotesIfUnrecognised = True
-        Me.ucrInputSave.IsMultiline = False
-        Me.ucrInputSave.IsReadOnly = False
-        Me.ucrInputSave.Location = New System.Drawing.Point(133, 391)
-        Me.ucrInputSave.Name = "ucrInputSave"
-        Me.ucrInputSave.Size = New System.Drawing.Size(170, 21)
-        Me.ucrInputSave.TabIndex = 16
-        '
-        'ucrReceiverElement
-        '
-        Me.ucrReceiverElement.frmParent = Me
-        Me.ucrReceiverElement.Location = New System.Drawing.Point(251, 263)
-        Me.ucrReceiverElement.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverElement.Name = "ucrReceiverElement"
-        Me.ucrReceiverElement.Selector = Nothing
-        Me.ucrReceiverElement.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverElement.strNcFilePath = ""
-        Me.ucrReceiverElement.TabIndex = 14
-        Me.ucrReceiverElement.ucrSelector = Nothing
         '
         'ucrReceiverDOY
         '
@@ -334,7 +334,7 @@ Partial Class dlgExtremesClimatic
         Me.ucrReceiverDOY.Selector = Nothing
         Me.ucrReceiverDOY.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverDOY.strNcFilePath = ""
-        Me.ucrReceiverDOY.TabIndex = 12
+        Me.ucrReceiverDOY.TabIndex = 11
         Me.ucrReceiverDOY.ucrSelector = Nothing
         '
         'ucrReceiverYear
@@ -346,7 +346,7 @@ Partial Class dlgExtremesClimatic
         Me.ucrReceiverYear.Selector = Nothing
         Me.ucrReceiverYear.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverYear.strNcFilePath = ""
-        Me.ucrReceiverYear.TabIndex = 10
+        Me.ucrReceiverYear.TabIndex = 9
         Me.ucrReceiverYear.ucrSelector = Nothing
         '
         'ucrReceiverDate
@@ -358,7 +358,7 @@ Partial Class dlgExtremesClimatic
         Me.ucrReceiverDate.Selector = Nothing
         Me.ucrReceiverDate.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverDate.strNcFilePath = ""
-        Me.ucrReceiverDate.TabIndex = 8
+        Me.ucrReceiverDate.TabIndex = 7
         Me.ucrReceiverDate.ucrSelector = Nothing
         '
         'ucrReceiverStation
@@ -370,7 +370,7 @@ Partial Class dlgExtremesClimatic
         Me.ucrReceiverStation.Selector = Nothing
         Me.ucrReceiverStation.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverStation.strNcFilePath = ""
-        Me.ucrReceiverStation.TabIndex = 6
+        Me.ucrReceiverStation.TabIndex = 5
         Me.ucrReceiverStation.ucrSelector = Nothing
         '
         'ucrSelectorClimaticExtremes
@@ -381,7 +381,7 @@ Partial Class dlgExtremesClimatic
         Me.ucrSelectorClimaticExtremes.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorClimaticExtremes.Name = "ucrSelectorClimaticExtremes"
         Me.ucrSelectorClimaticExtremes.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorClimaticExtremes.TabIndex = 4
+        Me.ucrSelectorClimaticExtremes.TabIndex = 3
         '
         'ucrBase
         '
@@ -394,8 +394,8 @@ Partial Class dlgExtremesClimatic
         '
         Me.ucrPnlExtremesType.Location = New System.Drawing.Point(99, 6)
         Me.ucrPnlExtremesType.Name = "ucrPnlExtremesType"
-        Me.ucrPnlExtremesType.Size = New System.Drawing.Size(200, 37)
-        Me.ucrPnlExtremesType.TabIndex = 2
+        Me.ucrPnlExtremesType.Size = New System.Drawing.Size(218, 37)
+        Me.ucrPnlExtremesType.TabIndex = 0
         '
         'dlgExtremesClimatic
         '

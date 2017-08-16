@@ -52,13 +52,11 @@ Public Class dlgExtremesClimatic
         ucrReceiverYear.Selector = ucrSelectorClimaticExtremes
         ucrReceiverYear.SetClimaticType("year")
         ucrReceiverYear.bAutoFill = True
-        ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
         ucrReceiverYear.strSelectorHeading = "Year Variables"
 
         ucrReceiverStation.Selector = ucrSelectorClimaticExtremes
         ucrReceiverStation.SetClimaticType("station")
         ucrReceiverStation.bAutoFill = True
-        ucrReceiverStation.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "station" & Chr(34)})
         ucrReceiverStation.strSelectorHeading = "Station Variables"
 
         '' What is Date used for in this?
@@ -66,7 +64,6 @@ Public Class dlgExtremesClimatic
         ucrReceiverDate.SetMeAsReceiver()
         ucrReceiverDate.Selector = ucrSelectorClimaticExtremes
         ucrReceiverDate.bAutoFill = True
-        ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
         ucrReceiverDate.strSelectorHeading = "Date Variables"
 
         ucrReceiverDOY.SetParameter(New RParameter("day", 0))
@@ -82,6 +79,7 @@ Public Class dlgExtremesClimatic
         ucrReceiverElement.SetParameterIsString()
         ucrReceiverElement.bWithQuotes = False
         ucrReceiverElement.strSelectorHeading = "Numerics"
+        ucrReceiverElement.SetDataType("numeric")
 
         'to/from
         ucrNudFrom.SetParameter(New RParameter("from", 1))
@@ -104,8 +102,8 @@ Public Class dlgExtremesClimatic
 
         ucrChkDayNumber.SetText("Include Day of Occurrence")
 
-        ucrChkMissingValues.SetText("Include Missing Values")
         ucrChkMissingValues.SetParameter(New RParameter("na.rm", 1))
+        ucrChkMissingValues.SetText("Include Missing Values")
 
         ' Peaks Option
         ucrInputThresholdValue.SetParameter(New RParameter("right", 1))
@@ -114,10 +112,8 @@ Public Class dlgExtremesClimatic
         ucrInputThresholdValue.AddQuotesIfUnrecognised = False
 
         ucrInputThresholdOperator.SetParameter(New RParameter("function_exp", 1)) ' is it function_exp = OPERATOR?
-
         ' This is adding a new operator, this has been done before with functions, e.g. dlgScatterplot has a checkbox which adds or removes a function (geom_smooth)
         ' But here, the function added changes depending on which is selected from the combo box.
-
         ucrInputThresholdOperator.SetItems({"<", "<=", ">=", ">"})
 
         ucrInputThresholdOperator.AddParameterIsROperatorCondition("<", "<", True)
@@ -133,7 +129,7 @@ Public Class dlgExtremesClimatic
         ucrPnlExtremesType.AddToLinkedControls(ucrInputThresholdOperator, {rdoPeaks}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=">=")
         ucrPnlExtremesType.AddToLinkedControls(ucrInputThresholdValue, {rdoPeaks}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.85")
         ucrPnlExtremesType.AddToLinkedControls(ucrPnlMaxMin, {rdoMinMax}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlExtremesType.AddToLinkedControls(ucrChkMissingValues, {rdoMinMax}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlExtremesType.AddToLinkedControls(ucrChkMissingValues, {rdoMinMax}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
         ucrPnlMaxMin.SetLinkedDisplayControl(lblNewColName)
     End Sub
 
@@ -152,7 +148,6 @@ Public Class dlgExtremesClimatic
         clsPeaksFilterOperator.Clear()
 
         ucrSelectorClimaticExtremes.Reset()
-        ucrInputThresholdValue.Reset()
         SetCalculationValues()
 
         ' Days
@@ -167,7 +162,7 @@ Public Class dlgExtremesClimatic
         clsDayFromAndToOperator.AddParameter("to_operator", clsROperatorParameter:=clsDayToOperator, iPosition:=1)
         clsDayToOperator.SetOperation("<=")
         clsDayToOperator.AddParameter("to", 366, iPosition:=1)
-        clsDayFromAndTo.SetAssignTo("Day_From_and_To")
+        clsDayFromAndTo.SetAssignTo("day_from_and_to")
 
         ' For the Min/Max option:
         clsGroupByFunction.SetRCommand("instat_calculation$new")
@@ -252,12 +247,12 @@ Public Class dlgExtremesClimatic
         If Not ucrInputSave.bUserTyped Then
             If rdoMinMax.Checked Then
                 If rdoMax.Checked Then
-                    ucrInputSave.SetName("max")
+                    ucrInputSave.SetName("max_" & ucrReceiverElement.GetVariableNames(False))
                 Else
-                    ucrInputSave.SetName("min")
+                    ucrInputSave.SetName("min_" & ucrReceiverElement.GetVariableNames(False))
                 End If
             ElseIf rdoPeaks.Checked Then
-                ucrInputSave.SetName("peaks")
+                ucrInputSave.SetName("peaks_" & ucrReceiverElement.GetVariableNames(False))
             End If
         End If
     End Sub
@@ -327,6 +322,7 @@ Public Class dlgExtremesClimatic
     Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlValueChanged
         MinMaxFunction()
         PeaksFunction()
+        SetAssignName()
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
