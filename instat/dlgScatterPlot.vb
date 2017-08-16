@@ -113,6 +113,7 @@ Public Class dlgScatterPlot
         clsRaesFunction = New RFunction
 
         ucrSelectorForScatter.Reset()
+        ucrSelectorForScatter.SetGgplotFunction(clsBaseOperator)
         ucrSaveScatterPlot.Reset()
         sdgPlots.Reset()
         bResetSubdialog = True
