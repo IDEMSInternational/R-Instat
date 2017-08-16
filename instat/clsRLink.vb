@@ -87,6 +87,7 @@ Public Class RLink
             If strLine.Trim(vbLf).Count > 0 Then
                 RunScript(strScript:=strLine.Trim(vbLf), iCallType:=iCallType, strComment:=strComment, bSeparateThread:=bSeparateThread, bSilent:=True)
             End If
+            strComment = ""
         Next
         bInstatObjectExists = True
     End Sub
