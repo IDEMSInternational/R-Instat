@@ -46,11 +46,12 @@ Public Class dlgDuplicateColumns
         If bReset Then
             SetDefaults()
         End If
+        SetRCodeforControls(bReset)
+        bReset = False
         If bUseSelectedColumn Then
             SetDefaultColumn()
         End If
-        SetRCodeforControls(bReset)
-        bReset = False
+        TestOKEnabled()
         autoTranslate(Me)
     End Sub
 
@@ -132,11 +133,6 @@ Public Class dlgDuplicateColumns
         ucrSelectorForDuplicateColumn.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = strSelectedDataFrame
         ucrReceiverDuplicateColumns.Add(strSelectedColumn, strSelectedDataFrame)
         bUseSelectedColumn = False
-    End Sub
-
-    Public Sub SetCurrentDataframe(strDataFrame As String)
-        strSelectedDataFrame = strDataFrame
-        ucrSelectorForDuplicateColumn.SetDataframe(strSelectedDataFrame)
     End Sub
 
     Private Sub PositionOfDuplicatedColumn()
