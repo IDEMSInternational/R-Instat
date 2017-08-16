@@ -32,9 +32,9 @@ Public Class dlgDuplicateColumns
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsDefaultFunction As New RFunction
-    Dim bUseSelectedColumn As Boolean = False
-    Dim strSelectedColumn As String = ""
-    Dim strSelectedDataFrame As String = ""
+    Public strSelectedDataFrame As String = ""
+    Private bUseSelectedColumn As Boolean = False
+    Private strSelectedColumn As String = ""
 
     Private Sub dlgCopySheet_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -48,6 +48,10 @@ Public Class dlgDuplicateColumns
         End If
         SetRCodeforControls(bReset)
         bReset = False
+        If bUseSelectedColumn Then
+            SetDefaultColumn()
+        End If
+        TestOKEnabled()
         autoTranslate(Me)
     End Sub
 

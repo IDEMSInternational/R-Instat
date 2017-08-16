@@ -20,6 +20,9 @@ Public Class dlgConvertColumns
     Public bFirstLoad As Boolean = True
     Public bToFactorOnly As Boolean = False
     Private bReset As Boolean = True
+    Private bUseSelectedColumn As Boolean = False
+    Private strSelectedColumn As String = ""
+    Public strSelectedDataFrame As String = ""
     Private clsDefaultFunction As New RFunction
 
     Private Sub dlgConvertColumns_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -32,6 +35,10 @@ Public Class dlgConvertColumns
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        bReset = False
+        If bUseSelectedColumn Then
+            SetDefaultColumn()
+        End If
         ReopenDialog()
         TestOKEnabled()
     End Sub
@@ -93,6 +100,18 @@ Public Class dlgConvertColumns
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
         clsDefaultFunction.AddParameter("to_type", Chr(34) & "factor" & Chr(34))
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+    End Sub
+
+    Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
+        strSelectedColumn = strColumn
+        strSelectedDataFrame = strDataFrame
+        bUseSelectedColumn = True
+    End Sub
+
+    Private Sub SetDefaultColumn()
+        ucrSelectorDataFrameColumns.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = strSelectedDataFrame
+        ucrReceiverColumnsToConvert.Add(strSelectedColumn, strSelectedDataFrame)
+        bUseSelectedColumn = False
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)

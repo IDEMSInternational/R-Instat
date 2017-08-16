@@ -24,6 +24,9 @@ Public Class dlgSort
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsSortFunction As New RFunction
+    Public strSelectedDataFrame As String = ""
+    Private bUseSelectedColumn As Boolean = False
+    Private strSelectedColumn As String = ""
     Private Sub dlgSort_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -35,6 +38,9 @@ Public Class dlgSort
         End If
         SetRCodeForControls(bReset)
         bReset = False
+        If bUseSelectedColumn Then
+            SetDefaultColumn()
+        End If
     End Sub
 
     Private Sub InitialiseDialog()
@@ -76,6 +82,18 @@ Public Class dlgSort
 
         ' Set default RFunction as the base function
         ucrBase.clsRsyntax.SetBaseRFunction(clsSortFunction)
+    End Sub
+
+    Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
+        strSelectedColumn = strColumn
+        strSelectedDataFrame = strDataFrame
+        bUseSelectedColumn = True
+    End Sub
+
+    Private Sub SetDefaultColumn()
+        ucrSelectForSort.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = strSelectedDataFrame
+        ucrReceiverSort.Add(strSelectedColumn, strSelectedDataFrame)
+        bUseSelectedColumn = False
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
