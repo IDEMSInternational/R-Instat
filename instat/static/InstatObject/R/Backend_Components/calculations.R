@@ -93,7 +93,7 @@ data_object$set("public", "save_calculation", function(calc) {
 #                             "filter" - for dplyr's "filter", to filter the rows of a data frame by any logical expression
 #                             "summary" - for dplyr's "summarise", to produce summaries. Produces a singple value unless the data is already grouped, 
 #                                         and then one value for each "group" is produced.
-#                             "combunation" - for calculations which contain sub calculations (and possibly mutations) but no main calculation is needed.
+#                             "combination" - for calculations which contain sub calculations (and possibly mutations) but no main calculation is needed.
 # name             : string - a name for the calculation. If save_calc = FALSE then name is not used anywhere.
 # result_name      : string - a name for the output (usually a column) produced by the calculation e.g. "YieldDouble"
 # result_data_frame : string - a name for the data frame that the output should go to. This could be an existing data frame on a new one
