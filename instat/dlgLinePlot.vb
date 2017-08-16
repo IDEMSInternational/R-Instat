@@ -108,6 +108,7 @@ Public Class dlgLinePlot
         clsBaseOperator = New ROperator
 
         ucrLinePlotSelector.Reset()
+        ucrLinePlotSelector.SetGgplotFunction(clsBaseOperator)
         ucrSave.Reset()
         ucrVariablesAsFactorForLinePlot.SetMeAsReceiver()
         bResetSubdialog = True
