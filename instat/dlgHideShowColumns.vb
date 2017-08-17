@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class dlgHideShowColumns
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Public strSelectedDataFrame As String = ""
     Private clsHiddenColumns As New RFunction
     Private Sub dlgHideShowColumns_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -60,6 +61,11 @@ Public Class dlgHideShowColumns
         clsHiddenColumns.AddParameter("col_names", "c()")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsHiddenColumns)
+    End Sub
+
+    Public Sub SetCurrentDataframe(strDataFrame As String)
+        strSelectedDataFrame = strDataFrame
+        ucrSelectorForHiddenColumns.SetDataframe(strSelectedDataFrame)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
