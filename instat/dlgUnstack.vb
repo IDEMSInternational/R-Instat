@@ -38,25 +38,9 @@ Public Class dlgUnstack
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 58
 
-        ' Operations
-        clsFormula.SetOperation("~")
-        clsFormula.AddParameter("formula", clsROperatorParameter:=clsIDColumns, iPosition:=0)
-        clsFormula.bBrackets = False
-        clsIDColumns.bBrackets = False
-
         'ucrSelector
         ucrSelectorForUnstack.SetParameter(New RParameter("data", 0))
         ucrSelectorForUnstack.SetParameterIsrfunction()
-
-        'ucrID
-        ucrIDColumns.SetParameter(New RParameter("x", 1))
-        ucrIDColumns.SetParameterIsString()
-        ucrIDColumns.Selector = ucrSelectorForUnstack
-
-        'ucrColumn
-        ucrColumnToUnstackReceiver.SetParameter(New RParameter("value.var", 4))
-        ucrColumnToUnstackReceiver.SetParameterIsString()
-        ucrColumnToUnstackReceiver.Selector = ucrSelectorForUnstack
 
         'ucrFactor
         ucrFactorToUnstackReceiver.SetParameter(New RParameter("y", 2))
@@ -64,6 +48,23 @@ Public Class dlgUnstack
         ucrFactorToUnstackReceiver.bWithQuotes = False
         ucrFactorToUnstackReceiver.Selector = ucrSelectorForUnstack
         ucrFactorToUnstackReceiver.SetDataType("factor")
+        ucrFactorToUnstackReceiver.strSelectorHeading = "Factor Variables"
+
+        'ucrColumn
+        ucrColumnToUnstackReceiver.SetParameter(New RParameter("value.var", 4))
+        ucrColumnToUnstackReceiver.SetParameterIsString()
+        ucrColumnToUnstackReceiver.Selector = ucrSelectorForUnstack
+
+        'ucrID
+        ucrIDColumns.SetParameter(New RParameter("x", 1))
+        ucrIDColumns.SetParameterIsString()
+        ucrIDColumns.Selector = ucrSelectorForUnstack
+
+        ' Operations
+        clsFormula.SetOperation("~")
+        clsFormula.AddParameter("formula", clsROperatorParameter:=clsIDColumns, iPosition:=0)
+        clsFormula.bBrackets = False
+        clsIDColumns.bBrackets = False
 
         'chkbox
         ucrChkDropMissingCombinations.SetParameter(New RParameter("drop", 3))
