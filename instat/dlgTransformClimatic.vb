@@ -102,6 +102,7 @@ Public Class dlgTransformClimatic
         ucrInputSum.SetItems(dctInputSumPairs)
         ucrInputSum.SetDropDownStyleAsNonEditable()
         ucrInputSum.SetLinkedDisplayControl(lblSumOver)
+        ucrInputSum.bAllowNonConditionValues = True
 
         ucrNudSumOver.SetParameter(New RParameter("width", 1))
         ucrNudSumOver.SetMinMax(1, 366)
@@ -115,7 +116,7 @@ Public Class dlgTransformClimatic
         ucrNudCountOver.SetLinkedDisplayControl(lblCountOver)
 
         ' Count and Spell
-        ucrInputCondition.SetItems({"<= Amount of Rain", "Between", ">= Amount of Rain"})
+        ucrInputCondition.SetItems({"<=", "Between", ">="})
         ucrInputCondition.SetDropDownStyleAsNonEditable()
 
         ucrInputSpellLower.SetParameter(New RParameter("min", 1))
@@ -140,14 +141,14 @@ Public Class dlgTransformClimatic
 
         ' Save Options
         ucrInputColName.SetParameter(New RParameter("result_name", 2))
-        ucrInputColName.SetName("moving_Sum")
+        ucrInputColName.SetName("moving_sum")
 
         ucrPnlTransform.AddToLinkedControls(ucrInputSum, {rdoMoving}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Sum")
         ucrPnlTransform.AddToLinkedControls(ucrNudSumOver, {rdoMoving}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
 
         ucrPnlTransform.AddToLinkedControls({ucrNudCountOver}, {rdoCount}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
         ucrPnlTransform.AddToLinkedControls({ucrInputCondition}, {rdoCount, rdoSpell}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Between")
-        ucrInputCondition.AddToLinkedControls(ucrInputSpellLower, {"<= Amount of Rain", "Between", ">= Amount of Rain"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrInputCondition.AddToLinkedControls(ucrInputSpellLower, {"<=", "Between", ">="}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrInputCondition.AddToLinkedControls(ucrInputSpellUpper, {"Between"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.85)
 
         ucrPnlTransform.AddToLinkedControls(ucrInputEvaporation, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
@@ -254,7 +255,7 @@ Public Class dlgTransformClimatic
         clsRTransform.SetRCommand("instat_calculation$new")
         clsRTransform.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRMovingFunction, iPosition:=1) ' changes depending on the rdo
-        clsRTransform.AddParameter("result_name", Chr(34) & "moving_Sum" & Chr(34), iPosition:=2)
+        clsRTransform.AddParameter("result_name", Chr(34) & "moving_sum" & Chr(34), iPosition:=2)
         clsRTransform.AddParameter("manipulations", clsRFunctionParameter:=clsTransformManipulationsFunc, iPosition:=5)
         clsRTransform.AddParameter("save", 2, iPosition:=6)
         clsRTransform.SetAssignTo("transform_calculation")
@@ -310,7 +311,7 @@ Public Class dlgTransformClimatic
 
     Private Sub InputConditionOptions()
         Select Case ucrInputCondition.GetText
-            Case "<= Amount of Rain"
+            Case "<="
                 clsRRaindayAndOperator.RemoveParameterByName("upper")
                 clsRRaindayUpperOperator.RemoveParameterByName("max")
                 clsRRaindayAndOperator.AddParameter("lower", clsROperatorParameter:=clsRRaindayLowerOperator, iPosition:=0)
@@ -362,9 +363,18 @@ Public Class dlgTransformClimatic
     End Sub
 
     Private Sub MovingColNames()
-        If ucrInputSum.cboInput.SelectedItem <> Nothing Then
-            ucrInputColName.SetName("moving_" & ucrInputSum.cboInput.SelectedItem)
-        End If
+        Select Case ucrInputSum.GetText
+            Case "Sum"
+                ucrInputColName.SetName("moving_sum")
+            Case "Maximum"
+                ucrInputColName.SetName("moving_max")
+            Case "Minimum"
+                ucrInputColName.SetName("moving_min")
+            Case "Mean"
+                ucrInputColName.SetName("moving_mean")
+            Case Else
+                ucrInputColName.SetName("moving")
+        End Select
     End Sub
 
     Private Sub GroupByOptions()
