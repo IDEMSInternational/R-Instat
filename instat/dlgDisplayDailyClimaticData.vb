@@ -15,10 +15,12 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgDisplayDailyClimaticData
+Public Class dlgDisplayDailyData
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private Sub dlgDisplayDailyClimaticData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private clsSummaryTable As RFunction
+    Private clsDailyClimaticData As RFunction
+    Private Sub dlgDisplayDailyData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
@@ -34,18 +36,43 @@ Public Class dlgDisplayDailyClimaticData
 
     Private Sub InitialiseDialog()
 
+        ucrSelectorDisplayDailyClimaticData.SetParameter(New RParameter("data_names"))
+        ucrSelectorDisplayDailyClimaticData.SetParameterIsrfunction()
+
         ucrReceiverStations.Selector = ucrSelectorDisplayDailyClimaticData
         ucrReceiverStations.SetClimaticType("station")
         ucrReceiverStations.bAutoFill = True
         ucrReceiverStations.SetMeAsReceiver()
 
+        ucrReceiverStations.SetParameter(New RParameter("station"))
+        ucrReceiverStations.SetParameterIsString()
+        ucrReceiverStations.bWithQuotes = False
+
+        ucrReceiverYear.SetParameter(New RParameter("year"))
+        ucrReceiverYear.SetParameterIsString()
+        ucrReceiverYear.bWithQuotes = False
+
+        ucrReceiverDate.SetParameter(New RParameter("rain"))
+        ucrReceiverDate.SetParameterIsString()
+        ucrReceiverDate.bWithQuotes = False
+
+        ucrReceiverStations.SetParameter(New RParameter("doy"))
+        ucrReceiverStations.SetParameterIsString()
+        ucrReceiverStations.bWithQuotes = False
+
         ucrReceiverYear.Selector = ucrSelectorDisplayDailyClimaticData
         ucrReceiverYear.SetClimaticType("year")
+        ucrReceiverYear.bAutoFill = True
+        ucrReceiverYear.strSelectorHeading = "Year Variables"
+        ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
         ucrReceiverYear.bAutoFill = True
 
         ucrReceiverDate.Selector = ucrSelectorDisplayDailyClimaticData
         ucrReceiverDate.SetClimaticType("date")
+        ucrReceiverDate.SetParameterIsString()
+        ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
         ucrReceiverDate.bAutoFill = True
+        ucrReceiverDate.strSelectorHeading = "Date Variables"
 
         ucrReceiverElements.Selector = ucrSelectorDisplayDailyClimaticData
         ucrReceiverElements.SetParameter(New RParameter("x", 0))
@@ -62,8 +89,7 @@ Public Class dlgDisplayDailyClimaticData
 
         ucrPnlFrequencyDisplay.AddRadioButton(rdoTable)
         ucrPnlFrequencyDisplay.AddRadioButton(rdoGraph)
-        ucrPnlFrequencyDisplay.AddRadioButton(rdoBoth)
-        ucrPnlFrequencyDisplay.AddToLinkedControls({ucrNudLowerYaxis, ucrNudUpperYaxis, ucrReceiverXaxis, ucrChkMissingRugPlot, ucrChkValuesOutsideYrange}, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFrequencyDisplay.AddToLinkedControls({ucrNudLowerYaxis, ucrNudUpperYaxis, ucrReceiverXaxis, ucrChkMissingRugPlot, ucrChkValuesOutsideYrange}, {rdoGraph}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.SetLinkedDisplayControl(grpGraph)
         ucrChkMissingRugPlot.SetLinkedDisplayControl(grpGraph)
         ucrChkMissingRugPlot.SetText("Indicate Missing Rug Plot")
@@ -72,13 +98,18 @@ Public Class dlgDisplayDailyClimaticData
     End Sub
 
     Private Sub SetDefaults()
+        clsSummaryTable = New RFunction
+        clsDailyClimaticData = New RFunction
         ucrSelectorDisplayDailyClimaticData.Reset()
-        rdoTable.Enabled = False 'for now
 
+        clsSummaryTable.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
+        clsDailyClimaticData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$daily_climatic_data")
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDailyClimaticData)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Object)
-
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -90,4 +121,5 @@ Public Class dlgDisplayDailyClimaticData
         SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
+
 End Class
