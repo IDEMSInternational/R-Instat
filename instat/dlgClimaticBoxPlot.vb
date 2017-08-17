@@ -124,14 +124,14 @@ Public Class dlgClimaticBoxPlot
 
         ucrReceiverFacet.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiverFacet.SetParameter(New RParameter("var1", 0))
-        'ucrReceiverFacet.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "month" & Chr(34)})
+        ucrReceiverFacet.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "month" & Chr(34)})
         ucrReceiverFacet.bAutoFill = True
         ucrReceiverFacet.SetParameterIsString()
         ucrReceiverFacet.bWithQuotes = False
 
         ucrReceiver2ndFacet.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiver2ndFacet.SetParameter(New RParameter("var2", 1))
-        'ucrReceiver2ndFacet.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "station" & Chr(34)})
+        ucrReceiver2ndFacet.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "station" & Chr(34)})
         ucrReceiver2ndFacet.bAutoFill = True
         ucrReceiver2ndFacet.SetParameterIsString()
         ucrReceiver2ndFacet.bWithQuotes = False
@@ -154,7 +154,6 @@ Public Class dlgClimaticBoxPlot
         ucrChkMoreData.AddToLinkedControls(ucrReceiverMoreData, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverMoreData.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiverMoreData.SetParameter(New RParameter("fill"))
-        'ucrReceiverMoreData.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "" & Chr(34)})
         ucrReceiverMoreData.SetParameterIsString()
         ucrReceiverMoreData.bWithQuotes = False
 
@@ -167,8 +166,8 @@ Public Class dlgClimaticBoxPlot
         ucrChk2ndFacet.SetText("2nd Facet")
         ucrChk2ndFacet.AddToLinkedControls(ucrReceiver2ndFacet, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChk2ndFacet.AddToLinkedControls(ucrChkMargins, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChk2ndFacet.AddFunctionNamesCondition(False, "facet_grid", False)
-        ucrChk2ndFacet.AddFunctionNamesCondition(True, "facet_grid", True)
+        ucrChk2ndFacet.AddParameterValuesCondition(False, "facets", "facet_grid", False)
+        ucrChk2ndFacet.AddParameterValuesCondition(True, "facets", "facet_grid", True)
 
         ucrChkMargins.SetText("Margins")
         ucrChkMargins.SetParameter(New RParameter("margins"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=False)
@@ -274,12 +273,14 @@ Public Class dlgClimaticBoxPlot
     Private Sub SetFacets()
         clsFacetFunction.SetPackageName("ggplot2")
         clsFacetOp.SetOperation("~")
-        If (ucrChkFacet.Checked AndAlso Not ucrReceiverFacet.IsEmpty) AndAlso Not ucrChk2ndFacet.Checked Then
-            clsFacetFunction.SetRCommand("facet_wrap")
-        ElseIf (ucrChkFacet.Checked AndAlso Not ucrReceiverFacet.IsEmpty) AndAlso (ucrChk2ndFacet.Checked AndAlso Not ucrReceiver2ndFacet.IsEmpty) Then
-            clsFacetFunction.SetRCommand("facet_grip")
+        If ucrChkFacet.Checked Then
+            If (Not ucrReceiverFacet.IsEmpty) AndAlso Not ucrChk2ndFacet.Checked Then
+                clsFacetFunction.SetRCommand("facet_wrap")
+            ElseIf (Not ucrReceiverFacet.IsEmpty) AndAlso (ucrChk2ndFacet.Checked AndAlso Not ucrReceiver2ndFacet.IsEmpty) Then
+                clsFacetFunction.SetRCommand("facet_grid")
+            End If
+            clsFacetFunction.AddParameter(clsROperatorParameter:=clsFacetOp)
         End If
-        clsFacetFunction.AddParameter(clsROperatorParameter:=clsFacetOp)
     End Sub
 
     Private Sub ucrChkFacet_ControlvalueChanged() Handles ucrChkFacet.ControlValueChanged, ucrReceiverFacet.ControlValueChanged, ucrChk2ndFacet.ControlValueChanged, ucrReceiver2ndFacet.ControlValueChanged
@@ -309,13 +310,5 @@ Public Class dlgClimaticBoxPlot
             End If
         Next
         'TODO need to check for the variable width from the geom function in a way that when we check the var width checkbox, it triggers controlvaluechanged
-    End Sub
-
-    Private Sub ucrPnlPlots_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPlots.ControlValueChanged
-
-    End Sub
-
-    Private Sub ucrChkFacet_ControlvalueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFacet.ControlValueChanged, ucrReceiver2ndFacet.ControlValueChanged, ucrChkFacet.ControlValueChanged, ucrChk2ndFacet.ControlValueChanged
-
     End Sub
 End Class
