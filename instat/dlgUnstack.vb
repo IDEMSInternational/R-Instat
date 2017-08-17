@@ -48,7 +48,7 @@ Public Class dlgUnstack
         ucrFactorToUnstackReceiver.bWithQuotes = False
         ucrFactorToUnstackReceiver.Selector = ucrSelectorForUnstack
         ucrFactorToUnstackReceiver.SetDataType("factor")
-        ucrFactorToUnstackReceiver.strSelectorHeading = "Factor Variables"
+        ucrFactorToUnstackReceiver.strSelectorHeading = "Factors"
 
         'ucrColumn
         ucrColumnToUnstackReceiver.SetParameter(New RParameter("value.var", 4))
@@ -85,11 +85,10 @@ Public Class dlgUnstack
         ucrSelectorForUnstack.Reset()
         ucrNewDFName.Reset()
         ucrFactorToUnstackReceiver.SetMeAsReceiver()
-        NewDefaultName()
 
         clsDefaultFunction.SetPackageName("reshape2")
         clsDefaultFunction.SetRCommand("dcast")
-        clsDefaultFunction.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
+        clsDefaultFunction.SetAssignTo(ucrSelectorForUnstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked", strTempDataframe:=ucrSelectorForUnstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
