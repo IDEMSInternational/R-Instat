@@ -27,6 +27,24 @@ link$set("public", "data_clone", function() {
 }
 )
 
+link$set("public", "rename_data_frame_in_link", function(old_data_name, new_data_name) {
+  if(self$from_data_frame == old_data_name) self$from_data_frame <- new_data_name
+  if(self$to_data_frame == old_data_name) self$to_data_frame <- new_data_name
+}
+)
+
+instat_object$set("public", "update_links_rename_data_frame", function(old_data_name, new_data_name) {
+  for(i in seq_along(private$.links)) {
+    private$.links[[i]]$rename_data_frame_in_link(old_data_name, new_data_name)
+  }
+}
+)
+
+instat_object$set("public", "update_links_rename_column", function(data_name, old_column_name, new_column_name) {
+  #TODO
+}
+)
+
 instat_object$set("public", "add_link", function(from_data_frame, to_data_frame, link_pairs, type, link_name) {
   if(length(names(link_pairs)) != length(link_pairs)) stop("link_pairs must be a named vector or list.")
   if(!self$link_exists_between(from_data_frame, to_data_frame)) {

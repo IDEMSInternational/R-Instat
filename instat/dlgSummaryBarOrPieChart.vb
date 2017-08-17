@@ -109,6 +109,7 @@ Public Class dlgSummaryBarOrPieChart
         clsRaesFunction = New RFunction
 
         ucrSummaryBarSelector.Reset()
+        ucrSummaryBarSelector.SetGgplotFunction(clsBaseOperator)
         ucrYReceiver.SetMeAsReceiver()
         ucrSaveSummaryBar.Reset()
         bResetSubdialog = True
