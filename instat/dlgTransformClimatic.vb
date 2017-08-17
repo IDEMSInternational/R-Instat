@@ -58,11 +58,12 @@ Public Class dlgTransformClimatic
         ucrPnlTransform.AddRadioButton(rdoSpell)
         ucrPnlTransform.AddRadioButton(rdoWaterBalance)
 
-        ucrPnlTransform.AddParameterValuesCondition(rdoMoving, "data", ucrReceiverData.GetVariableNames, True) ' function_exp = rollapply(data = element
-        ucrPnlTransform.AddParameterValuesCondition(rdoCount, "data", strRainDay, True) ' function_exp = rollapply(data = rain_day
-        SetDefaults()
-        ucrPnlTransform.AddParameterValuesCondition(rdoSpell, "function_exp", Chr(34) & "cumsum(" & strRainDay & ")-cummax((" & strRainDay & "==0)*cumsum(" & strRainDay & "))" & Chr(34), True)
-        ucrPnlTransform.AddParameterValuesCondition(rdoWaterBalance, "function_exp", "Reduce", True)
+        ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoMoving, "function_exp", "rollapply")
+        ucrPnlTransform.AddParameterPresentCondition(rdoMoving, "sub_calculations", False)
+        ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoCount, "function_exp", "rollapply")
+        ucrPnlTransform.AddParameterPresentCondition(rdoCount, "sub_calculations", True)
+        ucrPnlTransform.AddParameterIsStringCondition(rdoSpell, "function_exp")
+        ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoWaterBalance, "function_exp", "Reduce")
 
         'ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoMoving, "sub1", "instat_calculation$new", False) ' clsRRainday
         'ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoCount, "sub1", "instat_calculation$new")
@@ -70,10 +71,9 @@ Public Class dlgTransformClimatic
         'ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoWaterBalance, "sub1", "instat_calculation$new", False)
 
         ' Setting receivers
-        ucrReceiverData.SetParameter(New RParameter("data", 0))
+        ucrReceiverData.SetParameter(New RParameter("data", 0, bNewIncludeArgumentName:=False))
         ucrReceiverData.SetParameterIsString()
         ucrReceiverData.bWithQuotes = False
-        ucrReceiverData.SetParameterIncludeArgumentName(False)
         ucrReceiverData.Selector = ucrSelectorTransform
         ucrReceiverData.strSelectorHeading = "Numerics"
 
@@ -92,12 +92,6 @@ Public Class dlgTransformClimatic
         ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
         ucrReceiverDate.bAutoFill = True
         ucrReceiverDate.strSelectorHeading = "Date Variables"
-
-        ' What is this used for? We don't specify days of interest (yet?)
-        ucrReceiverDOY.Selector = ucrSelectorTransform
-        ucrReceiverDOY.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "doy" & Chr(34)})
-        ucrReceiverDOY.bAutoFill = True
-        ucrReceiverDOY.strSelectorHeading = "Day Variables"
 
         ' Moving
         ucrInputSum.SetParameter(New RParameter("FUN", 0))
@@ -146,7 +140,7 @@ Public Class dlgTransformClimatic
 
         ' Save Options
         ucrInputColName.SetParameter(New RParameter("result_name", 4))
-        ucrInputColName.SetName("count")
+        ucrInputColName.SetName("moving_Sum")
 
         ucrPnlTransform.AddToLinkedControls(ucrInputSum, {rdoMoving}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Sum")
         ucrPnlTransform.AddToLinkedControls(ucrNudSumOver, {rdoMoving}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
@@ -261,7 +255,7 @@ Public Class dlgTransformClimatic
         clsRTransform.SetRCommand("instat_calculation$new")
         clsRTransform.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRMovingFunction, iPosition:=1) ' changes depending on the rdo
-        clsRTransform.AddParameter("result_name", Chr(34) & "count" & Chr(34), iPosition:=2)
+        clsRTransform.AddParameter("result_name", Chr(34) & "moving_Sum" & Chr(34), iPosition:=2)
         clsRTransform.AddParameter("manipulations", clsRFunctionParameter:=clsTransformManipulationsFunc, iPosition:=3)
         clsRTransform.AddParameter("save", 2, iPosition:=4)
         clsRTransform.SetAssignTo("transform_calculation")
@@ -282,8 +276,9 @@ Public Class dlgTransformClimatic
         ucrReceiverData.AddAdditionalCodeParameterPair(clsRRaindayUpperOperator, New RParameter("rain", 0), iAdditionalPairNo:=3)
         ucrReceiverData.AddAdditionalCodeParameterPair(clsRWaterBalanceFunction, New RParameter("replace_na", 1, False), iAdditionalPairNo:=4)
 
+        ucrPnlTransform.SetRCode(clsRTransform, bReset)
+
         ' Moving
-        ucrPnlTransform.SetRCode(clsRCountFunction, bReset)
         ucrNudSumOver.SetRCode(clsRMovingFunction, bReset)
         ucrInputSum.SetRCode(clsRMovingFunction, bReset)
         ucrReceiverData.SetRCode(clsRMovingFunction, bReset)
