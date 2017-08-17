@@ -197,6 +197,8 @@ Public Class dlgClimaticSummary
 
         ucrSelectorVariable.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverElement.SetRCode(clsDefaultFunction, bReset)
+        ucrChkStoreResults.SetRCode(clsDefaultFunction, bReset)
+        ucrChkPrintOutput.SetRCode(clsDefaultFunction, bReset)
 
         ucrPnlAnnual.SetRCode(clsDefaultFactors, bReset)
         ucrReceiverStation.SetRCode(clsDefaultFactors, bReset)
