@@ -33,6 +33,7 @@ Public Class sdgClimdexIndices
         Dim dctNumericPairs As New Dictionary(Of String, String)
         Dim dctCategoricalPairs As New Dictionary(Of String, String)
         Dim lstCheckboxes As New List(Of ucrCheck)
+        cmdHelp.Enabled = False ' temporary
 
         'Annual for Max and Min Temperatures
         ucrChkFrostDays.SetParameter(New RParameter("frost", "Frost_Days", 0), bNewChangeParameterValue:=False)
@@ -120,6 +121,11 @@ Public Class sdgClimdexIndices
         ucrChkMonthlyMax5dayPrec.SetParameter(New RParameter("max_5day_rain", "Monthly_Maximum_5day_Precipitation", 17), bNewChangeParameterValue:=False)
         ucrChkMonthlyMax5dayPrec.SetText("Monthly/Yearly Maximum Consecutive 5-day Precipitation [18]")
         '        dctInputindicesTriples.Add(ucrChkMonthlyMax5dayPrec.chkCheck.Text, {"Monthly_Maximum_Consecutive_5day_Precipitation", "climdex.rx5day"}.ToList)
+        ucrChkMonthlyMax5dayPrec.AddToLinkedControls(ucrChkCentreMean, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkCentreMean.SetParameter(New RParameter("center.mean.on.last.day", 1), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True)
+        ucrChkCentreMean.SetText("Centre Mean on Last Day")
+        ucrChkCentreMean.SetRDefault("FALSE")
 
         ucrChkSimplePrecII.SetParameter(New RParameter("simple_rain_intensity", "Simple_Precipitation_Intensity_Index", 18), bNewChangeParameterValue:=False)
         ucrChkSimplePrecII.SetText("Simple Precipitation Intensity Index [19]")
@@ -172,6 +178,7 @@ Public Class sdgClimdexIndices
         Next
 
         ' Settings tab:
+        ucrInputFreq.Enabled = False ' temp. until freq="monthly" works in r-code.
         ucrInputFreq.SetParameter(New RParameter("freq", 2))
         dctInputFreqPairs.Add("annual", Chr(34) & "annual" & Chr(34))
         dctInputFreqPairs.Add("monthly", Chr(34) & "monthly" & Chr(34))
@@ -182,11 +189,6 @@ Public Class sdgClimdexIndices
         ucrChkMaxSpellSpanYears.SetParameter(New RParameter("spells.can.span.years", 1), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True)
         ucrChkMaxSpellSpanYears.SetText("Maximum Spell Length Span Years")
         ' this is used in four functions, do we want to have four checkboxes or one? If four: can change it for each option, if one: cannot change it for each option
-
-        'clsMonthlyMax5DayPrec
-        ucrChkCentreMean.SetParameter(New RParameter("center.mean.on.last.day", 1), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True)
-        ucrChkCentreMean.SetText("Centre Mean on Last Day")
-        ucrChkCentreMean.SetRDefault("FALSE")
 
         ' base
         ucrNudN.SetParameter(New RParameter("n", 8))
@@ -422,98 +424,41 @@ Public Class sdgClimdexIndices
 
         'prec.qtiles
         ucrInputPrecQtiles.SetRCode(clsRPrecQTiles, bReset, bCloneIfNeeded:=True)
-
-        IndicesType()
-
         If bReset Then
             tbpClimdex.SelectedIndex = 0
         End If
     End Sub
 
-    Private Sub GroupBoxControl(TempGroupBox As GroupBox)
-        For Each ChkBox As ucrCheck In TempGroupBox.Controls
-            ChkBox.Checked = False
-        Next
-    End Sub
-
-    Public Sub IndicesType()
-        If dlgClimdex.ucrReceiverPrec.IsEmpty Then
-            GroupBoxControl(grpPrecAnnual)
-            GroupBoxControl(grpPrecAnnualMonthly)
-            grpPrecAnnualMonthly.Enabled = False
-            grpPrecAnnual.Enabled = False
-        Else
-            If ucrInputFreq.cboInput.SelectedItem = "monthly" Then
-                GroupBoxControl(grpPrecAnnual)
-                grpPrecAnnual.Enabled = False
-            ElseIf ucrInputFreq.cboInput.SelectedItem = "annual" Then
-                grpPrecAnnual.Enabled = True
-            End If
-            grpPrecAnnualMonthly.Enabled = True
-        End If
-
-        If dlgClimdex.ucrReceiverTmax.IsEmpty Then
-            GroupBoxControl(grpTmaxAnnual)
-            GroupBoxControl(grpTmaxAnnualMonthly)
-            grpTmaxAnnualMonthly.Enabled = False
-            grpTmaxAnnual.Enabled = False
-        Else
-            If ucrInputFreq.cboInput.SelectedItem = "monthly" Then
-                GroupBoxControl(grpTmaxAnnual)
-                grpTmaxAnnual.Enabled = False
-            ElseIf ucrInputFreq.cboInput.SelectedItem = "annual" Then
-                grpTmaxAnnual.Enabled = True
-            End If
-            grpTmaxAnnualMonthly.Enabled = True
-        End If
-
-        If dlgClimdex.ucrReceiverTmin.IsEmpty Then
-            GroupBoxControl(grpTminAnnual)
-            GroupBoxControl(grpTminAnnualMonthly)
-            grpTminAnnualMonthly.Enabled = False
+    Private Sub IndicesType()
+        If ucrInputFreq.cboInput.SelectedItem = "monthly" Then
             grpTminAnnual.Enabled = False
-        Else
-            If ucrInputFreq.cboInput.SelectedItem = "monthly" Then
-                GroupBoxControl(grpTminAnnual)
-                grpTminAnnual.Enabled = False
-            ElseIf ucrInputFreq.cboInput.SelectedItem = "annual" Then
-                grpTminAnnual.Enabled = True
-            End If
-            grpTminAnnualMonthly.Enabled = True
-        End If
-
-        If dlgClimdex.ucrReceiverTmin.IsEmpty OrElse dlgClimdex.ucrReceiverTmax.IsEmpty Then
-            GroupBoxControl(grpTmaxTminAnnual)
-            GroupBoxControl(grpTmaxTminAnnualMonthly)
-            grpTmaxTminAnnualMonthly.Enabled = False
+            grpTmaxAnnual.Enabled = False
             grpTmaxTminAnnual.Enabled = False
-        Else
-            If ucrInputFreq.cboInput.SelectedItem = "monthly" Then
-                GroupBoxControl(grpTmaxTminAnnual)
-                grpTmaxTminAnnual.Enabled = False
-            ElseIf ucrInputFreq.cboInput.SelectedItem = "annual" Then
-                grpTmaxTminAnnual.Enabled = True
-            End If
-            grpTmaxTminAnnualMonthly.Enabled = True
+            grpPrecAnnual.Enabled = False
+        ElseIf ucrInputFreq.cboInput.SelectedItem = "annual" Then
+            grpTminAnnual.Enabled = True
+            grpTmaxAnnual.Enabled = True
+            grpTmaxTminAnnual.Enabled = True
+            grpPrecAnnual.Enabled = True
         End If
     End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
-        IndicesHelp()
+        'IndicesHelp()
     End Sub
 
-    Private Sub IndicesHelp()
-        Dim clsHelp As New RFunction
-        clsHelp.SetRCommand("help")
-        clsHelp.AddParameter("package", Chr(34) & "climdex.pcic" & Chr(34))
-        If IndicesCount = 1 Then
-            clsHelp.AddParameter("topic", Chr(34) & CheckedBoxFunction() & Chr(34))
-        Else
-            clsHelp.RemoveParameterByName("topic")
-        End If
-        clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
-        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Opening help page climdex indices generated by sub dialog Climdex Indices")
-    End Sub
+    'Private Sub IndicesHelp()
+    '    Dim clsHelp As New RFunction
+    '    clsHelp.SetRCommand("help")
+    '    clsHelp.AddParameter("package", Chr(34) & "climdex.pcic" & Chr(34))
+    '    If IndicesCount = 1 Then
+    '        clsHelp.AddParameter("topic", Chr(34) & CheckedBoxFunction() & Chr(34))
+    '    Else
+    '        clsHelp.RemoveParameterByName("topic")
+    '    End If
+    '    clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
+    '    frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Opening help page climdex indices generated by sub dialog Climdex Indices")
+    'End Sub
 
     Public ReadOnly Property IndicesCount As Integer
         Get

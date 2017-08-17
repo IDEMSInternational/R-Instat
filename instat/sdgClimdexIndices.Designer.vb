@@ -43,6 +43,7 @@ Partial Class sdgClimdexIndices
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.tbpPrecipitation = New System.Windows.Forms.TabPage()
         Me.grpPrecAnnual = New System.Windows.Forms.GroupBox()
+        Me.ucrInputThreshold = New instat.ucrInputTextBox()
         Me.lblThreshold = New System.Windows.Forms.Label()
         Me.ucrChkPrecExceedSpecifiedA = New instat.ucrCheck()
         Me.ucrChkMaxDrySpell = New instat.ucrCheck()
@@ -92,7 +93,6 @@ Partial Class sdgClimdexIndices
         Me.ucrNudUpperBase = New instat.ucrNud()
         Me.lblBaseFrom = New System.Windows.Forms.Label()
         Me.ucrNudLowerBase = New instat.ucrNud()
-        Me.ucrChkCentreMean = New instat.ucrCheck()
         Me.ucrChkNHemisphere = New instat.ucrCheck()
         Me.ucrChkMaxSpellSpanYears = New instat.ucrCheck()
         Me.ucrNudN = New instat.ucrNud()
@@ -110,7 +110,7 @@ Partial Class sdgClimdexIndices
         Me.lblN = New System.Windows.Forms.Label()
         Me.tbpClimdex = New System.Windows.Forms.TabControl()
         Me.ucrButtonsClimdexIndices = New instat.ucrButtonsSubdialogue()
-        Me.ucrInputThreshold = New instat.ucrInputTextBox()
+        Me.ucrChkCentreMean = New instat.ucrCheck()
         Me.tbpPrecipitation.SuspendLayout()
         Me.grpPrecAnnual.SuspendLayout()
         Me.grpPrecAnnualMonthly.SuspendLayout()
@@ -170,6 +170,16 @@ Partial Class sdgClimdexIndices
         Me.grpPrecAnnual.TabIndex = 1
         Me.grpPrecAnnual.TabStop = False
         Me.grpPrecAnnual.Text = "Annual"
+        '
+        'ucrInputThreshold
+        '
+        Me.ucrInputThreshold.AddQuotesIfUnrecognised = True
+        Me.ucrInputThreshold.IsMultiline = False
+        Me.ucrInputThreshold.IsReadOnly = False
+        Me.ucrInputThreshold.Location = New System.Drawing.Point(371, 88)
+        Me.ucrInputThreshold.Name = "ucrInputThreshold"
+        Me.ucrInputThreshold.Size = New System.Drawing.Size(68, 21)
+        Me.ucrInputThreshold.TabIndex = 12
         '
         'lblThreshold
         '
@@ -255,11 +265,12 @@ Partial Class sdgClimdexIndices
         '
         'grpPrecAnnualMonthly
         '
+        Me.grpPrecAnnualMonthly.Controls.Add(Me.ucrChkCentreMean)
         Me.grpPrecAnnualMonthly.Controls.Add(Me.ucrChkMonthlyMax5dayPrec)
         Me.grpPrecAnnualMonthly.Controls.Add(Me.ucrChkMonthlyMax1dayPrec)
         Me.grpPrecAnnualMonthly.Location = New System.Drawing.Point(11, 251)
         Me.grpPrecAnnualMonthly.Name = "grpPrecAnnualMonthly"
-        Me.grpPrecAnnualMonthly.Size = New System.Drawing.Size(445, 70)
+        Me.grpPrecAnnualMonthly.Size = New System.Drawing.Size(445, 93)
         Me.grpPrecAnnualMonthly.TabIndex = 0
         Me.grpPrecAnnualMonthly.TabStop = False
         Me.grpPrecAnnualMonthly.Text = "Annual/Monthly"
@@ -551,7 +562,6 @@ Partial Class sdgClimdexIndices
         Me.tbpSettings.Controls.Add(Me.ucrInputPrecQtiles)
         Me.tbpSettings.Controls.Add(Me.ucrInputTempQtiles)
         Me.tbpSettings.Controls.Add(Me.grpBaseRange)
-        Me.tbpSettings.Controls.Add(Me.ucrChkCentreMean)
         Me.tbpSettings.Controls.Add(Me.ucrChkNHemisphere)
         Me.tbpSettings.Controls.Add(Me.ucrChkMaxSpellSpanYears)
         Me.tbpSettings.Controls.Add(Me.ucrNudN)
@@ -649,14 +659,6 @@ Partial Class sdgClimdexIndices
         Me.ucrNudLowerBase.Size = New System.Drawing.Size(50, 20)
         Me.ucrNudLowerBase.TabIndex = 1
         Me.ucrNudLowerBase.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkCentreMean
-        '
-        Me.ucrChkCentreMean.Checked = False
-        Me.ucrChkCentreMean.Location = New System.Drawing.Point(236, 156)
-        Me.ucrChkCentreMean.Name = "ucrChkCentreMean"
-        Me.ucrChkCentreMean.Size = New System.Drawing.Size(212, 20)
-        Me.ucrChkCentreMean.TabIndex = 0
         '
         'ucrChkNHemisphere
         '
@@ -833,15 +835,13 @@ Partial Class sdgClimdexIndices
         Me.ucrButtonsClimdexIndices.Size = New System.Drawing.Size(142, 30)
         Me.ucrButtonsClimdexIndices.TabIndex = 2
         '
-        'ucrInputThreshold
+        'ucrChkCentreMean
         '
-        Me.ucrInputThreshold.AddQuotesIfUnrecognised = True
-        Me.ucrInputThreshold.IsMultiline = False
-        Me.ucrInputThreshold.IsReadOnly = False
-        Me.ucrInputThreshold.Location = New System.Drawing.Point(371, 88)
-        Me.ucrInputThreshold.Name = "ucrInputThreshold"
-        Me.ucrInputThreshold.Size = New System.Drawing.Size(68, 21)
-        Me.ucrInputThreshold.TabIndex = 12
+        Me.ucrChkCentreMean.Checked = False
+        Me.ucrChkCentreMean.Location = New System.Drawing.Point(83, 67)
+        Me.ucrChkCentreMean.Name = "ucrChkCentreMean"
+        Me.ucrChkCentreMean.Size = New System.Drawing.Size(212, 20)
+        Me.ucrChkCentreMean.TabIndex = 2
         '
         'sdgClimdexIndices
         '
@@ -927,7 +927,6 @@ Partial Class sdgClimdexIndices
     Friend WithEvents ucrNudUpperBase As ucrNud
     Friend WithEvents lblBaseFrom As Label
     Friend WithEvents ucrNudLowerBase As ucrNud
-    Friend WithEvents ucrChkCentreMean As ucrCheck
     Friend WithEvents ucrChkNHemisphere As ucrCheck
     Friend WithEvents ucrChkMaxSpellSpanYears As ucrCheck
     Friend WithEvents ucrNudN As ucrNud
@@ -960,4 +959,5 @@ Partial Class sdgClimdexIndices
     Friend WithEvents lblGSLMode As Label
     Friend WithEvents ucrInputGSLMode As ucrInputComboBox
     Friend WithEvents ucrInputThreshold As ucrInputTextBox
+    Friend WithEvents ucrChkCentreMean As ucrCheck
 End Class
