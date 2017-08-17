@@ -134,6 +134,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub mnuUnhideColumns_Click(sender As Object, e As EventArgs) Handles mnuUnhideColumns.Click
+        dlgHideShowColumns.SetCurrentDataframe(grdCurrSheet.Name)
         dlgHideShowColumns.ShowDialog()
         'grdData.DoAction(New unvell.ReoGrid.Actions.UnhideColumnsAction(grdData.CurrentWorksheet.SelectionRange.Col, grdData.CurrentWorksheet.SelectionRange.Cols))
     End Sub
@@ -295,15 +296,17 @@ Public Class ucrDataView
         dlgNewDataFrame.ShowDialog()
     End Sub
 
-    Private Sub deleteSheet_Click(sender As Object, e As EventArgs) Handles deleteSheet.Click
-        Dim strScript As String
-        Dim Delete = MsgBox("Are you sure you want to delete this dataframe?" & Environment.NewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Sheet")
-        If grdData.Worksheets.Count > 0 Then
-            If Delete = DialogResult.Yes Then
-                strScript = frmMain.clsRLink.strInstatDataObject & "$delete_dataframe(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ")"
-                RunScriptFromDataView(strScript)
-            End If
-        End If
+    Private Sub deleteSheet_Click(sender As Object, e As EventArgs) Handles deleteDataFrame.Click
+        'Dim strScript As String
+        'Dim Delete = MsgBox("Are you sure you want to delete this dataframe?" & Environment.NewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Sheet")
+        'If grdData.Worksheets.Count > 0 Then
+        '    If Delete = DialogResult.Yes Then
+        '        strScript = frmMain.clsRLink.strInstatDataObject & "$delete_dataframe(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ")"
+        '        RunScriptFromDataView(strScript)
+        '    End If
+        'End If
+        dlgDeleteDataFrames.SetDataFrameToAdd(grdCurrSheet.Name)
+        dlgDeleteDataFrames.ShowDialog()
     End Sub
 
     Private Sub grdData_WorksheetRemoved(sender As Object, e As WorksheetRemovedEventArgs) Handles grdData.WorksheetRemoved
@@ -604,6 +607,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub SortToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SortToolStripMenuItem.Click
+        dlgSort.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
         dlgSort.ShowDialog()
     End Sub
 
@@ -651,6 +655,7 @@ Public Class ucrDataView
 
     Private Sub mnuConvert_Click(sender As Object, e As EventArgs) Handles mnuConvert.Click
         'TODO Selected column should automatically appear in dialog
+        dlgConvertColumns.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
         dlgConvertColumns.ShowDialog()
     End Sub
 
@@ -707,4 +712,5 @@ Public Class ucrDataView
         grdData.Enabled = True
         Cursor = Cursors.Default
     End Sub
+
 End Class

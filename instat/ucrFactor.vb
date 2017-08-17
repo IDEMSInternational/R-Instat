@@ -292,10 +292,11 @@ Public Class ucrFactor
                     shtCurrSheet.SetRangeDataFormat(iNewRow, i, 1, 1, unvell.ReoGrid.DataFormat.CellDataFormatFlag.Text)
                 ElseIf shtCurrSheet.ColumnHeaders(i).Text = strLabelsName Then
                     shtCurrSheet(iNewRow, i) = ""
+                    shtCurrSheet.SetRangeDataFormat(iNewRow, i, 1, 1, unvell.ReoGrid.DataFormat.CellDataFormatFlag.Text)
                 ElseIf shtCurrSheet.ColumnHeaders(i).Text = strLevelsName Then
                     shtCurrSheet(iNewRow, i) = ""
                     shtCurrSheet.SetRangeDataFormat(iNewRow, i, 1, 1, unvell.ReoGrid.DataFormat.CellDataFormatFlag.Text)
-                ElseIf shtCurrSheet.ColumnHeaders(i).Text = "Counts" Then
+                ElseIf shtCurrSheet.ColumnHeaders(i).Text = strFreqName Then
                     'TODO Fix this formatting issue with a grid user control
                     shtCurrSheet.SetRangeDataFormat(iNewRow, i, 1, 1, unvell.ReoGrid.DataFormat.CellDataFormatFlag.Text)
                     shtCurrSheet(iNewRow, i) = 0

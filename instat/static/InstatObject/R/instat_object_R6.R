@@ -138,19 +138,33 @@ instat_object$set("public", "import_RDS", function(data_RDS, keep_existing = TRU
         self$set_data_objects(list())
         self$set_meta(list())
         self$set_objects(list())
+        self$set_links(list())
+        self$set_database_connection(NULL)
       }
+      new_links_list <- data_RDS$get_links()
       for(data_obj_name in data_RDS$get_data_names()) {
         data_obj_clone <- data_RDS$get_data_objects(data_obj_name)$data_clone(include_objects = include_objects, include_metadata = include_metadata, include_logs = include_logs, include_filters = include_filters, include_calculations = include_calculations)
         if(data_obj_name %in% self$get_data_names() && !overwrite_existing) {
           new_name <- next_default_item(data_obj_name, self$get_data_names())
           data_obj_clone$append_to_metadata(data_name_label, new_name)
+          if(new_name != data_obj_name) {
+            for(i in seq_along(new_links_list)) {
+              new_links_list[[i]]$rename_data_frame_in_link(data_obj_name, new_name)
+            }
+          }
         }
         #if(!data_obj_clone$is_metadata(data_name_label)) data_obj_clone$append_to_metadata(data_name_label, new_name)
         curr_data_name = data_obj_clone$get_metadata(data_name_label)
         self$append_data_object(curr_data_name, data_obj_clone)
       }
-      new_objects_list = data_RDS$get_objects(data_name = overall_label)
-      new_objects_count = length(new_objects_list)
+      for(i in seq_along(new_links_list)) {
+        curr_link <- new_links_list[[i]]
+        for(j in seq_along(curr_link$link_columns)) {
+          self$add_link(from_data_frame = curr_link$from_data_frame, to_data_frame = curr_link$to_data_frame, link_pairs = curr_link$link_columns[[j]], type = curr_link$type, link_name = names(new_links_list)[i])
+        }
+      }
+      new_objects_list <- data_RDS$get_objects(data_name = overall_label)
+      new_objects_count <- length(new_objects_list)
       if(include_objects && new_objects_count > 0) {
         for(i in (1:new_objects_count)) {
           if(!(names(new_objects_list)[i] %in% names(private$.objects)) || overwrite_existing) {
@@ -158,8 +172,8 @@ instat_object$set("public", "import_RDS", function(data_RDS, keep_existing = TRU
           }
         }
       }
-      new_metadata = data_RDS$get_metadata()
-      new_metadata_count = length(new_metadata)
+      new_metadata <- data_RDS$get_metadata()
+      new_metadata_count <- length(new_metadata)
       if(include_metadata && new_metadata_count > 0) {
         for(i in (1:new_metadata_count)) {
           if(!(names(new_metadata)[i] %in% names(private$metadata)) || overwrite_existing) {
@@ -724,19 +738,21 @@ instat_object$set("public", "get_next_default_dataframe_name", function(prefix, 
 } 
 )
 
-instat_object$set("public", "delete_dataframe", function(data_name) {
+instat_object$set("public", "delete_dataframes", function(data_names) {
   # TODO need a set or append
-  private$.data_objects[[data_name]] <- NULL
-  data_objects_changed <- TRUE
-  link_names <- c()
-  for(i in seq_along(private$.links)) {
-    if(private$.links[[i]]$from_data_frame == data_name || private$.links[[i]]$to_data_frame == data_name) {
-      link_names <- c(link_names, names(private$.links)[i])
+  for(name in data_names) {
+    private$.data_objects[[name]] <- NULL
+    data_objects_changed <- TRUE
+    link_names <- c()
+    for(i in seq_along(private$.links)) {
+      if(private$.links[[i]]$from_data_frame == name || private$.links[[i]]$to_data_frame == name) {
+        link_names <- c(link_names, names(private$.links)[i])
+      }
     }
-  }
-  for(name in link_names) {
-    #TODO Should we be able to disable links instead of deleting?
-    self$remove_link(name)
+    for(link_name in link_names) {
+      #TODO Should we be able to disable links instead of deleting?
+      self$remove_link(link_name)
+    }
   }
 } 
 )
@@ -763,17 +779,12 @@ instat_object$set("public", "sort_dataframe", function(data_name, col_names = c(
 )
 
 instat_object$set("public", "rename_dataframe", function(data_name, new_value = "", label = "") {
-  if(new_value %in% names(private$.data_objects)) stop("Cannot rename data frame since ", new_value, " is an existing data frame.")
   data_obj <- self$get_data_objects(data_name)
-  names(private$.data_objects)[names(private$.data_objects) == data_name] <- new_value
-  data_obj$append_to_metadata(data_name_label, new_value)
-  for(i in seq_along(private$.links)) {
-    if(private$.links[[i]]$from_data_frame == data_name) {
-      private$.links[[i]]$from_data_frame <- new_value
-    }
-    if(private$.links[[i]]$to_data_frame == data_name) {
-      private$.links[[i]]$to_data_frame <- new_value
-    }
+  if(data_name != new_value) {
+    if(new_value %in% names(private$.data_objects)) stop("Cannot rename data frame since ", new_value, " is an existing data frame.")
+    names(private$.data_objects)[names(private$.data_objects) == data_name] <- new_value
+    data_obj$append_to_metadata(data_name_label, new_value)
+    self$update_links_rename_data_frame(data_name, new_value)
   }
   if(label != "") {
     data_obj$append_to_metadata(property = "label" , new_val = label)
@@ -1103,25 +1114,73 @@ instat_object$set("public", "import_SST", function(dataset, data_from = 5, data_
 }
 )
 
-instat_object$set("public","make_inventory_plot", function(data_name, date_col, station_col = NULL, year_col = NULL, doy_col = NULL, element_cols = NULL, add_to_data = FALSE, year_doy_plot = FALSE, coord_flip = FALSE, facet_by = NULL, graph_title = "Inventory Plot") {
-  self$get_data_objects(data_name)$make_inventory_plot(date_col = date_col, station_col = station_col, year_col = year_col, doy_col = doy_col, element_cols = element_cols, add_to_data = add_to_data, year_doy_plot = year_doy_plot, coord_flip = coord_flip, facet_by = facet_by, graph_title = graph_title)
+instat_object$set("public","make_inventory_plot", function(data_name, date_col, station_col = NULL, year_col = NULL, doy_col = NULL, element_cols = NULL, add_to_data = FALSE, year_doy_plot = FALSE, coord_flip = FALSE, facet_by = NULL, graph_title = "Inventory Plot", key_colours = c("red", "grey"), display_rain_days = FALSE, rain_cats = list(breaks = c(0, 0.85, Inf), labels = c("Dry", "Rain"), key_colours = c("tan3", "blue"))) {
+  self$get_data_objects(data_name)$make_inventory_plot(date_col = date_col, station_col = station_col, year_col = year_col, doy_col = doy_col, element_cols = element_cols, add_to_data = add_to_data, year_doy_plot = year_doy_plot, coord_flip = coord_flip, facet_by = facet_by, graph_title = graph_title, key_colours = key_colours, display_rain_days = display_rain_days, rain_cats = rain_cats)
 }
 )
 
-instat_object$set("public", "import_NetCDF", function(nc_data, main_data_name, loc_data_name, latitude_col_name = "", longitude_col_name = "") {
-  nc_result <- open_NetCDF(nc_data = nc_data, latitude_col_name = latitude_col_name, longitude_col_name = longitude_col_name)
-  if(length(nc_result) != 3)stop("Output from open_NetCDF should be a list of length 3")
+instat_object$set("public", "import_NetCDF", function(nc, name, only_data_vars = TRUE, keep_raw_time = TRUE, include_metadata = TRUE) {
+  if(only_data_vars) {
+    all_var_names <- ncdf4.helpers::nc.get.variable.list(nc)
+  }
+  else {
+    all_var_names <- names(nc$var)
+  }
+  remaining_var_names <- all_var_names
+  var_groups <- list()
+  dim_groups <- list()
+  while(length(remaining_var_names) > 0) {
+    grp <- remaining_var_names[1]
+    dim_names <- ncdf4.helpers::nc.get.dim.names(nc, remaining_var_names[1])
+    dim_groups[[length(dim_groups) + 1]] <- dim_names
+    for(curr_var_name in remaining_var_names[-1]) {
+      if(setequal(ncdf4.helpers::nc.get.dim.names(nc, curr_var_name), dim_names)) {
+        grp <- c(grp, curr_var_name)
+      }
+    }
+    remaining_var_names <- remaining_var_names[-which(remaining_var_names %in% grp)]
+    var_groups[[length(var_groups) + 1]] <- grp
+  }
   
-  data_list = nc_result[c(1,2)]
-  
-  names(data_list) = c(main_data_name, next_default_item(prefix = loc_data_name, existing_names = self$get_data_names(), include_index = FALSE))
-  self$import_data(data_tables = data_list)
-  self$add_key(names(data_list)[2], nc_result[3][[1]])
-  named_char_vec  <- nc_result[3][[1]]
-  names(named_char_vec) <- named_char_vec
-  self$add_link(from_data_frame = names(data_list)[1], to_data_frame = names(data_list)[2], link_pairs = named_char_vec, type = keyed_link_label)
+  data_list <- list()
+  use_prefix <- (length(seq_along(var_groups)) > 1)
+  data_names <- c()
+  for(i in seq_along(var_groups)) {
+    if(use_prefix) curr_name <- paste0(name, "_", i)
+    else curr_name <- name
+    data_names <- c(data_names, curr_name)
+    data_list[[curr_name]] <- nc_as_data_frame(nc, var_groups[[i]], keep_raw_time = keep_raw_time, include_metadata = include_metadata)
+    tmp_list <- list()
+    tmp_list[[curr_name]] <- data_list[[curr_name]]
+    self$import_data(data_tables = tmp_list)
+    self$add_key(curr_name, dim_groups[[i]])
+  }
+  for(i in seq_along(data_names)) {
+    for(j in seq_along(data_names)) {
+      if(i != j && !self$link_exists_between(data_names[i], data_names[j]) && all(dim_groups[[i]] %in% dim_groups[[j]])) {
+        pairs <- dim_groups[[i]]
+        names(pairs) <- pairs
+        self$add_link(data_names[j], data_names[i], pairs, keyed_link_label)
+      }
+    }
+  }
 }
 )
+
+# instat_object$set("public", "import_NetCDF", function(nc_data, main_data_name, loc_data_name, latitude_col_name = "", longitude_col_name = "") {
+#   nc_result <- open_NetCDF(nc_data = nc_data, latitude_col_name = latitude_col_name, longitude_col_name = longitude_col_name)
+#   if(length(nc_result) != 3)stop("Output from open_NetCDF should be a list of length 3")
+#   
+#   data_list = nc_result[c(1,2)]
+#   
+#   names(data_list) = c(main_data_name, next_default_item(prefix = loc_data_name, existing_names = self$get_data_names(), include_index = FALSE))
+#   self$import_data(data_tables = data_list)
+#   self$add_key(names(data_list)[2], nc_result[3][[1]])
+#   named_char_vec  <- nc_result[3][[1]]
+#   names(named_char_vec) <- named_char_vec
+#   self$add_link(from_data_frame = names(data_list)[1], to_data_frame = names(data_list)[2], link_pairs = named_char_vec, type = keyed_link_label)
+# }
+# )
 
 instat_object$set("public", "infill_missing_dates", function(data_name, date_name, factors) {
   self$get_data_objects(data_name)$infill_missing_dates(date_name = date_name, factor = factors)
@@ -1383,5 +1442,10 @@ instat_object$set("public", "export_workspace", function(data_names, file, inclu
     }
   }
   save(list = ls(all.names = TRUE, envir = e), envir = e, file = file)
+} 
+)
+
+instat_object$set("public", "set_links", function(new_links) {
+  private$.links <- new_links
 } 
 )
