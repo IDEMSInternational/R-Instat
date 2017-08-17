@@ -43,11 +43,18 @@ Partial Class dlgExtremesClimatic
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lblDayOfYear = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrInputThresholdValue = New instat.ucrInputTextBox()
+        Me.ucrInputThresholdOperator = New instat.ucrInputComboBox()
         Me.lblValues = New System.Windows.Forms.Label()
+        Me.ucrNudTo = New instat.ucrNud()
+        Me.ucrChkMissingValues = New instat.ucrCheck()
+        Me.ucrNudFrom = New instat.ucrNud()
         Me.lblFrom = New System.Windows.Forms.Label()
         Me.lblTo = New System.Windows.Forms.Label()
         Me.rdoMin = New System.Windows.Forms.RadioButton()
         Me.rdoMax = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlMaxMin = New instat.UcrPanel()
+        Me.ucrChkDayNumber = New instat.ucrCheck()
         Me.rdoMinMax = New System.Windows.Forms.RadioButton()
         Me.rdoPeaks = New System.Windows.Forms.RadioButton()
         Me.lblElement = New System.Windows.Forms.Label()
@@ -55,13 +62,6 @@ Partial Class dlgExtremesClimatic
         Me.lblNewDFName = New System.Windows.Forms.Label()
         Me.ucrInputSave = New instat.ucrInputTextBox()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
-        Me.ucrInputThresholdValue = New instat.ucrInputTextBox()
-        Me.ucrInputThresholdOperator = New instat.ucrInputComboBox()
-        Me.ucrNudTo = New instat.ucrNud()
-        Me.ucrChkMissingValues = New instat.ucrCheck()
-        Me.ucrNudFrom = New instat.ucrNud()
-        Me.ucrPnlMaxMin = New instat.UcrPanel()
-        Me.ucrChkDayNumber = New instat.ucrCheck()
         Me.ucrReceiverDOY = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
@@ -129,6 +129,25 @@ Partial Class dlgExtremesClimatic
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
         '
+        'ucrInputThresholdValue
+        '
+        Me.ucrInputThresholdValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputThresholdValue.IsMultiline = False
+        Me.ucrInputThresholdValue.IsReadOnly = False
+        Me.ucrInputThresholdValue.Location = New System.Drawing.Point(126, 44)
+        Me.ucrInputThresholdValue.Name = "ucrInputThresholdValue"
+        Me.ucrInputThresholdValue.Size = New System.Drawing.Size(77, 21)
+        Me.ucrInputThresholdValue.TabIndex = 8
+        '
+        'ucrInputThresholdOperator
+        '
+        Me.ucrInputThresholdOperator.AddQuotesIfUnrecognised = True
+        Me.ucrInputThresholdOperator.IsReadOnly = False
+        Me.ucrInputThresholdOperator.Location = New System.Drawing.Point(46, 43)
+        Me.ucrInputThresholdOperator.Name = "ucrInputThresholdOperator"
+        Me.ucrInputThresholdOperator.Size = New System.Drawing.Size(72, 21)
+        Me.ucrInputThresholdOperator.TabIndex = 6
+        '
         'lblValues
         '
         Me.lblValues.AutoSize = True
@@ -137,6 +156,38 @@ Partial Class dlgExtremesClimatic
         Me.lblValues.Size = New System.Drawing.Size(37, 13)
         Me.lblValues.TabIndex = 5
         Me.lblValues.Text = "Value:"
+        '
+        'ucrNudTo
+        '
+        Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudTo.Location = New System.Drawing.Point(153, 18)
+        Me.ucrNudTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTo.Name = "ucrNudTo"
+        Me.ucrNudTo.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudTo.TabIndex = 3
+        Me.ucrNudTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkMissingValues
+        '
+        Me.ucrChkMissingValues.Checked = False
+        Me.ucrChkMissingValues.Location = New System.Drawing.Point(10, 121)
+        Me.ucrChkMissingValues.Name = "ucrChkMissingValues"
+        Me.ucrChkMissingValues.Size = New System.Drawing.Size(194, 20)
+        Me.ucrChkMissingValues.TabIndex = 11
+        '
+        'ucrNudFrom
+        '
+        Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudFrom.Location = New System.Drawing.Point(46, 18)
+        Me.ucrNudFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFrom.Name = "ucrNudFrom"
+        Me.ucrNudFrom.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudFrom.TabIndex = 1
+        Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblFrom
         '
@@ -178,6 +229,21 @@ Partial Class dlgExtremesClimatic
         Me.rdoMax.TabStop = True
         Me.rdoMax.Text = "Maximum Values"
         Me.rdoMax.UseVisualStyleBackColor = True
+        '
+        'ucrPnlMaxMin
+        '
+        Me.ucrPnlMaxMin.Location = New System.Drawing.Point(6, 40)
+        Me.ucrPnlMaxMin.Name = "ucrPnlMaxMin"
+        Me.ucrPnlMaxMin.Size = New System.Drawing.Size(131, 49)
+        Me.ucrPnlMaxMin.TabIndex = 7
+        '
+        'ucrChkDayNumber
+        '
+        Me.ucrChkDayNumber.Checked = False
+        Me.ucrChkDayNumber.Location = New System.Drawing.Point(10, 95)
+        Me.ucrChkDayNumber.Name = "ucrChkDayNumber"
+        Me.ucrChkDayNumber.Size = New System.Drawing.Size(194, 20)
+        Me.ucrChkDayNumber.TabIndex = 10
         '
         'rdoMinMax
         '
@@ -258,72 +324,6 @@ Partial Class dlgExtremesClimatic
         Me.ucrReceiverElement.strNcFilePath = ""
         Me.ucrReceiverElement.TabIndex = 13
         Me.ucrReceiverElement.ucrSelector = Nothing
-        '
-        'ucrInputThresholdValue
-        '
-        Me.ucrInputThresholdValue.AddQuotesIfUnrecognised = True
-        Me.ucrInputThresholdValue.IsMultiline = False
-        Me.ucrInputThresholdValue.IsReadOnly = False
-        Me.ucrInputThresholdValue.Location = New System.Drawing.Point(126, 44)
-        Me.ucrInputThresholdValue.Name = "ucrInputThresholdValue"
-        Me.ucrInputThresholdValue.Size = New System.Drawing.Size(77, 21)
-        Me.ucrInputThresholdValue.TabIndex = 8
-        '
-        'ucrInputThresholdOperator
-        '
-        Me.ucrInputThresholdOperator.AddQuotesIfUnrecognised = True
-        Me.ucrInputThresholdOperator.IsReadOnly = False
-        Me.ucrInputThresholdOperator.Location = New System.Drawing.Point(46, 43)
-        Me.ucrInputThresholdOperator.Name = "ucrInputThresholdOperator"
-        Me.ucrInputThresholdOperator.Size = New System.Drawing.Size(72, 21)
-        Me.ucrInputThresholdOperator.TabIndex = 6
-        '
-        'ucrNudTo
-        '
-        Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTo.Location = New System.Drawing.Point(153, 18)
-        Me.ucrNudTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTo.Name = "ucrNudTo"
-        Me.ucrNudTo.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudTo.TabIndex = 3
-        Me.ucrNudTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkMissingValues
-        '
-        Me.ucrChkMissingValues.Checked = False
-        Me.ucrChkMissingValues.Location = New System.Drawing.Point(10, 121)
-        Me.ucrChkMissingValues.Name = "ucrChkMissingValues"
-        Me.ucrChkMissingValues.Size = New System.Drawing.Size(194, 20)
-        Me.ucrChkMissingValues.TabIndex = 11
-        '
-        'ucrNudFrom
-        '
-        Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudFrom.Location = New System.Drawing.Point(46, 18)
-        Me.ucrNudFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFrom.Name = "ucrNudFrom"
-        Me.ucrNudFrom.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudFrom.TabIndex = 1
-        Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrPnlMaxMin
-        '
-        Me.ucrPnlMaxMin.Location = New System.Drawing.Point(6, 40)
-        Me.ucrPnlMaxMin.Name = "ucrPnlMaxMin"
-        Me.ucrPnlMaxMin.Size = New System.Drawing.Size(131, 49)
-        Me.ucrPnlMaxMin.TabIndex = 7
-        '
-        'ucrChkDayNumber
-        '
-        Me.ucrChkDayNumber.Checked = False
-        Me.ucrChkDayNumber.Location = New System.Drawing.Point(10, 95)
-        Me.ucrChkDayNumber.Name = "ucrChkDayNumber"
-        Me.ucrChkDayNumber.Size = New System.Drawing.Size(194, 20)
-        Me.ucrChkDayNumber.TabIndex = 10
         '
         'ucrReceiverDOY
         '
