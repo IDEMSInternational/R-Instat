@@ -147,6 +147,7 @@ Public Class sdgClimdexIndices
         ucrInputThreshold.SetParameter(New RParameter("threshold", 1))
         ucrInputThreshold.SetRDefault(1)
         ucrInputThreshold.SetValidationTypeAsNumeric()
+        ucrInputThreshold.AddQuotesIfUnrecognised = False
         ucrInputThreshold.SetLinkedDisplayControl(lblThreshold)
 
         ucrChkMaxDrySpell.SetParameter(New RParameter("max_dry_spell_length", "Maximum_Length_of_Dry_Spell", 22), bNewChangeParameterValue:=False)
