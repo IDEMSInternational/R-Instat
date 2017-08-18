@@ -138,19 +138,33 @@ instat_object$set("public", "import_RDS", function(data_RDS, keep_existing = TRU
         self$set_data_objects(list())
         self$set_meta(list())
         self$set_objects(list())
+        self$set_links(list())
+        self$set_database_connection(NULL)
       }
+      new_links_list <- data_RDS$get_links()
       for(data_obj_name in data_RDS$get_data_names()) {
         data_obj_clone <- data_RDS$get_data_objects(data_obj_name)$data_clone(include_objects = include_objects, include_metadata = include_metadata, include_logs = include_logs, include_filters = include_filters, include_calculations = include_calculations)
         if(data_obj_name %in% self$get_data_names() && !overwrite_existing) {
           new_name <- next_default_item(data_obj_name, self$get_data_names())
           data_obj_clone$append_to_metadata(data_name_label, new_name)
+          if(new_name != data_obj_name) {
+            for(i in seq_along(new_links_list)) {
+              new_links_list[[i]]$rename_data_frame_in_link(data_obj_name, new_name)
+            }
+          }
         }
         #if(!data_obj_clone$is_metadata(data_name_label)) data_obj_clone$append_to_metadata(data_name_label, new_name)
         curr_data_name = data_obj_clone$get_metadata(data_name_label)
         self$append_data_object(curr_data_name, data_obj_clone)
       }
-      new_objects_list = data_RDS$get_objects(data_name = overall_label)
-      new_objects_count = length(new_objects_list)
+      for(i in seq_along(new_links_list)) {
+        curr_link <- new_links_list[[i]]
+        for(j in seq_along(curr_link$link_columns)) {
+          self$add_link(from_data_frame = curr_link$from_data_frame, to_data_frame = curr_link$to_data_frame, link_pairs = curr_link$link_columns[[j]], type = curr_link$type, link_name = names(new_links_list)[i])
+        }
+      }
+      new_objects_list <- data_RDS$get_objects(data_name = overall_label)
+      new_objects_count <- length(new_objects_list)
       if(include_objects && new_objects_count > 0) {
         for(i in (1:new_objects_count)) {
           if(!(names(new_objects_list)[i] %in% names(private$.objects)) || overwrite_existing) {
@@ -158,8 +172,8 @@ instat_object$set("public", "import_RDS", function(data_RDS, keep_existing = TRU
           }
         }
       }
-      new_metadata = data_RDS$get_metadata()
-      new_metadata_count = length(new_metadata)
+      new_metadata <- data_RDS$get_metadata()
+      new_metadata_count <- length(new_metadata)
       if(include_metadata && new_metadata_count > 0) {
         for(i in (1:new_metadata_count)) {
           if(!(names(new_metadata)[i] %in% names(private$metadata)) || overwrite_existing) {
@@ -770,14 +784,7 @@ instat_object$set("public", "rename_dataframe", function(data_name, new_value = 
     if(new_value %in% names(private$.data_objects)) stop("Cannot rename data frame since ", new_value, " is an existing data frame.")
     names(private$.data_objects)[names(private$.data_objects) == data_name] <- new_value
     data_obj$append_to_metadata(data_name_label, new_value)
-    for(i in seq_along(private$.links)) {
-      if(private$.links[[i]]$from_data_frame == data_name) {
-        private$.links[[i]]$from_data_frame <- new_value
-      }
-      if(private$.links[[i]]$to_data_frame == data_name) {
-        private$.links[[i]]$to_data_frame <- new_value
-      }
-    }
+    self$update_links_rename_data_frame(data_name, new_value)
   }
   if(label != "") {
     data_obj$append_to_metadata(property = "label" , new_val = label)
@@ -1191,6 +1198,15 @@ instat_object$set("public", "remove_key", function(data_name, key_name) {
 )
 
 instat_object$set("public", "add_climdex_indices", function(data_name, indices = list(), freq = "annual") {
+  for(i in seq_along(indices)) {
+    l <- list(indices[[i]])
+    names(l) <- names(indices)[i]
+    self$add_single_climdex_index(data_name = data_name, indices = l)
+  }
+}
+)
+
+instat_object$set("public", "add_single_climdex_index", function(data_name, indices = list(), freq = "annual") {
   if(!self$get_data_objects(data_name)$get_metadata(is_climatic_label))stop("Define data as climatic.")
   mix_monthly_annual = c("Monthly_Minimum_of_Daily_Minimum_Temperature", "Percentage_of_Days_When_Tmax_is_Above_90th_Percentile","Percentage_of_Days_When_Tmin_is_Above_90th_Percentile","Percentage_of_Days_When_Tmax_is_Below_10th_Percentile","Percentage_of_Days_When_Tmin_is_Below_10th_Percentile", "Monthly_Maximum_Consecutive_5day_Precipitation", "Monthly_Maximum_1day_Precipitation","Monthly_Maximum_of_Daily_Maximum_Temperature", "Monthly_Maximum_of_Daily_Minimum_Temperature","Monthly_Minimum_of_Daily_Maximum_Temperature", "Mean_Diurnal_Temperature_Range")
   
@@ -1435,5 +1451,10 @@ instat_object$set("public", "export_workspace", function(data_names, file, inclu
     }
   }
   save(list = ls(all.names = TRUE, envir = e), envir = e, file = file)
+} 
+)
+
+instat_object$set("public", "set_links", function(new_links) {
+  private$.links <- new_links
 } 
 )
