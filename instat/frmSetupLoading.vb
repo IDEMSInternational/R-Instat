@@ -15,18 +15,38 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class frmSetupLoading
-    Private strHyperlink As String = ""
+    Private dctMessagesLinks As Dictionary(Of String, String)
+    Private iSelectedMessage As Integer
 
     Private Sub frmSetupLoading_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'Eventually have multiple messages and rotate what is shown each time
-        lblMessage.Text = "Did you know that R-Instat was developed in Africa by African Maths Initiative (AMI)?" & Environment.NewLine & "Click here to find out more about AMI and the partners who helped make R-Instat a success."
+        dctMessagesLinks = New Dictionary(Of String, String)
 
-        'Optional hyperlink when clicking on the message
-        strHyperlink = "http://africandata.org"
-        lblMessage.Cursor = Cursors.Hand
+        dctMessagesLinks.Add("Did you know: R-Instat was developed in Africa by African Maths Initiative (AMI)?" & Environment.NewLine & "Click here to find out more about AMI and the partners behind creating R-Instat.", "http://africandata.org")
+        dctMessagesLinks.Add("Did you know: R-Instat started as a crowd funding campaign in 2015 by partners working across Africa." & Environment.NewLine & "Click here to see the original campaign website and see how it all began.", "http://chuffed.org/project/africandatainitiative")
+        dctMessagesLinks.Add("Did you know: You can easily view a whole data frame in a separate window." & Environment.NewLine & "Just right click on the bottom sheets tab and select 'View'.", "")
+        dctMessagesLinks.Add("Did you know: Importing data from many other statistics packages is easy. Go to 'File > Open From File...' and choose your file." & Environment.NewLine & "You can export for other packages as well with File > Export > Export Dataset...", "")
+        dctMessagesLinks.Add("Did you know: R-Instat stores metadata on columns and data frames which you can edit. Go to View > Column Metadata or Data Frame Metadata to view and edit metadata.", "")
+        dctMessagesLinks.Add("Have you tried: Describing all your variables at once." & Environment.NewLine & "Simply go to Describe > One Variable > Summarise or Graph and choose all your variables to start an exploration.", "")
+        dctMessagesLinks.Add("Have you tried: Boxplots by a factor." & Environment.NewLine & "Boxplots are great visualisation and even better when using a second variable. Try adding a factor variable in the Factor receiver to compare across the factor levels.", "")
+        dctMessagesLinks.Add("Have you tried: Using the library datasets." & Environment.NewLine & "Go to File > Open From Library... to see many interesting and real world datasets to explore.", "")
+        dctMessagesLinks.Add("Looking for free statistics textbooks?" & Environment.NewLine & "Download the completely free CAST electronic And interactive textbooks for basic And advanced statistics. Click to find out more...", "http://cast.massey.ac.nz/")
+        dctMessagesLinks.Add("Looking for training materials?" & Environment.NewLine & "University of Reading's 'Stats Made Simple' resources are freely available online for anyone to use to teach or learn. Click to find out more...", "http://www.reading.ac.uk/ssc/resourcepage/materials.php")
+        dctMessagesLinks.Add("Looking for interesting cases studies for teaching?" & Environment.NewLine & "ILRI has freely available biometic case studies for anyone to use to teach or learn. Find the data sets in the R-Instat library and click to go to the IRLI website...", "https://www.ilri.org/biometrics/default.htm")
+
+        Randomize()
+        iSelectedMessage = CInt(Math.Ceiling(Rnd() * dctMessagesLinks.Count))
+        lblMessage.Text = dctMessagesLinks.Keys(iSelectedMessage)
+        If dctMessagesLinks.Values(iSelectedMessage) = "" Then
+            lblMessage.Cursor = Cursors.Default
+        Else
+            lblMessage.Cursor = Cursors.Hand
+        End If
     End Sub
 
     Private Sub lblMessage_Click(sender As Object, e As EventArgs) Handles lblMessage.Click
+        Dim strHyperlink As String = ""
+
+        strHyperlink = dctMessagesLinks.Values(iSelectedMessage)
         If strHyperlink <> "" Then
             Try
                 Process.Start(strHyperlink)
