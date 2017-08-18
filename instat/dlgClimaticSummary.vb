@@ -50,12 +50,12 @@ Public Class dlgClimaticSummary
         ucrSelectorVariable.SetParameterIsString()
 
         'panel setting
-        ucrPnlAnnual.AddRadioButton(rdoAnnual)
-        ucrPnlAnnual.AddRadioButton(rdoAnnualVariable)
-        ucrPnlAnnual.AddRadioButton(rdoWithinYear)
+        ucrPnlAnnualWithin.AddRadioButton(rdoAnnual)
+        ucrPnlAnnualWithin.AddRadioButton(rdoAnnualVariable)
+        ucrPnlAnnualWithin.AddRadioButton(rdoWithinYear)
 
-        ucrPnlAnnual.AddParameterPresentCondition(rdoWithinYear, "within_variable", True)
-        ucrPnlAnnual.AddParameterPresentCondition(rdoAnnual, "within_variable", False)
+        ucrPnlAnnualWithin.AddParameterPresentCondition(rdoWithinYear, "within_variable", True)
+        ucrPnlAnnualWithin.AddParameterPresentCondition(rdoAnnual, "within_variable", False)
 
         'receivers:
         ' by receivers
@@ -132,8 +132,8 @@ Public Class dlgClimaticSummary
         'linking controls
         'ucrPnlAnnual.AddToLinkedControls(ucrNudFrom, {rdoAnnual, rdoWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         'ucrPnlAnnual.AddToLinkedControls(ucrNudTo, {rdoAnnual, rdoWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=366)
-        ucrPnlAnnual.AddToLinkedControls({ucrReceiverFrom, ucrReceiverTo}, {rdoAnnualVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlAnnual.AddToLinkedControls({ucrReceiverWithinYear}, {rdoWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlAnnualWithin.AddToLinkedControls({ucrReceiverFrom, ucrReceiverTo}, {rdoAnnualVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlAnnualWithin.AddToLinkedControls({ucrReceiverWithinYear}, {rdoWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrNudFrom.SetLinkedDisplayControl(lblFrom)
         ucrNudTo.SetLinkedDisplayControl(lblTo)
@@ -186,6 +186,7 @@ Public Class dlgClimaticSummary
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
         bResetSubdialog = True
+        ReceiverFocus()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -200,7 +201,7 @@ Public Class dlgClimaticSummary
         ucrChkStoreResults.SetRCode(clsDefaultFunction, bReset)
         ucrChkPrintOutput.SetRCode(clsDefaultFunction, bReset)
 
-        ucrPnlAnnual.SetRCode(clsDefaultFactors, bReset)
+        ucrPnlAnnualWithin.SetRCode(clsDefaultFactors, bReset)
         ucrReceiverStation.SetRCode(clsDefaultFactors, bReset)
         ucrReceiverYear.SetRCode(clsDefaultFactors, bReset)
         ucrReceiverWithinYear.SetRCode(clsDefaultFactors, bReset)
@@ -233,6 +234,12 @@ Public Class dlgClimaticSummary
         End If
     End Sub
 
+    Private Sub ReceiverFocus()
+        If rdoAnnual.Checked Then
+            ucrReceiverStation.SetMeAsReceiver()
+        End If
+    End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
@@ -255,7 +262,8 @@ Public Class dlgClimaticSummary
         DayBoundaries()
     End Sub
 
-    Private Sub ucrPnlAnnual_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlAnnual.ControlValueChanged
+    Private Sub ucrPnlAnnualWithin_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlAnnualWithin.ControlValueChanged
+        ReceiverFocus()
         If rdoWithinYear.Checked Then
             clsDefaultFactors.AddParameter("within_variable", ucrReceiverWithinYear.GetVariableNames, bIncludeArgumentName:=False, iPosition:=2)
         Else
@@ -263,7 +271,7 @@ Public Class dlgClimaticSummary
         End If
     End Sub
 
-    Private Sub ucrReceiverDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverWithinYear.ControlContentsChanged, ucrPnlAnnual.ControlContentsChanged, ucrNudTo.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrReceiverFrom.ControlContentsChanged, ucrReceiverTo.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged
+    Private Sub ucrReceiverDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverWithinYear.ControlContentsChanged, ucrPnlAnnualWithin.ControlContentsChanged, ucrNudTo.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrReceiverFrom.ControlContentsChanged, ucrReceiverTo.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
