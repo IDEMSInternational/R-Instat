@@ -1582,6 +1582,7 @@ Partial Class frmMain
         '
         'mnuCimaticPrepareTransform
         '
+        Me.mnuCimaticPrepareTransform.Enabled = False
         Me.mnuCimaticPrepareTransform.Name = "mnuCimaticPrepareTransform"
         Me.mnuCimaticPrepareTransform.Size = New System.Drawing.Size(224, 22)
         Me.mnuCimaticPrepareTransform.Text = "Transform..."
@@ -1617,12 +1618,14 @@ Partial Class frmMain
         '
         'mnuClimaticPrepareExtremes
         '
+        Me.mnuClimaticPrepareExtremes.Enabled = False
         Me.mnuClimaticPrepareExtremes.Name = "mnuClimaticPrepareExtremes"
         Me.mnuClimaticPrepareExtremes.Size = New System.Drawing.Size(224, 22)
         Me.mnuClimaticPrepareExtremes.Text = "Extremes..."
         '
         'mnuClimaticPrepareEndOfRains
         '
+        Me.mnuClimaticPrepareEndOfRains.Enabled = False
         Me.mnuClimaticPrepareEndOfRains.Name = "mnuClimaticPrepareEndOfRains"
         Me.mnuClimaticPrepareEndOfRains.Size = New System.Drawing.Size(224, 22)
         Me.mnuClimaticPrepareEndOfRains.Text = "End of Rains..."
@@ -1732,7 +1735,7 @@ Partial Class frmMain
         'mnuClimaticDescribeWindSpeedDirectionWindRose
         '
         Me.mnuClimaticDescribeWindSpeedDirectionWindRose.Name = "mnuClimaticDescribeWindSpeedDirectionWindRose"
-        Me.mnuClimaticDescribeWindSpeedDirectionWindRose.Size = New System.Drawing.Size(139, 22)
+        Me.mnuClimaticDescribeWindSpeedDirectionWindRose.Size = New System.Drawing.Size(152, 22)
         Me.mnuClimaticDescribeWindSpeedDirectionWindRose.Text = "Wind Rose..."
         '
         'mnuClimaticDescribeSunshineRadiation
