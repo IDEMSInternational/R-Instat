@@ -110,28 +110,24 @@ Public Class dlgClimaticBoxPlot
 
         ucrReceiverWithinYear.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiverWithinYear.SetParameter(New RParameter(""))
-        ucrReceiverWithinYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "month" & Chr(34)})
         ucrReceiverWithinYear.bAutoFill = True
         ucrReceiverWithinYear.SetParameterIsString()
         ucrReceiverWithinYear.bWithQuotes = False
 
         ucrReceiverData.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiverData.SetParameter(New RParameter("y"))
-        ucrReceiverData.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "rain" & Chr(34)})
         ucrReceiverData.bAutoFill = True
         ucrReceiverData.SetParameterIsString()
         ucrReceiverData.bWithQuotes = False
 
         ucrReceiverFacet.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiverFacet.SetParameter(New RParameter("var1", 0))
-        ucrReceiverFacet.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "month" & Chr(34)})
         ucrReceiverFacet.bAutoFill = True
         ucrReceiverFacet.SetParameterIsString()
         ucrReceiverFacet.bWithQuotes = False
 
         ucrReceiver2ndFacet.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiver2ndFacet.SetParameter(New RParameter("var2", 1))
-        ucrReceiver2ndFacet.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "station" & Chr(34)})
         ucrReceiver2ndFacet.bAutoFill = True
         ucrReceiver2ndFacet.SetParameterIsString()
         ucrReceiver2ndFacet.bWithQuotes = False
@@ -283,7 +279,12 @@ Public Class dlgClimaticBoxPlot
         End If
     End Sub
 
-    Private Sub ucrChkFacet_ControlvalueChanged() Handles ucrChkFacet.ControlValueChanged, ucrReceiverFacet.ControlValueChanged, ucrChk2ndFacet.ControlValueChanged, ucrReceiver2ndFacet.ControlValueChanged
+    Private Sub FacetControls_ControlvalueChanged(ucrChangedControl As ucrCore) Handles ucrChkFacet.ControlValueChanged, ucrReceiverFacet.ControlValueChanged, ucrChk2ndFacet.ControlValueChanged, ucrReceiver2ndFacet.ControlValueChanged
+        If ucrChangedControl.Equals(ucrChkFacet) AndAlso ucrChkFacet.Checked Then
+            ucrReceiverFacet.SetMeAsReceiver()
+        ElseIf ucrChangedControl.Equals(ucrChk2ndFacet) AndAlso ucrChk2ndFacet.Checked Then
+            ucrReceiver2ndFacet.SetMeAsReceiver()
+        End If
         SetFacets()
         AddRemoveFacets()
     End Sub
