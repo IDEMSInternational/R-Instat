@@ -18,10 +18,22 @@ Imports instat.Translations
 Public Class dlgTransformClimatic
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Private clsRTransform, clsRRollFuncExpr, clsMatchFun, clsTransformManipulationsFunc, clsTransformGroupByFunc, clsReplaceNA, clsWaterBalance60, clsSubCalcList As New RFunction
-    Private clsRollFunction, clsRRainday As New RFunction
+    Private clsRTransform, clsOverallTransformFunction, clsTransformManipulationsFunc, clsGroupBy, clsReplaceNAasElement, clsRTransformCountSpellSub As New RFunction
+
+    'Moving
+    Private clsRMovingFunction As New RFunction
+
+    'Count and Spells
+    Private clsRRainday, clsRRaindayMatch, clsRCountFunction As New RFunction
+    Private clsRRaindayAndOperator, clsRRaindayLowerOperator, clsRRaindayUpperOperator, clsRCountOperator As New ROperator
+
+    ' Water Balance
+    Private clsPMinFunctionMax, clsPMaxFunctionMax, clsRWaterBalanceFunction As New RFunction
+    Private clsPMaxOperatorMax As New ROperator
+
     Private strCurrDataName As String = ""
-    Private strValuesUnder As String = ">="
+    Private strRainDay As String = "rain_day"
+
     Private Sub dlgTransformClimatic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
@@ -38,203 +50,253 @@ Public Class dlgTransformClimatic
 
     Private Sub InitialiseDialog()
         Dim dctInputSumPairs As New Dictionary(Of String, String)
-
         ucrBase.iHelpTopicID = 358
 
+        'Overall Panel
+        ucrPnlTransform.AddRadioButton(rdoMoving)
+        ucrPnlTransform.AddRadioButton(rdoCount)
+        ucrPnlTransform.AddRadioButton(rdoSpell)
+        ucrPnlTransform.AddRadioButton(rdoWaterBalance)
+
+        ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoMoving, "function_exp", "rollapply")
+        ucrPnlTransform.AddParameterPresentCondition(rdoMoving, "sub_calculations", False)
+        ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoCount, "function_exp", "rollapply")
+        ucrPnlTransform.AddParameterPresentCondition(rdoCount, "sub_calculations", True)
+        ucrPnlTransform.AddParameterIsStringCondition(rdoSpell, "function_exp")
+        ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoWaterBalance, "function_exp", "Reduce")
+
+        'ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoMoving, "sub1", "instat_calculation$new", False) ' clsRRainday
+        'ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoCount, "sub1", "instat_calculation$new")
+        'ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoSpell, "sub1", "instat_calculation$new")
+        'ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoWaterBalance, "sub1", "instat_calculation$new", False)
+
         ' Setting receivers
-        ucrReceiverData.SetParameter(New RParameter("data", 0))
+        ucrReceiverData.SetParameter(New RParameter("data", 0, bNewIncludeArgumentName:=False))
         ucrReceiverData.SetParameterIsString()
         ucrReceiverData.bWithQuotes = False
-        ucrReceiverData.SetParameterIncludeArgumentName(False)
         ucrReceiverData.Selector = ucrSelectorTransform
         ucrReceiverData.strSelectorHeading = "Numerics"
 
         ucrReceiverStation.Selector = ucrSelectorTransform
         ucrReceiverStation.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "station" & Chr(34)})
         ucrReceiverStation.bAutoFill = True
-        ucrReceiverStation.strSelectorHeading = "Factors"
+        ucrReceiverStation.strSelectorHeading = "Station Variables"
 
         ucrReceiverYear.Selector = ucrSelectorTransform
         ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
         ucrReceiverYear.bAutoFill = True
-        ucrReceiverYear.strSelectorHeading = "Numerics"
+        ucrReceiverYear.strSelectorHeading = "Year Variables"
 
+        ' What is this used for? I don't think this requires a key.
         ucrReceiverDate.Selector = ucrSelectorTransform
         ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
         ucrReceiverDate.bAutoFill = True
-        ucrReceiverDate.strSelectorHeading = "Date"
+        ucrReceiverDate.strSelectorHeading = "Date Variables"
 
-        ucrReceiverDOY.Selector = ucrSelectorTransform
-        ucrReceiverDOY.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "doy" & Chr(34)})
-        ucrReceiverDOY.bAutoFill = True
-        ucrReceiverDOY.strSelectorHeading = "Numerics"
-
-        'clsRTransform.SetRCommand("instat_calculation$new")
-        'clsRTransform.SetAssignTo("transform_calculation")
-
-        ucrInputThreshold.SetParameter(New RParameter("threshold", 1))
-        ucrInputThreshold.SetValidationTypeAsNumeric()
-        ucrInputThreshold.SetLinkedDisplayControl(lblThreshold)
-
+        ' Moving
         ucrInputSum.SetParameter(New RParameter("FUN", 0))
-        dctInputSumPairs.Add("sum", Chr(39) & "sum" & Chr(39))
-        dctInputSumPairs.Add("max", Chr(39) & "max" & Chr(39))
-        dctInputSumPairs.Add("min", Chr(39) & "min" & Chr(39))
-        dctInputSumPairs.Add("mean", Chr(39) & "mean" & Chr(39))
+        dctInputSumPairs.Add("Sum", "sum")
+        dctInputSumPairs.Add("Maximum", "max")
+        dctInputSumPairs.Add("Minimum", "min")
+        dctInputSumPairs.Add("Mean", "mean")
         ucrInputSum.SetItems(dctInputSumPairs)
-        ucrInputSum.SetLinkedDisplayControl(lblSumOver)
         ucrInputSum.SetDropDownStyleAsNonEditable()
+        ucrInputSum.SetLinkedDisplayControl(lblSumOver)
+        ucrInputSum.bAllowNonConditionValues = True
 
-        ucrNudSumOver.SetParameter(New RParameter("width", 2))
+        ucrNudSumOver.SetParameter(New RParameter("width", 1))
         ucrNudSumOver.SetMinMax(1, 366)
         ucrNudSumOver.Increment = 1
         ucrNudSumOver.SetLinkedDisplayControl(lblSumRows)
 
-        ucrNudCountOver.SetParameter(New RParameter("count_over"))
+        ' Count
+        ucrNudCountOver.SetParameter(New RParameter("width", 1))
         ucrNudCountOver.SetMinMax(1, 366)
         ucrNudCountOver.Increment = 1
         ucrNudCountOver.SetLinkedDisplayControl(lblCountOver)
 
-        ucrChkValuesUnderThreshold.SetText("Values Under Threshold")
-        ucrChkValuesUnderThreshold.SetLinkedDisplayControl(lblCountRows)
+        ' Count and Spell
+        ucrInputCondition.SetItems({"<=", "Between", ">="})
+        ucrInputCondition.SetDropDownStyleAsNonEditable()
 
-        ucrInputSpellLower.SetParameter(New RParameter("spell_lower"))
+        ucrInputSpellLower.SetParameter(New RParameter("min", 1))
         ucrInputSpellLower.SetValidationTypeAsNumeric()
-        ucrInputSpellLower.SetLinkedDisplayControl(lblValuesBetween)
+        ucrInputSpellLower.AddQuotesIfUnrecognised = False
+        ucrInputSpellLower.SetLinkedDisplayControl(lblCondition)
 
-        ucrInputSpellUpper.SetParameter(New RParameter("spell_upper"))
+        ucrInputSpellUpper.SetParameter(New RParameter("max", 1))
         ucrInputSpellUpper.SetValidationTypeAsNumeric()
-        ucrInputSpellUpper.SetLinkedDisplayControl(lblSpellAnd)
+        ucrInputSpellUpper.AddQuotesIfUnrecognised = False
 
-        ucrNudWBCapacity.SetParameter(New RParameter("capacity"))
+        ' Water Balance
+        ucrNudWBCapacity.SetParameter(New RParameter("capacity", 1), False)
         ucrNudWBCapacity.SetMinMax(1, Integer.MaxValue)
-        ucrNudWBCapacity.Increment = 1
+        ucrNudWBCapacity.Increment = 10
         ucrNudWBCapacity.SetLinkedDisplayControl(lblWBCapacity)
 
-        ucrInputEvaporation.SetParameter(New RParameter("evaporation"))
+        ucrInputEvaporation.SetParameter(New RParameter("evaporation", 1), False)
         ucrInputEvaporation.SetValidationTypeAsNumeric()
+        ucrInputEvaporation.AddQuotesIfUnrecognised = False
         ucrInputEvaporation.SetLinkedDisplayControl(lblWBEvaporation)
 
-        ucrInputColName.SetParameter(New RParameter("result_name", 4))
-        ucrInputColName.SetName("moving_" & ucrInputSum.cboInput.SelectedItem)
-        ucrInputColName.bUserTyped = False
+        ' Save Options
+        ucrInputColName.SetParameter(New RParameter("result_name", 2))
+        ucrInputColName.SetName("moving_sum")
 
-        clsSubCalcList.SetRCommand("list")
+        ucrPnlTransform.AddToLinkedControls(ucrInputSum, {rdoMoving}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Sum")
+        ucrPnlTransform.AddToLinkedControls(ucrNudSumOver, {rdoMoving}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
 
-        ucrPnlTransform.AddRadioButton(rdoMoving)
-        ucrPnlTransform.AddRadioButton(rdoCount)
-        ucrPnlTransform.AddRadioButton(rdoSpell)
-        ucrPnlTransform.AddRadioButton(rdoWaterBalance)
+        ucrPnlTransform.AddToLinkedControls({ucrNudCountOver}, {rdoCount}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
+        ucrPnlTransform.AddToLinkedControls({ucrInputCondition}, {rdoCount, rdoSpell}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Between")
+        ucrInputCondition.AddToLinkedControls(ucrInputSpellLower, {"<=", "Between", ">="}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrInputCondition.AddToLinkedControls(ucrInputSpellUpper, {"Between"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.85)
 
-        ucrPnlTransform.AddParameterValuesCondition(rdoMoving, "FUN", Chr(39) & "sum" & Chr(39))
-        ucrPnlTransform.AddParameterValuesCondition(rdoCount, "FUN", Chr(39) & "sum" & Chr(39), False)
-        ucrPnlTransform.AddParameterValuesCondition(rdoSpell, "FUN", Chr(39) & "sum" & Chr(39), False)
-        ucrPnlTransform.AddParameterValuesCondition(rdoWaterBalance, "FUN", Chr(39) & "sum" & Chr(39), False)
-        'temporary fix for now
-        ucrPnlTransform.bAllowNonConditionValues = True
-
-        ucrPnlTransform.AddToLinkedControls({ucrInputSum, ucrNudSumOver}, {rdoMoving}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlTransform.AddToLinkedControls({ucrNudCountOver, ucrChkValuesUnderThreshold}, {rdoCount}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlTransform.AddToLinkedControls({ucrInputSpellLower, ucrInputSpellUpper}, {rdoSpell}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlTransform.AddToLinkedControls({ucrNudWBCapacity, ucrInputEvaporation}, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlTransform.AddToLinkedControls(ucrInputEvaporation, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
+        ucrPnlTransform.AddToLinkedControls(ucrNudWBCapacity, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=60)
     End Sub
 
     Private Sub SetDefaults()
-        clsRRollFuncExpr = New RFunction
         clsRTransform = New RFunction
-        clsMatchFun = New RFunction
-        clsRollFunction = New RFunction
+        clsOverallTransformFunction = New RFunction
         clsTransformManipulationsFunc = New RFunction
-        clsTransformGroupByFunc = New RFunction
+        clsRTransformCountSpellSub = New RFunction
 
-        rdoMoving.Checked = True ' this is a temporary fix to reset problem
+        clsRMovingFunction = New RFunction
+        clsGroupBy = New RFunction
+        clsReplaceNAasElement = New RFunction
+        clsRCountFunction = New RFunction
+        clsRWaterBalanceFunction = New RFunction
+
+        clsRRaindayMatch = New RFunction
+        clsRCountFunction = New RFunction
+        clsRRaindayAndOperator = New ROperator
+        clsRRaindayLowerOperator = New ROperator
+        clsRRaindayUpperOperator = New ROperator
+        clsRCountOperator = New ROperator
+
+        clsPMinFunctionMax = New RFunction
+        clsPMaxFunctionMax = New RFunction
+        clsPMaxOperatorMax = New ROperator
 
         ucrSelectorTransform.Reset()
         ucrReceiverDate.SetMeAsReceiver()
-        ucrInputThreshold.SetName(0.85)
-        ucrInputEvaporation.SetName(5)
-        ucrNudCountOver.Value = 1
-        ucrNudWBCapacity.Value = 60
-        ucrChkValuesUnderThreshold.Checked = False
-        ucrInputSpellLower.SetName(0)
-        ucrInputSpellUpper.SetName(0.85)
         ucrInputColName.bUserTyped = False
-        ' RDO1
-        clsTransformGroupByFunc.SetRCommand("instat_calculation$new")
-        clsTransformGroupByFunc.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=2)
-        clsTransformGroupByFunc.SetAssignTo("grouping")
 
-
-        ' RDO2
-        clsMatchFun.SetRCommand("match.fun")
-        clsMatchFun.AddParameter("FUN", Chr(39) & "sum" & Chr(39), iPosition:=0)
-
-        clsRRollFuncExpr.SetPackageName("zoo")
-        clsRRollFuncExpr.SetRCommand("rollapply")
-        clsRRollFuncExpr.AddParameter("data", ucrReceiverData.GetVariableNames(bWithQuotes:=False), iPosition:=0)
-        clsRRollFuncExpr.AddParameter("fill", "NA", iPosition:=3)
-        clsRRollFuncExpr.AddParameter("width", 1, iPosition:=2)
-        clsRRollFuncExpr.AddParameter("FUN", clsRFunctionParameter:=clsMatchFun, iPosition:=1)
-        clsRRollFuncExpr.AddParameter("align", Chr(39) & "right" & Chr(39), iPosition:=4)
-
-        'RDO 3
-        clsReplaceNA.SetRCommand("instat_calculation$new")
-        clsReplaceNA.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=1)
-        clsReplaceNA.AddParameter("function_exp", Chr(34) & "replace(" & ucrReceiverData.GetVariableNames(False) & ", is.na(" & ucrReceiverData.GetVariableNames(False) & ")," & ucrNudWBCapacity.Value & ")" & Chr(34), iPosition:=2)
-        clsReplaceNA.AddParameter("result_name", Chr(34) & "replace_NA" & Chr(34), iPosition:=3)
-        clsReplaceNA.AddParameter("calculated_from", " list(" & strCurrDataName & "= " & ucrReceiverData.GetVariableNames() & ")", iPosition:=0)
-        clsReplaceNA.AddParameter("save", "0", iPosition:=4)
-        clsReplaceNA.SetAssignTo("replace_NA")
-
-        clsSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsReplaceNA, iPosition:=0)
-
-        clsWaterBalance60.SetRCommand("instat_calculation$new")
-        clsWaterBalance60.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=1)
-        clsWaterBalance60.AddParameter("result_name", Chr(34) & "Water_Balance_60" & Chr(34), iPosition:=3)
-        clsWaterBalance60.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubCalcList, iPosition:=5)
-        clsWaterBalance60.AddParameter("save", "2", iPosition:=4)
-        clsWaterBalance60.SetAssignTo("Water_Balance_60")
-
-        ' RDO4
+        ' Count and Spells: Rainday
+        clsRRaindayMatch.bToScriptAsRString = True
         clsRRainday.SetRCommand("instat_calculation$new")
-        clsRRainday.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=1)
-
-        clsRRainday.AddParameter("function_exp", Chr(34) & "ifelse(" & ucrReceiverData.GetVariableNames(False) & " >= " & ucrInputSpellLower.GetText() & " & " & ucrReceiverData.GetVariableNames(False) & " <= " & ucrInputSpellUpper.GetText() & ", 0,1)" & Chr(34), iPosition:=2)
-        clsRRainday.AddParameter("result_name", Chr(34) & "rain_day" & Chr(34), iPosition:=3)
-        clsRRainday.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames() & ")", iPosition:=0)
-        clsRRainday.AddParameter("save", "0", iPosition:=4)
+        clsRRainday.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        clsRRainday.AddParameter("function_exp", clsRFunctionParameter:=clsRRaindayMatch, iPosition:=1)
+        clsRRainday.AddParameter("result_name", Chr(34) & strRainDay & Chr(34), iPosition:=2)
         clsRRainday.SetAssignTo("rain_day")
 
-        ' Base
+        clsRRaindayMatch.SetRCommand("match")
+        clsRRaindayMatch.AddParameter("x", clsROperatorParameter:=clsRRaindayAndOperator)
+        clsRRaindayAndOperator.SetOperation("&")
+        clsRRaindayAndOperator.AddParameter("lower", clsROperatorParameter:=clsRRaindayLowerOperator, iPosition:=0)
+        clsRRaindayLowerOperator.SetOperation(">=")
+        clsRRaindayLowerOperator.AddParameter("min", 0, iPosition:=1)
+        clsRRaindayAndOperator.AddParameter("upper", clsROperatorParameter:=clsRRaindayUpperOperator, iPosition:=0)
+        clsRRaindayUpperOperator.SetOperation("<=")
+        clsRRaindayUpperOperator.AddParameter("max", 0.85, iPosition:=1)
+        clsRRaindayMatch.AddParameter("table", "1", iPosition:=1)
+        clsRRaindayMatch.AddParameter("nomatch", "0", iPosition:=2)
+
+        ' Count
+        clsRCountFunction.bToScriptAsRString = True
+        clsRCountFunction.SetPackageName("zoo")
+        clsRCountFunction.SetRCommand("rollapply")
+        clsRCountFunction.AddParameter("data", strRainDay, iPosition:=0)
+        clsRCountFunction.AddParameter("width", 2, iPosition:=1)
+        clsRCountFunction.AddParameter("FUN", "sum", iPosition:=2)
+        clsRCountFunction.AddParameter("align", Chr(39) & "right" & Chr(39), iPosition:=4)
+        clsRCountFunction.AddParameter("fill", "NA", iPosition:=5)
+
+        ' Spell
+        ' this is run as a string Chr(34) & "cumsum(" & strRainDay & ")-cummax((" & strRainDay & "==0)*cumsum(" & strRainDay & "))" & Chr(34))
+
+        ' Moving
+        clsRMovingFunction.bToScriptAsRString = True
+        clsRMovingFunction.SetPackageName("zoo")
+        clsRMovingFunction.SetRCommand("rollapply")
+        clsRMovingFunction.AddParameter("width", 2, iPosition:=1)
+        clsRMovingFunction.AddParameter("FUN", "sum", iPosition:=2)
+        clsRMovingFunction.AddParameter("fill", "NA", iPosition:=3)
+        clsRMovingFunction.AddParameter("align", Chr(39) & "right" & Chr(39), iPosition:=4)
+
+        ' Water Balance
+        clsRWaterBalanceFunction.bToScriptAsRString = True
+        clsRWaterBalanceFunction.SetRCommand("Reduce")
+        clsRWaterBalanceFunction.AddParameter("x", clsRFunctionParameter:=clsPMinFunctionMax, iPosition:=0, bIncludeArgumentName:=False)
+        clsPMinFunctionMax.SetRCommand("function(x, y) pmin")
+        clsPMinFunctionMax.AddParameter("pmax", clsRFunctionParameter:=clsPMaxFunctionMax, iPosition:=0, bIncludeArgumentName:=False)
+        clsPMaxFunctionMax.SetRCommand("pmax")
+        clsPMaxFunctionMax.AddParameter("calculation", clsROperatorParameter:=clsPMaxOperatorMax, iPosition:=0, bIncludeArgumentName:=False)
+        clsPMaxOperatorMax.SetOperation("-")
+        clsPMaxOperatorMax.AddParameter("first", "x + y", iPosition:=0)
+        clsPMaxOperatorMax.AddParameter("evaporation", 5, iPosition:=1, bIncludeArgumentName:=False)
+        clsPMaxFunctionMax.AddParameter("0", 0, iPosition:=1, bIncludeArgumentName:=False)
+        clsPMinFunctionMax.AddParameter("capacity", 60, iPosition:=1, bIncludeArgumentName:=False)
+        clsRWaterBalanceFunction.AddParameter("replace_na", iPosition:=1, bIncludeArgumentName:=False)
+        clsRWaterBalanceFunction.AddParameter("accumulate", "TRUE", iPosition:=2)
+        '"Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText & ", 0), " & ucrNudCapacity.Value & "), Rain, accumulate=TRUE)" & Chr(34))
+
+        ' Overall Function
+        clsRTransformCountSpellSub.SetRCommand("list")
+        clsRTransformCountSpellSub.AddParameter("sub1", clsRFunctionParameter:=clsRRainday, bIncludeArgumentName:=False, iPosition:=0)
+
+        clsGroupBy.SetRCommand("instat_calculation$new")
+        clsGroupBy.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=0)
+        clsGroupBy.SetAssignTo("grouping")
+
         clsTransformManipulationsFunc.SetRCommand("list")
-        clsTransformManipulationsFunc.AddParameter("group_by", clsRFunctionParameter:=clsTransformGroupByFunc, bIncludeArgumentName:=False, iPosition:=0)
+        clsTransformManipulationsFunc.AddParameter("group_by", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False, iPosition:=0)
 
         clsRTransform.SetRCommand("instat_calculation$new")
+        clsRTransform.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRMovingFunction, iPosition:=1) ' changes depending on the rdo
+        clsRTransform.AddParameter("result_name", Chr(34) & "moving_sum" & Chr(34), iPosition:=2)
+        clsRTransform.AddParameter("manipulations", clsRFunctionParameter:=clsTransformManipulationsFunc, iPosition:=5)
+        clsRTransform.AddParameter("save", 2, iPosition:=6)
         clsRTransform.SetAssignTo("transform_calculation")
-        clsRTransform.AddParameter("function_exp", Chr(34) & clsRRollFuncExpr.ToScript.ToString & Chr(34), iPosition:=2)
-        clsRTransform.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=1)
-        clsRTransform.AddParameter("result_name", Chr(34) & "moving_sum" & Chr(34), iPosition:=3)
-        clsRTransform.AddParameter("manipulations", clsRFunctionParameter:=clsTransformManipulationsFunc, iPosition:=4)
-        clsRTransform.AddParameter("save", 2, iPosition:=4)
 
-        clsRollFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
-        clsRollFunction.AddParameter("display", "FALSE", iPosition:=1)
-        clsRollFunction.AddParameter("calc", clsRFunctionParameter:=clsRTransform, iPosition:=0)
+        clsOverallTransformFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
+        clsOverallTransformFunction.AddParameter("calc", clsRFunctionParameter:=clsRTransform, iPosition:=0)
+        clsOverallTransformFunction.AddParameter("display", "FALSE", iPosition:=1)
 
         'Base Function
-        ucrBase.clsRsyntax.SetBaseRFunction(clsRollFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsOverallTransformFunction)
+
+        ' InputConditionOptions()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrPnlTransform.SetRCode(clsMatchFun, bReset)
-        ucrNudSumOver.SetRCode(clsRRollFuncExpr, bReset)
-        ucrReceiverData.SetRCode(clsRRollFuncExpr, bReset)
-        ucrInputSum.SetRCode(clsMatchFun, bReset)
+        ucrReceiverData.AddAdditionalCodeParameterPair(clsReplaceNAasElement, New RParameter("element", 0, False), iAdditionalPairNo:=1)
+        ucrReceiverData.AddAdditionalCodeParameterPair(clsRRaindayLowerOperator, New RParameter("rain", 0), iAdditionalPairNo:=2)
+        ucrReceiverData.AddAdditionalCodeParameterPair(clsRRaindayUpperOperator, New RParameter("rain", 0), iAdditionalPairNo:=3)
+        ucrReceiverData.AddAdditionalCodeParameterPair(clsRWaterBalanceFunction, New RParameter("replace_na", 1, False), iAdditionalPairNo:=4)
+
+        ucrPnlTransform.SetRCode(clsRTransform, bReset)
+
+        ' Moving
+        ucrNudSumOver.SetRCode(clsRMovingFunction, bReset)
+        ucrInputSum.SetRCode(clsRMovingFunction, bReset)
+        ucrReceiverData.SetRCode(clsRMovingFunction, bReset)
+
+        ' Count
+        ucrNudCountOver.SetRCode(clsRCountFunction, bReset)
+        ucrInputSpellLower.SetRCode(clsRRaindayLowerOperator, bReset)
+        ucrInputSpellUpper.SetRCode(clsRRaindayUpperOperator, bReset)
+
+        ' Water Balance
+        ucrInputEvaporation.SetRCode(clsPMaxOperatorMax, bReset)
+        ucrNudWBCapacity.SetRCode(clsPMinFunctionMax, bReset)
+
         ucrInputColName.SetRCode(clsRTransform, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverData.IsEmpty AndAlso ((rdoMoving.Checked AndAlso Not ucrInputSum.IsEmpty AndAlso ucrNudSumOver.GetText <> "") OrElse (rdoCount.Checked AndAlso ucrNudCountOver.GetText <> "") OrElse (rdoSpell.Checked AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (rdoWaterBalance.Checked AndAlso Not ucrInputEvaporation.IsEmpty AndAlso ucrNudWBCapacity.GetText <> "")) Then
+        If Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverData.IsEmpty AndAlso Not ucrInputColName.IsEmpty AndAlso ((rdoMoving.Checked AndAlso Not ucrInputSum.IsEmpty AndAlso ucrNudSumOver.GetText <> "") OrElse (rdoCount.Checked AndAlso ucrNudCountOver.GetText <> "" AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty AndAlso Not ucrInputCondition.IsEmpty) OrElse (rdoSpell.Checked AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty AndAlso Not ucrInputCondition.IsEmpty) OrElse (rdoWaterBalance.Checked AndAlso Not ucrInputEvaporation.IsEmpty AndAlso ucrNudWBCapacity.GetText <> "")) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -247,61 +309,42 @@ Public Class dlgTransformClimatic
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        clsRTransform.SetAssignTo("transform_calculation")
-        clsWaterBalance60.SetAssignTo("water_balance_60")
-        clsReplaceNA.SetAssignTo("replace_NA")
-        clsRRainday.SetAssignTo("rain_day")
-        SetGroupByFuncCalcFrom()
-        If rdoMoving.Checked Then
-            clsRTransform.AddParameter("function_exp", Chr(34) & clsRRollFuncExpr.ToScript.ToString & Chr(34), iPosition:=2)
-        ElseIf rdoCount.Checked Then
-            clsRTransform.AddParameter("function_exp", Chr(34) & clsRRollFuncExpr.ToScript.ToString & Chr(34), iPosition:=2)
-        ElseIf rdoSpell.Checked Then
-            clsRTransform.AddParameter("function_exp", Chr(34) & "cumsum(rain_day==0)-cummax((rain_day)*cumsum(rain_day==0))" & Chr(34), iPosition:=2)
-        ElseIf rdoWaterBalance.Checked Then
-            clsRTransform.AddParameter("function_exp", Chr(34) & "Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText() & ", 0), " & ucrNudWBCapacity.Value & "), replace_NA, accumulate=TRUE)" & Chr(34), iPosition:=2)
-        End If
-        clsRollFunction.AddParameter("calc", clsRFunctionParameter:=clsRTransform, iPosition:=1)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsRollFunction)
+    Private Sub InputConditionOptions()
+        Select Case ucrInputCondition.GetText
+            Case "<="
+                clsRRaindayAndOperator.RemoveParameterByName("upper")
+                clsRRaindayUpperOperator.RemoveParameterByName("max")
+                clsRRaindayAndOperator.AddParameter("lower", clsROperatorParameter:=clsRRaindayLowerOperator, iPosition:=0)
+                clsRRaindayLowerOperator.AddParameter("min", ucrInputSpellLower.GetText, iPosition:=1)
+                clsRCountOperator.AddParameter("x", clsROperatorParameter:=clsRRaindayLowerOperator, iPosition:=0)
+            Case "Between" ' match(Rain>=LEFT & Rain<=RIGHT, 1, nomatch = 0)
+                clsRRaindayAndOperator.AddParameter("lower", clsROperatorParameter:=clsRRaindayLowerOperator, iPosition:=0)
+                clsRRaindayLowerOperator.AddParameter("min", ucrInputSpellLower.GetText, iPosition:=1)
+                clsRRaindayAndOperator.AddParameter("upper", clsROperatorParameter:=clsRRaindayUpperOperator, iPosition:=0)
+                clsRRaindayUpperOperator.AddParameter("max", ucrInputSpellUpper.GetText, iPosition:=1)
+                clsRCountOperator.AddParameter("x", clsROperatorParameter:=clsRRaindayAndOperator, iPosition:=0)
+            Case Else
+                clsRRaindayAndOperator.RemoveParameterByName("lower")
+                clsRRaindayLowerOperator.RemoveParameterByName("min")
+                clsRRaindayAndOperator.AddParameter("upper", clsROperatorParameter:=clsRRaindayUpperOperator, iPosition:=0)
+                clsRRaindayUpperOperator.AddParameter("max", ucrInputSpellLower.GetText, iPosition:=1)
+                clsRCountOperator.AddParameter("x", clsROperatorParameter:=clsRRaindayUpperOperator, iPosition:=0)
+        End Select
     End Sub
 
-    Private Sub SumOver()
-        If Not ucrReceiverData.IsEmpty Then
-            clsRTransform.AddParameter("function_exp", Chr(34) & clsRRollFuncExpr.ToScript.ToString & Chr(34), iPosition:=2)
-        End If
-    End Sub
-
-    Private Sub ucrPnlTransform_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransform.ControlValueChanged, ucrPnlTransform.ControlContentsChanged
-        Dim bRain As Boolean = False
+    Private Sub ucrPnlTransform_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransform.ControlValueChanged
         If rdoMoving.Checked Then
-            clsRRollFuncExpr.AddParameter("width", ucrNudSumOver.Value)
-            clsRRollFuncExpr.AddParameter("FUN", clsRFunctionParameter:=clsMatchFun)
+            clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRMovingFunction, iPosition:=1)
             clsRTransform.RemoveParameterByName("sub_calculations")
-            grpTransform.Text = "Moving"
         ElseIf rdoCount.Checked Then
-            clsRRollFuncExpr.AddParameter("width", ucrNudCountOver.Value)
-            clsRRollFuncExpr.AddParameter("FUN", "function(x) length(which(x" & strValuesUnder & ucrInputThreshold.GetText() & "))")
-            clsRTransform.RemoveParameterByName("sub_calculations")
-            grpTransform.Text = "Count"
+            clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRCountFunction, iPosition:=1)
+            clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsRTransformCountSpellSub, iPosition:=4)
         ElseIf rdoSpell.Checked Then
-            clsRRainday.AddParameter("function_exp", Chr(34) & "ifelse(" & ucrReceiverData.GetVariableNames(False) & " >= " & ucrInputSpellLower.GetText() & " & " & ucrReceiverData.GetVariableNames(False) & " <= " & ucrInputSpellUpper.GetText() & ", 0, 1)" & Chr(34))
-            clsSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsRRainday)
-            clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubCalcList, iPosition:=6)
-            grpTransform.Text = "Spell"
+            clsRTransform.AddParameter("function_exp", Chr(34) & "cumsum(" & strRainDay & ")-cummax((" & strRainDay & "==0)*cumsum(" & strRainDay & "))" & Chr(34), iPosition:=1)
+            clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsRTransformCountSpellSub, iPosition:=4)
         ElseIf rdoWaterBalance.Checked Then
-            bRain = True
-            clsReplaceNA.AddParameter("function_exp", Chr(34) & "replace(" & ucrReceiverData.GetVariableNames(False) & ", is.na(" & ucrReceiverData.GetVariableNames(False) & ")," & ucrNudWBCapacity.Value & ")" & Chr(34))
-            clsSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsReplaceNA)
-            clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubCalcList, iPosition:=6)
-            grpTransform.Text = "Water Balance"
-        End If
-        SetAssignName()
-        If bRain Then
-            ucrReceiverData.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "rain" & Chr(34)})
-            ucrReceiverData.bAutoFill = True
-        Else
-            ucrReceiverData.RemoveIncludedMetadataProperty("Climatic_Type")
+            clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRWaterBalanceFunction, iPosition:=1)
+            clsRTransform.RemoveParameterByName("sub_calculations")
         End If
     End Sub
 
@@ -320,84 +363,65 @@ Public Class dlgTransformClimatic
     End Sub
 
     Private Sub MovingColNames()
-        If ucrInputSum.cboInput.SelectedItem <> Nothing Then
-            ucrInputColName.SetName("moving_" & ucrInputSum.cboInput.SelectedItem)
+        Select Case ucrInputSum.GetText
+            Case "Sum"
+                ucrInputColName.SetName("moving_sum")
+            Case "Maximum"
+                ucrInputColName.SetName("moving_max")
+            Case "Minimum"
+                ucrInputColName.SetName("moving_min")
+            Case "Mean"
+                ucrInputColName.SetName("moving_mean")
+            Case Else
+                ucrInputColName.SetName("moving")
+        End Select
+    End Sub
+
+    Private Sub GroupByOptions()
+        If Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty Then
+            clsGroupBy.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & "," & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames & ")", iPosition:=3)
+        Else
+            clsGroupBy.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & ")", iPosition:=3)
         End If
     End Sub
 
-    Private Sub ucrSelectorTransform_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrSelectorTransform.ControlContentsChanged, ucrReceiverData.ControlContentsChanged
+    Private Sub RainDays()
+        clsRRainday.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames() & ")", iPosition:=3)
+    End Sub
+
+    Private Sub ucrSelectorTransform_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrSelectorTransform.ControlContentsChanged
         strCurrDataName = Chr(34) & ucrSelectorTransform.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
-        clsRRainday.AddParameter("function_exp", Chr(34) & "ifelse(" & ucrReceiverData.GetVariableNames(False) & " >= " & ucrInputSpellLower.GetText() & " & " & ucrReceiverData.GetVariableNames(False) & " <= " & ucrInputSpellUpper.GetText() & ", 0, 1)" & Chr(34), iPosition:=2)
-        clsReplaceNA.AddParameter("function_exp", Chr(34) & "replace(" & ucrReceiverData.GetVariableNames(False) & ", is.na(" & ucrReceiverData.GetVariableNames(False) & ")," & ucrNudWBCapacity.Value & ")" & Chr(34), iPosition:=2)
-        clsRRainday.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames() & ")", iPosition:=0)
-        clsRTransform.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames() & ")", iPosition:=0)
-        clsReplaceNA.AddParameter("calculated_from", " list(" & strCurrDataName & "= " & ucrReceiverData.GetVariableNames() & ")", iPosition:=0)
+        RainDays()
+        GroupByOptions()
     End Sub
 
-    Private Sub ucrCountOver_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrNudCountOver.ControlContentsChanged
-        clsRRollFuncExpr.AddParameter("width", ucrNudCountOver.Value)
-        clsRTransform.AddParameter("function_exp", Chr(34) & clsRRollFuncExpr.ToScript.ToString & Chr(34), iPosition:=2)
-        TestOkEnabled()
+    Private Sub ucrInputSpellLower_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSpellLower.ControlValueChanged, ucrInputSpellUpper.ControlValueChanged, ucrInputCondition.ControlValueChanged
+        InputConditionOptions()
     End Sub
 
-    Private Sub ucrValuesUnder_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrChkValuesUnderThreshold.ControlContentsChanged, ucrInputThreshold.ControlContentsChanged
-        If ucrChkValuesUnderThreshold.Checked Then
-            strValuesUnder = "<"
-        Else
-            strValuesUnder = ">="
-        End If
-        clsRRollFuncExpr.AddParameter("FUN", "function(x) length(which(x" & strValuesUnder & ucrInputThreshold.GetText() & "))", iPosition:=0)
-        clsRTransform.AddParameter("function_exp", Chr(34) & clsRRollFuncExpr.ToScript.ToString & Chr(34), iPosition:=2)
-    End Sub
-
-    Private Sub SetGroupByFuncCalcFrom()
-        Dim strCurrDataName As String = ""
-        Dim strGroupByCalcFrom As String = ""
-        strCurrDataName = Chr(34) & ucrSelectorTransform.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
-        If Not ucrReceiverStation.IsEmpty Then
-            clsTransformGroupByFunc.SetAssignTo("grouping")
-            clsRTransform.AddParameter("manipulations", clsRFunctionParameter:=clsTransformManipulationsFunc, iPosition:=4)
-
-            strGroupByCalcFrom = "list(" & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames() & ")"
-        Else
-            clsRTransform.RemoveParameterByName("manipulations")
-
-        End If
-        If strGroupByCalcFrom <> "" Then
-            clsTransformGroupByFunc.AddParameter("calculated_from", strGroupByCalcFrom, iPosition:=0)
-        Else
-            clsTransformGroupByFunc.RemoveParameterByName("calculated_from")
-        End If
-    End Sub
-
-    Private Sub ucrWBControls_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrNudWBCapacity.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged
-        clsRTransform.AddParameter("function_exp", Chr(34) & "Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText() & ", 0), " & ucrNudWBCapacity.Value & "), replace_NA, accumulate=TRUE)" & Chr(34), iPosition:=2)
-        TestOkEnabled()
-    End Sub
-
-    Private Sub ucrSpellBetween_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputSpellLower.ControlContentsChanged, ucrInputSpellUpper.ControlContentsChanged
-        clsRRainday.AddParameter("function_exp", Chr(34) & "ifelse(" & ucrReceiverData.GetVariableNames(False) & " >= " & ucrInputSpellLower.GetText() & " & " & ucrReceiverData.GetVariableNames(False) & " <= " & ucrInputSpellUpper.GetText() & ", 0, 1)" & Chr(34), iPosition:=2)
-        clsSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsRRainday, iPosition:=0)
-        clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubCalcList, iPosition:=7)
-        clsRTransform.AddParameter("function_exp", Chr(34) & "cumsum(rain_day==0)-cummax((rain_day)*cumsum(rain_day==0))" & Chr(34), iPosition:=2)
-        TestOkEnabled()
+    Private Sub ucrReceiverData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlValueChanged
+        RainDays()
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
-        SetGroupByFuncCalcFrom()
+        GroupByOptions()
     End Sub
 
-    Private Sub ucrControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlValueChanged, ucrInputSum.ControlValueChanged, ucrNudSumOver.ControlValueChanged
-        SumOver()
+    Private Sub ucrReceiverYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlValueChanged
+        GroupByOptions()
+    End Sub
+
+    Private Sub ucrPnlTransform_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrPnlTransform.ControlContentsChanged
+        SetAssignName()
         TestOkEnabled()
     End Sub
 
     Private Sub ucrInputSum_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputSum.ControlContentsChanged
-        SumOver()
         MovingColNames()
+        TestOkEnabled()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverData.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverData.ControlContentsChanged, ucrNudSumOver.ControlContentsChanged, ucrNudCountOver.ControlContentsChanged, ucrInputSpellLower.ControlContentsChanged, ucrInputSpellUpper.ControlContentsChanged, ucrInputCondition.ControlContentsChanged, ucrInputColName.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged, ucrNudWBCapacity.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class

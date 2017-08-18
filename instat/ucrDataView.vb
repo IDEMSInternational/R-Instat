@@ -134,6 +134,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub mnuUnhideColumns_Click(sender As Object, e As EventArgs) Handles mnuUnhideColumns.Click
+        dlgHideShowColumns.SetCurrentDataframe(grdCurrSheet.Name)
         dlgHideShowColumns.ShowDialog()
         'grdData.DoAction(New unvell.ReoGrid.Actions.UnhideColumnsAction(grdData.CurrentWorksheet.SelectionRange.Col, grdData.CurrentWorksheet.SelectionRange.Cols))
     End Sub
@@ -606,6 +607,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub SortToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SortToolStripMenuItem.Click
+        dlgSort.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
         dlgSort.ShowDialog()
     End Sub
 
@@ -653,6 +655,7 @@ Public Class ucrDataView
 
     Private Sub mnuConvert_Click(sender As Object, e As EventArgs) Handles mnuConvert.Click
         'TODO Selected column should automatically appear in dialog
+        dlgConvertColumns.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
         dlgConvertColumns.ShowDialog()
     End Sub
 
@@ -709,4 +712,5 @@ Public Class ucrDataView
         grdData.Enabled = True
         Cursor = Cursors.Default
     End Sub
+
 End Class
