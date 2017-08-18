@@ -1650,11 +1650,15 @@ Public Class frmMain
         dlgDuplicatesConstructed.ShowDialog()
     End Sub
 
-    Private Sub BoxplotsConceptualisedAndConstructedToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BoxplotsConceptualisedAndConstructedToolStripMenuItem.Click
+    Private Sub SummaryOfDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SummaryOfDailyDataToolStripMenuItem.Click
+        dlgSummaryofDailydata.ShowDialog()
+    End Sub
+
+    Private Sub BoxplotsConceptualisedAndConstructedToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles BoxplotsConceptualisedAndConstructedToolStripMenuItem.Click
         dlgClimaticBoxPlot.ShowDialog()
     End Sub
 
-    Private Sub SummaryOfDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SummaryOfDailyDataToolStripMenuItem.Click
-        dlgSummaryofDailydata.ShowDialog()
+    Private Sub mnuClimaticDescribeWindSpeedDirectionWindRose_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeWindSpeedDirectionWindRose.Click
+        dlgWindrose.ShowDialog()
     End Sub
 End Class

@@ -704,6 +704,12 @@
     <Compile Include="sdgImportFromClimSoft.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgInventoryPlot.Designer.vb">
+      <DependentUpon>sdgInventoryPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgInventoryPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgMerge.Designer.vb">
       <DependentUpon>sdgMerge.vb</DependentUpon>
     </Compile>
@@ -3233,6 +3239,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgImportFromClimSoft.resx">
       <DependentUpon>sdgImportFromClimSoft.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgInventoryPlot.resx">
+      <DependentUpon>sdgInventoryPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgMerge.fr-FR.resx">
       <DependentUpon>sdgMerge.vb</DependentUpon>
