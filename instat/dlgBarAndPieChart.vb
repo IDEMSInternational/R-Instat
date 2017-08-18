@@ -141,6 +141,7 @@ Public Class dlgBarAndPieChart
         clsPieAesFunction = New RFunction
 
         ucrBarChartSelector.Reset()
+        ucrBarChartSelector.SetGgplotFunction(clsBaseOperator)
         ucrFactorReceiver.SetMeAsReceiver()
         ucrSaveBar.Reset()
         bResetSubdialog = True

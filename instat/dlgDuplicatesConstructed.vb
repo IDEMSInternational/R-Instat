@@ -18,7 +18,8 @@ Imports instat.Translations
 Public Class dlgDuplicatesConstructed
     Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
-    Private clsDuplicate2, clsDuplicated As New RFunction
+    Private clsDuplicated2, clsDuplicated As New RFunction
+
     Private Sub dlgDuplicatesConstructed_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -70,34 +71,33 @@ Public Class dlgDuplicatesConstructed
 
     Private Sub SetDefaults()
         clsDuplicated = New RFunction
-        clsDuplicate2 = New RFunction
+        clsDuplicated2 = New RFunction
 
         ucrNewColumnName.Reset()
         ucrSelectorDuplicateswithVariables.Reset()
         ucrReceiverMultipleForDuplicates.SetMeAsReceiver()
 
         clsDuplicated.SetRCommand("duplicated")
+        clsDuplicated.AddParameter("x", clsRFunctionParameter:=ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
 
-        clsDuplicate2.SetPackageName("questionr")
-        clsDuplicate2.SetRCommand("duplicated2")
-        clsDuplicate2.AddParameter("x", frmMain.clsRLink.strInstatDataObject & "$get_data_frame", iPosition:=0)
-
-        SetBaseFunction()
-        DataFrameParameter()
+        clsDuplicated2.SetPackageName("questionr")
+        clsDuplicated2.SetRCommand("duplicated2")
+        clsDuplicated2.AddParameter("x", clsRFunctionParameter:=ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
 
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnName.GetText, strTempDataframe:=ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDuplicate2)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDuplicated2)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverMultipleForDuplicates.AddAdditionalCodeParameterPair(clsDuplicate2, ucrReceiverMultipleForDuplicates.GetParameter, iAdditionalPairNo:=1)
-        ucrSelectorDuplicateswithVariables.AddAdditionalCodeParameterPair(clsDuplicate2, ucrSelectorDuplicateswithVariables.GetParameter, iAdditionalPairNo:=1)
-        ucrNewColumnName.AddAdditionalRCode(clsDuplicate2, 1)
+        ucrReceiverMultipleForDuplicates.AddAdditionalCodeParameterPair(clsDuplicated2, ucrReceiverMultipleForDuplicates.GetParameter, iAdditionalPairNo:=1)
+        ucrSelectorDuplicateswithVariables.AddAdditionalCodeParameterPair(clsDuplicated2, ucrSelectorDuplicateswithVariables.GetParameter, iAdditionalPairNo:=1)
+        ucrNewColumnName.AddAdditionalRCode(clsDuplicated2, 1)
+
         ucrSelectorDuplicateswithVariables.SetRCode(clsDuplicated, bReset)
         ucrReceiverMultipleForDuplicates.SetRCode(clsDuplicated, bReset)
         ucrNewColumnName.SetRCode(clsDuplicated, bReset)
         ucrPnlDuplicates.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrPnlOptions.SetRCode(clsDuplicate2, bReset)
+        ucrPnlOptions.SetRCode(clsDuplicated, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -118,26 +118,26 @@ Public Class dlgDuplicatesConstructed
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrPnlOptions_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged, ucrPnlDuplicates.ControlValueChanged
-        DataFrameParameter()
+    Private Sub ucrPnlOptions_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
+        SetDataFrameOrColumns()
     End Sub
 
-    Private Sub DataFrameParameter()
+    Private Sub SetDataFrameOrColumns()
         If rdoDataFrame.Checked Then
             ucrSelectorDuplicateswithVariables.SetVariablesVisible(False)
             clsDuplicated.AddParameter("x", clsRFunctionParameter:=ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-            clsDuplicate2.AddParameter("x", clsRFunctionParameter:=ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+            clsDuplicated2.AddParameter("x", clsRFunctionParameter:=ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         ElseIf rdoSelectedVariables.Checked Then
             ucrSelectorDuplicateswithVariables.SetVariablesVisible(True)
             clsDuplicated.AddParameter("x", clsRFunctionParameter:=ucrReceiverMultipleForDuplicates.GetVariables, iPosition:=0)
-            clsDuplicate2.AddParameter("x", clsRFunctionParameter:=ucrReceiverMultipleForDuplicates.GetVariables, iPosition:=0)
+            clsDuplicated2.AddParameter("x", clsRFunctionParameter:=ucrReceiverMultipleForDuplicates.GetVariables, iPosition:=0)
         Else
         End If
     End Sub
 
     Private Sub SetBaseFunction()
         If rdoAllDuplicateCases.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsDuplicate2)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsDuplicated2)
         ElseIf rdoDuplicatesOnly.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsDuplicated)
         End If
@@ -148,7 +148,7 @@ Public Class dlgDuplicatesConstructed
     End Sub
 
     Private Sub ucrSelectorDuplicateswithVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDuplicateswithVariables.ControlValueChanged
-        DataFrameParameter()
+        SetDataFrameOrColumns()
     End Sub
 
     Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlContentsChanged, ucrReceiverMultipleForDuplicates.ControlContentsChanged, ucrSelectorDuplicateswithVariables.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged

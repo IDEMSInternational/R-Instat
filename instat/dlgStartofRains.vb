@@ -102,19 +102,19 @@ Public Class dlgStartofRains
         'Total Rainfall
         ucrPnlTRCalculateBy.AddRadioButton(rdoTRAmount)
         ucrPnlTRCalculateBy.AddRadioButton(rdoTRPercentile)
-        ucrPnlTRCalculateBy.AddParameterPresentCondition(rdoTRAmount, "TRPercSub", False)
-        ucrPnlTRCalculateBy.AddParameterPresentCondition(rdoTRPercentile, "TRPercSub")
+        ucrPnlTRCalculateBy.AddParameterPresentCondition(rdoTRAmount, "tr_perc_sub", False)
+        ucrPnlTRCalculateBy.AddParameterPresentCondition(rdoTRPercentile, "tr_perc_sub")
         ucrPnlTRCalculateBy.AddToLinkedControls(ucrNudTRPercentile, {rdoTRPercentile}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.8)
         ucrPnlTRCalculateBy.AddToLinkedControls(ucrNudTRAmount, {rdoTRAmount}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=20)
         ucrPnlTRCalculateBy.SetLinkedDisplayControl(lblTRVal)
-        ucrPnlTRCalculateBy.AddParameterPresentCondition(rdoTRPercentile, "TRPerc")
-        ucrPnlTRCalculateBy.AddParameterPresentCondition(rdoTRAmount, "TRAmount")
+        ucrPnlTRCalculateBy.AddParameterPresentCondition(rdoTRPercentile, "tr_perc")
+        ucrPnlTRCalculateBy.AddParameterPresentCondition(rdoTRAmount, "tr_amount")
 
-        ucrNudTRAmount.SetParameter(New RParameter("TRAmount", 1, False), False)
+        ucrNudTRAmount.SetParameter(New RParameter("tr_amount", 1, False), False)
         ucrNudTRAmount.SetMinMax(1, Integer.MaxValue)
 
-        ucrChkTotalRainfall.SetParameter(New RParameter("TRSub", clsTRRollingSum, 1, False), False)
-        ucrChkTotalRainfall.AddAdditionalCodeParameterPair(clsCombineOperator, New RParameter("TotalRainfall", clsTRCombineOperator, 1, False), iAdditionalPairNo:=1)
+        ucrChkTotalRainfall.SetParameter(New RParameter("tr_sub", clsTRRollingSum, 1, False), False)
+        ucrChkTotalRainfall.AddAdditionalCodeParameterPair(clsCombineOperator, New RParameter("total_rainfall", clsTRCombineOperator, 1, False), iAdditionalPairNo:=1)
         ucrChkTotalRainfall.SetText("Total Rainfall")
         ucrChkTotalRainfall.AddToLinkedControls(ucrNudTROverDays, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
         ucrNudTROverDays.SetLinkedDisplayControl(lblTROverDays)
@@ -129,11 +129,11 @@ Public Class dlgStartofRains
         ucrNudTRPercentile.Increment = 0.1
 
         'Number of Rainy days
-        ucrChkNumberOfRainyDays.SetParameter(New RParameter("RDSub", clsRDRollingRainDays, 2, False), False)
-        ucrChkNumberOfRainyDays.AddAdditionalCodeParameterPair(clsCombineOperator, New RParameter("raindays", clsRDCombineOperator, 2, False), iAdditionalPairNo:=1)
+        ucrChkNumberOfRainyDays.SetParameter(New RParameter("rd_sub", clsRDRollingRainDays, 2, False), False)
+        ucrChkNumberOfRainyDays.AddAdditionalCodeParameterPair(clsCombineOperator, New RParameter("rain_days", clsRDCombineOperator, 2, False), iAdditionalPairNo:=1)
         ucrChkNumberOfRainyDays.SetText("Number of Rainy Days")
 
-        ucrNudRDMinimumDays.SetParameter(New RParameter("RDMin", 1))
+        ucrNudRDMinimumDays.SetParameter(New RParameter("rd_min", 1))
         ucrNudRDMinimumDays.SetLinkedDisplayControl(lblRDMinimum)
         ucrNudRDMinimumDays.SetMinMax(1, 366)
 
@@ -145,8 +145,8 @@ Public Class dlgStartofRains
         ucrChkNumberOfRainyDays.AddToLinkedControls(ucrNudRDOutOfDays, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
 
         'Dry Spell
-        ucrChkDrySpell.SetParameter(New RParameter("DSSub", clsDSDrySpellPeriod, 3, False), False)
-        ucrChkDrySpell.AddAdditionalCodeParameterPair(clsCombineOperator, New RParameter("dryspell", clsDSCombineOperator, 3, False), iAdditionalPairNo:=1)
+        ucrChkDrySpell.SetParameter(New RParameter("ds_sub", clsDSDrySpellPeriod, 3, False), False)
+        ucrChkDrySpell.AddAdditionalCodeParameterPair(clsCombineOperator, New RParameter("dry_spell", clsDSCombineOperator, 3, False), iAdditionalPairNo:=1)
         ucrChkDrySpell.SetText("Dry Spell")
         ucrChkDrySpell.AddToLinkedControls(ucrNudDSLengthOfTime, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=30)
         ucrChkDrySpell.AddToLinkedControls(ucrNudDSMaximumDays, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=9)
@@ -156,15 +156,15 @@ Public Class dlgStartofRains
         ucrNudDSLengthOfTime.SetParameter(New RParameter("width", 1))
         ucrNudDSLengthOfTime.SetMinMax(1, 366)
 
-        ucrNudDSMaximumDays.SetParameter(New RParameter("DSMax", 1))
+        ucrNudDSMaximumDays.SetParameter(New RParameter("ds_max", 1))
         ucrNudDSMaximumDays.SetMinMax(1, 366)
 
         ' Dry Period
-        ucrChkDryPeriod.SetParameter(New RParameter("DPSub", clsDPOverallInterval, 3, False), False)
-        ucrChkDryPeriod.AddAdditionalCodeParameterPair(clsCombineOperator, New RParameter("dryperiod", clsDPCombineOperator, 4, False), iAdditionalPairNo:=1)
+        ucrChkDryPeriod.SetParameter(New RParameter("dp_sub", clsDPOverallInterval, 3, False), False)
+        ucrChkDryPeriod.AddAdditionalCodeParameterPair(clsCombineOperator, New RParameter("dry_period", clsDPCombineOperator, 4, False), iAdditionalPairNo:=1)
         ucrChkDryPeriod.SetText("Dry Period")
 
-        ucrNudDPRainPeriod.SetParameter(New RParameter("width", 1))
+        ucrNudDPRainPeriod.SetParameter(New RParameter("width", 0))
         ucrNudDPRainPeriod.SetLinkedDisplayControl(lblDPLength)
         ucrNudDPRainPeriod.SetMinMax(1, 366)
 
@@ -172,7 +172,7 @@ Public Class dlgStartofRains
         ucrNudDPMaxRain.SetLinkedDisplayControl(lblDPMaxRain)
         ucrNudDPMaxRain.SetMinMax(1, Integer.MaxValue)
 
-        ucrNudDPOverallInterval.SetParameter(New RParameter("Overall", 0))
+        ucrNudDPOverallInterval.SetParameter(New RParameter("overall", 0))
         ucrNudDPOverallInterval.SetLinkedDisplayControl(lblDPOverallInterval)
         ucrNudDPOverallInterval.SetMinMax(1, 366)
 
@@ -192,11 +192,11 @@ Public Class dlgStartofRains
 
     Private Sub SetDefaults()
         Dim strRainDay As String = "rain_day"
-        Dim strRollingRainDays As String = "Rolling_Rain_Days"
-        Dim strDrySpell As String = "Dry_Spell"
-        Dim strRainInDays As String = "Rain_in_Days"
-        Dim strAboveThreshold As String = "Above_Threshold"
-        Dim strDPOverallIntervalRain As String = "DP_Overall_Interval_Rain"
+        Dim strRollingRainDays As String = "rolling_rain_days"
+        Dim strDrySpell As String = "dry_spell"
+        Dim strRainInDays As String = "rain_in_days"
+        Dim strAboveThreshold As String = "above_threshold"
+        Dim strDPOverallIntervalRain As String = "dp_overall_interval_rain"
         Dim strRollSumRain As String = "roll_sum_Rain"
 
         clsAddKey.Clear()
@@ -272,13 +272,13 @@ Public Class dlgStartofRains
 
         ' group
         clsGroupBy.SetRCommand("instat_calculation$new")
-        clsGroupBy.AddParameter("type", Chr(34) & "by" & Chr(34))
+        clsGroupBy.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=0)
         clsGroupBy.SetAssignTo("grouping")
 
         'rainydays
         clsRainyDaysFunction.bToScriptAsRString = True
         clsRainyDays.SetRCommand("instat_calculation$new")
-        clsRainyDays.AddParameter("type", Chr(34) & "calculation" & Chr(34))
+        clsRainyDays.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsRainyDays.AddParameter("function_exp", clsRFunctionParameter:=clsRainyDaysFunction, iPosition:=1)
         clsRainyDaysFunction.SetRCommand("match")
         clsRainyDaysFunction.AddParameter("x", clsROperatorParameter:=clsRainyDaysOperator, iPosition:=0)
@@ -288,7 +288,6 @@ Public Class dlgStartofRains
         clsRainyDaysFunction.AddParameter("nomatch", "0", iPosition:=2)
         '"match(" & ucrReceiverRainfall.GetVariableNames(False) & ">=" & nudThreshold.Value & "," & "1, nomatch = 0" & ")" & Chr(34))
         clsRainyDays.AddParameter("result_name", Chr(34) & strRainDay & Chr(34), iPosition:=2)
-        clsRainyDays.AddParameter("save", 0, iPosition:=6)
 
         'TOTAL RAINFALL: associated with ucrChkTRTotalRainfall
         clsTRRollingSumFunction.bToScriptAsRString = True
@@ -303,7 +302,6 @@ Public Class dlgStartofRains
         clsTRRollingSumFunction.AddParameter("na.rm", "FALSE", iPosition:=3)
         clsTRRollingSumFunction.AddParameter("align", Chr(39) & "right" & Chr(39), iPosition:=4)
         clsTRRollingSumFunction.AddParameter("fill", "NA", iPosition:=5)
-        clsTRRollingSum.AddParameter("save", 0, iPosition:=6)
         clsTRRollingSum.SetAssignTo("total_rainfall_rolling_day")
 
         ' Quantile checked:
@@ -319,8 +317,7 @@ Public Class dlgStartofRains
         clsTRWetSpellFunction.AddParameter("probs", 0.8, iPosition:=1)
         clsTRWetSpellFunction.AddParameter("na.rm", "TRUE", iPosition:=2)
         clsTRWetSpell.AddParameter("result_name", Chr(34) & strWetSpell & Chr(34), iPosition:=2)
-        clsTRWetSpell.AddParameter("sub_calculations", clsRFunctionParameter:=clsTRWetSpellList, iPosition:=5) ' check position
-        clsTRWetSpell.AddParameter("save", "0", iPosition:=6)
+        clsTRWetSpell.AddParameter("sub_calculations", clsRFunctionParameter:=clsTRWetSpellList, iPosition:=4)
         clsTRWetSpell.SetAssignTo("total_rainfall_wet_spell")
 
         ' RAINY DAY
@@ -338,10 +335,9 @@ Public Class dlgStartofRains
         clsRDRollingRainDaysFunction.AddParameter("align", Chr(39) & "right" & Chr(39), iPosition:=4)
         clsRDRollingRainDaysFunction.AddParameter("fill", "NA", iPosition:=5)
         clsRDRollingRainDays.AddParameter("result_name", Chr(34) & strRollingRainDays & Chr(34), iPosition:=2)
-        clsRDRollingRainDays.AddParameter("save", 0, iPosition:=6)
         clsRDRollingRainDays.SetAssignTo("rain_day_rolling_day")
         clsRDRollingRainDaysSub.AddParameter("sub1", clsRFunctionParameter:=clsRainyDays, bIncludeArgumentName:=False, iPosition:=0)
-        clsRDRollingRainDays.AddParameter("sub_calculations", clsRFunctionParameter:=clsRDRollingRainDaysSub)
+        clsRDRollingRainDays.AddParameter("sub_calculations", clsRFunctionParameter:=clsRDRollingRainDaysSub, iPosition:=4)
 
         'DRY SPELL
         clsDSDrySpell.SetRCommand("instat_calculation$new")
@@ -350,15 +346,13 @@ Public Class dlgStartofRains
         clsDSDrySpellSub.SetRCommand("list")
 
         clsDSDrySpell.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
-        'TODO: Sort below code out
         clsDSDrySpell.AddParameter("function_exp", Chr(34) & "cumsum(" & strRainDay & "==0)-cummax((" & strRainDay & ")*cumsum(" & strRainDay & "== 0))" & Chr(34), iPosition:=1)
         clsDSDrySpell.AddParameter("result_name", Chr(34) & strDrySpell & Chr(34), iPosition:=2)
-        clsDSDrySpell.AddParameter("save", 0, iPosition:=6)
         clsDSDrySpell.SetAssignTo("dry_spell")
 
         clsDSDrySpellPeriodFunctionLead.bToScriptAsRString = True
         clsDSDrySpellPeriod.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
-        clsDSDrySpellPeriod.AddParameter("function_exp", clsRFunctionParameter:=clsDSDrySpellPeriodFunctionLead)
+        clsDSDrySpellPeriod.AddParameter("function_exp", clsRFunctionParameter:=clsDSDrySpellPeriodFunctionLead, iPosition:=1)
         clsDSDrySpellPeriodFunctionLead.SetRCommand("lead")
         clsDSDrySpellPeriodFunctionLead.AddParameter("x", clsRFunctionParameter:=clsDSDrySpellFunction)
         clsDSDrySpellFunction.SetPackageName("zoo")
@@ -376,7 +370,7 @@ Public Class dlgStartofRains
         clsDSDrySpellSub.AddParameter("sub1", clsRFunctionParameter:=clsRainyDays, bIncludeArgumentName:=False)
         clsDSDrySpell.AddParameter("sub_calculations", clsRFunctionParameter:=clsDSDrySpellSub, iPosition:=4)
         clsDSDrySpellList.AddParameter("sub1", clsRFunctionParameter:=clsDSDrySpell, bIncludeArgumentName:=False)
-        clsDSDrySpellPeriod.AddParameter("sub_calculations", clsRFunctionParameter:=clsDSDrySpellList, iPosition:=5)
+        clsDSDrySpellPeriod.AddParameter("sub_calculations", clsRFunctionParameter:=clsDSDrySpellList, iPosition:=4)
 
         'DRY PERIOD
         clsDPRainInDaysFunctionLead.bToScriptAsRString = True
@@ -388,7 +382,7 @@ Public Class dlgStartofRains
 
         clsDPRainInDays.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         'width = " & nudDPRainPeriod.Value & ", FUN = sum, na.rm = FALSE, align='left', fill=NA)" & Chr(34))
-        clsDPRainInDays.AddParameter("function_exp", clsRFunctionParameter:=clsDPRainInDaysFunctionLead, iPosition:=2)
+        clsDPRainInDays.AddParameter("function_exp", clsRFunctionParameter:=clsDPRainInDaysFunctionLead, iPosition:=1)
         clsDPRainInDaysFunctionLead.SetRCommand("lead") ' i assume lead is wanted if it's the NEXT x days.
         clsDPRainInDaysFunctionLead.AddParameter("x", clsRFunctionParameter:=clsDPRainInDaysFunction)
         clsDPRainInDaysFunction.SetPackageName("zoo")
@@ -399,13 +393,12 @@ Public Class dlgStartofRains
         clsDPRainInDaysFunction.AddParameter("align", Chr(39) & "left" & Chr(39), iPosition:=4)
         clsDPRainInDaysFunction.AddParameter("fill", "NA", iPosition:=5)
         clsDPRainInDays.AddParameter("result_name", Chr(34) & strRainInDays & Chr(34), iPosition:=2) ' sub calc running?
-        clsDPRainInDays.AddParameter("save", "0", iPosition:=6)
         clsDPRainInDays.SetAssignTo("dry_period_rolling_sum")
 
         clsDPRainFunction.bToScriptAsRString = True
         clsDPRain.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         '        clsDPRain.AddParameter("function_exp", Chr(34) & "match( Rain_in_Days <= " & nudDPMaxRain.Value & ", 1, nomatch = 0)" & Chr(34))
-        clsDPRain.AddParameter("function_exp", clsRFunctionParameter:=clsDPRainFunction)
+        clsDPRain.AddParameter("function_exp", clsRFunctionParameter:=clsDPRainFunction, iPosition:=1)
         clsDPRainFunction.SetRCommand("match")
         clsDPRainFunction.AddParameter("x", clsROperatorParameter:=clsDPRainFunctionOperator)
         clsDPRainFunctionOperator.SetOperation("<=")
@@ -414,9 +407,8 @@ Public Class dlgStartofRains
         clsDPRainFunction.AddParameter("table", 1, iPosition:=1)
         clsDPRainFunction.AddParameter("nomatch", 0, iPosition:=2)
         'Chr(34) & "match( Rain_in_Days <= " & nudDPMaxRain.Value & ", 1, nomatch = 0)" & Chr(34))
-        clsDPRain.AddParameter("result_name", Chr(34) & strAboveThreshold & Chr(34), iPosition:=1)
+        clsDPRain.AddParameter("result_name", Chr(34) & strAboveThreshold & Chr(34), iPosition:=2)
         clsDPRain.AddParameter("sub_calculations", clsRFunctionParameter:=clsDPRainList, iPosition:=4)
-        clsDPRain.AddParameter("save", 0, iPosition:=6)
         clsDPRain.SetAssignTo("dry_period_above_threshold")
 
         clsDPRainList.AddParameter("sub1", clsRFunctionParameter:=clsDPRainInDays, bIncludeArgumentName:=False)
@@ -431,60 +423,60 @@ Public Class dlgStartofRains
         clsDPOverallIntervalFunction.AddParameter("data", strAboveThreshold, iPosition:=0) ' data = Above_Threshold or = strAboveThreshold
         clsDPOverallIntervalFunction.AddParameter("width", clsROperatorParameter:=clsDPOverallIntervalFunctionOperator, iPosition:=1)
         clsDPOverallIntervalFunctionOperator.SetOperation("-")
-        clsDPOverallIntervalFunctionOperator.AddParameter("Overall", 45, iPosition:=0)
+        clsDPOverallIntervalFunctionOperator.AddParameter("overall", 45, iPosition:=0)
         clsDPOverallIntervalFunctionOperator.AddParameter("right", clsROperatorParameter:=clsDPOverallIntervalFunctionOperatorRight, iPosition:=1)
         clsDPOverallIntervalFunctionOperatorRight.SetOperation("+")
-        clsDPOverallIntervalFunctionOperatorRight.AddParameter("Rain", 30, iPosition:=0)
+        clsDPOverallIntervalFunctionOperatorRight.AddParameter("width", 30, iPosition:=0)
         clsDPOverallIntervalFunctionOperatorRight.AddParameter("1", 1, iPosition:=1)
         clsDPOverallIntervalFunction.AddParameter("FUN", "sum", iPosition:=2)
         clsDPOverallIntervalFunction.AddParameter("na.rm", "FALSE", iPosition:=3)
         clsDPOverallIntervalFunction.AddParameter("align", Chr(39) & "left" & Chr(39), iPosition:=4)
         clsDPOverallIntervalFunction.AddParameter("fill", "NA", iPosition:=5)
         clsDPOverallInterval.AddParameter("result_name", Chr(34) & strDPOverallIntervalRain & Chr(34), iPosition:=2)
-        clsDPOverallInterval.AddParameter("save", "2", iPosition:=6)
+        clsDPOverallInterval.AddParameter("save", 2, iPosition:=6)
         clsDPOverallInterval.SetAssignTo("dry_period_overall_interval")
 
         ' Combined filter
         clsCombinedList.SetRCommand("list")
         clsCombinedFilter.SetRCommand("instat_calculation$new")
         clsCombinedFilter.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
-        clsCombinedFilter.AddParameter("sub_calculations", clsRFunctionParameter:=clsCombinedList, iPosition:=5)
+        clsCombinedFilter.AddParameter("function_exp", clsROperatorParameter:=clsCombineOperator, iPosition:=1)
+        clsCombinedFilter.AddParameter("sub_calculations", clsRFunctionParameter:=clsCombinedList, iPosition:=4)
         clsCombinedFilter.SetAssignTo("overall_combined_filter")
         clsCombineOperator.bToScriptAsRString = True
-        clsCombinedFilter.AddParameter("function_exp", clsROperatorParameter:=clsCombineOperator)
         clsCombineOperator.SetOperation("&")
 
         ' run always
         clsCombineOperator.AddParameter("rainfall", clsROperatorParameter:=clsRainCombineOperator, iPosition:=0)
         clsRainCombineOperator.SetOperation(">=")
-        clsRainCombineOperator.AddParameter("rainThreshold", 0.85, iPosition:=1)
+        clsRainCombineOperator.AddParameter("rain_threshold", 0.85, iPosition:=1)
 
         ' run if chkTR is checked
         clsTRCombineOperator.SetOperation(">")
-        clsTRCombineOperator.AddParameter("TRLeft", strRollSumRain, iPosition:=0)
+        clsTRCombineOperator.AddParameter("tr_left", strRollSumRain, iPosition:=0)
 
         ' run if chkRD is checked
         clsRDCombineOperator.SetOperation(">=")
-        clsRDCombineOperator.AddParameter("RDleft", strRollingRainDays, iPosition:=0)
-        clsRDCombineOperator.AddParameter("RDMin", 1, iPosition:=1)
+        clsRDCombineOperator.AddParameter("rd_left", strRollingRainDays, iPosition:=0)
+        clsRDCombineOperator.AddParameter("rd_min", 1, iPosition:=1)
 
         ' run if chkDS is checked
         clsDSCombineOperator.SetOperation("<")
-        clsDSCombineOperator.AddParameter("DSleft", strDrySpell, iPosition:=0)
-        clsDSCombineOperator.AddParameter("DSMax", 9, iPosition:=1)
+        clsDSCombineOperator.AddParameter("ds_left", strDrySpell, iPosition:=0)
+        clsDSCombineOperator.AddParameter("ds_max", 9, iPosition:=1)
 
         ' run if chkDP is checked
         clsDPCombineOperator.SetOperation("==")
-        clsDPCombineOperator.AddParameter("DPleft", strDPOverallIntervalRain, iPosition:=0)
-        clsDPCombineOperator.AddParameter("DPMax", 0, iPosition:=1)
+        clsDPCombineOperator.AddParameter("dp_left", strDPOverallIntervalRain, iPosition:=0)
+        clsDPCombineOperator.AddParameter("dp_max", 0, iPosition:=1)
 
         ' First DOY
         clsFirstDOYPerYearOperator.bToScriptAsRString = True
         clsFirstDOYPerYear.SetRCommand("instat_calculation$new")
         clsManipulationFirstDOYPerYear.SetRCommand("list")
-        clsManipulationFirstDOYPerYear.AddParameter("sub2", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False)
-        clsManipulationFirstDOYPerYear.AddParameter("DrySpellSub", clsRFunctionParameter:=clsCombinedFilter, bIncludeArgumentName:=False)
-        clsManipulationFirstDOYPerYear.AddParameter("sub3", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False)
+        clsManipulationFirstDOYPerYear.AddParameter("group_sub", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False)
+        clsManipulationFirstDOYPerYear.AddParameter("dry_spell_sub", clsRFunctionParameter:=clsCombinedFilter, bIncludeArgumentName:=False)
+        clsManipulationFirstDOYPerYear.AddParameter("day_sub", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False)
         clsFirstDOYPerYear.AddParameter("manipulations", clsRFunctionParameter:=clsManipulationFirstDOYPerYear, iPosition:=5)
         clsFirstDOYPerYear.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
         clsFirstDOYPerYear.AddParameter("function_exp", clsROperatorParameter:=clsFirstDOYPerYearOperator, iPosition:=1)
@@ -511,8 +503,8 @@ Public Class dlgStartofRains
         ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsDPRainInDaysFunction, New RParameter("data", 0), iAdditionalPairNo:=2)
         ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsRainCombineOperator, New RParameter("rain", 0), iAdditionalPairNo:=3)
         ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsTRRollingSumFunction, New RParameter("data", 0), iAdditionalPairNo:=4)
-        ucrNudThreshold.AddAdditionalCodeParameterPair(clsRainCombineOperator, New RParameter("rainThreshold", 1), iAdditionalPairNo:=1)
-        ucrNudDPRainPeriod.AddAdditionalCodeParameterPair(clsDPOverallIntervalFunctionOperatorRight, New RParameter("Rain", 0), iAdditionalPairNo:=1)
+        ucrNudThreshold.AddAdditionalCodeParameterPair(clsRainCombineOperator, New RParameter("rain_threshold", 1), iAdditionalPairNo:=1)
+        ucrNudDPRainPeriod.AddAdditionalCodeParameterPair(clsDPOverallIntervalFunctionOperatorRight, ucrNudDPRainPeriod.GetParameter(), iAdditionalPairNo:=1)
 
         ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
         ucrNudFrom.SetRCode(clsDayFromOperator, bReset)
@@ -570,48 +562,48 @@ Public Class dlgStartofRains
     End Sub
 
     Private Sub CombinedFilter()
-        clsCombineOperator.AddParameter("TotalRainfall", clsROperatorParameter:=clsTRCombineOperator, iPosition:=1)
+        clsCombineOperator.AddParameter("total_rainfall", clsROperatorParameter:=clsTRCombineOperator, iPosition:=1)
         If ucrChkTotalRainfall.Checked Then
             If rdoTRAmount.Checked Then
-                clsCombinedList.RemoveParameterByName("TRPercSub")
-                clsTRCombineOperator.RemoveParameterByName("TRPerc")
-                clsTRCombineOperator.AddParameter("TRAmount", strParameterValue:=ucrNudTRAmount.Value, iPosition:=1)
+                clsCombinedList.RemoveParameterByName("tr_perc_sub")
+                clsTRCombineOperator.RemoveParameterByName("tr_perc")
+                clsTRCombineOperator.AddParameter("tr_amount", strParameterValue:=ucrNudTRAmount.Value, iPosition:=1)
             Else
-                clsCombinedList.AddParameter("TRPercSub", clsRFunctionParameter:=clsTRWetSpell, bIncludeArgumentName:=False)
-                clsTRCombineOperator.RemoveParameterByName("TRAmount")
-                clsTRCombineOperator.AddParameter("TRPerc", strParameterValue:=strWetSpell, iPosition:=1)
+                clsCombinedList.AddParameter("tr_perc_sub", clsRFunctionParameter:=clsTRWetSpell, bIncludeArgumentName:=False)
+                clsTRCombineOperator.RemoveParameterByName("tr_amount")
+                clsTRCombineOperator.AddParameter("tr_perc", strParameterValue:=strWetSpell, iPosition:=1)
             End If
         Else
-            clsCombinedList.RemoveParameterByName("TRPercSub")
-            clsCombineOperator.RemoveParameterByName("TotalRainfall")
-            clsTRCombineOperator.RemoveParameterByName("TRPerc")
-            clsTRCombineOperator.RemoveParameterByName("TRAmount")
+            clsCombinedList.RemoveParameterByName("tr_perc_sub")
+            clsCombineOperator.RemoveParameterByName("total_rainfall")
+            clsTRCombineOperator.RemoveParameterByName("tr_perc")
+            clsTRCombineOperator.RemoveParameterByName("tr_amount")
         End If
     End Sub
 
     Private Sub GroupByOptions()
         If Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty Then
-            clsGroupBy.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & "," & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames & ")")
+            clsGroupBy.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & "," & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames & ")", iPosition:=3)
         Else
-            clsGroupBy.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & ")")
+            clsGroupBy.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & ")", iPosition:=3)
         End If
     End Sub
 
     Private Sub DayBoundaries()
-        clsDayFromAndTo.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")")
-        clsFirstDOYPerYear.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")", iPosition:=4)
+        clsDayFromAndTo.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")", iPosition:=3)
+        clsFirstDOYPerYear.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")", iPosition:=3)
     End Sub
 
     Private Sub RainDays()
-        clsRainyDays.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames() & ")", iPosition:=5)
+        clsRainyDays.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames() & ")", iPosition:=3)
     End Sub
 
     Private Sub TotalRainfall()
-        clsTRRollingSum.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames & ")", iPosition:=0)
+        clsTRRollingSum.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames & ")", iPosition:=3)
     End Sub
 
     Private Sub DryPeriod()
-        clsDPRainInDays.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames & ")", iPosition:=5)
+        clsDPRainInDays.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames & ")", iPosition:=3)
     End Sub
 
     Private Sub ucrChkTotalRainfall_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTotalRainfall.ControlValueChanged, ucrPnlTRCalculateBy.ControlValueChanged
