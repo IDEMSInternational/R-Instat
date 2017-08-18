@@ -1108,6 +1108,11 @@ instat_object$set("public","make_inventory_plot", function(data_name, date_col, 
 }
 )
 
+instat_object$set("public","display_daily_graph", function(data_name, station_col = NULL, year_col = NULL, doy_col = NULL, climatic_element = NULL) {
+  self$get_data_objects(data_name)$make_inventory_plot(date_col = date_col,station_col = station_col, year_col = year_col, doy_col = doy_col, climatic_element = element_cols)
+}
+)
+
 instat_object$set("public", "import_NetCDF", function(nc_data, main_data_name, loc_data_name, latitude_col_name = "", longitude_col_name = "") {
   nc_result <- open_NetCDF(nc_data = nc_data, latitude_col_name = latitude_col_name, longitude_col_name = longitude_col_name)
   if(length(nc_result) != 3)stop("Output from open_NetCDF should be a list of length 3")
@@ -1202,7 +1207,7 @@ instat_object$set("public", "get_climatic_column_name", function(data_name, col_
 }
 )
 
-instat_object$set("public", "display_daily_graph", function(data_name, station, climatic_element, doy, year) {
+instat_object$set("public", "daily_climatic_graph", function(data_name, station, climatic_element, doy, year) {
    for (station_name in station){
     for(first_year in year){
       data_name<-subset(subset(data_name,station==station_name),year>=first_year&year<first_year+10)
