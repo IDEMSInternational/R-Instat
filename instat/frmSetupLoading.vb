@@ -22,7 +22,7 @@ Public Class frmSetupLoading
         dctMessagesLinks = New Dictionary(Of String, String)
 
         dctMessagesLinks.Add("Did you know: R-Instat was developed in Africa by African Maths Initiative (AMI)?" & Environment.NewLine & "Click here to find out more about AMI and the partners behind creating R-Instat.", "http://africandata.org")
-        dctMessagesLinks.Add("Did you know: R-Instat started as a crowd funding campaign in 2015 by partners working across Africa." & Environment.NewLine & "Click here to see the original campaign website and see how it all began.", "http://chuffed.org/project/africandatainitiative")
+        dctMessagesLinks.Add("Did you know: R-Instat started as a crowd funding campaign in 2015 by partners working across Africa." & Environment.NewLine & "Click here to view the original campaign website and see how it all began.", "http://chuffed.org/project/africandatainitiative")
         dctMessagesLinks.Add("Did you know: You can easily view a whole data frame in a separate window." & Environment.NewLine & "Just right click on the bottom sheets tab and select 'View'.", "")
         dctMessagesLinks.Add("Did you know: Importing data from many other statistics packages is easy. Go to 'File > Open From File...' and choose your file." & Environment.NewLine & "You can export for other packages as well with File > Export > Export Dataset...", "")
         dctMessagesLinks.Add("Did you know: R-Instat stores metadata on columns and data frames which you can edit. Go to View > Column Metadata or Data Frame Metadata to view and edit metadata.", "")
