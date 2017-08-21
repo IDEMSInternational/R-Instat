@@ -64,7 +64,7 @@ Partial Class dlgClimaticSummary
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrPnlAnnual = New instat.UcrPanel()
+        Me.ucrPnlAnnualWithin = New instat.UcrPanel()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
         Me.ucrChkStoreResults = New instat.ucrCheck()
         Me.ucrChkPrintOutput = New instat.ucrCheck()
@@ -357,12 +357,12 @@ Partial Class dlgClimaticSummary
         Me.ucrBase.Size = New System.Drawing.Size(399, 52)
         Me.ucrBase.TabIndex = 24
         '
-        'ucrPnlAnnual
+        'ucrPnlAnnualWithin
         '
-        Me.ucrPnlAnnual.Location = New System.Drawing.Point(18, 10)
-        Me.ucrPnlAnnual.Name = "ucrPnlAnnual"
-        Me.ucrPnlAnnual.Size = New System.Drawing.Size(381, 35)
-        Me.ucrPnlAnnual.TabIndex = 0
+        Me.ucrPnlAnnualWithin.Location = New System.Drawing.Point(18, 10)
+        Me.ucrPnlAnnualWithin.Name = "ucrPnlAnnualWithin"
+        Me.ucrPnlAnnualWithin.Size = New System.Drawing.Size(381, 35)
+        Me.ucrPnlAnnualWithin.TabIndex = 0
         '
         'grpOptions
         '
@@ -432,7 +432,7 @@ Partial Class dlgClimaticSummary
         Me.Controls.Add(Me.rdoAnnualVariable)
         Me.Controls.Add(Me.rdoAnnual)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.ucrPnlAnnual)
+        Me.Controls.Add(Me.ucrPnlAnnualWithin)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -449,7 +449,7 @@ Partial Class dlgClimaticSummary
     Friend WithEvents rdoAnnual As RadioButton
     Friend WithEvents rdoAnnualVariable As RadioButton
     Friend WithEvents rdoWithinYear As RadioButton
-    Friend WithEvents ucrPnlAnnual As UcrPanel
+    Friend WithEvents ucrPnlAnnualWithin As UcrPanel
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
     Friend WithEvents ucrReceiverElement As ucrReceiverSingle
     Friend WithEvents ucrReceiverDOY As ucrReceiverSingle

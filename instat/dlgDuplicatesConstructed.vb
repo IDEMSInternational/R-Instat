@@ -97,7 +97,9 @@ Public Class dlgDuplicatesConstructed
         ucrReceiverMultipleForDuplicates.SetRCode(clsDuplicated, bReset)
         ucrNewColumnName.SetRCode(clsDuplicated, bReset)
         ucrPnlDuplicates.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrPnlOptions.SetRCode(clsDuplicated, bReset)
+        If bReset Then
+            ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        End If
     End Sub
 
     Private Sub TestOKEnabled()
