@@ -364,7 +364,6 @@ Public Class dlgStartofRains
         clsDSDrySpellFunction.AddParameter("align", Chr(39) & "left" & Chr(39), iPosition:=4)
         clsDSDrySpellFunction.AddParameter("fill", "NA", iPosition:=5)
         clsDSDrySpellPeriod.AddParameter("result_name", Chr(34) & strDrySpell & Chr(34), iPosition:=2)
-        clsDSDrySpellPeriod.AddParameter("save", 2, iPosition:=6)
         clsDSDrySpellPeriod.SetAssignTo("dry_spell_period")
 
         clsDSDrySpellSub.AddParameter("sub1", clsRFunctionParameter:=clsRainyDays, bIncludeArgumentName:=False)
@@ -433,7 +432,6 @@ Public Class dlgStartofRains
         clsDPOverallIntervalFunction.AddParameter("align", Chr(39) & "left" & Chr(39), iPosition:=4)
         clsDPOverallIntervalFunction.AddParameter("fill", "NA", iPosition:=5)
         clsDPOverallInterval.AddParameter("result_name", Chr(34) & strDPOverallIntervalRain & Chr(34), iPosition:=2)
-        clsDPOverallInterval.AddParameter("save", 2, iPosition:=6)
         clsDPOverallInterval.SetAssignTo("dry_period_overall_interval")
 
         ' Combined filter
