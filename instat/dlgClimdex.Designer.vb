@@ -48,7 +48,7 @@ Partial Class dlgClimdex
         Me.ucrReceiverTmin = New instat.ucrReceiverSingle()
         Me.ucrReceiverTmax = New instat.ucrReceiverSingle()
         Me.ucrSelectorClimdex = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrBaseClimdex = New instat.ucrButtons()
+        Me.ucrBase = New instat.ucrButtons()
         Me.ucrChkSave = New instat.ucrCheck()
         Me.SuspendLayout()
         '
@@ -84,7 +84,7 @@ Partial Class dlgClimdex
         '
         'cmdIndices
         '
-        Me.cmdIndices.Location = New System.Drawing.Point(335, 213)
+        Me.cmdIndices.Location = New System.Drawing.Point(337, 216)
         Me.cmdIndices.Name = "cmdIndices"
         Me.cmdIndices.Size = New System.Drawing.Size(74, 23)
         Me.cmdIndices.TabIndex = 10
@@ -160,12 +160,12 @@ Partial Class dlgClimdex
         Me.ucrSelectorClimdex.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorClimdex.TabIndex = 0
         '
-        'ucrBaseClimdex
+        'ucrBase
         '
-        Me.ucrBaseClimdex.Location = New System.Drawing.Point(12, 242)
-        Me.ucrBaseClimdex.Name = "ucrBaseClimdex"
-        Me.ucrBaseClimdex.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBaseClimdex.TabIndex = 11
+        Me.ucrBase.Location = New System.Drawing.Point(12, 242)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 11
         '
         'ucrChkSave
         '
@@ -179,7 +179,7 @@ Partial Class dlgClimdex
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(421, 302)
+        Me.ClientSize = New System.Drawing.Size(417, 300)
         Me.Controls.Add(Me.ucrChkSave)
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.ucrReceiverDate)
@@ -191,7 +191,7 @@ Partial Class dlgClimdex
         Me.Controls.Add(Me.ucrReceiverTmin)
         Me.Controls.Add(Me.ucrReceiverTmax)
         Me.Controls.Add(Me.ucrSelectorClimdex)
-        Me.Controls.Add(Me.ucrBaseClimdex)
+        Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -204,7 +204,7 @@ Partial Class dlgClimdex
 
     End Sub
 
-    Friend WithEvents ucrBaseClimdex As ucrButtons
+    Friend WithEvents ucrBase As ucrButtons
 
     Friend WithEvents ucrSelectorClimdex As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverTmax As ucrReceiverSingle
