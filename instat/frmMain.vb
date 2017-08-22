@@ -1091,10 +1091,6 @@ Public Class frmMain
         dlgWaterBalance.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticOrganiseEventsEndoftheRains_Click(sender As Object, e As EventArgs)
-        dlgEndofRains.ShowDialog()
-    End Sub
-
     Private Sub mnuOrganiseColumnGenerateCountInFactor_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnGenerateCountInFactor.Click
         dlgCountinFactor.ShowDialog()
     End Sub
