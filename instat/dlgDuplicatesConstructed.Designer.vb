@@ -29,12 +29,20 @@ Partial Class dlgDuplicatesConstructed
         Me.rdoDuplicatesOnly = New System.Windows.Forms.RadioButton()
         Me.rdoAllDuplicateCases = New System.Windows.Forms.RadioButton()
         Me.ttDuplicates = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ucrNewColumnName = New instat.ucrSave()
-        Me.ucrBase = New instat.ucrButtons()
+        Me.rdoSuccessiveValues = New System.Windows.Forms.RadioButton()
+        Me.ucrReceiverForDuplicates = New instat.ucrReceiverSingle()
         Me.ucrPnlDuplicates = New instat.UcrPanel()
-        Me.ucrReceiverMultipleForDuplicates = New instat.ucrReceiverMultiple()
+        Me.ucrNewColumnName = New instat.ucrSave()
         Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorDuplicateswithVariables = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.lblLowerLimitofsuccessivevalues = New System.Windows.Forms.Label()
+        Me.ucrNudSuccessiveValues = New instat.ucrNud()
+        Me.ucrChkOmitValues = New instat.ucrCheck()
+        Me.ucrInputConditions = New instat.ucrInputComboBox()
+        Me.ucrNudOmit = New instat.ucrNud()
+        Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
         'rdoDataFrame
@@ -44,7 +52,7 @@ Partial Class dlgDuplicatesConstructed
         Me.rdoDataFrame.FlatAppearance.BorderSize = 2
         Me.rdoDataFrame.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoDataFrame.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoDataFrame.Location = New System.Drawing.Point(99, 13)
+        Me.rdoDataFrame.Location = New System.Drawing.Point(22, 12)
         Me.rdoDataFrame.Name = "rdoDataFrame"
         Me.rdoDataFrame.Size = New System.Drawing.Size(109, 27)
         Me.rdoDataFrame.TabIndex = 1
@@ -60,7 +68,7 @@ Partial Class dlgDuplicatesConstructed
         Me.rdoSelectedVariables.FlatAppearance.BorderSize = 2
         Me.rdoSelectedVariables.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSelectedVariables.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoSelectedVariables.Location = New System.Drawing.Point(206, 13)
+        Me.rdoSelectedVariables.Location = New System.Drawing.Point(129, 12)
         Me.rdoSelectedVariables.Name = "rdoSelectedVariables"
         Me.rdoSelectedVariables.Size = New System.Drawing.Size(109, 27)
         Me.rdoSelectedVariables.TabIndex = 2
@@ -102,19 +110,33 @@ Partial Class dlgDuplicatesConstructed
         Me.rdoAllDuplicateCases.Text = "All Duplicate Cases"
         Me.rdoAllDuplicateCases.UseVisualStyleBackColor = True
         '
-        'ucrNewColumnName
+        'rdoSuccessiveValues
         '
-        Me.ucrNewColumnName.Location = New System.Drawing.Point(10, 310)
-        Me.ucrNewColumnName.Name = "ucrNewColumnName"
-        Me.ucrNewColumnName.Size = New System.Drawing.Size(294, 24)
-        Me.ucrNewColumnName.TabIndex = 9
+        Me.rdoSuccessiveValues.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoSuccessiveValues.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSuccessiveValues.FlatAppearance.BorderSize = 2
+        Me.rdoSuccessiveValues.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSuccessiveValues.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoSuccessiveValues.Location = New System.Drawing.Point(238, 12)
+        Me.rdoSuccessiveValues.Name = "rdoSuccessiveValues"
+        Me.rdoSuccessiveValues.Size = New System.Drawing.Size(109, 27)
+        Me.rdoSuccessiveValues.TabIndex = 12
+        Me.rdoSuccessiveValues.TabStop = True
+        Me.rdoSuccessiveValues.Text = "Successive Values"
+        Me.rdoSuccessiveValues.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoSuccessiveValues.UseVisualStyleBackColor = True
         '
-        'ucrBase
+        'ucrReceiverForDuplicates
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 335)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(401, 52)
-        Me.ucrBase.TabIndex = 10
+        Me.ucrReceiverForDuplicates.frmParent = Me
+        Me.ucrReceiverForDuplicates.Location = New System.Drawing.Point(252, 136)
+        Me.ucrReceiverForDuplicates.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverForDuplicates.Name = "ucrReceiverForDuplicates"
+        Me.ucrReceiverForDuplicates.Selector = Nothing
+        Me.ucrReceiverForDuplicates.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverForDuplicates.strNcFilePath = ""
+        Me.ucrReceiverForDuplicates.TabIndex = 11
+        Me.ucrReceiverForDuplicates.ucrSelector = Nothing
         '
         'ucrPnlDuplicates
         '
@@ -123,24 +145,26 @@ Partial Class dlgDuplicatesConstructed
         Me.ucrPnlDuplicates.Size = New System.Drawing.Size(180, 69)
         Me.ucrPnlDuplicates.TabIndex = 5
         '
-        'ucrReceiverMultipleForDuplicates
+        'ucrNewColumnName
         '
-        Me.ucrReceiverMultipleForDuplicates.frmParent = Me
-        Me.ucrReceiverMultipleForDuplicates.Location = New System.Drawing.Point(254, 97)
-        Me.ucrReceiverMultipleForDuplicates.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverMultipleForDuplicates.Name = "ucrReceiverMultipleForDuplicates"
-        Me.ucrReceiverMultipleForDuplicates.Selector = Nothing
-        Me.ucrReceiverMultipleForDuplicates.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverMultipleForDuplicates.strNcFilePath = ""
-        Me.ucrReceiverMultipleForDuplicates.TabIndex = 4
-        Me.ucrReceiverMultipleForDuplicates.ucrSelector = Nothing
+        Me.ucrNewColumnName.Location = New System.Drawing.Point(10, 310)
+        Me.ucrNewColumnName.Name = "ucrNewColumnName"
+        Me.ucrNewColumnName.Size = New System.Drawing.Size(294, 24)
+        Me.ucrNewColumnName.TabIndex = 9
         '
         'ucrPnlOptions
         '
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(89, 9)
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(10, 8)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        Me.ucrPnlOptions.Size = New System.Drawing.Size(254, 36)
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(360, 36)
         Me.ucrPnlOptions.TabIndex = 0
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 337)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(401, 52)
+        Me.ucrBase.TabIndex = 10
         '
         'ucrSelectorDuplicateswithVariables
         '
@@ -152,28 +176,97 @@ Partial Class dlgDuplicatesConstructed
         Me.ucrSelectorDuplicateswithVariables.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorDuplicateswithVariables.TabIndex = 3
         '
+        'lblLowerLimitofsuccessivevalues
+        '
+        Me.lblLowerLimitofsuccessivevalues.AutoSize = True
+        Me.lblLowerLimitofsuccessivevalues.Location = New System.Drawing.Point(3, 19)
+        Me.lblLowerLimitofsuccessivevalues.Name = "lblLowerLimitofsuccessivevalues"
+        Me.lblLowerLimitofsuccessivevalues.Size = New System.Drawing.Size(162, 13)
+        Me.lblLowerLimitofsuccessivevalues.TabIndex = 13
+        Me.lblLowerLimitofsuccessivevalues.Tag = ""
+        Me.lblLowerLimitofsuccessivevalues.Text = "Lower Limit of successive values"
+        '
+        'ucrNudSuccessiveValues
+        '
+        Me.ucrNudSuccessiveValues.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSuccessiveValues.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSuccessiveValues.Location = New System.Drawing.Point(171, 19)
+        Me.ucrNudSuccessiveValues.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSuccessiveValues.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSuccessiveValues.Name = "ucrNudSuccessiveValues"
+        Me.ucrNudSuccessiveValues.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSuccessiveValues.TabIndex = 14
+        Me.ucrNudSuccessiveValues.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkOmitValues
+        '
+        Me.ucrChkOmitValues.Checked = False
+        Me.ucrChkOmitValues.Location = New System.Drawing.Point(6, 39)
+        Me.ucrChkOmitValues.Name = "ucrChkOmitValues"
+        Me.ucrChkOmitValues.Size = New System.Drawing.Size(135, 20)
+        Me.ucrChkOmitValues.TabIndex = 16
+        '
+        'ucrInputConditions
+        '
+        Me.ucrInputConditions.AddQuotesIfUnrecognised = True
+        Me.ucrInputConditions.IsReadOnly = False
+        Me.ucrInputConditions.Location = New System.Drawing.Point(6, 65)
+        Me.ucrInputConditions.Name = "ucrInputConditions"
+        Me.ucrInputConditions.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputConditions.TabIndex = 17
+        '
+        'ucrNudOmit
+        '
+        Me.ucrNudOmit.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudOmit.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudOmit.Location = New System.Drawing.Point(148, 65)
+        Me.ucrNudOmit.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudOmit.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudOmit.Name = "ucrNudOmit"
+        Me.ucrNudOmit.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudOmit.TabIndex = 18
+        Me.ucrNudOmit.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'grpOptions
+        '
+        Me.grpOptions.Controls.Add(Me.ucrNudOmit)
+        Me.grpOptions.Controls.Add(Me.ucrChkOmitValues)
+        Me.grpOptions.Controls.Add(Me.ucrInputConditions)
+        Me.grpOptions.Controls.Add(Me.lblLowerLimitofsuccessivevalues)
+        Me.grpOptions.Controls.Add(Me.ucrNudSuccessiveValues)
+        Me.grpOptions.Location = New System.Drawing.Point(223, 196)
+        Me.grpOptions.Name = "grpOptions"
+        Me.grpOptions.Size = New System.Drawing.Size(239, 94)
+        Me.grpOptions.TabIndex = 19
+        Me.grpOptions.TabStop = False
+        Me.grpOptions.Text = "Options"
+        '
         'dlgDuplicatesConstructed
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(418, 393)
+        Me.ClientSize = New System.Drawing.Size(470, 393)
+        Me.Controls.Add(Me.rdoSuccessiveValues)
+        Me.Controls.Add(Me.ucrReceiverForDuplicates)
         Me.Controls.Add(Me.rdoIndexNumberOfDuplicates)
         Me.Controls.Add(Me.rdoDuplicatesOnly)
         Me.Controls.Add(Me.rdoAllDuplicateCases)
         Me.Controls.Add(Me.ucrPnlDuplicates)
         Me.Controls.Add(Me.ucrNewColumnName)
-        Me.Controls.Add(Me.ucrReceiverMultipleForDuplicates)
         Me.Controls.Add(Me.rdoDataFrame)
         Me.Controls.Add(Me.rdoSelectedVariables)
         Me.Controls.Add(Me.ucrPnlOptions)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSelectorDuplicateswithVariables)
+        Me.Controls.Add(Me.grpOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDuplicatesConstructed"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Duplicates Constructed"
+        Me.grpOptions.ResumeLayout(False)
+        Me.grpOptions.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -184,11 +277,18 @@ Partial Class dlgDuplicatesConstructed
     Friend WithEvents rdoSelectedVariables As RadioButton
     Friend WithEvents ucrPnlOptions As UcrPanel
     Friend WithEvents ucrSelectorDuplicateswithVariables As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrReceiverMultipleForDuplicates As ucrReceiverMultiple
     Friend WithEvents ucrNewColumnName As ucrSave
     Friend WithEvents rdoIndexNumberOfDuplicates As RadioButton
     Friend WithEvents rdoDuplicatesOnly As RadioButton
     Friend WithEvents rdoAllDuplicateCases As RadioButton
     Friend WithEvents ucrPnlDuplicates As UcrPanel
     Friend WithEvents ttDuplicates As ToolTip
+    Friend WithEvents ucrReceiverForDuplicates As ucrReceiverSingle
+    Friend WithEvents rdoSuccessiveValues As RadioButton
+    Friend WithEvents lblLowerLimitofsuccessivevalues As Label
+    Friend WithEvents ucrNudSuccessiveValues As ucrNud
+    Friend WithEvents ucrChkOmitValues As ucrCheck
+    Friend WithEvents ucrNudOmit As ucrNud
+    Friend WithEvents ucrInputConditions As ucrInputComboBox
+    Friend WithEvents grpOptions As GroupBox
 End Class
