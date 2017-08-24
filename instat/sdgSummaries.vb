@@ -63,12 +63,19 @@ Public Class sdgSummaries
         ucrChkVariance.SetParameter(New RParameter("summary_var", 12), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_var" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkVariance.SetText("Variance")
 
+        ucrChkUpperQuartile.SetParameter(New RParameter("upper_quartile", 13), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "upper_quartile" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkUpperQuartile.SetText("Upper Quartile")
+
+        ucrChkLowerQuartile.SetParameter(New RParameter("lower_quartile", 14), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "lower_quartile" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkLowerQuartile.SetText("Lower Quartile")
+
         ucrChkQuartiles.SetParameter(New RParameter("summary_quartiles", 13), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_quartiles" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkQuartiles.Enabled = False 'To be enabled once quartiles summary function has is implemented in Instat object
         ucrChkQuartiles.SetText("Quartiles")
 
+
         lstCheckboxes = New List(Of ucrCheck)
-        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkQuartiles})
+        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkQuartiles, ucrChkUpperQuartile, ucrChkLowerQuartile})
         For Each ctrTemp As ucrCheck In lstCheckboxes
             ctrTemp.SetParameterIncludeArgumentName(False)
             ctrTemp.SetRDefault(Chr(34) & Chr(34))
