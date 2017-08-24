@@ -86,6 +86,7 @@ Public Class dlgDescribeOneVariable
 
         clsSummaryFunction.SetRCommand("summary")
         clsSummaryFunction.AddParameter("maxsum", 7)
+        clsSummaryFunction.AddParameter("na.rm", "FALSE")
 
         clsInstatSummaryFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary")
         clsInstatSummaryFunction.AddParameter("return_output", "TRUE")
