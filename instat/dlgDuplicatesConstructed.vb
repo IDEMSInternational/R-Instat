@@ -57,16 +57,23 @@ Public Class dlgDuplicatesConstructed
         ucrPnlOptions.AddToLinkedControls(ucrNudSuccessiveValues, {rdoSuccessiveValues}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
         ucrReceiverForDuplicates.SetLinkedDisplayControl(lblSelectedVariable)
 
-
+        ucrChkOmitValues.AddFunctionNamesCondition(True, {frmMain.clsRLink.strInstatDataObject & "$duplicated_cases"})
+        ucrChkOmitValues.AddFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$duplicated_cases"}, False)
         ucrChkOmitValues.SetText("Omit Value(s)")
         ucrChkOmitValues.AddToLinkedControls(ucrNudOmit, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrChkOmitValues.AddToLinkedControls(ucrInputConditions, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="==")
         ucrChkOmitValues.SetLinkedDisplayControl(grpOptions)
 
+        ucrNudOmit.SetParameter(New RParameter("ignore", 3))
+
+        ucrChkTolerance.AddFunctionNamesCondition(True, {frmMain.clsRLink.strInstatDataObject & "$duplicated_cases"})
+        ucrChkTolerance.AddFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$duplicated_cases"}, False)
         ucrChkTolerance.SetText("Tolerance")
         ucrChkTolerance.AddToLinkedControls(ucrInputTolerance, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.01)
         ucrInputTolerance.SetValidationTypeAsNumeric()
 
+        ucrInputTolerance.SetParameter(New RParameter("tolerance", 0))
+        ucrInputTolerance.AddQuotesIfUnrecognised = False
 
         ucrSelectorDuplicateswithVariables.SetParameter(New RParameter("data_name", 0))
         ucrSelectorDuplicateswithVariables.SetParameterIsString()
@@ -129,6 +136,10 @@ Public Class dlgDuplicatesConstructed
         ucrNewColumnName.AddAdditionalRCode(clsDuplicated2, 1)
         ucrNewColumnName.AddAdditionalRCode(clsStreakFunction, 2)
 
+        ucrChkOmitValues.SetRCode(clsStreakFunction, bReset)
+        ucrNudOmit.SetRCode(clsStreakFunction, bReset)
+        ucrChkTolerance.SetRCode(clsStreakFunction, bReset)
+        ucrInputTolerance.SetRCode(clsStreakFunction, bReset)
         ucrSelectorDuplicateswithVariables.SetRCode(clsStreakFunction, bReset)
         ucrReceiverForDuplicates.SetRCode(clsDuplicated, bReset)
         ucrNewColumnName.SetRCode(clsDuplicated, bReset)
