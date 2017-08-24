@@ -146,7 +146,7 @@ Public Class dlgWaterBalance
         ucrNudThreshold.Increment = 0.1
         ucrNudThreshold.SetLinkedDisplayControl(lblThreshold)
 
-        ucrNudTotalOverDays.SetParameter(New RParameter("width", 1))
+        ucrNudTotalOverDays.SetParameter(New RParameter("n", 1))
         ucrNudTotalOverDays.SetMinMax(1, 366)
         ucrNudTotalOverDays.SetLinkedDisplayControl(lblTotalOverDays)
 
@@ -316,9 +316,9 @@ Public Class dlgWaterBalance
         clsWBFirstWaterBalanceMax.AddParameter("result_name", Chr(34) & strFirstWaterBalanceMax & Chr(34), iPosition:=2)
         clsWBFirstWaterBalanceManipulationMax.SetRCommand("list")
         clsWBFirstWaterBalanceMax.AddParameter("manipulations", clsRFunctionParameter:=clsWBFirstWaterBalanceManipulationMax, iPosition:=5)
-        clsWBFirstWaterBalanceManipulationMax.AddParameter("sub1", clsRFunctionParameter:=clsWBWaterFilterMax, bIncludeArgumentName:=False, iPosition:=0)
-        clsWBFirstWaterBalanceManipulationMax.AddParameter("sub3", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False, iPosition:=1)
-        clsWBFirstWaterBalanceManipulationMax.AddParameter("sub2", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False, iPosition:=2)
+        clsWBFirstWaterBalanceManipulationMax.AddParameter("sub1", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False, iPosition:=0)
+        clsWBFirstWaterBalanceManipulationMax.AddParameter("sub2", clsRFunctionParameter:=clsWBWaterFilterMax, bIncludeArgumentName:=False, iPosition:=1)
+        clsWBFirstWaterBalanceManipulationMax.AddParameter("sub3", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False, iPosition:=2)
         clsWBFirstWaterBalanceMax.SetAssignTo(strFirstWaterBalanceMax)
 
         ' For Minimum Capacity:
@@ -366,7 +366,7 @@ Public Class dlgWaterBalance
         clsWBWaterFilterMinOperator.AddParameter("rightMaxMin", 0.5, iPosition:=1)
         clsWBWaterFilterMin.AddParameter("sub_calculations", clsRFunctionParameter:=clsWBWaterFilterMinList, iPosition:=4)
         clsWBWaterFilterMinList.AddParameter("sub1", clsRFunctionParameter:=clsWBWaterBalanceMin)
-        clsWBWaterFilterMin.SetAssignTo("Water_Filter_Min")
+        clsWBWaterFilterMin.SetAssignTo("water_filter_min")
 
         clsWBFirstWaterBalanceMinOperator.bToScriptAsRString = True
         clsWBFirstWaterBalanceMinList.SetRCommand("list")
@@ -378,9 +378,9 @@ Public Class dlgWaterBalance
         clsWBFirstWaterBalanceMin.AddParameter("result_name", Chr(34) & strFirstWaterBalanceMin & Chr(34), iPosition:=3)
         clsWBFirstWaterBalanceMin.AddParameter("manipulations", clsRFunctionParameter:=clsWBFirstWaterBalanceMinList, iPosition:=5)
         clsWBFirstWaterBalanceMin.SetAssignTo(strFirstWaterBalanceMin)
-        clsWBFirstWaterBalanceMinList.AddParameter("sub1", clsRFunctionParameter:=clsWBWaterFilterMin, bIncludeArgumentName:=False, iPosition:=0)
-        clsWBFirstWaterBalanceMinList.AddParameter("sub2", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False, iPosition:=2)
-        clsWBFirstWaterBalanceMinList.AddParameter("sub3", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False, iPosition:=1)
+        clsWBFirstWaterBalanceMinList.AddParameter("sub1", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False, iPosition:=0)
+        clsWBFirstWaterBalanceMinList.AddParameter("sub2", clsRFunctionParameter:=clsWBWaterFilterMin, bIncludeArgumentName:=False, iPosition:=1)
+        clsWBFirstWaterBalanceMinList.AddParameter("sub3", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False, iPosition:=2)
 
         clsDifferenceOperation.bToScriptAsRString = True
         clsDifferenceList.SetRCommand("list")
@@ -419,13 +419,11 @@ Public Class dlgWaterBalance
         clsEndRainRollingSum.SetRCommand("instat_calculation$new")
         clsEndRainRollingSum.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsEndRainRollingSum.AddParameter("function_exp", clsRFunctionParameter:=clsRollingSumFunction, iPosition:=1)
-        clsRollingSumFunction.SetPackageName("zoo")
-        clsRollingSumFunction.SetRCommand("rollapply")
-        clsRollingSumFunction.AddParameter("width", 2, iPosition:=1)
-        clsRollingSumFunction.AddParameter("FUN", "sum", iPosition:=2)
+        clsRollingSumFunction.SetPackageName("RcppRoll")
+        clsRollingSumFunction.SetRCommand("roll_sumr")
+        clsRollingSumFunction.AddParameter("n", 2, iPosition:=1)
+        clsRollingSumFunction.AddParameter("fill", "NA", iPosition:=2)
         clsRollingSumFunction.AddParameter("na.rm", "FALSE", iPosition:=3)
-        clsRollingSumFunction.AddParameter("align", Chr(39) & "right" & Chr(39), iPosition:=4)
-        clsRollingSumFunction.AddParameter("fill", "NA", iPosition:=5)
         clsEndRainRollingSum.AddParameter("result_name", Chr(34) & strRollingSum & Chr(34), iPosition:=2)
         clsEndRainRollingSum.SetAssignTo("start_rain_rolling_sum")
 
@@ -461,9 +459,9 @@ Public Class dlgWaterBalance
         'clsEndRainLastInstanceList.AddParameter("sub1", clsRFunctionParameter:=clsEndRainFilter, iPosition:=0, bIncludeArgumentName:=False)
         clsEndRainLastInstance.AddParameter("manipulations", clsRFunctionParameter:=clsEndRainLastInstanceManipulationList, iPosition:=5)
         clsEndRainLastInstanceManipulationList.SetRCommand("list")
-        clsEndRainLastInstanceManipulationList.AddParameter("sub1", clsRFunctionParameter:=clsEndRainFilter, bIncludeArgumentName:=False, iPosition:=0)
-        clsEndRainLastInstanceManipulationList.AddParameter("sub2", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False, iPosition:=1)
-        clsEndRainLastInstanceManipulationList.AddParameter("sub3", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False, iPosition:=2)
+        clsEndRainLastInstanceManipulationList.AddParameter("sub1", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False, iPosition:=0)
+        clsEndRainLastInstanceManipulationList.AddParameter("sub2", clsRFunctionParameter:=clsEndRainFilter, bIncludeArgumentName:=False, iPosition:=1)
+        clsEndRainLastInstanceManipulationList.AddParameter("sub3", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False, iPosition:=2)
         clsEndRainLastInstance.AddParameter("save", "2", iPosition:=6)
         clsEndRainLastInstance.SetAssignTo("end_of_rains")
 
@@ -492,9 +490,9 @@ Public Class dlgWaterBalance
         ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsWBReplaceNAMaxFunctionList, New RParameter("x", 0, False), iAdditionalPairNo:=1)
         ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsWBReplaceNAMinFunctionList, New RParameter("x", 0, False), iAdditionalPairNo:=2)
         ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsWBReplaceNAMinFunction, New RParameter("x", 0), iAdditionalPairNo:=3)
-        ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsRollingSumFunction, New RParameter("data", 0), iAdditionalPairNo:=4)
+        ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsRollingSumFunction, New RParameter("x", 0), iAdditionalPairNo:=4)
         ucrNudWBLessThan.AddAdditionalCodeParameterPair(clsWBWaterFilterMinOperator, ucrNudWBLessThan.GetParameter(), iAdditionalPairNo:=1)
-        ucrInputEvaporation.AddAdditionalCodeParameterPair(clsPMaxOperatorMin, New RParameter("evaporation", 1), iAdditionalPairNo:=1)
+        ucrInputEvaporation.AddAdditionalCodeParameterPair(clsPMaxOperatorMin, ucrInputEvaporation.GetParameter(), iAdditionalPairNo:=1)
         ucrNudCapacity.AddAdditionalCodeParameterPair(clsWBReplaceNAMaxFunction, ucrNudCapacity.GetParameter(), iAdditionalPairNo:=1)
         ucrNudCapacity.AddAdditionalCodeParameterPair(clsPMinFunctionMin, ucrNudCapacity.GetParameter(), iAdditionalPairNo:=2)
 
