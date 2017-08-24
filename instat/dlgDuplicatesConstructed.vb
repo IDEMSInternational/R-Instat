@@ -102,7 +102,7 @@ Public Class dlgDuplicatesConstructed
         clsDuplicated = New RFunction
         clsDuplicated2 = New RFunction
         clsStreakFunction = New RFunction
-
+        SetDataFrameOrColumns()
         ucrNewColumnName.Reset()
         ucrSelectorDuplicateswithVariables.Reset()
         ucrReceiverForDuplicates.SetMeAsReceiver()
@@ -124,8 +124,8 @@ Public Class dlgDuplicatesConstructed
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverForDuplicates.AddAdditionalCodeParameterPair(clsDuplicated2, ucrReceiverForDuplicates.GetParameter, iAdditionalPairNo:=1)
         ucrReceiverForDuplicates.AddAdditionalCodeParameterPair(clsStreakFunction, New RParameter("col_name", 1), iAdditionalPairNo:=2)
-        ucrSelectorDuplicateswithVariables.AddAdditionalCodeParameterPair(clsDuplicated2, ucrSelectorDuplicateswithVariables.GetParameter, iAdditionalPairNo:=1)
-        ' ucrSelectorDuplicateswithVariables.AddAdditionalCodeParameterPair(clsStreakFunction, New RParameter("data_name", 0), iAdditionalPairNo:=2)
+        ucrSelectorDuplicateswithVariables.AddAdditionalCodeParameterPair(clsDuplicated2, New RParameter("x", 0), iAdditionalPairNo:=1)
+        ucrSelectorDuplicateswithVariables.AddAdditionalCodeParameterPair(clsDuplicated, New RParameter("x", 0), iAdditionalPairNo:=2)
         ucrNewColumnName.AddAdditionalRCode(clsDuplicated2, 1)
         ucrNewColumnName.AddAdditionalRCode(clsStreakFunction, 2)
 
@@ -163,15 +163,18 @@ Public Class dlgDuplicatesConstructed
     Private Sub SetDataFrameOrColumns()
         If rdoDataFrame.Checked Then
             ucrSelectorDuplicateswithVariables.SetVariablesVisible(False)
+            ucrSelectorDuplicateswithVariables.SetParameterIsrfunction()
+            ucrReceiverForDuplicates.SetParameterIsRFunction()
             clsDuplicated.AddParameter("x", clsRFunctionParameter:=ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
             clsDuplicated2.AddParameter("x", clsRFunctionParameter:=ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         ElseIf rdoSelectedVariables.Checked Then
+            ucrSelectorDuplicateswithVariables.SetParameterIsrfunction()
+            ucrReceiverForDuplicates.SetParameterIsRFunction()
             ucrSelectorDuplicateswithVariables.SetVariablesVisible(True)
-            clsDuplicated.AddParameter("x", clsRFunctionParameter:=ucrReceiverForDuplicates.GetVariables, iPosition:=0)
-            clsDuplicated2.AddParameter("x", clsRFunctionParameter:=ucrReceiverForDuplicates.GetVariables, iPosition:=0)
         ElseIf rdoSuccessiveValues.Checked Then
+            ucrReceiverForDuplicates.SetParameterIsString()
+            ucrSelectorDuplicateswithVariables.SetParameterIsString()
             ucrSelectorDuplicateswithVariables.SetVariablesVisible(True)
-            '  clsStreakFunction.AddParameter("col_name", ucrReceiverForDuplicates.GetVariableNames, iPosition:=0)
         End If
     End Sub
 
