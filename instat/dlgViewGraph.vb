@@ -52,16 +52,12 @@ Public Class dlgViewGraph
         ucrGraphReceiver.Selector = ucrGraphsSelector
         ucrGraphReceiver.SetMeAsReceiver()
 
+        ' We don't specify rdos in the new system here. This is because the automatic detection of the radio buttons relies on VB options, not R code
         'Group Options panel
         ucrPnlDisplayOptions.AddRadioButton(rdoDisplayOutputWindow)
         ucrPnlDisplayOptions.AddRadioButton(rdoDisplayRViewer)
         'ucrPnlDisplayOptions.AddRadioButton(rdoDisplaySeparateWindow) ' TODO: Add code for this
         ucrPnlDisplayOptions.AddRadioButton(rdoDisplayInteractiveView)
-
-        ucrPnlDisplayOptions.AddFunctionNamesCondition(rdoDisplayOutputWindow, frmMain.clsRLink.strInstatDataObject & "$get_graphs")
-        ucrPnlDisplayOptions.AddFunctionNamesCondition(rdoDisplayRViewer, frmMain.clsRLink.strInstatDataObject & "$get_graphs")
-        'ucrPnlDisplayOptions.AddFunctionNamesCondition(rdoDisplaySeparateWindow, frmMain.clsRLink.strInstatDataObject & "$get_graphs")
-        ucrPnlDisplayOptions.AddParameterValueFunctionNamesCondition(rdoDisplayInteractiveView, "p", frmMain.clsRLink.strInstatDataObject & "$get_graphs")
     End Sub
 
     Private Sub SetDefaults()
@@ -69,6 +65,7 @@ Public Class dlgViewGraph
         clsGetGraphs = New RFunction
 
         ucrGraphsSelector.Reset()
+        rdoDisplayInteractiveView.Checked = True
 
         clsggPlotly.SetPackageName("plotly")
         clsggPlotly.SetRCommand("ggplotly")
@@ -81,7 +78,6 @@ Public Class dlgViewGraph
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrGraphReceiver.SetRCode(clsGetGraphs, bReset)
         ucrGraphsSelector.SetRCode(clsGetGraphs, bReset)
-        ucrPnlDisplayOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
