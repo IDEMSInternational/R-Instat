@@ -353,11 +353,11 @@ Public Class dlgTransformClimatic
             If rdoMoving.Checked Then
                 MovingColNames()
             ElseIf rdoCount.Checked Then
-                ucrInputColName.SetName("count")
+                ucrInputColName.SetName("count_" & ucrReceiverData.GetVariableNames(False))
             ElseIf rdoSpell.Checked Then
-                ucrInputColName.SetName("spell")
+                ucrInputColName.SetName("spell_" & ucrReceiverData.GetVariableNames(False))
             ElseIf rdoWaterBalance.Checked Then
-                ucrInputColName.SetName("water_balance")
+                ucrInputColName.SetName("water_balance_" & ucrReceiverData.GetVariableNames(False))
             End If
         End If
     End Sub
@@ -365,15 +365,15 @@ Public Class dlgTransformClimatic
     Private Sub MovingColNames()
         Select Case ucrInputSum.GetText
             Case "Sum"
-                ucrInputColName.SetName("moving_sum")
+                ucrInputColName.SetName("moving_sum_" & ucrReceiverData.GetVariableNames(False))
             Case "Maximum"
-                ucrInputColName.SetName("moving_max")
+                ucrInputColName.SetName("moving_max_" & ucrReceiverData.GetVariableNames(False))
             Case "Minimum"
-                ucrInputColName.SetName("moving_min")
+                ucrInputColName.SetName("moving_min_" & ucrReceiverData.GetVariableNames(False))
             Case "Mean"
-                ucrInputColName.SetName("moving_mean")
+                ucrInputColName.SetName("moving_mean_" & ucrReceiverData.GetVariableNames(False))
             Case Else
-                ucrInputColName.SetName("moving")
+                ucrInputColName.SetName("moving_" & ucrReceiverData.GetVariableNames(False))
         End Select
     End Sub
 
@@ -401,6 +401,7 @@ Public Class dlgTransformClimatic
 
     Private Sub ucrReceiverData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlValueChanged
         RainDays()
+        SetAssignName()
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
