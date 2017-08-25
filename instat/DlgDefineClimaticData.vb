@@ -78,7 +78,7 @@ Public Class DlgDefineClimaticData
         ucrReceiverSunshine.Tag = "sunshine_hours"
         ucrReceiverSunshine.strSelectorHeading = "Sunshine Variables"
         ucrReceiverWindDirection.Tag = "wind_direction"
-        ucrReceiverWindDirection.strSelectorHeading = "Wind direction Variables"
+        ucrReceiverWindDirection.strSelectorHeading = "Wind Direction Variables"
         ucrReceiverWindSpeed.Tag = "wind_speed"
         ucrReceiverWindSpeed.strSelectorHeading = "Wind Speed Variables"
         ucrReceiverYear.Tag = "year"
