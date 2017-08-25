@@ -22,7 +22,6 @@ Public Class dlgDuplicatesConstructed
     Private clsDuplicated2, clsDuplicated, clsStreakFunction As New RFunction
     Private clsIgnoreOperator As New ROperator
 
-
     Private Sub dlgDuplicatesConstructed_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -57,7 +56,7 @@ Public Class dlgDuplicatesConstructed
         ucrPnlOptions.AddToLinkedControls(ucrPnlDuplicates, {rdoSelectedVariables, rdoDataFrame}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrChkOmitValues, {rdoSuccessiveValues}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrChkTolerance, {rdoSuccessiveValues}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls(ucrNudSuccessiveValues, {rdoSuccessiveValues}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
+        ' ucrPnlOptions.AddToLinkedControls(ucrNudSuccessiveValues, {rdoSuccessiveValues}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
         ucrReceiverForDuplicates.SetLinkedDisplayControl(lblSelectedVariable)
 
         ucrChkOmitValues.AddFunctionNamesCondition(True, {frmMain.clsRLink.strInstatDataObject & "$duplicated_cases"})
@@ -75,6 +74,7 @@ Public Class dlgDuplicatesConstructed
         ucrInputTolerance.SetParameter(New RParameter("tolerance", 0))
         ucrInputTolerance.AddQuotesIfUnrecognised = False
 
+
         ucrSelectorDuplicateswithVariables.SetParameter(New RParameter("data_name", 0))
         ucrSelectorDuplicateswithVariables.SetParameterIsString()
 
@@ -89,6 +89,7 @@ Public Class dlgDuplicatesConstructed
         dctConditions.Add(">", ">")
         dctConditions.Add(">=", ">=")
         ucrInputConditions.SetItems(dctConditions)
+        ucrInputConditions.SetDropDownStyleAsNonEditable()
 
         ucrPnlDuplicates.AddFunctionNamesCondition(rdoAllDuplicateCases, "duplicated2")
         ucrPnlDuplicates.AddFunctionNamesCondition(rdoDuplicatesOnly, "duplicated")
@@ -124,11 +125,6 @@ Public Class dlgDuplicatesConstructed
         'clsDuplicated2.AddParameter("x", frmMain.clsRLink.strInstatDataObject & "$get_data_frame", iPosition:=0)
         clsStreakFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$duplicated_cases")
 
-        '   clsIgnoreOperator.SetOperation(ucrInputConditions.GetText)
-        '   clsIgnoreOperator.AddParameter("first", "", iPosition:=0)
-        '  clsIgnoreOperator.AddParameter("value", 0, iPosition:=1)
-
-        clsStreakFunction.AddParameter("ignore", clsROperatorParameter:=clsIgnoreOperator)
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnName.GetText, strTempDataframe:=ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDuplicated2)
     End Sub
@@ -144,16 +140,13 @@ Public Class dlgDuplicatesConstructed
         ucrChkOmitValues.SetRCode(clsStreakFunction, bReset)
         ucrNudOmit.SetRCode(clsStreakFunction, bReset)
 
-        ' ucrInputConditions.SetRCode(clsIgnoreOperator, bReset)
-        'ucrNudOmit.SetRCode(clsIgnoreOperator, bReset)
-
         ucrChkTolerance.SetRCode(clsStreakFunction, bReset)
         ucrInputTolerance.SetRCode(clsStreakFunction, bReset)
         ucrSelectorDuplicateswithVariables.SetRCode(clsStreakFunction, bReset)
         ucrReceiverForDuplicates.SetRCode(clsDuplicated, bReset)
         ucrNewColumnName.SetRCode(clsDuplicated, bReset)
-        ucrPnlDuplicates.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         If bReset Then
+            ucrPnlDuplicates.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
             ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         End If
     End Sub
