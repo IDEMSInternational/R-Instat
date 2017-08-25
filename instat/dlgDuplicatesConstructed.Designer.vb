@@ -30,8 +30,12 @@ Partial Class dlgDuplicatesConstructed
         Me.rdoAllDuplicateCases = New System.Windows.Forms.RadioButton()
         Me.ttDuplicates = New System.Windows.Forms.ToolTip(Me.components)
         Me.rdoSuccessiveValues = New System.Windows.Forms.RadioButton()
-        Me.lblLowerLimitofsuccessivevalues = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrInputTolerance = New instat.ucrInputTextBox()
+        Me.ucrChkTolerance = New instat.ucrCheck()
+        Me.ucrNudOmit = New instat.ucrNud()
+        Me.ucrChkOmitValues = New instat.ucrCheck()
+        Me.ucrInputConditions = New instat.ucrInputComboBox()
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
         Me.ucrReceiverForDuplicates = New instat.ucrReceiverSingle()
         Me.ucrPnlDuplicates = New instat.UcrPanel()
@@ -39,12 +43,6 @@ Partial Class dlgDuplicatesConstructed
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorDuplicateswithVariables = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrInputTolerance = New instat.ucrInputTextBox()
-        Me.ucrChkTolerance = New instat.ucrCheck()
-        Me.ucrNudOmit = New instat.ucrNud()
-        Me.ucrChkOmitValues = New instat.ucrCheck()
-        Me.ucrInputConditions = New instat.ucrInputComboBox()
-        Me.ucrNudSuccessiveValues = New instat.ucrNud()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -129,16 +127,6 @@ Partial Class dlgDuplicatesConstructed
         Me.rdoSuccessiveValues.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoSuccessiveValues.UseVisualStyleBackColor = True
         '
-        'lblLowerLimitofsuccessivevalues
-        '
-        Me.lblLowerLimitofsuccessivevalues.AutoSize = True
-        Me.lblLowerLimitofsuccessivevalues.Location = New System.Drawing.Point(3, 19)
-        Me.lblLowerLimitofsuccessivevalues.Name = "lblLowerLimitofsuccessivevalues"
-        Me.lblLowerLimitofsuccessivevalues.Size = New System.Drawing.Size(162, 13)
-        Me.lblLowerLimitofsuccessivevalues.TabIndex = 13
-        Me.lblLowerLimitofsuccessivevalues.Tag = ""
-        Me.lblLowerLimitofsuccessivevalues.Text = "Lower Limit of successive values"
-        '
         'grpOptions
         '
         Me.grpOptions.Controls.Add(Me.ucrInputTolerance)
@@ -146,14 +134,59 @@ Partial Class dlgDuplicatesConstructed
         Me.grpOptions.Controls.Add(Me.ucrNudOmit)
         Me.grpOptions.Controls.Add(Me.ucrChkOmitValues)
         Me.grpOptions.Controls.Add(Me.ucrInputConditions)
-        Me.grpOptions.Controls.Add(Me.lblLowerLimitofsuccessivevalues)
-        Me.grpOptions.Controls.Add(Me.ucrNudSuccessiveValues)
-        Me.grpOptions.Location = New System.Drawing.Point(10, 232)
+        Me.grpOptions.Location = New System.Drawing.Point(10, 240)
         Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.Size = New System.Drawing.Size(337, 143)
+        Me.grpOptions.Size = New System.Drawing.Size(337, 124)
         Me.grpOptions.TabIndex = 19
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
+        '
+        'ucrInputTolerance
+        '
+        Me.ucrInputTolerance.AddQuotesIfUnrecognised = True
+        Me.ucrInputTolerance.IsMultiline = False
+        Me.ucrInputTolerance.IsReadOnly = False
+        Me.ucrInputTolerance.Location = New System.Drawing.Point(6, 86)
+        Me.ucrInputTolerance.Name = "ucrInputTolerance"
+        Me.ucrInputTolerance.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputTolerance.TabIndex = 20
+        '
+        'ucrChkTolerance
+        '
+        Me.ucrChkTolerance.Checked = False
+        Me.ucrChkTolerance.Location = New System.Drawing.Point(6, 62)
+        Me.ucrChkTolerance.Name = "ucrChkTolerance"
+        Me.ucrChkTolerance.Size = New System.Drawing.Size(135, 20)
+        Me.ucrChkTolerance.TabIndex = 19
+        '
+        'ucrNudOmit
+        '
+        Me.ucrNudOmit.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudOmit.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudOmit.Location = New System.Drawing.Point(148, 38)
+        Me.ucrNudOmit.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudOmit.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudOmit.Name = "ucrNudOmit"
+        Me.ucrNudOmit.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudOmit.TabIndex = 18
+        Me.ucrNudOmit.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkOmitValues
+        '
+        Me.ucrChkOmitValues.Checked = False
+        Me.ucrChkOmitValues.Location = New System.Drawing.Point(6, 12)
+        Me.ucrChkOmitValues.Name = "ucrChkOmitValues"
+        Me.ucrChkOmitValues.Size = New System.Drawing.Size(135, 20)
+        Me.ucrChkOmitValues.TabIndex = 16
+        '
+        'ucrInputConditions
+        '
+        Me.ucrInputConditions.AddQuotesIfUnrecognised = True
+        Me.ucrInputConditions.IsReadOnly = False
+        Me.ucrInputConditions.Location = New System.Drawing.Point(6, 38)
+        Me.ucrInputConditions.Name = "ucrInputConditions"
+        Me.ucrInputConditions.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputConditions.TabIndex = 17
         '
         'lblSelectedVariable
         '
@@ -215,65 +248,6 @@ Partial Class dlgDuplicatesConstructed
         Me.ucrSelectorDuplicateswithVariables.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorDuplicateswithVariables.TabIndex = 3
         '
-        'ucrInputTolerance
-        '
-        Me.ucrInputTolerance.AddQuotesIfUnrecognised = True
-        Me.ucrInputTolerance.IsMultiline = False
-        Me.ucrInputTolerance.IsReadOnly = False
-        Me.ucrInputTolerance.Location = New System.Drawing.Point(6, 113)
-        Me.ucrInputTolerance.Name = "ucrInputTolerance"
-        Me.ucrInputTolerance.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputTolerance.TabIndex = 20
-        '
-        'ucrChkTolerance
-        '
-        Me.ucrChkTolerance.Checked = False
-        Me.ucrChkTolerance.Location = New System.Drawing.Point(6, 89)
-        Me.ucrChkTolerance.Name = "ucrChkTolerance"
-        Me.ucrChkTolerance.Size = New System.Drawing.Size(135, 20)
-        Me.ucrChkTolerance.TabIndex = 19
-        '
-        'ucrNudOmit
-        '
-        Me.ucrNudOmit.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudOmit.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudOmit.Location = New System.Drawing.Point(148, 65)
-        Me.ucrNudOmit.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudOmit.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudOmit.Name = "ucrNudOmit"
-        Me.ucrNudOmit.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudOmit.TabIndex = 18
-        Me.ucrNudOmit.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkOmitValues
-        '
-        Me.ucrChkOmitValues.Checked = False
-        Me.ucrChkOmitValues.Location = New System.Drawing.Point(6, 39)
-        Me.ucrChkOmitValues.Name = "ucrChkOmitValues"
-        Me.ucrChkOmitValues.Size = New System.Drawing.Size(135, 20)
-        Me.ucrChkOmitValues.TabIndex = 16
-        '
-        'ucrInputConditions
-        '
-        Me.ucrInputConditions.AddQuotesIfUnrecognised = True
-        Me.ucrInputConditions.IsReadOnly = False
-        Me.ucrInputConditions.Location = New System.Drawing.Point(6, 65)
-        Me.ucrInputConditions.Name = "ucrInputConditions"
-        Me.ucrInputConditions.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputConditions.TabIndex = 17
-        '
-        'ucrNudSuccessiveValues
-        '
-        Me.ucrNudSuccessiveValues.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSuccessiveValues.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSuccessiveValues.Location = New System.Drawing.Point(171, 19)
-        Me.ucrNudSuccessiveValues.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudSuccessiveValues.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSuccessiveValues.Name = "ucrNudSuccessiveValues"
-        Me.ucrNudSuccessiveValues.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudSuccessiveValues.TabIndex = 14
-        Me.ucrNudSuccessiveValues.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'dlgDuplicatesConstructed
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -300,7 +274,6 @@ Partial Class dlgDuplicatesConstructed
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Duplicates"
         Me.grpOptions.ResumeLayout(False)
-        Me.grpOptions.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -319,8 +292,6 @@ Partial Class dlgDuplicatesConstructed
     Friend WithEvents ttDuplicates As ToolTip
     Friend WithEvents ucrReceiverForDuplicates As ucrReceiverSingle
     Friend WithEvents rdoSuccessiveValues As RadioButton
-    Friend WithEvents lblLowerLimitofsuccessivevalues As Label
-    Friend WithEvents ucrNudSuccessiveValues As ucrNud
     Friend WithEvents ucrChkOmitValues As ucrCheck
     Friend WithEvents ucrNudOmit As ucrNud
     Friend WithEvents ucrInputConditions As ucrInputComboBox
