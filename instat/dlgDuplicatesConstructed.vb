@@ -14,11 +14,14 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports RDotNet
 Imports instat.Translations
 Public Class dlgDuplicatesConstructed
     Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
     Private clsDuplicated2, clsDuplicated, clsStreakFunction As New RFunction
+    Private clsIgnoreOperator As New ROperator
+
 
     Private Sub dlgDuplicatesConstructed_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -63,9 +66,6 @@ Public Class dlgDuplicatesConstructed
         ucrChkOmitValues.AddToLinkedControls(ucrNudOmit, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrChkOmitValues.AddToLinkedControls(ucrInputConditions, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="==")
         ucrChkOmitValues.SetLinkedDisplayControl(grpOptions)
-
-        ucrNudOmit.SetParameter(New RParameter("ignore", 3))
-
         ucrChkTolerance.AddFunctionNamesCondition(True, {frmMain.clsRLink.strInstatDataObject & "$duplicated_cases"})
         ucrChkTolerance.AddFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$duplicated_cases"}, False)
         ucrChkTolerance.SetText("Tolerance")
@@ -124,6 +124,11 @@ Public Class dlgDuplicatesConstructed
         'clsDuplicated2.AddParameter("x", frmMain.clsRLink.strInstatDataObject & "$get_data_frame", iPosition:=0)
         clsStreakFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$duplicated_cases")
 
+        '   clsIgnoreOperator.SetOperation(ucrInputConditions.GetText)
+        '   clsIgnoreOperator.AddParameter("first", "", iPosition:=0)
+        '  clsIgnoreOperator.AddParameter("value", 0, iPosition:=1)
+
+        clsStreakFunction.AddParameter("ignore", clsROperatorParameter:=clsIgnoreOperator)
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnName.GetText, strTempDataframe:=ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDuplicated2)
     End Sub
@@ -138,6 +143,10 @@ Public Class dlgDuplicatesConstructed
 
         ucrChkOmitValues.SetRCode(clsStreakFunction, bReset)
         ucrNudOmit.SetRCode(clsStreakFunction, bReset)
+
+        ' ucrInputConditions.SetRCode(clsIgnoreOperator, bReset)
+        'ucrNudOmit.SetRCode(clsIgnoreOperator, bReset)
+
         ucrChkTolerance.SetRCode(clsStreakFunction, bReset)
         ucrInputTolerance.SetRCode(clsStreakFunction, bReset)
         ucrSelectorDuplicateswithVariables.SetRCode(clsStreakFunction, bReset)
@@ -158,6 +167,25 @@ Public Class dlgDuplicatesConstructed
             End If
         Else
             ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
+    Private Sub SetIgnoreVals()
+        If ucrChkOmitValues.Checked Then
+
+            If Not ucrReceiverForDuplicates.IsEmpty Then
+                Dim strVarToEvaluate As String
+                If Not ucrInputConditions.IsEmpty AndAlso ucrNudOmit.GetText <> "" Then
+                    strVarToEvaluate = ucrReceiverForDuplicates.GetVariableNames
+                    clsStreakFunction.AddParameter("ignore", strVarToEvaluate & "[" & strVarToEvaluate & ucrInputConditions.GetText & ucrNudOmit.GetText & "]")
+                Else
+                    clsStreakFunction.RemoveParameterByName("ignore")
+                End If
+            Else
+                clsStreakFunction.RemoveParameterByName("ignore")
+            End If
+        Else
+            clsStreakFunction.AddParameter("ignore", "NULL")
         End If
     End Sub
 
@@ -211,5 +239,9 @@ Public Class dlgDuplicatesConstructed
 
     Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlContentsChanged, ucrSelectorDuplicateswithVariables.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrReceiverForDuplicates.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrChkOmitValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOmitValues.ControlValueChanged, ucrReceiverForDuplicates.ControlValueChanged, ucrNudOmit.ControlValueChanged, ucrInputConditions.ControlValueChanged
+        SetIgnoreVals()
     End Sub
 End Class
