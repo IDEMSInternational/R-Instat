@@ -38,7 +38,6 @@ Public Class dlgDuplicatesConstructed
     Private Sub InitialiseDialog()
         Dim dctConditions As New Dictionary(Of String, String)
 
-
         ucrPnlOptions.AddRadioButton(rdoDataFrame)
         ucrPnlOptions.AddRadioButton(rdoSelectedVariables)
         ucrPnlOptions.AddRadioButton(rdoSuccessiveValues)
@@ -47,9 +46,9 @@ Public Class dlgDuplicatesConstructed
         ucrPnlDuplicates.AddRadioButton(rdoDuplicatesOnly)
         ucrPnlDuplicates.AddRadioButton(rdoIndexNumberOfDuplicates)
 
-        ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoDataFrame, "x", frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+        ucrPnlOptions.AddFunctionNamesCondition(rdoDataFrame, "duplicated2")
         ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoSelectedVariables, "x", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
-        ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoSuccessiveValues, "col_name", frmMain.clsRLink.strInstatDataObject & "$duplicated_cases")
+        ucrPnlOptions.AddFunctionNamesCondition(rdoSuccessiveValues, frmMain.clsRLink.strInstatDataObject & "$duplicated_cases")
 
         ucrPnlOptions.AddToLinkedControls(ucrReceiverForDuplicates, {rdoSelectedVariables, rdoSuccessiveValues}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrPnlDuplicates, {rdoSelectedVariables, rdoDataFrame}, bNewLinkedHideIfParameterMissing:=True)
@@ -64,15 +63,16 @@ Public Class dlgDuplicatesConstructed
         ucrChkOmitValues.AddToLinkedControls(ucrNudOmit, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrChkOmitValues.AddToLinkedControls(ucrInputConditions, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="==")
         ucrChkOmitValues.SetLinkedDisplayControl(grpOptions)
-        ucrChkTolerance.AddFunctionNamesCondition(True, {frmMain.clsRLink.strInstatDataObject & "$duplicated_cases"})
-        ucrChkTolerance.AddFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$duplicated_cases"}, False)
-        ucrChkTolerance.SetText("Tolerance")
-        ucrChkTolerance.AddToLinkedControls(ucrInputTolerance, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.01)
-        ucrInputTolerance.SetValidationTypeAsNumeric()
-
         ucrInputTolerance.SetParameter(New RParameter("tolerance", 0))
         ucrInputTolerance.AddQuotesIfUnrecognised = False
 
+        ucrChkTolerance.SetParameter(ucrInputTolerance.GetParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkTolerance.SetText("Tolerance")
+        ucrChkTolerance.AddParameterPresentCondition(True, "tolerance")
+        ucrChkTolerance.AddParameterPresentCondition(False, "tolerance", False)
+
+        ucrChkTolerance.AddToLinkedControls(ucrInputTolerance, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.01)
+        ucrInputTolerance.SetValidationTypeAsNumeric()
 
         ucrSelectorDuplicateswithVariables.SetParameter(New RParameter("data_name", 0))
         ucrSelectorDuplicateswithVariables.SetParameterIsString()
@@ -144,8 +144,8 @@ Public Class dlgDuplicatesConstructed
         ucrSelectorDuplicateswithVariables.SetRCode(clsStreakFunction, bReset)
         ucrReceiverForDuplicates.SetRCode(clsDuplicated, bReset)
         ucrNewColumnName.SetRCode(clsDuplicated, bReset)
+        ucrPnlDuplicates.SetRCode(clsDuplicated2, bReset)
         If bReset Then
-            ucrPnlDuplicates.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
             ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         End If
     End Sub
