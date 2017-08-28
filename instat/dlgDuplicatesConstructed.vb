@@ -20,7 +20,6 @@ Public Class dlgDuplicatesConstructed
     Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
     Private clsDuplicated2, clsDuplicated, clsStreakFunction As New RFunction
-    Private clsIgnoreOperator As New ROperator
 
     Private Sub dlgDuplicatesConstructed_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -165,12 +164,9 @@ Public Class dlgDuplicatesConstructed
 
     Private Sub SetIgnoreVals()
         If ucrChkOmitValues.Checked Then
-
             If Not ucrReceiverForDuplicates.IsEmpty Then
-                Dim strVarToEvaluate As String
                 If Not ucrInputConditions.IsEmpty AndAlso ucrNudOmit.GetText <> "" Then
-                    strVarToEvaluate = ucrReceiverForDuplicates.GetVariableNames
-                    clsStreakFunction.AddParameter("ignore", strVarToEvaluate & "[" & strVarToEvaluate & ucrInputConditions.GetText & ucrNudOmit.GetText & "]")
+                    clsStreakFunction.AddParameter("ignore", ucrReceiverForDuplicates.GetVariableNames & "[" & ucrReceiverForDuplicates.GetVariableNames & ucrInputConditions.GetText & ucrNudOmit.GetText & "]")
                 Else
                     clsStreakFunction.RemoveParameterByName("ignore")
                 End If
