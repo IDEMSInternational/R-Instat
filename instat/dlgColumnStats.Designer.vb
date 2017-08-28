@@ -41,11 +41,11 @@ Partial Class dlgColumnStats
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
         Me.lblByFactors = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
-        Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.ucrChkStoreResults = New instat.ucrCheck()
         Me.ucrChkOmitMissing = New instat.ucrCheck()
         Me.ucrChkPrintOutput = New instat.ucrCheck()
         Me.ucrChkDropUnusedLevels = New instat.ucrCheck()
+        Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.ucrReceiverByFactor = New instat.ucrReceiverMultiple()
         Me.ucrReceiverSelectedVariables = New instat.ucrReceiverMultiple()
         Me.ucrSelectorForColumnStatistics = New instat.ucrSelectorByDataFrameAddRemove()
@@ -84,16 +84,6 @@ Partial Class dlgColumnStats
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
         '
-        'cmdSummaries
-        '
-        Me.cmdSummaries.Location = New System.Drawing.Point(265, 292)
-        Me.cmdSummaries.Name = "cmdSummaries"
-        Me.cmdSummaries.Size = New System.Drawing.Size(77, 23)
-        Me.cmdSummaries.TabIndex = 6
-        Me.cmdSummaries.Tag = "Summaries"
-        Me.cmdSummaries.Text = "Summaries..."
-        Me.cmdSummaries.UseVisualStyleBackColor = True
-        '
         'ucrChkStoreResults
         '
         Me.ucrChkStoreResults.Checked = False
@@ -125,6 +115,16 @@ Partial Class dlgColumnStats
         Me.ucrChkDropUnusedLevels.Name = "ucrChkDropUnusedLevels"
         Me.ucrChkDropUnusedLevels.Size = New System.Drawing.Size(148, 20)
         Me.ucrChkDropUnusedLevels.TabIndex = 2
+        '
+        'cmdSummaries
+        '
+        Me.cmdSummaries.Location = New System.Drawing.Point(265, 292)
+        Me.cmdSummaries.Name = "cmdSummaries"
+        Me.cmdSummaries.Size = New System.Drawing.Size(120, 23)
+        Me.cmdSummaries.TabIndex = 6
+        Me.cmdSummaries.Tag = "Summaries"
+        Me.cmdSummaries.Text = "Summaries..."
+        Me.cmdSummaries.UseVisualStyleBackColor = True
         '
         'ucrReceiverByFactor
         '
