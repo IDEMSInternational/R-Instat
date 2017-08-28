@@ -24,25 +24,19 @@ Public Class dlgName
     Private clsDefaultRFunction As New RFunction
 
     Private Sub dlgName_Load(sender As Object, e As EventArgs) Handles Me.Load
+        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
         If bReset Then
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        autoTranslate(Me)
         If bUseSelectedColumn Then
             SetDefaultColumn()
         End If
-    End Sub
-
-    Private Sub ReopenDialog()
-        ucrSelectVariables.Reset()
     End Sub
 
     Private Sub InitialiseDialog()
