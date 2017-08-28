@@ -112,7 +112,7 @@ Partial Class sdgSummaries
         Me.grpQuartiles.Location = New System.Drawing.Point(13, 306)
         Me.grpQuartiles.Name = "grpQuartiles"
         Me.grpQuartiles.Size = New System.Drawing.Size(305, 63)
-        Me.grpQuartiles.TabIndex = 4
+        Me.grpQuartiles.TabIndex = 3
         Me.grpQuartiles.TabStop = False
         Me.grpQuartiles.Tag = "Quartiles"
         Me.grpQuartiles.Text = "Quartiles"
@@ -123,7 +123,7 @@ Partial Class sdgSummaries
         Me.ucrChkLowerQuartile.Location = New System.Drawing.Point(175, 20)
         Me.ucrChkLowerQuartile.Name = "ucrChkLowerQuartile"
         Me.ucrChkLowerQuartile.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkLowerQuartile.TabIndex = 2
+        Me.ucrChkLowerQuartile.TabIndex = 1
         '
         'ucrChkUpperQuartile
         '
@@ -139,7 +139,7 @@ Partial Class sdgSummaries
         Me.ucrChkVariance.Location = New System.Drawing.Point(8, 82)
         Me.ucrChkVariance.Name = "ucrChkVariance"
         Me.ucrChkVariance.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkVariance.TabIndex = 5
+        Me.ucrChkVariance.TabIndex = 4
         '
         'ucrChkMedian
         '
@@ -155,7 +155,7 @@ Partial Class sdgSummaries
         Me.ucrChkStdDev.Location = New System.Drawing.Point(175, 52)
         Me.ucrChkStdDev.Name = "ucrChkStdDev"
         Me.ucrChkStdDev.Size = New System.Drawing.Size(122, 20)
-        Me.ucrChkStdDev.TabIndex = 6
+        Me.ucrChkStdDev.TabIndex = 3
         '
         'ucrChkSum
         '
@@ -211,7 +211,7 @@ Partial Class sdgSummaries
         Me.ucrChkRange.Location = New System.Drawing.Point(8, 49)
         Me.ucrChkRange.Name = "ucrChkRange"
         Me.ucrChkRange.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkRange.TabIndex = 5
+        Me.ucrChkRange.TabIndex = 2
         '
         'ucrChkMaximum
         '
