@@ -44,7 +44,6 @@ Partial Class sdgSummaries
         Me.grpQuartiles = New System.Windows.Forms.GroupBox()
         Me.ucrChkLowerQuartile = New instat.ucrCheck()
         Me.ucrChkUpperQuartile = New instat.ucrCheck()
-        Me.ucrChkQuartiles = New instat.ucrCheck()
         Me.ucrChkVariance = New instat.ucrCheck()
         Me.ucrChkMedian = New instat.ucrCheck()
         Me.ucrChkStdDev = New instat.ucrCheck()
@@ -93,7 +92,6 @@ Partial Class sdgSummaries
         '
         'grpNumeric
         '
-        Me.grpNumeric.Controls.Add(Me.ucrChkQuartiles)
         Me.grpNumeric.Controls.Add(Me.ucrChkVariance)
         Me.grpNumeric.Controls.Add(Me.ucrChkMedian)
         Me.grpNumeric.Controls.Add(Me.ucrChkStdDev)
@@ -111,9 +109,9 @@ Partial Class sdgSummaries
         '
         Me.grpQuartiles.Controls.Add(Me.ucrChkLowerQuartile)
         Me.grpQuartiles.Controls.Add(Me.ucrChkUpperQuartile)
-        Me.grpQuartiles.Location = New System.Drawing.Point(13, 309)
+        Me.grpQuartiles.Location = New System.Drawing.Point(13, 306)
         Me.grpQuartiles.Name = "grpQuartiles"
-        Me.grpQuartiles.Size = New System.Drawing.Size(305, 71)
+        Me.grpQuartiles.Size = New System.Drawing.Size(305, 63)
         Me.grpQuartiles.TabIndex = 4
         Me.grpQuartiles.TabStop = False
         Me.grpQuartiles.Tag = "Quartiles"
@@ -135,14 +133,6 @@ Partial Class sdgSummaries
         Me.ucrChkUpperQuartile.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkUpperQuartile.TabIndex = 0
         '
-        'ucrChkQuartiles
-        '
-        Me.ucrChkQuartiles.Checked = False
-        Me.ucrChkQuartiles.Location = New System.Drawing.Point(175, 49)
-        Me.ucrChkQuartiles.Name = "ucrChkQuartiles"
-        Me.ucrChkQuartiles.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkQuartiles.TabIndex = 3
-        '
         'ucrChkVariance
         '
         Me.ucrChkVariance.Checked = False
@@ -162,7 +152,7 @@ Partial Class sdgSummaries
         'ucrChkStdDev
         '
         Me.ucrChkStdDev.Checked = False
-        Me.ucrChkStdDev.Location = New System.Drawing.Point(175, 82)
+        Me.ucrChkStdDev.Location = New System.Drawing.Point(175, 52)
         Me.ucrChkStdDev.Name = "ucrChkStdDev"
         Me.ucrChkStdDev.Size = New System.Drawing.Size(122, 20)
         Me.ucrChkStdDev.TabIndex = 6
@@ -290,5 +280,4 @@ Partial Class sdgSummaries
     Friend WithEvents grpQuartiles As GroupBox
     Friend WithEvents ucrChkLowerQuartile As ucrCheck
     Friend WithEvents ucrChkUpperQuartile As ucrCheck
-    Friend WithEvents ucrChkQuartiles As ucrCheck
 End Class
