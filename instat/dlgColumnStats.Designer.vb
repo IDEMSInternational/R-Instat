@@ -118,9 +118,9 @@ Partial Class dlgColumnStats
         '
         'cmdSummaries
         '
-        Me.cmdSummaries.Location = New System.Drawing.Point(265, 292)
+        Me.cmdSummaries.Location = New System.Drawing.Point(308, 294)
         Me.cmdSummaries.Name = "cmdSummaries"
-        Me.cmdSummaries.Size = New System.Drawing.Size(120, 23)
+        Me.cmdSummaries.Size = New System.Drawing.Size(100, 23)
         Me.cmdSummaries.TabIndex = 6
         Me.cmdSummaries.Tag = "Summaries"
         Me.cmdSummaries.Text = "Summaries..."
