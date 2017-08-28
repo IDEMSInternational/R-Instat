@@ -277,8 +277,8 @@ instat_object$set("public", "summary", function(data_name, columns_to_summarise,
     else {
       calc_columns <- NULL
     }
-  }
-  return(calc_columns)
+	}
+       return(calc_columns)
 }
 )
 
@@ -377,12 +377,12 @@ range_label = "summary_range"
 min_label="summary_min"
 max_label="summary_max"
 mean_label="summary_mean"
+quartile_label="summary_quartile"
 lower_quart_label="lower_quartile"
 upper_quart_label="upper_quartile"
-#quartiles need to be added as a summary
 
 # list of all summary function names
-all_summaries=c(sum_label, mode_label, count_label, count_missing_label, count_non_missing_label, sd_label, var_label, median_label, range_label, min_label, max_label, mean_label, upper_quart_label,lower_quart_label)
+all_summaries=c(sum_label, mode_label, count_label, count_missing_label, count_non_missing_label, sd_label, var_label, median_label, range_label, min_label, max_label, mean_label,quartile_label, lower_quart_label, upper_quart_label )
 summary_mode <- function(x,...) {
   ux <- unique(x)
   out <- ux[which.max(tabulate(match(x, ux)))]
@@ -442,14 +442,19 @@ summary_median <- function(x, na.rm = FALSE,...) {
   return(median(x, na.rm = na.rm))
 }
 
-# upper quartile function
-upper_quartile<-function(x,na.rm=TRUE, probs=0.75,...){
-  return(quantile(x,na.rm = na.rm, probs = probs ))
+#quantile function
+summary_quantile <- function(x, na.rm = FALSE, probs,...) {
+  return(quantile(x, na.rm = na.rm, probs = probs))
 }
 
 # lower quartile function
-lower_quartile<-function(x,na.rm=TRUE, probs=0.25,...){
-  return(quantile(x,na.rm = na.rm, probs = probs ))
+lower_quartile <- function(x, na.rm = FALSE, ...) {
+  return(quantile(x, na.rm = na.rm, probs = 0.25 ))
+}
+
+# upper quartile function
+upper_quartile <- function(x, na.rm = FALSE, ...) {
+  return(quantile(x, na.rm = na.rm, probs = 0.75 ))
 }
 
 instat_object$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), n_column_factors = 1, store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = TRUE, treat_columns_as_factor = FALSE, page_by = "default", as_html = TRUE, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, margin_name = "(All)", additional_filter, ...) {
