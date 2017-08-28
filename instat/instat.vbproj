@@ -722,12 +722,6 @@
     <Compile Include="sdgOneVarGraph.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sdgOneVarUseModBootstrap.Designer.vb">
-      <DependentUpon>sdgOneVarUseModBootstrap.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgOneVarUseModBootstrap.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="sdgOneVarUseModFit.Designer.vb">
       <DependentUpon>sdgOneVarUseModFit.vb</DependentUpon>
     </Compile>
@@ -3227,9 +3221,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgOneVarGraph.resx">
       <DependentUpon>sdgOneVarGraph.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgOneVarUseModBootstrap.resx">
-      <DependentUpon>sdgOneVarUseModBootstrap.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgOneVarUseModFit.resx">
       <DependentUpon>sdgOneVarUseModFit.vb</DependentUpon>
