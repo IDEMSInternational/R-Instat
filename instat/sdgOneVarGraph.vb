@@ -73,5 +73,8 @@ Public Class sdgOneVarGraph
         End If
         clsGraphOneVariable = clsNewRFunction
         SetRCode(Me, clsGraphOneVariable, bReset)
+        If bReset Then
+            tbcOneVarGraph.SelectedIndex = 0
+        End If
     End Sub
 End Class
