@@ -39,7 +39,7 @@ Public Class clsInstatOptionsDefaults
     Public Shared ReadOnly DEFAULTiDigits As Integer = 4
     Public Shared ReadOnly DEFAULTbShowSignifStars As Boolean = False
     Public Shared ReadOnly DEFAULTbAutoSaveData As Boolean = True
-    Public Shared ReadOnly DEFAULTiAutoSaveDataMinutes As Integer = 5
+    Public Shared ReadOnly DEFAULTiAutoSaveDataMinutes As Integer = 10
     Public Shared ReadOnly DEFAULTbShowWaitDialog As Boolean = True
     Public Shared ReadOnly DEFAULTiWaitTimeDelaySeconds As Integer = 2
 End Class
