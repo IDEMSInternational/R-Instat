@@ -46,8 +46,8 @@ Partial Class dlgBarAndPieChart
         Me.rdoBarChart = New System.Windows.Forms.RadioButton()
         Me.ucrSaveBar = New instat.ucrSave()
         Me.ucrChkFlipCoordinates = New instat.ucrCheck()
-        Me.ucrSecondReceiver = New instat.ucrReceiverSingle()
-        Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
+        Me.ucrReceiverSecond = New instat.ucrReceiverSingle()
+        Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
         Me.ucrBarChartSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
@@ -134,7 +134,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.ucrSaveBar.Location = New System.Drawing.Point(10, 319)
         Me.ucrSaveBar.Name = "ucrSaveBar"
-        Me.ucrSaveBar.Size = New System.Drawing.Size(313, 24)
+        Me.ucrSaveBar.Size = New System.Drawing.Size(255, 24)
         Me.ucrSaveBar.TabIndex = 12
         '
         'ucrChkFlipCoordinates
@@ -145,29 +145,29 @@ Partial Class dlgBarAndPieChart
         Me.ucrChkFlipCoordinates.Size = New System.Drawing.Size(166, 20)
         Me.ucrChkFlipCoordinates.TabIndex = 11
         '
-        'ucrSecondReceiver
+        'ucrReceiverSecond
         '
-        Me.ucrSecondReceiver.frmParent = Me
-        Me.ucrSecondReceiver.Location = New System.Drawing.Point(255, 141)
-        Me.ucrSecondReceiver.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSecondReceiver.Name = "ucrSecondReceiver"
-        Me.ucrSecondReceiver.Selector = Nothing
-        Me.ucrSecondReceiver.Size = New System.Drawing.Size(120, 20)
-        Me.ucrSecondReceiver.strNcFilePath = ""
-        Me.ucrSecondReceiver.TabIndex = 7
-        Me.ucrSecondReceiver.ucrSelector = Nothing
+        Me.ucrReceiverSecond.frmParent = Me
+        Me.ucrReceiverSecond.Location = New System.Drawing.Point(255, 141)
+        Me.ucrReceiverSecond.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSecond.Name = "ucrReceiverSecond"
+        Me.ucrReceiverSecond.Selector = Nothing
+        Me.ucrReceiverSecond.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverSecond.strNcFilePath = ""
+        Me.ucrReceiverSecond.TabIndex = 7
+        Me.ucrReceiverSecond.ucrSelector = Nothing
         '
-        'ucrFactorReceiver
+        'ucrReceiverFactor
         '
-        Me.ucrFactorReceiver.frmParent = Me
-        Me.ucrFactorReceiver.Location = New System.Drawing.Point(255, 91)
-        Me.ucrFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
-        Me.ucrFactorReceiver.Selector = Nothing
-        Me.ucrFactorReceiver.Size = New System.Drawing.Size(120, 20)
-        Me.ucrFactorReceiver.strNcFilePath = ""
-        Me.ucrFactorReceiver.TabIndex = 5
-        Me.ucrFactorReceiver.ucrSelector = Nothing
+        Me.ucrReceiverFactor.frmParent = Me
+        Me.ucrReceiverFactor.Location = New System.Drawing.Point(255, 91)
+        Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
+        Me.ucrReceiverFactor.Selector = Nothing
+        Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverFactor.strNcFilePath = ""
+        Me.ucrReceiverFactor.TabIndex = 5
+        Me.ucrReceiverFactor.ucrSelector = Nothing
         '
         'ucrBarChartSelector
         '
@@ -207,7 +207,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(417, 404)
+        Me.ClientSize = New System.Drawing.Size(415, 400)
         Me.Controls.Add(Me.ucrSaveBar)
         Me.Controls.Add(Me.ucrChkFlipCoordinates)
         Me.Controls.Add(Me.rdoBarChart)
@@ -215,8 +215,8 @@ Partial Class dlgBarAndPieChart
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.lblSecondFactor)
         Me.Controls.Add(Me.lblFactor)
-        Me.Controls.Add(Me.ucrSecondReceiver)
-        Me.Controls.Add(Me.ucrFactorReceiver)
+        Me.Controls.Add(Me.ucrReceiverSecond)
+        Me.Controls.Add(Me.ucrReceiverFactor)
         Me.Controls.Add(Me.ucrBarChartSelector)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.cmdBarChartOptions)
@@ -227,7 +227,7 @@ Partial Class dlgBarAndPieChart
         Me.MinimizeBox = False
         Me.Name = "dlgBarAndPieChart"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Bar_And_Pie_Chart"
+        Me.Tag = "Bar_and_Pie_Chart"
         Me.Text = "Bar and Pie Chart"
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -236,8 +236,8 @@ Partial Class dlgBarAndPieChart
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrBarChartSelector As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrFactorReceiver As ucrReceiverSingle
-    Friend WithEvents ucrSecondReceiver As ucrReceiverSingle
+    Friend WithEvents ucrReceiverFactor As ucrReceiverSingle
+    Friend WithEvents ucrReceiverSecond As ucrReceiverSingle
     Friend WithEvents lblFactor As Label
     Friend WithEvents lblSecondFactor As Label
     Friend WithEvents cmdOptions As Button
