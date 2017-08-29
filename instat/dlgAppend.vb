@@ -37,12 +37,12 @@ Public Class dlgAppend
         ucrBase.iHelpTopicID = 465
 
         ' ucrReceiver
-        ucrReceiverAppendDataframe.Selector = ucrSelectorDataframes
-        ucrReceiverAppendDataframe.SetMeAsReceiver()
         ucrReceiverAppendDataframe.SetParameter(New RParameter("x", 0))
         ucrReceiverAppendDataframe.SetParameterIsRFunction()
         ucrReceiverAppendDataframe.GetParameter().bIncludeArgumentName = False
-        ucrSelectorDataframes.SetItemType("dataframe")
+        ucrReceiverAppendDataframe.Selector = ucrSelectorDataframes
+        ucrReceiverAppendDataframe.SetMeAsReceiver()
+        ucrReceiverAppendDataframe.SetItemType("dataframe")
         ucrReceiverAppendDataframe.strSelectorHeading = "Data Frames"
 
         'chkID
@@ -90,13 +90,16 @@ Public Class dlgAppend
         End If
     End Sub
 
+    Private Sub ReopenDialog()
+    End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrReceiverAppendDataframe_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveGraph.ControlContentsChanged, ucrChkIncludeIDColumn.ControlContentsChanged, ucrInputIDColName.ControlContentsChanged, ucrReceiverAppendDataframe.ControlContentsChanged
+    Private Sub ucrReceiverAppendDataframe_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverAppendDataframe.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrChkIncludeIDColumn.ControlContentsChanged, ucrInputIDColName.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
