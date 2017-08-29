@@ -18,8 +18,8 @@ Imports instat.Translations
 Public Class dlgDisplayDailyData
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsSummaryTable As RFunction
-    Private clsDailyClimaticData As RFunction
+    Private clsSummaryTable, clsDisplayDailyGraph As RFunction
+
     Private Sub dlgDisplayDailyData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -36,27 +36,27 @@ Public Class dlgDisplayDailyData
 
     Private Sub InitialiseDialog()
 
-        ucrSelectorDisplayDailyClimaticData.SetParameter(New RParameter("data_names"))
+        ucrSelectorDisplayDailyClimaticData.SetParameter(New RParameter("data_name"))
         ucrSelectorDisplayDailyClimaticData.SetParameterIsrfunction()
 
         ucrReceiverStations.Selector = ucrSelectorDisplayDailyClimaticData
-        ucrReceiverStations.SetClimaticType("station")
+        ucrReceiverStations.SetClimaticType("station_col")
         ucrReceiverStations.bAutoFill = True
         ucrReceiverStations.SetMeAsReceiver()
 
-        ucrReceiverStations.SetParameter(New RParameter("station"))
+        ucrReceiverStations.SetParameter(New RParameter("station_col"))
         ucrReceiverStations.SetParameterIsString()
         ucrReceiverStations.bWithQuotes = False
 
-        ucrReceiverYear.SetParameter(New RParameter("year"))
+        ucrReceiverYear.SetParameter(New RParameter("year_col"))
         ucrReceiverYear.SetParameterIsString()
         ucrReceiverYear.bWithQuotes = False
 
-        ucrReceiverDate.SetParameter(New RParameter("rain"))
+        ucrReceiverDate.SetParameter(New RParameter("climatic_element"))
         ucrReceiverDate.SetParameterIsString()
         ucrReceiverDate.bWithQuotes = False
 
-        ucrReceiverStations.SetParameter(New RParameter("doy"))
+        ucrReceiverStations.SetParameter(New RParameter("doy_col"))
         ucrReceiverStations.SetParameterIsString()
         ucrReceiverStations.bWithQuotes = False
 
@@ -99,17 +99,21 @@ Public Class dlgDisplayDailyData
 
     Private Sub SetDefaults()
         clsSummaryTable = New RFunction
-        clsDailyClimaticData = New RFunction
+        clsDisplayDailyGraph = New RFunction
         ucrSelectorDisplayDailyClimaticData.Reset()
 
         clsSummaryTable.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
-        clsDailyClimaticData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$daily_climatic_data")
+        clsDisplayDailyGraph.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$display_daily_graph")
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDailyClimaticData)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDisplayDailyGraph)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Object)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrReceiverDate.SetRCode(clsDisplayDailyGraph, bReset)
+        ucrReceiverStations.SetRCode(clsDisplayDailyGraph, bReset)
+        ucrReceiverYear.SetRCode(clsDisplayDailyGraph, bReset)
+        ucrSelectorDisplayDailyClimaticData.SetRCode(clsDisplayDailyGraph, bReset)
+
     End Sub
 
     Private Sub TestOkEnabled()

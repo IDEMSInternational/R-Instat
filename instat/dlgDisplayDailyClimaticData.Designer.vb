@@ -66,6 +66,7 @@ Partial Class dlgDisplayDailyData
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(10, 375)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(428, 52)
         Me.ucrBase.TabIndex = 16
@@ -117,6 +118,7 @@ Partial Class dlgDisplayDailyData
         'ucrPnlFrequencyDisplay
         '
         Me.ucrPnlFrequencyDisplay.Location = New System.Drawing.Point(122, 12)
+        Me.ucrPnlFrequencyDisplay.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ucrPnlFrequencyDisplay.Name = "ucrPnlFrequencyDisplay"
         Me.ucrPnlFrequencyDisplay.Size = New System.Drawing.Size(214, 29)
         Me.ucrPnlFrequencyDisplay.TabIndex = 0
@@ -179,7 +181,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverYear.Name = "ucrReceiverYear"
         Me.ucrReceiverYear.Selector = Nothing
-        Me.ucrReceiverYear.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverYear.Size = New System.Drawing.Size(145, 20)
         Me.ucrReceiverYear.strNcFilePath = ""
         Me.ucrReceiverYear.TabIndex = 10
         Me.ucrReceiverYear.ucrSelector = Nothing
@@ -200,7 +202,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverXaxis.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverXaxis.Name = "ucrReceiverXaxis"
         Me.ucrReceiverXaxis.Selector = Nothing
-        Me.ucrReceiverXaxis.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverXaxis.Size = New System.Drawing.Size(145, 20)
         Me.ucrReceiverXaxis.strNcFilePath = ""
         Me.ucrReceiverXaxis.TabIndex = 12
         Me.ucrReceiverXaxis.ucrSelector = Nothing
@@ -239,6 +241,7 @@ Partial Class dlgDisplayDailyData
         '
         Me.ucrChkMissingRugPlot.Checked = False
         Me.ucrChkMissingRugPlot.Location = New System.Drawing.Point(9, 71)
+        Me.ucrChkMissingRugPlot.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ucrChkMissingRugPlot.Name = "ucrChkMissingRugPlot"
         Me.ucrChkMissingRugPlot.Size = New System.Drawing.Size(263, 20)
         Me.ucrChkMissingRugPlot.TabIndex = 5
@@ -248,6 +251,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrNudLowerYaxis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLowerYaxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudLowerYaxis.Location = New System.Drawing.Point(80, 16)
+        Me.ucrNudLowerYaxis.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ucrNudLowerYaxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudLowerYaxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLowerYaxis.Name = "ucrNudLowerYaxis"
@@ -274,6 +278,7 @@ Partial Class dlgDisplayDailyData
         '
         Me.ucrChkValuesOutsideYrange.Checked = False
         Me.ucrChkValuesOutsideYrange.Location = New System.Drawing.Point(9, 45)
+        Me.ucrChkValuesOutsideYrange.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ucrChkValuesOutsideYrange.Name = "ucrChkValuesOutsideYrange"
         Me.ucrChkValuesOutsideYrange.Size = New System.Drawing.Size(263, 20)
         Me.ucrChkValuesOutsideYrange.TabIndex = 4
@@ -283,6 +288,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrNudUpperYaxis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudUpperYaxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudUpperYaxis.Location = New System.Drawing.Point(216, 16)
+        Me.ucrNudUpperYaxis.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ucrNudUpperYaxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudUpperYaxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudUpperYaxis.Name = "ucrNudUpperYaxis"
@@ -303,7 +309,7 @@ Partial Class dlgDisplayDailyData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(442, 444)
+        Me.ClientSize = New System.Drawing.Size(446, 444)
         Me.Controls.Add(Me.grpGraph)
         Me.Controls.Add(Me.ucrReceiverElements)
         Me.Controls.Add(Me.ucrReceiverYear)
