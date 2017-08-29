@@ -42,8 +42,8 @@ Partial Class dlgRowNamesOrNumbers
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOverallOptions = New instat.UcrPanel()
         Me.ucrReceiverRowNames = New instat.ucrReceiverSingle()
-        Me.rdoCopytoFirstColumn = New System.Windows.Forms.RadioButton()
-        Me.rdoCopyfromColumn = New System.Windows.Forms.RadioButton()
+        Me.rdoCopyRowNamesIntoFirstColumn = New System.Windows.Forms.RadioButton()
+        Me.rdoSetRowNamesFromColumn = New System.Windows.Forms.RadioButton()
         Me.rdoResetintoPositiveIntegers = New System.Windows.Forms.RadioButton()
         Me.rdoSortbyRowNames = New System.Windows.Forms.RadioButton()
         Me.rdoSortDescending = New System.Windows.Forms.RadioButton()
@@ -91,27 +91,27 @@ Partial Class dlgRowNamesOrNumbers
         Me.ucrReceiverRowNames.TabIndex = 4
         Me.ucrReceiverRowNames.ucrSelector = Nothing
         '
-        'rdoCopytoFirstColumn
+        'rdoCopyRowNamesIntoFirstColumn
         '
-        Me.rdoCopytoFirstColumn.AutoSize = True
-        Me.rdoCopytoFirstColumn.Location = New System.Drawing.Point(9, 19)
-        Me.rdoCopytoFirstColumn.Name = "rdoCopytoFirstColumn"
-        Me.rdoCopytoFirstColumn.Size = New System.Drawing.Size(190, 17)
-        Me.rdoCopytoFirstColumn.TabIndex = 1
-        Me.rdoCopytoFirstColumn.TabStop = True
-        Me.rdoCopytoFirstColumn.Text = "Copy Row Names into First Column"
-        Me.rdoCopytoFirstColumn.UseVisualStyleBackColor = True
+        Me.rdoCopyRowNamesIntoFirstColumn.AutoSize = True
+        Me.rdoCopyRowNamesIntoFirstColumn.Location = New System.Drawing.Point(9, 19)
+        Me.rdoCopyRowNamesIntoFirstColumn.Name = "rdoCopyRowNamesIntoFirstColumn"
+        Me.rdoCopyRowNamesIntoFirstColumn.Size = New System.Drawing.Size(190, 17)
+        Me.rdoCopyRowNamesIntoFirstColumn.TabIndex = 1
+        Me.rdoCopyRowNamesIntoFirstColumn.TabStop = True
+        Me.rdoCopyRowNamesIntoFirstColumn.Text = "Copy Row Names into First Column"
+        Me.rdoCopyRowNamesIntoFirstColumn.UseVisualStyleBackColor = True
         '
-        'rdoCopyfromColumn
+        'rdoSetRowNamesFromColumn
         '
-        Me.rdoCopyfromColumn.AutoSize = True
-        Me.rdoCopyfromColumn.Location = New System.Drawing.Point(9, 72)
-        Me.rdoCopyfromColumn.Name = "rdoCopyfromColumn"
-        Me.rdoCopyfromColumn.Size = New System.Drawing.Size(163, 17)
-        Me.rdoCopyfromColumn.TabIndex = 3
-        Me.rdoCopyfromColumn.TabStop = True
-        Me.rdoCopyfromColumn.Text = "Set Row Names from Column"
-        Me.rdoCopyfromColumn.UseVisualStyleBackColor = True
+        Me.rdoSetRowNamesFromColumn.AutoSize = True
+        Me.rdoSetRowNamesFromColumn.Location = New System.Drawing.Point(9, 72)
+        Me.rdoSetRowNamesFromColumn.Name = "rdoSetRowNamesFromColumn"
+        Me.rdoSetRowNamesFromColumn.Size = New System.Drawing.Size(163, 17)
+        Me.rdoSetRowNamesFromColumn.TabIndex = 3
+        Me.rdoSetRowNamesFromColumn.TabStop = True
+        Me.rdoSetRowNamesFromColumn.Text = "Set Row Names from Column"
+        Me.rdoSetRowNamesFromColumn.UseVisualStyleBackColor = True
         '
         'rdoResetintoPositiveIntegers
         '
@@ -181,8 +181,8 @@ Partial Class dlgRowNamesOrNumbers
         Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.ucrNewColumnName)
         Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.rdoSortbyRowNames)
         Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.rdoResetintoPositiveIntegers)
-        Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.rdoCopyfromColumn)
-        Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.rdoCopytoFirstColumn)
+        Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.rdoSetRowNamesFromColumn)
+        Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.rdoCopyRowNamesIntoFirstColumn)
         Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.ucrReceiverRowNames)
         Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.ucrPnlOverallOptions)
         Me.grpboxOptionsforRowNamesorNumbercols.Location = New System.Drawing.Point(228, 34)
@@ -230,7 +230,7 @@ Partial Class dlgRowNamesOrNumbers
     Friend WithEvents rdoSortDescending As RadioButton
     Friend WithEvents rdoSortbyRowNames As RadioButton
     Friend WithEvents rdoResetintoPositiveIntegers As RadioButton
-    Friend WithEvents rdoCopyfromColumn As RadioButton
-    Friend WithEvents rdoCopytoFirstColumn As RadioButton
+    Friend WithEvents rdoSetRowNamesFromColumn As RadioButton
+    Friend WithEvents rdoCopyRowNamesIntoFirstColumn As RadioButton
     Friend WithEvents ucrPnlSortOptions As UcrPanel
 End Class
