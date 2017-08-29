@@ -42,11 +42,11 @@ Partial Class dlgAppend
         Me.lblDataframes = New System.Windows.Forms.Label()
         Me.lblIDColName = New System.Windows.Forms.Label()
         Me.ucrInputIDColName = New instat.ucrInputTextBox()
-        Me.ucrReceiverAppendDataframe = New instat.ucrReceiverMultiple()
         Me.ucrSelectorDataframes = New instat.ucrSelectorAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrChkIncludeIDColumn = New instat.ucrCheck()
+        Me.ucrReceiverAppendDataframe = New instat.ucrReceiverMultiple()
         Me.SuspendLayout()
         '
         'lblAppendToDataframe
@@ -86,16 +86,6 @@ Partial Class dlgAppend
         Me.ucrInputIDColName.Size = New System.Drawing.Size(180, 21)
         Me.ucrInputIDColName.TabIndex = 6
         '
-        'ucrReceiverAppendDataframe
-        '
-        Me.ucrReceiverAppendDataframe.frmParent = Me
-        Me.ucrReceiverAppendDataframe.Location = New System.Drawing.Point(252, 60)
-        Me.ucrReceiverAppendDataframe.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverAppendDataframe.Name = "ucrReceiverAppendDataframe"
-        Me.ucrReceiverAppendDataframe.Selector = Nothing
-        Me.ucrReceiverAppendDataframe.Size = New System.Drawing.Size(122, 104)
-        Me.ucrReceiverAppendDataframe.TabIndex = 3
-        '
         'ucrSelectorDataframes
         '
         Me.ucrSelectorDataframes.bShowHiddenColumns = False
@@ -127,18 +117,30 @@ Partial Class dlgAppend
         Me.ucrChkIncludeIDColumn.Size = New System.Drawing.Size(116, 20)
         Me.ucrChkIncludeIDColumn.TabIndex = 4
         '
+        'ucrReceiverAppendDataframe
+        '
+        Me.ucrReceiverAppendDataframe.frmParent = Me
+        Me.ucrReceiverAppendDataframe.Location = New System.Drawing.Point(255, 62)
+        Me.ucrReceiverAppendDataframe.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverAppendDataframe.Name = "ucrReceiverAppendDataframe"
+        Me.ucrReceiverAppendDataframe.Selector = Nothing
+        Me.ucrReceiverAppendDataframe.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverAppendDataframe.strNcFilePath = ""
+        Me.ucrReceiverAppendDataframe.TabIndex = 9
+        Me.ucrReceiverAppendDataframe.ucrSelector = Nothing
+        '
         'dlgAppend
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(417, 288)
+        Me.Controls.Add(Me.ucrReceiverAppendDataframe)
         Me.Controls.Add(Me.ucrChkIncludeIDColumn)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrInputIDColName)
         Me.Controls.Add(Me.lblDataframes)
         Me.Controls.Add(Me.lblIDColName)
         Me.Controls.Add(Me.lblAppendToDataframe)
-        Me.Controls.Add(Me.ucrReceiverAppendDataframe)
         Me.Controls.Add(Me.ucrSelectorDataframes)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -155,11 +157,11 @@ Partial Class dlgAppend
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSelectorDataframes As ucrSelectorAddRemove
-    Friend WithEvents ucrReceiverAppendDataframe As ucrReceiverMultiple
     Friend WithEvents lblAppendToDataframe As Label
     Friend WithEvents lblDataframes As Label
     Friend WithEvents lblIDColName As Label
     Friend WithEvents ucrInputIDColName As ucrInputTextBox
     Friend WithEvents ucrSaveGraph As ucrSave
     Friend WithEvents ucrChkIncludeIDColumn As ucrCheck
+    Friend WithEvents ucrReceiverAppendDataframe As ucrReceiverMultiple
 End Class
