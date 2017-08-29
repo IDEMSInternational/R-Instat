@@ -746,6 +746,12 @@
     <Compile Include="sdgOpenNetCDF.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgProportionsPercentages.Designer.vb">
+      <DependentUpon>sdgProportionsPercentages.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgProportionsPercentages.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgThemes.Designer.vb">
       <DependentUpon>sdgThemes.vb</DependentUpon>
     </Compile>
@@ -3230,6 +3236,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgOpenNetCDF.resx">
       <DependentUpon>sdgOpenNetCDF.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgProportionsPercentages.resx">
+      <DependentUpon>sdgProportionsPercentages.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSummaries.fr-FR.resx">
       <DependentUpon>sdgSummaries.vb</DependentUpon>
