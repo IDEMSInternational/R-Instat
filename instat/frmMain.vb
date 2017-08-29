@@ -1091,10 +1091,6 @@ Public Class frmMain
         dlgWaterBalance.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticOrganiseEventsEndoftheRains_Click(sender As Object, e As EventArgs)
-        dlgEndofRains.ShowDialog()
-    End Sub
-
     Private Sub mnuOrganiseColumnGenerateCountInFactor_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnGenerateCountInFactor.Click
         dlgCountinFactor.ShowDialog()
     End Sub
@@ -1648,10 +1644,6 @@ Public Class frmMain
 
     Private Sub DuplicatesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DuplicatesToolStripMenuItem.Click
         dlgDuplicatesConstructed.ShowDialog()
-    End Sub
-
-    Private Sub SummaryOfDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SummaryOfDailyDataToolStripMenuItem.Click
-        dlgSummaryofDailydata.ShowDialog()
     End Sub
 
     Private Sub BoxplotsConceptualisedAndConstructedToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles BoxplotsConceptualisedAndConstructedToolStripMenuItem.Click
