@@ -55,11 +55,11 @@ Public Class dlgClimaticBoxPlot
 
         ucrChkVarWidth.SetRCode(clsRgeomPlotFunction, bReset)
         ucrPnlPlots.SetRCode(clsRgeomPlotFunction, bReset)
+        ucrVariablesAsFactorForClimaticBoxplot.SetRCode(clsRaesFunction, bReset)
 
-        'ucrReceiverData.SetRCode(clsRaesFunction, bReset)
-        'ucrReceiverYear.SetRCode(clsRaesFunction, bReset)
-        'ucrChkMoreData.SetRCode(clsRaesFunction, bReset)
-        'ucrReceiverMoreData.SetRCode(clsRaesFunction, bReset)
+        ucrReceiverYear.SetRCode(clsRaesFunction, bReset)
+        ucrVariablesAsFactorForClimaticBoxplot.SetRCode(clsRaesFunction, bReset)
+
 
         'ucrChkFacet.SetRCode(clsBaseOperator, bReset)
         'ucrChk2ndFacet.SetRCode(clsBaseOperator, bReset)
@@ -92,14 +92,12 @@ Public Class dlgClimaticBoxPlot
         ucrSelectorClimaticBoxPlot.SetParameter(New RParameter("data", 0))
         ucrSelectorClimaticBoxPlot.SetParameterIsrfunction()
 
-        'ucrReceiverStation.Selector = ucrSelectorClimaticBoxPlot
-        'ucrReceiverStation.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "station" & Chr(34)})
-        'ucrReceiverStation.bAutoFill = True
-        'ucrReceiverStation.SetMeAsReceiver()
-
-        'ucrReceiverDate.Selector = ucrSelectorClimaticBoxPlot
-        'ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
-        'ucrReceiverDate.bAutoFill = True
+        ucrVariablesAsFactorForClimaticBoxplot.Selector = ucrSelectorClimaticBoxPlot
+        ucrVariablesAsFactorForClimaticBoxplot.SetParameter(New RParameter("y", 0))
+        ucrVariablesAsFactorForClimaticBoxplot.SetIncludedDataTypes({"numeric"})
+        ucrVariablesAsFactorForClimaticBoxplot.strSelectorHeading = "Numerics"
+        ucrVariablesAsFactorForClimaticBoxplot.SetParameterIsString()
+        ucrVariablesAsFactorForClimaticBoxplot.bWithQuotes = False
 
         ucrReceiverYear.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiverYear.SetParameter(New RParameter("x", 1))
@@ -113,12 +111,6 @@ Public Class dlgClimaticBoxPlot
         ucrReceiverWithinYear.bAutoFill = True
         ucrReceiverWithinYear.SetParameterIsString()
         ucrReceiverWithinYear.bWithQuotes = False
-
-        'ucrReceiverData.Selector = ucrSelectorClimaticBoxPlot
-        'ucrReceiverData.SetParameter(New RParameter("y"))
-        'ucrReceiverData.bAutoFill = True
-        'ucrReceiverData.SetParameterIsString()
-        'ucrReceiverData.bWithQuotes = False
 
         ucrReceiverFacet.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiverFacet.SetParameter(New RParameter("var1", 0))
@@ -143,27 +135,6 @@ Public Class dlgClimaticBoxPlot
         clsCoordFlipParam.SetArgument(clsCoordFlipFunc)
         ucrChkHorizontalBoxplot.SetText("Horizontal Plot")
         ucrChkHorizontalBoxplot.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-
-        'ucrChkMoreData.SetText("More Data")
-        'ucrChkMoreData.AddParameterPresentCondition(True, "fill", True)
-        'ucrChkMoreData.AddParameterPresentCondition(False, "fill", False)
-        'ucrChkMoreData.AddToLinkedControls(ucrReceiverMoreData, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrReceiverMoreData.Selector = ucrSelectorClimaticBoxPlot
-        'ucrReceiverMoreData.SetParameter(New RParameter("fill"))
-        'ucrReceiverMoreData.SetParameterIsString()
-        'ucrReceiverMoreData.bWithQuotes = False
-
-        'ucrChkFacet.SetText("Facet")
-        'ucrChkFacet.AddToLinkedControls(ucrReceiverFacet, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrChkFacet.AddToLinkedControls(ucrChk2ndFacet, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrChkFacet.AddParameterPresentCondition(True, "facets", True)
-        'ucrChkFacet.AddParameterPresentCondition(False, "facets", False)
-
-        'ucrChk2ndFacet.SetText("2nd Facet")
-        'ucrChk2ndFacet.AddToLinkedControls(ucrReceiver2ndFacet, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrChk2ndFacet.AddToLinkedControls(ucrChkMargins, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrChk2ndFacet.AddParameterValuesCondition(False, "facets", "facet_grid", False)
-        'ucrChk2ndFacet.AddParameterValuesCondition(True, "facets", "facet_grid", True)
 
         ucrChkMargins.SetText("Margins")
         ucrChkMargins.SetParameter(New RParameter("margins"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=False)
@@ -191,6 +162,7 @@ Public Class dlgClimaticBoxPlot
         sdgPlots.Reset()
         bResetSubdialog = True
         bResetBoxLayerSubdialog = True
+        ucrVariablesAsFactorForClimaticBoxplot.SetMeAsReceiver()
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.RemoveParameterByName("facets")
@@ -224,8 +196,7 @@ Public Class dlgClimaticBoxPlot
     End Sub
 
     Private Sub TestOKEnabled()
-        'Not ucrReceiverData.IsEmpty AndAlso
-        If Not ucrReceiverYear.IsEmpty AndAlso ucrSavePlot.IsComplete Then
+        If Not ucrVariablesAsFactorForClimaticBoxplot.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso ucrSavePlot.IsComplete Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -263,7 +234,7 @@ Public Class dlgClimaticBoxPlot
         End If
     End Sub
 
-    Private Sub ucrSavePlot_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlContentsChanged, ucrSavePlot.ControlContentsChanged
+    Private Sub ucrSavePlot_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlContentsChanged, ucrSavePlot.ControlContentsChanged, ucrVariablesAsFactorForClimaticBoxplot.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
