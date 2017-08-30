@@ -46,8 +46,8 @@ Public Class sdgProportionsPercentages
         ucrChkProportionsPercentages.SetRDefault(Chr(34) & "none" & Chr(34))
         ucrChkProportionsPercentages.SetText("Calculate Proportions or Percentages")
 
-        ucrPnlBY.AddToLinkedControls(ucrReceiverByFactor, {rdoByFactors}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkProportionsPercentages.AddToLinkedControls({ucrPnlBY, ucrChkDisplayAsDecimal, ucrSelectorProportionsPercentiles}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlBY.AddToLinkedControls({ucrReceiverByFactor, ucrChkDisplayAsDecimal}, {rdoByFactors}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkProportionsPercentages.AddToLinkedControls({ucrPnlBY, ucrSelectorProportionsPercentiles}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlBY.AddToLinkedControls(ucrReceiverColumn, {rdoByColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlBY.AddToLinkedControls(ucrReceiverFilter, {rdoByFilter}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverByFactor.SetLinkedDisplayControl(lblByFactors)
@@ -56,6 +56,9 @@ Public Class sdgProportionsPercentages
         ucrReceiverFilter.SetLinkedDisplayControl(lblFilter)
 
         bControlsInitialised = True
+        rdoByFactors.Checked = True
+        rdoByColumn.Enabled = False
+        rdoByFilter.Enabled = False
     End Sub
 
     Public Sub SetRFunction(clsNewDefaultFunction As RFunction, Optional bReset As Boolean = False)
@@ -63,22 +66,16 @@ Public Class sdgProportionsPercentages
             InitialiseControls()
         End If
         clsDefaultFunction = clsNewDefaultFunction
-        ucrSelectorProportionsPercentiles.Reset()
-
         SetRCode(Me, clsDefaultFunction, bReset)
     End Sub
 
-    Private Sub ReceiverFocus()
-        If rdoByColumn.Checked Then
-            ucrReceiverColumn.SetMeAsReceiver()
+    Private Sub ucrPnlBY_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlBY.ControlContentsChanged
+        If rdoByFilter.Checked Then
+            ucrReceiverFilter.SetMeAsReceiver()
         ElseIf rdoByFactors.Checked Then
             ucrReceiverByFactor.SetMeAsReceiver()
-        ElseIf rdoByFilter.Checked Then
-            ucrReceiverFilter.SetMeAsReceiver()
+        ElseIf rdoByColumn.Checked Then
+            ucrReceiverColumn.SetMeAsReceiver()
         End If
-    End Sub
-
-    Private Sub ucrPnlBY_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlBY.ControlContentsChanged
-        ReceiverFocus()
     End Sub
 End Class
