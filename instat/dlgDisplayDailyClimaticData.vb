@@ -35,7 +35,7 @@ Public Class dlgDisplayDailyData
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrSelectorDisplayDailyClimaticData.SetParameter(New RParameter("data_name"))
+        ucrSelectorDisplayDailyClimaticData.SetParameter(New RParameter("data_name", 0))
         ucrSelectorDisplayDailyClimaticData.SetParameterIsString()
 
         ucrReceiverStations.Selector = ucrSelectorDisplayDailyClimaticData
@@ -43,21 +43,17 @@ Public Class dlgDisplayDailyData
         ucrReceiverStations.bAutoFill = True
         ucrReceiverStations.SetMeAsReceiver()
 
-        ucrReceiverStations.SetParameter(New RParameter("station_col"))
+        ucrReceiverStations.SetParameter(New RParameter("station_col", 2))
         ucrReceiverStations.SetParameterIsString()
-        ucrReceiverStations.bWithQuotes = False
 
-        ucrReceiverYear.SetParameter(New RParameter("year_col"))
+        ucrReceiverYear.SetParameter(New RParameter("year_col", 3))
         ucrReceiverYear.SetParameterIsString()
-        ucrReceiverYear.bWithQuotes = False
 
-        ucrReceiverDate.SetParameter(New RParameter("climatic_element"))
-        ucrReceiverDate.SetParameterIsString()
-        ucrReceiverDate.bWithQuotes = False
 
-        ucrReceiverDayOfYear.SetParameter(New RParameter("doy_col"))
+
+        ucrReceiverDayOfYear.SetParameter(New RParameter("doy_col", 5))
         ucrReceiverDayOfYear.SetParameterIsString()
-        ucrReceiverDayOfYear.bWithQuotes = False
+
 
         ucrReceiverYear.Selector = ucrSelectorDisplayDailyClimaticData
         ucrReceiverYear.SetClimaticType("year")
@@ -73,16 +69,18 @@ Public Class dlgDisplayDailyData
         ucrReceiverDate.bAutoFill = True
         ucrReceiverDate.strSelectorHeading = "Date Variables"
 
+        ucrReceiverDate.SetParameter(New RParameter("date_col", 1))
+        ucrReceiverDate.SetParameterIsString()
+
         ucrReceiverElements.Selector = ucrSelectorDisplayDailyClimaticData
-        ucrReceiverElements.SetParameter(New RParameter("x", 0))
+        ucrReceiverElements.SetParameter(New RParameter("climatic_element", 6))
         ucrReceiverElements.SetParameterIsString()
-        ucrReceiverElements.bWithQuotes = False
 
-        ucrNudUpperYaxis.SetParameter(New RParameter("upper_limit"))
+        ucrNudUpperYaxis.SetParameter(New RParameter("upper_limit", 9))
 
-        ucrInputBarColour.SetParameter(New RParameter("bar_colour"))
+        ucrInputBarColour.SetParameter(New RParameter("bar_colour", 7))
 
-        ucrInputRugColour.SetParameter(New RParameter("rug_colour"))
+        ucrInputRugColour.SetParameter(New RParameter("rug_colour", 8))
 
         ucrReceiverDayOfYear.Selector = ucrSelectorDisplayDailyClimaticData
         ucrReceiverDayOfYear.SetClimaticType("doy")
@@ -93,6 +91,8 @@ Public Class dlgDisplayDailyData
 
         ucrPnlFrequencyDisplay.AddRadioButton(rdoTable)
         ucrPnlFrequencyDisplay.AddRadioButton(rdoGraph)
+        ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoGraph, frmMain.clsRLink.strInstatDataObject & "$display_daily_graph")
+        ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoTable, frmMain.clsRLink.strInstatDataObject & "$summary_table")
         ucrPnlFrequencyDisplay.SetLinkedDisplayControl(grpGraph)
     End Sub
 
@@ -116,6 +116,7 @@ Public Class dlgDisplayDailyData
         ucrInputRugColour.SetRCode(clsDisplayDailyGraph, bReset)
         ucrInputBarColour.SetRCode(clsDisplayDailyGraph, bReset)
         ucrNudUpperYaxis.SetRCode(clsDisplayDailyGraph, bReset)
+        ucrReceiverElements.SetRCode(clsDisplayDailyGraph, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
