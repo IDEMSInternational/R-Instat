@@ -235,9 +235,10 @@ Public Class dlgBarAndPieChart
                 ucrSaveBar.SetPrefix("bar")
             End If
         ElseIf rdoPieChart.Checked Then
-                clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsPieAesFunction, iPosition:=1)
+            clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsPieAesFunction, iPosition:=1)
             clsRgeomBarFunction.AddParameter("width", "1")
             clsBaseOperator.AddParameter(clsRCoordPolarParam)
+            ucrReceiverFactor.SetMeAsReceiver()
             cmdPieChartOptions.Visible = True
             cmdBarChartOptions.Visible = False
             If Not ucrSaveBar.bUserTyped Then
@@ -246,15 +247,8 @@ Public Class dlgBarAndPieChart
         End If
     End Sub
 
-    Private Sub ReceiverFocus()
-        If rdoPieChart.Checked Then
-            ucrReceiverFactor.SetMeAsReceiver()
-        End If
-    End Sub
-
     Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged
         SetDialogOptions()
-        ReceiverFocus()
     End Sub
 
     Private Sub CoreControls_ContentsChanged() Handles ucrReceiverFactor.ControlContentsChanged, ucrSaveBar.ControlContentsChanged
