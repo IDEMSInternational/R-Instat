@@ -33,6 +33,7 @@ Public Class sdgProportionsPercentages
         ucrReceiverColumn.Selector = ucrSelectorProportionsPercentiles
         ucrReceiverFilter.Selector = ucrSelectorProportionsPercentiles
         ucrReceiverByFactor.SetMeAsReceiver()
+
         ucrReceiverByFactor.SetParameter(New RParameter("perc_total_factors"))
         ucrReceiverByFactor.SetParameterIsString()
         ucrReceiverColumn.SetMeAsReceiver()
@@ -40,6 +41,10 @@ Public Class sdgProportionsPercentages
         ucrChkDisplayAsDecimal.SetParameter(New RParameter("perc_decimal"))
         ucrChkDisplayAsDecimal.SetText("Display as decimal")
         ucrChkDisplayAsDecimal.SetRDefault("FALSE")
+
+        ucrPnlBY.AddParameterPresentCondition(rdoByFactors, "perc_total_factors")
+        ucrPnlBY.AddParameterPresentCondition(rdoByFilter, "perc_total_factors", False)
+        ucrPnlBY.AddParameterPresentCondition(rdoByColumn, "perc_total_factors", False)
 
         ucrChkProportionsPercentages.SetParameter(New RParameter("percentage_type"))
         ucrChkProportionsPercentages.SetValuesCheckedAndUnchecked(Chr(34) & "factors" & Chr(34), Chr(34) & "none" & Chr(34))
@@ -56,9 +61,6 @@ Public Class sdgProportionsPercentages
         ucrReceiverFilter.SetLinkedDisplayControl(lblFilter)
 
         bControlsInitialised = True
-        rdoByFactors.Checked = True
-        rdoByColumn.Enabled = False
-        rdoByFilter.Enabled = False
     End Sub
 
     Public Sub SetRFunction(clsNewDefaultFunction As RFunction, Optional bReset As Boolean = False)
