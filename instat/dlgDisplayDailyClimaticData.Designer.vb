@@ -50,23 +50,23 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.lblYear = New System.Windows.Forms.Label()
-        Me.ucrReceiverXaxis = New instat.ucrReceiverSingle()
-        Me.lblXaxis = New System.Windows.Forms.Label()
+        Me.ucrReceiverDayOfYear = New instat.ucrReceiverSingle()
+        Me.lblDayOfTheYear = New System.Windows.Forms.Label()
         Me.lblYaxisUpper = New System.Windows.Forms.Label()
         Me.ucrReceiverElements = New instat.ucrReceiverMultiple()
-        Me.ucrChkMissingRugPlot = New instat.ucrCheck()
-        Me.ucrNudLowerYaxis = New instat.ucrNud()
         Me.grpGraph = New System.Windows.Forms.GroupBox()
-        Me.ucrChkValuesOutsideYrange = New instat.ucrCheck()
+        Me.ucrInputRugColour = New instat.ucrInputComboBox()
+        Me.lblRugColor = New System.Windows.Forms.Label()
+        Me.ucrInputBarColour = New instat.ucrInputComboBox()
+        Me.lblBarColour = New System.Windows.Forms.Label()
         Me.ucrNudUpperYaxis = New instat.ucrNud()
-        Me.lblYaxisLower = New System.Windows.Forms.Label()
         Me.grpGraph.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(10, 375)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(428, 52)
         Me.ucrBase.TabIndex = 16
@@ -118,7 +118,7 @@ Partial Class dlgDisplayDailyData
         'ucrPnlFrequencyDisplay
         '
         Me.ucrPnlFrequencyDisplay.Location = New System.Drawing.Point(122, 12)
-        Me.ucrPnlFrequencyDisplay.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ucrPnlFrequencyDisplay.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrPnlFrequencyDisplay.Name = "ucrPnlFrequencyDisplay"
         Me.ucrPnlFrequencyDisplay.Size = New System.Drawing.Size(214, 29)
         Me.ucrPnlFrequencyDisplay.TabIndex = 0
@@ -195,31 +195,31 @@ Partial Class dlgDisplayDailyData
         Me.lblYear.TabIndex = 9
         Me.lblYear.Text = "Year:"
         '
-        'ucrReceiverXaxis
+        'ucrReceiverDayOfYear
         '
-        Me.ucrReceiverXaxis.frmParent = Me
-        Me.ucrReceiverXaxis.Location = New System.Drawing.Point(293, 212)
-        Me.ucrReceiverXaxis.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverXaxis.Name = "ucrReceiverXaxis"
-        Me.ucrReceiverXaxis.Selector = Nothing
-        Me.ucrReceiverXaxis.Size = New System.Drawing.Size(145, 20)
-        Me.ucrReceiverXaxis.strNcFilePath = ""
-        Me.ucrReceiverXaxis.TabIndex = 12
-        Me.ucrReceiverXaxis.ucrSelector = Nothing
+        Me.ucrReceiverDayOfYear.frmParent = Me
+        Me.ucrReceiverDayOfYear.Location = New System.Drawing.Point(293, 212)
+        Me.ucrReceiverDayOfYear.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverDayOfYear.Name = "ucrReceiverDayOfYear"
+        Me.ucrReceiverDayOfYear.Selector = Nothing
+        Me.ucrReceiverDayOfYear.Size = New System.Drawing.Size(145, 20)
+        Me.ucrReceiverDayOfYear.strNcFilePath = ""
+        Me.ucrReceiverDayOfYear.TabIndex = 12
+        Me.ucrReceiverDayOfYear.ucrSelector = Nothing
         '
-        'lblXaxis
+        'lblDayOfTheYear
         '
-        Me.lblXaxis.AutoSize = True
-        Me.lblXaxis.Location = New System.Drawing.Point(293, 195)
-        Me.lblXaxis.Name = "lblXaxis"
-        Me.lblXaxis.Size = New System.Drawing.Size(38, 13)
-        Me.lblXaxis.TabIndex = 11
-        Me.lblXaxis.Text = "X-axis:"
+        Me.lblDayOfTheYear.AutoSize = True
+        Me.lblDayOfTheYear.Location = New System.Drawing.Point(293, 195)
+        Me.lblDayOfTheYear.Name = "lblDayOfTheYear"
+        Me.lblDayOfTheYear.Size = New System.Drawing.Size(29, 13)
+        Me.lblDayOfTheYear.TabIndex = 11
+        Me.lblDayOfTheYear.Text = "Doy:"
         '
         'lblYaxisUpper
         '
         Me.lblYaxisUpper.AutoSize = True
-        Me.lblYaxisUpper.Location = New System.Drawing.Point(140, 19)
+        Me.lblYaxisUpper.Location = New System.Drawing.Point(6, 16)
         Me.lblYaxisUpper.Name = "lblYaxisUpper"
         Me.lblYaxisUpper.Size = New System.Drawing.Size(70, 13)
         Me.lblYaxisUpper.TabIndex = 2
@@ -237,73 +237,69 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverElements.TabIndex = 15
         Me.ucrReceiverElements.ucrSelector = Nothing
         '
-        'ucrChkMissingRugPlot
-        '
-        Me.ucrChkMissingRugPlot.Checked = False
-        Me.ucrChkMissingRugPlot.Location = New System.Drawing.Point(9, 71)
-        Me.ucrChkMissingRugPlot.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.ucrChkMissingRugPlot.Name = "ucrChkMissingRugPlot"
-        Me.ucrChkMissingRugPlot.Size = New System.Drawing.Size(263, 20)
-        Me.ucrChkMissingRugPlot.TabIndex = 5
-        '
-        'ucrNudLowerYaxis
-        '
-        Me.ucrNudLowerYaxis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLowerYaxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudLowerYaxis.Location = New System.Drawing.Point(80, 16)
-        Me.ucrNudLowerYaxis.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.ucrNudLowerYaxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudLowerYaxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLowerYaxis.Name = "ucrNudLowerYaxis"
-        Me.ucrNudLowerYaxis.Size = New System.Drawing.Size(50, 23)
-        Me.ucrNudLowerYaxis.TabIndex = 1
-        Me.ucrNudLowerYaxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'grpGraph
         '
-        Me.grpGraph.Controls.Add(Me.ucrChkValuesOutsideYrange)
-        Me.grpGraph.Controls.Add(Me.ucrChkMissingRugPlot)
+        Me.grpGraph.Controls.Add(Me.ucrInputRugColour)
+        Me.grpGraph.Controls.Add(Me.lblRugColor)
+        Me.grpGraph.Controls.Add(Me.ucrInputBarColour)
+        Me.grpGraph.Controls.Add(Me.lblBarColour)
         Me.grpGraph.Controls.Add(Me.ucrNudUpperYaxis)
-        Me.grpGraph.Controls.Add(Me.lblYaxisLower)
-        Me.grpGraph.Controls.Add(Me.ucrNudLowerYaxis)
         Me.grpGraph.Controls.Add(Me.lblYaxisUpper)
         Me.grpGraph.Location = New System.Drawing.Point(10, 232)
         Me.grpGraph.Name = "grpGraph"
-        Me.grpGraph.Size = New System.Drawing.Size(277, 105)
+        Me.grpGraph.Size = New System.Drawing.Size(277, 136)
         Me.grpGraph.TabIndex = 13
         Me.grpGraph.TabStop = False
         Me.grpGraph.Text = "Graph"
         '
-        'ucrChkValuesOutsideYrange
+        'ucrInputRugColour
         '
-        Me.ucrChkValuesOutsideYrange.Checked = False
-        Me.ucrChkValuesOutsideYrange.Location = New System.Drawing.Point(9, 45)
-        Me.ucrChkValuesOutsideYrange.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.ucrChkValuesOutsideYrange.Name = "ucrChkValuesOutsideYrange"
-        Me.ucrChkValuesOutsideYrange.Size = New System.Drawing.Size(263, 20)
-        Me.ucrChkValuesOutsideYrange.TabIndex = 4
+        Me.ucrInputRugColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputRugColour.IsReadOnly = False
+        Me.ucrInputRugColour.Location = New System.Drawing.Point(83, 70)
+        Me.ucrInputRugColour.Name = "ucrInputRugColour"
+        Me.ucrInputRugColour.Size = New System.Drawing.Size(73, 21)
+        Me.ucrInputRugColour.TabIndex = 9
+        '
+        'lblRugColor
+        '
+        Me.lblRugColor.AutoSize = True
+        Me.lblRugColor.Location = New System.Drawing.Point(9, 75)
+        Me.lblRugColor.Name = "lblRugColor"
+        Me.lblRugColor.Size = New System.Drawing.Size(57, 13)
+        Me.lblRugColor.TabIndex = 8
+        Me.lblRugColor.Text = "Rug Color:"
+        '
+        'ucrInputBarColour
+        '
+        Me.ucrInputBarColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputBarColour.IsReadOnly = False
+        Me.ucrInputBarColour.Location = New System.Drawing.Point(83, 43)
+        Me.ucrInputBarColour.Name = "ucrInputBarColour"
+        Me.ucrInputBarColour.Size = New System.Drawing.Size(73, 21)
+        Me.ucrInputBarColour.TabIndex = 7
+        '
+        'lblBarColour
+        '
+        Me.lblBarColour.AutoSize = True
+        Me.lblBarColour.Location = New System.Drawing.Point(6, 48)
+        Me.lblBarColour.Name = "lblBarColour"
+        Me.lblBarColour.Size = New System.Drawing.Size(59, 13)
+        Me.lblBarColour.TabIndex = 6
+        Me.lblBarColour.Text = "Bar Colour:"
         '
         'ucrNudUpperYaxis
         '
         Me.ucrNudUpperYaxis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudUpperYaxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudUpperYaxis.Location = New System.Drawing.Point(216, 16)
-        Me.ucrNudUpperYaxis.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ucrNudUpperYaxis.Location = New System.Drawing.Point(83, 13)
+        Me.ucrNudUpperYaxis.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrNudUpperYaxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudUpperYaxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudUpperYaxis.Name = "ucrNudUpperYaxis"
         Me.ucrNudUpperYaxis.Size = New System.Drawing.Size(50, 23)
         Me.ucrNudUpperYaxis.TabIndex = 3
         Me.ucrNudUpperYaxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblYaxisLower
-        '
-        Me.lblYaxisLower.AutoSize = True
-        Me.lblYaxisLower.Location = New System.Drawing.Point(6, 19)
-        Me.lblYaxisLower.Name = "lblYaxisLower"
-        Me.lblYaxisLower.Size = New System.Drawing.Size(70, 13)
-        Me.lblYaxisLower.TabIndex = 0
-        Me.lblYaxisLower.Text = "Y-axis Lower:"
         '
         'dlgDisplayDailyData
         '
@@ -315,8 +311,8 @@ Partial Class dlgDisplayDailyData
         Me.Controls.Add(Me.ucrReceiverYear)
         Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.lblDate)
-        Me.Controls.Add(Me.lblXaxis)
-        Me.Controls.Add(Me.ucrReceiverXaxis)
+        Me.Controls.Add(Me.lblDayOfTheYear)
+        Me.Controls.Add(Me.ucrReceiverDayOfYear)
         Me.Controls.Add(Me.ucrReceiverDate)
         Me.Controls.Add(Me.lblElement)
         Me.Controls.Add(Me.lblStation)
@@ -349,16 +345,16 @@ Partial Class dlgDisplayDailyData
     Friend WithEvents lblElement As Label
     Friend WithEvents ucrReceiverElements As ucrReceiverMultiple
     Friend WithEvents lblYaxisUpper As Label
-    Friend WithEvents ucrReceiverXaxis As ucrReceiverSingle
-    Friend WithEvents lblXaxis As Label
+    Friend WithEvents ucrReceiverDayOfYear As ucrReceiverSingle
+    Friend WithEvents lblDayOfTheYear As Label
     Friend WithEvents ucrReceiverYear As ucrReceiverSingle
     Friend WithEvents lblYear As Label
     Friend WithEvents lblDate As Label
     Friend WithEvents ucrReceiverDate As ucrReceiverSingle
-    Friend WithEvents ucrChkMissingRugPlot As ucrCheck
-    Friend WithEvents ucrNudLowerYaxis As ucrNud
     Friend WithEvents grpGraph As GroupBox
-    Friend WithEvents ucrChkValuesOutsideYrange As ucrCheck
     Friend WithEvents ucrNudUpperYaxis As ucrNud
-    Friend WithEvents lblYaxisLower As Label
+    Friend WithEvents ucrInputRugColour As ucrInputComboBox
+    Friend WithEvents lblRugColor As Label
+    Friend WithEvents ucrInputBarColour As ucrInputComboBox
+    Friend WithEvents lblBarColour As Label
 End Class
