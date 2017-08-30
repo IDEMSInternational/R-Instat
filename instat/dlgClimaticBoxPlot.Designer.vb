@@ -35,7 +35,7 @@ Partial Class dlgClimaticBoxPlot
         Me.rdoBoxplot = New System.Windows.Forms.RadioButton()
         Me.grpFacets = New System.Windows.Forms.GroupBox()
         Me.ucrReceiver2ndFacet = New instat.ucrReceiverSingle()
-        Me.ucrReceiverFacet = New instat.ucrReceiverSingle()
+        Me.ucrReceiverFacetBy = New instat.ucrReceiverSingle()
         Me.ucrChkMargins = New instat.ucrCheck()
         Me.lblSecondFacet = New System.Windows.Forms.Label()
         Me.lblFacetBy = New System.Windows.Forms.Label()
@@ -66,9 +66,9 @@ Partial Class dlgClimaticBoxPlot
         Me.lblYear.AutoSize = True
         Me.lblYear.Location = New System.Drawing.Point(251, 203)
         Me.lblYear.Name = "lblYear"
-        Me.lblYear.Size = New System.Drawing.Size(32, 13)
+        Me.lblYear.Size = New System.Drawing.Size(68, 13)
         Me.lblYear.TabIndex = 26
-        Me.lblYear.Text = "Year:"
+        Me.lblYear.Text = "Year:(Factor)"
         '
         'grpLayout
         '
@@ -184,7 +184,7 @@ Partial Class dlgClimaticBoxPlot
         'grpFacets
         '
         Me.grpFacets.Controls.Add(Me.ucrReceiver2ndFacet)
-        Me.grpFacets.Controls.Add(Me.ucrReceiverFacet)
+        Me.grpFacets.Controls.Add(Me.ucrReceiverFacetBy)
         Me.grpFacets.Controls.Add(Me.ucrChkMargins)
         Me.grpFacets.Controls.Add(Me.lblSecondFacet)
         Me.grpFacets.Controls.Add(Me.lblFacetBy)
@@ -207,17 +207,17 @@ Partial Class dlgClimaticBoxPlot
         Me.ucrReceiver2ndFacet.TabIndex = 44
         Me.ucrReceiver2ndFacet.ucrSelector = Nothing
         '
-        'ucrReceiverFacet
+        'ucrReceiverFacetBy
         '
-        Me.ucrReceiverFacet.frmParent = Me
-        Me.ucrReceiverFacet.Location = New System.Drawing.Point(5, 38)
-        Me.ucrReceiverFacet.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFacet.Name = "ucrReceiverFacet"
-        Me.ucrReceiverFacet.Selector = Nothing
-        Me.ucrReceiverFacet.Size = New System.Drawing.Size(143, 20)
-        Me.ucrReceiverFacet.strNcFilePath = ""
-        Me.ucrReceiverFacet.TabIndex = 45
-        Me.ucrReceiverFacet.ucrSelector = Nothing
+        Me.ucrReceiverFacetBy.frmParent = Me
+        Me.ucrReceiverFacetBy.Location = New System.Drawing.Point(5, 38)
+        Me.ucrReceiverFacetBy.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFacetBy.Name = "ucrReceiverFacetBy"
+        Me.ucrReceiverFacetBy.Selector = Nothing
+        Me.ucrReceiverFacetBy.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverFacetBy.strNcFilePath = ""
+        Me.ucrReceiverFacetBy.TabIndex = 45
+        Me.ucrReceiverFacetBy.ucrSelector = Nothing
         '
         'ucrChkMargins
         '
@@ -387,7 +387,7 @@ Partial Class dlgClimaticBoxPlot
     Friend WithEvents ucrVariablesAsFactorForClimaticBoxplot As ucrVariablesAsFactor
     Friend WithEvents grpFacets As GroupBox
     Friend WithEvents ucrReceiver2ndFacet As ucrReceiverSingle
-    Friend WithEvents ucrReceiverFacet As ucrReceiverSingle
+    Friend WithEvents ucrReceiverFacetBy As ucrReceiverSingle
     Friend WithEvents ucrChkMargins As ucrCheck
     Friend WithEvents lblSecondFacet As Label
     Friend WithEvents lblFacetBy As Label

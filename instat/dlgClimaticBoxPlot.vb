@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 Public Class dlgClimaticBoxPlot
     Private bFirstLoad As Boolean = True
@@ -60,10 +61,7 @@ Public Class dlgClimaticBoxPlot
         ucrReceiverYear.SetRCode(clsRaesFunction, bReset)
         ucrVariablesAsFactorForClimaticBoxplot.SetRCode(clsRaesFunction, bReset)
 
-
-        'ucrChkFacet.SetRCode(clsBaseOperator, bReset)
-        'ucrChk2ndFacet.SetRCode(clsBaseOperator, bReset)
-        ucrReceiverFacet.SetRCode(clsFacetOp, bReset)
+        ucrReceiverFacetBy.SetRCode(clsFacetOp, bReset)
         ucrReceiver2ndFacet.SetRCode(clsFacetOp, bReset)
         ucrChkMargins.SetRCode(clsFacetFunction, bReset)
 
@@ -101,7 +99,9 @@ Public Class dlgClimaticBoxPlot
 
         ucrReceiverYear.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiverYear.SetParameter(New RParameter("x", 1))
-        ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
+        'we need this to be a factor
+        ucrReceiverYear.SetIncludedDataTypes({"factor"})
+        ' ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
         ucrReceiverYear.bAutoFill = True
         ucrReceiverYear.SetParameterIsString()
         ucrReceiverYear.bWithQuotes = False
@@ -112,11 +112,11 @@ Public Class dlgClimaticBoxPlot
         ucrReceiverWithinYear.SetParameterIsString()
         ucrReceiverWithinYear.bWithQuotes = False
 
-        ucrReceiverFacet.Selector = ucrSelectorClimaticBoxPlot
-        ucrReceiverFacet.SetParameter(New RParameter("var1", 0))
-        ucrReceiverFacet.bAutoFill = True
-        ucrReceiverFacet.SetParameterIsString()
-        ucrReceiverFacet.bWithQuotes = False
+        ucrReceiverFacetBy.Selector = ucrSelectorClimaticBoxPlot
+        ucrReceiverFacetBy.SetParameter(New RParameter("var1", 0))
+        ucrReceiverFacetBy.bAutoFill = True
+        ucrReceiverFacetBy.SetParameterIsString()
+        ucrReceiverFacetBy.bWithQuotes = False
 
         ucrReceiver2ndFacet.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiver2ndFacet.SetParameter(New RParameter("var2", 1))
@@ -285,7 +285,11 @@ Public Class dlgClimaticBoxPlot
         'TODO need to check for the variable width from the geom function in a way that when we check the var width checkbox, it triggers controlvaluechanged
     End Sub
 
-    Private Sub ucrPnlPlots_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPlots.ControlValueChanged
-
+    Private Sub ucrVariablesAsFactorForClimaticBoxplot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForClimaticBoxplot.ControlValueChanged
+        If Not ucrVariablesAsFactorForClimaticBoxplot.IsEmpty AndAlso Not ucrVariablesAsFactorForClimaticBoxplot.bSingleVariable Then
+            clsRaesFunction.AddParameter("fill", "variable")
+        Else
+            clsRaesFunction.RemoveParameterByName("fill")
+        End If
     End Sub
 End Class
