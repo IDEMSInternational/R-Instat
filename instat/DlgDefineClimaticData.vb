@@ -62,33 +62,19 @@ Public Class DlgDefineClimaticData
         ucrSelectorDefineClimaticData.SetParameter(New RParameter("data_name", 0))
         ucrSelectorDefineClimaticData.SetParameterIsString()
         ucrReceiverDate.Tag = "date"
-        ucrReceiverDate.strSelectorHeading = "Date"
         ucrReceiverCloudCover.Tag = "cloud_cover"
-        ucrReceiverCloudCover.strSelectorHeading = "Numerics"
         ucrReceiverStationName.Tag = "station"
-        ucrReceiverStationName.strSelectorHeading = "Factors"
         ucrReceiverMaxTemp.Tag = "temp_max"
-        ucrReceiverMaxTemp.strSelectorHeading = "Numerics"
         ucrReceiverMinTemp.Tag = "temp_min"
-        ucrReceiverMinTemp.strSelectorHeading = "Numerics"
         ucrReceiverRadiation.Tag = "radiation"
-        ucrReceiverRadiation.strSelectorHeading = "Numerics"
         ucrReceiverRain.Tag = "rain"
-        ucrReceiverRain.strSelectorHeading = "Numerics"
         ucrReceiverSunshine.Tag = "sunshine_hours"
-        ucrReceiverSunshine.strSelectorHeading = "Numerics"
         ucrReceiverWindDirection.Tag = "wind_direction"
-        ucrReceiverWindDirection.strSelectorHeading = "Numerics"
         ucrReceiverWindSpeed.Tag = "wind_speed"
-        ucrReceiverWindSpeed.strSelectorHeading = "Numerics"
         ucrReceiverYear.Tag = "year"
-        ucrReceiverYear.strSelectorHeading = "Numerics"
         ucrReceiverMonth.Tag = "month"
-        ucrReceiverMonth.strSelectorHeading = "Numerics"
         ucrReceiverDay.Tag = "day"
-        ucrReceiverDay.strSelectorHeading = "Numerics"
         ucrReceiverDOY.Tag = "doy"
-        ucrReceiverDOY.strSelectorHeading = "Numerics"
 
         SetRSelector()
     End Sub
