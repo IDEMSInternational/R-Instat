@@ -244,7 +244,7 @@ Public Class dlgHistogram
         End If
     End Sub
 
-    Private Sub CoreControls_ValueChanged() Handles ucrVariablesAsFactorforHist.ControlContentsChanged, ucrSaveHist.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged() Handles ucrVariablesAsFactorforHist.ControlContentsChanged, ucrSaveHist.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
