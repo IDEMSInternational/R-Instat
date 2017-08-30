@@ -194,7 +194,7 @@ Public Class dlgHistogram
             cmdHistogramOptions.Size = New Size(120, 25)
         ElseIf rdoFrequencyPolygon.Checked = True Then
             clsRgeomPlotFunction.SetRCommand("geom_freqpoly")
-            ucrSaveHist.SetPrefix("frequencypolygon")
+            ucrSaveHist.SetPrefix("frequency_polygon")
             ucrFactorReceiver.ChangeParameterName("colour")
             cmdHistogramOptions.Text = "Frequency Polygon Options"
             cmdHistogramOptions.Size = New Size(160, 25)
@@ -238,7 +238,7 @@ Public Class dlgHistogram
         End If
     End Sub
 
-    Private Sub ControlsValueChanged() Handles ucrVariablesAsFactorforHist.ControlContentsChanged, ucrSaveHist.ControlContentsChanged
+    Private Sub CoreControls_ValueChanged() Handles ucrVariablesAsFactorforHist.ControlContentsChanged, ucrSaveHist.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
