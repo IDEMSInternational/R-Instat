@@ -28,7 +28,8 @@ Public Class dlgClimaticBoxPlot
     Private clsXScaleContinuousFunction As New RFunction
     Private clsYScaleContinuousFunction As New RFunction
     Private clsFacetFunction As New RFunction
-    Private clsFacetOp As New ROperator
+    Private clsFacetWrapOp As New ROperator
+    Private clsFacetGridOp As New ROperator
     Private clsThemeFunction As New RFunction
     Private dctThemeFunctions As Dictionary(Of String, RFunction)
     Private bResetSubdialog As Boolean = True
@@ -48,6 +49,7 @@ Public Class dlgClimaticBoxPlot
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrReceiverFacetBy.AddAdditionalCodeParameterPair(clsFacetWrapOp, New RParameter("var1", iNewPosition:=1), iAdditionalPairNo:=1)
         ucrSavePlot.SetRCode(clsBaseOperator, bReset)
 
         ucrSelectorClimaticBoxPlot.SetRCode(clsRggplotFunction, bReset)
@@ -61,8 +63,8 @@ Public Class dlgClimaticBoxPlot
         ucrReceiverYear.SetRCode(clsRaesFunction, bReset)
         ucrVariablesAsFactorForClimaticBoxplot.SetRCode(clsRaesFunction, bReset)
 
-        ucrReceiverFacetBy.SetRCode(clsFacetOp, bReset)
-        ucrReceiver2ndFacet.SetRCode(clsFacetOp, bReset)
+        ucrReceiverFacetBy.SetRCode(clsFacetGridOp, bReset)
+        ucrReceiver2ndFacet.SetRCode(clsFacetGridOp, bReset)
         ucrChkMargins.SetRCode(clsFacetFunction, bReset)
 
     End Sub
@@ -102,25 +104,37 @@ Public Class dlgClimaticBoxPlot
 
         ucrReceiverYear.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiverYear.SetParameter(New RParameter("x", 1))
+        ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
         ucrReceiverYear.SetIncludedDataTypes({"factor"})
-        ucrReceiverYear.strSelectorHeading = "Factors"
+        ucrReceiverYear.strSelectorHeading = "Year Factors"
         ucrReceiverYear.SetParameterIsString()
         ucrReceiverYear.bWithQuotes = False
+        ucrReceiverYear.bAutoFill = True
+        ucrReceiverYear.SetValuesToIgnore({Chr(34) & Chr(34)})
+        ucrReceiverYear.bAddParameterIfEmpty = True
 
         ucrReceiverWithinYear.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiverWithinYear.SetParameter(New RParameter(""))
+        ucrReceiverWithinYear.SetIncludedDataTypes({"factor"})
+        ucrReceiverWithinYear.strSelectorHeading = "Factors"
         ucrReceiverWithinYear.SetParameterIsString()
         ucrReceiverWithinYear.bWithQuotes = False
 
+
         ucrReceiverFacetBy.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiverFacetBy.SetParameter(New RParameter("var1", 0))
+        ucrReceiverFacetBy.SetIncludedDataTypes({"factor"})
+        ucrReceiverFacetBy.strSelectorHeading = "Factors"
         ucrReceiverFacetBy.SetParameterIsString()
         ucrReceiverFacetBy.bWithQuotes = False
 
         ucrReceiver2ndFacet.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiver2ndFacet.SetParameter(New RParameter("var2", 1))
+        ucrReceiver2ndFacet.SetIncludedDataTypes({"factor"})
+        ucrReceiver2ndFacet.strSelectorHeading = "Factors"
         ucrReceiver2ndFacet.SetParameterIsString()
         ucrReceiver2ndFacet.bWithQuotes = False
+        ucrVariablesAsFactorForClimaticBoxplot.SetMeAsReceiver()
 
         ucrChkVarWidth.SetParameter(New RParameter("varwidth"))
         ucrChkVarWidth.SetText("Variable Width")
@@ -164,8 +178,13 @@ Public Class dlgClimaticBoxPlot
         clsRgeomPlotFunction = New RFunction
         clsRaesFunction = New RFunction
         clsFacetFunction = New RFunction
-        clsFacetOp = New ROperator
+        clsFacetWrapOp = New ROperator
+        clsFacetGridOp = New ROperator
 
+        clsFacetFunction.SetPackageName("ggplot2")
+        clsFacetWrapOp.SetOperation("~")
+        clsFacetWrapOp.bForceIncludeOperation = True
+        clsFacetGridOp.SetOperation("~")
         ucrSelectorClimaticBoxPlot.Reset()
         ucrSavePlot.Reset()
         sdgPlots.Reset()
@@ -207,7 +226,7 @@ Public Class dlgClimaticBoxPlot
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrVariablesAsFactorForClimaticBoxplot.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso ucrSavePlot.IsComplete Then
+        If Not ucrVariablesAsFactorForClimaticBoxplot.IsEmpty AndAlso ucrSavePlot.IsComplete Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -245,33 +264,8 @@ Public Class dlgClimaticBoxPlot
         End If
     End Sub
 
-    Private Sub ucrSavePlot_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlContentsChanged, ucrSavePlot.ControlContentsChanged, ucrVariablesAsFactorForClimaticBoxplot.ControlContentsChanged
+    Private Sub ucrSavePlot_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSavePlot.ControlContentsChanged, ucrVariablesAsFactorForClimaticBoxplot.ControlContentsChanged
         TestOKEnabled()
-    End Sub
-
-    Private Sub FacetControls_ControlvalueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFacetBy.ControlValueChanged, ucrReceiver2ndFacet.ControlValueChanged
-        'If ucrChangedControl.Equals(ucrReceiverFacetBy) Then
-        '    ucrReceiverFacetBy.SetMeAsReceiver()
-        'ElseIf ucrChangedControl.Equals(ucrReceiver2ndFacet) Then
-        '    ucrReceiver2ndFacet.SetMeAsReceiver()
-        'End If
-    End Sub
-    Private Sub AddRemoveFacets()
-        If Not ucrReceiverFacetBy.IsEmpty Then
-            clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
-        Else
-            clsBaseOperator.RemoveParameterByName("facets")
-        End If
-    End Sub
-    Private Sub SetFacets()
-        clsFacetFunction.SetPackageName("ggplot2")
-        clsFacetOp.SetOperation("~")
-        If Not ucrReceiverFacetBy.IsEmpty Then
-            clsFacetFunction.SetRCommand("facet_wrap")
-        ElseIf Not ucrReceiverFacetBy.IsEmpty AndAlso Not ucrReceiver2ndFacet.IsEmpty Then
-            clsFacetFunction.SetRCommand("facet_grid")
-        End If
-        clsFacetFunction.AddParameter(clsROperatorParameter:=clsFacetOp)
     End Sub
 
     Private Sub cmdBoxPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdBoxPlotOptions.Click
@@ -298,12 +292,21 @@ Public Class dlgClimaticBoxPlot
         End If
     End Sub
 
-    Private Sub SecondFacetReceiverEnabled()
-        If ucrReceiverFacetBy.IsEmpty() Then
-            ucrReceiver2ndFacet.Clear()
-            ucrReceiver2ndFacet.Enabled = False
+    Private Sub AddRemoveFacets()
+        If Not ucrReceiverFacetBy.IsEmpty Then
+            clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
         Else
-            ucrReceiver2ndFacet.Enabled = True
+            clsBaseOperator.RemoveParameterByName("facets")
+        End If
+    End Sub
+
+    Private Sub SetFacets()
+        If Not ucrReceiverFacetBy.IsEmpty AndAlso ucrReceiver2ndFacet.IsEmpty Then
+            clsFacetFunction.SetRCommand("facet_wrap")
+            clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetWrapOp, bIncludeArgumentName:=False)
+        ElseIf Not ucrReceiverFacetBy.IsEmpty AndAlso Not ucrReceiver2ndFacet.IsEmpty Then
+            clsFacetFunction.SetRCommand("facet_grid")
+            clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetGridOp, bIncludeArgumentName:=False)
         End If
     End Sub
 
@@ -312,6 +315,14 @@ Public Class dlgClimaticBoxPlot
         SetFacets()
         AddRemoveFacets()
         MarginsEnabled()
+    End Sub
+    Private Sub SecondFacetReceiverEnabled()
+        If ucrReceiverFacetBy.IsEmpty() Then
+            ucrReceiver2ndFacet.Clear()
+            ucrReceiver2ndFacet.Enabled = False
+        Else
+            ucrReceiver2ndFacet.Enabled = True
+        End If
     End Sub
 
     Private Sub MarginsEnabled()
