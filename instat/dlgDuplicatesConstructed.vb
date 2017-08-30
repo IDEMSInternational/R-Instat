@@ -51,17 +51,21 @@ Public Class dlgDuplicatesConstructed
         ucrPnlOptions.AddFunctionNamesCondition(rdoSuccessiveValues, frmMain.clsRLink.strInstatDataObject & "$duplicated_cases")
 
         ucrPnlOptions.AddToLinkedControls(ucrReceiverForDuplicates, {rdoSelectedVariables, rdoSuccessiveValues}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls(ucrPnlDuplicates, {rdoSelectedVariables, rdoDataFrame}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrPnlDuplicates, {rdoSelectedVariables, rdoDataFrame}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoAllDuplicateCases)
         ucrPnlOptions.AddToLinkedControls(ucrChkOmitValues, {rdoSuccessiveValues}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkOmitValues.SetText("Omit Value(s)")
+
         ucrPnlOptions.AddToLinkedControls(ucrChkTolerance, {rdoSuccessiveValues}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverForDuplicates.SetLinkedDisplayControl(lblSelectedVariable)
 
-        ucrChkOmitValues.AddFunctionNamesCondition(True, {frmMain.clsRLink.strInstatDataObject & "$duplicated_cases"})
-        ucrChkOmitValues.AddFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$duplicated_cases"}, False)
-        ucrChkOmitValues.SetText("Omit Value(s)")
+        ucrChkOmitValues.AddParameterValuesCondition(False, "ignore", "NULL", True)
+        ucrChkOmitValues.AddParameterValuesCondition(True, "ignore", "NULL", False)
+
+
         ucrChkOmitValues.AddToLinkedControls(ucrNudOmit, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrChkOmitValues.AddToLinkedControls(ucrInputConditions, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="==")
         ucrChkOmitValues.SetLinkedDisplayControl(grpOptions)
+
         ucrInputTolerance.SetParameter(New RParameter("tolerance", 0))
         ucrInputTolerance.AddQuotesIfUnrecognised = False
 
@@ -119,6 +123,7 @@ Public Class dlgDuplicatesConstructed
         clsDuplicated.SetRCommand("duplicated")
         clsDuplicated.AddParameter("x", clsRFunctionParameter:=ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
 
+        clsStreakFunction.AddParameter("ignore", "NULL")
         clsDuplicated2.SetPackageName("questionr")
         clsDuplicated2.SetRCommand("duplicated2")
         clsDuplicated2.AddParameter("x", clsRFunctionParameter:=ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
@@ -144,7 +149,7 @@ Public Class dlgDuplicatesConstructed
         ucrSelectorDuplicateswithVariables.SetRCode(clsStreakFunction, bReset)
         ucrReceiverForDuplicates.SetRCode(clsDuplicated, bReset)
         ucrNewColumnName.SetRCode(clsDuplicated, bReset)
-        ucrPnlDuplicates.SetRCode(clsDuplicated2, bReset)
+        ucrPnlDuplicates.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         If bReset Then
             ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         End If
@@ -165,21 +170,23 @@ Public Class dlgDuplicatesConstructed
     Private Sub SetIgnoreVals()
         If ucrChkOmitValues.Checked Then
             If Not ucrReceiverForDuplicates.IsEmpty Then
-                clsSubsetCol.AddParameter("col_name", ucrReceiverForDuplicates.GetVariableNames())
-                clsSubsetCol.AddParameter("data_name", Chr(34) & ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-                frmMain.clsRLink.RunInternalScriptGetValue(clsSubsetCol.ToScript)
-
                 If Not ucrInputConditions.IsEmpty AndAlso ucrNudOmit.GetText <> "" Then
+                    clsSubsetCol.AddParameter("col_name", ucrReceiverForDuplicates.GetVariableNames())
+                    clsSubsetCol.AddParameter("data_name", Chr(34) & ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+                    frmMain.clsRLink.RunInternalScriptGetValue(clsSubsetCol.ToScript)
+
                     clsStreakFunction.AddParameter("ignore", clsSubsetCol.ToScript & "[" & clsSubsetCol.ToScript & ucrInputConditions.GetText & ucrNudOmit.GetText & "]")
                 Else
-                    clsStreakFunction.RemoveParameterByName("ignore")
+                    clsSubsetCol.RemoveParameterByName("col_name")
+                    clsSubsetCol.RemoveParameterByName("data_name")
+                    clsStreakFunction.AddParameter("ignore", "NULL")
                 End If
             Else
-                clsStreakFunction.RemoveParameterByName("ignore")
-                clsSubsetCol.RemoveParameterByName("col_name")
-                clsSubsetCol.RemoveParameterByName("data_name")
+                clsStreakFunction.AddParameter("ignore", "NULL")
             End If
         Else
+            clsSubsetCol.RemoveParameterByName("col_name")
+            clsSubsetCol.RemoveParameterByName("data_name")
             clsStreakFunction.AddParameter("ignore", "NULL")
         End If
     End Sub
