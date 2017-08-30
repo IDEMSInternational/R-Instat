@@ -323,6 +323,8 @@ Public Class ucrReceiver
         Select Case strType
             Case "column"
                 strItemsParameterNameInRFunction = "col_names"
+            Case "dataframe"
+                strItemsParameterNameInRFunction = "data_name"
             Case "metadata"
                 'TODO what should this be?
                 strItemsParameterNameInRFunction = ""
