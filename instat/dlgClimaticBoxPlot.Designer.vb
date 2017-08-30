@@ -78,7 +78,7 @@ Partial Class dlgClimaticBoxPlot
         Me.grpLayout.Controls.Add(Me.ucrPnlLayoutOptions)
         Me.grpLayout.Location = New System.Drawing.Point(6, 373)
         Me.grpLayout.Name = "grpLayout"
-        Me.grpLayout.Size = New System.Drawing.Size(124, 60)
+        Me.grpLayout.Size = New System.Drawing.Size(124, 61)
         Me.grpLayout.TabIndex = 16
         Me.grpLayout.TabStop = False
         Me.grpLayout.Text = "Layout"
@@ -99,7 +99,7 @@ Partial Class dlgClimaticBoxPlot
         '
         Me.rdoYearThenData.AutoSize = True
         Me.rdoYearThenData.Enabled = False
-        Me.rdoYearThenData.Location = New System.Drawing.Point(4, 19)
+        Me.rdoYearThenData.Location = New System.Drawing.Point(6, 19)
         Me.rdoYearThenData.Name = "rdoYearThenData"
         Me.rdoYearThenData.Size = New System.Drawing.Size(101, 17)
         Me.rdoYearThenData.TabIndex = 0
@@ -268,9 +268,9 @@ Partial Class dlgClimaticBoxPlot
         '
         'ucrPnlLayoutOptions
         '
-        Me.ucrPnlLayoutOptions.Location = New System.Drawing.Point(4, 21)
+        Me.ucrPnlLayoutOptions.Location = New System.Drawing.Point(4, 18)
         Me.ucrPnlLayoutOptions.Name = "ucrPnlLayoutOptions"
-        Me.ucrPnlLayoutOptions.Size = New System.Drawing.Size(114, 35)
+        Me.ucrPnlLayoutOptions.Size = New System.Drawing.Size(108, 39)
         Me.ucrPnlLayoutOptions.TabIndex = 38
         '
         'ucrReceiverWithinYear
