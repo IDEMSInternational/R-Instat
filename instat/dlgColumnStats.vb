@@ -100,6 +100,7 @@ Public Class dlgColumnStats
         clsDefaultFunction.AddParameter("silent", "TRUE")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
         bResetSubdialog = True
+        bResetSubdialog = True
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -141,12 +142,19 @@ Public Class dlgColumnStats
 
     Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
         sdgSummaries.SetRFunction(clsSummariesList, bResetSubdialog)
-        bResetSubdialog = False
         sdgSummaries.ShowDialog()
+        bResetSubdialog = False
         TestOKEnabled()
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariables.ControlContentsChanged, ucrReceiverByFactor.ControlContentsChanged
+        TestOKEnabled()
+    End Sub
+
+    Private Sub cmdProportionsPercentages_Click(sender As Object, e As EventArgs) Handles cmdProportionsPercentages.Click
+        sdgProportionsPercentages.SetRFunction(clsDefaultFunction, bResetSubdialog)
+        sdgProportionsPercentages.ShowDialog()
+        bResetSubdialog = False
         TestOKEnabled()
     End Sub
 End Class
