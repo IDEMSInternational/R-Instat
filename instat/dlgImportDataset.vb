@@ -580,6 +580,7 @@ Public Class dlgImportDataset
                     GridPreviewVisible(True)
                     LinesToPreviewVisible(True)
                     lblNoPreview.Hide()
+                    cmdRefreshPreview.Enabled = True
                 Else
                     lblCannotImport.Show()
                     bCanImport = False
@@ -590,12 +591,14 @@ Public Class dlgImportDataset
                 lblNoPreview.Hide()
                 GridPreviewVisible(False)
                 LinesToPreviewVisible(False)
+                cmdRefreshPreview.Enabled = False
             Else
                 bCanImport = True
                 lblCannotImport.Hide()
                 lblNoPreview.Show()
                 GridPreviewVisible(False)
                 LinesToPreviewVisible(False)
+                cmdRefreshPreview.Enabled = False
             End If
             Cursor = Cursors.Default
             TestOkEnabled()
@@ -705,6 +708,11 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub ucrNudPreviewLines_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudPreviewLines.ControlContentsChanged
+        RefreshFilePreview()
+        RefreshFrameView()
+    End Sub
+
+    Private Sub cmdRefreshPreview_Click(sender As Object, e As EventArgs) Handles cmdRefreshPreview.Click
         RefreshFilePreview()
         RefreshFrameView()
     End Sub
