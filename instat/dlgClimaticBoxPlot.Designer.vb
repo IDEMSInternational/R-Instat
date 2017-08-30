@@ -22,28 +22,26 @@ Partial Class dlgClimaticBoxPlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.lblWithinYear = New System.Windows.Forms.Label()
-        Me.lblYear = New System.Windows.Forms.Label()
+        Me.lblXVariable = New System.Windows.Forms.Label()
         Me.grpLayout = New System.Windows.Forms.GroupBox()
         Me.rdoDataThenYear = New System.Windows.Forms.RadioButton()
         Me.rdoYearThenData = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlLayoutOptions = New instat.UcrPanel()
         Me.cmdBoxPlotOptions = New System.Windows.Forms.Button()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.rdoViolin = New System.Windows.Forms.RadioButton()
         Me.rdoJitter = New System.Windows.Forms.RadioButton()
         Me.rdoBoxplot = New System.Windows.Forms.RadioButton()
         Me.grpFacets = New System.Windows.Forms.GroupBox()
-        Me.lblSecondFacet = New System.Windows.Forms.Label()
-        Me.lblFacetBy = New System.Windows.Forms.Label()
-        Me.ucrChkVerticalXTickMarkers = New instat.ucrCheck()
         Me.ucrReceiver2ndFacet = New instat.ucrReceiverSingle()
         Me.ucrReceiverFacetBy = New instat.ucrReceiverSingle()
         Me.ucrChkMargins = New instat.ucrCheck()
+        Me.lblSecondFacet = New System.Windows.Forms.Label()
+        Me.lblFacetBy = New System.Windows.Forms.Label()
+        Me.ucrChkVerticalXTickMarkers = New instat.ucrCheck()
         Me.ucrVariablesAsFactorForClimaticBoxplot = New instat.ucrVariablesAsFactor()
         Me.ucrPnlPlots = New instat.UcrPanel()
-        Me.ucrPnlLayoutOptions = New instat.UcrPanel()
-        Me.ucrReceiverWithinYear = New instat.ucrReceiverSingle()
-        Me.ucrReceiverYear = New instat.ucrReceiverSingle()
+        Me.ucrReceiverXVariable = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSavePlot = New instat.ucrSave()
         Me.ucrChkHorizontalBoxplot = New instat.ucrCheck()
@@ -53,23 +51,14 @@ Partial Class dlgClimaticBoxPlot
         Me.grpFacets.SuspendLayout()
         Me.SuspendLayout()
         '
-        'lblWithinYear
+        'lblXVariable
         '
-        Me.lblWithinYear.AutoSize = True
-        Me.lblWithinYear.Location = New System.Drawing.Point(251, 246)
-        Me.lblWithinYear.Name = "lblWithinYear"
-        Me.lblWithinYear.Size = New System.Drawing.Size(65, 13)
-        Me.lblWithinYear.TabIndex = 8
-        Me.lblWithinYear.Text = "Within Year:"
-        '
-        'lblYear
-        '
-        Me.lblYear.AutoSize = True
-        Me.lblYear.Location = New System.Drawing.Point(251, 203)
-        Me.lblYear.Name = "lblYear"
-        Me.lblYear.Size = New System.Drawing.Size(68, 13)
-        Me.lblYear.TabIndex = 6
-        Me.lblYear.Text = "Year:(Factor)"
+        Me.lblXVariable.AutoSize = True
+        Me.lblXVariable.Location = New System.Drawing.Point(251, 201)
+        Me.lblXVariable.Name = "lblXVariable"
+        Me.lblXVariable.Size = New System.Drawing.Size(39, 13)
+        Me.lblXVariable.TabIndex = 6
+        Me.lblXVariable.Text = "X Axis:"
         '
         'grpLayout
         '
@@ -79,7 +68,7 @@ Partial Class dlgClimaticBoxPlot
         Me.grpLayout.Location = New System.Drawing.Point(6, 373)
         Me.grpLayout.Name = "grpLayout"
         Me.grpLayout.Size = New System.Drawing.Size(124, 61)
-        Me.grpLayout.TabIndex = 16
+        Me.grpLayout.TabIndex = 14
         Me.grpLayout.TabStop = False
         Me.grpLayout.Text = "Layout"
         '
@@ -107,12 +96,19 @@ Partial Class dlgClimaticBoxPlot
         Me.rdoYearThenData.Text = "Year Then Data"
         Me.rdoYearThenData.UseVisualStyleBackColor = True
         '
+        'ucrPnlLayoutOptions
+        '
+        Me.ucrPnlLayoutOptions.Location = New System.Drawing.Point(4, 18)
+        Me.ucrPnlLayoutOptions.Name = "ucrPnlLayoutOptions"
+        Me.ucrPnlLayoutOptions.Size = New System.Drawing.Size(108, 39)
+        Me.ucrPnlLayoutOptions.TabIndex = 38
+        '
         'cmdBoxPlotOptions
         '
         Me.cmdBoxPlotOptions.Location = New System.Drawing.Point(10, 241)
         Me.cmdBoxPlotOptions.Name = "cmdBoxPlotOptions"
         Me.cmdBoxPlotOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdBoxPlotOptions.TabIndex = 10
+        Me.cmdBoxPlotOptions.TabIndex = 8
         Me.cmdBoxPlotOptions.Tag = "Boxplot_Options"
         Me.cmdBoxPlotOptions.Text = "Boxplot Options"
         Me.cmdBoxPlotOptions.UseVisualStyleBackColor = True
@@ -122,7 +118,7 @@ Partial Class dlgClimaticBoxPlot
         Me.cmdOptions.Location = New System.Drawing.Point(10, 272)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdOptions.TabIndex = 11
+        Me.cmdOptions.TabIndex = 9
         Me.cmdOptions.Tag = "Options"
         Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
@@ -182,54 +178,28 @@ Partial Class dlgClimaticBoxPlot
         Me.grpFacets.Controls.Add(Me.ucrChkMargins)
         Me.grpFacets.Controls.Add(Me.lblSecondFacet)
         Me.grpFacets.Controls.Add(Me.lblFacetBy)
-        Me.grpFacets.Location = New System.Drawing.Point(249, 291)
+        Me.grpFacets.Location = New System.Drawing.Point(254, 241)
         Me.grpFacets.Name = "grpFacets"
         Me.grpFacets.Size = New System.Drawing.Size(149, 138)
-        Me.grpFacets.TabIndex = 15
+        Me.grpFacets.TabIndex = 10
         Me.grpFacets.TabStop = False
         Me.grpFacets.Text = "Facets"
         '
-        'lblSecondFacet
-        '
-        Me.lblSecondFacet.AutoSize = True
-        Me.lblSecondFacet.Location = New System.Drawing.Point(2, 68)
-        Me.lblSecondFacet.Name = "lblSecondFacet"
-        Me.lblSecondFacet.Size = New System.Drawing.Size(77, 13)
-        Me.lblSecondFacet.TabIndex = 2
-        Me.lblSecondFacet.Text = "Second Facet:"
-        '
-        'lblFacetBy
-        '
-        Me.lblFacetBy.AutoSize = True
-        Me.lblFacetBy.Location = New System.Drawing.Point(2, 25)
-        Me.lblFacetBy.Name = "lblFacetBy"
-        Me.lblFacetBy.Size = New System.Drawing.Size(52, 13)
-        Me.lblFacetBy.TabIndex = 0
-        Me.lblFacetBy.Text = "Facet By:"
-        '
-        'ucrChkVerticalXTickMarkers
-        '
-        Me.ucrChkVerticalXTickMarkers.Checked = False
-        Me.ucrChkVerticalXTickMarkers.Location = New System.Drawing.Point(10, 351)
-        Me.ucrChkVerticalXTickMarkers.Name = "ucrChkVerticalXTickMarkers"
-        Me.ucrChkVerticalXTickMarkers.Size = New System.Drawing.Size(210, 20)
-        Me.ucrChkVerticalXTickMarkers.TabIndex = 14
-        '
         'ucrReceiver2ndFacet
         '
-        Me.ucrReceiver2ndFacet.frmParent = Nothing
+        Me.ucrReceiver2ndFacet.frmParent = Me
         Me.ucrReceiver2ndFacet.Location = New System.Drawing.Point(5, 86)
         Me.ucrReceiver2ndFacet.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiver2ndFacet.Name = "ucrReceiver2ndFacet"
         Me.ucrReceiver2ndFacet.Selector = Nothing
         Me.ucrReceiver2ndFacet.Size = New System.Drawing.Size(143, 20)
         Me.ucrReceiver2ndFacet.strNcFilePath = ""
-        Me.ucrReceiver2ndFacet.TabIndex = 4
+        Me.ucrReceiver2ndFacet.TabIndex = 3
         Me.ucrReceiver2ndFacet.ucrSelector = Nothing
         '
         'ucrReceiverFacetBy
         '
-        Me.ucrReceiverFacetBy.frmParent = Nothing
+        Me.ucrReceiverFacetBy.frmParent = Me
         Me.ucrReceiverFacetBy.Location = New System.Drawing.Point(5, 38)
         Me.ucrReceiverFacetBy.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFacetBy.Name = "ucrReceiverFacetBy"
@@ -245,7 +215,33 @@ Partial Class dlgClimaticBoxPlot
         Me.ucrChkMargins.Location = New System.Drawing.Point(5, 112)
         Me.ucrChkMargins.Name = "ucrChkMargins"
         Me.ucrChkMargins.Size = New System.Drawing.Size(143, 20)
-        Me.ucrChkMargins.TabIndex = 0
+        Me.ucrChkMargins.TabIndex = 4
+        '
+        'lblSecondFacet
+        '
+        Me.lblSecondFacet.AutoSize = True
+        Me.lblSecondFacet.Location = New System.Drawing.Point(2, 70)
+        Me.lblSecondFacet.Name = "lblSecondFacet"
+        Me.lblSecondFacet.Size = New System.Drawing.Size(77, 13)
+        Me.lblSecondFacet.TabIndex = 2
+        Me.lblSecondFacet.Text = "Second Facet:"
+        '
+        'lblFacetBy
+        '
+        Me.lblFacetBy.AutoSize = True
+        Me.lblFacetBy.Location = New System.Drawing.Point(2, 23)
+        Me.lblFacetBy.Name = "lblFacetBy"
+        Me.lblFacetBy.Size = New System.Drawing.Size(52, 13)
+        Me.lblFacetBy.TabIndex = 0
+        Me.lblFacetBy.Text = "Facet By:"
+        '
+        'ucrChkVerticalXTickMarkers
+        '
+        Me.ucrChkVerticalXTickMarkers.Checked = False
+        Me.ucrChkVerticalXTickMarkers.Location = New System.Drawing.Point(10, 351)
+        Me.ucrChkVerticalXTickMarkers.Name = "ucrChkVerticalXTickMarkers"
+        Me.ucrChkVerticalXTickMarkers.Size = New System.Drawing.Size(210, 20)
+        Me.ucrChkVerticalXTickMarkers.TabIndex = 13
         '
         'ucrVariablesAsFactorForClimaticBoxplot
         '
@@ -266,50 +262,31 @@ Partial Class dlgClimaticBoxPlot
         Me.ucrPnlPlots.Size = New System.Drawing.Size(322, 35)
         Me.ucrPnlPlots.TabIndex = 0
         '
-        'ucrPnlLayoutOptions
+        'ucrReceiverXVariable
         '
-        Me.ucrPnlLayoutOptions.Location = New System.Drawing.Point(4, 18)
-        Me.ucrPnlLayoutOptions.Name = "ucrPnlLayoutOptions"
-        Me.ucrPnlLayoutOptions.Size = New System.Drawing.Size(108, 39)
-        Me.ucrPnlLayoutOptions.TabIndex = 38
-        '
-        'ucrReceiverWithinYear
-        '
-        Me.ucrReceiverWithinYear.frmParent = Me
-        Me.ucrReceiverWithinYear.Location = New System.Drawing.Point(254, 259)
-        Me.ucrReceiverWithinYear.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverWithinYear.Name = "ucrReceiverWithinYear"
-        Me.ucrReceiverWithinYear.Selector = Nothing
-        Me.ucrReceiverWithinYear.Size = New System.Drawing.Size(143, 20)
-        Me.ucrReceiverWithinYear.strNcFilePath = ""
-        Me.ucrReceiverWithinYear.TabIndex = 9
-        Me.ucrReceiverWithinYear.ucrSelector = Nothing
-        '
-        'ucrReceiverYear
-        '
-        Me.ucrReceiverYear.frmParent = Me
-        Me.ucrReceiverYear.Location = New System.Drawing.Point(254, 216)
-        Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverYear.Name = "ucrReceiverYear"
-        Me.ucrReceiverYear.Selector = Nothing
-        Me.ucrReceiverYear.Size = New System.Drawing.Size(143, 20)
-        Me.ucrReceiverYear.strNcFilePath = ""
-        Me.ucrReceiverYear.TabIndex = 7
-        Me.ucrReceiverYear.ucrSelector = Nothing
+        Me.ucrReceiverXVariable.frmParent = Me
+        Me.ucrReceiverXVariable.Location = New System.Drawing.Point(254, 216)
+        Me.ucrReceiverXVariable.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverXVariable.Name = "ucrReceiverXVariable"
+        Me.ucrReceiverXVariable.Selector = Nothing
+        Me.ucrReceiverXVariable.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverXVariable.strNcFilePath = ""
+        Me.ucrReceiverXVariable.TabIndex = 7
+        Me.ucrReceiverXVariable.ucrSelector = Nothing
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(10, 467)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
-        Me.ucrBase.TabIndex = 18
+        Me.ucrBase.TabIndex = 16
         '
         'ucrSavePlot
         '
         Me.ucrSavePlot.Location = New System.Drawing.Point(10, 439)
         Me.ucrSavePlot.Name = "ucrSavePlot"
         Me.ucrSavePlot.Size = New System.Drawing.Size(254, 24)
-        Me.ucrSavePlot.TabIndex = 17
+        Me.ucrSavePlot.TabIndex = 15
         '
         'ucrChkHorizontalBoxplot
         '
@@ -317,7 +294,7 @@ Partial Class dlgClimaticBoxPlot
         Me.ucrChkHorizontalBoxplot.Location = New System.Drawing.Point(10, 327)
         Me.ucrChkHorizontalBoxplot.Name = "ucrChkHorizontalBoxplot"
         Me.ucrChkHorizontalBoxplot.Size = New System.Drawing.Size(210, 20)
-        Me.ucrChkHorizontalBoxplot.TabIndex = 13
+        Me.ucrChkHorizontalBoxplot.TabIndex = 12
         '
         'ucrChkVarWidth
         '
@@ -325,7 +302,7 @@ Partial Class dlgClimaticBoxPlot
         Me.ucrChkVarWidth.Location = New System.Drawing.Point(10, 303)
         Me.ucrChkVarWidth.Name = "ucrChkVarWidth"
         Me.ucrChkVarWidth.Size = New System.Drawing.Size(210, 20)
-        Me.ucrChkVarWidth.TabIndex = 12
+        Me.ucrChkVarWidth.TabIndex = 11
         '
         'ucrSelectorClimaticBoxPlot
         '
@@ -352,10 +329,8 @@ Partial Class dlgClimaticBoxPlot
         Me.Controls.Add(Me.cmdBoxPlotOptions)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.grpLayout)
-        Me.Controls.Add(Me.ucrReceiverWithinYear)
-        Me.Controls.Add(Me.lblWithinYear)
-        Me.Controls.Add(Me.lblYear)
-        Me.Controls.Add(Me.ucrReceiverYear)
+        Me.Controls.Add(Me.lblXVariable)
+        Me.Controls.Add(Me.ucrReceiverXVariable)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSavePlot)
         Me.Controls.Add(Me.ucrChkHorizontalBoxplot)
@@ -380,10 +355,8 @@ Partial Class dlgClimaticBoxPlot
     Friend WithEvents ucrChkVarWidth As ucrCheck
     Friend WithEvents ucrSelectorClimaticBoxPlot As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrReceiverWithinYear As ucrReceiverSingle
-    Friend WithEvents lblWithinYear As Label
-    Friend WithEvents lblYear As Label
-    Friend WithEvents ucrReceiverYear As ucrReceiverSingle
+    Friend WithEvents lblXVariable As Label
+    Friend WithEvents ucrReceiverXVariable As ucrReceiverSingle
     Friend WithEvents grpLayout As GroupBox
     Friend WithEvents cmdBoxPlotOptions As Button
     Friend WithEvents cmdOptions As Button
