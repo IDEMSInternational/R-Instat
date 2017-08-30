@@ -62,7 +62,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.lblYvariable.Location = New System.Drawing.Point(253, 75)
         Me.lblYvariable.Name = "lblYvariable"
         Me.lblYvariable.Size = New System.Drawing.Size(58, 13)
-        Me.lblYvariable.TabIndex = 4
+        Me.lblYvariable.TabIndex = 5
         Me.lblYvariable.Tag = "Y_Variable:"
         Me.lblYvariable.Text = "Y Variable:"
         '
@@ -72,7 +72,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.lblFactor.Location = New System.Drawing.Point(253, 121)
         Me.lblFactor.Name = "lblFactor"
         Me.lblFactor.Size = New System.Drawing.Size(40, 13)
-        Me.lblFactor.TabIndex = 6
+        Me.lblFactor.TabIndex = 7
         Me.lblFactor.Tag = "Factor:"
         Me.lblFactor.Text = "Factor:"
         '
@@ -91,7 +91,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.cmdOptions.Location = New System.Drawing.Point(10, 257)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(121, 23)
-        Me.cmdOptions.TabIndex = 11
+        Me.cmdOptions.TabIndex = 12
         Me.cmdOptions.Tag = "Options"
         Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
@@ -102,7 +102,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.lblSecondFactor.Location = New System.Drawing.Point(253, 168)
         Me.lblSecondFactor.Name = "lblSecondFactor"
         Me.lblSecondFactor.Size = New System.Drawing.Size(80, 13)
-        Me.lblSecondFactor.TabIndex = 8
+        Me.lblSecondFactor.TabIndex = 9
         Me.lblSecondFactor.Tag = "Second+Factor:"
         Me.lblSecondFactor.Text = "Second Factor:"
         '
@@ -111,7 +111,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.cmdPieChartOptions.Location = New System.Drawing.Point(10, 228)
         Me.cmdPieChartOptions.Name = "cmdPieChartOptions"
         Me.cmdPieChartOptions.Size = New System.Drawing.Size(121, 23)
-        Me.cmdPieChartOptions.TabIndex = 10
+        Me.cmdPieChartOptions.TabIndex = 11
         Me.cmdPieChartOptions.Tag = "Pie_Chart_Options"
         Me.cmdPieChartOptions.Text = "Pie Chart Options"
         Me.cmdPieChartOptions.UseVisualStyleBackColor = True
@@ -160,7 +160,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.rdoTable.Location = New System.Drawing.Point(261, 10)
         Me.rdoTable.Name = "rdoTable"
         Me.rdoTable.Size = New System.Drawing.Size(100, 27)
-        Me.rdoTable.TabIndex = 0
+        Me.rdoTable.TabIndex = 3
         Me.rdoTable.TabStop = True
         Me.rdoTable.Text = "Tables"
         Me.rdoTable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -171,7 +171,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.ucrSaveSummaryBar.Location = New System.Drawing.Point(10, 288)
         Me.ucrSaveSummaryBar.Name = "ucrSaveSummaryBar"
         Me.ucrSaveSummaryBar.Size = New System.Drawing.Size(255, 24)
-        Me.ucrSaveSummaryBar.TabIndex = 12
+        Me.ucrSaveSummaryBar.TabIndex = 13
         '
         'ucrReceiverSecondFactor
         '
@@ -182,7 +182,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.ucrReceiverSecondFactor.Selector = Nothing
         Me.ucrReceiverSecondFactor.Size = New System.Drawing.Size(120, 26)
         Me.ucrReceiverSecondFactor.strNcFilePath = ""
-        Me.ucrReceiverSecondFactor.TabIndex = 9
+        Me.ucrReceiverSecondFactor.TabIndex = 10
         Me.ucrReceiverSecondFactor.ucrSelector = Nothing
         '
         'ucrReceiverFactor
@@ -194,7 +194,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.ucrReceiverFactor.Selector = Nothing
         Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverFactor.strNcFilePath = ""
-        Me.ucrReceiverFactor.TabIndex = 7
+        Me.ucrReceiverFactor.TabIndex = 8
         Me.ucrReceiverFactor.ucrSelector = Nothing
         '
         'ucrReceiverYVariable
@@ -206,7 +206,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.ucrReceiverYVariable.Selector = Nothing
         Me.ucrReceiverYVariable.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverYVariable.strNcFilePath = ""
-        Me.ucrReceiverYVariable.TabIndex = 5
+        Me.ucrReceiverYVariable.TabIndex = 6
         Me.ucrReceiverYVariable.ucrSelector = Nothing
         '
         'ucrSummaryBarSelector
@@ -217,14 +217,14 @@ Partial Class dlgSummaryBarOrPieChart
         Me.ucrSummaryBarSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSummaryBarSelector.Name = "ucrSummaryBarSelector"
         Me.ucrSummaryBarSelector.Size = New System.Drawing.Size(242, 192)
-        Me.ucrSummaryBarSelector.TabIndex = 3
+        Me.ucrSummaryBarSelector.TabIndex = 4
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(10, 316)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 13
+        Me.ucrBase.TabIndex = 14
         '
         'ucrPnlOptions
         '
