@@ -260,8 +260,4 @@ Public Class dlgBarAndPieChart
     Private Sub CoreControls_ContentsChanged() Handles ucrReceiverFactor.ControlContentsChanged, ucrSaveBar.ControlContentsChanged
         TestOkEnabled()
     End Sub
-
-    Private Sub CoreControls_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveBar.ControlContentsChanged, ucrReceiverFactor.ControlContentsChanged
-
-    End Sub
 End Class
