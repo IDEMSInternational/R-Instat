@@ -87,6 +87,7 @@ Public Class dlgColumnStats
         clsSummariesList = New RFunction
 
         ucrSelectorForColumnStatistics.Reset()
+        sdgProportionsPercentages.ucrSelectorProportionsPercentiles.Reset()
         ucrReceiverSelectedVariables.SetMeAsReceiver()
 
         clsSummariesList.SetRCommand("c")
