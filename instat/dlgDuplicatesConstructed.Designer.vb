@@ -31,11 +31,6 @@ Partial Class dlgDuplicatesConstructed
         Me.ttDuplicates = New System.Windows.Forms.ToolTip(Me.components)
         Me.rdoSuccessiveValues = New System.Windows.Forms.RadioButton()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
-        Me.ucrInputTolerance = New instat.ucrInputTextBox()
-        Me.ucrChkTolerance = New instat.ucrCheck()
-        Me.ucrNudOmit = New instat.ucrNud()
-        Me.ucrChkOmitValues = New instat.ucrCheck()
-        Me.ucrInputConditions = New instat.ucrInputComboBox()
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
         Me.ucrReceiverForDuplicates = New instat.ucrReceiverSingle()
         Me.ucrPnlDuplicates = New instat.UcrPanel()
@@ -43,6 +38,11 @@ Partial Class dlgDuplicatesConstructed
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorDuplicateswithVariables = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrInputTolerance = New instat.ucrInputTextBox()
+        Me.ucrChkTolerance = New instat.ucrCheck()
+        Me.ucrNudOmit = New instat.ucrNud()
+        Me.ucrChkOmitValues = New instat.ucrCheck()
+        Me.ucrInputConditions = New instat.ucrInputComboBox()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -136,57 +136,10 @@ Partial Class dlgDuplicatesConstructed
         Me.grpOptions.Controls.Add(Me.ucrInputConditions)
         Me.grpOptions.Location = New System.Drawing.Point(10, 235)
         Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.Size = New System.Drawing.Size(337, 124)
+        Me.grpOptions.Size = New System.Drawing.Size(267, 124)
         Me.grpOptions.TabIndex = 11
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
-        '
-        'ucrInputTolerance
-        '
-        Me.ucrInputTolerance.AddQuotesIfUnrecognised = True
-        Me.ucrInputTolerance.IsMultiline = False
-        Me.ucrInputTolerance.IsReadOnly = False
-        Me.ucrInputTolerance.Location = New System.Drawing.Point(6, 86)
-        Me.ucrInputTolerance.Name = "ucrInputTolerance"
-        Me.ucrInputTolerance.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputTolerance.TabIndex = 4
-        '
-        'ucrChkTolerance
-        '
-        Me.ucrChkTolerance.Checked = False
-        Me.ucrChkTolerance.Location = New System.Drawing.Point(6, 62)
-        Me.ucrChkTolerance.Name = "ucrChkTolerance"
-        Me.ucrChkTolerance.Size = New System.Drawing.Size(135, 20)
-        Me.ucrChkTolerance.TabIndex = 3
-        '
-        'ucrNudOmit
-        '
-        Me.ucrNudOmit.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudOmit.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudOmit.Location = New System.Drawing.Point(148, 38)
-        Me.ucrNudOmit.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudOmit.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudOmit.Name = "ucrNudOmit"
-        Me.ucrNudOmit.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudOmit.TabIndex = 2
-        Me.ucrNudOmit.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkOmitValues
-        '
-        Me.ucrChkOmitValues.Checked = False
-        Me.ucrChkOmitValues.Location = New System.Drawing.Point(6, 12)
-        Me.ucrChkOmitValues.Name = "ucrChkOmitValues"
-        Me.ucrChkOmitValues.Size = New System.Drawing.Size(135, 20)
-        Me.ucrChkOmitValues.TabIndex = 0
-        '
-        'ucrInputConditions
-        '
-        Me.ucrInputConditions.AddQuotesIfUnrecognised = True
-        Me.ucrInputConditions.IsReadOnly = False
-        Me.ucrInputConditions.Location = New System.Drawing.Point(6, 38)
-        Me.ucrInputConditions.Name = "ucrInputConditions"
-        Me.ucrInputConditions.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputConditions.TabIndex = 1
         '
         'lblSelectedVariable
         '
@@ -247,6 +200,53 @@ Partial Class dlgDuplicatesConstructed
         Me.ucrSelectorDuplicateswithVariables.Name = "ucrSelectorDuplicateswithVariables"
         Me.ucrSelectorDuplicateswithVariables.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorDuplicateswithVariables.TabIndex = 4
+        '
+        'ucrInputTolerance
+        '
+        Me.ucrInputTolerance.AddQuotesIfUnrecognised = True
+        Me.ucrInputTolerance.IsMultiline = False
+        Me.ucrInputTolerance.IsReadOnly = False
+        Me.ucrInputTolerance.Location = New System.Drawing.Point(6, 86)
+        Me.ucrInputTolerance.Name = "ucrInputTolerance"
+        Me.ucrInputTolerance.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputTolerance.TabIndex = 4
+        '
+        'ucrChkTolerance
+        '
+        Me.ucrChkTolerance.Checked = False
+        Me.ucrChkTolerance.Location = New System.Drawing.Point(6, 62)
+        Me.ucrChkTolerance.Name = "ucrChkTolerance"
+        Me.ucrChkTolerance.Size = New System.Drawing.Size(135, 20)
+        Me.ucrChkTolerance.TabIndex = 3
+        '
+        'ucrNudOmit
+        '
+        Me.ucrNudOmit.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudOmit.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudOmit.Location = New System.Drawing.Point(148, 38)
+        Me.ucrNudOmit.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudOmit.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudOmit.Name = "ucrNudOmit"
+        Me.ucrNudOmit.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudOmit.TabIndex = 2
+        Me.ucrNudOmit.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkOmitValues
+        '
+        Me.ucrChkOmitValues.Checked = False
+        Me.ucrChkOmitValues.Location = New System.Drawing.Point(6, 12)
+        Me.ucrChkOmitValues.Name = "ucrChkOmitValues"
+        Me.ucrChkOmitValues.Size = New System.Drawing.Size(135, 20)
+        Me.ucrChkOmitValues.TabIndex = 0
+        '
+        'ucrInputConditions
+        '
+        Me.ucrInputConditions.AddQuotesIfUnrecognised = True
+        Me.ucrInputConditions.IsReadOnly = False
+        Me.ucrInputConditions.Location = New System.Drawing.Point(6, 38)
+        Me.ucrInputConditions.Name = "ucrInputConditions"
+        Me.ucrInputConditions.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputConditions.TabIndex = 1
         '
         'dlgDuplicatesConstructed
         '
