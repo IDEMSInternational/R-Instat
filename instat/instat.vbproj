@@ -84,6 +84,9 @@
     <MultilingualAppToolkitVersion>4.0</MultilingualAppToolkitVersion>
     <MultilingualFallbackLanguage>en-US</MultilingualFallbackLanguage>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\rinstat_icon_Hih_icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -722,12 +725,6 @@
     <Compile Include="sdgOneVarGraph.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sdgOneVarUseModBootstrap.Designer.vb">
-      <DependentUpon>sdgOneVarUseModBootstrap.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgOneVarUseModBootstrap.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="sdgOneVarUseModFit.Designer.vb">
       <DependentUpon>sdgOneVarUseModFit.vb</DependentUpon>
     </Compile>
@@ -750,6 +747,12 @@
       <DependentUpon>sdgOpenNetCDF.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgOpenNetCDF.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgProportionsPercentages.Designer.vb">
+      <DependentUpon>sdgProportionsPercentages.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgProportionsPercentages.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgThemes.Designer.vb">
@@ -3228,9 +3231,6 @@
     <EmbeddedResource Include="sdgOneVarGraph.resx">
       <DependentUpon>sdgOneVarGraph.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgOneVarUseModBootstrap.resx">
-      <DependentUpon>sdgOneVarUseModBootstrap.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="sdgOneVarUseModFit.resx">
       <DependentUpon>sdgOneVarUseModFit.vb</DependentUpon>
     </EmbeddedResource>
@@ -3239,6 +3239,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgOpenNetCDF.resx">
       <DependentUpon>sdgOpenNetCDF.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgProportionsPercentages.resx">
+      <DependentUpon>sdgProportionsPercentages.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSummaries.fr-FR.resx">
       <DependentUpon>sdgSummaries.vb</DependentUpon>
@@ -4615,6 +4618,9 @@
     <None Include="lib\RDotNet.NativeLibrary.dll" />
     <None Include="lib\unvell.ReoGrid.dll" />
     <None Include="lib\unvell.ReoScript.dll" />
+    <Content Include="Resources\rinstat_icon_Hih_icon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="static\InstatObject\R\Backend_Components\link.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

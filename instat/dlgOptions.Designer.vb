@@ -99,7 +99,7 @@ Partial Class dlgOptions
         Me.lblMinutes = New System.Windows.Forms.Label()
         Me.ucrChkAutoSave = New instat.ucrCheck()
         Me.ucrChkShowDataonGrid = New instat.ucrCheck()
-        Me.ucrNudMinutes = New instat.ucrNud()
+        Me.ucrNudAutoSaveMinutes = New instat.ucrNud()
         Me.ucrNudMaxCols = New instat.ucrNud()
         Me.lblMaxCols = New System.Windows.Forms.Label()
         Me.ucrNudMaxRows = New instat.ucrNud()
@@ -691,7 +691,7 @@ Partial Class dlgOptions
         Me.tbpDataView.Controls.Add(Me.lblMinutes)
         Me.tbpDataView.Controls.Add(Me.ucrChkAutoSave)
         Me.tbpDataView.Controls.Add(Me.ucrChkShowDataonGrid)
-        Me.tbpDataView.Controls.Add(Me.ucrNudMinutes)
+        Me.tbpDataView.Controls.Add(Me.ucrNudAutoSaveMinutes)
         Me.tbpDataView.Controls.Add(Me.ucrNudMaxCols)
         Me.tbpDataView.Controls.Add(Me.lblMaxCols)
         Me.tbpDataView.Controls.Add(Me.ucrNudMaxRows)
@@ -740,15 +740,15 @@ Partial Class dlgOptions
         '
         'ucrNudMinutes
         '
-        Me.ucrNudMinutes.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMinutes.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMinutes.Location = New System.Drawing.Point(305, 104)
-        Me.ucrNudMinutes.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudMinutes.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMinutes.Name = "ucrNudMinutes"
-        Me.ucrNudMinutes.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudMinutes.TabIndex = 2
-        Me.ucrNudMinutes.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAutoSaveMinutes.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAutoSaveMinutes.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudAutoSaveMinutes.Location = New System.Drawing.Point(305, 104)
+        Me.ucrNudAutoSaveMinutes.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudAutoSaveMinutes.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAutoSaveMinutes.Name = "ucrNudMinutes"
+        Me.ucrNudAutoSaveMinutes.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudAutoSaveMinutes.TabIndex = 2
+        Me.ucrNudAutoSaveMinutes.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudMaxCols
         '
@@ -1004,7 +1004,7 @@ Partial Class dlgOptions
     Friend WithEvents lblMaxCols As Label
     Friend WithEvents ucrChkShowDataonGrid As ucrCheck
     Friend WithEvents ucrChkAutoSave As ucrCheck
-    Friend WithEvents ucrNudMinutes As ucrNud
+    Friend WithEvents ucrNudAutoSaveMinutes As ucrNud
     Friend WithEvents lblMinutes As Label
     Friend WithEvents lblEvery As Label
     Friend WithEvents lblWaitSeconds As Label
