@@ -69,6 +69,23 @@ Public Class sdgSummaries
         ucrChkLowerQuartile.SetParameter(New RParameter("lower_quartile", 14), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "lower_quartile" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkLowerQuartile.SetText("Lower Quartile")
 
+        ucrChkKurtosis.SetText("Kurtosis")
+
+        ucrChkSkewness.SetText("Skewness")
+
+        ucrChkCoefficientOfVariation.SetText("Coefficient Of Variation")
+
+        ucrChkMedianAbsoluteDeviation.SetText("Median Absolute Version")
+        ucrChkMedianAbsoluteDeviation.Visible = False
+
+        ucrPnlMissingOptions.AddRadioButton(rdoNumber)
+        ucrPnlMissingOptions.AddRadioButton(rdoPercentage)
+
+        ucrPnlMissingOptions.AddToLinkedControls({ucrNudNumber}, {rdoNumber}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMissingOptions.AddToLinkedControls({ucrNudPercentage}, {rdoPercentage}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudPercentage.SetLinkedDisplayControl(lblPercentage)
+        ucrNudNumber.SetLinkedDisplayControl(lblNumber)
+
         lstCheckboxes = New List(Of ucrCheck)
         lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkUpperQuartile, ucrChkLowerQuartile})
         For Each ctrTemp As ucrCheck In lstCheckboxes
