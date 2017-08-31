@@ -68,7 +68,7 @@ Partial Class dlgClimaticBoxPlot
         Me.grpLayout.Location = New System.Drawing.Point(10, 303)
         Me.grpLayout.Name = "grpLayout"
         Me.grpLayout.Size = New System.Drawing.Size(120, 61)
-        Me.grpLayout.TabIndex = 14
+        Me.grpLayout.TabIndex = 11
         Me.grpLayout.TabStop = False
         Me.grpLayout.Text = "Layout"
         '
@@ -108,7 +108,7 @@ Partial Class dlgClimaticBoxPlot
         Me.cmdBoxPlotOptions.Location = New System.Drawing.Point(10, 241)
         Me.cmdBoxPlotOptions.Name = "cmdBoxPlotOptions"
         Me.cmdBoxPlotOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdBoxPlotOptions.TabIndex = 8
+        Me.cmdBoxPlotOptions.TabIndex = 9
         Me.cmdBoxPlotOptions.Tag = "Boxplot_Options"
         Me.cmdBoxPlotOptions.Text = "Boxplot Options"
         Me.cmdBoxPlotOptions.UseVisualStyleBackColor = True
@@ -118,7 +118,7 @@ Partial Class dlgClimaticBoxPlot
         Me.cmdOptions.Location = New System.Drawing.Point(10, 272)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdOptions.TabIndex = 9
+        Me.cmdOptions.TabIndex = 10
         Me.cmdOptions.Tag = "Options"
         Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
@@ -181,7 +181,7 @@ Partial Class dlgClimaticBoxPlot
         Me.grpFacets.Location = New System.Drawing.Point(245, 252)
         Me.grpFacets.Name = "grpFacets"
         Me.grpFacets.Size = New System.Drawing.Size(149, 138)
-        Me.grpFacets.TabIndex = 10
+        Me.grpFacets.TabIndex = 8
         Me.grpFacets.TabStop = False
         Me.grpFacets.Text = "Facets"
         '
@@ -241,7 +241,7 @@ Partial Class dlgClimaticBoxPlot
         Me.ucrChkVerticalXTickMarkers.Location = New System.Drawing.Point(10, 422)
         Me.ucrChkVerticalXTickMarkers.Name = "ucrChkVerticalXTickMarkers"
         Me.ucrChkVerticalXTickMarkers.Size = New System.Drawing.Size(210, 20)
-        Me.ucrChkVerticalXTickMarkers.TabIndex = 13
+        Me.ucrChkVerticalXTickMarkers.TabIndex = 14
         '
         'ucrVariablesAsFactorForClimaticBoxplot
         '
@@ -294,7 +294,7 @@ Partial Class dlgClimaticBoxPlot
         Me.ucrChkHorizontalBoxplot.Location = New System.Drawing.Point(10, 396)
         Me.ucrChkHorizontalBoxplot.Name = "ucrChkHorizontalBoxplot"
         Me.ucrChkHorizontalBoxplot.Size = New System.Drawing.Size(210, 20)
-        Me.ucrChkHorizontalBoxplot.TabIndex = 12
+        Me.ucrChkHorizontalBoxplot.TabIndex = 13
         '
         'ucrChkVarWidth
         '
@@ -302,7 +302,7 @@ Partial Class dlgClimaticBoxPlot
         Me.ucrChkVarWidth.Location = New System.Drawing.Point(10, 370)
         Me.ucrChkVarWidth.Name = "ucrChkVarWidth"
         Me.ucrChkVarWidth.Size = New System.Drawing.Size(210, 20)
-        Me.ucrChkVarWidth.TabIndex = 11
+        Me.ucrChkVarWidth.TabIndex = 12
         '
         'ucrSelectorClimaticBoxPlot
         '
