@@ -271,7 +271,7 @@ Partial Class sdgSummaries
         Me.tbSummaries.Location = New System.Drawing.Point(12, 8)
         Me.tbSummaries.Name = "tbSummaries"
         Me.tbSummaries.SelectedIndex = 0
-        Me.tbSummaries.Size = New System.Drawing.Size(358, 365)
+        Me.tbSummaries.Size = New System.Drawing.Size(382, 365)
         Me.tbSummaries.TabIndex = 5
         '
         'tbsum
@@ -283,7 +283,7 @@ Partial Class sdgSummaries
         Me.tbsum.Location = New System.Drawing.Point(4, 22)
         Me.tbsum.Name = "tbsum"
         Me.tbsum.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbsum.Size = New System.Drawing.Size(350, 339)
+        Me.tbsum.Size = New System.Drawing.Size(326, 339)
         Me.tbsum.TabIndex = 0
         Me.tbsum.Text = "Summaries"
         Me.tbsum.UseVisualStyleBackColor = True
@@ -297,7 +297,7 @@ Partial Class sdgSummaries
         Me.tbScale.Location = New System.Drawing.Point(4, 22)
         Me.tbScale.Name = "tbScale"
         Me.tbScale.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbScale.Size = New System.Drawing.Size(380, 339)
+        Me.tbScale.Size = New System.Drawing.Size(350, 339)
         Me.tbScale.TabIndex = 1
         Me.tbScale.Text = "Scale"
         Me.tbScale.UseVisualStyleBackColor = True
@@ -340,7 +340,7 @@ Partial Class sdgSummaries
         Me.tbSkewness.Location = New System.Drawing.Point(4, 22)
         Me.tbSkewness.Name = "tbSkewness"
         Me.tbSkewness.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbSkewness.Size = New System.Drawing.Size(380, 339)
+        Me.tbSkewness.Size = New System.Drawing.Size(350, 339)
         Me.tbSkewness.TabIndex = 2
         Me.tbSkewness.Text = "Skewness"
         Me.tbSkewness.UseVisualStyleBackColor = True
@@ -359,7 +359,7 @@ Partial Class sdgSummaries
         Me.tbKurtosis.Location = New System.Drawing.Point(4, 22)
         Me.tbKurtosis.Name = "tbKurtosis"
         Me.tbKurtosis.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbKurtosis.Size = New System.Drawing.Size(380, 339)
+        Me.tbKurtosis.Size = New System.Drawing.Size(350, 339)
         Me.tbKurtosis.TabIndex = 3
         Me.tbKurtosis.Text = "Kurtosis"
         Me.tbKurtosis.UseVisualStyleBackColor = True
@@ -384,7 +384,7 @@ Partial Class sdgSummaries
         Me.tbMissingOptions.Location = New System.Drawing.Point(4, 22)
         Me.tbMissingOptions.Name = "tbMissingOptions"
         Me.tbMissingOptions.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbMissingOptions.Size = New System.Drawing.Size(380, 339)
+        Me.tbMissingOptions.Size = New System.Drawing.Size(374, 339)
         Me.tbMissingOptions.TabIndex = 4
         Me.tbMissingOptions.Text = "Missing Options"
         Me.tbMissingOptions.UseVisualStyleBackColor = True
