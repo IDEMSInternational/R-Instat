@@ -492,13 +492,15 @@ summary_median_absolute_deviation <- function(x, constant = 1.4826, na.rm = FALS
 }
 
 #Qn function
-summary_Qn <- function(x, constant = 2.21914, finite.corr = missing(constant),...){
-  return(robustbase::Qn(x, constant = constant, finite.corr = finite.corr))
+summary_Qn <- function(x, na.rm = FALSE, constant = 2.21914, finite.corr = missing(constant),...){
+  if(anyNA(x) && !na.rm) return(NA)
+  return(robustbase::Qn(x, na.rm = na.rm, constant = constant, finite.corr = finite.corr))
 }
 
-#sn function
-summary_Sn <- function(x, constant = 1.1926, finite.corr = missing(constant)){
-  return(robustbase::Sn(x, constant = constant, finite.corr = finite.corr))
+#Sn function
+summary_Sn <- function(x, na.rm = FALSE, constant = 1.1926, finite.corr = missing(constant)){
+  if(anyNA(x) && !na.rm) return(NA)
+  return(robustbase::Sn(x, na.rm = na.rm, constant = constant, finite.corr = finite.corr))
 }
   
 instat_object$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), n_column_factors = 1, store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = TRUE, treat_columns_as_factor = FALSE, page_by = "default", as_html = TRUE, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, margin_name = "(All)", additional_filter, ...) {
