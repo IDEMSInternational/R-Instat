@@ -47,10 +47,12 @@ Partial Class dlgDisplayDailyData
         Me.lblDayOfTheYear = New System.Windows.Forms.Label()
         Me.lblYaxisUpper = New System.Windows.Forms.Label()
         Me.grpGraph = New System.Windows.Forms.GroupBox()
-        Me.ucrInputRugColour = New instat.ucrInputComboBox()
         Me.lblRugColor = New System.Windows.Forms.Label()
-        Me.ucrInputBarColour = New instat.ucrInputComboBox()
         Me.lblBarColour = New System.Windows.Forms.Label()
+        Me.lblFactorby = New System.Windows.Forms.Label()
+        Me.ucrReceiverFactorby = New instat.ucrReceiverMultiple()
+        Me.ucrInputRugColour = New instat.ucrInputComboBox()
+        Me.ucrInputBarColour = New instat.ucrInputComboBox()
         Me.ucrNudUpperYaxis = New instat.ucrNud()
         Me.ucrReceiverElements = New instat.ucrReceiverMultiple()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
@@ -60,8 +62,6 @@ Partial Class dlgDisplayDailyData
         Me.ucrPnlFrequencyDisplay = New instat.UcrPanel()
         Me.ucrSelectorDisplayDailyClimaticData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrReceiverFactorby = New instat.ucrReceiverMultiple()
-        Me.lblFactorby = New System.Windows.Forms.Label()
         Me.grpGraph.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -168,15 +168,6 @@ Partial Class dlgDisplayDailyData
         Me.grpGraph.TabStop = False
         Me.grpGraph.Text = "Graph"
         '
-        'ucrInputRugColour
-        '
-        Me.ucrInputRugColour.AddQuotesIfUnrecognised = True
-        Me.ucrInputRugColour.IsReadOnly = False
-        Me.ucrInputRugColour.Location = New System.Drawing.Point(83, 70)
-        Me.ucrInputRugColour.Name = "ucrInputRugColour"
-        Me.ucrInputRugColour.Size = New System.Drawing.Size(73, 21)
-        Me.ucrInputRugColour.TabIndex = 9
-        '
         'lblRugColor
         '
         Me.lblRugColor.AutoSize = True
@@ -186,15 +177,6 @@ Partial Class dlgDisplayDailyData
         Me.lblRugColor.TabIndex = 8
         Me.lblRugColor.Text = "Rug Color:"
         '
-        'ucrInputBarColour
-        '
-        Me.ucrInputBarColour.AddQuotesIfUnrecognised = True
-        Me.ucrInputBarColour.IsReadOnly = False
-        Me.ucrInputBarColour.Location = New System.Drawing.Point(83, 43)
-        Me.ucrInputBarColour.Name = "ucrInputBarColour"
-        Me.ucrInputBarColour.Size = New System.Drawing.Size(73, 21)
-        Me.ucrInputBarColour.TabIndex = 7
-        '
         'lblBarColour
         '
         Me.lblBarColour.AutoSize = True
@@ -203,6 +185,45 @@ Partial Class dlgDisplayDailyData
         Me.lblBarColour.Size = New System.Drawing.Size(59, 13)
         Me.lblBarColour.TabIndex = 6
         Me.lblBarColour.Text = "Bar Colour:"
+        '
+        'lblFactorby
+        '
+        Me.lblFactorby.AutoSize = True
+        Me.lblFactorby.Location = New System.Drawing.Point(291, 65)
+        Me.lblFactorby.Name = "lblFactorby"
+        Me.lblFactorby.Size = New System.Drawing.Size(45, 13)
+        Me.lblFactorby.TabIndex = 18
+        Me.lblFactorby.Text = "Factors:"
+        '
+        'ucrReceiverFactorby
+        '
+        Me.ucrReceiverFactorby.frmParent = Me
+        Me.ucrReceiverFactorby.Location = New System.Drawing.Point(291, 80)
+        Me.ucrReceiverFactorby.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFactorby.Name = "ucrReceiverFactorby"
+        Me.ucrReceiverFactorby.Selector = Nothing
+        Me.ucrReceiverFactorby.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverFactorby.strNcFilePath = ""
+        Me.ucrReceiverFactorby.TabIndex = 17
+        Me.ucrReceiverFactorby.ucrSelector = Nothing
+        '
+        'ucrInputRugColour
+        '
+        Me.ucrInputRugColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputRugColour.IsReadOnly = False
+        Me.ucrInputRugColour.Location = New System.Drawing.Point(83, 70)
+        Me.ucrInputRugColour.Name = "ucrInputRugColour"
+        Me.ucrInputRugColour.Size = New System.Drawing.Size(73, 21)
+        Me.ucrInputRugColour.TabIndex = 9
+        '
+        'ucrInputBarColour
+        '
+        Me.ucrInputBarColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputBarColour.IsReadOnly = False
+        Me.ucrInputBarColour.Location = New System.Drawing.Point(83, 43)
+        Me.ucrInputBarColour.Name = "ucrInputBarColour"
+        Me.ucrInputBarColour.Size = New System.Drawing.Size(73, 21)
+        Me.ucrInputBarColour.TabIndex = 7
         '
         'ucrNudUpperYaxis
         '
@@ -303,32 +324,11 @@ Partial Class dlgDisplayDailyData
         Me.ucrBase.Size = New System.Drawing.Size(428, 52)
         Me.ucrBase.TabIndex = 16
         '
-        'ucrReceiverFactorby
-        '
-        Me.ucrReceiverFactorby.frmParent = Me
-        Me.ucrReceiverFactorby.Location = New System.Drawing.Point(291, 80)
-        Me.ucrReceiverFactorby.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFactorby.Name = "ucrReceiverFactorby"
-        Me.ucrReceiverFactorby.Selector = Nothing
-        Me.ucrReceiverFactorby.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverFactorby.strNcFilePath = ""
-        Me.ucrReceiverFactorby.TabIndex = 17
-        Me.ucrReceiverFactorby.ucrSelector = Nothing
-        '
-        'lblFactorby
-        '
-        Me.lblFactorby.AutoSize = True
-        Me.lblFactorby.Location = New System.Drawing.Point(291, 65)
-        Me.lblFactorby.Name = "lblFactorby"
-        Me.lblFactorby.Size = New System.Drawing.Size(45, 13)
-        Me.lblFactorby.TabIndex = 18
-        Me.lblFactorby.Text = "Factors:"
-        '
         'dlgDisplayDailyData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(655, 392)
+        Me.ClientSize = New System.Drawing.Size(443, 392)
         Me.Controls.Add(Me.lblFactorby)
         Me.Controls.Add(Me.ucrReceiverFactorby)
         Me.Controls.Add(Me.grpGraph)

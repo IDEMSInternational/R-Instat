@@ -53,8 +53,6 @@ Public Class dlgDisplayDailyData
         ucrReceiverYear.SetParameter(New RParameter("year_col", 3))
         ucrReceiverYear.SetParameterIsString()
 
-        ucrBase.clsRsyntax.iCallType = 3
-
         ucrReceiverDayOfYear.SetParameter(New RParameter("doy_col", 5))
         ucrReceiverDayOfYear.SetParameterIsString()
 
@@ -83,19 +81,19 @@ Public Class dlgDisplayDailyData
         ucrNudUpperYaxis.SetMinMax(0, Integer.MaxValue)
 
         ucrInputBarColour.SetParameter(New RParameter("bar_colour", 7))
-        dctBarColour.Add("blue", Chr(34) & "blue" & Chr(34))
-        dctBarColour.Add("red", Chr(34) & "red" & Chr(34))
-        dctBarColour.Add("yellow", Chr(34) & "yellow" & Chr(34))
-        dctBarColour.Add("green", Chr(34) & "green" & Chr(34))
-        dctBarColour.Add("violet", Chr(34) & "violet" & Chr(34))
+        dctBarColour.Add("Blue", Chr(34) & "blue" & Chr(34))
+        dctBarColour.Add("Red", Chr(34) & "red" & Chr(34))
+        dctBarColour.Add("Yellow", Chr(34) & "yellow" & Chr(34))
+        dctBarColour.Add("Green", Chr(34) & "green" & Chr(34))
+        dctBarColour.Add("Violet", Chr(34) & "violet" & Chr(34))
         ucrInputBarColour.SetItems(dctBarColour)
 
         ucrInputRugColour.SetParameter(New RParameter("rug_colour", 8))
-        dctRugColour.Add("blue", Chr(34) & "blue" & Chr(34))
-        dctRugColour.Add("red", Chr(34) & "red" & Chr(34))
-        dctRugColour.Add("yellow", Chr(34) & "yellow" & Chr(34))
-        dctRugColour.Add("green", Chr(34) & "green" & Chr(34))
-        dctRugColour.Add("violet", Chr(34) & "violet" & Chr(34))
+        dctRugColour.Add("Blue", Chr(34) & "blue" & Chr(34))
+        dctRugColour.Add("Red", Chr(34) & "red" & Chr(34))
+        dctRugColour.Add("Yellow", Chr(34) & "yellow" & Chr(34))
+        dctRugColour.Add("Green", Chr(34) & "green" & Chr(34))
+        dctRugColour.Add("Violet", Chr(34) & "violet" & Chr(34))
         ucrInputRugColour.SetItems(dctRugColour)
 
         ucrReceiverDayOfYear.Selector = ucrSelectorDisplayDailyClimaticData
@@ -107,20 +105,11 @@ Public Class dlgDisplayDailyData
         ucrReceiverFactorby.SetParameter(New RParameter("x"))
         ucrReceiverFactorby.SetParameterIsRFunction()
 
-        ucrNudUpperYaxis.SetLinkedDisplayControl(lblYaxisUpper)
-        ucrReceiverDayOfYear.SetLinkedDisplayControl(lblDayOfTheYear)
-
         ucrPnlFrequencyDisplay.AddRadioButton(rdoTable)
         ucrPnlFrequencyDisplay.AddRadioButton(rdoGraph)
         ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoGraph, frmMain.clsRLink.strInstatDataObject & "$display_daily_graph")
         ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoTable, frmMain.clsRLink.strInstatDataObject & "$summary_table")
-        ucrPnlFrequencyDisplay.AddParameterPresentCondition(rdoGraph, {"rug_colour", "upper_limit", "bar_colour", "doy_col", "date_col", "station_col"}, True)
-        ucrPnlFrequencyDisplay.AddParameterPresentCondition(rdoTable, {"rug_colour", "upper_limit", "bar_colour", "doy_col", "date_col", "station_col"}, False)
-        ucrPnlFrequencyDisplay.AddParameterPresentCondition(rdoTable, {"factors"}, True)
-        ucrPnlFrequencyDisplay.AddParameterPresentCondition(rdoGraph, {"factors"}, False)
-        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrInputRugColour, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:="blue", bNewLinkedChangeToDefaultState:=True)
-        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrNudUpperYaxis, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=50, bNewLinkedChangeToDefaultState:=True)
-        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrInputBarColour, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:="blue", bNewLinkedChangeToDefaultState:=True)
+        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrNudUpperYaxis, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrReceiverDayOfYear, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.SetLinkedDisplayControl(lblDayOfTheYear)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrReceiverDate, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -128,7 +117,7 @@ Public Class dlgDisplayDailyData
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrReceiverStations, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverStations.SetLinkedDisplayControl(lblStation)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrReceiverFactorby, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrReceiverFactorby.SetLinkedDisplayControl(lblFactorby)
+        ucrReceiverDayOfYear.SetLinkedDisplayControl(lblDayOfTheYear)
         ucrNudUpperYaxis.SetLinkedDisplayControl(grpGraph)
     End Sub
 
@@ -138,6 +127,7 @@ Public Class dlgDisplayDailyData
         clsConcat = New RFunction
 
         ucrSelectorDisplayDailyClimaticData.Reset()
+
         clsDisplayDailyGraph.AddParameter("upper_limit", 50)
         clsDisplayDailyGraph.AddParameter("rug_colour", Chr(34) & "blue" & Chr(34))
         clsDisplayDailyGraph.AddParameter("bar_colour", Chr(34) & "blue" & Chr(34))
@@ -163,11 +153,23 @@ Public Class dlgDisplayDailyData
         ucrInputBarColour.SetRCode(clsDisplayDailyGraph, bReset)
         ucrNudUpperYaxis.SetRCode(clsDisplayDailyGraph, bReset)
         ucrReceiverElements.SetRCode(clsDisplayDailyGraph, bReset)
-        ucrPnlFrequencyDisplay.SetRCode(clsDisplayDailyGraph, bReset)
+        ucrPnlFrequencyDisplay.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        ucrBase.OKEnabled(True)
+        If rdoGraph.Checked Then
+            If (Not ucrReceiverDate.IsEmpty OrElse Not ucrReceiverDayOfYear.IsEmpty OrElse Not ucrReceiverStations.IsEmpty) AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty AndAlso ucrNudUpperYaxis.GetText <> "" AndAlso Not ucrInputRugColour.IsEmpty AndAlso Not ucrInputBarColour.IsEmpty Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
+        Else
+            If Not ucrReceiverFactorby.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -178,9 +180,15 @@ Public Class dlgDisplayDailyData
 
     Private Sub ucrPnlFrequencyDisplay_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFrequencyDisplay.ControlValueChanged
         If rdoGraph.Checked Then
+            ucrBase.clsRsyntax.iCallType = 3
             ucrBase.clsRsyntax.SetBaseRFunction(clsDisplayDailyGraph)
         Else
+            ucrBase.clsRsyntax.iCallType = 2
             ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryTable)
         End If
+    End Sub
+
+    Private Sub ucrReceiverDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverStations.ControlContentsChanged, ucrReceiverDayOfYear.ControlContentsChanged, ucrNudUpperYaxis.ControlContentsChanged, ucrInputRugColour.ControlContentsChanged, ucrInputBarColour.ControlContentsChanged, ucrPnlFrequencyDisplay.ControlContentsChanged, ucrReceiverFactorby.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
