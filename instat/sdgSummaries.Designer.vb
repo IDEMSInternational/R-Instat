@@ -74,6 +74,8 @@ Partial Class sdgSummaries
         Me.ucrNudPercentage = New instat.ucrNud()
         Me.ucrNudNumber = New instat.ucrNud()
         Me.ucrPnlMissingOptions = New instat.UcrPanel()
+        Me.ucrChkSn = New instat.ucrCheck()
+        Me.ucrChkQn = New instat.ucrCheck()
         Me.grpCommon.SuspendLayout()
         Me.grpNotOrderedFactor.SuspendLayout()
         Me.grpNumeric.SuspendLayout()
@@ -254,7 +256,7 @@ Partial Class sdgSummaries
         '
         'ucrButtonsSummaries
         '
-        Me.ucrButtonsSummaries.Location = New System.Drawing.Point(100, 379)
+        Me.ucrButtonsSummaries.Location = New System.Drawing.Point(118, 379)
         Me.ucrButtonsSummaries.Name = "ucrButtonsSummaries"
         Me.ucrButtonsSummaries.Size = New System.Drawing.Size(142, 30)
         Me.ucrButtonsSummaries.TabIndex = 4
@@ -288,6 +290,8 @@ Partial Class sdgSummaries
         '
         'tbScale
         '
+        Me.tbScale.Controls.Add(Me.ucrChkSn)
+        Me.tbScale.Controls.Add(Me.ucrChkQn)
         Me.tbScale.Controls.Add(Me.ucrChkMedianAbsoluteDeviation)
         Me.tbScale.Controls.Add(Me.ucrChkCoefficientOfVariation)
         Me.tbScale.Location = New System.Drawing.Point(4, 22)
@@ -301,15 +305,15 @@ Partial Class sdgSummaries
         'ucrChkMedianAbsoluteDeviation
         '
         Me.ucrChkMedianAbsoluteDeviation.Checked = False
-        Me.ucrChkMedianAbsoluteDeviation.Location = New System.Drawing.Point(208, 24)
+        Me.ucrChkMedianAbsoluteDeviation.Location = New System.Drawing.Point(208, 31)
         Me.ucrChkMedianAbsoluteDeviation.Name = "ucrChkMedianAbsoluteDeviation"
-        Me.ucrChkMedianAbsoluteDeviation.Size = New System.Drawing.Size(171, 20)
+        Me.ucrChkMedianAbsoluteDeviation.Size = New System.Drawing.Size(166, 20)
         Me.ucrChkMedianAbsoluteDeviation.TabIndex = 2
         '
         'ucrChkCoefficientOfVariation
         '
         Me.ucrChkCoefficientOfVariation.Checked = False
-        Me.ucrChkCoefficientOfVariation.Location = New System.Drawing.Point(19, 24)
+        Me.ucrChkCoefficientOfVariation.Location = New System.Drawing.Point(19, 33)
         Me.ucrChkCoefficientOfVariation.Name = "ucrChkCoefficientOfVariation"
         Me.ucrChkCoefficientOfVariation.Size = New System.Drawing.Size(171, 20)
         Me.ucrChkCoefficientOfVariation.TabIndex = 1
@@ -440,6 +444,22 @@ Partial Class sdgSummaries
         Me.ucrPnlMissingOptions.Size = New System.Drawing.Size(214, 45)
         Me.ucrPnlMissingOptions.TabIndex = 2
         '
+        'ucrChkSn
+        '
+        Me.ucrChkSn.Checked = False
+        Me.ucrChkSn.Location = New System.Drawing.Point(208, 80)
+        Me.ucrChkSn.Name = "ucrChkSn"
+        Me.ucrChkSn.Size = New System.Drawing.Size(120, 20)
+        Me.ucrChkSn.TabIndex = 4
+        '
+        'ucrChkQn
+        '
+        Me.ucrChkQn.Checked = False
+        Me.ucrChkQn.Location = New System.Drawing.Point(19, 80)
+        Me.ucrChkQn.Name = "ucrChkQn"
+        Me.ucrChkQn.Size = New System.Drawing.Size(129, 20)
+        Me.ucrChkQn.TabIndex = 3
+        '
         'sdgSummaries
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -505,4 +525,6 @@ Partial Class sdgSummaries
     Friend WithEvents lblPercentage As Label
     Friend WithEvents rdoPercentage As RadioButton
     Friend WithEvents rdoNumber As RadioButton
+    Friend WithEvents ucrChkSn As ucrCheck
+    Friend WithEvents ucrChkQn As ucrCheck
 End Class
