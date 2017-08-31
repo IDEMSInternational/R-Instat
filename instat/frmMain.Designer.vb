@@ -196,7 +196,6 @@ Partial Class frmMain
         Me.mnuClimaticPrepare = New System.Windows.Forms.ToolStripMenuItem()
         Me.DispalyClimaticDataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCimaticPrepareTransform = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SummaryOfDailyDataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareClimaticSummaries = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator37 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticPrepareStartoftheRains = New System.Windows.Forms.ToolStripMenuItem()
@@ -1567,7 +1566,7 @@ Partial Class frmMain
         '
         'mnuClimaticPrepare
         '
-        Me.mnuClimaticPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DispalyClimaticDataToolStripMenuItem, Me.mnuCimaticPrepareTransform, Me.SummaryOfDailyDataToolStripMenuItem, Me.mnuClimaticPrepareClimaticSummaries, Me.ToolStripSeparator37, Me.mnuClimaticPrepareStartoftheRains, Me.mnuClimaticPrepareSpells, Me.mnuClimaticPrepareExtremes, Me.mnuClimaticPrepareEndOfRains, Me.mnuClimaticPrepareSummary, Me.mnuClimaticPrepareNewWorksheet, Me.mnuClimaticPrepareImportDailyData, Me.mnuClimaticPrepareMakeFactor, Me.mnuClimaticPrepareShiftDailyData, Me.mnuClimaticPrepareUnstackDailyData, Me.mnuClimaticPrepareStackDailyData})
+        Me.mnuClimaticPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DispalyClimaticDataToolStripMenuItem, Me.mnuCimaticPrepareTransform, Me.mnuClimaticPrepareClimaticSummaries, Me.ToolStripSeparator37, Me.mnuClimaticPrepareStartoftheRains, Me.mnuClimaticPrepareSpells, Me.mnuClimaticPrepareExtremes, Me.mnuClimaticPrepareEndOfRains, Me.mnuClimaticPrepareSummary, Me.mnuClimaticPrepareNewWorksheet, Me.mnuClimaticPrepareImportDailyData, Me.mnuClimaticPrepareMakeFactor, Me.mnuClimaticPrepareShiftDailyData, Me.mnuClimaticPrepareUnstackDailyData, Me.mnuClimaticPrepareStackDailyData})
         Me.mnuClimaticPrepare.Name = "mnuClimaticPrepare"
         Me.mnuClimaticPrepare.Size = New System.Drawing.Size(212, 22)
         Me.mnuClimaticPrepare.Tag = "Prepare"
@@ -1577,61 +1576,55 @@ Partial Class frmMain
         '
         Me.DispalyClimaticDataToolStripMenuItem.Enabled = False
         Me.DispalyClimaticDataToolStripMenuItem.Name = "DispalyClimaticDataToolStripMenuItem"
-        Me.DispalyClimaticDataToolStripMenuItem.Size = New System.Drawing.Size(224, 22)
-        Me.DispalyClimaticDataToolStripMenuItem.Text = "Display Daily Climatic Data..."
+        Me.DispalyClimaticDataToolStripMenuItem.Size = New System.Drawing.Size(189, 22)
+        Me.DispalyClimaticDataToolStripMenuItem.Text = "Display Daily..."
         '
         'mnuCimaticPrepareTransform
         '
         Me.mnuCimaticPrepareTransform.Name = "mnuCimaticPrepareTransform"
-        Me.mnuCimaticPrepareTransform.Size = New System.Drawing.Size(224, 22)
+        Me.mnuCimaticPrepareTransform.Size = New System.Drawing.Size(189, 22)
         Me.mnuCimaticPrepareTransform.Text = "Transform..."
-        '
-        'SummaryOfDailyDataToolStripMenuItem
-        '
-        Me.SummaryOfDailyDataToolStripMenuItem.Name = "SummaryOfDailyDataToolStripMenuItem"
-        Me.SummaryOfDailyDataToolStripMenuItem.Size = New System.Drawing.Size(224, 22)
-        Me.SummaryOfDailyDataToolStripMenuItem.Text = "Summary of Daily Data..."
         '
         'mnuClimaticPrepareClimaticSummaries
         '
         Me.mnuClimaticPrepareClimaticSummaries.Name = "mnuClimaticPrepareClimaticSummaries"
-        Me.mnuClimaticPrepareClimaticSummaries.Size = New System.Drawing.Size(224, 22)
+        Me.mnuClimaticPrepareClimaticSummaries.Size = New System.Drawing.Size(189, 22)
         Me.mnuClimaticPrepareClimaticSummaries.Text = "Climatic Summaries..."
         '
         'ToolStripSeparator37
         '
         Me.ToolStripSeparator37.Name = "ToolStripSeparator37"
-        Me.ToolStripSeparator37.Size = New System.Drawing.Size(221, 6)
+        Me.ToolStripSeparator37.Size = New System.Drawing.Size(186, 6)
         '
         'mnuClimaticPrepareStartoftheRains
         '
         Me.mnuClimaticPrepareStartoftheRains.Name = "mnuClimaticPrepareStartoftheRains"
-        Me.mnuClimaticPrepareStartoftheRains.Size = New System.Drawing.Size(224, 22)
+        Me.mnuClimaticPrepareStartoftheRains.Size = New System.Drawing.Size(189, 22)
         Me.mnuClimaticPrepareStartoftheRains.Text = "Start of the Rains..."
         '
         'mnuClimaticPrepareSpells
         '
         Me.mnuClimaticPrepareSpells.Name = "mnuClimaticPrepareSpells"
-        Me.mnuClimaticPrepareSpells.Size = New System.Drawing.Size(224, 22)
+        Me.mnuClimaticPrepareSpells.Size = New System.Drawing.Size(189, 22)
         Me.mnuClimaticPrepareSpells.Text = "Spells..."
         '
         'mnuClimaticPrepareExtremes
         '
         Me.mnuClimaticPrepareExtremes.Name = "mnuClimaticPrepareExtremes"
-        Me.mnuClimaticPrepareExtremes.Size = New System.Drawing.Size(224, 22)
+        Me.mnuClimaticPrepareExtremes.Size = New System.Drawing.Size(189, 22)
         Me.mnuClimaticPrepareExtremes.Text = "Extremes..."
         '
         'mnuClimaticPrepareEndOfRains
         '
         Me.mnuClimaticPrepareEndOfRains.Name = "mnuClimaticPrepareEndOfRains"
-        Me.mnuClimaticPrepareEndOfRains.Size = New System.Drawing.Size(224, 22)
+        Me.mnuClimaticPrepareEndOfRains.Size = New System.Drawing.Size(189, 22)
         Me.mnuClimaticPrepareEndOfRains.Text = "End of Rains..."
         '
         'mnuClimaticPrepareSummary
         '
         Me.mnuClimaticPrepareSummary.Enabled = False
         Me.mnuClimaticPrepareSummary.Name = "mnuClimaticPrepareSummary"
-        Me.mnuClimaticPrepareSummary.Size = New System.Drawing.Size(224, 22)
+        Me.mnuClimaticPrepareSummary.Size = New System.Drawing.Size(189, 22)
         Me.mnuClimaticPrepareSummary.Text = "Summary..."
         Me.mnuClimaticPrepareSummary.Visible = False
         '
@@ -1639,7 +1632,7 @@ Partial Class frmMain
         '
         Me.mnuClimaticPrepareNewWorksheet.Enabled = False
         Me.mnuClimaticPrepareNewWorksheet.Name = "mnuClimaticPrepareNewWorksheet"
-        Me.mnuClimaticPrepareNewWorksheet.Size = New System.Drawing.Size(224, 22)
+        Me.mnuClimaticPrepareNewWorksheet.Size = New System.Drawing.Size(189, 22)
         Me.mnuClimaticPrepareNewWorksheet.Tag = "New_Worksheet"
         Me.mnuClimaticPrepareNewWorksheet.Text = "New Worksheet..."
         Me.mnuClimaticPrepareNewWorksheet.Visible = False
@@ -1648,7 +1641,7 @@ Partial Class frmMain
         '
         Me.mnuClimaticPrepareImportDailyData.Enabled = False
         Me.mnuClimaticPrepareImportDailyData.Name = "mnuClimaticPrepareImportDailyData"
-        Me.mnuClimaticPrepareImportDailyData.Size = New System.Drawing.Size(224, 22)
+        Me.mnuClimaticPrepareImportDailyData.Size = New System.Drawing.Size(189, 22)
         Me.mnuClimaticPrepareImportDailyData.Tag = "Import_daily_data"
         Me.mnuClimaticPrepareImportDailyData.Text = "Import daily Data..."
         Me.mnuClimaticPrepareImportDailyData.Visible = False
@@ -1657,7 +1650,7 @@ Partial Class frmMain
         '
         Me.mnuClimaticPrepareMakeFactor.Enabled = False
         Me.mnuClimaticPrepareMakeFactor.Name = "mnuClimaticPrepareMakeFactor"
-        Me.mnuClimaticPrepareMakeFactor.Size = New System.Drawing.Size(224, 22)
+        Me.mnuClimaticPrepareMakeFactor.Size = New System.Drawing.Size(189, 22)
         Me.mnuClimaticPrepareMakeFactor.Tag = "Make_Factor"
         Me.mnuClimaticPrepareMakeFactor.Text = "Make Factor..."
         Me.mnuClimaticPrepareMakeFactor.Visible = False
@@ -1666,7 +1659,7 @@ Partial Class frmMain
         '
         Me.mnuClimaticPrepareShiftDailyData.Enabled = False
         Me.mnuClimaticPrepareShiftDailyData.Name = "mnuClimaticPrepareShiftDailyData"
-        Me.mnuClimaticPrepareShiftDailyData.Size = New System.Drawing.Size(224, 22)
+        Me.mnuClimaticPrepareShiftDailyData.Size = New System.Drawing.Size(189, 22)
         Me.mnuClimaticPrepareShiftDailyData.Tag = "Shift_Daily_data"
         Me.mnuClimaticPrepareShiftDailyData.Text = "Shift Daily Data..."
         Me.mnuClimaticPrepareShiftDailyData.Visible = False
@@ -1675,7 +1668,7 @@ Partial Class frmMain
         '
         Me.mnuClimaticPrepareUnstackDailyData.Enabled = False
         Me.mnuClimaticPrepareUnstackDailyData.Name = "mnuClimaticPrepareUnstackDailyData"
-        Me.mnuClimaticPrepareUnstackDailyData.Size = New System.Drawing.Size(224, 22)
+        Me.mnuClimaticPrepareUnstackDailyData.Size = New System.Drawing.Size(189, 22)
         Me.mnuClimaticPrepareUnstackDailyData.Tag = "Unstack_Daily_data"
         Me.mnuClimaticPrepareUnstackDailyData.Text = "Unstack Daily Data..."
         Me.mnuClimaticPrepareUnstackDailyData.Visible = False
@@ -1684,7 +1677,7 @@ Partial Class frmMain
         '
         Me.mnuClimaticPrepareStackDailyData.Enabled = False
         Me.mnuClimaticPrepareStackDailyData.Name = "mnuClimaticPrepareStackDailyData"
-        Me.mnuClimaticPrepareStackDailyData.Size = New System.Drawing.Size(224, 22)
+        Me.mnuClimaticPrepareStackDailyData.Size = New System.Drawing.Size(189, 22)
         Me.mnuClimaticPrepareStackDailyData.Tag = "Stack_Daily_data"
         Me.mnuClimaticPrepareStackDailyData.Text = "Stack Daily data..."
         Me.mnuClimaticPrepareStackDailyData.Visible = False
@@ -4191,6 +4184,5 @@ Partial Class frmMain
     Friend WithEvents mnuProcurementDescribeOneVar As ToolStripMenuItem
     Friend WithEvents mnuProcurementDescribeTwoVar As ToolStripMenuItem
     Friend WithEvents DuplicatesToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents SummaryOfDailyDataToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents BoxplotsConceptualisedAndConstructedToolStripMenuItem As ToolStripMenuItem
 End Class

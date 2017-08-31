@@ -47,6 +47,7 @@ Public Class sdgWindrose
         dctThemePairs.Add("minimal", Chr(34) & "minimal" & Chr(34))
         dctThemePairs.Add("classic", Chr(34) & "classic" & Chr(34))
         ucrInputTheme.SetItems(dctThemePairs)
+        ucrInputTheme.SetDropDownStyleAsNonEditable()
         ucrInputSpeedCuts.AddToLinkedControls(ucrNudNoOfSpeeds, {"NA"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
 
         bControlsInitialised = True
