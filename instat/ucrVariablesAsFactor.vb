@@ -284,7 +284,7 @@ Public Class ucrVariablesAsFactor
         Dim lstMeasureVars As String() = Nothing
         Dim clsTempParameter As RParameter
         Dim clsTempRCode As RCodeStructure
-        Dim clsMeasureVarsParam As RParameter
+        Dim clsMeasureVarsParam As RParameter = Nothing
 
         clsTempParameter = GetParameter()
         clsTempRCode = GetRCode()
@@ -301,25 +301,27 @@ Public Class ucrVariablesAsFactor
                         lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.clsArgumentCodeStructure.GetParameter(strItemsParameterNameInRFunction).strArgumentValue)
                     End If
                 End If
+                If clsTempRCode.ContainsParameter("data") Then
+                    clsMeasureVarsParam = clsTempRCode.GetParameter("data").clsArgumentCodeStructure.GetParameter("measure.vars")
+                ElseIf ucrVariableSelector IsNot Nothing AndAlso ucrVariableSelector.ucrAvailableDataFrames.clsCurrDataFrame IsNot Nothing AndAlso ucrVariableSelector.ucrAvailableDataFrames.clsCurrDataFrame.ContainsParameter("measure.vars") Then
+                    clsMeasureVarsParam = ucrVariableSelector.ucrAvailableDataFrames.clsCurrDataFrame.GetParameter("measure.vars")
+                End If
                 Clear()
                 If lstCurrentVariables IsNot Nothing Then
                     If lstCurrentVariables.Count = 1 Then
                         If lstCurrentVariables(0) = "value" Then
                             bSingleVariable = False
-                            If clsTempRCode.ContainsParameter("data") Then
-                                clsMeasureVarsParam = clsTempRCode.GetParameter("data").clsArgumentCodeStructure.GetParameter("measure.vars")
-                                If clsMeasureVarsParam IsNot Nothing Then
-                                    lstMeasureVars = ExtractItemsFromRList(clsMeasureVarsParam.strArgumentValue)
-                                End If
-                                If lstMeasureVars IsNot Nothing Then
-                                    For Each strTemp As String In lstMeasureVars
-                                        'TODO This only works if the selector is updated before receivers!
-                                        '     Needs to change eventually.
-                                        If Selector IsNot Nothing AndAlso strTemp <> "" Then
-                                            ucrMultipleVariables.Add(strTemp, Selector.strCurrentDataFrame)
-                                        End If
-                                    Next
-                                End If
+                            If clsMeasureVarsParam IsNot Nothing Then
+                                lstMeasureVars = ExtractItemsFromRList(clsMeasureVarsParam.strArgumentValue)
+                            End If
+                            If lstMeasureVars IsNot Nothing Then
+                                For Each strTemp As String In lstMeasureVars
+                                    'TODO This only works if the selector is updated before receivers!
+                                    '     Needs to change eventually.
+                                    If Selector IsNot Nothing AndAlso strTemp <> "" Then
+                                        ucrMultipleVariables.Add(strTemp, Selector.strCurrentDataFrame)
+                                    End If
+                                Next
                             End If
                         Else
                             bSingleVariable = True
