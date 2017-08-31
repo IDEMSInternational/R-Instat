@@ -269,7 +269,7 @@ Partial Class sdgSummaries
         Me.tbSummaries.Location = New System.Drawing.Point(12, 8)
         Me.tbSummaries.Name = "tbSummaries"
         Me.tbSummaries.SelectedIndex = 0
-        Me.tbSummaries.Size = New System.Drawing.Size(342, 365)
+        Me.tbSummaries.Size = New System.Drawing.Size(388, 365)
         Me.tbSummaries.TabIndex = 5
         '
         'tbsum
@@ -281,7 +281,7 @@ Partial Class sdgSummaries
         Me.tbsum.Location = New System.Drawing.Point(4, 22)
         Me.tbsum.Name = "tbsum"
         Me.tbsum.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbsum.Size = New System.Drawing.Size(334, 339)
+        Me.tbsum.Size = New System.Drawing.Size(380, 339)
         Me.tbsum.TabIndex = 0
         Me.tbsum.Text = "Summaries"
         Me.tbsum.UseVisualStyleBackColor = True
@@ -301,9 +301,9 @@ Partial Class sdgSummaries
         'ucrChkMedianAbsoluteDeviation
         '
         Me.ucrChkMedianAbsoluteDeviation.Checked = False
-        Me.ucrChkMedianAbsoluteDeviation.Location = New System.Drawing.Point(136, 24)
+        Me.ucrChkMedianAbsoluteDeviation.Location = New System.Drawing.Point(208, 24)
         Me.ucrChkMedianAbsoluteDeviation.Name = "ucrChkMedianAbsoluteDeviation"
-        Me.ucrChkMedianAbsoluteDeviation.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkMedianAbsoluteDeviation.Size = New System.Drawing.Size(171, 20)
         Me.ucrChkMedianAbsoluteDeviation.TabIndex = 2
         '
         'ucrChkCoefficientOfVariation
@@ -311,7 +311,7 @@ Partial Class sdgSummaries
         Me.ucrChkCoefficientOfVariation.Checked = False
         Me.ucrChkCoefficientOfVariation.Location = New System.Drawing.Point(19, 24)
         Me.ucrChkCoefficientOfVariation.Name = "ucrChkCoefficientOfVariation"
-        Me.ucrChkCoefficientOfVariation.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkCoefficientOfVariation.Size = New System.Drawing.Size(171, 20)
         Me.ucrChkCoefficientOfVariation.TabIndex = 1
         '
         'tbSkewness
@@ -330,7 +330,7 @@ Partial Class sdgSummaries
         Me.ucrChkSkewness.Checked = False
         Me.ucrChkSkewness.Location = New System.Drawing.Point(29, 25)
         Me.ucrChkSkewness.Name = "ucrChkSkewness"
-        Me.ucrChkSkewness.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkSkewness.Size = New System.Drawing.Size(152, 20)
         Me.ucrChkSkewness.TabIndex = 2
         '
         'tbKurtosis
@@ -349,7 +349,7 @@ Partial Class sdgSummaries
         Me.ucrChkKurtosis.Checked = False
         Me.ucrChkKurtosis.Location = New System.Drawing.Point(19, 28)
         Me.ucrChkKurtosis.Name = "ucrChkKurtosis"
-        Me.ucrChkKurtosis.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkKurtosis.Size = New System.Drawing.Size(163, 20)
         Me.ucrChkKurtosis.TabIndex = 2
         '
         'tbMissingOptions
@@ -394,7 +394,7 @@ Partial Class sdgSummaries
         'lblPercentage
         '
         Me.lblPercentage.AutoSize = True
-        Me.lblPercentage.Location = New System.Drawing.Point(0, 107)
+        Me.lblPercentage.Location = New System.Drawing.Point(4, 70)
         Me.lblPercentage.Name = "lblPercentage"
         Me.lblPercentage.Size = New System.Drawing.Size(309, 13)
         Me.lblPercentage.TabIndex = 6
@@ -403,7 +403,7 @@ Partial Class sdgSummaries
         'lblNumber
         '
         Me.lblNumber.AutoSize = True
-        Me.lblNumber.Location = New System.Drawing.Point(0, 63)
+        Me.lblNumber.Location = New System.Drawing.Point(6, 70)
         Me.lblNumber.Name = "lblNumber"
         Me.lblNumber.Size = New System.Drawing.Size(280, 13)
         Me.lblNumber.TabIndex = 5
@@ -413,7 +413,7 @@ Partial Class sdgSummaries
         '
         Me.ucrNudPercentage.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPercentage.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPercentage.Location = New System.Drawing.Point(313, 103)
+        Me.ucrNudPercentage.Location = New System.Drawing.Point(319, 66)
         Me.ucrNudPercentage.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudPercentage.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPercentage.Name = "ucrNudPercentage"
@@ -425,7 +425,7 @@ Partial Class sdgSummaries
         '
         Me.ucrNudNumber.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumber.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNumber.Location = New System.Drawing.Point(312, 56)
+        Me.ucrNudNumber.Location = New System.Drawing.Point(318, 66)
         Me.ucrNudNumber.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNumber.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumber.Name = "ucrNudNumber"
@@ -444,7 +444,7 @@ Partial Class sdgSummaries
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(364, 421)
+        Me.ClientSize = New System.Drawing.Size(406, 421)
         Me.Controls.Add(Me.tbSummaries)
         Me.Controls.Add(Me.ucrButtonsSummaries)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow

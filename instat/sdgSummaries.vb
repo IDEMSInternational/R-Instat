@@ -69,14 +69,16 @@ Public Class sdgSummaries
         ucrChkLowerQuartile.SetParameter(New RParameter("lower_quartile", 14), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "lower_quartile" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkLowerQuartile.SetText("Lower Quartile")
 
+        ucrChkKurtosis.SetParameter(New RParameter("summary_kurtosis", 15), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_kurtosis" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkKurtosis.SetText("Kurtosis")
 
+        ucrChkSkewness.SetParameter(New RParameter("summary_skewness", 15), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_skewness" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkSkewness.SetText("Skewness")
 
+        ucrChkCoefficientOfVariation.SetParameter(New RParameter("summary_coef_var", 15), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_coef_var" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkCoefficientOfVariation.SetText("Coefficient Of Variation")
 
-        ucrChkMedianAbsoluteDeviation.SetText("Median Absolute Version")
-        ucrChkMedianAbsoluteDeviation.Visible = False
+        ucrChkMedianAbsoluteDeviation.SetText("Median Absolute Deviation(MAD)")
 
         ucrPnlMissingOptions.AddRadioButton(rdoNumber)
         ucrPnlMissingOptions.AddRadioButton(rdoPercentage)
@@ -87,7 +89,7 @@ Public Class sdgSummaries
         ucrNudNumber.SetLinkedDisplayControl(lblNumber)
 
         lstCheckboxes = New List(Of ucrCheck)
-        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkUpperQuartile, ucrChkLowerQuartile})
+        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkUpperQuartile, ucrChkLowerQuartile, ucrChkKurtosis, ucrChkCoefficientOfVariation, ucrChkSkewness})
         For Each ctrTemp As ucrCheck In lstCheckboxes
             ctrTemp.SetParameterIncludeArgumentName(False)
             ctrTemp.SetRDefault(Chr(34) & Chr(34))
