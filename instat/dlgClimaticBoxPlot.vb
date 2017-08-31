@@ -35,6 +35,7 @@ Public Class dlgClimaticBoxPlot
     Private bResetSubdialog As Boolean = True
     Private bResetBoxLayerSubdialog As Boolean = True
     Private clsAsFactor As New RFunction
+
     Private Sub dlgClimaticBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -78,27 +79,27 @@ Public Class dlgClimaticBoxPlot
         ucrSelectorClimaticBoxPlot.SetParameter(New RParameter("data", 0))
         ucrSelectorClimaticBoxPlot.SetParameterIsrfunction()
 
-        ucrVariablesAsFactorForClimaticBoxplot.Selector = ucrSelectorClimaticBoxPlot
         ucrVariablesAsFactorForClimaticBoxplot.SetParameter(New RParameter("y", 0))
+        ucrVariablesAsFactorForClimaticBoxplot.Selector = ucrSelectorClimaticBoxPlot
         ucrVariablesAsFactorForClimaticBoxplot.SetIncludedDataTypes({"numeric"})
         ucrVariablesAsFactorForClimaticBoxplot.strSelectorHeading = "Numerics"
         ucrVariablesAsFactorForClimaticBoxplot.SetParameterIsString()
         ucrVariablesAsFactorForClimaticBoxplot.bWithQuotes = False
 
-        ucrReceiverXVariable.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiverXVariable.SetParameter(New RParameter("x", 1))
+        ucrReceiverXVariable.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiverXVariable.SetParameterIsString()
         ucrReceiverXVariable.bWithQuotes = False
         ucrReceiverXVariable.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrReceiverXVariable.bAddParameterIfEmpty = True
 
-        ucrReceiverFacetBy.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiverFacetBy.SetParameter(New RParameter("var1", 0))
+        ucrReceiverFacetBy.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiverFacetBy.SetParameterIsString()
         ucrReceiverFacetBy.bWithQuotes = False
 
-        ucrReceiver2ndFacet.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiver2ndFacet.SetParameter(New RParameter("var2", 1))
+        ucrReceiver2ndFacet.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiver2ndFacet.SetParameterIsString()
         ucrReceiver2ndFacet.bWithQuotes = False
         ucrVariablesAsFactorForClimaticBoxplot.SetMeAsReceiver()
@@ -112,24 +113,27 @@ Public Class dlgClimaticBoxPlot
         clsCoordFlipFunc.SetRCommand("coord_flip")
         clsCoordFlipParam.SetArgumentName("coord_flip")
         clsCoordFlipParam.SetArgument(clsCoordFlipFunc)
-        ucrChkHorizontalBoxplot.SetText("Horizontal Plot")
         ucrChkHorizontalBoxplot.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkHorizontalBoxplot.SetText("Horizontal Plot")
 
-        ucrChkMargins.SetText("Margins")
         ucrChkMargins.SetParameter(New RParameter("margins"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=False)
+        ucrChkMargins.SetText("Margins")
         ucrChkMargins.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkMargins.SetRDefault("FALSE")
 
-        ucrChkVerticalXTickMarkers.SetText("Verical X Tick Markers")
+        ucrChkVerticalXTickMarkers.SetText("Vertical X Tick Markers")
+        ucrChkVerticalXTickMarkers.SetParameter(clsThemeParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
         clsThemeFunc.SetPackageName("ggplot2")
-        clsTextElementFunc.SetPackageName("ggplot2")
         clsThemeFunc.SetRCommand("theme")
+        clsThemeFunc.AddParameter("axis.text.x", clsRFunctionParameter:=clsTextElementFunc)
+
+        clsThemeParam.SetArgument(clsThemeFunc)
+        clsThemeParam.SetArgumentName("theme")
+
+        clsTextElementFunc.SetPackageName("ggplot2")
         clsTextElementFunc.SetRCommand("element_text")
         clsTextElementFunc.AddParameter("angle", "90")
-        clsThemeFunc.AddParameter("axis.text.x", clsRFunctionParameter:=clsTextElementFunc)
-        clsThemeParam.SetArgumentName("theme")
-        clsThemeParam.SetArgument(clsThemeFunc)
-        ucrChkVerticalXTickMarkers.SetParameter(clsThemeParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         ucrSavePlot.SetPrefix("boxplot")
         ucrSavePlot.SetIsComboBox()
