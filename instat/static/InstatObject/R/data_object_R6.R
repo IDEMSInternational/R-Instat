@@ -2154,9 +2154,9 @@ data_object$set("public","display_daily_graph", function(data_name, date_col = N
   if(!self$is_climatic_data()) stop("Data is not defined as climatic.")
   if(missing(date_col)) stop("Date columns must be specified.")
   if(missing(climatic_element)) stop("Element column(s) must be specified.")
-#  if(!all(c(date_col, station_col, year_col, doy_col, climatic_element)) %in% self$get_column_names()) {
- #  stop("Not all specified columns found in the data")
- #}
+  #if(!all(c(date_col, station_col, year_col, doy_col, climatic_element)) %in% self$get_column_names()) {
+  # stop("Not all specified columns found in the data")
+# }
   date_data <- self$get_columns_from_data(date_col)
   if(!lubridate::is.Date(date_data)) stop(paste(date_col, " must be of type Date."))
   #Extracting  year and day of the year
@@ -2181,12 +2181,12 @@ data_object$set("public","display_daily_graph", function(data_name, date_col = N
   
   graph_list <- list()
   for(station_name in unique(station_data)) {
-    if(!is.null(station_col)) subdata <- curr_data[curr_data[[station_col]] == station_name, ]
-    else subdata <- curr_data
-    if(nrow(subdata) != 0) {
-      g <- ggplot2::ggplot(data = subdata, mapping = ggplot2::aes_(x = as.name(doy_col), y = as.name(climatic_element))) + ggplot2::geom_bar(stat  = "identity", fill = bar_colour) + ggplot2::geom_rug(data = subdata[is.na(sub_data[[climatic_element]]), ], mapping = ggplot2::aes_(x = as.name(doy_col)), sides = "b", color = rug_colour) + ggplot2::theme_minimal() + ggplot2::coord_cartesian(ylim = c(0, upper_limit)) + ggplot2::scale_x_continuous(breaks = c(1, 32, 61, 92, 122, 153, 183, 214, 245, 275, 306, 336, 367), labels = c(month.abb, ""), limits = c(0, 367)) + facet_wrap(facets = as.formula(paste("~", year_col))) + ggplot2::ggtitle(paste(station_name, "Daily", climatic_element)) + ggplot2::theme(panel.grid.minor = element_blank(), plot.title = element_text(hjust = 0.5, size = 20), axis.title = element_text(size = 16)) + xlab("Day of the year") + ylab(paste(climatic_element, "amount"))
-      if(any(subdata[[climatic_element]] > upper_limit)) {
-        g <- g + ggplot2::geom_text(data = subdata[subdata[[climatic_element]] > 100, ], mapping = ggplot2::aes_(y = upper_limit, label = as.name(climatic_element)), size = 3)
+    if(!is.null(station_col)) curr_data <- curr_data[curr_data[[station_col]] == station_name, ]
+    else curr_data <- curr_data
+    if(nrow(curr_data) != 0) {
+      g <- ggplot2::ggplot(data = curr_data, mapping = ggplot2::aes_(x = as.name(doy_col), y = as.name(climatic_element))) + ggplot2::geom_bar(stat  = "identity", fill = bar_colour) + ggplot2::geom_rug(data = curr_data[is.na(curr_data[[climatic_element]]), ], mapping = ggplot2::aes_(x = as.name(doy_col)), sides = "b", color = rug_colour) + ggplot2::theme_minimal() + ggplot2::coord_cartesian(ylim = c(0, upper_limit)) + ggplot2::scale_x_continuous(breaks = c(1, 32, 61, 92, 122, 153, 183, 214, 245, 275, 306, 336, 367), labels = c(month.abb, ""), limits = c(0, 367)) + facet_wrap(facets = as.formula(paste("~", year_col))) + ggplot2::ggtitle(paste(station_name, "Daily", climatic_element)) + ggplot2::theme(panel.grid.minor = element_blank(), plot.title = element_text(hjust = 0.5, size = 20), axis.title = element_text(size = 16)) + xlab("Day of the year") + ylab(paste(climatic_element, "amount"))
+      if(any(curr_data[[climatic_element]] > upper_limit)) {
+        g <- g + ggplot2::geom_text(data = curr_data[curr_data[[climatic_element]] > 100, ], mapping = ggplot2::aes_(y = upper_limit, label = as.name(climatic_element)), size = 3)
       }
     }
     graph_list[[length(graph_list) + 1]] <- g

@@ -49,11 +49,10 @@ Public Class dlgDisplayDailyData
         ucrReceiverYear.SetParameter(New RParameter("year_col", 3))
         ucrReceiverYear.SetParameterIsString()
 
-
+        ucrBase.clsRsyntax.iCallType = 3
 
         ucrReceiverDayOfYear.SetParameter(New RParameter("doy_col", 5))
         ucrReceiverDayOfYear.SetParameterIsString()
-
 
         ucrReceiverYear.Selector = ucrSelectorDisplayDailyClimaticData
         ucrReceiverYear.SetClimaticType("year")
@@ -117,6 +116,7 @@ Public Class dlgDisplayDailyData
         ucrInputBarColour.SetRCode(clsDisplayDailyGraph, bReset)
         ucrNudUpperYaxis.SetRCode(clsDisplayDailyGraph, bReset)
         ucrReceiverElements.SetRCode(clsDisplayDailyGraph, bReset)
+        ucrPnlFrequencyDisplay.SetRCode(clsDisplayDailyGraph, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
