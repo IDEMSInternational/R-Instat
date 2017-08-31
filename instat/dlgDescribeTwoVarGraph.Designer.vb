@@ -43,10 +43,10 @@ Partial Class dlgDescribeTwoVarGraph
         Me.lblFirstVariables = New System.Windows.Forms.Label()
         Me.ucrFlipCoordinates = New instat.ucrCheck()
         Me.ucrSaveGraph = New instat.ucrSave()
-        Me.ucrReceiverMultipleTwoVar = New instat.ucrVariablesAsFactor()
         Me.ucrSecondVariableReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorTwoVarGraph = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrReceiverMultipleTwoVar = New instat.ucrVariablesAsFactor()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -62,11 +62,11 @@ Partial Class dlgDescribeTwoVarGraph
         'lblSecondVariable
         '
         Me.lblSecondVariable.AutoSize = True
-        Me.lblSecondVariable.Location = New System.Drawing.Point(261, 176)
+        Me.lblSecondVariable.Location = New System.Drawing.Point(261, 105)
         Me.lblSecondVariable.Name = "lblSecondVariable"
-        Me.lblSecondVariable.Size = New System.Drawing.Size(88, 13)
+        Me.lblSecondVariable.Size = New System.Drawing.Size(99, 13)
         Me.lblSecondVariable.TabIndex = 3
-        Me.lblSecondVariable.Text = "Second Variable:"
+        Me.lblSecondVariable.Text = "Second Variable(s):"
         '
         'lblFirstVariables
         '
@@ -93,22 +93,10 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrSaveGraph.Size = New System.Drawing.Size(255, 24)
         Me.ucrSaveGraph.TabIndex = 7
         '
-        'ucrReceiverMultipleTwoVar
-        '
-        Me.ucrReceiverMultipleTwoVar.frmParent = Me
-        Me.ucrReceiverMultipleTwoVar.Location = New System.Drawing.Point(261, 30)
-        Me.ucrReceiverMultipleTwoVar.Name = "ucrReceiverMultipleTwoVar"
-        Me.ucrReceiverMultipleTwoVar.Selector = Nothing
-        Me.ucrReceiverMultipleTwoVar.Size = New System.Drawing.Size(120, 138)
-        Me.ucrReceiverMultipleTwoVar.strNcFilePath = ""
-        Me.ucrReceiverMultipleTwoVar.TabIndex = 1
-        Me.ucrReceiverMultipleTwoVar.ucrSelector = Nothing
-        Me.ucrReceiverMultipleTwoVar.ucrVariableSelector = Nothing
-        '
         'ucrSecondVariableReceiver
         '
         Me.ucrSecondVariableReceiver.frmParent = Me
-        Me.ucrSecondVariableReceiver.Location = New System.Drawing.Point(261, 191)
+        Me.ucrSecondVariableReceiver.Location = New System.Drawing.Point(264, 58)
         Me.ucrSecondVariableReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSecondVariableReceiver.Name = "ucrSecondVariableReceiver"
         Me.ucrSecondVariableReceiver.Selector = Nothing
@@ -134,6 +122,18 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 8
         '
+        'ucrReceiverMultipleTwoVar
+        '
+        Me.ucrReceiverMultipleTwoVar.frmParent = Me
+        Me.ucrReceiverMultipleTwoVar.Location = New System.Drawing.Point(264, 93)
+        Me.ucrReceiverMultipleTwoVar.Name = "ucrReceiverMultipleTwoVar"
+        Me.ucrReceiverMultipleTwoVar.Selector = Nothing
+        Me.ucrReceiverMultipleTwoVar.Size = New System.Drawing.Size(120, 138)
+        Me.ucrReceiverMultipleTwoVar.strNcFilePath = ""
+        Me.ucrReceiverMultipleTwoVar.TabIndex = 1
+        Me.ucrReceiverMultipleTwoVar.ucrSelector = Nothing
+        Me.ucrReceiverMultipleTwoVar.ucrVariableSelector = Nothing
+        '
         'dlgDescribeTwoVarGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -142,12 +142,12 @@ Partial Class dlgDescribeTwoVarGraph
         Me.Controls.Add(Me.ucrFlipCoordinates)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.lblFirstVariables)
-        Me.Controls.Add(Me.ucrReceiverMultipleTwoVar)
         Me.Controls.Add(Me.lblSecondVariable)
         Me.Controls.Add(Me.ucrSecondVariableReceiver)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrSelectorTwoVarGraph)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.ucrReceiverMultipleTwoVar)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
