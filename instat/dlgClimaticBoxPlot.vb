@@ -244,16 +244,22 @@ Public Class dlgClimaticBoxPlot
     Private Sub ucrPnlPlots_ControlValueChanged() Handles ucrPnlPlots.ControlValueChanged
         If rdoBoxplot.Checked Then
             clsRgeomPlotFunction.SetRCommand("geom_boxplot")
-            ucrSavePlot.SetPrefix("boxplot")
             cmdBoxPlotOptions.Text = "Boxplot Options"
+            If Not ucrSavePlot.bUserTyped Then
+                ucrSavePlot.SetPrefix("boxplot")
+            End If
         ElseIf rdoJitter.Checked Then
             clsRgeomPlotFunction.SetRCommand("geom_jitter")
-            ucrSavePlot.SetPrefix("jitter")
             cmdBoxPlotOptions.Text = "Jitter Options"
+            If Not ucrSavePlot.bUserTyped Then
+                ucrSavePlot.SetPrefix("jitter")
+            End If
         Else
             clsRgeomPlotFunction.SetRCommand("geom_violin")
-            ucrSavePlot.SetPrefix("violin")
             cmdBoxPlotOptions.Text = "Violin Options"
+            If Not ucrSavePlot.bUserTyped Then
+                ucrSavePlot.SetPrefix("violin")
+            End If
         End If
     End Sub
 
