@@ -60,6 +60,8 @@ Partial Class sdgSummaries
         Me.tbSummaries = New System.Windows.Forms.TabControl()
         Me.tbsum = New System.Windows.Forms.TabPage()
         Me.tbScale = New System.Windows.Forms.TabPage()
+        Me.ucrChkSn = New instat.ucrCheck()
+        Me.ucrChkQn = New instat.ucrCheck()
         Me.ucrChkMedianAbsoluteDeviation = New instat.ucrCheck()
         Me.ucrChkCoefficientOfVariation = New instat.ucrCheck()
         Me.tbSkewness = New System.Windows.Forms.TabPage()
@@ -74,8 +76,6 @@ Partial Class sdgSummaries
         Me.ucrNudPercentage = New instat.ucrNud()
         Me.ucrNudNumber = New instat.ucrNud()
         Me.ucrPnlMissingOptions = New instat.UcrPanel()
-        Me.ucrChkSn = New instat.ucrCheck()
-        Me.ucrChkQn = New instat.ucrCheck()
         Me.grpCommon.SuspendLayout()
         Me.grpNotOrderedFactor.SuspendLayout()
         Me.grpNumeric.SuspendLayout()
@@ -271,7 +271,7 @@ Partial Class sdgSummaries
         Me.tbSummaries.Location = New System.Drawing.Point(12, 8)
         Me.tbSummaries.Name = "tbSummaries"
         Me.tbSummaries.SelectedIndex = 0
-        Me.tbSummaries.Size = New System.Drawing.Size(388, 365)
+        Me.tbSummaries.Size = New System.Drawing.Size(358, 365)
         Me.tbSummaries.TabIndex = 5
         '
         'tbsum
@@ -283,7 +283,7 @@ Partial Class sdgSummaries
         Me.tbsum.Location = New System.Drawing.Point(4, 22)
         Me.tbsum.Name = "tbsum"
         Me.tbsum.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbsum.Size = New System.Drawing.Size(380, 339)
+        Me.tbsum.Size = New System.Drawing.Size(350, 339)
         Me.tbsum.TabIndex = 0
         Me.tbsum.Text = "Summaries"
         Me.tbsum.UseVisualStyleBackColor = True
@@ -302,10 +302,26 @@ Partial Class sdgSummaries
         Me.tbScale.Text = "Scale"
         Me.tbScale.UseVisualStyleBackColor = True
         '
+        'ucrChkSn
+        '
+        Me.ucrChkSn.Checked = False
+        Me.ucrChkSn.Location = New System.Drawing.Point(208, 48)
+        Me.ucrChkSn.Name = "ucrChkSn"
+        Me.ucrChkSn.Size = New System.Drawing.Size(120, 20)
+        Me.ucrChkSn.TabIndex = 4
+        '
+        'ucrChkQn
+        '
+        Me.ucrChkQn.Checked = False
+        Me.ucrChkQn.Location = New System.Drawing.Point(19, 47)
+        Me.ucrChkQn.Name = "ucrChkQn"
+        Me.ucrChkQn.Size = New System.Drawing.Size(129, 20)
+        Me.ucrChkQn.TabIndex = 3
+        '
         'ucrChkMedianAbsoluteDeviation
         '
         Me.ucrChkMedianAbsoluteDeviation.Checked = False
-        Me.ucrChkMedianAbsoluteDeviation.Location = New System.Drawing.Point(208, 31)
+        Me.ucrChkMedianAbsoluteDeviation.Location = New System.Drawing.Point(208, 15)
         Me.ucrChkMedianAbsoluteDeviation.Name = "ucrChkMedianAbsoluteDeviation"
         Me.ucrChkMedianAbsoluteDeviation.Size = New System.Drawing.Size(166, 20)
         Me.ucrChkMedianAbsoluteDeviation.TabIndex = 2
@@ -313,7 +329,7 @@ Partial Class sdgSummaries
         'ucrChkCoefficientOfVariation
         '
         Me.ucrChkCoefficientOfVariation.Checked = False
-        Me.ucrChkCoefficientOfVariation.Location = New System.Drawing.Point(19, 33)
+        Me.ucrChkCoefficientOfVariation.Location = New System.Drawing.Point(19, 16)
         Me.ucrChkCoefficientOfVariation.Name = "ucrChkCoefficientOfVariation"
         Me.ucrChkCoefficientOfVariation.Size = New System.Drawing.Size(171, 20)
         Me.ucrChkCoefficientOfVariation.TabIndex = 1
@@ -332,7 +348,7 @@ Partial Class sdgSummaries
         'ucrChkSkewness
         '
         Me.ucrChkSkewness.Checked = False
-        Me.ucrChkSkewness.Location = New System.Drawing.Point(29, 25)
+        Me.ucrChkSkewness.Location = New System.Drawing.Point(18, 15)
         Me.ucrChkSkewness.Name = "ucrChkSkewness"
         Me.ucrChkSkewness.Size = New System.Drawing.Size(152, 20)
         Me.ucrChkSkewness.TabIndex = 2
@@ -351,7 +367,7 @@ Partial Class sdgSummaries
         'ucrChkKurtosis
         '
         Me.ucrChkKurtosis.Checked = False
-        Me.ucrChkKurtosis.Location = New System.Drawing.Point(19, 28)
+        Me.ucrChkKurtosis.Location = New System.Drawing.Point(19, 16)
         Me.ucrChkKurtosis.Name = "ucrChkKurtosis"
         Me.ucrChkKurtosis.Size = New System.Drawing.Size(163, 20)
         Me.ucrChkKurtosis.TabIndex = 2
@@ -376,7 +392,7 @@ Partial Class sdgSummaries
         'rdoPercentage
         '
         Me.rdoPercentage.AutoSize = True
-        Me.rdoPercentage.Location = New System.Drawing.Point(129, 30)
+        Me.rdoPercentage.Location = New System.Drawing.Point(129, 23)
         Me.rdoPercentage.Name = "rdoPercentage"
         Me.rdoPercentage.Size = New System.Drawing.Size(80, 17)
         Me.rdoPercentage.TabIndex = 8
@@ -387,7 +403,7 @@ Partial Class sdgSummaries
         'rdoNumber
         '
         Me.rdoNumber.AutoSize = True
-        Me.rdoNumber.Location = New System.Drawing.Point(30, 30)
+        Me.rdoNumber.Location = New System.Drawing.Point(30, 23)
         Me.rdoNumber.Name = "rdoNumber"
         Me.rdoNumber.Size = New System.Drawing.Size(62, 17)
         Me.rdoNumber.TabIndex = 7
@@ -439,26 +455,10 @@ Partial Class sdgSummaries
         '
         'ucrPnlMissingOptions
         '
-        Me.ucrPnlMissingOptions.Location = New System.Drawing.Point(18, 15)
+        Me.ucrPnlMissingOptions.Location = New System.Drawing.Point(18, 8)
         Me.ucrPnlMissingOptions.Name = "ucrPnlMissingOptions"
         Me.ucrPnlMissingOptions.Size = New System.Drawing.Size(214, 45)
         Me.ucrPnlMissingOptions.TabIndex = 2
-        '
-        'ucrChkSn
-        '
-        Me.ucrChkSn.Checked = False
-        Me.ucrChkSn.Location = New System.Drawing.Point(208, 80)
-        Me.ucrChkSn.Name = "ucrChkSn"
-        Me.ucrChkSn.Size = New System.Drawing.Size(120, 20)
-        Me.ucrChkSn.TabIndex = 4
-        '
-        'ucrChkQn
-        '
-        Me.ucrChkQn.Checked = False
-        Me.ucrChkQn.Location = New System.Drawing.Point(19, 80)
-        Me.ucrChkQn.Name = "ucrChkQn"
-        Me.ucrChkQn.Size = New System.Drawing.Size(129, 20)
-        Me.ucrChkQn.TabIndex = 3
         '
         'sdgSummaries
         '
