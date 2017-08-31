@@ -147,6 +147,7 @@ Partial Class dlgHistogram
         Me.ucrVariablesAsFactorforHist.Name = "ucrVariablesAsFactorforHist"
         Me.ucrVariablesAsFactorforHist.Selector = Nothing
         Me.ucrVariablesAsFactorforHist.Size = New System.Drawing.Size(125, 136)
+        Me.ucrVariablesAsFactorforHist.strNcFilePath = ""
         Me.ucrVariablesAsFactorforHist.TabIndex = 5
         Me.ucrVariablesAsFactorforHist.ucrSelector = Nothing
         Me.ucrVariablesAsFactorforHist.ucrVariableSelector = Nothing
@@ -159,6 +160,7 @@ Partial Class dlgHistogram
         Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
         Me.ucrFactorReceiver.Selector = Nothing
         Me.ucrFactorReceiver.Size = New System.Drawing.Size(125, 20)
+        Me.ucrFactorReceiver.strNcFilePath = ""
         Me.ucrFactorReceiver.TabIndex = 7
         Me.ucrFactorReceiver.ucrSelector = Nothing
         '

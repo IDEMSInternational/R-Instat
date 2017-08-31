@@ -54,7 +54,7 @@ Partial Class dlgClimaticBoxPlot
         'lblXVariable
         '
         Me.lblXVariable.AutoSize = True
-        Me.lblXVariable.Location = New System.Drawing.Point(251, 201)
+        Me.lblXVariable.Location = New System.Drawing.Point(257, 207)
         Me.lblXVariable.Name = "lblXVariable"
         Me.lblXVariable.Size = New System.Drawing.Size(39, 13)
         Me.lblXVariable.TabIndex = 6
@@ -65,10 +65,10 @@ Partial Class dlgClimaticBoxPlot
         Me.grpLayout.Controls.Add(Me.rdoDataThenYear)
         Me.grpLayout.Controls.Add(Me.rdoYearThenData)
         Me.grpLayout.Controls.Add(Me.ucrPnlLayoutOptions)
-        Me.grpLayout.Location = New System.Drawing.Point(6, 373)
+        Me.grpLayout.Location = New System.Drawing.Point(10, 303)
         Me.grpLayout.Name = "grpLayout"
-        Me.grpLayout.Size = New System.Drawing.Size(124, 61)
-        Me.grpLayout.TabIndex = 14
+        Me.grpLayout.Size = New System.Drawing.Size(120, 61)
+        Me.grpLayout.TabIndex = 11
         Me.grpLayout.TabStop = False
         Me.grpLayout.Text = "Layout"
         '
@@ -76,7 +76,7 @@ Partial Class dlgClimaticBoxPlot
         '
         Me.rdoDataThenYear.AutoSize = True
         Me.rdoDataThenYear.Enabled = False
-        Me.rdoDataThenYear.Location = New System.Drawing.Point(4, 37)
+        Me.rdoDataThenYear.Location = New System.Drawing.Point(6, 42)
         Me.rdoDataThenYear.Name = "rdoDataThenYear"
         Me.rdoDataThenYear.Size = New System.Drawing.Size(101, 17)
         Me.rdoDataThenYear.TabIndex = 1
@@ -108,7 +108,7 @@ Partial Class dlgClimaticBoxPlot
         Me.cmdBoxPlotOptions.Location = New System.Drawing.Point(10, 241)
         Me.cmdBoxPlotOptions.Name = "cmdBoxPlotOptions"
         Me.cmdBoxPlotOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdBoxPlotOptions.TabIndex = 8
+        Me.cmdBoxPlotOptions.TabIndex = 9
         Me.cmdBoxPlotOptions.Tag = "Boxplot_Options"
         Me.cmdBoxPlotOptions.Text = "Boxplot Options"
         Me.cmdBoxPlotOptions.UseVisualStyleBackColor = True
@@ -118,7 +118,7 @@ Partial Class dlgClimaticBoxPlot
         Me.cmdOptions.Location = New System.Drawing.Point(10, 272)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdOptions.TabIndex = 9
+        Me.cmdOptions.TabIndex = 10
         Me.cmdOptions.Tag = "Options"
         Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
@@ -130,7 +130,7 @@ Partial Class dlgClimaticBoxPlot
         Me.rdoViolin.FlatAppearance.BorderSize = 2
         Me.rdoViolin.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoViolin.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoViolin.Location = New System.Drawing.Point(262, 12)
+        Me.rdoViolin.Location = New System.Drawing.Point(257, 12)
         Me.rdoViolin.Name = "rdoViolin"
         Me.rdoViolin.Size = New System.Drawing.Size(98, 27)
         Me.rdoViolin.TabIndex = 3
@@ -146,7 +146,7 @@ Partial Class dlgClimaticBoxPlot
         Me.rdoJitter.FlatAppearance.BorderSize = 2
         Me.rdoJitter.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoJitter.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoJitter.Location = New System.Drawing.Point(166, 12)
+        Me.rdoJitter.Location = New System.Drawing.Point(161, 12)
         Me.rdoJitter.Name = "rdoJitter"
         Me.rdoJitter.Size = New System.Drawing.Size(98, 27)
         Me.rdoJitter.TabIndex = 2
@@ -162,7 +162,7 @@ Partial Class dlgClimaticBoxPlot
         Me.rdoBoxplot.FlatAppearance.BorderSize = 2
         Me.rdoBoxplot.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoBoxplot.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoBoxplot.Location = New System.Drawing.Point(70, 12)
+        Me.rdoBoxplot.Location = New System.Drawing.Point(65, 12)
         Me.rdoBoxplot.Name = "rdoBoxplot"
         Me.rdoBoxplot.Size = New System.Drawing.Size(98, 27)
         Me.rdoBoxplot.TabIndex = 1
@@ -178,21 +178,21 @@ Partial Class dlgClimaticBoxPlot
         Me.grpFacets.Controls.Add(Me.ucrChkMargins)
         Me.grpFacets.Controls.Add(Me.lblSecondFacet)
         Me.grpFacets.Controls.Add(Me.lblFacetBy)
-        Me.grpFacets.Location = New System.Drawing.Point(254, 241)
+        Me.grpFacets.Location = New System.Drawing.Point(245, 252)
         Me.grpFacets.Name = "grpFacets"
         Me.grpFacets.Size = New System.Drawing.Size(149, 138)
-        Me.grpFacets.TabIndex = 10
+        Me.grpFacets.TabIndex = 8
         Me.grpFacets.TabStop = False
         Me.grpFacets.Text = "Facets"
         '
         'ucrReceiver2ndFacet
         '
         Me.ucrReceiver2ndFacet.frmParent = Me
-        Me.ucrReceiver2ndFacet.Location = New System.Drawing.Point(5, 86)
+        Me.ucrReceiver2ndFacet.Location = New System.Drawing.Point(13, 81)
         Me.ucrReceiver2ndFacet.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiver2ndFacet.Name = "ucrReceiver2ndFacet"
         Me.ucrReceiver2ndFacet.Selector = Nothing
-        Me.ucrReceiver2ndFacet.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiver2ndFacet.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiver2ndFacet.strNcFilePath = ""
         Me.ucrReceiver2ndFacet.TabIndex = 3
         Me.ucrReceiver2ndFacet.ucrSelector = Nothing
@@ -200,11 +200,11 @@ Partial Class dlgClimaticBoxPlot
         'ucrReceiverFacetBy
         '
         Me.ucrReceiverFacetBy.frmParent = Me
-        Me.ucrReceiverFacetBy.Location = New System.Drawing.Point(5, 38)
+        Me.ucrReceiverFacetBy.Location = New System.Drawing.Point(13, 36)
         Me.ucrReceiverFacetBy.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFacetBy.Name = "ucrReceiverFacetBy"
         Me.ucrReceiverFacetBy.Selector = Nothing
-        Me.ucrReceiverFacetBy.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverFacetBy.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverFacetBy.strNcFilePath = ""
         Me.ucrReceiverFacetBy.TabIndex = 1
         Me.ucrReceiverFacetBy.ucrSelector = Nothing
@@ -212,15 +212,15 @@ Partial Class dlgClimaticBoxPlot
         'ucrChkMargins
         '
         Me.ucrChkMargins.Checked = False
-        Me.ucrChkMargins.Location = New System.Drawing.Point(5, 112)
+        Me.ucrChkMargins.Location = New System.Drawing.Point(13, 112)
         Me.ucrChkMargins.Name = "ucrChkMargins"
-        Me.ucrChkMargins.Size = New System.Drawing.Size(143, 20)
+        Me.ucrChkMargins.Size = New System.Drawing.Size(130, 20)
         Me.ucrChkMargins.TabIndex = 4
         '
         'lblSecondFacet
         '
         Me.lblSecondFacet.AutoSize = True
-        Me.lblSecondFacet.Location = New System.Drawing.Point(2, 70)
+        Me.lblSecondFacet.Location = New System.Drawing.Point(13, 66)
         Me.lblSecondFacet.Name = "lblSecondFacet"
         Me.lblSecondFacet.Size = New System.Drawing.Size(77, 13)
         Me.lblSecondFacet.TabIndex = 2
@@ -229,7 +229,7 @@ Partial Class dlgClimaticBoxPlot
         'lblFacetBy
         '
         Me.lblFacetBy.AutoSize = True
-        Me.lblFacetBy.Location = New System.Drawing.Point(2, 23)
+        Me.lblFacetBy.Location = New System.Drawing.Point(13, 21)
         Me.lblFacetBy.Name = "lblFacetBy"
         Me.lblFacetBy.Size = New System.Drawing.Size(52, 13)
         Me.lblFacetBy.TabIndex = 0
@@ -238,15 +238,15 @@ Partial Class dlgClimaticBoxPlot
         'ucrChkVerticalXTickMarkers
         '
         Me.ucrChkVerticalXTickMarkers.Checked = False
-        Me.ucrChkVerticalXTickMarkers.Location = New System.Drawing.Point(10, 351)
+        Me.ucrChkVerticalXTickMarkers.Location = New System.Drawing.Point(10, 422)
         Me.ucrChkVerticalXTickMarkers.Name = "ucrChkVerticalXTickMarkers"
         Me.ucrChkVerticalXTickMarkers.Size = New System.Drawing.Size(210, 20)
-        Me.ucrChkVerticalXTickMarkers.TabIndex = 13
+        Me.ucrChkVerticalXTickMarkers.TabIndex = 14
         '
         'ucrVariablesAsFactorForClimaticBoxplot
         '
         Me.ucrVariablesAsFactorForClimaticBoxplot.frmParent = Me
-        Me.ucrVariablesAsFactorForClimaticBoxplot.Location = New System.Drawing.Point(254, 70)
+        Me.ucrVariablesAsFactorForClimaticBoxplot.Location = New System.Drawing.Point(257, 76)
         Me.ucrVariablesAsFactorForClimaticBoxplot.Name = "ucrVariablesAsFactorForClimaticBoxplot"
         Me.ucrVariablesAsFactorForClimaticBoxplot.Selector = Nothing
         Me.ucrVariablesAsFactorForClimaticBoxplot.Size = New System.Drawing.Size(120, 130)
@@ -257,7 +257,7 @@ Partial Class dlgClimaticBoxPlot
         '
         'ucrPnlPlots
         '
-        Me.ucrPnlPlots.Location = New System.Drawing.Point(57, 8)
+        Me.ucrPnlPlots.Location = New System.Drawing.Point(50, 8)
         Me.ucrPnlPlots.Name = "ucrPnlPlots"
         Me.ucrPnlPlots.Size = New System.Drawing.Size(322, 35)
         Me.ucrPnlPlots.TabIndex = 0
@@ -265,44 +265,44 @@ Partial Class dlgClimaticBoxPlot
         'ucrReceiverXVariable
         '
         Me.ucrReceiverXVariable.frmParent = Me
-        Me.ucrReceiverXVariable.Location = New System.Drawing.Point(254, 216)
+        Me.ucrReceiverXVariable.Location = New System.Drawing.Point(257, 222)
         Me.ucrReceiverXVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverXVariable.Name = "ucrReceiverXVariable"
         Me.ucrReceiverXVariable.Selector = Nothing
-        Me.ucrReceiverXVariable.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverXVariable.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverXVariable.strNcFilePath = ""
         Me.ucrReceiverXVariable.TabIndex = 7
         Me.ucrReceiverXVariable.ucrSelector = Nothing
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 467)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 474)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 16
         '
         'ucrSavePlot
         '
-        Me.ucrSavePlot.Location = New System.Drawing.Point(10, 439)
+        Me.ucrSavePlot.Location = New System.Drawing.Point(10, 448)
         Me.ucrSavePlot.Name = "ucrSavePlot"
-        Me.ucrSavePlot.Size = New System.Drawing.Size(254, 24)
+        Me.ucrSavePlot.Size = New System.Drawing.Size(255, 24)
         Me.ucrSavePlot.TabIndex = 15
         '
         'ucrChkHorizontalBoxplot
         '
         Me.ucrChkHorizontalBoxplot.Checked = False
-        Me.ucrChkHorizontalBoxplot.Location = New System.Drawing.Point(10, 327)
+        Me.ucrChkHorizontalBoxplot.Location = New System.Drawing.Point(10, 396)
         Me.ucrChkHorizontalBoxplot.Name = "ucrChkHorizontalBoxplot"
         Me.ucrChkHorizontalBoxplot.Size = New System.Drawing.Size(210, 20)
-        Me.ucrChkHorizontalBoxplot.TabIndex = 12
+        Me.ucrChkHorizontalBoxplot.TabIndex = 13
         '
         'ucrChkVarWidth
         '
         Me.ucrChkVarWidth.Checked = False
-        Me.ucrChkVarWidth.Location = New System.Drawing.Point(10, 303)
+        Me.ucrChkVarWidth.Location = New System.Drawing.Point(10, 370)
         Me.ucrChkVarWidth.Name = "ucrChkVarWidth"
         Me.ucrChkVarWidth.Size = New System.Drawing.Size(210, 20)
-        Me.ucrChkVarWidth.TabIndex = 11
+        Me.ucrChkVarWidth.TabIndex = 12
         '
         'ucrSelectorClimaticBoxPlot
         '
@@ -318,7 +318,7 @@ Partial Class dlgClimaticBoxPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(435, 525)
+        Me.ClientSize = New System.Drawing.Size(420, 530)
         Me.Controls.Add(Me.ucrChkVerticalXTickMarkers)
         Me.Controls.Add(Me.grpFacets)
         Me.Controls.Add(Me.ucrVariablesAsFactorForClimaticBoxplot)
@@ -341,7 +341,7 @@ Partial Class dlgClimaticBoxPlot
         Me.MinimizeBox = False
         Me.Name = "dlgClimaticBoxPlot"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Climatic BoxPlot"
+        Me.Text = "Climatic Boxplot"
         Me.grpLayout.ResumeLayout(False)
         Me.grpLayout.PerformLayout()
         Me.grpFacets.ResumeLayout(False)

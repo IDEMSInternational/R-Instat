@@ -1104,7 +1104,7 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
       }
       else {
         if(self$is_variables_metadata(labels_label, col_name)) {
-          new_col <- sjmisc::to_label(curr_col, add.non.labelled = TRUE)
+          new_col <- sjlabelled::as_label(curr_col, add.non.labelled = TRUE)
           #TODO work out how to do ordered correctly
 		  #if(make_ordered) new_col <- ordered(new_col)
         }
@@ -1124,7 +1124,7 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
     }
     else if(to_type == "numeric") {
       if(ignore_labels) {
-        new_col <- sjmisc::to_value(curr_col)
+        new_col <- sjlabelled::as_numeric(curr_col)
       }
       else {
         if(self$is_variables_metadata(labels_label, col_name) && !is.numeric(curr_col)) {
@@ -1140,11 +1140,11 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
           }
           new_col <- as.numeric(curr_labels[as.character(curr_col)])
         }
-        else new_col <- sjmisc::to_value(curr_col)
+        else new_col <- sjlabelled::as_numeric(curr_col)
       }
     }
     else if(to_type == "character") {
-      new_col <- sjmisc::to_character(curr_col)
+      new_col <- sjmisc::to_character(curr_col) 
     }
     self$add_columns_to_data(col_name = col_name, col_data = new_col)
     
