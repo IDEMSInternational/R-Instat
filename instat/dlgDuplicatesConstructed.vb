@@ -46,9 +46,9 @@ Public Class dlgDuplicatesConstructed
         ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoSelectedVariables, "x", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
         ucrPnlOptions.AddFunctionNamesCondition(rdoSuccessiveValues, frmMain.clsRLink.strInstatDataObject & "$duplicated_cases")
 
-        ucrPnlOptions.AddToLinkedControls(ucrReceiverForDuplicates, {rdoSelectedVariables, rdoSuccessiveValues}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrReceiverForSelectedVariables, {rdoSelectedVariables}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrPnlDuplicates, {rdoSelectedVariables, rdoDataFrame}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoAllDuplicateCases)
-        ucrPnlOptions.AddToLinkedControls({ucrChkOmitValues, ucrChkTolerance}, {rdoSuccessiveValues}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrChkOmitValues, ucrChkTolerance, ucrReceiverForSuccessiveValues}, {rdoSuccessiveValues}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ' Selector
         ' for rdoDataFrame this is ran as a r-function, it isn't run for rdoSelectedVariables. For rdoSuccessiveVariables this is a string so we are doing this manually
@@ -56,12 +56,12 @@ Public Class dlgDuplicatesConstructed
         ucrSelectorDuplicateswithVariables.SetParameterIsrfunction()
 
         ' Receiver
-        ' for rdoDataFrame this not run, this is ran as a r-function for rdoSelectedVariables. For rdoSuccessiveVariables this is a string so we are doing this manually
-        ucrReceiverForDuplicates.SetParameter(New RParameter("x", 0))
-        ucrReceiverForDuplicates.SetParameterIsRFunction()
-        ucrReceiverForDuplicates.Selector = ucrSelectorDuplicateswithVariables
-        ucrReceiverForDuplicates.SetMeAsReceiver()
-        ucrReceiverForDuplicates.SetLinkedDisplayControl(lblSelectedVariable)
+        ' for rdoSelectedVariables only
+        ucrReceiverForSelectedVariables.SetParameter(New RParameter("x", 0))
+        ucrReceiverForSelectedVariables.SetParameterIsRFunction()
+        ucrReceiverForSelectedVariables.Selector = ucrSelectorDuplicateswithVariables
+        ucrReceiverForSelectedVariables.SetMeAsReceiver()
+        ucrReceiverForSelectedVariables.SetLinkedDisplayControl(lblVariablesToDuplicate)
 
         ' For the first two rdos we have the following control
         ucrPnlDuplicates.AddRadioButton(rdoAllDuplicateCases)
@@ -77,6 +77,14 @@ Public Class dlgDuplicatesConstructed
         ttDuplicates.SetToolTip(rdoIndexNumberOfDuplicates, "Any duplicates are given their index number")
 
         ' For rdoSuccessiveVariables we have the following controls
+        ' Receiver
+        ' for rdoSuccessiveVariables only
+        ucrReceiverForSuccessiveValues.SetParameter(New RParameter("col_name", 1))
+        ucrReceiverForSuccessiveValues.SetParameterIsString()
+        ucrReceiverForSuccessiveValues.Selector = ucrSelectorDuplicateswithVariables
+        ucrReceiverForSuccessiveValues.SetMeAsReceiver()
+        ucrReceiverForSuccessiveValues.SetLinkedDisplayControl(lblSelectedVariable)
+
         ucrChkOmitValues.SetText("Omit Value(s)")
         ucrChkOmitValues.AddParameterValuesCondition(False, "ignore", "NULL", True)
         ucrChkOmitValues.AddParameterValuesCondition(True, "ignore", "NULL", False)
@@ -85,16 +93,17 @@ Public Class dlgDuplicatesConstructed
         ucrChkOmitValues.AddToLinkedControls(ucrInputConditions, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="==")
         ucrChkOmitValues.SetLinkedDisplayControl(grpOptions)
 
-        ucrChkTolerance.SetText("Tolerance")
-        ucrChkTolerance.AddParameterPresentCondition(True, "tolerance")
-        ucrChkTolerance.AddParameterPresentCondition(False, "tolerance", False)
-        ucrChkTolerance.AddToLinkedControls(ucrInputTolerance, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.01)
+        ucrNudOmit.SetMinMax(Integer.MinValue, Integer.MaxValue)
 
-        ucrInputTolerance.SetParameter(New RParameter("tolerance", 0))
+        ucrInputTolerance.SetParameter(New RParameter("tolerance", 3))
         ucrInputTolerance.AddQuotesIfUnrecognised = False
         ucrInputTolerance.SetValidationTypeAsNumeric()
 
         ucrChkTolerance.SetParameter(ucrInputTolerance.GetParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkTolerance.SetText("Tolerance")
+        ucrChkTolerance.AddParameterPresentCondition(True, "tolerance")
+        ucrChkTolerance.AddParameterPresentCondition(False, "tolerance", False)
+        ucrChkTolerance.AddToLinkedControls(ucrInputTolerance, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.01)
 
         ucrInputConditions.SetParameter(New RParameter("y"))
         dctConditions.Add("==", "==")
@@ -134,20 +143,19 @@ Public Class dlgDuplicatesConstructed
         ' For the third rdo we run clsStreakFunction
         clsSubsetCol.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
         clsSubsetCol.AddParameter("data_name", Chr(34) & ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
-        clsSubsetCol.AddParameter("col_names", ucrReceiverForDuplicates.GetVariableNames(), iPosition:=1)
-        clsSubsetCol.SetAssignTo(ucrReceiverForDuplicates.GetVariableNames(False))
+        clsSubsetCol.SetAssignTo(ucrReceiverForSuccessiveValues.GetVariableNames(False))
 
         clsStreakFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$duplicated_cases")
         clsStreakFunction.AddParameter("data_name", Chr(34) & ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
-        clsStreakFunction.AddParameter("col_name", ucrReceiverForDuplicates.GetVariableNames(), iPosition:=1)
-        clsStreakFunction.AddParameter("ignore", "NULL")
+        clsStreakFunction.AddParameter("ignore", "NULL", iPosition:=2)
 
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnName.GetText, strTempDataframe:=ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDuplicated2)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverForDuplicates.AddAdditionalCodeParameterPair(clsDuplicated2, ucrReceiverForDuplicates.GetParameter, iAdditionalPairNo:=1)
+        ucrReceiverForSelectedVariables.AddAdditionalCodeParameterPair(clsDuplicated2, ucrReceiverForSelectedVariables.GetParameter, iAdditionalPairNo:=1)
+        ucrReceiverForSuccessiveValues.AddAdditionalCodeParameterPair(clsSubsetCol, New RParameter("col_names", 1), iAdditionalPairNo:=1)
         ucrSelectorDuplicateswithVariables.AddAdditionalCodeParameterPair(clsDuplicated, New RParameter("x", 0), iAdditionalPairNo:=1)
         ucrNewColumnName.AddAdditionalRCode(clsDuplicated2, 1)
         ucrNewColumnName.AddAdditionalRCode(clsStreakFunction, 2)
@@ -158,7 +166,8 @@ Public Class dlgDuplicatesConstructed
         ucrInputTolerance.SetRCode(clsStreakFunction, bReset)
         ucrSelectorDuplicateswithVariables.SetRCode(clsDuplicated2, bReset)
 
-        ucrReceiverForDuplicates.SetRCode(clsDuplicated, bReset)
+        ucrReceiverForSuccessiveValues.SetRCode(clsStreakFunction, bReset)
+        ucrReceiverForSelectedVariables.SetRCode(clsDuplicated, bReset)
         ucrNewColumnName.SetRCode(clsDuplicated, bReset)
         ucrPnlDuplicates.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         If bReset Then
@@ -168,7 +177,7 @@ Public Class dlgDuplicatesConstructed
 
     Private Sub TestOKEnabled()
         If ucrNewColumnName.IsComplete Then
-            If (rdoDataFrame.Checked AndAlso ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "") OrElse (rdoSelectedVariables.Checked AndAlso Not ucrReceiverForDuplicates.IsEmpty) OrElse (rdoSuccessiveValues.Checked AndAlso Not ucrReceiverForDuplicates.IsEmpty) Then
+            If (rdoDataFrame.Checked AndAlso ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "") OrElse (rdoSelectedVariables.Checked AndAlso Not ucrReceiverForSelectedVariables.IsEmpty) OrElse (rdoSuccessiveValues.Checked AndAlso Not ucrReceiverForSuccessiveValues.IsEmpty AndAlso ((ucrChkOmitValues.Checked AndAlso ucrNudOmit.GetText <> "") OrElse Not ucrChkOmitValues.Checked) AndAlso ((ucrChkTolerance.Checked AndAlso Not ucrInputTolerance.IsEmpty) OrElse Not ucrChkTolerance.Checked)) Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
@@ -180,9 +189,12 @@ Public Class dlgDuplicatesConstructed
 
     Private Sub SetIgnoreVals()
         If ucrChkOmitValues.Checked Then
-            clsStreakFunction.AddParameter("ignore", ucrReceiverForDuplicates.GetVariableNames(False) & "[" & ucrReceiverForDuplicates.GetVariableNames(False) & ucrInputConditions.GetText & ucrNudOmit.GetText & "]", iPosition:=2)
+            clsSubsetCol.SetAssignTo(ucrReceiverForSuccessiveValues.GetVariableNames(False))
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsSubsetCol, iPosition:=1)
+            clsStreakFunction.AddParameter("ignore", ucrReceiverForSuccessiveValues.GetVariableNames(False) & "[" & ucrReceiverForSuccessiveValues.GetVariableNames(False) & ucrInputConditions.GetText & ucrNudOmit.GetText & "]", iPosition:=2)
         Else
-            clsStreakFunction.AddParameter("ignore", "NULL")
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSubsetCol)
+            clsStreakFunction.AddParameter("ignore", "NULL", iPosition:=2)
         End If
     End Sub
 
@@ -200,53 +212,47 @@ Public Class dlgDuplicatesConstructed
             clsDuplicated2.AddParameter("x", clsRFunctionParameter:=ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         ElseIf rdoSelectedVariables.Checked Then
             ucrSelectorDuplicateswithVariables.SetVariablesVisible(True)
+            ucrReceiverForSelectedVariables.SetMeAsReceiver()
             ' note that we have to run this here because the parameter x is used for both functions and all four radio buttons
-            clsDuplicated.AddParameter("x", clsRFunctionParameter:=ucrReceiverForDuplicates.GetVariables, iPosition:=0)
-            clsDuplicated2.AddParameter("x", clsRFunctionParameter:=ucrReceiverForDuplicates.GetVariables, iPosition:=0)
+            clsDuplicated.AddParameter("x", clsRFunctionParameter:=ucrReceiverForSelectedVariables.GetVariables, iPosition:=0)
+            clsDuplicated2.AddParameter("x", clsRFunctionParameter:=ucrReceiverForSelectedVariables.GetVariables, iPosition:=0)
         ElseIf rdoSuccessiveValues.Checked Then
+            ucrReceiverForSuccessiveValues.SetMeAsReceiver()
             ucrSelectorDuplicateswithVariables.SetVariablesVisible(True)
         End If
     End Sub
 
     Private Sub SetBaseFunction()
-        If rdoDataFrame.Checked OrElse rdoSelectedVariables.Checked Then
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSubsetCol)
+        If rdoSuccessiveValues.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsStreakFunction)
+            SetIgnoreVals()
+        ElseIf rdoDataFrame.Checked OrElse rdoSelectedVariables.Checked Then
             If rdoAllDuplicateCases.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsDuplicated2)
             ElseIf rdoDuplicatesOnly.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsDuplicated)
             End If
-        ElseIf rdoSuccessiveValues.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsStreakFunction)
-            If ucrChkOmitValues.Checked Then
-                ucrBase.clsRsyntax.AddToBeforeCodes(clsSubsetCol, iPosition:=1)
-            Else
-                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSubsetCol)
-            End If
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSubsetCol)
         End If
     End Sub
 
     Private Sub ucrPnlDuplicates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDuplicates.ControlValueChanged, ucrPnlOptions.ControlValueChanged
         SetBaseFunction()
+        SetDataFrameOrColumns()
     End Sub
 
     Private Sub ucrSelectorDuplicateswithVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDuplicateswithVariables.ControlValueChanged
         ' These are run as strings, not automatically in the new system so we need to update these when the selector changes.
         clsStreakFunction.AddParameter("data_name", Chr(34) & ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
         clsSubsetCol.AddParameter("data_name", Chr(34) & ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
-        'SetDataFrameOrColumns() ' TODO: check we don't need this
+        'SetDataFrameOrColumns()
+        SetBaseFunction()
     End Sub
 
-    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
-        SetDataFrameOrColumns()
-    End Sub
-
-    Private Sub ucrReceiverForDuplicates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForDuplicates.ControlValueChanged
-        ' These are not run automatically in the new system so we need to update these when the selector changes.
-        clsStreakFunction.AddParameter("col_name", ucrReceiverForDuplicates.GetVariableNames(), iPosition:=1)
-        clsSubsetCol.AddParameter("col_names", ucrReceiverForDuplicates.GetVariableNames(), iPosition:=1)
-        clsSubsetCol.SetAssignTo(ucrReceiverForDuplicates.GetVariableNames(False))
+    Private Sub ucrReceiverForDuplicates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForSuccessiveValues.ControlValueChanged
+        clsSubsetCol.SetAssignTo(ucrReceiverForSuccessiveValues.GetVariableNames(False))
         SetIgnoreVals()
+        SetBaseFunction()
     End Sub
 
     Private Sub ucrChkOmitValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOmitValues.ControlValueChanged, ucrNudOmit.ControlValueChanged, ucrInputConditions.ControlValueChanged
@@ -254,7 +260,7 @@ Public Class dlgDuplicatesConstructed
         SetIgnoreVals()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlContentsChanged, ucrSelectorDuplicateswithVariables.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrReceiverForDuplicates.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlContentsChanged, ucrSelectorDuplicateswithVariables.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrReceiverForSelectedVariables.ControlContentsChanged, ucrReceiverForSuccessiveValues.ControlContentsChanged, ucrChkOmitValues.ControlContentsChanged, ucrChkTolerance.ControlContentsChanged, ucrNudOmit.ControlContentsChanged, ucrInputTolerance.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
