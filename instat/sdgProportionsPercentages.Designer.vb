@@ -226,7 +226,7 @@ Partial Class sdgProportionsPercentages
         Me.MinimizeBox = False
         Me.Name = "sdgProportionsPercentages"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Proportions Percentages"
+        Me.Text = "Proportions Or Percentages"
         Me.grpOptions.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
