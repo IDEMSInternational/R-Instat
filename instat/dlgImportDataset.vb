@@ -36,6 +36,7 @@ Public Class dlgImportDataset
     Public strFilePathR As String
     Public strCurrentDirectory As String
     Public strFileToOpenOn As String
+    Private bDialogLoaded As Boolean
 
     Public Sub New()
 
@@ -55,6 +56,7 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub dlgImportDataset_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        bDialogLoaded = False
         autoTranslate(Me)
         Me.Show()
         If bFirstLoad Then
@@ -72,17 +74,25 @@ Public Class dlgImportDataset
             End If
             bStartOpenDialog = False
             strFileToOpenOn = ""
+            bDialogLoaded = True
+            RefreshFilePreview()
+            RefreshFrameView()
         ElseIf bStartOpenDialog Then
             GetFileFromOpenDialog()
             bStartOpenDialog = False
+            bDialogLoaded = True
+            RefreshFilePreview()
+            RefreshFrameView()
         Else
             If Not File.Exists(strFilePathSystem) Then
                 MsgBox("File no longer exists: " & strFilePathSystem, MsgBoxStyle.Information, "File No Longer Exists")
                 SetControlsFromFile("")
+                bDialogLoaded = True
+                RefreshFilePreview()
+                RefreshFrameView()
             End If
         End If
-        RefreshFilePreview()
-        RefreshFrameView()
+        bDialogLoaded = True
         bReset = False
         TestOkEnabled()
     End Sub
@@ -489,25 +499,26 @@ Public Class dlgImportDataset
     End Sub
 
     Public Sub RefreshFilePreview()
-
-        If strFileType = "CSV" AndAlso strFilePathSystem <> "" Then
-            TextPreviewVisible(True)
-            Try
-                Using sReader As New StreamReader(strFilePathSystem)
-                    txtTextFilePreview.Text = ""
-                    For i = 1 To ucrNudPreviewLines.Value + ucrNudLinesToSkipCSV.Value + 1
-                        txtTextFilePreview.Text = txtTextFilePreview.Text & sReader.ReadLine() & Environment.NewLine
-                        If sReader.Peek() = -1 Then
-                            Exit For
-                        End If
-                    Next
-                End Using
-            Catch ex As Exception
-                txtTextFilePreview.Text = "Cannot show text preview of file:" & strFilePathSystem & ". The file may have moved or be in use by another program. Close the file and select it again from the dialog to refresh the preview."
-                bCanImport = False
-            End Try
-        Else
-            TextPreviewVisible(False)
+        If bDialogLoaded Then
+            If strFileType = "CSV" AndAlso strFilePathSystem <> "" Then
+                TextPreviewVisible(True)
+                Try
+                    Using sReader As New StreamReader(strFilePathSystem)
+                        txtTextFilePreview.Text = ""
+                        For i = 1 To ucrNudPreviewLines.Value + ucrNudLinesToSkipCSV.Value + 1
+                            txtTextFilePreview.Text = txtTextFilePreview.Text & sReader.ReadLine() & Environment.NewLine
+                            If sReader.Peek() = -1 Then
+                                Exit For
+                            End If
+                        Next
+                    End Using
+                Catch ex As Exception
+                    txtTextFilePreview.Text = "Cannot show text preview of file:" & strFilePathSystem & ". The file may have moved or be in use by another program. Close the file and select it again from the dialog to refresh the preview."
+                    bCanImport = False
+                End Try
+            Else
+                TextPreviewVisible(False)
+            End If
         End If
     End Sub
 
@@ -521,72 +532,77 @@ Public Class dlgImportDataset
         Dim iTemp As Integer
         Dim strRowMaxParamName As String = ""
 
-        Cursor = Cursors.WaitCursor
-        ucrBase.OKEnabled(False)
-        clsAsCharacterFunc.SetRCommand("convert_to_character_matrix")
-        strTempDataFrameName = "temp"
-        grdDataPreview.Worksheets.Clear()
-        grdDataPreview.Enabled = False
-        lblCannotImport.Hide()
-        bValid = False
-        If {"CSV", "XLSX", "XLS"}.Contains(strFileType) AndAlso Not ucrInputFilePath.IsEmpty() Then
-            If strFileType = "CSV" Then
-                clsTempImport = clsImportCSV.Clone()
-                strRowMaxParamName = "nrows"
-            ElseIf strFileType = "XLSX" OrElse strFileType = "XLS" Then
-                clsTempImport = clsImportExcel.Clone()
-                strRowMaxParamName = "n_max"
-            End If
-            If clsTempImport.ContainsParameter(strRowMaxParamName) Then
-                If Integer.TryParse(clsTempImport.GetParameter(strRowMaxParamName).strArgumentValue, iTemp) Then
-                    clsTempImport.AddParameter(strRowMaxParamName, Math.Min(iTemp, ucrNudPreviewLines.Value))
+        If bDialogLoaded Then
+            Cursor = Cursors.WaitCursor
+            ucrBase.OKEnabled(False)
+            clsAsCharacterFunc.SetRCommand("convert_to_character_matrix")
+            strTempDataFrameName = "temp"
+            grdDataPreview.Worksheets.Clear()
+            grdDataPreview.Enabled = False
+            lblCannotImport.Hide()
+            bValid = False
+            If {"CSV", "XLSX", "XLS"}.Contains(strFileType) AndAlso Not ucrInputFilePath.IsEmpty() Then
+                If strFileType = "CSV" Then
+                    clsTempImport = clsImportCSV.Clone()
+                    strRowMaxParamName = "nrows"
+                ElseIf strFileType = "XLSX" OrElse strFileType = "XLS" Then
+                    clsTempImport = clsImportExcel.Clone()
+                    strRowMaxParamName = "n_max"
+                End If
+                If clsTempImport.ContainsParameter(strRowMaxParamName) Then
+                    If Integer.TryParse(clsTempImport.GetParameter(strRowMaxParamName).strArgumentValue, iTemp) Then
+                        clsTempImport.AddParameter(strRowMaxParamName, Math.Min(iTemp, ucrNudPreviewLines.Value))
+                    Else
+                        clsTempImport.AddParameter(strRowMaxParamName, ucrNudPreviewLines.Value)
+                    End If
                 Else
                     clsTempImport.AddParameter(strRowMaxParamName, ucrNudPreviewLines.Value)
                 End If
-            Else
-                clsTempImport.AddParameter(strRowMaxParamName, ucrNudPreviewLines.Value)
-            End If
-            clsTempImport.RemoveAssignTo()
-            clsAsCharacterFunc.AddParameter("data", clsRFunctionParameter:=clsTempImport)
-            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsAsCharacterFunc.ToScript(), bSilent:=True)
-            If expTemp IsNot Nothing Then
-                dfTemp = expTemp.AsDataFrame
-                If dfTemp IsNot Nothing Then
-                    Try
-                        frmMain.clsGrids.FillSheet(dfTemp, strTempDataFrameName, grdDataPreview, bIncludeDataTypes:=False, iColMax:=frmMain.clsGrids.iMaxCols)
-                        grdDataPreview.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
-                        grdDataPreview.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
-                        grdDataPreview.Enabled = True
-                        bValid = True
-                        bCanImport = True
-                    Catch
+                clsTempImport.RemoveAssignTo()
+                clsAsCharacterFunc.AddParameter("data", clsRFunctionParameter:=clsTempImport)
+                expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsAsCharacterFunc.ToScript(), bSilent:=True)
+                If expTemp IsNot Nothing Then
+                    dfTemp = expTemp.AsDataFrame
+                    If dfTemp IsNot Nothing Then
+                        Try
+                            frmMain.clsGrids.FillSheet(dfTemp, strTempDataFrameName, grdDataPreview, bIncludeDataTypes:=False, iColMax:=frmMain.clsGrids.iMaxCols)
+                            grdDataPreview.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
+                            grdDataPreview.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
+                            grdDataPreview.Enabled = True
+                            bValid = True
+                            bCanImport = True
+                        Catch
 
-                    End Try
+                        End Try
+                    End If
                 End If
-            End If
-            If bValid Then
-                GridPreviewVisible(True)
-                LinesToPreviewVisible(True)
-                lblNoPreview.Hide()
-            Else
-                lblCannotImport.Show()
+                If bValid Then
+                    GridPreviewVisible(True)
+                    LinesToPreviewVisible(True)
+                    lblNoPreview.Hide()
+                    cmdRefreshPreview.Enabled = True
+                Else
+                    lblCannotImport.Show()
+                    bCanImport = False
+                End If
+            ElseIf ucrInputFilePath.IsEmpty() Then
                 bCanImport = False
+                lblCannotImport.Hide()
+                lblNoPreview.Hide()
+                GridPreviewVisible(False)
+                LinesToPreviewVisible(False)
+                cmdRefreshPreview.Enabled = False
+            Else
+                bCanImport = True
+                lblCannotImport.Hide()
+                lblNoPreview.Show()
+                GridPreviewVisible(False)
+                LinesToPreviewVisible(False)
+                cmdRefreshPreview.Enabled = False
             End If
-        ElseIf ucrInputFilePath.IsEmpty() Then
-            bCanImport = False
-            lblCannotImport.Hide()
-            lblNoPreview.Hide()
-            GridPreviewVisible(False)
-            LinesToPreviewVisible(False)
-        Else
-            bCanImport = True
-            lblCannotImport.Hide()
-            lblNoPreview.Show()
-            GridPreviewVisible(False)
-            LinesToPreviewVisible(False)
+            Cursor = Cursors.Default
+            TestOkEnabled()
         End If
-        Cursor = Cursors.Default
-        TestOkEnabled()
     End Sub
 
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
@@ -692,6 +708,11 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub ucrNudPreviewLines_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudPreviewLines.ControlContentsChanged
+        RefreshFilePreview()
+        RefreshFrameView()
+    End Sub
+
+    Private Sub cmdRefreshPreview_Click(sender As Object, e As EventArgs) Handles cmdRefreshPreview.Click
         RefreshFilePreview()
         RefreshFrameView()
     End Sub

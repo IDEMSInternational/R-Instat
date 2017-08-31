@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class dlgSummaryofDailydata
+Partial Class sdgProportionsPercentages
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -24,7 +24,7 @@ Partial Class dlgSummaryofDailydata
     Private Sub InitializeComponent()
         Me.SuspendLayout()
         '
-        'dlgSummaryofDailydata
+        'sdgProportionsPercentages
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -32,9 +32,10 @@ Partial Class dlgSummaryofDailydata
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgSummaryofDailydata"
+        Me.Name = "sdgProportionsPercentages"
+        Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Summary of Daily Data"
+        Me.Text = "Proportions Percentages"
         Me.ResumeLayout(False)
 
     End Sub
