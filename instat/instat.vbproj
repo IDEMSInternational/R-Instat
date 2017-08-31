@@ -84,6 +84,9 @@
     <MultilingualAppToolkitVersion>4.0</MultilingualAppToolkitVersion>
     <MultilingualFallbackLanguage>en-US</MultilingualFallbackLanguage>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\rinstat_icon_Hih_icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -289,12 +292,6 @@
     <Compile Include="dlgDisplayDailyClimaticData.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgDrySpells.Designer.vb">
-      <DependentUpon>dlgDrySpells.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgDrySpells.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgDuplicatesConstructed.Designer.vb">
       <DependentUpon>dlgDuplicatesConstructed.vb</DependentUpon>
     </Compile>
@@ -347,12 +344,6 @@
       <DependentUpon>dlgExtremesClimatic.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgExtremesClimatic.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgSummaryofDailydata.Designer.vb">
-      <DependentUpon>dlgSummaryofDailydata.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgSummaryofDailydata.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgViewLabelsAndLevels.Designer.vb">
@@ -644,12 +635,6 @@
     <Compile Include="sdgAddNewDistribution.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sdgClimaticSummary.Designer.vb">
-      <DependentUpon>sdgClimaticSummary.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgClimaticSummary.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="sdgClimdexIndices.Designer.vb">
       <DependentUpon>sdgClimdexIndices.vb</DependentUpon>
     </Compile>
@@ -740,12 +725,6 @@
     <Compile Include="sdgOneVarGraph.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sdgOneVarUseModBootstrap.Designer.vb">
-      <DependentUpon>sdgOneVarUseModBootstrap.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgOneVarUseModBootstrap.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="sdgOneVarUseModFit.Designer.vb">
       <DependentUpon>sdgOneVarUseModFit.vb</DependentUpon>
     </Compile>
@@ -768,6 +747,12 @@
       <DependentUpon>sdgOpenNetCDF.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgOpenNetCDF.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgProportionsPercentages.Designer.vb">
+      <DependentUpon>sdgProportionsPercentages.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgProportionsPercentages.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgThemes.Designer.vb">
@@ -1458,18 +1443,6 @@
       <DependentUpon>dlgDuplicateColumns.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgDuplicateColumns.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgEndofRains.designer.vb">
-      <DependentUpon>dlgEndofRains.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgEndofRains.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgEndRain.designer.vb">
-      <DependentUpon>dlgEndRain.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgEndRain.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgExamine.Designer.vb">
@@ -2580,9 +2553,6 @@
     <EmbeddedResource Include="dlgExtremesClimatic.resx">
       <DependentUpon>dlgExtremesClimatic.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgSummaryofDailydata.resx">
-      <DependentUpon>dlgSummaryofDailydata.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgViewLabelsAndLevels.resx">
       <DependentUpon>dlgViewLabelsAndLevels.vb</DependentUpon>
     </EmbeddedResource>
@@ -3180,9 +3150,6 @@
     <EmbeddedResource Include="sdgCanonicalCorrelation.sw-KE.resx">
       <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgClimaticSummary.resx">
-      <DependentUpon>sdgClimaticSummary.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="sdgClimdexIndices.resx">
       <DependentUpon>sdgClimdexIndices.vb</DependentUpon>
     </EmbeddedResource>
@@ -3264,9 +3231,6 @@
     <EmbeddedResource Include="sdgOneVarGraph.resx">
       <DependentUpon>sdgOneVarGraph.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgOneVarUseModBootstrap.resx">
-      <DependentUpon>sdgOneVarUseModBootstrap.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="sdgOneVarUseModFit.resx">
       <DependentUpon>sdgOneVarUseModFit.vb</DependentUpon>
     </EmbeddedResource>
@@ -3275,6 +3239,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgOpenNetCDF.resx">
       <DependentUpon>sdgOpenNetCDF.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgProportionsPercentages.resx">
+      <DependentUpon>sdgProportionsPercentages.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSummaries.fr-FR.resx">
       <DependentUpon>sdgSummaries.vb</DependentUpon>
@@ -3483,24 +3450,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDuplicateColumns.sw-KE.resx">
       <DependentUpon>dlgDuplicateColumns.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgEndofRains.fr-FR.resx">
-      <DependentUpon>dlgEndofRains.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgEndofRains.resx">
-      <DependentUpon>dlgEndofRains.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgEndofRains.sw-KE.resx">
-      <DependentUpon>dlgEndofRains.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgEndRain.fr-FR.resx">
-      <DependentUpon>dlgEndRain.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgEndRain.resx">
-      <DependentUpon>dlgEndRain.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgEndRain.sw-KE.resx">
-      <DependentUpon>dlgEndRain.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExamine.fr-FR.resx">
       <DependentUpon>dlgExamine.vb</DependentUpon>
@@ -4669,6 +4618,9 @@
     <None Include="lib\RDotNet.NativeLibrary.dll" />
     <None Include="lib\unvell.ReoGrid.dll" />
     <None Include="lib\unvell.ReoScript.dll" />
+    <Content Include="Resources\rinstat_icon_Hih_icon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="static\InstatObject\R\Backend_Components\link.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
