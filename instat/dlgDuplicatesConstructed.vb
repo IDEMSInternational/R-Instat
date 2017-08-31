@@ -129,10 +129,11 @@ Public Class dlgDuplicatesConstructed
         'clsDuplicated2.AddParameter("x", frmMain.clsRLink.strInstatDataObject & "$get_data_frame", iPosition:=0)
         clsStreakFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$duplicated_cases")
         clsSubsetCol.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        clsSubsetCol.SetAssignTo(ucrReceiverForDuplicates.GetVariableNames(False))
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsSubsetCol, iPosition:=1)
 
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnName.GetText, strTempDataframe:=ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDuplicated2)
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsSubsetCol, iPosition:=1)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -171,10 +172,10 @@ Public Class dlgDuplicatesConstructed
 
     Private Sub SetIgnoreVals()
         If ucrChkOmitValues.Checked Then
-            clsSubsetCol.AddParameter("col_name", ucrReceiverForDuplicates.GetVariableNames())
-            clsStreakFunction.AddParameter("ignore", clsSubsetCol.ToScript & "[" & clsSubsetCol.ToScript & ucrInputConditions.GetText & ucrNudOmit.GetText & "]")
+            clsSubsetCol.AddParameter("col_names", ucrReceiverForDuplicates.GetVariableNames())
+            clsStreakFunction.AddParameter("ignore", ucrReceiverForDuplicates.GetVariableNames(False) & "[" & ucrReceiverForDuplicates.GetVariableNames(False) & ucrInputConditions.GetText & ucrNudOmit.GetText & "]")
         Else
-            clsSubsetCol.RemoveParameterByName("col_name")
+            clsSubsetCol.RemoveParameterByName("col_names")
             clsStreakFunction.AddParameter("ignore", "NULL")
         End If
     End Sub
@@ -204,7 +205,6 @@ Public Class dlgDuplicatesConstructed
             ucrReceiverForDuplicates.SetParameterIsString()
             ucrSelectorDuplicateswithVariables.SetParameterIsString()
             ucrSelectorDuplicateswithVariables.SetVariablesVisible(True)
-            SetIgnoreVals()
         End If
     End Sub
 
