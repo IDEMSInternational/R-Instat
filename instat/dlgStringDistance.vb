@@ -135,7 +135,14 @@ Public Class dlgStringDistance
         TestOkEnabled()
     End Sub
 
+    Private Sub ReceiverFocus()
+        If rdoString.Checked Then
+            ucrReceiverStringDistance.SetMeAsReceiver()
+        End If
+    End Sub
+
     Private Sub ucrPnlStringDist_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStringDist.ControlValueChanged
+        ReceiverFocus()
         If rdoColumn.Checked Then
             clsCurrentFunction = clsColumnFunction
         ElseIf rdoString.Checked Then

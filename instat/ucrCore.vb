@@ -545,6 +545,12 @@ Public Class ucrCore
         End If
     End Sub
 
+    Public Sub SetParameterValue(clsNewRCode As RCodeStructure)
+        If clsParameter IsNot Nothing Then
+            clsParameter.SetArgument(clsNewRCode)
+        End If
+    End Sub
+
     Public Sub SetValuesToIgnore(strValues() As String)
         strValuesToIgnore = strValues
     End Sub
