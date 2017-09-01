@@ -39,15 +39,17 @@ Public Class dlgClimaticBoxPlot
     Private Sub dlgClimaticBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
-            bFirstLoad = False
         End If
         If bReset Then
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
-        If bReset Then
+
+        If bFirstLoad Then
             AutoFill()
+            bFirstLoad = False
         End If
+
         bReset = False
         autoTranslate(Me)
         TestOKEnabled()
