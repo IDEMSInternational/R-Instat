@@ -17,6 +17,7 @@ Imports instat.Translations
 Public Class dlgClimaticBoxPlot
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private bRCodeUpdated As Boolean = False
     Private clsRggplotFunction As New RFunction
     Private clsRgeomPlotFunction As New RFunction
     Private clsRaesFunction As New RFunction
@@ -44,12 +45,10 @@ Public Class dlgClimaticBoxPlot
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
-
         If bFirstLoad Then
             AutoFill()
             bFirstLoad = False
         End If
-
         bReset = False
         autoTranslate(Me)
         TestOKEnabled()
@@ -104,7 +103,6 @@ Public Class dlgClimaticBoxPlot
         ucrReceiver2ndFacet.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiver2ndFacet.SetParameterIsString()
         ucrReceiver2ndFacet.bWithQuotes = False
-        ucrVariablesAsFactorForClimaticBoxplot.SetMeAsReceiver()
 
         ucrChkVarWidth.SetParameter(New RParameter("varwidth"))
         ucrChkVarWidth.SetText("Variable Width")
@@ -196,11 +194,12 @@ Public Class dlgClimaticBoxPlot
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorClimaticBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
         TestOKEnabled()
-        SecondFacetReceiverEnabled()
         MarginsEnabled()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        bRCodeUpdated = False
+
         ucrReceiverFacetBy.AddAdditionalCodeParameterPair(clsFacetWrapOp, New RParameter("var1", iNewPosition:=1), iAdditionalPairNo:=1)
         ucrSavePlot.SetRCode(clsBaseOperator, bReset)
 
@@ -217,7 +216,10 @@ Public Class dlgClimaticBoxPlot
 
         ucrReceiverFacetBy.SetRCode(clsFacetGridOp, bReset)
         ucrReceiver2ndFacet.SetRCode(clsFacetGridOp, bReset)
+
         ucrChkMargins.SetRCode(clsFacetFunction, bReset)
+        bRCodeUpdated = True
+        SecondFacetReceiverEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -339,11 +341,13 @@ Public Class dlgClimaticBoxPlot
     End Sub
 
     Private Sub SecondFacetReceiverEnabled()
-        If ucrReceiverFacetBy.IsEmpty() Then
-            ucrReceiver2ndFacet.Clear()
-            ucrReceiver2ndFacet.Enabled = False
-        Else
-            ucrReceiver2ndFacet.Enabled = True
+        If bRCodeUpdated Then
+            If ucrReceiverFacetBy.IsEmpty() Then
+                ucrReceiver2ndFacet.Clear()
+                ucrReceiver2ndFacet.Enabled = False
+            Else
+                ucrReceiver2ndFacet.Enabled = True
+            End If
         End If
     End Sub
 
