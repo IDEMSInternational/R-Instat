@@ -263,6 +263,7 @@ Public Class dlgClimaticBoxPlot
                 ucrSavePlot.SetPrefix("violin")
             End If
         End If
+        SetColourFillAes()
     End Sub
 
     Private Sub cmdBoxPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdBoxPlotOptions.Click
@@ -363,10 +364,20 @@ Public Class dlgClimaticBoxPlot
     End Sub
 
     Private Sub ucrVariablesAsFactorForClimaticBoxplot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForClimaticBoxplot.ControlValueChanged
+        SetColourFillAes()
+    End Sub
+    Private Sub SetColourFillAes()
         If Not ucrVariablesAsFactorForClimaticBoxplot.IsEmpty AndAlso Not ucrVariablesAsFactorForClimaticBoxplot.bSingleVariable Then
-            clsRaesFunction.AddParameter("fill", "variable")
+            If rdoJitter.Checked Then
+                clsRaesFunction.AddParameter("colour", "variable")
+                clsRaesFunction.RemoveParameterByName("fill")
+            Else
+                clsRaesFunction.AddParameter("fill", "variable")
+                clsRaesFunction.RemoveParameterByName("colour")
+            End If
         Else
             clsRaesFunction.RemoveParameterByName("fill")
+            clsRaesFunction.RemoveParameterByName("colour")
         End If
     End Sub
 
@@ -375,6 +386,7 @@ Public Class dlgClimaticBoxPlot
         SetFacets()
         AddRemoveFacets()
         MarginsEnabled()
+        FacetsCheck()
     End Sub
 
     Private Sub ucrSelectorClimaticBoxPlot_DataFrameChanged() Handles ucrSelectorClimaticBoxPlot.DataFrameChanged
@@ -383,5 +395,14 @@ Public Class dlgClimaticBoxPlot
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSavePlot.ControlContentsChanged, ucrVariablesAsFactorForClimaticBoxplot.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+    Private Sub FacetsCheck()
+        If Not ucrReceiverFacetBy.IsEmpty AndAlso Not ucrReceiver2ndFacet.IsEmpty Then
+            If ucrReceiverFacetBy.txtReceiverSingle.Text = ucrReceiver2ndFacet.txtReceiverSingle.Text Then
+                MsgBox("You can not do facets with two same variables", vbOKOnly)
+                ucrReceiver2ndFacet.Clear()
+                ucrReceiver2ndFacet.SetMeAsReceiver()
+            End If
+        End If
     End Sub
 End Class
