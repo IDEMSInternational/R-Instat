@@ -13,7 +13,6 @@
 '
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
 Imports instat.Translations
 Public Class dlgClimaticBoxPlot
     Private bFirstLoad As Boolean = True
@@ -36,6 +35,7 @@ Public Class dlgClimaticBoxPlot
     Private bResetSubdialog As Boolean = True
     Private bResetBoxLayerSubdialog As Boolean = True
     Private clsAsFactor As New RFunction
+
     Private Sub dlgClimaticBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -53,26 +53,6 @@ Public Class dlgClimaticBoxPlot
         bReset = False
         autoTranslate(Me)
         TestOKEnabled()
-    End Sub
-
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverFacetBy.AddAdditionalCodeParameterPair(clsFacetWrapOp, New RParameter("var1", iNewPosition:=1), iAdditionalPairNo:=1)
-        ucrSavePlot.SetRCode(clsBaseOperator, bReset)
-
-        ucrSelectorClimaticBoxPlot.SetRCode(clsRggplotFunction, bReset)
-        ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
-        ucrChkVerticalXTickMarkers.SetRCode(clsBaseOperator, bReset)
-
-        ucrChkVarWidth.SetRCode(clsRgeomPlotFunction, bReset)
-        ucrPnlPlots.SetRCode(clsRgeomPlotFunction, bReset)
-        ucrVariablesAsFactorForClimaticBoxplot.SetRCode(clsRaesFunction, bReset)
-
-        ucrReceiverXVariable.SetRCode(clsAsFactor, bReset)
-        ucrVariablesAsFactorForClimaticBoxplot.SetRCode(clsRaesFunction, bReset)
-
-        ucrReceiverFacetBy.SetRCode(clsFacetGridOp, bReset)
-        ucrReceiver2ndFacet.SetRCode(clsFacetGridOp, bReset)
-        ucrChkMargins.SetRCode(clsFacetFunction, bReset)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -101,27 +81,27 @@ Public Class dlgClimaticBoxPlot
         ucrSelectorClimaticBoxPlot.SetParameter(New RParameter("data", 0))
         ucrSelectorClimaticBoxPlot.SetParameterIsrfunction()
 
-        ucrVariablesAsFactorForClimaticBoxplot.Selector = ucrSelectorClimaticBoxPlot
         ucrVariablesAsFactorForClimaticBoxplot.SetParameter(New RParameter("y", 0))
+        ucrVariablesAsFactorForClimaticBoxplot.Selector = ucrSelectorClimaticBoxPlot
         ucrVariablesAsFactorForClimaticBoxplot.SetIncludedDataTypes({"numeric"})
         ucrVariablesAsFactorForClimaticBoxplot.strSelectorHeading = "Numerics"
         ucrVariablesAsFactorForClimaticBoxplot.SetParameterIsString()
         ucrVariablesAsFactorForClimaticBoxplot.bWithQuotes = False
 
-        ucrReceiverXVariable.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiverXVariable.SetParameter(New RParameter("x", 1))
+        ucrReceiverXVariable.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiverXVariable.SetParameterIsString()
         ucrReceiverXVariable.bWithQuotes = False
         ucrReceiverXVariable.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrReceiverXVariable.bAddParameterIfEmpty = True
 
-        ucrReceiverFacetBy.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiverFacetBy.SetParameter(New RParameter("var1", 0))
+        ucrReceiverFacetBy.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiverFacetBy.SetParameterIsString()
         ucrReceiverFacetBy.bWithQuotes = False
 
-        ucrReceiver2ndFacet.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiver2ndFacet.SetParameter(New RParameter("var2", 1))
+        ucrReceiver2ndFacet.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiver2ndFacet.SetParameterIsString()
         ucrReceiver2ndFacet.bWithQuotes = False
         ucrVariablesAsFactorForClimaticBoxplot.SetMeAsReceiver()
@@ -135,24 +115,27 @@ Public Class dlgClimaticBoxPlot
         clsCoordFlipFunc.SetRCommand("coord_flip")
         clsCoordFlipParam.SetArgumentName("coord_flip")
         clsCoordFlipParam.SetArgument(clsCoordFlipFunc)
-        ucrChkHorizontalBoxplot.SetText("Horizontal Plot")
         ucrChkHorizontalBoxplot.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkHorizontalBoxplot.SetText("Horizontal Plot")
 
-        ucrChkMargins.SetText("Margins")
         ucrChkMargins.SetParameter(New RParameter("margins"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=False)
+        ucrChkMargins.SetText("Margins")
         ucrChkMargins.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkMargins.SetRDefault("FALSE")
 
-        ucrChkVerticalXTickMarkers.SetText("Verical X Tick Markers")
+        ucrChkVerticalXTickMarkers.SetText("Vertical X Tick Markers")
+        ucrChkVerticalXTickMarkers.SetParameter(clsThemeParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
         clsThemeFunc.SetPackageName("ggplot2")
-        clsTextElementFunc.SetPackageName("ggplot2")
         clsThemeFunc.SetRCommand("theme")
+        clsThemeFunc.AddParameter("axis.text.x", clsRFunctionParameter:=clsTextElementFunc)
+
+        clsThemeParam.SetArgument(clsThemeFunc)
+        clsThemeParam.SetArgumentName("theme")
+
+        clsTextElementFunc.SetPackageName("ggplot2")
         clsTextElementFunc.SetRCommand("element_text")
         clsTextElementFunc.AddParameter("angle", "90")
-        clsThemeFunc.AddParameter("axis.text.x", clsRFunctionParameter:=clsTextElementFunc)
-        clsThemeParam.SetArgumentName("theme")
-        clsThemeParam.SetArgument(clsThemeFunc)
-        ucrChkVerticalXTickMarkers.SetParameter(clsThemeParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         ucrSavePlot.SetPrefix("boxplot")
         ucrSavePlot.SetIsComboBox()
@@ -217,6 +200,87 @@ Public Class dlgClimaticBoxPlot
         MarginsEnabled()
     End Sub
 
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrReceiverFacetBy.AddAdditionalCodeParameterPair(clsFacetWrapOp, New RParameter("var1", iNewPosition:=1), iAdditionalPairNo:=1)
+        ucrSavePlot.SetRCode(clsBaseOperator, bReset)
+
+        ucrSelectorClimaticBoxPlot.SetRCode(clsRggplotFunction, bReset)
+        ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
+        ucrChkVerticalXTickMarkers.SetRCode(clsBaseOperator, bReset)
+
+        ucrChkVarWidth.SetRCode(clsRgeomPlotFunction, bReset)
+        ucrPnlPlots.SetRCode(clsRgeomPlotFunction, bReset)
+        ucrVariablesAsFactorForClimaticBoxplot.SetRCode(clsRaesFunction, bReset)
+
+        ucrReceiverXVariable.SetRCode(clsAsFactor, bReset)
+        ucrVariablesAsFactorForClimaticBoxplot.SetRCode(clsRaesFunction, bReset)
+
+        ucrReceiverFacetBy.SetRCode(clsFacetGridOp, bReset)
+        ucrReceiver2ndFacet.SetRCode(clsFacetGridOp, bReset)
+        ucrChkMargins.SetRCode(clsFacetFunction, bReset)
+    End Sub
+
+    Private Sub TestOKEnabled()
+        If Not ucrVariablesAsFactorForClimaticBoxplot.IsEmpty AndAlso ucrSavePlot.IsComplete Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        AutoFill()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsFacetFunction, ucrNewBaseSelector:=ucrSelectorClimaticBoxPlot, bReset:=bResetSubdialog)
+        'this is a temporaly fix because we have facets done on the main dialog
+        sdgPlots.tbpFacet.Enabled = False
+        sdgPlots.ShowDialog()
+        bResetSubdialog = False
+    End Sub
+
+    Private Sub ucrPnlPlots_ControlValueChanged() Handles ucrPnlPlots.ControlValueChanged
+        If rdoBoxplot.Checked Then
+            clsRgeomPlotFunction.SetRCommand("geom_boxplot")
+            cmdBoxPlotOptions.Text = "Boxplot Options"
+            If Not ucrSavePlot.bUserTyped Then
+                ucrSavePlot.SetPrefix("boxplot")
+            End If
+        ElseIf rdoJitter.Checked Then
+            clsRgeomPlotFunction.SetRCommand("geom_jitter")
+            cmdBoxPlotOptions.Text = "Jitter Options"
+            If Not ucrSavePlot.bUserTyped Then
+                ucrSavePlot.SetPrefix("jitter")
+            End If
+        Else
+            clsRgeomPlotFunction.SetRCommand("geom_violin")
+            cmdBoxPlotOptions.Text = "Violin Options"
+            If Not ucrSavePlot.bUserTyped Then
+                ucrSavePlot.SetPrefix("violin")
+            End If
+        End If
+    End Sub
+
+    Private Sub cmdBoxPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdBoxPlotOptions.Click
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomPlotFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorClimaticBoxPlot, bApplyAesGlobally:=True, bReset:=bResetBoxLayerSubdialog)
+        sdgLayerOptions.ShowDialog()
+        bResetBoxLayerSubdialog = False
+        For Each clsParam In clsRaesFunction.clsParameters
+            If clsParam.strArgumentName = "x" Then
+                ucrReceiverXVariable.Add(clsParam.strArgumentValue)
+            ElseIf clsParam.strArgumentName = "y" Then
+                'ucrReceiverData.Add(clsParam.strArgumentValue)
+            ElseIf clsParam.strArgumentName = "fill" Then
+                'ucrReceiverMoreData.Add(clsParam.strArgumentValue)
+            End If
+        Next
+        'TODO need to check for the variable width from the geom function in a way that when we check the var width checkbox, it triggers controlvaluechanged
+    End Sub
+
     Private Sub AutoFill()
         Dim strYearCol As String
         Dim strMonthCol As String
@@ -253,76 +317,6 @@ Public Class dlgClimaticBoxPlot
         ElseIf strStationCol <> "" Then
             ucrReceiverXVariable.Add(strStationCol, strDataFrame)
         End If
-
-
-    End Sub
-
-    Private Sub TestOKEnabled()
-        If Not ucrVariablesAsFactorForClimaticBoxplot.IsEmpty AndAlso ucrSavePlot.IsComplete Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
-
-    End Sub
-
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-        SetRCodeForControls(True)
-        AutoFill()
-        TestOKEnabled()
-    End Sub
-
-    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsFacetFunction, ucrNewBaseSelector:=ucrSelectorClimaticBoxPlot, bReset:=bResetSubdialog)
-        'this is a temporaly fix because we have facets done on the main dialog
-        sdgPlots.tbpFacet.Enabled = False
-        sdgPlots.ShowDialog()
-        bResetSubdialog = False
-    End Sub
-
-    Private Sub ucrPnlPlots_ControlValueChanged() Handles ucrPnlPlots.ControlValueChanged
-        If rdoBoxplot.Checked Then
-            clsRgeomPlotFunction.SetRCommand("geom_boxplot")
-            ucrSavePlot.SetPrefix("boxplot")
-            cmdBoxPlotOptions.Text = "Boxplot Options"
-        ElseIf rdoJitter.Checked Then
-            clsRgeomPlotFunction.SetRCommand("geom_jitter")
-            ucrSavePlot.SetPrefix("jitter")
-            cmdBoxPlotOptions.Text = "Jitter Options"
-        Else
-            clsRgeomPlotFunction.SetRCommand("geom_violin")
-            ucrSavePlot.SetPrefix("violin")
-            cmdBoxPlotOptions.Text = "Violin Options"
-        End If
-    End Sub
-
-    Private Sub ucrSavePlot_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSavePlot.ControlContentsChanged, ucrVariablesAsFactorForClimaticBoxplot.ControlContentsChanged
-        TestOKEnabled()
-    End Sub
-
-    Private Sub cmdBoxPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdBoxPlotOptions.Click
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomPlotFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorClimaticBoxPlot, bApplyAesGlobally:=True, bReset:=bResetBoxLayerSubdialog)
-        sdgLayerOptions.ShowDialog()
-        bResetBoxLayerSubdialog = False
-        For Each clsParam In clsRaesFunction.clsParameters
-            If clsParam.strArgumentName = "x" Then
-                ucrReceiverXVariable.Add(clsParam.strArgumentValue)
-            ElseIf clsParam.strArgumentName = "y" Then
-                'ucrReceiverData.Add(clsParam.strArgumentValue)
-            ElseIf clsParam.strArgumentName = "fill" Then
-                'ucrReceiverMoreData.Add(clsParam.strArgumentValue)
-            End If
-        Next
-        'TODO need to check for the variable width from the geom function in a way that when we check the var width checkbox, it triggers controlvaluechanged
-    End Sub
-
-    Private Sub ucrVariablesAsFactorForClimaticBoxplot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForClimaticBoxplot.ControlValueChanged
-        If Not ucrVariablesAsFactorForClimaticBoxplot.IsEmpty AndAlso Not ucrVariablesAsFactorForClimaticBoxplot.bSingleVariable Then
-            clsRaesFunction.AddParameter("fill", "variable")
-        Else
-            clsRaesFunction.RemoveParameterByName("fill")
-        End If
     End Sub
 
     Private Sub AddRemoveFacets()
@@ -343,12 +337,6 @@ Public Class dlgClimaticBoxPlot
         End If
     End Sub
 
-    Private Sub ucrReceiverFacetBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFacetBy.ControlValueChanged, ucrReceiver2ndFacet.ControlValueChanged
-        SecondFacetReceiverEnabled()
-        SetFacets()
-        AddRemoveFacets()
-        MarginsEnabled()
-    End Sub
     Private Sub SecondFacetReceiverEnabled()
         If ucrReceiverFacetBy.IsEmpty() Then
             ucrReceiver2ndFacet.Clear()
@@ -366,10 +354,6 @@ Public Class dlgClimaticBoxPlot
         End If
     End Sub
 
-    Private Sub ucrSelectorClimaticBoxPlot_DataFrameChanged() Handles ucrSelectorClimaticBoxPlot.DataFrameChanged
-        AutoFill()
-    End Sub
-
     Private Sub ucrReceiverXVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverXVariable.ControlValueChanged
         If ucrReceiverXVariable.IsEmpty Then
             clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
@@ -378,7 +362,26 @@ Public Class dlgClimaticBoxPlot
         End If
     End Sub
 
-    Private Sub ucrPnlPlots_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPlots.ControlValueChanged
+    Private Sub ucrVariablesAsFactorForClimaticBoxplot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForClimaticBoxplot.ControlValueChanged
+        If Not ucrVariablesAsFactorForClimaticBoxplot.IsEmpty AndAlso Not ucrVariablesAsFactorForClimaticBoxplot.bSingleVariable Then
+            clsRaesFunction.AddParameter("fill", "variable")
+        Else
+            clsRaesFunction.RemoveParameterByName("fill")
+        End If
+    End Sub
 
+    Private Sub ucrReceiverFacetBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFacetBy.ControlValueChanged, ucrReceiver2ndFacet.ControlValueChanged
+        SecondFacetReceiverEnabled()
+        SetFacets()
+        AddRemoveFacets()
+        MarginsEnabled()
+    End Sub
+
+    Private Sub ucrSelectorClimaticBoxPlot_DataFrameChanged() Handles ucrSelectorClimaticBoxPlot.DataFrameChanged
+        AutoFill()
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSavePlot.ControlContentsChanged, ucrVariablesAsFactorForClimaticBoxplot.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
