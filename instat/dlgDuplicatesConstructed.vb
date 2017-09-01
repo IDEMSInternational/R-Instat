@@ -55,25 +55,21 @@ Public Class dlgDuplicatesConstructed
         ucrPnlOptions.AddToLinkedControls({ucrChkOmitValues, ucrChkTolerance, ucrReceiverForSuccessiveValues}, {rdoSuccessiveValues}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkOmitValues.SetText("Omit Value(s)")
-
-        ucrReceiverForSelectedVariables.SetLinkedDisplayControl(lblVariablesToDuplicate)
         ucrChkOmitValues.AddParameterValuesCondition(False, "ignore", "NULL", True)
         ucrChkOmitValues.AddParameterValuesCondition(True, "ignore", "NULL", False)
-
         ucrChkOmitValues.AddToLinkedControls(ucrNudOmit, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrChkOmitValues.AddToLinkedControls(ucrInputConditions, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="==")
         ucrChkOmitValues.SetLinkedDisplayControl(grpOptions)
 
         ucrInputTolerance.SetParameter(New RParameter("tolerance", 0))
         ucrInputTolerance.AddQuotesIfUnrecognised = False
+        ucrInputTolerance.SetValidationTypeAsNumeric()
 
         ucrChkTolerance.SetParameter(ucrInputTolerance.GetParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkTolerance.SetText("Tolerance")
         ucrChkTolerance.AddParameterPresentCondition(True, "tolerance")
         ucrChkTolerance.AddParameterPresentCondition(False, "tolerance", False)
-
         ucrChkTolerance.AddToLinkedControls(ucrInputTolerance, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.01)
-        ucrInputTolerance.SetValidationTypeAsNumeric()
 
         ucrSelectorDuplicateswithVariables.SetParameter(New RParameter("data_name", 0))
         ucrSelectorDuplicateswithVariables.SetParameterIsString()
@@ -81,6 +77,7 @@ Public Class dlgDuplicatesConstructed
         ucrReceiverForSelectedVariables.SetParameter(New RParameter("x", 0))
         ucrReceiverForSelectedVariables.SetParameterIsRFunction()
         ucrReceiverForSelectedVariables.Selector = ucrSelectorDuplicateswithVariables
+        ucrReceiverForSelectedVariables.SetLinkedDisplayControl(lblVariablesToDuplicate)
 
         ' for rdoSuccessiveVariables only
         ucrReceiverForSuccessiveValues.SetParameter(New RParameter("col_name", 1))
@@ -140,9 +137,7 @@ Public Class dlgDuplicatesConstructed
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverForSelectedVariables.AddAdditionalCodeParameterPair(clsDuplicated2, New RParameter("x", 1), iAdditionalPairNo:=1)
-        'ucrReceiverForSuccessiveValues.AddAdditionalCodeParameterPair(clsSubsetCol, New RParameter("col_name", 1), iAdditionalPairNo:=3)
         ucrSelectorDuplicateswithVariables.AddAdditionalCodeParameterPair(clsDuplicated2, New RParameter("x", 0), iAdditionalPairNo:=1)
-        '  ucrSelectorDuplicateswithVariables.AddAdditionalCodeParameterPair(clsSubsetCol, ucrSelectorDuplicateswithVariables.GetParameter, iAdditionalPairNo:=2)
         ucrSelectorDuplicateswithVariables.AddAdditionalCodeParameterPair(clsDuplicated, New RParameter("x", 0), iAdditionalPairNo:=2)
 
         ucrNewColumnName.AddAdditionalRCode(clsDuplicated2, 1)
