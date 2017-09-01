@@ -56,7 +56,6 @@ Partial Class sdgSummaries
         Me.grpQuartiles = New System.Windows.Forms.GroupBox()
         Me.ucrChkLowerQuartile = New instat.ucrCheck()
         Me.ucrChkUpperQuartile = New instat.ucrCheck()
-        Me.ucrButtonsSummaries = New instat.ucrButtonsSubdialogue()
         Me.tbSummaries = New System.Windows.Forms.TabControl()
         Me.tbsum = New System.Windows.Forms.TabPage()
         Me.tbScale = New System.Windows.Forms.TabPage()
@@ -76,6 +75,7 @@ Partial Class sdgSummaries
         Me.ucrNudPercentage = New instat.ucrNud()
         Me.ucrNudNumber = New instat.ucrNud()
         Me.ucrPnlMissingOptions = New instat.UcrPanel()
+        Me.ucrButtonsSummaries = New instat.ucrButtonsSubdialogue()
         Me.grpCommon.SuspendLayout()
         Me.grpNotOrderedFactor.SuspendLayout()
         Me.grpNumeric.SuspendLayout()
@@ -254,13 +254,6 @@ Partial Class sdgSummaries
         Me.ucrChkUpperQuartile.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkUpperQuartile.TabIndex = 0
         '
-        'ucrButtonsSummaries
-        '
-        Me.ucrButtonsSummaries.Location = New System.Drawing.Point(118, 379)
-        Me.ucrButtonsSummaries.Name = "ucrButtonsSummaries"
-        Me.ucrButtonsSummaries.Size = New System.Drawing.Size(142, 30)
-        Me.ucrButtonsSummaries.TabIndex = 4
-        '
         'tbSummaries
         '
         Me.tbSummaries.Controls.Add(Me.tbsum)
@@ -283,7 +276,7 @@ Partial Class sdgSummaries
         Me.tbsum.Location = New System.Drawing.Point(4, 22)
         Me.tbsum.Name = "tbsum"
         Me.tbsum.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbsum.Size = New System.Drawing.Size(326, 339)
+        Me.tbsum.Size = New System.Drawing.Size(374, 339)
         Me.tbsum.TabIndex = 0
         Me.tbsum.Text = "Summaries"
         Me.tbsum.UseVisualStyleBackColor = True
@@ -297,7 +290,7 @@ Partial Class sdgSummaries
         Me.tbScale.Location = New System.Drawing.Point(4, 22)
         Me.tbScale.Name = "tbScale"
         Me.tbScale.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbScale.Size = New System.Drawing.Size(350, 339)
+        Me.tbScale.Size = New System.Drawing.Size(374, 339)
         Me.tbScale.TabIndex = 1
         Me.tbScale.Text = "Scale"
         Me.tbScale.UseVisualStyleBackColor = True
@@ -305,7 +298,7 @@ Partial Class sdgSummaries
         'ucrChkSn
         '
         Me.ucrChkSn.Checked = False
-        Me.ucrChkSn.Location = New System.Drawing.Point(208, 48)
+        Me.ucrChkSn.Location = New System.Drawing.Point(229, 57)
         Me.ucrChkSn.Name = "ucrChkSn"
         Me.ucrChkSn.Size = New System.Drawing.Size(120, 20)
         Me.ucrChkSn.TabIndex = 4
@@ -313,7 +306,7 @@ Partial Class sdgSummaries
         'ucrChkQn
         '
         Me.ucrChkQn.Checked = False
-        Me.ucrChkQn.Location = New System.Drawing.Point(19, 47)
+        Me.ucrChkQn.Location = New System.Drawing.Point(229, 19)
         Me.ucrChkQn.Name = "ucrChkQn"
         Me.ucrChkQn.Size = New System.Drawing.Size(129, 20)
         Me.ucrChkQn.TabIndex = 3
@@ -321,15 +314,15 @@ Partial Class sdgSummaries
         'ucrChkMedianAbsoluteDeviation
         '
         Me.ucrChkMedianAbsoluteDeviation.Checked = False
-        Me.ucrChkMedianAbsoluteDeviation.Location = New System.Drawing.Point(208, 15)
+        Me.ucrChkMedianAbsoluteDeviation.Location = New System.Drawing.Point(15, 57)
         Me.ucrChkMedianAbsoluteDeviation.Name = "ucrChkMedianAbsoluteDeviation"
-        Me.ucrChkMedianAbsoluteDeviation.Size = New System.Drawing.Size(166, 20)
+        Me.ucrChkMedianAbsoluteDeviation.Size = New System.Drawing.Size(205, 20)
         Me.ucrChkMedianAbsoluteDeviation.TabIndex = 2
         '
         'ucrChkCoefficientOfVariation
         '
         Me.ucrChkCoefficientOfVariation.Checked = False
-        Me.ucrChkCoefficientOfVariation.Location = New System.Drawing.Point(19, 16)
+        Me.ucrChkCoefficientOfVariation.Location = New System.Drawing.Point(15, 19)
         Me.ucrChkCoefficientOfVariation.Name = "ucrChkCoefficientOfVariation"
         Me.ucrChkCoefficientOfVariation.Size = New System.Drawing.Size(171, 20)
         Me.ucrChkCoefficientOfVariation.TabIndex = 1
@@ -340,7 +333,7 @@ Partial Class sdgSummaries
         Me.tbSkewness.Location = New System.Drawing.Point(4, 22)
         Me.tbSkewness.Name = "tbSkewness"
         Me.tbSkewness.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbSkewness.Size = New System.Drawing.Size(350, 339)
+        Me.tbSkewness.Size = New System.Drawing.Size(374, 339)
         Me.tbSkewness.TabIndex = 2
         Me.tbSkewness.Text = "Skewness"
         Me.tbSkewness.UseVisualStyleBackColor = True
@@ -359,7 +352,7 @@ Partial Class sdgSummaries
         Me.tbKurtosis.Location = New System.Drawing.Point(4, 22)
         Me.tbKurtosis.Name = "tbKurtosis"
         Me.tbKurtosis.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbKurtosis.Size = New System.Drawing.Size(350, 339)
+        Me.tbKurtosis.Size = New System.Drawing.Size(374, 339)
         Me.tbKurtosis.TabIndex = 3
         Me.tbKurtosis.Text = "Kurtosis"
         Me.tbKurtosis.UseVisualStyleBackColor = True
@@ -416,9 +409,9 @@ Partial Class sdgSummaries
         Me.lblPercentage.AutoSize = True
         Me.lblPercentage.Location = New System.Drawing.Point(4, 70)
         Me.lblPercentage.Name = "lblPercentage"
-        Me.lblPercentage.Size = New System.Drawing.Size(309, 13)
+        Me.lblPercentage.Size = New System.Drawing.Size(308, 13)
         Me.lblPercentage.TabIndex = 6
-        Me.lblPercentage.Text = "Summary set to missing if more than this Percentage are missing:"
+        Me.lblPercentage.Text = "Summary set to missing if more than this percentage are missing:"
         '
         'lblNumber
         '
@@ -459,6 +452,13 @@ Partial Class sdgSummaries
         Me.ucrPnlMissingOptions.Name = "ucrPnlMissingOptions"
         Me.ucrPnlMissingOptions.Size = New System.Drawing.Size(214, 45)
         Me.ucrPnlMissingOptions.TabIndex = 2
+        '
+        'ucrButtonsSummaries
+        '
+        Me.ucrButtonsSummaries.Location = New System.Drawing.Point(118, 379)
+        Me.ucrButtonsSummaries.Name = "ucrButtonsSummaries"
+        Me.ucrButtonsSummaries.Size = New System.Drawing.Size(142, 30)
+        Me.ucrButtonsSummaries.TabIndex = 4
         '
         'sdgSummaries
         '
