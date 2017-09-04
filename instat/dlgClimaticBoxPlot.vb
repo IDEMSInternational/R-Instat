@@ -116,7 +116,7 @@ Public Class dlgClimaticBoxPlot
         ucrChkHorizontalBoxplot.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkHorizontalBoxplot.SetText("Horizontal Plot")
 
-        ucrChkMargins.SetParameter(New RParameter("margins"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=False)
+        ucrChkMargins.SetParameter(New RParameter("margins"))
         ucrChkMargins.SetText("Margins")
         ucrChkMargins.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkMargins.SetRDefault("FALSE")
@@ -194,7 +194,6 @@ Public Class dlgClimaticBoxPlot
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorClimaticBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
         TestOKEnabled()
-        MarginsEnabled()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -216,10 +215,11 @@ Public Class dlgClimaticBoxPlot
 
         ucrReceiverFacetBy.SetRCode(clsFacetGridOp, bReset)
         ucrReceiver2ndFacet.SetRCode(clsFacetGridOp, bReset)
-
         ucrChkMargins.SetRCode(clsFacetFunction, bReset)
+
         bRCodeUpdated = True
         SecondFacetReceiverEnabled()
+        MarginsEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -352,10 +352,12 @@ Public Class dlgClimaticBoxPlot
     End Sub
 
     Private Sub MarginsEnabled()
-        If Not ucrReceiver2ndFacet.IsEmpty AndAlso Not ucrReceiverFacetBy.IsEmpty Then
-            ucrChkMargins.Enabled = True
-        Else
-            ucrChkMargins.Enabled = False
+        If bRCodeUpdated Then
+            If Not ucrReceiver2ndFacet.IsEmpty AndAlso Not ucrReceiverFacetBy.IsEmpty Then
+                ucrChkMargins.Enabled = True
+            Else
+                ucrChkMargins.Enabled = False
+            End If
         End If
     End Sub
 
