@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgClimaticSummary
     Private bFirstload As Boolean = True
@@ -41,7 +42,7 @@ Public Class dlgClimaticSummary
     ' if annual is checked, display from/to nuds
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.clsRsyntax.iCallType = 0
         ucrBase.iHelpTopicID = 510
         rdoAnnualVariable.Enabled = False
         ucrChkDropUnusedLevels.Enabled = False ' removed this functionality so this is disabled
@@ -268,6 +269,14 @@ Public Class dlgClimaticSummary
             clsDefaultFactors.AddParameter("within_variable", ucrReceiverWithinYear.GetVariableNames, bIncludeArgumentName:=False, iPosition:=2)
         Else
             clsDefaultFactors.RemoveParameterByName("within_variable")
+        End If
+    End Sub
+
+    Private Sub ucrChkPrintOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPrintOutput.ControlValueChanged
+        If ucrChkPrintOutput.Checked Then
+            ucrBase.clsRsyntax.iCallType = 2
+        Else
+            ucrBase.clsRsyntax.iCallType = 0
         End If
     End Sub
 
