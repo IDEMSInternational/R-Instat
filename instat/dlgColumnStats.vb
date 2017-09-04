@@ -41,7 +41,7 @@ Public Class dlgColumnStats
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.clsRsyntax.iCallType = 0
         ucrBase.iHelpTopicID = 64
         ucrChkDropUnusedLevels.Enabled = False ' removed this functionality so this is disabled
         cmdProportionsPercentages.Enabled = False 'TODO: Disabling this for now still needs discussions.
@@ -153,6 +153,14 @@ Public Class dlgColumnStats
         sdgProportionsPercentages.ShowDialog()
         bResetSubdialog = False
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrChkPrintOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPrintOutput.ControlValueChanged
+        If ucrChkPrintOutput.Checked Then
+            ucrBase.clsRsyntax.iCallType = 2
+        Else
+            ucrBase.clsRsyntax.iCallType = 0
+        End If
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariables.ControlContentsChanged, ucrReceiverByFactor.ControlContentsChanged, ucrChkPrintOutput.ControlContentsChanged, ucrChkStoreResults.ControlContentsChanged
