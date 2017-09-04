@@ -1080,6 +1080,23 @@ Public Class RLink
         Return strColumn
     End Function
 
+    Public Function GetClimaticColumnOfType(strDataName As String, strType As String) As String
+        Dim clsGetColumnName As New RFunction
+        Dim strColumn As String
+        Dim expColumn As SymbolicExpression
+
+        clsGetColumnName.SetRCommand(strInstatDataObject & "$get_climatic_column_name")
+        clsGetColumnName.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
+        clsGetColumnName.AddParameter("col_name", strType)
+        expColumn = RunInternalScriptGetValue(clsGetColumnName.ToScript(), bSilent:=True)
+        If expColumn IsNot Nothing AndAlso Not expColumn.Type = Internals.SymbolicExpressionType.Null Then
+            strColumn = expColumn.AsCharacter(0)
+        Else
+            strColumn = ""
+        End If
+        Return strColumn
+    End Function
+
     Public Function GetCRIColumnNames(strDataName As String) As String()
         Dim clsGetColumnName As New RFunction
         Dim strColumn() As String
