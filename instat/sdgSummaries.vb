@@ -79,7 +79,7 @@ Public Class sdgSummaries
         ucrChkCoefficientOfVariation.SetText("Coefficient Of Variation")
 
         ucrChkMedianAbsoluteDeviation.SetParameter(New RParameter("summary_median_absolute_deviation", 18), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_median_absolute_deviation" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkMedianAbsoluteDeviation.SetText("Median Absolute Deviation(MAD)")
+        ucrChkMedianAbsoluteDeviation.SetText("Median Absolute Deviation (MAD)")
 
         ucrChkQn.SetParameter(New RParameter("summary_Qn", 19), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_Qn" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkQn.SetText("Qn")
