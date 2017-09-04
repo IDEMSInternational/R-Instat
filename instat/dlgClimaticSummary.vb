@@ -255,7 +255,7 @@ Public Class dlgClimaticSummary
     End Sub
 
     Private Sub DayBoundaries()
-        clsDayFromAndTo.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")")
+        clsDayFromAndTo.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")", iPosition:=2)
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDOY.ControlValueChanged, ucrSelectorVariable.ControlValueChanged
@@ -280,7 +280,7 @@ Public Class dlgClimaticSummary
         End If
     End Sub
 
-    Private Sub ucrReceiverDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverWithinYear.ControlContentsChanged, ucrPnlAnnualWithin.ControlContentsChanged, ucrNudTo.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrReceiverFrom.ControlContentsChanged, ucrReceiverTo.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverWithinYear.ControlContentsChanged, ucrPnlAnnualWithin.ControlContentsChanged, ucrNudTo.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrReceiverFrom.ControlContentsChanged, ucrReceiverTo.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
