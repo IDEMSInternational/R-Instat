@@ -400,6 +400,7 @@ Public Class dlgClimaticBoxPlot
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSavePlot.ControlContentsChanged, ucrVariablesAsFactorForClimaticBoxplot.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
     Private Sub FacetsCheck()
         If Not ucrReceiverFacetBy.IsEmpty AndAlso Not ucrReceiver2ndFacet.IsEmpty Then
             If ucrReceiverFacetBy.txtReceiverSingle.Text = ucrReceiver2ndFacet.txtReceiverSingle.Text Then
