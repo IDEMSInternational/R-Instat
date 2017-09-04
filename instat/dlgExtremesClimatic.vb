@@ -205,8 +205,6 @@ Public Class dlgExtremesClimatic
         clsRunCalcFunction.AddParameter("calc", clsRFunctionParameter:=clsMinMaxSummariseFunction)
         clsRunCalcFunction.AddParameter("display", "FALSE")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRunCalcFunction)
-
-        ucrInputSave.bUserTyped = False
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
@@ -244,16 +242,14 @@ Public Class dlgExtremesClimatic
     End Sub
 
     Private Sub SetAssignName()
-        If Not ucrInputSave.bUserTyped Then
-            If rdoMinMax.Checked Then
-                If rdoMax.Checked Then
-                    ucrInputSave.SetName("max_" & ucrReceiverElement.GetVariableNames(False))
-                Else
-                    ucrInputSave.SetName("min_" & ucrReceiverElement.GetVariableNames(False))
-                End If
-            ElseIf rdoPeaks.Checked Then
-                ucrInputSave.SetName("peaks_" & ucrReceiverElement.GetVariableNames(False))
+        If rdoMinMax.Checked Then
+            If rdoMax.Checked Then
+                ucrInputSave.SetName("max_" & ucrReceiverElement.GetVariableNames(False))
+            Else
+                ucrInputSave.SetName("min_" & ucrReceiverElement.GetVariableNames(False))
             End If
+        ElseIf rdoPeaks.Checked Then
+            ucrInputSave.SetName("peaks_" & ucrReceiverElement.GetVariableNames(False))
         End If
     End Sub
 
