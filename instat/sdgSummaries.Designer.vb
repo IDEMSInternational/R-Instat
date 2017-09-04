@@ -138,13 +138,13 @@ Partial Class sdgSummaries
         Me.grpNotOrderedFactor.Controls.Add(Me.ucrChkRange)
         Me.grpNotOrderedFactor.Controls.Add(Me.ucrChkMaximum)
         Me.grpNotOrderedFactor.Controls.Add(Me.ucrChkMinimum)
-        Me.grpNotOrderedFactor.Location = New System.Drawing.Point(6, 77)
+        Me.grpNotOrderedFactor.Location = New System.Drawing.Point(6, 80)
         Me.grpNotOrderedFactor.Name = "grpNotOrderedFactor"
         Me.grpNotOrderedFactor.Size = New System.Drawing.Size(303, 71)
         Me.grpNotOrderedFactor.TabIndex = 1
         Me.grpNotOrderedFactor.TabStop = False
-        Me.grpNotOrderedFactor.Tag = "All_but_unrdered_factor"
-        Me.grpNotOrderedFactor.Text = "All but (unordered) factor"
+        Me.grpNotOrderedFactor.Tag = "All_but_unordered_Factor"
+        Me.grpNotOrderedFactor.Text = "All but (unordered) Factor"
         '
         'ucrChkRange
         '
@@ -177,7 +177,7 @@ Partial Class sdgSummaries
         Me.grpNumeric.Controls.Add(Me.ucrChkStdDev)
         Me.grpNumeric.Controls.Add(Me.ucrChkSum)
         Me.grpNumeric.Controls.Add(Me.ucrChkMean)
-        Me.grpNumeric.Location = New System.Drawing.Point(5, 150)
+        Me.grpNumeric.Location = New System.Drawing.Point(5, 153)
         Me.grpNumeric.Name = "grpNumeric"
         Me.grpNumeric.Size = New System.Drawing.Size(303, 110)
         Me.grpNumeric.TabIndex = 2
@@ -229,7 +229,7 @@ Partial Class sdgSummaries
         '
         Me.grpQuartiles.Controls.Add(Me.ucrChkLowerQuartile)
         Me.grpQuartiles.Controls.Add(Me.ucrChkUpperQuartile)
-        Me.grpQuartiles.Location = New System.Drawing.Point(6, 266)
+        Me.grpQuartiles.Location = New System.Drawing.Point(6, 265)
         Me.grpQuartiles.Name = "grpQuartiles"
         Me.grpQuartiles.Size = New System.Drawing.Size(303, 56)
         Me.grpQuartiles.TabIndex = 3
@@ -263,7 +263,7 @@ Partial Class sdgSummaries
         Me.tbSummaries.Location = New System.Drawing.Point(7, 7)
         Me.tbSummaries.Name = "tbSummaries"
         Me.tbSummaries.SelectedIndex = 0
-        Me.tbSummaries.Size = New System.Drawing.Size(325, 365)
+        Me.tbSummaries.Size = New System.Drawing.Size(325, 353)
         Me.tbSummaries.TabIndex = 0
         '
         'tbsum
@@ -275,7 +275,7 @@ Partial Class sdgSummaries
         Me.tbsum.Location = New System.Drawing.Point(4, 22)
         Me.tbsum.Name = "tbsum"
         Me.tbsum.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbsum.Size = New System.Drawing.Size(317, 339)
+        Me.tbsum.Size = New System.Drawing.Size(317, 327)
         Me.tbsum.TabIndex = 0
         Me.tbsum.Text = "Summaries"
         Me.tbsum.UseVisualStyleBackColor = True
@@ -289,7 +289,7 @@ Partial Class sdgSummaries
         Me.tbScale.Location = New System.Drawing.Point(4, 22)
         Me.tbScale.Name = "tbScale"
         Me.tbScale.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbScale.Size = New System.Drawing.Size(317, 339)
+        Me.tbScale.Size = New System.Drawing.Size(317, 327)
         Me.tbScale.TabIndex = 1
         Me.tbScale.Text = "Scale"
         Me.tbScale.UseVisualStyleBackColor = True
@@ -332,7 +332,7 @@ Partial Class sdgSummaries
         Me.tbSkewness.Location = New System.Drawing.Point(4, 22)
         Me.tbSkewness.Name = "tbSkewness"
         Me.tbSkewness.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbSkewness.Size = New System.Drawing.Size(317, 339)
+        Me.tbSkewness.Size = New System.Drawing.Size(317, 327)
         Me.tbSkewness.TabIndex = 2
         Me.tbSkewness.Text = "Skewness"
         Me.tbSkewness.UseVisualStyleBackColor = True
@@ -446,7 +446,7 @@ Partial Class sdgSummaries
         '
         'ucrButtonsSummaries
         '
-        Me.ucrButtonsSummaries.Location = New System.Drawing.Point(97, 379)
+        Me.ucrButtonsSummaries.Location = New System.Drawing.Point(97, 363)
         Me.ucrButtonsSummaries.Name = "ucrButtonsSummaries"
         Me.ucrButtonsSummaries.Size = New System.Drawing.Size(142, 30)
         Me.ucrButtonsSummaries.TabIndex = 4
@@ -455,7 +455,7 @@ Partial Class sdgSummaries
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(337, 412)
+        Me.ClientSize = New System.Drawing.Size(337, 397)
         Me.Controls.Add(Me.tbSummaries)
         Me.Controls.Add(Me.ucrButtonsSummaries)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
