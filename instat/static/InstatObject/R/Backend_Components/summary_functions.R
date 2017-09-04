@@ -439,7 +439,7 @@ summary_min <- function (x, na.rm = FALSE,...) {
   else return(min(x, na.rm = na.rm))
 } 
 
-#get the range of the data
+# get the range of the data
 summary_range <- function(x, na.rm = FALSE, ...) {
   return(max(x, na.rm = na.rm) - min(x, na.rm = na.rm))
 }
@@ -449,7 +449,7 @@ summary_median <- function(x, na.rm = FALSE,...) {
   return(median(x, na.rm = na.rm))
 }
 
-#quantile function
+# quantile function
 summary_quantile <- function(x, na.rm = FALSE, probs,...) {
   if(anyNA(x) && !na.rm) return(NA)
   # This prevents multiple values being returned
@@ -466,41 +466,48 @@ upper_quartile <- function(x, na.rm = FALSE,...) {
   return(summary_quantile(x, na.rm = na.rm, probs = 0.75))
 }
 
-#Skewness e1071 function
+# Skewness e1071 function
 summary_skewness <- function(x, na.rm = FALSE, type = 2,...){
   return( e1071::skewness(x, na.rm = na.rm, type = type))
 }
 
-#skewness mc function
+# skewness mc function
 summary_skewness_mc <- function(x, na.rm=FALSE,...){
   return(robustbase::mc(x, na.rm = na.rm))
 }
 
-#kurtosis function
+# kurtosis function
 summary_kurtosis <- function(x, na.rm = FALSE, type = 2,...){
   return(e1071::kurtosis(x, na.rm = na.rm, type = type))
 }
 
-#Coefficient of Variation function
+# Coefficient of Variation function
 summary_coef_var <- function(x,...){
   return(summary_sd(x) / summary_mean(x))
 }
 
-#median absolute deviation function
-summary_median_absolute_deviation <- function(x, constant = 1.4826, na.rm = FALSE,low = FALSE, high = FALSE,...){
+# median absolute deviation function
+summary_median_absolute_deviation <- function(x, constant = 1.4826, na.rm = FALSE, low = FALSE, high = FALSE,...){
   return(stats::mad(x, constant = constant, na.rm = na.rm, low = low, high = high))  
 }
 
-#Qn function
-summary_Qn <- function(x, constant = 2.21914, finite.corr = missing(constant),...){
-  return(robustbase::Qn(x, constant = constant, finite.corr = finite.corr))
+# Qn function
+summary_Qn <- function(x, constant = 2.21914, finite.corr = missing(constant), na.rm = FALSE,...) {
+  if(anyNA(x) && !na.rm){
+    return(NA)}else{
+      x <- x[!is.na(x)]
+      return(robustbase::Qn(x, constant = constant, finite.corr = finite.corr))
+    }
 }
 
-#Sn function
-summary_Sn <- function(x, constant = 1.1926, finite.corr = missing(constant)){
-  return(robustbase::Sn(x, constant = constant, finite.corr = finite.corr))
+# Sn function
+summary_Sn <- function(x, constant = 1.1926, finite.corr = missing(constant), na.rm = FALSE,...){
+  if(anyNA(x) && !na.rm){
+    return(NA)}else{
+      x <- x[!is.na(x)]
+      return(robustbase::Qn(x, constant = constant, finite.corr = finite.corr))
+  } 
 }
-  
 
 instat_object$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), n_column_factors = 1, store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = TRUE, treat_columns_as_factor = FALSE, page_by = "default", as_html = TRUE, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, margin_name = "(All)", additional_filter, ...) {
   if(n_column_factors == 1 && length(factors) == 0) n_column_factors <- 0
