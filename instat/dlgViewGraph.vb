@@ -47,6 +47,7 @@ Public Class dlgViewGraph
         'Receiver
         ucrGraphReceiver.SetParameter(New RParameter("graph_name", 1))
         ucrGraphReceiver.strSelectorHeading = "Ggplot Graphs"
+        ucrGraphReceiver.bAutoFill = True
         ucrGraphReceiver.SetParameterIsString()
         ucrGraphReceiver.SetItemType("graph")
         ucrGraphReceiver.Selector = ucrGraphsSelector
