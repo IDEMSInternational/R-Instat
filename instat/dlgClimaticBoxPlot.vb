@@ -104,7 +104,7 @@ Public Class dlgClimaticBoxPlot
         ucrReceiver2ndFacet.SetParameterIsString()
         ucrReceiver2ndFacet.bWithQuotes = False
 
-        ucrChkVarWidth.SetParameter(New RParameter("varwidth"))
+        ucrChkVarWidth.SetParameter(New RParameter("varwidth", 0))
         ucrChkVarWidth.SetText("Variable Width")
         ucrChkVarWidth.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkVarWidth.SetRDefault("FALSE")
@@ -116,7 +116,7 @@ Public Class dlgClimaticBoxPlot
         ucrChkHorizontalBoxplot.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkHorizontalBoxplot.SetText("Horizontal Plot")
 
-        ucrChkMargins.SetParameter(New RParameter("margins"))
+        ucrChkMargins.SetParameter(New RParameter("margins", 2))
         ucrChkMargins.SetText("Margins")
         ucrChkMargins.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkMargins.SetRDefault("FALSE")
@@ -128,7 +128,7 @@ Public Class dlgClimaticBoxPlot
         clsThemeParam.SetArgumentName("theme")
         clsTextElementFunc.SetPackageName("ggplot2")
         clsTextElementFunc.SetRCommand("element_text")
-        clsTextElementFunc.AddParameter("angle", "90")
+        clsTextElementFunc.AddParameter("angle", "90", iPosition:=0)
         ucrChkVerticalXTickMarkers.SetText("Vertical X Tick Markers")
         ucrChkVerticalXTickMarkers.SetParameter(clsThemeParam, bNewAddRemoveParameter:=True, bNewChangeParameterValue:=False)
 
@@ -176,7 +176,7 @@ Public Class dlgClimaticBoxPlot
 
         clsRgeomPlotFunction.SetPackageName("ggplot2")
         clsRgeomPlotFunction.SetRCommand("geom_boxplot")
-        clsRgeomPlotFunction.AddParameter("varwidth", "FALSE")
+        clsRgeomPlotFunction.AddParameter("varwidth", "FALSE", iPosition:=0)
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -321,7 +321,7 @@ Public Class dlgClimaticBoxPlot
 
     Private Sub AddRemoveFacets()
         If Not ucrReceiverFacetBy.IsEmpty Then
-            clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
+            clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction, iPosition:=3)
         Else
             clsBaseOperator.RemoveParameterByName("facets")
         End If
@@ -330,10 +330,10 @@ Public Class dlgClimaticBoxPlot
     Private Sub SetFacets()
         If Not ucrReceiverFacetBy.IsEmpty AndAlso ucrReceiver2ndFacet.IsEmpty Then
             clsFacetFunction.SetRCommand("facet_wrap")
-            clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetWrapOp, bIncludeArgumentName:=False)
+            clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetWrapOp, bIncludeArgumentName:=False, iPosition:=0)
         ElseIf Not ucrReceiverFacetBy.IsEmpty AndAlso Not ucrReceiver2ndFacet.IsEmpty Then
             clsFacetFunction.SetRCommand("facet_grid")
-            clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetGridOp, bIncludeArgumentName:=False)
+            clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetGridOp, bIncludeArgumentName:=False, iPosition:=0)
         End If
     End Sub
 
@@ -360,22 +360,23 @@ Public Class dlgClimaticBoxPlot
 
     Private Sub ucrReceiverXVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverXVariable.ControlValueChanged
         If ucrReceiverXVariable.IsEmpty Then
-            clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
+            clsRaesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=1)
         Else
-            clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsFactor)
+            clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsFactor, iPosition:=1)
         End If
     End Sub
 
     Private Sub ucrVariablesAsFactorForClimaticBoxplot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForClimaticBoxplot.ControlValueChanged
         SetColourFillAes()
     End Sub
+
     Private Sub SetColourFillAes()
         If Not ucrVariablesAsFactorForClimaticBoxplot.IsEmpty AndAlso Not ucrVariablesAsFactorForClimaticBoxplot.bSingleVariable Then
             If rdoJitter.Checked Then
-                clsRaesFunction.AddParameter("colour", "variable")
+                clsRaesFunction.AddParameter("colour", "variable", iPosition:=2)
                 clsRaesFunction.RemoveParameterByName("fill")
             Else
-                clsRaesFunction.AddParameter("fill", "variable")
+                clsRaesFunction.AddParameter("fill", "variable", , iPosition:=2)
                 clsRaesFunction.RemoveParameterByName("colour")
             End If
         Else
