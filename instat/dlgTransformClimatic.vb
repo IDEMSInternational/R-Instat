@@ -76,6 +76,7 @@ Public Class dlgTransformClimatic
         ucrReceiverData.bWithQuotes = False
         ucrReceiverData.Selector = ucrSelectorTransform
         ucrReceiverData.strSelectorHeading = "Numerics"
+        ucrReceiverData.SetIncludedDataTypes({"numeric"})
 
         ucrReceiverStation.Selector = ucrSelectorTransform
         ucrReceiverStation.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "station" & Chr(34)})
@@ -180,7 +181,6 @@ Public Class dlgTransformClimatic
 
         ucrSelectorTransform.Reset()
         ucrReceiverDate.SetMeAsReceiver()
-        ucrInputColName.bUserTyped = False
 
         ' Count and Spells: Rainday
         clsRRaindayMatch.bToScriptAsRString = True
@@ -349,16 +349,14 @@ Public Class dlgTransformClimatic
     End Sub
 
     Private Sub SetAssignName()
-        If Not ucrInputColName.bUserTyped Then
-            If rdoMoving.Checked Then
-                MovingColNames()
-            ElseIf rdoCount.Checked Then
-                ucrInputColName.SetName("count_" & ucrReceiverData.GetVariableNames(False))
-            ElseIf rdoSpell.Checked Then
-                ucrInputColName.SetName("spell_" & ucrReceiverData.GetVariableNames(False))
-            ElseIf rdoWaterBalance.Checked Then
-                ucrInputColName.SetName("water_balance_" & ucrReceiverData.GetVariableNames(False))
-            End If
+        If rdoMoving.Checked Then
+            MovingColNames()
+        ElseIf rdoCount.Checked Then
+            ucrInputColName.SetName("count_" & ucrReceiverData.GetVariableNames(False))
+        ElseIf rdoSpell.Checked Then
+            ucrInputColName.SetName("spell_" & ucrReceiverData.GetVariableNames(False))
+        ElseIf rdoWaterBalance.Checked Then
+            ucrInputColName.SetName("water_" & ucrReceiverData.GetVariableNames(False))
         End If
     End Sub
 
