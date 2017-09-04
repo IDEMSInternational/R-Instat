@@ -31,7 +31,7 @@ Public Class frmSetupLoading
         dctMessagesLinks.Add("Have you tried: Using the library datasets." & Environment.NewLine & "Go to File > Open From Library... to see many interesting and real world datasets to explore.", "")
         dctMessagesLinks.Add("Looking for free statistics textbooks?" & Environment.NewLine & "Download the completely free CAST electronic and interactive textbooks for basic and advanced statistics. Click to find out more.", "http://cast.massey.ac.nz/")
         dctMessagesLinks.Add("Looking for training materials?" & Environment.NewLine & "University of Reading's 'Stats Made Simple' resources are freely available online for anyone to use to teach or learn. Click to find out more.", "http://www.reading.ac.uk/ssc/resourcepage/materials.php")
-        dctMessagesLinks.Add("Looking for interesting case studies for teaching?" & Environment.NewLine & "The International Livestock Research Institute (ILRI) has freely available biometic case studies for anyone to use to teach or learn. Find the data sets in the R-Instat library and click to go to the IRLI website.", "https://www.ilri.org/biometrics/default.htm")
+        dctMessagesLinks.Add("Looking for interesting case studies for teaching?" & Environment.NewLine & "The International Livestock Research Institute (ILRI) has freely available biometric case studies for anyone to use to teach or learn. Find the data sets in the R-Instat library and click to go to the ILRI website.", "https://www.ilri.org/biometrics/default.htm")
 
         Randomize()
         iSelectedMessage = CInt(Math.Ceiling(Rnd() * dctMessagesLinks.Count))
