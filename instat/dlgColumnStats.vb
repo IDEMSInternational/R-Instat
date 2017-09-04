@@ -41,9 +41,10 @@ Public Class dlgColumnStats
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.clsRsyntax.iCallType = 0
         ucrBase.iHelpTopicID = 64
         ucrChkDropUnusedLevels.Enabled = False ' removed this functionality so this is disabled
+        cmdProportionsPercentages.Enabled = False 'TODO: Disabling this for now still needs discussions.
 
         ucrSelectorForColumnStatistics.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForColumnStatistics.SetParameterIsString()
@@ -80,9 +81,6 @@ Public Class dlgColumnStats
         ucrChkOmitMissing.SetText("Omit Missing Values")
         ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOmitMissing.SetRDefault("FALSE")
-
-        'TODO:Disabling this for now still needs discussions.
-        cmdProportionsPercentages.Enabled = False
     End Sub
 
     Private Sub SetDefaults()
@@ -150,14 +148,22 @@ Public Class dlgColumnStats
         TestOKEnabled()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariables.ControlContentsChanged, ucrReceiverByFactor.ControlContentsChanged, ucrChkPrintOutput.ControlContentsChanged, ucrChkStoreResults.ControlContentsChanged
-        TestOKEnabled()
-    End Sub
-
     Private Sub cmdProportionsPercentages_Click(sender As Object, e As EventArgs) Handles cmdProportionsPercentages.Click
         sdgProportionsPercentages.SetRFunction(clsDefaultFunction, bResetSubdialog)
         sdgProportionsPercentages.ShowDialog()
         bResetSubdialog = False
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrChkPrintOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPrintOutput.ControlValueChanged
+        If ucrChkPrintOutput.Checked Then
+            ucrBase.clsRsyntax.iCallType = 2
+        Else
+            ucrBase.clsRsyntax.iCallType = 0
+        End If
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariables.ControlContentsChanged, ucrReceiverByFactor.ControlContentsChanged, ucrChkPrintOutput.ControlContentsChanged, ucrChkStoreResults.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
