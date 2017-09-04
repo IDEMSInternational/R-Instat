@@ -112,6 +112,10 @@ Public Class sdgSummaries
         End If
         clsListFunction = clsNewRFunction
         SetRCode(Me, clsListFunction, bReset)
+
+        If bReset Then
+            tbSummaries.SelectedIndex = 0
+        End If
     End Sub
 
     Public ReadOnly Property SummaryCount As Integer
