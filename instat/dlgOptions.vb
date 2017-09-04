@@ -51,9 +51,9 @@ Public Class dlgOptions
         ucrNudMaxRows.Increment = 10
         ucrNudMaxCols.Maximum = Integer.MaxValue
         ucrNudMaxCols.Increment = 1
-        ucrNudMinutes.Maximum = Integer.MaxValue
-        ucrNudMinutes.Increment = 1
-        ucrNudMinutes.Minimum = 1
+        ucrNudAutoSaveMinutes.Maximum = Integer.MaxValue
+        ucrNudAutoSaveMinutes.Increment = 1
+        ucrNudAutoSaveMinutes.Minimum = 1
         ucrNudWaitSeconds.Minimum = 1
         ucrNudWaitSeconds.Maximum = Integer.MaxValue
         ucrNudWaitSeconds.Increment = 0.5
@@ -75,8 +75,8 @@ Public Class dlgOptions
         ucrChkIncludeDefaultParams.SetText("Include Default Parameter Values in R Commands")
         ucrChkAutoSave.SetText("Auto save a backup of data")
         ucrChkShowWaitDialog.SetText("Show waiting dialog when command takes longer than")
-        ucrChkAutoSave.AddToLinkedControls(ucrNudMinutes, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrNudMinutes.SetLinkedDisplayControl(lblMinutes)
+        ucrChkAutoSave.AddToLinkedControls(ucrNudAutoSaveMinutes, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudAutoSaveMinutes.SetLinkedDisplayControl(lblMinutes)
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinOutputWindow)
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinRViewer)
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinSeparateWindows)
@@ -95,7 +95,7 @@ Public Class dlgOptions
         SetEditorFont(frmMain.clsInstatOptions.fntEditor, frmMain.clsInstatOptions.clrEditor)
         ucrNudMaxRows.Value = frmMain.clsInstatOptions.iMaxRows
         ucrNudMaxCols.Value = frmMain.clsInstatOptions.iMaxCols
-        ucrNudMinutes.Value = frmMain.clsInstatOptions.iAutoSaveDataMinutes
+        ucrNudAutoSaveMinutes.Value = frmMain.clsInstatOptions.iAutoSaveDataMinutes
         ucrNudPreviewRows.Value = frmMain.clsInstatOptions.iPreviewRows
         ucrInputComment.SetName(frmMain.clsInstatOptions.strComment)
         ucrWorkingDirectory.SetName(frmMain.clsInstatOptions.strWorkingDirectory)
@@ -131,7 +131,6 @@ Public Class dlgOptions
 
     Private Sub SetInstatOptions()
         frmMain.clsInstatOptions.bIncludeRDefaultParameters = ucrChkIncludeDefaultParams.Checked
-        frmMain.clsInstatOptions.bAutoSaveData = ucrChkAutoSave.Checked
         frmMain.clsInstatOptions.SetFormatOutput(fntOutput, clrOutput)
         frmMain.clsInstatOptions.SetFormatComment(fntComment, clrComment)
         frmMain.clsInstatOptions.SetFormatScript(fntCommand, clrCommand)
@@ -140,7 +139,8 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetPreviewRows(ucrNudPreviewRows.Value)
         frmMain.clsInstatOptions.SetMaxRows(ucrNudMaxRows.Value)
         frmMain.clsInstatOptions.SetMaxCols(ucrNudMaxCols.Value)
-        frmMain.clsInstatOptions.SetAutoSaveData(ucrNudMinutes.Value)
+        frmMain.clsInstatOptions.SetAutoSaveData(ucrChkAutoSave.Checked)
+        frmMain.clsInstatOptions.SetAutoSaveDataMinutes(ucrNudAutoSaveMinutes.Value)
         frmMain.clsInstatOptions.SetLanguageCultureCode(strCurrLanguageCulture)
         frmMain.clsInstatOptions.SetWorkingDirectory(strWorkingDirectory)
         frmMain.clsInstatOptions.SetGraphDisplayOption(strGraphDisplayOption)
@@ -321,7 +321,7 @@ Public Class dlgOptions
 
     End Sub
 
-    Private Sub AllControls_ControlValueChanged() Handles ucrNudMaxCols.ControlValueChanged, ucrNudMinutes.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkAutoSave.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrNudWaitSeconds.ControlValueChanged
+    Private Sub AllControls_ControlValueChanged() Handles ucrNudMaxCols.ControlValueChanged, ucrNudAutoSaveMinutes.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkAutoSave.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrNudWaitSeconds.ControlValueChanged
         ApplyEnabled(True)
     End Sub
 
