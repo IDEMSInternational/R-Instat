@@ -74,7 +74,6 @@ Partial Class sdgSummaries
         Me.lblNumber = New System.Windows.Forms.Label()
         Me.ucrNudPercentage = New instat.ucrNud()
         Me.ucrNudNumber = New instat.ucrNud()
-        Me.ucrPnlMissingOptions = New instat.UcrPanel()
         Me.ucrButtonsSummaries = New instat.ucrButtonsSubdialogue()
         Me.grpCommon.SuspendLayout()
         Me.grpNotOrderedFactor.SuspendLayout()
@@ -232,7 +231,7 @@ Partial Class sdgSummaries
         Me.grpQuartiles.Controls.Add(Me.ucrChkUpperQuartile)
         Me.grpQuartiles.Location = New System.Drawing.Point(6, 266)
         Me.grpQuartiles.Name = "grpQuartiles"
-        Me.grpQuartiles.Size = New System.Drawing.Size(303, 64)
+        Me.grpQuartiles.Size = New System.Drawing.Size(303, 56)
         Me.grpQuartiles.TabIndex = 3
         Me.grpQuartiles.TabStop = False
         Me.grpQuartiles.Tag = "Quartiles"
@@ -264,7 +263,7 @@ Partial Class sdgSummaries
         Me.tbSummaries.Location = New System.Drawing.Point(12, 8)
         Me.tbSummaries.Name = "tbSummaries"
         Me.tbSummaries.SelectedIndex = 0
-        Me.tbSummaries.Size = New System.Drawing.Size(382, 365)
+        Me.tbSummaries.Size = New System.Drawing.Size(325, 365)
         Me.tbSummaries.TabIndex = 5
         '
         'tbsum
@@ -276,7 +275,7 @@ Partial Class sdgSummaries
         Me.tbsum.Location = New System.Drawing.Point(4, 22)
         Me.tbsum.Name = "tbsum"
         Me.tbsum.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbsum.Size = New System.Drawing.Size(374, 339)
+        Me.tbsum.Size = New System.Drawing.Size(317, 339)
         Me.tbsum.TabIndex = 0
         Me.tbsum.Text = "Summaries"
         Me.tbsum.UseVisualStyleBackColor = True
@@ -290,7 +289,7 @@ Partial Class sdgSummaries
         Me.tbScale.Location = New System.Drawing.Point(4, 22)
         Me.tbScale.Name = "tbScale"
         Me.tbScale.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbScale.Size = New System.Drawing.Size(374, 339)
+        Me.tbScale.Size = New System.Drawing.Size(317, 339)
         Me.tbScale.TabIndex = 1
         Me.tbScale.Text = "Scale"
         Me.tbScale.UseVisualStyleBackColor = True
@@ -300,7 +299,7 @@ Partial Class sdgSummaries
         Me.ucrChkSn.Checked = False
         Me.ucrChkSn.Location = New System.Drawing.Point(229, 57)
         Me.ucrChkSn.Name = "ucrChkSn"
-        Me.ucrChkSn.Size = New System.Drawing.Size(120, 20)
+        Me.ucrChkSn.Size = New System.Drawing.Size(82, 20)
         Me.ucrChkSn.TabIndex = 4
         '
         'ucrChkQn
@@ -308,7 +307,7 @@ Partial Class sdgSummaries
         Me.ucrChkQn.Checked = False
         Me.ucrChkQn.Location = New System.Drawing.Point(229, 19)
         Me.ucrChkQn.Name = "ucrChkQn"
-        Me.ucrChkQn.Size = New System.Drawing.Size(129, 20)
+        Me.ucrChkQn.Size = New System.Drawing.Size(85, 20)
         Me.ucrChkQn.TabIndex = 3
         '
         'ucrChkMedianAbsoluteDeviation
@@ -333,7 +332,7 @@ Partial Class sdgSummaries
         Me.tbSkewness.Location = New System.Drawing.Point(4, 22)
         Me.tbSkewness.Name = "tbSkewness"
         Me.tbSkewness.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbSkewness.Size = New System.Drawing.Size(374, 339)
+        Me.tbSkewness.Size = New System.Drawing.Size(317, 339)
         Me.tbSkewness.TabIndex = 2
         Me.tbSkewness.Text = "Skewness"
         Me.tbSkewness.UseVisualStyleBackColor = True
@@ -352,7 +351,7 @@ Partial Class sdgSummaries
         Me.tbKurtosis.Location = New System.Drawing.Point(4, 22)
         Me.tbKurtosis.Name = "tbKurtosis"
         Me.tbKurtosis.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbKurtosis.Size = New System.Drawing.Size(374, 339)
+        Me.tbKurtosis.Size = New System.Drawing.Size(317, 339)
         Me.tbKurtosis.TabIndex = 3
         Me.tbKurtosis.Text = "Kurtosis"
         Me.tbKurtosis.UseVisualStyleBackColor = True
@@ -373,11 +372,10 @@ Partial Class sdgSummaries
         Me.tbMissingOptions.Controls.Add(Me.lblNumber)
         Me.tbMissingOptions.Controls.Add(Me.ucrNudPercentage)
         Me.tbMissingOptions.Controls.Add(Me.ucrNudNumber)
-        Me.tbMissingOptions.Controls.Add(Me.ucrPnlMissingOptions)
         Me.tbMissingOptions.Location = New System.Drawing.Point(4, 22)
         Me.tbMissingOptions.Name = "tbMissingOptions"
         Me.tbMissingOptions.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbMissingOptions.Size = New System.Drawing.Size(374, 339)
+        Me.tbMissingOptions.Size = New System.Drawing.Size(317, 339)
         Me.tbMissingOptions.TabIndex = 4
         Me.tbMissingOptions.Text = "Missing Options"
         Me.tbMissingOptions.UseVisualStyleBackColor = True
@@ -446,13 +444,6 @@ Partial Class sdgSummaries
         Me.ucrNudNumber.TabIndex = 3
         Me.ucrNudNumber.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrPnlMissingOptions
-        '
-        Me.ucrPnlMissingOptions.Location = New System.Drawing.Point(18, 8)
-        Me.ucrPnlMissingOptions.Name = "ucrPnlMissingOptions"
-        Me.ucrPnlMissingOptions.Size = New System.Drawing.Size(214, 45)
-        Me.ucrPnlMissingOptions.TabIndex = 2
-        '
         'ucrButtonsSummaries
         '
         Me.ucrButtonsSummaries.Location = New System.Drawing.Point(118, 379)
@@ -464,7 +455,7 @@ Partial Class sdgSummaries
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(406, 421)
+        Me.ClientSize = New System.Drawing.Size(348, 421)
         Me.Controls.Add(Me.tbSummaries)
         Me.Controls.Add(Me.ucrButtonsSummaries)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -518,7 +509,6 @@ Partial Class sdgSummaries
     Friend WithEvents ucrChkSkewness As ucrCheck
     Friend WithEvents ucrChkKurtosis As ucrCheck
     Friend WithEvents tbMissingOptions As TabPage
-    Friend WithEvents ucrPnlMissingOptions As UcrPanel
     Friend WithEvents ucrNudPercentage As ucrNud
     Friend WithEvents ucrNudNumber As ucrNud
     Friend WithEvents lblNumber As Label

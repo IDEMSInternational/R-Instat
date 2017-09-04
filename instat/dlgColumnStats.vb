@@ -80,6 +80,9 @@ Public Class dlgColumnStats
         ucrChkOmitMissing.SetText("Omit Missing Values")
         ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOmitMissing.SetRDefault("FALSE")
+
+        'TODO:Disabling this for now still needs discussions.
+        cmdProportionsPercentages.Enabled = False
     End Sub
 
     Private Sub SetDefaults()
