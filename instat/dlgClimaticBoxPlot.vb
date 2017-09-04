@@ -121,19 +121,16 @@ Public Class dlgClimaticBoxPlot
         ucrChkMargins.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkMargins.SetRDefault("FALSE")
 
-        ucrChkVerticalXTickMarkers.SetText("Vertical X Tick Markers")
-        ucrChkVerticalXTickMarkers.SetParameter(clsThemeParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-
         clsThemeFunc.SetPackageName("ggplot2")
         clsThemeFunc.SetRCommand("theme")
         clsThemeFunc.AddParameter("axis.text.x", clsRFunctionParameter:=clsTextElementFunc)
-
         clsThemeParam.SetArgument(clsThemeFunc)
         clsThemeParam.SetArgumentName("theme")
-
         clsTextElementFunc.SetPackageName("ggplot2")
         clsTextElementFunc.SetRCommand("element_text")
         clsTextElementFunc.AddParameter("angle", "90")
+        ucrChkVerticalXTickMarkers.SetText("Vertical X Tick Markers")
+        ucrChkVerticalXTickMarkers.SetParameter(clsThemeParam, bNewAddRemoveParameter:=True, bNewChangeParameterValue:=False)
 
         ucrSavePlot.SetPrefix("boxplot")
         ucrSavePlot.SetIsComboBox()
@@ -405,7 +402,7 @@ Public Class dlgClimaticBoxPlot
     Private Sub FacetsCheck()
         If Not ucrReceiverFacetBy.IsEmpty AndAlso Not ucrReceiver2ndFacet.IsEmpty Then
             If ucrReceiverFacetBy.txtReceiverSingle.Text = ucrReceiver2ndFacet.txtReceiverSingle.Text Then
-                MsgBox("You can not do facets with two same variables", vbOKOnly)
+                MsgBox("You cannot do facets with two of the same variables", vbOKOnly)
                 ucrReceiver2ndFacet.Clear()
                 ucrReceiver2ndFacet.SetMeAsReceiver()
             End If
