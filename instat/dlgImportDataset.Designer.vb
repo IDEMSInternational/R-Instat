@@ -89,6 +89,7 @@ Partial Class dlgImportDataset
         Me.ucrSaveFile = New instat.ucrSave()
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
+        Me.cmdRefreshPreview = New System.Windows.Forms.Button()
         Me.grpCSV.SuspendLayout()
         Me.grpExcel.SuspendLayout()
         Me.grpRDS.SuspendLayout()
@@ -369,7 +370,7 @@ Partial Class dlgImportDataset
         Me.grpExcel.Controls.Add(Me.lblSelectSheetExcel)
         Me.grpExcel.Location = New System.Drawing.Point(10, 91)
         Me.grpExcel.Name = "grpExcel"
-        Me.grpExcel.Size = New System.Drawing.Size(219, 392)
+        Me.grpExcel.Size = New System.Drawing.Size(219, 300)
         Me.grpExcel.TabIndex = 5
         Me.grpExcel.TabStop = False
         Me.grpExcel.Text = "Import Excel Options"
@@ -615,16 +616,26 @@ Partial Class dlgImportDataset
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(241, 445)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 443)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 15
+        '
+        'cmdRefreshPreview
+        '
+        Me.cmdRefreshPreview.Location = New System.Drawing.Point(569, 443)
+        Me.cmdRefreshPreview.Name = "cmdRefreshPreview"
+        Me.cmdRefreshPreview.Size = New System.Drawing.Size(94, 23)
+        Me.cmdRefreshPreview.TabIndex = 16
+        Me.cmdRefreshPreview.Text = "Refresh Preview"
+        Me.cmdRefreshPreview.UseVisualStyleBackColor = True
         '
         'dlgImportDataset
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(672, 499)
+        Me.Controls.Add(Me.cmdRefreshPreview)
         Me.Controls.Add(Me.lblLinesToPreview)
         Me.Controls.Add(Me.ucrNudPreviewLines)
         Me.Controls.Add(Me.grpExcel)
@@ -709,4 +720,5 @@ Partial Class dlgImportDataset
     Friend WithEvents lblNAStringsCSV As Label
     Friend WithEvents ucrNudPreviewLines As ucrNud
     Friend WithEvents lblLinesToPreview As Label
+    Friend WithEvents cmdRefreshPreview As Button
 End Class
