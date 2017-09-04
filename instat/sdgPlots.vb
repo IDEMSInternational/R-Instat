@@ -554,6 +554,7 @@ Public Class sdgPlots
     Private Sub FactorReceivers_ControlValueChanged() Handles ucr1stFactorReceiver.ControlValueChanged, ucr2ndFactorReceiver.ControlValueChanged
         SecondFactorReceiverEnabled()
         SetFacetParameters()
+        FacetsCheck()
     End Sub
 
     Private Sub SecondFactorReceiverEnabled()
@@ -653,4 +654,13 @@ Public Class sdgPlots
     End Sub
     'Warning/Task to be discussed: need to disable ok on dlg's when layers are not complete on subdialogues + warning message... 
     'Warning: actually this will be very hard to implement until the global aes, set from the main layer are properly communicated to plots. Global aes might fill in missing mandatory aes...
+    Private Sub FacetsCheck()
+        If Not ucr1stFactorReceiver.IsEmpty AndAlso Not ucr2ndFactorReceiver.IsEmpty Then
+            If ucr1stFactorReceiver.txtReceiverSingle.Text = ucr2ndFactorReceiver.txtReceiverSingle.Text Then
+                MsgBox("You can not do facets with two same variables", vbOKOnly)
+                ucr2ndFactorReceiver.Clear()
+                ucr2ndFactorReceiver.SetMeAsReceiver()
+            End If
+        End If
+    End Sub
 End Class
