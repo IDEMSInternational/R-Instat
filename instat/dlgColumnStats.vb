@@ -130,7 +130,7 @@ Public Class dlgColumnStats
     End Sub
 
     Public Sub TestOKEnabled()
-        If Not ucrReceiverByFactor.IsEmpty AndAlso Not clsSummariesList.clsParameters.Count = 0 Then
+        If Not ucrReceiverByFactor.IsEmpty AndAlso (ucrChkStoreResults.Checked OrElse ucrChkPrintOutput.Checked) AndAlso Not clsSummariesList.clsParameters.Count = 0 Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -150,7 +150,7 @@ Public Class dlgColumnStats
         TestOKEnabled()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariables.ControlContentsChanged, ucrReceiverByFactor.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariables.ControlContentsChanged, ucrReceiverByFactor.ControlContentsChanged, ucrChkPrintOutput.ControlContentsChanged, ucrChkStoreResults.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
