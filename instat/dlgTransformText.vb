@@ -19,7 +19,7 @@ Imports instat.Translations
 Public Class dlgTransformText
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsConvertFunction, clsLengthFunction, clsPadFunction, clsTrimFunction, clsWordsFunction, clsSubstringFunction As New RFunction
+    Private clsConvertFunction, clsLengthFunction, clsPadFunction, clsTrimFunction, clsWordsFunction, clsSubstringFunction, clsFixedFunction As New RFunction
     Private bRCodeSet As Boolean = True
 
     Private Sub dlgTransformText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -144,14 +144,13 @@ Public Class dlgTransformText
         ucrChkLastOr.AddParameterIsRFunctionCondition(True, "start", True)
 
         ' ucrInputSeparator
-        ucrInputSeparator.SetParameter(New RParameter("sep", 3))
-        dctInputSeparator.Add("Space ( )", "fixed(" & Chr(34) & " " & Chr(34) & ")")
+        ucrInputSeparator.SetParameter(New RParameter("pattern", 3))
+        dctInputSeparator.Add("Space ( )", Chr(34) & " " & Chr(34))
         dctInputSeparator.Add("Colon :", Chr(34) & ":" & Chr(34))
-        dctInputSeparator.Add("Period .", "fixed(" & Chr(34) & "." & Chr(34) & ")")
+        dctInputSeparator.Add("Period .", Chr(34) & "." & Chr(34))
         dctInputSeparator.Add("Underscore _", Chr(34) & "_" & Chr(34))
         ucrInputSeparator.SetItems(dctInputSeparator)
         ucrInputSeparator.SetLinkedDisplayControl(lblSeparator)
-        ucrInputSeparator.SetRDefault("fixed(" & Chr(34) & " " & Chr(34) & ")")
         ucrInputSeparator.bAllowNonConditionValues = True
 
         'rdoSubstring
@@ -180,6 +179,7 @@ Public Class dlgTransformText
         clsTrimFunction = New RFunction
         clsWordsFunction = New RFunction
         clsSubstringFunction = New RFunction
+        clsFixedFunction = New RFunction
 
         ucrNewColName.Reset()
         ucrSelectorForTransformText.Reset()
@@ -201,12 +201,14 @@ Public Class dlgTransformText
         clsTrimFunction.SetPackageName("stringr")
         clsTrimFunction.SetRCommand("str_trim")
         clsTrimFunction.AddParameter("side", Chr(34) & "left" & Chr(34))
-
+        clsFixedFunction.AddParameter("pattern", strParameterValue:=Chr(34) & " " & Chr(34))
         clsWordsFunction.SetPackageName("stringr")
         clsWordsFunction.SetRCommand("word")
         clsWordsFunction.AddParameter("start", 1)
         clsWordsFunction.AddParameter("end", 2)
-        clsWordsFunction.AddParameter("sep", "fixed(" & Chr(34) & " " & Chr(34) & ")")
+        clsFixedFunction.SetPackageName("stringr")
+        clsFixedFunction.SetRCommand("fixed")
+        clsWordsFunction.AddParameter("sep", clsRFunctionParameter:=clsFixedFunction)
 
         clsSubstringFunction.SetPackageName("stringr")
         clsSubstringFunction.SetRCommand("str_sub")
@@ -234,7 +236,7 @@ Public Class dlgTransformText
         ucrReceiverLastWord.SetRCode(clsWordsFunction, bReset)
         ucrNudFirstWord.SetRCode(clsWordsFunction, bReset)
         ucrNudLastWord.SetRCode(clsWordsFunction, bReset)
-        ucrInputSeparator.SetRCode(clsWordsFunction, bReset)
+        ucrInputSeparator.SetRCode(clsFixedFunction, bReset)
         ucrNudFrom.SetRCode(clsSubstringFunction, bReset)
         ucrNudTo.SetRCode(clsSubstringFunction, bReset)
 
