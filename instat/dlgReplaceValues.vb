@@ -59,6 +59,8 @@ Public Class dlgReplaceValues
         ucrPnlOld.AddParameterPresentCondition(rdoOldInterval, "start_value")
         ucrPnlOld.AddParameterPresentCondition(rdoOldInterval, "end_value")
 
+        ucrPnlOld.AddToLinkedControls(ucrPnlNew, {rdoOldInterval, rdoOldValue, rdoOldMissing}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoNewMissing)
+
         ucrPnlOld.AddToLinkedControls(ucrInputOldValue, {rdoOldValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
         ucrPnlOld.AddToLinkedControls(ucrInputRangeFrom, {rdoOldInterval}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrPnlOld.AddToLinkedControls(ucrInputRangeTo, {rdoOldInterval}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
