@@ -54,22 +54,21 @@ Public Class dlgReplaceValues
         ucrPnlOld.AddRadioButton(rdoOldMissing)
         ucrPnlOld.AddRadioButton(rdoOldInterval)
 
-
         ucrPnlOld.AddParameterValuesCondition(rdoOldMissing, "old_is_missing", "TRUE")
         ucrPnlOld.AddParameterPresentCondition(rdoOldValue, "old_is_missing", False)
         ucrPnlOld.AddParameterPresentCondition(rdoOldInterval, "old_is_missing", False)
 
         ucrPnlOld.AddParameterPresentCondition(rdoOldValue, "old_value")
         ucrPnlOld.AddParameterPresentCondition(rdoOldMissing, "old_value", False)
-        ucrPnlOld.AddParameterPresentCondition(rdoNewMissing, "old_value", False)
+        ucrPnlOld.AddParameterPresentCondition(rdoOldInterval, "old_value", False)
 
         ucrPnlOld.AddParameterPresentCondition(rdoOldInterval, "start_value")
         ucrPnlOld.AddParameterPresentCondition(rdoOldMissing, "start_value", False)
-        ucrPnlOld.AddParameterPresentCondition(rdoNewMissing, "start_value", False)
+        ucrPnlOld.AddParameterPresentCondition(rdoOldValue, "start_value", False)
 
         ucrPnlOld.AddParameterPresentCondition(rdoOldInterval, "end_value")
         ucrPnlOld.AddParameterPresentCondition(rdoOldMissing, "end_value", False)
-        ucrPnlOld.AddParameterPresentCondition(rdoNewMissing, "end_value", False)
+        ucrPnlOld.AddParameterPresentCondition(rdoOldValue, "end_value", False)
 
 
         ucrPnlOld.AddToLinkedControls(ucrPnlNew, {rdoOldInterval, rdoOldValue, rdoOldMissing}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoNewMissing)
@@ -219,6 +218,12 @@ Public Class dlgReplaceValues
             Else
                 clsReplace.RemoveParameterByName("locf")
                 clsReplace.RemoveParameterByName("from_last")
+            End If
+        Else
+            If rdoOldMissing.Checked Then
+                clsReplace.AddParameter("old_is_missing", "TRUE")
+            Else
+                clsReplace.RemoveParameterByName("old_is_missing")
             End If
         End If
     End Sub
