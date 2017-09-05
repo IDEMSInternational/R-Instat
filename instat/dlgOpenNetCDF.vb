@@ -61,6 +61,7 @@ Public Class dlgOpenNetCDF
 
     Private Sub InitialiseDialog()
         'ucrBase.iHelpTopicID = 
+        cmdOptions.Enabled = False ' Temporarily disabled.
 
         ucrInputFilePath.SetParameter(New RParameter("filename", 0))
         ucrInputFilePath.IsReadOnly = True
@@ -98,7 +99,7 @@ Public Class dlgOpenNetCDF
         clsRCDF.SetPackageName("ncdf4")
         clsRCDF.SetRCommand("nc_open")
         clsRCDF.SetAssignTo("nc")
-        clsRCDF.AddParameter("boundary", clsRFunctionParameter:=clsRSubsetFunction, iPosition:=2)
+        ' clsRCDF.AddParameter("boundary", clsRFunctionParameter:=clsRSubsetFunction, iPosition:=2) ' disabled while sub dialog is disabled
         clsRSubsetFunction.SetRCommand("list")
         clsRSubsetFunction.AddParameter("lat", clsRFunctionParameter:=clsRLatFunction, iPosition:=0) ' TODO, CALL LAT CORRECTLY
         clsRSubsetFunction.AddParameter("long", clsRFunctionParameter:=clsRLongFunction, iPosition:=1) ' TODO, CALL CORRECTLY
