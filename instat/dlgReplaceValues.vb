@@ -54,13 +54,25 @@ Public Class dlgReplaceValues
         ucrPnlOld.AddRadioButton(rdoOldMissing)
         ucrPnlOld.AddRadioButton(rdoOldInterval)
 
-        ucrPnlOld.AddParameterPresentCondition(rdoOldValue, "old_value")
+
         ucrPnlOld.AddParameterValuesCondition(rdoOldMissing, "old_is_missing", "TRUE")
+        ucrPnlOld.AddParameterPresentCondition(rdoOldValue, "old_is_missing", False)
+        ucrPnlOld.AddParameterPresentCondition(rdoOldInterval, "old_is_missing", False)
+
+        ucrPnlOld.AddParameterPresentCondition(rdoOldValue, "old_value")
+        ucrPnlOld.AddParameterPresentCondition(rdoOldMissing, "old_value", False)
+        ucrPnlOld.AddParameterPresentCondition(rdoNewMissing, "old_value", False)
+
         ucrPnlOld.AddParameterPresentCondition(rdoOldInterval, "start_value")
+        ucrPnlOld.AddParameterPresentCondition(rdoOldMissing, "start_value", False)
+        ucrPnlOld.AddParameterPresentCondition(rdoNewMissing, "start_value", False)
+
         ucrPnlOld.AddParameterPresentCondition(rdoOldInterval, "end_value")
+        ucrPnlOld.AddParameterPresentCondition(rdoOldMissing, "end_value", False)
+        ucrPnlOld.AddParameterPresentCondition(rdoNewMissing, "end_value", False)
+
 
         ucrPnlOld.AddToLinkedControls(ucrPnlNew, {rdoOldInterval, rdoOldValue, rdoOldMissing}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoNewMissing)
-
         ucrPnlOld.AddToLinkedControls(ucrInputOldValue, {rdoOldValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
         ucrPnlOld.AddToLinkedControls(ucrInputRangeFrom, {rdoOldInterval}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrPnlOld.AddToLinkedControls(ucrInputRangeTo, {rdoOldInterval}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
