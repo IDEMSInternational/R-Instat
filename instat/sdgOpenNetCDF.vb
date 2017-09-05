@@ -16,8 +16,10 @@
 
 Imports instat.Translations
 Public Class sdgOpenNetCDF
-    Private clsRCDF, clsRSubsetFunction, clsRLatFunction, clsRLongFunction, clsRZFunction, clsRTimeFunction As New RFunction
+    Private clsRDefaultFunction, clsRSubsetFunction, clsRLatFunction, clsRLongFunction, clsRZFunction, clsRTimeFunction As New RFunction
     Private strShort As String
+    Public bControlsInitialised As Boolean = False
+
     Private Sub sdgOpenNetCDF_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
@@ -57,13 +59,27 @@ Public Class sdgOpenNetCDF
         ucrInputMaxTime.SetParameter(New RParameter("time2", 1, bNewIncludeArgumentName:=False))
         ucrInputMaxTime.SetValidationTypeAsNumeric()
         ucrInputMaxTime.AddQuotesIfUnrecognised = False
+
+        ucrChkOnlyDataVariables.SetParameter(New RParameter("only_data_vars", 2))
+        ucrChkOnlyDataVariables.SetText("Only Data Variables")
+        ucrChkOnlyDataVariables.SetRDefault("TRUE")
+
+        ucrChkKeepRawTime.SetParameter(New RParameter("keep_raw_time", 3))
+        ucrChkKeepRawTime.SetText("Keep Raw Time")
+        ucrChkKeepRawTime.SetRDefault("TRUE")
+
+        ucrChkIncludeMetadata.SetParameter(New RParameter("include_metadata", 4))
+        ucrChkIncludeMetadata.SetText("Include Metadata")
+        ucrChkIncludeMetadata.SetRDefault("TRUE")
+
+        InitialiseTabs()
     End Sub
 
-    Public Sub SetRFunction(clsRNewCDF As RFunction, clsRNewLatFunction As RFunction, clsRNewLongFunction As RFunction, clsRNewZFunction As RFunction, clsRNewTimeFunction As RFunction, strNewShort As String, Optional bReset As Boolean = False)
-        'If Not bControlsInitialised Then
-        '    InitialiseControls()
-        'End If
-        clsRCDF = clsRNewCDF
+    Public Sub SetRFunction(clsRNewDefaultFunction As RFunction, clsRNewLatFunction As RFunction, clsRNewLongFunction As RFunction, clsRNewZFunction As RFunction, clsRNewTimeFunction As RFunction, strNewShort As String, Optional bReset As Boolean = False)
+        If Not bControlsInitialised Then
+            InitialiseControls()
+        End If
+        clsRDefaultFunction = clsRNewDefaultFunction
         clsRLatFunction = clsRNewLatFunction
         clsRLongFunction = clsRNewLongFunction
         clsRZFunction = clsRNewZFunction
@@ -81,6 +97,17 @@ Public Class sdgOpenNetCDF
         ucrInputMinTime.SetRCode(clsRTimeFunction, bReset, bCloneIfNeeded:=True)
         ucrInputMaxTime.SetRCode(clsRTimeFunction, bReset, bCloneIfNeeded:=True)
 
+        ucrChkOnlyDataVariables.SetRCode(clsRDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkKeepRawTime.SetRCode(clsRDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkIncludeMetadata.SetRCode(clsRDefaultFunction, bReset, bCloneIfNeeded:=True)
+
         ucrInputMinLong.Focus()
+    End Sub
+
+    Private Sub InitialiseTabs()
+        For i = 0 To tbNetCDF.TabCount - 1
+            tbNetCDF.SelectedIndex = i
+        Next
+        tbNetCDF.SelectedIndex = 0
     End Sub
 End Class

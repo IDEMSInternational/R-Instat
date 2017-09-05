@@ -44,9 +44,6 @@ Partial Class dlgOpenNetCDF
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
         Me.ucrInputDataName = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkIncludeMetadata = New instat.ucrCheck()
-        Me.ucrChkKeepRawTime = New instat.ucrCheck()
-        Me.ucrChkOnlyDataVariables = New instat.ucrCheck()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.cmdDetails = New System.Windows.Forms.Button()
         Me.ucrInputFileDetails = New instat.ucrInputTextBox()
@@ -111,30 +108,6 @@ Partial Class dlgOpenNetCDF
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 15
-        '
-        'ucrChkIncludeMetadata
-        '
-        Me.ucrChkIncludeMetadata.Checked = False
-        Me.ucrChkIncludeMetadata.Location = New System.Drawing.Point(10, 109)
-        Me.ucrChkIncludeMetadata.Name = "ucrChkIncludeMetadata"
-        Me.ucrChkIncludeMetadata.Size = New System.Drawing.Size(162, 20)
-        Me.ucrChkIncludeMetadata.TabIndex = 5
-        '
-        'ucrChkKeepRawTime
-        '
-        Me.ucrChkKeepRawTime.Checked = False
-        Me.ucrChkKeepRawTime.Location = New System.Drawing.Point(10, 83)
-        Me.ucrChkKeepRawTime.Name = "ucrChkKeepRawTime"
-        Me.ucrChkKeepRawTime.Size = New System.Drawing.Size(162, 20)
-        Me.ucrChkKeepRawTime.TabIndex = 4
-        '
-        'ucrChkOnlyDataVariables
-        '
-        Me.ucrChkOnlyDataVariables.Checked = False
-        Me.ucrChkOnlyDataVariables.Location = New System.Drawing.Point(10, 57)
-        Me.ucrChkOnlyDataVariables.Name = "ucrChkOnlyDataVariables"
-        Me.ucrChkOnlyDataVariables.Size = New System.Drawing.Size(162, 20)
-        Me.ucrChkOnlyDataVariables.TabIndex = 3
         '
         'cmdOptions
         '
@@ -231,9 +204,6 @@ Partial Class dlgOpenNetCDF
         Me.Controls.Add(Me.ucrInputFileDetails)
         Me.Controls.Add(Me.cmdDetails)
         Me.Controls.Add(Me.cmdOptions)
-        Me.Controls.Add(Me.ucrChkOnlyDataVariables)
-        Me.Controls.Add(Me.ucrChkKeepRawTime)
-        Me.Controls.Add(Me.ucrChkIncludeMetadata)
         Me.Controls.Add(Me.ucrInputFilePath)
         Me.Controls.Add(Me.ucrInputDataName)
         Me.Controls.Add(Me.cmdOpenDataSet)
@@ -258,9 +228,6 @@ Partial Class dlgOpenNetCDF
     Friend WithEvents cmdOpenDataSet As Button
     Friend WithEvents lblFileOpenPath As Label
     Friend WithEvents lblMainDataName As Label
-    Friend WithEvents ucrChkIncludeMetadata As ucrCheck
-    Friend WithEvents ucrChkKeepRawTime As ucrCheck
-    Friend WithEvents ucrChkOnlyDataVariables As ucrCheck
     Friend WithEvents cmdOptions As Button
     Friend WithEvents cmdDetails As Button
     Friend WithEvents ucrInputFileDetails As ucrInputTextBox

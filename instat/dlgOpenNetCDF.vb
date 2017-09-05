@@ -65,18 +65,6 @@ Public Class dlgOpenNetCDF
         ucrInputFilePath.SetParameter(New RParameter("filename", 0))
         ucrInputFilePath.IsReadOnly = True
 
-        ucrChkOnlyDataVariables.SetParameter(New RParameter("only_data_vars", 2))
-        ucrChkOnlyDataVariables.SetText("Only Data Variables")
-        ucrChkOnlyDataVariables.SetRDefault("TRUE")
-
-        ucrChkKeepRawTime.SetParameter(New RParameter("keep_raw_time", 3))
-        ucrChkKeepRawTime.SetText("Keep Raw Time")
-        ucrChkKeepRawTime.SetRDefault("TRUE")
-
-        ucrChkIncludeMetadata.SetParameter(New RParameter("include_metadata", 4))
-        ucrChkIncludeMetadata.SetText("Include Metadata")
-        ucrChkIncludeMetadata.SetRDefault("TRUE")
-
         ucrInputDataName.SetParameter(New RParameter("name", 1))
         ucrInputDataName.SetValidationTypeAsRVariable()
 
@@ -110,7 +98,7 @@ Public Class dlgOpenNetCDF
         clsRCDF.SetPackageName("ncdf4")
         clsRCDF.SetRCommand("nc_open")
         clsRCDF.SetAssignTo("nc")
-        clsRSubsetFunction.AddParameter("subset", clsRFunctionParameter:=clsRSubsetFunction, iPosition:=2)
+        clsRCDF.AddParameter("boundary", clsRFunctionParameter:=clsRSubsetFunction, iPosition:=2)
         clsRSubsetFunction.SetRCommand("list")
         clsRSubsetFunction.AddParameter("lat", clsRFunctionParameter:=clsRLatFunction, iPosition:=0) ' TODO, CALL LAT CORRECTLY
         clsRSubsetFunction.AddParameter("long", clsRFunctionParameter:=clsRLongFunction, iPosition:=1) ' TODO, CALL CORRECTLY
@@ -135,9 +123,6 @@ Public Class dlgOpenNetCDF
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrInputDataName.SetRCode(clsRDefaultFunction, bReset)
-        ucrChkOnlyDataVariables.SetRCode(clsRDefaultFunction, bReset)
-        ucrChkKeepRawTime.SetRCode(clsRDefaultFunction, bReset)
-        ucrChkIncludeMetadata.SetRCode(clsRDefaultFunction, bReset)
         ucrInputFilePath.SetRCode(clsRCDF, bReset)
         ucrPnlFileDetails.SetRCode(clsRFileDetails, bReset)
     End Sub
@@ -193,11 +178,11 @@ Public Class dlgOpenNetCDF
         End Using
     End Sub
 
-    Private Sub cmdMoreOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgOpenNetCDF.SetRFunction(clsRCDF, clsRLatFunction, clsRLongFunction, clsRZFunction, clsRTimeFunction, strShort, bResetSubdialog)
-
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgOpenNetCDF.SetRFunction(clsRDefaultFunction, clsRLatFunction, clsRLongFunction, clsRZFunction, clsRTimeFunction, strShort, bResetSubdialog)
         bResetSubdialog = False
         sdgOpenNetCDF.ShowDialog()
+        TestOkEnabled()
     End Sub
 
     Private Sub cmdOpenDataSet_Click(sender As Object, e As EventArgs) Handles cmdOpenDataSet.Click
