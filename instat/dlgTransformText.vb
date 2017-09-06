@@ -222,10 +222,10 @@ Public Class dlgTransformText
         ucrReceiverTransformText.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrNewColName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlOperation.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrPnlPad.AddAdditionalCodeParameterPair(clsPadFunction, clsNewRParameter:=New RParameter("side", 2), iAdditionalPairNo:=1)
 
         ucrInputTo.SetRCode(clsConvertFunction, bReset)
         ucrInputPad.SetRCode(clsPadFunction, bReset)
-        ucrPnlPad.SetRCode(clsPadFunction, bReset)
         ucrNudWidth.SetRCode(clsPadFunction, bReset)
         ucrPnlPad.SetRCode(clsTrimFunction, bReset)
         ucrChkFirstOr.SetRCode(clsWordsFunction, bReset)
