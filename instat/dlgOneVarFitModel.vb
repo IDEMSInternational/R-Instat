@@ -61,10 +61,6 @@ Public Class dlgOneVarFitModel
         ucrChkConvertVariate.AddParameterValueFunctionNamesCondition(True, "data", "as.numeric", True)
         ucrChkConvertVariate.AddParameterValueFunctionNamesCondition(False, "data", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data", True)
 
-        ucrNudHyp.SetParameter(New RParameter("mu"))
-
-        ucrNudCI.SetParameter(New RParameter("mu"))
-
         ucrSaveModel.SetPrefix("dist")
         ucrSaveModel.SetSaveTypeAsModel()
         ucrSaveModel.SetDataFrameSelector(ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
@@ -80,39 +76,49 @@ Public Class dlgOneVarFitModel
         ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoGeneralCase, "fitdist")
         ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoExactCase, "fitdist", False)
 
-        ucrPnlStats.AddRadioButton(rdoEnorm)
-        ucrPnlStats.AddRadioButton(rdoMeanWilcox)
-        ucrPnlStats.AddRadioButton(rdoVarSign)
-
-        ucrPnlStats.AddFunctionNamesCondition(rdoEnorm, "enorm")
-        ucrPnlStats.AddFunctionNamesCondition(rdoMeanWilcox, "t.test")
-        ucrPnlStats.AddFunctionNamesCondition(rdoVarSign, "varTest")
-
-        ucrPnlWilcoxVarTest.AddRadioButton(rdoWilcoxSignTest)
-        ucrPnlWilcoxVarTest.AddRadioButton(rdoVarSignTest)
-
-        ucrPnlWilcoxVarTest.AddFunctionNamesCondition(rdoWilcoxSignTest, "wilcox.test")
-        ucrPnlWilcoxVarTest.AddFunctionNamesCondition(rdoVarSignTest, "signmedian.test")
-
-
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrPnlStats, {rdoExactCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudCI, {rdoExactCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.95)
         ucrNudCI.SetLinkedDisplayControl(lblConfidenceLimit)
-        ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudHyp, {rdoExactCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        'ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudHyp, {rdoExactCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudHyp.SetLinkedDisplayControl(lblHyp)
         ucrPnlStats.SetLinkedDisplayControl(grpConditions)
 
-        '  ucrPnlGeneralExactCase.AddToLinkedControls(ucrChkBinModify, {rdoExactCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        'ucrPnlGeneralExactCase.AddToLinkedControls(ucrPnlStats, {rdoExactCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-
+        ' For Exact Option
+        ucrNudCI.SetParameter(New RParameter("conf.level", 2))
         ucrNudCI.Increment = 0.05
         ucrNudCI.DecimalPlaces = 2
         ucrNudCI.SetMinMax(0, 1)
 
+        ucrNudHyp.SetParameter(New RParameter("mu", 1)) ' name for wilcox, sign median, t.test
         ucrNudHyp.Increment = 1
         ucrNudHyp.DecimalPlaces = 2
         ucrNudHyp.SetMinMax(0.00, Integer.MaxValue)
+        ucrNudHyp.SetLinkedDisplayControl(lblHyp)
 
+        ' Normal tests
+        ucrPnlStats.AddRadioButton(rdoMeanNormal)
+        ucrPnlStats.AddRadioButton(rdoVarNormal)
+        ucrPnlStats.AddRadioButton(rdoEnormNorm)
+
+        ucrPnlStats.AddFunctionNamesCondition(rdoMeanNormal, "t.test")
+        ucrPnlStats.AddFunctionNamesCondition(rdoVarNormal, "varTest")
+        ucrPnlStats.AddFunctionNamesCondition(rdoEnormNorm, "enorm")
+
+        ' Different default states for each of these radio buttons. enorm also doesn't connect to this option.
+        ucrPnlStats.AddToLinkedControls(ucrNudHyp, {rdoMeanNormal, rdoVarNormal}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        'ucrPnlStats.AddToLinkedControls(ucrNudHyp, {rdoVarNormal}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+
+        ' Non parametric tests
+        ucrPnlWilcoxVarTest.AddRadioButton(rdoWilcoxSignTest)
+        ucrPnlWilcoxVarTest.AddRadioButton(rdoVarSignTest)
+        ucrPnlWilcoxVarTest.AddFunctionNamesCondition(rdoWilcoxSignTest, "wilcox.test")
+        ucrPnlWilcoxVarTest.AddFunctionNamesCondition(rdoVarSignTest, "signmedian.test")
+
+        ucrPnlWilcoxVarTest.AddToLinkedControls(ucrNudHyp, {rdoWilcoxSignTest, rdoVarSignTest}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+
+        ' to move
         ucrOperator.SetItems({"==", "<", "<=", ">", ">=", "!="})
         dctucrOperator.Add("(==)", "==")
         dctucrOperator.Add("<", "<")
@@ -122,7 +128,7 @@ Public Class dlgOneVarFitModel
         dctucrOperator.Add("(!=)", "!=")
 
         'Disabled for now
-        rdoExactCase.Enabled = False
+        'rdoExactCase.Enabled = False
         'ucrOperator.SetItems(dctucrOperator)
         ' ucrVariables.SetItemsTypeAsColumns()    'we want SetItemsTypeAs factors in the column
 
@@ -187,24 +193,35 @@ Public Class dlgOneVarFitModel
         clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger)
 
         'Exact Case
-
         'TTest
         clsRTTest.SetPackageName("stats")
         clsRTTest.SetRCommand("t.test")
-        clsRTTest.AddParameter("mu", 0.00)
+        clsRTTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector, iPosition:=0)
+        clsRTTest.AddParameter("mu", 0, iPosition:=1)
+
         'VarTest
         clsVarTest.SetPackageName("EnvStats")
         clsVarTest.SetRCommand("varTest")
+        clsVarTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector, iPosition:=0)
+        clsVarTest.AddParameter("sigma.squared", 1, iPosition:=1)
+
         'Enorm
         clsREnormTest.SetPackageName("EnvStats")
         clsREnormTest.SetRCommand("enorm")
+        clsREnormTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector, iPosition:=0)
 
+        ' Non-Parametric tests
         clsRWilcoxTest.SetPackageName("stats")
         clsRWilcoxTest.SetRCommand("wilcox.test")
-        clsRWilcoxTest.AddParameter("mu", 0.00)
+        clsRWilcoxTest.AddParameter("mu", 0, iPosition:=1)
 
         clsRNonSignTest.SetPackageName("signmedian.test")
         clsRNonSignTest.SetRCommand("signmedian.test")
+        clsRNonSignTest.AddParameter("mu", 0, iPosition:=1)
+
+
+
+
 
         clsRPoissonTest.SetPackageName("stats")
         clsRPoissonTest.SetRCommand("poisson.test")
@@ -270,40 +287,40 @@ Public Class dlgOneVarFitModel
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         bRCodeSet = False
+        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRConvertNumeric, New RParameter("x"), iAdditionalPairNo:=1)
+        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRConvertInteger, New RParameter("x"), iAdditionalPairNo:=2)
+        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRStartValues, New RParameter("x"), iAdditionalPairNo:=3)
+
+        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRWilcoxTest, New RParameter("x"), iAdditionalPairNo:=4) ' I think I want this converted not this itself?
+        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRNonSignTest, New RParameter("x"), iAdditionalPairNo:=5)
+        'ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRLength, New RParameter("x"), iAdditionalPairNo:=5)
+        'ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRMean, New RParameter("x"), iAdditionalPairNo:=6)
+        'ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("x"), iAdditionalPairNo:=7)
+
+        ucrNudHyp.AddAdditionalCodeParameterPair(clsVarTest, New RParameter("sigma.squared", 1), iAdditionalPairNo:=1)
+        ucrNudHyp.AddAdditionalCodeParameterPair(clsRWilcoxTest, ucrNudHyp.GetParameter(), iAdditionalPairNo:=2)
+        ucrNudHyp.AddAdditionalCodeParameterPair(clsRNonSignTest, ucrNudHyp.GetParameter(), iAdditionalPairNo:=3)
+        'ucrNudHyp.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("p"), iAdditionalPairNo:=6)
+        'ucrNudHyp.AddAdditionalCodeParameterPair(clsRPoissonTest, New RParameter("r"), iAdditionalPairNo:=7)
+        ' ucrNudHyp.AddAdditionalCodeParameterPair(clsRPoissonTest, New RParameter("sigma.squared"), iAdditionalPairNo:=8)
+
+        ucrNudCI.AddAdditionalCodeParameterPair(clsRTTest, ucrNudCI.GetParameter(), iAdditionalPairNo:=1)
+        ucrNudCI.AddAdditionalCodeParameterPair(clsVarTest, ucrNudCI.GetParameter(), iAdditionalPairNo:=2)
+        ucrNudCI.AddAdditionalCodeParameterPair(clsREnormTest, ucrNudCI.GetParameter(), iAdditionalPairNo:=3)
+        ucrNudCI.AddAdditionalCodeParameterPair(clsRWilcoxTest, ucrNudCI.GetParameter(), iAdditionalPairNo:=4)
+        ucrNudCI.AddAdditionalCodeParameterPair(clsRNonSignTest, ucrNudCI.GetParameter(), iAdditionalPairNo:=5)
+        'ucrNudCI.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("conf.level"), iAdditionalPairNo:=6)
+        '  ucrNudCI.AddAdditionalCodeParameterPair(clsRPoissonTest, New RParameter("conf.level"), iAdditionalPairNo:=6)
+
         ucrPnlGeneralExactCase.SetRCode(clsROneVarFitModel, bReset)
         ucrPnlStats.SetRCode(clsRTTest, bReset)
         ucrPnlWilcoxVarTest.SetRCode(clsRWilcoxTest, bReset)
         ucrReceiverVariable.SetRCode(clsRConvertVector, bReset)
         ucrChkConvertVariate.SetRCode(clsROneVarFitModel, bReset)
+
         ucrNudHyp.SetRCode(clsRTTest, bReset)
         ucrDistributionChoice.SetRCode(clsFamilyFunction, bReset)
-        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRConvertNumeric, New RParameter("x"), iAdditionalPairNo:=1)
-        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRConvertInteger, New RParameter("x"), iAdditionalPairNo:=2)
-        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRWilcoxTest, New RParameter("x"), iAdditionalPairNo:=3)
-        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRNonSignTest, New RParameter("x"), iAdditionalPairNo:=4)
-        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRLength, New RParameter("x"), iAdditionalPairNo:=5)
-        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRMean, New RParameter("x"), iAdditionalPairNo:=6)
-        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("x"), iAdditionalPairNo:=7)
-        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRStartValues, New RParameter("x"), iAdditionalPairNo:=8)
-
         ucrSaveModel.SetRCode(clsROneVarFitModel, bReset)
-
-        ucrNudHyp.AddAdditionalCodeParameterPair(clsVarTest, New RParameter("sigma.squared"), iAdditionalPairNo:=1)
-        ucrNudHyp.AddAdditionalCodeParameterPair(clsVarTest, New RParameter("sigma.squared"), iAdditionalPairNo:=2)
-        ucrNudHyp.AddAdditionalCodeParameterPair(clsRWilcoxTest, New RParameter("mu"), iAdditionalPairNo:=3)
-        ucrNudHyp.AddAdditionalCodeParameterPair(clsRNonSignTest, New RParameter("mu"), iAdditionalPairNo:=4)
-        ucrNudHyp.AddAdditionalCodeParameterPair(clsRTTest, New RParameter("mu"), iAdditionalPairNo:=5)
-        ucrNudHyp.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("p"), iAdditionalPairNo:=6)
-        ucrNudHyp.AddAdditionalCodeParameterPair(clsRPoissonTest, New RParameter("r"), iAdditionalPairNo:=7)
-        ' ucrNudHyp.AddAdditionalCodeParameterPair(clsRPoissonTest, New RParameter("sigma.squared"), iAdditionalPairNo:=8)
-
-        ucrNudCI.AddAdditionalCodeParameterPair(clsRTTest, New RParameter("conf.level"), iAdditionalPairNo:=1)
-        ucrNudCI.AddAdditionalCodeParameterPair(clsVarTest, New RParameter("conf.level"), iAdditionalPairNo:=2)
-        ucrNudCI.AddAdditionalCodeParameterPair(clsREnormTest, New RParameter("conf.level"), iAdditionalPairNo:=3)
-        ucrNudCI.AddAdditionalCodeParameterPair(clsRWilcoxTest, New RParameter("conf.level"), iAdditionalPairNo:=4)
-        ucrNudCI.AddAdditionalCodeParameterPair(clsRNonSignTest, New RParameter("conf.level"), iAdditionalPairNo:=5)
-        ucrNudCI.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("conf.level"), iAdditionalPairNo:=6)
-        '  ucrNudCI.AddAdditionalCodeParameterPair(clsRPoissonTest, New RParameter("conf.level"), iAdditionalPairNo:=6)
         bRCodeSet = True
     End Sub
 
@@ -365,6 +382,7 @@ Public Class dlgOneVarFitModel
             ucrChkConvertVariate.Visible = False
             clsROneVarFitModel.RemoveParameterByName("data")
         End If
+
         If ucrDistributionChoice.lstCurrentDistributions.Count = 0 OrElse ucrReceiverVariable.IsEmpty() Then
             ucrDistributionChoice.Enabled = False
             ucrDistributionChoice.ucrInputDistributions.SetName("")
@@ -375,47 +393,43 @@ Public Class dlgOneVarFitModel
 
 
     Public Sub ResponseConvert()
-        If bRCodeSet Then
-            If Not ucrReceiverVariable.IsEmpty Then
-                ucrDistributionChoice.RecieverDatatype(ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverVariable.GetVariableNames(bWithQuotes:=False))
-                If ucrReceiverVariable.strCurrDataType = "numeric" Then
-                    ucrChkConvertVariate.Checked = False
-                    ucrChkConvertVariate.Visible = False
-                Else
-                    ucrChkConvertVariate.Visible = True
-                End If
-                If ucrChkConvertVariate.Checked Then
-                    clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertNumeric)
-                Else
-                    'TODO This is needed because fitdist checks is.vector on data which is FALSE when data has attributes
-                    If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" OrElse ucrDistributionChoice.clsCurrDistribution.strNameTag = "Geometric" Then
-                        clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger)
+        If rdoGeneralCase.Checked Then
+            If bRCodeSet Then
+                If Not ucrReceiverVariable.IsEmpty Then
+                    ucrDistributionChoice.RecieverDatatype(ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverVariable.GetVariableNames(bWithQuotes:=False))
+                    If ucrReceiverVariable.strCurrDataType = "numeric" Then
+                        ucrChkConvertVariate.Checked = False
+                        ucrChkConvertVariate.Visible = False
                     Else
-                        clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertVector)
+                        ucrChkConvertVariate.Visible = True
                     End If
-                    If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Extreme_Value" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Binomial" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Students_t" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Chi_Square" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "F" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Hypergeometric" Then
-                        clsROneVarFitModel.AddParameter("start", clsRFunctionParameter:=clsRStartValues)
-                        ' TODO llplot() no longer works with starting values. However, the mle's will not plot without starting values for these variables
+                    If ucrChkConvertVariate.Checked Then
+                        clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertNumeric)
+                    Else
+                        'TODO This is needed because fitdist checks is.vector on data which is FALSE when data has attributes
+                        If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" OrElse ucrDistributionChoice.clsCurrDistribution.strNameTag = "Geometric" Then
+                            clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger)
+                        Else
+                            clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertVector)
+                        End If
+                        If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Extreme_Value" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Binomial" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Students_t" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Chi_Square" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "F" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Hypergeometric" Then
+                            clsROneVarFitModel.AddParameter("start", clsRFunctionParameter:=clsRStartValues)
+                            ' TODO llplot() no longer works with starting values. However, the mle's will not plot without starting values for these variables
+                        End If
                     End If
+                Else
+                    ucrChkConvertVariate.Visible = False
                 End If
-            Else
-                ucrChkConvertVariate.Visible = False
+                TestOKEnabled()
             End If
-            If ucrDistributionChoice.lstCurrentDistributions.Count = 0 OrElse ucrReceiverVariable.IsEmpty() Then
-                ucrDistributionChoice.Enabled = False
-                ucrDistributionChoice.ucrInputDistributions.SetName("")
-            Else
-                ucrDistributionChoice.Enabled = True
-            End If
-            TestOKEnabled()
         End If
     End Sub
 
     Public Sub SetBaseFunction()
+        SetDataParameter()
         If rdoGeneralCase.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
             clsROneVarFitModel.AddParameter("distr", Chr(34) & ucrDistributionChoice.clsCurrDistribution.strRName & Chr(34))
-            SetDataParameter()
             clsRplotPPComp.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
             clsRplotPPComp.AddParameter("ft", clsRFunctionParameter:=clsROneVarFitModel)
             clsRplotCdfcomp.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
@@ -439,19 +453,19 @@ Public Class dlgOneVarFitModel
                 grpVarAndWilcox.Show()
                 grpVarAndWilcoxSign.Hide()
                 If rdoExactCase.Checked Then
-                    If rdoMeanWilcox.Checked Then
+                    If rdoMeanNormal.Checked Then
                         ucrNudHyp.SetMinMax(0.00, 1)
-                        clsRTTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector)
+                        'clsRTTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector)
                         ucrBase.clsRsyntax.SetBaseRFunction(clsRTTest)
-                    ElseIf rdoEnorm.Checked Then
+                    ElseIf rdoEnormNorm.Checked Then
                         ucrNudHyp.SetMinMax(0.01, Integer.MaxValue)
-                        ucrNudHyp.Value = 0.00
-                        clsREnormTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector)
+                        'ucrNudHyp.Value = 0.00
+                        'clsREnormTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector)
                         ucrBase.clsRsyntax.SetBaseRFunction(clsREnormTest)
                     Else
                         ucrNudHyp.SetMinMax(0.00, Integer.MaxValue)
-                        ucrNudHyp.Value = 1.0
-                        clsVarTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector)
+                        'ucrNudHyp.Value = 1.0
+                        'clsVarTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector)
                         ucrBase.clsRsyntax.SetBaseRFunction(clsVarTest)
                     End If
                 End If
@@ -463,10 +477,10 @@ Public Class dlgOneVarFitModel
                 grpVarAndWilcox.Hide()
                 grpVarAndWilcoxSign.Show()
                 If rdoWilcoxSignTest.Checked Then
-                    clsRWilcoxTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector)
+                    '    clsRWilcoxTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector)
                     ucrBase.clsRsyntax.SetBaseRFunction(clsRWilcoxTest)
                 Else
-                    clsRNonSignTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector)
+                    '    clsRNonSignTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector)
                     ucrBase.clsRsyntax.SetBaseRFunction(clsRNonSignTest)
                 End If
             End If
@@ -531,7 +545,6 @@ Public Class dlgOneVarFitModel
         sdgOneVarFitModDisplay.SetRCode(ucrBase.clsRsyntax, clsRNewOneVarFitModel:=clsROneVarFitModel, clsNewRLogLikFunction:=clsRLogLikFunction, clsNewRplotFunction:=clsRplotFunction, clsNewRplotPPComp:=clsRplotPPComp, clsNewRplotCdfcomp:=clsRplotCdfcomp, clsNewRplotQqComp:=clsRplotQqComp, clsNewRplotDenscomp:=clsRplotDenscomp, ucrNewDistribution:=ucrDistribution, bReset:=bResetFitModDisplay)
         bResetFitModDisplay = False
         sdgOneVarFitModDisplay.ShowDialog()
-        Display()
         EnableOptions()
         TestOKEnabled()
     End Sub
@@ -541,17 +554,16 @@ Public Class dlgOneVarFitModel
         bResetFittingOptions = False
         sdgOneVarFitModel.ShowDialog()
         EnableOptions()
-        Display()
         TestOKEnabled()
     End Sub
 
     Private Sub EnableOptions()
-        If Not ucrReceiverVariable.IsEmpty Then
-            cmdFittingOptions.Enabled = True
-            cmdDisplayOptions.Enabled = True
+        If Not ucrReceiverVariable.IsEmpty AndAlso rdoGeneralCase.Checked Then
+            cmdFittingOptions.Visible = True
+            cmdDisplayOptions.Visible = True
         Else
-            cmdFittingOptions.Enabled = False
-            cmdDisplayOptions.Enabled = False
+            cmdFittingOptions.Visible = False
+            cmdDisplayOptions.Visible = False
         End If
     End Sub
 
@@ -569,39 +581,32 @@ Public Class dlgOneVarFitModel
             cmdFittingOptions.Visible = True
             cmdDisplayOptions.Visible = True
             grpConditions.Visible = False
-            ' rdoMeanWilcox.Visible = False
-            'rdoVarSign.Visible = False
-            '  rdoEnorm.Visible = False
+            rdoMeanNormal.Visible = False ' only visible if normal is selected and if rdoExact is chosen
+            rdoVarNormal.Visible = False ' only visible if normal is selected and if rdoExact is chosen
+            rdoEnormNorm.Visible = False ' only visible if normal is selected and if rdoExact is chosen
             grpVarAndWilcoxSign.Hide()
         ElseIf rdoExactCase.Checked Then
-            cmdFittingOptions.Visible = False
-            cmdDisplayOptions.Visible = False
             ucrChkConvertVariate.Visible = False
             grpConditions.Visible = True
             If ucrDistributionChoice.clsCurrDistribution.bIsExact = True Then
                 If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal" Then
                     grpVarAndWilcoxSign.Hide()
                     grpVarAndWilcox.Show()
-                    'rdoMeanWilcox.Visible = True
-                    'rdoVarSign.Visible = True
-                    'rdoEnorm.Visible = True
-                    ' rdoMeanWilcox.Text = "Compare Mean"
-                    'rdoVarSign.Text = "Compare Variance"
-                    If rdoVarSign.Checked Then
+                    rdoMeanNormal.Visible = True
+                    rdoVarNormal.Visible = True
+                    rdoEnormNorm.Visible = True
+                    If rdoVarNormal.Checked Then
                         ucrNudHyp.SetMinMax(0.01, 1)
                     Else
                         ucrNudHyp.SetMinMax(ucrDistributionChoice.clsCurrDistribution.lstExact(5), ucrNudHyp.Value = ucrDistributionChoice.clsCurrDistribution.lstExact(2))
                     End If
+
                 ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "No_Distribution" Then
                     grpVarAndWilcox.Hide()
                     grpVarAndWilcoxSign.Show()
-                    'rdoMeanWilcox.Visible = True
-                    'rdoVarSign.Visible = True
-                    ' rdoEnorm.Visible = False
-                    ' rdoMeanWilcox.Text = "None-Wilcoxon"
-                    ' rdoVarSign.Text = "None-Sign"
                     ucrNudHyp.Minimum = ucrDistributionChoice.clsCurrDistribution.lstExact(5)
                     ucrNudHyp.Value = ucrDistributionChoice.clsCurrDistribution.lstExact(2)
+
                 Else
                     ucrNudHyp.Minimum = ucrDistributionChoice.clsCurrDistribution.lstExact(5)
                     ucrNudHyp.Value = ucrDistributionChoice.clsCurrDistribution.lstExact(2)
@@ -623,6 +628,8 @@ Public Class dlgOneVarFitModel
         BinomialConditions()
         SetDistributions()
         DataTypeAccepted()
+        ResponseConvert()
+        Display()
     End Sub
 
     Private Sub ucrDistributions_cboDistributionsIndexChanged() Handles ucrDistributionChoice.DistributionsIndexChanged
@@ -632,6 +639,7 @@ Public Class dlgOneVarFitModel
         PlotResiduals()
         DataTypeAccepted()
         TestOKEnabled()
+        Display()
     End Sub
 
     Private Sub lbls_VisibleChanged(sender As Object, e As EventArgs) Handles lblEquals.VisibleChanged, lblSuccessIf.VisibleChanged
@@ -699,6 +707,5 @@ Public Class dlgOneVarFitModel
 
     Private Sub ucrChkConvertVariate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkConvertVariate.ControlValueChanged
         SetDataParameter()
-        Display()
     End Sub
 End Class
