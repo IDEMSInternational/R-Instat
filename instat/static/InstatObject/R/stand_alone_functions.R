@@ -228,15 +228,58 @@ pentad <- function(date) {
   return(temp_pentad)
 }
 
-nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = TRUE) {
+nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = TRUE, boundary = NULL) {
   dim_names <- ncdf4.helpers::nc.get.dim.names(nc, vars[1])
-  
   dim_values <- list()
   for(dim_name in dim_names) {
     #why no wrapper for this in ncdf4.helper?
-    dim_values[[length(dim_values) + 1]] <- nc$dim[[dim_name]]$vals
+    dim_values[[dim_name]] <- nc$dim[[dim_name]]$vals
     #This is not recommended but appears in tutorials
     #ncdf4::ncvar_get(nc, dim_name)
+  }
+  if(!is.null(boundary)) {
+    dim_axes <- ncdf4.helpers::nc.get.dim.axes(nc, vars[1])
+    if(!all(names(boundary) %in% dim_names)) stop("boundary contains dimensions not associated with", vars[1])
+    if(anyNA(dim_axes)) {
+      warning("Cannot subset data when some dimension axes cannot be identified.")
+      start <- NA
+      count <- NA
+    }
+    else {
+      start <- c()
+      count <- c()
+      for(dim in c("X", "Y", "Z", "T", "S")) {
+        if(dim %in% dim_axes) {
+          dim_var <- names(dim_axes)[which(dim_axes == dim)]
+          curr_dim_values <- dim_values[[dim_var]]
+          if(dim_var %in% names(boundary)) {
+            ind <- which(curr_dim_values >= boundary[[dim_var]][1] & curr_dim_values <= boundary[[dim_var]][2])
+            if(length(ind) == 0) {
+              warning("No values within the range specified for", dim_var, "All values will be included.")
+              start <- c(start, 1)
+              count <- c(count, length(curr_dim_values))
+            }
+            else {
+              start <- c(start, min(ind))
+              count <- c(count, length(ind))
+              dim_values[[dim_var]] <- dim_values[[dim_var]][ind]
+            }
+          }
+          else {
+            start <- c(start, 1)
+            count <- c(count, length(curr_dim_values))
+          }
+        }
+      }
+      if(length(start) == 0) {
+        start <- NA
+        count <- NA
+      }
+    }
+  }
+  else {
+    start <- NA
+    count <- NA
   }
   var_data <- expand.grid(dim_values, KEEP.OUT.ATTRS = FALSE)
   for(i in seq_along(var_data)) {
@@ -251,7 +294,7 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
     }
     else {
       included_vars <- c(included_vars, var)
-      var_data[[var]] <- as.vector(ncdf4::ncvar_get(nc, var))
+      var_data[[var]] <- as.vector(ncdf4::ncvar_get(nc, var, start = start, count = count))
     }
   }
   
@@ -259,14 +302,19 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
   time_dims <- names(dim_axes[which(dim_axes == "T" & names(dim_axes) %in% dim_names)])
   if(length(time_dims) == 1) {
     time_var <- time_dims
-    raw_time <- nc$dim[[time_var]]$vals
+    raw_time_full <- nc$dim[[time_var]]$vals
+    raw_time <- dim_values[[time_var]]
     attr(raw_time, "dim") <- NULL
     df_names <- time_var
     time_df <- data.frame(raw_time)
     names(time_df) <- time_var
     try({
+      # need to subset this if time var has been subsetted
+      time_ind <- which(raw_time_full %in% raw_time)
       pcict_time <- ncdf4.helpers::nc.get.time.series(nc, time.dim.name = time_var)
+      pcict_time <- pcict_time[time_ind]
       posixct_time <- PCICt::as.POSIXct.PCICt(pcict_time)
+      posixct_time <- posixct_time[time_ind]
       time_df[[paste0(time_var, "_full")]] <- posixct_time
       time_df[[paste0(time_var, "_date")]] <- as.Date(posixct_time)
     })
