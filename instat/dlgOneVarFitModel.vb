@@ -210,6 +210,18 @@ Public Class dlgOneVarFitModel
         clsREnormTest.SetRCommand("enorm")
         clsREnormTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector, iPosition:=0)
 
+        ' Poisson
+        clsRPoissonTest.SetPackageName("stats")
+        clsRPoissonTest.SetRCommand("poisson.test")
+        clsRPoissonTest.AddParameter("x", clsRFunctionParameter:=clsRLength, iPosition:=0)
+        clsRPoissonTest.AddParameter("T", clsRFunctionParameter:=clsRMean, iPosition:=1)
+
+        clsRLength.SetPackageName("base")
+        clsRLength.SetRCommand("length")
+
+        clsRMean.SetPackageName("base")
+        clsRMean.SetRCommand("mean")
+
         ' Non-Parametric tests
         clsRWilcoxTest.SetPackageName("stats")
         clsRWilcoxTest.SetRCommand("wilcox.test")
@@ -218,19 +230,6 @@ Public Class dlgOneVarFitModel
         clsRNonSignTest.SetPackageName("signmedian.test")
         clsRNonSignTest.SetRCommand("signmedian.test")
         clsRNonSignTest.AddParameter("mu", 0, iPosition:=1)
-
-
-
-
-
-        clsRPoissonTest.SetPackageName("stats")
-        clsRPoissonTest.SetRCommand("poisson.test")
-
-        clsRLength.SetPackageName("base")
-        clsRLength.SetRCommand("length")
-
-        clsRMean.SetPackageName("base")
-        clsRMean.SetRCommand("mean")
 
         clsRBinomTest.SetPackageName("stats")
         clsRBinomTest.SetRCommand("binom.test")
@@ -293,24 +292,23 @@ Public Class dlgOneVarFitModel
 
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRWilcoxTest, New RParameter("x"), iAdditionalPairNo:=4) ' I think I want this converted not this itself?
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRNonSignTest, New RParameter("x"), iAdditionalPairNo:=5)
-        'ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRLength, New RParameter("x"), iAdditionalPairNo:=5)
-        'ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRMean, New RParameter("x"), iAdditionalPairNo:=6)
-        'ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("x"), iAdditionalPairNo:=7)
+        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRLength, New RParameter("x"), iAdditionalPairNo:=6)
+        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRMean, New RParameter("x"), iAdditionalPairNo:=7)
+        'ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("x"), iAdditionalPairNo:=8)
 
         ucrNudHyp.AddAdditionalCodeParameterPair(clsVarTest, New RParameter("sigma.squared", 1), iAdditionalPairNo:=1)
         ucrNudHyp.AddAdditionalCodeParameterPair(clsRWilcoxTest, ucrNudHyp.GetParameter(), iAdditionalPairNo:=2)
         ucrNudHyp.AddAdditionalCodeParameterPair(clsRNonSignTest, ucrNudHyp.GetParameter(), iAdditionalPairNo:=3)
-        'ucrNudHyp.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("p"), iAdditionalPairNo:=6)
-        'ucrNudHyp.AddAdditionalCodeParameterPair(clsRPoissonTest, New RParameter("r"), iAdditionalPairNo:=7)
-        ' ucrNudHyp.AddAdditionalCodeParameterPair(clsRPoissonTest, New RParameter("sigma.squared"), iAdditionalPairNo:=8)
+        ucrNudHyp.AddAdditionalCodeParameterPair(clsRPoissonTest, New RParameter("r"), iAdditionalPairNo:=4)
+        'ucrNudHyp.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("p"), iAdditionalPairNo:=5)
 
         ucrNudCI.AddAdditionalCodeParameterPair(clsRTTest, ucrNudCI.GetParameter(), iAdditionalPairNo:=1)
         ucrNudCI.AddAdditionalCodeParameterPair(clsVarTest, ucrNudCI.GetParameter(), iAdditionalPairNo:=2)
         ucrNudCI.AddAdditionalCodeParameterPair(clsREnormTest, ucrNudCI.GetParameter(), iAdditionalPairNo:=3)
         ucrNudCI.AddAdditionalCodeParameterPair(clsRWilcoxTest, ucrNudCI.GetParameter(), iAdditionalPairNo:=4)
         ucrNudCI.AddAdditionalCodeParameterPair(clsRNonSignTest, ucrNudCI.GetParameter(), iAdditionalPairNo:=5)
+        ucrNudCI.AddAdditionalCodeParameterPair(clsRPoissonTest, New RParameter("conf.level"), iAdditionalPairNo:=6)
         'ucrNudCI.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("conf.level"), iAdditionalPairNo:=6)
-        '  ucrNudCI.AddAdditionalCodeParameterPair(clsRPoissonTest, New RParameter("conf.level"), iAdditionalPairNo:=6)
 
         ucrPnlGeneralExactCase.SetRCode(clsROneVarFitModel, bReset)
         ucrPnlStats.SetRCode(clsRTTest, bReset)
@@ -446,8 +444,7 @@ Public Class dlgOneVarFitModel
                 If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" AndAlso (ucrReceiverVariable.strCurrDataType = "factor" OrElse ucrReceiverVariable.strCurrDataType = "character") Then
                     ucrReceiverVariable.Clear()
                 End If
-                clsRPoissonTest.AddParameter("T", clsRFunctionParameter:=clsRMean)
-                clsRPoissonTest.AddParameter("x", clsRFunctionParameter:=clsRLength)
+                ' is ucrNudHyp an integer here? It shouldnt have dps I think?
                 ucrBase.clsRsyntax.SetBaseRFunction(clsRPoissonTest)
             ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal" Then
                 grpVarAndWilcox.Show()
