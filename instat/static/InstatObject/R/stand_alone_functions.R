@@ -228,7 +228,7 @@ pentad <- function(date) {
   return(temp_pentad)
 }
 
-nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = TRUE, boundary) {
+nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = TRUE, boundary = NULL) {
   dim_names <- ncdf4.helpers::nc.get.dim.names(nc, vars[1])
   dim_values <- list()
   for(dim_name in dim_names) {
@@ -237,7 +237,7 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
     #This is not recommended but appears in tutorials
     #ncdf4::ncvar_get(nc, dim_name)
   }
-  if(!missing(boundary)) {
+  if(!is.null(boundary)) {
     dim_axes <- ncdf4.helpers::nc.get.dim.axes(nc, vars[1])
     if(!all(names(boundary) %in% dim_names)) stop("boundary contains dimensions not associated with", vars[1])
     if(anyNA(dim_axes)) {
@@ -277,6 +277,10 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
       }
     }
   }
+  else {
+    start <- NA
+    count <- NA
+  }
   var_data <- expand.grid(dim_values, KEEP.OUT.ATTRS = FALSE)
   for(i in seq_along(var_data)) {
     attr(var_data[[i]], "dim") <- NULL
@@ -299,16 +303,18 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
   if(length(time_dims) == 1) {
     time_var <- time_dims
     raw_time_full <- nc$dim[[time_var]]$vals
-    raw_time <- var_data[[time_var]]
+    raw_time <- dim_values[[time_var]]
     attr(raw_time, "dim") <- NULL
     df_names <- time_var
     time_df <- data.frame(raw_time)
     names(time_df) <- time_var
     try({
       # need to subset this if time var has been subsetted
-      # time_ind <- which(raw_time_full %in% raw_time) ; pcict_time <- pcict_time[ind]
+      time_ind <- which(raw_time_full %in% raw_time)
       pcict_time <- ncdf4.helpers::nc.get.time.series(nc, time.dim.name = time_var)
+      pcict_time <- pcict_time[time_ind]
       posixct_time <- PCICt::as.POSIXct.PCICt(pcict_time)
+      posixct_time <- posixct_time[time_ind]
       time_df[[paste0(time_var, "_full")]] <- posixct_time
       time_df[[paste0(time_var, "_date")]] <- as.Date(posixct_time)
     })
