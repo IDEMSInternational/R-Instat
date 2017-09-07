@@ -108,7 +108,6 @@ Public Class dlgOneVarFitModel
 
         ' Different default states for each of these radio buttons. enorm also doesn't connect to this option.
         ucrPnlNormal.AddToLinkedControls(ucrNudHyp, {rdoMeanNormal, rdoVarNormal}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrPnlStats.AddToLinkedControls(ucrNudHyp, {rdoVarNormal}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
 
         ' Non parametric tests
         ucrPnlWilcoxVarTest.AddRadioButton(rdoWilcoxSignTest)
@@ -451,19 +450,12 @@ Public Class dlgOneVarFitModel
                 ucrPnlWilcoxVarTest.Hide()
                 If rdoExactCase.Checked Then
                     If rdoMeanNormal.Checked Then
-                        ucrNudHyp.SetMinMax(0.00, 1)
-                        'clsRTTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector)
                         ucrBase.clsRsyntax.SetBaseRFunction(clsRTTest)
                     ElseIf rdoEnormNorm.Checked Then
-                        ucrNudHyp.SetMinMax(0.01, Integer.MaxValue)
-                        'ucrNudHyp.Value = 0.00
-                        'clsREnormTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector)
                         ucrBase.clsRsyntax.SetBaseRFunction(clsREnormTest)
-                    Else
-                        ucrNudHyp.SetMinMax(0.00, Integer.MaxValue)
-                        'ucrNudHyp.Value = 1.0
-                        'clsVarTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector)
+                    ElseIf rdoVarNormal.Checked Then
                         ucrBase.clsRsyntax.SetBaseRFunction(clsVarTest)
+                    Else
                     End If
                 End If
             ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Then
@@ -592,10 +584,12 @@ Public Class dlgOneVarFitModel
                     rdoMeanNormal.Visible = True
                     rdoVarNormal.Visible = True
                     rdoEnormNorm.Visible = True
+                    ucrNudHyp.Maximum = ucrDistributionChoice.clsCurrDistribution.lstExact(6)
                     If rdoVarNormal.Checked Then
-                        ucrNudHyp.SetMinMax(0.01, 1)
+                        ucrNudHyp.Minimum = 0.01
                     Else
-                        ucrNudHyp.SetMinMax(ucrDistributionChoice.clsCurrDistribution.lstExact(5), ucrNudHyp.Value = ucrDistributionChoice.clsCurrDistribution.lstExact(2))
+                        ucrNudHyp.Minimum = ucrDistributionChoice.clsCurrDistribution.lstExact(5)
+                        '    ucrNudHyp.Value = ucrDistributionChoice.clsCurrDistribution.lstExact(2)
                     End If
 
                 ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "No_Distribution" Then
