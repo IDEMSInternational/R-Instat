@@ -236,9 +236,10 @@ nc_get_dim_min_max <- function(nc, dimension, time_as_date = TRUE) {
   if(dimension %in% time_dims && time_as_date) {
     time_vals <- c()
     try({
-      pcict_time <- ncdf4.helpers::nc.get.time.series(nc, time.dim.name = time_var)
+      pcict_time <- ncdf4.helpers::nc.get.time.series(nc, time.dim.name = dimension)
       posixct_time <- PCICt::as.POSIXct.PCICt(pcict_time)
-      time_vals <- as.Date(posixct_time)
+      # RDotNet interprets Date class as numeric so character needed to preserve date
+      time_vals <- as.character(as.Date(posixct_time))
     })
     if(length(time_vals) > 0 && !anyNA(time_vals)) vals <- time_vals
   }
