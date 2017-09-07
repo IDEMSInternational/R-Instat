@@ -17,7 +17,7 @@
 Imports instat.Translations
 Public Class dlgOneVarFitModel
     Public clsROneVarFitModel, clsFamilyFunction, clsRLogLikFunction, clsRLength, clsRMean, clsRTTest, clsVarTest, clsREnormTest, clsRNonSignTest, clsRWilcoxTest, clsRBinomTest, clsRPoissonTest, clsRplot, clsRfitdist, clsRStartValues, clsRBinomStart, clsRConvertVector, clsRConvertInteger, clsRConvertNumeric As New RFunction
-    Public clsRplotFunction, clsRplotPPComp, clsRplotCdfcomp, clsRplotQqComp, clsRplotDenscomp As RFunction
+    Public clsRplotFunction, clsRplotPPComp, clsRplotCdfcomp, clsRplotQqComp, clsRplotDensComp As RFunction
     Public clsFunctionOperator, clsFactorOperator As New ROperator
     Private WithEvents ucrDistribution As ucrDistributions
     Public bfirstload As Boolean = True
@@ -80,7 +80,6 @@ Public Class dlgOneVarFitModel
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudCI, {rdoExactCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.95)
         ucrNudCI.SetLinkedDisplayControl(lblConfidenceLimit)
         'ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudHyp, {rdoExactCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrNudHyp.SetLinkedDisplayControl(lblHyp)
         ucrPnlNormal.SetLinkedDisplayControl(grpConditions)
 
         'ucrPnlGeneralExactCase.AddToLinkedControls(ucrPnlStats, {rdoExactCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -94,7 +93,7 @@ Public Class dlgOneVarFitModel
         ucrNudHyp.SetParameter(New RParameter("mu", 1)) ' name for wilcox, sign median, t.test
         ucrNudHyp.Increment = 1
         ucrNudHyp.DecimalPlaces = 2
-        ucrNudHyp.SetMinMax(0.00, Integer.MaxValue)
+        ucrNudHyp.Maximum = Integer.MaxValue
         ucrNudHyp.SetLinkedDisplayControl(lblHyp)
 
         ' Normal tests
@@ -107,15 +106,13 @@ Public Class dlgOneVarFitModel
         ucrPnlNormal.AddFunctionNamesCondition(rdoEnormNorm, "enorm")
 
         ' Different default states for each of these radio buttons. enorm also doesn't connect to this option.
-        ucrPnlNormal.AddToLinkedControls(ucrNudHyp, {rdoMeanNormal, rdoVarNormal}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudHyp, {rdoExactCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ' Non parametric tests
         ucrPnlWilcoxVarTest.AddRadioButton(rdoWilcoxSignTest)
         ucrPnlWilcoxVarTest.AddRadioButton(rdoVarSignTest)
         ucrPnlWilcoxVarTest.AddFunctionNamesCondition(rdoWilcoxSignTest, "wilcox.test")
         ucrPnlWilcoxVarTest.AddFunctionNamesCondition(rdoVarSignTest, "signmedian.test")
-
-        ucrPnlWilcoxVarTest.AddToLinkedControls(ucrNudHyp, {rdoWilcoxSignTest, rdoVarSignTest}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
 
         ' to move
         ucrOperator.SetItems({"==", "<", "<=", ">", ">=", "!="})
@@ -159,7 +156,7 @@ Public Class dlgOneVarFitModel
         clsRplotPPComp = New RFunction
         clsRplotCdfcomp = New RFunction
         clsRplotQqComp = New RFunction
-        clsRplotDenscomp = New RFunction
+        clsRplotDensComp = New RFunction
         clsRLogLikFunction = New RFunction
         clsFamilyFunction = New RFunction
         clsROneVarFitModel = New RFunction
@@ -254,10 +251,10 @@ Public Class dlgOneVarFitModel
         clsRplotQqComp.bExcludeAssignedFunctionOutput = False
         clsRplotQqComp.iCallType = 3
 
-        clsRplotDenscomp.SetPackageName("fitdistrplus")
-        clsRplotDenscomp.SetRCommand("denscomp")
-        clsRplotDenscomp.bExcludeAssignedFunctionOutput = False
-        clsRplotDenscomp.iCallType = 3
+        clsRplotDensComp.SetPackageName("fitdistrplus")
+        clsRplotDensComp.SetRCommand("denscomp")
+        clsRplotDensComp.bExcludeAssignedFunctionOutput = False
+        clsRplotDensComp.iCallType = 3
 
         clsRLogLikFunction.SetPackageName("fitdistrplus")
         clsRLogLikFunction.SetRCommand("llplot")
@@ -354,30 +351,32 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Public Sub SetDataParameter()
-        If Not ucrReceiverVariable.IsEmpty Then
-            If ucrReceiverVariable.strCurrDataType = "numeric" Then
-                ucrChkConvertVariate.Checked = False
-                ucrChkConvertVariate.Visible = False
-            Else
-                ucrChkConvertVariate.Visible = True
-            End If
-            If ucrChkConvertVariate.Checked Then
-                clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertNumeric)
-            Else
-                'TODO This is needed because fitdist checks is.vector on data which is FALSE when data has attributes
-                If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" OrElse ucrDistributionChoice.clsCurrDistribution.strNameTag = "Geometric" Then
-                    clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger)
+        If rdoGeneralCase.Checked Then
+            If Not ucrReceiverVariable.IsEmpty Then
+                If ucrReceiverVariable.strCurrDataType = "numeric" Then
+                    ucrChkConvertVariate.Checked = False
+                    ucrChkConvertVariate.Visible = False
                 Else
-                    clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertVector)
+                    ucrChkConvertVariate.Visible = True
                 End If
-                If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Extreme_Value" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Binomial" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Students_t" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Chi_Square" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "F" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Hypergeometric" Then
-                    clsROneVarFitModel.AddParameter("start", clsRFunctionParameter:=clsRStartValues)
-                    ' TODO llplot() no longer works with starting values. However, the mle's will not plot without starting values for these variables
+                If ucrChkConvertVariate.Checked Then
+                    clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertNumeric)
+                Else
+                    'TODO This is needed because fitdist checks is.vector on data which is FALSE when data has attributes
+                    If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" OrElse ucrDistributionChoice.clsCurrDistribution.strNameTag = "Geometric" Then
+                        clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger)
+                    Else
+                        clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertVector)
+                    End If
+                    If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Extreme_Value" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Binomial" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Students_t" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Chi_Square" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "F" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Hypergeometric" Then
+                        clsROneVarFitModel.AddParameter("start", clsRFunctionParameter:=clsRStartValues)
+                        ' TODO llplot() no longer works with starting values. However, the mle's will not plot without starting values for these variables
+                    End If
                 End If
+            Else
+                ucrChkConvertVariate.Visible = False
+                clsROneVarFitModel.RemoveParameterByName("data")
             End If
-        Else
-            ucrChkConvertVariate.Visible = False
-            clsROneVarFitModel.RemoveParameterByName("data")
         End If
 
         If ucrDistributionChoice.lstCurrentDistributions.Count = 0 OrElse ucrReceiverVariable.IsEmpty() Then
@@ -433,8 +432,8 @@ Public Class dlgOneVarFitModel
             clsRplotCdfcomp.AddParameter("ft", clsRFunctionParameter:=clsROneVarFitModel)
             clsRplotQqComp.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
             clsRplotQqComp.AddParameter("ft", clsRFunctionParameter:=clsROneVarFitModel)
-            clsRplotDenscomp.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
-            clsRplotDenscomp.AddParameter("ft", clsRFunctionParameter:=clsROneVarFitModel)
+            clsRplotDensComp.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
+            clsRplotDensComp.AddParameter("ft", clsRFunctionParameter:=clsROneVarFitModel)
             clsRLogLikFunction.AddParameter("mlefit", clsRFunctionParameter:=clsROneVarFitModel)
         ElseIf rdoExactCase.Checked Then
             If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" Then
@@ -443,7 +442,6 @@ Public Class dlgOneVarFitModel
                 If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" AndAlso (ucrReceiverVariable.strCurrDataType = "factor" OrElse ucrReceiverVariable.strCurrDataType = "character") Then
                     ucrReceiverVariable.Clear()
                 End If
-                ' is ucrNudHyp an integer here? It shouldnt have dps I think?
                 ucrBase.clsRsyntax.SetBaseRFunction(clsRPoissonTest)
             ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal" Then
                 ucrPnlNormal.Show()
@@ -466,10 +464,8 @@ Public Class dlgOneVarFitModel
                 ucrPnlNormal.Hide()
                 ucrPnlWilcoxVarTest.Show()
                 If rdoWilcoxSignTest.Checked Then
-                    '    clsRWilcoxTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector)
                     ucrBase.clsRsyntax.SetBaseRFunction(clsRWilcoxTest)
                 Else
-                    '    clsRNonSignTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector)
                     ucrBase.clsRsyntax.SetBaseRFunction(clsRNonSignTest)
                 End If
             End If
@@ -531,7 +527,7 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgOneVarFitModDisplay.SetRCode(ucrBase.clsRsyntax, clsRNewOneVarFitModel:=clsROneVarFitModel, clsNewRLogLikFunction:=clsRLogLikFunction, clsNewRplotFunction:=clsRplotFunction, clsNewRplotPPComp:=clsRplotPPComp, clsNewRplotCdfcomp:=clsRplotCdfcomp, clsNewRplotQqComp:=clsRplotQqComp, clsNewRplotDenscomp:=clsRplotDenscomp, ucrNewDistribution:=ucrDistribution, bReset:=bResetFitModDisplay)
+        sdgOneVarFitModDisplay.SetRCode(ucrBase.clsRsyntax, clsRNewOneVarFitModel:=clsROneVarFitModel, clsNewRLogLikFunction:=clsRLogLikFunction, clsNewRplotFunction:=clsRplotFunction, clsNewRplotPPComp:=clsRplotPPComp, clsNewRplotCdfcomp:=clsRplotCdfcomp, clsNewRplotQqComp:=clsRplotQqComp, clsNewRplotDenscomp:=clsRplotDensComp, ucrNewDistribution:=ucrDistribution, bReset:=bResetFitModDisplay)
         bResetFitModDisplay = False
         sdgOneVarFitModDisplay.ShowDialog()
         EnableOptions()
@@ -584,21 +580,29 @@ Public Class dlgOneVarFitModel
                     rdoMeanNormal.Visible = True
                     rdoVarNormal.Visible = True
                     rdoEnormNorm.Visible = True
-                    ucrNudHyp.Maximum = ucrDistributionChoice.clsCurrDistribution.lstExact(6)
                     If rdoVarNormal.Checked Then
+                        ucrNudHyp.Visible = True
                         ucrNudHyp.Minimum = 0.01
+                        '   ucrNudHyp.Value = 1
                     Else
                         ucrNudHyp.Minimum = ucrDistributionChoice.clsCurrDistribution.lstExact(5)
-                        '    ucrNudHyp.Value = ucrDistributionChoice.clsCurrDistribution.lstExact(2)
+                        '    ucrNudHyp.Value = 0
+                        If rdoEnormNorm.Checked Then
+                            ucrNudHyp.Visible = False
+                        Else
+                            ucrNudHyp.Visible = True
+                        End If
                     End If
 
                 ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "No_Distribution" Then
+                    ucrNudHyp.Visible = True
                     ucrPnlNormal.Hide()
                     ucrPnlWilcoxVarTest.Show()
                     ucrNudHyp.Minimum = ucrDistributionChoice.clsCurrDistribution.lstExact(5)
                     ucrNudHyp.Value = ucrDistributionChoice.clsCurrDistribution.lstExact(2)
 
                 Else
+                    ucrNudHyp.Visible = True
                     ucrNudHyp.Minimum = ucrDistributionChoice.clsCurrDistribution.lstExact(5)
                     ucrNudHyp.Value = ucrDistributionChoice.clsCurrDistribution.lstExact(2)
                     'ucrPnlWilcoxVarTest.Hide()
@@ -609,7 +613,6 @@ Public Class dlgOneVarFitModel
                 End If
                 ucrNudHyp.Increment = ucrDistributionChoice.clsCurrDistribution.lstExact(3)
                 ucrNudHyp.DecimalPlaces = ucrDistributionChoice.clsCurrDistribution.lstExact(4)
-                ucrNudHyp.Maximum = ucrDistributionChoice.clsCurrDistribution.lstExact(6)
             End If
         End If
     End Sub
@@ -620,6 +623,7 @@ Public Class dlgOneVarFitModel
         SetDistributions()
         DataTypeAccepted()
         ResponseConvert()
+        SetDataParameter()
         Display()
     End Sub
 

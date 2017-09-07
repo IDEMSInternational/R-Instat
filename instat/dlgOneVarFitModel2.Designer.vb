@@ -46,24 +46,24 @@ Partial Class dlgOneVarFitModel
         Me.grpConditions = New System.Windows.Forms.GroupBox()
         Me.rdoEnormNorm = New System.Windows.Forms.RadioButton()
         Me.rdoMeanNormal = New System.Windows.Forms.RadioButton()
-        Me.ucrNudHyp = New instat.ucrNud()
         Me.rdoWilcoxSignTest = New System.Windows.Forms.RadioButton()
         Me.rdoVarSignTest = New System.Windows.Forms.RadioButton()
-        Me.ucrChkBinModify = New instat.ucrCheck()
-        Me.ucrPnlWilcoxVarTest = New instat.UcrPanel()
         Me.rdoVarNormal = New System.Windows.Forms.RadioButton()
-        Me.ucrNudBinomialConditions = New instat.ucrNud()
-        Me.ucrOperator = New instat.ucrInputComboBox()
-        Me.ucrVariables = New instat.ucrInputComboBox()
-        Me.ucrPnlNormal = New instat.UcrPanel()
         Me.lblHyp = New System.Windows.Forms.Label()
         Me.lblConfidenceLimit = New System.Windows.Forms.Label()
-        Me.ucrNudCI = New instat.ucrNud()
         Me.cmdDisplayOptions = New System.Windows.Forms.Button()
         Me.cmdFittingOptions = New System.Windows.Forms.Button()
         Me.ucrChkConvertVariate = New instat.ucrCheck()
         Me.ucrPnlGeneralExactCase = New instat.UcrPanel()
         Me.ucrSaveModel = New instat.ucrSave()
+        Me.ucrNudHyp = New instat.ucrNud()
+        Me.ucrChkBinModify = New instat.ucrCheck()
+        Me.ucrPnlWilcoxVarTest = New instat.UcrPanel()
+        Me.ucrNudBinomialConditions = New instat.ucrNud()
+        Me.ucrOperator = New instat.ucrInputComboBox()
+        Me.ucrVariables = New instat.ucrInputComboBox()
+        Me.ucrPnlNormal = New instat.UcrPanel()
+        Me.ucrNudCI = New instat.ucrNud()
         Me.ucrDistributionChoice = New instat.ucrDistributions()
         Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
         Me.ucrSelectorOneVarFitMod = New instat.ucrSelectorByDataFrameAddRemove()
@@ -74,7 +74,7 @@ Partial Class dlgOneVarFitModel
         'LblVariable
         '
         Me.LblVariable.AutoSize = True
-        Me.LblVariable.Location = New System.Drawing.Point(249, 47)
+        Me.LblVariable.Location = New System.Drawing.Point(249, 81)
         Me.LblVariable.Name = "LblVariable"
         Me.LblVariable.Size = New System.Drawing.Size(48, 13)
         Me.LblVariable.TabIndex = 8
@@ -147,7 +147,7 @@ Partial Class dlgOneVarFitModel
         Me.grpConditions.Controls.Add(Me.lblHyp)
         Me.grpConditions.Controls.Add(Me.lblConfidenceLimit)
         Me.grpConditions.Controls.Add(Me.ucrNudCI)
-        Me.grpConditions.Location = New System.Drawing.Point(249, 119)
+        Me.grpConditions.Location = New System.Drawing.Point(249, 149)
         Me.grpConditions.Name = "grpConditions"
         Me.grpConditions.Size = New System.Drawing.Size(196, 132)
         Me.grpConditions.TabIndex = 34
@@ -177,18 +177,6 @@ Partial Class dlgOneVarFitModel
         Me.rdoMeanNormal.TextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.rdoMeanNormal.UseVisualStyleBackColor = True
         '
-        'ucrNudHyp
-        '
-        Me.ucrNudHyp.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudHyp.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudHyp.Location = New System.Drawing.Point(100, 38)
-        Me.ucrNudHyp.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudHyp.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudHyp.Name = "ucrNudHyp"
-        Me.ucrNudHyp.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudHyp.TabIndex = 49
-        Me.ucrNudHyp.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'rdoWilcoxSignTest
         '
         Me.rdoWilcoxSignTest.AutoSize = True
@@ -212,6 +200,87 @@ Partial Class dlgOneVarFitModel
         Me.rdoVarSignTest.Text = "Compare Variance"
         Me.rdoVarSignTest.UseVisualStyleBackColor = True
         '
+        'rdoVarNormal
+        '
+        Me.rdoVarNormal.AutoSize = True
+        Me.rdoVarNormal.Location = New System.Drawing.Point(8, 87)
+        Me.rdoVarNormal.Name = "rdoVarNormal"
+        Me.rdoVarNormal.Size = New System.Drawing.Size(112, 17)
+        Me.rdoVarNormal.TabIndex = 64
+        Me.rdoVarNormal.TabStop = True
+        Me.rdoVarNormal.Text = "Compare Variance"
+        Me.rdoVarNormal.UseVisualStyleBackColor = True
+        '
+        'lblHyp
+        '
+        Me.lblHyp.AutoSize = True
+        Me.lblHyp.Location = New System.Drawing.Point(6, 40)
+        Me.lblHyp.Name = "lblHyp"
+        Me.lblHyp.Size = New System.Drawing.Size(83, 13)
+        Me.lblHyp.TabIndex = 46
+        Me.lblHyp.Text = "Null Hypothesis:"
+        '
+        'lblConfidenceLimit
+        '
+        Me.lblConfidenceLimit.AutoSize = True
+        Me.lblConfidenceLimit.Location = New System.Drawing.Point(6, 16)
+        Me.lblConfidenceLimit.Name = "lblConfidenceLimit"
+        Me.lblConfidenceLimit.Size = New System.Drawing.Size(88, 13)
+        Me.lblConfidenceLimit.TabIndex = 47
+        Me.lblConfidenceLimit.Text = "Confidence Limit:"
+        '
+        'cmdDisplayOptions
+        '
+        Me.cmdDisplayOptions.Location = New System.Drawing.Point(316, 287)
+        Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
+        Me.cmdDisplayOptions.Size = New System.Drawing.Size(92, 23)
+        Me.cmdDisplayOptions.TabIndex = 44
+        Me.cmdDisplayOptions.Text = "Display Options"
+        Me.cmdDisplayOptions.UseVisualStyleBackColor = True
+        '
+        'cmdFittingOptions
+        '
+        Me.cmdFittingOptions.Location = New System.Drawing.Point(316, 258)
+        Me.cmdFittingOptions.Name = "cmdFittingOptions"
+        Me.cmdFittingOptions.Size = New System.Drawing.Size(92, 23)
+        Me.cmdFittingOptions.TabIndex = 43
+        Me.cmdFittingOptions.Text = "Fitting Options"
+        Me.cmdFittingOptions.UseVisualStyleBackColor = True
+        '
+        'ucrChkConvertVariate
+        '
+        Me.ucrChkConvertVariate.Checked = False
+        Me.ucrChkConvertVariate.Location = New System.Drawing.Point(249, 119)
+        Me.ucrChkConvertVariate.Name = "ucrChkConvertVariate"
+        Me.ucrChkConvertVariate.Size = New System.Drawing.Size(156, 20)
+        Me.ucrChkConvertVariate.TabIndex = 42
+        '
+        'ucrPnlGeneralExactCase
+        '
+        Me.ucrPnlGeneralExactCase.Location = New System.Drawing.Point(67, 7)
+        Me.ucrPnlGeneralExactCase.Name = "ucrPnlGeneralExactCase"
+        Me.ucrPnlGeneralExactCase.Size = New System.Drawing.Size(266, 35)
+        Me.ucrPnlGeneralExactCase.TabIndex = 39
+        '
+        'ucrSaveModel
+        '
+        Me.ucrSaveModel.Location = New System.Drawing.Point(10, 286)
+        Me.ucrSaveModel.Name = "ucrSaveModel"
+        Me.ucrSaveModel.Size = New System.Drawing.Size(255, 24)
+        Me.ucrSaveModel.TabIndex = 38
+        '
+        'ucrNudHyp
+        '
+        Me.ucrNudHyp.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudHyp.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudHyp.Location = New System.Drawing.Point(100, 38)
+        Me.ucrNudHyp.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudHyp.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudHyp.Name = "ucrNudHyp"
+        Me.ucrNudHyp.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudHyp.TabIndex = 49
+        Me.ucrNudHyp.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'ucrChkBinModify
         '
         Me.ucrChkBinModify.Checked = False
@@ -226,17 +295,6 @@ Partial Class dlgOneVarFitModel
         Me.ucrPnlWilcoxVarTest.Name = "ucrPnlWilcoxVarTest"
         Me.ucrPnlWilcoxVarTest.Size = New System.Drawing.Size(117, 48)
         Me.ucrPnlWilcoxVarTest.TabIndex = 63
-        '
-        'rdoVarNormal
-        '
-        Me.rdoVarNormal.AutoSize = True
-        Me.rdoVarNormal.Location = New System.Drawing.Point(8, 87)
-        Me.rdoVarNormal.Name = "rdoVarNormal"
-        Me.rdoVarNormal.Size = New System.Drawing.Size(112, 17)
-        Me.rdoVarNormal.TabIndex = 64
-        Me.rdoVarNormal.TabStop = True
-        Me.rdoVarNormal.Text = "Compare Variance"
-        Me.rdoVarNormal.UseVisualStyleBackColor = True
         '
         'ucrNudBinomialConditions
         '
@@ -275,24 +333,6 @@ Partial Class dlgOneVarFitModel
         Me.ucrPnlNormal.Size = New System.Drawing.Size(118, 62)
         Me.ucrPnlNormal.TabIndex = 63
         '
-        'lblHyp
-        '
-        Me.lblHyp.AutoSize = True
-        Me.lblHyp.Location = New System.Drawing.Point(6, 40)
-        Me.lblHyp.Name = "lblHyp"
-        Me.lblHyp.Size = New System.Drawing.Size(83, 13)
-        Me.lblHyp.TabIndex = 46
-        Me.lblHyp.Text = "Null Hypothesis:"
-        '
-        'lblConfidenceLimit
-        '
-        Me.lblConfidenceLimit.AutoSize = True
-        Me.lblConfidenceLimit.Location = New System.Drawing.Point(6, 16)
-        Me.lblConfidenceLimit.Name = "lblConfidenceLimit"
-        Me.lblConfidenceLimit.Size = New System.Drawing.Size(88, 13)
-        Me.lblConfidenceLimit.TabIndex = 47
-        Me.lblConfidenceLimit.Text = "Confidence Limit:"
-        '
         'ucrNudCI
         '
         Me.ucrNudCI.DecimalPlaces = New Decimal(New Integer() {2, 0, 0, 0})
@@ -305,46 +345,6 @@ Partial Class dlgOneVarFitModel
         Me.ucrNudCI.TabIndex = 48
         Me.ucrNudCI.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'cmdDisplayOptions
-        '
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(294, 290)
-        Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
-        Me.cmdDisplayOptions.Size = New System.Drawing.Size(92, 23)
-        Me.cmdDisplayOptions.TabIndex = 44
-        Me.cmdDisplayOptions.Text = "Display Options"
-        Me.cmdDisplayOptions.UseVisualStyleBackColor = True
-        '
-        'cmdFittingOptions
-        '
-        Me.cmdFittingOptions.Location = New System.Drawing.Point(294, 261)
-        Me.cmdFittingOptions.Name = "cmdFittingOptions"
-        Me.cmdFittingOptions.Size = New System.Drawing.Size(92, 23)
-        Me.cmdFittingOptions.TabIndex = 43
-        Me.cmdFittingOptions.Text = "Fitting Options"
-        Me.cmdFittingOptions.UseVisualStyleBackColor = True
-        '
-        'ucrChkConvertVariate
-        '
-        Me.ucrChkConvertVariate.Checked = False
-        Me.ucrChkConvertVariate.Location = New System.Drawing.Point(249, 94)
-        Me.ucrChkConvertVariate.Name = "ucrChkConvertVariate"
-        Me.ucrChkConvertVariate.Size = New System.Drawing.Size(156, 20)
-        Me.ucrChkConvertVariate.TabIndex = 42
-        '
-        'ucrPnlGeneralExactCase
-        '
-        Me.ucrPnlGeneralExactCase.Location = New System.Drawing.Point(67, 7)
-        Me.ucrPnlGeneralExactCase.Name = "ucrPnlGeneralExactCase"
-        Me.ucrPnlGeneralExactCase.Size = New System.Drawing.Size(266, 35)
-        Me.ucrPnlGeneralExactCase.TabIndex = 39
-        '
-        'ucrSaveModel
-        '
-        Me.ucrSaveModel.Location = New System.Drawing.Point(10, 286)
-        Me.ucrSaveModel.Name = "ucrSaveModel"
-        Me.ucrSaveModel.Size = New System.Drawing.Size(255, 24)
-        Me.ucrSaveModel.TabIndex = 38
-        '
         'ucrDistributionChoice
         '
         Me.ucrDistributionChoice.Location = New System.Drawing.Point(10, 249)
@@ -355,7 +355,7 @@ Partial Class dlgOneVarFitModel
         'ucrReceiverVariable
         '
         Me.ucrReceiverVariable.frmParent = Me
-        Me.ucrReceiverVariable.Location = New System.Drawing.Point(249, 64)
+        Me.ucrReceiverVariable.Location = New System.Drawing.Point(249, 96)
         Me.ucrReceiverVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverVariable.Name = "ucrReceiverVariable"
         Me.ucrReceiverVariable.Selector = Nothing
