@@ -209,12 +209,10 @@ Partial Class sdgOpenNetCDF
         '
         'dtpMinT
         '
-        Me.dtpMinT.Checked = False
         Me.dtpMinT.Location = New System.Drawing.Point(149, 282)
         Me.dtpMinT.Name = "dtpMinT"
         Me.dtpMinT.Size = New System.Drawing.Size(133, 20)
         Me.dtpMinT.TabIndex = 23
-        Me.dtpMinT.Value = New Date(2017, 9, 7, 14, 39, 0, 0)
         '
         'lblMinX
         '

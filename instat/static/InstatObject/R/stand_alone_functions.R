@@ -272,7 +272,16 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
           dim_var <- names(dim_axes)[which(dim_axes == dim)]
           curr_dim_values <- dim_values[[dim_var]]
           if(dim_var %in% names(boundary)) {
-            ind <- which(curr_dim_values >= boundary[[dim_var]][1] & curr_dim_values <= boundary[[dim_var]][2])
+            if(dim == "T") {
+              ind <- integer(0)
+              try({
+                pcict_time <- ncdf4.helpers::nc.get.time.series(nc, time.dim.name = dim_var)
+                posixct_time <- PCICt::as.POSIXct.PCICt(pcict_time)
+                time_vals <- as.Date(posixct_time)
+                ind <- which(time_vals >= boundary[[dim_var]][1] & time_vals <= boundary[[dim_var]][2])
+              })
+            }
+            else ind <- which(curr_dim_values >= boundary[[dim_var]][1] & curr_dim_values <= boundary[[dim_var]][2])
             if(length(ind) == 0) {
               warning("No values within the range specified for", dim_var, "All values will be included.")
               start <- c(start, 1)
