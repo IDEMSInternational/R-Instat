@@ -228,6 +228,24 @@ pentad <- function(date) {
   return(temp_pentad)
 }
 
+nc_get_dim_min_max <- function(nc, dimension, time_as_date = TRUE) {
+  if(!dimension %in% names(nc$dim)) stop(dimension, " not found in file.")
+  vals <- nc$dim[[dimension]]$vals
+  dim_axes <- ncdf4.helpers::nc.get.dim.axes(nc)
+  time_dims <- names(dim_axes[which(dim_axes == "T")])
+  if(dimension %in% time_dims && time_as_date) {
+    time_vals <- c()
+    try({
+      pcict_time <- ncdf4.helpers::nc.get.time.series(nc, time.dim.name = time_var)
+      posixct_time <- PCICt::as.POSIXct.PCICt(pcict_time)
+      time_vals <- as.Date(posixct_time)
+    })
+    if(length(time_vals) > 0 && !anyNA(time_vals)) vals <- time_vals
+  }
+  bounds <- c(min(vals, na.rm = TRUE), max(vals, na.rm = TRUE))
+  return(bounds)
+}
+
 nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = TRUE, boundary = NULL) {
   dim_names <- ncdf4.helpers::nc.get.dim.names(nc, vars[1])
   dim_values <- list()

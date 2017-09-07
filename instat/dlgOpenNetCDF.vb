@@ -21,7 +21,8 @@ Imports RDotNet
 Public Class dlgOpenNetCDF
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsRDefaultFunction, clsRCDF, clsRClose, clsRFileDetails, clsRSubsetFunction, clsRLatFunction, clsRLongFunction, clsRZFunction, clsRTimeFunction As New RFunction
+    Private clsImportNetcdfFunction, clsNcOpenFunction, clsRClose, clsRFileDetails As New RFunction
+    Private clsBoundaryListFunction, clsYLimitsFunction, clsXLimtsFunction, clsZLimtsFunction, clsSLimtsFunction, clsTLimitsFunction As New RFunction
     Dim strFileType As String
     Dim bComponentsInitialised As Boolean
     Public bStartOpenDialog As Boolean
@@ -61,7 +62,6 @@ Public Class dlgOpenNetCDF
 
     Private Sub InitialiseDialog()
         'ucrBase.iHelpTopicID = 
-        cmdOptions.Enabled = False ' Temporarily disabled.
 
         ucrInputFilePath.SetParameter(New RParameter("filename", 0))
         ucrInputFilePath.IsReadOnly = True
@@ -75,11 +75,13 @@ Public Class dlgOpenNetCDF
         ucrPnlFileDetails.AddRadioButton(rdoMedium, Chr(34) & "m" & Chr(34))
         ucrPnlFileDetails.AddRadioButton(rdoLong, Chr(34) & "l" & Chr(34))
         ucrPnlFileDetails.SetRDefault(Chr(34) & "s" & Chr(34))
+
+        ucrInputFileDetails.txtInput.ScrollBars = ScrollBars.Vertical
     End Sub
 
     Private Sub SetDefaults()
-        clsRDefaultFunction = New RFunction
-        clsRCDF = New RFunction
+        clsImportNetcdfFunction = New RFunction
+        clsNcOpenFunction = New RFunction
         clsRClose = New RFunction
         clsRFileDetails = New RFunction
 
@@ -93,38 +95,34 @@ Public Class dlgOpenNetCDF
         ucrInputFilePath.SetName("")
         'ucrInputDataName.SetName("") ' technically this clears anyway as it updates to what is in the ucrInputFilePath, which is nothing.
 
-        clsRDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_NetCDF")
-        clsRDefaultFunction.AddParameter("nc", clsRFunctionParameter:=clsRCDF, iPosition:=0)
+        clsImportNetcdfFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_NetCDF")
+        clsImportNetcdfFunction.AddParameter("nc", clsRFunctionParameter:=clsNcOpenFunction, iPosition:=0)
 
-        clsRCDF.SetPackageName("ncdf4")
-        clsRCDF.SetRCommand("nc_open")
-        clsRCDF.SetAssignTo("nc")
-        ' clsRCDF.AddParameter("boundary", clsRFunctionParameter:=clsRSubsetFunction, iPosition:=2) ' disabled while sub dialog is disabled
-        clsRSubsetFunction.SetRCommand("list")
-        clsRSubsetFunction.AddParameter("lat", clsRFunctionParameter:=clsRLatFunction, iPosition:=0) ' TODO, CALL LAT CORRECTLY
-        clsRSubsetFunction.AddParameter("long", clsRFunctionParameter:=clsRLongFunction, iPosition:=1) ' TODO, CALL CORRECTLY
-        clsRSubsetFunction.AddParameter("z", clsRFunctionParameter:=clsRZFunction, iPosition:=2) ' TODO, CALL CORRECTLY
-        clsRSubsetFunction.AddParameter("time", clsRFunctionParameter:=clsRTimeFunction, iPosition:=3) ' TODO, CALL CORRECTLY
-        clsRLatFunction.SetRCommand("c")
-        clsRLongFunction.SetRCommand("c")
-        clsRZFunction.SetRCommand("c")
-        clsRTimeFunction.SetRCommand("c")
+        clsNcOpenFunction.SetPackageName("ncdf4")
+        clsNcOpenFunction.SetRCommand("nc_open")
+        'clsNcOpenFunction.SetAssignTo("nc")
+
+        clsBoundaryListFunction.SetRCommand("list")
+        clsXLimtsFunction.SetRCommand("c")
+        clsYLimitsFunction.SetRCommand("c")
+        clsZLimtsFunction.SetRCommand("c")
+        clsTLimitsFunction.SetRCommand("c")
 
         clsRClose.SetPackageName("ncdf4")
         clsRClose.SetRCommand("nc_close")
-        clsRClose.AddParameter("nc", clsRFunctionParameter:=clsRCDF, iPosition:=0)
+        clsRClose.AddParameter("nc", clsRFunctionParameter:=clsNcOpenFunction, iPosition:=0)
 
         clsRFileDetails.SetPackageName("cmsaf")
         clsRFileDetails.SetRCommand("ncinfo")
 
         ucrBase.clsRsyntax.AddToAfterCodes(clsRClose, iPosition:=0)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsRDefaultFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsImportNetcdfFunction)
         bResetSubdialog = True
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrInputDataName.SetRCode(clsRDefaultFunction, bReset)
-        ucrInputFilePath.SetRCode(clsRCDF, bReset)
+        ucrInputDataName.SetRCode(clsImportNetcdfFunction, bReset)
+        ucrInputFilePath.SetRCode(clsNcOpenFunction, bReset)
         ucrPnlFileDetails.SetRCode(clsRFileDetails, bReset)
     End Sub
 
@@ -167,7 +165,7 @@ Public Class dlgOpenNetCDF
                     lblMainDataName.Show()
 
                     If strFileExt = ".nc" Then
-                        clsRCDF.AddParameter("filename", Chr(34) & strFilePath & Chr(34))
+                        clsNcOpenFunction.AddParameter("filename", Chr(34) & strFilePath & Chr(34))
                         strFileType = "nc"
                         ucrInputDataName.SetName(strFileName, bSilent:=True)
                         ucrInputDataName.Focus()
@@ -180,7 +178,7 @@ Public Class dlgOpenNetCDF
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgOpenNetCDF.SetRFunction(clsRDefaultFunction, clsRLatFunction, clsRLongFunction, clsRZFunction, clsRTimeFunction, strShort, bResetSubdialog)
+        sdgOpenNetCDF.SetRFunction(clsNewImportNetcdfFunction:=clsImportNetcdfFunction, clsNewNcOpenFunction:=clsNcOpenFunction, clsNewXLimitsFunction:=clsXLimtsFunction, clsNewYLimitsFunction:=clsYLimitsFunction, clsNewZLimitsFunction:=clsZLimtsFunction, clsNewSLimitsFunction:=clsSLimtsFunction, clsNewTLimitsFunction:=clsTLimitsFunction, strNewShortDescription:=strShort, bReset:=bResetSubdialog)
         bResetSubdialog = False
         sdgOpenNetCDF.ShowDialog()
         TestOkEnabled()
