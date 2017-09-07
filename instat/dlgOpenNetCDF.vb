@@ -162,7 +162,7 @@ Public Class dlgOpenNetCDF
                     strFileExt = Path.GetExtension(strFilePath)
                     ucrInputFilePath.SetName(strFilePath)
                     ucrInputDataName.Show()
-                    lblMainDataName.Show()
+                    lblDataFramePrefix.Show()
 
                     If strFileExt = ".nc" Then
                         clsNcOpenFunction.AddParameter("filename", Chr(34) & strFilePath & Chr(34))
@@ -171,6 +171,7 @@ Public Class dlgOpenNetCDF
                         ucrInputDataName.Focus()
                         clsRFileDetails.AddParameter("infile", Chr(34) & strFilePath & Chr(34), iPosition:=1)
                         FileDetails()
+                        clsImportNetcdfFunction.RemoveParameterByName("boundary")
                     End If
                 End If
             End If
@@ -178,7 +179,7 @@ Public Class dlgOpenNetCDF
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgOpenNetCDF.SetRFunction(clsNewImportNetcdfFunction:=clsImportNetcdfFunction, clsNewNcOpenFunction:=clsNcOpenFunction, clsNewXLimitsFunction:=clsXLimtsFunction, clsNewYLimitsFunction:=clsYLimitsFunction, clsNewZLimitsFunction:=clsZLimtsFunction, clsNewSLimitsFunction:=clsSLimtsFunction, clsNewTLimitsFunction:=clsTLimitsFunction, strNewShortDescription:=strShort, bReset:=bResetSubdialog)
+        sdgOpenNetCDF.SetRFunction(clsNewImportNetcdfFunction:=clsImportNetcdfFunction, clsNewNcOpenFunction:=clsNcOpenFunction, clsNewBoundaryListFunction:=clsBoundaryListFunction, clsNewXLimitsFunction:=clsXLimtsFunction, clsNewYLimitsFunction:=clsYLimitsFunction, clsNewZLimitsFunction:=clsZLimtsFunction, clsNewSLimitsFunction:=clsSLimtsFunction, clsNewTLimitsFunction:=clsTLimitsFunction, strNewShortDescription:=strShort, bReset:=bResetSubdialog)
         bResetSubdialog = False
         sdgOpenNetCDF.ShowDialog()
         TestOkEnabled()

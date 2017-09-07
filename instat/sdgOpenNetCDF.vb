@@ -91,7 +91,7 @@ Public Class sdgOpenNetCDF
         InitialiseTabs()
     End Sub
 
-    Public Sub SetRFunction(clsNewImportNetcdfFunction As RFunction, clsNewNcOpenFunction As RFunction, clsNewXLimitsFunction As RFunction, clsNewYLimitsFunction As RFunction, clsNewZLimitsFunction As RFunction, clsNewSLimitsFunction As RFunction, clsNewTLimitsFunction As RFunction, strNewShortDescription As String, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsNewImportNetcdfFunction As RFunction, clsNewNcOpenFunction As RFunction, clsNewBoundaryListFunction As RFunction, clsNewXLimitsFunction As RFunction, clsNewYLimitsFunction As RFunction, clsNewZLimitsFunction As RFunction, clsNewSLimitsFunction As RFunction, clsNewTLimitsFunction As RFunction, strNewShortDescription As String, Optional bReset As Boolean = False)
         Dim numMinMax As NumericVector
         Dim dcmMin As Nullable(Of Decimal)
         Dim dcmMax As Nullable(Of Decimal)
@@ -107,6 +107,7 @@ Public Class sdgOpenNetCDF
         End If
         clsImportNetcdfFunction = clsNewImportNetcdfFunction
         clsNcOpenFunction = clsNewNcOpenFunction
+        clsBoundaryListFunction = clsNewBoundaryListFunction
         clsYLimitsFunction = clsNewYLimitsFunction
         clsXLimitsFunction = clsNewXLimitsFunction
         clsZLimitsFunction = clsNewZLimitsFunction
@@ -162,6 +163,10 @@ Public Class sdgOpenNetCDF
                     lstMaxTextBoxes(i).Enabled = False
                 End If
             Next
+            If clsBoundaryListFunction.clsParameters.Count > 0 Then
+                clsImportNetcdfFunction.AddParameter("boundary", clsRFunctionParameter:=clsBoundaryListFunction)
+            End If
+
             ucrInputMinX.SetRCode(clsXLimitsFunction, bReset, bCloneIfNeeded:=True)
             ucrInputMaxX.SetRCode(clsXLimitsFunction, bReset, bCloneIfNeeded:=True)
             ucrInputMinY.SetRCode(clsYLimitsFunction, bReset, bCloneIfNeeded:=True)
