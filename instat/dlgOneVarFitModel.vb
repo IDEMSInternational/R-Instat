@@ -76,12 +76,12 @@ Public Class dlgOneVarFitModel
         ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoGeneralCase, "fitdist")
         ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoExactCase, "fitdist", False)
 
-        ucrPnlGeneralExactCase.AddToLinkedControls(ucrPnlStats, {rdoExactCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlGeneralExactCase.AddToLinkedControls(ucrPnlNormal, {rdoExactCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudCI, {rdoExactCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.95)
         ucrNudCI.SetLinkedDisplayControl(lblConfidenceLimit)
         'ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudHyp, {rdoExactCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudHyp.SetLinkedDisplayControl(lblHyp)
-        ucrPnlStats.SetLinkedDisplayControl(grpConditions)
+        ucrPnlNormal.SetLinkedDisplayControl(grpConditions)
 
         'ucrPnlGeneralExactCase.AddToLinkedControls(ucrPnlStats, {rdoExactCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
@@ -98,16 +98,16 @@ Public Class dlgOneVarFitModel
         ucrNudHyp.SetLinkedDisplayControl(lblHyp)
 
         ' Normal tests
-        ucrPnlStats.AddRadioButton(rdoMeanNormal)
-        ucrPnlStats.AddRadioButton(rdoVarNormal)
-        ucrPnlStats.AddRadioButton(rdoEnormNorm)
+        ucrPnlNormal.AddRadioButton(rdoMeanNormal)
+        ucrPnlNormal.AddRadioButton(rdoVarNormal)
+        ucrPnlNormal.AddRadioButton(rdoEnormNorm)
 
-        ucrPnlStats.AddFunctionNamesCondition(rdoMeanNormal, "t.test")
-        ucrPnlStats.AddFunctionNamesCondition(rdoVarNormal, "varTest")
-        ucrPnlStats.AddFunctionNamesCondition(rdoEnormNorm, "enorm")
+        ucrPnlNormal.AddFunctionNamesCondition(rdoMeanNormal, "t.test")
+        ucrPnlNormal.AddFunctionNamesCondition(rdoVarNormal, "varTest")
+        ucrPnlNormal.AddFunctionNamesCondition(rdoEnormNorm, "enorm")
 
         ' Different default states for each of these radio buttons. enorm also doesn't connect to this option.
-        ucrPnlStats.AddToLinkedControls(ucrNudHyp, {rdoMeanNormal, rdoVarNormal}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlNormal.AddToLinkedControls(ucrNudHyp, {rdoMeanNormal, rdoVarNormal}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         'ucrPnlStats.AddToLinkedControls(ucrNudHyp, {rdoVarNormal}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
 
         ' Non parametric tests
@@ -311,7 +311,7 @@ Public Class dlgOneVarFitModel
         'ucrNudCI.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("conf.level"), iAdditionalPairNo:=6)
 
         ucrPnlGeneralExactCase.SetRCode(clsROneVarFitModel, bReset)
-        ucrPnlStats.SetRCode(clsRTTest, bReset)
+        ucrPnlNormal.SetRCode(clsRTTest, bReset)
         ucrPnlWilcoxVarTest.SetRCode(clsRWilcoxTest, bReset)
         ucrReceiverVariable.SetRCode(clsRConvertVector, bReset)
         ucrChkConvertVariate.SetRCode(clsROneVarFitModel, bReset)
@@ -322,7 +322,7 @@ Public Class dlgOneVarFitModel
         bRCodeSet = True
     End Sub
 
-    Private Sub ucrPnlStats_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStats.ControlValueChanged
+    Private Sub ucrPnlStats_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlNormal.ControlValueChanged
         SetBaseFunction()
         Display()
     End Sub
@@ -439,16 +439,16 @@ Public Class dlgOneVarFitModel
             clsRLogLikFunction.AddParameter("mlefit", clsRFunctionParameter:=clsROneVarFitModel)
         ElseIf rdoExactCase.Checked Then
             If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" Then
-                grpVarAndWilcoxSign.Hide()
-                grpVarAndWilcox.Hide()
+                ucrPnlNormal.Hide()
+                ucrPnlWilcoxVarTest.Hide()
                 If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" AndAlso (ucrReceiverVariable.strCurrDataType = "factor" OrElse ucrReceiverVariable.strCurrDataType = "character") Then
                     ucrReceiverVariable.Clear()
                 End If
                 ' is ucrNudHyp an integer here? It shouldnt have dps I think?
                 ucrBase.clsRsyntax.SetBaseRFunction(clsRPoissonTest)
             ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal" Then
-                grpVarAndWilcox.Show()
-                grpVarAndWilcoxSign.Hide()
+                ucrPnlNormal.Show()
+                ucrPnlWilcoxVarTest.Hide()
                 If rdoExactCase.Checked Then
                     If rdoMeanNormal.Checked Then
                         ucrNudHyp.SetMinMax(0.00, 1)
@@ -467,12 +467,12 @@ Public Class dlgOneVarFitModel
                     End If
                 End If
             ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Then
-                grpVarAndWilcoxSign.Hide()
-                grpVarAndWilcox.Hide()
+                ucrPnlWilcoxVarTest.Hide()
+                ucrPnlNormal.Hide()
                 SetBinomialTest()
             Else
-                grpVarAndWilcox.Hide()
-                grpVarAndWilcoxSign.Show()
+                ucrPnlNormal.Hide()
+                ucrPnlWilcoxVarTest.Show()
                 If rdoWilcoxSignTest.Checked Then
                     '    clsRWilcoxTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector)
                     ucrBase.clsRsyntax.SetBaseRFunction(clsRWilcoxTest)
@@ -581,14 +581,14 @@ Public Class dlgOneVarFitModel
             rdoMeanNormal.Visible = False ' only visible if normal is selected and if rdoExact is chosen
             rdoVarNormal.Visible = False ' only visible if normal is selected and if rdoExact is chosen
             rdoEnormNorm.Visible = False ' only visible if normal is selected and if rdoExact is chosen
-            grpVarAndWilcoxSign.Hide()
+            ucrPnlWilcoxVarTest.Hide()
         ElseIf rdoExactCase.Checked Then
             ucrChkConvertVariate.Visible = False
             grpConditions.Visible = True
             If ucrDistributionChoice.clsCurrDistribution.bIsExact = True Then
                 If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal" Then
-                    grpVarAndWilcoxSign.Hide()
-                    grpVarAndWilcox.Show()
+                    ucrPnlWilcoxVarTest.Hide()
+                    ucrPnlNormal.Show()
                     rdoMeanNormal.Visible = True
                     rdoVarNormal.Visible = True
                     rdoEnormNorm.Visible = True
@@ -599,15 +599,15 @@ Public Class dlgOneVarFitModel
                     End If
 
                 ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "No_Distribution" Then
-                    grpVarAndWilcox.Hide()
-                    grpVarAndWilcoxSign.Show()
+                    ucrPnlNormal.Hide()
+                    ucrPnlWilcoxVarTest.Show()
                     ucrNudHyp.Minimum = ucrDistributionChoice.clsCurrDistribution.lstExact(5)
                     ucrNudHyp.Value = ucrDistributionChoice.clsCurrDistribution.lstExact(2)
 
                 Else
                     ucrNudHyp.Minimum = ucrDistributionChoice.clsCurrDistribution.lstExact(5)
                     ucrNudHyp.Value = ucrDistributionChoice.clsCurrDistribution.lstExact(2)
-                    'grpVarAndWilcoxSign.Hide()
+                    'ucrPnlWilcoxVarTest.Hide()
                     ' grpVarAndWilcox.Hide()
                     'rdoMeanWilcox.Visible = False
                     ' rdoVarSign.Visible = False
