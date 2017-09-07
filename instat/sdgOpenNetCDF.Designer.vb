@@ -22,22 +22,22 @@ Partial Class sdgOpenNetCDF
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.lblMinimumLongitude = New System.Windows.Forms.Label()
-        Me.lblMinimumLatitude = New System.Windows.Forms.Label()
+        Me.lblMinX = New System.Windows.Forms.Label()
+        Me.lblMinY = New System.Windows.Forms.Label()
         Me.lblMinZ = New System.Windows.Forms.Label()
-        Me.lblMinTime = New System.Windows.Forms.Label()
-        Me.lblMaxTime = New System.Windows.Forms.Label()
+        Me.lblMinT = New System.Windows.Forms.Label()
+        Me.lblMaxT = New System.Windows.Forms.Label()
         Me.lblMaxZ = New System.Windows.Forms.Label()
-        Me.lblMaxLatitude = New System.Windows.Forms.Label()
-        Me.lblMaxLongitude = New System.Windows.Forms.Label()
-        Me.ucrInputMinLong = New instat.ucrInputTextBox()
-        Me.ucrInputMinLat = New instat.ucrInputTextBox()
+        Me.lblMaxY = New System.Windows.Forms.Label()
+        Me.lblMaxX = New System.Windows.Forms.Label()
+        Me.ucrInputMinX = New instat.ucrInputTextBox()
+        Me.ucrInputMinY = New instat.ucrInputTextBox()
         Me.ucrInputMinZ = New instat.ucrInputTextBox()
-        Me.ucrInputMinTime = New instat.ucrInputTextBox()
-        Me.ucrInputMaxLong = New instat.ucrInputTextBox()
-        Me.ucrInputMaxLat = New instat.ucrInputTextBox()
+        Me.ucrInputMinT = New instat.ucrInputTextBox()
+        Me.ucrInputMaxX = New instat.ucrInputTextBox()
+        Me.ucrInputMaxY = New instat.ucrInputTextBox()
         Me.ucrInputMaxZ = New instat.ucrInputTextBox()
-        Me.ucrInputMaxTime = New instat.ucrInputTextBox()
+        Me.ucrInputMaxT = New instat.ucrInputTextBox()
         Me.ucrInputFileDetails = New instat.ucrInputTextBox()
         Me.tbNetCDF = New System.Windows.Forms.TabControl()
         Me.tbSubset = New System.Windows.Forms.TabPage()
@@ -53,21 +53,21 @@ Partial Class sdgOpenNetCDF
         '
         'lblMinimumLongitude
         '
-        Me.lblMinimumLongitude.AutoSize = True
-        Me.lblMinimumLongitude.Location = New System.Drawing.Point(8, 177)
-        Me.lblMinimumLongitude.Name = "lblMinimumLongitude"
-        Me.lblMinimumLongitude.Size = New System.Drawing.Size(101, 13)
-        Me.lblMinimumLongitude.TabIndex = 1
-        Me.lblMinimumLongitude.Text = "Minimum Longitude:"
+        Me.lblMinX.AutoSize = True
+        Me.lblMinX.Location = New System.Drawing.Point(8, 177)
+        Me.lblMinX.Name = "lblMinimumLongitude"
+        Me.lblMinX.Size = New System.Drawing.Size(101, 13)
+        Me.lblMinX.TabIndex = 1
+        Me.lblMinX.Text = "Minimum Longitude:"
         '
         'lblMinimumLatitude
         '
-        Me.lblMinimumLatitude.AutoSize = True
-        Me.lblMinimumLatitude.Location = New System.Drawing.Point(8, 204)
-        Me.lblMinimumLatitude.Name = "lblMinimumLatitude"
-        Me.lblMinimumLatitude.Size = New System.Drawing.Size(92, 13)
-        Me.lblMinimumLatitude.TabIndex = 5
-        Me.lblMinimumLatitude.Text = "Minimum Latitude:"
+        Me.lblMinY.AutoSize = True
+        Me.lblMinY.Location = New System.Drawing.Point(8, 204)
+        Me.lblMinY.Name = "lblMinimumLatitude"
+        Me.lblMinY.Size = New System.Drawing.Size(92, 13)
+        Me.lblMinY.TabIndex = 5
+        Me.lblMinY.Text = "Minimum Latitude:"
         '
         'lblMinZ
         '
@@ -80,21 +80,21 @@ Partial Class sdgOpenNetCDF
         '
         'lblMinTime
         '
-        Me.lblMinTime.AutoSize = True
-        Me.lblMinTime.Location = New System.Drawing.Point(8, 258)
-        Me.lblMinTime.Name = "lblMinTime"
-        Me.lblMinTime.Size = New System.Drawing.Size(77, 13)
-        Me.lblMinTime.TabIndex = 13
-        Me.lblMinTime.Text = "Minimum Time:"
+        Me.lblMinT.AutoSize = True
+        Me.lblMinT.Location = New System.Drawing.Point(8, 258)
+        Me.lblMinT.Name = "lblMinTime"
+        Me.lblMinT.Size = New System.Drawing.Size(77, 13)
+        Me.lblMinT.TabIndex = 13
+        Me.lblMinT.Text = "Minimum Time:"
         '
         'lblMaxTime
         '
-        Me.lblMaxTime.AutoSize = True
-        Me.lblMaxTime.Location = New System.Drawing.Point(168, 258)
-        Me.lblMaxTime.Name = "lblMaxTime"
-        Me.lblMaxTime.Size = New System.Drawing.Size(80, 13)
-        Me.lblMaxTime.TabIndex = 15
-        Me.lblMaxTime.Text = "Maximum Time:"
+        Me.lblMaxT.AutoSize = True
+        Me.lblMaxT.Location = New System.Drawing.Point(168, 258)
+        Me.lblMaxT.Name = "lblMaxTime"
+        Me.lblMaxT.Size = New System.Drawing.Size(80, 13)
+        Me.lblMaxT.TabIndex = 15
+        Me.lblMaxT.Text = "Maximum Time:"
         '
         'lblMaxZ
         '
@@ -107,41 +107,41 @@ Partial Class sdgOpenNetCDF
         '
         'lblMaxLatitude
         '
-        Me.lblMaxLatitude.AutoSize = True
-        Me.lblMaxLatitude.Location = New System.Drawing.Point(168, 204)
-        Me.lblMaxLatitude.Name = "lblMaxLatitude"
-        Me.lblMaxLatitude.Size = New System.Drawing.Size(95, 13)
-        Me.lblMaxLatitude.TabIndex = 7
-        Me.lblMaxLatitude.Text = "Maximum Latitude:"
+        Me.lblMaxY.AutoSize = True
+        Me.lblMaxY.Location = New System.Drawing.Point(168, 204)
+        Me.lblMaxY.Name = "lblMaxLatitude"
+        Me.lblMaxY.Size = New System.Drawing.Size(95, 13)
+        Me.lblMaxY.TabIndex = 7
+        Me.lblMaxY.Text = "Maximum Latitude:"
         '
         'lblMaxLongitude
         '
-        Me.lblMaxLongitude.AutoSize = True
-        Me.lblMaxLongitude.Location = New System.Drawing.Point(168, 177)
-        Me.lblMaxLongitude.Name = "lblMaxLongitude"
-        Me.lblMaxLongitude.Size = New System.Drawing.Size(104, 13)
-        Me.lblMaxLongitude.TabIndex = 3
-        Me.lblMaxLongitude.Text = "Maximum Longitude:"
+        Me.lblMaxX.AutoSize = True
+        Me.lblMaxX.Location = New System.Drawing.Point(168, 177)
+        Me.lblMaxX.Name = "lblMaxLongitude"
+        Me.lblMaxX.Size = New System.Drawing.Size(104, 13)
+        Me.lblMaxX.TabIndex = 3
+        Me.lblMaxX.Text = "Maximum Longitude:"
         '
         'ucrInputMinLong
         '
-        Me.ucrInputMinLong.AddQuotesIfUnrecognised = True
-        Me.ucrInputMinLong.IsMultiline = False
-        Me.ucrInputMinLong.IsReadOnly = False
-        Me.ucrInputMinLong.Location = New System.Drawing.Point(110, 174)
-        Me.ucrInputMinLong.Name = "ucrInputMinLong"
-        Me.ucrInputMinLong.Size = New System.Drawing.Size(52, 21)
-        Me.ucrInputMinLong.TabIndex = 2
+        Me.ucrInputMinX.AddQuotesIfUnrecognised = True
+        Me.ucrInputMinX.IsMultiline = False
+        Me.ucrInputMinX.IsReadOnly = False
+        Me.ucrInputMinX.Location = New System.Drawing.Point(110, 174)
+        Me.ucrInputMinX.Name = "ucrInputMinLong"
+        Me.ucrInputMinX.Size = New System.Drawing.Size(52, 21)
+        Me.ucrInputMinX.TabIndex = 2
         '
         'ucrInputMinLat
         '
-        Me.ucrInputMinLat.AddQuotesIfUnrecognised = True
-        Me.ucrInputMinLat.IsMultiline = False
-        Me.ucrInputMinLat.IsReadOnly = False
-        Me.ucrInputMinLat.Location = New System.Drawing.Point(110, 201)
-        Me.ucrInputMinLat.Name = "ucrInputMinLat"
-        Me.ucrInputMinLat.Size = New System.Drawing.Size(52, 21)
-        Me.ucrInputMinLat.TabIndex = 6
+        Me.ucrInputMinY.AddQuotesIfUnrecognised = True
+        Me.ucrInputMinY.IsMultiline = False
+        Me.ucrInputMinY.IsReadOnly = False
+        Me.ucrInputMinY.Location = New System.Drawing.Point(110, 201)
+        Me.ucrInputMinY.Name = "ucrInputMinLat"
+        Me.ucrInputMinY.Size = New System.Drawing.Size(52, 21)
+        Me.ucrInputMinY.TabIndex = 6
         '
         'ucrInputMinZ
         '
@@ -155,33 +155,33 @@ Partial Class sdgOpenNetCDF
         '
         'ucrInputMinTime
         '
-        Me.ucrInputMinTime.AddQuotesIfUnrecognised = True
-        Me.ucrInputMinTime.IsMultiline = False
-        Me.ucrInputMinTime.IsReadOnly = False
-        Me.ucrInputMinTime.Location = New System.Drawing.Point(110, 255)
-        Me.ucrInputMinTime.Name = "ucrInputMinTime"
-        Me.ucrInputMinTime.Size = New System.Drawing.Size(52, 21)
-        Me.ucrInputMinTime.TabIndex = 14
+        Me.ucrInputMinT.AddQuotesIfUnrecognised = True
+        Me.ucrInputMinT.IsMultiline = False
+        Me.ucrInputMinT.IsReadOnly = False
+        Me.ucrInputMinT.Location = New System.Drawing.Point(110, 255)
+        Me.ucrInputMinT.Name = "ucrInputMinTime"
+        Me.ucrInputMinT.Size = New System.Drawing.Size(52, 21)
+        Me.ucrInputMinT.TabIndex = 14
         '
         'ucrInputMaxLong
         '
-        Me.ucrInputMaxLong.AddQuotesIfUnrecognised = True
-        Me.ucrInputMaxLong.IsMultiline = False
-        Me.ucrInputMaxLong.IsReadOnly = False
-        Me.ucrInputMaxLong.Location = New System.Drawing.Point(275, 174)
-        Me.ucrInputMaxLong.Name = "ucrInputMaxLong"
-        Me.ucrInputMaxLong.Size = New System.Drawing.Size(52, 21)
-        Me.ucrInputMaxLong.TabIndex = 4
+        Me.ucrInputMaxX.AddQuotesIfUnrecognised = True
+        Me.ucrInputMaxX.IsMultiline = False
+        Me.ucrInputMaxX.IsReadOnly = False
+        Me.ucrInputMaxX.Location = New System.Drawing.Point(275, 174)
+        Me.ucrInputMaxX.Name = "ucrInputMaxLong"
+        Me.ucrInputMaxX.Size = New System.Drawing.Size(52, 21)
+        Me.ucrInputMaxX.TabIndex = 4
         '
         'ucrInputMaxLat
         '
-        Me.ucrInputMaxLat.AddQuotesIfUnrecognised = True
-        Me.ucrInputMaxLat.IsMultiline = False
-        Me.ucrInputMaxLat.IsReadOnly = False
-        Me.ucrInputMaxLat.Location = New System.Drawing.Point(275, 201)
-        Me.ucrInputMaxLat.Name = "ucrInputMaxLat"
-        Me.ucrInputMaxLat.Size = New System.Drawing.Size(52, 21)
-        Me.ucrInputMaxLat.TabIndex = 8
+        Me.ucrInputMaxY.AddQuotesIfUnrecognised = True
+        Me.ucrInputMaxY.IsMultiline = False
+        Me.ucrInputMaxY.IsReadOnly = False
+        Me.ucrInputMaxY.Location = New System.Drawing.Point(275, 201)
+        Me.ucrInputMaxY.Name = "ucrInputMaxLat"
+        Me.ucrInputMaxY.Size = New System.Drawing.Size(52, 21)
+        Me.ucrInputMaxY.TabIndex = 8
         '
         'ucrInputMaxZ
         '
@@ -195,13 +195,13 @@ Partial Class sdgOpenNetCDF
         '
         'ucrInputMaxTime
         '
-        Me.ucrInputMaxTime.AddQuotesIfUnrecognised = True
-        Me.ucrInputMaxTime.IsMultiline = False
-        Me.ucrInputMaxTime.IsReadOnly = False
-        Me.ucrInputMaxTime.Location = New System.Drawing.Point(275, 255)
-        Me.ucrInputMaxTime.Name = "ucrInputMaxTime"
-        Me.ucrInputMaxTime.Size = New System.Drawing.Size(52, 21)
-        Me.ucrInputMaxTime.TabIndex = 16
+        Me.ucrInputMaxT.AddQuotesIfUnrecognised = True
+        Me.ucrInputMaxT.IsMultiline = False
+        Me.ucrInputMaxT.IsReadOnly = False
+        Me.ucrInputMaxT.Location = New System.Drawing.Point(275, 255)
+        Me.ucrInputMaxT.Name = "ucrInputMaxTime"
+        Me.ucrInputMaxT.Size = New System.Drawing.Size(52, 21)
+        Me.ucrInputMaxT.TabIndex = 16
         '
         'ucrInputFileDetails
         '
@@ -226,22 +226,22 @@ Partial Class sdgOpenNetCDF
         'tbSubset
         '
         Me.tbSubset.Controls.Add(Me.ucrInputFileDetails)
-        Me.tbSubset.Controls.Add(Me.lblMaxTime)
-        Me.tbSubset.Controls.Add(Me.ucrInputMaxTime)
+        Me.tbSubset.Controls.Add(Me.lblMaxT)
+        Me.tbSubset.Controls.Add(Me.ucrInputMaxT)
         Me.tbSubset.Controls.Add(Me.lblMaxZ)
         Me.tbSubset.Controls.Add(Me.ucrInputMaxZ)
-        Me.tbSubset.Controls.Add(Me.lblMaxLatitude)
-        Me.tbSubset.Controls.Add(Me.ucrInputMaxLat)
-        Me.tbSubset.Controls.Add(Me.lblMaxLongitude)
-        Me.tbSubset.Controls.Add(Me.ucrInputMaxLong)
-        Me.tbSubset.Controls.Add(Me.lblMinTime)
-        Me.tbSubset.Controls.Add(Me.ucrInputMinTime)
+        Me.tbSubset.Controls.Add(Me.lblMaxY)
+        Me.tbSubset.Controls.Add(Me.ucrInputMaxY)
+        Me.tbSubset.Controls.Add(Me.lblMaxX)
+        Me.tbSubset.Controls.Add(Me.ucrInputMaxX)
+        Me.tbSubset.Controls.Add(Me.lblMinT)
+        Me.tbSubset.Controls.Add(Me.ucrInputMinT)
         Me.tbSubset.Controls.Add(Me.lblMinZ)
         Me.tbSubset.Controls.Add(Me.ucrInputMinZ)
-        Me.tbSubset.Controls.Add(Me.lblMinimumLatitude)
-        Me.tbSubset.Controls.Add(Me.ucrInputMinLat)
-        Me.tbSubset.Controls.Add(Me.lblMinimumLongitude)
-        Me.tbSubset.Controls.Add(Me.ucrInputMinLong)
+        Me.tbSubset.Controls.Add(Me.lblMinY)
+        Me.tbSubset.Controls.Add(Me.ucrInputMinY)
+        Me.tbSubset.Controls.Add(Me.lblMinX)
+        Me.tbSubset.Controls.Add(Me.ucrInputMinX)
         Me.tbSubset.Location = New System.Drawing.Point(4, 22)
         Me.tbSubset.Name = "tbSubset"
         Me.tbSubset.Padding = New System.Windows.Forms.Padding(3)
@@ -316,22 +316,22 @@ Partial Class sdgOpenNetCDF
     End Sub
 
     Friend WithEvents ucrInputFileDetails As ucrInputTextBox
-    Friend WithEvents ucrInputMaxTime As ucrInputTextBox
+    Friend WithEvents ucrInputMaxT As ucrInputTextBox
     Friend WithEvents ucrInputMaxZ As ucrInputTextBox
-    Friend WithEvents ucrInputMaxLat As ucrInputTextBox
-    Friend WithEvents ucrInputMaxLong As ucrInputTextBox
-    Friend WithEvents ucrInputMinTime As ucrInputTextBox
+    Friend WithEvents ucrInputMaxY As ucrInputTextBox
+    Friend WithEvents ucrInputMaxX As ucrInputTextBox
+    Friend WithEvents ucrInputMinT As ucrInputTextBox
     Friend WithEvents ucrInputMinZ As ucrInputTextBox
-    Friend WithEvents ucrInputMinLat As ucrInputTextBox
-    Friend WithEvents ucrInputMinLong As ucrInputTextBox
-    Friend WithEvents lblMinimumLongitude As Label
-    Friend WithEvents lblMinimumLatitude As Label
+    Friend WithEvents ucrInputMinY As ucrInputTextBox
+    Friend WithEvents ucrInputMinX As ucrInputTextBox
+    Friend WithEvents lblMinX As Label
+    Friend WithEvents lblMinY As Label
     Friend WithEvents lblMinZ As Label
-    Friend WithEvents lblMinTime As Label
-    Friend WithEvents lblMaxTime As Label
+    Friend WithEvents lblMinT As Label
+    Friend WithEvents lblMaxT As Label
     Friend WithEvents lblMaxZ As Label
-    Friend WithEvents lblMaxLatitude As Label
-    Friend WithEvents lblMaxLongitude As Label
+    Friend WithEvents lblMaxY As Label
+    Friend WithEvents lblMaxX As Label
     Friend WithEvents tbNetCDF As TabControl
     Friend WithEvents tbSubset As TabPage
     Friend WithEvents tbOptions As TabPage
