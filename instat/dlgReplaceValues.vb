@@ -150,6 +150,7 @@ Public Class dlgReplaceValues
 
         clsReplace.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data")
         clsReplace.AddParameter("old_value", "-99", iPosition:=3)
+        clsReplace.RemoveParameterByName("old_is_missing")
         clsReplace.AddParameter("new_is_missing", "TRUE", iPosition:=8)
         ucrBase.clsRsyntax.SetBaseRFunction(clsReplace)
     End Sub
@@ -220,7 +221,9 @@ Public Class dlgReplaceValues
                 clsReplace.RemoveParameterByName("from_last")
             End If
         Else
-            If rdoOldMissing.Checked Then
+            If rdoOldValue.Checked Then
+                clsReplace.RemoveParameterByName("old_is_missing")
+            ElseIf rdoOldMissing.Checked Then
                 clsReplace.AddParameter("old_is_missing", "TRUE")
             Else
                 clsReplace.RemoveParameterByName("old_is_missing")
