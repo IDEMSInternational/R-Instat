@@ -244,12 +244,12 @@ Public Class dlgExtremesClimatic
     Private Sub SetAssignName()
         If rdoMinMax.Checked Then
             If rdoMax.Checked Then
-                ucrInputSave.SetName("max_" & ucrReceiverElement.GetVariableNames(False))
+                ucrInputSave.SetName("max")
             Else
-                ucrInputSave.SetName("min_" & ucrReceiverElement.GetVariableNames(False))
+                ucrInputSave.SetName("min")
             End If
         ElseIf rdoPeaks.Checked Then
-            ucrInputSave.SetName("peaks_" & ucrReceiverElement.GetVariableNames(False))
+            ucrInputSave.SetName("peaks")
         End If
     End Sub
 
@@ -318,7 +318,6 @@ Public Class dlgExtremesClimatic
     Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlValueChanged
         MinMaxFunction()
         PeaksFunction()
-        SetAssignName()
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
