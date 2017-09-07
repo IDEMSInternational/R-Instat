@@ -52,30 +52,6 @@ Public Class dlgBarAndPieChart
         TestOkEnabled()
     End Sub
 
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrFactorReceiver.SetRCode(clsBarAesFunction, bReset)
-        ucrFactorReceiver.AddAdditionalCodeParameterPair(clsPieAesFunction, New RParameter("fill", 0), iAdditionalPairNo:=1)
-
-        ucrSecondReceiver.SetRCode(clsBarAesFunction, bReset)
-
-        ucrSaveBar.SetRCode(clsBaseOperator, bReset)
-        ucrBarChartSelector.SetRCode(clsRggplotFunction, bReset)
-        ucrPnlOptions.SetRCode(clsBaseOperator, bReset)
-        ucrChkFlipCoordinates.SetRCode(clsBaseOperator, bReset)
-    End Sub
-
-    Private Sub TestOkEnabled()
-        If ucrFactorReceiver.IsEmpty OrElse Not ucrSaveBar.IsComplete Then
-            ucrBase.OKEnabled(False)
-        Else
-            ucrBase.OKEnabled(True)
-        End If
-    End Sub
-
-    Private Sub AllControls_ContenctsChanged() Handles ucrFactorReceiver.ControlContentsChanged, ucrSaveBar.ControlContentsChanged
-        TestOkEnabled()
-    End Sub
-
     Private Sub InitialiseDialog()
         Dim clsCoordFlipFunc As New RFunction
         Dim clsCoordFlipParam As New RParameter
@@ -91,25 +67,25 @@ Public Class dlgBarAndPieChart
         ucrPnlOptions.AddParameterPresentCondition(rdoBarChart, "coord_polar", False)
 
         ucrPnlOptions.AddToLinkedControls(ucrChkFlipCoordinates, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls(ucrSecondReceiver, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrSecondReceiver.SetLinkedDisplayControl(lblSecondFactor)
+        ucrPnlOptions.AddToLinkedControls(ucrReceiverSecond, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrReceiverSecond.SetLinkedDisplayControl(lblSecondFactor)
 
         ucrBarChartSelector.SetParameter(New RParameter("data", 0))
         ucrBarChartSelector.SetParameterIsrfunction()
 
-        ucrFactorReceiver.Selector = ucrBarChartSelector
-        ucrFactorReceiver.SetIncludedDataTypes({"factor"})
-        ucrFactorReceiver.strSelectorHeading = "Factors"
-        ucrFactorReceiver.SetParameter(New RParameter("x", 0))
-        ucrFactorReceiver.bWithQuotes = False
-        ucrFactorReceiver.SetParameterIsString()
+        ucrReceiverFactor.Selector = ucrBarChartSelector
+        ucrReceiverFactor.SetIncludedDataTypes({"factor"})
+        ucrReceiverFactor.strSelectorHeading = "Factors"
+        ucrReceiverFactor.SetParameter(New RParameter("x", 0))
+        ucrReceiverFactor.bWithQuotes = False
+        ucrReceiverFactor.SetParameterIsString()
 
-        ucrSecondReceiver.Selector = ucrBarChartSelector
-        ucrSecondReceiver.SetIncludedDataTypes({"factor"})
-        ucrSecondReceiver.strSelectorHeading = "Factors"
-        ucrSecondReceiver.SetParameter(New RParameter("fill", 1))
-        ucrSecondReceiver.bWithQuotes = False
-        ucrSecondReceiver.SetParameterIsString()
+        ucrReceiverSecond.Selector = ucrBarChartSelector
+        ucrReceiverSecond.SetIncludedDataTypes({"factor"})
+        ucrReceiverSecond.strSelectorHeading = "Factors"
+        ucrReceiverSecond.SetParameter(New RParameter("fill", 1))
+        ucrReceiverSecond.bWithQuotes = False
+        ucrReceiverSecond.SetParameterIsString()
 
         ' sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         ucrSaveBar.SetIsComboBox()
@@ -142,7 +118,7 @@ Public Class dlgBarAndPieChart
 
         ucrBarChartSelector.Reset()
         ucrBarChartSelector.SetGgplotFunction(clsBaseOperator)
-        ucrFactorReceiver.SetMeAsReceiver()
+        ucrReceiverFactor.SetMeAsReceiver()
         ucrSaveBar.Reset()
         bResetSubdialog = True
         bResetBarLayerSubdialog = True
@@ -181,25 +157,23 @@ Public Class dlgBarAndPieChart
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
     End Sub
 
-    Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged
-        SetDialogOptions()
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrReceiverFactor.SetRCode(clsBarAesFunction, bReset)
+        ucrReceiverFactor.AddAdditionalCodeParameterPair(clsPieAesFunction, New RParameter("fill", 0), iAdditionalPairNo:=1)
+
+        ucrReceiverSecond.SetRCode(clsBarAesFunction, bReset)
+
+        ucrSaveBar.SetRCode(clsBaseOperator, bReset)
+        ucrBarChartSelector.SetRCode(clsRggplotFunction, bReset)
+        ucrPnlOptions.SetRCode(clsBaseOperator, bReset)
+        ucrChkFlipCoordinates.SetRCode(clsBaseOperator, bReset)
     End Sub
 
-    Private Sub SetDialogOptions()
-        If rdoBarChart.Checked Then
-            clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsBarAesFunction, iPosition:=1)
-            ucrSaveBar.SetPrefix("bar")
-            cmdPieChartOptions.Visible = False
-            cmdBarChartOptions.Visible = True
-            clsRgeomBarFunction.RemoveParameterByName("width")
-            clsBaseOperator.RemoveParameter(clsRCoordPolarParam)
-        ElseIf rdoPieChart.Checked Then
-            clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsPieAesFunction, iPosition:=1)
-            ucrSaveBar.SetPrefix("pie")
-            clsRgeomBarFunction.AddParameter("width", "1")
-            clsBaseOperator.AddParameter(clsRCoordPolarParam)
-            cmdPieChartOptions.Visible = True
-            cmdBarChartOptions.Visible = False
+    Private Sub TestOkEnabled()
+        If ucrReceiverFactor.IsEmpty OrElse Not ucrSaveBar.IsComplete Then
+            ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
         End If
     End Sub
 
@@ -222,14 +196,14 @@ Public Class dlgBarAndPieChart
         sdgLayerOptions.ShowDialog()
         bResetBarLayerSubdialog = False
         If clsBarAesFunction.ContainsParameter("x") Then
-            ucrFactorReceiver.Add(clsBarAesFunction.GetParameter("x").strArgumentValue)
+            ucrReceiverFactor.Add(clsBarAesFunction.GetParameter("x").strArgumentValue)
         Else
-            ucrFactorReceiver.Clear()
+            ucrReceiverFactor.Clear()
         End If
         If clsBarAesFunction.ContainsParameter("fill") Then
-            ucrSecondReceiver.Add(clsBarAesFunction.GetParameter("fill").strArgumentValue)
+            ucrReceiverSecond.Add(clsBarAesFunction.GetParameter("fill").strArgumentValue)
         Else
-            ucrSecondReceiver.Clear()
+            ucrReceiverSecond.Clear()
         End If
         TestOkEnabled()
     End Sub
@@ -243,14 +217,41 @@ Public Class dlgBarAndPieChart
             clsPieAesFunction.AddParameter("x", Chr(34) & Chr(34))
         End If
         If clsPieAesFunction.ContainsParameter("fill") Then
-            ucrFactorReceiver.Add(clsPieAesFunction.GetParameter("fill").strArgumentValue)
+            ucrReceiverFactor.Add(clsPieAesFunction.GetParameter("fill").strArgumentValue)
         Else
-            ucrFactorReceiver.Clear()
+            ucrReceiverFactor.Clear()
         End If
         TestOkEnabled()
     End Sub
 
-    Private Sub AllControlsChanged() Handles ucrSaveBar.ControlContentsChanged, ucrFactorReceiver.ControlContentsChanged
+    Private Sub SetDialogOptions()
+        If rdoBarChart.Checked Then
+            clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsBarAesFunction, iPosition:=1)
+            cmdPieChartOptions.Visible = False
+            cmdBarChartOptions.Visible = True
+            clsRgeomBarFunction.RemoveParameterByName("width")
+            clsBaseOperator.RemoveParameter(clsRCoordPolarParam)
+            If Not ucrSaveBar.bUserTyped Then
+                ucrSaveBar.SetPrefix("bar")
+            End If
+        ElseIf rdoPieChart.Checked Then
+            clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsPieAesFunction, iPosition:=1)
+            clsRgeomBarFunction.AddParameter("width", "1")
+            clsBaseOperator.AddParameter(clsRCoordPolarParam)
+            ucrReceiverFactor.SetMeAsReceiver()
+            cmdPieChartOptions.Visible = True
+            cmdBarChartOptions.Visible = False
+            If Not ucrSaveBar.bUserTyped Then
+                ucrSaveBar.SetPrefix("pie")
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged
+        SetDialogOptions()
+    End Sub
+
+    Private Sub CoreControls_ContentsChanged() Handles ucrReceiverFactor.ControlContentsChanged, ucrSaveBar.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
