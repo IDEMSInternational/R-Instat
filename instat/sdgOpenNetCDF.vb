@@ -62,13 +62,13 @@ Public Class sdgOpenNetCDF
         ucrInputMaxZ.SetValidationTypeAsNumeric()
         ucrInputMaxZ.AddQuotesIfUnrecognised = False
 
-        ucrInputMinT.SetParameter(New RParameter("min", 0, bNewIncludeArgumentName:=False))
-        ucrInputMinT.SetValidationTypeAsNumeric()
-        ucrInputMinT.AddQuotesIfUnrecognised = False
+        ucrInputMinS.SetParameter(New RParameter("min", 0, bNewIncludeArgumentName:=False))
+        ucrInputMinS.SetValidationTypeAsNumeric()
+        ucrInputMinS.AddQuotesIfUnrecognised = False
 
-        ucrInputMaxT.SetParameter(New RParameter("max", 1, bNewIncludeArgumentName:=False))
-        ucrInputMaxT.SetValidationTypeAsNumeric()
-        ucrInputMaxT.AddQuotesIfUnrecognised = False
+        ucrInputMaxS.SetParameter(New RParameter("max", 1, bNewIncludeArgumentName:=False))
+        ucrInputMaxS.SetValidationTypeAsNumeric()
+        ucrInputMaxS.AddQuotesIfUnrecognised = False
 
         ucrChkOnlyDataVariables.SetParameter(New RParameter("only_data_vars", 2))
         ucrChkOnlyDataVariables.SetText("Only Data Variables")
@@ -83,8 +83,8 @@ Public Class sdgOpenNetCDF
         ucrChkIncludeMetadata.SetRDefault("TRUE")
 
         lstDims = New List(Of String)(New String() {"X", "Y", "Z", "T"})
-        lstMinTextBoxes = New List(Of ucrInputTextBox)(New ucrInputTextBox() {ucrInputMinX, ucrInputMinY, ucrInputMinZ, ucrInputMinT})
-        lstMaxTextBoxes = New List(Of ucrInputTextBox)(New ucrInputTextBox() {ucrInputMaxX, ucrInputMaxY, ucrInputMaxZ, ucrInputMaxT})
+        lstMinTextBoxes = New List(Of ucrInputTextBox)(New ucrInputTextBox() {ucrInputMinX, ucrInputMinY, ucrInputMinZ, ucrInputMinS})
+        lstMaxTextBoxes = New List(Of ucrInputTextBox)(New ucrInputTextBox() {ucrInputMaxX, ucrInputMaxY, ucrInputMaxZ, ucrInputMaxS})
         lstMinLabels = New List(Of Label)(New Label() {lblMinX, lblMinY, lblMinZ, lblMinT})
         lstMaxLabels = New List(Of Label)(New Label() {lblMaxX, lblMaxY, lblMaxZ, lblMaxT})
 
@@ -173,8 +173,8 @@ Public Class sdgOpenNetCDF
             ucrInputMaxY.SetRCode(clsYLimitsFunction, bReset, bCloneIfNeeded:=True)
             ucrInputMinZ.SetRCode(clsZLimitsFunction, bReset, bCloneIfNeeded:=True)
             ucrInputMaxZ.SetRCode(clsZLimitsFunction, bReset, bCloneIfNeeded:=True)
-            ucrInputMinT.SetRCode(clsTLimitsFunction, bReset, bCloneIfNeeded:=True)
-            ucrInputMaxT.SetRCode(clsTLimitsFunction, bReset, bCloneIfNeeded:=True)
+            ucrInputMinS.SetRCode(clsTLimitsFunction, bReset, bCloneIfNeeded:=True)
+            ucrInputMaxS.SetRCode(clsTLimitsFunction, bReset, bCloneIfNeeded:=True)
 
             ucrChkOnlyDataVariables.SetRCode(clsImportNetcdfFunction, bReset, bCloneIfNeeded:=True)
             ucrChkKeepRawTime.SetRCode(clsImportNetcdfFunction, bReset, bCloneIfNeeded:=True)
