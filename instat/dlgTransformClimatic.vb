@@ -352,26 +352,26 @@ Public Class dlgTransformClimatic
         If rdoMoving.Checked Then
             MovingColNames()
         ElseIf rdoCount.Checked Then
-            ucrInputColName.SetName("count_" & ucrReceiverData.GetVariableNames(False))
+            ucrInputColName.SetName("count")
         ElseIf rdoSpell.Checked Then
-            ucrInputColName.SetName("spell_" & ucrReceiverData.GetVariableNames(False))
+            ucrInputColName.SetName("spell")
         ElseIf rdoWaterBalance.Checked Then
-            ucrInputColName.SetName("water_" & ucrReceiverData.GetVariableNames(False))
+            ucrInputColName.SetName("water")
         End If
     End Sub
 
     Private Sub MovingColNames()
         Select Case ucrInputSum.GetText
             Case "Sum"
-                ucrInputColName.SetName("moving_sum_" & ucrReceiverData.GetVariableNames(False))
+                ucrInputColName.SetName("moving_sum")
             Case "Maximum"
-                ucrInputColName.SetName("moving_max_" & ucrReceiverData.GetVariableNames(False))
+                ucrInputColName.SetName("moving_max")
             Case "Minimum"
-                ucrInputColName.SetName("moving_min_" & ucrReceiverData.GetVariableNames(False))
+                ucrInputColName.SetName("moving_min")
             Case "Mean"
-                ucrInputColName.SetName("moving_mean_" & ucrReceiverData.GetVariableNames(False))
+                ucrInputColName.SetName("moving_mean")
             Case Else
-                ucrInputColName.SetName("moving_" & ucrReceiverData.GetVariableNames(False))
+                ucrInputColName.SetName("moving")
         End Select
     End Sub
 
@@ -399,7 +399,6 @@ Public Class dlgTransformClimatic
 
     Private Sub ucrReceiverData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlValueChanged
         RainDays()
-        SetAssignName()
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
