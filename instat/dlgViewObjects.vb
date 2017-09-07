@@ -48,6 +48,7 @@ Public Class dlgViewObjects
         ucrReceiverSelectedObject.SetMeAsReceiver()
         ucrReceiverSelectedObject.strSelectorHeading = "Objects"
         ucrReceiverSelectedObject.SetItemType("object")
+        ucrReceiverSelectedObject.bAutoFill = True
 
         ucrPnlContentsToView.bAllowNonConditionValues = True ' temporary
         ' rdo's
@@ -57,6 +58,11 @@ Public Class dlgViewObjects
         'ucrPnlContentsToView.AddRadioButton(rdoComponent, Chr(34) & " " & Chr(34))
         'ucrPnlContentsToView.AddRadioButton(rdoViewGraph, Chr(34) & " " & Chr(34))
         'ucrPnlContentsToView.SetRDefault(Chr(34) & "" & Chr(34))
+
+        'we are disabling this for now until they're working correctly.
+        rdoStructure.Enabled = False
+        rdoAllContents.Enabled = False
+        rdoComponent.Enabled = False
     End Sub
 
     Private Sub SetDefaults()
@@ -90,7 +96,7 @@ Public Class dlgViewObjects
 
     Private Sub SetiCallType()
         If rdoViewGraph.Checked Then
-            ucrBase.clsRsyntax.iCallType = 0
+            ucrBase.clsRsyntax.iCallType = 3
         Else
             ucrBase.clsRsyntax.iCallType = 2
         End If
