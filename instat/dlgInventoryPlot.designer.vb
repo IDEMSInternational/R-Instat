@@ -47,7 +47,6 @@ Partial Class dlgInventoryPlot
         Me.grpPlotType = New System.Windows.Forms.GroupBox()
         Me.rdoyear_doy_plot = New System.Windows.Forms.RadioButton()
         Me.rdoDatePlot = New System.Windows.Forms.RadioButton()
-        Me.ucrChkDisplayRainDays = New instat.ucrCheck()
         Me.ucrPnlPlotType = New instat.UcrPanel()
         Me.ucrInputFacetBy = New instat.ucrInputComboBox()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
@@ -152,14 +151,6 @@ Partial Class dlgInventoryPlot
         Me.rdoDatePlot.TabStop = True
         Me.rdoDatePlot.Text = "Date Plot"
         Me.rdoDatePlot.UseVisualStyleBackColor = True
-        '
-        'ucrChkDisplayRainDays
-        '
-        Me.ucrChkDisplayRainDays.Checked = False
-        Me.ucrChkDisplayRainDays.Location = New System.Drawing.Point(10, 340)
-        Me.ucrChkDisplayRainDays.Name = "ucrChkDisplayRainDays"
-        Me.ucrChkDisplayRainDays.Size = New System.Drawing.Size(151, 20)
-        Me.ucrChkDisplayRainDays.TabIndex = 18
         '
         'ucrPnlPlotType
         '
@@ -279,7 +270,6 @@ Partial Class dlgInventoryPlot
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(423, 475)
         Me.Controls.Add(Me.lblGraphTitle)
-        Me.Controls.Add(Me.ucrChkDisplayRainDays)
         Me.Controls.Add(Me.grpPlotType)
         Me.Controls.Add(Me.lblFacetBy)
         Me.Controls.Add(Me.ucrInputFacetBy)
@@ -330,6 +320,5 @@ Partial Class dlgInventoryPlot
     Friend WithEvents grpPlotType As GroupBox
     Friend WithEvents rdoyear_doy_plot As RadioButton
     Friend WithEvents rdoDatePlot As RadioButton
-    Friend WithEvents ucrChkDisplayRainDays As ucrCheck
     Friend WithEvents lblGraphTitle As Label
 End Class

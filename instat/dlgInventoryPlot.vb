@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class dlgInventoryPlot
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private bResetSubdialog As Boolean = False
     Private clsDefaultRFunction As New RFunction
 
     Private Sub dlgInventoryPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -67,10 +68,6 @@ Public Class dlgInventoryPlot
         ucrInputTitle.SetParameter(New RParameter("graph_title", 5))
         ucrInputTitle.SetRDefault("Inventory Plot")
 
-        ucrChkDisplayRainDays.SetParameter(New RParameter("display_rain_days", 13), bNewChangeParameterValue:=True)
-        ucrChkDisplayRainDays.SetText("Display Rain Days")
-        ucrChkDisplayRainDays.SetRDefault("FALSE")
-
         ucrChkShowNonMissing.SetText("Show Non Missing")
         ucrChkShowNonMissing.Enabled = False ' this currently has no parameter associated with it
 
@@ -100,7 +97,7 @@ Public Class dlgInventoryPlot
 
     Private Sub SetDefaults()
         clsDefaultRFunction = New RFunction
-
+        bResetSubdialog = True
         ucrInventoryPlotSelector.Reset()
         ucrSaveGraph.Reset()
         ucrReceiverDate.SetMeAsReceiver()
@@ -128,9 +125,9 @@ Public Class dlgInventoryPlot
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        'there needs to be work on sdgplots before this could be linked 
-        'sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
+        'sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrSelectorBoxPlot, bReset:=bResetSubdialog)
         'sdgPlots.ShowDialog()
+        'bResetSubdialog = False
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -141,5 +138,11 @@ Public Class dlgInventoryPlot
 
     Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveGraph.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged, ucrInputTitle.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub cmdInventoryPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdInventoryPlotOptions.Click
+        sdgInventoryPlot.SetRFunction(clsDefaultRFunction, bResetSubdialog)
+        bResetSubdialog = False
+        sdgInventoryPlot.ShowDialog()
     End Sub
 End Class
