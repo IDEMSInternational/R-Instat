@@ -113,6 +113,8 @@ Public Class sdgOpenNetCDF
         Dim bShowDimension As Boolean
         Dim dtMin As DateTime
         Dim dtMax As DateTime
+        Dim strTemp As String
+        Dim strScript As String = ""
 
         If Not bControlsInitialised Then
             InitialiseControls()
@@ -128,7 +130,6 @@ Public Class sdgOpenNetCDF
 
         clsTLimitsFunction.AddParameter("min", clsRFunctionParameter:=clsAsDateMin)
         clsTLimitsFunction.AddParameter("max", clsRFunctionParameter:=clsAsDateMax)
-        'TODO Add S function to list once extra text boxes added
         lstFunctions = New List(Of RFunction)(New RFunction() {clsXLimitsFunction, clsYLimitsFunction, clsZLimitsFunction, clsSLimitsFunction, clsTLimitsFunction})
 
         ucrInputFileDetails.SetName(strNewShortDescription)
@@ -137,7 +138,11 @@ Public Class sdgOpenNetCDF
         clsGetDimNames.SetPackageName("ncdf4.helpers")
         clsGetDimNames.SetRCommand("nc.get.dim.axes")
         clsGetDimNames.AddParameter("f", clsRFunctionParameter:=clsNcOpenFunction)
-        expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDimNames.ToScript, bSilent:=True)
+        strTemp = clsGetDimNames.ToScript(strScript)
+        If strScript <> "" Then
+            frmMain.clsRLink.RunScript(strScript, strComment:="Opening nc file", bUpdateGrids:=False)
+        End If
+        expTemp = frmMain.clsRLink.RunInternalScriptGetValue(strTemp, bSilent:=True)
         If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
             strDimNames = expTemp.AsCharacter.Names.ToArray
             strDimAxes = expTemp.AsCharacter.ToArray
@@ -220,7 +225,7 @@ Public Class sdgOpenNetCDF
                         lstMinTextBoxes(i).Visible = True
                         lstMaxTextBoxes(i).Visible = True
                         lstMinLabels(i).Visible = True
-                        lstMinLabels(i).Visible = True
+                        lstMaxLabels(i).Visible = True
                         lstMinTextBoxes(i).SetValidationTypeAsNumeric(dcmMin:=dcmMin, dcmMax:=dcmMax)
                         lstMaxTextBoxes(i).SetValidationTypeAsNumeric(dcmMin:=dcmMin, dcmMax:=dcmMax)
                         lstFunctions(i).AddParameter("min", dcmMin, bIncludeArgumentName:=False)
@@ -231,7 +236,7 @@ Public Class sdgOpenNetCDF
                         lstMinTextBoxes(i).Visible = False
                         lstMaxTextBoxes(i).Visible = False
                         lstMinLabels(i).Visible = False
-                        lstMinLabels(i).Visible = False
+                        lstMaxLabels(i).Visible = False
                         lstAxesLabels(i).Text = "No " & lstDims(i) & " dimension."
                     End If
                 End If
