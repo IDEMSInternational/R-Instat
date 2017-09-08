@@ -105,9 +105,9 @@ Partial Class dlgOneVarFitModel
         Me.rdoExactCase.FlatAppearance.BorderSize = 2
         Me.rdoExactCase.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoExactCase.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoExactCase.Location = New System.Drawing.Point(194, 11)
+        Me.rdoExactCase.Location = New System.Drawing.Point(219, 11)
         Me.rdoExactCase.Name = "rdoExactCase"
-        Me.rdoExactCase.Size = New System.Drawing.Size(126, 28)
+        Me.rdoExactCase.Size = New System.Drawing.Size(93, 28)
         Me.rdoExactCase.TabIndex = 41
         Me.rdoExactCase.Text = "Exact Solution"
         Me.rdoExactCase.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -120,9 +120,9 @@ Partial Class dlgOneVarFitModel
         Me.rdoGeneralCase.FlatAppearance.BorderSize = 2
         Me.rdoGeneralCase.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoGeneralCase.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoGeneralCase.Location = New System.Drawing.Point(76, 11)
+        Me.rdoGeneralCase.Location = New System.Drawing.Point(128, 11)
         Me.rdoGeneralCase.Name = "rdoGeneralCase"
-        Me.rdoGeneralCase.Size = New System.Drawing.Size(122, 28)
+        Me.rdoGeneralCase.Size = New System.Drawing.Size(93, 28)
         Me.rdoGeneralCase.TabIndex = 40
         Me.rdoGeneralCase.Text = "General Case"
         Me.rdoGeneralCase.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -257,7 +257,7 @@ Partial Class dlgOneVarFitModel
         '
         'ucrPnlGeneralExactCase
         '
-        Me.ucrPnlGeneralExactCase.Location = New System.Drawing.Point(67, 7)
+        Me.ucrPnlGeneralExactCase.Location = New System.Drawing.Point(92, 7)
         Me.ucrPnlGeneralExactCase.Name = "ucrPnlGeneralExactCase"
         Me.ucrPnlGeneralExactCase.Size = New System.Drawing.Size(266, 35)
         Me.ucrPnlGeneralExactCase.TabIndex = 39

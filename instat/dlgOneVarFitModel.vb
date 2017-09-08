@@ -68,8 +68,6 @@ Public Class dlgOneVarFitModel
         ucrSaveModel.SetIsComboBox()
         ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
 
-        ucrChkBinModify.SetText("Modify Conditions for 'Success'")
-
         ucrPnlGeneralExactCase.AddRadioButton(rdoGeneralCase)
         ucrPnlGeneralExactCase.AddRadioButton(rdoExactCase)
 
@@ -108,13 +106,9 @@ Public Class dlgOneVarFitModel
         ' Different default states for each of these radio buttons. enorm also doesn't connect to this option.
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudHyp, {rdoExactCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ' Non parametric tests
-        ucrPnlWilcoxVarTest.AddRadioButton(rdoWilcoxSignTest)
-        ucrPnlWilcoxVarTest.AddRadioButton(rdoVarSignTest)
-        ucrPnlWilcoxVarTest.AddFunctionNamesCondition(rdoWilcoxSignTest, "wilcox.test")
-        ucrPnlWilcoxVarTest.AddFunctionNamesCondition(rdoVarSignTest, "signmedian.test")
+        ' Binomial tests
+        ucrChkBinModify.SetText("Modify Conditions for 'Success'")
 
-        ' to move
         ucrOperator.SetItems({"==", "<", "<=", ">", ">=", "!="})
         dctucrOperator.Add("(==)", "==")
         dctucrOperator.Add("<", "<")
@@ -122,11 +116,29 @@ Public Class dlgOneVarFitModel
         dctucrOperator.Add("(>)", ">")
         dctucrOperator.Add("(>=)", ">=")
         dctucrOperator.Add("(!=)", "!=")
+        ucrOperator.SetLinkedDisplayControl(lblSuccessIf)
+
+        ' If it is numeric
+        ucrNudBinomialConditions.SetMinMax(Integer.MinValue, Integer.MaxValue)
+
+        ' If it is a factor
+        ucrVariables.Enabled = False ' Temporary
+        ucrVariables.SetLinkedDisplayControl(lblEquals)
+        ' ucrVariables.SetItemsTypeAsColumns()    'we want SetItemsTypeAs factors in the column
+
+        ucrChkBinModify.AddToLinkedControls(ucrOperator, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkBinModify.AddToLinkedControls(ucrNudBinomialConditions, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True) ' if it's a numeric in the receiver
+        ' ucrChkBinModify.AddToLinkedControls(ucrVariables, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True) ' if it's a factor in the receiver
+
+        ' Non parametric tests
+        ucrPnlWilcoxVarTest.AddRadioButton(rdoWilcoxSignTest)
+        ucrPnlWilcoxVarTest.AddRadioButton(rdoVarSignTest)
+        ucrPnlWilcoxVarTest.AddFunctionNamesCondition(rdoWilcoxSignTest, "wilcox.test")
+        ucrPnlWilcoxVarTest.AddFunctionNamesCondition(rdoVarSignTest, "signmedian.test")
 
         'Disabled for now
         'rdoExactCase.Enabled = False
         'ucrOperator.SetItems(dctucrOperator)
-        ' ucrVariables.SetItemsTypeAsColumns()    'we want SetItemsTypeAs factors in the column
 
         'temp disabled as only works for numeric columns currently
         '.Enabled = False
@@ -227,8 +239,9 @@ Public Class dlgOneVarFitModel
         clsRNonSignTest.SetRCommand("signmedian.test")
         clsRNonSignTest.AddParameter("mu", 0, iPosition:=1)
 
-        clsRBinomTest.SetPackageName("stats")
+        clsRBinomTest.SetPackageName("mosaic")
         clsRBinomTest.SetRCommand("binom.test")
+        clsRBinomTest.AddParameter("p", 0.5, iPosition:=1)
 
         'Display Options/Functions
         clsRplotFunction.SetPackageName("graphics")
@@ -290,13 +303,13 @@ Public Class dlgOneVarFitModel
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRNonSignTest, New RParameter("x"), iAdditionalPairNo:=5)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRLength, New RParameter("x"), iAdditionalPairNo:=6)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRMean, New RParameter("x"), iAdditionalPairNo:=7)
-        'ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("x"), iAdditionalPairNo:=8)
+        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("x"), iAdditionalPairNo:=8)
 
         ucrNudHyp.AddAdditionalCodeParameterPair(clsVarTest, New RParameter("sigma.squared", 1), iAdditionalPairNo:=1)
         ucrNudHyp.AddAdditionalCodeParameterPair(clsRWilcoxTest, ucrNudHyp.GetParameter(), iAdditionalPairNo:=2)
         ucrNudHyp.AddAdditionalCodeParameterPair(clsRNonSignTest, ucrNudHyp.GetParameter(), iAdditionalPairNo:=3)
         ucrNudHyp.AddAdditionalCodeParameterPair(clsRPoissonTest, New RParameter("r"), iAdditionalPairNo:=4)
-        'ucrNudHyp.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("p"), iAdditionalPairNo:=5)
+        ucrNudHyp.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("p", 1), iAdditionalPairNo:=5)
 
         ucrNudCI.AddAdditionalCodeParameterPair(clsRTTest, ucrNudCI.GetParameter(), iAdditionalPairNo:=1)
         ucrNudCI.AddAdditionalCodeParameterPair(clsVarTest, ucrNudCI.GetParameter(), iAdditionalPairNo:=2)
@@ -304,7 +317,7 @@ Public Class dlgOneVarFitModel
         ucrNudCI.AddAdditionalCodeParameterPair(clsRWilcoxTest, ucrNudCI.GetParameter(), iAdditionalPairNo:=4)
         ucrNudCI.AddAdditionalCodeParameterPair(clsRNonSignTest, ucrNudCI.GetParameter(), iAdditionalPairNo:=5)
         ucrNudCI.AddAdditionalCodeParameterPair(clsRPoissonTest, New RParameter("conf.level"), iAdditionalPairNo:=6)
-        'ucrNudCI.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("conf.level"), iAdditionalPairNo:=6)
+        ucrNudCI.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("conf.level"), iAdditionalPairNo:=6)
 
         ucrPnlGeneralExactCase.SetRCode(clsROneVarFitModel, bReset)
         ucrPnlNormal.SetRCode(clsRTTest, bReset)
@@ -318,24 +331,7 @@ Public Class dlgOneVarFitModel
         bRCodeSet = True
     End Sub
 
-    Private Sub ucrPnlStats_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlNormal.ControlValueChanged
-        SetBaseFunction()
-        Display()
-    End Sub
-
-    Private Sub ucrPnlWilcoxVarTest_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlWilcoxVarTest.ControlValueChanged
-        SetBaseFunction()
-        Display()
-    End Sub
-
-    Private Sub SetDistributions()
-        If rdoGeneralCase.Checked Then
-            ucrDistributionChoice.SetAllDistributions()
-        ElseIf rdoExactCase.Checked Then
-            ucrDistributionChoice.SetExactDistributions()
-        End If
-    End Sub
-
+    ' TODO: This needs to be completed
     Private Sub TestOKEnabled()
         If ucrSaveModel.IsComplete() AndAlso Not ucrReceiverVariable.IsEmpty AndAlso ucrDistributionChoice.ucrInputDistributions.cboInput.SelectedItem <> "" Then
             ucrBase.OKEnabled(True)
@@ -350,6 +346,15 @@ Public Class dlgOneVarFitModel
         TestOKEnabled()
     End Sub
 
+    Private Sub SetDistributions()
+        If rdoGeneralCase.Checked Then
+            ucrDistributionChoice.SetAllDistributions()
+        ElseIf rdoExactCase.Checked Then
+            ucrDistributionChoice.SetExactDistributions()
+        End If
+    End Sub
+
+    ' General
     Public Sub SetDataParameter()
         If rdoGeneralCase.Checked Then
             If Not ucrReceiverVariable.IsEmpty Then
@@ -379,6 +384,7 @@ Public Class dlgOneVarFitModel
             End If
         End If
 
+        ' for both exact and general cases
         If ucrDistributionChoice.lstCurrentDistributions.Count = 0 OrElse ucrReceiverVariable.IsEmpty() Then
             ucrDistributionChoice.Enabled = False
             ucrDistributionChoice.ucrInputDistributions.SetName("")
@@ -386,7 +392,6 @@ Public Class dlgOneVarFitModel
             ucrDistributionChoice.Enabled = True
         End If
     End Sub
-
 
     Public Sub ResponseConvert()
         If rdoGeneralCase.Checked Then
@@ -421,6 +426,54 @@ Public Class dlgOneVarFitModel
         End If
     End Sub
 
+    ' Is this meant to be just for general?
+    Private Sub PlotResiduals()
+        clsRplot.AddParameter("x", clsRFunctionParameter:=clsRfitdist)
+        clsRfitdist.AddParameter("distr", Chr(34) & ucrDistributionChoice.clsCurrDistribution.strRName & Chr(34))
+        If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" Then
+            clsRConvertInteger.SetRCommand("as.integer")
+            clsRfitdist.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger)
+        Else
+            clsRConvertVector.SetRCommand("as.vector")
+            clsRfitdist.AddParameter("data", clsRFunctionParameter:=clsRConvertVector)
+        End If
+        If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Then
+            clsRBinomStart.SetRCommand("mean")
+            clsRfitdist.AddParameter("start", clsRFunctionParameter:=clsRBinomStart)
+        End If
+    End Sub
+
+    Private Sub EnableOptions()
+        If Not ucrReceiverVariable.IsEmpty AndAlso rdoGeneralCase.Checked Then
+            cmdFittingOptions.Visible = True
+            cmdDisplayOptions.Visible = True
+        Else
+            cmdFittingOptions.Visible = False
+            cmdDisplayOptions.Visible = False
+        End If
+    End Sub
+
+    Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
+        sdgOneVarFitModDisplay.SetRCode(ucrBase.clsRsyntax, clsRNewOneVarFitModel:=clsROneVarFitModel, clsNewRLogLikFunction:=clsRLogLikFunction, clsNewRplotFunction:=clsRplotFunction, clsNewRplotPPComp:=clsRplotPPComp, clsNewRplotCdfcomp:=clsRplotCdfcomp, clsNewRplotQqComp:=clsRplotQqComp, clsNewRplotDenscomp:=clsRplotDensComp, ucrNewDistribution:=ucrDistribution, bReset:=bResetFitModDisplay)
+        bResetFitModDisplay = False
+        sdgOneVarFitModDisplay.ShowDialog()
+        EnableOptions()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub cmdFittingOptions_Click(sender As Object, e As EventArgs) Handles cmdFittingOptions.Click
+        sdgOneVarFitModel.SetRCode(ucrBase.clsRsyntax, clsROneVarFitModel, clsNewRLogLikFunction:=clsRLogLikFunction, ucrNewDistribution:=ucrDistribution, bReset:=bResetFittingOptions)
+        bResetFittingOptions = False
+        sdgOneVarFitModel.ShowDialog()
+        EnableOptions()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrChkConvertVariate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkConvertVariate.ControlValueChanged
+        SetDataParameter()
+    End Sub
+
+    ' Exact and General
     Public Sub SetBaseFunction()
         SetDataParameter()
         If rdoGeneralCase.Checked Then
@@ -487,80 +540,6 @@ Public Class dlgOneVarFitModel
         End If
     End Sub
 
-
-    Private Sub SetBinomialTest()
-        If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Binomial" Then
-            ucrReceiverVariable.SetDataType(strTemp:="integer" OrElse "numeric" OrElse "character" OrElse "factor")
-        End If
-        If ucrChkBinModify.Checked Then
-            If ucrReceiverVariable.strCurrDataType = "factor" OrElse ucrReceiverVariable.strCurrDataType = "character" Then
-                clsFactorOperator.SetOperation("==")
-                clsFactorOperator.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrReceiverVariable.GetVariables())
-                clsFactorOperator.AddParameter(strParameterValue:=ucrVariables.GetText())
-                clsRBinomTest.AddParameter("x", clsROperatorParameter:=clsFactorOperator)
-            Else
-                clsFunctionOperator.SetOperation(ucrOperator.GetText())
-                clsFunctionOperator.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrReceiverVariable.GetVariables())
-                clsFunctionOperator.AddParameter(strParameterValue:=ucrNudBinomialConditions.Value.ToString())
-                clsRBinomTest.AddParameter("x", clsROperatorParameter:=clsFunctionOperator)
-            End If
-        Else
-            clsRBinomTest.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetVariables())
-        End If
-        ucrBase.clsRsyntax.SetBaseRFunction(clsRBinomTest)
-    End Sub
-
-    Private Sub PlotResiduals()
-        clsRplot.AddParameter("x", clsRFunctionParameter:=clsRfitdist)
-        clsRfitdist.AddParameter("distr", Chr(34) & ucrDistributionChoice.clsCurrDistribution.strRName & Chr(34))
-        If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" Then
-            clsRConvertInteger.SetRCommand("as.integer")
-            clsRfitdist.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger)
-        Else
-            clsRConvertVector.SetRCommand("as.vector")
-            clsRfitdist.AddParameter("data", clsRFunctionParameter:=clsRConvertVector)
-        End If
-        If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Then
-            clsRBinomStart.SetRCommand("mean")
-            clsRfitdist.AddParameter("start", clsRFunctionParameter:=clsRBinomStart)
-        End If
-    End Sub
-
-    Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgOneVarFitModDisplay.SetRCode(ucrBase.clsRsyntax, clsRNewOneVarFitModel:=clsROneVarFitModel, clsNewRLogLikFunction:=clsRLogLikFunction, clsNewRplotFunction:=clsRplotFunction, clsNewRplotPPComp:=clsRplotPPComp, clsNewRplotCdfcomp:=clsRplotCdfcomp, clsNewRplotQqComp:=clsRplotQqComp, clsNewRplotDenscomp:=clsRplotDensComp, ucrNewDistribution:=ucrDistribution, bReset:=bResetFitModDisplay)
-        bResetFitModDisplay = False
-        sdgOneVarFitModDisplay.ShowDialog()
-        EnableOptions()
-        TestOKEnabled()
-    End Sub
-
-    Private Sub cmdFittingOptions_Click(sender As Object, e As EventArgs) Handles cmdFittingOptions.Click
-        sdgOneVarFitModel.SetRCode(ucrBase.clsRsyntax, clsROneVarFitModel, clsNewRLogLikFunction:=clsRLogLikFunction, ucrNewDistribution:=ucrDistribution, bReset:=bResetFittingOptions)
-        bResetFittingOptions = False
-        sdgOneVarFitModel.ShowDialog()
-        EnableOptions()
-        TestOKEnabled()
-    End Sub
-
-    Private Sub EnableOptions()
-        If Not ucrReceiverVariable.IsEmpty AndAlso rdoGeneralCase.Checked Then
-            cmdFittingOptions.Visible = True
-            cmdDisplayOptions.Visible = True
-        Else
-            cmdFittingOptions.Visible = False
-            cmdDisplayOptions.Visible = False
-        End If
-    End Sub
-
-    'Private Sub UcrBase_ClickOk(sender As Object, e As EventArgs) Handles UcrBase.ClickOk
-    '    If rdoGeneralCase.Checked Then
-    '    ElseIf rdoExactCase.Checked Then
-    '        If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal" OrElse ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" Then ' can remove this line once Bernouli residual plots are working
-    '            PlotResiduals()
-    '        End If
-    '    End If
-    'End Sub
-
     Private Sub Display()
         If rdoGeneralCase.Checked Then
             cmdFittingOptions.Visible = True
@@ -617,16 +596,6 @@ Public Class dlgOneVarFitModel
         End If
     End Sub
 
-    Private Sub ucrPnlGeneralExactCase_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGeneralExactCase.ControlValueChanged
-        EnableOptions()
-        BinomialConditions()
-        SetDistributions()
-        DataTypeAccepted()
-        ResponseConvert()
-        SetDataParameter()
-        Display()
-    End Sub
-
     Private Sub ucrDistributions_cboDistributionsIndexChanged() Handles ucrDistributionChoice.DistributionsIndexChanged
         SetBaseFunction()
         BinomialConditions()
@@ -637,59 +606,14 @@ Public Class dlgOneVarFitModel
         Display()
     End Sub
 
-    Private Sub lbls_VisibleChanged(sender As Object, e As EventArgs) Handles lblEquals.VisibleChanged, lblSuccessIf.VisibleChanged
+    Private Sub ucrPnlGeneralExactCase_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGeneralExactCase.ControlValueChanged
+        EnableOptions()
         BinomialConditions()
-    End Sub
-
-    Private Sub BinomialConditions()
-        If rdoExactCase.Checked AndAlso ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Then
-            'ucrChkBinModify.Enabled = True
-            ucrChkBinModify.Visible = True
-            If ucrChkBinModify.Checked Then
-                lblSuccessIf.Visible = True
-                If ucrReceiverVariable.strCurrDataType = "factor" Then
-                    ucrVariables.Visible = True
-                    lblEquals.Visible = True
-                Else
-                    lblEquals.Visible = False
-                    ucrNudBinomialConditions.Visible = True
-                    ucrOperator.Visible = True
-                    ucrVariables.Visible = False
-                End If
-            Else
-                lblSuccessIf.Visible = False
-                lblEquals.Visible = False
-                ucrNudBinomialConditions.Visible = False
-                ucrOperator.Visible = False
-                ucrVariables.Visible = False
-            End If
-        Else
-            ucrChkBinModify.Visible = False
-            ucrChkBinModify.Checked = False
-            lblSuccessIf.Visible = False
-            lblEquals.Visible = False
-            ucrNudBinomialConditions.Visible = False
-            ucrOperator.Visible = False
-            ucrVariables.Visible = False
-        End If
-        ' ucrNudBinomialConditions.Value = 1
-        ucrNudBinomialConditions.Maximum = Integer.MaxValue
-        ucrNudBinomialConditions.Minimum = Integer.MinValue
+        SetDistributions()
+        DataTypeAccepted()
+        ResponseConvert()
+        SetDataParameter()
         Display()
-    End Sub
-
-    Private Sub cboVariables_TextChanged() Handles ucrVariables.NameChanged
-        BinomialConditions()
-        SetBinomialTest()
-    End Sub
-
-    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveModel.ControlContentsChanged, ucrReceiverVariable.ControlContentsChanged
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrChkBinModify_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBinModify.ControlValueChanged
-        SetBinomialTest()
-        BinomialConditions()
     End Sub
 
     Private Sub UcrReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariable.ControlValueChanged
@@ -700,7 +624,90 @@ Public Class dlgOneVarFitModel
         DataTypeAccepted()
     End Sub
 
-    Private Sub ucrChkConvertVariate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkConvertVariate.ControlValueChanged
-        SetDataParameter()
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveModel.ControlContentsChanged, ucrReceiverVariable.ControlContentsChanged
+        TestOKEnabled()
     End Sub
+
+    ' Exact
+    ' Exact: Normal
+    Private Sub ucrPnlStats_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlNormal.ControlValueChanged
+        SetBaseFunction()
+        Display()
+    End Sub
+
+    ' Exact: Binomial
+    Private Sub SetBinomialTest()
+        If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Binomial" Then
+            ucrReceiverVariable.SetDataType(strTemp:="integer" OrElse "numeric" OrElse "character" OrElse "factor")
+        End If
+        If ucrChkBinModify.Checked Then
+            If ucrReceiverVariable.strCurrDataType = "factor" OrElse ucrReceiverVariable.strCurrDataType = "character" Then
+                clsFactorOperator.SetOperation("==")
+                clsFactorOperator.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrReceiverVariable.GetVariables())
+                clsFactorOperator.AddParameter(strParameterValue:=ucrVariables.GetText())
+                clsRBinomTest.AddParameter("x", clsROperatorParameter:=clsFactorOperator)
+            Else
+                clsFunctionOperator.SetOperation(ucrOperator.GetText())
+                clsFunctionOperator.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrReceiverVariable.GetVariables())
+                clsFunctionOperator.AddParameter(strParameterValue:=ucrNudBinomialConditions.Value.ToString())
+                clsRBinomTest.AddParameter("x", clsROperatorParameter:=clsFunctionOperator)
+            End If
+        Else
+            clsRBinomTest.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetVariables())
+        End If
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRBinomTest)
+    End Sub
+
+    Private Sub BinomialConditions()
+        If rdoExactCase.Checked AndAlso ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Then
+            'ucrChkBinModify.Enabled = True
+            ucrChkBinModify.Visible = True
+            If ucrChkBinModify.Checked Then
+                If ucrReceiverVariable.strCurrDataType = "factor" Then
+                    ucrVariables.Visible = True
+                Else
+                    ucrNudBinomialConditions.Visible = True
+                    ucrOperator.Visible = True
+                    ucrVariables.Visible = False
+                End If
+            Else
+                ucrNudBinomialConditions.Visible = False
+                ucrOperator.Visible = False
+                ucrVariables.Visible = False
+            End If
+        Else
+            ucrChkBinModify.Visible = False
+            ucrChkBinModify.Checked = False
+            ucrNudBinomialConditions.Visible = False
+            ucrOperator.Visible = False
+            ucrVariables.Visible = False
+        End If
+        ' ucrNudBinomialConditions.Value = 1
+        Display()
+    End Sub
+
+    Private Sub ucrChkBinModify_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBinModify.ControlValueChanged
+        SetBinomialTest()
+        BinomialConditions()
+    End Sub
+
+    Private Sub cboVariables_TextChanged() Handles ucrVariables.NameChanged
+        BinomialConditions()
+        SetBinomialTest()
+    End Sub
+
+    ' Exact: Non-Parametric
+    Private Sub ucrPnlWilcoxVarTest_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlWilcoxVarTest.ControlValueChanged
+        SetBaseFunction()
+        Display()
+    End Sub
+
+    'Private Sub UcrBase_ClickOk(sender As Object, e As EventArgs) Handles UcrBase.ClickOk
+    '    If rdoGeneralCase.Checked Then
+    '    ElseIf rdoExactCase.Checked Then
+    '        If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal" OrElse ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" Then ' can remove this line once Bernouli residual plots are working
+    '            PlotResiduals()
+    '        End If
+    '    End If
+    'End Sub
 End Class
