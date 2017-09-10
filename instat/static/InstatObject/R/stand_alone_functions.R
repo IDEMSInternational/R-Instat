@@ -278,7 +278,7 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
                 pcict_time <- ncdf4.helpers::nc.get.time.series(nc, time.dim.name = dim_var)
                 posixct_time <- PCICt::as.POSIXct.PCICt(pcict_time)
                 time_vals <- as.Date(posixct_time)
-                ind <- which(time_vals >= boundary[[dim_var]][1] & time_vals <= boundary[[dim_var]][2])
+                ind <- which(time_vals >= boundary[[dim_var]][[1]] & time_vals <= boundary[[dim_var]][[2]])
               })
             }
             else ind <- which(curr_dim_values >= boundary[[dim_var]][1] & curr_dim_values <= boundary[[dim_var]][2])
@@ -342,7 +342,6 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
       pcict_time <- ncdf4.helpers::nc.get.time.series(nc, time.dim.name = time_var)
       pcict_time <- pcict_time[time_ind]
       posixct_time <- PCICt::as.POSIXct.PCICt(pcict_time)
-      posixct_time <- posixct_time[time_ind]
       time_df[[paste0(time_var, "_full")]] <- posixct_time
       time_df[[paste0(time_var, "_date")]] <- as.Date(posixct_time)
     })
