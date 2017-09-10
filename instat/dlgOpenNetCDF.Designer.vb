@@ -120,9 +120,9 @@ Partial Class dlgOpenNetCDF
         '
         'cmdDetails
         '
-        Me.cmdDetails.Location = New System.Drawing.Point(332, 103)
+        Me.cmdDetails.Location = New System.Drawing.Point(314, 50)
         Me.cmdDetails.Name = "cmdDetails"
-        Me.cmdDetails.Size = New System.Drawing.Size(77, 23)
+        Me.cmdDetails.Size = New System.Drawing.Size(95, 23)
         Me.cmdDetails.TabIndex = 8
         Me.cmdDetails.Tag = "Show_Details"
         Me.cmdDetails.Text = "Show Details >>"
