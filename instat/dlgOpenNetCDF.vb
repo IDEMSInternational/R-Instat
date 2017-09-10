@@ -69,7 +69,7 @@ Public Class dlgOpenNetCDF
         Dim strTemp As String = ""
         Dim strScript As String = ""
 
-        If Not ucrInputFilePath.IsEmpty AndAlso File.Exists(Replace(strFilePath, "/", "\")) Then
+        If Not ucrInputFilePath.IsEmpty AndAlso File.Exists(strFilePath) Then
             strScript = clsNcOpenFunction.ToScript(strTemp)
             frmMain.clsRLink.RunScript(strTemp, strComment:="Opening Net CDF file", bUpdateGrids:=False, bSilent:=True)
             bCloseFile = True
@@ -166,18 +166,18 @@ Public Class dlgOpenNetCDF
                 'checks if the file name is not blank'
                 If dlgOpen.FileName <> "" Then
                     strFileName = Path.GetFileNameWithoutExtension(dlgOpen.FileName)
-                    strFilePath = Replace(dlgOpen.FileName, "\", "/")
+                    strFilePath = dlgOpen.FileName
                     strFileExt = Path.GetExtension(strFilePath)
-                    ucrInputFilePath.SetName(strFilePath)
+                    ucrInputFilePath.SetName(Replace(strFilePath, "\", "/"))
                     If strFileExt = ".nc" Then
                         CheckCloseFile()
                         bCloseFile = True
                         ucrInputDataName.SetName(frmMain.clsRLink.MakeValidText(strFileName))
-                        clsNcOpenFunction.AddParameter("filename", Chr(34) & strFilePath & Chr(34))
+                        clsNcOpenFunction.AddParameter("filename", Chr(34) & Replace(strFilePath, "\", "/") & Chr(34))
                         clsNcOpenFunction.ToScript(strTemp)
                         frmMain.clsRLink.RunScript(strTemp, strComment:="Opening netCDF file", bUpdateGrids:=False)
                         strFileType = "nc"
-                        clsRFileDetails.AddParameter("infile", Chr(34) & strFilePath & Chr(34), iPosition:=1)
+                        clsRFileDetails.AddParameter("infile", Chr(34) & Replace(strFilePath, "\", "/") & Chr(34), iPosition:=1)
                         FileDetails()
                         clsImportNetcdfFunction.RemoveParameterByName("boundary")
                     End If
@@ -187,7 +187,7 @@ Public Class dlgOpenNetCDF
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgOpenNetCDF.SetRFunction(clsNewImportNetcdfFunction:=clsImportNetcdfFunction, clsNewNcOpenFunction:=clsNcOpenFunction, clsNewBoundaryListFunction:=clsBoundaryListFunction, clsNewXLimitsFunction:=clsXLimtsFunction, clsNewYLimitsFunction:=clsYLimitsFunction, clsNewZLimitsFunction:=clsZLimtsFunction, clsNewSLimitsFunction:=clsSLimtsFunction, clsNewTLimitsFunction:=clsTLimitsFunction, strNewShortDescription:=strShort, bReset:=bResetSubdialog)
+        sdgOpenNetCDF.SetRFunction(clsNewImportNetcdfFunction:=clsImportNetcdfFunction, clsNewNcOpenFunction:=clsNcOpenFunction, strNewFilePath:=strFilePath, clsNewBoundaryListFunction:=clsBoundaryListFunction, clsNewXLimitsFunction:=clsXLimtsFunction, clsNewYLimitsFunction:=clsYLimitsFunction, clsNewZLimitsFunction:=clsZLimtsFunction, clsNewSLimitsFunction:=clsSLimtsFunction, clsNewTLimitsFunction:=clsTLimitsFunction, strNewShortDescription:=strShort, bReset:=bResetSubdialog)
         bResetSubdialog = False
         sdgOpenNetCDF.ShowDialog()
         TestOkEnabled()
