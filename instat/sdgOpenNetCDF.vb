@@ -29,6 +29,7 @@ Public Class sdgOpenNetCDF
     Private lstMaxLabels As List(Of Label)
     Private lstDims As List(Of String)
     Private lstFunctions As List(Of RFunction)
+    Private strFilePath As String
 
     Private Sub sdgOpenNetCDF_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -74,8 +75,11 @@ Public Class sdgOpenNetCDF
         ucrInputMaxS.SetValidationTypeAsNumeric()
         ucrInputMaxS.AddQuotesIfUnrecognised = False
 
+        'Temp disabled until code is stable with only_data_vars = False
+        ucrChkOnlyDataVariables.Enabled = False
+
         ucrChkOnlyDataVariables.SetParameter(New RParameter("only_data_vars", 2))
-        ucrChkOnlyDataVariables.SetText("Only Data Variables")
+        ucrChkOnlyDataVariables.SetText("Only Include Data Variables")
         ucrChkOnlyDataVariables.SetRDefault("TRUE")
 
         ucrChkKeepRawTime.SetParameter(New RParameter("keep_raw_time", 3))
@@ -95,7 +99,7 @@ Public Class sdgOpenNetCDF
         InitialiseTabs()
     End Sub
 
-    Public Sub SetRFunction(clsNewImportNetcdfFunction As RFunction, clsNewNcOpenFunction As RFunction, clsNewBoundaryListFunction As RFunction, clsNewXLimitsFunction As RFunction, clsNewYLimitsFunction As RFunction, clsNewZLimitsFunction As RFunction, clsNewSLimitsFunction As RFunction, clsNewTLimitsFunction As RFunction, strNewShortDescription As String, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsNewImportNetcdfFunction As RFunction, clsNewNcOpenFunction As RFunction, strNewFilePath As String, clsNewBoundaryListFunction As RFunction, clsNewXLimitsFunction As RFunction, clsNewYLimitsFunction As RFunction, clsNewZLimitsFunction As RFunction, clsNewSLimitsFunction As RFunction, clsNewTLimitsFunction As RFunction, strNewShortDescription As String, Optional bReset As Boolean = False)
         Dim numMinMax As NumericVector
         Dim chrMinMaxDates As CharacterVector
         Dim dcmMin As Nullable(Of Decimal)
@@ -133,133 +137,129 @@ Public Class sdgOpenNetCDF
         lstFunctions = New List(Of RFunction)(New RFunction() {clsXLimitsFunction, clsYLimitsFunction, clsZLimitsFunction, clsSLimitsFunction, clsTLimitsFunction})
 
         ucrInputFileDetails.SetName(strNewShortDescription)
-        'ucrInputFileDetails.txtInput.ScrollToCaret()
 
-        clsGetDimNames.SetPackageName("ncdf4.helpers")
-        clsGetDimNames.SetRCommand("nc.get.dim.axes")
-        clsGetDimNames.AddParameter("f", clsRFunctionParameter:=clsNcOpenFunction)
-        strTemp = clsGetDimNames.ToScript(strScript)
-        If strScript <> "" Then
-            frmMain.clsRLink.RunScript(strScript, strComment:="Opening nc file", bUpdateGrids:=False)
-        End If
-        expTemp = frmMain.clsRLink.RunInternalScriptGetValue(strTemp, bSilent:=True)
-        If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
-            strDimNames = expTemp.AsCharacter.Names.ToArray
-            strDimAxes = expTemp.AsCharacter.ToArray
-        Else
-            strDimNames = Nothing
-            strDimAxes = Nothing
-        End If
-        If strDimAxes IsNot Nothing Then
-            clsGetBoundsFunction.SetRCommand("nc_get_dim_min_max")
-            clsGetBoundsFunction.AddParameter("nc", clsRFunctionParameter:=clsNcOpenFunction)
-            For i As Integer = 0 To lstDims.Count - 1
-                dcmMin = Nothing
-                dcmMax = Nothing
-                strMinDate = ""
-                strMaxDate = ""
-                If strDimAxes.Contains(lstDims(i)) Then
-                    iIndex = Array.IndexOf(strDimAxes, lstDims(i))
-                    clsGetBoundsFunction.AddParameter("dimension", Chr(34) & strDimNames(iIndex) & Chr(34))
-                    expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetBoundsFunction.ToScript, bSilent:=True)
-                    If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
-                        If lstDims(i) = "T" Then
-                            chrMinMaxDates = expTemp.AsCharacter
-                            If chrMinMaxDates.Count = 2 Then
-                                strMinDate = chrMinMaxDates(0)
-                                strMaxDate = chrMinMaxDates(1)
-                            End If
-                        Else
-                            numMinMax = expTemp.AsNumeric
-                            If numMinMax.Count = 2 Then
-                                dcmMin = numMinMax(0)
-                                dcmMax = numMinMax(1)
+        If strFilePath <> strNewFilePath Then
+            strFilePath = strNewFilePath
+            clsGetDimNames.SetPackageName("ncdf4.helpers")
+            clsGetDimNames.SetRCommand("nc.get.dim.axes")
+            clsGetDimNames.AddParameter("f", clsRFunctionParameter:=clsNcOpenFunction)
+            strTemp = clsGetDimNames.ToScript(strScript)
+            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(strTemp, bSilent:=True)
+            If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
+                strDimNames = expTemp.AsCharacter.Names.ToArray
+                strDimAxes = expTemp.AsCharacter.ToArray
+            Else
+                strDimNames = Nothing
+                strDimAxes = Nothing
+            End If
+            If strDimAxes IsNot Nothing Then
+                clsGetBoundsFunction.SetRCommand("nc_get_dim_min_max")
+                clsGetBoundsFunction.AddParameter("nc", clsRFunctionParameter:=clsNcOpenFunction)
+                For i As Integer = 0 To lstDims.Count - 1
+                    dcmMin = Nothing
+                    dcmMax = Nothing
+                    strMinDate = ""
+                    strMaxDate = ""
+                    If strDimAxes.Contains(lstDims(i)) Then
+                        iIndex = Array.IndexOf(strDimAxes, lstDims(i))
+                        clsGetBoundsFunction.AddParameter("dimension", Chr(34) & strDimNames(iIndex) & Chr(34))
+                        expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetBoundsFunction.ToScript, bSilent:=True)
+                        If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
+                            If lstDims(i) = "T" Then
+                                chrMinMaxDates = expTemp.AsCharacter
+                                If chrMinMaxDates.Count = 2 Then
+                                    strMinDate = chrMinMaxDates(0)
+                                    strMaxDate = chrMinMaxDates(1)
+                                End If
+                            Else
+                                numMinMax = expTemp.AsNumeric
+                                If numMinMax.Count = 2 Then
+                                    dcmMin = numMinMax(0)
+                                    dcmMax = numMinMax(1)
+                                End If
                             End If
                         End If
                     End If
-                End If
-                If lstDims(i) = "T" Then
-                    bShowDimension = True
-                    If strMinDate <> "" AndAlso strMaxDate <> "" Then
-                        strMinDateSplit = strMinDate.Split("-")
-                        strMaxDateSplit = strMaxDate.Split("-")
-                        If strMinDateSplit.Count = 3 AndAlso strMaxDateSplit.Count = 3 Then
-                            Try
-                                dtMin = New DateTime(strMinDateSplit(0), strMinDateSplit(1), strMinDateSplit(2))
-                                dtMax = New DateTime(strMaxDateSplit(0), strMaxDateSplit(1), strMaxDateSplit(2))
-                                dtpMinT.MinDate = dtMin
-                                dtpMinT.MaxDate = dtMax
-                                dtpMaxT.MinDate = dtMin
-                                dtpMaxT.MaxDate = dtMax
-                                dtpMinT.Value = dtMin
-                                dtpMaxT.Value = dtMax
-                            Catch ex As Exception
+                    If lstDims(i) = "T" Then
+                        bShowDimension = True
+                        If strMinDate <> "" AndAlso strMaxDate <> "" Then
+                            strMinDateSplit = strMinDate.Split("-")
+                            strMaxDateSplit = strMaxDate.Split("-")
+                            If strMinDateSplit.Count = 3 AndAlso strMaxDateSplit.Count = 3 Then
+                                Try
+                                    dtMin = New DateTime(strMinDateSplit(0), strMinDateSplit(1), strMinDateSplit(2))
+                                    dtMax = New DateTime(strMaxDateSplit(0), strMaxDateSplit(1), strMaxDateSplit(2))
+                                    dtpMinT.MinDate = dtMin
+                                    dtpMinT.MaxDate = dtMax
+                                    dtpMaxT.MinDate = dtMin
+                                    dtpMaxT.MaxDate = dtMax
+                                    dtpMinT.Value = dtMin
+                                    dtpMaxT.Value = dtMax
+                                Catch ex As Exception
+                                    bShowDimension = False
+                                    lstAxesLabels(i).Text = "Could not read time dimension dates from file."
+                                End Try
+                                If bShowDimension Then
+                                    lstAxesLabels(i).Text = strDimNames(iIndex) & ":"
+                                End If
+                            Else
                                 bShowDimension = False
-                                lstAxesLabels(i).Text = "Could not read time dimension dates from file."
-                            End Try
-                            If bShowDimension Then
-                                lstAxesLabels(i).Text = strDimNames(iIndex) & ":"
+                                lstAxesLabels(i).Text = "No " & lstDims(i) & " dimension."
                             End If
                         Else
                             bShowDimension = False
                             lstAxesLabels(i).Text = "No " & lstDims(i) & " dimension."
                         End If
+                        If bShowDimension Then
+                            dtpMinT.Visible = True
+                            dtpMaxT.Visible = True
+                            lstMinLabels(i).Visible = True
+                            lstMaxLabels(i).Visible = True
+                            clsBoundaryListFunction.AddParameter(strDimNames(iIndex), clsRFunctionParameter:=lstFunctions(i))
+                        Else
+                            dtpMinT.Visible = False
+                            dtpMaxT.Visible = False
+                            lstMinLabels(i).Visible = False
+                            lstMaxLabels(i).Visible = False
+                        End If
                     Else
-                        bShowDimension = False
-                        lstAxesLabels(i).Text = "No " & lstDims(i) & " dimension."
+                        If dcmMin.HasValue AndAlso dcmMax.HasValue Then
+                            lstMinTextBoxes(i).Visible = True
+                            lstMaxTextBoxes(i).Visible = True
+                            lstMinLabels(i).Visible = True
+                            lstMaxLabels(i).Visible = True
+                            lstMinTextBoxes(i).SetValidationTypeAsNumeric(dcmMin:=dcmMin, dcmMax:=dcmMax)
+                            lstMaxTextBoxes(i).SetValidationTypeAsNumeric(dcmMin:=dcmMin, dcmMax:=dcmMax)
+                            lstFunctions(i).AddParameter("min", dcmMin, bIncludeArgumentName:=False)
+                            lstFunctions(i).AddParameter("max", dcmMax, bIncludeArgumentName:=False)
+                            clsBoundaryListFunction.AddParameter(strDimNames(iIndex), clsRFunctionParameter:=lstFunctions(i))
+                            lstAxesLabels(i).Text = strDimNames(iIndex) & ":"
+                        Else
+                            lstMinTextBoxes(i).Visible = False
+                            lstMaxTextBoxes(i).Visible = False
+                            lstMinLabels(i).Visible = False
+                            lstMaxLabels(i).Visible = False
+                            lstAxesLabels(i).Text = "No " & lstDims(i) & " dimension."
+                        End If
                     End If
-                    If bShowDimension Then
-                        dtpMinT.Visible = True
-                        dtpMaxT.Visible = True
-                        lstMinLabels(i).Visible = True
-                        lstMaxLabels(i).Visible = True
-                        clsBoundaryListFunction.AddParameter(strDimNames(iIndex), clsRFunctionParameter:=lstFunctions(i))
-                    Else
-                        dtpMinT.Visible = False
-                        dtpMaxT.Visible = False
-                        lstMinLabels(i).Visible = False
-                        lstMaxLabels(i).Visible = False
-                    End If
-                Else
-                    If dcmMin.HasValue AndAlso dcmMax.HasValue Then
-                        lstMinTextBoxes(i).Visible = True
-                        lstMaxTextBoxes(i).Visible = True
-                        lstMinLabels(i).Visible = True
-                        lstMaxLabels(i).Visible = True
-                        lstMinTextBoxes(i).SetValidationTypeAsNumeric(dcmMin:=dcmMin, dcmMax:=dcmMax)
-                        lstMaxTextBoxes(i).SetValidationTypeAsNumeric(dcmMin:=dcmMin, dcmMax:=dcmMax)
-                        lstFunctions(i).AddParameter("min", dcmMin, bIncludeArgumentName:=False)
-                        lstFunctions(i).AddParameter("max", dcmMax, bIncludeArgumentName:=False)
-                        clsBoundaryListFunction.AddParameter(strDimNames(iIndex), clsRFunctionParameter:=lstFunctions(i))
-                        lstAxesLabels(i).Text = strDimNames(iIndex) & ":"
-                    Else
-                        lstMinTextBoxes(i).Visible = False
-                        lstMaxTextBoxes(i).Visible = False
-                        lstMinLabels(i).Visible = False
-                        lstMaxLabels(i).Visible = False
-                        lstAxesLabels(i).Text = "No " & lstDims(i) & " dimension."
-                    End If
+                Next
+                If clsBoundaryListFunction.clsParameters.Count > 0 Then
+                    clsImportNetcdfFunction.AddParameter("boundary", clsRFunctionParameter:=clsBoundaryListFunction)
                 End If
-            Next
-            If clsBoundaryListFunction.clsParameters.Count > 0 Then
-                clsImportNetcdfFunction.AddParameter("boundary", clsRFunctionParameter:=clsBoundaryListFunction)
             End If
-
-            ucrInputMinX.SetRCode(clsXLimitsFunction, bReset, bCloneIfNeeded:=True)
-            ucrInputMaxX.SetRCode(clsXLimitsFunction, bReset, bCloneIfNeeded:=True)
-            ucrInputMinY.SetRCode(clsYLimitsFunction, bReset, bCloneIfNeeded:=True)
-            ucrInputMaxY.SetRCode(clsYLimitsFunction, bReset, bCloneIfNeeded:=True)
-            ucrInputMinZ.SetRCode(clsZLimitsFunction, bReset, bCloneIfNeeded:=True)
-            ucrInputMaxZ.SetRCode(clsZLimitsFunction, bReset, bCloneIfNeeded:=True)
-            ucrInputMinS.SetRCode(clsSLimitsFunction, bReset, bCloneIfNeeded:=True)
-            ucrInputMaxS.SetRCode(clsSLimitsFunction, bReset, bCloneIfNeeded:=True)
-
-            ucrChkOnlyDataVariables.SetRCode(clsImportNetcdfFunction, bReset, bCloneIfNeeded:=True)
-            ucrChkKeepRawTime.SetRCode(clsImportNetcdfFunction, bReset, bCloneIfNeeded:=True)
-            ucrChkIncludeMetadata.SetRCode(clsImportNetcdfFunction, bReset, bCloneIfNeeded:=True)
-
-            ucrInputMinX.Focus()
         End If
+        ucrInputMinX.SetRCode(clsXLimitsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputMaxX.SetRCode(clsXLimitsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputMinY.SetRCode(clsYLimitsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputMaxY.SetRCode(clsYLimitsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputMinZ.SetRCode(clsZLimitsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputMaxZ.SetRCode(clsZLimitsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputMinS.SetRCode(clsSLimitsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputMaxS.SetRCode(clsSLimitsFunction, bReset, bCloneIfNeeded:=True)
+
+        ucrChkOnlyDataVariables.SetRCode(clsImportNetcdfFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkKeepRawTime.SetRCode(clsImportNetcdfFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkIncludeMetadata.SetRCode(clsImportNetcdfFunction, bReset, bCloneIfNeeded:=True)
     End Sub
 
     Private Sub InitialiseTabs()
