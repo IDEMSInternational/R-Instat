@@ -22,7 +22,7 @@ Imports System.ComponentModel
 Public Class dlgOpenNetCDF
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsImportNetcdfFunction, clsNcOpenFunction, clsNcClose, clsRFileDetails As New RFunction
+    Private clsImportNetcdfFunction, clsNcOpenFunction, clsNcCloseFunction, clsRFileDetails As New RFunction
     Private clsBoundaryListFunction, clsYLimitsFunction, clsXLimtsFunction, clsZLimtsFunction, clsSLimtsFunction, clsTLimitsFunction As New RFunction
     Dim strFileType As String
     Dim bComponentsInitialised As Boolean
@@ -34,6 +34,7 @@ Public Class dlgOpenNetCDF
     Private strMedium As String
     Private strLong As String
     Private bCloseFile As Boolean = False
+    Private strFileAssignName As String = "nc"
 
     Public Sub New()
         ' This call is required by the designer.
@@ -66,52 +67,47 @@ Public Class dlgOpenNetCDF
 
     Private Sub OpenFile()
         Dim strTemp As String = ""
+        Dim strScript As String = ""
 
         If Not ucrInputFilePath.IsEmpty AndAlso File.Exists(Replace(strFilePath, "/", "\")) Then
-            clsNcOpenFunction.ToScript(strTemp)
+            strScript = clsNcOpenFunction.ToScript(strTemp)
             frmMain.clsRLink.RunScript(strTemp, strComment:="Opening Net CDF file", bUpdateGrids:=False, bSilent:=True)
+            bCloseFile = True
         End If
     End Sub
 
     Private Sub InitialiseDialog()
         'ucrBase.iHelpTopicID = 
 
-        ucrInputFilePath.SetParameter(New RParameter("filename", 0))
         ucrInputFilePath.IsReadOnly = True
+
+        ucrInputFileDetails.txtInput.ScrollBars = ScrollBars.Vertical
 
         ucrInputDataName.SetParameter(New RParameter("name", 1))
         ucrInputDataName.SetValidationTypeAsRVariable()
         ucrInputDataName.bAutoChangeOnLeave = True
-
-        ' For File Detail options
-        ucrPnlFileDetails.SetParameter(New RParameter("info", 0))
-        ucrPnlFileDetails.AddRadioButton(rdoShort, Chr(34) & "s" & Chr(34))
-        ucrPnlFileDetails.AddRadioButton(rdoMedium, Chr(34) & "m" & Chr(34))
-        ucrPnlFileDetails.AddRadioButton(rdoLong, Chr(34) & "l" & Chr(34))
-        ucrPnlFileDetails.SetRDefault(Chr(34) & "s" & Chr(34))
-
-        ucrInputFileDetails.txtInput.ScrollBars = ScrollBars.Vertical
     End Sub
 
     Private Sub SetDefaults()
         clsImportNetcdfFunction = New RFunction
         clsNcOpenFunction = New RFunction
-        clsNcClose = New RFunction
+        clsNcCloseFunction = New RFunction
         clsRFileDetails = New RFunction
 
         Me.Size = New Size(434, 256)
-        cmdDetails.Text = "Show Details"
+        cmdDetails.Text = "Show Details >>"
         bShowDetails = True
         strShort = ""
         strMedium = ""
         strLong = ""
+        rdoShort.Checked = True
 
         clsImportNetcdfFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_NetCDF")
         clsImportNetcdfFunction.AddParameter("nc", clsRFunctionParameter:=clsNcOpenFunction, iPosition:=0)
 
         clsNcOpenFunction.SetPackageName("ncdf4")
         clsNcOpenFunction.SetRCommand("nc_open")
-        clsNcOpenFunction.SetAssignTo("nc")
+        clsNcOpenFunction.SetAssignTo(strFileAssignName)
 
         clsBoundaryListFunction.SetRCommand("list")
         clsXLimtsFunction.SetRCommand("c")
@@ -119,23 +115,21 @@ Public Class dlgOpenNetCDF
         clsZLimtsFunction.SetRCommand("c")
         clsTLimitsFunction.SetRCommand("c")
 
-        clsNcClose.SetPackageName("ncdf4")
-        clsNcClose.SetRCommand("nc_close")
-        clsNcClose.AddParameter("nc", clsRFunctionParameter:=clsNcOpenFunction, iPosition:=0)
+        clsNcCloseFunction.SetPackageName("ncdf4")
+        clsNcCloseFunction.SetRCommand("nc_close")
+        clsNcCloseFunction.AddParameter("nc", clsRFunctionParameter:=clsNcOpenFunction, iPosition:=0)
 
         clsRFileDetails.SetPackageName("cmsaf")
         clsRFileDetails.SetRCommand("ncinfo")
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsImportNetcdfFunction)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsNcClose, iPosition:=0)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsNcCloseFunction, iPosition:=0)
         bResetSubdialog = True
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrInputDataName.SetRCode(clsImportNetcdfFunction, bReset)
-        ucrInputFilePath.SetRCode(clsNcOpenFunction, bReset)
-        ucrPnlFileDetails.SetRCode(clsRFileDetails, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -207,10 +201,10 @@ Public Class dlgOpenNetCDF
         bShowDetails = Not bShowDetails
         If Not bShowDetails Then
             Me.Size = New Size(777, 256)
-            cmdDetails.Text = "Hide Details"
+            cmdDetails.Text = "Hide Details <<"
         Else
             Me.Size = New Size(434, 256)
-            cmdDetails.Text = "Show Details"
+            cmdDetails.Text = "Show Details >>"
         End If
     End Sub
 
@@ -258,7 +252,7 @@ Public Class dlgOpenNetCDF
         End If
     End Sub
 
-    Private Sub ucrPnlFileDetails_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFileDetails.ControlValueChanged
+    Private Sub DescriptionButtons_CheckedChanged(sender As Object, e As EventArgs) Handles rdoShort.CheckedChanged, rdoMedium.CheckedChanged, rdoLong.CheckedChanged
         InputDetails()
     End Sub
 
@@ -274,10 +268,16 @@ Public Class dlgOpenNetCDF
         CheckCloseFile()
     End Sub
 
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        bCloseFile = False
+        clsNcOpenFunction.SetAssignTo(strFileAssignName)
+    End Sub
+
     Private Sub CheckCloseFile()
         If bCloseFile Then
-            frmMain.clsRLink.RunScript(clsNcClose.ToScript(), strComment:="Closing Net CDF file", bUpdateGrids:=False)
+            frmMain.clsRLink.RunScript(clsNcCloseFunction.ToScript(), strComment:="Closing Net CDF file", bUpdateGrids:=False)
             bCloseFile = False
+            clsNcOpenFunction.SetAssignTo(strFileAssignName)
         End If
     End Sub
 End Class
