@@ -17,6 +17,7 @@
 Imports instat.Translations
 Public Class sdgInventoryPlot
     Private clsInventoryFunction As New RFunction
+    Private clsKeyColours As New RFunction
     Private bControlsInitialised As Boolean = False
 
     Private Sub sdgInventoryPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -31,30 +32,36 @@ Public Class sdgInventoryPlot
 
         ucrChkDisplayRainDays.AddToLinkedControls(ucrInputRain, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputRain.SetLinkedDisplayControl(lblRainLabel)
-        ucrInputRain.SetLinkedDisplayControl(grpDisplayRainDays)
+        ucrInputRain.SetParameter(New RParameter("rainlabel"))
 
         ucrChkDisplayRainDays.AddToLinkedControls(ucrInputDry, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputRain.SetLinkedDisplayControl(lblDryLabel)
+        ucrInputDry.SetLinkedDisplayControl(lblDryLabel)
 
         ucrChkDisplayRainDays.AddToLinkedControls(ucrNudThresholdValue, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.85)
-        ucrInputRain.SetLinkedDisplayControl(lblRainThresholdValue)
+        ucrNudThresholdValue.SetLinkedDisplayControl(lblRainThresholdValue)
 
         ucrChkDisplayRainDays.AddToLinkedControls(ucrRainColour, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputRain.SetLinkedDisplayControl(lblRainColour)
+        ucrRainColour.SetLinkedDisplayControl(lblRainColour)
+        ucrRainColour.SetParameter(New RParameter("rain", 0))
 
         ucrChkDisplayRainDays.AddToLinkedControls(ucrDryColour, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputRain.SetLinkedDisplayControl(lblDryColour)
+        ucrDryColour.SetLinkedDisplayControl(lblDryColour)
+        ucrDryColour.SetParameter(New RParameter("dry", 1))
 
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRFunction(clsNewRFunction As RFunction, bReset As Boolean)
+    Public Sub SetRFunction(clsNewRFunction As RFunction, clsNewKeyColours As RFunction, bReset As Boolean)
 
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
         clsInventoryFunction = clsNewRFunction
-        SetRCode(Me, clsInventoryFunction, bReset)
+        clsKeyColours = clsNewKeyColours
+
+        ucrRainColour.SetRCode(clsNewKeyColours, bReset)
+        ucrDryColour.SetRCode(clsNewKeyColours, bReset)
+        ucrChkDisplayRainDays.SetRCode(clsInventoryFunction, bReset)
     End Sub
 
 End Class

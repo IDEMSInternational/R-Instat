@@ -21,6 +21,12 @@ Public Class dlgInventoryPlot
     Private bResetSubdialog As Boolean = False
     Private clsDefaultRFunction As New RFunction
 
+    Private clsKeyColours As New RFunction
+    Private clsListFunc As New RFunction
+    Private clsBreaksFunc As New RFunction
+    Private clslabelsFunc As New RFunction
+
+
     Private Sub dlgInventoryPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -97,15 +103,33 @@ Public Class dlgInventoryPlot
 
     Private Sub SetDefaults()
         clsDefaultRFunction = New RFunction
+        clsKeyColours = New RFunction
+        clsListFunc = New RFunction
+        clsBreaksFunc = New RFunction
+        clslabelsFunc = New RFunction
+
         bResetSubdialog = True
         ucrInventoryPlotSelector.Reset()
         ucrSaveGraph.Reset()
         ucrReceiverDate.SetMeAsReceiver()
 
+
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot")
         clsDefaultRFunction.AddParameter("coord_flip", "FALSE")
         clsDefaultRFunction.AddParameter("year_doy_plot", "FALSE")
         clsDefaultRFunction.AddParameter("facet_by", "NULL")
+
+        clsKeyColours.SetRCommand("c")
+        clsKeyColours.AddParameter("rain", Chr(34) & "red" & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+        clsKeyColours.AddParameter("dry", Chr(34) & "grey" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
+        clsDefaultRFunction.AddParameter("key_colours", clsRFunctionParameter:=clsKeyColours)
+
+        'clsRainDrylabels.SetRCommand("c")
+        'clsRainDrylabels.AddParameter("rain", "Rain", bIncludeArgumentName:=False)
+        'clsRainDrylabels.AddParameter("dry", "Dry", bIncludeArgumentName:=False)
+        'clsListFunc.AddParameter("labels ", clsRFunctionParameter:=clsRainDrylabels)
+        'clsDefaultRFunction.AddParameter("rain_cats", clsRFunctionParameter:=clsListFunc)
+
         clsDefaultRFunction.SetAssignTo("last_graph", strTempDataframe:=ucrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
 
@@ -141,7 +165,7 @@ Public Class dlgInventoryPlot
     End Sub
 
     Private Sub cmdInventoryPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdInventoryPlotOptions.Click
-        sdgInventoryPlot.SetRFunction(clsDefaultRFunction, bResetSubdialog)
+        sdgInventoryPlot.SetRFunction(clsDefaultRFunction, clsKeyColours, bResetSubdialog)
         bResetSubdialog = False
         sdgInventoryPlot.ShowDialog()
     End Sub
