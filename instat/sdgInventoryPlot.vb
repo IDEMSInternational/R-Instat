@@ -18,6 +18,8 @@ Imports instat.Translations
 Public Class sdgInventoryPlot
     Private clsInventoryFunction As New RFunction
     Private clsKeyColours As New RFunction
+    Private clsBreaksFunc As New RFunction
+    Private clslabelsFunc As New RFunction
     Private bControlsInitialised As Boolean = False
 
     Private Sub sdgInventoryPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -39,6 +41,7 @@ Public Class sdgInventoryPlot
 
         ucrChkDisplayRainDays.AddToLinkedControls(ucrNudThresholdValue, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.85)
         ucrNudThresholdValue.SetLinkedDisplayControl(lblRainThresholdValue)
+        ucrNudThresholdValue.SetParameter(New RParameter("threashold", 1))
 
         ucrChkDisplayRainDays.AddToLinkedControls(ucrRainColour, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrRainColour.SetLinkedDisplayControl(lblRainColour)
@@ -51,16 +54,22 @@ Public Class sdgInventoryPlot
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRFunction(clsNewRFunction As RFunction, clsNewKeyColours As RFunction, bReset As Boolean)
+    Public Sub SetRFunction(clsNewRFunction As RFunction, clsNewKeyColours As RFunction, clsNewBreaksFunc As RFunction, clsNewlabelsFunc As RFunction, bReset As Boolean)
 
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
+
         clsInventoryFunction = clsNewRFunction
         clsKeyColours = clsNewKeyColours
+        clsBreaksFunc = clsNewBreaksFunc
+        clslabelsFunc = clslabelsFunc
 
-        ucrRainColour.SetRCode(clsNewKeyColours, bReset)
-        ucrDryColour.SetRCode(clsNewKeyColours, bReset)
+        ucrRainColour.SetRCode(clsKeyColours, bReset)
+        ucrDryColour.SetRCode(clsKeyColours, bReset)
+        ucrNudThresholdValue.SetRCode(clsBreaksFunc, bReset)
+        ucrInputDry.SetRCode(clslabelsFunc, bReset)
+        ucrInputRain.SetRCode(clslabelsFunc, bReset)
         ucrChkDisplayRainDays.SetRCode(clsInventoryFunction, bReset)
     End Sub
 
