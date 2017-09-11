@@ -185,7 +185,7 @@ Partial Class dlgInventoryPlot
         Me.ucrInputTitle.AddQuotesIfUnrecognised = True
         Me.ucrInputTitle.IsMultiline = False
         Me.ucrInputTitle.IsReadOnly = False
-        Me.ucrInputTitle.Location = New System.Drawing.Point(87, 367)
+        Me.ucrInputTitle.Location = New System.Drawing.Point(87, 336)
         Me.ucrInputTitle.Name = "ucrInputTitle"
         Me.ucrInputTitle.Size = New System.Drawing.Size(204, 21)
         Me.ucrInputTitle.TabIndex = 15
@@ -213,7 +213,7 @@ Partial Class dlgInventoryPlot
         '
         'ucrSaveGraph
         '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 394)
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 363)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         Me.ucrSaveGraph.Size = New System.Drawing.Size(255, 24)
         Me.ucrSaveGraph.TabIndex = 16
@@ -250,7 +250,7 @@ Partial Class dlgInventoryPlot
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 421)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 390)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 17
@@ -258,7 +258,7 @@ Partial Class dlgInventoryPlot
         'lblGraphTitle
         '
         Me.lblGraphTitle.AutoSize = True
-        Me.lblGraphTitle.Location = New System.Drawing.Point(10, 370)
+        Me.lblGraphTitle.Location = New System.Drawing.Point(10, 339)
         Me.lblGraphTitle.Name = "lblGraphTitle"
         Me.lblGraphTitle.Size = New System.Drawing.Size(62, 13)
         Me.lblGraphTitle.TabIndex = 19
@@ -268,7 +268,7 @@ Partial Class dlgInventoryPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(423, 475)
+        Me.ClientSize = New System.Drawing.Size(423, 451)
         Me.Controls.Add(Me.lblGraphTitle)
         Me.Controls.Add(Me.grpPlotType)
         Me.Controls.Add(Me.lblFacetBy)

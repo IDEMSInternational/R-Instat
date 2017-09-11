@@ -27,6 +27,7 @@ Public Class sdgInventoryPlot
         ucrChkDisplayRainDays.SetParameter(New RParameter("display_rain_days", 13), bNewChangeParameterValue:=True)
         ucrChkDisplayRainDays.SetText("Display Rain Days")
         ucrChkDisplayRainDays.SetRDefault("FALSE")
+        bControlsInitialised = True
     End Sub
 
     Public Sub SetRFunction(clsNewRFunction As RFunction, bReset As Boolean)
