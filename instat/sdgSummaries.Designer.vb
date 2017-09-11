@@ -297,7 +297,7 @@ Partial Class sdgSummaries
         'ucrChkSn
         '
         Me.ucrChkSn.Checked = False
-        Me.ucrChkSn.Location = New System.Drawing.Point(180, 51)
+        Me.ucrChkSn.Location = New System.Drawing.Point(222, 51)
         Me.ucrChkSn.Name = "ucrChkSn"
         Me.ucrChkSn.Size = New System.Drawing.Size(82, 20)
         Me.ucrChkSn.TabIndex = 4
@@ -305,7 +305,7 @@ Partial Class sdgSummaries
         'ucrChkQn
         '
         Me.ucrChkQn.Checked = False
-        Me.ucrChkQn.Location = New System.Drawing.Point(180, 25)
+        Me.ucrChkQn.Location = New System.Drawing.Point(222, 25)
         Me.ucrChkQn.Name = "ucrChkQn"
         Me.ucrChkQn.Size = New System.Drawing.Size(85, 20)
         Me.ucrChkQn.TabIndex = 3
@@ -351,7 +351,7 @@ Partial Class sdgSummaries
         Me.tbKurtosis.Location = New System.Drawing.Point(4, 22)
         Me.tbKurtosis.Name = "tbKurtosis"
         Me.tbKurtosis.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbKurtosis.Size = New System.Drawing.Size(317, 339)
+        Me.tbKurtosis.Size = New System.Drawing.Size(317, 327)
         Me.tbKurtosis.TabIndex = 3
         Me.tbKurtosis.Text = "Kurtosis"
         Me.tbKurtosis.UseVisualStyleBackColor = True
@@ -375,7 +375,7 @@ Partial Class sdgSummaries
         Me.tbMissingOptions.Location = New System.Drawing.Point(4, 22)
         Me.tbMissingOptions.Name = "tbMissingOptions"
         Me.tbMissingOptions.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbMissingOptions.Size = New System.Drawing.Size(317, 339)
+        Me.tbMissingOptions.Size = New System.Drawing.Size(317, 327)
         Me.tbMissingOptions.TabIndex = 4
         Me.tbMissingOptions.Text = "Missing Options"
         Me.tbMissingOptions.UseVisualStyleBackColor = True
