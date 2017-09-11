@@ -40,7 +40,7 @@ Partial Class dlgOpenNetCDF
     Private Sub InitializeComponent()
         Me.cmdOpenDataSet = New System.Windows.Forms.Button()
         Me.lblFileOpenPath = New System.Windows.Forms.Label()
-        Me.lblMainDataName = New System.Windows.Forms.Label()
+        Me.lblDataFramePrefix = New System.Windows.Forms.Label()
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
         Me.ucrInputDataName = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
@@ -72,15 +72,15 @@ Partial Class dlgOpenNetCDF
         Me.lblFileOpenPath.TabIndex = 0
         Me.lblFileOpenPath.Text = "File:"
         '
-        'lblMainDataName
+        'lblDataFramePrefix
         '
-        Me.lblMainDataName.AutoSize = True
-        Me.lblMainDataName.Location = New System.Drawing.Point(10, 137)
-        Me.lblMainDataName.Name = "lblMainDataName"
-        Me.lblMainDataName.Size = New System.Drawing.Size(122, 13)
-        Me.lblMainDataName.TabIndex = 6
-        Me.lblMainDataName.Tag = "Main_Data_Frame_Name:"
-        Me.lblMainDataName.Text = "Main Data Frame Name:"
+        Me.lblDataFramePrefix.AutoSize = True
+        Me.lblDataFramePrefix.Location = New System.Drawing.Point(10, 137)
+        Me.lblDataFramePrefix.Name = "lblDataFramePrefix"
+        Me.lblDataFramePrefix.Size = New System.Drawing.Size(122, 13)
+        Me.lblDataFramePrefix.TabIndex = 6
+        Me.lblDataFramePrefix.Tag = "Prefix_for_Data_Frames:"
+        Me.lblDataFramePrefix.Text = "Prefix for Data Frames:"
         '
         'ucrInputFilePath
         '
@@ -120,9 +120,9 @@ Partial Class dlgOpenNetCDF
         '
         'cmdDetails
         '
-        Me.cmdDetails.Location = New System.Drawing.Point(332, 103)
+        Me.cmdDetails.Location = New System.Drawing.Point(314, 50)
         Me.cmdDetails.Name = "cmdDetails"
-        Me.cmdDetails.Size = New System.Drawing.Size(77, 23)
+        Me.cmdDetails.Size = New System.Drawing.Size(95, 23)
         Me.cmdDetails.TabIndex = 8
         Me.cmdDetails.Tag = "Show_Details"
         Me.cmdDetails.Text = "Show Details >>"
@@ -208,7 +208,7 @@ Partial Class dlgOpenNetCDF
         Me.Controls.Add(Me.ucrInputDataName)
         Me.Controls.Add(Me.cmdOpenDataSet)
         Me.Controls.Add(Me.lblFileOpenPath)
-        Me.Controls.Add(Me.lblMainDataName)
+        Me.Controls.Add(Me.lblDataFramePrefix)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrPnlFileDetails)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -227,7 +227,7 @@ Partial Class dlgOpenNetCDF
     Friend WithEvents ucrInputDataName As ucrInputTextBox
     Friend WithEvents cmdOpenDataSet As Button
     Friend WithEvents lblFileOpenPath As Label
-    Friend WithEvents lblMainDataName As Label
+    Friend WithEvents lblDataFramePrefix As Label
     Friend WithEvents cmdOptions As Button
     Friend WithEvents cmdDetails As Button
     Friend WithEvents ucrInputFileDetails As ucrInputTextBox

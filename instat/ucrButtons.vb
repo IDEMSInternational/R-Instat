@@ -21,6 +21,10 @@ Public Class ucrButtons
     Public iHelpTopicID As Integer
     Public bFirstLoad As Boolean
     Public strComment As String
+    Public Event BeforeClickOk(sender As Object, e As EventArgs)
+    Public Event ClickOk(sender As Object, e As EventArgs)
+    Public Event ClickReset(sender As Object, e As EventArgs)
+    Public Event ClickClose(sender As Object, e As EventArgs)
 
     Public Sub New()
         ' This call is required by the designer.
@@ -35,16 +39,13 @@ Public Class ucrButtons
 
     Private Sub cmdCancel_Click(sender As Object, e As EventArgs) Handles cmdCancel.Click
         Me.ParentForm.Hide()
+        RaiseEvent ClickClose(sender, e)
     End Sub
 
     Private Sub cmdReset_Click(sender As Object, e As EventArgs) Handles cmdReset.Click
         SetDefaults()
         RaiseEvent ClickReset(sender, e)
     End Sub
-
-    Public Event BeforeClickOk(sender As Object, e As EventArgs)
-    Public Event ClickOk(sender As Object, e As EventArgs)
-    Public Event ClickReset(sender As Object, e As EventArgs)
 
     Private Sub cmdOk_Click(sender As Object, e As EventArgs) Handles cmdOk.Click
         Dim lstCurrentEnabled As New List(Of Boolean)
