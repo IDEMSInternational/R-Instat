@@ -346,6 +346,12 @@
     <Compile Include="dlgExtremesClimatic.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgPlotRegion.Designer.vb">
+      <DependentUpon>dlgPlotRegion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPlotRegion.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgViewLabelsAndLevels.Designer.vb">
       <DependentUpon>dlgViewLabelsAndLevels.vb</DependentUpon>
     </Compile>
@@ -2552,6 +2558,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExtremesClimatic.resx">
       <DependentUpon>dlgExtremesClimatic.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPlotRegion.resx">
+      <DependentUpon>dlgPlotRegion.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgViewLabelsAndLevels.resx">
       <DependentUpon>dlgViewLabelsAndLevels.vb</DependentUpon>
