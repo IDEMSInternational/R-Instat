@@ -24,9 +24,27 @@ Public Class sdgInventoryPlot
     End Sub
 
     Private Sub InitialiseControls()
+
         ucrChkDisplayRainDays.SetParameter(New RParameter("display_rain_days", 13), bNewChangeParameterValue:=True)
         ucrChkDisplayRainDays.SetText("Display Rain Days")
         ucrChkDisplayRainDays.SetRDefault("FALSE")
+
+        ucrChkDisplayRainDays.AddToLinkedControls(ucrInputRain, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputRain.SetLinkedDisplayControl(lblRainLabel)
+        ucrInputRain.SetLinkedDisplayControl(grpDisplayRainDays)
+
+        ucrChkDisplayRainDays.AddToLinkedControls(ucrInputDry, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputRain.SetLinkedDisplayControl(lblDryLabel)
+
+        ucrChkDisplayRainDays.AddToLinkedControls(ucrNudThresholdValue, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.85)
+        ucrInputRain.SetLinkedDisplayControl(lblRainThresholdValue)
+
+        ucrChkDisplayRainDays.AddToLinkedControls(ucrRainColour, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputRain.SetLinkedDisplayControl(lblRainColour)
+
+        ucrChkDisplayRainDays.AddToLinkedControls(ucrDryColour, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputRain.SetLinkedDisplayControl(lblDryColour)
+
         bControlsInitialised = True
     End Sub
 
@@ -36,7 +54,7 @@ Public Class sdgInventoryPlot
             InitialiseControls()
         End If
         clsInventoryFunction = clsNewRFunction
-
+        SetRCode(Me, clsInventoryFunction, bReset)
     End Sub
 
 End Class

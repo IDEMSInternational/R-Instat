@@ -92,7 +92,6 @@ Partial Class dlgInventoryPlot
         '
         'cmdInventoryPlotOptions
         '
-        Me.cmdInventoryPlotOptions.Enabled = False
         Me.cmdInventoryPlotOptions.Location = New System.Drawing.Point(10, 194)
         Me.cmdInventoryPlotOptions.Name = "cmdInventoryPlotOptions"
         Me.cmdInventoryPlotOptions.Size = New System.Drawing.Size(121, 23)
