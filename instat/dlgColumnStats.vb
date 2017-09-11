@@ -41,9 +41,10 @@ Public Class dlgColumnStats
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.clsRsyntax.iCallType = 0
         ucrBase.iHelpTopicID = 64
         ucrChkDropUnusedLevels.Enabled = False ' removed this functionality so this is disabled
+        cmdProportionsPercentages.Enabled = False 'TODO: Disabling this for now still needs discussions.
 
         ucrSelectorForColumnStatistics.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForColumnStatistics.SetParameterIsString()
@@ -87,6 +88,7 @@ Public Class dlgColumnStats
         clsSummariesList = New RFunction
 
         ucrSelectorForColumnStatistics.Reset()
+        sdgProportionsPercentages.ucrSelectorProportionsPercentiles.Reset()
         ucrReceiverSelectedVariables.SetMeAsReceiver()
 
         clsSummariesList.SetRCommand("c")
@@ -126,7 +128,7 @@ Public Class dlgColumnStats
     End Sub
 
     Public Sub TestOKEnabled()
-        If Not ucrReceiverByFactor.IsEmpty AndAlso Not clsSummariesList.clsParameters.Count = 0 Then
+        If Not ucrReceiverByFactor.IsEmpty AndAlso (ucrChkStoreResults.Checked OrElse ucrChkPrintOutput.Checked) AndAlso Not clsSummariesList.clsParameters.Count = 0 Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -141,12 +143,27 @@ Public Class dlgColumnStats
 
     Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
         sdgSummaries.SetRFunction(clsSummariesList, bResetSubdialog)
-        bResetSubdialog = False
         sdgSummaries.ShowDialog()
+        bResetSubdialog = False
         TestOKEnabled()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariables.ControlContentsChanged, ucrReceiverByFactor.ControlContentsChanged
+    Private Sub cmdProportionsPercentages_Click(sender As Object, e As EventArgs) Handles cmdProportionsPercentages.Click
+        sdgProportionsPercentages.SetRFunction(clsDefaultFunction, bResetSubdialog)
+        sdgProportionsPercentages.ShowDialog()
+        bResetSubdialog = False
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrChkPrintOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPrintOutput.ControlValueChanged
+        If ucrChkPrintOutput.Checked Then
+            ucrBase.clsRsyntax.iCallType = 2
+        Else
+            ucrBase.clsRsyntax.iCallType = 0
+        End If
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariables.ControlContentsChanged, ucrReceiverByFactor.ControlContentsChanged, ucrChkPrintOutput.ControlContentsChanged, ucrChkStoreResults.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
