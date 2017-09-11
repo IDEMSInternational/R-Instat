@@ -483,6 +483,8 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
+        Me.mnuCMSAF = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PlToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1418,7 +1420,7 @@ Partial Class frmMain
         '
         'mnuClimatic
         '
-        Me.mnuClimatic.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFile, Me.ToolStripSeparator18, Me.mnuClimaticDates, Me.mnuCliDefineClimaticData, Me.mnuClimaticQualityControl, Me.mnuClimaticPrepare, Me.ToolStripSeparator30, Me.mnuClimdex, Me.mnuClimaticDescribe, Me.mnuClimaticPICSA, Me.ToolStripSeparator16, Me.mnuClimaticModels, Me.mnuClimaticExamine, Me.mnuClimaticProcess, Me.ToolStripSeparator23, Me.mnuClimaticSCF, Me.mnuClimaticEvaporation, Me.mnuClimaticCrop, Me.mnuClimaticHeatSum, Me.mnuClimateMethods})
+        Me.mnuClimatic.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFile, Me.ToolStripSeparator18, Me.mnuClimaticDates, Me.mnuCliDefineClimaticData, Me.mnuClimaticQualityControl, Me.mnuClimaticPrepare, Me.ToolStripSeparator30, Me.mnuClimdex, Me.mnuClimaticDescribe, Me.mnuClimaticPICSA, Me.mnuCMSAF, Me.ToolStripSeparator16, Me.mnuClimaticModels, Me.mnuClimaticExamine, Me.mnuClimaticProcess, Me.ToolStripSeparator23, Me.mnuClimaticSCF, Me.mnuClimaticEvaporation, Me.mnuClimaticCrop, Me.mnuClimaticHeatSum, Me.mnuClimateMethods})
         Me.mnuClimatic.Name = "mnuClimatic"
         Me.mnuClimatic.Size = New System.Drawing.Size(63, 20)
         Me.mnuClimatic.Tag = "Climatic"
@@ -1763,19 +1765,19 @@ Partial Class frmMain
         'mnuClimaticPICSARainfall
         '
         Me.mnuClimaticPICSARainfall.Name = "mnuClimaticPICSARainfall"
-        Me.mnuClimaticPICSARainfall.Size = New System.Drawing.Size(150, 22)
+        Me.mnuClimaticPICSARainfall.Size = New System.Drawing.Size(152, 22)
         Me.mnuClimaticPICSARainfall.Text = "Rainfall..."
         '
         'mnuClimaticPICSATemperature
         '
         Me.mnuClimaticPICSATemperature.Name = "mnuClimaticPICSATemperature"
-        Me.mnuClimaticPICSATemperature.Size = New System.Drawing.Size(150, 22)
+        Me.mnuClimaticPICSATemperature.Size = New System.Drawing.Size(152, 22)
         Me.mnuClimaticPICSATemperature.Text = "Temperature..."
         '
         'mnuClimaticPICSACrops
         '
         Me.mnuClimaticPICSACrops.Name = "mnuClimaticPICSACrops"
-        Me.mnuClimaticPICSACrops.Size = New System.Drawing.Size(150, 22)
+        Me.mnuClimaticPICSACrops.Size = New System.Drawing.Size(152, 22)
         Me.mnuClimaticPICSACrops.Text = "Crops..."
         '
         'mnuClimaticModels
@@ -3694,6 +3696,19 @@ Partial Class frmMain
         Me.ucrOutput.Size = New System.Drawing.Size(444, 231)
         Me.ucrOutput.TabIndex = 0
         '
+        'mnuCMSAF
+        '
+        Me.mnuCMSAF.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlToolStripMenuItem})
+        Me.mnuCMSAF.Name = "mnuCMSAF"
+        Me.mnuCMSAF.Size = New System.Drawing.Size(212, 22)
+        Me.mnuCMSAF.Text = "CM SAF"
+        '
+        'PlToolStripMenuItem
+        '
+        Me.PlToolStripMenuItem.Name = "PlToolStripMenuItem"
+        Me.PlToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.PlToolStripMenuItem.Text = "Plot Region..."
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -4185,4 +4200,6 @@ Partial Class frmMain
     Friend WithEvents mnuProcurementDescribeTwoVar As ToolStripMenuItem
     Friend WithEvents DuplicatesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents BoxplotsConceptualisedAndConstructedToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuCMSAF As ToolStripMenuItem
+    Friend WithEvents PlToolStripMenuItem As ToolStripMenuItem
 End Class

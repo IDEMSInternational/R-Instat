@@ -1653,4 +1653,8 @@ Public Class frmMain
     Private Sub mnuClimaticDescribeWindSpeedDirectionWindRose_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeWindSpeedDirectionWindRose.Click
         dlgWindrose.ShowDialog()
     End Sub
+
+    Private Sub PlToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PlToolStripMenuItem.Click
+        dlgPlotRegion.ShowDialog()
+    End Sub
 End Class
