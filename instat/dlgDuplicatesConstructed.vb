@@ -176,7 +176,6 @@ Public Class dlgDuplicatesConstructed
             If Not ucrReceiverForSuccessiveValues.IsEmpty Then
                 clsSubsetCol.AddParameter("col_name", ucrReceiverForSuccessiveValues.GetVariableNames())
                 clsSubsetCol.AddParameter("data_name", Chr(34) & ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-                frmMain.clsRLink.RunInternalScriptGetValue(clsSubsetCol.ToScript)
                 clsStreakFunction.AddParameter("ignore", clsSubsetCol.ToScript & "[" & clsSubsetCol.ToScript & ucrInputConditions.GetText & Chr(34) & ucrInputOmitValues.GetText & Chr(34) & "]", iPosition:=2)
             Else
                 clsStreakFunction.AddParameter("ignore", "NULL")
