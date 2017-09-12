@@ -21,6 +21,7 @@ Public Class dlgPlotRegion
     Private bResetSubdialog As Boolean = True
     Private clsPlotRegionFunction As RFunction
     Private clsAsDateTimeFunction As RFunction
+    Private clsSequenceFunction As RFunction
 
     Private Sub dlgPlotRegion_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -60,15 +61,17 @@ Public Class dlgPlotRegion
     Private Sub SetDefaults()
         clsPlotRegionFunction = New RFunction
         clsAsDateTimeFunction = New RFunction
+        clsSequenceFunction = New RFunction
         bResetSubdialog = True
         ucrSelectorPlotRegion.Reset()
         ucrReceiverLongitude.SetMeAsReceiver()
-        clsPlotRegionFunction.AddParameter("time_point", clsRFunctionParameter:=clsAsDateTimeFunction)
+        clsPlotRegionFunction.AddParameter("time_point", clsRFunctionParameter:=clsAsDateTimeFunction, iPosition:=5)
 
         clsPlotRegionFunction.SetRCommand("plot.region")
         clsAsDateTimeFunction.SetRCommand("as.Date")
+        clsSequenceFunction.SetRCommand("seq")
         clsAsDateTimeFunction.AddParameter("format", Chr(34) & "%Y-%m-%d" & Chr(34), iPosition:=1)
-        dtpDateTimePicker.Value = New DateTime(2015, 1, 1)
+        dtpDateTimePicker.Value = New DateTime(2015, 11, 1)
 
         AsDate()
         ucrBase.clsRsyntax.SetBaseRFunction(clsPlotRegionFunction)
@@ -97,7 +100,7 @@ Public Class dlgPlotRegion
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlotRegion.SetRFunction(clsPlotRegionFunction, bResetSubdialog)
+        sdgPlotRegion.SetRFunction(clsPlotRegionFunction, clsSequenceFunction, bResetSubdialog)
         bResetSubdialog = False
         sdgPlotRegion.ShowDialog()
     End Sub

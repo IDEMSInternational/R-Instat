@@ -90,7 +90,7 @@ Partial Class sdgPlotRegion
         Me.tbcPlotRegion.Location = New System.Drawing.Point(13, 13)
         Me.tbcPlotRegion.Name = "tbcPlotRegion"
         Me.tbcPlotRegion.SelectedIndex = 0
-        Me.tbcPlotRegion.Size = New System.Drawing.Size(452, 449)
+        Me.tbcPlotRegion.Size = New System.Drawing.Size(452, 445)
         Me.tbcPlotRegion.TabIndex = 1
         '
         'tbpLayout
@@ -126,7 +126,7 @@ Partial Class sdgPlotRegion
         Me.tbpLayout.Location = New System.Drawing.Point(4, 22)
         Me.tbpLayout.Name = "tbpLayout"
         Me.tbpLayout.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpLayout.Size = New System.Drawing.Size(444, 423)
+        Me.tbpLayout.Size = New System.Drawing.Size(444, 419)
         Me.tbpLayout.TabIndex = 0
         Me.tbpLayout.Text = "Layout"
         Me.tbpLayout.UseVisualStyleBackColor = True
