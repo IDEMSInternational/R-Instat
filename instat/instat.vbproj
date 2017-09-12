@@ -779,6 +779,12 @@
     <Compile Include="sdgWindrose.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="static\InstatObject\R\sdplotRegion.Designer.vb">
+      <DependentUpon>sdplotRegion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="static\InstatObject\R\sdplotRegion.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ucrAxes.Designer.vb">
       <DependentUpon>ucrAxes.vb</DependentUpon>
     </Compile>
@@ -4226,6 +4232,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgWindrose.resx">
       <DependentUpon>sdgWindrose.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="static\InstatObject\R\sdplotRegion.resx">
+      <DependentUpon>sdplotRegion.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrAdditionalLayers.fr-FR.resx">
       <DependentUpon>ucrAdditionalLayers.vb</DependentUpon>
