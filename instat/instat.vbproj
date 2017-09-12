@@ -755,6 +755,12 @@
     <Compile Include="sdgOpenNetCDF.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgPlotRegion.Designer.vb">
+      <DependentUpon>sdgPlotRegion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgPlotRegion.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgProportionsPercentages.Designer.vb">
       <DependentUpon>sdgProportionsPercentages.vb</DependentUpon>
     </Compile>
@@ -3248,6 +3254,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgOpenNetCDF.resx">
       <DependentUpon>sdgOpenNetCDF.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgPlotRegion.resx">
+      <DependentUpon>sdgPlotRegion.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgProportionsPercentages.resx">
       <DependentUpon>sdgProportionsPercentages.vb</DependentUpon>
