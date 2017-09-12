@@ -70,6 +70,7 @@ Partial Class sdgPlotRegion
         Me.ucrNudSizeofCityLabels = New instat.ucrNud()
         Me.lblLatitudOffset = New System.Windows.Forms.Label()
         Me.ucrNudLatitudeOffset = New instat.ucrNud()
+        Me.ucrChkPlotOwnLocations = New instat.ucrCheck()
         Me.tbcPlotRegion.SuspendLayout()
         Me.tbpLayout.SuspendLayout()
         Me.tbpAdditionalFeatures.SuspendLayout()
@@ -142,6 +143,7 @@ Partial Class sdgPlotRegion
         Me.tbpAdditionalFeatures.Controls.Add(Me.lblSizeofCities)
         Me.tbpAdditionalFeatures.Controls.Add(Me.ucrNudThickness)
         Me.tbpAdditionalFeatures.Controls.Add(Me.lblThickness)
+        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrChkPlotOwnLocations)
         Me.tbpAdditionalFeatures.Controls.Add(Me.ucrChkLabelCities)
         Me.tbpAdditionalFeatures.Controls.Add(Me.ucrChkPlotCities)
         Me.tbpAdditionalFeatures.Controls.Add(Me.ucrChkPlotRivers)
@@ -506,7 +508,7 @@ Partial Class sdgPlotRegion
         'ucrChkLabelCities
         '
         Me.ucrChkLabelCities.Checked = False
-        Me.ucrChkLabelCities.Location = New System.Drawing.Point(7, 186)
+        Me.ucrChkLabelCities.Location = New System.Drawing.Point(7, 185)
         Me.ucrChkLabelCities.Name = "ucrChkLabelCities"
         Me.ucrChkLabelCities.Size = New System.Drawing.Size(190, 20)
         Me.ucrChkLabelCities.TabIndex = 0
@@ -570,6 +572,14 @@ Partial Class sdgPlotRegion
         Me.ucrNudLatitudeOffset.Size = New System.Drawing.Size(50, 20)
         Me.ucrNudLatitudeOffset.TabIndex = 2
         Me.ucrNudLatitudeOffset.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkPlotOwnLocations
+        '
+        Me.ucrChkPlotOwnLocations.Checked = False
+        Me.ucrChkPlotOwnLocations.Location = New System.Drawing.Point(10, 364)
+        Me.ucrChkPlotOwnLocations.Name = "ucrChkPlotOwnLocations"
+        Me.ucrChkPlotOwnLocations.Size = New System.Drawing.Size(190, 20)
+        Me.ucrChkPlotOwnLocations.TabIndex = 0
         '
         'sdgPlotRegion
         '
@@ -638,4 +648,5 @@ Partial Class sdgPlotRegion
     Friend WithEvents lblSizeofCityLabels As Label
     Friend WithEvents ucrNudLatitudeOffset As ucrNud
     Friend WithEvents lblLatitudOffset As Label
+    Friend WithEvents ucrChkPlotOwnLocations As ucrCheck
 End Class
