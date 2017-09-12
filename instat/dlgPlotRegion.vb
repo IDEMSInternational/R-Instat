@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class dlgPlotRegion
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private bResetSubdialog As Boolean = True
     Private clsPlotRegionFunction As RFunction
     Private clsAsDateTimeFunction As RFunction
 
@@ -50,16 +51,16 @@ Public Class dlgPlotRegion
         ucrReceiverElement.Selector = ucrSelectorPlotRegion
         ucrReceiverElement.SetParameterIsRFunction()
 
-        ucrReceiverYear.SetParameter(New RParameter("time", 4))
-        ucrReceiverYear.Selector = ucrSelectorPlotRegion
-        ucrReceiverYear.SetParameterIsRFunction()
-        ucrReceiverYear.SetIncludedDataTypes({"Date"})
+        ucrReceiverDate.SetParameter(New RParameter("time", 4))
+        ucrReceiverDate.Selector = ucrSelectorPlotRegion
+        ucrReceiverDate.SetParameterIsRFunction()
+        ucrReceiverDate.SetIncludedDataTypes({"Date"})
     End Sub
 
     Private Sub SetDefaults()
         clsPlotRegionFunction = New RFunction
         clsAsDateTimeFunction = New RFunction
-
+        bResetSubdialog = True
         ucrSelectorPlotRegion.Reset()
         ucrReceiverLongitude.SetMeAsReceiver()
         clsPlotRegionFunction.AddParameter("time_point", clsRFunctionParameter:=clsAsDateTimeFunction)
@@ -93,5 +94,11 @@ Public Class dlgPlotRegion
 
     Private Sub dtpDateTimePicker_ValueChanged(sender As Object, e As EventArgs) Handles dtpDateTimePicker.ValueChanged
         AsDate()
+    End Sub
+
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgPlotRegion.SetRFunction(clsPlotRegionFunction, bResetSubdialog)
+        bResetSubdialog = False
+        sdgPlotRegion.ShowDialog()
     End Sub
 End Class
