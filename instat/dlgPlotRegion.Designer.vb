@@ -95,7 +95,7 @@ Partial Class dlgPlotRegion
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(138, 23)
         Me.cmdOptions.TabIndex = 12
-        Me.cmdOptions.Text = "options"
+        Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'ucrBase
