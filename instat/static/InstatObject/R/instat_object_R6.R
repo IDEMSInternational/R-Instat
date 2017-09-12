@@ -1462,3 +1462,4 @@ instat_object$set("public", "set_links", function(new_links) {
   private$.links <- new_links
 } 
 )
+
