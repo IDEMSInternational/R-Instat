@@ -129,7 +129,6 @@ Public Class sdgPlotRegion
         dctPlotCapitalsPairs.Add("Country Capitals", Chr(34) & "1" & Chr(34))
         dctPlotCapitalsPairs.Add("Provincial, State, Regional Capitals", Chr(34) & "2" & Chr(34))
         dctPlotCapitalsPairs.Add("Local Capitals", Chr(34) & "3" & Chr(34))
-        dctPlotCapitalsPairs.Add("Density Plot", Chr(34) & "geom_density" & Chr(34))
         ucrInputPlotCapitals.SetItems(dctPlotCapitalsPairs)
         ucrInputPlotCapitals.SetDropDownStyleAsNonEditable()
 
