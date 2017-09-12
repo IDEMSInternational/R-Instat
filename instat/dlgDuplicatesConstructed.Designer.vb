@@ -35,16 +35,16 @@ Partial Class dlgDuplicatesConstructed
         Me.lblVariablesToDuplicate = New System.Windows.Forms.Label()
         Me.ucrReceiverForSelectedVariables = New instat.ucrReceiverMultiple()
         Me.ucrReceiverForSuccessiveValues = New instat.ucrReceiverSingle()
-        Me.ucrPnlDuplicates = New instat.UcrPanel()
         Me.ucrNewColumnName = New instat.ucrSave()
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorDuplicateswithVariables = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrInputOmitValues = New instat.ucrInputTextBox()
         Me.ucrInputTolerance = New instat.ucrInputTextBox()
         Me.ucrChkTolerance = New instat.ucrCheck()
-        Me.ucrNudOmit = New instat.ucrNud()
         Me.ucrChkOmitValues = New instat.ucrCheck()
         Me.ucrInputConditions = New instat.ucrInputComboBox()
+        Me.ucrPnlDuplicates = New instat.UcrPanel()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -83,7 +83,7 @@ Partial Class dlgDuplicatesConstructed
         'rdoIndexNumberOfDuplicates
         '
         Me.rdoIndexNumberOfDuplicates.AutoSize = True
-        Me.rdoIndexNumberOfDuplicates.Location = New System.Drawing.Point(10, 285)
+        Me.rdoIndexNumberOfDuplicates.Location = New System.Drawing.Point(17, 280)
         Me.rdoIndexNumberOfDuplicates.Name = "rdoIndexNumberOfDuplicates"
         Me.rdoIndexNumberOfDuplicates.Size = New System.Drawing.Size(156, 17)
         Me.rdoIndexNumberOfDuplicates.TabIndex = 12
@@ -94,7 +94,7 @@ Partial Class dlgDuplicatesConstructed
         'rdoDuplicatesOnly
         '
         Me.rdoDuplicatesOnly.AutoSize = True
-        Me.rdoDuplicatesOnly.Location = New System.Drawing.Point(10, 262)
+        Me.rdoDuplicatesOnly.Location = New System.Drawing.Point(17, 257)
         Me.rdoDuplicatesOnly.Name = "rdoDuplicatesOnly"
         Me.rdoDuplicatesOnly.Size = New System.Drawing.Size(99, 17)
         Me.rdoDuplicatesOnly.TabIndex = 11
@@ -105,7 +105,7 @@ Partial Class dlgDuplicatesConstructed
         'rdoAllDuplicateCases
         '
         Me.rdoAllDuplicateCases.AutoSize = True
-        Me.rdoAllDuplicateCases.Location = New System.Drawing.Point(10, 239)
+        Me.rdoAllDuplicateCases.Location = New System.Drawing.Point(17, 234)
         Me.rdoAllDuplicateCases.Name = "rdoAllDuplicateCases"
         Me.rdoAllDuplicateCases.Size = New System.Drawing.Size(116, 17)
         Me.rdoAllDuplicateCases.TabIndex = 10
@@ -131,14 +131,14 @@ Partial Class dlgDuplicatesConstructed
         '
         'grpOptions
         '
+        Me.grpOptions.Controls.Add(Me.ucrInputOmitValues)
         Me.grpOptions.Controls.Add(Me.ucrInputTolerance)
         Me.grpOptions.Controls.Add(Me.ucrChkTolerance)
-        Me.grpOptions.Controls.Add(Me.ucrNudOmit)
         Me.grpOptions.Controls.Add(Me.ucrChkOmitValues)
         Me.grpOptions.Controls.Add(Me.ucrInputConditions)
-        Me.grpOptions.Location = New System.Drawing.Point(10, 236)
+        Me.grpOptions.Location = New System.Drawing.Point(10, 234)
         Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.Size = New System.Drawing.Size(221, 124)
+        Me.grpOptions.Size = New System.Drawing.Size(329, 124)
         Me.grpOptions.TabIndex = 13
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
@@ -148,20 +148,20 @@ Partial Class dlgDuplicatesConstructed
         Me.lblSelectedVariable.AutoSize = True
         Me.lblSelectedVariable.Location = New System.Drawing.Point(263, 82)
         Me.lblSelectedVariable.Name = "lblSelectedVariable"
-        Me.lblSelectedVariable.Size = New System.Drawing.Size(108, 13)
+        Me.lblSelectedVariable.Size = New System.Drawing.Size(93, 13)
         Me.lblSelectedVariable.TabIndex = 5
         Me.lblSelectedVariable.Tag = ""
-        Me.lblSelectedVariable.Text = "Variable to Duplicate:"
+        Me.lblSelectedVariable.Text = "Variable to check:"
         '
         'lblVariablesToDuplicate
         '
         Me.lblVariablesToDuplicate.AutoSize = True
         Me.lblVariablesToDuplicate.Location = New System.Drawing.Point(263, 82)
         Me.lblVariablesToDuplicate.Name = "lblVariablesToDuplicate"
-        Me.lblVariablesToDuplicate.Size = New System.Drawing.Size(113, 13)
+        Me.lblVariablesToDuplicate.Size = New System.Drawing.Size(98, 13)
         Me.lblVariablesToDuplicate.TabIndex = 7
         Me.lblVariablesToDuplicate.Tag = ""
-        Me.lblVariablesToDuplicate.Text = "Variables to Duplicate:"
+        Me.lblVariablesToDuplicate.Text = "Variables to check:"
         '
         'ucrReceiverForSelectedVariables
         '
@@ -186,13 +186,6 @@ Partial Class dlgDuplicatesConstructed
         Me.ucrReceiverForSuccessiveValues.strNcFilePath = ""
         Me.ucrReceiverForSuccessiveValues.TabIndex = 6
         Me.ucrReceiverForSuccessiveValues.ucrSelector = Nothing
-        '
-        'ucrPnlDuplicates
-        '
-        Me.ucrPnlDuplicates.Location = New System.Drawing.Point(3, 235)
-        Me.ucrPnlDuplicates.Name = "ucrPnlDuplicates"
-        Me.ucrPnlDuplicates.Size = New System.Drawing.Size(179, 77)
-        Me.ucrPnlDuplicates.TabIndex = 9
         '
         'ucrNewColumnName
         '
@@ -225,6 +218,16 @@ Partial Class dlgDuplicatesConstructed
         Me.ucrSelectorDuplicateswithVariables.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorDuplicateswithVariables.TabIndex = 4
         '
+        'ucrInputOmitValues
+        '
+        Me.ucrInputOmitValues.AddQuotesIfUnrecognised = True
+        Me.ucrInputOmitValues.IsMultiline = False
+        Me.ucrInputOmitValues.IsReadOnly = False
+        Me.ucrInputOmitValues.Location = New System.Drawing.Point(145, 45)
+        Me.ucrInputOmitValues.Name = "ucrInputOmitValues"
+        Me.ucrInputOmitValues.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputOmitValues.TabIndex = 5
+        '
         'ucrInputTolerance
         '
         Me.ucrInputTolerance.AddQuotesIfUnrecognised = True
@@ -243,18 +246,6 @@ Partial Class dlgDuplicatesConstructed
         Me.ucrChkTolerance.Size = New System.Drawing.Size(135, 20)
         Me.ucrChkTolerance.TabIndex = 3
         '
-        'ucrNudOmit
-        '
-        Me.ucrNudOmit.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudOmit.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudOmit.Location = New System.Drawing.Point(149, 45)
-        Me.ucrNudOmit.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudOmit.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudOmit.Name = "ucrNudOmit"
-        Me.ucrNudOmit.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudOmit.TabIndex = 2
-        Me.ucrNudOmit.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'ucrChkOmitValues
         '
         Me.ucrChkOmitValues.Checked = False
@@ -271,6 +262,13 @@ Partial Class dlgDuplicatesConstructed
         Me.ucrInputConditions.Name = "ucrInputConditions"
         Me.ucrInputConditions.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputConditions.TabIndex = 1
+        '
+        'ucrPnlDuplicates
+        '
+        Me.ucrPnlDuplicates.Location = New System.Drawing.Point(10, 230)
+        Me.ucrPnlDuplicates.Name = "ucrPnlDuplicates"
+        Me.ucrPnlDuplicates.Size = New System.Drawing.Size(179, 77)
+        Me.ucrPnlDuplicates.TabIndex = 9
         '
         'dlgDuplicatesConstructed
         '
@@ -318,7 +316,6 @@ Partial Class dlgDuplicatesConstructed
     Friend WithEvents ttDuplicates As ToolTip
     Friend WithEvents rdoSuccessiveValues As RadioButton
     Friend WithEvents ucrChkOmitValues As ucrCheck
-    Friend WithEvents ucrNudOmit As ucrNud
     Friend WithEvents ucrInputConditions As ucrInputComboBox
     Friend WithEvents grpOptions As GroupBox
     Friend WithEvents lblSelectedVariable As Label
@@ -327,4 +324,5 @@ Partial Class dlgDuplicatesConstructed
     Friend WithEvents ucrReceiverForSuccessiveValues As ucrReceiverSingle
     Friend WithEvents ucrReceiverForSelectedVariables As ucrReceiverMultiple
     Friend WithEvents lblVariablesToDuplicate As Label
+    Friend WithEvents ucrInputOmitValues As ucrInputTextBox
 End Class
