@@ -121,8 +121,8 @@ Public Class dlgInventoryPlot
         clsDefaultRFunction.AddParameter("facet_by", "NULL")
 
         clsKeyColours.SetRCommand("c")
-        clsKeyColours.AddParameter("rain", Chr(34) & "red" & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
-        clsKeyColours.AddParameter("dry", Chr(34) & "grey" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
+        clsKeyColours.AddParameter("missing", Chr(34) & "red" & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+        clsKeyColours.AddParameter("nonmissing", Chr(34) & "grey" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
         clsDefaultRFunction.AddParameter("key_colours", clsRFunctionParameter:=clsKeyColours)
 
         clsBreaksFunc.SetRCommand("c")
@@ -133,8 +133,8 @@ Public Class dlgInventoryPlot
         clsDefaultRFunction.AddParameter("rain_cats", clsRFunctionParameter:=clsListFunc)
 
         clslabelsFunc.SetRCommand("c")
-        clslabelsFunc.AddParameter("rain", "Rain", bIncludeArgumentName:=False, iPosition:=1)
-        clslabelsFunc.AddParameter("dry", "Dry", bIncludeArgumentName:=False, iPosition:=0)
+        clslabelsFunc.AddParameter("rain", Chr(34) & "Rain" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
+        clslabelsFunc.AddParameter("dry", Chr(34) & "Dry" & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
         clsListFunc.AddParameter("labels ", clsRFunctionParameter:=clslabelsFunc)
         clsDefaultRFunction.AddParameter("rain_cats", clsRFunctionParameter:=clsListFunc)
 
