@@ -54,8 +54,25 @@ Partial Class sdgPlotRegion
         Me.ucrInputColourBarMax = New instat.ucrInputTextBox()
         Me.lblNumberofColours = New System.Windows.Forms.Label()
         Me.ucrNudNumberofColours = New instat.ucrNud()
+        Me.ucrChkPlotHighResolution = New instat.ucrCheck()
+        Me.ucrChkPlotCoastLines = New instat.ucrCheck()
+        Me.ucrChkPlotCountries = New instat.ucrCheck()
+        Me.ucrChkPlotRivers = New instat.ucrCheck()
+        Me.ucrChkPlotCities = New instat.ucrCheck()
+        Me.lblThickness = New System.Windows.Forms.Label()
+        Me.ucrNudThickness = New instat.ucrNud()
+        Me.lblSizeofCities = New System.Windows.Forms.Label()
+        Me.ucrNudSizeofCities = New instat.ucrNud()
+        Me.ucrChkLabelCities = New instat.ucrCheck()
+        Me.lblPlotCapitals = New System.Windows.Forms.Label()
+        Me.ucrInputPlotCapitals = New instat.ucrInputComboBox()
+        Me.lblSizeofCityLabels = New System.Windows.Forms.Label()
+        Me.ucrNudSizeofCityLabels = New instat.ucrNud()
+        Me.lblLatitudOffset = New System.Windows.Forms.Label()
+        Me.ucrNudLatitudeOffset = New instat.ucrNud()
         Me.tbcPlotRegion.SuspendLayout()
         Me.tbpLayout.SuspendLayout()
+        Me.tbpAdditionalFeatures.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrButtonsSdgPlotRegion
@@ -115,6 +132,22 @@ Partial Class sdgPlotRegion
         '
         'tbpAdditionalFeatures
         '
+        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrInputPlotCapitals)
+        Me.tbpAdditionalFeatures.Controls.Add(Me.lblPlotCapitals)
+        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrNudLatitudeOffset)
+        Me.tbpAdditionalFeatures.Controls.Add(Me.lblLatitudOffset)
+        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrNudSizeofCityLabels)
+        Me.tbpAdditionalFeatures.Controls.Add(Me.lblSizeofCityLabels)
+        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrNudSizeofCities)
+        Me.tbpAdditionalFeatures.Controls.Add(Me.lblSizeofCities)
+        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrNudThickness)
+        Me.tbpAdditionalFeatures.Controls.Add(Me.lblThickness)
+        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrChkLabelCities)
+        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrChkPlotCities)
+        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrChkPlotRivers)
+        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrChkPlotCountries)
+        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrChkPlotCoastLines)
+        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrChkPlotHighResolution)
         Me.tbpAdditionalFeatures.Location = New System.Drawing.Point(4, 22)
         Me.tbpAdditionalFeatures.Name = "tbpAdditionalFeatures"
         Me.tbpAdditionalFeatures.Padding = New System.Windows.Forms.Padding(3)
@@ -388,6 +421,156 @@ Partial Class sdgPlotRegion
         Me.ucrNudNumberofColours.TabIndex = 3
         Me.ucrNudNumberofColours.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
+        'ucrChkPlotHighResolution
+        '
+        Me.ucrChkPlotHighResolution.Checked = False
+        Me.ucrChkPlotHighResolution.Location = New System.Drawing.Point(7, 16)
+        Me.ucrChkPlotHighResolution.Name = "ucrChkPlotHighResolution"
+        Me.ucrChkPlotHighResolution.Size = New System.Drawing.Size(278, 20)
+        Me.ucrChkPlotHighResolution.TabIndex = 0
+        '
+        'ucrChkPlotCoastLines
+        '
+        Me.ucrChkPlotCoastLines.Checked = False
+        Me.ucrChkPlotCoastLines.Location = New System.Drawing.Point(7, 42)
+        Me.ucrChkPlotCoastLines.Name = "ucrChkPlotCoastLines"
+        Me.ucrChkPlotCoastLines.Size = New System.Drawing.Size(278, 20)
+        Me.ucrChkPlotCoastLines.TabIndex = 0
+        '
+        'ucrChkPlotCountries
+        '
+        Me.ucrChkPlotCountries.Checked = False
+        Me.ucrChkPlotCountries.Location = New System.Drawing.Point(7, 68)
+        Me.ucrChkPlotCountries.Name = "ucrChkPlotCountries"
+        Me.ucrChkPlotCountries.Size = New System.Drawing.Size(278, 20)
+        Me.ucrChkPlotCountries.TabIndex = 0
+        '
+        'ucrChkPlotRivers
+        '
+        Me.ucrChkPlotRivers.Checked = False
+        Me.ucrChkPlotRivers.Location = New System.Drawing.Point(6, 94)
+        Me.ucrChkPlotRivers.Name = "ucrChkPlotRivers"
+        Me.ucrChkPlotRivers.Size = New System.Drawing.Size(278, 20)
+        Me.ucrChkPlotRivers.TabIndex = 0
+        '
+        'ucrChkPlotCities
+        '
+        Me.ucrChkPlotCities.Checked = False
+        Me.ucrChkPlotCities.Location = New System.Drawing.Point(7, 121)
+        Me.ucrChkPlotCities.Name = "ucrChkPlotCities"
+        Me.ucrChkPlotCities.Size = New System.Drawing.Size(190, 20)
+        Me.ucrChkPlotCities.TabIndex = 0
+        '
+        'lblThickness
+        '
+        Me.lblThickness.AutoSize = True
+        Me.lblThickness.Location = New System.Drawing.Point(7, 147)
+        Me.lblThickness.Name = "lblThickness"
+        Me.lblThickness.Size = New System.Drawing.Size(56, 13)
+        Me.lblThickness.TabIndex = 1
+        Me.lblThickness.Text = "Thickness"
+        '
+        'ucrNudThickness
+        '
+        Me.ucrNudThickness.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudThickness.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudThickness.Location = New System.Drawing.Point(82, 147)
+        Me.ucrNudThickness.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudThickness.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudThickness.Name = "ucrNudThickness"
+        Me.ucrNudThickness.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudThickness.TabIndex = 2
+        Me.ucrNudThickness.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblSizeofCities
+        '
+        Me.lblSizeofCities.AutoSize = True
+        Me.lblSizeofCities.Location = New System.Drawing.Point(229, 127)
+        Me.lblSizeofCities.Name = "lblSizeofCities"
+        Me.lblSizeofCities.Size = New System.Drawing.Size(67, 13)
+        Me.lblSizeofCities.TabIndex = 1
+        Me.lblSizeofCities.Text = "Size of Cities"
+        '
+        'ucrNudSizeofCities
+        '
+        Me.ucrNudSizeofCities.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSizeofCities.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSizeofCities.Location = New System.Drawing.Point(304, 127)
+        Me.ucrNudSizeofCities.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSizeofCities.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSizeofCities.Name = "ucrNudSizeofCities"
+        Me.ucrNudSizeofCities.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSizeofCities.TabIndex = 2
+        Me.ucrNudSizeofCities.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkLabelCities
+        '
+        Me.ucrChkLabelCities.Checked = False
+        Me.ucrChkLabelCities.Location = New System.Drawing.Point(7, 186)
+        Me.ucrChkLabelCities.Name = "ucrChkLabelCities"
+        Me.ucrChkLabelCities.Size = New System.Drawing.Size(190, 20)
+        Me.ucrChkLabelCities.TabIndex = 0
+        '
+        'lblPlotCapitals
+        '
+        Me.lblPlotCapitals.AutoSize = True
+        Me.lblPlotCapitals.Location = New System.Drawing.Point(6, 223)
+        Me.lblPlotCapitals.Name = "lblPlotCapitals"
+        Me.lblPlotCapitals.Size = New System.Drawing.Size(65, 13)
+        Me.lblPlotCapitals.TabIndex = 3
+        Me.lblPlotCapitals.Text = "Plot Capitals"
+        '
+        'ucrInputPlotCapitals
+        '
+        Me.ucrInputPlotCapitals.AddQuotesIfUnrecognised = True
+        Me.ucrInputPlotCapitals.IsReadOnly = False
+        Me.ucrInputPlotCapitals.Location = New System.Drawing.Point(92, 223)
+        Me.ucrInputPlotCapitals.Name = "ucrInputPlotCapitals"
+        Me.ucrInputPlotCapitals.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputPlotCapitals.TabIndex = 4
+        '
+        'lblSizeofCityLabels
+        '
+        Me.lblSizeofCityLabels.AutoSize = True
+        Me.lblSizeofCityLabels.Location = New System.Drawing.Point(4, 274)
+        Me.lblSizeofCityLabels.Name = "lblSizeofCityLabels"
+        Me.lblSizeofCityLabels.Size = New System.Drawing.Size(93, 13)
+        Me.lblSizeofCityLabels.TabIndex = 1
+        Me.lblSizeofCityLabels.Text = "Size of City Labels"
+        '
+        'ucrNudSizeofCityLabels
+        '
+        Me.ucrNudSizeofCityLabels.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSizeofCityLabels.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSizeofCityLabels.Location = New System.Drawing.Point(103, 274)
+        Me.ucrNudSizeofCityLabels.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSizeofCityLabels.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSizeofCityLabels.Name = "ucrNudSizeofCityLabels"
+        Me.ucrNudSizeofCityLabels.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSizeofCityLabels.TabIndex = 2
+        Me.ucrNudSizeofCityLabels.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblLatitudOffset
+        '
+        Me.lblLatitudOffset.AutoSize = True
+        Me.lblLatitudOffset.Location = New System.Drawing.Point(4, 314)
+        Me.lblLatitudOffset.Name = "lblLatitudOffset"
+        Me.lblLatitudOffset.Size = New System.Drawing.Size(76, 13)
+        Me.lblLatitudOffset.TabIndex = 1
+        Me.lblLatitudOffset.Text = "Latitude Offset"
+        '
+        'ucrNudLatitudeOffset
+        '
+        Me.ucrNudLatitudeOffset.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLatitudeOffset.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudLatitudeOffset.Location = New System.Drawing.Point(103, 314)
+        Me.ucrNudLatitudeOffset.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLatitudeOffset.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLatitudeOffset.Name = "ucrNudLatitudeOffset"
+        Me.ucrNudLatitudeOffset.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudLatitudeOffset.TabIndex = 2
+        Me.ucrNudLatitudeOffset.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'sdgPlotRegion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -401,6 +584,8 @@ Partial Class sdgPlotRegion
         Me.tbcPlotRegion.ResumeLayout(False)
         Me.tbpLayout.ResumeLayout(False)
         Me.tbpLayout.PerformLayout()
+        Me.tbpAdditionalFeatures.ResumeLayout(False)
+        Me.tbpAdditionalFeatures.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -437,4 +622,20 @@ Partial Class sdgPlotRegion
     Friend WithEvents lblColourBarMax As Label
     Friend WithEvents ucrNudNumberofColours As ucrNud
     Friend WithEvents lblNumberofColours As Label
+    Friend WithEvents ucrChkPlotCities As ucrCheck
+    Friend WithEvents ucrChkPlotRivers As ucrCheck
+    Friend WithEvents ucrChkPlotCountries As ucrCheck
+    Friend WithEvents ucrChkPlotCoastLines As ucrCheck
+    Friend WithEvents ucrChkPlotHighResolution As ucrCheck
+    Friend WithEvents ucrNudThickness As ucrNud
+    Friend WithEvents lblThickness As Label
+    Friend WithEvents ucrNudSizeofCities As ucrNud
+    Friend WithEvents lblSizeofCities As Label
+    Friend WithEvents ucrChkLabelCities As ucrCheck
+    Friend WithEvents ucrInputPlotCapitals As ucrInputComboBox
+    Friend WithEvents lblPlotCapitals As Label
+    Friend WithEvents ucrNudSizeofCityLabels As ucrNud
+    Friend WithEvents lblSizeofCityLabels As Label
+    Friend WithEvents ucrNudLatitudeOffset As ucrNud
+    Friend WithEvents lblLatitudOffset As Label
 End Class
