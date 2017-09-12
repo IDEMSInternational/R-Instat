@@ -60,6 +60,10 @@ Public Class dlgName
         ucrInputVariableLabel.SetParameter(New RParameter("label", 3))
     End Sub
 
+    Private Sub ReopenDialog()
+        ucrSelectVariables.Reset()
+    End Sub
+
     Public Sub SetDefaults()
         clsDefaultRFunction = New RFunction
         ucrInputVariableLabel.Reset()
