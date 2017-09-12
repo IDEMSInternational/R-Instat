@@ -148,6 +148,8 @@ Public Class sdgPlotRegion
         ucrNudSizeofCityLabels.SetRDefault("0.25")
 
         'not yet working disabled for now
+        ucrChkSetColourBreaks.Enabled = False
+        ucrChkPlotRivers.Enabled = False
         ucrChkPlotOwnLocations.Enabled = False
         ucrChkPlotOwnLocations.SetParameter(New RParameter("plotOwnLocations", 29))
         ucrChkPlotOwnLocations.SetText("Plot Own Locations")
@@ -163,5 +165,9 @@ Public Class sdgPlotRegion
         clsRfunction = clsNewRfunction
         clsSequenceFunction = clsNewSequenceFunction
         SetRCode(Me, clsRfunction, bReset)
+
+        If bReset Then
+            tbcPlotRegion.SelectedIndex = 0
+        End If
     End Sub
 End Class
