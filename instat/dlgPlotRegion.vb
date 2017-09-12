@@ -82,7 +82,11 @@ Public Class dlgPlotRegion
     End Sub
 
     Private Sub TestOkEnabled()
-
+        If Not ucrReceiverLongitude.IsEmpty AndAlso Not ucrReceiverLatitude.IsEmpty AndAlso Not ucrReceiverElement.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrBasePlotRegion_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -103,5 +107,9 @@ Public Class dlgPlotRegion
         sdgPlotRegion.SetRFunction(clsPlotRegionFunction, clsSequenceFunction, bResetSubdialog)
         bResetSubdialog = False
         sdgPlotRegion.ShowDialog()
+    End Sub
+
+    Private Sub ucrReceiverLatitude_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLatitude.ControlContentsChanged, ucrReceiverLongitude.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
