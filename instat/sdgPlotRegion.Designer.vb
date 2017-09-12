@@ -24,41 +24,41 @@ Partial Class sdgPlotRegion
     Private Sub InitializeComponent()
         Me.tbcPlotRegion = New System.Windows.Forms.TabControl()
         Me.tbpLayout = New System.Windows.Forms.TabPage()
-        Me.lblNumberofColours = New System.Windows.Forms.Label()
-        Me.lblColourBarMax = New System.Windows.Forms.Label()
-        Me.lblColourBarMin = New System.Windows.Forms.Label()
-        Me.lblInterval = New System.Windows.Forms.Label()
-        Me.lblMaxBreakPoint = New System.Windows.Forms.Label()
-        Me.lblMinBreakPoint = New System.Windows.Forms.Label()
-        Me.lblPlotWidth = New System.Windows.Forms.Label()
-        Me.lblPlotHeight = New System.Windows.Forms.Label()
-        Me.lblMaxLatitude = New System.Windows.Forms.Label()
-        Me.lblMinLatitude = New System.Windows.Forms.Label()
-        Me.lblMaxLongitude = New System.Windows.Forms.Label()
-        Me.lblMinLongitude = New System.Windows.Forms.Label()
-        Me.lblAddtoTitle = New System.Windows.Forms.Label()
-        Me.tbpAdditionalFeatures = New System.Windows.Forms.TabPage()
-        Me.lblPlotCapitals = New System.Windows.Forms.Label()
-        Me.lblLatitudOffset = New System.Windows.Forms.Label()
-        Me.lblSizeofCityLabels = New System.Windows.Forms.Label()
-        Me.lblSizeofCities = New System.Windows.Forms.Label()
-        Me.lblThickness = New System.Windows.Forms.Label()
         Me.ucrNudNumberofColours = New instat.ucrNud()
         Me.ucrChkSetColourBreaks = New instat.ucrCheck()
         Me.ucrChkPlotAnomaly = New instat.ucrCheck()
         Me.ucrInputColourBarMax = New instat.ucrInputTextBox()
         Me.ucrInputColourBarMin = New instat.ucrInputTextBox()
+        Me.lblNumberofColours = New System.Windows.Forms.Label()
+        Me.lblColourBarMax = New System.Windows.Forms.Label()
         Me.ucrInputInterval = New instat.ucrInputTextBox()
+        Me.lblColourBarMin = New System.Windows.Forms.Label()
         Me.ucrInputMaxBreakPoint = New instat.ucrInputTextBox()
+        Me.lblInterval = New System.Windows.Forms.Label()
         Me.ucrInputMinBreakPoint = New instat.ucrInputTextBox()
+        Me.lblMaxBreakPoint = New System.Windows.Forms.Label()
+        Me.lblMinBreakPoint = New System.Windows.Forms.Label()
         Me.ucrInputPlotWidth = New instat.ucrInputTextBox()
+        Me.lblPlotWidth = New System.Windows.Forms.Label()
         Me.ucrInputPlotHeight = New instat.ucrInputTextBox()
+        Me.lblPlotHeight = New System.Windows.Forms.Label()
         Me.ucrInputMaxLatitude = New instat.ucrInputTextBox()
+        Me.lblMaxLatitude = New System.Windows.Forms.Label()
         Me.ucrInputMinLatitude = New instat.ucrInputTextBox()
+        Me.lblMinLatitude = New System.Windows.Forms.Label()
         Me.ucrInputMaxLongitude = New instat.ucrInputTextBox()
+        Me.lblMaxLongitude = New System.Windows.Forms.Label()
         Me.ucrInputMinLongitude = New instat.ucrInputTextBox()
+        Me.lblMinLongitude = New System.Windows.Forms.Label()
         Me.ucrInputAddtoTitle = New instat.ucrInputTextBox()
+        Me.lblAddtoTitle = New System.Windows.Forms.Label()
+        Me.tbpAdditionalFeatures = New System.Windows.Forms.TabPage()
         Me.ucrInputPlotCapitals = New instat.ucrInputComboBox()
+        Me.lblPlotCapitals = New System.Windows.Forms.Label()
+        Me.lblLatitudOffset = New System.Windows.Forms.Label()
+        Me.lblSizeofCityLabels = New System.Windows.Forms.Label()
+        Me.lblSizeofCities = New System.Windows.Forms.Label()
+        Me.lblThickness = New System.Windows.Forms.Label()
         Me.ucrNudLatitudeOffset = New instat.ucrNud()
         Me.ucrNudSizeofCityLabels = New instat.ucrNud()
         Me.ucrNudSizeofCities = New instat.ucrNud()
@@ -124,195 +124,6 @@ Partial Class sdgPlotRegion
         Me.tbpLayout.Text = "Layout"
         Me.tbpLayout.UseVisualStyleBackColor = True
         '
-        'lblNumberofColours
-        '
-        Me.lblNumberofColours.AutoSize = True
-        Me.lblNumberofColours.Location = New System.Drawing.Point(7, 388)
-        Me.lblNumberofColours.Name = "lblNumberofColours"
-        Me.lblNumberofColours.Size = New System.Drawing.Size(94, 13)
-        Me.lblNumberofColours.TabIndex = 0
-        Me.lblNumberofColours.Text = "Number of Colours"
-        '
-        'lblColourBarMax
-        '
-        Me.lblColourBarMax.AutoSize = True
-        Me.lblColourBarMax.Location = New System.Drawing.Point(7, 362)
-        Me.lblColourBarMax.Name = "lblColourBarMax"
-        Me.lblColourBarMax.Size = New System.Drawing.Size(79, 13)
-        Me.lblColourBarMax.TabIndex = 0
-        Me.lblColourBarMax.Text = "Colour Bar Max"
-        '
-        'lblColourBarMin
-        '
-        Me.lblColourBarMin.AutoSize = True
-        Me.lblColourBarMin.Location = New System.Drawing.Point(7, 335)
-        Me.lblColourBarMin.Name = "lblColourBarMin"
-        Me.lblColourBarMin.Size = New System.Drawing.Size(76, 13)
-        Me.lblColourBarMin.TabIndex = 0
-        Me.lblColourBarMin.Text = "Colour Bar Min"
-        '
-        'lblInterval
-        '
-        Me.lblInterval.AutoSize = True
-        Me.lblInterval.Location = New System.Drawing.Point(7, 308)
-        Me.lblInterval.Name = "lblInterval"
-        Me.lblInterval.Size = New System.Drawing.Size(42, 13)
-        Me.lblInterval.TabIndex = 0
-        Me.lblInterval.Text = "Interval"
-        '
-        'lblMaxBreakPoint
-        '
-        Me.lblMaxBreakPoint.AutoSize = True
-        Me.lblMaxBreakPoint.Location = New System.Drawing.Point(7, 284)
-        Me.lblMaxBreakPoint.Name = "lblMaxBreakPoint"
-        Me.lblMaxBreakPoint.Size = New System.Drawing.Size(85, 13)
-        Me.lblMaxBreakPoint.TabIndex = 0
-        Me.lblMaxBreakPoint.Text = "Max Break Point"
-        '
-        'lblMinBreakPoint
-        '
-        Me.lblMinBreakPoint.AutoSize = True
-        Me.lblMinBreakPoint.Location = New System.Drawing.Point(7, 260)
-        Me.lblMinBreakPoint.Name = "lblMinBreakPoint"
-        Me.lblMinBreakPoint.Size = New System.Drawing.Size(82, 13)
-        Me.lblMinBreakPoint.TabIndex = 0
-        Me.lblMinBreakPoint.Text = "Min Break Point"
-        '
-        'lblPlotWidth
-        '
-        Me.lblPlotWidth.AutoSize = True
-        Me.lblPlotWidth.Location = New System.Drawing.Point(7, 178)
-        Me.lblPlotWidth.Name = "lblPlotWidth"
-        Me.lblPlotWidth.Size = New System.Drawing.Size(56, 13)
-        Me.lblPlotWidth.TabIndex = 0
-        Me.lblPlotWidth.Text = "Plot Width"
-        '
-        'lblPlotHeight
-        '
-        Me.lblPlotHeight.AutoSize = True
-        Me.lblPlotHeight.Location = New System.Drawing.Point(7, 151)
-        Me.lblPlotHeight.Name = "lblPlotHeight"
-        Me.lblPlotHeight.Size = New System.Drawing.Size(59, 13)
-        Me.lblPlotHeight.TabIndex = 0
-        Me.lblPlotHeight.Text = "Plot Height"
-        '
-        'lblMaxLatitude
-        '
-        Me.lblMaxLatitude.AutoSize = True
-        Me.lblMaxLatitude.Location = New System.Drawing.Point(7, 124)
-        Me.lblMaxLatitude.Name = "lblMaxLatitude"
-        Me.lblMaxLatitude.Size = New System.Drawing.Size(65, 13)
-        Me.lblMaxLatitude.TabIndex = 0
-        Me.lblMaxLatitude.Text = "Min Latitude"
-        '
-        'lblMinLatitude
-        '
-        Me.lblMinLatitude.AutoSize = True
-        Me.lblMinLatitude.Location = New System.Drawing.Point(7, 97)
-        Me.lblMinLatitude.Name = "lblMinLatitude"
-        Me.lblMinLatitude.Size = New System.Drawing.Size(65, 13)
-        Me.lblMinLatitude.TabIndex = 0
-        Me.lblMinLatitude.Text = "Min Latitude"
-        '
-        'lblMaxLongitude
-        '
-        Me.lblMaxLongitude.AutoSize = True
-        Me.lblMaxLongitude.Location = New System.Drawing.Point(7, 70)
-        Me.lblMaxLongitude.Name = "lblMaxLongitude"
-        Me.lblMaxLongitude.Size = New System.Drawing.Size(77, 13)
-        Me.lblMaxLongitude.TabIndex = 0
-        Me.lblMaxLongitude.Text = "Max Longitude"
-        '
-        'lblMinLongitude
-        '
-        Me.lblMinLongitude.AutoSize = True
-        Me.lblMinLongitude.Location = New System.Drawing.Point(7, 43)
-        Me.lblMinLongitude.Name = "lblMinLongitude"
-        Me.lblMinLongitude.Size = New System.Drawing.Size(74, 13)
-        Me.lblMinLongitude.TabIndex = 0
-        Me.lblMinLongitude.Text = "Min Longitude"
-        '
-        'lblAddtoTitle
-        '
-        Me.lblAddtoTitle.AutoSize = True
-        Me.lblAddtoTitle.Location = New System.Drawing.Point(7, 16)
-        Me.lblAddtoTitle.Name = "lblAddtoTitle"
-        Me.lblAddtoTitle.Size = New System.Drawing.Size(61, 13)
-        Me.lblAddtoTitle.TabIndex = 0
-        Me.lblAddtoTitle.Text = "Add to Title"
-        '
-        'tbpAdditionalFeatures
-        '
-        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrInputPlotCapitals)
-        Me.tbpAdditionalFeatures.Controls.Add(Me.lblPlotCapitals)
-        Me.tbpAdditionalFeatures.Controls.Add(Me.lblLatitudOffset)
-        Me.tbpAdditionalFeatures.Controls.Add(Me.lblSizeofCityLabels)
-        Me.tbpAdditionalFeatures.Controls.Add(Me.lblSizeofCities)
-        Me.tbpAdditionalFeatures.Controls.Add(Me.lblThickness)
-        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrNudLatitudeOffset)
-        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrNudSizeofCityLabels)
-        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrNudSizeofCities)
-        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrNudThickness)
-        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrChkPlotOwnLocations)
-        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrChkLabelCities)
-        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrChkPlotCities)
-        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrChkPlotRivers)
-        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrChkPlotCountries)
-        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrChkPlotCoastLines)
-        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrChkPlotHighResolution)
-        Me.tbpAdditionalFeatures.Location = New System.Drawing.Point(4, 22)
-        Me.tbpAdditionalFeatures.Name = "tbpAdditionalFeatures"
-        Me.tbpAdditionalFeatures.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpAdditionalFeatures.Size = New System.Drawing.Size(444, 419)
-        Me.tbpAdditionalFeatures.TabIndex = 1
-        Me.tbpAdditionalFeatures.Text = "Additional Features"
-        Me.tbpAdditionalFeatures.UseVisualStyleBackColor = True
-        '
-        'lblPlotCapitals
-        '
-        Me.lblPlotCapitals.AutoSize = True
-        Me.lblPlotCapitals.Location = New System.Drawing.Point(6, 223)
-        Me.lblPlotCapitals.Name = "lblPlotCapitals"
-        Me.lblPlotCapitals.Size = New System.Drawing.Size(65, 13)
-        Me.lblPlotCapitals.TabIndex = 3
-        Me.lblPlotCapitals.Text = "Plot Capitals"
-        '
-        'lblLatitudOffset
-        '
-        Me.lblLatitudOffset.AutoSize = True
-        Me.lblLatitudOffset.Location = New System.Drawing.Point(4, 314)
-        Me.lblLatitudOffset.Name = "lblLatitudOffset"
-        Me.lblLatitudOffset.Size = New System.Drawing.Size(76, 13)
-        Me.lblLatitudOffset.TabIndex = 1
-        Me.lblLatitudOffset.Text = "Latitude Offset"
-        '
-        'lblSizeofCityLabels
-        '
-        Me.lblSizeofCityLabels.AutoSize = True
-        Me.lblSizeofCityLabels.Location = New System.Drawing.Point(4, 274)
-        Me.lblSizeofCityLabels.Name = "lblSizeofCityLabels"
-        Me.lblSizeofCityLabels.Size = New System.Drawing.Size(93, 13)
-        Me.lblSizeofCityLabels.TabIndex = 1
-        Me.lblSizeofCityLabels.Text = "Size of City Labels"
-        '
-        'lblSizeofCities
-        '
-        Me.lblSizeofCities.AutoSize = True
-        Me.lblSizeofCities.Location = New System.Drawing.Point(229, 127)
-        Me.lblSizeofCities.Name = "lblSizeofCities"
-        Me.lblSizeofCities.Size = New System.Drawing.Size(67, 13)
-        Me.lblSizeofCities.TabIndex = 1
-        Me.lblSizeofCities.Text = "Size of Cities"
-        '
-        'lblThickness
-        '
-        Me.lblThickness.AutoSize = True
-        Me.lblThickness.Location = New System.Drawing.Point(7, 147)
-        Me.lblThickness.Name = "lblThickness"
-        Me.lblThickness.Size = New System.Drawing.Size(56, 13)
-        Me.lblThickness.TabIndex = 1
-        Me.lblThickness.Text = "Thickness"
-        '
         'ucrNudNumberofColours
         '
         Me.ucrNudNumberofColours.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
@@ -361,6 +172,24 @@ Partial Class sdgPlotRegion
         Me.ucrInputColourBarMin.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputColourBarMin.TabIndex = 1
         '
+        'lblNumberofColours
+        '
+        Me.lblNumberofColours.AutoSize = True
+        Me.lblNumberofColours.Location = New System.Drawing.Point(7, 388)
+        Me.lblNumberofColours.Name = "lblNumberofColours"
+        Me.lblNumberofColours.Size = New System.Drawing.Size(94, 13)
+        Me.lblNumberofColours.TabIndex = 0
+        Me.lblNumberofColours.Text = "Number of Colours"
+        '
+        'lblColourBarMax
+        '
+        Me.lblColourBarMax.AutoSize = True
+        Me.lblColourBarMax.Location = New System.Drawing.Point(7, 362)
+        Me.lblColourBarMax.Name = "lblColourBarMax"
+        Me.lblColourBarMax.Size = New System.Drawing.Size(79, 13)
+        Me.lblColourBarMax.TabIndex = 0
+        Me.lblColourBarMax.Text = "Colour Bar Max"
+        '
         'ucrInputInterval
         '
         Me.ucrInputInterval.AddQuotesIfUnrecognised = True
@@ -370,6 +199,15 @@ Partial Class sdgPlotRegion
         Me.ucrInputInterval.Name = "ucrInputInterval"
         Me.ucrInputInterval.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputInterval.TabIndex = 1
+        '
+        'lblColourBarMin
+        '
+        Me.lblColourBarMin.AutoSize = True
+        Me.lblColourBarMin.Location = New System.Drawing.Point(7, 335)
+        Me.lblColourBarMin.Name = "lblColourBarMin"
+        Me.lblColourBarMin.Size = New System.Drawing.Size(76, 13)
+        Me.lblColourBarMin.TabIndex = 0
+        Me.lblColourBarMin.Text = "Colour Bar Min"
         '
         'ucrInputMaxBreakPoint
         '
@@ -381,6 +219,15 @@ Partial Class sdgPlotRegion
         Me.ucrInputMaxBreakPoint.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputMaxBreakPoint.TabIndex = 1
         '
+        'lblInterval
+        '
+        Me.lblInterval.AutoSize = True
+        Me.lblInterval.Location = New System.Drawing.Point(7, 308)
+        Me.lblInterval.Name = "lblInterval"
+        Me.lblInterval.Size = New System.Drawing.Size(42, 13)
+        Me.lblInterval.TabIndex = 0
+        Me.lblInterval.Text = "Interval"
+        '
         'ucrInputMinBreakPoint
         '
         Me.ucrInputMinBreakPoint.AddQuotesIfUnrecognised = True
@@ -390,6 +237,24 @@ Partial Class sdgPlotRegion
         Me.ucrInputMinBreakPoint.Name = "ucrInputMinBreakPoint"
         Me.ucrInputMinBreakPoint.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputMinBreakPoint.TabIndex = 1
+        '
+        'lblMaxBreakPoint
+        '
+        Me.lblMaxBreakPoint.AutoSize = True
+        Me.lblMaxBreakPoint.Location = New System.Drawing.Point(7, 284)
+        Me.lblMaxBreakPoint.Name = "lblMaxBreakPoint"
+        Me.lblMaxBreakPoint.Size = New System.Drawing.Size(85, 13)
+        Me.lblMaxBreakPoint.TabIndex = 0
+        Me.lblMaxBreakPoint.Text = "Max Break Point"
+        '
+        'lblMinBreakPoint
+        '
+        Me.lblMinBreakPoint.AutoSize = True
+        Me.lblMinBreakPoint.Location = New System.Drawing.Point(7, 260)
+        Me.lblMinBreakPoint.Name = "lblMinBreakPoint"
+        Me.lblMinBreakPoint.Size = New System.Drawing.Size(82, 13)
+        Me.lblMinBreakPoint.TabIndex = 0
+        Me.lblMinBreakPoint.Text = "Min Break Point"
         '
         'ucrInputPlotWidth
         '
@@ -401,6 +266,15 @@ Partial Class sdgPlotRegion
         Me.ucrInputPlotWidth.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputPlotWidth.TabIndex = 1
         '
+        'lblPlotWidth
+        '
+        Me.lblPlotWidth.AutoSize = True
+        Me.lblPlotWidth.Location = New System.Drawing.Point(7, 178)
+        Me.lblPlotWidth.Name = "lblPlotWidth"
+        Me.lblPlotWidth.Size = New System.Drawing.Size(56, 13)
+        Me.lblPlotWidth.TabIndex = 0
+        Me.lblPlotWidth.Text = "Plot Width"
+        '
         'ucrInputPlotHeight
         '
         Me.ucrInputPlotHeight.AddQuotesIfUnrecognised = True
@@ -410,6 +284,15 @@ Partial Class sdgPlotRegion
         Me.ucrInputPlotHeight.Name = "ucrInputPlotHeight"
         Me.ucrInputPlotHeight.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputPlotHeight.TabIndex = 1
+        '
+        'lblPlotHeight
+        '
+        Me.lblPlotHeight.AutoSize = True
+        Me.lblPlotHeight.Location = New System.Drawing.Point(7, 151)
+        Me.lblPlotHeight.Name = "lblPlotHeight"
+        Me.lblPlotHeight.Size = New System.Drawing.Size(59, 13)
+        Me.lblPlotHeight.TabIndex = 0
+        Me.lblPlotHeight.Text = "Plot Height"
         '
         'ucrInputMaxLatitude
         '
@@ -421,6 +304,15 @@ Partial Class sdgPlotRegion
         Me.ucrInputMaxLatitude.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputMaxLatitude.TabIndex = 1
         '
+        'lblMaxLatitude
+        '
+        Me.lblMaxLatitude.AutoSize = True
+        Me.lblMaxLatitude.Location = New System.Drawing.Point(7, 124)
+        Me.lblMaxLatitude.Name = "lblMaxLatitude"
+        Me.lblMaxLatitude.Size = New System.Drawing.Size(65, 13)
+        Me.lblMaxLatitude.TabIndex = 0
+        Me.lblMaxLatitude.Text = "Min Latitude"
+        '
         'ucrInputMinLatitude
         '
         Me.ucrInputMinLatitude.AddQuotesIfUnrecognised = True
@@ -430,6 +322,15 @@ Partial Class sdgPlotRegion
         Me.ucrInputMinLatitude.Name = "ucrInputMinLatitude"
         Me.ucrInputMinLatitude.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputMinLatitude.TabIndex = 1
+        '
+        'lblMinLatitude
+        '
+        Me.lblMinLatitude.AutoSize = True
+        Me.lblMinLatitude.Location = New System.Drawing.Point(7, 97)
+        Me.lblMinLatitude.Name = "lblMinLatitude"
+        Me.lblMinLatitude.Size = New System.Drawing.Size(65, 13)
+        Me.lblMinLatitude.TabIndex = 0
+        Me.lblMinLatitude.Text = "Min Latitude"
         '
         'ucrInputMaxLongitude
         '
@@ -441,6 +342,15 @@ Partial Class sdgPlotRegion
         Me.ucrInputMaxLongitude.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputMaxLongitude.TabIndex = 1
         '
+        'lblMaxLongitude
+        '
+        Me.lblMaxLongitude.AutoSize = True
+        Me.lblMaxLongitude.Location = New System.Drawing.Point(7, 70)
+        Me.lblMaxLongitude.Name = "lblMaxLongitude"
+        Me.lblMaxLongitude.Size = New System.Drawing.Size(77, 13)
+        Me.lblMaxLongitude.TabIndex = 0
+        Me.lblMaxLongitude.Text = "Max Longitude"
+        '
         'ucrInputMinLongitude
         '
         Me.ucrInputMinLongitude.AddQuotesIfUnrecognised = True
@@ -450,6 +360,15 @@ Partial Class sdgPlotRegion
         Me.ucrInputMinLongitude.Name = "ucrInputMinLongitude"
         Me.ucrInputMinLongitude.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputMinLongitude.TabIndex = 1
+        '
+        'lblMinLongitude
+        '
+        Me.lblMinLongitude.AutoSize = True
+        Me.lblMinLongitude.Location = New System.Drawing.Point(7, 43)
+        Me.lblMinLongitude.Name = "lblMinLongitude"
+        Me.lblMinLongitude.Size = New System.Drawing.Size(74, 13)
+        Me.lblMinLongitude.TabIndex = 0
+        Me.lblMinLongitude.Text = "Min Longitude"
         '
         'ucrInputAddtoTitle
         '
@@ -461,20 +380,101 @@ Partial Class sdgPlotRegion
         Me.ucrInputAddtoTitle.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputAddtoTitle.TabIndex = 1
         '
+        'lblAddtoTitle
+        '
+        Me.lblAddtoTitle.AutoSize = True
+        Me.lblAddtoTitle.Location = New System.Drawing.Point(7, 16)
+        Me.lblAddtoTitle.Name = "lblAddtoTitle"
+        Me.lblAddtoTitle.Size = New System.Drawing.Size(61, 13)
+        Me.lblAddtoTitle.TabIndex = 0
+        Me.lblAddtoTitle.Text = "Add to Title"
+        '
+        'tbpAdditionalFeatures
+        '
+        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrInputPlotCapitals)
+        Me.tbpAdditionalFeatures.Controls.Add(Me.lblPlotCapitals)
+        Me.tbpAdditionalFeatures.Controls.Add(Me.lblLatitudOffset)
+        Me.tbpAdditionalFeatures.Controls.Add(Me.lblSizeofCityLabels)
+        Me.tbpAdditionalFeatures.Controls.Add(Me.lblSizeofCities)
+        Me.tbpAdditionalFeatures.Controls.Add(Me.lblThickness)
+        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrNudLatitudeOffset)
+        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrNudSizeofCityLabels)
+        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrNudSizeofCities)
+        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrNudThickness)
+        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrChkPlotOwnLocations)
+        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrChkLabelCities)
+        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrChkPlotCities)
+        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrChkPlotRivers)
+        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrChkPlotCountries)
+        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrChkPlotCoastLines)
+        Me.tbpAdditionalFeatures.Controls.Add(Me.ucrChkPlotHighResolution)
+        Me.tbpAdditionalFeatures.Location = New System.Drawing.Point(4, 22)
+        Me.tbpAdditionalFeatures.Name = "tbpAdditionalFeatures"
+        Me.tbpAdditionalFeatures.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpAdditionalFeatures.Size = New System.Drawing.Size(444, 419)
+        Me.tbpAdditionalFeatures.TabIndex = 1
+        Me.tbpAdditionalFeatures.Text = "Additional Features"
+        Me.tbpAdditionalFeatures.UseVisualStyleBackColor = True
+        '
         'ucrInputPlotCapitals
         '
         Me.ucrInputPlotCapitals.AddQuotesIfUnrecognised = True
         Me.ucrInputPlotCapitals.IsReadOnly = False
-        Me.ucrInputPlotCapitals.Location = New System.Drawing.Point(92, 223)
+        Me.ucrInputPlotCapitals.Location = New System.Drawing.Point(103, 223)
         Me.ucrInputPlotCapitals.Name = "ucrInputPlotCapitals"
         Me.ucrInputPlotCapitals.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputPlotCapitals.TabIndex = 4
+        '
+        'lblPlotCapitals
+        '
+        Me.lblPlotCapitals.AutoSize = True
+        Me.lblPlotCapitals.Location = New System.Drawing.Point(6, 227)
+        Me.lblPlotCapitals.Name = "lblPlotCapitals"
+        Me.lblPlotCapitals.Size = New System.Drawing.Size(65, 13)
+        Me.lblPlotCapitals.TabIndex = 3
+        Me.lblPlotCapitals.Text = "Plot Capitals"
+        '
+        'lblLatitudOffset
+        '
+        Me.lblLatitudOffset.AutoSize = True
+        Me.lblLatitudOffset.Location = New System.Drawing.Point(4, 309)
+        Me.lblLatitudOffset.Name = "lblLatitudOffset"
+        Me.lblLatitudOffset.Size = New System.Drawing.Size(76, 13)
+        Me.lblLatitudOffset.TabIndex = 1
+        Me.lblLatitudOffset.Text = "Latitude Offset"
+        '
+        'lblSizeofCityLabels
+        '
+        Me.lblSizeofCityLabels.AutoSize = True
+        Me.lblSizeofCityLabels.Location = New System.Drawing.Point(4, 270)
+        Me.lblSizeofCityLabels.Name = "lblSizeofCityLabels"
+        Me.lblSizeofCityLabels.Size = New System.Drawing.Size(93, 13)
+        Me.lblSizeofCityLabels.TabIndex = 1
+        Me.lblSizeofCityLabels.Text = "Size of City Labels"
+        '
+        'lblSizeofCities
+        '
+        Me.lblSizeofCities.AutoSize = True
+        Me.lblSizeofCities.Location = New System.Drawing.Point(195, 127)
+        Me.lblSizeofCities.Name = "lblSizeofCities"
+        Me.lblSizeofCities.Size = New System.Drawing.Size(67, 13)
+        Me.lblSizeofCities.TabIndex = 1
+        Me.lblSizeofCities.Text = "Size of Cities"
+        '
+        'lblThickness
+        '
+        Me.lblThickness.AutoSize = True
+        Me.lblThickness.Location = New System.Drawing.Point(7, 153)
+        Me.lblThickness.Name = "lblThickness"
+        Me.lblThickness.Size = New System.Drawing.Size(56, 13)
+        Me.lblThickness.TabIndex = 1
+        Me.lblThickness.Text = "Thickness"
         '
         'ucrNudLatitudeOffset
         '
         Me.ucrNudLatitudeOffset.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLatitudeOffset.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudLatitudeOffset.Location = New System.Drawing.Point(103, 314)
+        Me.ucrNudLatitudeOffset.Location = New System.Drawing.Point(103, 307)
         Me.ucrNudLatitudeOffset.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudLatitudeOffset.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLatitudeOffset.Name = "ucrNudLatitudeOffset"
@@ -486,7 +486,7 @@ Partial Class sdgPlotRegion
         '
         Me.ucrNudSizeofCityLabels.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSizeofCityLabels.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSizeofCityLabels.Location = New System.Drawing.Point(103, 274)
+        Me.ucrNudSizeofCityLabels.Location = New System.Drawing.Point(103, 267)
         Me.ucrNudSizeofCityLabels.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSizeofCityLabels.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSizeofCityLabels.Name = "ucrNudSizeofCityLabels"
@@ -498,7 +498,7 @@ Partial Class sdgPlotRegion
         '
         Me.ucrNudSizeofCities.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSizeofCities.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSizeofCities.Location = New System.Drawing.Point(304, 127)
+        Me.ucrNudSizeofCities.Location = New System.Drawing.Point(265, 124)
         Me.ucrNudSizeofCities.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSizeofCities.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSizeofCities.Name = "ucrNudSizeofCities"
@@ -510,7 +510,7 @@ Partial Class sdgPlotRegion
         '
         Me.ucrNudThickness.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudThickness.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudThickness.Location = New System.Drawing.Point(82, 147)
+        Me.ucrNudThickness.Location = New System.Drawing.Point(103, 153)
         Me.ucrNudThickness.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudThickness.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudThickness.Name = "ucrNudThickness"
@@ -537,9 +537,9 @@ Partial Class sdgPlotRegion
         'ucrChkPlotCities
         '
         Me.ucrChkPlotCities.Checked = False
-        Me.ucrChkPlotCities.Location = New System.Drawing.Point(7, 121)
+        Me.ucrChkPlotCities.Location = New System.Drawing.Point(7, 124)
         Me.ucrChkPlotCities.Name = "ucrChkPlotCities"
-        Me.ucrChkPlotCities.Size = New System.Drawing.Size(190, 20)
+        Me.ucrChkPlotCities.Size = New System.Drawing.Size(176, 20)
         Me.ucrChkPlotCities.TabIndex = 0
         '
         'ucrChkPlotRivers

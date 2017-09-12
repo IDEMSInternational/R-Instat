@@ -71,7 +71,7 @@ Public Class dlgPlotRegion
         clsAsDateTimeFunction.SetRCommand("as.Date")
         clsSequenceFunction.SetRCommand("seq")
         clsAsDateTimeFunction.AddParameter("format", Chr(34) & "%Y-%m-%d" & Chr(34), iPosition:=1)
-        dtpDateTimePicker.Value = New DateTime(2015, 11, 1)
+        dtpDateTimePicker.Value = New DateTime(2015, 01, 01)
 
         AsDate()
         ucrBase.clsRsyntax.SetBaseRFunction(clsPlotRegionFunction)

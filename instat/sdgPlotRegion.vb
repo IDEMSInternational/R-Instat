@@ -118,7 +118,7 @@ Public Class sdgPlotRegion
         ucrChkPlotCities.SetParameter(New RParameter("plotCities", 22))
         ucrChkPlotCities.AddToLinkedControls(ucrNudSizeofCities, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=1)
         ucrChkPlotCities.AddToLinkedControls(ucrChkLabelCities, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputMinBreakPoint.SetLinkedDisplayControl(lblSizeofCities)
+        ucrNudSizeofCities.SetLinkedDisplayControl(lblSizeofCities)
         ucrChkPlotCities.SetText("Plot Cities")
         ucrChkPlotCities.SetRDefault("FALSE")
 
