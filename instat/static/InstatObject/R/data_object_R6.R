@@ -2515,36 +2515,6 @@ instat_object$set("public","define_red_flags", function(data_name, red_flags = c
 }
 )
 
-data_object$set("public", "duplicated_cases", function(col_name="",ignore=NULL,tolerance=0.01) {
-  col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
-  col_data1<-c(1,rep(NA,length(col_data)-1))
-  if(is.numeric(col_data)){
-    for(i in 2:length(col_data)){
-      if(is.na(col_data1[i-1])==FALSE){
-        col_data1[i]<-ifelse((col_data[i]>=(col_data[i-1]-tolerance))&(col_data[i]<=(col_data[i-1]+tolerance))&!(col_data[i]%in%ignore),col_data1[i-1]+1,1)
-      }
-      else{
-        col_data1[i]<-ifelse(col_data[i]%in%ignore,1,1) 
-      }
-    }
-  }
-  else{
-    for(i in 2:length(col_data)){
-      if(is.na(col_data1[i-1])==FALSE){
-        col_data1[i]<-ifelse((col_data[i]==col_data[i-1])&!(col_data[i]%in%ignore),col_data1[i-1]+1,1)
-      }
-      else{
-        col_data1[i]<-ifelse(col_data[i]%in%ignore,1,1) 
-      }
-    }     
-    
-  }
-  return(col_data1)
-  
-}
-
-)
-
 data_object$set("public","define_red_flags", function(red_flags = c()) {
   if(!self$is_metadata(corruption_data_label)) {
     stop("Cannot define corruption red flags when data frame is not defined as corruption data.")
