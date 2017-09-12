@@ -28,6 +28,8 @@ Public Class dlgName
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
+        Else
+            ReopenDialog()
         End If
         If bReset Then
             SetDefaults()
