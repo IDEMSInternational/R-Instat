@@ -61,7 +61,7 @@ Public Class dlgDuplicatesConstructed
         rdoIndexNumberOfDuplicates.Enabled = False 'for now until it's working properly
 
         ' for rdoSuccessiveVariables this is ran as a string, it isn't run for rdoSelectedVariables.For rdodataframe this is ran as an r-function so we are doing this manually but passing the parameter in the additional code pair
-        ucrSelectorDuplicateswithVariables.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorDuplicateswithVariables.SetParameter(New RParameter("x", 0))
         ucrSelectorDuplicateswithVariables.SetParameterIsString()
 
         ucrReceiverForSelectedVariables.SetParameter(New RParameter("x", 0))
@@ -143,8 +143,6 @@ Public Class dlgDuplicatesConstructed
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverForSelectedVariables.AddAdditionalCodeParameterPair(clsDuplicated2, New RParameter("x", 1), iAdditionalPairNo:=1)
         ucrSelectorDuplicateswithVariables.AddAdditionalCodeParameterPair(clsDuplicated2, New RParameter("x", 0), iAdditionalPairNo:=1)
-        ucrSelectorDuplicateswithVariables.AddAdditionalCodeParameterPair(clsDuplicated, New RParameter("x", 0), iAdditionalPairNo:=2)
-
         ucrNewColumnName.AddAdditionalRCode(clsDuplicated2, 1)
         ucrNewColumnName.AddAdditionalRCode(clsStreakFunction, 2)
 
@@ -153,7 +151,7 @@ Public Class dlgDuplicatesConstructed
         ucrNudOmit.SetRCode(clsStreakFunction, bReset)
         ucrChkTolerance.SetRCode(clsStreakFunction, bReset)
         ucrInputTolerance.SetRCode(clsStreakFunction, bReset)
-        ' ucrSelectorDuplicateswithVariables.SetRCode(clsStreakFunction, bReset)
+        ucrSelectorDuplicateswithVariables.SetRCode(clsDuplicated, bReset)
         ucrReceiverForSelectedVariables.SetRCode(clsDuplicated, bReset)
         ucrNewColumnName.SetRCode(clsDuplicated, bReset)
         ucrPnlDuplicates.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)

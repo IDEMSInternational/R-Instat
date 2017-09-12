@@ -672,7 +672,6 @@ split_items_in_groups <- function(items, num) {
 cancor_coef <- function(object) {
   object[c("xcoef", "ycoef")]
 }
-=======
 ###################
 
 # cmsaf Plot.Region script
@@ -911,6 +910,7 @@ plot.region <- function(lon, lat, product, time, time_point = as.Date("2002-01-0
   axis(3,lwd=1,at=c(lonmin,lonmax),tick=TRUE,lwd.ticks=0,labels=FALSE)
   axis(4,lwd=1,at=c(latmin,latmax), tick=TRUE,lwd.ticks=0,labels=FALSE)
 }
+
 duplicated_cases<-function(col_name,ignore=NULL,tolerance=0.01) {
   col_name<-as.vector(col_name)
   col_data1<-c(1,rep(NA,length(col_name)-1))
