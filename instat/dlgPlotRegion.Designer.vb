@@ -43,7 +43,7 @@ Partial Class dlgPlotRegion
         Me.lblDate.Location = New System.Drawing.Point(263, 165)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(33, 13)
-        Me.lblDate.TabIndex = 16
+        Me.lblDate.TabIndex = 7
         Me.lblDate.Text = "Date:"
         '
         'lblElement
@@ -52,7 +52,7 @@ Partial Class dlgPlotRegion
         Me.lblElement.Location = New System.Drawing.Point(263, 122)
         Me.lblElement.Name = "lblElement"
         Me.lblElement.Size = New System.Drawing.Size(48, 13)
-        Me.lblElement.TabIndex = 17
+        Me.lblElement.TabIndex = 5
         Me.lblElement.Text = "Element:"
         '
         'lblLatitude
@@ -61,7 +61,7 @@ Partial Class dlgPlotRegion
         Me.lblLatitude.Location = New System.Drawing.Point(263, 77)
         Me.lblLatitude.Name = "lblLatitude"
         Me.lblLatitude.Size = New System.Drawing.Size(48, 13)
-        Me.lblLatitude.TabIndex = 18
+        Me.lblLatitude.TabIndex = 3
         Me.lblLatitude.Text = "Latitude:"
         '
         'lblLongitude
@@ -70,7 +70,7 @@ Partial Class dlgPlotRegion
         Me.lblLongitude.Location = New System.Drawing.Point(263, 32)
         Me.lblLongitude.Name = "lblLongitude"
         Me.lblLongitude.Size = New System.Drawing.Size(57, 13)
-        Me.lblLongitude.TabIndex = 19
+        Me.lblLongitude.TabIndex = 1
         Me.lblLongitude.Text = "Longitude:"
         '
         'dtpDateTimePicker
@@ -78,7 +78,7 @@ Partial Class dlgPlotRegion
         Me.dtpDateTimePicker.Location = New System.Drawing.Point(265, 233)
         Me.dtpDateTimePicker.Name = "dtpDateTimePicker"
         Me.dtpDateTimePicker.Size = New System.Drawing.Size(133, 20)
-        Me.dtpDateTimePicker.TabIndex = 25
+        Me.dtpDateTimePicker.TabIndex = 10
         '
         'lblMinT
         '
@@ -86,7 +86,7 @@ Partial Class dlgPlotRegion
         Me.lblMinT.Location = New System.Drawing.Point(262, 217)
         Me.lblMinT.Name = "lblMinT"
         Me.lblMinT.Size = New System.Drawing.Size(60, 13)
-        Me.lblMinT.TabIndex = 24
+        Me.lblMinT.TabIndex = 9
         Me.lblMinT.Text = "Time Point:"
         '
         'cmdOptions
@@ -94,7 +94,7 @@ Partial Class dlgPlotRegion
         Me.cmdOptions.Location = New System.Drawing.Point(265, 267)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(138, 23)
-        Me.cmdOptions.TabIndex = 27
+        Me.cmdOptions.TabIndex = 12
         Me.cmdOptions.Text = "options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
@@ -103,7 +103,7 @@ Partial Class dlgPlotRegion
         Me.ucrBase.Location = New System.Drawing.Point(12, 296)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 26
+        Me.ucrBase.TabIndex = 11
         '
         'ucrReceiverLongitude
         '
@@ -114,7 +114,7 @@ Partial Class dlgPlotRegion
         Me.ucrReceiverLongitude.Selector = Nothing
         Me.ucrReceiverLongitude.Size = New System.Drawing.Size(143, 20)
         Me.ucrReceiverLongitude.strNcFilePath = ""
-        Me.ucrReceiverLongitude.TabIndex = 12
+        Me.ucrReceiverLongitude.TabIndex = 2
         Me.ucrReceiverLongitude.ucrSelector = Nothing
         '
         'ucrReceiverDate
@@ -126,7 +126,7 @@ Partial Class dlgPlotRegion
         Me.ucrReceiverDate.Selector = Nothing
         Me.ucrReceiverDate.Size = New System.Drawing.Size(143, 20)
         Me.ucrReceiverDate.strNcFilePath = ""
-        Me.ucrReceiverDate.TabIndex = 15
+        Me.ucrReceiverDate.TabIndex = 8
         Me.ucrReceiverDate.ucrSelector = Nothing
         '
         'ucrReceiverLatitude
@@ -138,7 +138,7 @@ Partial Class dlgPlotRegion
         Me.ucrReceiverLatitude.Selector = Nothing
         Me.ucrReceiverLatitude.Size = New System.Drawing.Size(143, 20)
         Me.ucrReceiverLatitude.strNcFilePath = ""
-        Me.ucrReceiverLatitude.TabIndex = 13
+        Me.ucrReceiverLatitude.TabIndex = 4
         Me.ucrReceiverLatitude.ucrSelector = Nothing
         '
         'ucrReceiverElement
@@ -150,7 +150,7 @@ Partial Class dlgPlotRegion
         Me.ucrReceiverElement.Selector = Nothing
         Me.ucrReceiverElement.Size = New System.Drawing.Size(143, 20)
         Me.ucrReceiverElement.strNcFilePath = ""
-        Me.ucrReceiverElement.TabIndex = 14
+        Me.ucrReceiverElement.TabIndex = 6
         Me.ucrReceiverElement.ucrSelector = Nothing
         '
         'ucrSelectorPlotRegion
@@ -161,7 +161,7 @@ Partial Class dlgPlotRegion
         Me.ucrSelectorPlotRegion.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorPlotRegion.Name = "ucrSelectorPlotRegion"
         Me.ucrSelectorPlotRegion.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorPlotRegion.TabIndex = 11
+        Me.ucrSelectorPlotRegion.TabIndex = 0
         '
         'dlgPlotRegion
         '
