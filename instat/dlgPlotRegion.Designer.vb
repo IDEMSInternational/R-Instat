@@ -22,77 +22,20 @@ Partial Class dlgPlotRegion
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrReceiverLongitude = New instat.ucrReceiverSingle()
-        Me.ucrReceiverYear = New instat.ucrReceiverSingle()
-        Me.ucrReceiverLatitude = New instat.ucrReceiverSingle()
-        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
-        Me.ucrSelectorPlotRegion = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblElement = New System.Windows.Forms.Label()
         Me.lblLatitude = New System.Windows.Forms.Label()
         Me.lblLongitude = New System.Windows.Forms.Label()
         Me.dtpDateTimePicker = New System.Windows.Forms.DateTimePicker()
         Me.lblMinT = New System.Windows.Forms.Label()
+        Me.cmdOptions = New System.Windows.Forms.Button()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrReceiverLongitude = New instat.ucrReceiverSingle()
+        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
+        Me.ucrReceiverLatitude = New instat.ucrReceiverSingle()
+        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
+        Me.ucrSelectorPlotRegion = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
-        '
-        'ucrReceiverLongitude
-        '
-        Me.ucrReceiverLongitude.frmParent = Me
-        Me.ucrReceiverLongitude.Location = New System.Drawing.Point(266, 45)
-        Me.ucrReceiverLongitude.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverLongitude.Name = "ucrReceiverLongitude"
-        Me.ucrReceiverLongitude.Selector = Nothing
-        Me.ucrReceiverLongitude.Size = New System.Drawing.Size(143, 20)
-        Me.ucrReceiverLongitude.strNcFilePath = ""
-        Me.ucrReceiverLongitude.TabIndex = 12
-        Me.ucrReceiverLongitude.ucrSelector = Nothing
-        '
-        'ucrReceiverYear
-        '
-        Me.ucrReceiverYear.frmParent = Me
-        Me.ucrReceiverYear.Location = New System.Drawing.Point(266, 180)
-        Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverYear.Name = "ucrReceiverYear"
-        Me.ucrReceiverYear.Selector = Nothing
-        Me.ucrReceiverYear.Size = New System.Drawing.Size(143, 20)
-        Me.ucrReceiverYear.strNcFilePath = ""
-        Me.ucrReceiverYear.TabIndex = 15
-        Me.ucrReceiverYear.ucrSelector = Nothing
-        '
-        'ucrReceiverLatitude
-        '
-        Me.ucrReceiverLatitude.frmParent = Me
-        Me.ucrReceiverLatitude.Location = New System.Drawing.Point(266, 90)
-        Me.ucrReceiverLatitude.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverLatitude.Name = "ucrReceiverLatitude"
-        Me.ucrReceiverLatitude.Selector = Nothing
-        Me.ucrReceiverLatitude.Size = New System.Drawing.Size(143, 20)
-        Me.ucrReceiverLatitude.strNcFilePath = ""
-        Me.ucrReceiverLatitude.TabIndex = 13
-        Me.ucrReceiverLatitude.ucrSelector = Nothing
-        '
-        'ucrReceiverElement
-        '
-        Me.ucrReceiverElement.frmParent = Me
-        Me.ucrReceiverElement.Location = New System.Drawing.Point(266, 135)
-        Me.ucrReceiverElement.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverElement.Name = "ucrReceiverElement"
-        Me.ucrReceiverElement.Selector = Nothing
-        Me.ucrReceiverElement.Size = New System.Drawing.Size(143, 20)
-        Me.ucrReceiverElement.strNcFilePath = ""
-        Me.ucrReceiverElement.TabIndex = 14
-        Me.ucrReceiverElement.ucrSelector = Nothing
-        '
-        'ucrSelectorPlotRegion
-        '
-        Me.ucrSelectorPlotRegion.bShowHiddenColumns = False
-        Me.ucrSelectorPlotRegion.bUseCurrentFilter = True
-        Me.ucrSelectorPlotRegion.Location = New System.Drawing.Point(12, 37)
-        Me.ucrSelectorPlotRegion.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorPlotRegion.Name = "ucrSelectorPlotRegion"
-        Me.ucrSelectorPlotRegion.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorPlotRegion.TabIndex = 11
         '
         'lblDate
         '
@@ -132,7 +75,7 @@ Partial Class dlgPlotRegion
         '
         'dtpDateTimePicker
         '
-        Me.dtpDateTimePicker.Location = New System.Drawing.Point(270, 225)
+        Me.dtpDateTimePicker.Location = New System.Drawing.Point(265, 233)
         Me.dtpDateTimePicker.Name = "dtpDateTimePicker"
         Me.dtpDateTimePicker.Size = New System.Drawing.Size(133, 20)
         Me.dtpDateTimePicker.TabIndex = 25
@@ -140,11 +83,20 @@ Partial Class dlgPlotRegion
         'lblMinT
         '
         Me.lblMinT.AutoSize = True
-        Me.lblMinT.Location = New System.Drawing.Point(267, 209)
+        Me.lblMinT.Location = New System.Drawing.Point(262, 217)
         Me.lblMinT.Name = "lblMinT"
-        Me.lblMinT.Size = New System.Drawing.Size(92, 13)
+        Me.lblMinT.Size = New System.Drawing.Size(60, 13)
         Me.lblMinT.TabIndex = 24
-        Me.lblMinT.Text = "Date Time Picker:"
+        Me.lblMinT.Text = "Time Point:"
+        '
+        'cmdOptions
+        '
+        Me.cmdOptions.Location = New System.Drawing.Point(265, 267)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(138, 23)
+        Me.cmdOptions.TabIndex = 27
+        Me.cmdOptions.Text = "options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'ucrBase
         '
@@ -153,11 +105,70 @@ Partial Class dlgPlotRegion
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 26
         '
+        'ucrReceiverLongitude
+        '
+        Me.ucrReceiverLongitude.frmParent = Me
+        Me.ucrReceiverLongitude.Location = New System.Drawing.Point(266, 45)
+        Me.ucrReceiverLongitude.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverLongitude.Name = "ucrReceiverLongitude"
+        Me.ucrReceiverLongitude.Selector = Nothing
+        Me.ucrReceiverLongitude.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverLongitude.strNcFilePath = ""
+        Me.ucrReceiverLongitude.TabIndex = 12
+        Me.ucrReceiverLongitude.ucrSelector = Nothing
+        '
+        'ucrReceiverDate
+        '
+        Me.ucrReceiverDate.frmParent = Me
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(266, 180)
+        Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverDate.Name = "ucrReceiverDate"
+        Me.ucrReceiverDate.Selector = Nothing
+        Me.ucrReceiverDate.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverDate.strNcFilePath = ""
+        Me.ucrReceiverDate.TabIndex = 15
+        Me.ucrReceiverDate.ucrSelector = Nothing
+        '
+        'ucrReceiverLatitude
+        '
+        Me.ucrReceiverLatitude.frmParent = Me
+        Me.ucrReceiverLatitude.Location = New System.Drawing.Point(266, 90)
+        Me.ucrReceiverLatitude.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverLatitude.Name = "ucrReceiverLatitude"
+        Me.ucrReceiverLatitude.Selector = Nothing
+        Me.ucrReceiverLatitude.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverLatitude.strNcFilePath = ""
+        Me.ucrReceiverLatitude.TabIndex = 13
+        Me.ucrReceiverLatitude.ucrSelector = Nothing
+        '
+        'ucrReceiverElement
+        '
+        Me.ucrReceiverElement.frmParent = Me
+        Me.ucrReceiverElement.Location = New System.Drawing.Point(266, 135)
+        Me.ucrReceiverElement.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverElement.Name = "ucrReceiverElement"
+        Me.ucrReceiverElement.Selector = Nothing
+        Me.ucrReceiverElement.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverElement.strNcFilePath = ""
+        Me.ucrReceiverElement.TabIndex = 14
+        Me.ucrReceiverElement.ucrSelector = Nothing
+        '
+        'ucrSelectorPlotRegion
+        '
+        Me.ucrSelectorPlotRegion.bShowHiddenColumns = False
+        Me.ucrSelectorPlotRegion.bUseCurrentFilter = True
+        Me.ucrSelectorPlotRegion.Location = New System.Drawing.Point(12, 37)
+        Me.ucrSelectorPlotRegion.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorPlotRegion.Name = "ucrSelectorPlotRegion"
+        Me.ucrSelectorPlotRegion.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorPlotRegion.TabIndex = 11
+        '
         'dlgPlotRegion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(421, 360)
+        Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.dtpDateTimePicker)
         Me.Controls.Add(Me.lblMinT)
@@ -166,7 +177,7 @@ Partial Class dlgPlotRegion
         Me.Controls.Add(Me.lblElement)
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.ucrReceiverLongitude)
-        Me.Controls.Add(Me.ucrReceiverYear)
+        Me.Controls.Add(Me.ucrReceiverDate)
         Me.Controls.Add(Me.ucrReceiverLatitude)
         Me.Controls.Add(Me.ucrReceiverElement)
         Me.Controls.Add(Me.ucrSelectorPlotRegion)
@@ -182,7 +193,7 @@ Partial Class dlgPlotRegion
     End Sub
 
     Friend WithEvents ucrReceiverLongitude As ucrReceiverSingle
-    Friend WithEvents ucrReceiverYear As ucrReceiverSingle
+    Friend WithEvents ucrReceiverDate As ucrReceiverSingle
     Friend WithEvents ucrReceiverLatitude As ucrReceiverSingle
     Friend WithEvents ucrReceiverElement As ucrReceiverSingle
     Friend WithEvents ucrSelectorPlotRegion As ucrSelectorByDataFrameAddRemove
@@ -193,4 +204,5 @@ Partial Class dlgPlotRegion
     Friend WithEvents dtpDateTimePicker As DateTimePicker
     Friend WithEvents lblMinT As Label
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents cmdOptions As Button
 End Class

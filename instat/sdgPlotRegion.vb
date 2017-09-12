@@ -31,19 +31,19 @@ Public Class sdgPlotRegion
 
         ucrInputMinLongitude.SetParameter(New RParameter("lonmin"))
         ucrInputMinLongitude.SetRDefault("NA")
-        ucrInputMinLongitude.SetValidationTypeAsNumeric()
+        'ucrInputMinLongitude.SetValidationTypeAsNumeric()
 
         ucrInputMaxLongitude.SetParameter(New RParameter("lonmax"))
         ucrInputMaxLongitude.SetRDefault("NA")
-        ucrInputMaxLongitude.SetValidationTypeAsNumeric()
+        'ucrInputMaxLongitude.SetValidationTypeAsNumeric()
 
         ucrInputMinLatitude.SetParameter(New RParameter("latmin"))
         ucrInputMinLatitude.SetRDefault("NA")
-        ucrInputMinLatitude.SetValidationTypeAsNumeric()
+        'ucrInputMinLatitude.SetValidationTypeAsNumeric()
 
         ucrInputMaxLatitude.SetParameter(New RParameter("latmax"))
         ucrInputMaxLatitude.SetRDefault("NA")
-        ucrInputMaxLatitude.SetValidationTypeAsNumeric()
+        'ucrInputMaxLatitude.SetValidationTypeAsNumeric()
 
         ucrInputPlotHeight.SetParameter(New RParameter("height"))
         ucrInputPlotHeight.SetRDefault("600")
@@ -81,11 +81,11 @@ Public Class sdgPlotRegion
 
         ucrInputColourBarMin.SetParameter(New RParameter("colmin0"))
         ucrInputColourBarMin.SetRDefault("NA")
-        ucrInputColourBarMin.SetValidationTypeAsNumeric()
+        'ucrInputColourBarMin.SetValidationTypeAsNumeric()
 
         ucrInputColourBarMax.SetParameter(New RParameter("colmax0"))
         ucrInputColourBarMax.SetRDefault("NA")
-        ucrInputColourBarMax.SetValidationTypeAsNumeric()
+        'ucrInputColourBarMax.SetValidationTypeAsNumeric()
 
 
         ucrNudNumberofColours.SetParameter(New RParameter("ncol"))
