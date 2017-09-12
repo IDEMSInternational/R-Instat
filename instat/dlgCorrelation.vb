@@ -119,6 +119,7 @@ Public Class dlgCorrelation
 
         ucrSelectorCorrelation.Reset()
         ucrSaveModel.Reset()
+        ucrReceiverFirstColumn.SetMeAsReceiver()
 
         clsTempFunc = ucrSelectorCorrelation.ucrAvailableDataFrames.clsCurrDataFrame
         clsTempFunc.AddParameter("remove_attr", "TRUE")
