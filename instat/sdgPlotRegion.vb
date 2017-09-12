@@ -89,6 +89,48 @@ Public Class sdgPlotRegion
         ucrNudNumberofColours.SetParameter(New RParameter("ncol"))
         ucrNudNumberofColours.SetRDefault("14")
 
+        ucrChkPlotHighResolution.SetParameter(New RParameter("plotHighRes"))
+        ucrChkPlotHighResolution.SetText("Plot High Resolution")
+        ucrChkPlotHighResolution.SetRDefault("FALSE")
+
+        ucrChkPlotCoastLines.SetParameter(New RParameter("plotCoastline"))
+        ucrChkPlotCoastLines.SetText("Plot Coast Lines")
+        ucrChkPlotCoastLines.SetRDefault("TRUE")
+
+        ucrChkPlotCountries.SetParameter(New RParameter("plotCountries"))
+        ucrChkPlotCountries.SetText("Plot Countries")
+        ucrChkPlotCountries.SetRDefault("TRUE")
+
+        ucrChkPlotRivers.SetParameter(New RParameter("plotRivers"))
+        ucrChkPlotRivers.SetText("Plot Rivers")
+        ucrChkPlotRivers.SetRDefault("FALSE")
+
+        ucrChkPlotCities.SetParameter(New RParameter("plotCities"))
+        ucrChkPlotCities.AddToLinkedControls(ucrNudSizeofCities, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=1)
+        ucrChkPlotCities.AddToLinkedControls(ucrChkLabelCities, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputMinBreakPoint.SetLinkedDisplayControl(lblSizeofCities)
+        ucrChkPlotCities.SetText("Plot Cities")
+        ucrChkPlotCities.SetRDefault("FALSE")
+
+        ucrNudThickness.SetParameter(New RParameter("contour.thick"))
+        ucrNudThickness.SetRDefault("2")
+
+        ucrNudSizeofCities.SetParameter(New RParameter("cex.cities"))
+        ucrNudSizeofCities.SetRDefault("1")
+
+        ucrChkLabelCities.SetParameter(New RParameter("label.cities"))
+        ucrChkLabelCities.SetText("Label Cities")
+        ucrChkLabelCities.SetRDefault("TRUE")
+
+        ucrInputPlotCapitals.SetParameter(New RParameter(""))
+        ucrInputPlotCapitals.SetRDefault("")
+
+        ucrNudSizeofCityLabels.SetParameter(New RParameter("cex.label.cities"))
+        ucrNudSizeofCityLabels.SetRDefault("0.5")
+
+        ucrNudSizeofCityLabels.SetParameter(New RParameter("dlat"))
+        ucrNudSizeofCityLabels.SetRDefault("0.25")
+
         bControlsInitialised = True
     End Sub
 
