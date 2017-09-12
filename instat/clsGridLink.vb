@@ -103,8 +103,8 @@ Public Class clsGridLink
                     bMessageShown = True
                 End If
                 bRDataChanged = False
-                End If
-                expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsMetadataChanged.ToScript())
+            End If
+            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsMetadataChanged.ToScript())
             If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
                 bRMetadataChanged = expTemp.AsLogical(0)
             Else
@@ -113,8 +113,8 @@ Public Class clsGridLink
                     bMessageShown = True
                 End If
                 bRMetadataChanged = False
-                End If
-                expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsVariablesMetadataChanged.ToScript())
+            End If
+            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsVariablesMetadataChanged.ToScript())
             If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
                 bRVariablesMetadataChanged = expTemp.AsLogical(0)
             Else
@@ -123,9 +123,9 @@ Public Class clsGridLink
                     bMessageShown = True
                 End If
                 bRVariablesMetadataChanged = False
-                End If
+            End If
 
-                If (bGrdDataExists AndAlso (bGrdDataChanged OrElse bRDataChanged)) OrElse (bGrdVariablesMetadataExists AndAlso (bGrdVariablesMetadataChanged OrElse bRVariablesMetadataChanged)) Then
+            If (bGrdDataExists AndAlso (bGrdDataChanged OrElse bRDataChanged)) OrElse (bGrdVariablesMetadataExists AndAlso (bGrdVariablesMetadataChanged OrElse bRVariablesMetadataChanged)) Then
                 expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataNames.ToScript(), bSilent:=True)
                 If expTemp IsNot Nothing Then
                     lstDataNames = expTemp.AsList
@@ -135,8 +135,8 @@ Public Class clsGridLink
                         bMessageShown = True
                     End If
                     lstDataNames = Nothing
-                    End If
-                    If lstDataNames IsNot Nothing Then
+                End If
+                If lstDataNames IsNot Nothing Then
                     For i = 0 To lstDataNames.Length - 1
                         strDataName = lstDataNames.AsCharacter(i)
                         clsDataChanged.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
