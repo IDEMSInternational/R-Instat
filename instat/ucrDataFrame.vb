@@ -121,7 +121,7 @@ Public Class ucrDataFrame
             clsParam.SetArgumentName("data_name")
             clsParam.SetArgumentValue(Chr(34) & cboAvailableDataFrames.Text & Chr(34))
             clsCurrDataFrame.AddParameter(clsParam)
-            clsCurrDataFrame.SetAssignTo(cboAvailableDataFrames.Text & "_temp")
+            clsCurrDataFrame.SetAssignTo(cboAvailableDataFrames.Text)
         End If
     End Sub
 
