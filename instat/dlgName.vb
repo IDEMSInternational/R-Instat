@@ -28,6 +28,8 @@ Public Class dlgName
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
+        Else
+            ReopenDialog()
         End If
         If bReset Then
             SetDefaults()
@@ -58,6 +60,10 @@ Public Class dlgName
 
         'Label Input
         ucrInputVariableLabel.SetParameter(New RParameter("label", 3))
+    End Sub
+
+    Private Sub ReopenDialog()
+        ucrSelectVariables.Reset()
     End Sub
 
     Public Sub SetDefaults()
