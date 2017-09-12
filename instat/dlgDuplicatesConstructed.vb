@@ -46,7 +46,7 @@ Public Class dlgDuplicatesConstructed
 
         ucrPnlOptions.AddFunctionNamesCondition(rdoDataFrame, "duplicated2")
         ucrPnlOptions.AddFunctionNamesCondition(rdoSelectedVariables, "duplicated")
-        ucrPnlOptions.AddFunctionNamesCondition(rdoSuccessiveValues, frmMain.clsRLink.strInstatDataObject & "$duplicated_cases")
+        ucrPnlOptions.AddFunctionNamesCondition(rdoSuccessiveValues, "duplicated_cases")
 
         ucrPnlOptions.AddToLinkedControls(ucrReceiverForSelectedVariables, {rdoSelectedVariables}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrPnlDuplicates, {rdoSelectedVariables, rdoDataFrame}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoAllDuplicateCases)
@@ -75,7 +75,7 @@ Public Class dlgDuplicatesConstructed
 
         ' For rdoSuccessiveVariables we have the following controls
         ucrReceiverForSuccessiveValues.SetParameter(New RParameter("col_name", 1))
-        ucrReceiverForSuccessiveValues.SetParameterIsString()
+        ucrReceiverForSuccessiveValues.SetParameterIsRFunction()
         ucrReceiverForSuccessiveValues.Selector = ucrSelectorDuplicateswithVariables
         ucrReceiverForSuccessiveValues.SetLinkedDisplayControl(lblSelectedVariable)
 
@@ -132,7 +132,7 @@ Public Class dlgDuplicatesConstructed
         clsDuplicated2.SetRCommand("duplicated2")
 
         ' For the third rdo we run clsStreakFunction
-        clsStreakFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$duplicated_cases")
+        clsStreakFunction.SetRCommand("duplicated_cases")
         clsStreakFunction.AddParameter("ignore", "NULL")
 
         clsSubsetCol.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
@@ -153,7 +153,7 @@ Public Class dlgDuplicatesConstructed
         ucrNudOmit.SetRCode(clsStreakFunction, bReset)
         ucrChkTolerance.SetRCode(clsStreakFunction, bReset)
         ucrInputTolerance.SetRCode(clsStreakFunction, bReset)
-        ucrSelectorDuplicateswithVariables.SetRCode(clsStreakFunction, bReset)
+        ' ucrSelectorDuplicateswithVariables.SetRCode(clsStreakFunction, bReset)
         ucrReceiverForSelectedVariables.SetRCode(clsDuplicated, bReset)
         ucrNewColumnName.SetRCode(clsDuplicated, bReset)
         ucrPnlDuplicates.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)

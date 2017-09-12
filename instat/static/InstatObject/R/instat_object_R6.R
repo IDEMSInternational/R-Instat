@@ -1458,8 +1458,4 @@ instat_object$set("public", "set_links", function(new_links) {
   private$.links <- new_links
 } 
 )
-instat_object$set("public","duplicated_cases", function(data_name, col_name, ignore=NULL, tolerance=0.01) {
-  self$get_data_objects(data_name)$duplicated_cases(col_name = col_name, ignore = ignore, tolerance = tolerance)
-}
-)
 
