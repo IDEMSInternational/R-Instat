@@ -24,8 +24,8 @@ Partial Class sdgPlotRegion
     Private Sub InitializeComponent()
         Me.ucrButtonsSdgPlotRegion = New instat.ucrButtonsSubdialogue()
         Me.tbcPlotRegion = New System.Windows.Forms.TabControl()
-        Me.tbpOptions = New System.Windows.Forms.TabPage()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.tbpLayout = New System.Windows.Forms.TabPage()
+        Me.tbpAdditionalFeatures = New System.Windows.Forms.TabPage()
         Me.lblAddtoTitle = New System.Windows.Forms.Label()
         Me.ucrInputAddtoTitle = New instat.ucrInputTextBox()
         Me.lblMinLongitude = New System.Windows.Forms.Label()
@@ -55,7 +55,7 @@ Partial Class sdgPlotRegion
         Me.lblNumberofColours = New System.Windows.Forms.Label()
         Me.ucrNudNumberofColours = New instat.ucrNud()
         Me.tbcPlotRegion.SuspendLayout()
-        Me.tbpOptions.SuspendLayout()
+        Me.tbpLayout.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrButtonsSdgPlotRegion
@@ -67,61 +67,61 @@ Partial Class sdgPlotRegion
         '
         'tbcPlotRegion
         '
-        Me.tbcPlotRegion.Controls.Add(Me.tbpOptions)
-        Me.tbcPlotRegion.Controls.Add(Me.TabPage2)
+        Me.tbcPlotRegion.Controls.Add(Me.tbpLayout)
+        Me.tbcPlotRegion.Controls.Add(Me.tbpAdditionalFeatures)
         Me.tbcPlotRegion.Location = New System.Drawing.Point(13, 13)
         Me.tbcPlotRegion.Name = "tbcPlotRegion"
         Me.tbcPlotRegion.SelectedIndex = 0
         Me.tbcPlotRegion.Size = New System.Drawing.Size(452, 449)
         Me.tbcPlotRegion.TabIndex = 1
         '
-        'tbpOptions
+        'tbpLayout
         '
-        Me.tbpOptions.Controls.Add(Me.ucrNudNumberofColours)
-        Me.tbpOptions.Controls.Add(Me.ucrChkSetColourBreaks)
-        Me.tbpOptions.Controls.Add(Me.ucrChkPlotAnomaly)
-        Me.tbpOptions.Controls.Add(Me.ucrInputColourBarMax)
-        Me.tbpOptions.Controls.Add(Me.ucrInputColourBarMin)
-        Me.tbpOptions.Controls.Add(Me.lblNumberofColours)
-        Me.tbpOptions.Controls.Add(Me.lblColourBarMax)
-        Me.tbpOptions.Controls.Add(Me.ucrInputInterval)
-        Me.tbpOptions.Controls.Add(Me.lblColourBarMin)
-        Me.tbpOptions.Controls.Add(Me.ucrInputMaxBreakPoint)
-        Me.tbpOptions.Controls.Add(Me.lblInterval)
-        Me.tbpOptions.Controls.Add(Me.ucrInputMinBreakPoint)
-        Me.tbpOptions.Controls.Add(Me.lblMaxBreakPoint)
-        Me.tbpOptions.Controls.Add(Me.lblMinBreakPoint)
-        Me.tbpOptions.Controls.Add(Me.ucrInputPlotWidth)
-        Me.tbpOptions.Controls.Add(Me.lblPlotWidth)
-        Me.tbpOptions.Controls.Add(Me.ucrInputPlotHeight)
-        Me.tbpOptions.Controls.Add(Me.lblPlotHeight)
-        Me.tbpOptions.Controls.Add(Me.ucrInputMaxLatitude)
-        Me.tbpOptions.Controls.Add(Me.lblMaxLatitude)
-        Me.tbpOptions.Controls.Add(Me.ucrInputMinLatitude)
-        Me.tbpOptions.Controls.Add(Me.lblMinLatitude)
-        Me.tbpOptions.Controls.Add(Me.ucrInputMaxLongitude)
-        Me.tbpOptions.Controls.Add(Me.lblMaxLongitude)
-        Me.tbpOptions.Controls.Add(Me.ucrInputMinLongitude)
-        Me.tbpOptions.Controls.Add(Me.lblMinLongitude)
-        Me.tbpOptions.Controls.Add(Me.ucrInputAddtoTitle)
-        Me.tbpOptions.Controls.Add(Me.lblAddtoTitle)
-        Me.tbpOptions.Location = New System.Drawing.Point(4, 22)
-        Me.tbpOptions.Name = "tbpOptions"
-        Me.tbpOptions.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpOptions.Size = New System.Drawing.Size(444, 423)
-        Me.tbpOptions.TabIndex = 0
-        Me.tbpOptions.Text = "TabPage1"
-        Me.tbpOptions.UseVisualStyleBackColor = True
+        Me.tbpLayout.Controls.Add(Me.ucrNudNumberofColours)
+        Me.tbpLayout.Controls.Add(Me.ucrChkSetColourBreaks)
+        Me.tbpLayout.Controls.Add(Me.ucrChkPlotAnomaly)
+        Me.tbpLayout.Controls.Add(Me.ucrInputColourBarMax)
+        Me.tbpLayout.Controls.Add(Me.ucrInputColourBarMin)
+        Me.tbpLayout.Controls.Add(Me.lblNumberofColours)
+        Me.tbpLayout.Controls.Add(Me.lblColourBarMax)
+        Me.tbpLayout.Controls.Add(Me.ucrInputInterval)
+        Me.tbpLayout.Controls.Add(Me.lblColourBarMin)
+        Me.tbpLayout.Controls.Add(Me.ucrInputMaxBreakPoint)
+        Me.tbpLayout.Controls.Add(Me.lblInterval)
+        Me.tbpLayout.Controls.Add(Me.ucrInputMinBreakPoint)
+        Me.tbpLayout.Controls.Add(Me.lblMaxBreakPoint)
+        Me.tbpLayout.Controls.Add(Me.lblMinBreakPoint)
+        Me.tbpLayout.Controls.Add(Me.ucrInputPlotWidth)
+        Me.tbpLayout.Controls.Add(Me.lblPlotWidth)
+        Me.tbpLayout.Controls.Add(Me.ucrInputPlotHeight)
+        Me.tbpLayout.Controls.Add(Me.lblPlotHeight)
+        Me.tbpLayout.Controls.Add(Me.ucrInputMaxLatitude)
+        Me.tbpLayout.Controls.Add(Me.lblMaxLatitude)
+        Me.tbpLayout.Controls.Add(Me.ucrInputMinLatitude)
+        Me.tbpLayout.Controls.Add(Me.lblMinLatitude)
+        Me.tbpLayout.Controls.Add(Me.ucrInputMaxLongitude)
+        Me.tbpLayout.Controls.Add(Me.lblMaxLongitude)
+        Me.tbpLayout.Controls.Add(Me.ucrInputMinLongitude)
+        Me.tbpLayout.Controls.Add(Me.lblMinLongitude)
+        Me.tbpLayout.Controls.Add(Me.ucrInputAddtoTitle)
+        Me.tbpLayout.Controls.Add(Me.lblAddtoTitle)
+        Me.tbpLayout.Location = New System.Drawing.Point(4, 22)
+        Me.tbpLayout.Name = "tbpLayout"
+        Me.tbpLayout.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpLayout.Size = New System.Drawing.Size(444, 423)
+        Me.tbpLayout.TabIndex = 0
+        Me.tbpLayout.Text = "Layout"
+        Me.tbpLayout.UseVisualStyleBackColor = True
         '
-        'TabPage2
+        'tbpAdditionalFeatures
         '
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(192, 74)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "TabPage2"
-        Me.TabPage2.UseVisualStyleBackColor = True
+        Me.tbpAdditionalFeatures.Location = New System.Drawing.Point(4, 22)
+        Me.tbpAdditionalFeatures.Name = "tbpAdditionalFeatures"
+        Me.tbpAdditionalFeatures.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpAdditionalFeatures.Size = New System.Drawing.Size(444, 423)
+        Me.tbpAdditionalFeatures.TabIndex = 1
+        Me.tbpAdditionalFeatures.Text = "Additional Features"
+        Me.tbpAdditionalFeatures.UseVisualStyleBackColor = True
         '
         'lblAddtoTitle
         '
@@ -399,18 +399,18 @@ Partial Class sdgPlotRegion
         Me.Name = "sdgPlotRegion"
         Me.Text = "Plot Region"
         Me.tbcPlotRegion.ResumeLayout(False)
-        Me.tbpOptions.ResumeLayout(False)
-        Me.tbpOptions.PerformLayout()
+        Me.tbpLayout.ResumeLayout(False)
+        Me.tbpLayout.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
 
     Friend WithEvents ucrButtonsSdgPlotRegion As ucrButtonsSubdialogue
     Friend WithEvents tbcPlotRegion As TabControl
-    Friend WithEvents tbpOptions As TabPage
+    Friend WithEvents tbpLayout As TabPage
     Friend WithEvents ucrInputAddtoTitle As ucrInputTextBox
     Friend WithEvents lblAddtoTitle As Label
-    Friend WithEvents TabPage2 As TabPage
+    Friend WithEvents tbpAdditionalFeatures As TabPage
     Friend WithEvents ucrInputMinLongitude As ucrInputTextBox
     Friend WithEvents lblMinLongitude As Label
     Friend WithEvents ucrInputMaxLongitude As ucrInputTextBox
