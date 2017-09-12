@@ -79,7 +79,12 @@ success <- invisible(mapply(function(p, v) length(find.package(p, quiet = TRUE))
 if(!all(success)) install.packages(names(success)[!success], repos = paste0("file:///", getwd(), "/extras"), type = "win.binary")
 
 # ggthemes temp added because themes list doesn't contain package names
-for(pack in c("plyr", "dplyr", "ggplot2", "ggthemes", "svglite", "ggfortify", "PCICt")) {
+# sp needed for plot.region() function which requires sp loaded but gives errors through R-Instat
+# plyr and dplyr loaded in order to avoid conflicts
+# ggplot2 loaded for convenience
+# svglite and ggofrtify needed for View Graph dialog
+# PCICt needed to access PCICt class when importing NET cdf files
+for(pack in c("plyr", "dplyr", "ggplot2", "ggthemes", "svglite", "ggfortify", "PCICt", "sp")) {
  library(pack, character.only = TRUE)
 }
 
