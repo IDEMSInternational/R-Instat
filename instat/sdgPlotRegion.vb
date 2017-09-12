@@ -24,6 +24,8 @@ Public Class sdgPlotRegion
     End Sub
 
     Private Sub InitialiseControls()
+        Dim dctPlotCapitalsPairs As New Dictionary(Of String, String)
+
         ucrInputAddtoTitle.SetParameter(New RParameter("add2title"))
         ucrInputAddtoTitle.SetRDefault("NA")
 
@@ -122,14 +124,24 @@ Public Class sdgPlotRegion
         ucrChkLabelCities.SetText("Label Cities")
         ucrChkLabelCities.SetRDefault("TRUE")
 
-        ucrInputPlotCapitals.SetParameter(New RParameter(""))
-        ucrInputPlotCapitals.SetRDefault("")
+        ucrInputPlotCapitals.SetParameter(New RParameter("plotCapitals"))
+        dctPlotCapitalsPairs.Add("No Capitals", Chr(34) & "0" & Chr(34))
+        dctPlotCapitalsPairs.Add("Country Capitals", Chr(34) & "1" & Chr(34))
+        dctPlotCapitalsPairs.Add("Provincial, State, Regional Capitals", Chr(34) & "2" & Chr(34))
+        dctPlotCapitalsPairs.Add("Local Capitals", Chr(34) & "3" & Chr(34))
+        dctPlotCapitalsPairs.Add("Density Plot", Chr(34) & "geom_density" & Chr(34))
+        ucrInputPlotCapitals.SetItems(dctPlotCapitalsPairs)
+        ucrInputPlotCapitals.SetDropDownStyleAsNonEditable()
 
         ucrNudSizeofCityLabels.SetParameter(New RParameter("cex.label.cities"))
         ucrNudSizeofCityLabels.SetRDefault("0.5")
 
         ucrNudSizeofCityLabels.SetParameter(New RParameter("dlat"))
         ucrNudSizeofCityLabels.SetRDefault("0.25")
+
+        ucrChkPlotOwnLocations.SetParameter(New RParameter("plotOwnLocations"))
+        ucrChkPlotOwnLocations.SetText("Plot Own Locations")
+        ucrChkPlotOwnLocations.SetRDefault("FALSE")
 
         bControlsInitialised = True
     End Sub
@@ -141,5 +153,4 @@ Public Class sdgPlotRegion
         clsRfunction = clsNewRfunction
         SetRCode(Me, clsRfunction, bReset)
     End Sub
-
 End Class
