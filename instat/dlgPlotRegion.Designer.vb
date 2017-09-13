@@ -77,7 +77,7 @@ Partial Class dlgPlotRegion
         '
         Me.dtpDateTimePicker.Location = New System.Drawing.Point(265, 233)
         Me.dtpDateTimePicker.Name = "dtpDateTimePicker"
-        Me.dtpDateTimePicker.Size = New System.Drawing.Size(133, 20)
+        Me.dtpDateTimePicker.Size = New System.Drawing.Size(144, 20)
         Me.dtpDateTimePicker.TabIndex = 10
         '
         'lblMinT
