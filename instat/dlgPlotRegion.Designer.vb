@@ -67,7 +67,7 @@ Partial Class dlgPlotRegion
         'lblLongitude
         '
         Me.lblLongitude.AutoSize = True
-        Me.lblLongitude.Location = New System.Drawing.Point(263, 32)
+        Me.lblLongitude.Location = New System.Drawing.Point(263, 30)
         Me.lblLongitude.Name = "lblLongitude"
         Me.lblLongitude.Size = New System.Drawing.Size(57, 13)
         Me.lblLongitude.TabIndex = 1
@@ -75,7 +75,7 @@ Partial Class dlgPlotRegion
         '
         'dtpDateTimePicker
         '
-        Me.dtpDateTimePicker.Location = New System.Drawing.Point(265, 233)
+        Me.dtpDateTimePicker.Location = New System.Drawing.Point(265, 228)
         Me.dtpDateTimePicker.Name = "dtpDateTimePicker"
         Me.dtpDateTimePicker.Size = New System.Drawing.Size(144, 20)
         Me.dtpDateTimePicker.TabIndex = 10
@@ -83,7 +83,7 @@ Partial Class dlgPlotRegion
         'lblMinT
         '
         Me.lblMinT.AutoSize = True
-        Me.lblMinT.Location = New System.Drawing.Point(262, 217)
+        Me.lblMinT.Location = New System.Drawing.Point(262, 212)
         Me.lblMinT.Name = "lblMinT"
         Me.lblMinT.Size = New System.Drawing.Size(60, 13)
         Me.lblMinT.TabIndex = 9
@@ -91,16 +91,16 @@ Partial Class dlgPlotRegion
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(265, 267)
+        Me.cmdOptions.Location = New System.Drawing.Point(10, 199)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(138, 23)
+        Me.cmdOptions.Size = New System.Drawing.Size(120, 23)
         Me.cmdOptions.TabIndex = 12
         Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 296)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 260)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 11
@@ -157,7 +157,7 @@ Partial Class dlgPlotRegion
         '
         Me.ucrSelectorPlotRegion.bShowHiddenColumns = False
         Me.ucrSelectorPlotRegion.bUseCurrentFilter = True
-        Me.ucrSelectorPlotRegion.Location = New System.Drawing.Point(12, 37)
+        Me.ucrSelectorPlotRegion.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorPlotRegion.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorPlotRegion.Name = "ucrSelectorPlotRegion"
         Me.ucrSelectorPlotRegion.Size = New System.Drawing.Size(210, 180)
@@ -167,7 +167,7 @@ Partial Class dlgPlotRegion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(421, 360)
+        Me.ClientSize = New System.Drawing.Size(421, 319)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.dtpDateTimePicker)
