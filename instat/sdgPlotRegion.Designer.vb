@@ -420,7 +420,7 @@ Partial Class sdgPlotRegion
         '
         Me.ucrInputPlotCapitals.AddQuotesIfUnrecognised = True
         Me.ucrInputPlotCapitals.IsReadOnly = False
-        Me.ucrInputPlotCapitals.Location = New System.Drawing.Point(103, 216)
+        Me.ucrInputPlotCapitals.Location = New System.Drawing.Point(105, 216)
         Me.ucrInputPlotCapitals.Name = "ucrInputPlotCapitals"
         Me.ucrInputPlotCapitals.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputPlotCapitals.TabIndex = 4
@@ -474,7 +474,7 @@ Partial Class sdgPlotRegion
         '
         Me.ucrNudLatitudeOffset.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLatitudeOffset.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudLatitudeOffset.Location = New System.Drawing.Point(103, 278)
+        Me.ucrNudLatitudeOffset.Location = New System.Drawing.Point(105, 278)
         Me.ucrNudLatitudeOffset.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudLatitudeOffset.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLatitudeOffset.Name = "ucrNudLatitudeOffset"
@@ -486,7 +486,7 @@ Partial Class sdgPlotRegion
         '
         Me.ucrNudSizeofCityLabels.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSizeofCityLabels.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSizeofCityLabels.Location = New System.Drawing.Point(103, 247)
+        Me.ucrNudSizeofCityLabels.Location = New System.Drawing.Point(105, 247)
         Me.ucrNudSizeofCityLabels.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSizeofCityLabels.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSizeofCityLabels.Name = "ucrNudSizeofCityLabels"
@@ -510,7 +510,7 @@ Partial Class sdgPlotRegion
         '
         Me.ucrNudThickness.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudThickness.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudThickness.Location = New System.Drawing.Point(103, 187)
+        Me.ucrNudThickness.Location = New System.Drawing.Point(105, 187)
         Me.ucrNudThickness.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudThickness.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudThickness.Name = "ucrNudThickness"
