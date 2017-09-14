@@ -95,7 +95,7 @@ Partial Class sdgProportionsPercentages
         Me.lblByFactors.Name = "lblByFactors"
         Me.lblByFactors.Size = New System.Drawing.Size(66, 13)
         Me.lblByFactors.TabIndex = 6
-        Me.lblByFactors.Text = "By Factor(s):"
+        Me.lblByFactors.Text = "As Proportion of Factors (Optional):"
         '
         'lblColumn
         '
@@ -206,7 +206,7 @@ Partial Class sdgProportionsPercentages
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(373, 418)
+        Me.ClientSize = New System.Drawing.Size(410, 418)
         Me.Controls.Add(Me.lblFilter)
         Me.Controls.Add(Me.ucrReceiverFilter)
         Me.Controls.Add(Me.grpOptions)

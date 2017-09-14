@@ -28,6 +28,11 @@ Public Class sdgProportionsPercentages
         ucrPnlBY.AddRadioButton(rdoByFactors)
         ucrPnlBY.AddRadioButton(rdoByFilter)
         ucrPnlBY.AddRadioButton(rdoByColumn)
+        ucrPnlBY.AddParameterPresentCondition(rdoByFactors, "perc_total_factors")
+        ucrPnlBY.AddParameterPresentCondition(rdoByFilter, "perc_total_filter")
+        ucrPnlBY.AddParameterPresentCondition(rdoByColumn, "perc_total_columns")
+        rdoByColumn.Enabled = False
+        rdoByFilter.Enabled = False
 
         ucrReceiverByFactor.Selector = ucrSelectorProportionsPercentiles
         ucrReceiverColumn.Selector = ucrSelectorProportionsPercentiles
@@ -42,17 +47,13 @@ Public Class sdgProportionsPercentages
         ucrChkDisplayAsDecimal.SetText("Display as decimal")
         ucrChkDisplayAsDecimal.SetRDefault("FALSE")
 
-        ucrPnlBY.AddParameterPresentCondition(rdoByFactors, "perc_total_factors")
-        ucrPnlBY.AddParameterPresentCondition(rdoByFilter, "perc_total_factors", False)
-        ucrPnlBY.AddParameterPresentCondition(rdoByColumn, "perc_total_factors", False)
-
         ucrChkProportionsPercentages.SetParameter(New RParameter("percentage_type"))
         ucrChkProportionsPercentages.SetValuesCheckedAndUnchecked(Chr(34) & "factors" & Chr(34), Chr(34) & "none" & Chr(34))
         ucrChkProportionsPercentages.SetRDefault(Chr(34) & "none" & Chr(34))
         ucrChkProportionsPercentages.SetText("Calculate Proportions or Percentages")
 
         ucrPnlBY.AddToLinkedControls({ucrReceiverByFactor, ucrChkDisplayAsDecimal}, {rdoByFactors}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkProportionsPercentages.AddToLinkedControls({ucrPnlBY, ucrSelectorProportionsPercentiles}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkProportionsPercentages.AddToLinkedControls({ucrPnlBY, ucrSelectorProportionsPercentiles}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoByFactors)
         ucrPnlBY.AddToLinkedControls(ucrReceiverColumn, {rdoByColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlBY.AddToLinkedControls(ucrReceiverFilter, {rdoByFilter}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverByFactor.SetLinkedDisplayControl(lblByFactors)
