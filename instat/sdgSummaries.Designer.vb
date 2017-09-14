@@ -192,7 +192,7 @@ Partial Class sdgSummaries
         Me.ucrChkKurtosis.Location = New System.Drawing.Point(222, 78)
         Me.ucrChkKurtosis.Name = "ucrChkKurtosis"
         Me.ucrChkKurtosis.Size = New System.Drawing.Size(91, 20)
-        Me.ucrChkKurtosis.TabIndex = 6
+        Me.ucrChkKurtosis.TabIndex = 5
         '
         'ucrChkSkewness
         '
@@ -200,7 +200,7 @@ Partial Class sdgSummaries
         Me.ucrChkSkewness.Location = New System.Drawing.Point(14, 78)
         Me.ucrChkSkewness.Name = "ucrChkSkewness"
         Me.ucrChkSkewness.Size = New System.Drawing.Size(152, 20)
-        Me.ucrChkSkewness.TabIndex = 5
+        Me.ucrChkSkewness.TabIndex = 2
         '
         'ucrChkSn
         '
@@ -224,7 +224,7 @@ Partial Class sdgSummaries
         Me.ucrChkMedianAbsoluteDeviation.Location = New System.Drawing.Point(14, 51)
         Me.ucrChkMedianAbsoluteDeviation.Name = "ucrChkMedianAbsoluteDeviation"
         Me.ucrChkMedianAbsoluteDeviation.Size = New System.Drawing.Size(205, 20)
-        Me.ucrChkMedianAbsoluteDeviation.TabIndex = 2
+        Me.ucrChkMedianAbsoluteDeviation.TabIndex = 1
         '
         'ucrChkCoefficientOfVariation
         '
@@ -232,7 +232,7 @@ Partial Class sdgSummaries
         Me.ucrChkCoefficientOfVariation.Location = New System.Drawing.Point(14, 25)
         Me.ucrChkCoefficientOfVariation.Name = "ucrChkCoefficientOfVariation"
         Me.ucrChkCoefficientOfVariation.Size = New System.Drawing.Size(171, 20)
-        Me.ucrChkCoefficientOfVariation.TabIndex = 1
+        Me.ucrChkCoefficientOfVariation.TabIndex = 0
         '
         'tbsum
         '
