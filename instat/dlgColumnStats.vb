@@ -43,8 +43,8 @@ Public Class dlgColumnStats
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.iCallType = 0
         ucrBase.iHelpTopicID = 64
+
         ucrChkDropUnusedLevels.Enabled = False ' removed this functionality so this is disabled
-        cmdProportionsPercentages.Enabled = False 'TODO: Disabling this for now still needs discussions.
 
         ucrSelectorForColumnStatistics.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForColumnStatistics.SetParameterIsString()
