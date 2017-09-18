@@ -50,6 +50,7 @@ Partial Class dlgLinePlot
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.ucrSave = New instat.ucrSave()
         Me.ucrChkPoints = New instat.ucrCheck()
+        Me.ucrChkLineofBestFit = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblXVariable
@@ -107,6 +108,7 @@ Partial Class dlgLinePlot
         Me.ucrVariablesAsFactorForLinePlot.Name = "ucrVariablesAsFactorForLinePlot"
         Me.ucrVariablesAsFactorForLinePlot.Selector = Nothing
         Me.ucrVariablesAsFactorForLinePlot.Size = New System.Drawing.Size(125, 136)
+        Me.ucrVariablesAsFactorForLinePlot.strNcFilePath = ""
         Me.ucrVariablesAsFactorForLinePlot.TabIndex = 1
         Me.ucrVariablesAsFactorForLinePlot.ucrSelector = Nothing
         Me.ucrVariablesAsFactorForLinePlot.ucrVariableSelector = Nothing
@@ -123,7 +125,7 @@ Partial Class dlgLinePlot
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 308)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 355)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 10
@@ -136,6 +138,7 @@ Partial Class dlgLinePlot
         Me.ucrFactorOptionalReceiver.Name = "ucrFactorOptionalReceiver"
         Me.ucrFactorOptionalReceiver.Selector = Nothing
         Me.ucrFactorOptionalReceiver.Size = New System.Drawing.Size(125, 26)
+        Me.ucrFactorOptionalReceiver.strNcFilePath = ""
         Me.ucrFactorOptionalReceiver.TabIndex = 5
         Me.ucrFactorOptionalReceiver.ucrSelector = Nothing
         '
@@ -147,12 +150,13 @@ Partial Class dlgLinePlot
         Me.ucrReceiverX.Name = "ucrReceiverX"
         Me.ucrReceiverX.Selector = Nothing
         Me.ucrReceiverX.Size = New System.Drawing.Size(125, 26)
+        Me.ucrReceiverX.strNcFilePath = ""
         Me.ucrReceiverX.TabIndex = 3
         Me.ucrReceiverX.ucrSelector = Nothing
         '
         'ucrSave
         '
-        Me.ucrSave.Location = New System.Drawing.Point(10, 282)
+        Me.ucrSave.Location = New System.Drawing.Point(10, 324)
         Me.ucrSave.Name = "ucrSave"
         Me.ucrSave.Size = New System.Drawing.Size(254, 24)
         Me.ucrSave.TabIndex = 9
@@ -162,14 +166,23 @@ Partial Class dlgLinePlot
         Me.ucrChkPoints.Checked = False
         Me.ucrChkPoints.Location = New System.Drawing.Point(10, 256)
         Me.ucrChkPoints.Name = "ucrChkPoints"
-        Me.ucrChkPoints.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkPoints.Size = New System.Drawing.Size(100, 24)
         Me.ucrChkPoints.TabIndex = 8
         '
-        'dlgPlot
+        'ucrChkLineofBestFit
+        '
+        Me.ucrChkLineofBestFit.Checked = False
+        Me.ucrChkLineofBestFit.Location = New System.Drawing.Point(10, 290)
+        Me.ucrChkLineofBestFit.Name = "ucrChkLineofBestFit"
+        Me.ucrChkLineofBestFit.Size = New System.Drawing.Size(173, 24)
+        Me.ucrChkLineofBestFit.TabIndex = 11
+        '
+        'dlgLinePlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 364)
+        Me.ClientSize = New System.Drawing.Size(419, 420)
+        Me.Controls.Add(Me.ucrChkLineofBestFit)
         Me.Controls.Add(Me.ucrChkPoints)
         Me.Controls.Add(Me.ucrSave)
         Me.Controls.Add(Me.ucrVariablesAsFactorForLinePlot)
@@ -185,7 +198,7 @@ Partial Class dlgLinePlot
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgPlot"
+        Me.Name = "dlgLinePlot"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Line_Plot"
         Me.Text = "Line Plot"
@@ -205,4 +218,5 @@ Partial Class dlgLinePlot
     Friend WithEvents ucrVariablesAsFactorForLinePlot As ucrVariablesAsFactor
     Friend WithEvents ucrChkPoints As ucrCheck
     Friend WithEvents ucrSave As ucrSave
+    Friend WithEvents ucrChkLineofBestFit As ucrCheck
 End Class
