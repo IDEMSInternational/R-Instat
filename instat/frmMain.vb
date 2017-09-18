@@ -1557,7 +1557,7 @@ Public Class frmMain
     End Sub
 
     Private Sub DispalyClimaticDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DispalyClimaticDataToolStripMenuItem.Click
-        dlgDisplayDailyClimaticData.ShowDialog()
+        dlgDisplayDailyData.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticPrepareClimaticSummaries_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareClimaticSummaries.Click

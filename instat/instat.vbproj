@@ -286,10 +286,10 @@
     <Compile Include="dlgDescribeTwoVariable.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgDisplayDailyClimaticData.Designer.vb">
-      <DependentUpon>dlgDisplayDailyClimaticData.vb</DependentUpon>
+    <Compile Include="dlgDisplayDailyData.Designer.vb">
+      <DependentUpon>dlgDisplayDailyData.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgDisplayDailyClimaticData.vb">
+    <Compile Include="dlgDisplayDailyData.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgDuplicatesConstructed.Designer.vb">
@@ -2526,8 +2526,8 @@
     <EmbeddedResource Include="dlgDescribeTwoVariable.sw-KE.resx">
       <DependentUpon>dlgDescribeTwoVariable.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgDisplayDailyClimaticData.resx">
-      <DependentUpon>dlgDisplayDailyClimaticData.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDisplayDailyData.resx">
+      <DependentUpon>dlgDisplayDailyData.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDuplicatesConstructed.resx">
       <DependentUpon>dlgDuplicatesConstructed.vb</DependentUpon>
