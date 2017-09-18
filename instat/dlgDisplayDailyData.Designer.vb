@@ -202,7 +202,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverFactorby.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactorby.Name = "ucrReceiverFactorby"
         Me.ucrReceiverFactorby.Selector = Nothing
-        Me.ucrReceiverFactorby.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverFactorby.Size = New System.Drawing.Size(122, 100)
         Me.ucrReceiverFactorby.strNcFilePath = ""
         Me.ucrReceiverFactorby.TabIndex = 17
         Me.ucrReceiverFactorby.ucrSelector = Nothing
@@ -245,7 +245,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverElements.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverElements.Name = "ucrReceiverElements"
         Me.ucrReceiverElements.Selector = Nothing
-        Me.ucrReceiverElements.Size = New System.Drawing.Size(120, 78)
+        Me.ucrReceiverElements.Size = New System.Drawing.Size(122, 78)
         Me.ucrReceiverElements.strNcFilePath = ""
         Me.ucrReceiverElements.TabIndex = 15
         Me.ucrReceiverElements.ucrSelector = Nothing
@@ -257,7 +257,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverYear.Name = "ucrReceiverYear"
         Me.ucrReceiverYear.Selector = Nothing
-        Me.ucrReceiverYear.Size = New System.Drawing.Size(145, 20)
+        Me.ucrReceiverYear.Size = New System.Drawing.Size(122, 20)
         Me.ucrReceiverYear.strNcFilePath = ""
         Me.ucrReceiverYear.TabIndex = 10
         Me.ucrReceiverYear.ucrSelector = Nothing
@@ -269,7 +269,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverDayOfYear.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDayOfYear.Name = "ucrReceiverDayOfYear"
         Me.ucrReceiverDayOfYear.Selector = Nothing
-        Me.ucrReceiverDayOfYear.Size = New System.Drawing.Size(145, 20)
+        Me.ucrReceiverDayOfYear.Size = New System.Drawing.Size(122, 20)
         Me.ucrReceiverDayOfYear.strNcFilePath = ""
         Me.ucrReceiverDayOfYear.TabIndex = 12
         Me.ucrReceiverDayOfYear.ucrSelector = Nothing
@@ -277,11 +277,11 @@ Partial Class dlgDisplayDailyData
         'ucrReceiverDate
         '
         Me.ucrReceiverDate.frmParent = Me
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(293, 124)
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(291, 124)
         Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing
-        Me.ucrReceiverDate.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverDate.Size = New System.Drawing.Size(122, 20)
         Me.ucrReceiverDate.strNcFilePath = ""
         Me.ucrReceiverDate.TabIndex = 8
         Me.ucrReceiverDate.ucrSelector = Nothing
@@ -289,11 +289,11 @@ Partial Class dlgDisplayDailyData
         'ucrReceiverStations
         '
         Me.ucrReceiverStations.frmParent = Me
-        Me.ucrReceiverStations.Location = New System.Drawing.Point(293, 80)
+        Me.ucrReceiverStations.Location = New System.Drawing.Point(291, 80)
         Me.ucrReceiverStations.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStations.Name = "ucrReceiverStations"
         Me.ucrReceiverStations.Selector = Nothing
-        Me.ucrReceiverStations.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverStations.Size = New System.Drawing.Size(122, 20)
         Me.ucrReceiverStations.strNcFilePath = ""
         Me.ucrReceiverStations.TabIndex = 6
         Me.ucrReceiverStations.ucrSelector = Nothing

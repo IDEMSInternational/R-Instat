@@ -135,6 +135,7 @@ Public Class dlgDisplayDailyData
         clsSummaryTableFunction.AddParameter("factors", clsRFunctionParameter:=clsConcFunction)
         clsSummaryTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
         clsDisplayDailyGraphFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$display_daily_graph")
+        ReceiverFocus()
         ucrBase.clsRsyntax.SetBaseRFunction(clsDisplayDailyGraphFunction)
     End Sub
 
@@ -177,11 +178,20 @@ Public Class dlgDisplayDailyData
         TestOkEnabled()
     End Sub
 
+    Private Sub ReceiverFocus()
+        If rdoTable.Checked Then
+            ucrReceiverFactorby.SetMeAsReceiver()
+        ElseIf rdoGraph.Checked Then
+            ucrReceiverStations.SetMeAsReceiver()
+        End If
+    End Sub
+
     Private Sub ucrPnlFrequencyDisplay_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFrequencyDisplay.ControlValueChanged
+        ReceiverFocus()
         If rdoGraph.Checked Then
             ucrBase.clsRsyntax.iCallType = 3
             ucrBase.clsRsyntax.SetBaseRFunction(clsDisplayDailyGraphFunction)
-        Else
+        ElseIf rdoTable.Checked Then
             ucrBase.clsRsyntax.iCallType = 2
             ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryTableFunction)
         End If
