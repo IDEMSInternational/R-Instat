@@ -73,6 +73,7 @@ Public Class clsGridLink
         Dim clsGetCombinedMetadata As New RFunction
         Dim clsSetMetadataChanged As New RFunction
         Dim expTemp As SymbolicExpression
+        Dim bMessageShown As Boolean = False
 
         clsDataChanged.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_changed")
         clsMetadataChanged.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_metadata_changed")
@@ -97,21 +98,30 @@ Public Class clsGridLink
             If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
                 bRDataChanged = expTemp.AsLogical(0)
             Else
-                MsgBox("Error: Could not retrieve data frames from R. Data displayed in spreadsheet may not be up to date." & Environment.NewLine & "We strongly suggest restarting R-Instat before continuing.", MsgBoxStyle.Exclamation, "Cannot retrieve data")
+                If Not bMessageShown Then
+                    MsgBox("Error: Could not retrieve data frames from R. Data displayed in spreadsheet may not be up to date." & Environment.NewLine & "We strongly suggest restarting R-Instat before continuing.", MsgBoxStyle.Exclamation, "Cannot retrieve data")
+                    bMessageShown = True
+                End If
                 bRDataChanged = False
             End If
             expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsMetadataChanged.ToScript())
             If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
                 bRMetadataChanged = expTemp.AsLogical(0)
             Else
-                MsgBox("Error: Could not retrieve data frames from R. Data displayed in spreadsheet may not be up to date." & Environment.NewLine & "We strongly suggest restarting R-Instat before continuing.", MsgBoxStyle.Exclamation, "Cannot retrieve data")
+                If Not bMessageShown Then
+                    MsgBox("Error: Could not retrieve data frames from R. Data displayed in spreadsheet may not be up to date." & Environment.NewLine & "We strongly suggest restarting R-Instat before continuing.", MsgBoxStyle.Exclamation, "Cannot retrieve data")
+                    bMessageShown = True
+                End If
                 bRMetadataChanged = False
             End If
             expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsVariablesMetadataChanged.ToScript())
             If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
                 bRVariablesMetadataChanged = expTemp.AsLogical(0)
             Else
-                MsgBox("Error: Could not retrieve data frames from R. Data displayed in spreadsheet may not be up to date." & Environment.NewLine & "We strongly suggest restarting R-Instat before continuing.", MsgBoxStyle.Exclamation, "Cannot retrieve data")
+                If Not bMessageShown Then
+                    MsgBox("Error: Could not retrieve data frames from R. Data displayed in spreadsheet may not be up to date." & Environment.NewLine & "We strongly suggest restarting R-Instat before continuing.", MsgBoxStyle.Exclamation, "Cannot retrieve data")
+                    bMessageShown = True
+                End If
                 bRVariablesMetadataChanged = False
             End If
 
@@ -120,7 +130,10 @@ Public Class clsGridLink
                 If expTemp IsNot Nothing Then
                     lstDataNames = expTemp.AsList
                 Else
-                    MsgBox("Error: Could not retrieve data frames from R. Data displayed in spreadsheet may not be up to date." & Environment.NewLine & "We strongly suggest restarting R-Instat before continuing.", MsgBoxStyle.Exclamation, "Cannot retrieve data")
+                    If Not bMessageShown Then
+                        MsgBox("Error: Could not retrieve data frames from R. Data displayed in spreadsheet may not be up to date." & Environment.NewLine & "We strongly suggest restarting R-Instat before continuing.", MsgBoxStyle.Exclamation, "Cannot retrieve data")
+                        bMessageShown = True
+                    End If
                     lstDataNames = Nothing
                 End If
                 If lstDataNames IsNot Nothing Then
@@ -131,7 +144,10 @@ Public Class clsGridLink
                         If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
                             bRDataChanged = expTemp.AsLogical(0)
                         Else
-                            MsgBox("Error: Could not retrieve data frames from R. Data displayed in spreadsheet may not be up to date." & Environment.NewLine & "We strongly suggest restarting R-Instat before continuing.", MsgBoxStyle.Exclamation, "Cannot retrieve data")
+                            If Not bMessageShown Then
+                                MsgBox("Error: Could not retrieve data frames from R. Data displayed in spreadsheet may not be up to date." & Environment.NewLine & "We strongly suggest restarting R-Instat before continuing.", MsgBoxStyle.Exclamation, "Cannot retrieve data")
+                                bMessageShown = True
+                            End If
                             bRDataChanged = False
                         End If
                         If (bGrdDataExists AndAlso bRDataChanged) Then
@@ -144,7 +160,10 @@ Public Class clsGridLink
                                 If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
                                     bFilterApplied = expTemp.AsLogical(0)
                                 Else
-                                    MsgBox("Warning: Could not retrieve information about filter applied to data frame:" & strDataName & " from R. Data displayed in spreadsheet will not use a filter." & Environment.NewLine & "We strongly suggest restarting R-Instat before continuing.", MsgBoxStyle.Information, "Cannot retrieve filter information")
+                                    If Not bMessageShown Then
+                                        MsgBox("Warning: Could not retrieve information about filter applied to data frame:" & strDataName & " from R. Data displayed in spreadsheet will not use a filter." & Environment.NewLine & "We strongly suggest restarting R-Instat before continuing.", MsgBoxStyle.Information, "Cannot retrieve filter information")
+                                        bMessageShown = True
+                                    End If
                                     bFilterApplied = False
                                 End If
                                 If bFilterApplied Then
@@ -157,7 +176,10 @@ Public Class clsGridLink
                                 clsSetDataFramesChanged.AddParameter("new_val", "FALSE")
                                 frmMain.clsRLink.RunInternalScript(clsSetDataFramesChanged.ToScript(), bSilent:=True)
                             Else
-                                MsgBox("Error: Could not retrieve data frame:" & strDataName & " from R. Data displayed in spreadsheet may not be up to date." & Environment.NewLine & "We strongly suggest restarting R-Instat before continuing.", MsgBoxStyle.Exclamation, "Cannot retrieve data")
+                                If Not bMessageShown Then
+                                    MsgBox("Error: Could not retrieve data frame:" & strDataName & " from R. Data displayed in spreadsheet may not be up to date." & Environment.NewLine & "We strongly suggest restarting R-Instat before continuing.", MsgBoxStyle.Exclamation, "Cannot retrieve data")
+                                    bMessageShown = True
+                                End If
                             End If
                         End If
                         clsVariablesMetadataChanged.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
@@ -166,7 +188,10 @@ Public Class clsGridLink
                             bRVariablesMetadataChanged = expTemp.AsLogical(0)
                         Else
                             bRVariablesMetadataChanged = False
-                            MsgBox("Error: Could not retrieve metadata for data frame:" & strDataName & " from R. Data displayed in spreadsheet may not be up to date." & Environment.NewLine & "We strongly suggest restarting R-Instat before continuing.", MsgBoxStyle.Exclamation, "Cannot retrieve data")
+                            If Not bMessageShown Then
+                                MsgBox("Error: Could not retrieve metadata for data frame:" & strDataName & " from R. Data displayed in spreadsheet may not be up to date." & Environment.NewLine & "We strongly suggest restarting R-Instat before continuing.", MsgBoxStyle.Exclamation, "Cannot retrieve data")
+                                bMessageShown = True
+                            End If
                         End If
                         If (bGrdVariablesMetadataExists AndAlso bRVariablesMetadataChanged) Then
                             clsGetVariablesMetadata.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
@@ -179,7 +204,10 @@ Public Class clsGridLink
                                 clsSetVariablesMetadataChanged.AddParameter("new_val", "FALSE")
                                 frmMain.clsRLink.RunInternalScript(clsSetVariablesMetadataChanged.ToScript(), bSilent:=True)
                             Else
-                                MsgBox("Error: Could not retrieve metadata for data frame:" & strDataName & " from R. Data displayed in spreadsheet may not be up to date." & Environment.NewLine & "We strongly suggest restarting R-Instat before continuing.", MsgBoxStyle.Exclamation, "Cannot retrieve metadata")
+                                If Not bMessageShown Then
+                                    MsgBox("Error: Could not retrieve metadata for data frame:" & strDataName & " from R. Data displayed in spreadsheet may not be up to date." & Environment.NewLine & "We strongly suggest restarting R-Instat before continuing.", MsgBoxStyle.Exclamation, "Cannot retrieve metadata")
+                                    bMessageShown = True
+                                End If
                             End If
                         End If
                     Next
