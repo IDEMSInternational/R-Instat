@@ -139,9 +139,9 @@ Public Class dlgDisplayDailyData
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Object)
-        ucrReceiverYear.AddAdditionalCodeParameterPair(clsSummaryTableFunction, New RParameter("page_by", 2), 1)
-        ucrSelectorDisplayDailyClimaticData.AddAdditionalCodeParameterPair(clsSummaryTableFunction, ucrSelectorDisplayDailyClimaticData.GetParameter, 1)
-        ucrReceiverElements.AddAdditionalCodeParameterPair(clsSummaryTableFunction, New RParameter("columns_to_summarise", 1), 1)
+        ucrReceiverYear.AddAdditionalCodeParameterPair(clsSummaryTableFunction, New RParameter("page_by", 2), iAdditionalPairNo:=1)
+        ucrSelectorDisplayDailyClimaticData.AddAdditionalCodeParameterPair(clsSummaryTableFunction, ucrSelectorDisplayDailyClimaticData.GetParameter, iAdditionalPairNo:=1)
+        ucrReceiverElements.AddAdditionalCodeParameterPair(clsSummaryTableFunction, New RParameter("columns_to_summarise", 1), iAdditionalPairNo:=1)
         ucrReceiverFactorby.SetRCode(clsConcFunction, bReset)
         ucrReceiverDate.SetRCode(clsDisplayDailyGraphFunction, bReset)
         ucrReceiverStations.SetRCode(clsDisplayDailyGraphFunction, bReset)
