@@ -99,9 +99,9 @@ Public Class dlgDisplayDailyData
         ucrReceiverDayOfYear.SetClimaticType("doy")
         ucrReceiverDayOfYear.bAutoFill = True
 
+        ucrReceiverFactorby.SetParameter(New RParameter("x", 1))
         ucrReceiverFactorby.Selector = ucrSelectorDisplayDailyClimaticData
         ucrReceiverFactorby.SetMeAsReceiver()
-        ucrReceiverFactorby.SetParameter(New RParameter("x"))
         ucrReceiverFactorby.SetParameterIsRFunction()
 
         ucrPnlFrequencyDisplay.AddRadioButton(rdoTable)
