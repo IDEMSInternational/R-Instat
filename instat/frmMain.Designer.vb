@@ -224,6 +224,8 @@ Partial Class frmMain
         Me.mnuClimaticPICSARainfall = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPICSATemperature = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPICSACrops = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCMSAF = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PlToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticModels = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticModelsExtremes = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticModelsCircular = New System.Windows.Forms.ToolStripMenuItem()
@@ -483,8 +485,6 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
-        Me.mnuCMSAF = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PlToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1576,7 +1576,6 @@ Partial Class frmMain
         '
         'DispalyClimaticDataToolStripMenuItem
         '
-        Me.DispalyClimaticDataToolStripMenuItem.Enabled = False
         Me.DispalyClimaticDataToolStripMenuItem.Name = "DispalyClimaticDataToolStripMenuItem"
         Me.DispalyClimaticDataToolStripMenuItem.Size = New System.Drawing.Size(189, 22)
         Me.DispalyClimaticDataToolStripMenuItem.Text = "Display Daily..."
@@ -1765,20 +1764,33 @@ Partial Class frmMain
         'mnuClimaticPICSARainfall
         '
         Me.mnuClimaticPICSARainfall.Name = "mnuClimaticPICSARainfall"
-        Me.mnuClimaticPICSARainfall.Size = New System.Drawing.Size(152, 22)
+        Me.mnuClimaticPICSARainfall.Size = New System.Drawing.Size(150, 22)
         Me.mnuClimaticPICSARainfall.Text = "Rainfall..."
         '
         'mnuClimaticPICSATemperature
         '
         Me.mnuClimaticPICSATemperature.Name = "mnuClimaticPICSATemperature"
-        Me.mnuClimaticPICSATemperature.Size = New System.Drawing.Size(152, 22)
+        Me.mnuClimaticPICSATemperature.Size = New System.Drawing.Size(150, 22)
         Me.mnuClimaticPICSATemperature.Text = "Temperature..."
         '
         'mnuClimaticPICSACrops
         '
         Me.mnuClimaticPICSACrops.Name = "mnuClimaticPICSACrops"
-        Me.mnuClimaticPICSACrops.Size = New System.Drawing.Size(152, 22)
+        Me.mnuClimaticPICSACrops.Size = New System.Drawing.Size(150, 22)
         Me.mnuClimaticPICSACrops.Text = "Crops..."
+        '
+        'mnuCMSAF
+        '
+        Me.mnuCMSAF.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlToolStripMenuItem})
+        Me.mnuCMSAF.Name = "mnuCMSAF"
+        Me.mnuCMSAF.Size = New System.Drawing.Size(212, 22)
+        Me.mnuCMSAF.Text = "CM SAF"
+        '
+        'PlToolStripMenuItem
+        '
+        Me.PlToolStripMenuItem.Name = "PlToolStripMenuItem"
+        Me.PlToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
+        Me.PlToolStripMenuItem.Text = "Plot Region..."
         '
         'mnuClimaticModels
         '
@@ -3695,19 +3707,6 @@ Partial Class frmMain
         Me.ucrOutput.Name = "ucrOutput"
         Me.ucrOutput.Size = New System.Drawing.Size(444, 231)
         Me.ucrOutput.TabIndex = 0
-        '
-        'mnuCMSAF
-        '
-        Me.mnuCMSAF.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlToolStripMenuItem})
-        Me.mnuCMSAF.Name = "mnuCMSAF"
-        Me.mnuCMSAF.Size = New System.Drawing.Size(212, 22)
-        Me.mnuCMSAF.Text = "CM SAF"
-        '
-        'PlToolStripMenuItem
-        '
-        Me.PlToolStripMenuItem.Name = "PlToolStripMenuItem"
-        Me.PlToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.PlToolStripMenuItem.Text = "Plot Region..."
         '
         'frmMain
         '
