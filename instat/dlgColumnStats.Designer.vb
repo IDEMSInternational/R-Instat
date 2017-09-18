@@ -119,7 +119,7 @@ Partial Class dlgColumnStats
         '
         'cmdSummaries
         '
-        Me.cmdSummaries.Location = New System.Drawing.Point(265, 320)
+        Me.cmdSummaries.Location = New System.Drawing.Point(247, 289)
         Me.cmdSummaries.Name = "cmdSummaries"
         Me.cmdSummaries.Size = New System.Drawing.Size(143, 23)
         Me.cmdSummaries.TabIndex = 7
@@ -129,7 +129,7 @@ Partial Class dlgColumnStats
         '
         'cmdProportionsPercentages
         '
-        Me.cmdProportionsPercentages.Location = New System.Drawing.Point(265, 291)
+        Me.cmdProportionsPercentages.Location = New System.Drawing.Point(247, 318)
         Me.cmdProportionsPercentages.Name = "cmdProportionsPercentages"
         Me.cmdProportionsPercentages.Size = New System.Drawing.Size(143, 23)
         Me.cmdProportionsPercentages.TabIndex = 6
