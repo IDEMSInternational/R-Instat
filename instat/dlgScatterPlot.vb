@@ -39,6 +39,9 @@ Public Class dlgScatterPlot
     Dim strReceiverYSingleVarType As String = ""
     Dim strReceiverYMultipleVarType As String = ""
 
+    Private clsGeomSmoothFunc As New RFunction
+    Private clsGeomSmoothParameter As New RParameter
+
     Private Sub dlgScatterPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -58,8 +61,7 @@ Public Class dlgScatterPlot
         ucrBase.iHelpTopicID = 433
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
-        Dim clsGeomSmoothFunc As New RFunction
-        Dim clsGeomSmoothParameter As New RParameter
+
 
         ucrSelectorForScatter.SetParameter(New RParameter("data", 0))
         ucrSelectorForScatter.SetParameterIsrfunction()
@@ -96,7 +98,14 @@ Public Class dlgScatterPlot
         clsGeomSmoothParameter.SetArgumentName("geom_smooth")
         clsGeomSmoothParameter.SetArgument(clsGeomSmoothFunc)
         ucrChkLineofBestFit.SetText("Add Line of Best Fit")
+        ucrChkLineofBestFit.AddToLinkedControls(ucrChkWithSE, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkLineofBestFit.SetParameter(clsGeomSmoothParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
+        ucrChkWithSE.SetText("With Standard Error")
+        ucrChkWithSE.SetParameter(New RParameter("se"))
+        ucrChkWithSE.SetValuesCheckedAndUnchecked("FALSE", "TRUE")
+        ucrChkWithSE.SetRDefault("TRUE")
+        ucrChkWithSE.AddParameterValuesCondition(True, "se", "FALSE")
 
         ucrSaveScatterPlot.SetPrefix("scatterplot")
         ucrSaveScatterPlot.SetSaveTypeAsGraph()
@@ -156,6 +165,7 @@ Public Class dlgScatterPlot
         ucrFactorOptionalReceiver.SetRCode(clsRaesFunction, bReset)
         ucrChkLineofBestFit.SetRCode(clsBaseOperator, bReset)
         ucrSaveScatterPlot.SetRCode(clsBaseOperator, bReset)
+        ucrChkWithSE.SetRCode(clsGeomSmoothFunc, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
