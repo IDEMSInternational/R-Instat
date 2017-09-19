@@ -1078,7 +1078,7 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
     stop("to_type must be a character of length one")
   }
   
-  if(!(to_type %in% c("integer", "factor", "numeric", "character", "ordered_factor"))) {
+  if(!(to_type %in% c("integer", "factor", "numeric", "character", "ordered_factor", "logical"))) {
     stop(to_type, " is not a valid type to convert to")
   }
   
@@ -1146,6 +1146,11 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
     else if(to_type == "character") {
       new_col <- sjmisc::to_character(curr_col) 
     }
+    else if(to_type == "logical") {
+      if(is.logical.like(curr_col)) new_col <- as.logical(curr_col)
+      else stop("Column is not numeric or contains values other than 0 and 1. Converting to logical would result in losing information.")
+    }
+    
     self$add_columns_to_data(col_name = col_name, col_data = new_col)
     
     if(keep_attr) {
