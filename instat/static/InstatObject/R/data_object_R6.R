@@ -2562,6 +2562,20 @@ data_object$set("public","is_corruption_type_present", function(type) {
 }
 )
 
+instat_object$set("public","get_CRI_component_column_names", function(data_name) {
+  self$get_data_objects(data_name)$get_CRI_component_column_names()
+}
+)
+
+data_object$set("public","get_CRI_component_column_names", function() {
+  include <- list(TRUE)
+  names(include) <- corruption_index_label
+  return(self$get_column_names(include = include))
+}
+)
+
+corruption_index_label
+
 instat_object$set("public","get_CRI_column_names", function(data_name) {
   self$get_data_objects(data_name)$get_CRI_column_names()
 }
