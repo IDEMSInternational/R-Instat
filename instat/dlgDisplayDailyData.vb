@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgDisplayDailyData
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsSummaryTableFunction, clsDisplayDailyGraphFunction, clsConcFunction As RFunction
+    Private clsSummaryTableFunction, clsDisplayDailyGraphFunction As RFunction
 
     Private Sub dlgDisplayDailyData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -110,7 +110,6 @@ Public Class dlgDisplayDailyData
         ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoTable, frmMain.clsRLink.strInstatDataObject & "$summary_table")
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrNudUpperYaxis, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrReceiverDayOfYear, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlFrequencyDisplay.SetLinkedDisplayControl(lblDayOfTheYear)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrReceiverDate, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverDate.SetLinkedDisplayControl(lblDate)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrReceiverStations, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -123,16 +122,15 @@ Public Class dlgDisplayDailyData
     Private Sub SetDefaults()
         clsSummaryTableFunction = New RFunction
         clsDisplayDailyGraphFunction = New RFunction
-        clsConcFunction = New RFunction
 
         ucrSelectorDisplayDailyClimaticData.Reset()
 
         clsDisplayDailyGraphFunction.AddParameter("upper_limit", 50)
         clsDisplayDailyGraphFunction.AddParameter("rug_colour", Chr(34) & "blue" & Chr(34))
         clsDisplayDailyGraphFunction.AddParameter("bar_colour", Chr(34) & "blue" & Chr(34))
-        clsConcFunction.SetRCommand("c")
-        clsSummaryTableFunction.AddParameter("summaries", Chr(34) & "sum_label" & Chr(34))
-        clsSummaryTableFunction.AddParameter("factors", clsRFunctionParameter:=clsConcFunction)
+        clsSummaryTableFunction.AddParameter("summaries", "sum_label")
+        clsSummaryTableFunction.AddParameter("n_column_factors", "1")
+        clsSummaryTableFunction.AddParameter("stored_results", Chr(34) & "FALSE" & Chr(34))
         clsSummaryTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
         clsDisplayDailyGraphFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$display_daily_graph")
         ReceiverFocus()
@@ -143,7 +141,6 @@ Public Class dlgDisplayDailyData
         ucrReceiverYear.AddAdditionalCodeParameterPair(clsSummaryTableFunction, New RParameter("page_by", 2), iAdditionalPairNo:=1)
         ucrSelectorDisplayDailyClimaticData.AddAdditionalCodeParameterPair(clsSummaryTableFunction, ucrSelectorDisplayDailyClimaticData.GetParameter, iAdditionalPairNo:=1)
         ucrReceiverElements.AddAdditionalCodeParameterPair(clsSummaryTableFunction, New RParameter("columns_to_summarise", 1), iAdditionalPairNo:=1)
-        ucrReceiverFactorby.SetRCode(clsConcFunction, bReset)
         ucrReceiverDate.SetRCode(clsDisplayDailyGraphFunction, bReset)
         ucrReceiverStations.SetRCode(clsDisplayDailyGraphFunction, bReset)
         ucrReceiverDayOfYear.SetRCode(clsDisplayDailyGraphFunction, bReset)
@@ -199,5 +196,9 @@ Public Class dlgDisplayDailyData
 
     Private Sub ucrReceiverDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverStations.ControlContentsChanged, ucrReceiverDayOfYear.ControlContentsChanged, ucrNudUpperYaxis.ControlContentsChanged, ucrInputRugColour.ControlContentsChanged, ucrInputBarColour.ControlContentsChanged, ucrPnlFrequencyDisplay.ControlContentsChanged, ucrReceiverFactorby.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrReceiverFactorby_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactorby.ControlValueChanged
+        clsSummaryTableFunction.AddParameter("factors", ucrReceiverFactorby.GetVariableNames)
     End Sub
 End Class
