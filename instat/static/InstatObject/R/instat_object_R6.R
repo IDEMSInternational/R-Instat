@@ -1467,19 +1467,3 @@ instat_object$set("public","display_daily_graph", function(data_name, date_col =
     self$get_data_objects(data_name)$display_daily_graph(date_col = date_col,station_col = station_col, year_col = year_col, doy_col = doy_col, climatic_element = climatic_element, rug_colour = rug_colour, bar_colour = bar_colour, upper_limit = upper_limit)
   }
 )
-
-instat_object$set("public", "daily_climatic_graph", function(data_name, station, climatic_element, doy, year){
-    for (station_name in station){
-        for(first_year in year){
-            data_name<-subset(subset(data_name,station==station_name),year>=first_year&year<first_year+10)
-            if (nrow(data_name)!=0){
-                if (nrow(subset(data_name,climatic_element>100))!=0){
-                    return(ggplot(data_name, aes(x=doy, y=climatic_element)) + geom_bar(stat="identity", fill="blue") + geom_rug(data=subset(data_name, is.na(climatic_element)==1), mapping = aes(x=doy), sides="b", color="red") + theme_minimal() + coord_cartesian(ylim=c(0,100)) + scale_x_continuous(breaks=c(1,32, 61, 92, 122, 153, 183, 214, 245, 275, 306, 336, 367), labels = c(month.abb,""), limits =c(0,367)) + facet_wrap(~year,ncol=2) + ggtitle(paste0(station_name, " Daily ", climatic_element)) + theme(panel.grid.minor = element_blank(), plot.title = element_text(hjust = 0.5, size=20), axis.title = element_text(size=16)) + xlab("Day of the year") + ylab(paste(climatic_element, "amount", sep = " ")) + geom_text(data= subset(subdata,climatic_element>100), mapping= aes(y=100, label=climatic_element), size = 3))
-                  } else {
-                      return(ggplot(data_name, aes(x=doy, y=climatic_element)) + geom_bar(stat="identity", fill="blue") + geom_rug(data=subset(data_name, is.na(climatic_element)==1), mapping = aes(x=doy), sides="b", color="red") + theme_minimal() + coord_cartesian(ylim=c(0,100)) + scale_x_continuous(breaks=c(1,32, 61, 92, 122, 153, 183, 214, 245, 275, 306, 336, 367), labels = c(month.abb,""), limits =c(0,367)) + facet_wrap(~year,ncol=2) + ggtitle(paste0(station_name, " Daily ", climatic_elementfall)) + theme(panel.grid.minor = element_blank(), plot.title = element_text(hjust = 0.5, size=20), axis.title = element_text(size=16)) + xlab("Day of the year") + ylab(climatic_element))
-                  }
-            }
-        }
-    }
-}
-)
