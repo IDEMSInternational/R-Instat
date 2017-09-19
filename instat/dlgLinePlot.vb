@@ -52,6 +52,8 @@ Public Class dlgLinePlot
     Private Sub InitialiseDialog()
         Dim clsGeomPointFunc As New RFunction
         Dim clsGeomPointParam As New RParameter
+        Dim clsGeomSmoothFunc As New RFunction
+        Dim clsGeomSmoothParameter As New RParameter
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
@@ -92,6 +94,14 @@ Public Class dlgLinePlot
         clsGeomPointParam.SetArgument(clsGeomPointFunc)
         ucrChkPoints.SetText("Points")
         ucrChkPoints.SetParameter(clsGeomPointParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
+        clsGeomSmoothFunc.SetPackageName("ggplot2")
+        clsGeomSmoothFunc.SetRCommand("geom_smooth")
+        clsGeomSmoothFunc.AddParameter("method", Chr(34) & "lm" & Chr(34))
+        clsGeomSmoothParameter.SetArgumentName("geom_smooth")
+        clsGeomSmoothParameter.SetArgument(clsGeomSmoothFunc)
+        ucrChkLineofBestFit.SetText("Add Line of Best Fit")
+        ucrChkLineofBestFit.SetParameter(clsGeomSmoothParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         ucrSave.SetPrefix("lineplot")
         ucrSave.SetIsComboBox()
@@ -154,6 +164,7 @@ Public Class dlgLinePlot
         ucrVariablesAsFactorForLinePlot.SetRCode(clsRaesFunction, bReset)
         ucrFactorOptionalReceiver.SetRCode(clsRaesFunction, bReset)
         ucrSave.SetRCode(clsBaseOperator, bReset)
+        ucrChkLineofBestFit.SetRCode(clsBaseOperator, bReset)
         ucrChkPoints.SetRCode(clsBaseOperator, bReset)
     End Sub
 
