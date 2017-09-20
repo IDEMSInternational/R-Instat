@@ -105,7 +105,7 @@ Partial Class dlgScatterPlot
         Me.ucrSaveScatterPlot.Location = New System.Drawing.Point(10, 285)
         Me.ucrSaveScatterPlot.Name = "ucrSaveScatterPlot"
         Me.ucrSaveScatterPlot.Size = New System.Drawing.Size(255, 24)
-        Me.ucrSaveScatterPlot.TabIndex = 9
+        Me.ucrSaveScatterPlot.TabIndex = 10
         '
         'ucrSelectorForScatter
         '
@@ -158,7 +158,7 @@ Partial Class dlgScatterPlot
         Me.ucrBase.Location = New System.Drawing.Point(10, 312)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 10
+        Me.ucrBase.TabIndex = 11
         '
         'ucrChkWithSE
         '
@@ -166,7 +166,7 @@ Partial Class dlgScatterPlot
         Me.ucrChkWithSE.Location = New System.Drawing.Point(262, 257)
         Me.ucrChkWithSE.Name = "ucrChkWithSE"
         Me.ucrChkWithSE.Size = New System.Drawing.Size(135, 20)
-        Me.ucrChkWithSE.TabIndex = 8
+        Me.ucrChkWithSE.TabIndex = 9
         '
         'dlgScatterPlot
         '
