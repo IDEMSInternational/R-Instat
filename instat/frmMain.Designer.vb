@@ -461,6 +461,7 @@ Partial Class frmMain
         Me.mnuProcurementModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementModelFitModelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DefineRedFlagsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CorrelationsRedFlagsorOthersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalculateCRIToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcurementUseCRI = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementUseCRISummariseCRIbyCountry = New System.Windows.Forms.ToolStripMenuItem()
@@ -3351,7 +3352,7 @@ Partial Class frmMain
         '
         'mnuProcurement
         '
-        Me.mnuProcurement.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCorruptionDefineCorruptionData, Me.mnuProcurementPrepare, Me.mnuProcurementDescribe, Me.DefineOutputsToolStripMenuItem, Me.mnuProcurementModel, Me.DefineRedFlagsToolStripMenuItem, Me.CalculateCRIToolStripMenuItem, Me.ProcurementUseCRI})
+        Me.mnuProcurement.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCorruptionDefineCorruptionData, Me.mnuProcurementPrepare, Me.mnuProcurementDescribe, Me.DefineOutputsToolStripMenuItem, Me.mnuProcurementModel, Me.DefineRedFlagsToolStripMenuItem, Me.CorrelationsRedFlagsorOthersToolStripMenuItem, Me.CalculateCRIToolStripMenuItem, Me.ProcurementUseCRI})
         Me.mnuProcurement.Name = "mnuProcurement"
         Me.mnuProcurement.Size = New System.Drawing.Size(88, 20)
         Me.mnuProcurement.Text = "Procurement"
@@ -3454,6 +3455,12 @@ Partial Class frmMain
         Me.DefineRedFlagsToolStripMenuItem.Name = "DefineRedFlagsToolStripMenuItem"
         Me.DefineRedFlagsToolStripMenuItem.Size = New System.Drawing.Size(292, 22)
         Me.DefineRedFlagsToolStripMenuItem.Text = "Define Red Flag Variables..."
+        '
+        'CorrelationsRedFlagsorOthersToolStripMenuItem
+        '
+        Me.CorrelationsRedFlagsorOthersToolStripMenuItem.Name = "CorrelationsRedFlagsorOthersToolStripMenuItem"
+        Me.CorrelationsRedFlagsorOthersToolStripMenuItem.Size = New System.Drawing.Size(292, 22)
+        Me.CorrelationsRedFlagsorOthersToolStripMenuItem.Text = "Correlations (Red Flags or others)..."
         '
         'CalculateCRIToolStripMenuItem
         '
@@ -4201,4 +4208,5 @@ Partial Class frmMain
     Friend WithEvents BoxplotsConceptualisedAndConstructedToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuCMSAF As ToolStripMenuItem
     Friend WithEvents PlToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CorrelationsRedFlagsorOthersToolStripMenuItem As ToolStripMenuItem
 End Class

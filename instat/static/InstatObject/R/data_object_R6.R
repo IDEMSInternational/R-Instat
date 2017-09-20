@@ -1078,7 +1078,7 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
     stop("to_type must be a character of length one")
   }
   
-  if(!(to_type %in% c("integer", "factor", "numeric", "character", "ordered_factor"))) {
+  if(!(to_type %in% c("integer", "factor", "numeric", "character", "ordered_factor", "logical"))) {
     stop(to_type, " is not a valid type to convert to")
   }
   
@@ -1146,6 +1146,11 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
     else if(to_type == "character") {
       new_col <- sjmisc::to_character(curr_col) 
     }
+    else if(to_type == "logical") {
+      if(is.logical.like(curr_col)) new_col <- as.logical(curr_col)
+      else stop("Column is not numeric or contains values other than 0 and 1. Converting to logical would result in losing information.")
+    }
+    
     self$add_columns_to_data(col_name = col_name, col_data = new_col)
     
     if(keep_attr) {
@@ -2556,6 +2561,20 @@ data_object$set("public","is_corruption_type_present", function(type) {
   return(self$is_metadata(corruption_data_label) && !is.na(self$get_metadata(corruption_data_label)) && self$is_variables_metadata(corruption_type_label) && (type %in% self$get_variables_metadata(property = corruption_type_label)))
 }
 )
+
+instat_object$set("public","get_CRI_component_column_names", function(data_name) {
+  self$get_data_objects(data_name)$get_CRI_component_column_names()
+}
+)
+
+data_object$set("public","get_CRI_component_column_names", function() {
+  include <- list(TRUE)
+  names(include) <- corruption_index_label
+  return(self$get_column_names(include = include))
+}
+)
+
+corruption_index_label
 
 instat_object$set("public","get_CRI_column_names", function(data_name) {
   self$get_data_objects(data_name)$get_CRI_column_names()
