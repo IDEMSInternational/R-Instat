@@ -232,7 +232,7 @@ Public Class ucrColumnMetadata
     Private Sub mnuConvertToLogical_Click(sender As Object, e As EventArgs) Handles mnuConvertToLogical.Click
         clsConvertTo.AddParameter("to_type", Chr(34) & "logical" & Chr(34))
         clsConvertTo.AddParameter("col_names", GetSelectedVariableNames())
-        RunScriptFromColumnMetadata(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Character")
+        RunScriptFromColumnMetadata(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Logical")
     End Sub
 
     Private Sub clearColumnFilterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles clearColumnFilterToolStripMenuItem.Click
