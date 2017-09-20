@@ -94,7 +94,7 @@ Public Class dlgScatterPlot
 
         clsGeomSmoothFunc.SetPackageName("ggplot2")
         clsGeomSmoothFunc.SetRCommand("geom_smooth")
-        clsGeomSmoothFunc.AddParameter("method", Chr(34) & "lm" & Chr(34))
+        clsGeomSmoothFunc.AddParameter("method", Chr(34) & "lm" & Chr(34), iPosition:=0)
         clsGeomSmoothParameter.SetArgumentName("geom_smooth")
         clsGeomSmoothParameter.SetArgument(clsGeomSmoothFunc)
         ucrChkLineofBestFit.SetText("Add Line of Best Fit")
@@ -102,7 +102,7 @@ Public Class dlgScatterPlot
         ucrChkLineofBestFit.SetParameter(clsGeomSmoothParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         ucrChkWithSE.SetText("With Standard Error")
-        ucrChkWithSE.SetParameter(New RParameter("se"))
+        ucrChkWithSE.SetParameter(New RParameter("se", 1))
         ucrChkWithSE.SetValuesCheckedAndUnchecked("FALSE", "TRUE")
         ucrChkWithSE.SetRDefault("TRUE")
         ucrChkWithSE.AddParameterValuesCondition(True, "se", "FALSE")
