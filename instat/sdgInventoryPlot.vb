@@ -35,7 +35,7 @@ Public Class sdgInventoryPlot
         ucrChkDisplayRainDays.AddToLinkedControls(ucrInputRain, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputRain.SetLinkedDisplayControl(lblRainLabel)
         ucrInputRain.SetParameter(New RParameter("rainlabel"))
-
+        ucrInputRain.SetLinkedDisplayControl(grpRainyDays)
         ucrChkDisplayRainDays.AddToLinkedControls(ucrInputDry, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputDry.SetLinkedDisplayControl(lblDryLabel)
 

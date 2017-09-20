@@ -52,7 +52,7 @@ Partial Class sdgInventoryPlot
         '
         'ucrButtonsInventoryplot
         '
-        Me.ucrButtonsInventoryplot.Location = New System.Drawing.Point(84, 352)
+        Me.ucrButtonsInventoryplot.Location = New System.Drawing.Point(67, 339)
         Me.ucrButtonsInventoryplot.Name = "ucrButtonsInventoryplot"
         Me.ucrButtonsInventoryplot.Size = New System.Drawing.Size(142, 30)
         Me.ucrButtonsInventoryplot.TabIndex = 0
@@ -105,12 +105,11 @@ Partial Class sdgInventoryPlot
         Me.grpRainyDays.Controls.Add(Me.ucrRainColour)
         Me.grpRainyDays.Controls.Add(Me.ucrInputDry)
         Me.grpRainyDays.Controls.Add(Me.ucrNudThresholdValue)
-        Me.grpRainyDays.Location = New System.Drawing.Point(12, 143)
+        Me.grpRainyDays.Location = New System.Drawing.Point(12, 128)
         Me.grpRainyDays.Name = "grpRainyDays"
         Me.grpRainyDays.Size = New System.Drawing.Size(261, 203)
         Me.grpRainyDays.TabIndex = 35
         Me.grpRainyDays.TabStop = False
-        Me.grpRainyDays.Text = "GroupBox1"
         '
         'ucrInputRain
         '
