@@ -67,6 +67,7 @@ Public Class dlgCombineText
     Private Sub SetDefaults()
         clsDefaultFunction = New RFunction
         ucrSelectorForCombineText.Reset()
+        ucrSaveColumn.Reset()
 
         clsDefaultFunction.SetPackageName("stringr")
         clsDefaultFunction.SetRCommand("str_c")

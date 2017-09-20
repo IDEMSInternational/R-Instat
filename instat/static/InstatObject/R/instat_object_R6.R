@@ -1148,12 +1148,14 @@ instat_object$set("public", "import_NetCDF", function(nc, name, only_data_vars =
   for(i in seq_along(var_groups)) {
     if(use_prefix) curr_name <- paste0(name, "_", i)
     else curr_name <- name
-    data_names <- c(data_names, curr_name)
     if(!missing(boundary)) curr_boundary <- boundary[names(boundary) %in% dim_groups[[i]]]
     else curr_boundary <- NULL
+    curr_name <- make.names(curr_name)
+    curr_name <- next_default_item(curr_name, self$get_data_names(), include_index = FALSE)
     data_list[[curr_name]] <- nc_as_data_frame(nc, var_groups[[i]], keep_raw_time = keep_raw_time, include_metadata = include_metadata, boundary = curr_boundary)
     tmp_list <- list()
     tmp_list[[curr_name]] <- data_list[[curr_name]]
+    data_names <- c(data_names, curr_name)
     self$import_data(data_tables = tmp_list)
     self$add_key(curr_name, dim_groups[[i]])
   }
@@ -1460,3 +1462,4 @@ instat_object$set("public", "set_links", function(new_links) {
   private$.links <- new_links
 } 
 )
+

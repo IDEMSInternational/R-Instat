@@ -41,11 +41,12 @@ Partial Class dlgColumnStats
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
         Me.lblByFactors = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
-        Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.ucrChkStoreResults = New instat.ucrCheck()
         Me.ucrChkOmitMissing = New instat.ucrCheck()
         Me.ucrChkPrintOutput = New instat.ucrCheck()
         Me.ucrChkDropUnusedLevels = New instat.ucrCheck()
+        Me.cmdSummaries = New System.Windows.Forms.Button()
+        Me.cmdProportionsPercentages = New System.Windows.Forms.Button()
         Me.ucrReceiverByFactor = New instat.ucrReceiverMultiple()
         Me.ucrReceiverSelectedVariables = New instat.ucrReceiverMultiple()
         Me.ucrSelectorForColumnStatistics = New instat.ucrSelectorByDataFrameAddRemove()
@@ -84,16 +85,6 @@ Partial Class dlgColumnStats
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
         '
-        'cmdSummaries
-        '
-        Me.cmdSummaries.Location = New System.Drawing.Point(265, 292)
-        Me.cmdSummaries.Name = "cmdSummaries"
-        Me.cmdSummaries.Size = New System.Drawing.Size(77, 23)
-        Me.cmdSummaries.TabIndex = 6
-        Me.cmdSummaries.Tag = "Summaries"
-        Me.cmdSummaries.Text = "Summaries..."
-        Me.cmdSummaries.UseVisualStyleBackColor = True
-        '
         'ucrChkStoreResults
         '
         Me.ucrChkStoreResults.Checked = False
@@ -125,6 +116,26 @@ Partial Class dlgColumnStats
         Me.ucrChkDropUnusedLevels.Name = "ucrChkDropUnusedLevels"
         Me.ucrChkDropUnusedLevels.Size = New System.Drawing.Size(148, 20)
         Me.ucrChkDropUnusedLevels.TabIndex = 2
+        '
+        'cmdSummaries
+        '
+        Me.cmdSummaries.Location = New System.Drawing.Point(247, 289)
+        Me.cmdSummaries.Name = "cmdSummaries"
+        Me.cmdSummaries.Size = New System.Drawing.Size(143, 23)
+        Me.cmdSummaries.TabIndex = 7
+        Me.cmdSummaries.Tag = "Summaries"
+        Me.cmdSummaries.Text = "Summaries..."
+        Me.cmdSummaries.UseVisualStyleBackColor = True
+        '
+        'cmdProportionsPercentages
+        '
+        Me.cmdProportionsPercentages.Location = New System.Drawing.Point(247, 318)
+        Me.cmdProportionsPercentages.Name = "cmdProportionsPercentages"
+        Me.cmdProportionsPercentages.Size = New System.Drawing.Size(143, 23)
+        Me.cmdProportionsPercentages.TabIndex = 6
+        Me.cmdProportionsPercentages.Tag = "Proportions/Percentages..."
+        Me.cmdProportionsPercentages.Text = "Proportions/Percentages..."
+        Me.cmdProportionsPercentages.UseVisualStyleBackColor = True
         '
         'ucrReceiverByFactor
         '
@@ -162,16 +173,17 @@ Partial Class dlgColumnStats
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 323)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 349)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(402, 53)
-        Me.ucrBase.TabIndex = 7
+        Me.ucrBase.TabIndex = 8
         '
         'dlgColumnStats
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 381)
+        Me.ClientSize = New System.Drawing.Size(416, 404)
+        Me.Controls.Add(Me.cmdProportionsPercentages)
         Me.Controls.Add(Me.cmdSummaries)
         Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.ucrReceiverByFactor)
@@ -205,4 +217,5 @@ Partial Class dlgColumnStats
     Friend WithEvents ucrChkOmitMissing As ucrCheck
     Friend WithEvents ucrChkPrintOutput As ucrCheck
     Friend WithEvents ucrChkDropUnusedLevels As ucrCheck
+    Friend WithEvents cmdProportionsPercentages As Button
 End Class

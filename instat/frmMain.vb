@@ -1653,4 +1653,26 @@ Public Class frmMain
     Private Sub mnuClimaticDescribeWindSpeedDirectionWindRose_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeWindSpeedDirectionWindRose.Click
         dlgWindrose.ShowDialog()
     End Sub
+
+    Private Sub PlToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PlToolStripMenuItem.Click
+        dlgPlotRegion.ShowDialog()
+    End Sub
+
+    Private Sub CorrelationsRedFlagsorOthersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CorrelationsRedFlagsorOthersToolStripMenuItem.Click
+        Dim lstDataNames As List(Of String)
+        Dim strComponentColumnNames() As String
+
+        lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
+        If lstDataNames.Count > 0 Then
+            dlgCorrelation.strDefaultDataFrame = lstDataNames(0)
+            strComponentColumnNames = clsRLink.GetCorruptionComponentsColumnNames(lstDataNames(0))
+            If strComponentColumnNames IsNot Nothing AndAlso strComponentColumnNames.Count > 0 Then
+                dlgCorrelation.strDefaultColumns = strComponentColumnNames
+            End If
+        Else
+            dlgCorrelation.strDefaultDataFrame = ""
+            dlgCorrelation.strDefaultColumns = Nothing
+        End If
+        dlgCorrelation.ShowDialog()
+    End Sub
 End Class

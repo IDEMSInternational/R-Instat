@@ -31,7 +31,7 @@ Public Class ucrDataFrameMetadata
         lstNonEditableColumns.AddRange({"class", "Is_Hidden", "Row_Count", "Column_Count", "Is_Linkable", "Is_Calculated"})
         grdMetaData.Worksheets(0).Name = "metadata"
         grdMetaData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, False)
-        grdMetaData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowHorScroll, False)
+        grdMetaData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowHorScroll, True)
         grdMetaData.SheetTabNewButtonVisible = False
     End Sub
 
