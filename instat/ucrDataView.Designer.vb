@@ -90,6 +90,7 @@ Partial Class ucrDataView
         Me.lblNoData = New System.Windows.Forms.Label()
         Me.lblRowDisplay = New System.Windows.Forms.Label()
         Me.lblHeader = New System.Windows.Forms.Label()
+        Me.mnuConvertToLogical = New System.Windows.Forms.ToolStripMenuItem()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowContextMenuStrip.SuspendLayout()
@@ -119,9 +120,9 @@ Partial Class ucrDataView
         '
         'columnContextMenuStrip
         '
-        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuDuplicateColumn, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertVariate, Me.mnuConvertToDate, Me.mnuConvert, Me.ToolStripSeparator1, Me.mnuHideColumns, Me.mnuUnhideColumns, Me.mnuUnhideAllColumns, Me.toolStripMenuItem21, Me.FreezeToHereToolStripMenuItem, Me.UnfreezeToolStripMenuItem, Me.ToolStripSeparator3, Me.SortToolStripMenuItem, Me.columnFilterToolStripMenuItem, Me.clearColumnFilterToolStripMenuItem})
+        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuDuplicateColumn, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertToLogical, Me.mnuConvertVariate, Me.mnuConvertToDate, Me.mnuConvert, Me.ToolStripSeparator1, Me.mnuHideColumns, Me.mnuUnhideColumns, Me.mnuUnhideAllColumns, Me.toolStripMenuItem21, Me.FreezeToHereToolStripMenuItem, Me.UnfreezeToolStripMenuItem, Me.ToolStripSeparator3, Me.SortToolStripMenuItem, Me.columnFilterToolStripMenuItem, Me.clearColumnFilterToolStripMenuItem})
         Me.columnContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.columnContextMenuStrip.Size = New System.Drawing.Size(213, 446)
+        Me.columnContextMenuStrip.Size = New System.Drawing.Size(213, 490)
         '
         'mnuColumnRename
         '
@@ -348,7 +349,7 @@ Partial Class ucrDataView
         '
         Me.statusColumnMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.insertSheet, Me.deleteDataFrame, Me.renameSheet, Me.reorderSheet, Me.CopySheet, Me.HideSheet, Me.unhideSheet, Me.ViewSheet})
         Me.statusColumnMenu.Name = "statusColumnMenu"
-        Me.statusColumnMenu.Size = New System.Drawing.Size(163, 202)
+        Me.statusColumnMenu.Size = New System.Drawing.Size(163, 180)
         '
         'insertSheet
         '
@@ -437,6 +438,12 @@ Partial Class ucrDataView
         Me.lblHeader.Text = "Data View"
         Me.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'mnuConvertToLogical
+        '
+        Me.mnuConvertToLogical.Name = "mnuConvertToLogical"
+        Me.mnuConvertToLogical.Size = New System.Drawing.Size(212, 22)
+        Me.mnuConvertToLogical.Text = "Convert to Logical"
+        '
         'ucrDataView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -507,4 +514,5 @@ Partial Class ucrDataView
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
     Friend WithEvents AddComment As ToolStripMenuItem
     Friend WithEvents lblHeader As Label
+    Friend WithEvents mnuConvertToLogical As ToolStripMenuItem
 End Class
