@@ -293,7 +293,7 @@ Public Class frmMain
     End Sub
 
     Private Sub SummaryToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificSummary.Click
-        dlgNewSummaryTables.ShowDialog()
+        dlgSummaryTables.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareAddColumnTransform_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnCalculateTransform.Click
@@ -1377,7 +1377,7 @@ Public Class frmMain
     End Sub
 
     Private Sub SummaryToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgNewSummaryTables.ShowDialog()
+        dlgSummaryTables.ShowDialog()
     End Sub
 
     Private Sub ImportFromCSPROToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportFromCSPROToolStripMenuItem.Click
