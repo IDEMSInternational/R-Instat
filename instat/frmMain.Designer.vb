@@ -638,14 +638,14 @@ Partial Class frmMain
         Me.mnuDescribeSpecificFrequency.Name = "mnuDescribeSpecificFrequency"
         Me.mnuDescribeSpecificFrequency.Size = New System.Drawing.Size(209, 22)
         Me.mnuDescribeSpecificFrequency.Tag = "Frequency..."
-        Me.mnuDescribeSpecificFrequency.Text = "Frequency..."
+        Me.mnuDescribeSpecificFrequency.Text = "Frequency Tables..."
         '
         'mnuDescribeSpecificSummary
         '
         Me.mnuDescribeSpecificSummary.Name = "mnuDescribeSpecificSummary"
         Me.mnuDescribeSpecificSummary.Size = New System.Drawing.Size(209, 22)
         Me.mnuDescribeSpecificSummary.Tag = "Summary..."
-        Me.mnuDescribeSpecificSummary.Text = "Summary..."
+        Me.mnuDescribeSpecificSummary.Text = "Summary Tables..."
         '
         'mnuDescribeSpecificMultipleResponse
         '
@@ -1577,7 +1577,6 @@ Partial Class frmMain
         '
         'DispalyClimaticDataToolStripMenuItem
         '
-        Me.DispalyClimaticDataToolStripMenuItem.Enabled = False
         Me.DispalyClimaticDataToolStripMenuItem.Name = "DispalyClimaticDataToolStripMenuItem"
         Me.DispalyClimaticDataToolStripMenuItem.Size = New System.Drawing.Size(189, 22)
         Me.DispalyClimaticDataToolStripMenuItem.Text = "Display Daily..."
