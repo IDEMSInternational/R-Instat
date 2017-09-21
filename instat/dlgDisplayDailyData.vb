@@ -30,8 +30,15 @@ Public Class dlgDisplayDailyData
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        ReopenDialog()
         bReset = False
         TestOkEnabled()
+    End Sub
+
+    Private Sub ReopenDialog()
+        If rdoGraph.Checked Then
+            grpGraph.Visible = True
+        End If
     End Sub
 
     Private Sub InitialiseDialog()
