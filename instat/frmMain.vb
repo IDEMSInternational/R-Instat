@@ -337,16 +337,8 @@ Public Class frmMain
     '    dlgNon_ParametricTwoWayAnova.ShowDialog()
     'End Sub
 
-    Private Sub NewWorksheetToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareNewWorksheet.Click
-        dlgNewWorksheet.ShowDialog()
-    End Sub
-
     Private Sub ImportDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareImportDailyData.Click
 
-    End Sub
-
-    Private Sub MakeFactorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareMakeFactor.Click
-        dlgMakeFactor.ShowDialog()
     End Sub
 
     Private Sub ShiftDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareShiftDailyData.Click
@@ -733,10 +725,6 @@ Public Class frmMain
         dlgNon_ParametricOneSampleTests.ShowDialog()
     End Sub
 
-    Private Sub mnuModelOtherOneVariableGoodnessofFit_Click(sender As Object, e As EventArgs) Handles mnuModelOtherOneVariableGoodnessofFit.Click
-        dlgGoodnessofFit.ShowDialog()
-    End Sub
-
     Private Sub mnuModelOtherTwoVariablesSimpleRegression_Click(sender As Object, e As EventArgs) Handles mnuModelOtherTwoVariablesSimpleRegression.Click
         dlgTwoVariableFitModel.ShowDialog()
     End Sub
@@ -767,10 +755,6 @@ Public Class frmMain
 
     Private Sub mnuModelOtherGeneralANOVAGeneral_Click(sender As Object, e As EventArgs) Handles mnuModelOtherGeneralANOVAGeneral.Click
         dlgGeneralANOVA.ShowDialog()
-    End Sub
-
-    Private Sub mnuModelOtherGeneralRegression_Click(sender As Object, e As EventArgs) Handles mnuModelOtherGeneralRegression.Click
-        dlgGeneralRegression.ShowDialog()
     End Sub
 
     Private Sub OutputWindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuViewOutputWindow.Click
@@ -1088,7 +1072,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticOrganiseEventsWaterBalance_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareEndOfRains.Click
-        dlgWaterBalance.ShowDialog()
+        dlgEndOfRainsSeason.ShowDialog()
     End Sub
 
     Private Sub mnuOrganiseColumnGenerateCountInFactor_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnGenerateCountInFactor.Click
@@ -1265,10 +1249,6 @@ Public Class frmMain
 
     Private Sub InventoryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InventoryToolStripMenuItem.Click
         dlgInventoryPlot.ShowDialog()
-    End Sub
-
-    Private Sub DisplayDailyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplayDailyToolStripMenuItem.Click
-        dlgDisplayDaily.ShowDialog()
     End Sub
 
     Private Sub mnuClimateFileClimSoft_Click(sender As Object, e As EventArgs) Handles mnuClimateFileClimSoft.Click
