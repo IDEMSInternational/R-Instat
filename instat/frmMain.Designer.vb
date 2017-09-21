@@ -638,14 +638,14 @@ Partial Class frmMain
         Me.mnuDescribeSpecificFrequency.Name = "mnuDescribeSpecificFrequency"
         Me.mnuDescribeSpecificFrequency.Size = New System.Drawing.Size(209, 22)
         Me.mnuDescribeSpecificFrequency.Tag = "Frequency..."
-        Me.mnuDescribeSpecificFrequency.Text = "Frequency..."
+        Me.mnuDescribeSpecificFrequency.Text = "Frequency Tables..."
         '
         'mnuDescribeSpecificSummary
         '
         Me.mnuDescribeSpecificSummary.Name = "mnuDescribeSpecificSummary"
         Me.mnuDescribeSpecificSummary.Size = New System.Drawing.Size(209, 22)
         Me.mnuDescribeSpecificSummary.Tag = "Summary..."
-        Me.mnuDescribeSpecificSummary.Text = "Summary..."
+        Me.mnuDescribeSpecificSummary.Text = "Summary Tables..."
         '
         'mnuDescribeSpecificMultipleResponse
         '
