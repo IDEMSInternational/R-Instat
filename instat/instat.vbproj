@@ -1415,18 +1415,6 @@
     <Compile Include="dlgDescribeOneVariable.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgDisplayDaily.Designer.vb">
-      <DependentUpon>dlgDisplayDaily.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgDisplayDaily.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgDisplayDailyDataRain.designer.vb">
-      <DependentUpon>dlgDisplayDailyDataRain.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgDisplayDailyDataRain.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgDisplayDoyofYear.designer.vb">
       <DependentUpon>dlgDisplayDoyofYear.vb</DependentUpon>
     </Compile>
@@ -3405,24 +3393,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDescribeOneVariable.sw-KE.resx">
       <DependentUpon>dlgDescribeOneVariable.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDisplayDaily.fr-FR.resx">
-      <DependentUpon>dlgDisplayDaily.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDisplayDaily.resx">
-      <DependentUpon>dlgDisplayDaily.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDisplayDaily.sw-KE.resx">
-      <DependentUpon>dlgDisplayDaily.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDisplayDailyDataRain.fr-FR.resx">
-      <DependentUpon>dlgDisplayDailyDataRain.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDisplayDailyDataRain.resx">
-      <DependentUpon>dlgDisplayDailyDataRain.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDisplayDailyDataRain.sw-KE.resx">
-      <DependentUpon>dlgDisplayDailyDataRain.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDisplayDoyofYear.fr-FR.resx">
       <DependentUpon>dlgDisplayDoyofYear.vb</DependentUpon>
