@@ -168,12 +168,14 @@ Public Class dlgDisplayDailyData
             Else
                 ucrBase.OKEnabled(False)
             End If
-        Else
-            If Not ucrReceiverFactorby.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty Then
+        ElseIf rdoTable.Checked Then
+            If Not ucrReceiverElements.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
             End If
+        Else
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
