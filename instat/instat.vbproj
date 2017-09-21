@@ -430,10 +430,10 @@
     <Compile Include="dlgNewMarkovChains.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgNewSummaryTables.Designer.vb">
-      <DependentUpon>dlgNewSummaryTables.vb</DependentUpon>
+    <Compile Include="dlgSummaryTables.Designer.vb">
+      <DependentUpon>dlgSummaryTables.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgNewSummaryTables.vb">
+    <Compile Include="dlgSummaryTables.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgOneVarCompareModels.Designer.vb">
@@ -2727,8 +2727,8 @@
     <EmbeddedResource Include="dlgNewMarkovChains.resx">
       <DependentUpon>dlgNewMarkovChains.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgNewSummaryTables.resx">
-      <DependentUpon>dlgNewSummaryTables.vb</DependentUpon>
+    <EmbeddedResource Include="dlgSummaryTables.resx">
+      <DependentUpon>dlgSummaryTables.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneVarCompareModels.resx">
       <DependentUpon>dlgOneVarCompareModels.vb</DependentUpon>
