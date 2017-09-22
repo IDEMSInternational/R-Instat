@@ -131,6 +131,7 @@ Partial Class dlgLabels
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgLabels"
+        Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Labels"
         Me.Text = "Labels/Levels"
