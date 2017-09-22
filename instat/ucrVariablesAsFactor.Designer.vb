@@ -45,27 +45,33 @@ Partial Class ucrVariablesAsFactor
         '
         'ucrMultipleVariables
         '
+        Me.ucrMultipleVariables.frmParent = Nothing
         Me.ucrMultipleVariables.Location = New System.Drawing.Point(0, 30)
         Me.ucrMultipleVariables.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrMultipleVariables.Name = "ucrMultipleVariables"
         Me.ucrMultipleVariables.Selector = Nothing
         Me.ucrMultipleVariables.Size = New System.Drawing.Size(120, 100)
+        Me.ucrMultipleVariables.strNcFilePath = ""
         Me.ucrMultipleVariables.TabIndex = 1
+        Me.ucrMultipleVariables.ucrSelector = Nothing
         '
         'ucrSingleVariable
         '
-        Me.ucrSingleVariable.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ucrSingleVariable.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)
+        ), System.Windows.Forms.AnchorStyles)
+        Me.ucrSingleVariable.frmParent = Nothing
         Me.ucrSingleVariable.Location = New System.Drawing.Point(0, 30)
         Me.ucrSingleVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSingleVariable.Name = "ucrSingleVariable"
         Me.ucrSingleVariable.Selector = Nothing
         Me.ucrSingleVariable.Size = New System.Drawing.Size(120, 20)
+        Me.ucrSingleVariable.strNcFilePath = ""
         Me.ucrSingleVariable.TabIndex = 2
+        Me.ucrSingleVariable.ucrSelector = Nothing
         '
         'cmdVariables
         '
-        Me.cmdVariables.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.cmdVariables.Dock = System.Windows.Forms.DockStyle.Top
         Me.cmdVariables.Location = New System.Drawing.Point(0, 0)
         Me.cmdVariables.Name = "cmdVariables"
         Me.cmdVariables.Size = New System.Drawing.Size(120, 27)
