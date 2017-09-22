@@ -352,10 +352,10 @@
     <Compile Include="dlgPlotRegion.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgRclimdex.Designer.vb">
-      <DependentUpon>dlgRclimdex.vb</DependentUpon>
+    <Compile Include="dlgRain.Designer.vb">
+      <DependentUpon>dlgRain.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgRclimdex.vb">
+    <Compile Include="dlgRain.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgViewLabelsAndLevels.Designer.vb">
@@ -2574,8 +2574,8 @@
     <EmbeddedResource Include="dlgPlotRegion.resx">
       <DependentUpon>dlgPlotRegion.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgRclimdex.resx">
-      <DependentUpon>dlgRclimdex.vb</DependentUpon>
+    <EmbeddedResource Include="dlgRain.resx">
+      <DependentUpon>dlgRain.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgViewLabelsAndLevels.resx">
       <DependentUpon>dlgViewLabelsAndLevels.vb</DependentUpon>
