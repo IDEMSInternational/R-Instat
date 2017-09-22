@@ -65,6 +65,7 @@ Partial Class ucrColumnMetadata
         Me.columnFilterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.clearColumnFilterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblHeader = New System.Windows.Forms.Label()
+        Me.mnuConvertToLogical = New System.Windows.Forms.ToolStripMenuItem()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
@@ -91,9 +92,9 @@ Partial Class ucrColumnMetadata
         '
         'columnContextMenuStrip
         '
-        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuDuplicateColumn, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertVariate, Me.mnuConvertToDate, Me.mnuConvert, Me.ToolStripSeparator1, Me.mnuHideColumns, Me.mnuUnhideColumns, Me.mnuUnhideAllColumns, Me.toolStripMenuItem21, Me.FreezeToHereToolStripMenuItem, Me.UnfreezeToolStripMenuItem, Me.ToolStripSeparator3, Me.SortToolStripMenuItem, Me.columnFilterToolStripMenuItem, Me.clearColumnFilterToolStripMenuItem})
+        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuDuplicateColumn, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertToLogical, Me.mnuConvertVariate, Me.mnuConvertToDate, Me.mnuConvert, Me.ToolStripSeparator1, Me.mnuHideColumns, Me.mnuUnhideColumns, Me.mnuUnhideAllColumns, Me.toolStripMenuItem21, Me.FreezeToHereToolStripMenuItem, Me.UnfreezeToolStripMenuItem, Me.ToolStripSeparator3, Me.SortToolStripMenuItem, Me.columnFilterToolStripMenuItem, Me.clearColumnFilterToolStripMenuItem})
         Me.columnContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.columnContextMenuStrip.Size = New System.Drawing.Size(213, 446)
+        Me.columnContextMenuStrip.Size = New System.Drawing.Size(213, 490)
         '
         'mnuColumnRename
         '
@@ -243,6 +244,11 @@ Partial Class ucrColumnMetadata
         Me.lblHeader.Text = "Column Metadata"
         Me.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'mnuConvertToLogical
+        '
+        Me.mnuConvertToLogical.Name = "mnuConvertToLogical"
+        Me.mnuConvertToLogical.Size = New System.Drawing.Size(212, 22)
+        Me.mnuConvertToLogical.Text = "Convert to Logical"
         'tlpTableContainer
         '
         Me.tlpTableContainer.ColumnCount = 1
@@ -297,5 +303,6 @@ Partial Class ucrColumnMetadata
     Friend WithEvents SortToolStripMenuItem As ToolStripMenuItem
     Private WithEvents columnFilterToolStripMenuItem As ToolStripMenuItem
     Private WithEvents clearColumnFilterToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuConvertToLogical As ToolStripMenuItem
     Friend WithEvents tlpTableContainer As TableLayoutPanel
 End Class
