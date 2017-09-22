@@ -417,6 +417,7 @@ Partial Class ucrDataView
         '
         'lblRowDisplay
         '
+        Me.lblRowDisplay.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblRowDisplay.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblRowDisplay.Location = New System.Drawing.Point(3, 264)
         Me.lblRowDisplay.Name = "lblRowDisplay"
