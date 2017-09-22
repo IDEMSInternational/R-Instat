@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgNewSummaryTables
+Public Class dlgSummaryTables
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private clsSummariesList As New RFunction
