@@ -454,7 +454,7 @@ Partial Class DlgDefineClimaticData
         Me.Controls.Add(Me.grpElements)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSelectorDefineClimaticData)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "DlgDefineClimaticData"
