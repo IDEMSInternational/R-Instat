@@ -358,6 +358,12 @@
     <Compile Include="dlgClimaticCheckDataRain.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRclimdex.Designer.vb">
+      <DependentUpon>dlgRclimdex.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRclimdex.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgViewLabelsAndLevels.Designer.vb">
       <DependentUpon>dlgViewLabelsAndLevels.vb</DependentUpon>
     </Compile>
@@ -2576,6 +2582,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgClimaticCheckDataRain.resx">
       <DependentUpon>dlgClimaticCheckDataRain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRclimdex.resx">
+      <DependentUpon>dlgRclimdex.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgViewLabelsAndLevels.resx">
       <DependentUpon>dlgViewLabelsAndLevels.vb</DependentUpon>
