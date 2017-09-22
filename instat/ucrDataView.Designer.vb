@@ -91,31 +91,33 @@ Partial Class ucrDataView
         Me.lblRowDisplay = New System.Windows.Forms.Label()
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.mnuConvertToLogical = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
+        Me.pnlDataContainer = New System.Windows.Forms.Panel()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowContextMenuStrip.SuspendLayout()
         Me.statusColumnMenu.SuspendLayout()
+        Me.tlpTableContainer.SuspendLayout()
+        Me.pnlDataContainer.SuspendLayout()
         Me.SuspendLayout()
         '
         'grdData
         '
-        Me.grdData.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grdData.BackColor = System.Drawing.Color.White
         Me.grdData.ColumnHeaderContextMenuStrip = Me.columnContextMenuStrip
         Me.grdData.ContextMenuStrip = Me.cellContextMenuStrip
+        Me.grdData.Dock = System.Windows.Forms.DockStyle.Fill
         Me.grdData.LeadHeaderContextMenuStrip = Nothing
-        Me.grdData.Location = New System.Drawing.Point(0, 23)
+        Me.grdData.Location = New System.Drawing.Point(0, 0)
         Me.grdData.Name = "grdData"
         Me.grdData.RowHeaderContextMenuStrip = Me.rowContextMenuStrip
         Me.grdData.Script = Nothing
         Me.grdData.SheetTabContextMenuStrip = Me.statusColumnMenu
         Me.grdData.SheetTabNewButtonVisible = False
         Me.grdData.SheetTabVisible = True
-        Me.grdData.SheetTabWidth = 200
+        Me.grdData.SheetTabWidth = 154
         Me.grdData.ShowScrollEndSpacing = True
-        Me.grdData.Size = New System.Drawing.Size(441, 238)
+        Me.grdData.Size = New System.Drawing.Size(438, 238)
         Me.grdData.TabIndex = 0
         '
         'columnContextMenuStrip
@@ -408,7 +410,7 @@ Partial Class ucrDataView
         Me.lblNoData.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblNoData.Location = New System.Drawing.Point(0, 0)
         Me.lblNoData.Name = "lblNoData"
-        Me.lblNoData.Size = New System.Drawing.Size(444, 284)
+        Me.lblNoData.Size = New System.Drawing.Size(438, 238)
         Me.lblNoData.TabIndex = 1
         Me.lblNoData.Tag = "no_data_loaded"
         Me.lblNoData.Text = "No Data Loaded"
@@ -416,11 +418,10 @@ Partial Class ucrDataView
         '
         'lblRowDisplay
         '
-        Me.lblRowDisplay.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.lblRowDisplay.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblRowDisplay.Location = New System.Drawing.Point(0, 264)
+        Me.lblRowDisplay.Location = New System.Drawing.Point(3, 264)
         Me.lblRowDisplay.Name = "lblRowDisplay"
-        Me.lblRowDisplay.Size = New System.Drawing.Size(444, 20)
+        Me.lblRowDisplay.Size = New System.Drawing.Size(438, 20)
         Me.lblRowDisplay.TabIndex = 4
         Me.lblRowDisplay.Text = "Label1"
         Me.lblRowDisplay.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -428,12 +429,12 @@ Partial Class ucrDataView
         'lblHeader
         '
         Me.lblHeader.BackColor = System.Drawing.Color.FromArgb(CType(CType(35, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(190, Byte), Integer))
-        Me.lblHeader.Dock = System.Windows.Forms.DockStyle.Top
+        Me.lblHeader.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblHeader.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblHeader.Location = New System.Drawing.Point(0, 0)
+        Me.lblHeader.Location = New System.Drawing.Point(3, 0)
         Me.lblHeader.Name = "lblHeader"
-        Me.lblHeader.Size = New System.Drawing.Size(444, 20)
+        Me.lblHeader.Size = New System.Drawing.Size(438, 20)
         Me.lblHeader.TabIndex = 5
         Me.lblHeader.Text = "Data View"
         Me.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -443,15 +444,38 @@ Partial Class ucrDataView
         Me.mnuConvertToLogical.Name = "mnuConvertToLogical"
         Me.mnuConvertToLogical.Size = New System.Drawing.Size(212, 22)
         Me.mnuConvertToLogical.Text = "Convert to Logical"
+        'tlpTableContainer
+        '
+        Me.tlpTableContainer.ColumnCount = 1
+        Me.tlpTableContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tlpTableContainer.Controls.Add(Me.lblHeader, 0, 0)
+        Me.tlpTableContainer.Controls.Add(Me.lblRowDisplay, 0, 2)
+        Me.tlpTableContainer.Controls.Add(Me.pnlDataContainer, 0, 1)
+        Me.tlpTableContainer.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tlpTableContainer.Location = New System.Drawing.Point(0, 0)
+        Me.tlpTableContainer.Name = "tlpTableContainer"
+        Me.tlpTableContainer.RowCount = 3
+        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.tlpTableContainer.Size = New System.Drawing.Size(444, 284)
+        Me.tlpTableContainer.TabIndex = 6
+        '
+        'pnlDataContainer
+        '
+        Me.pnlDataContainer.Controls.Add(Me.grdData)
+        Me.pnlDataContainer.Controls.Add(Me.lblNoData)
+        Me.pnlDataContainer.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnlDataContainer.Location = New System.Drawing.Point(3, 23)
+        Me.pnlDataContainer.Name = "pnlDataContainer"
+        Me.pnlDataContainer.Size = New System.Drawing.Size(438, 238)
+        Me.pnlDataContainer.TabIndex = 7
         '
         'ucrDataView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.lblHeader)
-        Me.Controls.Add(Me.lblRowDisplay)
-        Me.Controls.Add(Me.grdData)
-        Me.Controls.Add(Me.lblNoData)
+        Me.Controls.Add(Me.tlpTableContainer)
         Me.Name = "ucrDataView"
         Me.Size = New System.Drawing.Size(444, 284)
         Me.Tag = "Data_View"
@@ -459,6 +483,8 @@ Partial Class ucrDataView
         Me.cellContextMenuStrip.ResumeLayout(False)
         Me.rowContextMenuStrip.ResumeLayout(False)
         Me.statusColumnMenu.ResumeLayout(False)
+        Me.tlpTableContainer.ResumeLayout(False)
+        Me.pnlDataContainer.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -515,4 +541,6 @@ Partial Class ucrDataView
     Friend WithEvents AddComment As ToolStripMenuItem
     Friend WithEvents lblHeader As Label
     Friend WithEvents mnuConvertToLogical As ToolStripMenuItem
+    Friend WithEvents tlpTableContainer As TableLayoutPanel
+    Friend WithEvents pnlDataContainer As Panel
 End Class
