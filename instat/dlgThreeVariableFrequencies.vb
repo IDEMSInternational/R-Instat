@@ -22,11 +22,15 @@ Public Class dlgThreeVariableFrequencies
     Private clsSjTab, clsSelect, clsSjPlot, clsGroupBy, clsGridArrange As New RFunction
     Private clsTableBaseOperator, clsGraphBaseOperator As New ROperator
     Private clsCurrBaseCode As RCodeStructure
+    Private iMaxWidth As Integer
+    Private iMaxGraphGroupX As Integer
 
     Private Sub dlgThreeVariableFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
+            iMaxWidth = Me.Width
+            iMaxGraphGroupX = grpFreqTypeGraph.Location.X
             bFirstLoad = False
         End If
         If bReset Then
@@ -253,7 +257,6 @@ Public Class dlgThreeVariableFrequencies
         TestOkEnabled()
     End Sub
 
-
     Private Sub SetBaseFunction()
         If rdoTable.Checked OrElse rdoBoth.Checked Then
             ucrBase.clsRsyntax.SetBaseROperator(clsTableBaseOperator)
@@ -296,13 +299,11 @@ Public Class dlgThreeVariableFrequencies
 
     Private Sub ChangeLocation()
         If rdoBoth.Checked Then
-            grpFreqTypeTable.Location = New Point(260, 261)
-            grpFreqTypeGraph.Location = New Point(384, 261)
-            Me.Size = New Size(525, 492)
+            grpFreqTypeGraph.Location = New Point(iMaxGraphGroupX, grpFreqTypeGraph.Location.Y)
+            Me.Size = New Size(iMaxWidth, Me.Height)
         Else
-            grpFreqTypeTable.Location = New Point(260, 261)
-            grpFreqTypeGraph.Location = New Point(260, 261)
-            Me.Size = New Size(431, 492)
+            grpFreqTypeGraph.Location = New Point(iMaxGraphGroupX / 1.48, grpFreqTypeGraph.Location.Y)
+            Me.Size = New Size(iMaxWidth / 1.22, Me.Height)
         End If
     End Sub
 

@@ -21,11 +21,19 @@ Public Class dlgTransformText
     Private bReset As Boolean = True
     Private clsConvertFunction, clsLengthFunction, clsPadFunction, clsTrimFunction, clsWordsFunction, clsSubstringFunction As New RFunction
     Private bRCodeSet As Boolean = True
+    Private iFullHeight As Integer
+    Private igrpParameterFullHeight As Integer
+    Private iBaseMaxY As Integer
+    Private iNewColMaxY As Integer
 
     Private Sub dlgTransformText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
+            iFullHeight = Me.Height
+            igrpParameterFullHeight = grpParameters.Height
+            iBaseMaxY = ucrBase.Location.Y
+            iNewColMaxY = ucrNewColName.Location.Y
             bFirstLoad = False
         End If
         If bReset Then
@@ -174,7 +182,6 @@ Public Class dlgTransformText
         ucrNewColName.SetSaveTypeAsColumn()
         ucrNewColName.SetDataFrameSelector(ucrSelectorForTransformText.ucrAvailableDataFrames)
         ucrNewColName.SetLabelText("Column Name:")
-        DialogSize()
     End Sub
 
     Private Sub SetDefaults()
@@ -242,6 +249,7 @@ Public Class dlgTransformText
         ucrNudTo.SetRCode(clsSubstringFunction, bReset)
 
         bRCodeSet = True
+        DialogSize()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -297,33 +305,33 @@ Public Class dlgTransformText
     Private Sub DialogSize()
         If rdoConvertCase.Checked OrElse rdoTrim.Checked Then
             grpParameters.Visible = True
-            grpParameters.Size = New Size(397, 57)
-            ucrNewColName.Location = New Point(10, 301)
-            ucrBase.Location = New Point(10, 326)
-            Me.Size = New Size(435, 422)
+            grpParameters.Size = New Size(grpParameters.Width, igrpParameterFullHeight / 3.04)
+            ucrNewColName.Location = New Point(ucrNewColName.Location.X, iNewColMaxY / 1.39)
+            ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.36)
+            Me.Size = New Size(Me.Width, iFullHeight / 1.27)
         ElseIf rdoLength.Checked Then
             grpParameters.Visible = False
-            ucrNewColName.Location = New Point(10, 237)
-            ucrBase.Location = New Point(10, 262)
-            Me.Size = New Size(435, 357)
+            ucrNewColName.Location = New Point(ucrNewColName.Location.X, iNewColMaxY / 1.76)
+            ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.69)
+            Me.Size = New Size(Me.Width, iFullHeight / 1.5)
         ElseIf rdoSubstring.Checked Then
             grpParameters.Visible = True
-            grpParameters.Size = New Size(397, 81)
-            ucrNewColName.Location = New Point(10, 327)
-            ucrBase.Location = New Point(10, 352)
-            Me.Size = New Size(435, 448)
+            grpParameters.Size = New Size(grpParameters.Width, igrpParameterFullHeight / 2.14)
+            ucrNewColName.Location = New Point(ucrNewColName.Location.X, iNewColMaxY / 1.28)
+            ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.26)
+            Me.Size = New Size(Me.Width, iFullHeight / 1.2)
         ElseIf rdoPad.Checked Then
             grpParameters.Visible = True
-            grpParameters.Size = New Size(397, 121)
-            ucrNewColName.Location = New Point(10, 365)
-            ucrBase.Location = New Point(10, 390)
-            Me.Size = New Size(435, 486)
+            grpParameters.Size = New Size(grpParameters.Width, igrpParameterFullHeight / 1.43)
+            ucrNewColName.Location = New Point(ucrNewColName.Location.X, iNewColMaxY / 1.14)
+            ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.13)
+            Me.Size = New Size(Me.Width, iFullHeight / 1.1)
         Else
             grpParameters.Visible = True
-            grpParameters.Size = New Size(397, 173)
-            ucrNewColName.Location = New Point(10, 417)
-            ucrBase.Location = New Point(10, 442)
-            Me.Size = New Size(435, 537)
+            grpParameters.Size = New Size(grpParameters.Width, igrpParameterFullHeight)
+            ucrNewColName.Location = New Point(ucrBase.Location.X, iNewColMaxY)
+            ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
+            Me.Size = New Size(Me.Width, iFullHeight)
         End If
     End Sub
 
