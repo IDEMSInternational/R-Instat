@@ -39,7 +39,6 @@ Public Class dlgImportOpenRefine
         ucrBase.iHelpTopicID = 467
 
         ucrInputProjectName.SetParameter(New RParameter("project.name", 0))
-        ucrInputProjectName.SetValidationTypeAsRVariable()
         ucrInputProjectName.SetRDefault("NULL")
 
         ucrInputProjectID.SetParameter(New RParameter("project.id", 1))

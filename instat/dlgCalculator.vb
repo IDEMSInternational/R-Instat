@@ -24,11 +24,13 @@ Public Class dlgCalculator
     Dim clsDetach As New RFunction
     Public bFirstLoad As Boolean = True
     Public iHelpCalcID As Integer
+    Private iBasicWidth As Integer
 
     Private Sub dlgCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
+            iBasicWidth = Me.Width
             SetDefaults()
             bFirstLoad = False
         Else
@@ -132,21 +134,21 @@ Public Class dlgCalculator
     Private Sub CalculationsOptions()
         Select Case ucrCalc.ucrInputCalOptions.GetText
             Case "Maths"
-                Me.Size = New System.Drawing.Size(680, 435)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.33, Me.Height)
             Case "Logical and Symbols"
-                Me.Size = New System.Drawing.Size(627, 435)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.23, Me.Height)
             Case "Statistics"
-                Me.Size = New System.Drawing.Size(588, 435)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.15, Me.Height)
             Case "Strings (Character Columns)"
-                Me.Size = New System.Drawing.Size(630, 435)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.24, Me.Height)
             Case "Probability"
-                Me.Size = New System.Drawing.Size(810, 435)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.59, Me.Height)
             Case "Dates"
-                Me.Size = New System.Drawing.Size(660, 435)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.3, Me.Height)
             Case "Rows"
-                Me.Size = New System.Drawing.Size(615, 435)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.21, Me.Height)
             Case Else
-                Me.Size = New System.Drawing.Size(510, 435)
+                Me.Size = New System.Drawing.Size(iBasicWidth, Me.Height)
         End Select
     End Sub
 

@@ -208,10 +208,10 @@
     <Compile Include="dlgClimaticSummary.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgClimdex.Designer.vb">
-      <DependentUpon>dlgClimdex.vb</DependentUpon>
+    <Compile Include="dlgClimdexIndices.Designer.vb">
+      <DependentUpon>dlgClimdexIndices.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgClimdex.vb">
+    <Compile Include="dlgClimdexIndices.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgClimSoft.Designer.vb">
@@ -286,16 +286,16 @@
     <Compile Include="dlgDescribeTwoVariable.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgDisplayDailyClimaticData.Designer.vb">
-      <DependentUpon>dlgDisplayDailyClimaticData.vb</DependentUpon>
+    <Compile Include="dlgDisplayDailyData.Designer.vb">
+      <DependentUpon>dlgDisplayDailyData.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgDisplayDailyClimaticData.vb">
+    <Compile Include="dlgDisplayDailyData.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgDuplicatesConstructed.Designer.vb">
-      <DependentUpon>dlgDuplicatesConstructed.vb</DependentUpon>
+    <Compile Include="dlgDuplicates.Designer.vb">
+      <DependentUpon>dlgDuplicates.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgDuplicatesConstructed.vb">
+    <Compile Include="dlgDuplicates.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgEnter.Designer.vb">
@@ -350,6 +350,12 @@
       <DependentUpon>dlgPlotRegion.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgPlotRegion.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgClimaticCheckDataRain.Designer.vb">
+      <DependentUpon>dlgClimaticCheckDataRain.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticCheckDataRain.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgViewLabelsAndLevels.Designer.vb">
@@ -430,10 +436,10 @@
     <Compile Include="dlgNewMarkovChains.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgNewSummaryTables.Designer.vb">
-      <DependentUpon>dlgNewSummaryTables.vb</DependentUpon>
+    <Compile Include="dlgSummaryTables.Designer.vb">
+      <DependentUpon>dlgSummaryTables.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgNewSummaryTables.vb">
+    <Compile Include="dlgSummaryTables.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgOneVarCompareModels.Designer.vb">
@@ -959,24 +965,6 @@
     <Compile Include="dlgGeneralForGraphics.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgGeneralRegression.Designer.vb">
-      <DependentUpon>dlgGeneralRegression.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgGeneralRegression.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgGeneralTables.Designer.vb">
-      <DependentUpon>dlgGeneralTables.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgGeneralTables.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgGoodnessofFit.Designer.vb">
-      <DependentUpon>dlgGoodnessofFit.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgGoodnessofFit.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgHideDataframes.Designer.vb">
       <DependentUpon>dlgHideDataframes.vb</DependentUpon>
     </Compile>
@@ -1415,36 +1403,6 @@
     <Compile Include="dlgDescribeOneVariable.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgDisplayDaily.Designer.vb">
-      <DependentUpon>dlgDisplayDaily.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgDisplayDaily.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgDisplayDailyDataRain.designer.vb">
-      <DependentUpon>dlgDisplayDailyDataRain.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgDisplayDailyDataRain.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgDisplayDoyofYear.designer.vb">
-      <DependentUpon>dlgDisplayDoyofYear.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgDisplayDoyofYear.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgDisplayRainRunningTotal.designer.vb">
-      <DependentUpon>dlgDisplayRainRunningTotal.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgDisplayRainRunningTotal.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgDisplaySpellLength.designer.vb">
-      <DependentUpon>dlgDisplaySpellLength.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgDisplaySpellLength.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgDotPlot.designer.vb">
       <DependentUpon>dlgDotPlot.vb</DependentUpon>
     </Compile>
@@ -1565,34 +1523,16 @@
     <Compile Include="dlgInventoryPlot.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgIsNAListvb.designer.vb">
-      <DependentUpon>dlgIsNAListvb.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgIsNAListvb.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgLabels.Designer.vb">
       <DependentUpon>dlgLabels.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgLabels.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgLines.designer.vb">
-      <DependentUpon>dlgLines.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgLines.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgLockUnlock.Designer.vb">
       <DependentUpon>dlgLockUnlock.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgLockUnlock.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgMakeFactor.Designer.vb">
-      <DependentUpon>dlgMakeFactor.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgMakeFactor.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgMerge.Designer.vb">
@@ -1613,46 +1553,10 @@
     <Compile Include="dlgMissingDataTable.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgMissingValuesplot.designer.vb">
-      <DependentUpon>dlgMissingValuesplot.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgMissingValuesplot.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgModelProbabilities.Designer.vb">
-      <DependentUpon>dlgModelProbabilities.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgModelProbabilities.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgMonthlySummaries.designer.vb">
-      <DependentUpon>dlgMonthlySummaries.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgMonthlySummaries.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgMovingAverage.Designer.vb">
-      <DependentUpon>dlgMovingAverage.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgMovingAverage.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgMultipleRegression.Designer.vb">
-      <DependentUpon>dlgMultipleRegression.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgMultipleRegression.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgName.Designer.vb">
       <DependentUpon>dlgName.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgName.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgNewWorksheet.Designer.vb">
-      <DependentUpon>dlgNewWorksheet.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgNewWorksheet.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgNon-ParametricOneWayANOVA.Designer.vb">
@@ -1679,12 +1583,6 @@
     <Compile Include="dlgOptions.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgOutputforCDT.designer.vb">
-      <DependentUpon>dlgOutputforCDT.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgOutputforCDT.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgOutputforCPT.designer.vb">
       <DependentUpon>dlgOutputforCPT.vb</DependentUpon>
     </Compile>
@@ -1707,18 +1605,6 @@
       <DependentUpon>dlgPrepare.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgPrepare.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgProbabilityPlot.designer.vb">
-      <DependentUpon>dlgProbabilityPlot.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgProbabilityPlot.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgRainStats.designer.vb">
-      <DependentUpon>dlgRainStats.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgRainStats.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgRandomSample.designer.vb">
@@ -1907,16 +1793,10 @@
     <Compile Include="dlgView.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgWaterBalance.Designer.vb">
-      <DependentUpon>dlgWaterBalance.vb</DependentUpon>
+    <Compile Include="dlgEndOfRainsSeason.Designer.vb">
+      <DependentUpon>dlgEndOfRainsSeason.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgWaterBalance.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgYearRaincount.designer.vb">
-      <DependentUpon>dlgYearRaincount.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgYearRaincount.vb">
+    <Compile Include="dlgEndOfRainsSeason.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmCommand.Designer.vb">
@@ -2364,8 +2244,8 @@
     <EmbeddedResource Include="dlgClimaticSummary.resx">
       <DependentUpon>dlgClimaticSummary.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgClimdex.resx">
-      <DependentUpon>dlgClimdex.vb</DependentUpon>
+    <EmbeddedResource Include="dlgClimdexIndices.resx">
+      <DependentUpon>dlgClimdexIndices.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgClimSoft.resx">
       <DependentUpon>dlgClimSoft.vb</DependentUpon>
@@ -2526,11 +2406,11 @@
     <EmbeddedResource Include="dlgDescribeTwoVariable.sw-KE.resx">
       <DependentUpon>dlgDescribeTwoVariable.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgDisplayDailyClimaticData.resx">
-      <DependentUpon>dlgDisplayDailyClimaticData.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDisplayDailyData.resx">
+      <DependentUpon>dlgDisplayDailyData.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgDuplicatesConstructed.resx">
-      <DependentUpon>dlgDuplicatesConstructed.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDuplicates.resx">
+      <DependentUpon>dlgDuplicates.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgEnter.resx">
       <DependentUpon>dlgEnter.vb</DependentUpon>
@@ -2567,6 +2447,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPlotRegion.resx">
       <DependentUpon>dlgPlotRegion.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticCheckDataRain.resx">
+      <DependentUpon>dlgClimaticCheckDataRain.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgViewLabelsAndLevels.resx">
       <DependentUpon>dlgViewLabelsAndLevels.vb</DependentUpon>
@@ -2618,33 +2501,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgGeneralForGraphics.sw-KE.resx">
       <DependentUpon>dlgGeneralForGraphics.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgGeneralRegression.fr-FR.resx">
-      <DependentUpon>dlgGeneralRegression.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgGeneralRegression.resx">
-      <DependentUpon>dlgGeneralRegression.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgGeneralRegression.sw-KE.resx">
-      <DependentUpon>dlgGeneralRegression.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgGeneralTables.fr-FR.resx">
-      <DependentUpon>dlgGeneralTables.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgGeneralTables.resx">
-      <DependentUpon>dlgGeneralTables.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgGeneralTables.sw-KE.resx">
-      <DependentUpon>dlgGeneralTables.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgGoodnessofFit.fr-FR.resx">
-      <DependentUpon>dlgGoodnessofFit.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgGoodnessofFit.resx">
-      <DependentUpon>dlgGoodnessofFit.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgGoodnessofFit.sw-KE.resx">
-      <DependentUpon>dlgGoodnessofFit.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgHideDataframes.fr-FR.resx">
       <DependentUpon>dlgHideDataframes.vb</DependentUpon>
@@ -2727,8 +2583,8 @@
     <EmbeddedResource Include="dlgNewMarkovChains.resx">
       <DependentUpon>dlgNewMarkovChains.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgNewSummaryTables.resx">
-      <DependentUpon>dlgNewSummaryTables.vb</DependentUpon>
+    <EmbeddedResource Include="dlgSummaryTables.resx">
+      <DependentUpon>dlgSummaryTables.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneVarCompareModels.resx">
       <DependentUpon>dlgOneVarCompareModels.vb</DependentUpon>
@@ -3406,51 +3262,6 @@
     <EmbeddedResource Include="dlgDescribeOneVariable.sw-KE.resx">
       <DependentUpon>dlgDescribeOneVariable.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgDisplayDaily.fr-FR.resx">
-      <DependentUpon>dlgDisplayDaily.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDisplayDaily.resx">
-      <DependentUpon>dlgDisplayDaily.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDisplayDaily.sw-KE.resx">
-      <DependentUpon>dlgDisplayDaily.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDisplayDailyDataRain.fr-FR.resx">
-      <DependentUpon>dlgDisplayDailyDataRain.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDisplayDailyDataRain.resx">
-      <DependentUpon>dlgDisplayDailyDataRain.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDisplayDailyDataRain.sw-KE.resx">
-      <DependentUpon>dlgDisplayDailyDataRain.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDisplayDoyofYear.fr-FR.resx">
-      <DependentUpon>dlgDisplayDoyofYear.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDisplayDoyofYear.resx">
-      <DependentUpon>dlgDisplayDoyofYear.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDisplayDoyofYear.sw-KE.resx">
-      <DependentUpon>dlgDisplayDoyofYear.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDisplayRainRunningTotal.fr-FR.resx">
-      <DependentUpon>dlgDisplayRainRunningTotal.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDisplayRainRunningTotal.resx">
-      <DependentUpon>dlgDisplayRainRunningTotal.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDisplayRainRunningTotal.sw-KE.resx">
-      <DependentUpon>dlgDisplayRainRunningTotal.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDisplaySpellLength.fr-FR.resx">
-      <DependentUpon>dlgDisplaySpellLength.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDisplaySpellLength.resx">
-      <DependentUpon>dlgDisplaySpellLength.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDisplaySpellLength.sw-KE.resx">
-      <DependentUpon>dlgDisplaySpellLength.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgDotPlot.fr-FR.resx">
       <DependentUpon>dlgDotPlot.vb</DependentUpon>
     </EmbeddedResource>
@@ -3631,15 +3442,6 @@
     <EmbeddedResource Include="dlgInventoryPlot.sw-KE.resx">
       <DependentUpon>dlgInventoryPlot.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgIsNAListvb.fr-FR.resx">
-      <DependentUpon>dlgIsNAListvb.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgIsNAListvb.resx">
-      <DependentUpon>dlgIsNAListvb.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgIsNAListvb.sw-KE.resx">
-      <DependentUpon>dlgIsNAListvb.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgLabels.fr-FR.resx">
       <DependentUpon>dlgLabels.vb</DependentUpon>
     </EmbeddedResource>
@@ -3649,15 +3451,6 @@
     <EmbeddedResource Include="dlgLabels.sw-KE.resx">
       <DependentUpon>dlgLabels.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgLines.fr-FR.resx">
-      <DependentUpon>dlgLines.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgLines.resx">
-      <DependentUpon>dlgLines.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgLines.sw-KE.resx">
-      <DependentUpon>dlgLines.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgLockUnlock.fr-FR.resx">
       <DependentUpon>dlgLockUnlock.vb</DependentUpon>
     </EmbeddedResource>
@@ -3666,15 +3459,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgLockUnlock.sw-KE.resx">
       <DependentUpon>dlgLockUnlock.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgMakeFactor.fr-FR.resx">
-      <DependentUpon>dlgMakeFactor.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgMakeFactor.resx">
-      <DependentUpon>dlgMakeFactor.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgMakeFactor.sw-KE.resx">
-      <DependentUpon>dlgMakeFactor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMissingData.fr-FR.resx">
       <DependentUpon>dlgMissingData.vb</DependentUpon>
@@ -3694,51 +3478,6 @@
     <EmbeddedResource Include="dlgMissingDataTable.sw-KE.resx">
       <DependentUpon>dlgMissingDataTable.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgMissingValuesplot.fr-FR.resx">
-      <DependentUpon>dlgMissingValuesplot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgMissingValuesplot.resx">
-      <DependentUpon>dlgMissingValuesplot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgMissingValuesplot.sw-KE.resx">
-      <DependentUpon>dlgMissingValuesplot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgModelProbabilities.fr-FR.resx">
-      <DependentUpon>dlgModelProbabilities.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgModelProbabilities.resx">
-      <DependentUpon>dlgModelProbabilities.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgModelProbabilities.sw-KE.resx">
-      <DependentUpon>dlgModelProbabilities.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgMonthlySummaries.fr-FR.resx">
-      <DependentUpon>dlgMonthlySummaries.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgMonthlySummaries.resx">
-      <DependentUpon>dlgMonthlySummaries.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgMonthlySummaries.sw-KE.resx">
-      <DependentUpon>dlgMonthlySummaries.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgMovingAverage.fr-FR.resx">
-      <DependentUpon>dlgMovingAverage.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgMovingAverage.resx">
-      <DependentUpon>dlgMovingAverage.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgMovingAverage.sw-KE.resx">
-      <DependentUpon>dlgMovingAverage.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgMultipleRegression.fr-FR.resx">
-      <DependentUpon>dlgMultipleRegression.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgMultipleRegression.resx">
-      <DependentUpon>dlgMultipleRegression.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgMultipleRegression.sw-KE.resx">
-      <DependentUpon>dlgMultipleRegression.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgName.fr-FR.resx">
       <DependentUpon>dlgName.vb</DependentUpon>
     </EmbeddedResource>
@@ -3747,15 +3486,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgName.sw-KE.resx">
       <DependentUpon>dlgName.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgNewWorksheet.fr-FR.resx">
-      <DependentUpon>dlgNewWorksheet.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgNewWorksheet.resx">
-      <DependentUpon>dlgNewWorksheet.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgNewWorksheet.sw-KE.resx">
-      <DependentUpon>dlgNewWorksheet.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgNon-ParametricOneWayANOVA.fr-FR.resx">
       <DependentUpon>dlgNon-ParametricOneWayANOVA.vb</DependentUpon>
@@ -3794,15 +3524,6 @@
     <EmbeddedResource Include="dlgOptions.sw-KE.resx">
       <DependentUpon>dlgOptions.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgOutputforCDT.fr-FR.resx">
-      <DependentUpon>dlgOutputforCDT.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgOutputforCDT.resx">
-      <DependentUpon>dlgOutputforCDT.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgOutputforCDT.sw-KE.resx">
-      <DependentUpon>dlgOutputforCDT.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgOutputforCPT.fr-FR.resx">
       <DependentUpon>dlgOutputforCPT.vb</DependentUpon>
     </EmbeddedResource>
@@ -3838,24 +3559,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPrepare.sw-KE.resx">
       <DependentUpon>dlgPrepare.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgProbabilityPlot.fr-FR.resx">
-      <DependentUpon>dlgProbabilityPlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgProbabilityPlot.resx">
-      <DependentUpon>dlgProbabilityPlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgProbabilityPlot.sw-KE.resx">
-      <DependentUpon>dlgProbabilityPlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgRainStats.fr-FR.resx">
-      <DependentUpon>dlgRainStats.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgRainStats.resx">
-      <DependentUpon>dlgRainStats.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgRainStats.sw-KE.resx">
-      <DependentUpon>dlgRainStats.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRandomSample.fr-FR.resx">
       <DependentUpon>dlgRandomSample.vb</DependentUpon>
@@ -4097,23 +3800,14 @@
     <EmbeddedResource Include="dlgView.sw-KE.resx">
       <DependentUpon>dlgView.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgWaterBalance.fr-FR.resx">
-      <DependentUpon>dlgWaterBalance.vb</DependentUpon>
+    <EmbeddedResource Include="dlgEndOfRainsSeason.fr-FR.resx">
+      <DependentUpon>dlgEndOfRainsSeason.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgWaterBalance.resx">
-      <DependentUpon>dlgWaterBalance.vb</DependentUpon>
+    <EmbeddedResource Include="dlgEndOfRainsSeason.resx">
+      <DependentUpon>dlgEndOfRainsSeason.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgWaterBalance.sw-KE.resx">
-      <DependentUpon>dlgWaterBalance.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgYearRaincount.fr-FR.resx">
-      <DependentUpon>dlgYearRaincount.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgYearRaincount.resx">
-      <DependentUpon>dlgYearRaincount.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgYearRaincount.sw-KE.resx">
-      <DependentUpon>dlgYearRaincount.vb</DependentUpon>
+    <EmbeddedResource Include="dlgEndOfRainsSeason.sw-KE.resx">
+      <DependentUpon>dlgEndOfRainsSeason.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCommand.fr-FR.resx">
       <DependentUpon>frmCommand.vb</DependentUpon>
