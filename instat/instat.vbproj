@@ -202,6 +202,12 @@
     <Compile Include="dlgClimaticBoxPlot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgClimaticCheckDataTemperature.Designer.vb">
+      <DependentUpon>dlgClimaticCheckDataTemperature.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticCheckDataTemperature.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgClimaticSummary.Designer.vb">
       <DependentUpon>dlgClimaticSummary.vb</DependentUpon>
     </Compile>
@@ -2240,6 +2246,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgClimaticBoxPlot.resx">
       <DependentUpon>dlgClimaticBoxPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticCheckDataTemperature.resx">
+      <DependentUpon>dlgClimaticCheckDataTemperature.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgClimaticSummary.resx">
       <DependentUpon>dlgClimaticSummary.vb</DependentUpon>
