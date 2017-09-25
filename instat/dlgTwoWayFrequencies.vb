@@ -23,12 +23,18 @@ Public Class dlgTwoWayFrequencies
     Public strDefaultDataFrame As String = ""
     Public strDefaultColumnVariable As String = ""
     Public strDefaultRowVariable As String = ""
+    Private iFullWidth As Integer
+    Private iGraphTypeMaxX As Integer
+    Private iTableTypeMaxX As Integer
 
     Private Sub dlgTwoWayFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
+            iFullWidth = Me.Width
+            iGraphTypeMaxX = grpFreqTypeGraph.Location.X
+            iTableTypeMaxX = grpFreqTypeTable.Location.X
         End If
         If bReset Then
             SetDefaults()
@@ -37,14 +43,13 @@ Public Class dlgTwoWayFrequencies
         SetDefaultVariables()
         bReset = False
         'temp needed because of show/hiding bug
-        ChangeLocation()
+        SetLocations()
         TestOkEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
         'HelpID
         ucrBase.iHelpTopicID = 415
-        Me.Size = New Size(426, 411)
         ucrReceiverColumnFactor.Selector = ucrSelectorTwoWayFrequencies
         ucrReceiverRowFactor.Selector = ucrSelectorTwoWayFrequencies
         ucrReceiverWeights.Selector = ucrSelectorTwoWayFrequencies
@@ -139,7 +144,6 @@ Public Class dlgTwoWayFrequencies
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
         ucrChkColumn.SetLinkedDisplayControl(grpFreqTypeTable)
-        ChangeLocation()
     End Sub
 
     Private Sub SetDefaults()
@@ -205,7 +209,7 @@ Public Class dlgTwoWayFrequencies
         ucrChkRow.SetRCode(clsSjTab, bReset)
         ucrChkCount.SetRCode(clsSjTab, bReset)
         ucrSaveGraph.SetRCode(clsSjPlot, bReset)
-
+        SetLocations()
     End Sub
 
     Private Sub SetDefaultVariables()
@@ -274,11 +278,11 @@ Public Class dlgTwoWayFrequencies
         TestOkEnabled()
     End Sub
 
-    Private Sub ChangeLocation()
+    Private Sub SetLocations()
         If rdoBoth.Checked Then
-            grpFreqTypeTable.Location = New Point(240, 166)
-            grpFreqTypeGraph.Location = New Point(358, 166)
-            Me.Size = New Size(496, 433)
+            grpFreqTypeTable.Location = New Point(iTableTypeMaxX / 1.1, grpFreqTypeTable.Location.Y)
+            grpFreqTypeGraph.Location = New Point(iGraphTypeMaxX, grpFreqTypeGraph.Location.Y)
+            Me.Size = New Size(iFullWidth, Me.Height)
         Else
             If rdoGraph.Checked Then
                 grpFreqTypeGraph.Show()
@@ -287,9 +291,9 @@ Public Class dlgTwoWayFrequencies
                 grpFreqTypeGraph.Hide()
                 grpFreqTypeTable.Show()
             End If
-            grpFreqTypeTable.Location = New Point(263, 166)
-            grpFreqTypeGraph.Location = New Point(263, 166)
-            Me.Size = New Size(437, 433)
+            grpFreqTypeTable.Location = New Point(iTableTypeMaxX, grpFreqTypeTable.Location.Y)
+            grpFreqTypeGraph.Location = New Point(iGraphTypeMaxX / 1.36, grpFreqTypeGraph.Location.Y)
+            Me.Size = New Size(iFullWidth / 1.13, Me.Height)
         End If
     End Sub
 
@@ -310,7 +314,7 @@ Public Class dlgTwoWayFrequencies
             ucrReceiverRowFactor.SetParameter(clsRowParam)
             ucrReceiverColumnFactor.SetParameter(clsColumnParam)
         End If
-        ChangeLocation()
+        SetLocations()
         SetBaseFunction()
     End Sub
 
