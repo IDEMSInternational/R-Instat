@@ -61,6 +61,11 @@ Public Class frmMain
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        Dim prdCustom As New clsCustomRenderer(New clsCustomColourTable)
+
+        mnuBar.Renderer = prdCustom
+        Tool_strip.Renderer = prdCustom
+
         SetMainMenusEnabled(False)
         Cursor = Cursors.WaitCursor
         'temporary
