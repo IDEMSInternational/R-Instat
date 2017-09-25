@@ -29,7 +29,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("")>
 <Assembly: AssemblyCompany("")>
 <Assembly: AssemblyProduct("instat")>
-<Assembly: AssemblyCopyright("Copyright ©  2015")>
+<Assembly: AssemblyCopyright("Copyright ©  2015-2017")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
