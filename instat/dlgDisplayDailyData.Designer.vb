@@ -47,13 +47,13 @@ Partial Class dlgDisplayDailyData
         Me.lblDayOfTheYear = New System.Windows.Forms.Label()
         Me.lblYaxisUpper = New System.Windows.Forms.Label()
         Me.grpGraph = New System.Windows.Forms.GroupBox()
+        Me.ucrInputRugColour = New instat.ucrInputComboBox()
         Me.lblRugColor = New System.Windows.Forms.Label()
+        Me.ucrInputBarColour = New instat.ucrInputComboBox()
         Me.lblBarColour = New System.Windows.Forms.Label()
+        Me.ucrNudUpperYaxis = New instat.ucrNud()
         Me.lblFactorby = New System.Windows.Forms.Label()
         Me.ucrReceiverFactorby = New instat.ucrReceiverMultiple()
-        Me.ucrInputRugColour = New instat.ucrInputComboBox()
-        Me.ucrInputBarColour = New instat.ucrInputComboBox()
-        Me.ucrNudUpperYaxis = New instat.ucrNud()
         Me.ucrReceiverElements = New instat.ucrReceiverMultiple()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDayOfYear = New instat.ucrReceiverSingle()
@@ -96,7 +96,7 @@ Partial Class dlgDisplayDailyData
         Me.rdoGraph.Size = New System.Drawing.Size(100, 28)
         Me.rdoGraph.TabIndex = 2
         Me.rdoGraph.Text = "Graph"
-        Me.rdoGraph.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.rdoGraph.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoGraph.UseVisualStyleBackColor = True
         '
         'lblStation
@@ -168,6 +168,15 @@ Partial Class dlgDisplayDailyData
         Me.grpGraph.TabStop = False
         Me.grpGraph.Text = "Graph"
         '
+        'ucrInputRugColour
+        '
+        Me.ucrInputRugColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputRugColour.IsReadOnly = False
+        Me.ucrInputRugColour.Location = New System.Drawing.Point(83, 70)
+        Me.ucrInputRugColour.Name = "ucrInputRugColour"
+        Me.ucrInputRugColour.Size = New System.Drawing.Size(73, 21)
+        Me.ucrInputRugColour.TabIndex = 9
+        '
         'lblRugColor
         '
         Me.lblRugColor.AutoSize = True
@@ -177,6 +186,15 @@ Partial Class dlgDisplayDailyData
         Me.lblRugColor.TabIndex = 8
         Me.lblRugColor.Text = "Rug Color:"
         '
+        'ucrInputBarColour
+        '
+        Me.ucrInputBarColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputBarColour.IsReadOnly = False
+        Me.ucrInputBarColour.Location = New System.Drawing.Point(83, 43)
+        Me.ucrInputBarColour.Name = "ucrInputBarColour"
+        Me.ucrInputBarColour.Size = New System.Drawing.Size(73, 21)
+        Me.ucrInputBarColour.TabIndex = 7
+        '
         'lblBarColour
         '
         Me.lblBarColour.AutoSize = True
@@ -185,6 +203,19 @@ Partial Class dlgDisplayDailyData
         Me.lblBarColour.Size = New System.Drawing.Size(59, 13)
         Me.lblBarColour.TabIndex = 6
         Me.lblBarColour.Text = "Bar Colour:"
+        '
+        'ucrNudUpperYaxis
+        '
+        Me.ucrNudUpperYaxis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudUpperYaxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudUpperYaxis.Location = New System.Drawing.Point(83, 13)
+        Me.ucrNudUpperYaxis.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrNudUpperYaxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudUpperYaxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudUpperYaxis.Name = "ucrNudUpperYaxis"
+        Me.ucrNudUpperYaxis.Size = New System.Drawing.Size(50, 23)
+        Me.ucrNudUpperYaxis.TabIndex = 3
+        Me.ucrNudUpperYaxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblFactorby
         '
@@ -206,37 +237,6 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverFactorby.strNcFilePath = ""
         Me.ucrReceiverFactorby.TabIndex = 17
         Me.ucrReceiverFactorby.ucrSelector = Nothing
-        '
-        'ucrInputRugColour
-        '
-        Me.ucrInputRugColour.AddQuotesIfUnrecognised = True
-        Me.ucrInputRugColour.IsReadOnly = False
-        Me.ucrInputRugColour.Location = New System.Drawing.Point(83, 70)
-        Me.ucrInputRugColour.Name = "ucrInputRugColour"
-        Me.ucrInputRugColour.Size = New System.Drawing.Size(73, 21)
-        Me.ucrInputRugColour.TabIndex = 9
-        '
-        'ucrInputBarColour
-        '
-        Me.ucrInputBarColour.AddQuotesIfUnrecognised = True
-        Me.ucrInputBarColour.IsReadOnly = False
-        Me.ucrInputBarColour.Location = New System.Drawing.Point(83, 43)
-        Me.ucrInputBarColour.Name = "ucrInputBarColour"
-        Me.ucrInputBarColour.Size = New System.Drawing.Size(73, 21)
-        Me.ucrInputBarColour.TabIndex = 7
-        '
-        'ucrNudUpperYaxis
-        '
-        Me.ucrNudUpperYaxis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudUpperYaxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudUpperYaxis.Location = New System.Drawing.Point(83, 13)
-        Me.ucrNudUpperYaxis.Margin = New System.Windows.Forms.Padding(4)
-        Me.ucrNudUpperYaxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudUpperYaxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudUpperYaxis.Name = "ucrNudUpperYaxis"
-        Me.ucrNudUpperYaxis.Size = New System.Drawing.Size(50, 23)
-        Me.ucrNudUpperYaxis.TabIndex = 3
-        Me.ucrNudUpperYaxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrReceiverElements
         '
