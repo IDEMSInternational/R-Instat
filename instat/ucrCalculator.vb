@@ -24,6 +24,7 @@ Public Class ucrCalculator
     Public Event TryCommadClick()
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
+    Private iBasicWidth As Integer
 
     Public Sub New()
 
@@ -32,6 +33,7 @@ Public Class ucrCalculator
 
         ' Add any initialization after the InitializeComponent() call.
         InitialiseControls()
+        iBasicWidth = Me.Width
     End Sub
 
     Private Sub ucrCalculator_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -172,7 +174,7 @@ Public Class ucrCalculator
                 grpProbabilty.Visible = False
                 grpRows.Visible = False
                 iHelpCalcID = 126
-                Me.Size = New System.Drawing.Size(659, 377)
+                Me.Size = New Size(iBasicWidth * 1.34, Me.Height)
             Case "Logical and Symbols"
                 grpDates.Visible = False
                 grpStatistics.Visible = False
@@ -181,7 +183,7 @@ Public Class ucrCalculator
                 grpBasic.Visible = True
                 grpStrings.Visible = False
                 iHelpCalcID = 127
-                Me.Size = New System.Drawing.Size(617, 377)
+                Me.Size = New Size(iBasicWidth * 1.26, Me.Height)
                 grpProbabilty.Visible = False
                 grpRows.Visible = False
             Case "Statistics"
@@ -191,7 +193,7 @@ Public Class ucrCalculator
                 grpMaths.Visible = False
                 grpBasic.Visible = True
                 iHelpCalcID = 128
-                Me.Size = New System.Drawing.Size(568, 377)
+                Me.Size = New Size(iBasicWidth * 1.16, Me.Height)
                 grpStrings.Visible = False
                 grpProbabilty.Visible = False
                 grpRows.Visible = False
@@ -205,7 +207,7 @@ Public Class ucrCalculator
                 grpProbabilty.Visible = False
                 grpRows.Visible = False
                 iHelpCalcID = 129
-                Me.Size = New System.Drawing.Size(610, 377)
+                Me.Size = New Size(iBasicWidth * 1.24, Me.Height)
             Case "Probability"
                 grpDates.Visible = False
                 grpProbabilty.Visible = True
@@ -216,7 +218,7 @@ Public Class ucrCalculator
                 grpBasic.Visible = True
                 grpRows.Visible = False
                 iHelpCalcID = 120
-                Me.Size = New System.Drawing.Size(779, 377)
+                Me.Size = New Size(iBasicWidth * 1.59, Me.Height)
             Case "Dates"
                 grpDates.Visible = True
                 grpProbabilty.Visible = False
@@ -227,7 +229,7 @@ Public Class ucrCalculator
                 grpBasic.Visible = True
                 grpRows.Visible = False
                 iHelpCalcID = 130
-                Me.Size = New System.Drawing.Size(639, 377)
+                Me.Size = New Size(iBasicWidth * 1.3, Me.Height)
             Case "Rows"
                 grpDates.Visible = False
                 grpProbabilty.Visible = False
@@ -237,10 +239,10 @@ Public Class ucrCalculator
                 grpMaths.Visible = False
                 grpStrings.Visible = False
                 grpRows.Visible = True
-                Me.Size = New System.Drawing.Size(595, 377)
+                Me.Size = New Size(iBasicWidth * 1.21, Me.Height)
             Case Else
                 grpDates.Visible = False
-                Me.Size = New System.Drawing.Size(491, 377)
+                Me.Size = New Size(iBasicWidth, Me.Height)
                 grpProbabilty.Visible = False
                 grpStatistics.Visible = False
                 grpBasic.Visible = True
