@@ -159,7 +159,7 @@ Partial Class dlgDescribeOneVariable
         Me.Controls.Add(Me.ucrBaseDescribeOneVar)
         Me.Controls.Add(Me.lblSelectedVariable)
         Me.Controls.Add(Me.cmdSummaries)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDescribeOneVariable"

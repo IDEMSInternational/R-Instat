@@ -41,28 +41,28 @@ Partial Class ucrScript
         Me.txtScript = New System.Windows.Forms.TextBox()
         Me.cmdClear = New System.Windows.Forms.Button()
         Me.lblHeader = New System.Windows.Forms.Label()
+        Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
+        Me.tlpTableContainer.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtScript
         '
-        Me.txtScript.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtScript.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtScript.Location = New System.Drawing.Point(0, 44)
+        Me.txtScript.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtScript.Location = New System.Drawing.Point(3, 53)
         Me.txtScript.Multiline = True
         Me.txtScript.Name = "txtScript"
         Me.txtScript.ReadOnly = True
         Me.txtScript.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtScript.Size = New System.Drawing.Size(411, 267)
+        Me.txtScript.Size = New System.Drawing.Size(405, 258)
         Me.txtScript.TabIndex = 0
         '
         'cmdClear
         '
-        Me.cmdClear.Dock = System.Windows.Forms.DockStyle.Top
-        Me.cmdClear.Location = New System.Drawing.Point(0, 20)
+        Me.cmdClear.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cmdClear.Location = New System.Drawing.Point(3, 23)
         Me.cmdClear.Name = "cmdClear"
-        Me.cmdClear.Size = New System.Drawing.Size(411, 26)
+        Me.cmdClear.Size = New System.Drawing.Size(405, 24)
         Me.cmdClear.TabIndex = 1
         Me.cmdClear.Text = "Clear contents"
         Me.cmdClear.UseVisualStyleBackColor = True
@@ -70,32 +70,49 @@ Partial Class ucrScript
         'lblHeader
         '
         Me.lblHeader.BackColor = System.Drawing.Color.FromArgb(CType(CType(35, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(190, Byte), Integer))
-        Me.lblHeader.Dock = System.Windows.Forms.DockStyle.Top
+        Me.lblHeader.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblHeader.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblHeader.Location = New System.Drawing.Point(0, 0)
+        Me.lblHeader.Location = New System.Drawing.Point(3, 0)
         Me.lblHeader.Name = "lblHeader"
-        Me.lblHeader.Size = New System.Drawing.Size(411, 20)
+        Me.lblHeader.Size = New System.Drawing.Size(405, 20)
         Me.lblHeader.TabIndex = 8
         Me.lblHeader.Text = "Script"
         Me.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'tlpTableContainer
+        '
+        Me.tlpTableContainer.ColumnCount = 1
+        Me.tlpTableContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tlpTableContainer.Controls.Add(Me.lblHeader, 0, 0)
+        Me.tlpTableContainer.Controls.Add(Me.txtScript, 0, 2)
+        Me.tlpTableContainer.Controls.Add(Me.cmdClear, 0, 1)
+        Me.tlpTableContainer.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tlpTableContainer.Location = New System.Drawing.Point(0, 0)
+        Me.tlpTableContainer.Name = "tlpTableContainer"
+        Me.tlpTableContainer.RowCount = 3
+        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
+        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tlpTableContainer.Size = New System.Drawing.Size(411, 314)
+        Me.tlpTableContainer.TabIndex = 9
         '
         'ucrScript
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.cmdClear)
-        Me.Controls.Add(Me.lblHeader)
-        Me.Controls.Add(Me.txtScript)
+        Me.Controls.Add(Me.tlpTableContainer)
         Me.Name = "ucrScript"
         Me.Size = New System.Drawing.Size(411, 314)
         Me.Tag = "Script_Window"
+        Me.tlpTableContainer.ResumeLayout(False)
+        Me.tlpTableContainer.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents txtScript As TextBox
     Friend WithEvents cmdClear As Button
     Friend WithEvents lblHeader As Label
+    Friend WithEvents tlpTableContainer As TableLayoutPanel
 End Class
