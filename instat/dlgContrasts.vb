@@ -24,6 +24,7 @@ Public Class dlgContrasts
     Public bFirstLoad As Boolean = True
     Public bReset As Boolean = True
     Public clsNlevels, clsFactorColumn, clsContractMatrix, clsSetContrast As New RFunction
+    Private iFullWidth As Integer
 
     Public Sub New()
 
@@ -37,6 +38,7 @@ Public Class dlgContrasts
         grdCurrSheet = grdLayoutForContrasts.CurrentWorksheet
         grdCurrSheet.SetSettings(WorksheetSettings.Edit_DragSelectionToMoveCells, False)
         grdCurrSheet.SelectionForwardDirection = SelectionForwardDirection.Down
+        iFullWidth = Me.Width
     End Sub
 
     Private Sub dlgContrasts_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -149,7 +151,7 @@ Public Class dlgContrasts
 
     Private Sub SetGridDimensions()
         If Not ucrReceiverForContrasts.IsEmpty AndAlso ucrInputContrastName.GetText = "User Defined" Then
-            Me.Size = New System.Drawing.Size(440 + grdLayoutForContrasts.Width, 294)
+            Me.Size = New Size(iFullWidth, Me.Height)
             clsFactorColumn.AddParameter("col_name", ucrReceiverForContrasts.GetVariableNames())
             clsFactorColumn.AddParameter("data_name", Chr(34) & ucrSelectorForContrast.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
             clsNlevels.AddParameter("x", clsRFunctionParameter:=clsFactorColumn)
@@ -157,7 +159,7 @@ Public Class dlgContrasts
             grdCurrSheet.Columns = grdCurrSheet.Rows - 1
             grdLayoutForContrasts.Enabled = True
         Else
-            Me.Size = New System.Drawing.Size(435, 294)
+            Me.Size = New Size(iFullWidth / 1.86, Me.Height)
             clsFactorColumn.RemoveParameterByName("col_name")
             clsNlevels.RemoveParameterByName("x")
             grdLayoutForContrasts.Enabled = False

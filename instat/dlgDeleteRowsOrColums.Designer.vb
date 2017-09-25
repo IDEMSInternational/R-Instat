@@ -114,7 +114,7 @@ Partial Class dlgDeleteRowsOrColums
         Me.rdoRows.Size = New System.Drawing.Size(100, 28)
         Me.rdoRows.TabIndex = 2
         Me.rdoRows.Text = "Rows"
-        Me.rdoRows.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.rdoRows.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoRows.UseVisualStyleBackColor = True
         '
         'lblTo
