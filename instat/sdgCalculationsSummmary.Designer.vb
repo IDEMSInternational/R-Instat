@@ -271,7 +271,7 @@ Partial Class sdgCalculationsSummmary
         '
         'ucrManipulations
         '
-        Me.ucrManipulations.Location = New System.Drawing.Point(6, 30)
+        Me.ucrManipulations.Location = New System.Drawing.Point(6, 32)
         Me.ucrManipulations.Name = "ucrManipulations"
         Me.ucrManipulations.Size = New System.Drawing.Size(154, 139)
         Me.ucrManipulations.TabIndex = 21
