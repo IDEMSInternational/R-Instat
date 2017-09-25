@@ -61,6 +61,11 @@ Public Class frmMain
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        Dim prdCustom As New clsCustomRenderer(New clsCustomColourTable)
+
+        mnuBar.Renderer = prdCustom
+        Tool_strip.Renderer = prdCustom
+
         SetMainMenusEnabled(False)
         Cursor = Cursors.WaitCursor
         'temporary
@@ -1112,7 +1117,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimdex_Click(sender As Object, e As EventArgs) Handles mnuClimdex.Click
-        dlgClimdex.ShowDialog()
+        dlgClimdexIndices.ShowDialog()
     End Sub
 
     Private Sub mnuDescribeOtherGraphicsDialogsWindRose_Click(sender As Object, e As EventArgs)
@@ -1623,7 +1628,7 @@ Public Class frmMain
     End Sub
 
     Private Sub DuplicatesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DuplicatesToolStripMenuItem.Click
-        dlgDuplicatesConstructed.ShowDialog()
+        dlgDuplicates.ShowDialog()
     End Sub
 
     Private Sub BoxplotsConceptualisedAndConstructedToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles BoxplotsConceptualisedAndConstructedToolStripMenuItem.Click

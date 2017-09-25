@@ -187,12 +187,15 @@ Partial Class ucrCalculator
         '
         'ucrReceiverForCalculation
         '
+        Me.ucrReceiverForCalculation.frmParent = Nothing
         Me.ucrReceiverForCalculation.Location = New System.Drawing.Point(87, 13)
         Me.ucrReceiverForCalculation.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.ucrReceiverForCalculation.Name = "ucrReceiverForCalculation"
         Me.ucrReceiverForCalculation.Selector = Nothing
         Me.ucrReceiverForCalculation.Size = New System.Drawing.Size(284, 28)
+        Me.ucrReceiverForCalculation.strNcFilePath = ""
         Me.ucrReceiverForCalculation.TabIndex = 120
+        Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
         'lblExpression
         '
@@ -207,6 +210,7 @@ Partial Class ucrCalculator
         '
         'ucrSaveResultInto
         '
+        Me.ucrSaveResultInto.AddQuotesIfUnrecognised = True
         Me.ucrSaveResultInto.IsReadOnly = False
         Me.ucrSaveResultInto.Location = New System.Drawing.Point(121, 286)
         Me.ucrSaveResultInto.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
@@ -227,6 +231,8 @@ Partial Class ucrCalculator
         '
         'ucrInputTryMessage
         '
+        Me.ucrInputTryMessage.AddQuotesIfUnrecognised = True
+        Me.ucrInputTryMessage.IsMultiline = False
         Me.ucrInputTryMessage.IsReadOnly = True
         Me.ucrInputTryMessage.Location = New System.Drawing.Point(93, 257)
         Me.ucrInputTryMessage.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
@@ -275,6 +281,7 @@ Partial Class ucrCalculator
         '
         'ucrInputCalOptions
         '
+        Me.ucrInputCalOptions.AddQuotesIfUnrecognised = True
         Me.ucrInputCalOptions.IsReadOnly = False
         Me.ucrInputCalOptions.Location = New System.Drawing.Point(226, 38)
         Me.ucrInputCalOptions.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
@@ -1741,7 +1748,7 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.ucrReceiverForCalculation)
         Me.Controls.Add(Me.lblExpression)
         Me.Name = "ucrCalculator"
-        Me.Size = New System.Drawing.Size(555, 322)
+        Me.Size = New System.Drawing.Size(491, 322)
         Me.grpBasic.ResumeLayout(False)
         Me.grpDates.ResumeLayout(False)
         Me.grpRows.ResumeLayout(False)

@@ -150,6 +150,8 @@
   <ItemGroup>
     <Compile Include="clsBlockReader.vb" />
     <Compile Include="clsCondition.vb" />
+    <Compile Include="clsCustomColourTable.vb" />
+    <Compile Include="clsCustomRenderer.vb" />
     <Compile Include="clsGgplotDefaults.vb" />
     <Compile Include="clsInstatOptionsDefaults.vb" />
     <Compile Include="clsRCodeStructure.vb" />
@@ -208,10 +210,10 @@
     <Compile Include="dlgClimaticSummary.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgClimdex.Designer.vb">
-      <DependentUpon>dlgClimdex.vb</DependentUpon>
+    <Compile Include="dlgClimdexIndices.Designer.vb">
+      <DependentUpon>dlgClimdexIndices.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgClimdex.vb">
+    <Compile Include="dlgClimdexIndices.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgClimSoft.Designer.vb">
@@ -292,10 +294,10 @@
     <Compile Include="dlgDisplayDailyData.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgDuplicatesConstructed.Designer.vb">
-      <DependentUpon>dlgDuplicatesConstructed.vb</DependentUpon>
+    <Compile Include="dlgDuplicates.Designer.vb">
+      <DependentUpon>dlgDuplicates.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgDuplicatesConstructed.vb">
+    <Compile Include="dlgDuplicates.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgEnter.Designer.vb">
@@ -2244,8 +2246,8 @@
     <EmbeddedResource Include="dlgClimaticSummary.resx">
       <DependentUpon>dlgClimaticSummary.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgClimdex.resx">
-      <DependentUpon>dlgClimdex.vb</DependentUpon>
+    <EmbeddedResource Include="dlgClimdexIndices.resx">
+      <DependentUpon>dlgClimdexIndices.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgClimSoft.resx">
       <DependentUpon>dlgClimSoft.vb</DependentUpon>
@@ -2409,8 +2411,8 @@
     <EmbeddedResource Include="dlgDisplayDailyData.resx">
       <DependentUpon>dlgDisplayDailyData.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgDuplicatesConstructed.resx">
-      <DependentUpon>dlgDuplicatesConstructed.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDuplicates.resx">
+      <DependentUpon>dlgDuplicates.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgEnter.resx">
       <DependentUpon>dlgEnter.vb</DependentUpon>
