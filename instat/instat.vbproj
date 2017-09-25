@@ -208,10 +208,10 @@
     <Compile Include="dlgClimaticSummary.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgClimdex.Designer.vb">
-      <DependentUpon>dlgClimdex.vb</DependentUpon>
+    <Compile Include="dlgClimdexIndices.Designer.vb">
+      <DependentUpon>dlgClimdexIndices.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgClimdex.vb">
+    <Compile Include="dlgClimdexIndices.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgClimSoft.Designer.vb">
@@ -292,10 +292,10 @@
     <Compile Include="dlgDisplayDailyData.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgDuplicatesConstructed.Designer.vb">
-      <DependentUpon>dlgDuplicatesConstructed.vb</DependentUpon>
+    <Compile Include="dlgDuplicates.Designer.vb">
+      <DependentUpon>dlgDuplicates.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgDuplicatesConstructed.vb">
+    <Compile Include="dlgDuplicates.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgEnter.Designer.vb">
@@ -350,6 +350,12 @@
       <DependentUpon>dlgPlotRegion.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgPlotRegion.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgClimaticCheckDataRain.Designer.vb">
+      <DependentUpon>dlgClimaticCheckDataRain.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticCheckDataRain.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgViewLabelsAndLevels.Designer.vb">
@@ -2238,8 +2244,8 @@
     <EmbeddedResource Include="dlgClimaticSummary.resx">
       <DependentUpon>dlgClimaticSummary.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgClimdex.resx">
-      <DependentUpon>dlgClimdex.vb</DependentUpon>
+    <EmbeddedResource Include="dlgClimdexIndices.resx">
+      <DependentUpon>dlgClimdexIndices.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgClimSoft.resx">
       <DependentUpon>dlgClimSoft.vb</DependentUpon>
@@ -2403,8 +2409,8 @@
     <EmbeddedResource Include="dlgDisplayDailyData.resx">
       <DependentUpon>dlgDisplayDailyData.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgDuplicatesConstructed.resx">
-      <DependentUpon>dlgDuplicatesConstructed.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDuplicates.resx">
+      <DependentUpon>dlgDuplicates.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgEnter.resx">
       <DependentUpon>dlgEnter.vb</DependentUpon>
@@ -2441,6 +2447,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPlotRegion.resx">
       <DependentUpon>dlgPlotRegion.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticCheckDataRain.resx">
+      <DependentUpon>dlgClimaticCheckDataRain.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgViewLabelsAndLevels.resx">
       <DependentUpon>dlgViewLabelsAndLevels.vb</DependentUpon>

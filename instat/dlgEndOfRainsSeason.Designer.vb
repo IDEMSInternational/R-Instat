@@ -420,7 +420,7 @@ Partial Class dlgEndOfRainsSeason
         Me.ucrInputEvaporation.Size = New System.Drawing.Size(143, 21)
         Me.ucrInputEvaporation.TabIndex = 26
         '
-        'dlgWaterBalance
+        'dlgEndOfRainsSeason
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -459,10 +459,10 @@ Partial Class dlgEndOfRainsSeason
         Me.Controls.Add(Me.ucrSelectorForWaterBalance)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrInputEvaporation)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgWaterBalance"
+        Me.Name = "dlgEndOfRainsSeason"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "End_of_Rains_Season"
         Me.Text = "End of Rains/Season"

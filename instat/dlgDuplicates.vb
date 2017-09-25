@@ -16,7 +16,7 @@
 
 Imports RDotNet
 Imports instat.Translations
-Public Class dlgDuplicatesConstructed
+Public Class dlgDuplicates
     Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
     Private clsDuplicated2, clsDuplicated, clsStreakFunction, clsSubsetCol As New RFunction
