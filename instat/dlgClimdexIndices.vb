@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgClimdex
+Public Class dlgClimdexIndices
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Public bSaveIndex As Boolean = True
