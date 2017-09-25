@@ -19,10 +19,13 @@ Public Class dlgStringHandling
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private clsCountFunction, clsExtractFunction, clsDetectFunction, clsLocateFunction, clsReplaceFunction, clsReplaceAllFunction, clsFixedFunction, clsRegexFunction As New RFunction
+    Private iFullWidth As Integer
+
     Private Sub dlgStringHandling_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
             bFirstload = False
+            iFullWidth = Me.Width
         End If
         If bReset Then
             SetDefaults()
@@ -280,10 +283,10 @@ Public Class dlgStringHandling
     Private Sub ChangeSize()
         If rdoRegex.Checked Then
             grpRegex.Visible = True
-            Me.Size = New Size(685, 390)
+            Me.Size = New Size(iFullWidth, Me.Height)
         Else
             grpRegex.Visible = False
-            Me.Size = New Size(437, 390)
+            Me.Size = New Size(iFullWidth / 1.57, Me.Height)
         End If
     End Sub
 

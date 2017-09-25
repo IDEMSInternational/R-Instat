@@ -35,6 +35,7 @@ Public Class dlgOpenNetCDF
     Private strLong As String
     Private bCloseFile As Boolean = False
     Private strFileAssignName As String = "nc"
+    Private iExpandedWidth As Integer
 
     Public Sub New()
         ' This call is required by the designer.
@@ -43,6 +44,7 @@ Public Class dlgOpenNetCDF
         bComponentsInitialised = True
         bStartOpenDialog = True
         ucrInputDataName.bAutoChangeOnLeave = True
+        iExpandedWidth = Me.Width
     End Sub
 
     Private Sub dlgOpenNetCDF_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -94,9 +96,6 @@ Public Class dlgOpenNetCDF
         clsNcCloseFunction = New RFunction
         clsRFileDetails = New RFunction
 
-        Me.Size = New Size(434, 256)
-        cmdDetails.Text = "Show Details >>"
-        bShowDetails = True
         strShort = ""
         strMedium = ""
         strLong = ""
@@ -126,6 +125,9 @@ Public Class dlgOpenNetCDF
         ucrBase.clsRsyntax.SetBaseRFunction(clsImportNetcdfFunction)
         ucrBase.clsRsyntax.AddToAfterCodes(clsNcCloseFunction, iPosition:=0)
         bResetSubdialog = True
+
+        bShowDetails = False
+        SetDialogSize()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -198,12 +200,16 @@ Public Class dlgOpenNetCDF
     End Sub
 
     Private Sub cmdDetails_Click(sender As Object, e As EventArgs) Handles cmdDetails.Click
+        SetDialogSize()
+    End Sub
+
+    Private Sub SetDialogSize()
         bShowDetails = Not bShowDetails
         If Not bShowDetails Then
-            Me.Size = New Size(777, 256)
+            Me.Size = New Size(iExpandedWidth, Me.Height)
             cmdDetails.Text = "Hide Details <<"
         Else
-            Me.Size = New Size(434, 256)
+            Me.Size = New Size(iExpandedWidth / 1.8, Me.Height)
             cmdDetails.Text = "Show Details >>"
         End If
     End Sub
