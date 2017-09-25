@@ -192,7 +192,7 @@ Partial Class dlgThreeVariableFrequencies
         Me.grpFreqTypeTable.Controls.Add(Me.ucrChkCount)
         Me.grpFreqTypeTable.Controls.Add(Me.ucrChkColumn)
         Me.grpFreqTypeTable.Controls.Add(Me.ucrChkCell)
-        Me.grpFreqTypeTable.Location = New System.Drawing.Point(274, 255)
+        Me.grpFreqTypeTable.Location = New System.Drawing.Point(260, 261)
         Me.grpFreqTypeTable.Name = "grpFreqTypeTable"
         Me.grpFreqTypeTable.Size = New System.Drawing.Size(121, 111)
         Me.grpFreqTypeTable.TabIndex = 13
@@ -247,7 +247,7 @@ Partial Class dlgThreeVariableFrequencies
         Me.grpFreqTypeGraph.Controls.Add(Me.rdoRow)
         Me.grpFreqTypeGraph.Controls.Add(Me.rdoCell)
         Me.grpFreqTypeGraph.Controls.Add(Me.ucrPnlFreqType)
-        Me.grpFreqTypeGraph.Location = New System.Drawing.Point(398, 255)
+        Me.grpFreqTypeGraph.Location = New System.Drawing.Point(384, 261)
         Me.grpFreqTypeGraph.Name = "grpFreqTypeGraph"
         Me.grpFreqTypeGraph.Size = New System.Drawing.Size(121, 111)
         Me.grpFreqTypeGraph.TabIndex = 14
@@ -294,6 +294,7 @@ Partial Class dlgThreeVariableFrequencies
         Me.ucrReceiverGroupBy2nd.Name = "ucrReceiverGroupBy2nd"
         Me.ucrReceiverGroupBy2nd.Selector = Nothing
         Me.ucrReceiverGroupBy2nd.Size = New System.Drawing.Size(121, 20)
+        Me.ucrReceiverGroupBy2nd.strNcFilePath = ""
         Me.ucrReceiverGroupBy2nd.TabIndex = 12
         Me.ucrReceiverGroupBy2nd.ucrSelector = Nothing
         '
@@ -305,6 +306,7 @@ Partial Class dlgThreeVariableFrequencies
         Me.ucrReceiverGroupsBy1st.Name = "ucrReceiverGroupsBy1st"
         Me.ucrReceiverGroupsBy1st.Selector = Nothing
         Me.ucrReceiverGroupsBy1st.Size = New System.Drawing.Size(121, 20)
+        Me.ucrReceiverGroupsBy1st.strNcFilePath = ""
         Me.ucrReceiverGroupsBy1st.TabIndex = 10
         Me.ucrReceiverGroupsBy1st.ucrSelector = Nothing
         '
@@ -316,6 +318,7 @@ Partial Class dlgThreeVariableFrequencies
         Me.ucrReceiverWeights.Name = "ucrReceiverWeights"
         Me.ucrReceiverWeights.Selector = Nothing
         Me.ucrReceiverWeights.Size = New System.Drawing.Size(128, 20)
+        Me.ucrReceiverWeights.strNcFilePath = ""
         Me.ucrReceiverWeights.TabIndex = 17
         Me.ucrReceiverWeights.ucrSelector = Nothing
         '
@@ -335,6 +338,7 @@ Partial Class dlgThreeVariableFrequencies
         Me.ucrReceiverColumnFactor.Name = "ucrReceiverColumnFactor"
         Me.ucrReceiverColumnFactor.Selector = Nothing
         Me.ucrReceiverColumnFactor.Size = New System.Drawing.Size(121, 20)
+        Me.ucrReceiverColumnFactor.strNcFilePath = ""
         Me.ucrReceiverColumnFactor.TabIndex = 8
         Me.ucrReceiverColumnFactor.ucrSelector = Nothing
         '
@@ -346,6 +350,7 @@ Partial Class dlgThreeVariableFrequencies
         Me.ucrReceiverRowFactor.Name = "ucrReceiverRowFactor"
         Me.ucrReceiverRowFactor.Selector = Nothing
         Me.ucrReceiverRowFactor.Size = New System.Drawing.Size(121, 20)
+        Me.ucrReceiverRowFactor.strNcFilePath = ""
         Me.ucrReceiverRowFactor.TabIndex = 6
         Me.ucrReceiverRowFactor.ucrSelector = Nothing
         '
@@ -385,7 +390,7 @@ Partial Class dlgThreeVariableFrequencies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(521, 453)
+        Me.ClientSize = New System.Drawing.Size(509, 453)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.rdoBoth)
         Me.Controls.Add(Me.ucrReceiverGroupBy2nd)
