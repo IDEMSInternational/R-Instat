@@ -48,7 +48,7 @@ Partial Class dlgReorderLevels
         'lblFactor
         '
         Me.lblFactor.AutoSize = True
-        Me.lblFactor.Location = New System.Drawing.Point(250, 25)
+        Me.lblFactor.Location = New System.Drawing.Point(245, 25)
         Me.lblFactor.Name = "lblFactor"
         Me.lblFactor.Size = New System.Drawing.Size(85, 13)
         Me.lblFactor.TabIndex = 1
@@ -59,7 +59,7 @@ Partial Class dlgReorderLevels
         '
         Me.ucrReceiverFactor.AutoSize = True
         Me.ucrReceiverFactor.frmParent = Me
-        Me.ucrReceiverFactor.Location = New System.Drawing.Point(249, 40)
+        Me.ucrReceiverFactor.Location = New System.Drawing.Point(246, 40)
         Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
         Me.ucrReceiverFactor.Selector = Nothing
@@ -89,7 +89,7 @@ Partial Class dlgReorderLevels
         '
         Me.ucrReorderFactor.Location = New System.Drawing.Point(246, 69)
         Me.ucrReorderFactor.Name = "ucrReorderFactor"
-        Me.ucrReorderFactor.Size = New System.Drawing.Size(206, 195)
+        Me.ucrReorderFactor.Size = New System.Drawing.Size(206, 180)
         Me.ucrReorderFactor.TabIndex = 3
         Me.ucrReorderFactor.ucrDataFrameList = Nothing
         Me.ucrReorderFactor.ucrReceiver = Nothing
