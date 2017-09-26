@@ -20,6 +20,7 @@ Public Class sdgInventoryPlot
     Private clsKeyColours As New RFunction
     Private clsBreaksFunc As New RFunction
     Private clslabelsFunc As New RFunction
+    Private clsMissingNonMissing As New RFunction
     Private bControlsInitialised As Boolean = False
 
     Private Sub sdgInventoryPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -27,6 +28,9 @@ Public Class sdgInventoryPlot
     End Sub
 
     Private Sub InitialiseControls()
+
+        ucrColourMissing.SetParameter(New RParameter("var1"))
+        ucrColourNonMissing.SetParameter(New RParameter("var1"))
 
         ucrChkDisplayRainDays.SetParameter(New RParameter("display_rain_days", 13), bNewChangeParameterValue:=True)
         ucrChkDisplayRainDays.SetText("Display Rain Days")
@@ -54,7 +58,7 @@ Public Class sdgInventoryPlot
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRFunction(clsNewRFunction As RFunction, clsNewKeyColours As RFunction, clsNewBreaksFunc As RFunction, clsNewlabelsFunc As RFunction, bReset As Boolean)
+    Public Sub SetRFunction(clsNewRFunction As RFunction, clsNewKeyColours As RFunction, clsNewBreaksFunc As RFunction, clsNewlabelsFunc As RFunction, clsNewMissingNonMissing As RFunction, bReset As Boolean)
 
         If Not bControlsInitialised Then
             InitialiseControls()
@@ -64,6 +68,7 @@ Public Class sdgInventoryPlot
         clsKeyColours = clsNewKeyColours
         clsBreaksFunc = clsNewBreaksFunc
         clslabelsFunc = clslabelsFunc
+        clsMissingNonMissing = clsNewMissingNonMissing
 
         ucrRainColour.SetRCode(clsKeyColours, bReset)
         ucrDryColour.SetRCode(clsKeyColours, bReset)
@@ -71,6 +76,8 @@ Public Class sdgInventoryPlot
         ucrInputDry.SetRCode(clslabelsFunc, bReset)
         ucrInputRain.SetRCode(clslabelsFunc, bReset)
         ucrChkDisplayRainDays.SetRCode(clsInventoryFunction, bReset)
+        ucrColourNonMissing.SetRCode(clsMissingNonMissing, bReset)
+        ucrColourMissing.SetRCode(clsMissingNonMissing, bReset)
     End Sub
 
 End Class

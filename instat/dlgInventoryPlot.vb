@@ -25,6 +25,7 @@ Public Class dlgInventoryPlot
     Private clsListFunc As New RFunction
     Private clsBreaksFunc As New RFunction
     Private clslabelsFunc As New RFunction
+    Private clsMissingNonMissing As New RFunction
 
 
     Private Sub dlgInventoryPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -107,7 +108,7 @@ Public Class dlgInventoryPlot
         clsListFunc = New RFunction
         clsBreaksFunc = New RFunction
         clslabelsFunc = New RFunction
-
+        clsMissingNonMissing = New RFunction
 
         bResetSubdialog = True
         ucrInventoryPlotSelector.Reset()
@@ -137,6 +138,11 @@ Public Class dlgInventoryPlot
         clslabelsFunc.AddParameter("dry", Chr(34) & "Dry" & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
         clsListFunc.AddParameter("labels ", clsRFunctionParameter:=clslabelsFunc)
         clsDefaultRFunction.AddParameter("rain_cats", clsRFunctionParameter:=clsListFunc)
+
+        clsMissingNonMissing.SetRCommand("c")
+        clsMissingNonMissing.AddParameter("var1", Chr(34) & "red" & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+        clsMissingNonMissing.AddParameter("var2", Chr(34) & "grey" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
+        clsDefaultRFunction.AddParameter("key_colours", clsRFunctionParameter:=clsMissingNonMissing)
 
         clsDefaultRFunction.SetAssignTo("last_graph", strTempDataframe:=ucrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
@@ -173,7 +179,7 @@ Public Class dlgInventoryPlot
     End Sub
 
     Private Sub cmdInventoryPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdInventoryPlotOptions.Click
-        sdgInventoryPlot.SetRFunction(clsDefaultRFunction, clsKeyColours, clsBreaksFunc, clslabelsFunc, bResetSubdialog)
+        sdgInventoryPlot.SetRFunction(clsDefaultRFunction, clsKeyColours, clsBreaksFunc, clslabelsFunc, clsMissingNonMissing, bResetSubdialog)
         bResetSubdialog = False
         sdgInventoryPlot.ShowDialog()
     End Sub
