@@ -63,7 +63,7 @@ Partial Class dlgReorderMetadata
         'lblMetataDataColumns
         '
         Me.lblMetataDataColumns.AutoSize = True
-        Me.lblMetataDataColumns.Location = New System.Drawing.Point(173, 28)
+        Me.lblMetataDataColumns.Location = New System.Drawing.Point(173, 25)
         Me.lblMetataDataColumns.Name = "lblMetataDataColumns"
         Me.lblMetataDataColumns.Size = New System.Drawing.Size(98, 13)
         Me.lblMetataDataColumns.TabIndex = 1
@@ -73,7 +73,7 @@ Partial Class dlgReorderMetadata
         '
         Me.ucrReorderMetadata.Location = New System.Drawing.Point(173, 40)
         Me.ucrReorderMetadata.Name = "ucrReorderMetadata"
-        Me.ucrReorderMetadata.Size = New System.Drawing.Size(209, 195)
+        Me.ucrReorderMetadata.Size = New System.Drawing.Size(209, 181)
         Me.ucrReorderMetadata.TabIndex = 2
         Me.ucrReorderMetadata.ucrDataFrameList = Nothing
         Me.ucrReorderMetadata.ucrReceiver = Nothing

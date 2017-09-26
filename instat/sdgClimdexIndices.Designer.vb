@@ -55,6 +55,7 @@ Partial Class sdgClimdexIndices
         Me.ucrChkTotalDailyPrec = New instat.ucrCheck()
         Me.ucrChkSimplePrecII = New instat.ucrCheck()
         Me.grpPrecAnnualMonthly = New System.Windows.Forms.GroupBox()
+        Me.ucrChkCentreMean = New instat.ucrCheck()
         Me.ucrChkMonthlyMax5dayPrec = New instat.ucrCheck()
         Me.ucrChkMonthlyMax1dayPrec = New instat.ucrCheck()
         Me.tbpTemperature = New System.Windows.Forms.TabPage()
@@ -110,7 +111,6 @@ Partial Class sdgClimdexIndices
         Me.lblN = New System.Windows.Forms.Label()
         Me.tbpClimdex = New System.Windows.Forms.TabControl()
         Me.ucrButtonsClimdexIndices = New instat.ucrButtonsSubdialogue()
-        Me.ucrChkCentreMean = New instat.ucrCheck()
         Me.tbpPrecipitation.SuspendLayout()
         Me.grpPrecAnnual.SuspendLayout()
         Me.grpPrecAnnualMonthly.SuspendLayout()
@@ -274,6 +274,14 @@ Partial Class sdgClimdexIndices
         Me.grpPrecAnnualMonthly.TabIndex = 0
         Me.grpPrecAnnualMonthly.TabStop = False
         Me.grpPrecAnnualMonthly.Text = "Annual/Monthly"
+        '
+        'ucrChkCentreMean
+        '
+        Me.ucrChkCentreMean.Checked = False
+        Me.ucrChkCentreMean.Location = New System.Drawing.Point(83, 67)
+        Me.ucrChkCentreMean.Name = "ucrChkCentreMean"
+        Me.ucrChkCentreMean.Size = New System.Drawing.Size(212, 20)
+        Me.ucrChkCentreMean.TabIndex = 2
         '
         'ucrChkMonthlyMax5dayPrec
         '
@@ -835,14 +843,6 @@ Partial Class sdgClimdexIndices
         Me.ucrButtonsClimdexIndices.Size = New System.Drawing.Size(142, 30)
         Me.ucrButtonsClimdexIndices.TabIndex = 2
         '
-        'ucrChkCentreMean
-        '
-        Me.ucrChkCentreMean.Checked = False
-        Me.ucrChkCentreMean.Location = New System.Drawing.Point(83, 67)
-        Me.ucrChkCentreMean.Name = "ucrChkCentreMean"
-        Me.ucrChkCentreMean.Size = New System.Drawing.Size(212, 20)
-        Me.ucrChkCentreMean.TabIndex = 2
-        '
         'sdgClimdexIndices
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -851,7 +851,7 @@ Partial Class sdgClimdexIndices
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.tbpClimdex)
         Me.Controls.Add(Me.ucrButtonsClimdexIndices)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgClimdexIndices"
