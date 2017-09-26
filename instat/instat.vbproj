@@ -150,6 +150,8 @@
   <ItemGroup>
     <Compile Include="clsBlockReader.vb" />
     <Compile Include="clsCondition.vb" />
+    <Compile Include="clsCustomColourTable.vb" />
+    <Compile Include="clsCustomRenderer.vb" />
     <Compile Include="clsGgplotDefaults.vb" />
     <Compile Include="clsInstatOptionsDefaults.vb" />
     <Compile Include="clsRCodeStructure.vb" />

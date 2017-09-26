@@ -111,7 +111,7 @@ Partial Class dlgAddComment
         Me.rdoRow.Size = New System.Drawing.Size(100, 28)
         Me.rdoRow.TabIndex = 2
         Me.rdoRow.Text = "Row"
-        Me.rdoRow.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.rdoRow.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoRow.UseVisualStyleBackColor = True
         '
         'UcrDialogDisabled1
