@@ -1078,7 +1078,7 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
     stop("to_type must be a character of length one")
   }
   
-  if(!(to_type %in% c("integer", "factor", "numeric", "character", "ordered_factor"))) {
+  if(!(to_type %in% c("integer", "factor", "numeric", "character", "ordered_factor", "logical"))) {
     stop(to_type, " is not a valid type to convert to")
   }
   
@@ -1146,6 +1146,11 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
     else if(to_type == "character") {
       new_col <- sjmisc::to_character(curr_col) 
     }
+    else if(to_type == "logical") {
+      if(is.logical.like(curr_col)) new_col <- as.logical(curr_col)
+      else stop("Column is not numeric or contains values other than 0 and 1. Converting to logical would result in losing information.")
+    }
+    
     self$add_columns_to_data(col_name = col_name, col_data = new_col)
     
     if(keep_attr) {
@@ -2557,6 +2562,20 @@ data_object$set("public","is_corruption_type_present", function(type) {
 }
 )
 
+instat_object$set("public","get_CRI_component_column_names", function(data_name) {
+  self$get_data_objects(data_name)$get_CRI_component_column_names()
+}
+)
+
+data_object$set("public","get_CRI_component_column_names", function() {
+  include <- list(TRUE)
+  names(include) <- corruption_index_label
+  return(self$get_column_names(include = include))
+}
+)
+
+corruption_index_label
+
 instat_object$set("public","get_CRI_column_names", function(data_name) {
   self$get_data_objects(data_name)$get_CRI_column_names()
 }
@@ -3121,5 +3140,51 @@ data_object$set("public", "append_column_attributes", function(col_name, new_att
   for(i in seq_along(new_attr)) {
     self$append_to_variables_metadata(property = tmp_names[i], col_names = col_name, new_val = new_attr[[i]])
   }
+}
+)
+
+#Creating display daily climatic elements graphs
+data_object$set("public","display_daily_graph", function(data_name, date_col = NULL, station_col = NULL, year_col = NULL, doy_col = NULL, climatic_element = NULL, rug_colour = "red", bar_colour = "blue", upper_limit = 100) {
+  if(!self$is_climatic_data()) stop("Data is not defined as climatic.")
+  if(missing(date_col)) stop("Date columns must be specified.")
+  if(missing(climatic_element)) stop("Element column(s) must be specified.")
+  #if(!all(c(date_col, station_col, year_col, doy_col, climatic_element)) %in% self$get_column_names()) {
+    # stop("Not all specified columns found in the data")
+  # }
+  date_data <- self$get_columns_from_data(date_col)
+  if(!lubridate::is.Date(date_data)) stop(paste(date_col, " must be of type Date."))
+  #Extracting  year and day of the year
+    if(is.null(year_col)) {
+      if(is.null(self$get_climatic_column_name(year_label))) {
+        self$split_date(col_name = date_col, year = TRUE)
+      }
+      year_col <- self$get_climatic_column_name(year_label)
+    }
+  if(is.null(doy_col)) {
+    if(is.null(self$get_climatic_column_name(doy_label))) {
+      self$split_date(col_name = date_col, day_in_year = TRUE)
+    }
+    doy_col <- self$get_climatic_column_name(doy_label)
+  }
+  curr_data <- self$get_data_frame()
+  if(!is.null(station_col)) {
+    station_data <- self$get_columns_from_data(station_col)
+  }
+  else station_data <- 1
+  year_data <- self$get_columns_from_data(year_col)
+  
+  graph_list <- list()
+  for(station_name in unique(station_data)) {
+    if(!is.null(station_col)) curr_data <- curr_data[curr_data[[station_col]] == station_name, ]
+    if(nrow(curr_data) != 0) {
+      g <- ggplot2::ggplot(data = curr_data, mapping = ggplot2::aes_(x = as.name(doy_col), y = as.name(climatic_element))) + ggplot2::geom_bar(stat  = "identity", fill = bar_colour) + ggplot2::geom_rug(data = curr_data[is.na(curr_data[[climatic_element]]), ], mapping = ggplot2::aes_(x = as.name(doy_col)), sides = "b", color = rug_colour) + ggplot2::theme_minimal() + ggplot2::coord_cartesian(ylim = c(0, upper_limit)) + ggplot2::scale_x_continuous(breaks = c(1, 32, 61, 92, 122, 153, 183, 214, 245, 275, 306, 336, 367), labels = c(month.abb, ""), limits = c(0, 367)) + facet_wrap(facets = as.formula(paste("~", year_col))) + ggplot2::ggtitle(paste(ifelse(station_name == 1, "", station_name), "Daily", climatic_element)) + ggplot2::theme(panel.grid.minor = element_blank(), plot.title = element_text(hjust = 0.5, size = 20), axis.title = element_text(size = 16)) + xlab("Date") + ylab(climatic_element) + ggplot2::theme(axis.text.x=ggplot2::element_text(angle=90))
+      if(any(curr_data[[climatic_element]] > upper_limit, na.rm = TRUE)) {
+        g <- g + ggplot2::geom_text(data = curr_data[curr_data[[climatic_element]] > upper_limit, ], mapping = ggplot2::aes_(y = upper_limit, label = as.name(climatic_element)), size = 3)
+      }
+    }
+    graph_list[[length(graph_list) + 1]] <- g
+  }
+  if(length(graph_list) > 1) return(gridExtra::grid.arrange(grobs = graph_list))
+  else return(g)
 }
 )

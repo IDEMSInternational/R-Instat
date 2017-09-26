@@ -45,6 +45,11 @@ Public Class dlgConvertColumns
 
     Private Sub ReopenDialog()
         SetToFactorStatus(bToFactorOnly)
+        If rdoNumeric.Checked Then
+            grpFactorToNumericOptions.Visible = True
+        Else
+            grpFactorToNumericOptions.Visible = False
+        End If
     End Sub
 
     Private Sub InitialiseDialog()
@@ -64,7 +69,9 @@ Public Class dlgConvertColumns
         ucrPnlConvertTo.AddRadioButton(rdoNumeric, Chr(34) & "numeric" & Chr(34))
         ucrPnlConvertTo.AddRadioButton(rdoCharacter, Chr(34) & "character" & Chr(34))
         ucrPnlConvertTo.AddRadioButton(rdoInteger, Chr(34) & "integer" & Chr(34))
+        ucrPnlConvertTo.AddRadioButton(rdoLogical, Chr(34) & "logical" & Chr(34))
         ucrPnlConvertTo.AddToLinkedControls(ucrChkSpecifyDecimalsToDisplay, {rdoFactor, rdoOrderedFactor}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlConvertTo.AddToLinkedControls(ucrPnlFactorToNumericOptions, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoDefault)
 
         ucrPnlFactorToNumericOptions.SetParameter(New RParameter("factor_values", 3))
         ucrPnlFactorToNumericOptions.AddRadioButton(rdoDefault, "NULL")
@@ -72,8 +79,6 @@ Public Class dlgConvertColumns
         ucrPnlFactorToNumericOptions.AddRadioButton(rdoConvertOrdinals, Chr(34) & "force_ordinals" & Chr(34))
         ucrPnlFactorToNumericOptions.SetRDefault("NULL")
         ucrPnlFactorToNumericOptions.SetLinkedDisplayControl(grpFactorToNumericOptions)
-
-        ucrPnlConvertTo.AddToLinkedControls(ucrPnlFactorToNumericOptions, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkSpecifyDecimalsToDisplay.SetParameter(New RParameter("set_digits", 4))
         ucrChkSpecifyDecimalsToDisplay.SetText("Specify Decimals (from Numeric)")

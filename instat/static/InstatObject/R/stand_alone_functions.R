@@ -650,6 +650,12 @@ import_from_iri <- function(download_from, data_file, path, X1, X2,Y1,Y2, get_ar
   return(list(dataout,lat_lon_dataframe))
 }
 
+is.logical.like <- function(x) {
+  if(is.logical(x)) return(TRUE)
+  else if(is.numeric(x)) return(all(na.omit(x) %in% c(1,0)))
+  else return(FALSE)
+}
+
 is.binary <- function(x) {
   if(is.logical(x)) return(TRUE)
   else if(is.numeric(x)) return(all(na.omit(x) %in% c(1,0)))
