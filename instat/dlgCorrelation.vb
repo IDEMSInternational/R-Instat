@@ -21,6 +21,9 @@ Public Class dlgCorrelation
     Private clsCorrelationTestFunction, clsRGGcorrGraphicsFunction, clsRGraphicsFuction, clsRGGscatMatrixFunction, clsCorrelationFunction, clsRTempFunction, clsTempFunc As New RFunction
     Private clsColFunction As String
     Private bResetSubdialog As Boolean = False
+    Public strDefaultDataFrame As String = ""
+    Public strDefaultColumns() As String = Nothing
+
     Private Sub dlgCorrelation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
@@ -33,6 +36,7 @@ Public Class dlgCorrelation
         bReset = False
         autoTranslate(Me)
         ReopenDialog()
+        SetDefaultColumn()
         TestOKEnabled()
     End Sub
 
@@ -174,6 +178,20 @@ Public Class dlgCorrelation
         ucrPnlCompletePairwise.SetRCode(clsCorrelationFunction, bReset)
         ucrSaveModel.AddAdditionalRCode(clsCorrelationTestFunction, 1)
         ucrSaveModel.SetRCode(clsCorrelationFunction, bReset)
+    End Sub
+
+    Private Sub SetDefaultColumn()
+        If strDefaultDataFrame <> "" Then
+            ucrSelectorCorrelation.SetDataframe(strDefaultDataFrame)
+            rdoMultipleColumns.Checked = True
+        End If
+        If strDefaultColumns IsNot Nothing AndAlso strDefaultColumns.Count > 0 Then
+            For Each strVar As String In strDefaultColumns
+                ucrReceiverMultipleColumns.Add(strVar, strDefaultDataFrame)
+            Next
+        End If
+        strDefaultDataFrame = ""
+        strDefaultColumns = Nothing
     End Sub
 
     Public Sub TestOKEnabled()
