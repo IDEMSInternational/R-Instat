@@ -93,6 +93,13 @@ Public Class sdgSummaries
         ucrChkSn.SetText("Sn")
 
         ucrChkTrimmedMean.SetText("Trimmed Mean")
+        ucrChkTrimmedMean.Enabled = False
+        ucrNudFraction.Enabled = False
+        grpLocation.Enabled = False
+        ucrNudFraction.Maximum = 0.5
+        ucrNudFraction.DecimalPlaces = 1
+        ucrNudFraction.Increment = 0.1
+        ucrNudFraction.SetRDefault(0)
 
         'ucrPnlMissingOptions.AddRadioButton(rdoNumber)
         'ucrPnlMissingOptions.AddRadioButton(rdoPercentage)
