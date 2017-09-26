@@ -55,9 +55,9 @@ Partial Class dlgReorderColumns
         '
         'ucrReorderColumns
         '
-        Me.ucrReorderColumns.Location = New System.Drawing.Point(170, 25)
+        Me.ucrReorderColumns.Location = New System.Drawing.Point(170, 29)
         Me.ucrReorderColumns.Name = "ucrReorderColumns"
-        Me.ucrReorderColumns.Size = New System.Drawing.Size(211, 195)
+        Me.ucrReorderColumns.Size = New System.Drawing.Size(211, 174)
         Me.ucrReorderColumns.TabIndex = 2
         Me.ucrReorderColumns.ucrDataFrameList = Nothing
         Me.ucrReorderColumns.ucrReceiver = Nothing

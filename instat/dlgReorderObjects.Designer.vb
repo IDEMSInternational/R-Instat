@@ -54,7 +54,7 @@ Partial Class dlgReorderObjects
         'lblObjectsToReoder
         '
         Me.lblObjectsToReoder.AutoSize = True
-        Me.lblObjectsToReoder.Location = New System.Drawing.Point(182, 33)
+        Me.lblObjectsToReoder.Location = New System.Drawing.Point(182, 28)
         Me.lblObjectsToReoder.Name = "lblObjectsToReoder"
         Me.lblObjectsToReoder.Size = New System.Drawing.Size(99, 13)
         Me.lblObjectsToReoder.TabIndex = 1
@@ -74,7 +74,7 @@ Partial Class dlgReorderObjects
         '
         Me.ucrReorderObjects.Location = New System.Drawing.Point(182, 45)
         Me.ucrReorderObjects.Name = "ucrReorderObjects"
-        Me.ucrReorderObjects.Size = New System.Drawing.Size(209, 195)
+        Me.ucrReorderObjects.Size = New System.Drawing.Size(209, 178)
         Me.ucrReorderObjects.TabIndex = 2
         Me.ucrReorderObjects.ucrDataFrameList = Nothing
         Me.ucrReorderObjects.ucrReceiver = Nothing

@@ -57,6 +57,7 @@ Partial Class dlgConvertColumns
         Me.ucrSelectorDataFrameColumns = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverColumnsToConvert = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
+        Me.rdoLogical = New System.Windows.Forms.RadioButton()
         Me.grpConvertTo.SuspendLayout()
         Me.grpFactorToNumericOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -73,6 +74,7 @@ Partial Class dlgConvertColumns
         '
         'grpConvertTo
         '
+        Me.grpConvertTo.Controls.Add(Me.rdoLogical)
         Me.grpConvertTo.Controls.Add(Me.rdoCharacter)
         Me.grpConvertTo.Controls.Add(Me.rdoInteger)
         Me.grpConvertTo.Controls.Add(Me.rdoNumeric)
@@ -258,6 +260,17 @@ Partial Class dlgConvertColumns
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 8
         '
+        'rdoLogical
+        '
+        Me.rdoLogical.AutoSize = True
+        Me.rdoLogical.Location = New System.Drawing.Point(237, 66)
+        Me.rdoLogical.Name = "rdoLogical"
+        Me.rdoLogical.Size = New System.Drawing.Size(59, 17)
+        Me.rdoLogical.TabIndex = 6
+        Me.rdoLogical.TabStop = True
+        Me.rdoLogical.Text = "Logical"
+        Me.rdoLogical.UseVisualStyleBackColor = True
+        '
         'dlgConvertColumns
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -307,4 +320,5 @@ Partial Class dlgConvertColumns
     Friend WithEvents ucrChkKeepAttributes As ucrCheck
     Friend WithEvents rdoDefault As RadioButton
     Friend WithEvents rdoConvertLevels As RadioButton
+    Friend WithEvents rdoLogical As RadioButton
 End Class

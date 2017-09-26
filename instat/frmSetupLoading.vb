@@ -34,7 +34,7 @@ Public Class frmSetupLoading
         dctMessagesLinks.Add("Looking for interesting case studies for teaching?" & Environment.NewLine & "The International Livestock Research Institute (ILRI) has freely available biometric case studies for anyone to use to teach or learn. Find the data sets in the R-Instat library and click to go to the ILRI website.", "https://www.ilri.org/biometrics/default.htm")
 
         Randomize()
-        iSelectedMessage = CInt(Math.Ceiling(Rnd() * dctMessagesLinks.Count))
+        iSelectedMessage = CInt(Math.Floor(Rnd() * dctMessagesLinks.Count))
         lblMessage.Text = dctMessagesLinks.Keys(iSelectedMessage)
         If dctMessagesLinks.Values(iSelectedMessage) = "" Then
             lblMessage.Cursor = Cursors.Default
