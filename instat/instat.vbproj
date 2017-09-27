@@ -150,6 +150,8 @@
   <ItemGroup>
     <Compile Include="clsBlockReader.vb" />
     <Compile Include="clsCondition.vb" />
+    <Compile Include="clsCustomColourTable.vb" />
+    <Compile Include="clsCustomRenderer.vb" />
     <Compile Include="clsGgplotDefaults.vb" />
     <Compile Include="clsInstatOptionsDefaults.vb" />
     <Compile Include="clsRCodeStructure.vb" />
@@ -200,6 +202,12 @@
       <DependentUpon>dlgClimaticBoxPlot.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgClimaticBoxPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgClimaticCheckDataTemperature.Designer.vb">
+      <DependentUpon>dlgClimaticCheckDataTemperature.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticCheckDataTemperature.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgClimaticSummary.Designer.vb">
@@ -2240,6 +2248,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgClimaticBoxPlot.resx">
       <DependentUpon>dlgClimaticBoxPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticCheckDataTemperature.resx">
+      <DependentUpon>dlgClimaticCheckDataTemperature.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgClimaticSummary.resx">
       <DependentUpon>dlgClimaticSummary.vb</DependentUpon>
