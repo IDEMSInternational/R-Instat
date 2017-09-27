@@ -118,7 +118,7 @@ Public Class dlgDescribeTwoVarGraph
         ucrSaveGraph.Reset()
         ucrSelectorTwoVarGraph.Reset()
 
-        ucrReceiverMultipleTwoVar.SetMeAsReceiver()
+        ucrSecondVariableReceiver.SetMeAsReceiver()
         sdgDescribeTwoVarGraph.InitialiseControls()
 
         'Defining functions and operators
