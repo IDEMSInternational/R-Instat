@@ -62,9 +62,9 @@ Public Class dlgCountryColouredMap
     End Sub
 
     Private Sub SetDefaults()
-        clsMapdataFunction = New RFunction
-        clsRightjoinfunction = New RFunction
-        clsconcatenateFunction = New RFunction
+        clsMapDataFunction = New RFunction
+        clsJoinFunction = New RFunction
+        clsConcatenateFunction = New RFunction
 
         clsBaseOperator = New ROperator
         clsGgplot = New RFunction
@@ -74,17 +74,17 @@ Public Class dlgCountryColouredMap
 
         ucrSelectorCountryColouredMap.Reset()
         ucrReceiverCountry.SetMeAsReceiver()
-        clsMapdataFunction.SetPackageName("ggplot2")
-        clsMapdataFunction.SetRCommand("map_data")
-        clsMapdataFunction.SetAssignTo("world")
-        clsMapdataFunction.AddParameter("map", strParameterValue:=Chr(34) & "world" & Chr(34))
+        clsMapDataFunction.SetPackageName("ggplot2")
+        clsMapDataFunction.SetRCommand("map_data")
+        clsMapDataFunction.SetAssignTo("world")
+        clsMapDataFunction.AddParameter("map", strParameterValue:=Chr(34) & "world" & Chr(34))
 
-        clsRightjoinfunction.SetPackageName("dplyr")
-        clsRightjoinfunction.SetRCommand("right_join")
-        clsRightjoinfunction.SetAssignTo("merged_country")
-        clsRightjoinfunction.AddParameter("x", clsRFunctionParameter:=clsMapdataFunction, bIncludeArgumentName:=False)
-        clsRightjoinfunction.AddParameter("by", clsRFunctionParameter:=clsconcatenateFunction)
-        clsconcatenateFunction.SetRCommand("c")
+        clsJoinFunction.SetPackageName("dplyr")
+        clsJoinFunction.SetRCommand("right_join")
+        clsJoinFunction.SetAssignTo("merged_country")
+        clsJoinFunction.AddParameter("x", clsRFunctionParameter:=clsMapDataFunction, bIncludeArgumentName:=False)
+        clsJoinFunction.AddParameter("by", clsRFunctionParameter:=clsConcatenateFunction)
+        clsConcatenateFunction.SetRCommand("c")
 
 
         clsBaseOperator.SetOperation("+")
@@ -94,7 +94,7 @@ Public Class dlgCountryColouredMap
 
         clsRGeomPolygon.SetPackageName("ggplot2")
         clsRGeomPolygon.SetRCommand("geom_polygon")
-        clsRGeomPolygon.AddParameter("data", clsRFunctionParameter:=clsRightjoinfunction, iPosition:=0)
+        clsRGeomPolygon.AddParameter("data", clsRFunctionParameter:=clsJoinFunction, iPosition:=0)
 
         clsRaesFunc.SetPackageName("ggplot2")
         clsRaesFunc.SetRCommand("aes")
@@ -109,15 +109,15 @@ Public Class dlgCountryColouredMap
         clsBaseOperator.AddParameter("coordmap", clsRFunctionParameter:=clsCoordMap, iPosition:=2)
 
 
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsMapdataFunction)
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsRightjoinfunction)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsMapDataFunction)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsJoinFunction)
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorCountryColouredMap.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrSelectorCountryColouredMap.SetRCode(clsMapdataFunction, bReset)
-        ucrReceiverCountry.SetRCode(clsconcatenateFunction, bReset)
+        ucrSelectorCountryColouredMap.SetRCode(clsMapDataFunction, bReset)
+        ucrReceiverCountry.SetRCode(clsConcatenateFunction, bReset)
         ucrReceiverColourBy.SetRCode(clsRaesFunc, bReset)
         ucrSaveMap.SetRCode(clsBaseOperator, bReset)
 
