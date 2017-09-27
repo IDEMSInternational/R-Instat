@@ -103,10 +103,10 @@ Public Class dlgScatterPlot
         ucrChkLineofBestFit.SetParameter(clsGeomSmoothParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         ucrChkWithSE.SetText("With Standard Error")
-        ucrChkWithSE.SetParameter(New RParameter("se", 1))
+        ucrChkWithSE.SetParameter(New RParameter("se"), bNewAddRemoveParameter:=True, bNewChangeParameterValue:=True)
         ucrChkWithSE.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkWithSE.AddParameterValuesCondition(True, "se", "TRUE")
-        ucrChkWithSE.AddParameterValuesCondition(False, "se", "FALSE")
+        'ucrChkWithSE.AddParameterValuesCondition(True, "se", "TRUE")
+        'ucrChkWithSE.AddParameterValuesCondition(False, "se", "FALSE")
 
         ucrSaveScatterPlot.SetPrefix("scatterplot")
         ucrSaveScatterPlot.SetSaveTypeAsGraph()
