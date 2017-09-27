@@ -246,6 +246,12 @@
     <Compile Include="dlgCountinFactor.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCountryColouredMap.Designer.vb">
+      <DependentUpon>dlgCountryColouredMap.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCountryColouredMap.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="DlgDefineClimaticData.Designer.vb">
       <DependentUpon>DlgDefineClimaticData.vb</DependentUpon>
     </Compile>
@@ -2326,6 +2332,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCountinFactor.resx">
       <DependentUpon>dlgCountinFactor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCountryColouredMap.resx">
+      <DependentUpon>dlgCountryColouredMap.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCumulativeDistribution.fr-FR.resx">
       <DependentUpon>dlgCumulativeDistribution.vb</DependentUpon>
