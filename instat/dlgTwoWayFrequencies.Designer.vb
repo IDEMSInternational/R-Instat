@@ -106,7 +106,6 @@ Partial Class dlgTwoWayFrequencies
         '
         Me.rdoGraph.Appearance = System.Windows.Forms.Appearance.Button
         Me.rdoGraph.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.rdoGraph.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoGraph.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoGraph.FlatAppearance.BorderSize = 2
         Me.rdoGraph.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
@@ -117,7 +116,7 @@ Partial Class dlgTwoWayFrequencies
         Me.rdoGraph.Size = New System.Drawing.Size(100, 28)
         Me.rdoGraph.TabIndex = 2
         Me.rdoGraph.Text = "Graph"
-        Me.rdoGraph.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.rdoGraph.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoGraph.UseVisualStyleBackColor = True
         '
         'grpFreqTypeTable
@@ -178,7 +177,6 @@ Partial Class dlgTwoWayFrequencies
         '
         Me.rdoBoth.Appearance = System.Windows.Forms.Appearance.Button
         Me.rdoBoth.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.rdoBoth.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoBoth.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoBoth.FlatAppearance.BorderSize = 2
         Me.rdoBoth.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
@@ -189,7 +187,7 @@ Partial Class dlgTwoWayFrequencies
         Me.rdoBoth.Size = New System.Drawing.Size(100, 28)
         Me.rdoBoth.TabIndex = 3
         Me.rdoBoth.Text = "Both"
-        Me.rdoBoth.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.rdoBoth.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoBoth.UseVisualStyleBackColor = True
         '
         'grpFreqTypeGraph
@@ -305,6 +303,7 @@ Partial Class dlgTwoWayFrequencies
         Me.ucrReceiverWeights.Name = "ucrReceiverWeights"
         Me.ucrReceiverWeights.Selector = Nothing
         Me.ucrReceiverWeights.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverWeights.strNcFilePath = ""
         Me.ucrReceiverWeights.TabIndex = 13
         Me.ucrReceiverWeights.ucrSelector = Nothing
         '
@@ -316,6 +315,7 @@ Partial Class dlgTwoWayFrequencies
         Me.ucrReceiverColumnFactor.Name = "ucrReceiverColumnFactor"
         Me.ucrReceiverColumnFactor.Selector = Nothing
         Me.ucrReceiverColumnFactor.Size = New System.Drawing.Size(121, 20)
+        Me.ucrReceiverColumnFactor.strNcFilePath = ""
         Me.ucrReceiverColumnFactor.TabIndex = 8
         Me.ucrReceiverColumnFactor.ucrSelector = Nothing
         '
@@ -327,6 +327,7 @@ Partial Class dlgTwoWayFrequencies
         Me.ucrReceiverRowFactor.Name = "ucrReceiverRowFactor"
         Me.ucrReceiverRowFactor.Selector = Nothing
         Me.ucrReceiverRowFactor.Size = New System.Drawing.Size(121, 20)
+        Me.ucrReceiverRowFactor.strNcFilePath = ""
         Me.ucrReceiverRowFactor.TabIndex = 6
         Me.ucrReceiverRowFactor.ucrSelector = Nothing
         '

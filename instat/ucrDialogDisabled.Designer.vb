@@ -43,15 +43,13 @@ Partial Class ucrDialogDisabled
         '
         'lblDisabled
         '
-        Me.lblDisabled.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblDisabled.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        Me.lblDisabled.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblDisabled.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDisabled.ForeColor = System.Drawing.SystemColors.ControlText
         Me.lblDisabled.Location = New System.Drawing.Point(0, 0)
         Me.lblDisabled.Name = "lblDisabled"
-        Me.lblDisabled.Size = New System.Drawing.Size(241, 51)
+        Me.lblDisabled.Size = New System.Drawing.Size(240, 50)
         Me.lblDisabled.TabIndex = 0
         Me.lblDisabled.Text = "This dialog is not yet functioning. " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "It is for viewing only." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "OK cannot be enabl" &
     "ed." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)

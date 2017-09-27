@@ -61,6 +61,11 @@ Public Class frmMain
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        Dim prdCustom As New clsCustomRenderer(New clsCustomColourTable)
+
+        mnuBar.Renderer = prdCustom
+        Tool_strip.Renderer = prdCustom
+
         SetMainMenusEnabled(False)
         Cursor = Cursors.WaitCursor
         'temporary
@@ -293,7 +298,7 @@ Public Class frmMain
     End Sub
 
     Private Sub SummaryToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificSummary.Click
-        dlgNewSummaryTables.ShowDialog()
+        dlgSummaryTables.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareAddColumnTransform_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnCalculateTransform.Click
@@ -337,16 +342,8 @@ Public Class frmMain
     '    dlgNon_ParametricTwoWayAnova.ShowDialog()
     'End Sub
 
-    Private Sub NewWorksheetToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareNewWorksheet.Click
-        dlgNewWorksheet.ShowDialog()
-    End Sub
-
     Private Sub ImportDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareImportDailyData.Click
 
-    End Sub
-
-    Private Sub MakeFactorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareMakeFactor.Click
-        dlgMakeFactor.ShowDialog()
     End Sub
 
     Private Sub ShiftDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareShiftDailyData.Click
@@ -733,10 +730,6 @@ Public Class frmMain
         dlgNon_ParametricOneSampleTests.ShowDialog()
     End Sub
 
-    Private Sub mnuModelOtherOneVariableGoodnessofFit_Click(sender As Object, e As EventArgs) Handles mnuModelOtherOneVariableGoodnessofFit.Click
-        dlgGoodnessofFit.ShowDialog()
-    End Sub
-
     Private Sub mnuModelOtherTwoVariablesSimpleRegression_Click(sender As Object, e As EventArgs) Handles mnuModelOtherTwoVariablesSimpleRegression.Click
         dlgTwoVariableFitModel.ShowDialog()
     End Sub
@@ -767,10 +760,6 @@ Public Class frmMain
 
     Private Sub mnuModelOtherGeneralANOVAGeneral_Click(sender As Object, e As EventArgs) Handles mnuModelOtherGeneralANOVAGeneral.Click
         dlgGeneralANOVA.ShowDialog()
-    End Sub
-
-    Private Sub mnuModelOtherGeneralRegression_Click(sender As Object, e As EventArgs) Handles mnuModelOtherGeneralRegression.Click
-        dlgGeneralRegression.ShowDialog()
     End Sub
 
     Private Sub OutputWindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuViewOutputWindow.Click
@@ -1088,7 +1077,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticOrganiseEventsWaterBalance_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareEndOfRains.Click
-        dlgWaterBalance.ShowDialog()
+        dlgEndOfRainsSeason.ShowDialog()
     End Sub
 
     Private Sub mnuOrganiseColumnGenerateCountInFactor_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnGenerateCountInFactor.Click
@@ -1128,7 +1117,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimdex_Click(sender As Object, e As EventArgs) Handles mnuClimdex.Click
-        dlgClimdex.ShowDialog()
+        dlgClimdexIndices.ShowDialog()
     End Sub
 
     Private Sub mnuDescribeOtherGraphicsDialogsWindRose_Click(sender As Object, e As EventArgs)
@@ -1267,10 +1256,6 @@ Public Class frmMain
         dlgInventoryPlot.ShowDialog()
     End Sub
 
-    Private Sub DisplayDailyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplayDailyToolStripMenuItem.Click
-        dlgDisplayDaily.ShowDialog()
-    End Sub
-
     Private Sub mnuClimateFileClimSoft_Click(sender As Object, e As EventArgs) Handles mnuClimateFileClimSoft.Click
         dlgClimSoft.ShowDialog()
     End Sub
@@ -1377,7 +1362,7 @@ Public Class frmMain
     End Sub
 
     Private Sub SummaryToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgNewSummaryTables.ShowDialog()
+        dlgSummaryTables.ShowDialog()
     End Sub
 
     Private Sub ImportFromCSPROToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportFromCSPROToolStripMenuItem.Click
@@ -1557,7 +1542,7 @@ Public Class frmMain
     End Sub
 
     Private Sub DispalyClimaticDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DispalyClimaticDataToolStripMenuItem.Click
-        dlgDisplayDailyClimaticData.ShowDialog()
+        dlgDisplayDailyData.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticPrepareClimaticSummaries_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareClimaticSummaries.Click
@@ -1643,7 +1628,7 @@ Public Class frmMain
     End Sub
 
     Private Sub DuplicatesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DuplicatesToolStripMenuItem.Click
-        dlgDuplicatesConstructed.ShowDialog()
+        dlgDuplicates.ShowDialog()
     End Sub
 
     Private Sub BoxplotsConceptualisedAndConstructedToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles BoxplotsConceptualisedAndConstructedToolStripMenuItem.Click
@@ -1656,5 +1641,23 @@ Public Class frmMain
 
     Private Sub PlToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PlToolStripMenuItem.Click
         dlgPlotRegion.ShowDialog()
+    End Sub
+
+    Private Sub CorrelationsRedFlagsorOthersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CorrelationsRedFlagsorOthersToolStripMenuItem.Click
+        Dim lstDataNames As List(Of String)
+        Dim strComponentColumnNames() As String
+
+        lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
+        If lstDataNames.Count > 0 Then
+            dlgCorrelation.strDefaultDataFrame = lstDataNames(0)
+            strComponentColumnNames = clsRLink.GetCorruptionComponentsColumnNames(lstDataNames(0))
+            If strComponentColumnNames IsNot Nothing AndAlso strComponentColumnNames.Count > 0 Then
+                dlgCorrelation.strDefaultColumns = strComponentColumnNames
+            End If
+        Else
+            dlgCorrelation.strDefaultDataFrame = ""
+            dlgCorrelation.strDefaultColumns = Nothing
+        End If
+        dlgCorrelation.ShowDialog()
     End Sub
 End Class

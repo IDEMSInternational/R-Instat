@@ -45,10 +45,8 @@ Partial Class ucrReceiverSingle
         '
         'txtReceiverSingle
         '
-        Me.txtReceiverSingle.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtReceiverSingle.ContextMenuStrip = Me.mnuRightClick
+        Me.txtReceiverSingle.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtReceiverSingle.Location = New System.Drawing.Point(0, 0)
         Me.txtReceiverSingle.Name = "txtReceiverSingle"
         Me.txtReceiverSingle.ReadOnly = True

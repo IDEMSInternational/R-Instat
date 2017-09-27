@@ -137,7 +137,9 @@ Partial Class dlgExportToCPT
         Me.ucrReceiverMultipleDataColumns.Name = "ucrReceiverMultipleDataColumns"
         Me.ucrReceiverMultipleDataColumns.Selector = Nothing
         Me.ucrReceiverMultipleDataColumns.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverMultipleDataColumns.strNcFilePath = ""
         Me.ucrReceiverMultipleDataColumns.TabIndex = 5
+        Me.ucrReceiverMultipleDataColumns.ucrSelector = Nothing
         '
         'ucrReceiverDataColumn
         '
@@ -147,7 +149,9 @@ Partial Class dlgExportToCPT
         Me.ucrReceiverDataColumn.Name = "ucrReceiverDataColumn"
         Me.ucrReceiverDataColumn.Selector = Nothing
         Me.ucrReceiverDataColumn.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverDataColumn.strNcFilePath = ""
         Me.ucrReceiverDataColumn.TabIndex = 7
+        Me.ucrReceiverDataColumn.ucrSelector = Nothing
         '
         'ucrReceiverStations
         '
@@ -157,7 +161,9 @@ Partial Class dlgExportToCPT
         Me.ucrReceiverStations.Name = "ucrReceiverStations"
         Me.ucrReceiverStations.Selector = Nothing
         Me.ucrReceiverStations.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverStations.strNcFilePath = ""
         Me.ucrReceiverStations.TabIndex = 7
+        Me.ucrReceiverStations.ucrSelector = Nothing
         '
         'ucrReceiverYears
         '
@@ -167,7 +173,9 @@ Partial Class dlgExportToCPT
         Me.ucrReceiverYears.Name = "ucrReceiverYears"
         Me.ucrReceiverYears.Selector = Nothing
         Me.ucrReceiverYears.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverYears.strNcFilePath = ""
         Me.ucrReceiverYears.TabIndex = 3
+        Me.ucrReceiverYears.ucrSelector = Nothing
         '
         'ucrSSTDataframe
         '
@@ -217,7 +225,7 @@ Partial Class dlgExportToCPT
         Me.Controls.Add(Me.ucrSSTDataframe)
         Me.Controls.Add(Me.cmdBrowse)
         Me.Controls.Add(Me.lblExport)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgExportToCPT"

@@ -224,6 +224,8 @@ Partial Class frmMain
         Me.mnuClimaticPICSARainfall = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPICSATemperature = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPICSACrops = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCMSAF = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PlToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticModels = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticModelsExtremes = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticModelsCircular = New System.Windows.Forms.ToolStripMenuItem()
@@ -459,6 +461,7 @@ Partial Class frmMain
         Me.mnuProcurementModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementModelFitModelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DefineRedFlagsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CorrelationsRedFlagsorOthersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalculateCRIToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcurementUseCRI = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementUseCRISummariseCRIbyCountry = New System.Windows.Forms.ToolStripMenuItem()
@@ -475,16 +478,14 @@ Partial Class frmMain
         Me.splOverall = New System.Windows.Forms.SplitContainer()
         Me.splExtraWindows = New System.Windows.Forms.SplitContainer()
         Me.splMetadata = New System.Windows.Forms.SplitContainer()
+        Me.splLogScript = New System.Windows.Forms.SplitContainer()
+        Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrColumnMeta = New instat.ucrColumnMetadata()
         Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
-        Me.splLogScript = New System.Windows.Forms.SplitContainer()
         Me.ucrLogWindow = New instat.ucrLog()
         Me.ucrScriptWindow = New instat.ucrScript()
-        Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
-        Me.mnuCMSAF = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PlToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -637,14 +638,14 @@ Partial Class frmMain
         Me.mnuDescribeSpecificFrequency.Name = "mnuDescribeSpecificFrequency"
         Me.mnuDescribeSpecificFrequency.Size = New System.Drawing.Size(209, 22)
         Me.mnuDescribeSpecificFrequency.Tag = "Frequency..."
-        Me.mnuDescribeSpecificFrequency.Text = "Frequency..."
+        Me.mnuDescribeSpecificFrequency.Text = "Frequency Tables..."
         '
         'mnuDescribeSpecificSummary
         '
         Me.mnuDescribeSpecificSummary.Name = "mnuDescribeSpecificSummary"
         Me.mnuDescribeSpecificSummary.Size = New System.Drawing.Size(209, 22)
         Me.mnuDescribeSpecificSummary.Tag = "Summary..."
-        Me.mnuDescribeSpecificSummary.Text = "Summary..."
+        Me.mnuDescribeSpecificSummary.Text = "Summary Tables..."
         '
         'mnuDescribeSpecificMultipleResponse
         '
@@ -1576,7 +1577,6 @@ Partial Class frmMain
         '
         'DispalyClimaticDataToolStripMenuItem
         '
-        Me.DispalyClimaticDataToolStripMenuItem.Enabled = False
         Me.DispalyClimaticDataToolStripMenuItem.Name = "DispalyClimaticDataToolStripMenuItem"
         Me.DispalyClimaticDataToolStripMenuItem.Size = New System.Drawing.Size(189, 22)
         Me.DispalyClimaticDataToolStripMenuItem.Text = "Display Daily..."
@@ -1765,20 +1765,33 @@ Partial Class frmMain
         'mnuClimaticPICSARainfall
         '
         Me.mnuClimaticPICSARainfall.Name = "mnuClimaticPICSARainfall"
-        Me.mnuClimaticPICSARainfall.Size = New System.Drawing.Size(152, 22)
+        Me.mnuClimaticPICSARainfall.Size = New System.Drawing.Size(150, 22)
         Me.mnuClimaticPICSARainfall.Text = "Rainfall..."
         '
         'mnuClimaticPICSATemperature
         '
         Me.mnuClimaticPICSATemperature.Name = "mnuClimaticPICSATemperature"
-        Me.mnuClimaticPICSATemperature.Size = New System.Drawing.Size(152, 22)
+        Me.mnuClimaticPICSATemperature.Size = New System.Drawing.Size(150, 22)
         Me.mnuClimaticPICSATemperature.Text = "Temperature..."
         '
         'mnuClimaticPICSACrops
         '
         Me.mnuClimaticPICSACrops.Name = "mnuClimaticPICSACrops"
-        Me.mnuClimaticPICSACrops.Size = New System.Drawing.Size(152, 22)
+        Me.mnuClimaticPICSACrops.Size = New System.Drawing.Size(150, 22)
         Me.mnuClimaticPICSACrops.Text = "Crops..."
+        '
+        'mnuCMSAF
+        '
+        Me.mnuCMSAF.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlToolStripMenuItem})
+        Me.mnuCMSAF.Name = "mnuCMSAF"
+        Me.mnuCMSAF.Size = New System.Drawing.Size(212, 22)
+        Me.mnuCMSAF.Text = "CM SAF"
+        '
+        'PlToolStripMenuItem
+        '
+        Me.PlToolStripMenuItem.Name = "PlToolStripMenuItem"
+        Me.PlToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
+        Me.PlToolStripMenuItem.Text = "Plot Region..."
         '
         'mnuClimaticModels
         '
@@ -2336,6 +2349,7 @@ Partial Class frmMain
         '
         'Tool_strip
         '
+        Me.Tool_strip.BackColor = System.Drawing.SystemColors.ControlLightLight
         Me.Tool_strip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.Tool_strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTbNew, Me.mnuTbOpen, Me.mnuTbSave, Me.mnuTbPrint, Me.toolStripSeparator, Me.mnuTbCut, Me.mnuTbCopy, Me.mnuTbPaste, Me.mnuTbDelete, Me.separator1, Me.EditLastDialogueToolStrip, Me.mnuTbShowLast10, Me.separator2, Me.mnuTbHelp})
         Me.Tool_strip.Location = New System.Drawing.Point(0, 24)
@@ -2479,6 +2493,7 @@ Partial Class frmMain
         'mnuBar
         '
         Me.mnuBar.AllowMerge = False
+        Me.mnuBar.BackColor = System.Drawing.SystemColors.ControlLightLight
         Me.mnuBar.ImeMode = System.Windows.Forms.ImeMode.[On]
         Me.mnuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuEdit, Me.mnuPrepare, Me.mnuDescribe, Me.mnuModel, Me.mnuClimatic, Me.mnuProcurement, Me.mnuTools, Me.mnuView, Me.mnuHelp})
         Me.mnuBar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
@@ -3339,7 +3354,7 @@ Partial Class frmMain
         '
         'mnuProcurement
         '
-        Me.mnuProcurement.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCorruptionDefineCorruptionData, Me.mnuProcurementPrepare, Me.mnuProcurementDescribe, Me.DefineOutputsToolStripMenuItem, Me.mnuProcurementModel, Me.DefineRedFlagsToolStripMenuItem, Me.CalculateCRIToolStripMenuItem, Me.ProcurementUseCRI})
+        Me.mnuProcurement.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCorruptionDefineCorruptionData, Me.mnuProcurementPrepare, Me.mnuProcurementDescribe, Me.DefineOutputsToolStripMenuItem, Me.mnuProcurementModel, Me.DefineRedFlagsToolStripMenuItem, Me.CorrelationsRedFlagsorOthersToolStripMenuItem, Me.CalculateCRIToolStripMenuItem, Me.ProcurementUseCRI})
         Me.mnuProcurement.Name = "mnuProcurement"
         Me.mnuProcurement.Size = New System.Drawing.Size(88, 20)
         Me.mnuProcurement.Text = "Procurement"
@@ -3442,6 +3457,12 @@ Partial Class frmMain
         Me.DefineRedFlagsToolStripMenuItem.Name = "DefineRedFlagsToolStripMenuItem"
         Me.DefineRedFlagsToolStripMenuItem.Size = New System.Drawing.Size(292, 22)
         Me.DefineRedFlagsToolStripMenuItem.Text = "Define Red Flag Variables..."
+        '
+        'CorrelationsRedFlagsorOthersToolStripMenuItem
+        '
+        Me.CorrelationsRedFlagsorOthersToolStripMenuItem.Name = "CorrelationsRedFlagsorOthersToolStripMenuItem"
+        Me.CorrelationsRedFlagsorOthersToolStripMenuItem.Size = New System.Drawing.Size(292, 22)
+        Me.CorrelationsRedFlagsorOthersToolStripMenuItem.Text = "Correlations (Red Flags or others)..."
         '
         'CalculateCRIToolStripMenuItem
         '
@@ -3597,24 +3618,6 @@ Partial Class frmMain
         Me.splMetadata.SplitterWidth = 5
         Me.splMetadata.TabIndex = 0
         '
-        'ucrColumnMeta
-        '
-        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrColumnMeta.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrColumnMeta.Location = New System.Drawing.Point(0, 0)
-        Me.ucrColumnMeta.Name = "ucrColumnMeta"
-        Me.ucrColumnMeta.Size = New System.Drawing.Size(75, 194)
-        Me.ucrColumnMeta.TabIndex = 0
-        '
-        'ucrDataFrameMeta
-        '
-        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrDataFrameMeta.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrDataFrameMeta.Location = New System.Drawing.Point(0, 0)
-        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
-        Me.ucrDataFrameMeta.Size = New System.Drawing.Size(176, 194)
-        Me.ucrDataFrameMeta.TabIndex = 0
-        '
         'splLogScript
         '
         Me.splLogScript.BackColor = System.Drawing.Color.LightGray
@@ -3635,25 +3638,6 @@ Partial Class frmMain
         Me.splLogScript.SplitterDistance = 182
         Me.splLogScript.SplitterWidth = 5
         Me.splLogScript.TabIndex = 0
-        '
-        'ucrLogWindow
-        '
-        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrLogWindow.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrLogWindow.Location = New System.Drawing.Point(0, 0)
-        Me.ucrLogWindow.Name = "ucrLogWindow"
-        Me.ucrLogWindow.Size = New System.Drawing.Size(182, 194)
-        Me.ucrLogWindow.TabIndex = 0
-        '
-        'ucrScriptWindow
-        '
-        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrScriptWindow.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrScriptWindow.Location = New System.Drawing.Point(0, 0)
-        Me.ucrScriptWindow.Name = "ucrScriptWindow"
-        Me.ucrScriptWindow.Size = New System.Drawing.Size(386, 194)
-        Me.ucrScriptWindow.TabIndex = 0
-        Me.ucrScriptWindow.Tag = "Script_Window"
         '
         'splDataOutput
         '
@@ -3676,6 +3660,43 @@ Partial Class frmMain
         Me.splDataOutput.SplitterWidth = 5
         Me.splDataOutput.TabIndex = 0
         '
+        'ucrColumnMeta
+        '
+        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrColumnMeta.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrColumnMeta.Location = New System.Drawing.Point(0, 0)
+        Me.ucrColumnMeta.Name = "ucrColumnMeta"
+        Me.ucrColumnMeta.Size = New System.Drawing.Size(75, 194)
+        Me.ucrColumnMeta.TabIndex = 0
+        '
+        'ucrDataFrameMeta
+        '
+        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrDataFrameMeta.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrDataFrameMeta.Location = New System.Drawing.Point(0, 0)
+        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
+        Me.ucrDataFrameMeta.Size = New System.Drawing.Size(176, 194)
+        Me.ucrDataFrameMeta.TabIndex = 0
+        '
+        'ucrLogWindow
+        '
+        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrLogWindow.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrLogWindow.Location = New System.Drawing.Point(0, 0)
+        Me.ucrLogWindow.Name = "ucrLogWindow"
+        Me.ucrLogWindow.Size = New System.Drawing.Size(182, 194)
+        Me.ucrLogWindow.TabIndex = 0
+        '
+        'ucrScriptWindow
+        '
+        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrScriptWindow.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrScriptWindow.Location = New System.Drawing.Point(0, 0)
+        Me.ucrScriptWindow.Name = "ucrScriptWindow"
+        Me.ucrScriptWindow.Size = New System.Drawing.Size(386, 194)
+        Me.ucrScriptWindow.TabIndex = 0
+        Me.ucrScriptWindow.Tag = "Script_Window"
+        '
         'ucrDataViewer
         '
         Me.ucrDataViewer.BackColor = System.Drawing.SystemColors.Control
@@ -3695,19 +3716,6 @@ Partial Class frmMain
         Me.ucrOutput.Name = "ucrOutput"
         Me.ucrOutput.Size = New System.Drawing.Size(444, 231)
         Me.ucrOutput.TabIndex = 0
-        '
-        'mnuCMSAF
-        '
-        Me.mnuCMSAF.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlToolStripMenuItem})
-        Me.mnuCMSAF.Name = "mnuCMSAF"
-        Me.mnuCMSAF.Size = New System.Drawing.Size(212, 22)
-        Me.mnuCMSAF.Text = "CM SAF"
-        '
-        'PlToolStripMenuItem
-        '
-        Me.PlToolStripMenuItem.Name = "PlToolStripMenuItem"
-        Me.PlToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.PlToolStripMenuItem.Text = "Plot Region..."
         '
         'frmMain
         '
@@ -4202,4 +4210,5 @@ Partial Class frmMain
     Friend WithEvents BoxplotsConceptualisedAndConstructedToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuCMSAF As ToolStripMenuItem
     Friend WithEvents PlToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CorrelationsRedFlagsorOthersToolStripMenuItem As ToolStripMenuItem
 End Class
