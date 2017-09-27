@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgCountryColouredMap
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsMapdataFunction, clsRightjoinfunction, clsconcatenateFunction As New RFunction
+    Private clsMapDataFunction, clsJoinFunction, clsConcatenateFunction As New RFunction
     Private clsBaseOperator As New ROperator
     Private clsGgplot As New RFunction
     Private clsRGeomPolygon As New RFunction
