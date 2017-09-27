@@ -62,7 +62,7 @@ Partial Class dlgDescribeTwoVarGraph
         'lblSecondVariable
         '
         Me.lblSecondVariable.AutoSize = True
-        Me.lblSecondVariable.Location = New System.Drawing.Point(261, 105)
+        Me.lblSecondVariable.Location = New System.Drawing.Point(261, 108)
         Me.lblSecondVariable.Name = "lblSecondVariable"
         Me.lblSecondVariable.Size = New System.Drawing.Size(99, 13)
         Me.lblSecondVariable.TabIndex = 3
@@ -96,7 +96,7 @@ Partial Class dlgDescribeTwoVarGraph
         'ucrSecondVariableReceiver
         '
         Me.ucrSecondVariableReceiver.frmParent = Me
-        Me.ucrSecondVariableReceiver.Location = New System.Drawing.Point(264, 58)
+        Me.ucrSecondVariableReceiver.Location = New System.Drawing.Point(264, 60)
         Me.ucrSecondVariableReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSecondVariableReceiver.Name = "ucrSecondVariableReceiver"
         Me.ucrSecondVariableReceiver.Selector = Nothing
