@@ -43,7 +43,7 @@ Public Class ucrReceiverSingle
 
     End Sub
 
-    Public Overrides Sub Add(strItem As String, Optional strDataFrame As String = "")
+    Public Overrides Sub Add(strItem As String, Optional strDataFrame As String = "", Optional strToolTip As String = "")
         Dim clsGetDataType As New RFunction
         Dim strCurrentItemType As String
         Dim expColumnType As SymbolicExpression

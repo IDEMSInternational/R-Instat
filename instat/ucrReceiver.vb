@@ -347,7 +347,7 @@ Public Class ucrReceiver
         bTypeSet = True
     End Sub
 
-    Public Overridable Sub Add(strItem As String, Optional strDataFrame As String = "")
+    Public Overridable Sub Add(strItem As String, Optional strDataFrame As String = "", Optional strToolTip As String = "")
         'SetMeAsReceiver()
         'For i = 0 To Selector.lstAvailableVariable.Items.Count - 1
         '    If Selector.lstAvailableVariable.Items(i).Text = strItem Then
