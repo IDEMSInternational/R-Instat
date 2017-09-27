@@ -281,6 +281,11 @@ instat_object$set("public", "get_column_data_types", function(data_name, columns
 }
 )
 
+instat_object$set("public", "get_column_labels", function(data_name, columns) {
+  return(self$get_data_objects(data_name)$get_column_labels(columns = columns))
+}
+)
+
 instat_object$set("public", "get_combined_metadata", function(convert_to_character = FALSE) { 
   retlist <- data.frame()
   i = 1
