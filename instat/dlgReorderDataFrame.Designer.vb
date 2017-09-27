@@ -61,9 +61,9 @@ Partial Class dlgReorderDataFrame
         '
         'ucrDataFrameToReorder
         '
-        Me.ucrDataFrameToReorder.Location = New System.Drawing.Point(10, 25)
+        Me.ucrDataFrameToReorder.Location = New System.Drawing.Point(10, 29)
         Me.ucrDataFrameToReorder.Name = "ucrDataFrameToReorder"
-        Me.ucrDataFrameToReorder.Size = New System.Drawing.Size(209, 195)
+        Me.ucrDataFrameToReorder.Size = New System.Drawing.Size(209, 175)
         Me.ucrDataFrameToReorder.TabIndex = 1
         Me.ucrDataFrameToReorder.ucrDataFrameList = Nothing
         Me.ucrDataFrameToReorder.ucrReceiver = Nothing

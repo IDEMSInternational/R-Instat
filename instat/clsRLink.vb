@@ -1080,6 +1080,22 @@ Public Class RLink
         Return strColumn
     End Function
 
+    Public Function GetCorruptionComponentsColumnNames(strDataName As String) As String()
+        Dim clsGetComponents As New RFunction
+        Dim strColumn() As String
+        Dim expColumn As SymbolicExpression
+
+        clsGetComponents.SetRCommand(strInstatDataObject & "$get_CRI_component_column_names")
+        clsGetComponents.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
+        expColumn = RunInternalScriptGetValue(clsGetComponents.ToScript(), bSilent:=True)
+        If expColumn IsNot Nothing AndAlso Not expColumn.Type = Internals.SymbolicExpressionType.Null Then
+            strColumn = expColumn.AsCharacter.ToArray
+        Else
+            strColumn = Nothing
+        End If
+        Return strColumn
+    End Function
+
     Public Function GetClimaticColumnOfType(strDataName As String, strType As String) As String
         Dim clsGetColumnName As New RFunction
         Dim strColumn As String
