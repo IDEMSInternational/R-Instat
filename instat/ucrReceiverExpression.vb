@@ -38,7 +38,7 @@ Public Class ucrReceiverExpression
         End If
     End Sub
 
-    Public Overrides Sub Add(strItem As String, Optional strDataFrame As String = "", Optional strToolTip As String = "")
+    Public Overrides Sub Add(strItem As String, Optional strDataFrame As String = "")
         Dim strCurrentItemType As String
         Dim kvpItem As KeyValuePair(Of String, String)
 
