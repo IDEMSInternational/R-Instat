@@ -222,11 +222,11 @@ Public Class ucrVariablesAsFactor
         End If
     End Sub
 
-    Public Overrides Sub Add(strVar As String, Optional strDataFrame As String = "", Optional strToolTip As String = "")
+    Public Overrides Sub Add(strVar As String, Optional strDataFrame As String = "")
         If bSingleVariable Then
-            ucrSingleVariable.Add(strVar, strDataFrame, strToolTip)
+            ucrSingleVariable.Add(strVar, strDataFrame)
         Else
-            ucrMultipleVariables.Add(strVar, strDataFrame, strToolTip)
+            ucrMultipleVariables.Add(strVar, strDataFrame)
         End If
     End Sub
 
