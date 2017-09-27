@@ -198,7 +198,11 @@ Public Class dlgDisplayDailyData
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlValueChanged, ucrReceiverDay.ControlValueChanged, ucrReceiverMonth.ControlValueChanged
-        clsSummaryTableFunction.AddParameter("factors", "c(" & ucrReceiverYear.GetVariableNames & "," & ucrReceiverMonth.GetVariableNames & "," & ucrReceiverDay.GetVariableNames & ")")
+    Private Sub ucrReceiverYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlValueChanged, ucrReceiverDay.ControlValueChanged, ucrReceiverMonth.ControlValueChanged, ucrReceiverStations.ControlValueChanged
+        If Not ucrReceiverStations.IsEmpty Then
+            clsSummaryTableFunction.AddParameter("factors", "c(" & ucrReceiverStations.GetVariableNames & "," & ucrReceiverYear.GetVariableNames & "," & ucrReceiverMonth.GetVariableNames & "," & ucrReceiverDay.GetVariableNames & ")")
+        Else
+            clsSummaryTableFunction.AddParameter("factors", "c(" & ucrReceiverYear.GetVariableNames & "," & ucrReceiverMonth.GetVariableNames & "," & ucrReceiverDay.GetVariableNames & ")")
+        End If
     End Sub
 End Class
