@@ -793,10 +793,9 @@ Public Class RLink
                             Else
                                 strCurrColumnTypes = New String(chrCurrColumns.Count - 1) {}
                             End If
-                            clsGetColumnLabels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
+                            clsGetColumnLabels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_labels")
                             clsGetColumnLabels.AddParameter("data_name", Chr(34) & vecColumns.Names(i) & Chr(34))
-                            clsGetColumnLabels.AddParameter("property", "label_label")
-                            clsGetColumnLabels.AddParameter("column", strColumnsRList)
+                            clsGetColumnLabels.AddParameter("columns", strColumnsRList)
                             expItems = frmMain.clsRLink.RunInternalScriptGetValue(clsGetColumnLabels.ToScript())
                             If expItems IsNot Nothing AndAlso Not expItems.Type = Internals.SymbolicExpressionType.Null Then
                                 strCurrColumnLables = expItems.AsCharacter.ToArray
