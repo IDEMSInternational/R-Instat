@@ -32,28 +32,6 @@ Public Class dlgLabelsLevels
         autoTranslate(Me)
     End Sub
 
-    Private Sub SetRCodeforControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        TestOKEnabled()
-    End Sub
-
-    Private Sub TestOKEnabled()
-        If Not ucrReceiverLabels.IsEmpty() AndAlso ucrFactorLabels.IsColumnComplete(ucrFactorLabels.strLabelsName) AndAlso (ucrChkIncludeLevelNumbers.Visible AndAlso Not ucrChkIncludeLevelNumbers.Checked OrElse (ucrFactorLabels.IsColumnComplete(ucrFactorLabels.strLevelsName))) Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
-    End Sub
-
-    Private Sub SetDefaults()
-        clsViewLabels = New RFunction
-        ucrSelectorForLabels.Reset()
-        ucrSelectorForLabels.Focus()
-        clsViewLabels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_factor_levels")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsViewLabels)
-        AddLevelButtonEnabled()
-    End Sub
-
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 35
 
@@ -75,6 +53,28 @@ Public Class dlgLabelsLevels
         ucrSelectorForLabels.SetParameterIsString()
 
         ucrChkIncludeLevelNumbers.SetText("Include Level Numbers")
+    End Sub
+
+    Private Sub SetDefaults()
+        clsViewLabels = New RFunction
+        ucrSelectorForLabels.Reset()
+        ucrSelectorForLabels.Focus()
+        clsViewLabels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_factor_levels")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsViewLabels)
+        AddLevelButtonEnabled()
+    End Sub
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        TestOKEnabled()
+    End Sub
+
+    Private Sub TestOKEnabled()
+        If Not ucrReceiverLabels.IsEmpty() AndAlso ucrFactorLabels.IsColumnComplete(ucrFactorLabels.strLabelsName) AndAlso (ucrChkIncludeLevelNumbers.Visible AndAlso Not ucrChkIncludeLevelNumbers.Checked OrElse (ucrFactorLabels.IsColumnComplete(ucrFactorLabels.strLevelsName))) Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
