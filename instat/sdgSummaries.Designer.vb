@@ -60,7 +60,6 @@ Partial Class sdgSummaries
         Me.grpScale = New System.Windows.Forms.GroupBox()
         Me.grpSkewness = New System.Windows.Forms.GroupBox()
         Me.ucrChkMc = New instat.ucrCheck()
-        Me.grpKurtosis = New System.Windows.Forms.GroupBox()
         Me.tbsum = New System.Windows.Forms.TabPage()
         Me.grpCommon = New System.Windows.Forms.GroupBox()
         Me.ucrChkNTotal = New instat.ucrCheck()
@@ -191,7 +190,6 @@ Partial Class sdgSummaries
         Me.tbMore.Controls.Add(Me.ucrChkCoefficientOfVariation)
         Me.tbMore.Controls.Add(Me.grpScale)
         Me.tbMore.Controls.Add(Me.grpSkewness)
-        Me.tbMore.Controls.Add(Me.grpKurtosis)
         Me.tbMore.Location = New System.Drawing.Point(4, 22)
         Me.tbMore.Name = "tbMore"
         Me.tbMore.Padding = New System.Windows.Forms.Padding(3)
@@ -205,9 +203,9 @@ Partial Class sdgSummaries
         Me.grpLocation.Controls.Add(Me.lblFractionTrimmed)
         Me.grpLocation.Controls.Add(Me.ucrNudFraction)
         Me.grpLocation.Controls.Add(Me.ucrChkTrimmedMean)
-        Me.grpLocation.Location = New System.Drawing.Point(6, 78)
+        Me.grpLocation.Location = New System.Drawing.Point(6, 10)
         Me.grpLocation.Name = "grpLocation"
-        Me.grpLocation.Size = New System.Drawing.Size(301, 52)
+        Me.grpLocation.Size = New System.Drawing.Size(302, 52)
         Me.grpLocation.TabIndex = 7
         Me.grpLocation.TabStop = False
         Me.grpLocation.Text = "Location"
@@ -236,7 +234,7 @@ Partial Class sdgSummaries
         'ucrChkTrimmedMean
         '
         Me.ucrChkTrimmedMean.Checked = False
-        Me.ucrChkTrimmedMean.Location = New System.Drawing.Point(7, 19)
+        Me.ucrChkTrimmedMean.Location = New System.Drawing.Point(14, 19)
         Me.ucrChkTrimmedMean.Name = "ucrChkTrimmedMean"
         Me.ucrChkTrimmedMean.Size = New System.Drawing.Size(120, 20)
         Me.ucrChkTrimmedMean.TabIndex = 6
@@ -244,54 +242,54 @@ Partial Class sdgSummaries
         'ucrChkKurtosis
         '
         Me.ucrChkKurtosis.Checked = False
-        Me.ucrChkKurtosis.Location = New System.Drawing.Point(13, 207)
+        Me.ucrChkKurtosis.Location = New System.Drawing.Point(19, 197)
         Me.ucrChkKurtosis.Name = "ucrChkKurtosis"
-        Me.ucrChkKurtosis.Size = New System.Drawing.Size(86, 20)
+        Me.ucrChkKurtosis.Size = New System.Drawing.Size(120, 20)
         Me.ucrChkKurtosis.TabIndex = 5
         '
         'ucrChkSkewness
         '
         Me.ucrChkSkewness.Checked = False
-        Me.ucrChkSkewness.Location = New System.Drawing.Point(13, 148)
+        Me.ucrChkSkewness.Location = New System.Drawing.Point(19, 148)
         Me.ucrChkSkewness.Name = "ucrChkSkewness"
-        Me.ucrChkSkewness.Size = New System.Drawing.Size(152, 20)
+        Me.ucrChkSkewness.Size = New System.Drawing.Size(174, 20)
         Me.ucrChkSkewness.TabIndex = 2
         '
         'ucrChkSn
         '
         Me.ucrChkSn.Checked = False
-        Me.ucrChkSn.Location = New System.Drawing.Point(222, 51)
+        Me.ucrChkSn.Location = New System.Drawing.Point(213, 103)
         Me.ucrChkSn.Name = "ucrChkSn"
-        Me.ucrChkSn.Size = New System.Drawing.Size(82, 20)
+        Me.ucrChkSn.Size = New System.Drawing.Size(76, 20)
         Me.ucrChkSn.TabIndex = 4
         '
         'ucrChkQn
         '
         Me.ucrChkQn.Checked = False
-        Me.ucrChkQn.Location = New System.Drawing.Point(222, 25)
+        Me.ucrChkQn.Location = New System.Drawing.Point(213, 77)
         Me.ucrChkQn.Name = "ucrChkQn"
-        Me.ucrChkQn.Size = New System.Drawing.Size(85, 20)
+        Me.ucrChkQn.Size = New System.Drawing.Size(76, 20)
         Me.ucrChkQn.TabIndex = 3
         '
         'ucrChkMedianAbsoluteDeviation
         '
         Me.ucrChkMedianAbsoluteDeviation.Checked = False
-        Me.ucrChkMedianAbsoluteDeviation.Location = New System.Drawing.Point(13, 51)
+        Me.ucrChkMedianAbsoluteDeviation.Location = New System.Drawing.Point(18, 103)
         Me.ucrChkMedianAbsoluteDeviation.Name = "ucrChkMedianAbsoluteDeviation"
-        Me.ucrChkMedianAbsoluteDeviation.Size = New System.Drawing.Size(205, 20)
+        Me.ucrChkMedianAbsoluteDeviation.Size = New System.Drawing.Size(174, 20)
         Me.ucrChkMedianAbsoluteDeviation.TabIndex = 1
         '
         'ucrChkCoefficientOfVariation
         '
         Me.ucrChkCoefficientOfVariation.Checked = False
-        Me.ucrChkCoefficientOfVariation.Location = New System.Drawing.Point(13, 25)
+        Me.ucrChkCoefficientOfVariation.Location = New System.Drawing.Point(18, 77)
         Me.ucrChkCoefficientOfVariation.Name = "ucrChkCoefficientOfVariation"
-        Me.ucrChkCoefficientOfVariation.Size = New System.Drawing.Size(171, 20)
+        Me.ucrChkCoefficientOfVariation.Size = New System.Drawing.Size(174, 20)
         Me.ucrChkCoefficientOfVariation.TabIndex = 0
         '
         'grpScale
         '
-        Me.grpScale.Location = New System.Drawing.Point(6, 8)
+        Me.grpScale.Location = New System.Drawing.Point(6, 61)
         Me.grpScale.Name = "grpScale"
         Me.grpScale.Size = New System.Drawing.Size(302, 71)
         Me.grpScale.TabIndex = 6
@@ -301,9 +299,9 @@ Partial Class sdgSummaries
         'grpSkewness
         '
         Me.grpSkewness.Controls.Add(Me.ucrChkMc)
-        Me.grpSkewness.Location = New System.Drawing.Point(6, 128)
+        Me.grpSkewness.Location = New System.Drawing.Point(6, 133)
         Me.grpSkewness.Name = "grpSkewness"
-        Me.grpSkewness.Size = New System.Drawing.Size(301, 57)
+        Me.grpSkewness.Size = New System.Drawing.Size(302, 57)
         Me.grpSkewness.TabIndex = 8
         Me.grpSkewness.TabStop = False
         Me.grpSkewness.Text = "Skewness"
@@ -311,19 +309,10 @@ Partial Class sdgSummaries
         'ucrChkMc
         '
         Me.ucrChkMc.Checked = False
-        Me.ucrChkMc.Location = New System.Drawing.Point(213, 21)
+        Me.ucrChkMc.Location = New System.Drawing.Point(206, 21)
         Me.ucrChkMc.Name = "ucrChkMc"
         Me.ucrChkMc.Size = New System.Drawing.Size(76, 20)
         Me.ucrChkMc.TabIndex = 7
-        '
-        'grpKurtosis
-        '
-        Me.grpKurtosis.Location = New System.Drawing.Point(6, 185)
-        Me.grpKurtosis.Name = "grpKurtosis"
-        Me.grpKurtosis.Size = New System.Drawing.Size(301, 56)
-        Me.grpKurtosis.TabIndex = 9
-        Me.grpKurtosis.TabStop = False
-        Me.grpKurtosis.Text = "Kurtosis"
         '
         'tbsum
         '
@@ -584,7 +573,6 @@ Partial Class sdgSummaries
     Friend WithEvents grpScale As GroupBox
     Friend WithEvents grpLocation As GroupBox
     Friend WithEvents grpSkewness As GroupBox
-    Friend WithEvents grpKurtosis As GroupBox
     Friend WithEvents ucrChkTrimmedMean As ucrCheck
     Friend WithEvents ucrChkMc As ucrCheck
     Friend WithEvents lblFractionTrimmed As Label
