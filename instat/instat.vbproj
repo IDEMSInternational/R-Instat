@@ -204,6 +204,12 @@
     <Compile Include="dlgClimaticBoxPlot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgClimaticCheckDataTemperature.Designer.vb">
+      <DependentUpon>dlgClimaticCheckDataTemperature.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticCheckDataTemperature.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgClimaticSummary.Designer.vb">
       <DependentUpon>dlgClimaticSummary.vb</DependentUpon>
     </Compile>
@@ -238,6 +244,12 @@
       <DependentUpon>dlgCountinFactor.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgCountinFactor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgCountryColouredMap.Designer.vb">
+      <DependentUpon>dlgCountryColouredMap.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCountryColouredMap.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DlgDefineClimaticData.Designer.vb">
@@ -2243,6 +2255,9 @@
     <EmbeddedResource Include="dlgClimaticBoxPlot.resx">
       <DependentUpon>dlgClimaticBoxPlot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticCheckDataTemperature.resx">
+      <DependentUpon>dlgClimaticCheckDataTemperature.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgClimaticSummary.resx">
       <DependentUpon>dlgClimaticSummary.vb</DependentUpon>
     </EmbeddedResource>
@@ -2317,6 +2332,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCountinFactor.resx">
       <DependentUpon>dlgCountinFactor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCountryColouredMap.resx">
+      <DependentUpon>dlgCountryColouredMap.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCumulativeDistribution.fr-FR.resx">
       <DependentUpon>dlgCumulativeDistribution.vb</DependentUpon>
