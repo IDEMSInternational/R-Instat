@@ -47,7 +47,6 @@ Partial Class ucrReorder
         '
         'cmdTop
         '
-        Me.cmdTop.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.cmdTop.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.cmdTop.Image = Global.instat.My.Resources.Resources.arrows_top
         Me.cmdTop.Location = New System.Drawing.Point(164, 47)
@@ -58,7 +57,6 @@ Partial Class ucrReorder
         '
         'cmdUp
         '
-        Me.cmdUp.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.cmdUp.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.cmdUp.Image = Global.instat.My.Resources.Resources.arrows_up
         Me.cmdUp.Location = New System.Drawing.Point(164, 73)
@@ -69,7 +67,6 @@ Partial Class ucrReorder
         '
         'cmdDown
         '
-        Me.cmdDown.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.cmdDown.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.cmdDown.Image = Global.instat.My.Resources.Resources.arrows_down
         Me.cmdDown.Location = New System.Drawing.Point(164, 99)
@@ -80,7 +77,6 @@ Partial Class ucrReorder
         '
         'cmdBottom
         '
-        Me.cmdBottom.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.cmdBottom.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.cmdBottom.Image = Global.instat.My.Resources.Resources.arrows_bottom
         Me.cmdBottom.Location = New System.Drawing.Point(164, 125)
@@ -91,13 +87,11 @@ Partial Class ucrReorder
         '
         'lstAvailableData
         '
-        Me.lstAvailableData.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lstAvailableData.Dock = System.Windows.Forms.DockStyle.Left
         Me.lstAvailableData.FullRowSelect = True
-        Me.lstAvailableData.Location = New System.Drawing.Point(3, 3)
+        Me.lstAvailableData.Location = New System.Drawing.Point(0, 0)
         Me.lstAvailableData.Name = "lstAvailableData"
-        Me.lstAvailableData.Size = New System.Drawing.Size(154, 173)
+        Me.lstAvailableData.Size = New System.Drawing.Size(154, 195)
         Me.lstAvailableData.TabIndex = 5
         Me.lstAvailableData.UseCompatibleStateImageBehavior = False
         Me.lstAvailableData.View = System.Windows.Forms.View.Details
