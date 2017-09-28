@@ -463,7 +463,6 @@ Public Class ucrDataView
     End Sub
 
     Private Sub mnuLevelsLabels_Click(sender As Object, e As EventArgs) Handles mnuLevelsLabels.Click
-        'dlgLabelsLevels.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
         dlgLabelsLevels.ShowDialog()
     End Sub
 
