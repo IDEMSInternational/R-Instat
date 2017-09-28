@@ -41,17 +41,18 @@ Public Class dlgCountryColouredMap
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.iCallType = 3
         ucrReceiverCountry.Selector = ucrSelectorCountryColouredMap
         ucrReceiverColourBy.Selector = ucrSelectorCountryColouredMap
 
-        ucrSelectorCountryColouredMap.SetParameter(New RParameter("", 1))
+        ucrSelectorCountryColouredMap.SetParameter(New RParameter("y", 1))
         ucrSelectorCountryColouredMap.SetParameterIsrfunction()
 
         ucrReceiverCountry.SetParameter(New RParameter("region", 2))
         ucrReceiverCountry.SetParameterIsString()
 
-        ucrReceiverColourBy.SetParameter(New RParameter("group", 3))
-        ucrReceiverCountry.SetParameterIsString()
+        ucrReceiverColourBy.SetParameter(New RParameter("fill", 3))
+        ucrReceiverColourBy.SetParameterIsRFunction()
 
         ucrSaveMap.SetPrefix("Map")
         ucrSaveMap.SetSaveTypeAsGraph()
@@ -74,6 +75,7 @@ Public Class dlgCountryColouredMap
 
         ucrSelectorCountryColouredMap.Reset()
         ucrReceiverCountry.SetMeAsReceiver()
+
         clsMapDataFunction.SetPackageName("ggplot2")
         clsMapDataFunction.SetRCommand("map_data")
         clsMapDataFunction.SetAssignTo("world")
@@ -82,10 +84,9 @@ Public Class dlgCountryColouredMap
         clsJoinFunction.SetPackageName("dplyr")
         clsJoinFunction.SetRCommand("right_join")
         clsJoinFunction.SetAssignTo("merged_country")
-        clsJoinFunction.AddParameter("x", clsRFunctionParameter:=clsMapDataFunction, bIncludeArgumentName:=False)
-        clsJoinFunction.AddParameter("by", clsRFunctionParameter:=clsConcatenateFunction)
+        clsJoinFunction.AddParameter("x", clsRFunctionParameter:=clsMapDataFunction, iPosition:=0)
+        clsJoinFunction.AddParameter("by", clsRFunctionParameter:=clsConcatenateFunction, iPosition:=2)
         clsConcatenateFunction.SetRCommand("c")
-
 
         clsBaseOperator.SetOperation("+")
         clsGgplot.SetPackageName("ggplot2")
@@ -101,35 +102,41 @@ Public Class dlgCountryColouredMap
         clsRGeomPolygon.AddParameter("aes", clsRFunctionParameter:=clsRaesFunc, iPosition:=1, bIncludeArgumentName:=False)
         clsRaesFunc.AddParameter("x", "long", iPosition:=0)
         clsRaesFunc.AddParameter("y", "lat", iPosition:=1)
-        clsRaesFunc.AddParameter("fill", "count")
+        clsRaesFunc.AddParameter("group", "group")
         clsBaseOperator.AddParameter("polygon", clsRFunctionParameter:=clsRGeomPolygon, iPosition:=1)
 
         clsCoordMap.SetPackageName("ggplot2")
-        clsCoordMap.SetRCommand("coord_map")
-        clsBaseOperator.AddParameter("coordmap", clsRFunctionParameter:=clsCoordMap, iPosition:=2)
-
-
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsMapDataFunction)
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsJoinFunction)
+        clsCoordMap.SetRCommand("coord_quickmap")
+        clsBaseOperator.AddParameter("coordquickmap", clsRFunctionParameter:=clsCoordMap, iPosition:=2)
+        ucrBase.clsRsyntax.ClearCodes()
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsMapDataFunction, iPosition:=1)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsJoinFunction, iPosition:=2)
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorCountryColouredMap.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrSelectorCountryColouredMap.SetRCode(clsMapDataFunction, bReset)
+        ucrSelectorCountryColouredMap.SetRCode(clsJoinFunction, bReset)
         ucrReceiverCountry.SetRCode(clsConcatenateFunction, bReset)
         ucrReceiverColourBy.SetRCode(clsRaesFunc, bReset)
         ucrSaveMap.SetRCode(clsBaseOperator, bReset)
-
     End Sub
 
     Private Sub TestOKEnabled()
-
+        If Not ucrReceiverCountry.IsEmpty AndAlso Not ucrReceiverColourBy.IsEmpty AndAlso ucrSaveMap.IsComplete Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrReceiverCountry_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverCountry.ControlContentsChanged, ucrReceiverColourBy.ControlContentsChanged, ucrSaveMap.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
