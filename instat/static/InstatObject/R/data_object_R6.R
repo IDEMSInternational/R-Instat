@@ -404,6 +404,12 @@ data_object$set("public", "get_column_data_types", function(columns) {
 }
 )
 
+data_object$set("public", "get_column_labels", function(columns) {
+  if(missing(columns)) return(as.vector(sapply(private$data, function(x) paste(attr(x, "label"), collapse = ","))))
+  else return(as.vector(sapply(private$data[columns], function(x) paste(attr(x, "label"), collapse = ","), USE.NAMES = FALSE)))
+}
+)
+
 data_object$set("public", "clear_variables_metadata", function() {
   for(column in self$get_data_frame(use_current_filter = FALSE)) {
     for(name in names(attributes(column))) {
