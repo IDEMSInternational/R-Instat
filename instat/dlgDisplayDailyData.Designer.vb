@@ -107,7 +107,7 @@ Partial Class dlgDisplayDailyData
         Me.lblStation.Location = New System.Drawing.Point(291, 65)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(43, 13)
-        Me.lblStation.TabIndex = 5
+        Me.lblStation.TabIndex = 4
         Me.lblStation.Text = "Station:"
         '
         'lblElement
@@ -116,7 +116,7 @@ Partial Class dlgDisplayDailyData
         Me.lblElement.Location = New System.Drawing.Point(293, 239)
         Me.lblElement.Name = "lblElement"
         Me.lblElement.Size = New System.Drawing.Size(59, 13)
-        Me.lblElement.TabIndex = 14
+        Me.lblElement.TabIndex = 16
         Me.lblElement.Text = "Element(s):"
         '
         'lblDate
@@ -125,7 +125,7 @@ Partial Class dlgDisplayDailyData
         Me.lblDate.Location = New System.Drawing.Point(293, 109)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(33, 13)
-        Me.lblDate.TabIndex = 7
+        Me.lblDate.TabIndex = 8
         Me.lblDate.Text = "Date:"
         '
         'lblYear
@@ -134,7 +134,7 @@ Partial Class dlgDisplayDailyData
         Me.lblYear.Location = New System.Drawing.Point(287, 193)
         Me.lblYear.Name = "lblYear"
         Me.lblYear.Size = New System.Drawing.Size(32, 13)
-        Me.lblYear.TabIndex = 9
+        Me.lblYear.TabIndex = 14
         Me.lblYear.Text = "Year:"
         '
         'lblDayOfTheYear
@@ -143,7 +143,7 @@ Partial Class dlgDisplayDailyData
         Me.lblDayOfTheYear.Location = New System.Drawing.Point(293, 153)
         Me.lblDayOfTheYear.Name = "lblDayOfTheYear"
         Me.lblDayOfTheYear.Size = New System.Drawing.Size(29, 13)
-        Me.lblDayOfTheYear.TabIndex = 11
+        Me.lblDayOfTheYear.TabIndex = 10
         Me.lblDayOfTheYear.Text = "Doy:"
         '
         'lblYaxisUpper
@@ -152,7 +152,7 @@ Partial Class dlgDisplayDailyData
         Me.lblYaxisUpper.Location = New System.Drawing.Point(6, 16)
         Me.lblYaxisUpper.Name = "lblYaxisUpper"
         Me.lblYaxisUpper.Size = New System.Drawing.Size(70, 13)
-        Me.lblYaxisUpper.TabIndex = 2
+        Me.lblYaxisUpper.TabIndex = 0
         Me.lblYaxisUpper.Text = "Y-axis Upper:"
         '
         'grpGraph
@@ -166,7 +166,7 @@ Partial Class dlgDisplayDailyData
         Me.grpGraph.Location = New System.Drawing.Point(10, 232)
         Me.grpGraph.Name = "grpGraph"
         Me.grpGraph.Size = New System.Drawing.Size(277, 99)
-        Me.grpGraph.TabIndex = 13
+        Me.grpGraph.TabIndex = 18
         Me.grpGraph.TabStop = False
         Me.grpGraph.Text = "Graph"
         '
@@ -177,7 +177,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrInputRugColour.Location = New System.Drawing.Point(83, 70)
         Me.ucrInputRugColour.Name = "ucrInputRugColour"
         Me.ucrInputRugColour.Size = New System.Drawing.Size(73, 21)
-        Me.ucrInputRugColour.TabIndex = 9
+        Me.ucrInputRugColour.TabIndex = 5
         '
         'lblRugColor
         '
@@ -185,7 +185,7 @@ Partial Class dlgDisplayDailyData
         Me.lblRugColor.Location = New System.Drawing.Point(9, 75)
         Me.lblRugColor.Name = "lblRugColor"
         Me.lblRugColor.Size = New System.Drawing.Size(57, 13)
-        Me.lblRugColor.TabIndex = 8
+        Me.lblRugColor.TabIndex = 4
         Me.lblRugColor.Text = "Rug Color:"
         '
         'ucrInputBarColour
@@ -195,7 +195,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrInputBarColour.Location = New System.Drawing.Point(83, 43)
         Me.ucrInputBarColour.Name = "ucrInputBarColour"
         Me.ucrInputBarColour.Size = New System.Drawing.Size(73, 21)
-        Me.ucrInputBarColour.TabIndex = 7
+        Me.ucrInputBarColour.TabIndex = 3
         '
         'lblBarColour
         '
@@ -203,7 +203,7 @@ Partial Class dlgDisplayDailyData
         Me.lblBarColour.Location = New System.Drawing.Point(6, 48)
         Me.lblBarColour.Name = "lblBarColour"
         Me.lblBarColour.Size = New System.Drawing.Size(59, 13)
-        Me.lblBarColour.TabIndex = 6
+        Me.lblBarColour.TabIndex = 2
         Me.lblBarColour.Text = "Bar Colour:"
         '
         'ucrNudUpperYaxis
@@ -216,7 +216,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrNudUpperYaxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudUpperYaxis.Name = "ucrNudUpperYaxis"
         Me.ucrNudUpperYaxis.Size = New System.Drawing.Size(50, 23)
-        Me.ucrNudUpperYaxis.TabIndex = 3
+        Me.ucrNudUpperYaxis.TabIndex = 1
         Me.ucrNudUpperYaxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrReceiverElements
@@ -228,7 +228,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverElements.Selector = Nothing
         Me.ucrReceiverElements.Size = New System.Drawing.Size(122, 78)
         Me.ucrReceiverElements.strNcFilePath = ""
-        Me.ucrReceiverElements.TabIndex = 15
+        Me.ucrReceiverElements.TabIndex = 17
         Me.ucrReceiverElements.ucrSelector = Nothing
         '
         'ucrReceiverYear
@@ -240,7 +240,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverYear.Selector = Nothing
         Me.ucrReceiverYear.Size = New System.Drawing.Size(122, 20)
         Me.ucrReceiverYear.strNcFilePath = ""
-        Me.ucrReceiverYear.TabIndex = 10
+        Me.ucrReceiverYear.TabIndex = 15
         Me.ucrReceiverYear.ucrSelector = Nothing
         '
         'ucrReceiverDayOfYear
@@ -252,7 +252,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverDayOfYear.Selector = Nothing
         Me.ucrReceiverDayOfYear.Size = New System.Drawing.Size(122, 20)
         Me.ucrReceiverDayOfYear.strNcFilePath = ""
-        Me.ucrReceiverDayOfYear.TabIndex = 12
+        Me.ucrReceiverDayOfYear.TabIndex = 11
         Me.ucrReceiverDayOfYear.ucrSelector = Nothing
         '
         'ucrReceiverDate
@@ -264,7 +264,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverDate.Selector = Nothing
         Me.ucrReceiverDate.Size = New System.Drawing.Size(122, 20)
         Me.ucrReceiverDate.strNcFilePath = ""
-        Me.ucrReceiverDate.TabIndex = 8
+        Me.ucrReceiverDate.TabIndex = 9
         Me.ucrReceiverDate.ucrSelector = Nothing
         '
         'ucrReceiverStations
@@ -276,7 +276,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverStations.Selector = Nothing
         Me.ucrReceiverStations.Size = New System.Drawing.Size(122, 20)
         Me.ucrReceiverStations.strNcFilePath = ""
-        Me.ucrReceiverStations.TabIndex = 6
+        Me.ucrReceiverStations.TabIndex = 5
         Me.ucrReceiverStations.ucrSelector = Nothing
         '
         'ucrPnlFrequencyDisplay
@@ -295,7 +295,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrSelectorDisplayDailyClimaticData.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDisplayDailyClimaticData.Name = "ucrSelectorDisplayDailyClimaticData"
         Me.ucrSelectorDisplayDailyClimaticData.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorDisplayDailyClimaticData.TabIndex = 4
+        Me.ucrSelectorDisplayDailyClimaticData.TabIndex = 3
         '
         'ucrBase
         '
@@ -303,7 +303,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(428, 52)
-        Me.ucrBase.TabIndex = 16
+        Me.ucrBase.TabIndex = 19
         '
         'ucrReceiverMonth
         '
@@ -314,7 +314,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverMonth.Selector = Nothing
         Me.ucrReceiverMonth.Size = New System.Drawing.Size(122, 20)
         Me.ucrReceiverMonth.strNcFilePath = ""
-        Me.ucrReceiverMonth.TabIndex = 17
+        Me.ucrReceiverMonth.TabIndex = 7
         Me.ucrReceiverMonth.ucrSelector = Nothing
         '
         'ucrReceiverDay
@@ -326,25 +326,25 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverDay.Selector = Nothing
         Me.ucrReceiverDay.Size = New System.Drawing.Size(122, 20)
         Me.ucrReceiverDay.strNcFilePath = ""
-        Me.ucrReceiverDay.TabIndex = 18
+        Me.ucrReceiverDay.TabIndex = 13
         Me.ucrReceiverDay.ucrSelector = Nothing
         '
         'lblMonth
         '
         Me.lblMonth.AutoSize = True
-        Me.lblMonth.Location = New System.Drawing.Point(288, 110)
+        Me.lblMonth.Location = New System.Drawing.Point(290, 109)
         Me.lblMonth.Name = "lblMonth"
         Me.lblMonth.Size = New System.Drawing.Size(40, 13)
-        Me.lblMonth.TabIndex = 19
+        Me.lblMonth.TabIndex = 6
         Me.lblMonth.Text = "Month:"
         '
         'lblDay
         '
         Me.lblDay.AutoSize = True
-        Me.lblDay.Location = New System.Drawing.Point(290, 152)
+        Me.lblDay.Location = New System.Drawing.Point(291, 152)
         Me.lblDay.Name = "lblDay"
         Me.lblDay.Size = New System.Drawing.Size(29, 13)
-        Me.lblDay.TabIndex = 20
+        Me.lblDay.TabIndex = 12
         Me.lblDay.Text = "Day:"
         '
         'dlgDisplayDailyData
