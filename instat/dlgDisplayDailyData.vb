@@ -141,7 +141,7 @@ Public Class dlgDisplayDailyData
         clsSummaryTableFunction.AddParameter("stored_results", Chr(34) & "FALSE" & Chr(34))
         clsSummaryTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
         clsDisplayDailyGraphFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$display_daily_graph")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDisplayDailyGraphFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryTableFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
