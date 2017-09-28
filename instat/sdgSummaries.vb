@@ -78,7 +78,7 @@ Public Class sdgSummaries
         ucrChkSkewness.SetText("Skewness(3rd Moment)")
 
         ucrChkMc.SetParameter(New RParameter("summary_skewness_mc", 20), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_skewness_mc" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkMc.SetText("Mc")
+        ucrChkMc.SetText("mc")
 
         ucrChkCoefficientOfVariation.SetParameter(New RParameter("summary_coef_var", 17), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_coef_var" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkCoefficientOfVariation.SetText("Coefficient Of Variation")
