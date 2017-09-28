@@ -1537,10 +1537,10 @@
     <Compile Include="dlgInventoryPlot.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgLabels.Designer.vb">
-      <DependentUpon>dlgLabels.vb</DependentUpon>
+    <Compile Include="dlgLabelsLevels.Designer.vb">
+      <DependentUpon>dlgLabelsLevels.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgLabels.vb">
+    <Compile Include="dlgLabelsLevels.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgLockUnlock.Designer.vb">
@@ -3462,14 +3462,14 @@
     <EmbeddedResource Include="dlgInventoryPlot.sw-KE.resx">
       <DependentUpon>dlgInventoryPlot.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgLabels.fr-FR.resx">
-      <DependentUpon>dlgLabels.vb</DependentUpon>
+    <EmbeddedResource Include="dlgLabelsLevels.fr-FR.resx">
+      <DependentUpon>dlgLabelsLevels.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgLabels.resx">
-      <DependentUpon>dlgLabels.vb</DependentUpon>
+    <EmbeddedResource Include="dlgLabelsLevels.resx">
+      <DependentUpon>dlgLabelsLevels.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgLabels.sw-KE.resx">
-      <DependentUpon>dlgLabels.vb</DependentUpon>
+    <EmbeddedResource Include="dlgLabelsLevels.sw-KE.resx">
+      <DependentUpon>dlgLabelsLevels.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgLockUnlock.fr-FR.resx">
       <DependentUpon>dlgLockUnlock.vb</DependentUpon>

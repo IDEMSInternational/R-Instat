@@ -13,11 +13,8 @@
 '
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-Imports instat
 Imports instat.Translations
-
-Public Class dlgLabels
+Public Class dlgLabelsLevels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsViewLabels As New RFunction
