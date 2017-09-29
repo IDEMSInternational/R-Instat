@@ -224,7 +224,6 @@ Public Class dlgTransformText
         clsSubstringFunction.SetRCommand("str_sub")
         clsSubstringFunction.AddParameter("start", 1, iPosition:=1)
         clsSubstringFunction.AddParameter("end", 2, iPosition:=2)
-
         ucrBase.clsRsyntax.SetBaseRFunction(clsConvertFunction)
     End Sub
 
@@ -345,7 +344,9 @@ Public Class dlgTransformText
     End Sub
 
     Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOperation.ControlValueChanged
-        If rdoLength.Checked Then
+        If rdoConvertCase.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsConvertFunction)
+        ElseIf rdoLength.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsLengthFunction)
         ElseIf rdoPad.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsPadFunction)
@@ -355,8 +356,6 @@ Public Class dlgTransformText
             ucrBase.clsRsyntax.SetBaseRFunction(clsWordsFunction)
         ElseIf rdoSubstring.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSubstringFunction)
-        ElseIf rdoConvertCase.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsConvertFunction)
         End If
     End Sub
 
