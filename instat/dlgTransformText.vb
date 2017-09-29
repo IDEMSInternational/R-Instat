@@ -33,7 +33,7 @@ Public Class dlgTransformText
             iFullHeight = Me.Height
             igrpParameterFullHeight = grpParameters.Height
             iBaseMaxY = ucrBase.Location.Y
-            iNewColMaxY = ucrNewColName.Location.Y
+            iNewColMaxY = ucrSaveNewColumn.Location.Y
             bFirstLoad = False
         End If
         If bReset Then
@@ -178,10 +178,10 @@ Public Class dlgTransformText
         ucrNudTo.SetLinkedDisplayControl(lblToSubstring)
 
         'ucrNewColName
-        ucrNewColName.SetIsTextBox()
-        ucrNewColName.SetSaveTypeAsColumn()
-        ucrNewColName.SetDataFrameSelector(ucrSelectorForTransformText.ucrAvailableDataFrames)
-        ucrNewColName.SetLabelText("Column Name:")
+        ucrSaveNewColumn.SetIsTextBox()
+        ucrSaveNewColumn.SetSaveTypeAsColumn()
+        ucrSaveNewColumn.SetDataFrameSelector(ucrSelectorForTransformText.ucrAvailableDataFrames)
+        ucrSaveNewColumn.SetLabelText("Column Name:")
     End Sub
 
     Private Sub SetDefaults()
@@ -192,16 +192,17 @@ Public Class dlgTransformText
         clsWordsFunction = New RFunction
         clsSubstringFunction = New RFunction
 
-        ucrNewColName.Reset()
+        ucrSaveNewColumn.Reset()
         ucrSelectorForTransformText.Reset()
 
         NewDefaultName()
         clsConvertFunction.SetPackageName("stringr")
         clsConvertFunction.SetRCommand("str_to_lower")
-        clsConvertFunction.SetAssignTo(ucrNewColName.GetText(), strTempDataframe:=ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText)
+        clsConvertFunction.SetAssignTo(ucrSaveNewColumn.GetText(), strTempDataframe:=ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveNewColumn.GetText)
 
         clsLengthFunction.SetPackageName("stringr")
         clsLengthFunction.SetRCommand("str_length")
+        'clsLengthFunction.SetAssignTo(ucrNewColName.GetText(), strTempDataframe:=ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText)
 
         clsPadFunction.SetPackageName("stringr")
         clsPadFunction.SetRCommand("str_pad")
@@ -228,11 +229,21 @@ Public Class dlgTransformText
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        bRCodeSet = False
         ucrPnlPad.AddAdditionalCodeParameterPair(clsPadFunction, clsNewRParameter:=New RParameter("side", 2), iAdditionalPairNo:=1)
+        ucrReceiverTransformText.AddAdditionalCodeParameterPair(clsConvertFunction, clsNewRParameter:=New RParameter("string", 0), iAdditionalPairNo:=1)
+        ucrReceiverTransformText.AddAdditionalCodeParameterPair(clsPadFunction, clsNewRParameter:=New RParameter("string", 0), iAdditionalPairNo:=2)
+        ucrReceiverTransformText.AddAdditionalCodeParameterPair(clsTrimFunction, clsNewRParameter:=New RParameter("string", 0), iAdditionalPairNo:=3)
+        ucrReceiverTransformText.AddAdditionalCodeParameterPair(clsWordsFunction, clsNewRParameter:=New RParameter("string", 0), iAdditionalPairNo:=4)
+        ucrReceiverTransformText.AddAdditionalCodeParameterPair(clsSubstringFunction, clsNewRParameter:=New RParameter("string", 0), iAdditionalPairNo:=5)
 
-        ucrReceiverTransformText.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrNewColName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrSaveNewColumn.AddAdditionalRCode(clsLengthFunction, iAdditionalPairNo:=1)
+        ucrSaveNewColumn.AddAdditionalRCode(clsPadFunction, iAdditionalPairNo:=2)
+        ucrSaveNewColumn.AddAdditionalRCode(clsTrimFunction, iAdditionalPairNo:=3)
+        ucrSaveNewColumn.AddAdditionalRCode(clsWordsFunction, iAdditionalPairNo:=4)
+        ucrSaveNewColumn.AddAdditionalRCode(clsSubstringFunction, iAdditionalPairNo:=5)
+
+        ucrReceiverTransformText.SetRCode(clsLengthFunction, bReset)
+        ucrSaveNewColumn.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlOperation.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrInputTo.SetRCode(clsConvertFunction, bReset)
         ucrInputPad.SetRCode(clsPadFunction, bReset)
@@ -247,13 +258,11 @@ Public Class dlgTransformText
         ucrInputSeparator.SetRCode(clsWordsFunction, bReset)
         ucrNudFrom.SetRCode(clsSubstringFunction, bReset)
         ucrNudTo.SetRCode(clsSubstringFunction, bReset)
-
-        bRCodeSet = True
         DialogSize()
     End Sub
 
     Private Sub TestOkEnabled()
-        If (Not ucrReceiverTransformText.IsEmpty()) AndAlso ucrNewColName.IsComplete() Then
+        If (Not ucrReceiverTransformText.IsEmpty()) AndAlso ucrSaveNewColumn.IsComplete() Then
             If rdoConvertCase.Checked Then
                 If Not ucrInputTo.IsEmpty() Then
                     ucrBase.OKEnabled(True)
@@ -297,8 +306,8 @@ Public Class dlgTransformText
     End Sub
 
     Private Sub NewDefaultName()
-        If (Not ucrNewColName.bUserTyped) AndAlso Not ucrReceiverTransformText.IsEmpty Then
-            ucrNewColName.SetName(ucrReceiverTransformText.GetVariableNames(bWithQuotes:=False) & "_transformed")
+        If (Not ucrSaveNewColumn.bUserTyped) AndAlso Not ucrReceiverTransformText.IsEmpty Then
+            ucrSaveNewColumn.SetName(ucrReceiverTransformText.GetVariableNames(bWithQuotes:=False) & "_transformed")
         End If
     End Sub
 
@@ -306,60 +315,48 @@ Public Class dlgTransformText
         If rdoConvertCase.Checked OrElse rdoTrim.Checked Then
             grpParameters.Visible = True
             grpParameters.Size = New Size(grpParameters.Width, igrpParameterFullHeight / 3.04)
-            ucrNewColName.Location = New Point(ucrNewColName.Location.X, iNewColMaxY / 1.39)
+            ucrSaveNewColumn.Location = New Point(ucrSaveNewColumn.Location.X, iNewColMaxY / 1.39)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.36)
             Me.Size = New Size(Me.Width, iFullHeight / 1.27)
         ElseIf rdoLength.Checked Then
             grpParameters.Visible = False
-            ucrNewColName.Location = New Point(ucrNewColName.Location.X, iNewColMaxY / 1.76)
+            ucrSaveNewColumn.Location = New Point(ucrSaveNewColumn.Location.X, iNewColMaxY / 1.76)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.69)
             Me.Size = New Size(Me.Width, iFullHeight / 1.5)
         ElseIf rdoSubstring.Checked Then
             grpParameters.Visible = True
             grpParameters.Size = New Size(grpParameters.Width, igrpParameterFullHeight / 2.14)
-            ucrNewColName.Location = New Point(ucrNewColName.Location.X, iNewColMaxY / 1.28)
+            ucrSaveNewColumn.Location = New Point(ucrSaveNewColumn.Location.X, iNewColMaxY / 1.28)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.26)
             Me.Size = New Size(Me.Width, iFullHeight / 1.2)
         ElseIf rdoPad.Checked Then
             grpParameters.Visible = True
             grpParameters.Size = New Size(grpParameters.Width, igrpParameterFullHeight / 1.43)
-            ucrNewColName.Location = New Point(ucrNewColName.Location.X, iNewColMaxY / 1.14)
+            ucrSaveNewColumn.Location = New Point(ucrSaveNewColumn.Location.X, iNewColMaxY / 1.14)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.13)
             Me.Size = New Size(Me.Width, iFullHeight / 1.1)
         Else
             grpParameters.Visible = True
             grpParameters.Size = New Size(grpParameters.Width, igrpParameterFullHeight)
-            ucrNewColName.Location = New Point(ucrBase.Location.X, iNewColMaxY)
+            ucrSaveNewColumn.Location = New Point(ucrBase.Location.X, iNewColMaxY)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
             Me.Size = New Size(Me.Width, iFullHeight)
         End If
     End Sub
 
-    Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOperation.ControlValueChanged, ucrInputTo.ControlValueChanged
-        If bRCodeSet Then
-            If rdoLength.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsLengthFunction)
-            ElseIf rdoPad.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsPadFunction)
-            ElseIf rdoTrim.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsTrimFunction)
-            ElseIf rdoWords.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsWordsFunction)
-            ElseIf rdoSubstring.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsSubstringFunction)
-            ElseIf rdoConvertCase.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsConvertFunction)
-                Select Case ucrInputTo.GetText
-                    Case "Lower"
-                        ucrBase.clsRsyntax.SetFunction("str_to_lower")
-                    Case "Upper"
-                        ucrBase.clsRsyntax.SetFunction("str_to_upper")
-                    Case "Title"
-                        ucrBase.clsRsyntax.SetFunction("str_to_title")
-                End Select
-            End If
-            TestOkEnabled()
-            SetRCodeForControls(False)
+    Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOperation.ControlValueChanged
+        If rdoLength.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsLengthFunction)
+        ElseIf rdoPad.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsPadFunction)
+        ElseIf rdoTrim.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsTrimFunction)
+        ElseIf rdoWords.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsWordsFunction)
+        ElseIf rdoSubstring.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSubstringFunction)
+        ElseIf rdoConvertCase.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsConvertFunction)
         End If
     End Sub
 
@@ -402,7 +399,18 @@ Public Class dlgTransformText
         NewDefaultName()
     End Sub
 
-    Private Sub ucrReceiverTransformText_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstWord.ControlContentsChanged, ucrNudWidth.ControlContentsChanged, ucrNudFirstWord.ControlContentsChanged, ucrNudLastWord.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrNudTo.ControlContentsChanged, ucrReceiverLastWord.ControlContentsChanged, ucrReceiverTransformText.ControlContentsChanged, ucrPnlOperation.ControlContentsChanged, ucrInputPad.ControlContentsChanged, ucrNewColName.ControlContentsChanged, ucrInputSeparator.ControlContentsChanged, ucrInputTo.ControlContentsChanged, ucrChkFirstOr.ControlContentsChanged, ucrChkLastOr.ControlContentsChanged
+    Private Sub ucrReceiverTransformText_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstWord.ControlContentsChanged, ucrNudWidth.ControlContentsChanged, ucrNudFirstWord.ControlContentsChanged, ucrNudLastWord.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrNudTo.ControlContentsChanged, ucrReceiverLastWord.ControlContentsChanged, ucrReceiverTransformText.ControlContentsChanged, ucrPnlOperation.ControlContentsChanged, ucrInputPad.ControlContentsChanged, ucrSaveNewColumn.ControlContentsChanged, ucrInputSeparator.ControlContentsChanged, ucrInputTo.ControlContentsChanged, ucrChkFirstOr.ControlContentsChanged, ucrChkLastOr.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrInputTo_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTo.ControlValueChanged
+        Select Case ucrInputTo.GetText
+            Case "Lower"
+                ucrBase.clsRsyntax.SetFunction("str_to_lower")
+            Case "Upper"
+                ucrBase.clsRsyntax.SetFunction("str_to_upper")
+            Case "Title"
+                ucrBase.clsRsyntax.SetFunction("str_to_title")
+        End Select
     End Sub
 End Class
