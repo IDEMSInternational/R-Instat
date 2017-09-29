@@ -315,6 +315,7 @@ Public Class RLink
         Dim strTempGraphsDirectory As String
         Dim clsPNGFunction As New RFunction
         Dim strTempAssignTo As String = ".temp_val"
+        Dim bSuccess As Boolean
 
         strTempGraphsDirectory = System.IO.Path.Combine(System.IO.Path.GetTempPath() & "R_Instat_Temp_Graphs")
         strOutput = ""
@@ -354,7 +355,14 @@ Public Class RLink
                         clsPNGFunction.AddParameter("width", 4000)
                         clsPNGFunction.AddParameter("height", 4000)
                         clsPNGFunction.AddParameter("res", 500)
-                        Evaluate(clsPNGFunction.ToScript(), bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                        bSuccess = Evaluate(clsPNGFunction.ToScript(), bSilent:=True, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                        ' Temporary solution to being unable to save graphs in a temporary location for display.
+                        ' This can occur if System.IO.Path.GetTempPath() returns a path that is not writable.
+                        If Not bSuccess Then
+                            Evaluate("graphics.off()", bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                            strGraphDisplayOption = "view_R_viewer"
+                            MsgBox("A problem occured saving your graph in the temporary location: " & strTempGraphsDirectory & vbNewLine & vbNewLine & "To ensure graphs can be viewed, graphs will now appear in a pop up R viewer. You can change this setting in Tools > Options: Graph Display if this later becomes resolved.", MsgBoxStyle.Exclamation)
+                        End If
                         'need to boost resolution of the devices, it's not as good as with ggsave.
                     End If
                 End If
