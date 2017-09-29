@@ -108,9 +108,6 @@ Public Class dlgCountryColouredMap
         clsCoordMap.SetPackageName("ggplot2")
         clsCoordMap.SetRCommand("coord_quickmap")
         clsBaseOperator.AddParameter("coordquickmap", clsRFunctionParameter:=clsCoordMap, iPosition:=2)
-        ucrBase.clsRsyntax.ClearCodes()
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsMapDataFunction, iPosition:=1)
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsJoinFunction, iPosition:=2)
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorCountryColouredMap.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
     End Sub
