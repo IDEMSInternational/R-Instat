@@ -663,12 +663,6 @@ Public Class ucrDataView
         End If
     End Sub
 
-    'Private Sub mnuConvert_Click(sender As Object, e As EventArgs)
-    '    'TODO Selected column should automatically appear in dialog
-    '    dlgConvertColumns.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
-    '    dlgConvertColumns.ShowDialog()
-    'End Sub
-
     Private Sub copyRangeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles copyRangeToolStripMenuItem.Click
         grdData.CurrentWorksheet.Copy()
     End Sub

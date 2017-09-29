@@ -54,6 +54,7 @@ Partial Class ucrColumnMetadata
         Me.mnuConvertToLogical = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuConvertVariate = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLabelsLevels = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuFreezeToHere = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuUnfreeze = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
@@ -62,7 +63,6 @@ Partial Class ucrColumnMetadata
         Me.mnuClearColumnFilter = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
         Me.SuspendLayout()
@@ -90,7 +90,7 @@ Partial Class ucrColumnMetadata
         '
         Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuReoderColumns, Me.mnuDuplicateColumn, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertToLogical, Me.mnuConvertVariate, Me.mnuLabelsLevels, Me.ToolStripSeparator1, Me.mnuFreezeToHere, Me.mnuUnfreeze, Me.ToolStripSeparator3, Me.mnuSort, Me.mnuColumnFilter, Me.mnuClearColumnFilter})
         Me.columnContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.columnContextMenuStrip.Size = New System.Drawing.Size(213, 418)
+        Me.columnContextMenuStrip.Size = New System.Drawing.Size(213, 396)
         '
         'mnuColumnRename
         '
@@ -170,6 +170,11 @@ Partial Class ucrColumnMetadata
         Me.mnuLabelsLevels.Text = "Labels/Levels..."
         Me.mnuLabelsLevels.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage
         '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(209, 6)
+        '
         'mnuFreezeToHere
         '
         Me.mnuFreezeToHere.Name = "mnuFreezeToHere"
@@ -232,11 +237,6 @@ Partial Class ucrColumnMetadata
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.tlpTableContainer.Size = New System.Drawing.Size(344, 138)
         Me.tlpTableContainer.TabIndex = 7
-        '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(209, 6)
         '
         'ucrColumnMetadata
         '

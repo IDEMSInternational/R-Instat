@@ -235,18 +235,18 @@ Public Class ucrColumnMetadata
         RunScriptFromColumnMetadata(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Logical")
     End Sub
 
-    Private Sub clearColumnFilterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClearColumnFilter.Click
+    Private Sub mnuClearColumnFilter_Click(sender As Object, e As EventArgs) Handles mnuClearColumnFilter.Click
         RunScriptFromColumnMetadata(clsRemoveFilter.ToScript(), strComment:="Right click menu: Remove Current Filter")
     End Sub
 
-    Private Sub SortToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuSort.Click
+    Private Sub mnuSort_Click(sender As Object, e As EventArgs) Handles mnuSort.Click
         dlgSort.ShowDialog()
     End Sub
 
-    Private Sub mnuConvertDate_Click(sender As Object, e As EventArgs)
-        dlgMakeDate.SetCurrentColumn(GetSelectedVariableNamesAsArray()(0), grdCurrSheet.Name)
-        dlgMakeDate.ShowDialog()
-    End Sub
+    'Private Sub mnuConvertDate_Click(sender As Object, e As EventArgs)
+    '    dlgMakeDate.SetCurrentColumn(GetSelectedVariableNamesAsArray()(0), grdCurrSheet.Name)
+    '    dlgMakeDate.ShowDialog()
+    'End Sub
 
     Private Sub mnuCovertToOrderedFactors_Click(sender As Object, e As EventArgs) Handles mnuCovertToOrderedFactors.Click
         clsConvertOrderedFactor.AddParameter("col_names", GetSelectedVariableNames())
@@ -259,7 +259,7 @@ Public Class ucrColumnMetadata
         dlgDuplicateColumns.ShowDialog()
     End Sub
 
-    Private Sub columnFilterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuColumnFilter.Click
+    Private Sub mnuColumnFilter_Click(sender As Object, e As EventArgs) Handles mnuColumnFilter.Click
         dlgRestrict.bIsSubsetDialog = False
         dlgRestrict.strDefaultDataframe = grdCurrSheet.Name
         dlgRestrict.ShowDialog()
@@ -270,7 +270,6 @@ Public Class ucrColumnMetadata
         clsConvertTo.AddParameter("col_names", GetSelectedVariableNames())
         RunScriptFromColumnMetadata(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Factor")
     End Sub
-
 
     'Private Sub mnuUnhideAllColumns_Click(sender As Object, e As EventArgs)
     '    RunScriptFromColumnMetadata(clsUnhideAllColumns.ToScript(), strComment:="Right click menu: Unhide all columns")
