@@ -372,4 +372,12 @@ Public Class ucrColumnMetadata
         'TODO Selected column should automatically appear in dialog
         dlgConvertColumns.ShowDialog()
     End Sub
+
+    Private Sub mnuReoderColumns_Click(sender As Object, e As EventArgs) Handles mnuReoderColumns.Click
+        dlgReorderColumns.ShowDialog()
+    End Sub
+
+    Private Sub mnuLabelsLevels_Click(sender As Object, e As EventArgs) Handles mnuLabelsLevels.Click
+        dlgLabelsLevels.ShowDialog()
+    End Sub
 End Class
