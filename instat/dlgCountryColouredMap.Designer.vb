@@ -36,9 +36,9 @@ Partial Class dlgCountryColouredMap
         Me.lblCountry.AutoSize = True
         Me.lblCountry.Location = New System.Drawing.Point(235, 44)
         Me.lblCountry.Name = "lblCountry"
-        Me.lblCountry.Size = New System.Drawing.Size(46, 13)
+        Me.lblCountry.Size = New System.Drawing.Size(54, 13)
         Me.lblCountry.TabIndex = 4
-        Me.lblCountry.Text = "Country:"
+        Me.lblCountry.Text = "Countries:"
         '
         'lblColourBy
         '

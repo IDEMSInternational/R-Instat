@@ -53,7 +53,8 @@ Public Class dlgCountryColouredMap
         ucrReceiverCountry.SetParameterIsString()
 
         ucrReceiverColourBy.SetParameter(New RParameter("fill", 3))
-        ucrReceiverColourBy.SetParameterIsRFunction()
+        ucrReceiverColourBy.SetParameterIsString()
+        ucrReceiverColourBy.bWithQuotes = False
 
         ucrSaveMap.SetPrefix("Map")
         ucrSaveMap.SetSaveTypeAsGraph()
@@ -100,7 +101,7 @@ Public Class dlgCountryColouredMap
 
         clsRaesFunc.SetPackageName("ggplot2")
         clsRaesFunc.SetRCommand("aes")
-        clsRGeomPolygon.AddParameter("aes", clsRFunctionParameter:=clsRaesFunc, iPosition:=1, bIncludeArgumentName:=False)
+        clsRGeomPolygon.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunc, iPosition:=1)
         clsRaesFunc.AddParameter("x", "long", iPosition:=0)
         clsRaesFunc.AddParameter("y", "lat", iPosition:=1)
         clsRaesFunc.AddParameter("group", "group")
