@@ -36,9 +36,9 @@ Partial Class dlgCountryColouredMap
         Me.lblCountry.AutoSize = True
         Me.lblCountry.Location = New System.Drawing.Point(235, 44)
         Me.lblCountry.Name = "lblCountry"
-        Me.lblCountry.Size = New System.Drawing.Size(43, 13)
+        Me.lblCountry.Size = New System.Drawing.Size(46, 13)
         Me.lblCountry.TabIndex = 4
-        Me.lblCountry.Text = "Country"
+        Me.lblCountry.Text = "Country:"
         '
         'lblColourBy
         '
@@ -53,7 +53,7 @@ Partial Class dlgCountryColouredMap
         '
         Me.ucrSaveMap.Location = New System.Drawing.Point(10, 209)
         Me.ucrSaveMap.Name = "ucrSaveMap"
-        Me.ucrSaveMap.Size = New System.Drawing.Size(268, 24)
+        Me.ucrSaveMap.Size = New System.Drawing.Size(271, 24)
         Me.ucrSaveMap.TabIndex = 6
         '
         'ucrReceiverColourBy
