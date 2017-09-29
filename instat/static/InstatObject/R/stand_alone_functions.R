@@ -943,3 +943,9 @@ duplicated_cases <- function(col_name, ignore = NULL, tolerance=0.01) {
   }
   return(col_data1)
 }
+
+get_installed_packages_with_data <- function() {
+  pack_data <- data(package = .packages(all.available = TRUE))
+  pack_data <- pack_data[["results"]]
+  return(unique(pack_data[,1]))
+}
