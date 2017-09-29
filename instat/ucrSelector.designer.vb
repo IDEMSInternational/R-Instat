@@ -59,6 +59,7 @@ Partial Class ucrSelector
         Me.lstAvailableVariable.HideSelection = False
         Me.lstAvailableVariable.Location = New System.Drawing.Point(0, 0)
         Me.lstAvailableVariable.Name = "lstAvailableVariable"
+        Me.lstAvailableVariable.ShowItemToolTips = True
         Me.lstAvailableVariable.Size = New System.Drawing.Size(120, 130)
         Me.lstAvailableVariable.TabIndex = 83
         Me.lstAvailableVariable.UseCompatibleStateImageBehavior = False

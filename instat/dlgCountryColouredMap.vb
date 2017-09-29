@@ -41,6 +41,7 @@ Public Class dlgCountryColouredMap
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
         ucrReceiverCountry.Selector = ucrSelectorCountryColouredMap
         ucrReceiverColourBy.Selector = ucrSelectorCountryColouredMap
