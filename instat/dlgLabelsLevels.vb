@@ -33,6 +33,9 @@ Public Class dlgLabelsLevels
         SetRCodeforControls(bReset)
         bReset = False
         autoTranslate(Me)
+        If bUseSelectedColumn Then
+            SetDefaultColumn()
+        End If
     End Sub
 
     Private Sub InitialiseDialog()
@@ -71,6 +74,12 @@ Public Class dlgLabelsLevels
         strSelectedColumn = strColumn
         strSelectedDataFrame = strDataFrame
         bUseSelectedColumn = True
+    End Sub
+
+    Private Sub SetDefaultColumn()
+        ucrSelectorForLabels.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = strSelectedDataFrame
+        ucrReceiverLabels.Add(strSelectedColumn, strSelectedDataFrame)
+        bUseSelectedColumn = False
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
