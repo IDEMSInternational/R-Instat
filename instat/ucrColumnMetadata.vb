@@ -240,6 +240,7 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Sub mnuSort_Click(sender As Object, e As EventArgs) Handles mnuSort.Click
+        dlgSort.SetCurrentColumn(GetSelectedVariableNamesAsArray()(0), grdCurrSheet.Name)
         dlgSort.ShowDialog()
     End Sub
 
@@ -377,6 +378,7 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Sub mnuLabelsLevels_Click(sender As Object, e As EventArgs) Handles mnuLabelsLevels.Click
+        dlgLabelsLevels.SetCurrentColumn(GetSelectedVariableNamesAsArray()(0), grdCurrSheet.Name)
         dlgLabelsLevels.ShowDialog()
     End Sub
 End Class
