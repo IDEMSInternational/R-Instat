@@ -20,6 +20,8 @@ Public Class dlgReplaceValues
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsReplace As New RFunction
+    Private strVarType As String = ""
+
     Private Sub dlgReplace_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -158,7 +160,7 @@ Public Class dlgReplaceValues
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrReceiverReplace.IsEmpty() OrElse (rdoOldInterval.Checked AndAlso (ucrInputRangeFrom.IsEmpty() OrElse ucrInputRangeTo.IsEmpty())) Then
+        If ucrReceiverReplace.IsEmpty() OrElse (rdoOldInterval.Checked AndAlso (ucrInputRangeFrom.IsEmpty() OrElse ucrInputRangeTo.IsEmpty())) OrElse (rdoOldValue.Checked AndAlso ucrInputOldValue.IsEmpty AndAlso {"numeric", "integer"}.Contains(strVarType)) OrElse (rdoNewValue.Checked AndAlso ucrInputNewValue.IsEmpty AndAlso {"numeric", "integer"}.Contains(strVarType)) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -172,8 +174,6 @@ Public Class dlgReplaceValues
     End Sub
 
     Private Sub InputValue()
-        Dim strVarType As String
-
         If Not ucrReceiverReplace.IsEmpty AndAlso ucrReceiverReplace.GetCurrentItemTypes(True).Count > 0 Then
             strVarType = ucrReceiverReplace.GetCurrentItemTypes(True)(0)
             If rdoOldValue.Checked Then
@@ -215,6 +215,7 @@ Public Class dlgReplaceValues
                 clsReplace.RemoveParameterByName("from_last")
             End If
         Else
+            strVarType = ""
         End If
     End Sub
 
