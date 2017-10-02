@@ -158,14 +158,10 @@ Public Class dlgReplaceValues
     End Sub
 
     Private Sub TestOKEnabled()
-        If (Not ucrReceiverReplace.IsEmpty()) Then
-            If (((rdoOldValue.Checked AndAlso Not ucrInputOldValue.IsEmpty) OrElse (rdoOldInterval.Checked AndAlso Not ucrInputRangeFrom.IsEmpty() AndAlso Not ucrInputRangeTo.IsEmpty()) OrElse rdoOldMissing.Checked) AndAlso ((rdoNewValue.Checked AndAlso Not ucrInputNewValue.IsEmpty) OrElse rdoNewMissing.Checked) OrElse rdoNewFromBelow.Checked OrElse rdoNewFromAbove.Checked) Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
-        Else
+        If ucrReceiverReplace.IsEmpty() OrElse (rdoOldInterval.Checked AndAlso (ucrInputRangeFrom.IsEmpty() OrElse ucrInputRangeTo.IsEmpty())) Then
             ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
         End If
     End Sub
 
@@ -178,7 +174,7 @@ Public Class dlgReplaceValues
     Private Sub InputValue()
         Dim strVarType As String
 
-        If Not ucrReceiverReplace.IsEmpty Then
+        If Not ucrReceiverReplace.IsEmpty AndAlso ucrReceiverReplace.GetCurrentItemTypes(True).Count > 0 Then
             strVarType = ucrReceiverReplace.GetCurrentItemTypes(True)(0)
             If rdoOldValue.Checked Then
                 If (strVarType = "numeric" OrElse strVarType = "integer") Then
@@ -225,7 +221,7 @@ Public Class dlgReplaceValues
     Private Sub EnableRange()
         Dim strVarType As String
 
-        If Not ucrReceiverReplace.IsEmpty Then
+        If Not ucrReceiverReplace.IsEmpty AndAlso ucrReceiverReplace.GetCurrentItemTypes(True).Count > 0 Then
             strVarType = ucrReceiverReplace.GetCurrentItemTypes(True)(0)
         Else
             strVarType = ""
