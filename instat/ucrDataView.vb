@@ -20,6 +20,7 @@ Imports System.Globalization
 Imports System.Threading
 Imports instat.Translations
 Imports unvell.ReoGrid.Events
+Imports System.ComponentModel
 
 Public Class ucrDataView
     'Public clearFilter As unvell.ReoGrid.Data.AutoColumnFilter
@@ -418,19 +419,19 @@ Public Class ucrDataView
                     Else
                         MsgBox("Invalid value: " & strNewValue & Environment.NewLine & "This column is: integer. Values must be integer.", MsgBoxStyle.Exclamation, "Invalid Value")
                     End If
-                'Currently removed as this is the class for a blank column
-                'Case "logical"
-                '    'Should we accept 'true'/'false'/'True' etc. as logical values?
-                '    If e.NewData = "TRUE" OrElse e.NewData = "FALSE" Then
-                '        clsReplaceValue.AddParameter("new_value", e.NewData)
-                '        bValid = True
-                '    Else
-                '        MsgBox("Invalid value: " & e.NewData.ToString() & Environment.NewLine & "This column is: logical. Values must be logical (either TRUE or FALSE).", MsgBoxStyle.Exclamation, "Invalid Value")
-                '        e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
-                '    End If
-                'Case "character"
-                'clsReplaceValue.AddParameter("new_value", Chr(34) & e.NewData & Chr(34))
-                'bValid = True
+                    'Currently removed as this is the class for a blank column
+                    'Case "logical"
+                    '    'Should we accept 'true'/'false'/'True' etc. as logical values?
+                    '    If e.NewData = "TRUE" OrElse e.NewData = "FALSE" Then
+                    '        clsReplaceValue.AddParameter("new_value", e.NewData)
+                    '        bValid = True
+                    '    Else
+                    '        MsgBox("Invalid value: " & e.NewData.ToString() & Environment.NewLine & "This column is: logical. Values must be logical (either TRUE or FALSE).", MsgBoxStyle.Exclamation, "Invalid Value")
+                    '        e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
+                    '    End If
+                    'Case "character"
+                    'clsReplaceValue.AddParameter("new_value", Chr(34) & e.NewData & Chr(34))
+                    'bValid = True
                 Case Else
                     If Double.TryParse(strNewValue, dblValue) OrElse strNewValue = "TRUE" OrElse strNewValue = "FALSE" Then
                         clsReplaceValue.AddParameter("new_value", strNewValue)
@@ -463,7 +464,16 @@ Public Class ucrDataView
     End Sub
 
     Private Sub mnuLevelsLabels_Click(sender As Object, e As EventArgs) Handles mnuLevelsLabels.Click
-        dlgLabelsLevels.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
+        Dim strType As String
+        Dim strColumns() As String
+
+        strColumns = SelectedColumnsAsArray()
+        If strColumns.Count = 1 Then
+            strType = frmMain.clsRLink.GetColumnType(grdCurrSheet.Name, strColumns(0))
+            If strType = "factor" Then
+                dlgLabelsLevels.SetCurrentColumn(strColumns(0), grdCurrSheet.Name)
+            End If
+        End If
         dlgLabelsLevels.ShowDialog()
     End Sub
 
@@ -718,7 +728,25 @@ Public Class ucrDataView
         Cursor = Cursors.Default
     End Sub
 
-    Private Sub mnuReoderColumns_Click(sender As Object, e As EventArgs) Handles mnuReoderColumns.Click
-        dlgReorderColumns.ShowDialog()
+    Private Sub columnContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles columnContextMenuStrip.Opening
+        Dim iSelectedCols As Integer
+        Dim strType As String
+        Dim strColumns() As String
+
+        iSelectedCols = grdData.CurrentWorksheet.SelectionRange.Cols
+        strColumns = SelectedColumnsAsArray()
+
+        If iSelectedCols = 1 Then
+            strType = frmMain.clsRLink.GetColumnType(grdCurrSheet.Name, strColumns(0))
+            mnuLevelsLabels.Enabled = (strType = "factor")
+            mnuDeleteCol.Text = "Delete Column"
+            mnuInsertColsBefore.Text = "Insert 1 Column Before"
+            mnuInsertColsAfter.Text = "Insert 1 Column After"
+        Else
+            mnuLevelsLabels.Enabled = False
+            mnuDeleteCol.Text = "Delete Columns"
+            mnuInsertColsBefore.Text = "Insert " & iSelectedCols & " Columns Before"
+            mnuInsertColsAfter.Text = "Insert " & iSelectedCols & " Columns After"
+        End If
     End Sub
 End Class
