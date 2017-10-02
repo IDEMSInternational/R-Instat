@@ -38,8 +38,8 @@ Public Class ucrColumnMetadata
     Private Sub frmVariables_Load(sender As Object, e As EventArgs) Handles Me.Load
         loadForm()
         SetRFunctions()
-        FreezeToHereToolStripMenuItem.Enabled = False
-        UnfreezeToolStripMenuItem.Enabled = False
+        mnuFreezeToHere.Enabled = False
+        mnuUnfreeze.Enabled = False
         mnuInsertColsAfter.Enabled = False
         mnuInsertColsBefore.Enabled = False
         '  grdVariables.RowHeaderContextMenuStrip = frmMain.ucrDataViewer.grdData.ColumnHeaderContextMenuStrip
@@ -235,18 +235,19 @@ Public Class ucrColumnMetadata
         RunScriptFromColumnMetadata(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Logical")
     End Sub
 
-    Private Sub clearColumnFilterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles clearColumnFilterToolStripMenuItem.Click
+    Private Sub mnuClearColumnFilter_Click(sender As Object, e As EventArgs) Handles mnuClearColumnFilter.Click
         RunScriptFromColumnMetadata(clsRemoveFilter.ToScript(), strComment:="Right click menu: Remove Current Filter")
     End Sub
 
-    Private Sub SortToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SortToolStripMenuItem.Click
+    Private Sub mnuSort_Click(sender As Object, e As EventArgs) Handles mnuSort.Click
+        dlgSort.SetCurrentColumn(GetSelectedVariableNamesAsArray()(0), grdCurrSheet.Name)
         dlgSort.ShowDialog()
     End Sub
 
-    Private Sub mnuConvertDate_Click(sender As Object, e As EventArgs) Handles mnuConvertToDate.Click
-        dlgMakeDate.SetCurrentColumn(GetSelectedVariableNamesAsArray()(0), grdCurrSheet.Name)
-        dlgMakeDate.ShowDialog()
-    End Sub
+    'Private Sub mnuConvertDate_Click(sender As Object, e As EventArgs)
+    '    dlgMakeDate.SetCurrentColumn(GetSelectedVariableNamesAsArray()(0), grdCurrSheet.Name)
+    '    dlgMakeDate.ShowDialog()
+    'End Sub
 
     Private Sub mnuCovertToOrderedFactors_Click(sender As Object, e As EventArgs) Handles mnuCovertToOrderedFactors.Click
         clsConvertOrderedFactor.AddParameter("col_names", GetSelectedVariableNames())
@@ -259,7 +260,7 @@ Public Class ucrColumnMetadata
         dlgDuplicateColumns.ShowDialog()
     End Sub
 
-    Private Sub columnFilterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles columnFilterToolStripMenuItem.Click
+    Private Sub mnuColumnFilter_Click(sender As Object, e As EventArgs) Handles mnuColumnFilter.Click
         dlgRestrict.bIsSubsetDialog = False
         dlgRestrict.strDefaultDataframe = grdCurrSheet.Name
         dlgRestrict.ShowDialog()
@@ -271,23 +272,22 @@ Public Class ucrColumnMetadata
         RunScriptFromColumnMetadata(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Factor")
     End Sub
 
+    'Private Sub mnuUnhideAllColumns_Click(sender As Object, e As EventArgs)
+    '    RunScriptFromColumnMetadata(clsUnhideAllColumns.ToScript(), strComment:="Right click menu: Unhide all columns")
+    'End Sub
 
-    Private Sub mnuUnhideAllColumns_Click(sender As Object, e As EventArgs) Handles mnuUnhideAllColumns.Click
-        RunScriptFromColumnMetadata(clsUnhideAllColumns.ToScript(), strComment:="Right click menu: Unhide all columns")
-    End Sub
+    'Private Sub mnuUnhideColumns_Click(sender As Object, e As EventArgs)
+    '    dlgHideShowColumns.ShowDialog()
+    '    'grdData.DoAction(New unvell.ReoGrid.Actions.UnhideColumnsAction(grdData.CurrentWorksheet.SelectionRange.Col, grdData.CurrentWorksheet.SelectionRange.Cols))
+    'End Sub
 
-    Private Sub mnuUnhideColumns_Click(sender As Object, e As EventArgs) Handles mnuUnhideColumns.Click
-        dlgHideShowColumns.ShowDialog()
-        'grdData.DoAction(New unvell.ReoGrid.Actions.UnhideColumnsAction(grdData.CurrentWorksheet.SelectionRange.Col, grdData.CurrentWorksheet.SelectionRange.Cols))
-    End Sub
-
-    Private Sub mnuHideColumns_Click(sender As Object, e As EventArgs) Handles mnuHideColumns.Click
-        clsAppendVariablesMetaData.AddParameter("col_names", GetSelectedVariableNames())
-        clsAppendVariablesMetaData.AddParameter("property", "is_hidden_label")
-        clsAppendVariablesMetaData.AddParameter("new_val", "TRUE")
-        RunScriptFromColumnMetadata(clsAppendVariablesMetaData.ToScript(), strComment:="Right click menu: Hide column(s)" & GetSelectedVariableNames())
-        'grdData.DoAction(New unvell.ReoGrid.Actions.HideColumnsAction(grdData.CurrentWorksheet.SelectionRange.Col, grdData.CurrentWorksheet.SelectionRange.Cols))
-    End Sub
+    'Private Sub mnuHideColumns_Click(sender As Object, e As EventArgs)
+    '    clsAppendVariablesMetaData.AddParameter("col_names", GetSelectedVariableNames())
+    '    clsAppendVariablesMetaData.AddParameter("property", "is_hidden_label")
+    '    clsAppendVariablesMetaData.AddParameter("new_val", "TRUE")
+    '    RunScriptFromColumnMetadata(clsAppendVariablesMetaData.ToScript(), strComment:="Right click menu: Hide column(s)" & GetSelectedVariableNames())
+    '    'grdData.DoAction(New unvell.ReoGrid.Actions.HideColumnsAction(grdData.CurrentWorksheet.SelectionRange.Col, grdData.CurrentWorksheet.SelectionRange.Cols))
+    'End Sub
 
     Private Function GetSelectedVariableNames(Optional bWithQuotes As Boolean = True) As String
         Dim lstSelectedVars As New List(Of String)
@@ -368,8 +368,17 @@ Public Class ucrColumnMetadata
         dlgName.ShowDialog()
     End Sub
 
-    Private Sub mnuConvert_Click(sender As Object, e As EventArgs) Handles mnuConvert.Click
+    Private Sub mnuConvert_Click(sender As Object, e As EventArgs)
         'TODO Selected column should automatically appear in dialog
         dlgConvertColumns.ShowDialog()
+    End Sub
+
+    Private Sub mnuReoderColumns_Click(sender As Object, e As EventArgs) Handles mnuReoderColumns.Click
+        dlgReorderColumns.ShowDialog()
+    End Sub
+
+    Private Sub mnuLabelsLevels_Click(sender As Object, e As EventArgs) Handles mnuLabelsLevels.Click
+        dlgLabelsLevels.SetCurrentColumn(GetSelectedVariableNamesAsArray()(0), grdCurrSheet.Name)
+        dlgLabelsLevels.ShowDialog()
     End Sub
 End Class
