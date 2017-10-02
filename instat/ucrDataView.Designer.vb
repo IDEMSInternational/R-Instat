@@ -42,7 +42,6 @@ Partial Class ucrDataView
         Me.grdData = New unvell.ReoGrid.ReoGridControl()
         Me.columnContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuColumnRename = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuReoderColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDuplicateColumn = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuInsertColsBefore = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuInsertColsAfter = New System.Windows.Forms.ToolStripMenuItem()
@@ -89,6 +88,7 @@ Partial Class ucrDataView
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
         Me.pnlDataContainer = New System.Windows.Forms.Panel()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowContextMenuStrip.SuspendLayout()
@@ -118,21 +118,15 @@ Partial Class ucrDataView
         '
         'columnContextMenuStrip
         '
-        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuReoderColumns, Me.mnuDuplicateColumn, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertToLogical, Me.mnuConvertVariate, Me.mnuLevelsLabels, Me.toolStripMenuItem21, Me.mnuFreezeToHere, Me.mnuUnfreeze, Me.ToolStripSeparator3, Me.mnuSort, Me.mnuColumnFilter, Me.mnuClearColumnFilter})
+        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuDuplicateColumn, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertToLogical, Me.mnuConvertVariate, Me.ToolStripSeparator1, Me.mnuLevelsLabels, Me.toolStripMenuItem21, Me.mnuFreezeToHere, Me.mnuUnfreeze, Me.ToolStripSeparator3, Me.mnuSort, Me.mnuColumnFilter, Me.mnuClearColumnFilter})
         Me.columnContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.columnContextMenuStrip.Size = New System.Drawing.Size(213, 418)
+        Me.columnContextMenuStrip.Size = New System.Drawing.Size(213, 402)
         '
         'mnuColumnRename
         '
         Me.mnuColumnRename.Name = "mnuColumnRename"
         Me.mnuColumnRename.Size = New System.Drawing.Size(212, 22)
         Me.mnuColumnRename.Text = "Rename Column..."
-        '
-        'mnuReoderColumns
-        '
-        Me.mnuReoderColumns.Name = "mnuReoderColumns"
-        Me.mnuReoderColumns.Size = New System.Drawing.Size(212, 22)
-        Me.mnuReoderColumns.Text = "Reoder Columns..."
         '
         'mnuDuplicateColumn
         '
@@ -445,6 +439,11 @@ Partial Class ucrDataView
         Me.pnlDataContainer.Size = New System.Drawing.Size(438, 238)
         Me.pnlDataContainer.TabIndex = 7
         '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(209, 6)
+        '
         'ucrDataView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -511,6 +510,6 @@ Partial Class ucrDataView
     Friend WithEvents mnuConvertToLogical As ToolStripMenuItem
     Friend WithEvents tlpTableContainer As TableLayoutPanel
     Friend WithEvents pnlDataContainer As Panel
-    Friend WithEvents mnuReoderColumns As ToolStripMenuItem
     Friend WithEvents mnuLevelsLabels As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
 End Class

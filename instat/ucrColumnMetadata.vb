@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.ComponentModel
 Imports instat.Translations
 Imports unvell.ReoGrid.Events
 
@@ -373,12 +374,30 @@ Public Class ucrColumnMetadata
         dlgConvertColumns.ShowDialog()
     End Sub
 
-    Private Sub mnuReoderColumns_Click(sender As Object, e As EventArgs) Handles mnuReoderColumns.Click
-        dlgReorderColumns.ShowDialog()
-    End Sub
-
-    Private Sub mnuLabelsLevels_Click(sender As Object, e As EventArgs) Handles mnuLabelsLevels.Click
+    Private Sub mnuLabelsLevels_Click(sender As Object, e As EventArgs) Handles mnuLevelsLabels.Click
         dlgLabelsLevels.SetCurrentColumn(GetSelectedVariableNamesAsArray()(0), grdCurrSheet.Name)
         dlgLabelsLevels.ShowDialog()
+    End Sub
+
+    Private Sub columnContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles columnContextMenuStrip.Opening
+        Dim iSelectedCols As Integer
+        Dim strType As String
+        Dim strColumns() As String
+
+        iSelectedCols = grdVariables.CurrentWorksheet.SelectionRange.Rows
+        strColumns = GetSelectedVariableNamesAsArray()
+
+        If iSelectedCols = 1 Then
+            strType = frmMain.clsRLink.GetColumnType(grdCurrSheet.Name, strColumns(0))
+            mnuLevelsLabels.Enabled = (strType = "factor")
+            mnuDeleteCol.Text = "Delete Column"
+            mnuInsertColsBefore.Text = "Insert 1 Column Before"
+            mnuInsertColsAfter.Text = "Insert 1 Column After"
+        Else
+            mnuLevelsLabels.Enabled = False
+            mnuDeleteCol.Text = "Delete Columns"
+            mnuInsertColsBefore.Text = "Insert " & iSelectedCols & " Columns Before"
+            mnuInsertColsAfter.Text = "Insert " & iSelectedCols & " Columns After"
+        End If
     End Sub
 End Class
