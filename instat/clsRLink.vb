@@ -315,6 +315,7 @@ Public Class RLink
         Dim strTempGraphsDirectory As String
         Dim clsPNGFunction As New RFunction
         Dim strTempAssignTo As String = ".temp_val"
+        Dim bSuccess As Boolean
 
         strTempGraphsDirectory = System.IO.Path.Combine(System.IO.Path.GetTempPath() & "R_Instat_Temp_Graphs")
         strOutput = ""
@@ -354,7 +355,14 @@ Public Class RLink
                         clsPNGFunction.AddParameter("width", 4000)
                         clsPNGFunction.AddParameter("height", 4000)
                         clsPNGFunction.AddParameter("res", 500)
-                        Evaluate(clsPNGFunction.ToScript(), bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                        bSuccess = Evaluate(clsPNGFunction.ToScript(), bSilent:=True, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                        ' Temporary solution to being unable to save graphs in a temporary location for display.
+                        ' This can occur if System.IO.Path.GetTempPath() returns a path that is not writable.
+                        If Not bSuccess Then
+                            Evaluate("graphics.off()", bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                            strGraphDisplayOption = "view_R_viewer"
+                            MsgBox("A problem occured saving your graph in the temporary location: " & strTempGraphsDirectory & vbNewLine & vbNewLine & "To ensure graphs can be viewed, graphs will now appear in a pop up R viewer. You can change this setting in Tools > Options: Graph Display if this later becomes resolved.", MsgBoxStyle.Exclamation)
+                        End If
                         'need to boost resolution of the devices, it's not as good as with ggsave.
                     End If
                 End If
@@ -706,6 +714,12 @@ Public Class RLink
         Dim kvpInclude As KeyValuePair(Of String, String())
         Dim kvpExclude As KeyValuePair(Of String, String())
         Dim expItems As SymbolicExpression
+        Dim clsGetColumnTypes As New RFunction
+        Dim strCurrColumnTypes() As String
+        Dim clsGetColumnLabels As New RFunction
+        Dim strCurrColumnLables() As String
+        Dim strColumnsRList As String
+        Dim strTemp As String
 
         If bInstatObjectExists Then
             Select Case strType
@@ -771,14 +785,52 @@ Public Class RLink
                         For j = 0 To chrCurrColumns.Count - 1
                             lstView.Items.Add(chrCurrColumns(j))
                             lstView.Items(j).Tag = vecColumns.Names(i)
+                            lstView.Items(j).ToolTipText = chrCurrColumns(j)
                             If vecColumns.Count > 1 Then
                                 lstView.Items(j).Group = lstView.Groups(i)
                             End If
                         Next
+                        If strType = "column" Then
+                            strColumnsRList = GetListAsRString(chrCurrColumns.ToList)
+                            clsGetColumnTypes.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_data_types")
+                            clsGetColumnTypes.AddParameter("data_name", Chr(34) & vecColumns.Names(i) & Chr(34))
+                            clsGetColumnTypes.AddParameter("columns", strColumnsRList)
+                            expItems = RunInternalScriptGetValue(clsGetColumnTypes.ToScript(), bSilent:=True)
+                            If expItems IsNot Nothing AndAlso Not expItems.Type = Internals.SymbolicExpressionType.Null Then
+                                strCurrColumnTypes = expItems.AsCharacter.ToArray
+                            Else
+                                strCurrColumnTypes = New String(chrCurrColumns.Count - 1) {}
+                            End If
+                            clsGetColumnLabels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_labels")
+                            clsGetColumnLabels.AddParameter("data_name", Chr(34) & vecColumns.Names(i) & Chr(34))
+                            clsGetColumnLabels.AddParameter("columns", strColumnsRList)
+                            expItems = frmMain.clsRLink.RunInternalScriptGetValue(clsGetColumnLabels.ToScript())
+                            If expItems IsNot Nothing AndAlso Not expItems.Type = Internals.SymbolicExpressionType.Null Then
+                                strCurrColumnLables = expItems.AsCharacter.ToArray
+                            Else
+                                strCurrColumnLables = New String(chrCurrColumns.Count - 1) {}
+                            End If
+                            For j = 0 To chrCurrColumns.Count - 1
+                                strTemp = strCurrColumnLables(j)
+                                If strCurrColumnLables(j) <> "" Then
+                                    lstView.Items(j).ToolTipText = lstView.Items(j).ToolTipText & vbNewLine & strTemp
+                                End If
+                                strTemp = strCurrColumnTypes(j)
+                                If strTemp <> "" Then
+                                    lstView.Items(j).ToolTipText = lstView.Items(j).ToolTipText & vbNewLine & strTemp
+                                End If
+                            Next
+                        End If
                     End If
                 Next
-                'TODO Find out how to get this to set automatically ( Width = -2 almost works)
-                lstView.Columns(0).Width = lstView.Width - 25
+                lstView.Columns(0).Width = -2
+                ' When there is a vertical scroll bar, Width = -2 makes it slightly wider than needed
+                ' causing the horizontal scroll bar to display even when not needed.
+                ' Reducing the Width by ~ 2 removes the horizontal scroll bar when it's not needed 
+                ' and doesn't affect the visibility of the longest item
+                ' This has been tested on high resolution screens but needs further testing
+                ' and possibly a better solution.
+                lstView.Columns(0).Width = lstView.Columns(0).Width - 2
             End If
         End If
     End Sub

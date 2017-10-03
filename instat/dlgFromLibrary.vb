@@ -25,7 +25,7 @@ Public Class dlgFromLibrary
     Private bReset As Boolean = True
     Private clsDataFunction As New RFunction
     Private dctPackages As New Dictionary(Of String, String)
-    Private lstAvailablePackages As List(Of String)
+    Private strAvailablePackages() As String
 
     Private Sub dlgFromLibrary_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
@@ -42,36 +42,29 @@ Public Class dlgFromLibrary
     End Sub
 
     Private Sub InitialiseDialog()
-        Dim expPackageData As SymbolicExpression
+        Dim clsGetPackages As New RFunction
+        Dim expPackageNames As SymbolicExpression
+        Dim chrPackageNames As CharacterVector
         Dim iDataSets As Integer = 0
 
         ucrBase.iHelpTopicID = 156
 
         lstCollection.HideSelection = False
 
-        'This is now a static list because packages are not loaded in R.
-        lstAvailablePackages = {"agridat", "candisc", "CircStats", "circular", "climdex.pcic", "DAAG", "dae", "datasets", "dplyr", "EnvStats", "Evapotranspiration", "extRemes", "factoextra", "FactoMineR", "faraway", "fitdistrplus", "gapminder", "GGally", "ggplot2", "ggthemes", "htmlTable", "lme4", "lubridate", "openair", "plotly", "plotrix", "plyr", "questionr", "reshape2", "sjmisc", "stringr", "survival", "nycflights13", "Lahman"}.ToList()
-        'TODO possibly don't want to be running this much R code in initialse.
-        '     alternatively have to make sure all packages have some data
-        For i = lstAvailablePackages.Count - 1 To 0 Step -1
-            Try
-                expPackageData = frmMain.clsRLink.RunInternalScriptGetValue("nrow(data(package = " & Chr(34) & lstAvailablePackages(i) & Chr(34) & ")$results)", bSilent:=True)
-                If expPackageData IsNot Nothing Then
-                    iDataSets = expPackageData.AsInteger(0)
-                End If
-                If iDataSets = 0 Then
-                    lstAvailablePackages.RemoveAt(i)
-                End If
-            Catch ex As Exception
-                lstAvailablePackages.RemoveAt(i)
-            End Try
-        Next
-        lstAvailablePackages.Sort()
+        clsGetPackages.SetRCommand("get_installed_packages_with_data")
+        expPackageNames = frmMain.clsRLink.RunInternalScriptGetValue(clsGetPackages.ToScript(), bSilent:=True)
+        If expPackageNames IsNot Nothing AndAlso expPackageNames.Type <> Internals.SymbolicExpressionType.Null Then
+            chrPackageNames = expPackageNames.AsCharacter
+            strAvailablePackages = chrPackageNames.ToArray
+            System.Array.Sort(Of String)(strAvailablePackages)
+        End If
 
-        ucrInputPackages.SetParameter(New RParameter("package"))
-        ucrInputPackages.SetItems(lstAvailablePackages.ToArray(), bAddConditions:=True)
-        ucrInputPackages.SetDropDownStyleAsNonEditable()
-        ucrInputPackages.SetLinkedDisplayControl(lblFromPackage)
+        If strAvailablePackages IsNot Nothing Then
+            ucrInputPackages.SetParameter(New RParameter("package"))
+            ucrInputPackages.SetItems(strAvailablePackages, bAddConditions:=True)
+            ucrInputPackages.SetDropDownStyleAsNonEditable()
+            ucrInputPackages.SetLinkedDisplayControl(lblFromPackage)
+        End If
 
         ucrPnlOptions.AddRadioButton(rdoDefaultDatasets)
         ucrPnlOptions.AddRadioButton(rdoInstatCollection)
@@ -99,7 +92,9 @@ Public Class dlgFromLibrary
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
-        ucrInputPackages.SetRCode(clsDataFunction, bReset)
+        If strAvailablePackages IsNot Nothing Then
+            ucrInputPackages.SetRCode(clsDataFunction, bReset)
+        End If
         ucrNewDataFrameName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlOptions.SetRSyntax(ucrBase.clsRsyntax, bReset)
     End Sub

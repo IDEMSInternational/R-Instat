@@ -43,6 +43,7 @@ Public Class ucrFactor
     Public strLevelsName As String
     Public strLabelsName As String
     Public strFreqName As String
+    Private bDoNotUpdateCells As Boolean = False
 
     Public Sub New()
 
@@ -354,7 +355,20 @@ Public Class ucrFactor
     End Function
 
     Private Sub shtcurrsheet_celldatachanged(sender As Object, e As CellEventArgs) Handles shtCurrSheet.CellDataChanged
-        UpdateCells(e.Cell.Column)
+        Dim i As Integer
+        Dim iChecked As Boolean
+
+        If Not bDoNotUpdateCells Then
+            If e.Cell.Column = iSelectorColumnIndex AndAlso grdFactorData.Worksheets(0).SelectionRange.ContainsColumn(iSelectorColumnIndex) AndAlso grdFactorData.Worksheets(0).SelectionRange.Rows > 1 Then
+                iChecked = DirectCast(e.Cell.Data, Boolean)
+                bDoNotUpdateCells = True
+                For i = grdFactorData.Worksheets(0).SelectionRange.Row To grdFactorData.Worksheets(0).SelectionRange.Row + grdFactorData.Worksheets(0).SelectionRange.Rows - 1
+                    shtCurrSheet(i, iSelectorColumnIndex) = iChecked
+                Next
+                bDoNotUpdateCells = False
+            End If
+            UpdateCells(e.Cell.Column)
+        End If
     End Sub
 
     Private Sub UpdateCells(Optional iColumn As Integer = -2)
