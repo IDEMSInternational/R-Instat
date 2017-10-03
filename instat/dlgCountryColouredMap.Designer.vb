@@ -29,6 +29,8 @@ Partial Class dlgCountryColouredMap
         Me.ucrReceiverCountry = New instat.ucrReceiverSingle()
         Me.ucrSelectorCountryColouredMap = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.cmdPolygonOptions = New System.Windows.Forms.Button()
+        Me.cmdOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblCountry
@@ -51,7 +53,7 @@ Partial Class dlgCountryColouredMap
         '
         'ucrSaveMap
         '
-        Me.ucrSaveMap.Location = New System.Drawing.Point(10, 209)
+        Me.ucrSaveMap.Location = New System.Drawing.Point(-2, 292)
         Me.ucrSaveMap.Name = "ucrSaveMap"
         Me.ucrSaveMap.Size = New System.Drawing.Size(271, 24)
         Me.ucrSaveMap.TabIndex = 6
@@ -92,16 +94,36 @@ Partial Class dlgCountryColouredMap
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 239)
+        Me.ucrBase.Location = New System.Drawing.Point(-2, 322)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
+        '
+        'cmdPolygonOptions
+        '
+        Me.cmdPolygonOptions.Location = New System.Drawing.Point(10, 198)
+        Me.cmdPolygonOptions.Name = "cmdPolygonOptions"
+        Me.cmdPolygonOptions.Size = New System.Drawing.Size(121, 23)
+        Me.cmdPolygonOptions.TabIndex = 7
+        Me.cmdPolygonOptions.Text = "Polygon Options"
+        Me.cmdPolygonOptions.UseVisualStyleBackColor = True
+        '
+        'cmdOptions
+        '
+        Me.cmdOptions.Location = New System.Drawing.Point(10, 227)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(121, 23)
+        Me.cmdOptions.TabIndex = 8
+        Me.cmdOptions.Text = "Map Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'dlgCountryColouredMap
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(413, 300)
+        Me.ClientSize = New System.Drawing.Size(453, 405)
+        Me.Controls.Add(Me.cmdOptions)
+        Me.Controls.Add(Me.cmdPolygonOptions)
         Me.Controls.Add(Me.ucrSaveMap)
         Me.Controls.Add(Me.lblColourBy)
         Me.Controls.Add(Me.lblCountry)
@@ -127,4 +149,6 @@ Partial Class dlgCountryColouredMap
     Friend WithEvents lblColourBy As Label
     Friend WithEvents lblCountry As Label
     Friend WithEvents ucrSaveMap As ucrSave
+    Friend WithEvents cmdPolygonOptions As Button
+    Friend WithEvents cmdOptions As Button
 End Class
