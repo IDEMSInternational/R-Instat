@@ -43,7 +43,7 @@ Public Class dlgRemoveUnusedLevels
         'Set receiver
         ucrReceiverFactorColumn.Selector = ucrSelectorFactorColumn
         ucrReceiverFactorColumn.SetMeAsReceiver()
-        ucrReceiverFactorColumn.SetIncludedDataTypes({"factor"})
+        ucrReceiverFactorColumn.SetIncludedDataTypes({"factor"}, bOnlyExcludeOppositeType:=False)
         ucrReceiverFactorColumn.strSelectorHeading = "Factors"
 
         ucrRemoveUnusedFactorLevels.SetReceiver(ucrReceiverFactorColumn)

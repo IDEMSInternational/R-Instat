@@ -52,7 +52,7 @@ Public Class dlgLabelsLevels
         ucrReceiverLabels.SetParameterIsString()
         ucrReceiverLabels.Selector = ucrSelectorForLabels
         ucrReceiverLabels.SetMeAsReceiver()
-        ucrReceiverLabels.SetIncludedDataTypes({"factor"})
+        ucrReceiverLabels.SetIncludedDataTypes({"factor"}, bOnlyExcludeOppositeType:=False)
         ucrReceiverLabels.strSelectorHeading = "Factors"
 
         ucrSelectorForLabels.SetParameter(New RParameter("data_name", 0))
