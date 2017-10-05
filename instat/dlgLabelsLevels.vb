@@ -13,14 +13,14 @@
 '
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-Imports instat
 Imports instat.Translations
-
-Public Class dlgLabels
+Public Class dlgLabelsLevels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsViewLabels As New RFunction
+    Public strSelectedDataFrame As String = ""
+    Private bUseSelectedColumn As Boolean = False
+    Private strSelectedColumn As String = ""
 
     Private Sub dlgLabels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -33,28 +33,9 @@ Public Class dlgLabels
         SetRCodeforControls(bReset)
         bReset = False
         autoTranslate(Me)
-    End Sub
-
-    Private Sub SetRCodeforControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        TestOKEnabled()
-    End Sub
-
-    Private Sub TestOKEnabled()
-        If Not ucrReceiverLabels.IsEmpty() AndAlso ucrFactorLabels.IsColumnComplete(ucrFactorLabels.strLabelsName) AndAlso (ucrChkIncludeLevelNumbers.Visible AndAlso Not ucrChkIncludeLevelNumbers.Checked OrElse (ucrFactorLabels.IsColumnComplete(ucrFactorLabels.strLevelsName))) Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
+        If bUseSelectedColumn Then
+            SetDefaultColumn()
         End If
-    End Sub
-
-    Private Sub SetDefaults()
-        clsViewLabels = New RFunction
-        ucrSelectorForLabels.Reset()
-        ucrSelectorForLabels.Focus()
-        clsViewLabels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_factor_levels")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsViewLabels)
-        AddLevelButtonEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -71,13 +52,47 @@ Public Class dlgLabels
         ucrReceiverLabels.SetParameterIsString()
         ucrReceiverLabels.Selector = ucrSelectorForLabels
         ucrReceiverLabels.SetMeAsReceiver()
-        ucrReceiverLabels.SetIncludedDataTypes({"factor"})
+        ucrReceiverLabels.SetIncludedDataTypes({"factor"}, bOnlyExcludeOppositeType:=False)
         ucrReceiverLabels.strSelectorHeading = "Factors"
 
         ucrSelectorForLabels.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForLabels.SetParameterIsString()
 
         ucrChkIncludeLevelNumbers.SetText("Include Level Numbers")
+    End Sub
+
+    Private Sub SetDefaults()
+        clsViewLabels = New RFunction
+        ucrSelectorForLabels.Reset()
+        ucrSelectorForLabels.Focus()
+        clsViewLabels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_factor_levels")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsViewLabels)
+        AddLevelButtonEnabled()
+    End Sub
+
+    Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
+        strSelectedColumn = strColumn
+        strSelectedDataFrame = strDataFrame
+        bUseSelectedColumn = True
+    End Sub
+
+    Private Sub SetDefaultColumn()
+        ucrSelectorForLabels.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = strSelectedDataFrame
+        ucrReceiverLabels.Add(strSelectedColumn, strSelectedDataFrame)
+        bUseSelectedColumn = False
+    End Sub
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        TestOKEnabled()
+    End Sub
+
+    Private Sub TestOKEnabled()
+        If Not ucrReceiverLabels.IsEmpty() AndAlso ucrFactorLabels.IsColumnComplete(ucrFactorLabels.strLabelsName) AndAlso (ucrChkIncludeLevelNumbers.Visible AndAlso Not ucrChkIncludeLevelNumbers.Checked OrElse (ucrFactorLabels.IsColumnComplete(ucrFactorLabels.strLevelsName))) Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
