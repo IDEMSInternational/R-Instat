@@ -78,14 +78,26 @@ versions <- c("1.4-5", "1.12", "1.9-3", "0.2.0", "1.1.0", "0.1-3",
 success <- invisible(mapply(function(p, v) length(find.package(p, quiet = TRUE)) > 0 && compareVersion(as.character(packageVersion(p)), v) >= 0, packs, versions))
 if(!all(success)) install.packages(names(success)[!success], repos = paste0("file:///", getwd(), "/extras"), type = "win.binary")
 
+# Returns package names from packs which are not installed with the correct version
+packages_not_installed <- function() {
+  success <- invisible(mapply(function(p, v) length(find.package(p, quiet = TRUE)) > 0 && compareVersion(as.character(packageVersion(p)), v) >= 0, packs, versions))
+  return(names(success)[!success])
+}
+
 # ggthemes temp added because themes list doesn't contain package names
 # sp needed for plot.region() function which requires sp loaded but gives errors through R-Instat
 # plyr and dplyr loaded in order to avoid conflicts
 # ggplot2 loaded for convenience
 # svglite and ggofrtify needed for View Graph dialog
 # PCICt needed to access PCICt class when importing NET cdf files
-for(pack in c("plyr", "dplyr", "ggplot2", "ggthemes", "svglite", "ggfortify", "PCICt", "sp")) {
- library(pack, character.only = TRUE)
+packs_to_load <- c("plyr", "dplyr", "ggplot2", "ggthemes", "svglite", "ggfortify", "PCICt", "sp", "danny")
+for(pack in packs_to_load) {
+ try(library(pack, character.only = TRUE))
+}
+
+# Returns package names from packs_to_load which are not loaded
+packages_not_loaded <- function() {
+  return(packs_to_load[!packs_to_load %in% .packages()])
 }
 
 setwd(dirname(parent.frame(2)$ofile))
