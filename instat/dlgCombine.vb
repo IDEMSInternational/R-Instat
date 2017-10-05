@@ -48,7 +48,7 @@ Public Class dlgCombine
         ucrFactorsReceiver.Selector = ucrSelectorCombineFactors
         ucrFactorsReceiver.SetMeAsReceiver()
         ucrFactorsReceiver.bUseFilteredData = False
-        ucrFactorsReceiver.SetIncludedDataTypes({"factor"})
+        ucrFactorsReceiver.SetIncludedDataTypes({"factor"}, bStrict:=True)
 
         ' Input Column Name
         ucrNewColName.SetIsTextBox()
