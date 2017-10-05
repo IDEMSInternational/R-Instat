@@ -44,7 +44,7 @@ Public Class dlgDummyVariables
         ucrReceiverFactor.SetParameter(New RParameter("x", 0))
         ucrReceiverFactor.Selector = ucrSelectorDummyVariable
         ucrReceiverFactor.SetMeAsReceiver()
-        ucrReceiverFactor.SetIncludedDataTypes({"factor"})
+        ucrReceiverFactor.SetIncludedDataTypes({"factor"}, bOnlyExcludeOppositeType:=False)
         ucrReceiverFactor.strSelectorHeading = "Factors"
         ucrReceiverFactor.SetParameterIsRFunction()
 

@@ -186,20 +186,51 @@ Public Class ucrReceiver
         OnControlValueChanged()
     End Sub
 
-    'TODO remove this method and replace with SetIncludedDataTypes
-    Public Sub SetDataType(strTemp As String)
-        AddIncludedMetadataProperty("class", {Chr(34) & strTemp & Chr(34)})
+    ' If bOnlyExcludeOppositeType = True then instead of restricting to that type it will try to guess which type(s) to exclude
+    ' e.g. SetDataType("numeric", True) will just exclude factor and character columns (so logical, Date etc. will be included)
+    '      Whereas SetDataType("numeric", False) will only include numeric types (logical, Date etc. will NOT be included)
+    ' Both options are useful in different contexts.
+    ' Currently bOnlyExcludeOppositeType = True only detects "numeric", "factor" and "character"
+    Public Sub SetDataType(strTemp As String, Optional bOnlyExcludeOppositeType As Boolean = True)
+        If bOnlyExcludeOppositeType Then
+            If strTemp = "numeric" Then
+                AddExcludedMetadataProperty("class", {Chr(34) & "factor" & Chr(34), Chr(34) & "character" & Chr(34)})
+            ElseIf strTemp = "factor" OrElse strTemp = "character" Then
+                AddExcludedMetadataProperty("class", {Chr(34) & "numeric" & Chr(34)})
+            Else
+                AddIncludedMetadataProperty("class", {Chr(34) & strTemp & Chr(34)})
+            End If
+        Else
+            AddIncludedMetadataProperty("class", {Chr(34) & strTemp & Chr(34)})
+        End If
     End Sub
 
-    Public Overridable Sub SetIncludedDataTypes(strInclude As String())
+    'bOnlyExcludeOppositeType used as described in SetDataType.
+    'Currently only checks if strInclude has exactly one item.
+    Public Overridable Sub SetIncludedDataTypes(strInclude As String(), Optional bOnlyExcludeOppositeType As Boolean = True)
         Dim strTypes(strInclude.Count - 1) As String
 
         Array.Copy(strInclude, strTypes, strInclude.Length)
         'If the two previous lines where not added, the modification of value performed on strTypes was immediately performed on strInclude, then the argument passed into the function such as clsCurrGeom.clsAesParameters(i).strIncludedDataTypes in ucrGeomListWithAes.SetParameters would have been edited (i.e. quotes would have been added to the types names in the strIncludedDataTypes of the i'th AesParameter of the current Geom...), which we don't want !
+
         For i = 0 To strInclude.Count - 1
             strTypes(i) = Chr(34) & strInclude(i) & Chr(34)
         Next
-        AddIncludedMetadataProperty("class", strTypes)
+        If bOnlyExcludeOppositeType Then
+            If strTypes.Count = 1 Then
+                If strTypes(0) = "numeric" Then
+                    AddExcludedMetadataProperty("class", {Chr(34) & "factor" & Chr(34), Chr(34) & "character" & Chr(34)})
+                ElseIf strTypes(0) = "factor" OrElse strTypes(0) = "character" Then
+                    AddExcludedMetadataProperty("class", {Chr(34) & "numeric" & Chr(34)})
+                Else
+                    AddIncludedMetadataProperty("class", strTypes)
+                End If
+            Else
+                AddIncludedMetadataProperty("class", strTypes)
+            End If
+        Else
+            AddIncludedMetadataProperty("class", strTypes)
+        End If
     End Sub
 
     Public Overridable Sub SetExcludedDataTypes(strExclude As String())
