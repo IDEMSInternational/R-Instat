@@ -574,7 +574,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareFactorLabel_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorLevelsLabels.Click
-        dlgLabels.ShowDialog()
+        dlgLabelsLevels.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareFactorViewLabels_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click

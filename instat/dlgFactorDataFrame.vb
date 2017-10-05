@@ -45,7 +45,7 @@ Public Class dlgFactorDataFrame
         ucrReceiverFactorDataFrame.SetParameterIsString()
         ucrReceiverFactorDataFrame.Selector = ucrSelectorFactorDataFrame
         ucrReceiverFactorDataFrame.SetMeAsReceiver()
-        ucrReceiverFactorDataFrame.SetIncludedDataTypes({"factor"})
+        ucrReceiverFactorDataFrame.SetIncludedDataTypes({"factor"}, bOnlyExcludeOppositeType:=False)
 
         'ucrnewname
         ucrInputFactorNames.SetParameter(New RParameter("factor_data_frame_name", 2))
