@@ -155,7 +155,7 @@ Public Class ucrSelector
     Public Sub Add()
         If CurrentReceiver IsNot Nothing AndAlso (lstAvailableVariable.SelectedItems.Count > 0) Then
             CurrentReceiver.AddSelected()
-            CurrentReceiver.Focus()
+            'CurrentReceiver.Focus()
         End If
     End Sub
 
