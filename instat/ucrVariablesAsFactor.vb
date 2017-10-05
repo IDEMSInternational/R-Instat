@@ -356,9 +356,9 @@ Public Class ucrVariablesAsFactor
         End Set
     End Property
 
-    Public Overrides Sub SetIncludedDataTypes(strInclude As String())
-        ucrSingleVariable.SetIncludedDataTypes(strInclude)
-        ucrMultipleVariables.SetIncludedDataTypes(strInclude)
+    Public Overrides Sub SetIncludedDataTypes(strInclude As String(), Optional bStrict As Boolean = False)
+        ucrSingleVariable.SetIncludedDataTypes(strInclude, bStrict)
+        ucrMultipleVariables.SetIncludedDataTypes(strInclude, bStrict)
     End Sub
 
     Public Overrides Sub SetExcludedDataTypes(strExclude As String())
