@@ -141,6 +141,8 @@ Public Class dlgDisplayDailyData
         clsSummaryTableFunction.AddParameter("summaries", "sum_label", iPosition:=1)
         clsSummaryTableFunction.AddParameter("n_column_factors", "1", iPosition:=4)
         clsSummaryTableFunction.AddParameter(" include_margins", "TRUE", iPosition:=5)
+        clsSummaryTableFunction.AddParameter("rnames", "FALSE", iPosition:=6)
+        clsSummaryTableFunction.AddParameter("as_html ", "TRUE", iPosition:=7)
         clsSummaryTableFunction.AddParameter("stored_results", Chr(34) & "FALSE" & Chr(34), iPosition:=9)
         clsSummaryTableFunction.AddParameter("factors", clsRFunctionParameter:=clsConcFunction, iPosition:=3)
         clsSummaryTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
