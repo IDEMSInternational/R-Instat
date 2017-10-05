@@ -41,7 +41,7 @@ Public Class dlgCountinFactor
         ucrCountReceiver.SetParameter(New RParameter("nesting.fac", 0))
         ucrCountReceiver.SetParameterIsRFunction()
         ucrCountReceiver.Selector = ucrCountSelector
-        ucrCountReceiver.SetIncludedDataTypes({"factor"})
+        ucrCountReceiver.SetIncludedDataTypes({"factor"}, bOnlyExcludeOppositeType:=False)
         ucrCountReceiver.strSelectorHeading = "Factors"
         ucrCountReceiver.SetMeAsReceiver()
         ucrCountReceiver.bUseFilteredData = False
