@@ -776,6 +776,8 @@ Public Class RLink
                 Case "nc_dim_variables"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_nc_variable_names")
                     clsGetItems.AddParameter("file", Chr(34) & strNcFilePath & Chr(34))
+                Case "variable_sets"
+                    clsGetItems.SetRCommand(strInstatDataObject & "$get_variable_sets_names")
             End Select
             clsGetItems.AddParameter("as_list", "TRUE")
             lstView.Clear()
