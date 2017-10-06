@@ -44,7 +44,7 @@ Public Class dlgReorderLevels
         ucrReceiverFactor.SetParameter(New RParameter("col_name", 1))
         ucrReceiverFactor.Selector = ucrSelectorFactorLevelsToReorder
         ucrReceiverFactor.SetMeAsReceiver()
-        ucrReceiverFactor.SetIncludedDataTypes({"factor"}, bOnlyExcludeOppositeType:=False)
+        ucrReceiverFactor.SetIncludedDataTypes({"factor"}, bStrict:=True)
         ucrReceiverFactor.strSelectorHeading = "Factors"
         ucrReceiverFactor.SetParameterIsString()
 
