@@ -288,6 +288,12 @@
     <Compile Include="dlgDefineRedFlags.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgVariableSets.Designer.vb">
+      <DependentUpon>dlgVariableSets.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgVariableSets.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDescribeTwoVarGraph.Designer.vb">
       <DependentUpon>dlgDescribeTwoVarGraph.vb</DependentUpon>
     </Compile>
@@ -640,6 +646,12 @@
       <DependentUpon>frmOutputWindow.vb</DependentUpon>
     </Compile>
     <Compile Include="frmOutputWindow.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPackageIssues.Designer.vb">
+      <DependentUpon>frmPackageIssues.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPackageIssues.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ImportFromDatabases.Designer.vb">
@@ -2360,6 +2372,9 @@
     <EmbeddedResource Include="dlgDefineRedFlags.resx">
       <DependentUpon>dlgDefineRedFlags.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgVariableSets.resx">
+      <DependentUpon>dlgVariableSets.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteObjects.fr-FR.resx">
       <DependentUpon>dlgDeleteObjects.vb</DependentUpon>
     </EmbeddedResource>
@@ -2989,6 +3004,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmOutputWindow.resx">
       <DependentUpon>frmOutputWindow.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPackageIssues.resx">
+      <DependentUpon>frmPackageIssues.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSetupLoading.fr-FR.resx">
       <DependentUpon>frmSetupLoading.vb</DependentUpon>
