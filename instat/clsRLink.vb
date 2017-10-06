@@ -64,6 +64,8 @@ Public Class RLink
     Private iWaitDelay As Integer = 2
 
     Public Sub StartREngine(Optional strScript As String = "", Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True)
+        Dim strMissingPackages() As String
+
         Try
             REngine.SetEnvironmentVariables()
         Catch ex As Exception
@@ -89,6 +91,11 @@ Public Class RLink
             End If
             strComment = ""
         Next
+        strMissingPackages = GetPackagesNotInstalled()
+        If strMissingPackages IsNot Nothing AndAlso strMissingPackages.Count > 0 Then
+            frmPackageIssues.SetMissingPackages(strMissingPackages)
+            frmPackageIssues.ShowDialog()
+        End If
         bInstatObjectExists = True
     End Sub
 
@@ -101,6 +108,28 @@ Public Class RLink
             End Try
         End If
     End Sub
+
+    Public Function GetPackagesNotInstalled() As String()
+        Dim chrPackagesNotInstalled As CharacterVector
+        Dim clsPackagesNotInstalled As New RFunction
+        Dim expTemp As SymbolicExpression
+
+        clsPackagesNotInstalled.SetRCommand("packages_not_installed")
+        expTemp = RunInternalScriptGetValue(clsPackagesNotInstalled.ToScript(), bSilent:=True)
+        If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
+            chrPackagesNotInstalled = expTemp.AsCharacter
+            Return chrPackagesNotInstalled.ToArray
+        Else
+            Return Nothing
+        End If
+    End Function
+
+    Public Function LoadedRequiredPackages(Optional bSilent As Boolean = False) As Boolean
+        Dim clsLoadPackages As New RFunction
+
+        clsLoadPackages.SetRCommand("load_required_R_Instat_packages")
+        Return RunInternalScript(clsLoadPackages.ToScript(), bSilent:=bSilent)
+    End Function
 
     Public Sub LoadInstatDataObjectFromFile(strFile As String, Optional strComment As String = "")
         Dim clsReadRDS As New RFunction
