@@ -170,17 +170,17 @@ Public Class dlgCountryColouredMap
         'SetupLayer sends the components storing the plot info (clsRgeom_boxplotFunction, clsRggplotFunction, ...) of dlgBoxPlot through to sdgLayerOptions where these will be edited.
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplot, clsNewGeomFunc:=clsRGeomPolygon, clsNewGlobalAesFunc:=clsRaesFunc, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorCountryColouredMap, bApplyAesGlobally:=True, bReset:=bResetLayerSubdialog)
 
-        For Each clsParam In clsRaesFunc.clsParameters
-            If clsParam.strArgumentName = "x" Then
-                sdgLayerOptions.ucrGeomWithAes.ucrReceiverParam1.Add(clsParam.strArgumentValue, bFixReceiver:=True)
-            End If
-            If clsParam.strArgumentName = "y" Then
-                sdgLayerOptions.ucrGeomWithAes.ucrReceiverParam2.Add(clsParam.strArgumentValue, bFixReceiver:=True)
-            End If
-            If clsParam.strArgumentName = "group" Then
-                sdgLayerOptions.ucrGeomWithAes.ucrReceiverParam6.Add(clsParam.strArgumentValue, bFixReceiver:=True)
-            End If
-        Next
+        'For Each clsParam In clsRaesFunc.clsParameters
+        '    If clsParam.strArgumentName = "x" Then
+        '        sdgLayerOptions.ucrGeomWithAes.ucrReceiverParam1.Add(clsParam.strArgumentValue, bFixReceiver:=True)
+        '    End If
+        '    If clsParam.strArgumentName = "y" Then
+        '        sdgLayerOptions.ucrGeomWithAes.ucrReceiverParam2.Add(clsParam.strArgumentValue, bFixReceiver:=True)
+        '    End If
+        '    If clsParam.strArgumentName = "group" Then
+        '        sdgLayerOptions.ucrGeomWithAes.ucrReceiverParam6.Add(clsParam.strArgumentValue, bFixReceiver:=True)
+        '    End If
+        'Next
 
         sdgLayerOptions.ShowDialog()
         bResetLayerSubdialog = False
