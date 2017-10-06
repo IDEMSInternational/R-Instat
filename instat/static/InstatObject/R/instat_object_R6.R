@@ -1469,6 +1469,21 @@ instat_object$set("public", "set_links", function(new_links) {
 )
 
 instat_object$set("public","display_daily_graph", function(data_name, date_col = NULL, station_col = NULL, year_col = NULL, doy_col = NULL, climatic_element = NULL, upper_limit = 100, bar_colour = "blue", rug_colour = "red") {
-    self$get_data_objects(data_name)$display_daily_graph(date_col = date_col,station_col = station_col, year_col = year_col, doy_col = doy_col, climatic_element = climatic_element, rug_colour = rug_colour, bar_colour = bar_colour, upper_limit = upper_limit)
-  }
+  self$get_data_objects(data_name)$display_daily_graph(date_col = date_col,station_col = station_col, year_col = year_col, doy_col = doy_col, climatic_element = climatic_element, rug_colour = rug_colour, bar_colour = bar_colour, upper_limit = upper_limit)
+}
+)
+
+instat_object$set("public","create_variable_set", function(data_name, set_name, columns) {
+  self$get_data_objects(data_name)$create_variable_set(set_name = set_name, columns = columns)
+}
+)
+
+instat_object$set("public","update_variable_set", function(data_name, set_name, columns) {
+  self$get_data_objects(data_name)$update_variable_set(set_name = set_name, columns = columns)
+}
+)
+
+instat_object$set("public","delete_variable_set", function(data_name, set_name) {
+  self$get_data_objects(data_name)$delete_variable_set(set_name = set_name)
+}
 )
