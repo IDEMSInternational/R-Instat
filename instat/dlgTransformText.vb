@@ -343,10 +343,8 @@ Public Class dlgTransformText
         End If
     End Sub
 
-    Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOperation.ControlValueChanged
-        If rdoConvertCase.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsConvertFunction)
-        ElseIf rdoLength.Checked Then
+    Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOperation.ControlValueChanged, ucrInputTo.ControlValueChanged
+        If rdoLength.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsLengthFunction)
         ElseIf rdoPad.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsPadFunction)
@@ -356,6 +354,16 @@ Public Class dlgTransformText
             ucrBase.clsRsyntax.SetBaseRFunction(clsWordsFunction)
         ElseIf rdoSubstring.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSubstringFunction)
+        ElseIf rdoConvertCase.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsConvertFunction)
+            Select Case ucrInputTo.GetText
+                Case "Lower"
+                    ucrBase.clsRsyntax.SetFunction("str_to_lower")
+                Case "Upper"
+                    ucrBase.clsRsyntax.SetFunction("str_to_upper")
+                Case "Title"
+                    ucrBase.clsRsyntax.SetFunction("str_to_title")
+            End Select
         End If
     End Sub
 
@@ -400,16 +408,5 @@ Public Class dlgTransformText
 
     Private Sub ucrReceiverTransformText_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstWord.ControlContentsChanged, ucrNudWidth.ControlContentsChanged, ucrNudFirstWord.ControlContentsChanged, ucrNudLastWord.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrNudTo.ControlContentsChanged, ucrReceiverLastWord.ControlContentsChanged, ucrReceiverTransformText.ControlContentsChanged, ucrPnlOperation.ControlContentsChanged, ucrInputPad.ControlContentsChanged, ucrSaveNewColumn.ControlContentsChanged, ucrInputSeparator.ControlContentsChanged, ucrInputTo.ControlContentsChanged, ucrChkFirstOr.ControlContentsChanged, ucrChkLastOr.ControlContentsChanged
         TestOkEnabled()
-    End Sub
-
-    Private Sub ucrInputTo_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTo.ControlValueChanged
-        Select Case ucrInputTo.GetText
-            Case "Lower"
-                ucrBase.clsRsyntax.SetFunction("str_to_lower")
-            Case "Upper"
-                ucrBase.clsRsyntax.SetFunction("str_to_upper")
-            Case "Title"
-                ucrBase.clsRsyntax.SetFunction("str_to_title")
-        End Select
     End Sub
 End Class
