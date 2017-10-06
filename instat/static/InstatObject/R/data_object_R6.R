@@ -3225,3 +3225,28 @@ data_object$set("public", "delete_variable_set", function(set_name) {
   }
 }
 )
+
+data_object$set("public", "get_variable_sets_names", function(include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
+  metadata_names <- self$get_variables_metadata_names()
+  set_names <- stringr::str_sub(metadata_names[startsWith(metadata_names, set_prefix)], start = nchar(set_prefix) + 1)
+  if(as_list) {
+    out <- list()
+    out[[self$get_metadata(data_name_label)]] <- set_names
+  }
+  else out <- set_names
+  return(out)
+}
+)
+
+data_object$set("public", "get_variable_sets", function(set_names, force_as_list) {
+  curr_set_names <- self$get_variable_sets_names()
+  if(!missing(set_names) && !all(set_names %in% curr_set_names)) stop("Not all of: ", paste(set_name, collapse = ", "), "exist as variable sets.")
+  include_lists <- rep(list(TRUE), length(set_names))
+  names(include_lists) <- set_names
+  out <- lapply(include_lists, function(x) self$get_column_names(include = x))
+  if(length(set_names) == 1 && !force_as_list) {
+    out <- as.character(unlist(out))
+  }
+  return(out)
+}
+)
