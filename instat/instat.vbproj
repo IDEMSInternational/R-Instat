@@ -642,6 +642,12 @@
     <Compile Include="frmOutputWindow.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmPackageIssues.Designer.vb">
+      <DependentUpon>frmPackageIssues.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPackageIssues.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ImportFromDatabases.Designer.vb">
       <DependentUpon>ImportFromDatabases.vb</DependentUpon>
     </Compile>
@@ -2989,6 +2995,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmOutputWindow.resx">
       <DependentUpon>frmOutputWindow.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPackageIssues.resx">
+      <DependentUpon>frmPackageIssues.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSetupLoading.fr-FR.resx">
       <DependentUpon>frmSetupLoading.vb</DependentUpon>
