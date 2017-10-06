@@ -674,6 +674,7 @@ instat_object$set("public", "replace_value_in_data", function(data_name, col_nam
 
 instat_object$set("public", "rename_column_in_data", function(data_name, column_name, new_val, label = "") {
   self$get_data_objects(data_name)$rename_column_in_data(column_name, new_val, label)
+  self$update_links_rename_column(data_name = data_name, old_column_name = column_name, new_column_name = new_val)
 } 
 )
 
