@@ -1660,4 +1660,8 @@ Public Class frmMain
         End If
         dlgCorrelation.ShowDialog()
     End Sub
+
+    Private Sub DisplayDailyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplayDailyToolStripMenuItem.Click
+        dlgDisplayDailyData.ShowDialog()
+    End Sub
 End Class
