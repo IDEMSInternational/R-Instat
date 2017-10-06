@@ -3438,7 +3438,7 @@ Partial Class frmMain
         '
         Me.mnuProcurementDescribeMaps.Name = "mnuProcurementDescribeMaps"
         Me.mnuProcurementDescribeMaps.Size = New System.Drawing.Size(320, 22)
-        Me.mnuProcurementDescribeMaps.Text = "Maps.."
+        Me.mnuProcurementDescribeMaps.Text = "Map Country Values..."
         '
         'mnuProcurementDefineCorruption
         '
@@ -3456,7 +3456,7 @@ Partial Class frmMain
         'mnuProcurementModelFitModelToolStripMenuItem
         '
         Me.mnuProcurementModelFitModelToolStripMenuItem.Name = "mnuProcurementModelFitModelToolStripMenuItem"
-        Me.mnuProcurementModelFitModelToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.mnuProcurementModelFitModelToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
         Me.mnuProcurementModelFitModelToolStripMenuItem.Text = "Fit Model..."
         '
         'mnuProcurementDefineRedFlags
@@ -3494,7 +3494,7 @@ Partial Class frmMain
         '
         Me.mnuProcurementMaps.Name = "mnuProcurementMaps"
         Me.mnuProcurementMaps.Size = New System.Drawing.Size(292, 22)
-        Me.mnuProcurementMaps.Text = "Maps..."
+        Me.mnuProcurementMaps.Text = "Map Country Values..."
         '
         'mnuTools
         '
