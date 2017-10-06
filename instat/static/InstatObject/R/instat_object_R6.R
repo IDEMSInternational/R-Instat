@@ -1487,3 +1487,8 @@ instat_object$set("public","delete_variable_set", function(data_name, set_name) 
   self$get_data_objects(data_name)$delete_variable_set(set_name = set_name)
 }
 )
+
+instat_object$set("public","get_variable_sets_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
+  self$get_data_objects(data_name)$get_variable_sets_names(include_overall = include_overall, include = include, exclude = exclude, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items)
+}
+)
