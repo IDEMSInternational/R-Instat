@@ -94,6 +94,13 @@ Public Class dlgConvertColumns
         ucrChkKeepAttributes.SetParameter(New RParameter("keep_attr", 6))
         ucrChkKeepAttributes.SetText("Keep Attributes")
         ucrChkKeepAttributes.SetRDefault("TRUE")
+
+        ucrPnlConvertTo.AddToLinkedControls(ucrChkCreateLabels, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkCreateLabels.SetParameter(New RParameter("keep.labels", 7))
+        ucrChkCreateLabels.SetText("Create Labels")
+        ucrChkCreateLabels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkCreateLabels.SetRDefault("TRUE")
+
     End Sub
 
     Private Sub SetDefaults()
