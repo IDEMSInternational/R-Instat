@@ -30,7 +30,8 @@ Partial Class dlgCountryColouredMap
         Me.ucrSelectorCountryColouredMap = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.cmdPolygonOptions = New System.Windows.Forms.Button()
-        Me.cmdOptions = New System.Windows.Forms.Button()
+        Me.cmdPlotOptions = New System.Windows.Forms.Button()
+        Me.cmdMapOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblCountry
@@ -53,7 +54,7 @@ Partial Class dlgCountryColouredMap
         '
         'ucrSaveMap
         '
-        Me.ucrSaveMap.Location = New System.Drawing.Point(-2, 292)
+        Me.ucrSaveMap.Location = New System.Drawing.Point(10, 256)
         Me.ucrSaveMap.Name = "ucrSaveMap"
         Me.ucrSaveMap.Size = New System.Drawing.Size(271, 24)
         Me.ucrSaveMap.TabIndex = 6
@@ -94,13 +95,14 @@ Partial Class dlgCountryColouredMap
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(-2, 322)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 296)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
         '
         'cmdPolygonOptions
         '
+        Me.cmdPolygonOptions.Enabled = False
         Me.cmdPolygonOptions.Location = New System.Drawing.Point(10, 198)
         Me.cmdPolygonOptions.Name = "cmdPolygonOptions"
         Me.cmdPolygonOptions.Size = New System.Drawing.Size(121, 23)
@@ -108,21 +110,33 @@ Partial Class dlgCountryColouredMap
         Me.cmdPolygonOptions.Text = "Polygon Options"
         Me.cmdPolygonOptions.UseVisualStyleBackColor = True
         '
-        'cmdOptions
+        'cmdPlotOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(10, 227)
-        Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(121, 23)
-        Me.cmdOptions.TabIndex = 8
-        Me.cmdOptions.Text = "Map Options"
-        Me.cmdOptions.UseVisualStyleBackColor = True
+        Me.cmdPlotOptions.Enabled = False
+        Me.cmdPlotOptions.Location = New System.Drawing.Point(10, 227)
+        Me.cmdPlotOptions.Name = "cmdPlotOptions"
+        Me.cmdPlotOptions.Size = New System.Drawing.Size(121, 23)
+        Me.cmdPlotOptions.TabIndex = 8
+        Me.cmdPlotOptions.Text = "Plot Options"
+        Me.cmdPlotOptions.UseVisualStyleBackColor = True
+        '
+        'cmdMapOptions
+        '
+        Me.cmdMapOptions.Enabled = False
+        Me.cmdMapOptions.Location = New System.Drawing.Point(238, 146)
+        Me.cmdMapOptions.Name = "cmdMapOptions"
+        Me.cmdMapOptions.Size = New System.Drawing.Size(121, 23)
+        Me.cmdMapOptions.TabIndex = 8
+        Me.cmdMapOptions.Text = "Map Options"
+        Me.cmdMapOptions.UseVisualStyleBackColor = True
         '
         'dlgCountryColouredMap
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(453, 405)
-        Me.Controls.Add(Me.cmdOptions)
+        Me.ClientSize = New System.Drawing.Size(425, 354)
+        Me.Controls.Add(Me.cmdMapOptions)
+        Me.Controls.Add(Me.cmdPlotOptions)
         Me.Controls.Add(Me.cmdPolygonOptions)
         Me.Controls.Add(Me.ucrSaveMap)
         Me.Controls.Add(Me.lblColourBy)
@@ -150,5 +164,6 @@ Partial Class dlgCountryColouredMap
     Friend WithEvents lblCountry As Label
     Friend WithEvents ucrSaveMap As ucrSave
     Friend WithEvents cmdPolygonOptions As Button
-    Friend WithEvents cmdOptions As Button
+    Friend WithEvents cmdPlotOptions As Button
+    Friend WithEvents cmdMapOptions As Button
 End Class
