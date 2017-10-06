@@ -866,19 +866,21 @@ Public Class ucrGeom
 
         'lstAllGeoms.Add(clsgeom_pointrange)
 
-        'clsgeom_polygon.strGeomName = "geom_polygon"
-        'clsgeom_polygon.AddAesParameter("x", bIsMandatory:=True)
-        'clsgeom_polygon.AddAesParameter("y", bIsMandatory:=True)
-        ''optional
-        'clsgeom_polygon.AddAesParameter("alpha")
-        'clsgeom_polygon.AddAesParameter("colour")
-        'clsgeom_polygon.AddAesParameter("fill")
-        'clsgeom_polygon.AddAesParameter("linetype")
-        'clsgeom_polygon.AddAesParameter("size")
-        ''add layer parameters 
-        'clsgeom_polygon.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_polygon.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
-        'lstAllGeoms.Add(clsgeom_polygon)
+        clsgeom_polygon.strGeomName = "geom_polygon"
+        clsgeom_polygon.AddAesParameter("x", bIsMandatory:=True)
+        clsgeom_polygon.AddAesParameter("y", bIsMandatory:=True)
+        'optional
+        clsgeom_polygon.AddAesParameter("alpha")
+        clsgeom_polygon.AddAesParameter("colour")
+        clsgeom_polygon.AddAesParameter("fill")
+        clsgeom_polygon.AddAesParameter("group")
+        clsgeom_polygon.AddAesParameter("linetype")
+        clsgeom_polygon.AddAesParameter("size")
+
+        'add layer parameters 
+        clsgeom_polygon.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
+        clsgeom_polygon.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
+        lstAllGeoms.Add(clsgeom_polygon)
 
         ''clsgeom_qq.strGeomName = "geom_qq"
         ''clsgeom_qq.AddAesParameter("sample", bIsMandatory:=True)
