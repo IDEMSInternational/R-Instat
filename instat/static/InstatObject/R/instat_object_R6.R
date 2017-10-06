@@ -1492,3 +1492,8 @@ instat_object$set("public","get_variable_sets_names", function(data_name, includ
   self$get_data_objects(data_name)$get_variable_sets_names(include_overall = include_overall, include = include, exclude = exclude, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items)
 }
 )
+
+instat_object$set("public","get_variable_sets", function(data_name, set_names, force_as_list = FALSE) {
+  self$get_data_objects(data_name)$get_variable_sets(set_names = set_names, force_as_list = force_as_list)
+}
+)
