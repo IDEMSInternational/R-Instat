@@ -288,6 +288,12 @@
     <Compile Include="dlgDefineRedFlags.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgVariableSets.Designer.vb">
+      <DependentUpon>dlgVariableSets.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgVariableSets.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDescribeTwoVarGraph.Designer.vb">
       <DependentUpon>dlgDescribeTwoVarGraph.vb</DependentUpon>
     </Compile>
@@ -640,6 +646,12 @@
       <DependentUpon>frmOutputWindow.vb</DependentUpon>
     </Compile>
     <Compile Include="frmOutputWindow.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPackageIssues.Designer.vb">
+      <DependentUpon>frmPackageIssues.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPackageIssues.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ImportFromDatabases.Designer.vb">
@@ -1537,10 +1549,10 @@
     <Compile Include="dlgInventoryPlot.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgLabels.Designer.vb">
-      <DependentUpon>dlgLabels.vb</DependentUpon>
+    <Compile Include="dlgLabelsLevels.Designer.vb">
+      <DependentUpon>dlgLabelsLevels.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgLabels.vb">
+    <Compile Include="dlgLabelsLevels.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgLockUnlock.Designer.vb">
@@ -2360,6 +2372,9 @@
     <EmbeddedResource Include="dlgDefineRedFlags.resx">
       <DependentUpon>dlgDefineRedFlags.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgVariableSets.resx">
+      <DependentUpon>dlgVariableSets.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteObjects.fr-FR.resx">
       <DependentUpon>dlgDeleteObjects.vb</DependentUpon>
     </EmbeddedResource>
@@ -2990,6 +3005,9 @@
     <EmbeddedResource Include="frmOutputWindow.resx">
       <DependentUpon>frmOutputWindow.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmPackageIssues.resx">
+      <DependentUpon>frmPackageIssues.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmSetupLoading.fr-FR.resx">
       <DependentUpon>frmSetupLoading.vb</DependentUpon>
     </EmbeddedResource>
@@ -3462,14 +3480,14 @@
     <EmbeddedResource Include="dlgInventoryPlot.sw-KE.resx">
       <DependentUpon>dlgInventoryPlot.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgLabels.fr-FR.resx">
-      <DependentUpon>dlgLabels.vb</DependentUpon>
+    <EmbeddedResource Include="dlgLabelsLevels.fr-FR.resx">
+      <DependentUpon>dlgLabelsLevels.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgLabels.resx">
-      <DependentUpon>dlgLabels.vb</DependentUpon>
+    <EmbeddedResource Include="dlgLabelsLevels.resx">
+      <DependentUpon>dlgLabelsLevels.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgLabels.sw-KE.resx">
-      <DependentUpon>dlgLabels.vb</DependentUpon>
+    <EmbeddedResource Include="dlgLabelsLevels.sw-KE.resx">
+      <DependentUpon>dlgLabelsLevels.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgLockUnlock.fr-FR.resx">
       <DependentUpon>dlgLockUnlock.vb</DependentUpon>
@@ -5403,6 +5421,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\zoo_1.8-0.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\Library\Procurement\idb.RDS">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\Library\Procurement\EuropeAid.RDS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

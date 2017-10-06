@@ -1077,7 +1077,7 @@ data_object$set("public", "sort_dataframe", function(col_names = c(), decreasing
 }
 )
 
-data_object$set("public", "convert_column_to_type", function(col_names = c(), to_type, factor_values = NULL, set_digits, set_decimals = FALSE, keep_attr = TRUE, ignore_labels = FALSE) {
+data_object$set("public", "convert_column_to_type", function(col_names = c(), to_type, factor_values = NULL, set_digits, set_decimals = FALSE, keep_attr = TRUE, ignore_labels = FALSE, keep.labels = TRUE) {
   if(!all(col_names %in% self$get_column_names())) stop("Some column names not found in the data")
   
   if(length(to_type) !=1 ) {
@@ -1130,7 +1130,7 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
     }
     else if(to_type == "numeric") {
       if(ignore_labels) {
-        new_col <- sjlabelled::as_numeric(curr_col)
+        new_col <- sjlabelled::as_numeric(curr_col, keep.labels = keep.labels)
       }
       else {
         if(self$is_variables_metadata(labels_label, col_name) && !is.numeric(curr_col)) {
@@ -1146,7 +1146,7 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
           }
           new_col <- as.numeric(curr_labels[as.character(curr_col)])
         }
-        else new_col <- sjlabelled::as_numeric(curr_col)
+        else new_col <- sjlabelled::as_numeric(curr_col, keep.labels = keep.labels)
       }
     }
     else if(to_type == "character") {
@@ -3192,5 +3192,36 @@ data_object$set("public","display_daily_graph", function(data_name, date_col = N
   }
   if(length(graph_list) > 1) return(gridExtra::grid.arrange(grobs = graph_list))
   else return(g)
+}
+)
+
+data_object$set("public", "get_variables_metadata_names", function(columns) {
+  if(missing(columns)) columns <- self$get_column_names()
+  cols <- self$get_columns_from_data(columns, force_as_data_frame = TRUE)
+  return(unique(as.character(unlist(sapply(cols, function(x) names(attributes(x)))))))
+}
+)
+
+data_object$set("public", "create_variable_set", function(set_name, columns) {
+  adjusted_set_name <- paste0(set_prefix, set_name)
+  if(adjusted_set_name %in% self$get_variables_metadata_names()) warning("A set named ", set_name, " already exists and will be replaced.")
+  self$append_to_variables_metadata(col_names = setdiff(self$get_column_names(), columns), property = adjusted_set_name, new_val = FALSE)
+  self$append_to_variables_metadata(col_names = columns, property = adjusted_set_name, new_val = TRUE)
+}
+)
+
+data_object$set("public", "update_variable_set", function(set_name, columns) {
+  suppressWarnings(self$create_variable_set(set_name = set_name, columns = columns))
+}
+)
+
+data_object$set("public", "delete_variable_set", function(set_name) {
+  adjusted_set_name <- paste0(set_prefix, set_name)
+  if(!adjusted_set_name %in% self$get_variables_metadata_names()) {
+    warning("There is no variable set called ", set_name, ".")
+  }
+  else {
+    self$append_to_variables_metadata(col_names = self$get_column_names(), property = adjusted_set_name, new_val = NULL)
+  }
 }
 )
