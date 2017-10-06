@@ -288,10 +288,10 @@
     <Compile Include="dlgDefineRedFlags.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgDefineSetsofVariable.Designer.vb">
-      <DependentUpon>dlgDefineSetsofVariable.vb</DependentUpon>
+    <Compile Include="dlgVariableSets.Designer.vb">
+      <DependentUpon>dlgVariableSets.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgDefineSetsofVariable.vb">
+    <Compile Include="dlgVariableSets.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgDescribeTwoVarGraph.Designer.vb">
@@ -2366,8 +2366,8 @@
     <EmbeddedResource Include="dlgDefineRedFlags.resx">
       <DependentUpon>dlgDefineRedFlags.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgDefineSetsofVariable.resx">
-      <DependentUpon>dlgDefineSetsofVariable.vb</DependentUpon>
+    <EmbeddedResource Include="dlgVariableSets.resx">
+      <DependentUpon>dlgVariableSets.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteObjects.fr-FR.resx">
       <DependentUpon>dlgDeleteObjects.vb</DependentUpon>
