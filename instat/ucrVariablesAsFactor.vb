@@ -225,10 +225,8 @@ Public Class ucrVariablesAsFactor
     Public Overrides Sub Add(strVar As String, Optional strDataFrame As String = "", Optional bFixReceiver As Boolean = False)
         If bSingleVariable Then
             ucrSingleVariable.Add(strVar, strDataFrame, bFixReceiver)
-            ucrSingleVariable.txtReceiverSingle.Enabled = Not bFixReceiver
         Else
             ucrMultipleVariables.Add(strVar, strDataFrame, bFixReceiver)
-            ucrMultipleVariables.lstSelectedVariables.Enabled = Not bFixReceiver
         End If
     End Sub
 
