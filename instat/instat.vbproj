@@ -204,6 +204,12 @@
     <Compile Include="dlgClimaticBoxPlot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgClimaticCheckDataTemperature.Designer.vb">
+      <DependentUpon>dlgClimaticCheckDataTemperature.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticCheckDataTemperature.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgClimaticSummary.Designer.vb">
       <DependentUpon>dlgClimaticSummary.vb</DependentUpon>
     </Compile>
@@ -238,6 +244,12 @@
       <DependentUpon>dlgCountinFactor.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgCountinFactor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgCountryColouredMap.Designer.vb">
+      <DependentUpon>dlgCountryColouredMap.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCountryColouredMap.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DlgDefineClimaticData.Designer.vb">
@@ -1525,10 +1537,10 @@
     <Compile Include="dlgInventoryPlot.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgLabels.Designer.vb">
-      <DependentUpon>dlgLabels.vb</DependentUpon>
+    <Compile Include="dlgLabelsLevels.Designer.vb">
+      <DependentUpon>dlgLabelsLevels.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgLabels.vb">
+    <Compile Include="dlgLabelsLevels.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgLockUnlock.Designer.vb">
@@ -2243,6 +2255,9 @@
     <EmbeddedResource Include="dlgClimaticBoxPlot.resx">
       <DependentUpon>dlgClimaticBoxPlot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticCheckDataTemperature.resx">
+      <DependentUpon>dlgClimaticCheckDataTemperature.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgClimaticSummary.resx">
       <DependentUpon>dlgClimaticSummary.vb</DependentUpon>
     </EmbeddedResource>
@@ -2317,6 +2332,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCountinFactor.resx">
       <DependentUpon>dlgCountinFactor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCountryColouredMap.resx">
+      <DependentUpon>dlgCountryColouredMap.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCumulativeDistribution.fr-FR.resx">
       <DependentUpon>dlgCumulativeDistribution.vb</DependentUpon>
@@ -3444,14 +3462,14 @@
     <EmbeddedResource Include="dlgInventoryPlot.sw-KE.resx">
       <DependentUpon>dlgInventoryPlot.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgLabels.fr-FR.resx">
-      <DependentUpon>dlgLabels.vb</DependentUpon>
+    <EmbeddedResource Include="dlgLabelsLevels.fr-FR.resx">
+      <DependentUpon>dlgLabelsLevels.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgLabels.resx">
-      <DependentUpon>dlgLabels.vb</DependentUpon>
+    <EmbeddedResource Include="dlgLabelsLevels.resx">
+      <DependentUpon>dlgLabelsLevels.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgLabels.sw-KE.resx">
-      <DependentUpon>dlgLabels.vb</DependentUpon>
+    <EmbeddedResource Include="dlgLabelsLevels.sw-KE.resx">
+      <DependentUpon>dlgLabelsLevels.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgLockUnlock.fr-FR.resx">
       <DependentUpon>dlgLockUnlock.vb</DependentUpon>
@@ -5385,6 +5403,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\zoo_1.8-0.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\Library\Procurement\idb.RDS">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\Library\Procurement\EuropeAid.RDS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
