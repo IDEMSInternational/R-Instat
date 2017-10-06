@@ -1009,18 +1009,19 @@ data_object$set("public", "get_data_frame_length", function(use_current_filter =
 }
 )
 
-data_object$set("public", "get_factor_data_frame", function(col_name = "", include_levels = TRUE) {
+data_object$set("public", "get_factor_data_frame", function(col_name = "", include_levels = TRUE, include_NA_level = FALSE) {
   if(!(col_name %in% self$get_column_names())) stop(col_name, " is not a column name,")
   col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
   if(!(is.factor(col_data))) stop(col_name, " is not a factor column")
   
-  counts <- as.data.frame(table(col_data))
+  counts <- data.frame(table(col_data))
   counts <- plyr::rename(counts, replace = c("col_data" = "Label"))
+  counts[["Label"]] <- as.character(counts[["Label"]])
   counts[["Ord."]] <- 1:nrow(counts)
   if(include_levels) {
     if(self$is_variables_metadata(str = labels_label, col = col_name)) {
       curr_levels <- self$get_variables_metadata(property = labels_label, column = col_name, direct_from_attributes = TRUE)
-      curr_levels <- data.frame(Label = names(curr_levels), Level = as.vector(curr_levels))
+      curr_levels <- data.frame(Label = names(curr_levels), Level = as.vector(curr_levels), stringsAsFactors = FALSE)
       counts <- dplyr::left_join(counts, curr_levels, by = "Label")
     }
     else {
@@ -1030,6 +1031,11 @@ data_object$set("public", "get_factor_data_frame", function(col_name = "", inclu
     counts <- counts[c("Ord.", "Label", "Level", "Freq")]
   }
   else counts <- counts[c("Ord.", "Label", "Freq")]
+  if(include_NA_level) {
+    missing_count <- sum(is.na(col_data))
+    if(include_levels) counts[nrow(counts) + 1, ] <- c("-", "NA", "-", missing_count)
+    else counts[nrow(counts) + 1, ] <- c("-", "(NA)", missing_count)
+  }
   return(counts)
 }
 )
