@@ -445,26 +445,28 @@ Partial Class frmMain
         Me.mnuPrepareRObjectsReorder = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareRObjectsDelete = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurement = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuCorruptionDefineCorruptionData = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementDefineData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementPrepare = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CountryNamesCorrectionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MergeAdditionalDataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.FilterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.UseAwardDateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SetRefLevelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DefineContractValueCategoriesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RecodeNumericIntoQuantilesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementPrepareStandardiseCountryName = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementPrepareMergeAdditionalData = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementPrepareFilterByCountry = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementPrepareUseAwardDate = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementPrepareSetFactorReferenceLevel = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementPrepareDefineContractValueCategories = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementPrepareRecodeNumericIntoQuantiles = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementDescribe = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementDescribeOneVar = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementDescribeTwoVar = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DefineOutputsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementDescribeMaps = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementDefineCorruption = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementModelFitModelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DefineRedFlagsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CorrelationsRedFlagsorOthersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CalculateCRIToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ProcurementUseCRI = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementDefineRedFlags = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementCorrelations = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementCalculateCRI = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementUseCRI = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementUseCRISummariseCRIbyCountry = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementMaps = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTools = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsRunRCode = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsRestartR = New System.Windows.Forms.ToolStripMenuItem()
@@ -478,12 +480,12 @@ Partial Class frmMain
         Me.splOverall = New System.Windows.Forms.SplitContainer()
         Me.splExtraWindows = New System.Windows.Forms.SplitContainer()
         Me.splMetadata = New System.Windows.Forms.SplitContainer()
-        Me.splLogScript = New System.Windows.Forms.SplitContainer()
-        Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrColumnMeta = New instat.ucrColumnMetadata()
         Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
+        Me.splLogScript = New System.Windows.Forms.SplitContainer()
         Me.ucrLogWindow = New instat.ucrLog()
         Me.ucrScriptWindow = New instat.ucrScript()
+        Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
         Me.stsStrip.SuspendLayout()
@@ -3353,69 +3355,69 @@ Partial Class frmMain
         '
         'mnuProcurement
         '
-        Me.mnuProcurement.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCorruptionDefineCorruptionData, Me.mnuProcurementPrepare, Me.mnuProcurementDescribe, Me.DefineOutputsToolStripMenuItem, Me.mnuProcurementModel, Me.DefineRedFlagsToolStripMenuItem, Me.CorrelationsRedFlagsorOthersToolStripMenuItem, Me.CalculateCRIToolStripMenuItem, Me.ProcurementUseCRI})
+        Me.mnuProcurement.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementDefineData, Me.mnuProcurementPrepare, Me.mnuProcurementDescribe, Me.mnuProcurementDefineCorruption, Me.mnuProcurementModel, Me.mnuProcurementDefineRedFlags, Me.mnuProcurementCorrelations, Me.mnuProcurementCalculateCRI, Me.mnuProcurementUseCRI, Me.mnuProcurementMaps})
         Me.mnuProcurement.Name = "mnuProcurement"
         Me.mnuProcurement.Size = New System.Drawing.Size(88, 20)
         Me.mnuProcurement.Text = "Procurement"
         '
-        'mnuCorruptionDefineCorruptionData
+        'mnuProcurementDefineData
         '
-        Me.mnuCorruptionDefineCorruptionData.Name = "mnuCorruptionDefineCorruptionData"
-        Me.mnuCorruptionDefineCorruptionData.Size = New System.Drawing.Size(292, 22)
-        Me.mnuCorruptionDefineCorruptionData.Text = "Define Procurement Data..."
+        Me.mnuProcurementDefineData.Name = "mnuProcurementDefineData"
+        Me.mnuProcurementDefineData.Size = New System.Drawing.Size(292, 22)
+        Me.mnuProcurementDefineData.Text = "Define Procurement Data..."
         '
         'mnuProcurementPrepare
         '
-        Me.mnuProcurementPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CountryNamesCorrectionsToolStripMenuItem, Me.MergeAdditionalDataToolStripMenuItem, Me.FilterToolStripMenuItem, Me.UseAwardDateToolStripMenuItem, Me.SetRefLevelToolStripMenuItem, Me.DefineContractValueCategoriesToolStripMenuItem, Me.RecodeNumericIntoQuantilesToolStripMenuItem})
+        Me.mnuProcurementPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementPrepareStandardiseCountryName, Me.mnuProcurementPrepareMergeAdditionalData, Me.mnuProcurementPrepareFilterByCountry, Me.mnuProcurementPrepareUseAwardDate, Me.mnuProcurementPrepareSetFactorReferenceLevel, Me.mnuProcurementPrepareDefineContractValueCategories, Me.mnuProcurementPrepareRecodeNumericIntoQuantiles})
         Me.mnuProcurementPrepare.Name = "mnuProcurementPrepare"
         Me.mnuProcurementPrepare.Size = New System.Drawing.Size(292, 22)
         Me.mnuProcurementPrepare.Text = "Prepare"
         '
-        'CountryNamesCorrectionsToolStripMenuItem
+        'mnuProcurementPrepareStandardiseCountryName
         '
-        Me.CountryNamesCorrectionsToolStripMenuItem.Name = "CountryNamesCorrectionsToolStripMenuItem"
-        Me.CountryNamesCorrectionsToolStripMenuItem.Size = New System.Drawing.Size(256, 22)
-        Me.CountryNamesCorrectionsToolStripMenuItem.Text = "Standardise Country Names..."
+        Me.mnuProcurementPrepareStandardiseCountryName.Name = "mnuProcurementPrepareStandardiseCountryName"
+        Me.mnuProcurementPrepareStandardiseCountryName.Size = New System.Drawing.Size(256, 22)
+        Me.mnuProcurementPrepareStandardiseCountryName.Text = "Standardise Country Names..."
         '
-        'MergeAdditionalDataToolStripMenuItem
+        'mnuProcurementPrepareMergeAdditionalData
         '
-        Me.MergeAdditionalDataToolStripMenuItem.Name = "MergeAdditionalDataToolStripMenuItem"
-        Me.MergeAdditionalDataToolStripMenuItem.Size = New System.Drawing.Size(256, 22)
-        Me.MergeAdditionalDataToolStripMenuItem.Text = "Merge Additional Data..."
+        Me.mnuProcurementPrepareMergeAdditionalData.Name = "mnuProcurementPrepareMergeAdditionalData"
+        Me.mnuProcurementPrepareMergeAdditionalData.Size = New System.Drawing.Size(256, 22)
+        Me.mnuProcurementPrepareMergeAdditionalData.Text = "Merge Additional Data..."
         '
-        'FilterToolStripMenuItem
+        'mnuProcurementPrepareFilterByCountry
         '
-        Me.FilterToolStripMenuItem.Name = "FilterToolStripMenuItem"
-        Me.FilterToolStripMenuItem.Size = New System.Drawing.Size(256, 22)
-        Me.FilterToolStripMenuItem.Text = "Filter by Country (or other)..."
+        Me.mnuProcurementPrepareFilterByCountry.Name = "mnuProcurementPrepareFilterByCountry"
+        Me.mnuProcurementPrepareFilterByCountry.Size = New System.Drawing.Size(256, 22)
+        Me.mnuProcurementPrepareFilterByCountry.Text = "Filter by Country (or other)..."
         '
-        'UseAwardDateToolStripMenuItem
+        'mnuProcurementPrepareUseAwardDate
         '
-        Me.UseAwardDateToolStripMenuItem.Name = "UseAwardDateToolStripMenuItem"
-        Me.UseAwardDateToolStripMenuItem.Size = New System.Drawing.Size(256, 22)
-        Me.UseAwardDateToolStripMenuItem.Text = "Use Award Date (or other)..."
+        Me.mnuProcurementPrepareUseAwardDate.Name = "mnuProcurementPrepareUseAwardDate"
+        Me.mnuProcurementPrepareUseAwardDate.Size = New System.Drawing.Size(256, 22)
+        Me.mnuProcurementPrepareUseAwardDate.Text = "Use Award Date (or other)..."
         '
-        'SetRefLevelToolStripMenuItem
+        'mnuProcurementPrepareSetFactorReferenceLevel
         '
-        Me.SetRefLevelToolStripMenuItem.Name = "SetRefLevelToolStripMenuItem"
-        Me.SetRefLevelToolStripMenuItem.Size = New System.Drawing.Size(256, 22)
-        Me.SetRefLevelToolStripMenuItem.Text = "Set Factor Reference Level..."
+        Me.mnuProcurementPrepareSetFactorReferenceLevel.Name = "mnuProcurementPrepareSetFactorReferenceLevel"
+        Me.mnuProcurementPrepareSetFactorReferenceLevel.Size = New System.Drawing.Size(256, 22)
+        Me.mnuProcurementPrepareSetFactorReferenceLevel.Text = "Set Factor Reference Level..."
         '
-        'DefineContractValueCategoriesToolStripMenuItem
+        'mnuProcurementPrepareDefineContractValueCategories
         '
-        Me.DefineContractValueCategoriesToolStripMenuItem.Name = "DefineContractValueCategoriesToolStripMenuItem"
-        Me.DefineContractValueCategoriesToolStripMenuItem.Size = New System.Drawing.Size(256, 22)
-        Me.DefineContractValueCategoriesToolStripMenuItem.Text = "Define Contract Value Categories..."
+        Me.mnuProcurementPrepareDefineContractValueCategories.Name = "mnuProcurementPrepareDefineContractValueCategories"
+        Me.mnuProcurementPrepareDefineContractValueCategories.Size = New System.Drawing.Size(256, 22)
+        Me.mnuProcurementPrepareDefineContractValueCategories.Text = "Define Contract Value Categories..."
         '
-        'RecodeNumericIntoQuantilesToolStripMenuItem
+        'mnuProcurementPrepareRecodeNumericIntoQuantiles
         '
-        Me.RecodeNumericIntoQuantilesToolStripMenuItem.Name = "RecodeNumericIntoQuantilesToolStripMenuItem"
-        Me.RecodeNumericIntoQuantilesToolStripMenuItem.Size = New System.Drawing.Size(256, 22)
-        Me.RecodeNumericIntoQuantilesToolStripMenuItem.Text = "Recode Numeric into Quantiles..."
+        Me.mnuProcurementPrepareRecodeNumericIntoQuantiles.Name = "mnuProcurementPrepareRecodeNumericIntoQuantiles"
+        Me.mnuProcurementPrepareRecodeNumericIntoQuantiles.Size = New System.Drawing.Size(256, 22)
+        Me.mnuProcurementPrepareRecodeNumericIntoQuantiles.Text = "Recode Numeric into Quantiles..."
         '
         'mnuProcurementDescribe
         '
-        Me.mnuProcurementDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementDescribeOneVar, Me.mnuProcurementDescribeTwoVar})
+        Me.mnuProcurementDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementDescribeOneVar, Me.mnuProcurementDescribeTwoVar, Me.mnuProcurementDescribeMaps})
         Me.mnuProcurementDescribe.Name = "mnuProcurementDescribe"
         Me.mnuProcurementDescribe.Size = New System.Drawing.Size(292, 22)
         Me.mnuProcurementDescribe.Text = "Describe"
@@ -3432,11 +3434,17 @@ Partial Class frmMain
         Me.mnuProcurementDescribeTwoVar.Size = New System.Drawing.Size(320, 22)
         Me.mnuProcurementDescribeTwoVar.Text = "Two Variable Frequencies by Sector (or other)..."
         '
-        'DefineOutputsToolStripMenuItem
+        'mnuProcurementDescribeMaps
         '
-        Me.DefineOutputsToolStripMenuItem.Name = "DefineOutputsToolStripMenuItem"
-        Me.DefineOutputsToolStripMenuItem.Size = New System.Drawing.Size(292, 22)
-        Me.DefineOutputsToolStripMenuItem.Text = "Define Corruption Risk Output Variables..."
+        Me.mnuProcurementDescribeMaps.Name = "mnuProcurementDescribeMaps"
+        Me.mnuProcurementDescribeMaps.Size = New System.Drawing.Size(320, 22)
+        Me.mnuProcurementDescribeMaps.Text = "Maps.."
+        '
+        'mnuProcurementDefineCorruption
+        '
+        Me.mnuProcurementDefineCorruption.Name = "mnuProcurementDefineCorruption"
+        Me.mnuProcurementDefineCorruption.Size = New System.Drawing.Size(292, 22)
+        Me.mnuProcurementDefineCorruption.Text = "Define Corruption Risk Output Variables..."
         '
         'mnuProcurementModel
         '
@@ -3448,39 +3456,45 @@ Partial Class frmMain
         'mnuProcurementModelFitModelToolStripMenuItem
         '
         Me.mnuProcurementModelFitModelToolStripMenuItem.Name = "mnuProcurementModelFitModelToolStripMenuItem"
-        Me.mnuProcurementModelFitModelToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
+        Me.mnuProcurementModelFitModelToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.mnuProcurementModelFitModelToolStripMenuItem.Text = "Fit Model..."
         '
-        'DefineRedFlagsToolStripMenuItem
+        'mnuProcurementDefineRedFlags
         '
-        Me.DefineRedFlagsToolStripMenuItem.Name = "DefineRedFlagsToolStripMenuItem"
-        Me.DefineRedFlagsToolStripMenuItem.Size = New System.Drawing.Size(292, 22)
-        Me.DefineRedFlagsToolStripMenuItem.Text = "Define Red Flag Variables..."
+        Me.mnuProcurementDefineRedFlags.Name = "mnuProcurementDefineRedFlags"
+        Me.mnuProcurementDefineRedFlags.Size = New System.Drawing.Size(292, 22)
+        Me.mnuProcurementDefineRedFlags.Text = "Define Red Flag Variables..."
         '
-        'CorrelationsRedFlagsorOthersToolStripMenuItem
+        'mnuProcurementCorrelations
         '
-        Me.CorrelationsRedFlagsorOthersToolStripMenuItem.Name = "CorrelationsRedFlagsorOthersToolStripMenuItem"
-        Me.CorrelationsRedFlagsorOthersToolStripMenuItem.Size = New System.Drawing.Size(292, 22)
-        Me.CorrelationsRedFlagsorOthersToolStripMenuItem.Text = "Correlations (Red Flags or others)..."
+        Me.mnuProcurementCorrelations.Name = "mnuProcurementCorrelations"
+        Me.mnuProcurementCorrelations.Size = New System.Drawing.Size(292, 22)
+        Me.mnuProcurementCorrelations.Text = "Correlations (Red Flags or others)..."
         '
-        'CalculateCRIToolStripMenuItem
+        'mnuProcurementCalculateCRI
         '
-        Me.CalculateCRIToolStripMenuItem.Name = "CalculateCRIToolStripMenuItem"
-        Me.CalculateCRIToolStripMenuItem.Size = New System.Drawing.Size(292, 22)
-        Me.CalculateCRIToolStripMenuItem.Text = "Calculate Corruption Risk Index (CRI)..."
+        Me.mnuProcurementCalculateCRI.Name = "mnuProcurementCalculateCRI"
+        Me.mnuProcurementCalculateCRI.Size = New System.Drawing.Size(292, 22)
+        Me.mnuProcurementCalculateCRI.Text = "Calculate Corruption Risk Index (CRI)..."
         '
-        'ProcurementUseCRI
+        'mnuProcurementUseCRI
         '
-        Me.ProcurementUseCRI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementUseCRISummariseCRIbyCountry})
-        Me.ProcurementUseCRI.Name = "ProcurementUseCRI"
-        Me.ProcurementUseCRI.Size = New System.Drawing.Size(292, 22)
-        Me.ProcurementUseCRI.Text = "Use CRI"
+        Me.mnuProcurementUseCRI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementUseCRISummariseCRIbyCountry})
+        Me.mnuProcurementUseCRI.Name = "mnuProcurementUseCRI"
+        Me.mnuProcurementUseCRI.Size = New System.Drawing.Size(292, 22)
+        Me.mnuProcurementUseCRI.Text = "Use CRI"
         '
         'mnuProcurementUseCRISummariseCRIbyCountry
         '
         Me.mnuProcurementUseCRISummariseCRIbyCountry.Name = "mnuProcurementUseCRISummariseCRIbyCountry"
         Me.mnuProcurementUseCRISummariseCRIbyCountry.Size = New System.Drawing.Size(278, 22)
         Me.mnuProcurementUseCRISummariseCRIbyCountry.Text = "Summarise CRI by Country (or other)..."
+        '
+        'mnuProcurementMaps
+        '
+        Me.mnuProcurementMaps.Name = "mnuProcurementMaps"
+        Me.mnuProcurementMaps.Size = New System.Drawing.Size(292, 22)
+        Me.mnuProcurementMaps.Text = "Maps..."
         '
         'mnuTools
         '
@@ -3617,6 +3631,24 @@ Partial Class frmMain
         Me.splMetadata.SplitterWidth = 5
         Me.splMetadata.TabIndex = 0
         '
+        'ucrColumnMeta
+        '
+        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrColumnMeta.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrColumnMeta.Location = New System.Drawing.Point(0, 0)
+        Me.ucrColumnMeta.Name = "ucrColumnMeta"
+        Me.ucrColumnMeta.Size = New System.Drawing.Size(75, 194)
+        Me.ucrColumnMeta.TabIndex = 0
+        '
+        'ucrDataFrameMeta
+        '
+        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrDataFrameMeta.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrDataFrameMeta.Location = New System.Drawing.Point(0, 0)
+        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
+        Me.ucrDataFrameMeta.Size = New System.Drawing.Size(176, 194)
+        Me.ucrDataFrameMeta.TabIndex = 0
+        '
         'splLogScript
         '
         Me.splLogScript.BackColor = System.Drawing.Color.LightGray
@@ -3638,6 +3670,25 @@ Partial Class frmMain
         Me.splLogScript.SplitterWidth = 5
         Me.splLogScript.TabIndex = 0
         '
+        'ucrLogWindow
+        '
+        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrLogWindow.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrLogWindow.Location = New System.Drawing.Point(0, 0)
+        Me.ucrLogWindow.Name = "ucrLogWindow"
+        Me.ucrLogWindow.Size = New System.Drawing.Size(182, 194)
+        Me.ucrLogWindow.TabIndex = 0
+        '
+        'ucrScriptWindow
+        '
+        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrScriptWindow.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrScriptWindow.Location = New System.Drawing.Point(0, 0)
+        Me.ucrScriptWindow.Name = "ucrScriptWindow"
+        Me.ucrScriptWindow.Size = New System.Drawing.Size(386, 194)
+        Me.ucrScriptWindow.TabIndex = 0
+        Me.ucrScriptWindow.Tag = "Script_Window"
+        '
         'splDataOutput
         '
         Me.splDataOutput.BackColor = System.Drawing.Color.LightGray
@@ -3658,43 +3709,6 @@ Partial Class frmMain
         Me.splDataOutput.SplitterDistance = 385
         Me.splDataOutput.SplitterWidth = 5
         Me.splDataOutput.TabIndex = 0
-        '
-        'ucrColumnMeta
-        '
-        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrColumnMeta.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrColumnMeta.Location = New System.Drawing.Point(0, 0)
-        Me.ucrColumnMeta.Name = "ucrColumnMeta"
-        Me.ucrColumnMeta.Size = New System.Drawing.Size(75, 194)
-        Me.ucrColumnMeta.TabIndex = 0
-        '
-        'ucrDataFrameMeta
-        '
-        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrDataFrameMeta.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrDataFrameMeta.Location = New System.Drawing.Point(0, 0)
-        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
-        Me.ucrDataFrameMeta.Size = New System.Drawing.Size(176, 194)
-        Me.ucrDataFrameMeta.TabIndex = 0
-        '
-        'ucrLogWindow
-        '
-        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrLogWindow.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrLogWindow.Location = New System.Drawing.Point(0, 0)
-        Me.ucrLogWindow.Name = "ucrLogWindow"
-        Me.ucrLogWindow.Size = New System.Drawing.Size(182, 194)
-        Me.ucrLogWindow.TabIndex = 0
-        '
-        'ucrScriptWindow
-        '
-        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrScriptWindow.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrScriptWindow.Location = New System.Drawing.Point(0, 0)
-        Me.ucrScriptWindow.Name = "ucrScriptWindow"
-        Me.ucrScriptWindow.Size = New System.Drawing.Size(386, 194)
-        Me.ucrScriptWindow.TabIndex = 0
-        Me.ucrScriptWindow.Tag = "Script_Window"
         '
         'ucrDataViewer
         '
@@ -4136,18 +4150,18 @@ Partial Class frmMain
     Friend WithEvents DisplayDailyToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents QCProceduresToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator18 As ToolStripSeparator
-    Friend WithEvents mnuCorruptionDefineCorruptionData As ToolStripMenuItem
+    Friend WithEvents mnuProcurementDefineData As ToolStripMenuItem
     Friend WithEvents mnuClimaticSCFSupportCumulativeExceedanceGraphs As ToolStripMenuItem
-    Friend WithEvents CountryNamesCorrectionsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents MergeAdditionalDataToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents FilterToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents UseAwardDateToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents SetRefLevelToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents DefineContractValueCategoriesToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents DefineRedFlagsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuProcurementPrepareStandardiseCountryName As ToolStripMenuItem
+    Friend WithEvents mnuProcurementPrepareMergeAdditionalData As ToolStripMenuItem
+    Friend WithEvents mnuProcurementPrepareFilterByCountry As ToolStripMenuItem
+    Friend WithEvents mnuProcurementPrepareUseAwardDate As ToolStripMenuItem
+    Friend WithEvents mnuProcurementPrepareSetFactorReferenceLevel As ToolStripMenuItem
+    Friend WithEvents mnuProcurementPrepareDefineContractValueCategories As ToolStripMenuItem
+    Friend WithEvents mnuProcurementDefineRedFlags As ToolStripMenuItem
     Friend WithEvents mnuProcurementModelFitModelToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents CalculateCRIToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ProcurementUseCRI As ToolStripMenuItem
+    Friend WithEvents mnuProcurementCalculateCRI As ToolStripMenuItem
+    Friend WithEvents mnuProcurementUseCRI As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator33 As ToolStripSeparator
     Friend WithEvents mnuDescribeOneVariableFrequencies As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator34 As ToolStripSeparator
@@ -4156,8 +4170,8 @@ Partial Class frmMain
     Friend WithEvents ImportFromCSPROToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ImportFromToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents OpenNetCDFToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents DefineOutputsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents RecodeNumericIntoQuantilesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuProcurementDefineCorruption As ToolStripMenuItem
+    Friend WithEvents mnuProcurementPrepareRecodeNumericIntoQuantiles As ToolStripMenuItem
     Friend WithEvents mnuDescribeThreeVariable As ToolStripMenuItem
     Friend WithEvents mnuDescribeThreeVariableSummarise As ToolStripMenuItem
     Friend WithEvents mnuDescribeThreeVariableGraph As ToolStripMenuItem
@@ -4209,5 +4223,7 @@ Partial Class frmMain
     Friend WithEvents BoxplotsConceptualisedAndConstructedToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuCMSAF As ToolStripMenuItem
     Friend WithEvents PlToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents CorrelationsRedFlagsorOthersToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuProcurementCorrelations As ToolStripMenuItem
+    Friend WithEvents mnuProcurementMaps As ToolStripMenuItem
+    Friend WithEvents mnuProcurementDescribeMaps As ToolStripMenuItem
 End Class
