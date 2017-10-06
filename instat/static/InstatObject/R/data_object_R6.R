@@ -1034,7 +1034,7 @@ data_object$set("public", "get_factor_data_frame", function(col_name = "", inclu
   if(include_NA_level) {
     missing_count <- sum(is.na(col_data))
     if(include_levels) counts[nrow(counts) + 1, ] <- c("-", "NA", "-", missing_count)
-	    else counts[nrow(counts) + 1, ] <- c("-", "(NA)", missing_count)
+    else counts[nrow(counts) + 1, ] <- c("-", "(NA)", missing_count)
   }
   return(counts)
 }
