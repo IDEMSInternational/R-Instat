@@ -103,10 +103,11 @@ Public Class dlgScatterPlot
         ucrChkLineofBestFit.SetParameter(clsGeomSmoothParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         ucrChkWithSE.SetText("With Standard Error")
-        ucrChkWithSE.SetParameter(New RParameter("se"), bNewAddRemoveParameter:=True, bNewChangeParameterValue:=True)
+        ucrChkWithSE.SetParameter(New RParameter("se"), bNewAddRemoveParameter:=False, bNewChangeParameterValue:=True)
         ucrChkWithSE.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         'ucrChkWithSE.AddParameterValuesCondition(True, "se", "TRUE")
         'ucrChkWithSE.AddParameterValuesCondition(False, "se", "FALSE")
+        ucrChkWithSE.SetRDefault("TRUE")
 
         ucrSaveScatterPlot.SetPrefix("scatterplot")
         ucrSaveScatterPlot.SetSaveTypeAsGraph()
@@ -155,6 +156,8 @@ Public Class dlgScatterPlot
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction
         clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
+
+
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
     End Sub
