@@ -186,20 +186,51 @@ Public Class ucrReceiver
         OnControlValueChanged()
     End Sub
 
-    'TODO remove this method and replace with SetIncludedDataTypes
-    Public Sub SetDataType(strTemp As String)
-        AddIncludedMetadataProperty("class", {Chr(34) & strTemp & Chr(34)})
+    ' If bStrict = True then only columns of the type specific will be included
+    ' If bStict = False then a less strict condition will be made for which columns are included, depending on the type
+    ' as specified below.
+    ' SetDataType("numeric", False) will exclude factor and character columns (so numeric, logical, Date etc. will be included)
+    ' SetDataType("factor", False) will include factor and logical columns
+    Public Sub SetDataType(strTemp As String, Optional bStrict As Boolean = False)
+        If Not bStrict Then
+            If strTemp = "numeric" Then
+                AddExcludedMetadataProperty("class", {Chr(34) & "factor" & Chr(34), Chr(34) & "character" & Chr(34)})
+            ElseIf strTemp = "factor" Then
+                AddIncludedMetadataProperty("class", {Chr(34) & "factor" & Chr(34), Chr(34) & "logical" & Chr(34)})
+            Else
+                AddIncludedMetadataProperty("class", {Chr(34) & strTemp & Chr(34)})
+            End If
+        Else
+            AddIncludedMetadataProperty("class", {Chr(34) & strTemp & Chr(34)})
+        End If
     End Sub
 
-    Public Overridable Sub SetIncludedDataTypes(strInclude As String())
+    'bStrict used as described in SetDataType.
+    'Currently only checks if strInclude has exactly one item.
+    Public Overridable Sub SetIncludedDataTypes(strInclude As String(), Optional bStrict As Boolean = False)
         Dim strTypes(strInclude.Count - 1) As String
 
         Array.Copy(strInclude, strTypes, strInclude.Length)
         'If the two previous lines where not added, the modification of value performed on strTypes was immediately performed on strInclude, then the argument passed into the function such as clsCurrGeom.clsAesParameters(i).strIncludedDataTypes in ucrGeomListWithAes.SetParameters would have been edited (i.e. quotes would have been added to the types names in the strIncludedDataTypes of the i'th AesParameter of the current Geom...), which we don't want !
+
         For i = 0 To strInclude.Count - 1
             strTypes(i) = Chr(34) & strInclude(i) & Chr(34)
         Next
-        AddIncludedMetadataProperty("class", strTypes)
+        If Not bStrict Then
+            If strTypes.Count = 1 Then
+                If strTypes(0) = Chr(34) & "numeric" & Chr(34) Then
+                    AddExcludedMetadataProperty("class", {Chr(34) & "factor" & Chr(34), Chr(34) & "character" & Chr(34)})
+                ElseIf strTypes(0) = Chr(34) & "factor" & Chr(34) Then
+                    AddIncludedMetadataProperty("class", {Chr(34) & "factor" & Chr(34), Chr(34) & "logical" & Chr(34)})
+                Else
+                    AddIncludedMetadataProperty("class", strTypes)
+                End If
+            Else
+                AddIncludedMetadataProperty("class", strTypes)
+            End If
+        Else
+            AddIncludedMetadataProperty("class", strTypes)
+        End If
     End Sub
 
     Public Overridable Sub SetExcludedDataTypes(strExclude As String())

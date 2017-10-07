@@ -1009,18 +1009,19 @@ data_object$set("public", "get_data_frame_length", function(use_current_filter =
 }
 )
 
-data_object$set("public", "get_factor_data_frame", function(col_name = "", include_levels = TRUE) {
+data_object$set("public", "get_factor_data_frame", function(col_name = "", include_levels = TRUE, include_NA_level = FALSE) {
   if(!(col_name %in% self$get_column_names())) stop(col_name, " is not a column name,")
   col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
   if(!(is.factor(col_data))) stop(col_name, " is not a factor column")
   
-  counts <- as.data.frame(table(col_data))
+  counts <- data.frame(table(col_data))
   counts <- plyr::rename(counts, replace = c("col_data" = "Label"))
+  counts[["Label"]] <- as.character(counts[["Label"]])
   counts[["Ord."]] <- 1:nrow(counts)
   if(include_levels) {
     if(self$is_variables_metadata(str = labels_label, col = col_name)) {
       curr_levels <- self$get_variables_metadata(property = labels_label, column = col_name, direct_from_attributes = TRUE)
-      curr_levels <- data.frame(Label = names(curr_levels), Level = as.vector(curr_levels))
+      curr_levels <- data.frame(Label = names(curr_levels), Level = as.vector(curr_levels), stringsAsFactors = FALSE)
       counts <- dplyr::left_join(counts, curr_levels, by = "Label")
     }
     else {
@@ -1030,6 +1031,11 @@ data_object$set("public", "get_factor_data_frame", function(col_name = "", inclu
     counts <- counts[c("Ord.", "Label", "Level", "Freq")]
   }
   else counts <- counts[c("Ord.", "Label", "Freq")]
+  if(include_NA_level) {
+    missing_count <- sum(is.na(col_data))
+    if(include_levels) counts[nrow(counts) + 1, ] <- c("-", "NA", "-", missing_count)
+    else counts[nrow(counts) + 1, ] <- c("-", "(NA)", missing_count)
+  }
   return(counts)
 }
 )
@@ -3192,5 +3198,61 @@ data_object$set("public","display_daily_graph", function(data_name, date_col = N
   }
   if(length(graph_list) > 1) return(gridExtra::grid.arrange(grobs = graph_list))
   else return(g)
+}
+)
+
+data_object$set("public", "get_variables_metadata_names", function(columns) {
+  if(missing(columns)) columns <- self$get_column_names()
+  cols <- self$get_columns_from_data(columns, force_as_data_frame = TRUE)
+  return(unique(as.character(unlist(sapply(cols, function(x) names(attributes(x)))))))
+}
+)
+
+data_object$set("public", "create_variable_set", function(set_name, columns) {
+  adjusted_set_name <- paste0(set_prefix, set_name)
+  if(adjusted_set_name %in% self$get_variables_metadata_names()) warning("A set named ", set_name, " already exists and will be replaced.")
+  self$append_to_variables_metadata(col_names = setdiff(self$get_column_names(), columns), property = adjusted_set_name, new_val = FALSE)
+  self$append_to_variables_metadata(col_names = columns, property = adjusted_set_name, new_val = TRUE)
+}
+)
+
+data_object$set("public", "update_variable_set", function(set_name, columns) {
+  suppressWarnings(self$create_variable_set(set_name = set_name, columns = columns))
+}
+)
+
+data_object$set("public", "delete_variable_set", function(set_name) {
+  adjusted_set_name <- paste0(set_prefix, set_name)
+  if(!adjusted_set_name %in% self$get_variables_metadata_names()) {
+    warning("There is no variable set called ", set_name, ".")
+  }
+  else {
+    self$append_to_variables_metadata(col_names = self$get_column_names(), property = adjusted_set_name, new_val = NULL)
+  }
+}
+)
+
+data_object$set("public", "get_variable_sets_names", function(include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
+  metadata_names <- self$get_variables_metadata_names()
+  set_names <- stringr::str_sub(metadata_names[startsWith(metadata_names, set_prefix)], start = nchar(set_prefix) + 1)
+  if(as_list) {
+    out <- list()
+    out[[self$get_metadata(data_name_label)]] <- set_names
+  }
+  else out <- set_names
+  return(out)
+}
+)
+
+data_object$set("public", "get_variable_sets", function(set_names, force_as_list) {
+  curr_set_names <- self$get_variable_sets_names()
+  if(!missing(set_names) && !all(set_names %in% curr_set_names)) stop("Not all of: ", paste(set_name, collapse = ", "), "exist as variable sets.")
+  include_lists <- rep(list(TRUE), length(set_names))
+  names(include_lists) <- set_names
+  out <- lapply(include_lists, function(x) self$get_column_names(include = x))
+  if(length(set_names) == 1 && !force_as_list) {
+    out <- as.character(unlist(out))
+  }
+  return(out)
 }
 )
