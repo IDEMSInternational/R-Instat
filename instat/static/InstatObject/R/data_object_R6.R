@@ -1303,8 +1303,8 @@ data_object$set("public", "get_column_names", function(as_list = FALSE, include 
         if(!data_type_label %in% names(curr_var_metadata)) curr_var_metadata[[data_type_label]] <- class(private$data[[col]])
         #TODO this is a temp compatibility solution for how the class of ordered factor used to be shown when getting metadata
         if(length(curr_var_metadata[[data_type_label]]) == 2 && all(curr_var_metadata[[data_type_label]] %in% c("ordered", "factor"))) curr_var_metadata[[data_type_label]] <- "ordered,factor"
-        if(all(c(names(include), names(exclude)) %in% names(curr_var_metadata)) && all(sapply(names(include), function(prop) curr_var_metadata[[prop]] %in% include[[prop]]))
-           && all(sapply(names(exclude), function(prop) !curr_var_metadata[[prop]] %in% exclude[[prop]]))) {
+        if(all(c(names(include), names(exclude)) %in% names(curr_var_metadata)) && all(sapply(names(include), function(prop) any(curr_var_metadata[[prop]] %in% include[[prop]])))
+           && all(sapply(names(exclude), function(prop) !any(curr_var_metadata[[prop]] %in% exclude[[prop]])))) {
           out <- c(out, col)
         }
       }
