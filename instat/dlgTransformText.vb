@@ -117,16 +117,23 @@ Public Class dlgTransformText
         'rdoWords
         ucrPnlOperation.AddToLinkedControls(ucrChkFirstOr, {rdoWords}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOperation.AddToLinkedControls(ucrChkLastOr, {rdoWords}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOperation.AddToLinkedControls(ucrInputSeparator, {rdoWords}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOperation.AddToLinkedControls(ucrNudFrom, {rdoSubstring}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrPnlOperation.AddToLinkedControls(ucrNudTo, {rdoSubstring}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
         ucrChkFirstOr.AddToLinkedControls(ucrNudFirstWord, {False}, bNewLinkedDisabledIfParameterMissing:=True)
         ucrChkFirstOr.AddToLinkedControls(ucrReceiverFirstWord, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkLastOr.AddToLinkedControls(ucrNudLastWord, {False}, bNewLinkedDisabledIfParameterMissing:=True)
         ucrChkLastOr.AddToLinkedControls(ucrReceiverLastWord, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOperation.AddToLinkedControls(ucrInputSeparator, {rdoWords}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'ucrChkFirstOr
         ucrNudFirstWord.SetParameter(New RParameter("start", 1))
         ucrNudFirstWord.SetMinMax(Integer.MinValue, Integer.MaxValue)
         ucrNudFirstWord.SetLinkedDisplayControl(lblFirstWord)
+
+        'ucrChkLastOr
+        ucrNudLastWord.SetParameter(New RParameter("end", 2))
+        ucrNudLastWord.SetMinMax(Integer.MinValue, Integer.MaxValue)
+        ucrNudLastWord.SetLinkedDisplayControl(lblLastWord)
 
         ucrReceiverFirstWord.SetParameter(New RParameter("start", 1))
         ucrReceiverFirstWord.SetParameterIsRFunction()
@@ -134,20 +141,15 @@ Public Class dlgTransformText
         ucrReceiverFirstWord.bUseFilteredData = False
         ucrReceiverFirstWord.SetIncludedDataTypes({"numeric"})
 
-        ucrChkFirstOr.SetText("Or Column")
-        ucrChkFirstOr.AddParameterIsStringCondition(False, "start", True)
-        ucrChkFirstOr.AddParameterIsRFunctionCondition(True, "start", True)
-
-        'ucrChkLastOr
-        ucrNudLastWord.SetParameter(New RParameter("end", 2))
-        ucrNudLastWord.SetMinMax(Integer.MinValue, Integer.MaxValue)
-        ucrNudLastWord.SetLinkedDisplayControl(lblLastWord)
-
         ucrReceiverLastWord.SetParameter(New RParameter("end", 2))
         ucrReceiverLastWord.SetParameterIsRFunction()
         ucrReceiverLastWord.Selector = ucrSelectorForTransformText
         ucrReceiverLastWord.bUseFilteredData = False
         ucrReceiverLastWord.SetIncludedDataTypes({"numeric"})
+
+        ucrChkFirstOr.SetText("Or Column")
+        ucrChkFirstOr.AddParameterIsStringCondition(False, "start", True)
+        ucrChkFirstOr.AddParameterIsRFunctionCondition(True, "start", True)
 
         ucrChkLastOr.SetText("Or Column")
         ucrChkLastOr.AddParameterIsStringCondition(False, "start", True)
@@ -163,10 +165,6 @@ Public Class dlgTransformText
         ucrInputSeparator.SetLinkedDisplayControl(lblSeparator)
         ucrInputSeparator.SetRDefault("stringr::fixed(" & Chr(34) & " " & Chr(34) & ")")
         ucrInputSeparator.bAllowNonConditionValues = True
-
-        'rdoSubstring
-        ucrPnlOperation.AddToLinkedControls(ucrNudFrom, {rdoSubstring}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
-        ucrPnlOperation.AddToLinkedControls(ucrNudTo, {rdoSubstring}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
 
         'ucrNuds
         ucrNudFrom.SetParameter(New RParameter("start", 1))
@@ -202,7 +200,6 @@ Public Class dlgTransformText
 
         clsLengthFunction.SetPackageName("stringr")
         clsLengthFunction.SetRCommand("str_length")
-        'clsLengthFunction.SetAssignTo(ucrNewColName.GetText(), strTempDataframe:=ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText)
 
         clsPadFunction.SetPackageName("stringr")
         clsPadFunction.SetRCommand("str_pad")
@@ -373,21 +370,16 @@ Public Class dlgTransformText
             ucrNudLastWord.Visible = True
             If ucrChkFirstOr.Checked Then
                 ucrReceiverFirstWord.SetMeAsReceiver()
-                clsSubstringFunction.AddParameter("start", clsRFunctionParameter:=ucrReceiverFirstWord.GetVariables(), iPosition:=1)
             Else
                 If ucrChkLastOr.Checked Then
                     ucrReceiverLastWord.SetMeAsReceiver()
                 Else
                     ucrReceiverTransformText.SetMeAsReceiver()
                 End If
-                clsSubstringFunction.AddParameter("start", ucrNudFirstWord.Value, iPosition:=1)
             End If
-
             If ucrChkLastOr.Checked Then
                 ucrReceiverLastWord.SetMeAsReceiver()
-                clsSubstringFunction.AddParameter("end", clsRFunctionParameter:=ucrReceiverLastWord.GetVariables(), iPosition:=2)
             Else
-                clsSubstringFunction.AddParameter("end", ucrNudLastWord.Value, iPosition:=2)
                 If ucrChkFirstOr.Checked Then
                     ucrReceiverFirstWord.SetMeAsReceiver()
                 Else
