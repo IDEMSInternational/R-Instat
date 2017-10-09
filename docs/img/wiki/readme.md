@@ -1,1 +1,1 @@
-## Folder to store images used in the wiki
+Folder to store images used in the wiki
