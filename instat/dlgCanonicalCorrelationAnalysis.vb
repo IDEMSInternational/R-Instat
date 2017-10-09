@@ -45,14 +45,14 @@ Public Class dlgCanonicalCorrelationAnalysis
         ucrReceiverYVariables.SetParameter(New RParameter("y", 0))
         ucrReceiverYVariables.SetParameterIsRFunction()
         ucrReceiverYVariables.Selector = ucrSelectorCCA
-        ucrReceiverYVariables.SetDataType("numeric")
+        ucrReceiverYVariables.SetDataType("numeric", bStrict:=True)
         ucrReceiverYVariables.strSelectorHeading = "Numerics"
 
         ' X Variable Selector
         ucrReceiverXVariables.SetParameter(New RParameter("x", 1))
         ucrReceiverXVariables.SetParameterIsRFunction()
         ucrReceiverXVariables.Selector = ucrSelectorCCA
-        ucrReceiverXVariables.SetDataType("numeric")
+        ucrReceiverXVariables.SetDataType("numeric", bStrict:=True)
         ucrReceiverXVariables.strSelectorHeading = "Numerics"
 
         'ucrSaveResult
