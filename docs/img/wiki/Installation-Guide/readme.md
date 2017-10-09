@@ -1,1 +1,1 @@
-Images for the Installation Guide wiki page
+## Images for the Installation Guide wiki page
