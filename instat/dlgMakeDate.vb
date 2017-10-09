@@ -155,7 +155,7 @@ Public Class dlgMakeDate
         ucrPnlFormat.AddRadioButton(rdoDefaultFormat)
         ucrPnlFormat.AddRadioButton(rdoSpecifyFormat)
         ucrPnlFormat.AddRadioButton(rdoSpecifyOrigin)
-
+        ttMakeDate.SetToolTip(rdoDefaultFormat, "If not specified, it will try %Y-%m-%d then %Y/%m/%d on the first non-NA element")
         ucrPnlDate.AddFunctionNamesCondition(rdoSingleColumn, "as.Date")
         ucrPnlDate.AddFunctionNamesCondition(rdoTwoColumns, frmMain.clsRLink.strInstatDataObject & "$make_date_yeardoy")
         ucrPnlDate.AddFunctionNamesCondition(rdoThreeColumns, frmMain.clsRLink.strInstatDataObject & "$make_date_yearmonthday")
@@ -341,9 +341,7 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub SelectorHeader()
-        If rdoDefaultFormat.Checked Then
-            ucrReceiverForDate.strSelectorHeading = "Characters"
-        ElseIf rdoSpecifyOrigin.Checked Then
+        If rdoSpecifyOrigin.Checked Then
             ucrReceiverForDate.strSelectorHeading = "Numerics"
         Else
             ucrReceiverForDate.strSelectorHeading = "Variables"
@@ -394,7 +392,6 @@ Public Class dlgMakeDate
         If rdoDefaultFormat.Checked Then
             grpFormats.Hide()
             cmdHelp.Visible = False
-            ucrReceiverForDate.SetIncludedDataTypes({"character", "factor"})
             ucrBase.clsRsyntax.RemoveParameter("format")
             ucrBase.clsRsyntax.RemoveParameter("origin")
         ElseIf rdoSpecifyOrigin.Checked Then
