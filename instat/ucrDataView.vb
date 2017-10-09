@@ -470,7 +470,7 @@ Public Class ucrDataView
         strColumns = SelectedColumnsAsArray()
         If strColumns.Count = 1 Then
             strType = frmMain.clsRLink.GetColumnType(grdCurrSheet.Name, strColumns(0))
-            If strType = "factor" Then
+            If strType.Contains("factor") Then
                 dlgLabelsLevels.SetCurrentColumn(strColumns(0), grdCurrSheet.Name)
             End If
         End If
@@ -738,7 +738,7 @@ Public Class ucrDataView
 
         If iSelectedCols = 1 Then
             strType = frmMain.clsRLink.GetColumnType(grdCurrSheet.Name, strColumns(0))
-            mnuLevelsLabels.Enabled = (strType = "factor")
+            mnuLevelsLabels.Enabled = (strType.Contains("factor"))
             mnuDeleteCol.Text = "Delete Column"
             mnuInsertColsBefore.Text = "Insert 1 Column Before"
             mnuInsertColsAfter.Text = "Insert 1 Column After"
