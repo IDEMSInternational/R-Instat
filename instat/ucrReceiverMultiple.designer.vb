@@ -53,6 +53,7 @@ Partial Class ucrReceiverMultiple
         Me.lstSelectedVariables.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.lstSelectedVariables.Location = New System.Drawing.Point(0, 0)
         Me.lstSelectedVariables.Name = "lstSelectedVariables"
+        Me.lstSelectedVariables.ShowItemToolTips = True
         Me.lstSelectedVariables.Size = New System.Drawing.Size(120, 100)
         Me.lstSelectedVariables.TabIndex = 1
         Me.lstSelectedVariables.UseCompatibleStateImageBehavior = False
