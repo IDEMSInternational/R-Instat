@@ -155,7 +155,7 @@ Public Class dlgMakeDate
         ucrPnlFormat.AddRadioButton(rdoDefaultFormat)
         ucrPnlFormat.AddRadioButton(rdoSpecifyFormat)
         ucrPnlFormat.AddRadioButton(rdoSpecifyOrigin)
-        ttMakeDate.SetToolTip(rdoDefaultFormat, "If not specified, it will try %Y-%m-%d then %Y/%m/%d on the first non-NA element")
+        ttMakeDate.SetToolTip(rdoDefaultFormat, "This will try 'Year(4-digit)-Month-Day %Y-%m-%d' then 'Year(4-digit)/Month/Day %Y/%m/%d' on the first non-NA element")
         ucrPnlDate.AddFunctionNamesCondition(rdoSingleColumn, "as.Date")
         ucrPnlDate.AddFunctionNamesCondition(rdoTwoColumns, frmMain.clsRLink.strInstatDataObject & "$make_date_yeardoy")
         ucrPnlDate.AddFunctionNamesCondition(rdoThreeColumns, frmMain.clsRLink.strInstatDataObject & "$make_date_yearmonthday")
