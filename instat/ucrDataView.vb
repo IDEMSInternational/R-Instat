@@ -739,12 +739,12 @@ Public Class ucrDataView
         If iSelectedCols = 1 Then
             strType = frmMain.clsRLink.GetColumnType(grdCurrSheet.Name, strColumns(0))
             mnuLevelsLabels.Enabled = (strType.Contains("factor"))
-            mnuDeleteCol.Text = "Delete Column"
+            mnuDeleteCol.Text = "Delete 1 Column"
             mnuInsertColsBefore.Text = "Insert 1 Column Before"
             mnuInsertColsAfter.Text = "Insert 1 Column After"
         Else
             mnuLevelsLabels.Enabled = False
-            mnuDeleteCol.Text = "Delete Columns"
+            mnuDeleteCol.Text = "Delete " & iSelectedCols & " Columns"
             mnuInsertColsBefore.Text = "Insert " & iSelectedCols & " Columns Before"
             mnuInsertColsAfter.Text = "Insert " & iSelectedCols & " Columns After"
         End If
