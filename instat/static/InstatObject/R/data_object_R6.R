@@ -1303,8 +1303,8 @@ data_object$set("public", "get_column_names", function(as_list = FALSE, include 
         if(!data_type_label %in% names(curr_var_metadata)) curr_var_metadata[[data_type_label]] <- class(private$data[[col]])
         #TODO this is a temp compatibility solution for how the class of ordered factor used to be shown when getting metadata
         if(length(curr_var_metadata[[data_type_label]]) == 2 && all(curr_var_metadata[[data_type_label]] %in% c("ordered", "factor"))) curr_var_metadata[[data_type_label]] <- "ordered,factor"
-        if(all(c(names(include), names(exclude)) %in% names(curr_var_metadata)) && all(sapply(names(include), function(prop) curr_var_metadata[[prop]] %in% include[[prop]]))
-           && all(sapply(names(exclude), function(prop) !curr_var_metadata[[prop]] %in% exclude[[prop]]))) {
+        if(all(c(names(include), names(exclude)) %in% names(curr_var_metadata)) && all(sapply(names(include), function(prop) any(curr_var_metadata[[prop]] %in% include[[prop]])))
+           && all(sapply(names(exclude), function(prop) !any(curr_var_metadata[[prop]] %in% exclude[[prop]])))) {
           out <- c(out, col)
         }
       }
@@ -2311,7 +2311,7 @@ data_object$set("public","make_inventory_plot", function(date_col, station_col =
 }
 )
 
-data_object$set("public","infill_missing_dates", function(date_name, factors) {
+data_object$set("public","infill_missing_dates", function(date_name, factors, resort = TRUE) {
   date_col <- self$get_columns_from_data(date_name)
   if(!lubridate::is.Date(date_col)) stop(date_name, " is not a Date column.")
   if(anyNA(date_col)) stop("Cannot do infilling as date column has missing values")
@@ -2326,7 +2326,7 @@ data_object$set("public","infill_missing_dates", function(date_name, factors) {
       names(full_dates) <- date_name
       self$merge_data(full_dates, by = date_name, type = "full")
       message("Missing dates infilled.")
-      self$sort_dataframe(col_names = date_name)
+      if(resort) self$sort_dataframe(col_names = date_name)
     }
   }
   else {
@@ -2356,7 +2356,7 @@ data_object$set("public","infill_missing_dates", function(date_name, factors) {
     if(merge_required) {
       all_dates_factors <- plyr::rbind.fill(full_dates_list)
       self$merge_data(all_dates_factors, by = c(date_name, factors), type = "full")
-      self$sort_dataframe(col_names = c(date_name, factors))
+      if(resort) self$sort_dataframe(col_names = c(factors, date_name))
     }
   }
 }
