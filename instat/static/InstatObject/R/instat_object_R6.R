@@ -1192,8 +1192,8 @@ instat_object$set("public", "import_NetCDF", function(nc, name, only_data_vars =
 # }
 # )
 
-instat_object$set("public", "infill_missing_dates", function(data_name, date_name, factors) {
-  self$get_data_objects(data_name)$infill_missing_dates(date_name = date_name, factor = factors)
+instat_object$set("public", "infill_missing_dates", function(data_name, date_name, factors, resort = TRUE) {
+  self$get_data_objects(data_name)$infill_missing_dates(date_name = date_name, factor = factors, resort = resort)
 }
 )
 

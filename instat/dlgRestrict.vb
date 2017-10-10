@@ -117,8 +117,8 @@ Public Class dlgRestrict
     End Sub
 
     Private Sub OpenNewFilterSubDialog()
-        sdgCreateFilter.ucrCreateFilter.SetDefaultDataFrame(strDefaultDataframe)
-        If strDefaultColumn <> "" Then
+        sdgCreateFilter.ucrCreateFilter.SetDefaultDataFrame(ucrSelectorFilter.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        If strDefaultColumn <> "" AndAlso ucrSelectorFilter.ucrAvailableDataFrames.cboAvailableDataFrames.Text = strDefaultDataframe Then
             sdgCreateFilter.ucrCreateFilter.SetDefaultColumn(strDefaultColumn)
         End If
         sdgCreateFilter.ShowDialog()
