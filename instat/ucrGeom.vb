@@ -999,18 +999,18 @@ Public Class ucrGeom
         'clsgeom_segment.AddLayerParameter("vjust", "numeric", "0.5")
         'lstAllGeoms.Add(clsgeom_segment)
 
-        ''clsgeom_smooth.strGeomName = "geom_smooth"
-        'mandatory
-        ''clsgeom_smooth.AddAesParameter("x", bIsMandatory:=True)
-        ''clsgeom_smooth.AddAesParameter("y", bIsMandatory:=True)
-        'optional 
-        ''clsgeom_smooth.AddAesParameter("alpha")
-        ''clsgeom_smooth.AddAesParameter("colour")
-        ''clsgeom_smooth.AddAesParameter("fill")
-        ''clsgeom_smooth.AddAesParameter("linetype")
-        ''clsgeom_smooth.AddAesParameter("size")
-        ''clsgeom_smooth.AddAesParameter("weight")
-        ''lstAllGeoms.Add(clsgeom_smooth)
+        clsgeom_smooth.strGeomName = "geom_smooth"
+        ' mandatory
+        clsgeom_smooth.AddAesParameter("x", bIsMandatory:=True)
+        clsgeom_smooth.AddAesParameter("y", bIsMandatory:=True)
+        ' optional 
+        clsgeom_smooth.AddAesParameter("alpha")
+        clsgeom_smooth.AddAesParameter("colour")
+        clsgeom_smooth.AddAesParameter("fill")
+        clsgeom_smooth.AddAesParameter("linetype")
+        clsgeom_smooth.AddAesParameter("size")
+        clsgeom_smooth.AddAesParameter("weight")
+        lstAllGeoms.Add(clsgeom_smooth)
 
         'clsgeom_spoke.strGeomName = "geom_spoke"
         ''mandatory
