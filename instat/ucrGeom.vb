@@ -878,8 +878,21 @@ Public Class ucrGeom
         clsgeom_polygon.AddAesParameter("size")
 
         'add layer parameters 
-        clsgeom_polygon.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
-        clsgeom_polygon.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
+        clsgeom_polygon.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_polygon.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_polygon.AddLayerParameter("lineed", "list", Chr(34) & "round" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "butt" & Chr(34), Chr(34) & "squire" & Chr(34)})
+        clsgeom_polygon.AddLayerParameter("linejoin", "list", Chr(34) & "round" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "mitre" & Chr(34), Chr(34) & "bevel" & Chr(34)})
+        clsgeom_polygon.AddLayerParameter("linemitre", "numeric", "0", lstParameterStrings:={1})
+
+        'Arrow parameter is a function and should be passed like this
+        'arrow(angle = 30, length = unit(0.25, "inches"), ends = "last", Type = "open")
+        'currently not sure how to do this 
+        'clsgeom_polygon.AddLayerParameter("arrow")
+
+        clsgeom_polygon.AddLayerParameter("na.rm", "boolean", "FALSE")
+        clsgeom_polygon.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_polygon.AddLayerParameter("inherit.aes", "boolean", "FALSE")
+        clsgeom_polygon.AddLayerParameter("direction", "list", Chr(34) & "vh" & Chr(34), lstParameterStrings:={Chr(34) & "vh" & Chr(34), Chr(34) & "hv" & Chr(34)})
         lstAllGeoms.Add(clsgeom_polygon)
 
         ''clsgeom_qq.strGeomName = "geom_qq"
@@ -999,18 +1012,29 @@ Public Class ucrGeom
         'clsgeom_segment.AddLayerParameter("vjust", "numeric", "0.5")
         'lstAllGeoms.Add(clsgeom_segment)
 
-        clsgeom_smooth.strGeomName = "geom_smooth"
-        ' mandatory
-        clsgeom_smooth.AddAesParameter("x", bIsMandatory:=True)
-        clsgeom_smooth.AddAesParameter("y", bIsMandatory:=True)
-        ' optional 
-        clsgeom_smooth.AddAesParameter("alpha")
-        clsgeom_smooth.AddAesParameter("colour")
-        clsgeom_smooth.AddAesParameter("fill")
-        clsgeom_smooth.AddAesParameter("linetype")
-        clsgeom_smooth.AddAesParameter("size")
-        clsgeom_smooth.AddAesParameter("weight")
-        lstAllGeoms.Add(clsgeom_smooth)
+        'clsgeom_smooth.strGeomName = "geom_smooth"
+        '' mandatory
+        'clsgeom_smooth.AddAesParameter("x", bIsMandatory:=True)
+        'clsgeom_smooth.AddAesParameter("y", bIsMandatory:=True)
+        '' optional 
+        'clsgeom_smooth.AddAesParameter("alpha")
+        'clsgeom_smooth.AddAesParameter("colour")
+        'clsgeom_smooth.AddAesParameter("fill")
+        'clsgeom_smooth.AddAesParameter("linetype")
+        'clsgeom_smooth.AddAesParameter("size")
+        'clsgeom_smooth.AddAesParameter("weight")
+
+        '''add  layer parameter
+        '' clsgeom_smooth.AddLayerParameter("position")
+        'clsgeom_smooth.AddLayerParameter("", "list", Chr(34) & "identity" & Chr(34))
+        'clsgeom_smooth.AddLayerParameter("method", "list", Chr(34) & "lm" & Chr(34), lstParameterStrings:={Chr(34) & "glm" & Chr(34), Chr(34) & "gam" & Chr(34), Chr(34) & "loess" & Chr(34), Chr(34) & "rlm" & Chr(34)})
+        'clsgeom_smooth.AddLayerParameter("formula", "list", Chr(34) & "lm" & Chr(34), lstParameterStrings:={Chr(34) & "glm" & Chr(34), Chr(34) & "gam" & Chr(34), Chr(34) & "loess" & Chr(34), Chr(34) & "rlm" & Chr(34)})
+        'clsgeom_smooth.AddLayerParameter("se", "boolean", "TRUE")
+        'clsgeom_smooth.AddLayerParameter("na.rm", "boolean", "FALSE")
+        'clsgeom_smooth.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        'clsgeom_smooth.AddLayerParameter("inherit.aes", "boolean", "FALSE")
+
+        'lstAllGeoms.Add(clsgeom_smooth)
 
         'clsgeom_spoke.strGeomName = "geom_spoke"
         ''mandatory
