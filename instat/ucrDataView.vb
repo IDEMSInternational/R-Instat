@@ -744,10 +744,9 @@ Public Class ucrDataView
             mnuInsertColsAfter.Text = "Insert 1 Column After"
         Else
             mnuLevelsLabels.Enabled = False
-            mnuDeleteCol.Text = "Delete Columns"
+            mnuDeleteCol.Text = "Delete " & iSelectedCols & " Columns"
             mnuInsertColsBefore.Text = "Insert " & iSelectedCols & " Columns Before"
             mnuInsertColsAfter.Text = "Insert " & iSelectedCols & " Columns After"
-            mnuDeleteCol.Text = "Delete " & iSelectedCols & " Columns"
         End If
     End Sub
 End Class
