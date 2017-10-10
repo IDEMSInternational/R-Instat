@@ -63,6 +63,7 @@ Public Class dlgCountryColouredMap
         ucrSelectorCountryColouredMap.SetParameterIsrfunction()
 
         ucrReceiverCountry.SetParameter(New RParameter("region", 2))
+        ucrReceiverCountry.SetIncludedDataTypes({"factor", "character"})
         ucrReceiverCountry.SetParameterIsString()
 
         ucrReceiverColourBy.SetParameter(New RParameter("fill", 3))
