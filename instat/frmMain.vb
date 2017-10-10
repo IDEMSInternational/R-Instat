@@ -1673,7 +1673,7 @@ Public Class frmMain
         dlgCountryColouredMap.ShowDialog()
     End Sub
 
-    Private Sub mnuInfillMissingDates_Click(sender As Object, e As EventArgs) Handles mnuInfillMissingDates.Click
+    Private Sub mnuPrepareColumnInfillMissingDates_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnInfillMissingDates.Click
         dlgInfill.ShowDialog()
     End Sub
 End Class
