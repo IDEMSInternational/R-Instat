@@ -49,6 +49,7 @@ Public Class ucrReceiverExpression
         Else
             strCurrentItemType = Selector.GetItemType()
         End If
+
         If cboExpression.Enabled Then
             If strCurrentItemType = "column" Then
                 If strDataFrame = "" Then
@@ -68,6 +69,8 @@ Public Class ucrReceiverExpression
             AddToReceiverAtCursorPosition(strItem)
             Selector.AddToVariablesList(strItem, strDataFrame)
             OnSelectionChanged()
+            'we need this to run when everything else has run 
+            cboExpression.Enabled = Not bFixReceiver
         End If
     End Sub
 
