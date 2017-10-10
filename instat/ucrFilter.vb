@@ -48,7 +48,7 @@ Public Class ucrFilter
         End If
         ClearConditions()
         If strDefaultDataFrame <> "" Then
-            ucrSelectorForFitler.SetDataframe(strDefaultDataFrame)
+            ucrSelectorForFitler.SetDataframe(strDefaultDataFrame, False)
         End If
         If strDefaultColumn <> "" Then
             ucrFilterByReceiver.Add(strDefaultColumn)
