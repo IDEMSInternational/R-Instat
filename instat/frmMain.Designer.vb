@@ -488,6 +488,7 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
+        Me.mnuInfillMissingDates = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -532,32 +533,32 @@ Partial Class frmMain
         'mnuDescribeOneVariableSummarise
         '
         Me.mnuDescribeOneVariableSummarise.Name = "mnuDescribeOneVariableSummarise"
-        Me.mnuDescribeOneVariableSummarise.Size = New System.Drawing.Size(146, 22)
+        Me.mnuDescribeOneVariableSummarise.Size = New System.Drawing.Size(152, 22)
         Me.mnuDescribeOneVariableSummarise.Tag = "Summarise..."
         Me.mnuDescribeOneVariableSummarise.Text = "Summarise..."
         '
         'mnuDescribeOneVariableGraph
         '
         Me.mnuDescribeOneVariableGraph.Name = "mnuDescribeOneVariableGraph"
-        Me.mnuDescribeOneVariableGraph.Size = New System.Drawing.Size(146, 22)
+        Me.mnuDescribeOneVariableGraph.Size = New System.Drawing.Size(152, 22)
         Me.mnuDescribeOneVariableGraph.Tag = "Graph..."
         Me.mnuDescribeOneVariableGraph.Text = "Graph..."
         '
         'ToolStripSeparator33
         '
         Me.ToolStripSeparator33.Name = "ToolStripSeparator33"
-        Me.ToolStripSeparator33.Size = New System.Drawing.Size(143, 6)
+        Me.ToolStripSeparator33.Size = New System.Drawing.Size(149, 6)
         '
         'mnuDescribeOneVariableFrequencies
         '
         Me.mnuDescribeOneVariableFrequencies.Name = "mnuDescribeOneVariableFrequencies"
-        Me.mnuDescribeOneVariableFrequencies.Size = New System.Drawing.Size(146, 22)
+        Me.mnuDescribeOneVariableFrequencies.Size = New System.Drawing.Size(152, 22)
         Me.mnuDescribeOneVariableFrequencies.Text = "Frequencies..."
         '
         'RatingDataToolStripMenuItem
         '
         Me.RatingDataToolStripMenuItem.Name = "RatingDataToolStripMenuItem"
-        Me.RatingDataToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.RatingDataToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.RatingDataToolStripMenuItem.Text = "Rating Data..."
         '
         'mnuDescribeTwoVariables
@@ -3070,7 +3071,7 @@ Partial Class frmMain
         '
         'mnuPrepareColumnDate
         '
-        Me.mnuPrepareColumnDate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnGenerateDate, Me.mnuPrepareColumnMakeDate, Me.mnuPrepareColumnUseDate, Me.mnuPrepareColumnMakeTime, Me.mnuPrepareColumnUseTime})
+        Me.mnuPrepareColumnDate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnGenerateDate, Me.mnuPrepareColumnMakeDate, Me.mnuPrepareColumnUseDate, Me.mnuInfillMissingDates, Me.mnuPrepareColumnMakeTime, Me.mnuPrepareColumnUseTime})
         Me.mnuPrepareColumnDate.Name = "mnuPrepareColumnDate"
         Me.mnuPrepareColumnDate.Size = New System.Drawing.Size(172, 22)
         Me.mnuPrepareColumnDate.Text = "Column: Date"
@@ -3079,33 +3080,33 @@ Partial Class frmMain
         '
         Me.mnuPrepareColumnGenerateDate.Enabled = False
         Me.mnuPrepareColumnGenerateDate.Name = "mnuPrepareColumnGenerateDate"
-        Me.mnuPrepareColumnGenerateDate.Size = New System.Drawing.Size(162, 22)
+        Me.mnuPrepareColumnGenerateDate.Size = New System.Drawing.Size(182, 22)
         Me.mnuPrepareColumnGenerateDate.Text = "Generate Dates..."
         '
         'mnuPrepareColumnMakeDate
         '
         Me.mnuPrepareColumnMakeDate.Name = "mnuPrepareColumnMakeDate"
-        Me.mnuPrepareColumnMakeDate.Size = New System.Drawing.Size(162, 22)
+        Me.mnuPrepareColumnMakeDate.Size = New System.Drawing.Size(182, 22)
         Me.mnuPrepareColumnMakeDate.Text = "Make Date..."
         '
         'mnuPrepareColumnUseDate
         '
         Me.mnuPrepareColumnUseDate.Name = "mnuPrepareColumnUseDate"
-        Me.mnuPrepareColumnUseDate.Size = New System.Drawing.Size(162, 22)
+        Me.mnuPrepareColumnUseDate.Size = New System.Drawing.Size(182, 22)
         Me.mnuPrepareColumnUseDate.Text = "Use Date..."
         '
         'mnuPrepareColumnMakeTime
         '
         Me.mnuPrepareColumnMakeTime.Enabled = False
         Me.mnuPrepareColumnMakeTime.Name = "mnuPrepareColumnMakeTime"
-        Me.mnuPrepareColumnMakeTime.Size = New System.Drawing.Size(162, 22)
+        Me.mnuPrepareColumnMakeTime.Size = New System.Drawing.Size(182, 22)
         Me.mnuPrepareColumnMakeTime.Text = "Make Time..."
         '
         'mnuPrepareColumnUseTime
         '
         Me.mnuPrepareColumnUseTime.Enabled = False
         Me.mnuPrepareColumnUseTime.Name = "mnuPrepareColumnUseTime"
-        Me.mnuPrepareColumnUseTime.Size = New System.Drawing.Size(162, 22)
+        Me.mnuPrepareColumnUseTime.Size = New System.Drawing.Size(182, 22)
         Me.mnuPrepareColumnUseTime.Text = "Use Time..."
         '
         'mnuPrepareColumnReshape
@@ -3730,6 +3731,12 @@ Partial Class frmMain
         Me.ucrOutput.Size = New System.Drawing.Size(444, 231)
         Me.ucrOutput.TabIndex = 0
         '
+        'mnuInfillMissingDates
+        '
+        Me.mnuInfillMissingDates.Name = "mnuInfillMissingDates"
+        Me.mnuInfillMissingDates.Size = New System.Drawing.Size(182, 22)
+        Me.mnuInfillMissingDates.Text = "Infill Missing Dates..."
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -4226,4 +4233,5 @@ Partial Class frmMain
     Friend WithEvents mnuProcurementCorrelations As ToolStripMenuItem
     Friend WithEvents mnuProcurementMaps As ToolStripMenuItem
     Friend WithEvents mnuProcurementDescribeMaps As ToolStripMenuItem
+    Friend WithEvents mnuInfillMissingDates As ToolStripMenuItem
 End Class
