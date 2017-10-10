@@ -40,6 +40,7 @@ Public Class ucrFactor
     Public WithEvents ucrChkLevels As ucrCheck
     Public bForceShowLevels As Boolean
     Public bIncludeLevels As Boolean
+    Public bIncludeNA As Boolean
     Public strLevelsName As String
     Public strLabelsName As String
     Public strFreqName As String
@@ -62,6 +63,7 @@ Public Class ucrFactor
         bIncludeCopyOfLevels = False
         bForceShowLevels = False
         bIncludeLevels = True
+        bIncludeNA = False
         strLevelsName = "Level"
         strLabelsName = "Label"
         strFreqName = "Freq"
@@ -156,6 +158,11 @@ Public Class ucrFactor
                     clsGetFactorData.AddParameter("include_levels", "TRUE")
                 Else
                     clsGetFactorData.AddParameter("include_levels", "FALSE")
+                End If
+                If bIncludeNA Then
+                    clsGetFactorData.AddParameter("include_NA_level", "TRUE")
+                Else
+                    clsGetFactorData.AddParameter("include_NA_level", "FALSE")
                 End If
                 clsConvertToCharacter.SetRCommand("convert_to_character_matrix")
                 clsConvertToCharacter.AddParameter("data", clsRFunctionParameter:=clsGetFactorData)
@@ -325,7 +332,15 @@ Public Class ucrFactor
                         ElseIf iCount > 1 Then
                             strTemp = strTemp & ","
                         End If
-                        strTemp = strTemp & Chr(34) & shtCurrSheet(i, iLabelsCol) & Chr(34)
+                        'This checks if the value in the ordinal column is "-" which means it's the NA row
+                        'so no quotes should be added.
+                        'There could be a real factor level with the same label as (NA) so safer to check
+                        'the Ordinal column which will only have "-" for the (NA) row.
+                        If shtCurrSheet(i, 0) = "-" Then
+                            strTemp = strTemp & shtCurrSheet(i, iLabelsCol)
+                        Else
+                            strTemp = strTemp & Chr(34) & shtCurrSheet(i, iLabelsCol) & Chr(34)
+                        End If
                         iCount = iCount + 1
                     End If
                 End If

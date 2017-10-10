@@ -322,6 +322,7 @@ Public Class ucrReceiverMultiple
                 lstSelectedVariables.Items.Add(kvpTempItem.Value).Group = grpCurr
                 lstSelectedVariables.Items(lstSelectedVariables.Items.Count - 1).Tag = kvpTempItem.Key
                 lstSelectedVariables.Items(lstSelectedVariables.Items.Count - 1).Name = kvpTempItem.Value
+                lstSelectedVariables.Items(lstSelectedVariables.Items.Count - 1).ToolTipText = kvpTempItem.Value
                 Selector.AddToVariablesList(kvpTempItem.Value, kvpTempItem.Key)
             End If
         Next
