@@ -375,7 +375,16 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Sub mnuLabelsLevels_Click(sender As Object, e As EventArgs) Handles mnuLevelsLabels.Click
-        dlgLabelsLevels.SetCurrentColumn(GetSelectedVariableNamesAsArray()(0), grdCurrSheet.Name)
+        Dim strType As String
+        Dim strColumns() As String
+
+        strColumns = GetSelectedVariableNamesAsArray()
+        If strColumns.Count = 1 Then
+            strType = frmMain.clsRLink.GetColumnType(grdCurrSheet.Name, strColumns(0))
+            If strType.Contains("factor") Then
+                dlgLabelsLevels.SetCurrentColumn(strColumns(0), grdCurrSheet.Name)
+            End If
+        End If
         dlgLabelsLevels.ShowDialog()
     End Sub
 
@@ -389,7 +398,7 @@ Public Class ucrColumnMetadata
 
         If iSelectedCols = 1 Then
             strType = frmMain.clsRLink.GetColumnType(grdCurrSheet.Name, strColumns(0))
-            mnuLevelsLabels.Enabled = (strType = "factor")
+            mnuLevelsLabels.Enabled = (strType.Contains("factor"))
             mnuDeleteCol.Text = "Delete Column"
             mnuInsertColsBefore.Text = "Insert 1 Column Before"
             mnuInsertColsAfter.Text = "Insert 1 Column After"
