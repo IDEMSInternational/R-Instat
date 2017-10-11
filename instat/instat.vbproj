@@ -4694,10 +4694,7 @@
     <Content Include="static\Library\Climatic\WKenya_StationInfo.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\Library\Procurement\WorldBankProcDataFrame.rds">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Procurement\WorldBankProcInstatObject.RDS">
+    <Content Include="static\Library\Procurement\WorldBank_old.RDS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\Library\CAST\CASTDATA.RDS">
@@ -5427,6 +5424,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\Library\Procurement\EuropeAid.RDS">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\Library\Procurement\WorldBank.RDS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
