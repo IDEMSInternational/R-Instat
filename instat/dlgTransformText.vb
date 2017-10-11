@@ -284,15 +284,10 @@ Public Class dlgTransformText
                     ucrBase.OKEnabled(False)
                 End If
             ElseIf rdoSubstring.Checked Then
-                If ucrNudTo.GetText <> "" AndAlso ucrNudFrom.GetText <> "" Then
+                If ((ucrNudTo.GetText <> "" AndAlso ucrNudFrom.GetText <> "" AndAlso Not ucrChkFirstOr.Checked) OrElse (ucrChkFirstOr.Checked AndAlso Not ucrReceiverFirstWord.IsEmpty)) AndAlso ((ucrNudLastWord.GetText <> "" AndAlso Not ucrChkLastOr.Checked) OrElse (ucrChkLastOr.Checked AndAlso Not ucrReceiverLastWord.IsEmpty)) Then
                     ucrBase.OKEnabled(True)
-                    If Not ucrReceiverFirstWord.IsEmpty AndAlso Not ucrReceiverLastWord.IsEmpty Then
-                        ucrBase.OKEnabled(True)
-                    Else
-                        ucrBase.OKEnabled(False)
-                    End If
                 Else
-                        ucrBase.OKEnabled(False)
+                    ucrBase.OKEnabled(False)
                 End If
             Else
                 ucrBase.OKEnabled(False)
