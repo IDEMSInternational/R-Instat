@@ -22,8 +22,6 @@ Public Class dlgAddKey
     Private bReset As Boolean = True
     Private clsDefaultRFunction As New RFunction
     Private clsAnyDuplicatesFunction As New RFunction
-    Private clsSumFunction As New RFunction
-    Private clsIsNAFunction As New RFunction
     Private bUniqueChecked As Boolean = False
 
     Private Sub dlgAddKey_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -90,31 +88,21 @@ Public Class dlgAddKey
 
     Private Sub cmdCheckUnique_Click(sender As Object, e As EventArgs) Handles cmdCheckUnique.Click
         Dim iAnyDuplicated As Integer
-        Dim iSumNA As Integer
 
         clsAnyDuplicatesFunction.SetRCommand("anyDuplicated")
-        clsSumFunction.SetRCommand("sum")
-        clsIsNAFunction.SetRCommand("is.na")
-        clsSumFunction.AddParameter("x", clsRFunctionParameter:=clsIsNAFunction)
 
         clsAnyDuplicatesFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverKeyColumns.GetVariables())
-        clsIsNAFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverKeyColumns.GetVariables())
         Try
             iAnyDuplicated = frmMain.clsRLink.RunInternalScriptGetValue(clsAnyDuplicatesFunction.ToScript()).AsInteger(0)
-            iSumNA = frmMain.clsRLink.RunInternalScriptGetValue(clsSumFunction.ToScript()).AsInteger(0)
         Catch ex As Exception
             iAnyDuplicated = -1
-            iSumNA = -1
         End Try
         bUniqueChecked = False
-        If iAnyDuplicated = -1 OrElse iSumNA = -1 Then
-            ucrInputCheckInput.SetName("Developer error! Could not check uniqueness/missing values.")
+        If iAnyDuplicated = -1 Then
+            ucrInputCheckInput.SetName("Developer error! Could not check uniqueness.")
             ucrInputCheckInput.txtInput.BackColor = Color.Yellow
         ElseIf iAnyDuplicated > 0 Then
             ucrInputCheckInput.SetName("Column(s) cannot define a key. Entries not unique.")
-            ucrInputCheckInput.txtInput.BackColor = Color.LightCoral
-        ElseIf iSumNA > 0 Then
-            ucrInputCheckInput.SetName("Column(s) cannot define a key. Entries contain missing values.")
             ucrInputCheckInput.txtInput.BackColor = Color.LightCoral
         Else
             ucrInputCheckInput.SetName("Column(s) can define a key.")
