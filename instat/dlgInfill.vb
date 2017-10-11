@@ -59,6 +59,7 @@ Public Class dlgInfill
         ucrChkResort.SetParameter(New RParameter("resort", 3))
         ucrChkResort.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkResort.SetRDefault("TRUE")
+        ucrChkResort.SetText("Resort")
     End Sub
 
     Private Sub SetDefaults()
