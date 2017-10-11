@@ -23,7 +23,20 @@ Public Class dlgCountryColouredMap
     Private clsGgplot As New RFunction
     Private clsRGeomPolygon As New RFunction
     Private clsRaesFunc As New RFunction
+    Private clsLocalRaesFunction As New RFunction
     Private clsCoordMap As New RFunction
+    Private bResetSubDialog As Boolean = False
+
+    Private clsLabsFunction As New RFunction
+    Private clsXlabsFunction As New RFunction
+    Private clsYlabFunction As New RFunction
+    Private clsXScaleContinuousFunction As New RFunction
+    Private clsYScaleContinuousFunction As New RFunction
+    Private clsRFacetFunction As New RFunction
+    Private clsThemeFunction As New RFunction
+    Private dctThemeFunctions As Dictionary(Of String, RFunction)
+
+    Private bResetLayerSubdialog As Boolean = True
 
     Private Sub dlgCountryColouredMap_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -50,6 +63,7 @@ Public Class dlgCountryColouredMap
         ucrSelectorCountryColouredMap.SetParameterIsrfunction()
 
         ucrReceiverCountry.SetParameter(New RParameter("region", 2))
+        ucrReceiverCountry.SetIncludedDataTypes({"factor", "character"})
         ucrReceiverCountry.SetParameterIsString()
 
         ucrReceiverColourBy.SetParameter(New RParameter("fill", 3))
@@ -75,7 +89,9 @@ Public Class dlgCountryColouredMap
         clsCoordMap = New RFunction
         clsRaesFunc = New RFunction
 
+
         ucrSelectorCountryColouredMap.Reset()
+        ucrSelectorCountryColouredMap.SetGgplotFunction(clsBaseOperator)
         ucrReceiverCountry.SetMeAsReceiver()
 
         clsMapDataFunction.SetPackageName("ggplot2")
@@ -107,6 +123,17 @@ Public Class dlgCountryColouredMap
         clsRaesFunc.AddParameter("group", "group")
         clsBaseOperator.AddParameter("polygon", clsRFunctionParameter:=clsRGeomPolygon, iPosition:=1)
 
+        clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
+        clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
+        clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
+        clsXScaleContinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
+        clsYScaleContinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
+        clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
+        clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
+        clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()
+        dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
+        clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
+
         clsCoordMap.SetPackageName("ggplot2")
         clsCoordMap.SetRCommand("coord_quickmap")
         clsBaseOperator.AddParameter("coordquickmap", clsRFunctionParameter:=clsCoordMap, iPosition:=2)
@@ -134,8 +161,36 @@ Public Class dlgCountryColouredMap
         SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdPlotOptions.Click, cmdMapOptions.Click
+        sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunc, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrSelectorCountryColouredMap, bReset:=bResetSubDialog)
+        bResetSubDialog = False
+        sdgPlots.ShowDialog()
+    End Sub
 
+    Private Sub cmdPolygonOptions_Click(sender As Object, e As EventArgs) Handles cmdPolygonOptions.Click
+        'SetupLayer sends the components storing the plot info (clsRgeom_boxplotFunction, clsRggplotFunction, ...) of dlgBoxPlot through to sdgLayerOptions where these will be edited.
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplot, clsNewGeomFunc:=clsRGeomPolygon, clsNewGlobalAesFunc:=clsRaesFunc, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorCountryColouredMap, bApplyAesGlobally:=True, bReset:=bResetLayerSubdialog)
+
+        'For Each clsParam In clsRaesFunc.clsParameters
+        '    If clsParam.strArgumentName = "x" Then
+        '        sdgLayerOptions.ucrGeomWithAes.ucrReceiverParam1.Add(clsParam.strArgumentValue, bFixReceiver:=True)
+        '    End If
+        '    If clsParam.strArgumentName = "y" Then
+        '        sdgLayerOptions.ucrGeomWithAes.ucrReceiverParam2.Add(clsParam.strArgumentValue, bFixReceiver:=True)
+        '    End If
+        '    If clsParam.strArgumentName = "group" Then
+        '        sdgLayerOptions.ucrGeomWithAes.ucrReceiverParam6.Add(clsParam.strArgumentValue, bFixReceiver:=True)
+        '    End If
+        'Next
+
+        sdgLayerOptions.ShowDialog()
+        bResetLayerSubdialog = False
+    End Sub
     Private Sub ucrReceiverCountry_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverCountry.ControlContentsChanged, ucrReceiverColourBy.ControlContentsChanged, ucrSaveMap.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrSelectorCountryColouredMap_DataFrameChanged() Handles ucrSelectorCountryColouredMap.DataFrameChanged
+        sdgPlots.SetDataFrame(ucrSelectorCountryColouredMap.ucrAvailableDataFrames.strCurrDataFrame)
     End Sub
 End Class

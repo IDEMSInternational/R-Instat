@@ -38,6 +38,7 @@ Partial Class dlgMakeDate
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgMakeDate))
         Me.grpTwoColumns = New System.Windows.Forms.GroupBox()
         Me.ucrChkTwoDigitYear = New instat.ucrCheck()
@@ -86,6 +87,7 @@ Partial Class dlgMakeDate
         Me.ucrSaveDate = New instat.ucrSave()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorMakeDate = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ttMakeDate = New System.Windows.Forms.ToolTip(Me.components)
         Me.grpTwoColumns.SuspendLayout()
         Me.grpSingleColumn.SuspendLayout()
         Me.grpFormatField.SuspendLayout()
@@ -670,4 +672,5 @@ Partial Class dlgMakeDate
     Friend WithEvents grpFormats As GroupBox
     Friend WithEvents txtTextDateFormats As RichTextBox
     Friend WithEvents cmdHelp As Button
+    Friend WithEvents ttMakeDate As ToolTip
 End Class
