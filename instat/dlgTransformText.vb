@@ -120,9 +120,9 @@ Public Class dlgTransformText
         ucrPnlOperation.AddToLinkedControls(ucrInputSeparator, {rdoWords}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOperation.AddToLinkedControls(ucrNudFrom, {rdoSubstring}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrPnlOperation.AddToLinkedControls(ucrNudTo, {rdoSubstring}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
-        ucrChkFirstOr.AddToLinkedControls(ucrNudFirstWord, {False}, bNewLinkedDisabledIfParameterMissing:=True)
+        ucrChkFirstOr.AddToLinkedControls(ucrNudFirstWord, {False}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrChkFirstOr.AddToLinkedControls(ucrReceiverFirstWord, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkLastOr.AddToLinkedControls(ucrNudLastWord, {False}, bNewLinkedDisabledIfParameterMissing:=True)
+        ucrChkLastOr.AddToLinkedControls(ucrNudLastWord, {False}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
         ucrChkLastOr.AddToLinkedControls(ucrReceiverLastWord, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         'ucrChkFirstOr
@@ -249,8 +249,6 @@ Public Class dlgTransformText
         ucrChkLastOr.SetRCode(clsWordsFunction, bReset)
         ucrReceiverFirstWord.SetRCode(clsWordsFunction, bReset)
         ucrReceiverLastWord.SetRCode(clsWordsFunction, bReset)
-        ucrNudFirstWord.SetRCode(clsWordsFunction, bReset)
-        ucrNudLastWord.SetRCode(clsWordsFunction, bReset)
         ucrInputSeparator.SetRCode(clsWordsFunction, bReset)
         ucrNudFrom.SetRCode(clsSubstringFunction, bReset)
         ucrNudTo.SetRCode(clsSubstringFunction, bReset)
@@ -338,6 +336,11 @@ Public Class dlgTransformText
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
             Me.Size = New Size(Me.Width, iFullHeight)
         End If
+    End Sub
+
+    Private Sub ucrNudFirstWord_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudFirstWord.ControlValueChanged, ucrNudLastWord.ControlValueChanged
+        clsWordsFunction.AddParameter("start", ucrNudFirstWord.Value, iPosition:=1)
+        clsWordsFunction.AddParameter("end", ucrNudLastWord.Value, iPosition:=2)
     End Sub
 
     Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOperation.ControlValueChanged, ucrInputTo.ControlValueChanged
