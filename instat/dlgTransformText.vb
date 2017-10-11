@@ -369,20 +369,34 @@ Public Class dlgTransformText
     Private Sub ucrWordsTab_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFirstOr.ControlValueChanged, ucrChkLastOr.ControlValueChanged, ucrPnlOperation.ControlValueChanged
         If rdoWords.Checked OrElse rdoSubstring.Checked Then
             If ucrChkFirstOr.Checked Then
+                ucrNudFirstWord.Enabled = False
+                ucrNudFrom.Enabled = False
                 ucrReceiverFirstWord.SetMeAsReceiver()
             Else
+                ucrNudFirstWord.Enabled = True
+                ucrNudFrom.Enabled = True
                 If ucrChkLastOr.Checked Then
+                    ucrNudLastWord.Enabled = False
+                    ucrNudTo.Enabled = False
                     ucrReceiverLastWord.SetMeAsReceiver()
                 Else
+                    ucrNudLastWord.Enabled = True
+                    ucrNudTo.Enabled = True
                     ucrReceiverTransformText.SetMeAsReceiver()
                 End If
             End If
             If ucrChkLastOr.Checked Then
+                ucrNudLastWord.Enabled = False
+                ucrNudTo.Enabled = False
                 ucrReceiverLastWord.SetMeAsReceiver()
             Else
                 If ucrChkFirstOr.Checked Then
+                    ucrNudFirstWord.Enabled = False
+                    ucrNudFrom.Enabled = False
                     ucrReceiverFirstWord.SetMeAsReceiver()
                 Else
+                    ucrNudFirstWord.Enabled = True
+                    ucrNudFrom.Enabled = True
                     ucrReceiverTransformText.SetMeAsReceiver()
                 End If
             End If
