@@ -1666,11 +1666,9 @@ data_object$set("public", "unfreeze_columns", function() {
 #TODO maybe get ride of this method as that you can't create a key without
 #     the instat object also creating a self link
 data_object$set("public", "add_key", function(col_names, key_name) {
-  if(anyDuplicated(self$get_columns_from_data(col_names, use_current_filter = FALSE)) > 0) {
+  cols <- self$get_columns_from_data(col_names, use_current_filter = FALSE)
+  if(anyDuplicated(cols) > 0) {
     stop("key columns must have unique combinations")
-  }
-  if(sum(is.na(self$get_columns_from_data(col_names, use_current_filter = FALSE))) > 0) {
-    stop("key columns cannot have missing values")
   }
   if(self$is_key(col_names)) {
     warning("A key with these columns already exists. No action will be taken.")
