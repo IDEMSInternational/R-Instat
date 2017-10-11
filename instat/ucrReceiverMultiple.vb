@@ -329,7 +329,7 @@ Public Class ucrReceiverMultiple
         OnSelectionChanged()
     End Sub
 
-    Public Overrides Sub Add(strItem As String, Optional strDataFrame As String = "")
+    Public Overrides Sub Add(strItem As String, Optional strDataFrame As String = "", Optional bFixreceiver As Boolean = False)
         Dim kvpItems(0) As KeyValuePair(Of String, String)
         If strDataFrame = "" Then
             For i = 0 To Selector.lstAvailableVariable.Items.Count - 1
@@ -340,6 +340,8 @@ Public Class ucrReceiverMultiple
         End If
         kvpItems(0) = New KeyValuePair(Of String, String)(strDataFrame, strItem)
         AddMultiple(kvpItems)
+
+        lstSelectedVariables.Enabled = Not bFixreceiver
     End Sub
 
     Public Sub AddItemsWithMetadataProperty(strCurrentDataFrame As String, strProperty As String, strValues As String())
