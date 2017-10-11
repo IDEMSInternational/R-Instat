@@ -286,8 +286,13 @@ Public Class dlgTransformText
             ElseIf rdoSubstring.Checked Then
                 If ucrNudTo.GetText <> "" AndAlso ucrNudFrom.GetText <> "" Then
                     ucrBase.OKEnabled(True)
+                    If Not ucrReceiverFirstWord.IsEmpty AndAlso Not ucrReceiverLastWord.IsEmpty Then
+                        ucrBase.OKEnabled(True)
+                    Else
+                        ucrBase.OKEnabled(False)
+                    End If
                 Else
-                    ucrBase.OKEnabled(False)
+                        ucrBase.OKEnabled(False)
                 End If
             Else
                 ucrBase.OKEnabled(False)
