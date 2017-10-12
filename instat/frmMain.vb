@@ -1672,4 +1672,8 @@ Public Class frmMain
     Private Sub mnuProcurementDescribeMaps_Click(sender As Object, e As EventArgs) Handles mnuProcurementDescribeMaps.Click
         dlgCountryColouredMap.ShowDialog()
     End Sub
+
+    Private Sub mnuPrepareDataFrameVariableSets_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameVariableSets.Click
+        dlgVariableSets.ShowDialog()
+    End Sub
 End Class
