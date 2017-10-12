@@ -103,14 +103,13 @@ Public Class dlgLinePlot
         clsGeomSmoothParameter.SetArgumentName("geom_smooth")
         clsGeomSmoothParameter.SetArgument(clsGeomSmoothFunc)
         ucrChkLineofBestFit.SetText("Add Line of Best Fit")
-        ucrChkLineofBestFit.AddToLinkedControls(ucrChkWithSE, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkLineofBestFit.AddToLinkedControls(ucrChkWithSE, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkLineofBestFit.SetParameter(clsGeomSmoothParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         ucrChkWithSE.SetText("With Standard Error")
         ucrChkWithSE.SetParameter(New RParameter("se", 1))
         ucrChkWithSE.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkWithSE.AddParameterValuesCondition(True, "se", "TRUE")
-        ucrChkWithSE.AddParameterValuesCondition(False, "se", "FALSE")
+        ucrChkWithSE.SetRDefault("TRUE")
 
         ucrSave.SetPrefix("lineplot")
         ucrSave.SetIsComboBox()
@@ -159,7 +158,7 @@ Public Class dlgLinePlot
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction
         clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
-
+        clsGeomSmoothFunc.AddParameter("se", "FALSE", iPosition:=1)
         clsBaseOperator.RemoveParameterByName("geom_point")
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrLinePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
