@@ -147,7 +147,7 @@ Public Class dlgFromLibrary
         Dim dfPackage As DataFrame = Nothing
 
         If strPackage IsNot Nothing Then
-            expTemp = frmMain.clsRLink.RunInternalScriptGetValue("data.frame(data(package =" & Chr(34) & strPackage & Chr(34) & ")$results[1:nrow(data(package =" & Chr(34) & strPackage & Chr(34) & ")$results),3:4])", bSilent:=True)
+            expTemp = frmMain.clsRLink.RunInternalScriptGetValue("data.frame(data(package =" & Chr(34) & strPackage & Chr(34) & ")$results)[ ,3:4]", bSilent:=True)
             If expTemp IsNot Nothing Then
                 dfPackage = expTemp.AsDataFrame
             End If
