@@ -50,7 +50,7 @@ Partial Class dlgInfill
         'lblDate
         '
         Me.lblDate.AutoSize = True
-        Me.lblDate.Location = New System.Drawing.Point(278, 21)
+        Me.lblDate.Location = New System.Drawing.Point(263, 15)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(33, 13)
         Me.lblDate.TabIndex = 1
@@ -59,7 +59,7 @@ Partial Class dlgInfill
         'lblByFactors
         '
         Me.lblByFactors.AutoSize = True
-        Me.lblByFactors.Location = New System.Drawing.Point(278, 73)
+        Me.lblByFactors.Location = New System.Drawing.Point(263, 66)
         Me.lblByFactors.Name = "lblByFactors"
         Me.lblByFactors.Size = New System.Drawing.Size(60, 13)
         Me.lblByFactors.TabIndex = 3
@@ -68,15 +68,15 @@ Partial Class dlgInfill
         'ucrChkResort
         '
         Me.ucrChkResort.Checked = False
-        Me.ucrChkResort.Location = New System.Drawing.Point(278, 196)
+        Me.ucrChkResort.Location = New System.Drawing.Point(263, 196)
         Me.ucrChkResort.Name = "ucrChkResort"
-        Me.ucrChkResort.Size = New System.Drawing.Size(120, 20)
+        Me.ucrChkResort.Size = New System.Drawing.Size(141, 20)
         Me.ucrChkResort.TabIndex = 5
         '
         'ucrReceiverFactors
         '
         Me.ucrReceiverFactors.frmParent = Me
-        Me.ucrReceiverFactors.Location = New System.Drawing.Point(278, 90)
+        Me.ucrReceiverFactors.Location = New System.Drawing.Point(263, 83)
         Me.ucrReceiverFactors.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactors.Name = "ucrReceiverFactors"
         Me.ucrReceiverFactors.Selector = Nothing
@@ -88,7 +88,7 @@ Partial Class dlgInfill
         'ucrReceiverDate
         '
         Me.ucrReceiverDate.frmParent = Me
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(278, 37)
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(263, 31)
         Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing
@@ -111,14 +111,14 @@ Partial Class dlgInfill
         '
         Me.ucrBase.Location = New System.Drawing.Point(9, 228)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(406, 52)
         Me.ucrBase.TabIndex = 6
         '
         'dlgInfill
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(415, 286)
+        Me.ClientSize = New System.Drawing.Size(417, 286)
         Me.Controls.Add(Me.ucrChkResort)
         Me.Controls.Add(Me.lblByFactors)
         Me.Controls.Add(Me.lblDate)
