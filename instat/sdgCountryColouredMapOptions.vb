@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 
 Public Class sdgCountryColouredMapOptions
@@ -46,6 +45,11 @@ Public Class sdgCountryColouredMapOptions
         ucrPnlRegionChoice.AddToLinkedControls(ucrInputLongMin, {rdoChooseRegion}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlRegionChoice.AddToLinkedControls(ucrInputLongMax, {rdoChooseRegion}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlRegionChoice.AddToLinkedControls(ucrInputCommonRegions, {rdoChooseRegion}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputCommonRegions.SetLinkedDisplayControl(lblCommonRegions)
+        ucrInputLongMin.SetLinkedDisplayControl(lblLong)
+        ucrInputLongMax.SetLinkedDisplayControl(lblLongMax)
+        ucrInputLatMin.SetLinkedDisplayControl(lblLat)
+        ucrInputLatMax.SetLinkedDisplayControl(lblLatMax)
 
         lstRegionInputControls = New List(Of ucrInputTextBox)
         lstRegionInputControls.AddRange({ucrInputLatMin, ucrInputLatMax, ucrInputLongMin, ucrInputLongMax})
@@ -92,7 +96,6 @@ Public Class sdgCountryColouredMapOptions
         ucrInputLongMax.SetRCode(clsLongMax, bReset:=bReset, bCloneIfNeeded:=True)
         ucrPnlRegionChoice.SetRCode(clsJoinFunction, bReset:=bReset, bCloneIfNeeded:=True)
         bClearRegion = True
-
         ucrInputCommonRegions.SetName("Choose...")
     End Sub
 
@@ -138,7 +141,18 @@ Public Class sdgCountryColouredMapOptions
         bClearRegion = True
     End Sub
 
+    Private Sub labelVisibility()
+        If lblLong.Visible OrElse lblLat.Visible Then
+            lblLongMin.Visible = True
+            lblLatMin.Visible = True
+        Else
+            lblLongMin.Visible = False
+            lblLatMin.Visible = False
+        End If
+    End Sub
+
     Private Sub ucrPnlRegionChoice_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlRegionChoice.ControlValueChanged
+        labelVisibility()
         If rdoOwnCountries.Checked Then
             clsJoinFunction.SetRCommand("right_join")
             clsMapDataOperator.RemoveParameterByName("filter")
