@@ -99,14 +99,12 @@ Public Class dlgScatterPlot
         clsGeomSmoothParameter.SetArgumentName("geom_smooth")
         clsGeomSmoothParameter.SetArgument(clsGeomSmoothFunc)
         ucrChkLineofBestFit.SetText("Add Line of Best Fit")
-        ucrChkLineofBestFit.AddToLinkedControls(ucrChkWithSE, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkLineofBestFit.AddToLinkedControls(ucrChkWithSE, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkLineofBestFit.SetParameter(clsGeomSmoothParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         ucrChkWithSE.SetText("With Standard Error")
         ucrChkWithSE.SetParameter(New RParameter("se"), bNewAddRemoveParameter:=False, bNewChangeParameterValue:=True)
         ucrChkWithSE.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        'ucrChkWithSE.AddParameterValuesCondition(True, "se", "TRUE")
-        'ucrChkWithSE.AddParameterValuesCondition(False, "se", "FALSE")
         ucrChkWithSE.SetRDefault("TRUE")
 
         ucrSaveScatterPlot.SetPrefix("scatterplot")
@@ -156,7 +154,7 @@ Public Class dlgScatterPlot
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction
         clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
-
+        clsGeomSmoothFunc.AddParameter("se", "FALSE", iPosition:=1)
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
