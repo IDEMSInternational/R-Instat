@@ -1,4 +1,13 @@
-# a link can contain multiple ways to link two data frames
+# A link is a relationship between two data frames
+# from_data_frame : character - the name of the first data frame of the link
+# to_data_frame   : character - the name of the second data frame of the link
+# type            : character - the type of link e.g. "keyed"
+# link_columns    : list      - a list where each element defines how the data frames are linked
+#                               It is a list because two data frames may be linked in different ways
+#                               Each element of the list is a named character vector 
+#                               where the name-element pairs of the vector define linking columns between the data frames
+#                               the name is the name of column in from_data_frame
+#                               the element is the corresponding name of a column in to_data_frame
 link <- R6::R6Class("link",
                        public = list(
                          initialize = function(from_data_frame = "", to_data_frame = "", type = "", link_columns = list()) {
@@ -33,6 +42,21 @@ link$set("public", "rename_data_frame_in_link", function(old_data_name, new_data
 }
 )
 
+link$set("public", "rename_column_in_link", function(data_name, old_column_name, new_column_name) {
+  print(self$link_columns)
+  if(self$from_data_frame == data_name) {
+    for(i in seq_along(self$link_columns)) {
+      names(self$link_columns[[i]])[which(old_column_name %in% names(self$link_columns[[i]]))] <- new_column_name
+    }
+  }
+  if(self$to_data_frame == data_name) {
+    for(i in seq_along(self$link_columns)) {
+      self$link_columns[[i]][which(old_column_name %in% self$link_columns[[i]])] <- new_column_name
+    }
+  }
+}
+)
+
 instat_object$set("public", "update_links_rename_data_frame", function(old_data_name, new_data_name) {
   for(i in seq_along(private$.links)) {
     private$.links[[i]]$rename_data_frame_in_link(old_data_name, new_data_name)
@@ -41,7 +65,9 @@ instat_object$set("public", "update_links_rename_data_frame", function(old_data_
 )
 
 instat_object$set("public", "update_links_rename_column", function(data_name, old_column_name, new_column_name) {
-  #TODO
+  for(i in seq_along(private$.links)) {
+    private$.links[[i]]$rename_column_in_link(data_name, old_column_name, new_column_name)
+  }
 }
 )
 
