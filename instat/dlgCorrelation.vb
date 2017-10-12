@@ -48,20 +48,22 @@ Public Class dlgCorrelation
         ucrReceiverFirstColumn.SetParameterIsRFunction()
         ucrReceiverFirstColumn.Selector = ucrSelectorCorrelation
         ucrReceiverFirstColumn.strSelectorHeading = "Numerics"
-        ucrReceiverMultipleColumns.Selector = ucrSelectorCorrelation
-        ucrReceiverFirstColumn.SetDataType("numeric")
+        ' cor.test only accepts numeric columns so need to be strict
+        ucrReceiverFirstColumn.SetDataType("numeric", bStrict:=True)
 
         ucrReceiverSecondColumn.SetParameter(New RParameter("y", 1))
         ucrReceiverSecondColumn.SetParameterIsRFunction()
         ucrReceiverSecondColumn.strSelectorHeading = "Numerics"
         ucrReceiverSecondColumn.Selector = ucrSelectorCorrelation
-        ucrReceiverSecondColumn.SetDataType("numeric")
+        ' cor.test only accepts numeric columns so need to be strict
+        ucrReceiverSecondColumn.SetDataType("numeric", bStrict:=True)
 
         ucrReceiverMultipleColumns.SetParameter(New RParameter("x", 2))
         ucrReceiverMultipleColumns.Selector = ucrSelectorCorrelation
         ucrReceiverMultipleColumns.strSelectorHeading = "Numerics"
         ucrReceiverMultipleColumns.SetParameterIsRFunction()
-        ucrReceiverMultipleColumns.SetDataType("numeric")
+        ' cor accepts numeric and logical columns
+        ucrReceiverMultipleColumns.SetIncludedDataTypes({"numeric", "logical"})
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         'TODO: Fix bugs produced when rdoScatterplotMatrix is checked. Disabled for now

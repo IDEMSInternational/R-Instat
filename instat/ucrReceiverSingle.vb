@@ -43,7 +43,7 @@ Public Class ucrReceiverSingle
 
     End Sub
 
-    Public Overrides Sub Add(strItem As String, Optional strDataFrame As String = "")
+    Public Overrides Sub Add(strItem As String, Optional strDataFrame As String = "", Optional bFixReceiver As Boolean = False)
         Dim clsGetDataType As New RFunction
         Dim strCurrentItemType As String
         Dim expColumnType As SymbolicExpression
@@ -118,6 +118,7 @@ Public Class ucrReceiverSingle
             If bRemove Then
                 RemoveSelected()
             End If
+            txtReceiverSingle.Enabled = Not bFixReceiver
         End If
     End Sub
 
