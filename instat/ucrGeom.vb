@@ -1026,14 +1026,23 @@ Public Class ucrGeom
         clsgeom_smooth.AddAesParameter("weight")
 
         'add  layer parameter
-        '' clsgeom_smooth.AddLayerParameter("position")
-        'clsgeom_smooth.AddLayerParameter("", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_smooth.AddLayerParameter("method", "list", Chr(34) & "lm" & Chr(34), lstParameterStrings:={Chr(34) & "glm" & Chr(34), Chr(34) & "gam" & Chr(34), Chr(34) & "loess" & Chr(34), Chr(34) & "rlm" & Chr(34)})
+        'clsgeom_smooth.AddLayerParameter("position")
+        clsgeom_smooth.AddLayerParameter("method", "list", Chr(34) & "lm" & Chr(34), lstParameterStrings:={Chr(34) & "lm" & Chr(34), Chr(34) & "glm" & Chr(34), Chr(34) & "gam" & Chr(34), Chr(34) & "loess" & Chr(34), Chr(34) & "rlm" & Chr(34)})
         'clsgeom_smooth.AddLayerParameter("formula", "list", Chr(34) & "lm" & Chr(34), lstParameterStrings:={Chr(34) & "glm" & Chr(34), Chr(34) & "gam" & Chr(34), Chr(34) & "loess" & Chr(34), Chr(34) & "rlm" & Chr(34)})
-        'clsgeom_smooth.AddLayerParameter("se", "boolean", "TRUE")
-        'clsgeom_smooth.AddLayerParameter("na.rm", "boolean", "FALSE")
-        'clsgeom_smooth.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
-        'clsgeom_smooth.AddLayerParameter("inherit.aes", "boolean", "FALSE")
+        clsgeom_smooth.AddLayerParameter("se", "boolean", "TRUE")
+        clsgeom_smooth.AddLayerParameter("na.rm", "boolean", "FALSE")
+        clsgeom_smooth.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_smooth.AddLayerParameter("inherit.aes", "boolean", "FALSE")
+
+        'geom and stat are missing here 
+        clsgeom_smooth.AddLayerParameter("n", "numeric", "0.15")
+        clsgeom_smooth.AddLayerParameter("span", "numeric", "0.15")
+        clsgeom_smooth.AddLayerParameter("fullrange", "numeric", "0.15")
+        clsgeom_smooth.AddLayerParameter("level", "numeric", "0.95")
+        clsgeom_smooth.AddLayerParameter("level", "numeric", "0.95")
+
+        'method.args isa list of methods passed into the moddeling function
+        clsgeom_smooth.AddLayerParameter("method.args", "numeric", "0.95")
 
         lstAllGeoms.Add(clsgeom_smooth)
 
