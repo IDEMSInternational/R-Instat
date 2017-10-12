@@ -1012,19 +1012,20 @@ Public Class ucrGeom
         'clsgeom_segment.AddLayerParameter("vjust", "numeric", "0.5")
         'lstAllGeoms.Add(clsgeom_segment)
 
-        'clsgeom_smooth.strGeomName = "geom_smooth"
-        '' mandatory
-        'clsgeom_smooth.AddAesParameter("x", bIsMandatory:=True)
-        'clsgeom_smooth.AddAesParameter("y", bIsMandatory:=True)
-        '' optional 
-        'clsgeom_smooth.AddAesParameter("alpha")
-        'clsgeom_smooth.AddAesParameter("colour")
-        'clsgeom_smooth.AddAesParameter("fill")
-        'clsgeom_smooth.AddAesParameter("linetype")
-        'clsgeom_smooth.AddAesParameter("size")
-        'clsgeom_smooth.AddAesParameter("weight")
+        clsgeom_smooth.strGeomName = "geom_smooth"
+        ' mandatory
+        clsgeom_smooth.AddAesParameter("x", bIsMandatory:=True)
+        clsgeom_smooth.AddAesParameter("y", bIsMandatory:=True)
+        ' optional 
+        clsgeom_smooth.AddAesParameter("alpha")
+        clsgeom_smooth.AddAesParameter("colour")
+        clsgeom_smooth.AddAesParameter("fill")
+        clsgeom_smooth.AddAesParameter("group")
+        clsgeom_smooth.AddAesParameter("linetype")
+        clsgeom_smooth.AddAesParameter("size")
+        clsgeom_smooth.AddAesParameter("weight")
 
-        '''add  layer parameter
+        'add  layer parameter
         '' clsgeom_smooth.AddLayerParameter("position")
         'clsgeom_smooth.AddLayerParameter("", "list", Chr(34) & "identity" & Chr(34))
         'clsgeom_smooth.AddLayerParameter("method", "list", Chr(34) & "lm" & Chr(34), lstParameterStrings:={Chr(34) & "glm" & Chr(34), Chr(34) & "gam" & Chr(34), Chr(34) & "loess" & Chr(34), Chr(34) & "rlm" & Chr(34)})
@@ -1034,7 +1035,7 @@ Public Class ucrGeom
         'clsgeom_smooth.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         'clsgeom_smooth.AddLayerParameter("inherit.aes", "boolean", "FALSE")
 
-        'lstAllGeoms.Add(clsgeom_smooth)
+        lstAllGeoms.Add(clsgeom_smooth)
 
         'clsgeom_spoke.strGeomName = "geom_spoke"
         ''mandatory
