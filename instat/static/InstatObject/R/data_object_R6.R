@@ -1666,11 +1666,9 @@ data_object$set("public", "unfreeze_columns", function() {
 #TODO maybe get ride of this method as that you can't create a key without
 #     the instat object also creating a self link
 data_object$set("public", "add_key", function(col_names, key_name) {
-  if(anyDuplicated(self$get_columns_from_data(col_names, use_current_filter = FALSE)) > 0) {
+  cols <- self$get_columns_from_data(col_names, use_current_filter = FALSE)
+  if(anyDuplicated(cols) > 0) {
     stop("key columns must have unique combinations")
-  }
-  if(sum(is.na(self$get_columns_from_data(col_names, use_current_filter = FALSE))) > 0) {
-    stop("key columns cannot have missing values")
   }
   if(self$is_key(col_names)) {
     warning("A key with these columns already exists. No action will be taken.")
@@ -2311,7 +2309,7 @@ data_object$set("public","make_inventory_plot", function(date_col, station_col =
 }
 )
 
-data_object$set("public","infill_missing_dates", function(date_name, factors) {
+data_object$set("public","infill_missing_dates", function(date_name, factors, resort = TRUE) {
   date_col <- self$get_columns_from_data(date_name)
   if(!lubridate::is.Date(date_col)) stop(date_name, " is not a Date column.")
   if(anyNA(date_col)) stop("Cannot do infilling as date column has missing values")
@@ -2326,7 +2324,7 @@ data_object$set("public","infill_missing_dates", function(date_name, factors) {
       names(full_dates) <- date_name
       self$merge_data(full_dates, by = date_name, type = "full")
       message("Missing dates infilled.")
-      self$sort_dataframe(col_names = date_name)
+      if(resort) self$sort_dataframe(col_names = date_name)
     }
   }
   else {
@@ -2356,7 +2354,7 @@ data_object$set("public","infill_missing_dates", function(date_name, factors) {
     if(merge_required) {
       all_dates_factors <- plyr::rbind.fill(full_dates_list)
       self$merge_data(all_dates_factors, by = c(date_name, factors), type = "full")
-      self$sort_dataframe(col_names = c(date_name, factors))
+      if(resort) self$sort_dataframe(col_names = c(factors, date_name))
     }
   }
 }

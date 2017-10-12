@@ -691,6 +691,12 @@
     <Compile Include="sdgCorruptionCountryLevelColumns.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgCountryColouredMapOptions.Designer.vb">
+      <DependentUpon>sdgCountryColouredMapOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgCountryColouredMapOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgDescribeDisplay.Designer.vb">
       <DependentUpon>sdgDescribeDisplay.vb</DependentUpon>
     </Compile>
@@ -3077,6 +3083,9 @@
     <EmbeddedResource Include="sdgCorruptionCountryLevelColumns.resx">
       <DependentUpon>sdgCorruptionCountryLevelColumns.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgCountryColouredMapOptions.resx">
+      <DependentUpon>sdgCountryColouredMapOptions.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgCreateFilter.fr-FR.resx">
       <DependentUpon>sdgCreateFilter.vb</DependentUpon>
     </EmbeddedResource>
@@ -4694,10 +4703,7 @@
     <Content Include="static\Library\Climatic\WKenya_StationInfo.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\Library\Procurement\WorldBankProcDataFrame.rds">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Procurement\WorldBankProcInstatObject.RDS">
+    <Content Include="static\Library\Procurement\WorldBank_old.RDS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\Library\CAST\CASTDATA.RDS">
@@ -5427,6 +5433,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\Library\Procurement\EuropeAid.RDS">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\Library\Procurement\WorldBank.RDS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
