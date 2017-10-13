@@ -72,7 +72,7 @@ Public Class dlgContrasts
     Private Sub InitialiseDialog()
         ucrReceiverForContrasts.Selector = ucrSelectorForContrast
         ucrReceiverForContrasts.SetMeAsReceiver()
-        ucrReceiverForContrasts.SetIncludedDataTypes({"factor"})
+        ucrReceiverForContrasts.SetIncludedDataTypes({"factor"}, bStrict:=True)
         ucrReceiverForContrasts.strSelectorHeading = "Factors"
         ucrBase.iHelpTopicID = 353
 

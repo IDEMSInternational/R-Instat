@@ -64,6 +64,8 @@ Public Class RLink
     Private iWaitDelay As Integer = 2
 
     Public Sub StartREngine(Optional strScript As String = "", Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True)
+        Dim strMissingPackages() As String
+
         Try
             REngine.SetEnvironmentVariables()
         Catch ex As Exception
@@ -89,6 +91,11 @@ Public Class RLink
             End If
             strComment = ""
         Next
+        strMissingPackages = GetPackagesNotInstalled()
+        If strMissingPackages IsNot Nothing AndAlso strMissingPackages.Count > 0 Then
+            frmPackageIssues.SetMissingPackages(strMissingPackages)
+            frmPackageIssues.ShowDialog()
+        End If
         bInstatObjectExists = True
     End Sub
 
@@ -101,6 +108,28 @@ Public Class RLink
             End Try
         End If
     End Sub
+
+    Public Function GetPackagesNotInstalled() As String()
+        Dim chrPackagesNotInstalled As CharacterVector
+        Dim clsPackagesNotInstalled As New RFunction
+        Dim expTemp As SymbolicExpression
+
+        clsPackagesNotInstalled.SetRCommand("packages_not_installed")
+        expTemp = RunInternalScriptGetValue(clsPackagesNotInstalled.ToScript(), bSilent:=True)
+        If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
+            chrPackagesNotInstalled = expTemp.AsCharacter
+            Return chrPackagesNotInstalled.ToArray
+        Else
+            Return Nothing
+        End If
+    End Function
+
+    Public Function LoadedRequiredPackages(Optional bSilent As Boolean = False) As Boolean
+        Dim clsLoadPackages As New RFunction
+
+        clsLoadPackages.SetRCommand("load_required_R_Instat_packages")
+        Return RunInternalScript(clsLoadPackages.ToScript(), bSilent:=bSilent)
+    End Function
 
     Public Sub LoadInstatDataObjectFromFile(strFile As String, Optional strComment As String = "")
         Dim clsReadRDS As New RFunction
@@ -315,6 +344,7 @@ Public Class RLink
         Dim strTempGraphsDirectory As String
         Dim clsPNGFunction As New RFunction
         Dim strTempAssignTo As String = ".temp_val"
+        Dim bSuccess As Boolean
 
         strTempGraphsDirectory = System.IO.Path.Combine(System.IO.Path.GetTempPath() & "R_Instat_Temp_Graphs")
         strOutput = ""
@@ -354,7 +384,14 @@ Public Class RLink
                         clsPNGFunction.AddParameter("width", 4000)
                         clsPNGFunction.AddParameter("height", 4000)
                         clsPNGFunction.AddParameter("res", 500)
-                        Evaluate(clsPNGFunction.ToScript(), bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                        bSuccess = Evaluate(clsPNGFunction.ToScript(), bSilent:=True, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                        ' Temporary solution to being unable to save graphs in a temporary location for display.
+                        ' This can occur if System.IO.Path.GetTempPath() returns a path that is not writable.
+                        If Not bSuccess Then
+                            Evaluate("graphics.off()", bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                            strGraphDisplayOption = "view_R_viewer"
+                            MsgBox("A problem occured saving your graph in the temporary location: " & strTempGraphsDirectory & vbNewLine & vbNewLine & "To ensure graphs can be viewed, graphs will now appear in a pop up R viewer. You can change this setting in Tools > Options: Graph Display if this later becomes resolved.", MsgBoxStyle.Exclamation)
+                        End If
                         'need to boost resolution of the devices, it's not as good as with ggsave.
                     End If
                 End If
@@ -739,6 +776,8 @@ Public Class RLink
                 Case "nc_dim_variables"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_nc_variable_names")
                     clsGetItems.AddParameter("file", Chr(34) & strNcFilePath & Chr(34))
+                Case "variable_sets"
+                    clsGetItems.SetRCommand(strInstatDataObject & "$get_variable_sets_names")
             End Select
             clsGetItems.AddParameter("as_list", "TRUE")
             lstView.Clear()
