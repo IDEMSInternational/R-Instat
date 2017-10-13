@@ -122,7 +122,6 @@ Partial Class dlgCountryColouredMap
         '
         'cmdMapOptions
         '
-        Me.cmdMapOptions.Enabled = False
         Me.cmdMapOptions.Location = New System.Drawing.Point(238, 146)
         Me.cmdMapOptions.Name = "cmdMapOptions"
         Me.cmdMapOptions.Size = New System.Drawing.Size(121, 23)
