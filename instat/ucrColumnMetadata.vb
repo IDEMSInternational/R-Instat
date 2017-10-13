@@ -41,8 +41,6 @@ Public Class ucrColumnMetadata
         SetRFunctions()
         mnuFreezeToHere.Enabled = False
         mnuUnfreeze.Enabled = False
-        mnuInsertColsAfter.Enabled = False
-        mnuInsertColsBefore.Enabled = False
         '  grdVariables.RowHeaderContextMenuStrip = frmMain.ucrDataViewer.grdData.ColumnHeaderContextMenuStrip
     End Sub
 
@@ -399,14 +397,51 @@ Public Class ucrColumnMetadata
         If iSelectedCols = 1 Then
             strType = frmMain.clsRLink.GetColumnType(grdCurrSheet.Name, strColumns(0))
             mnuLevelsLabels.Enabled = (strType.Contains("factor"))
-            mnuDeleteCol.Text = "Delete Column"
+            mnuDeleteCol.Text = "Delete 1 Column"
             mnuInsertColsBefore.Text = "Insert 1 Column Before"
             mnuInsertColsAfter.Text = "Insert 1 Column After"
         Else
             mnuLevelsLabels.Enabled = False
-            mnuDeleteCol.Text = "Delete Columns"
+            mnuDeleteCol.Text = "Delete " & iSelectedCols & " Columns"
             mnuInsertColsBefore.Text = "Insert " & iSelectedCols & " Columns Before"
             mnuInsertColsAfter.Text = "Insert " & iSelectedCols & " Columns After"
         End If
+    End Sub
+
+    Private Function SelectedColumnPosition(bFirstNotLast As Boolean)
+        Dim lstCurrentRows As String()
+
+        lstCurrentRows = lstRowsNames.Find(Function(x) x.Key = grdVariables.CurrentWorksheet.Name).Value
+        If bFirstNotLast Then
+            'Return Chr(34) & lstCurrentRows(grdVariables.CurrentWorksheet.SelectionRange.Row) & Chr(34)
+        Else
+            'Return Chr(34) & lstCurrentRows(grdVariables.CurrentWorksheet.SelectionRange.EndRow) & Chr(34)
+        End If
+    End Function
+
+    Private Sub RunScriptFromDataView(strScript As String, Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing)
+        Cursor = Cursors.WaitCursor
+        grdVariables.Enabled = False
+        frmMain.clsRLink.RunScript(strScript:=strScript, iCallType:=iCallType, strComment:=strComment, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+        grdVariables.Enabled = True
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub mnuInsertColsBefore_Click(sender As Object, e As EventArgs) Handles mnuInsertColsBefore.Click
+        clsInsertColumns.AddParameter("adjacent_column", SelectedColumnPosition(True))
+        clsInsertColumns.AddParameter("num_cols", grdCurrSheet.SelectionRange.Rows)
+        clsInsertColumns.AddParameter("before", "TRUE")
+        clsInsertColumns.AddParameter("col_name", Chr(34) & "X" & Chr(34))
+        clsInsertColumns.AddParameter("use_col_name_as_prefix", "TRUE")
+        RunScriptFromDataView(clsInsertColumns.ToScript(), strComment:="Right click menu: Insert Column(s) Before")
+    End Sub
+
+    Private Sub mnuInsertColsAfter_Click(sender As Object, e As EventArgs) Handles mnuInsertColsAfter.Click
+        clsInsertColumns.AddParameter("adjacent_column", SelectedColumnPosition(True))
+        clsInsertColumns.AddParameter("num_cols", grdCurrSheet.SelectionRange.Rows)
+        clsInsertColumns.AddParameter("before", "FALSE")
+        clsInsertColumns.AddParameter("col_name", Chr(34) & "X" & Chr(34))
+        clsInsertColumns.AddParameter("use_col_name_as_prefix", "TRUE")
+        RunScriptFromDataView(clsInsertColumns.ToScript(), strComment:="Right click menu: Insert Column(s) After")
     End Sub
 End Class
