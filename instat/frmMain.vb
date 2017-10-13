@@ -1320,7 +1320,7 @@ Public Class frmMain
         dlgCanonicalCorrelationAnalysis.ShowDialog()
     End Sub
 
-    Private Sub mnuCorruptionDefineCorruptionData_Click(sender As Object, e As EventArgs) Handles mnuCorruptionDefineCorruptionData.Click
+    Private Sub mnuProcurementDefineData_Click(sender As Object, e As EventArgs) Handles mnuProcurementDefineData.Click
         dlgDefineCorruption.ShowDialog()
     End Sub
 
@@ -1328,7 +1328,7 @@ Public Class frmMain
         dlgCumulativeDistribution.ShowDialog()
     End Sub
 
-    Private Sub FilterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FilterToolStripMenuItem.Click
+    Private Sub mnuProcurementPrepareFilterByCountry_Click(sender As Object, e As EventArgs) Handles mnuProcurementPrepareFilterByCountry.Click
         Dim lstDataNames As List(Of String)
 
         dlgRestrict.bIsSubsetDialog = True
@@ -1349,7 +1349,7 @@ Public Class frmMain
         dlgFitCorruptionModel.ShowDialog()
     End Sub
 
-    Private Sub DefineRedFlagsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DefineRedFlagsToolStripMenuItem.Click
+    Private Sub mnuProcurementDefineRedFlags_Click(sender As Object, e As EventArgs) Handles mnuProcurementDefineRedFlags.Click
         dlgDefineRedFlags.ShowDialog()
     End Sub
 
@@ -1377,11 +1377,11 @@ Public Class frmMain
         dlgOpenNetCDF.ShowDialog()
     End Sub
 
-    Private Sub DefineOutputsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DefineOutputsToolStripMenuItem.Click
+    Private Sub mnuProcurementDefineCorruption_Click(sender As Object, e As EventArgs) Handles mnuProcurementDefineCorruption.Click
         dlgDefineCorruptionOutputs.ShowDialog()
     End Sub
 
-    Private Sub DefineCorruptionFreeCategoriesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SetRefLevelToolStripMenuItem.Click
+    Private Sub mnuProcurementPrepareSetFactorReferenceLevel_Click(sender As Object, e As EventArgs) Handles mnuProcurementPrepareSetFactorReferenceLevel.Click
         Dim lstDataNames As List(Of String)
 
         lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
@@ -1391,7 +1391,7 @@ Public Class frmMain
         dlgReferenceLevel.ShowDialog()
     End Sub
 
-    Private Sub DefineContractValueCategoriesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DefineContractValueCategoriesToolStripMenuItem.Click
+    Private Sub mnuProcurementPrepareDefineContractValueCategories_Click(sender As Object, e As EventArgs) Handles mnuProcurementPrepareDefineContractValueCategories.Click
         Dim lstDataNames As List(Of String)
 
         lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
@@ -1409,11 +1409,11 @@ Public Class frmMain
         dlgRecodeNumeric.ShowDialog()
     End Sub
 
-    Private Sub MergeAdditionalDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MergeAdditionalDataToolStripMenuItem.Click
+    Private Sub mnuProcurementPrepareMergeAdditionalData_Click(sender As Object, e As EventArgs) Handles mnuProcurementPrepareMergeAdditionalData.Click
         dlgMerge.ShowDialog()
     End Sub
 
-    Private Sub UseAwardDateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UseAwardDateToolStripMenuItem.Click
+    Private Sub mnuProcurementPrepareUseAwardDate_Click(sender As Object, e As EventArgs) Handles mnuProcurementPrepareUseAwardDate.Click
         Dim lstDataNames As List(Of String)
 
         lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
@@ -1431,11 +1431,11 @@ Public Class frmMain
         dlgOneWayFrequencies.ShowDialog()
     End Sub
 
-    Private Sub CalculateCRIToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CalculateCRIToolStripMenuItem.Click
+    Private Sub mnuProcurementCalculateCRI_Click(sender As Object, e As EventArgs) Handles mnuProcurementCalculateCRI.Click
         dlgDefineCRI.ShowDialog()
     End Sub
 
-    Private Sub CountryNamesCorrectionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CountryNamesCorrectionsToolStripMenuItem.Click
+    Private Sub mnuProcurementPrepareStandardiseCountryName_Click(sender As Object, e As EventArgs) Handles mnuProcurementPrepareStandardiseCountryName.Click
         Dim lstDataNames As List(Of String)
 
         lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
@@ -1449,7 +1449,7 @@ Public Class frmMain
         dlgStandardiseCountryNames.ShowDialog()
     End Sub
 
-    Private Sub RecodeNumericIntoQuantilesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RecodeNumericIntoQuantilesToolStripMenuItem.Click
+    Private Sub mnuProcurementPrepareRecodeNumericIntoQuantiles_Click(sender As Object, e As EventArgs) Handles mnuProcurementPrepareRecodeNumericIntoQuantiles.Click
         dlgRecodeNumericIntoQuantiles.ShowDialog()
     End Sub
 
@@ -1643,7 +1643,7 @@ Public Class frmMain
         dlgPlotRegion.ShowDialog()
     End Sub
 
-    Private Sub CorrelationsRedFlagsorOthersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CorrelationsRedFlagsorOthersToolStripMenuItem.Click
+    Private Sub mnuProcurementCorrelations_Click(sender As Object, e As EventArgs) Handles mnuProcurementCorrelations.Click
         Dim lstDataNames As List(Of String)
         Dim strComponentColumnNames() As String
 
@@ -1659,5 +1659,21 @@ Public Class frmMain
             dlgCorrelation.strDefaultColumns = Nothing
         End If
         dlgCorrelation.ShowDialog()
+    End Sub
+
+    Private Sub DisplayDailyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplayDailyToolStripMenuItem.Click
+        dlgDisplayDailyData.ShowDialog()
+    End Sub
+
+    Private Sub mnuProcurementMaps_Click(sender As Object, e As EventArgs) Handles mnuProcurementMaps.Click
+        dlgCountryColouredMap.ShowDialog()
+    End Sub
+
+    Private Sub mnuProcurementDescribeMaps_Click(sender As Object, e As EventArgs) Handles mnuProcurementDescribeMaps.Click
+        dlgCountryColouredMap.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareColumnInfillMissingDates_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnInfillMissingDates.Click
+        dlgInfill.ShowDialog()
     End Sub
 End Class

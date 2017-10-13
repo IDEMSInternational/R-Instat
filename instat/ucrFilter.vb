@@ -48,7 +48,7 @@ Public Class ucrFilter
         End If
         ClearConditions()
         If strDefaultDataFrame <> "" Then
-            ucrSelectorForFitler.SetDataframe(strDefaultDataFrame)
+            ucrSelectorForFitler.SetDataframe(strDefaultDataFrame, False)
         End If
         If strDefaultColumn <> "" Then
             ucrFilterByReceiver.Add(strDefaultColumn)
@@ -64,6 +64,7 @@ Public Class ucrFilter
         ucrFactorLevels.SetAsMultipleSelector()
         ucrFactorLevels.SetReceiver(ucrFilterByReceiver)
         ucrFactorLevels.SetIncludeLevels(False)
+        ucrFactorLevels.bIncludeNA = True
         clsFilterView.bForceIncludeOperation = False
         lstFilters.Columns.Add("Variable")
         lstFilters.Columns.Add("Condition")

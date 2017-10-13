@@ -222,11 +222,11 @@ Public Class ucrVariablesAsFactor
         End If
     End Sub
 
-    Public Overrides Sub Add(strVar As String, Optional strDataFrame As String = "")
+    Public Overrides Sub Add(strVar As String, Optional strDataFrame As String = "", Optional bFixReceiver As Boolean = False)
         If bSingleVariable Then
-            ucrSingleVariable.Add(strVar, strDataFrame)
+            ucrSingleVariable.Add(strVar, strDataFrame, bFixReceiver)
         Else
-            ucrMultipleVariables.Add(strVar, strDataFrame)
+            ucrMultipleVariables.Add(strVar, strDataFrame, bFixReceiver)
         End If
     End Sub
 
@@ -356,9 +356,9 @@ Public Class ucrVariablesAsFactor
         End Set
     End Property
 
-    Public Overrides Sub SetIncludedDataTypes(strInclude As String(), Optional bOnlyExcludeOppositeType As Boolean = True)
-        ucrSingleVariable.SetIncludedDataTypes(strInclude, bOnlyExcludeOppositeType)
-        ucrMultipleVariables.SetIncludedDataTypes(strInclude, bOnlyExcludeOppositeType)
+    Public Overrides Sub SetIncludedDataTypes(strInclude As String(), Optional bStrict As Boolean = False)
+        ucrSingleVariable.SetIncludedDataTypes(strInclude, bStrict)
+        ucrMultipleVariables.SetIncludedDataTypes(strInclude, bStrict)
     End Sub
 
     Public Overrides Sub SetExcludedDataTypes(strExclude As String())
