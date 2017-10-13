@@ -51,7 +51,7 @@ Partial Class frmSetupLoading
         Me.lblHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblHeader.Location = New System.Drawing.Point(0, 0)
         Me.lblHeader.Name = "lblHeader"
-        Me.lblHeader.Size = New System.Drawing.Size(437, 111)
+        Me.lblHeader.Size = New System.Drawing.Size(430, 79)
         Me.lblHeader.TabIndex = 0
         Me.lblHeader.Text = "Sorry for the wait." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "An R command is taking some time to complete. " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Please be " &
     "patient while the process finishes."
@@ -59,7 +59,7 @@ Partial Class frmSetupLoading
         '
         'pgbProgres
         '
-        Me.pgbProgres.Location = New System.Drawing.Point(43, 117)
+        Me.pgbProgres.Location = New System.Drawing.Point(41, 82)
         Me.pgbProgres.MarqueeAnimationSpeed = 75
         Me.pgbProgres.Name = "pgbProgres"
         Me.pgbProgres.Size = New System.Drawing.Size(351, 16)
@@ -70,7 +70,7 @@ Partial Class frmSetupLoading
         '
         Me.lblWaiting.AutoSize = True
         Me.lblWaiting.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblWaiting.Location = New System.Drawing.Point(21, 162)
+        Me.lblWaiting.Location = New System.Drawing.Point(21, 116)
         Me.lblWaiting.Name = "lblWaiting"
         Me.lblWaiting.Size = New System.Drawing.Size(159, 20)
         Me.lblWaiting.TabIndex = 3
@@ -79,7 +79,7 @@ Partial Class frmSetupLoading
         'lblSeparator
         '
         Me.lblSeparator.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.lblSeparator.Location = New System.Drawing.Point(18, 145)
+        Me.lblSeparator.Location = New System.Drawing.Point(22, 107)
         Me.lblSeparator.Name = "lblSeparator"
         Me.lblSeparator.Size = New System.Drawing.Size(400, 2)
         Me.lblSeparator.TabIndex = 4
@@ -89,7 +89,7 @@ Partial Class frmSetupLoading
         Me.lblMessage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblMessage.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblMessage.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.lblMessage.Location = New System.Drawing.Point(22, 194)
+        Me.lblMessage.Location = New System.Drawing.Point(22, 148)
         Me.lblMessage.Name = "lblMessage"
         Me.lblMessage.Size = New System.Drawing.Size(393, 89)
         Me.lblMessage.TabIndex = 5
@@ -100,7 +100,7 @@ Partial Class frmSetupLoading
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(437, 311)
+        Me.ClientSize = New System.Drawing.Size(430, 256)
         Me.ControlBox = False
         Me.Controls.Add(Me.lblMessage)
         Me.Controls.Add(Me.lblSeparator)
@@ -109,7 +109,7 @@ Partial Class frmSetupLoading
         Me.Controls.Add(Me.lblHeader)
         Me.Cursor = System.Windows.Forms.Cursors.Default
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Location = New System.Drawing.Point(540, 49)
+        Me.Location = New System.Drawing.Point(470, 40)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmSetupLoading"
