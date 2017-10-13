@@ -43,6 +43,7 @@ Partial Class dlgLinePlot
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.cmdLineOptions = New System.Windows.Forms.Button()
         Me.lblFactorOptional = New System.Windows.Forms.Label()
+        Me.ucrChkWithSE = New instat.ucrCheck()
         Me.ucrChkLineofBestFit = New instat.ucrCheck()
         Me.ucrChkPoints = New instat.ucrCheck()
         Me.ucrSave = New instat.ucrSave()
@@ -51,7 +52,6 @@ Partial Class dlgLinePlot
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
-        Me.ucrChkWithSE = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblXVariable
@@ -102,12 +102,20 @@ Partial Class dlgLinePlot
         Me.lblFactorOptional.Tag = "Factor_Optional:"
         Me.lblFactorOptional.Text = "Factor (Optional):"
         '
+        'ucrChkWithSE
+        '
+        Me.ucrChkWithSE.Checked = False
+        Me.ucrChkWithSE.Location = New System.Drawing.Point(132, 284)
+        Me.ucrChkWithSE.Name = "ucrChkWithSE"
+        Me.ucrChkWithSE.Size = New System.Drawing.Size(135, 20)
+        Me.ucrChkWithSE.TabIndex = 9
+        '
         'ucrChkLineofBestFit
         '
         Me.ucrChkLineofBestFit.Checked = False
         Me.ucrChkLineofBestFit.Location = New System.Drawing.Point(10, 280)
         Me.ucrChkLineofBestFit.Name = "ucrChkLineofBestFit"
-        Me.ucrChkLineofBestFit.Size = New System.Drawing.Size(173, 24)
+        Me.ucrChkLineofBestFit.Size = New System.Drawing.Size(119, 24)
         Me.ucrChkLineofBestFit.TabIndex = 10
         '
         'ucrChkPoints
@@ -177,14 +185,6 @@ Partial Class dlgLinePlot
         Me.ucrReceiverX.strNcFilePath = ""
         Me.ucrReceiverX.TabIndex = 3
         Me.ucrReceiverX.ucrSelector = Nothing
-        '
-        'ucrChkWithSE
-        '
-        Me.ucrChkWithSE.Checked = False
-        Me.ucrChkWithSE.Location = New System.Drawing.Point(249, 277)
-        Me.ucrChkWithSE.Name = "ucrChkWithSE"
-        Me.ucrChkWithSE.Size = New System.Drawing.Size(135, 20)
-        Me.ucrChkWithSE.TabIndex = 9
         '
         'dlgLinePlot
         '
