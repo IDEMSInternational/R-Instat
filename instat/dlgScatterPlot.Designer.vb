@@ -49,6 +49,7 @@ Partial Class dlgScatterPlot
         Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrChkWithSE = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -96,7 +97,7 @@ Partial Class dlgScatterPlot
         Me.ucrChkLineofBestFit.Checked = False
         Me.ucrChkLineofBestFit.Location = New System.Drawing.Point(10, 260)
         Me.ucrChkLineofBestFit.Name = "ucrChkLineofBestFit"
-        Me.ucrChkLineofBestFit.Size = New System.Drawing.Size(173, 20)
+        Me.ucrChkLineofBestFit.Size = New System.Drawing.Size(120, 20)
         Me.ucrChkLineofBestFit.TabIndex = 8
         '
         'ucrSaveScatterPlot
@@ -104,7 +105,7 @@ Partial Class dlgScatterPlot
         Me.ucrSaveScatterPlot.Location = New System.Drawing.Point(10, 285)
         Me.ucrSaveScatterPlot.Name = "ucrSaveScatterPlot"
         Me.ucrSaveScatterPlot.Size = New System.Drawing.Size(255, 24)
-        Me.ucrSaveScatterPlot.TabIndex = 9
+        Me.ucrSaveScatterPlot.TabIndex = 10
         '
         'ucrSelectorForScatter
         '
@@ -157,13 +158,22 @@ Partial Class dlgScatterPlot
         Me.ucrBase.Location = New System.Drawing.Point(10, 312)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 10
+        Me.ucrBase.TabIndex = 11
+        '
+        'ucrChkWithSE
+        '
+        Me.ucrChkWithSE.Checked = False
+        Me.ucrChkWithSE.Location = New System.Drawing.Point(136, 260)
+        Me.ucrChkWithSE.Name = "ucrChkWithSE"
+        Me.ucrChkWithSE.Size = New System.Drawing.Size(135, 20)
+        Me.ucrChkWithSE.TabIndex = 9
         '
         'dlgScatterPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(421, 368)
+        Me.Controls.Add(Me.ucrChkWithSE)
         Me.Controls.Add(Me.ucrChkLineofBestFit)
         Me.Controls.Add(Me.ucrSaveScatterPlot)
         Me.Controls.Add(Me.ucrSelectorForScatter)
@@ -197,4 +207,5 @@ Partial Class dlgScatterPlot
     Friend WithEvents ucrSelectorForScatter As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrSaveScatterPlot As ucrSave
     Friend WithEvents ucrChkLineofBestFit As ucrCheck
+    Friend WithEvents ucrChkWithSE As ucrCheck
 End Class

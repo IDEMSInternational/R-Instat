@@ -400,7 +400,7 @@ summary_mode <- function(x,...) {
 
 summary_mean <- function (x, add_cols, weights="", na.rm = FALSE, trim = 0,...) {
   if( length(x)==0 || (na.rm && length(x[!is.na(x)])==0) ) return(NA)
-  else return(mean(x, na.rm=na.rm, trim = trim))
+  else return(mean(x, na.rm = na.rm, trim = trim))
 }
 
 summary_sum <- function (x, na.rm = FALSE,...) {

@@ -38,7 +38,7 @@ Public Class ucrReceiverExpression
         End If
     End Sub
 
-    Public Overrides Sub Add(strItem As String, Optional strDataFrame As String = "")
+    Public Overrides Sub Add(strItem As String, Optional strDataFrame As String = "", Optional bFixReceiver As Boolean = False)
         Dim strCurrentItemType As String
         Dim kvpItem As KeyValuePair(Of String, String)
 
@@ -49,6 +49,7 @@ Public Class ucrReceiverExpression
         Else
             strCurrentItemType = Selector.GetItemType()
         End If
+
         If cboExpression.Enabled Then
             If strCurrentItemType = "column" Then
                 If strDataFrame = "" Then
@@ -68,6 +69,8 @@ Public Class ucrReceiverExpression
             AddToReceiverAtCursorPosition(strItem)
             Selector.AddToVariablesList(strItem, strDataFrame)
             OnSelectionChanged()
+            'we need this to run when everything else has run 
+            cboExpression.Enabled = Not bFixReceiver
         End If
     End Sub
 

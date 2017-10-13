@@ -40,6 +40,7 @@ Partial Class dlgConvertColumns
     Private Sub InitializeComponent()
         Me.lblColumnsToConvert = New System.Windows.Forms.Label()
         Me.grpConvertTo = New System.Windows.Forms.GroupBox()
+        Me.rdoLogical = New System.Windows.Forms.RadioButton()
         Me.rdoCharacter = New System.Windows.Forms.RadioButton()
         Me.rdoInteger = New System.Windows.Forms.RadioButton()
         Me.rdoNumeric = New System.Windows.Forms.RadioButton()
@@ -57,7 +58,7 @@ Partial Class dlgConvertColumns
         Me.ucrSelectorDataFrameColumns = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverColumnsToConvert = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
-        Me.rdoLogical = New System.Windows.Forms.RadioButton()
+        Me.ucrChkCreateLabels = New instat.ucrCheck()
         Me.grpConvertTo.SuspendLayout()
         Me.grpFactorToNumericOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -87,6 +88,17 @@ Partial Class dlgConvertColumns
         Me.grpConvertTo.TabIndex = 3
         Me.grpConvertTo.TabStop = False
         Me.grpConvertTo.Text = "Convert To"
+        '
+        'rdoLogical
+        '
+        Me.rdoLogical.AutoSize = True
+        Me.rdoLogical.Location = New System.Drawing.Point(237, 66)
+        Me.rdoLogical.Name = "rdoLogical"
+        Me.rdoLogical.Size = New System.Drawing.Size(59, 17)
+        Me.rdoLogical.TabIndex = 6
+        Me.rdoLogical.TabStop = True
+        Me.rdoLogical.Text = "Logical"
+        Me.rdoLogical.UseVisualStyleBackColor = True
         '
         'rdoCharacter
         '
@@ -260,22 +272,20 @@ Partial Class dlgConvertColumns
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 8
         '
-        'rdoLogical
+        'ucrChkCreateLabels
         '
-        Me.rdoLogical.AutoSize = True
-        Me.rdoLogical.Location = New System.Drawing.Point(237, 66)
-        Me.rdoLogical.Name = "rdoLogical"
-        Me.rdoLogical.Size = New System.Drawing.Size(59, 17)
-        Me.rdoLogical.TabIndex = 6
-        Me.rdoLogical.TabStop = True
-        Me.rdoLogical.Text = "Logical"
-        Me.rdoLogical.UseVisualStyleBackColor = True
+        Me.ucrChkCreateLabels.Checked = False
+        Me.ucrChkCreateLabels.Location = New System.Drawing.Point(247, 290)
+        Me.ucrChkCreateLabels.Name = "ucrChkCreateLabels"
+        Me.ucrChkCreateLabels.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkCreateLabels.TabIndex = 9
         '
         'dlgConvertColumns
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(415, 463)
+        Me.Controls.Add(Me.ucrChkCreateLabels)
         Me.Controls.Add(Me.grpFactorToNumericOptions)
         Me.Controls.Add(Me.ucrChkKeepAttributes)
         Me.Controls.Add(Me.ucrNudDisplayDecimals)
@@ -321,4 +331,5 @@ Partial Class dlgConvertColumns
     Friend WithEvents rdoDefault As RadioButton
     Friend WithEvents rdoConvertLevels As RadioButton
     Friend WithEvents rdoLogical As RadioButton
+    Friend WithEvents ucrChkCreateLabels As ucrCheck
 End Class
