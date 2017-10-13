@@ -75,7 +75,10 @@ Public Class sdgSummaries
         ucrChkKurtosis.SetText("Kurtosis")
 
         ucrChkSkewness.SetParameter(New RParameter("summary_skewness", 16), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_skewness" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkSkewness.SetText("Skewness")
+        ucrChkSkewness.SetText("Skewness(3rd Moment)")
+
+        ucrChkMc.SetParameter(New RParameter("summary_skewness_mc", 20), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_skewness_mc" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkMc.SetText("mc")
 
         ucrChkCoefficientOfVariation.SetParameter(New RParameter("summary_coef_var", 17), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_coef_var" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkCoefficientOfVariation.SetText("Coefficient Of Variation")
@@ -89,6 +92,15 @@ Public Class sdgSummaries
         ucrChkSn.SetParameter(New RParameter("summary_Sn", 20), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_Sn" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkSn.SetText("Sn")
 
+        ucrChkTrimmedMean.SetText("Trimmed Mean")
+        ucrChkTrimmedMean.Enabled = False
+        ucrNudFraction.Enabled = False
+        grpLocation.Enabled = False
+        ucrNudFraction.Maximum = 0.5
+        ucrNudFraction.DecimalPlaces = 1
+        ucrNudFraction.Increment = 0.1
+        ucrNudFraction.SetRDefault(0)
+
         'ucrPnlMissingOptions.AddRadioButton(rdoNumber)
         'ucrPnlMissingOptions.AddRadioButton(rdoPercentage)
 
@@ -97,7 +109,7 @@ Public Class sdgSummaries
         ucrNudPercentage.SetLinkedDisplayControl(lblPercentage)
         ucrNudNumber.SetLinkedDisplayControl(lblNumber)
 
-        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkUpperQuartile, ucrChkLowerQuartile, ucrChkMedianAbsoluteDeviation, ucrChkKurtosis, ucrChkCoefficientOfVariation, ucrChkSkewness, ucrChkQn, ucrChkSn})
+        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkUpperQuartile, ucrChkLowerQuartile, ucrChkMedianAbsoluteDeviation, ucrChkKurtosis, ucrChkCoefficientOfVariation, ucrChkSkewness, ucrChkMc, ucrChkQn, ucrChkSn})
         'TODO: This needs modifying summaries functions to allow this options to be implemented.
         tbMissingOptions.Enabled = False
         For Each ctrTemp As ucrCheck In lstCheckboxes

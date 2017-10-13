@@ -44,7 +44,7 @@ Public Class dlgReferenceLevel
         ucrReceiverReferenceLevels.SetParameterIsString()
         ucrReceiverReferenceLevels.Selector = ucrSelectorForReferenceLevels
         ucrReceiverReferenceLevels.SetMeAsReceiver()
-        ucrReceiverReferenceLevels.SetIncludedDataTypes({"factor"}, bOnlyExcludeOppositeType:=False)
+        ucrReceiverReferenceLevels.SetIncludedDataTypes({"factor"}, bStrict:=True)
         ucrReceiverReferenceLevels.strSelectorHeading = "Factors"
         ucrReceiverReferenceLevels.SetExcludedDataTypes({"ordered,factor"})
 

@@ -186,17 +186,17 @@ Public Class ucrReceiver
         OnControlValueChanged()
     End Sub
 
-    ' If bOnlyExcludeOppositeType = True then instead of restricting to that type it will try to guess which type(s) to exclude
-    ' e.g. SetDataType("numeric", True) will just exclude factor and character columns (so logical, Date etc. will be included)
-    '      Whereas SetDataType("numeric", False) will only include numeric types (logical, Date etc. will NOT be included)
-    ' Both options are useful in different contexts.
-    ' Currently bOnlyExcludeOppositeType = True only detects "numeric", "factor" and "character"
-    Public Sub SetDataType(strTemp As String, Optional bOnlyExcludeOppositeType As Boolean = True)
-        If bOnlyExcludeOppositeType Then
+    ' If bStrict = True then only columns of the type specific will be included
+    ' If bStict = False then a less strict condition will be made for which columns are included, depending on the type
+    ' as specified below.
+    ' SetDataType("numeric", False) will exclude factor and character columns (so numeric, logical, Date etc. will be included)
+    ' SetDataType("factor", False) will include factor and logical columns
+    Public Sub SetDataType(strTemp As String, Optional bStrict As Boolean = False)
+        If Not bStrict Then
             If strTemp = "numeric" Then
                 AddExcludedMetadataProperty("class", {Chr(34) & "factor" & Chr(34), Chr(34) & "character" & Chr(34)})
-            ElseIf strTemp = "factor" OrElse strTemp = "character" Then
-                AddExcludedMetadataProperty("class", {Chr(34) & "numeric" & Chr(34)})
+            ElseIf strTemp = "factor" Then
+                AddIncludedMetadataProperty("class", {Chr(34) & "factor" & Chr(34), Chr(34) & "logical" & Chr(34)})
             Else
                 AddIncludedMetadataProperty("class", {Chr(34) & strTemp & Chr(34)})
             End If
@@ -205,9 +205,9 @@ Public Class ucrReceiver
         End If
     End Sub
 
-    'bOnlyExcludeOppositeType used as described in SetDataType.
+    'bStrict used as described in SetDataType.
     'Currently only checks if strInclude has exactly one item.
-    Public Overridable Sub SetIncludedDataTypes(strInclude As String(), Optional bOnlyExcludeOppositeType As Boolean = True)
+    Public Overridable Sub SetIncludedDataTypes(strInclude As String(), Optional bStrict As Boolean = False)
         Dim strTypes(strInclude.Count - 1) As String
 
         Array.Copy(strInclude, strTypes, strInclude.Length)
@@ -216,12 +216,12 @@ Public Class ucrReceiver
         For i = 0 To strInclude.Count - 1
             strTypes(i) = Chr(34) & strInclude(i) & Chr(34)
         Next
-        If bOnlyExcludeOppositeType Then
+        If Not bStrict Then
             If strTypes.Count = 1 Then
-                If strTypes(0) = "numeric" Then
+                If strTypes(0) = Chr(34) & "numeric" & Chr(34) Then
                     AddExcludedMetadataProperty("class", {Chr(34) & "factor" & Chr(34), Chr(34) & "character" & Chr(34)})
-                ElseIf strTypes(0) = "factor" OrElse strTypes(0) = "character" Then
-                    AddExcludedMetadataProperty("class", {Chr(34) & "numeric" & Chr(34)})
+                ElseIf strTypes(0) = Chr(34) & "factor" & Chr(34) Then
+                    AddIncludedMetadataProperty("class", {Chr(34) & "factor" & Chr(34), Chr(34) & "logical" & Chr(34)})
                 Else
                     AddIncludedMetadataProperty("class", strTypes)
                 End If
@@ -378,7 +378,7 @@ Public Class ucrReceiver
         bTypeSet = True
     End Sub
 
-    Public Overridable Sub Add(strItem As String, Optional strDataFrame As String = "")
+    Public Overridable Sub Add(strItem As String, Optional strDataFrame As String = "", Optional bFixReceiver As Boolean = False)
         'SetMeAsReceiver()
         'For i = 0 To Selector.lstAvailableVariable.Items.Count - 1
         '    If Selector.lstAvailableVariable.Items(i).Text = strItem Then
