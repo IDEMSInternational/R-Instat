@@ -115,7 +115,6 @@ Partial Class frmSetupLoading
         Me.Name = "frmSetupLoading"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "An R Command is Running"
-        Me.TopMost = True
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
