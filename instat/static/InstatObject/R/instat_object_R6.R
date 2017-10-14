@@ -1479,8 +1479,8 @@ instat_object$set("public","create_variable_set", function(data_name, set_name, 
 }
 )
 
-instat_object$set("public","update_variable_set", function(data_name, set_name, columns) {
-  self$get_data_objects(data_name)$update_variable_set(set_name = set_name, columns = columns)
+instat_object$set("public","update_variable_set", function(data_name, set_name, columns, new_set_name) {
+  self$get_data_objects(data_name)$update_variable_set(set_name = set_name, columns = columns, new_set_name = new_set_name)
 }
 )
 
