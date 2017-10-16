@@ -720,6 +720,16 @@ Public Class ucrDataView
         End If
     End Sub
 
+    Public Sub SetCurrentDataFrame(iIndex As Integer)
+        If grdData IsNot Nothing Then
+            If grdData.Worksheets.Count > iIndex Then
+                grdData.CurrentWorksheet = grdData.Worksheets(iIndex)
+            Else
+                ' Developer error?
+            End If
+        End If
+    End Sub
+
     Private Sub RunScriptFromDataView(strScript As String, Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing)
         Cursor = Cursors.WaitCursor
         grdData.Enabled = False
