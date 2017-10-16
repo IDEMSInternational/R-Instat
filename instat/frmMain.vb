@@ -95,7 +95,7 @@ Public Class frmMain
         AddHandler System.Windows.Forms.Application.Idle, AddressOf Application_Idle
 
         'Sets up the Recent items
-        clsRecentItems.setToolStripItems(mnuFile, mnuTbShowLast10, sepStart, sepEnd)
+        clsRecentItems.setToolStripItems(mnuFile, mnuTbOpen, mnuTbLast10Dialogs, sepStart, sepEnd)
         'checks existence of MRU list
         clsRecentItems.checkOnLoad()
         Cursor = Cursors.Default
@@ -216,6 +216,12 @@ Public Class frmMain
         mnuViewDataFrameMetadata.Checked = False
         mnuViewColumnMetadata.Checked = False
         mnuViewScriptWindow.Checked = False
+
+        mnuTbDataView.Checked = True
+        mnuTbOutput.Checked = True
+        mnuTbColumnMetadata.Checked = False
+        mnuTbLog.Checked = False
+
         UpdateLayout()
     End Sub
 
@@ -415,6 +421,10 @@ Public Class frmMain
                 splOverall.Panel1Collapsed = True
             End If
         End If
+        mnuTbDataView.Checked = mnuViewDataView.Checked
+        mnuTbOutput.Checked = mnuViewOutputWindow.Checked
+        mnuTbColumnMetadata.Checked = mnuViewColumnMetadata.Checked
+        mnuTbLog.Checked = mnuViewLog.Checked
     End Sub
 
     Private Sub mnuWindowVariable_Click(sender As Object, e As EventArgs) Handles mnuViewColumnMetadata.Click
@@ -495,22 +505,11 @@ Public Class frmMain
         dlgDeleteRowsOrColums.ShowDialog()
     End Sub
 
-    Private Sub EditLastDialogueToolStrip_Click(sender As Object, e As EventArgs) Handles EditLastDialogueToolStrip.Click
+    Private Sub EditLastDialogueToolStrip_Click(sender As Object, e As EventArgs) Handles mnuTbEditLastDialog.Click
         If clsRecentItems.mnuItems.Count > 0 Then
             clsRecentItems.mnuItems.Last.ShowDialog()
         End If
     End Sub
-
-    Private Sub mnuTbNew_Click(sender As Object, e As EventArgs) Handles mnuTbNew.Click
-        mnuFileNewDataFrame_Click(sender, e)
-    End Sub
-
-
-    Private Sub mnuTbOpen_Click(sender As Object, e As EventArgs) Handles mnuTbOpen.Click
-        mnuFileOpenFromFile_Click(sender, e)
-    End Sub
-
-
 
     Private Sub mnuTbSave_Click(sender As Object, e As EventArgs) Handles mnuTbSave.Click
         mnuFileSave_Click(sender, e)
@@ -531,10 +530,6 @@ Public Class frmMain
 
     Private Sub mnuTbCopy_Click(sender As Object, e As EventArgs) Handles mnuTbCopy.Click
         mnuEditCopy_Click(sender, e)
-    End Sub
-
-    Private Sub mnuTbPrint_Click(sender As Object, e As EventArgs) Handles mnuTbPrint.Click
-        mnuFilePrint_Click(sender, e)
     End Sub
 
     Private Sub mnuHelpHelp_Click(sender As Object, e As EventArgs)
@@ -1689,5 +1684,42 @@ Public Class frmMain
 
     Private Sub mnuPrepareColumnInfillMissingDates_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnInfillMissingDates.Click
         dlgInfill.ShowDialog()
+    End Sub
+
+    Private Sub mnuDataView_Click(sender As Object, e As EventArgs) Handles mnuTbDataView.Click
+        mnuViewDataView.Checked = Not mnuViewDataView.Checked
+        UpdateLayout()
+    End Sub
+
+    Private Sub mnuTbOutput_Click(sender As Object, e As EventArgs) Handles mnuTbOutput.Click
+        mnuViewOutputWindow.Checked = Not mnuViewOutputWindow.Checked
+        UpdateLayout()
+    End Sub
+
+    Private Sub mnuTbColumnMetadata_Click(sender As Object, e As EventArgs) Handles mnuTbColumnMetadata.Click
+        mnuViewColumnMetadata.Checked = Not mnuViewColumnMetadata.Checked
+        UpdateLayout()
+    End Sub
+
+    Private Sub mnuTbLog_Click(sender As Object, e As EventArgs) Handles mnuTbLog.Click
+        mnuViewLog.Checked = Not mnuViewLog.Checked
+        UpdateLayout()
+    End Sub
+
+    Private Sub mnuTbResetLayout_Click(sender As Object, e As EventArgs) Handles mnuTbResetLayout.Click
+        SetToDefaultLayout()
+    End Sub
+
+    Public Sub SetToolbarHeight(iHeight As Integer)
+        'Not currently working, do not use this method
+        'Tool_strip.ImageScalingSize = New Size(iHeight, iHeight)
+    End Sub
+
+    Private Sub mnuTbOpenFromLibrary_Click(sender As Object, e As EventArgs) Handles mnuTbOpenFromLibrary.Click
+        dlgFromLibrary.ShowDialog()
+    End Sub
+
+    Private Sub mnuTbOpen_ButtonClick(sender As Object, e As EventArgs) Handles mnuTbOpen.ButtonClick
+        dlgImportDataset.ShowDialog()
     End Sub
 End Class
