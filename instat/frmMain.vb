@@ -1549,8 +1549,22 @@ Public Class frmMain
         dlgClimaticSummary.ShowDialog()
     End Sub
 
+    Public Function GetDataFrameCount() As Integer
+        If ucrDataViewer IsNot Nothing AndAlso ucrDataViewer.grdData IsNot Nothing Then
+            Return ucrDataViewer.grdData.Worksheets.Count
+        Else
+            Return 0
+        End If
+    End Function
+
     Public Sub SetCurrentDataFrame(strDataName As String)
         ucrDataViewer.SetCurrentDataFrame(strDataName)
+        ucrColumnMeta.SetCurrentDataFrame(strDataName)
+    End Sub
+
+    Public Sub SetCurrentDataFrame(iIndex As Integer)
+        ucrDataViewer.SetCurrentDataFrame(iIndex)
+        ucrColumnMeta.SetCurrentDataFrame(iIndex)
     End Sub
 
     Private Sub WindroseToolStripMenuItem_Click(sender As Object, e As EventArgs)
