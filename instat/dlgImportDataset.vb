@@ -37,6 +37,7 @@ Public Class dlgImportDataset
     Public strCurrentDirectory As String
     Public strFileToOpenOn As String
     Private bDialogLoaded As Boolean
+    Private iDataFrameCount As Integer
 
     Public Sub New()
 
@@ -697,10 +698,19 @@ Public Class dlgImportDataset
         End If
     End Sub
 
+    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+        'Gets the current number of (visible) data frame before importing
+        'So correct current data frame can be set after
+        iDataFrameCount = frmMain.GetDataFrameCount()
+    End Sub
+
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         ' add the item to the MRU (Most Recently Used) list...
         'Disabled until implemented correctly
         frmMain.clsRecentItems.addToMenu(strFilePathSystem)
+        'Sets the current data frame as the first new data frame
+        'Needed so that if multiple data frames imported, the last one is not the current data frame
+        frmMain.SetCurrentDataFrame(iDataFrameCount)
     End Sub
 
     Private Sub CSVControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkStringsAsFactorsCSV.ControlValueChanged, ucrInputNAStringsCSV.ControlValueChanged, ucrInputEncodingCSV.ControlValueChanged, ucrInputSeparatorCSV.ControlValueChanged, ucrInputHeadersCSV.ControlValueChanged, ucrInputDecimalCSV.ControlValueChanged, ucrNudLinesToSkipCSV.ControlValueChanged, ucrPnlRowNamesCSV.ControlValueChanged
