@@ -109,12 +109,12 @@ instat_object$set("public", "add_link", function(from_data_frame, to_data_frame,
     found <- FALSE
     for(curr_link_pairs in curr_link_columns) {
       # Are these the right checks on the link columns?
-      if(from_on_left && length(link_pairs) == length(curr_link_pairs) && (setequal(link_pairs, curr_link_pairs) || setequal(names(link_pairs), names(curr_link_pairs)))) {
+      if(from_on_left && length(link_pairs) == length(curr_link_pairs) && setequal(names(link_pairs), names(curr_link_pairs))) {
         message("A link with these columns already exists. A new link will not be added.")
         found <- TRUE
         break
       }
-      else if(!from_on_left && length(link_pairs) == length(curr_link_pairs) && (setequal(link_pairs, names(curr_link_pairs)) || setequal(names(link_pairs), curr_link_pairs))) {
+      else if(!from_on_left && length(link_pairs) == length(curr_link_pairs) && (setequal(link_pairs, names(curr_link_pairs)))) {
         message("A link with these columns already exists. A new link will not be added.")
         found <- TRUE
         break
