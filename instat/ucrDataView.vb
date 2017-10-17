@@ -47,6 +47,8 @@ Public Class ucrDataView
         mnuFreezeToHere.Enabled = False
         mnuUnfreeze.Enabled = False
         grdData.Visible = False
+        mnuInsertColsBefore.Enabled = False
+        mnuInsertColsAfter.Enabled = False
         'autoTranslate(Me)
         'Disable Autoformat cell
         'This needs to be added at the part when we are writing data to the grid, not here
@@ -84,31 +86,31 @@ Public Class ucrDataView
         UpdateRFunctionDataFrameParameters()
     End Sub
 
-    Private Sub mnuInsertColsBefore_Click(sender As Object, e As EventArgs) Handles mnuInsertColsBefore.Click
-        clsInsertColumns.AddParameter("adjacent_column", SelectedColumnPosition(True))
-        clsInsertColumns.AddParameter("num_cols", grdCurrSheet.SelectionRange.Cols)
-        clsInsertColumns.AddParameter("before", "TRUE")
-        'TODO This should be an option in dialog
-        clsInsertColumns.AddParameter("col_name", Chr(34) & "X" & Chr(34))
-        clsInsertColumns.AddParameter("use_col_name_as_prefix", "TRUE")
-        RunScriptFromDataView(clsInsertColumns.ToScript(), strComment:="Right click menu: Insert Column(s) Before")
-    End Sub
+    'Private Sub mnuInsertColsBefore_Click(sender As Object, e As EventArgs) Handles mnuInsertColsBefore.Click
+    '    clsInsertColumns.AddParameter("adjacent_column", SelectedColumnPosition(True))
+    '    clsInsertColumns.AddParameter("num_cols", grdCurrSheet.SelectionRange.Cols)
+    '    clsInsertColumns.AddParameter("before", "TRUE")
+    '    'TODO This should be an option in dialog
+    '    clsInsertColumns.AddParameter("col_name", Chr(34) & "X" & Chr(34))
+    '    clsInsertColumns.AddParameter("use_col_name_as_prefix", "TRUE")
+    '    RunScriptFromDataView(clsInsertColumns.ToScript(), strComment:="Right click menu: Insert Column(s) Before")
+    'End Sub
 
-    Private Sub mnuInsertColsAfter_Click(sender As Object, e As EventArgs) Handles mnuInsertColsAfter.Click
-        clsInsertColumns.AddParameter("adjacent_column", SelectedColumnPosition(False))
-        clsInsertColumns.AddParameter("num_cols", grdCurrSheet.SelectionRange.Cols)
-        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-            clsInsertColumns.AddParameter("before", "FALSE")
-        Else
-            clsInsertColumns.RemoveParameterByName("before")
-        End If
-        'TODO This should be an option in dialog
-        'This is now the default in the R method so not needed
-        'but should be added if user wants to change from default
-        'clsInsertColumns.AddParameter("col_name", Chr(34) & "X" & Chr(34))
-        'clsInsertColumns.AddParameter("use_col_name_as_prefix", "TRUE")
-        RunScriptFromDataView(clsInsertColumns.ToScript(), strComment:="Right click menu: Insert Column(s) After")
-    End Sub
+    'Private Sub mnuInsertColsAfter_Click(sender As Object, e As EventArgs) Handles mnuInsertColsAfter.Click
+    '    clsInsertColumns.AddParameter("adjacent_column", SelectedColumnPosition(False))
+    '    clsInsertColumns.AddParameter("num_cols", grdCurrSheet.SelectionRange.Cols)
+    '    If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+    '        clsInsertColumns.AddParameter("before", "FALSE")
+    '    Else
+    '        clsInsertColumns.RemoveParameterByName("before")
+    '    End If
+    '    'TODO This should be an option in dialog
+    '    'This is now the default in the R method so not needed
+    '    'but should be added if user wants to change from default
+    '    'clsInsertColumns.AddParameter("col_name", Chr(34) & "X" & Chr(34))
+    '    'clsInsertColumns.AddParameter("use_col_name_as_prefix", "TRUE")
+    '    RunScriptFromDataView(clsInsertColumns.ToScript(), strComment:="Right click menu: Insert Column(s) After")
+    'End Sub
 
     Private Sub mnuDeleteCol_Click(sender As Object, e As EventArgs) Handles mnuDeleteCol.Click
         If grdData.CurrentWorksheet.SelectionRange.Cols = grdData.CurrentWorksheet.ColumnCount Then
