@@ -2356,7 +2356,9 @@ data_object$set("public","infill_missing_dates", function(date_name, factors, re
     }
     if(merge_required) {
       all_dates_factors <- plyr::rbind.fill(full_dates_list)
-      self$merge_data(all_dates_factors, by = c(date_name, factors), type = "full")
+      by <- c(date_name, factors)
+      names(by) <- by
+      self$merge_data(all_dates_factors, by = by, type = "full")
       if(resort) self$sort_dataframe(col_names = c(factors, date_name))
     }
   }
