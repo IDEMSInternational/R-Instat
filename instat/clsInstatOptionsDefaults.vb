@@ -42,4 +42,5 @@ Public Class clsInstatOptionsDefaults
     Public Shared ReadOnly DEFAULTiAutoSaveDataMinutes As Integer = 10
     Public Shared ReadOnly DEFAULTbShowWaitDialog As Boolean = True
     Public Shared ReadOnly DEFAULTiWaitTimeDelaySeconds As Integer = 2
+    Public Shared ReadOnly DEFAULTiToolbarHeight As Integer = 30
 End Class
