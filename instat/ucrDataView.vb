@@ -47,8 +47,8 @@ Public Class ucrDataView
         mnuFreezeToHere.Enabled = False
         mnuUnfreeze.Enabled = False
         grdData.Visible = False
-        mnuInsertColsBefore.Enabled = False
-        mnuInsertColsAfter.Enabled = False
+        mnuInsertColsBefore.Visible = False
+        mnuInsertColsAfter.Visible = False
         'autoTranslate(Me)
         'Disable Autoformat cell
         'This needs to be added at the part when we are writing data to the grid, not here
