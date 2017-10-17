@@ -3214,18 +3214,21 @@ data_object$set("public", "create_variable_set", function(set_name, columns) {
 }
 )
 
-data_object$set("public", "update_variable_set", function(set_name, columns) {
-  suppressWarnings(self$create_variable_set(set_name = set_name, columns = columns))
+data_object$set("public", "update_variable_set", function(set_name, columns, new_set_name) {
+  if(!missing(new_set_name) && new_set_name != set_name) {
+    self$delete_variable_sets(set_names = set_name)
+  }
+  suppressWarnings(self$create_variable_set(set_name = new_set_name, columns = columns))
 }
 )
 
-data_object$set("public", "delete_variable_set", function(set_name) {
-  adjusted_set_name <- paste0(set_prefix, set_name)
-  if(!adjusted_set_name %in% self$get_variables_metadata_names()) {
-    warning("There is no variable set called ", set_name, ".")
+data_object$set("public", "delete_variable_sets", function(set_names) {
+  adjusted_set_names <- paste0(set_prefix, set_names)
+  if(!all(adjusted_set_names %in% self$get_variables_metadata_names())) {
+    warning("Some of the variable set names were not found. Sets will not be deleted.")
   }
   else {
-    self$append_to_variables_metadata(col_names = self$get_column_names(), property = adjusted_set_name, new_val = NULL)
+    sapply(adjusted_set_names, function(x) self$append_to_variables_metadata(col_names = self$get_column_names(), property = x, new_val = NULL))
   }
 }
 )
@@ -3246,8 +3249,8 @@ data_object$set("public", "get_variable_sets", function(set_names, force_as_list
   curr_set_names <- self$get_variable_sets_names()
   if(!missing(set_names) && !all(set_names %in% curr_set_names)) stop("Not all of: ", paste(set_name, collapse = ", "), "exist as variable sets.")
   include_lists <- rep(list(TRUE), length(set_names))
-  names(include_lists) <- set_names
-  out <- lapply(include_lists, function(x) self$get_column_names(include = x))
+  names(include_lists) <- paste0(set_prefix, set_names)
+  out <- lapply(seq_along(include_lists), function(i) self$get_column_names(include = include_lists[i]))
   if(length(set_names) == 1 && !force_as_list) {
     out <- as.character(unlist(out))
   }

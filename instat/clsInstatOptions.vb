@@ -42,6 +42,7 @@ Imports RDotNet
     Public iAutoSaveDataMinutes As Nullable(Of Integer)
     Public bShowWaitDialog As Nullable(Of Boolean)
     Public iWaitTimeDelaySeconds As Nullable(Of Integer)
+    Public iToolbarHeight As Nullable(Of Integer)
 
     Public Sub New(Optional bSetOptions As Boolean = True)
         'TODO Is this sensible to do in constructor?
@@ -71,6 +72,7 @@ Imports RDotNet
         iAutoSaveDataMinutes = clsInstatOptionsDefaults.DEFAULTiAutoSaveDataMinutes
         bShowWaitDialog = clsInstatOptionsDefaults.DEFAULTbShowWaitDialog
         iWaitTimeDelaySeconds = clsInstatOptionsDefaults.DEFAULTiWaitTimeDelaySeconds
+        iToolbarHeight = clsInstatOptionsDefaults.DEFAULTiToolbarHeight
         If bSetOptions Then
             SetOptions()
         End If
@@ -207,6 +209,12 @@ Imports RDotNet
             SetWaitTimeDelaySeconds(iWaitTimeDelaySeconds)
         Else
             SetWaitTimeDelaySeconds(clsInstatOptionsDefaults.DEFAULTiWaitTimeDelaySeconds)
+        End If
+
+        If iToolbarHeight.HasValue Then
+            SetToolbarHeight(iToolbarHeight)
+        Else
+            SetToolbarHeight(clsInstatOptionsDefaults.DEFAULTiToolbarHeight)
         End If
     End Sub
 
@@ -371,5 +379,10 @@ Imports RDotNet
     Public Sub SetWaitTimeDelaySeconds(iNewTimeInSeconds As Integer)
         iWaitTimeDelaySeconds = iNewTimeInSeconds
         frmMain.clsRLink.SetWaitDelayTime(iWaitTimeDelaySeconds)
+    End Sub
+
+    Public Sub SetToolbarHeight(iNewToolbarHeight As Integer)
+        iToolbarHeight = iNewToolbarHeight
+        frmMain.SetToolbarHeight(iToolbarHeight)
     End Sub
 End Class
