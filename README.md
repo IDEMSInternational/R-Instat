@@ -1,6 +1,6 @@
 # R-Instat
 
-R-Instat is free, menu driven statistics software powered by R. It is designed to exploit the power of the R statistical system, while simultaneously being as easy to use as other traditional point and click statistics software such as SPSS, though its menu and dialog-based interface.
+R-Instat is free, menu driven statistics software powered by R. It is designed to exploit the power of the R statistical system, while simultaneously being as easy to use as other traditional point and click statistics software, through its menu and dialog-based interface.
 
 ## Download
 
