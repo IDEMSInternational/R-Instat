@@ -301,21 +301,24 @@ Partial Class frmMain
         Me.stsStrip = New System.Windows.Forms.StatusStrip()
         Me.tstatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.Tool_strip = New System.Windows.Forms.ToolStrip()
-        Me.mnuTbNew = New System.Windows.Forms.ToolStripButton()
-        Me.mnuTbOpen = New System.Windows.Forms.ToolStripButton()
+        Me.mnuTbOpenFromLibrary = New System.Windows.Forms.ToolStripButton()
         Me.mnuTbSave = New System.Windows.Forms.ToolStripButton()
-        Me.mnuTbPrint = New System.Windows.Forms.ToolStripButton()
         Me.toolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuTbCut = New System.Windows.Forms.ToolStripButton()
         Me.mnuTbCopy = New System.Windows.Forms.ToolStripButton()
         Me.mnuTbPaste = New System.Windows.Forms.ToolStripButton()
         Me.mnuTbDelete = New System.Windows.Forms.ToolStripButton()
         Me.separator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.EditLastDialogueToolStrip = New System.Windows.Forms.ToolStripButton()
-        Me.mnuTbShowLast10 = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.mnuTbEditLastDialog = New System.Windows.Forms.ToolStripButton()
+        Me.mnuTbLast10Dialogs = New System.Windows.Forms.ToolStripDropDownButton()
         Me.sepStart = New System.Windows.Forms.ToolStripSeparator()
         Me.sepEnd = New System.Windows.Forms.ToolStripSeparator()
         Me.separator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuTbDataView = New System.Windows.Forms.ToolStripButton()
+        Me.mnuTbOutput = New System.Windows.Forms.ToolStripButton()
+        Me.mnuTbColumnMetadata = New System.Windows.Forms.ToolStripButton()
+        Me.mnuTbLog = New System.Windows.Forms.ToolStripButton()
+        Me.mnuTbResetLayout = New System.Windows.Forms.ToolStripButton()
+        Me.separator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuTbHelp = New System.Windows.Forms.ToolStripButton()
         Me.mnuBar = New System.Windows.Forms.MenuStrip()
         Me.mnuFile = New System.Windows.Forms.ToolStripMenuItem()
@@ -406,6 +409,7 @@ Partial Class frmMain
         Me.mnuPrepareColumnGenerateDate = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnMakeDate = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnUseDate = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnInfillMissingDates = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnMakeTime = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnUseTime = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnReshape = New System.Windows.Forms.ToolStripMenuItem()
@@ -480,12 +484,13 @@ Partial Class frmMain
         Me.splOverall = New System.Windows.Forms.SplitContainer()
         Me.splExtraWindows = New System.Windows.Forms.SplitContainer()
         Me.splMetadata = New System.Windows.Forms.SplitContainer()
+        Me.splLogScript = New System.Windows.Forms.SplitContainer()
+        Me.splDataOutput = New System.Windows.Forms.SplitContainer()
+        Me.mnuTbOpen = New System.Windows.Forms.ToolStripSplitButton()
         Me.ucrColumnMeta = New instat.ucrColumnMetadata()
         Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
-        Me.splLogScript = New System.Windows.Forms.SplitContainer()
         Me.ucrLogWindow = New instat.ucrLog()
         Me.ucrScriptWindow = New instat.ucrScript()
-        Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
         Me.stsStrip.SuspendLayout()
@@ -2352,73 +2357,49 @@ Partial Class frmMain
         '
         Me.Tool_strip.BackColor = System.Drawing.SystemColors.ControlLightLight
         Me.Tool_strip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.Tool_strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTbNew, Me.mnuTbOpen, Me.mnuTbSave, Me.mnuTbPrint, Me.toolStripSeparator, Me.mnuTbCut, Me.mnuTbCopy, Me.mnuTbPaste, Me.mnuTbDelete, Me.separator1, Me.EditLastDialogueToolStrip, Me.mnuTbShowLast10, Me.separator2, Me.mnuTbHelp})
+        Me.Tool_strip.ImageScalingSize = New System.Drawing.Size(30, 30)
+        Me.Tool_strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTbOpen, Me.mnuTbOpenFromLibrary, Me.mnuTbSave, Me.toolStripSeparator, Me.mnuTbCopy, Me.mnuTbPaste, Me.mnuTbDelete, Me.separator1, Me.mnuTbEditLastDialog, Me.mnuTbLast10Dialogs, Me.separator2, Me.mnuTbDataView, Me.mnuTbOutput, Me.mnuTbColumnMetadata, Me.mnuTbLog, Me.mnuTbResetLayout, Me.separator3, Me.mnuTbHelp})
         Me.Tool_strip.Location = New System.Drawing.Point(0, 24)
         Me.Tool_strip.Name = "Tool_strip"
-        Me.Tool_strip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
-        Me.Tool_strip.Size = New System.Drawing.Size(834, 25)
+        Me.Tool_strip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
+        Me.Tool_strip.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.Tool_strip.Size = New System.Drawing.Size(834, 37)
         Me.Tool_strip.TabIndex = 7
         Me.Tool_strip.Text = "Tool"
         '
-        'mnuTbNew
+        'mnuTbOpenFromLibrary
         '
-        Me.mnuTbNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.mnuTbNew.Image = CType(resources.GetObject("mnuTbNew.Image"), System.Drawing.Image)
-        Me.mnuTbNew.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.mnuTbNew.Name = "mnuTbNew"
-        Me.mnuTbNew.Size = New System.Drawing.Size(23, 22)
-        Me.mnuTbNew.Text = "&New"
-        '
-        'mnuTbOpen
-        '
-        Me.mnuTbOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.mnuTbOpen.Image = CType(resources.GetObject("mnuTbOpen.Image"), System.Drawing.Image)
-        Me.mnuTbOpen.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.mnuTbOpen.Name = "mnuTbOpen"
-        Me.mnuTbOpen.Size = New System.Drawing.Size(23, 22)
-        Me.mnuTbOpen.Text = "&Open"
+        Me.mnuTbOpenFromLibrary.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.mnuTbOpenFromLibrary.Image = Global.instat.My.Resources.Resources.openfromlibrary
+        Me.mnuTbOpenFromLibrary.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.mnuTbOpenFromLibrary.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
+        Me.mnuTbOpenFromLibrary.Name = "mnuTbOpenFromLibrary"
+        Me.mnuTbOpenFromLibrary.Size = New System.Drawing.Size(34, 34)
+        Me.mnuTbOpenFromLibrary.ToolTipText = "Open From Library"
         '
         'mnuTbSave
         '
         Me.mnuTbSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.mnuTbSave.Image = CType(resources.GetObject("mnuTbSave.Image"), System.Drawing.Image)
         Me.mnuTbSave.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.mnuTbSave.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
         Me.mnuTbSave.Name = "mnuTbSave"
-        Me.mnuTbSave.Size = New System.Drawing.Size(23, 22)
+        Me.mnuTbSave.Size = New System.Drawing.Size(34, 34)
         Me.mnuTbSave.Text = "&Save"
-        '
-        'mnuTbPrint
-        '
-        Me.mnuTbPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.mnuTbPrint.Enabled = False
-        Me.mnuTbPrint.Image = CType(resources.GetObject("mnuTbPrint.Image"), System.Drawing.Image)
-        Me.mnuTbPrint.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.mnuTbPrint.Name = "mnuTbPrint"
-        Me.mnuTbPrint.Size = New System.Drawing.Size(23, 22)
-        Me.mnuTbPrint.Text = "&Print"
         '
         'toolStripSeparator
         '
         Me.toolStripSeparator.Name = "toolStripSeparator"
-        Me.toolStripSeparator.Size = New System.Drawing.Size(6, 25)
-        '
-        'mnuTbCut
-        '
-        Me.mnuTbCut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.mnuTbCut.Enabled = False
-        Me.mnuTbCut.Image = CType(resources.GetObject("mnuTbCut.Image"), System.Drawing.Image)
-        Me.mnuTbCut.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.mnuTbCut.Name = "mnuTbCut"
-        Me.mnuTbCut.Size = New System.Drawing.Size(23, 22)
-        Me.mnuTbCut.Text = "C&ut"
+        Me.toolStripSeparator.Size = New System.Drawing.Size(6, 37)
         '
         'mnuTbCopy
         '
         Me.mnuTbCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.mnuTbCopy.Image = CType(resources.GetObject("mnuTbCopy.Image"), System.Drawing.Image)
         Me.mnuTbCopy.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.mnuTbCopy.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
         Me.mnuTbCopy.Name = "mnuTbCopy"
-        Me.mnuTbCopy.Size = New System.Drawing.Size(23, 22)
+        Me.mnuTbCopy.Size = New System.Drawing.Size(34, 34)
         Me.mnuTbCopy.Text = "&Copy"
         '
         'mnuTbPaste
@@ -2427,8 +2408,9 @@ Partial Class frmMain
         Me.mnuTbPaste.Enabled = False
         Me.mnuTbPaste.Image = CType(resources.GetObject("mnuTbPaste.Image"), System.Drawing.Image)
         Me.mnuTbPaste.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.mnuTbPaste.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
         Me.mnuTbPaste.Name = "mnuTbPaste"
-        Me.mnuTbPaste.Size = New System.Drawing.Size(23, 22)
+        Me.mnuTbPaste.Size = New System.Drawing.Size(34, 34)
         Me.mnuTbPaste.Text = "&Paste"
         '
         'mnuTbDelete
@@ -2436,34 +2418,37 @@ Partial Class frmMain
         Me.mnuTbDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.mnuTbDelete.Image = Global.instat.My.Resources.Resources.Oxygen_Icons_org_Oxygen_Status_dialog_error
         Me.mnuTbDelete.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.mnuTbDelete.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
         Me.mnuTbDelete.Name = "mnuTbDelete"
-        Me.mnuTbDelete.Size = New System.Drawing.Size(23, 22)
+        Me.mnuTbDelete.Size = New System.Drawing.Size(34, 34)
         Me.mnuTbDelete.Text = "&Delete"
-        Me.mnuTbDelete.ToolTipText = "Clears the output window"
+        Me.mnuTbDelete.ToolTipText = "Clear Output Window"
         '
         'separator1
         '
         Me.separator1.Name = "separator1"
-        Me.separator1.Size = New System.Drawing.Size(6, 25)
+        Me.separator1.Size = New System.Drawing.Size(6, 37)
         '
-        'EditLastDialogueToolStrip
+        'mnuTbEditLastDialog
         '
-        Me.EditLastDialogueToolStrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.EditLastDialogueToolStrip.Image = Global.instat.My.Resources.Resources.Paomedia_Small_N_Flat_Window_layout
-        Me.EditLastDialogueToolStrip.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.EditLastDialogueToolStrip.Name = "EditLastDialogueToolStrip"
-        Me.EditLastDialogueToolStrip.Size = New System.Drawing.Size(23, 22)
-        Me.EditLastDialogueToolStrip.Text = "&Edit last dialog"
+        Me.mnuTbEditLastDialog.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.mnuTbEditLastDialog.Image = Global.instat.My.Resources.Resources.lastdialog
+        Me.mnuTbEditLastDialog.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.mnuTbEditLastDialog.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
+        Me.mnuTbEditLastDialog.Name = "mnuTbEditLastDialog"
+        Me.mnuTbEditLastDialog.Size = New System.Drawing.Size(34, 34)
+        Me.mnuTbEditLastDialog.ToolTipText = "Edit Last Dialog"
         '
-        'mnuTbShowLast10
+        'mnuTbLast10Dialogs
         '
-        Me.mnuTbShowLast10.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.mnuTbShowLast10.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.sepStart, Me.sepEnd})
-        Me.mnuTbShowLast10.Image = Global.instat.My.Resources.Resources.Oxygen_Icons_org_Oxygen_Actions_window_duplicate
-        Me.mnuTbShowLast10.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.mnuTbShowLast10.Name = "mnuTbShowLast10"
-        Me.mnuTbShowLast10.Size = New System.Drawing.Size(29, 22)
-        Me.mnuTbShowLast10.Text = "&Show last 10 dialogs"
+        Me.mnuTbLast10Dialogs.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.mnuTbLast10Dialogs.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.sepStart, Me.sepEnd})
+        Me.mnuTbLast10Dialogs.Image = Global.instat.My.Resources.Resources.last10dialogs
+        Me.mnuTbLast10Dialogs.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.mnuTbLast10Dialogs.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
+        Me.mnuTbLast10Dialogs.Name = "mnuTbLast10Dialogs"
+        Me.mnuTbLast10Dialogs.Size = New System.Drawing.Size(43, 34)
+        Me.mnuTbLast10Dialogs.ToolTipText = "Last 10 Dialogs"
         '
         'sepStart
         '
@@ -2480,15 +2465,75 @@ Partial Class frmMain
         'separator2
         '
         Me.separator2.Name = "separator2"
-        Me.separator2.Size = New System.Drawing.Size(6, 25)
+        Me.separator2.Size = New System.Drawing.Size(6, 37)
+        '
+        'mnuTbDataView
+        '
+        Me.mnuTbDataView.CheckOnClick = True
+        Me.mnuTbDataView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.mnuTbDataView.Image = Global.instat.My.Resources.Resources.dataview
+        Me.mnuTbDataView.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.mnuTbDataView.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
+        Me.mnuTbDataView.Name = "mnuTbDataView"
+        Me.mnuTbDataView.Size = New System.Drawing.Size(34, 34)
+        Me.mnuTbDataView.ToolTipText = "Data View"
+        '
+        'mnuTbOutput
+        '
+        Me.mnuTbOutput.CheckOnClick = True
+        Me.mnuTbOutput.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.mnuTbOutput.Image = Global.instat.My.Resources.Resources.output2
+        Me.mnuTbOutput.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.mnuTbOutput.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
+        Me.mnuTbOutput.Name = "mnuTbOutput"
+        Me.mnuTbOutput.Size = New System.Drawing.Size(34, 34)
+        Me.mnuTbOutput.ToolTipText = "Output Window"
+        '
+        'mnuTbColumnMetadata
+        '
+        Me.mnuTbColumnMetadata.CheckOnClick = True
+        Me.mnuTbColumnMetadata.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.mnuTbColumnMetadata.Image = Global.instat.My.Resources.Resources.columnmetadata
+        Me.mnuTbColumnMetadata.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.mnuTbColumnMetadata.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
+        Me.mnuTbColumnMetadata.Name = "mnuTbColumnMetadata"
+        Me.mnuTbColumnMetadata.Size = New System.Drawing.Size(34, 34)
+        Me.mnuTbColumnMetadata.ToolTipText = "Column Metadata"
+        '
+        'mnuTbLog
+        '
+        Me.mnuTbLog.CheckOnClick = True
+        Me.mnuTbLog.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.mnuTbLog.Image = Global.instat.My.Resources.Resources.scriptwindow
+        Me.mnuTbLog.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.mnuTbLog.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
+        Me.mnuTbLog.Name = "mnuTbLog"
+        Me.mnuTbLog.Size = New System.Drawing.Size(34, 34)
+        Me.mnuTbLog.ToolTipText = "Log Window"
+        '
+        'mnuTbResetLayout
+        '
+        Me.mnuTbResetLayout.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.mnuTbResetLayout.Image = Global.instat.My.Resources.Resources.resetlayout
+        Me.mnuTbResetLayout.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.mnuTbResetLayout.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
+        Me.mnuTbResetLayout.Name = "mnuTbResetLayout"
+        Me.mnuTbResetLayout.Size = New System.Drawing.Size(34, 34)
+        Me.mnuTbResetLayout.ToolTipText = "Reset Layout"
+        '
+        'separator3
+        '
+        Me.separator3.Name = "separator3"
+        Me.separator3.Size = New System.Drawing.Size(6, 37)
         '
         'mnuTbHelp
         '
         Me.mnuTbHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.mnuTbHelp.Image = CType(resources.GetObject("mnuTbHelp.Image"), System.Drawing.Image)
         Me.mnuTbHelp.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.mnuTbHelp.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
         Me.mnuTbHelp.Name = "mnuTbHelp"
-        Me.mnuTbHelp.Size = New System.Drawing.Size(23, 22)
+        Me.mnuTbHelp.Size = New System.Drawing.Size(34, 34)
         Me.mnuTbHelp.Text = "He&lp"
         '
         'mnuBar
@@ -3070,7 +3115,7 @@ Partial Class frmMain
         '
         'mnuPrepareColumnDate
         '
-        Me.mnuPrepareColumnDate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnGenerateDate, Me.mnuPrepareColumnMakeDate, Me.mnuPrepareColumnUseDate, Me.mnuPrepareColumnMakeTime, Me.mnuPrepareColumnUseTime})
+        Me.mnuPrepareColumnDate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnGenerateDate, Me.mnuPrepareColumnMakeDate, Me.mnuPrepareColumnUseDate, Me.mnuPrepareColumnInfillMissingDates, Me.mnuPrepareColumnMakeTime, Me.mnuPrepareColumnUseTime})
         Me.mnuPrepareColumnDate.Name = "mnuPrepareColumnDate"
         Me.mnuPrepareColumnDate.Size = New System.Drawing.Size(172, 22)
         Me.mnuPrepareColumnDate.Text = "Column: Date"
@@ -3079,33 +3124,39 @@ Partial Class frmMain
         '
         Me.mnuPrepareColumnGenerateDate.Enabled = False
         Me.mnuPrepareColumnGenerateDate.Name = "mnuPrepareColumnGenerateDate"
-        Me.mnuPrepareColumnGenerateDate.Size = New System.Drawing.Size(162, 22)
+        Me.mnuPrepareColumnGenerateDate.Size = New System.Drawing.Size(182, 22)
         Me.mnuPrepareColumnGenerateDate.Text = "Generate Dates..."
         '
         'mnuPrepareColumnMakeDate
         '
         Me.mnuPrepareColumnMakeDate.Name = "mnuPrepareColumnMakeDate"
-        Me.mnuPrepareColumnMakeDate.Size = New System.Drawing.Size(162, 22)
+        Me.mnuPrepareColumnMakeDate.Size = New System.Drawing.Size(182, 22)
         Me.mnuPrepareColumnMakeDate.Text = "Make Date..."
         '
         'mnuPrepareColumnUseDate
         '
         Me.mnuPrepareColumnUseDate.Name = "mnuPrepareColumnUseDate"
-        Me.mnuPrepareColumnUseDate.Size = New System.Drawing.Size(162, 22)
+        Me.mnuPrepareColumnUseDate.Size = New System.Drawing.Size(182, 22)
         Me.mnuPrepareColumnUseDate.Text = "Use Date..."
+        '
+        'mnuPrepareColumnInfillMissingDates
+        '
+        Me.mnuPrepareColumnInfillMissingDates.Name = "mnuPrepareColumnInfillMissingDates"
+        Me.mnuPrepareColumnInfillMissingDates.Size = New System.Drawing.Size(182, 22)
+        Me.mnuPrepareColumnInfillMissingDates.Text = "Infill Missing Dates..."
         '
         'mnuPrepareColumnMakeTime
         '
         Me.mnuPrepareColumnMakeTime.Enabled = False
         Me.mnuPrepareColumnMakeTime.Name = "mnuPrepareColumnMakeTime"
-        Me.mnuPrepareColumnMakeTime.Size = New System.Drawing.Size(162, 22)
+        Me.mnuPrepareColumnMakeTime.Size = New System.Drawing.Size(182, 22)
         Me.mnuPrepareColumnMakeTime.Text = "Make Time..."
         '
         'mnuPrepareColumnUseTime
         '
         Me.mnuPrepareColumnUseTime.Enabled = False
         Me.mnuPrepareColumnUseTime.Name = "mnuPrepareColumnUseTime"
-        Me.mnuPrepareColumnUseTime.Size = New System.Drawing.Size(162, 22)
+        Me.mnuPrepareColumnUseTime.Size = New System.Drawing.Size(182, 22)
         Me.mnuPrepareColumnUseTime.Text = "Use Time..."
         '
         'mnuPrepareColumnReshape
@@ -3572,7 +3623,7 @@ Partial Class frmMain
         '
         Me.splOverall.BackColor = System.Drawing.Color.LightGray
         Me.splOverall.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.splOverall.Location = New System.Drawing.Point(0, 49)
+        Me.splOverall.Location = New System.Drawing.Point(0, 61)
         Me.splOverall.Name = "splOverall"
         Me.splOverall.Orientation = System.Windows.Forms.Orientation.Horizontal
         '
@@ -3585,8 +3636,8 @@ Partial Class frmMain
         '
         Me.splOverall.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splOverall.Panel2.Controls.Add(Me.splDataOutput)
-        Me.splOverall.Size = New System.Drawing.Size(834, 430)
-        Me.splOverall.SplitterDistance = 194
+        Me.splOverall.Size = New System.Drawing.Size(834, 418)
+        Me.splOverall.SplitterDistance = 188
         Me.splOverall.SplitterWidth = 5
         Me.splOverall.TabIndex = 10
         '
@@ -3606,7 +3657,7 @@ Partial Class frmMain
         '
         Me.splExtraWindows.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splExtraWindows.Panel2.Controls.Add(Me.splLogScript)
-        Me.splExtraWindows.Size = New System.Drawing.Size(834, 194)
+        Me.splExtraWindows.Size = New System.Drawing.Size(834, 188)
         Me.splExtraWindows.SplitterDistance = 256
         Me.splExtraWindows.SplitterWidth = 5
         Me.splExtraWindows.TabIndex = 0
@@ -3626,28 +3677,10 @@ Partial Class frmMain
         '
         Me.splMetadata.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splMetadata.Panel2.Controls.Add(Me.ucrDataFrameMeta)
-        Me.splMetadata.Size = New System.Drawing.Size(256, 194)
+        Me.splMetadata.Size = New System.Drawing.Size(256, 188)
         Me.splMetadata.SplitterDistance = 75
         Me.splMetadata.SplitterWidth = 5
         Me.splMetadata.TabIndex = 0
-        '
-        'ucrColumnMeta
-        '
-        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrColumnMeta.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrColumnMeta.Location = New System.Drawing.Point(0, 0)
-        Me.ucrColumnMeta.Name = "ucrColumnMeta"
-        Me.ucrColumnMeta.Size = New System.Drawing.Size(75, 194)
-        Me.ucrColumnMeta.TabIndex = 0
-        '
-        'ucrDataFrameMeta
-        '
-        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrDataFrameMeta.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrDataFrameMeta.Location = New System.Drawing.Point(0, 0)
-        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
-        Me.ucrDataFrameMeta.Size = New System.Drawing.Size(176, 194)
-        Me.ucrDataFrameMeta.TabIndex = 0
         '
         'splLogScript
         '
@@ -3665,29 +3698,10 @@ Partial Class frmMain
         '
         Me.splLogScript.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splLogScript.Panel2.Controls.Add(Me.ucrScriptWindow)
-        Me.splLogScript.Size = New System.Drawing.Size(573, 194)
+        Me.splLogScript.Size = New System.Drawing.Size(573, 188)
         Me.splLogScript.SplitterDistance = 182
         Me.splLogScript.SplitterWidth = 5
         Me.splLogScript.TabIndex = 0
-        '
-        'ucrLogWindow
-        '
-        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrLogWindow.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrLogWindow.Location = New System.Drawing.Point(0, 0)
-        Me.ucrLogWindow.Name = "ucrLogWindow"
-        Me.ucrLogWindow.Size = New System.Drawing.Size(182, 194)
-        Me.ucrLogWindow.TabIndex = 0
-        '
-        'ucrScriptWindow
-        '
-        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrScriptWindow.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrScriptWindow.Location = New System.Drawing.Point(0, 0)
-        Me.ucrScriptWindow.Name = "ucrScriptWindow"
-        Me.ucrScriptWindow.Size = New System.Drawing.Size(386, 194)
-        Me.ucrScriptWindow.TabIndex = 0
-        Me.ucrScriptWindow.Tag = "Script_Window"
         '
         'splDataOutput
         '
@@ -3705,10 +3719,57 @@ Partial Class frmMain
         '
         Me.splDataOutput.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splDataOutput.Panel2.Controls.Add(Me.ucrOutput)
-        Me.splDataOutput.Size = New System.Drawing.Size(834, 231)
+        Me.splDataOutput.Size = New System.Drawing.Size(834, 225)
         Me.splDataOutput.SplitterDistance = 385
         Me.splDataOutput.SplitterWidth = 5
         Me.splDataOutput.TabIndex = 0
+        '
+        'mnuTbOpen
+        '
+        Me.mnuTbOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.mnuTbOpen.Image = Global.instat.My.Resources.Resources.openfromfile
+        Me.mnuTbOpen.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.mnuTbOpen.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
+        Me.mnuTbOpen.Name = "mnuTbOpen"
+        Me.mnuTbOpen.Size = New System.Drawing.Size(46, 34)
+        Me.mnuTbOpen.Text = "&Open"
+        '
+        'ucrColumnMeta
+        '
+        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrColumnMeta.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrColumnMeta.Location = New System.Drawing.Point(0, 0)
+        Me.ucrColumnMeta.Name = "ucrColumnMeta"
+        Me.ucrColumnMeta.Size = New System.Drawing.Size(75, 188)
+        Me.ucrColumnMeta.TabIndex = 0
+        '
+        'ucrDataFrameMeta
+        '
+        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrDataFrameMeta.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrDataFrameMeta.Location = New System.Drawing.Point(0, 0)
+        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
+        Me.ucrDataFrameMeta.Size = New System.Drawing.Size(176, 188)
+        Me.ucrDataFrameMeta.TabIndex = 0
+        '
+        'ucrLogWindow
+        '
+        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrLogWindow.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrLogWindow.Location = New System.Drawing.Point(0, 0)
+        Me.ucrLogWindow.Name = "ucrLogWindow"
+        Me.ucrLogWindow.Size = New System.Drawing.Size(182, 188)
+        Me.ucrLogWindow.TabIndex = 0
+        '
+        'ucrScriptWindow
+        '
+        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrScriptWindow.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrScriptWindow.Location = New System.Drawing.Point(0, 0)
+        Me.ucrScriptWindow.Name = "ucrScriptWindow"
+        Me.ucrScriptWindow.Size = New System.Drawing.Size(386, 188)
+        Me.ucrScriptWindow.TabIndex = 0
+        Me.ucrScriptWindow.Tag = "Script_Window"
         '
         'ucrDataViewer
         '
@@ -3717,7 +3778,7 @@ Partial Class frmMain
         Me.ucrDataViewer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ucrDataViewer.Location = New System.Drawing.Point(0, 0)
         Me.ucrDataViewer.Name = "ucrDataViewer"
-        Me.ucrDataViewer.Size = New System.Drawing.Size(385, 231)
+        Me.ucrDataViewer.Size = New System.Drawing.Size(385, 225)
         Me.ucrDataViewer.TabIndex = 0
         Me.ucrDataViewer.Tag = "Data_View"
         '
@@ -3727,7 +3788,7 @@ Partial Class frmMain
         Me.ucrOutput.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ucrOutput.Location = New System.Drawing.Point(0, 0)
         Me.ucrOutput.Name = "ucrOutput"
-        Me.ucrOutput.Size = New System.Drawing.Size(444, 231)
+        Me.ucrOutput.Size = New System.Drawing.Size(444, 225)
         Me.ucrOutput.TabIndex = 0
         '
         'frmMain
@@ -3816,17 +3877,13 @@ Partial Class frmMain
     Friend WithEvents stsStrip As StatusStrip
     Friend WithEvents tstatus As ToolStripStatusLabel
     Private WithEvents Tool_strip As ToolStrip
-    Friend WithEvents mnuTbNew As ToolStripButton
-    Friend WithEvents mnuTbOpen As ToolStripButton
     Friend WithEvents mnuTbSave As ToolStripButton
-    Friend WithEvents mnuTbPrint As ToolStripButton
     Friend WithEvents toolStripSeparator As ToolStripSeparator
-    Friend WithEvents mnuTbCut As ToolStripButton
     Friend WithEvents mnuTbCopy As ToolStripButton
     Friend WithEvents mnuTbPaste As ToolStripButton
     Friend WithEvents mnuTbDelete As ToolStripButton
     Friend WithEvents separator1 As ToolStripSeparator
-    Friend WithEvents EditLastDialogueToolStrip As ToolStripButton
+    Friend WithEvents mnuTbEditLastDialog As ToolStripButton
     Friend WithEvents separator2 As ToolStripSeparator
     Friend WithEvents mnuTbHelp As ToolStripButton
     Private WithEvents mnuBar As MenuStrip
@@ -3868,7 +3925,7 @@ Partial Class frmMain
     Friend WithEvents mnuExport As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataObjectDataFrameMetadata As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataObjectCopyDataFrame As ToolStripMenuItem
-    Friend WithEvents mnuTbShowLast10 As ToolStripDropDownButton
+    Friend WithEvents mnuTbLast10Dialogs As ToolStripDropDownButton
     Friend WithEvents sepEnd As ToolStripSeparator
     Friend WithEvents sepStart As ToolStripSeparator
     Friend WithEvents mnuPrepareDataFrameSort As ToolStripMenuItem
@@ -4226,4 +4283,13 @@ Partial Class frmMain
     Friend WithEvents mnuProcurementCorrelations As ToolStripMenuItem
     Friend WithEvents mnuProcurementMaps As ToolStripMenuItem
     Friend WithEvents mnuProcurementDescribeMaps As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnInfillMissingDates As ToolStripMenuItem
+    Friend WithEvents mnuTbOpenFromLibrary As ToolStripButton
+    Friend WithEvents mnuTbDataView As ToolStripButton
+    Friend WithEvents mnuTbOutput As ToolStripButton
+    Friend WithEvents mnuTbColumnMetadata As ToolStripButton
+    Friend WithEvents mnuTbLog As ToolStripButton
+    Friend WithEvents separator3 As ToolStripSeparator
+    Friend WithEvents mnuTbResetLayout As ToolStripButton
+    Friend WithEvents mnuTbOpen As ToolStripSplitButton
 End Class
