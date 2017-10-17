@@ -749,6 +749,8 @@ Public Class RLink
         Dim strCurrColumnLables() As String
         Dim strColumnsRList As String
         Dim strTemp As String
+        Dim lviTemp As ListViewItem
+        Dim strTopItemText As String = ""
 
         If bInstatObjectExists Then
             Select Case strType
@@ -780,6 +782,9 @@ Public Class RLink
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_variable_sets_names")
             End Select
             clsGetItems.AddParameter("as_list", "TRUE")
+            If lstView.TopItem IsNot Nothing Then
+                strTopItemText = lstView.TopItem.Text
+            End If
             lstView.Clear()
             lstView.Groups.Clear()
             lstView.Columns.Add(strHeading)
@@ -862,6 +867,12 @@ Public Class RLink
                 ' This has been tested on high resolution screens but needs further testing
                 ' and possibly a better solution.
                 lstView.Columns(0).Width = lstView.Columns(0).Width - 2
+                If strTopItemText <> "" Then
+                    lviTemp = lstView.FindItemWithText(strTopItemText)
+                    If lviTemp IsNot Nothing Then
+                        lstView.TopItem = lviTemp
+                    End If
+                End If
             End If
         End If
     End Sub
