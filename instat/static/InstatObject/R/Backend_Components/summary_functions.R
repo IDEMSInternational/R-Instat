@@ -3,7 +3,12 @@ data_object$set("public", "merge_data", function(new_data, by = NULL, type = "le
   #TODO how to use match argument with dplyr join functions
   old_metadata <- attributes(private$data)
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
-
+  by_col_attributes <- list()
+  if(!is.null(by)) {
+    for(i in seq_along(by)) {
+      by_col_attributes[[names(by)[[i]]]] <- get_column_attributes(curr_data[[names(by)[[i]]]])
+    }
+  }
   if(type == "left") {
     new_data <- dplyr::left_join(curr_data, new_data, by)
   }
@@ -28,6 +33,11 @@ data_object$set("public", "merge_data", function(new_data, by = NULL, type = "le
   self$append_to_metadata(is_calculated_label, TRUE)
   self$add_defaults_meta()
   self$add_defaults_variables_metadata(setdiff(names(new_data), names(curr_data)))
+  if(!is.null(by)) {
+    for(i in seq_along(by_col_attributes)) {
+      self$append_column_attributes(col_name = names(by_col_attributes)[i], new_attr = by_col_attributes[[i]])
+    }
+  }
 }
 )
 
@@ -400,7 +410,7 @@ summary_mode <- function(x,...) {
 
 summary_mean <- function (x, add_cols, weights="", na.rm = FALSE, trim = 0,...) {
   if( length(x)==0 || (na.rm && length(x[!is.na(x)])==0) ) return(NA)
-  else return(mean(x, na.rm=na.rm, trim = trim))
+  else return(mean(x, na.rm = na.rm, trim = trim))
 }
 
 summary_sum <- function (x, na.rm = FALSE,...) {

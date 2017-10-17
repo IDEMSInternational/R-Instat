@@ -79,6 +79,25 @@ Public Class ucrColumnMetadata
         grdCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
     End Sub
 
+    Public Sub SetCurrentDataFrame(strDataName As String)
+        Dim grdWorksheet As unvell.ReoGrid.Worksheet
+
+        If grdVariables IsNot Nothing Then
+            grdWorksheet = grdVariables.GetWorksheetByName(strDataName)
+            If grdWorksheet IsNot Nothing Then
+                grdVariables.CurrentWorksheet = grdWorksheet
+            End If
+        End If
+    End Sub
+
+    Public Sub SetCurrentDataFrame(iIndex As Integer)
+        If grdVariables.Worksheets.Count > iIndex Then
+            grdVariables.CurrentWorksheet = grdVariables.Worksheets(iIndex)
+        Else
+            ' Developer error?
+        End If
+    End Sub
+
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrSheet.AfterCellEdit
         Dim strScript As String = ""
         Dim strComment As String = ""
