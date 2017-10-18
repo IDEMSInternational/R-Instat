@@ -860,7 +860,7 @@ Public Class frmMain
                 If (Not System.IO.Directory.Exists(strAppDataPath)) Then
                     System.IO.Directory.CreateDirectory(strAppDataPath)
                 End If
-                If clsRLink.bREngineInitialised Then
+                If clsRLink IsNot Nothing AndAlso clsRLink.bREngineInitialised Then
                     clsRecentItems.saveOnClose()
                     If clsInstatOptions IsNot Nothing Then
                         SaveInstatOptions(Path.Combine(strAppDataPath, strInstatOptionsFile))
