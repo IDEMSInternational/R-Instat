@@ -52,6 +52,17 @@ Partial Class dlgDisplayDailyData
         Me.ucrInputBarColour = New instat.ucrInputComboBox()
         Me.lblBarColour = New System.Windows.Forms.Label()
         Me.ucrNudUpperYaxis = New instat.ucrNud()
+        Me.lblMonth = New System.Windows.Forms.Label()
+        Me.lblDay = New System.Windows.Forms.Label()
+        Me.grpTable = New System.Windows.Forms.GroupBox()
+        Me.ucrSaveTable = New instat.ucrSave()
+        Me.lblSummary = New System.Windows.Forms.Label()
+        Me.ucrInputComboSummary = New instat.ucrInputComboBox()
+        Me.ucrNudSigFigs = New instat.ucrNud()
+        Me.lblSigFigs = New System.Windows.Forms.Label()
+        Me.ucrChkAsHTMLTable = New instat.ucrCheck()
+        Me.ucrReceiverDay = New instat.ucrReceiverSingle()
+        Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
         Me.ucrReceiverElements = New instat.ucrReceiverMultiple()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDayOfYear = New instat.ucrReceiverSingle()
@@ -60,11 +71,8 @@ Partial Class dlgDisplayDailyData
         Me.ucrPnlFrequencyDisplay = New instat.UcrPanel()
         Me.ucrSelectorDisplayDailyClimaticData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
-        Me.ucrReceiverDay = New instat.ucrReceiverSingle()
-        Me.lblMonth = New System.Windows.Forms.Label()
-        Me.lblDay = New System.Windows.Forms.Label()
         Me.grpGraph.SuspendLayout()
+        Me.grpTable.SuspendLayout()
         Me.SuspendLayout()
         '
         'rdoTable
@@ -219,10 +227,123 @@ Partial Class dlgDisplayDailyData
         Me.ucrNudUpperYaxis.TabIndex = 1
         Me.ucrNudUpperYaxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
+        'lblMonth
+        '
+        Me.lblMonth.AutoSize = True
+        Me.lblMonth.Location = New System.Drawing.Point(291, 109)
+        Me.lblMonth.Name = "lblMonth"
+        Me.lblMonth.Size = New System.Drawing.Size(40, 13)
+        Me.lblMonth.TabIndex = 6
+        Me.lblMonth.Text = "Month:"
+        '
+        'lblDay
+        '
+        Me.lblDay.AutoSize = True
+        Me.lblDay.Location = New System.Drawing.Point(291, 152)
+        Me.lblDay.Name = "lblDay"
+        Me.lblDay.Size = New System.Drawing.Size(29, 13)
+        Me.lblDay.TabIndex = 12
+        Me.lblDay.Text = "Day:"
+        '
+        'grpTable
+        '
+        Me.grpTable.Controls.Add(Me.ucrSaveTable)
+        Me.grpTable.Controls.Add(Me.lblSummary)
+        Me.grpTable.Controls.Add(Me.ucrInputComboSummary)
+        Me.grpTable.Controls.Add(Me.ucrNudSigFigs)
+        Me.grpTable.Controls.Add(Me.lblSigFigs)
+        Me.grpTable.Controls.Add(Me.ucrChkAsHTMLTable)
+        Me.grpTable.Location = New System.Drawing.Point(10, 232)
+        Me.grpTable.Name = "grpTable"
+        Me.grpTable.Size = New System.Drawing.Size(277, 133)
+        Me.grpTable.TabIndex = 6
+        Me.grpTable.TabStop = False
+        Me.grpTable.Text = "Display"
+        '
+        'ucrSaveTable
+        '
+        Me.ucrSaveTable.Location = New System.Drawing.Point(7, 103)
+        Me.ucrSaveTable.Name = "ucrSaveTable"
+        Me.ucrSaveTable.Size = New System.Drawing.Size(261, 24)
+        Me.ucrSaveTable.TabIndex = 20
+        '
+        'lblSummary
+        '
+        Me.lblSummary.AutoSize = True
+        Me.lblSummary.Location = New System.Drawing.Point(5, 74)
+        Me.lblSummary.Name = "lblSummary"
+        Me.lblSummary.Size = New System.Drawing.Size(53, 13)
+        Me.lblSummary.TabIndex = 9
+        Me.lblSummary.Tag = "Summary:"
+        Me.lblSummary.Text = "Summary:"
+        '
+        'ucrInputComboSummary
+        '
+        Me.ucrInputComboSummary.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboSummary.IsReadOnly = False
+        Me.ucrInputComboSummary.Location = New System.Drawing.Point(104, 70)
+        Me.ucrInputComboSummary.Name = "ucrInputComboSummary"
+        Me.ucrInputComboSummary.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputComboSummary.TabIndex = 8
+        '
+        'ucrNudSigFigs
+        '
+        Me.ucrNudSigFigs.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSigFigs.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSigFigs.Location = New System.Drawing.Point(104, 45)
+        Me.ucrNudSigFigs.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSigFigs.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSigFigs.Name = "ucrNudSigFigs"
+        Me.ucrNudSigFigs.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSigFigs.TabIndex = 7
+        Me.ucrNudSigFigs.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblSigFigs
+        '
+        Me.lblSigFigs.AutoSize = True
+        Me.lblSigFigs.Location = New System.Drawing.Point(5, 48)
+        Me.lblSigFigs.Name = "lblSigFigs"
+        Me.lblSigFigs.Size = New System.Drawing.Size(96, 13)
+        Me.lblSigFigs.TabIndex = 6
+        Me.lblSigFigs.Tag = "Significant_Figures:"
+        Me.lblSigFigs.Text = "Significant Figures:"
+        '
+        'ucrChkAsHTMLTable
+        '
+        Me.ucrChkAsHTMLTable.Checked = False
+        Me.ucrChkAsHTMLTable.Location = New System.Drawing.Point(9, 22)
+        Me.ucrChkAsHTMLTable.Name = "ucrChkAsHTMLTable"
+        Me.ucrChkAsHTMLTable.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkAsHTMLTable.TabIndex = 0
+        '
+        'ucrReceiverDay
+        '
+        Me.ucrReceiverDay.frmParent = Me
+        Me.ucrReceiverDay.Location = New System.Drawing.Point(290, 166)
+        Me.ucrReceiverDay.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverDay.Name = "ucrReceiverDay"
+        Me.ucrReceiverDay.Selector = Nothing
+        Me.ucrReceiverDay.Size = New System.Drawing.Size(122, 20)
+        Me.ucrReceiverDay.strNcFilePath = ""
+        Me.ucrReceiverDay.TabIndex = 13
+        Me.ucrReceiverDay.ucrSelector = Nothing
+        '
+        'ucrReceiverMonth
+        '
+        Me.ucrReceiverMonth.frmParent = Me
+        Me.ucrReceiverMonth.Location = New System.Drawing.Point(288, 124)
+        Me.ucrReceiverMonth.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMonth.Name = "ucrReceiverMonth"
+        Me.ucrReceiverMonth.Selector = Nothing
+        Me.ucrReceiverMonth.Size = New System.Drawing.Size(122, 20)
+        Me.ucrReceiverMonth.strNcFilePath = ""
+        Me.ucrReceiverMonth.TabIndex = 7
+        Me.ucrReceiverMonth.ucrSelector = Nothing
+        '
         'ucrReceiverElements
         '
         Me.ucrReceiverElements.frmParent = Me
-        Me.ucrReceiverElements.Location = New System.Drawing.Point(288, 253)
+        Me.ucrReceiverElements.Location = New System.Drawing.Point(290, 253)
         Me.ucrReceiverElements.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverElements.Name = "ucrReceiverElements"
         Me.ucrReceiverElements.Selector = Nothing
@@ -234,7 +355,7 @@ Partial Class dlgDisplayDailyData
         'ucrReceiverYear
         '
         Me.ucrReceiverYear.frmParent = Me
-        Me.ucrReceiverYear.Location = New System.Drawing.Point(288, 209)
+        Me.ucrReceiverYear.Location = New System.Drawing.Point(290, 209)
         Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverYear.Name = "ucrReceiverYear"
         Me.ucrReceiverYear.Selector = Nothing
@@ -270,7 +391,7 @@ Partial Class dlgDisplayDailyData
         'ucrReceiverStations
         '
         Me.ucrReceiverStations.frmParent = Me
-        Me.ucrReceiverStations.Location = New System.Drawing.Point(288, 80)
+        Me.ucrReceiverStations.Location = New System.Drawing.Point(290, 80)
         Me.ucrReceiverStations.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStations.Name = "ucrReceiverStations"
         Me.ucrReceiverStations.Selector = Nothing
@@ -299,59 +420,18 @@ Partial Class dlgDisplayDailyData
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 338)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 372)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(428, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(412, 52)
         Me.ucrBase.TabIndex = 19
-        '
-        'ucrReceiverMonth
-        '
-        Me.ucrReceiverMonth.frmParent = Me
-        Me.ucrReceiverMonth.Location = New System.Drawing.Point(288, 124)
-        Me.ucrReceiverMonth.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverMonth.Name = "ucrReceiverMonth"
-        Me.ucrReceiverMonth.Selector = Nothing
-        Me.ucrReceiverMonth.Size = New System.Drawing.Size(122, 20)
-        Me.ucrReceiverMonth.strNcFilePath = ""
-        Me.ucrReceiverMonth.TabIndex = 7
-        Me.ucrReceiverMonth.ucrSelector = Nothing
-        '
-        'ucrReceiverDay
-        '
-        Me.ucrReceiverDay.frmParent = Me
-        Me.ucrReceiverDay.Location = New System.Drawing.Point(288, 166)
-        Me.ucrReceiverDay.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverDay.Name = "ucrReceiverDay"
-        Me.ucrReceiverDay.Selector = Nothing
-        Me.ucrReceiverDay.Size = New System.Drawing.Size(122, 20)
-        Me.ucrReceiverDay.strNcFilePath = ""
-        Me.ucrReceiverDay.TabIndex = 13
-        Me.ucrReceiverDay.ucrSelector = Nothing
-        '
-        'lblMonth
-        '
-        Me.lblMonth.AutoSize = True
-        Me.lblMonth.Location = New System.Drawing.Point(291, 109)
-        Me.lblMonth.Name = "lblMonth"
-        Me.lblMonth.Size = New System.Drawing.Size(40, 13)
-        Me.lblMonth.TabIndex = 6
-        Me.lblMonth.Text = "Month:"
-        '
-        'lblDay
-        '
-        Me.lblDay.AutoSize = True
-        Me.lblDay.Location = New System.Drawing.Point(291, 152)
-        Me.lblDay.Name = "lblDay"
-        Me.lblDay.Size = New System.Drawing.Size(29, 13)
-        Me.lblDay.TabIndex = 12
-        Me.lblDay.Text = "Day:"
         '
         'dlgDisplayDailyData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(422, 392)
+        Me.ClientSize = New System.Drawing.Size(422, 429)
+        Me.Controls.Add(Me.grpTable)
         Me.Controls.Add(Me.lblDay)
         Me.Controls.Add(Me.lblMonth)
         Me.Controls.Add(Me.ucrReceiverDay)
@@ -380,6 +460,8 @@ Partial Class dlgDisplayDailyData
         Me.Text = "Display Daily Data"
         Me.grpGraph.ResumeLayout(False)
         Me.grpGraph.PerformLayout()
+        Me.grpTable.ResumeLayout(False)
+        Me.grpTable.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -411,4 +493,11 @@ Partial Class dlgDisplayDailyData
     Friend WithEvents ucrReceiverMonth As ucrReceiverSingle
     Friend WithEvents lblDay As Label
     Friend WithEvents lblMonth As Label
+    Friend WithEvents grpTable As GroupBox
+    Friend WithEvents ucrChkAsHTMLTable As ucrCheck
+    Friend WithEvents ucrSaveTable As ucrSave
+    Friend WithEvents ucrNudSigFigs As ucrNud
+    Friend WithEvents lblSigFigs As Label
+    Friend WithEvents lblSummary As Label
+    Friend WithEvents ucrInputComboSummary As ucrInputComboBox
 End Class
