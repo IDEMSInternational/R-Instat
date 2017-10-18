@@ -68,7 +68,6 @@ Public Class RLink
 
     Public Sub StartREngine(Optional strScript As String = "", Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True)
         Dim strMissingPackages() As String
-        Dim clsRVersionMajor As New RFunction
         Dim expTemp As SymbolicExpression
         Dim strMajor As String = ""
         Dim strMinor As String = ""
