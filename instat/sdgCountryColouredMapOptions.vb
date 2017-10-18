@@ -46,9 +46,9 @@ Public Class sdgCountryColouredMapOptions
         ucrPnlRegionChoice.AddToLinkedControls(ucrInputLongMax, {rdoChooseRegion}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlRegionChoice.AddToLinkedControls(ucrInputCommonRegions, {rdoChooseRegion}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputCommonRegions.SetLinkedDisplayControl(lblCommonRegions)
-        ucrInputLongMin.SetLinkedDisplayControl(lblLong)
+        ucrInputLongMin.SetLinkedDisplayControl(lblLongMin)
         ucrInputLongMax.SetLinkedDisplayControl(lblLongMax)
-        ucrInputLatMin.SetLinkedDisplayControl(lblLat)
+        ucrInputLatMin.SetLinkedDisplayControl(lblLatMin)
         ucrInputLatMax.SetLinkedDisplayControl(lblLatMax)
 
         lstRegionInputControls = New List(Of ucrInputTextBox)
@@ -141,18 +141,7 @@ Public Class sdgCountryColouredMapOptions
         bClearRegion = True
     End Sub
 
-    Private Sub labelVisibility()
-        If lblLong.Visible OrElse lblLat.Visible Then
-            lblLongMin.Visible = True
-            lblLatMin.Visible = True
-        Else
-            lblLongMin.Visible = False
-            lblLatMin.Visible = False
-        End If
-    End Sub
-
     Private Sub ucrPnlRegionChoice_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlRegionChoice.ControlValueChanged
-        labelVisibility()
         If rdoOwnCountries.Checked Then
             clsJoinFunction.SetRCommand("right_join")
             clsMapDataOperator.RemoveParameterByName("filter")
@@ -165,6 +154,16 @@ Public Class sdgCountryColouredMapOptions
     Private Sub ucrInputLatMax_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputLatMin.ControlContentsChanged, ucrInputLatMax.ControlContentsChanged, ucrInputLongMin.ControlContentsChanged, ucrInputLongMax.ControlContentsChanged
         If bClearRegion Then
             ucrInputCommonRegions.SetName("Choose...")
+        End If
+    End Sub
+
+    Private Sub lblLongMin_VisibleChanged(sender As Object, e As EventArgs) Handles lblLongMin.VisibleChanged, lblLatMin.VisibleChanged
+        If lblLongMin.Visible OrElse lblLatMin.Visible Then
+            lblLong.Visible = True
+            lblLat.Visible = True
+        Else
+            lblLong.Visible = False
+            lblLat.Visible = False
         End If
     End Sub
 End Class
