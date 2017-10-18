@@ -157,13 +157,11 @@ Public Class sdgCountryColouredMapOptions
         End If
     End Sub
 
-    Private Sub lblLongMin_VisibleChanged(sender As Object, e As EventArgs) Handles lblLongMin.VisibleChanged, lblLatMin.VisibleChanged
-        If lblLongMin.Visible OrElse lblLatMin.Visible Then
-            lblLong.Visible = True
-            lblLat.Visible = True
-        Else
-            lblLong.Visible = False
-            lblLat.Visible = False
-        End If
+    Private Sub lblLongMin_VisibleChanged(sender As Object, e As EventArgs) Handles lblLongMin.VisibleChanged
+        lblLong.Visible = lblLongMin.Visible
+    End Sub
+
+    Private Sub lblLatMin_VisibleChanged(sender As Object, e As EventArgs) Handles lblLatMin.VisibleChanged
+        lblLat.Visible = lblLatMin.Visible
     End Sub
 End Class
