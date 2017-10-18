@@ -113,6 +113,9 @@ Partial Class dlgOptions
         Me.rdoDisplayinRViewer = New System.Windows.Forms.RadioButton()
         Me.rdoDisplayinOutputWindow = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGraphDisplay = New instat.UcrPanel()
+        Me.tbpSpecialMenus = New System.Windows.Forms.TabPage()
+        Me.ucrChkViewClimaticMenu = New instat.ucrCheck()
+        Me.ucrChkViewProcurementMenuMenu = New instat.ucrCheck()
         CType(Me.spltControls, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.spltControls.Panel1.SuspendLayout()
         Me.spltControls.Panel2.SuspendLayout()
@@ -134,6 +137,7 @@ Partial Class dlgOptions
         Me.tbpDataView.SuspendLayout()
         Me.tbpWorkingDirectory.SuspendLayout()
         Me.tbpGraphDisplay.SuspendLayout()
+        Me.tbpSpecialMenus.SuspendLayout()
         Me.SuspendLayout()
         '
         'cmdApply
@@ -245,6 +249,7 @@ Partial Class dlgOptions
         Me.tbcOptions.Controls.Add(Me.tbpDataView)
         Me.tbcOptions.Controls.Add(Me.tbpWorkingDirectory)
         Me.tbcOptions.Controls.Add(Me.tbpGraphDisplay)
+        Me.tbcOptions.Controls.Add(Me.tbpSpecialMenus)
         Me.tbcOptions.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tbcOptions.Location = New System.Drawing.Point(0, 0)
         Me.tbcOptions.Name = "tbcOptions"
@@ -738,14 +743,14 @@ Partial Class dlgOptions
         Me.ucrChkShowDataonGrid.Size = New System.Drawing.Size(257, 20)
         Me.ucrChkShowDataonGrid.TabIndex = 3
         '
-        'ucrNudMinutes
+        'ucrNudAutoSaveMinutes
         '
         Me.ucrNudAutoSaveMinutes.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAutoSaveMinutes.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudAutoSaveMinutes.Location = New System.Drawing.Point(305, 104)
         Me.ucrNudAutoSaveMinutes.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudAutoSaveMinutes.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAutoSaveMinutes.Name = "ucrNudMinutes"
+        Me.ucrNudAutoSaveMinutes.Name = "ucrNudAutoSaveMinutes"
         Me.ucrNudAutoSaveMinutes.Size = New System.Drawing.Size(50, 20)
         Me.ucrNudAutoSaveMinutes.TabIndex = 2
         Me.ucrNudAutoSaveMinutes.Value = New Decimal(New Integer() {0, 0, 0, 0})
@@ -886,6 +891,34 @@ Partial Class dlgOptions
         Me.ucrPnlGraphDisplay.Size = New System.Drawing.Size(169, 66)
         Me.ucrPnlGraphDisplay.TabIndex = 3
         '
+        'tbpSpecialMenus
+        '
+        Me.tbpSpecialMenus.Controls.Add(Me.ucrChkViewProcurementMenuMenu)
+        Me.tbpSpecialMenus.Controls.Add(Me.ucrChkViewClimaticMenu)
+        Me.tbpSpecialMenus.Location = New System.Drawing.Point(4, 22)
+        Me.tbpSpecialMenus.Name = "tbpSpecialMenus"
+        Me.tbpSpecialMenus.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpSpecialMenus.Size = New System.Drawing.Size(564, 291)
+        Me.tbpSpecialMenus.TabIndex = 13
+        Me.tbpSpecialMenus.Text = "Special Menus"
+        Me.tbpSpecialMenus.UseVisualStyleBackColor = True
+        '
+        'ucrChkViewClimaticMenu
+        '
+        Me.ucrChkViewClimaticMenu.Checked = False
+        Me.ucrChkViewClimaticMenu.Location = New System.Drawing.Point(7, 16)
+        Me.ucrChkViewClimaticMenu.Name = "ucrChkViewClimaticMenu"
+        Me.ucrChkViewClimaticMenu.Size = New System.Drawing.Size(209, 20)
+        Me.ucrChkViewClimaticMenu.TabIndex = 0
+        '
+        'ucrChkViewProcurementMenuMenu
+        '
+        Me.ucrChkViewProcurementMenuMenu.Checked = False
+        Me.ucrChkViewProcurementMenuMenu.Location = New System.Drawing.Point(7, 42)
+        Me.ucrChkViewProcurementMenuMenu.Name = "ucrChkViewProcurementMenuMenu"
+        Me.ucrChkViewProcurementMenuMenu.Size = New System.Drawing.Size(209, 20)
+        Me.ucrChkViewProcurementMenuMenu.TabIndex = 0
+        '
         'dlgOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -938,6 +971,7 @@ Partial Class dlgOptions
         Me.tbpWorkingDirectory.PerformLayout()
         Me.tbpGraphDisplay.ResumeLayout(False)
         Me.tbpGraphDisplay.PerformLayout()
+        Me.tbpSpecialMenus.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1010,4 +1044,7 @@ Partial Class dlgOptions
     Friend WithEvents lblWaitSeconds As Label
     Friend WithEvents ucrChkShowWaitDialog As ucrCheck
     Friend WithEvents ucrNudWaitSeconds As ucrNud
+    Friend WithEvents tbpSpecialMenus As TabPage
+    Friend WithEvents ucrChkViewProcurementMenuMenu As ucrCheck
+    Friend WithEvents ucrChkViewClimaticMenu As ucrCheck
 End Class
