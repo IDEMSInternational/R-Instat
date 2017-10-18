@@ -84,7 +84,7 @@ Public Class frmMain
 
         AutoRecoverAndStartREngine()
 
-        'Do this after setting up R Link becuase setup edits Output window which is changed by Options
+        'Do this after setting up R Link because loading options may run R code
         LoadInstatOptions()
 
         'Do this after loading options because interval depends on options
@@ -243,11 +243,11 @@ Public Class frmMain
                     'FileStream.Close()
                 End Using
             Catch ex As Exception
-                MsgBox("Error attempting to use file:" & strFilePath & Environment.NewLine & "The file may be in use by another program or the file does not contain an instance of InstatOptions." & Environment.NewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error opening file")
+                MsgBox("Could not load options from:" & strFilePath & Environment.NewLine & "The file may be in use by another program or the file does not contain an instance of InstatOptions." & Environment.NewLine & "Options will be reset to factory defaults." & vbNewLine & "System error message: " & ex.Message, MsgBoxStyle.Information, "Cannot open options file")
                 clsInstatOptions = New InstatOptions
             End Try
         Else
-            MsgBox("File:" & strFilePath & " does not exist." & Environment.NewLine & "File will not be loaded.", MsgBoxStyle.Critical)
+            MsgBox("Options file:" & strFilePath & " does not exist." & Environment.NewLine & "File will not be loaded." & vbNewLine & "Options will be reset to factory defaults.", MsgBoxStyle.Information)
             clsInstatOptions = New InstatOptions
         End If
     End Sub
@@ -257,10 +257,15 @@ Public Class frmMain
 
         Try
             Using FileStream As Stream = File.Create(strFilePath)
-                serializer.Serialize(FileStream, clsInstatOptions)
-                'TODO Check whether this is needed or not. Using should do it automatically.
-                '     Also check general structure of this code.
-                'FileStream.Close()
+                'If the program is closed during startup of the RLink e.g. if R is not installed correctly
+                'then clsInstatOptions = Nothing because this is initialised after setup.
+                'Hence we do not need to save or give an error message.
+                If clsInstatOptions IsNot Nothing Then
+                    serializer.Serialize(FileStream, clsInstatOptions)
+                    'TODO Check whether this is needed or not. Using should do it automatically.
+                    '     Also check general structure of this code.
+                    'FileStream.Close()
+                End If
             End Using
         Catch ex As Exception
             MsgBox("Error attempting to save to file:" & strFilePath & Environment.NewLine & "The file may be in use by another program." & Environment.NewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error saving to file")
@@ -855,11 +860,15 @@ Public Class frmMain
                 If (Not System.IO.Directory.Exists(strAppDataPath)) Then
                     System.IO.Directory.CreateDirectory(strAppDataPath)
                 End If
-                clsRecentItems.saveOnClose()
-                SaveInstatOptions(Path.Combine(strAppDataPath, strInstatOptionsFile))
-                DeleteAutoSaveData()
-                DeleteAutoSaveLog()
-                DeleteAutoSaveDebugLog()
+                If clsRLink IsNot Nothing AndAlso clsRLink.bREngineInitialised Then
+                    clsRecentItems.saveOnClose()
+                    If clsInstatOptions IsNot Nothing Then
+                        SaveInstatOptions(Path.Combine(strAppDataPath, strInstatOptionsFile))
+                    End If
+                    DeleteAutoSaveData()
+                    DeleteAutoSaveLog()
+                    DeleteAutoSaveDebugLog()
+                End If
                 clsRLink.CloseREngine()
             Catch ex As Exception
                 MsgBox("Error attempting to save setting files to App Data folder." & Environment.NewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error saving settings")
