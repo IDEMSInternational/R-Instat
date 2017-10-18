@@ -1484,8 +1484,8 @@ instat_object$set("public","update_variable_set", function(data_name, set_name, 
 }
 )
 
-instat_object$set("public","delete_variable_set", function(data_name, set_name) {
-  self$get_data_objects(data_name)$delete_variable_set(set_name = set_name)
+instat_object$set("public","delete_variable_sets", function(data_name, set_names) {
+  self$get_data_objects(data_name)$delete_variable_sets(set_names = set_names)
 }
 )
 
