@@ -63,22 +63,45 @@ Public Class RLink
     'Time in seconds to wait before showing waiting dialog
     Private iWaitDelay As Integer = 2
 
+    Private strRVersionMajorRequired As String = "3"
+    Private strRVersionMinorRequired As String = "4"
+
     Public Sub StartREngine(Optional strScript As String = "", Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True)
         Dim strMissingPackages() As String
+        Dim clsRVersionMajor As New RFunction
+        Dim expTemp As SymbolicExpression
+        Dim strMajor As String = ""
+        Dim strMinor As String = ""
 
         Try
             REngine.SetEnvironmentVariables()
+            clsEngine = REngine.GetInstance()
+            clsEngine.Initialize()
         Catch ex As Exception
-            MsgBox(ex.Message & Environment.NewLine & "Ensure that the correct version of R is installed and restart the program.", MsgBoxStyle.Critical, "Cannot initialise R connection.")
+            MsgBox(ex.Message & Environment.NewLine & "Could not establish connection to R." & vbNewLine & "R-Instat requires version " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".0 or later." & vbNewLine & "Rerun the installation to install R or download the latest version from https://cran.r-project.org/ and restart R-Instat." & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Cannot initialise R connection.")
             Application.Exit()
+            Environment.Exit(0)
         End Try
         Try
-            clsEngine = REngine.GetInstance()
+            expTemp = RunInternalScriptGetValue("R.Version()$major", bSilent:=True)
+            If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
+                strMajor = expTemp.AsCharacter(0)
+            End If
+            expTemp = RunInternalScriptGetValue("R.Version()$minor", bSilent:=True)
+            If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
+                strMinor = expTemp.AsCharacter(0)
+            End If
+            If Not (strMajor = strRVersionMajorRequired AndAlso strMinor.Count > 0 AndAlso strMinor(0) = strRVersionMinorRequired) Then
+                MsgBox("Your current version of R is outdated. You are currently running R version " & strMajor & "." & strMinor & vbNewLine & "R-Instat requires version " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".0 or later." & vbNewLine & "Rerun the installation to install an updated version of R or download the latest version from https://cran.r-project.org/ and restart R-Instat.", MsgBoxStyle.Critical, "R Version outdated.")
+                Application.Exit()
+                Environment.Exit(0)
+            End If
         Catch ex As Exception
-            MsgBox(ex.Message & Environment.NewLine & "Ensure that the correct version of R is installed and restart the program.", MsgBoxStyle.Critical, "Cannot initialise R connection.")
+            MsgBox(ex.Message & Environment.NewLine & "Could not determine the version of R installed on your machine. We recommend rerunning the installation to install an updated version of R or download the latest version from https://cran.r-project.org/ and restart R-Instat.", MsgBoxStyle.Critical, "Cannot determine R version.")
             Application.Exit()
+            Environment.Exit(0)
         End Try
-        clsEngine.Initialize()
+        bREngineInitialised = True
         If strScript = "" Then
             strScript = GetRSetupScript()
             iCallType = 0
