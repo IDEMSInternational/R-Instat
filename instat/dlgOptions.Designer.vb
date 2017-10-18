@@ -114,8 +114,8 @@ Partial Class dlgOptions
         Me.rdoDisplayinOutputWindow = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGraphDisplay = New instat.UcrPanel()
         Me.tbpSpecialMenus = New System.Windows.Forms.TabPage()
+        Me.ucrChkViewProcurementMenu = New instat.ucrCheck()
         Me.ucrChkViewClimaticMenu = New instat.ucrCheck()
-        Me.ucrChkViewProcurementMenuMenu = New instat.ucrCheck()
         CType(Me.spltControls, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.spltControls.Panel1.SuspendLayout()
         Me.spltControls.Panel2.SuspendLayout()
@@ -893,7 +893,7 @@ Partial Class dlgOptions
         '
         'tbpSpecialMenus
         '
-        Me.tbpSpecialMenus.Controls.Add(Me.ucrChkViewProcurementMenuMenu)
+        Me.tbpSpecialMenus.Controls.Add(Me.ucrChkViewProcurementMenu)
         Me.tbpSpecialMenus.Controls.Add(Me.ucrChkViewClimaticMenu)
         Me.tbpSpecialMenus.Location = New System.Drawing.Point(4, 22)
         Me.tbpSpecialMenus.Name = "tbpSpecialMenus"
@@ -903,6 +903,14 @@ Partial Class dlgOptions
         Me.tbpSpecialMenus.Text = "Special Menus"
         Me.tbpSpecialMenus.UseVisualStyleBackColor = True
         '
+        'ucrChkViewProcurementMenu
+        '
+        Me.ucrChkViewProcurementMenu.Checked = False
+        Me.ucrChkViewProcurementMenu.Location = New System.Drawing.Point(7, 42)
+        Me.ucrChkViewProcurementMenu.Name = "ucrChkViewProcurementMenu"
+        Me.ucrChkViewProcurementMenu.Size = New System.Drawing.Size(209, 20)
+        Me.ucrChkViewProcurementMenu.TabIndex = 0
+        '
         'ucrChkViewClimaticMenu
         '
         Me.ucrChkViewClimaticMenu.Checked = False
@@ -910,14 +918,6 @@ Partial Class dlgOptions
         Me.ucrChkViewClimaticMenu.Name = "ucrChkViewClimaticMenu"
         Me.ucrChkViewClimaticMenu.Size = New System.Drawing.Size(209, 20)
         Me.ucrChkViewClimaticMenu.TabIndex = 0
-        '
-        'ucrChkViewProcurementMenuMenu
-        '
-        Me.ucrChkViewProcurementMenuMenu.Checked = False
-        Me.ucrChkViewProcurementMenuMenu.Location = New System.Drawing.Point(7, 42)
-        Me.ucrChkViewProcurementMenuMenu.Name = "ucrChkViewProcurementMenuMenu"
-        Me.ucrChkViewProcurementMenuMenu.Size = New System.Drawing.Size(209, 20)
-        Me.ucrChkViewProcurementMenuMenu.TabIndex = 0
         '
         'dlgOptions
         '
@@ -1045,6 +1045,6 @@ Partial Class dlgOptions
     Friend WithEvents ucrChkShowWaitDialog As ucrCheck
     Friend WithEvents ucrNudWaitSeconds As ucrNud
     Friend WithEvents tbpSpecialMenus As TabPage
-    Friend WithEvents ucrChkViewProcurementMenuMenu As ucrCheck
+    Friend WithEvents ucrChkViewProcurementMenu As ucrCheck
     Friend WithEvents ucrChkViewClimaticMenu As ucrCheck
 End Class
