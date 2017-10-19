@@ -47,22 +47,23 @@ Partial Class dlgDisplayDailyData
         Me.lblDayOfTheYear = New System.Windows.Forms.Label()
         Me.lblYaxisUpper = New System.Windows.Forms.Label()
         Me.grpGraph = New System.Windows.Forms.GroupBox()
-        Me.ucrInputRugColour = New instat.ucrInputComboBox()
         Me.lblRugColor = New System.Windows.Forms.Label()
-        Me.ucrInputBarColour = New instat.ucrInputComboBox()
         Me.lblBarColour = New System.Windows.Forms.Label()
-        Me.ucrNudUpperYaxis = New instat.ucrNud()
         Me.lblMonth = New System.Windows.Forms.Label()
         Me.lblDay = New System.Windows.Forms.Label()
         Me.grpTable = New System.Windows.Forms.GroupBox()
-        Me.ucrSaveTable = New instat.ucrSave()
         Me.lblSummary = New System.Windows.Forms.Label()
+        Me.lblSigFigs = New System.Windows.Forms.Label()
+        Me.ucrChkDisplayMargins = New instat.ucrCheck()
+        Me.ucrSaveTable = New instat.ucrSave()
         Me.ucrInputComboSummary = New instat.ucrInputComboBox()
         Me.ucrNudSigFigs = New instat.ucrNud()
-        Me.lblSigFigs = New System.Windows.Forms.Label()
         Me.ucrChkAsHTMLTable = New instat.ucrCheck()
         Me.ucrReceiverDay = New instat.ucrReceiverSingle()
         Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
+        Me.ucrInputRugColour = New instat.ucrInputComboBox()
+        Me.ucrInputBarColour = New instat.ucrInputComboBox()
+        Me.ucrNudUpperYaxis = New instat.ucrNud()
         Me.ucrReceiverElements = New instat.ucrReceiverMultiple()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDayOfYear = New instat.ucrReceiverSingle()
@@ -178,15 +179,6 @@ Partial Class dlgDisplayDailyData
         Me.grpGraph.TabStop = False
         Me.grpGraph.Text = "Graph"
         '
-        'ucrInputRugColour
-        '
-        Me.ucrInputRugColour.AddQuotesIfUnrecognised = True
-        Me.ucrInputRugColour.IsReadOnly = False
-        Me.ucrInputRugColour.Location = New System.Drawing.Point(83, 70)
-        Me.ucrInputRugColour.Name = "ucrInputRugColour"
-        Me.ucrInputRugColour.Size = New System.Drawing.Size(73, 21)
-        Me.ucrInputRugColour.TabIndex = 5
-        '
         'lblRugColor
         '
         Me.lblRugColor.AutoSize = True
@@ -196,15 +188,6 @@ Partial Class dlgDisplayDailyData
         Me.lblRugColor.TabIndex = 4
         Me.lblRugColor.Text = "Rug Color:"
         '
-        'ucrInputBarColour
-        '
-        Me.ucrInputBarColour.AddQuotesIfUnrecognised = True
-        Me.ucrInputBarColour.IsReadOnly = False
-        Me.ucrInputBarColour.Location = New System.Drawing.Point(83, 43)
-        Me.ucrInputBarColour.Name = "ucrInputBarColour"
-        Me.ucrInputBarColour.Size = New System.Drawing.Size(73, 21)
-        Me.ucrInputBarColour.TabIndex = 3
-        '
         'lblBarColour
         '
         Me.lblBarColour.AutoSize = True
@@ -213,19 +196,6 @@ Partial Class dlgDisplayDailyData
         Me.lblBarColour.Size = New System.Drawing.Size(59, 13)
         Me.lblBarColour.TabIndex = 2
         Me.lblBarColour.Text = "Bar Colour:"
-        '
-        'ucrNudUpperYaxis
-        '
-        Me.ucrNudUpperYaxis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudUpperYaxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudUpperYaxis.Location = New System.Drawing.Point(83, 13)
-        Me.ucrNudUpperYaxis.Margin = New System.Windows.Forms.Padding(4)
-        Me.ucrNudUpperYaxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudUpperYaxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudUpperYaxis.Name = "ucrNudUpperYaxis"
-        Me.ucrNudUpperYaxis.Size = New System.Drawing.Size(50, 23)
-        Me.ucrNudUpperYaxis.TabIndex = 1
-        Me.ucrNudUpperYaxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblMonth
         '
@@ -247,6 +217,7 @@ Partial Class dlgDisplayDailyData
         '
         'grpTable
         '
+        Me.grpTable.Controls.Add(Me.ucrChkDisplayMargins)
         Me.grpTable.Controls.Add(Me.ucrSaveTable)
         Me.grpTable.Controls.Add(Me.lblSummary)
         Me.grpTable.Controls.Add(Me.ucrInputComboSummary)
@@ -255,27 +226,45 @@ Partial Class dlgDisplayDailyData
         Me.grpTable.Controls.Add(Me.ucrChkAsHTMLTable)
         Me.grpTable.Location = New System.Drawing.Point(10, 232)
         Me.grpTable.Name = "grpTable"
-        Me.grpTable.Size = New System.Drawing.Size(277, 133)
+        Me.grpTable.Size = New System.Drawing.Size(277, 155)
         Me.grpTable.TabIndex = 6
         Me.grpTable.TabStop = False
         Me.grpTable.Text = "Display"
-        '
-        'ucrSaveTable
-        '
-        Me.ucrSaveTable.Location = New System.Drawing.Point(7, 103)
-        Me.ucrSaveTable.Name = "ucrSaveTable"
-        Me.ucrSaveTable.Size = New System.Drawing.Size(261, 24)
-        Me.ucrSaveTable.TabIndex = 20
         '
         'lblSummary
         '
         Me.lblSummary.AutoSize = True
         Me.lblSummary.Location = New System.Drawing.Point(5, 74)
         Me.lblSummary.Name = "lblSummary"
-        Me.lblSummary.Size = New System.Drawing.Size(53, 13)
+        Me.lblSummary.Size = New System.Drawing.Size(88, 13)
         Me.lblSummary.TabIndex = 9
-        Me.lblSummary.Tag = "Summary:"
-        Me.lblSummary.Text = "Summary:"
+        Me.lblSummary.Tag = "Margin Summary:"
+        Me.lblSummary.Text = "Margin Summary:"
+        '
+        'lblSigFigs
+        '
+        Me.lblSigFigs.AutoSize = True
+        Me.lblSigFigs.Location = New System.Drawing.Point(5, 48)
+        Me.lblSigFigs.Name = "lblSigFigs"
+        Me.lblSigFigs.Size = New System.Drawing.Size(96, 13)
+        Me.lblSigFigs.TabIndex = 6
+        Me.lblSigFigs.Tag = "Significant_Figures:"
+        Me.lblSigFigs.Text = "Significant Figures:"
+        '
+        'ucrChkDisplayMargins
+        '
+        Me.ucrChkDisplayMargins.Checked = False
+        Me.ucrChkDisplayMargins.Location = New System.Drawing.Point(9, 98)
+        Me.ucrChkDisplayMargins.Name = "ucrChkDisplayMargins"
+        Me.ucrChkDisplayMargins.Size = New System.Drawing.Size(104, 20)
+        Me.ucrChkDisplayMargins.TabIndex = 21
+        '
+        'ucrSaveTable
+        '
+        Me.ucrSaveTable.Location = New System.Drawing.Point(9, 126)
+        Me.ucrSaveTable.Name = "ucrSaveTable"
+        Me.ucrSaveTable.Size = New System.Drawing.Size(261, 24)
+        Me.ucrSaveTable.TabIndex = 20
         '
         'ucrInputComboSummary
         '
@@ -283,7 +272,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrInputComboSummary.IsReadOnly = False
         Me.ucrInputComboSummary.Location = New System.Drawing.Point(104, 70)
         Me.ucrInputComboSummary.Name = "ucrInputComboSummary"
-        Me.ucrInputComboSummary.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputComboSummary.Size = New System.Drawing.Size(106, 21)
         Me.ucrInputComboSummary.TabIndex = 8
         '
         'ucrNudSigFigs
@@ -297,16 +286,6 @@ Partial Class dlgDisplayDailyData
         Me.ucrNudSigFigs.Size = New System.Drawing.Size(50, 20)
         Me.ucrNudSigFigs.TabIndex = 7
         Me.ucrNudSigFigs.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblSigFigs
-        '
-        Me.lblSigFigs.AutoSize = True
-        Me.lblSigFigs.Location = New System.Drawing.Point(5, 48)
-        Me.lblSigFigs.Name = "lblSigFigs"
-        Me.lblSigFigs.Size = New System.Drawing.Size(96, 13)
-        Me.lblSigFigs.TabIndex = 6
-        Me.lblSigFigs.Tag = "Significant_Figures:"
-        Me.lblSigFigs.Text = "Significant Figures:"
         '
         'ucrChkAsHTMLTable
         '
@@ -339,6 +318,37 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverMonth.strNcFilePath = ""
         Me.ucrReceiverMonth.TabIndex = 7
         Me.ucrReceiverMonth.ucrSelector = Nothing
+        '
+        'ucrInputRugColour
+        '
+        Me.ucrInputRugColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputRugColour.IsReadOnly = False
+        Me.ucrInputRugColour.Location = New System.Drawing.Point(83, 70)
+        Me.ucrInputRugColour.Name = "ucrInputRugColour"
+        Me.ucrInputRugColour.Size = New System.Drawing.Size(73, 21)
+        Me.ucrInputRugColour.TabIndex = 5
+        '
+        'ucrInputBarColour
+        '
+        Me.ucrInputBarColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputBarColour.IsReadOnly = False
+        Me.ucrInputBarColour.Location = New System.Drawing.Point(83, 43)
+        Me.ucrInputBarColour.Name = "ucrInputBarColour"
+        Me.ucrInputBarColour.Size = New System.Drawing.Size(73, 21)
+        Me.ucrInputBarColour.TabIndex = 3
+        '
+        'ucrNudUpperYaxis
+        '
+        Me.ucrNudUpperYaxis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudUpperYaxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudUpperYaxis.Location = New System.Drawing.Point(83, 13)
+        Me.ucrNudUpperYaxis.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrNudUpperYaxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudUpperYaxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudUpperYaxis.Name = "ucrNudUpperYaxis"
+        Me.ucrNudUpperYaxis.Size = New System.Drawing.Size(50, 23)
+        Me.ucrNudUpperYaxis.TabIndex = 1
+        Me.ucrNudUpperYaxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrReceiverElements
         '
@@ -420,7 +430,7 @@ Partial Class dlgDisplayDailyData
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 372)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 394)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(412, 52)
@@ -430,7 +440,7 @@ Partial Class dlgDisplayDailyData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(422, 429)
+        Me.ClientSize = New System.Drawing.Size(422, 459)
         Me.Controls.Add(Me.grpTable)
         Me.Controls.Add(Me.lblDay)
         Me.Controls.Add(Me.lblMonth)
@@ -500,4 +510,5 @@ Partial Class dlgDisplayDailyData
     Friend WithEvents lblSigFigs As Label
     Friend WithEvents lblSummary As Label
     Friend WithEvents ucrInputComboSummary As ucrInputComboBox
+    Friend WithEvents ucrChkDisplayMargins As ucrCheck
 End Class
