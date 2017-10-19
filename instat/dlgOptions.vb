@@ -366,20 +366,12 @@ Public Class dlgOptions
         End If
     End Sub
 
-    Private Sub ucrChkViewClimaticMenu_ControlValueChanged() Handles ucrChkViewClimaticMenu.ControlValueChanged
-        If ucrChkViewClimaticMenu.Checked Then
-            frmMain.mnuClimatic.Visible = True
-        Else
-            frmMain.mnuClimatic.Visible = False
-        End If
+    Private Sub ucrChkViewClimaticMenu_Load() Handles ucrChkViewClimaticMenu.ControlValueChanged
+        frmMain.clsInstatOptions.bShowClimatic = ucrChkViewClimaticMenu.Checked
     End Sub
 
-    Private Sub ucrChkViewProcurementMenu_ControlValueChanged() Handles ucrChkViewProcurementMenu.ControlValueChanged
-        If ucrChkViewProcurementMenu.Checked Then
-            frmMain.mnuProcurement.Visible = True
-        Else
-            frmMain.mnuProcurement.Visible = False
-        End If
+    Private Sub ucrChkViewProcurementMenu_Load() Handles ucrChkViewProcurementMenu.ControlValueChanged
+        frmMain.clsInstatOptions.bShowProcurement = ucrChkViewProcurementMenu.Checked
     End Sub
 
     Private Sub ucrPnlGraphDisplay_ControlValueChanged() Handles ucrPnlGraphDisplay.ControlValueChanged

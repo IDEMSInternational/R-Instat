@@ -38,12 +38,12 @@ Partial Class dlgOptions
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Languages")
-        Dim TreeNode2 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Comments")
-        Dim TreeNode3 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Import")
-        Dim TreeNode4 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Output Window")
-        Dim TreeNode5 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Commands")
-        Dim TreeNode6 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Data View")
+        Dim TreeNode7 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Languages")
+        Dim TreeNode8 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Comments")
+        Dim TreeNode9 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Import")
+        Dim TreeNode10 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Output Window")
+        Dim TreeNode11 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Commands")
+        Dim TreeNode12 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Data View")
         Me.cmdApply = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
@@ -212,29 +212,29 @@ Partial Class dlgOptions
         Me.trOptions.Dock = System.Windows.Forms.DockStyle.Fill
         Me.trOptions.Location = New System.Drawing.Point(0, 0)
         Me.trOptions.Name = "trOptions"
-        TreeNode1.Name = "ndLanguages"
-        TreeNode1.Tag = "1"
-        TreeNode1.Text = "Languages"
-        TreeNode1.ToolTipText = "Choose different languages"
-        TreeNode2.Name = "ndComments"
-        TreeNode2.Tag = "2"
-        TreeNode2.Text = "Comments"
-        TreeNode2.ToolTipText = "Comments for the dialogs"
-        TreeNode3.Name = "ndImport"
-        TreeNode3.Tag = "3"
-        TreeNode3.Text = "Import"
-        TreeNode3.ToolTipText = "Import Data Settings"
-        TreeNode4.Name = "ndOutputWindow"
-        TreeNode4.Tag = "4"
-        TreeNode4.Text = "Output Window"
-        TreeNode4.ToolTipText = "Output Window Formatting Options"
-        TreeNode5.Name = "ndCommands"
-        TreeNode5.Tag = "8"
-        TreeNode5.Text = "Commands"
-        TreeNode5.ToolTipText = "Commands Options"
-        TreeNode6.Name = "ndDataView"
-        TreeNode6.Text = "Data View"
-        Me.trOptions.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1, TreeNode2, TreeNode3, TreeNode4, TreeNode5, TreeNode6})
+        TreeNode7.Name = "ndLanguages"
+        TreeNode7.Tag = "1"
+        TreeNode7.Text = "Languages"
+        TreeNode7.ToolTipText = "Choose different languages"
+        TreeNode8.Name = "ndComments"
+        TreeNode8.Tag = "2"
+        TreeNode8.Text = "Comments"
+        TreeNode8.ToolTipText = "Comments for the dialogs"
+        TreeNode9.Name = "ndImport"
+        TreeNode9.Tag = "3"
+        TreeNode9.Text = "Import"
+        TreeNode9.ToolTipText = "Import Data Settings"
+        TreeNode10.Name = "ndOutputWindow"
+        TreeNode10.Tag = "4"
+        TreeNode10.Text = "Output Window"
+        TreeNode10.ToolTipText = "Output Window Formatting Options"
+        TreeNode11.Name = "ndCommands"
+        TreeNode11.Tag = "8"
+        TreeNode11.Text = "Commands"
+        TreeNode11.ToolTipText = "Commands Options"
+        TreeNode12.Name = "ndDataView"
+        TreeNode12.Text = "Data View"
+        Me.trOptions.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode7, TreeNode8, TreeNode9, TreeNode10, TreeNode11, TreeNode12})
         Me.trOptions.Size = New System.Drawing.Size(184, 317)
         Me.trOptions.TabIndex = 0
         '
