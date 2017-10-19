@@ -47,6 +47,8 @@ Public Class dlgDisplayDailyData
         Dim dctBarColour As New Dictionary(Of String, String)
         Dim dctRugColour As New Dictionary(Of String, String)
         Dim dctSummary As New Dictionary(Of String, String)
+        ucrBase.clsRsyntax.iCallType = 4
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrSelectorDisplayDailyClimaticData.SetParameter(New RParameter("data_name", 0))
         ucrSelectorDisplayDailyClimaticData.SetParameterIsString()
@@ -129,8 +131,18 @@ Public Class dlgDisplayDailyData
         ucrSaveTable.SetCheckBoxText("Save Table")
         ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
 
+        ucrChkDisplayMargins.SetParameter(New RParameter("include_margins", 9))
+        ucrChkDisplayMargins.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkDisplayMargins.SetText("Display Margins")
+        ucrChkDisplayMargins.SetRDefault("FALSE")
+
         ucrInputComboSummary.SetParameter(New RParameter("summaries", 2))
-        dctSummary.Add("summary_mean", Chr(34) & "summary_mean" & Chr(34))
+        dctSummary.Add("Total", "sum_label")
+        dctSummary.Add("Maximun", "max_label")
+        dctSummary.Add("Minimum", "min_label")
+        dctSummary.Add("count_missing_label", "count_missing_label")
+        dctSummary.Add("Mean", "mean_label")
+        ucrInputComboSummary.SetRDefault("mean_label")
         ucrInputComboSummary.SetItems(dctSummary)
 
         ucrPnlFrequencyDisplay.AddRadioButton(rdoTable)
@@ -163,9 +175,8 @@ Public Class dlgDisplayDailyData
         clsConcFunction.SetRCommand("c")
         clsDisplayDailyGraphFunction.AddParameter("rug_colour", Chr(34) & "red" & Chr(34))
         clsDisplayDailyGraphFunction.AddParameter("bar_colour", Chr(34) & "blue" & Chr(34))
-        'clsSummaryTableFunction.AddParameter("summaries", "sum_label", iPosition:=2)
         clsSummaryTableFunction.AddParameter("n_column_factors", "1", iPosition:=4)
-        clsSummaryTableFunction.AddParameter("include_margins", "TRUE", iPosition:=5)
+        clsSummaryTableFunction.AddParameter("summaries", "sum_label", iPosition:=2)
         clsSummaryTableFunction.AddParameter("rnames", "FALSE", iPosition:=6)
         clsSummaryTableFunction.AddParameter("store_results", "FALSE", iPosition:=5)
         clsSummaryTableFunction.AddParameter("factors", clsRFunctionParameter:=clsConcFunction, iPosition:=3)
@@ -196,6 +207,8 @@ Public Class dlgDisplayDailyData
         ucrChkAsHTMLTable.SetRCode(clsSummaryTableFunction, bReset)
         ucrSaveTable.SetRCode(clsSummaryTableFunction, bReset)
         ucrNudSigFigs.SetRCode(clsSummaryTableFunction, bReset)
+        ucrInputComboSummary.SetRCode(clsSummaryTableFunction, bReset)
+        ucrChkDisplayMargins.SetRCode(clsSummaryTableFunction, bReset)
         ucrPnlFrequencyDisplay.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
