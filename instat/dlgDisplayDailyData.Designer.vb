@@ -72,6 +72,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrPnlFrequencyDisplay = New instat.UcrPanel()
         Me.ucrSelectorDisplayDailyClimaticData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSaveGraph = New instat.ucrSave()
         Me.grpGraph.SuspendLayout()
         Me.grpTable.SuspendLayout()
         Me.SuspendLayout()
@@ -166,6 +167,7 @@ Partial Class dlgDisplayDailyData
         '
         'grpGraph
         '
+        Me.grpGraph.Controls.Add(Me.ucrSaveGraph)
         Me.grpGraph.Controls.Add(Me.ucrInputRugColour)
         Me.grpGraph.Controls.Add(Me.lblRugColor)
         Me.grpGraph.Controls.Add(Me.ucrInputBarColour)
@@ -174,7 +176,7 @@ Partial Class dlgDisplayDailyData
         Me.grpGraph.Controls.Add(Me.lblYaxisUpper)
         Me.grpGraph.Location = New System.Drawing.Point(10, 232)
         Me.grpGraph.Name = "grpGraph"
-        Me.grpGraph.Size = New System.Drawing.Size(277, 99)
+        Me.grpGraph.Size = New System.Drawing.Size(277, 137)
         Me.grpGraph.TabIndex = 18
         Me.grpGraph.TabStop = False
         Me.grpGraph.Text = "Graph"
@@ -191,7 +193,7 @@ Partial Class dlgDisplayDailyData
         'lblBarColour
         '
         Me.lblBarColour.AutoSize = True
-        Me.lblBarColour.Location = New System.Drawing.Point(6, 48)
+        Me.lblBarColour.Location = New System.Drawing.Point(9, 48)
         Me.lblBarColour.Name = "lblBarColour"
         Me.lblBarColour.Size = New System.Drawing.Size(59, 13)
         Me.lblBarColour.TabIndex = 2
@@ -224,7 +226,7 @@ Partial Class dlgDisplayDailyData
         Me.grpTable.Controls.Add(Me.ucrNudSigFigs)
         Me.grpTable.Controls.Add(Me.lblSigFigs)
         Me.grpTable.Controls.Add(Me.ucrChkAsHTMLTable)
-        Me.grpTable.Location = New System.Drawing.Point(10, 232)
+        Me.grpTable.Location = New System.Drawing.Point(10, 230)
         Me.grpTable.Name = "grpTable"
         Me.grpTable.Size = New System.Drawing.Size(277, 155)
         Me.grpTable.TabIndex = 6
@@ -436,6 +438,13 @@ Partial Class dlgDisplayDailyData
         Me.ucrBase.Size = New System.Drawing.Size(412, 52)
         Me.ucrBase.TabIndex = 19
         '
+        'ucrSaveGraph
+        '
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(9, 106)
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(261, 24)
+        Me.ucrSaveGraph.TabIndex = 21
+        '
         'dlgDisplayDailyData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -511,4 +520,5 @@ Partial Class dlgDisplayDailyData
     Friend WithEvents lblSummary As Label
     Friend WithEvents ucrInputComboSummary As ucrInputComboBox
     Friend WithEvents ucrChkDisplayMargins As ucrCheck
+    Friend WithEvents ucrSaveGraph As ucrSave
 End Class

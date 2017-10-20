@@ -131,18 +131,24 @@ Public Class dlgDisplayDailyData
         ucrSaveTable.SetCheckBoxText("Save Table")
         ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
 
+        ucrSaveGraph.SetPrefix("Graph")
+        ucrSaveGraph.SetSaveTypeAsGraph()
+        ucrSaveGraph.SetDataFrameSelector(ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames)
+        ucrSaveGraph.SetIsComboBox()
+        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
+
         ucrChkDisplayMargins.SetParameter(New RParameter("include_margins", 9))
         ucrChkDisplayMargins.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkDisplayMargins.SetText("Display Margins")
-        ucrChkDisplayMargins.SetRDefault("FALSE")
+        ucrChkDisplayMargins.SetText("Margin")
+        ucrChkDisplayMargins.SetRDefault("TRUE")
 
         ucrInputComboSummary.SetParameter(New RParameter("summaries", 2))
         dctSummary.Add("Total", "sum_label")
         dctSummary.Add("Maximun", "max_label")
         dctSummary.Add("Minimum", "min_label")
-        dctSummary.Add("count_missing_label", "count_missing_label")
+        dctSummary.Add("Count Missing", "count_missing_label")
         dctSummary.Add("Mean", "mean_label")
-        ucrInputComboSummary.SetRDefault("mean_label")
         ucrInputComboSummary.SetItems(dctSummary)
 
         ucrPnlFrequencyDisplay.AddRadioButton(rdoTable)
@@ -180,6 +186,7 @@ Public Class dlgDisplayDailyData
         clsSummaryTableFunction.AddParameter("rnames", "FALSE", iPosition:=6)
         clsSummaryTableFunction.AddParameter("store_results", "FALSE", iPosition:=5)
         clsSummaryTableFunction.AddParameter("factors", clsRFunctionParameter:=clsConcFunction, iPosition:=3)
+        clsDisplayDailyGraphFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_graph")
         clsSummaryTableFunction.SetAssignTo("last_table", strTempDataframe:=ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_table")
         clsSummaryTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
         clsDisplayDailyGraphFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$display_daily_graph")
@@ -206,6 +213,7 @@ Public Class dlgDisplayDailyData
         ucrReceiverElements.SetRCode(clsDisplayDailyGraphFunction, bReset)
         ucrChkAsHTMLTable.SetRCode(clsSummaryTableFunction, bReset)
         ucrSaveTable.SetRCode(clsSummaryTableFunction, bReset)
+        ucrSaveGraph.SetRCode(clsDisplayDailyGraphFunction, bReset)
         ucrNudSigFigs.SetRCode(clsSummaryTableFunction, bReset)
         ucrInputComboSummary.SetRCode(clsSummaryTableFunction, bReset)
         ucrChkDisplayMargins.SetRCode(clsSummaryTableFunction, bReset)
@@ -240,7 +248,7 @@ Public Class dlgDisplayDailyData
         If rdoGraph.Checked Then
             ucrBase.clsRsyntax.iCallType = 3
             ucrBase.clsRsyntax.SetBaseRFunction(clsDisplayDailyGraphFunction)
-        ElseIf rdoTable.Checked Then
+        Else
             ucrBase.clsRsyntax.iCallType = 2
             ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryTableFunction)
         End If
@@ -250,7 +258,7 @@ Public Class dlgDisplayDailyData
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrChkAsHTMLTable_HandleDestroyed(sender As Object, e As EventArgs) Handles ucrChkAsHTMLTable.HandleDestroyed
+    Private Sub ucrChkAsHTMLTable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAsHTMLTable.ControlValueChanged
         If ucrChkAsHTMLTable.Checked Then
             ucrBase.clsRsyntax.iCallType = 4
         Else
