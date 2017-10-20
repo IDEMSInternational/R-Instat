@@ -41,8 +41,8 @@ Public Class ucrColumnMetadata
         SetRFunctions()
         mnuFreezeToHere.Enabled = False
         mnuUnfreeze.Enabled = False
-        mnuInsertColsAfter.Enabled = False
-        mnuInsertColsBefore.Enabled = False
+        mnuInsertColsAfter.Visible = False
+        mnuInsertColsBefore.Visible = False
         '  grdVariables.RowHeaderContextMenuStrip = frmMain.ucrDataViewer.grdData.ColumnHeaderContextMenuStrip
     End Sub
 
