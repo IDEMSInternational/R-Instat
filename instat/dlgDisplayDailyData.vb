@@ -140,7 +140,7 @@ Public Class dlgDisplayDailyData
 
         ucrChkDisplayMargins.SetParameter(New RParameter("include_margins", 9))
         ucrChkDisplayMargins.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkDisplayMargins.SetText("Margin")
+        ucrChkDisplayMargins.SetText("Display Margins")
         ucrChkDisplayMargins.SetRDefault("TRUE")
 
         ucrInputComboSummary.SetParameter(New RParameter("summaries", 2))
