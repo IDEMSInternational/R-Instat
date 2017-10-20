@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 
 Public Class sdgCountryColouredMapOptions
@@ -46,6 +45,11 @@ Public Class sdgCountryColouredMapOptions
         ucrPnlRegionChoice.AddToLinkedControls(ucrInputLongMin, {rdoChooseRegion}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlRegionChoice.AddToLinkedControls(ucrInputLongMax, {rdoChooseRegion}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlRegionChoice.AddToLinkedControls(ucrInputCommonRegions, {rdoChooseRegion}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputCommonRegions.SetLinkedDisplayControl(lblCommonRegions)
+        ucrInputLongMin.SetLinkedDisplayControl(lblLongMin)
+        ucrInputLongMax.SetLinkedDisplayControl(lblLongMax)
+        ucrInputLatMin.SetLinkedDisplayControl(lblLatMin)
+        ucrInputLatMax.SetLinkedDisplayControl(lblLatMax)
 
         lstRegionInputControls = New List(Of ucrInputTextBox)
         lstRegionInputControls.AddRange({ucrInputLatMin, ucrInputLatMax, ucrInputLongMin, ucrInputLongMax})
@@ -92,7 +96,6 @@ Public Class sdgCountryColouredMapOptions
         ucrInputLongMax.SetRCode(clsLongMax, bReset:=bReset, bCloneIfNeeded:=True)
         ucrPnlRegionChoice.SetRCode(clsJoinFunction, bReset:=bReset, bCloneIfNeeded:=True)
         bClearRegion = True
-
         ucrInputCommonRegions.SetName("Choose...")
     End Sub
 
@@ -152,5 +155,13 @@ Public Class sdgCountryColouredMapOptions
         If bClearRegion Then
             ucrInputCommonRegions.SetName("Choose...")
         End If
+    End Sub
+
+    Private Sub lblLongMin_VisibleChanged(sender As Object, e As EventArgs) Handles lblLongMin.VisibleChanged
+        lblLong.Visible = lblLongMin.Visible
+    End Sub
+
+    Private Sub lblLatMin_VisibleChanged(sender As Object, e As EventArgs) Handles lblLatMin.VisibleChanged
+        lblLat.Visible = lblLatMin.Visible
     End Sub
 End Class
