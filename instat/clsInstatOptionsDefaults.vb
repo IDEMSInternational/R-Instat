@@ -18,6 +18,8 @@ Public Class clsInstatOptionsDefaults
     Public Shared ReadOnly DEFAULTbIncludeRDefaultParameters As Boolean = False
     Public Shared ReadOnly DEFAULTbCommandsinOutput As Boolean = True
     Public Shared ReadOnly DEFAULTbIncludeCommentDefault As Boolean = True
+    Public Shared ReadOnly DEFAULTbShowProcurement As Boolean = True
+    Public Shared ReadOnly DEFAULTbShowClimatic As Boolean = True
     Public Shared ReadOnly DEFAULTfntOutput As Font = New Font(FontFamily.GenericMonospace, 11, FontStyle.Regular)
     Public Shared ReadOnly DEFAULTclrOutput As Color = Color.Blue
     Public Shared ReadOnly DEFAULTfntComment As Font = New Font(FontFamily.GenericSansSerif, 11, FontStyle.Regular)

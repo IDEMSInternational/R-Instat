@@ -35,6 +35,8 @@ Imports RDotNet
     Public strGraphDisplayOption As String
     Public bCommandsinOutput As Nullable(Of Boolean)
     Public bIncludeCommentDefault As Nullable(Of Boolean) 'sets the default for comments on the dialog
+    Public bShowProcurement As Nullable(Of Boolean)
+    Public bShowClimatic As Nullable(Of Boolean)
     Public iDigits As Nullable(Of Integer)
     Public bShowSignifStars As Nullable(Of Boolean)
     Public bChangeDataFrame As Nullable(Of Boolean)
@@ -49,6 +51,8 @@ Imports RDotNet
         bIncludeRDefaultParameters = clsInstatOptionsDefaults.DEFAULTbIncludeRDefaultParameters
         bCommandsinOutput = clsInstatOptionsDefaults.DEFAULTbCommandsinOutput
         bIncludeCommentDefault = clsInstatOptionsDefaults.DEFAULTbIncludeCommentDefault
+        bShowClimatic = clsInstatOptionsDefaults.DEFAULTbShowClimatic
+        bShowProcurement = clsInstatOptionsDefaults.DEFAULTbShowProcurement
         fntOutput = clsInstatOptionsDefaults.DEFAULTfntOutput
         clrOutput = clsInstatOptionsDefaults.DEFAULTclrOutput
         fntComment = clsInstatOptionsDefaults.DEFAULTfntComment
@@ -173,6 +177,18 @@ Imports RDotNet
             SetIncludeCommentByDefault(bIncludeCommentDefault)
         Else
             SetIncludeCommentByDefault(clsInstatOptionsDefaults.DEFAULTbIncludeCommentDefault)
+        End If
+
+        If bShowProcurement.HasValue Then
+            SetShowProcurement(bShowProcurement)
+        Else
+            SetShowProcurement(clsInstatOptionsDefaults.DEFAULTbShowProcurement)
+        End If
+
+        If bShowClimatic.HasValue Then
+            SetShowClimatic(bShowClimatic)
+        Else
+            SetShowClimatic(clsInstatOptionsDefaults.DEFAULTbShowClimatic)
         End If
 
         If bIncludeRDefaultParameters.HasValue Then
@@ -358,6 +374,15 @@ Imports RDotNet
     Public Sub SetIncludeCommentByDefault(bNewInclude As Boolean)
         bIncludeCommentDefault = bNewInclude
     End Sub
+
+    Public Sub SetShowProcurement(bIncludeProcurement As Boolean)
+        bShowProcurement = bIncludeProcurement
+    End Sub
+
+    Public Sub SetShowClimatic(bIncludeClimatic As Boolean)
+        bShowClimatic = bIncludeClimatic
+    End Sub
+
 
     Public Sub SetIncludeRDefaultParameters(bNewInclude As Boolean)
         bIncludeRDefaultParameters = bNewInclude

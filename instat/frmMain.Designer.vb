@@ -148,6 +148,8 @@ Partial Class frmMain
         Me.mnuViewScriptWindow = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewColumnMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuViewClimaticMenu = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuViewProcurementMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator22 = New System.Windows.Forms.ToolStripSeparator()
         Me.ResetToDefaultLayoutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
@@ -301,6 +303,7 @@ Partial Class frmMain
         Me.stsStrip = New System.Windows.Forms.StatusStrip()
         Me.tstatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.Tool_strip = New System.Windows.Forms.ToolStrip()
+        Me.mnuTbOpen = New System.Windows.Forms.ToolStripSplitButton()
         Me.mnuTbOpenFromLibrary = New System.Windows.Forms.ToolStripButton()
         Me.mnuTbSave = New System.Windows.Forms.ToolStripButton()
         Me.toolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
@@ -486,7 +489,6 @@ Partial Class frmMain
         Me.splMetadata = New System.Windows.Forms.SplitContainer()
         Me.splLogScript = New System.Windows.Forms.SplitContainer()
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
-        Me.mnuTbOpen = New System.Windows.Forms.ToolStripSplitButton()
         Me.ucrColumnMeta = New instat.ucrColumnMetadata()
         Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
         Me.ucrLogWindow = New instat.ucrLog()
@@ -1256,7 +1258,7 @@ Partial Class frmMain
         '
         'mnuView
         '
-        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewDataView, Me.mnuViewOutputWindow, Me.mnuViewLog, Me.mnuViewScriptWindow, Me.mnuViewColumnMetadata, Me.mnuViewDataFrameMetadata, Me.ToolStripSeparator22, Me.ResetToDefaultLayoutToolStripMenuItem})
+        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewDataView, Me.mnuViewOutputWindow, Me.mnuViewLog, Me.mnuViewScriptWindow, Me.mnuViewColumnMetadata, Me.mnuViewDataFrameMetadata, Me.mnuViewClimaticMenu, Me.mnuViewProcurementMenu, Me.ToolStripSeparator22, Me.ResetToDefaultLayoutToolStripMenuItem})
         Me.mnuView.Name = "mnuView"
         Me.mnuView.Size = New System.Drawing.Size(44, 20)
         Me.mnuView.Tag = "View"
@@ -1302,6 +1304,20 @@ Partial Class frmMain
         Me.mnuViewDataFrameMetadata.Size = New System.Drawing.Size(196, 22)
         Me.mnuViewDataFrameMetadata.Tag = "Data_Frame_Metadata"
         Me.mnuViewDataFrameMetadata.Text = "Data Frame Metadata"
+        '
+        'mnuViewClimaticMenu
+        '
+        Me.mnuViewClimaticMenu.Name = "mnuViewClimaticMenu"
+        Me.mnuViewClimaticMenu.Size = New System.Drawing.Size(196, 22)
+        Me.mnuViewClimaticMenu.Tag = ""
+        Me.mnuViewClimaticMenu.Text = "Climatic Menu"
+        '
+        'mnuViewProcurementMenu
+        '
+        Me.mnuViewProcurementMenu.Name = "mnuViewProcurementMenu"
+        Me.mnuViewProcurementMenu.Size = New System.Drawing.Size(196, 22)
+        Me.mnuViewProcurementMenu.Tag = ""
+        Me.mnuViewProcurementMenu.Text = "Procurement Menu"
         '
         'ToolStripSeparator22
         '
@@ -2366,6 +2382,16 @@ Partial Class frmMain
         Me.Tool_strip.Size = New System.Drawing.Size(834, 37)
         Me.Tool_strip.TabIndex = 7
         Me.Tool_strip.Text = "Tool"
+        '
+        'mnuTbOpen
+        '
+        Me.mnuTbOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.mnuTbOpen.Image = Global.instat.My.Resources.Resources.openfromfile
+        Me.mnuTbOpen.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.mnuTbOpen.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
+        Me.mnuTbOpen.Name = "mnuTbOpen"
+        Me.mnuTbOpen.Size = New System.Drawing.Size(46, 34)
+        Me.mnuTbOpen.Text = "&Open"
         '
         'mnuTbOpenFromLibrary
         '
@@ -3724,16 +3750,6 @@ Partial Class frmMain
         Me.splDataOutput.SplitterWidth = 5
         Me.splDataOutput.TabIndex = 0
         '
-        'mnuTbOpen
-        '
-        Me.mnuTbOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.mnuTbOpen.Image = Global.instat.My.Resources.Resources.openfromfile
-        Me.mnuTbOpen.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.mnuTbOpen.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
-        Me.mnuTbOpen.Name = "mnuTbOpen"
-        Me.mnuTbOpen.Size = New System.Drawing.Size(46, 34)
-        Me.mnuTbOpen.Text = "&Open"
-        '
         'ucrColumnMeta
         '
         Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -4292,4 +4308,6 @@ Partial Class frmMain
     Friend WithEvents separator3 As ToolStripSeparator
     Friend WithEvents mnuTbResetLayout As ToolStripButton
     Friend WithEvents mnuTbOpen As ToolStripSplitButton
+    Friend WithEvents mnuViewClimaticMenu As ToolStripMenuItem
+    Friend WithEvents mnuViewProcurementMenu As ToolStripMenuItem
 End Class
