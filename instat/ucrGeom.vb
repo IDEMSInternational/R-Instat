@@ -1035,14 +1035,13 @@ Public Class ucrGeom
         clsgeom_smooth.AddLayerParameter("inherit.aes", "boolean", "FALSE")
 
         'geom and stat are missing here 
-        clsgeom_smooth.AddLayerParameter("n", "numeric", "0.15")
-        clsgeom_smooth.AddLayerParameter("span", "numeric", "0.15")
-        clsgeom_smooth.AddLayerParameter("fullrange", "numeric", "0.15")
-        clsgeom_smooth.AddLayerParameter("level", "numeric", "0.95")
-        clsgeom_smooth.AddLayerParameter("level", "numeric", "0.95")
+        'clsgeom_smooth.AddLayerParameter("n", "numeric", "0.15")
+        'clsgeom_smooth.AddLayerParameter("span", "numeric", "0.15")
+        'clsgeom_smooth.AddLayerParameter("fullrange", "numeric", "0.15")
+        'clsgeom_smooth.AddLayerParameter("level", "numeric", "0.95")
 
-        'method.args isa list of methods passed into the moddeling function
-        clsgeom_smooth.AddLayerParameter("method.args", "numeric", "0.95")
+        'method.args is a list of methods passed into the moddeling function
+        'clsgeom_smooth.AddLayerParameter("method.args", "numeric", "0.95")
 
         lstAllGeoms.Add(clsgeom_smooth)
 
