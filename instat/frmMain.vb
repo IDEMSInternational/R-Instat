@@ -101,8 +101,8 @@ Public Class frmMain
         Cursor = Cursors.Default
         SetMainMenusEnabled(True)
 
-        mnuViewClimaticMenu.Checked = clsInstatOptions.bShowClimatic
-        mnuViewProcurementMenu.Checked = clsInstatOptions.bShowProcurement
+        mnuViewClimaticMenu.Checked = clsInstatOptions.bShowClimaticMenu
+        mnuViewProcurementMenu.Checked = clsInstatOptions.bShowProcurementMenu
 
     End Sub
 
@@ -1736,31 +1736,21 @@ Public Class frmMain
         dlgImportDataset.ShowDialog()
     End Sub
 
-    Private Sub ShowHideSpecialMenus()
-        If mnuViewClimaticMenu.Checked Then
-            mnuClimatic.Visible = True
-            clsInstatOptions.bShowClimatic = True
-        Else
-            mnuClimatic.Visible = False
-            clsInstatOptions.bShowClimatic = False
-        End If
+    Public Sub SetShowProcurementMenu(bNewShowProcurementMenu As Boolean)
+        mnuProcurement.Visible = bNewShowProcurementMenu
+        mnuViewProcurementMenu.Checked = bNewShowProcurementMenu
+    End Sub
 
-        If mnuViewProcurementMenu.Checked Then
-            mnuProcurement.Visible = True
-            clsInstatOptions.bShowProcurement = True
-        Else
-            mnuProcurement.Visible = False
-            clsInstatOptions.bShowProcurement = False
-        End If
+    Public Sub SetShowClimaticMenu(bNewShowClimaticMenu As Boolean)
+        mnuClimatic.Visible = bNewShowClimaticMenu
+        mnuViewClimaticMenu.Checked = bNewShowClimaticMenu
     End Sub
 
     Private Sub mnuViewClimaticMenu_Click(sender As Object, e As EventArgs) Handles mnuViewClimaticMenu.Click
-        mnuViewClimaticMenu.Checked = Not mnuViewClimaticMenu.Checked
-        ShowHideSpecialMenus()
+        clsInstatOptions.SetShowClimaticMenu(Not mnuViewClimaticMenu.Checked)
     End Sub
 
     Private Sub mnuViewProcurementMenu_Click(sender As Object, e As EventArgs) Handles mnuViewProcurementMenu.Click
-        mnuViewProcurementMenu.Checked = Not mnuViewProcurementMenu.Checked
-        ShowHideSpecialMenus()
+        clsInstatOptions.SetShowProcurementMenu(Not mnuViewProcurementMenu.Checked)
     End Sub
 End Class
