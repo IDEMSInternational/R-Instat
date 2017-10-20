@@ -118,7 +118,7 @@ Public Class dlgDisplayDailyData
 
         ucrChkAsHTMLTable.SetParameter(New RParameter("as_html"))
         ucrChkAsHTMLTable.SetText("HTML Table")
-        ucrChkAsHTMLTable.SetRDefault("FALSE")
+        ucrChkAsHTMLTable.SetRDefault("TRUE")
 
         ucrNudSigFigs.SetParameter(New RParameter("signif_fig"))
         ucrNudSigFigs.SetMinMax(0, 22)
@@ -141,14 +141,15 @@ Public Class dlgDisplayDailyData
         ucrChkDisplayMargins.SetParameter(New RParameter("include_margins", 9))
         ucrChkDisplayMargins.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkDisplayMargins.SetText("Display Margins")
-        ucrChkDisplayMargins.SetRDefault("TRUE")
+        ucrChkDisplayMargins.SetRDefault("FALSE")
 
         ucrInputComboSummary.SetParameter(New RParameter("summaries", 2))
         dctSummary.Add("Total", "sum_label")
-        dctSummary.Add("Maximun", "max_label")
-        dctSummary.Add("Minimum", "min_label")
-        dctSummary.Add("Count Missing", "count_missing_label")
         dctSummary.Add("Mean", "mean_label")
+        dctSummary.Add("Minimum", "min_label")
+        dctSummary.Add("Maximun", "max_label")
+        'currenlty can't have this because the summary is applied to the body as well as margins
+        'dctSummary.Add("Count Missing", "count_missing_label")
         ucrInputComboSummary.SetItems(dctSummary)
 
         ucrPnlFrequencyDisplay.AddRadioButton(rdoTable)
@@ -185,6 +186,7 @@ Public Class dlgDisplayDailyData
         clsSummaryTableFunction.AddParameter("summaries", "sum_label", iPosition:=2)
         clsSummaryTableFunction.AddParameter("rnames", "FALSE", iPosition:=6)
         clsSummaryTableFunction.AddParameter("store_results", "FALSE", iPosition:=5)
+        clsSummaryTableFunction.AddParameter("as_html", "FALSE", iPosition:=7)
         clsSummaryTableFunction.AddParameter("factors", clsRFunctionParameter:=clsConcFunction, iPosition:=3)
         clsDisplayDailyGraphFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_graph")
         clsSummaryTableFunction.SetAssignTo("last_table", strTempDataframe:=ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_table")
