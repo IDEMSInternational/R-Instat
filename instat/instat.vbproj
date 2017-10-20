@@ -5448,6 +5448,18 @@
     <Content Include="static\Library\Procurement\WorldBank.RDS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="static\Library\Climatic\Satellite\CMSAF_CFC_DailyMean_1991-2015_Dodoma.nc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\Library\Climatic\Satellite\CMSAF_SDU_DailySums_1983-2015_Dodoma.nc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\Library\Climatic\Satellite\CMSAF_SISc_DailyMean_1983-2015_Dodoma.nc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\Library\Climatic\Satellite\CMSAF_SIS_DailyMean_1983-2015_Dodoma.nc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
