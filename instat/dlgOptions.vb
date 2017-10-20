@@ -69,6 +69,8 @@ Public Class dlgOptions
         rdoSpanish.Enabled = False
         ucrNudDigits.SetMinMax(0, 22)
         ucrChkIncludeCommentsbyDefault.SetText("Include Comments by Default")
+        ucrChkViewClimaticMenu.SetText("Show Climatic Menu")
+        ucrChkViewProcurementMenu.SetText("Show Procurement Menu")
         ucrChkShowRCommandsinOutputWindow.SetText(" Show R Commands in Output Window")
         ucrChkShowSignifStars.SetText("Show stars on summary tables for coefficients")
         ucrChkShowDataonGrid.SetText("Display dialog's selected data frame in grid")
@@ -100,6 +102,8 @@ Public Class dlgOptions
         ucrInputComment.SetName(frmMain.clsInstatOptions.strComment)
         ucrWorkingDirectory.SetName(frmMain.clsInstatOptions.strWorkingDirectory)
         ucrChkIncludeCommentsbyDefault.Checked = frmMain.clsInstatOptions.bIncludeCommentDefault
+        ucrChkViewProcurementMenu.Checked = frmMain.clsInstatOptions.bShowProcurement
+        ucrChkViewClimaticMenu.Checked = frmMain.clsInstatOptions.bShowClimatic
         ucrChkShowRCommandsinOutputWindow.Checked = frmMain.clsInstatOptions.bCommandsinOutput
         ucrNudDigits.Value = frmMain.clsInstatOptions.iDigits
         ucrChkShowSignifStars.Checked = frmMain.clsInstatOptions.bShowSignifStars
@@ -109,13 +113,13 @@ Public Class dlgOptions
         Select Case frmMain.clsInstatOptions.strLanguageCultureCode
             Case "en-GB"
                 rdoEnglish.Checked = True
-                ' temp disabled as not functioning
-                'Case "fr-FR"
-                '    rdoFrench.Checked = True
-                'Case "sw-KE"
-                '    rdoKiswahili.Checked = True
-                'Case "es-ES"
-                '    rdoSpanish.Checked = True
+            ' temp disabled as not functioning
+            'Case "fr-FR"
+            '    rdoFrench.Checked = True
+            'Case "sw-KE"
+            '    rdoKiswahili.Checked = True
+            'Case "es-ES"
+            '    rdoSpanish.Checked = True
             Case Else
                 rdoEnglish.Checked = True
         End Select
@@ -145,6 +149,8 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetWorkingDirectory(strWorkingDirectory)
         frmMain.clsInstatOptions.SetGraphDisplayOption(strGraphDisplayOption)
         frmMain.clsInstatOptions.bIncludeCommentDefault = ucrChkIncludeCommentsbyDefault.Checked
+        frmMain.clsInstatOptions.bShowProcurement = ucrChkViewProcurementMenu.Checked
+        frmMain.clsInstatOptions.bShowClimatic = ucrChkViewClimaticMenu.Checked
         frmMain.clsInstatOptions.SetCommandInOutpt(ucrChkShowRCommandsinOutputWindow.Checked)
         frmMain.clsInstatOptions.SetDigits(ucrNudDigits.Value)
         frmMain.clsInstatOptions.SetSignifStars(ucrChkShowSignifStars.Checked)
@@ -321,7 +327,7 @@ Public Class dlgOptions
 
     End Sub
 
-    Private Sub AllControls_ControlValueChanged() Handles ucrNudMaxCols.ControlValueChanged, ucrNudAutoSaveMinutes.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkAutoSave.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrNudWaitSeconds.ControlValueChanged
+    Private Sub AllControls_ControlValueChanged() Handles ucrNudMaxCols.ControlValueChanged, ucrNudAutoSaveMinutes.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkAutoSave.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrNudWaitSeconds.ControlValueChanged, ucrChkViewClimaticMenu.ControlValueChanged, ucrChkViewProcurementMenu.ControlValueChanged
         ApplyEnabled(True)
     End Sub
 
@@ -358,6 +364,14 @@ Public Class dlgOptions
             LoadInstatOptions()
             ApplyEnabled(True)
         End If
+    End Sub
+
+    Private Sub ucrChkViewClimaticMenu_Load() Handles ucrChkViewClimaticMenu.ControlValueChanged
+        frmMain.clsInstatOptions.bShowClimatic = ucrChkViewClimaticMenu.Checked
+    End Sub
+
+    Private Sub ucrChkViewProcurementMenu_Load() Handles ucrChkViewProcurementMenu.ControlValueChanged
+        frmMain.clsInstatOptions.bShowProcurement = ucrChkViewProcurementMenu.Checked
     End Sub
 
     Private Sub ucrPnlGraphDisplay_ControlValueChanged() Handles ucrPnlGraphDisplay.ControlValueChanged
