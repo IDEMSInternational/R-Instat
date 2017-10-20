@@ -148,10 +148,11 @@ Partial Class frmMain
         Me.mnuViewScriptWindow = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewColumnMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator39 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ResetToDefaultLayoutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator22 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuViewClimaticMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewProcurementMenu = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator22 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ResetToDefaultLayoutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpHelpIntroduction = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpHistFAQ = New System.Windows.Forms.ToolStripMenuItem()
@@ -355,6 +356,7 @@ Partial Class frmMain
         Me.mnuPrepareDataFrameConvertColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareDataFrameColumnMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareDataFrameColumnStructure = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareDataFrameVariableSets = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator20 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuPrepareDataFrameReorderColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareDataFrameInsertColumnsRows = New System.Windows.Forms.ToolStripMenuItem()
@@ -365,7 +367,6 @@ Partial Class frmMain
         Me.ColourByPropertyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckData = New System.Windows.Forms.ToolStripMenuItem()
         Me.DuplicatesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPreparePrepareToShareJitter = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataExportOpenRefine = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataImportOpenRefine = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCheckDataPrePareToShareSdcPackage = New System.Windows.Forms.ToolStripMenuItem()
@@ -495,7 +496,8 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
-        Me.ToolStripSeparator39 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuPrepareCheckDataJitter = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator40 = New System.Windows.Forms.ToolStripSeparator()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1077,7 +1079,7 @@ Partial Class frmMain
         '
         Me.mnuModelOtherTwoVariablesTwoSamples.Enabled = False
         Me.mnuModelOtherTwoVariablesTwoSamples.Name = "mnuModelOtherTwoVariablesTwoSamples"
-        Me.mnuModelOtherTwoVariablesTwoSamples.Size = New System.Drawing.Size(266, 22)
+        Me.mnuModelOtherTwoVariablesTwoSamples.Size = New System.Drawing.Size(267, 22)
         Me.mnuModelOtherTwoVariablesTwoSamples.Tag = "Two_Samples..."
         Me.mnuModelOtherTwoVariablesTwoSamples.Text = "Two Samples..."
         '
@@ -1085,21 +1087,21 @@ Partial Class frmMain
         '
         Me.mnuModelOtherTwoVariablesSummaryData.Enabled = False
         Me.mnuModelOtherTwoVariablesSummaryData.Name = "mnuModelOtherTwoVariablesSummaryData"
-        Me.mnuModelOtherTwoVariablesSummaryData.Size = New System.Drawing.Size(266, 22)
+        Me.mnuModelOtherTwoVariablesSummaryData.Size = New System.Drawing.Size(267, 22)
         Me.mnuModelOtherTwoVariablesSummaryData.Tag = "Summary_Data..."
         Me.mnuModelOtherTwoVariablesSummaryData.Text = "Summary Data..."
         '
         'mnuModelOtherTwoVariablesSimpleRegression
         '
         Me.mnuModelOtherTwoVariablesSimpleRegression.Name = "mnuModelOtherTwoVariablesSimpleRegression"
-        Me.mnuModelOtherTwoVariablesSimpleRegression.Size = New System.Drawing.Size(266, 22)
+        Me.mnuModelOtherTwoVariablesSimpleRegression.Size = New System.Drawing.Size(267, 22)
         Me.mnuModelOtherTwoVariablesSimpleRegression.Tag = "Simple_Regression..."
         Me.mnuModelOtherTwoVariablesSimpleRegression.Text = "Simple Regression..."
         '
         'mnuModelOtherTwoVariablesOneWayANOVA
         '
         Me.mnuModelOtherTwoVariablesOneWayANOVA.Name = "mnuModelOtherTwoVariablesOneWayANOVA"
-        Me.mnuModelOtherTwoVariablesOneWayANOVA.Size = New System.Drawing.Size(266, 22)
+        Me.mnuModelOtherTwoVariablesOneWayANOVA.Size = New System.Drawing.Size(267, 22)
         Me.mnuModelOtherTwoVariablesOneWayANOVA.Tag = "One_Way_ANOVA..."
         Me.mnuModelOtherTwoVariablesOneWayANOVA.Text = "One Way ANOVA..."
         '
@@ -1107,14 +1109,14 @@ Partial Class frmMain
         '
         Me.mnuModelOtherTwoVariablesNonParametricTwoSamples.Enabled = False
         Me.mnuModelOtherTwoVariablesNonParametricTwoSamples.Name = "mnuModelOtherTwoVariablesNonParametricTwoSamples"
-        Me.mnuModelOtherTwoVariablesNonParametricTwoSamples.Size = New System.Drawing.Size(266, 22)
+        Me.mnuModelOtherTwoVariablesNonParametricTwoSamples.Size = New System.Drawing.Size(267, 22)
         Me.mnuModelOtherTwoVariablesNonParametricTwoSamples.Tag = "Non_Parameteric_Two_Samples..."
         Me.mnuModelOtherTwoVariablesNonParametricTwoSamples.Text = "Non Parametric Two Samples..."
         '
         'mnuModelOtherTwoVariablesNonParametricOneWayANOVA
         '
         Me.mnuModelOtherTwoVariablesNonParametricOneWayANOVA.Name = "mnuModelOtherTwoVariablesNonParametricOneWayANOVA"
-        Me.mnuModelOtherTwoVariablesNonParametricOneWayANOVA.Size = New System.Drawing.Size(266, 22)
+        Me.mnuModelOtherTwoVariablesNonParametricOneWayANOVA.Size = New System.Drawing.Size(267, 22)
         Me.mnuModelOtherTwoVariablesNonParametricOneWayANOVA.Tag = "Non_Parameteric_One_Way_ANOVA..."
         Me.mnuModelOtherTwoVariablesNonParametricOneWayANOVA.Text = "Non Parameteric One Way ANOVA..."
         '
@@ -1131,21 +1133,21 @@ Partial Class frmMain
         '
         Me.mnuModelOtherThreeVariablesSimpleWithGroups.Enabled = False
         Me.mnuModelOtherThreeVariablesSimpleWithGroups.Name = "mnuModelOtherThreeVariablesSimpleWithGroups"
-        Me.mnuModelOtherThreeVariablesSimpleWithGroups.Size = New System.Drawing.Size(260, 22)
+        Me.mnuModelOtherThreeVariablesSimpleWithGroups.Size = New System.Drawing.Size(262, 22)
         Me.mnuModelOtherThreeVariablesSimpleWithGroups.Tag = "Simple_with_groups..."
         Me.mnuModelOtherThreeVariablesSimpleWithGroups.Text = "Simple With Groups..."
         '
         'mnuModelOtherThreeVariablesNonParametricTwoWayANOVA
         '
         Me.mnuModelOtherThreeVariablesNonParametricTwoWayANOVA.Name = "mnuModelOtherThreeVariablesNonParametricTwoWayANOVA"
-        Me.mnuModelOtherThreeVariablesNonParametricTwoWayANOVA.Size = New System.Drawing.Size(260, 22)
+        Me.mnuModelOtherThreeVariablesNonParametricTwoWayANOVA.Size = New System.Drawing.Size(262, 22)
         Me.mnuModelOtherThreeVariablesNonParametricTwoWayANOVA.Tag = "Non_Parametric_Two_Way_ANOVA..."
         Me.mnuModelOtherThreeVariablesNonParametricTwoWayANOVA.Text = "Non Parametric Two Way ANOVA..."
         '
         'mnuModelOtherThreeVariablesChisquareTest
         '
         Me.mnuModelOtherThreeVariablesChisquareTest.Name = "mnuModelOtherThreeVariablesChisquareTest"
-        Me.mnuModelOtherThreeVariablesChisquareTest.Size = New System.Drawing.Size(260, 22)
+        Me.mnuModelOtherThreeVariablesChisquareTest.Size = New System.Drawing.Size(262, 22)
         Me.mnuModelOtherThreeVariablesChisquareTest.Tag = "Chi-square_Test"
         Me.mnuModelOtherThreeVariablesChisquareTest.Text = "Chi-square Test..."
         '
@@ -1162,7 +1164,7 @@ Partial Class frmMain
         '
         Me.mnuModelOtherGeneralANOVAGeneral.Enabled = False
         Me.mnuModelOtherGeneralANOVAGeneral.Name = "mnuModelOtherGeneralANOVAGeneral"
-        Me.mnuModelOtherGeneralANOVAGeneral.Size = New System.Drawing.Size(166, 22)
+        Me.mnuModelOtherGeneralANOVAGeneral.Size = New System.Drawing.Size(167, 22)
         Me.mnuModelOtherGeneralANOVAGeneral.Tag = "ANOVA_General..."
         Me.mnuModelOtherGeneralANOVAGeneral.Text = "ANOVA General..."
         '
@@ -1170,7 +1172,7 @@ Partial Class frmMain
         '
         Me.mnuModelOtherGeneralRegression.Enabled = False
         Me.mnuModelOtherGeneralRegression.Name = "mnuModelOtherGeneralRegression"
-        Me.mnuModelOtherGeneralRegression.Size = New System.Drawing.Size(166, 22)
+        Me.mnuModelOtherGeneralRegression.Size = New System.Drawing.Size(167, 22)
         Me.mnuModelOtherGeneralRegression.Tag = "Regression..."
         Me.mnuModelOtherGeneralRegression.Text = "Regression..."
         '
@@ -1178,7 +1180,7 @@ Partial Class frmMain
         '
         Me.mnuModelOtherGeneralLogLinear.Enabled = False
         Me.mnuModelOtherGeneralLogLinear.Name = "mnuModelOtherGeneralLogLinear"
-        Me.mnuModelOtherGeneralLogLinear.Size = New System.Drawing.Size(166, 22)
+        Me.mnuModelOtherGeneralLogLinear.Size = New System.Drawing.Size(167, 22)
         Me.mnuModelOtherGeneralLogLinear.Tag = "Log_Linear"
         Me.mnuModelOtherGeneralLogLinear.Text = "Log Linear..."
         '
@@ -1306,6 +1308,22 @@ Partial Class frmMain
         Me.mnuViewDataFrameMetadata.Tag = "Data_Frame_Metadata"
         Me.mnuViewDataFrameMetadata.Text = "Data Frame Metadata"
         '
+        'ToolStripSeparator39
+        '
+        Me.ToolStripSeparator39.Name = "ToolStripSeparator39"
+        Me.ToolStripSeparator39.Size = New System.Drawing.Size(193, 6)
+        '
+        'ResetToDefaultLayoutToolStripMenuItem
+        '
+        Me.ResetToDefaultLayoutToolStripMenuItem.Name = "ResetToDefaultLayoutToolStripMenuItem"
+        Me.ResetToDefaultLayoutToolStripMenuItem.Size = New System.Drawing.Size(196, 22)
+        Me.ResetToDefaultLayoutToolStripMenuItem.Text = "Reset to Default Layout"
+        '
+        'ToolStripSeparator22
+        '
+        Me.ToolStripSeparator22.Name = "ToolStripSeparator22"
+        Me.ToolStripSeparator22.Size = New System.Drawing.Size(193, 6)
+        '
         'mnuViewClimaticMenu
         '
         Me.mnuViewClimaticMenu.Name = "mnuViewClimaticMenu"
@@ -1319,17 +1337,6 @@ Partial Class frmMain
         Me.mnuViewProcurementMenu.Size = New System.Drawing.Size(196, 22)
         Me.mnuViewProcurementMenu.Tag = ""
         Me.mnuViewProcurementMenu.Text = "Procurement Menu"
-        '
-        'ToolStripSeparator22
-        '
-        Me.ToolStripSeparator22.Name = "ToolStripSeparator22"
-        Me.ToolStripSeparator22.Size = New System.Drawing.Size(193, 6)
-        '
-        'ResetToDefaultLayoutToolStripMenuItem
-        '
-        Me.ResetToDefaultLayoutToolStripMenuItem.Name = "ResetToDefaultLayoutToolStripMenuItem"
-        Me.ResetToDefaultLayoutToolStripMenuItem.Size = New System.Drawing.Size(196, 22)
-        Me.ResetToDefaultLayoutToolStripMenuItem.Text = "Reset to Default Layout"
         '
         'mnuHelp
         '
@@ -1788,19 +1795,19 @@ Partial Class frmMain
         'mnuClimaticPICSARainfall
         '
         Me.mnuClimaticPICSARainfall.Name = "mnuClimaticPICSARainfall"
-        Me.mnuClimaticPICSARainfall.Size = New System.Drawing.Size(150, 22)
+        Me.mnuClimaticPICSARainfall.Size = New System.Drawing.Size(151, 22)
         Me.mnuClimaticPICSARainfall.Text = "Rainfall..."
         '
         'mnuClimaticPICSATemperature
         '
         Me.mnuClimaticPICSATemperature.Name = "mnuClimaticPICSATemperature"
-        Me.mnuClimaticPICSATemperature.Size = New System.Drawing.Size(150, 22)
+        Me.mnuClimaticPICSATemperature.Size = New System.Drawing.Size(151, 22)
         Me.mnuClimaticPICSATemperature.Text = "Temperature..."
         '
         'mnuClimaticPICSACrops
         '
         Me.mnuClimaticPICSACrops.Name = "mnuClimaticPICSACrops"
-        Me.mnuClimaticPICSACrops.Size = New System.Drawing.Size(150, 22)
+        Me.mnuClimaticPICSACrops.Size = New System.Drawing.Size(151, 22)
         Me.mnuClimaticPICSACrops.Text = "Crops..."
         '
         'mnuCMSAF
@@ -2703,7 +2710,7 @@ Partial Class frmMain
         '
         'mnuPrepareDataFrame
         '
-        Me.mnuPrepareDataFrame.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareDataFrameViewData, Me.mnuPrepareDataFrameRenameColumn, Me.mnuPrepareDataFrameRowNumbersNames, Me.ToolStripSeparator1, Me.mnuPrepareDataFrameSort, Me.mnuPrepareDataFrameFilter, Me.mnuPrepareDataFrameReplaceValues, Me.ToolStripSeparator2, Me.mnuPrepareDataFrameConvertColumns, Me.mnuPrepareDataFrameColumnMetadata, Me.mnuPrepareDataFrameColumnStructure, Me.ToolStripSeparator20, Me.mnuPrepareDataFrameReorderColumns, Me.mnuPrepareDataFrameInsertColumnsRows, Me.mnuPrepareDataFrameDeleteColumnsRows, Me.mnuPrepareDataFrameProtectColumn, Me.mnuPrepareDataFrameHideColumns, Me.mnuPrepareDataFrameFreezeColumns, Me.ColourByPropertyToolStripMenuItem})
+        Me.mnuPrepareDataFrame.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareDataFrameViewData, Me.mnuPrepareDataFrameRenameColumn, Me.mnuPrepareDataFrameRowNumbersNames, Me.ToolStripSeparator1, Me.mnuPrepareDataFrameSort, Me.mnuPrepareDataFrameFilter, Me.mnuPrepareDataFrameReplaceValues, Me.ToolStripSeparator2, Me.mnuPrepareDataFrameConvertColumns, Me.mnuPrepareDataFrameColumnMetadata, Me.mnuPrepareDataFrameColumnStructure, Me.mnuPrepareDataFrameVariableSets, Me.ToolStripSeparator20, Me.mnuPrepareDataFrameReorderColumns, Me.mnuPrepareDataFrameInsertColumnsRows, Me.mnuPrepareDataFrameDeleteColumnsRows, Me.mnuPrepareDataFrameProtectColumn, Me.mnuPrepareDataFrameHideColumns, Me.mnuPrepareDataFrameFreezeColumns, Me.ColourByPropertyToolStripMenuItem})
         Me.mnuPrepareDataFrame.Name = "mnuPrepareDataFrame"
         Me.mnuPrepareDataFrame.Size = New System.Drawing.Size(172, 22)
         Me.mnuPrepareDataFrame.Tag = "Data_Frame"
@@ -2782,6 +2789,12 @@ Partial Class frmMain
         Me.mnuPrepareDataFrameColumnStructure.Tag = "Column_Structure..."
         Me.mnuPrepareDataFrameColumnStructure.Text = "Column Structure..."
         '
+        'mnuDataFrameVariableSets
+        '
+        Me.mnuPrepareDataFrameVariableSets.Name = "mnuDataFrameVariableSets"
+        Me.mnuPrepareDataFrameVariableSets.Size = New System.Drawing.Size(200, 22)
+        Me.mnuPrepareDataFrameVariableSets.Text = "Variable Sets"
+        '
         'ToolStripSeparator20
         '
         Me.ToolStripSeparator20.Name = "ToolStripSeparator20"
@@ -2840,7 +2853,7 @@ Partial Class frmMain
         'mnuPrepareCheckData
         '
         Me.mnuPrepareCheckData.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.mnuPrepareCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DuplicatesToolStripMenuItem, Me.mnuPreparePrepareToShareJitter, Me.mnuPrepareCheckDataExportOpenRefine, Me.mnuPrepareCheckDataImportOpenRefine, Me.mnuCheckDataPrePareToShareSdcPackage})
+        Me.mnuPrepareCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DuplicatesToolStripMenuItem, Me.mnuPrepareCheckDataExportOpenRefine, Me.mnuPrepareCheckDataImportOpenRefine, Me.ToolStripSeparator40, Me.mnuPrepareCheckDataJitter, Me.mnuCheckDataPrePareToShareSdcPackage})
         Me.mnuPrepareCheckData.Name = "mnuPrepareCheckData"
         Me.mnuPrepareCheckData.Size = New System.Drawing.Size(172, 22)
         Me.mnuPrepareCheckData.Text = "Check Data"
@@ -2850,13 +2863,6 @@ Partial Class frmMain
         Me.DuplicatesToolStripMenuItem.Name = "DuplicatesToolStripMenuItem"
         Me.DuplicatesToolStripMenuItem.Size = New System.Drawing.Size(245, 22)
         Me.DuplicatesToolStripMenuItem.Text = "Duplicates..."
-        '
-        'mnuPreparePrepareToShareJitter
-        '
-        Me.mnuPreparePrepareToShareJitter.Enabled = False
-        Me.mnuPreparePrepareToShareJitter.Name = "mnuPreparePrepareToShareJitter"
-        Me.mnuPreparePrepareToShareJitter.Size = New System.Drawing.Size(245, 22)
-        Me.mnuPreparePrepareToShareJitter.Text = "Jitter..."
         '
         'mnuPrepareCheckDataExportOpenRefine
         '
@@ -3441,94 +3447,94 @@ Partial Class frmMain
         'mnuProcurementDefineData
         '
         Me.mnuProcurementDefineData.Name = "mnuProcurementDefineData"
-        Me.mnuProcurementDefineData.Size = New System.Drawing.Size(292, 22)
+        Me.mnuProcurementDefineData.Size = New System.Drawing.Size(293, 22)
         Me.mnuProcurementDefineData.Text = "Define Procurement Data..."
         '
         'mnuProcurementPrepare
         '
         Me.mnuProcurementPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementPrepareStandardiseCountryName, Me.mnuProcurementPrepareMergeAdditionalData, Me.mnuProcurementPrepareFilterByCountry, Me.mnuProcurementPrepareUseAwardDate, Me.mnuProcurementPrepareSetFactorReferenceLevel, Me.mnuProcurementPrepareDefineContractValueCategories, Me.mnuProcurementPrepareRecodeNumericIntoQuantiles})
         Me.mnuProcurementPrepare.Name = "mnuProcurementPrepare"
-        Me.mnuProcurementPrepare.Size = New System.Drawing.Size(292, 22)
+        Me.mnuProcurementPrepare.Size = New System.Drawing.Size(293, 22)
         Me.mnuProcurementPrepare.Text = "Prepare"
         '
         'mnuProcurementPrepareStandardiseCountryName
         '
         Me.mnuProcurementPrepareStandardiseCountryName.Name = "mnuProcurementPrepareStandardiseCountryName"
-        Me.mnuProcurementPrepareStandardiseCountryName.Size = New System.Drawing.Size(256, 22)
+        Me.mnuProcurementPrepareStandardiseCountryName.Size = New System.Drawing.Size(257, 22)
         Me.mnuProcurementPrepareStandardiseCountryName.Text = "Standardise Country Names..."
         '
         'mnuProcurementPrepareMergeAdditionalData
         '
         Me.mnuProcurementPrepareMergeAdditionalData.Name = "mnuProcurementPrepareMergeAdditionalData"
-        Me.mnuProcurementPrepareMergeAdditionalData.Size = New System.Drawing.Size(256, 22)
+        Me.mnuProcurementPrepareMergeAdditionalData.Size = New System.Drawing.Size(257, 22)
         Me.mnuProcurementPrepareMergeAdditionalData.Text = "Merge Additional Data..."
         '
         'mnuProcurementPrepareFilterByCountry
         '
         Me.mnuProcurementPrepareFilterByCountry.Name = "mnuProcurementPrepareFilterByCountry"
-        Me.mnuProcurementPrepareFilterByCountry.Size = New System.Drawing.Size(256, 22)
+        Me.mnuProcurementPrepareFilterByCountry.Size = New System.Drawing.Size(257, 22)
         Me.mnuProcurementPrepareFilterByCountry.Text = "Filter by Country (or other)..."
         '
         'mnuProcurementPrepareUseAwardDate
         '
         Me.mnuProcurementPrepareUseAwardDate.Name = "mnuProcurementPrepareUseAwardDate"
-        Me.mnuProcurementPrepareUseAwardDate.Size = New System.Drawing.Size(256, 22)
+        Me.mnuProcurementPrepareUseAwardDate.Size = New System.Drawing.Size(257, 22)
         Me.mnuProcurementPrepareUseAwardDate.Text = "Use Award Date (or other)..."
         '
         'mnuProcurementPrepareSetFactorReferenceLevel
         '
         Me.mnuProcurementPrepareSetFactorReferenceLevel.Name = "mnuProcurementPrepareSetFactorReferenceLevel"
-        Me.mnuProcurementPrepareSetFactorReferenceLevel.Size = New System.Drawing.Size(256, 22)
+        Me.mnuProcurementPrepareSetFactorReferenceLevel.Size = New System.Drawing.Size(257, 22)
         Me.mnuProcurementPrepareSetFactorReferenceLevel.Text = "Set Factor Reference Level..."
         '
         'mnuProcurementPrepareDefineContractValueCategories
         '
         Me.mnuProcurementPrepareDefineContractValueCategories.Name = "mnuProcurementPrepareDefineContractValueCategories"
-        Me.mnuProcurementPrepareDefineContractValueCategories.Size = New System.Drawing.Size(256, 22)
+        Me.mnuProcurementPrepareDefineContractValueCategories.Size = New System.Drawing.Size(257, 22)
         Me.mnuProcurementPrepareDefineContractValueCategories.Text = "Define Contract Value Categories..."
         '
         'mnuProcurementPrepareRecodeNumericIntoQuantiles
         '
         Me.mnuProcurementPrepareRecodeNumericIntoQuantiles.Name = "mnuProcurementPrepareRecodeNumericIntoQuantiles"
-        Me.mnuProcurementPrepareRecodeNumericIntoQuantiles.Size = New System.Drawing.Size(256, 22)
+        Me.mnuProcurementPrepareRecodeNumericIntoQuantiles.Size = New System.Drawing.Size(257, 22)
         Me.mnuProcurementPrepareRecodeNumericIntoQuantiles.Text = "Recode Numeric into Quantiles..."
         '
         'mnuProcurementDescribe
         '
         Me.mnuProcurementDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementDescribeOneVar, Me.mnuProcurementDescribeTwoVar, Me.mnuProcurementDescribeMaps})
         Me.mnuProcurementDescribe.Name = "mnuProcurementDescribe"
-        Me.mnuProcurementDescribe.Size = New System.Drawing.Size(292, 22)
+        Me.mnuProcurementDescribe.Size = New System.Drawing.Size(293, 22)
         Me.mnuProcurementDescribe.Text = "Describe"
         '
         'mnuProcurementDescribeOneVar
         '
         Me.mnuProcurementDescribeOneVar.Name = "mnuProcurementDescribeOneVar"
-        Me.mnuProcurementDescribeOneVar.Size = New System.Drawing.Size(320, 22)
+        Me.mnuProcurementDescribeOneVar.Size = New System.Drawing.Size(322, 22)
         Me.mnuProcurementDescribeOneVar.Text = "One Variable Frequencies..."
         '
         'mnuProcurementDescribeTwoVar
         '
         Me.mnuProcurementDescribeTwoVar.Name = "mnuProcurementDescribeTwoVar"
-        Me.mnuProcurementDescribeTwoVar.Size = New System.Drawing.Size(320, 22)
+        Me.mnuProcurementDescribeTwoVar.Size = New System.Drawing.Size(322, 22)
         Me.mnuProcurementDescribeTwoVar.Text = "Two Variable Frequencies by Sector (or other)..."
         '
         'mnuProcurementDescribeMaps
         '
         Me.mnuProcurementDescribeMaps.Name = "mnuProcurementDescribeMaps"
-        Me.mnuProcurementDescribeMaps.Size = New System.Drawing.Size(320, 22)
+        Me.mnuProcurementDescribeMaps.Size = New System.Drawing.Size(322, 22)
         Me.mnuProcurementDescribeMaps.Text = "Map Country Values..."
         '
         'mnuProcurementDefineCorruption
         '
         Me.mnuProcurementDefineCorruption.Name = "mnuProcurementDefineCorruption"
-        Me.mnuProcurementDefineCorruption.Size = New System.Drawing.Size(292, 22)
+        Me.mnuProcurementDefineCorruption.Size = New System.Drawing.Size(293, 22)
         Me.mnuProcurementDefineCorruption.Text = "Define Corruption Risk Output Variables..."
         '
         'mnuProcurementModel
         '
         Me.mnuProcurementModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementModelFitModelToolStripMenuItem})
         Me.mnuProcurementModel.Name = "mnuProcurementModel"
-        Me.mnuProcurementModel.Size = New System.Drawing.Size(292, 22)
+        Me.mnuProcurementModel.Size = New System.Drawing.Size(293, 22)
         Me.mnuProcurementModel.Text = "Model"
         '
         'mnuProcurementModelFitModelToolStripMenuItem
@@ -3540,26 +3546,26 @@ Partial Class frmMain
         'mnuProcurementDefineRedFlags
         '
         Me.mnuProcurementDefineRedFlags.Name = "mnuProcurementDefineRedFlags"
-        Me.mnuProcurementDefineRedFlags.Size = New System.Drawing.Size(292, 22)
+        Me.mnuProcurementDefineRedFlags.Size = New System.Drawing.Size(293, 22)
         Me.mnuProcurementDefineRedFlags.Text = "Define Red Flag Variables..."
         '
         'mnuProcurementCorrelations
         '
         Me.mnuProcurementCorrelations.Name = "mnuProcurementCorrelations"
-        Me.mnuProcurementCorrelations.Size = New System.Drawing.Size(292, 22)
+        Me.mnuProcurementCorrelations.Size = New System.Drawing.Size(293, 22)
         Me.mnuProcurementCorrelations.Text = "Correlations (Red Flags or others)..."
         '
         'mnuProcurementCalculateCRI
         '
         Me.mnuProcurementCalculateCRI.Name = "mnuProcurementCalculateCRI"
-        Me.mnuProcurementCalculateCRI.Size = New System.Drawing.Size(292, 22)
+        Me.mnuProcurementCalculateCRI.Size = New System.Drawing.Size(293, 22)
         Me.mnuProcurementCalculateCRI.Text = "Calculate Corruption Risk Index (CRI)..."
         '
         'mnuProcurementUseCRI
         '
         Me.mnuProcurementUseCRI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementUseCRISummariseCRIbyCountry})
         Me.mnuProcurementUseCRI.Name = "mnuProcurementUseCRI"
-        Me.mnuProcurementUseCRI.Size = New System.Drawing.Size(292, 22)
+        Me.mnuProcurementUseCRI.Size = New System.Drawing.Size(293, 22)
         Me.mnuProcurementUseCRI.Text = "Use CRI"
         '
         'mnuProcurementUseCRISummariseCRIbyCountry
@@ -3571,14 +3577,14 @@ Partial Class frmMain
         'mnuProcurementMaps
         '
         Me.mnuProcurementMaps.Name = "mnuProcurementMaps"
-        Me.mnuProcurementMaps.Size = New System.Drawing.Size(292, 22)
+        Me.mnuProcurementMaps.Size = New System.Drawing.Size(293, 22)
         Me.mnuProcurementMaps.Text = "Map Country Values..."
         '
         'mnuTools
         '
         Me.mnuTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsRunRCode, Me.mnuToolsRestartR, Me.mnuToolsCheckForUpdates, Me.mnuToolsClearOutputWindow, Me.ToolStripSeparator5, Me.mnuToolsSaveCurrentOptions, Me.mnuToolsLoadOptions, Me.mnuToolsOptions})
         Me.mnuTools.Name = "mnuTools"
-        Me.mnuTools.Size = New System.Drawing.Size(47, 20)
+        Me.mnuTools.Size = New System.Drawing.Size(48, 20)
         Me.mnuTools.Text = "Tools"
         '
         'mnuToolsRunRCode
@@ -3808,10 +3814,17 @@ Partial Class frmMain
         Me.ucrOutput.Size = New System.Drawing.Size(444, 225)
         Me.ucrOutput.TabIndex = 0
         '
-        'ToolStripSeparator39
+        'ToolStripMenuItem3
         '
-        Me.ToolStripSeparator39.Name = "ToolStripSeparator39"
-        Me.ToolStripSeparator39.Size = New System.Drawing.Size(193, 6)
+        Me.mnuPrepareCheckDataJitter.Enabled = False
+        Me.mnuPrepareCheckDataJitter.Name = "ToolStripMenuItem3"
+        Me.mnuPrepareCheckDataJitter.Size = New System.Drawing.Size(245, 22)
+        Me.mnuPrepareCheckDataJitter.Text = "Jitter..."
+        '
+        'ToolStripSeparator40
+        '
+        Me.ToolStripSeparator40.Name = "ToolStripSeparator40"
+        Me.ToolStripSeparator40.Size = New System.Drawing.Size(242, 6)
         '
         'frmMain
         '
@@ -4080,7 +4093,6 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator9 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator13 As ToolStripSeparator
     Friend WithEvents mnuPrepareCheckData As ToolStripMenuItem
-    Friend WithEvents mnuPreparePrepareToShareJitter As ToolStripMenuItem
     Friend WithEvents mnuCheckDataPrePareToShareSdcPackage As ToolStripMenuItem
     Friend WithEvents ColourByPropertyToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataObjectHideDataframes As ToolStripMenuItem
@@ -4317,4 +4329,7 @@ Partial Class frmMain
     Friend WithEvents mnuViewClimaticMenu As ToolStripMenuItem
     Friend WithEvents mnuViewProcurementMenu As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator39 As ToolStripSeparator
+    Friend WithEvents mnuPrepareDataFrameVariableSets As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator40 As ToolStripSeparator
+    Friend WithEvents mnuPrepareCheckDataJitter As ToolStripMenuItem
 End Class
