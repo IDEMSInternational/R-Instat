@@ -102,8 +102,8 @@ Public Class dlgOptions
         ucrInputComment.SetName(frmMain.clsInstatOptions.strComment)
         ucrWorkingDirectory.SetName(frmMain.clsInstatOptions.strWorkingDirectory)
         ucrChkIncludeCommentsbyDefault.Checked = frmMain.clsInstatOptions.bIncludeCommentDefault
-        ucrChkViewProcurementMenu.Checked = frmMain.clsInstatOptions.bShowProcurement
-        ucrChkViewClimaticMenu.Checked = frmMain.clsInstatOptions.bShowClimatic
+        ucrChkViewProcurementMenu.Checked = frmMain.clsInstatOptions.bShowProcurementMenu
+        ucrChkViewClimaticMenu.Checked = frmMain.clsInstatOptions.bShowClimaticMenu
         ucrChkShowRCommandsinOutputWindow.Checked = frmMain.clsInstatOptions.bCommandsinOutput
         ucrNudDigits.Value = frmMain.clsInstatOptions.iDigits
         ucrChkShowSignifStars.Checked = frmMain.clsInstatOptions.bShowSignifStars
@@ -149,8 +149,8 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetWorkingDirectory(strWorkingDirectory)
         frmMain.clsInstatOptions.SetGraphDisplayOption(strGraphDisplayOption)
         frmMain.clsInstatOptions.bIncludeCommentDefault = ucrChkIncludeCommentsbyDefault.Checked
-        frmMain.clsInstatOptions.bShowProcurement = ucrChkViewProcurementMenu.Checked
-        frmMain.clsInstatOptions.bShowClimatic = ucrChkViewClimaticMenu.Checked
+        frmMain.clsInstatOptions.SetShowProcurementMenu(ucrChkViewProcurementMenu.Checked)
+        frmMain.clsInstatOptions.SetShowClimaticMenu(ucrChkViewClimaticMenu.Checked)
         frmMain.clsInstatOptions.SetCommandInOutpt(ucrChkShowRCommandsinOutputWindow.Checked)
         frmMain.clsInstatOptions.SetDigits(ucrNudDigits.Value)
         frmMain.clsInstatOptions.SetSignifStars(ucrChkShowSignifStars.Checked)
@@ -364,14 +364,6 @@ Public Class dlgOptions
             LoadInstatOptions()
             ApplyEnabled(True)
         End If
-    End Sub
-
-    Private Sub ucrChkViewClimaticMenu_Load() Handles ucrChkViewClimaticMenu.ControlValueChanged
-        frmMain.clsInstatOptions.bShowClimatic = ucrChkViewClimaticMenu.Checked
-    End Sub
-
-    Private Sub ucrChkViewProcurementMenu_Load() Handles ucrChkViewProcurementMenu.ControlValueChanged
-        frmMain.clsInstatOptions.bShowProcurement = ucrChkViewProcurementMenu.Checked
     End Sub
 
     Private Sub ucrPnlGraphDisplay_ControlValueChanged() Handles ucrPnlGraphDisplay.ControlValueChanged
