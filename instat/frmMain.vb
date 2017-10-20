@@ -100,6 +100,10 @@ Public Class frmMain
         clsRecentItems.checkOnLoad()
         Cursor = Cursors.Default
         SetMainMenusEnabled(True)
+
+        mnuViewClimaticMenu.Checked = clsInstatOptions.bShowClimaticMenu
+        mnuViewProcurementMenu.Checked = clsInstatOptions.bShowProcurementMenu
+
     End Sub
 
     Private Sub SetMainMenusEnabled(bEnabled As Boolean)
@@ -1730,5 +1734,23 @@ Public Class frmMain
 
     Private Sub mnuTbOpen_ButtonClick(sender As Object, e As EventArgs) Handles mnuTbOpen.ButtonClick
         dlgImportDataset.ShowDialog()
+    End Sub
+
+    Public Sub SetShowProcurementMenu(bNewShowProcurementMenu As Boolean)
+        mnuProcurement.Visible = bNewShowProcurementMenu
+        mnuViewProcurementMenu.Checked = bNewShowProcurementMenu
+    End Sub
+
+    Public Sub SetShowClimaticMenu(bNewShowClimaticMenu As Boolean)
+        mnuClimatic.Visible = bNewShowClimaticMenu
+        mnuViewClimaticMenu.Checked = bNewShowClimaticMenu
+    End Sub
+
+    Private Sub mnuViewClimaticMenu_Click(sender As Object, e As EventArgs) Handles mnuViewClimaticMenu.Click
+        clsInstatOptions.SetShowClimaticMenu(Not mnuViewClimaticMenu.Checked)
+    End Sub
+
+    Private Sub mnuViewProcurementMenu_Click(sender As Object, e As EventArgs) Handles mnuViewProcurementMenu.Click
+        clsInstatOptions.SetShowProcurementMenu(Not mnuViewProcurementMenu.Checked)
     End Sub
 End Class
