@@ -892,7 +892,7 @@ data_object$set("public", "add_defaults_variables_metadata", function(column_nam
     if(!self$is_variables_metadata(scientific_label, column)) {
       self$append_to_variables_metadata(column, scientific_label, FALSE)
     }
-    if(!self$is_variables_metadata(signif_figures_label, column)) {
+    if(!self$is_variables_metadata(signif_figures_label, column) || is.na(self$get_variables_metadata(property = signif_figures_label, column = column))) {
       self$append_to_variables_metadata(column, signif_figures_label, get_default_significant_figures(self$get_columns_from_data(column, use_current_filter = FALSE)))
     }
     if(self$is_variables_metadata(labels_label, column)) {
@@ -1166,6 +1166,9 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
     self$add_columns_to_data(col_name = col_name, col_data = new_col)
     
     if(keep_attr) {
+      if(to_type %in% c("numeric", "integer") && signif_figures_label %in% names(tmp_attr) && is.na(tmp_attr[[signif_figures_label]])) {
+       tmp_attr[[signif_figures_label]] <- NULL
+      }
       self$append_column_attributes(col_name = col_name, new_attr = tmp_attr)
     }
   }
@@ -1590,7 +1593,7 @@ data_object$set("public", "get_object_names", function(type = "", as_list = FALS
   else {
     if(type == model_label) out = names(private$objects)[!sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "htmlTable") %in% class(x)))]
     else if(type == graph_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob") %in% class(x)))]
-    else if(type == table_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("htmlTable", "data.frame") %in% class(x)))]
+    else if(type == table_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("htmlTable", "data.frame", "list") %in% class(x)))]
     else stop("type: ", type, " not recognised")
   }
   if(length(excluded_items) > 0) {
@@ -2353,7 +2356,9 @@ data_object$set("public","infill_missing_dates", function(date_name, factors, re
     }
     if(merge_required) {
       all_dates_factors <- plyr::rbind.fill(full_dates_list)
-      self$merge_data(all_dates_factors, by = c(date_name, factors), type = "full")
+      by <- c(date_name, factors)
+      names(by) <- by
+      self$merge_data(all_dates_factors, by = by, type = "full")
       if(resort) self$sort_dataframe(col_names = c(factors, date_name))
     }
   }

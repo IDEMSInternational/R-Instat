@@ -692,6 +692,7 @@ Public Class dlgImportDataset
                 clsImportExcel.AddParameter("which", ucrInputSelectSheetExcel.cboInput.SelectedIndex + 1)
                 If Not ucrSaveFile.UserTyped() Then
                     ucrSaveFile.SetName(ucrInputSelectSheetExcel.GetText(), bSilent:=True)
+                    ucrSaveFile.Focus()
                 End If
             End If
             RefreshFrameView()
