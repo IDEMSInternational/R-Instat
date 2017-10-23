@@ -76,7 +76,6 @@ Partial Class ucrDataView
         Me.mnuFilter = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuRemoveCurrentFilter = New System.Windows.Forms.ToolStripMenuItem()
         Me.statusColumnMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.insertSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.deleteDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.renameSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.reorderSheet = New System.Windows.Forms.ToolStripMenuItem()
@@ -326,15 +325,9 @@ Partial Class ucrDataView
         '
         'statusColumnMenu
         '
-        Me.statusColumnMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.insertSheet, Me.deleteDataFrame, Me.renameSheet, Me.reorderSheet, Me.CopySheet, Me.HideSheet, Me.unhideSheet, Me.ViewSheet})
+        Me.statusColumnMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.deleteDataFrame, Me.renameSheet, Me.HideSheet, Me.unhideSheet, Me.CopySheet, Me.reorderSheet, Me.ViewSheet})
         Me.statusColumnMenu.Name = "statusColumnMenu"
         Me.statusColumnMenu.Size = New System.Drawing.Size(163, 180)
-        '
-        'insertSheet
-        '
-        Me.insertSheet.Name = "insertSheet"
-        Me.insertSheet.Size = New System.Drawing.Size(162, 22)
-        Me.insertSheet.Text = "Insert..."
         '
         'deleteDataFrame
         '
@@ -363,7 +356,6 @@ Partial Class ucrDataView
         '
         'HideSheet
         '
-        Me.HideSheet.Enabled = False
         Me.HideSheet.Name = "HideSheet"
         Me.HideSheet.Size = New System.Drawing.Size(162, 22)
         Me.HideSheet.Text = "Hide"
@@ -373,7 +365,7 @@ Partial Class ucrDataView
         Me.unhideSheet.Enabled = False
         Me.unhideSheet.Name = "unhideSheet"
         Me.unhideSheet.Size = New System.Drawing.Size(162, 22)
-        Me.unhideSheet.Text = "Unhide"
+        Me.unhideSheet.Text = "Unhide..."
         '
         'ViewSheet
         '
@@ -479,7 +471,6 @@ Partial Class ucrDataView
     Private WithEvents mnuInsertRowsAfter As ToolStripMenuItem
     Private WithEvents mnuDeleteRows As ToolStripMenuItem
     Friend WithEvents statusColumnMenu As ContextMenuStrip
-    Friend WithEvents insertSheet As ToolStripMenuItem
     Friend WithEvents deleteDataFrame As ToolStripMenuItem
     Friend WithEvents renameSheet As ToolStripMenuItem
     Friend WithEvents mnuColumnRename As ToolStripMenuItem
