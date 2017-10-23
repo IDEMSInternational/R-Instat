@@ -805,10 +805,6 @@ Public Class frmMain
         dlgRowNamesOrNumbers.ShowDialog()
     End Sub
 
-    Private Sub JitterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuPreparePrepareToShareJitter.Click
-        dlgJitter.ShowDialog()
-    End Sub
-
     Private Sub mnuModelFourVariablesFitModel_Click(sender As Object, e As EventArgs) Handles mnuModelFourVariablesFitModel.Click
         dlgFourVariableModelling.ShowDialog()
     End Sub
@@ -1752,5 +1748,13 @@ Public Class frmMain
 
     Private Sub mnuViewProcurementMenu_Click(sender As Object, e As EventArgs) Handles mnuViewProcurementMenu.Click
         clsInstatOptions.SetShowProcurementMenu(Not mnuViewProcurementMenu.Checked)
+    End Sub
+
+    Private Sub mnuPrepareDataFrameVariableSets_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameVariableSets.Click
+        dlgVariableSets.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareCheckDataJitter_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataJitter.Click
+        dlgJitter.ShowDialog()
     End Sub
 End Class
