@@ -35,6 +35,8 @@ Imports RDotNet
     Public strGraphDisplayOption As String
     Public bCommandsinOutput As Nullable(Of Boolean)
     Public bIncludeCommentDefault As Nullable(Of Boolean) 'sets the default for comments on the dialog
+    Public bShowProcurementMenu As Nullable(Of Boolean)
+    Public bShowClimaticMenu As Nullable(Of Boolean)
     Public iDigits As Nullable(Of Integer)
     Public bShowSignifStars As Nullable(Of Boolean)
     Public bChangeDataFrame As Nullable(Of Boolean)
@@ -49,6 +51,8 @@ Imports RDotNet
         bIncludeRDefaultParameters = clsInstatOptionsDefaults.DEFAULTbIncludeRDefaultParameters
         bCommandsinOutput = clsInstatOptionsDefaults.DEFAULTbCommandsinOutput
         bIncludeCommentDefault = clsInstatOptionsDefaults.DEFAULTbIncludeCommentDefault
+        bShowClimaticMenu = clsInstatOptionsDefaults.DEFAULTbShowClimaticMenu
+        bShowProcurementMenu = clsInstatOptionsDefaults.DEFAULTbShowProcurementMenu
         fntOutput = clsInstatOptionsDefaults.DEFAULTfntOutput
         clrOutput = clsInstatOptionsDefaults.DEFAULTclrOutput
         fntComment = clsInstatOptionsDefaults.DEFAULTfntComment
@@ -173,6 +177,18 @@ Imports RDotNet
             SetIncludeCommentByDefault(bIncludeCommentDefault)
         Else
             SetIncludeCommentByDefault(clsInstatOptionsDefaults.DEFAULTbIncludeCommentDefault)
+        End If
+
+        If bShowProcurementMenu.HasValue Then
+            SetShowProcurementMenu(bShowProcurementMenu)
+        Else
+            SetShowProcurementMenu(clsInstatOptionsDefaults.DEFAULTbShowProcurementMenu)
+        End If
+
+        If bShowClimaticMenu.HasValue Then
+            SetShowClimaticMenu(bShowClimaticMenu)
+        Else
+            SetShowClimaticMenu(clsInstatOptionsDefaults.DEFAULTbShowClimaticMenu)
         End If
 
         If bIncludeRDefaultParameters.HasValue Then
@@ -357,6 +373,16 @@ Imports RDotNet
 
     Public Sub SetIncludeCommentByDefault(bNewInclude As Boolean)
         bIncludeCommentDefault = bNewInclude
+    End Sub
+
+    Public Sub SetShowProcurementMenu(bNewShowProcurementMenu As Boolean)
+        bShowProcurementMenu = bNewShowProcurementMenu
+        frmMain.SetShowProcurementMenu(bNewShowProcurementMenu)
+    End Sub
+
+    Public Sub SetShowClimaticMenu(bNewShowClimaticMenu As Boolean)
+        bShowClimaticMenu = bNewShowClimaticMenu
+        frmMain.SetShowClimaticMenu(bNewShowClimaticMenu)
     End Sub
 
     Public Sub SetIncludeRDefaultParameters(bNewInclude As Boolean)
