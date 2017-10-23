@@ -286,6 +286,11 @@ instat_object$set("public", "get_column_labels", function(data_name, columns) {
 }
 )
 
+instat_object$set("public", "get_data_frame_metadata", function(data_name, label, include_calculated = TRUE, excluded_not_for_display = TRUE) {
+  return(self$get_data_objects(data_name)$get_metadata(label = label, include_calculated = include_calculated, excluded_not_for_display = excluded_not_for_display))
+}
+)
+
 instat_object$set("public", "get_combined_metadata", function(convert_to_character = FALSE) { 
   retlist <- data.frame()
   i = 1
@@ -312,9 +317,13 @@ instat_object$set("public", "get_metadata", function(name) {
 } 
 )
 
-instat_object$set("public", "get_data_names", function(as_list = FALSE, include, exclude, excluded_items) { 
-  if(as_list) return(list(data_names = names(private$.data_objects)))
-  else return(names(private$.data_objects))
+instat_object$set("public", "get_data_names", function(as_list = FALSE, include, exclude, excluded_items, include_hidden = TRUE) { 
+  ret <- names(private$.data_objects)
+  if(!include_hidden) {
+    ret <- ret[sapply(ret, function(x) !isTRUE(self$get_data_objects(x)$get_metadata(label = is_hidden_label)))]
+  }
+  if(as_list) return(list(data_names = ret))
+  else return(ret)
 } 
 )
 
