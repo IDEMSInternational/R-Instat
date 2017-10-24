@@ -78,10 +78,10 @@ Partial Class ucrDataView
         Me.statusColumnMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.deleteDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.renameSheet = New System.Windows.Forms.ToolStripMenuItem()
-        Me.reorderSheet = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CopySheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.HideSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.unhideSheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CopySheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.reorderSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblNoData = New System.Windows.Forms.Label()
         Me.lblRowDisplay = New System.Windows.Forms.Label()
@@ -341,19 +341,6 @@ Partial Class ucrDataView
         Me.renameSheet.Size = New System.Drawing.Size(162, 22)
         Me.renameSheet.Text = "Rename..."
         '
-        'reorderSheet
-        '
-        Me.reorderSheet.Enabled = False
-        Me.reorderSheet.Name = "reorderSheet"
-        Me.reorderSheet.Size = New System.Drawing.Size(162, 22)
-        Me.reorderSheet.Text = "Reorder..."
-        '
-        'CopySheet
-        '
-        Me.CopySheet.Name = "CopySheet"
-        Me.CopySheet.Size = New System.Drawing.Size(162, 22)
-        Me.CopySheet.Text = "Copy..."
-        '
         'HideSheet
         '
         Me.HideSheet.Name = "HideSheet"
@@ -362,10 +349,22 @@ Partial Class ucrDataView
         '
         'unhideSheet
         '
-        Me.unhideSheet.Enabled = False
         Me.unhideSheet.Name = "unhideSheet"
         Me.unhideSheet.Size = New System.Drawing.Size(162, 22)
         Me.unhideSheet.Text = "Unhide..."
+        '
+        'CopySheet
+        '
+        Me.CopySheet.Name = "CopySheet"
+        Me.CopySheet.Size = New System.Drawing.Size(162, 22)
+        Me.CopySheet.Text = "Copy..."
+        '
+        'reorderSheet
+        '
+        Me.reorderSheet.Enabled = False
+        Me.reorderSheet.Name = "reorderSheet"
+        Me.reorderSheet.Size = New System.Drawing.Size(162, 22)
+        Me.reorderSheet.Text = "Reorder..."
         '
         'ViewSheet
         '
