@@ -49,13 +49,14 @@ Partial Class ucrSelectorByDataFrameAddRemove
         '
         'lstAvailableVariable
         '
+        Me.lstAvailableVariable.Size = New System.Drawing.Size(148, 130)
         Me.lstAvailableVariable.TabIndex = 2
         '
         'btnAdd
         '
-        Me.btnAdd.Location = New System.Drawing.Point(134, 85)
+        Me.btnAdd.Location = New System.Drawing.Point(151, 85)
         Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(74, 24)
+        Me.btnAdd.Size = New System.Drawing.Size(57, 34)
         Me.btnAdd.TabIndex = 3
         Me.btnAdd.Tag = "add"
         Me.btnAdd.Text = "Add"
@@ -63,9 +64,9 @@ Partial Class ucrSelectorByDataFrameAddRemove
         '
         'btnDataOptions
         '
-        Me.btnDataOptions.Location = New System.Drawing.Point(134, 146)
+        Me.btnDataOptions.Location = New System.Drawing.Point(151, 146)
         Me.btnDataOptions.Name = "btnDataOptions"
-        Me.btnDataOptions.Size = New System.Drawing.Size(74, 34)
+        Me.btnDataOptions.Size = New System.Drawing.Size(57, 34)
         Me.btnDataOptions.TabIndex = 4
         Me.btnDataOptions.Tag = "Data_Options"
         Me.btnDataOptions.Text = "Data Options"
