@@ -501,6 +501,7 @@ Partial Class frmMain
         Me.ucrScriptWindow = New instat.ucrScript()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
+        Me.ToolStripSeparator41 = New System.Windows.Forms.ToolStripSeparator()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -2850,7 +2851,7 @@ Partial Class frmMain
         'mnuPrepareCheckData
         '
         Me.mnuPrepareCheckData.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.mnuPrepareCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DuplicatesToolStripMenuItem, Me.mnuPrepareCheckDataExportOpenRefine, Me.mnuPrepareCheckDataImportOpenRefine, Me.mnuPrepareCheckDataBoxplot, Me.mnuPrepareCheckDataOneVariableGraph, Me.mnuPrepareCheckDataOneVariableSummarise, Me.mnuPrepareCheckDataOneWayFrequencies, Me.ToolStripSeparator40, Me.mnuPreparePrepareToShareJitter, Me.mnuCheckDataPrePareToShareSdcPackage})
+        Me.mnuPrepareCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DuplicatesToolStripMenuItem, Me.mnuPrepareCheckDataBoxplot, Me.mnuPrepareCheckDataOneVariableSummarise, Me.mnuPrepareCheckDataOneVariableGraph, Me.mnuPrepareCheckDataOneWayFrequencies, Me.ToolStripSeparator41, Me.mnuPrepareCheckDataExportOpenRefine, Me.mnuPrepareCheckDataImportOpenRefine, Me.ToolStripSeparator40, Me.mnuPreparePrepareToShareJitter, Me.mnuCheckDataPrePareToShareSdcPackage})
         Me.mnuPrepareCheckData.Name = "mnuPrepareCheckData"
         Me.mnuPrepareCheckData.Size = New System.Drawing.Size(172, 22)
         Me.mnuPrepareCheckData.Text = "Check Data"
@@ -3783,7 +3784,7 @@ Partial Class frmMain
         '
         Me.mnuPrepareCheckDataOneWayFrequencies.Name = "mnuPrepareCheckDataOneWayFrequencies"
         Me.mnuPrepareCheckDataOneWayFrequencies.Size = New System.Drawing.Size(245, 22)
-        Me.mnuPrepareCheckDataOneWayFrequencies.Text = "One Way Frequencies..."
+        Me.mnuPrepareCheckDataOneWayFrequencies.Text = "One Variable Frequencies..."
         '
         'ToolStripSeparator40
         '
@@ -3846,6 +3847,11 @@ Partial Class frmMain
         Me.ucrOutput.Name = "ucrOutput"
         Me.ucrOutput.Size = New System.Drawing.Size(444, 225)
         Me.ucrOutput.TabIndex = 0
+        '
+        'ToolStripSeparator41
+        '
+        Me.ToolStripSeparator41.Name = "ToolStripSeparator41"
+        Me.ToolStripSeparator41.Size = New System.Drawing.Size(242, 6)
         '
         'frmMain
         '
@@ -4356,4 +4362,5 @@ Partial Class frmMain
     Friend WithEvents mnuPrepareCheckDataOneVariableSummarise As ToolStripMenuItem
     Friend WithEvents mnuPrepareCheckDataOneWayFrequencies As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator40 As ToolStripSeparator
+    Friend WithEvents ToolStripSeparator41 As ToolStripSeparator
 End Class
