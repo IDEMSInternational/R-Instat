@@ -79,6 +79,7 @@ Public Class clsGridLink
         clsMetadataChanged.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_metadata_changed")
         clsVariablesMetadataChanged.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata_changed")
         clsGetDataNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_names")
+        clsGetDataNames.AddParameter("include_hidden", "FALSE")
         clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
         clsGetDataFrame.AddParameter("convert_to_character", "TRUE")
         clsGetDataFrame.AddParameter("include_hidden_columns", "FALSE")
