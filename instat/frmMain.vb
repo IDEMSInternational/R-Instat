@@ -84,7 +84,7 @@ Public Class frmMain
 
         AutoRecoverAndStartREngine()
 
-        'Do this after setting up R Link becuase setup edits Output window which is changed by Options
+        'Do this after setting up R Link because loading options may run R code
         LoadInstatOptions()
 
         'Do this after loading options because interval depends on options
@@ -95,11 +95,15 @@ Public Class frmMain
         AddHandler System.Windows.Forms.Application.Idle, AddressOf Application_Idle
 
         'Sets up the Recent items
-        clsRecentItems.setToolStripItems(mnuFile, mnuTbShowLast10, sepStart, sepEnd)
+        clsRecentItems.setToolStripItems(mnuFile, mnuTbOpen, mnuTbLast10Dialogs, sepStart, sepEnd)
         'checks existence of MRU list
         clsRecentItems.checkOnLoad()
         Cursor = Cursors.Default
         SetMainMenusEnabled(True)
+
+        mnuViewClimaticMenu.Checked = clsInstatOptions.bShowClimaticMenu
+        mnuViewProcurementMenu.Checked = clsInstatOptions.bShowProcurementMenu
+
     End Sub
 
     Private Sub SetMainMenusEnabled(bEnabled As Boolean)
@@ -216,6 +220,12 @@ Public Class frmMain
         mnuViewDataFrameMetadata.Checked = False
         mnuViewColumnMetadata.Checked = False
         mnuViewScriptWindow.Checked = False
+
+        mnuTbDataView.Checked = True
+        mnuTbOutput.Checked = True
+        mnuTbColumnMetadata.Checked = False
+        mnuTbLog.Checked = False
+
         UpdateLayout()
     End Sub
 
@@ -237,11 +247,11 @@ Public Class frmMain
                     'FileStream.Close()
                 End Using
             Catch ex As Exception
-                MsgBox("Error attempting to use file:" & strFilePath & Environment.NewLine & "The file may be in use by another program or the file does not contain an instance of InstatOptions." & Environment.NewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error opening file")
+                MsgBox("Could not load options from:" & strFilePath & Environment.NewLine & "The file may be in use by another program or the file does not contain an instance of InstatOptions." & Environment.NewLine & "Options will be reset to factory defaults." & vbNewLine & "System error message: " & ex.Message, MsgBoxStyle.Information, "Cannot open options file")
                 clsInstatOptions = New InstatOptions
             End Try
         Else
-            MsgBox("File:" & strFilePath & " does not exist." & Environment.NewLine & "File will not be loaded.", MsgBoxStyle.Critical)
+            MsgBox("Options file:" & strFilePath & " does not exist." & Environment.NewLine & "File will not be loaded." & vbNewLine & "Options will be reset to factory defaults.", MsgBoxStyle.Information)
             clsInstatOptions = New InstatOptions
         End If
     End Sub
@@ -251,10 +261,15 @@ Public Class frmMain
 
         Try
             Using FileStream As Stream = File.Create(strFilePath)
-                serializer.Serialize(FileStream, clsInstatOptions)
-                'TODO Check whether this is needed or not. Using should do it automatically.
-                '     Also check general structure of this code.
-                'FileStream.Close()
+                'If the program is closed during startup of the RLink e.g. if R is not installed correctly
+                'then clsInstatOptions = Nothing because this is initialised after setup.
+                'Hence we do not need to save or give an error message.
+                If clsInstatOptions IsNot Nothing Then
+                    serializer.Serialize(FileStream, clsInstatOptions)
+                    'TODO Check whether this is needed or not. Using should do it automatically.
+                    '     Also check general structure of this code.
+                    'FileStream.Close()
+                End If
             End Using
         Catch ex As Exception
             MsgBox("Error attempting to save to file:" & strFilePath & Environment.NewLine & "The file may be in use by another program." & Environment.NewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error saving to file")
@@ -415,6 +430,10 @@ Public Class frmMain
                 splOverall.Panel1Collapsed = True
             End If
         End If
+        mnuTbDataView.Checked = mnuViewDataView.Checked
+        mnuTbOutput.Checked = mnuViewOutputWindow.Checked
+        mnuTbColumnMetadata.Checked = mnuViewColumnMetadata.Checked
+        mnuTbLog.Checked = mnuViewLog.Checked
     End Sub
 
     Private Sub mnuWindowVariable_Click(sender As Object, e As EventArgs) Handles mnuViewColumnMetadata.Click
@@ -495,22 +514,11 @@ Public Class frmMain
         dlgDeleteRowsOrColums.ShowDialog()
     End Sub
 
-    Private Sub EditLastDialogueToolStrip_Click(sender As Object, e As EventArgs) Handles EditLastDialogueToolStrip.Click
+    Private Sub EditLastDialogueToolStrip_Click(sender As Object, e As EventArgs) Handles mnuTbEditLastDialog.Click
         If clsRecentItems.mnuItems.Count > 0 Then
             clsRecentItems.mnuItems.Last.ShowDialog()
         End If
     End Sub
-
-    Private Sub mnuTbNew_Click(sender As Object, e As EventArgs) Handles mnuTbNew.Click
-        mnuFileNewDataFrame_Click(sender, e)
-    End Sub
-
-
-    Private Sub mnuTbOpen_Click(sender As Object, e As EventArgs) Handles mnuTbOpen.Click
-        mnuFileOpenFromFile_Click(sender, e)
-    End Sub
-
-
 
     Private Sub mnuTbSave_Click(sender As Object, e As EventArgs) Handles mnuTbSave.Click
         mnuFileSave_Click(sender, e)
@@ -531,10 +539,6 @@ Public Class frmMain
 
     Private Sub mnuTbCopy_Click(sender As Object, e As EventArgs) Handles mnuTbCopy.Click
         mnuEditCopy_Click(sender, e)
-    End Sub
-
-    Private Sub mnuTbPrint_Click(sender As Object, e As EventArgs) Handles mnuTbPrint.Click
-        mnuFilePrint_Click(sender, e)
     End Sub
 
     Private Sub mnuHelpHelp_Click(sender As Object, e As EventArgs)
@@ -860,11 +864,15 @@ Public Class frmMain
                 If (Not System.IO.Directory.Exists(strAppDataPath)) Then
                     System.IO.Directory.CreateDirectory(strAppDataPath)
                 End If
-                clsRecentItems.saveOnClose()
-                SaveInstatOptions(Path.Combine(strAppDataPath, strInstatOptionsFile))
-                DeleteAutoSaveData()
-                DeleteAutoSaveLog()
-                DeleteAutoSaveDebugLog()
+                If clsRLink IsNot Nothing AndAlso clsRLink.bREngineInitialised Then
+                    clsRecentItems.saveOnClose()
+                    If clsInstatOptions IsNot Nothing Then
+                        SaveInstatOptions(Path.Combine(strAppDataPath, strInstatOptionsFile))
+                    End If
+                    DeleteAutoSaveData()
+                    DeleteAutoSaveLog()
+                    DeleteAutoSaveDebugLog()
+                End If
                 clsRLink.CloseREngine()
             Catch ex As Exception
                 MsgBox("Error attempting to save setting files to App Data folder." & Environment.NewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error saving settings")
@@ -1549,8 +1557,22 @@ Public Class frmMain
         dlgClimaticSummary.ShowDialog()
     End Sub
 
+    Public Function GetDataFrameCount() As Integer
+        If ucrDataViewer IsNot Nothing AndAlso ucrDataViewer.grdData IsNot Nothing Then
+            Return ucrDataViewer.grdData.Worksheets.Count
+        Else
+            Return 0
+        End If
+    End Function
+
     Public Sub SetCurrentDataFrame(strDataName As String)
         ucrDataViewer.SetCurrentDataFrame(strDataName)
+        ucrColumnMeta.SetCurrentDataFrame(strDataName)
+    End Sub
+
+    Public Sub SetCurrentDataFrame(iIndex As Integer)
+        ucrDataViewer.SetCurrentDataFrame(iIndex)
+        ucrColumnMeta.SetCurrentDataFrame(iIndex)
     End Sub
 
     Private Sub WindroseToolStripMenuItem_Click(sender As Object, e As EventArgs)
@@ -1671,5 +1693,80 @@ Public Class frmMain
 
     Private Sub mnuProcurementDescribeMaps_Click(sender As Object, e As EventArgs) Handles mnuProcurementDescribeMaps.Click
         dlgCountryColouredMap.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareColumnInfillMissingDates_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnInfillMissingDates.Click
+        dlgInfill.ShowDialog()
+    End Sub
+
+    Private Sub mnuDataView_Click(sender As Object, e As EventArgs) Handles mnuTbDataView.Click
+        mnuViewDataView.Checked = Not mnuViewDataView.Checked
+        UpdateLayout()
+    End Sub
+
+    Private Sub mnuTbOutput_Click(sender As Object, e As EventArgs) Handles mnuTbOutput.Click
+        mnuViewOutputWindow.Checked = Not mnuViewOutputWindow.Checked
+        UpdateLayout()
+    End Sub
+
+    Private Sub mnuTbColumnMetadata_Click(sender As Object, e As EventArgs) Handles mnuTbColumnMetadata.Click
+        mnuViewColumnMetadata.Checked = Not mnuViewColumnMetadata.Checked
+        UpdateLayout()
+    End Sub
+
+    Private Sub mnuTbLog_Click(sender As Object, e As EventArgs) Handles mnuTbLog.Click
+        mnuViewLog.Checked = Not mnuViewLog.Checked
+        UpdateLayout()
+    End Sub
+
+    Private Sub mnuTbResetLayout_Click(sender As Object, e As EventArgs) Handles mnuTbResetLayout.Click
+        SetToDefaultLayout()
+    End Sub
+
+    Public Sub SetToolbarHeight(iHeight As Integer)
+        'Not currently working, do not use this method
+        'Tool_strip.ImageScalingSize = New Size(iHeight, iHeight)
+    End Sub
+
+    Private Sub mnuTbOpenFromLibrary_Click(sender As Object, e As EventArgs) Handles mnuTbOpenFromLibrary.Click
+        dlgFromLibrary.ShowDialog()
+    End Sub
+
+    Private Sub mnuTbOpen_ButtonClick(sender As Object, e As EventArgs) Handles mnuTbOpen.ButtonClick
+        dlgImportDataset.ShowDialog()
+    End Sub
+
+    Public Sub SetShowProcurementMenu(bNewShowProcurementMenu As Boolean)
+        mnuProcurement.Visible = bNewShowProcurementMenu
+        mnuViewProcurementMenu.Checked = bNewShowProcurementMenu
+    End Sub
+
+    Public Sub SetShowClimaticMenu(bNewShowClimaticMenu As Boolean)
+        mnuClimatic.Visible = bNewShowClimaticMenu
+        mnuViewClimaticMenu.Checked = bNewShowClimaticMenu
+    End Sub
+
+    Private Sub mnuViewClimaticMenu_Click(sender As Object, e As EventArgs) Handles mnuViewClimaticMenu.Click
+        clsInstatOptions.SetShowClimaticMenu(Not mnuViewClimaticMenu.Checked)
+    End Sub
+
+    Private Sub mnuViewProcurementMenu_Click(sender As Object, e As EventArgs) Handles mnuViewProcurementMenu.Click
+        clsInstatOptions.SetShowProcurementMenu(Not mnuViewProcurementMenu.Checked)
+    End Sub
+
+    Private Sub mnuPrepareCheckDataBoxplot_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataBoxplot.Click
+        dlgBoxplot.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareCheckDataOneVariableGraph_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataOneVariableGraph.Click
+        dlgOneVariableGraph.ShowDialog()
+    End Sub
+
+    Private Sub OneVariableSummariseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataOneVariableSummarise.Click
+        dlgDescribeOneVariable.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareCheckDataOneWayFrequencies_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataOneWayFrequencies.Click
+        dlgOneWayFrequencies.ShowDialog()
     End Sub
 End Class

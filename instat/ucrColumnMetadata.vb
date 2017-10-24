@@ -41,8 +41,8 @@ Public Class ucrColumnMetadata
         SetRFunctions()
         mnuFreezeToHere.Enabled = False
         mnuUnfreeze.Enabled = False
-        mnuInsertColsAfter.Enabled = False
-        mnuInsertColsBefore.Enabled = False
+        mnuInsertColsAfter.Visible = False
+        mnuInsertColsBefore.Visible = False
         '  grdVariables.RowHeaderContextMenuStrip = frmMain.ucrDataViewer.grdData.ColumnHeaderContextMenuStrip
     End Sub
 
@@ -77,6 +77,25 @@ Public Class ucrColumnMetadata
         grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
         grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToFillSerial, False)
         grdCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
+    End Sub
+
+    Public Sub SetCurrentDataFrame(strDataName As String)
+        Dim grdWorksheet As unvell.ReoGrid.Worksheet
+
+        If grdVariables IsNot Nothing Then
+            grdWorksheet = grdVariables.GetWorksheetByName(strDataName)
+            If grdWorksheet IsNot Nothing Then
+                grdVariables.CurrentWorksheet = grdWorksheet
+            End If
+        End If
+    End Sub
+
+    Public Sub SetCurrentDataFrame(iIndex As Integer)
+        If grdVariables.Worksheets.Count > iIndex Then
+            grdVariables.CurrentWorksheet = grdVariables.Worksheets(iIndex)
+        Else
+            ' Developer error?
+        End If
     End Sub
 
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrSheet.AfterCellEdit
