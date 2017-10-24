@@ -44,17 +44,15 @@ Partial Class ucrSelectorByDataFrameAddRemove
         '
         'ucrAvailableDataFrames
         '
-        Me.ucrAvailableDataFrames.bUseCurrentFilter = True
         Me.ucrAvailableDataFrames.TabIndex = 0
         '
         'lstAvailableVariable
         '
-        Me.lstAvailableVariable.Size = New System.Drawing.Size(148, 130)
         Me.lstAvailableVariable.TabIndex = 2
         '
         'btnAdd
         '
-        Me.btnAdd.Location = New System.Drawing.Point(151, 85)
+        Me.btnAdd.Location = New System.Drawing.Point(153, 85)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(57, 34)
         Me.btnAdd.TabIndex = 3
@@ -64,7 +62,7 @@ Partial Class ucrSelectorByDataFrameAddRemove
         '
         'btnDataOptions
         '
-        Me.btnDataOptions.Location = New System.Drawing.Point(151, 146)
+        Me.btnDataOptions.Location = New System.Drawing.Point(153, 146)
         Me.btnDataOptions.Name = "btnDataOptions"
         Me.btnDataOptions.Size = New System.Drawing.Size(57, 34)
         Me.btnDataOptions.TabIndex = 4
@@ -76,7 +74,6 @@ Partial Class ucrSelectorByDataFrameAddRemove
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.bUseCurrentFilter = True
         Me.Controls.Add(Me.btnDataOptions)
         Me.Controls.Add(Me.btnAdd)
         Me.Name = "ucrSelectorByDataFrameAddRemove"
