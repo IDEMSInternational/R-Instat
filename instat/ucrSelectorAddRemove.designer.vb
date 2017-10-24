@@ -42,11 +42,10 @@ Partial Class ucrSelectorAddRemove
         'lstAvailableVariable
         '
         Me.lstAvailableVariable.Dock = System.Windows.Forms.DockStyle.None
-        Me.lstAvailableVariable.Size = New System.Drawing.Size(148, 130)
         '
         'btnAdd
         '
-        Me.btnAdd.Location = New System.Drawing.Point(151, 40)
+        Me.btnAdd.Location = New System.Drawing.Point(153, 40)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(57, 34)
         Me.btnAdd.TabIndex = 83
@@ -56,7 +55,7 @@ Partial Class ucrSelectorAddRemove
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(151, 96)
+        Me.cmdOptions.Location = New System.Drawing.Point(153, 96)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(57, 34)
         Me.cmdOptions.TabIndex = 84
