@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Imports RDotNet
 
@@ -86,5 +87,9 @@ Public Class dlgHideDataframes
                 ucrReceiverMultiple.Add(strDataFrame)
             Next
         End If
+    End Sub
+
+    Private Sub ucrReceiverMultiple_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultiple.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
