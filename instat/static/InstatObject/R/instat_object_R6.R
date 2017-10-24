@@ -923,6 +923,21 @@ instat_object$set("public","unhide_all_columns", function(data_name) {
 } 
 )
 
+instat_object$set("public","set_hidden_data_frames", function(data_names = c()) {
+  invisible(sapply(data_names, function(x) self$append_to_dataframe_metadata(data_name = x, property = is_hidden_label, new_val = TRUE)))
+  unhide_data_names <- setdiff(self$get_data_names(), data_names)
+  invisible(sapply(unhide_data_names, function(x) self$append_to_dataframe_metadata(data_name = x, property = is_hidden_label, new_val = FALSE)))
+} 
+)
+
+instat_object$set("public","get_hidden_data_frames", function() {
+  all_data_names <- names(private$.data_objects)
+  visible_data_names <- all_data_names[sapply(all_data_names, function(x) !isTRUE(self$get_data_objects(x)$get_metadata(label = is_hidden_label)))]
+  hidden_data_names <- setdiff(all_data_names, visible_data_names)
+  return(hidden_data_names)
+} 
+)
+
 instat_object$set("public","set_row_names", function(data_name, row_names) {
   self$get_data_objects(data_name)$set_row_names(row_names = row_names)
 } 
