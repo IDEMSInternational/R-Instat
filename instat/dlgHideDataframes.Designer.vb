@@ -58,7 +58,7 @@ Partial Class dlgHideDataframes
         Me.ucrSelectorForDataFrames.Location = New System.Drawing.Point(10, 30)
         Me.ucrSelectorForDataFrames.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForDataFrames.Name = "ucrSelectorForDataFrames"
-        Me.ucrSelectorForDataFrames.Size = New System.Drawing.Size(201, 147)
+        Me.ucrSelectorForDataFrames.Size = New System.Drawing.Size(217, 147)
         Me.ucrSelectorForDataFrames.TabIndex = 2
         '
         'lblDataFrames
@@ -73,7 +73,7 @@ Partial Class dlgHideDataframes
         'lblHiddenDataFrames
         '
         Me.lblHiddenDataFrames.AutoSize = True
-        Me.lblHiddenDataFrames.Location = New System.Drawing.Point(247, 34)
+        Me.lblHiddenDataFrames.Location = New System.Drawing.Point(269, 34)
         Me.lblHiddenDataFrames.Name = "lblHiddenDataFrames"
         Me.lblHiddenDataFrames.Size = New System.Drawing.Size(113, 13)
         Me.lblHiddenDataFrames.TabIndex = 4
@@ -82,7 +82,7 @@ Partial Class dlgHideDataframes
         'ucrReceiverMultiple
         '
         Me.ucrReceiverMultiple.frmParent = Me
-        Me.ucrReceiverMultiple.Location = New System.Drawing.Point(247, 49)
+        Me.ucrReceiverMultiple.Location = New System.Drawing.Point(269, 49)
         Me.ucrReceiverMultiple.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultiple.Name = "ucrReceiverMultiple"
         Me.ucrReceiverMultiple.Selector = Nothing
