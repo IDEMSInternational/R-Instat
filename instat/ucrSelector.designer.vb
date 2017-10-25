@@ -60,7 +60,7 @@ Partial Class ucrSelector
         Me.lstAvailableVariable.Location = New System.Drawing.Point(0, 0)
         Me.lstAvailableVariable.Name = "lstAvailableVariable"
         Me.lstAvailableVariable.ShowItemToolTips = True
-        Me.lstAvailableVariable.Size = New System.Drawing.Size(120, 130)
+        Me.lstAvailableVariable.Size = New System.Drawing.Size(148, 130)
         Me.lstAvailableVariable.TabIndex = 83
         Me.lstAvailableVariable.UseCompatibleStateImageBehavior = False
         Me.lstAvailableVariable.View = System.Windows.Forms.View.Details
@@ -69,7 +69,7 @@ Partial Class ucrSelector
         '
         Me.SelectionMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddSelectedToolStripMenuItem, Me.SelectAllToolStripMenuItem, Me.ClearSelectionToolStripMenuItem, Me.AddAllToolStripMenuItem})
         Me.SelectionMenuStrip.Name = "SelectionMenuStrip"
-        Me.SelectionMenuStrip.Size = New System.Drawing.Size(153, 114)
+        Me.SelectionMenuStrip.Size = New System.Drawing.Size(153, 92)
         '
         'AddSelectedToolStripMenuItem
         '
@@ -105,7 +105,7 @@ Partial Class ucrSelector
         Me.Controls.Add(Me.lstAvailableVariable)
         Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "ucrSelector"
-        Me.Size = New System.Drawing.Size(120, 130)
+        Me.Size = New System.Drawing.Size(148, 130)
         Me.SelectionMenuStrip.ResumeLayout(False)
         Me.ResumeLayout(False)
 
