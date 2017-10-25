@@ -819,6 +819,9 @@ data_object$set("public", "append_to_metadata", function(property, new_value = "
   attr(private$data, property) <- new_value
   self$append_to_changes(list(Added_metadata, property, new_value))
   self$metadata_changed <- TRUE
+  # Not sure this is correct way to ensure unhidden data frames appear.
+  # Possibly better to modify the Grid Link
+  if(property == is_hidden_label) self$data_changed <- TRUE
 }
 )
 
@@ -876,6 +879,7 @@ data_object$set("public", "is_variables_metadata", function(str, col, return_vec
 
 data_object$set("public", "add_defaults_meta", function() {
   if(!self$is_metadata(is_calculated_label)) self$append_to_metadata(is_calculated_label, FALSE)
+  if(!self$is_metadata(is_hidden_label)) self$append_to_metadata(is_hidden_label, FALSE)
   if(!self$is_metadata(label_label)) self$append_to_metadata(label_label, "")
 }
 )
