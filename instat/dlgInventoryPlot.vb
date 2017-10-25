@@ -18,7 +18,15 @@ Imports instat.Translations
 Public Class dlgInventoryPlot
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private bResetSubdialog As Boolean = False
     Private clsDefaultRFunction As New RFunction
+
+    Private clsKeyColours As New RFunction
+    Private clsListFunc As New RFunction
+    Private clsBreaksFunc As New RFunction
+    Private clslabelsFunc As New RFunction
+    Private clsMissingNonMissing As New RFunction
+
 
     Private Sub dlgInventoryPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -67,10 +75,6 @@ Public Class dlgInventoryPlot
         ucrInputTitle.SetParameter(New RParameter("graph_title", 5))
         ucrInputTitle.SetRDefault("Inventory Plot")
 
-        ucrChkDisplayRainDays.SetParameter(New RParameter("display_rain_days", 13), bNewChangeParameterValue:=True)
-        ucrChkDisplayRainDays.SetText("Display Rain Days")
-        ucrChkDisplayRainDays.SetRDefault("FALSE")
-
         ucrChkShowNonMissing.SetText("Show Non Missing")
         ucrChkShowNonMissing.Enabled = False ' this currently has no parameter associated with it
 
@@ -100,15 +104,46 @@ Public Class dlgInventoryPlot
 
     Private Sub SetDefaults()
         clsDefaultRFunction = New RFunction
+        clsKeyColours = New RFunction
+        clsListFunc = New RFunction
+        clsBreaksFunc = New RFunction
+        clslabelsFunc = New RFunction
+        clsMissingNonMissing = New RFunction
 
+        bResetSubdialog = True
         ucrInventoryPlotSelector.Reset()
         ucrSaveGraph.Reset()
         ucrReceiverDate.SetMeAsReceiver()
+
 
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot")
         clsDefaultRFunction.AddParameter("coord_flip", "FALSE")
         clsDefaultRFunction.AddParameter("year_doy_plot", "FALSE")
         clsDefaultRFunction.AddParameter("facet_by", "NULL")
+
+        clsKeyColours.SetRCommand("c")
+        clsKeyColours.AddParameter("missing", Chr(34) & "red" & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+        clsKeyColours.AddParameter("nonmissing", Chr(34) & "grey" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
+        clsDefaultRFunction.AddParameter("key_colours", clsRFunctionParameter:=clsKeyColours)
+
+        clsBreaksFunc.SetRCommand("c")
+        clsListFunc.SetRCommand("list")
+        clsBreaksFunc.AddParameter("var1", 0, bIncludeArgumentName:=False, iPosition:=0)
+        clsBreaksFunc.AddParameter("threashold", 0.85, bIncludeArgumentName:=False, iPosition:=1)
+        clsListFunc.AddParameter("breaks", clsRFunctionParameter:=clsBreaksFunc, iPosition:=0)
+        clsDefaultRFunction.AddParameter("rain_cats", clsRFunctionParameter:=clsListFunc)
+
+        clslabelsFunc.SetRCommand("c")
+        clslabelsFunc.AddParameter("rain", Chr(34) & "Rain" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
+        clslabelsFunc.AddParameter("dry", Chr(34) & "Dry" & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+        clsListFunc.AddParameter("labels ", clsRFunctionParameter:=clslabelsFunc)
+        clsDefaultRFunction.AddParameter("rain_cats", clsRFunctionParameter:=clsListFunc)
+
+        clsMissingNonMissing.SetRCommand("c")
+        clsMissingNonMissing.AddParameter("var1", Chr(34) & "red" & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+        clsMissingNonMissing.AddParameter("var2", Chr(34) & "grey" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
+        clsDefaultRFunction.AddParameter("key_colours", clsRFunctionParameter:=clsMissingNonMissing)
+
         clsDefaultRFunction.SetAssignTo("last_graph", strTempDataframe:=ucrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
 
@@ -128,9 +163,9 @@ Public Class dlgInventoryPlot
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        'there needs to be work on sdgplots before this could be linked 
-        'sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
+        'sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrSelectorBoxPlot, bReset:=bResetSubdialog)
         'sdgPlots.ShowDialog()
+        'bResetSubdialog = False
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -141,5 +176,11 @@ Public Class dlgInventoryPlot
 
     Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveGraph.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged, ucrInputTitle.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub cmdInventoryPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdInventoryPlotOptions.Click
+        sdgInventoryPlot.SetRFunction(clsDefaultRFunction, clsKeyColours, clsBreaksFunc, clslabelsFunc, clsMissingNonMissing, bResetSubdialog)
+        bResetSubdialog = False
+        sdgInventoryPlot.ShowDialog()
     End Sub
 End Class
