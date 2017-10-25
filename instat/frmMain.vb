@@ -1753,4 +1753,20 @@ Public Class frmMain
     Private Sub mnuViewProcurementMenu_Click(sender As Object, e As EventArgs) Handles mnuViewProcurementMenu.Click
         clsInstatOptions.SetShowProcurementMenu(Not mnuViewProcurementMenu.Checked)
     End Sub
+
+    Private Sub mnuPrepareCheckDataBoxplot_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataBoxplot.Click
+        dlgBoxplot.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareCheckDataOneVariableGraph_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataOneVariableGraph.Click
+        dlgOneVariableGraph.ShowDialog()
+    End Sub
+
+    Private Sub OneVariableSummariseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataOneVariableSummarise.Click
+        dlgDescribeOneVariable.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareCheckDataOneWayFrequencies_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataOneWayFrequencies.Click
+        dlgOneWayFrequencies.ShowDialog()
+    End Sub
 End Class
