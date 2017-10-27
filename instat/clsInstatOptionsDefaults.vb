@@ -18,6 +18,8 @@ Public Class clsInstatOptionsDefaults
     Public Shared ReadOnly DEFAULTbIncludeRDefaultParameters As Boolean = False
     Public Shared ReadOnly DEFAULTbCommandsinOutput As Boolean = True
     Public Shared ReadOnly DEFAULTbIncludeCommentDefault As Boolean = True
+    Public Shared ReadOnly DEFAULTbShowProcurementMenu As Boolean = True
+    Public Shared ReadOnly DEFAULTbShowClimaticMenu As Boolean = True
     Public Shared ReadOnly DEFAULTfntOutput As Font = New Font(FontFamily.GenericMonospace, 11, FontStyle.Regular)
     Public Shared ReadOnly DEFAULTclrOutput As Color = Color.Blue
     Public Shared ReadOnly DEFAULTfntComment As Font = New Font(FontFamily.GenericSansSerif, 11, FontStyle.Regular)
@@ -42,4 +44,5 @@ Public Class clsInstatOptionsDefaults
     Public Shared ReadOnly DEFAULTiAutoSaveDataMinutes As Integer = 10
     Public Shared ReadOnly DEFAULTbShowWaitDialog As Boolean = True
     Public Shared ReadOnly DEFAULTiWaitTimeDelaySeconds As Integer = 2
+    Public Shared ReadOnly DEFAULTiToolbarHeight As Integer = 30
 End Class

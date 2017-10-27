@@ -38,12 +38,12 @@ Partial Class dlgOptions
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Languages")
-        Dim TreeNode2 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Comments")
-        Dim TreeNode3 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Import")
-        Dim TreeNode4 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Output Window")
-        Dim TreeNode5 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Commands")
-        Dim TreeNode6 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Data View")
+        Dim TreeNode7 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Languages")
+        Dim TreeNode8 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Comments")
+        Dim TreeNode9 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Import")
+        Dim TreeNode10 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Output Window")
+        Dim TreeNode11 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Commands")
+        Dim TreeNode12 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Data View")
         Me.cmdApply = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
@@ -113,6 +113,9 @@ Partial Class dlgOptions
         Me.rdoDisplayinRViewer = New System.Windows.Forms.RadioButton()
         Me.rdoDisplayinOutputWindow = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGraphDisplay = New instat.UcrPanel()
+        Me.tbpSpecialMenus = New System.Windows.Forms.TabPage()
+        Me.ucrChkViewProcurementMenu = New instat.ucrCheck()
+        Me.ucrChkViewClimaticMenu = New instat.ucrCheck()
         CType(Me.spltControls, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.spltControls.Panel1.SuspendLayout()
         Me.spltControls.Panel2.SuspendLayout()
@@ -134,6 +137,7 @@ Partial Class dlgOptions
         Me.tbpDataView.SuspendLayout()
         Me.tbpWorkingDirectory.SuspendLayout()
         Me.tbpGraphDisplay.SuspendLayout()
+        Me.tbpSpecialMenus.SuspendLayout()
         Me.SuspendLayout()
         '
         'cmdApply
@@ -208,29 +212,29 @@ Partial Class dlgOptions
         Me.trOptions.Dock = System.Windows.Forms.DockStyle.Fill
         Me.trOptions.Location = New System.Drawing.Point(0, 0)
         Me.trOptions.Name = "trOptions"
-        TreeNode1.Name = "ndLanguages"
-        TreeNode1.Tag = "1"
-        TreeNode1.Text = "Languages"
-        TreeNode1.ToolTipText = "Choose different languages"
-        TreeNode2.Name = "ndComments"
-        TreeNode2.Tag = "2"
-        TreeNode2.Text = "Comments"
-        TreeNode2.ToolTipText = "Comments for the dialogs"
-        TreeNode3.Name = "ndImport"
-        TreeNode3.Tag = "3"
-        TreeNode3.Text = "Import"
-        TreeNode3.ToolTipText = "Import Data Settings"
-        TreeNode4.Name = "ndOutputWindow"
-        TreeNode4.Tag = "4"
-        TreeNode4.Text = "Output Window"
-        TreeNode4.ToolTipText = "Output Window Formatting Options"
-        TreeNode5.Name = "ndCommands"
-        TreeNode5.Tag = "8"
-        TreeNode5.Text = "Commands"
-        TreeNode5.ToolTipText = "Commands Options"
-        TreeNode6.Name = "ndDataView"
-        TreeNode6.Text = "Data View"
-        Me.trOptions.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1, TreeNode2, TreeNode3, TreeNode4, TreeNode5, TreeNode6})
+        TreeNode7.Name = "ndLanguages"
+        TreeNode7.Tag = "1"
+        TreeNode7.Text = "Languages"
+        TreeNode7.ToolTipText = "Choose different languages"
+        TreeNode8.Name = "ndComments"
+        TreeNode8.Tag = "2"
+        TreeNode8.Text = "Comments"
+        TreeNode8.ToolTipText = "Comments for the dialogs"
+        TreeNode9.Name = "ndImport"
+        TreeNode9.Tag = "3"
+        TreeNode9.Text = "Import"
+        TreeNode9.ToolTipText = "Import Data Settings"
+        TreeNode10.Name = "ndOutputWindow"
+        TreeNode10.Tag = "4"
+        TreeNode10.Text = "Output Window"
+        TreeNode10.ToolTipText = "Output Window Formatting Options"
+        TreeNode11.Name = "ndCommands"
+        TreeNode11.Tag = "8"
+        TreeNode11.Text = "Commands"
+        TreeNode11.ToolTipText = "Commands Options"
+        TreeNode12.Name = "ndDataView"
+        TreeNode12.Text = "Data View"
+        Me.trOptions.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode7, TreeNode8, TreeNode9, TreeNode10, TreeNode11, TreeNode12})
         Me.trOptions.Size = New System.Drawing.Size(184, 317)
         Me.trOptions.TabIndex = 0
         '
@@ -245,6 +249,7 @@ Partial Class dlgOptions
         Me.tbcOptions.Controls.Add(Me.tbpDataView)
         Me.tbcOptions.Controls.Add(Me.tbpWorkingDirectory)
         Me.tbcOptions.Controls.Add(Me.tbpGraphDisplay)
+        Me.tbcOptions.Controls.Add(Me.tbpSpecialMenus)
         Me.tbcOptions.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tbcOptions.Location = New System.Drawing.Point(0, 0)
         Me.tbcOptions.Name = "tbcOptions"
@@ -738,14 +743,14 @@ Partial Class dlgOptions
         Me.ucrChkShowDataonGrid.Size = New System.Drawing.Size(257, 20)
         Me.ucrChkShowDataonGrid.TabIndex = 3
         '
-        'ucrNudMinutes
+        'ucrNudAutoSaveMinutes
         '
         Me.ucrNudAutoSaveMinutes.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAutoSaveMinutes.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudAutoSaveMinutes.Location = New System.Drawing.Point(305, 104)
         Me.ucrNudAutoSaveMinutes.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudAutoSaveMinutes.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAutoSaveMinutes.Name = "ucrNudMinutes"
+        Me.ucrNudAutoSaveMinutes.Name = "ucrNudAutoSaveMinutes"
         Me.ucrNudAutoSaveMinutes.Size = New System.Drawing.Size(50, 20)
         Me.ucrNudAutoSaveMinutes.TabIndex = 2
         Me.ucrNudAutoSaveMinutes.Value = New Decimal(New Integer() {0, 0, 0, 0})
@@ -886,6 +891,34 @@ Partial Class dlgOptions
         Me.ucrPnlGraphDisplay.Size = New System.Drawing.Size(169, 66)
         Me.ucrPnlGraphDisplay.TabIndex = 3
         '
+        'tbpSpecialMenus
+        '
+        Me.tbpSpecialMenus.Controls.Add(Me.ucrChkViewProcurementMenu)
+        Me.tbpSpecialMenus.Controls.Add(Me.ucrChkViewClimaticMenu)
+        Me.tbpSpecialMenus.Location = New System.Drawing.Point(4, 22)
+        Me.tbpSpecialMenus.Name = "tbpSpecialMenus"
+        Me.tbpSpecialMenus.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpSpecialMenus.Size = New System.Drawing.Size(564, 291)
+        Me.tbpSpecialMenus.TabIndex = 13
+        Me.tbpSpecialMenus.Text = "Special Menus"
+        Me.tbpSpecialMenus.UseVisualStyleBackColor = True
+        '
+        'ucrChkViewProcurementMenu
+        '
+        Me.ucrChkViewProcurementMenu.Checked = False
+        Me.ucrChkViewProcurementMenu.Location = New System.Drawing.Point(7, 42)
+        Me.ucrChkViewProcurementMenu.Name = "ucrChkViewProcurementMenu"
+        Me.ucrChkViewProcurementMenu.Size = New System.Drawing.Size(209, 20)
+        Me.ucrChkViewProcurementMenu.TabIndex = 0
+        '
+        'ucrChkViewClimaticMenu
+        '
+        Me.ucrChkViewClimaticMenu.Checked = False
+        Me.ucrChkViewClimaticMenu.Location = New System.Drawing.Point(7, 16)
+        Me.ucrChkViewClimaticMenu.Name = "ucrChkViewClimaticMenu"
+        Me.ucrChkViewClimaticMenu.Size = New System.Drawing.Size(209, 20)
+        Me.ucrChkViewClimaticMenu.TabIndex = 0
+        '
         'dlgOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -938,6 +971,7 @@ Partial Class dlgOptions
         Me.tbpWorkingDirectory.PerformLayout()
         Me.tbpGraphDisplay.ResumeLayout(False)
         Me.tbpGraphDisplay.PerformLayout()
+        Me.tbpSpecialMenus.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1010,4 +1044,7 @@ Partial Class dlgOptions
     Friend WithEvents lblWaitSeconds As Label
     Friend WithEvents ucrChkShowWaitDialog As ucrCheck
     Friend WithEvents ucrNudWaitSeconds As ucrNud
+    Friend WithEvents tbpSpecialMenus As TabPage
+    Friend WithEvents ucrChkViewProcurementMenu As ucrCheck
+    Friend WithEvents ucrChkViewClimaticMenu As ucrCheck
 End Class
