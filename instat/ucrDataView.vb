@@ -41,12 +41,15 @@ Public Class ucrDataView
     Private clsGetDataFrame As New RFunction
     Private clsConvertOrderedFactor As New RFunction
     Private clsFilterApplied As New RFunction
+    Private clsHideDataFrame As New RFunction
     Public lstColumnNames As New List(Of KeyValuePair(Of String, String()))
 
     Private Sub ucrDataView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         mnuFreezeToHere.Enabled = False
         mnuUnfreeze.Enabled = False
         grdData.Visible = False
+        mnuInsertColsBefore.Visible = False
+        mnuInsertColsAfter.Visible = False
         'autoTranslate(Me)
         'Disable Autoformat cell
         'This needs to be added at the part when we are writing data to the grid, not here
@@ -80,35 +83,36 @@ Public Class ucrDataView
         clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
         clsConvertOrderedFactor.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
         clsFilterApplied.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$filter_applied")
+        clsHideDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_dataframe_metadata")
         clsViewDataFrame.SetRCommand("View")
         UpdateRFunctionDataFrameParameters()
     End Sub
 
-    Private Sub mnuInsertColsBefore_Click(sender As Object, e As EventArgs) Handles mnuInsertColsBefore.Click
-        clsInsertColumns.AddParameter("adjacent_column", SelectedColumnPosition(True))
-        clsInsertColumns.AddParameter("num_cols", grdCurrSheet.SelectionRange.Cols)
-        clsInsertColumns.AddParameter("before", "TRUE")
-        'TODO This should be an option in dialog
-        clsInsertColumns.AddParameter("col_name", Chr(34) & "X" & Chr(34))
-        clsInsertColumns.AddParameter("use_col_name_as_prefix", "TRUE")
-        RunScriptFromDataView(clsInsertColumns.ToScript(), strComment:="Right click menu: Insert Column(s) Before")
-    End Sub
+    'Private Sub mnuInsertColsBefore_Click(sender As Object, e As EventArgs) Handles mnuInsertColsBefore.Click
+    '    clsInsertColumns.AddParameter("adjacent_column", SelectedColumnPosition(True))
+    '    clsInsertColumns.AddParameter("num_cols", grdCurrSheet.SelectionRange.Cols)
+    '    clsInsertColumns.AddParameter("before", "TRUE")
+    '    'TODO This should be an option in dialog
+    '    clsInsertColumns.AddParameter("col_name", Chr(34) & "X" & Chr(34))
+    '    clsInsertColumns.AddParameter("use_col_name_as_prefix", "TRUE")
+    '    RunScriptFromDataView(clsInsertColumns.ToScript(), strComment:="Right click menu: Insert Column(s) Before")
+    'End Sub
 
-    Private Sub mnuInsertColsAfter_Click(sender As Object, e As EventArgs) Handles mnuInsertColsAfter.Click
-        clsInsertColumns.AddParameter("adjacent_column", SelectedColumnPosition(False))
-        clsInsertColumns.AddParameter("num_cols", grdCurrSheet.SelectionRange.Cols)
-        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-            clsInsertColumns.AddParameter("before", "FALSE")
-        Else
-            clsInsertColumns.RemoveParameterByName("before")
-        End If
-        'TODO This should be an option in dialog
-        'This is now the default in the R method so not needed
-        'but should be added if user wants to change from default
-        'clsInsertColumns.AddParameter("col_name", Chr(34) & "X" & Chr(34))
-        'clsInsertColumns.AddParameter("use_col_name_as_prefix", "TRUE")
-        RunScriptFromDataView(clsInsertColumns.ToScript(), strComment:="Right click menu: Insert Column(s) After")
-    End Sub
+    'Private Sub mnuInsertColsAfter_Click(sender As Object, e As EventArgs) Handles mnuInsertColsAfter.Click
+    '    clsInsertColumns.AddParameter("adjacent_column", SelectedColumnPosition(False))
+    '    clsInsertColumns.AddParameter("num_cols", grdCurrSheet.SelectionRange.Cols)
+    '    If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+    '        clsInsertColumns.AddParameter("before", "FALSE")
+    '    Else
+    '        clsInsertColumns.RemoveParameterByName("before")
+    '    End If
+    '    'TODO This should be an option in dialog
+    '    'This is now the default in the R method so not needed
+    '    'but should be added if user wants to change from default
+    '    'clsInsertColumns.AddParameter("col_name", Chr(34) & "X" & Chr(34))
+    '    'clsInsertColumns.AddParameter("use_col_name_as_prefix", "TRUE")
+    '    RunScriptFromDataView(clsInsertColumns.ToScript(), strComment:="Right click menu: Insert Column(s) After")
+    'End Sub
 
     Private Sub mnuDeleteCol_Click(sender As Object, e As EventArgs) Handles mnuDeleteCol.Click
         If grdData.CurrentWorksheet.SelectionRange.Cols = grdData.CurrentWorksheet.ColumnCount Then
@@ -291,10 +295,6 @@ Public Class ucrDataView
         If grdCurrSheet IsNot Nothing Then
             grdCurrSheet.SelectAll()
         End If
-    End Sub
-
-    Private Sub insertSheet_Click(sender As Object, e As EventArgs) Handles insertSheet.Click
-        dlgNewDataFrame.ShowDialog()
     End Sub
 
     Private Sub deleteSheet_Click(sender As Object, e As EventArgs) Handles deleteDataFrame.Click
@@ -758,5 +758,20 @@ Public Class ucrDataView
             mnuInsertColsBefore.Text = "Insert " & iSelectedCols & " Columns Before"
             mnuInsertColsAfter.Text = "Insert " & iSelectedCols & " Columns After"
         End If
+    End Sub
+
+    Private Sub HideSheet_Click(sender As Object, e As EventArgs) Handles HideSheet.Click
+        clsHideDataFrame.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
+        clsHideDataFrame.AddParameter("property", "is_hidden_label")
+        clsHideDataFrame.AddParameter("new_val", "TRUE")
+        RunScriptFromDataView(clsHideDataFrame.ToScript(), strComment:="Right click menu: Hide Data Frame")
+    End Sub
+
+    Private Sub unhideSheet_Click(sender As Object, e As EventArgs) Handles unhideSheet.Click
+        dlgHideDataframes.ShowDialog()
+    End Sub
+
+    Private Sub statusColumnMenu_Opening(sender As Object, e As CancelEventArgs) Handles statusColumnMenu.Opening
+        HideSheet.Enabled = (grdData.Worksheets.Count > 1)
     End Sub
 End Class
