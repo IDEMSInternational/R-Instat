@@ -127,7 +127,7 @@ Public Class dlgEndOfRainsSeason
         ucrNudCapacity.SetLinkedDisplayControl(lblCapacity)
 
         ucrInputWBColName.SetParameter(New RParameter("result_name", 3))
-        ucrInputWBColName.SetName("end_season")
+        ucrInputWBColName.SetPrefix("end_season")
         ucrInputWBColName.SetDataFrameSelector(ucrSelectorForWaterBalance.ucrAvailableDataFrames)
         ucrInputWBColName.SetLinkedDisplayControl(lblWBColName)
         ucrInputWBColName.SetValidationTypeAsRVariable()
@@ -151,7 +151,7 @@ Public Class dlgEndOfRainsSeason
         ucrNudTotalOverDays.SetLinkedDisplayControl(lblTotalOverDays)
 
         ucrInputEndRainColName.SetParameter(New RParameter("result_name", 3))
-        ucrInputEndRainColName.SetName("end_rain")
+        ucrInputEndRainColName.SetPrefix("end_rain")
         ucrInputEndRainColName.SetValidationTypeAsRVariable()
         ucrInputEndRainColName.SetDataFrameSelector(ucrSelectorForWaterBalance.ucrAvailableDataFrames)
         ucrInputEndRainColName.SetLinkedDisplayControl(lblEndRainsColName)

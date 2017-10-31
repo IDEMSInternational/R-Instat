@@ -187,7 +187,7 @@ Public Class dlgStartofRains
         'save
         ucrInputNewColumnName.SetParameter(New RParameter("result_name", 2))
         ucrInputNewColumnName.SetDataFrameSelector(ucrSelectorForStartofRains.ucrAvailableDataFrames)
-        ucrInputNewColumnName.SetName("start")
+        ucrInputNewColumnName.SetPrefix("start")
     End Sub
 
     Private Sub SetDefaults()

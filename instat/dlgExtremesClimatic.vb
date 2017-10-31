@@ -244,12 +244,12 @@ Public Class dlgExtremesClimatic
     Private Sub SetAssignName()
         If rdoMinMax.Checked Then
             If rdoMax.Checked Then
-                ucrInputSave.SetName("max")
+                ucrInputSave.SetPrefix("max")
             Else
-                ucrInputSave.SetName("min")
+                ucrInputSave.SetPrefix("min")
             End If
         ElseIf rdoPeaks.Checked Then
-            ucrInputSave.SetName("peaks")
+            ucrInputSave.SetPrefix("peaks")
         End If
     End Sub
 
