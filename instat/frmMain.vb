@@ -216,6 +216,8 @@ Public Class frmMain
 
         mnuViewDataView.Checked = True
         mnuViewOutputWindow.Checked = True
+        mnuViewClimaticMenu.Checked = True
+        mnuViewProcurementMenu.Checked = True
         mnuViewLog.Checked = False
         mnuViewDataFrameMetadata.Checked = False
         mnuViewColumnMetadata.Checked = False
@@ -434,6 +436,8 @@ Public Class frmMain
         mnuTbOutput.Checked = mnuViewOutputWindow.Checked
         mnuTbColumnMetadata.Checked = mnuViewColumnMetadata.Checked
         mnuTbLog.Checked = mnuViewLog.Checked
+        mnuClimatic.Visible = mnuViewClimaticMenu.Checked
+        mnuProcurement.Visible = mnuViewProcurementMenu.Checked
     End Sub
 
     Private Sub mnuWindowVariable_Click(sender As Object, e As EventArgs) Handles mnuViewColumnMetadata.Click
