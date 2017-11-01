@@ -16,13 +16,13 @@
 
 Imports instat.Translations
 
-Public Class dlgDescribeOneVariable
+Public Class dlgOneVariableSummarise
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsSummaryFunction, clsSummariesList, clsInstatSummaryFunction As New RFunction
     Private bResetSubdialog As Boolean = False
 
-    Private Sub dlgDescriptiveStatistics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgOneVariableSummarise_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -37,17 +37,17 @@ Public Class dlgDescribeOneVariable
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBaseDescribeOneVar.iHelpTopicID = 410
-        ucrBaseDescribeOneVar.clsRsyntax.iCallType = 2
+        ucrBase.iHelpTopicID = 410
+        ucrBase.clsRsyntax.iCallType = 2
 
         'The selector is only used for one of the functions. Therefore it's parameter name is always the same. So this can be done in Initialise.
-        ucrSelectorDescribeOneVar.SetParameter(New RParameter("data_name", 0))
-        ucrSelectorDescribeOneVar.SetParameterIsString()
+        ucrSelectorOneVarSummarise.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorOneVarSummarise.SetParameterIsString()
 
-        ucrReceiverDescribeOneVar.SetParameter(New RParameter("object", 0))
-        ucrReceiverDescribeOneVar.SetParameterIsRFunction()
-        ucrReceiverDescribeOneVar.Selector = ucrSelectorDescribeOneVar
-        ucrReceiverDescribeOneVar.SetMeAsReceiver()
+        ucrReceiverOneVarSummarise.SetParameter(New RParameter("object", 0))
+        ucrReceiverOneVarSummarise.SetParameterIsRFunction()
+        ucrReceiverOneVarSummarise.Selector = ucrSelectorOneVarSummarise
+        ucrReceiverOneVarSummarise.SetMeAsReceiver()
 
         ucrNudMaxSum.SetParameter(New RParameter("maxsum", 2))
         ucrNudMaxSum.SetRDefault("7")
@@ -77,7 +77,7 @@ Public Class dlgDescribeOneVariable
         clsInstatSummaryFunction = New RFunction
         cmdSummaries.Enabled = False
 
-        ucrSelectorDescribeOneVar.Reset()
+        ucrSelectorOneVarSummarise.Reset()
 
         clsSummariesList.SetRCommand("c")
         clsSummariesList.AddParameter("summary_count_non_missing", Chr(34) & "summary_count_non_missing" & Chr(34), bIncludeArgumentName:=False)
@@ -92,29 +92,29 @@ Public Class dlgDescribeOneVariable
         clsInstatSummaryFunction.AddParameter("return_output", "TRUE")
         clsInstatSummaryFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList)
 
-        ucrBaseDescribeOneVar.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
         bResetSubdialog = True
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsInstatSummaryFunction, ucrChkOmitMissing.GetParameter(), iAdditionalPairNo:=1)
         ucrNudMaxSum.SetRCode(clsSummaryFunction, bReset)
-        ucrReceiverDescribeOneVar.SetRCode(clsSummaryFunction, bReset)
+        ucrReceiverOneVarSummarise.SetRCode(clsSummaryFunction, bReset)
         ucrChkOmitMissing.SetRCode(clsSummaryFunction, bReset)
-        ucrChkCustomise.SetRCode(ucrBaseDescribeOneVar.clsRsyntax.clsBaseFunction, bReset)
-        ucrSelectorDescribeOneVar.SetRCode(clsInstatSummaryFunction, bReset)
+        ucrChkCustomise.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrSelectorOneVarSummarise.SetRCode(clsInstatSummaryFunction, bReset)
     End Sub
 
     Public Sub TestOKEnabled()
         'We cannot test the values on the sub dialog because the sub dialog may not be in sync with the main dialog code. This only happens once the sub dialog has been opened.
-        If ucrReceiverDescribeOneVar.IsEmpty() OrElse (ucrChkCustomise.Checked AndAlso clsSummariesList.clsParameters.Count = 0) OrElse ucrNudMaxSum.GetText = "" Then
-            ucrBaseDescribeOneVar.OKEnabled(False)
+        If ucrReceiverOneVarSummarise.IsEmpty() OrElse (ucrChkCustomise.Checked AndAlso clsSummariesList.clsParameters.Count = 0) OrElse ucrNudMaxSum.GetText = "" Then
+            ucrBase.OKEnabled(False)
         Else
-            ucrBaseDescribeOneVar.OKEnabled(True)
+            ucrBase.OKEnabled(True)
         End If
     End Sub
 
-    Private Sub ucrBaseDescribeOneVar_ClickReset(sender As Object, e As EventArgs) Handles ucrBaseDescribeOneVar.ClickReset
+    Private Sub ucrBaseDescribeOneVar_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
@@ -129,19 +129,19 @@ Public Class dlgDescribeOneVariable
 
     Private Sub ChangeBaseFunction()
         If ucrChkCustomise.Checked Then
-            ucrBaseDescribeOneVar.clsRsyntax.SetBaseRFunction(clsInstatSummaryFunction)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsInstatSummaryFunction)
             cmdSummaries.Enabled = True
         Else
-            ucrBaseDescribeOneVar.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
             cmdSummaries.Enabled = False
         End If
         'We need to update the base function to include the 
         'ucrBaseDescribeOneVar.clsRsyntax.clsBaseFunction.AddParameter(ucrChkOmitMissing.GetParameter())
     End Sub
 
-    Private Sub ucrReceiverDescribeOneVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDescribeOneVar.ControlValueChanged
-        If Not ucrReceiverDescribeOneVar.IsEmpty Then
-            clsInstatSummaryFunction.AddParameter("columns_to_summarise", ucrReceiverDescribeOneVar.GetVariableNames())
+    Private Sub ucrReceiverDescribeOneVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOneVarSummarise.ControlValueChanged
+        If Not ucrReceiverOneVarSummarise.IsEmpty Then
+            clsInstatSummaryFunction.AddParameter("columns_to_summarise", ucrReceiverOneVarSummarise.GetVariableNames())
         Else
             clsInstatSummaryFunction.RemoveParameterByName("columns_to_summarise")
         End If
@@ -151,7 +151,7 @@ Public Class dlgDescribeOneVariable
         ChangeBaseFunction()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDescribeOneVar.ControlContentsChanged, ucrChkCustomise.ControlContentsChanged, ucrNudMaxSum.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOneVarSummarise.ControlContentsChanged, ucrChkCustomise.ControlContentsChanged, ucrNudMaxSum.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class

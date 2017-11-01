@@ -216,6 +216,8 @@ Public Class frmMain
 
         mnuViewDataView.Checked = True
         mnuViewOutputWindow.Checked = True
+        mnuViewClimaticMenu.Checked = True
+        mnuViewProcurementMenu.Checked = True
         mnuViewLog.Checked = False
         mnuViewDataFrameMetadata.Checked = False
         mnuViewColumnMetadata.Checked = False
@@ -434,6 +436,8 @@ Public Class frmMain
         mnuTbOutput.Checked = mnuViewOutputWindow.Checked
         mnuTbColumnMetadata.Checked = mnuViewColumnMetadata.Checked
         mnuTbLog.Checked = mnuViewLog.Checked
+        mnuClimatic.Visible = mnuViewClimaticMenu.Checked
+        mnuProcurement.Visible = mnuViewProcurementMenu.Checked
     End Sub
 
     Private Sub mnuWindowVariable_Click(sender As Object, e As EventArgs) Handles mnuViewColumnMetadata.Click
@@ -846,7 +850,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuDescribeOneVariableSummarise_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableSummarise.Click
-        dlgDescribeOneVariable.ShowDialog()
+        dlgOneVariableSummarise.ShowDialog()
     End Sub
 
     Private Sub mnuDescribeOneVariableGraph_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableGraph.Click
@@ -1013,7 +1017,7 @@ Public Class frmMain
         dlgDescribeTwoVarGraph.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticFileOpensst_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileOpensst.Click
+    Private Sub mnuClimaticFileOpenSST_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileOpenSST.Click
         dlgOpenSST.ShowDialog()
     End Sub
 
@@ -1256,11 +1260,11 @@ Public Class frmMain
         dlgNewMarkovChains.ShowDialog()
     End Sub
 
-    Private Sub mnuCliDefineClimaticData_Click(sender As Object, e As EventArgs) Handles mnuCliDefineClimaticData.Click
+    Private Sub mnuClimaticDefineClimaticData_Click(sender As Object, e As EventArgs) Handles mnuClimaticDefineClimaticData.Click
         DlgDefineClimaticData.ShowDialog()
     End Sub
 
-    Private Sub InventoryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InventoryToolStripMenuItem.Click
+    Private Sub mnuClimaticCheckDataInventory_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataInventory.Click
         dlgInventoryPlot.ShowDialog()
     End Sub
 
@@ -1381,7 +1385,7 @@ Public Class frmMain
         dlgImportFromDatabases.ShowDialog()
     End Sub
 
-    Private Sub OpenNetCDFToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenNetCDFToolStripMenuItem.Click
+    Private Sub mnuClimaticFileOpenNetCDF_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileOpenNetCDF.Click
         dlgOpenNetCDF.ShowDialog()
     End Sub
 
@@ -1549,7 +1553,7 @@ Public Class frmMain
         dlgSummaryBarOrPieChart.ShowDialog()
     End Sub
 
-    Private Sub DispalyClimaticDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DispalyClimaticDataToolStripMenuItem.Click
+    Private Sub mnuClimaticPrepareDispalyDaily_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareDispalyDaily.Click
         dlgDisplayDailyData.ShowDialog()
     End Sub
 
@@ -1649,11 +1653,11 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub DuplicatesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DuplicatesToolStripMenuItem.Click
+    Private Sub mnuPrepareCheckDataDuplicates_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataDuplicates.Click
         dlgDuplicates.ShowDialog()
     End Sub
 
-    Private Sub BoxplotsConceptualisedAndConstructedToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles BoxplotsConceptualisedAndConstructedToolStripMenuItem.Click
+    Private Sub mnuClimaticCheckDataBoxplot_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataBoxplot.Click
         dlgClimaticBoxPlot.ShowDialog()
     End Sub
 
@@ -1661,7 +1665,7 @@ Public Class frmMain
         dlgWindrose.ShowDialog()
     End Sub
 
-    Private Sub PlToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PlToolStripMenuItem.Click
+    Private Sub mnuClimaticCMSAFPlotRegion_Click(sender As Object, e As EventArgs) Handles mnuClimaticCMSAFPlotRegion.Click
         dlgPlotRegion.ShowDialog()
     End Sub
 
@@ -1683,7 +1687,7 @@ Public Class frmMain
         dlgCorrelation.ShowDialog()
     End Sub
 
-    Private Sub DisplayDailyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplayDailyToolStripMenuItem.Click
+    Private Sub mnuClimaticCheckDataDisplayDaily_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataDisplayDaily.Click
         dlgDisplayDailyData.ShowDialog()
     End Sub
 
@@ -1762,11 +1766,11 @@ Public Class frmMain
         dlgOneVariableGraph.ShowDialog()
     End Sub
 
-    Private Sub OneVariableSummariseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataOneVariableSummarise.Click
-        dlgDescribeOneVariable.ShowDialog()
-    End Sub
-
     Private Sub mnuPrepareCheckDataOneWayFrequencies_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataOneWayFrequencies.Click
         dlgOneWayFrequencies.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareCheckDataOneVariableSummarise_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataOneVariableSummarise.Click
+        dlgOneVariableSummarise.ShowDialog()
     End Sub
 End Class
