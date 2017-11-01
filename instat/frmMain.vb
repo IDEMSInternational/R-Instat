@@ -216,8 +216,8 @@ Public Class frmMain
 
         mnuViewDataView.Checked = True
         mnuViewOutputWindow.Checked = True
-        mnuViewClimaticMenu.Checked = True
-        mnuViewProcurementMenu.Checked = True
+        mnuViewClimaticMenu.Checked = False
+        mnuViewProcurementMenu.Checked = False
         mnuViewLog.Checked = False
         mnuViewDataFrameMetadata.Checked = False
         mnuViewColumnMetadata.Checked = False
@@ -1465,7 +1465,7 @@ Public Class frmMain
         dlgRecodeNumericIntoQuantiles.ShowDialog()
     End Sub
 
-    Private Sub ResetToDefaultLayoutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ResetToDefaultLayoutToolStripMenuItem.Click
+    Private Sub mnuViewResetToDefaultLayout_Click(sender As Object, e As EventArgs) Handles mnuViewResetToDefaultLayout.Click
         SetToDefaultLayout()
     End Sub
 
