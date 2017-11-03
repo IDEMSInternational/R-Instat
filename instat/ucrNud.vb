@@ -148,13 +148,30 @@ Public Class ucrNud
     End Function
 
     Protected Overrides Sub SetToValue(objTemp As Object)
+        'PLEASE NOTE THE COMMENTS ARE FOR GITHUB DISCUSSUIONS AND SHOW MY RECOMMENDATIONS. 
+        'THIS CODE BLOCK CAN BE CHANGED BACK TO THE WAY IT WAS. 
+        'CHANGES RECOMMENDED 
+        ' 1- Either change the parameter above to be of type decimal or
+        ' 2- Use objTemp.ToString instead of objTemp as the value in Decimal.TryParse(objTemp.ToString, dNewValue)
+
+        'I think the above objTemp parameter should be declared as decimal. 
+        'To show the users of this method that the parameter expected is explictly of type Decimal
+        'failure to which one can attempt to pass an object that can't be cast to string and that will throw
+        'an InvalidCastException in the statement I have commented below
+
         Dim dNewValue As Decimal
 
         If objTemp Is Nothing Then
             'If no value reset to a default value
             nudUpDown.Value = nudUpDown.Minimum
         Else
-            If Decimal.TryParse(objTemp, dNewValue) AndAlso dNewValue >= nudUpDown.Minimum AndAlso dNewValue <= nudUpDown.Maximum Then
+
+            'If its NECESSARY parameter objTemp to be of type OBJECT then I  think it should 
+            'explicitly be converted to STRING to prevent future errors of InvalidCastException.
+            'the Decimal.TryParse(<String>, result as decimal) takes a string as one of its parameters
+            'In my testing a situation can occur where the passed objTemp value can't be implicitly cast to string
+            'this has happened with inappropriate setting of ucrNud controls.
+            If Decimal.TryParse(objTemp.ToString, dNewValue) AndAlso dNewValue >= nudUpDown.Minimum AndAlso dNewValue <= nudUpDown.Maximum Then
                 nudUpDown.Value = dNewValue
             Else
                 MsgBox("Developer error: The value given cannot be converted to a decimal or is outside the range of the control. Value will be unchanged.")
