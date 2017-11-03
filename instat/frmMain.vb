@@ -1548,11 +1548,6 @@ Public Class frmMain
     Private Sub FrequencyTablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FrequencyTablesToolStripMenuItem.Click
         dlgSummaryBarOrPieChart.ShowDialog()
     End Sub
-
-    Private Sub DispalyClimaticDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DispalyClimaticDataToolStripMenuItem.Click
-        dlgDisplayDailyData.ShowDialog()
-    End Sub
-
     Private Sub mnuClimaticPrepareClimaticSummaries_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareClimaticSummaries.Click
         dlgClimaticSummary.ShowDialog()
     End Sub
