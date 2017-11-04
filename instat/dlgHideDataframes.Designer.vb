@@ -19,7 +19,7 @@ Partial Class dlgHideDataframes
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -36,10 +36,13 @@ Partial Class dlgHideDataframes
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrDataframeHide = New instat.ucrDataFrame()
+        Me.ucrSelectorForDataFrames = New instat.ucrSelectorAddRemove()
+        Me.lblDataFrames = New System.Windows.Forms.Label()
+        Me.lblHiddenDataFrames = New System.Windows.Forms.Label()
+        Me.ucrReceiverMultiple = New instat.ucrReceiverMultiple()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -49,21 +52,54 @@ Partial Class dlgHideDataframes
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 1
         '
-        'ucrDataframeHide
+        'ucrSelectorForDataFrames
         '
-        Me.ucrDataframeHide.bUseCurrentFilter = False
-        Me.ucrDataframeHide.Location = New System.Drawing.Point(9, 9)
-        Me.ucrDataframeHide.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrDataframeHide.Name = "ucrDataframeHide"
-        Me.ucrDataframeHide.Size = New System.Drawing.Size(120, 50)
-        Me.ucrDataframeHide.TabIndex = 0
+        Me.ucrSelectorForDataFrames.bShowHiddenColumns = False
+        Me.ucrSelectorForDataFrames.Location = New System.Drawing.Point(10, 30)
+        Me.ucrSelectorForDataFrames.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorForDataFrames.Name = "ucrSelectorForDataFrames"
+        Me.ucrSelectorForDataFrames.Size = New System.Drawing.Size(201, 147)
+        Me.ucrSelectorForDataFrames.TabIndex = 2
+        '
+        'lblDataFrames
+        '
+        Me.lblDataFrames.AutoSize = True
+        Me.lblDataFrames.Location = New System.Drawing.Point(10, 13)
+        Me.lblDataFrames.Name = "lblDataFrames"
+        Me.lblDataFrames.Size = New System.Drawing.Size(76, 13)
+        Me.lblDataFrames.TabIndex = 3
+        Me.lblDataFrames.Text = "Data Frame(s):"
+        '
+        'lblHiddenDataFrames
+        '
+        Me.lblHiddenDataFrames.AutoSize = True
+        Me.lblHiddenDataFrames.Location = New System.Drawing.Point(247, 34)
+        Me.lblHiddenDataFrames.Name = "lblHiddenDataFrames"
+        Me.lblHiddenDataFrames.Size = New System.Drawing.Size(113, 13)
+        Me.lblHiddenDataFrames.TabIndex = 4
+        Me.lblHiddenDataFrames.Text = "Hidden Data Frame(s):"
+        '
+        'ucrReceiverMultiple
+        '
+        Me.ucrReceiverMultiple.frmParent = Me
+        Me.ucrReceiverMultiple.Location = New System.Drawing.Point(247, 49)
+        Me.ucrReceiverMultiple.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMultiple.Name = "ucrReceiverMultiple"
+        Me.ucrReceiverMultiple.Selector = Nothing
+        Me.ucrReceiverMultiple.Size = New System.Drawing.Size(120, 112)
+        Me.ucrReceiverMultiple.strNcFilePath = ""
+        Me.ucrReceiverMultiple.TabIndex = 5
+        Me.ucrReceiverMultiple.ucrSelector = Nothing
         '
         'dlgHideDataframes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(422, 261)
-        Me.Controls.Add(Me.ucrDataframeHide)
+        Me.Controls.Add(Me.lblHiddenDataFrames)
+        Me.Controls.Add(Me.ucrReceiverMultiple)
+        Me.Controls.Add(Me.lblDataFrames)
+        Me.Controls.Add(Me.ucrSelectorForDataFrames)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -73,9 +109,13 @@ Partial Class dlgHideDataframes
         Me.Tag = "Hide_Dataframes"
         Me.Text = "Hide Dataframes"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrDataframeHide As ucrDataFrame
+    Friend WithEvents ucrSelectorForDataFrames As ucrSelectorAddRemove
+    Friend WithEvents lblDataFrames As Label
+    Friend WithEvents lblHiddenDataFrames As Label
+    Friend WithEvents ucrReceiverMultiple As ucrReceiverMultiple
 End Class

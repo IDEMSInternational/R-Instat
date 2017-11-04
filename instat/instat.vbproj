@@ -4377,9 +4377,19 @@
     <None Include="lib\RDotNet.NativeLibrary.dll" />
     <None Include="lib\unvell.ReoGrid.dll" />
     <None Include="lib\unvell.ReoScript.dll" />
+    <None Include="Resources\columnmetadata.png" />
+    <None Include="Resources\dataview.png" />
+    <None Include="Resources\last10dialogs.png" />
+    <None Include="Resources\lastdialog.png" />
+    <None Include="Resources\openfromfile.png" />
+    <None Include="Resources\openfromlibrary.png" />
+    <None Include="Resources\output2.png" />
+    <None Include="Resources\reset.png" />
+    <None Include="Resources\resetlayout.png" />
     <Content Include="Resources\rinstat_icon_Hih_icon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\script.png" />
     <Content Include="static\InstatObject\R\Backend_Components\link.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -5436,6 +5446,18 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\Library\Procurement\WorldBank.RDS">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\Library\Climatic\Satellite\CMSAF_CFC_DailyMean_1991-2015_Dodoma.nc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\Library\Climatic\Satellite\CMSAF_SDU_DailySums_1983-2015_Dodoma.nc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\Library\Climatic\Satellite\CMSAF_SISc_DailyMean_1983-2015_Dodoma.nc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\Library\Climatic\Satellite\CMSAF_SIS_DailyMean_1983-2015_Dodoma.nc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
