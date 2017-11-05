@@ -72,6 +72,7 @@ Public Class ucrFilter
         ucrInputFilterName.SetDataFrameSelector(ucrSelectorForFitler.ucrAvailableDataFrames)
         ucrInputFilterName.SetPrefix("Filter")
         ucrInputFilterName.SetDefaultTypeAsFilter()
+        ucrSelectorForFitler.btnDataOptions.Visible = False
     End Sub
 
     Private Sub SetDefaults()
