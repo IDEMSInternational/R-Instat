@@ -106,7 +106,7 @@ Public Class dlgShowModel
         ucrReceiverExpressionForTablePlus.AddAdditionalCodeParameterPair(clsProbabilities, New RParameter("q", 1), 1)
         ucrInputProbabilities.AddAdditionalCodeParameterPair(clsProbabilities, New RParameter("q", 1), 1)
         ucrChkDisplayGraphResults.AddAdditionalCodeParameterPair(clsProbabilities, ucrChkDisplayGraphResults.GetParameter, 1)
-        ucrPnlDistTypes.SetRCode(clsQuantiles, bReset)
+        ucrPnlDistTypes.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverExpressionForTablePlus.SetRCode(clsQuantiles, bReset)
         ucrChkDisplayGraphResults.SetRCode(clsQuantiles, bReset)
         ucrInputProbabilities.SetRCode(clsQuantiles, bReset)
