@@ -64,8 +64,6 @@ Public Class dlgOptions
         rtbOutputPreview.Text = strPreviewText
         SetView()
         'temp disabled as not functioning yet
-        rdoFrench.Enabled = False
-        rdoKiswahili.Enabled = False
         rdoSpanish.Enabled = False
         ucrNudDigits.SetMinMax(0, 22)
         ucrChkIncludeCommentsbyDefault.SetText("Include Comments by Default")
