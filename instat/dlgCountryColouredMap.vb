@@ -157,7 +157,7 @@ Public Class dlgCountryColouredMap
         clsRGeomPolygon.AddParameter("data", clsRFunctionParameter:=clsJoinFunction, iPosition:=0)
         'TODO make this an option
         clsRGeomPolygon.AddParameter("color", Chr(34) & "black" & Chr(34))
-
+        
         clsRaesFunc.SetPackageName("ggplot2")
         clsRaesFunc.SetRCommand("aes")
         clsRGeomPolygon.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunc, iPosition:=1)
@@ -165,7 +165,9 @@ Public Class dlgCountryColouredMap
         clsRaesFunc.AddParameter("y", "lat", iPosition:=1)
         clsRaesFunc.AddParameter("group", "group")
         clsBaseOperator.AddParameter("polygon", clsRFunctionParameter:=clsRGeomPolygon, iPosition:=1)
-
+        ' temporary better default colours for fill
+        ' TODO make this editable in the sub dialog
+        clsBaseOperator.AddParameter("fill", "scale_fill_gradientn(colours = rev(heat.colors(10)))")
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()

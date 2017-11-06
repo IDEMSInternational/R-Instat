@@ -21,6 +21,8 @@ Public Class dlgDescribeOneVariable
     Private bReset As Boolean = True
     Private clsSummaryFunction, clsSummariesList, clsInstatSummaryFunction As New RFunction
     Private bResetSubdialog As Boolean = False
+    Public strDefaultDataFrame As String = ""
+    Public strDefaultColumns() As String = Nothing
 
     Private Sub dlgDescriptiveStatistics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -31,6 +33,7 @@ Public Class dlgDescribeOneVariable
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetDefaultColumn()
         bReset = False
         TestOKEnabled()
         autoTranslate(Me)
@@ -145,6 +148,19 @@ Public Class dlgDescribeOneVariable
         Else
             clsInstatSummaryFunction.RemoveParameterByName("columns_to_summarise")
         End If
+    End Sub
+
+    Private Sub SetDefaultColumn()
+        If strDefaultDataFrame <> "" Then
+            ucrSelectorDescribeOneVar.SetDataframe(strDefaultDataFrame)
+        End If
+        If strDefaultColumns IsNot Nothing AndAlso strDefaultColumns.Count > 0 Then
+            For Each strVar As String In strDefaultColumns
+                ucrReceiverDescribeOneVar.Add(strVar, strDefaultDataFrame)
+            Next
+        End If
+        strDefaultDataFrame = ""
+        strDefaultColumns = Nothing
     End Sub
 
     Private Sub ucrChkCustomise_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCustomise.ControlValueChanged

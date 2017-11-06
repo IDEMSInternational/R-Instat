@@ -2541,7 +2541,7 @@ instat_object$set("public","define_red_flags", function(data_name, red_flags = c
 
 data_object$set("public","define_red_flags", function(red_flags = c()) {
   if(!self$is_metadata(corruption_data_label)) {
-    stop("Cannot define corruption red flags when data frame is not defined as corruption data.")
+    stop("Cannot define red flags when data frame is not defined as procurement data.")
   }
   self$append_to_variables_metadata(red_flags, corruption_red_flag_label, TRUE)
   self$append_to_variables_metadata(red_flags, corruption_index_label, TRUE)
@@ -2593,7 +2593,17 @@ data_object$set("public","get_CRI_component_column_names", function() {
 }
 )
 
-corruption_index_label
+instat_object$set("public","get_red_flag_column_names", function(data_name) {
+  self$get_data_objects(data_name)$get_red_flag_column_names()
+}
+)
+
+data_object$set("public","get_red_flag_column_names", function() {
+  include <- list(TRUE)
+  names(include) <- corruption_red_flag_label
+  return(self$get_column_names(include = include))
+}
+)
 
 instat_object$set("public","get_CRI_column_names", function(data_name) {
   self$get_data_objects(data_name)$get_CRI_column_names()
