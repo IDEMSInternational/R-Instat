@@ -88,6 +88,8 @@ Partial Class sdgDataOptions
         '
         'ucrInputFilterPreview
         '
+        Me.ucrInputFilterPreview.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilterPreview.IsMultiline = False
         Me.ucrInputFilterPreview.IsReadOnly = False
         Me.ucrInputFilterPreview.Location = New System.Drawing.Point(128, 209)
         Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
@@ -160,12 +162,15 @@ Partial Class sdgDataOptions
         '
         'ucrReceiverFilter
         '
+        Me.ucrReceiverFilter.frmParent = Nothing
         Me.ucrReceiverFilter.Location = New System.Drawing.Point(175, 34)
         Me.ucrReceiverFilter.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFilter.Name = "ucrReceiverFilter"
         Me.ucrReceiverFilter.Selector = Nothing
         Me.ucrReceiverFilter.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverFilter.strNcFilePath = ""
         Me.ucrReceiverFilter.TabIndex = 2
+        Me.ucrReceiverFilter.ucrSelector = Nothing
         '
         'ucrSelectorFilters
         '
@@ -174,7 +179,7 @@ Partial Class sdgDataOptions
         Me.ucrSelectorFilters.Location = New System.Drawing.Point(8, 8)
         Me.ucrSelectorFilters.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorFilters.Name = "ucrSelectorFilters"
-        Me.ucrSelectorFilters.Size = New System.Drawing.Size(120, 180)
+        Me.ucrSelectorFilters.Size = New System.Drawing.Size(154, 180)
         Me.ucrSelectorFilters.TabIndex = 0
         '
         'tbColumns
