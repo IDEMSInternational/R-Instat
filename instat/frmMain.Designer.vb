@@ -1825,7 +1825,7 @@ Partial Class frmMain
         'mnuClimaticCMSAFPlotRegion
         '
         Me.mnuClimaticCMSAFPlotRegion.Name = "mnuClimaticCMSAFPlotRegion"
-        Me.mnuClimaticCMSAFPlotRegion.Size = New System.Drawing.Size(152, 22)
+        Me.mnuClimaticCMSAFPlotRegion.Size = New System.Drawing.Size(144, 22)
         Me.mnuClimaticCMSAFPlotRegion.Text = "Plot Region..."
         '
         'mnuClimaticModels
@@ -3405,7 +3405,6 @@ Partial Class frmMain
         '
         'mnuPrepareDataObjectHideDataframes
         '
-        Me.mnuPrepareDataObjectHideDataframes.Enabled = False
         Me.mnuPrepareDataObjectHideDataframes.Name = "mnuPrepareDataObjectHideDataframes"
         Me.mnuPrepareDataObjectHideDataframes.Size = New System.Drawing.Size(196, 22)
         Me.mnuPrepareDataObjectHideDataframes.Text = "Hide Dataframes..."
