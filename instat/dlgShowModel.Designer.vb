@@ -123,9 +123,9 @@ Partial Class dlgShowModel
         Me.rdoProbabilities.FlatAppearance.BorderSize = 2
         Me.rdoProbabilities.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoProbabilities.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoProbabilities.Location = New System.Drawing.Point(114, 14)
+        Me.rdoProbabilities.Location = New System.Drawing.Point(229, 15)
         Me.rdoProbabilities.Name = "rdoProbabilities"
-        Me.rdoProbabilities.Size = New System.Drawing.Size(118, 27)
+        Me.rdoProbabilities.Size = New System.Drawing.Size(128, 27)
         Me.rdoProbabilities.TabIndex = 0
         Me.rdoProbabilities.TabStop = True
         Me.rdoProbabilities.Text = "Probabilities"
@@ -139,7 +139,7 @@ Partial Class dlgShowModel
         Me.rdoQuantiles.FlatAppearance.BorderSize = 2
         Me.rdoQuantiles.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoQuantiles.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoQuantiles.Location = New System.Drawing.Point(231, 14)
+        Me.rdoQuantiles.Location = New System.Drawing.Point(105, 15)
         Me.rdoQuantiles.Name = "rdoQuantiles"
         Me.rdoQuantiles.Size = New System.Drawing.Size(128, 27)
         Me.rdoQuantiles.TabIndex = 1
@@ -150,9 +150,9 @@ Partial Class dlgShowModel
         '
         'ucrPnlDistTypes
         '
-        Me.ucrPnlDistTypes.Location = New System.Drawing.Point(114, 10)
+        Me.ucrPnlDistTypes.Location = New System.Drawing.Point(95, 10)
         Me.ucrPnlDistTypes.Name = "ucrPnlDistTypes"
-        Me.ucrPnlDistTypes.Size = New System.Drawing.Size(254, 36)
+        Me.ucrPnlDistTypes.Size = New System.Drawing.Size(273, 36)
         Me.ucrPnlDistTypes.TabIndex = 14
         '
         'ucrChkDisplayGraphResults
