@@ -58,7 +58,7 @@ Partial Class dlgHideDataframes
         Me.ucrSelectorForDataFrames.Location = New System.Drawing.Point(10, 30)
         Me.ucrSelectorForDataFrames.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForDataFrames.Name = "ucrSelectorForDataFrames"
-        Me.ucrSelectorForDataFrames.Size = New System.Drawing.Size(201, 147)
+        Me.ucrSelectorForDataFrames.Size = New System.Drawing.Size(218, 147)
         Me.ucrSelectorForDataFrames.TabIndex = 2
         '
         'lblDataFrames
