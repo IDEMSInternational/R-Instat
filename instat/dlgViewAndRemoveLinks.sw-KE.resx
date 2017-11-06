@@ -12,4 +12,106 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="lblLinks.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblLinks.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>12, 15</value>
+  </data>
+  <data name="lblLinks.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>35, 13</value>
+  </data>
+  <data name="lblLinks.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblSelectedLink.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSelectedLink.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>196, 28</value>
+  </data>
+  <data name="lblSelectedLink.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>75, 13</value>
+  </data>
+  <data name="lblSelectedLink.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rdoViewLink.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoViewLink.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>194, 74</value>
+  </data>
+  <data name="rdoViewLink.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>71, 17</value>
+  </data>
+  <data name="rdoViewLink.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="rdoDeleteLink.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoDeleteLink.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>194, 97</value>
+  </data>
+  <data name="rdoDeleteLink.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>79, 17</value>
+  </data>
+  <data name="rdoDeleteLink.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" xml:space="preserve" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>422, 191</value>
+  </data>
+  <data name="ucrPnlLinks.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>184, 66</value>
+  </data>
+  <data name="ucrPnlLinks.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>130, 62</value>
+  </data>
+  <data name="ucrPnlLinks.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="ucrSelectorLinks.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 30</value>
+  </data>
+  <data name="ucrSelectorLinks.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectorLinks.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 98</value>
+  </data>
+  <data name="ucrSelectorLinks.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="ucrBase.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 134</value>
+  </data>
+  <data name="ucrBase.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>410, 52</value>
+  </data>
+  <data name="ucrBase.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="$this.StartPosition" xml:space="preserve" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="ucrReceiverViewLinks.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>194, 43</value>
+  </data>
+  <data name="ucrReceiverViewLinks.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverViewLinks.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverViewLinks.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

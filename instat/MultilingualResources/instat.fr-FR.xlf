@@ -7595,7 +7595,164 @@ Examples:
       <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
     </header>
     <body>
-      <group id="INSTAT/DLGVIEWANDREMOVELINKS.RESX" datatype="resx" />
+      <group id="INSTAT/DLGVIEWANDREMOVELINKS.RESX" datatype="resx">
+        <trans-unit id="lblLinks.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+        <trans-unit id="lblLinks.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>12, 15</source>
+          <target state="needs-review-translation">12, 15</target>
+        </trans-unit>
+        <trans-unit id="lblLinks.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>35, 13</source>
+          <target state="needs-review-translation">35, 13</target>
+        </trans-unit>
+        <trans-unit id="lblLinks.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>0</source>
+          <target state="needs-review-translation">0</target>
+        </trans-unit>
+        <trans-unit id="lblLinks.Text" translate="yes" xml:space="preserve">
+          <source>Links:</source>
+          <target state="new">Links:</target>
+        </trans-unit>
+        <trans-unit id="lblSelectedLink.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+        <trans-unit id="lblSelectedLink.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>196, 28</source>
+          <target state="needs-review-translation">196, 28</target>
+        </trans-unit>
+        <trans-unit id="lblSelectedLink.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>75, 13</source>
+          <target state="needs-review-translation">75, 13</target>
+        </trans-unit>
+        <trans-unit id="lblSelectedLink.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>2</source>
+          <target state="needs-review-translation">2</target>
+        </trans-unit>
+        <trans-unit id="lblSelectedLink.Text" translate="yes" xml:space="preserve">
+          <source>Selected Link:</source>
+          <target state="new">Selected Link:</target>
+        </trans-unit>
+        <trans-unit id="rdoViewLink.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+        <trans-unit id="rdoViewLink.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>194, 74</source>
+          <target state="needs-review-translation">194, 74</target>
+        </trans-unit>
+        <trans-unit id="rdoViewLink.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>71, 17</source>
+          <target state="needs-review-translation">71, 17</target>
+        </trans-unit>
+        <trans-unit id="rdoViewLink.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>5</source>
+          <target state="needs-review-translation">5</target>
+        </trans-unit>
+        <trans-unit id="rdoViewLink.Text" translate="yes" xml:space="preserve">
+          <source>View Link</source>
+          <target state="new">View Link</target>
+        </trans-unit>
+        <trans-unit id="rdoDeleteLink.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+        <trans-unit id="rdoDeleteLink.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>194, 97</source>
+          <target state="needs-review-translation">194, 97</target>
+        </trans-unit>
+        <trans-unit id="rdoDeleteLink.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>79, 17</source>
+          <target state="needs-review-translation">79, 17</target>
+        </trans-unit>
+        <trans-unit id="rdoDeleteLink.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>6</source>
+          <target state="needs-review-translation">6</target>
+        </trans-unit>
+        <trans-unit id="rdoDeleteLink.Text" translate="yes" xml:space="preserve">
+          <source>Delete Link</source>
+          <target state="new">Delete Link</target>
+        </trans-unit>
+        <trans-unit id="$this.AutoScaleDimensions" translate="yes" xml:space="preserve" extype="System.Drawing.SizeF, System.Drawing">
+          <source>6, 13</source>
+          <target state="needs-review-translation">6, 13</target>
+        </trans-unit>
+        <trans-unit id="$this.ClientSize" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>422, 191</source>
+          <target state="needs-review-translation">422, 191</target>
+        </trans-unit>
+        <trans-unit id="ucrPnlLinks.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>184, 66</source>
+          <target state="needs-review-translation">184, 66</target>
+        </trans-unit>
+        <trans-unit id="ucrPnlLinks.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>130, 62</source>
+          <target state="needs-review-translation">130, 62</target>
+        </trans-unit>
+        <trans-unit id="ucrPnlLinks.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>4</source>
+          <target state="needs-review-translation">4</target>
+        </trans-unit>
+        <trans-unit id="ucrSelectorLinks.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>10, 30</source>
+          <target state="needs-review-translation">10, 30</target>
+        </trans-unit>
+        <trans-unit id="ucrSelectorLinks.Margin" translate="yes" xml:space="preserve" extype="System.Windows.Forms.Padding, System.Windows.Forms">
+          <source>0, 0, 0, 0</source>
+          <target state="needs-review-translation">0, 0, 0, 0</target>
+        </trans-unit>
+        <trans-unit id="ucrSelectorLinks.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>120, 98</source>
+          <target state="needs-review-translation">120, 98</target>
+        </trans-unit>
+        <trans-unit id="ucrSelectorLinks.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>1</source>
+          <target state="needs-review-translation">1</target>
+        </trans-unit>
+        <trans-unit id="ucrBase.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>10, 134</source>
+          <target state="needs-review-translation">10, 134</target>
+        </trans-unit>
+        <trans-unit id="ucrBase.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>410, 52</source>
+          <target state="needs-review-translation">410, 52</target>
+        </trans-unit>
+        <trans-unit id="ucrBase.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>7</source>
+          <target state="needs-review-translation">7</target>
+        </trans-unit>
+        <trans-unit id="$this.StartPosition" translate="yes" xml:space="preserve" extype="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+          <source>CenterScreen</source>
+          <target state="needs-review-translation">CenterScreen</target>
+        </trans-unit>
+        <trans-unit id="$this.Text" translate="yes" xml:space="preserve">
+          <source>View and Remove Links</source>
+          <target state="new">View and Remove Links</target>
+        </trans-unit>
+        <trans-unit id="ucrReceiverViewLinks.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>194, 43</source>
+          <target state="needs-review-translation">194, 43</target>
+        </trans-unit>
+        <trans-unit id="ucrReceiverViewLinks.Margin" translate="yes" xml:space="preserve" extype="System.Windows.Forms.Padding, System.Windows.Forms">
+          <source>0, 0, 0, 0</source>
+          <target state="needs-review-translation">0, 0, 0, 0</target>
+        </trans-unit>
+        <trans-unit id="ucrReceiverViewLinks.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>120, 20</source>
+          <target state="needs-review-translation">120, 20</target>
+        </trans-unit>
+        <trans-unit id="ucrReceiverViewLinks.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>3</source>
+          <target state="needs-review-translation">3</target>
+        </trans-unit>
+        <trans-unit id="$this.Localizable" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" extradata="metadata">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+      </group>
     </body>
   </file>
   <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGVIEWANDREMOVEKEYS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
