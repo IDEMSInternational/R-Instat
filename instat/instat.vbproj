@@ -1429,10 +1429,10 @@
     <Compile Include="dlgDayMonth.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgDescribeOneVariable.Designer.vb">
-      <DependentUpon>dlgDescribeOneVariable.vb</DependentUpon>
+    <Compile Include="dlgOneVariableSummarise.Designer.vb">
+      <DependentUpon>dlgOneVariableSummarise.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgDescribeOneVariable.vb">
+    <Compile Include="dlgOneVariableSummarise.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgDotPlot.designer.vb">
@@ -3300,14 +3300,14 @@
     <EmbeddedResource Include="dlgDayMonth.sw-KE.resx">
       <DependentUpon>dlgDayMonth.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgDescribeOneVariable.fr-FR.resx">
-      <DependentUpon>dlgDescribeOneVariable.vb</DependentUpon>
+    <EmbeddedResource Include="dlgOneVariableSummarise.fr-FR.resx">
+      <DependentUpon>dlgOneVariableSummarise.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgDescribeOneVariable.resx">
-      <DependentUpon>dlgDescribeOneVariable.vb</DependentUpon>
+    <EmbeddedResource Include="dlgOneVariableSummarise.resx">
+      <DependentUpon>dlgOneVariableSummarise.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgDescribeOneVariable.sw-KE.resx">
-      <DependentUpon>dlgDescribeOneVariable.vb</DependentUpon>
+    <EmbeddedResource Include="dlgOneVariableSummarise.sw-KE.resx">
+      <DependentUpon>dlgOneVariableSummarise.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDotPlot.fr-FR.resx">
       <DependentUpon>dlgDotPlot.vb</DependentUpon>
