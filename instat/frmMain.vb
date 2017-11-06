@@ -846,7 +846,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuDescribeOneVariableSummarise_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableSummarise.Click
-        dlgDescribeOneVariable.ShowDialog()
+        dlgOneVariableSummarise.ShowDialog()
     End Sub
 
     Private Sub mnuDescribeOneVariableGraph_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableGraph.Click
@@ -1757,8 +1757,8 @@ Public Class frmMain
         dlgOneVariableGraph.ShowDialog()
     End Sub
 
-    Private Sub OneVariableSummariseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataOneVariableSummarise.Click
-        dlgDescribeOneVariable.ShowDialog()
+    Private Sub mnuPrepareCheckDataOneVariableSummarise_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataOneVariableSummarise.Click
+        dlgOneVariableSummarise.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareCheckDataOneWayFrequencies_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataOneWayFrequencies.Click
