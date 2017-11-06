@@ -5454,6 +5454,12 @@
     <Content Include="static\Library\Climatic\Satellite\CMSAF_SIS_DailyMean_1983-2015_Dodoma.nc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="static\Library\Procurement\country.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\Library\Procurement\country.year.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
