@@ -94,7 +94,7 @@ Public Class dlgEndOfRainsSeason
         ucrNudFrom.SetMinMax(1, 366)
 
         ucrNudTo.SetParameter(New RParameter("to", 1))
-        ucrNudTo.SetMinMax(2, 366)
+        ucrNudTo.SetMinMax(1, 366)
 
         'WATER BALANCE
         ucrChkEndOfSeason.SetText("End of Season")
@@ -136,15 +136,15 @@ Public Class dlgEndOfRainsSeason
         ucrChkEndOfRains.SetParameter(New RParameter("sub_end_rain", clsEndRainLastInstance, 1), False)
         ucrChkEndOfRains.SetText("End of Rains")
 
-        ucrChkEndOfRains.AddToLinkedControls(ucrNudThreshold, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.85)
-        ucrChkEndOfRains.AddToLinkedControls(ucrNudTotalOverDays, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
+        ucrChkEndOfRains.AddToLinkedControls(ucrNudAmount, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
+        ucrChkEndOfRains.AddToLinkedControls(ucrNudTotalOverDays, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrChkEndOfRains.AddToLinkedControls(ucrInputEndRainColName, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="end_rain")
 
-        ucrNudThreshold.SetParameter(New RParameter("threshold", 1, False))
-        ucrNudThreshold.SetMinMax() ' min and max
-        ucrNudThreshold.DecimalPlaces = 2
-        ucrNudThreshold.Increment = 0.1
-        ucrNudThreshold.SetLinkedDisplayControl(lblThreshold)
+        ucrNudAmount.SetParameter(New RParameter("threshold", 1, False))
+        ucrNudAmount.SetMinMax() ' min and max
+        ucrNudAmount.DecimalPlaces = 2
+        ucrNudAmount.Increment = 0.1
+        ucrNudAmount.SetLinkedDisplayControl(lblAmount)
 
         ucrNudTotalOverDays.SetParameter(New RParameter("n", 1))
         ucrNudTotalOverDays.SetMinMax(1, 366)
@@ -434,7 +434,7 @@ Public Class dlgEndOfRainsSeason
         clsEndRainFilter.AddParameter("function_exp", clsROperatorParameter:=clsEndRainFilterOperator, iPosition:=1)
         clsEndRainFilterOperator.SetOperation(">")
         clsEndRainFilterOperator.AddParameter("left", strRollingSum, iPosition:=0)
-        clsEndRainFilterOperator.AddParameter("threshold", 0.85, iPosition:=1)
+        clsEndRainFilterOperator.AddParameter("threshold", 10, iPosition:=1)
         clsEndRainFilter.AddParameter("result_name", Chr(34) & strFilterRain & Chr(34), iPosition:=2)
         clsEndRainFilter.AddParameter("sub_calculations", clsRFunctionParameter:=clsEndRainFilterList, iPosition:=4)
         clsEndRainFilterList.AddParameter("sub1", clsRFunctionParameter:=clsEndRainRollingSum, iPosition:=0, bIncludeArgumentName:=False)
@@ -523,12 +523,12 @@ Public Class dlgEndOfRainsSeason
 
         'EoR
         ucrChkEndOfRains.SetRCode(clsCombinationBaseList, bReset)
-        ucrNudThreshold.SetRCode(clsEndRainFilterOperator, bReset)
+        ucrNudAmount.SetRCode(clsEndRainFilterOperator, bReset)
         ucrNudTotalOverDays.SetRCode(clsRollingSumFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
-        If (ucrChkEndOfRains.Checked OrElse ucrChkEndOfSeason.Checked) AndAlso Not ucrReceiverRainfall.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso ucrNudFrom.GetText <> "" AndAlso ucrNudTo.GetText <> "" AndAlso ((ucrChkEndOfSeason.Checked AndAlso ucrNudCapacity.GetText <> "" AndAlso ucrNudWBLessThan.GetText <> "" AndAlso Not ucrInputWBColName.IsEmpty AndAlso Not ucrInputEvaporation.IsEmpty) OrElse Not ucrChkEndOfSeason.Checked) AndAlso ((ucrChkEndOfRains.Checked AndAlso ucrNudThreshold.GetText <> "" AndAlso ucrNudTotalOverDays.GetText <> "") OrElse Not ucrChkEndOfRains.Checked) AndAlso ucrInputEndRainColName.GetText <> ucrInputWBColName.GetText Then
+        If (ucrChkEndOfRains.Checked OrElse ucrChkEndOfSeason.Checked) AndAlso Not ucrReceiverRainfall.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso ucrNudFrom.GetText <> "" AndAlso ucrNudTo.GetText <> "" AndAlso ((ucrChkEndOfSeason.Checked AndAlso ucrNudCapacity.GetText <> "" AndAlso ucrNudWBLessThan.GetText <> "" AndAlso Not ucrInputWBColName.IsEmpty AndAlso Not ucrInputEvaporation.IsEmpty) OrElse Not ucrChkEndOfSeason.Checked) AndAlso ((ucrChkEndOfRains.Checked AndAlso ucrNudAmount.GetText <> "" AndAlso ucrNudTotalOverDays.GetText <> "") OrElse Not ucrChkEndOfRains.Checked) AndAlso ucrInputEndRainColName.GetText <> ucrInputWBColName.GetText Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -583,7 +583,7 @@ Public Class dlgEndOfRainsSeason
         RainfallChange()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkEndOfRains.ControlContentsChanged, ucrChkEndOfSeason.ControlContentsChanged, ucrReceiverRainfall.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrNudTo.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrNudCapacity.ControlContentsChanged, ucrNudWBLessThan.ControlContentsChanged, ucrInputWBColName.ControlContentsChanged, ucrChkEvaporationAsReceiver.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged, ucrReceiverEvaporation.ControlContentsChanged, ucrNudTotalOverDays.ControlContentsChanged, ucrNudThreshold.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkEndOfRains.ControlContentsChanged, ucrChkEndOfSeason.ControlContentsChanged, ucrReceiverRainfall.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrNudTo.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrNudCapacity.ControlContentsChanged, ucrNudWBLessThan.ControlContentsChanged, ucrInputWBColName.ControlContentsChanged, ucrChkEvaporationAsReceiver.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged, ucrReceiverEvaporation.ControlContentsChanged, ucrNudTotalOverDays.ControlContentsChanged, ucrNudAmount.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class

@@ -46,14 +46,14 @@ Partial Class dlgEndOfRainsSeason
         Me.lblRainfall = New System.Windows.Forms.Label()
         Me.lblEvaporation = New System.Windows.Forms.Label()
         Me.lblStation = New System.Windows.Forms.Label()
-        Me.lblThreshold = New System.Windows.Forms.Label()
+        Me.lblAmount = New System.Windows.Forms.Label()
         Me.lblTotalOverDays = New System.Windows.Forms.Label()
         Me.lblWaterBalanceLessThan = New System.Windows.Forms.Label()
         Me.lblEndRainsColName = New System.Windows.Forms.Label()
         Me.lblWBColName = New System.Windows.Forms.Label()
         Me.lblTo = New System.Windows.Forms.Label()
         Me.ucrNudTotalOverDays = New instat.ucrNud()
-        Me.ucrNudThreshold = New instat.ucrNud()
+        Me.ucrNudAmount = New instat.ucrNud()
         Me.ucrChkEndOfRains = New instat.ucrCheck()
         Me.ucrChkEvaporationAsReceiver = New instat.ucrCheck()
         Me.ucrReceiverEvaporation = New instat.ucrReceiverSingle()
@@ -147,14 +147,14 @@ Partial Class dlgEndOfRainsSeason
         Me.lblStation.TabIndex = 1
         Me.lblStation.Text = "Station:"
         '
-        'lblThreshold
+        'lblAmount
         '
-        Me.lblThreshold.AutoSize = True
-        Me.lblThreshold.Location = New System.Drawing.Point(153, 319)
-        Me.lblThreshold.Name = "lblThreshold"
-        Me.lblThreshold.Size = New System.Drawing.Size(57, 13)
-        Me.lblThreshold.TabIndex = 24
-        Me.lblThreshold.Text = "Threshold:"
+        Me.lblAmount.AutoSize = True
+        Me.lblAmount.Location = New System.Drawing.Point(153, 319)
+        Me.lblAmount.Name = "lblAmount"
+        Me.lblAmount.Size = New System.Drawing.Size(46, 13)
+        Me.lblAmount.TabIndex = 24
+        Me.lblAmount.Text = "Amount:"
         '
         'lblTotalOverDays
         '
@@ -217,17 +217,17 @@ Partial Class dlgEndOfRainsSeason
         Me.ucrNudTotalOverDays.TabIndex = 27
         Me.ucrNudTotalOverDays.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrNudThreshold
+        'ucrNudAmount
         '
-        Me.ucrNudThreshold.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudThreshold.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudThreshold.Location = New System.Drawing.Point(209, 316)
-        Me.ucrNudThreshold.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudThreshold.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudThreshold.Name = "ucrNudThreshold"
-        Me.ucrNudThreshold.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudThreshold.TabIndex = 25
-        Me.ucrNudThreshold.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAmount.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAmount.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudAmount.Location = New System.Drawing.Point(209, 316)
+        Me.ucrNudAmount.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudAmount.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAmount.Name = "ucrNudAmount"
+        Me.ucrNudAmount.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudAmount.TabIndex = 25
+        Me.ucrNudAmount.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkEndOfRains
         '
@@ -427,8 +427,8 @@ Partial Class dlgEndOfRainsSeason
         Me.ClientSize = New System.Drawing.Size(574, 464)
         Me.Controls.Add(Me.ucrNudTotalOverDays)
         Me.Controls.Add(Me.lblTotalOverDays)
-        Me.Controls.Add(Me.ucrNudThreshold)
-        Me.Controls.Add(Me.lblThreshold)
+        Me.Controls.Add(Me.ucrNudAmount)
+        Me.Controls.Add(Me.lblAmount)
         Me.Controls.Add(Me.ucrChkEndOfRains)
         Me.Controls.Add(Me.ucrChkEvaporationAsReceiver)
         Me.Controls.Add(Me.ucrReceiverEvaporation)
@@ -487,8 +487,8 @@ Partial Class dlgEndOfRainsSeason
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblStation As Label
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
-    Friend WithEvents lblThreshold As Label
-    Friend WithEvents ucrNudThreshold As ucrNud
+    Friend WithEvents lblAmount As Label
+    Friend WithEvents ucrNudAmount As ucrNud
     Friend WithEvents lblTotalOverDays As Label
     Friend WithEvents ucrNudTotalOverDays As ucrNud
     Friend WithEvents ucrNudWBLessThan As ucrNud

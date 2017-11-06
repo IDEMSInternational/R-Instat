@@ -127,7 +127,7 @@ Public Class dlgExtremesClimatic
         ucrInputSave.SetValidationTypeAsRVariable()
 
         ucrPnlExtremesType.AddToLinkedControls(ucrInputThresholdOperator, {rdoPeaks}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=">=")
-        ucrPnlExtremesType.AddToLinkedControls(ucrInputThresholdValue, {rdoPeaks}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.85")
+        ucrPnlExtremesType.AddToLinkedControls(ucrInputThresholdValue, {rdoPeaks}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="60")
         ucrPnlExtremesType.AddToLinkedControls(ucrPnlMaxMin, {rdoMinMax}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlExtremesType.AddToLinkedControls(ucrChkMissingValues, {rdoMinMax}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMaxMin.SetLinkedDisplayControl(lblNewColName)
@@ -192,7 +192,7 @@ Public Class dlgExtremesClimatic
         clsPeaksFilterFunction.AddParameter("function_exp", clsROperatorParameter:=clsPeaksFilterOperator, iPosition:=1)
         clsPeaksFilterOperator.SetOperation(">=") ' this value changes depending what is selected in the combo box. Temp. fix in a sub, but needs a proper fix.
         clsPeaksFilterOperator.AddParameter("left", iPosition:=0)
-        clsPeaksFilterOperator.AddParameter("right", "0.85", iPosition:=1)
+        clsPeaksFilterOperator.AddParameter("right", "60", iPosition:=1)
         clsPeaksFilterFunction.AddParameter("manipulations", clsRFunctionParameter:=clsDayManipulation, iPosition:=2)
         clsDayManipulation.AddParameter("sub1", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False, iPosition:=0)
         clsPeaksFilterFunction.AddParameter("save", 2, iPosition:=3)
