@@ -1245,6 +1245,22 @@ Public Class RLink
         Return strColumn
     End Function
 
+    Public Function GetRedFlagColumnNames(strDataName As String) As String()
+        Dim clsGetColumnName As New RFunction
+        Dim strColumn() As String
+        Dim expColumn As SymbolicExpression
+
+        clsGetColumnName.SetRCommand(strInstatDataObject & "$get_red_flag_column_names")
+        clsGetColumnName.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
+        expColumn = RunInternalScriptGetValue(clsGetColumnName.ToScript(), bSilent:=True)
+        If expColumn IsNot Nothing AndAlso Not expColumn.Type = Internals.SymbolicExpressionType.Null Then
+            strColumn = expColumn.AsCharacter.ToArray()
+        Else
+            strColumn = Nothing
+        End If
+        Return strColumn
+    End Function
+
     Public Function IsBinary(strDataName As String, strColumn As String) As Boolean
         Dim clsGetColumn As New RFunction
         Dim clsIsBinary As New RFunction
