@@ -81,7 +81,7 @@ Public Class dlgDefineRedFlags
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverRedFlag.IsEmpty Then
+        If ucrSelectorDefineRedFlag.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
