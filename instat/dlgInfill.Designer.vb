@@ -38,6 +38,7 @@ Partial Class dlgInfill
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgInfill))
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblByFactors = New System.Windows.Forms.Label()
         Me.ucrChkResort = New instat.ucrCheck()
@@ -49,76 +50,54 @@ Partial Class dlgInfill
         '
         'lblDate
         '
-        Me.lblDate.AutoSize = True
-        Me.lblDate.Location = New System.Drawing.Point(263, 15)
+        resources.ApplyResources(Me.lblDate, "lblDate")
         Me.lblDate.Name = "lblDate"
-        Me.lblDate.Size = New System.Drawing.Size(33, 13)
-        Me.lblDate.TabIndex = 1
-        Me.lblDate.Text = "Date:"
         '
         'lblByFactors
         '
-        Me.lblByFactors.AutoSize = True
-        Me.lblByFactors.Location = New System.Drawing.Point(263, 66)
+        resources.ApplyResources(Me.lblByFactors, "lblByFactors")
         Me.lblByFactors.Name = "lblByFactors"
-        Me.lblByFactors.Size = New System.Drawing.Size(60, 13)
-        Me.lblByFactors.TabIndex = 3
-        Me.lblByFactors.Text = "By Factors:"
         '
         'ucrChkResort
         '
         Me.ucrChkResort.Checked = False
-        Me.ucrChkResort.Location = New System.Drawing.Point(263, 196)
+        resources.ApplyResources(Me.ucrChkResort, "ucrChkResort")
         Me.ucrChkResort.Name = "ucrChkResort"
-        Me.ucrChkResort.Size = New System.Drawing.Size(141, 20)
-        Me.ucrChkResort.TabIndex = 5
         '
         'ucrReceiverFactors
         '
         Me.ucrReceiverFactors.frmParent = Me
-        Me.ucrReceiverFactors.Location = New System.Drawing.Point(263, 83)
-        Me.ucrReceiverFactors.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverFactors, "ucrReceiverFactors")
         Me.ucrReceiverFactors.Name = "ucrReceiverFactors"
         Me.ucrReceiverFactors.Selector = Nothing
-        Me.ucrReceiverFactors.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverFactors.strNcFilePath = ""
-        Me.ucrReceiverFactors.TabIndex = 4
         Me.ucrReceiverFactors.ucrSelector = Nothing
         '
         'ucrReceiverDate
         '
         Me.ucrReceiverDate.frmParent = Me
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(263, 31)
-        Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverDate, "ucrReceiverDate")
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing
-        Me.ucrReceiverDate.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverDate.strNcFilePath = ""
-        Me.ucrReceiverDate.TabIndex = 2
         Me.ucrReceiverDate.ucrSelector = Nothing
         '
         'ucrInfillSelector
         '
         Me.ucrInfillSelector.bShowHiddenColumns = False
         Me.ucrInfillSelector.bUseCurrentFilter = True
-        Me.ucrInfillSelector.Location = New System.Drawing.Point(9, 9)
-        Me.ucrInfillSelector.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrInfillSelector, "ucrInfillSelector")
         Me.ucrInfillSelector.Name = "ucrInfillSelector"
-        Me.ucrInfillSelector.Size = New System.Drawing.Size(210, 180)
-        Me.ucrInfillSelector.TabIndex = 0
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 228)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(406, 52)
-        Me.ucrBase.TabIndex = 6
         '
         'dlgInfill
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(417, 286)
         Me.Controls.Add(Me.ucrChkResort)
         Me.Controls.Add(Me.lblByFactors)
         Me.Controls.Add(Me.lblDate)
@@ -130,9 +109,7 @@ Partial Class dlgInfill
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgInfill"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Infill"
-        Me.Text = "Infill"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
