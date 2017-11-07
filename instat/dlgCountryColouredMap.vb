@@ -166,6 +166,10 @@ Public Class dlgCountryColouredMap
         clsRaesFunc.AddParameter("group", "group")
         clsBaseOperator.AddParameter("polygon", clsRFunctionParameter:=clsRGeomPolygon, iPosition:=1)
 
+        ' temporary better default colours for fill
+        ' TODO make this editable in the sub dialog
+        clsBaseOperator.AddParameter("fill", "scale_fill_gradientn(colours = rev(heat.colors(10)))")
+
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
