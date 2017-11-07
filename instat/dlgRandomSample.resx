@@ -117,4 +117,253 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblSampleSize.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblSampleSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>276, 154</value>
+  </data>
+  <data name="lblSampleSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 13</value>
+  </data>
+  <data name="lblSampleSize.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lblSampleSize.Text" xml:space="preserve">
+    <value>Sample Size:</value>
+  </data>
+  <data name="&gt;&gt;lblSampleSize.Name" xml:space="preserve">
+    <value>lblSampleSize</value>
+  </data>
+  <data name="&gt;&gt;lblSampleSize.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSampleSize.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblSampleSize.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="lblNumberofSamples.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblNumberofSamples.Location" type="System.Drawing.Point, System.Drawing">
+    <value>276, 128</value>
+  </data>
+  <data name="lblNumberofSamples.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 13</value>
+  </data>
+  <data name="lblNumberofSamples.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblNumberofSamples.Text" xml:space="preserve">
+    <value>Number of Samples:</value>
+  </data>
+  <data name="&gt;&gt;lblNumberofSamples.Name" xml:space="preserve">
+    <value>lblNumberofSamples</value>
+  </data>
+  <data name="&gt;&gt;lblNumberofSamples.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblNumberofSamples.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblNumberofSamples.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="ucrSampleSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>378, 152</value>
+  </data>
+  <data name="ucrSampleSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 23</value>
+  </data>
+  <data name="ucrSampleSize.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ucrSampleSize.Name" xml:space="preserve">
+    <value>ucrSampleSize</value>
+  </data>
+  <data name="&gt;&gt;ucrSampleSize.Type" xml:space="preserve">
+    <value>instat.ucrDataFrameLength, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSampleSize.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSampleSize.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrSelectorRandomSamples.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrSelectorRandomSamples.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectorRandomSamples.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 40</value>
+  </data>
+  <data name="ucrSelectorRandomSamples.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorRandomSamples.Name" xml:space="preserve">
+    <value>ucrSelectorRandomSamples</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorRandomSamples.Type" xml:space="preserve">
+    <value>instat.ucrDataFrame, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorRandomSamples.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorRandomSamples.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="ucrDistWithParameters.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 55</value>
+  </data>
+  <data name="ucrDistWithParameters.Size" type="System.Drawing.Size, System.Drawing">
+    <value>247, 156</value>
+  </data>
+  <data name="ucrDistWithParameters.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrDistWithParameters.Name" xml:space="preserve">
+    <value>ucrDistWithParameters</value>
+  </data>
+  <data name="&gt;&gt;ucrDistWithParameters.Type" xml:space="preserve">
+    <value>instat.ucrDistributionsWithParameters, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrDistWithParameters.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrDistWithParameters.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 248</value>
+  </data>
+  <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>410, 52</value>
+  </data>
+  <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
+    <value>ucrBase</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Type" xml:space="preserve">
+    <value>instat.ucrButtons, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="ucrChkSetSeed.Location" type="System.Drawing.Point, System.Drawing">
+    <value>276, 101</value>
+  </data>
+  <data name="ucrChkSetSeed.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="ucrChkSetSeed.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSetSeed.Name" xml:space="preserve">
+    <value>ucrChkSetSeed</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSetSeed.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSetSeed.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSetSeed.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrNudSeed.Location" type="System.Drawing.Point, System.Drawing">
+    <value>378, 100</value>
+  </data>
+  <data name="ucrNudSeed.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudSeed.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSeed.Name" xml:space="preserve">
+    <value>ucrNudSeed</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSeed.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSeed.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSeed.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrNudNumberOfSamples.Location" type="System.Drawing.Point, System.Drawing">
+    <value>378, 126</value>
+  </data>
+  <data name="ucrNudNumberOfSamples.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudNumberOfSamples.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrNudNumberOfSamples.Name" xml:space="preserve">
+    <value>ucrNudNumberOfSamples</value>
+  </data>
+  <data name="&gt;&gt;ucrNudNumberOfSamples.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudNumberOfSamples.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrNudNumberOfSamples.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrSaveRandomSamples.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 218</value>
+  </data>
+  <data name="ucrSaveRandomSamples.Size" type="System.Drawing.Size, System.Drawing">
+    <value>233, 24</value>
+  </data>
+  <data name="ucrSaveRandomSamples.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveRandomSamples.Name" xml:space="preserve">
+    <value>ucrSaveRandomSamples</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveRandomSamples.Type" xml:space="preserve">
+    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveRandomSamples.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveRandomSamples.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>540, 300</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Generate Random Sample</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>dlgRandomSample</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
