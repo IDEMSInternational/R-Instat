@@ -38,6 +38,7 @@ Partial Class dlgReorderColumns
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgReorderColumns))
         Me.lblColumns = New System.Windows.Forms.Label()
         Me.ucrReorderColumns = New instat.ucrReorder()
         Me.ucrDataFrameSelect = New instat.ucrDataFrame()
@@ -46,43 +47,31 @@ Partial Class dlgReorderColumns
         '
         'lblColumns
         '
-        Me.lblColumns.AutoSize = True
-        Me.lblColumns.Location = New System.Drawing.Point(170, 13)
+        resources.ApplyResources(Me.lblColumns, "lblColumns")
         Me.lblColumns.Name = "lblColumns"
-        Me.lblColumns.Size = New System.Drawing.Size(103, 13)
-        Me.lblColumns.TabIndex = 1
-        Me.lblColumns.Text = "Columns to Reorder:"
         '
         'ucrReorderColumns
         '
-        Me.ucrReorderColumns.Location = New System.Drawing.Point(170, 29)
+        resources.ApplyResources(Me.ucrReorderColumns, "ucrReorderColumns")
         Me.ucrReorderColumns.Name = "ucrReorderColumns"
-        Me.ucrReorderColumns.Size = New System.Drawing.Size(211, 174)
-        Me.ucrReorderColumns.TabIndex = 2
         Me.ucrReorderColumns.ucrDataFrameList = Nothing
         Me.ucrReorderColumns.ucrReceiver = Nothing
         '
         'ucrDataFrameSelect
         '
         Me.ucrDataFrameSelect.bUseCurrentFilter = True
-        Me.ucrDataFrameSelect.Location = New System.Drawing.Point(10, 10)
-        Me.ucrDataFrameSelect.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrDataFrameSelect, "ucrDataFrameSelect")
         Me.ucrDataFrameSelect.Name = "ucrDataFrameSelect"
-        Me.ucrDataFrameSelect.Size = New System.Drawing.Size(120, 40)
-        Me.ucrDataFrameSelect.TabIndex = 0
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 209)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
-        Me.ucrBase.TabIndex = 3
         '
         'dlgReorderColumns
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(415, 266)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReorderColumns)
         Me.Controls.Add(Me.ucrDataFrameSelect)
@@ -92,8 +81,6 @@ Partial Class dlgReorderColumns
         Me.MinimizeBox = False
         Me.Name = "dlgReorderColumns"
         Me.ShowIcon = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Reorder Columns"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

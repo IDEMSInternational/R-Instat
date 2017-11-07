@@ -38,6 +38,7 @@ Partial Class dlgRowSummary
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgRowSummary))
         Me.lblSelected = New System.Windows.Forms.Label()
         Me.cmdUserDefined = New System.Windows.Forms.Button()
         Me.grpStatistic = New System.Windows.Forms.GroupBox()
@@ -59,22 +60,15 @@ Partial Class dlgRowSummary
         '
         'lblSelected
         '
-        Me.lblSelected.AutoSize = True
-        Me.lblSelected.Location = New System.Drawing.Point(247, 45)
+        resources.ApplyResources(Me.lblSelected, "lblSelected")
         Me.lblSelected.Name = "lblSelected"
-        Me.lblSelected.Size = New System.Drawing.Size(103, 13)
-        Me.lblSelected.TabIndex = 1
         Me.lblSelected.Tag = "Rows_to_Summarise:"
-        Me.lblSelected.Text = "Rows to Summarise:"
         '
         'cmdUserDefined
         '
-        Me.cmdUserDefined.Location = New System.Drawing.Point(308, 271)
+        resources.ApplyResources(Me.cmdUserDefined, "cmdUserDefined")
         Me.cmdUserDefined.Name = "cmdUserDefined"
-        Me.cmdUserDefined.Size = New System.Drawing.Size(100, 23)
-        Me.cmdUserDefined.TabIndex = 5
         Me.cmdUserDefined.Tag = "User_Define"
-        Me.cmdUserDefined.Text = "User Define"
         Me.cmdUserDefined.UseVisualStyleBackColor = True
         '
         'grpStatistic
@@ -88,158 +82,110 @@ Partial Class dlgRowSummary
         Me.grpStatistic.Controls.Add(Me.rdoMedian)
         Me.grpStatistic.Controls.Add(Me.rdoSum)
         Me.grpStatistic.Controls.Add(Me.ucrPanelStatistics)
-        Me.grpStatistic.Location = New System.Drawing.Point(10, 195)
+        resources.ApplyResources(Me.grpStatistic, "grpStatistic")
         Me.grpStatistic.Name = "grpStatistic"
-        Me.grpStatistic.Size = New System.Drawing.Size(398, 70)
-        Me.grpStatistic.TabIndex = 3
         Me.grpStatistic.TabStop = False
         Me.grpStatistic.Tag = "Statistic"
-        Me.grpStatistic.Text = "Row Statistic"
         '
         'rdoMinimum
         '
-        Me.rdoMinimum.AutoSize = True
-        Me.rdoMinimum.Location = New System.Drawing.Point(327, 19)
+        resources.ApplyResources(Me.rdoMinimum, "rdoMinimum")
         Me.rdoMinimum.Name = "rdoMinimum"
-        Me.rdoMinimum.Size = New System.Drawing.Size(66, 17)
-        Me.rdoMinimum.TabIndex = 7
         Me.rdoMinimum.TabStop = True
         Me.rdoMinimum.Tag = "Minimum"
-        Me.rdoMinimum.Text = "Minimum"
         Me.rdoMinimum.UseVisualStyleBackColor = True
         '
         'rdoMaximum
         '
-        Me.rdoMaximum.AutoSize = True
-        Me.rdoMaximum.Location = New System.Drawing.Point(327, 42)
+        resources.ApplyResources(Me.rdoMaximum, "rdoMaximum")
         Me.rdoMaximum.Name = "rdoMaximum"
-        Me.rdoMaximum.Size = New System.Drawing.Size(69, 17)
-        Me.rdoMaximum.TabIndex = 8
         Me.rdoMaximum.TabStop = True
         Me.rdoMaximum.Tag = "Maximum"
-        Me.rdoMaximum.Text = "Maximum"
         Me.rdoMaximum.UseVisualStyleBackColor = True
         '
         'rdoCount
         '
-        Me.rdoCount.AutoSize = True
-        Me.rdoCount.Location = New System.Drawing.Point(204, 19)
+        resources.ApplyResources(Me.rdoCount, "rdoCount")
         Me.rdoCount.Name = "rdoCount"
-        Me.rdoCount.Size = New System.Drawing.Size(53, 17)
-        Me.rdoCount.TabIndex = 5
         Me.rdoCount.TabStop = True
         Me.rdoCount.Tag = "Count"
-        Me.rdoCount.Text = "Count"
         Me.rdoCount.UseVisualStyleBackColor = True
         '
         'rdoMean
         '
-        Me.rdoMean.AutoSize = True
-        Me.rdoMean.Location = New System.Drawing.Point(6, 19)
+        resources.ApplyResources(Me.rdoMean, "rdoMean")
         Me.rdoMean.Name = "rdoMean"
-        Me.rdoMean.Size = New System.Drawing.Size(52, 17)
-        Me.rdoMean.TabIndex = 1
         Me.rdoMean.TabStop = True
         Me.rdoMean.Tag = "Mean"
-        Me.rdoMean.Text = "Mean"
         Me.rdoMean.UseVisualStyleBackColor = True
         '
         'rdoStandardDeviation
         '
-        Me.rdoStandardDeviation.AutoSize = True
-        Me.rdoStandardDeviation.Location = New System.Drawing.Point(77, 42)
+        resources.ApplyResources(Me.rdoStandardDeviation, "rdoStandardDeviation")
         Me.rdoStandardDeviation.Name = "rdoStandardDeviation"
-        Me.rdoStandardDeviation.Size = New System.Drawing.Size(116, 17)
-        Me.rdoStandardDeviation.TabIndex = 4
         Me.rdoStandardDeviation.TabStop = True
         Me.rdoStandardDeviation.Tag = "Standard_Deviation"
-        Me.rdoStandardDeviation.Text = "Standard Deviation"
         Me.rdoStandardDeviation.UseVisualStyleBackColor = True
         '
         'rdoNumberofMissing
         '
-        Me.rdoNumberofMissing.AutoSize = True
-        Me.rdoNumberofMissing.Location = New System.Drawing.Point(204, 42)
+        resources.ApplyResources(Me.rdoNumberofMissing, "rdoNumberofMissing")
         Me.rdoNumberofMissing.Name = "rdoNumberofMissing"
-        Me.rdoNumberofMissing.Size = New System.Drawing.Size(112, 17)
-        Me.rdoNumberofMissing.TabIndex = 6
         Me.rdoNumberofMissing.TabStop = True
         Me.rdoNumberofMissing.Tag = "Number_of_Missing"
-        Me.rdoNumberofMissing.Text = "Number of Missing"
         Me.rdoNumberofMissing.UseVisualStyleBackColor = True
         '
         'rdoMedian
         '
-        Me.rdoMedian.AutoSize = True
-        Me.rdoMedian.Location = New System.Drawing.Point(6, 42)
+        resources.ApplyResources(Me.rdoMedian, "rdoMedian")
         Me.rdoMedian.Name = "rdoMedian"
-        Me.rdoMedian.Size = New System.Drawing.Size(60, 17)
-        Me.rdoMedian.TabIndex = 2
         Me.rdoMedian.TabStop = True
         Me.rdoMedian.Tag = "Median"
-        Me.rdoMedian.Text = "Median"
         Me.rdoMedian.UseVisualStyleBackColor = True
         '
         'rdoSum
         '
-        Me.rdoSum.AutoSize = True
-        Me.rdoSum.Location = New System.Drawing.Point(77, 19)
+        resources.ApplyResources(Me.rdoSum, "rdoSum")
         Me.rdoSum.Name = "rdoSum"
-        Me.rdoSum.Size = New System.Drawing.Size(46, 17)
-        Me.rdoSum.TabIndex = 3
         Me.rdoSum.TabStop = True
         Me.rdoSum.Tag = "Sum"
-        Me.rdoSum.Text = "Sum"
         Me.rdoSum.UseVisualStyleBackColor = True
         '
         'ucrPanelStatistics
         '
-        Me.ucrPanelStatistics.Location = New System.Drawing.Point(3, 12)
+        resources.ApplyResources(Me.ucrPanelStatistics, "ucrPanelStatistics")
         Me.ucrPanelStatistics.Name = "ucrPanelStatistics"
-        Me.ucrPanelStatistics.Size = New System.Drawing.Size(393, 56)
-        Me.ucrPanelStatistics.TabIndex = 0
         '
         'ucrSaveResults
         '
-        Me.ucrSaveResults.Location = New System.Drawing.Point(10, 271)
+        resources.ApplyResources(Me.ucrSaveResults, "ucrSaveResults")
         Me.ucrSaveResults.Name = "ucrSaveResults"
-        Me.ucrSaveResults.Size = New System.Drawing.Size(269, 24)
-        Me.ucrSaveResults.TabIndex = 4
         '
         'ucrSelectorForRowSummaries
         '
         Me.ucrSelectorForRowSummaries.bShowHiddenColumns = False
         Me.ucrSelectorForRowSummaries.bUseCurrentFilter = True
-        Me.ucrSelectorForRowSummaries.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorForRowSummaries.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorForRowSummaries, "ucrSelectorForRowSummaries")
         Me.ucrSelectorForRowSummaries.Name = "ucrSelectorForRowSummaries"
-        Me.ucrSelectorForRowSummaries.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorForRowSummaries.TabIndex = 0
         '
         'ucrReceiverForRowSummaries
         '
         Me.ucrReceiverForRowSummaries.frmParent = Me
-        Me.ucrReceiverForRowSummaries.Location = New System.Drawing.Point(250, 60)
-        Me.ucrReceiverForRowSummaries.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverForRowSummaries, "ucrReceiverForRowSummaries")
         Me.ucrReceiverForRowSummaries.Name = "ucrReceiverForRowSummaries"
         Me.ucrReceiverForRowSummaries.Selector = Nothing
-        Me.ucrReceiverForRowSummaries.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverForRowSummaries.strNcFilePath = ""
-        Me.ucrReceiverForRowSummaries.TabIndex = 2
         Me.ucrReceiverForRowSummaries.ucrSelector = Nothing
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 300)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 6
         '
         'dlgRowSummary
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(418, 357)
         Me.Controls.Add(Me.ucrSaveResults)
         Me.Controls.Add(Me.grpStatistic)
         Me.Controls.Add(Me.cmdUserDefined)
@@ -251,9 +197,7 @@ Partial Class dlgRowSummary
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgRowSummary"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Row_Summaries"
-        Me.Text = "Row Summaries"
         Me.grpStatistic.ResumeLayout(False)
         Me.grpStatistic.PerformLayout()
         Me.ResumeLayout(False)

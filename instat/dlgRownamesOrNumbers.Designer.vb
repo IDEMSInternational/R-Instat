@@ -38,6 +38,7 @@ Partial Class dlgRowNamesOrNumbers
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgRowNamesOrNumbers))
         Me.ucrSelectorRowNames = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOverallOptions = New instat.UcrPanel()
@@ -59,118 +60,80 @@ Partial Class dlgRowNamesOrNumbers
         '
         Me.ucrSelectorRowNames.bShowHiddenColumns = False
         Me.ucrSelectorRowNames.bUseCurrentFilter = True
-        Me.ucrSelectorRowNames.Location = New System.Drawing.Point(9, 10)
-        Me.ucrSelectorRowNames.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorRowNames, "ucrSelectorRowNames")
         Me.ucrSelectorRowNames.Name = "ucrSelectorRowNames"
-        Me.ucrSelectorRowNames.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorRowNames.TabIndex = 0
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 281)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 2
         '
         'ucrPnlOverallOptions
         '
-        Me.ucrPnlOverallOptions.Location = New System.Drawing.Point(3, 14)
+        resources.ApplyResources(Me.ucrPnlOverallOptions, "ucrPnlOverallOptions")
         Me.ucrPnlOverallOptions.Name = "ucrPnlOverallOptions"
-        Me.ucrPnlOverallOptions.Size = New System.Drawing.Size(227, 166)
-        Me.ucrPnlOverallOptions.TabIndex = 0
         '
         'ucrReceiverRowNames
         '
         Me.ucrReceiverRowNames.frmParent = Me
-        Me.ucrReceiverRowNames.Location = New System.Drawing.Point(24, 92)
-        Me.ucrReceiverRowNames.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverRowNames, "ucrReceiverRowNames")
         Me.ucrReceiverRowNames.Name = "ucrReceiverRowNames"
         Me.ucrReceiverRowNames.Selector = Nothing
-        Me.ucrReceiverRowNames.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverRowNames.strNcFilePath = ""
-        Me.ucrReceiverRowNames.TabIndex = 4
         Me.ucrReceiverRowNames.ucrSelector = Nothing
         '
         'rdoCopyRowNamesIntoFirstColumn
         '
-        Me.rdoCopyRowNamesIntoFirstColumn.AutoSize = True
-        Me.rdoCopyRowNamesIntoFirstColumn.Location = New System.Drawing.Point(9, 19)
+        resources.ApplyResources(Me.rdoCopyRowNamesIntoFirstColumn, "rdoCopyRowNamesIntoFirstColumn")
         Me.rdoCopyRowNamesIntoFirstColumn.Name = "rdoCopyRowNamesIntoFirstColumn"
-        Me.rdoCopyRowNamesIntoFirstColumn.Size = New System.Drawing.Size(190, 17)
-        Me.rdoCopyRowNamesIntoFirstColumn.TabIndex = 1
         Me.rdoCopyRowNamesIntoFirstColumn.TabStop = True
-        Me.rdoCopyRowNamesIntoFirstColumn.Text = "Copy Row Names into First Column"
         Me.rdoCopyRowNamesIntoFirstColumn.UseVisualStyleBackColor = True
         '
         'rdoSetRowNamesFromColumn
         '
-        Me.rdoSetRowNamesFromColumn.AutoSize = True
-        Me.rdoSetRowNamesFromColumn.Location = New System.Drawing.Point(9, 72)
+        resources.ApplyResources(Me.rdoSetRowNamesFromColumn, "rdoSetRowNamesFromColumn")
         Me.rdoSetRowNamesFromColumn.Name = "rdoSetRowNamesFromColumn"
-        Me.rdoSetRowNamesFromColumn.Size = New System.Drawing.Size(163, 17)
-        Me.rdoSetRowNamesFromColumn.TabIndex = 3
         Me.rdoSetRowNamesFromColumn.TabStop = True
-        Me.rdoSetRowNamesFromColumn.Text = "Set Row Names from Column"
         Me.rdoSetRowNamesFromColumn.UseVisualStyleBackColor = True
         '
         'rdoResetintoPositiveIntegers
         '
-        Me.rdoResetintoPositiveIntegers.AutoSize = True
-        Me.rdoResetintoPositiveIntegers.Location = New System.Drawing.Point(9, 127)
+        resources.ApplyResources(Me.rdoResetintoPositiveIntegers, "rdoResetintoPositiveIntegers")
         Me.rdoResetintoPositiveIntegers.Name = "rdoResetintoPositiveIntegers"
-        Me.rdoResetintoPositiveIntegers.Size = New System.Drawing.Size(207, 17)
-        Me.rdoResetintoPositiveIntegers.TabIndex = 5
         Me.rdoResetintoPositiveIntegers.TabStop = True
-        Me.rdoResetintoPositiveIntegers.Text = "Reset Row Names to Positive Integers"
         Me.rdoResetintoPositiveIntegers.UseVisualStyleBackColor = True
         '
         'rdoSortbyRowNames
         '
-        Me.rdoSortbyRowNames.AutoSize = True
-        Me.rdoSortbyRowNames.Location = New System.Drawing.Point(9, 156)
+        resources.ApplyResources(Me.rdoSortbyRowNames, "rdoSortbyRowNames")
         Me.rdoSortbyRowNames.Name = "rdoSortbyRowNames"
-        Me.rdoSortbyRowNames.Size = New System.Drawing.Size(119, 17)
-        Me.rdoSortbyRowNames.TabIndex = 6
         Me.rdoSortbyRowNames.TabStop = True
-        Me.rdoSortbyRowNames.Text = "Sort by Row Names"
         Me.rdoSortbyRowNames.UseVisualStyleBackColor = True
         '
         'rdoSortDescending
         '
-        Me.rdoSortDescending.AutoSize = True
-        Me.rdoSortDescending.Location = New System.Drawing.Point(130, 186)
+        resources.ApplyResources(Me.rdoSortDescending, "rdoSortDescending")
         Me.rdoSortDescending.Name = "rdoSortDescending"
-        Me.rdoSortDescending.Size = New System.Drawing.Size(82, 17)
-        Me.rdoSortDescending.TabIndex = 9
         Me.rdoSortDescending.TabStop = True
-        Me.rdoSortDescending.Text = "Descending"
         Me.rdoSortDescending.UseVisualStyleBackColor = True
         '
         'rdoSortAscending
         '
-        Me.rdoSortAscending.AutoSize = True
-        Me.rdoSortAscending.Location = New System.Drawing.Point(24, 186)
+        resources.ApplyResources(Me.rdoSortAscending, "rdoSortAscending")
         Me.rdoSortAscending.Name = "rdoSortAscending"
-        Me.rdoSortAscending.Size = New System.Drawing.Size(75, 17)
-        Me.rdoSortAscending.TabIndex = 8
         Me.rdoSortAscending.TabStop = True
-        Me.rdoSortAscending.Text = "Ascending"
         Me.rdoSortAscending.UseVisualStyleBackColor = True
         '
         'ucrNewColumnName
         '
-        Me.ucrNewColumnName.Location = New System.Drawing.Point(24, 42)
+        resources.ApplyResources(Me.ucrNewColumnName, "ucrNewColumnName")
         Me.ucrNewColumnName.Name = "ucrNewColumnName"
-        Me.ucrNewColumnName.Size = New System.Drawing.Size(206, 24)
-        Me.ucrNewColumnName.TabIndex = 2
         '
         'ucrChkAsNumeric
         '
         Me.ucrChkAsNumeric.Checked = False
-        Me.ucrChkAsNumeric.Location = New System.Drawing.Point(24, 213)
+        resources.ApplyResources(Me.ucrChkAsNumeric, "ucrChkAsNumeric")
         Me.ucrChkAsNumeric.Name = "ucrChkAsNumeric"
-        Me.ucrChkAsNumeric.Size = New System.Drawing.Size(188, 20)
-        Me.ucrChkAsNumeric.TabIndex = 9
         '
         'grpboxOptionsforRowNamesorNumbercols
         '
@@ -185,25 +148,19 @@ Partial Class dlgRowNamesOrNumbers
         Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.rdoCopyRowNamesIntoFirstColumn)
         Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.ucrReceiverRowNames)
         Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.ucrPnlOverallOptions)
-        Me.grpboxOptionsforRowNamesorNumbercols.Location = New System.Drawing.Point(228, 34)
+        resources.ApplyResources(Me.grpboxOptionsforRowNamesorNumbercols, "grpboxOptionsforRowNamesorNumbercols")
         Me.grpboxOptionsforRowNamesorNumbercols.Name = "grpboxOptionsforRowNamesorNumbercols"
-        Me.grpboxOptionsforRowNamesorNumbercols.Size = New System.Drawing.Size(236, 241)
-        Me.grpboxOptionsforRowNamesorNumbercols.TabIndex = 1
         Me.grpboxOptionsforRowNamesorNumbercols.TabStop = False
-        Me.grpboxOptionsforRowNamesorNumbercols.Text = "Options"
         '
         'ucrPnlSortOptions
         '
-        Me.ucrPnlSortOptions.Location = New System.Drawing.Point(7, 171)
+        resources.ApplyResources(Me.ucrPnlSortOptions, "ucrPnlSortOptions")
         Me.ucrPnlSortOptions.Name = "ucrPnlSortOptions"
-        Me.ucrPnlSortOptions.Size = New System.Drawing.Size(206, 36)
-        Me.ucrPnlSortOptions.TabIndex = 7
         '
         'dlgRowNamesOrNumbers
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(470, 336)
         Me.Controls.Add(Me.grpboxOptionsforRowNamesorNumbercols)
         Me.Controls.Add(Me.ucrSelectorRowNames)
         Me.Controls.Add(Me.ucrBase)
@@ -211,8 +168,6 @@ Partial Class dlgRowNamesOrNumbers
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgRowNamesOrNumbers"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Row Names Or Numbers"
         Me.grpboxOptionsforRowNamesorNumbercols.ResumeLayout(False)
         Me.grpboxOptionsforRowNamesorNumbercols.PerformLayout()
         Me.ResumeLayout(False)
