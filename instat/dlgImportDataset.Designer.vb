@@ -156,7 +156,7 @@ Partial Class dlgImportDataset
         Me.grdDataPreview.SheetTabContextMenuStrip = Nothing
         Me.grdDataPreview.SheetTabNewButtonVisible = False
         Me.grdDataPreview.SheetTabVisible = True
-        Me.grdDataPreview.SheetTabWidth = 90
+        Me.grdDataPreview.SheetTabWidth = 60
         Me.grdDataPreview.ShowScrollEndSpacing = True
         '
         'lblFileOpenPath
