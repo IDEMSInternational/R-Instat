@@ -120,4 +120,697 @@
   <metadata name="ttJoinDetails.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="cmdAddPair.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 46</value>
+  </data>
+  <data name="cmdAddPair.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 23</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cmdAddPair.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="cmdAddPair.Text" xml:space="preserve">
+    <value>Add Pair</value>
+  </data>
+  <data name="&gt;&gt;cmdAddPair.Name" xml:space="preserve">
+    <value>cmdAddPair</value>
+  </data>
+  <data name="&gt;&gt;cmdAddPair.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdAddPair.Parent" xml:space="preserve">
+    <value>grpKeys</value>
+  </data>
+  <data name="&gt;&gt;cmdAddPair.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblFirstKeyMatch.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFirstKeyMatch.Location" type="System.Drawing.Point, System.Drawing">
+    <value>128, 22</value>
+  </data>
+  <data name="lblFirstKeyMatch.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 13</value>
+  </data>
+  <data name="lblFirstKeyMatch.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblFirstKeyMatch.Text" xml:space="preserve">
+    <value>Matched With</value>
+  </data>
+  <data name="&gt;&gt;lblFirstKeyMatch.Name" xml:space="preserve">
+    <value>lblFirstKeyMatch</value>
+  </data>
+  <data name="&gt;&gt;lblFirstKeyMatch.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblFirstKeyMatch.Parent" xml:space="preserve">
+    <value>grpKeys</value>
+  </data>
+  <data name="&gt;&gt;lblFirstKeyMatch.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrReceiverSecondDF.Location" type="System.Drawing.Point, System.Drawing">
+    <value>205, 20</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrReceiverSecondDF.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverSecondDF.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverSecondDF.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSecondDF.Name" xml:space="preserve">
+    <value>ucrReceiverSecondDF</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSecondDF.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSecondDF.Parent" xml:space="preserve">
+    <value>grpKeys</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSecondDF.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrReceiverFirstDF.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 20</value>
+  </data>
+  <data name="ucrReceiverFirstDF.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverFirstDF.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverFirstDF.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverFirstDF.Name" xml:space="preserve">
+    <value>ucrReceiverFirstDF</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverFirstDF.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverFirstDF.Parent" xml:space="preserve">
+    <value>grpKeys</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverFirstDF.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="grpKeys.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 243</value>
+  </data>
+  <data name="grpKeys.Size" type="System.Drawing.Size, System.Drawing">
+    <value>335, 76</value>
+  </data>
+  <data name="grpKeys.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="grpKeys.Text" xml:space="preserve">
+    <value>Key Columns</value>
+  </data>
+  <data name="&gt;&gt;grpKeys.Name" xml:space="preserve">
+    <value>grpKeys</value>
+  </data>
+  <data name="&gt;&gt;grpKeys.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpKeys.Parent" xml:space="preserve">
+    <value>tpJoinByOptions</value>
+  </data>
+  <data name="&gt;&gt;grpKeys.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="cmdRemoveAll.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 223</value>
+  </data>
+  <data name="cmdRemoveAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>130, 23</value>
+  </data>
+  <data name="cmdRemoveAll.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="cmdRemoveAll.Text" xml:space="preserve">
+    <value>Remove All Pairs</value>
+  </data>
+  <data name="&gt;&gt;cmdRemoveAll.Name" xml:space="preserve">
+    <value>cmdRemoveAll</value>
+  </data>
+  <data name="&gt;&gt;cmdRemoveAll.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdRemoveAll.Parent" xml:space="preserve">
+    <value>pnlKeyColumns</value>
+  </data>
+  <data name="&gt;&gt;cmdRemoveAll.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lstKeyColumns.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 21</value>
+  </data>
+  <data name="lstKeyColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 167</value>
+  </data>
+  <data name="lstKeyColumns.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;lstKeyColumns.Name" xml:space="preserve">
+    <value>lstKeyColumns</value>
+  </data>
+  <data name="&gt;&gt;lstKeyColumns.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lstKeyColumns.Parent" xml:space="preserve">
+    <value>pnlKeyColumns</value>
+  </data>
+  <data name="&gt;&gt;lstKeyColumns.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblKeyColumns.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblKeyColumns.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 5</value>
+  </data>
+  <data name="lblKeyColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 13</value>
+  </data>
+  <data name="lblKeyColumns.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblKeyColumns.Text" xml:space="preserve">
+    <value>Key Columns</value>
+  </data>
+  <data name="&gt;&gt;lblKeyColumns.Name" xml:space="preserve">
+    <value>lblKeyColumns</value>
+  </data>
+  <data name="&gt;&gt;lblKeyColumns.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblKeyColumns.Parent" xml:space="preserve">
+    <value>pnlKeyColumns</value>
+  </data>
+  <data name="&gt;&gt;lblKeyColumns.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cmdRemoveSelectedPair.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 194</value>
+  </data>
+  <data name="cmdRemoveSelectedPair.Size" type="System.Drawing.Size, System.Drawing">
+    <value>130, 23</value>
+  </data>
+  <data name="cmdRemoveSelectedPair.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="cmdRemoveSelectedPair.Text" xml:space="preserve">
+    <value>Remove Selected Pair</value>
+  </data>
+  <data name="&gt;&gt;cmdRemoveSelectedPair.Name" xml:space="preserve">
+    <value>cmdRemoveSelectedPair</value>
+  </data>
+  <data name="&gt;&gt;cmdRemoveSelectedPair.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdRemoveSelectedPair.Parent" xml:space="preserve">
+    <value>pnlKeyColumns</value>
+  </data>
+  <data name="&gt;&gt;cmdRemoveSelectedPair.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="pnlKeyColumns.Location" type="System.Drawing.Point, System.Drawing">
+    <value>435, 65</value>
+  </data>
+  <data name="pnlKeyColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 256</value>
+  </data>
+  <data name="pnlKeyColumns.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;pnlKeyColumns.Name" xml:space="preserve">
+    <value>pnlKeyColumns</value>
+  </data>
+  <data name="&gt;&gt;pnlKeyColumns.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlKeyColumns.Parent" xml:space="preserve">
+    <value>tpJoinByOptions</value>
+  </data>
+  <data name="&gt;&gt;pnlKeyColumns.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="rdoChooseColumns.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoChooseColumns.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoChooseColumns.Location" type="System.Drawing.Point, System.Drawing">
+    <value>316, 15</value>
+  </data>
+  <data name="rdoChooseColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 28</value>
+  </data>
+  <data name="rdoChooseColumns.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rdoChooseColumns.Text" xml:space="preserve">
+    <value>Choose which columns to merge by</value>
+  </data>
+  <data name="rdoChooseColumns.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoChooseColumns.Name" xml:space="preserve">
+    <value>rdoChooseColumns</value>
+  </data>
+  <data name="&gt;&gt;rdoChooseColumns.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoChooseColumns.Parent" xml:space="preserve">
+    <value>tpJoinByOptions</value>
+  </data>
+  <data name="&gt;&gt;rdoChooseColumns.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rdoByAllMatching.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoByAllMatching.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoByAllMatching.Location" type="System.Drawing.Point, System.Drawing">
+    <value>94, 15</value>
+  </data>
+  <data name="rdoByAllMatching.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 28</value>
+  </data>
+  <data name="rdoByAllMatching.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoByAllMatching.Text" xml:space="preserve">
+    <value>Merge by all columns with the same name</value>
+  </data>
+  <data name="rdoByAllMatching.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoByAllMatching.Name" xml:space="preserve">
+    <value>rdoByAllMatching</value>
+  </data>
+  <data name="&gt;&gt;rdoByAllMatching.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoByAllMatching.Parent" xml:space="preserve">
+    <value>tpJoinByOptions</value>
+  </data>
+  <data name="&gt;&gt;rdoByAllMatching.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrSelectorSecondDF.Location" type="System.Drawing.Point, System.Drawing">
+    <value>222, 57</value>
+  </data>
+  <data name="ucrSelectorSecondDF.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectorSecondDF.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 180</value>
+  </data>
+  <data name="ucrSelectorSecondDF.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorSecondDF.Name" xml:space="preserve">
+    <value>ucrSelectorSecondDF</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorSecondDF.Type" xml:space="preserve">
+    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorSecondDF.Parent" xml:space="preserve">
+    <value>tpJoinByOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorSecondDF.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrSelectorFirstDF.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 57</value>
+  </data>
+  <data name="ucrSelectorFirstDF.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectorFirstDF.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 180</value>
+  </data>
+  <data name="ucrSelectorFirstDF.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorFirstDF.Name" xml:space="preserve">
+    <value>ucrSelectorFirstDF</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorFirstDF.Type" xml:space="preserve">
+    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorFirstDF.Parent" xml:space="preserve">
+    <value>tpJoinByOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorFirstDF.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrPnlMergeByOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>90, 13</value>
+  </data>
+  <data name="ucrPnlMergeByOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>460, 42</value>
+  </data>
+  <data name="ucrPnlMergeByOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlMergeByOptions.Name" xml:space="preserve">
+    <value>ucrPnlMergeByOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlMergeByOptions.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlMergeByOptions.Parent" xml:space="preserve">
+    <value>tpJoinByOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlMergeByOptions.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="tpJoinByOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tpJoinByOptions.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tpJoinByOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>648, 367</value>
+  </data>
+  <data name="tpJoinByOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tpJoinByOptions.Text" xml:space="preserve">
+    <value>Joining Columns</value>
+  </data>
+  <data name="&gt;&gt;tpJoinByOptions.Name" xml:space="preserve">
+    <value>tpJoinByOptions</value>
+  </data>
+  <data name="&gt;&gt;tpJoinByOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tpJoinByOptions.Parent" xml:space="preserve">
+    <value>tbcMergeOptions</value>
+  </data>
+  <data name="&gt;&gt;tpJoinByOptions.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrChkMergeWithSubsetSecond.Location" type="System.Drawing.Point, System.Drawing">
+    <value>252, 10</value>
+  </data>
+  <data name="ucrChkMergeWithSubsetSecond.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 20</value>
+  </data>
+  <data name="ucrChkMergeWithSubsetSecond.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMergeWithSubsetSecond.Name" xml:space="preserve">
+    <value>ucrChkMergeWithSubsetSecond</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMergeWithSubsetSecond.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMergeWithSubsetSecond.Parent" xml:space="preserve">
+    <value>tpIncludeColumns</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMergeWithSubsetSecond.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrChkMergeWithSubsetFirst.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
+  </data>
+  <data name="ucrChkMergeWithSubsetFirst.Size" type="System.Drawing.Size, System.Drawing">
+    <value>206, 20</value>
+  </data>
+  <data name="ucrChkMergeWithSubsetFirst.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMergeWithSubsetFirst.Name" xml:space="preserve">
+    <value>ucrChkMergeWithSubsetFirst</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMergeWithSubsetFirst.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMergeWithSubsetFirst.Parent" xml:space="preserve">
+    <value>tpIncludeColumns</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMergeWithSubsetFirst.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblVariablesToIncludeSecond.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblVariablesToIncludeSecond.Location" type="System.Drawing.Point, System.Drawing">
+    <value>249, 223</value>
+  </data>
+  <data name="lblVariablesToIncludeSecond.Size" type="System.Drawing.Size, System.Drawing">
+    <value>107, 13</value>
+  </data>
+  <data name="lblVariablesToIncludeSecond.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lblVariablesToIncludeSecond.Text" xml:space="preserve">
+    <value>Variables To Include:</value>
+  </data>
+  <data name="&gt;&gt;lblVariablesToIncludeSecond.Name" xml:space="preserve">
+    <value>lblVariablesToIncludeSecond</value>
+  </data>
+  <data name="&gt;&gt;lblVariablesToIncludeSecond.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblVariablesToIncludeSecond.Parent" xml:space="preserve">
+    <value>tpIncludeColumns</value>
+  </data>
+  <data name="&gt;&gt;lblVariablesToIncludeSecond.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblVariablesToIncludeFirst.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblVariablesToIncludeFirst.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 223</value>
+  </data>
+  <data name="lblVariablesToIncludeFirst.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 13</value>
+  </data>
+  <data name="lblVariablesToIncludeFirst.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblVariablesToIncludeFirst.Text" xml:space="preserve">
+    <value>Variable To Include:</value>
+  </data>
+  <data name="&gt;&gt;lblVariablesToIncludeFirst.Name" xml:space="preserve">
+    <value>lblVariablesToIncludeFirst</value>
+  </data>
+  <data name="&gt;&gt;lblVariablesToIncludeFirst.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblVariablesToIncludeFirst.Parent" xml:space="preserve">
+    <value>tpIncludeColumns</value>
+  </data>
+  <data name="&gt;&gt;lblVariablesToIncludeFirst.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrReceiverSecondSelected.Location" type="System.Drawing.Point, System.Drawing">
+    <value>252, 238</value>
+  </data>
+  <data name="ucrReceiverSecondSelected.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverSecondSelected.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 119</value>
+  </data>
+  <data name="ucrReceiverSecondSelected.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSecondSelected.Name" xml:space="preserve">
+    <value>ucrReceiverSecondSelected</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSecondSelected.Type" xml:space="preserve">
+    <value>instat.ucrReceiverMultiple, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSecondSelected.Parent" xml:space="preserve">
+    <value>tpIncludeColumns</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSecondSelected.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrReceiverFirstSelected.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 238</value>
+  </data>
+  <data name="ucrReceiverFirstSelected.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverFirstSelected.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 119</value>
+  </data>
+  <data name="ucrReceiverFirstSelected.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverFirstSelected.Name" xml:space="preserve">
+    <value>ucrReceiverFirstSelected</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverFirstSelected.Type" xml:space="preserve">
+    <value>instat.ucrReceiverMultiple, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverFirstSelected.Parent" xml:space="preserve">
+    <value>tpIncludeColumns</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverFirstSelected.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="ucrSelectorColumnsToIncludeSecond.Location" type="System.Drawing.Point, System.Drawing">
+    <value>252, 34</value>
+  </data>
+  <data name="ucrSelectorColumnsToIncludeSecond.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectorColumnsToIncludeSecond.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 180</value>
+  </data>
+  <data name="ucrSelectorColumnsToIncludeSecond.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorColumnsToIncludeSecond.Name" xml:space="preserve">
+    <value>ucrSelectorColumnsToIncludeSecond</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorColumnsToIncludeSecond.Type" xml:space="preserve">
+    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorColumnsToIncludeSecond.Parent" xml:space="preserve">
+    <value>tpIncludeColumns</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorColumnsToIncludeSecond.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="ucrSelectorColumnsToIncludeFirst.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 34</value>
+  </data>
+  <data name="ucrSelectorColumnsToIncludeFirst.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectorColumnsToIncludeFirst.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 180</value>
+  </data>
+  <data name="ucrSelectorColumnsToIncludeFirst.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorColumnsToIncludeFirst.Name" xml:space="preserve">
+    <value>ucrSelectorColumnsToIncludeFirst</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorColumnsToIncludeFirst.Type" xml:space="preserve">
+    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorColumnsToIncludeFirst.Parent" xml:space="preserve">
+    <value>tpIncludeColumns</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorColumnsToIncludeFirst.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="tpIncludeColumns.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tpIncludeColumns.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tpIncludeColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>648, 367</value>
+  </data>
+  <data name="tpIncludeColumns.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tpIncludeColumns.Text" xml:space="preserve">
+    <value>Columns to Include</value>
+  </data>
+  <data name="&gt;&gt;tpIncludeColumns.Name" xml:space="preserve">
+    <value>tpIncludeColumns</value>
+  </data>
+  <data name="&gt;&gt;tpIncludeColumns.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tpIncludeColumns.Parent" xml:space="preserve">
+    <value>tbcMergeOptions</value>
+  </data>
+  <data name="&gt;&gt;tpIncludeColumns.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tbcMergeOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 8</value>
+  </data>
+  <data name="tbcMergeOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>656, 393</value>
+  </data>
+  <data name="tbcMergeOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tbcMergeOptions.Name" xml:space="preserve">
+    <value>tbcMergeOptions</value>
+  </data>
+  <data name="&gt;&gt;tbcMergeOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbcMergeOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tbcMergeOptions.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrSubBase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>264, 407</value>
+  </data>
+  <data name="ucrSubBase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 30</value>
+  </data>
+  <data name="ucrSubBase.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrSubBase.Name" xml:space="preserve">
+    <value>ucrSubBase</value>
+  </data>
+  <data name="&gt;&gt;ucrSubBase.Type" xml:space="preserve">
+    <value>instat.ucrButtonsSubdialogue, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSubBase.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSubBase.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>670, 439</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Merge Options</value>
+  </data>
+  <data name="&gt;&gt;ttJoinDetails.Name" xml:space="preserve">
+    <value>ttJoinDetails</value>
+  </data>
+  <data name="&gt;&gt;ttJoinDetails.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>sdgMerge</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
