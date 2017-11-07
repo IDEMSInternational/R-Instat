@@ -70,7 +70,6 @@ Partial Class dlgClimaticSummary
         Me.ucrChkStoreResults = New instat.ucrCheck()
         Me.ucrChkPrintOutput = New instat.ucrCheck()
         Me.ucrChkDropUnusedLevels = New instat.ucrCheck()
-        Me.ucrChkOmitMissingValues = New instat.ucrCheck()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -272,7 +271,6 @@ Partial Class dlgClimaticSummary
         '
         'grpOptions
         '
-        Me.grpOptions.Controls.Add(Me.ucrChkOmitMissingValues)
         Me.grpOptions.Controls.Add(Me.ucrChkStoreResults)
         Me.grpOptions.Controls.Add(Me.ucrChkPrintOutput)
         Me.grpOptions.Controls.Add(Me.ucrChkDropUnusedLevels)
@@ -297,12 +295,6 @@ Partial Class dlgClimaticSummary
         Me.ucrChkDropUnusedLevels.Checked = False
         resources.ApplyResources(Me.ucrChkDropUnusedLevels, "ucrChkDropUnusedLevels")
         Me.ucrChkDropUnusedLevels.Name = "ucrChkDropUnusedLevels"
-        '
-        'ucrChkOmitMissingValues
-        '
-        Me.ucrChkOmitMissingValues.Checked = False
-        resources.ApplyResources(Me.ucrChkOmitMissingValues, "ucrChkOmitMissingValues")
-        Me.ucrChkOmitMissingValues.Name = "ucrChkOmitMissingValues"
         '
         'dlgClimaticSummary
         '
@@ -377,5 +369,4 @@ Partial Class dlgClimaticSummary
     Friend WithEvents ucrChkStoreResults As ucrCheck
     Friend WithEvents ucrChkPrintOutput As ucrCheck
     Friend WithEvents ucrChkDropUnusedLevels As ucrCheck
-    Friend WithEvents ucrChkOmitMissingValues As ucrCheck
 End Class
