@@ -117,4 +117,244 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ucrButtonsDescribeDisplay.Location" type="System.Drawing.Point, System.Drawing">
+    <value>55, 186</value>
+  </data>
+  <data name="ucrButtonsDescribeDisplay.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 30</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrButtonsDescribeDisplay.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrButtonsDescribeDisplay.Name" xml:space="preserve">
+    <value>ucrButtonsDescribeDisplay</value>
+  </data>
+  <data name="&gt;&gt;ucrButtonsDescribeDisplay.Type" xml:space="preserve">
+    <value>instat.ucrButtonsSubdialogue, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrButtonsDescribeDisplay.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrButtonsDescribeDisplay.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrChkAddMargins.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 18</value>
+  </data>
+  <data name="ucrChkAddMargins.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="ucrChkAddMargins.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddMargins.Name" xml:space="preserve">
+    <value>ucrChkAddMargins</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddMargins.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddMargins.Parent" xml:space="preserve">
+    <value>grpFrequenciesOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddMargins.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrChkTranspose.Location" type="System.Drawing.Point, System.Drawing">
+    <value>127, 18</value>
+  </data>
+  <data name="ucrChkTranspose.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 20</value>
+  </data>
+  <data name="ucrChkTranspose.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkTranspose.Name" xml:space="preserve">
+    <value>ucrChkTranspose</value>
+  </data>
+  <data name="&gt;&gt;ucrChkTranspose.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkTranspose.Parent" xml:space="preserve">
+    <value>grpFrequenciesOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkTranspose.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrChkProportions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 40</value>
+  </data>
+  <data name="ucrChkProportions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="ucrChkProportions.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrChkProportions.Name" xml:space="preserve">
+    <value>ucrChkProportions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkProportions.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkProportions.Parent" xml:space="preserve">
+    <value>grpFrequenciesOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkProportions.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrChkPercentages.Location" type="System.Drawing.Point, System.Drawing">
+    <value>127, 40</value>
+  </data>
+  <data name="ucrChkPercentages.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 20</value>
+  </data>
+  <data name="ucrChkPercentages.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPercentages.Name" xml:space="preserve">
+    <value>ucrChkPercentages</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPercentages.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPercentages.Parent" xml:space="preserve">
+    <value>grpFrequenciesOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPercentages.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="grpFrequenciesOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
+  </data>
+  <data name="grpFrequenciesOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 68</value>
+  </data>
+  <data name="grpFrequenciesOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpFrequenciesOptions.Text" xml:space="preserve">
+    <value>Frequencies Options</value>
+  </data>
+  <data name="&gt;&gt;grpFrequenciesOptions.Name" xml:space="preserve">
+    <value>grpFrequenciesOptions</value>
+  </data>
+  <data name="&gt;&gt;grpFrequenciesOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpFrequenciesOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpFrequenciesOptions.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrChkMeans.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 65</value>
+  </data>
+  <data name="ucrChkMeans.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="ucrChkMeans.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMeans.Name" xml:space="preserve">
+    <value>ucrChkMeans</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMeans.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMeans.Parent" xml:space="preserve">
+    <value>grpAnovaOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMeans.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrChkSignifStars.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 19</value>
+  </data>
+  <data name="ucrChkSignifStars.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 20</value>
+  </data>
+  <data name="ucrChkSignifStars.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSignifStars.Name" xml:space="preserve">
+    <value>ucrChkSignifStars</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSignifStars.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSignifStars.Parent" xml:space="preserve">
+    <value>grpAnovaOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSignifStars.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrChkSignifLevel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 42</value>
+  </data>
+  <data name="ucrChkSignifLevel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 20</value>
+  </data>
+  <data name="ucrChkSignifLevel.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSignifLevel.Name" xml:space="preserve">
+    <value>ucrChkSignifLevel</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSignifLevel.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSignifLevel.Parent" xml:space="preserve">
+    <value>grpAnovaOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSignifLevel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="grpAnovaOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 84</value>
+  </data>
+  <data name="grpAnovaOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 91</value>
+  </data>
+  <data name="grpAnovaOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="grpAnovaOptions.Text" xml:space="preserve">
+    <value>Anova Options</value>
+  </data>
+  <data name="&gt;&gt;grpAnovaOptions.Name" xml:space="preserve">
+    <value>grpAnovaOptions</value>
+  </data>
+  <data name="&gt;&gt;grpAnovaOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpAnovaOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpAnovaOptions.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>262, 222</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Describe Display Options</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>sdgDescribeDisplay</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

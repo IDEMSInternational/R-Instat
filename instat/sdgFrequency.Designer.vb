@@ -38,6 +38,7 @@ Partial Class sdgFrequency
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgFrequency))
         Me.ucrBaseSubDialog = New instat.ucrButtonsSubdialogue()
         Me.ucrPnlDisplayType = New instat.UcrPanel()
         Me.rdoHorizontally = New System.Windows.Forms.RadioButton()
@@ -49,72 +50,51 @@ Partial Class sdgFrequency
         '
         'ucrBaseSubDialog
         '
-        Me.ucrBaseSubDialog.Location = New System.Drawing.Point(62, 178)
+        resources.ApplyResources(Me.ucrBaseSubDialog, "ucrBaseSubDialog")
         Me.ucrBaseSubDialog.Name = "ucrBaseSubDialog"
-        Me.ucrBaseSubDialog.Size = New System.Drawing.Size(142, 30)
-        Me.ucrBaseSubDialog.TabIndex = 7
         '
         'ucrPnlDisplayType
         '
-        Me.ucrPnlDisplayType.Location = New System.Drawing.Point(163, 61)
+        resources.ApplyResources(Me.ucrPnlDisplayType, "ucrPnlDisplayType")
         Me.ucrPnlDisplayType.Name = "ucrPnlDisplayType"
-        Me.ucrPnlDisplayType.Size = New System.Drawing.Size(114, 90)
-        Me.ucrPnlDisplayType.TabIndex = 53
         '
         'rdoHorizontally
         '
-        Me.rdoHorizontally.AutoSize = True
-        Me.rdoHorizontally.Location = New System.Drawing.Point(170, 113)
+        resources.ApplyResources(Me.rdoHorizontally, "rdoHorizontally")
         Me.rdoHorizontally.Name = "rdoHorizontally"
-        Me.rdoHorizontally.Size = New System.Drawing.Size(79, 17)
-        Me.rdoHorizontally.TabIndex = 63
         Me.rdoHorizontally.TabStop = True
-        Me.rdoHorizontally.Text = "Horizontally"
         Me.rdoHorizontally.UseVisualStyleBackColor = True
         '
         'rdoVertically
         '
-        Me.rdoVertically.AutoSize = True
-        Me.rdoVertically.Location = New System.Drawing.Point(170, 89)
+        resources.ApplyResources(Me.rdoVertically, "rdoVertically")
         Me.rdoVertically.Name = "rdoVertically"
-        Me.rdoVertically.Size = New System.Drawing.Size(67, 17)
-        Me.rdoVertically.TabIndex = 62
         Me.rdoVertically.TabStop = True
-        Me.rdoVertically.Text = "Vertically"
         Me.rdoVertically.UseVisualStyleBackColor = True
         '
         'rdoSeparateTables
         '
-        Me.rdoSeparateTables.AutoSize = True
-        Me.rdoSeparateTables.Location = New System.Drawing.Point(170, 65)
+        resources.ApplyResources(Me.rdoSeparateTables, "rdoSeparateTables")
         Me.rdoSeparateTables.Name = "rdoSeparateTables"
-        Me.rdoSeparateTables.Size = New System.Drawing.Size(103, 17)
-        Me.rdoSeparateTables.TabIndex = 61
         Me.rdoSeparateTables.TabStop = True
-        Me.rdoSeparateTables.Text = "Separate Tables"
         Me.rdoSeparateTables.UseVisualStyleBackColor = True
         '
         'ucrchkMargins
         '
         Me.ucrchkMargins.Checked = False
-        Me.ucrchkMargins.Location = New System.Drawing.Point(12, 89)
+        resources.ApplyResources(Me.ucrchkMargins, "ucrchkMargins")
         Me.ucrchkMargins.Name = "ucrchkMargins"
-        Me.ucrchkMargins.Size = New System.Drawing.Size(131, 20)
-        Me.ucrchkMargins.TabIndex = 65
         '
         'ucrchkDisplay
         '
         Me.ucrchkDisplay.Checked = False
-        Me.ucrchkDisplay.Location = New System.Drawing.Point(12, 63)
+        resources.ApplyResources(Me.ucrchkDisplay, "ucrchkDisplay")
         Me.ucrchkDisplay.Name = "ucrchkDisplay"
-        Me.ucrchkDisplay.Size = New System.Drawing.Size(131, 20)
-        Me.ucrchkDisplay.TabIndex = 64
         '
         'sdgFrequency
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(284, 208)
         Me.Controls.Add(Me.ucrchkMargins)
         Me.Controls.Add(Me.ucrchkDisplay)
         Me.Controls.Add(Me.rdoHorizontally)
@@ -126,8 +106,6 @@ Partial Class sdgFrequency
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgFrequency"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Frequency"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
