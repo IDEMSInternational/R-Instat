@@ -38,6 +38,7 @@ Partial Class dlgDescribeTwoVarGraph
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgDescribeTwoVarGraph))
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.lblSecondVariable = New System.Windows.Forms.Label()
         Me.lblFirstVariables = New System.Windows.Forms.Label()
@@ -51,94 +52,68 @@ Partial Class dlgDescribeTwoVarGraph
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(10, 197)
+        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(120, 23)
-        Me.cmdOptions.TabIndex = 5
         Me.cmdOptions.Tag = "Options..."
-        Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'lblSecondVariable
         '
-        Me.lblSecondVariable.AutoSize = True
-        Me.lblSecondVariable.Location = New System.Drawing.Point(261, 176)
+        resources.ApplyResources(Me.lblSecondVariable, "lblSecondVariable")
         Me.lblSecondVariable.Name = "lblSecondVariable"
-        Me.lblSecondVariable.Size = New System.Drawing.Size(88, 13)
-        Me.lblSecondVariable.TabIndex = 3
-        Me.lblSecondVariable.Text = "Second Variable:"
         '
         'lblFirstVariables
         '
-        Me.lblFirstVariables.AutoSize = True
-        Me.lblFirstVariables.Location = New System.Drawing.Point(261, 45)
+        resources.ApplyResources(Me.lblFirstVariables, "lblFirstVariables")
         Me.lblFirstVariables.Name = "lblFirstVariables"
-        Me.lblFirstVariables.Size = New System.Drawing.Size(81, 13)
-        Me.lblFirstVariables.TabIndex = 2
         Me.lblFirstVariables.Tag = "First_Variable(s)"
-        Me.lblFirstVariables.Text = "First Variable(s):"
         '
         'ucrFlipCoordinates
         '
         Me.ucrFlipCoordinates.Checked = False
-        Me.ucrFlipCoordinates.Location = New System.Drawing.Point(10, 226)
+        resources.ApplyResources(Me.ucrFlipCoordinates, "ucrFlipCoordinates")
         Me.ucrFlipCoordinates.Name = "ucrFlipCoordinates"
-        Me.ucrFlipCoordinates.Size = New System.Drawing.Size(120, 20)
-        Me.ucrFlipCoordinates.TabIndex = 6
         '
         'ucrSaveGraph
         '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 252)
+        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(255, 24)
-        Me.ucrSaveGraph.TabIndex = 7
         '
         'ucrReceiverMultipleTwoVar
         '
         Me.ucrReceiverMultipleTwoVar.frmParent = Me
-        Me.ucrReceiverMultipleTwoVar.Location = New System.Drawing.Point(261, 30)
+        resources.ApplyResources(Me.ucrReceiverMultipleTwoVar, "ucrReceiverMultipleTwoVar")
         Me.ucrReceiverMultipleTwoVar.Name = "ucrReceiverMultipleTwoVar"
         Me.ucrReceiverMultipleTwoVar.Selector = Nothing
-        Me.ucrReceiverMultipleTwoVar.Size = New System.Drawing.Size(120, 138)
         Me.ucrReceiverMultipleTwoVar.strNcFilePath = ""
-        Me.ucrReceiverMultipleTwoVar.TabIndex = 1
         Me.ucrReceiverMultipleTwoVar.ucrSelector = Nothing
         Me.ucrReceiverMultipleTwoVar.ucrVariableSelector = Nothing
         '
         'ucrSecondVariableReceiver
         '
         Me.ucrSecondVariableReceiver.frmParent = Me
-        Me.ucrSecondVariableReceiver.Location = New System.Drawing.Point(261, 191)
-        Me.ucrSecondVariableReceiver.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSecondVariableReceiver, "ucrSecondVariableReceiver")
         Me.ucrSecondVariableReceiver.Name = "ucrSecondVariableReceiver"
         Me.ucrSecondVariableReceiver.Selector = Nothing
-        Me.ucrSecondVariableReceiver.Size = New System.Drawing.Size(120, 20)
         Me.ucrSecondVariableReceiver.strNcFilePath = ""
-        Me.ucrSecondVariableReceiver.TabIndex = 4
         Me.ucrSecondVariableReceiver.ucrSelector = Nothing
         '
         'ucrSelectorTwoVarGraph
         '
         Me.ucrSelectorTwoVarGraph.bShowHiddenColumns = False
         Me.ucrSelectorTwoVarGraph.bUseCurrentFilter = True
-        Me.ucrSelectorTwoVarGraph.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorTwoVarGraph.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorTwoVarGraph, "ucrSelectorTwoVarGraph")
         Me.ucrSelectorTwoVarGraph.Name = "ucrSelectorTwoVarGraph"
-        Me.ucrSelectorTwoVarGraph.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorTwoVarGraph.TabIndex = 0
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 278)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 8
         '
         'dlgDescribeTwoVarGraph
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(416, 334)
         Me.Controls.Add(Me.ucrFlipCoordinates)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.lblFirstVariables)
@@ -152,8 +127,6 @@ Partial Class dlgDescribeTwoVarGraph
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDescribeTwoVarGraph"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Two Variable Graph"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
