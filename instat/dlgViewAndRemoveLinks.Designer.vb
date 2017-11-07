@@ -38,6 +38,7 @@ Partial Class dlgViewAndRemoveLinks
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgViewAndRemoveLinks))
         Me.lblLinks = New System.Windows.Forms.Label()
         Me.lblSelectedLink = New System.Windows.Forms.Label()
         Me.rdoViewLink = New System.Windows.Forms.RadioButton()
@@ -50,84 +51,57 @@ Partial Class dlgViewAndRemoveLinks
         '
         'lblLinks
         '
-        Me.lblLinks.AutoSize = True
-        Me.lblLinks.Location = New System.Drawing.Point(12, 15)
+        resources.ApplyResources(Me.lblLinks, "lblLinks")
         Me.lblLinks.Name = "lblLinks"
-        Me.lblLinks.Size = New System.Drawing.Size(35, 13)
-        Me.lblLinks.TabIndex = 0
-        Me.lblLinks.Text = "Links:"
         '
         'lblSelectedLink
         '
-        Me.lblSelectedLink.AutoSize = True
-        Me.lblSelectedLink.Location = New System.Drawing.Point(196, 28)
+        resources.ApplyResources(Me.lblSelectedLink, "lblSelectedLink")
         Me.lblSelectedLink.Name = "lblSelectedLink"
-        Me.lblSelectedLink.Size = New System.Drawing.Size(75, 13)
-        Me.lblSelectedLink.TabIndex = 2
-        Me.lblSelectedLink.Text = "Selected Link:"
         '
         'rdoViewLink
         '
-        Me.rdoViewLink.AutoSize = True
-        Me.rdoViewLink.Location = New System.Drawing.Point(194, 74)
+        resources.ApplyResources(Me.rdoViewLink, "rdoViewLink")
         Me.rdoViewLink.Name = "rdoViewLink"
-        Me.rdoViewLink.Size = New System.Drawing.Size(71, 17)
-        Me.rdoViewLink.TabIndex = 5
         Me.rdoViewLink.TabStop = True
-        Me.rdoViewLink.Text = "View Link"
         Me.rdoViewLink.UseVisualStyleBackColor = True
         '
         'rdoDeleteLink
         '
-        Me.rdoDeleteLink.AutoSize = True
-        Me.rdoDeleteLink.Location = New System.Drawing.Point(194, 97)
+        resources.ApplyResources(Me.rdoDeleteLink, "rdoDeleteLink")
         Me.rdoDeleteLink.Name = "rdoDeleteLink"
-        Me.rdoDeleteLink.Size = New System.Drawing.Size(79, 17)
-        Me.rdoDeleteLink.TabIndex = 6
         Me.rdoDeleteLink.TabStop = True
-        Me.rdoDeleteLink.Text = "Delete Link"
         Me.rdoDeleteLink.UseVisualStyleBackColor = True
         '
         'ucrReceiverViewLinks
         '
         Me.ucrReceiverViewLinks.frmParent = Me
-        Me.ucrReceiverViewLinks.Location = New System.Drawing.Point(194, 43)
-        Me.ucrReceiverViewLinks.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverViewLinks, "ucrReceiverViewLinks")
         Me.ucrReceiverViewLinks.Name = "ucrReceiverViewLinks"
         Me.ucrReceiverViewLinks.Selector = Nothing
-        Me.ucrReceiverViewLinks.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverViewLinks.strNcFilePath = ""
-        Me.ucrReceiverViewLinks.TabIndex = 3
         Me.ucrReceiverViewLinks.ucrSelector = Nothing
         '
         'ucrPnlLinks
         '
-        Me.ucrPnlLinks.Location = New System.Drawing.Point(184, 66)
+        resources.ApplyResources(Me.ucrPnlLinks, "ucrPnlLinks")
         Me.ucrPnlLinks.Name = "ucrPnlLinks"
-        Me.ucrPnlLinks.Size = New System.Drawing.Size(130, 62)
-        Me.ucrPnlLinks.TabIndex = 4
         '
         'ucrSelectorLinks
         '
         Me.ucrSelectorLinks.bShowHiddenColumns = False
-        Me.ucrSelectorLinks.Location = New System.Drawing.Point(10, 30)
-        Me.ucrSelectorLinks.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorLinks, "ucrSelectorLinks")
         Me.ucrSelectorLinks.Name = "ucrSelectorLinks"
-        Me.ucrSelectorLinks.Size = New System.Drawing.Size(120, 98)
-        Me.ucrSelectorLinks.TabIndex = 1
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 134)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 7
         '
         'dlgViewAndRemoveLinks
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(422, 191)
         Me.Controls.Add(Me.ucrReceiverViewLinks)
         Me.Controls.Add(Me.rdoDeleteLink)
         Me.Controls.Add(Me.rdoViewLink)
@@ -140,8 +114,6 @@ Partial Class dlgViewAndRemoveLinks
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgViewAndRemoveLinks"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "View and Remove Links"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
