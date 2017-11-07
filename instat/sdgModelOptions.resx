@@ -117,4 +117,358 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="rdoCloglog.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="rdoCloglog.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 23</value>
+  </data>
+  <data name="rdoCloglog.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 17</value>
+  </data>
+  <data name="rdoCloglog.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoCloglog.Text" xml:space="preserve">
+    <value>cloglog</value>
+  </data>
+  <data name="&gt;&gt;rdoCloglog.Name" xml:space="preserve">
+    <value>rdoCloglog</value>
+  </data>
+  <data name="&gt;&gt;rdoCloglog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoCloglog.Parent" xml:space="preserve">
+    <value>grpLinkFunctions</value>
+  </data>
+  <data name="&gt;&gt;rdoCloglog.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="rdoSqrt.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoSqrt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 47</value>
+  </data>
+  <data name="rdoSqrt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 17</value>
+  </data>
+  <data name="rdoSqrt.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="rdoSqrt.Text" xml:space="preserve">
+    <value>Sqrt</value>
+  </data>
+  <data name="&gt;&gt;rdoSqrt.Name" xml:space="preserve">
+    <value>rdoSqrt</value>
+  </data>
+  <data name="&gt;&gt;rdoSqrt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoSqrt.Parent" xml:space="preserve">
+    <value>grpLinkFunctions</value>
+  </data>
+  <data name="&gt;&gt;rdoSqrt.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="rdoMuSquaredInverse.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoMuSquaredInverse.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 73</value>
+  </data>
+  <data name="rdoMuSquaredInverse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 17</value>
+  </data>
+  <data name="rdoMuSquaredInverse.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="rdoMuSquaredInverse.Text" xml:space="preserve">
+    <value>1/mu^2</value>
+  </data>
+  <data name="&gt;&gt;rdoMuSquaredInverse.Name" xml:space="preserve">
+    <value>rdoMuSquaredInverse</value>
+  </data>
+  <data name="&gt;&gt;rdoMuSquaredInverse.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoMuSquaredInverse.Parent" xml:space="preserve">
+    <value>grpLinkFunctions</value>
+  </data>
+  <data name="&gt;&gt;rdoMuSquaredInverse.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="rdoInverse.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoInverse.Location" type="System.Drawing.Point, System.Drawing">
+    <value>155, 71</value>
+  </data>
+  <data name="rdoInverse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 17</value>
+  </data>
+  <data name="rdoInverse.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="rdoInverse.Text" xml:space="preserve">
+    <value>Inverse</value>
+  </data>
+  <data name="&gt;&gt;rdoInverse.Name" xml:space="preserve">
+    <value>rdoInverse</value>
+  </data>
+  <data name="&gt;&gt;rdoInverse.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoInverse.Parent" xml:space="preserve">
+    <value>grpLinkFunctions</value>
+  </data>
+  <data name="&gt;&gt;rdoInverse.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="rdoCauchit.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoCauchit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>155, 22</value>
+  </data>
+  <data name="rdoCauchit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 17</value>
+  </data>
+  <data name="rdoCauchit.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rdoCauchit.Text" xml:space="preserve">
+    <value>Cauchit</value>
+  </data>
+  <data name="&gt;&gt;rdoCauchit.Name" xml:space="preserve">
+    <value>rdoCauchit</value>
+  </data>
+  <data name="&gt;&gt;rdoCauchit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoCauchit.Parent" xml:space="preserve">
+    <value>grpLinkFunctions</value>
+  </data>
+  <data name="&gt;&gt;rdoCauchit.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="rdoProbit.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoProbit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>155, 47</value>
+  </data>
+  <data name="rdoProbit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 17</value>
+  </data>
+  <data name="rdoProbit.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="rdoProbit.Text" xml:space="preserve">
+    <value>Probit</value>
+  </data>
+  <data name="&gt;&gt;rdoProbit.Name" xml:space="preserve">
+    <value>rdoProbit</value>
+  </data>
+  <data name="&gt;&gt;rdoProbit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoProbit.Parent" xml:space="preserve">
+    <value>grpLinkFunctions</value>
+  </data>
+  <data name="&gt;&gt;rdoProbit.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="rdoIdentity.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoIdentity.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 22</value>
+  </data>
+  <data name="rdoIdentity.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 17</value>
+  </data>
+  <data name="rdoIdentity.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="rdoIdentity.Text" xml:space="preserve">
+    <value>Identity</value>
+  </data>
+  <data name="&gt;&gt;rdoIdentity.Name" xml:space="preserve">
+    <value>rdoIdentity</value>
+  </data>
+  <data name="&gt;&gt;rdoIdentity.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoIdentity.Parent" xml:space="preserve">
+    <value>grpLinkFunctions</value>
+  </data>
+  <data name="&gt;&gt;rdoIdentity.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rdoLog.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoLog.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 47</value>
+  </data>
+  <data name="rdoLog.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 17</value>
+  </data>
+  <data name="rdoLog.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="rdoLog.Text" xml:space="preserve">
+    <value>Log</value>
+  </data>
+  <data name="&gt;&gt;rdoLog.Name" xml:space="preserve">
+    <value>rdoLog</value>
+  </data>
+  <data name="&gt;&gt;rdoLog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoLog.Parent" xml:space="preserve">
+    <value>grpLinkFunctions</value>
+  </data>
+  <data name="&gt;&gt;rdoLog.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rdoLogit.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoLogit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 71</value>
+  </data>
+  <data name="rdoLogit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 17</value>
+  </data>
+  <data name="rdoLogit.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="rdoLogit.Text" xml:space="preserve">
+    <value>Logit</value>
+  </data>
+  <data name="&gt;&gt;rdoLogit.Name" xml:space="preserve">
+    <value>rdoLogit</value>
+  </data>
+  <data name="&gt;&gt;rdoLogit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoLogit.Parent" xml:space="preserve">
+    <value>grpLinkFunctions</value>
+  </data>
+  <data name="&gt;&gt;rdoLogit.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrPnlLinkFunctions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 19</value>
+  </data>
+  <data name="ucrPnlLinkFunctions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>225, 79</value>
+  </data>
+  <data name="ucrPnlLinkFunctions.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlLinkFunctions.Name" xml:space="preserve">
+    <value>ucrPnlLinkFunctions</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlLinkFunctions.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlLinkFunctions.Parent" xml:space="preserve">
+    <value>grpLinkFunctions</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlLinkFunctions.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="grpLinkFunctions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 57</value>
+  </data>
+  <data name="grpLinkFunctions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>239, 104</value>
+  </data>
+  <data name="grpLinkFunctions.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="grpLinkFunctions.Text" xml:space="preserve">
+    <value>Link Function</value>
+  </data>
+  <data name="&gt;&gt;grpLinkFunctions.Name" xml:space="preserve">
+    <value>grpLinkFunctions</value>
+  </data>
+  <data name="&gt;&gt;grpLinkFunctions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpLinkFunctions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpLinkFunctions.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrDistributionChoice.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="ucrDistributionChoice.Size" type="System.Drawing.Size, System.Drawing">
+    <value>208, 27</value>
+  </data>
+  <data name="ucrDistributionChoice.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;ucrDistributionChoice.Name" xml:space="preserve">
+    <value>ucrDistributionChoice</value>
+  </data>
+  <data name="&gt;&gt;ucrDistributionChoice.Type" xml:space="preserve">
+    <value>instat.ucrDistributions, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrDistributionChoice.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrDistributionChoice.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrButtonsSDGModelOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>60, 170</value>
+  </data>
+  <data name="ucrButtonsSDGModelOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 30</value>
+  </data>
+  <data name="ucrButtonsSDGModelOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrButtonsSDGModelOptions.Name" xml:space="preserve">
+    <value>ucrButtonsSDGModelOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrButtonsSDGModelOptions.Type" xml:space="preserve">
+    <value>instat.ucrButtonsSubdialogue, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrButtonsSDGModelOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrButtonsSDGModelOptions.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>263, 204</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Model Options</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>sdgModelOptions</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
