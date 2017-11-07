@@ -63,22 +63,44 @@ Public Class RLink
     'Time in seconds to wait before showing waiting dialog
     Private iWaitDelay As Integer = 2
 
+    Private strRVersionMajorRequired As String = "3"
+    Private strRVersionMinorRequired As String = "4"
+
     Public Sub StartREngine(Optional strScript As String = "", Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True)
         Dim strMissingPackages() As String
+        Dim expTemp As SymbolicExpression
+        Dim strMajor As String = ""
+        Dim strMinor As String = ""
 
         Try
             REngine.SetEnvironmentVariables()
+            clsEngine = REngine.GetInstance()
+            clsEngine.Initialize()
         Catch ex As Exception
-            MsgBox(ex.Message & Environment.NewLine & "Ensure that the correct version of R is installed and restart the program.", MsgBoxStyle.Critical, "Cannot initialise R connection.")
+            MsgBox(ex.Message & Environment.NewLine & "Could not establish connection to R." & vbNewLine & "R-Instat requires version " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".0 or later." & vbNewLine & "Rerun the installation to install R or download the latest version from https://cran.r-project.org/ and restart R-Instat." & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Cannot initialise R connection.")
             Application.Exit()
+            Environment.Exit(0)
         End Try
         Try
-            clsEngine = REngine.GetInstance()
+            expTemp = RunInternalScriptGetValue("R.Version()$major", bSilent:=True)
+            If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
+                strMajor = expTemp.AsCharacter(0)
+            End If
+            expTemp = RunInternalScriptGetValue("R.Version()$minor", bSilent:=True)
+            If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
+                strMinor = expTemp.AsCharacter(0)
+            End If
+            If Not (strMajor = strRVersionMajorRequired AndAlso strMinor.Count > 0 AndAlso strMinor(0) = strRVersionMinorRequired) Then
+                MsgBox("Your current version of R is outdated. You are currently running R version " & strMajor & "." & strMinor & vbNewLine & "R-Instat requires version " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".0 or later." & vbNewLine & "Rerun the installation to install an updated version of R or download the latest version from https://cran.r-project.org/ and restart R-Instat.", MsgBoxStyle.Critical, "R Version outdated.")
+                Application.Exit()
+                Environment.Exit(0)
+            End If
         Catch ex As Exception
-            MsgBox(ex.Message & Environment.NewLine & "Ensure that the correct version of R is installed and restart the program.", MsgBoxStyle.Critical, "Cannot initialise R connection.")
+            MsgBox(ex.Message & Environment.NewLine & "Could not determine the version of R installed on your machine. We recommend rerunning the installation to install an updated version of R or download the latest version from https://cran.r-project.org/ and restart R-Instat.", MsgBoxStyle.Critical, "Cannot determine R version.")
             Application.Exit()
+            Environment.Exit(0)
         End Try
-        clsEngine.Initialize()
+        bREngineInitialised = True
         If strScript = "" Then
             strScript = GetRSetupScript()
             iCallType = 0
@@ -749,6 +771,8 @@ Public Class RLink
         Dim strCurrColumnLables() As String
         Dim strColumnsRList As String
         Dim strTemp As String
+        Dim lviTemp As ListViewItem
+        Dim strTopItemText As String = ""
 
         If bInstatObjectExists Then
             Select Case strType
@@ -780,6 +804,9 @@ Public Class RLink
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_variable_sets_names")
             End Select
             clsGetItems.AddParameter("as_list", "TRUE")
+            If lstView.TopItem IsNot Nothing Then
+                strTopItemText = lstView.TopItem.Text
+            End If
             lstView.Clear()
             lstView.Groups.Clear()
             lstView.Columns.Add(strHeading)
@@ -862,6 +889,12 @@ Public Class RLink
                 ' This has been tested on high resolution screens but needs further testing
                 ' and possibly a better solution.
                 lstView.Columns(0).Width = lstView.Columns(0).Width - 2
+                If strTopItemText <> "" Then
+                    lviTemp = lstView.FindItemWithText(strTopItemText)
+                    If lviTemp IsNot Nothing Then
+                        lstView.TopItem = lviTemp
+                    End If
+                End If
             End If
         End If
     End Sub
@@ -1202,6 +1235,22 @@ Public Class RLink
         Dim expColumn As SymbolicExpression
 
         clsGetColumnName.SetRCommand(strInstatDataObject & "$get_CRI_column_names")
+        clsGetColumnName.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
+        expColumn = RunInternalScriptGetValue(clsGetColumnName.ToScript(), bSilent:=True)
+        If expColumn IsNot Nothing AndAlso Not expColumn.Type = Internals.SymbolicExpressionType.Null Then
+            strColumn = expColumn.AsCharacter.ToArray()
+        Else
+            strColumn = Nothing
+        End If
+        Return strColumn
+    End Function
+
+    Public Function GetRedFlagColumnNames(strDataName As String) As String()
+        Dim clsGetColumnName As New RFunction
+        Dim strColumn() As String
+        Dim expColumn As SymbolicExpression
+
+        clsGetColumnName.SetRCommand(strInstatDataObject & "$get_red_flag_column_names")
         clsGetColumnName.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
         expColumn = RunInternalScriptGetValue(clsGetColumnName.ToScript(), bSilent:=True)
         If expColumn IsNot Nothing AndAlso Not expColumn.Type = Internals.SymbolicExpressionType.Null Then
