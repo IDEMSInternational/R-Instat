@@ -52,6 +52,9 @@ Partial Class dlgClimaticSummary
         Me.lblReceiverFrom = New System.Windows.Forms.Label()
         Me.cmdSummary = New System.Windows.Forms.Button()
         Me.lblWithinYear = New System.Windows.Forms.Label()
+        Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrChkStoreResults = New instat.ucrCheck()
+        Me.ucrChkPrintOutput = New instat.ucrCheck()
         Me.ucrSelectorVariable = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverWithinYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverFrom = New instat.ucrReceiverSingle()
@@ -65,10 +68,8 @@ Partial Class dlgClimaticSummary
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlAnnualWithin = New instat.UcrPanel()
-        Me.grpOptions = New System.Windows.Forms.GroupBox()
-        Me.ucrChkStoreResults = New instat.ucrCheck()
-        Me.ucrChkPrintOutput = New instat.ucrCheck()
         Me.ucrChkDropUnusedLevels = New instat.ucrCheck()
+        Me.ucrChkOmitMissingValues = New instat.ucrCheck()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -168,7 +169,7 @@ Partial Class dlgClimaticSummary
         'lblTo
         '
         Me.lblTo.AutoSize = True
-        Me.lblTo.Location = New System.Drawing.Point(159, 341)
+        Me.lblTo.Location = New System.Drawing.Point(159, 356)
         Me.lblTo.Name = "lblTo"
         Me.lblTo.Size = New System.Drawing.Size(23, 13)
         Me.lblTo.TabIndex = 33
@@ -177,7 +178,7 @@ Partial Class dlgClimaticSummary
         'lblFrom
         '
         Me.lblFrom.AutoSize = True
-        Me.lblFrom.Location = New System.Drawing.Point(11, 340)
+        Me.lblFrom.Location = New System.Drawing.Point(11, 355)
         Me.lblFrom.Name = "lblFrom"
         Me.lblFrom.Size = New System.Drawing.Size(33, 13)
         Me.lblFrom.TabIndex = 34
@@ -186,7 +187,7 @@ Partial Class dlgClimaticSummary
         'lblReceiverTo
         '
         Me.lblReceiverTo.AutoSize = True
-        Me.lblReceiverTo.Location = New System.Drawing.Point(159, 340)
+        Me.lblReceiverTo.Location = New System.Drawing.Point(159, 354)
         Me.lblReceiverTo.Name = "lblReceiverTo"
         Me.lblReceiverTo.Size = New System.Drawing.Size(23, 13)
         Me.lblReceiverTo.TabIndex = 21
@@ -195,7 +196,7 @@ Partial Class dlgClimaticSummary
         'lblReceiverFrom
         '
         Me.lblReceiverFrom.AutoSize = True
-        Me.lblReceiverFrom.Location = New System.Drawing.Point(11, 340)
+        Me.lblReceiverFrom.Location = New System.Drawing.Point(11, 354)
         Me.lblReceiverFrom.Name = "lblReceiverFrom"
         Me.lblReceiverFrom.Size = New System.Drawing.Size(33, 13)
         Me.lblReceiverFrom.TabIndex = 18
@@ -203,7 +204,7 @@ Partial Class dlgClimaticSummary
         '
         'cmdSummary
         '
-        Me.cmdSummary.Location = New System.Drawing.Point(302, 334)
+        Me.cmdSummary.Location = New System.Drawing.Point(302, 348)
         Me.cmdSummary.Name = "cmdSummary"
         Me.cmdSummary.Size = New System.Drawing.Size(105, 26)
         Me.cmdSummary.TabIndex = 23
@@ -219,6 +220,35 @@ Partial Class dlgClimaticSummary
         Me.lblWithinYear.Size = New System.Drawing.Size(65, 13)
         Me.lblWithinYear.TabIndex = 15
         Me.lblWithinYear.Text = "Within Year:"
+        '
+        'grpOptions
+        '
+        Me.grpOptions.Controls.Add(Me.ucrChkOmitMissingValues)
+        Me.grpOptions.Controls.Add(Me.ucrChkStoreResults)
+        Me.grpOptions.Controls.Add(Me.ucrChkPrintOutput)
+        Me.grpOptions.Controls.Add(Me.ucrChkDropUnusedLevels)
+        Me.grpOptions.Location = New System.Drawing.Point(9, 233)
+        Me.grpOptions.Name = "grpOptions"
+        Me.grpOptions.Size = New System.Drawing.Size(160, 114)
+        Me.grpOptions.TabIndex = 17
+        Me.grpOptions.TabStop = False
+        Me.grpOptions.Text = "Options"
+        '
+        'ucrChkStoreResults
+        '
+        Me.ucrChkStoreResults.Checked = False
+        Me.ucrChkStoreResults.Location = New System.Drawing.Point(6, 13)
+        Me.ucrChkStoreResults.Name = "ucrChkStoreResults"
+        Me.ucrChkStoreResults.Size = New System.Drawing.Size(148, 20)
+        Me.ucrChkStoreResults.TabIndex = 0
+        '
+        'ucrChkPrintOutput
+        '
+        Me.ucrChkPrintOutput.Checked = False
+        Me.ucrChkPrintOutput.Location = New System.Drawing.Point(6, 38)
+        Me.ucrChkPrintOutput.Name = "ucrChkPrintOutput"
+        Me.ucrChkPrintOutput.Size = New System.Drawing.Size(148, 20)
+        Me.ucrChkPrintOutput.TabIndex = 1
         '
         'ucrSelectorVariable
         '
@@ -245,7 +275,7 @@ Partial Class dlgClimaticSummary
         'ucrReceiverFrom
         '
         Me.ucrReceiverFrom.frmParent = Me
-        Me.ucrReceiverFrom.Location = New System.Drawing.Point(47, 337)
+        Me.ucrReceiverFrom.Location = New System.Drawing.Point(47, 351)
         Me.ucrReceiverFrom.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFrom.Name = "ucrReceiverFrom"
         Me.ucrReceiverFrom.Selector = Nothing
@@ -257,7 +287,7 @@ Partial Class dlgClimaticSummary
         'ucrReceiverTo
         '
         Me.ucrReceiverTo.frmParent = Me
-        Me.ucrReceiverTo.Location = New System.Drawing.Point(185, 337)
+        Me.ucrReceiverTo.Location = New System.Drawing.Point(185, 351)
         Me.ucrReceiverTo.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTo.Name = "ucrReceiverTo"
         Me.ucrReceiverTo.Selector = Nothing
@@ -270,7 +300,7 @@ Partial Class dlgClimaticSummary
         '
         Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTo.Location = New System.Drawing.Point(185, 337)
+        Me.ucrNudTo.Location = New System.Drawing.Point(185, 352)
         Me.ucrNudTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTo.Name = "ucrNudTo"
@@ -282,7 +312,7 @@ Partial Class dlgClimaticSummary
         '
         Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudFrom.Location = New System.Drawing.Point(47, 337)
+        Me.ucrNudFrom.Location = New System.Drawing.Point(47, 352)
         Me.ucrNudFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudFrom.Name = "ucrNudFrom"
@@ -352,7 +382,7 @@ Partial Class dlgClimaticSummary
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 366)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 380)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(399, 52)
         Me.ucrBase.TabIndex = 24
@@ -364,47 +394,27 @@ Partial Class dlgClimaticSummary
         Me.ucrPnlAnnualWithin.Size = New System.Drawing.Size(381, 35)
         Me.ucrPnlAnnualWithin.TabIndex = 0
         '
-        'grpOptions
-        '
-        Me.grpOptions.Controls.Add(Me.ucrChkStoreResults)
-        Me.grpOptions.Controls.Add(Me.ucrChkPrintOutput)
-        Me.grpOptions.Controls.Add(Me.ucrChkDropUnusedLevels)
-        Me.grpOptions.Location = New System.Drawing.Point(9, 233)
-        Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.Size = New System.Drawing.Size(160, 94)
-        Me.grpOptions.TabIndex = 17
-        Me.grpOptions.TabStop = False
-        Me.grpOptions.Text = "Options"
-        '
-        'ucrChkStoreResults
-        '
-        Me.ucrChkStoreResults.Checked = False
-        Me.ucrChkStoreResults.Location = New System.Drawing.Point(6, 17)
-        Me.ucrChkStoreResults.Name = "ucrChkStoreResults"
-        Me.ucrChkStoreResults.Size = New System.Drawing.Size(148, 20)
-        Me.ucrChkStoreResults.TabIndex = 0
-        '
-        'ucrChkPrintOutput
-        '
-        Me.ucrChkPrintOutput.Checked = False
-        Me.ucrChkPrintOutput.Location = New System.Drawing.Point(6, 42)
-        Me.ucrChkPrintOutput.Name = "ucrChkPrintOutput"
-        Me.ucrChkPrintOutput.Size = New System.Drawing.Size(148, 20)
-        Me.ucrChkPrintOutput.TabIndex = 1
-        '
         'ucrChkDropUnusedLevels
         '
         Me.ucrChkDropUnusedLevels.Checked = False
-        Me.ucrChkDropUnusedLevels.Location = New System.Drawing.Point(6, 67)
+        Me.ucrChkDropUnusedLevels.Location = New System.Drawing.Point(6, 63)
         Me.ucrChkDropUnusedLevels.Name = "ucrChkDropUnusedLevels"
         Me.ucrChkDropUnusedLevels.Size = New System.Drawing.Size(148, 20)
         Me.ucrChkDropUnusedLevels.TabIndex = 2
+        '
+        'ucrChkOmitMissingValues
+        '
+        Me.ucrChkOmitMissingValues.Checked = False
+        Me.ucrChkOmitMissingValues.Location = New System.Drawing.Point(6, 89)
+        Me.ucrChkOmitMissingValues.Name = "ucrChkOmitMissingValues"
+        Me.ucrChkOmitMissingValues.Size = New System.Drawing.Size(148, 20)
+        Me.ucrChkOmitMissingValues.TabIndex = 3
         '
         'dlgClimaticSummary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(415, 423)
+        Me.ClientSize = New System.Drawing.Size(415, 434)
         Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.ucrSelectorVariable)
         Me.Controls.Add(Me.ucrReceiverWithinYear)
@@ -475,5 +485,6 @@ Partial Class dlgClimaticSummary
     Friend WithEvents grpOptions As GroupBox
     Friend WithEvents ucrChkStoreResults As ucrCheck
     Friend WithEvents ucrChkPrintOutput As ucrCheck
+    Friend WithEvents ucrChkOmitMissingValues As ucrCheck
     Friend WithEvents ucrChkDropUnusedLevels As ucrCheck
 End Class
