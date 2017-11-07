@@ -39,6 +39,7 @@ Partial Class ucrSelector
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrSelector))
         Me.lstAvailableVariable = New System.Windows.Forms.ListView()
         Me.SelectionMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.AddSelectedToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -52,16 +53,13 @@ Partial Class ucrSelector
         '
         Me.lstAvailableVariable.Activation = System.Windows.Forms.ItemActivation.TwoClick
         Me.lstAvailableVariable.ContextMenuStrip = Me.SelectionMenuStrip
-        Me.lstAvailableVariable.Dock = System.Windows.Forms.DockStyle.Fill
+        resources.ApplyResources(Me.lstAvailableVariable, "lstAvailableVariable")
         Me.lstAvailableVariable.FullRowSelect = True
         Me.lstAvailableVariable.GridLines = True
         Me.lstAvailableVariable.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
         Me.lstAvailableVariable.HideSelection = False
-        Me.lstAvailableVariable.Location = New System.Drawing.Point(0, 0)
         Me.lstAvailableVariable.Name = "lstAvailableVariable"
         Me.lstAvailableVariable.ShowItemToolTips = True
-        Me.lstAvailableVariable.Size = New System.Drawing.Size(148, 130)
-        Me.lstAvailableVariable.TabIndex = 83
         Me.lstAvailableVariable.UseCompatibleStateImageBehavior = False
         Me.lstAvailableVariable.View = System.Windows.Forms.View.Details
         '
@@ -69,43 +67,37 @@ Partial Class ucrSelector
         '
         Me.SelectionMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddSelectedToolStripMenuItem, Me.SelectAllToolStripMenuItem, Me.ClearSelectionToolStripMenuItem, Me.AddAllToolStripMenuItem})
         Me.SelectionMenuStrip.Name = "SelectionMenuStrip"
-        Me.SelectionMenuStrip.Size = New System.Drawing.Size(153, 92)
+        resources.ApplyResources(Me.SelectionMenuStrip, "SelectionMenuStrip")
         '
         'AddSelectedToolStripMenuItem
         '
         Me.AddSelectedToolStripMenuItem.Name = "AddSelectedToolStripMenuItem"
-        Me.AddSelectedToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        resources.ApplyResources(Me.AddSelectedToolStripMenuItem, "AddSelectedToolStripMenuItem")
         Me.AddSelectedToolStripMenuItem.Tag = "Add_selected"
-        Me.AddSelectedToolStripMenuItem.Text = "Add Selected"
         '
         'SelectAllToolStripMenuItem
         '
         Me.SelectAllToolStripMenuItem.Name = "SelectAllToolStripMenuItem"
-        Me.SelectAllToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        resources.ApplyResources(Me.SelectAllToolStripMenuItem, "SelectAllToolStripMenuItem")
         Me.SelectAllToolStripMenuItem.Tag = "Select_All"
-        Me.SelectAllToolStripMenuItem.Text = "Select All"
         '
         'ClearSelectionToolStripMenuItem
         '
         Me.ClearSelectionToolStripMenuItem.Name = "ClearSelectionToolStripMenuItem"
-        Me.ClearSelectionToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        resources.ApplyResources(Me.ClearSelectionToolStripMenuItem, "ClearSelectionToolStripMenuItem")
         Me.ClearSelectionToolStripMenuItem.Tag = "Clear_Selection"
-        Me.ClearSelectionToolStripMenuItem.Text = "Clear Selection"
         '
         'AddAllToolStripMenuItem
         '
         Me.AddAllToolStripMenuItem.Name = "AddAllToolStripMenuItem"
-        Me.AddAllToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.AddAllToolStripMenuItem.Text = "Add All"
+        resources.ApplyResources(Me.AddAllToolStripMenuItem, "AddAllToolStripMenuItem")
         '
         'ucrSelector
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.lstAvailableVariable)
-        Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "ucrSelector"
-        Me.Size = New System.Drawing.Size(148, 130)
         Me.SelectionMenuStrip.ResumeLayout(False)
         Me.ResumeLayout(False)
 
