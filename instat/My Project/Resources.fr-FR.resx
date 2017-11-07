@@ -36,47 +36,29 @@
   <data name="Cancel" xml:space="preserve">
     <value>Annuler</value>
   </data>
-  <data name="Choose_Statistics" xml:space="preserve">
-    <value>Sélectionnez statistiques</value>
-  </data>
   <data name="Clear" xml:space="preserve">
     <value>Effacer</value>
   </data>
-  <data name="Climatic" xml:space="preserve">
-    <value>Climatiques</value>
-  </data>
   <data name="Close" xml:space="preserve">
     <value>Fermer</value>
-  </data>
-  <data name="Close_Worksheet" xml:space="preserve">
-    <value>Fermer la feuille de calcul</value>
-  </data>
-  <data name="Command_and_Output_Window" xml:space="preserve">
-    <value>Commande et fenêtre sortie</value>
   </data>
   <data name="Copy" xml:space="preserve">
     <value>Copier</value>
   </data>
   <data name="Copy_Special" xml:space="preserve">
-    <value>Copier spécial</value>
-  </data>
-  <data name="Cumulative_Frequency" xml:space="preserve">
-    <value>Fréquence cumulée</value>
+    <value>Copie spéciale</value>
   </data>
   <data name="Cut" xml:space="preserve">
     <value>Couper</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>Edition</value>
+    <value>Édition</value>
   </data>
   <data name="Exit_" xml:space="preserve">
     <value>Quitter</value>
   </data>
-  <data name="Factor_Variable" xml:space="preserve">
-    <value>Facteur Variable</value>
-  </data>
   <data name="File" xml:space="preserve">
-    <value>Fichier </value>
+    <value>Fichier</value>
   </data>
   <data name="Find" xml:space="preserve">
     <value>Rechercher</value>
@@ -95,12 +77,6 @@
   </data>
   <data name="Ok" xml:space="preserve">
     <value>OK</value>
-  </data>
-  <data name="Open_From_Library" xml:space="preserve">
-    <value>Ouvert de la bibliothèque</value>
-  </data>
-  <data name="Open_Worksheet" xml:space="preserve">
-    <value>Feuille de calcul ouverte</value>
   </data>
   <data name="Paste" xml:space="preserve">
     <value>Coller</value>
@@ -129,9 +105,6 @@
   <data name="Script" xml:space="preserve">
     <value>Script</value>
   </data>
-  <data name="Script_Window" xml:space="preserve">
-    <value>Fenêtre script</value>
-  </data>
   <data name="Selected_Variables" xml:space="preserve">
     <value>Variables sélectionnées</value>
   </data>
@@ -139,25 +112,19 @@
     <value>Sélectionner tout</value>
   </data>
   <data name="Statistics" xml:space="preserve">
-    <value>Statistiques</value>
-  </data>
-  <data name="Stem_And_Leaf" xml:space="preserve">
-    <value>Tige et feuilles</value>
+    <value>&amp;Statistiques :</value>
   </data>
   <data name="Submit" xml:space="preserve">
     <value>Envoyer</value>
   </data>
   <data name="Undo" xml:space="preserve">
-    <value>Rétablir</value>
+    <value>&amp;Annuler</value>
   </data>
   <data name="Window" xml:space="preserve">
     <value>Fenêtre</value>
   </data>
   <data name="Export_as" xml:space="preserve">
-    <value>Export_as</value>
-  </data>
-  <data name="Import_ASCII" xml:space="preserve">
-    <value>Import ASCII</value>
+    <value>Exporter en tant que :</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Langue</value>
@@ -172,52 +139,25 @@
     <value>Sortie</value>
   </data>
   <data name="Selection" xml:space="preserve">
-    <value>Sélection</value>
-  </data>
-  <data name="Analysis_of_Variance" xml:space="preserve">
-    <value>Analyse de la Variance</value>
+    <value>Selection</value>
   </data>
   <data name="Calculations" xml:space="preserve">
     <value>Calculs</value>
   </data>
-  <data name="Check_Duplicates" xml:space="preserve">
-    <value>Vérifier les doublons</value>
-  </data>
-  <data name="Circular_Statisctics" xml:space="preserve">
-    <value>CircularStatisctics</value>
-  </data>
-  <data name="Clear_Remove" xml:space="preserve">
-    <value>Clear(Remove)</value>
-  </data>
   <data name="Column_Properties" xml:space="preserve">
-    <value>Propriétés de colonne</value>
-  </data>
-  <data name="Column_Statistics" xml:space="preserve">
-    <value>Statistiques de colonnes</value>
+    <value>Propriétés des &amp;colonnes...</value>
   </data>
   <data name="Data" xml:space="preserve">
     <value>Data</value>
   </data>
-  <data name="Describe" xml:space="preserve">
-    <value>Décrire</value>
-  </data>
   <data name="Display" xml:space="preserve">
     <value>Affichage</value>
-  </data>
-  <data name="Diversity" xml:space="preserve">
-    <value>Diversité</value>
-  </data>
-  <data name="Duplicate_copy_columns" xml:space="preserve">
-    <value>Duplicata (copie de colonnes)</value>
   </data>
   <data name="English" xml:space="preserve">
     <value>Anglais</value>
   </data>
   <data name="Enter" xml:space="preserve">
-    <value>Entrée</value>
-  </data>
-  <data name="Freequency_Chart" xml:space="preserve">
-    <value>Graphique Freequeency</value>
+    <value>Entrer</value>
   </data>
   <data name="French" xml:space="preserve">
     <value>Français</value>
@@ -228,56 +168,23 @@
   <data name="Histogram" xml:space="preserve">
     <value>Histogramme</value>
   </data>
-  <data name="Load_Graph" xml:space="preserve">
-    <value>Graphique de charge</value>
-  </data>
-  <data name="Manipulate" xml:space="preserve">
-    <value>Manipuler les</value>
-  </data>
-  <data name="Non_Parametric" xml:space="preserve">
-    <value>Non paramétrique</value>
-  </data>
   <data name="Plot" xml:space="preserve">
     <value>Tracer</value>
-  </data>
-  <data name="Probability_Distribution" xml:space="preserve">
-    <value>Distribution de probabilité</value>
-  </data>
-  <data name="Probability_Plot" xml:space="preserve">
-    <value>Graphique de probabilité</value>
-  </data>
-  <data name="Random_Samples" xml:space="preserve">
-    <value>Échantillons aléatoires</value>
   </data>
   <data name="Regression" xml:space="preserve">
     <value>Régression</value>
   </data>
-  <data name="Regular_Sequence" xml:space="preserve">
-    <value>Séquence régulière</value>
-  </data>
   <data name="Reshape" xml:space="preserve">
     <value>Remodeler</value>
-  </data>
-  <data name="Resize_Worksheet" xml:space="preserve">
-    <value>Redimensionner la feuille de calcul</value>
   </data>
   <data name="Sample_Size" xml:space="preserve">
     <value>Taille d'échantillon</value>
   </data>
   <data name="ScatterPlot" xml:space="preserve">
-    <value>Nuage de points...</value>
-  </data>
-  <data name="Simple_Models" xml:space="preserve">
-    <value>Modèles simples</value>
+    <value>Nuage de points</value>
   </data>
   <data name="Summary" xml:space="preserve">
     <value>Résumé</value>
-  </data>
-  <data name="Summary_Chart" xml:space="preserve">
-    <value>Tableau récapitulatif</value>
-  </data>
-  <data name="Survival" xml:space="preserve">
-    <value>Survie</value>
   </data>
   <data name="Tables" xml:space="preserve">
     <value>Tables</value>
@@ -285,32 +192,11 @@
   <data name="Time_Series" xml:space="preserve">
     <value>Série chronologique</value>
   </data>
-  <data name="Windrose" xml:space="preserve">
-    <value>Rose des vents</value>
-  </data>
   <data name="Expand" xml:space="preserve">
     <value>Développer</value>
   </data>
-  <data name="Indicator_Variables" xml:space="preserve">
-    <value>Variables indicatrices</value>
-  </data>
-  <data name="Interractions" xml:space="preserve">
-    <value>Interractions</value>
-  </data>
-  <data name="Polynomials" xml:space="preserve">
-    <value>Polynômes</value>
-  </data>
-  <data name="Recode" xml:space="preserve">
-    <value>Recode</value>
-  </data>
-  <data name="Row_Statistics" xml:space="preserve">
-    <value>Row_Statistics</value>
-  </data>
   <data name="Select_" xml:space="preserve">
     <value>Sélectionner</value>
-  </data>
-  <data name="Select_and_Stack" xml:space="preserve">
-    <value>Sélectionnez et pile</value>
   </data>
   <data name="Sort" xml:space="preserve">
     <value>Tri</value>
@@ -321,131 +207,50 @@
   <data name="Transform" xml:space="preserve">
     <value>Transformer</value>
   </data>
-  <data name="Unstack" xml:space="preserve">
-    <value>Désempilement</value>
-  </data>
   <data name="Clear1" xml:space="preserve">
-    <value>Claire Del</value>
-  </data>
-  <data name="Command_Logging" xml:space="preserve">
-    <value>Journalisation des commandes</value>
-  </data>
-  <data name="Copy_Special1" xml:space="preserve">
-    <value>Copie spéciale Ctrl + Y</value>
+    <value>Effacer	Suppr</value>
   </data>
   <data name="Find1" xml:space="preserve">
-    <value>Trouver Ctrl + F</value>
+    <value>Rechercher...	Ctrl-F</value>
   </data>
   <data name="Flags" xml:space="preserve">
     <value>Indicateurs</value>
   </data>
-  <data name="Font" xml:space="preserve">
-    <value>Police Ctrl + T</value>
-  </data>
   <data name="Options" xml:space="preserve">
     <value>Options</value>
   </data>
-  <data name="Output_Spooling" xml:space="preserve">
-    <value>File d'attente de sortie</value>
-  </data>
   <data name="Paste1" xml:space="preserve">
-    <value>Coller Ctrl + V</value>
+    <value>Coller	Ctrl-V</value>
   </data>
   <data name="Recall" xml:space="preserve">
     <value>Rappeler</value>
   </data>
   <data name="Replace1" xml:space="preserve">
-    <value>Remplacer Ctrl + H</value>
-  </data>
-  <data name="Run_Worksheet_Editor" xml:space="preserve">
-    <value>Exécutez l'éditeur de feuille de calcul F7</value>
-  </data>
-  <data name="Select_All1" xml:space="preserve">
-    <value>Sélectionnez toutes les baguettes + A </value>
-  </data>
-  <data name="View_Edit_Macro" xml:space="preserve">
-    <value>Afficher/modifier Macro</value>
-  </data>
-  <data name="View_Edit_Text" xml:space="preserve">
-    <value>Afficher/modifier texte</value>
+    <value>Remplacer...	Ctrl+H</value>
   </data>
   <data name="Data_View" xml:space="preserve">
-    <value>Affichage des données</value>
+    <value>&amp;Vue de données...</value>
   </data>
   <data name="Output_Window" xml:space="preserve">
     <value>Fenêtre Sortie</value>
   </data>
-  <data name="Dry_Spell" xml:space="preserve">
-    <value>Période de sécheresse</value>
-  </data>
-  <data name="Earliest_day" xml:space="preserve">
-    <value>Premier jour</value>
-  </data>
-  <data name="Length_of_Dry_Spell" xml:space="preserve">
-    <value>Longueur de la période de sécheresse</value>
-  </data>
   <data name="Not_Yet_Implemented" xml:space="preserve">
-    <value>Pas encore mis en œuvre</value>
-  </data>
-  <data name="Number_of_Rain_Days" xml:space="preserve">
-    <value>Nombre de jours de pluie</value>
-  </data>
-  <data name="Threashold" xml:space="preserve">
-    <value>Threashold</value>
-  </data>
-  <data name="Total_Rain" xml:space="preserve">
-    <value>Pluie totale</value>
+    <value>Cette commande n'est pas encore mise en application</value>
   </data>
   <data name="Within" xml:space="preserve">
-    <value>Au sein de</value>
-  </data>
-  <data name="Extremes" xml:space="preserve">
-    <value>Extrêmes</value>
-  </data>
-  <data name="Spells" xml:space="preserve">
-    <value>Sorts</value>
-  </data>
-  <data name="Start_of_the_Rains" xml:space="preserve">
-    <value>Début de la saison des pluies</value>
-  </data>
-  <data name="Water_Balance" xml:space="preserve">
-    <value>Bilan hydrique</value>
+    <value>Dans :</value>
   </data>
   <data name="Column_Name" xml:space="preserve">
     <value>Nom de la colonne</value>
   </data>
   <data name="Days" xml:space="preserve">
-    <value>jours</value>
-  </data>
-  <data name="Start_of_Rain" xml:space="preserve">
-    <value>Début de pluie</value>
-  </data>
-  <data name="Dry_Spell1" xml:space="preserve">
-    <value>Période de sécheresse</value>
-  </data>
-  <data name="To_Script" xml:space="preserve">
-    <value>Au Script</value>
+    <value>Jours</value>
   </data>
   <data name="Ascending" xml:space="preserve">
-    <value>Croissant</value>
+    <value>Ordre croissant</value>
   </data>
   <data name="Descending" xml:space="preserve">
-    <value>Décroissant</value>
-  </data>
-  <data name="Anova_One_Way" xml:space="preserve">
-    <value>ANOVA One Way</value>
-  </data>
-  <data name="Earilest_Day" xml:space="preserve">
-    <value>Earilest jour</value>
-  </data>
-  <data name="End_of_Rain" xml:space="preserve">
-    <value>Fin de la pluie</value>
-  </data>
-  <data name="End_of_Rains" xml:space="preserve">
-    <value>Fin de saison des pluies</value>
-  </data>
-  <data name="Evaporation" xml:space="preserve">
-    <value>Évaporation</value>
+    <value>Ordre décroissant</value>
   </data>
   <data name="Maximum_Capacity" xml:space="preserve">
     <value>Capacité maximale</value>
@@ -454,106 +259,34 @@
     <value>Quatre</value>
   </data>
   <data name="One" xml:space="preserve">
-    <value>un     </value>
+    <value>Un</value>
   </data>
   <data name="Three" xml:space="preserve">
-    <value>trois</value>
+    <value>Trois</value>
   </data>
   <data name="Two" xml:space="preserve">
-    <value>deux</value>
-  </data>
-  <data name="Continuity__Correction" xml:space="preserve">
-    <value>Correction de continuité</value>
-  </data>
-  <data name="Layout_of_data" xml:space="preserve">
-    <value>Disposition de données</value>
-  </data>
-  <data name="Make_Result_as_a_factor" xml:space="preserve">
-    <value>Rendre le résultat comme un facteur</value>
+    <value>Deux</value>
   </data>
   <data name="New_Value" xml:space="preserve">
-    <value>Nouvelle valeur</value>
-  </data>
-  <data name="Range_End" xml:space="preserve">
-    <value>Fin de gamme</value>
-  </data>
-  <data name="Range_Start" xml:space="preserve">
-    <value>Gamme Start</value>
-  </data>
-  <data name="Save_values" xml:space="preserve">
-    <value>Enregistrer les valeurs</value>
+    <value>Nouvelle valeur :</value>
   </data>
   <data name="String1" xml:space="preserve">
     <value>Nouveau</value>
   </data>
-  <data name="With_a_Label" xml:space="preserve">
-    <value>Avec une étiquette</value>
-  </data>
-  <data name="Write_back_to_the_data" xml:space="preserve">
-    <value>Écrire dans les données</value>
-  </data>
-  <data name="Data_to_be_averaged" xml:space="preserve">
-    <value>Données de la valeur moyenne</value>
-  </data>
-  <data name="Display_residuals" xml:space="preserve">
-    <value>Afficher les résidus</value>
-  </data>
   <data name="Lag" xml:space="preserve">
     <value>Décalage</value>
-  </data>
-  <data name="Moving_Averages" xml:space="preserve">
-    <value>Les moyennes mobiles</value>
-  </data>
-  <data name="Save_residuals" xml:space="preserve">
-    <value>Enregistrer les valeurs résiduelles</value>
-  </data>
-  <data name="Save_results_in" xml:space="preserve">
-    <value>Enregistrer les résultats dans</value>
-  </data>
-  <data name="By_factors" xml:space="preserve">
-    <value>By_factor(s)</value>
-  </data>
-  <data name="Data_to_be_plotted" xml:space="preserve">
-    <value>Données à tracer</value>
-  </data>
-  <data name="Horizontal_boxplot" xml:space="preserve">
-    <value>Boxplot horizontal</value>
-  </data>
-  <data name="Notched_boxplot" xml:space="preserve">
-    <value>Boxplot cranté</value>
   </data>
   <data name="String2" xml:space="preserve">
     <value>Options</value>
   </data>
-  <data name="Variable_width" xml:space="preserve">
-    <value>Largeur variable</value>
-  </data>
-  <data name="Blocking_factor" xml:space="preserve">
-    <value>Facteur de blocage</value>
-  </data>
-  <data name="Contrasts" xml:space="preserve">
-    <value>Contrastes</value>
-  </data>
-  <data name="Response_variable1" xml:space="preserve">
-    <value>1ère variable de réponse</value>
-  </data>
-  <data name="Response_variable2" xml:space="preserve">
-    <value>2ème variable de réponse</value>
-  </data>
   <data name="Save_results" xml:space="preserve">
-    <value>Enregistrer les résultats</value>
-  </data>
-  <data name="Treatment_factor" xml:space="preserve">
-    <value>Facteur de traitement</value>
+    <value>Enregistrer les résultats...</value>
   </data>
   <data name="arrows_up" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\arrows_up.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Density" xml:space="preserve">
-    <value>Densité</value>
-  </data>
-  <data name="Display_Letter_Values" xml:space="preserve">
-    <value>Valeurs d'affichage lettre</value>
+    <value>Densité :</value>
   </data>
   <data name="First" xml:space="preserve">
     <value>Premier</value>
@@ -561,38 +294,14 @@
   <data name="Site" xml:space="preserve">
     <value>Site</value>
   </data>
-  <data name="Display_Spell_length" xml:space="preserve">
-    <value>Longueur du sort</value>
-  </data>
-  <data name="Selected_variables2" xml:space="preserve">
-    <value>Certaines variables</value>
-  </data>
-  <data name="Annual_rainfall" xml:space="preserve">
-    <value>Précipitations annuelles</value>
-  </data>
   <data name="Geometric1" xml:space="preserve">
     <value>Géométrique</value>
-  </data>
-  <data name="legend_bty" xml:space="preserve">
-    <value>la légende bty</value>
   </data>
   <data name="Append" xml:space="preserve">
     <value>Ajouter</value>
   </data>
   <data name="Import" xml:space="preserve">
     <value>Importer</value>
-  </data>
-  <data name="With_X_Variable" xml:space="preserve">
-    <value>Avec X Variable</value>
-  </data>
-  <data name="Random_subset" xml:space="preserve">
-    <value>Sous-ensemble aléatoire</value>
-  </data>
-  <data name="Attach_to_Existing_Label_Column" xml:space="preserve">
-    <value>Attacher à la colonne étiquette existante</value>
-  </data>
-  <data name="Plot_character" xml:space="preserve">
-    <value>Caractère de terrain</value>
   </data>
   <data name="Percents" xml:space="preserve">
     <value>Pourcentages</value>
@@ -601,16 +310,10 @@
     <value>..\Resources\arrows_down.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="None" xml:space="preserve">
-    <value>Aucun</value>
-  </data>
-  <data name="Restrict_Options" xml:space="preserve">
-    <value>Restreindre les Options</value>
-  </data>
-  <data name="Rename_sheets" xml:space="preserve">
-    <value>Renommer des feuilles</value>
+    <value>Aucune</value>
   </data>
   <data name="Number" xml:space="preserve">
-    <value>Numérique</value>
+    <value>Nombre</value>
   </data>
   <data name="Count" xml:space="preserve">
     <value>Nombre</value>
@@ -618,77 +321,32 @@
   <data name="Comment" xml:space="preserve">
     <value>Commentaire</value>
   </data>
-  <data name="Climatic_Methods" xml:space="preserve">
-    <value>Méthodes climatiques</value>
-  </data>
-  <data name="Display_DOY_of_Year" xml:space="preserve">
-    <value>Affichage DOY d'année</value>
-  </data>
   <data name="Label" xml:space="preserve">
-    <value>Intitulé</value>
-  </data>
-  <data name="Plot_window" xml:space="preserve">
-    <value>Tracer la fenêtre</value>
-  </data>
-  <data name="BoxPlot_Options" xml:space="preserve">
-    <value>BoxPlot Options</value>
-  </data>
-  <data name="Seasonal_Summary" xml:space="preserve">
-    <value>Résumé saisonnier</value>
+    <value>Étiquette</value>
   </data>
   <data name="New_worksheet" xml:space="preserve">
-    <value>Nouvelle feuille de calcul</value>
+    <value>&amp;Nouvelle feuille de calcul</value>
   </data>
   <data name="arrows_bottom" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\arrows_bottom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Graphic_options" xml:space="preserve">
-    <value>Options de graphiques</value>
   </data>
   <data name="Normal1" xml:space="preserve">
     <value>Normal</value>
   </data>
   <data name="No" xml:space="preserve">
-    <value>Non</value>
+    <value>No</value>
   </data>
   <data name="Rate" xml:space="preserve">
-    <value>rate</value>
-  </data>
-  <data name="Stack_Daily_data" xml:space="preserve">
-    <value>Pile de données quotidiennes</value>
-  </data>
-  <data name="Principal_Components" xml:space="preserve">
-    <value>Composantes principales</value>
-  </data>
-  <data name="Make_Factor_an_Ordinary_Variable" xml:space="preserve">
-    <value>Faire facteur une Variable ordinaire</value>
+    <value>Taux</value>
   </data>
   <data name="Model" xml:space="preserve">
     <value>Modèle</value>
   </data>
-  <data name="Interpolate" xml:space="preserve">
-    <value>Interpoler</value>
-  </data>
-  <data name="Y_Axis_Variable" xml:space="preserve">
-    <value>Variable d'axe Y</value>
-  </data>
   <data name="Mean1" xml:space="preserve">
     <value>Moyenne</value>
   </data>
-  <data name="Bernouli" xml:space="preserve">
-    <value>Bernouli</value>
-  </data>
   <data name="Filter" xml:space="preserve">
-    <value>Filtre</value>
-  </data>
-  <data name="Make_Factor" xml:space="preserve">
-    <value>Faire facteur</value>
-  </data>
-  <data name="Unused_levels" xml:space="preserve">
-    <value>Niveaux non utilisés</value>
-  </data>
-  <data name="Reference_levels" xml:space="preserve">
-    <value>Niveaux de référence</value>
+    <value>Filtrer</value>
   </data>
   <data name="Station_name" xml:space="preserve">
     <value>Nom de la station</value>
@@ -696,23 +354,11 @@
   <data name="Kappa" xml:space="preserve">
     <value>Kappa</value>
   </data>
-  <data name="Indicator_variable" xml:space="preserve">
-    <value>Variable d'indicateur</value>
-  </data>
-  <data name="Display_daily" xml:space="preserve">
-    <value>Afficher tous les jours</value>
-  </data>
   <data name="Maximum1" xml:space="preserve">
     <value>Maximum</value>
   </data>
   <data name="Events" xml:space="preserve">
     <value>Événements</value>
-  </data>
-  <data name="Expot_CPT_to_Tabular" xml:space="preserve">
-    <value>Exporter CPT à tabulaire</value>
-  </data>
-  <data name="Attach_to_New_Label_Column" xml:space="preserve">
-    <value>Joindre à la nouvelle étiquette de colonne</value>
   </data>
   <data name="Total" xml:space="preserve">
     <value>Total</value>
@@ -721,13 +367,10 @@
     <value>Statistique</value>
   </data>
   <data name="Std_Deviation" xml:space="preserve">
-    <value>Écart-type</value>
+    <value>Écart type</value>
   </data>
   <data name="Sum" xml:space="preserve">
-    <value>somme</value>
-  </data>
-  <data name="Display_Rain_Running_Total" xml:space="preserve">
-    <value>Affichage pluie Running Total</value>
+    <value>Somme</value>
   </data>
   <data name="Layers" xml:space="preserve">
     <value>Couches</value>
@@ -736,16 +379,10 @@
     <value>Nombre d'échantillons</value>
   </data>
   <data name="Height" xml:space="preserve">
-    <value>height</value>
-  </data>
-  <data name="vonmises" xml:space="preserve">
-    <value>vonMises</value>
-  </data>
-  <data name="Matching_column" xml:space="preserve">
-    <value>Colonne correspondante</value>
+    <value>Taille</value>
   </data>
   <data name="Convert_to" xml:space="preserve">
-    <value>Convertir en</value>
+    <value>Convertir en :</value>
   </data>
   <data name="Normal" xml:space="preserve">
     <value>Normal</value>
@@ -753,62 +390,32 @@
   <data name="Lock" xml:space="preserve">
     <value>Verrouiller</value>
   </data>
-  <data name="End_of_the_Rains" xml:space="preserve">
-    <value>Fin de la saison des pluies</value>
-  </data>
   <data name="Timeseries" xml:space="preserve">
     <value>Timeseries</value>
-  </data>
-  <data name="Level_number" xml:space="preserve">
-    <value>Numéro de niveau</value>
   </data>
   <data name="Maximum" xml:space="preserve">
     <value>Maximum</value>
   </data>
   <data name="View" xml:space="preserve">
-    <value>Affichage</value>
-  </data>
-  <data name="Y_label" xml:space="preserve">
-    <value>Étiquette de Y</value>
-  </data>
-  <data name="Detach_Label_Column" xml:space="preserve">
-    <value>Détacher la colonne étiquette</value>
-  </data>
-  <data name="Attach_to_existing_label_column1" xml:space="preserve">
-    <value>Attacher à la colonne étiquette existante</value>
+    <value>Afficher</value>
   </data>
   <data name="Prepare" xml:space="preserve">
     <value>Préparer</value>
-  </data>
-  <data name="Yvariable" xml:space="preserve">
-    <value>Variable Y</value>
   </data>
   <data name="Facets" xml:space="preserve">
     <value>Facettes</value>
   </data>
   <data name="Number_of_levels" xml:space="preserve">
-    <value>Nombre de niveaux</value>
-  </data>
-  <data name="Extreme_Events" xml:space="preserve">
-    <value>Événements extrêmes</value>
+    <value>Nombre de niveaux.</value>
   </data>
   <data name="Weights1" xml:space="preserve">
-    <value>Épaisseurs</value>
+    <value>Poids</value>
   </data>
   <data name="Weights" xml:space="preserve">
-    <value>Épaisseurs</value>
-  </data>
-  <data name="Rain_count" xml:space="preserve">
-    <value>Comte de pluie</value>
-  </data>
-  <data name="With_column" xml:space="preserve">
-    <value>Avec colonne</value>
+    <value>Poids</value>
   </data>
   <data name="Bottom" xml:space="preserve">
-    <value>En bas</value>
-  </data>
-  <data name="Log_Linear" xml:space="preserve">
-    <value>Log-linéaire</value>
+    <value>derniers</value>
   </data>
   <data name="Inventory" xml:space="preserve">
     <value>Inventaire</value>
@@ -816,128 +423,47 @@
   <data name="Interaction" xml:space="preserve">
     <value>Interaction</value>
   </data>
-  <data name="REQUIRES_FACTOR_SELECTORS" xml:space="preserve">
-    <value>NÉCESSITE DES SÉLECTEURS DE FACTEUR</value>
-  </data>
-  <data name="X_Axis_Variable" xml:space="preserve">
-    <value>X Variable de l'axe</value>
-  </data>
-  <data name="Column_summaries" xml:space="preserve">
-    <value>Résumés de la colonne</value>
-  </data>
-  <data name="Data_column" xml:space="preserve">
-    <value>Colonne de données</value>
-  </data>
   <data name="View_data" xml:space="preserve">
     <value>Afficher les données</value>
   </data>
   <data name="Cases" xml:space="preserve">
-    <value>% Des cas</value>
-  </data>
-  <data name="Two_Samles_Summary_Data" xml:space="preserve">
-    <value>Deux échantillons de données sommaires</value>
-  </data>
-  <data name="Pie_Chart_Options" xml:space="preserve">
-    <value>Options de graphique à secteurs</value>
+    <value>Incidents</value>
   </data>
   <data name="Missing" xml:space="preserve">
     <value>Manquant</value>
   </data>
   <data name="Scale" xml:space="preserve">
-    <value>ECHELLE</value>
-  </data>
-  <data name="Shift_Daily_data" xml:space="preserve">
-    <value>Maj des données quotidiennes</value>
+    <value>Mettre à l'échelle</value>
   </data>
   <data name="Last" xml:space="preserve">
     <value>Dernier</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>Nom</value>
+    <value>Nom complet</value>
   </data>
   <data name="Plot_Options" xml:space="preserve">
-    <value>Options de tracé</value>
-  </data>
-  <data name="Gamma_With_Zeros" xml:space="preserve">
-    <value>Gamma avec des zéros</value>
+    <value>Options de traçage...</value>
   </data>
   <data name="Output_options" xml:space="preserve">
     <value>Options de sortie</value>
   </data>
-  <data name="Restrict_filter" xml:space="preserve">
-    <value>Restrict(Filter)</value>
-  </data>
-  <data name="Gamma_With_Shape_and_Rate" xml:space="preserve">
-    <value>Gamma avec forme et taux</value>
-  </data>
   <data name="Factor" xml:space="preserve">
-    <value>facteur</value>
-  </data>
-  <data name="Weibull" xml:space="preserve">
-    <value>Weibull</value>
-  </data>
-  <data name="Poisson" xml:space="preserve">
-    <value>Poisson</value>
+    <value>Facteur :</value>
   </data>
   <data name="Median" xml:space="preserve">
     <value>Médian</value>
   </data>
-  <data name="Standard_deviation" xml:space="preserve">
-    <value>St. Dev</value>
-  </data>
   <data name="Lock_and_unlock" xml:space="preserve">
     <value>Verrouillage et déverrouillage</value>
-  </data>
-  <data name="Summary_Variable" xml:space="preserve">
-    <value>Sommaire Variable</value>
-  </data>
-  <data name="Colour_rainbow" xml:space="preserve">
-    <value>Arc-en-ciel de couleur</value>
-  </data>
-  <data name="Row_names" xml:space="preserve">
-    <value>Noms de ligne</value>
-  </data>
-  <data name="Output_for_CDT" xml:space="preserve">
-    <value>Sortie pour CDT</value>
   </data>
   <data name="Additional" xml:space="preserve">
     <value>Supplémentaire</value>
   </data>
-  <data name="Omit_value" xml:space="preserve">
-    <value>Omettez la valeur</value>
-  </data>
   <data name="Quote" xml:space="preserve">
     <value>Devis</value>
   </data>
-  <data name="Three_Summaries" xml:space="preserve">
-    <value>Trois résumés</value>
-  </data>
-  <data name="Factor_into" xml:space="preserve">
-    <value>Facteur dans</value>
-  </data>
-  <data name="Binomial" xml:space="preserve">
-    <value>Binomiale</value>
-  </data>
-  <data name="Cliplot" xml:space="preserve">
-    <value>Cliplot</value>
-  </data>
-  <data name="Extreme_Value" xml:space="preserve">
-    <value>Valeurs extrêmes</value>
-  </data>
-  <data name="Penman" xml:space="preserve">
-    <value>Penman</value>
-  </data>
-  <data name="Selected_variables1" xml:space="preserve">
-    <value>Certaines variables</value>
-  </data>
-  <data name="Columns_to_be_stack" xml:space="preserve">
-    <value>Colonnes à pile</value>
-  </data>
-  <data name="Copy_Results_into_a_New_Column" xml:space="preserve">
-    <value>Copier les résultats dans une nouvelle colonne</value>
-  </data>
   <data name="Yes" xml:space="preserve">
-    <value>Oui</value>
+    <value>Yes</value>
   </data>
   <data name="Heading" xml:space="preserve">
     <value>Titre</value>
@@ -945,110 +471,38 @@
   <data name="Mode" xml:space="preserve">
     <value>Mode</value>
   </data>
-  <data name="Attach_to_a_new_label_column" xml:space="preserve">
-    <value>Attacher à une nouvelle colonne étiquette</value>
-  </data>
-  <data name="Missing_Data_Table" xml:space="preserve">
-    <value>Table de données manquantes</value>
-  </data>
-  <data name="Unstack_Decast" xml:space="preserve">
-    <value>Désempilement/Decast</value>
-  </data>
-  <data name="Reorder_levels" xml:space="preserve">
-    <value>Réorganiser les niveaux</value>
-  </data>
-  <data name="Import_daily_data" xml:space="preserve">
-    <value>Importer des données quotidiennes</value>
-  </data>
   <data name="Minimum1" xml:space="preserve">
     <value>Minimum</value>
-  </data>
-  <data name="Markov_Modelling" xml:space="preserve">
-    <value>Modélisation de Markov</value>
-  </data>
-  <data name="Freequency_Polygon" xml:space="preserve">
-    <value>Freequeency polygone</value>
-  </data>
-  <data name="Find_from" xml:space="preserve">
-    <value>Trouver des</value>
-  </data>
-  <data name="Cluster_By" xml:space="preserve">
-    <value>Cluster par</value>
-  </data>
-  <data name="Sheet_name" xml:space="preserve">
-    <value>Nom de la feuille</value>
-  </data>
-  <data name="Histogram_Options" xml:space="preserve">
-    <value>Options de l'histogramme</value>
-  </data>
-  <data name="Heat_Sum" xml:space="preserve">
-    <value>Somme de la chaleur</value>
   </data>
   <data name="Exponential" xml:space="preserve">
     <value>Exponentielle</value>
   </data>
-  <data name="By_Second_Factor" xml:space="preserve">
-    <value>Deuxième facteur</value>
-  </data>
   <data name="Greater_Than" xml:space="preserve">
-    <value>Supérieur à</value>
-  </data>
-  <data name="Output_for_CPT" xml:space="preserve">
-    <value>Sortie pour CPT</value>
+    <value>Est supérieur à</value>
   </data>
   <data name="Expand1" xml:space="preserve">
     <value>Développer</value>
   </data>
   <data name="Legend_position" xml:space="preserve">
-    <value>Position de la légende</value>
-  </data>
-  <data name="Selected_Column" xml:space="preserve">
-    <value>Colonnes sélectionnées</value>
-  </data>
-  <data name="Level_to_be_omitted" xml:space="preserve">
-    <value>Niveau de libeller</value>
-  </data>
-  <data name="Day_Month" xml:space="preserve">
-    <value>Jour mois</value>
-  </data>
-  <data name="Bar_Chart_Options" xml:space="preserve">
-    <value>Options de graphique à barres</value>
+    <value>Position de la légende :</value>
   </data>
   <data name="Process" xml:space="preserve">
     <value>Processus</value>
-  </data>
-  <data name="Cumulative_exceedance" xml:space="preserve">
-    <value>Dépassements cumulés</value>
-  </data>
-  <data name="Rain_Statistics" xml:space="preserve">
-    <value>Statistiques de pluie</value>
   </data>
   <data name="Include" xml:space="preserve">
     <value>Inclure</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Intitulé</value>
+    <value>Fonction</value>
   </data>
   <data name="Shape" xml:space="preserve">
     <value>Forme</value>
-  </data>
-  <data name="Display_daily_data_rain" xml:space="preserve">
-    <value>Afficher tous les jours de pluie de données</value>
-  </data>
-  <data name="Copy_Sheet" xml:space="preserve">
-    <value>Copier une feuille</value>
-  </data>
-  <data name="Reserve_free_space" xml:space="preserve">
-    <value>Réserve d'espace libre</value>
   </data>
   <data name="Uniform" xml:space="preserve">
     <value>Uniforme</value>
   </data>
   <data name="Overtype" xml:space="preserve">
-    <value>(Refrappe)</value>
-  </data>
-  <data name="Row_statistics1" xml:space="preserve">
-    <value>Statistiques de ligne</value>
+    <value>&amp;Refrappe</value>
   </data>
   <data name="Type" xml:space="preserve">
     <value>Type</value>
@@ -1056,119 +510,53 @@
   <data name="Exclude" xml:space="preserve">
     <value>Exclure</value>
   </data>
-  <data name="Stack_data_into" xml:space="preserve">
-    <value>Données de la pile en</value>
-  </data>
-  <data name="Legend_label" xml:space="preserve">
-    <value>Étiquette de légende</value>
-  </data>
   <data name="Axes" xml:space="preserve">
     <value>Axes</value>
-  </data>
-  <data name="Data_Frame" xml:space="preserve">
-    <value>Trame de données</value>
-  </data>
-  <data name="Delete_sheet" xml:space="preserve">
-    <value>Supprimer la fiche</value>
   </data>
   <data name="Chart_Type" xml:space="preserve">
     <value>Type de graphique</value>
   </data>
   <data name="Equal_To" xml:space="preserve">
-    <value>Égal à</value>
-  </data>
-  <data name="Bar_And_Pie_Chart" xml:space="preserve">
-    <value>Bar et Camembert</value>
-  </data>
-  <data name="Cumulative_Exceedence" xml:space="preserve">
-    <value>Dépassement cumulé</value>
+    <value>Égal à...</value>
   </data>
   <data name="Into" xml:space="preserve">
-    <value>Dans</value>
-  </data>
-  <data name="Copy_result_into_a_new_column" xml:space="preserve">
-    <value>Copier le résultat dans une nouvelle colonne</value>
-  </data>
-  <data name="von_mises" xml:space="preserve">
-    <value>von mises</value>
-  </data>
-  <data name="Make_variable_into_a_factor" xml:space="preserve">
-    <value>Rendre variable dans un facteur de</value>
+    <value>Da&amp;ns :</value>
   </data>
   <data name="Themes" xml:space="preserve">
     <value>Thèmes</value>
   </data>
   <data name="Categorical" xml:space="preserve">
-    <value>Catégorielles</value>
-  </data>
-  <data name="Unstack_Daily_data" xml:space="preserve">
-    <value>Désempilement de données quotidiennes</value>
+    <value>Catégorie</value>
   </data>
   <data name="Bar_Chart" xml:space="preserve">
-    <value>Barres</value>
-  </data>
-  <data name="Summary_Statistics" xml:space="preserve">
-    <value>Statistiques sommaires</value>
+    <value>Graphique à barres</value>
   </data>
   <data name="Seed" xml:space="preserve">
-    <value>Seed</value>
+    <value>Valeur initiale</value>
   </data>
   <data name="Order" xml:space="preserve">
     <value>Ordre</value>
   </data>
   <data name="Line_width" xml:space="preserve">
-    <value>Largeur de la ligne</value>
-  </data>
-  <data name="Generate_new_label_column_from_data" xml:space="preserve">
-    <value>Générer la nouvelle colonne d'étiquette de données</value>
+    <value> Épaisseur du trait</value>
   </data>
   <data name="Existing_worksheet" xml:space="preserve">
-    <value>Feuille de calcul existante</value>
-  </data>
-  <data name="Statistcs_required" xml:space="preserve">
-    <value>Statistcs requise</value>
-  </data>
-  <data name="Reorder_sheets" xml:space="preserve">
-    <value>Feuilles reoder</value>
-  </data>
-  <data name="Examine" xml:space="preserve">
-    <value>Examiner</value>
+    <value>Feuille de calcul &amp;existante :</value>
   </data>
   <data name="Pie_Chart" xml:space="preserve">
-    <value>Secteurs</value>
-  </data>
-  <data name="Factor_unused_levels" xml:space="preserve">
-    <value>Facteur de niveaux non utilisés</value>
+    <value>Graphique en secteurs</value>
   </data>
   <data name="Row" xml:space="preserve">
-    <value>ROW</value>
-  </data>
-  <data name="Gamma_With_Shape_and_Mean" xml:space="preserve">
-    <value>Gamma avec forme et moyenne</value>
-  </data>
-  <data name="Row_summary" xml:space="preserve">
-    <value>Ligne Sommaire</value>
-  </data>
-  <data name="Gamma_With_Shape_and_Scale" xml:space="preserve">
-    <value>Gamma avec la forme et l'échelle</value>
+    <value>&amp;Ligne</value>
   </data>
   <data name="Condition" xml:space="preserve">
-    <value>État</value>
+    <value>Condition</value>
   </data>
   <data name="Weight" xml:space="preserve">
     <value>Poids</value>
   </data>
-  <data name="Missing_Data" xml:space="preserve">
-    <value>Données manquantes</value>
-  </data>
-  <data name="Cliboxplot" xml:space="preserve">
-    <value>Cliboxplot</value>
-  </data>
   <data name="Unlock" xml:space="preserve">
     <value>Déverrouiller</value>
-  </data>
-  <data name="Category_Factor" xml:space="preserve">
-    <value>Facteur de catégorie</value>
   </data>
   <data name="Missing_values" xml:space="preserve">
     <value>Valeurs manquantes</value>
@@ -1176,26 +564,8 @@
   <data name="Data_file" xml:space="preserve">
     <value>Fichier de données</value>
   </data>
-  <data name="Multinomial" xml:space="preserve">
-    <value>Multinomiale</value>
-  </data>
-  <data name="One_Sample_Summary_Data" xml:space="preserve">
-    <value>Un échantillon des données sommaires</value>
-  </data>
-  <data name="Monthly_Summaries" xml:space="preserve">
-    <value>Résumés mensuels</value>
-  </data>
   <data name="Top" xml:space="preserve">
-    <value>En haut</value>
-  </data>
-  <data name="Model_Probabilities" xml:space="preserve">
-    <value>Probabilités de modèle</value>
-  </data>
-  <data name="Stack_Melt" xml:space="preserve">
-    <value>Pile/fonte</value>
-  </data>
-  <data name="Permute_rows" xml:space="preserve">
-    <value>Permute les lignes</value>
+    <value>Top</value>
   </data>
   <data name="a" xml:space="preserve">
     <value>a</value>
@@ -1207,58 +577,22 @@
     <value>Géométrique</value>
   </data>
   <data name="Number_of_Cases" xml:space="preserve">
-    <value>Nombre d'incidents</value>
+    <value>Nombre d’incidents</value>
   </data>
   <data name="Rank" xml:space="preserve">
-    <value>RANG</value>
-  </data>
-  <data name="Grid_square" xml:space="preserve">
-    <value>Grille carrée</value>
-  </data>
-  <data name="Counts_Totals" xml:space="preserve">
-    <value>Dénombrements totaux</value>
-  </data>
-  <data name="Seasonal_Summary_Rain" xml:space="preserve">
-    <value>Pluie de Résumé saisonnier</value>
-  </data>
-  <data name="Second_Factor" xml:space="preserve">
-    <value>Deuxième facteur</value>
-  </data>
-  <data name="Multiple_lines" xml:space="preserve">
-    <value>Plusieurs lignes</value>
+    <value>Rang</value>
   </data>
   <data name="Probability" xml:space="preserve">
     <value>Probabilité</value>
   </data>
-  <data name="Summary_Bar_Pie_Chart" xml:space="preserve">
-    <value>Barre de sommaire ou PieChart</value>
-  </data>
-  <data name="Change_Format_Month" xml:space="preserve">
-    <value>Changement Format mois</value>
-  </data>
-  <data name="Strings_as_factors" xml:space="preserve">
-    <value>Chaînes en tant que facteurs</value>
-  </data>
-  <data name="Indicator_variales" xml:space="preserve">
-    <value>Variables indicatrices</value>
-  </data>
   <data name="Mean" xml:space="preserve">
     <value>Moyenne</value>
-  </data>
-  <data name="Canonical_Correlations" xml:space="preserve">
-    <value>Corrélations canoniques</value>
-  </data>
-  <data name="Restrict_data_values" xml:space="preserve">
-    <value>Limiter les valeurs de données</value>
   </data>
   <data name="Exponential1" xml:space="preserve">
     <value>Exponentielle</value>
   </data>
-  <data name="Export_for_PICSA" xml:space="preserve">
-    <value>Exportation de PICSA</value>
-  </data>
   <data name="Encoding" xml:space="preserve">
-    <value>Codage</value>
+    <value>encodage</value>
   </data>
   <data name="Separator" xml:space="preserve">
     <value>Séparateur</value>
@@ -1266,50 +600,20 @@
   <data name="Input_File" xml:space="preserve">
     <value>Fichier d'entrée</value>
   </data>
-  <data name="Interested_variable" xml:space="preserve">
-    <value>Intéressé par variable</value>
-  </data>
   <data name="Reorder" xml:space="preserve">
     <value>Réorganiser</value>
-  </data>
-  <data name="Data_Manipulation" xml:space="preserve">
-    <value>Manipulation de données</value>
   </data>
   <data name="arrows_top" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\arrows_top.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Combine_Factors" xml:space="preserve">
-    <value>Combiner les facteurs</value>
-  </data>
-  <data name="Dot_Plot_Options" xml:space="preserve">
-    <value>Dot Plot Options</value>
-  </data>
-  <data name="Drop_Unused_Levels" xml:space="preserve">
-    <value>Laisser tomber les niveaux non utilisés </value>
-  </data>
-  <data name="Dummy_Variables" xml:space="preserve">
-    <value>Variables nominales</value>
-  </data>
   <data name="Factors" xml:space="preserve">
     <value>Facteurs</value>
-  </data>
-  <data name="Factor_Optional" xml:space="preserve">
-    <value>Factor(optional)</value>
-  </data>
-  <data name="Include_Facets" xml:space="preserve">
-    <value>Inclure les facettes</value>
   </data>
   <data name="Level" xml:space="preserve">
     <value>Niveau</value>
   </data>
-  <data name="Level_Omitted" xml:space="preserve">
-    <value>Omet le niveau</value>
-  </data>
   <data name="Line_Options" xml:space="preserve">
     <value>Options de courbes</value>
-  </data>
-  <data name="New_Column_Name" xml:space="preserve">
-    <value>Nouveau nom de colonne</value>
   </data>
   <data name="Number_of_Rows" xml:space="preserve">
     <value>Nombre de lignes</value>
@@ -1317,76 +621,61 @@
   <data name="Points" xml:space="preserve">
     <value>Points</value>
   </data>
-  <data name="Point_Options" xml:space="preserve">
-    <value>Options de point</value>
-  </data>
-  <data name="Second_Factor_Optional" xml:space="preserve">
-    <value>Deuxième Factor(Optional)</value>
-  </data>
   <data name="Selected" xml:space="preserve">
     <value>Sélectionné</value>
   </data>
-  <data name="Simple_Regression_Options" xml:space="preserve">
-    <value>Options de régression simple</value>
-  </data>
-  <data name="Variate" xml:space="preserve">
-    <value>Variable aléatoire</value>
-  </data>
-  <data name="Y_Variable" xml:space="preserve">
-    <value>Variable Y</value>
-  </data>
-  <data name="Columns_To_Transpose" xml:space="preserve">
-    <value>Colonnes à transposer</value>
-  </data>
-  <data name="Name_New_Columns" xml:space="preserve">
-    <value>Nouvelles colonnes nom</value>
-  </data>
-  <data name="New_Data_Frame_Name" xml:space="preserve">
-    <value>Nouveau nom de trame de données</value>
-  </data>
-  <data name="Number_Of_Columns" xml:space="preserve">
-    <value>Nombre de colonnes</value>
-  </data>
-  <data name="Random_Subsets" xml:space="preserve">
-    <value>Sous-ensembles aléatoires</value>
-  </data>
-  <data name="Set_Seed" xml:space="preserve">
-    <value>Set de semences</value>
-  </data>
-  <data name="Transpose_Columns" xml:space="preserve">
-    <value>Transposer colonnes</value>
-  </data>
-  <data name="Without_Replacement" xml:space="preserve">
-    <value>Sans remplacement</value>
-  </data>
-  <data name="With_Replacement" xml:space="preserve">
-    <value>Avec remplacement</value>
-  </data>
   <data name="BarCharts" xml:space="preserve">
-    <value>Graphiques à barres...</value>
-  </data>
-  <data name="BarChartSummary" xml:space="preserve">
-    <value>Graphiques à barres de résumé...</value>
+    <value>Graphiques à barres</value>
   </data>
   <data name="BoxPlot" xml:space="preserve">
-    <value>BoxPlot...</value>
+    <value>Surfaces</value>
   </data>
-  <data name="CummDist" xml:space="preserve">
-    <value>Distribution cumulative...</value>
+  <data name="Gamma" xml:space="preserve">
+    <value>Gamma</value>
   </data>
-  <data name="DotPlot" xml:space="preserve">
-    <value>Dotplot...</value>
+  <data name="Location" xml:space="preserve">
+    <value>Localisation</value>
   </data>
-  <data name="InventoryPlot" xml:space="preserve">
-    <value>L'inventaire terrain...</value>
+  <data name="Beta" xml:space="preserve">
+    <value>Bêta</value>
   </data>
-  <data name="LinePlot" xml:space="preserve">
-    <value>Terrain en ligne...</value>
+  <data name="b" xml:space="preserve">
+    <value>o</value>
   </data>
-  <data name="StemLeaf" xml:space="preserve">
-    <value>Tige et feuille...</value>
+  <data name="F" xml:space="preserve">
+    <value>F</value>
   </data>
-  <data name="UseGraph" xml:space="preserve">
-    <value>Utiliser le graphique...</value>
+  <data name="Shape_1" xml:space="preserve">
+    <value>Forme 1</value>
+  </data>
+  <data name="Shape_2" xml:space="preserve">
+    <value>Forme 2</value>
+  </data>
+  <data name="columnmetadata" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\columnmetadata.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dataview" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dataview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="last10dialogs" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\last10dialogs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="lastdialog" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lastdialog.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="openfromfile" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\openfromfile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="openfromlibrary" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\openfromlibrary.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="output2" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\output2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="scriptwindow" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\script.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="resetlayout" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\resetlayout.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
