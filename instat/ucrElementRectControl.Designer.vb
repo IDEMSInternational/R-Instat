@@ -38,6 +38,7 @@ Partial Class ucrElementRectControl
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrElementRectControl))
         Me.grpElementRect = New System.Windows.Forms.GroupBox()
         Me.ucrRectFill = New instat.ucrColors()
         Me.ucrRectColors = New instat.ucrColors()
@@ -60,92 +61,71 @@ Partial Class ucrElementRectControl
         Me.grpElementRect.Controls.Add(Me.ucrChkRectColour)
         Me.grpElementRect.Controls.Add(Me.ucrNudRectSize)
         Me.grpElementRect.Controls.Add(Me.ucrInputRectLineType)
-        Me.grpElementRect.Location = New System.Drawing.Point(3, 0)
+        resources.ApplyResources(Me.grpElementRect, "grpElementRect")
         Me.grpElementRect.Name = "grpElementRect"
-        Me.grpElementRect.Size = New System.Drawing.Size(246, 119)
-        Me.grpElementRect.TabIndex = 0
         Me.grpElementRect.TabStop = False
-        Me.grpElementRect.Text = "ElementRect"
         '
         'ucrRectFill
         '
         Me.ucrRectFill.AddQuotesIfUnrecognised = True
         Me.ucrRectFill.IsReadOnly = False
-        Me.ucrRectFill.Location = New System.Drawing.Point(105, 93)
+        resources.ApplyResources(Me.ucrRectFill, "ucrRectFill")
         Me.ucrRectFill.Name = "ucrRectFill"
-        Me.ucrRectFill.Size = New System.Drawing.Size(137, 21)
-        Me.ucrRectFill.TabIndex = 7
         '
         'ucrRectColors
         '
         Me.ucrRectColors.AddQuotesIfUnrecognised = True
         Me.ucrRectColors.IsReadOnly = False
-        Me.ucrRectColors.Location = New System.Drawing.Point(105, 68)
+        resources.ApplyResources(Me.ucrRectColors, "ucrRectColors")
         Me.ucrRectColors.Name = "ucrRectColors"
-        Me.ucrRectColors.Size = New System.Drawing.Size(137, 21)
-        Me.ucrRectColors.TabIndex = 5
         '
         'ucrChkRectFill
         '
         Me.ucrChkRectFill.Checked = False
-        Me.ucrChkRectFill.Location = New System.Drawing.Point(6, 94)
+        resources.ApplyResources(Me.ucrChkRectFill, "ucrChkRectFill")
         Me.ucrChkRectFill.Name = "ucrChkRectFill"
-        Me.ucrChkRectFill.Size = New System.Drawing.Size(88, 20)
-        Me.ucrChkRectFill.TabIndex = 6
         '
         'ucrChkRectSize
         '
         Me.ucrChkRectSize.Checked = False
-        Me.ucrChkRectSize.Location = New System.Drawing.Point(8, 19)
+        resources.ApplyResources(Me.ucrChkRectSize, "ucrChkRectSize")
         Me.ucrChkRectSize.Name = "ucrChkRectSize"
-        Me.ucrChkRectSize.Size = New System.Drawing.Size(88, 20)
-        Me.ucrChkRectSize.TabIndex = 0
         '
         'ucrChkRectLineType
         '
         Me.ucrChkRectLineType.Checked = False
-        Me.ucrChkRectLineType.Location = New System.Drawing.Point(8, 44)
+        resources.ApplyResources(Me.ucrChkRectLineType, "ucrChkRectLineType")
         Me.ucrChkRectLineType.Name = "ucrChkRectLineType"
-        Me.ucrChkRectLineType.Size = New System.Drawing.Size(88, 20)
-        Me.ucrChkRectLineType.TabIndex = 2
         '
         'ucrChkRectColour
         '
         Me.ucrChkRectColour.Checked = False
-        Me.ucrChkRectColour.Location = New System.Drawing.Point(6, 69)
+        resources.ApplyResources(Me.ucrChkRectColour, "ucrChkRectColour")
         Me.ucrChkRectColour.Name = "ucrChkRectColour"
-        Me.ucrChkRectColour.Size = New System.Drawing.Size(88, 20)
-        Me.ucrChkRectColour.TabIndex = 4
         '
         'ucrNudRectSize
         '
         Me.ucrNudRectSize.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudRectSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudRectSize.Location = New System.Drawing.Point(105, 19)
+        resources.ApplyResources(Me.ucrNudRectSize, "ucrNudRectSize")
         Me.ucrNudRectSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudRectSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRectSize.Name = "ucrNudRectSize"
-        Me.ucrNudRectSize.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudRectSize.TabIndex = 1
         Me.ucrNudRectSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrInputRectLineType
         '
         Me.ucrInputRectLineType.AddQuotesIfUnrecognised = True
         Me.ucrInputRectLineType.IsReadOnly = False
-        Me.ucrInputRectLineType.Location = New System.Drawing.Point(105, 43)
-        Me.ucrInputRectLineType.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        resources.ApplyResources(Me.ucrInputRectLineType, "ucrInputRectLineType")
         Me.ucrInputRectLineType.Name = "ucrInputRectLineType"
-        Me.ucrInputRectLineType.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputRectLineType.TabIndex = 3
         '
         'ucrElementRectControl
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.grpElementRect)
         Me.Name = "ucrElementRectControl"
-        Me.Size = New System.Drawing.Size(255, 123)
         Me.grpElementRect.ResumeLayout(False)
         Me.ResumeLayout(False)
 

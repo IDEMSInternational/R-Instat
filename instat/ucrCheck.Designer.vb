@@ -38,27 +38,22 @@ Partial Class ucrCheck
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrCheck))
         Me.chkCheck = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'chkCheck
         '
-        Me.chkCheck.CheckAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.chkCheck.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.chkCheck.Location = New System.Drawing.Point(0, 0)
+        resources.ApplyResources(Me.chkCheck, "chkCheck")
         Me.chkCheck.Name = "chkCheck"
-        Me.chkCheck.Size = New System.Drawing.Size(100, 20)
-        Me.chkCheck.TabIndex = 0
-        Me.chkCheck.Text = "CheckBox1"
         Me.chkCheck.UseVisualStyleBackColor = True
         '
         'ucrCheck
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.chkCheck)
         Me.Name = "ucrCheck"
-        Me.Size = New System.Drawing.Size(100, 20)
         Me.ResumeLayout(False)
 
     End Sub

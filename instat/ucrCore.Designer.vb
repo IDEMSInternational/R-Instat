@@ -38,8 +38,16 @@ Partial Class ucrCore
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrCore))
+        Me.SuspendLayout()
+        '
+        'ucrCore
+        '
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Name = "ucrCore"
+        Me.ResumeLayout(False)
+
     End Sub
 
 End Class

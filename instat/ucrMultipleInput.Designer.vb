@@ -38,23 +38,21 @@ Partial Class ucrMultipleInput
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrMultipleInput))
         Me.txtNumericItems = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'txtNumericItems
         '
-        Me.txtNumericItems.Location = New System.Drawing.Point(4, 4)
+        resources.ApplyResources(Me.txtNumericItems, "txtNumericItems")
         Me.txtNumericItems.Name = "txtNumericItems"
-        Me.txtNumericItems.Size = New System.Drawing.Size(143, 20)
-        Me.txtNumericItems.TabIndex = 0
         '
-        'ucrMultipleNumeric
+        'ucrMultipleInput
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.txtNumericItems)
-        Me.Name = "ucrMultipleNumeric"
-        Me.Size = New System.Drawing.Size(150, 29)
+        Me.Name = "ucrMultipleInput"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

@@ -38,6 +38,7 @@ Partial Class ucrELementTextControl
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrELementTextControl))
         Me.grpAxisLabels = New System.Windows.Forms.GroupBox()
         Me.ucrTextColors = New instat.ucrColors()
         Me.ucrChkTextColour = New instat.ucrCheck()
@@ -76,173 +77,135 @@ Partial Class ucrELementTextControl
         Me.grpAxisLabels.Controls.Add(Me.ucrNudsize)
         Me.grpAxisLabels.Controls.Add(Me.ucrInputTextFace)
         Me.grpAxisLabels.Controls.Add(Me.ucrInputTextFamily)
-        Me.grpAxisLabels.Location = New System.Drawing.Point(3, 0)
+        resources.ApplyResources(Me.grpAxisLabels, "grpAxisLabels")
         Me.grpAxisLabels.Name = "grpAxisLabels"
-        Me.grpAxisLabels.Size = New System.Drawing.Size(246, 223)
-        Me.grpAxisLabels.TabIndex = 0
         Me.grpAxisLabels.TabStop = False
-        Me.grpAxisLabels.Text = "Element Text "
         '
         'ucrTextColors
         '
         Me.ucrTextColors.AddQuotesIfUnrecognised = True
         Me.ucrTextColors.IsReadOnly = False
-        Me.ucrTextColors.Location = New System.Drawing.Point(105, 191)
+        resources.ApplyResources(Me.ucrTextColors, "ucrTextColors")
         Me.ucrTextColors.Name = "ucrTextColors"
-        Me.ucrTextColors.Size = New System.Drawing.Size(137, 21)
-        Me.ucrTextColors.TabIndex = 15
         '
         'ucrChkTextColour
         '
         Me.ucrChkTextColour.Checked = False
-        Me.ucrChkTextColour.Location = New System.Drawing.Point(8, 192)
+        resources.ApplyResources(Me.ucrChkTextColour, "ucrChkTextColour")
         Me.ucrChkTextColour.Name = "ucrChkTextColour"
-        Me.ucrChkTextColour.Size = New System.Drawing.Size(94, 20)
-        Me.ucrChkTextColour.TabIndex = 14
         '
         'ucrChkTextFace
         '
         Me.ucrChkTextFace.Checked = False
-        Me.ucrChkTextFace.Location = New System.Drawing.Point(8, 167)
+        resources.ApplyResources(Me.ucrChkTextFace, "ucrChkTextFace")
         Me.ucrChkTextFace.Name = "ucrChkTextFace"
-        Me.ucrChkTextFace.Size = New System.Drawing.Size(94, 20)
-        Me.ucrChkTextFace.TabIndex = 12
         '
         'ucrChkTextFamily
         '
         Me.ucrChkTextFamily.Checked = False
-        Me.ucrChkTextFamily.Location = New System.Drawing.Point(8, 142)
+        resources.ApplyResources(Me.ucrChkTextFamily, "ucrChkTextFamily")
         Me.ucrChkTextFamily.Name = "ucrChkTextFamily"
-        Me.ucrChkTextFamily.Size = New System.Drawing.Size(94, 20)
-        Me.ucrChkTextFamily.TabIndex = 10
         '
         'ucrChkAngle
         '
         Me.ucrChkAngle.Checked = False
-        Me.ucrChkAngle.Location = New System.Drawing.Point(8, 117)
+        resources.ApplyResources(Me.ucrChkAngle, "ucrChkAngle")
         Me.ucrChkAngle.Name = "ucrChkAngle"
-        Me.ucrChkAngle.Size = New System.Drawing.Size(94, 20)
-        Me.ucrChkAngle.TabIndex = 8
         '
         'ucrChkHjust
         '
         Me.ucrChkHjust.Checked = False
-        Me.ucrChkHjust.Location = New System.Drawing.Point(8, 44)
+        resources.ApplyResources(Me.ucrChkHjust, "ucrChkHjust")
         Me.ucrChkHjust.Name = "ucrChkHjust"
-        Me.ucrChkHjust.Size = New System.Drawing.Size(94, 20)
-        Me.ucrChkHjust.TabIndex = 2
         '
         'ucrChkVjust
         '
         Me.ucrChkVjust.Checked = False
-        Me.ucrChkVjust.Location = New System.Drawing.Point(8, 69)
+        resources.ApplyResources(Me.ucrChkVjust, "ucrChkVjust")
         Me.ucrChkVjust.Name = "ucrChkVjust"
-        Me.ucrChkVjust.Size = New System.Drawing.Size(94, 20)
-        Me.ucrChkVjust.TabIndex = 4
         '
         'ucrChkLineHeight
         '
         Me.ucrChkLineHeight.Checked = False
-        Me.ucrChkLineHeight.Location = New System.Drawing.Point(8, 94)
+        resources.ApplyResources(Me.ucrChkLineHeight, "ucrChkLineHeight")
         Me.ucrChkLineHeight.Name = "ucrChkLineHeight"
-        Me.ucrChkLineHeight.Size = New System.Drawing.Size(94, 18)
-        Me.ucrChkLineHeight.TabIndex = 6
         '
         'ucrChkSize
         '
         Me.ucrChkSize.Checked = False
-        Me.ucrChkSize.Location = New System.Drawing.Point(8, 19)
+        resources.ApplyResources(Me.ucrChkSize, "ucrChkSize")
         Me.ucrChkSize.Name = "ucrChkSize"
-        Me.ucrChkSize.Size = New System.Drawing.Size(94, 20)
-        Me.ucrChkSize.TabIndex = 0
         '
         'ucrNudVjust
         '
         Me.ucrNudVjust.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudVjust.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.ucrNudVjust.Location = New System.Drawing.Point(105, 68)
+        resources.ApplyResources(Me.ucrNudVjust, "ucrNudVjust")
         Me.ucrNudVjust.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudVjust.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudVjust.Name = "ucrNudVjust"
-        Me.ucrNudVjust.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudVjust.TabIndex = 5
         Me.ucrNudVjust.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudLineHeight
         '
         Me.ucrNudLineHeight.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudLineHeight.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.ucrNudLineHeight.Location = New System.Drawing.Point(105, 92)
+        resources.ApplyResources(Me.ucrNudLineHeight, "ucrNudLineHeight")
         Me.ucrNudLineHeight.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudLineHeight.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLineHeight.Name = "ucrNudLineHeight"
-        Me.ucrNudLineHeight.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudLineHeight.TabIndex = 7
         Me.ucrNudLineHeight.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudAngle
         '
         Me.ucrNudAngle.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAngle.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudAngle.Location = New System.Drawing.Point(105, 117)
+        resources.ApplyResources(Me.ucrNudAngle, "ucrNudAngle")
         Me.ucrNudAngle.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudAngle.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAngle.Name = "ucrNudAngle"
-        Me.ucrNudAngle.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudAngle.TabIndex = 9
         Me.ucrNudAngle.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudHjust
         '
         Me.ucrNudHjust.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudHjust.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.ucrNudHjust.Location = New System.Drawing.Point(105, 43)
+        resources.ApplyResources(Me.ucrNudHjust, "ucrNudHjust")
         Me.ucrNudHjust.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudHjust.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudHjust.Name = "ucrNudHjust"
-        Me.ucrNudHjust.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudHjust.TabIndex = 3
         Me.ucrNudHjust.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudsize
         '
         Me.ucrNudsize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudsize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudsize.Location = New System.Drawing.Point(105, 19)
+        resources.ApplyResources(Me.ucrNudsize, "ucrNudsize")
         Me.ucrNudsize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudsize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudsize.Name = "ucrNudsize"
-        Me.ucrNudsize.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudsize.TabIndex = 1
         Me.ucrNudsize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrInputTextFace
         '
         Me.ucrInputTextFace.AddQuotesIfUnrecognised = True
         Me.ucrInputTextFace.IsReadOnly = False
-        Me.ucrInputTextFace.Location = New System.Drawing.Point(105, 166)
-        Me.ucrInputTextFace.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        resources.ApplyResources(Me.ucrInputTextFace, "ucrInputTextFace")
         Me.ucrInputTextFace.Name = "ucrInputTextFace"
-        Me.ucrInputTextFace.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputTextFace.TabIndex = 13
         '
         'ucrInputTextFamily
         '
         Me.ucrInputTextFamily.AddQuotesIfUnrecognised = True
         Me.ucrInputTextFamily.IsReadOnly = False
-        Me.ucrInputTextFamily.Location = New System.Drawing.Point(105, 141)
-        Me.ucrInputTextFamily.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        resources.ApplyResources(Me.ucrInputTextFamily, "ucrInputTextFamily")
         Me.ucrInputTextFamily.Name = "ucrInputTextFamily"
-        Me.ucrInputTextFamily.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputTextFamily.TabIndex = 11
         '
         'ucrELementTextControl
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.grpAxisLabels)
         Me.Name = "ucrELementTextControl"
-        Me.Size = New System.Drawing.Size(255, 227)
         Me.grpAxisLabels.ResumeLayout(False)
         Me.ResumeLayout(False)
 
