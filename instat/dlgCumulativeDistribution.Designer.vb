@@ -38,6 +38,7 @@ Partial Class dlgCumulativeDistribution
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgCumulativeDistribution))
         Me.lblFactors = New System.Windows.Forms.Label()
         Me.cmdLineOptions = New System.Windows.Forms.Button()
         Me.cmdPlotOptions = New System.Windows.Forms.Button()
@@ -53,112 +54,82 @@ Partial Class dlgCumulativeDistribution
         '
         'lblFactors
         '
-        Me.lblFactors.AutoSize = True
-        Me.lblFactors.Location = New System.Drawing.Point(255, 173)
+        resources.ApplyResources(Me.lblFactors, "lblFactors")
         Me.lblFactors.Name = "lblFactors"
-        Me.lblFactors.Size = New System.Drawing.Size(88, 13)
-        Me.lblFactors.TabIndex = 2
         Me.lblFactors.Tag = "Factors_Optional:"
-        Me.lblFactors.Text = "Factor (Optional):"
         '
         'cmdLineOptions
         '
-        Me.cmdLineOptions.Enabled = False
-        Me.cmdLineOptions.Location = New System.Drawing.Point(10, 198)
+        resources.ApplyResources(Me.cmdLineOptions, "cmdLineOptions")
         Me.cmdLineOptions.Name = "cmdLineOptions"
-        Me.cmdLineOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdLineOptions.TabIndex = 4
         Me.cmdLineOptions.Tag = "Line_Options"
-        Me.cmdLineOptions.Text = "Line Options"
         Me.cmdLineOptions.UseVisualStyleBackColor = True
         '
         'cmdPlotOptions
         '
-        Me.cmdPlotOptions.Location = New System.Drawing.Point(10, 229)
+        resources.ApplyResources(Me.cmdPlotOptions, "cmdPlotOptions")
         Me.cmdPlotOptions.Name = "cmdPlotOptions"
-        Me.cmdPlotOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdPlotOptions.TabIndex = 5
         Me.cmdPlotOptions.Tag = "Plot_Options"
-        Me.cmdPlotOptions.Text = "Options"
         Me.cmdPlotOptions.UseVisualStyleBackColor = True
         '
         'ucrChkExceedancePlots
         '
         Me.ucrChkExceedancePlots.Checked = False
-        Me.ucrChkExceedancePlots.Location = New System.Drawing.Point(10, 260)
+        resources.ApplyResources(Me.ucrChkExceedancePlots, "ucrChkExceedancePlots")
         Me.ucrChkExceedancePlots.Name = "ucrChkExceedancePlots"
-        Me.ucrChkExceedancePlots.Size = New System.Drawing.Size(152, 20)
-        Me.ucrChkExceedancePlots.TabIndex = 6
         '
         'ucrSaveCumDist
         '
-        Me.ucrSaveCumDist.Location = New System.Drawing.Point(10, 338)
+        resources.ApplyResources(Me.ucrSaveCumDist, "ucrSaveCumDist")
         Me.ucrSaveCumDist.Name = "ucrSaveCumDist"
-        Me.ucrSaveCumDist.Size = New System.Drawing.Size(255, 24)
-        Me.ucrSaveCumDist.TabIndex = 9
         '
         'ucrVariablesAsFactorforCumDist
         '
         Me.ucrVariablesAsFactorforCumDist.frmParent = Me
-        Me.ucrVariablesAsFactorforCumDist.Location = New System.Drawing.Point(255, 30)
+        resources.ApplyResources(Me.ucrVariablesAsFactorforCumDist, "ucrVariablesAsFactorforCumDist")
         Me.ucrVariablesAsFactorforCumDist.Name = "ucrVariablesAsFactorforCumDist"
         Me.ucrVariablesAsFactorforCumDist.Selector = Nothing
-        Me.ucrVariablesAsFactorforCumDist.Size = New System.Drawing.Size(125, 136)
         Me.ucrVariablesAsFactorforCumDist.strNcFilePath = ""
-        Me.ucrVariablesAsFactorforCumDist.TabIndex = 1
         Me.ucrVariablesAsFactorforCumDist.ucrSelector = Nothing
         Me.ucrVariablesAsFactorforCumDist.ucrVariableSelector = Nothing
         '
         'ucrFactorReceiver
         '
         Me.ucrFactorReceiver.frmParent = Me
-        Me.ucrFactorReceiver.Location = New System.Drawing.Point(255, 188)
-        Me.ucrFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrFactorReceiver, "ucrFactorReceiver")
         Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
         Me.ucrFactorReceiver.Selector = Nothing
-        Me.ucrFactorReceiver.Size = New System.Drawing.Size(125, 26)
         Me.ucrFactorReceiver.strNcFilePath = ""
-        Me.ucrFactorReceiver.TabIndex = 3
         Me.ucrFactorReceiver.ucrSelector = Nothing
         '
         'ucrCumDistSelector
         '
         Me.ucrCumDistSelector.bShowHiddenColumns = False
         Me.ucrCumDistSelector.bUseCurrentFilter = True
-        Me.ucrCumDistSelector.Location = New System.Drawing.Point(10, 10)
-        Me.ucrCumDistSelector.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrCumDistSelector, "ucrCumDistSelector")
         Me.ucrCumDistSelector.Name = "ucrCumDistSelector"
-        Me.ucrCumDistSelector.Size = New System.Drawing.Size(210, 180)
-        Me.ucrCumDistSelector.TabIndex = 0
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 363)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 10
         '
         'ucrChkCountsOnYAxis
         '
         Me.ucrChkCountsOnYAxis.Checked = False
-        Me.ucrChkCountsOnYAxis.Location = New System.Drawing.Point(10, 286)
+        resources.ApplyResources(Me.ucrChkCountsOnYAxis, "ucrChkCountsOnYAxis")
         Me.ucrChkCountsOnYAxis.Name = "ucrChkCountsOnYAxis"
-        Me.ucrChkCountsOnYAxis.Size = New System.Drawing.Size(152, 20)
-        Me.ucrChkCountsOnYAxis.TabIndex = 7
         '
         'ucrChkIncludePoints
         '
         Me.ucrChkIncludePoints.Checked = False
-        Me.ucrChkIncludePoints.Location = New System.Drawing.Point(10, 312)
+        resources.ApplyResources(Me.ucrChkIncludePoints, "ucrChkIncludePoints")
         Me.ucrChkIncludePoints.Name = "ucrChkIncludePoints"
-        Me.ucrChkIncludePoints.Size = New System.Drawing.Size(152, 20)
-        Me.ucrChkIncludePoints.TabIndex = 8
         '
         'dlgCumulativeDistribution
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 418)
         Me.Controls.Add(Me.ucrChkIncludePoints)
         Me.Controls.Add(Me.ucrChkCountsOnYAxis)
         Me.Controls.Add(Me.ucrChkExceedancePlots)
@@ -174,9 +145,7 @@ Partial Class dlgCumulativeDistribution
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgCumulativeDistribution"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Cumulative_Distribution"
-        Me.Text = "Cumulative/Exceedance Graphs"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
