@@ -117,4 +117,445 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>80, 212</value>
+  </data>
+  <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 30</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
+    <value>ucrBase</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Type" xml:space="preserve">
+    <value>instat.ucrButtonsSubdialogue, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrSavePlots.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 148</value>
+  </data>
+  <data name="ucrSavePlots.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 24</value>
+  </data>
+  <data name="ucrSavePlots.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ucrSavePlots.Name" xml:space="preserve">
+    <value>ucrSavePlots</value>
+  </data>
+  <data name="&gt;&gt;ucrSavePlots.Type" xml:space="preserve">
+    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSavePlots.Parent" xml:space="preserve">
+    <value>TabPage1</value>
+  </data>
+  <data name="&gt;&gt;ucrSavePlots.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rdoPPPlot.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoPPPlot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 125</value>
+  </data>
+  <data name="rdoPPPlot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 17</value>
+  </data>
+  <data name="rdoPPPlot.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="rdoPPPlot.Text" xml:space="preserve">
+    <value>PP-Plot</value>
+  </data>
+  <data name="&gt;&gt;rdoPPPlot.Name" xml:space="preserve">
+    <value>rdoPPPlot</value>
+  </data>
+  <data name="&gt;&gt;rdoPPPlot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoPPPlot.Parent" xml:space="preserve">
+    <value>TabPage1</value>
+  </data>
+  <data name="&gt;&gt;rdoPPPlot.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rdoQQPlot.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoQQPlot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 102</value>
+  </data>
+  <data name="rdoQQPlot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 17</value>
+  </data>
+  <data name="rdoQQPlot.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="rdoQQPlot.Text" xml:space="preserve">
+    <value>QQ-Plot</value>
+  </data>
+  <data name="&gt;&gt;rdoQQPlot.Name" xml:space="preserve">
+    <value>rdoQQPlot</value>
+  </data>
+  <data name="&gt;&gt;rdoQQPlot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoQQPlot.Parent" xml:space="preserve">
+    <value>TabPage1</value>
+  </data>
+  <data name="&gt;&gt;rdoQQPlot.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="rdoDensityPlot.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoDensityPlot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 79</value>
+  </data>
+  <data name="rdoDensityPlot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>81, 17</value>
+  </data>
+  <data name="rdoDensityPlot.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="rdoDensityPlot.Text" xml:space="preserve">
+    <value>Density Plot</value>
+  </data>
+  <data name="&gt;&gt;rdoDensityPlot.Name" xml:space="preserve">
+    <value>rdoDensityPlot</value>
+  </data>
+  <data name="&gt;&gt;rdoDensityPlot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoDensityPlot.Parent" xml:space="preserve">
+    <value>TabPage1</value>
+  </data>
+  <data name="&gt;&gt;rdoDensityPlot.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="rdoCDFPlot.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoCDFPlot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 56</value>
+  </data>
+  <data name="rdoCDFPlot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 17</value>
+  </data>
+  <data name="rdoCDFPlot.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="rdoCDFPlot.Text" xml:space="preserve">
+    <value>CDF Plot</value>
+  </data>
+  <data name="&gt;&gt;rdoCDFPlot.Name" xml:space="preserve">
+    <value>rdoCDFPlot</value>
+  </data>
+  <data name="&gt;&gt;rdoCDFPlot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoCDFPlot.Parent" xml:space="preserve">
+    <value>TabPage1</value>
+  </data>
+  <data name="&gt;&gt;rdoCDFPlot.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="rdoPlotAll.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoPlotAll.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 33</value>
+  </data>
+  <data name="rdoPlotAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 17</value>
+  </data>
+  <data name="rdoPlotAll.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rdoPlotAll.Text" xml:space="preserve">
+    <value>Multi-Plot</value>
+  </data>
+  <data name="&gt;&gt;rdoPlotAll.Name" xml:space="preserve">
+    <value>rdoPlotAll</value>
+  </data>
+  <data name="&gt;&gt;rdoPlotAll.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoPlotAll.Parent" xml:space="preserve">
+    <value>TabPage1</value>
+  </data>
+  <data name="&gt;&gt;rdoPlotAll.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="rdoNoPlot.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoNoPlot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
+  </data>
+  <data name="rdoNoPlot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 17</value>
+  </data>
+  <data name="rdoNoPlot.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoNoPlot.Text" xml:space="preserve">
+    <value>No Plot</value>
+  </data>
+  <data name="&gt;&gt;rdoNoPlot.Name" xml:space="preserve">
+    <value>rdoNoPlot</value>
+  </data>
+  <data name="&gt;&gt;rdoNoPlot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoNoPlot.Parent" xml:space="preserve">
+    <value>TabPage1</value>
+  </data>
+  <data name="&gt;&gt;rdoNoPlot.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="ucrPnlPlots.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="ucrPnlPlots.Size" type="System.Drawing.Size, System.Drawing">
+    <value>265, 173</value>
+  </data>
+  <data name="ucrPnlPlots.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlPlots.Name" xml:space="preserve">
+    <value>ucrPnlPlots</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlPlots.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlPlots.Parent" xml:space="preserve">
+    <value>TabPage1</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlPlots.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="TabPage1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="TabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>279, 174</value>
+  </data>
+  <data name="TabPage1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="TabPage1.Text" xml:space="preserve">
+    <value>Plots</value>
+  </data>
+  <data name="&gt;&gt;TabPage1.Name" xml:space="preserve">
+    <value>TabPage1</value>
+  </data>
+  <data name="&gt;&gt;TabPage1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TabPage1.Parent" xml:space="preserve">
+    <value>tbcPlots</value>
+  </data>
+  <data name="&gt;&gt;TabPage1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrChkPLotLogLik.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
+  </data>
+  <data name="ucrChkPLotLogLik.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="ucrChkPLotLogLik.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPLotLogLik.Name" xml:space="preserve">
+    <value>ucrChkPLotLogLik</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPLotLogLik.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPLotLogLik.Parent" xml:space="preserve">
+    <value>tbclikelihood</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPLotLogLik.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrSaveLikelihood.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 148</value>
+  </data>
+  <data name="ucrSaveLikelihood.Size" type="System.Drawing.Size, System.Drawing">
+    <value>263, 24</value>
+  </data>
+  <data name="ucrSaveLikelihood.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveLikelihood.Name" xml:space="preserve">
+    <value>ucrSaveLikelihood</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveLikelihood.Type" xml:space="preserve">
+    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveLikelihood.Parent" xml:space="preserve">
+    <value>tbclikelihood</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveLikelihood.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rdoLik.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoLik.Location" type="System.Drawing.Point, System.Drawing">
+    <value>34, 60</value>
+  </data>
+  <data name="rdoLik.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 17</value>
+  </data>
+  <data name="rdoLik.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="rdoLik.Text" xml:space="preserve">
+    <value>Plot Likelihood</value>
+  </data>
+  <data name="&gt;&gt;rdoLik.Name" xml:space="preserve">
+    <value>rdoLik</value>
+  </data>
+  <data name="&gt;&gt;rdoLik.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoLik.Parent" xml:space="preserve">
+    <value>tbclikelihood</value>
+  </data>
+  <data name="&gt;&gt;rdoLik.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="rdoLoglik.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoLoglik.Location" type="System.Drawing.Point, System.Drawing">
+    <value>34, 37</value>
+  </data>
+  <data name="rdoLoglik.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 17</value>
+  </data>
+  <data name="rdoLoglik.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rdoLoglik.Text" xml:space="preserve">
+    <value>Plot Log-Likelihood</value>
+  </data>
+  <data name="&gt;&gt;rdoLoglik.Name" xml:space="preserve">
+    <value>rdoLoglik</value>
+  </data>
+  <data name="&gt;&gt;rdoLoglik.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoLoglik.Parent" xml:space="preserve">
+    <value>tbclikelihood</value>
+  </data>
+  <data name="&gt;&gt;rdoLoglik.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrPnlLikelihood.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 31</value>
+  </data>
+  <data name="ucrPnlLikelihood.Size" type="System.Drawing.Size, System.Drawing">
+    <value>208, 61</value>
+  </data>
+  <data name="ucrPnlLikelihood.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlLikelihood.Name" xml:space="preserve">
+    <value>ucrPnlLikelihood</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlLikelihood.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlLikelihood.Parent" xml:space="preserve">
+    <value>tbclikelihood</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlLikelihood.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="tbclikelihood.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbclikelihood.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbclikelihood.Size" type="System.Drawing.Size, System.Drawing">
+    <value>279, 174</value>
+  </data>
+  <data name="tbclikelihood.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tbclikelihood.Text" xml:space="preserve">
+    <value>Likelihood</value>
+  </data>
+  <data name="&gt;&gt;tbclikelihood.Name" xml:space="preserve">
+    <value>tbclikelihood</value>
+  </data>
+  <data name="&gt;&gt;tbclikelihood.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbclikelihood.Parent" xml:space="preserve">
+    <value>tbcPlots</value>
+  </data>
+  <data name="&gt;&gt;tbclikelihood.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tbcPlots.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 8</value>
+  </data>
+  <data name="tbcPlots.Size" type="System.Drawing.Size, System.Drawing">
+    <value>287, 200</value>
+  </data>
+  <data name="tbcPlots.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tbcPlots.Name" xml:space="preserve">
+    <value>tbcPlots</value>
+  </data>
+  <data name="&gt;&gt;tbcPlots.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbcPlots.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tbcPlots.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>299, 247</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Display Options</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>sdgOneVarFitModDisplay</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
