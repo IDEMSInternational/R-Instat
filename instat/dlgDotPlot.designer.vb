@@ -38,6 +38,7 @@ Partial Class dlgDotPlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgDotPlot))
         Me.cmdDotPlotOptions = New System.Windows.Forms.Button()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.lblOtherAxis = New System.Windows.Forms.Label()
@@ -45,8 +46,8 @@ Partial Class dlgDotPlot
         Me.grpBinAxis = New System.Windows.Forms.GroupBox()
         Me.rdoYBinAxis = New System.Windows.Forms.RadioButton()
         Me.rdoXBinAxis = New System.Windows.Forms.RadioButton()
-        Me.ucrSaveDotPlot = New instat.ucrSave()
         Me.ucrPnlBinAxis = New instat.UcrPanel()
+        Me.ucrSaveDotPlot = New instat.ucrSave()
         Me.ucrVariablesAsFactorDotPlot = New instat.ucrVariablesAsFactor()
         Me.ucrDotPlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
@@ -57,107 +58,77 @@ Partial Class dlgDotPlot
         '
         'cmdDotPlotOptions
         '
-        Me.cmdDotPlotOptions.Location = New System.Drawing.Point(10, 198)
+        resources.ApplyResources(Me.cmdDotPlotOptions, "cmdDotPlotOptions")
         Me.cmdDotPlotOptions.Name = "cmdDotPlotOptions"
-        Me.cmdDotPlotOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdDotPlotOptions.TabIndex = 6
         Me.cmdDotPlotOptions.Tag = "Dot_Plot_Options"
-        Me.cmdDotPlotOptions.Text = "Dot Plot Options..."
         Me.cmdDotPlotOptions.UseVisualStyleBackColor = True
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(10, 228)
+        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdOptions.TabIndex = 7
         Me.cmdOptions.Tag = "Options"
-        Me.cmdOptions.Text = "Plot Options..."
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'lblOtherAxis
         '
-        Me.lblOtherAxis.AutoSize = True
-        Me.lblOtherAxis.Location = New System.Drawing.Point(255, 198)
+        resources.ApplyResources(Me.lblOtherAxis, "lblOtherAxis")
         Me.lblOtherAxis.Name = "lblOtherAxis"
-        Me.lblOtherAxis.Size = New System.Drawing.Size(106, 13)
-        Me.lblOtherAxis.TabIndex = 2
         Me.lblOtherAxis.Tag = "Other_Axis_(optional):"
-        Me.lblOtherAxis.Text = "Other Axis (Optional):"
         '
         'lblFactor
         '
-        Me.lblFactor.AutoSize = True
-        Me.lblFactor.Location = New System.Drawing.Point(255, 244)
+        resources.ApplyResources(Me.lblFactor, "lblFactor")
         Me.lblFactor.Name = "lblFactor"
-        Me.lblFactor.Size = New System.Drawing.Size(88, 13)
-        Me.lblFactor.TabIndex = 4
         Me.lblFactor.Tag = "Factor_(optional):"
-        Me.lblFactor.Text = "Factor (Optional):"
         '
         'grpBinAxis
         '
         Me.grpBinAxis.Controls.Add(Me.rdoYBinAxis)
         Me.grpBinAxis.Controls.Add(Me.rdoXBinAxis)
         Me.grpBinAxis.Controls.Add(Me.ucrPnlBinAxis)
-        Me.grpBinAxis.Location = New System.Drawing.Point(10, 259)
+        resources.ApplyResources(Me.grpBinAxis, "grpBinAxis")
         Me.grpBinAxis.Name = "grpBinAxis"
-        Me.grpBinAxis.Size = New System.Drawing.Size(120, 66)
-        Me.grpBinAxis.TabIndex = 8
         Me.grpBinAxis.TabStop = False
         Me.grpBinAxis.Tag = "Bin_Axis:"
-        Me.grpBinAxis.Text = "Bin Axis:"
         '
         'rdoYBinAxis
         '
-        Me.rdoYBinAxis.AutoSize = True
+        resources.ApplyResources(Me.rdoYBinAxis, "rdoYBinAxis")
         Me.rdoYBinAxis.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoYBinAxis.FlatAppearance.BorderSize = 2
         Me.rdoYBinAxis.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoYBinAxis.Location = New System.Drawing.Point(8, 40)
         Me.rdoYBinAxis.Name = "rdoYBinAxis"
-        Me.rdoYBinAxis.Size = New System.Drawing.Size(30, 17)
-        Me.rdoYBinAxis.TabIndex = 1
         Me.rdoYBinAxis.TabStop = True
-        Me.rdoYBinAxis.Text = "y"
         Me.rdoYBinAxis.UseVisualStyleBackColor = True
         '
         'rdoXBinAxis
         '
-        Me.rdoXBinAxis.AutoSize = True
+        resources.ApplyResources(Me.rdoXBinAxis, "rdoXBinAxis")
         Me.rdoXBinAxis.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoXBinAxis.FlatAppearance.BorderSize = 2
         Me.rdoXBinAxis.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoXBinAxis.Location = New System.Drawing.Point(8, 17)
         Me.rdoXBinAxis.Name = "rdoXBinAxis"
-        Me.rdoXBinAxis.Size = New System.Drawing.Size(30, 17)
-        Me.rdoXBinAxis.TabIndex = 0
         Me.rdoXBinAxis.TabStop = True
-        Me.rdoXBinAxis.Text = "x"
         Me.rdoXBinAxis.UseVisualStyleBackColor = True
-        '
-        'ucrSaveDotPlot
-        '
-        Me.ucrSaveDotPlot.Location = New System.Drawing.Point(10, 331)
-        Me.ucrSaveDotPlot.Name = "ucrSaveDotPlot"
-        Me.ucrSaveDotPlot.Size = New System.Drawing.Size(265, 24)
-        Me.ucrSaveDotPlot.TabIndex = 9
         '
         'ucrPnlBinAxis
         '
-        Me.ucrPnlBinAxis.Location = New System.Drawing.Point(6, 16)
+        resources.ApplyResources(Me.ucrPnlBinAxis, "ucrPnlBinAxis")
         Me.ucrPnlBinAxis.Name = "ucrPnlBinAxis"
-        Me.ucrPnlBinAxis.Size = New System.Drawing.Size(55, 44)
-        Me.ucrPnlBinAxis.TabIndex = 11
+        '
+        'ucrSaveDotPlot
+        '
+        resources.ApplyResources(Me.ucrSaveDotPlot, "ucrSaveDotPlot")
+        Me.ucrSaveDotPlot.Name = "ucrSaveDotPlot"
         '
         'ucrVariablesAsFactorDotPlot
         '
         Me.ucrVariablesAsFactorDotPlot.frmParent = Me
-        Me.ucrVariablesAsFactorDotPlot.Location = New System.Drawing.Point(255, 30)
+        resources.ApplyResources(Me.ucrVariablesAsFactorDotPlot, "ucrVariablesAsFactorDotPlot")
         Me.ucrVariablesAsFactorDotPlot.Name = "ucrVariablesAsFactorDotPlot"
         Me.ucrVariablesAsFactorDotPlot.Selector = Nothing
-        Me.ucrVariablesAsFactorDotPlot.Size = New System.Drawing.Size(125, 133)
-        Me.ucrVariablesAsFactorDotPlot.TabIndex = 1
+        Me.ucrVariablesAsFactorDotPlot.strNcFilePath = ""
         Me.ucrVariablesAsFactorDotPlot.ucrSelector = Nothing
         Me.ucrVariablesAsFactorDotPlot.ucrVariableSelector = Nothing
         '
@@ -165,46 +136,36 @@ Partial Class dlgDotPlot
         '
         Me.ucrDotPlotSelector.bShowHiddenColumns = False
         Me.ucrDotPlotSelector.bUseCurrentFilter = True
-        Me.ucrDotPlotSelector.Location = New System.Drawing.Point(10, 10)
-        Me.ucrDotPlotSelector.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrDotPlotSelector, "ucrDotPlotSelector")
         Me.ucrDotPlotSelector.Name = "ucrDotPlotSelector"
-        Me.ucrDotPlotSelector.Size = New System.Drawing.Size(210, 180)
-        Me.ucrDotPlotSelector.TabIndex = 0
         '
         'ucrFactorReceiver
         '
         Me.ucrFactorReceiver.frmParent = Me
-        Me.ucrFactorReceiver.Location = New System.Drawing.Point(255, 259)
-        Me.ucrFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrFactorReceiver, "ucrFactorReceiver")
         Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
         Me.ucrFactorReceiver.Selector = Nothing
-        Me.ucrFactorReceiver.Size = New System.Drawing.Size(125, 20)
-        Me.ucrFactorReceiver.TabIndex = 5
+        Me.ucrFactorReceiver.strNcFilePath = ""
         Me.ucrFactorReceiver.ucrSelector = Nothing
         '
         'ucrOtherAxisReceiver
         '
         Me.ucrOtherAxisReceiver.frmParent = Me
-        Me.ucrOtherAxisReceiver.Location = New System.Drawing.Point(255, 213)
-        Me.ucrOtherAxisReceiver.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrOtherAxisReceiver, "ucrOtherAxisReceiver")
         Me.ucrOtherAxisReceiver.Name = "ucrOtherAxisReceiver"
         Me.ucrOtherAxisReceiver.Selector = Nothing
-        Me.ucrOtherAxisReceiver.Size = New System.Drawing.Size(125, 20)
-        Me.ucrOtherAxisReceiver.TabIndex = 3
+        Me.ucrOtherAxisReceiver.strNcFilePath = ""
         Me.ucrOtherAxisReceiver.ucrSelector = Nothing
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 361)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 10
         '
         'dlgDotPlot
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(415, 419)
         Me.Controls.Add(Me.ucrSaveDotPlot)
         Me.Controls.Add(Me.grpBinAxis)
         Me.Controls.Add(Me.ucrVariablesAsFactorDotPlot)
@@ -220,9 +181,7 @@ Partial Class dlgDotPlot
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDotPlot"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Dot_Plot"
-        Me.Text = "Dot Plot"
         Me.grpBinAxis.ResumeLayout(False)
         Me.grpBinAxis.PerformLayout()
         Me.ResumeLayout(False)
