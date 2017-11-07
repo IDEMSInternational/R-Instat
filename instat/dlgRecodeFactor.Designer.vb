@@ -38,6 +38,7 @@ Partial Class dlgRecodeFactor
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgRecodeFactor))
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
         Me.lblFactor = New System.Windows.Forms.Label()
@@ -48,66 +49,48 @@ Partial Class dlgRecodeFactor
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 335)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 5
         '
         'ucrReceiverFactor
         '
         Me.ucrReceiverFactor.frmParent = Me
-        Me.ucrReceiverFactor.Location = New System.Drawing.Point(248, 60)
-        Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverFactor, "ucrReceiverFactor")
         Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
         Me.ucrReceiverFactor.Selector = Nothing
-        Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverFactor.strNcFilePath = ""
-        Me.ucrReceiverFactor.TabIndex = 2
         Me.ucrReceiverFactor.ucrSelector = Nothing
         '
         'lblFactor
         '
-        Me.lblFactor.AutoSize = True
-        Me.lblFactor.Location = New System.Drawing.Point(248, 45)
+        resources.ApplyResources(Me.lblFactor, "lblFactor")
         Me.lblFactor.Name = "lblFactor"
-        Me.lblFactor.Size = New System.Drawing.Size(85, 13)
-        Me.lblFactor.TabIndex = 1
-        Me.lblFactor.Text = "Factor Selected:"
         '
         'ucrSaveNewColumn
         '
-        Me.ucrSaveNewColumn.Location = New System.Drawing.Point(10, 305)
+        resources.ApplyResources(Me.ucrSaveNewColumn, "ucrSaveNewColumn")
         Me.ucrSaveNewColumn.Name = "ucrSaveNewColumn"
-        Me.ucrSaveNewColumn.Size = New System.Drawing.Size(229, 24)
-        Me.ucrSaveNewColumn.TabIndex = 4
         '
         'ucrFactorGrid
         '
-        Me.ucrFactorGrid.AutoSize = True
+        resources.ApplyResources(Me.ucrFactorGrid, "ucrFactorGrid")
         Me.ucrFactorGrid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.ucrFactorGrid.clsReceiver = Nothing
-        Me.ucrFactorGrid.Location = New System.Drawing.Point(248, 87)
         Me.ucrFactorGrid.Name = "ucrFactorGrid"
         Me.ucrFactorGrid.shtCurrSheet = Nothing
-        Me.ucrFactorGrid.Size = New System.Drawing.Size(288, 221)
-        Me.ucrFactorGrid.TabIndex = 3
         Me.ucrFactorGrid.ucrChkLevels = Nothing
         '
         'ucrSelectorForRecode
         '
         Me.ucrSelectorForRecode.bShowHiddenColumns = False
         Me.ucrSelectorForRecode.bUseCurrentFilter = True
-        Me.ucrSelectorForRecode.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorForRecode.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorForRecode, "ucrSelectorForRecode")
         Me.ucrSelectorForRecode.Name = "ucrSelectorForRecode"
-        Me.ucrSelectorForRecode.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorForRecode.TabIndex = 0
         '
         'dlgRecodeFactor
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(545, 389)
         Me.Controls.Add(Me.ucrSaveNewColumn)
         Me.Controls.Add(Me.ucrFactorGrid)
         Me.Controls.Add(Me.lblFactor)
@@ -118,8 +101,6 @@ Partial Class dlgRecodeFactor
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgRecodeFactor"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Recode Factor"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
