@@ -38,6 +38,7 @@ Partial Class dlgSummaryTables
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgSummaryTables))
         Me.lblFactors = New System.Windows.Forms.Label()
         Me.lblSummaryColumns = New System.Windows.Forms.Label()
         Me.cmdSummaries = New System.Windows.Forms.Button()
@@ -68,210 +69,151 @@ Partial Class dlgSummaryTables
         '
         'lblFactors
         '
-        Me.lblFactors.AutoSize = True
-        Me.lblFactors.Location = New System.Drawing.Point(264, 45)
+        resources.ApplyResources(Me.lblFactors, "lblFactors")
         Me.lblFactors.Name = "lblFactors"
-        Me.lblFactors.Size = New System.Drawing.Size(45, 13)
-        Me.lblFactors.TabIndex = 1
         Me.lblFactors.Tag = "Factors:"
-        Me.lblFactors.Text = "Factors:"
         '
         'lblSummaryColumns
         '
-        Me.lblSummaryColumns.AutoSize = True
-        Me.lblSummaryColumns.Location = New System.Drawing.Point(264, 174)
+        resources.ApplyResources(Me.lblSummaryColumns, "lblSummaryColumns")
         Me.lblSummaryColumns.Name = "lblSummaryColumns"
-        Me.lblSummaryColumns.Size = New System.Drawing.Size(96, 13)
-        Me.lblSummaryColumns.TabIndex = 3
         Me.lblSummaryColumns.Tag = "Summary_Columns"
-        Me.lblSummaryColumns.Text = "Summary Columns:"
         '
         'cmdSummaries
         '
-        Me.cmdSummaries.Location = New System.Drawing.Point(287, 472)
+        resources.ApplyResources(Me.cmdSummaries, "cmdSummaries")
         Me.cmdSummaries.Name = "cmdSummaries"
-        Me.cmdSummaries.Size = New System.Drawing.Size(120, 23)
-        Me.cmdSummaries.TabIndex = 14
-        Me.cmdSummaries.Text = "Summaries..."
         Me.cmdSummaries.UseVisualStyleBackColor = True
         '
         'ucrSaveTable
         '
-        Me.ucrSaveTable.Location = New System.Drawing.Point(10, 472)
+        resources.ApplyResources(Me.ucrSaveTable, "ucrSaveTable")
         Me.ucrSaveTable.Name = "ucrSaveTable"
-        Me.ucrSaveTable.Size = New System.Drawing.Size(255, 24)
-        Me.ucrSaveTable.TabIndex = 13
         '
         'ucrChkOmitMissing
         '
         Me.ucrChkOmitMissing.Checked = False
-        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(10, 281)
+        resources.ApplyResources(Me.ucrChkOmitMissing, "ucrChkOmitMissing")
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
-        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(148, 20)
-        Me.ucrChkOmitMissing.TabIndex = 9
         '
         'ucrChkStoreResults
         '
         Me.ucrChkStoreResults.Checked = False
-        Me.ucrChkStoreResults.Location = New System.Drawing.Point(10, 255)
+        resources.ApplyResources(Me.ucrChkStoreResults, "ucrChkStoreResults")
         Me.ucrChkStoreResults.Name = "ucrChkStoreResults"
-        Me.ucrChkStoreResults.Size = New System.Drawing.Size(148, 20)
-        Me.ucrChkStoreResults.TabIndex = 8
         '
         'ucrChkDisplayMargins
         '
         Me.ucrChkDisplayMargins.Checked = False
-        Me.ucrChkDisplayMargins.Location = New System.Drawing.Point(10, 307)
+        resources.ApplyResources(Me.ucrChkDisplayMargins, "ucrChkDisplayMargins")
         Me.ucrChkDisplayMargins.Name = "ucrChkDisplayMargins"
-        Me.ucrChkDisplayMargins.Size = New System.Drawing.Size(150, 20)
-        Me.ucrChkDisplayMargins.TabIndex = 10
         '
         'ucrChkSummaries
         '
         Me.ucrChkSummaries.Checked = False
-        Me.ucrChkSummaries.Location = New System.Drawing.Point(10, 229)
+        resources.ApplyResources(Me.ucrChkSummaries, "ucrChkSummaries")
         Me.ucrChkSummaries.Name = "ucrChkSummaries"
-        Me.ucrChkSummaries.Size = New System.Drawing.Size(242, 20)
-        Me.ucrChkSummaries.TabIndex = 7
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 501)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(435, 52)
-        Me.ucrBase.TabIndex = 0
         '
         'ucrReceiverSummaryCols
         '
         Me.ucrReceiverSummaryCols.frmParent = Me
-        Me.ucrReceiverSummaryCols.Location = New System.Drawing.Point(264, 189)
-        Me.ucrReceiverSummaryCols.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverSummaryCols, "ucrReceiverSummaryCols")
         Me.ucrReceiverSummaryCols.Name = "ucrReceiverSummaryCols"
         Me.ucrReceiverSummaryCols.Selector = Nothing
-        Me.ucrReceiverSummaryCols.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverSummaryCols.strNcFilePath = ""
-        Me.ucrReceiverSummaryCols.TabIndex = 4
         Me.ucrReceiverSummaryCols.ucrSelector = Nothing
         '
         'ucrReceiverFactors
         '
         Me.ucrReceiverFactors.frmParent = Me
-        Me.ucrReceiverFactors.Location = New System.Drawing.Point(264, 60)
-        Me.ucrReceiverFactors.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverFactors, "ucrReceiverFactors")
         Me.ucrReceiverFactors.Name = "ucrReceiverFactors"
         Me.ucrReceiverFactors.Selector = Nothing
-        Me.ucrReceiverFactors.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverFactors.strNcFilePath = ""
-        Me.ucrReceiverFactors.TabIndex = 2
         Me.ucrReceiverFactors.ucrSelector = Nothing
         '
         'ucrReceiverWeights
         '
         Me.ucrReceiverWeights.frmParent = Me
-        Me.ucrReceiverWeights.Location = New System.Drawing.Point(109, 206)
-        Me.ucrReceiverWeights.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverWeights, "ucrReceiverWeights")
         Me.ucrReceiverWeights.Name = "ucrReceiverWeights"
         Me.ucrReceiverWeights.Selector = Nothing
-        Me.ucrReceiverWeights.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverWeights.strNcFilePath = ""
-        Me.ucrReceiverWeights.TabIndex = 6
         Me.ucrReceiverWeights.ucrSelector = Nothing
         '
         'ucrChkWeight
         '
         Me.ucrChkWeight.Checked = False
-        Me.ucrChkWeight.Location = New System.Drawing.Point(10, 204)
+        resources.ApplyResources(Me.ucrChkWeight, "ucrChkWeight")
         Me.ucrChkWeight.Name = "ucrChkWeight"
-        Me.ucrChkWeight.Size = New System.Drawing.Size(84, 20)
-        Me.ucrChkWeight.TabIndex = 5
         '
         'ucrSelectorSummaryTables
         '
         Me.ucrSelectorSummaryTables.bShowHiddenColumns = False
         Me.ucrSelectorSummaryTables.bUseCurrentFilter = True
-        Me.ucrSelectorSummaryTables.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorSummaryTables.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorSummaryTables, "ucrSelectorSummaryTables")
         Me.ucrSelectorSummaryTables.Name = "ucrSelectorSummaryTables"
-        Me.ucrSelectorSummaryTables.Size = New System.Drawing.Size(210, 182)
-        Me.ucrSelectorSummaryTables.TabIndex = 0
         '
         'lblSigFigs
         '
-        Me.lblSigFigs.AutoSize = True
-        Me.lblSigFigs.Location = New System.Drawing.Point(8, 92)
+        resources.ApplyResources(Me.lblSigFigs, "lblSigFigs")
         Me.lblSigFigs.Name = "lblSigFigs"
-        Me.lblSigFigs.Size = New System.Drawing.Size(96, 13)
-        Me.lblSigFigs.TabIndex = 4
         Me.lblSigFigs.Tag = "Significant_Figures:"
-        Me.lblSigFigs.Text = "Significant Figures:"
         '
         'ucrNudSigFigs
         '
         Me.ucrNudSigFigs.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSigFigs.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSigFigs.Location = New System.Drawing.Point(129, 90)
+        resources.ApplyResources(Me.ucrNudSigFigs, "ucrNudSigFigs")
         Me.ucrNudSigFigs.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSigFigs.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSigFigs.Name = "ucrNudSigFigs"
-        Me.ucrNudSigFigs.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudSigFigs.TabIndex = 5
         Me.ucrNudSigFigs.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrInputPageBy
         '
         Me.ucrInputPageBy.AddQuotesIfUnrecognised = True
         Me.ucrInputPageBy.IsReadOnly = False
-        Me.ucrInputPageBy.Location = New System.Drawing.Point(60, 66)
+        resources.ApplyResources(Me.ucrInputPageBy, "ucrInputPageBy")
         Me.ucrInputPageBy.Name = "ucrInputPageBy"
-        Me.ucrInputPageBy.Size = New System.Drawing.Size(120, 21)
-        Me.ucrInputPageBy.TabIndex = 3
         '
         'lblPageBy
         '
-        Me.lblPageBy.AutoSize = True
-        Me.lblPageBy.Location = New System.Drawing.Point(8, 68)
+        resources.ApplyResources(Me.lblPageBy, "lblPageBy")
         Me.lblPageBy.Name = "lblPageBy"
-        Me.lblPageBy.Size = New System.Drawing.Size(49, 13)
-        Me.lblPageBy.TabIndex = 2
         Me.lblPageBy.Tag = "Page by:"
-        Me.lblPageBy.Text = "Page by:"
         '
         'lblColumnFactors
         '
-        Me.lblColumnFactors.AutoSize = True
-        Me.lblColumnFactors.Location = New System.Drawing.Point(8, 116)
+        resources.ApplyResources(Me.lblColumnFactors, "lblColumnFactors")
         Me.lblColumnFactors.Name = "lblColumnFactors"
-        Me.lblColumnFactors.Size = New System.Drawing.Size(83, 13)
-        Me.lblColumnFactors.TabIndex = 6
         Me.lblColumnFactors.Tag = "Column_Factors:"
-        Me.lblColumnFactors.Text = "Column Factors:"
         '
         'ucrChkRowNumbers
         '
         Me.ucrChkRowNumbers.Checked = False
-        Me.ucrChkRowNumbers.Location = New System.Drawing.Point(8, 19)
+        resources.ApplyResources(Me.ucrChkRowNumbers, "ucrChkRowNumbers")
         Me.ucrChkRowNumbers.Name = "ucrChkRowNumbers"
-        Me.ucrChkRowNumbers.Size = New System.Drawing.Size(148, 20)
-        Me.ucrChkRowNumbers.TabIndex = 0
         '
         'ucrChkHTMLTable
         '
         Me.ucrChkHTMLTable.Checked = False
-        Me.ucrChkHTMLTable.Location = New System.Drawing.Point(8, 45)
+        resources.ApplyResources(Me.ucrChkHTMLTable, "ucrChkHTMLTable")
         Me.ucrChkHTMLTable.Name = "ucrChkHTMLTable"
-        Me.ucrChkHTMLTable.Size = New System.Drawing.Size(148, 20)
-        Me.ucrChkHTMLTable.TabIndex = 1
         '
         'ucrNudColumnFactors
         '
         Me.ucrNudColumnFactors.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudColumnFactors.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudColumnFactors.Location = New System.Drawing.Point(129, 114)
+        resources.ApplyResources(Me.ucrNudColumnFactors, "ucrNudColumnFactors")
         Me.ucrNudColumnFactors.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudColumnFactors.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudColumnFactors.Name = "ucrNudColumnFactors"
-        Me.ucrNudColumnFactors.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudColumnFactors.TabIndex = 7
         Me.ucrNudColumnFactors.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'grpDisplay
@@ -286,38 +228,28 @@ Partial Class dlgSummaryTables
         Me.grpDisplay.Controls.Add(Me.ucrInputPageBy)
         Me.grpDisplay.Controls.Add(Me.ucrNudSigFigs)
         Me.grpDisplay.Controls.Add(Me.lblSigFigs)
-        Me.grpDisplay.Location = New System.Drawing.Point(222, 297)
+        resources.ApplyResources(Me.grpDisplay, "grpDisplay")
         Me.grpDisplay.Name = "grpDisplay"
-        Me.grpDisplay.Size = New System.Drawing.Size(185, 169)
-        Me.grpDisplay.TabIndex = 12
         Me.grpDisplay.TabStop = False
-        Me.grpDisplay.Text = "Display"
         '
         'ucrInputNA
         '
         Me.ucrInputNA.AddQuotesIfUnrecognised = True
         Me.ucrInputNA.IsMultiline = False
         Me.ucrInputNA.IsReadOnly = False
-        Me.ucrInputNA.Location = New System.Drawing.Point(90, 138)
+        resources.ApplyResources(Me.ucrInputNA, "ucrInputNA")
         Me.ucrInputNA.Name = "ucrInputNA"
-        Me.ucrInputNA.Size = New System.Drawing.Size(89, 21)
-        Me.ucrInputNA.TabIndex = 15
         '
         'lblDisplayNA
         '
-        Me.lblDisplayNA.AutoSize = True
-        Me.lblDisplayNA.Location = New System.Drawing.Point(8, 141)
+        resources.ApplyResources(Me.lblDisplayNA, "lblDisplayNA")
         Me.lblDisplayNA.Name = "lblDisplayNA"
-        Me.lblDisplayNA.Size = New System.Drawing.Size(76, 13)
-        Me.lblDisplayNA.TabIndex = 8
         Me.lblDisplayNA.Tag = ""
-        Me.lblDisplayNA.Text = "Display NA as:"
         '
-        'dlgNewSummaryTables
+        'dlgSummaryTables
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(415, 560)
         Me.Controls.Add(Me.ucrSaveTable)
         Me.Controls.Add(Me.ucrChkOmitMissing)
         Me.Controls.Add(Me.ucrChkStoreResults)
@@ -336,9 +268,7 @@ Partial Class dlgSummaryTables
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgNewSummaryTables"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Summary Tables"
+        Me.Name = "dlgSummaryTables"
         Me.grpDisplay.ResumeLayout(False)
         Me.grpDisplay.PerformLayout()
         Me.ResumeLayout(False)
