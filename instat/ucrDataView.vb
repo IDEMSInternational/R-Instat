@@ -375,6 +375,9 @@ Public Class ucrDataView
         Dim chrCurrentFactorLevels As CharacterVector
         Dim bValid As Boolean = False
 
+        'trim white space from ends of value
+        strNewValue = strNewValue.Trim()
+
         clsGetFactorLevels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels")
         clsGetFactorLevels.AddParameter("data_name", Chr(34) & grdData.CurrentWorksheet.Name & Chr(34))
 
@@ -400,7 +403,7 @@ Public Class ucrDataView
                 Case "factor"
                     chrCurrentFactorLevels = frmMain.clsRLink.RunInternalScriptGetValue(clsGetFactorLevels.ToScript()).AsCharacter
                     If Not chrCurrentFactorLevels.Contains(strNewValue) Then
-                        MsgBox("Invalid value: " & strNewValue & Environment.NewLine & "This column is: factor. Values must be an existing level of this factor column.", MsgBoxStyle.Exclamation, "Invalid Value")
+                        MsgBox("Invalid value: '" & strNewValue & "'" & Environment.NewLine & "This column is: factor. Values must be an existing level of this factor column.", MsgBoxStyle.Exclamation, "Invalid Value")
                     Else
                         clsReplaceValue.AddParameter("new_value", Chr(34) & strNewValue & Chr(34))
                         bValid = True
@@ -410,14 +413,14 @@ Public Class ucrDataView
                         clsReplaceValue.AddParameter("new_value", strNewValue)
                         bValid = True
                     Else
-                        MsgBox("Invalid value: " & strNewValue & Environment.NewLine & "This column is: numeric. Values must be numeric.", MsgBoxStyle.Exclamation, "Invalid Value")
+                        MsgBox("Invalid value: '" & strNewValue & "'" & Environment.NewLine & "This column is: numeric. Values must be numeric.", MsgBoxStyle.Exclamation, "Invalid Value")
                     End If
                 Case "integer"
                     If Integer.TryParse(strNewValue, iValue) Then
                         clsReplaceValue.AddParameter("new_value", strNewValue)
                         bValid = True
                     Else
-                        MsgBox("Invalid value: " & strNewValue & Environment.NewLine & "This column is: integer. Values must be integer.", MsgBoxStyle.Exclamation, "Invalid Value")
+                        MsgBox("Invalid value: '" & strNewValue & "'" & Environment.NewLine & "This column is: integer. Values must be integer.", MsgBoxStyle.Exclamation, "Invalid Value")
                     End If
                     'Currently removed as this is the class for a blank column
                     'Case "logical"

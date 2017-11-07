@@ -38,6 +38,7 @@ Partial Class sdgDescribeTwoVarGraph
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgDescribeTwoVarGraph))
         Me.UcrButtonsSubdialogue1 = New instat.ucrButtonsSubdialogue()
         Me.ucrNumericByNumeric = New instat.ucrInputComboBox()
         Me.lblNumericByNumeric = New System.Windows.Forms.Label()
@@ -51,88 +52,65 @@ Partial Class sdgDescribeTwoVarGraph
         '
         'UcrButtonsSubdialogue1
         '
-        Me.UcrButtonsSubdialogue1.Location = New System.Drawing.Point(66, 143)
+        resources.ApplyResources(Me.UcrButtonsSubdialogue1, "UcrButtonsSubdialogue1")
         Me.UcrButtonsSubdialogue1.Name = "UcrButtonsSubdialogue1"
-        Me.UcrButtonsSubdialogue1.Size = New System.Drawing.Size(142, 30)
-        Me.UcrButtonsSubdialogue1.TabIndex = 8
         '
         'ucrNumericByNumeric
         '
+        Me.ucrNumericByNumeric.AddQuotesIfUnrecognised = True
         Me.ucrNumericByNumeric.IsReadOnly = False
-        Me.ucrNumericByNumeric.Location = New System.Drawing.Point(148, 11)
+        resources.ApplyResources(Me.ucrNumericByNumeric, "ucrNumericByNumeric")
         Me.ucrNumericByNumeric.Name = "ucrNumericByNumeric"
-        Me.ucrNumericByNumeric.Size = New System.Drawing.Size(144, 21)
-        Me.ucrNumericByNumeric.TabIndex = 1
         '
         'lblNumericByNumeric
         '
-        Me.lblNumericByNumeric.AutoSize = True
-        Me.lblNumericByNumeric.Location = New System.Drawing.Point(9, 15)
+        resources.ApplyResources(Me.lblNumericByNumeric, "lblNumericByNumeric")
         Me.lblNumericByNumeric.Name = "lblNumericByNumeric"
-        Me.lblNumericByNumeric.Size = New System.Drawing.Size(105, 13)
-        Me.lblNumericByNumeric.TabIndex = 0
         Me.lblNumericByNumeric.Tag = "Numeric_by_Numeric:"
-        Me.lblNumericByNumeric.Text = "Numeric by Numeric:"
         '
         'lblNumericByCategorical
         '
-        Me.lblNumericByCategorical.AutoSize = True
-        Me.lblNumericByCategorical.Location = New System.Drawing.Point(9, 47)
+        resources.ApplyResources(Me.lblNumericByCategorical, "lblNumericByCategorical")
         Me.lblNumericByCategorical.Name = "lblNumericByCategorical"
-        Me.lblNumericByCategorical.Size = New System.Drawing.Size(119, 13)
-        Me.lblNumericByCategorical.TabIndex = 2
         Me.lblNumericByCategorical.Tag = "Numeric_by_Categorical:"
-        Me.lblNumericByCategorical.Text = "Numeric by Categorical:"
         '
         'ucrNumericByCategorical
         '
+        Me.ucrNumericByCategorical.AddQuotesIfUnrecognised = True
         Me.ucrNumericByCategorical.IsReadOnly = False
-        Me.ucrNumericByCategorical.Location = New System.Drawing.Point(148, 43)
+        resources.ApplyResources(Me.ucrNumericByCategorical, "ucrNumericByCategorical")
         Me.ucrNumericByCategorical.Name = "ucrNumericByCategorical"
-        Me.ucrNumericByCategorical.Size = New System.Drawing.Size(144, 21)
-        Me.ucrNumericByCategorical.TabIndex = 3
         '
         'lblCategoricalByCategorical
         '
-        Me.lblCategoricalByCategorical.AutoSize = True
-        Me.lblCategoricalByCategorical.Location = New System.Drawing.Point(9, 111)
+        resources.ApplyResources(Me.lblCategoricalByCategorical, "lblCategoricalByCategorical")
         Me.lblCategoricalByCategorical.Name = "lblCategoricalByCategorical"
-        Me.lblCategoricalByCategorical.Size = New System.Drawing.Size(133, 13)
-        Me.lblCategoricalByCategorical.TabIndex = 6
         Me.lblCategoricalByCategorical.Tag = "Categorical_by_Categorical:"
-        Me.lblCategoricalByCategorical.Text = "Categorical by Categorical:"
         '
         'ucrCategoricalByCategorical
         '
+        Me.ucrCategoricalByCategorical.AddQuotesIfUnrecognised = True
         Me.ucrCategoricalByCategorical.IsReadOnly = False
-        Me.ucrCategoricalByCategorical.Location = New System.Drawing.Point(148, 107)
+        resources.ApplyResources(Me.ucrCategoricalByCategorical, "ucrCategoricalByCategorical")
         Me.ucrCategoricalByCategorical.Name = "ucrCategoricalByCategorical"
-        Me.ucrCategoricalByCategorical.Size = New System.Drawing.Size(144, 21)
-        Me.ucrCategoricalByCategorical.TabIndex = 7
         '
         'lblCategoricalByNumeric
         '
-        Me.lblCategoricalByNumeric.AutoSize = True
-        Me.lblCategoricalByNumeric.Location = New System.Drawing.Point(9, 79)
+        resources.ApplyResources(Me.lblCategoricalByNumeric, "lblCategoricalByNumeric")
         Me.lblCategoricalByNumeric.Name = "lblCategoricalByNumeric"
-        Me.lblCategoricalByNumeric.Size = New System.Drawing.Size(119, 13)
-        Me.lblCategoricalByNumeric.TabIndex = 4
         Me.lblCategoricalByNumeric.Tag = "Categorical_by_Numeric:"
-        Me.lblCategoricalByNumeric.Text = "Categorical by Numeric:"
         '
         'ucrCategoricalByNumeric
         '
+        Me.ucrCategoricalByNumeric.AddQuotesIfUnrecognised = True
         Me.ucrCategoricalByNumeric.IsReadOnly = False
-        Me.ucrCategoricalByNumeric.Location = New System.Drawing.Point(148, 75)
+        resources.ApplyResources(Me.ucrCategoricalByNumeric, "ucrCategoricalByNumeric")
         Me.ucrCategoricalByNumeric.Name = "ucrCategoricalByNumeric"
-        Me.ucrCategoricalByNumeric.Size = New System.Drawing.Size(144, 21)
-        Me.ucrCategoricalByNumeric.TabIndex = 5
         '
         'sdgDescribeTwoVarGraph
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(302, 177)
         Me.Controls.Add(Me.lblCategoricalByCategorical)
         Me.Controls.Add(Me.ucrCategoricalByCategorical)
         Me.Controls.Add(Me.lblCategoricalByNumeric)
@@ -146,8 +124,6 @@ Partial Class sdgDescribeTwoVarGraph
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgDescribeTwoVarGraph"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Two Variable Graph"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
