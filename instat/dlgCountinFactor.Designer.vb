@@ -38,6 +38,7 @@ Partial Class dlgCountinFactor
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgCountinFactor))
         Me.lblSelectedFactor = New System.Windows.Forms.Label()
         Me.ucrNewColName = New instat.ucrSave()
         Me.ucrCountReceiver = New instat.ucrReceiverSingle()
@@ -47,54 +48,39 @@ Partial Class dlgCountinFactor
         '
         'lblSelectedFactor
         '
-        Me.lblSelectedFactor.AutoSize = True
-        Me.lblSelectedFactor.Location = New System.Drawing.Point(267, 45)
+        resources.ApplyResources(Me.lblSelectedFactor, "lblSelectedFactor")
         Me.lblSelectedFactor.Name = "lblSelectedFactor"
-        Me.lblSelectedFactor.Size = New System.Drawing.Size(85, 13)
-        Me.lblSelectedFactor.TabIndex = 1
-        Me.lblSelectedFactor.Text = "Selected Factor:"
         '
         'ucrNewColName
         '
-        Me.ucrNewColName.Location = New System.Drawing.Point(9, 210)
+        resources.ApplyResources(Me.ucrNewColName, "ucrNewColName")
         Me.ucrNewColName.Name = "ucrNewColName"
-        Me.ucrNewColName.Size = New System.Drawing.Size(255, 24)
-        Me.ucrNewColName.TabIndex = 3
         '
         'ucrCountReceiver
         '
         Me.ucrCountReceiver.frmParent = Me
-        Me.ucrCountReceiver.Location = New System.Drawing.Point(267, 60)
-        Me.ucrCountReceiver.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrCountReceiver, "ucrCountReceiver")
         Me.ucrCountReceiver.Name = "ucrCountReceiver"
         Me.ucrCountReceiver.Selector = Nothing
-        Me.ucrCountReceiver.Size = New System.Drawing.Size(130, 20)
         Me.ucrCountReceiver.strNcFilePath = ""
-        Me.ucrCountReceiver.TabIndex = 2
         Me.ucrCountReceiver.ucrSelector = Nothing
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 240)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 4
         '
         'ucrCountSelector
         '
         Me.ucrCountSelector.bShowHiddenColumns = False
         Me.ucrCountSelector.bUseCurrentFilter = True
-        Me.ucrCountSelector.Location = New System.Drawing.Point(9, 9)
-        Me.ucrCountSelector.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrCountSelector, "ucrCountSelector")
         Me.ucrCountSelector.Name = "ucrCountSelector"
-        Me.ucrCountSelector.Size = New System.Drawing.Size(210, 180)
-        Me.ucrCountSelector.TabIndex = 0
         '
         'dlgCountinFactor
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(423, 297)
         Me.Controls.Add(Me.ucrNewColName)
         Me.Controls.Add(Me.lblSelectedFactor)
         Me.Controls.Add(Me.ucrCountReceiver)
@@ -104,9 +90,7 @@ Partial Class dlgCountinFactor
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgCountinFactor"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Count_in_Factor"
-        Me.Text = "Count in Factor"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

@@ -38,6 +38,7 @@ Partial Class dlgStringHandling
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgStringHandling))
         Me.lblColumn = New System.Windows.Forms.Label()
         Me.lblReplaceBy = New System.Windows.Forms.Label()
         Me.lblPattern = New System.Windows.Forms.Label()
@@ -88,125 +89,77 @@ Partial Class dlgStringHandling
         '
         'lblColumn
         '
-        Me.lblColumn.AutoSize = True
-        Me.lblColumn.Location = New System.Drawing.Point(259, 129)
+        resources.ApplyResources(Me.lblColumn, "lblColumn")
         Me.lblColumn.Name = "lblColumn"
-        Me.lblColumn.Size = New System.Drawing.Size(45, 13)
-        Me.lblColumn.TabIndex = 11
-        Me.lblColumn.Text = "Column:"
         '
         'lblReplaceBy
         '
-        Me.lblReplaceBy.AutoSize = True
-        Me.lblReplaceBy.Location = New System.Drawing.Point(259, 218)
+        resources.ApplyResources(Me.lblReplaceBy, "lblReplaceBy")
         Me.lblReplaceBy.Name = "lblReplaceBy"
-        Me.lblReplaceBy.Size = New System.Drawing.Size(65, 13)
-        Me.lblReplaceBy.TabIndex = 15
-        Me.lblReplaceBy.Text = "Replace By:"
         '
         'lblPattern
         '
-        Me.lblPattern.AutoSize = True
-        Me.lblPattern.Location = New System.Drawing.Point(259, 170)
+        resources.ApplyResources(Me.lblPattern, "lblPattern")
         Me.lblPattern.Name = "lblPattern"
-        Me.lblPattern.Size = New System.Drawing.Size(44, 13)
-        Me.lblPattern.TabIndex = 13
-        Me.lblPattern.Text = "Pattern:"
         '
         'rdoCount
         '
-        Me.rdoCount.Appearance = System.Windows.Forms.Appearance.Button
+        resources.ApplyResources(Me.rdoCount, "rdoCount")
         Me.rdoCount.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoCount.FlatAppearance.BorderSize = 2
         Me.rdoCount.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoCount.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoCount.Location = New System.Drawing.Point(14, 12)
         Me.rdoCount.Name = "rdoCount"
-        Me.rdoCount.Size = New System.Drawing.Size(88, 27)
-        Me.rdoCount.TabIndex = 1
         Me.rdoCount.TabStop = True
-        Me.rdoCount.Text = " Word Count"
-        Me.rdoCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoCount.UseVisualStyleBackColor = True
         '
         'rdoReplace
         '
-        Me.rdoReplace.Appearance = System.Windows.Forms.Appearance.Button
+        resources.ApplyResources(Me.rdoReplace, "rdoReplace")
         Me.rdoReplace.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoReplace.FlatAppearance.BorderSize = 2
         Me.rdoReplace.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoReplace.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoReplace.Location = New System.Drawing.Point(277, 12)
         Me.rdoReplace.Name = "rdoReplace"
-        Me.rdoReplace.Size = New System.Drawing.Size(61, 27)
-        Me.rdoReplace.TabIndex = 5
         Me.rdoReplace.TabStop = True
-        Me.rdoReplace.Text = "Replace"
-        Me.rdoReplace.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoReplace.UseVisualStyleBackColor = True
         '
         'rdoLocate
         '
-        Me.rdoLocate.Appearance = System.Windows.Forms.Appearance.Button
+        resources.ApplyResources(Me.rdoLocate, "rdoLocate")
         Me.rdoLocate.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoLocate.FlatAppearance.BorderSize = 2
         Me.rdoLocate.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoLocate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoLocate.Location = New System.Drawing.Point(218, 12)
         Me.rdoLocate.Name = "rdoLocate"
-        Me.rdoLocate.Size = New System.Drawing.Size(61, 27)
-        Me.rdoLocate.TabIndex = 4
         Me.rdoLocate.TabStop = True
-        Me.rdoLocate.Text = "Locate"
-        Me.rdoLocate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoLocate.UseVisualStyleBackColor = True
         '
         'rdoExtract
         '
-        Me.rdoExtract.Appearance = System.Windows.Forms.Appearance.Button
+        resources.ApplyResources(Me.rdoExtract, "rdoExtract")
         Me.rdoExtract.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoExtract.FlatAppearance.BorderSize = 2
         Me.rdoExtract.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoExtract.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoExtract.Location = New System.Drawing.Point(159, 12)
         Me.rdoExtract.Name = "rdoExtract"
-        Me.rdoExtract.Size = New System.Drawing.Size(61, 27)
-        Me.rdoExtract.TabIndex = 3
         Me.rdoExtract.TabStop = True
-        Me.rdoExtract.Text = "Extract"
-        Me.rdoExtract.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoExtract.UseVisualStyleBackColor = True
         '
         'rdoDetect
         '
-        Me.rdoDetect.Appearance = System.Windows.Forms.Appearance.Button
+        resources.ApplyResources(Me.rdoDetect, "rdoDetect")
         Me.rdoDetect.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoDetect.FlatAppearance.BorderSize = 2
         Me.rdoDetect.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoDetect.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoDetect.Location = New System.Drawing.Point(100, 12)
         Me.rdoDetect.Name = "rdoDetect"
-        Me.rdoDetect.Size = New System.Drawing.Size(61, 27)
-        Me.rdoDetect.TabIndex = 2
         Me.rdoDetect.TabStop = True
-        Me.rdoDetect.Text = "Detect"
-        Me.rdoDetect.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoDetect.UseVisualStyleBackColor = True
         '
         'rdoReplaceAll
         '
-        Me.rdoReplaceAll.Appearance = System.Windows.Forms.Appearance.Button
+        resources.ApplyResources(Me.rdoReplaceAll, "rdoReplaceAll")
         Me.rdoReplaceAll.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoReplaceAll.FlatAppearance.BorderSize = 2
         Me.rdoReplaceAll.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoReplaceAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoReplaceAll.Location = New System.Drawing.Point(335, 12)
         Me.rdoReplaceAll.Name = "rdoReplaceAll"
-        Me.rdoReplaceAll.Size = New System.Drawing.Size(74, 27)
-        Me.rdoReplaceAll.TabIndex = 6
         Me.rdoReplaceAll.TabStop = True
-        Me.rdoReplaceAll.Text = "Replace All"
-        Me.rdoReplaceAll.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoReplaceAll.UseVisualStyleBackColor = True
         '
         'grpRegex
@@ -234,314 +187,195 @@ Partial Class dlgStringHandling
         Me.grpRegex.Controls.Add(Me.cmdBackSlashb)
         Me.grpRegex.Controls.Add(Me.cmdSbackSlash)
         Me.grpRegex.Controls.Add(Me.cmdOr)
-        Me.grpRegex.Location = New System.Drawing.Point(420, 144)
-        Me.grpRegex.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        resources.ApplyResources(Me.grpRegex, "grpRegex")
         Me.grpRegex.Name = "grpRegex"
-        Me.grpRegex.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.grpRegex.Size = New System.Drawing.Size(239, 141)
-        Me.grpRegex.TabIndex = 180
         Me.grpRegex.TabStop = False
-        Me.grpRegex.Text = "Regex keyboard"
         '
         'cmdClear
         '
-        Me.cmdClear.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdClear.Location = New System.Drawing.Point(198, 75)
-        Me.cmdClear.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        resources.ApplyResources(Me.cmdClear, "cmdClear")
         Me.cmdClear.Name = "cmdClear"
-        Me.cmdClear.Size = New System.Drawing.Size(37, 60)
-        Me.cmdClear.TabIndex = 145
-        Me.cmdClear.Text = "Clear"
         Me.cmdClear.UseVisualStyleBackColor = True
         '
         'cmdBackSlash
         '
-        Me.cmdBackSlash.Location = New System.Drawing.Point(159, 105)
-        Me.cmdBackSlash.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        resources.ApplyResources(Me.cmdBackSlash, "cmdBackSlash")
         Me.cmdBackSlash.Name = "cmdBackSlash"
-        Me.cmdBackSlash.Size = New System.Drawing.Size(38, 30)
-        Me.cmdBackSlash.TabIndex = 140
-        Me.cmdBackSlash.Text = "\ "
         Me.cmdBackSlash.UseVisualStyleBackColor = True
         '
         'cmdWBackSlash
         '
-        Me.cmdWBackSlash.Location = New System.Drawing.Point(159, 75)
-        Me.cmdWBackSlash.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        resources.ApplyResources(Me.cmdWBackSlash, "cmdWBackSlash")
         Me.cmdWBackSlash.Name = "cmdWBackSlash"
-        Me.cmdWBackSlash.Size = New System.Drawing.Size(38, 30)
-        Me.cmdWBackSlash.TabIndex = 139
-        Me.cmdWBackSlash.Text = "\ W"
         Me.cmdWBackSlash.UseVisualStyleBackColor = True
         '
         'cmdDollarSign
         '
-        Me.cmdDollarSign.Location = New System.Drawing.Point(198, 45)
-        Me.cmdDollarSign.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        resources.ApplyResources(Me.cmdDollarSign, "cmdDollarSign")
         Me.cmdDollarSign.Name = "cmdDollarSign"
-        Me.cmdDollarSign.Size = New System.Drawing.Size(38, 30)
-        Me.cmdDollarSign.TabIndex = 138
-        Me.cmdDollarSign.Text = "$"
         Me.cmdDollarSign.UseVisualStyleBackColor = True
         '
         'cmdOpenCloseParenthesis
         '
-        Me.cmdOpenCloseParenthesis.Location = New System.Drawing.Point(198, 15)
-        Me.cmdOpenCloseParenthesis.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        resources.ApplyResources(Me.cmdOpenCloseParenthesis, "cmdOpenCloseParenthesis")
         Me.cmdOpenCloseParenthesis.Name = "cmdOpenCloseParenthesis"
-        Me.cmdOpenCloseParenthesis.Size = New System.Drawing.Size(38, 30)
-        Me.cmdOpenCloseParenthesis.TabIndex = 137
-        Me.cmdOpenCloseParenthesis.Text = "(  )"
         Me.cmdOpenCloseParenthesis.UseVisualStyleBackColor = True
         '
         'cmdBackSlashd
         '
-        Me.cmdBackSlashd.Location = New System.Drawing.Point(81, 105)
-        Me.cmdBackSlashd.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        resources.ApplyResources(Me.cmdBackSlashd, "cmdBackSlashd")
         Me.cmdBackSlashd.Name = "cmdBackSlashd"
-        Me.cmdBackSlashd.Size = New System.Drawing.Size(38, 30)
-        Me.cmdBackSlashd.TabIndex = 136
-        Me.cmdBackSlashd.Text = "\ d"
         Me.cmdBackSlashd.UseVisualStyleBackColor = True
         '
         'cmdBackSlashs
         '
-        Me.cmdBackSlashs.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdBackSlashs.Location = New System.Drawing.Point(3, 105)
-        Me.cmdBackSlashs.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        resources.ApplyResources(Me.cmdBackSlashs, "cmdBackSlashs")
         Me.cmdBackSlashs.Name = "cmdBackSlashs"
-        Me.cmdBackSlashs.Size = New System.Drawing.Size(38, 30)
-        Me.cmdBackSlashs.TabIndex = 132
         Me.cmdBackSlashs.Tag = "Del"
-        Me.cmdBackSlashs.Text = "\ s"
         Me.cmdBackSlashs.UseVisualStyleBackColor = True
         '
         'cmdPower
         '
-        Me.cmdPower.Location = New System.Drawing.Point(159, 45)
-        Me.cmdPower.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        resources.ApplyResources(Me.cmdPower, "cmdPower")
         Me.cmdPower.Name = "cmdPower"
-        Me.cmdPower.Size = New System.Drawing.Size(38, 30)
-        Me.cmdPower.TabIndex = 133
-        Me.cmdPower.Text = "^"
         Me.cmdPower.UseVisualStyleBackColor = True
         '
         'cmdOpenBracketCaretClosedBracket
         '
-        Me.cmdOpenBracketCaretClosedBracket.Location = New System.Drawing.Point(120, 15)
-        Me.cmdOpenBracketCaretClosedBracket.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        resources.ApplyResources(Me.cmdOpenBracketCaretClosedBracket, "cmdOpenBracketCaretClosedBracket")
         Me.cmdOpenBracketCaretClosedBracket.Name = "cmdOpenBracketCaretClosedBracket"
-        Me.cmdOpenBracketCaretClosedBracket.Size = New System.Drawing.Size(38, 30)
-        Me.cmdOpenBracketCaretClosedBracket.TabIndex = 131
-        Me.cmdOpenBracketCaretClosedBracket.Text = "[ ^ ]"
         Me.cmdOpenBracketCaretClosedBracket.UseVisualStyleBackColor = True
         '
         'cmdPlus
         '
-        Me.cmdPlus.Location = New System.Drawing.Point(42, 45)
-        Me.cmdPlus.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        resources.ApplyResources(Me.cmdPlus, "cmdPlus")
         Me.cmdPlus.Name = "cmdPlus"
-        Me.cmdPlus.Size = New System.Drawing.Size(38, 30)
-        Me.cmdPlus.TabIndex = 130
-        Me.cmdPlus.Text = "+"
         Me.cmdPlus.UseVisualStyleBackColor = True
         '
         'cmdBackSlashw
         '
-        Me.cmdBackSlashw.Location = New System.Drawing.Point(120, 75)
-        Me.cmdBackSlashw.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        resources.ApplyResources(Me.cmdBackSlashw, "cmdBackSlashw")
         Me.cmdBackSlashw.Name = "cmdBackSlashw"
-        Me.cmdBackSlashw.Size = New System.Drawing.Size(38, 30)
-        Me.cmdBackSlashw.TabIndex = 129
-        Me.cmdBackSlashw.Text = "\ w"
         Me.cmdBackSlashw.UseVisualStyleBackColor = True
         '
         'cmdMultiply
         '
-        Me.cmdMultiply.Location = New System.Drawing.Point(120, 45)
-        Me.cmdMultiply.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        resources.ApplyResources(Me.cmdMultiply, "cmdMultiply")
         Me.cmdMultiply.Name = "cmdMultiply"
-        Me.cmdMultiply.Size = New System.Drawing.Size(38, 30)
-        Me.cmdMultiply.TabIndex = 128
-        Me.cmdMultiply.Text = "."
         Me.cmdMultiply.UseVisualStyleBackColor = True
         '
         'cmdOpenCloseBrace
         '
-        Me.cmdOpenCloseBrace.Location = New System.Drawing.Point(159, 15)
-        Me.cmdOpenCloseBrace.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        resources.ApplyResources(Me.cmdOpenCloseBrace, "cmdOpenCloseBrace")
         Me.cmdOpenCloseBrace.Name = "cmdOpenCloseBrace"
-        Me.cmdOpenCloseBrace.Size = New System.Drawing.Size(38, 30)
-        Me.cmdOpenCloseBrace.TabIndex = 127
-        Me.cmdOpenCloseBrace.Text = "{  }"
         Me.cmdOpenCloseBrace.UseVisualStyleBackColor = True
         '
         'cmdOpenClosedBracket
         '
-        Me.cmdOpenClosedBracket.Location = New System.Drawing.Point(81, 15)
-        Me.cmdOpenClosedBracket.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        resources.ApplyResources(Me.cmdOpenClosedBracket, "cmdOpenClosedBracket")
         Me.cmdOpenClosedBracket.Name = "cmdOpenClosedBracket"
-        Me.cmdOpenClosedBracket.Size = New System.Drawing.Size(38, 30)
-        Me.cmdOpenClosedBracket.TabIndex = 126
-        Me.cmdOpenClosedBracket.Text = "[  ]"
         Me.cmdOpenClosedBracket.UseVisualStyleBackColor = True
         '
         'cmdSingleQuote
         '
-        Me.cmdSingleQuote.Location = New System.Drawing.Point(42, 15)
-        Me.cmdSingleQuote.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        resources.ApplyResources(Me.cmdSingleQuote, "cmdSingleQuote")
         Me.cmdSingleQuote.Name = "cmdSingleQuote"
-        Me.cmdSingleQuote.Size = New System.Drawing.Size(38, 30)
-        Me.cmdSingleQuote.TabIndex = 125
-        Me.cmdSingleQuote.Text = "' '"
         Me.cmdSingleQuote.UseVisualStyleBackColor = True
         '
         'cmdQuote
         '
-        Me.cmdQuote.Location = New System.Drawing.Point(3, 15)
-        Me.cmdQuote.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        resources.ApplyResources(Me.cmdQuote, "cmdQuote")
         Me.cmdQuote.Name = "cmdQuote"
-        Me.cmdQuote.Size = New System.Drawing.Size(38, 30)
-        Me.cmdQuote.TabIndex = 124
-        Me.cmdQuote.Text = """ """
         Me.cmdQuote.UseVisualStyleBackColor = True
         '
         'cmdQuestionMark
         '
-        Me.cmdQuestionMark.Location = New System.Drawing.Point(81, 45)
-        Me.cmdQuestionMark.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        resources.ApplyResources(Me.cmdQuestionMark, "cmdQuestionMark")
         Me.cmdQuestionMark.Name = "cmdQuestionMark"
-        Me.cmdQuestionMark.Size = New System.Drawing.Size(38, 30)
-        Me.cmdQuestionMark.TabIndex = 123
-        Me.cmdQuestionMark.Text = "?"
         Me.cmdQuestionMark.UseVisualStyleBackColor = True
         '
         'cmdDBackSlah
         '
-        Me.cmdDBackSlah.Location = New System.Drawing.Point(120, 105)
-        Me.cmdDBackSlah.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        resources.ApplyResources(Me.cmdDBackSlah, "cmdDBackSlah")
         Me.cmdDBackSlah.Name = "cmdDBackSlah"
-        Me.cmdDBackSlah.Size = New System.Drawing.Size(38, 30)
-        Me.cmdDBackSlah.TabIndex = 122
-        Me.cmdDBackSlah.Text = "\ D"
         Me.cmdDBackSlah.UseVisualStyleBackColor = True
         '
         'cmdStar
         '
-        Me.cmdStar.Location = New System.Drawing.Point(3, 45)
-        Me.cmdStar.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        resources.ApplyResources(Me.cmdStar, "cmdStar")
         Me.cmdStar.Name = "cmdStar"
-        Me.cmdStar.Size = New System.Drawing.Size(38, 30)
-        Me.cmdStar.TabIndex = 121
-        Me.cmdStar.Text = "*"
         Me.cmdStar.UseVisualStyleBackColor = True
         '
         'cmdBbackSlash
         '
-        Me.cmdBbackSlash.Location = New System.Drawing.Point(81, 75)
-        Me.cmdBbackSlash.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        resources.ApplyResources(Me.cmdBbackSlash, "cmdBbackSlash")
         Me.cmdBbackSlash.Name = "cmdBbackSlash"
-        Me.cmdBbackSlash.Size = New System.Drawing.Size(38, 30)
-        Me.cmdBbackSlash.TabIndex = 120
-        Me.cmdBbackSlash.Text = "\ B"
         Me.cmdBbackSlash.UseVisualStyleBackColor = True
         '
         'cmdBackSlashb
         '
-        Me.cmdBackSlashb.Location = New System.Drawing.Point(42, 75)
-        Me.cmdBackSlashb.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        resources.ApplyResources(Me.cmdBackSlashb, "cmdBackSlashb")
         Me.cmdBackSlashb.Name = "cmdBackSlashb"
-        Me.cmdBackSlashb.Size = New System.Drawing.Size(38, 30)
-        Me.cmdBackSlashb.TabIndex = 119
-        Me.cmdBackSlashb.Text = "\ b"
         Me.cmdBackSlashb.UseVisualStyleBackColor = True
         '
         'cmdSbackSlash
         '
-        Me.cmdSbackSlash.Location = New System.Drawing.Point(42, 105)
-        Me.cmdSbackSlash.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        resources.ApplyResources(Me.cmdSbackSlash, "cmdSbackSlash")
         Me.cmdSbackSlash.Name = "cmdSbackSlash"
-        Me.cmdSbackSlash.Size = New System.Drawing.Size(38, 30)
-        Me.cmdSbackSlash.TabIndex = 118
-        Me.cmdSbackSlash.Text = "\ S"
         Me.cmdSbackSlash.UseVisualStyleBackColor = True
         '
         'cmdOr
         '
-        Me.cmdOr.Location = New System.Drawing.Point(3, 75)
-        Me.cmdOr.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        resources.ApplyResources(Me.cmdOr, "cmdOr")
         Me.cmdOr.Name = "cmdOr"
-        Me.cmdOr.Size = New System.Drawing.Size(38, 30)
-        Me.cmdOr.TabIndex = 117
-        Me.cmdOr.Text = "|,"
         Me.cmdOr.UseVisualStyleBackColor = True
         '
         'rdoFixed
         '
-        Me.rdoFixed.AutoSize = True
-        Me.rdoFixed.Location = New System.Drawing.Point(262, 96)
+        resources.ApplyResources(Me.rdoFixed, "rdoFixed")
         Me.rdoFixed.Name = "rdoFixed"
-        Me.rdoFixed.Size = New System.Drawing.Size(50, 17)
-        Me.rdoFixed.TabIndex = 9
         Me.rdoFixed.TabStop = True
-        Me.rdoFixed.Text = "Fixed"
         Me.rdoFixed.UseVisualStyleBackColor = True
         '
         'rdoRegex
         '
-        Me.rdoRegex.AutoSize = True
-        Me.rdoRegex.Location = New System.Drawing.Point(318, 96)
+        resources.ApplyResources(Me.rdoRegex, "rdoRegex")
         Me.rdoRegex.Name = "rdoRegex"
-        Me.rdoRegex.Size = New System.Drawing.Size(56, 17)
-        Me.rdoRegex.TabIndex = 10
         Me.rdoRegex.TabStop = True
-        Me.rdoRegex.Text = "Regex"
         Me.rdoRegex.UseVisualStyleBackColor = True
         '
         'ucrSaveStringHandling
         '
-        Me.ucrSaveStringHandling.Location = New System.Drawing.Point(10, 271)
+        resources.ApplyResources(Me.ucrSaveStringHandling, "ucrSaveStringHandling")
         Me.ucrSaveStringHandling.Name = "ucrSaveStringHandling"
-        Me.ucrSaveStringHandling.Size = New System.Drawing.Size(293, 24)
-        Me.ucrSaveStringHandling.TabIndex = 18
         '
         'ucrReceiverForRegexExpression
         '
         Me.ucrReceiverForRegexExpression.frmParent = Me
-        Me.ucrReceiverForRegexExpression.Location = New System.Drawing.Point(259, 185)
-        Me.ucrReceiverForRegexExpression.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        resources.ApplyResources(Me.ucrReceiverForRegexExpression, "ucrReceiverForRegexExpression")
         Me.ucrReceiverForRegexExpression.Name = "ucrReceiverForRegexExpression"
         Me.ucrReceiverForRegexExpression.Selector = Nothing
-        Me.ucrReceiverForRegexExpression.Size = New System.Drawing.Size(138, 28)
         Me.ucrReceiverForRegexExpression.strNcFilePath = ""
-        Me.ucrReceiverForRegexExpression.TabIndex = 14
         Me.ucrReceiverForRegexExpression.ucrSelector = Nothing
         '
         'ucrPnlFixedRegex
         '
-        Me.ucrPnlFixedRegex.Location = New System.Drawing.Point(259, 87)
+        resources.ApplyResources(Me.ucrPnlFixedRegex, "ucrPnlFixedRegex")
         Me.ucrPnlFixedRegex.Name = "ucrPnlFixedRegex"
-        Me.ucrPnlFixedRegex.Size = New System.Drawing.Size(116, 32)
-        Me.ucrPnlFixedRegex.TabIndex = 8
         '
         'ucrChkIncludeRegularExpressions
         '
         Me.ucrChkIncludeRegularExpressions.Checked = False
-        Me.ucrChkIncludeRegularExpressions.Location = New System.Drawing.Point(9, 242)
+        resources.ApplyResources(Me.ucrChkIncludeRegularExpressions, "ucrChkIncludeRegularExpressions")
         Me.ucrChkIncludeRegularExpressions.Name = "ucrChkIncludeRegularExpressions"
-        Me.ucrChkIncludeRegularExpressions.Size = New System.Drawing.Size(239, 20)
-        Me.ucrChkIncludeRegularExpressions.TabIndex = 17
         '
         'ucrReceiverStringHandling
         '
         Me.ucrReceiverStringHandling.frmParent = Me
-        Me.ucrReceiverStringHandling.Location = New System.Drawing.Point(259, 144)
-        Me.ucrReceiverStringHandling.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverStringHandling, "ucrReceiverStringHandling")
         Me.ucrReceiverStringHandling.Name = "ucrReceiverStringHandling"
         Me.ucrReceiverStringHandling.Selector = Nothing
-        Me.ucrReceiverStringHandling.Size = New System.Drawing.Size(138, 20)
         Me.ucrReceiverStringHandling.strNcFilePath = ""
-        Me.ucrReceiverStringHandling.TabIndex = 12
         Me.ucrReceiverStringHandling.ucrSelector = Nothing
         '
         'ucrInputReplaceBy
@@ -549,50 +383,38 @@ Partial Class dlgStringHandling
         Me.ucrInputReplaceBy.AddQuotesIfUnrecognised = True
         Me.ucrInputReplaceBy.IsMultiline = False
         Me.ucrInputReplaceBy.IsReadOnly = False
-        Me.ucrInputReplaceBy.Location = New System.Drawing.Point(259, 233)
+        resources.ApplyResources(Me.ucrInputReplaceBy, "ucrInputReplaceBy")
         Me.ucrInputReplaceBy.Name = "ucrInputReplaceBy"
-        Me.ucrInputReplaceBy.Size = New System.Drawing.Size(138, 20)
-        Me.ucrInputReplaceBy.TabIndex = 16
         '
         'ucrInputPattern
         '
         Me.ucrInputPattern.AddQuotesIfUnrecognised = True
         Me.ucrInputPattern.IsMultiline = False
         Me.ucrInputPattern.IsReadOnly = False
-        Me.ucrInputPattern.Location = New System.Drawing.Point(259, 186)
+        resources.ApplyResources(Me.ucrInputPattern, "ucrInputPattern")
         Me.ucrInputPattern.Name = "ucrInputPattern"
-        Me.ucrInputPattern.Size = New System.Drawing.Size(138, 20)
-        Me.ucrInputPattern.TabIndex = 12
         '
         'ucrSelectorStringHandling
         '
         Me.ucrSelectorStringHandling.bShowHiddenColumns = False
         Me.ucrSelectorStringHandling.bUseCurrentFilter = True
-        Me.ucrSelectorStringHandling.Location = New System.Drawing.Point(9, 55)
-        Me.ucrSelectorStringHandling.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorStringHandling, "ucrSelectorStringHandling")
         Me.ucrSelectorStringHandling.Name = "ucrSelectorStringHandling"
-        Me.ucrSelectorStringHandling.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorStringHandling.TabIndex = 7
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 301)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(406, 52)
-        Me.ucrBase.TabIndex = 19
         '
         'ucrPnlStringHandling
         '
-        Me.ucrPnlStringHandling.Location = New System.Drawing.Point(9, 1)
+        resources.ApplyResources(Me.ucrPnlStringHandling, "ucrPnlStringHandling")
         Me.ucrPnlStringHandling.Name = "ucrPnlStringHandling"
-        Me.ucrPnlStringHandling.Size = New System.Drawing.Size(406, 51)
-        Me.ucrPnlStringHandling.TabIndex = 0
         '
         'dlgStringHandling
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(669, 368)
         Me.Controls.Add(Me.ucrSaveStringHandling)
         Me.Controls.Add(Me.rdoRegex)
         Me.Controls.Add(Me.rdoFixed)
@@ -619,8 +441,6 @@ Partial Class dlgStringHandling
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgStringHandling"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "String Handling"
         Me.grpRegex.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
