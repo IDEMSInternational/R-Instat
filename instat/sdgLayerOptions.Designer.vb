@@ -38,6 +38,7 @@ Partial Class sdgLayerOptions
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgLayerOptions))
         Me.tbcLayers = New System.Windows.Forms.TabControl()
         Me.tbpAesthetics = New System.Windows.Forms.TabPage()
         Me.ucrGeomWithAes = New instat.ucrGeomListWithParameters()
@@ -53,69 +54,50 @@ Partial Class sdgLayerOptions
         '
         Me.tbcLayers.Controls.Add(Me.tbpAesthetics)
         Me.tbcLayers.Controls.Add(Me.tbpGeomParameters)
-        Me.tbcLayers.Location = New System.Drawing.Point(6, 8)
+        resources.ApplyResources(Me.tbcLayers, "tbcLayers")
         Me.tbcLayers.Name = "tbcLayers"
         Me.tbcLayers.SelectedIndex = 0
-        Me.tbcLayers.Size = New System.Drawing.Size(482, 511)
-        Me.tbcLayers.TabIndex = 0
         '
         'tbpAesthetics
         '
         Me.tbpAesthetics.Controls.Add(Me.ucrGeomWithAes)
-        Me.tbpAesthetics.Location = New System.Drawing.Point(4, 22)
+        resources.ApplyResources(Me.tbpAesthetics, "tbpAesthetics")
         Me.tbpAesthetics.Name = "tbpAesthetics"
-        Me.tbpAesthetics.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpAesthetics.Size = New System.Drawing.Size(474, 485)
-        Me.tbpAesthetics.TabIndex = 0
-        Me.tbpAesthetics.Text = "Layer Dimensions (Aesthetics)"
         Me.tbpAesthetics.UseVisualStyleBackColor = True
         '
         'ucrGeomWithAes
         '
-        Me.ucrGeomWithAes.Location = New System.Drawing.Point(3, 3)
+        resources.ApplyResources(Me.ucrGeomWithAes, "ucrGeomWithAes")
         Me.ucrGeomWithAes.Name = "ucrGeomWithAes"
-        Me.ucrGeomWithAes.Size = New System.Drawing.Size(467, 399)
-        Me.ucrGeomWithAes.TabIndex = 0
         '
         'tbpGeomParameters
         '
         Me.tbpGeomParameters.Controls.Add(Me.ucrLayerParameter)
-        Me.tbpGeomParameters.Location = New System.Drawing.Point(4, 22)
+        resources.ApplyResources(Me.tbpGeomParameters, "tbpGeomParameters")
         Me.tbpGeomParameters.Name = "tbpGeomParameters"
-        Me.tbpGeomParameters.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpGeomParameters.Size = New System.Drawing.Size(474, 485)
-        Me.tbpGeomParameters.TabIndex = 1
-        Me.tbpGeomParameters.Text = "Layer Parameters (Geom Parameters)"
         Me.tbpGeomParameters.UseVisualStyleBackColor = True
         '
         'ucrLayerParameter
         '
-        Me.ucrLayerParameter.Location = New System.Drawing.Point(3, 3)
+        resources.ApplyResources(Me.ucrLayerParameter, "ucrLayerParameter")
         Me.ucrLayerParameter.Name = "ucrLayerParameter"
-        Me.ucrLayerParameter.Size = New System.Drawing.Size(308, 476)
-        Me.ucrLayerParameter.TabIndex = 0
         Me.ucrLayerParameter.ucrGeomWithAes = Nothing
         '
         'ucrSdgLayerBase
         '
-        Me.ucrSdgLayerBase.Location = New System.Drawing.Point(173, 524)
+        resources.ApplyResources(Me.ucrSdgLayerBase, "ucrSdgLayerBase")
         Me.ucrSdgLayerBase.Name = "ucrSdgLayerBase"
-        Me.ucrSdgLayerBase.Size = New System.Drawing.Size(142, 30)
-        Me.ucrSdgLayerBase.TabIndex = 1
         '
         'sdgLayerOptions
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(492, 562)
         Me.Controls.Add(Me.tbcLayers)
         Me.Controls.Add(Me.ucrSdgLayerBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgLayerOptions"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Layer Options"
         Me.tbcLayers.ResumeLayout(False)
         Me.tbpAesthetics.ResumeLayout(False)
         Me.tbpGeomParameters.ResumeLayout(False)

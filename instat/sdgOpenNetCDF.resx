@@ -117,4 +117,823 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblMaxS.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblMaxS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>296, 258</value>
+  </data>
+  <data name="lblMaxS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 13</value>
+  </data>
+  <data name="lblMaxS.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="lblMaxS.Text" xml:space="preserve">
+    <value>Max:</value>
+  </data>
+  <data name="&gt;&gt;lblMaxS.Name" xml:space="preserve">
+    <value>lblMaxS</value>
+  </data>
+  <data name="&gt;&gt;lblMaxS.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMaxS.Parent" xml:space="preserve">
+    <value>tbSubset</value>
+  </data>
+  <data name="&gt;&gt;lblMaxS.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblMinS.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMinS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>120, 257</value>
+  </data>
+  <data name="lblMinS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>27, 13</value>
+  </data>
+  <data name="lblMinS.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="lblMinS.Text" xml:space="preserve">
+    <value>Min:</value>
+  </data>
+  <data name="&gt;&gt;lblMinS.Name" xml:space="preserve">
+    <value>lblMinS</value>
+  </data>
+  <data name="&gt;&gt;lblMinS.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMinS.Parent" xml:space="preserve">
+    <value>tbSubset</value>
+  </data>
+  <data name="&gt;&gt;lblMinS.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblS.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 258</value>
+  </data>
+  <data name="lblS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>17, 13</value>
+  </data>
+  <data name="lblS.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="lblS.Text" xml:space="preserve">
+    <value>S:</value>
+  </data>
+  <data name="&gt;&gt;lblS.Name" xml:space="preserve">
+    <value>lblS</value>
+  </data>
+  <data name="&gt;&gt;lblS.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblS.Parent" xml:space="preserve">
+    <value>tbSubset</value>
+  </data>
+  <data name="&gt;&gt;lblS.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblZ.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblZ.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 231</value>
+  </data>
+  <data name="lblZ.Size" type="System.Drawing.Size, System.Drawing">
+    <value>17, 13</value>
+  </data>
+  <data name="lblZ.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="lblZ.Text" xml:space="preserve">
+    <value>Z:</value>
+  </data>
+  <data name="&gt;&gt;lblZ.Name" xml:space="preserve">
+    <value>lblZ</value>
+  </data>
+  <data name="&gt;&gt;lblZ.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblZ.Parent" xml:space="preserve">
+    <value>tbSubset</value>
+  </data>
+  <data name="&gt;&gt;lblZ.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblY.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblY.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 204</value>
+  </data>
+  <data name="lblY.Size" type="System.Drawing.Size, System.Drawing">
+    <value>17, 13</value>
+  </data>
+  <data name="lblY.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lblY.Text" xml:space="preserve">
+    <value>Y:</value>
+  </data>
+  <data name="&gt;&gt;lblY.Name" xml:space="preserve">
+    <value>lblY</value>
+  </data>
+  <data name="&gt;&gt;lblY.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblY.Parent" xml:space="preserve">
+    <value>tbSubset</value>
+  </data>
+  <data name="&gt;&gt;lblY.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lblMinX.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMinX.Location" type="System.Drawing.Point, System.Drawing">
+    <value>120, 177</value>
+  </data>
+  <data name="lblMinX.Size" type="System.Drawing.Size, System.Drawing">
+    <value>27, 13</value>
+  </data>
+  <data name="lblMinX.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblMinX.Text" xml:space="preserve">
+    <value>Min:</value>
+  </data>
+  <data name="&gt;&gt;lblMinX.Name" xml:space="preserve">
+    <value>lblMinX</value>
+  </data>
+  <data name="&gt;&gt;lblMinX.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMinX.Parent" xml:space="preserve">
+    <value>tbSubset</value>
+  </data>
+  <data name="&gt;&gt;lblMinX.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="dtpMinT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>149, 282</value>
+  </data>
+  <data name="dtpMinT.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 20</value>
+  </data>
+  <data name="dtpMinT.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="&gt;&gt;dtpMinT.Name" xml:space="preserve">
+    <value>dtpMinT</value>
+  </data>
+  <data name="&gt;&gt;dtpMinT.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dtpMinT.Parent" xml:space="preserve">
+    <value>tbSubset</value>
+  </data>
+  <data name="&gt;&gt;dtpMinT.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="dtpMaxT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>328, 282</value>
+  </data>
+  <data name="dtpMaxT.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 20</value>
+  </data>
+  <data name="dtpMaxT.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="&gt;&gt;dtpMaxT.Name" xml:space="preserve">
+    <value>dtpMaxT</value>
+  </data>
+  <data name="&gt;&gt;dtpMaxT.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dtpMaxT.Parent" xml:space="preserve">
+    <value>tbSubset</value>
+  </data>
+  <data name="&gt;&gt;dtpMaxT.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="lblMaxT.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMaxT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>296, 285</value>
+  </data>
+  <data name="lblMaxT.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 13</value>
+  </data>
+  <data name="lblMaxT.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="lblMaxT.Text" xml:space="preserve">
+    <value>Max:</value>
+  </data>
+  <data name="&gt;&gt;lblMaxT.Name" xml:space="preserve">
+    <value>lblMaxT</value>
+  </data>
+  <data name="&gt;&gt;lblMaxT.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMaxT.Parent" xml:space="preserve">
+    <value>tbSubset</value>
+  </data>
+  <data name="&gt;&gt;lblMaxT.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="ucrInputFileDetails.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 9</value>
+  </data>
+  <data name="ucrInputFileDetails.Size" type="System.Drawing.Size, System.Drawing">
+    <value>450, 159</value>
+  </data>
+  <data name="ucrInputFileDetails.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrInputFileDetails.Name" xml:space="preserve">
+    <value>ucrInputFileDetails</value>
+  </data>
+  <data name="&gt;&gt;ucrInputFileDetails.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputFileDetails.Parent" xml:space="preserve">
+    <value>tbSubset</value>
+  </data>
+  <data name="&gt;&gt;ucrInputFileDetails.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="lblMinT.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMinT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>120, 285</value>
+  </data>
+  <data name="lblMinT.Size" type="System.Drawing.Size, System.Drawing">
+    <value>27, 13</value>
+  </data>
+  <data name="lblMinT.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="lblMinT.Text" xml:space="preserve">
+    <value>Min:</value>
+  </data>
+  <data name="&gt;&gt;lblMinT.Name" xml:space="preserve">
+    <value>lblMinT</value>
+  </data>
+  <data name="&gt;&gt;lblMinT.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMinT.Parent" xml:space="preserve">
+    <value>tbSubset</value>
+  </data>
+  <data name="&gt;&gt;lblMinT.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="ucrInputMaxS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>328, 255</value>
+  </data>
+  <data name="ucrInputMaxS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 21</value>
+  </data>
+  <data name="ucrInputMaxS.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMaxS.Name" xml:space="preserve">
+    <value>ucrInputMaxS</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMaxS.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMaxS.Parent" xml:space="preserve">
+    <value>tbSubset</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMaxS.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="lblMaxZ.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMaxZ.Location" type="System.Drawing.Point, System.Drawing">
+    <value>296, 231</value>
+  </data>
+  <data name="lblMaxZ.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 13</value>
+  </data>
+  <data name="lblMaxZ.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="lblMaxZ.Text" xml:space="preserve">
+    <value>Max:</value>
+  </data>
+  <data name="&gt;&gt;lblMaxZ.Name" xml:space="preserve">
+    <value>lblMaxZ</value>
+  </data>
+  <data name="&gt;&gt;lblMaxZ.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMaxZ.Parent" xml:space="preserve">
+    <value>tbSubset</value>
+  </data>
+  <data name="&gt;&gt;lblMaxZ.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="ucrInputMaxZ.Location" type="System.Drawing.Point, System.Drawing">
+    <value>328, 228</value>
+  </data>
+  <data name="ucrInputMaxZ.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 21</value>
+  </data>
+  <data name="ucrInputMaxZ.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMaxZ.Name" xml:space="preserve">
+    <value>ucrInputMaxZ</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMaxZ.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMaxZ.Parent" xml:space="preserve">
+    <value>tbSubset</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMaxZ.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="lblMaxY.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMaxY.Location" type="System.Drawing.Point, System.Drawing">
+    <value>296, 204</value>
+  </data>
+  <data name="lblMaxY.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 13</value>
+  </data>
+  <data name="lblMaxY.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="lblMaxY.Text" xml:space="preserve">
+    <value>Max:</value>
+  </data>
+  <data name="&gt;&gt;lblMaxY.Name" xml:space="preserve">
+    <value>lblMaxY</value>
+  </data>
+  <data name="&gt;&gt;lblMaxY.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMaxY.Parent" xml:space="preserve">
+    <value>tbSubset</value>
+  </data>
+  <data name="&gt;&gt;lblMaxY.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="ucrInputMaxY.Location" type="System.Drawing.Point, System.Drawing">
+    <value>328, 201</value>
+  </data>
+  <data name="ucrInputMaxY.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 21</value>
+  </data>
+  <data name="ucrInputMaxY.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMaxY.Name" xml:space="preserve">
+    <value>ucrInputMaxY</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMaxY.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMaxY.Parent" xml:space="preserve">
+    <value>tbSubset</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMaxY.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="lblMaxX.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMaxX.Location" type="System.Drawing.Point, System.Drawing">
+    <value>296, 177</value>
+  </data>
+  <data name="lblMaxX.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 13</value>
+  </data>
+  <data name="lblMaxX.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblMaxX.Text" xml:space="preserve">
+    <value>Max:</value>
+  </data>
+  <data name="&gt;&gt;lblMaxX.Name" xml:space="preserve">
+    <value>lblMaxX</value>
+  </data>
+  <data name="&gt;&gt;lblMaxX.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMaxX.Parent" xml:space="preserve">
+    <value>tbSubset</value>
+  </data>
+  <data name="&gt;&gt;lblMaxX.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="ucrInputMaxX.Location" type="System.Drawing.Point, System.Drawing">
+    <value>328, 174</value>
+  </data>
+  <data name="ucrInputMaxX.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 21</value>
+  </data>
+  <data name="ucrInputMaxX.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMaxX.Name" xml:space="preserve">
+    <value>ucrInputMaxX</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMaxX.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMaxX.Parent" xml:space="preserve">
+    <value>tbSubset</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMaxX.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="lblT.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 285</value>
+  </data>
+  <data name="lblT.Size" type="System.Drawing.Size, System.Drawing">
+    <value>17, 13</value>
+  </data>
+  <data name="lblT.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="lblT.Text" xml:space="preserve">
+    <value>T:</value>
+  </data>
+  <data name="&gt;&gt;lblT.Name" xml:space="preserve">
+    <value>lblT</value>
+  </data>
+  <data name="&gt;&gt;lblT.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblT.Parent" xml:space="preserve">
+    <value>tbSubset</value>
+  </data>
+  <data name="&gt;&gt;lblT.ZOrder" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="ucrInputMinS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>149, 255</value>
+  </data>
+  <data name="ucrInputMinS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 21</value>
+  </data>
+  <data name="ucrInputMinS.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMinS.Name" xml:space="preserve">
+    <value>ucrInputMinS</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMinS.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMinS.Parent" xml:space="preserve">
+    <value>tbSubset</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMinS.ZOrder" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="lblMinZ.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMinZ.Location" type="System.Drawing.Point, System.Drawing">
+    <value>120, 231</value>
+  </data>
+  <data name="lblMinZ.Size" type="System.Drawing.Size, System.Drawing">
+    <value>27, 13</value>
+  </data>
+  <data name="lblMinZ.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="lblMinZ.Text" xml:space="preserve">
+    <value>Min:</value>
+  </data>
+  <data name="&gt;&gt;lblMinZ.Name" xml:space="preserve">
+    <value>lblMinZ</value>
+  </data>
+  <data name="&gt;&gt;lblMinZ.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMinZ.Parent" xml:space="preserve">
+    <value>tbSubset</value>
+  </data>
+  <data name="&gt;&gt;lblMinZ.ZOrder" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="ucrInputMinZ.Location" type="System.Drawing.Point, System.Drawing">
+    <value>149, 228</value>
+  </data>
+  <data name="ucrInputMinZ.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 21</value>
+  </data>
+  <data name="ucrInputMinZ.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMinZ.Name" xml:space="preserve">
+    <value>ucrInputMinZ</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMinZ.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMinZ.Parent" xml:space="preserve">
+    <value>tbSubset</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMinZ.ZOrder" xml:space="preserve">
+    <value>21</value>
+  </data>
+  <data name="lblMinY.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMinY.Location" type="System.Drawing.Point, System.Drawing">
+    <value>120, 204</value>
+  </data>
+  <data name="lblMinY.Size" type="System.Drawing.Size, System.Drawing">
+    <value>27, 13</value>
+  </data>
+  <data name="lblMinY.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="lblMinY.Text" xml:space="preserve">
+    <value>Min:</value>
+  </data>
+  <data name="&gt;&gt;lblMinY.Name" xml:space="preserve">
+    <value>lblMinY</value>
+  </data>
+  <data name="&gt;&gt;lblMinY.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMinY.Parent" xml:space="preserve">
+    <value>tbSubset</value>
+  </data>
+  <data name="&gt;&gt;lblMinY.ZOrder" xml:space="preserve">
+    <value>22</value>
+  </data>
+  <data name="ucrInputMinY.Location" type="System.Drawing.Point, System.Drawing">
+    <value>149, 201</value>
+  </data>
+  <data name="ucrInputMinY.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 21</value>
+  </data>
+  <data name="ucrInputMinY.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMinY.Name" xml:space="preserve">
+    <value>ucrInputMinY</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMinY.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMinY.Parent" xml:space="preserve">
+    <value>tbSubset</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMinY.ZOrder" xml:space="preserve">
+    <value>23</value>
+  </data>
+  <data name="lblX.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblX.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 177</value>
+  </data>
+  <data name="lblX.Size" type="System.Drawing.Size, System.Drawing">
+    <value>17, 13</value>
+  </data>
+  <data name="lblX.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblX.Text" xml:space="preserve">
+    <value>X:</value>
+  </data>
+  <data name="&gt;&gt;lblX.Name" xml:space="preserve">
+    <value>lblX</value>
+  </data>
+  <data name="&gt;&gt;lblX.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblX.Parent" xml:space="preserve">
+    <value>tbSubset</value>
+  </data>
+  <data name="&gt;&gt;lblX.ZOrder" xml:space="preserve">
+    <value>24</value>
+  </data>
+  <data name="ucrInputMinX.Location" type="System.Drawing.Point, System.Drawing">
+    <value>149, 174</value>
+  </data>
+  <data name="ucrInputMinX.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 21</value>
+  </data>
+  <data name="ucrInputMinX.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMinX.Name" xml:space="preserve">
+    <value>ucrInputMinX</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMinX.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMinX.Parent" xml:space="preserve">
+    <value>tbSubset</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMinX.ZOrder" xml:space="preserve">
+    <value>25</value>
+  </data>
+  <data name="tbSubset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tbSubset.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbSubset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>475, 397</value>
+  </data>
+  <data name="tbSubset.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tbSubset.Text" xml:space="preserve">
+    <value>Subset</value>
+  </data>
+  <data name="&gt;&gt;tbSubset.Name" xml:space="preserve">
+    <value>tbSubset</value>
+  </data>
+  <data name="&gt;&gt;tbSubset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbSubset.Parent" xml:space="preserve">
+    <value>tbNetCDF</value>
+  </data>
+  <data name="&gt;&gt;tbSubset.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrChkOnlyDataVariables.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 18</value>
+  </data>
+  <data name="ucrChkOnlyDataVariables.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 20</value>
+  </data>
+  <data name="ucrChkOnlyDataVariables.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOnlyDataVariables.Name" xml:space="preserve">
+    <value>ucrChkOnlyDataVariables</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOnlyDataVariables.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOnlyDataVariables.Parent" xml:space="preserve">
+    <value>tbOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOnlyDataVariables.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrChkKeepRawTime.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 44</value>
+  </data>
+  <data name="ucrChkKeepRawTime.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 20</value>
+  </data>
+  <data name="ucrChkKeepRawTime.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkKeepRawTime.Name" xml:space="preserve">
+    <value>ucrChkKeepRawTime</value>
+  </data>
+  <data name="&gt;&gt;ucrChkKeepRawTime.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkKeepRawTime.Parent" xml:space="preserve">
+    <value>tbOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkKeepRawTime.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrChkIncludeMetadata.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 70</value>
+  </data>
+  <data name="ucrChkIncludeMetadata.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 20</value>
+  </data>
+  <data name="ucrChkIncludeMetadata.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIncludeMetadata.Name" xml:space="preserve">
+    <value>ucrChkIncludeMetadata</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIncludeMetadata.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIncludeMetadata.Parent" xml:space="preserve">
+    <value>tbOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIncludeMetadata.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tbOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbOptions.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>475, 397</value>
+  </data>
+  <data name="tbOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tbOptions.Text" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="&gt;&gt;tbOptions.Name" xml:space="preserve">
+    <value>tbOptions</value>
+  </data>
+  <data name="&gt;&gt;tbOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbOptions.Parent" xml:space="preserve">
+    <value>tbNetCDF</value>
+  </data>
+  <data name="&gt;&gt;tbOptions.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tbNetCDF.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 8</value>
+  </data>
+  <data name="tbNetCDF.Size" type="System.Drawing.Size, System.Drawing">
+    <value>483, 423</value>
+  </data>
+  <data name="tbNetCDF.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tbNetCDF.Name" xml:space="preserve">
+    <value>tbNetCDF</value>
+  </data>
+  <data name="&gt;&gt;tbNetCDF.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbNetCDF.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tbNetCDF.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>176, 433</value>
+  </data>
+  <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 30</value>
+  </data>
+  <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
+    <value>ucrBase</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Type" xml:space="preserve">
+    <value>instat.ucrButtonsSubdialogue, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>494, 468</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>NetCDF Options</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>sdgOpenNetCDF</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
