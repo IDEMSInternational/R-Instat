@@ -358,7 +358,7 @@
     <value>True</value>
   </data>
   <data name="lblTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>159, 355</value>
+    <value>159, 341</value>
   </data>
   <data name="lblTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 13</value>
@@ -385,7 +385,7 @@
     <value>True</value>
   </data>
   <data name="lblFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 354</value>
+    <value>11, 340</value>
   </data>
   <data name="lblFrom.Size" type="System.Drawing.Size, System.Drawing">
     <value>33, 13</value>
@@ -412,7 +412,7 @@
     <value>True</value>
   </data>
   <data name="lblReceiverTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>159, 354</value>
+    <value>159, 340</value>
   </data>
   <data name="lblReceiverTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 13</value>
@@ -439,7 +439,7 @@
     <value>True</value>
   </data>
   <data name="lblReceiverFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 354</value>
+    <value>11, 340</value>
   </data>
   <data name="lblReceiverFrom.Size" type="System.Drawing.Size, System.Drawing">
     <value>33, 13</value>
@@ -463,7 +463,7 @@
     <value>5</value>
   </data>
   <data name="cmdSummary.Location" type="System.Drawing.Point, System.Drawing">
-    <value>302, 348</value>
+    <value>302, 334</value>
   </data>
   <data name="cmdSummary.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 26</value>
@@ -544,28 +544,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>415, 432</value>
-  </data>
-  <data name="ucrChkOmitMissingValues.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 93</value>
-  </data>
-  <data name="ucrChkOmitMissingValues.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 20</value>
-  </data>
-  <data name="ucrChkOmitMissingValues.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOmitMissingValues.Name" xml:space="preserve">
-    <value>ucrChkOmitMissingValues</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOmitMissingValues.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOmitMissingValues.Parent" xml:space="preserve">
-    <value>grpOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOmitMissingValues.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>415, 423</value>
   </data>
   <data name="ucrChkStoreResults.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 17</value>
@@ -586,7 +565,7 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrChkStoreResults.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="ucrChkPrintOutput.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 42</value>
@@ -607,7 +586,7 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrChkPrintOutput.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="ucrChkDropUnusedLevels.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 67</value>
@@ -628,13 +607,13 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrChkDropUnusedLevels.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="grpOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 233</value>
   </data>
   <data name="grpOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 117</value>
+    <value>160, 94</value>
   </data>
   <data name="grpOptions.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -655,7 +634,7 @@
     <value>0</value>
   </data>
   <data name="ucrReceiverFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>47, 351</value>
+    <value>47, 337</value>
   </data>
   <data name="ucrReceiverFrom.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -679,7 +658,7 @@
     <value>7</value>
   </data>
   <data name="ucrReceiverTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>185, 351</value>
+    <value>185, 337</value>
   </data>
   <data name="ucrReceiverTo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -703,7 +682,7 @@
     <value>8</value>
   </data>
   <data name="ucrNudTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>185, 351</value>
+    <value>185, 337</value>
   </data>
   <data name="ucrNudTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -724,7 +703,7 @@
     <value>11</value>
   </data>
   <data name="ucrNudFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>47, 351</value>
+    <value>47, 337</value>
   </data>
   <data name="ucrNudFrom.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -865,7 +844,7 @@
     <value>22</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 378</value>
+    <value>9, 366</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>399, 52</value>
@@ -905,9 +884,6 @@
   </data>
   <data name="&gt;&gt;ucrPnlAnnualWithin.ZOrder" xml:space="preserve">
     <value>27</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
