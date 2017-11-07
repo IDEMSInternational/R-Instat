@@ -117,4 +117,388 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ucrTextColors.Location" type="System.Drawing.Point, System.Drawing">
+    <value>105, 191</value>
+  </data>
+  <data name="ucrTextColors.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 21</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrTextColors.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;ucrTextColors.Name" xml:space="preserve">
+    <value>ucrTextColors</value>
+  </data>
+  <data name="&gt;&gt;ucrTextColors.Type" xml:space="preserve">
+    <value>instat.ucrColors, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrTextColors.Parent" xml:space="preserve">
+    <value>grpAxisLabels</value>
+  </data>
+  <data name="&gt;&gt;ucrTextColors.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrChkTextColour.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 192</value>
+  </data>
+  <data name="ucrChkTextColour.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 20</value>
+  </data>
+  <data name="ucrChkTextColour.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;ucrChkTextColour.Name" xml:space="preserve">
+    <value>ucrChkTextColour</value>
+  </data>
+  <data name="&gt;&gt;ucrChkTextColour.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkTextColour.Parent" xml:space="preserve">
+    <value>grpAxisLabels</value>
+  </data>
+  <data name="&gt;&gt;ucrChkTextColour.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrChkTextFace.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 167</value>
+  </data>
+  <data name="ucrChkTextFace.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 20</value>
+  </data>
+  <data name="ucrChkTextFace.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;ucrChkTextFace.Name" xml:space="preserve">
+    <value>ucrChkTextFace</value>
+  </data>
+  <data name="&gt;&gt;ucrChkTextFace.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkTextFace.Parent" xml:space="preserve">
+    <value>grpAxisLabels</value>
+  </data>
+  <data name="&gt;&gt;ucrChkTextFace.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrChkTextFamily.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 142</value>
+  </data>
+  <data name="ucrChkTextFamily.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 20</value>
+  </data>
+  <data name="ucrChkTextFamily.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;ucrChkTextFamily.Name" xml:space="preserve">
+    <value>ucrChkTextFamily</value>
+  </data>
+  <data name="&gt;&gt;ucrChkTextFamily.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkTextFamily.Parent" xml:space="preserve">
+    <value>grpAxisLabels</value>
+  </data>
+  <data name="&gt;&gt;ucrChkTextFamily.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrChkAngle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 117</value>
+  </data>
+  <data name="ucrChkAngle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 20</value>
+  </data>
+  <data name="ucrChkAngle.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAngle.Name" xml:space="preserve">
+    <value>ucrChkAngle</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAngle.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAngle.Parent" xml:space="preserve">
+    <value>grpAxisLabels</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAngle.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrChkHjust.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 44</value>
+  </data>
+  <data name="ucrChkHjust.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 20</value>
+  </data>
+  <data name="ucrChkHjust.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrChkHjust.Name" xml:space="preserve">
+    <value>ucrChkHjust</value>
+  </data>
+  <data name="&gt;&gt;ucrChkHjust.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkHjust.Parent" xml:space="preserve">
+    <value>grpAxisLabels</value>
+  </data>
+  <data name="&gt;&gt;ucrChkHjust.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="ucrChkVjust.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 69</value>
+  </data>
+  <data name="ucrChkVjust.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 20</value>
+  </data>
+  <data name="ucrChkVjust.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrChkVjust.Name" xml:space="preserve">
+    <value>ucrChkVjust</value>
+  </data>
+  <data name="&gt;&gt;ucrChkVjust.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkVjust.Parent" xml:space="preserve">
+    <value>grpAxisLabels</value>
+  </data>
+  <data name="&gt;&gt;ucrChkVjust.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="ucrChkLineHeight.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 94</value>
+  </data>
+  <data name="ucrChkLineHeight.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 18</value>
+  </data>
+  <data name="ucrChkLineHeight.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLineHeight.Name" xml:space="preserve">
+    <value>ucrChkLineHeight</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLineHeight.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLineHeight.Parent" xml:space="preserve">
+    <value>grpAxisLabels</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLineHeight.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="ucrChkSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 19</value>
+  </data>
+  <data name="ucrChkSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 20</value>
+  </data>
+  <data name="ucrChkSize.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSize.Name" xml:space="preserve">
+    <value>ucrChkSize</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSize.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSize.Parent" xml:space="preserve">
+    <value>grpAxisLabels</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSize.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="ucrNudVjust.Location" type="System.Drawing.Point, System.Drawing">
+    <value>105, 68</value>
+  </data>
+  <data name="ucrNudVjust.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudVjust.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrNudVjust.Name" xml:space="preserve">
+    <value>ucrNudVjust</value>
+  </data>
+  <data name="&gt;&gt;ucrNudVjust.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudVjust.Parent" xml:space="preserve">
+    <value>grpAxisLabels</value>
+  </data>
+  <data name="&gt;&gt;ucrNudVjust.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="ucrNudLineHeight.Location" type="System.Drawing.Point, System.Drawing">
+    <value>105, 92</value>
+  </data>
+  <data name="ucrNudLineHeight.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudLineHeight.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ucrNudLineHeight.Name" xml:space="preserve">
+    <value>ucrNudLineHeight</value>
+  </data>
+  <data name="&gt;&gt;ucrNudLineHeight.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudLineHeight.Parent" xml:space="preserve">
+    <value>grpAxisLabels</value>
+  </data>
+  <data name="&gt;&gt;ucrNudLineHeight.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="ucrNudAngle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>105, 117</value>
+  </data>
+  <data name="ucrNudAngle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudAngle.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;ucrNudAngle.Name" xml:space="preserve">
+    <value>ucrNudAngle</value>
+  </data>
+  <data name="&gt;&gt;ucrNudAngle.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudAngle.Parent" xml:space="preserve">
+    <value>grpAxisLabels</value>
+  </data>
+  <data name="&gt;&gt;ucrNudAngle.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="ucrNudHjust.Location" type="System.Drawing.Point, System.Drawing">
+    <value>105, 43</value>
+  </data>
+  <data name="ucrNudHjust.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudHjust.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrNudHjust.Name" xml:space="preserve">
+    <value>ucrNudHjust</value>
+  </data>
+  <data name="&gt;&gt;ucrNudHjust.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudHjust.Parent" xml:space="preserve">
+    <value>grpAxisLabels</value>
+  </data>
+  <data name="&gt;&gt;ucrNudHjust.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="ucrNudsize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>105, 19</value>
+  </data>
+  <data name="ucrNudsize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudsize.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrNudsize.Name" xml:space="preserve">
+    <value>ucrNudsize</value>
+  </data>
+  <data name="&gt;&gt;ucrNudsize.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudsize.Parent" xml:space="preserve">
+    <value>grpAxisLabels</value>
+  </data>
+  <data name="&gt;&gt;ucrNudsize.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="ucrInputTextFace.Location" type="System.Drawing.Point, System.Drawing">
+    <value>105, 166</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrInputTextFace.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>21, 17, 21, 17</value>
+  </data>
+  <data name="ucrInputTextFace.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 21</value>
+  </data>
+  <data name="ucrInputTextFace.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTextFace.Name" xml:space="preserve">
+    <value>ucrInputTextFace</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTextFace.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTextFace.Parent" xml:space="preserve">
+    <value>grpAxisLabels</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTextFace.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="ucrInputTextFamily.Location" type="System.Drawing.Point, System.Drawing">
+    <value>105, 141</value>
+  </data>
+  <data name="ucrInputTextFamily.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>21, 17, 21, 17</value>
+  </data>
+  <data name="ucrInputTextFamily.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 21</value>
+  </data>
+  <data name="ucrInputTextFamily.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTextFamily.Name" xml:space="preserve">
+    <value>ucrInputTextFamily</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTextFamily.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTextFamily.Parent" xml:space="preserve">
+    <value>grpAxisLabels</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTextFamily.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="grpAxisLabels.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="grpAxisLabels.Size" type="System.Drawing.Size, System.Drawing">
+    <value>246, 223</value>
+  </data>
+  <data name="grpAxisLabels.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpAxisLabels.Text" xml:space="preserve">
+    <value>Element Text </value>
+  </data>
+  <data name="&gt;&gt;grpAxisLabels.Name" xml:space="preserve">
+    <value>grpAxisLabels</value>
+  </data>
+  <data name="&gt;&gt;grpAxisLabels.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpAxisLabels.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpAxisLabels.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 227</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>ucrELementTextControl</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

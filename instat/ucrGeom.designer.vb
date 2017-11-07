@@ -38,37 +38,30 @@ Partial Class ucrGeom
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrGeom))
         Me.lblTypeofLayer = New System.Windows.Forms.Label()
         Me.ucrInputGeoms = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'lblTypeofLayer
         '
-        Me.lblTypeofLayer.AutoSize = True
-        Me.lblTypeofLayer.Location = New System.Drawing.Point(4, 4)
+        resources.ApplyResources(Me.lblTypeofLayer, "lblTypeofLayer")
         Me.lblTypeofLayer.Name = "lblTypeofLayer"
-        Me.lblTypeofLayer.Size = New System.Drawing.Size(112, 13)
-        Me.lblTypeofLayer.TabIndex = 1
-        Me.lblTypeofLayer.Text = "Type of Layer (Geom):"
-        Me.lblTypeofLayer.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'ucrInputGeoms
         '
         Me.ucrInputGeoms.AddQuotesIfUnrecognised = True
         Me.ucrInputGeoms.IsReadOnly = False
-        Me.ucrInputGeoms.Location = New System.Drawing.Point(7, 22)
+        resources.ApplyResources(Me.ucrInputGeoms, "ucrInputGeoms")
         Me.ucrInputGeoms.Name = "ucrInputGeoms"
-        Me.ucrInputGeoms.Size = New System.Drawing.Size(151, 21)
-        Me.ucrInputGeoms.TabIndex = 2
         '
         'ucrGeom
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ucrInputGeoms)
         Me.Controls.Add(Me.lblTypeofLayer)
         Me.Name = "ucrGeom"
-        Me.Size = New System.Drawing.Size(168, 50)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

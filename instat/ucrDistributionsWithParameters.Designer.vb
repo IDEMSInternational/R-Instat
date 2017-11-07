@@ -38,6 +38,7 @@ Partial Class ucrDistributionsWithParameters
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrDistributionsWithParameters))
         Me.lblDistributionParameters = New System.Windows.Forms.Label()
         Me.lblParameter1 = New System.Windows.Forms.Label()
         Me.lblParameter2 = New System.Windows.Forms.Label()
@@ -51,89 +52,65 @@ Partial Class ucrDistributionsWithParameters
         '
         'lblDistributionParameters
         '
-        Me.lblDistributionParameters.AutoSize = True
-        Me.lblDistributionParameters.Location = New System.Drawing.Point(6, 45)
+        resources.ApplyResources(Me.lblDistributionParameters, "lblDistributionParameters")
         Me.lblDistributionParameters.Name = "lblDistributionParameters"
-        Me.lblDistributionParameters.Size = New System.Drawing.Size(118, 13)
-        Me.lblDistributionParameters.TabIndex = 2
         Me.lblDistributionParameters.Tag = "distribution_parameters:"
-        Me.lblDistributionParameters.Text = "Distribution Parameters:"
         '
         'lblParameter1
         '
-        Me.lblParameter1.AutoSize = True
-        Me.lblParameter1.Location = New System.Drawing.Point(9, 72)
+        resources.ApplyResources(Me.lblParameter1, "lblParameter1")
         Me.lblParameter1.Name = "lblParameter1"
-        Me.lblParameter1.Size = New System.Drawing.Size(0, 13)
-        Me.lblParameter1.TabIndex = 3
         '
         'lblParameter2
         '
-        Me.lblParameter2.AutoSize = True
-        Me.lblParameter2.Location = New System.Drawing.Point(9, 101)
+        resources.ApplyResources(Me.lblParameter2, "lblParameter2")
         Me.lblParameter2.Name = "lblParameter2"
-        Me.lblParameter2.Size = New System.Drawing.Size(0, 13)
-        Me.lblParameter2.TabIndex = 4
         '
         'lblParameter3
         '
-        Me.lblParameter3.AutoSize = True
-        Me.lblParameter3.Location = New System.Drawing.Point(9, 128)
+        resources.ApplyResources(Me.lblParameter3, "lblParameter3")
         Me.lblParameter3.Name = "lblParameter3"
-        Me.lblParameter3.Size = New System.Drawing.Size(0, 13)
-        Me.lblParameter3.TabIndex = 5
         '
         'lblParameter4
         '
-        Me.lblParameter4.AutoSize = True
-        Me.lblParameter4.Location = New System.Drawing.Point(9, 155)
+        resources.ApplyResources(Me.lblParameter4, "lblParameter4")
         Me.lblParameter4.Name = "lblParameter4"
-        Me.lblParameter4.Size = New System.Drawing.Size(0, 13)
-        Me.lblParameter4.TabIndex = 9
         '
         'ucrInputParameter1
         '
         Me.ucrInputParameter1.AddQuotesIfUnrecognised = True
         Me.ucrInputParameter1.IsMultiline = False
         Me.ucrInputParameter1.IsReadOnly = False
-        Me.ucrInputParameter1.Location = New System.Drawing.Point(143, 64)
+        resources.ApplyResources(Me.ucrInputParameter1, "ucrInputParameter1")
         Me.ucrInputParameter1.Name = "ucrInputParameter1"
-        Me.ucrInputParameter1.Size = New System.Drawing.Size(100, 21)
-        Me.ucrInputParameter1.TabIndex = 11
         '
         'ucrInputParameter2
         '
         Me.ucrInputParameter2.AddQuotesIfUnrecognised = True
         Me.ucrInputParameter2.IsMultiline = False
         Me.ucrInputParameter2.IsReadOnly = False
-        Me.ucrInputParameter2.Location = New System.Drawing.Point(143, 93)
+        resources.ApplyResources(Me.ucrInputParameter2, "ucrInputParameter2")
         Me.ucrInputParameter2.Name = "ucrInputParameter2"
-        Me.ucrInputParameter2.Size = New System.Drawing.Size(100, 21)
-        Me.ucrInputParameter2.TabIndex = 12
         '
         'ucrInputParameter3
         '
         Me.ucrInputParameter3.AddQuotesIfUnrecognised = True
         Me.ucrInputParameter3.IsMultiline = False
         Me.ucrInputParameter3.IsReadOnly = False
-        Me.ucrInputParameter3.Location = New System.Drawing.Point(143, 120)
+        resources.ApplyResources(Me.ucrInputParameter3, "ucrInputParameter3")
         Me.ucrInputParameter3.Name = "ucrInputParameter3"
-        Me.ucrInputParameter3.Size = New System.Drawing.Size(100, 21)
-        Me.ucrInputParameter3.TabIndex = 14
         '
         'ucrInputParameter4
         '
         Me.ucrInputParameter4.AddQuotesIfUnrecognised = True
         Me.ucrInputParameter4.IsMultiline = False
         Me.ucrInputParameter4.IsReadOnly = False
-        Me.ucrInputParameter4.Location = New System.Drawing.Point(143, 147)
+        resources.ApplyResources(Me.ucrInputParameter4, "ucrInputParameter4")
         Me.ucrInputParameter4.Name = "ucrInputParameter4"
-        Me.ucrInputParameter4.Size = New System.Drawing.Size(100, 21)
-        Me.ucrInputParameter4.TabIndex = 13
         '
         'ucrDistributionsWithParameters
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ucrInputParameter3)
         Me.Controls.Add(Me.ucrInputParameter4)
@@ -145,7 +122,6 @@ Partial Class ucrDistributionsWithParameters
         Me.Controls.Add(Me.lblParameter1)
         Me.Controls.Add(Me.lblDistributionParameters)
         Me.Name = "ucrDistributionsWithParameters"
-        Me.Size = New System.Drawing.Size(248, 177)
         Me.Controls.SetChildIndex(Me.lblDistributionParameters, 0)
         Me.Controls.SetChildIndex(Me.lblParameter1, 0)
         Me.Controls.SetChildIndex(Me.lblParameter2, 0)

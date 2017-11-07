@@ -117,4 +117,433 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblSelectLevels.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblSelectLevels.Location" type="System.Drawing.Point, System.Drawing">
+    <value>413, 42</value>
+  </data>
+  <data name="lblSelectLevels.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 13</value>
+  </data>
+  <data name="lblSelectLevels.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblSelectLevels.Text" xml:space="preserve">
+    <value>Select Levels:</value>
+  </data>
+  <data name="&gt;&gt;lblSelectLevels.Name" xml:space="preserve">
+    <value>lblSelectLevels</value>
+  </data>
+  <data name="&gt;&gt;lblSelectLevels.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSelectLevels.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblSelectLevels.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="cmdAddCondition.Location" type="System.Drawing.Point, System.Drawing">
+    <value>278, 64</value>
+  </data>
+  <data name="cmdAddCondition.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 23</value>
+  </data>
+  <data name="cmdAddCondition.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="cmdAddCondition.Text" xml:space="preserve">
+    <value>Add Condition</value>
+  </data>
+  <data name="&gt;&gt;cmdAddCondition.Name" xml:space="preserve">
+    <value>cmdAddCondition</value>
+  </data>
+  <data name="&gt;&gt;cmdAddCondition.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdAddCondition.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmdAddCondition.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="cmdToggleSelectAll.Location" type="System.Drawing.Point, System.Drawing">
+    <value>674, 363</value>
+  </data>
+  <data name="cmdToggleSelectAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 23</value>
+  </data>
+  <data name="cmdToggleSelectAll.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="cmdToggleSelectAll.Text" xml:space="preserve">
+    <value>Select All Levels</value>
+  </data>
+  <data name="&gt;&gt;cmdToggleSelectAll.Name" xml:space="preserve">
+    <value>cmdToggleSelectAll</value>
+  </data>
+  <data name="&gt;&gt;cmdToggleSelectAll.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdToggleSelectAll.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmdToggleSelectAll.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="lstFilters.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 195</value>
+  </data>
+  <data name="lstFilters.Size" type="System.Drawing.Size, System.Drawing">
+    <value>268, 132</value>
+  </data>
+  <data name="lstFilters.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;lstFilters.Name" xml:space="preserve">
+    <value>lstFilters</value>
+  </data>
+  <data name="&gt;&gt;lstFilters.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lstFilters.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lstFilters.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="lblFilterPreview.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFilterPreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 339</value>
+  </data>
+  <data name="lblFilterPreview.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 13</value>
+  </data>
+  <data name="lblFilterPreview.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="lblFilterPreview.Text" xml:space="preserve">
+    <value>Fliter Preview:</value>
+  </data>
+  <data name="&gt;&gt;lblFilterPreview.Name" xml:space="preserve">
+    <value>lblFilterPreview</value>
+  </data>
+  <data name="&gt;&gt;lblFilterPreview.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblFilterPreview.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblFilterPreview.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="lblFilterBy.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFilterBy.Location" type="System.Drawing.Point, System.Drawing">
+    <value>278, 27</value>
+  </data>
+  <data name="lblFilterBy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 13</value>
+  </data>
+  <data name="lblFilterBy.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="lblFilterBy.Text" xml:space="preserve">
+    <value>Filter By:</value>
+  </data>
+  <data name="&gt;&gt;lblFilterBy.Name" xml:space="preserve">
+    <value>lblFilterBy</value>
+  </data>
+  <data name="&gt;&gt;lblFilterBy.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblFilterBy.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblFilterBy.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="cmdClearConditions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>278, 304</value>
+  </data>
+  <data name="cmdClearConditions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 23</value>
+  </data>
+  <data name="cmdClearConditions.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="cmdClearConditions.Text" xml:space="preserve">
+    <value>Clear Conditions</value>
+  </data>
+  <data name="&gt;&gt;cmdClearConditions.Name" xml:space="preserve">
+    <value>cmdClearConditions</value>
+  </data>
+  <data name="&gt;&gt;cmdClearConditions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdClearConditions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmdClearConditions.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="mcdEditCondition.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mcdEditCondition.Location" type="System.Drawing.Point, System.Drawing">
+    <value>278, 216</value>
+  </data>
+  <data name="mcdEditCondition.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 36</value>
+  </data>
+  <data name="mcdEditCondition.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="mcdEditCondition.Text" xml:space="preserve">
+    <value>Edit Condition</value>
+  </data>
+  <data name="&gt;&gt;mcdEditCondition.Name" xml:space="preserve">
+    <value>mcdEditCondition</value>
+  </data>
+  <data name="&gt;&gt;mcdEditCondition.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mcdEditCondition.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;mcdEditCondition.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="cmdRemoveCondition.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="cmdRemoveCondition.Location" type="System.Drawing.Point, System.Drawing">
+    <value>278, 260</value>
+  </data>
+  <data name="cmdRemoveCondition.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 36</value>
+  </data>
+  <data name="cmdRemoveCondition.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="cmdRemoveCondition.Text" xml:space="preserve">
+    <value>Remove Condition</value>
+  </data>
+  <data name="&gt;&gt;cmdRemoveCondition.Name" xml:space="preserve">
+    <value>cmdRemoveCondition</value>
+  </data>
+  <data name="&gt;&gt;cmdRemoveCondition.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdRemoveCondition.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmdRemoveCondition.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblNewFilterName.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblNewFilterName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 366</value>
+  </data>
+  <data name="lblNewFilterName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 13</value>
+  </data>
+  <data name="lblNewFilterName.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="lblNewFilterName.Text" xml:space="preserve">
+    <value>New Filter Name:</value>
+  </data>
+  <data name="&gt;&gt;lblNewFilterName.Name" xml:space="preserve">
+    <value>lblNewFilterName</value>
+  </data>
+  <data name="&gt;&gt;lblNewFilterName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblNewFilterName.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblNewFilterName.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrInputFilterName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>96, 364</value>
+  </data>
+  <data name="ucrInputFilterName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 21</value>
+  </data>
+  <data name="ucrInputFilterName.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;ucrInputFilterName.Name" xml:space="preserve">
+    <value>ucrInputFilterName</value>
+  </data>
+  <data name="&gt;&gt;ucrInputFilterName.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputFilterName.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputFilterName.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrValueForFilter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>490, 40</value>
+  </data>
+  <data name="ucrValueForFilter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 21</value>
+  </data>
+  <data name="ucrValueForFilter.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;ucrValueForFilter.Name" xml:space="preserve">
+    <value>ucrValueForFilter</value>
+  </data>
+  <data name="&gt;&gt;ucrValueForFilter.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrValueForFilter.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrValueForFilter.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="ucrFilterPreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>96, 337</value>
+  </data>
+  <data name="ucrFilterPreview.Size" type="System.Drawing.Size, System.Drawing">
+    <value>275, 21</value>
+  </data>
+  <data name="ucrFilterPreview.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;ucrFilterPreview.Name" xml:space="preserve">
+    <value>ucrFilterPreview</value>
+  </data>
+  <data name="&gt;&gt;ucrFilterPreview.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrFilterPreview.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrFilterPreview.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="ucrFilterOperation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>420, 40</value>
+  </data>
+  <data name="ucrFilterOperation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 21</value>
+  </data>
+  <data name="ucrFilterOperation.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrFilterOperation.Name" xml:space="preserve">
+    <value>ucrFilterOperation</value>
+  </data>
+  <data name="&gt;&gt;ucrFilterOperation.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrFilterOperation.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrFilterOperation.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="ucrFactorLevels.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="ucrFactorLevels.Location" type="System.Drawing.Point, System.Drawing">
+    <value>413, 61</value>
+  </data>
+  <data name="ucrFactorLevels.Size" type="System.Drawing.Size, System.Drawing">
+    <value>354, 297</value>
+  </data>
+  <data name="ucrFactorLevels.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrFactorLevels.Name" xml:space="preserve">
+    <value>ucrFactorLevels</value>
+  </data>
+  <data name="&gt;&gt;ucrFactorLevels.Type" xml:space="preserve">
+    <value>instat.ucrFactor, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrFactorLevels.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrFactorLevels.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="ucrFilterByReceiver.Location" type="System.Drawing.Point, System.Drawing">
+    <value>278, 42</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrFilterByReceiver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrFilterByReceiver.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrFilterByReceiver.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrFilterByReceiver.Name" xml:space="preserve">
+    <value>ucrFilterByReceiver</value>
+  </data>
+  <data name="&gt;&gt;ucrFilterByReceiver.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrFilterByReceiver.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrFilterByReceiver.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="ucrSelectorForFitler.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 4</value>
+  </data>
+  <data name="ucrSelectorForFitler.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectorForFitler.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 180</value>
+  </data>
+  <data name="ucrSelectorForFitler.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorForFitler.Name" xml:space="preserve">
+    <value>ucrSelectorForFitler</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorForFitler.Type" xml:space="preserve">
+    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorForFitler.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorForFitler.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>770, 395</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>ucrFilter</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

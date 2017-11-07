@@ -39,6 +39,7 @@ Partial Class ucrDataFrame
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrDataFrame))
         Me.cboAvailableDataFrames = New System.Windows.Forms.ComboBox()
         Me.mnuRightClick = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuRightClickCopy = New System.Windows.Forms.ToolStripMenuItem()
@@ -51,47 +52,38 @@ Partial Class ucrDataFrame
         '
         Me.cboAvailableDataFrames.ContextMenuStrip = Me.mnuRightClick
         Me.cboAvailableDataFrames.FormattingEnabled = True
-        Me.cboAvailableDataFrames.Location = New System.Drawing.Point(0, 19)
+        resources.ApplyResources(Me.cboAvailableDataFrames, "cboAvailableDataFrames")
         Me.cboAvailableDataFrames.Name = "cboAvailableDataFrames"
-        Me.cboAvailableDataFrames.Size = New System.Drawing.Size(148, 21)
-        Me.cboAvailableDataFrames.TabIndex = 0
         '
         'mnuRightClick
         '
         Me.mnuRightClick.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuRightClickCopy, Me.mnuRightClickSetData})
         Me.mnuRightClick.Name = "mnuRightClick"
-        Me.mnuRightClick.Size = New System.Drawing.Size(163, 48)
+        resources.ApplyResources(Me.mnuRightClick, "mnuRightClick")
         '
         'mnuRightClickCopy
         '
         Me.mnuRightClickCopy.Name = "mnuRightClickCopy"
-        Me.mnuRightClickCopy.Size = New System.Drawing.Size(162, 22)
-        Me.mnuRightClickCopy.Text = "Copy"
+        resources.ApplyResources(Me.mnuRightClickCopy, "mnuRightClickCopy")
         '
         'mnuRightClickSetData
         '
         Me.mnuRightClickSetData.Name = "mnuRightClickSetData"
-        Me.mnuRightClickSetData.Size = New System.Drawing.Size(162, 22)
-        Me.mnuRightClickSetData.Text = "View Data Frame"
+        resources.ApplyResources(Me.mnuRightClickSetData, "mnuRightClickSetData")
         '
         'lblDataFrame
         '
-        Me.lblDataFrame.Location = New System.Drawing.Point(0, 3)
+        resources.ApplyResources(Me.lblDataFrame, "lblDataFrame")
         Me.lblDataFrame.Name = "lblDataFrame"
-        Me.lblDataFrame.Size = New System.Drawing.Size(65, 13)
-        Me.lblDataFrame.TabIndex = 1
         Me.lblDataFrame.Tag = "Data_Frame:"
-        Me.lblDataFrame.Text = "Data Frame:"
         '
         'ucrDataFrame
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.lblDataFrame)
         Me.Controls.Add(Me.cboAvailableDataFrames)
-        Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "ucrDataFrame"
-        Me.Size = New System.Drawing.Size(148, 50)
         Me.mnuRightClick.ResumeLayout(False)
         Me.ResumeLayout(False)
 

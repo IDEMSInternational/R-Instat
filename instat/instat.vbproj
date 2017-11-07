@@ -4633,6 +4633,9 @@
     <EmbeddedResource Include="ucrColumnMetadata.sw-KE.resx">
       <DependentUpon>ucrColumnMetadata.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrCore.resx">
+      <DependentUpon>ucrCore.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrDataFrame.fr-FR.resx">
       <DependentUpon>ucrDataFrame.vb</DependentUpon>
     </EmbeddedResource>
@@ -4884,6 +4887,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrRadio.sw-KE.resx">
       <DependentUpon>ucrRadio.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiver.resx">
+      <DependentUpon>ucrReceiver.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrReceiverExpression.fr-FR.resx">
       <DependentUpon>ucrReceiverExpression.vb</DependentUpon>
