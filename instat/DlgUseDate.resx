@@ -117,4 +117,676 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblDateVariable.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblDateVariable.Location" type="System.Drawing.Point, System.Drawing">
+    <value>254, 44</value>
+  </data>
+  <data name="lblDateVariable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>71, 13</value>
+  </data>
+  <data name="lblDateVariable.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblDateVariable.Text" xml:space="preserve">
+    <value>Date Column:</value>
+  </data>
+  <data name="&gt;&gt;lblDateVariable.Name" xml:space="preserve">
+    <value>lblDateVariable</value>
+  </data>
+  <data name="&gt;&gt;lblDateVariable.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblDateVariable.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblDateVariable.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lblMonth.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMonth.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 73</value>
+  </data>
+  <data name="lblMonth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 13</value>
+  </data>
+  <data name="lblMonth.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblMonth.Text" xml:space="preserve">
+    <value>Month:</value>
+  </data>
+  <data name="&gt;&gt;lblMonth.Name" xml:space="preserve">
+    <value>lblMonth</value>
+  </data>
+  <data name="&gt;&gt;lblMonth.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMonth.Parent" xml:space="preserve">
+    <value>grpShifted</value>
+  </data>
+  <data name="&gt;&gt;lblMonth.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrInputComboBoxMonth.Location" type="System.Drawing.Point, System.Drawing">
+    <value>56, 70</value>
+  </data>
+  <data name="ucrInputComboBoxMonth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>81, 21</value>
+  </data>
+  <data name="ucrInputComboBoxMonth.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboBoxMonth.Name" xml:space="preserve">
+    <value>ucrInputComboBoxMonth</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboBoxMonth.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboBoxMonth.Parent" xml:space="preserve">
+    <value>grpShifted</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboBoxMonth.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblDay.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblDay.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 98</value>
+  </data>
+  <data name="lblDay.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 13</value>
+  </data>
+  <data name="lblDay.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblDay.Text" xml:space="preserve">
+    <value>Day:</value>
+  </data>
+  <data name="&gt;&gt;lblDay.Name" xml:space="preserve">
+    <value>lblDay</value>
+  </data>
+  <data name="&gt;&gt;lblDay.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblDay.Parent" xml:space="preserve">
+    <value>grpShifted</value>
+  </data>
+  <data name="&gt;&gt;lblDay.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrChkShiftYear.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 46</value>
+  </data>
+  <data name="ucrChkShiftYear.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="ucrChkShiftYear.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftYear.Name" xml:space="preserve">
+    <value>ucrChkShiftYear</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftYear.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftYear.Parent" xml:space="preserve">
+    <value>grpShifted</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftYear.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrNudShiftStartDay.Location" type="System.Drawing.Point, System.Drawing">
+    <value>57, 95</value>
+  </data>
+  <data name="ucrNudShiftStartDay.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudShiftStartDay.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrNudShiftStartDay.Name" xml:space="preserve">
+    <value>ucrNudShiftStartDay</value>
+  </data>
+  <data name="&gt;&gt;ucrNudShiftStartDay.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudShiftStartDay.Parent" xml:space="preserve">
+    <value>grpShifted</value>
+  </data>
+  <data name="&gt;&gt;ucrNudShiftStartDay.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrChkShiftDay.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 19</value>
+  </data>
+  <data name="ucrChkShiftDay.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 20</value>
+  </data>
+  <data name="ucrChkShiftDay.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftDay.Name" xml:space="preserve">
+    <value>ucrChkShiftDay</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftDay.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftDay.Parent" xml:space="preserve">
+    <value>grpShifted</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftDay.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="grpShifted.Location" type="System.Drawing.Point, System.Drawing">
+    <value>236, 201</value>
+  </data>
+  <data name="grpShifted.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 125</value>
+  </data>
+  <data name="grpShifted.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="grpShifted.Text" xml:space="preserve">
+    <value>Shifted</value>
+  </data>
+  <data name="&gt;&gt;grpShifted.Name" xml:space="preserve">
+    <value>grpShifted</value>
+  </data>
+  <data name="&gt;&gt;grpShifted.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpShifted.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpShifted.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrChkLeapYear.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 19</value>
+  </data>
+  <data name="ucrChkLeapYear.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="ucrChkLeapYear.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLeapYear.Name" xml:space="preserve">
+    <value>ucrChkLeapYear</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLeapYear.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLeapYear.Parent" xml:space="preserve">
+    <value>grpOthers</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLeapYear.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrChkDekad.Location" type="System.Drawing.Point, System.Drawing">
+    <value>221, 19</value>
+  </data>
+  <data name="ucrChkDekad.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="ucrChkDekad.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDekad.Name" xml:space="preserve">
+    <value>ucrChkDekad</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDekad.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDekad.Parent" xml:space="preserve">
+    <value>grpOthers</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDekad.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrChkPentad.Location" type="System.Drawing.Point, System.Drawing">
+    <value>112, 19</value>
+  </data>
+  <data name="ucrChkPentad.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="ucrChkPentad.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPentad.Name" xml:space="preserve">
+    <value>ucrChkPentad</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPentad.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPentad.Parent" xml:space="preserve">
+    <value>grpOthers</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPentad.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="grpOthers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 330</value>
+  </data>
+  <data name="grpOthers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>369, 48</value>
+  </data>
+  <data name="grpOthers.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="grpOthers.Text" xml:space="preserve">
+    <value>Other Functions</value>
+  </data>
+  <data name="&gt;&gt;grpOthers.Name" xml:space="preserve">
+    <value>grpOthers</value>
+  </data>
+  <data name="&gt;&gt;grpOthers.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpOthers.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpOthers.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrChkFullWeekday.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 17</value>
+  </data>
+  <data name="ucrChkFullWeekday.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 20</value>
+  </data>
+  <data name="ucrChkFullWeekday.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFullWeekday.Name" xml:space="preserve">
+    <value>ucrChkFullWeekday</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFullWeekday.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFullWeekday.Parent" xml:space="preserve">
+    <value>grpFullName</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFullWeekday.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrChkFullMonth.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 43</value>
+  </data>
+  <data name="ucrChkFullMonth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 20</value>
+  </data>
+  <data name="ucrChkFullMonth.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFullMonth.Name" xml:space="preserve">
+    <value>ucrChkFullMonth</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFullMonth.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFullMonth.Parent" xml:space="preserve">
+    <value>grpFullName</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFullMonth.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="grpFullName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>385, 201</value>
+  </data>
+  <data name="grpFullName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 89</value>
+  </data>
+  <data name="grpFullName.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="grpFullName.Text" xml:space="preserve">
+    <value>Full Name</value>
+  </data>
+  <data name="&gt;&gt;grpFullName.Name" xml:space="preserve">
+    <value>grpFullName</value>
+  </data>
+  <data name="&gt;&gt;grpFullName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpFullName.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpFullName.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrChkAbbrMonth.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 43</value>
+  </data>
+  <data name="ucrChkAbbrMonth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 20</value>
+  </data>
+  <data name="ucrChkAbbrMonth.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAbbrMonth.Name" xml:space="preserve">
+    <value>ucrChkAbbrMonth</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAbbrMonth.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAbbrMonth.Parent" xml:space="preserve">
+    <value>grpAbbreviation</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAbbrMonth.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrChkAbbrWeekday.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 17</value>
+  </data>
+  <data name="ucrChkAbbrWeekday.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 20</value>
+  </data>
+  <data name="ucrChkAbbrWeekday.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAbbrWeekday.Name" xml:space="preserve">
+    <value>ucrChkAbbrWeekday</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAbbrWeekday.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAbbrWeekday.Parent" xml:space="preserve">
+    <value>grpAbbreviation</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAbbrWeekday.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="grpAbbreviation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>386, 290</value>
+  </data>
+  <data name="grpAbbreviation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 88</value>
+  </data>
+  <data name="grpAbbreviation.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="grpAbbreviation.Text" xml:space="preserve">
+    <value>Abbreviation</value>
+  </data>
+  <data name="&gt;&gt;grpAbbreviation.Name" xml:space="preserve">
+    <value>grpAbbreviation</value>
+  </data>
+  <data name="&gt;&gt;grpAbbreviation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpAbbreviation.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpAbbreviation.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="ucrChkDayYear366.Location" type="System.Drawing.Point, System.Drawing">
+    <value>108, 69</value>
+  </data>
+  <data name="ucrChkDayYear366.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 20</value>
+  </data>
+  <data name="ucrChkDayYear366.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDayYear366.Name" xml:space="preserve">
+    <value>ucrChkDayYear366</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDayYear366.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDayYear366.Parent" xml:space="preserve">
+    <value>grpValues</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDayYear366.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrChkYear.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 17</value>
+  </data>
+  <data name="ucrChkYear.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="ucrChkYear.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkYear.Name" xml:space="preserve">
+    <value>ucrChkYear</value>
+  </data>
+  <data name="&gt;&gt;ucrChkYear.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkYear.Parent" xml:space="preserve">
+    <value>grpValues</value>
+  </data>
+  <data name="&gt;&gt;ucrChkYear.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrChkDayInYear.Location" type="System.Drawing.Point, System.Drawing">
+    <value>108, 43</value>
+  </data>
+  <data name="ucrChkDayInYear.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 20</value>
+  </data>
+  <data name="ucrChkDayInYear.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDayInYear.Name" xml:space="preserve">
+    <value>ucrChkDayInYear</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDayInYear.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDayInYear.Parent" xml:space="preserve">
+    <value>grpValues</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDayInYear.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrChkMonth.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 43</value>
+  </data>
+  <data name="ucrChkMonth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="ucrChkMonth.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMonth.Name" xml:space="preserve">
+    <value>ucrChkMonth</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMonth.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMonth.Parent" xml:space="preserve">
+    <value>grpValues</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMonth.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrChkDay.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 69</value>
+  </data>
+  <data name="ucrChkDay.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="ucrChkDay.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDay.Name" xml:space="preserve">
+    <value>ucrChkDay</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDay.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDay.Parent" xml:space="preserve">
+    <value>grpValues</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDay.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrChkWeekday.Location" type="System.Drawing.Point, System.Drawing">
+    <value>108, 17</value>
+  </data>
+  <data name="ucrChkWeekday.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 20</value>
+  </data>
+  <data name="ucrChkWeekday.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeekday.Name" xml:space="preserve">
+    <value>ucrChkWeekday</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeekday.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeekday.Parent" xml:space="preserve">
+    <value>grpValues</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeekday.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="ucrChkWeek.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 95</value>
+  </data>
+  <data name="ucrChkWeek.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="ucrChkWeek.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeek.Name" xml:space="preserve">
+    <value>ucrChkWeek</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeek.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeek.Parent" xml:space="preserve">
+    <value>grpValues</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeek.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="grpValues.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 199</value>
+  </data>
+  <data name="grpValues.Size" type="System.Drawing.Size, System.Drawing">
+    <value>220, 125</value>
+  </data>
+  <data name="grpValues.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="grpValues.Text" xml:space="preserve">
+    <value>Values</value>
+  </data>
+  <data name="&gt;&gt;grpValues.Name" xml:space="preserve">
+    <value>grpValues</value>
+  </data>
+  <data name="&gt;&gt;grpValues.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpValues.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpValues.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>502, 444</value>
+  </data>
+  <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 384</value>
+  </data>
+  <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>407, 52</value>
+  </data>
+  <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
+    <value>ucrBase</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Type" xml:space="preserve">
+    <value>instat.ucrButtons, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="ucrSelectorUseDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrSelectorUseDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectorUseDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 180</value>
+  </data>
+  <data name="ucrSelectorUseDate.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorUseDate.Name" xml:space="preserve">
+    <value>ucrSelectorUseDate</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorUseDate.Type" xml:space="preserve">
+    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorUseDate.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorUseDate.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Use Date</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>dlgUseDate</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ucrReceiverUseDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>254, 59</value>
+  </data>
+  <data name="ucrReceiverUseDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverUseDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>151, 20</value>
+  </data>
+  <data name="ucrReceiverUseDate.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverUseDate.Name" xml:space="preserve">
+    <value>ucrReceiverUseDate</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverUseDate.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverUseDate.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverUseDate.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
 </root>
