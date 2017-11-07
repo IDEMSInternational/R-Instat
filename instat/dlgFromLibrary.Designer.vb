@@ -38,6 +38,7 @@ Partial Class dlgFromLibrary
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgFromLibrary))
         Me.cmdLibraryCollection = New System.Windows.Forms.Button()
         Me.lstCollection = New System.Windows.Forms.ListView()
         Me.clmDatasets = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -54,128 +55,92 @@ Partial Class dlgFromLibrary
         '
         'cmdLibraryCollection
         '
-        Me.cmdLibraryCollection.Location = New System.Drawing.Point(157, 51)
+        resources.ApplyResources(Me.cmdLibraryCollection, "cmdLibraryCollection")
         Me.cmdLibraryCollection.Name = "cmdLibraryCollection"
-        Me.cmdLibraryCollection.Size = New System.Drawing.Size(117, 23)
-        Me.cmdLibraryCollection.TabIndex = 5
-        Me.cmdLibraryCollection.Text = "Browse"
         Me.cmdLibraryCollection.UseVisualStyleBackColor = True
         '
         'lstCollection
         '
         Me.lstCollection.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.clmDatasets, Me.clmDesc})
         Me.lstCollection.FullRowSelect = True
-        Me.lstCollection.Location = New System.Drawing.Point(10, 79)
+        resources.ApplyResources(Me.lstCollection, "lstCollection")
         Me.lstCollection.MultiSelect = False
         Me.lstCollection.Name = "lstCollection"
         Me.lstCollection.ShowGroups = False
         Me.lstCollection.ShowItemToolTips = True
-        Me.lstCollection.Size = New System.Drawing.Size(397, 173)
         Me.lstCollection.Sorting = System.Windows.Forms.SortOrder.Ascending
-        Me.lstCollection.TabIndex = 6
         Me.lstCollection.UseCompatibleStateImageBehavior = False
         Me.lstCollection.View = System.Windows.Forms.View.Details
         '
         'clmDatasets
         '
-        Me.clmDatasets.Text = "Data"
-        Me.clmDatasets.Width = 142
+        resources.ApplyResources(Me.clmDatasets, "clmDatasets")
         '
         'clmDesc
         '
-        Me.clmDesc.Text = "Description"
-        Me.clmDesc.Width = 266
+        resources.ApplyResources(Me.clmDesc, "clmDesc")
         '
         'lblFromPackage
         '
-        Me.lblFromPackage.AutoSize = True
-        Me.lblFromPackage.Location = New System.Drawing.Point(11, 56)
+        resources.ApplyResources(Me.lblFromPackage, "lblFromPackage")
         Me.lblFromPackage.Name = "lblFromPackage"
-        Me.lblFromPackage.Size = New System.Drawing.Size(79, 13)
-        Me.lblFromPackage.TabIndex = 3
-        Me.lblFromPackage.Text = "From Package:"
         '
         'cmdHelp
         '
-        Me.cmdHelp.Location = New System.Drawing.Point(332, 258)
+        resources.ApplyResources(Me.cmdHelp, "cmdHelp")
         Me.cmdHelp.Name = "cmdHelp"
-        Me.cmdHelp.Size = New System.Drawing.Size(75, 23)
-        Me.cmdHelp.TabIndex = 8
-        Me.cmdHelp.Text = "Help"
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
         'rdoDefaultDatasets
         '
-        Me.rdoDefaultDatasets.Appearance = System.Windows.Forms.Appearance.Button
+        resources.ApplyResources(Me.rdoDefaultDatasets, "rdoDefaultDatasets")
         Me.rdoDefaultDatasets.BackColor = System.Drawing.SystemColors.Control
         Me.rdoDefaultDatasets.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoDefaultDatasets.FlatAppearance.BorderSize = 2
         Me.rdoDefaultDatasets.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoDefaultDatasets.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoDefaultDatasets.Location = New System.Drawing.Point(71, 12)
         Me.rdoDefaultDatasets.Name = "rdoDefaultDatasets"
-        Me.rdoDefaultDatasets.Size = New System.Drawing.Size(145, 28)
-        Me.rdoDefaultDatasets.TabIndex = 1
         Me.rdoDefaultDatasets.TabStop = True
         Me.rdoDefaultDatasets.Tag = ""
-        Me.rdoDefaultDatasets.Text = "Load from R"
-        Me.rdoDefaultDatasets.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoDefaultDatasets.UseVisualStyleBackColor = False
         '
         'rdoInstatCollection
         '
-        Me.rdoInstatCollection.Appearance = System.Windows.Forms.Appearance.Button
+        resources.ApplyResources(Me.rdoInstatCollection, "rdoInstatCollection")
         Me.rdoInstatCollection.BackColor = System.Drawing.SystemColors.Control
         Me.rdoInstatCollection.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoInstatCollection.FlatAppearance.BorderSize = 2
         Me.rdoInstatCollection.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoInstatCollection.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoInstatCollection.Location = New System.Drawing.Point(214, 12)
         Me.rdoInstatCollection.Name = "rdoInstatCollection"
-        Me.rdoInstatCollection.Size = New System.Drawing.Size(145, 28)
-        Me.rdoInstatCollection.TabIndex = 2
         Me.rdoInstatCollection.TabStop = True
         Me.rdoInstatCollection.Tag = ""
-        Me.rdoInstatCollection.Text = "Load from Instat collection"
-        Me.rdoInstatCollection.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoInstatCollection.UseVisualStyleBackColor = False
         '
         'ucrInputPackages
         '
         Me.ucrInputPackages.AddQuotesIfUnrecognised = True
         Me.ucrInputPackages.IsReadOnly = False
-        Me.ucrInputPackages.Location = New System.Drawing.Point(92, 52)
+        resources.ApplyResources(Me.ucrInputPackages, "ucrInputPackages")
         Me.ucrInputPackages.Name = "ucrInputPackages"
-        Me.ucrInputPackages.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputPackages.TabIndex = 4
         '
         'ucrBase
         '
-        Me.ucrBase.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.ucrBase.Location = New System.Drawing.Point(10, 287)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(400, 59)
-        Me.ucrBase.TabIndex = 9
         '
         'ucrPnlOptions
         '
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(59, 2)
+        resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        Me.ucrPnlOptions.Size = New System.Drawing.Size(316, 44)
-        Me.ucrPnlOptions.TabIndex = 0
         '
         'ucrNewDataFrameName
         '
-        Me.ucrNewDataFrameName.Location = New System.Drawing.Point(10, 259)
+        resources.ApplyResources(Me.ucrNewDataFrameName, "ucrNewDataFrameName")
         Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
-        Me.ucrNewDataFrameName.Size = New System.Drawing.Size(264, 24)
-        Me.ucrNewDataFrameName.TabIndex = 7
         '
         'dlgFromLibrary
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(418, 348)
         Me.Controls.Add(Me.ucrNewDataFrameName)
         Me.Controls.Add(Me.rdoDefaultDatasets)
         Me.Controls.Add(Me.rdoInstatCollection)
@@ -190,8 +155,6 @@ Partial Class dlgFromLibrary
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgFromLibrary"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Open Dataset from Library"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
