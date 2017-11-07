@@ -22,6 +22,7 @@ Partial Class dlgClimaticBoxPlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgClimaticBoxPlot))
         Me.lblXVariable = New System.Windows.Forms.Label()
         Me.grpLayout = New System.Windows.Forms.GroupBox()
         Me.rdoDataThenYear = New System.Windows.Forms.RadioButton()
@@ -53,122 +54,79 @@ Partial Class dlgClimaticBoxPlot
         '
         'lblXVariable
         '
-        Me.lblXVariable.AutoSize = True
-        Me.lblXVariable.Location = New System.Drawing.Point(257, 207)
+        resources.ApplyResources(Me.lblXVariable, "lblXVariable")
         Me.lblXVariable.Name = "lblXVariable"
-        Me.lblXVariable.Size = New System.Drawing.Size(39, 13)
-        Me.lblXVariable.TabIndex = 6
-        Me.lblXVariable.Text = "X Axis:"
         '
         'grpLayout
         '
         Me.grpLayout.Controls.Add(Me.rdoDataThenYear)
         Me.grpLayout.Controls.Add(Me.rdoYearThenData)
         Me.grpLayout.Controls.Add(Me.ucrPnlLayoutOptions)
-        Me.grpLayout.Location = New System.Drawing.Point(10, 303)
+        resources.ApplyResources(Me.grpLayout, "grpLayout")
         Me.grpLayout.Name = "grpLayout"
-        Me.grpLayout.Size = New System.Drawing.Size(120, 61)
-        Me.grpLayout.TabIndex = 11
         Me.grpLayout.TabStop = False
-        Me.grpLayout.Text = "Layout"
         '
         'rdoDataThenYear
         '
-        Me.rdoDataThenYear.AutoSize = True
-        Me.rdoDataThenYear.Enabled = False
-        Me.rdoDataThenYear.Location = New System.Drawing.Point(6, 42)
+        resources.ApplyResources(Me.rdoDataThenYear, "rdoDataThenYear")
         Me.rdoDataThenYear.Name = "rdoDataThenYear"
-        Me.rdoDataThenYear.Size = New System.Drawing.Size(101, 17)
-        Me.rdoDataThenYear.TabIndex = 1
         Me.rdoDataThenYear.TabStop = True
-        Me.rdoDataThenYear.Text = "Data Then Year"
         Me.rdoDataThenYear.UseVisualStyleBackColor = True
         '
         'rdoYearThenData
         '
-        Me.rdoYearThenData.AutoSize = True
-        Me.rdoYearThenData.Enabled = False
-        Me.rdoYearThenData.Location = New System.Drawing.Point(6, 19)
+        resources.ApplyResources(Me.rdoYearThenData, "rdoYearThenData")
         Me.rdoYearThenData.Name = "rdoYearThenData"
-        Me.rdoYearThenData.Size = New System.Drawing.Size(101, 17)
-        Me.rdoYearThenData.TabIndex = 0
         Me.rdoYearThenData.TabStop = True
-        Me.rdoYearThenData.Text = "Year Then Data"
         Me.rdoYearThenData.UseVisualStyleBackColor = True
         '
         'ucrPnlLayoutOptions
         '
-        Me.ucrPnlLayoutOptions.Location = New System.Drawing.Point(4, 18)
+        resources.ApplyResources(Me.ucrPnlLayoutOptions, "ucrPnlLayoutOptions")
         Me.ucrPnlLayoutOptions.Name = "ucrPnlLayoutOptions"
-        Me.ucrPnlLayoutOptions.Size = New System.Drawing.Size(108, 39)
-        Me.ucrPnlLayoutOptions.TabIndex = 38
         '
         'cmdBoxPlotOptions
         '
-        Me.cmdBoxPlotOptions.Location = New System.Drawing.Point(10, 241)
+        resources.ApplyResources(Me.cmdBoxPlotOptions, "cmdBoxPlotOptions")
         Me.cmdBoxPlotOptions.Name = "cmdBoxPlotOptions"
-        Me.cmdBoxPlotOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdBoxPlotOptions.TabIndex = 9
         Me.cmdBoxPlotOptions.Tag = "Boxplot_Options"
-        Me.cmdBoxPlotOptions.Text = "Boxplot Options"
         Me.cmdBoxPlotOptions.UseVisualStyleBackColor = True
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(10, 272)
+        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdOptions.TabIndex = 10
         Me.cmdOptions.Tag = "Options"
-        Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'rdoViolin
         '
-        Me.rdoViolin.Appearance = System.Windows.Forms.Appearance.Button
+        resources.ApplyResources(Me.rdoViolin, "rdoViolin")
         Me.rdoViolin.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoViolin.FlatAppearance.BorderSize = 2
         Me.rdoViolin.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoViolin.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoViolin.Location = New System.Drawing.Point(257, 12)
         Me.rdoViolin.Name = "rdoViolin"
-        Me.rdoViolin.Size = New System.Drawing.Size(98, 27)
-        Me.rdoViolin.TabIndex = 3
         Me.rdoViolin.TabStop = True
-        Me.rdoViolin.Text = "Violin Plot"
-        Me.rdoViolin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoViolin.UseVisualStyleBackColor = True
         '
         'rdoJitter
         '
-        Me.rdoJitter.Appearance = System.Windows.Forms.Appearance.Button
+        resources.ApplyResources(Me.rdoJitter, "rdoJitter")
         Me.rdoJitter.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoJitter.FlatAppearance.BorderSize = 2
         Me.rdoJitter.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoJitter.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoJitter.Location = New System.Drawing.Point(161, 12)
         Me.rdoJitter.Name = "rdoJitter"
-        Me.rdoJitter.Size = New System.Drawing.Size(98, 27)
-        Me.rdoJitter.TabIndex = 2
         Me.rdoJitter.TabStop = True
-        Me.rdoJitter.Text = "Jitter Plot"
-        Me.rdoJitter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoJitter.UseVisualStyleBackColor = True
         '
         'rdoBoxplot
         '
-        Me.rdoBoxplot.Appearance = System.Windows.Forms.Appearance.Button
+        resources.ApplyResources(Me.rdoBoxplot, "rdoBoxplot")
         Me.rdoBoxplot.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoBoxplot.FlatAppearance.BorderSize = 2
         Me.rdoBoxplot.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoBoxplot.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoBoxplot.Location = New System.Drawing.Point(65, 12)
         Me.rdoBoxplot.Name = "rdoBoxplot"
-        Me.rdoBoxplot.Size = New System.Drawing.Size(98, 27)
-        Me.rdoBoxplot.TabIndex = 1
         Me.rdoBoxplot.TabStop = True
-        Me.rdoBoxplot.Text = "Boxplot"
-        Me.rdoBoxplot.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoBoxplot.UseVisualStyleBackColor = True
         '
         'grpFacets
@@ -178,147 +136,107 @@ Partial Class dlgClimaticBoxPlot
         Me.grpFacets.Controls.Add(Me.ucrChkMargins)
         Me.grpFacets.Controls.Add(Me.lblSecondFacet)
         Me.grpFacets.Controls.Add(Me.lblFacetBy)
-        Me.grpFacets.Location = New System.Drawing.Point(245, 252)
+        resources.ApplyResources(Me.grpFacets, "grpFacets")
         Me.grpFacets.Name = "grpFacets"
-        Me.grpFacets.Size = New System.Drawing.Size(149, 138)
-        Me.grpFacets.TabIndex = 8
         Me.grpFacets.TabStop = False
-        Me.grpFacets.Text = "Facets"
         '
         'ucrReceiver2ndFacet
         '
         Me.ucrReceiver2ndFacet.frmParent = Me
-        Me.ucrReceiver2ndFacet.Location = New System.Drawing.Point(13, 81)
-        Me.ucrReceiver2ndFacet.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiver2ndFacet, "ucrReceiver2ndFacet")
         Me.ucrReceiver2ndFacet.Name = "ucrReceiver2ndFacet"
         Me.ucrReceiver2ndFacet.Selector = Nothing
-        Me.ucrReceiver2ndFacet.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiver2ndFacet.strNcFilePath = ""
-        Me.ucrReceiver2ndFacet.TabIndex = 3
         Me.ucrReceiver2ndFacet.ucrSelector = Nothing
         '
         'ucrReceiverFacetBy
         '
         Me.ucrReceiverFacetBy.frmParent = Me
-        Me.ucrReceiverFacetBy.Location = New System.Drawing.Point(13, 36)
-        Me.ucrReceiverFacetBy.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverFacetBy, "ucrReceiverFacetBy")
         Me.ucrReceiverFacetBy.Name = "ucrReceiverFacetBy"
         Me.ucrReceiverFacetBy.Selector = Nothing
-        Me.ucrReceiverFacetBy.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverFacetBy.strNcFilePath = ""
-        Me.ucrReceiverFacetBy.TabIndex = 1
         Me.ucrReceiverFacetBy.ucrSelector = Nothing
         '
         'ucrChkMargins
         '
         Me.ucrChkMargins.Checked = False
-        Me.ucrChkMargins.Location = New System.Drawing.Point(13, 112)
+        resources.ApplyResources(Me.ucrChkMargins, "ucrChkMargins")
         Me.ucrChkMargins.Name = "ucrChkMargins"
-        Me.ucrChkMargins.Size = New System.Drawing.Size(130, 20)
-        Me.ucrChkMargins.TabIndex = 4
         '
         'lblSecondFacet
         '
-        Me.lblSecondFacet.AutoSize = True
-        Me.lblSecondFacet.Location = New System.Drawing.Point(13, 66)
+        resources.ApplyResources(Me.lblSecondFacet, "lblSecondFacet")
         Me.lblSecondFacet.Name = "lblSecondFacet"
-        Me.lblSecondFacet.Size = New System.Drawing.Size(77, 13)
-        Me.lblSecondFacet.TabIndex = 2
-        Me.lblSecondFacet.Text = "Second Facet:"
         '
         'lblFacetBy
         '
-        Me.lblFacetBy.AutoSize = True
-        Me.lblFacetBy.Location = New System.Drawing.Point(13, 21)
+        resources.ApplyResources(Me.lblFacetBy, "lblFacetBy")
         Me.lblFacetBy.Name = "lblFacetBy"
-        Me.lblFacetBy.Size = New System.Drawing.Size(52, 13)
-        Me.lblFacetBy.TabIndex = 0
-        Me.lblFacetBy.Text = "Facet By:"
         '
         'ucrChkVerticalXTickMarkers
         '
         Me.ucrChkVerticalXTickMarkers.Checked = False
-        Me.ucrChkVerticalXTickMarkers.Location = New System.Drawing.Point(10, 422)
+        resources.ApplyResources(Me.ucrChkVerticalXTickMarkers, "ucrChkVerticalXTickMarkers")
         Me.ucrChkVerticalXTickMarkers.Name = "ucrChkVerticalXTickMarkers"
-        Me.ucrChkVerticalXTickMarkers.Size = New System.Drawing.Size(210, 20)
-        Me.ucrChkVerticalXTickMarkers.TabIndex = 14
         '
         'ucrVariablesAsFactorForClimaticBoxplot
         '
         Me.ucrVariablesAsFactorForClimaticBoxplot.frmParent = Me
-        Me.ucrVariablesAsFactorForClimaticBoxplot.Location = New System.Drawing.Point(257, 76)
+        resources.ApplyResources(Me.ucrVariablesAsFactorForClimaticBoxplot, "ucrVariablesAsFactorForClimaticBoxplot")
         Me.ucrVariablesAsFactorForClimaticBoxplot.Name = "ucrVariablesAsFactorForClimaticBoxplot"
         Me.ucrVariablesAsFactorForClimaticBoxplot.Selector = Nothing
-        Me.ucrVariablesAsFactorForClimaticBoxplot.Size = New System.Drawing.Size(120, 130)
         Me.ucrVariablesAsFactorForClimaticBoxplot.strNcFilePath = ""
-        Me.ucrVariablesAsFactorForClimaticBoxplot.TabIndex = 5
         Me.ucrVariablesAsFactorForClimaticBoxplot.ucrSelector = Nothing
         Me.ucrVariablesAsFactorForClimaticBoxplot.ucrVariableSelector = Nothing
         '
         'ucrPnlPlots
         '
-        Me.ucrPnlPlots.Location = New System.Drawing.Point(50, 8)
+        resources.ApplyResources(Me.ucrPnlPlots, "ucrPnlPlots")
         Me.ucrPnlPlots.Name = "ucrPnlPlots"
-        Me.ucrPnlPlots.Size = New System.Drawing.Size(322, 35)
-        Me.ucrPnlPlots.TabIndex = 0
         '
         'ucrReceiverXVariable
         '
         Me.ucrReceiverXVariable.frmParent = Me
-        Me.ucrReceiverXVariable.Location = New System.Drawing.Point(257, 222)
-        Me.ucrReceiverXVariable.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverXVariable, "ucrReceiverXVariable")
         Me.ucrReceiverXVariable.Name = "ucrReceiverXVariable"
         Me.ucrReceiverXVariable.Selector = Nothing
-        Me.ucrReceiverXVariable.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverXVariable.strNcFilePath = ""
-        Me.ucrReceiverXVariable.TabIndex = 7
         Me.ucrReceiverXVariable.ucrSelector = Nothing
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 474)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
-        Me.ucrBase.TabIndex = 16
         '
         'ucrSavePlot
         '
-        Me.ucrSavePlot.Location = New System.Drawing.Point(10, 448)
+        resources.ApplyResources(Me.ucrSavePlot, "ucrSavePlot")
         Me.ucrSavePlot.Name = "ucrSavePlot"
-        Me.ucrSavePlot.Size = New System.Drawing.Size(255, 24)
-        Me.ucrSavePlot.TabIndex = 15
         '
         'ucrChkHorizontalBoxplot
         '
         Me.ucrChkHorizontalBoxplot.Checked = False
-        Me.ucrChkHorizontalBoxplot.Location = New System.Drawing.Point(10, 396)
+        resources.ApplyResources(Me.ucrChkHorizontalBoxplot, "ucrChkHorizontalBoxplot")
         Me.ucrChkHorizontalBoxplot.Name = "ucrChkHorizontalBoxplot"
-        Me.ucrChkHorizontalBoxplot.Size = New System.Drawing.Size(210, 20)
-        Me.ucrChkHorizontalBoxplot.TabIndex = 13
         '
         'ucrChkVarWidth
         '
         Me.ucrChkVarWidth.Checked = False
-        Me.ucrChkVarWidth.Location = New System.Drawing.Point(10, 370)
+        resources.ApplyResources(Me.ucrChkVarWidth, "ucrChkVarWidth")
         Me.ucrChkVarWidth.Name = "ucrChkVarWidth"
-        Me.ucrChkVarWidth.Size = New System.Drawing.Size(210, 20)
-        Me.ucrChkVarWidth.TabIndex = 12
         '
         'ucrSelectorClimaticBoxPlot
         '
         Me.ucrSelectorClimaticBoxPlot.bShowHiddenColumns = False
         Me.ucrSelectorClimaticBoxPlot.bUseCurrentFilter = True
-        Me.ucrSelectorClimaticBoxPlot.Location = New System.Drawing.Point(10, 56)
-        Me.ucrSelectorClimaticBoxPlot.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorClimaticBoxPlot, "ucrSelectorClimaticBoxPlot")
         Me.ucrSelectorClimaticBoxPlot.Name = "ucrSelectorClimaticBoxPlot"
-        Me.ucrSelectorClimaticBoxPlot.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorClimaticBoxPlot.TabIndex = 4
         '
         'dlgClimaticBoxPlot
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 530)
         Me.Controls.Add(Me.ucrChkVerticalXTickMarkers)
         Me.Controls.Add(Me.grpFacets)
         Me.Controls.Add(Me.ucrVariablesAsFactorForClimaticBoxplot)
@@ -340,8 +258,6 @@ Partial Class dlgClimaticBoxPlot
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgClimaticBoxPlot"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Climatic Boxplot"
         Me.grpLayout.ResumeLayout(False)
         Me.grpLayout.PerformLayout()
         Me.grpFacets.ResumeLayout(False)
