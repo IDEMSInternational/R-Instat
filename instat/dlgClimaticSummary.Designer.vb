@@ -38,6 +38,7 @@ Partial Class dlgClimaticSummary
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgClimaticSummary))
         Me.rdoAnnual = New System.Windows.Forms.RadioButton()
         Me.rdoAnnualVariable = New System.Windows.Forms.RadioButton()
         Me.rdoWithinYear = New System.Windows.Forms.RadioButton()
@@ -74,337 +75,231 @@ Partial Class dlgClimaticSummary
         '
         'rdoAnnual
         '
-        Me.rdoAnnual.Appearance = System.Windows.Forms.Appearance.Button
+        resources.ApplyResources(Me.rdoAnnual, "rdoAnnual")
         Me.rdoAnnual.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoAnnual.FlatAppearance.BorderSize = 2
         Me.rdoAnnual.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoAnnual.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoAnnual.Location = New System.Drawing.Point(36, 14)
         Me.rdoAnnual.Name = "rdoAnnual"
-        Me.rdoAnnual.Size = New System.Drawing.Size(118, 27)
-        Me.rdoAnnual.TabIndex = 1
         Me.rdoAnnual.TabStop = True
-        Me.rdoAnnual.Text = "Annual"
-        Me.rdoAnnual.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoAnnual.UseVisualStyleBackColor = True
         '
         'rdoAnnualVariable
         '
-        Me.rdoAnnualVariable.Appearance = System.Windows.Forms.Appearance.Button
+        resources.ApplyResources(Me.rdoAnnualVariable, "rdoAnnualVariable")
         Me.rdoAnnualVariable.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoAnnualVariable.FlatAppearance.BorderSize = 2
         Me.rdoAnnualVariable.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoAnnualVariable.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoAnnualVariable.Location = New System.Drawing.Point(268, 14)
         Me.rdoAnnualVariable.Name = "rdoAnnualVariable"
-        Me.rdoAnnualVariable.Size = New System.Drawing.Size(118, 27)
-        Me.rdoAnnualVariable.TabIndex = 3
         Me.rdoAnnualVariable.TabStop = True
-        Me.rdoAnnualVariable.Text = "Annual Variable"
-        Me.rdoAnnualVariable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoAnnualVariable.UseVisualStyleBackColor = True
         '
         'rdoWithinYear
         '
-        Me.rdoWithinYear.Appearance = System.Windows.Forms.Appearance.Button
+        resources.ApplyResources(Me.rdoWithinYear, "rdoWithinYear")
         Me.rdoWithinYear.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoWithinYear.FlatAppearance.BorderSize = 2
         Me.rdoWithinYear.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoWithinYear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoWithinYear.Location = New System.Drawing.Point(152, 14)
         Me.rdoWithinYear.Name = "rdoWithinYear"
-        Me.rdoWithinYear.Size = New System.Drawing.Size(118, 27)
-        Me.rdoWithinYear.TabIndex = 2
         Me.rdoWithinYear.TabStop = True
-        Me.rdoWithinYear.Text = "Within Year"
-        Me.rdoWithinYear.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoWithinYear.UseVisualStyleBackColor = True
         '
         'lblStation
         '
-        Me.lblStation.AutoSize = True
-        Me.lblStation.Location = New System.Drawing.Point(259, 69)
+        resources.ApplyResources(Me.lblStation, "lblStation")
         Me.lblStation.Name = "lblStation"
-        Me.lblStation.Size = New System.Drawing.Size(43, 13)
-        Me.lblStation.TabIndex = 5
-        Me.lblStation.Text = "Station:"
         '
         'lblDate
         '
-        Me.lblDate.AutoSize = True
-        Me.lblDate.Location = New System.Drawing.Point(259, 110)
+        resources.ApplyResources(Me.lblDate, "lblDate")
         Me.lblDate.Name = "lblDate"
-        Me.lblDate.Size = New System.Drawing.Size(33, 13)
-        Me.lblDate.TabIndex = 7
-        Me.lblDate.Text = "Date:"
         '
         'lblYear
         '
-        Me.lblYear.AutoSize = True
-        Me.lblYear.Location = New System.Drawing.Point(259, 191)
+        resources.ApplyResources(Me.lblYear, "lblYear")
         Me.lblYear.Name = "lblYear"
-        Me.lblYear.Size = New System.Drawing.Size(32, 13)
-        Me.lblYear.TabIndex = 11
-        Me.lblYear.Text = "Year:"
         '
         'lblDay
         '
-        Me.lblDay.AutoSize = True
-        Me.lblDay.Location = New System.Drawing.Point(259, 232)
+        resources.ApplyResources(Me.lblDay, "lblDay")
         Me.lblDay.Name = "lblDay"
-        Me.lblDay.Size = New System.Drawing.Size(66, 13)
-        Me.lblDay.TabIndex = 13
-        Me.lblDay.Text = "Day of Year:"
         '
         'lblElement
         '
-        Me.lblElement.AutoSize = True
-        Me.lblElement.Location = New System.Drawing.Point(259, 150)
+        resources.ApplyResources(Me.lblElement, "lblElement")
         Me.lblElement.Name = "lblElement"
-        Me.lblElement.Size = New System.Drawing.Size(33, 13)
-        Me.lblElement.TabIndex = 9
-        Me.lblElement.Text = "Data:"
         '
         'lblTo
         '
-        Me.lblTo.AutoSize = True
-        Me.lblTo.Location = New System.Drawing.Point(159, 341)
+        resources.ApplyResources(Me.lblTo, "lblTo")
         Me.lblTo.Name = "lblTo"
-        Me.lblTo.Size = New System.Drawing.Size(23, 13)
-        Me.lblTo.TabIndex = 33
-        Me.lblTo.Text = "To:"
         '
         'lblFrom
         '
-        Me.lblFrom.AutoSize = True
-        Me.lblFrom.Location = New System.Drawing.Point(11, 340)
+        resources.ApplyResources(Me.lblFrom, "lblFrom")
         Me.lblFrom.Name = "lblFrom"
-        Me.lblFrom.Size = New System.Drawing.Size(33, 13)
-        Me.lblFrom.TabIndex = 34
-        Me.lblFrom.Text = "From:"
         '
         'lblReceiverTo
         '
-        Me.lblReceiverTo.AutoSize = True
-        Me.lblReceiverTo.Location = New System.Drawing.Point(159, 340)
+        resources.ApplyResources(Me.lblReceiverTo, "lblReceiverTo")
         Me.lblReceiverTo.Name = "lblReceiverTo"
-        Me.lblReceiverTo.Size = New System.Drawing.Size(23, 13)
-        Me.lblReceiverTo.TabIndex = 21
-        Me.lblReceiverTo.Text = "To:"
         '
         'lblReceiverFrom
         '
-        Me.lblReceiverFrom.AutoSize = True
-        Me.lblReceiverFrom.Location = New System.Drawing.Point(11, 340)
+        resources.ApplyResources(Me.lblReceiverFrom, "lblReceiverFrom")
         Me.lblReceiverFrom.Name = "lblReceiverFrom"
-        Me.lblReceiverFrom.Size = New System.Drawing.Size(33, 13)
-        Me.lblReceiverFrom.TabIndex = 18
-        Me.lblReceiverFrom.Text = "From:"
         '
         'cmdSummary
         '
-        Me.cmdSummary.Location = New System.Drawing.Point(302, 334)
+        resources.ApplyResources(Me.cmdSummary, "cmdSummary")
         Me.cmdSummary.Name = "cmdSummary"
-        Me.cmdSummary.Size = New System.Drawing.Size(105, 26)
-        Me.cmdSummary.TabIndex = 23
         Me.cmdSummary.Tag = "Summaries"
-        Me.cmdSummary.Text = "Summaries"
         Me.cmdSummary.UseVisualStyleBackColor = True
         '
         'lblWithinYear
         '
-        Me.lblWithinYear.AutoSize = True
-        Me.lblWithinYear.Location = New System.Drawing.Point(259, 274)
+        resources.ApplyResources(Me.lblWithinYear, "lblWithinYear")
         Me.lblWithinYear.Name = "lblWithinYear"
-        Me.lblWithinYear.Size = New System.Drawing.Size(65, 13)
-        Me.lblWithinYear.TabIndex = 15
-        Me.lblWithinYear.Text = "Within Year:"
         '
         'ucrSelectorVariable
         '
         Me.ucrSelectorVariable.bShowHiddenColumns = False
         Me.ucrSelectorVariable.bUseCurrentFilter = True
-        Me.ucrSelectorVariable.Location = New System.Drawing.Point(9, 48)
-        Me.ucrSelectorVariable.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorVariable, "ucrSelectorVariable")
         Me.ucrSelectorVariable.Name = "ucrSelectorVariable"
-        Me.ucrSelectorVariable.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorVariable.TabIndex = 4
         '
         'ucrReceiverWithinYear
         '
         Me.ucrReceiverWithinYear.frmParent = Me
-        Me.ucrReceiverWithinYear.Location = New System.Drawing.Point(259, 289)
-        Me.ucrReceiverWithinYear.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverWithinYear, "ucrReceiverWithinYear")
         Me.ucrReceiverWithinYear.Name = "ucrReceiverWithinYear"
         Me.ucrReceiverWithinYear.Selector = Nothing
-        Me.ucrReceiverWithinYear.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverWithinYear.strNcFilePath = ""
-        Me.ucrReceiverWithinYear.TabIndex = 16
         Me.ucrReceiverWithinYear.ucrSelector = Nothing
         '
         'ucrReceiverFrom
         '
         Me.ucrReceiverFrom.frmParent = Me
-        Me.ucrReceiverFrom.Location = New System.Drawing.Point(47, 337)
-        Me.ucrReceiverFrom.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverFrom, "ucrReceiverFrom")
         Me.ucrReceiverFrom.Name = "ucrReceiverFrom"
         Me.ucrReceiverFrom.Selector = Nothing
-        Me.ucrReceiverFrom.Size = New System.Drawing.Size(107, 20)
         Me.ucrReceiverFrom.strNcFilePath = ""
-        Me.ucrReceiverFrom.TabIndex = 19
         Me.ucrReceiverFrom.ucrSelector = Nothing
         '
         'ucrReceiverTo
         '
         Me.ucrReceiverTo.frmParent = Me
-        Me.ucrReceiverTo.Location = New System.Drawing.Point(185, 337)
-        Me.ucrReceiverTo.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverTo, "ucrReceiverTo")
         Me.ucrReceiverTo.Name = "ucrReceiverTo"
         Me.ucrReceiverTo.Selector = Nothing
-        Me.ucrReceiverTo.Size = New System.Drawing.Size(106, 20)
         Me.ucrReceiverTo.strNcFilePath = ""
-        Me.ucrReceiverTo.TabIndex = 22
         Me.ucrReceiverTo.ucrSelector = Nothing
         '
         'ucrNudTo
         '
         Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTo.Location = New System.Drawing.Point(185, 337)
+        resources.ApplyResources(Me.ucrNudTo, "ucrNudTo")
         Me.ucrNudTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTo.Name = "ucrNudTo"
-        Me.ucrNudTo.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudTo.TabIndex = 32
         Me.ucrNudTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudFrom
         '
         Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudFrom.Location = New System.Drawing.Point(47, 337)
+        resources.ApplyResources(Me.ucrNudFrom, "ucrNudFrom")
         Me.ucrNudFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudFrom.Name = "ucrNudFrom"
-        Me.ucrNudFrom.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudFrom.TabIndex = 31
         Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrReceiverElement
         '
         Me.ucrReceiverElement.frmParent = Me
-        Me.ucrReceiverElement.Location = New System.Drawing.Point(259, 165)
-        Me.ucrReceiverElement.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverElement, "ucrReceiverElement")
         Me.ucrReceiverElement.Name = "ucrReceiverElement"
         Me.ucrReceiverElement.Selector = Nothing
-        Me.ucrReceiverElement.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverElement.strNcFilePath = ""
-        Me.ucrReceiverElement.TabIndex = 10
         Me.ucrReceiverElement.ucrSelector = Nothing
         '
         'ucrReceiverDOY
         '
         Me.ucrReceiverDOY.frmParent = Me
-        Me.ucrReceiverDOY.Location = New System.Drawing.Point(259, 247)
-        Me.ucrReceiverDOY.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverDOY, "ucrReceiverDOY")
         Me.ucrReceiverDOY.Name = "ucrReceiverDOY"
         Me.ucrReceiverDOY.Selector = Nothing
-        Me.ucrReceiverDOY.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverDOY.strNcFilePath = ""
-        Me.ucrReceiverDOY.TabIndex = 14
         Me.ucrReceiverDOY.ucrSelector = Nothing
         '
         'ucrReceiverYear
         '
         Me.ucrReceiverYear.frmParent = Me
-        Me.ucrReceiverYear.Location = New System.Drawing.Point(259, 206)
-        Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverYear, "ucrReceiverYear")
         Me.ucrReceiverYear.Name = "ucrReceiverYear"
         Me.ucrReceiverYear.Selector = Nothing
-        Me.ucrReceiverYear.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverYear.strNcFilePath = ""
-        Me.ucrReceiverYear.TabIndex = 12
         Me.ucrReceiverYear.ucrSelector = Nothing
         '
         'ucrReceiverDate
         '
         Me.ucrReceiverDate.frmParent = Me
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(259, 125)
-        Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverDate, "ucrReceiverDate")
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing
-        Me.ucrReceiverDate.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverDate.strNcFilePath = ""
-        Me.ucrReceiverDate.TabIndex = 8
         Me.ucrReceiverDate.ucrSelector = Nothing
         '
         'ucrReceiverStation
         '
         Me.ucrReceiverStation.frmParent = Me
-        Me.ucrReceiverStation.Location = New System.Drawing.Point(259, 84)
-        Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverStation, "ucrReceiverStation")
         Me.ucrReceiverStation.Name = "ucrReceiverStation"
         Me.ucrReceiverStation.Selector = Nothing
-        Me.ucrReceiverStation.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverStation.strNcFilePath = ""
-        Me.ucrReceiverStation.TabIndex = 6
         Me.ucrReceiverStation.ucrSelector = Nothing
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 366)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(399, 52)
-        Me.ucrBase.TabIndex = 24
         '
         'ucrPnlAnnualWithin
         '
-        Me.ucrPnlAnnualWithin.Location = New System.Drawing.Point(18, 10)
+        resources.ApplyResources(Me.ucrPnlAnnualWithin, "ucrPnlAnnualWithin")
         Me.ucrPnlAnnualWithin.Name = "ucrPnlAnnualWithin"
-        Me.ucrPnlAnnualWithin.Size = New System.Drawing.Size(381, 35)
-        Me.ucrPnlAnnualWithin.TabIndex = 0
         '
         'grpOptions
         '
         Me.grpOptions.Controls.Add(Me.ucrChkStoreResults)
         Me.grpOptions.Controls.Add(Me.ucrChkPrintOutput)
         Me.grpOptions.Controls.Add(Me.ucrChkDropUnusedLevels)
-        Me.grpOptions.Location = New System.Drawing.Point(9, 233)
+        resources.ApplyResources(Me.grpOptions, "grpOptions")
         Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.Size = New System.Drawing.Size(160, 94)
-        Me.grpOptions.TabIndex = 17
         Me.grpOptions.TabStop = False
-        Me.grpOptions.Text = "Options"
         '
         'ucrChkStoreResults
         '
         Me.ucrChkStoreResults.Checked = False
-        Me.ucrChkStoreResults.Location = New System.Drawing.Point(6, 17)
+        resources.ApplyResources(Me.ucrChkStoreResults, "ucrChkStoreResults")
         Me.ucrChkStoreResults.Name = "ucrChkStoreResults"
-        Me.ucrChkStoreResults.Size = New System.Drawing.Size(148, 20)
-        Me.ucrChkStoreResults.TabIndex = 0
         '
         'ucrChkPrintOutput
         '
         Me.ucrChkPrintOutput.Checked = False
-        Me.ucrChkPrintOutput.Location = New System.Drawing.Point(6, 42)
+        resources.ApplyResources(Me.ucrChkPrintOutput, "ucrChkPrintOutput")
         Me.ucrChkPrintOutput.Name = "ucrChkPrintOutput"
-        Me.ucrChkPrintOutput.Size = New System.Drawing.Size(148, 20)
-        Me.ucrChkPrintOutput.TabIndex = 1
         '
         'ucrChkDropUnusedLevels
         '
         Me.ucrChkDropUnusedLevels.Checked = False
-        Me.ucrChkDropUnusedLevels.Location = New System.Drawing.Point(6, 67)
+        resources.ApplyResources(Me.ucrChkDropUnusedLevels, "ucrChkDropUnusedLevels")
         Me.ucrChkDropUnusedLevels.Name = "ucrChkDropUnusedLevels"
-        Me.ucrChkDropUnusedLevels.Size = New System.Drawing.Size(148, 20)
-        Me.ucrChkDropUnusedLevels.TabIndex = 2
         '
         'dlgClimaticSummary
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(415, 423)
         Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.ucrSelectorVariable)
         Me.Controls.Add(Me.ucrReceiverWithinYear)
@@ -437,8 +332,6 @@ Partial Class dlgClimaticSummary
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgClimaticSummary"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Climatic Summary"
         Me.grpOptions.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()

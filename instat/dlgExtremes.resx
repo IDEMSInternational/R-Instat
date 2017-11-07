@@ -117,4 +117,523 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 290</value>
+  </data>
+  <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>405, 51</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
+    <value>ucrBase</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Type" xml:space="preserve">
+    <value>instat.ucrButtons, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="ucrAddRemove.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 24</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrAddRemove.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrAddRemove.Size" type="System.Drawing.Size, System.Drawing">
+    <value>206, 127</value>
+  </data>
+  <data name="ucrAddRemove.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrAddRemove.Name" xml:space="preserve">
+    <value>ucrAddRemove</value>
+  </data>
+  <data name="&gt;&gt;ucrAddRemove.Type" xml:space="preserve">
+    <value>instat.ucrSelectorAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrAddRemove.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrAddRemove.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>416, 353</value>
+  </data>
+  <data name="UcrDialogDisabled1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>80, 140</value>
+  </data>
+  <data name="UcrDialogDisabled1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>240, 50</value>
+  </data>
+  <data name="UcrDialogDisabled1.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;UcrDialogDisabled1.Name" xml:space="preserve">
+    <value>UcrDialogDisabled1</value>
+  </data>
+  <data name="&gt;&gt;UcrDialogDisabled1.Type" xml:space="preserve">
+    <value>instat.ucrDialogDisabled, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;UcrDialogDisabled1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;UcrDialogDisabled1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="chkProbabilityPlot.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkProbabilityPlot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 168</value>
+  </data>
+  <data name="chkProbabilityPlot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 17</value>
+  </data>
+  <data name="chkProbabilityPlot.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="chkProbabilityPlot.Text" xml:space="preserve">
+    <value>Probability plot</value>
+  </data>
+  <data name="&gt;&gt;chkProbabilityPlot.Name" xml:space="preserve">
+    <value>chkProbabilityPlot</value>
+  </data>
+  <data name="&gt;&gt;chkProbabilityPlot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkProbabilityPlot.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;chkProbabilityPlot.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="txtAnd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>267, 123</value>
+  </data>
+  <data name="txtAnd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>33, 20</value>
+  </data>
+  <data name="txtAnd.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;txtAnd.Name" xml:space="preserve">
+    <value>txtAnd</value>
+  </data>
+  <data name="&gt;&gt;txtAnd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtAnd.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtAnd.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblAnd.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblAnd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>234, 124</value>
+  </data>
+  <data name="lblAnd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 13</value>
+  </data>
+  <data name="lblAnd.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="lblAnd.Text" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="&gt;&gt;lblAnd.Name" xml:space="preserve">
+    <value>lblAnd</value>
+  </data>
+  <data name="&gt;&gt;lblAnd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblAnd.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblAnd.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="txtBetween.Location" type="System.Drawing.Point, System.Drawing">
+    <value>267, 97</value>
+  </data>
+  <data name="txtBetween.Size" type="System.Drawing.Size, System.Drawing">
+    <value>33, 20</value>
+  </data>
+  <data name="txtBetween.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;txtBetween.Name" xml:space="preserve">
+    <value>txtBetween</value>
+  </data>
+  <data name="&gt;&gt;txtBetween.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtBetween.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtBetween.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lblBetween.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblBetween.Location" type="System.Drawing.Point, System.Drawing">
+    <value>232, 101</value>
+  </data>
+  <data name="lblBetween.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 13</value>
+  </data>
+  <data name="lblBetween.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="lblBetween.Text" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="lblBetween.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="&gt;&gt;lblBetween.Name" xml:space="preserve">
+    <value>lblBetween</value>
+  </data>
+  <data name="&gt;&gt;lblBetween.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblBetween.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblBetween.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="chkRestrictValues.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkRestrictValues.Location" type="System.Drawing.Point, System.Drawing">
+    <value>224, 77</value>
+  </data>
+  <data name="chkRestrictValues.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 17</value>
+  </data>
+  <data name="chkRestrictValues.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="chkRestrictValues.Text" xml:space="preserve">
+    <value>Restrict Data Values</value>
+  </data>
+  <data name="&gt;&gt;chkRestrictValues.Name" xml:space="preserve">
+    <value>chkRestrictValues</value>
+  </data>
+  <data name="&gt;&gt;chkRestrictValues.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkRestrictValues.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;chkRestrictValues.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="cboMethodOfMoments.Location" type="System.Drawing.Point, System.Drawing">
+    <value>147, 59</value>
+  </data>
+  <data name="cboMethodOfMoments.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 21</value>
+  </data>
+  <data name="cboMethodOfMoments.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;cboMethodOfMoments.Name" xml:space="preserve">
+    <value>cboMethodOfMoments</value>
+  </data>
+  <data name="&gt;&gt;cboMethodOfMoments.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cboMethodOfMoments.Parent" xml:space="preserve">
+    <value>grpEstimationMethods</value>
+  </data>
+  <data name="&gt;&gt;cboMethodOfMoments.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cboMaximumLikelihood.Location" type="System.Drawing.Point, System.Drawing">
+    <value>147, 32</value>
+  </data>
+  <data name="cboMaximumLikelihood.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 21</value>
+  </data>
+  <data name="cboMaximumLikelihood.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;cboMaximumLikelihood.Name" xml:space="preserve">
+    <value>cboMaximumLikelihood</value>
+  </data>
+  <data name="&gt;&gt;cboMaximumLikelihood.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cboMaximumLikelihood.Parent" xml:space="preserve">
+    <value>grpEstimationMethods</value>
+  </data>
+  <data name="&gt;&gt;cboMaximumLikelihood.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblSaveEstimates.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSaveEstimates.Location" type="System.Drawing.Point, System.Drawing">
+    <value>143, 16</value>
+  </data>
+  <data name="lblSaveEstimates.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 13</value>
+  </data>
+  <data name="lblSaveEstimates.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblSaveEstimates.Text" xml:space="preserve">
+    <value>Save Estimates in:</value>
+  </data>
+  <data name="&gt;&gt;lblSaveEstimates.Name" xml:space="preserve">
+    <value>lblSaveEstimates</value>
+  </data>
+  <data name="&gt;&gt;lblSaveEstimates.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSaveEstimates.Parent" xml:space="preserve">
+    <value>grpEstimationMethods</value>
+  </data>
+  <data name="&gt;&gt;lblSaveEstimates.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="chkMethodOfMoments.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkMethodOfMoments.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 62</value>
+  </data>
+  <data name="chkMethodOfMoments.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 17</value>
+  </data>
+  <data name="chkMethodOfMoments.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="chkMethodOfMoments.Text" xml:space="preserve">
+    <value>Method of Moments</value>
+  </data>
+  <data name="&gt;&gt;chkMethodOfMoments.Name" xml:space="preserve">
+    <value>chkMethodOfMoments</value>
+  </data>
+  <data name="&gt;&gt;chkMethodOfMoments.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkMethodOfMoments.Parent" xml:space="preserve">
+    <value>grpEstimationMethods</value>
+  </data>
+  <data name="&gt;&gt;chkMethodOfMoments.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="chkMaximumLikelihood.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkMaximumLikelihood.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 34</value>
+  </data>
+  <data name="chkMaximumLikelihood.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 17</value>
+  </data>
+  <data name="chkMaximumLikelihood.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="chkMaximumLikelihood.Text" xml:space="preserve">
+    <value>Maximum Likelihood</value>
+  </data>
+  <data name="&gt;&gt;chkMaximumLikelihood.Name" xml:space="preserve">
+    <value>chkMaximumLikelihood</value>
+  </data>
+  <data name="&gt;&gt;chkMaximumLikelihood.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkMaximumLikelihood.Parent" xml:space="preserve">
+    <value>grpEstimationMethods</value>
+  </data>
+  <data name="&gt;&gt;chkMaximumLikelihood.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="grpEstimationMethods.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 193</value>
+  </data>
+  <data name="grpEstimationMethods.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 91</value>
+  </data>
+  <data name="grpEstimationMethods.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="grpEstimationMethods.Text" xml:space="preserve">
+    <value>Estimation methods</value>
+  </data>
+  <data name="&gt;&gt;grpEstimationMethods.Name" xml:space="preserve">
+    <value>grpEstimationMethods</value>
+  </data>
+  <data name="&gt;&gt;grpEstimationMethods.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpEstimationMethods.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpEstimationMethods.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="rdoGEV.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoGEV.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 48</value>
+  </data>
+  <data name="rdoGEV.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 17</value>
+  </data>
+  <data name="rdoGEV.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoGEV.Text" xml:space="preserve">
+    <value>GEV</value>
+  </data>
+  <data name="&gt;&gt;rdoGEV.Name" xml:space="preserve">
+    <value>rdoGEV</value>
+  </data>
+  <data name="&gt;&gt;rdoGEV.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoGEV.Parent" xml:space="preserve">
+    <value>grpDistributions</value>
+  </data>
+  <data name="&gt;&gt;rdoGEV.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rdoGumbel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoGumbel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 25</value>
+  </data>
+  <data name="rdoGumbel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 17</value>
+  </data>
+  <data name="rdoGumbel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rdoGumbel.Text" xml:space="preserve">
+    <value>Gumbel</value>
+  </data>
+  <data name="&gt;&gt;rdoGumbel.Name" xml:space="preserve">
+    <value>rdoGumbel</value>
+  </data>
+  <data name="&gt;&gt;rdoGumbel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoGumbel.Parent" xml:space="preserve">
+    <value>grpDistributions</value>
+  </data>
+  <data name="&gt;&gt;rdoGumbel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="grpDistributions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>267, 194</value>
+  </data>
+  <data name="grpDistributions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 91</value>
+  </data>
+  <data name="grpDistributions.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="grpDistributions.Text" xml:space="preserve">
+    <value>Distributions</value>
+  </data>
+  <data name="&gt;&gt;grpDistributions.Name" xml:space="preserve">
+    <value>grpDistributions</value>
+  </data>
+  <data name="&gt;&gt;grpDistributions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpDistributions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpDistributions.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="lblDataToFit.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblDataToFit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>224, 24</value>
+  </data>
+  <data name="lblDataToFit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 13</value>
+  </data>
+  <data name="lblDataToFit.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblDataToFit.Text" xml:space="preserve">
+    <value>Data to be Fitted:</value>
+  </data>
+  <data name="&gt;&gt;lblDataToFit.Name" xml:space="preserve">
+    <value>lblDataToFit</value>
+  </data>
+  <data name="&gt;&gt;lblDataToFit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblDataToFit.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblDataToFit.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Fit an Extreme Distribution</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>dlgExtremes</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ucrReceiverDataToFit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>224, 39</value>
+  </data>
+  <data name="ucrReceiverDataToFit.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverDataToFit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 26</value>
+  </data>
+  <data name="ucrReceiverDataToFit.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverDataToFit.Name" xml:space="preserve">
+    <value>ucrReceiverDataToFit</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverDataToFit.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverDataToFit.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverDataToFit.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
 </root>
