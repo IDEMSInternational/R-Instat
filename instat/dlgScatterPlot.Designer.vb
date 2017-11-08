@@ -38,6 +38,7 @@ Partial Class dlgScatterPlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgScatterPlot))
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.lblFactorOptional = New System.Windows.Forms.Label()
         Me.lblXVariable = New System.Windows.Forms.Label()
@@ -54,125 +55,91 @@ Partial Class dlgScatterPlot
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(10, 229)
+        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdOptions.TabIndex = 7
         Me.cmdOptions.Tag = "Options"
-        Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'lblFactorOptional
         '
-        Me.lblFactorOptional.AutoSize = True
-        Me.lblFactorOptional.Location = New System.Drawing.Point(262, 219)
+        resources.ApplyResources(Me.lblFactorOptional, "lblFactorOptional")
         Me.lblFactorOptional.Name = "lblFactorOptional"
-        Me.lblFactorOptional.Size = New System.Drawing.Size(111, 13)
-        Me.lblFactorOptional.TabIndex = 4
         Me.lblFactorOptional.Tag = "By_Variable_Optional:"
-        Me.lblFactorOptional.Text = "By Variable (Optional):"
         '
         'lblXVariable
         '
-        Me.lblXVariable.AutoSize = True
-        Me.lblXVariable.Location = New System.Drawing.Point(262, 172)
+        resources.ApplyResources(Me.lblXVariable, "lblXVariable")
         Me.lblXVariable.Name = "lblXVariable"
-        Me.lblXVariable.Size = New System.Drawing.Size(58, 13)
-        Me.lblXVariable.TabIndex = 2
         Me.lblXVariable.Tag = "X_Variable:"
-        Me.lblXVariable.Text = "X Variable:"
         '
         'cmdScatterPlotOptions
         '
-        Me.cmdScatterPlotOptions.Location = New System.Drawing.Point(10, 198)
+        resources.ApplyResources(Me.cmdScatterPlotOptions, "cmdScatterPlotOptions")
         Me.cmdScatterPlotOptions.Name = "cmdScatterPlotOptions"
-        Me.cmdScatterPlotOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdScatterPlotOptions.TabIndex = 6
         Me.cmdScatterPlotOptions.Tag = "ScatterPlot_Options"
-        Me.cmdScatterPlotOptions.Text = "Scatter Plot Options"
         Me.cmdScatterPlotOptions.UseVisualStyleBackColor = True
         '
         'ucrChkLineofBestFit
         '
         Me.ucrChkLineofBestFit.Checked = False
-        Me.ucrChkLineofBestFit.Location = New System.Drawing.Point(10, 260)
+        resources.ApplyResources(Me.ucrChkLineofBestFit, "ucrChkLineofBestFit")
         Me.ucrChkLineofBestFit.Name = "ucrChkLineofBestFit"
-        Me.ucrChkLineofBestFit.Size = New System.Drawing.Size(120, 20)
-        Me.ucrChkLineofBestFit.TabIndex = 8
         '
         'ucrSaveScatterPlot
         '
-        Me.ucrSaveScatterPlot.Location = New System.Drawing.Point(10, 285)
+        resources.ApplyResources(Me.ucrSaveScatterPlot, "ucrSaveScatterPlot")
         Me.ucrSaveScatterPlot.Name = "ucrSaveScatterPlot"
-        Me.ucrSaveScatterPlot.Size = New System.Drawing.Size(255, 24)
-        Me.ucrSaveScatterPlot.TabIndex = 10
         '
         'ucrSelectorForScatter
         '
         Me.ucrSelectorForScatter.bShowHiddenColumns = False
         Me.ucrSelectorForScatter.bUseCurrentFilter = True
-        Me.ucrSelectorForScatter.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorForScatter.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorForScatter, "ucrSelectorForScatter")
         Me.ucrSelectorForScatter.Name = "ucrSelectorForScatter"
-        Me.ucrSelectorForScatter.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorForScatter.TabIndex = 0
         '
         'ucrVariablesAsFactorForScatter
         '
         Me.ucrVariablesAsFactorForScatter.frmParent = Me
-        Me.ucrVariablesAsFactorForScatter.Location = New System.Drawing.Point(262, 30)
+        resources.ApplyResources(Me.ucrVariablesAsFactorForScatter, "ucrVariablesAsFactorForScatter")
         Me.ucrVariablesAsFactorForScatter.Name = "ucrVariablesAsFactorForScatter"
         Me.ucrVariablesAsFactorForScatter.Selector = Nothing
-        Me.ucrVariablesAsFactorForScatter.Size = New System.Drawing.Size(125, 136)
         Me.ucrVariablesAsFactorForScatter.strNcFilePath = ""
-        Me.ucrVariablesAsFactorForScatter.TabIndex = 1
         Me.ucrVariablesAsFactorForScatter.ucrSelector = Nothing
         Me.ucrVariablesAsFactorForScatter.ucrVariableSelector = Nothing
         '
         'ucrFactorOptionalReceiver
         '
         Me.ucrFactorOptionalReceiver.frmParent = Me
-        Me.ucrFactorOptionalReceiver.Location = New System.Drawing.Point(262, 234)
-        Me.ucrFactorOptionalReceiver.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrFactorOptionalReceiver, "ucrFactorOptionalReceiver")
         Me.ucrFactorOptionalReceiver.Name = "ucrFactorOptionalReceiver"
         Me.ucrFactorOptionalReceiver.Selector = Nothing
-        Me.ucrFactorOptionalReceiver.Size = New System.Drawing.Size(120, 20)
         Me.ucrFactorOptionalReceiver.strNcFilePath = ""
-        Me.ucrFactorOptionalReceiver.TabIndex = 5
         Me.ucrFactorOptionalReceiver.ucrSelector = Nothing
         '
         'ucrReceiverX
         '
         Me.ucrReceiverX.frmParent = Me
-        Me.ucrReceiverX.Location = New System.Drawing.Point(262, 187)
-        Me.ucrReceiverX.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverX, "ucrReceiverX")
         Me.ucrReceiverX.Name = "ucrReceiverX"
         Me.ucrReceiverX.Selector = Nothing
-        Me.ucrReceiverX.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverX.strNcFilePath = ""
-        Me.ucrReceiverX.TabIndex = 3
         Me.ucrReceiverX.ucrSelector = Nothing
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 312)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 11
         '
         'ucrChkWithSE
         '
         Me.ucrChkWithSE.Checked = False
-        Me.ucrChkWithSE.Location = New System.Drawing.Point(136, 260)
+        resources.ApplyResources(Me.ucrChkWithSE, "ucrChkWithSE")
         Me.ucrChkWithSE.Name = "ucrChkWithSE"
-        Me.ucrChkWithSE.Size = New System.Drawing.Size(135, 20)
-        Me.ucrChkWithSE.TabIndex = 9
         '
         'dlgScatterPlot
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(421, 368)
         Me.Controls.Add(Me.ucrChkWithSE)
         Me.Controls.Add(Me.ucrChkLineofBestFit)
         Me.Controls.Add(Me.ucrSaveScatterPlot)
@@ -189,8 +156,6 @@ Partial Class dlgScatterPlot
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgScatterPlot"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Scatter Plot"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

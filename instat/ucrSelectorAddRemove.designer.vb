@@ -35,41 +35,35 @@ Partial Class ucrSelectorAddRemove
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrSelectorAddRemove))
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lstAvailableVariable
         '
-        Me.lstAvailableVariable.Dock = System.Windows.Forms.DockStyle.None
+        resources.ApplyResources(Me.lstAvailableVariable, "lstAvailableVariable")
         '
         'btnAdd
         '
-        Me.btnAdd.Location = New System.Drawing.Point(153, 40)
+        resources.ApplyResources(Me.btnAdd, "btnAdd")
         Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(57, 34)
-        Me.btnAdd.TabIndex = 83
         Me.btnAdd.Tag = "Add"
-        Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = True
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(153, 96)
+        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(57, 34)
-        Me.cmdOptions.TabIndex = 84
         Me.cmdOptions.Tag = "Data_Options"
-        Me.cmdOptions.Text = "Data Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'ucrSelectorAddRemove
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.btnAdd)
         Me.Name = "ucrSelectorAddRemove"
-        Me.Size = New System.Drawing.Size(210, 147)
         Me.Controls.SetChildIndex(Me.lstAvailableVariable, 0)
         Me.Controls.SetChildIndex(Me.btnAdd, 0)
         Me.Controls.SetChildIndex(Me.cmdOptions, 0)
