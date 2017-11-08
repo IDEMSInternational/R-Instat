@@ -24,6 +24,9 @@
   <data name="lblLinks.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
+  <data name="lblLinks.Text" xml:space="preserve">
+    <value>Viungo</value>
+  </data>
   <data name="lblSelectedLink.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -48,6 +51,9 @@
   <data name="rdoViewLink.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
+  <data name="rdoViewLink.Text" xml:space="preserve">
+    <value>Tazama Unganisho</value>
+  </data>
   <data name="rdoDeleteLink.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -59,6 +65,9 @@
   </data>
   <data name="rdoDeleteLink.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>6</value>
+  </data>
+  <data name="rdoDeleteLink.Text" xml:space="preserve">
+    <value>&amp;Futa kiungo</value>
   </data>
   <data name="$this.AutoScaleDimensions" xml:space="preserve" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
