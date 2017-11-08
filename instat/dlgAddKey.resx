@@ -117,89 +117,136 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="lblNameDataSet.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="lblNameDataSet.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 62</value>
+  <data name="cmdCheckUnique.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 230</value>
   </data>
-  <data name="lblNameDataSet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 13</value>
+  <data name="cmdCheckUnique.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 23</value>
   </data>
-  <data name="lblNameDataSet.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cmdCheckUnique.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
-  <data name="lblNameDataSet.Text" xml:space="preserve">
-    <value>Dataset Name:</value>
+  <data name="cmdCheckUnique.Text" xml:space="preserve">
+    <value>Check Unique</value>
   </data>
-  <data name="&gt;&gt;lblNameDataSet.Name" xml:space="preserve">
-    <value>lblNameDataSet</value>
+  <data name="&gt;&gt;cmdCheckUnique.Name" xml:space="preserve">
+    <value>cmdCheckUnique</value>
   </data>
-  <data name="&gt;&gt;lblNameDataSet.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;cmdCheckUnique.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblNameDataSet.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmdCheckUnique.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;lblNameDataSet.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="ucrDataFrameOpenRefine.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 10</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ucrDataFrameOpenRefine.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrDataFrameOpenRefine.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 41</value>
-  </data>
-  <data name="ucrDataFrameOpenRefine.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrDataFrameOpenRefine.Name" xml:space="preserve">
-    <value>ucrDataFrameOpenRefine</value>
-  </data>
-  <data name="&gt;&gt;ucrDataFrameOpenRefine.Type" xml:space="preserve">
-    <value>instat.ucrDataFrame, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrDataFrameOpenRefine.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrDataFrameOpenRefine.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrChkOpenBrowser.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 86</value>
-  </data>
-  <data name="ucrChkOpenBrowser.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
-  </data>
-  <data name="ucrChkOpenBrowser.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;cmdCheckUnique.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;ucrChkOpenBrowser.Name" xml:space="preserve">
-    <value>ucrChkOpenBrowser</value>
+  <data name="lblKeyColumns.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;ucrChkOpenBrowser.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="lblKeyColumns.Location" type="System.Drawing.Point, System.Drawing">
+    <value>254, 45</value>
   </data>
-  <data name="&gt;&gt;ucrChkOpenBrowser.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="lblKeyColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>71, 13</value>
   </data>
-  <data name="&gt;&gt;ucrChkOpenBrowser.ZOrder" xml:space="preserve">
+  <data name="lblKeyColumns.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
+  <data name="lblKeyColumns.Text" xml:space="preserve">
+    <value>Key Columns:</value>
+  </data>
+  <data name="&gt;&gt;lblKeyColumns.Name" xml:space="preserve">
+    <value>lblKeyColumns</value>
+  </data>
+  <data name="&gt;&gt;lblKeyColumns.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblKeyColumns.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblKeyColumns.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblKeyName.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblKeyName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 208</value>
+  </data>
+  <data name="lblKeyName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 13</value>
+  </data>
+  <data name="lblKeyName.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblKeyName.Text" xml:space="preserve">
+    <value>Key Name:</value>
+  </data>
+  <data name="&gt;&gt;lblKeyName.Name" xml:space="preserve">
+    <value>lblKeyName</value>
+  </data>
+  <data name="&gt;&gt;lblKeyName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblKeyName.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblKeyName.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrInputKeyName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>114, 204</value>
+  </data>
+  <data name="ucrInputKeyName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>182, 21</value>
+  </data>
+  <data name="ucrInputKeyName.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrInputKeyName.Name" xml:space="preserve">
+    <value>ucrInputKeyName</value>
+  </data>
+  <data name="&gt;&gt;ucrInputKeyName.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputKeyName.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputKeyName.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrInputCheckInput.Location" type="System.Drawing.Point, System.Drawing">
+    <value>114, 232</value>
+  </data>
+  <data name="ucrInputCheckInput.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 21</value>
+  </data>
+  <data name="ucrInputCheckInput.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrInputCheckInput.Name" xml:space="preserve">
+    <value>ucrInputCheckInput</value>
+  </data>
+  <data name="&gt;&gt;ucrInputCheckInput.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputCheckInput.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputCheckInput.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 112</value>
+    <value>10, 261</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>407, 52</value>
+    <value>405, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -211,28 +258,32 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
-  <data name="ucrInputDatasetName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>91, 59</value>
+  <data name="ucrSelectorKeyColumns.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
   </data>
-  <data name="ucrInputDatasetName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 21</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrSelectorKeyColumns.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
-  <data name="ucrInputDatasetName.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="ucrSelectorKeyColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 180</value>
   </data>
-  <data name="&gt;&gt;ucrInputDatasetName.Name" xml:space="preserve">
-    <value>ucrInputDatasetName</value>
+  <data name="ucrSelectorKeyColumns.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="&gt;&gt;ucrInputDatasetName.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;ucrSelectorKeyColumns.Name" xml:space="preserve">
+    <value>ucrSelectorKeyColumns</value>
   </data>
-  <data name="&gt;&gt;ucrInputDatasetName.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrSelectorKeyColumns.Type" xml:space="preserve">
+    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorKeyColumns.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrInputDatasetName.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;ucrSelectorKeyColumns.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -241,18 +292,42 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>415, 170</value>
+    <value>418, 321</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterScreen</value>
+    <value>CenterParent</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Export to OpenRefine</value>
+    <value>Add Key</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>dlgExportToOpenRefine</value>
+    <value>dlgAddKey</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ucrReceiverKeyColumns.Location" type="System.Drawing.Point, System.Drawing">
+    <value>254, 60</value>
+  </data>
+  <data name="ucrReceiverKeyColumns.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverKeyColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 130</value>
+  </data>
+  <data name="ucrReceiverKeyColumns.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverKeyColumns.Name" xml:space="preserve">
+    <value>ucrReceiverKeyColumns</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverKeyColumns.Type" xml:space="preserve">
+    <value>instat.ucrReceiverMultiple, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverKeyColumns.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverKeyColumns.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
 </root>

@@ -38,6 +38,7 @@ Partial Class dlgHideShowColumns
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgHideShowColumns))
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorForHiddenColumns = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverHiddenColumns = New instat.ucrReceiverMultiple()
@@ -46,47 +47,34 @@ Partial Class dlgHideShowColumns
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 200)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 3
         '
         'ucrSelectorForHiddenColumns
         '
         Me.ucrSelectorForHiddenColumns.bShowHiddenColumns = False
         Me.ucrSelectorForHiddenColumns.bUseCurrentFilter = True
-        Me.ucrSelectorForHiddenColumns.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorForHiddenColumns.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorForHiddenColumns, "ucrSelectorForHiddenColumns")
         Me.ucrSelectorForHiddenColumns.Name = "ucrSelectorForHiddenColumns"
-        Me.ucrSelectorForHiddenColumns.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorForHiddenColumns.TabIndex = 0
         '
         'ucrReceiverHiddenColumns
         '
         Me.ucrReceiverHiddenColumns.frmParent = Me
-        Me.ucrReceiverHiddenColumns.Location = New System.Drawing.Point(252, 60)
-        Me.ucrReceiverHiddenColumns.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverHiddenColumns, "ucrReceiverHiddenColumns")
         Me.ucrReceiverHiddenColumns.Name = "ucrReceiverHiddenColumns"
         Me.ucrReceiverHiddenColumns.Selector = Nothing
-        Me.ucrReceiverHiddenColumns.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverHiddenColumns.strNcFilePath = ""
-        Me.ucrReceiverHiddenColumns.TabIndex = 2
         Me.ucrReceiverHiddenColumns.ucrSelector = Nothing
         '
         'lblHiddenColumns
         '
-        Me.lblHiddenColumns.AutoSize = True
-        Me.lblHiddenColumns.Location = New System.Drawing.Point(249, 45)
+        resources.ApplyResources(Me.lblHiddenColumns, "lblHiddenColumns")
         Me.lblHiddenColumns.Name = "lblHiddenColumns"
-        Me.lblHiddenColumns.Size = New System.Drawing.Size(93, 13)
-        Me.lblHiddenColumns.TabIndex = 1
-        Me.lblHiddenColumns.Text = "Hidden Column(s):"
         '
         'dlgHideShowColumns
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 259)
         Me.Controls.Add(Me.lblHiddenColumns)
         Me.Controls.Add(Me.ucrReceiverHiddenColumns)
         Me.Controls.Add(Me.ucrSelectorForHiddenColumns)
@@ -95,9 +83,7 @@ Partial Class dlgHideShowColumns
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgHideShowColumns"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Hidden_Columns"
-        Me.Text = "Hidden Column(s)"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
