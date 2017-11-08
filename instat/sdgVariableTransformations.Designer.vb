@@ -38,6 +38,7 @@ Partial Class sdgVariableTransformations
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgVariableTransformations))
         Me.ucrButtonsSDGVarTransform = New instat.ucrButtonsSubdialogue()
         Me.rdoLogBase10 = New System.Windows.Forms.RadioButton()
         Me.rdoSquareRoot = New System.Windows.Forms.RadioButton()
@@ -54,81 +55,57 @@ Partial Class sdgVariableTransformations
         '
         'ucrButtonsSDGVarTransform
         '
-        Me.ucrButtonsSDGVarTransform.Location = New System.Drawing.Point(42, 250)
+        resources.ApplyResources(Me.ucrButtonsSDGVarTransform, "ucrButtonsSDGVarTransform")
         Me.ucrButtonsSDGVarTransform.Name = "ucrButtonsSDGVarTransform"
-        Me.ucrButtonsSDGVarTransform.Size = New System.Drawing.Size(142, 30)
-        Me.ucrButtonsSDGVarTransform.TabIndex = 2
         '
         'rdoLogBase10
         '
-        Me.rdoLogBase10.AutoSize = True
-        Me.rdoLogBase10.Location = New System.Drawing.Point(23, 89)
+        resources.ApplyResources(Me.rdoLogBase10, "rdoLogBase10")
         Me.rdoLogBase10.Name = "rdoLogBase10"
-        Me.rdoLogBase10.Size = New System.Drawing.Size(85, 17)
-        Me.rdoLogBase10.TabIndex = 13
         Me.rdoLogBase10.TabStop = True
         Me.rdoLogBase10.Tag = "Log_Base_10"
-        Me.rdoLogBase10.Text = "Log Base 10"
         Me.rdoLogBase10.UseVisualStyleBackColor = True
         '
         'rdoSquareRoot
         '
-        Me.rdoSquareRoot.AutoSize = True
-        Me.rdoSquareRoot.Location = New System.Drawing.Point(23, 118)
+        resources.ApplyResources(Me.rdoSquareRoot, "rdoSquareRoot")
         Me.rdoSquareRoot.Name = "rdoSquareRoot"
-        Me.rdoSquareRoot.Size = New System.Drawing.Size(85, 17)
-        Me.rdoSquareRoot.TabIndex = 14
         Me.rdoSquareRoot.TabStop = True
         Me.rdoSquareRoot.Tag = "Square_root"
-        Me.rdoSquareRoot.Text = "Square Root"
         Me.rdoSquareRoot.UseVisualStyleBackColor = True
         '
         'rdoPower
         '
-        Me.rdoPower.AutoSize = True
-        Me.rdoPower.Location = New System.Drawing.Point(23, 147)
+        resources.ApplyResources(Me.rdoPower, "rdoPower")
         Me.rdoPower.Name = "rdoPower"
-        Me.rdoPower.Size = New System.Drawing.Size(58, 17)
-        Me.rdoPower.TabIndex = 15
         Me.rdoPower.TabStop = True
         Me.rdoPower.Tag = "Power"
-        Me.rdoPower.Text = "Power:"
         Me.rdoPower.UseVisualStyleBackColor = True
         '
         'rdoNaturalLog
         '
-        Me.rdoNaturalLog.AutoSize = True
-        Me.rdoNaturalLog.Location = New System.Drawing.Point(23, 60)
+        resources.ApplyResources(Me.rdoNaturalLog, "rdoNaturalLog")
         Me.rdoNaturalLog.Name = "rdoNaturalLog"
-        Me.rdoNaturalLog.Size = New System.Drawing.Size(80, 17)
-        Me.rdoNaturalLog.TabIndex = 12
         Me.rdoNaturalLog.TabStop = True
         Me.rdoNaturalLog.Tag = "Natural_log"
-        Me.rdoNaturalLog.Text = "Natural Log"
         Me.rdoNaturalLog.UseVisualStyleBackColor = True
         '
         'rdoIdentity
         '
-        Me.rdoIdentity.AutoSize = True
-        Me.rdoIdentity.Location = New System.Drawing.Point(23, 31)
+        resources.ApplyResources(Me.rdoIdentity, "rdoIdentity")
         Me.rdoIdentity.Name = "rdoIdentity"
-        Me.rdoIdentity.Size = New System.Drawing.Size(59, 17)
-        Me.rdoIdentity.TabIndex = 17
         Me.rdoIdentity.TabStop = True
         Me.rdoIdentity.Tag = "Identity"
-        Me.rdoIdentity.Text = "Identity"
         Me.rdoIdentity.UseVisualStyleBackColor = True
         '
         'ucrNudPower
         '
         Me.ucrNudPower.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPower.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPower.Location = New System.Drawing.Point(87, 147)
+        resources.ApplyResources(Me.ucrNudPower, "ucrNudPower")
         Me.ucrNudPower.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudPower.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPower.Name = "ucrNudPower"
-        Me.ucrNudPower.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudPower.TabIndex = 17
         Me.ucrNudPower.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'grpChooseFunction
@@ -140,45 +117,33 @@ Partial Class sdgVariableTransformations
         Me.grpChooseFunction.Controls.Add(Me.rdoSquareRoot)
         Me.grpChooseFunction.Controls.Add(Me.rdoLogBase10)
         Me.grpChooseFunction.Controls.Add(Me.ucrPnlChooseFunction)
-        Me.grpChooseFunction.Location = New System.Drawing.Point(10, 10)
+        resources.ApplyResources(Me.grpChooseFunction, "grpChooseFunction")
         Me.grpChooseFunction.Name = "grpChooseFunction"
-        Me.grpChooseFunction.Size = New System.Drawing.Size(218, 184)
-        Me.grpChooseFunction.TabIndex = 1
         Me.grpChooseFunction.TabStop = False
         Me.grpChooseFunction.Tag = "General_Functions"
-        Me.grpChooseFunction.Text = "Choose Function"
         '
         'ucrPnlChooseFunction
         '
-        Me.ucrPnlChooseFunction.Location = New System.Drawing.Point(6, 19)
+        resources.ApplyResources(Me.ucrPnlChooseFunction, "ucrPnlChooseFunction")
         Me.ucrPnlChooseFunction.Name = "ucrPnlChooseFunction"
-        Me.ucrPnlChooseFunction.Size = New System.Drawing.Size(168, 159)
-        Me.ucrPnlChooseFunction.TabIndex = 3
         '
         'lblPreview
         '
-        Me.lblPreview.AutoSize = True
-        Me.lblPreview.Location = New System.Drawing.Point(12, 216)
+        resources.ApplyResources(Me.lblPreview, "lblPreview")
         Me.lblPreview.Name = "lblPreview"
-        Me.lblPreview.Size = New System.Drawing.Size(48, 13)
-        Me.lblPreview.TabIndex = 3
-        Me.lblPreview.Text = "Preview:"
         '
         'ucrInputPreview
         '
         Me.ucrInputPreview.AddQuotesIfUnrecognised = True
         Me.ucrInputPreview.IsMultiline = False
         Me.ucrInputPreview.IsReadOnly = False
-        Me.ucrInputPreview.Location = New System.Drawing.Point(66, 213)
+        resources.ApplyResources(Me.ucrInputPreview, "ucrInputPreview")
         Me.ucrInputPreview.Name = "ucrInputPreview"
-        Me.ucrInputPreview.Size = New System.Drawing.Size(158, 21)
-        Me.ucrInputPreview.TabIndex = 4
         '
         'sdgVariableTransformations
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(236, 284)
         Me.Controls.Add(Me.ucrInputPreview)
         Me.Controls.Add(Me.lblPreview)
         Me.Controls.Add(Me.ucrButtonsSDGVarTransform)
@@ -187,9 +152,7 @@ Partial Class sdgVariableTransformations
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgVariableTransformations"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Tag = "Variable _Transformations"
-        Me.Text = "Variable Transformations"
         Me.grpChooseFunction.ResumeLayout(False)
         Me.grpChooseFunction.PerformLayout()
         Me.ResumeLayout(False)

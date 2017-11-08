@@ -168,6 +168,10 @@ Public Class dlgMerge
         Else
             clsMerge.RemoveParameterByName("suffix")
         End If
+        ' Ensures options set on the subdialog are "reset" since they depend on data frame choice
+        clsMerge.RemoveParameterByName("by")
+        clsMerge.AddParameter("x", clsRFunctionParameter:=ucrFirstDataFrame.clsCurrDataFrame)
+        clsMerge.AddParameter("y", clsRFunctionParameter:=ucrSecondDataFrame.clsCurrDataFrame)
     End Sub
 
     Private Sub ucrFirstDataFrame_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrFirstDataFrame.ControlContentsChanged, ucrSecondDataFrame.ControlContentsChanged, ucrSaveMerge.ControlContentsChanged

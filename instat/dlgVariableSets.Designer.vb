@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgVariableSets
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,66 +20,32 @@ Partial Class dlgVariableSets
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrReceiverSelectedSet = New instat.ucrReceiverSingle()
-        Me.ucrVariableSetsSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblSelectedSet = New System.Windows.Forms.Label()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrPnlOptions = New instat.UcrPanel()
         Me.rdoDelete = New System.Windows.Forms.RadioButton()
         Me.rdoEdit = New System.Windows.Forms.RadioButton()
         Me.rdoMake = New System.Windows.Forms.RadioButton()
+        Me.lblSetName = New System.Windows.Forms.Label()
+        Me.lblVariables = New System.Windows.Forms.Label()
+        Me.ucrInputSetNewName = New instat.ucrInputTextBox()
+        Me.ucrReceiverSelectedSet = New instat.ucrReceiverSingle()
+        Me.ucrReceiverMultipleVariables = New instat.ucrReceiverMultiple()
+        Me.ucrSelectorVariableSets = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrPnlOptions = New instat.UcrPanel()
         Me.SuspendLayout()
-        '
-        'ucrReceiverSelectedSet
-        '
-        Me.ucrReceiverSelectedSet.frmParent = Me
-        Me.ucrReceiverSelectedSet.Location = New System.Drawing.Point(380, 128)
-        Me.ucrReceiverSelectedSet.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverSelectedSet.Name = "ucrReceiverSelectedSet"
-        Me.ucrReceiverSelectedSet.Selector = Nothing
-        Me.ucrReceiverSelectedSet.Size = New System.Drawing.Size(188, 31)
-        Me.ucrReceiverSelectedSet.strNcFilePath = ""
-        Me.ucrReceiverSelectedSet.TabIndex = 15
-        Me.ucrReceiverSelectedSet.ucrSelector = Nothing
-        '
-        'ucrVariableSetsSelector
-        '
-        Me.ucrVariableSetsSelector.bShowHiddenColumns = False
-        Me.ucrVariableSetsSelector.bUseCurrentFilter = True
-        Me.ucrVariableSetsSelector.Location = New System.Drawing.Point(7, 72)
-        Me.ucrVariableSetsSelector.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrVariableSetsSelector.Name = "ucrVariableSetsSelector"
-        Me.ucrVariableSetsSelector.Size = New System.Drawing.Size(315, 277)
-        Me.ucrVariableSetsSelector.TabIndex = 13
         '
         'lblSelectedSet
         '
         Me.lblSelectedSet.AutoSize = True
-        Me.lblSelectedSet.Location = New System.Drawing.Point(376, 98)
+        Me.lblSelectedSet.Location = New System.Drawing.Point(351, 72)
         Me.lblSelectedSet.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSelectedSet.Name = "lblSelectedSet"
         Me.lblSelectedSet.Size = New System.Drawing.Size(105, 20)
         Me.lblSelectedSet.TabIndex = 14
         Me.lblSelectedSet.Tag = ""
         Me.lblSelectedSet.Text = "Selected Set:"
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(7, 369)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(615, 80)
-        Me.ucrBase.TabIndex = 16
-        '
-        'ucrPnlOptions
-        '
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(6, 6)
-        Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        Me.ucrPnlOptions.Size = New System.Drawing.Size(597, 65)
-        Me.ucrPnlOptions.TabIndex = 12
         '
         'rdoDelete
         '
@@ -135,17 +101,104 @@ Partial Class dlgVariableSets
         Me.rdoMake.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoMake.UseVisualStyleBackColor = True
         '
+        'lblSetName
+        '
+        Me.lblSetName.AutoSize = True
+        Me.lblSetName.Location = New System.Drawing.Point(351, 336)
+        Me.lblSetName.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblSetName.Name = "lblSetName"
+        Me.lblSetName.Size = New System.Drawing.Size(119, 20)
+        Me.lblSetName.TabIndex = 20
+        Me.lblSetName.Tag = ""
+        Me.lblSetName.Text = "Set New Name:"
+        '
+        'lblVariables
+        '
+        Me.lblVariables.AutoSize = True
+        Me.lblVariables.Location = New System.Drawing.Point(356, 135)
+        Me.lblVariables.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblVariables.Name = "lblVariables"
+        Me.lblVariables.Size = New System.Drawing.Size(75, 20)
+        Me.lblVariables.TabIndex = 23
+        Me.lblVariables.Tag = ""
+        Me.lblVariables.Text = "Variables"
+        '
+        'ucrInputSetNewName
+        '
+        Me.ucrInputSetNewName.AddQuotesIfUnrecognised = True
+        Me.ucrInputSetNewName.IsMultiline = False
+        Me.ucrInputSetNewName.IsReadOnly = False
+        Me.ucrInputSetNewName.Location = New System.Drawing.Point(355, 360)
+        Me.ucrInputSetNewName.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrInputSetNewName.Name = "ucrInputSetNewName"
+        Me.ucrInputSetNewName.Size = New System.Drawing.Size(206, 32)
+        Me.ucrInputSetNewName.TabIndex = 24
+        '
+        'ucrReceiverSelectedSet
+        '
+        Me.ucrReceiverSelectedSet.frmParent = Nothing
+        Me.ucrReceiverSelectedSet.Location = New System.Drawing.Point(355, 96)
+        Me.ucrReceiverSelectedSet.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSelectedSet.Name = "ucrReceiverSelectedSet"
+        Me.ucrReceiverSelectedSet.Selector = Nothing
+        Me.ucrReceiverSelectedSet.Size = New System.Drawing.Size(188, 31)
+        Me.ucrReceiverSelectedSet.strNcFilePath = ""
+        Me.ucrReceiverSelectedSet.TabIndex = 15
+        Me.ucrReceiverSelectedSet.ucrSelector = Nothing
+        '
+        'ucrReceiverMultipleVariables
+        '
+        Me.ucrReceiverMultipleVariables.frmParent = Nothing
+        Me.ucrReceiverMultipleVariables.Location = New System.Drawing.Point(355, 163)
+        Me.ucrReceiverMultipleVariables.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMultipleVariables.Name = "ucrReceiverMultipleVariables"
+        Me.ucrReceiverMultipleVariables.Selector = Nothing
+        Me.ucrReceiverMultipleVariables.Size = New System.Drawing.Size(180, 154)
+        Me.ucrReceiverMultipleVariables.strNcFilePath = ""
+        Me.ucrReceiverMultipleVariables.TabIndex = 21
+        Me.ucrReceiverMultipleVariables.ucrSelector = Nothing
+        '
+        'ucrVariableSetsSelector
+        '
+        Me.ucrSelectorVariableSets.bShowHiddenColumns = False
+        Me.ucrSelectorVariableSets.bUseCurrentFilter = True
+        Me.ucrSelectorVariableSets.Location = New System.Drawing.Point(10, 72)
+        Me.ucrSelectorVariableSets.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorVariableSets.Name = "ucrVariableSetsSelector"
+        Me.ucrSelectorVariableSets.Size = New System.Drawing.Size(315, 277)
+        Me.ucrSelectorVariableSets.TabIndex = 13
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 422)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(615, 80)
+        Me.ucrBase.TabIndex = 16
+        '
+        'ucrPnlOptions
+        '
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(23, 5)
+        Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrPnlOptions.Name = "ucrPnlOptions"
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(575, 60)
+        Me.ucrPnlOptions.TabIndex = 12
+        '
         'dlgVariableSets
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(648, 459)
-        Me.Controls.Add(Me.rdoDelete)
-        Me.Controls.Add(Me.rdoEdit)
-        Me.Controls.Add(Me.rdoMake)
-        Me.Controls.Add(Me.ucrReceiverSelectedSet)
-        Me.Controls.Add(Me.ucrVariableSetsSelector)
+        Me.ClientSize = New System.Drawing.Size(633, 508)
         Me.Controls.Add(Me.lblSelectedSet)
+        Me.Controls.Add(Me.ucrInputSetNewName)
+        Me.Controls.Add(Me.ucrReceiverSelectedSet)
+        Me.Controls.Add(Me.lblSetName)
+        Me.Controls.Add(Me.rdoDelete)
+        Me.Controls.Add(Me.lblVariables)
+        Me.Controls.Add(Me.rdoEdit)
+        Me.Controls.Add(Me.ucrReceiverMultipleVariables)
+        Me.Controls.Add(Me.rdoMake)
+        Me.Controls.Add(Me.ucrSelectorVariableSets)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrPnlOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -160,11 +213,15 @@ Partial Class dlgVariableSets
     End Sub
 
     Friend WithEvents ucrReceiverSelectedSet As ucrReceiverSingle
-    Friend WithEvents ucrVariableSetsSelector As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectorVariableSets As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblSelectedSet As Label
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrPnlOptions As UcrPanel
     Friend WithEvents rdoDelete As RadioButton
     Friend WithEvents rdoEdit As RadioButton
     Friend WithEvents rdoMake As RadioButton
+    Friend WithEvents ucrReceiverMultipleVariables As ucrReceiverMultiple
+    Friend WithEvents lblSetName As Label
+    Friend WithEvents lblVariables As Label
+    Friend WithEvents ucrInputSetNewName As ucrInputTextBox
 End Class

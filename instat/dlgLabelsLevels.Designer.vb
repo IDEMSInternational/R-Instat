@@ -38,6 +38,7 @@ Partial Class dlgLabelsLevels
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgLabelsLevels))
         Me.lblFactor = New System.Windows.Forms.Label()
         Me.cmdAddLevel = New System.Windows.Forms.Button()
         Me.ucrChkIncludeLevelNumbers = New instat.ucrCheck()
@@ -49,77 +50,56 @@ Partial Class dlgLabelsLevels
         '
         'lblFactor
         '
-        Me.lblFactor.AutoSize = True
-        Me.lblFactor.Location = New System.Drawing.Point(256, 22)
+        resources.ApplyResources(Me.lblFactor, "lblFactor")
         Me.lblFactor.Name = "lblFactor"
-        Me.lblFactor.Size = New System.Drawing.Size(85, 13)
-        Me.lblFactor.TabIndex = 3
         Me.lblFactor.Tag = "Factor_Selected:"
-        Me.lblFactor.Text = "Factor Selected:"
         '
         'cmdAddLevel
         '
-        Me.cmdAddLevel.Location = New System.Drawing.Point(115, 287)
+        resources.ApplyResources(Me.cmdAddLevel, "cmdAddLevel")
         Me.cmdAddLevel.Name = "cmdAddLevel"
-        Me.cmdAddLevel.Size = New System.Drawing.Size(96, 23)
-        Me.cmdAddLevel.TabIndex = 5
-        Me.cmdAddLevel.Text = "Add Factor Level"
         Me.cmdAddLevel.UseVisualStyleBackColor = True
         '
         'ucrChkIncludeLevelNumbers
         '
         Me.ucrChkIncludeLevelNumbers.Checked = False
-        Me.ucrChkIncludeLevelNumbers.Location = New System.Drawing.Point(115, 316)
+        resources.ApplyResources(Me.ucrChkIncludeLevelNumbers, "ucrChkIncludeLevelNumbers")
         Me.ucrChkIncludeLevelNumbers.Name = "ucrChkIncludeLevelNumbers"
-        Me.ucrChkIncludeLevelNumbers.Size = New System.Drawing.Size(135, 20)
-        Me.ucrChkIncludeLevelNumbers.TabIndex = 6
         '
         'ucrReceiverLabels
         '
         Me.ucrReceiverLabels.frmParent = Me
-        Me.ucrReceiverLabels.Location = New System.Drawing.Point(256, 37)
-        Me.ucrReceiverLabels.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverLabels, "ucrReceiverLabels")
         Me.ucrReceiverLabels.Name = "ucrReceiverLabels"
         Me.ucrReceiverLabels.Selector = Nothing
-        Me.ucrReceiverLabels.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverLabels.strNcFilePath = ""
-        Me.ucrReceiverLabels.TabIndex = 4
         Me.ucrReceiverLabels.ucrSelector = Nothing
         '
         'ucrFactorLabels
         '
-        Me.ucrFactorLabels.AutoSize = True
+        resources.ApplyResources(Me.ucrFactorLabels, "ucrFactorLabels")
         Me.ucrFactorLabels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.ucrFactorLabels.clsReceiver = Nothing
-        Me.ucrFactorLabels.Location = New System.Drawing.Point(256, 66)
         Me.ucrFactorLabels.Name = "ucrFactorLabels"
         Me.ucrFactorLabels.shtCurrSheet = Nothing
-        Me.ucrFactorLabels.Size = New System.Drawing.Size(336, 299)
-        Me.ucrFactorLabels.TabIndex = 2
         Me.ucrFactorLabels.ucrChkLevels = Nothing
         '
         'ucrSelectorForLabels
         '
         Me.ucrSelectorForLabels.bShowHiddenColumns = False
         Me.ucrSelectorForLabels.bUseCurrentFilter = True
-        Me.ucrSelectorForLabels.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorForLabels.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorForLabels, "ucrSelectorForLabels")
         Me.ucrSelectorForLabels.Name = "ucrSelectorForLabels"
-        Me.ucrSelectorForLabels.Size = New System.Drawing.Size(242, 196)
-        Me.ucrSelectorForLabels.TabIndex = 1
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 376)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 0
         '
-        'dlgLabels
+        'dlgLabelsLevels
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(604, 431)
         Me.Controls.Add(Me.ucrChkIncludeLevelNumbers)
         Me.Controls.Add(Me.cmdAddLevel)
         Me.Controls.Add(Me.ucrReceiverLabels)
@@ -130,11 +110,9 @@ Partial Class dlgLabelsLevels
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgLabels"
+        Me.Name = "dlgLabelsLevels"
         Me.ShowIcon = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Labels"
-        Me.Text = "Labels/Levels"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
