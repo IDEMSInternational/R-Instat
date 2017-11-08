@@ -2020,6 +2020,9 @@
   <data name="mnuDescribe.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>64, 20</value>
   </data>
+  <data name="mnuDescribe.Text" xml:space="preserve">
+    <value>Décrire</value>
+  </data>
   <data name="mnuModelProbabilityDistributionsShowModel.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>242, 22</value>
   </data>
