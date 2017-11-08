@@ -38,32 +38,26 @@ Partial Class ucrSelectorByDataFrame
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrSelectorByDataFrame))
         Me.ucrAvailableDataFrames = New instat.ucrDataFrame()
         Me.SuspendLayout()
         '
         'lstAvailableVariable
         '
-        Me.lstAvailableVariable.Dock = System.Windows.Forms.DockStyle.None
-        Me.lstAvailableVariable.Location = New System.Drawing.Point(0, 50)
-        Me.lstAvailableVariable.Margin = New System.Windows.Forms.Padding(0)
-        Me.lstAvailableVariable.Size = New System.Drawing.Size(148, 130)
+        resources.ApplyResources(Me.lstAvailableVariable, "lstAvailableVariable")
         '
         'ucrAvailableDataFrames
         '
         Me.ucrAvailableDataFrames.bUseCurrentFilter = True
-        Me.ucrAvailableDataFrames.Location = New System.Drawing.Point(0, 0)
-        Me.ucrAvailableDataFrames.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrAvailableDataFrames, "ucrAvailableDataFrames")
         Me.ucrAvailableDataFrames.Name = "ucrAvailableDataFrames"
-        Me.ucrAvailableDataFrames.Size = New System.Drawing.Size(148, 50)
-        Me.ucrAvailableDataFrames.TabIndex = 84
         '
         'ucrSelectorByDataFrame
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ucrAvailableDataFrames)
         Me.Name = "ucrSelectorByDataFrame"
-        Me.Size = New System.Drawing.Size(148, 180)
         Me.Controls.SetChildIndex(Me.lstAvailableVariable, 0)
         Me.Controls.SetChildIndex(Me.ucrAvailableDataFrames, 0)
         Me.ResumeLayout(False)

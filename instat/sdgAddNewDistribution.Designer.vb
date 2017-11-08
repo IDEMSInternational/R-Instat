@@ -38,6 +38,7 @@ Partial Class sdgAddNewDistribution
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgAddNewDistribution))
         Me.ucrBaseSubDialog = New instat.ucrButtonsSubdialogue()
         Me.ucrNewDistributions = New instat.ucrDistributionsWithParameters()
         Me.grpChangeLimits = New System.Windows.Forms.GroupBox()
@@ -63,17 +64,13 @@ Partial Class sdgAddNewDistribution
         '
         'ucrBaseSubDialog
         '
-        Me.ucrBaseSubDialog.Location = New System.Drawing.Point(13, 344)
+        resources.ApplyResources(Me.ucrBaseSubDialog, "ucrBaseSubDialog")
         Me.ucrBaseSubDialog.Name = "ucrBaseSubDialog"
-        Me.ucrBaseSubDialog.Size = New System.Drawing.Size(142, 30)
-        Me.ucrBaseSubDialog.TabIndex = 6
         '
         'ucrNewDistributions
         '
-        Me.ucrNewDistributions.Location = New System.Drawing.Point(12, 12)
+        resources.ApplyResources(Me.ucrNewDistributions, "ucrNewDistributions")
         Me.ucrNewDistributions.Name = "ucrNewDistributions"
-        Me.ucrNewDistributions.Size = New System.Drawing.Size(253, 194)
-        Me.ucrNewDistributions.TabIndex = 0
         '
         'grpChangeLimits
         '
@@ -83,123 +80,83 @@ Partial Class sdgAddNewDistribution
         Me.grpChangeLimits.Controls.Add(Me.nudXlimLower)
         Me.grpChangeLimits.Controls.Add(Me.lblYlim)
         Me.grpChangeLimits.Controls.Add(Me.lblXlim)
-        Me.grpChangeLimits.Location = New System.Drawing.Point(13, 198)
+        resources.ApplyResources(Me.grpChangeLimits, "grpChangeLimits")
         Me.grpChangeLimits.Name = "grpChangeLimits"
-        Me.grpChangeLimits.Size = New System.Drawing.Size(200, 71)
-        Me.grpChangeLimits.TabIndex = 1
         Me.grpChangeLimits.TabStop = False
-        Me.grpChangeLimits.Text = "Change Limits"
         '
         'nudYlimUpper
         '
-        Me.nudYlimUpper.Location = New System.Drawing.Point(137, 43)
+        resources.ApplyResources(Me.nudYlimUpper, "nudYlimUpper")
         Me.nudYlimUpper.Name = "nudYlimUpper"
-        Me.nudYlimUpper.Size = New System.Drawing.Size(42, 20)
-        Me.nudYlimUpper.TabIndex = 5
         '
         'nudXlimUpper
         '
-        Me.nudXlimUpper.Location = New System.Drawing.Point(137, 16)
+        resources.ApplyResources(Me.nudXlimUpper, "nudXlimUpper")
         Me.nudXlimUpper.Name = "nudXlimUpper"
-        Me.nudXlimUpper.Size = New System.Drawing.Size(42, 20)
-        Me.nudXlimUpper.TabIndex = 4
         '
         'nudYlimLower
         '
-        Me.nudYlimLower.Location = New System.Drawing.Point(78, 43)
+        resources.ApplyResources(Me.nudYlimLower, "nudYlimLower")
         Me.nudYlimLower.Name = "nudYlimLower"
-        Me.nudYlimLower.Size = New System.Drawing.Size(42, 20)
-        Me.nudYlimLower.TabIndex = 3
         '
         'nudXlimLower
         '
-        Me.nudXlimLower.Location = New System.Drawing.Point(78, 16)
+        resources.ApplyResources(Me.nudXlimLower, "nudXlimLower")
         Me.nudXlimLower.Name = "nudXlimLower"
-        Me.nudXlimLower.Size = New System.Drawing.Size(42, 20)
-        Me.nudXlimLower.TabIndex = 2
         '
         'lblYlim
         '
-        Me.lblYlim.AutoSize = True
-        Me.lblYlim.Location = New System.Drawing.Point(7, 46)
+        resources.ApplyResources(Me.lblYlim, "lblYlim")
         Me.lblYlim.Name = "lblYlim"
-        Me.lblYlim.Size = New System.Drawing.Size(26, 13)
-        Me.lblYlim.TabIndex = 1
-        Me.lblYlim.Text = "Ylim"
         '
         'lblXlim
         '
-        Me.lblXlim.AutoSize = True
-        Me.lblXlim.Location = New System.Drawing.Point(7, 20)
+        resources.ApplyResources(Me.lblXlim, "lblXlim")
         Me.lblXlim.Name = "lblXlim"
-        Me.lblXlim.Size = New System.Drawing.Size(26, 13)
-        Me.lblXlim.TabIndex = 0
-        Me.lblXlim.Text = "Xlim"
         '
         'grpPlot
         '
         Me.grpPlot.Controls.Add(Me.rdoProbability)
         Me.grpPlot.Controls.Add(Me.rdoDensity)
-        Me.grpPlot.Location = New System.Drawing.Point(13, 276)
+        resources.ApplyResources(Me.grpPlot, "grpPlot")
         Me.grpPlot.Name = "grpPlot"
-        Me.grpPlot.Size = New System.Drawing.Size(200, 36)
-        Me.grpPlot.TabIndex = 2
         Me.grpPlot.TabStop = False
-        Me.grpPlot.Text = "Plot"
         '
         'rdoProbability
         '
-        Me.rdoProbability.AutoSize = True
-        Me.rdoProbability.Location = New System.Drawing.Point(104, 15)
+        resources.ApplyResources(Me.rdoProbability, "rdoProbability")
         Me.rdoProbability.Name = "rdoProbability"
-        Me.rdoProbability.Size = New System.Drawing.Size(73, 17)
-        Me.rdoProbability.TabIndex = 1
         Me.rdoProbability.TabStop = True
-        Me.rdoProbability.Text = "Probability"
         Me.rdoProbability.UseVisualStyleBackColor = True
         '
         'rdoDensity
         '
-        Me.rdoDensity.AutoSize = True
-        Me.rdoDensity.Location = New System.Drawing.Point(7, 15)
+        resources.ApplyResources(Me.rdoDensity, "rdoDensity")
         Me.rdoDensity.Name = "rdoDensity"
-        Me.rdoDensity.Size = New System.Drawing.Size(60, 17)
-        Me.rdoDensity.TabIndex = 0
         Me.rdoDensity.TabStop = True
-        Me.rdoDensity.Text = "Density"
         Me.rdoDensity.UseVisualStyleBackColor = True
         '
         'cmdAddDistribution
         '
-        Me.cmdAddDistribution.Location = New System.Drawing.Point(13, 315)
+        resources.ApplyResources(Me.cmdAddDistribution, "cmdAddDistribution")
         Me.cmdAddDistribution.Name = "cmdAddDistribution"
-        Me.cmdAddDistribution.Size = New System.Drawing.Size(120, 23)
-        Me.cmdAddDistribution.TabIndex = 3
-        Me.cmdAddDistribution.Text = "Add Distribution"
         Me.cmdAddDistribution.UseVisualStyleBackColor = True
         '
         'lstAddedDistribution
         '
         Me.lstAddedDistribution.FormattingEnabled = True
-        Me.lstAddedDistribution.Location = New System.Drawing.Point(271, 44)
+        resources.ApplyResources(Me.lstAddedDistribution, "lstAddedDistribution")
         Me.lstAddedDistribution.Name = "lstAddedDistribution"
-        Me.lstAddedDistribution.Size = New System.Drawing.Size(120, 147)
-        Me.lstAddedDistribution.TabIndex = 5
         '
         'lblAddedDistribution
         '
-        Me.lblAddedDistribution.AutoSize = True
-        Me.lblAddedDistribution.Location = New System.Drawing.Point(268, 28)
+        resources.ApplyResources(Me.lblAddedDistribution, "lblAddedDistribution")
         Me.lblAddedDistribution.Name = "lblAddedDistribution"
-        Me.lblAddedDistribution.Size = New System.Drawing.Size(93, 13)
-        Me.lblAddedDistribution.TabIndex = 4
-        Me.lblAddedDistribution.Text = "Added Distribution"
         '
         'sdgAddNewDistribution
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(395, 375)
         Me.Controls.Add(Me.lblAddedDistribution)
         Me.Controls.Add(Me.lstAddedDistribution)
         Me.Controls.Add(Me.cmdAddDistribution)
@@ -211,8 +168,6 @@ Partial Class sdgAddNewDistribution
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgAddNewDistribution"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "New Distribution"
         Me.grpChangeLimits.ResumeLayout(False)
         Me.grpChangeLimits.PerformLayout()
         CType(Me.nudYlimUpper, System.ComponentModel.ISupportInitialize).EndInit()

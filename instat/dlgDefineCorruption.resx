@@ -117,4 +117,907 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ucrDefineCorruptionSelector.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrDefineCorruptionSelector.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrDefineCorruptionSelector.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 180</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrDefineCorruptionSelector.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrDefineCorruptionSelector.Name" xml:space="preserve">
+    <value>ucrDefineCorruptionSelector</value>
+  </data>
+  <data name="&gt;&gt;ucrDefineCorruptionSelector.Type" xml:space="preserve">
+    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrDefineCorruptionSelector.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrDefineCorruptionSelector.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 377</value>
+  </data>
+  <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>410, 52</value>
+  </data>
+  <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
+    <value>ucrBase</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Type" xml:space="preserve">
+    <value>instat.ucrButtons, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="lblNoBidsReceived.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblNoBidsReceived.Location" type="System.Drawing.Point, System.Drawing">
+    <value>414, 27</value>
+  </data>
+  <data name="lblNoBidsReceived.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 13</value>
+  </data>
+  <data name="lblNoBidsReceived.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="lblNoBidsReceived.Text" xml:space="preserve">
+    <value>No. Bids Received:</value>
+  </data>
+  <data name="&gt;&gt;lblNoBidsReceived.Name" xml:space="preserve">
+    <value>lblNoBidsReceived</value>
+  </data>
+  <data name="&gt;&gt;lblNoBidsReceived.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblNoBidsReceived.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblNoBidsReceived.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>553, 437</value>
+  </data>
+  <data name="cmdCalculatedColumns.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 233</value>
+  </data>
+  <data name="cmdCalculatedColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 23</value>
+  </data>
+  <data name="cmdCalculatedColumns.TabIndex" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="cmdCalculatedColumns.Text" xml:space="preserve">
+    <value>Calculated Columns</value>
+  </data>
+  <data name="&gt;&gt;cmdCalculatedColumns.Name" xml:space="preserve">
+    <value>cmdCalculatedColumns</value>
+  </data>
+  <data name="&gt;&gt;cmdCalculatedColumns.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdCalculatedColumns.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmdCalculatedColumns.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cmdCountryLevel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 203</value>
+  </data>
+  <data name="cmdCountryLevel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 23</value>
+  </data>
+  <data name="cmdCountryLevel.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="cmdCountryLevel.Text" xml:space="preserve">
+    <value>Country Level</value>
+  </data>
+  <data name="&gt;&gt;cmdCountryLevel.Name" xml:space="preserve">
+    <value>cmdCountryLevel</value>
+  </data>
+  <data name="&gt;&gt;cmdCountryLevel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdCountryLevel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmdCountryLevel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrChkAutoGenerate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 265</value>
+  </data>
+  <data name="ucrChkAutoGenerate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrChkAutoGenerate.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAutoGenerate.Name" xml:space="preserve">
+    <value>ucrChkAutoGenerate</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAutoGenerate.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAutoGenerate.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAutoGenerate.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblRegion.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblRegion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>251, 70</value>
+  </data>
+  <data name="lblRegion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 13</value>
+  </data>
+  <data name="lblRegion.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblRegion.Text" xml:space="preserve">
+    <value>Region:</value>
+  </data>
+  <data name="&gt;&gt;lblRegion.Name" xml:space="preserve">
+    <value>lblRegion</value>
+  </data>
+  <data name="&gt;&gt;lblRegion.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblRegion.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblRegion.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrReceiverRegion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>251, 85</value>
+  </data>
+  <data name="ucrReceiverRegion.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverRegion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverRegion.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverRegion.Name" xml:space="preserve">
+    <value>ucrReceiverRegion</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverRegion.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverRegion.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverRegion.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lblFiscalYear.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFiscalYear.Location" type="System.Drawing.Point, System.Drawing">
+    <value>414, 285</value>
+  </data>
+  <data name="lblFiscalYear.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 13</value>
+  </data>
+  <data name="lblFiscalYear.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="lblFiscalYear.Text" xml:space="preserve">
+    <value>Fiscal Year:</value>
+  </data>
+  <data name="&gt;&gt;lblFiscalYear.Name" xml:space="preserve">
+    <value>lblFiscalYear</value>
+  </data>
+  <data name="&gt;&gt;lblFiscalYear.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblFiscalYear.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblFiscalYear.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="ucrReceiverFiscalYear.Location" type="System.Drawing.Point, System.Drawing">
+    <value>414, 300</value>
+  </data>
+  <data name="ucrReceiverFiscalYear.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverFiscalYear.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverFiscalYear.TabIndex" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverFiscalYear.Name" xml:space="preserve">
+    <value>ucrReceiverFiscalYear</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverFiscalYear.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverFiscalYear.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverFiscalYear.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="ucrReceiverContractValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>414, 257</value>
+  </data>
+  <data name="ucrReceiverContractValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverContractValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverContractValue.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverContractValue.Name" xml:space="preserve">
+    <value>ucrReceiverContractValue</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverContractValue.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverContractValue.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverContractValue.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="lblContractValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblContractValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>414, 242</value>
+  </data>
+  <data name="lblContractValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 13</value>
+  </data>
+  <data name="lblContractValue.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="lblContractValue.Text" xml:space="preserve">
+    <value>Contract Value:</value>
+  </data>
+  <data name="&gt;&gt;lblContractValue.Name" xml:space="preserve">
+    <value>lblContractValue</value>
+  </data>
+  <data name="&gt;&gt;lblContractValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblContractValue.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblContractValue.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="lblCountry.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblCountry.Location" type="System.Drawing.Point, System.Drawing">
+    <value>251, 27</value>
+  </data>
+  <data name="lblCountry.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 13</value>
+  </data>
+  <data name="lblCountry.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblCountry.Text" xml:space="preserve">
+    <value>Country:</value>
+  </data>
+  <data name="&gt;&gt;lblCountry.Name" xml:space="preserve">
+    <value>lblCountry</value>
+  </data>
+  <data name="&gt;&gt;lblCountry.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblCountry.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblCountry.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="lblSignatureDate.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSignatureDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>251, 199</value>
+  </data>
+  <data name="lblSignatureDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>81, 13</value>
+  </data>
+  <data name="lblSignatureDate.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="lblSignatureDate.Text" xml:space="preserve">
+    <value>Signature Date:</value>
+  </data>
+  <data name="&gt;&gt;lblSignatureDate.Name" xml:space="preserve">
+    <value>lblSignatureDate</value>
+  </data>
+  <data name="&gt;&gt;lblSignatureDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSignatureDate.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblSignatureDate.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="ucrReceiverProcedureType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>414, 128</value>
+  </data>
+  <data name="ucrReceiverProcedureType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverProcedureType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverProcedureType.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverProcedureType.Name" xml:space="preserve">
+    <value>ucrReceiverProcedureType</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverProcedureType.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverProcedureType.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverProcedureType.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="lblAwardDate.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblAwardDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>251, 156</value>
+  </data>
+  <data name="lblAwardDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 13</value>
+  </data>
+  <data name="lblAwardDate.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="lblAwardDate.Text" xml:space="preserve">
+    <value>Award Date:</value>
+  </data>
+  <data name="&gt;&gt;lblAwardDate.Name" xml:space="preserve">
+    <value>lblAwardDate</value>
+  </data>
+  <data name="&gt;&gt;lblAwardDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblAwardDate.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblAwardDate.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="lblProcedureType.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblProcedureType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>414, 113</value>
+  </data>
+  <data name="lblProcedureType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 13</value>
+  </data>
+  <data name="lblProcedureType.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="lblProcedureType.Text" xml:space="preserve">
+    <value>Procedure Type:</value>
+  </data>
+  <data name="&gt;&gt;lblProcedureType.Name" xml:space="preserve">
+    <value>lblProcedureType</value>
+  </data>
+  <data name="&gt;&gt;lblProcedureType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblProcedureType.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblProcedureType.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="ucrReceiverContractTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>251, 257</value>
+  </data>
+  <data name="ucrReceiverContractTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverContractTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverContractTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverContractTitle.Name" xml:space="preserve">
+    <value>ucrReceiverContractTitle</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverContractTitle.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverContractTitle.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverContractTitle.ZOrder" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="ucrReceiverAwardDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>251, 171</value>
+  </data>
+  <data name="ucrReceiverAwardDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverAwardDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverAwardDate.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverAwardDate.Name" xml:space="preserve">
+    <value>ucrReceiverAwardDate</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverAwardDate.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverAwardDate.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverAwardDate.ZOrder" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="lblContractTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblContractTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>251, 242</value>
+  </data>
+  <data name="lblContractTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 13</value>
+  </data>
+  <data name="lblContractTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="lblContractTitle.Text" xml:space="preserve">
+    <value>Contract Title:</value>
+  </data>
+  <data name="&gt;&gt;lblContractTitle.Name" xml:space="preserve">
+    <value>lblContractTitle</value>
+  </data>
+  <data name="&gt;&gt;lblContractTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblContractTitle.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblContractTitle.ZOrder" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="ucrReceiverSignatureDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>251, 214</value>
+  </data>
+  <data name="ucrReceiverSignatureDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverSignatureDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverSignatureDate.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSignatureDate.Name" xml:space="preserve">
+    <value>ucrReceiverSignatureDate</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSignatureDate.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSignatureDate.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSignatureDate.ZOrder" xml:space="preserve">
+    <value>21</value>
+  </data>
+  <data name="ucrReceiverNoConsideredBids.Location" type="System.Drawing.Point, System.Drawing">
+    <value>414, 85</value>
+  </data>
+  <data name="ucrReceiverNoConsideredBids.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverNoConsideredBids.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverNoConsideredBids.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverNoConsideredBids.Name" xml:space="preserve">
+    <value>ucrReceiverNoConsideredBids</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverNoConsideredBids.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverNoConsideredBids.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverNoConsideredBids.ZOrder" xml:space="preserve">
+    <value>22</value>
+  </data>
+  <data name="lblNoConsideredBids.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblNoConsideredBids.Location" type="System.Drawing.Point, System.Drawing">
+    <value>414, 70</value>
+  </data>
+  <data name="lblNoConsideredBids.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 13</value>
+  </data>
+  <data name="lblNoConsideredBids.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="lblNoConsideredBids.Text" xml:space="preserve">
+    <value>No. Considered Bids:</value>
+  </data>
+  <data name="&gt;&gt;lblNoConsideredBids.Name" xml:space="preserve">
+    <value>lblNoConsideredBids</value>
+  </data>
+  <data name="&gt;&gt;lblNoConsideredBids.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblNoConsideredBids.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblNoConsideredBids.ZOrder" xml:space="preserve">
+    <value>23</value>
+  </data>
+  <data name="ucrReceiverCountry.Location" type="System.Drawing.Point, System.Drawing">
+    <value>251, 42</value>
+  </data>
+  <data name="ucrReceiverCountry.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverCountry.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverCountry.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverCountry.Name" xml:space="preserve">
+    <value>ucrReceiverCountry</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverCountry.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverCountry.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverCountry.ZOrder" xml:space="preserve">
+    <value>24</value>
+  </data>
+  <data name="ucrReceiverWinnerCountry.Location" type="System.Drawing.Point, System.Drawing">
+    <value>414, 214</value>
+  </data>
+  <data name="ucrReceiverWinnerCountry.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverWinnerCountry.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverWinnerCountry.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverWinnerCountry.Name" xml:space="preserve">
+    <value>ucrReceiverWinnerCountry</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverWinnerCountry.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverWinnerCountry.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverWinnerCountry.ZOrder" xml:space="preserve">
+    <value>25</value>
+  </data>
+  <data name="lblProcuringAuthority.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblProcuringAuthority.Location" type="System.Drawing.Point, System.Drawing">
+    <value>251, 113</value>
+  </data>
+  <data name="lblProcuringAuthority.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 13</value>
+  </data>
+  <data name="lblProcuringAuthority.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lblProcuringAuthority.Text" xml:space="preserve">
+    <value>Procuring Authority:</value>
+  </data>
+  <data name="&gt;&gt;lblProcuringAuthority.Name" xml:space="preserve">
+    <value>lblProcuringAuthority</value>
+  </data>
+  <data name="&gt;&gt;lblProcuringAuthority.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblProcuringAuthority.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblProcuringAuthority.ZOrder" xml:space="preserve">
+    <value>26</value>
+  </data>
+  <data name="ucrReceiverProcuringAuthority.Location" type="System.Drawing.Point, System.Drawing">
+    <value>251, 128</value>
+  </data>
+  <data name="ucrReceiverProcuringAuthority.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverProcuringAuthority.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverProcuringAuthority.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverProcuringAuthority.Name" xml:space="preserve">
+    <value>ucrReceiverProcuringAuthority</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverProcuringAuthority.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverProcuringAuthority.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverProcuringAuthority.ZOrder" xml:space="preserve">
+    <value>27</value>
+  </data>
+  <data name="lblWinnerCountry.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblWinnerCountry.Location" type="System.Drawing.Point, System.Drawing">
+    <value>414, 199</value>
+  </data>
+  <data name="lblWinnerCountry.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 13</value>
+  </data>
+  <data name="lblWinnerCountry.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="lblWinnerCountry.Text" xml:space="preserve">
+    <value>Winner Country:</value>
+  </data>
+  <data name="&gt;&gt;lblWinnerCountry.Name" xml:space="preserve">
+    <value>lblWinnerCountry</value>
+  </data>
+  <data name="&gt;&gt;lblWinnerCountry.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblWinnerCountry.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblWinnerCountry.ZOrder" xml:space="preserve">
+    <value>28</value>
+  </data>
+  <data name="lblContractSector.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblContractSector.Location" type="System.Drawing.Point, System.Drawing">
+    <value>251, 285</value>
+  </data>
+  <data name="lblContractSector.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 13</value>
+  </data>
+  <data name="lblContractSector.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="lblContractSector.Text" xml:space="preserve">
+    <value>Contract Sector:</value>
+  </data>
+  <data name="&gt;&gt;lblContractSector.Name" xml:space="preserve">
+    <value>lblContractSector</value>
+  </data>
+  <data name="&gt;&gt;lblContractSector.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblContractSector.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblContractSector.ZOrder" xml:space="preserve">
+    <value>29</value>
+  </data>
+  <data name="ucrReceiverContractSector.Location" type="System.Drawing.Point, System.Drawing">
+    <value>251, 300</value>
+  </data>
+  <data name="ucrReceiverContractSector.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverContractSector.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverContractSector.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverContractSector.Name" xml:space="preserve">
+    <value>ucrReceiverContractSector</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverContractSector.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverContractSector.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverContractSector.ZOrder" xml:space="preserve">
+    <value>30</value>
+  </data>
+  <data name="lblProcurementCategory.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblProcurementCategory.Location" type="System.Drawing.Point, System.Drawing">
+    <value>251, 331</value>
+  </data>
+  <data name="lblProcurementCategory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 13</value>
+  </data>
+  <data name="lblProcurementCategory.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="lblProcurementCategory.Text" xml:space="preserve">
+    <value>Procurement Category:</value>
+  </data>
+  <data name="&gt;&gt;lblProcurementCategory.Name" xml:space="preserve">
+    <value>lblProcurementCategory</value>
+  </data>
+  <data name="&gt;&gt;lblProcurementCategory.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblProcurementCategory.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblProcurementCategory.ZOrder" xml:space="preserve">
+    <value>31</value>
+  </data>
+  <data name="ucrReceiverProcurementCategory.Location" type="System.Drawing.Point, System.Drawing">
+    <value>251, 346</value>
+  </data>
+  <data name="ucrReceiverProcurementCategory.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverProcurementCategory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverProcurementCategory.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverProcurementCategory.Name" xml:space="preserve">
+    <value>ucrReceiverProcurementCategory</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverProcurementCategory.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverProcurementCategory.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverProcurementCategory.ZOrder" xml:space="preserve">
+    <value>32</value>
+  </data>
+  <data name="lblWinnerName.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblWinnerName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>414, 156</value>
+  </data>
+  <data name="lblWinnerName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 13</value>
+  </data>
+  <data name="lblWinnerName.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="lblWinnerName.Text" xml:space="preserve">
+    <value>Winner Name:</value>
+  </data>
+  <data name="&gt;&gt;lblWinnerName.Name" xml:space="preserve">
+    <value>lblWinnerName</value>
+  </data>
+  <data name="&gt;&gt;lblWinnerName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblWinnerName.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblWinnerName.ZOrder" xml:space="preserve">
+    <value>33</value>
+  </data>
+  <data name="ucrReceiverWinnerName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>414, 171</value>
+  </data>
+  <data name="ucrReceiverWinnerName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverWinnerName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverWinnerName.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverWinnerName.Name" xml:space="preserve">
+    <value>ucrReceiverWinnerName</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverWinnerName.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverWinnerName.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverWinnerName.ZOrder" xml:space="preserve">
+    <value>34</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Define Procurement Data</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>dlgDefineCorruption</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ucrReceiverNoBids.Location" type="System.Drawing.Point, System.Drawing">
+    <value>414, 42</value>
+  </data>
+  <data name="ucrReceiverNoBids.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverNoBids.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverNoBids.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverNoBids.Name" xml:space="preserve">
+    <value>ucrReceiverNoBids</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverNoBids.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverNoBids.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverNoBids.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
 </root>
