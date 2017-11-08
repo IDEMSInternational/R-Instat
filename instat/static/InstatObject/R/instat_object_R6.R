@@ -442,7 +442,7 @@ instat_object$set("public", "add_object", function(data_name, object, object_nam
 }
 ) 
 
-instat_object$set("public", "get_objects", function(data_name, object_name, include_overall = TRUE, as_list = FALSE, type = "", include_empty = FALSE, force_as_list = FALSE) {
+instat_object$set("public", "get_objects", function(data_name, object_name, include_overall = TRUE, as_list = FALSE, type = "", include_empty = FALSE, force_as_list = FALSE, print_graph = TRUE) {
   #TODO implement force_as_list in all cases
   if(missing(data_name)) {
     if(!missing(object_name)) {
@@ -472,7 +472,10 @@ instat_object$set("public", "get_objects", function(data_name, object_name, incl
       lst[[data_name]][[object_name]] <- out
       return(lst)
     }
-    else return(out)
+    else {
+      if(print_graph && (ggplot2::is.ggplot(out) || "gg" %in% class(out))) return(print(out))
+      else return(out)
+    }
   }
 }
 )
@@ -589,8 +592,8 @@ instat_object$set("public", "add_graph", function(data_name, graph, graph_name) 
 }
 )
 
-instat_object$set("public", "get_graphs", function(data_name, graph_name, include_overall = TRUE, force_as_list = FALSE) {
-  self$get_objects(data_name = data_name, object_name = graph_name, include_overall = include_overall, type = graph_label, force_as_list = force_as_list)
+instat_object$set("public", "get_graphs", function(data_name, graph_name, include_overall = TRUE, force_as_list = FALSE, print_graph = TRUE) {
+  self$get_objects(data_name = data_name, object_name = graph_name, include_overall = include_overall, type = graph_label, force_as_list = force_as_list, print_graph = print_graph)
 }
 )
 
