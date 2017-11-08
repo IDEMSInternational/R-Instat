@@ -3564,7 +3564,7 @@ Partial Class frmMain
         '
         'mnuProcurementDescribe
         '
-        Me.mnuProcurementDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementDescribeOneVar, Me.OneVariableSummariseToolStripMenuItem, Me.OneVariableGraphToolStripMenuItem, Me.ToolStripSeparator44, Me.mnuProcurementDescribeTwoVar, Me.CorrelationsRedFlagsOrOthersToolStripMenuItem})
+        Me.mnuProcurementDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OneVariableSummariseToolStripMenuItem, Me.OneVariableGraphToolStripMenuItem, Me.mnuProcurementDescribeOneVar, Me.ToolStripSeparator44, Me.mnuProcurementDescribeTwoVar, Me.CorrelationsRedFlagsOrOthersToolStripMenuItem})
         Me.mnuProcurementDescribe.Name = "mnuProcurementDescribe"
         Me.mnuProcurementDescribe.Size = New System.Drawing.Size(216, 22)
         Me.mnuProcurementDescribe.Text = "Describe"
