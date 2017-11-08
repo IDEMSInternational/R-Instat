@@ -124,7 +124,7 @@ Partial Class dlgImportFromODK
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblChooseForm)
         Me.Controls.Add(Me.lblUsername)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgImportFromODK"
