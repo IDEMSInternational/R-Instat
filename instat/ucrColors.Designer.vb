@@ -35,11 +35,12 @@ Partial Class ucrColors
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrColors))
         Me.SuspendLayout()
         '
         'ucrColors
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.Name = "ucrColors"
         Me.ResumeLayout(False)
 
