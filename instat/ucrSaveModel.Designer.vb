@@ -38,37 +38,32 @@ Partial Class ucrSaveModel
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrSaveModel))
         Me.chkSaveModel = New System.Windows.Forms.CheckBox()
         Me.ucrInputModelName = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'chkSaveModel
         '
-        Me.chkSaveModel.AutoSize = True
-        Me.chkSaveModel.Location = New System.Drawing.Point(0, 3)
+        resources.ApplyResources(Me.chkSaveModel, "chkSaveModel")
         Me.chkSaveModel.Name = "chkSaveModel"
-        Me.chkSaveModel.Size = New System.Drawing.Size(83, 17)
-        Me.chkSaveModel.TabIndex = 1
         Me.chkSaveModel.Tag = "Save_Model"
-        Me.chkSaveModel.Text = "Save Model"
         Me.chkSaveModel.UseVisualStyleBackColor = True
         '
         'ucrInputModelName
         '
-        Me.ucrInputModelName.Location = New System.Drawing.Point(86, 0)
-        Me.ucrInputModelName.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrInputModelName.AddQuotesIfUnrecognised = True
+        Me.ucrInputModelName.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputModelName, "ucrInputModelName")
         Me.ucrInputModelName.Name = "ucrInputModelName"
-        Me.ucrInputModelName.Size = New System.Drawing.Size(180, 20)
-        Me.ucrInputModelName.TabIndex = 0
         '
         'ucrSaveModel
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.chkSaveModel)
         Me.Controls.Add(Me.ucrInputModelName)
         Me.Name = "ucrSaveModel"
-        Me.Size = New System.Drawing.Size(265, 20)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

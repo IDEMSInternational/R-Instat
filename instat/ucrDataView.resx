@@ -120,16 +120,709 @@
   <metadata name="columnContextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="mnuColumnRename.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="mnuColumnRename.Text" xml:space="preserve">
+    <value>Rename Column...</value>
+  </data>
+  <data name="mnuDuplicateColumn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="mnuDuplicateColumn.Text" xml:space="preserve">
+    <value>Duplicate Column...</value>
+  </data>
+  <data name="mnuInsertColsBefore.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="mnuInsertColsBefore.Text" xml:space="preserve">
+    <value>Insert Column(s) Before</value>
+  </data>
+  <data name="mnuInsertColsAfter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="mnuInsertColsAfter.Text" xml:space="preserve">
+    <value>Insert Column(s) After</value>
+  </data>
+  <data name="mnuDeleteCol.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="mnuDeleteCol.Text" xml:space="preserve">
+    <value>Delete Column(s)</value>
+  </data>
+  <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 6</value>
+  </data>
+  <data name="mnuConvertToFactor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="mnuConvertToFactor.Text" xml:space="preserve">
+    <value>Convert to Factor</value>
+  </data>
+  <data name="mnuCovertToOrderedFactors.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="mnuCovertToOrderedFactors.Text" xml:space="preserve">
+    <value>Convert to Ordered Factor</value>
+  </data>
+  <data name="mnuConvertText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="mnuConvertText.Text" xml:space="preserve">
+    <value>Convert to Character</value>
+  </data>
+  <data name="mnuConvertToLogical.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="mnuConvertToLogical.Text" xml:space="preserve">
+    <value>Convert to Logical</value>
+  </data>
+  <data name="mnuConvertVariate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="mnuConvertVariate.Text" xml:space="preserve">
+    <value>Convert to Numeric</value>
+  </data>
+  <data name="ToolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 6</value>
+  </data>
+  <data name="mnuLevelsLabels.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="mnuLevelsLabels.Text" xml:space="preserve">
+    <value>Levels/Labels...</value>
+  </data>
+  <data name="toolStripMenuItem21.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 6</value>
+  </data>
+  <data name="mnuFreezeToHere.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="mnuFreezeToHere.Text" xml:space="preserve">
+    <value>Freeze to Here</value>
+  </data>
+  <data name="mnuUnfreeze.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="mnuUnfreeze.Text" xml:space="preserve">
+    <value>Unfreeze</value>
+  </data>
+  <data name="ToolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 6</value>
+  </data>
+  <data name="mnuSort.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="mnuSort.Text" xml:space="preserve">
+    <value>Sort...</value>
+  </data>
+  <data name="mnuColumnFilter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="mnuColumnFilter.Text" xml:space="preserve">
+    <value>Filter...</value>
+  </data>
+  <data name="mnuClearColumnFilter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="mnuClearColumnFilter.Text" xml:space="preserve">
+    <value>Remove Current Filter</value>
+  </data>
+  <data name="columnContextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 380</value>
+  </data>
+  <data name="&gt;&gt;columnContextMenuStrip.Name" xml:space="preserve">
+    <value>columnContextMenuStrip</value>
+  </data>
+  <data name="&gt;&gt;columnContextMenuStrip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <metadata name="cellContextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>208, 17</value>
   </metadata>
+  <data name="AddComment.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 22</value>
+  </data>
+  <data name="AddComment.Text" xml:space="preserve">
+    <value>Add Comment...</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cutRangeToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="cutRangeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 22</value>
+  </data>
+  <data name="cutRangeToolStripMenuItem.Text" xml:space="preserve">
+    <value>Cut</value>
+  </data>
+  <data name="copyRangeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 22</value>
+  </data>
+  <data name="copyRangeToolStripMenuItem.Text" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="pasteRangeToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="pasteRangeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 22</value>
+  </data>
+  <data name="pasteRangeToolStripMenuItem.Text" xml:space="preserve">
+    <value>Paste</value>
+  </data>
+  <data name="cellContextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>163, 92</value>
+  </data>
+  <data name="&gt;&gt;cellContextMenuStrip.Name" xml:space="preserve">
+    <value>cellContextMenuStrip</value>
+  </data>
+  <data name="&gt;&gt;cellContextMenuStrip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="grdData.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="grdData.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
   <metadata name="rowContextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>377, 17</value>
   </metadata>
+  <data name="mnuInsertRowsBefore.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="mnuInsertRowsBefore.Text" xml:space="preserve">
+    <value>Insert Row(s) Before</value>
+  </data>
+  <data name="mnuInsertRowsAfter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="mnuInsertRowsAfter.Text" xml:space="preserve">
+    <value>Insert Row(s) After</value>
+  </data>
+  <data name="mnuDeleteRows.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="mnuDeleteRows.Text" xml:space="preserve">
+    <value>Delete Row(s)</value>
+  </data>
+  <data name="ToolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 6</value>
+  </data>
+  <data name="mnuAddComment.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="mnuAddComment.Text" xml:space="preserve">
+    <value>Add Comment...</value>
+  </data>
+  <data name="ToolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 6</value>
+  </data>
+  <data name="mnuFilter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="mnuFilter.Text" xml:space="preserve">
+    <value>Filter...</value>
+  </data>
+  <data name="mnuRemoveCurrentFilter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="mnuRemoveCurrentFilter.Text" xml:space="preserve">
+    <value>Remove Current Filter</value>
+  </data>
+  <data name="rowContextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 148</value>
+  </data>
+  <data name="&gt;&gt;rowContextMenuStrip.Name" xml:space="preserve">
+    <value>rowContextMenuStrip</value>
+  </data>
+  <data name="&gt;&gt;rowContextMenuStrip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <metadata name="statusColumnMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>548, 17</value>
+  </metadata>
+  <data name="deleteDataFrame.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 22</value>
+  </data>
+  <data name="deleteDataFrame.Text" xml:space="preserve">
+    <value>Delete...</value>
+  </data>
+  <data name="renameSheet.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 22</value>
+  </data>
+  <data name="renameSheet.Text" xml:space="preserve">
+    <value>Rename...</value>
+  </data>
+  <data name="HideSheet.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 22</value>
+  </data>
+  <data name="HideSheet.Text" xml:space="preserve">
+    <value>Hide</value>
+  </data>
+  <data name="unhideSheet.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 22</value>
+  </data>
+  <data name="unhideSheet.Text" xml:space="preserve">
+    <value>Unhide...</value>
+  </data>
+  <data name="CopySheet.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 22</value>
+  </data>
+  <data name="CopySheet.Text" xml:space="preserve">
+    <value>Copy...</value>
+  </data>
+  <data name="reorderSheet.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="reorderSheet.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 22</value>
+  </data>
+  <data name="reorderSheet.Text" xml:space="preserve">
+    <value>Reorder...</value>
+  </data>
+  <data name="ViewSheet.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 22</value>
+  </data>
+  <data name="ViewSheet.Text" xml:space="preserve">
+    <value>View Data Frame</value>
+  </data>
+  <data name="statusColumnMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>163, 158</value>
+  </data>
+  <data name="&gt;&gt;statusColumnMenu.Name" xml:space="preserve">
+    <value>statusColumnMenu</value>
+  </data>
+  <data name="&gt;&gt;statusColumnMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="grdData.Size" type="System.Drawing.Size, System.Drawing">
+    <value>438, 238</value>
+  </data>
+  <data name="grdData.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;grdData.Name" xml:space="preserve">
+    <value>grdData</value>
+  </data>
+  <data name="&gt;&gt;grdData.Type" xml:space="preserve">
+    <value>unvell.ReoGrid.ReoGridControl, unvell.ReoGrid, Version=2.0.1.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;grdData.Parent" xml:space="preserve">
+    <value>pnlDataContainer</value>
+  </data>
+  <data name="&gt;&gt;grdData.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblNoData.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="lblNoData.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 20.25pt</value>
+  </data>
+  <data name="lblNoData.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="lblNoData.Size" type="System.Drawing.Size, System.Drawing">
+    <value>438, 238</value>
+  </data>
+  <data name="lblNoData.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblNoData.Text" xml:space="preserve">
+    <value>No Data Loaded</value>
+  </data>
+  <data name="lblNoData.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;lblNoData.Name" xml:space="preserve">
+    <value>lblNoData</value>
+  </data>
+  <data name="&gt;&gt;lblNoData.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblNoData.Parent" xml:space="preserve">
+    <value>pnlDataContainer</value>
+  </data>
+  <data name="&gt;&gt;lblNoData.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblRowDisplay.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="lblRowDisplay.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
+  </data>
+  <data name="lblRowDisplay.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 264</value>
+  </data>
+  <data name="lblRowDisplay.Size" type="System.Drawing.Size, System.Drawing">
+    <value>438, 20</value>
+  </data>
+  <data name="lblRowDisplay.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblRowDisplay.Text" xml:space="preserve">
+    <value>Label1</value>
+  </data>
+  <data name="lblRowDisplay.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;lblRowDisplay.Name" xml:space="preserve">
+    <value>lblRowDisplay</value>
+  </data>
+  <data name="&gt;&gt;lblRowDisplay.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblRowDisplay.Parent" xml:space="preserve">
+    <value>tlpTableContainer</value>
+  </data>
+  <data name="&gt;&gt;lblRowDisplay.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblHeader.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="lblHeader.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
+  </data>
+  <data name="lblHeader.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="lblHeader.Size" type="System.Drawing.Size, System.Drawing">
+    <value>438, 20</value>
+  </data>
+  <data name="lblHeader.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lblHeader.Text" xml:space="preserve">
+    <value>Data View</value>
+  </data>
+  <data name="lblHeader.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;lblHeader.Name" xml:space="preserve">
+    <value>lblHeader</value>
+  </data>
+  <data name="&gt;&gt;lblHeader.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblHeader.Parent" xml:space="preserve">
+    <value>tlpTableContainer</value>
+  </data>
+  <data name="&gt;&gt;lblHeader.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tlpTableContainer.ColumnCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="pnlDataContainer.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="pnlDataContainer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 23</value>
+  </data>
+  <data name="pnlDataContainer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>438, 238</value>
+  </data>
+  <data name="pnlDataContainer.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;pnlDataContainer.Name" xml:space="preserve">
+    <value>pnlDataContainer</value>
+  </data>
+  <data name="&gt;&gt;pnlDataContainer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlDataContainer.Parent" xml:space="preserve">
+    <value>tlpTableContainer</value>
+  </data>
+  <data name="&gt;&gt;pnlDataContainer.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tlpTableContainer.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tlpTableContainer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tlpTableContainer.RowCount" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="tlpTableContainer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>444, 284</value>
+  </data>
+  <data name="tlpTableContainer.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;tlpTableContainer.Name" xml:space="preserve">
+    <value>tlpTableContainer</value>
+  </data>
+  <data name="&gt;&gt;tlpTableContainer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tlpTableContainer.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tlpTableContainer.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="tlpTableContainer.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lblHeader" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblRowDisplay" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="pnlDataContainer" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Absolute,20,Percent,100,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>91</value>
   </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>444, 284</value>
+  </data>
+  <data name="&gt;&gt;mnuColumnRename.Name" xml:space="preserve">
+    <value>mnuColumnRename</value>
+  </data>
+  <data name="&gt;&gt;mnuColumnRename.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuDuplicateColumn.Name" xml:space="preserve">
+    <value>mnuDuplicateColumn</value>
+  </data>
+  <data name="&gt;&gt;mnuDuplicateColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuInsertColsBefore.Name" xml:space="preserve">
+    <value>mnuInsertColsBefore</value>
+  </data>
+  <data name="&gt;&gt;mnuInsertColsBefore.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuInsertColsAfter.Name" xml:space="preserve">
+    <value>mnuInsertColsAfter</value>
+  </data>
+  <data name="&gt;&gt;mnuInsertColsAfter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuDeleteCol.Name" xml:space="preserve">
+    <value>mnuDeleteCol</value>
+  </data>
+  <data name="&gt;&gt;mnuDeleteCol.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem2.Name" xml:space="preserve">
+    <value>toolStripMenuItem2</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuConvertToFactor.Name" xml:space="preserve">
+    <value>mnuConvertToFactor</value>
+  </data>
+  <data name="&gt;&gt;mnuConvertToFactor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuCovertToOrderedFactors.Name" xml:space="preserve">
+    <value>mnuCovertToOrderedFactors</value>
+  </data>
+  <data name="&gt;&gt;mnuCovertToOrderedFactors.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuConvertText.Name" xml:space="preserve">
+    <value>mnuConvertText</value>
+  </data>
+  <data name="&gt;&gt;mnuConvertText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuConvertToLogical.Name" xml:space="preserve">
+    <value>mnuConvertToLogical</value>
+  </data>
+  <data name="&gt;&gt;mnuConvertToLogical.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuConvertVariate.Name" xml:space="preserve">
+    <value>mnuConvertVariate</value>
+  </data>
+  <data name="&gt;&gt;mnuConvertVariate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator1.Name" xml:space="preserve">
+    <value>ToolStripSeparator1</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuLevelsLabels.Name" xml:space="preserve">
+    <value>mnuLevelsLabels</value>
+  </data>
+  <data name="&gt;&gt;mnuLevelsLabels.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem21.Name" xml:space="preserve">
+    <value>toolStripMenuItem21</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem21.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuFreezeToHere.Name" xml:space="preserve">
+    <value>mnuFreezeToHere</value>
+  </data>
+  <data name="&gt;&gt;mnuFreezeToHere.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuUnfreeze.Name" xml:space="preserve">
+    <value>mnuUnfreeze</value>
+  </data>
+  <data name="&gt;&gt;mnuUnfreeze.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator3.Name" xml:space="preserve">
+    <value>ToolStripSeparator3</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuSort.Name" xml:space="preserve">
+    <value>mnuSort</value>
+  </data>
+  <data name="&gt;&gt;mnuSort.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuColumnFilter.Name" xml:space="preserve">
+    <value>mnuColumnFilter</value>
+  </data>
+  <data name="&gt;&gt;mnuColumnFilter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuClearColumnFilter.Name" xml:space="preserve">
+    <value>mnuClearColumnFilter</value>
+  </data>
+  <data name="&gt;&gt;mnuClearColumnFilter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AddComment.Name" xml:space="preserve">
+    <value>AddComment</value>
+  </data>
+  <data name="&gt;&gt;AddComment.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cutRangeToolStripMenuItem.Name" xml:space="preserve">
+    <value>cutRangeToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;cutRangeToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;copyRangeToolStripMenuItem.Name" xml:space="preserve">
+    <value>copyRangeToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;copyRangeToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pasteRangeToolStripMenuItem.Name" xml:space="preserve">
+    <value>pasteRangeToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;pasteRangeToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuInsertRowsBefore.Name" xml:space="preserve">
+    <value>mnuInsertRowsBefore</value>
+  </data>
+  <data name="&gt;&gt;mnuInsertRowsBefore.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuInsertRowsAfter.Name" xml:space="preserve">
+    <value>mnuInsertRowsAfter</value>
+  </data>
+  <data name="&gt;&gt;mnuInsertRowsAfter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuDeleteRows.Name" xml:space="preserve">
+    <value>mnuDeleteRows</value>
+  </data>
+  <data name="&gt;&gt;mnuDeleteRows.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator2.Name" xml:space="preserve">
+    <value>ToolStripSeparator2</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuAddComment.Name" xml:space="preserve">
+    <value>mnuAddComment</value>
+  </data>
+  <data name="&gt;&gt;mnuAddComment.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator4.Name" xml:space="preserve">
+    <value>ToolStripSeparator4</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuFilter.Name" xml:space="preserve">
+    <value>mnuFilter</value>
+  </data>
+  <data name="&gt;&gt;mnuFilter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuRemoveCurrentFilter.Name" xml:space="preserve">
+    <value>mnuRemoveCurrentFilter</value>
+  </data>
+  <data name="&gt;&gt;mnuRemoveCurrentFilter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;deleteDataFrame.Name" xml:space="preserve">
+    <value>deleteDataFrame</value>
+  </data>
+  <data name="&gt;&gt;deleteDataFrame.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;renameSheet.Name" xml:space="preserve">
+    <value>renameSheet</value>
+  </data>
+  <data name="&gt;&gt;renameSheet.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;HideSheet.Name" xml:space="preserve">
+    <value>HideSheet</value>
+  </data>
+  <data name="&gt;&gt;HideSheet.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;unhideSheet.Name" xml:space="preserve">
+    <value>unhideSheet</value>
+  </data>
+  <data name="&gt;&gt;unhideSheet.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CopySheet.Name" xml:space="preserve">
+    <value>CopySheet</value>
+  </data>
+  <data name="&gt;&gt;CopySheet.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;reorderSheet.Name" xml:space="preserve">
+    <value>reorderSheet</value>
+  </data>
+  <data name="&gt;&gt;reorderSheet.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ViewSheet.Name" xml:space="preserve">
+    <value>ViewSheet</value>
+  </data>
+  <data name="&gt;&gt;ViewSheet.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>ucrDataView</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
