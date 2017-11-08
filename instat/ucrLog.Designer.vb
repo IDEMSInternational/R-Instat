@@ -39,7 +39,6 @@ Partial Class ucrLog
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrLog))
         Me.txtLog = New System.Windows.Forms.TextBox()
         Me.mnuContextLogFile = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuOpenLogFile = New System.Windows.Forms.ToolStripMenuItem()
@@ -53,47 +52,69 @@ Partial Class ucrLog
         'txtLog
         '
         Me.txtLog.ContextMenuStrip = Me.mnuContextLogFile
-        resources.ApplyResources(Me.txtLog, "txtLog")
+        Me.txtLog.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtLog.Location = New System.Drawing.Point(3, 23)
+        Me.txtLog.Multiline = True
         Me.txtLog.Name = "txtLog"
         Me.txtLog.ReadOnly = True
+        Me.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtLog.Size = New System.Drawing.Size(525, 389)
+        Me.txtLog.TabIndex = 0
         Me.txtLog.TabStop = False
         '
         'mnuContextLogFile
         '
         Me.mnuContextLogFile.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOpenLogFile, Me.mnuCopy})
         Me.mnuContextLogFile.Name = "mnuContextLogFile"
-        resources.ApplyResources(Me.mnuContextLogFile, "mnuContextLogFile")
+        Me.mnuContextLogFile.Size = New System.Drawing.Size(148, 48)
         '
         'mnuOpenLogFile
         '
         Me.mnuOpenLogFile.Name = "mnuOpenLogFile"
-        resources.ApplyResources(Me.mnuOpenLogFile, "mnuOpenLogFile")
+        Me.mnuOpenLogFile.Size = New System.Drawing.Size(147, 22)
+        Me.mnuOpenLogFile.Text = "Open Log File"
         '
         'mnuCopy
         '
         Me.mnuCopy.Name = "mnuCopy"
-        resources.ApplyResources(Me.mnuCopy, "mnuCopy")
+        Me.mnuCopy.Size = New System.Drawing.Size(147, 22)
+        Me.mnuCopy.Text = "Copy"
         '
         'lblHeader
         '
         Me.lblHeader.BackColor = System.Drawing.Color.FromArgb(CType(CType(35, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(190, Byte), Integer))
-        resources.ApplyResources(Me.lblHeader, "lblHeader")
+        Me.lblHeader.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.lblHeader.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblHeader.Location = New System.Drawing.Point(3, 0)
         Me.lblHeader.Name = "lblHeader"
+        Me.lblHeader.Size = New System.Drawing.Size(525, 20)
+        Me.lblHeader.TabIndex = 8
+        Me.lblHeader.Text = "Log"
+        Me.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'tlpTableContainer
         '
-        resources.ApplyResources(Me.tlpTableContainer, "tlpTableContainer")
+        Me.tlpTableContainer.ColumnCount = 1
+        Me.tlpTableContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.tlpTableContainer.Controls.Add(Me.lblHeader, 0, 0)
         Me.tlpTableContainer.Controls.Add(Me.txtLog, 0, 1)
+        Me.tlpTableContainer.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tlpTableContainer.Location = New System.Drawing.Point(0, 0)
         Me.tlpTableContainer.Name = "tlpTableContainer"
+        Me.tlpTableContainer.RowCount = 2
+        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tlpTableContainer.Size = New System.Drawing.Size(531, 415)
+        Me.tlpTableContainer.TabIndex = 9
         '
         'ucrLog
         '
-        resources.ApplyResources(Me, "$this")
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.tlpTableContainer)
         Me.Name = "ucrLog"
+        Me.Size = New System.Drawing.Size(531, 415)
         Me.mnuContextLogFile.ResumeLayout(False)
         Me.tlpTableContainer.ResumeLayout(False)
         Me.tlpTableContainer.PerformLayout()
