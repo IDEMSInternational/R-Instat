@@ -38,6 +38,7 @@ Partial Class dlgImportFromODK
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgImportFromODK))
         Me.lblUsername = New System.Windows.Forms.Label()
         Me.lblChooseForm = New System.Windows.Forms.Label()
         Me.cmdFindForms = New System.Windows.Forms.Button()
@@ -51,101 +52,69 @@ Partial Class dlgImportFromODK
         '
         'lblUsername
         '
-        Me.lblUsername.AutoSize = True
-        Me.lblUsername.Location = New System.Drawing.Point(10, 58)
+        resources.ApplyResources(Me.lblUsername, "lblUsername")
         Me.lblUsername.Name = "lblUsername"
-        Me.lblUsername.Size = New System.Drawing.Size(58, 13)
-        Me.lblUsername.TabIndex = 1
-        Me.lblUsername.Text = "Username:"
         '
         'lblChooseForm
         '
-        Me.lblChooseForm.AutoSize = True
-        Me.lblChooseForm.Location = New System.Drawing.Point(10, 118)
+        resources.ApplyResources(Me.lblChooseForm, "lblChooseForm")
         Me.lblChooseForm.Name = "lblChooseForm"
-        Me.lblChooseForm.Size = New System.Drawing.Size(72, 13)
-        Me.lblChooseForm.TabIndex = 4
-        Me.lblChooseForm.Text = "Choose Form:"
         '
         'cmdFindForms
         '
-        Me.cmdFindForms.Location = New System.Drawing.Point(10, 81)
+        resources.ApplyResources(Me.cmdFindForms, "cmdFindForms")
         Me.cmdFindForms.Name = "cmdFindForms"
-        Me.cmdFindForms.Size = New System.Drawing.Size(102, 23)
-        Me.cmdFindForms.TabIndex = 3
-        Me.cmdFindForms.Text = "Find Forms"
         Me.cmdFindForms.UseVisualStyleBackColor = True
         '
         'ucrInputChooseForm
         '
         Me.ucrInputChooseForm.AddQuotesIfUnrecognised = True
         Me.ucrInputChooseForm.IsReadOnly = False
-        Me.ucrInputChooseForm.Location = New System.Drawing.Point(86, 114)
+        resources.ApplyResources(Me.ucrInputChooseForm, "ucrInputChooseForm")
         Me.ucrInputChooseForm.Name = "ucrInputChooseForm"
-        Me.ucrInputChooseForm.Size = New System.Drawing.Size(152, 21)
-        Me.ucrInputChooseForm.TabIndex = 5
         '
         'ucrInputUsername
         '
         Me.ucrInputUsername.AddQuotesIfUnrecognised = True
         Me.ucrInputUsername.IsMultiline = False
         Me.ucrInputUsername.IsReadOnly = False
-        Me.ucrInputUsername.Location = New System.Drawing.Point(86, 56)
+        resources.ApplyResources(Me.ucrInputUsername, "ucrInputUsername")
         Me.ucrInputUsername.Name = "ucrInputUsername"
-        Me.ucrInputUsername.Size = New System.Drawing.Size(152, 21)
-        Me.ucrInputUsername.TabIndex = 2
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 148)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(420, 52)
-        Me.ucrBase.TabIndex = 6
         '
         'ucrPnlPlatform
         '
-        Me.ucrPnlPlatform.Location = New System.Drawing.Point(98, 12)
+        resources.ApplyResources(Me.ucrPnlPlatform, "ucrPnlPlatform")
         Me.ucrPnlPlatform.Name = "ucrPnlPlatform"
-        Me.ucrPnlPlatform.Size = New System.Drawing.Size(246, 28)
-        Me.ucrPnlPlatform.TabIndex = 0
         '
         'rdoKobo
         '
-        Me.rdoKobo.Appearance = System.Windows.Forms.Appearance.Button
+        resources.ApplyResources(Me.rdoKobo, "rdoKobo")
         Me.rdoKobo.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoKobo.FlatAppearance.BorderSize = 2
         Me.rdoKobo.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoKobo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoKobo.Location = New System.Drawing.Point(116, 12)
         Me.rdoKobo.Name = "rdoKobo"
-        Me.rdoKobo.Size = New System.Drawing.Size(100, 28)
-        Me.rdoKobo.TabIndex = 0
         Me.rdoKobo.TabStop = True
-        Me.rdoKobo.Text = "Kobo"
-        Me.rdoKobo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoKobo.UseVisualStyleBackColor = True
         '
         'rdoOna
         '
-        Me.rdoOna.Appearance = System.Windows.Forms.Appearance.Button
+        resources.ApplyResources(Me.rdoOna, "rdoOna")
         Me.rdoOna.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoOna.FlatAppearance.BorderSize = 2
         Me.rdoOna.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoOna.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoOna.Location = New System.Drawing.Point(214, 12)
         Me.rdoOna.Name = "rdoOna"
-        Me.rdoOna.Size = New System.Drawing.Size(100, 28)
-        Me.rdoOna.TabIndex = 1
         Me.rdoOna.TabStop = True
-        Me.rdoOna.Text = "Ona"
-        Me.rdoOna.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoOna.UseVisualStyleBackColor = True
         '
         'dlgImportFromODK
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(418, 205)
         Me.Controls.Add(Me.rdoOna)
         Me.Controls.Add(Me.rdoKobo)
         Me.Controls.Add(Me.ucrPnlPlatform)
@@ -159,8 +128,6 @@ Partial Class dlgImportFromODK
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgImportFromODK"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Import from ODK"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

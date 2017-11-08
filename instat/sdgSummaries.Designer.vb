@@ -38,6 +38,7 @@ Partial Class sdgSummaries
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgSummaries))
         Me.ucrButtonsSummaries = New instat.ucrButtonsSubdialogue()
         Me.tbMissingOptions = New System.Windows.Forms.TabPage()
         Me.rdoPercentage = New System.Windows.Forms.RadioButton()
@@ -94,10 +95,8 @@ Partial Class sdgSummaries
         '
         'ucrButtonsSummaries
         '
-        Me.ucrButtonsSummaries.Location = New System.Drawing.Point(97, 363)
+        resources.ApplyResources(Me.ucrButtonsSummaries, "ucrButtonsSummaries")
         Me.ucrButtonsSummaries.Name = "ucrButtonsSummaries"
-        Me.ucrButtonsSummaries.Size = New System.Drawing.Size(142, 30)
-        Me.ucrButtonsSummaries.TabIndex = 4
         '
         'tbMissingOptions
         '
@@ -107,76 +106,52 @@ Partial Class sdgSummaries
         Me.tbMissingOptions.Controls.Add(Me.lblNumber)
         Me.tbMissingOptions.Controls.Add(Me.ucrNudPercentage)
         Me.tbMissingOptions.Controls.Add(Me.ucrNudNumber)
-        Me.tbMissingOptions.Location = New System.Drawing.Point(4, 22)
+        resources.ApplyResources(Me.tbMissingOptions, "tbMissingOptions")
         Me.tbMissingOptions.Name = "tbMissingOptions"
-        Me.tbMissingOptions.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbMissingOptions.Size = New System.Drawing.Size(320, 327)
-        Me.tbMissingOptions.TabIndex = 4
-        Me.tbMissingOptions.Text = "Missing Options"
         Me.tbMissingOptions.UseVisualStyleBackColor = True
         '
         'rdoPercentage
         '
-        Me.rdoPercentage.AutoSize = True
-        Me.rdoPercentage.Location = New System.Drawing.Point(9, 46)
+        resources.ApplyResources(Me.rdoPercentage, "rdoPercentage")
         Me.rdoPercentage.Name = "rdoPercentage"
-        Me.rdoPercentage.Size = New System.Drawing.Size(80, 17)
-        Me.rdoPercentage.TabIndex = 8
         Me.rdoPercentage.TabStop = True
-        Me.rdoPercentage.Text = "Percentage"
         Me.rdoPercentage.UseVisualStyleBackColor = True
         '
         'rdoNumber
         '
-        Me.rdoNumber.AutoSize = True
-        Me.rdoNumber.Location = New System.Drawing.Point(9, 23)
+        resources.ApplyResources(Me.rdoNumber, "rdoNumber")
         Me.rdoNumber.Name = "rdoNumber"
-        Me.rdoNumber.Size = New System.Drawing.Size(62, 17)
-        Me.rdoNumber.TabIndex = 7
         Me.rdoNumber.TabStop = True
-        Me.rdoNumber.Text = "Number"
         Me.rdoNumber.UseVisualStyleBackColor = True
         '
         'lblPercentage
         '
-        Me.lblPercentage.AutoSize = True
-        Me.lblPercentage.Location = New System.Drawing.Point(4, 70)
+        resources.ApplyResources(Me.lblPercentage, "lblPercentage")
         Me.lblPercentage.Name = "lblPercentage"
-        Me.lblPercentage.Size = New System.Drawing.Size(308, 13)
-        Me.lblPercentage.TabIndex = 6
-        Me.lblPercentage.Text = "Summary set to missing if more than this percentage are missing:"
         '
         'lblNumber
         '
-        Me.lblNumber.AutoSize = True
-        Me.lblNumber.Location = New System.Drawing.Point(6, 70)
+        resources.ApplyResources(Me.lblNumber, "lblNumber")
         Me.lblNumber.Name = "lblNumber"
-        Me.lblNumber.Size = New System.Drawing.Size(280, 13)
-        Me.lblNumber.TabIndex = 5
-        Me.lblNumber.Text = "Summary set to missing if more than this value are missing:"
         '
         'ucrNudPercentage
         '
         Me.ucrNudPercentage.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPercentage.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPercentage.Location = New System.Drawing.Point(319, 66)
+        resources.ApplyResources(Me.ucrNudPercentage, "ucrNudPercentage")
         Me.ucrNudPercentage.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudPercentage.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPercentage.Name = "ucrNudPercentage"
-        Me.ucrNudPercentage.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudPercentage.TabIndex = 4
         Me.ucrNudPercentage.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudNumber
         '
         Me.ucrNudNumber.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumber.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNumber.Location = New System.Drawing.Point(318, 66)
+        resources.ApplyResources(Me.ucrNudNumber, "ucrNudNumber")
         Me.ucrNudNumber.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNumber.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumber.Name = "ucrNudNumber"
-        Me.ucrNudNumber.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudNumber.TabIndex = 3
         Me.ucrNudNumber.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'tbMore
@@ -190,12 +165,8 @@ Partial Class sdgSummaries
         Me.tbMore.Controls.Add(Me.ucrChkCoefficientOfVariation)
         Me.tbMore.Controls.Add(Me.grpScale)
         Me.tbMore.Controls.Add(Me.grpSkewness)
-        Me.tbMore.Location = New System.Drawing.Point(4, 22)
+        resources.ApplyResources(Me.tbMore, "tbMore")
         Me.tbMore.Name = "tbMore"
-        Me.tbMore.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbMore.Size = New System.Drawing.Size(320, 327)
-        Me.tbMore.TabIndex = 1
-        Me.tbMore.Text = "More"
         Me.tbMore.UseVisualStyleBackColor = True
         '
         'grpLocation
@@ -203,116 +174,85 @@ Partial Class sdgSummaries
         Me.grpLocation.Controls.Add(Me.lblFractionTrimmed)
         Me.grpLocation.Controls.Add(Me.ucrNudFraction)
         Me.grpLocation.Controls.Add(Me.ucrChkTrimmedMean)
-        Me.grpLocation.Location = New System.Drawing.Point(6, 10)
+        resources.ApplyResources(Me.grpLocation, "grpLocation")
         Me.grpLocation.Name = "grpLocation"
-        Me.grpLocation.Size = New System.Drawing.Size(302, 52)
-        Me.grpLocation.TabIndex = 7
         Me.grpLocation.TabStop = False
-        Me.grpLocation.Text = "Location"
         '
         'lblFractionTrimmed
         '
-        Me.lblFractionTrimmed.AutoSize = True
-        Me.lblFractionTrimmed.Location = New System.Drawing.Point(121, 21)
+        resources.ApplyResources(Me.lblFractionTrimmed, "lblFractionTrimmed")
         Me.lblFractionTrimmed.Name = "lblFractionTrimmed"
-        Me.lblFractionTrimmed.Size = New System.Drawing.Size(88, 13)
-        Me.lblFractionTrimmed.TabIndex = 8
-        Me.lblFractionTrimmed.Text = "Fraction Trimmed"
         '
         'ucrNudFraction
         '
         Me.ucrNudFraction.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudFraction.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudFraction.Location = New System.Drawing.Point(213, 18)
+        resources.ApplyResources(Me.ucrNudFraction, "ucrNudFraction")
         Me.ucrNudFraction.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudFraction.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudFraction.Name = "ucrNudFraction"
-        Me.ucrNudFraction.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudFraction.TabIndex = 7
         Me.ucrNudFraction.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkTrimmedMean
         '
         Me.ucrChkTrimmedMean.Checked = False
-        Me.ucrChkTrimmedMean.Location = New System.Drawing.Point(14, 19)
+        resources.ApplyResources(Me.ucrChkTrimmedMean, "ucrChkTrimmedMean")
         Me.ucrChkTrimmedMean.Name = "ucrChkTrimmedMean"
-        Me.ucrChkTrimmedMean.Size = New System.Drawing.Size(120, 20)
-        Me.ucrChkTrimmedMean.TabIndex = 6
         '
         'ucrChkKurtosis
         '
         Me.ucrChkKurtosis.Checked = False
-        Me.ucrChkKurtosis.Location = New System.Drawing.Point(19, 197)
+        resources.ApplyResources(Me.ucrChkKurtosis, "ucrChkKurtosis")
         Me.ucrChkKurtosis.Name = "ucrChkKurtosis"
-        Me.ucrChkKurtosis.Size = New System.Drawing.Size(120, 20)
-        Me.ucrChkKurtosis.TabIndex = 5
         '
         'ucrChkSkewness
         '
         Me.ucrChkSkewness.Checked = False
-        Me.ucrChkSkewness.Location = New System.Drawing.Point(19, 148)
+        resources.ApplyResources(Me.ucrChkSkewness, "ucrChkSkewness")
         Me.ucrChkSkewness.Name = "ucrChkSkewness"
-        Me.ucrChkSkewness.Size = New System.Drawing.Size(174, 20)
-        Me.ucrChkSkewness.TabIndex = 2
         '
         'ucrChkSn
         '
         Me.ucrChkSn.Checked = False
-        Me.ucrChkSn.Location = New System.Drawing.Point(213, 103)
+        resources.ApplyResources(Me.ucrChkSn, "ucrChkSn")
         Me.ucrChkSn.Name = "ucrChkSn"
-        Me.ucrChkSn.Size = New System.Drawing.Size(76, 20)
-        Me.ucrChkSn.TabIndex = 4
         '
         'ucrChkQn
         '
         Me.ucrChkQn.Checked = False
-        Me.ucrChkQn.Location = New System.Drawing.Point(213, 77)
+        resources.ApplyResources(Me.ucrChkQn, "ucrChkQn")
         Me.ucrChkQn.Name = "ucrChkQn"
-        Me.ucrChkQn.Size = New System.Drawing.Size(76, 20)
-        Me.ucrChkQn.TabIndex = 3
         '
         'ucrChkMedianAbsoluteDeviation
         '
         Me.ucrChkMedianAbsoluteDeviation.Checked = False
-        Me.ucrChkMedianAbsoluteDeviation.Location = New System.Drawing.Point(18, 103)
+        resources.ApplyResources(Me.ucrChkMedianAbsoluteDeviation, "ucrChkMedianAbsoluteDeviation")
         Me.ucrChkMedianAbsoluteDeviation.Name = "ucrChkMedianAbsoluteDeviation"
-        Me.ucrChkMedianAbsoluteDeviation.Size = New System.Drawing.Size(174, 20)
-        Me.ucrChkMedianAbsoluteDeviation.TabIndex = 1
         '
         'ucrChkCoefficientOfVariation
         '
         Me.ucrChkCoefficientOfVariation.Checked = False
-        Me.ucrChkCoefficientOfVariation.Location = New System.Drawing.Point(18, 77)
+        resources.ApplyResources(Me.ucrChkCoefficientOfVariation, "ucrChkCoefficientOfVariation")
         Me.ucrChkCoefficientOfVariation.Name = "ucrChkCoefficientOfVariation"
-        Me.ucrChkCoefficientOfVariation.Size = New System.Drawing.Size(174, 20)
-        Me.ucrChkCoefficientOfVariation.TabIndex = 0
         '
         'grpScale
         '
-        Me.grpScale.Location = New System.Drawing.Point(6, 61)
+        resources.ApplyResources(Me.grpScale, "grpScale")
         Me.grpScale.Name = "grpScale"
-        Me.grpScale.Size = New System.Drawing.Size(302, 71)
-        Me.grpScale.TabIndex = 6
         Me.grpScale.TabStop = False
-        Me.grpScale.Text = "Scale"
         '
         'grpSkewness
         '
         Me.grpSkewness.Controls.Add(Me.ucrChkMc)
-        Me.grpSkewness.Location = New System.Drawing.Point(6, 133)
+        resources.ApplyResources(Me.grpSkewness, "grpSkewness")
         Me.grpSkewness.Name = "grpSkewness"
-        Me.grpSkewness.Size = New System.Drawing.Size(302, 57)
-        Me.grpSkewness.TabIndex = 8
         Me.grpSkewness.TabStop = False
-        Me.grpSkewness.Text = "Skewness"
         '
         'ucrChkMc
         '
         Me.ucrChkMc.Checked = False
-        Me.ucrChkMc.Location = New System.Drawing.Point(206, 21)
+        resources.ApplyResources(Me.ucrChkMc, "ucrChkMc")
         Me.ucrChkMc.Name = "ucrChkMc"
-        Me.ucrChkMc.Size = New System.Drawing.Size(76, 20)
-        Me.ucrChkMc.TabIndex = 7
         '
         'tbsum
         '
@@ -320,12 +260,8 @@ Partial Class sdgSummaries
         Me.tbsum.Controls.Add(Me.grpQuartiles)
         Me.tbsum.Controls.Add(Me.grpNotOrderedFactor)
         Me.tbsum.Controls.Add(Me.grpNumeric)
-        Me.tbsum.Location = New System.Drawing.Point(4, 22)
+        resources.ApplyResources(Me.tbsum, "tbsum")
         Me.tbsum.Name = "tbsum"
-        Me.tbsum.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbsum.Size = New System.Drawing.Size(320, 327)
-        Me.tbsum.TabIndex = 0
-        Me.tbsum.Text = "Summaries"
         Me.tbsum.UseVisualStyleBackColor = True
         '
         'grpCommon
@@ -334,110 +270,83 @@ Partial Class sdgSummaries
         Me.grpCommon.Controls.Add(Me.ucrChkMode)
         Me.grpCommon.Controls.Add(Me.ucrChkNMissing)
         Me.grpCommon.Controls.Add(Me.ucrChkNonMissing)
-        Me.grpCommon.Location = New System.Drawing.Point(6, 6)
+        resources.ApplyResources(Me.grpCommon, "grpCommon")
         Me.grpCommon.Name = "grpCommon"
-        Me.grpCommon.Size = New System.Drawing.Size(303, 72)
-        Me.grpCommon.TabIndex = 0
         Me.grpCommon.TabStop = False
         Me.grpCommon.Tag = "Common"
-        Me.grpCommon.Text = "Common"
         '
         'ucrChkNTotal
         '
         Me.ucrChkNTotal.Checked = False
-        Me.ucrChkNTotal.Location = New System.Drawing.Point(174, 19)
+        resources.ApplyResources(Me.ucrChkNTotal, "ucrChkNTotal")
         Me.ucrChkNTotal.Name = "ucrChkNTotal"
-        Me.ucrChkNTotal.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkNTotal.TabIndex = 2
         '
         'ucrChkMode
         '
         Me.ucrChkMode.Checked = False
-        Me.ucrChkMode.Location = New System.Drawing.Point(174, 45)
+        resources.ApplyResources(Me.ucrChkMode, "ucrChkMode")
         Me.ucrChkMode.Name = "ucrChkMode"
-        Me.ucrChkMode.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkMode.TabIndex = 3
         '
         'ucrChkNMissing
         '
         Me.ucrChkNMissing.Checked = False
-        Me.ucrChkNMissing.Location = New System.Drawing.Point(8, 45)
+        resources.ApplyResources(Me.ucrChkNMissing, "ucrChkNMissing")
         Me.ucrChkNMissing.Name = "ucrChkNMissing"
-        Me.ucrChkNMissing.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkNMissing.TabIndex = 1
         '
         'ucrChkNonMissing
         '
         Me.ucrChkNonMissing.Checked = False
-        Me.ucrChkNonMissing.Location = New System.Drawing.Point(8, 19)
+        resources.ApplyResources(Me.ucrChkNonMissing, "ucrChkNonMissing")
         Me.ucrChkNonMissing.Name = "ucrChkNonMissing"
-        Me.ucrChkNonMissing.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkNonMissing.TabIndex = 0
         '
         'grpQuartiles
         '
         Me.grpQuartiles.Controls.Add(Me.ucrChkLowerQuartile)
         Me.grpQuartiles.Controls.Add(Me.ucrChkUpperQuartile)
-        Me.grpQuartiles.Location = New System.Drawing.Point(6, 249)
+        resources.ApplyResources(Me.grpQuartiles, "grpQuartiles")
         Me.grpQuartiles.Name = "grpQuartiles"
-        Me.grpQuartiles.Size = New System.Drawing.Size(303, 51)
-        Me.grpQuartiles.TabIndex = 3
         Me.grpQuartiles.TabStop = False
         Me.grpQuartiles.Tag = "Quartiles"
-        Me.grpQuartiles.Text = "Quartiles"
         '
         'ucrChkLowerQuartile
         '
         Me.ucrChkLowerQuartile.Checked = False
-        Me.ucrChkLowerQuartile.Location = New System.Drawing.Point(8, 19)
+        resources.ApplyResources(Me.ucrChkLowerQuartile, "ucrChkLowerQuartile")
         Me.ucrChkLowerQuartile.Name = "ucrChkLowerQuartile"
-        Me.ucrChkLowerQuartile.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkLowerQuartile.TabIndex = 1
         '
         'ucrChkUpperQuartile
         '
         Me.ucrChkUpperQuartile.Checked = False
-        Me.ucrChkUpperQuartile.Location = New System.Drawing.Point(174, 19)
+        resources.ApplyResources(Me.ucrChkUpperQuartile, "ucrChkUpperQuartile")
         Me.ucrChkUpperQuartile.Name = "ucrChkUpperQuartile"
-        Me.ucrChkUpperQuartile.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkUpperQuartile.TabIndex = 0
         '
         'grpNotOrderedFactor
         '
         Me.grpNotOrderedFactor.Controls.Add(Me.ucrChkRange)
         Me.grpNotOrderedFactor.Controls.Add(Me.ucrChkMaximum)
         Me.grpNotOrderedFactor.Controls.Add(Me.ucrChkMinimum)
-        Me.grpNotOrderedFactor.Location = New System.Drawing.Point(6, 80)
+        resources.ApplyResources(Me.grpNotOrderedFactor, "grpNotOrderedFactor")
         Me.grpNotOrderedFactor.Name = "grpNotOrderedFactor"
-        Me.grpNotOrderedFactor.Size = New System.Drawing.Size(303, 71)
-        Me.grpNotOrderedFactor.TabIndex = 1
         Me.grpNotOrderedFactor.TabStop = False
         Me.grpNotOrderedFactor.Tag = "All_but_unordered_Factor"
-        Me.grpNotOrderedFactor.Text = "All but (unordered) Factor"
         '
         'ucrChkRange
         '
         Me.ucrChkRange.Checked = False
-        Me.ucrChkRange.Location = New System.Drawing.Point(8, 45)
+        resources.ApplyResources(Me.ucrChkRange, "ucrChkRange")
         Me.ucrChkRange.Name = "ucrChkRange"
-        Me.ucrChkRange.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkRange.TabIndex = 1
         '
         'ucrChkMaximum
         '
         Me.ucrChkMaximum.Checked = False
-        Me.ucrChkMaximum.Location = New System.Drawing.Point(174, 19)
+        resources.ApplyResources(Me.ucrChkMaximum, "ucrChkMaximum")
         Me.ucrChkMaximum.Name = "ucrChkMaximum"
-        Me.ucrChkMaximum.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkMaximum.TabIndex = 2
         '
         'ucrChkMinimum
         '
         Me.ucrChkMinimum.Checked = False
-        Me.ucrChkMinimum.Location = New System.Drawing.Point(8, 19)
+        resources.ApplyResources(Me.ucrChkMinimum, "ucrChkMinimum")
         Me.ucrChkMinimum.Name = "ucrChkMinimum"
-        Me.ucrChkMinimum.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkMinimum.TabIndex = 0
         '
         'grpNumeric
         '
@@ -446,79 +355,61 @@ Partial Class sdgSummaries
         Me.grpNumeric.Controls.Add(Me.ucrChkStdDev)
         Me.grpNumeric.Controls.Add(Me.ucrChkSum)
         Me.grpNumeric.Controls.Add(Me.ucrChkMean)
-        Me.grpNumeric.Location = New System.Drawing.Point(5, 153)
+        resources.ApplyResources(Me.grpNumeric, "grpNumeric")
         Me.grpNumeric.Name = "grpNumeric"
-        Me.grpNumeric.Size = New System.Drawing.Size(303, 96)
-        Me.grpNumeric.TabIndex = 2
         Me.grpNumeric.TabStop = False
         Me.grpNumeric.Tag = "Numeric"
-        Me.grpNumeric.Text = "Numeric"
         '
         'ucrChkVariance
         '
         Me.ucrChkVariance.Checked = False
-        Me.ucrChkVariance.Location = New System.Drawing.Point(8, 71)
+        resources.ApplyResources(Me.ucrChkVariance, "ucrChkVariance")
         Me.ucrChkVariance.Name = "ucrChkVariance"
-        Me.ucrChkVariance.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkVariance.TabIndex = 2
         '
         'ucrChkMedian
         '
         Me.ucrChkMedian.Checked = False
-        Me.ucrChkMedian.Location = New System.Drawing.Point(175, 19)
+        resources.ApplyResources(Me.ucrChkMedian, "ucrChkMedian")
         Me.ucrChkMedian.Name = "ucrChkMedian"
-        Me.ucrChkMedian.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkMedian.TabIndex = 3
         '
         'ucrChkStdDev
         '
         Me.ucrChkStdDev.Checked = False
-        Me.ucrChkStdDev.Location = New System.Drawing.Point(175, 45)
+        resources.ApplyResources(Me.ucrChkStdDev, "ucrChkStdDev")
         Me.ucrChkStdDev.Name = "ucrChkStdDev"
-        Me.ucrChkStdDev.Size = New System.Drawing.Size(122, 20)
-        Me.ucrChkStdDev.TabIndex = 4
         '
         'ucrChkSum
         '
         Me.ucrChkSum.Checked = False
-        Me.ucrChkSum.Location = New System.Drawing.Point(8, 19)
+        resources.ApplyResources(Me.ucrChkSum, "ucrChkSum")
         Me.ucrChkSum.Name = "ucrChkSum"
-        Me.ucrChkSum.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkSum.TabIndex = 0
         '
         'ucrChkMean
         '
         Me.ucrChkMean.Checked = False
-        Me.ucrChkMean.Location = New System.Drawing.Point(8, 45)
+        resources.ApplyResources(Me.ucrChkMean, "ucrChkMean")
         Me.ucrChkMean.Name = "ucrChkMean"
-        Me.ucrChkMean.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkMean.TabIndex = 1
         '
         'tbSummaries
         '
         Me.tbSummaries.Controls.Add(Me.tbsum)
         Me.tbSummaries.Controls.Add(Me.tbMore)
         Me.tbSummaries.Controls.Add(Me.tbMissingOptions)
-        Me.tbSummaries.Location = New System.Drawing.Point(7, 7)
+        resources.ApplyResources(Me.tbSummaries, "tbSummaries")
         Me.tbSummaries.Name = "tbSummaries"
         Me.tbSummaries.SelectedIndex = 0
-        Me.tbSummaries.Size = New System.Drawing.Size(328, 353)
-        Me.tbSummaries.TabIndex = 0
         '
         'sdgSummaries
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(338, 397)
         Me.Controls.Add(Me.tbSummaries)
         Me.Controls.Add(Me.ucrButtonsSummaries)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgSummaries"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Tag = "Summaries"
-        Me.Text = "Summaries"
         Me.tbMissingOptions.ResumeLayout(False)
         Me.tbMissingOptions.PerformLayout()
         Me.tbMore.ResumeLayout(False)

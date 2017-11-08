@@ -38,6 +38,7 @@ Partial Class dlgDuplicateColumns
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgDuplicateColumns))
         Me.lblColumns = New System.Windows.Forms.Label()
         Me.lblNewColumnName = New System.Windows.Forms.Label()
         Me.ucrInputColumnName = New instat.ucrInputComboBox()
@@ -55,52 +56,36 @@ Partial Class dlgDuplicateColumns
         '
         'lblColumns
         '
-        Me.lblColumns.AutoSize = True
-        Me.lblColumns.Location = New System.Drawing.Point(228, 45)
+        resources.ApplyResources(Me.lblColumns, "lblColumns")
         Me.lblColumns.Name = "lblColumns"
-        Me.lblColumns.Size = New System.Drawing.Size(105, 13)
-        Me.lblColumns.TabIndex = 1
-        Me.lblColumns.Text = "Column to Duplicate:"
         '
         'lblNewColumnName
         '
-        Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(7, 212)
+        resources.ApplyResources(Me.lblNewColumnName, "lblNewColumnName")
         Me.lblNewColumnName.Name = "lblNewColumnName"
-        Me.lblNewColumnName.Size = New System.Drawing.Size(101, 13)
-        Me.lblNewColumnName.TabIndex = 4
-        Me.lblNewColumnName.Text = "New Column Name:"
         '
         'ucrInputColumnName
         '
         Me.ucrInputColumnName.AddQuotesIfUnrecognised = True
         Me.ucrInputColumnName.IsReadOnly = False
-        Me.ucrInputColumnName.Location = New System.Drawing.Point(110, 209)
+        resources.ApplyResources(Me.ucrInputColumnName, "ucrInputColumnName")
         Me.ucrInputColumnName.Name = "ucrInputColumnName"
-        Me.ucrInputColumnName.Size = New System.Drawing.Size(140, 21)
-        Me.ucrInputColumnName.TabIndex = 5
         '
         'ucrReceiverDuplicateColumns
         '
         Me.ucrReceiverDuplicateColumns.frmParent = Me
-        Me.ucrReceiverDuplicateColumns.Location = New System.Drawing.Point(228, 60)
-        Me.ucrReceiverDuplicateColumns.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverDuplicateColumns, "ucrReceiverDuplicateColumns")
         Me.ucrReceiverDuplicateColumns.Name = "ucrReceiverDuplicateColumns"
         Me.ucrReceiverDuplicateColumns.Selector = Nothing
-        Me.ucrReceiverDuplicateColumns.Size = New System.Drawing.Size(129, 20)
         Me.ucrReceiverDuplicateColumns.strNcFilePath = ""
-        Me.ucrReceiverDuplicateColumns.TabIndex = 2
         Me.ucrReceiverDuplicateColumns.ucrSelector = Nothing
         '
         'ucrSelectorForDuplicateColumn
         '
         Me.ucrSelectorForDuplicateColumn.bShowHiddenColumns = False
         Me.ucrSelectorForDuplicateColumn.bUseCurrentFilter = True
-        Me.ucrSelectorForDuplicateColumn.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorForDuplicateColumn.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorForDuplicateColumn, "ucrSelectorForDuplicateColumn")
         Me.ucrSelectorForDuplicateColumn.Name = "ucrSelectorForDuplicateColumn"
-        Me.ucrSelectorForDuplicateColumn.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorForDuplicateColumn.TabIndex = 0
         '
         'grpDuplicatedColumn
         '
@@ -109,76 +94,52 @@ Partial Class dlgDuplicateColumns
         Me.grpDuplicatedColumn.Controls.Add(Me.rdoAfter)
         Me.grpDuplicatedColumn.Controls.Add(Me.rdoBeginning)
         Me.grpDuplicatedColumn.Controls.Add(Me.ucrPnlColPosition)
-        Me.grpDuplicatedColumn.Location = New System.Drawing.Point(228, 92)
+        resources.ApplyResources(Me.grpDuplicatedColumn, "grpDuplicatedColumn")
         Me.grpDuplicatedColumn.Name = "grpDuplicatedColumn"
-        Me.grpDuplicatedColumn.Size = New System.Drawing.Size(180, 110)
-        Me.grpDuplicatedColumn.TabIndex = 3
         Me.grpDuplicatedColumn.TabStop = False
-        Me.grpDuplicatedColumn.Text = "Position of Duplicated Column"
         '
         'rdoBefore
         '
-        Me.rdoBefore.AutoSize = True
-        Me.rdoBefore.Location = New System.Drawing.Point(6, 42)
+        resources.ApplyResources(Me.rdoBefore, "rdoBefore")
         Me.rdoBefore.Name = "rdoBefore"
-        Me.rdoBefore.Size = New System.Drawing.Size(56, 17)
-        Me.rdoBefore.TabIndex = 2
         Me.rdoBefore.TabStop = True
-        Me.rdoBefore.Text = "Before"
         Me.rdoBefore.UseVisualStyleBackColor = True
         '
         'rdoEnd
         '
-        Me.rdoEnd.AutoSize = True
-        Me.rdoEnd.Location = New System.Drawing.Point(6, 88)
+        resources.ApplyResources(Me.rdoEnd, "rdoEnd")
         Me.rdoEnd.Name = "rdoEnd"
-        Me.rdoEnd.Size = New System.Drawing.Size(44, 17)
-        Me.rdoEnd.TabIndex = 4
         Me.rdoEnd.TabStop = True
-        Me.rdoEnd.Text = "End"
         Me.rdoEnd.UseVisualStyleBackColor = True
         '
         'rdoAfter
         '
-        Me.rdoAfter.AutoSize = True
-        Me.rdoAfter.Location = New System.Drawing.Point(6, 65)
+        resources.ApplyResources(Me.rdoAfter, "rdoAfter")
         Me.rdoAfter.Name = "rdoAfter"
-        Me.rdoAfter.Size = New System.Drawing.Size(47, 17)
-        Me.rdoAfter.TabIndex = 3
         Me.rdoAfter.TabStop = True
-        Me.rdoAfter.Text = "After"
         Me.rdoAfter.UseVisualStyleBackColor = True
         '
         'rdoBeginning
         '
-        Me.rdoBeginning.AutoSize = True
-        Me.rdoBeginning.Location = New System.Drawing.Point(6, 19)
+        resources.ApplyResources(Me.rdoBeginning, "rdoBeginning")
         Me.rdoBeginning.Name = "rdoBeginning"
-        Me.rdoBeginning.Size = New System.Drawing.Size(72, 17)
-        Me.rdoBeginning.TabIndex = 1
         Me.rdoBeginning.TabStop = True
-        Me.rdoBeginning.Text = "Beginning"
         Me.rdoBeginning.UseVisualStyleBackColor = True
         '
         'ucrPnlColPosition
         '
-        Me.ucrPnlColPosition.Location = New System.Drawing.Point(6, 19)
+        resources.ApplyResources(Me.ucrPnlColPosition, "ucrPnlColPosition")
         Me.ucrPnlColPosition.Name = "ucrPnlColPosition"
-        Me.ucrPnlColPosition.Size = New System.Drawing.Size(99, 85)
-        Me.ucrPnlColPosition.TabIndex = 0
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 240)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(399, 53)
-        Me.ucrBase.TabIndex = 6
         '
         'dlgDuplicateColumns
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(418, 298)
         Me.Controls.Add(Me.lblNewColumnName)
         Me.Controls.Add(Me.ucrInputColumnName)
         Me.Controls.Add(Me.ucrReceiverDuplicateColumns)
@@ -190,9 +151,7 @@ Partial Class dlgDuplicateColumns
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDuplicateColumns"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = ""
-        Me.Text = "Duplicate Column"
         Me.grpDuplicatedColumn.ResumeLayout(False)
         Me.grpDuplicatedColumn.PerformLayout()
         Me.ResumeLayout(False)

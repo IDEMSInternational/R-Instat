@@ -38,6 +38,7 @@ Partial Class sdgDescribeDisplay
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgDescribeDisplay))
         Me.ucrButtonsDescribeDisplay = New instat.ucrButtonsSubdialogue()
         Me.grpFrequenciesOptions = New System.Windows.Forms.GroupBox()
         Me.ucrChkAddMargins = New instat.ucrCheck()
@@ -54,10 +55,8 @@ Partial Class sdgDescribeDisplay
         '
         'ucrButtonsDescribeDisplay
         '
-        Me.ucrButtonsDescribeDisplay.Location = New System.Drawing.Point(55, 186)
+        resources.ApplyResources(Me.ucrButtonsDescribeDisplay, "ucrButtonsDescribeDisplay")
         Me.ucrButtonsDescribeDisplay.Name = "ucrButtonsDescribeDisplay"
-        Me.ucrButtonsDescribeDisplay.Size = New System.Drawing.Size(142, 30)
-        Me.ucrButtonsDescribeDisplay.TabIndex = 2
         '
         'grpFrequenciesOptions
         '
@@ -65,88 +64,67 @@ Partial Class sdgDescribeDisplay
         Me.grpFrequenciesOptions.Controls.Add(Me.ucrChkTranspose)
         Me.grpFrequenciesOptions.Controls.Add(Me.ucrChkProportions)
         Me.grpFrequenciesOptions.Controls.Add(Me.ucrChkPercentages)
-        Me.grpFrequenciesOptions.Location = New System.Drawing.Point(10, 10)
+        resources.ApplyResources(Me.grpFrequenciesOptions, "grpFrequenciesOptions")
         Me.grpFrequenciesOptions.Name = "grpFrequenciesOptions"
-        Me.grpFrequenciesOptions.Size = New System.Drawing.Size(243, 68)
-        Me.grpFrequenciesOptions.TabIndex = 0
         Me.grpFrequenciesOptions.TabStop = False
         Me.grpFrequenciesOptions.Tag = "Frequencies_Options"
-        Me.grpFrequenciesOptions.Text = "Frequencies Options"
         '
         'ucrChkAddMargins
         '
         Me.ucrChkAddMargins.Checked = False
-        Me.ucrChkAddMargins.Location = New System.Drawing.Point(10, 18)
+        resources.ApplyResources(Me.ucrChkAddMargins, "ucrChkAddMargins")
         Me.ucrChkAddMargins.Name = "ucrChkAddMargins"
-        Me.ucrChkAddMargins.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkAddMargins.TabIndex = 0
         '
         'ucrChkTranspose
         '
         Me.ucrChkTranspose.Checked = False
-        Me.ucrChkTranspose.Location = New System.Drawing.Point(127, 18)
+        resources.ApplyResources(Me.ucrChkTranspose, "ucrChkTranspose")
         Me.ucrChkTranspose.Name = "ucrChkTranspose"
-        Me.ucrChkTranspose.Size = New System.Drawing.Size(97, 20)
-        Me.ucrChkTranspose.TabIndex = 1
         '
         'ucrChkProportions
         '
         Me.ucrChkProportions.Checked = False
-        Me.ucrChkProportions.Location = New System.Drawing.Point(10, 40)
+        resources.ApplyResources(Me.ucrChkProportions, "ucrChkProportions")
         Me.ucrChkProportions.Name = "ucrChkProportions"
-        Me.ucrChkProportions.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkProportions.TabIndex = 2
         '
         'ucrChkPercentages
         '
         Me.ucrChkPercentages.Checked = False
-        Me.ucrChkPercentages.Location = New System.Drawing.Point(127, 40)
+        resources.ApplyResources(Me.ucrChkPercentages, "ucrChkPercentages")
         Me.ucrChkPercentages.Name = "ucrChkPercentages"
-        Me.ucrChkPercentages.Size = New System.Drawing.Size(97, 20)
-        Me.ucrChkPercentages.TabIndex = 3
         '
         'grpAnovaOptions
         '
         Me.grpAnovaOptions.Controls.Add(Me.ucrChkMeans)
         Me.grpAnovaOptions.Controls.Add(Me.ucrChkSignifStars)
         Me.grpAnovaOptions.Controls.Add(Me.ucrChkSignifLevel)
-        Me.grpAnovaOptions.Location = New System.Drawing.Point(10, 84)
+        resources.ApplyResources(Me.grpAnovaOptions, "grpAnovaOptions")
         Me.grpAnovaOptions.Name = "grpAnovaOptions"
-        Me.grpAnovaOptions.Size = New System.Drawing.Size(243, 91)
-        Me.grpAnovaOptions.TabIndex = 1
         Me.grpAnovaOptions.TabStop = False
         Me.grpAnovaOptions.Tag = "Anova_Options"
-        Me.grpAnovaOptions.Text = "Anova Options"
         '
         'ucrChkMeans
         '
         Me.ucrChkMeans.Checked = False
-        Me.ucrChkMeans.Location = New System.Drawing.Point(10, 65)
+        resources.ApplyResources(Me.ucrChkMeans, "ucrChkMeans")
         Me.ucrChkMeans.Name = "ucrChkMeans"
-        Me.ucrChkMeans.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkMeans.TabIndex = 2
         '
         'ucrChkSignifStars
         '
         Me.ucrChkSignifStars.Checked = False
-        Me.ucrChkSignifStars.Location = New System.Drawing.Point(10, 19)
+        resources.ApplyResources(Me.ucrChkSignifStars, "ucrChkSignifStars")
         Me.ucrChkSignifStars.Name = "ucrChkSignifStars"
-        Me.ucrChkSignifStars.Size = New System.Drawing.Size(143, 20)
-        Me.ucrChkSignifStars.TabIndex = 0
         '
         'ucrChkSignifLevel
         '
         Me.ucrChkSignifLevel.Checked = False
-        Me.ucrChkSignifLevel.Location = New System.Drawing.Point(10, 42)
+        resources.ApplyResources(Me.ucrChkSignifLevel, "ucrChkSignifLevel")
         Me.ucrChkSignifLevel.Name = "ucrChkSignifLevel"
-        Me.ucrChkSignifLevel.Size = New System.Drawing.Size(143, 20)
-        Me.ucrChkSignifLevel.TabIndex = 1
         '
         'sdgDescribeDisplay
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(262, 222)
         Me.Controls.Add(Me.grpFrequenciesOptions)
         Me.Controls.Add(Me.grpAnovaOptions)
         Me.Controls.Add(Me.ucrButtonsDescribeDisplay)
@@ -154,9 +132,7 @@ Partial Class sdgDescribeDisplay
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgDescribeDisplay"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Tag = "Describe_Display_Options"
-        Me.Text = "Describe Display Options"
         Me.grpFrequenciesOptions.ResumeLayout(False)
         Me.grpAnovaOptions.ResumeLayout(False)
         Me.ResumeLayout(False)

@@ -117,4 +117,334 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="cmdLibraryCollection.Location" type="System.Drawing.Point, System.Drawing">
+    <value>236, 78</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cmdLibraryCollection.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="cmdLibraryCollection.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 35</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cmdLibraryCollection.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="cmdLibraryCollection.Text" xml:space="preserve">
+    <value>Browse</value>
+  </data>
+  <data name="&gt;&gt;cmdLibraryCollection.Name" xml:space="preserve">
+    <value>cmdLibraryCollection</value>
+  </data>
+  <data name="&gt;&gt;cmdLibraryCollection.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdLibraryCollection.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmdLibraryCollection.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="clmDatasets.Text" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="clmDatasets.Width" type="System.Int32, mscorlib">
+    <value>142</value>
+  </data>
+  <data name="clmDesc.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="clmDesc.Width" type="System.Int32, mscorlib">
+    <value>266</value>
+  </data>
+  <data name="lstCollection.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 122</value>
+  </data>
+  <data name="lstCollection.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="lstCollection.Size" type="System.Drawing.Size, System.Drawing">
+    <value>594, 264</value>
+  </data>
+  <data name="lstCollection.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;lstCollection.Name" xml:space="preserve">
+    <value>lstCollection</value>
+  </data>
+  <data name="&gt;&gt;lstCollection.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lstCollection.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lstCollection.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="lblFromPackage.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFromPackage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 86</value>
+  </data>
+  <data name="lblFromPackage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="lblFromPackage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 20</value>
+  </data>
+  <data name="lblFromPackage.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblFromPackage.Text" xml:space="preserve">
+    <value>From Package:</value>
+  </data>
+  <data name="&gt;&gt;lblFromPackage.Name" xml:space="preserve">
+    <value>lblFromPackage</value>
+  </data>
+  <data name="&gt;&gt;lblFromPackage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblFromPackage.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblFromPackage.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="cmdHelp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>498, 397</value>
+  </data>
+  <data name="cmdHelp.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="cmdHelp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 35</value>
+  </data>
+  <data name="cmdHelp.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="cmdHelp.Text" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="&gt;&gt;cmdHelp.Name" xml:space="preserve">
+    <value>cmdHelp</value>
+  </data>
+  <data name="&gt;&gt;cmdHelp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdHelp.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmdHelp.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="rdoDefaultDatasets.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoDefaultDatasets.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoDefaultDatasets.Location" type="System.Drawing.Point, System.Drawing">
+    <value>106, 18</value>
+  </data>
+  <data name="rdoDefaultDatasets.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="rdoDefaultDatasets.Size" type="System.Drawing.Size, System.Drawing">
+    <value>218, 43</value>
+  </data>
+  <data name="rdoDefaultDatasets.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoDefaultDatasets.Text" xml:space="preserve">
+    <value>Load from R</value>
+  </data>
+  <data name="rdoDefaultDatasets.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoDefaultDatasets.Name" xml:space="preserve">
+    <value>rdoDefaultDatasets</value>
+  </data>
+  <data name="&gt;&gt;rdoDefaultDatasets.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoDefaultDatasets.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoDefaultDatasets.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rdoInstatCollection.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoInstatCollection.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoInstatCollection.Location" type="System.Drawing.Point, System.Drawing">
+    <value>321, 18</value>
+  </data>
+  <data name="rdoInstatCollection.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="rdoInstatCollection.Size" type="System.Drawing.Size, System.Drawing">
+    <value>218, 43</value>
+  </data>
+  <data name="rdoInstatCollection.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rdoInstatCollection.Text" xml:space="preserve">
+    <value>Load from Instat collection</value>
+  </data>
+  <data name="rdoInstatCollection.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoInstatCollection.Name" xml:space="preserve">
+    <value>rdoInstatCollection</value>
+  </data>
+  <data name="&gt;&gt;rdoInstatCollection.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoInstatCollection.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoInstatCollection.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrInputPackages.Location" type="System.Drawing.Point, System.Drawing">
+    <value>138, 80</value>
+  </data>
+  <data name="ucrInputPackages.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
+  </data>
+  <data name="ucrInputPackages.Size" type="System.Drawing.Size, System.Drawing">
+    <value>206, 32</value>
+  </data>
+  <data name="ucrInputPackages.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrInputPackages.Name" xml:space="preserve">
+    <value>ucrInputPackages</value>
+  </data>
+  <data name="&gt;&gt;ucrInputPackages.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputPackages.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputPackages.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrBase.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 442</value>
+  </data>
+  <data name="ucrBase.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 8, 6, 8</value>
+  </data>
+  <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>600, 91</value>
+  </data>
+  <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
+    <value>ucrBase</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Type" xml:space="preserve">
+    <value>instat.ucrButtons, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="ucrPnlOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>88, 3</value>
+  </data>
+  <data name="ucrPnlOptions.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 8, 6, 8</value>
+  </data>
+  <data name="ucrPnlOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>474, 68</value>
+  </data>
+  <data name="ucrPnlOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOptions.Name" xml:space="preserve">
+    <value>ucrPnlOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOptions.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOptions.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="ucrNewDataFrameName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 398</value>
+  </data>
+  <data name="ucrNewDataFrameName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 8, 6, 8</value>
+  </data>
+  <data name="ucrNewDataFrameName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>396, 37</value>
+  </data>
+  <data name="ucrNewDataFrameName.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ucrNewDataFrameName.Name" xml:space="preserve">
+    <value>ucrNewDataFrameName</value>
+  </data>
+  <data name="&gt;&gt;ucrNewDataFrameName.Type" xml:space="preserve">
+    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNewDataFrameName.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrNewDataFrameName.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>9, 20</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>627, 535</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Open Dataset from Library</value>
+  </data>
+  <data name="&gt;&gt;clmDatasets.Name" xml:space="preserve">
+    <value>clmDatasets</value>
+  </data>
+  <data name="&gt;&gt;clmDatasets.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;clmDesc.Name" xml:space="preserve">
+    <value>clmDesc</value>
+  </data>
+  <data name="&gt;&gt;clmDesc.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>dlgFromLibrary</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
