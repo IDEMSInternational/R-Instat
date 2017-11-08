@@ -470,7 +470,7 @@ Public Class sdgSimpleRegOptions
         For i = 0 To tbpRegOptions.TabCount - 1
             tbpRegOptions.SelectedIndex = i
         Next
-        tbpRegOptions.TabPages(2).Enabled = False
+        tbpRegOptions.TabPages(2).Enabled = True
         tbpRegOptions.SelectedIndex = 0
         For j = 0 To tcGraphics.TabCount - 1
             tcGraphics.SelectedIndex = j
