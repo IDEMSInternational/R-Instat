@@ -705,6 +705,10 @@ Public Class dlgImportDataset
         iDataFrameCount = frmMain.GetDataFrameCount()
     End Sub
 
+    Private Sub ucrInputSheets_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSelectSheetExcel.ControlValueChanged
+
+    End Sub
+
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         ' add the item to the MRU (Most Recently Used) list...
         'Disabled until implemented correctly
