@@ -38,6 +38,7 @@ Partial Class dlgGeneralForGraphics
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgGeneralForGraphics))
         Me.ucrAdditionalLayers = New instat.ucrAdditionalLayers()
         Me.ucrSaveGraph = New instat.ucrSaveGraph()
         Me.ucrBase = New instat.ucrButtons()
@@ -46,40 +47,30 @@ Partial Class dlgGeneralForGraphics
         '
         'ucrAdditionalLayers
         '
-        Me.ucrAdditionalLayers.Location = New System.Drawing.Point(12, 12)
+        resources.ApplyResources(Me.ucrAdditionalLayers, "ucrAdditionalLayers")
         Me.ucrAdditionalLayers.Name = "ucrAdditionalLayers"
-        Me.ucrAdditionalLayers.Size = New System.Drawing.Size(222, 194)
-        Me.ucrAdditionalLayers.TabIndex = 5
         '
         'ucrSaveGraph
         '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(12, 212)
+        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(265, 20)
-        Me.ucrSaveGraph.TabIndex = 4
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 248)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 0
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(267, 45)
+        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdOptions.TabIndex = 9
         Me.cmdOptions.Tag = "Options"
-        Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'dlgGeneralForGraphics
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(422, 303)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrAdditionalLayers)
         Me.Controls.Add(Me.ucrSaveGraph)
@@ -88,9 +79,7 @@ Partial Class dlgGeneralForGraphics
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgGeneralForGraphics"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "General "
-        Me.Text = "General "
         Me.ResumeLayout(False)
 
     End Sub

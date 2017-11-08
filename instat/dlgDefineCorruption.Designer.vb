@@ -38,6 +38,7 @@ Partial Class dlgDefineCorruption
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgDefineCorruption))
         Me.ucrDefineCorruptionSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.lblNoBidsReceived = New System.Windows.Forms.Label()
@@ -79,335 +80,246 @@ Partial Class dlgDefineCorruption
         '
         Me.ucrDefineCorruptionSelector.bShowHiddenColumns = False
         Me.ucrDefineCorruptionSelector.bUseCurrentFilter = True
-        Me.ucrDefineCorruptionSelector.Location = New System.Drawing.Point(10, 10)
-        Me.ucrDefineCorruptionSelector.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrDefineCorruptionSelector, "ucrDefineCorruptionSelector")
         Me.ucrDefineCorruptionSelector.Name = "ucrDefineCorruptionSelector"
-        Me.ucrDefineCorruptionSelector.Size = New System.Drawing.Size(210, 180)
-        Me.ucrDefineCorruptionSelector.TabIndex = 0
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 377)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 34
         '
         'lblNoBidsReceived
         '
-        Me.lblNoBidsReceived.AutoSize = True
-        Me.lblNoBidsReceived.Location = New System.Drawing.Point(414, 27)
+        resources.ApplyResources(Me.lblNoBidsReceived, "lblNoBidsReceived")
         Me.lblNoBidsReceived.Name = "lblNoBidsReceived"
-        Me.lblNoBidsReceived.Size = New System.Drawing.Size(99, 13)
-        Me.lblNoBidsReceived.TabIndex = 17
-        Me.lblNoBidsReceived.Text = "No. Bids Received:"
         '
         'ucrReceiverNoBids
         '
         Me.ucrReceiverNoBids.frmParent = Me
-        Me.ucrReceiverNoBids.Location = New System.Drawing.Point(414, 42)
-        Me.ucrReceiverNoBids.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverNoBids, "ucrReceiverNoBids")
         Me.ucrReceiverNoBids.Name = "ucrReceiverNoBids"
         Me.ucrReceiverNoBids.Selector = Nothing
-        Me.ucrReceiverNoBids.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverNoBids.TabIndex = 18
+        Me.ucrReceiverNoBids.strNcFilePath = ""
+        Me.ucrReceiverNoBids.ucrSelector = Nothing
         '
         'ucrReceiverProcedureType
         '
         Me.ucrReceiverProcedureType.frmParent = Me
-        Me.ucrReceiverProcedureType.Location = New System.Drawing.Point(414, 128)
-        Me.ucrReceiverProcedureType.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverProcedureType, "ucrReceiverProcedureType")
         Me.ucrReceiverProcedureType.Name = "ucrReceiverProcedureType"
         Me.ucrReceiverProcedureType.Selector = Nothing
-        Me.ucrReceiverProcedureType.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverProcedureType.TabIndex = 22
+        Me.ucrReceiverProcedureType.strNcFilePath = ""
+        Me.ucrReceiverProcedureType.ucrSelector = Nothing
         '
         'lblProcedureType
         '
-        Me.lblProcedureType.AutoSize = True
-        Me.lblProcedureType.Location = New System.Drawing.Point(414, 113)
+        resources.ApplyResources(Me.lblProcedureType, "lblProcedureType")
         Me.lblProcedureType.Name = "lblProcedureType"
-        Me.lblProcedureType.Size = New System.Drawing.Size(86, 13)
-        Me.lblProcedureType.TabIndex = 21
-        Me.lblProcedureType.Text = "Procedure Type:"
         '
         'ucrReceiverContractValue
         '
         Me.ucrReceiverContractValue.frmParent = Me
-        Me.ucrReceiverContractValue.Location = New System.Drawing.Point(414, 257)
-        Me.ucrReceiverContractValue.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverContractValue, "ucrReceiverContractValue")
         Me.ucrReceiverContractValue.Name = "ucrReceiverContractValue"
         Me.ucrReceiverContractValue.Selector = Nothing
-        Me.ucrReceiverContractValue.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverContractValue.TabIndex = 28
+        Me.ucrReceiverContractValue.strNcFilePath = ""
+        Me.ucrReceiverContractValue.ucrSelector = Nothing
         '
         'lblContractValue
         '
-        Me.lblContractValue.AutoSize = True
-        Me.lblContractValue.Location = New System.Drawing.Point(414, 242)
+        resources.ApplyResources(Me.lblContractValue, "lblContractValue")
         Me.lblContractValue.Name = "lblContractValue"
-        Me.lblContractValue.Size = New System.Drawing.Size(80, 13)
-        Me.lblContractValue.TabIndex = 27
-        Me.lblContractValue.Text = "Contract Value:"
         '
         'ucrReceiverNoConsideredBids
         '
         Me.ucrReceiverNoConsideredBids.frmParent = Me
-        Me.ucrReceiverNoConsideredBids.Location = New System.Drawing.Point(414, 85)
-        Me.ucrReceiverNoConsideredBids.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverNoConsideredBids, "ucrReceiverNoConsideredBids")
         Me.ucrReceiverNoConsideredBids.Name = "ucrReceiverNoConsideredBids"
         Me.ucrReceiverNoConsideredBids.Selector = Nothing
-        Me.ucrReceiverNoConsideredBids.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverNoConsideredBids.TabIndex = 20
+        Me.ucrReceiverNoConsideredBids.strNcFilePath = ""
+        Me.ucrReceiverNoConsideredBids.ucrSelector = Nothing
         '
         'ucrReceiverWinnerCountry
         '
         Me.ucrReceiverWinnerCountry.frmParent = Me
-        Me.ucrReceiverWinnerCountry.Location = New System.Drawing.Point(414, 214)
-        Me.ucrReceiverWinnerCountry.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverWinnerCountry, "ucrReceiverWinnerCountry")
         Me.ucrReceiverWinnerCountry.Name = "ucrReceiverWinnerCountry"
         Me.ucrReceiverWinnerCountry.Selector = Nothing
-        Me.ucrReceiverWinnerCountry.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverWinnerCountry.TabIndex = 26
+        Me.ucrReceiverWinnerCountry.strNcFilePath = ""
+        Me.ucrReceiverWinnerCountry.ucrSelector = Nothing
         '
         'lblNoConsideredBids
         '
-        Me.lblNoConsideredBids.AutoSize = True
-        Me.lblNoConsideredBids.Location = New System.Drawing.Point(414, 70)
+        resources.ApplyResources(Me.lblNoConsideredBids, "lblNoConsideredBids")
         Me.lblNoConsideredBids.Name = "lblNoConsideredBids"
-        Me.lblNoConsideredBids.Size = New System.Drawing.Size(106, 13)
-        Me.lblNoConsideredBids.TabIndex = 19
-        Me.lblNoConsideredBids.Text = "No. Considered Bids:"
         '
         'lblWinnerCountry
         '
-        Me.lblWinnerCountry.AutoSize = True
-        Me.lblWinnerCountry.Location = New System.Drawing.Point(414, 199)
+        resources.ApplyResources(Me.lblWinnerCountry, "lblWinnerCountry")
         Me.lblWinnerCountry.Name = "lblWinnerCountry"
-        Me.lblWinnerCountry.Size = New System.Drawing.Size(83, 13)
-        Me.lblWinnerCountry.TabIndex = 25
-        Me.lblWinnerCountry.Text = "Winner Country:"
         '
         'ucrReceiverProcuringAuthority
         '
         Me.ucrReceiverProcuringAuthority.frmParent = Me
-        Me.ucrReceiverProcuringAuthority.Location = New System.Drawing.Point(251, 128)
-        Me.ucrReceiverProcuringAuthority.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverProcuringAuthority, "ucrReceiverProcuringAuthority")
         Me.ucrReceiverProcuringAuthority.Name = "ucrReceiverProcuringAuthority"
         Me.ucrReceiverProcuringAuthority.Selector = Nothing
-        Me.ucrReceiverProcuringAuthority.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverProcuringAuthority.TabIndex = 6
+        Me.ucrReceiverProcuringAuthority.strNcFilePath = ""
+        Me.ucrReceiverProcuringAuthority.ucrSelector = Nothing
         '
         'lblProcuringAuthority
         '
-        Me.lblProcuringAuthority.AutoSize = True
-        Me.lblProcuringAuthority.Location = New System.Drawing.Point(251, 113)
+        resources.ApplyResources(Me.lblProcuringAuthority, "lblProcuringAuthority")
         Me.lblProcuringAuthority.Name = "lblProcuringAuthority"
-        Me.lblProcuringAuthority.Size = New System.Drawing.Size(99, 13)
-        Me.lblProcuringAuthority.TabIndex = 5
-        Me.lblProcuringAuthority.Text = "Procuring Authority:"
         '
         'ucrReceiverCountry
         '
         Me.ucrReceiverCountry.frmParent = Me
-        Me.ucrReceiverCountry.Location = New System.Drawing.Point(251, 42)
-        Me.ucrReceiverCountry.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverCountry, "ucrReceiverCountry")
         Me.ucrReceiverCountry.Name = "ucrReceiverCountry"
         Me.ucrReceiverCountry.Selector = Nothing
-        Me.ucrReceiverCountry.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverCountry.TabIndex = 2
+        Me.ucrReceiverCountry.strNcFilePath = ""
+        Me.ucrReceiverCountry.ucrSelector = Nothing
         '
         'ucrReceiverSignatureDate
         '
         Me.ucrReceiverSignatureDate.frmParent = Me
-        Me.ucrReceiverSignatureDate.Location = New System.Drawing.Point(251, 214)
-        Me.ucrReceiverSignatureDate.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverSignatureDate, "ucrReceiverSignatureDate")
         Me.ucrReceiverSignatureDate.Name = "ucrReceiverSignatureDate"
         Me.ucrReceiverSignatureDate.Selector = Nothing
-        Me.ucrReceiverSignatureDate.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSignatureDate.TabIndex = 10
+        Me.ucrReceiverSignatureDate.strNcFilePath = ""
+        Me.ucrReceiverSignatureDate.ucrSelector = Nothing
         '
         'ucrReceiverContractSector
         '
         Me.ucrReceiverContractSector.frmParent = Me
-        Me.ucrReceiverContractSector.Location = New System.Drawing.Point(251, 300)
-        Me.ucrReceiverContractSector.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverContractSector, "ucrReceiverContractSector")
         Me.ucrReceiverContractSector.Name = "ucrReceiverContractSector"
         Me.ucrReceiverContractSector.Selector = Nothing
-        Me.ucrReceiverContractSector.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverContractSector.TabIndex = 14
+        Me.ucrReceiverContractSector.strNcFilePath = ""
+        Me.ucrReceiverContractSector.ucrSelector = Nothing
         '
         'ucrReceiverProcurementCategory
         '
         Me.ucrReceiverProcurementCategory.frmParent = Me
-        Me.ucrReceiverProcurementCategory.Location = New System.Drawing.Point(251, 346)
-        Me.ucrReceiverProcurementCategory.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverProcurementCategory, "ucrReceiverProcurementCategory")
         Me.ucrReceiverProcurementCategory.Name = "ucrReceiverProcurementCategory"
         Me.ucrReceiverProcurementCategory.Selector = Nothing
-        Me.ucrReceiverProcurementCategory.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverProcurementCategory.TabIndex = 16
+        Me.ucrReceiverProcurementCategory.strNcFilePath = ""
+        Me.ucrReceiverProcurementCategory.ucrSelector = Nothing
         '
         'ucrReceiverWinnerName
         '
         Me.ucrReceiverWinnerName.frmParent = Me
-        Me.ucrReceiverWinnerName.Location = New System.Drawing.Point(414, 171)
-        Me.ucrReceiverWinnerName.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverWinnerName, "ucrReceiverWinnerName")
         Me.ucrReceiverWinnerName.Name = "ucrReceiverWinnerName"
         Me.ucrReceiverWinnerName.Selector = Nothing
-        Me.ucrReceiverWinnerName.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverWinnerName.TabIndex = 24
+        Me.ucrReceiverWinnerName.strNcFilePath = ""
+        Me.ucrReceiverWinnerName.ucrSelector = Nothing
         '
         'lblWinnerName
         '
-        Me.lblWinnerName.AutoSize = True
-        Me.lblWinnerName.Location = New System.Drawing.Point(414, 156)
+        resources.ApplyResources(Me.lblWinnerName, "lblWinnerName")
         Me.lblWinnerName.Name = "lblWinnerName"
-        Me.lblWinnerName.Size = New System.Drawing.Size(75, 13)
-        Me.lblWinnerName.TabIndex = 23
-        Me.lblWinnerName.Text = "Winner Name:"
         '
         'lblContractSector
         '
-        Me.lblContractSector.AutoSize = True
-        Me.lblContractSector.Location = New System.Drawing.Point(251, 285)
+        resources.ApplyResources(Me.lblContractSector, "lblContractSector")
         Me.lblContractSector.Name = "lblContractSector"
-        Me.lblContractSector.Size = New System.Drawing.Size(84, 13)
-        Me.lblContractSector.TabIndex = 13
-        Me.lblContractSector.Text = "Contract Sector:"
         '
         'lblProcurementCategory
         '
-        Me.lblProcurementCategory.AutoSize = True
-        Me.lblProcurementCategory.Location = New System.Drawing.Point(251, 331)
+        resources.ApplyResources(Me.lblProcurementCategory, "lblProcurementCategory")
         Me.lblProcurementCategory.Name = "lblProcurementCategory"
-        Me.lblProcurementCategory.Size = New System.Drawing.Size(115, 13)
-        Me.lblProcurementCategory.TabIndex = 15
-        Me.lblProcurementCategory.Text = "Procurement Category:"
         '
         'lblContractTitle
         '
-        Me.lblContractTitle.AutoSize = True
-        Me.lblContractTitle.Location = New System.Drawing.Point(251, 242)
+        resources.ApplyResources(Me.lblContractTitle, "lblContractTitle")
         Me.lblContractTitle.Name = "lblContractTitle"
-        Me.lblContractTitle.Size = New System.Drawing.Size(73, 13)
-        Me.lblContractTitle.TabIndex = 11
-        Me.lblContractTitle.Text = "Contract Title:"
         '
         'ucrReceiverAwardDate
         '
         Me.ucrReceiverAwardDate.frmParent = Me
-        Me.ucrReceiverAwardDate.Location = New System.Drawing.Point(251, 171)
-        Me.ucrReceiverAwardDate.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverAwardDate, "ucrReceiverAwardDate")
         Me.ucrReceiverAwardDate.Name = "ucrReceiverAwardDate"
         Me.ucrReceiverAwardDate.Selector = Nothing
-        Me.ucrReceiverAwardDate.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverAwardDate.TabIndex = 8
+        Me.ucrReceiverAwardDate.strNcFilePath = ""
+        Me.ucrReceiverAwardDate.ucrSelector = Nothing
         '
         'ucrReceiverContractTitle
         '
         Me.ucrReceiverContractTitle.frmParent = Me
-        Me.ucrReceiverContractTitle.Location = New System.Drawing.Point(251, 257)
-        Me.ucrReceiverContractTitle.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverContractTitle, "ucrReceiverContractTitle")
         Me.ucrReceiverContractTitle.Name = "ucrReceiverContractTitle"
         Me.ucrReceiverContractTitle.Selector = Nothing
-        Me.ucrReceiverContractTitle.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverContractTitle.TabIndex = 12
+        Me.ucrReceiverContractTitle.strNcFilePath = ""
+        Me.ucrReceiverContractTitle.ucrSelector = Nothing
         '
         'lblAwardDate
         '
-        Me.lblAwardDate.AutoSize = True
-        Me.lblAwardDate.Location = New System.Drawing.Point(251, 156)
+        resources.ApplyResources(Me.lblAwardDate, "lblAwardDate")
         Me.lblAwardDate.Name = "lblAwardDate"
-        Me.lblAwardDate.Size = New System.Drawing.Size(66, 13)
-        Me.lblAwardDate.TabIndex = 7
-        Me.lblAwardDate.Text = "Award Date:"
         '
         'lblSignatureDate
         '
-        Me.lblSignatureDate.AutoSize = True
-        Me.lblSignatureDate.Location = New System.Drawing.Point(251, 199)
+        resources.ApplyResources(Me.lblSignatureDate, "lblSignatureDate")
         Me.lblSignatureDate.Name = "lblSignatureDate"
-        Me.lblSignatureDate.Size = New System.Drawing.Size(81, 13)
-        Me.lblSignatureDate.TabIndex = 9
-        Me.lblSignatureDate.Text = "Signature Date:"
         '
         'lblCountry
         '
-        Me.lblCountry.AutoSize = True
-        Me.lblCountry.Location = New System.Drawing.Point(251, 27)
+        resources.ApplyResources(Me.lblCountry, "lblCountry")
         Me.lblCountry.Name = "lblCountry"
-        Me.lblCountry.Size = New System.Drawing.Size(46, 13)
-        Me.lblCountry.TabIndex = 1
-        Me.lblCountry.Text = "Country:"
         '
         'lblFiscalYear
         '
-        Me.lblFiscalYear.AutoSize = True
-        Me.lblFiscalYear.Location = New System.Drawing.Point(414, 285)
+        resources.ApplyResources(Me.lblFiscalYear, "lblFiscalYear")
         Me.lblFiscalYear.Name = "lblFiscalYear"
-        Me.lblFiscalYear.Size = New System.Drawing.Size(62, 13)
-        Me.lblFiscalYear.TabIndex = 29
-        Me.lblFiscalYear.Text = "Fiscal Year:"
         '
         'ucrReceiverFiscalYear
         '
         Me.ucrReceiverFiscalYear.frmParent = Me
-        Me.ucrReceiverFiscalYear.Location = New System.Drawing.Point(414, 300)
-        Me.ucrReceiverFiscalYear.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverFiscalYear, "ucrReceiverFiscalYear")
         Me.ucrReceiverFiscalYear.Name = "ucrReceiverFiscalYear"
         Me.ucrReceiverFiscalYear.Selector = Nothing
-        Me.ucrReceiverFiscalYear.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverFiscalYear.TabIndex = 30
+        Me.ucrReceiverFiscalYear.strNcFilePath = ""
+        Me.ucrReceiverFiscalYear.ucrSelector = Nothing
         '
         'lblRegion
         '
-        Me.lblRegion.AutoSize = True
-        Me.lblRegion.Location = New System.Drawing.Point(251, 70)
+        resources.ApplyResources(Me.lblRegion, "lblRegion")
         Me.lblRegion.Name = "lblRegion"
-        Me.lblRegion.Size = New System.Drawing.Size(44, 13)
-        Me.lblRegion.TabIndex = 3
-        Me.lblRegion.Text = "Region:"
         '
         'ucrReceiverRegion
         '
         Me.ucrReceiverRegion.frmParent = Me
-        Me.ucrReceiverRegion.Location = New System.Drawing.Point(251, 85)
-        Me.ucrReceiverRegion.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverRegion, "ucrReceiverRegion")
         Me.ucrReceiverRegion.Name = "ucrReceiverRegion"
         Me.ucrReceiverRegion.Selector = Nothing
-        Me.ucrReceiverRegion.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverRegion.TabIndex = 4
+        Me.ucrReceiverRegion.strNcFilePath = ""
+        Me.ucrReceiverRegion.ucrSelector = Nothing
         '
         'ucrChkAutoGenerate
         '
         Me.ucrChkAutoGenerate.Checked = False
-        Me.ucrChkAutoGenerate.Location = New System.Drawing.Point(10, 265)
+        resources.ApplyResources(Me.ucrChkAutoGenerate, "ucrChkAutoGenerate")
         Me.ucrChkAutoGenerate.Name = "ucrChkAutoGenerate"
-        Me.ucrChkAutoGenerate.Size = New System.Drawing.Size(120, 20)
-        Me.ucrChkAutoGenerate.TabIndex = 31
         '
         'cmdCountryLevel
         '
-        Me.cmdCountryLevel.Location = New System.Drawing.Point(10, 203)
+        resources.ApplyResources(Me.cmdCountryLevel, "cmdCountryLevel")
         Me.cmdCountryLevel.Name = "cmdCountryLevel"
-        Me.cmdCountryLevel.Size = New System.Drawing.Size(119, 23)
-        Me.cmdCountryLevel.TabIndex = 32
-        Me.cmdCountryLevel.Text = "Country Level"
         Me.cmdCountryLevel.UseVisualStyleBackColor = True
         '
         'cmdCalculatedColumns
         '
-        Me.cmdCalculatedColumns.Location = New System.Drawing.Point(10, 233)
+        resources.ApplyResources(Me.cmdCalculatedColumns, "cmdCalculatedColumns")
         Me.cmdCalculatedColumns.Name = "cmdCalculatedColumns"
-        Me.cmdCalculatedColumns.Size = New System.Drawing.Size(119, 23)
-        Me.cmdCalculatedColumns.TabIndex = 33
-        Me.cmdCalculatedColumns.Text = "Calculated Columns"
         Me.cmdCalculatedColumns.UseVisualStyleBackColor = True
         '
         'dlgDefineCorruption
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(553, 437)
         Me.Controls.Add(Me.cmdCalculatedColumns)
         Me.Controls.Add(Me.cmdCountryLevel)
         Me.Controls.Add(Me.ucrChkAutoGenerate)
@@ -447,8 +359,6 @@ Partial Class dlgDefineCorruption
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDefineCorruption"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Define Procurement Data"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

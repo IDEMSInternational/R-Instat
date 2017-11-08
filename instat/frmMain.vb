@@ -846,7 +846,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuDescribeOneVariableSummarise_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableSummarise.Click
-        dlgDescribeOneVariable.ShowDialog()
+        dlgOneVariableSummarise.ShowDialog()
     End Sub
 
     Private Sub mnuDescribeOneVariableGraph_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableGraph.Click
@@ -1256,11 +1256,11 @@ Public Class frmMain
         dlgNewMarkovChains.ShowDialog()
     End Sub
 
-    Private Sub mnuCliDefineClimaticData_Click(sender As Object, e As EventArgs) Handles mnuCliDefineClimaticData.Click
+    Private Sub mnuClimaticDefineClimaticData_Click(sender As Object, e As EventArgs) Handles mnuClimaticDefineClimaticData.Click
         DlgDefineClimaticData.ShowDialog()
     End Sub
 
-    Private Sub InventoryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InventoryToolStripMenuItem.Click
+    Private Sub mnuClimaticCheckDataInventory_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataInventory.Click
         dlgInventoryPlot.ShowDialog()
     End Sub
 
@@ -1339,7 +1339,7 @@ Public Class frmMain
     Private Sub mnuProcurementPrepareFilterByCountry_Click(sender As Object, e As EventArgs) Handles mnuProcurementPrepareFilterByCountry.Click
         Dim lstDataNames As List(Of String)
 
-        dlgRestrict.bIsSubsetDialog = True
+        dlgRestrict.bIsSubsetDialog = False
         lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
         If lstDataNames.Count > 0 Then
             dlgRestrict.strDefaultDataframe = lstDataNames(0)
@@ -1361,16 +1361,8 @@ Public Class frmMain
         dlgDefineRedFlags.ShowDialog()
     End Sub
 
-    Private Sub mnuDescribeTwoVariablesTabulate_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
     Private Sub mnuDescribeTwoVariablesFrequencies_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoVariablesFrequencies.Click
         dlgTwoWayFrequencies.ShowDialog()
-    End Sub
-
-    Private Sub SummaryToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgSummaryTables.ShowDialog()
     End Sub
 
     Private Sub ImportFromCSPROToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportFromCSPROToolStripMenuItem.Click
@@ -1385,7 +1377,7 @@ Public Class frmMain
         dlgOpenNetCDF.ShowDialog()
     End Sub
 
-    Private Sub mnuProcurementDefineCorruption_Click(sender As Object, e As EventArgs) Handles mnuProcurementDefineCorruption.Click
+    Private Sub mnuProcurementDefineCorruption_Click(sender As Object, e As EventArgs)
         dlgDefineCorruptionOutputs.ShowDialog()
     End Sub
 
@@ -1439,29 +1431,25 @@ Public Class frmMain
         dlgOneWayFrequencies.ShowDialog()
     End Sub
 
-    Private Sub mnuProcurementCalculateCRI_Click(sender As Object, e As EventArgs) Handles mnuProcurementCalculateCRI.Click
-        dlgDefineCRI.ShowDialog()
-    End Sub
+    'Private Sub mnuProcurementPrepareStandardiseCountryName_Click(sender As Object, e As EventArgs)
+    '    Dim lstDataNames As List(Of String)
 
-    Private Sub mnuProcurementPrepareStandardiseCountryName_Click(sender As Object, e As EventArgs) Handles mnuProcurementPrepareStandardiseCountryName.Click
-        Dim lstDataNames As List(Of String)
-
-        lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
-        If lstDataNames.Count > 0 Then
-            dlgStandardiseCountryNames.strDefaultDataFrame = lstDataNames(0)
-            dlgStandardiseCountryNames.strDefaultColumn = clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_country_label")
-        Else
-            dlgStandardiseCountryNames.strDefaultDataFrame = ""
-            dlgStandardiseCountryNames.strDefaultColumn = ""
-        End If
-        dlgStandardiseCountryNames.ShowDialog()
-    End Sub
+    '    lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
+    '    If lstDataNames.Count > 0 Then
+    '        dlgStandardiseCountryNames.strDefaultDataFrame = lstDataNames(0)
+    '        dlgStandardiseCountryNames.strDefaultColumn = clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_country_label")
+    '    Else
+    '        dlgStandardiseCountryNames.strDefaultDataFrame = ""
+    '        dlgStandardiseCountryNames.strDefaultColumn = ""
+    '    End If
+    '    dlgStandardiseCountryNames.ShowDialog()
+    'End Sub
 
     Private Sub mnuProcurementPrepareRecodeNumericIntoQuantiles_Click(sender As Object, e As EventArgs) Handles mnuProcurementPrepareRecodeNumericIntoQuantiles.Click
         dlgRecodeNumericIntoQuantiles.ShowDialog()
     End Sub
 
-    Private Sub ResetToDefaultLayoutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ResetToDefaultLayoutToolStripMenuItem.Click
+    Private Sub mnuViewResetToDefaultLayout_Click(sender As Object, e As EventArgs) Handles mnuViewResetToDefaultLayout.Click
         SetToDefaultLayout()
     End Sub
 
@@ -1548,11 +1536,6 @@ Public Class frmMain
     Private Sub FrequencyTablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FrequencyTablesToolStripMenuItem.Click
         dlgSummaryBarOrPieChart.ShowDialog()
     End Sub
-
-    Private Sub DispalyClimaticDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DispalyClimaticDataToolStripMenuItem.Click
-        dlgDisplayDailyData.ShowDialog()
-    End Sub
-
     Private Sub mnuClimaticPrepareClimaticSummaries_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareClimaticSummaries.Click
         dlgClimaticSummary.ShowDialog()
     End Sub
@@ -1653,7 +1636,7 @@ Public Class frmMain
         dlgDuplicates.ShowDialog()
     End Sub
 
-    Private Sub BoxplotsConceptualisedAndConstructedToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles BoxplotsConceptualisedAndConstructedToolStripMenuItem.Click
+    Private Sub mnuClimaticCheckDataBoxplot_Click_1(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataBoxplot.Click
         dlgClimaticBoxPlot.ShowDialog()
     End Sub
 
@@ -1661,38 +1644,12 @@ Public Class frmMain
         dlgWindrose.ShowDialog()
     End Sub
 
-    Private Sub PlToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PlToolStripMenuItem.Click
+    Private Sub mnuClimaticCMSAFPlotRegion_Click(sender As Object, e As EventArgs) Handles mnuClimaticCMSAFPlotRegion.Click
         dlgPlotRegion.ShowDialog()
     End Sub
 
-    Private Sub mnuProcurementCorrelations_Click(sender As Object, e As EventArgs) Handles mnuProcurementCorrelations.Click
-        Dim lstDataNames As List(Of String)
-        Dim strComponentColumnNames() As String
-
-        lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
-        If lstDataNames.Count > 0 Then
-            dlgCorrelation.strDefaultDataFrame = lstDataNames(0)
-            strComponentColumnNames = clsRLink.GetCorruptionComponentsColumnNames(lstDataNames(0))
-            If strComponentColumnNames IsNot Nothing AndAlso strComponentColumnNames.Count > 0 Then
-                dlgCorrelation.strDefaultColumns = strComponentColumnNames
-            End If
-        Else
-            dlgCorrelation.strDefaultDataFrame = ""
-            dlgCorrelation.strDefaultColumns = Nothing
-        End If
-        dlgCorrelation.ShowDialog()
-    End Sub
-
-    Private Sub DisplayDailyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplayDailyToolStripMenuItem.Click
+    Private Sub mnuClimaticCheckDataDisplayDaily_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataDisplayDaily.Click
         dlgDisplayDailyData.ShowDialog()
-    End Sub
-
-    Private Sub mnuProcurementMaps_Click(sender As Object, e As EventArgs) Handles mnuProcurementMaps.Click
-        dlgCountryColouredMap.ShowDialog()
-    End Sub
-
-    Private Sub mnuProcurementDescribeMaps_Click(sender As Object, e As EventArgs) Handles mnuProcurementDescribeMaps.Click
-        dlgCountryColouredMap.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareColumnInfillMissingDates_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnInfillMissingDates.Click
@@ -1762,11 +1719,128 @@ Public Class frmMain
         dlgOneVariableGraph.ShowDialog()
     End Sub
 
-    Private Sub OneVariableSummariseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataOneVariableSummarise.Click
-        dlgDescribeOneVariable.ShowDialog()
+    Private Sub mnuPrepareCheckDataOneVariableSummarise_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataOneVariableSummarise.Click
+        dlgOneVariableSummarise.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareCheckDataOneWayFrequencies_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataOneWayFrequencies.Click
         dlgOneWayFrequencies.ShowDialog()
+    End Sub
+
+    Private Sub SummariseRedFlagsByCountryorOtherToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SummariseRedFlagsByCountryorOtherToolStripMenuItem.Click
+        Dim lstDataNames As List(Of String)
+
+        lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
+        If lstDataNames.Count > 0 Then
+            dlgColumnStats.strDefaultDataFrame = lstDataNames(0)
+            dlgColumnStats.strDefaultVariables = clsRLink.GetRedFlagColumnNames(lstDataNames(0))
+            dlgColumnStats.strDefaultFactors = {clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_country_label")}
+        Else
+            dlgColumnStats.strDefaultDataFrame = ""
+            dlgColumnStats.strDefaultVariables = Nothing
+            dlgColumnStats.strDefaultFactors = Nothing
+        End If
+        dlgColumnStats.ShowDialog()
+    End Sub
+
+    Private Sub mnuProcurementCalculateCRI_Click(sender As Object, e As EventArgs) Handles mnuProcurementCalculateCRI.Click
+        dlgDefineCRI.ShowDialog()
+    End Sub
+
+    Private Sub mnuProcurementDefineCorruption_Click_1(sender As Object, e As EventArgs) Handles mnuProcurementDefineCorruption.Click
+        dlgDefineCorruptionOutputs.ShowDialog()
+    End Sub
+
+    Private Sub SummariseRedFlagsByCountryAndYearorOtherToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SummariseRedFlagsByCountryAndYearorOtherToolStripMenuItem.Click
+        Dim lstDataNames As List(Of String)
+
+        lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
+        If lstDataNames.Count > 0 Then
+            dlgColumnStats.strDefaultDataFrame = lstDataNames(0)
+            dlgColumnStats.strDefaultVariables = clsRLink.GetRedFlagColumnNames(lstDataNames(0))
+            dlgColumnStats.strDefaultFactors = {clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_country_label"), clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_fiscal_year_label")}
+        Else
+            dlgColumnStats.strDefaultDataFrame = ""
+        dlgColumnStats.strDefaultVariables = Nothing
+        dlgColumnStats.strDefaultFactors = Nothing
+        End If
+        dlgColumnStats.ShowDialog()
+    End Sub
+
+    Private Sub OneVariableSummariseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OneVariableSummariseToolStripMenuItem.Click
+        Dim lstDataNames As List(Of String)
+        Dim lstColumns As New List(Of String)
+        Dim strRedFlags() As String
+
+        lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
+        If lstDataNames.Count > 0 Then
+            dlgOneVariableSummarise.strDefaultDataFrame = lstDataNames(0)
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_country_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_single_bidder_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_all_bids_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_procurement_type_3_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_tax_haven_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_contract_sector_label"))
+            strRedFlags = clsRLink.GetRedFlagColumnNames(lstDataNames(0))
+            If strRedFlags IsNot Nothing Then
+                lstColumns.AddRange(strRedFlags)
+            End If
+            lstColumns.RemoveAll(Function(x) x = "")
+            lstColumns = lstColumns.Distinct.ToList
+            dlgOneVariableSummarise.strDefaultColumns = lstColumns.ToArray()
+        Else
+            dlgOneVariableSummarise.strDefaultDataFrame = ""
+            dlgOneVariableSummarise.strDefaultColumns = Nothing
+        End If
+        dlgOneVariableSummarise.ShowDialog()
+    End Sub
+
+    Private Sub OneVariableGraphToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OneVariableGraphToolStripMenuItem.Click
+        Dim lstDataNames As List(Of String)
+        Dim lstColumns As New List(Of String)
+        Dim strRedFlags() As String
+
+        lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
+        If lstDataNames.Count > 0 Then
+            dlgOneVariableGraph.strDefaultDataFrame = lstDataNames(0)
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_country_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_single_bidder_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_all_bids_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_procurement_type_3_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_tax_haven_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_contract_sector_label"))
+            strRedFlags = clsRLink.GetRedFlagColumnNames(lstDataNames(0))
+            If strRedFlags IsNot Nothing Then
+                lstColumns.AddRange(strRedFlags)
+            End If
+            lstColumns.RemoveAll(Function(x) x = "")
+            dlgOneVariableGraph.strDefaultColumns = lstColumns.ToArray()
+        Else
+            dlgOneVariableGraph.strDefaultDataFrame = ""
+            dlgOneVariableGraph.strDefaultColumns = Nothing
+        End If
+        dlgOneVariableGraph.ShowDialog()
+    End Sub
+
+    Private Sub CorrelationsRedFlagsOrOthersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CorrelationsRedFlagsOrOthersToolStripMenuItem.Click
+        Dim lstDataNames As List(Of String)
+        Dim strComponentColumnNames() As String
+
+        lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
+        If lstDataNames.Count > 0 Then
+            dlgCorrelation.strDefaultDataFrame = lstDataNames(0)
+            strComponentColumnNames = clsRLink.GetRedFlagColumnNames(lstDataNames(0))
+            If strComponentColumnNames IsNot Nothing AndAlso strComponentColumnNames.Count > 0 Then
+                dlgCorrelation.strDefaultColumns = strComponentColumnNames
+            End If
+        Else
+            dlgCorrelation.strDefaultDataFrame = ""
+            dlgCorrelation.strDefaultColumns = Nothing
+        End If
+        dlgCorrelation.ShowDialog()
+    End Sub
+
+    Private Sub MapCountryValuesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MapCountryValuesToolStripMenuItem.Click
+        dlgCountryColouredMap.ShowDialog()
     End Sub
 End Class

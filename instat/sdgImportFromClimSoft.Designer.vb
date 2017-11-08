@@ -38,6 +38,7 @@ Partial Class sdgImportFromClimSoft
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgImportFromClimSoft))
         Me.ucrInputDatabaseName = New instat.ucrInputTextBox()
         Me.lblDatabaseName = New System.Windows.Forms.Label()
         Me.ucrInputHost = New instat.ucrInputTextBox()
@@ -56,106 +57,73 @@ Partial Class sdgImportFromClimSoft
         Me.ucrInputDatabaseName.AddQuotesIfUnrecognised = True
         Me.ucrInputDatabaseName.IsMultiline = False
         Me.ucrInputDatabaseName.IsReadOnly = False
-        Me.ucrInputDatabaseName.Location = New System.Drawing.Point(103, 21)
+        resources.ApplyResources(Me.ucrInputDatabaseName, "ucrInputDatabaseName")
         Me.ucrInputDatabaseName.Name = "ucrInputDatabaseName"
-        Me.ucrInputDatabaseName.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputDatabaseName.TabIndex = 1
         '
         'lblDatabaseName
         '
-        Me.lblDatabaseName.AutoSize = True
-        Me.lblDatabaseName.Location = New System.Drawing.Point(12, 24)
+        resources.ApplyResources(Me.lblDatabaseName, "lblDatabaseName")
         Me.lblDatabaseName.Name = "lblDatabaseName"
-        Me.lblDatabaseName.Size = New System.Drawing.Size(87, 13)
-        Me.lblDatabaseName.TabIndex = 0
-        Me.lblDatabaseName.Text = "Database Name:"
         '
         'ucrInputHost
         '
         Me.ucrInputHost.AddQuotesIfUnrecognised = True
         Me.ucrInputHost.IsMultiline = False
         Me.ucrInputHost.IsReadOnly = False
-        Me.ucrInputHost.Location = New System.Drawing.Point(103, 48)
+        resources.ApplyResources(Me.ucrInputHost, "ucrInputHost")
         Me.ucrInputHost.Name = "ucrInputHost"
-        Me.ucrInputHost.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputHost.TabIndex = 3
         '
         'lblHost
         '
-        Me.lblHost.AutoSize = True
-        Me.lblHost.Location = New System.Drawing.Point(12, 52)
+        resources.ApplyResources(Me.lblHost, "lblHost")
         Me.lblHost.Name = "lblHost"
-        Me.lblHost.Size = New System.Drawing.Size(32, 13)
-        Me.lblHost.TabIndex = 2
-        Me.lblHost.Text = "Host:"
         '
         'ucrInputPort
         '
         Me.ucrInputPort.AddQuotesIfUnrecognised = True
         Me.ucrInputPort.IsMultiline = False
         Me.ucrInputPort.IsReadOnly = False
-        Me.ucrInputPort.Location = New System.Drawing.Point(103, 75)
+        resources.ApplyResources(Me.ucrInputPort, "ucrInputPort")
         Me.ucrInputPort.Name = "ucrInputPort"
-        Me.ucrInputPort.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputPort.TabIndex = 5
         '
         'lblPort
         '
-        Me.lblPort.AutoSize = True
-        Me.lblPort.Location = New System.Drawing.Point(12, 79)
+        resources.ApplyResources(Me.lblPort, "lblPort")
         Me.lblPort.Name = "lblPort"
-        Me.lblPort.Size = New System.Drawing.Size(29, 13)
-        Me.lblPort.TabIndex = 4
-        Me.lblPort.Text = "Port:"
         '
         'ucrInputUserName
         '
         Me.ucrInputUserName.AddQuotesIfUnrecognised = True
         Me.ucrInputUserName.IsMultiline = False
         Me.ucrInputUserName.IsReadOnly = False
-        Me.ucrInputUserName.Location = New System.Drawing.Point(103, 102)
+        resources.ApplyResources(Me.ucrInputUserName, "ucrInputUserName")
         Me.ucrInputUserName.Name = "ucrInputUserName"
-        Me.ucrInputUserName.Size = New System.Drawing.Size(137, 21)
         '
         'lblUserName
         '
-        Me.lblUserName.AutoSize = True
-        Me.lblUserName.Location = New System.Drawing.Point(12, 106)
+        resources.ApplyResources(Me.lblUserName, "lblUserName")
         Me.lblUserName.Name = "lblUserName"
-        Me.lblUserName.Size = New System.Drawing.Size(58, 13)
-        Me.lblUserName.TabIndex = 6
-        Me.lblUserName.Text = "Username:"
         '
         'lblConnection
         '
-        Me.lblConnection.AutoSize = True
-        Me.lblConnection.Location = New System.Drawing.Point(162, 134)
+        resources.ApplyResources(Me.lblConnection, "lblConnection")
         Me.lblConnection.Name = "lblConnection"
-        Me.lblConnection.Size = New System.Drawing.Size(78, 13)
-        Me.lblConnection.TabIndex = 9
-        Me.lblConnection.Text = "No Connection"
         '
         'ucrBaseSdgClimSoft
         '
-        Me.ucrBaseSdgClimSoft.Location = New System.Drawing.Point(57, 168)
+        resources.ApplyResources(Me.ucrBaseSdgClimSoft, "ucrBaseSdgClimSoft")
         Me.ucrBaseSdgClimSoft.Name = "ucrBaseSdgClimSoft"
-        Me.ucrBaseSdgClimSoft.Size = New System.Drawing.Size(142, 30)
-        Me.ucrBaseSdgClimSoft.TabIndex = 10
         '
         'cmdEnterPassword
         '
-        Me.cmdEnterPassword.Location = New System.Drawing.Point(12, 130)
+        resources.ApplyResources(Me.cmdEnterPassword, "cmdEnterPassword")
         Me.cmdEnterPassword.Name = "cmdEnterPassword"
-        Me.cmdEnterPassword.Size = New System.Drawing.Size(107, 22)
-        Me.cmdEnterPassword.TabIndex = 8
-        Me.cmdEnterPassword.Text = "Enter Password"
         Me.cmdEnterPassword.UseVisualStyleBackColor = True
         '
         'sdgImportFromClimSoft
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(257, 203)
         Me.Controls.Add(Me.ucrBaseSdgClimSoft)
         Me.Controls.Add(Me.lblConnection)
         Me.Controls.Add(Me.cmdEnterPassword)
@@ -171,8 +139,6 @@ Partial Class sdgImportFromClimSoft
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgImportFromClimSoft"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Connect To ClimSoft Database"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
