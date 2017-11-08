@@ -22,28 +22,24 @@ Partial Class sdgInventoryPlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgInventoryPlot))
         Me.ucrButtonsInventoryplot = New instat.ucrButtonsSubdialogue()
         Me.SuspendLayout()
         '
         'ucrButtonsInventoryplot
         '
-        Me.ucrButtonsInventoryplot.Location = New System.Drawing.Point(63, 205)
+        resources.ApplyResources(Me.ucrButtonsInventoryplot, "ucrButtonsInventoryplot")
         Me.ucrButtonsInventoryplot.Name = "ucrButtonsInventoryplot"
-        Me.ucrButtonsInventoryplot.Size = New System.Drawing.Size(142, 30)
-        Me.ucrButtonsInventoryplot.TabIndex = 0
         '
         'sdgInventoryPlot
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(284, 261)
         Me.Controls.Add(Me.ucrButtonsInventoryplot)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgInventoryPlot"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Inventory Plot"
         Me.ResumeLayout(False)
 
     End Sub
