@@ -117,4 +117,220 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ucrLineColors.Location" type="System.Drawing.Point, System.Drawing">
+    <value>105, 68</value>
+  </data>
+  <data name="ucrLineColors.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 21</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrLineColors.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrLineColors.Name" xml:space="preserve">
+    <value>ucrLineColors</value>
+  </data>
+  <data name="&gt;&gt;ucrLineColors.Type" xml:space="preserve">
+    <value>instat.ucrColors, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrLineColors.Parent" xml:space="preserve">
+    <value>grpTickMarks</value>
+  </data>
+  <data name="&gt;&gt;ucrLineColors.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrChkLineLineEnd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 94</value>
+  </data>
+  <data name="ucrChkLineLineEnd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 20</value>
+  </data>
+  <data name="ucrChkLineLineEnd.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLineLineEnd.Name" xml:space="preserve">
+    <value>ucrChkLineLineEnd</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLineLineEnd.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLineLineEnd.Parent" xml:space="preserve">
+    <value>grpTickMarks</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLineLineEnd.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrChkLineSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 19</value>
+  </data>
+  <data name="ucrChkLineSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 20</value>
+  </data>
+  <data name="ucrChkLineSize.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLineSize.Name" xml:space="preserve">
+    <value>ucrChkLineSize</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLineSize.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLineSize.Parent" xml:space="preserve">
+    <value>grpTickMarks</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLineSize.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrChkLineLineType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 44</value>
+  </data>
+  <data name="ucrChkLineLineType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 20</value>
+  </data>
+  <data name="ucrChkLineLineType.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLineLineType.Name" xml:space="preserve">
+    <value>ucrChkLineLineType</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLineLineType.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLineLineType.Parent" xml:space="preserve">
+    <value>grpTickMarks</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLineLineType.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrChkLineColour.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 69</value>
+  </data>
+  <data name="ucrChkLineColour.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 20</value>
+  </data>
+  <data name="ucrChkLineColour.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLineColour.Name" xml:space="preserve">
+    <value>ucrChkLineColour</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLineColour.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLineColour.Parent" xml:space="preserve">
+    <value>grpTickMarks</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLineColour.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrInputLineLineEnd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>105, 93</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrInputLineLineEnd.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>21, 17, 21, 17</value>
+  </data>
+  <data name="ucrInputLineLineEnd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 21</value>
+  </data>
+  <data name="ucrInputLineLineEnd.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLineLineEnd.Name" xml:space="preserve">
+    <value>ucrInputLineLineEnd</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLineLineEnd.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLineLineEnd.Parent" xml:space="preserve">
+    <value>grpTickMarks</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLineLineEnd.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="ucrNudLineSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>105, 19</value>
+  </data>
+  <data name="ucrNudLineSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudLineSize.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrNudLineSize.Name" xml:space="preserve">
+    <value>ucrNudLineSize</value>
+  </data>
+  <data name="&gt;&gt;ucrNudLineSize.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudLineSize.Parent" xml:space="preserve">
+    <value>grpTickMarks</value>
+  </data>
+  <data name="&gt;&gt;ucrNudLineSize.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="ucrInputLineLineType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>105, 43</value>
+  </data>
+  <data name="ucrInputLineLineType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>21, 17, 21, 17</value>
+  </data>
+  <data name="ucrInputLineLineType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 21</value>
+  </data>
+  <data name="ucrInputLineLineType.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLineLineType.Name" xml:space="preserve">
+    <value>ucrInputLineLineType</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLineLineType.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLineLineType.Parent" xml:space="preserve">
+    <value>grpTickMarks</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLineLineType.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="grpTickMarks.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="grpTickMarks.Size" type="System.Drawing.Size, System.Drawing">
+    <value>246, 119</value>
+  </data>
+  <data name="grpTickMarks.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpTickMarks.Text" xml:space="preserve">
+    <value>Element Line</value>
+  </data>
+  <data name="&gt;&gt;grpTickMarks.Name" xml:space="preserve">
+    <value>grpTickMarks</value>
+  </data>
+  <data name="&gt;&gt;grpTickMarks.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpTickMarks.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpTickMarks.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 123</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>ucrElementLineControl</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

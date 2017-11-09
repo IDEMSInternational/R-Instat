@@ -38,24 +38,21 @@ Partial Class ucrDataFrameLength
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrDataFrameLength))
         Me.txtLength = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'txtLength
         '
-        Me.txtLength.Enabled = False
-        Me.txtLength.Location = New System.Drawing.Point(0, 0)
+        resources.ApplyResources(Me.txtLength, "txtLength")
         Me.txtLength.Name = "txtLength"
-        Me.txtLength.Size = New System.Drawing.Size(51, 20)
-        Me.txtLength.TabIndex = 0
         '
         'ucrDataFrameLength
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.txtLength)
         Me.Name = "ucrDataFrameLength"
-        Me.Size = New System.Drawing.Size(53, 23)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
