@@ -65,7 +65,6 @@ Public Class frmMain
 
         mnuBar.Renderer = prdCustom
         Tool_strip.Renderer = prdCustom
-
         SetMainMenusEnabled(False)
         Cursor = Cursors.WaitCursor
         'temporary
@@ -86,6 +85,7 @@ Public Class frmMain
 
         'Do this after setting up R Link because loading options may run R code
         LoadInstatOptions()
+        autoTranslate(Me)
 
         'Do this after loading options because interval depends on options
         'Interval is in milliseconds and option is in minutes
