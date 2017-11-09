@@ -1036,9 +1036,9 @@ Public Class ucrGeom
 
         'geom and stat are missing here 
         'clsgeom_smooth.AddLayerParameter("n", "numeric", "0.15")
-        'clsgeom_smooth.AddLayerParameter("span", "numeric", "0.15")
-        'clsgeom_smooth.AddLayerParameter("fullrange", "numeric", "0.15")
-        'clsgeom_smooth.AddLayerParameter("level", "numeric", "0.95")
+        clsgeom_smooth.AddLayerParameter("span", "numeric", "0", lstParameterStrings:={1, 0})
+        clsgeom_smooth.AddLayerParameter("fullrange", "boolean", "FALSE")
+        clsgeom_smooth.AddLayerParameter("level", "numeric", "0.95", lstParameterStrings:={1, 0})
 
         'method.args is a list of methods passed into the moddeling function
         'clsgeom_smooth.AddLayerParameter("method.args", "numeric", "0.95")
