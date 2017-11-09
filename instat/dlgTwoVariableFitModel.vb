@@ -26,6 +26,10 @@ Public Class dlgTwoVariableFitModel
     Public clsFormulaOperator, clsPowerOperator As ROperator
     Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric As RFunction
 
+    Private Sub ucrFamily_EnabledChanged(sender As Object, e As EventArgs) Handles ucrDistributionChoice.EnabledChanged
+
+    End Sub
+
     'Display options codes
     Public clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As RFunction
 
