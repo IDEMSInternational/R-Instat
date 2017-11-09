@@ -1026,23 +1026,27 @@ Public Class ucrGeom
         clsgeom_smooth.AddAesParameter("weight")
 
         'add  layer parameter
-        'clsgeom_smooth.AddLayerParameter("position")
+        'clsgeom_smooth.AddLayerParameter("position") ****Not sure how many positions exist for geom_smooth
+
         clsgeom_smooth.AddLayerParameter("method", "list", Chr(34) & "lm" & Chr(34), lstParameterStrings:={Chr(34) & "lm" & Chr(34), Chr(34) & "glm" & Chr(34), Chr(34) & "gam" & Chr(34), Chr(34) & "loess" & Chr(34), Chr(34) & "rlm" & Chr(34)})
-        'clsgeom_smooth.AddLayerParameter("formula", "list", Chr(34) & "lm" & Chr(34), lstParameterStrings:={Chr(34) & "glm" & Chr(34), Chr(34) & "gam" & Chr(34), Chr(34) & "loess" & Chr(34), Chr(34) & "rlm" & Chr(34)})
+        'formula has to be an input and we dont have that currently. its passed in like this formula= y ~ x or  formula= y ~ poly(x, 2) or formula= y ~ log(x) so the user has to type in stuff
+        'clsgeom_smooth.AddLayerParameter("formula",)
         clsgeom_smooth.AddLayerParameter("se", "boolean", "TRUE")
         clsgeom_smooth.AddLayerParameter("na.rm", "boolean", "FALSE")
         clsgeom_smooth.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_smooth.AddLayerParameter("inherit.aes", "boolean", "FALSE")
 
-        'geom and stat are missing here 
-        'clsgeom_smooth.AddLayerParameter("n", "numeric", "0.15")
+        'geom and stat are missing here as we dont know how to override the default connection between geom_smooth and stat_smooth
+        'you can have stat_smooth or geom_smooth. I am not sure how we can do that from here, changing the smothing function
+
+        clsgeom_smooth.AddLayerParameter("n", "numeric", "0")
         clsgeom_smooth.AddLayerParameter("span", "numeric", "0", lstParameterStrings:={1, 0})
         clsgeom_smooth.AddLayerParameter("fullrange", "boolean", "FALSE")
         clsgeom_smooth.AddLayerParameter("level", "numeric", "0.95", lstParameterStrings:={1, 0})
 
         'method.args is a list of methods passed into the moddeling function
-        'clsgeom_smooth.AddLayerParameter("method.args", "numeric", "0.95")
-
+        'its passed in like this** method.args = list(family = "binomial") we currently dont have this too. 
+        'clsgeom_smooth.AddLayerParameter("method.args")
         lstAllGeoms.Add(clsgeom_smooth)
 
         'clsgeom_spoke.strGeomName = "geom_spoke"
