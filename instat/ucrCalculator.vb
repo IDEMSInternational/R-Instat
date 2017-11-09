@@ -179,7 +179,7 @@ Public Class ucrCalculator
                 grpProbabilty.Visible = False
                 grpTransform.Visible = False
                 iHelpCalcID = 126
-                Me.Size = New Size(iBasicWidth * 1.34, Me.Height)
+                Me.Size = New Size(iBasicWidth * 1.38, Me.Height)
             Case "Logical and Symbols"
                 grpDates.Visible = False
                 grpSummary.Visible = False
@@ -188,7 +188,7 @@ Public Class ucrCalculator
                 grpBasic.Visible = True
                 grpStrings.Visible = False
                 iHelpCalcID = 127
-                Me.Size = New Size(iBasicWidth * 1.26, Me.Height)
+                Me.Size = New Size(iBasicWidth * 1.44, Me.Height)
                 grpProbabilty.Visible = False
                 grpTransform.Visible = False
             Case "Summary"
@@ -198,7 +198,7 @@ Public Class ucrCalculator
                 grpMaths.Visible = False
                 grpBasic.Visible = True
                 iHelpCalcID = 128
-                Me.Size = New Size(iBasicWidth * 1.16, Me.Height)
+                Me.Size = New Size(iBasicWidth * 1.51, Me.Height)
                 grpStrings.Visible = False
                 grpProbabilty.Visible = False
                 grpTransform.Visible = False
@@ -212,7 +212,7 @@ Public Class ucrCalculator
                 grpProbabilty.Visible = False
                 grpTransform.Visible = False
                 iHelpCalcID = 129
-                Me.Size = New Size(iBasicWidth * 1.24, Me.Height)
+                Me.Size = New Size(iBasicWidth * 1.42, Me.Height)
             Case "Probability"
                 grpDates.Visible = False
                 grpProbabilty.Visible = True
@@ -223,7 +223,7 @@ Public Class ucrCalculator
                 grpBasic.Visible = True
                 grpTransform.Visible = False
                 iHelpCalcID = 120
-                Me.Size = New Size(iBasicWidth * 1.59, Me.Height)
+                Me.Size = New Size(iBasicWidth * 1.57, Me.Height)
             Case "Dates"
                 grpDates.Visible = True
                 grpProbabilty.Visible = False
@@ -234,7 +234,7 @@ Public Class ucrCalculator
                 grpBasic.Visible = True
                 grpTransform.Visible = False
                 iHelpCalcID = 130
-                Me.Size = New Size(iBasicWidth * 1.3, Me.Height)
+                Me.Size = New Size(iBasicWidth * 1.32, Me.Height)
             Case "Transform"
                 grpDates.Visible = False
                 grpProbabilty.Visible = False
@@ -244,7 +244,7 @@ Public Class ucrCalculator
                 grpMaths.Visible = False
                 grpStrings.Visible = False
                 grpTransform.Visible = True
-                Me.Size = New Size(iBasicWidth * 1.21, Me.Height)
+                Me.Size = New Size(iBasicWidth * 1.33, Me.Height)
             Case Else
                 grpDates.Visible = False
                 Me.Size = New Size(iBasicWidth, Me.Height)
@@ -317,7 +317,6 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdSiginf_Click(sender As Object, e As EventArgs) Handles cmdSiginf.Click
-
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("signif(x= ,digits=6)", 10)
         Else
