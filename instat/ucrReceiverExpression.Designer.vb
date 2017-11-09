@@ -38,25 +38,22 @@ Partial Class ucrReceiverExpression
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrReceiverExpression))
         Me.cboExpression = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
         '
         'cboExpression
         '
-        Me.cboExpression.Dock = System.Windows.Forms.DockStyle.Fill
+        resources.ApplyResources(Me.cboExpression, "cboExpression")
         Me.cboExpression.FormattingEnabled = True
-        Me.cboExpression.Location = New System.Drawing.Point(0, 0)
         Me.cboExpression.Name = "cboExpression"
-        Me.cboExpression.Size = New System.Drawing.Size(250, 21)
-        Me.cboExpression.TabIndex = 0
         '
         'ucrReceiverExpression
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.cboExpression)
         Me.Name = "ucrReceiverExpression"
-        Me.Size = New System.Drawing.Size(250, 20)
         Me.ResumeLayout(False)
 
     End Sub
