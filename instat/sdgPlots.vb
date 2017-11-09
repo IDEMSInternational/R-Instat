@@ -173,7 +173,10 @@ Public Class sdgPlots
 
         'themes tab
         urChkSelectTheme.SetText("Select Theme")
-        ucrInputThemes.SetParameter(New RParameter("theme_name"))
+        ' This position MUST be smaller than the position of the theme() parameter
+        ' Otherwise this will overwrite any specific theme options selected
+        ' Currently theme() is set to position 100
+        ucrInputThemes.SetParameter(New RParameter("theme_name", iNewPosition:=14))
         urChkSelectTheme.AddToLinkedControls(ucrInputThemes, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         urChkSelectTheme.AddParameterPresentCondition(True, "theme_name")
         urChkSelectTheme.AddParameterPresentCondition(False, "theme_name", False)
