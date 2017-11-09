@@ -28,9 +28,11 @@ Public Class ucrLayerParamsControls
     Public Sub SetControl(clsNewRCode As RCodeStructure, Optional clsNewLayerParam As LayerParameter = Nothing, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
+            bControlsInitialised = True
         End If
         ucrReceiverMetadataProperty.SetControls(clsNewRCode:=clsNewRCode, clsNewLayerParam:=clsNewLayerParam, bReset:=bReset)
-        ucrChkParamName.SetRCode(clsNewRCode, bReset)
+        ' Clear the conditions because this control could have been used for another geom (so different conditions)
+        ucrChkParamName.ClearConditions()
         If clsNewLayerParam IsNot Nothing Then
             ucrChkParamName.SetText(clsNewLayerParam.strLayerParameterName)
             ucrChkParamName.AddParameterPresentCondition(True, clsNewLayerParam.strLayerParameterName)
@@ -39,6 +41,8 @@ Public Class ucrLayerParamsControls
         Else
             ucrChkParamName.Visible = False
         End If
+        ' Set RCode only after clearing and setting conditions
+        ucrChkParamName.SetRCode(clsNewRCode, bReset)
     End Sub
 
     Private Sub ucrReceiverMetadataProperty_ControlContentsChanged() Handles ucrReceiverMetadataProperty.ControlContentsChanged, ucrChkParamName.ControlContentsChanged
