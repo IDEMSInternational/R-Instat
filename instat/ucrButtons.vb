@@ -189,7 +189,7 @@ Public Class ucrButtons
 
     Private Sub ucrButtons_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         frmMain.clsRecentItems.addToMenu(Me.Parent)
-        translateEach(Controls)
+        translateEach(Controls, Me)
         If bFirstLoad Then
             SetDefaults()
             bFirstLoad = False
