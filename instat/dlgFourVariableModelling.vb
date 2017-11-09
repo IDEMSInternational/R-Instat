@@ -163,6 +163,7 @@ Public Class dlgFourVariableModelling
 
         'Residual Plots
         clsAutoPlot = clsRegressionDefaults.clsDefaultAutoplot.Clone
+        clsAutoPlot.bExcludeAssignedFunctionOutput = False
 
         'Model
         clsFormulaFunction = clsRegressionDefaults.clsDefaultFormulaFunction.Clone
@@ -186,6 +187,7 @@ Public Class dlgFourVariableModelling
         clsVisReg.AddParameter("type", Chr(34) & "conditional" & Chr(34))
         clsVisReg.AddParameter("gg", "FALSE")
         clsVisReg.iCallType = 3
+        clsVisReg.bExcludeAssignedFunctionOutput = False
 
         clsFirstPowerOperator.SetOperation("^")
         clsFirstPowerOperator.AddParameter("power", 2, iPosition:=1)
@@ -374,8 +376,8 @@ Public Class dlgFourVariableModelling
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
         sdgSimpleRegOptions.SetRCode(ucrBaseFourVariableModelling.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, clsNewAutoplot:=clsAutoPlot, bReset:=bResetDisplayOptions)
         sdgSimpleRegOptions.ShowDialog()
+        GraphAssignTo()
         bResetDisplayOptions = False
-
     End Sub
 
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
@@ -428,6 +430,13 @@ Public Class dlgFourVariableModelling
 
     Private Sub ucrSelectorFourVariableModelling_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorFourVariableModelling.ControlValueChanged
         SetBaseFunction()
+        GraphAssignTo()
+    End Sub
+
+    Private Sub GraphAssignTo()
+        'temp fix for graph display problem with RDotNet
+        clsVisReg.SetAssignTo("last_visreg", strTempDataframe:=ucrSelectorFourVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_visreg")
+        clsAutoPlot.SetAssignTo("last_autoplot", strTempDataframe:=ucrSelectorFourVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_autoplot")
     End Sub
 
     Private Sub SetOverallExplanatoryOperator()
