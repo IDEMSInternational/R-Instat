@@ -108,7 +108,7 @@ Public Class dlgHistogram
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
-        clsBaseOperator.AddParameter("histogram", clsRFunctionParameter:=clsRgeomPlotFunction)
+        clsBaseOperator.AddParameter("histogram", clsRFunctionParameter:=clsRgeomPlotFunction, iPosition:=2)
 
         clsRggplotFunction.SetPackageName("ggplot2")
         clsRggplotFunction.SetRCommand("ggplot")

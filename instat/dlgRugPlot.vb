@@ -103,7 +103,7 @@ Public Class dlgRugPlot
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
-        clsBaseOperator.AddParameter("scatter", clsRFunctionParameter:=clsRgeom_RugPlotFunction)
+        clsBaseOperator.AddParameter("scatter", clsRFunctionParameter:=clsRgeom_RugPlotFunction, iPosition:=2)
 
         clsRggplotFunction.SetPackageName("ggplot2")
         clsRggplotFunction.SetRCommand("ggplot")
