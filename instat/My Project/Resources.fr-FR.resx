@@ -198,6 +198,9 @@
   <data name="Select_" xml:space="preserve">
     <value>Sélectionner</value>
   </data>
+  <data name="Select_and_Stack" xml:space="preserve">
+    <value>Select and Stack</value>
+  </data>
   <data name="Sort" xml:space="preserve">
     <value>Tri</value>
   </data>

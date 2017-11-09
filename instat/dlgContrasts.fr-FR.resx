@@ -12,4 +12,103 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="lblFactorReceiver.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFactorReceiver.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>260, 48</value>
+  </data>
+  <data name="lblFactorReceiver.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>93, 13</value>
+  </data>
+  <data name="lblFactorReceiver.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblSelectContrastName.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSelectContrastName.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>260, 99</value>
+  </data>
+  <data name="lblSelectContrastName.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>113, 13</value>
+  </data>
+  <data name="lblSelectContrastName.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblDefineContrast.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblDefineContrast.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>445, 20</value>
+  </data>
+  <data name="lblDefineContrast.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>92, 13</value>
+  </data>
+  <data name="lblDefineContrast.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="grdLayoutForContrasts.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>445, 36</value>
+  </data>
+  <data name="grdLayoutForContrasts.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>333, 207</value>
+  </data>
+  <data name="grdLayoutForContrasts.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="ucrInputContrastName.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>260, 114</value>
+  </data>
+  <data name="ucrInputContrastName.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 21</value>
+  </data>
+  <data name="ucrInputContrastName.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" xml:space="preserve" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>792, 255</value>
+  </data>
+  <data name="ucrSelectorForContrast.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>13, 13</value>
+  </data>
+  <data name="ucrSelectorForContrast.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectorForContrast.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>210, 180</value>
+  </data>
+  <data name="ucrSelectorForContrast.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="ucrBase.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>13, 200</value>
+  </data>
+  <data name="ucrBase.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>410, 60</value>
+  </data>
+  <data name="ucrBase.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="$this.StartPosition" xml:space="preserve" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="ucrReceiverForContrasts.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>260, 63</value>
+  </data>
+  <data name="ucrReceiverForContrasts.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverForContrasts.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverForContrasts.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>
