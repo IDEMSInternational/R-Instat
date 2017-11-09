@@ -23,6 +23,7 @@ Imports instat
 
 Public Class dlgOptions
     Public strCurrLanguageCulture As String
+    Public strPrevLanguageCulture As String
     Public strOutputWindowDisplay As String
     Public strWorkingDirectory As String
     Private strGraphDisplayOption As String
@@ -121,6 +122,7 @@ Public Class dlgOptions
             Case Else
                 rdoEnglish.Checked = True
         End Select
+        strPrevLanguageCulture = frmMain.clsInstatOptions.strLanguageCultureCode
 
         If frmMain.clsInstatOptions.strGraphDisplayOption = "view_output_window" Then
             rdoDisplayinOutputWindow.Checked = True
@@ -222,10 +224,10 @@ Public Class dlgOptions
         SetInstatOptions()
         autoTranslate(Me)
 
-        If frmMain.Visible Then
+        If frmMain.Visible AndAlso strCurrLanguageCulture <> strPrevLanguageCulture Then
             autoTranslate(frmMain)
+            'TODO translation containers within frmMain here
         End If
-        'TODO translation containers within frmMain here
 
         'disables the command after running it
         cmdApply.Enabled = True
