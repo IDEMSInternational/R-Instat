@@ -38,34 +38,30 @@ Partial Class ucrInputConfidenceLimit
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrInputConfidenceLimit))
         Me.ucrConfidenceLimit = New instat.ucrInputComboBox()
         Me.lblConfidenceLimit = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrConfidenceLimit
         '
-        Me.ucrConfidenceLimit.Location = New System.Drawing.Point(94, 0)
+        Me.ucrConfidenceLimit.AddQuotesIfUnrecognised = True
+        Me.ucrConfidenceLimit.IsReadOnly = False
+        resources.ApplyResources(Me.ucrConfidenceLimit, "ucrConfidenceLimit")
         Me.ucrConfidenceLimit.Name = "ucrConfidenceLimit"
-        Me.ucrConfidenceLimit.Size = New System.Drawing.Size(56, 24)
-        Me.ucrConfidenceLimit.TabIndex = 0
         '
         'lblConfidenceLimit
         '
-        Me.lblConfidenceLimit.AutoSize = True
-        Me.lblConfidenceLimit.Location = New System.Drawing.Point(3, 3)
+        resources.ApplyResources(Me.lblConfidenceLimit, "lblConfidenceLimit")
         Me.lblConfidenceLimit.Name = "lblConfidenceLimit"
-        Me.lblConfidenceLimit.Size = New System.Drawing.Size(88, 13)
-        Me.lblConfidenceLimit.TabIndex = 1
-        Me.lblConfidenceLimit.Text = "Confidence Limit:"
         '
         'ucrInputConfidenceLimit
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.lblConfidenceLimit)
         Me.Controls.Add(Me.ucrConfidenceLimit)
         Me.Name = "ucrInputConfidenceLimit"
-        Me.Size = New System.Drawing.Size(154, 23)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

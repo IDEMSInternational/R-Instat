@@ -12,4 +12,166 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="UcrLayerParamsControls1.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 50</value>
+  </data>
+  <data name="UcrLayerParamsControls1.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>338, 25</value>
+  </data>
+  <data name="UcrLayerParamsControls1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="UcrLayerParamsControls2.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 75</value>
+  </data>
+  <data name="UcrLayerParamsControls2.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>290, 25</value>
+  </data>
+  <data name="UcrLayerParamsControls2.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="UcrLayerParamsControls3.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 100</value>
+  </data>
+  <data name="UcrLayerParamsControls3.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>290, 25</value>
+  </data>
+  <data name="UcrLayerParamsControls3.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="UcrLayerParamsControls4.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 125</value>
+  </data>
+  <data name="UcrLayerParamsControls4.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>290, 25</value>
+  </data>
+  <data name="UcrLayerParamsControls4.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="UcrLayerParamsControls5.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 150</value>
+  </data>
+  <data name="UcrLayerParamsControls5.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>290, 25</value>
+  </data>
+  <data name="UcrLayerParamsControls5.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="UcrLayerParamsControls6.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 175</value>
+  </data>
+  <data name="UcrLayerParamsControls6.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>290, 25</value>
+  </data>
+  <data name="UcrLayerParamsControls6.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="UcrLayerParamsControls7.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 200</value>
+  </data>
+  <data name="UcrLayerParamsControls7.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>290, 25</value>
+  </data>
+  <data name="UcrLayerParamsControls7.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="UcrLayerParamsControls8.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 225</value>
+  </data>
+  <data name="UcrLayerParamsControls8.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>290, 25</value>
+  </data>
+  <data name="UcrLayerParamsControls8.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="UcrLayerParamsControls9.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 250</value>
+  </data>
+  <data name="UcrLayerParamsControls9.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>290, 25</value>
+  </data>
+  <data name="UcrLayerParamsControls9.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="UcrLayerParamsControls10.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 275</value>
+  </data>
+  <data name="UcrLayerParamsControls10.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>290, 25</value>
+  </data>
+  <data name="UcrLayerParamsControls10.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="UcrLayerParamsControls11.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 300</value>
+  </data>
+  <data name="UcrLayerParamsControls11.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>290, 25</value>
+  </data>
+  <data name="UcrLayerParamsControls11.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="UcrLayerParamsControls12.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 325</value>
+  </data>
+  <data name="UcrLayerParamsControls12.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>290, 25</value>
+  </data>
+  <data name="UcrLayerParamsControls12.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="UcrLayerParamsControls13.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 350</value>
+  </data>
+  <data name="UcrLayerParamsControls13.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>290, 25</value>
+  </data>
+  <data name="UcrLayerParamsControls13.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="UcrLayerParamsControls17.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 450</value>
+  </data>
+  <data name="UcrLayerParamsControls17.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>290, 25</value>
+  </data>
+  <data name="UcrLayerParamsControls17.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="UcrLayerParamsControls16.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 425</value>
+  </data>
+  <data name="UcrLayerParamsControls16.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>290, 25</value>
+  </data>
+  <data name="UcrLayerParamsControls16.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="UcrLayerParamsControls15.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 400</value>
+  </data>
+  <data name="UcrLayerParamsControls15.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>290, 25</value>
+  </data>
+  <data name="UcrLayerParamsControls15.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="UcrLayerParamsControls14.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 375</value>
+  </data>
+  <data name="UcrLayerParamsControls14.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>290, 25</value>
+  </data>
+  <data name="UcrLayerParamsControls14.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" xml:space="preserve" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>265, 481</value>
+  </data>
+  <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

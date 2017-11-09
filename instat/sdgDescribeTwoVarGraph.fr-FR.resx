@@ -12,4 +12,109 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="UcrButtonsSubdialogue1.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>66, 143</value>
+  </data>
+  <data name="UcrButtonsSubdialogue1.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>142, 30</value>
+  </data>
+  <data name="UcrButtonsSubdialogue1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="ucrNumericByNumeric.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>148, 11</value>
+  </data>
+  <data name="ucrNumericByNumeric.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>144, 21</value>
+  </data>
+  <data name="ucrNumericByNumeric.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblNumericByNumeric.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblNumericByNumeric.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>9, 15</value>
+  </data>
+  <data name="lblNumericByNumeric.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>105, 13</value>
+  </data>
+  <data name="lblNumericByNumeric.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblNumericByCategorical.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblNumericByCategorical.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>9, 47</value>
+  </data>
+  <data name="lblNumericByCategorical.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>119, 13</value>
+  </data>
+  <data name="lblNumericByCategorical.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="ucrNumericByCategorical.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>148, 43</value>
+  </data>
+  <data name="ucrNumericByCategorical.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>144, 21</value>
+  </data>
+  <data name="ucrNumericByCategorical.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblCategoricalByCategorical.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblCategoricalByCategorical.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>9, 111</value>
+  </data>
+  <data name="lblCategoricalByCategorical.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>133, 13</value>
+  </data>
+  <data name="lblCategoricalByCategorical.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="ucrCategoricalByCategorical.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>148, 107</value>
+  </data>
+  <data name="ucrCategoricalByCategorical.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>144, 21</value>
+  </data>
+  <data name="ucrCategoricalByCategorical.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="lblCategoricalByNumeric.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblCategoricalByNumeric.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>9, 79</value>
+  </data>
+  <data name="lblCategoricalByNumeric.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>119, 13</value>
+  </data>
+  <data name="lblCategoricalByNumeric.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="ucrCategoricalByNumeric.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>148, 75</value>
+  </data>
+  <data name="ucrCategoricalByNumeric.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>144, 21</value>
+  </data>
+  <data name="ucrCategoricalByNumeric.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" xml:space="preserve" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>302, 177</value>
+  </data>
+  <data name="$this.StartPosition" xml:space="preserve" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>
