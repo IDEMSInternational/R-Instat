@@ -260,6 +260,9 @@
   <data name="mnuDescribeSpecificBoxplot.Text" xml:space="preserve">
     <value>Boxplot...</value>
   </data>
+  <data name="mnuDescribeSpecificDotPlot.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="mnuDescribeSpecificDotPlot.Size" type="System.Drawing.Size, System.Drawing">
     <value>209, 22</value>
   </data>
