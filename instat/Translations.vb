@@ -95,7 +95,8 @@ Public Class Translations
         For Each tsItem In tsCollection
             ' process this item, then recursively process any sub items
             res.ApplyResources(tsItem, tsItem.Name, Threading.Thread.CurrentThread.CurrentUICulture)
-            If TypeOf tsItem Is ToolStripMenuItem Then
+            mnuItem = TryCast(tsItem, ToolStripMenuItem)
+            If mnuItem IsNot Nothing Then
                 mnuItem = DirectCast(tsItem, ToolStripMenuItem)
                 If mnuItem.HasDropDownItems Then
                     translateMenu(mnuItem.DropDownItems, ctrParent)
