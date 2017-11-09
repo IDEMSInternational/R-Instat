@@ -455,7 +455,11 @@ instat_object$set("public", "get_objects", function(data_name, object_name, incl
       if(include_overall) out[[overall_label]] <- private$.objects[self$get_object_names(data_name = overall_label, type = type)]
       if(!include_empty) out = out[sapply(out, function(x) length(x) > 0)]
     }
-    return(out)
+    if(length(out) == 1) {
+      if(print_graph && (ggplot2::is.ggplot(out) || any(c("gg", "ggmultiplot") %in% class(out)))) return(print(out))
+      else return(out)
+    }
+    else return(out)
   }
   else {
     if(data_name == overall_label) {
@@ -473,7 +477,7 @@ instat_object$set("public", "get_objects", function(data_name, object_name, incl
       return(lst)
     }
     else {
-      if(print_graph && (ggplot2::is.ggplot(out) || "gg" %in% class(out))) return(print(out))
+      if(print_graph && (ggplot2::is.ggplot(out) || any(c("gg", "ggmultiplot") %in% class(out)))) return(print(out))
       else return(out)
     }
   }
