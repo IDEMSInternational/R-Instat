@@ -4129,6 +4129,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOptions.fr-FR.resx">
       <DependentUpon>dlgOptions.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOptions.resx">
       <DependentUpon>dlgOptions.vb</DependentUpon>
@@ -4745,6 +4746,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrFilter.sw-KE.resx">
       <DependentUpon>ucrFilter.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrGeomListWithAes.fr-FR.resx">
       <DependentUpon>ucrGeomListWithAes.vb</DependentUpon>
