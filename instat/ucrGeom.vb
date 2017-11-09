@@ -1041,9 +1041,9 @@ Public Class ucrGeom
         'you can have stat_smooth or geom_smooth. I am not sure how we can do that from here, changing the smothing function
 
         clsgeom_smooth.AddLayerParameter("n", "numeric", "0")
-        clsgeom_smooth.AddLayerParameter("span", "numeric", "0", lstParameterStrings:={1, 0})
+        clsgeom_smooth.AddLayerParameter("span", "numeric", "0", lstParameterStrings:={1, 0, 1})
         clsgeom_smooth.AddLayerParameter("fullrange", "boolean", "FALSE")
-        clsgeom_smooth.AddLayerParameter("level", "numeric", "0.95", lstParameterStrings:={1, 0})
+        clsgeom_smooth.AddLayerParameter("level", "numeric", "0.95", lstParameterStrings:={2, 0, 1})
 
         'method.args is a list of methods passed into the moddeling function
         'its passed in like this** method.args = list(family = "binomial") we currently dont have this too. 
