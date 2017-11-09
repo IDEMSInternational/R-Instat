@@ -1595,8 +1595,8 @@ data_object$set("public", "get_objects", function(object_name, type = "", force_
 data_object$set("public", "get_object_names", function(type = "", as_list = FALSE, excluded_items = c()) {
   if(type == "") out = names(private$objects)
   else {
-    if(type == model_label) out = names(private$objects)[!sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "htmlTable") %in% class(x)))]
-    else if(type == graph_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob") %in% class(x)))]
+    if(type == model_label) out = names(private$objects)[!sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "htmlTable", "ggmultiplot") %in% class(x)))]
+    else if(type == graph_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot") %in% class(x)))]
     else if(type == table_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("htmlTable", "data.frame", "list") %in% class(x)))]
     else stop("type: ", type, " not recognised")
   }

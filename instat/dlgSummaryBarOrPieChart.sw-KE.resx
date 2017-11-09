@@ -12,4 +12,220 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="lblYvariable.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblYvariable.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>253, 75</value>
+  </data>
+  <data name="lblYvariable.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>58, 13</value>
+  </data>
+  <data name="lblYvariable.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lblFactor.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFactor.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>253, 121</value>
+  </data>
+  <data name="lblFactor.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 13</value>
+  </data>
+  <data name="lblFactor.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="cmdBarChartOptions.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 228</value>
+  </data>
+  <data name="cmdBarChartOptions.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>121, 23</value>
+  </data>
+  <data name="cmdBarChartOptions.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="cmdOptions.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 257</value>
+  </data>
+  <data name="cmdOptions.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>121, 23</value>
+  </data>
+  <data name="cmdOptions.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="lblSecondFactor.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSecondFactor.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>253, 168</value>
+  </data>
+  <data name="lblSecondFactor.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>80, 13</value>
+  </data>
+  <data name="lblSecondFactor.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="cmdPieChartOptions.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 228</value>
+  </data>
+  <data name="cmdPieChartOptions.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>121, 23</value>
+  </data>
+  <data name="cmdPieChartOptions.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="rdoBarChart.Appearance" xml:space="preserve" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoBarChart.FlatStyle" xml:space="preserve" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoBarChart.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>67, 10</value>
+  </data>
+  <data name="rdoBarChart.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>100, 27</value>
+  </data>
+  <data name="rdoBarChart.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoBarChart.Text" xml:space="preserve">
+    <value>Chati Mwambaa</value>
+  </data>
+  <data name="rdoBarChart.TextAlign" xml:space="preserve" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="rdoPieChart.Appearance" xml:space="preserve" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoPieChart.FlatStyle" xml:space="preserve" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoPieChart.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>165, 10</value>
+  </data>
+  <data name="rdoPieChart.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>100, 27</value>
+  </data>
+  <data name="rdoPieChart.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rdoPieChart.Text" xml:space="preserve">
+    <value>Chatipai</value>
+  </data>
+  <data name="rdoPieChart.TextAlign" xml:space="preserve" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="rdoTable.Appearance" xml:space="preserve" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoTable.Enabled" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="rdoTable.FlatStyle" xml:space="preserve" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoTable.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>261, 10</value>
+  </data>
+  <data name="rdoTable.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>100, 27</value>
+  </data>
+  <data name="rdoTable.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="rdoTable.Text" xml:space="preserve">
+    <value>Majedwali</value>
+  </data>
+  <data name="rdoTable.TextAlign" xml:space="preserve" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="ucrSaveSummaryBar.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 288</value>
+  </data>
+  <data name="ucrSaveSummaryBar.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>255, 24</value>
+  </data>
+  <data name="ucrSaveSummaryBar.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" xml:space="preserve" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>425, 371</value>
+  </data>
+  <data name="ucrReceiverFactor.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>252, 136</value>
+  </data>
+  <data name="ucrReceiverFactor.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverFactor.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverFactor.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="ucrReceiverYVariable.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>252, 90</value>
+  </data>
+  <data name="ucrReceiverYVariable.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverYVariable.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverYVariable.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="ucrSummaryBarSelector.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 40</value>
+  </data>
+  <data name="ucrSummaryBarSelector.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSummaryBarSelector.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>242, 192</value>
+  </data>
+  <data name="ucrSummaryBarSelector.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="ucrBase.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 316</value>
+  </data>
+  <data name="ucrBase.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>410, 53</value>
+  </data>
+  <data name="ucrBase.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="ucrPnlOptions.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>54, 3</value>
+  </data>
+  <data name="ucrPnlOptions.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>307, 35</value>
+  </data>
+  <data name="ucrPnlOptions.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="$this.StartPosition" xml:space="preserve" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="ucrReceiverSecondFactor.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>252, 183</value>
+  </data>
+  <data name="ucrReceiverSecondFactor.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverSecondFactor.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 26</value>
+  </data>
+  <data name="ucrReceiverSecondFactor.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

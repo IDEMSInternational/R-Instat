@@ -32,7 +32,7 @@ Public Class ucrButtonsSubdialogue
     End Sub
 
     Private Sub ucrButtonsSubdialogue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        translateEach(Controls)
+        translateEach(Controls, Me)
     End Sub
 
     Private Sub HelpContent()
