@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 
 Public Class dlgFitCorruptionModel
@@ -112,6 +113,7 @@ Public Class dlgFitCorruptionModel
         'Residual Plots
         clsAutoPlot = clsRegressionDefaults.clsDefaultAutoplot.Clone
         clsAutoPlot.AddParameter("object", clsRFunctionParameter:=clsCorruptionModel, iPosition:=0)
+        clsAutoPlot.bExcludeAssignedFunctionOutput = False
 
         'Display formula
         clsFormulaFunction = clsRegressionDefaults.clsDefaultFormulaFunction.Clone
@@ -140,7 +142,7 @@ Public Class dlgFitCorruptionModel
         clsVisReg.AddParameter("gg", "TRUE")
         clsVisReg.iCallType = 3
         clsVisReg.AddParameter("fit", clsRFunctionParameter:=clsCorruptionModel, iPosition:=0)
-
+        clsVisReg.bExcludeAssignedFunctionOutput = False
 
         clsCorruptionModel.SetRCommand("glm")
         clsCorruptionModel.AddParameter("formula", clsROperatorParameter:=clsFormula)
@@ -233,11 +235,22 @@ Public Class dlgFitCorruptionModel
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
         sdgSimpleRegOptions.SetRCode(ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, clsNewAutoplot:=clsAutoPlot, bReset:=bResetDisplayOptions)
         sdgSimpleRegOptions.ShowDialog()
+        GraphAssignTo()
         bResetDisplayOptions = False
     End Sub
 
     Private Sub ucrReceiverOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOutput.ControlValueChanged, ucrReceiverControlVariables.ControlValueChanged, ucrReceiverIndicators.ControlValueChanged
         SetBaseFunction()
         SetFormula()
+    End Sub
+
+    Private Sub ucrSelectorFitModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorFitModel.ControlValueChanged
+        GraphAssignTo()
+    End Sub
+
+    Private Sub GraphAssignTo()
+        'temp fix for graph display problem with RDotNet
+        clsVisReg.SetAssignTo("last_visreg", strTempDataframe:=ucrSelectorFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_visreg")
+        clsAutoPlot.SetAssignTo("last_autoplot", strTempDataframe:=ucrSelectorFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_autoplot")
     End Sub
 End Class
