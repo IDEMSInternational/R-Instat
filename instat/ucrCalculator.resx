@@ -502,7 +502,7 @@
     <value>18</value>
   </data>
   <data name="grpBasic.Location" type="System.Drawing.Point, System.Drawing">
-    <value>223, 60</value>
+    <value>223, 63</value>
   </data>
   <data name="grpBasic.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -1285,7 +1285,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpDates.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="cmdDmy.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1897,7 +1897,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpTransform.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>0</value>
   </data>
   <data name="cmdRowRank.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2146,7 +2146,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdMovMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>67, 102</value>
+    <value>67, 73</value>
   </data>
   <data name="cmdMovMax.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 30</value>
@@ -2173,7 +2173,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdMovSum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>67, 73</value>
+    <value>67, 102</value>
   </data>
   <data name="cmdMovSum.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 30</value>
@@ -2659,7 +2659,7 @@
     <value>19</value>
   </data>
   <data name="grpSummary.Location" type="System.Drawing.Point, System.Drawing">
-    <value>432, 60</value>
+    <value>432, 63</value>
   </data>
   <data name="grpSummary.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -2686,7 +2686,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpSummary.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="cmdMad.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -3517,7 +3517,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpStrings.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="cmdSplit.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -4318,7 +4318,7 @@
     <value>27</value>
   </data>
   <data name="grpLogical.Location" type="System.Drawing.Point, System.Drawing">
-    <value>432, 62</value>
+    <value>432, 63</value>
   </data>
   <data name="grpLogical.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -4327,7 +4327,7 @@
     <value>2, 3, 2, 3</value>
   </data>
   <data name="grpLogical.Size" type="System.Drawing.Size, System.Drawing">
-    <value>251, 220</value>
+    <value>253, 220</value>
   </data>
   <data name="grpLogical.TabIndex" type="System.Int32, mscorlib">
     <value>183</value>
@@ -4345,13 +4345,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpLogical.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="cmdNear.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdNear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>188, 158</value>
+    <value>186, 158</value>
   </data>
   <data name="cmdNear.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 30</value>
@@ -4378,7 +4378,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdBetween.Location" type="System.Drawing.Point, System.Drawing">
-    <value>187, 129</value>
+    <value>186, 129</value>
   </data>
   <data name="cmdBetween.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 30</value>
@@ -4387,7 +4387,7 @@
     <value>200</value>
   </data>
   <data name="cmdBetween.Text" xml:space="preserve">
-    <value>Between</value>
+    <value>between</value>
   </data>
   <data name="&gt;&gt;cmdBetween.Name" xml:space="preserve">
     <value>cmdBetween</value>
@@ -4405,7 +4405,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdIsFalse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>188, 187</value>
+    <value>186, 187</value>
   </data>
   <data name="cmdIsFalse.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 30</value>
@@ -4462,7 +4462,7 @@
     <value>65, 187</value>
   </data>
   <data name="cmdAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 30</value>
+    <value>58, 30</value>
   </data>
   <data name="cmdAll.TabIndex" type="System.Int32, mscorlib">
     <value>197</value>
@@ -4486,10 +4486,10 @@
     <value>NoControl</value>
   </data>
   <data name="cmdIsTrue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>127, 187</value>
+    <value>122, 187</value>
   </data>
   <data name="cmdIsTrue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 30</value>
+    <value>65, 30</value>
   </data>
   <data name="cmdIsTrue.TabIndex" type="System.Int32, mscorlib">
     <value>196</value>
@@ -4543,7 +4543,7 @@
     <value>65, 158</value>
   </data>
   <data name="cmdNotIsNa.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 30</value>
+    <value>58, 30</value>
   </data>
   <data name="cmdNotIsNa.TabIndex" type="System.Int32, mscorlib">
     <value>194</value>
@@ -4567,16 +4567,16 @@
     <value>NoControl</value>
   </data>
   <data name="cmdDuplicate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>127, 158</value>
+    <value>122, 158</value>
   </data>
   <data name="cmdDuplicate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 30</value>
+    <value>65, 30</value>
   </data>
   <data name="cmdDuplicate.TabIndex" type="System.Int32, mscorlib">
     <value>193</value>
   </data>
   <data name="cmdDuplicate.Text" xml:space="preserve">
-    <value>duplic</value>
+    <value>duplicated</value>
   </data>
   <data name="&gt;&gt;cmdDuplicate.Name" xml:space="preserve">
     <value>cmdDuplicate</value>
@@ -4624,7 +4624,7 @@
     <value>65, 129</value>
   </data>
   <data name="cmdmatch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 30</value>
+    <value>58, 30</value>
   </data>
   <data name="cmdmatch.TabIndex" type="System.Int32, mscorlib">
     <value>191</value>
@@ -4648,10 +4648,10 @@
     <value>NoControl</value>
   </data>
   <data name="cmdwhen.Location" type="System.Drawing.Point, System.Drawing">
-    <value>126, 129</value>
+    <value>122, 129</value>
   </data>
   <data name="cmdwhen.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 30</value>
+    <value>65, 30</value>
   </data>
   <data name="cmdwhen.TabIndex" type="System.Int32, mscorlib">
     <value>190</value>
@@ -5374,7 +5374,7 @@
     <value>17</value>
   </data>
   <data name="grpProbabilty.Location" type="System.Drawing.Point, System.Drawing">
-    <value>430, 60</value>
+    <value>430, 63</value>
   </data>
   <data name="grpProbabilty.Size" type="System.Drawing.Size, System.Drawing">
     <value>314, 137</value>
@@ -6259,13 +6259,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpMaths.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>2</value>
   </data>
   <data name="cmdSign.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdSign.Location" type="System.Drawing.Point, System.Drawing">
-    <value>172, 101</value>
+    <value>171, 101</value>
   </data>
   <data name="cmdSign.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -6298,13 +6298,13 @@
     <value>NoControl</value>
   </data>
   <data name="cmdRound.Location" type="System.Drawing.Point, System.Drawing">
-    <value>114, 101</value>
+    <value>121, 101</value>
   </data>
   <data name="cmdRound.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
   </data>
   <data name="cmdRound.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 30</value>
+    <value>51, 30</value>
   </data>
   <data name="cmdRound.TabIndex" type="System.Int32, mscorlib">
     <value>146</value>
@@ -6337,7 +6337,7 @@
     <value>2, 3, 2, 3</value>
   </data>
   <data name="cmdSiginf.Size" type="System.Drawing.Size, System.Drawing">
-    <value>38, 30</value>
+    <value>45, 30</value>
   </data>
   <data name="cmdSiginf.TabIndex" type="System.Int32, mscorlib">
     <value>145</value>
@@ -7006,7 +7006,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>767, 345</value>
+    <value>477, 330</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ucrCalculator</value>
