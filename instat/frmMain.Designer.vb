@@ -688,8 +688,8 @@ Partial Class frmMain
         '
         'mnuDescribeSpecificDotPlot
         '
-        Me.mnuDescribeSpecificDotPlot.Name = "mnuDescribeSpecificDotPlot"
         resources.ApplyResources(Me.mnuDescribeSpecificDotPlot, "mnuDescribeSpecificDotPlot")
+        Me.mnuDescribeSpecificDotPlot.Name = "mnuDescribeSpecificDotPlot"
         Me.mnuDescribeSpecificDotPlot.Tag = "Dotplot..."
         '
         'mnuDescribeSpecificRugPlot
