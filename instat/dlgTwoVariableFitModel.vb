@@ -184,6 +184,7 @@ Public Class dlgTwoVariableFitModel
 
         'Residual Plots
         clsAutoPlot = clsRegressionDefaults.clsDefaultAutoplot.Clone
+        clsAutoPlot.bExcludeAssignedFunctionOutput = False
 
         clsRgeom_point = clsRegressionDefaults.clsDefaultRgeom_pointFunction.Clone
         clsRGraphicsOperator.AddParameter("geom_point", clsRFunctionParameter:=clsRgeom_point, iPosition:=1)
@@ -199,6 +200,7 @@ Public Class dlgTwoVariableFitModel
         clsVisReg.AddParameter("type", Chr(34) & "conditional" & Chr(34))
         clsVisReg.AddParameter("gg", "TRUE")
         clsVisReg.iCallType = 3
+        clsVisReg.bExcludeAssignedFunctionOutput = False
 
         'Model
         clsFormulaFunction = clsRegressionDefaults.clsDefaultFormulaFunction.Clone
@@ -350,6 +352,7 @@ Public Class dlgTwoVariableFitModel
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
         sdgSimpleRegOptions.SetRCode(ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, clsNewAutoplot:=clsAutoPlot, bReset:=bResetOptionsSubDialog)
         sdgSimpleRegOptions.ShowDialog()
+        GraphAssignTo()
         bResetOptionsSubDialog = False
     End Sub
 
@@ -651,6 +654,14 @@ Public Class dlgTwoVariableFitModel
 
     Private Sub ucrSelectorSimpleReg_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorSimpleReg.ControlValueChanged
         SetBaseFunction()
+        GraphAssignTo()
+    End Sub
+
+    'temp fix for graph display problem with RDotNet
+    'correct solution is to have save controls linked to each graph
+    Private Sub GraphAssignTo()
+        clsVisReg.SetAssignTo("last_visreg", strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_visreg")
+        clsAutoPlot.SetAssignTo("last_autoplot", strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_autoplot")
     End Sub
 
     Private Sub ucrExplanatory_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverExplanatory.SelectionChanged
