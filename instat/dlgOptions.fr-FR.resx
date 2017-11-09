@@ -21,6 +21,9 @@
   <data name="cmdApply.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
+  <data name="cmdApply.Text" xml:space="preserve">
+    <value>Appliquer</value>
+  </data>
   <data name="cmdHelp.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>477, 324</value>
   </data>
@@ -29,6 +32,9 @@
   </data>
   <data name="cmdHelp.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>12</value>
+  </data>
+  <data name="cmdHelp.Text" xml:space="preserve">
+    <value>Aide</value>
   </data>
   <data name="cmdCancel.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>315, 324</value>
@@ -39,6 +45,9 @@
   <data name="cmdCancel.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
+  <data name="cmdCancel.Text" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
   <data name="cmdOk.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>234, 324</value>
   </data>
@@ -47,6 +56,9 @@
   </data>
   <data name="cmdOk.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>11</value>
+  </data>
+  <data name="cmdOk.Text" xml:space="preserve">
+    <value>OK</value>
   </data>
   <data name="spltControls.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>5, 1</value>
@@ -59,6 +71,9 @@
   </data>
   <data name="cmdFactoryReset.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>13</value>
+  </data>
+  <data name="cmdFactoryReset.Text" xml:space="preserve">
+    <value>Rétablir les paramètres d’origine</value>
   </data>
   <data name="trOptions.Dock" xml:space="preserve" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -147,6 +162,9 @@
   <data name="tbpLanguages.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
+  <data name="tbpLanguages.Text" xml:space="preserve">
+    <value>Langues</value>
+  </data>
   <data name="pnComments.AutoSizeMode" xml:space="preserve" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
@@ -171,6 +189,9 @@
   <data name="tbpComments.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
+  <data name="tbpComments.Text" xml:space="preserve">
+    <value>Commentaires</value>
+  </data>
   <data name="tbpImport.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
@@ -179,6 +200,9 @@
   </data>
   <data name="tbpImport.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>3</value>
+  </data>
+  <data name="tbpImport.Text" xml:space="preserve">
+    <value>Importer</value>
   </data>
   <data name="tbpOutputWindow.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -192,6 +216,9 @@
   <data name="tbpOutputWindow.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
+  <data name="tbpOutputWindow.Text" xml:space="preserve">
+    <value>Fenêtre Sortie</value>
+  </data>
   <data name="tbpEditor.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
@@ -203,6 +230,9 @@
   </data>
   <data name="tbpEditor.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>10</value>
+  </data>
+  <data name="tbpEditor.ToolTipText" xml:space="preserve">
+    <value>&amp;Vue de données...</value>
   </data>
   <data name="tbpCommands.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -216,6 +246,9 @@
   <data name="tbpCommands.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
+  <data name="tbpCommands.Text" xml:space="preserve">
+    <value>Commandes</value>
+  </data>
   <data name="tbpDataView.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
@@ -228,6 +261,9 @@
   <data name="tbpDataView.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
+  <data name="tbpDataView.Text" xml:space="preserve">
+    <value>&amp;Vue de données...</value>
+  </data>
   <data name="tbpWorkingDirectory.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
@@ -239,6 +275,9 @@
   </data>
   <data name="tbpWorkingDirectory.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>11</value>
+  </data>
+  <data name="tbpWorkingDirectory.Text" xml:space="preserve">
+    <value>Répertoire de travail</value>
   </data>
   <data name="tbpGraphDisplay.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -306,6 +345,9 @@
   <data name="grpLanguage.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
+  <data name="grpLanguage.Text" xml:space="preserve">
+    <value>Langue</value>
+  </data>
   <data name="rdoSpanish.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -321,6 +363,9 @@
   <data name="rdoSpanish.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
+  <data name="rdoSpanish.Text" xml:space="preserve">
+    <value>Espagnol</value>
+  </data>
   <data name="rdoEnglish.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -332,6 +377,9 @@
   </data>
   <data name="rdoEnglish.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>1</value>
+  </data>
+  <data name="rdoEnglish.Text" xml:space="preserve">
+    <value>Anglais</value>
   </data>
   <data name="rdoFrench.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -345,6 +393,9 @@
   <data name="rdoFrench.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
+  <data name="rdoFrench.Text" xml:space="preserve">
+    <value>Français</value>
+  </data>
   <data name="rdoKiswahili.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -356,6 +407,9 @@
   </data>
   <data name="rdoKiswahili.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>3</value>
+  </data>
+  <data name="rdoKiswahili.Text" xml:space="preserve">
+    <value>Kiswahili</value>
   </data>
   <data name="ucrPnlLanguage.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>0, 17</value>
@@ -386,6 +440,9 @@
   </data>
   <data name="lblComment.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>0</value>
+  </data>
+  <data name="lblComment.Text" xml:space="preserve">
+    <value>Commentaire</value>
   </data>
   <data name="pnImportData.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -504,6 +561,9 @@
   <data name="rtbCommentPreview.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>22</value>
   </data>
+  <data name="rtbCommentPreview.Text" xml:space="preserve">
+    <value></value>
+  </data>
   <data name="rtbOutputPreview.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>100, 49</value>
   </data>
@@ -512,6 +572,9 @@
   </data>
   <data name="rtbOutputPreview.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>21</value>
+  </data>
+  <data name="rtbOutputPreview.Text" xml:space="preserve">
+    <value></value>
   </data>
   <data name="rtbCommandPreview.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>100, 9</value>
@@ -522,6 +585,9 @@
   <data name="rtbCommandPreview.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
+  <data name="rtbCommandPreview.Text" xml:space="preserve">
+    <value></value>
+  </data>
   <data name="cmdCommandFormat.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>288, 9</value>
   </data>
@@ -530,6 +596,9 @@
   </data>
   <data name="cmdCommandFormat.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>10</value>
+  </data>
+  <data name="cmdCommandFormat.Text" xml:space="preserve">
+    <value>Modifier</value>
   </data>
   <data name="lblCommentFormat.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -552,6 +621,9 @@
   <data name="cmdOutputFormat.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
+  <data name="cmdOutputFormat.Text" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
   <data name="lblOutputFormat.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -564,6 +636,9 @@
   <data name="lblOutputFormat.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>18</value>
   </data>
+  <data name="lblOutputFormat.Text" xml:space="preserve">
+    <value>Format de sortie</value>
+  </data>
   <data name="cmdCommentFormat.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>288, 89</value>
   </data>
@@ -572,6 +647,9 @@
   </data>
   <data name="cmdCommentFormat.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>16</value>
+  </data>
+  <data name="cmdCommentFormat.Text" xml:space="preserve">
+    <value>Modifier</value>
   </data>
   <data name="lblCommandFormat.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -609,6 +687,9 @@
   <data name="cmdEditorFont.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
+  <data name="cmdEditorFont.Text" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
   <data name="lblFont.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -621,6 +702,9 @@
   <data name="lblFont.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>17</value>
   </data>
+  <data name="lblFont.Text" xml:space="preserve">
+    <value>Police...</value>
+  </data>
   <data name="lblWaitSeconds.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -632,6 +716,9 @@
   </data>
   <data name="lblWaitSeconds.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>8</value>
+  </data>
+  <data name="lblWaitSeconds.Text" xml:space="preserve">
+    <value>secondes</value>
   </data>
   <data name="ucrChkShowWaitDialog.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>6, 47</value>
@@ -672,6 +759,9 @@
   <data name="lblEvery.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
+  <data name="lblEvery.Text" xml:space="preserve">
+    <value>Tous les</value>
+  </data>
   <data name="lblMinutes.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -683,6 +773,9 @@
   </data>
   <data name="lblMinutes.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>4</value>
+  </data>
+  <data name="lblMinutes.Text" xml:space="preserve">
+    <value>Minutes</value>
   </data>
   <data name="ucrChkAutoSave.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>13, 104</value>
@@ -774,6 +867,9 @@
   <data name="lblWorkingDirectory.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
+  <data name="lblWorkingDirectory.Text" xml:space="preserve">
+    <value>Répertoire de travail</value>
+  </data>
   <data name="ucrWorkingDirectory.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>111, 17</value>
   </data>
@@ -854,6 +950,9 @@
   </data>
   <data name="$this.StartPosition" xml:space="preserve" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Options</value>
   </data>
   <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

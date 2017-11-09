@@ -4129,6 +4129,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOptions.fr-FR.resx">
       <DependentUpon>dlgOptions.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOptions.resx">
       <DependentUpon>dlgOptions.vb</DependentUpon>
