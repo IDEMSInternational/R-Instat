@@ -93,6 +93,7 @@ Public Class dlgLinePlot
         clsGeomPointFunc.SetRCommand("geom_point")
         clsGeomPointParam.SetArgumentName("geom_point")
         clsGeomPointParam.SetArgument(clsGeomPointFunc)
+        clsGeomPointParam.Position = 3
         ucrChkPoints.SetText("Points")
         ucrChkPoints.SetParameter(clsGeomPointParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
@@ -134,7 +135,7 @@ Public Class dlgLinePlot
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
-        clsBaseOperator.AddParameter("lineplot", clsRFunctionParameter:=clsRgeomlineplotFunction)
+        clsBaseOperator.AddParameter("lineplot", clsRFunctionParameter:=clsRgeomlineplotFunction, iPosition:=2)
 
         clsRggplotFunction.SetPackageName("ggplot2")
         clsRggplotFunction.SetRCommand("ggplot")
