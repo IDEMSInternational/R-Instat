@@ -121,6 +121,10 @@
   <data name="lblTextFilePreview.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblTextFilePreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblTextFilePreview.Location" type="System.Drawing.Point, System.Drawing">
     <value>238, 9</value>
@@ -149,6 +153,9 @@
   <data name="lblDataFrame.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblDataFrame.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblDataFrame.Location" type="System.Drawing.Point, System.Drawing">
     <value>238, 239</value>
   </data>
@@ -175,6 +182,9 @@
   </data>
   <data name="lblEncodingCSV.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblEncodingCSV.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblEncodingCSV.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 29</value>
@@ -203,6 +213,9 @@
   <data name="lblHeadersCSV.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblHeadersCSV.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblHeadersCSV.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 63</value>
   </data>
@@ -229,6 +242,9 @@
   </data>
   <data name="lblRowNamesCSV.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblRowNamesCSV.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblRowNamesCSV.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 111</value>
@@ -257,6 +273,9 @@
   <data name="lblSeparatorCSV.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblSeparatorCSV.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblSeparatorCSV.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 158</value>
   </data>
@@ -283,6 +302,9 @@
   </data>
   <data name="lblDecimalCSV.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblDecimalCSV.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblDecimalCSV.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 185</value>
@@ -314,7 +336,6 @@
   <data name="txtTextFilePreview.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="txtTextFilePreview.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
     <value>Both</value>
   </data>
@@ -360,6 +381,9 @@
   <data name="lblFileOpenPath.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblFileOpenPath.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblFileOpenPath.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 26</value>
   </data>
@@ -387,6 +411,9 @@
   <data name="lblLinesToSkipCSV.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblLinesToSkipCSV.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblLinesToSkipCSV.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 239</value>
   </data>
@@ -410,6 +437,9 @@
   </data>
   <data name="&gt;&gt;lblLinesToSkipCSV.ZOrder" xml:space="preserve">
     <value>15</value>
+  </data>
+  <data name="cmdBrowse.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cmdBrowse.Location" type="System.Drawing.Point, System.Drawing">
     <value>164, 22</value>
@@ -443,6 +473,9 @@
   </data>
   <data name="lblNAStringsCSV.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblNAStringsCSV.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblNAStringsCSV.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 213</value>
@@ -519,6 +552,9 @@
   <data name="rdoRowNamesNoCSV.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="rdoRowNamesNoCSV.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoRowNamesNoCSV.Location" type="System.Drawing.Point, System.Drawing">
     <value>70, 130</value>
   </data>
@@ -545,6 +581,9 @@
   </data>
   <data name="rdoRowNamesYesCSV.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="rdoRowNamesYesCSV.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoRowNamesYesCSV.Location" type="System.Drawing.Point, System.Drawing">
     <value>21, 131</value>
@@ -840,6 +879,9 @@
   <data name="lblMissingValueStringExcel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblMissingValueStringExcel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblMissingValueStringExcel.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 75</value>
   </data>
@@ -915,6 +957,9 @@
   <data name="lblNamedRegion.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblNamedRegion.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblNamedRegion.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 74</value>
   </data>
@@ -966,6 +1011,9 @@
   <data name="lblRowToSkipExcel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblRowToSkipExcel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblRowToSkipExcel.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 144</value>
   </data>
@@ -992,6 +1040,9 @@
   </data>
   <data name="lblSelectSheetExcel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblSelectSheetExcel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblSelectSheetExcel.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 29</value>
@@ -1245,6 +1296,9 @@
   <data name="lblCannotImport.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 12pt, style=Bold</value>
   </data>
+  <data name="lblCannotImport.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblCannotImport.Location" type="System.Drawing.Point, System.Drawing">
     <value>262, 316</value>
   </data>
@@ -1282,6 +1336,9 @@ Modify options or select a different file.</value>
   <data name="lblNoPreview.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 11.25pt</value>
   </data>
+  <data name="lblNoPreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblNoPreview.Location" type="System.Drawing.Point, System.Drawing">
     <value>298, 318</value>
   </data>
@@ -1315,6 +1372,9 @@ Modify options or select a different file.</value>
   <data name="lblLinesToPreview.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblLinesToPreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblLinesToPreview.Location" type="System.Drawing.Point, System.Drawing">
     <value>519, 239</value>
   </data>
@@ -1338,6 +1398,33 @@ Modify options or select a different file.</value>
   </data>
   <data name="&gt;&gt;lblLinesToPreview.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="cmdRefreshPreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdRefreshPreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>569, 443</value>
+  </data>
+  <data name="cmdRefreshPreview.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 23</value>
+  </data>
+  <data name="cmdRefreshPreview.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="cmdRefreshPreview.Text" xml:space="preserve">
+    <value>Refresh Preview</value>
+  </data>
+  <data name="&gt;&gt;cmdRefreshPreview.Name" xml:space="preserve">
+    <value>cmdRefreshPreview</value>
+  </data>
+  <data name="&gt;&gt;cmdRefreshPreview.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdRefreshPreview.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmdRefreshPreview.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="ucrNudPreviewLines.Location" type="System.Drawing.Point, System.Drawing">
     <value>613, 236</value>
@@ -1435,30 +1522,6 @@ Modify options or select a different file.</value>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
-  <data name="cmdRefreshPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>569, 443</value>
-  </data>
-  <data name="cmdRefreshPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 23</value>
-  </data>
-  <data name="cmdRefreshPreview.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="cmdRefreshPreview.Text" xml:space="preserve">
-    <value>Refresh Preview</value>
-  </data>
-  <data name="&gt;&gt;cmdRefreshPreview.Name" xml:space="preserve">
-    <value>cmdRefreshPreview</value>
-  </data>
-  <data name="&gt;&gt;cmdRefreshPreview.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdRefreshPreview.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;cmdRefreshPreview.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1466,7 +1529,10 @@ Modify options or select a different file.</value>
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>676, 497</value>
+    <value>676, 500</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

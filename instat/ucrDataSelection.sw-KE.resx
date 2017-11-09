@@ -12,4 +12,79 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="btnRemove.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>99, 76</value>
+  </data>
+  <data name="btnRemove.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="btnRemove.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>80</value>
+  </data>
+  <data name="btnRemove.Text" xml:space="preserve">
+    <value>Ondoa</value>
+  </data>
+  <data name="btnAdd.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>99, 38</value>
+  </data>
+  <data name="btnAdd.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="btnAdd.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>79</value>
+  </data>
+  <data name="btnAdd.Text" xml:space="preserve">
+    <value>Ongeza</value>
+  </data>
+  <data name="lblSelectedVariables.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSelectedVariables.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>182, 3</value>
+  </data>
+  <data name="lblSelectedVariables.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>95, 13</value>
+  </data>
+  <data name="lblSelectedVariables.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>78</value>
+  </data>
+  <data name="lstSelectedVariables.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>189, 23</value>
+  </data>
+  <data name="lstSelectedVariables.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>84, 95</value>
+  </data>
+  <data name="lstSelectedVariables.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>77</value>
+  </data>
+  <data name="lblAvailableVariables.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblAvailableVariables.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>2, 3</value>
+  </data>
+  <data name="lblAvailableVariables.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>102, 13</value>
+  </data>
+  <data name="lblAvailableVariables.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>76</value>
+  </data>
+  <data name="lstAvailableVariable.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>9, 23</value>
+  </data>
+  <data name="lstAvailableVariable.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>84, 95</value>
+  </data>
+  <data name="lstAvailableVariable.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>75</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" xml:space="preserve" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>285, 122</value>
+  </data>
+  <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>
