@@ -83,6 +83,8 @@ Public Class dlgGeneralForGraphics
         clsGlobalAesFunction.SetRCommand("aes")
 
         clsBaseOperator.AddParameter("ggplot2", clsRFunctionParameter:=clsGgplotFunction, iPosition:=0)
+        clsBaseOperator.SetAssignTo("last_graph", strTempGraph:="last_graph")
+        clsBaseOperator.bExcludeAssignedFunctionOutput = False
 
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
 
