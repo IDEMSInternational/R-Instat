@@ -39,7 +39,6 @@ Partial Class ucrColumnMetadata
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrColumnMetadata))
         Me.grdVariables = New unvell.ReoGrid.ReoGridControl()
         Me.columnContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuColumnRename = New System.Windows.Forms.ToolStripMenuItem()
@@ -72,8 +71,9 @@ Partial Class ucrColumnMetadata
         '
         Me.grdVariables.BackColor = System.Drawing.Color.White
         Me.grdVariables.ColumnHeaderContextMenuStrip = Nothing
-        resources.ApplyResources(Me.grdVariables, "grdVariables")
+        Me.grdVariables.Dock = System.Windows.Forms.DockStyle.Fill
         Me.grdVariables.LeadHeaderContextMenuStrip = Nothing
+        Me.grdVariables.Location = New System.Drawing.Point(3, 23)
         Me.grdVariables.Name = "grdVariables"
         Me.grdVariables.RowHeaderContextMenuStrip = Me.columnContextMenuStrip
         Me.grdVariables.Script = Nothing
@@ -82,133 +82,168 @@ Partial Class ucrColumnMetadata
         Me.grdVariables.SheetTabVisible = True
         Me.grdVariables.SheetTabWidth = 154
         Me.grdVariables.ShowScrollEndSpacing = True
+        Me.grdVariables.Size = New System.Drawing.Size(338, 112)
+        Me.grdVariables.TabIndex = 2
+        Me.grdVariables.Text = "Variables"
         '
         'columnContextMenuStrip
         '
         Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuDuplicateColumn, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertToLogical, Me.mnuConvertVariate, Me.ToolStripSeparator2, Me.mnuLevelsLabels, Me.ToolStripSeparator1, Me.mnuFreezeToHere, Me.mnuUnfreeze, Me.ToolStripSeparator3, Me.mnuSort, Me.mnuColumnFilter, Me.mnuClearColumnFilter})
         Me.columnContextMenuStrip.Name = "columnContextMenuStrip"
-        resources.ApplyResources(Me.columnContextMenuStrip, "columnContextMenuStrip")
+        Me.columnContextMenuStrip.Size = New System.Drawing.Size(213, 380)
         '
         'mnuColumnRename
         '
         Me.mnuColumnRename.Name = "mnuColumnRename"
-        resources.ApplyResources(Me.mnuColumnRename, "mnuColumnRename")
+        Me.mnuColumnRename.Size = New System.Drawing.Size(212, 22)
+        Me.mnuColumnRename.Text = "Rename Column..."
         '
         'mnuDuplicateColumn
         '
         Me.mnuDuplicateColumn.Name = "mnuDuplicateColumn"
-        resources.ApplyResources(Me.mnuDuplicateColumn, "mnuDuplicateColumn")
+        Me.mnuDuplicateColumn.Size = New System.Drawing.Size(212, 22)
+        Me.mnuDuplicateColumn.Text = "Duplicate Column..."
         '
         'mnuInsertColsBefore
         '
         Me.mnuInsertColsBefore.Name = "mnuInsertColsBefore"
-        resources.ApplyResources(Me.mnuInsertColsBefore, "mnuInsertColsBefore")
+        Me.mnuInsertColsBefore.Size = New System.Drawing.Size(212, 22)
+        Me.mnuInsertColsBefore.Text = "Insert Column(s) Before"
         '
         'mnuInsertColsAfter
         '
         Me.mnuInsertColsAfter.Name = "mnuInsertColsAfter"
-        resources.ApplyResources(Me.mnuInsertColsAfter, "mnuInsertColsAfter")
+        Me.mnuInsertColsAfter.Size = New System.Drawing.Size(212, 22)
+        Me.mnuInsertColsAfter.Text = "Insert Column(s) After"
         '
         'mnuDeleteCol
         '
         Me.mnuDeleteCol.Name = "mnuDeleteCol"
-        resources.ApplyResources(Me.mnuDeleteCol, "mnuDeleteCol")
+        Me.mnuDeleteCol.Size = New System.Drawing.Size(212, 22)
+        Me.mnuDeleteCol.Text = "Delete Column(s)"
         '
         'toolStripMenuItem2
         '
         Me.toolStripMenuItem2.Name = "toolStripMenuItem2"
-        resources.ApplyResources(Me.toolStripMenuItem2, "toolStripMenuItem2")
+        Me.toolStripMenuItem2.Size = New System.Drawing.Size(209, 6)
         '
         'mnuConvertToFactor
         '
         Me.mnuConvertToFactor.Name = "mnuConvertToFactor"
-        resources.ApplyResources(Me.mnuConvertToFactor, "mnuConvertToFactor")
+        Me.mnuConvertToFactor.Size = New System.Drawing.Size(212, 22)
+        Me.mnuConvertToFactor.Text = "Convert to Factor"
         '
         'mnuCovertToOrderedFactors
         '
         Me.mnuCovertToOrderedFactors.Name = "mnuCovertToOrderedFactors"
-        resources.ApplyResources(Me.mnuCovertToOrderedFactors, "mnuCovertToOrderedFactors")
+        Me.mnuCovertToOrderedFactors.Size = New System.Drawing.Size(212, 22)
+        Me.mnuCovertToOrderedFactors.Text = "Convert to Ordered Factor"
         '
         'mnuConvertText
         '
         Me.mnuConvertText.Name = "mnuConvertText"
-        resources.ApplyResources(Me.mnuConvertText, "mnuConvertText")
+        Me.mnuConvertText.Size = New System.Drawing.Size(212, 22)
+        Me.mnuConvertText.Text = "Convert to Character"
         '
         'mnuConvertToLogical
         '
         Me.mnuConvertToLogical.Name = "mnuConvertToLogical"
-        resources.ApplyResources(Me.mnuConvertToLogical, "mnuConvertToLogical")
+        Me.mnuConvertToLogical.Size = New System.Drawing.Size(212, 22)
+        Me.mnuConvertToLogical.Text = "Convert to Logical"
         '
         'mnuConvertVariate
         '
         Me.mnuConvertVariate.Name = "mnuConvertVariate"
-        resources.ApplyResources(Me.mnuConvertVariate, "mnuConvertVariate")
+        Me.mnuConvertVariate.Size = New System.Drawing.Size(212, 22)
+        Me.mnuConvertVariate.Text = "Convert to Numeric"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        resources.ApplyResources(Me.ToolStripSeparator2, "ToolStripSeparator2")
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(209, 6)
         '
         'mnuLevelsLabels
         '
         Me.mnuLevelsLabels.Name = "mnuLevelsLabels"
-        resources.ApplyResources(Me.mnuLevelsLabels, "mnuLevelsLabels")
+        Me.mnuLevelsLabels.Size = New System.Drawing.Size(212, 22)
+        Me.mnuLevelsLabels.Text = "Levels/Labels..."
+        Me.mnuLevelsLabels.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        resources.ApplyResources(Me.ToolStripSeparator1, "ToolStripSeparator1")
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(209, 6)
         '
         'mnuFreezeToHere
         '
         Me.mnuFreezeToHere.Name = "mnuFreezeToHere"
-        resources.ApplyResources(Me.mnuFreezeToHere, "mnuFreezeToHere")
+        Me.mnuFreezeToHere.Size = New System.Drawing.Size(212, 22)
+        Me.mnuFreezeToHere.Text = "Freeze to Here"
         '
         'mnuUnfreeze
         '
         Me.mnuUnfreeze.Name = "mnuUnfreeze"
-        resources.ApplyResources(Me.mnuUnfreeze, "mnuUnfreeze")
+        Me.mnuUnfreeze.Size = New System.Drawing.Size(212, 22)
+        Me.mnuUnfreeze.Text = "Unfreeze"
         '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        resources.ApplyResources(Me.ToolStripSeparator3, "ToolStripSeparator3")
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(209, 6)
         '
         'mnuSort
         '
         Me.mnuSort.Name = "mnuSort"
-        resources.ApplyResources(Me.mnuSort, "mnuSort")
+        Me.mnuSort.Size = New System.Drawing.Size(212, 22)
+        Me.mnuSort.Text = "Sort..."
         '
         'mnuColumnFilter
         '
         Me.mnuColumnFilter.Name = "mnuColumnFilter"
-        resources.ApplyResources(Me.mnuColumnFilter, "mnuColumnFilter")
+        Me.mnuColumnFilter.Size = New System.Drawing.Size(212, 22)
+        Me.mnuColumnFilter.Text = "Filter..."
         '
         'mnuClearColumnFilter
         '
         Me.mnuClearColumnFilter.Name = "mnuClearColumnFilter"
-        resources.ApplyResources(Me.mnuClearColumnFilter, "mnuClearColumnFilter")
+        Me.mnuClearColumnFilter.Size = New System.Drawing.Size(212, 22)
+        Me.mnuClearColumnFilter.Text = "Remove Current Filter"
         '
         'lblHeader
         '
         Me.lblHeader.BackColor = System.Drawing.Color.FromArgb(CType(CType(35, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(190, Byte), Integer))
-        resources.ApplyResources(Me.lblHeader, "lblHeader")
+        Me.lblHeader.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.lblHeader.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblHeader.Location = New System.Drawing.Point(3, 0)
         Me.lblHeader.Name = "lblHeader"
+        Me.lblHeader.Size = New System.Drawing.Size(338, 20)
+        Me.lblHeader.TabIndex = 6
+        Me.lblHeader.Text = "Column Metadata"
+        Me.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'tlpTableContainer
         '
-        resources.ApplyResources(Me.tlpTableContainer, "tlpTableContainer")
+        Me.tlpTableContainer.ColumnCount = 1
+        Me.tlpTableContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.tlpTableContainer.Controls.Add(Me.grdVariables, 0, 1)
         Me.tlpTableContainer.Controls.Add(Me.lblHeader, 0, 0)
+        Me.tlpTableContainer.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tlpTableContainer.Location = New System.Drawing.Point(0, 0)
         Me.tlpTableContainer.Name = "tlpTableContainer"
+        Me.tlpTableContainer.RowCount = 2
+        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tlpTableContainer.Size = New System.Drawing.Size(344, 138)
+        Me.tlpTableContainer.TabIndex = 7
         '
         'ucrColumnMetadata
         '
-        resources.ApplyResources(Me, "$this")
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.tlpTableContainer)
         Me.Name = "ucrColumnMetadata"
+        Me.Size = New System.Drawing.Size(344, 138)
         Me.columnContextMenuStrip.ResumeLayout(False)
         Me.tlpTableContainer.ResumeLayout(False)
         Me.ResumeLayout(False)

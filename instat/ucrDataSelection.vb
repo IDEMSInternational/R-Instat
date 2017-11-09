@@ -39,7 +39,7 @@ Public Class ucrDataSelection
 
     Private Sub ucrDataSelection_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         loadColumns()
-        translateEach(Controls)
+        translateEach(Controls, Me)
     End Sub
 
     Public Sub loadColumns()

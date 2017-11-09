@@ -12,4 +12,184 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="lblNumberofRows.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblNumberofRows.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>7, 108</value>
+  </data>
+  <data name="lblNumberofRows.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>89, 13</value>
+  </data>
+  <data name="lblNumberofRows.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lblColumnsToDelete.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblColumnsToDelete.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>254, 89</value>
+  </data>
+  <data name="lblColumnsToDelete.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>96, 13</value>
+  </data>
+  <data name="lblColumnsToDelete.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblFrom.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFrom.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>7, 143</value>
+  </data>
+  <data name="lblFrom.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>67, 13</value>
+  </data>
+  <data name="lblFrom.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="rdoColumns.Appearance" xml:space="preserve" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoColumns.FlatStyle" xml:space="preserve" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoColumns.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>105, 12</value>
+  </data>
+  <data name="rdoColumns.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>100, 28</value>
+  </data>
+  <data name="rdoColumns.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoColumns.Text" xml:space="preserve">
+    <value>Safuwima</value>
+  </data>
+  <data name="rdoColumns.TextAlign" xml:space="preserve" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="rdoRows.Appearance" xml:space="preserve" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoRows.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="rdoRows.CheckAlign" xml:space="preserve" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="rdoRows.FlatStyle" xml:space="preserve" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoRows.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>203, 12</value>
+  </data>
+  <data name="rdoRows.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>100, 28</value>
+  </data>
+  <data name="rdoRows.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rdoRows.Text" xml:space="preserve">
+    <value>Safumlalo</value>
+  </data>
+  <data name="rdoRows.TextAlign" xml:space="preserve" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="lblTo.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblTo.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>51, 169</value>
+  </data>
+  <data name="lblTo.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>23, 13</value>
+  </data>
+  <data name="lblTo.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="lblTo.Text" xml:space="preserve">
+    <value>Kwenda:</value>
+  </data>
+  <data name="ucrNudTo.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>100, 165</value>
+  </data>
+  <data name="ucrNudTo.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudTo.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="ucrPnlColumnsOrRows.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>97, 11</value>
+  </data>
+  <data name="ucrPnlColumnsOrRows.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>214, 29</value>
+  </data>
+  <data name="ucrPnlColumnsOrRows.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="ucrDataFrameLengthForDeleteRows.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>100, 104</value>
+  </data>
+  <data name="ucrDataFrameLengthForDeleteRows.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>55, 24</value>
+  </data>
+  <data name="ucrDataFrameLengthForDeleteRows.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="ucrNudFrom.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>100, 139</value>
+  </data>
+  <data name="ucrNudFrom.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudFrom.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="ucrSelectorForDeleteColumns.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>9, 43</value>
+  </data>
+  <data name="ucrSelectorForDeleteColumns.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectorForDeleteColumns.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>210, 180</value>
+  </data>
+  <data name="ucrSelectorForDeleteColumns.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" xml:space="preserve" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>416, 299</value>
+  </data>
+  <data name="ucrBase.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>9, 243</value>
+  </data>
+  <data name="ucrBase.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>410, 52</value>
+  </data>
+  <data name="ucrBase.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="$this.StartPosition" xml:space="preserve" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="ucrReceiverForColumnsToDelete.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>254, 104</value>
+  </data>
+  <data name="ucrReceiverForColumnsToDelete.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverForColumnsToDelete.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 100</value>
+  </data>
+  <data name="ucrReceiverForColumnsToDelete.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

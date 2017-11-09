@@ -111,13 +111,13 @@ Public Class dlgOptions
         Select Case frmMain.clsInstatOptions.strLanguageCultureCode
             Case "en-GB"
                 rdoEnglish.Checked = True
-            ' temp disabled as not functioning
-            'Case "fr-FR"
-            '    rdoFrench.Checked = True
-            'Case "sw-KE"
-            '    rdoKiswahili.Checked = True
-            'Case "es-ES"
-            '    rdoSpanish.Checked = True
+            Case "fr-FR"
+                rdoFrench.Checked = True
+            Case "sw-KE"
+                rdoKiswahili.Checked = True
+                ' temp disabled as not functioning
+                'Case "es-ES"
+                '    rdoSpanish.Checked = True
             Case Else
                 rdoEnglish.Checked = True
         End Select
@@ -225,30 +225,8 @@ Public Class dlgOptions
         If frmMain.Visible Then
             autoTranslate(frmMain)
         End If
+        'TODO translation containers within frmMain here
 
-        If frmCommand.Visible Then
-            autoTranslate(frmCommand)
-        End If
-
-        If frmEditor.Visible Then
-            autoTranslate(frmEditor)
-        End If
-
-        If frmLog.Visible Then
-            autoTranslate(frmLog)
-        End If
-
-        If frmMetaData.Visible Then
-            autoTranslate(frmMetaData)
-        End If
-
-        If frmScript.Visible Then
-            autoTranslate(frmScript)
-        End If
-
-        If frmVariables.Visible Then
-            autoTranslate(frmVariables)
-        End If
         'disables the command after running it
         cmdApply.Enabled = True
         cmdOk.Enabled = True
