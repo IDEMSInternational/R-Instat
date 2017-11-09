@@ -38,12 +38,7 @@ Partial Class dlgOptions
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim TreeNode7 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Languages")
-        Dim TreeNode8 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Comments")
-        Dim TreeNode9 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Import")
-        Dim TreeNode10 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Output Window")
-        Dim TreeNode11 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Commands")
-        Dim TreeNode12 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Data View")
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgOptions))
         Me.cmdApply = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
@@ -142,47 +137,35 @@ Partial Class dlgOptions
         '
         'cmdApply
         '
-        Me.cmdApply.Location = New System.Drawing.Point(396, 324)
+        resources.ApplyResources(Me.cmdApply, "cmdApply")
         Me.cmdApply.Name = "cmdApply"
-        Me.cmdApply.Size = New System.Drawing.Size(75, 23)
-        Me.cmdApply.TabIndex = 10
         Me.cmdApply.Tag = "Apply"
-        Me.cmdApply.Text = "Apply"
         Me.cmdApply.UseVisualStyleBackColor = True
         '
         'cmdHelp
         '
-        Me.cmdHelp.Location = New System.Drawing.Point(477, 324)
+        resources.ApplyResources(Me.cmdHelp, "cmdHelp")
         Me.cmdHelp.Name = "cmdHelp"
-        Me.cmdHelp.Size = New System.Drawing.Size(75, 23)
-        Me.cmdHelp.TabIndex = 12
         Me.cmdHelp.Tag = "Help"
-        Me.cmdHelp.Text = "Help"
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
         'cmdCancel
         '
-        Me.cmdCancel.Location = New System.Drawing.Point(315, 324)
+        resources.ApplyResources(Me.cmdCancel, "cmdCancel")
         Me.cmdCancel.Name = "cmdCancel"
-        Me.cmdCancel.Size = New System.Drawing.Size(75, 23)
-        Me.cmdCancel.TabIndex = 9
         Me.cmdCancel.Tag = "Cancel"
-        Me.cmdCancel.Text = "Cancel"
         Me.cmdCancel.UseVisualStyleBackColor = True
         '
         'cmdOk
         '
-        Me.cmdOk.Location = New System.Drawing.Point(234, 324)
+        resources.ApplyResources(Me.cmdOk, "cmdOk")
         Me.cmdOk.Name = "cmdOk"
-        Me.cmdOk.Size = New System.Drawing.Size(75, 23)
-        Me.cmdOk.TabIndex = 11
         Me.cmdOk.Tag = "Ok"
-        Me.cmdOk.Text = "Ok"
         Me.cmdOk.UseVisualStyleBackColor = True
         '
         'spltControls
         '
-        Me.spltControls.Location = New System.Drawing.Point(5, 1)
+        resources.ApplyResources(Me.spltControls, "spltControls")
         Me.spltControls.Name = "spltControls"
         '
         'spltControls.Panel1
@@ -193,50 +176,19 @@ Partial Class dlgOptions
         'spltControls.Panel2
         '
         Me.spltControls.Panel2.Controls.Add(Me.tbcOptions)
-        Me.spltControls.Size = New System.Drawing.Size(760, 317)
-        Me.spltControls.SplitterDistance = 184
-        Me.spltControls.TabIndex = 8
         '
         'cmdFactoryReset
         '
-        Me.cmdFactoryReset.Location = New System.Drawing.Point(13, 287)
+        resources.ApplyResources(Me.cmdFactoryReset, "cmdFactoryReset")
         Me.cmdFactoryReset.Name = "cmdFactoryReset"
-        Me.cmdFactoryReset.Size = New System.Drawing.Size(100, 23)
-        Me.cmdFactoryReset.TabIndex = 13
         Me.cmdFactoryReset.Tag = "Help"
-        Me.cmdFactoryReset.Text = "Factory Reset"
         Me.cmdFactoryReset.UseVisualStyleBackColor = True
         '
         'trOptions
         '
-        Me.trOptions.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.trOptions.Location = New System.Drawing.Point(0, 0)
+        resources.ApplyResources(Me.trOptions, "trOptions")
         Me.trOptions.Name = "trOptions"
-        TreeNode7.Name = "ndLanguages"
-        TreeNode7.Tag = "1"
-        TreeNode7.Text = "Languages"
-        TreeNode7.ToolTipText = "Choose different languages"
-        TreeNode8.Name = "ndComments"
-        TreeNode8.Tag = "2"
-        TreeNode8.Text = "Comments"
-        TreeNode8.ToolTipText = "Comments for the dialogs"
-        TreeNode9.Name = "ndImport"
-        TreeNode9.Tag = "3"
-        TreeNode9.Text = "Import"
-        TreeNode9.ToolTipText = "Import Data Settings"
-        TreeNode10.Name = "ndOutputWindow"
-        TreeNode10.Tag = "4"
-        TreeNode10.Text = "Output Window"
-        TreeNode10.ToolTipText = "Output Window Formatting Options"
-        TreeNode11.Name = "ndCommands"
-        TreeNode11.Tag = "8"
-        TreeNode11.Text = "Commands"
-        TreeNode11.ToolTipText = "Commands Options"
-        TreeNode12.Name = "ndDataView"
-        TreeNode12.Text = "Data View"
-        Me.trOptions.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode7, TreeNode8, TreeNode9, TreeNode10, TreeNode11, TreeNode12})
-        Me.trOptions.Size = New System.Drawing.Size(184, 317)
-        Me.trOptions.TabIndex = 0
+        Me.trOptions.Nodes.AddRange(New System.Windows.Forms.TreeNode() {CType(resources.GetObject("trOptions.Nodes"), System.Windows.Forms.TreeNode), CType(resources.GetObject("trOptions.Nodes1"), System.Windows.Forms.TreeNode), CType(resources.GetObject("trOptions.Nodes2"), System.Windows.Forms.TreeNode), CType(resources.GetObject("trOptions.Nodes3"), System.Windows.Forms.TreeNode), CType(resources.GetObject("trOptions.Nodes4"), System.Windows.Forms.TreeNode), CType(resources.GetObject("trOptions.Nodes5"), System.Windows.Forms.TreeNode)})
         '
         'tbcOptions
         '
@@ -250,33 +202,23 @@ Partial Class dlgOptions
         Me.tbcOptions.Controls.Add(Me.tbpWorkingDirectory)
         Me.tbcOptions.Controls.Add(Me.tbpGraphDisplay)
         Me.tbcOptions.Controls.Add(Me.tbpSpecialMenus)
-        Me.tbcOptions.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tbcOptions.Location = New System.Drawing.Point(0, 0)
+        resources.ApplyResources(Me.tbcOptions, "tbcOptions")
         Me.tbcOptions.Name = "tbcOptions"
         Me.tbcOptions.SelectedIndex = 0
-        Me.tbcOptions.Size = New System.Drawing.Size(572, 317)
-        Me.tbcOptions.TabIndex = 0
         '
         'tbpLanguages
         '
         Me.tbpLanguages.Controls.Add(Me.pnLanguages)
-        Me.tbpLanguages.Location = New System.Drawing.Point(4, 22)
+        resources.ApplyResources(Me.tbpLanguages, "tbpLanguages")
         Me.tbpLanguages.Name = "tbpLanguages"
-        Me.tbpLanguages.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpLanguages.Size = New System.Drawing.Size(564, 291)
-        Me.tbpLanguages.TabIndex = 0
         Me.tbpLanguages.Tag = "Languages"
-        Me.tbpLanguages.Text = "Languages"
         Me.tbpLanguages.UseVisualStyleBackColor = True
         '
         'pnLanguages
         '
-        Me.pnLanguages.AutoSize = True
+        resources.ApplyResources(Me.pnLanguages, "pnLanguages")
         Me.pnLanguages.Controls.Add(Me.grpLanguage)
-        Me.pnLanguages.Location = New System.Drawing.Point(3, 3)
         Me.pnLanguages.Name = "pnLanguages"
-        Me.pnLanguages.Size = New System.Drawing.Size(122, 126)
-        Me.pnLanguages.TabIndex = 1
         '
         'grpLanguage
         '
@@ -285,147 +227,99 @@ Partial Class dlgOptions
         Me.grpLanguage.Controls.Add(Me.rdoFrench)
         Me.grpLanguage.Controls.Add(Me.rdoKiswahili)
         Me.grpLanguage.Controls.Add(Me.ucrPnlLanguage)
-        Me.grpLanguage.Location = New System.Drawing.Point(3, 3)
+        resources.ApplyResources(Me.grpLanguage, "grpLanguage")
         Me.grpLanguage.Name = "grpLanguage"
-        Me.grpLanguage.Size = New System.Drawing.Size(109, 113)
-        Me.grpLanguage.TabIndex = 2
         Me.grpLanguage.TabStop = False
-        Me.grpLanguage.Text = "Language"
         '
         'rdoSpanish
         '
-        Me.rdoSpanish.AutoSize = True
-        Me.rdoSpanish.Enabled = False
-        Me.rdoSpanish.Location = New System.Drawing.Point(6, 84)
+        resources.ApplyResources(Me.rdoSpanish, "rdoSpanish")
         Me.rdoSpanish.Name = "rdoSpanish"
-        Me.rdoSpanish.Size = New System.Drawing.Size(63, 17)
-        Me.rdoSpanish.TabIndex = 2
-        Me.rdoSpanish.Text = "Spanish"
         Me.rdoSpanish.UseVisualStyleBackColor = True
         '
         'rdoEnglish
         '
-        Me.rdoEnglish.AutoSize = True
-        Me.rdoEnglish.Location = New System.Drawing.Point(6, 19)
+        resources.ApplyResources(Me.rdoEnglish, "rdoEnglish")
         Me.rdoEnglish.Name = "rdoEnglish"
-        Me.rdoEnglish.Size = New System.Drawing.Size(59, 17)
-        Me.rdoEnglish.TabIndex = 1
         Me.rdoEnglish.Tag = "English"
-        Me.rdoEnglish.Text = "English"
         Me.rdoEnglish.UseVisualStyleBackColor = True
         '
         'rdoFrench
         '
-        Me.rdoFrench.AutoSize = True
-        Me.rdoFrench.Location = New System.Drawing.Point(6, 42)
+        resources.ApplyResources(Me.rdoFrench, "rdoFrench")
         Me.rdoFrench.Name = "rdoFrench"
-        Me.rdoFrench.Size = New System.Drawing.Size(58, 17)
-        Me.rdoFrench.TabIndex = 2
         Me.rdoFrench.Tag = "French"
-        Me.rdoFrench.Text = "French"
         Me.rdoFrench.UseVisualStyleBackColor = True
         '
         'rdoKiswahili
         '
-        Me.rdoKiswahili.AutoSize = True
-        Me.rdoKiswahili.Location = New System.Drawing.Point(6, 65)
+        resources.ApplyResources(Me.rdoKiswahili, "rdoKiswahili")
         Me.rdoKiswahili.Name = "rdoKiswahili"
-        Me.rdoKiswahili.Size = New System.Drawing.Size(65, 17)
-        Me.rdoKiswahili.TabIndex = 3
         Me.rdoKiswahili.Tag = "Kiswahili"
-        Me.rdoKiswahili.Text = "Kiswahili"
         Me.rdoKiswahili.UseVisualStyleBackColor = True
         '
         'ucrPnlLanguage
         '
-        Me.ucrPnlLanguage.Location = New System.Drawing.Point(0, 17)
+        resources.ApplyResources(Me.ucrPnlLanguage, "ucrPnlLanguage")
         Me.ucrPnlLanguage.Name = "ucrPnlLanguage"
-        Me.ucrPnlLanguage.Size = New System.Drawing.Size(103, 90)
-        Me.ucrPnlLanguage.TabIndex = 0
         '
         'tbpComments
         '
         Me.tbpComments.Controls.Add(Me.pnComments)
-        Me.tbpComments.Location = New System.Drawing.Point(4, 22)
+        resources.ApplyResources(Me.tbpComments, "tbpComments")
         Me.tbpComments.Name = "tbpComments"
-        Me.tbpComments.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpComments.Size = New System.Drawing.Size(564, 291)
-        Me.tbpComments.TabIndex = 1
         Me.tbpComments.Tag = "Comments"
-        Me.tbpComments.Text = "Comments"
         Me.tbpComments.UseVisualStyleBackColor = True
         '
         'pnComments
         '
-        Me.pnComments.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        resources.ApplyResources(Me.pnComments, "pnComments")
         Me.pnComments.Controls.Add(Me.ucrInputComment)
         Me.pnComments.Controls.Add(Me.lblComment)
-        Me.pnComments.Location = New System.Drawing.Point(10, 10)
         Me.pnComments.Name = "pnComments"
-        Me.pnComments.Size = New System.Drawing.Size(338, 29)
-        Me.pnComments.TabIndex = 2
         '
         'ucrInputComment
         '
         Me.ucrInputComment.AddQuotesIfUnrecognised = True
         Me.ucrInputComment.IsMultiline = False
         Me.ucrInputComment.IsReadOnly = False
-        Me.ucrInputComment.Location = New System.Drawing.Point(58, 5)
+        resources.ApplyResources(Me.ucrInputComment, "ucrInputComment")
         Me.ucrInputComment.Name = "ucrInputComment"
-        Me.ucrInputComment.Size = New System.Drawing.Size(277, 21)
-        Me.ucrInputComment.TabIndex = 1
         '
         'lblComment
         '
-        Me.lblComment.AutoSize = True
-        Me.lblComment.Location = New System.Drawing.Point(2, 9)
+        resources.ApplyResources(Me.lblComment, "lblComment")
         Me.lblComment.Name = "lblComment"
-        Me.lblComment.Size = New System.Drawing.Size(54, 13)
-        Me.lblComment.TabIndex = 0
         Me.lblComment.Tag = "Comment:"
-        Me.lblComment.Text = "Comment:"
         '
         'tbpImport
         '
         Me.tbpImport.Controls.Add(Me.pnImportData)
-        Me.tbpImport.Location = New System.Drawing.Point(4, 22)
+        resources.ApplyResources(Me.tbpImport, "tbpImport")
         Me.tbpImport.Name = "tbpImport"
-        Me.tbpImport.Size = New System.Drawing.Size(564, 291)
-        Me.tbpImport.TabIndex = 3
-        Me.tbpImport.Text = "Import"
         Me.tbpImport.UseVisualStyleBackColor = True
         '
         'pnImportData
         '
-        Me.pnImportData.AutoSize = True
-        Me.pnImportData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        resources.ApplyResources(Me.pnImportData, "pnImportData")
         Me.pnImportData.Controls.Add(Me.ucrNudPreviewRows)
         Me.pnImportData.Controls.Add(Me.lblPreviewRows)
-        Me.pnImportData.Location = New System.Drawing.Point(10, 10)
         Me.pnImportData.Name = "pnImportData"
-        Me.pnImportData.Size = New System.Drawing.Size(186, 28)
-        Me.pnImportData.TabIndex = 2
         '
         'ucrNudPreviewRows
         '
         Me.ucrNudPreviewRows.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPreviewRows.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPreviewRows.Location = New System.Drawing.Point(133, 5)
+        resources.ApplyResources(Me.ucrNudPreviewRows, "ucrNudPreviewRows")
         Me.ucrNudPreviewRows.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudPreviewRows.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPreviewRows.Name = "ucrNudPreviewRows"
-        Me.ucrNudPreviewRows.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudPreviewRows.TabIndex = 3
         Me.ucrNudPreviewRows.Value = New Decimal(New Integer() {10, 0, 0, 0})
         '
         'lblPreviewRows
         '
-        Me.lblPreviewRows.AutoSize = True
-        Me.lblPreviewRows.Location = New System.Drawing.Point(3, 9)
+        resources.ApplyResources(Me.lblPreviewRows, "lblPreviewRows")
         Me.lblPreviewRows.Name = "lblPreviewRows"
-        Me.lblPreviewRows.Size = New System.Drawing.Size(130, 13)
-        Me.lblPreviewRows.TabIndex = 0
-        Me.lblPreviewRows.Text = "Number of Preview Rows:"
         '
         'tbpOutputWindow
         '
@@ -433,75 +327,55 @@ Partial Class dlgOptions
         Me.tbpOutputWindow.Controls.Add(Me.ucrChkIncludeCommentsbyDefault)
         Me.tbpOutputWindow.Controls.Add(Me.grpROptions)
         Me.tbpOutputWindow.Controls.Add(Me.pnFormatOptions)
-        Me.tbpOutputWindow.Location = New System.Drawing.Point(4, 22)
+        resources.ApplyResources(Me.tbpOutputWindow, "tbpOutputWindow")
         Me.tbpOutputWindow.Name = "tbpOutputWindow"
-        Me.tbpOutputWindow.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpOutputWindow.Size = New System.Drawing.Size(564, 291)
-        Me.tbpOutputWindow.TabIndex = 2
-        Me.tbpOutputWindow.Text = "Output Window"
         Me.tbpOutputWindow.UseVisualStyleBackColor = True
         '
         'ucrChkShowRCommandsinOutputWindow
         '
         Me.ucrChkShowRCommandsinOutputWindow.Checked = False
-        Me.ucrChkShowRCommandsinOutputWindow.Location = New System.Drawing.Point(10, 168)
+        resources.ApplyResources(Me.ucrChkShowRCommandsinOutputWindow, "ucrChkShowRCommandsinOutputWindow")
         Me.ucrChkShowRCommandsinOutputWindow.Name = "ucrChkShowRCommandsinOutputWindow"
-        Me.ucrChkShowRCommandsinOutputWindow.Size = New System.Drawing.Size(271, 20)
-        Me.ucrChkShowRCommandsinOutputWindow.TabIndex = 27
         '
         'ucrChkIncludeCommentsbyDefault
         '
         Me.ucrChkIncludeCommentsbyDefault.Checked = False
-        Me.ucrChkIncludeCommentsbyDefault.Location = New System.Drawing.Point(10, 145)
+        resources.ApplyResources(Me.ucrChkIncludeCommentsbyDefault, "ucrChkIncludeCommentsbyDefault")
         Me.ucrChkIncludeCommentsbyDefault.Name = "ucrChkIncludeCommentsbyDefault"
-        Me.ucrChkIncludeCommentsbyDefault.Size = New System.Drawing.Size(271, 20)
-        Me.ucrChkIncludeCommentsbyDefault.TabIndex = 26
         '
         'grpROptions
         '
         Me.grpROptions.Controls.Add(Me.ucrChkShowSignifStars)
         Me.grpROptions.Controls.Add(Me.ucrNudDigits)
         Me.grpROptions.Controls.Add(Me.lblNoDigits)
-        Me.grpROptions.Location = New System.Drawing.Point(10, 192)
+        resources.ApplyResources(Me.grpROptions, "grpROptions")
         Me.grpROptions.Name = "grpROptions"
-        Me.grpROptions.Size = New System.Drawing.Size(271, 93)
-        Me.grpROptions.TabIndex = 25
         Me.grpROptions.TabStop = False
-        Me.grpROptions.Text = "R Options"
         '
         'ucrChkShowSignifStars
         '
         Me.ucrChkShowSignifStars.Checked = False
-        Me.ucrChkShowSignifStars.Location = New System.Drawing.Point(7, 49)
+        resources.ApplyResources(Me.ucrChkShowSignifStars, "ucrChkShowSignifStars")
         Me.ucrChkShowSignifStars.Name = "ucrChkShowSignifStars"
-        Me.ucrChkShowSignifStars.Size = New System.Drawing.Size(255, 20)
-        Me.ucrChkShowSignifStars.TabIndex = 28
         '
         'ucrNudDigits
         '
         Me.ucrNudDigits.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDigits.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudDigits.Location = New System.Drawing.Point(152, 21)
+        resources.ApplyResources(Me.ucrNudDigits, "ucrNudDigits")
         Me.ucrNudDigits.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudDigits.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDigits.Name = "ucrNudDigits"
-        Me.ucrNudDigits.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudDigits.TabIndex = 27
         Me.ucrNudDigits.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblNoDigits
         '
-        Me.lblNoDigits.AutoSize = True
-        Me.lblNoDigits.Location = New System.Drawing.Point(6, 23)
+        resources.ApplyResources(Me.lblNoDigits, "lblNoDigits")
         Me.lblNoDigits.Name = "lblNoDigits"
-        Me.lblNoDigits.Size = New System.Drawing.Size(137, 13)
-        Me.lblNoDigits.TabIndex = 1
-        Me.lblNoDigits.Text = "Number of Digits to Display:"
         '
         'pnFormatOptions
         '
-        Me.pnFormatOptions.AutoSize = True
-        Me.pnFormatOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        resources.ApplyResources(Me.pnFormatOptions, "pnFormatOptions")
         Me.pnFormatOptions.Controls.Add(Me.rtbCommentPreview)
         Me.pnFormatOptions.Controls.Add(Me.rtbOutputPreview)
         Me.pnFormatOptions.Controls.Add(Me.rtbCommandPreview)
@@ -511,132 +385,83 @@ Partial Class dlgOptions
         Me.pnFormatOptions.Controls.Add(Me.lblOutputFormat)
         Me.pnFormatOptions.Controls.Add(Me.cmdCommentFormat)
         Me.pnFormatOptions.Controls.Add(Me.lblCommandFormat)
-        Me.pnFormatOptions.Location = New System.Drawing.Point(10, 10)
         Me.pnFormatOptions.Name = "pnFormatOptions"
-        Me.pnFormatOptions.Size = New System.Drawing.Size(391, 118)
-        Me.pnFormatOptions.TabIndex = 21
         '
         'rtbCommentPreview
         '
-        Me.rtbCommentPreview.Location = New System.Drawing.Point(100, 89)
+        resources.ApplyResources(Me.rtbCommentPreview, "rtbCommentPreview")
         Me.rtbCommentPreview.Name = "rtbCommentPreview"
         Me.rtbCommentPreview.ReadOnly = True
-        Me.rtbCommentPreview.Size = New System.Drawing.Size(171, 26)
-        Me.rtbCommentPreview.TabIndex = 22
-        Me.rtbCommentPreview.Text = ""
         '
         'rtbOutputPreview
         '
-        Me.rtbOutputPreview.Location = New System.Drawing.Point(100, 49)
+        resources.ApplyResources(Me.rtbOutputPreview, "rtbOutputPreview")
         Me.rtbOutputPreview.Name = "rtbOutputPreview"
         Me.rtbOutputPreview.ReadOnly = True
-        Me.rtbOutputPreview.Size = New System.Drawing.Size(171, 26)
-        Me.rtbOutputPreview.TabIndex = 21
-        Me.rtbOutputPreview.Text = ""
         '
         'rtbCommandPreview
         '
-        Me.rtbCommandPreview.Location = New System.Drawing.Point(100, 9)
+        resources.ApplyResources(Me.rtbCommandPreview, "rtbCommandPreview")
         Me.rtbCommandPreview.Name = "rtbCommandPreview"
         Me.rtbCommandPreview.ReadOnly = True
-        Me.rtbCommandPreview.Size = New System.Drawing.Size(171, 26)
-        Me.rtbCommandPreview.TabIndex = 20
-        Me.rtbCommandPreview.Text = ""
         '
         'cmdCommandFormat
         '
-        Me.cmdCommandFormat.Location = New System.Drawing.Point(288, 9)
+        resources.ApplyResources(Me.cmdCommandFormat, "cmdCommandFormat")
         Me.cmdCommandFormat.Name = "cmdCommandFormat"
-        Me.cmdCommandFormat.Size = New System.Drawing.Size(100, 23)
-        Me.cmdCommandFormat.TabIndex = 10
-        Me.cmdCommandFormat.Text = "Change..."
         Me.cmdCommandFormat.UseVisualStyleBackColor = True
         '
         'lblCommentFormat
         '
-        Me.lblCommentFormat.AutoSize = True
-        Me.lblCommentFormat.Location = New System.Drawing.Point(4, 94)
+        resources.ApplyResources(Me.lblCommentFormat, "lblCommentFormat")
         Me.lblCommentFormat.Name = "lblCommentFormat"
-        Me.lblCommentFormat.Size = New System.Drawing.Size(89, 13)
-        Me.lblCommentFormat.TabIndex = 19
-        Me.lblCommentFormat.Text = "Comment Format:"
         '
         'cmdOutputFormat
         '
-        Me.cmdOutputFormat.Location = New System.Drawing.Point(288, 49)
+        resources.ApplyResources(Me.cmdOutputFormat, "cmdOutputFormat")
         Me.cmdOutputFormat.Name = "cmdOutputFormat"
-        Me.cmdOutputFormat.Size = New System.Drawing.Size(100, 23)
-        Me.cmdOutputFormat.TabIndex = 16
-        Me.cmdOutputFormat.Text = "Change..."
         Me.cmdOutputFormat.UseVisualStyleBackColor = True
         '
         'lblOutputFormat
         '
-        Me.lblOutputFormat.AutoSize = True
-        Me.lblOutputFormat.Location = New System.Drawing.Point(4, 54)
+        resources.ApplyResources(Me.lblOutputFormat, "lblOutputFormat")
         Me.lblOutputFormat.Name = "lblOutputFormat"
-        Me.lblOutputFormat.Size = New System.Drawing.Size(77, 13)
-        Me.lblOutputFormat.TabIndex = 18
-        Me.lblOutputFormat.Text = "Output Format:"
         '
         'cmdCommentFormat
         '
-        Me.cmdCommentFormat.Location = New System.Drawing.Point(288, 89)
+        resources.ApplyResources(Me.cmdCommentFormat, "cmdCommentFormat")
         Me.cmdCommentFormat.Name = "cmdCommentFormat"
-        Me.cmdCommentFormat.Size = New System.Drawing.Size(100, 23)
-        Me.cmdCommentFormat.TabIndex = 16
-        Me.cmdCommentFormat.Text = "Change..."
         Me.cmdCommentFormat.UseVisualStyleBackColor = True
         '
         'lblCommandFormat
         '
-        Me.lblCommandFormat.AutoSize = True
-        Me.lblCommandFormat.Location = New System.Drawing.Point(4, 14)
+        resources.ApplyResources(Me.lblCommandFormat, "lblCommandFormat")
         Me.lblCommandFormat.Name = "lblCommandFormat"
-        Me.lblCommandFormat.Size = New System.Drawing.Size(92, 13)
-        Me.lblCommandFormat.TabIndex = 17
-        Me.lblCommandFormat.Text = "Command Format:"
         '
         'tbpEditor
         '
         Me.tbpEditor.Controls.Add(Me.pnFormatEditor)
-        Me.tbpEditor.Location = New System.Drawing.Point(4, 22)
+        resources.ApplyResources(Me.tbpEditor, "tbpEditor")
         Me.tbpEditor.Name = "tbpEditor"
-        Me.tbpEditor.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpEditor.Size = New System.Drawing.Size(564, 291)
-        Me.tbpEditor.TabIndex = 10
-        Me.tbpEditor.Text = "Editor Window"
-        Me.tbpEditor.ToolTipText = "Data View"
         Me.tbpEditor.UseVisualStyleBackColor = True
         '
         'pnFormatEditor
         '
-        Me.pnFormatEditor.AutoSize = True
-        Me.pnFormatEditor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        resources.ApplyResources(Me.pnFormatEditor, "pnFormatEditor")
         Me.pnFormatEditor.Controls.Add(Me.cmdEditorFont)
         Me.pnFormatEditor.Controls.Add(Me.lblFont)
-        Me.pnFormatEditor.Location = New System.Drawing.Point(10, 10)
         Me.pnFormatEditor.Name = "pnFormatEditor"
-        Me.pnFormatEditor.Size = New System.Drawing.Size(212, 28)
-        Me.pnFormatEditor.TabIndex = 22
         '
         'cmdEditorFont
         '
-        Me.cmdEditorFont.Location = New System.Drawing.Point(109, 2)
+        resources.ApplyResources(Me.cmdEditorFont, "cmdEditorFont")
         Me.cmdEditorFont.Name = "cmdEditorFont"
-        Me.cmdEditorFont.Size = New System.Drawing.Size(100, 23)
-        Me.cmdEditorFont.TabIndex = 10
-        Me.cmdEditorFont.Text = "Change..."
         Me.cmdEditorFont.UseVisualStyleBackColor = True
         '
         'lblFont
         '
-        Me.lblFont.AutoSize = True
-        Me.lblFont.Location = New System.Drawing.Point(4, 7)
+        resources.ApplyResources(Me.lblFont, "lblFont")
         Me.lblFont.Name = "lblFont"
-        Me.lblFont.Size = New System.Drawing.Size(66, 13)
-        Me.lblFont.TabIndex = 17
-        Me.lblFont.Text = "Format Font:"
         '
         'tbpCommands
         '
@@ -644,51 +469,37 @@ Partial Class dlgOptions
         Me.tbpCommands.Controls.Add(Me.ucrChkShowWaitDialog)
         Me.tbpCommands.Controls.Add(Me.ucrNudWaitSeconds)
         Me.tbpCommands.Controls.Add(Me.ucrChkIncludeDefaultParams)
-        Me.tbpCommands.Location = New System.Drawing.Point(4, 22)
+        resources.ApplyResources(Me.tbpCommands, "tbpCommands")
         Me.tbpCommands.Name = "tbpCommands"
-        Me.tbpCommands.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpCommands.Size = New System.Drawing.Size(564, 291)
-        Me.tbpCommands.TabIndex = 4
         Me.tbpCommands.Tag = "Commands"
-        Me.tbpCommands.Text = "Commands"
         Me.tbpCommands.UseVisualStyleBackColor = True
         '
         'lblWaitSeconds
         '
-        Me.lblWaitSeconds.AutoSize = True
-        Me.lblWaitSeconds.Location = New System.Drawing.Point(357, 50)
+        resources.ApplyResources(Me.lblWaitSeconds, "lblWaitSeconds")
         Me.lblWaitSeconds.Name = "lblWaitSeconds"
-        Me.lblWaitSeconds.Size = New System.Drawing.Size(47, 13)
-        Me.lblWaitSeconds.TabIndex = 8
-        Me.lblWaitSeconds.Text = "seconds"
         '
         'ucrChkShowWaitDialog
         '
         Me.ucrChkShowWaitDialog.Checked = False
-        Me.ucrChkShowWaitDialog.Location = New System.Drawing.Point(6, 47)
+        resources.ApplyResources(Me.ucrChkShowWaitDialog, "ucrChkShowWaitDialog")
         Me.ucrChkShowWaitDialog.Name = "ucrChkShowWaitDialog"
-        Me.ucrChkShowWaitDialog.Size = New System.Drawing.Size(293, 20)
-        Me.ucrChkShowWaitDialog.TabIndex = 6
         '
         'ucrNudWaitSeconds
         '
         Me.ucrNudWaitSeconds.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWaitSeconds.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudWaitSeconds.Location = New System.Drawing.Point(305, 47)
+        resources.ApplyResources(Me.ucrNudWaitSeconds, "ucrNudWaitSeconds")
         Me.ucrNudWaitSeconds.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudWaitSeconds.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWaitSeconds.Name = "ucrNudWaitSeconds"
-        Me.ucrNudWaitSeconds.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudWaitSeconds.TabIndex = 5
         Me.ucrNudWaitSeconds.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkIncludeDefaultParams
         '
         Me.ucrChkIncludeDefaultParams.Checked = False
-        Me.ucrChkIncludeDefaultParams.Location = New System.Drawing.Point(6, 20)
+        resources.ApplyResources(Me.ucrChkIncludeDefaultParams, "ucrChkIncludeDefaultParams")
         Me.ucrChkIncludeDefaultParams.Name = "ucrChkIncludeDefaultParams"
-        Me.ucrChkIncludeDefaultParams.Size = New System.Drawing.Size(261, 21)
-        Me.ucrChkIncludeDefaultParams.TabIndex = 3
         '
         'tbpDataView
         '
@@ -701,142 +512,99 @@ Partial Class dlgOptions
         Me.tbpDataView.Controls.Add(Me.lblMaxCols)
         Me.tbpDataView.Controls.Add(Me.ucrNudMaxRows)
         Me.tbpDataView.Controls.Add(Me.lblMaxRows)
-        Me.tbpDataView.Location = New System.Drawing.Point(4, 22)
+        resources.ApplyResources(Me.tbpDataView, "tbpDataView")
         Me.tbpDataView.Name = "tbpDataView"
-        Me.tbpDataView.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpDataView.Size = New System.Drawing.Size(564, 291)
-        Me.tbpDataView.TabIndex = 9
-        Me.tbpDataView.Text = "Data View"
         Me.tbpDataView.UseVisualStyleBackColor = True
         '
         'lblEvery
         '
-        Me.lblEvery.AutoSize = True
-        Me.lblEvery.Location = New System.Drawing.Point(255, 104)
+        resources.ApplyResources(Me.lblEvery, "lblEvery")
         Me.lblEvery.Name = "lblEvery"
-        Me.lblEvery.Size = New System.Drawing.Size(34, 13)
-        Me.lblEvery.TabIndex = 4
-        Me.lblEvery.Text = "Every"
         '
         'lblMinutes
         '
-        Me.lblMinutes.AutoSize = True
-        Me.lblMinutes.Location = New System.Drawing.Point(362, 104)
+        resources.ApplyResources(Me.lblMinutes, "lblMinutes")
         Me.lblMinutes.Name = "lblMinutes"
-        Me.lblMinutes.Size = New System.Drawing.Size(44, 13)
-        Me.lblMinutes.TabIndex = 4
-        Me.lblMinutes.Text = "Minutes"
         '
         'ucrChkAutoSave
         '
         Me.ucrChkAutoSave.Checked = False
-        Me.ucrChkAutoSave.Location = New System.Drawing.Point(13, 104)
+        resources.ApplyResources(Me.ucrChkAutoSave, "ucrChkAutoSave")
         Me.ucrChkAutoSave.Name = "ucrChkAutoSave"
-        Me.ucrChkAutoSave.Size = New System.Drawing.Size(236, 20)
-        Me.ucrChkAutoSave.TabIndex = 3
         '
         'ucrChkShowDataonGrid
         '
         Me.ucrChkShowDataonGrid.Checked = False
-        Me.ucrChkShowDataonGrid.Location = New System.Drawing.Point(13, 78)
+        resources.ApplyResources(Me.ucrChkShowDataonGrid, "ucrChkShowDataonGrid")
         Me.ucrChkShowDataonGrid.Name = "ucrChkShowDataonGrid"
-        Me.ucrChkShowDataonGrid.Size = New System.Drawing.Size(257, 20)
-        Me.ucrChkShowDataonGrid.TabIndex = 3
         '
         'ucrNudAutoSaveMinutes
         '
         Me.ucrNudAutoSaveMinutes.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAutoSaveMinutes.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudAutoSaveMinutes.Location = New System.Drawing.Point(305, 104)
+        resources.ApplyResources(Me.ucrNudAutoSaveMinutes, "ucrNudAutoSaveMinutes")
         Me.ucrNudAutoSaveMinutes.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudAutoSaveMinutes.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAutoSaveMinutes.Name = "ucrNudAutoSaveMinutes"
-        Me.ucrNudAutoSaveMinutes.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudAutoSaveMinutes.TabIndex = 2
         Me.ucrNudAutoSaveMinutes.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudMaxCols
         '
         Me.ucrNudMaxCols.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxCols.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaxCols.Location = New System.Drawing.Point(221, 41)
+        resources.ApplyResources(Me.ucrNudMaxCols, "ucrNudMaxCols")
         Me.ucrNudMaxCols.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMaxCols.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxCols.Name = "ucrNudMaxCols"
-        Me.ucrNudMaxCols.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudMaxCols.TabIndex = 2
         Me.ucrNudMaxCols.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblMaxCols
         '
-        Me.lblMaxCols.AutoSize = True
-        Me.lblMaxCols.Location = New System.Drawing.Point(10, 44)
+        resources.ApplyResources(Me.lblMaxCols, "lblMaxCols")
         Me.lblMaxCols.Name = "lblMaxCols"
-        Me.lblMaxCols.Size = New System.Drawing.Size(198, 13)
-        Me.lblMaxCols.TabIndex = 1
-        Me.lblMaxCols.Text = "Maximum Number of Columns to Display:"
         '
         'ucrNudMaxRows
         '
         Me.ucrNudMaxRows.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxRows.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaxRows.Location = New System.Drawing.Point(220, 15)
+        resources.ApplyResources(Me.ucrNudMaxRows, "ucrNudMaxRows")
         Me.ucrNudMaxRows.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMaxRows.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxRows.Name = "ucrNudMaxRows"
-        Me.ucrNudMaxRows.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudMaxRows.TabIndex = 2
         Me.ucrNudMaxRows.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblMaxRows
         '
-        Me.lblMaxRows.AutoSize = True
-        Me.lblMaxRows.Location = New System.Drawing.Point(10, 18)
+        resources.ApplyResources(Me.lblMaxRows, "lblMaxRows")
         Me.lblMaxRows.Name = "lblMaxRows"
-        Me.lblMaxRows.Size = New System.Drawing.Size(185, 13)
-        Me.lblMaxRows.TabIndex = 1
-        Me.lblMaxRows.Text = "Maximum Number of Rows to Display:"
         '
         'tbpWorkingDirectory
         '
         Me.tbpWorkingDirectory.Controls.Add(Me.cmdWorkingDirectory)
         Me.tbpWorkingDirectory.Controls.Add(Me.lblWorkingDirectory)
         Me.tbpWorkingDirectory.Controls.Add(Me.ucrWorkingDirectory)
-        Me.tbpWorkingDirectory.Location = New System.Drawing.Point(4, 22)
+        resources.ApplyResources(Me.tbpWorkingDirectory, "tbpWorkingDirectory")
         Me.tbpWorkingDirectory.Name = "tbpWorkingDirectory"
-        Me.tbpWorkingDirectory.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpWorkingDirectory.Size = New System.Drawing.Size(564, 291)
-        Me.tbpWorkingDirectory.TabIndex = 11
-        Me.tbpWorkingDirectory.Text = "Working Directory"
         Me.tbpWorkingDirectory.UseVisualStyleBackColor = True
         '
         'cmdWorkingDirectory
         '
-        Me.cmdWorkingDirectory.Location = New System.Drawing.Point(399, 16)
+        resources.ApplyResources(Me.cmdWorkingDirectory, "cmdWorkingDirectory")
         Me.cmdWorkingDirectory.Name = "cmdWorkingDirectory"
-        Me.cmdWorkingDirectory.Size = New System.Drawing.Size(24, 21)
-        Me.cmdWorkingDirectory.TabIndex = 2
-        Me.cmdWorkingDirectory.Text = "..."
         Me.cmdWorkingDirectory.UseVisualStyleBackColor = True
         '
         'lblWorkingDirectory
         '
-        Me.lblWorkingDirectory.AutoSize = True
-        Me.lblWorkingDirectory.Location = New System.Drawing.Point(13, 20)
+        resources.ApplyResources(Me.lblWorkingDirectory, "lblWorkingDirectory")
         Me.lblWorkingDirectory.Name = "lblWorkingDirectory"
-        Me.lblWorkingDirectory.Size = New System.Drawing.Size(95, 13)
-        Me.lblWorkingDirectory.TabIndex = 0
-        Me.lblWorkingDirectory.Text = "Working Directory:"
         '
         'ucrWorkingDirectory
         '
         Me.ucrWorkingDirectory.AddQuotesIfUnrecognised = True
         Me.ucrWorkingDirectory.IsMultiline = False
         Me.ucrWorkingDirectory.IsReadOnly = False
-        Me.ucrWorkingDirectory.Location = New System.Drawing.Point(111, 17)
+        resources.ApplyResources(Me.ucrWorkingDirectory, "ucrWorkingDirectory")
         Me.ucrWorkingDirectory.Name = "ucrWorkingDirectory"
-        Me.ucrWorkingDirectory.Size = New System.Drawing.Size(282, 21)
-        Me.ucrWorkingDirectory.TabIndex = 1
         '
         'tbpGraphDisplay
         '
@@ -844,86 +612,59 @@ Partial Class dlgOptions
         Me.tbpGraphDisplay.Controls.Add(Me.rdoDisplayinRViewer)
         Me.tbpGraphDisplay.Controls.Add(Me.rdoDisplayinOutputWindow)
         Me.tbpGraphDisplay.Controls.Add(Me.ucrPnlGraphDisplay)
-        Me.tbpGraphDisplay.Location = New System.Drawing.Point(4, 22)
+        resources.ApplyResources(Me.tbpGraphDisplay, "tbpGraphDisplay")
         Me.tbpGraphDisplay.Name = "tbpGraphDisplay"
-        Me.tbpGraphDisplay.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpGraphDisplay.Size = New System.Drawing.Size(564, 291)
-        Me.tbpGraphDisplay.TabIndex = 12
-        Me.tbpGraphDisplay.Text = "Graph Display"
         Me.tbpGraphDisplay.UseVisualStyleBackColor = True
         '
         'rdoDisplayinSeparateWindows
         '
-        Me.rdoDisplayinSeparateWindows.AutoSize = True
+        resources.ApplyResources(Me.rdoDisplayinSeparateWindows, "rdoDisplayinSeparateWindows")
         Me.rdoDisplayinSeparateWindows.Checked = True
-        Me.rdoDisplayinSeparateWindows.Location = New System.Drawing.Point(6, 52)
         Me.rdoDisplayinSeparateWindows.Name = "rdoDisplayinSeparateWindows"
-        Me.rdoDisplayinSeparateWindows.Size = New System.Drawing.Size(163, 17)
-        Me.rdoDisplayinSeparateWindows.TabIndex = 1
         Me.rdoDisplayinSeparateWindows.TabStop = True
-        Me.rdoDisplayinSeparateWindows.Text = "Display in Separate Windows"
         Me.rdoDisplayinSeparateWindows.UseVisualStyleBackColor = True
         '
         'rdoDisplayinRViewer
         '
-        Me.rdoDisplayinRViewer.AutoSize = True
-        Me.rdoDisplayinRViewer.Location = New System.Drawing.Point(6, 29)
+        resources.ApplyResources(Me.rdoDisplayinRViewer, "rdoDisplayinRViewer")
         Me.rdoDisplayinRViewer.Name = "rdoDisplayinRViewer"
-        Me.rdoDisplayinRViewer.Size = New System.Drawing.Size(116, 17)
-        Me.rdoDisplayinRViewer.TabIndex = 1
-        Me.rdoDisplayinRViewer.Text = "Display in R Viewer"
         Me.rdoDisplayinRViewer.UseVisualStyleBackColor = True
         '
         'rdoDisplayinOutputWindow
         '
-        Me.rdoDisplayinOutputWindow.AutoSize = True
-        Me.rdoDisplayinOutputWindow.Location = New System.Drawing.Point(6, 6)
+        resources.ApplyResources(Me.rdoDisplayinOutputWindow, "rdoDisplayinOutputWindow")
         Me.rdoDisplayinOutputWindow.Name = "rdoDisplayinOutputWindow"
-        Me.rdoDisplayinOutputWindow.Size = New System.Drawing.Size(147, 17)
-        Me.rdoDisplayinOutputWindow.TabIndex = 1
-        Me.rdoDisplayinOutputWindow.Text = "Display in Output Window"
         Me.rdoDisplayinOutputWindow.UseVisualStyleBackColor = True
         '
         'ucrPnlGraphDisplay
         '
-        Me.ucrPnlGraphDisplay.Location = New System.Drawing.Point(0, 3)
+        resources.ApplyResources(Me.ucrPnlGraphDisplay, "ucrPnlGraphDisplay")
         Me.ucrPnlGraphDisplay.Name = "ucrPnlGraphDisplay"
-        Me.ucrPnlGraphDisplay.Size = New System.Drawing.Size(169, 66)
-        Me.ucrPnlGraphDisplay.TabIndex = 3
         '
         'tbpSpecialMenus
         '
         Me.tbpSpecialMenus.Controls.Add(Me.ucrChkViewProcurementMenu)
         Me.tbpSpecialMenus.Controls.Add(Me.ucrChkViewClimaticMenu)
-        Me.tbpSpecialMenus.Location = New System.Drawing.Point(4, 22)
+        resources.ApplyResources(Me.tbpSpecialMenus, "tbpSpecialMenus")
         Me.tbpSpecialMenus.Name = "tbpSpecialMenus"
-        Me.tbpSpecialMenus.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpSpecialMenus.Size = New System.Drawing.Size(564, 291)
-        Me.tbpSpecialMenus.TabIndex = 13
-        Me.tbpSpecialMenus.Text = "Special Menus"
         Me.tbpSpecialMenus.UseVisualStyleBackColor = True
         '
         'ucrChkViewProcurementMenu
         '
         Me.ucrChkViewProcurementMenu.Checked = False
-        Me.ucrChkViewProcurementMenu.Location = New System.Drawing.Point(7, 42)
+        resources.ApplyResources(Me.ucrChkViewProcurementMenu, "ucrChkViewProcurementMenu")
         Me.ucrChkViewProcurementMenu.Name = "ucrChkViewProcurementMenu"
-        Me.ucrChkViewProcurementMenu.Size = New System.Drawing.Size(209, 20)
-        Me.ucrChkViewProcurementMenu.TabIndex = 0
         '
         'ucrChkViewClimaticMenu
         '
         Me.ucrChkViewClimaticMenu.Checked = False
-        Me.ucrChkViewClimaticMenu.Location = New System.Drawing.Point(7, 16)
+        resources.ApplyResources(Me.ucrChkViewClimaticMenu, "ucrChkViewClimaticMenu")
         Me.ucrChkViewClimaticMenu.Name = "ucrChkViewClimaticMenu"
-        Me.ucrChkViewClimaticMenu.Size = New System.Drawing.Size(209, 20)
-        Me.ucrChkViewClimaticMenu.TabIndex = 0
         '
         'dlgOptions
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(770, 353)
         Me.Controls.Add(Me.cmdApply)
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.cmdCancel)
@@ -933,9 +674,7 @@ Partial Class dlgOptions
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgOptions"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Options"
-        Me.Text = "Options"
         Me.spltControls.Panel1.ResumeLayout(False)
         Me.spltControls.Panel2.ResumeLayout(False)
         CType(Me.spltControls, System.ComponentModel.ISupportInitialize).EndInit()
