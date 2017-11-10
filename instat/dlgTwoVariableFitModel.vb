@@ -25,7 +25,6 @@ Public Class dlgTwoVariableFitModel
     'General case codes
     Public clsFormulaOperator, clsPowerOperator As ROperator
     Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric As RFunction
-
     'Display options codes
     Public clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As RFunction
 
@@ -53,9 +52,6 @@ Public Class dlgTwoVariableFitModel
     End Sub
 
     Private Sub InitialiseDialog()
-        'temp disabled until implemented
-        rdoTwoSample.Enabled = False
-
         ucrBase.iHelpTopicID = 366
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
@@ -69,7 +65,7 @@ Public Class dlgTwoVariableFitModel
         ucrPnlModelType.AddRadioButton(rdoTwoSample)
         ucrPnlModelType.AddFunctionNamesCondition(rdoTwoSample, "t.test")
         ucrPnlModelType.AddFunctionNamesCondition(rdoGeneralCase, "t.test", False)
-        ucrPnlModelType.AddToLinkedControls(ucrModelPreview, {rdoGeneralCase}, bNewLinkedHideIfParameterMissing:=True)
+        'ucrPnlModelType.AddToLinkedControls(ucrModelPreview, {rdoGeneralCase}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlModelType.AddToLinkedControls(ucrNudCI, {rdoTwoSample}, bNewLinkedChangeToDefaultState:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=0.95)
         ucrPnlModelType.AddToLinkedControls(ucrNudHypothesis, {rdoTwoSample}, bNewLinkedChangeToDefaultState:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=0)
         ucrPnlModelType.AddToLinkedControls(ucrPnlMeansAndVariance, {rdoTwoSample}, bNewLinkedChangeToDefaultState:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=rdoCompareMeans)
@@ -101,8 +97,8 @@ Public Class dlgTwoVariableFitModel
         ucrSaveModels.SetIsComboBox()
         ucrSaveModels.SetAssignToIfUncheckedValue("last_model")
 
-        'ucrPnlMeansAndVariance.AddRadioButton(rdoCompareMeans)
-        'ucrPnlMeansAndVariance.AddRadioButton(rdoCompareVariance)
+        ucrPnlMeansAndVariance.AddRadioButton(rdoCompareMeans)
+        ucrPnlMeansAndVariance.AddRadioButton(rdoCompareVariance)
 
         '###################################
 
@@ -289,12 +285,13 @@ Public Class dlgTwoVariableFitModel
 
         'General case controls
         ucrSelectorSimpleReg.AddAdditionalCodeParameterPair(clsGLM, ucrSelectorSimpleReg.GetParameter(), 1)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsRTTest, ucrReceiverExplanatory.GetParameter(), iAdditionalPairNo:=1)
         ucrSaveModels.AddAdditionalRCode(clsGLM, 1)
         ucrReceiverResponse.SetRCode(clsAsNumeric, bReset)
         ucrReceiverExplanatory.SetRCode(clsTransformFunction, bReset)
         ucrPnlModelType.SetRCode(clsLMOrGLM, bReset)
         ucrSelectorSimpleReg.SetRCode(clsLM, bReset)
-        ucrChkConvertToVariate.SetRCode(clsFormulaOperator)
+        ucrChkConvertToVariate.SetRCode(clsFormulaOperator, bReset)
         ucrSaveModels.SetRCode(clsLM, bReset)
 
         ucrDistributionChoice.SetRCode(clsFamilyFunction, bReset)
@@ -306,7 +303,7 @@ Public Class dlgTwoVariableFitModel
         ' ucrExplanatory.AddAdditionalCodeParameterPair(clsGLM, ucrExplanatory.GetParameter, iAdditionalPairNo:=1)
         'ucrSelectorSimpleReg.AddAdditionalCodeParameterPair(clsGLM, New RParameter("data"), iAdditionalPairNo:=1)
         ' ucrSelectorSimpleReg.AddAdditionalCodeParameterPair(clsGLM, ucrSelectorSimpleReg.GetParameter, 1)
-        ' ucrSelectorSimpleReg.AddAdditionalCodeParameterPair(clsRTTest, ucrSelectorSimpleReg.GetParameter, 2)
+        'ucrSelectorSimpleReg.AddAdditionalCodeParameterPair(clsRTTest, ucrSelectorSimpleReg.GetParameter, 2)
         ' ucrResponse.AddAdditionalCodeParameterPair(clsRConvert, New RParameter("x", 1))
         'ucrNudCI.AddAdditionalCodeParameterPair(clsRPoisson, New RParameter("conf.int"), 1)
         'ucrNudHypothesis.AddAdditionalCodeParameterPair(clsRPoisson, New RParameter("r"), 1)
@@ -316,13 +313,12 @@ Public Class dlgTwoVariableFitModel
     End Sub
 
     Private Sub TestOKEnabled()
-        If rdoGeneralCase.Checked Then
+        If rdoGeneralCase.Checked OrElse rdoTwoSample.Checked Then
             If Not ucrReceiverResponse.IsEmpty() AndAlso Not ucrReceiverExplanatory.IsEmpty() AndAlso ucrSaveModels.IsComplete AndAlso Not ucrDistributionChoice.ucrInputDistributions.IsEmpty Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
             End If
-        Else
             'TODO
         End If
         'If Not ucrReceiverResponse.IsEmpty() AndAlso Not ucrReceiverExplanatory.IsEmpty() AndAlso (ucrSaveModels.IsComplete) Then
@@ -379,12 +375,12 @@ Public Class dlgTwoVariableFitModel
     Public Sub DataTypeAccepted()
         If rdoTwoSample.Checked Then
             ucrReceiverResponse.SetIncludedDataTypes({"integer", "numeric"})
-            ucrReceiverExplanatory.SetIncludedDataTypes({"character", "factor"})
+            'ucrReceiverExplanatory.SetIncludedDataTypes({"character", "factor"})
             If ucrReceiverResponse.strCurrDataType = "factor" OrElse ucrReceiverResponse.strCurrDataType = "character" Then
-                ucrReceiverResponse.Clear()
+                'ucrReceiverResponse.Clear()
             End If
             If ucrReceiverExplanatory.strCurrDataType = "integer" OrElse ucrReceiverExplanatory.strCurrDataType = "numeric" OrElse ucrReceiverResponse.strCurrDataType = "positive integer" Then
-                ucrReceiverExplanatory.Clear()
+                'ucrReceiverExplanatory.Clear()
             End If
         ElseIf rdoGeneralCase.Checked Then
             ucrReceiverResponse.SetIncludedDataTypes({"integer", "numeric", "character", "factor"})
@@ -404,7 +400,7 @@ Public Class dlgTwoVariableFitModel
         clsModel.SetOperation("~")
         clsModel.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrReceiverResponse.GetVariables())
         clsModel.AddParameter(clsRFunctionParameter:=ucrReceiverExplanatory.GetVariables())
-        clsRTTest.AddParameter("x", clsROperatorParameter:=clsModel)
+        clsRTTest.AddParameter("formula", clsROperatorParameter:=clsModel)
         '        End If
         If ucrChkPairedTest.Checked Then
             clsRTTest.AddParameter("paired", "TRUE")
@@ -795,5 +791,9 @@ Public Class dlgTwoVariableFitModel
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverResponse.ControlContentsChanged, ucrPnlModelType.ControlContentsChanged, ucrReceiverExplanatory.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrPnlMeansAndVariance_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMeansAndVariance.ControlValueChanged
+        SetBaseFunction()
     End Sub
 End Class
