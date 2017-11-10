@@ -26,10 +26,6 @@ Public Class dlgTwoVariableFitModel
     Public clsFormulaOperator, clsPowerOperator As ROperator
     Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric As RFunction
 
-    Private Sub ucrFamily_EnabledChanged(sender As Object, e As EventArgs) Handles ucrDistributionChoice.EnabledChanged
-
-    End Sub
-
     'Display options codes
     Public clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As RFunction
 
@@ -58,7 +54,7 @@ Public Class dlgTwoVariableFitModel
 
     Private Sub InitialiseDialog()
         'temp disabled until implemented
-        rdoTwoSample.Enabled = True
+        rdoTwoSample.Enabled = False
 
         ucrBase.iHelpTopicID = 366
         ucrBase.clsRsyntax.iCallType = 2
