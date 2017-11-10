@@ -155,6 +155,7 @@ Public Class dlgThreeVariableModelling
 
         'Residual Plots
         clsAutoPlot = clsRegressionDefaults.clsDefaultAutoplot.Clone
+        clsAutoPlot.bExcludeAssignedFunctionOutput = False
 
         'Model
         clsFormulaFunction = clsRegressionDefaults.clsDefaultFormulaFunction.Clone
@@ -179,6 +180,7 @@ Public Class dlgThreeVariableModelling
         'changed gg parameter to FALSE since when TRUE no plot is given (not compatible with ggplot2 package)
         clsVisReg.AddParameter("gg", "FALSE")
         clsVisReg.iCallType = 3
+        clsVisReg.bExcludeAssignedFunctionOutput = False
 
         clsLM.SetAssignTo(ucrSaveModel.GetText, strTempDataframe:=ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:=ucrSaveModel.GetText, bAssignToIsPrefix:=True)
         clsGLM.SetAssignTo(ucrSaveModel.GetText, strTempDataframe:=ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:=ucrSaveModel.GetText, bAssignToIsPrefix:=True)
@@ -288,6 +290,7 @@ Public Class dlgThreeVariableModelling
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
         sdgSimpleRegOptions.SetRCode(ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, clsNewAutoplot:=clsAutoPlot, bReset:=bResetDisplayOptions)
         sdgSimpleRegOptions.ShowDialog()
+        GraphAssignTo()
         bResetDisplayOptions = False
     End Sub
 
@@ -403,5 +406,12 @@ Public Class dlgThreeVariableModelling
 
     Private Sub ucrSelectorThreeVariableModelling_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorThreeVariableModelling.ControlValueChanged
         SetBaseFunction()
+        GraphAssignTo()
+    End Sub
+
+    Private Sub GraphAssignTo()
+        'temp fix for graph display problem with RDotNet
+        clsVisReg.SetAssignTo("last_visreg", strTempDataframe:=ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_visreg")
+        clsAutoPlot.SetAssignTo("last_autoplot", strTempDataframe:=ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_autoplot")
     End Sub
 End Class

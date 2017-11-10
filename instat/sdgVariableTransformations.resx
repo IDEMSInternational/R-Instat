@@ -117,4 +117,298 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ucrButtonsSDGVarTransform.Location" type="System.Drawing.Point, System.Drawing">
+    <value>42, 250</value>
+  </data>
+  <data name="ucrButtonsSDGVarTransform.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 30</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrButtonsSDGVarTransform.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrButtonsSDGVarTransform.Name" xml:space="preserve">
+    <value>ucrButtonsSDGVarTransform</value>
+  </data>
+  <data name="&gt;&gt;ucrButtonsSDGVarTransform.Type" xml:space="preserve">
+    <value>instat.ucrButtonsSubdialogue, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrButtonsSDGVarTransform.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrButtonsSDGVarTransform.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="rdoLogBase10.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoLogBase10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 89</value>
+  </data>
+  <data name="rdoLogBase10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 17</value>
+  </data>
+  <data name="rdoLogBase10.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="rdoLogBase10.Text" xml:space="preserve">
+    <value>Log Base 10</value>
+  </data>
+  <data name="&gt;&gt;rdoLogBase10.Name" xml:space="preserve">
+    <value>rdoLogBase10</value>
+  </data>
+  <data name="&gt;&gt;rdoLogBase10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoLogBase10.Parent" xml:space="preserve">
+    <value>grpChooseFunction</value>
+  </data>
+  <data name="&gt;&gt;rdoLogBase10.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="rdoSquareRoot.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoSquareRoot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 118</value>
+  </data>
+  <data name="rdoSquareRoot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 17</value>
+  </data>
+  <data name="rdoSquareRoot.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="rdoSquareRoot.Text" xml:space="preserve">
+    <value>Square Root</value>
+  </data>
+  <data name="&gt;&gt;rdoSquareRoot.Name" xml:space="preserve">
+    <value>rdoSquareRoot</value>
+  </data>
+  <data name="&gt;&gt;rdoSquareRoot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoSquareRoot.Parent" xml:space="preserve">
+    <value>grpChooseFunction</value>
+  </data>
+  <data name="&gt;&gt;rdoSquareRoot.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="rdoPower.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoPower.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 147</value>
+  </data>
+  <data name="rdoPower.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 17</value>
+  </data>
+  <data name="rdoPower.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="rdoPower.Text" xml:space="preserve">
+    <value>Power:</value>
+  </data>
+  <data name="&gt;&gt;rdoPower.Name" xml:space="preserve">
+    <value>rdoPower</value>
+  </data>
+  <data name="&gt;&gt;rdoPower.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoPower.Parent" xml:space="preserve">
+    <value>grpChooseFunction</value>
+  </data>
+  <data name="&gt;&gt;rdoPower.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="rdoNaturalLog.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoNaturalLog.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 60</value>
+  </data>
+  <data name="rdoNaturalLog.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 17</value>
+  </data>
+  <data name="rdoNaturalLog.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="rdoNaturalLog.Text" xml:space="preserve">
+    <value>Natural Log</value>
+  </data>
+  <data name="&gt;&gt;rdoNaturalLog.Name" xml:space="preserve">
+    <value>rdoNaturalLog</value>
+  </data>
+  <data name="&gt;&gt;rdoNaturalLog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoNaturalLog.Parent" xml:space="preserve">
+    <value>grpChooseFunction</value>
+  </data>
+  <data name="&gt;&gt;rdoNaturalLog.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="rdoIdentity.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoIdentity.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 31</value>
+  </data>
+  <data name="rdoIdentity.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 17</value>
+  </data>
+  <data name="rdoIdentity.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="rdoIdentity.Text" xml:space="preserve">
+    <value>Identity</value>
+  </data>
+  <data name="&gt;&gt;rdoIdentity.Name" xml:space="preserve">
+    <value>rdoIdentity</value>
+  </data>
+  <data name="&gt;&gt;rdoIdentity.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoIdentity.Parent" xml:space="preserve">
+    <value>grpChooseFunction</value>
+  </data>
+  <data name="&gt;&gt;rdoIdentity.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrNudPower.Location" type="System.Drawing.Point, System.Drawing">
+    <value>87, 147</value>
+  </data>
+  <data name="ucrNudPower.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudPower.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;ucrNudPower.Name" xml:space="preserve">
+    <value>ucrNudPower</value>
+  </data>
+  <data name="&gt;&gt;ucrNudPower.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudPower.Parent" xml:space="preserve">
+    <value>grpChooseFunction</value>
+  </data>
+  <data name="&gt;&gt;ucrNudPower.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrPnlChooseFunction.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 19</value>
+  </data>
+  <data name="ucrPnlChooseFunction.Size" type="System.Drawing.Size, System.Drawing">
+    <value>168, 159</value>
+  </data>
+  <data name="ucrPnlChooseFunction.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlChooseFunction.Name" xml:space="preserve">
+    <value>ucrPnlChooseFunction</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlChooseFunction.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlChooseFunction.Parent" xml:space="preserve">
+    <value>grpChooseFunction</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlChooseFunction.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="grpChooseFunction.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
+  </data>
+  <data name="grpChooseFunction.Size" type="System.Drawing.Size, System.Drawing">
+    <value>218, 184</value>
+  </data>
+  <data name="grpChooseFunction.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="grpChooseFunction.Text" xml:space="preserve">
+    <value>Choose Function</value>
+  </data>
+  <data name="&gt;&gt;grpChooseFunction.Name" xml:space="preserve">
+    <value>grpChooseFunction</value>
+  </data>
+  <data name="&gt;&gt;grpChooseFunction.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpChooseFunction.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpChooseFunction.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblPreview.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblPreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 216</value>
+  </data>
+  <data name="lblPreview.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 13</value>
+  </data>
+  <data name="lblPreview.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblPreview.Text" xml:space="preserve">
+    <value>Preview:</value>
+  </data>
+  <data name="&gt;&gt;lblPreview.Name" xml:space="preserve">
+    <value>lblPreview</value>
+  </data>
+  <data name="&gt;&gt;lblPreview.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblPreview.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblPreview.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrInputPreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>66, 213</value>
+  </data>
+  <data name="ucrInputPreview.Size" type="System.Drawing.Size, System.Drawing">
+    <value>158, 21</value>
+  </data>
+  <data name="ucrInputPreview.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrInputPreview.Name" xml:space="preserve">
+    <value>ucrInputPreview</value>
+  </data>
+  <data name="&gt;&gt;ucrInputPreview.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputPreview.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputPreview.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>236, 284</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Variable Transformations</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>sdgVariableTransformations</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

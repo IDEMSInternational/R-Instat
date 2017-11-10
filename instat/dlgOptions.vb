@@ -23,6 +23,7 @@ Imports instat
 
 Public Class dlgOptions
     Public strCurrLanguageCulture As String
+    Public strPrevLanguageCulture As String
     Public strOutputWindowDisplay As String
     Public strWorkingDirectory As String
     Private strGraphDisplayOption As String
@@ -111,16 +112,17 @@ Public Class dlgOptions
         Select Case frmMain.clsInstatOptions.strLanguageCultureCode
             Case "en-GB"
                 rdoEnglish.Checked = True
-            ' temp disabled as not functioning
-            'Case "fr-FR"
-            '    rdoFrench.Checked = True
-            'Case "sw-KE"
-            '    rdoKiswahili.Checked = True
-            'Case "es-ES"
-            '    rdoSpanish.Checked = True
+            Case "fr-FR"
+                rdoFrench.Checked = True
+            Case "sw-KE"
+                rdoKiswahili.Checked = True
+                ' temp disabled as not functioning
+                'Case "es-ES"
+                '    rdoSpanish.Checked = True
             Case Else
                 rdoEnglish.Checked = True
         End Select
+        strPrevLanguageCulture = frmMain.clsInstatOptions.strLanguageCultureCode
 
         If frmMain.clsInstatOptions.strGraphDisplayOption = "view_output_window" Then
             rdoDisplayinOutputWindow.Checked = True
@@ -222,33 +224,11 @@ Public Class dlgOptions
         SetInstatOptions()
         autoTranslate(Me)
 
-        If frmMain.Visible Then
+        If frmMain.Visible AndAlso strCurrLanguageCulture <> strPrevLanguageCulture Then
             autoTranslate(frmMain)
+            'TODO translation containers within frmMain here
         End If
-
-        If frmCommand.Visible Then
-            autoTranslate(frmCommand)
-        End If
-
-        If frmEditor.Visible Then
-            autoTranslate(frmEditor)
-        End If
-
-        If frmLog.Visible Then
-            autoTranslate(frmLog)
-        End If
-
-        If frmMetaData.Visible Then
-            autoTranslate(frmMetaData)
-        End If
-
-        If frmScript.Visible Then
-            autoTranslate(frmScript)
-        End If
-
-        If frmVariables.Visible Then
-            autoTranslate(frmVariables)
-        End If
+        strPrevLanguageCulture = strCurrLanguageCulture
         'disables the command after running it
         cmdApply.Enabled = True
         cmdOk.Enabled = True

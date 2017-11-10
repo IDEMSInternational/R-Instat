@@ -38,6 +38,7 @@ Partial Class dlgUseGraph
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgUseGraph))
         Me.lblGraphtoUse = New System.Windows.Forms.Label()
         Me.cmdPlotOptions = New System.Windows.Forms.Button()
         Me.ucrSaveGraph = New instat.ucrSave()
@@ -48,63 +49,45 @@ Partial Class dlgUseGraph
         '
         'lblGraphtoUse
         '
-        Me.lblGraphtoUse.AutoSize = True
-        Me.lblGraphtoUse.Location = New System.Drawing.Point(252, 45)
+        resources.ApplyResources(Me.lblGraphtoUse, "lblGraphtoUse")
         Me.lblGraphtoUse.Name = "lblGraphtoUse"
-        Me.lblGraphtoUse.Size = New System.Drawing.Size(73, 13)
-        Me.lblGraphtoUse.TabIndex = 1
-        Me.lblGraphtoUse.Text = "Graph to Use:"
         '
         'cmdPlotOptions
         '
-        Me.cmdPlotOptions.Location = New System.Drawing.Point(10, 198)
+        resources.ApplyResources(Me.cmdPlotOptions, "cmdPlotOptions")
         Me.cmdPlotOptions.Name = "cmdPlotOptions"
-        Me.cmdPlotOptions.Size = New System.Drawing.Size(120, 23)
-        Me.cmdPlotOptions.TabIndex = 3
-        Me.cmdPlotOptions.Text = "Options"
         Me.cmdPlotOptions.UseVisualStyleBackColor = True
         '
         'ucrSaveGraph
         '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 227)
+        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(255, 24)
-        Me.ucrSaveGraph.TabIndex = 4
         '
         'ucrGraphReceiver
         '
         Me.ucrGraphReceiver.frmParent = Me
-        Me.ucrGraphReceiver.Location = New System.Drawing.Point(252, 60)
-        Me.ucrGraphReceiver.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrGraphReceiver, "ucrGraphReceiver")
         Me.ucrGraphReceiver.Name = "ucrGraphReceiver"
         Me.ucrGraphReceiver.Selector = Nothing
-        Me.ucrGraphReceiver.Size = New System.Drawing.Size(120, 20)
         Me.ucrGraphReceiver.strNcFilePath = ""
-        Me.ucrGraphReceiver.TabIndex = 2
         Me.ucrGraphReceiver.ucrSelector = Nothing
         '
         'ucrGraphsSelector
         '
         Me.ucrGraphsSelector.bShowHiddenColumns = False
         Me.ucrGraphsSelector.bUseCurrentFilter = True
-        Me.ucrGraphsSelector.Location = New System.Drawing.Point(10, 10)
-        Me.ucrGraphsSelector.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrGraphsSelector, "ucrGraphsSelector")
         Me.ucrGraphsSelector.Name = "ucrGraphsSelector"
-        Me.ucrGraphsSelector.Size = New System.Drawing.Size(210, 180)
-        Me.ucrGraphsSelector.TabIndex = 0
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 254)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 5
         '
         'dlgUseGraph
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(414, 311)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.cmdPlotOptions)
         Me.Controls.Add(Me.lblGraphtoUse)
@@ -115,9 +98,7 @@ Partial Class dlgUseGraph
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgUseGraph"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Use_Graph"
-        Me.Text = "Use Graph"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

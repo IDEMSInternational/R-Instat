@@ -208,10 +208,12 @@ Public Class ucrFilter
     End Sub
 
     Private Sub ucrInputFilterName_NameChanged() Handles ucrInputFilterName.NameChanged
-        If Not ucrInputFilterName.IsEmpty() Then
-            clsFilterFunction.AddParameter("filter_name", Chr(34) & ucrInputFilterName.GetText() & Chr(34))
-        Else
-            clsFilterFunction.RemoveParameterByName("filter_name")
+        If clsFilterFunction IsNot Nothing Then
+            If Not ucrInputFilterName.IsEmpty() Then
+                clsFilterFunction.AddParameter("filter_name", Chr(34) & ucrInputFilterName.GetText() & Chr(34))
+            Else
+                clsFilterFunction.RemoveParameterByName("filter_name")
+            End If
         End If
     End Sub
 

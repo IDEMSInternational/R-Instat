@@ -12,4 +12,127 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="lblSelectedObject.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSelectedObject.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>250, 45</value>
+  </data>
+  <data name="lblSelectedObject.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>79, 13</value>
+  </data>
+  <data name="lblSelectedObject.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoStructure.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoStructure.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>256, 93</value>
+  </data>
+  <data name="rdoStructure.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>68, 17</value>
+  </data>
+  <data name="rdoStructure.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="rdoStructure.Text" xml:space="preserve">
+    <value>Muundo</value>
+  </data>
+  <data name="rdoAllContents.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoAllContents.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>256, 116</value>
+  </data>
+  <data name="rdoAllContents.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 17</value>
+  </data>
+  <data name="rdoAllContents.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="rdoComponent.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoComponent.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>256, 139</value>
+  </data>
+  <data name="rdoComponent.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>79, 17</value>
+  </data>
+  <data name="rdoComponent.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="rdoComponent.Text" xml:space="preserve">
+    <value>Kijenzi</value>
+  </data>
+  <data name="rdoViewGraph.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoViewGraph.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>256, 162</value>
+  </data>
+  <data name="rdoViewGraph.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>80, 17</value>
+  </data>
+  <data name="rdoViewGraph.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" xml:space="preserve" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>417, 259</value>
+  </data>
+  <data name="ucrSelectorForViewObject.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
+  </data>
+  <data name="ucrSelectorForViewObject.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectorForViewObject.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>210, 180</value>
+  </data>
+  <data name="ucrSelectorForViewObject.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="ucrBase.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 198</value>
+  </data>
+  <data name="ucrBase.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>410, 52</value>
+  </data>
+  <data name="ucrBase.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="ucrPnlContentsToView.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>250, 90</value>
+  </data>
+  <data name="ucrPnlContentsToView.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>109, 94</value>
+  </data>
+  <data name="ucrPnlContentsToView.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="$this.StartPosition" xml:space="preserve" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>&amp;Onyesha Kipengee</value>
+  </data>
+  <data name="ucrReceiverSelectedObject.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>250, 60</value>
+  </data>
+  <data name="ucrReceiverSelectedObject.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverSelectedObject.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverSelectedObject.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

@@ -117,4 +117,382 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ucrBaseSubDialog.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 344</value>
+  </data>
+  <data name="ucrBaseSubDialog.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 30</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrBaseSubDialog.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrBaseSubDialog.Name" xml:space="preserve">
+    <value>ucrBaseSubDialog</value>
+  </data>
+  <data name="&gt;&gt;ucrBaseSubDialog.Type" xml:space="preserve">
+    <value>instat.ucrButtonsSubdialogue, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrBaseSubDialog.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrBaseSubDialog.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="ucrNewDistributions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="ucrNewDistributions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 194</value>
+  </data>
+  <data name="ucrNewDistributions.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrNewDistributions.Name" xml:space="preserve">
+    <value>ucrNewDistributions</value>
+  </data>
+  <data name="&gt;&gt;ucrNewDistributions.Type" xml:space="preserve">
+    <value>instat.ucrDistributionsWithParameters, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNewDistributions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrNewDistributions.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="nudYlimUpper.Location" type="System.Drawing.Point, System.Drawing">
+    <value>137, 43</value>
+  </data>
+  <data name="nudYlimUpper.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 20</value>
+  </data>
+  <data name="nudYlimUpper.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;nudYlimUpper.Name" xml:space="preserve">
+    <value>nudYlimUpper</value>
+  </data>
+  <data name="&gt;&gt;nudYlimUpper.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudYlimUpper.Parent" xml:space="preserve">
+    <value>grpChangeLimits</value>
+  </data>
+  <data name="&gt;&gt;nudYlimUpper.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="nudXlimUpper.Location" type="System.Drawing.Point, System.Drawing">
+    <value>137, 16</value>
+  </data>
+  <data name="nudXlimUpper.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 20</value>
+  </data>
+  <data name="nudXlimUpper.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;nudXlimUpper.Name" xml:space="preserve">
+    <value>nudXlimUpper</value>
+  </data>
+  <data name="&gt;&gt;nudXlimUpper.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudXlimUpper.Parent" xml:space="preserve">
+    <value>grpChangeLimits</value>
+  </data>
+  <data name="&gt;&gt;nudXlimUpper.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="nudYlimLower.Location" type="System.Drawing.Point, System.Drawing">
+    <value>78, 43</value>
+  </data>
+  <data name="nudYlimLower.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 20</value>
+  </data>
+  <data name="nudYlimLower.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;nudYlimLower.Name" xml:space="preserve">
+    <value>nudYlimLower</value>
+  </data>
+  <data name="&gt;&gt;nudYlimLower.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudYlimLower.Parent" xml:space="preserve">
+    <value>grpChangeLimits</value>
+  </data>
+  <data name="&gt;&gt;nudYlimLower.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="nudXlimLower.Location" type="System.Drawing.Point, System.Drawing">
+    <value>78, 16</value>
+  </data>
+  <data name="nudXlimLower.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 20</value>
+  </data>
+  <data name="nudXlimLower.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;nudXlimLower.Name" xml:space="preserve">
+    <value>nudXlimLower</value>
+  </data>
+  <data name="&gt;&gt;nudXlimLower.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudXlimLower.Parent" xml:space="preserve">
+    <value>grpChangeLimits</value>
+  </data>
+  <data name="&gt;&gt;nudXlimLower.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblYlim.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblYlim.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 46</value>
+  </data>
+  <data name="lblYlim.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 13</value>
+  </data>
+  <data name="lblYlim.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblYlim.Text" xml:space="preserve">
+    <value>Ylim</value>
+  </data>
+  <data name="&gt;&gt;lblYlim.Name" xml:space="preserve">
+    <value>lblYlim</value>
+  </data>
+  <data name="&gt;&gt;lblYlim.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblYlim.Parent" xml:space="preserve">
+    <value>grpChangeLimits</value>
+  </data>
+  <data name="&gt;&gt;lblYlim.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lblXlim.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblXlim.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 20</value>
+  </data>
+  <data name="lblXlim.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 13</value>
+  </data>
+  <data name="lblXlim.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblXlim.Text" xml:space="preserve">
+    <value>Xlim</value>
+  </data>
+  <data name="&gt;&gt;lblXlim.Name" xml:space="preserve">
+    <value>lblXlim</value>
+  </data>
+  <data name="&gt;&gt;lblXlim.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblXlim.Parent" xml:space="preserve">
+    <value>grpChangeLimits</value>
+  </data>
+  <data name="&gt;&gt;lblXlim.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="grpChangeLimits.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 198</value>
+  </data>
+  <data name="grpChangeLimits.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 71</value>
+  </data>
+  <data name="grpChangeLimits.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="grpChangeLimits.Text" xml:space="preserve">
+    <value>Change Limits</value>
+  </data>
+  <data name="&gt;&gt;grpChangeLimits.Name" xml:space="preserve">
+    <value>grpChangeLimits</value>
+  </data>
+  <data name="&gt;&gt;grpChangeLimits.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpChangeLimits.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpChangeLimits.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="rdoProbability.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoProbability.Location" type="System.Drawing.Point, System.Drawing">
+    <value>104, 15</value>
+  </data>
+  <data name="rdoProbability.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 17</value>
+  </data>
+  <data name="rdoProbability.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoProbability.Text" xml:space="preserve">
+    <value>Probability</value>
+  </data>
+  <data name="&gt;&gt;rdoProbability.Name" xml:space="preserve">
+    <value>rdoProbability</value>
+  </data>
+  <data name="&gt;&gt;rdoProbability.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoProbability.Parent" xml:space="preserve">
+    <value>grpPlot</value>
+  </data>
+  <data name="&gt;&gt;rdoProbability.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rdoDensity.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoDensity.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 15</value>
+  </data>
+  <data name="rdoDensity.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 17</value>
+  </data>
+  <data name="rdoDensity.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rdoDensity.Text" xml:space="preserve">
+    <value>Density</value>
+  </data>
+  <data name="&gt;&gt;rdoDensity.Name" xml:space="preserve">
+    <value>rdoDensity</value>
+  </data>
+  <data name="&gt;&gt;rdoDensity.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoDensity.Parent" xml:space="preserve">
+    <value>grpPlot</value>
+  </data>
+  <data name="&gt;&gt;rdoDensity.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="grpPlot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 276</value>
+  </data>
+  <data name="grpPlot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 36</value>
+  </data>
+  <data name="grpPlot.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="grpPlot.Text" xml:space="preserve">
+    <value>Plot</value>
+  </data>
+  <data name="&gt;&gt;grpPlot.Name" xml:space="preserve">
+    <value>grpPlot</value>
+  </data>
+  <data name="&gt;&gt;grpPlot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpPlot.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpPlot.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="cmdAddDistribution.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 315</value>
+  </data>
+  <data name="cmdAddDistribution.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 23</value>
+  </data>
+  <data name="cmdAddDistribution.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="cmdAddDistribution.Text" xml:space="preserve">
+    <value>Add Distribution</value>
+  </data>
+  <data name="&gt;&gt;cmdAddDistribution.Name" xml:space="preserve">
+    <value>cmdAddDistribution</value>
+  </data>
+  <data name="&gt;&gt;cmdAddDistribution.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdAddDistribution.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmdAddDistribution.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lstAddedDistribution.Location" type="System.Drawing.Point, System.Drawing">
+    <value>271, 44</value>
+  </data>
+  <data name="lstAddedDistribution.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 147</value>
+  </data>
+  <data name="lstAddedDistribution.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;lstAddedDistribution.Name" xml:space="preserve">
+    <value>lstAddedDistribution</value>
+  </data>
+  <data name="&gt;&gt;lstAddedDistribution.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lstAddedDistribution.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lstAddedDistribution.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblAddedDistribution.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblAddedDistribution.Location" type="System.Drawing.Point, System.Drawing">
+    <value>268, 28</value>
+  </data>
+  <data name="lblAddedDistribution.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 13</value>
+  </data>
+  <data name="lblAddedDistribution.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblAddedDistribution.Text" xml:space="preserve">
+    <value>Added Distribution</value>
+  </data>
+  <data name="&gt;&gt;lblAddedDistribution.Name" xml:space="preserve">
+    <value>lblAddedDistribution</value>
+  </data>
+  <data name="&gt;&gt;lblAddedDistribution.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblAddedDistribution.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblAddedDistribution.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>395, 375</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>New Distribution</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>sdgAddNewDistribution</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

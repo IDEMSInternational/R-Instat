@@ -38,6 +38,7 @@ Partial Class sdgOneVarFitModDisplay
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgOneVarFitModDisplay))
         Me.ucrBase = New instat.ucrButtonsSubdialogue()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.ucrSavePlots = New instat.ucrSave()
@@ -62,10 +63,8 @@ Partial Class sdgOneVarFitModDisplay
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(80, 212)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(142, 30)
-        Me.ucrBase.TabIndex = 1
         '
         'TabPage1
         '
@@ -77,97 +76,63 @@ Partial Class sdgOneVarFitModDisplay
         Me.TabPage1.Controls.Add(Me.rdoPlotAll)
         Me.TabPage1.Controls.Add(Me.rdoNoPlot)
         Me.TabPage1.Controls.Add(Me.ucrPnlPlots)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        resources.ApplyResources(Me.TabPage1, "TabPage1")
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(279, 174)
-        Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "Plots"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
         'ucrSavePlots
         '
-        Me.ucrSavePlots.Location = New System.Drawing.Point(10, 148)
+        resources.ApplyResources(Me.ucrSavePlots, "ucrSavePlots")
         Me.ucrSavePlots.Name = "ucrSavePlots"
-        Me.ucrSavePlots.Size = New System.Drawing.Size(261, 24)
-        Me.ucrSavePlots.TabIndex = 7
         '
         'rdoPPPlot
         '
-        Me.rdoPPPlot.AutoSize = True
-        Me.rdoPPPlot.Location = New System.Drawing.Point(10, 125)
+        resources.ApplyResources(Me.rdoPPPlot, "rdoPPPlot")
         Me.rdoPPPlot.Name = "rdoPPPlot"
-        Me.rdoPPPlot.Size = New System.Drawing.Size(60, 17)
-        Me.rdoPPPlot.TabIndex = 6
-        Me.rdoPPPlot.Text = "PP-Plot"
         Me.rdoPPPlot.UseVisualStyleBackColor = True
         '
         'rdoQQPlot
         '
-        Me.rdoQQPlot.AutoSize = True
-        Me.rdoQQPlot.Location = New System.Drawing.Point(10, 102)
+        resources.ApplyResources(Me.rdoQQPlot, "rdoQQPlot")
         Me.rdoQQPlot.Name = "rdoQQPlot"
-        Me.rdoQQPlot.Size = New System.Drawing.Size(62, 17)
-        Me.rdoQQPlot.TabIndex = 5
-        Me.rdoQQPlot.Text = "QQ-Plot"
         Me.rdoQQPlot.UseVisualStyleBackColor = True
         '
         'rdoDensityPlot
         '
-        Me.rdoDensityPlot.AutoSize = True
-        Me.rdoDensityPlot.Location = New System.Drawing.Point(10, 79)
+        resources.ApplyResources(Me.rdoDensityPlot, "rdoDensityPlot")
         Me.rdoDensityPlot.Name = "rdoDensityPlot"
-        Me.rdoDensityPlot.Size = New System.Drawing.Size(81, 17)
-        Me.rdoDensityPlot.TabIndex = 4
-        Me.rdoDensityPlot.Text = "Density Plot"
         Me.rdoDensityPlot.UseVisualStyleBackColor = True
         '
         'rdoCDFPlot
         '
-        Me.rdoCDFPlot.AutoSize = True
-        Me.rdoCDFPlot.Location = New System.Drawing.Point(10, 56)
+        resources.ApplyResources(Me.rdoCDFPlot, "rdoCDFPlot")
         Me.rdoCDFPlot.Name = "rdoCDFPlot"
-        Me.rdoCDFPlot.Size = New System.Drawing.Size(67, 17)
-        Me.rdoCDFPlot.TabIndex = 3
-        Me.rdoCDFPlot.Text = "CDF Plot"
         Me.rdoCDFPlot.UseVisualStyleBackColor = True
         '
         'rdoPlotAll
         '
-        Me.rdoPlotAll.AutoSize = True
-        Me.rdoPlotAll.Location = New System.Drawing.Point(10, 33)
+        resources.ApplyResources(Me.rdoPlotAll, "rdoPlotAll")
         Me.rdoPlotAll.Name = "rdoPlotAll"
-        Me.rdoPlotAll.Size = New System.Drawing.Size(68, 17)
-        Me.rdoPlotAll.TabIndex = 2
-        Me.rdoPlotAll.Text = "Multi-Plot"
         Me.rdoPlotAll.UseVisualStyleBackColor = True
         '
         'rdoNoPlot
         '
-        Me.rdoNoPlot.AutoSize = True
-        Me.rdoNoPlot.Location = New System.Drawing.Point(10, 10)
+        resources.ApplyResources(Me.rdoNoPlot, "rdoNoPlot")
         Me.rdoNoPlot.Name = "rdoNoPlot"
-        Me.rdoNoPlot.Size = New System.Drawing.Size(60, 17)
-        Me.rdoNoPlot.TabIndex = 1
-        Me.rdoNoPlot.Text = "No Plot"
         Me.rdoNoPlot.UseVisualStyleBackColor = True
         '
         'ucrPnlPlots
         '
-        Me.ucrPnlPlots.Location = New System.Drawing.Point(6, 6)
+        resources.ApplyResources(Me.ucrPnlPlots, "ucrPnlPlots")
         Me.ucrPnlPlots.Name = "ucrPnlPlots"
-        Me.ucrPnlPlots.Size = New System.Drawing.Size(265, 173)
-        Me.ucrPnlPlots.TabIndex = 0
         '
         'tbcPlots
         '
         Me.tbcPlots.Controls.Add(Me.TabPage1)
         Me.tbcPlots.Controls.Add(Me.tbclikelihood)
-        Me.tbcPlots.Location = New System.Drawing.Point(7, 8)
+        resources.ApplyResources(Me.tbcPlots, "tbcPlots")
         Me.tbcPlots.Name = "tbcPlots"
         Me.tbcPlots.SelectedIndex = 0
-        Me.tbcPlots.Size = New System.Drawing.Size(287, 200)
-        Me.tbcPlots.TabIndex = 0
         '
         'tbclikelihood
         '
@@ -176,71 +141,50 @@ Partial Class sdgOneVarFitModDisplay
         Me.tbclikelihood.Controls.Add(Me.rdoLik)
         Me.tbclikelihood.Controls.Add(Me.rdoLoglik)
         Me.tbclikelihood.Controls.Add(Me.ucrPnlLikelihood)
-        Me.tbclikelihood.Location = New System.Drawing.Point(4, 22)
+        resources.ApplyResources(Me.tbclikelihood, "tbclikelihood")
         Me.tbclikelihood.Name = "tbclikelihood"
-        Me.tbclikelihood.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbclikelihood.Size = New System.Drawing.Size(279, 174)
-        Me.tbclikelihood.TabIndex = 1
-        Me.tbclikelihood.Text = "Likelihood"
         Me.tbclikelihood.UseVisualStyleBackColor = True
         '
         'ucrChkPLotLogLik
         '
         Me.ucrChkPLotLogLik.Checked = False
-        Me.ucrChkPLotLogLik.Location = New System.Drawing.Point(10, 10)
+        resources.ApplyResources(Me.ucrChkPLotLogLik, "ucrChkPLotLogLik")
         Me.ucrChkPLotLogLik.Name = "ucrChkPLotLogLik"
-        Me.ucrChkPLotLogLik.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkPLotLogLik.TabIndex = 0
         '
         'ucrSaveLikelihood
         '
-        Me.ucrSaveLikelihood.Location = New System.Drawing.Point(10, 148)
+        resources.ApplyResources(Me.ucrSaveLikelihood, "ucrSaveLikelihood")
         Me.ucrSaveLikelihood.Name = "ucrSaveLikelihood"
-        Me.ucrSaveLikelihood.Size = New System.Drawing.Size(263, 24)
-        Me.ucrSaveLikelihood.TabIndex = 4
         '
         'rdoLik
         '
-        Me.rdoLik.AutoSize = True
-        Me.rdoLik.Location = New System.Drawing.Point(34, 60)
+        resources.ApplyResources(Me.rdoLik, "rdoLik")
         Me.rdoLik.Name = "rdoLik"
-        Me.rdoLik.Size = New System.Drawing.Size(94, 17)
-        Me.rdoLik.TabIndex = 3
-        Me.rdoLik.Text = "Plot Likelihood"
         Me.rdoLik.UseVisualStyleBackColor = True
         '
         'rdoLoglik
         '
-        Me.rdoLoglik.AutoSize = True
+        resources.ApplyResources(Me.rdoLoglik, "rdoLoglik")
         Me.rdoLoglik.Checked = True
-        Me.rdoLoglik.Location = New System.Drawing.Point(34, 37)
         Me.rdoLoglik.Name = "rdoLoglik"
-        Me.rdoLoglik.Size = New System.Drawing.Size(115, 17)
-        Me.rdoLoglik.TabIndex = 2
         Me.rdoLoglik.TabStop = True
-        Me.rdoLoglik.Text = "Plot Log-Likelihood"
         Me.rdoLoglik.UseVisualStyleBackColor = True
         '
         'ucrPnlLikelihood
         '
-        Me.ucrPnlLikelihood.Location = New System.Drawing.Point(12, 31)
+        resources.ApplyResources(Me.ucrPnlLikelihood, "ucrPnlLikelihood")
         Me.ucrPnlLikelihood.Name = "ucrPnlLikelihood"
-        Me.ucrPnlLikelihood.Size = New System.Drawing.Size(208, 61)
-        Me.ucrPnlLikelihood.TabIndex = 1
         '
         'sdgOneVarFitModDisplay
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(299, 247)
         Me.Controls.Add(Me.tbcPlots)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgOneVarFitModDisplay"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Display Options"
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
         Me.tbcPlots.ResumeLayout(False)
