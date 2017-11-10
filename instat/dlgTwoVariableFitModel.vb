@@ -54,7 +54,7 @@ Public Class dlgTwoVariableFitModel
 
     Private Sub InitialiseDialog()
         'temp disabled until implemented
-        rdoTwoSample.Enabled = True
+        rdoTwoSample.Enabled = False
 
         ucrBase.iHelpTopicID = 366
         ucrBase.clsRsyntax.iCallType = 2
