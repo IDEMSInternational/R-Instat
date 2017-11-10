@@ -38,6 +38,7 @@ Partial Class dlgExportRWorkspace
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgExportRWorkspace))
         Me.cmdBrowse = New System.Windows.Forms.Button()
         Me.lblExport = New System.Windows.Forms.Label()
         Me.lblDataFrames = New System.Windows.Forms.Label()
@@ -53,106 +54,75 @@ Partial Class dlgExportRWorkspace
         '
         'cmdBrowse
         '
-        Me.cmdBrowse.Location = New System.Drawing.Point(346, 249)
+        resources.ApplyResources(Me.cmdBrowse, "cmdBrowse")
         Me.cmdBrowse.Name = "cmdBrowse"
-        Me.cmdBrowse.Size = New System.Drawing.Size(62, 23)
-        Me.cmdBrowse.TabIndex = 9
-        Me.cmdBrowse.Text = "Browse"
         Me.cmdBrowse.UseVisualStyleBackColor = True
         '
         'lblExport
         '
-        Me.lblExport.AutoSize = True
-        Me.lblExport.Location = New System.Drawing.Point(10, 255)
+        resources.ApplyResources(Me.lblExport, "lblExport")
         Me.lblExport.Name = "lblExport"
-        Me.lblExport.Size = New System.Drawing.Size(59, 13)
-        Me.lblExport.TabIndex = 7
-        Me.lblExport.Text = "Export File:"
         '
         'lblDataFrames
         '
-        Me.lblDataFrames.AutoSize = True
-        Me.lblDataFrames.Location = New System.Drawing.Point(10, 13)
+        resources.ApplyResources(Me.lblDataFrames, "lblDataFrames")
         Me.lblDataFrames.Name = "lblDataFrames"
-        Me.lblDataFrames.Size = New System.Drawing.Size(76, 13)
-        Me.lblDataFrames.TabIndex = 0
-        Me.lblDataFrames.Text = "Data Frame(s):"
         '
         'lblSelectedDataFrames
         '
-        Me.lblSelectedDataFrames.AutoSize = True
-        Me.lblSelectedDataFrames.Location = New System.Drawing.Point(247, 45)
+        resources.ApplyResources(Me.lblSelectedDataFrames, "lblSelectedDataFrames")
         Me.lblSelectedDataFrames.Name = "lblSelectedDataFrames"
-        Me.lblSelectedDataFrames.Size = New System.Drawing.Size(115, 13)
-        Me.lblSelectedDataFrames.TabIndex = 2
-        Me.lblSelectedDataFrames.Text = "Selected Data Frames:"
         '
         'ucrSelectorForDataFrames
         '
         Me.ucrSelectorForDataFrames.bShowHiddenColumns = False
-        Me.ucrSelectorForDataFrames.Location = New System.Drawing.Point(10, 30)
-        Me.ucrSelectorForDataFrames.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorForDataFrames, "ucrSelectorForDataFrames")
         Me.ucrSelectorForDataFrames.Name = "ucrSelectorForDataFrames"
-        Me.ucrSelectorForDataFrames.Size = New System.Drawing.Size(201, 147)
-        Me.ucrSelectorForDataFrames.TabIndex = 1
         '
         'ucrInputExportFile
         '
         Me.ucrInputExportFile.AddQuotesIfUnrecognised = True
         Me.ucrInputExportFile.IsMultiline = False
         Me.ucrInputExportFile.IsReadOnly = False
-        Me.ucrInputExportFile.Location = New System.Drawing.Point(91, 251)
+        resources.ApplyResources(Me.ucrInputExportFile, "ucrInputExportFile")
         Me.ucrInputExportFile.Name = "ucrInputExportFile"
-        Me.ucrInputExportFile.Size = New System.Drawing.Size(249, 21)
-        Me.ucrInputExportFile.TabIndex = 8
         '
         'ucrChkGraphs
         '
         Me.ucrChkGraphs.Checked = False
-        Me.ucrChkGraphs.Location = New System.Drawing.Point(10, 199)
+        resources.ApplyResources(Me.ucrChkGraphs, "ucrChkGraphs")
         Me.ucrChkGraphs.Name = "ucrChkGraphs"
-        Me.ucrChkGraphs.Size = New System.Drawing.Size(119, 20)
-        Me.ucrChkGraphs.TabIndex = 5
         '
         'ucrChkModels
         '
         Me.ucrChkModels.Checked = False
-        Me.ucrChkModels.Location = New System.Drawing.Point(10, 225)
+        resources.ApplyResources(Me.ucrChkModels, "ucrChkModels")
         Me.ucrChkModels.Name = "ucrChkModels"
-        Me.ucrChkModels.Size = New System.Drawing.Size(128, 20)
-        Me.ucrChkModels.TabIndex = 6
         '
         'ucrChkMetadata
         '
         Me.ucrChkMetadata.Checked = False
-        Me.ucrChkMetadata.Location = New System.Drawing.Point(10, 173)
+        resources.ApplyResources(Me.ucrChkMetadata, "ucrChkMetadata")
         Me.ucrChkMetadata.Name = "ucrChkMetadata"
-        Me.ucrChkMetadata.Size = New System.Drawing.Size(145, 20)
-        Me.ucrChkMetadata.TabIndex = 4
         '
         'ucrReceiverMultiple
         '
         Me.ucrReceiverMultiple.frmParent = Me
-        Me.ucrReceiverMultiple.Location = New System.Drawing.Point(247, 60)
-        Me.ucrReceiverMultiple.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverMultiple, "ucrReceiverMultiple")
         Me.ucrReceiverMultiple.Name = "ucrReceiverMultiple"
         Me.ucrReceiverMultiple.Selector = Nothing
-        Me.ucrReceiverMultiple.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverMultiple.TabIndex = 3
+        Me.ucrReceiverMultiple.strNcFilePath = ""
         Me.ucrReceiverMultiple.ucrSelector = Nothing
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 281)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(398, 52)
-        Me.ucrBase.TabIndex = 10
         '
         'dlgExportRWorkspace
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(413, 338)
         Me.Controls.Add(Me.lblSelectedDataFrames)
         Me.Controls.Add(Me.lblDataFrames)
         Me.Controls.Add(Me.ucrInputExportFile)
@@ -168,8 +138,6 @@ Partial Class dlgExportRWorkspace
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgExportRWorkspace"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Export R Workspace"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

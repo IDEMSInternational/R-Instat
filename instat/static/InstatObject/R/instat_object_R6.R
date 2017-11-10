@@ -442,7 +442,7 @@ instat_object$set("public", "add_object", function(data_name, object, object_nam
 }
 ) 
 
-instat_object$set("public", "get_objects", function(data_name, object_name, include_overall = TRUE, as_list = FALSE, type = "", include_empty = FALSE, force_as_list = FALSE) {
+instat_object$set("public", "get_objects", function(data_name, object_name, include_overall = TRUE, as_list = FALSE, type = "", include_empty = FALSE, force_as_list = FALSE, print_graph = TRUE) {
   #TODO implement force_as_list in all cases
   if(missing(data_name)) {
     if(!missing(object_name)) {
@@ -455,7 +455,11 @@ instat_object$set("public", "get_objects", function(data_name, object_name, incl
       if(include_overall) out[[overall_label]] <- private$.objects[self$get_object_names(data_name = overall_label, type = type)]
       if(!include_empty) out = out[sapply(out, function(x) length(x) > 0)]
     }
-    return(out)
+    if(!missing(object_name) && length(object_name) == 1) {
+      if(print_graph && (ggplot2::is.ggplot(out) || any(c("gg", "ggmultiplot") %in% class(out)))) return(print(out))
+      else return(out)
+    }
+    else return(out)
   }
   else {
     if(data_name == overall_label) {
@@ -472,7 +476,10 @@ instat_object$set("public", "get_objects", function(data_name, object_name, incl
       lst[[data_name]][[object_name]] <- out
       return(lst)
     }
-    else return(out)
+    else {
+      if(print_graph && (ggplot2::is.ggplot(out) || any(c("gg", "ggmultiplot") %in% class(out)))) return(print(out))
+      else return(out)
+    }
   }
 }
 )
@@ -589,8 +596,8 @@ instat_object$set("public", "add_graph", function(data_name, graph, graph_name) 
 }
 )
 
-instat_object$set("public", "get_graphs", function(data_name, graph_name, include_overall = TRUE, force_as_list = FALSE) {
-  self$get_objects(data_name = data_name, object_name = graph_name, include_overall = include_overall, type = graph_label, force_as_list = force_as_list)
+instat_object$set("public", "get_graphs", function(data_name, graph_name, include_overall = TRUE, force_as_list = FALSE, print_graph = TRUE) {
+  self$get_objects(data_name = data_name, object_name = graph_name, include_overall = include_overall, type = graph_label, force_as_list = force_as_list, print_graph = print_graph)
 }
 )
 
@@ -1508,8 +1515,8 @@ instat_object$set("public","update_variable_set", function(data_name, set_name, 
 }
 )
 
-instat_object$set("public","delete_variable_set", function(data_name, set_name) {
-  self$get_data_objects(data_name)$delete_variable_set(set_name = set_name)
+instat_object$set("public","delete_variable_sets", function(data_name, set_names) {
+  self$get_data_objects(data_name)$delete_variable_sets(set_names = set_names)
 }
 )
 

@@ -49,15 +49,6 @@ Partial Class dlgTwoVariableFitModel
         Me.rdoGeneralCase = New System.Windows.Forms.RadioButton()
         Me.lblFactor = New System.Windows.Forms.Label()
         Me.lblNumeric = New System.Windows.Forms.Label()
-        Me.ucrSaveModels = New instat.ucrSave()
-        Me.ucrChkConvertToVariate = New instat.ucrCheck()
-        Me.ucrReceiverExplanatory = New instat.ucrReceiverSingle()
-        Me.ucrReceiverResponse = New instat.ucrReceiverSingle()
-        Me.ucrSelectorSimpleReg = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrPnlModelType = New instat.UcrPanel()
-        Me.ucrModelPreview = New instat.ucrInputTextBox()
-        Me.ucrDistributionChoice = New instat.ucrDistributions()
-        Me.ucrBase = New instat.ucrButtons()
         Me.grpParameters = New System.Windows.Forms.GroupBox()
         Me.rdoCompareVariance = New System.Windows.Forms.RadioButton()
         Me.rdoCompareMeans = New System.Windows.Forms.RadioButton()
@@ -68,6 +59,15 @@ Partial Class dlgTwoVariableFitModel
         Me.lblDifferenceInMeans = New System.Windows.Forms.Label()
         Me.lblConfidenceInterval = New System.Windows.Forms.Label()
         Me.cmdExplanatoryFunction = New System.Windows.Forms.Button()
+        Me.ucrSaveModels = New instat.ucrSave()
+        Me.ucrChkConvertToVariate = New instat.ucrCheck()
+        Me.ucrReceiverExplanatory = New instat.ucrReceiverSingle()
+        Me.ucrReceiverResponse = New instat.ucrReceiverSingle()
+        Me.ucrSelectorSimpleReg = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrPnlModelType = New instat.UcrPanel()
+        Me.ucrModelPreview = New instat.ucrInputTextBox()
+        Me.ucrDistributionChoice = New instat.ucrDistributions()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpParameters.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -108,7 +108,7 @@ Partial Class dlgTwoVariableFitModel
         'cmdDisplayOptions
         '
         Me.cmdDisplayOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(341, 364)
+        Me.cmdDisplayOptions.Location = New System.Drawing.Point(341, 388)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
         Me.cmdDisplayOptions.Size = New System.Drawing.Size(110, 23)
         Me.cmdDisplayOptions.TabIndex = 16
@@ -119,7 +119,7 @@ Partial Class dlgTwoVariableFitModel
         'cmdModelOptions
         '
         Me.cmdModelOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdModelOptions.Location = New System.Drawing.Point(341, 336)
+        Me.cmdModelOptions.Location = New System.Drawing.Point(341, 360)
         Me.cmdModelOptions.Name = "cmdModelOptions"
         Me.cmdModelOptions.Size = New System.Drawing.Size(110, 23)
         Me.cmdModelOptions.TabIndex = 15
@@ -131,7 +131,7 @@ Partial Class dlgTwoVariableFitModel
         '
         Me.lblModelPreview.AutoSize = True
         Me.lblModelPreview.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblModelPreview.Location = New System.Drawing.Point(10, 339)
+        Me.lblModelPreview.Location = New System.Drawing.Point(10, 363)
         Me.lblModelPreview.Name = "lblModelPreview"
         Me.lblModelPreview.Size = New System.Drawing.Size(80, 13)
         Me.lblModelPreview.TabIndex = 12
@@ -171,7 +171,7 @@ Partial Class dlgTwoVariableFitModel
         '
         Me.lblFactor.AutoSize = True
         Me.lblFactor.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFactor.Location = New System.Drawing.Point(264, 147)
+        Me.lblFactor.Location = New System.Drawing.Point(267, 150)
         Me.lblFactor.Name = "lblFactor"
         Me.lblFactor.Size = New System.Drawing.Size(106, 13)
         Me.lblFactor.TabIndex = 7
@@ -181,91 +181,11 @@ Partial Class dlgTwoVariableFitModel
         '
         Me.lblNumeric.AutoSize = True
         Me.lblNumeric.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNumeric.Location = New System.Drawing.Point(264, 85)
+        Me.lblNumeric.Location = New System.Drawing.Point(267, 85)
         Me.lblNumeric.Name = "lblNumeric"
         Me.lblNumeric.Size = New System.Drawing.Size(99, 13)
         Me.lblNumeric.TabIndex = 4
         Me.lblNumeric.Text = "Response Variable:"
-        '
-        'ucrSaveModels
-        '
-        Me.ucrSaveModels.Location = New System.Drawing.Point(10, 366)
-        Me.ucrSaveModels.Name = "ucrSaveModels"
-        Me.ucrSaveModels.Size = New System.Drawing.Size(291, 24)
-        Me.ucrSaveModels.TabIndex = 14
-        '
-        'ucrChkConvertToVariate
-        '
-        Me.ucrChkConvertToVariate.Checked = False
-        Me.ucrChkConvertToVariate.Location = New System.Drawing.Point(267, 122)
-        Me.ucrChkConvertToVariate.Name = "ucrChkConvertToVariate"
-        Me.ucrChkConvertToVariate.Size = New System.Drawing.Size(120, 20)
-        Me.ucrChkConvertToVariate.TabIndex = 6
-        '
-        'ucrReceiverExplanatory
-        '
-        Me.ucrReceiverExplanatory.frmParent = Me
-        Me.ucrReceiverExplanatory.Location = New System.Drawing.Point(267, 165)
-        Me.ucrReceiverExplanatory.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverExplanatory.Name = "ucrReceiverExplanatory"
-        Me.ucrReceiverExplanatory.Selector = Nothing
-        Me.ucrReceiverExplanatory.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverExplanatory.strNcFilePath = ""
-        Me.ucrReceiverExplanatory.TabIndex = 8
-        Me.ucrReceiverExplanatory.ucrSelector = Nothing
-        '
-        'ucrReceiverResponse
-        '
-        Me.ucrReceiverResponse.frmParent = Me
-        Me.ucrReceiverResponse.Location = New System.Drawing.Point(267, 99)
-        Me.ucrReceiverResponse.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverResponse.Name = "ucrReceiverResponse"
-        Me.ucrReceiverResponse.Selector = Nothing
-        Me.ucrReceiverResponse.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverResponse.strNcFilePath = ""
-        Me.ucrReceiverResponse.TabIndex = 5
-        Me.ucrReceiverResponse.ucrSelector = Nothing
-        '
-        'ucrSelectorSimpleReg
-        '
-        Me.ucrSelectorSimpleReg.bShowHiddenColumns = False
-        Me.ucrSelectorSimpleReg.bUseCurrentFilter = True
-        Me.ucrSelectorSimpleReg.Location = New System.Drawing.Point(10, 49)
-        Me.ucrSelectorSimpleReg.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorSimpleReg.Name = "ucrSelectorSimpleReg"
-        Me.ucrSelectorSimpleReg.Size = New System.Drawing.Size(226, 186)
-        Me.ucrSelectorSimpleReg.TabIndex = 3
-        '
-        'ucrPnlModelType
-        '
-        Me.ucrPnlModelType.Location = New System.Drawing.Point(93, 3)
-        Me.ucrPnlModelType.Name = "ucrPnlModelType"
-        Me.ucrPnlModelType.Size = New System.Drawing.Size(267, 43)
-        Me.ucrPnlModelType.TabIndex = 0
-        '
-        'ucrModelPreview
-        '
-        Me.ucrModelPreview.AddQuotesIfUnrecognised = True
-        Me.ucrModelPreview.IsMultiline = False
-        Me.ucrModelPreview.IsReadOnly = False
-        Me.ucrModelPreview.Location = New System.Drawing.Point(97, 337)
-        Me.ucrModelPreview.Name = "ucrModelPreview"
-        Me.ucrModelPreview.Size = New System.Drawing.Size(204, 21)
-        Me.ucrModelPreview.TabIndex = 13
-        '
-        'ucrDistributionChoice
-        '
-        Me.ucrDistributionChoice.Location = New System.Drawing.Point(10, 244)
-        Me.ucrDistributionChoice.Name = "ucrDistributionChoice"
-        Me.ucrDistributionChoice.Size = New System.Drawing.Size(208, 27)
-        Me.ucrDistributionChoice.TabIndex = 11
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 396)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(406, 54)
-        Me.ucrBase.TabIndex = 17
         '
         'grpParameters
         '
@@ -277,7 +197,7 @@ Partial Class dlgTwoVariableFitModel
         Me.grpParameters.Controls.Add(Me.ucrNudCI)
         Me.grpParameters.Controls.Add(Me.lblDifferenceInMeans)
         Me.grpParameters.Controls.Add(Me.lblConfidenceInterval)
-        Me.grpParameters.Location = New System.Drawing.Point(268, 187)
+        Me.grpParameters.Location = New System.Drawing.Point(268, 212)
         Me.grpParameters.Name = "grpParameters"
         Me.grpParameters.Size = New System.Drawing.Size(183, 137)
         Me.grpParameters.TabIndex = 9
@@ -369,18 +289,98 @@ Partial Class dlgTwoVariableFitModel
         '
         'cmdExplanatoryFunction
         '
-        Me.cmdExplanatoryFunction.Location = New System.Drawing.Point(267, 192)
+        Me.cmdExplanatoryFunction.Location = New System.Drawing.Point(268, 186)
         Me.cmdExplanatoryFunction.Name = "cmdExplanatoryFunction"
         Me.cmdExplanatoryFunction.Size = New System.Drawing.Size(103, 23)
         Me.cmdExplanatoryFunction.TabIndex = 10
         Me.cmdExplanatoryFunction.Text = "Function..."
         Me.cmdExplanatoryFunction.UseVisualStyleBackColor = True
         '
+        'ucrSaveModels
+        '
+        Me.ucrSaveModels.Location = New System.Drawing.Point(10, 390)
+        Me.ucrSaveModels.Name = "ucrSaveModels"
+        Me.ucrSaveModels.Size = New System.Drawing.Size(291, 24)
+        Me.ucrSaveModels.TabIndex = 14
+        '
+        'ucrChkConvertToVariate
+        '
+        Me.ucrChkConvertToVariate.Checked = False
+        Me.ucrChkConvertToVariate.Location = New System.Drawing.Point(270, 122)
+        Me.ucrChkConvertToVariate.Name = "ucrChkConvertToVariate"
+        Me.ucrChkConvertToVariate.Size = New System.Drawing.Size(120, 20)
+        Me.ucrChkConvertToVariate.TabIndex = 6
+        '
+        'ucrReceiverExplanatory
+        '
+        Me.ucrReceiverExplanatory.frmParent = Me
+        Me.ucrReceiverExplanatory.Location = New System.Drawing.Point(268, 163)
+        Me.ucrReceiverExplanatory.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverExplanatory.Name = "ucrReceiverExplanatory"
+        Me.ucrReceiverExplanatory.Selector = Nothing
+        Me.ucrReceiverExplanatory.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverExplanatory.strNcFilePath = ""
+        Me.ucrReceiverExplanatory.TabIndex = 8
+        Me.ucrReceiverExplanatory.ucrSelector = Nothing
+        '
+        'ucrReceiverResponse
+        '
+        Me.ucrReceiverResponse.frmParent = Me
+        Me.ucrReceiverResponse.Location = New System.Drawing.Point(270, 98)
+        Me.ucrReceiverResponse.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverResponse.Name = "ucrReceiverResponse"
+        Me.ucrReceiverResponse.Selector = Nothing
+        Me.ucrReceiverResponse.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverResponse.strNcFilePath = ""
+        Me.ucrReceiverResponse.TabIndex = 5
+        Me.ucrReceiverResponse.ucrSelector = Nothing
+        '
+        'ucrSelectorSimpleReg
+        '
+        Me.ucrSelectorSimpleReg.bShowHiddenColumns = False
+        Me.ucrSelectorSimpleReg.bUseCurrentFilter = True
+        Me.ucrSelectorSimpleReg.Location = New System.Drawing.Point(10, 49)
+        Me.ucrSelectorSimpleReg.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorSimpleReg.Name = "ucrSelectorSimpleReg"
+        Me.ucrSelectorSimpleReg.Size = New System.Drawing.Size(226, 186)
+        Me.ucrSelectorSimpleReg.TabIndex = 3
+        '
+        'ucrPnlModelType
+        '
+        Me.ucrPnlModelType.Location = New System.Drawing.Point(93, 3)
+        Me.ucrPnlModelType.Name = "ucrPnlModelType"
+        Me.ucrPnlModelType.Size = New System.Drawing.Size(267, 43)
+        Me.ucrPnlModelType.TabIndex = 0
+        '
+        'ucrModelPreview
+        '
+        Me.ucrModelPreview.AddQuotesIfUnrecognised = True
+        Me.ucrModelPreview.IsMultiline = False
+        Me.ucrModelPreview.IsReadOnly = False
+        Me.ucrModelPreview.Location = New System.Drawing.Point(97, 361)
+        Me.ucrModelPreview.Name = "ucrModelPreview"
+        Me.ucrModelPreview.Size = New System.Drawing.Size(204, 21)
+        Me.ucrModelPreview.TabIndex = 13
+        '
+        'ucrDistributionChoice
+        '
+        Me.ucrDistributionChoice.Location = New System.Drawing.Point(10, 244)
+        Me.ucrDistributionChoice.Name = "ucrDistributionChoice"
+        Me.ucrDistributionChoice.Size = New System.Drawing.Size(208, 27)
+        Me.ucrDistributionChoice.TabIndex = 11
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 424)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(406, 54)
+        Me.ucrBase.TabIndex = 17
+        '
         'dlgTwoVariableFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(466, 452)
+        Me.ClientSize = New System.Drawing.Size(462, 478)
         Me.Controls.Add(Me.cmdExplanatoryFunction)
         Me.Controls.Add(Me.grpParameters)
         Me.Controls.Add(Me.ucrSaveModels)

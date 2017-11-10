@@ -389,6 +389,7 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub ucrPnlFormat_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFormat.ControlValueChanged, ucrInputFormat.ControlValueChanged, ucrInputOrigin.ControlValueChanged
+        ucrReceiverForDate.RemoveIncludedMetadataProperty("class")
         If rdoDefaultFormat.Checked Then
             grpFormats.Hide()
             cmdHelp.Visible = False
@@ -399,7 +400,6 @@ Public Class dlgMakeDate
             cmdHelp.Visible = False
             ucrReceiverForDate.SetIncludedDataTypes({"numeric"})
         Else
-            ucrReceiverForDate.SetIncludedDataTypes({"numeric", "character", "factor", "integer"})
             grpFormats.Show()
             cmdHelp.Visible = True
         End If
