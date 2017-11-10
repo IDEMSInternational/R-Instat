@@ -390,6 +390,7 @@ Imports RDotNet
 
     Public Sub SetAutoSaveDataMinutes(iNewMinutes As Integer)
         iAutoSaveDataMinutes = iNewMinutes
+        frmMain.ResetTimer()
     End Sub
 
     Public Sub SetShowWaitDialog(bNewShow As Boolean)
