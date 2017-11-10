@@ -85,8 +85,9 @@ Public Class frmMain
 
         'Do this after setting up R Link because loading options may run R code
         LoadInstatOptions()
-        autoTranslate(Me)
-
+        If clsInstatOptions.strLanguageCultureCode <> "en-GB" Then
+            autoTranslate(Me)
+        End If
         'Do this after loading options because interval depends on options
         'Interval is in milliseconds and option is in minutes
         timer.Interval = (clsInstatOptions.iAutoSaveDataMinutes * 60 * 1000)

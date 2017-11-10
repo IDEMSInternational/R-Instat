@@ -130,7 +130,7 @@ Public Class dlgScatterPlot
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
-        clsBaseOperator.AddParameter("scatter", clsRFunctionParameter:=clsRScatterGeomFunction)
+        clsBaseOperator.AddParameter("scatter", clsRFunctionParameter:=clsRScatterGeomFunction, iPosition:=2)
 
         clsRggplotFunction.SetPackageName("ggplot2")
         clsRggplotFunction.SetRCommand("ggplot")

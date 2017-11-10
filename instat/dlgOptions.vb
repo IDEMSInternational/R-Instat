@@ -228,7 +228,7 @@ Public Class dlgOptions
             autoTranslate(frmMain)
             'TODO translation containers within frmMain here
         End If
-
+        strPrevLanguageCulture = strCurrLanguageCulture
         'disables the command after running it
         cmdApply.Enabled = True
         cmdOk.Enabled = True
