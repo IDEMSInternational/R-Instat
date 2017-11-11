@@ -43,18 +43,18 @@ Partial Class dlgBoxplot
         Me.lblByFactors = New System.Windows.Forms.Label()
         Me.lblBySecondFactor = New System.Windows.Forms.Label()
         Me.cmdBoxPlotOptions = New System.Windows.Forms.Button()
+        Me.rdoBoxplot = New System.Windows.Forms.RadioButton()
+        Me.rdoJitter = New System.Windows.Forms.RadioButton()
+        Me.rdoViolin = New System.Windows.Forms.RadioButton()
+        Me.ucrSaveBoxplot = New instat.ucrSave()
+        Me.ucrChkHorizontalBoxplot = New instat.ucrCheck()
+        Me.ucrChkVarWidth = New instat.ucrCheck()
         Me.ucrVariablesAsFactorForBoxplot = New instat.ucrVariablesAsFactor()
         Me.ucrSecondFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorBoxPlot = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrByFactorsReceiver = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.rdoBoxplot = New System.Windows.Forms.RadioButton()
-        Me.rdoJitter = New System.Windows.Forms.RadioButton()
-        Me.rdoViolin = New System.Windows.Forms.RadioButton()
         Me.ucrPnlPlots = New instat.UcrPanel()
-        Me.ucrChkVarWidth = New instat.ucrCheck()
-        Me.ucrChkHorizontalBoxplot = New instat.ucrCheck()
-        Me.ucrSaveBoxplot = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -82,6 +82,53 @@ Partial Class dlgBoxplot
         Me.cmdBoxPlotOptions.Name = "cmdBoxPlotOptions"
         Me.cmdBoxPlotOptions.Tag = "Boxplot_Options"
         Me.cmdBoxPlotOptions.UseVisualStyleBackColor = True
+        '
+        'rdoBoxplot
+        '
+        resources.ApplyResources(Me.rdoBoxplot, "rdoBoxplot")
+        Me.rdoBoxplot.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoBoxplot.FlatAppearance.BorderSize = 2
+        Me.rdoBoxplot.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoBoxplot.Name = "rdoBoxplot"
+        Me.rdoBoxplot.TabStop = True
+        Me.rdoBoxplot.UseVisualStyleBackColor = True
+        '
+        'rdoJitter
+        '
+        resources.ApplyResources(Me.rdoJitter, "rdoJitter")
+        Me.rdoJitter.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoJitter.FlatAppearance.BorderSize = 2
+        Me.rdoJitter.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoJitter.Name = "rdoJitter"
+        Me.rdoJitter.TabStop = True
+        Me.rdoJitter.UseVisualStyleBackColor = True
+        '
+        'rdoViolin
+        '
+        resources.ApplyResources(Me.rdoViolin, "rdoViolin")
+        Me.rdoViolin.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoViolin.FlatAppearance.BorderSize = 2
+        Me.rdoViolin.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoViolin.Name = "rdoViolin"
+        Me.rdoViolin.TabStop = True
+        Me.rdoViolin.UseVisualStyleBackColor = True
+        '
+        'ucrSaveBoxplot
+        '
+        resources.ApplyResources(Me.ucrSaveBoxplot, "ucrSaveBoxplot")
+        Me.ucrSaveBoxplot.Name = "ucrSaveBoxplot"
+        '
+        'ucrChkHorizontalBoxplot
+        '
+        Me.ucrChkHorizontalBoxplot.Checked = False
+        resources.ApplyResources(Me.ucrChkHorizontalBoxplot, "ucrChkHorizontalBoxplot")
+        Me.ucrChkHorizontalBoxplot.Name = "ucrChkHorizontalBoxplot"
+        '
+        'ucrChkVarWidth
+        '
+        Me.ucrChkVarWidth.Checked = False
+        resources.ApplyResources(Me.ucrChkVarWidth, "ucrChkVarWidth")
+        Me.ucrChkVarWidth.Name = "ucrChkVarWidth"
         '
         'ucrVariablesAsFactorForBoxplot
         '
@@ -123,57 +170,10 @@ Partial Class dlgBoxplot
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'rdoBoxplot
-        '
-        resources.ApplyResources(Me.rdoBoxplot, "rdoBoxplot")
-        Me.rdoBoxplot.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoBoxplot.FlatAppearance.BorderSize = 2
-        Me.rdoBoxplot.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoBoxplot.Name = "rdoBoxplot"
-        Me.rdoBoxplot.TabStop = True
-        Me.rdoBoxplot.UseVisualStyleBackColor = True
-        '
-        'rdoJitter
-        '
-        resources.ApplyResources(Me.rdoJitter, "rdoJitter")
-        Me.rdoJitter.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoJitter.FlatAppearance.BorderSize = 2
-        Me.rdoJitter.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoJitter.Name = "rdoJitter"
-        Me.rdoJitter.TabStop = True
-        Me.rdoJitter.UseVisualStyleBackColor = True
-        '
-        'rdoViolin
-        '
-        resources.ApplyResources(Me.rdoViolin, "rdoViolin")
-        Me.rdoViolin.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoViolin.FlatAppearance.BorderSize = 2
-        Me.rdoViolin.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoViolin.Name = "rdoViolin"
-        Me.rdoViolin.TabStop = True
-        Me.rdoViolin.UseVisualStyleBackColor = True
-        '
         'ucrPnlPlots
         '
         resources.ApplyResources(Me.ucrPnlPlots, "ucrPnlPlots")
         Me.ucrPnlPlots.Name = "ucrPnlPlots"
-        '
-        'ucrChkVarWidth
-        '
-        Me.ucrChkVarWidth.Checked = False
-        resources.ApplyResources(Me.ucrChkVarWidth, "ucrChkVarWidth")
-        Me.ucrChkVarWidth.Name = "ucrChkVarWidth"
-        '
-        'ucrChkHorizontalBoxplot
-        '
-        Me.ucrChkHorizontalBoxplot.Checked = False
-        resources.ApplyResources(Me.ucrChkHorizontalBoxplot, "ucrChkHorizontalBoxplot")
-        Me.ucrChkHorizontalBoxplot.Name = "ucrChkHorizontalBoxplot"
-        '
-        'ucrSaveBoxplot
-        '
-        resources.ApplyResources(Me.ucrSaveBoxplot, "ucrSaveBoxplot")
-        Me.ucrSaveBoxplot.Name = "ucrSaveBoxplot"
         '
         'dlgBoxplot
         '
