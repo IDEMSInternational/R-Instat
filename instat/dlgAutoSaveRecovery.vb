@@ -187,14 +187,15 @@ Public Class dlgAutoSaveRecovery
     End Sub
 
     Private Sub DeleteTempFiles()
-        If strAutoSavedInternalLogFilePaths IsNot Nothing AndAlso strAutoSavedInternalLogFilePaths.Count > 0 AndAlso File.Exists(strAutoSavedInternalLogFilePaths(0)) Then
-            File.Delete(strAutoSavedInternalLogFilePaths(0))
-        End If
-        If strAutoSavedLogFilePaths IsNot Nothing AndAlso strAutoSavedLogFilePaths.Count > 0 AndAlso File.Exists(strAutoSavedLogFilePaths(0)) Then
-            File.Delete(strAutoSavedLogFilePaths(0))
-        End If
-        If strAutoSavedDataFilePaths IsNot Nothing AndAlso strAutoSavedDataFilePaths.Count > 0 AndAlso File.Exists(strAutoSavedDataFilePaths(0)) Then
-            File.Delete(strAutoSavedDataFilePaths(0))
-        End If
+        ' No longer needed as now done after closing
+        'If strAutoSavedInternalLogFilePaths IsNot Nothing AndAlso strAutoSavedInternalLogFilePaths.Count > 0 AndAlso File.Exists(strAutoSavedInternalLogFilePaths(0)) Then
+        '    File.Delete(strAutoSavedInternalLogFilePaths(0))
+        'End If
+        'If strAutoSavedLogFilePaths IsNot Nothing AndAlso strAutoSavedLogFilePaths.Count > 0 AndAlso File.Exists(strAutoSavedLogFilePaths(0)) Then
+        '    File.Delete(strAutoSavedLogFilePaths(0))
+        'End If
+        'If strAutoSavedDataFilePaths IsNot Nothing AndAlso strAutoSavedDataFilePaths.Count > 0 AndAlso File.Exists(strAutoSavedDataFilePaths(0)) Then
+        '    File.Delete(strAutoSavedDataFilePaths(0))
+        'End If
     End Sub
 End Class
