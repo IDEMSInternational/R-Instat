@@ -124,6 +124,12 @@ Public Class frmMain
     Private Sub Application_Idle(sender As Object, e As EventArgs)
         If clsInstatOptions.bAutoSaveData AndAlso Not timer.Enabled AndAlso (ActiveForm Is Nothing OrElse ActiveForm.Equals(Me)) AndAlso Not clsRLink.bRCodeRunning Then
             AutoSaveData()
+            ResetTimer()
+        End If
+    End Sub
+
+    Public Sub ResetTimer()
+        If clsInstatOptions.bAutoSaveData Then
             timer.Interval = (clsInstatOptions.iAutoSaveDataMinutes * 60 * 1000)
             timer.Start()
         End If
@@ -162,33 +168,32 @@ Public Class frmMain
                     dlgAutoSaveRecovery.ShowDialog()
                     strScript = dlgAutoSaveRecovery.GetScript()
                     strDataFilePath = dlgAutoSaveRecovery.GetDataFilePath()
-                Else
-                    If iLogFiles > 0 Then
-                        Try
-                            File.Delete(strAutoSavedLogFilePaths(0))
-                        Catch ex As Exception
-                            MsgBox("Could not delete backup log file" & Environment.NewLine, "Error deleting file")
-                        End Try
-                    End If
-                    If iInternalLogFiles > 0 Then
-                        Try
-                            File.Delete(strAutoSavedInternalLogFilePaths(0))
-                        Catch ex As Exception
-                            MsgBox("Could not delete backup internal log file." & Environment.NewLine & ex.Message, "Error deleting file")
-                        End Try
-                    End If
-                    If iDataFiles > 0 Then
-                        Try
-                            File.Delete(strAutoSavedDataFilePaths(0))
-                        Catch ex As Exception
-                            MsgBox("Could not delete back data file." & Environment.NewLine & ex.Message, "Error deleting file")
-                        End Try
-                    End If
                 End If
             End If
             clsRLink.StartREngine(strScript)
             If strDataFilePath <> "" Then
                 clsRLink.LoadInstatDataObjectFromFile(strDataFilePath, strComment:="Loading auto recovered data file")
+            End If
+            If iLogFiles > 0 Then
+                Try
+                    File.Delete(strAutoSavedLogFilePaths(0))
+                Catch ex As Exception
+                    MsgBox("Could not delete backup log file" & Environment.NewLine, "Error deleting file")
+                End Try
+            End If
+            If iInternalLogFiles > 0 Then
+                Try
+                    File.Delete(strAutoSavedInternalLogFilePaths(0))
+                Catch ex As Exception
+                    MsgBox("Could not delete backup internal log file." & Environment.NewLine & ex.Message, "Error deleting file")
+                End Try
+            End If
+            If iDataFiles > 0 Then
+                Try
+                    File.Delete(strAutoSavedDataFilePaths(0))
+                Catch ex As Exception
+                    MsgBox("Could not delete back data file." & Environment.NewLine & ex.Message, "Error deleting file")
+                End Try
             End If
         End If
     End Sub

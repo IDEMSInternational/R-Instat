@@ -71,6 +71,7 @@ Public Class RLink
         Dim expTemp As SymbolicExpression
         Dim strMajor As String = ""
         Dim strMinor As String = ""
+        Dim iCurrentCallType As Integer
 
         Try
             REngine.SetEnvironmentVariables()
@@ -109,7 +110,12 @@ Public Class RLink
         End If
         For Each strLine As String In strScript.Split(Environment.NewLine)
             If strLine.Trim(vbLf).Count > 0 Then
-                RunScript(strScript:=strLine.Trim(vbLf), iCallType:=iCallType, strComment:=strComment, bSeparateThread:=bSeparateThread, bSilent:=True)
+                If strLine.Contains(strInstatDataObject & "$get_graphs") Then
+                    iCurrentCallType = 3
+                Else
+                    iCurrentCallType = iCallType
+                End If
+                RunScript(strScript:=strLine.Trim(vbLf), iCallType:=iCurrentCallType, strComment:=strComment, bSeparateThread:=bSeparateThread, bSilent:=True)
             End If
             strComment = ""
         Next
@@ -155,10 +161,14 @@ Public Class RLink
 
     Public Sub LoadInstatDataObjectFromFile(strFile As String, Optional strComment As String = "")
         Dim clsReadRDS As New RFunction
+        Dim strScript As String = ""
+        Dim strTemp As String = ""
 
         clsReadRDS.SetRCommand("readRDS")
-        clsReadRDS.AddParameter("file", strFile.Replace("\", "/"))
-        RunScript(clsReadRDS.ToScript(), strComment:=strComment)
+        clsReadRDS.AddParameter("file", Chr(34) & strFile.Replace("\", "/") & Chr(34))
+        clsReadRDS.SetAssignTo(strInstatDataObject)
+        strTemp = clsReadRDS.ToScript(strScript)
+        RunScript(strScript, strComment:=strComment)
         bInstatObjectExists = True
     End Sub
 
