@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cmdOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cmdOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 268</value>
@@ -146,6 +150,9 @@
   <data name="lblByFactors.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblByFactors.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblByFactors.Location" type="System.Drawing.Point, System.Drawing">
     <value>254, 205</value>
   </data>
@@ -173,6 +180,9 @@
   <data name="lblBySecondFactor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblBySecondFactor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblBySecondFactor.Location" type="System.Drawing.Point, System.Drawing">
     <value>254, 249</value>
   </data>
@@ -196,6 +206,9 @@
   </data>
   <data name="&gt;&gt;lblBySecondFactor.ZOrder" xml:space="preserve">
     <value>10</value>
+  </data>
+  <data name="cmdBoxPlotOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cmdBoxPlotOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 237</value>
@@ -221,14 +234,113 @@
   <data name="&gt;&gt;cmdBoxPlotOptions.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+  <data name="rdoBoxplot.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>425, 433</value>
+  <data name="rdoBoxplot.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoBoxplot.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoBoxplot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>60, 11</value>
+  </data>
+  <data name="rdoBoxplot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 27</value>
+  </data>
+  <data name="rdoBoxplot.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoBoxplot.Text" xml:space="preserve">
+    <value>Boxplot</value>
+  </data>
+  <data name="rdoBoxplot.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoBoxplot.Name" xml:space="preserve">
+    <value>rdoBoxplot</value>
+  </data>
+  <data name="&gt;&gt;rdoBoxplot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoBoxplot.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoBoxplot.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="rdoJitter.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoJitter.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoJitter.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoJitter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>156, 11</value>
+  </data>
+  <data name="rdoJitter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 27</value>
+  </data>
+  <data name="rdoJitter.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rdoJitter.Text" xml:space="preserve">
+    <value>Jitter Plot</value>
+  </data>
+  <data name="rdoJitter.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoJitter.Name" xml:space="preserve">
+    <value>rdoJitter</value>
+  </data>
+  <data name="&gt;&gt;rdoJitter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoJitter.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoJitter.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="rdoViolin.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoViolin.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoViolin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoViolin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>252, 11</value>
+  </data>
+  <data name="rdoViolin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 27</value>
+  </data>
+  <data name="rdoViolin.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="rdoViolin.Text" xml:space="preserve">
+    <value>Violin Plot</value>
+  </data>
+  <data name="rdoViolin.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoViolin.Name" xml:space="preserve">
+    <value>rdoViolin</value>
+  </data>
+  <data name="&gt;&gt;rdoViolin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoViolin.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoViolin.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="ucrSaveBoxplot.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 351</value>
@@ -293,105 +405,14 @@
   <data name="&gt;&gt;ucrChkVarWidth.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="rdoViolin.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
   </data>
-  <data name="rdoViolin.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="rdoViolin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 13</value>
-  </data>
-  <data name="rdoViolin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 27</value>
-  </data>
-  <data name="rdoViolin.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="rdoViolin.Text" xml:space="preserve">
-    <value>Violin Plot</value>
-  </data>
-  <data name="rdoViolin.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;rdoViolin.Name" xml:space="preserve">
-    <value>rdoViolin</value>
-  </data>
-  <data name="&gt;&gt;rdoViolin.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoViolin.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;rdoViolin.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="rdoJitter.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="rdoJitter.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="rdoJitter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>163, 13</value>
-  </data>
-  <data name="rdoJitter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 27</value>
-  </data>
-  <data name="rdoJitter.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="rdoJitter.Text" xml:space="preserve">
-    <value>Jitter Plot</value>
-  </data>
-  <data name="rdoJitter.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;rdoJitter.Name" xml:space="preserve">
-    <value>rdoJitter</value>
-  </data>
-  <data name="&gt;&gt;rdoJitter.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoJitter.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;rdoJitter.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="rdoBoxplot.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="rdoBoxplot.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="rdoBoxplot.Location" type="System.Drawing.Point, System.Drawing">
-    <value>67, 13</value>
-  </data>
-  <data name="rdoBoxplot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 27</value>
-  </data>
-  <data name="rdoBoxplot.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="rdoBoxplot.Text" xml:space="preserve">
-    <value>Boxplot</value>
-  </data>
-  <data name="rdoBoxplot.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;rdoBoxplot.Name" xml:space="preserve">
-    <value>rdoBoxplot</value>
-  </data>
-  <data name="&gt;&gt;rdoBoxplot.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoBoxplot.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;rdoBoxplot.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>425, 433</value>
   </data>
   <data name="ucrSecondFactorReceiver.Location" type="System.Drawing.Point, System.Drawing">
     <value>254, 263</value>
@@ -487,10 +508,10 @@
     <value>14</value>
   </data>
   <data name="ucrPnlPlots.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 12</value>
+    <value>23, 3</value>
   </data>
   <data name="ucrPnlPlots.Size" type="System.Drawing.Size, System.Drawing">
-    <value>374, 35</value>
+    <value>374, 61</value>
   </data>
   <data name="ucrPnlPlots.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -506,6 +527,9 @@
   </data>
   <data name="&gt;&gt;ucrPnlPlots.ZOrder" xml:space="preserve">
     <value>15</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
