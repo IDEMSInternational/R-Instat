@@ -28,17 +28,17 @@ Public Class Translations
             'If checkboxes are translated then it overrides the text set in the dialog code
             'If ucrPanels are translated their position is shifted on the dialog - not yet found reason but does not affect button translation
             If TypeOf aControl IsNot ucrCheck AndAlso TypeOf aControl IsNot ucrInput Then
-                If TypeOf aControl Is UcrPanel OrElse TypeOf aControl Is Panel Then
-                    translateEach(aControl.Controls, ctrParent)
-                Else
-                    If TypeOf aControl Is MenuStrip Then
-                        mnuTmp = DirectCast(aControl, MenuStrip)
-                        translateMenu(mnuTmp.Items, ctrParent)
-                    ElseIf TypeOf aControl Is UserControl Then
-                        translateEach(aControl.Controls, aControl)
-                    End If
-                    res.ApplyResources(aControl, aControl.Name, Threading.Thread.CurrentThread.CurrentUICulture)
+                'If TypeOf aControl Is UcrPanel OrElse TypeOf aControl Is Panel Then
+                '    translateEach(aControl.Controls, ctrParent)
+                'Else
+                If TypeOf aControl Is MenuStrip Then
+                    mnuTmp = DirectCast(aControl, MenuStrip)
+                    translateMenu(mnuTmp.Items, ctrParent)
+                ElseIf TypeOf aControl Is UserControl Then
+                    translateEach(aControl.Controls, aControl)
                 End If
+                res.ApplyResources(aControl, aControl.Name, Threading.Thread.CurrentThread.CurrentUICulture)
+                'End If
             End If
         Next
 
