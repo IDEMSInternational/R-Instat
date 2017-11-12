@@ -2695,6 +2695,9 @@
     <EmbeddedResource Include="dlgRecodeNumericIntoQuantiles.sw-KE.resx">
       <DependentUpon>dlgRecodeNumericIntoQuantiles.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgRenameDataFrame.resx">
+      <DependentUpon>dlgRenameDataFrame.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgRowNamesOrNumbers.fr-FR.resx">
       <DependentUpon>dlgRowNamesOrNumbers.vb</DependentUpon>
     </EmbeddedResource>
