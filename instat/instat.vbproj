@@ -2407,6 +2407,12 @@
     <EmbeddedResource Include="dlgContrasts.sw-KE.resx">
       <DependentUpon>dlgContrasts.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCopyDataFrame.resx">
+      <DependentUpon>dlgCopyDataFrame.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCopySheet.fr-FR.resx" />
+    <EmbeddedResource Include="dlgCopySheet.resx" />
+    <EmbeddedResource Include="dlgCopySheet.sw-KE.resx" />
     <EmbeddedResource Include="dlgCorruptionDescribe.fr-FR.resx">
       <DependentUpon>dlgCorruptionDescribe.vb</DependentUpon>
     </EmbeddedResource>
