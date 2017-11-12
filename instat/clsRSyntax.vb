@@ -42,6 +42,7 @@ Public Class RSyntax
     Public bExcludeAssignedFunctionOutput As Boolean = True
 
     Public bSeparateThread As Boolean = True
+    Public bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing
 
     Public Sub SetFunction(strFunctionName As String)
         'Warning: confusing name

@@ -155,9 +155,11 @@ Public Class dlgContrasts
             clsFactorColumn.AddParameter("col_name", ucrReceiverForContrasts.GetVariableNames())
             clsFactorColumn.AddParameter("data_name", Chr(34) & ucrSelectorForContrast.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
             clsNlevels.AddParameter("x", clsRFunctionParameter:=clsFactorColumn)
-            grdCurrSheet.Rows = frmMain.clsRLink.RunInternalScriptGetValue(clsNlevels.ToScript).AsNumeric(0)
-            grdCurrSheet.Columns = grdCurrSheet.Rows - 1
-            grdLayoutForContrasts.Enabled = True
+            If grdCurrSheet IsNot Nothing Then
+                grdCurrSheet.Rows = frmMain.clsRLink.RunInternalScriptGetValue(clsNlevels.ToScript).AsNumeric(0)
+                grdCurrSheet.Columns = grdCurrSheet.Rows - 1
+                grdLayoutForContrasts.Enabled = True
+            End If
         Else
             Me.Size = New Size(iFullWidth / 1.86, Me.Height)
             clsFactorColumn.RemoveParameterByName("col_name")
@@ -180,13 +182,15 @@ Public Class dlgContrasts
     End Sub
 
     Public Function IsEmptyCells() As Boolean
-        For i = 0 To grdCurrSheet.ColumnCount - 1
-            For j = 0 To grdCurrSheet.RowCount - 1
-                If grdCurrSheet(row:=j, col:=i) Is Nothing Then
-                    Return True
-                End If
+        If grdCurrSheet IsNot Nothing Then
+            For i = 0 To grdCurrSheet.ColumnCount - 1
+                For j = 0 To grdCurrSheet.RowCount - 1
+                    If grdCurrSheet(row:=j, col:=i) Is Nothing Then
+                        Return True
+                    End If
+                Next
             Next
-        Next
+        End If
         Return False
     End Function
 
