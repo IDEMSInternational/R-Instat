@@ -2407,6 +2407,12 @@
     <EmbeddedResource Include="dlgContrasts.sw-KE.resx">
       <DependentUpon>dlgContrasts.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCopyDataFrame.resx">
+      <DependentUpon>dlgCopyDataFrame.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCopySheet.fr-FR.resx" />
+    <EmbeddedResource Include="dlgCopySheet.resx" />
+    <EmbeddedResource Include="dlgCopySheet.sw-KE.resx" />
     <EmbeddedResource Include="dlgCorruptionDescribe.fr-FR.resx">
       <DependentUpon>dlgCorruptionDescribe.vb</DependentUpon>
     </EmbeddedResource>
@@ -2694,6 +2700,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRecodeNumericIntoQuantiles.sw-KE.resx">
       <DependentUpon>dlgRecodeNumericIntoQuantiles.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRenameDataFrame.resx">
+      <DependentUpon>dlgRenameDataFrame.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRowNamesOrNumbers.fr-FR.resx">
       <DependentUpon>dlgRowNamesOrNumbers.vb</DependentUpon>

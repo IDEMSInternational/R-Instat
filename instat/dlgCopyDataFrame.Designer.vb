@@ -39,24 +39,24 @@ Partial Class dlgCopyDataFrame
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgCopyDataFrame))
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrDataFrameCopySheets = New instat.ucrDataFrame()
-        Me.ucrInputLabel = New instat.ucrInputTextBox()
         Me.lblLabel = New System.Windows.Forms.Label()
-        Me.ucrInputNewDataFrameName = New instat.ucrInputTextBox()
         Me.lblNewName = New System.Windows.Forms.Label()
+        Me.ucrInputLabel = New instat.ucrInputTextBox()
+        Me.ucrInputNewDataFrameName = New instat.ucrInputTextBox()
+        Me.ucrDataFrameCopySheets = New instat.ucrDataFrame()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
-        'ucrBase
+        'lblLabel
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
+        resources.ApplyResources(Me.lblLabel, "lblLabel")
+        Me.lblLabel.Name = "lblLabel"
         '
-        'ucrDataFrameCopySheets
+        'lblNewName
         '
-        Me.ucrDataFrameCopySheets.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrDataFrameCopySheets, "ucrDataFrameCopySheets")
-        Me.ucrDataFrameCopySheets.Name = "ucrDataFrameCopySheets"
+        resources.ApplyResources(Me.lblNewName, "lblNewName")
+        Me.lblNewName.Name = "lblNewName"
+        Me.lblNewName.Tag = "New_Name"
         '
         'ucrInputLabel
         '
@@ -66,11 +66,6 @@ Partial Class dlgCopyDataFrame
         resources.ApplyResources(Me.ucrInputLabel, "ucrInputLabel")
         Me.ucrInputLabel.Name = "ucrInputLabel"
         '
-        'lblLabel
-        '
-        resources.ApplyResources(Me.lblLabel, "lblLabel")
-        Me.lblLabel.Name = "lblLabel"
-        '
         'ucrInputNewDataFrameName
         '
         Me.ucrInputNewDataFrameName.AddQuotesIfUnrecognised = True
@@ -79,11 +74,16 @@ Partial Class dlgCopyDataFrame
         resources.ApplyResources(Me.ucrInputNewDataFrameName, "ucrInputNewDataFrameName")
         Me.ucrInputNewDataFrameName.Name = "ucrInputNewDataFrameName"
         '
-        'lblNewName
+        'ucrDataFrameCopySheets
         '
-        resources.ApplyResources(Me.lblNewName, "lblNewName")
-        Me.lblNewName.Name = "lblNewName"
-        Me.lblNewName.Tag = "New_Name"
+        Me.ucrDataFrameCopySheets.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrDataFrameCopySheets, "ucrDataFrameCopySheets")
+        Me.ucrDataFrameCopySheets.Name = "ucrDataFrameCopySheets"
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
         '
         'dlgCopyDataFrame
         '
