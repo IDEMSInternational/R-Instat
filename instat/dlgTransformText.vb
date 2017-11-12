@@ -20,7 +20,7 @@ Public Class dlgTransformText
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsConvertFunction, clsLengthFunction, clsPadFunction, clsTrimFunction, clsWordsFunction, clsSubstringFunction As New RFunction
-    Private bRCodeSet As Boolean = True
+    Private bRCodeSet As Boolean = False
     Private iFullHeight As Integer
     Private igrpParameterFullHeight As Integer
     Private iBaseMaxY As Integer
