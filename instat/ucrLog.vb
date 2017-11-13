@@ -15,7 +15,11 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.IO
+Imports RDotNet
+Imports instat
+
 Public Class ucrLog
+    Public clsRLink As New RLink
     Public strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
     Public Sub CopyText()
         txtLog.Copy()
@@ -58,5 +62,12 @@ Public Class ucrLog
         txtLog.SelectionStart = txtLog.Text.Length
         txtLog.ScrollToCaret()
         txtLog.Refresh()
+    End Sub
+
+    Private Sub mnuRunSelectedText_Click(sender As Object, e As EventArgs) Handles mnuRunSelectedText.Click
+        If MsgBox("This may give errors if a selection is incomplete or if the data has changed.", MessageBoxButtons.YesNo) = MsgBoxResult.Yes Then
+            'run code here
+
+        End If
     End Sub
 End Class
