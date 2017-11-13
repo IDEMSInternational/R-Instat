@@ -225,7 +225,10 @@ Public Class sdgThemes
             InitialiseControls()
         End If
         clsThemeFunction = clsNewThemeFunction
-        clsBaseOperator.AddParameter("theme_name", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
+        ' The position MUST be larger than the position of the theme_* argument
+        ' Otherwise the choice of theme will overwrite the options selected here.
+        ' Currently set to large value as no reason this cannot be at the end currently
+        clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=100)
 
         dctThemeFunctions = dctNewThemeFunctions
         dctThemeFunctions.TryGetValue("axis.text", clsElementTickText)
@@ -411,9 +414,12 @@ Public Class sdgThemes
 
     Private Sub AddRemoveTheme()
         If clsThemeFunction.iParameterCount > 0 Then
-            clsBaseOperator.AddParameter("theme_name", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
+            ' The position MUST be larger than the position of the theme_* argument
+            ' Otherwise the choice of theme will overwrite the options selected here.
+            ' Currently set to large value as no reason this cannot be at the end currently
+            clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=100)
         Else
-            clsBaseOperator.RemoveParameterByName("theme_name")
+            clsBaseOperator.RemoveParameterByName("theme")
         End If
     End Sub
 
