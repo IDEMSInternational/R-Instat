@@ -65,9 +65,15 @@ Public Class ucrLog
     End Sub
 
     Private Sub mnuRunSelectedText_Click(sender As Object, e As EventArgs) Handles mnuRunSelectedText.Click
-        If MsgBox("This may give errors if a selection is incomplete or if the data has changed.", MessageBoxButtons.YesNo) = MsgBoxResult.Yes Then
-            'run code here
 
+        If txtLog.SelectedText.Count <> 0 Then
+            If MsgBox("This may give errors if a selection is incomplete or if the data has changed.", MessageBoxButtons.YesNo) = MsgBoxResult.Yes Then
+                'run code here
+
+            End If
+        Else
+            MsgBox("You need to select some text before running", vbOKOnly)
         End If
+
     End Sub
 End Class
