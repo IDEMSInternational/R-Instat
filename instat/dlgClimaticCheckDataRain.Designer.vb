@@ -41,12 +41,18 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrSelectorRain = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrNudLarge = New instat.ucrNud()
+        Me.ucrNudSame = New instat.ucrNud()
+        Me.ucrNudWetDays = New instat.ucrNud()
+        Me.lblNewColName = New System.Windows.Forms.Label()
+        Me.ucrInputSave = New instat.ucrInputTextBox()
+        Me.lblmm = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblStation
         '
         Me.lblStation.AutoSize = True
-        Me.lblStation.Location = New System.Drawing.Point(253, 45)
+        Me.lblStation.Location = New System.Drawing.Point(256, 22)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(40, 13)
         Me.lblStation.TabIndex = 2
@@ -55,7 +61,7 @@ Partial Class dlgClimaticCheckDataRain
         'lblDate
         '
         Me.lblDate.AutoSize = True
-        Me.lblDate.Location = New System.Drawing.Point(256, 88)
+        Me.lblDate.Location = New System.Drawing.Point(256, 69)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(30, 13)
         Me.lblDate.TabIndex = 4
@@ -64,7 +70,7 @@ Partial Class dlgClimaticCheckDataRain
         'lblYear
         '
         Me.lblYear.AutoSize = True
-        Me.lblYear.Location = New System.Drawing.Point(256, 131)
+        Me.lblYear.Location = New System.Drawing.Point(256, 113)
         Me.lblYear.Name = "lblYear"
         Me.lblYear.Size = New System.Drawing.Size(29, 13)
         Me.lblYear.TabIndex = 4
@@ -73,7 +79,7 @@ Partial Class dlgClimaticCheckDataRain
         'lblDay
         '
         Me.lblDay.AutoSize = True
-        Me.lblDay.Location = New System.Drawing.Point(255, 217)
+        Me.lblDay.Location = New System.Drawing.Point(256, 199)
         Me.lblDay.Name = "lblDay"
         Me.lblDay.Size = New System.Drawing.Size(26, 13)
         Me.lblDay.TabIndex = 4
@@ -82,7 +88,7 @@ Partial Class dlgClimaticCheckDataRain
         'lblMonth
         '
         Me.lblMonth.AutoSize = True
-        Me.lblMonth.Location = New System.Drawing.Point(258, 174)
+        Me.lblMonth.Location = New System.Drawing.Point(256, 155)
         Me.lblMonth.Name = "lblMonth"
         Me.lblMonth.Size = New System.Drawing.Size(37, 13)
         Me.lblMonth.TabIndex = 4
@@ -91,7 +97,7 @@ Partial Class dlgClimaticCheckDataRain
         'lblElement
         '
         Me.lblElement.AutoSize = True
-        Me.lblElement.Location = New System.Drawing.Point(258, 260)
+        Me.lblElement.Location = New System.Drawing.Point(256, 245)
         Me.lblElement.Name = "lblElement"
         Me.lblElement.Size = New System.Drawing.Size(45, 13)
         Me.lblElement.TabIndex = 4
@@ -100,7 +106,7 @@ Partial Class dlgClimaticCheckDataRain
         'ucrChkOutlier
         '
         Me.ucrChkOutlier.Checked = False
-        Me.ucrChkOutlier.Location = New System.Drawing.Point(10, 292)
+        Me.ucrChkOutlier.Location = New System.Drawing.Point(10, 303)
         Me.ucrChkOutlier.Name = "ucrChkOutlier"
         Me.ucrChkOutlier.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkOutlier.TabIndex = 6
@@ -108,7 +114,7 @@ Partial Class dlgClimaticCheckDataRain
         'ucrChkDryMonth
         '
         Me.ucrChkDryMonth.Checked = False
-        Me.ucrChkDryMonth.Location = New System.Drawing.Point(10, 268)
+        Me.ucrChkDryMonth.Location = New System.Drawing.Point(10, 279)
         Me.ucrChkDryMonth.Name = "ucrChkDryMonth"
         Me.ucrChkDryMonth.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkDryMonth.TabIndex = 6
@@ -116,7 +122,7 @@ Partial Class dlgClimaticCheckDataRain
         'ucrChkWetDays
         '
         Me.ucrChkWetDays.Checked = False
-        Me.ucrChkWetDays.Location = New System.Drawing.Point(12, 244)
+        Me.ucrChkWetDays.Location = New System.Drawing.Point(10, 255)
         Me.ucrChkWetDays.Name = "ucrChkWetDays"
         Me.ucrChkWetDays.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkWetDays.TabIndex = 6
@@ -124,7 +130,7 @@ Partial Class dlgClimaticCheckDataRain
         'ucrChkSame
         '
         Me.ucrChkSame.Checked = False
-        Me.ucrChkSame.Location = New System.Drawing.Point(13, 220)
+        Me.ucrChkSame.Location = New System.Drawing.Point(10, 231)
         Me.ucrChkSame.Name = "ucrChkSame"
         Me.ucrChkSame.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkSame.TabIndex = 6
@@ -132,7 +138,7 @@ Partial Class dlgClimaticCheckDataRain
         'ucrChkLarge
         '
         Me.ucrChkLarge.Checked = False
-        Me.ucrChkLarge.Location = New System.Drawing.Point(13, 196)
+        Me.ucrChkLarge.Location = New System.Drawing.Point(10, 207)
         Me.ucrChkLarge.Name = "ucrChkLarge"
         Me.ucrChkLarge.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkLarge.TabIndex = 6
@@ -140,7 +146,7 @@ Partial Class dlgClimaticCheckDataRain
         'ucrReceiverMonth
         '
         Me.ucrReceiverMonth.frmParent = Me
-        Me.ucrReceiverMonth.Location = New System.Drawing.Point(256, 197)
+        Me.ucrReceiverMonth.Location = New System.Drawing.Point(256, 172)
         Me.ucrReceiverMonth.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMonth.Name = "ucrReceiverMonth"
         Me.ucrReceiverMonth.Selector = Nothing
@@ -152,7 +158,7 @@ Partial Class dlgClimaticCheckDataRain
         'ucrReceiverElement
         '
         Me.ucrReceiverElement.frmParent = Me
-        Me.ucrReceiverElement.Location = New System.Drawing.Point(256, 273)
+        Me.ucrReceiverElement.Location = New System.Drawing.Point(256, 258)
         Me.ucrReceiverElement.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverElement.Name = "ucrReceiverElement"
         Me.ucrReceiverElement.Selector = Nothing
@@ -164,7 +170,7 @@ Partial Class dlgClimaticCheckDataRain
         'ucrReceiverDay
         '
         Me.ucrReceiverDay.frmParent = Me
-        Me.ucrReceiverDay.Location = New System.Drawing.Point(256, 240)
+        Me.ucrReceiverDay.Location = New System.Drawing.Point(256, 215)
         Me.ucrReceiverDay.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDay.Name = "ucrReceiverDay"
         Me.ucrReceiverDay.Selector = Nothing
@@ -176,7 +182,7 @@ Partial Class dlgClimaticCheckDataRain
         'ucrReceiverYear
         '
         Me.ucrReceiverYear.frmParent = Me
-        Me.ucrReceiverYear.Location = New System.Drawing.Point(256, 154)
+        Me.ucrReceiverYear.Location = New System.Drawing.Point(256, 129)
         Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverYear.Name = "ucrReceiverYear"
         Me.ucrReceiverYear.Selector = Nothing
@@ -188,7 +194,7 @@ Partial Class dlgClimaticCheckDataRain
         'ucrReceiverDate
         '
         Me.ucrReceiverDate.frmParent = Me
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(256, 111)
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(256, 86)
         Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing
@@ -200,7 +206,7 @@ Partial Class dlgClimaticCheckDataRain
         'ucrReceiverStation
         '
         Me.ucrReceiverStation.frmParent = Me
-        Me.ucrReceiverStation.Location = New System.Drawing.Point(256, 63)
+        Me.ucrReceiverStation.Location = New System.Drawing.Point(256, 38)
         Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStation.Name = "ucrReceiverStation"
         Me.ucrReceiverStation.Selector = Nothing
@@ -213,7 +219,7 @@ Partial Class dlgClimaticCheckDataRain
         '
         Me.ucrSelectorRain.bShowHiddenColumns = False
         Me.ucrSelectorRain.bUseCurrentFilter = True
-        Me.ucrSelectorRain.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorRain.Location = New System.Drawing.Point(10, 20)
         Me.ucrSelectorRain.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorRain.Name = "ucrSelectorRain"
         Me.ucrSelectorRain.Size = New System.Drawing.Size(210, 180)
@@ -221,16 +227,85 @@ Partial Class dlgClimaticCheckDataRain
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 329)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 354)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
+        '
+        'ucrNudLarge
+        '
+        Me.ucrNudLarge.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLarge.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudLarge.Location = New System.Drawing.Point(122, 207)
+        Me.ucrNudLarge.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+        Me.ucrNudLarge.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLarge.Name = "ucrNudLarge"
+        Me.ucrNudLarge.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudLarge.TabIndex = 7
+        Me.ucrNudLarge.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudSame
+        '
+        Me.ucrNudSame.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSame.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSame.Location = New System.Drawing.Point(122, 231)
+        Me.ucrNudSame.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSame.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSame.Name = "ucrNudSame"
+        Me.ucrNudSame.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSame.TabIndex = 8
+        Me.ucrNudSame.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudWetDays
+        '
+        Me.ucrNudWetDays.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWetDays.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudWetDays.Location = New System.Drawing.Point(122, 255)
+        Me.ucrNudWetDays.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudWetDays.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWetDays.Name = "ucrNudWetDays"
+        Me.ucrNudWetDays.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudWetDays.TabIndex = 9
+        Me.ucrNudWetDays.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblNewColName
+        '
+        Me.lblNewColName.Location = New System.Drawing.Point(10, 326)
+        Me.lblNewColName.Name = "lblNewColName"
+        Me.lblNewColName.Size = New System.Drawing.Size(112, 21)
+        Me.lblNewColName.TabIndex = 17
+        Me.lblNewColName.Text = "New Column Name:"
+        '
+        'ucrInputSave
+        '
+        Me.ucrInputSave.AddQuotesIfUnrecognised = True
+        Me.ucrInputSave.IsMultiline = False
+        Me.ucrInputSave.IsReadOnly = False
+        Me.ucrInputSave.Location = New System.Drawing.Point(123, 326)
+        Me.ucrInputSave.Name = "ucrInputSave"
+        Me.ucrInputSave.Size = New System.Drawing.Size(170, 21)
+        Me.ucrInputSave.TabIndex = 18
+        '
+        'lblmm
+        '
+        Me.lblmm.AutoSize = True
+        Me.lblmm.Location = New System.Drawing.Point(175, 211)
+        Me.lblmm.Name = "lblmm"
+        Me.lblmm.Size = New System.Drawing.Size(23, 13)
+        Me.lblmm.TabIndex = 19
+        Me.lblmm.Text = "mm"
         '
         'dlgClimaticCheckDataRain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(423, 388)
+        Me.ClientSize = New System.Drawing.Size(425, 412)
+        Me.Controls.Add(Me.lblmm)
+        Me.Controls.Add(Me.lblNewColName)
+        Me.Controls.Add(Me.ucrInputSave)
+        Me.Controls.Add(Me.ucrNudWetDays)
+        Me.Controls.Add(Me.ucrNudSame)
+        Me.Controls.Add(Me.ucrNudLarge)
         Me.Controls.Add(Me.ucrChkOutlier)
         Me.Controls.Add(Me.ucrChkDryMonth)
         Me.Controls.Add(Me.ucrChkWetDays)
@@ -255,7 +330,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.MinimizeBox = False
         Me.Name = "dlgClimaticCheckDataRain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Climatic Check Data Rain"
+        Me.Text = "Climatic Check Data Rainfall"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -280,4 +355,10 @@ Partial Class dlgClimaticCheckDataRain
     Friend WithEvents ucrReceiverDate As ucrReceiverSingle
     Friend WithEvents lblYear As Label
     Friend WithEvents lblDate As Label
+    Friend WithEvents ucrNudLarge As ucrNud
+    Friend WithEvents ucrNudWetDays As ucrNud
+    Friend WithEvents ucrNudSame As ucrNud
+    Friend WithEvents lblNewColName As Label
+    Friend WithEvents ucrInputSave As ucrInputTextBox
+    Friend WithEvents lblmm As Label
 End Class
