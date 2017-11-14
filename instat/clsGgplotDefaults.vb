@@ -34,6 +34,10 @@ Public Class GgplotDefaults
 
             clsTempParam.SetArgumentName("theme_name")
             clsTempParam.SetArgumentValue("theme_grey()")
+            'This position MUST be smaller than the position of the theme() parameter
+            ' Otherwise this will overwrite any specific theme options selected
+            ' Currently theme() is set to position 100
+            clsTempParam.Position = 14
             Return clsTempParam
         End Get
     End Property
