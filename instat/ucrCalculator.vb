@@ -42,7 +42,13 @@ Public Class ucrCalculator
                 InitialiseControls()
             End If
             bFirstLoad = False
+        Else
+            ReopenDialog()
         End If
+    End Sub
+
+    Private Sub ReopenDialog()
+        CalculationsOptions()
     End Sub
 
     Public Sub InitialiseControls()
