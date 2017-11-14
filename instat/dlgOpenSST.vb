@@ -19,7 +19,7 @@ Imports System.IO
 
 Public Class dlgOpenSST
     'Private intLines As Integer
-    Private clsReadFile As RFunction
+    Private clsReadFile As New RFunction
     Private clsRBaseCPT, clsBaseNetCDF, clsRCDF As New RFunction
     Private strTempWorkbookName As String
     Dim bFirstLoad As Boolean
