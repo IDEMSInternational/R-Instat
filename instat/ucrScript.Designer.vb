@@ -66,7 +66,7 @@ Partial Class ucrScript
         '
         Me.mnuContextScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuRunSelectedText, Me.mnuRunWholeScript})
         Me.mnuContextScript.Name = "mnuContextLogFile"
-        Me.mnuContextScript.Size = New System.Drawing.Size(167, 48)
+        Me.mnuContextScript.Size = New System.Drawing.Size(167, 70)
         '
         'mnuRunSelectedText
         '
