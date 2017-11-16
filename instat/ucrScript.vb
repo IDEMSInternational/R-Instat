@@ -14,7 +14,11 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
 Public Class ucrScript
+
+    Public clsRLInk As New RLink
+
     Public Sub CopyText()
         txtScript.Copy()
     End Sub
@@ -39,4 +43,18 @@ Public Class ucrScript
         txtScript.ScrollToCaret()
         txtScript.Refresh()
     End Sub
+
+    Private Sub mnuRunWholeScript_Click(sender As Object, e As EventArgs) Handles mnuRunWholeScript.Click
+
+        Dim strScript As String
+        strScript = txtScript.Text
+        clsRLInk.bOutput = True
+
+        For Each strLine As String In strScript.Split(Environment.NewLine)
+            strLine = strLine.Replace(vbLf, String.Empty)
+            strLine = strLine.Replace(vbCrLf, String.Empty)
+            clsRLInk.RunScript(strScript:=strLine, iCallType:=0, strComment:="Code run from Script window", bSeparateThread:=False, bSilent:=True)
+        Next
+    End Sub
+
 End Class
