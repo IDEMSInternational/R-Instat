@@ -40,14 +40,14 @@ Partial Class ucrScript
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.txtScript = New System.Windows.Forms.TextBox()
-        Me.cmdClear = New System.Windows.Forms.Button()
-        Me.lblHeader = New System.Windows.Forms.Label()
-        Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
         Me.mnuContextScript = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuRunSelectedText = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuRunWholeScript = New System.Windows.Forms.ToolStripMenuItem()
-        Me.tlpTableContainer.SuspendLayout()
+        Me.cmdClear = New System.Windows.Forms.Button()
+        Me.lblHeader = New System.Windows.Forms.Label()
+        Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
         Me.mnuContextScript.SuspendLayout()
+        Me.tlpTableContainer.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtScript
@@ -58,10 +58,27 @@ Partial Class ucrScript
         Me.txtScript.Location = New System.Drawing.Point(3, 53)
         Me.txtScript.Multiline = True
         Me.txtScript.Name = "txtScript"
-        Me.txtScript.ReadOnly = True
         Me.txtScript.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.txtScript.Size = New System.Drawing.Size(405, 258)
         Me.txtScript.TabIndex = 0
+        '
+        'mnuContextScript
+        '
+        Me.mnuContextScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuRunSelectedText, Me.mnuRunWholeScript})
+        Me.mnuContextScript.Name = "mnuContextLogFile"
+        Me.mnuContextScript.Size = New System.Drawing.Size(167, 48)
+        '
+        'mnuRunSelectedText
+        '
+        Me.mnuRunSelectedText.Name = "mnuRunSelectedText"
+        Me.mnuRunSelectedText.Size = New System.Drawing.Size(166, 22)
+        Me.mnuRunSelectedText.Text = "Run Selected Text"
+        '
+        'mnuRunWholeScript
+        '
+        Me.mnuRunWholeScript.Name = "mnuRunWholeScript"
+        Me.mnuRunWholeScript.Size = New System.Drawing.Size(166, 22)
+        Me.mnuRunWholeScript.Text = "Run Whole Script"
         '
         'cmdClear
         '
@@ -103,24 +120,6 @@ Partial Class ucrScript
         Me.tlpTableContainer.Size = New System.Drawing.Size(411, 314)
         Me.tlpTableContainer.TabIndex = 9
         '
-        'mnuContextScript
-        '
-        Me.mnuContextScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuRunSelectedText, Me.mnuRunWholeScript})
-        Me.mnuContextScript.Name = "mnuContextLogFile"
-        Me.mnuContextScript.Size = New System.Drawing.Size(167, 48)
-        '
-        'mnuRunSelectedText
-        '
-        Me.mnuRunSelectedText.Name = "mnuRunSelectedText"
-        Me.mnuRunSelectedText.Size = New System.Drawing.Size(166, 22)
-        Me.mnuRunSelectedText.Text = "Run Selected Text"
-        '
-        'mnuRunWholeScript
-        '
-        Me.mnuRunWholeScript.Name = "mnuRunWholeScript"
-        Me.mnuRunWholeScript.Size = New System.Drawing.Size(166, 22)
-        Me.mnuRunWholeScript.Text = "Run Whole Script"
-        '
         'ucrScript
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -129,9 +128,9 @@ Partial Class ucrScript
         Me.Name = "ucrScript"
         Me.Size = New System.Drawing.Size(411, 314)
         Me.Tag = "Script_Window"
+        Me.mnuContextScript.ResumeLayout(False)
         Me.tlpTableContainer.ResumeLayout(False)
         Me.tlpTableContainer.PerformLayout()
-        Me.mnuContextScript.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
