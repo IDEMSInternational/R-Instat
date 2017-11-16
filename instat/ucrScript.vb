@@ -57,4 +57,19 @@ Public Class ucrScript
         Next
     End Sub
 
+    Private Sub mnuRunSelectedText_Click(sender As Object, e As EventArgs) Handles mnuRunSelectedText.Click
+        Dim strSelectedScript As String
+
+        If txtScript.SelectionLength > 0 AndAlso txtScript.SelectedText <> "" Then
+            strSelectedScript = txtScript.SelectedText
+
+            For Each strLine As String In strSelectedScript.Split(Environment.NewLine)
+                strLine = strLine.Replace(vbLf, String.Empty)
+                strLine = strLine.Replace(vbCrLf, String.Empty)
+                clsRLInk.RunScript(strScript:=strLine, iCallType:=0, strComment:="Code run from Script window", bSeparateThread:=False, bSilent:=True)
+            Next
+        Else
+            MsgBox("You need to select some text before running", vbOKOnly)
+        End If
+    End Sub
 End Class
