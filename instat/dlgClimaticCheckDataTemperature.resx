@@ -333,6 +333,9 @@
   <data name="lblRangeElement2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblRangeElement2.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="lblRangeElement2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -392,6 +395,9 @@
   </data>
   <data name="lblRangeElement2to.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblRangeElement2to.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="lblRangeElement2to.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -453,6 +459,9 @@
   <data name="lblJumpElement2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblJumpElement2.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="lblJumpElement2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -479,6 +488,48 @@
   </data>
   <data name="&gt;&gt;lblJumpElement2.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="lblElement2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblElement2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblElement2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>309, 326</value>
+  </data>
+  <data name="lblElement2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 13</value>
+  </data>
+  <data name="lblElement2.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="lblElement2.Text" xml:space="preserve">
+    <value>Element 2</value>
+  </data>
+  <data name="&gt;&gt;lblElement2.Name" xml:space="preserve">
+    <value>lblElement2</value>
+  </data>
+  <data name="&gt;&gt;lblElement2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblElement2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblElement2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>467, 513</value>
+  </data>
+  <data name="ucrNudJumpElement2.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="ucrNudJumpElement2.Location" type="System.Drawing.Point, System.Drawing">
     <value>146, 368</value>
@@ -542,6 +593,9 @@
   </data>
   <data name="&gt;&gt;ucrChkRange.ZOrder" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="ucrNudSame.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="ucrNudSame.Location" type="System.Drawing.Point, System.Drawing">
     <value>81, 290</value>
@@ -609,6 +663,9 @@
   <data name="&gt;&gt;ucrNudOutlier.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
+  <data name="ucrNudRangeElement2Max.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="ucrNudRangeElement2Max.Location" type="System.Drawing.Point, System.Drawing">
     <value>209, 257</value>
   </data>
@@ -654,6 +711,9 @@
   <data name="&gt;&gt;ucrChkOutlier.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
+  <data name="ucrNudRangeElement2Min.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="ucrNudRangeElement2Min.Location" type="System.Drawing.Point, System.Drawing">
     <value>141, 258</value>
   </data>
@@ -695,6 +755,9 @@
   </data>
   <data name="&gt;&gt;ucrNudRangeElement1Max.ZOrder" xml:space="preserve">
     <value>17</value>
+  </data>
+  <data name="ucrChkSame.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="ucrChkSame.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 290</value>
@@ -779,135 +842,6 @@
   </data>
   <data name="&gt;&gt;ucrChkDifference.ZOrder" xml:space="preserve">
     <value>21</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>467, 513</value>
-  </data>
-  <data name="&gt;&gt;lblElement2.Name" xml:space="preserve">
-    <value>lblElement2</value>
-  </data>
-  <data name="&gt;&gt;lblElement2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblElement2.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblElement2.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverElement2.Name" xml:space="preserve">
-    <value>ucrReceiverElement2</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverElement2.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverElement2.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverElement2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverDay.Name" xml:space="preserve">
-    <value>ucrReceiverDay</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverDay.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverDay.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverDay.ZOrder" xml:space="preserve">
-    <value>29</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverMonth.Name" xml:space="preserve">
-    <value>ucrReceiverMonth</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverMonth.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverMonth.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverMonth.ZOrder" xml:space="preserve">
-    <value>30</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverYear.Name" xml:space="preserve">
-    <value>ucrReceiverYear</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverYear.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverYear.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverYear.ZOrder" xml:space="preserve">
-    <value>31</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverDate.Name" xml:space="preserve">
-    <value>ucrReceiverDate</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverDate.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverDate.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverDate.ZOrder" xml:space="preserve">
-    <value>32</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverStation.Name" xml:space="preserve">
-    <value>ucrReceiverStation</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverStation.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverStation.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverStation.ZOrder" xml:space="preserve">
-    <value>33</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorTemperature.Name" xml:space="preserve">
-    <value>ucrSelectorTemperature</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorTemperature.Type" xml:space="preserve">
-    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorTemperature.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorTemperature.ZOrder" xml:space="preserve">
-    <value>34</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
-    <value>ucrBase</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.Type" xml:space="preserve">
-    <value>instat.ucrButtons, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>35</value>
-  </data>
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterScreen</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Climatic Check Data Temperature</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>dlgClimaticCheckDataTemperature</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverElement1.Location" type="System.Drawing.Point, System.Drawing">
     <value>309, 284</value>
@@ -1098,6 +1032,21 @@
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>35</value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Climatic Check Data Temperature</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>dlgClimaticCheckDataTemperature</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="ucrReceiverElement2.Location" type="System.Drawing.Point, System.Drawing">
     <value>309, 339</value>
   </data>
@@ -1121,32 +1070,5 @@
   </data>
   <data name="&gt;&gt;ucrReceiverElement2.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="lblElement2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblElement2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>309, 326</value>
-  </data>
-  <data name="lblElement2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 13</value>
-  </data>
-  <data name="lblElement2.TabIndex" type="System.Int32, mscorlib">
-    <value>38</value>
-  </data>
-  <data name="lblElement2.Text" xml:space="preserve">
-    <value>Element 2</value>
-  </data>
-  <data name="&gt;&gt;lblElement2.Name" xml:space="preserve">
-    <value>lblElement2</value>
-  </data>
-  <data name="&gt;&gt;lblElement2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblElement2.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblElement2.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
 </root>

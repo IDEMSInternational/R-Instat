@@ -35,6 +35,8 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.lblRangeElement2to = New System.Windows.Forms.Label()
         Me.lblJumpElement1 = New System.Windows.Forms.Label()
         Me.lblJumpElement2 = New System.Windows.Forms.Label()
+        Me.lblElement2 = New System.Windows.Forms.Label()
+        Me.ucrReceiverElement2 = New instat.ucrReceiverSingle()
         Me.ucrNudJumpElement2 = New instat.ucrNud()
         Me.ucrNudJumpElement1 = New instat.ucrNud()
         Me.ucrChkRange = New instat.ucrCheck()
@@ -57,8 +59,6 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrSelectorTemperature = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrReceiverElement2 = New instat.ucrReceiverSingle()
-        Me.lblElement2 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblStation
@@ -121,11 +121,25 @@ Partial Class dlgClimaticCheckDataTemperature
         resources.ApplyResources(Me.lblJumpElement2, "lblJumpElement2")
         Me.lblJumpElement2.Name = "lblJumpElement2"
         '
+        'lblElement2
+        '
+        resources.ApplyResources(Me.lblElement2, "lblElement2")
+        Me.lblElement2.Name = "lblElement2"
+        '
+        'ucrReceiverElement2
+        '
+        Me.ucrReceiverElement2.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverElement2, "ucrReceiverElement2")
+        Me.ucrReceiverElement2.Name = "ucrReceiverElement2"
+        Me.ucrReceiverElement2.Selector = Nothing
+        Me.ucrReceiverElement2.strNcFilePath = ""
+        Me.ucrReceiverElement2.ucrSelector = Nothing
+        '
         'ucrNudJumpElement2
         '
         Me.ucrNudJumpElement2.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudJumpElement2.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         resources.ApplyResources(Me.ucrNudJumpElement2, "ucrNudJumpElement2")
+        Me.ucrNudJumpElement2.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudJumpElement2.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudJumpElement2.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudJumpElement2.Name = "ucrNudJumpElement2"
@@ -150,8 +164,8 @@ Partial Class dlgClimaticCheckDataTemperature
         'ucrNudSame
         '
         Me.ucrNudSame.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSame.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         resources.ApplyResources(Me.ucrNudSame, "ucrNudSame")
+        Me.ucrNudSame.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudSame.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSame.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSame.Name = "ucrNudSame"
@@ -180,8 +194,8 @@ Partial Class dlgClimaticCheckDataTemperature
         'ucrNudRangeElement2Max
         '
         Me.ucrNudRangeElement2Max.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRangeElement2Max.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         resources.ApplyResources(Me.ucrNudRangeElement2Max, "ucrNudRangeElement2Max")
+        Me.ucrNudRangeElement2Max.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudRangeElement2Max.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudRangeElement2Max.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRangeElement2Max.Name = "ucrNudRangeElement2Max"
@@ -196,8 +210,8 @@ Partial Class dlgClimaticCheckDataTemperature
         'ucrNudRangeElement2Min
         '
         Me.ucrNudRangeElement2Min.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRangeElement2Min.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         resources.ApplyResources(Me.ucrNudRangeElement2Min, "ucrNudRangeElement2Min")
+        Me.ucrNudRangeElement2Min.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudRangeElement2Min.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudRangeElement2Min.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRangeElement2Min.Name = "ucrNudRangeElement2Min"
@@ -306,20 +320,6 @@ Partial Class dlgClimaticCheckDataTemperature
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrReceiverElement2
-        '
-        Me.ucrReceiverElement2.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverElement2, "ucrReceiverElement2")
-        Me.ucrReceiverElement2.Name = "ucrReceiverElement2"
-        Me.ucrReceiverElement2.Selector = Nothing
-        Me.ucrReceiverElement2.strNcFilePath = ""
-        Me.ucrReceiverElement2.ucrSelector = Nothing
-        '
-        'lblElement2
-        '
-        resources.ApplyResources(Me.lblElement2, "lblElement2")
-        Me.lblElement2.Name = "lblElement2"
         '
         'dlgClimaticCheckDataTemperature
         '

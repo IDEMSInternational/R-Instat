@@ -118,7 +118,7 @@ Public Class dlgClimaticCheckDataTemperature
 
         ucrNudRangeElement1Max.SetParameter(New RParameter("to", 1, bNewIncludeArgumentName:=False))
         'ucrNudRangeElement1Max.SetMinMax(-50, 50)
-        'ucrNudRangeElement1Max.SetLinkedDisplayControl(lblRangeElement1to)
+        ucrNudRangeElement1Max.SetLinkedDisplayControl(lblRangeElement1to)
 
 
         ucrNudRangeElement2Min.SetParameter(New RParameter("from", 1))
