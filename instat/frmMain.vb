@@ -1849,4 +1849,8 @@ Public Class frmMain
     Private Sub MapCountryValuesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MapCountryValuesToolStripMenuItem.Click
         dlgCountryColouredMap.ShowDialog()
     End Sub
+
+    Private Sub OpenNETcdfFileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenNETcdfFileToolStripMenuItem.Click
+        dlgOpenNetCDF.ShowDialog()
+    End Sub
 End Class
