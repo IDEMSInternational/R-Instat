@@ -15,6 +15,8 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class ucrScript
+    Private strComment As String = "Code run from Script Window"
+
     Public Sub CopyText()
         txtScript.Copy()
     End Sub
@@ -26,12 +28,7 @@ Public Class ucrScript
     Private Sub cmdRun_Click(sender As Object, e As EventArgs) Handles cmdRun.Click
         Dim strScript As String
         strScript = txtScript.Text
-
-        For Each strLine As String In strScript.Split(Environment.NewLine)
-            If strLine.Trim(vbCrLf).Count > 0 Then
-                frmMain.clsRLink.RunScript(strScript:=strLine.Trim(vbLf), iCallType:=0, strComment:="Code run from Script window", bSeparateThread:=False, bSilent:=True)
-            End If
-        Next
+        frmMain.clsRLink.RunWindowScripts(strNewScript:=strScript, strNewComment:=strComment, INewCalltype:=0)
     End Sub
 
     Public Sub AppendText(strText As String)
@@ -57,10 +54,10 @@ Public Class ucrScript
         If txtScript.SelectionLength > 0 AndAlso txtScript.SelectedText <> "" Then
             strSelectedScript = txtScript.SelectedText
 
-            For Each strLine As String In strSelectedScript.Split(Environment.NewLine)
-                strLine = strLine.Replace(vbLf, String.Empty)
-                frmMain.clsRLink.RunScript(strScript:=strLine, iCallType:=0, strComment:="Code run from Script window", bSeparateThread:=False, bSilent:=True)
-            Next
+            If MsgBox("This may give errors if a selection is incomplete or if the data has changed. Do you want to proceed?", MessageBoxButtons.YesNo) = MsgBoxResult.Yes Then
+                frmMain.clsRLink.RunWindowScripts(strNewScript:=strSelectedScript, strNewComment:=strComment, INewCalltype:=0)
+            End If
+
         Else
             MsgBox("You need to select some text before running", vbOKOnly)
         End If

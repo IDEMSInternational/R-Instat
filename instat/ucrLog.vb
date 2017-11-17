@@ -20,6 +20,7 @@ Imports instat
 
 Public Class ucrLog
     Private strComment As String = "Code run from Log Window"
+
     Public strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
     Public Sub CopyText()
         txtLog.Copy()
