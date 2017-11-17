@@ -127,6 +127,16 @@ Public Class RLink
         bInstatObjectExists = True
     End Sub
 
+    Public Sub RunWindowScripts(strNewScript As String, strNewComment As String)
+
+        Dim strSelectedScript As String = strNewScript
+
+        For Each strLine As String In strSelectedScript.Split(Environment.NewLine)
+            strLine = strLine.Replace(vbLf, String.Empty)
+            frmMain.clsRLink.RunScript(strScript:=strLine, iCallType:=0, strComment:=strNewComment, bSeparateThread:=False, bSilent:=True)
+        Next
+    End Sub
+
     Public Sub CloseREngine()
         If clsEngine IsNot Nothing Then
             Try

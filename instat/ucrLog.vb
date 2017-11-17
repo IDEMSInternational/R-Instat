@@ -19,7 +19,7 @@ Imports RDotNet
 Imports instat
 
 Public Class ucrLog
-    Public clsRLink As New RLink
+    Private strComment As String = "Code run from Log Window"
     Public strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
     Public Sub CopyText()
         txtLog.Copy()
@@ -65,12 +65,11 @@ Public Class ucrLog
     End Sub
 
     Private Sub mnuRunSelectedText_Click(sender As Object, e As EventArgs) Handles mnuRunSelectedText.Click
-        If txtLog.SelectedText.Count <> 0 Then
-            If MsgBox("This may give errors if a selection is incomplete or if the data has changed.", MessageBoxButtons.YesNo) = MsgBoxResult.Yes Then
-                'run code here
-                For Each strLine As String In txtLog.SelectedText
-                    'RLink.RunScript(strScript:=strLine, iCallType:=0, strComment:="", bSeparateThread:=False, bSilent:=True)
-                Next
+        If txtLog.SelectedText <> "" AndAlso txtLog.SelectionLength > 0 Then
+            Dim strSelectedScript As String = txtLog.SelectedText
+            If MsgBox("This may give errors if a selection is incomplete or if the data has changed. Do you want to proceed?", MessageBoxButtons.YesNo) = MsgBoxResult.Yes Then
+
+                frmMain.clsRLink.RunWindowScripts(strSelectedScript, strComment)
             End If
         Else
             MsgBox("You need to select some text before running", vbOKOnly)
