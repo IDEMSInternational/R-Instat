@@ -164,8 +164,8 @@ Partial Class dlgClimaticCheckDataTemperature
         'ucrNudSame
         '
         Me.ucrNudSame.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudSame, "ucrNudSame")
         Me.ucrNudSame.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudSame, "ucrNudSame")
         Me.ucrNudSame.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSame.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSame.Name = "ucrNudSame"
