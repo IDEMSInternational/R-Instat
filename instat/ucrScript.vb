@@ -23,7 +23,25 @@ Public Class ucrScript
         txtScript.SelectAll()
     End Sub
 
-    Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
+    Private Sub cmdRun_Click(sender As Object, e As EventArgs) Handles cmdRun.Click
+        Dim strScript As String
+        strScript = txtScript.Text
+
+        For Each strLine As String In strScript.Split(Environment.NewLine)
+            If strLine.Trim(vbCrLf).Count > 0 Then
+                frmMain.clsRLink.RunScript(strScript:=strLine.Trim(vbLf), iCallType:=0, strComment:="Code run from Script window", bSeparateThread:=False, bSilent:=True)
+            End If
+        Next
+    End Sub
+
+    Public Sub AppendText(strText As String)
+        txtScript.Text = txtScript.Text & Environment.NewLine & strText
+        txtScript.SelectionStart = txtScript.Text.Length
+        txtScript.ScrollToCaret()
+        txtScript.Refresh()
+    End Sub
+
+    Private Sub mnuRunWholeScript_Click(sender As Object, e As EventArgs) Handles mnuClearContents.Click
         Dim dlgResponse As DialogResult
         If txtScript.Text <> "" Then
             dlgResponse = MessageBox.Show("Are you sure you want to clear the " & Me.Text, "Clear " & Me.Text, MessageBoxButtons.YesNo)
@@ -33,10 +51,18 @@ Public Class ucrScript
         End If
     End Sub
 
-    Public Sub AppendText(strText As String)
-        txtScript.Text = txtScript.Text & Environment.NewLine & strText
-        txtScript.SelectionStart = txtScript.Text.Length
-        txtScript.ScrollToCaret()
-        txtScript.Refresh()
+    Private Sub mnuRunSelectedText_Click(sender As Object, e As EventArgs) Handles mnuRunSelectedText.Click
+        Dim strSelectedScript As String
+
+        If txtScript.SelectionLength > 0 AndAlso txtScript.SelectedText <> "" Then
+            strSelectedScript = txtScript.SelectedText
+
+            For Each strLine As String In strSelectedScript.Split(Environment.NewLine)
+                strLine = strLine.Replace(vbLf, String.Empty)
+                frmMain.clsRLink.RunScript(strScript:=strLine, iCallType:=0, strComment:="Code run from Script window", bSeparateThread:=False, bSilent:=True)
+            Next
+        Else
+            MsgBox("You need to select some text before running", vbOKOnly)
+        End If
     End Sub
 End Class
