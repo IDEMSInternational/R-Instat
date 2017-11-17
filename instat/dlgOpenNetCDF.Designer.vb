@@ -51,6 +51,7 @@ Partial Class dlgOpenNetCDF
         Me.rdoMedium = New System.Windows.Forms.RadioButton()
         Me.rdoLong = New System.Windows.Forms.RadioButton()
         Me.ucrPnlFileDetails = New instat.UcrPanel()
+        Me.cmdFromLibrary = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'cmdOpenDataSet
@@ -77,7 +78,7 @@ Partial Class dlgOpenNetCDF
         Me.lblDataFramePrefix.AutoSize = True
         Me.lblDataFramePrefix.Location = New System.Drawing.Point(10, 137)
         Me.lblDataFramePrefix.Name = "lblDataFramePrefix"
-        Me.lblDataFramePrefix.Size = New System.Drawing.Size(122, 13)
+        Me.lblDataFramePrefix.Size = New System.Drawing.Size(114, 13)
         Me.lblDataFramePrefix.TabIndex = 6
         Me.lblDataFramePrefix.Tag = "Prefix_for_Data_Frames:"
         Me.lblDataFramePrefix.Text = "Prefix for Data Frames:"
@@ -120,7 +121,7 @@ Partial Class dlgOpenNetCDF
         '
         'cmdDetails
         '
-        Me.cmdDetails.Location = New System.Drawing.Point(314, 50)
+        Me.cmdDetails.Location = New System.Drawing.Point(314, 77)
         Me.cmdDetails.Name = "cmdDetails"
         Me.cmdDetails.Size = New System.Drawing.Size(95, 23)
         Me.cmdDetails.TabIndex = 8
@@ -193,11 +194,22 @@ Partial Class dlgOpenNetCDF
         Me.ucrPnlFileDetails.Size = New System.Drawing.Size(254, 30)
         Me.ucrPnlFileDetails.TabIndex = 9
         '
+        'cmdFromLibrary
+        '
+        Me.cmdFromLibrary.Location = New System.Drawing.Point(332, 48)
+        Me.cmdFromLibrary.Name = "cmdFromLibrary"
+        Me.cmdFromLibrary.Size = New System.Drawing.Size(77, 23)
+        Me.cmdFromLibrary.TabIndex = 16
+        Me.cmdFromLibrary.Tag = "Browse"
+        Me.cmdFromLibrary.Text = "From Library"
+        Me.cmdFromLibrary.UseVisualStyleBackColor = True
+        '
         'dlgOpenNetCDF
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(761, 217)
+        Me.Controls.Add(Me.cmdFromLibrary)
         Me.Controls.Add(Me.rdoLong)
         Me.Controls.Add(Me.rdoMedium)
         Me.Controls.Add(Me.rdoShort)
@@ -235,5 +247,6 @@ Partial Class dlgOpenNetCDF
     Friend WithEvents rdoMedium As RadioButton
     Friend WithEvents rdoLong As RadioButton
     Friend WithEvents ucrPnlFileDetails As UcrPanel
+    Friend WithEvents cmdFromLibrary As Button
 End Class
 
