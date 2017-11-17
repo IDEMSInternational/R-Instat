@@ -127,6 +127,25 @@ Public Class RLink
         bInstatObjectExists = True
     End Sub
 
+    Public Sub RunScriptFromWindow(strNewScript As String, strNewComment As String)
+        Dim strSelectedScript As String = strNewScript
+        Dim iCallType As Integer
+        Dim bFirst As Boolean = True
+        Dim strComment As String = strNewComment
+
+        For Each strLine As String In strSelectedScript.Split(Environment.NewLine)
+            If strLine.Trim(vbLf).Count > 0 AndAlso Not strLine.Trim(vbLf).StartsWith("#") Then
+                If strLine.Contains(strInstatDataObject & "$get_graphs") Then
+                    iCallType = 3
+                Else
+                    iCallType = 0
+                End If
+                RunScript(strScript:=strLine.Trim(vbLf), iCallType:=iCallType, strComment:=strComment, bSeparateThread:=False, bSilent:=False)
+                strComment = ""
+            End If
+        Next
+    End Sub
+
     Public Sub CloseREngine()
         If clsEngine IsNot Nothing Then
             Try
