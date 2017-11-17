@@ -69,7 +69,7 @@ Public Class ucrLog
             Dim strSelectedScript As String = txtLog.SelectedText
             If MsgBox("This may give errors if a selection is incomplete or if the data has changed. Do you want to proceed?", MessageBoxButtons.YesNo) = MsgBoxResult.Yes Then
 
-                frmMain.clsRLink.RunWindowScripts(strSelectedScript, strComment)
+                frmMain.clsRLink.RunWindowScripts(strNewScript:=strSelectedScript, strNewComment:=strComment, INewCalltype:=0)
             End If
         Else
             MsgBox("You need to select some text before running", vbOKOnly)
