@@ -127,19 +127,22 @@ Public Class RLink
         bInstatObjectExists = True
     End Sub
 
-    Public Sub RunWindowScripts(strNewScript As String, strNewComment As String, INewCalltype As Integer)
-
+    Public Sub RunScriptFromWindow(strNewScript As String, strNewComment As String)
         Dim strSelectedScript As String = strNewScript
-        Dim calltype As Integer = INewCalltype
+        Dim iCallType As Integer
+        Dim bFirst As Boolean = True
+        Dim strComment As String = strNewComment
 
         For Each strLine As String In strSelectedScript.Split(Environment.NewLine)
-            strLine = strLine.Replace(vbLf, String.Empty)
-            If strLine.Contains(strInstatDataObject & "$get_graphs") Then
-                INewCalltype = 3
-            Else
-                INewCalltype = 0
+            If strLine.Trim(vbLf).Count > 0 AndAlso Not strLine.Trim(vbLf).StartsWith("#") Then
+                If strLine.Contains(strInstatDataObject & "$get_graphs") Then
+                    iCallType = 3
+                Else
+                    iCallType = 0
+                End If
+                RunScript(strScript:=strLine.Trim(vbLf), iCallType:=iCallType, strComment:=strComment, bSeparateThread:=False, bSilent:=False)
+                strComment = ""
             End If
-            RunScript(strScript:=strLine, iCallType:=INewCalltype, strComment:=strNewComment, bSeparateThread:=False, bSilent:=True)
         Next
     End Sub
 

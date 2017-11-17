@@ -17,6 +17,7 @@
 Imports System.IO
 Imports RDotNet
 Imports instat
+Imports System.ComponentModel
 
 Public Class ucrLog
     Private strComment As String = "Code run from Log Window"
@@ -67,12 +68,13 @@ Public Class ucrLog
     Private Sub mnuRunSelectedText_Click(sender As Object, e As EventArgs) Handles mnuRunSelectedText.Click
         If txtLog.SelectedText <> "" AndAlso txtLog.SelectionLength > 0 Then
             Dim strSelectedScript As String = txtLog.SelectedText
-            If MsgBox("This may give errors if a selection is incomplete or if the data has changed. Do you want to proceed?", MessageBoxButtons.YesNo) = MsgBoxResult.Yes Then
-
-                frmMain.clsRLink.RunWindowScripts(strNewScript:=strSelectedScript, strNewComment:=strComment, INewCalltype:=0)
+            If MsgBox("Running selected code from the log window is not yet a stable operation e.g. if a selection is incomplete or if the data has changed." & vbNewLine & vbNewLine & "Do you want to proceed?", MessageBoxButtons.YesNo, "Warning") = MsgBoxResult.Yes Then
+                frmMain.clsRLink.RunScriptFromWindow(strNewScript:=strSelectedScript, strNewComment:=strComment)
             End If
-        Else
-            MsgBox("You need to select some text before running", vbOKOnly)
         End If
+    End Sub
+
+    Private Sub mnuContextLogFile_Opening(sender As Object, e As CancelEventArgs) Handles mnuContextLogFile.Opening
+        mnuRunSelectedText.Enabled = (txtLog.SelectedText <> "" AndAlso txtLog.SelectionLength > 0)
     End Sub
 End Class
