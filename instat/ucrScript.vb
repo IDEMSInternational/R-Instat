@@ -14,11 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
 Public Class ucrScript
-
-    Public clsRLInk As New RLink
-
     Public Sub CopyText()
         txtScript.Copy()
     End Sub
@@ -27,14 +23,15 @@ Public Class ucrScript
         txtScript.SelectAll()
     End Sub
 
-    Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
-        Dim dlgResponse As DialogResult
-        If txtScript.Text <> "" Then
-            dlgResponse = MessageBox.Show("Are you sure you want to clear the " & Me.Text, "Clear " & Me.Text, MessageBoxButtons.YesNo)
-            If dlgResponse = DialogResult.Yes Then
-                txtScript.Clear()
+    Private Sub cmdRun_Click(sender As Object, e As EventArgs) Handles cmdRun.Click
+        Dim strScript As String
+        strScript = txtScript.Text
+
+        For Each strLine As String In strScript.Split(Environment.NewLine)
+            If strLine.Trim(vbCrLf).Count > 0 Then
+                frmMain.clsRLink.RunScript(strScript:=strLine.Trim(vbLf), iCallType:=0, strComment:="Code run from Script window", bSeparateThread:=False, bSilent:=True)
             End If
-        End If
+        Next
     End Sub
 
     Public Sub AppendText(strText As String)
@@ -44,17 +41,14 @@ Public Class ucrScript
         txtScript.Refresh()
     End Sub
 
-    Private Sub mnuRunWholeScript_Click(sender As Object, e As EventArgs) Handles mnuRunWholeScript.Click
-
-        Dim strScript As String
-        strScript = txtScript.Text
-        clsRLInk.bOutput = True
-
-        For Each strLine As String In strScript.Split(Environment.NewLine)
-            If strLine.Trim(vbCrLf).Count > 0 Then
-                clsRLInk.RunScript(strScript:=strLine.Trim(vbLf), iCallType:=0, strComment:="Code run from Script window", bSeparateThread:=False, bSilent:=True)
+    Private Sub mnuRunWholeScript_Click(sender As Object, e As EventArgs) Handles mnuClearContents.Click
+        Dim dlgResponse As DialogResult
+        If txtScript.Text <> "" Then
+            dlgResponse = MessageBox.Show("Are you sure you want to clear the " & Me.Text, "Clear " & Me.Text, MessageBoxButtons.YesNo)
+            If dlgResponse = DialogResult.Yes Then
+                txtScript.Clear()
             End If
-        Next
+        End If
     End Sub
 
     Private Sub mnuRunSelectedText_Click(sender As Object, e As EventArgs) Handles mnuRunSelectedText.Click
@@ -65,8 +59,7 @@ Public Class ucrScript
 
             For Each strLine As String In strSelectedScript.Split(Environment.NewLine)
                 strLine = strLine.Replace(vbLf, String.Empty)
-                strLine = strLine.Replace(vbCrLf, String.Empty)
-                clsRLInk.RunScript(strScript:=strLine, iCallType:=0, strComment:="Code run from Script window", bSeparateThread:=False, bSilent:=True)
+                frmMain.clsRLink.RunScript(strScript:=strLine, iCallType:=0, strComment:="Code run from Script window", bSeparateThread:=False, bSilent:=True)
             Next
         Else
             MsgBox("You need to select some text before running", vbOKOnly)
