@@ -594,9 +594,6 @@
   <data name="&gt;&gt;ucrChkRange.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="ucrNudSame.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="ucrNudSame.Location" type="System.Drawing.Point, System.Drawing">
     <value>81, 290</value>
   </data>
@@ -755,9 +752,6 @@
   </data>
   <data name="&gt;&gt;ucrNudRangeElement1Max.ZOrder" xml:space="preserve">
     <value>17</value>
-  </data>
-  <data name="ucrChkSame.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="ucrChkSame.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 290</value>
@@ -1031,9 +1025,6 @@
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>35</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

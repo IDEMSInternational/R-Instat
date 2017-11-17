@@ -26,7 +26,11 @@ Public Class dlgClimaticCheckDataTemperature
     Private clsConcFunc, clsDiffFunc, clsAbsFunc As RFunction
     Private clsJumpGreaterOperator As ROperator
 
-    'diffrence
+    'same
+    Private clsRepFunc, clsRleFunc, clsAsNumFunc As RFunction
+    Private clsDollarOperator, clsSameGreaterOperator As ROperator
+
+    'difference
     Private clsDiffOperator, clsLessDiffOperator As ROperator
 
     Private Sub dlgClimaticCheckDataTemperature_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -113,11 +117,11 @@ Public Class dlgClimaticCheckDataTemperature
         'Nuds for the respective options
         'Range Option
         ucrNudRangeElement1Min.SetParameter(New RParameter("from", iNewPosition:=1, bNewIncludeArgumentName:=False))
-        ucrNudRangeElement1Min.SetMinMax(-50, 50)
+        ucrNudRangeElement1Min.SetMinMax(-50, 65)
         ucrNudRangeElement1Min.SetLinkedDisplayControl(lblRangeElement1)
 
         ucrNudRangeElement1Max.SetParameter(New RParameter("to", 1, bNewIncludeArgumentName:=False))
-        'ucrNudRangeElement1Max.SetMinMax(-50, 50)
+        ucrNudRangeElement1Max.SetMinMax(-50, 65)
         ucrNudRangeElement1Max.SetLinkedDisplayControl(lblRangeElement1to)
 
 
@@ -128,7 +132,7 @@ Public Class dlgClimaticCheckDataTemperature
         ucrNudRangeElement2Max.SetMinMax(-50, 50)
 
         'Same Option
-        ucrNudSame.SetParameter(New RParameter("n", 1))
+        ucrNudSame.SetParameter(New RParameter("n", 1, bNewIncludeArgumentName:=False))
         ucrNudSame.SetMinMax(2, 366)
 
 
@@ -151,6 +155,8 @@ Public Class dlgClimaticCheckDataTemperature
     End Sub
 
     Private Sub SetDefaults()
+        Dim strLengths As String = "lengths"
+
         clsGroupByFunc = New RFunction
         clsListFunc = New RFunction
         clsFilterFunc = New RFunction
@@ -164,6 +170,11 @@ Public Class dlgClimaticCheckDataTemperature
         clsJumpGreaterOperator = New ROperator
         clsDiffOperator = New ROperator
         clsLessDiffOperator = New ROperator
+        clsRepFunc = New RFunction
+        clsRleFunc = New RFunction
+        clsAsNumFunc = New RFunction
+        clsSameGreaterOperator = New ROperator
+        clsDollarOperator = New ROperator
 
         clsGroupByFunc.Clear()
         clsListFunc.Clear()
@@ -178,10 +189,24 @@ Public Class dlgClimaticCheckDataTemperature
         clsLessDiffOperator.Clear()
         clsDiffOperator.Clear()
 
-
         ucrSelectorTemperature.Reset()
 
-        'diffrence
+        clsSameGreaterOperator.bToScriptAsRString = True
+        clsSameGreaterOperator.SetOperation(">")
+        clsSameGreaterOperator.AddParameter("left", bIncludeArgumentName:=False, clsRFunctionParameter:=clsRepFunc, iPosition:=0)
+
+        clsRepFunc.SetRCommand("rep")
+        clsRepFunc.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsDollarOperator, iPosition:=0)
+        clsRepFunc.AddParameter("right", bIncludeArgumentName:=False, clsROperatorParameter:=clsDollarOperator, iPosition:=1)
+
+        clsAsNumFunc.SetRCommand("as.numeric")
+        clsRleFunc.SetRCommand("rle")
+        clsRleFunc.AddParameter("left", bIncludeArgumentName:=False, clsRFunctionParameter:=clsAsNumFunc, iPosition:=0)
+
+        clsDollarOperator.SetOperation("$")
+        clsDollarOperator.AddParameter("left", bIncludeArgumentName:=False, clsRFunctionParameter:=clsRleFunc, iPosition:=0)
+        clsDollarOperator.AddParameter("right", strParameterValue:=strLengths, bIncludeArgumentName:=False, iPosition:=1)
+        'difference
         clsLessDiffOperator.SetOperation("<")
         clsLessDiffOperator.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsDiffOperator, iPosition:=0)
 
@@ -205,7 +230,9 @@ Public Class dlgClimaticCheckDataTemperature
         clsAndOpertor.bToScriptAsRString = True
         clsLessOperator.SetOperation("<")
         clsGreaterOperator.SetOperation(">")
+        clsGreaterOperator.AddParameter("from", "0", bIncludeArgumentName:=False, iPosition:=1)
         clsAndOpertor.SetOperation("&")
+        clsAndOpertor.bBrackets = False
         clsAndOpertor.AddParameter("left", clsROperatorParameter:=clsGreaterOperator, iPosition:=0, bIncludeArgumentName:=False)
         clsAndOpertor.AddParameter("right", clsROperatorParameter:=clsLessOperator, iPosition:=1, bIncludeArgumentName:=False)
         clsListFunc.SetRCommand("list")
@@ -228,16 +255,19 @@ Public Class dlgClimaticCheckDataTemperature
         clsRunCalcFunc.AddParameter("display", "FALSE")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRunCalcFunc)
     End Sub
+
     Private Sub SetRCodeForControls(bReset)
         ucrReceiverElement1.AddAdditionalCodeParameterPair(clsLessOperator, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrReceiverElement1.AddAdditionalCodeParameterPair(clsDiffFunc, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
         ucrReceiverElement1.AddAdditionalCodeParameterPair(clsDiffOperator, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
+        ucrReceiverElement1.AddAdditionalCodeParameterPair(clsAsNumFunc, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=4)
         ucrReceiverElement1.SetRCode(clsGreaterOperator, bReset)
         ucrNudRangeElement1Min.SetRCode(clsGreaterOperator, bReset)
         ucrNudRangeElement1Max.SetRCode(clsLessOperator, bReset)
         ucrNudJumpElement1.SetRCode(clsJumpGreaterOperator, bReset)
         ucrReceiverElement2.SetRCode(clsDiffOperator, bReset)
         ucrNudDifference.SetRCode(clsLessDiffOperator, bReset)
+        ucrNudSame.SetRCode(clsSameGreaterOperator, bReset)
     End Sub
     Private Sub TestOkEnabled()
         'If Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverMonth.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty() AndAlso Not ucrReceiverDay.IsEmpty() AndAlso Not ucrReceiverElement.IsEmpty() AndAlso ucrNudJumpElement1Max.GetText <> "" AndAlso ucrNudJumpElement1Min.GetText <> "" AndAlso ucrNudJumpElement2Max.GetText <> "" AndAlso ucrNudJumpElement2Min.GetText <> "" AndAlso ucrNudSame.GetText <> "" AndAlso ucrNudJumpElement1Max.GetText <> "" AndAlso ucrNudJumpElement1Min.GetText <> "" AndAlso ucrNudJumpElement2Max.GetText <> "" AndAlso ucrNudJumpElement2Min.GetText <> "" AndAlso ucrNudDifference.GetText <> "" AndAlso ucrNudOutlier.GetText <> "" Then
@@ -280,13 +310,15 @@ Public Class dlgClimaticCheckDataTemperature
         FilterFunc()
     End Sub
 
-    Private Sub ucrChkRange_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRange.ControlValueChanged, ucrChkJump.ControlValueChanged, ucrChkDifference.ControlValueChanged
+    Private Sub ucrChkRange_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRange.ControlValueChanged, ucrChkJump.ControlValueChanged, ucrChkDifference.ControlValueChanged, ucrChkSame.ControlValueChanged
         If ucrChkRange.Checked Then
             clsFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsAndOpertor, iPosition:=1)
         ElseIf ucrChkJump.Checked Then
             clsFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsJumpGreaterOperator, iPosition:=1)
         ElseIf ucrChkDifference.Checked Then
             clsFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsLessDiffOperator, iPosition:=1)
+        ElseIf ucrChkSame.Checked Then
+            clsFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsSameGreaterOperator, iPosition:=1)
         End If
     End Sub
 End Class
