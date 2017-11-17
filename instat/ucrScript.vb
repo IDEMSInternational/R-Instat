@@ -51,9 +51,9 @@ Public Class ucrScript
         clsRLInk.bOutput = True
 
         For Each strLine As String In strScript.Split(Environment.NewLine)
-            strLine = strLine.Replace(vbLf, String.Empty)
-            strLine = strLine.Replace(vbCrLf, String.Empty)
-            clsRLInk.RunScript(strScript:=strLine, iCallType:=0, strComment:="Code run from Script window", bSeparateThread:=False, bSilent:=True)
+            If strLine.Trim(vbCrLf).Count > 0 Then
+                clsRLInk.RunScript(strScript:=strLine.Trim(vbLf), iCallType:=0, strComment:="Code run from Script window", bSeparateThread:=False, bSilent:=True)
+            End If
         Next
     End Sub
 
