@@ -26,9 +26,7 @@ Public Class ucrScript
     End Sub
 
     Private Sub cmdRun_Click(sender As Object, e As EventArgs) Handles cmdRun.Click
-        Dim strScript As String
-        strScript = txtScript.Text
-        frmMain.clsRLink.RunWindowScripts(strNewScript:=strScript, strNewComment:=strComment, INewCalltype:=0)
+        RunText(txtScript.Text)
     End Sub
 
     Public Sub AppendText(strText As String)
@@ -49,17 +47,16 @@ Public Class ucrScript
     End Sub
 
     Private Sub mnuRunSelectedText_Click(sender As Object, e As EventArgs) Handles mnuRunSelectedText.Click
-        Dim strSelectedScript As String
-
         If txtScript.SelectionLength > 0 AndAlso txtScript.SelectedText <> "" Then
-            strSelectedScript = txtScript.SelectedText
+            RunText(txtScript.SelectedText)
+        End If
+    End Sub
 
-            If MsgBox("This may give errors if a selection is incomplete or if the data has changed. Do you want to proceed?", MessageBoxButtons.YesNo) = MsgBoxResult.Yes Then
-                frmMain.clsRLink.RunWindowScripts(strNewScript:=strSelectedScript, strNewComment:=strComment, INewCalltype:=0)
+    Private Sub RunText(strText As String)
+        If strText <> "" Then
+            If MsgBox("Running code from the script window is not yet a stable operation." & vbNewLine & vbNewLine & "Do you want to proceed?", MessageBoxButtons.YesNo, "Warning") = MsgBoxResult.Yes Then
+                frmMain.clsRLink.RunScriptFromWindow(strNewScript:=strText, strNewComment:=strComment)
             End If
-
-        Else
-            MsgBox("You need to select some text before running", vbOKOnly)
         End If
     End Sub
 End Class

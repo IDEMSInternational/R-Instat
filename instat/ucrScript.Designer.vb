@@ -87,7 +87,7 @@ Partial Class ucrScript
         Me.cmdRun.Name = "cmdRun"
         Me.cmdRun.Size = New System.Drawing.Size(405, 24)
         Me.cmdRun.TabIndex = 1
-        Me.cmdRun.Text = "Run"
+        Me.cmdRun.Text = "Run All"
         Me.cmdRun.UseVisualStyleBackColor = True
         '
         'lblHeader
