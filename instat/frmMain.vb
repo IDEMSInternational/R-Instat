@@ -129,7 +129,7 @@ Public Class frmMain
     End Sub
 
     Public Sub ResetTimer()
-        If clsInstatOptions.bAutoSaveData Then
+        If clsInstatOptions IsNot Nothing AndAlso clsInstatOptions.bAutoSaveData IsNot Nothing AndAlso clsInstatOptions.bAutoSaveData Then
             timer.Interval = (clsInstatOptions.iAutoSaveDataMinutes * 60 * 1000)
             timer.Start()
         End If
