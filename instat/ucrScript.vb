@@ -15,6 +15,8 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class ucrScript
+    Private strComment As String = "Code run from Script Window"
+
     Public Sub CopyText()
         txtScript.Copy()
     End Sub
@@ -23,7 +25,18 @@ Public Class ucrScript
         txtScript.SelectAll()
     End Sub
 
-    Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
+    Private Sub cmdRun_Click(sender As Object, e As EventArgs) Handles cmdRun.Click
+        RunText(txtScript.Text)
+    End Sub
+
+    Public Sub AppendText(strText As String)
+        txtScript.Text = txtScript.Text & Environment.NewLine & strText
+        txtScript.SelectionStart = txtScript.Text.Length
+        txtScript.ScrollToCaret()
+        txtScript.Refresh()
+    End Sub
+
+    Private Sub mnuRunWholeScript_Click(sender As Object, e As EventArgs) Handles mnuClearContents.Click
         Dim dlgResponse As DialogResult
         If txtScript.Text <> "" Then
             dlgResponse = MessageBox.Show("Are you sure you want to clear the " & Me.Text, "Clear " & Me.Text, MessageBoxButtons.YesNo)
@@ -33,10 +46,17 @@ Public Class ucrScript
         End If
     End Sub
 
-    Public Sub AppendText(strText As String)
-        txtScript.Text = txtScript.Text & Environment.NewLine & strText
-        txtScript.SelectionStart = txtScript.Text.Length
-        txtScript.ScrollToCaret()
-        txtScript.Refresh()
+    Private Sub mnuRunSelectedText_Click(sender As Object, e As EventArgs) Handles mnuRunSelectedText.Click
+        If txtScript.SelectionLength > 0 AndAlso txtScript.SelectedText <> "" Then
+            RunText(txtScript.SelectedText)
+        End If
+    End Sub
+
+    Private Sub RunText(strText As String)
+        If strText <> "" Then
+            If MsgBox("Running code from the script window is not yet a stable operation." & vbNewLine & vbNewLine & "Do you want to proceed?", MessageBoxButtons.YesNo, "Warning") = MsgBoxResult.Yes Then
+                frmMain.clsRLink.RunScriptFromWindow(strNewScript:=strText, strNewComment:=strComment)
+            End If
+        End If
     End Sub
 End Class
