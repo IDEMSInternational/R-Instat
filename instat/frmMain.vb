@@ -129,7 +129,7 @@ Public Class frmMain
     End Sub
 
     Public Sub ResetTimer()
-        If clsInstatOptions.bAutoSaveData Then
+        If clsInstatOptions IsNot Nothing AndAlso clsInstatOptions.bAutoSaveData IsNot Nothing AndAlso clsInstatOptions.bAutoSaveData Then
             timer.Interval = (clsInstatOptions.iAutoSaveDataMinutes * 60 * 1000)
             timer.Start()
         End If
@@ -1848,5 +1848,9 @@ Public Class frmMain
 
     Private Sub MapCountryValuesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MapCountryValuesToolStripMenuItem.Click
         dlgCountryColouredMap.ShowDialog()
+    End Sub
+
+    Private Sub OpenNETcdfFileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenNETcdfFileToolStripMenuItem.Click
+        dlgOpenNetCDF.ShowDialog()
     End Sub
 End Class

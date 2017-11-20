@@ -333,6 +333,7 @@ Partial Class frmMain
         Me.mnuImportFromODK = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImportFromCSPROToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImportFromToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OpenNETcdfFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator27 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuFileConvert = New System.Windows.Forms.ToolStripMenuItem()
         Me.tlSeparatorFile = New System.Windows.Forms.ToolStripSeparator()
@@ -2196,7 +2197,7 @@ Partial Class frmMain
         '
         'mnuFile
         '
-        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileOpenFromFile, Me.mnuFileOpenFromLibrary, Me.ToolStripSeparator35, Me.mnuImportFromODK, Me.ImportFromCSPROToolStripMenuItem, Me.ImportFromToolStripMenuItem, Me.ToolStripSeparator27, Me.mnuFileConvert, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuExport, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFileCloseData, Me.ToolStripSeparator8, Me.mnuFIleExit})
+        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileOpenFromFile, Me.mnuFileOpenFromLibrary, Me.ToolStripSeparator35, Me.mnuImportFromODK, Me.ImportFromCSPROToolStripMenuItem, Me.ImportFromToolStripMenuItem, Me.OpenNETcdfFileToolStripMenuItem, Me.ToolStripSeparator27, Me.mnuFileConvert, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuExport, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFileCloseData, Me.ToolStripSeparator8, Me.mnuFIleExit})
         Me.mnuFile.Name = "mnuFile"
         resources.ApplyResources(Me.mnuFile, "mnuFile")
         Me.mnuFile.Tag = "File"
@@ -2238,6 +2239,11 @@ Partial Class frmMain
         '
         resources.ApplyResources(Me.ImportFromToolStripMenuItem, "ImportFromToolStripMenuItem")
         Me.ImportFromToolStripMenuItem.Name = "ImportFromToolStripMenuItem"
+        '
+        'OpenNETcdfFileToolStripMenuItem
+        '
+        Me.OpenNETcdfFileToolStripMenuItem.Name = "OpenNETcdfFileToolStripMenuItem"
+        resources.ApplyResources(Me.OpenNETcdfFileToolStripMenuItem, "OpenNETcdfFileToolStripMenuItem")
         '
         'ToolStripSeparator27
         '
@@ -3793,4 +3799,5 @@ Partial Class frmMain
     Friend WithEvents mnuProcurementDefineCorruption As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator45 As ToolStripSeparator
     Friend WithEvents mnuProcurementCalculateCRI As ToolStripMenuItem
+    Friend WithEvents OpenNETcdfFileToolStripMenuItem As ToolStripMenuItem
 End Class
