@@ -35,7 +35,7 @@ Public Class dlgBoxplot
     Private dctThemeFunctions As Dictionary(Of String, RFunction)
     Private bResetSubdialog As Boolean = True
     Private bResetBoxLayerSubdialog As Boolean = True
-    Private clsBoxplotAesfunc As New RFunction
+    Private clsGeomAesfunc As New RFunction
 
 
     Private Sub dlgBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -125,7 +125,7 @@ Public Class dlgBoxplot
         clsRggplotFunction = New RFunction
         clsRgeomPlotFunction = New RFunction
         clsRaesFunction = New RFunction
-        clsBoxplotAesfunc = New RFunction
+        clsGeomAesfunc = New RFunction
 
         ucrSelectorBoxPlot.Reset()
         ucrSelectorBoxPlot.SetGgplotFunction(clsBaseOperator)
@@ -152,9 +152,9 @@ Public Class dlgBoxplot
         clsRgeomPlotFunction.SetRCommand("geom_boxplot")
         clsRgeomPlotFunction.AddParameter("varwidth", "FALSE")
 
-        clsBoxplotAesfunc.SetPackageName("ggplot2")
-        clsBoxplotAesfunc.SetRCommand("aes")
-        clsRgeomPlotFunction.AddParameter("boxaes", clsRFunctionParameter:=clsBoxplotAesfunc, iPosition:=1, bIncludeArgumentName:=False)
+        clsGeomAesfunc.SetPackageName("ggplot2")
+        clsGeomAesfunc.SetRCommand("aes")
+        clsRgeomPlotFunction.AddParameter("boxaes", clsRFunctionParameter:=clsGeomAesfunc, iPosition:=1, bIncludeArgumentName:=False)
 
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
@@ -183,8 +183,7 @@ Public Class dlgBoxplot
         ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
         ucrVariablesAsFactorForBoxplot.SetRCode(clsRaesFunction, bReset)
         ucrByFactorsReceiver.SetRCode(clsRaesFunction, bReset)
-        ucrByFactorsReceiver.AddAdditionalCodeParameterPair(clsBoxplotAesfunc, New RParameter("Group", 0), iAdditionalPairNo:=1)
-
+        ucrByFactorsReceiver.AddAdditionalCodeParameterPair(clsGeomAesfunc, New RParameter("group", 0), iAdditionalPairNo:=1)
 
         ucrSecondFactorReceiver.SetRCode(clsRaesFunction, bReset)
         ucrPnlPlots.SetRCode(clsRgeomPlotFunction, bReset)
@@ -255,13 +254,13 @@ Public Class dlgBoxplot
             cmdBoxPlotOptions.Text = "Boxplot Options"
         ElseIf rdoJitter.Checked Then
             clsRgeomPlotFunction.SetRCommand("geom_jitter")
-            clsRgeomPlotFunction.RemoveParameterByName("boxaes")
+            ' clsRgeomPlotFunction.RemoveParameterByName("boxaes")
             ucrSaveBoxplot.SetPrefix("jitter")
             ucrSecondFactorReceiver.ChangeParameterName("colour")
             cmdBoxPlotOptions.Text = "Jitter Options"
         Else
             clsRgeomPlotFunction.SetRCommand("geom_violin")
-            clsRgeomPlotFunction.RemoveParameterByName("boxaes")
+            ' clsRgeomPlotFunction.RemoveParameterByName("boxaes")
             ucrSaveBoxplot.SetPrefix("violin")
             ucrSecondFactorReceiver.ChangeParameterName("fill")
             cmdBoxPlotOptions.Text = "Violin Options"
