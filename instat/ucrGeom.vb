@@ -441,24 +441,32 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_density)
 
 
-        'clsgeom_density2d.strGeomName = "geom_density2d"
-        ''Mandatory
-        'clsgeom_density2d.AddAesParameter("x", bIsMandatory:=True)
-        'clsgeom_density2d.AddAesParameter("y", bIsMandatory:=True)
+        clsgeom_density2d.strGeomName = "geom_density2d"
+        'Mandatory
+        clsgeom_density2d.AddAesParameter("x", bIsMandatory:=True)
+        clsgeom_density2d.AddAesParameter("y", bIsMandatory:=True)
         ''optional
-        'clsgeom_density2d.AddAesParameter("alpha")
-        'clsgeom_density2d.AddAesParameter("colour")
-        'clsgeom_density2d.AddAesParameter("linetype")
-        'clsgeom_density2d.AddAesParameter("size")
+        clsgeom_density2d.AddAesParameter("alpha")
+        clsgeom_density2d.AddAesParameter("colour")
+        clsgeom_density2d.AddAesParameter("group")
+        clsgeom_density2d.AddAesParameter("linetype")
+        clsgeom_density2d.AddAesParameter("size")
 
         ''Adding layer parameters
-        'clsgeom_density2d.AddLayerParameter("stat", "list", Chr(34) & "density2d" & Chr(34))
-        'clsgeom_density2d.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_density2d.AddLayerParameter("lineend", "list", Chr(34) & "butt" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "butt" & Chr(34), Chr(34) & "square" & Chr(34)})
-        'clsgeom_density2d.AddLayerParameter("linejoin", "list", Chr(34) & "round" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "mitre" & Chr(34), Chr(34) & "bevel" & Chr(34)})
+        'not sure of other stats here
+        clsgeom_density2d.AddLayerParameter("stat", "list", Chr(34) & "density2d" & Chr(34))
+        clsgeom_density2d.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
+        clsgeom_density2d.AddLayerParameter("lineend", "list", Chr(34) & "butt" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "butt" & Chr(34), Chr(34) & "square" & Chr(34)})
+        clsgeom_density2d.AddLayerParameter("linejoin", "list", Chr(34) & "round" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "mitre" & Chr(34), Chr(34) & "bevel" & Chr(34)})
+        clsgeom_density2d.AddLayerParameter("na.rm", "boolean", "FALSE")
+        clsgeom_density2d.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_density2d.AddLayerParameter("inherit.aes", "boolean", "FALSE")
+        clsgeom_density2d.AddLayerParameter("contour", "boolean", "FALSE")
         ''linemitre should 1 or a number >1
-        'clsgeom_density2d.AddLayerParameter("linemitre", "numeric", "1")
-        'lstAllGeoms.Add(clsgeom_density2d)
+        clsgeom_density2d.AddLayerParameter("linemitre", "numeric", "1")
+        clsgeom_density2d.AddLayerParameter("n", "numeric", "1")
+        clsgeom_density2d.AddLayerParameter("h", "numeric", "1")
+        lstAllGeoms.Add(clsgeom_density2d)
 
         'clsgeom_density_2d.strGeomName = "geom_density_2d"
         ''Mandatory
