@@ -128,70 +128,69 @@ Public Class dlgClimaticCheckDataRain
         ucrSelectorRain.Reset()
         ucrReceiverStation.SetMeAsReceiver()
 
+        'Group Function
         clsGroupByFunc.SetRCommand("instat_calculation$new")
         clsGroupByFunc.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=0)
         clsGroupByFunc.SetAssignTo("grouping")
 
-        clsAsNumericFunc.SetRCommand("as.numeric")
+        clsListFunc.SetRCommand("list")
+        clsListFunc.AddParameter("sub1", clsRFunctionParameter:=clsGroupByFunc, bIncludeArgumentName:=False, iPosition:=1)
 
+        'Main Filter
+        clsRainFilterFunc.SetRCommand("instat_calculation$new")
+        clsRainFilterFunc.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
+        clsRainFilterFunc.AddParameter("save", 2)
+        clsRainFilterFunc.AddParameter("result_data_frame", Chr(34) & "Rainfall_Filter" & Chr(34))
+        clsRainFilterFunc.SetAssignTo("rainfall_filter")
+
+        'Large
+        clsLargeOperator.bToScriptAsRString = True
+        clsLargeOperator.SetOperation(">")
+        clsLargeOperator.AddParameter("left", iPosition:=0)
+        clsLargeOperator.AddParameter("right", "200", iPosition:=1)
+
+        'Same
+        clsGreaterOperator.SetOperation(">")
+        clsGreaterOperator.AddParameter("y", "0", iPosition:=1, bIncludeArgumentName:=False)
         clsAndOperator.SetOperation("&")
         clsAndOperator.bBrackets = False
         clsAndOperator.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsGreaterOperator, iPosition:=0)
         clsAndOperator.AddParameter("right", bIncludeArgumentName:=False, clsRFunctionParameter:=clsRepFunc, iPosition:=1)
-
+        clsGreterSameOperator.bToScriptAsRString = True
+        clsGreterSameOperator.SetOperation(">")
+        clsGreterSameOperator.bBrackets = False
+        clsGreterSameOperator.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsAndOperator, iPosition:=0)
+        clsAsNumericFunc.SetRCommand("as.numeric")
         clsRleFunc.SetRCommand("rle")
         clsRleFunc.AddParameter("numeric", bIncludeArgumentName:=False, clsRFunctionParameter:=clsAsNumericFunc, iPosition:=0)
-
         clsDollarOperator.SetOperation("$")
-        clsDollarOperator.bBrackets = False
         clsDollarOperator.AddParameter("left", bIncludeArgumentName:=False, clsRFunctionParameter:=clsRleFunc, iPosition:=0)
         clsDollarOperator.AddParameter("right", bIncludeArgumentName:=False, strParameterValue:=strLengths, iPosition:=1)
         clsRepFunc.SetRCommand("rep")
         clsRepFunc.AddParameter("first", bIncludeArgumentName:=False, clsROperatorParameter:=clsDollarOperator, iPosition:=0)
         clsRepFunc.AddParameter("second", bIncludeArgumentName:=False, clsROperatorParameter:=clsDollarOperator, iPosition:=1)
 
-        clsGreterSameOperator.bToScriptAsRString = True
-        clsGreterSameOperator.SetOperation(">")
-        clsGreterSameOperator.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsAndOperator, iPosition:=0)
-        clsLargeOperator.bToScriptAsRString = True
-        clsRainFilterFunc.SetRCommand("instat_calculation$new")
-        clsRainFilterFunc.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
-        clsRainFilterFunc.AddParameter("save", 2)
-        clsRainFilterFunc.AddParameter("result_data_frame", Chr(34) & "Rainfall_Filter" & Chr(34))
-        clsRainFilterFunc.SetAssignTo("rainfall_filter")
-        clsLargeOperator.SetOperation(">")
-        clsLargeOperator.AddParameter("left", iPosition:=0)
-        clsLargeOperator.AddParameter("right", "200", iPosition:=1)
-        clsListFunc.SetRCommand("list")
-        clsListFunc.AddParameter("sub1", clsRFunctionParameter:=clsGroupByFunc, bIncludeArgumentName:=False, iPosition:=1)
-
+        'Wet
         clsEqualOperator.SetOperation("==")
         clsEqualOperator.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsGreaterOperator, iPosition:=0)
         clsEqualOperator.AddParameter("right", "0", bIncludeArgumentName:=False, iPosition:=1)
-
         clsCumSumFuc.SetRCommand("cumsum")
-        clsGreaterOperator.SetOperation(">")
-        clsGreaterOperator.bBrackets = False
-        clsGreaterOperator.AddParameter("y", "0", iPosition:=1, bIncludeArgumentName:=False)
-        clsCumSumFuc.AddParameter("x", bIncludeArgumentName:=False, clsROperatorParameter:=clsGreaterOperator, iPosition:=0)
-
         clsGreatOperator.SetOperation(">")
         clsGreatOperator.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsMinusOperator, iPosition:=0)
-        clsGreaterOperator.bBrackets = False
         clsGreatOperator.bToScriptAsRString = True
         clsMinusOperator.SetOperation("-")
-        clsMinusOperator.bBrackets = False
         clsMinusOperator.AddParameter("left", bIncludeArgumentName:=False, clsRFunctionParameter:=clsCumSumFuc, iPosition:=0)
         clsMinusOperator.AddParameter("right", bIncludeArgumentName:=False, clsRFunctionParameter:=clsCumMaxFunc, iPosition:=1)
-
         clsCumMaxFunc.SetRCommand("cummax")
         clsCumMaxFunc.AddParameter("right", bIncludeArgumentName:=False, clsROperatorParameter:=clsMultiplOperator, iPosition:=0)
         clsMultiplOperator.SetOperation("*")
         clsMultiplOperator.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsEqualOperator, iPosition:=0)
         clsMultiplOperator.AddParameter("right", bIncludeArgumentName:=False, clsRFunctionParameter:=clsCumSumFuc, iPosition:=1)
+        clsCumSumFuc.AddParameter("x", bIncludeArgumentName:=False, clsROperatorParameter:=clsGreaterOperator, iPosition:=0)
 
-        'Combined filter
+        'Combined filters
         clsOrLargeSameOperator.SetOperation("|")
+        clsOrLargeSameOperator.bBrackets = False
         clsOrLargeSameOperator.AddParameter("large", bIncludeArgumentName:=False, clsROperatorParameter:=clsLargeOperator, iPosition:=0)
         clsOrLargeSameOperator.AddParameter("same", bIncludeArgumentName:=False, clsROperatorParameter:=clsGreterSameOperator, iPosition:=1)
         clsOrLargeWetOperator.SetOperation("|")
