@@ -125,23 +125,6 @@ Public Class dlgClimaticCheckDataRain
         clsOrSameWetOperator = New ROperator
         clsEqualOperator = New ROperator
 
-        clsCumSumFuc.Clear()
-        clsCumMaxFunc.Clear()
-        clsGreaterOperator.Clear()
-        clsMinusOperator.Clear()
-        clsMultiplOperator.Clear()
-        clsGreatOperator.Clear()
-        clsGroupByFunc.Clear()
-        clsRainFilterFunc.Clear()
-        clsRunCalcFunc.Clear()
-        clsListFunc.Clear()
-        clsLargeOperator.Clear()
-        clsAndOperator.Clear()
-        clsRleFunc.Clear()
-        clsDollarOperator.Clear()
-        clsRepFunc.Clear()
-        clsAsNumericFunc.Clear()
-
         ucrSelectorRain.Reset()
         ucrReceiverStation.SetMeAsReceiver()
 
@@ -246,6 +229,8 @@ Public Class dlgClimaticCheckDataRain
         If Not ucrReceiverStation.IsEmpty Then
             clsGroupByFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames & ")", iPosition:=1)
             clsRainFilterFunc.AddParameter("manipulations", clsRFunctionParameter:=clsListFunc, iPosition:=4)
+        Else
+            clsRainFilterFunc.RemoveParameterByName("manipulations")
         End If
     End Sub
 
