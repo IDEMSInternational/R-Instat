@@ -453,7 +453,7 @@ Public Class ucrGeom
         clsgeom_density2d.AddAesParameter("size")
 
         ''Adding layer parameters
-        'not sure of other stats here
+        'not sure of other stats and positons here
         clsgeom_density2d.AddLayerParameter("stat", "list", Chr(34) & "density2d" & Chr(34), lstParameterStrings:={Chr(34) & "density2d" & Chr(34)})
         clsgeom_density2d.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
         clsgeom_density2d.AddLayerParameter("lineend", "list", Chr(34) & "butt" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "butt" & Chr(34), Chr(34) & "square" & Chr(34)})
