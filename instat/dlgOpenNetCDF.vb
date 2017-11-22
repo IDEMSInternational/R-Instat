@@ -36,13 +36,15 @@ Public Class dlgOpenNetCDF
     Private bCloseFile As Boolean = False
     Private strFileAssignName As String = "nc"
     Private iExpandedWidth As Integer
+    Private strLibraryPath As String = Path.Combine(frmMain.strStaticPath, "Library", "Climatic", "Satellite/")
+    Private bFromLibrary As Boolean = False
 
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
         bFirstLoad = True
         bComponentsInitialised = True
-        bStartOpenDialog = True
+        bStartOpenDialog = False
         ucrInputDataName.bAutoChangeOnLeave = True
         iExpandedWidth = Me.Width
     End Sub
@@ -157,7 +159,9 @@ Public Class dlgOpenNetCDF
         Using dlgOpen As New OpenFileDialog
             dlgOpen.Filter = "All Data files|*.nc|NetCDF files|*.nc"
             dlgOpen.Title = "Open Data from file"
-            If Not ucrInputFilePath.IsEmpty() Then
+            If bFromLibrary Then
+                dlgOpen.InitialDirectory = Path.GetDirectoryName(Replace(strLibraryPath, "/", "\"))
+            ElseIf Not ucrInputFilePath.IsEmpty() Then
                 dlgOpen.InitialDirectory = Path.GetDirectoryName(Replace(ucrInputFilePath.GetText(), "/", "\"))
             Else
                 dlgOpen.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
@@ -197,6 +201,12 @@ Public Class dlgOpenNetCDF
 
     Private Sub cmdOpenDataSet_Click(sender As Object, e As EventArgs) Handles cmdOpenDataSet.Click
         GetFileFromOpenDialog()
+    End Sub
+
+    Private Sub cmdFromLibrary_Click(sender As Object, e As EventArgs) Handles cmdFromLibrary.Click
+        bFromLibrary = True
+        GetFileFromOpenDialog()
+        bFromLibrary = False
     End Sub
 
     Private Sub cmdDetails_Click(sender As Object, e As EventArgs) Handles cmdDetails.Click

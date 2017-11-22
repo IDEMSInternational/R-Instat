@@ -19,11 +19,13 @@ Public Class sdgDescribeTwoVarGraph
     ' Public bControlsInitialised As Boolean = False
     'Public clsGraphOneVariable As New ROperator
     Public bFirstLoad As Boolean = True
+    Private bLoaded As Boolean = False
 
     Private Sub sdgDescribeTwoVarGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             bFirstLoad = False
+            bLoaded = True
         End If
     End Sub
 
@@ -110,6 +112,8 @@ Public Class sdgDescribeTwoVarGraph
     'End Sub
 
     Private Sub ucrGraphs_NameChanged() Handles ucrNumericByNumeric.NameChanged, ucrNumericByCategorical.NameChanged, ucrCategoricalByNumeric.NameChanged, ucrCategoricalByCategorical.NameChanged
-        dlgDescribeTwoVarGraph.Results()
+        If bLoaded Then
+            dlgDescribeTwoVarGraph.Results()
+        End If
     End Sub
 End Class
