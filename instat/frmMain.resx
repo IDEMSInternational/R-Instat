@@ -2314,6 +2314,12 @@
   <data name="ImportFromToolStripMenuItem.Text" xml:space="preserve">
     <value>Import from Databases...</value>
   </data>
+  <data name="OpenNETcdfFileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 22</value>
+  </data>
+  <data name="OpenNETcdfFileToolStripMenuItem.Text" xml:space="preserve">
+    <value>Open NetCDF...</value>
+  </data>
   <data name="ToolStripSeparator27.Size" type="System.Drawing.Size, System.Drawing">
     <value>210, 6</value>
   </data>
@@ -7229,6 +7235,12 @@
     <value>ImportFromToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;ImportFromToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;OpenNETcdfFileToolStripMenuItem.Name" xml:space="preserve">
+    <value>OpenNETcdfFileToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;OpenNETcdfFileToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator27.Name" xml:space="preserve">
