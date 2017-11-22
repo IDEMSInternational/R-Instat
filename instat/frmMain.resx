@@ -287,6 +287,15 @@
   <data name="CummulativeDistributionToolStripMenuItem.Text" xml:space="preserve">
     <value>Cumulative Distribution...</value>
   </data>
+  <data name="mnuDescribeSpecificMosaic.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuDescribeSpecificMosaic.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 22</value>
+  </data>
+  <data name="mnuDescribeSpecificMosaic.Text" xml:space="preserve">
+    <value>Mosaic</value>
+  </data>
   <data name="mnuDescribeSpecific.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 22</value>
   </data>
@@ -5669,6 +5678,12 @@
     <value>CummulativeDistributionToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;CummulativeDistributionToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuDescribeSpecificMosaic.Name" xml:space="preserve">
+    <value>mnuDescribeSpecificMosaic</value>
+  </data>
+  <data name="&gt;&gt;mnuDescribeSpecificMosaic.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuDescribeGeneral.Name" xml:space="preserve">
