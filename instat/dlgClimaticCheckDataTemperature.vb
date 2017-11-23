@@ -33,6 +33,9 @@ Public Class dlgClimaticCheckDataTemperature
     'difference
     Private clsDiffOperator, clsLessDiffOperator As ROperator
 
+    'combined
+    Private clsOrRangeJumpOperator, clsOrRangeSameOperator, clsOrRangeDiffOperator, clsOrSameJumpOperator, clsOrSameDiffOperator, clsOrJumpDiffOperator As ROperator
+
     Private Sub dlgClimaticCheckDataTemperature_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstload Then
@@ -176,18 +179,12 @@ Public Class dlgClimaticCheckDataTemperature
         clsSameGreaterOperator = New ROperator
         clsDollarOperator = New ROperator
 
-        clsGroupByFunc.Clear()
-        clsListFunc.Clear()
-        clsFilterFunc.Clear()
-        clsRunCalcFunc.Clear()
-        clsLessOperator.Clear()
-        clsGreaterOperator.Clear()
-        clsAndOpertor.Clear()
-        clsAbsFunc.Clear()
-        clsConcFunc.Clear()
-        clsDiffFunc.Clear()
-        clsLessDiffOperator.Clear()
-        clsDiffOperator.Clear()
+        clsOrRangeJumpOperator = New ROperator
+        clsOrRangeSameOperator = New ROperator
+        clsOrRangeDiffOperator = New ROperator
+        clsOrSameJumpOperator = New ROperator
+        clsOrSameDiffOperator = New ROperator
+        clsOrJumpDiffOperator = New ROperator
 
         ucrSelectorTemperature.Reset()
 
@@ -250,6 +247,33 @@ Public Class dlgClimaticCheckDataTemperature
         clsFilterFunc.AddParameter("manipulations", clsRFunctionParameter:=clsListFunc, iPosition:=3)
         clsFilterFunc.SetAssignTo("temp_filter")
 
+
+        'combined
+        clsOrRangeJumpOperator.SetOperation("|")
+        clsOrRangeJumpOperator.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsAndOpertor, iPosition:=0)
+        clsOrRangeJumpOperator.AddParameter("right", bIncludeArgumentName:=False, clsROperatorParameter:=clsJumpGreaterOperator, iPosition:=1)
+
+        clsOrRangeSameOperator.SetOperation("|")
+        clsOrRangeSameOperator.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsAndOpertor, iPosition:=0)
+        clsOrRangeSameOperator.AddParameter("right", bIncludeArgumentName:=False, clsROperatorParameter:=clsSameGreaterOperator, iPosition:=1)
+
+        clsOrRangeDiffOperator.SetOperation("|")
+        clsOrRangeDiffOperator.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsAndOpertor, iPosition:=0)
+        clsOrRangeDiffOperator.AddParameter("right", bIncludeArgumentName:=False, clsROperatorParameter:=clsLessDiffOperator, iPosition:=1)
+
+        clsOrSameJumpOperator.SetOperation("|")
+        clsOrSameJumpOperator.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsSameGreaterOperator, iPosition:=0)
+        clsOrSameJumpOperator.AddParameter("right", bIncludeArgumentName:=False, clsROperatorParameter:=clsJumpGreaterOperator, iPosition:=1)
+
+        clsOrSameDiffOperator.SetOperation("|")
+        clsOrSameDiffOperator.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsSameGreaterOperator, iPosition:=0)
+        clsOrSameDiffOperator.AddParameter("right", bIncludeArgumentName:=False, clsROperatorParameter:=clsLessDiffOperator, iPosition:=1)
+
+        clsOrJumpDiffOperator.SetOperation("|")
+        clsOrJumpDiffOperator.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsJumpGreaterOperator, iPosition:=0)
+        clsOrJumpDiffOperator.AddParameter("right", bIncludeArgumentName:=False, clsROperatorParameter:=clsLessDiffOperator, iPosition:=1)
+
+
         clsRunCalcFunc.SetRCommand("InstatDataObject$run_instat_calculation")
         clsRunCalcFunc.AddParameter("calc", clsRFunctionParameter:=clsFilterFunc, iPosition:=0)
         clsRunCalcFunc.AddParameter("display", "FALSE")
@@ -311,14 +335,49 @@ Public Class dlgClimaticCheckDataTemperature
     End Sub
 
     Private Sub ucrChkRange_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRange.ControlValueChanged, ucrChkJump.ControlValueChanged, ucrChkDifference.ControlValueChanged, ucrChkSame.ControlValueChanged
-        If ucrChkRange.Checked Then
+        If ucrChkRange.Checked AndAlso Not ucrChkJump.Checked AndAlso Not ucrChkDifference.Checked AndAlso Not ucrChkSame.Checked Then
+            clsAndOpertor.bToScriptAsRString = True
             clsFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsAndOpertor, iPosition:=1)
-        ElseIf ucrChkJump.Checked Then
+        ElseIf ucrChkJump.Checked AndAlso Not ucrChkRange.Checked AndAlso Not ucrChkDifference.Checked AndAlso Not ucrChkSame.Checked Then
+            clsJumpGreaterOperator.bToScriptAsRString = True
             clsFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsJumpGreaterOperator, iPosition:=1)
-        ElseIf ucrChkDifference.Checked Then
+        ElseIf ucrChkDifference.Checked AndAlso Not ucrChkJump.Checked AndAlso Not ucrChkRange.Checked AndAlso Not ucrChkSame.Checked Then
+            clsLessDiffOperator.bToScriptAsRString = True
             clsFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsLessDiffOperator, iPosition:=1)
-        ElseIf ucrChkSame.Checked Then
+        ElseIf ucrChkSame.Checked AndAlso Not ucrChkJump.Checked AndAlso Not ucrChkDifference.Checked AndAlso Not ucrChkRange.Checked Then
+            clsSameGreaterOperator.bToScriptAsRString = True
             clsFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsSameGreaterOperator, iPosition:=1)
+        ElseIf ucrChkRange.Checked AndAlso ucrChkJump.Checked Then
+            clsAndOpertor.bToScriptAsRString = False
+            clsJumpGreaterOperator.bToScriptAsRString = False
+            clsOrRangeJumpOperator.bToScriptAsRString = True
+            clsFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsOrRangeJumpOperator, iPosition:=1)
+        ElseIf ucrChkRange.Checked AndAlso ucrChkSame.Checked Then
+            clsAndOpertor.bToScriptAsRString = False
+            clsSameGreaterOperator.bToScriptAsRString = False
+            clsOrRangeSameOperator.bToScriptAsRString = True
+            clsFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsOrRangeSameOperator, iPosition:=1)
+        ElseIf ucrChkRange.Checked AndAlso ucrChkDifference.Checked Then
+            clsAndOpertor.bToScriptAsRString = False
+            clsLessDiffOperator.bToScriptAsRString = False
+            clsOrRangeDiffOperator.bToScriptAsRString = True
+            clsFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsOrRangeDiffOperator, iPosition:=1)
+        ElseIf ucrChkSame.Checked AndAlso ucrChkJump.Checked Then
+            clsSameGreaterOperator.bToScriptAsRString = False
+            clsJumpGreaterOperator.bToScriptAsRString = False
+            clsOrSameJumpOperator.bToScriptAsRString = True
+            clsFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsOrSameJumpOperator, iPosition:=1)
+        ElseIf ucrChkSame.Checked AndAlso ucrChkDifference.Checked Then
+            clsSameGreaterOperator.bToScriptAsRString = False
+            clsLessDiffOperator.bToScriptAsRString = False
+            clsOrSameDiffOperator.bToScriptAsRString = True
+            clsFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsOrSameDiffOperator, iPosition:=1)
+        ElseIf ucrChkJump.Checked AndAlso ucrChkDifference.Checked Then
+            clsJumpGreaterOperator.bToScriptAsRString = False
+            clsLessDiffOperator.bToScriptAsRString = False
+            clsOrJumpDiffOperator.bToScriptAsRString = True
+            clsFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsOrJumpDiffOperator, iPosition:=1)
         End If
+
     End Sub
 End Class
