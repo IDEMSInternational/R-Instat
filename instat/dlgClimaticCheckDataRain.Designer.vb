@@ -284,7 +284,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.lblDays.Name = "lblDays"
         Me.lblDays.Size = New System.Drawing.Size(29, 13)
         Me.lblDays.TabIndex = 20
-        Me.lblDays.Text = "days"
+        Me.lblDays.Text = "days (ignoring zero)"
         '
         'lblDaysWet
         '
@@ -293,7 +293,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.lblDaysWet.Name = "lblDaysWet"
         Me.lblDaysWet.Size = New System.Drawing.Size(98, 13)
         Me.lblDaysWet.TabIndex = 21
-        Me.lblDaysWet.Text = "days( ignoring zero)"
+        Me.lblDaysWet.Text = "days"
         '
         'dlgClimaticCheckDataRain
         '
