@@ -144,7 +144,6 @@ Public Class dlgClimaticCheckDataRain
         clsRainFilterFunc.SetAssignTo("rainfall_filter")
 
         'Large
-        clsLargeOperator.bToScriptAsRString = True
         clsLargeOperator.SetOperation(">")
         clsLargeOperator.AddParameter("left", iPosition:=0)
         clsLargeOperator.AddParameter("right", "200", iPosition:=1)
@@ -156,7 +155,6 @@ Public Class dlgClimaticCheckDataRain
         clsAndOperator.bBrackets = False
         clsAndOperator.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsGreaterOperator, iPosition:=0)
         clsAndOperator.AddParameter("right", bIncludeArgumentName:=False, clsRFunctionParameter:=clsRepFunc, iPosition:=1)
-        clsGreterSameOperator.bToScriptAsRString = True
         clsGreterSameOperator.SetOperation(">")
         clsGreterSameOperator.bBrackets = False
         clsGreterSameOperator.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsAndOperator, iPosition:=0)
@@ -177,7 +175,6 @@ Public Class dlgClimaticCheckDataRain
         clsCumSumFuc.SetRCommand("cumsum")
         clsGreatOperator.SetOperation(">")
         clsGreatOperator.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsMinusOperator, iPosition:=0)
-        clsGreatOperator.bToScriptAsRString = True
         clsMinusOperator.SetOperation("-")
         clsMinusOperator.AddParameter("left", bIncludeArgumentName:=False, clsRFunctionParameter:=clsCumSumFuc, iPosition:=0)
         clsMinusOperator.AddParameter("right", bIncludeArgumentName:=False, clsRFunctionParameter:=clsCumMaxFunc, iPosition:=1)
@@ -259,18 +256,28 @@ Public Class dlgClimaticCheckDataRain
 
     Private Sub ucrChkLarge_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLarge.ControlValueChanged, ucrChkSame.ControlValueChanged, ucrChkWetDays.ControlValueChanged, ucrNudWetDays.ControlValueChanged, ucrNudSame.ControlValueChanged
         If ucrChkLarge.Checked AndAlso Not ucrChkSame.Checked AndAlso Not ucrChkWetDays.Checked Then
+            clsLargeOperator.bToScriptAsRString = True
             clsRainFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsLargeOperator, iPosition:=1)
         ElseIf ucrChkSame.Checked AndAlso Not ucrChkLarge.Checked AndAlso Not ucrChkWetDays.Checked Then
+            clsGreterSameOperator.bToScriptAsRString = True
             clsRainFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsGreterSameOperator, iPosition:=1)
-            'clsRainFilterFunc.AddParameter("function_exp", Chr(34) & strRain & ">0&" & "rep(rle(" & strRain & ")$lenghts," & "rle(" & strRain & ")$lengths)" & ">" & ucrNudSame.Value & Chr(34), iPosition:=1)
         ElseIf ucrChkWetDays.Checked AndAlso Not ucrChkLarge.Checked AndAlso Not ucrChkSame.Checked Then
+            clsGreatOperator.bToScriptAsRString = True
             clsRainFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsGreatOperator, iPosition:=1)
-            'clsRainFilterFunc.AddParameter("function_exp", Chr(34) & "(cumsum(" & strRain & ">0)-cummax((" & strRain & ">0)*cumsum(" & strRain & ">0" & ")))" & ">" & ucrNudWetDays.Value & Chr(34), iPosition:=1)
         ElseIf ucrChkLarge.Checked AndAlso ucrChkSame.Checked Then
+            clsLargeOperator.bToScriptAsRString = False
+            clsGreterSameOperator.bToScriptAsRString = False
+            clsOrLargeSameOperator.bToScriptAsRString = True
             clsRainFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsOrLargeSameOperator, iPosition:=1)
         ElseIf ucrChkLarge.Checked AndAlso ucrChkWetDays.Checked Then
+            clsLargeOperator.bToScriptAsRString = False
+            clsGreatOperator.bToScriptAsRString = False
+            clsOrLargeWetOperator.bToScriptAsRString = True
             clsRainFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsOrLargeWetOperator, iPosition:=1)
         ElseIf ucrChkSame.Checked AndAlso ucrChkWetDays.Checked Then
+            clsGreatOperator.bToScriptAsRString = False
+            clsGreterSameOperator.bToScriptAsRString = False
+            clsOrSameWetOperator.bToScriptAsRString = True
             clsRainFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsOrSameWetOperator, iPosition:=1)
         End If
     End Sub
