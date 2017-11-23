@@ -43,10 +43,10 @@ Partial Class ucrScript
         Me.mnuContextScript = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuRunSelectedText = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClearContents = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOpenScript = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdRun = New System.Windows.Forms.Button()
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
-        Me.cmdOpenScript = New System.Windows.Forms.Button()
         Me.mnuContextScript.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
         Me.SuspendLayout()
@@ -56,18 +56,18 @@ Partial Class ucrScript
         Me.txtScript.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtScript.ContextMenuStrip = Me.mnuContextScript
         Me.txtScript.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtScript.Location = New System.Drawing.Point(3, 89)
+        Me.txtScript.Location = New System.Drawing.Point(3, 56)
         Me.txtScript.Multiline = True
         Me.txtScript.Name = "txtScript"
         Me.txtScript.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtScript.Size = New System.Drawing.Size(405, 222)
+        Me.txtScript.Size = New System.Drawing.Size(405, 255)
         Me.txtScript.TabIndex = 0
         '
         'mnuContextScript
         '
-        Me.mnuContextScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuRunSelectedText, Me.mnuClearContents})
+        Me.mnuContextScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuRunSelectedText, Me.mnuClearContents, Me.mnuOpenScript})
         Me.mnuContextScript.Name = "mnuContextLogFile"
-        Me.mnuContextScript.Size = New System.Drawing.Size(167, 48)
+        Me.mnuContextScript.Size = New System.Drawing.Size(167, 70)
         '
         'mnuRunSelectedText
         '
@@ -81,10 +81,16 @@ Partial Class ucrScript
         Me.mnuClearContents.Size = New System.Drawing.Size(166, 22)
         Me.mnuClearContents.Text = "Clear Contents"
         '
+        'mnuOpenScript
+        '
+        Me.mnuOpenScript.Name = "mnuOpenScript"
+        Me.mnuOpenScript.Size = New System.Drawing.Size(166, 22)
+        Me.mnuOpenScript.Text = "Open Script"
+        '
         'cmdRun
         '
         Me.cmdRun.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.cmdRun.Location = New System.Drawing.Point(3, 56)
+        Me.cmdRun.Location = New System.Drawing.Point(3, 23)
         Me.cmdRun.Name = "cmdRun"
         Me.cmdRun.Size = New System.Drawing.Size(405, 27)
         Me.cmdRun.TabIndex = 1
@@ -109,30 +115,18 @@ Partial Class ucrScript
         Me.tlpTableContainer.ColumnCount = 1
         Me.tlpTableContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.tlpTableContainer.Controls.Add(Me.lblHeader, 0, 0)
-        Me.tlpTableContainer.Controls.Add(Me.txtScript, 0, 3)
-        Me.tlpTableContainer.Controls.Add(Me.cmdOpenScript, 0, 1)
-        Me.tlpTableContainer.Controls.Add(Me.cmdRun, 0, 2)
+        Me.tlpTableContainer.Controls.Add(Me.txtScript, 0, 2)
+        Me.tlpTableContainer.Controls.Add(Me.cmdRun, 0, 1)
         Me.tlpTableContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tlpTableContainer.Location = New System.Drawing.Point(0, 0)
         Me.tlpTableContainer.Name = "tlpTableContainer"
-        Me.tlpTableContainer.RowCount = 4
+        Me.tlpTableContainer.RowCount = 3
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33.0!))
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33.0!))
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.tlpTableContainer.Size = New System.Drawing.Size(411, 314)
         Me.tlpTableContainer.TabIndex = 9
-        '
-        'cmdOpenScript
-        '
-        Me.cmdOpenScript.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.cmdOpenScript.Location = New System.Drawing.Point(3, 23)
-        Me.cmdOpenScript.Name = "cmdOpenScript"
-        Me.cmdOpenScript.Size = New System.Drawing.Size(405, 27)
-        Me.cmdOpenScript.TabIndex = 9
-        Me.cmdOpenScript.Text = "Open Script"
-        Me.cmdOpenScript.UseVisualStyleBackColor = True
         '
         'ucrScript
         '
@@ -156,5 +150,5 @@ Partial Class ucrScript
     Friend WithEvents mnuContextScript As ContextMenuStrip
     Friend WithEvents mnuRunSelectedText As ToolStripMenuItem
     Friend WithEvents mnuClearContents As ToolStripMenuItem
-    Friend WithEvents cmdOpenScript As Button
+    Friend WithEvents mnuOpenScript As ToolStripMenuItem
 End Class

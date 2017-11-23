@@ -62,7 +62,7 @@ Public Class ucrScript
         End If
     End Sub
 
-    Private Sub cmdOpenScript_Click(sender As Object, e As EventArgs) Handles cmdOpenScript.Click
+    Private Sub mnuOpenScript_Click(sender As Object, e As EventArgs) Handles mnuOpenScript.Click
         Dim clsProcessStart As New RFunction
         Dim strScriptFilename As String = ""
         Dim i As Integer
