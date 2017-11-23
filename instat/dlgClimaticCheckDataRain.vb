@@ -26,23 +26,26 @@ Public Class dlgClimaticCheckDataRain
     Private clsLargeOperator As New ROperator
     'Same
     Private clsRleFunc, clsRepFunc, clsAsNumericFunc As New RFunction
-    Private clsAndOperator, clsDollarOperator, clsGreterSameOperator As ROperator
+    Private clsAndOperator, clsDollarOperator, clsGreaterSameOperator As New ROperator
     'Wetdays
     Private clsCumSumFuc, clsCumMaxFunc As New RFunction
     Private clsGreaterOperator, clsMinusOperator, clsMultiplOperator, clsGreatOperator, clsEqualOperator As New ROperator
     'Combined Filters
-    Private clsOrLargeSameOperator, clsOrLargeWetOperator, clsOrSameWetOperator As ROperator
+    Private clsOrOperator As New ROperator
 
     Private Sub dlgRain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstload Then
             InitialiseDialog()
-            bFirstload = False
         End If
         If bReset Then
-            setDefaults()
+            SetDefaults()
         End If
         setRcodeForControls(bReset)
+        If bFirstload Then
+            AutoFillRainColumn()
+            bFirstload = False
+        End If
         bReset = False
         autoTranslate(Me)
         TestOkEnabled()
@@ -78,8 +81,6 @@ Public Class dlgClimaticCheckDataRain
         ucrReceiverElement.Selector = ucrSelectorRain
         ucrReceiverElement.SetParameterIsString()
         ucrReceiverElement.bWithQuotes = False
-        'ucrReceiverElement.SetClimaticType("Rain")
-        'ucrReceiverElement.bAutoFill = True
 
         ucrNudLarge.SetParameter(New RParameter("right", 1))
 
@@ -87,17 +88,13 @@ Public Class dlgClimaticCheckDataRain
         ucrReceiverDate.SetClimaticType("date")
         ucrReceiverDate.bAutoFill = True
 
-        'ucrChkLarge.SetParameter(New RParameter("function_exp", clsLargeOperator, 1, False), False)
-        'ucrChkLarge.AddAdditionalCodeParameterPair(clsRainFilterFunc, New RParameter("function_exp", clsLargeOperator, 1, False), iAdditionalPairNo:=1)
-        'ucrChkLarge.AddParameterIsROperatorCondition(True,)
+        ucrChkLarge.SetParameter(New RParameter("large", clsLargeOperator, 1), bNewChangeParameterValue:=False)
         ucrChkLarge.SetText("Large")
 
-        'ucrChkSame.SetParameter(New RParameter("function_exp", clsGreterSameOperator, 1, False), False)
-        'ucrChkSame.AddAdditionalCodeParameterPair(clsRainFilterFunc, New RParameter("function_exp", clsGreterSameOperator, 1, False), iAdditionalPairNo:=1)
-        ucrChkSame.SetText("Same")
+        ucrChkSame.SetParameter(New RParameter("same", clsGreaterSameOperator, 1), bNewChangeParameterValue:=False)
+        ucrChkSame.SetText("Consecutive")
 
-        'ucrChkWetDays.SetParameter(New RParameter("tr_sub", clsLargeOperator, 1, False), False)
-        'ucrChkWetDays.AddAdditionalCodeParameterPair(clsRainFilterFunc, New RParameter("function_exp", clsGreatOperator, 1, False), iAdditionalPairNo:=1)
+        ucrChkWetDays.SetParameter(New RParameter("wet_days", clsGreatOperator, 1, False), bNewChangeParameterValue:=False)
         ucrChkWetDays.SetText("Wet Days")
 
         ucrNudSame.SetParameter(New RParameter("right", 1, bNewIncludeArgumentName:=False))
@@ -112,18 +109,19 @@ Public Class dlgClimaticCheckDataRain
         ucrNudWetDays.SetLinkedDisplayControl(lblDaysWet)
     End Sub
 
-    Private Sub setDefaults()
+    Private Sub SetDefaults()
         Dim strLengths As String = "lengths"
         clsRleFunc = New RFunction
         clsRepFunc = New RFunction
         clsAsNumericFunc = New RFunction
         clsAndOperator = New ROperator
         clsDollarOperator = New ROperator
-        clsGreterSameOperator = New ROperator
-        clsOrLargeSameOperator = New ROperator
-        clsOrLargeWetOperator = New ROperator
-        clsOrSameWetOperator = New ROperator
+        clsOrOperator = New ROperator
         clsEqualOperator = New ROperator
+
+        clsLargeOperator.Clear()
+        clsGreaterSameOperator.Clear()
+        clsGreatOperator.Clear()
 
         ucrSelectorRain.Reset()
         ucrReceiverStation.SetMeAsReceiver()
@@ -155,9 +153,9 @@ Public Class dlgClimaticCheckDataRain
         clsAndOperator.bBrackets = False
         clsAndOperator.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsGreaterOperator, iPosition:=0)
         clsAndOperator.AddParameter("right", bIncludeArgumentName:=False, clsRFunctionParameter:=clsRepFunc, iPosition:=1)
-        clsGreterSameOperator.SetOperation(">")
-        clsGreterSameOperator.bBrackets = False
-        clsGreterSameOperator.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsAndOperator, iPosition:=0)
+        clsGreaterSameOperator.SetOperation(">")
+        clsGreaterSameOperator.bBrackets = False
+        clsGreaterSameOperator.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsAndOperator, iPosition:=0)
         clsAsNumericFunc.SetRCommand("as.numeric")
         clsRleFunc.SetRCommand("rle")
         clsRleFunc.AddParameter("numeric", bIncludeArgumentName:=False, clsRFunctionParameter:=clsAsNumericFunc, iPosition:=0)
@@ -186,17 +184,12 @@ Public Class dlgClimaticCheckDataRain
         clsCumSumFuc.AddParameter("x", bIncludeArgumentName:=False, clsROperatorParameter:=clsGreaterOperator, iPosition:=0)
 
         'Combined filters
-        clsOrLargeSameOperator.SetOperation("|")
-        clsOrLargeSameOperator.bBrackets = False
-        clsOrLargeSameOperator.AddParameter("large", bIncludeArgumentName:=False, clsROperatorParameter:=clsLargeOperator, iPosition:=0)
-        clsOrLargeSameOperator.AddParameter("same", bIncludeArgumentName:=False, clsROperatorParameter:=clsGreterSameOperator, iPosition:=1)
-        clsOrLargeWetOperator.SetOperation("|")
-        clsOrLargeWetOperator.AddParameter("large", bIncludeArgumentName:=False, clsROperatorParameter:=clsLargeOperator, iPosition:=0)
-        clsOrLargeWetOperator.AddParameter("wet", bIncludeArgumentName:=False, clsROperatorParameter:=clsGreatOperator, iPosition:=1)
-        clsOrSameWetOperator.SetOperation("|")
-        clsOrSameWetOperator.AddParameter("same", bIncludeArgumentName:=False, clsROperatorParameter:=clsGreterSameOperator, iPosition:=0)
-        clsOrSameWetOperator.AddParameter("wet", bIncludeArgumentName:=False, clsROperatorParameter:=clsGreatOperator, iPosition:=1)
-        GroupByOptions()
+        clsOrOperator.SetOperation("|")
+        clsOrOperator.bBrackets = True
+        clsOrOperator.bToScriptAsRString = True
+
+        clsRainFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsOrOperator)
+
         clsRunCalcFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsRunCalcFunc.AddParameter("calc", clsRFunctionParameter:=clsRainFilterFunc)
         clsRunCalcFunc.AddParameter("display", "FALSE")
@@ -209,12 +202,12 @@ Public Class dlgClimaticCheckDataRain
         ucrReceiverElement.SetRCode(clsLargeOperator, bReset)
 
         ucrNudLarge.SetRCode(clsLargeOperator, bReset)
-        ucrNudSame.SetRCode(clsGreterSameOperator, bReset)
+        ucrNudSame.SetRCode(clsGreaterSameOperator, bReset)
         ucrNudWetDays.SetRCode(clsGreatOperator, bReset)
 
-        ucrChkLarge.SetRCode(clsLargeOperator, bReset)
-        ucrChkSame.SetRCode(clsGreterSameOperator, bReset)
-        ucrChkWetDays.SetRCode(clsGreatOperator, bReset)
+        ucrChkLarge.SetRCode(clsOrOperator, bReset)
+        ucrChkSame.SetRCode(clsOrOperator, bReset)
+        ucrChkWetDays.SetRCode(clsOrOperator, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -235,7 +228,7 @@ Public Class dlgClimaticCheckDataRain
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        setDefaults()
+        SetDefaults()
         setRcodeForControls(True)
         TestOkEnabled()
     End Sub
@@ -248,37 +241,22 @@ Public Class dlgClimaticCheckDataRain
         strCurrDataName = Chr(34) & ucrSelectorRain.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
         GroupByOptions()
         FilterFunction()
+        AutoFillRainColumn()
     End Sub
 
     Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlValueChanged, ucrNudLarge.ControlValueChanged
         FilterFunction()
     End Sub
 
-    Private Sub ucrChkLarge_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLarge.ControlValueChanged, ucrChkSame.ControlValueChanged, ucrChkWetDays.ControlValueChanged, ucrNudWetDays.ControlValueChanged, ucrNudSame.ControlValueChanged
-        If ucrChkLarge.Checked AndAlso Not ucrChkSame.Checked AndAlso Not ucrChkWetDays.Checked Then
-            clsLargeOperator.bToScriptAsRString = True
-            clsRainFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsLargeOperator, iPosition:=1)
-        ElseIf ucrChkSame.Checked AndAlso Not ucrChkLarge.Checked AndAlso Not ucrChkWetDays.Checked Then
-            clsGreterSameOperator.bToScriptAsRString = True
-            clsRainFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsGreterSameOperator, iPosition:=1)
-        ElseIf ucrChkWetDays.Checked AndAlso Not ucrChkLarge.Checked AndAlso Not ucrChkSame.Checked Then
-            clsGreatOperator.bToScriptAsRString = True
-            clsRainFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsGreatOperator, iPosition:=1)
-        ElseIf ucrChkLarge.Checked AndAlso ucrChkSame.Checked Then
-            clsLargeOperator.bToScriptAsRString = False
-            clsGreterSameOperator.bToScriptAsRString = False
-            clsOrLargeSameOperator.bToScriptAsRString = True
-            clsRainFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsOrLargeSameOperator, iPosition:=1)
-        ElseIf ucrChkLarge.Checked AndAlso ucrChkWetDays.Checked Then
-            clsLargeOperator.bToScriptAsRString = False
-            clsGreatOperator.bToScriptAsRString = False
-            clsOrLargeWetOperator.bToScriptAsRString = True
-            clsRainFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsOrLargeWetOperator, iPosition:=1)
-        ElseIf ucrChkSame.Checked AndAlso ucrChkWetDays.Checked Then
-            clsGreatOperator.bToScriptAsRString = False
-            clsGreterSameOperator.bToScriptAsRString = False
-            clsOrSameWetOperator.bToScriptAsRString = True
-            clsRainFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsOrSameWetOperator, iPosition:=1)
+    Private Sub AutoFillRainColumn()
+        Dim strRainCol As String
+        Dim strDataFrame As String
+
+        strDataFrame = ucrSelectorRain.ucrAvailableDataFrames.cboAvailableDataFrames.Text
+        strRainCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "rain_label")
+
+        If strRainCol <> "" Then
+            ucrReceiverElement.Add(strRainCol, strDataFrame)
         End If
     End Sub
 End Class
