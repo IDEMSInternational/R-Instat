@@ -1427,13 +1427,13 @@ Partial Class frmMain
         '
         'mnuClimaticCheckDataQCRainfall
         '
-        resources.ApplyResources(Me.mnuClimaticCheckDataQCRainfall, "mnuClimaticCheckDataQCRainfall")
         Me.mnuClimaticCheckDataQCRainfall.Name = "mnuClimaticCheckDataQCRainfall"
+        resources.ApplyResources(Me.mnuClimaticCheckDataQCRainfall, "mnuClimaticCheckDataQCRainfall")
         '
         'mnuClimaticCheckDataQCTemperatures
         '
-        resources.ApplyResources(Me.mnuClimaticCheckDataQCTemperatures, "mnuClimaticCheckDataQCTemperatures")
         Me.mnuClimaticCheckDataQCTemperatures.Name = "mnuClimaticCheckDataQCTemperatures"
+        resources.ApplyResources(Me.mnuClimaticCheckDataQCTemperatures, "mnuClimaticCheckDataQCTemperatures")
         '
         'mnuClimaticPrepare
         '
