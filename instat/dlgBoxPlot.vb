@@ -35,16 +35,13 @@ Public Class dlgBoxplot
     Private dctThemeFunctions As Dictionary(Of String, RFunction)
     Private bResetSubdialog As Boolean = True
     Private bResetBoxLayerSubdialog As Boolean = True
-    Private clsGeomAesfunc As New RFunction
-
 
     Private Sub dlgBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
-        Else
-            'SetGeomprefixFillColourAes()
         End If
+
         If bReset Then
             SetDefaults()
         End If
@@ -84,7 +81,7 @@ Public Class dlgBoxplot
 
         ucrByFactorsReceiver.SetParameter(New RParameter("x", 1))
         ucrByFactorsReceiver.Selector = ucrSelectorBoxPlot
-        'ucrByFactorsReceiver.SetIncludedDataTypes({"factor"})
+        ucrByFactorsReceiver.SetIncludedDataTypes({"factor", "numeric"})
         ucrByFactorsReceiver.strSelectorHeading = "Varibles"
         ucrByFactorsReceiver.SetParameterIsString()
         ucrByFactorsReceiver.bWithQuotes = False
@@ -125,7 +122,7 @@ Public Class dlgBoxplot
         clsRggplotFunction = New RFunction
         clsRgeomPlotFunction = New RFunction
         clsRaesFunction = New RFunction
-        clsGeomAesfunc = New RFunction
+        clsLocalRaesFunction = New RFunction
 
         ucrSelectorBoxPlot.Reset()
         ucrSelectorBoxPlot.SetGgplotFunction(clsBaseOperator)
@@ -152,9 +149,9 @@ Public Class dlgBoxplot
         clsRgeomPlotFunction.SetRCommand("geom_boxplot")
         clsRgeomPlotFunction.AddParameter("varwidth", "FALSE")
 
-        clsGeomAesfunc.SetPackageName("ggplot2")
-        clsGeomAesfunc.SetRCommand("aes")
-        clsRgeomPlotFunction.AddParameter("boxaes", clsRFunctionParameter:=clsGeomAesfunc, iPosition:=1, bIncludeArgumentName:=False)
+        clsLocalRaesFunction.SetPackageName("ggplot2")
+        clsLocalRaesFunction.SetRCommand("aes")
+        clsRgeomPlotFunction.AddParameter("boxaes", clsRFunctionParameter:=clsLocalRaesFunction, iPosition:=1, bIncludeArgumentName:=False)
 
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
@@ -166,7 +163,6 @@ Public Class dlgBoxplot
         clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
-        clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
         TempOptionsDisabledInMultipleVariablesCase()
@@ -183,7 +179,7 @@ Public Class dlgBoxplot
         ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
         ucrVariablesAsFactorForBoxplot.SetRCode(clsRaesFunction, bReset)
         ucrByFactorsReceiver.SetRCode(clsRaesFunction, bReset)
-        ucrByFactorsReceiver.AddAdditionalCodeParameterPair(clsGeomAesfunc, New RParameter("group", 0), iAdditionalPairNo:=1)
+        ucrByFactorsReceiver.AddAdditionalCodeParameterPair(clsLocalRaesFunction, New RParameter("group", 0), iAdditionalPairNo:=1)
 
         ucrSecondFactorReceiver.SetRCode(clsRaesFunction, bReset)
         ucrPnlPlots.SetRCode(clsRgeomPlotFunction, bReset)
@@ -211,7 +207,7 @@ Public Class dlgBoxplot
 
     Private Sub cmdBoxPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdBoxPlotOptions.Click
         'SetupLayer sends the components storing the plot info (clsRgeom_boxplotFunction, clsRggplotFunction, ...) of dlgBoxPlot through to sdgLayerOptions where these will be edited.
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomPlotFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsGeomAesfunc, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorBoxPlot, bApplyAesGlobally:=True, bReset:=bResetBoxLayerSubdialog)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomPlotFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorBoxPlot, bApplyAesGlobally:=True, bReset:=bResetBoxLayerSubdialog)
         sdgLayerOptions.ShowDialog()
         bResetBoxLayerSubdialog = False
         'Coming from the sdgLayerOptions, clsRgeom_boxplot and others has been modified. One then needs to display these modifications on the dlgBoxPlot.
