@@ -150,7 +150,7 @@
     <value>True</value>
   </data>
   <data name="lblAppendToDataframe.Location" type="System.Drawing.Point, System.Drawing">
-    <value>256, 46</value>
+    <value>253, 17</value>
   </data>
   <data name="lblAppendToDataframe.Size" type="System.Drawing.Size, System.Drawing">
     <value>115, 13</value>
@@ -211,7 +211,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrSelectorDataFramesToDelete.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 150</value>
+    <value>216, 141</value>
   </data>
   <data name="ucrSelectorDataFramesToDelete.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -241,7 +241,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverDataFrames.Location" type="System.Drawing.Point, System.Drawing">
-    <value>256, 62</value>
+    <value>253, 33</value>
   </data>
   <data name="ucrReceiverDataFrames.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
