@@ -39,19 +39,19 @@ Partial Class dlgCalculator
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgCalculator))
-        Me.ucrCalc = New instat.ucrCalculator()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrCalc = New instat.ucrCalculator()
         Me.SuspendLayout()
-        '
-        'ucrCalc
-        '
-        resources.ApplyResources(Me.ucrCalc, "ucrCalc")
-        Me.ucrCalc.Name = "ucrCalc"
         '
         'ucrBase
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
+        '
+        'ucrCalc
+        '
+        resources.ApplyResources(Me.ucrCalc, "ucrCalc")
+        Me.ucrCalc.Name = "ucrCalc"
         '
         'dlgCalculator
         '
