@@ -153,7 +153,7 @@ Public Class dlgClimaticCheckDataRain
         clsAndOperator.bBrackets = False
         clsAndOperator.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsGreaterOperator, iPosition:=0)
         clsAndOperator.AddParameter("right", bIncludeArgumentName:=False, clsRFunctionParameter:=clsRepFunc, iPosition:=1)
-        clsGreaterSameOperator.SetOperation(">")
+        clsGreaterSameOperator.SetOperation(">=")
         clsGreaterSameOperator.bBrackets = False
         clsGreaterSameOperator.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsAndOperator, iPosition:=0)
         clsAsNumericFunc.SetRCommand("as.numeric")
