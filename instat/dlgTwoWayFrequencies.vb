@@ -346,7 +346,7 @@ Public Class dlgTwoWayFrequencies
         If rdoTable.Checked OrElse rdoBoth.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjTab)
             'ucrBase.clsRsyntax.bHTMLOutput = True
-            ucrBase.clsRsyntax.iCallType = 0
+            ucrBase.clsRsyntax.iCallType = 2
         ElseIf rdoGraph.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjPlot)
             ' ucrBase.clsRsyntax.bHTMLOutput = False

@@ -236,7 +236,7 @@ Public Class dlgOneWayFrequencies
     Private Sub SetBaseFunction()
         If rdoTable.Checked OrElse rdoBoth.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjTab)
-            ucrBase.clsRsyntax.iCallType = 0
+            ucrBase.clsRsyntax.iCallType = 2
         ElseIf rdoGraph.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsPlotGrid)
             ucrBase.clsRsyntax.iCallType = 3
