@@ -36,15 +36,12 @@ Public Class dlgClimaticCheckDataTemperature
         autoTranslate(Me)
         If bFirstload Then
             InitialiseDialog()
+            bFirstload = False
         End If
         If bReset Then
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
-        If bFirstload Then
-            'AutoFillRainColumn()
-            bFirstload = False
-        End If
         bReset = False
         autoTranslate(Me)
         TestOkEnabled()
@@ -99,18 +96,22 @@ Public Class dlgClimaticCheckDataTemperature
         ucrReceiverElement2.bWithQuotes = False
 
         'Checkboxes for options
-        ucrChkRange.SetParameter(New RParameter("range", clsAndOpertor, 1, False), bNewChangeParameterValue:=False)
+        ucrChkRange.SetParameter(New RParameter("range", clsAndOpertor, 1), bNewChangeParameterValue:=False)
         ucrChkRange.SetText("Range")
         ucrChkRange.AddToLinkedControls(ucrNudRangeElement1Min, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrChkRange.AddToLinkedControls(ucrNudRangeElement1Max, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=50)
+        ucrChkRange.AddToLinkedControls(ucrNudRangeElement2Min, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrChkRange.AddToLinkedControls(ucrNudRangeElement2Max, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=50)
+        ucrNudRangeElement2Min.SetLinkedDisplayControl(lblRangeElement2)
+        ucrNudRangeElement2Max.SetLinkedDisplayControl(lblRangeElement2to)
 
-        ucrChkSame.SetParameter(New RParameter("same", clsSameGreaterOperator, 1, False), bNewChangeParameterValue:=False)
+        ucrChkSame.SetParameter(New RParameter("same", clsSameGreaterOperator, 1), bNewChangeParameterValue:=False)
         ucrChkSame.SetText("Same")
         ucrChkSame.AddToLinkedControls(ucrNudSame, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=4)
 
-        ucrChkJump.SetParameter(New RParameter("jump", clsJumpGreaterOperator, 1, False), bNewChangeParameterValue:=False)
+        ucrChkJump.SetParameter(New RParameter("jump", clsJumpGreaterOperator, 1), bNewChangeParameterValue:=False)
         ucrChkJump.SetText("Jump")
-        ucrChkJump.AddToLinkedControls(ucrNudJumpElement1, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrChkJump.AddToLinkedControls(ucrNudJumpElement1, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrChkJump.AddToLinkedControls(ucrNudJumpElement2, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=20)
 
         ucrChkDifference.SetParameter(New RParameter("diff", clsLessDiffOperator, 1), bNewChangeParameterValue:=False)
@@ -129,11 +130,11 @@ Public Class dlgClimaticCheckDataTemperature
         ucrNudRangeElement1Max.SetMinMax(-50, 65)
         ucrNudRangeElement1Max.SetLinkedDisplayControl(lblRangeElement1to)
 
-        ucrNudRangeElement2Min.SetParameter(New RParameter("from", 1))
-        ucrNudRangeElement2Min.SetMinMax(-50, 50)
-
-        ucrNudRangeElement2Max.SetParameter(New RParameter("from", 1))
-        ucrNudRangeElement2Max.SetMinMax(-50, 50)
+        'This are not yet working
+        'ucrNudRangeElement2Min.SetParameter(New RParameter("from", 1))
+        'ucrNudRangeElement2Min.SetMinMax(-50, 50)
+        'ucrNudRangeElement2Max.SetParameter(New RParameter("from", 1))
+        'ucrNudRangeElement2Max.SetMinMax(-50, 50)
 
         'Same Option
         ucrNudSame.SetParameter(New RParameter("n", 1, bNewIncludeArgumentName:=False))
@@ -144,9 +145,10 @@ Public Class dlgClimaticCheckDataTemperature
         ucrNudJumpElement1.SetMinMax(1, 25)
         ucrNudJumpElement1.SetLinkedDisplayControl(lblJumpElement1)
 
-        ucrNudJumpElement2.SetParameter(New RParameter("from", 1))
-        ucrNudJumpElement2.SetMinMax(1, 25)
-        ucrNudJumpElement2.SetLinkedDisplayControl(lblJumpElement2)
+        'Not yet working
+        'ucrNudJumpElement2.SetParameter(New RParameter("from", 1))
+        'ucrNudJumpElement2.SetMinMax(1, 25)
+        'ucrNudJumpElement2.SetLinkedDisplayControl(lblJumpElement2)
 
         'Difference Option
         ucrNudDifference.SetParameter(New RParameter("n", iNewPosition:=1, bNewIncludeArgumentName:=False))
@@ -181,7 +183,7 @@ Public Class dlgClimaticCheckDataTemperature
         clsLessDiffOperator.Clear()
 
         ucrSelectorTemperature.Reset()
-
+        ucrReceiverStation.SetMeAsReceiver()
         clsSameGreaterOperator.SetOperation(">")
         clsSameGreaterOperator.AddParameter("left", bIncludeArgumentName:=False, clsRFunctionParameter:=clsRepFunc, iPosition:=0)
 
@@ -209,14 +211,11 @@ Public Class dlgClimaticCheckDataTemperature
 
         clsAbsFunc.SetRCommand("abs")
         clsAbsFunc.AddParameter("diff", bIncludeArgumentName:=False, clsRFunctionParameter:=clsConcFunc, iPosition:=0)
-
         clsDiffFunc.SetRCommand("diff")
 
-        'clsJumpGreaterOperator.bToScriptAsRString = True
         clsJumpGreaterOperator.SetOperation(">")
         clsJumpGreaterOperator.AddParameter("left", bIncludeArgumentName:=False, clsRFunctionParameter:=clsAbsFunc, iPosition:=0)
 
-        'clsAndOpertor.bToScriptAsRString = True
         clsLessOperator.SetOperation("<")
         clsGreaterOperator.SetOperation(">")
         clsGreaterOperator.AddParameter("from", "0", bIncludeArgumentName:=False, iPosition:=1)
@@ -229,7 +228,6 @@ Public Class dlgClimaticCheckDataTemperature
         clsListFunc.AddParameter("list", bIncludeArgumentName:=False, clsRFunctionParameter:=clsGroupByFunc, iPosition:=0)
         clsGroupByFunc.SetRCommand("instat_calculation$new")
         clsGroupByFunc.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=0)
-        'clsGroupByFunc.AddParameter("calculated_from", clsRFunctionParameter:=clsListFunc, iPosition:=1)
         clsGroupByFunc.SetAssignTo("grouping")
 
         clsFilterFunc.SetRCommand("instat_calculation$new")
