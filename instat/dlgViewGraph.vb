@@ -33,6 +33,7 @@ Public Class dlgViewGraph
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetGraphDisplayType()
         bReset = False
         TestOkEnabled()
     End Sub
@@ -102,6 +103,10 @@ Public Class dlgViewGraph
     End Sub
 
     Private Sub ucrPnlDisplayOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDisplayOptions.ControlValueChanged
+        SetGraphDisplayType()
+    End Sub
+
+    Private Sub SetGraphDisplayType()
         If rdoDisplayInteractiveView.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsggPlotly)
             ' Since R 3.4.2 this is the only way the RDotNet detects the plotly window should load

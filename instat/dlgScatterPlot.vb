@@ -71,7 +71,6 @@ Public Class dlgScatterPlot
         ucrVariablesAsFactorForScatter.bWithQuotes = False
         ucrVariablesAsFactorForScatter.Selector = ucrSelectorForScatter
         ucrVariablesAsFactorForScatter.SetFactorReceiver(ucrFactorOptionalReceiver)
-        ucrVariablesAsFactorForScatter.SetIncludedDataTypes({"factor", "numeric"})
         ucrVariablesAsFactorForScatter.strSelectorHeading = "Variables"
         ucrVariablesAsFactorForScatter.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrVariablesAsFactorForScatter.bAddParameterIfEmpty = True
@@ -80,7 +79,6 @@ Public Class dlgScatterPlot
         ucrReceiverX.SetParameterIsString()
         ucrReceiverX.bWithQuotes = False
         ucrReceiverX.Selector = ucrSelectorForScatter
-        ucrReceiverX.SetIncludedDataTypes({"factor", "numeric"})
         ucrReceiverX.strSelectorHeading = "Variables"
         ucrReceiverX.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrReceiverX.bAddParameterIfEmpty = True
@@ -89,7 +87,6 @@ Public Class dlgScatterPlot
         ucrFactorOptionalReceiver.SetParameterIsString()
         ucrFactorOptionalReceiver.bWithQuotes = False
         ucrFactorOptionalReceiver.Selector = ucrSelectorForScatter
-        ucrFactorOptionalReceiver.SetIncludedDataTypes({"factor", "numeric"})
         ucrFactorOptionalReceiver.strSelectorHeading = "Variables"
 
         clsGeomSmoothFunc.SetPackageName("ggplot2")
