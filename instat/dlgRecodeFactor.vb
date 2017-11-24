@@ -44,6 +44,7 @@ Public Class dlgRecodeFactor
         ucrReceiverFactor.strSelectorHeading = "Factors"
         ucrReceiverFactor.SetMeAsReceiver()
         ucrReceiverFactor.SetParameterIsRFunction()
+        ucrReceiverFactor.bUseFilteredData = False
 
         ucrFactorGrid.SetReceiver(ucrReceiverFactor)
         ucrFactorGrid.SetAsViewerOnly()
