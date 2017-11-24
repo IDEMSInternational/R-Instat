@@ -184,7 +184,7 @@ Public Class dlgClimaticCheckDataTemperature
 
         ucrSelectorTemperature.Reset()
         ucrReceiverStation.SetMeAsReceiver()
-        clsSameGreaterOperator.SetOperation(">")
+        clsSameGreaterOperator.SetOperation(">=")
         clsSameGreaterOperator.AddParameter("left", bIncludeArgumentName:=False, clsRFunctionParameter:=clsRepFunc, iPosition:=0)
 
         clsRepFunc.SetRCommand("rep")
