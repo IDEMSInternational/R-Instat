@@ -91,7 +91,7 @@ Public Class dlgBoxplot
         ucrSecondFactorReceiver.SetParameter(New RParameter("fill", 2))
         ucrSecondFactorReceiver.Selector = ucrSelectorBoxPlot
         ucrSecondFactorReceiver.SetIncludedDataTypes({"factor"})
-        ucrSecondFactorReceiver.strSelectorHeading = "Factors"
+        ucrSecondFactorReceiver.strSelectorHeading = "Variables"
         ucrSecondFactorReceiver.SetParameterIsString()
         ucrSecondFactorReceiver.bWithQuotes = False
 
@@ -276,7 +276,7 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub ucrPnlPlots_ControlValueChanged() Handles ucrPnlPlots.ControlValueChanged
-        SetGeomprefixFillColourAes()
+        SetGeomPrefixFillColourAes()
     End Sub
 
     Private Sub ucrSaveBoxplot_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveBoxplot.ControlContentsChanged, ucrVariablesAsFactorForBoxplot.ControlContentsChanged
