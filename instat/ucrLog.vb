@@ -15,7 +15,13 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.IO
+Imports RDotNet
+Imports instat
+Imports System.ComponentModel
+
 Public Class ucrLog
+    Private strComment As String = "Code run from Log Window"
+
     Public strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
     Public Sub CopyText()
         txtLog.Copy()
@@ -58,5 +64,18 @@ Public Class ucrLog
         txtLog.SelectionStart = txtLog.Text.Length
         txtLog.ScrollToCaret()
         txtLog.Refresh()
+    End Sub
+
+    Private Sub mnuRunSelectedText_Click(sender As Object, e As EventArgs) Handles mnuRunSelectedText.Click
+        If txtLog.SelectedText <> "" AndAlso txtLog.SelectionLength > 0 Then
+            Dim strSelectedScript As String = txtLog.SelectedText
+            If MsgBox("Running selected code from the log window is not yet a stable operation e.g. if a selection is incomplete or if the data has changed." & vbNewLine & vbNewLine & "Do you want to proceed?", MessageBoxButtons.YesNo, "Warning") = MsgBoxResult.Yes Then
+                frmMain.clsRLink.RunScriptFromWindow(strNewScript:=strSelectedScript, strNewComment:=strComment)
+            End If
+        End If
+    End Sub
+
+    Private Sub mnuContextLogFile_Opening(sender As Object, e As CancelEventArgs) Handles mnuContextLogFile.Opening
+        mnuRunSelectedText.Enabled = (txtLog.SelectedText <> "" AndAlso txtLog.SelectionLength > 0)
     End Sub
 End Class

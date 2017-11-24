@@ -65,7 +65,6 @@ Public Class dlgLinePlot
 
         ucrReceiverX.SetParameter(New RParameter("x", 0))
         ucrReceiverX.Selector = ucrLinePlotSelector
-        ucrReceiverX.SetIncludedDataTypes({"numeric", "factor"})
         ucrReceiverX.strSelectorHeading = "Variables"
         ucrReceiverX.bWithQuotes = False
         ucrReceiverX.SetParameterIsString()
@@ -82,7 +81,6 @@ Public Class dlgLinePlot
         ucrVariablesAsFactorForLinePlot.SetParameter(New RParameter("y", 1))
         ucrVariablesAsFactorForLinePlot.SetFactorReceiver(ucrFactorOptionalReceiver)
         ucrVariablesAsFactorForLinePlot.Selector = ucrLinePlotSelector
-        ucrVariablesAsFactorForLinePlot.SetIncludedDataTypes({"numeric", "factor"})
         ucrVariablesAsFactorForLinePlot.strSelectorHeading = "Varibles"
         ucrVariablesAsFactorForLinePlot.SetParameterIsString()
         ucrVariablesAsFactorForLinePlot.bWithQuotes = False
