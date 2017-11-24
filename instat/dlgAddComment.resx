@@ -274,7 +274,7 @@
     <value>2</value>
   </data>
   <data name="UcrDialogDisabled1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>66, 147</value>
+    <value>71, 154</value>
   </data>
   <data name="UcrDialogDisabled1.Size" type="System.Drawing.Size, System.Drawing">
     <value>295, 96</value>
@@ -376,7 +376,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrSelectorAddComment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 180</value>
+    <value>233, 191</value>
   </data>
   <data name="ucrSelectorAddComment.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
