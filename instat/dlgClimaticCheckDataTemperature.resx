@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblStation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>292, 27</value>
+    <value>295, 27</value>
   </data>
   <data name="lblStation.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 13</value>
@@ -157,7 +157,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>292, 76</value>
+    <value>295, 77</value>
   </data>
   <data name="lblDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>30, 13</value>
@@ -187,7 +187,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>292, 121</value>
+    <value>294, 122</value>
   </data>
   <data name="lblYear.Size" type="System.Drawing.Size, System.Drawing">
     <value>29, 13</value>
@@ -217,7 +217,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblMonth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>292, 166</value>
+    <value>295, 167</value>
   </data>
   <data name="lblMonth.Size" type="System.Drawing.Size, System.Drawing">
     <value>37, 13</value>
@@ -247,7 +247,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>292, 211</value>
+    <value>295, 212</value>
   </data>
   <data name="lblDay.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 13</value>
@@ -277,7 +277,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblElement1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>292, 261</value>
+    <value>295, 261</value>
   </data>
   <data name="lblElement1.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 13</value>
@@ -370,7 +370,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblRangeElement1to.Location" type="System.Drawing.Point, System.Drawing">
-    <value>195, 220</value>
+    <value>211, 220</value>
   </data>
   <data name="lblRangeElement1to.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 13</value>
@@ -403,7 +403,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblRangeElement2to.Location" type="System.Drawing.Point, System.Drawing">
-    <value>194, 258</value>
+    <value>210, 258</value>
   </data>
   <data name="lblRangeElement2to.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 13</value>
@@ -433,7 +433,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblJumpElement1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>99, 328</value>
+    <value>99, 330</value>
   </data>
   <data name="lblJumpElement1.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 13</value>
@@ -496,7 +496,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblElement2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>292, 311</value>
+    <value>295, 311</value>
   </data>
   <data name="lblElement2.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 13</value>
@@ -535,7 +535,7 @@
     <value>156, 357</value>
   </data>
   <data name="ucrNudJumpElement2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 20</value>
+    <value>50, 20</value>
   </data>
   <data name="ucrNudJumpElement2.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
@@ -553,10 +553,10 @@
     <value>4</value>
   </data>
   <data name="ucrNudJumpElement1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 324</value>
+    <value>156, 327</value>
   </data>
   <data name="ucrNudJumpElement1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 20</value>
+    <value>50, 20</value>
   </data>
   <data name="ucrNudJumpElement1.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
@@ -598,7 +598,7 @@
     <value>156, 290</value>
   </data>
   <data name="ucrNudSame.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 20</value>
+    <value>50, 20</value>
   </data>
   <data name="ucrNudSame.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
@@ -616,10 +616,10 @@
     <value>8</value>
   </data>
   <data name="ucrNudDifference.Location" type="System.Drawing.Point, System.Drawing">
-    <value>155, 385</value>
+    <value>156, 385</value>
   </data>
   <data name="ucrNudDifference.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 20</value>
+    <value>50, 20</value>
   </data>
   <data name="ucrNudDifference.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
@@ -640,10 +640,10 @@
     <value>False</value>
   </data>
   <data name="ucrNudOutlier.Location" type="System.Drawing.Point, System.Drawing">
-    <value>154, 416</value>
+    <value>156, 416</value>
   </data>
   <data name="ucrNudOutlier.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 20</value>
+    <value>50, 20</value>
   </data>
   <data name="ucrNudOutlier.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
@@ -664,10 +664,10 @@
     <value>False</value>
   </data>
   <data name="ucrNudRangeElement2Max.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 255</value>
+    <value>230, 255</value>
   </data>
   <data name="ucrNudRangeElement2Max.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 20</value>
+    <value>50, 20</value>
   </data>
   <data name="ucrNudRangeElement2Max.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -715,7 +715,7 @@
     <value>156, 255</value>
   </data>
   <data name="ucrNudRangeElement2Min.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 20</value>
+    <value>50, 20</value>
   </data>
   <data name="ucrNudRangeElement2Min.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -733,10 +733,10 @@
     <value>16</value>
   </data>
   <data name="ucrNudRangeElement1Max.Location" type="System.Drawing.Point, System.Drawing">
-    <value>214, 216</value>
+    <value>230, 216</value>
   </data>
   <data name="ucrNudRangeElement1Max.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 20</value>
+    <value>50, 20</value>
   </data>
   <data name="ucrNudRangeElement1Max.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -778,7 +778,7 @@
     <value>156, 216</value>
   </data>
   <data name="ucrNudRangeElement1Min.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 20</value>
+    <value>50, 20</value>
   </data>
   <data name="ucrNudRangeElement1Min.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
