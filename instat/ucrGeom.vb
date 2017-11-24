@@ -766,8 +766,10 @@ Public Class ucrGeom
         'Optional
         clsgeom_line.AddAesParameter("alpha", strIncludedDataTypes:={"numeric", "factor"})
         clsgeom_line.AddAesParameter("colour", strIncludedDataTypes:={"numeric", "factor"})
+        clsgeom_line.AddAesParameter("group", strIncludedDataTypes:={"numeric", "factor"})
         clsgeom_line.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
         clsgeom_line.AddAesParameter("size", strIncludedDataTypes:={"numeric", "factor"})
+
         'Adding layer parameters
         'Geom_line Parameters
 
