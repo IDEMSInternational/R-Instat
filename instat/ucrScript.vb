@@ -41,7 +41,7 @@ Public Class ucrScript
     Private Sub mnuRunWholeScript_Click(sender As Object, e As EventArgs) Handles mnuClearContents.Click
         Dim dlgResponse As DialogResult
         If txtScript.Text <> "" Then
-            dlgResponse = MessageBox.Show("Are you sure you want to clear the " & Me.Text, "Clear " & Me.Text, MessageBoxButtons.YesNo)
+            dlgResponse = MessageBox.Show("Are you sure you want to clear the contents of the script window " & Me.Text, "Clear " & Me.Text, MessageBoxButtons.YesNo)
             If dlgResponse = DialogResult.Yes Then
                 txtScript.Clear()
             End If
@@ -51,6 +51,9 @@ Public Class ucrScript
     Private Sub mnuRunSelectedText_Click(sender As Object, e As EventArgs) Handles mnuRunSelectedText.Click
         If txtScript.SelectionLength > 0 AndAlso txtScript.SelectedText <> "" Then
             RunText(txtScript.SelectedText)
+        Else
+            MessageBox.Show("You need to select some text before running" & Me.Text, "No text selected" & Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+
         End If
     End Sub
 
@@ -84,4 +87,5 @@ Public Class ucrScript
             End
         End Try
     End Sub
+
 End Class
