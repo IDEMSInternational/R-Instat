@@ -19,7 +19,7 @@ Partial Class ucrCalculator
     Inherits System.Windows.Forms.UserControl
 
     'UserControl overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -36,23 +36,18 @@ Partial Class ucrCalculator
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrCalculator))
-        Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.lblExpression = New System.Windows.Forms.Label()
-        Me.ucrSaveResultInto = New instat.ucrInputComboBox()
         Me.chkSaveResultInto = New System.Windows.Forms.CheckBox()
-        Me.ucrInputTryMessage = New instat.ucrInputTextBox()
         Me.cmdTry = New System.Windows.Forms.Button()
-        Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.chkShowArguments = New System.Windows.Forms.CheckBox()
-        Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.grpBasic = New System.Windows.Forms.GroupBox()
-        Me.cmdBrackets = New System.Windows.Forms.Button()
         Me.cmdClear = New System.Windows.Forms.Button()
         Me.cmdDelete = New System.Windows.Forms.Button()
+        Me.cmdBrackets = New System.Windows.Forms.Button()
         Me.cmdPower = New System.Windows.Forms.Button()
         Me.cmdDivide = New System.Windows.Forms.Button()
         Me.cmdPlus = New System.Windows.Forms.Button()
@@ -82,7 +77,18 @@ Partial Class ucrCalculator
         Me.cmdYmd = New System.Windows.Forms.Button()
         Me.cmdDoy = New System.Windows.Forms.Button()
         Me.cmdLeap = New System.Windows.Forms.Button()
-        Me.grpRows = New System.Windows.Forms.GroupBox()
+        Me.grpTransform = New System.Windows.Forms.GroupBox()
+        Me.cmdRowRank = New System.Windows.Forms.Button()
+        Me.cmdDiff = New System.Windows.Forms.Button()
+        Me.cmdEcdf = New System.Windows.Forms.Button()
+        Me.cmdmovemean = New System.Windows.Forms.Button()
+        Me.cmdCumMean = New System.Windows.Forms.Button()
+        Me.cmdNtile = New System.Windows.Forms.Button()
+        Me.cmMovMed = New System.Windows.Forms.Button()
+        Me.cmdMRank = New System.Windows.Forms.Button()
+        Me.cmdDRank = New System.Windows.Forms.Button()
+        Me.cmdMovMax = New System.Windows.Forms.Button()
+        Me.cmdMovSum = New System.Windows.Forms.Button()
         Me.cmdpercentrank = New System.Windows.Forms.Button()
         Me.cmdcumsum = New System.Windows.Forms.Button()
         Me.cmdcummin = New System.Windows.Forms.Button()
@@ -91,6 +97,27 @@ Partial Class ucrCalculator
         Me.cmdpmax = New System.Windows.Forms.Button()
         Me.cmdLead = New System.Windows.Forms.Button()
         Me.cmdLag = New System.Windows.Forms.Button()
+        Me.grpSummary = New System.Windows.Forms.GroupBox()
+        Me.cmdMad = New System.Windows.Forms.Button()
+        Me.cmdMc = New System.Windows.Forms.Button()
+        Me.cmdPropn = New System.Windows.Forms.Button()
+        Me.cmdCv = New System.Windows.Forms.Button()
+        Me.cmdSkew = New System.Windows.Forms.Button()
+        Me.cmdAnyDup = New System.Windows.Forms.Button()
+        Me.cmdDistinct = New System.Windows.Forms.Button()
+        Me.cmdNonMiss = New System.Windows.Forms.Button()
+        Me.cmdIQR = New System.Windows.Forms.Button()
+        Me.cmdQuantile = New System.Windows.Forms.Button()
+        Me.cmdRange = New System.Windows.Forms.Button()
+        Me.cmdSd = New System.Windows.Forms.Button()
+        Me.cmdMedian = New System.Windows.Forms.Button()
+        Me.cmdMin = New System.Windows.Forms.Button()
+        Me.cmdMax = New System.Windows.Forms.Button()
+        Me.cmdMean = New System.Windows.Forms.Button()
+        Me.cmdMiss = New System.Windows.Forms.Button()
+        Me.cmdLength = New System.Windows.Forms.Button()
+        Me.cmdSum = New System.Windows.Forms.Button()
+        Me.cmdVar = New System.Windows.Forms.Button()
         Me.grpStrings = New System.Windows.Forms.GroupBox()
         Me.cmdSplit = New System.Windows.Forms.Button()
         Me.cmdCombine = New System.Windows.Forms.Button()
@@ -107,6 +134,18 @@ Partial Class ucrCalculator
         Me.cmdCountstrings = New System.Windows.Forms.Button()
         Me.cmdLocate = New System.Windows.Forms.Button()
         Me.grpLogical = New System.Windows.Forms.GroupBox()
+        Me.cmdNear = New System.Windows.Forms.Button()
+        Me.cmdBetween = New System.Windows.Forms.Button()
+        Me.cmdIsFalse = New System.Windows.Forms.Button()
+        Me.cmdAny = New System.Windows.Forms.Button()
+        Me.cmdAll = New System.Windows.Forms.Button()
+        Me.cmdIsTrue = New System.Windows.Forms.Button()
+        Me.cmdIsNa = New System.Windows.Forms.Button()
+        Me.cmdNotIsNa = New System.Windows.Forms.Button()
+        Me.cmdDuplicate = New System.Windows.Forms.Button()
+        Me.cmdIfelse = New System.Windows.Forms.Button()
+        Me.cmdmatch = New System.Windows.Forms.Button()
+        Me.cmdwhen = New System.Windows.Forms.Button()
         Me.cmdOpeningBracket = New System.Windows.Forms.Button()
         Me.cmdColon = New System.Windows.Forms.Button()
         Me.cmdGreaterOrEqualsTo = New System.Windows.Forms.Button()
@@ -124,7 +163,6 @@ Partial Class ucrCalculator
         Me.cmdNotEqualsTo = New System.Windows.Forms.Button()
         Me.cmdEquivalent = New System.Windows.Forms.Button()
         Me.grpProbabilty = New System.Windows.Forms.GroupBox()
-        Me.cmdDigamma = New System.Windows.Forms.Button()
         Me.cmdGamma = New System.Windows.Forms.Button()
         Me.cmdLbeta = New System.Windows.Forms.Button()
         Me.cmdqF = New System.Windows.Forms.Button()
@@ -142,6 +180,7 @@ Partial Class ucrCalculator
         Me.cmdLfact = New System.Windows.Forms.Button()
         Me.cmdTrigamma = New System.Windows.Forms.Button()
         Me.cmdBeta = New System.Windows.Forms.Button()
+        Me.cmdDigamma = New System.Windows.Forms.Button()
         Me.grpMaths = New System.Windows.Forms.GroupBox()
         Me.cmdSign = New System.Windows.Forms.Button()
         Me.cmdRound = New System.Windows.Forms.Button()
@@ -163,37 +202,20 @@ Partial Class ucrCalculator
         Me.cmdAcos = New System.Windows.Forms.Button()
         Me.cmdCos = New System.Windows.Forms.Button()
         Me.cmdSqrt = New System.Windows.Forms.Button()
-        Me.grpStatistics = New System.Windows.Forms.GroupBox()
-        Me.cmdIQR = New System.Windows.Forms.Button()
-        Me.cmdQuantile = New System.Windows.Forms.Button()
-        Me.cmdRange = New System.Windows.Forms.Button()
-        Me.cmdSd = New System.Windows.Forms.Button()
-        Me.cmdVar = New System.Windows.Forms.Button()
-        Me.cmdMedian = New System.Windows.Forms.Button()
-        Me.cmdMin = New System.Windows.Forms.Button()
-        Me.cmdMax = New System.Windows.Forms.Button()
-        Me.cmdMean = New System.Windows.Forms.Button()
-        Me.cmdSum = New System.Windows.Forms.Button()
-        Me.cmdMiss = New System.Windows.Forms.Button()
-        Me.cmdCount = New System.Windows.Forms.Button()
+        Me.ucrInputCalOptions = New instat.ucrInputComboBox()
+        Me.ucrSaveResultInto = New instat.ucrInputComboBox()
+        Me.ucrInputTryMessage = New instat.ucrInputTextBox()
+        Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
-        Me.grpRows.SuspendLayout()
+        Me.grpTransform.SuspendLayout()
+        Me.grpSummary.SuspendLayout()
         Me.grpStrings.SuspendLayout()
         Me.grpLogical.SuspendLayout()
         Me.grpProbabilty.SuspendLayout()
         Me.grpMaths.SuspendLayout()
-        Me.grpStatistics.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'ucrReceiverForCalculation
-        '
-        Me.ucrReceiverForCalculation.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverForCalculation, "ucrReceiverForCalculation")
-        Me.ucrReceiverForCalculation.Name = "ucrReceiverForCalculation"
-        Me.ucrReceiverForCalculation.Selector = Nothing
-        Me.ucrReceiverForCalculation.strNcFilePath = ""
-        Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
         'lblExpression
         '
@@ -201,39 +223,17 @@ Partial Class ucrCalculator
         Me.lblExpression.Name = "lblExpression"
         Me.lblExpression.Tag = "Expression"
         '
-        'ucrSaveResultInto
-        '
-        Me.ucrSaveResultInto.AddQuotesIfUnrecognised = True
-        Me.ucrSaveResultInto.IsReadOnly = False
-        resources.ApplyResources(Me.ucrSaveResultInto, "ucrSaveResultInto")
-        Me.ucrSaveResultInto.Name = "ucrSaveResultInto"
-        '
         'chkSaveResultInto
         '
         resources.ApplyResources(Me.chkSaveResultInto, "chkSaveResultInto")
         Me.chkSaveResultInto.Name = "chkSaveResultInto"
         Me.chkSaveResultInto.UseVisualStyleBackColor = True
         '
-        'ucrInputTryMessage
-        '
-        Me.ucrInputTryMessage.AddQuotesIfUnrecognised = True
-        Me.ucrInputTryMessage.IsMultiline = False
-        Me.ucrInputTryMessage.IsReadOnly = True
-        resources.ApplyResources(Me.ucrInputTryMessage, "ucrInputTryMessage")
-        Me.ucrInputTryMessage.Name = "ucrInputTryMessage"
-        '
         'cmdTry
         '
         resources.ApplyResources(Me.cmdTry, "cmdTry")
         Me.cmdTry.Name = "cmdTry"
         Me.cmdTry.UseVisualStyleBackColor = True
-        '
-        'ucrSelectorForCalculations
-        '
-        Me.ucrSelectorForCalculations.bShowHiddenColumns = False
-        Me.ucrSelectorForCalculations.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorForCalculations, "ucrSelectorForCalculations")
-        Me.ucrSelectorForCalculations.Name = "ucrSelectorForCalculations"
         '
         'cmdHelp
         '
@@ -247,18 +247,11 @@ Partial Class ucrCalculator
         Me.chkShowArguments.Name = "chkShowArguments"
         Me.chkShowArguments.UseVisualStyleBackColor = True
         '
-        'ucrInputCalOptions
-        '
-        Me.ucrInputCalOptions.AddQuotesIfUnrecognised = True
-        Me.ucrInputCalOptions.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputCalOptions, "ucrInputCalOptions")
-        Me.ucrInputCalOptions.Name = "ucrInputCalOptions"
-        '
         'grpBasic
         '
-        Me.grpBasic.Controls.Add(Me.cmdBrackets)
         Me.grpBasic.Controls.Add(Me.cmdClear)
         Me.grpBasic.Controls.Add(Me.cmdDelete)
+        Me.grpBasic.Controls.Add(Me.cmdBrackets)
         Me.grpBasic.Controls.Add(Me.cmdPower)
         Me.grpBasic.Controls.Add(Me.cmdDivide)
         Me.grpBasic.Controls.Add(Me.cmdPlus)
@@ -279,12 +272,6 @@ Partial Class ucrCalculator
         Me.grpBasic.Name = "grpBasic"
         Me.grpBasic.TabStop = False
         '
-        'cmdBrackets
-        '
-        resources.ApplyResources(Me.cmdBrackets, "cmdBrackets")
-        Me.cmdBrackets.Name = "cmdBrackets"
-        Me.cmdBrackets.UseVisualStyleBackColor = True
-        '
         'cmdClear
         '
         resources.ApplyResources(Me.cmdClear, "cmdClear")
@@ -295,8 +282,13 @@ Partial Class ucrCalculator
         '
         resources.ApplyResources(Me.cmdDelete, "cmdDelete")
         Me.cmdDelete.Name = "cmdDelete"
-        Me.cmdDelete.Tag = "Del"
         Me.cmdDelete.UseVisualStyleBackColor = True
+        '
+        'cmdBrackets
+        '
+        resources.ApplyResources(Me.cmdBrackets, "cmdBrackets")
+        Me.cmdBrackets.Name = "cmdBrackets"
+        Me.cmdBrackets.UseVisualStyleBackColor = True
         '
         'cmdPower
         '
@@ -485,19 +477,96 @@ Partial Class ucrCalculator
         Me.cmdLeap.Name = "cmdLeap"
         Me.cmdLeap.UseVisualStyleBackColor = True
         '
-        'grpRows
+        'grpTransform
         '
-        Me.grpRows.Controls.Add(Me.cmdpercentrank)
-        Me.grpRows.Controls.Add(Me.cmdcumsum)
-        Me.grpRows.Controls.Add(Me.cmdcummin)
-        Me.grpRows.Controls.Add(Me.cmdcummax)
-        Me.grpRows.Controls.Add(Me.cmdPMin)
-        Me.grpRows.Controls.Add(Me.cmdpmax)
-        Me.grpRows.Controls.Add(Me.cmdLead)
-        Me.grpRows.Controls.Add(Me.cmdLag)
-        resources.ApplyResources(Me.grpRows, "grpRows")
-        Me.grpRows.Name = "grpRows"
-        Me.grpRows.TabStop = False
+        Me.grpTransform.Controls.Add(Me.cmdRowRank)
+        Me.grpTransform.Controls.Add(Me.cmdDiff)
+        Me.grpTransform.Controls.Add(Me.cmdEcdf)
+        Me.grpTransform.Controls.Add(Me.cmdmovemean)
+        Me.grpTransform.Controls.Add(Me.cmdCumMean)
+        Me.grpTransform.Controls.Add(Me.cmdNtile)
+        Me.grpTransform.Controls.Add(Me.cmMovMed)
+        Me.grpTransform.Controls.Add(Me.cmdMRank)
+        Me.grpTransform.Controls.Add(Me.cmdDRank)
+        Me.grpTransform.Controls.Add(Me.cmdMovMax)
+        Me.grpTransform.Controls.Add(Me.cmdMovSum)
+        Me.grpTransform.Controls.Add(Me.cmdpercentrank)
+        Me.grpTransform.Controls.Add(Me.cmdcumsum)
+        Me.grpTransform.Controls.Add(Me.cmdcummin)
+        Me.grpTransform.Controls.Add(Me.cmdcummax)
+        Me.grpTransform.Controls.Add(Me.cmdPMin)
+        Me.grpTransform.Controls.Add(Me.cmdpmax)
+        Me.grpTransform.Controls.Add(Me.cmdLead)
+        Me.grpTransform.Controls.Add(Me.cmdLag)
+        resources.ApplyResources(Me.grpTransform, "grpTransform")
+        Me.grpTransform.Name = "grpTransform"
+        Me.grpTransform.TabStop = False
+        '
+        'cmdRowRank
+        '
+        resources.ApplyResources(Me.cmdRowRank, "cmdRowRank")
+        Me.cmdRowRank.Name = "cmdRowRank"
+        Me.cmdRowRank.UseVisualStyleBackColor = True
+        '
+        'cmdDiff
+        '
+        resources.ApplyResources(Me.cmdDiff, "cmdDiff")
+        Me.cmdDiff.Name = "cmdDiff"
+        Me.cmdDiff.UseVisualStyleBackColor = True
+        '
+        'cmdEcdf
+        '
+        resources.ApplyResources(Me.cmdEcdf, "cmdEcdf")
+        Me.cmdEcdf.Name = "cmdEcdf"
+        Me.cmdEcdf.UseVisualStyleBackColor = True
+        '
+        'cmdmovemean
+        '
+        resources.ApplyResources(Me.cmdmovemean, "cmdmovemean")
+        Me.cmdmovemean.Name = "cmdmovemean"
+        Me.cmdmovemean.UseVisualStyleBackColor = True
+        '
+        'cmdCumMean
+        '
+        resources.ApplyResources(Me.cmdCumMean, "cmdCumMean")
+        Me.cmdCumMean.Name = "cmdCumMean"
+        Me.cmdCumMean.UseVisualStyleBackColor = True
+        '
+        'cmdNtile
+        '
+        resources.ApplyResources(Me.cmdNtile, "cmdNtile")
+        Me.cmdNtile.Name = "cmdNtile"
+        Me.cmdNtile.UseVisualStyleBackColor = True
+        '
+        'cmMovMed
+        '
+        resources.ApplyResources(Me.cmMovMed, "cmMovMed")
+        Me.cmMovMed.Name = "cmMovMed"
+        Me.cmMovMed.UseVisualStyleBackColor = True
+        '
+        'cmdMRank
+        '
+        resources.ApplyResources(Me.cmdMRank, "cmdMRank")
+        Me.cmdMRank.Name = "cmdMRank"
+        Me.cmdMRank.UseVisualStyleBackColor = True
+        '
+        'cmdDRank
+        '
+        resources.ApplyResources(Me.cmdDRank, "cmdDRank")
+        Me.cmdDRank.Name = "cmdDRank"
+        Me.cmdDRank.UseVisualStyleBackColor = True
+        '
+        'cmdMovMax
+        '
+        resources.ApplyResources(Me.cmdMovMax, "cmdMovMax")
+        Me.cmdMovMax.Name = "cmdMovMax"
+        Me.cmdMovMax.UseVisualStyleBackColor = True
+        '
+        'cmdMovSum
+        '
+        resources.ApplyResources(Me.cmdMovSum, "cmdMovSum")
+        Me.cmdMovSum.Name = "cmdMovSum"
+        Me.cmdMovSum.UseVisualStyleBackColor = True
         '
         'cmdpercentrank
         '
@@ -546,6 +615,152 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.cmdLag, "cmdLag")
         Me.cmdLag.Name = "cmdLag"
         Me.cmdLag.UseVisualStyleBackColor = True
+        '
+        'grpSummary
+        '
+        Me.grpSummary.Controls.Add(Me.cmdMad)
+        Me.grpSummary.Controls.Add(Me.cmdMc)
+        Me.grpSummary.Controls.Add(Me.cmdPropn)
+        Me.grpSummary.Controls.Add(Me.cmdCv)
+        Me.grpSummary.Controls.Add(Me.cmdSkew)
+        Me.grpSummary.Controls.Add(Me.cmdAnyDup)
+        Me.grpSummary.Controls.Add(Me.cmdDistinct)
+        Me.grpSummary.Controls.Add(Me.cmdNonMiss)
+        Me.grpSummary.Controls.Add(Me.cmdIQR)
+        Me.grpSummary.Controls.Add(Me.cmdQuantile)
+        Me.grpSummary.Controls.Add(Me.cmdRange)
+        Me.grpSummary.Controls.Add(Me.cmdSd)
+        Me.grpSummary.Controls.Add(Me.cmdMedian)
+        Me.grpSummary.Controls.Add(Me.cmdMin)
+        Me.grpSummary.Controls.Add(Me.cmdMax)
+        Me.grpSummary.Controls.Add(Me.cmdMean)
+        Me.grpSummary.Controls.Add(Me.cmdMiss)
+        Me.grpSummary.Controls.Add(Me.cmdLength)
+        Me.grpSummary.Controls.Add(Me.cmdSum)
+        Me.grpSummary.Controls.Add(Me.cmdVar)
+        resources.ApplyResources(Me.grpSummary, "grpSummary")
+        Me.grpSummary.Name = "grpSummary"
+        Me.grpSummary.TabStop = False
+        '
+        'cmdMad
+        '
+        resources.ApplyResources(Me.cmdMad, "cmdMad")
+        Me.cmdMad.Name = "cmdMad"
+        Me.cmdMad.UseVisualStyleBackColor = True
+        '
+        'cmdMc
+        '
+        resources.ApplyResources(Me.cmdMc, "cmdMc")
+        Me.cmdMc.Name = "cmdMc"
+        Me.cmdMc.UseVisualStyleBackColor = True
+        '
+        'cmdPropn
+        '
+        resources.ApplyResources(Me.cmdPropn, "cmdPropn")
+        Me.cmdPropn.Name = "cmdPropn"
+        Me.cmdPropn.UseVisualStyleBackColor = True
+        '
+        'cmdCv
+        '
+        resources.ApplyResources(Me.cmdCv, "cmdCv")
+        Me.cmdCv.Name = "cmdCv"
+        Me.cmdCv.UseVisualStyleBackColor = True
+        '
+        'cmdSkew
+        '
+        resources.ApplyResources(Me.cmdSkew, "cmdSkew")
+        Me.cmdSkew.Name = "cmdSkew"
+        Me.cmdSkew.UseVisualStyleBackColor = True
+        '
+        'cmdAnyDup
+        '
+        resources.ApplyResources(Me.cmdAnyDup, "cmdAnyDup")
+        Me.cmdAnyDup.Name = "cmdAnyDup"
+        Me.cmdAnyDup.UseVisualStyleBackColor = True
+        '
+        'cmdDistinct
+        '
+        resources.ApplyResources(Me.cmdDistinct, "cmdDistinct")
+        Me.cmdDistinct.Name = "cmdDistinct"
+        Me.cmdDistinct.UseVisualStyleBackColor = True
+        '
+        'cmdNonMiss
+        '
+        resources.ApplyResources(Me.cmdNonMiss, "cmdNonMiss")
+        Me.cmdNonMiss.Name = "cmdNonMiss"
+        Me.cmdNonMiss.UseVisualStyleBackColor = True
+        '
+        'cmdIQR
+        '
+        resources.ApplyResources(Me.cmdIQR, "cmdIQR")
+        Me.cmdIQR.Name = "cmdIQR"
+        Me.cmdIQR.UseVisualStyleBackColor = True
+        '
+        'cmdQuantile
+        '
+        resources.ApplyResources(Me.cmdQuantile, "cmdQuantile")
+        Me.cmdQuantile.Name = "cmdQuantile"
+        Me.cmdQuantile.UseVisualStyleBackColor = True
+        '
+        'cmdRange
+        '
+        resources.ApplyResources(Me.cmdRange, "cmdRange")
+        Me.cmdRange.Name = "cmdRange"
+        Me.cmdRange.UseVisualStyleBackColor = True
+        '
+        'cmdSd
+        '
+        resources.ApplyResources(Me.cmdSd, "cmdSd")
+        Me.cmdSd.Name = "cmdSd"
+        Me.cmdSd.UseVisualStyleBackColor = True
+        '
+        'cmdMedian
+        '
+        resources.ApplyResources(Me.cmdMedian, "cmdMedian")
+        Me.cmdMedian.Name = "cmdMedian"
+        Me.cmdMedian.UseVisualStyleBackColor = True
+        '
+        'cmdMin
+        '
+        resources.ApplyResources(Me.cmdMin, "cmdMin")
+        Me.cmdMin.Name = "cmdMin"
+        Me.cmdMin.UseVisualStyleBackColor = True
+        '
+        'cmdMax
+        '
+        resources.ApplyResources(Me.cmdMax, "cmdMax")
+        Me.cmdMax.Name = "cmdMax"
+        Me.cmdMax.UseVisualStyleBackColor = True
+        '
+        'cmdMean
+        '
+        resources.ApplyResources(Me.cmdMean, "cmdMean")
+        Me.cmdMean.Name = "cmdMean"
+        Me.cmdMean.UseVisualStyleBackColor = True
+        '
+        'cmdMiss
+        '
+        resources.ApplyResources(Me.cmdMiss, "cmdMiss")
+        Me.cmdMiss.Name = "cmdMiss"
+        Me.cmdMiss.UseVisualStyleBackColor = True
+        '
+        'cmdLength
+        '
+        resources.ApplyResources(Me.cmdLength, "cmdLength")
+        Me.cmdLength.Name = "cmdLength"
+        Me.cmdLength.UseVisualStyleBackColor = True
+        '
+        'cmdSum
+        '
+        resources.ApplyResources(Me.cmdSum, "cmdSum")
+        Me.cmdSum.Name = "cmdSum"
+        Me.cmdSum.UseVisualStyleBackColor = True
+        '
+        'cmdVar
+        '
+        resources.ApplyResources(Me.cmdVar, "cmdVar")
+        Me.cmdVar.Name = "cmdVar"
+        Me.cmdVar.UseVisualStyleBackColor = True
         '
         'grpStrings
         '
@@ -655,6 +870,18 @@ Partial Class ucrCalculator
         '
         'grpLogical
         '
+        Me.grpLogical.Controls.Add(Me.cmdNear)
+        Me.grpLogical.Controls.Add(Me.cmdBetween)
+        Me.grpLogical.Controls.Add(Me.cmdIsFalse)
+        Me.grpLogical.Controls.Add(Me.cmdAny)
+        Me.grpLogical.Controls.Add(Me.cmdAll)
+        Me.grpLogical.Controls.Add(Me.cmdIsTrue)
+        Me.grpLogical.Controls.Add(Me.cmdIsNa)
+        Me.grpLogical.Controls.Add(Me.cmdNotIsNa)
+        Me.grpLogical.Controls.Add(Me.cmdDuplicate)
+        Me.grpLogical.Controls.Add(Me.cmdIfelse)
+        Me.grpLogical.Controls.Add(Me.cmdmatch)
+        Me.grpLogical.Controls.Add(Me.cmdwhen)
         Me.grpLogical.Controls.Add(Me.cmdOpeningBracket)
         Me.grpLogical.Controls.Add(Me.cmdColon)
         Me.grpLogical.Controls.Add(Me.cmdGreaterOrEqualsTo)
@@ -674,6 +901,78 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.grpLogical, "grpLogical")
         Me.grpLogical.Name = "grpLogical"
         Me.grpLogical.TabStop = False
+        '
+        'cmdNear
+        '
+        resources.ApplyResources(Me.cmdNear, "cmdNear")
+        Me.cmdNear.Name = "cmdNear"
+        Me.cmdNear.UseVisualStyleBackColor = True
+        '
+        'cmdBetween
+        '
+        resources.ApplyResources(Me.cmdBetween, "cmdBetween")
+        Me.cmdBetween.Name = "cmdBetween"
+        Me.cmdBetween.UseVisualStyleBackColor = True
+        '
+        'cmdIsFalse
+        '
+        resources.ApplyResources(Me.cmdIsFalse, "cmdIsFalse")
+        Me.cmdIsFalse.Name = "cmdIsFalse"
+        Me.cmdIsFalse.UseVisualStyleBackColor = True
+        '
+        'cmdAny
+        '
+        resources.ApplyResources(Me.cmdAny, "cmdAny")
+        Me.cmdAny.Name = "cmdAny"
+        Me.cmdAny.UseVisualStyleBackColor = True
+        '
+        'cmdAll
+        '
+        resources.ApplyResources(Me.cmdAll, "cmdAll")
+        Me.cmdAll.Name = "cmdAll"
+        Me.cmdAll.UseVisualStyleBackColor = True
+        '
+        'cmdIsTrue
+        '
+        resources.ApplyResources(Me.cmdIsTrue, "cmdIsTrue")
+        Me.cmdIsTrue.Name = "cmdIsTrue"
+        Me.cmdIsTrue.UseVisualStyleBackColor = True
+        '
+        'cmdIsNa
+        '
+        resources.ApplyResources(Me.cmdIsNa, "cmdIsNa")
+        Me.cmdIsNa.Name = "cmdIsNa"
+        Me.cmdIsNa.UseVisualStyleBackColor = True
+        '
+        'cmdNotIsNa
+        '
+        resources.ApplyResources(Me.cmdNotIsNa, "cmdNotIsNa")
+        Me.cmdNotIsNa.Name = "cmdNotIsNa"
+        Me.cmdNotIsNa.UseVisualStyleBackColor = True
+        '
+        'cmdDuplicate
+        '
+        resources.ApplyResources(Me.cmdDuplicate, "cmdDuplicate")
+        Me.cmdDuplicate.Name = "cmdDuplicate"
+        Me.cmdDuplicate.UseVisualStyleBackColor = True
+        '
+        'cmdIfelse
+        '
+        resources.ApplyResources(Me.cmdIfelse, "cmdIfelse")
+        Me.cmdIfelse.Name = "cmdIfelse"
+        Me.cmdIfelse.UseVisualStyleBackColor = True
+        '
+        'cmdmatch
+        '
+        resources.ApplyResources(Me.cmdmatch, "cmdmatch")
+        Me.cmdmatch.Name = "cmdmatch"
+        Me.cmdmatch.UseVisualStyleBackColor = True
+        '
+        'cmdwhen
+        '
+        resources.ApplyResources(Me.cmdwhen, "cmdwhen")
+        Me.cmdwhen.Name = "cmdwhen"
+        Me.cmdwhen.UseVisualStyleBackColor = True
         '
         'cmdOpeningBracket
         '
@@ -775,7 +1074,6 @@ Partial Class ucrCalculator
         '
         'grpProbabilty
         '
-        Me.grpProbabilty.Controls.Add(Me.cmdDigamma)
         Me.grpProbabilty.Controls.Add(Me.cmdGamma)
         Me.grpProbabilty.Controls.Add(Me.cmdLbeta)
         Me.grpProbabilty.Controls.Add(Me.cmdqF)
@@ -793,15 +1091,10 @@ Partial Class ucrCalculator
         Me.grpProbabilty.Controls.Add(Me.cmdLfact)
         Me.grpProbabilty.Controls.Add(Me.cmdTrigamma)
         Me.grpProbabilty.Controls.Add(Me.cmdBeta)
+        Me.grpProbabilty.Controls.Add(Me.cmdDigamma)
         resources.ApplyResources(Me.grpProbabilty, "grpProbabilty")
         Me.grpProbabilty.Name = "grpProbabilty"
         Me.grpProbabilty.TabStop = False
-        '
-        'cmdDigamma
-        '
-        resources.ApplyResources(Me.cmdDigamma, "cmdDigamma")
-        Me.cmdDigamma.Name = "cmdDigamma"
-        Me.cmdDigamma.UseVisualStyleBackColor = True
         '
         'cmdGamma
         '
@@ -905,6 +1198,12 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.cmdBeta, "cmdBeta")
         Me.cmdBeta.Name = "cmdBeta"
         Me.cmdBeta.UseVisualStyleBackColor = True
+        '
+        'cmdDigamma
+        '
+        resources.ApplyResources(Me.cmdDigamma, "cmdDigamma")
+        Me.cmdDigamma.Name = "cmdDigamma"
+        Me.cmdDigamma.UseVisualStyleBackColor = True
         '
         'grpMaths
         '
@@ -1052,107 +1351,54 @@ Partial Class ucrCalculator
         Me.cmdSqrt.Name = "cmdSqrt"
         Me.cmdSqrt.UseVisualStyleBackColor = True
         '
-        'grpStatistics
+        'ucrInputCalOptions
         '
-        Me.grpStatistics.Controls.Add(Me.cmdIQR)
-        Me.grpStatistics.Controls.Add(Me.cmdQuantile)
-        Me.grpStatistics.Controls.Add(Me.cmdRange)
-        Me.grpStatistics.Controls.Add(Me.cmdSd)
-        Me.grpStatistics.Controls.Add(Me.cmdVar)
-        Me.grpStatistics.Controls.Add(Me.cmdMedian)
-        Me.grpStatistics.Controls.Add(Me.cmdMin)
-        Me.grpStatistics.Controls.Add(Me.cmdMax)
-        Me.grpStatistics.Controls.Add(Me.cmdMean)
-        Me.grpStatistics.Controls.Add(Me.cmdSum)
-        Me.grpStatistics.Controls.Add(Me.cmdMiss)
-        Me.grpStatistics.Controls.Add(Me.cmdCount)
-        resources.ApplyResources(Me.grpStatistics, "grpStatistics")
-        Me.grpStatistics.Name = "grpStatistics"
-        Me.grpStatistics.TabStop = False
+        Me.ucrInputCalOptions.AddQuotesIfUnrecognised = True
+        Me.ucrInputCalOptions.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputCalOptions, "ucrInputCalOptions")
+        Me.ucrInputCalOptions.Name = "ucrInputCalOptions"
         '
-        'cmdIQR
+        'ucrSaveResultInto
         '
-        resources.ApplyResources(Me.cmdIQR, "cmdIQR")
-        Me.cmdIQR.Name = "cmdIQR"
-        Me.cmdIQR.UseVisualStyleBackColor = True
+        Me.ucrSaveResultInto.AddQuotesIfUnrecognised = True
+        Me.ucrSaveResultInto.IsReadOnly = False
+        resources.ApplyResources(Me.ucrSaveResultInto, "ucrSaveResultInto")
+        Me.ucrSaveResultInto.Name = "ucrSaveResultInto"
         '
-        'cmdQuantile
+        'ucrInputTryMessage
         '
-        resources.ApplyResources(Me.cmdQuantile, "cmdQuantile")
-        Me.cmdQuantile.Name = "cmdQuantile"
-        Me.cmdQuantile.UseVisualStyleBackColor = True
+        Me.ucrInputTryMessage.AddQuotesIfUnrecognised = True
+        Me.ucrInputTryMessage.IsMultiline = False
+        Me.ucrInputTryMessage.IsReadOnly = True
+        resources.ApplyResources(Me.ucrInputTryMessage, "ucrInputTryMessage")
+        Me.ucrInputTryMessage.Name = "ucrInputTryMessage"
         '
-        'cmdRange
+        'ucrSelectorForCalculations
         '
-        resources.ApplyResources(Me.cmdRange, "cmdRange")
-        Me.cmdRange.Name = "cmdRange"
-        Me.cmdRange.UseVisualStyleBackColor = True
+        Me.ucrSelectorForCalculations.bShowHiddenColumns = False
+        Me.ucrSelectorForCalculations.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorForCalculations, "ucrSelectorForCalculations")
+        Me.ucrSelectorForCalculations.Name = "ucrSelectorForCalculations"
         '
-        'cmdSd
+        'ucrReceiverForCalculation
         '
-        resources.ApplyResources(Me.cmdSd, "cmdSd")
-        Me.cmdSd.Name = "cmdSd"
-        Me.cmdSd.UseVisualStyleBackColor = True
-        '
-        'cmdVar
-        '
-        resources.ApplyResources(Me.cmdVar, "cmdVar")
-        Me.cmdVar.Name = "cmdVar"
-        Me.cmdVar.UseVisualStyleBackColor = True
-        '
-        'cmdMedian
-        '
-        resources.ApplyResources(Me.cmdMedian, "cmdMedian")
-        Me.cmdMedian.Name = "cmdMedian"
-        Me.cmdMedian.UseVisualStyleBackColor = True
-        '
-        'cmdMin
-        '
-        resources.ApplyResources(Me.cmdMin, "cmdMin")
-        Me.cmdMin.Name = "cmdMin"
-        Me.cmdMin.UseVisualStyleBackColor = True
-        '
-        'cmdMax
-        '
-        resources.ApplyResources(Me.cmdMax, "cmdMax")
-        Me.cmdMax.Name = "cmdMax"
-        Me.cmdMax.UseVisualStyleBackColor = True
-        '
-        'cmdMean
-        '
-        resources.ApplyResources(Me.cmdMean, "cmdMean")
-        Me.cmdMean.Name = "cmdMean"
-        Me.cmdMean.UseVisualStyleBackColor = True
-        '
-        'cmdSum
-        '
-        resources.ApplyResources(Me.cmdSum, "cmdSum")
-        Me.cmdSum.Name = "cmdSum"
-        Me.cmdSum.UseVisualStyleBackColor = True
-        '
-        'cmdMiss
-        '
-        resources.ApplyResources(Me.cmdMiss, "cmdMiss")
-        Me.cmdMiss.Name = "cmdMiss"
-        Me.cmdMiss.UseVisualStyleBackColor = True
-        '
-        'cmdCount
-        '
-        resources.ApplyResources(Me.cmdCount, "cmdCount")
-        Me.cmdCount.Name = "cmdCount"
-        Me.cmdCount.UseVisualStyleBackColor = True
+        Me.ucrReceiverForCalculation.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverForCalculation, "ucrReceiverForCalculation")
+        Me.ucrReceiverForCalculation.Name = "ucrReceiverForCalculation"
+        Me.ucrReceiverForCalculation.Selector = Nothing
+        Me.ucrReceiverForCalculation.strNcFilePath = ""
+        Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
         'ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.grpDates)
-        Me.Controls.Add(Me.grpRows)
-        Me.Controls.Add(Me.grpStrings)
+        Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.grpLogical)
-        Me.Controls.Add(Me.grpProbabilty)
         Me.Controls.Add(Me.grpMaths)
-        Me.Controls.Add(Me.grpStatistics)
+        Me.Controls.Add(Me.grpSummary)
+        Me.Controls.Add(Me.grpStrings)
+        Me.Controls.Add(Me.grpDates)
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.chkShowArguments)
         Me.Controls.Add(Me.ucrInputCalOptions)
@@ -1164,15 +1410,16 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.ucrSelectorForCalculations)
         Me.Controls.Add(Me.ucrReceiverForCalculation)
         Me.Controls.Add(Me.lblExpression)
+        Me.Controls.Add(Me.grpProbabilty)
         Me.Name = "ucrCalculator"
         Me.grpBasic.ResumeLayout(False)
         Me.grpDates.ResumeLayout(False)
-        Me.grpRows.ResumeLayout(False)
+        Me.grpTransform.ResumeLayout(False)
+        Me.grpSummary.ResumeLayout(False)
         Me.grpStrings.ResumeLayout(False)
         Me.grpLogical.ResumeLayout(False)
         Me.grpProbabilty.ResumeLayout(False)
         Me.grpMaths.ResumeLayout(False)
-        Me.grpStatistics.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1190,13 +1437,10 @@ Partial Class ucrCalculator
     Friend WithEvents ucrInputCalOptions As ucrInputComboBox
     Friend WithEvents grpBasic As GroupBox
     Friend WithEvents cmdBrackets As Button
-    Friend WithEvents cmdClear As Button
-    Friend WithEvents cmdDelete As Button
     Friend WithEvents cmdPower As Button
     Friend WithEvents cmdDivide As Button
     Friend WithEvents cmdPlus As Button
     Friend WithEvents cmdMinus As Button
-    Friend WithEvents cmdMultiply As Button
     Friend WithEvents cmdDot As Button
     Friend WithEvents cmd9 As Button
     Friend WithEvents cmd8 As Button
@@ -1221,8 +1465,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdYmd As Button
     Friend WithEvents cmdDoy As Button
     Friend WithEvents cmdLeap As Button
-    Friend WithEvents grpRows As GroupBox
-    Friend WithEvents cmdpercentrank As Button
+    Friend WithEvents grpTransform As GroupBox
     Friend WithEvents cmdcumsum As Button
     Friend WithEvents cmdcummin As Button
     Friend WithEvents cmdcummax As Button
@@ -1302,7 +1545,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdAcos As Button
     Friend WithEvents cmdCos As Button
     Friend WithEvents cmdSqrt As Button
-    Friend WithEvents grpStatistics As GroupBox
+    Friend WithEvents grpSummary As GroupBox
     Friend WithEvents cmdIQR As Button
     Friend WithEvents cmdQuantile As Button
     Friend WithEvents cmdRange As Button
@@ -1314,5 +1557,40 @@ Partial Class ucrCalculator
     Friend WithEvents cmdMean As Button
     Friend WithEvents cmdSum As Button
     Friend WithEvents cmdMiss As Button
-    Friend WithEvents cmdCount As Button
+    Friend WithEvents cmdLength As Button
+    Friend WithEvents cmdDelete As Button
+    Friend WithEvents cmdClear As Button
+    Friend WithEvents cmdMultiply As Button
+    Friend WithEvents cmdpercentrank As Button
+    Friend WithEvents cmdDiff As Button
+    Friend WithEvents cmdEcdf As Button
+    Friend WithEvents cmdmovemean As Button
+    Friend WithEvents cmdCumMean As Button
+    Friend WithEvents cmdNtile As Button
+    Friend WithEvents cmMovMed As Button
+    Friend WithEvents cmdMRank As Button
+    Friend WithEvents cmdDRank As Button
+    Friend WithEvents cmdMovMax As Button
+    Friend WithEvents cmdMovSum As Button
+    Friend WithEvents cmdAny As Button
+    Friend WithEvents cmdAll As Button
+    Friend WithEvents cmdIsTrue As Button
+    Friend WithEvents cmdIsNa As Button
+    Friend WithEvents cmdNotIsNa As Button
+    Friend WithEvents cmdDuplicate As Button
+    Friend WithEvents cmdIfelse As Button
+    Friend WithEvents cmdmatch As Button
+    Friend WithEvents cmdwhen As Button
+    Friend WithEvents cmdNear As Button
+    Friend WithEvents cmdBetween As Button
+    Friend WithEvents cmdIsFalse As Button
+    Friend WithEvents cmdRowRank As Button
+    Friend WithEvents cmdNonMiss As Button
+    Friend WithEvents cmdDistinct As Button
+    Friend WithEvents cmdMad As Button
+    Friend WithEvents cmdMc As Button
+    Friend WithEvents cmdPropn As Button
+    Friend WithEvents cmdCv As Button
+    Friend WithEvents cmdSkew As Button
+    Friend WithEvents cmdAnyDup As Button
 End Class
