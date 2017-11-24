@@ -38,10 +38,10 @@ Public Class ucrScript
         txtScript.Refresh()
     End Sub
 
-    Private Sub mnuRunWholeScript_Click(sender As Object, e As EventArgs) Handles mnuClearContents.Click
+    Private Sub mnuClearContents_Click(sender As Object, e As EventArgs) Handles mnuClearContents.Click
         Dim dlgResponse As DialogResult
         If txtScript.Text <> "" Then
-            dlgResponse = MessageBox.Show("Are you sure you want to clear the contents of the script window " & Me.Text, "Clear " & Me.Text, MessageBoxButtons.YesNo)
+            dlgResponse = MessageBox.Show("Are you sure you want to clear the contents of the script window?" & Me.Text, "Clear " & Me.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question)
             If dlgResponse = DialogResult.Yes Then
                 txtScript.Clear()
             End If
