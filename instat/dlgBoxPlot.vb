@@ -81,7 +81,6 @@ Public Class dlgBoxplot
 
         ucrByFactorsReceiver.SetParameter(New RParameter("x", 1))
         ucrByFactorsReceiver.Selector = ucrSelectorBoxPlot
-        ucrByFactorsReceiver.SetIncludedDataTypes({"factor", "numeric"})
         ucrByFactorsReceiver.strSelectorHeading = "Varibles"
         ucrByFactorsReceiver.SetParameterIsString()
         ucrByFactorsReceiver.bWithQuotes = False
@@ -91,7 +90,7 @@ Public Class dlgBoxplot
         ucrSecondFactorReceiver.SetParameter(New RParameter("fill", 2))
         ucrSecondFactorReceiver.Selector = ucrSelectorBoxPlot
         ucrSecondFactorReceiver.SetIncludedDataTypes({"factor"})
-        ucrSecondFactorReceiver.strSelectorHeading = "Variables"
+        ucrSecondFactorReceiver.strSelectorHeading = "Factors"
         ucrSecondFactorReceiver.SetParameterIsString()
         ucrSecondFactorReceiver.bWithQuotes = False
 
