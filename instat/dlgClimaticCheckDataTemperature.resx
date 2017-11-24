@@ -133,7 +133,7 @@
     <value>40, 13</value>
   </data>
   <data name="lblStation.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>1</value>
   </data>
   <data name="lblStation.Text" xml:space="preserve">
     <value>Station</value>
@@ -163,7 +163,7 @@
     <value>30, 13</value>
   </data>
   <data name="lblDate.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>3</value>
   </data>
   <data name="lblDate.Text" xml:space="preserve">
     <value>Date</value>
@@ -193,7 +193,7 @@
     <value>29, 13</value>
   </data>
   <data name="lblYear.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>5</value>
   </data>
   <data name="lblYear.Text" xml:space="preserve">
     <value>Year</value>
@@ -223,7 +223,7 @@
     <value>37, 13</value>
   </data>
   <data name="lblMonth.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>7</value>
   </data>
   <data name="lblMonth.Text" xml:space="preserve">
     <value>Month</value>
@@ -253,7 +253,7 @@
     <value>26, 13</value>
   </data>
   <data name="lblDay.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>9</value>
   </data>
   <data name="lblDay.Text" xml:space="preserve">
     <value>Day</value>
@@ -283,7 +283,7 @@
     <value>54, 13</value>
   </data>
   <data name="lblElement1.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>11</value>
   </data>
   <data name="lblElement1.Text" xml:space="preserve">
     <value>Element 1</value>
@@ -313,7 +313,7 @@
     <value>54, 13</value>
   </data>
   <data name="lblRangeElement1.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
+    <value>16</value>
   </data>
   <data name="lblRangeElement1.Text" xml:space="preserve">
     <value>Element 1</value>
@@ -346,7 +346,7 @@
     <value>54, 13</value>
   </data>
   <data name="lblRangeElement2.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
+    <value>20</value>
   </data>
   <data name="lblRangeElement2.Text" xml:space="preserve">
     <value>Element 2</value>
@@ -376,7 +376,7 @@
     <value>16, 13</value>
   </data>
   <data name="lblRangeElement1to.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
+    <value>18</value>
   </data>
   <data name="lblRangeElement1to.Text" xml:space="preserve">
     <value>to</value>
@@ -409,7 +409,7 @@
     <value>16, 13</value>
   </data>
   <data name="lblRangeElement2to.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
+    <value>22</value>
   </data>
   <data name="lblRangeElement2to.Text" xml:space="preserve">
     <value>to</value>
@@ -439,7 +439,7 @@
     <value>54, 13</value>
   </data>
   <data name="lblJumpElement1.TabIndex" type="System.Int32, mscorlib">
-    <value>34</value>
+    <value>27</value>
   </data>
   <data name="lblJumpElement1.Text" xml:space="preserve">
     <value>Element 1</value>
@@ -472,7 +472,7 @@
     <value>54, 13</value>
   </data>
   <data name="lblJumpElement2.TabIndex" type="System.Int32, mscorlib">
-    <value>36</value>
+    <value>29</value>
   </data>
   <data name="lblJumpElement2.Text" xml:space="preserve">
     <value>Element 2</value>
@@ -502,7 +502,7 @@
     <value>54, 13</value>
   </data>
   <data name="lblElement2.TabIndex" type="System.Int32, mscorlib">
-    <value>38</value>
+    <value>13</value>
   </data>
   <data name="lblElement2.Text" xml:space="preserve">
     <value>Element 2</value>
@@ -538,7 +538,7 @@
     <value>35, 20</value>
   </data>
   <data name="ucrNudJumpElement2.TabIndex" type="System.Int32, mscorlib">
-    <value>31</value>
+    <value>30</value>
   </data>
   <data name="&gt;&gt;ucrNudJumpElement2.Name" xml:space="preserve">
     <value>ucrNudJumpElement2</value>
@@ -559,7 +559,7 @@
     <value>35, 20</value>
   </data>
   <data name="ucrNudJumpElement1.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
+    <value>28</value>
   </data>
   <data name="&gt;&gt;ucrNudJumpElement1.Name" xml:space="preserve">
     <value>ucrNudJumpElement1</value>
@@ -580,7 +580,7 @@
     <value>82, 20</value>
   </data>
   <data name="ucrChkRange.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
+    <value>15</value>
   </data>
   <data name="&gt;&gt;ucrChkRange.Name" xml:space="preserve">
     <value>ucrChkRange</value>
@@ -601,7 +601,7 @@
     <value>35, 20</value>
   </data>
   <data name="ucrNudSame.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
+    <value>25</value>
   </data>
   <data name="&gt;&gt;ucrNudSame.Name" xml:space="preserve">
     <value>ucrNudSame</value>
@@ -622,7 +622,7 @@
     <value>35, 20</value>
   </data>
   <data name="ucrNudDifference.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
+    <value>32</value>
   </data>
   <data name="&gt;&gt;ucrNudDifference.Name" xml:space="preserve">
     <value>ucrNudDifference</value>
@@ -646,7 +646,7 @@
     <value>35, 20</value>
   </data>
   <data name="ucrNudOutlier.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
+    <value>34</value>
   </data>
   <data name="&gt;&gt;ucrNudOutlier.Name" xml:space="preserve">
     <value>ucrNudOutlier</value>
@@ -670,7 +670,7 @@
     <value>35, 20</value>
   </data>
   <data name="ucrNudRangeElement2Max.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>23</value>
   </data>
   <data name="&gt;&gt;ucrNudRangeElement2Max.Name" xml:space="preserve">
     <value>ucrNudRangeElement2Max</value>
@@ -694,7 +694,7 @@
     <value>100, 20</value>
   </data>
   <data name="ucrChkOutlier.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
+    <value>33</value>
   </data>
   <data name="&gt;&gt;ucrChkOutlier.Name" xml:space="preserve">
     <value>ucrChkOutlier</value>
@@ -718,7 +718,7 @@
     <value>35, 20</value>
   </data>
   <data name="ucrNudRangeElement2Min.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>21</value>
   </data>
   <data name="&gt;&gt;ucrNudRangeElement2Min.Name" xml:space="preserve">
     <value>ucrNudRangeElement2Min</value>
@@ -739,7 +739,7 @@
     <value>35, 20</value>
   </data>
   <data name="ucrNudRangeElement1Max.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>19</value>
   </data>
   <data name="&gt;&gt;ucrNudRangeElement1Max.Name" xml:space="preserve">
     <value>ucrNudRangeElement1Max</value>
@@ -760,7 +760,7 @@
     <value>100, 20</value>
   </data>
   <data name="ucrChkSame.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>24</value>
   </data>
   <data name="&gt;&gt;ucrChkSame.Name" xml:space="preserve">
     <value>ucrChkSame</value>
@@ -781,7 +781,7 @@
     <value>35, 20</value>
   </data>
   <data name="ucrNudRangeElement1Min.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>17</value>
   </data>
   <data name="&gt;&gt;ucrNudRangeElement1Min.Name" xml:space="preserve">
     <value>ucrNudRangeElement1Min</value>
@@ -802,7 +802,7 @@
     <value>100, 20</value>
   </data>
   <data name="ucrChkJump.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>26</value>
   </data>
   <data name="&gt;&gt;ucrChkJump.Name" xml:space="preserve">
     <value>ucrChkJump</value>
@@ -823,7 +823,7 @@
     <value>100, 20</value>
   </data>
   <data name="ucrChkDifference.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>31</value>
   </data>
   <data name="&gt;&gt;ucrChkDifference.Name" xml:space="preserve">
     <value>ucrChkDifference</value>
@@ -847,7 +847,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrReceiverElement1.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>12</value>
   </data>
   <data name="&gt;&gt;ucrReceiverElement1.Name" xml:space="preserve">
     <value>ucrReceiverElement1</value>
@@ -871,7 +871,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrReceiverDay.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;ucrReceiverDay.Name" xml:space="preserve">
     <value>ucrReceiverDay</value>
@@ -895,7 +895,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrReceiverMonth.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;ucrReceiverMonth.Name" xml:space="preserve">
     <value>ucrReceiverMonth</value>
@@ -919,7 +919,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrReceiverYear.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;ucrReceiverYear.Name" xml:space="preserve">
     <value>ucrReceiverYear</value>
@@ -943,7 +943,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrReceiverDate.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;ucrReceiverDate.Name" xml:space="preserve">
     <value>ucrReceiverDate</value>
@@ -991,7 +991,7 @@
     <value>210, 180</value>
   </data>
   <data name="ucrSelectorTemperature.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;ucrSelectorTemperature.Name" xml:space="preserve">
     <value>ucrSelectorTemperature</value>
@@ -1012,7 +1012,7 @@
     <value>410, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>35</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -1048,7 +1048,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrReceiverElement2.TabIndex" type="System.Int32, mscorlib">
-    <value>37</value>
+    <value>14</value>
   </data>
   <data name="&gt;&gt;ucrReceiverElement2.Name" xml:space="preserve">
     <value>ucrReceiverElement2</value>
