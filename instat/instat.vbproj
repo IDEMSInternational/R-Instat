@@ -789,6 +789,12 @@
     <Compile Include="sdgOpenNetCDF.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgParallelPlots.Designer.vb">
+      <DependentUpon>sdgParallelPlots.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgParallelPlots.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgPlotRegion.Designer.vb">
       <DependentUpon>sdgPlotRegion.vb</DependentUpon>
     </Compile>
@@ -3726,6 +3732,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgOpenNetCDF.sw-KE.resx">
       <DependentUpon>sdgOpenNetCDF.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgParallelPlots.resx">
+      <DependentUpon>sdgParallelPlots.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgPlotRegion.fr-FR.resx">
       <DependentUpon>sdgPlotRegion.vb</DependentUpon>
