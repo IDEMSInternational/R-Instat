@@ -294,6 +294,9 @@
   <data name="rdoHorizontal.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="rdoHorizontal.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoHorizontal.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 230</value>
   </data>
@@ -320,6 +323,9 @@
   </data>
   <data name="rdoVertical.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="rdoVertical.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoVertical.Location" type="System.Drawing.Point, System.Drawing">
     <value>104, 230</value>
@@ -348,6 +354,9 @@
   <data name="lblFactor2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblFactor2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblFactor2.Location" type="System.Drawing.Point, System.Drawing">
     <value>274, 133</value>
   </data>
@@ -374,6 +383,9 @@
   </data>
   <data name="lblFactor1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblFactor1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblFactor1.Location" type="System.Drawing.Point, System.Drawing">
     <value>272, 78</value>
@@ -546,6 +558,9 @@
   <data name="lblCaption.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblCaption.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblCaption.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 68</value>
   </data>
@@ -573,6 +588,9 @@
   <data name="lblSubTitle.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblSubTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblSubTitle.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 41</value>
   </data>
@@ -599,6 +617,9 @@
   </data>
   <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 17</value>
@@ -690,6 +711,9 @@
   <data name="rdoLegendTitleCustom.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="rdoLegendTitleCustom.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoLegendTitleCustom.Location" type="System.Drawing.Point, System.Drawing">
     <value>61, 23</value>
   </data>
@@ -716,6 +740,9 @@
   </data>
   <data name="rdoLegendTitleAuto.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="rdoLegendTitleAuto.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoLegendTitleAuto.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 23</value>
@@ -996,32 +1023,35 @@
   <data name="&gt;&gt;urChkSelectTheme.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="grpCommonOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 65</value>
   </data>
-  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="grpCommonOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>455, 223</value>
   </data>
-  <data name="GroupBox1.TabIndex" type="System.Int32, mscorlib">
+  <data name="grpCommonOptions.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
+  <data name="grpCommonOptions.Text" xml:space="preserve">
     <value>Common Options</value>
   </data>
-  <data name="&gt;&gt;GroupBox1.Name" xml:space="preserve">
-    <value>GroupBox1</value>
+  <data name="&gt;&gt;grpCommonOptions.Name" xml:space="preserve">
+    <value>grpCommonOptions</value>
   </data>
-  <data name="&gt;&gt;GroupBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;grpCommonOptions.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;GroupBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;grpCommonOptions.Parent" xml:space="preserve">
     <value>tbpTheme</value>
   </data>
-  <data name="&gt;&gt;GroupBox1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;grpCommonOptions.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="lblFont.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblFont.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblFont.Location" type="System.Drawing.Point, System.Drawing">
     <value>233, 49</value>
@@ -1043,6 +1073,9 @@
   </data>
   <data name="&gt;&gt;lblFont.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="cmdAllOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cmdAllOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>297, 18</value>
@@ -1116,34 +1149,25 @@
   <data name="&gt;&gt;tbpTheme.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="lblWarning.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="ucrChkHorizontalPlot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 18</value>
   </data>
-  <data name="lblWarning.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 12pt</value>
+  <data name="ucrChkHorizontalPlot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>252, 20</value>
   </data>
-  <data name="lblWarning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>99, 93</value>
-  </data>
-  <data name="lblWarning.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 20</value>
-  </data>
-  <data name="lblWarning.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrChkHorizontalPlot.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="lblWarning.Text" xml:space="preserve">
-    <value>Not yet implemented</value>
+  <data name="&gt;&gt;ucrChkHorizontalPlot.Name" xml:space="preserve">
+    <value>ucrChkHorizontalPlot</value>
   </data>
-  <data name="&gt;&gt;lblWarning.Name" xml:space="preserve">
-    <value>lblWarning</value>
+  <data name="&gt;&gt;ucrChkHorizontalPlot.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;lblWarning.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblWarning.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkHorizontalPlot.Parent" xml:space="preserve">
     <value>tbpCoordinates</value>
   </data>
-  <data name="&gt;&gt;lblWarning.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkHorizontalPlot.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tbpCoordinates.Location" type="System.Drawing.Point, System.Drawing">
@@ -1223,6 +1247,9 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>517, 399</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
