@@ -284,6 +284,12 @@
     <Compile Include="dlgDefineRedFlags.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgParallelCoordinatePlot.Designer.vb">
+      <DependentUpon>dlgParallelCoordinatePlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgParallelCoordinatePlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgVariableSets.Designer.vb">
       <DependentUpon>dlgVariableSets.vb</DependentUpon>
     </Compile>
@@ -2664,6 +2670,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOpenNetCDF.sw-KE.resx">
       <DependentUpon>dlgOpenNetCDF.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgParallelCoordinatePlot.resx">
+      <DependentUpon>dlgParallelCoordinatePlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPCSARainfall.fr-FR.resx">
       <DependentUpon>dlgPCSARainfall.vb</DependentUpon>
