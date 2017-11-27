@@ -1853,4 +1853,12 @@ Public Class frmMain
     Private Sub OpenNETcdfFileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenNETcdfFileToolStripMenuItem.Click
         dlgOpenNetCDF.ShowDialog()
     End Sub
+
+    Private Sub mnuClimaticCheckDataQCRainfall_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataQCRainfall.Click
+        dlgClimaticCheckDataRain.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticCheckDataQCTemperatures_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataQCTemperatures.Click
+        dlgClimaticCheckDataTemperature.ShowDialog()
+    End Sub
 End Class
