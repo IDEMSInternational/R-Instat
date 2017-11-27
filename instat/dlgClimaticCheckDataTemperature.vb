@@ -46,7 +46,16 @@ Public Class dlgClimaticCheckDataTemperature
         autoTranslate(Me)
         TestOkEnabled()
     End Sub
+
     Private Sub InitialiseDialog()
+        'TODO: Not yet implemented.
+        rdoMultiple.Enabled = False
+        rdoSatelite.Enabled = False
+        rdoIndividual.Checked = True
+
+        ucrChkOutlier.Enabled = False
+        ucrNudOutlier.Enabled = False
+        lblNudOutlier.Enabled = False
 
         'Station Receiver
         ucrReceiverStation.Selector = ucrSelectorTemperature
@@ -109,8 +118,7 @@ Public Class dlgClimaticCheckDataTemperature
 
         ucrChkJump.SetParameter(New RParameter("jump", clsJumpGreaterOperator, 1), bNewChangeParameterValue:=False)
         ucrChkJump.SetText("Jump")
-        ucrChkJump.AddToLinkedControls(ucrNudJumpElement1, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
-        ucrChkJump.AddToLinkedControls(ucrNudJumpElement2, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=20)
+        ucrChkJump.AddToLinkedControls(ucrNudJump, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
 
         ucrChkDifference.SetParameter(New RParameter("diff", clsLessDiffOperator, 1), bNewChangeParameterValue:=False)
         ucrChkDifference.SetText("Difference")
@@ -139,21 +147,13 @@ Public Class dlgClimaticCheckDataTemperature
         ucrNudSame.SetMinMax(2, 366)
 
         'Jump Option
-        ucrNudJumpElement1.SetParameter(New RParameter("from", iNewPosition:=1, bNewIncludeArgumentName:=False))
-        ucrNudJumpElement1.SetMinMax(1, 25)
-        ucrNudJumpElement1.SetLinkedDisplayControl(lblJumpElement1)
-
-        'Not yet working
-        'ucrNudJumpElement2.SetParameter(New RParameter("from", 1))
-        'ucrNudJumpElement2.SetMinMax(1, 25)
-        ucrNudJumpElement2.SetLinkedDisplayControl(lblJumpElement2)
+        ucrNudJump.SetParameter(New RParameter("from", iNewPosition:=1, bNewIncludeArgumentName:=False))
+        ucrNudJump.SetMinMax(1, 25)
 
         'Difference Option
         ucrNudDifference.SetParameter(New RParameter("n", iNewPosition:=1, bNewIncludeArgumentName:=False))
         ucrNudDifference.SetMinMax(-5, 5)
 
-        'Outlier Option
-        'More deliberations required for this Nud.
     End Sub
 
     Private Sub SetDefaults()
@@ -255,7 +255,7 @@ Public Class dlgClimaticCheckDataTemperature
         ucrReceiverElement1.SetRCode(clsGreaterOperator, bReset)
         ucrNudRangeElement1Min.SetRCode(clsGreaterOperator, bReset)
         ucrNudRangeElement1Max.SetRCode(clsLessOperator, bReset)
-        ucrNudJumpElement1.SetRCode(clsJumpGreaterOperator, bReset)
+        ucrNudJump.SetRCode(clsJumpGreaterOperator, bReset)
         ucrReceiverElement2.SetRCode(clsDiffOperator, bReset)
         ucrNudDifference.SetRCode(clsLessDiffOperator, bReset)
         ucrNudSame.SetRCode(clsSameGreaterOperator, bReset)
@@ -291,7 +291,7 @@ Public Class dlgClimaticCheckDataTemperature
         clsTempFilterFunc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & ")", iPosition:=2)
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrReceiverDay.ControlContentsChanged, ucrReceiverElement1.ControlContentsChanged, ucrNudSame.ControlContentsChanged, ucrNudRangeElement1Min.ControlContentsChanged, ucrNudRangeElement1Max.ControlContentsChanged, ucrNudRangeElement2Min.ControlContentsChanged, ucrNudRangeElement2Max.ControlContentsChanged, ucrNudJumpElement1.ControlContentsChanged, ucrNudRangeElement2Min.ControlContentsChanged, ucrNudRangeElement2Max.ControlContentsChanged, ucrNudDifference.ControlContentsChanged, ucrNudOutlier.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrReceiverDay.ControlContentsChanged, ucrReceiverElement1.ControlContentsChanged, ucrNudSame.ControlContentsChanged, ucrNudRangeElement1Min.ControlContentsChanged, ucrNudRangeElement1Max.ControlContentsChanged, ucrNudRangeElement2Min.ControlContentsChanged, ucrNudRangeElement2Max.ControlContentsChanged, ucrNudJump.ControlContentsChanged, ucrNudRangeElement2Min.ControlContentsChanged, ucrNudRangeElement2Max.ControlContentsChanged, ucrNudDifference.ControlContentsChanged, ucrNudOutlier.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
