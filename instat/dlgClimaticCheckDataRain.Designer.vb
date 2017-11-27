@@ -29,6 +29,8 @@ Partial Class dlgClimaticCheckDataRain
         Me.lblMonth = New System.Windows.Forms.Label()
         Me.lblElement = New System.Windows.Forms.Label()
         Me.lblmm = New System.Windows.Forms.Label()
+        Me.lblDays = New System.Windows.Forms.Label()
+        Me.lblRainDays = New System.Windows.Forms.Label()
         Me.ucrNudWetDays = New instat.ucrNud()
         Me.ucrNudSame = New instat.ucrNud()
         Me.ucrNudLarge = New instat.ucrNud()
@@ -45,8 +47,6 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrSelectorRain = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblDays = New System.Windows.Forms.Label()
-        Me.lblDaysWet = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblStation
@@ -54,63 +54,81 @@ Partial Class dlgClimaticCheckDataRain
         Me.lblStation.AutoSize = True
         Me.lblStation.Location = New System.Drawing.Point(259, 22)
         Me.lblStation.Name = "lblStation"
-        Me.lblStation.Size = New System.Drawing.Size(40, 13)
+        Me.lblStation.Size = New System.Drawing.Size(43, 13)
         Me.lblStation.TabIndex = 1
-        Me.lblStation.Text = "Station"
+        Me.lblStation.Text = "Station:"
         '
         'lblDate
         '
         Me.lblDate.AutoSize = True
-        Me.lblDate.Location = New System.Drawing.Point(259, 69)
+        Me.lblDate.Location = New System.Drawing.Point(259, 70)
         Me.lblDate.Name = "lblDate"
-        Me.lblDate.Size = New System.Drawing.Size(30, 13)
+        Me.lblDate.Size = New System.Drawing.Size(33, 13)
         Me.lblDate.TabIndex = 3
-        Me.lblDate.Text = "Date"
+        Me.lblDate.Text = "Date:"
         '
         'lblYear
         '
         Me.lblYear.AutoSize = True
         Me.lblYear.Location = New System.Drawing.Point(259, 113)
         Me.lblYear.Name = "lblYear"
-        Me.lblYear.Size = New System.Drawing.Size(29, 13)
+        Me.lblYear.Size = New System.Drawing.Size(32, 13)
         Me.lblYear.TabIndex = 5
-        Me.lblYear.Text = "Year"
+        Me.lblYear.Text = "Year:"
         '
         'lblDay
         '
         Me.lblDay.AutoSize = True
         Me.lblDay.Location = New System.Drawing.Point(259, 199)
         Me.lblDay.Name = "lblDay"
-        Me.lblDay.Size = New System.Drawing.Size(26, 13)
+        Me.lblDay.Size = New System.Drawing.Size(29, 13)
         Me.lblDay.TabIndex = 9
-        Me.lblDay.Text = "Day"
+        Me.lblDay.Text = "Day:"
         '
         'lblMonth
         '
         Me.lblMonth.AutoSize = True
         Me.lblMonth.Location = New System.Drawing.Point(259, 155)
         Me.lblMonth.Name = "lblMonth"
-        Me.lblMonth.Size = New System.Drawing.Size(37, 13)
+        Me.lblMonth.Size = New System.Drawing.Size(40, 13)
         Me.lblMonth.TabIndex = 7
-        Me.lblMonth.Text = "Month"
+        Me.lblMonth.Text = "Month:"
         '
         'lblElement
         '
         Me.lblElement.AutoSize = True
-        Me.lblElement.Location = New System.Drawing.Point(259, 245)
+        Me.lblElement.Location = New System.Drawing.Point(259, 244)
         Me.lblElement.Name = "lblElement"
-        Me.lblElement.Size = New System.Drawing.Size(45, 13)
+        Me.lblElement.Size = New System.Drawing.Size(48, 13)
         Me.lblElement.TabIndex = 11
-        Me.lblElement.Text = "Element"
+        Me.lblElement.Text = "Element:"
         '
         'lblmm
         '
         Me.lblmm.AutoSize = True
         Me.lblmm.Location = New System.Drawing.Point(157, 211)
         Me.lblmm.Name = "lblmm"
-        Me.lblmm.Size = New System.Drawing.Size(23, 13)
+        Me.lblmm.Size = New System.Drawing.Size(85, 13)
         Me.lblmm.TabIndex = 15
-        Me.lblmm.Text = "mm"
+        Me.lblmm.Text = "mm (or negative)"
+        '
+        'lblDays
+        '
+        Me.lblDays.AutoSize = True
+        Me.lblDays.Location = New System.Drawing.Point(157, 234)
+        Me.lblDays.Name = "lblDays"
+        Me.lblDays.Size = New System.Drawing.Size(98, 13)
+        Me.lblDays.TabIndex = 18
+        Me.lblDays.Text = "days (ignoring zero)"
+        '
+        'lblRainDays
+        '
+        Me.lblRainDays.AutoSize = True
+        Me.lblRainDays.Location = New System.Drawing.Point(157, 259)
+        Me.lblRainDays.Name = "lblRainDays"
+        Me.lblRainDays.Size = New System.Drawing.Size(54, 13)
+        Me.lblRainDays.TabIndex = 21
+        Me.lblRainDays.Text = "Rain days"
         '
         'ucrNudWetDays
         '
@@ -277,30 +295,12 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 24
         '
-        'lblDays
-        '
-        Me.lblDays.AutoSize = True
-        Me.lblDays.Location = New System.Drawing.Point(157, 234)
-        Me.lblDays.Name = "lblDays"
-        Me.lblDays.Size = New System.Drawing.Size(98, 13)
-        Me.lblDays.TabIndex = 18
-        Me.lblDays.Text = "days (ignoring zero)"
-        '
-        'lblDaysWet
-        '
-        Me.lblDaysWet.AutoSize = True
-        Me.lblDaysWet.Location = New System.Drawing.Point(157, 259)
-        Me.lblDaysWet.Name = "lblDaysWet"
-        Me.lblDaysWet.Size = New System.Drawing.Size(29, 13)
-        Me.lblDaysWet.TabIndex = 21
-        Me.lblDaysWet.Text = "days"
-        '
         'dlgClimaticCheckDataRain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(425, 389)
-        Me.Controls.Add(Me.lblDaysWet)
+        Me.Controls.Add(Me.lblRainDays)
         Me.Controls.Add(Me.lblDays)
         Me.Controls.Add(Me.lblmm)
         Me.Controls.Add(Me.ucrNudWetDays)
@@ -360,5 +360,5 @@ Partial Class dlgClimaticCheckDataRain
     Friend WithEvents ucrNudSame As ucrNud
     Friend WithEvents lblmm As Label
     Friend WithEvents lblDays As Label
-    Friend WithEvents lblDaysWet As Label
+    Friend WithEvents lblRainDays As Label
 End Class
