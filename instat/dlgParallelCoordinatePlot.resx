@@ -201,6 +201,27 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>424, 478</value>
   </data>
+  <data name="ucrSaveGraph.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 395</value>
+  </data>
+  <data name="ucrSaveGraph.Size" type="System.Drawing.Size, System.Drawing">
+    <value>410, 24</value>
+  </data>
+  <data name="ucrSaveGraph.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveGraph.Name" xml:space="preserve">
+    <value>ucrSaveGraph</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveGraph.Type" xml:space="preserve">
+    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveGraph.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveGraph.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrChkHorizontalPlot.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 359</value>
   </data>
@@ -220,7 +241,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkHorizontalPlot.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrNudTransparency.Location" type="System.Drawing.Point, System.Drawing">
     <value>344, 298</value>
@@ -241,7 +262,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrNudTransparency.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="lblTransparency.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -268,7 +289,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblTransparency.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="ucrChkPoints.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 332</value>
@@ -289,7 +310,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkPoints.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="ucrChkBoxplots.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 305</value>
@@ -310,7 +331,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkBoxplots.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="ucrInputScale.Location" type="System.Drawing.Point, System.Drawing">
     <value>48, 268</value>
@@ -331,7 +352,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputScale.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="lblScale.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -358,27 +379,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblScale.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="ucrSaveGraph.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 399</value>
-  </data>
-  <data name="ucrSaveGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>265, 20</value>
-  </data>
-  <data name="ucrSaveGraph.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveGraph.Name" xml:space="preserve">
-    <value>ucrSaveGraph</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveGraph.Type" xml:space="preserve">
-    <value>instat.ucrSaveGraph, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveGraph.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveGraph.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
@@ -492,28 +492,28 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="UcrReceiverMultiple1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrReceiverXVariables.Location" type="System.Drawing.Point, System.Drawing">
     <value>268, 44</value>
   </data>
-  <data name="UcrReceiverMultiple1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ucrReceiverXVariables.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="UcrReceiverMultiple1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrReceiverXVariables.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 100</value>
   </data>
-  <data name="UcrReceiverMultiple1.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrReceiverXVariables.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;UcrReceiverMultiple1.Name" xml:space="preserve">
-    <value>UcrReceiverMultiple1</value>
+  <data name="&gt;&gt;ucrReceiverXVariables.Name" xml:space="preserve">
+    <value>ucrReceiverXVariables</value>
   </data>
-  <data name="&gt;&gt;UcrReceiverMultiple1.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverXVariables.Type" xml:space="preserve">
     <value>instat.ucrReceiverMultiple, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;UcrReceiverMultiple1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverXVariables.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;UcrReceiverMultiple1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverXVariables.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
 </root>

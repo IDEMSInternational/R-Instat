@@ -26,12 +26,11 @@ Partial Class dlgParallelCoordinatePlot
         Me.ucrSelectorParallelCoordinatePlot = New instat.ucrSelectorByDataFrameAddRemove()
         Me.cmdParcoordOptions = New System.Windows.Forms.Button()
         Me.cmdPlotOptions = New System.Windows.Forms.Button()
-        Me.UcrReceiverMultiple1 = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverXVariables = New instat.ucrReceiverMultiple()
         Me.lblXVariables = New System.Windows.Forms.Label()
         Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
         Me.lblFactor = New System.Windows.Forms.Label()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSaveGraph = New instat.ucrSaveGraph()
         Me.lblScale = New System.Windows.Forms.Label()
         Me.ucrInputScale = New instat.ucrInputComboBox()
         Me.ucrChkBoxplots = New instat.ucrCheck()
@@ -39,6 +38,7 @@ Partial Class dlgParallelCoordinatePlot
         Me.lblTransparency = New System.Windows.Forms.Label()
         Me.ucrNudTransparency = New instat.ucrNud()
         Me.ucrChkHorizontalPlot = New instat.ucrCheck()
+        Me.ucrSaveGraph = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'ucrSelectorParallelCoordinatePlot
@@ -60,14 +60,14 @@ Partial Class dlgParallelCoordinatePlot
         Me.cmdPlotOptions.Name = "cmdPlotOptions"
         Me.cmdPlotOptions.UseVisualStyleBackColor = True
         '
-        'UcrReceiverMultiple1
+        'ucrReceiverXVariables
         '
-        Me.UcrReceiverMultiple1.frmParent = Me
-        resources.ApplyResources(Me.UcrReceiverMultiple1, "UcrReceiverMultiple1")
-        Me.UcrReceiverMultiple1.Name = "UcrReceiverMultiple1"
-        Me.UcrReceiverMultiple1.Selector = Nothing
-        Me.UcrReceiverMultiple1.strNcFilePath = ""
-        Me.UcrReceiverMultiple1.ucrSelector = Nothing
+        Me.ucrReceiverXVariables.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverXVariables, "ucrReceiverXVariables")
+        Me.ucrReceiverXVariables.Name = "ucrReceiverXVariables"
+        Me.ucrReceiverXVariables.Selector = Nothing
+        Me.ucrReceiverXVariables.strNcFilePath = ""
+        Me.ucrReceiverXVariables.ucrSelector = Nothing
         '
         'lblXVariables
         '
@@ -92,11 +92,6 @@ Partial Class dlgParallelCoordinatePlot
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrSaveGraph
-        '
-        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
-        Me.ucrSaveGraph.Name = "ucrSaveGraph"
         '
         'lblScale
         '
@@ -143,10 +138,16 @@ Partial Class dlgParallelCoordinatePlot
         resources.ApplyResources(Me.ucrChkHorizontalPlot, "ucrChkHorizontalPlot")
         Me.ucrChkHorizontalPlot.Name = "ucrChkHorizontalPlot"
         '
+        'ucrSaveGraph
+        '
+        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        '
         'dlgParallelCoordinatePlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrChkHorizontalPlot)
         Me.Controls.Add(Me.ucrNudTransparency)
         Me.Controls.Add(Me.lblTransparency)
@@ -154,12 +155,11 @@ Partial Class dlgParallelCoordinatePlot
         Me.Controls.Add(Me.ucrChkBoxplots)
         Me.Controls.Add(Me.ucrInputScale)
         Me.Controls.Add(Me.lblScale)
-        Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblFactor)
         Me.Controls.Add(Me.ucrReceiverFactor)
         Me.Controls.Add(Me.lblXVariables)
-        Me.Controls.Add(Me.UcrReceiverMultiple1)
+        Me.Controls.Add(Me.ucrReceiverXVariables)
         Me.Controls.Add(Me.cmdPlotOptions)
         Me.Controls.Add(Me.cmdParcoordOptions)
         Me.Controls.Add(Me.ucrSelectorParallelCoordinatePlot)
@@ -175,9 +175,8 @@ Partial Class dlgParallelCoordinatePlot
     Friend WithEvents ucrSelectorParallelCoordinatePlot As ucrSelectorByDataFrameAddRemove
     Friend WithEvents cmdParcoordOptions As Button
     Friend WithEvents cmdPlotOptions As Button
-    Friend WithEvents UcrReceiverMultiple1 As ucrReceiverMultiple
+    Friend WithEvents ucrReceiverXVariables As ucrReceiverMultiple
     Friend WithEvents lblScale As Label
-    Friend WithEvents ucrSaveGraph As ucrSaveGraph
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblFactor As Label
     Friend WithEvents ucrReceiverFactor As ucrReceiverSingle
@@ -188,4 +187,5 @@ Partial Class dlgParallelCoordinatePlot
     Friend WithEvents ucrChkBoxplots As ucrCheck
     Friend WithEvents ucrNudTransparency As ucrNud
     Friend WithEvents ucrChkHorizontalPlot As ucrCheck
+    Friend WithEvents ucrSaveGraph As ucrSave
 End Class
