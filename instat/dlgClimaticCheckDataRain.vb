@@ -188,7 +188,7 @@ Public Class dlgClimaticCheckDataRain
         clsOrOperator.bBrackets = True
         clsOrOperator.bToScriptAsRString = True
 
-        clsRainFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsOrOperator)
+        clsRainFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsOrOperator, iPosition:=1)
 
         clsRunCalcFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsRunCalcFunc.AddParameter("calc", clsRFunctionParameter:=clsRainFilterFunc)
