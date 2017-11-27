@@ -53,7 +53,6 @@ Partial Class dlgBoxplot
         Me.rdoViolin = New System.Windows.Forms.RadioButton()
         Me.ucrPnlPlots = New instat.UcrPanel()
         Me.ucrChkVarWidth = New instat.ucrCheck()
-        Me.ucrChkHorizontalBoxplot = New instat.ucrCheck()
         Me.ucrSaveBoxplot = New instat.ucrSave()
         Me.SuspendLayout()
         '
@@ -164,12 +163,6 @@ Partial Class dlgBoxplot
         resources.ApplyResources(Me.ucrChkVarWidth, "ucrChkVarWidth")
         Me.ucrChkVarWidth.Name = "ucrChkVarWidth"
         '
-        'ucrChkHorizontalBoxplot
-        '
-        Me.ucrChkHorizontalBoxplot.Checked = False
-        resources.ApplyResources(Me.ucrChkHorizontalBoxplot, "ucrChkHorizontalBoxplot")
-        Me.ucrChkHorizontalBoxplot.Name = "ucrChkHorizontalBoxplot"
-        '
         'ucrSaveBoxplot
         '
         resources.ApplyResources(Me.ucrSaveBoxplot, "ucrSaveBoxplot")
@@ -180,7 +173,6 @@ Partial Class dlgBoxplot
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ucrSaveBoxplot)
-        Me.Controls.Add(Me.ucrChkHorizontalBoxplot)
         Me.Controls.Add(Me.ucrChkVarWidth)
         Me.Controls.Add(Me.rdoViolin)
         Me.Controls.Add(Me.rdoJitter)
@@ -219,7 +211,6 @@ Partial Class dlgBoxplot
     Friend WithEvents rdoJitter As RadioButton
     Friend WithEvents rdoViolin As RadioButton
     Friend WithEvents ucrSaveBoxplot As ucrSave
-    Friend WithEvents ucrChkHorizontalBoxplot As ucrCheck
     Friend WithEvents ucrChkVarWidth As ucrCheck
     Friend WithEvents ucrPnlPlots As UcrPanel
 End Class
