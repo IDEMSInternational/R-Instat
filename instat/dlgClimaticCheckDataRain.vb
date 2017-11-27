@@ -82,7 +82,7 @@ Public Class dlgClimaticCheckDataRain
         ucrReceiverElement.SetParameterIsString()
         ucrReceiverElement.bWithQuotes = False
 
-        ucrNudLarge.SetParameter(New RParameter("right", 1))
+        ucrNudLarge.SetParameter(New RParameter("right", 1, bNewIncludeArgumentName:=False))
         ucrNudLarge.SetMinMax(iNewMin:=Integer.MinValue, iNewMax:=Integer.MaxValue)
 
         ucrReceiverDate.Selector = ucrSelectorRain
@@ -93,10 +93,10 @@ Public Class dlgClimaticCheckDataRain
         ucrChkLarge.SetText("Large")
 
         ucrChkSame.SetParameter(New RParameter("same", clsGreaterSameOperator, 1), bNewChangeParameterValue:=False)
-        ucrChkSame.SetText("Consecutive")
+        ucrChkSame.SetText("Same")
 
         ucrChkWetDays.SetParameter(New RParameter("wet_days", clsGreatOperator, 1, False), bNewChangeParameterValue:=False)
-        ucrChkWetDays.SetText("Wet Days")
+        ucrChkWetDays.SetText("Consecutive")
 
         ucrNudSame.SetParameter(New RParameter("right", 1, bNewIncludeArgumentName:=False))
         ucrNudWetDays.SetParameter(New RParameter("right", 1, bNewIncludeArgumentName:=False))
@@ -107,7 +107,7 @@ Public Class dlgClimaticCheckDataRain
         ucrChkWetDays.AddToLinkedControls(ucrNudWetDays, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
         ucrNudLarge.SetLinkedDisplayControl(lblmm)
         ucrNudSame.SetLinkedDisplayControl(lblDays)
-        ucrNudWetDays.SetLinkedDisplayControl(lblDaysWet)
+        ucrNudWetDays.SetLinkedDisplayControl(lblRainDays)
     End Sub
 
     Private Sub SetDefaults()
@@ -211,7 +211,11 @@ Public Class dlgClimaticCheckDataRain
     End Sub
 
     Private Sub TestOkEnabled()
-
+        If Not ucrReceiverElement.IsEmpty AndAlso (ucrChkLarge.Checked OrElse ucrChkSame.Checked OrElse ucrChkWetDays.Checked) Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub GroupByOptions()
@@ -258,5 +262,9 @@ Public Class dlgClimaticCheckDataRain
         If strRainCol <> "" Then
             ucrReceiverElement.Add(strRainCol, strDataFrame)
         End If
+    End Sub
+
+    Private Sub ucrReceiverElement_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrChkLarge.ControlContentsChanged, ucrChkSame.ControlContentsChanged, ucrChkWetDays.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
