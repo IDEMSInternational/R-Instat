@@ -37,7 +37,6 @@ Partial Class dlgParallelCoordinatePlot
         Me.ucrChkPoints = New instat.ucrCheck()
         Me.lblTransparency = New System.Windows.Forms.Label()
         Me.ucrNudTransparency = New instat.ucrNud()
-        Me.ucrChkHorizontalPlot = New instat.ucrCheck()
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.SuspendLayout()
         '
@@ -132,12 +131,6 @@ Partial Class dlgParallelCoordinatePlot
         Me.ucrNudTransparency.Name = "ucrNudTransparency"
         Me.ucrNudTransparency.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrChkHorizontalPlot
-        '
-        Me.ucrChkHorizontalPlot.Checked = False
-        resources.ApplyResources(Me.ucrChkHorizontalPlot, "ucrChkHorizontalPlot")
-        Me.ucrChkHorizontalPlot.Name = "ucrChkHorizontalPlot"
-        '
         'ucrSaveGraph
         '
         resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
@@ -148,7 +141,6 @@ Partial Class dlgParallelCoordinatePlot
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ucrSaveGraph)
-        Me.Controls.Add(Me.ucrChkHorizontalPlot)
         Me.Controls.Add(Me.ucrNudTransparency)
         Me.Controls.Add(Me.lblTransparency)
         Me.Controls.Add(Me.ucrChkPoints)
@@ -186,6 +178,5 @@ Partial Class dlgParallelCoordinatePlot
     Friend WithEvents ucrChkPoints As ucrCheck
     Friend WithEvents ucrChkBoxplots As ucrCheck
     Friend WithEvents ucrNudTransparency As ucrNud
-    Friend WithEvents ucrChkHorizontalPlot As ucrCheck
     Friend WithEvents ucrSaveGraph As ucrSave
 End Class
