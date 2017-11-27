@@ -141,7 +141,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrNudLarge.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLarge.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudLarge.Location = New System.Drawing.Point(106, 207)
-        Me.ucrNudLarge.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+        Me.ucrNudLarge.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudLarge.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLarge.Name = "ucrNudLarge"
         Me.ucrNudLarge.Size = New System.Drawing.Size(50, 20)

@@ -83,6 +83,7 @@ Public Class dlgClimaticCheckDataRain
         ucrReceiverElement.bWithQuotes = False
 
         ucrNudLarge.SetParameter(New RParameter("right", 1))
+        ucrNudLarge.SetMinMax(iNewMin:=Integer.MinValue, iNewMax:=Integer.MaxValue)
 
         ucrReceiverDate.Selector = ucrSelectorRain
         ucrReceiverDate.SetClimaticType("date")
@@ -144,7 +145,6 @@ Public Class dlgClimaticCheckDataRain
         'Large
         clsLargeOperator.SetOperation(">")
         clsLargeOperator.AddParameter("left", iPosition:=0)
-        clsLargeOperator.AddParameter("right", "200", iPosition:=1)
 
         'Same
         clsGreaterOperator.SetOperation(">")
