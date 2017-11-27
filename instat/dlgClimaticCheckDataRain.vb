@@ -23,7 +23,7 @@ Public Class dlgClimaticCheckDataRain
     'Large/Same/wetdays
     Private clsGroupByFunc, clsRainFilterFunc, clsRunCalcFunc, clsListFunc As New RFunction
     'Large 
-    Private clsLargeOperator As New ROperator
+    Private clsLargeOperator, clsOrLargeOperator, clsLargeLessOperator As New ROperator
     'Same
     Private clsRleFunc, clsRepFunc, clsAsNumericFunc As New RFunction
     Private clsAndOperator, clsDollarOperator, clsGreaterSameOperator As New ROperator
@@ -89,7 +89,7 @@ Public Class dlgClimaticCheckDataRain
         ucrReceiverDate.SetClimaticType("date")
         ucrReceiverDate.bAutoFill = True
 
-        ucrChkLarge.SetParameter(New RParameter("large", clsLargeOperator, 1), bNewChangeParameterValue:=False)
+        ucrChkLarge.SetParameter(New RParameter("large", clsOrLargeOperator, 1), bNewChangeParameterValue:=False)
         ucrChkLarge.SetText("Large")
 
         ucrChkSame.SetParameter(New RParameter("same", clsGreaterSameOperator, 1), bNewChangeParameterValue:=False)
@@ -119,8 +119,10 @@ Public Class dlgClimaticCheckDataRain
         clsDollarOperator = New ROperator
         clsOrOperator = New ROperator
         clsEqualOperator = New ROperator
+        clsLargeOperator = New ROperator
+        clsLargeLessOperator = New ROperator
 
-        clsLargeOperator.Clear()
+        clsOrLargeOperator.Clear()
         clsGreaterSameOperator.Clear()
         clsGreatOperator.Clear()
 
@@ -145,6 +147,11 @@ Public Class dlgClimaticCheckDataRain
         'Large
         clsLargeOperator.SetOperation(">")
         clsLargeOperator.AddParameter("left", iPosition:=0)
+        clsOrLargeOperator.SetOperation("|")
+        clsOrLargeOperator.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsLargeOperator, iPosition:=0)
+        clsOrLargeOperator.AddParameter("right", bIncludeArgumentName:=False, clsROperatorParameter:=clsLargeLessOperator, iPosition:=1)
+        clsLargeLessOperator.SetOperation("<")
+        clsLargeLessOperator.AddParameter("right", bIncludeArgumentName:=False, strParameterValue:="1E-8", iPosition:=1)
 
         'Same
         clsGreaterOperator.SetOperation(">")
@@ -199,6 +206,7 @@ Public Class dlgClimaticCheckDataRain
     Private Sub setRcodeForControls(bReset)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsGreaterOperator, New RParameter("left", 0), iAdditionalPairNo:=1)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsAsNumericFunc, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
+        ucrReceiverElement.AddAdditionalCodeParameterPair(clsLargeLessOperator, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
         ucrReceiverElement.SetRCode(clsLargeOperator, bReset)
 
         ucrNudLarge.SetRCode(clsLargeOperator, bReset)
