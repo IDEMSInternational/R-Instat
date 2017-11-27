@@ -150,7 +150,7 @@
     <value>True</value>
   </data>
   <data name="lblDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 70</value>
+    <value>259, 66</value>
   </data>
   <data name="lblDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>33, 13</value>
@@ -177,7 +177,7 @@
     <value>True</value>
   </data>
   <data name="lblYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 113</value>
+    <value>259, 110</value>
   </data>
   <data name="lblYear.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 13</value>
@@ -204,7 +204,7 @@
     <value>True</value>
   </data>
   <data name="lblDay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 199</value>
+    <value>259, 198</value>
   </data>
   <data name="lblDay.Size" type="System.Drawing.Size, System.Drawing">
     <value>29, 13</value>
@@ -231,7 +231,7 @@
     <value>True</value>
   </data>
   <data name="lblMonth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 155</value>
+    <value>259, 154</value>
   </data>
   <data name="lblMonth.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 13</value>
@@ -258,7 +258,7 @@
     <value>True</value>
   </data>
   <data name="lblElement.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 244</value>
+    <value>259, 242</value>
   </data>
   <data name="lblElement.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 13</value>
@@ -342,13 +342,13 @@
     <value>157, 259</value>
   </data>
   <data name="lblRainDays.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 13</value>
+    <value>49, 13</value>
   </data>
   <data name="lblRainDays.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
   </data>
   <data name="lblRainDays.Text" xml:space="preserve">
-    <value>Rain days</value>
+    <value>rain days</value>
   </data>
   <data name="&gt;&gt;lblRainDays.Name" xml:space="preserve">
     <value>lblRainDays</value>
@@ -537,7 +537,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>425, 389</value>
+    <value>421, 389</value>
   </data>
   <data name="ucrReceiverElement.Location" type="System.Drawing.Point, System.Drawing">
     <value>259, 258</value>
@@ -565,7 +565,7 @@
     <value>12</value>
   </data>
   <data name="ucrReceiverDay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 215</value>
+    <value>259, 214</value>
   </data>
   <data name="ucrReceiverDay.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -589,7 +589,7 @@
     <value>13</value>
   </data>
   <data name="ucrReceiverYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 129</value>
+    <value>259, 126</value>
   </data>
   <data name="ucrReceiverYear.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -613,7 +613,7 @@
     <value>15</value>
   </data>
   <data name="ucrReceiverDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 86</value>
+    <value>259, 82</value>
   </data>
   <data name="ucrReceiverDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -718,7 +718,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverMonth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 172</value>
+    <value>259, 170</value>
   </data>
   <data name="ucrReceiverMonth.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
