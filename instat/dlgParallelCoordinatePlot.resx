@@ -142,7 +142,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorParallelCoordinatePlot.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>14</value>
   </data>
   <data name="cmdParcoordOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 201</value>
@@ -166,7 +166,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdParcoordOptions.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>13</value>
   </data>
   <data name="cmdPlotOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 230</value>
@@ -190,7 +190,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdPlotOptions.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>12</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -222,27 +222,6 @@
   <data name="&gt;&gt;ucrSaveGraph.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="ucrChkHorizontalPlot.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 359</value>
-  </data>
-  <data name="ucrChkHorizontalPlot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
-  </data>
-  <data name="ucrChkHorizontalPlot.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="&gt;&gt;ucrChkHorizontalPlot.Name" xml:space="preserve">
-    <value>ucrChkHorizontalPlot</value>
-  </data>
-  <data name="&gt;&gt;ucrChkHorizontalPlot.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkHorizontalPlot.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkHorizontalPlot.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="ucrNudTransparency.Location" type="System.Drawing.Point, System.Drawing">
     <value>344, 298</value>
   </data>
@@ -262,7 +241,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrNudTransparency.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="lblTransparency.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -289,7 +268,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblTransparency.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="ucrChkPoints.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 332</value>
@@ -310,7 +289,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkPoints.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="ucrChkBoxplots.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 305</value>
@@ -331,7 +310,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkBoxplots.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="ucrInputScale.Location" type="System.Drawing.Point, System.Drawing">
     <value>48, 268</value>
@@ -352,7 +331,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputScale.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="lblScale.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -379,7 +358,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblScale.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 425</value>
@@ -400,7 +379,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="lblFactor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -427,7 +406,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFactor.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="ucrReceiverFactor.Location" type="System.Drawing.Point, System.Drawing">
     <value>268, 201</value>
@@ -451,7 +430,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverFactor.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="lblXVariables.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -478,7 +457,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblXVariables.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -514,6 +493,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverXVariables.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>11</value>
   </data>
 </root>
