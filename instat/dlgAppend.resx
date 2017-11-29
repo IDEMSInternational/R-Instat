@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblAppendToDataframe.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 45</value>
+    <value>248, 17</value>
   </data>
   <data name="lblAppendToDataframe.Size" type="System.Drawing.Size, System.Drawing">
     <value>115, 13</value>
@@ -318,6 +318,9 @@
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -331,7 +334,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverAppendDataframe.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 60</value>
+    <value>248, 32</value>
   </data>
   <data name="ucrReceiverAppendDataframe.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
