@@ -284,6 +284,12 @@
     <Compile Include="dlgDefineRedFlags.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgParallelCoordinatePlot.Designer.vb">
+      <DependentUpon>dlgParallelCoordinatePlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgParallelCoordinatePlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgVariableSets.Designer.vb">
       <DependentUpon>dlgVariableSets.vb</DependentUpon>
     </Compile>
@@ -787,6 +793,12 @@
       <DependentUpon>sdgOpenNetCDF.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgOpenNetCDF.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgParallelPlots.Designer.vb">
+      <DependentUpon>sdgParallelPlots.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgParallelPlots.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgPlotRegion.Designer.vb">
@@ -2665,6 +2677,9 @@
     <EmbeddedResource Include="dlgOpenNetCDF.sw-KE.resx">
       <DependentUpon>dlgOpenNetCDF.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgParallelCoordinatePlot.resx">
+      <DependentUpon>dlgParallelCoordinatePlot.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgPCSARainfall.fr-FR.resx">
       <DependentUpon>dlgPCSARainfall.vb</DependentUpon>
     </EmbeddedResource>
@@ -3726,6 +3741,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgOpenNetCDF.sw-KE.resx">
       <DependentUpon>sdgOpenNetCDF.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgParallelPlots.resx">
+      <DependentUpon>sdgParallelPlots.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgPlotRegion.fr-FR.resx">
       <DependentUpon>sdgPlotRegion.vb</DependentUpon>
