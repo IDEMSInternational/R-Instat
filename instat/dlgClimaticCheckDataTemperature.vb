@@ -145,14 +145,17 @@ Public Class dlgClimaticCheckDataTemperature
         'Same Option
         ucrNudSame.SetParameter(New RParameter("n", 1, bNewIncludeArgumentName:=False))
         ucrNudSame.SetMinMax(2, 366)
+        ucrNudSame.SetLinkedDisplayControl(lblNudSame)
 
         'Jump Option
         ucrNudJump.SetParameter(New RParameter("from", iNewPosition:=1, bNewIncludeArgumentName:=False))
         ucrNudJump.SetMinMax(1, 25)
+        ucrNudJump.SetLinkedDisplayControl(lblNudJump)
 
         'Difference Option
         ucrNudDifference.SetParameter(New RParameter("n", iNewPosition:=1, bNewIncludeArgumentName:=False))
         ucrNudDifference.SetMinMax(-5, 5)
+        ucrNudDifference.SetLinkedDisplayControl(lblNudDiff)
 
     End Sub
 
@@ -306,5 +309,15 @@ Public Class dlgClimaticCheckDataTemperature
 
     Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement1.ControlValueChanged
         FilterFunc()
+    End Sub
+
+    Private Sub lblRangeElement1_VisibleChanged(sender As Object, e As EventArgs) Handles lblRangeElement1.VisibleChanged
+        lblNudRangeElement1Min.Visible = lblRangeElement1.Visible
+        lblNudRangeElement1Max.Visible = lblRangeElement1.Visible
+    End Sub
+
+    Private Sub lblRangeElement2_VisibleChanged(sender As Object, e As EventArgs) Handles lblRangeElement2.VisibleChanged
+        lblNudRangeElement2Min.Visible = lblRangeElement2.Visible
+        lblNudRangeElement2Max.Visible = lblRangeElement2.Visible
     End Sub
 End Class
