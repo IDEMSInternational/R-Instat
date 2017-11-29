@@ -88,31 +88,32 @@ Public Class dlgBackupManager
     End Sub
 
     Private Sub cmdOpen_Click(sender As Object, e As EventArgs) Handles cmdOpen.Click
-
         If (Not testOk()) Then
             MsgBox("Select the file to open")
             Return
         End If
-
         If MsgBox("Are you sure you want to open this data file?" & Environment.NewLine & "This will replace the current data.", MessageBoxButtons.YesNo, "Back up Manager") = MsgBoxResult.No Then
             Return
         End If
-
         If (ucrLstViewDataBackups.SelectedIndices.Count = 1) Then
             'get the selected file path. To be used in opening the file name in form Main
             strSelectedDataFilePath = strAutoSavedDataFilePaths(ucrLstViewDataBackups.SelectedIndices(0))
             If strSelectedDataFilePath <> "" Then
-                'clsRLink.StartREngine("")
+                'pass the selected file to the sub and run the script generated
                 frmMain.clsRLink.LoadInstatDataObjectFromFile(strSelectedDataFilePath, strComment:="Loading auto recovered data file")
+                If frmMain.clsRLink.bInstatObjectExists Then
+                    '****** not sure about what really this script does but it registers a change to the instant object
+                    frmMain.clsRLink.RunInternalScript(frmMain.clsRLink.strInstatDataObject & "$data_objects_changed <- TRUE")
+                End If
+                'update the grid which will update the binded dataview
+                frmMain.clsGrids.UpdateGrids()
             End If
         Else
-            'don't allow opening of more than 1 file at a time
-            'NOTE in future this can be changed
+            'don't allow opening of more than 1 file at a time. NOTE in future this can be changed
             MsgBox("You can only open one data file at a time")
         End If
         setButtonStates(False)
         Close()
-
     End Sub
 
     Private Sub cmdSave_Click(sender As Object, e As EventArgs) Handles cmdSave.Click
