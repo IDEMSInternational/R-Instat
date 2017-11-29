@@ -69,6 +69,7 @@ Partial Class frmMain
         Me.mnuDescribeSpecificRugPlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificBarChart = New System.Windows.Forms.ToolStripMenuItem()
         Me.CummulativeDistributionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeSpecificMosaic = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeGeneral = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeGeneralColumnSummaries = New System.Windows.Forms.ToolStripMenuItem()
         Me.DescribeGeneralTabulation = New System.Windows.Forms.ToolStripMenuItem()
@@ -333,6 +334,7 @@ Partial Class frmMain
         Me.mnuImportFromODK = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImportFromCSPROToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImportFromToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OpenNETcdfFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator27 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuFileConvert = New System.Windows.Forms.ToolStripMenuItem()
         Me.tlSeparatorFile = New System.Windows.Forms.ToolStripSeparator()
@@ -634,7 +636,7 @@ Partial Class frmMain
         '
         'mnuDescribeSpecific
         '
-        Me.mnuDescribeSpecific.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeSpecificFrequency, Me.mnuDescribeSpecificSummary, Me.mnuDescribeSpecificMultipleResponse, Me.ToolStripSeparator26, Me.mnuDescribeSpecificScatterPlot, Me.mnuDescribeSpecificLinePlot, Me.mnuDescribeSpecificHistogram, Me.mnuDescribeSpecificBoxplot, Me.mnuDescribeSpecificDotPlot, Me.mnuDescribeSpecificRugPlot, Me.mnuDescribeSpecificBarChart, Me.CummulativeDistributionToolStripMenuItem})
+        Me.mnuDescribeSpecific.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeSpecificFrequency, Me.mnuDescribeSpecificSummary, Me.mnuDescribeSpecificMultipleResponse, Me.ToolStripSeparator26, Me.mnuDescribeSpecificScatterPlot, Me.mnuDescribeSpecificLinePlot, Me.mnuDescribeSpecificHistogram, Me.mnuDescribeSpecificBoxplot, Me.mnuDescribeSpecificDotPlot, Me.mnuDescribeSpecificRugPlot, Me.mnuDescribeSpecificBarChart, Me.CummulativeDistributionToolStripMenuItem, Me.mnuDescribeSpecificMosaic})
         Me.mnuDescribeSpecific.Name = "mnuDescribeSpecific"
         resources.ApplyResources(Me.mnuDescribeSpecific, "mnuDescribeSpecific")
         Me.mnuDescribeSpecific.Tag = "Table_Dialogs"
@@ -707,6 +709,11 @@ Partial Class frmMain
         '
         Me.CummulativeDistributionToolStripMenuItem.Name = "CummulativeDistributionToolStripMenuItem"
         resources.ApplyResources(Me.CummulativeDistributionToolStripMenuItem, "CummulativeDistributionToolStripMenuItem")
+        '
+        'mnuDescribeSpecificMosaic
+        '
+        resources.ApplyResources(Me.mnuDescribeSpecificMosaic, "mnuDescribeSpecificMosaic")
+        Me.mnuDescribeSpecificMosaic.Name = "mnuDescribeSpecificMosaic"
         '
         'mnuDescribeGeneral
         '
@@ -1420,13 +1427,13 @@ Partial Class frmMain
         '
         'mnuClimaticCheckDataQCRainfall
         '
-        resources.ApplyResources(Me.mnuClimaticCheckDataQCRainfall, "mnuClimaticCheckDataQCRainfall")
         Me.mnuClimaticCheckDataQCRainfall.Name = "mnuClimaticCheckDataQCRainfall"
+        resources.ApplyResources(Me.mnuClimaticCheckDataQCRainfall, "mnuClimaticCheckDataQCRainfall")
         '
         'mnuClimaticCheckDataQCTemperatures
         '
-        resources.ApplyResources(Me.mnuClimaticCheckDataQCTemperatures, "mnuClimaticCheckDataQCTemperatures")
         Me.mnuClimaticCheckDataQCTemperatures.Name = "mnuClimaticCheckDataQCTemperatures"
+        resources.ApplyResources(Me.mnuClimaticCheckDataQCTemperatures, "mnuClimaticCheckDataQCTemperatures")
         '
         'mnuClimaticPrepare
         '
@@ -2196,7 +2203,7 @@ Partial Class frmMain
         '
         'mnuFile
         '
-        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileOpenFromFile, Me.mnuFileOpenFromLibrary, Me.ToolStripSeparator35, Me.mnuImportFromODK, Me.ImportFromCSPROToolStripMenuItem, Me.ImportFromToolStripMenuItem, Me.ToolStripSeparator27, Me.mnuFileConvert, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuExport, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFileCloseData, Me.ToolStripSeparator8, Me.mnuFIleExit})
+        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileOpenFromFile, Me.mnuFileOpenFromLibrary, Me.ToolStripSeparator35, Me.mnuImportFromODK, Me.ImportFromCSPROToolStripMenuItem, Me.ImportFromToolStripMenuItem, Me.OpenNETcdfFileToolStripMenuItem, Me.ToolStripSeparator27, Me.mnuFileConvert, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuExport, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFileCloseData, Me.ToolStripSeparator8, Me.mnuFIleExit})
         Me.mnuFile.Name = "mnuFile"
         resources.ApplyResources(Me.mnuFile, "mnuFile")
         Me.mnuFile.Tag = "File"
@@ -2238,6 +2245,11 @@ Partial Class frmMain
         '
         resources.ApplyResources(Me.ImportFromToolStripMenuItem, "ImportFromToolStripMenuItem")
         Me.ImportFromToolStripMenuItem.Name = "ImportFromToolStripMenuItem"
+        '
+        'OpenNETcdfFileToolStripMenuItem
+        '
+        Me.OpenNETcdfFileToolStripMenuItem.Name = "OpenNETcdfFileToolStripMenuItem"
+        resources.ApplyResources(Me.OpenNETcdfFileToolStripMenuItem, "OpenNETcdfFileToolStripMenuItem")
         '
         'ToolStripSeparator27
         '
@@ -3793,4 +3805,6 @@ Partial Class frmMain
     Friend WithEvents mnuProcurementDefineCorruption As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator45 As ToolStripSeparator
     Friend WithEvents mnuProcurementCalculateCRI As ToolStripMenuItem
+    Friend WithEvents OpenNETcdfFileToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuDescribeSpecificMosaic As ToolStripMenuItem
 End Class

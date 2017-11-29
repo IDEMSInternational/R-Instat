@@ -45,6 +45,7 @@ Partial Class ucrLog
         Me.mnuCopy = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
+        Me.mnuRunSelectedText = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuContextLogFile.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
         Me.SuspendLayout()
@@ -64,20 +65,20 @@ Partial Class ucrLog
         '
         'mnuContextLogFile
         '
-        Me.mnuContextLogFile.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOpenLogFile, Me.mnuCopy})
+        Me.mnuContextLogFile.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOpenLogFile, Me.mnuCopy, Me.mnuRunSelectedText})
         Me.mnuContextLogFile.Name = "mnuContextLogFile"
-        Me.mnuContextLogFile.Size = New System.Drawing.Size(148, 48)
+        Me.mnuContextLogFile.Size = New System.Drawing.Size(167, 70)
         '
         'mnuOpenLogFile
         '
         Me.mnuOpenLogFile.Name = "mnuOpenLogFile"
-        Me.mnuOpenLogFile.Size = New System.Drawing.Size(147, 22)
+        Me.mnuOpenLogFile.Size = New System.Drawing.Size(166, 22)
         Me.mnuOpenLogFile.Text = "Open Log File"
         '
         'mnuCopy
         '
         Me.mnuCopy.Name = "mnuCopy"
-        Me.mnuCopy.Size = New System.Drawing.Size(147, 22)
+        Me.mnuCopy.Size = New System.Drawing.Size(166, 22)
         Me.mnuCopy.Text = "Copy"
         '
         'lblHeader
@@ -108,6 +109,12 @@ Partial Class ucrLog
         Me.tlpTableContainer.Size = New System.Drawing.Size(531, 415)
         Me.tlpTableContainer.TabIndex = 9
         '
+        'mnuRunSelectedText
+        '
+        Me.mnuRunSelectedText.Name = "mnuRunSelectedText"
+        Me.mnuRunSelectedText.Size = New System.Drawing.Size(166, 22)
+        Me.mnuRunSelectedText.Text = "Run Selected Text"
+        '
         'ucrLog
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -128,4 +135,5 @@ Partial Class ucrLog
     Friend WithEvents mnuOpenLogFile As ToolStripMenuItem
     Friend WithEvents mnuCopy As ToolStripMenuItem
     Friend WithEvents tlpTableContainer As TableLayoutPanel
+    Friend WithEvents mnuRunSelectedText As ToolStripMenuItem
 End Class

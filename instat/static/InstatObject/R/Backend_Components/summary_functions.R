@@ -585,6 +585,18 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
     else if(all(page_by %in% factors)) {
       levels_list <- lapply(page_by, function(x) levels(self$get_columns_from_data(data_name = data_name, col_names = x)))
       levels_data_frame <- expand.grid(levels_list)
+      # temp fix for having empty levels in page_by factor
+      # currently only checks each factor level separately - could still crash if missing combinations
+      # TODO fix for general case
+      tmp_data <- self$get_data_frame(data_name)
+      levels_data_frame$filter <- TRUE
+      for(i in seq_along(page_by)) {
+        tab <- table(tmp_data[[page_by[[i]]]])
+        tab <- tab[tab > 0]
+        levels_data_frame$filter <- levels_data_frame$filter & (levels_data_frame[[paste0("Var", i)]] %in% names(tab))
+      }
+      levels_data_frame <- subset(levels_data_frame, filter)
+      levels_data_frame$filter <- NULL
       for(j in 1:ncol(levels_data_frame)) {
         levels_data_frame[,j] <- paste0(page_by[j], " == ", "'", levels_data_frame[,j], "'")
       }
