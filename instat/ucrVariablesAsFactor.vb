@@ -160,6 +160,8 @@ Public Class ucrVariablesAsFactor
         End If
     End Function
 
+    'This is called the first time this control is loaded, cmdVariables is clicked on
+    'And everytime  SetControlValue() is executed (Note.  SetControlValue() is called by setRCode() of ucrCore )
     Public Sub SetReceiverStatus()
         'This sub sets up the receiver for it to operate as desired depending on the status it is in: multiple or single.
         'In the multiple case, stack_data, measure.vars and id.vars are added to the parameters of the current dataframe RFunction. In the single case, these are removed.
@@ -172,7 +174,7 @@ Public Class ucrVariablesAsFactor
             ucrSingleVariable.Visible = True
             ucrMultipleVariables.Visible = False
             If ucrVariableSelector IsNot Nothing Then
-                ucrSingleVariable.SetMeAsReceiver()
+                'ucrSingleVariable.SetMeAsReceiver()
                 ucrVariableSelector.ucrAvailableDataFrames.clsCurrDataFrame.RemoveParameterByName("stack_data")
                 ucrVariableSelector.ucrAvailableDataFrames.clsCurrDataFrame.RemoveParameterByName("measure.vars")
                 ucrVariableSelector.ucrAvailableDataFrames.clsCurrDataFrame.RemoveParameterByName("id.vars")
@@ -180,7 +182,7 @@ Public Class ucrVariablesAsFactor
             If ucrFactorReceiver IsNot Nothing Then
                 ucrFactorReceiver.SetStackedFactorMode(False)
             End If
-            ucrSingleVariable.SetMeAsReceiver()
+            'ucrSingleVariable.SetMeAsReceiver()
             If Selector IsNot Nothing Then
                 Selector.bIsStacked = False
             End If
@@ -191,12 +193,12 @@ Public Class ucrVariablesAsFactor
             cmdVariables.Text = "Multiple Variables"
             cmdVariables.FlatStyle = FlatStyle.Flat
             If ucrVariableSelector IsNot Nothing Then
-                ucrMultipleVariables.SetMeAsReceiver()
+                'ucrMultipleVariables.SetMeAsReceiver()
                 ucrVariableSelector.ucrAvailableDataFrames.clsCurrDataFrame.AddParameter("stack_data", "TRUE")
                 SetMeasureVars()
                 ucrVariableSelector.ucrAvailableDataFrames.clsCurrDataFrame.AddParameter("id.vars", GetIDVarNamesFromSelector())
             End If
-            ucrMultipleVariables.SetMeAsReceiver()
+            'ucrMultipleVariables.SetMeAsReceiver()
             If Selector IsNot Nothing Then
                 Selector.bIsStacked = True
             End If
