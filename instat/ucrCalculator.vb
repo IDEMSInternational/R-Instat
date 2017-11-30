@@ -1070,7 +1070,11 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdIfelse_Click(sender As Object, e As EventArgs) Handles cmdIfelse.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::if_else()", 1)
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ifelse(test= ,""yes"" ,""no"")", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ifelse()", 1)
+        End If
     End Sub
 
     Private Sub cmdmatch_Click(sender As Object, e As EventArgs) Handles cmdmatch.Click
@@ -1139,5 +1143,21 @@ Public Class ucrCalculator
 
     Private Sub cmdAnyDup_Click(sender As Object, e As EventArgs) Handles cmdAnyDup.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("anyDuplicated()", 2)
+    End Sub
+
+    Private Sub cmdCor_Click(sender As Object, e As EventArgs) Handles cmdCor.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cor(x= ,y= )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cor( )", 2)
+        End If
+    End Sub
+
+    Private Sub cmdCov_Click(sender As Object, e As EventArgs) Handles cmdCov.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cov(x= ,y= )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cov( )", 2)
+        End If
     End Sub
 End Class
