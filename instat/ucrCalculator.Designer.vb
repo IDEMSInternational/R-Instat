@@ -98,6 +98,8 @@ Partial Class ucrCalculator
         Me.cmdLead = New System.Windows.Forms.Button()
         Me.cmdLag = New System.Windows.Forms.Button()
         Me.grpSummary = New System.Windows.Forms.GroupBox()
+        Me.cmdCor = New System.Windows.Forms.Button()
+        Me.cmdCov = New System.Windows.Forms.Button()
         Me.cmdMad = New System.Windows.Forms.Button()
         Me.cmdMc = New System.Windows.Forms.Button()
         Me.cmdPropn = New System.Windows.Forms.Button()
@@ -618,6 +620,8 @@ Partial Class ucrCalculator
         '
         'grpSummary
         '
+        Me.grpSummary.Controls.Add(Me.cmdCor)
+        Me.grpSummary.Controls.Add(Me.cmdCov)
         Me.grpSummary.Controls.Add(Me.cmdMad)
         Me.grpSummary.Controls.Add(Me.cmdMc)
         Me.grpSummary.Controls.Add(Me.cmdPropn)
@@ -641,6 +645,18 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.grpSummary, "grpSummary")
         Me.grpSummary.Name = "grpSummary"
         Me.grpSummary.TabStop = False
+        '
+        'cmdCor
+        '
+        resources.ApplyResources(Me.cmdCor, "cmdCor")
+        Me.cmdCor.Name = "cmdCor"
+        Me.cmdCor.UseVisualStyleBackColor = True
+        '
+        'cmdCov
+        '
+        resources.ApplyResources(Me.cmdCov, "cmdCov")
+        Me.cmdCov.Name = "cmdCov"
+        Me.cmdCov.UseVisualStyleBackColor = True
         '
         'cmdMad
         '
@@ -1393,10 +1409,11 @@ Partial Class ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.grpSummary)
+        Me.Controls.Add(Me.grpProbabilty)
         Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.grpLogical)
         Me.Controls.Add(Me.grpMaths)
-        Me.Controls.Add(Me.grpSummary)
         Me.Controls.Add(Me.grpStrings)
         Me.Controls.Add(Me.grpDates)
         Me.Controls.Add(Me.cmdHelp)
@@ -1410,7 +1427,6 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.ucrSelectorForCalculations)
         Me.Controls.Add(Me.ucrReceiverForCalculation)
         Me.Controls.Add(Me.lblExpression)
-        Me.Controls.Add(Me.grpProbabilty)
         Me.Name = "ucrCalculator"
         Me.grpBasic.ResumeLayout(False)
         Me.grpDates.ResumeLayout(False)
@@ -1593,4 +1609,6 @@ Partial Class ucrCalculator
     Friend WithEvents cmdCv As Button
     Friend WithEvents cmdSkew As Button
     Friend WithEvents cmdAnyDup As Button
+    Friend WithEvents cmdCor As Button
+    Friend WithEvents cmdCov As Button
 End Class
