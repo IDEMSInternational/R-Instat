@@ -24,40 +24,18 @@ Public Class dlgBackupManager
     Private Sub dlgBackupManager_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Get the default Auto save Data Folder
         strAutoSaveDataFolderPath = frmMain.strAutoSaveDataFolderPath
-
         'set selected data file path to empty string
         strSelectedDataFilePath = ""
         loadFilesInfo()
         setButtonStates(False)
         autoTranslate(Me)
-
         'add to the list of last loaded forms
         frmMain.clsRecentItems.addToMenu(Me)
-
     End Sub
-
-    'get the folder path from the default declared data save folder path in frmMain
-    'this should be set by the parent, in this case frmMain
-    Public Property AutoSaveDataFolderPath() As String
-        Get
-            Return strAutoSaveDataFolderPath
-        End Get
-        Set(value As String)
-            strAutoSaveDataFolderPath = value
-        End Set
-    End Property
-
-    'this is accessed by frmMain. To get the selected data file name & path to open
-    Public ReadOnly Property SelectedDataFilePath() As String
-        Get
-            Return strSelectedDataFilePath
-        End Get
-    End Property
 
     'loads the files info's into the listview
     Private Sub loadFilesInfo()
         'clear any previous items
-
         ucrLstViewDataBackups.Items.Clear()
 
         'countercheck if the folder really exists then get all the file paths inside the folder
@@ -78,9 +56,6 @@ Public Class dlgBackupManager
                 End With
             Next
         End If
-
-        'ucrLstViewDataBackups.SelectedItems.Clear()
-
     End Sub
 
     Private Sub ucrLstViewDataBackups_Click(sender As Object, e As EventArgs) Handles ucrLstViewDataBackups.Click
@@ -92,9 +67,11 @@ Public Class dlgBackupManager
             MsgBox("Select the file to open")
             Return
         End If
+
         If MsgBox("Are you sure you want to open this data file?" & Environment.NewLine & "This will replace the current data.", MessageBoxButtons.YesNo, "Back up Manager") = MsgBoxResult.No Then
             Return
         End If
+
         If (ucrLstViewDataBackups.SelectedIndices.Count = 1) Then
             'get the selected file path. To be used in opening the file name in form Main
             strSelectedDataFilePath = strAutoSavedDataFilePaths(ucrLstViewDataBackups.SelectedIndices(0))
@@ -117,7 +94,6 @@ Public Class dlgBackupManager
     End Sub
 
     Private Sub cmdSave_Click(sender As Object, e As EventArgs) Handles cmdSave.Click
-
         If (Not testOk()) Then
             MsgBox("Select the file to save")
             Return
@@ -140,16 +116,14 @@ Public Class dlgBackupManager
             'NOTE in future this can be changed
             MsgBox("You can only save one data file at a time")
         End If
-
-
     End Sub
 
     Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
-
         If (Not testOk()) Then
             MsgBox("Select the file to delete")
             Return
         End If
+
         If MsgBox("Are you sure you want to delete this file?" & Environment.NewLine & "You cannot undo this action and all its data will be lost.", MessageBoxButtons.YesNo, "Back up Manager") = MsgBoxResult.No Then
             Return
         End If
@@ -158,7 +132,6 @@ Public Class dlgBackupManager
         For i As Integer = 0 To ucrLstViewDataBackups.SelectedIndices.Count - 1
             'delete the file
             File.Delete(strAutoSavedDataFilePaths(ucrLstViewDataBackups.SelectedIndices(i)))
-
         Next
 
         'then reload file info's
@@ -179,7 +152,6 @@ Public Class dlgBackupManager
     End Sub
 
     Private Sub cmdClose_Click(sender As Object, e As EventArgs) Handles cmdClose.Click
-
         strSelectedDataFilePath = ""
         Close()
     End Sub
@@ -187,7 +159,7 @@ Public Class dlgBackupManager
     'function to return bytes as KB,MB,GB,TB in a 2 dp string format
     Public Function getConvertedFileSize(fileSize As ULong) As String
         Try
-            'to hold the div result as a double for formatting
+            'to hold the division result as a double for formatting
             Dim doubleBytes As Double
             Select Case fileSize
                 Case Is >= 1099511627776
@@ -230,7 +202,6 @@ Public Class dlgBackupManager
         cmdDelete.Enabled = state
     End Sub
 
-
     'copies the file to the user destination location
     Private Sub saveFile(sourceFileName As String, destFilename As String)
         Try
@@ -239,6 +210,5 @@ Public Class dlgBackupManager
             MsgBox("Could not copy and/or delete data file." & Environment.NewLine & ex.Message, "Error copying/deleting file")
         End Try
     End Sub
-
 
 End Class
