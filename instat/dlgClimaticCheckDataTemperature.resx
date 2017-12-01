@@ -348,6 +348,9 @@
   <data name="lblRangeElement2.Text" xml:space="preserve">
     <value>Element 2(Tmin)</value>
   </data>
+  <data name="lblRangeElement2.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;lblRangeElement2.Name" xml:space="preserve">
     <value>lblRangeElement2</value>
   </data>
@@ -407,6 +410,9 @@
   </data>
   <data name="lblRangeElement2to.Text" xml:space="preserve">
     <value>to</value>
+  </data>
+  <data name="lblRangeElement2to.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;lblRangeElement2to.Name" xml:space="preserve">
     <value>lblRangeElement2to</value>
@@ -648,6 +654,9 @@
   <data name="lblNudDiff.Text" xml:space="preserve">
     <value>mm</value>
   </data>
+  <data name="lblNudDiff.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;lblNudDiff.Name" xml:space="preserve">
     <value>lblNudDiff</value>
   </data>
@@ -738,6 +747,9 @@
   <data name="lblNudRangeElement2Min.Text" xml:space="preserve">
     <value>mm</value>
   </data>
+  <data name="lblNudRangeElement2Min.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;lblNudRangeElement2Min.Name" xml:space="preserve">
     <value>lblNudRangeElement2Min</value>
   </data>
@@ -797,6 +809,9 @@
   </data>
   <data name="lblNudRangeElement2Max.Text" xml:space="preserve">
     <value>mm</value>
+  </data>
+  <data name="lblNudRangeElement2Max.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;lblNudRangeElement2Max.Name" xml:space="preserve">
     <value>lblNudRangeElement2Max</value>
@@ -891,6 +906,9 @@
   <data name="ucrNudDifference.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
   </data>
+  <data name="ucrNudDifference.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;ucrNudDifference.Name" xml:space="preserve">
     <value>ucrNudDifference</value>
   </data>
@@ -933,6 +951,9 @@
   <data name="ucrNudRangeElement2Max.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
   </data>
+  <data name="ucrNudRangeElement2Max.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;ucrNudRangeElement2Max.Name" xml:space="preserve">
     <value>ucrNudRangeElement2Max</value>
   </data>
@@ -974,6 +995,9 @@
   </data>
   <data name="ucrNudRangeElement2Min.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
+  </data>
+  <data name="ucrNudRangeElement2Min.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;ucrNudRangeElement2Min.Name" xml:space="preserve">
     <value>ucrNudRangeElement2Min</value>
@@ -1079,6 +1103,9 @@
   </data>
   <data name="ucrChkDifference.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
+  </data>
+  <data name="ucrChkDifference.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;ucrChkDifference.Name" xml:space="preserve">
     <value>ucrChkDifference</value>

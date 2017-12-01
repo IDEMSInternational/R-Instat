@@ -108,10 +108,10 @@ Public Class dlgClimaticCheckDataTemperature
         ucrChkRange.SetText("Range")
         ucrChkRange.AddToLinkedControls(ucrNudRangeElement1Min, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrChkRange.AddToLinkedControls(ucrNudRangeElement1Max, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=50)
-        ucrChkRange.AddToLinkedControls(ucrNudRangeElement2Min, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
-        ucrChkRange.AddToLinkedControls(ucrNudRangeElement2Max, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=50)
-        ucrNudRangeElement2Min.SetLinkedDisplayControl(lblRangeElement2)
-        ucrNudRangeElement2Max.SetLinkedDisplayControl(lblRangeElement2to)
+        'ucrChkRange.AddToLinkedControls(ucrNudRangeElement2Min, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        'ucrChkRange.AddToLinkedControls(ucrNudRangeElement2Max, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=50)
+        'ucrNudRangeElement2Min.SetLinkedDisplayControl(lblRangeElement2)
+        'ucrNudRangeElement2Max.SetLinkedDisplayControl(lblRangeElement2to)
 
         ucrChkSame.SetParameter(New RParameter("same", clsSameGreaterOperator, 1), bNewChangeParameterValue:=False)
         ucrChkSame.SetText("Same")
@@ -155,8 +155,8 @@ Public Class dlgClimaticCheckDataTemperature
         'Difference Option
         ucrNudDifference.SetParameter(New RParameter("n", iNewPosition:=1, bNewIncludeArgumentName:=False))
         ucrNudDifference.SetMinMax(-5, 5)
-        ucrChkDifference.AddToLinkedControls(ucrNudDifference, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
-        ucrNudDifference.SetLinkedDisplayControl(lblNudDiff)
+        'ucrChkDifference.AddToLinkedControls(ucrNudDifference, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        'ucrNudDifference.SetLinkedDisplayControl(lblNudDiff)
 
     End Sub
 
@@ -338,5 +338,30 @@ Public Class dlgClimaticCheckDataTemperature
     Private Sub lblRangeElement2_VisibleChanged(sender As Object, e As EventArgs) Handles lblRangeElement2.VisibleChanged
         lblNudRangeElement2Min.Visible = lblRangeElement2.Visible
         lblNudRangeElement2Max.Visible = lblRangeElement2.Visible
+    End Sub
+
+    Private Sub ucrReceiverElement2_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement2.ControlValueChanged
+        If Not ucrReceiverElement2.IsEmpty Then
+            ucrNudRangeElement2Min.Visible = True
+            ucrNudRangeElement2Max.Visible = True
+            lblRangeElement2.Visible = True
+            lblNudRangeElement2Min.Visible = True
+            lblNudRangeElement2Max.Visible = True
+            lblRangeElement2to.Visible = True
+            ucrChkDifference.Visible = True
+            ucrNudDifference.Visible = True
+            lblNudDiff.Visible = True
+            ucrChkRange.Checked = True
+        Else
+            ucrNudRangeElement2Min.Visible = False
+            ucrNudRangeElement2Max.Visible = False
+            lblRangeElement2.Visible = False
+            lblNudRangeElement2Min.Visible = False
+            lblNudRangeElement2Max.Visible = False
+            lblRangeElement2to.Visible = False
+            ucrChkDifference.Visible = False
+            ucrNudDifference.Visible = False
+            lblNudDiff.Visible = False
+        End If
     End Sub
 End Class
