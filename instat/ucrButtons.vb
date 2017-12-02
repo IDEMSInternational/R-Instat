@@ -52,6 +52,8 @@ Public Class ucrButtons
         Dim ctrTempControl As Control
         Dim j As Integer
 
+        'this is getting the current controls on the form and disables then to prevent user to interract with form when its running
+
         For Each ctrTempControl In ParentForm.Controls
             lstCurrentEnabled.Add(ctrTempControl.Enabled)
             ctrTempControl.Enabled = False
@@ -90,8 +92,11 @@ Public Class ucrButtons
         Dim lstAssignToCodes As New List(Of RCodeStructure)
         Dim lstAssignToStrings As New List(Of String)
 
+        'rm is the R function to remove the created objects from the memory at the end of the script and c is the function that puts them together in a list
         clsRemoveFunc.SetRCommand("rm")
         clsRemoveListFun.SetRCommand("c")
+
+        'this sets the comment for the script
         If chkComment.Checked Then
             strComments = txtComment.Text
         Else
@@ -156,6 +161,7 @@ Public Class ucrButtons
         Next
 
         'Clear variables from global environment
+        'TODO check that this line could be removed
         clsRemoveFunc.ClearParameters()
         'TODO remove assign to instat object
         'lstAssignToStrings.RemoveAll(Function(x) x = frmMain.clsRLink.strInstatDataObject)
