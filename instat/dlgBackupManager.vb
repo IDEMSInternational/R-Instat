@@ -37,12 +37,10 @@ Public Class dlgBackupManager
     Private Sub loadFilesInfo()
         'clear any previous items
         ucrLstViewDataBackups.Items.Clear()
-
         'countercheck if the folder really exists then get all the file paths inside the folder
         If Directory.Exists(strAutoSaveDataFolderPath) Then
             strAutoSavedDataFilePaths = My.Computer.FileSystem.GetFiles(frmMain.strAutoSaveDataFolderPath).ToList
         End If
-
         'if there are files then loop thro to get their info
         If strAutoSavedDataFilePaths IsNot Nothing AndAlso strAutoSavedDataFilePaths.Count > 0 Then
             Dim autoSavedFileInfo As FileInfo
@@ -67,11 +65,9 @@ Public Class dlgBackupManager
             MsgBox("Select the file to open")
             Return
         End If
-
         If MsgBox("Are you sure you want to open this data file?" & Environment.NewLine & "This will replace the current data.", MessageBoxButtons.YesNo, "Back up Manager") = MsgBoxResult.No Then
             Return
         End If
-
         If (ucrLstViewDataBackups.SelectedIndices.Count = 1) Then
             'get the selected file path. To be used in opening the file name in form Main
             strSelectedDataFilePath = strAutoSavedDataFilePaths(ucrLstViewDataBackups.SelectedIndices(0))
@@ -98,7 +94,6 @@ Public Class dlgBackupManager
             MsgBox("Select the file to save")
             Return
         End If
-
         'if its only one file that got selected then use the SaveFileDialog
         If (ucrLstViewDataBackups.SelectedIndices.Count = 1) Then
             Using dlgSave As New SaveFileDialog
@@ -123,22 +118,18 @@ Public Class dlgBackupManager
             MsgBox("Select the file to delete")
             Return
         End If
-
         If MsgBox("Are you sure you want to delete this file?" & Environment.NewLine & "You cannot undo this action and all its data will be lost.", MessageBoxButtons.YesNo, "Back up Manager") = MsgBoxResult.No Then
             Return
         End If
-
         'loop thro deleting the selected files
         For i As Integer = 0 To ucrLstViewDataBackups.SelectedIndices.Count - 1
             'delete the file
             File.Delete(strAutoSavedDataFilePaths(ucrLstViewDataBackups.SelectedIndices(i)))
         Next
-
         'then reload file info's
         loadFilesInfo()
         'set the button states accordingly
         testOk()
-
     End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
@@ -210,5 +201,4 @@ Public Class dlgBackupManager
             MsgBox("Could not copy and/or delete data file." & Environment.NewLine & ex.Message, "Error copying/deleting file")
         End Try
     End Sub
-
 End Class

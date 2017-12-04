@@ -123,10 +123,14 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblBackupHeader.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 37</value>
+    <value>20, 24</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblBackupHeader.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
   </data>
   <data name="lblBackupHeader.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 20</value>
+    <value>92, 13</value>
   </data>
   <data name="lblBackupHeader.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -146,11 +150,32 @@
   <data name="&gt;&gt;lblBackupHeader.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="ucrLstViewColName.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="ucrLstViewColName.Width" type="System.Int32, mscorlib">
+    <value>158</value>
+  </data>
+  <data name="ucrLstViewColDate.Text" xml:space="preserve">
+    <value>Date modified</value>
+  </data>
+  <data name="ucrLstViewColDate.Width" type="System.Int32, mscorlib">
+    <value>113</value>
+  </data>
+  <data name="ucrLstViewSize.Text" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="ucrLstViewSize.Width" type="System.Int32, mscorlib">
+    <value>96</value>
+  </data>
   <data name="ucrLstViewDataBackups.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 63</value>
+    <value>17, 41</value>
+  </data>
+  <data name="ucrLstViewDataBackups.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="ucrLstViewDataBackups.Size" type="System.Drawing.Size, System.Drawing">
-    <value>413, 172</value>
+    <value>375, 153</value>
   </data>
   <data name="ucrLstViewDataBackups.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -167,29 +192,14 @@
   <data name="&gt;&gt;ucrLstViewDataBackups.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="ucrLstViewColName.Text" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="ucrLstViewColName.Width" type="System.Int32, mscorlib">
-    <value>158</value>
-  </data>
-  <data name="ucrLstViewColDate.Text" xml:space="preserve">
-    <value>Date modified</value>
-  </data>
-  <data name="ucrLstViewColDate.Width" type="System.Int32, mscorlib">
-    <value>152</value>
-  </data>
-  <data name="ucrLstViewSize.Text" xml:space="preserve">
-    <value>Size</value>
-  </data>
-  <data name="ucrLstViewSize.Width" type="System.Int32, mscorlib">
-    <value>96</value>
-  </data>
   <data name="cmdClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>334, 239</value>
+    <value>325, 204</value>
+  </data>
+  <data name="cmdClose.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="cmdClose.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 30</value>
+    <value>75, 23</value>
   </data>
   <data name="cmdClose.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -210,10 +220,13 @@
     <value>1</value>
   </data>
   <data name="cmdHelp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 239</value>
+    <value>247, 204</value>
+  </data>
+  <data name="cmdHelp.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="cmdHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 30</value>
+    <value>75, 23</value>
   </data>
   <data name="cmdHelp.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -234,10 +247,13 @@
     <value>3</value>
   </data>
   <data name="cmdDelete.Location" type="System.Drawing.Point, System.Drawing">
-    <value>170, 239</value>
+    <value>169, 204</value>
+  </data>
+  <data name="cmdDelete.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="cmdDelete.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 30</value>
+    <value>75, 23</value>
   </data>
   <data name="cmdDelete.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -260,11 +276,17 @@
   <data name="cmdOpen.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="cmdOpen.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="cmdOpen.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 239</value>
+    <value>9, 204</value>
+  </data>
+  <data name="cmdOpen.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="cmdOpen.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 30</value>
+    <value>75, 23</value>
   </data>
   <data name="cmdOpen.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -288,10 +310,13 @@
     <value>True</value>
   </data>
   <data name="lblBackupMessage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 8</value>
+    <value>20, 5</value>
+  </data>
+  <data name="lblBackupMessage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
   </data>
   <data name="lblBackupMessage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>414, 20</value>
+    <value>281, 13</value>
   </data>
   <data name="lblBackupMessage.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -311,15 +336,17 @@
   <data name="&gt;&gt;lblBackupMessage.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="cmdSave.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdSave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>88, 239</value>
+    <value>88, 204</value>
+  </data>
+  <data name="cmdSave.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="cmdSave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 30</value>
+    <value>75, 23</value>
   </data>
   <data name="cmdSave.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -343,13 +370,16 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>9, 20</value>
+    <value>6, 13</value>
   </data>
   <data name="$this.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>426, 274</value>
+    <value>409, 235</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
