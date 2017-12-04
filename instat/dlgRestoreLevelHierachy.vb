@@ -17,10 +17,36 @@
 Imports instat.Translations
 Public Class dlgRestoreLevelHierachy
     Private bFirstLoad As Boolean = True
-    Private breset As Boolean = True
+    Private bReset As Boolean = True
 
     Private Sub dlgRestoreLevelHierachy_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        If bFirstLoad Then
+            InitialiseDialog()
+            bFirstLoad = False
+        End If
+
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
         autoTranslate(Me)
         tipReceiverOtherVariables.SetToolTip(Me.ucrReceiverOtherVariables, "Variables at the same level as key column")
+    End Sub
+
+    Private Sub InitialiseDialog()
+
+    End Sub
+
+    Private Sub SetDefaults()
+
+    End Sub
+
+    Private Sub TestOkEnabled()
+
+    End Sub
+    Private Sub SetRCodeForControls(bReset As Boolean)
+
     End Sub
 End Class
