@@ -137,6 +137,7 @@ Public Class ucrGeom
         Dim clsgeom_line As New Geoms
         Dim clsgeom_linerange As New Geoms
         Dim clsgeom_map As New Geoms
+        Dim clsgeom_mosaic As New Geoms
         Dim clsgeom_path As New Geoms
         Dim clsgeom_point As New Geoms
         Dim clsgeom_pointrange As New Geoms
@@ -441,24 +442,32 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_density)
 
 
-        'clsgeom_density2d.strGeomName = "geom_density2d"
-        ''Mandatory
-        'clsgeom_density2d.AddAesParameter("x", bIsMandatory:=True)
-        'clsgeom_density2d.AddAesParameter("y", bIsMandatory:=True)
+        clsgeom_density2d.strGeomName = "geom_density2d"
+        'Mandatory
+        clsgeom_density2d.AddAesParameter("x", bIsMandatory:=True)
+        clsgeom_density2d.AddAesParameter("y", bIsMandatory:=True)
         ''optional
-        'clsgeom_density2d.AddAesParameter("alpha")
-        'clsgeom_density2d.AddAesParameter("colour")
-        'clsgeom_density2d.AddAesParameter("linetype")
-        'clsgeom_density2d.AddAesParameter("size")
+        clsgeom_density2d.AddAesParameter("alpha")
+        clsgeom_density2d.AddAesParameter("colour")
+        clsgeom_density2d.AddAesParameter("group")
+        clsgeom_density2d.AddAesParameter("linetype")
+        clsgeom_density2d.AddAesParameter("size")
 
         ''Adding layer parameters
-        'clsgeom_density2d.AddLayerParameter("stat", "list", Chr(34) & "density2d" & Chr(34))
-        'clsgeom_density2d.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_density2d.AddLayerParameter("lineend", "list", Chr(34) & "butt" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "butt" & Chr(34), Chr(34) & "square" & Chr(34)})
-        'clsgeom_density2d.AddLayerParameter("linejoin", "list", Chr(34) & "round" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "mitre" & Chr(34), Chr(34) & "bevel" & Chr(34)})
+        'not sure of other stats and positons here
+        clsgeom_density2d.AddLayerParameter("stat", "list", Chr(34) & "density2d" & Chr(34), lstParameterStrings:={Chr(34) & "density2d" & Chr(34)})
+        clsgeom_density2d.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_density2d.AddLayerParameter("lineend", "list", Chr(34) & "butt" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "butt" & Chr(34), Chr(34) & "square" & Chr(34)})
+        clsgeom_density2d.AddLayerParameter("linejoin", "list", Chr(34) & "round" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "mitre" & Chr(34), Chr(34) & "bevel" & Chr(34)})
+        clsgeom_density2d.AddLayerParameter("na.rm", "boolean", "FALSE")
+        clsgeom_density2d.AddLayerParameter("show.legend", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_density2d.AddLayerParameter("inherit.aes", "boolean", "TRUE")
+        clsgeom_density2d.AddLayerParameter("contour", "boolean", "FALSE")
         ''linemitre should 1 or a number >1
-        'clsgeom_density2d.AddLayerParameter("linemitre", "numeric", "1")
-        'lstAllGeoms.Add(clsgeom_density2d)
+        clsgeom_density2d.AddLayerParameter("linemitre", "numeric", "1")
+        clsgeom_density2d.AddLayerParameter("n", "numeric", "20")
+        clsgeom_density2d.AddLayerParameter("h", "numeric", "20")
+        lstAllGeoms.Add(clsgeom_density2d)
 
         'clsgeom_density_2d.strGeomName = "geom_density_2d"
         ''Mandatory
@@ -757,8 +766,10 @@ Public Class ucrGeom
         'Optional
         clsgeom_line.AddAesParameter("alpha", strIncludedDataTypes:={"numeric", "factor"})
         clsgeom_line.AddAesParameter("colour", strIncludedDataTypes:={"numeric", "factor"})
+        clsgeom_line.AddAesParameter("group", strIncludedDataTypes:={"numeric", "factor"})
         clsgeom_line.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
         clsgeom_line.AddAesParameter("size", strIncludedDataTypes:={"numeric", "factor"})
+
         'Adding layer parameters
         'Geom_line Parameters
 
@@ -822,6 +833,17 @@ Public Class ucrGeom
         ''linemitre should 1 or a number >1
         'clsgeom_path.AddLayerParameter("linemitre", "numeric", "1")
         'lstAllGeoms.Add(clsgeom_path)
+
+
+        'this is just a start.. needs lots of further work
+        'clsgeom_mosaic.strGeomName = "geom_mosaic"
+        ''mandatory
+        'clsgeom_mosaic.AddAesParameter("weight ", bIsMandatory:=True)
+        'clsgeom_mosaic.AddAesParameter("x", bIsMandatory:=True)
+        'clsgeom_mosaic.AddAesParameter("fill", bIsMandatory:=True)
+        'clsgeom_mosaic.AddAesParameter("conds", bIsMandatory:=True)
+        'lstAllGeoms.Add(clsgeom_mosaic)
+
 
         clsgeom_point.SetGeomName("geom_point")
         'Mandatory aesthetics : here x and y are mandatory, however, when not filled, default values "" are given. Alternatively, if we want to have at least on filled, could add bIsDependentlyMandatory:=True in both. Planning on refining the mandatory aes methods to include the "" cases systematically.
