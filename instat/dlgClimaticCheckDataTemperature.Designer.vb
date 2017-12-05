@@ -45,6 +45,7 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.lblNudRangeElement2Min = New System.Windows.Forms.Label()
         Me.lblNudRangeElement1Max = New System.Windows.Forms.Label()
         Me.lblNudRangeElement2Max = New System.Windows.Forms.Label()
+        Me.ucrChkRange2 = New instat.ucrCheck()
         Me.ucrReceiverElement2 = New instat.ucrReceiverSingle()
         Me.ucrNudJump = New instat.ucrNud()
         Me.ucrChkRange = New instat.ucrCheck()
@@ -195,6 +196,12 @@ Partial Class dlgClimaticCheckDataTemperature
         '
         resources.ApplyResources(Me.lblNudRangeElement2Max, "lblNudRangeElement2Max")
         Me.lblNudRangeElement2Max.Name = "lblNudRangeElement2Max"
+        '
+        'ucrChkRange2
+        '
+        Me.ucrChkRange2.Checked = False
+        resources.ApplyResources(Me.ucrChkRange2, "ucrChkRange2")
+        Me.ucrChkRange2.Name = "ucrChkRange2"
         '
         'ucrReceiverElement2
         '
@@ -390,6 +397,7 @@ Partial Class dlgClimaticCheckDataTemperature
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkRange2)
         Me.Controls.Add(Me.lblNudRangeElement2Max)
         Me.Controls.Add(Me.lblNudRangeElement1Max)
         Me.Controls.Add(Me.lblNudRangeElement2Min)
@@ -489,4 +497,5 @@ Partial Class dlgClimaticCheckDataTemperature
     Friend WithEvents lblNudRangeElement1Max As Label
     Friend WithEvents lblNudRangeElement2Min As Label
     Friend WithEvents lblNudRangeElement1Min As Label
+    Friend WithEvents ucrChkRange2 As ucrCheck
 End Class
