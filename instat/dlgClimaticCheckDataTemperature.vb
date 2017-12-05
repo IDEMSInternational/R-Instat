@@ -21,7 +21,7 @@ Public Class dlgClimaticCheckDataTemperature
     Private strCurrDataFrame As String
     Private clsGroupByFunc, clsListFunc, clsTempFilterFunc, clsRunCalcFunc As New RFunction
     'Range
-    Private clsLessOperator, clsGreaterOperator, clsRangeOrOpertor, clsRangeAndOperator, clsRangeOr2Opertor, clsLess2Operator, clsGreater2Operator As New ROperator
+    Private clsLessOperator, clsGreaterOperator, clsRangeOrOpertor, clsRangeAndOperator, clsRangeOr2Opertor, clsLess2Operator, clsGreater2Operator, clsRangeAnd2Operator As New ROperator
     'Jump
     Private clsConcFunc, clsDiffFunc, clsAbsFunc As RFunction
     Private clsJumpGreaterOperator As New ROperator
@@ -104,14 +104,18 @@ Public Class dlgClimaticCheckDataTemperature
         ucrReceiverElement2.bWithQuotes = False
 
         'Checkboxes for options
-        ucrChkRange.SetParameter(New RParameter("range", clsRangeOrOpertor, 1), bNewChangeParameterValue:=False)
-        ucrChkRange.SetText("Range")
+        ucrChkRange.SetParameter(New RParameter("range", clsRangeAndOperator, 1), bNewChangeParameterValue:=False)
+        ucrChkRange.SetText("Range(Element1)")
+
+        ucrChkRange2.SetParameter(New RParameter("range2", clsRangeAnd2Operator, 1), bNewChangeParameterValue:=False)
+        ucrChkRange2.SetText("Range(Element2)")
+
         ucrChkRange.AddToLinkedControls(ucrNudRangeElement1Min, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrChkRange.AddToLinkedControls(ucrNudRangeElement1Max, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=50)
-        'ucrChkRange.AddToLinkedControls(ucrNudRangeElement2Min, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
-        'ucrChkRange.AddToLinkedControls(ucrNudRangeElement2Max, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=50)
-        'ucrNudRangeElement2Min.SetLinkedDisplayControl(lblRangeElement2)
-        'ucrNudRangeElement2Max.SetLinkedDisplayControl(lblRangeElement2to)
+        ucrChkRange2.AddToLinkedControls(ucrNudRangeElement2Min, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrChkRange2.AddToLinkedControls(ucrNudRangeElement2Max, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=50)
+        ucrNudRangeElement2Min.SetLinkedDisplayControl(lblRangeElement2)
+        ucrNudRangeElement2Max.SetLinkedDisplayControl(lblRangeElement2to)
 
         ucrChkSame.SetParameter(New RParameter("same", clsSameGreaterOperator, 1), bNewChangeParameterValue:=False)
         ucrChkSame.SetText("Same")
@@ -132,7 +136,7 @@ Public Class dlgClimaticCheckDataTemperature
         ucrNudRangeElement1Min.SetMinMax(-50, 65)
         ucrNudRangeElement1Min.SetLinkedDisplayControl(lblRangeElement1)
 
-        ucrNudRangeElement1Max.SetParameter(New RParameter("to", 1, bNewIncludeArgumentName:=False))
+        ucrNudRangeElement1Max.SetParameter(New RParameter("To", 1, bNewIncludeArgumentName:=False))
         ucrNudRangeElement1Max.SetMinMax(-50, 65)
         ucrNudRangeElement1Max.SetLinkedDisplayControl(lblRangeElement1to)
 
@@ -155,9 +159,10 @@ Public Class dlgClimaticCheckDataTemperature
         'Difference Option
         ucrNudDifference.SetParameter(New RParameter("n", iNewPosition:=1, bNewIncludeArgumentName:=False))
         ucrNudDifference.SetMinMax(-5, 5)
-        'ucrChkDifference.AddToLinkedControls(ucrNudDifference, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
-        'ucrNudDifference.SetLinkedDisplayControl(lblNudDiff)
-
+        ucrChkDifference.AddToLinkedControls(ucrNudDifference, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        'ucrChkDifference.AddToLinkedControls(ucrReceiverElement2, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrNudDifference.SetLinkedDisplayControl(lblNudDiff)
+        ucrReceiverElement2.SetLinkedDisplayControl(lblElement2)
     End Sub
 
     Private Sub SetDefaults()
@@ -178,11 +183,12 @@ Public Class dlgClimaticCheckDataTemperature
         clsAsNumFunc = New RFunction
         clsDollarOperator = New ROperator
         clsOrOperator = New ROperator
-        clsRangeOr2Opertor = New ROperator
+        'clsRangeOr2Opertor = New ROperator
         clsLess2Operator = New ROperator
         clsGreater2Operator = New ROperator
 
-        clsRangeOrOpertor.Clear()
+        clsRangeAndOperator.Clear()
+        clsRangeAnd2Operator.Clear()
         clsSameGreaterOperator.Clear()
         clsJumpGreaterOperator.Clear()
         clsLessDiffOperator.Clear()
@@ -201,20 +207,20 @@ Public Class dlgClimaticCheckDataTemperature
         clsLessOperator.SetOperation("<")
         clsGreaterOperator.SetOperation(">")
         clsGreaterOperator.AddParameter("from", "0", bIncludeArgumentName:=False, iPosition:=1)
-        clsRangeOrOpertor.SetOperation("|")
-        clsRangeOrOpertor.bBrackets = False
-        clsRangeOrOpertor.AddParameter("left", clsROperatorParameter:=clsGreaterOperator, iPosition:=0, bIncludeArgumentName:=False)
-        clsRangeOrOpertor.AddParameter("right", clsROperatorParameter:=clsLessOperator, iPosition:=1, bIncludeArgumentName:=False)
         clsRangeAndOperator.SetOperation("&")
+        clsRangeOrOpertor.bBrackets = False
+        clsRangeAndOperator.AddParameter("left", clsROperatorParameter:=clsGreaterOperator, iPosition:=0, bIncludeArgumentName:=False)
+        clsRangeAndOperator.AddParameter("right", clsROperatorParameter:=clsLessOperator, iPosition:=1, bIncludeArgumentName:=False)
+        clsRangeAnd2Operator.SetOperation("&")
         clsLess2Operator.SetOperation("<")
         clsGreater2Operator.SetOperation(">")
         clsGreater2Operator.AddParameter("from", "0", bIncludeArgumentName:=False, iPosition:=1)
-        clsRangeOr2Opertor.SetOperation("|")
-        clsRangeOr2Opertor.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsGreater2Operator, iPosition:=0)
-        clsRangeOr2Opertor.AddParameter("right", bIncludeArgumentName:=False, clsROperatorParameter:=clsLess2Operator, iPosition:=1)
+        ' clsRangeOr2Opertor.SetOperation("|")
+        clsRangeAnd2Operator.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsGreater2Operator, iPosition:=0)
+        clsRangeAnd2Operator.AddParameter("right", bIncludeArgumentName:=False, clsROperatorParameter:=clsLess2Operator, iPosition:=1)
 
-        clsRangeAndOperator.AddParameter("left", clsROperatorParameter:=clsRangeOrOpertor, iPosition:=0, bIncludeArgumentName:=False)
-        clsRangeAndOperator.AddParameter("right", clsROperatorParameter:=clsRangeOr2Opertor, iPosition:=1, bIncludeArgumentName:=False)
+        'clsRangeAndOperator.AddParameter("left", clsROperatorParameter:=clsRangeOrOpertor, iPosition:=0, bIncludeArgumentName:=False)
+        'clsRangeAndOperator.AddParameter("right", clsROperatorParameter:=clsRangeOr2Opertor, iPosition:=1, bIncludeArgumentName:=False)
 
         'Same
         clsSameGreaterOperator.SetOperation(">=")
@@ -282,6 +288,7 @@ Public Class dlgClimaticCheckDataTemperature
         ucrNudDifference.SetRCode(clsLessDiffOperator, bReset)
         ucrNudSame.SetRCode(clsSameGreaterOperator, bReset)
         ucrChkRange.SetRCode(clsOrOperator, bReset)
+        ucrChkRange2.SetRCode(clsOrOperator, bReset)
         ucrChkSame.SetRCode(clsOrOperator, bReset)
         ucrChkJump.SetRCode(clsOrOperator, bReset)
         ucrChkDifference.SetRCode(clsOrOperator, bReset)
@@ -338,30 +345,5 @@ Public Class dlgClimaticCheckDataTemperature
     Private Sub lblRangeElement2_VisibleChanged(sender As Object, e As EventArgs) Handles lblRangeElement2.VisibleChanged
         lblNudRangeElement2Min.Visible = lblRangeElement2.Visible
         lblNudRangeElement2Max.Visible = lblRangeElement2.Visible
-    End Sub
-
-    Private Sub ucrReceiverElement2_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement2.ControlValueChanged
-        If Not ucrReceiverElement2.IsEmpty Then
-            ucrNudRangeElement2Min.Visible = True
-            ucrNudRangeElement2Max.Visible = True
-            lblRangeElement2.Visible = True
-            lblNudRangeElement2Min.Visible = True
-            lblNudRangeElement2Max.Visible = True
-            lblRangeElement2to.Visible = True
-            ucrChkDifference.Visible = True
-            ucrNudDifference.Visible = True
-            lblNudDiff.Visible = True
-            ucrChkRange.Checked = True
-        Else
-            ucrNudRangeElement2Min.Visible = False
-            ucrNudRangeElement2Max.Visible = False
-            lblRangeElement2.Visible = False
-            lblNudRangeElement2Min.Visible = False
-            lblNudRangeElement2Max.Visible = False
-            lblRangeElement2to.Visible = False
-            ucrChkDifference.Visible = False
-            ucrNudDifference.Visible = False
-            lblNudDiff.Visible = False
-        End If
     End Sub
 End Class
