@@ -32,10 +32,33 @@ Public Class dlgRestoreLevelHierachy
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
-        tipReceiverOtherVariables.SetToolTip(Me.ucrReceiverOtherVariables, "Variables at the same level as key column")
     End Sub
 
     Private Sub InitialiseDialog()
+
+        ucrSelectorRestoreHierachy.SetParameter(New RParameter(""))
+
+        ucrReceiverKeyVariable.Selector = ucrSelectorRestoreHierachy
+        ucrReceiverKeyVariable.SetParameter(New RParameter(""))
+
+        ucrReceiverOtherVariables.Selector = ucrSelectorRestoreHierachy
+        ucrReceiverOtherVariables.SetParameter(New RParameter(""))
+        tipRestoreHierachy.SetToolTip(ucrReceiverOtherVariables, "Variables at the same level as key column.")
+
+        ucrChkWarn.SetText("Warn if the other variables are not constant")
+        ucrChkWarn.SetParameter(New RParameter(""))
+        tipRestoreHierachy.SetToolTip(ucrChkWarn, "columns at the same level as the key column should take a single value at each level of that column.")
+
+
+        ucrChkDelete.SetText("Delete other variables from the original data frame")
+        ucrChkDelete.SetParameter(New RParameter(""))
+        tipRestoreHierachy.SetToolTip(ucrChkDelete, "Columns are only deleted if they are constant within levels of the key column.")
+
+        ucrSaveColumn.SetPrefix("Hierachy")
+        ucrSaveColumn.SetSaveTypeAsColumn()
+        ucrSaveColumn.SetDataFrameSelector(ucrSelectorRestoreHierachy.ucrAvailableDataFrames)
+        ucrSaveColumn.SetLabelText("New Column Name:")
+        ucrSaveColumn.SetIsComboBox()
 
     End Sub
 
@@ -49,4 +72,5 @@ Public Class dlgRestoreLevelHierachy
     Private Sub SetRCodeForControls(bReset As Boolean)
 
     End Sub
+
 End Class

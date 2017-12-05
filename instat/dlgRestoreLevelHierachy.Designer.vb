@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgRestoreLevelHierachy
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,28 +20,63 @@ Partial Class dlgRestoreLevelHierachy
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgRestoreLevelHierachy))
-        Me.ucrSelectorRestoreHierachy = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverKeyVariable = New instat.ucrReceiverSingle()
         Me.lblKeyVariable = New System.Windows.Forms.Label()
-        Me.ucrReceiverOtherVariables = New instat.ucrReceiverMultiple()
         Me.lblOtherVariables = New System.Windows.Forms.Label()
-        Me.ucrDelete = New instat.ucrCheck()
-        Me.ucrChkWarn = New instat.ucrCheck()
-        Me.ucrSaveColumn = New instat.ucrSave()
+        Me.tipRestoreHierachy = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrBase = New instat.ucrButtons()
-        Me.tipReceiverOtherVariables = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ucrSaveColumn = New instat.ucrSave()
+        Me.ucrChkWarn = New instat.ucrCheck()
+        Me.ucrChkDelete = New instat.ucrCheck()
+        Me.ucrReceiverOtherVariables = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverKeyVariable = New instat.ucrReceiverSingle()
+        Me.ucrSelectorRestoreHierachy = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
         '
-        'ucrSelectorRestoreHierachy
+        'lblKeyVariable
         '
-        Me.ucrSelectorRestoreHierachy.bShowHiddenColumns = False
-        Me.ucrSelectorRestoreHierachy.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorRestoreHierachy, "ucrSelectorRestoreHierachy")
-        Me.ucrSelectorRestoreHierachy.Name = "ucrSelectorRestoreHierachy"
+        resources.ApplyResources(Me.lblKeyVariable, "lblKeyVariable")
+        Me.lblKeyVariable.Name = "lblKeyVariable"
+        '
+        'lblOtherVariables
+        '
+        resources.ApplyResources(Me.lblOtherVariables, "lblOtherVariables")
+        Me.lblOtherVariables.Name = "lblOtherVariables"
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
+        '
+        'ucrSaveColumn
+        '
+        resources.ApplyResources(Me.ucrSaveColumn, "ucrSaveColumn")
+        Me.ucrSaveColumn.Name = "ucrSaveColumn"
+        '
+        'ucrChkWarn
+        '
+        Me.ucrChkWarn.Checked = False
+        resources.ApplyResources(Me.ucrChkWarn, "ucrChkWarn")
+        Me.ucrChkWarn.Name = "ucrChkWarn"
+        '
+        'ucrChkDelete
+        '
+        Me.ucrChkDelete.Checked = False
+        resources.ApplyResources(Me.ucrChkDelete, "ucrChkDelete")
+        Me.ucrChkDelete.Name = "ucrChkDelete"
+        '
+        'ucrReceiverOtherVariables
+        '
+        Me.ucrReceiverOtherVariables.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverOtherVariables, "ucrReceiverOtherVariables")
+        Me.ucrReceiverOtherVariables.Name = "ucrReceiverOtherVariables"
+        Me.ucrReceiverOtherVariables.Selector = Nothing
+        Me.ucrReceiverOtherVariables.strNcFilePath = ""
+        Me.tipRestoreHierachy.SetToolTip(Me.ucrReceiverOtherVariables, resources.GetString("ucrReceiverOtherVariables.ToolTip"))
+        Me.ucrReceiverOtherVariables.ucrSelector = Nothing
         '
         'ucrReceiverKeyVariable
         '
@@ -52,46 +87,12 @@ Partial Class dlgRestoreLevelHierachy
         Me.ucrReceiverKeyVariable.strNcFilePath = ""
         Me.ucrReceiverKeyVariable.ucrSelector = Nothing
         '
-        'lblKeyVariable
+        'ucrSelectorRestoreHierachy
         '
-        resources.ApplyResources(Me.lblKeyVariable, "lblKeyVariable")
-        Me.lblKeyVariable.Name = "lblKeyVariable"
-        '
-        'ucrReceiverOtherVariables
-        '
-        Me.ucrReceiverOtherVariables.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverOtherVariables, "ucrReceiverOtherVariables")
-        Me.ucrReceiverOtherVariables.Name = "ucrReceiverOtherVariables"
-        Me.ucrReceiverOtherVariables.Selector = Nothing
-        Me.ucrReceiverOtherVariables.strNcFilePath = ""
-        Me.ucrReceiverOtherVariables.ucrSelector = Nothing
-        '
-        'lblOtherVariables
-        '
-        resources.ApplyResources(Me.lblOtherVariables, "lblOtherVariables")
-        Me.lblOtherVariables.Name = "lblOtherVariables"
-        '
-        'ucrDelete
-        '
-        Me.ucrDelete.Checked = False
-        resources.ApplyResources(Me.ucrDelete, "ucrDelete")
-        Me.ucrDelete.Name = "ucrDelete"
-        '
-        'ucrChkWarn
-        '
-        Me.ucrChkWarn.Checked = False
-        resources.ApplyResources(Me.ucrChkWarn, "ucrChkWarn")
-        Me.ucrChkWarn.Name = "ucrChkWarn"
-        '
-        'ucrSaveColumn
-        '
-        resources.ApplyResources(Me.ucrSaveColumn, "ucrSaveColumn")
-        Me.ucrSaveColumn.Name = "ucrSaveColumn"
-        '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
+        Me.ucrSelectorRestoreHierachy.bShowHiddenColumns = False
+        Me.ucrSelectorRestoreHierachy.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorRestoreHierachy, "ucrSelectorRestoreHierachy")
+        Me.ucrSelectorRestoreHierachy.Name = "ucrSelectorRestoreHierachy"
         '
         'dlgRestoreLevelHierachy
         '
@@ -100,7 +101,7 @@ Partial Class dlgRestoreLevelHierachy
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSaveColumn)
         Me.Controls.Add(Me.ucrChkWarn)
-        Me.Controls.Add(Me.ucrDelete)
+        Me.Controls.Add(Me.ucrChkDelete)
         Me.Controls.Add(Me.ucrReceiverOtherVariables)
         Me.Controls.Add(Me.lblOtherVariables)
         Me.Controls.Add(Me.lblKeyVariable)
@@ -121,8 +122,8 @@ Partial Class dlgRestoreLevelHierachy
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSaveColumn As ucrSave
     Friend WithEvents ucrChkWarn As ucrCheck
-    Friend WithEvents ucrDelete As ucrCheck
+    Friend WithEvents ucrChkDelete As ucrCheck
     Friend WithEvents ucrReceiverOtherVariables As ucrReceiverMultiple
     Friend WithEvents lblOtherVariables As Label
-    Friend WithEvents tipReceiverOtherVariables As ToolTip
+    Friend WithEvents tipRestoreHierachy As ToolTip
 End Class
