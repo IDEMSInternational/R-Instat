@@ -46,6 +46,7 @@ Public Class ucrCore
 
     'Optional value
     'If parameter has this value then it will be removed from RCodeStructure 
+    'TODO check implementation of this. Does not seen to be used
     Public objValueToRemoveParameter As Object
 
     'ValueChanged is raised when a new value has been set in the control
