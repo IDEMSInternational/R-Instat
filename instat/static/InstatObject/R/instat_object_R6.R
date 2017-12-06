@@ -1530,7 +1530,7 @@ instat_object$set("public","get_variable_sets", function(data_name, set_names, f
 }
 )
 
-instat_object$set("public","DisplayDaily", function(Datain,Stations,Variables,option=1,Years,Misscode="-",Tracecode="tr",Zerocode="--",Fileout=NA,monstats=c("min","mean","median","max","IQR","sum")){
+instat_object$set("public","DisplayDaily", function(Datain, Stations, Variables, option = 1, Years, Misscode = "-", Tracecode = "tr", Zerocode = "--", Fileout = NA, monstats = c("min","mean","median","max","IQR","sum")){
   #-----------------------------------------------------------------------#
   # Helen Greatrex, SSC, SSC-RCLIM package                                #
   #                                                                       #
