@@ -55,7 +55,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.lblStation.Location = New System.Drawing.Point(259, 22)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(40, 13)
-        Me.lblStation.TabIndex = 2
+        Me.lblStation.TabIndex = 1
         Me.lblStation.Text = "Station"
         '
         'lblDate
@@ -64,7 +64,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.lblDate.Location = New System.Drawing.Point(259, 69)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(30, 13)
-        Me.lblDate.TabIndex = 4
+        Me.lblDate.TabIndex = 3
         Me.lblDate.Text = "Date"
         '
         'lblYear
@@ -73,7 +73,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.lblYear.Location = New System.Drawing.Point(259, 113)
         Me.lblYear.Name = "lblYear"
         Me.lblYear.Size = New System.Drawing.Size(29, 13)
-        Me.lblYear.TabIndex = 4
+        Me.lblYear.TabIndex = 5
         Me.lblYear.Text = "Year"
         '
         'lblDay
@@ -82,7 +82,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.lblDay.Location = New System.Drawing.Point(259, 199)
         Me.lblDay.Name = "lblDay"
         Me.lblDay.Size = New System.Drawing.Size(26, 13)
-        Me.lblDay.TabIndex = 4
+        Me.lblDay.TabIndex = 9
         Me.lblDay.Text = "Day"
         '
         'lblMonth
@@ -91,7 +91,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.lblMonth.Location = New System.Drawing.Point(259, 155)
         Me.lblMonth.Name = "lblMonth"
         Me.lblMonth.Size = New System.Drawing.Size(37, 13)
-        Me.lblMonth.TabIndex = 4
+        Me.lblMonth.TabIndex = 7
         Me.lblMonth.Text = "Month"
         '
         'lblElement
@@ -100,7 +100,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.lblElement.Location = New System.Drawing.Point(259, 245)
         Me.lblElement.Name = "lblElement"
         Me.lblElement.Size = New System.Drawing.Size(45, 13)
-        Me.lblElement.TabIndex = 4
+        Me.lblElement.TabIndex = 11
         Me.lblElement.Text = "Element"
         '
         'lblmm
@@ -109,7 +109,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.lblmm.Location = New System.Drawing.Point(157, 211)
         Me.lblmm.Name = "lblmm"
         Me.lblmm.Size = New System.Drawing.Size(23, 13)
-        Me.lblmm.TabIndex = 19
+        Me.lblmm.TabIndex = 15
         Me.lblmm.Text = "mm"
         '
         'ucrNudWetDays
@@ -121,7 +121,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrNudWetDays.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWetDays.Name = "ucrNudWetDays"
         Me.ucrNudWetDays.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudWetDays.TabIndex = 9
+        Me.ucrNudWetDays.TabIndex = 20
         Me.ucrNudWetDays.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudSame
@@ -133,7 +133,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrNudSame.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSame.Name = "ucrNudSame"
         Me.ucrNudSame.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudSame.TabIndex = 8
+        Me.ucrNudSame.TabIndex = 17
         Me.ucrNudSame.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudLarge
@@ -145,7 +145,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrNudLarge.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLarge.Name = "ucrNudLarge"
         Me.ucrNudLarge.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudLarge.TabIndex = 7
+        Me.ucrNudLarge.TabIndex = 14
         Me.ucrNudLarge.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkOutlier
@@ -154,7 +154,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrChkOutlier.Location = New System.Drawing.Point(10, 303)
         Me.ucrChkOutlier.Name = "ucrChkOutlier"
         Me.ucrChkOutlier.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkOutlier.TabIndex = 6
+        Me.ucrChkOutlier.TabIndex = 23
         '
         'ucrChkDryMonth
         '
@@ -162,7 +162,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrChkDryMonth.Location = New System.Drawing.Point(10, 279)
         Me.ucrChkDryMonth.Name = "ucrChkDryMonth"
         Me.ucrChkDryMonth.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkDryMonth.TabIndex = 6
+        Me.ucrChkDryMonth.TabIndex = 22
         '
         'ucrChkWetDays
         '
@@ -170,7 +170,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrChkWetDays.Location = New System.Drawing.Point(10, 255)
         Me.ucrChkWetDays.Name = "ucrChkWetDays"
         Me.ucrChkWetDays.Size = New System.Drawing.Size(92, 20)
-        Me.ucrChkWetDays.TabIndex = 6
+        Me.ucrChkWetDays.TabIndex = 19
         '
         'ucrChkSame
         '
@@ -178,7 +178,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrChkSame.Location = New System.Drawing.Point(10, 231)
         Me.ucrChkSame.Name = "ucrChkSame"
         Me.ucrChkSame.Size = New System.Drawing.Size(92, 20)
-        Me.ucrChkSame.TabIndex = 6
+        Me.ucrChkSame.TabIndex = 16
         '
         'ucrChkLarge
         '
@@ -186,7 +186,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrChkLarge.Location = New System.Drawing.Point(10, 207)
         Me.ucrChkLarge.Name = "ucrChkLarge"
         Me.ucrChkLarge.Size = New System.Drawing.Size(92, 20)
-        Me.ucrChkLarge.TabIndex = 6
+        Me.ucrChkLarge.TabIndex = 13
         '
         'ucrReceiverMonth
         '
@@ -197,7 +197,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrReceiverMonth.Selector = Nothing
         Me.ucrReceiverMonth.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverMonth.strNcFilePath = ""
-        Me.ucrReceiverMonth.TabIndex = 5
+        Me.ucrReceiverMonth.TabIndex = 8
         Me.ucrReceiverMonth.ucrSelector = Nothing
         '
         'ucrReceiverElement
@@ -209,7 +209,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrReceiverElement.Selector = Nothing
         Me.ucrReceiverElement.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverElement.strNcFilePath = ""
-        Me.ucrReceiverElement.TabIndex = 5
+        Me.ucrReceiverElement.TabIndex = 12
         Me.ucrReceiverElement.ucrSelector = Nothing
         '
         'ucrReceiverDay
@@ -221,7 +221,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrReceiverDay.Selector = Nothing
         Me.ucrReceiverDay.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverDay.strNcFilePath = ""
-        Me.ucrReceiverDay.TabIndex = 5
+        Me.ucrReceiverDay.TabIndex = 10
         Me.ucrReceiverDay.ucrSelector = Nothing
         '
         'ucrReceiverYear
@@ -233,7 +233,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrReceiverYear.Selector = Nothing
         Me.ucrReceiverYear.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverYear.strNcFilePath = ""
-        Me.ucrReceiverYear.TabIndex = 5
+        Me.ucrReceiverYear.TabIndex = 6
         Me.ucrReceiverYear.ucrSelector = Nothing
         '
         'ucrReceiverDate
@@ -245,7 +245,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrReceiverDate.Selector = Nothing
         Me.ucrReceiverDate.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverDate.strNcFilePath = ""
-        Me.ucrReceiverDate.TabIndex = 5
+        Me.ucrReceiverDate.TabIndex = 4
         Me.ucrReceiverDate.ucrSelector = Nothing
         '
         'ucrReceiverStation
@@ -257,7 +257,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrReceiverStation.Selector = Nothing
         Me.ucrReceiverStation.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverStation.strNcFilePath = ""
-        Me.ucrReceiverStation.TabIndex = 3
+        Me.ucrReceiverStation.TabIndex = 2
         Me.ucrReceiverStation.ucrSelector = Nothing
         '
         'ucrSelectorRain
@@ -268,22 +268,22 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrSelectorRain.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorRain.Name = "ucrSelectorRain"
         Me.ucrSelectorRain.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorRain.TabIndex = 1
+        Me.ucrSelectorRain.TabIndex = 0
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(10, 329)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 24
         '
         'lblDays
         '
         Me.lblDays.AutoSize = True
         Me.lblDays.Location = New System.Drawing.Point(157, 234)
         Me.lblDays.Name = "lblDays"
-        Me.lblDays.Size = New System.Drawing.Size(29, 13)
-        Me.lblDays.TabIndex = 20
+        Me.lblDays.Size = New System.Drawing.Size(98, 13)
+        Me.lblDays.TabIndex = 18
         Me.lblDays.Text = "days (ignoring zero)"
         '
         'lblDaysWet
@@ -291,7 +291,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.lblDaysWet.AutoSize = True
         Me.lblDaysWet.Location = New System.Drawing.Point(157, 259)
         Me.lblDaysWet.Name = "lblDaysWet"
-        Me.lblDaysWet.Size = New System.Drawing.Size(98, 13)
+        Me.lblDaysWet.Size = New System.Drawing.Size(29, 13)
         Me.lblDaysWet.TabIndex = 21
         Me.lblDaysWet.Text = "days"
         '
