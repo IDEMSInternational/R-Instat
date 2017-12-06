@@ -92,6 +92,23 @@ Public Class sdgSummaries
         ucrChkSn.SetParameter(New RParameter("summary_Sn", 20), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_Sn" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkSn.SetText("Sn")
 
+        ucrChkPercentile.SetText("Percentile")
+
+        ucrChkProportion.SetText("Proportion")
+
+        ucrChkCount.SetText("Count")
+
+        ucrChkPercentage.SetText("Percentage")
+
+        ucrChkCorrelations.SetText("Correlations")
+
+        ucrChkCovariance.SetText("Covariance")
+
+        'linking controls
+        ucrChkPercentile.AddToLinkedControls(ucrInputPercentile, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkProportion.AddToLinkedControls({ucrInputInequality, ucrInputValue}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkCount.AddToLinkedControls({ucrChkPercentage, ucrInputInequality, ucrInputValue}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
         ucrChkTrimmedMean.SetText("Trimmed Mean")
         ucrChkTrimmedMean.Enabled = False
         ucrNudFraction.Enabled = False
