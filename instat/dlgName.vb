@@ -15,6 +15,8 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports RDotNet
+
 Public Class dlgName
     Dim bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -119,8 +121,34 @@ Public Class dlgName
     End Sub
 
     Private Sub ucrReceiverName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverName.ControlValueChanged
-        If ((Not ucrInputNewName.bUserTyped) AndAlso (Not ucrReceiverName.IsEmpty)) Then
-            ucrInputNewName.SetName(ucrReceiverName.GetVariableNames(bWithQuotes:=False))
+        'if the receiver is not emppty
+        If Not ucrReceiverName.IsEmpty Then
+            'if the user has not typed anything then change the ucrInputNewName contents
+            If Not ucrInputNewName.bUserTyped Then
+                ucrInputNewName.SetName(ucrReceiverName.GetVariableNames(bWithQuotes:=False))
+            End If
+
+            'if the user has not typed anything then change the ucrInputVariableLabel contents
+            If Not ucrInputVariableLabel.bUserTyped Then
+                'get the label of the column selected(from ucrReceiverName) and set it as ucrInputVariableLabel value
+                Dim colmnLabelsRFunction = New RFunction
+                Dim expItems As SymbolicExpression
+
+                colmnLabelsRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_labels")
+                colmnLabelsRFunction.AddParameter("data_name", Chr(34) & ucrSelectVariables.strCurrentDataFrame & Chr(34))
+                colmnLabelsRFunction.AddParameter("columns", ucrReceiverName.GetVariableNames(bWithQuotes:=True))
+
+                expItems = frmMain.clsRLink.RunInternalScriptGetValue(colmnLabelsRFunction.ToScript(), bSilent:=True)
+
+                If expItems IsNot Nothing AndAlso Not (expItems.Type = Internals.SymbolicExpressionType.Null) Then
+                    For Each strLabel As String In expItems.AsCharacter.ToArray
+                        ucrInputVariableLabel.SetName(strLabel)
+                    Next
+                End If
+
+            End If
+
         End If
+
     End Sub
 End Class
