@@ -72,7 +72,7 @@ Public Class dlgParallelCoordinatePlot
         ucrNudTransparency.DecimalPlaces = 2
         ucrNudTransparency.Increment = 0.01
 
-        ucrInputScale.SetParameter(New RParameter("scale"))
+        ucrInputScale.SetParameter(New RParameter("scale", 6))
         dctScale.Add("Std", "std")
         dctScale.Add("Robust", Chr(34) & "robust" & Chr(34))
         dctScale.Add("Uniminmax", Chr(34) & "uniminmax" & Chr(34))

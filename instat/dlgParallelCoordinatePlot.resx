@@ -130,7 +130,7 @@
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="cmdParcoordOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>5</value>
   </data>
   <data name="cmdParcoordOptions.Text" xml:space="preserve">
     <value>Parcoord Options</value>
@@ -157,7 +157,7 @@
     <value>147, 23</value>
   </data>
   <data name="cmdPlotOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>6</value>
   </data>
   <data name="cmdPlotOptions.Text" xml:space="preserve">
     <value>Plot Options</value>
@@ -187,7 +187,7 @@
     <value>60, 13</value>
   </data>
   <data name="lblXVariables.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>1</value>
   </data>
   <data name="lblXVariables.Text" xml:space="preserve">
     <value>X Variables</value>
@@ -217,7 +217,7 @@
     <value>85, 13</value>
   </data>
   <data name="lblFactor.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>3</value>
   </data>
   <data name="lblFactor.Text" xml:space="preserve">
     <value>Factor (Optional)</value>
@@ -241,7 +241,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblScale.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 272</value>
+    <value>6, 268</value>
   </data>
   <data name="lblScale.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 13</value>
@@ -271,13 +271,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblTransparency.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 301</value>
+    <value>265, 236</value>
   </data>
   <data name="lblTransparency.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 13</value>
   </data>
   <data name="lblTransparency.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>7</value>
   </data>
   <data name="lblTransparency.Text" xml:space="preserve">
     <value>Transparency</value>
@@ -295,13 +295,13 @@
     <value>2</value>
   </data>
   <data name="ucrSaveGraph.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 395</value>
+    <value>9, 358</value>
   </data>
   <data name="ucrSaveGraph.Size" type="System.Drawing.Size, System.Drawing">
     <value>260, 24</value>
   </data>
   <data name="ucrSaveGraph.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
+    <value>13</value>
   </data>
   <data name="&gt;&gt;ucrSaveGraph.Name" xml:space="preserve">
     <value>ucrSaveGraph</value>
@@ -316,13 +316,13 @@
     <value>0</value>
   </data>
   <data name="ucrNudTransparency.Location" type="System.Drawing.Point, System.Drawing">
-    <value>344, 298</value>
+    <value>344, 233</value>
   </data>
   <data name="ucrNudTransparency.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 20</value>
   </data>
   <data name="ucrNudTransparency.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;ucrNudTransparency.Name" xml:space="preserve">
     <value>ucrNudTransparency</value>
@@ -400,13 +400,13 @@
     <value>5</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 425</value>
+    <value>9, 388</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>14</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -427,7 +427,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>424, 478</value>
+    <value>424, 450</value>
   </data>
   <data name="ucrReceiverXVariables.Location" type="System.Drawing.Point, System.Drawing">
     <value>268, 44</value>
@@ -439,7 +439,7 @@
     <value>120, 100</value>
   </data>
   <data name="ucrReceiverXVariables.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;ucrReceiverXVariables.Name" xml:space="preserve">
     <value>ucrReceiverXVariables</value>
@@ -502,7 +502,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrReceiverFactor.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;ucrReceiverFactor.Name" xml:space="preserve">
     <value>ucrReceiverFactor</value>
