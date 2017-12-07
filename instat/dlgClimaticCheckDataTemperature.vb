@@ -110,10 +110,10 @@ Public Class dlgClimaticCheckDataTemperature
         ucrChkRange2.SetParameter(New RParameter("range2", clsRangeAnd2Operator, 1), bNewChangeParameterValue:=False)
         ucrChkRange2.SetText("Range(Element2)")
 
-        ucrChkRange.AddToLinkedControls(ucrNudRangeElement1Min, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrChkRange.AddToLinkedControls(ucrNudRangeElement1Min, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
         ucrChkRange.AddToLinkedControls(ucrNudRangeElement1Max, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=50)
         ucrChkRange2.AddToLinkedControls(ucrNudRangeElement2Min, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
-        ucrChkRange2.AddToLinkedControls(ucrNudRangeElement2Max, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=50)
+        ucrChkRange2.AddToLinkedControls(ucrNudRangeElement2Max, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=30)
         ucrNudRangeElement2Min.SetLinkedDisplayControl(lblRangeElement2)
         ucrNudRangeElement2Max.SetLinkedDisplayControl(lblRangeElement2to)
 
@@ -123,7 +123,7 @@ Public Class dlgClimaticCheckDataTemperature
 
         ucrChkJump.SetParameter(New RParameter("jump", clsJumpGreaterOperator, 1), bNewChangeParameterValue:=False)
         ucrChkJump.SetText("Jump")
-        ucrChkJump.AddToLinkedControls(ucrNudJump, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrChkJump.AddToLinkedControls(ucrNudJump, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
 
         ucrChkDifference.SetParameter(New RParameter("diff", clsLessDiffOperator, 1), bNewChangeParameterValue:=False)
         ucrChkDifference.SetText("Difference")
@@ -140,7 +140,6 @@ Public Class dlgClimaticCheckDataTemperature
         ucrNudRangeElement1Max.SetMinMax(-50, 65)
         ucrNudRangeElement1Max.SetLinkedDisplayControl(lblRangeElement1to)
 
-        'This are not yet working
         ucrNudRangeElement2Min.SetParameter(New RParameter("from", 1, bNewIncludeArgumentName:=False))
         ucrNudRangeElement2Min.SetMinMax(-50, 50)
         ucrNudRangeElement2Max.SetParameter(New RParameter("from", 1, bNewIncludeArgumentName:=False))
@@ -159,8 +158,11 @@ Public Class dlgClimaticCheckDataTemperature
         'Difference Option
         ucrNudDifference.SetParameter(New RParameter("n", iNewPosition:=1, bNewIncludeArgumentName:=False))
         ucrNudDifference.SetMinMax(-5, 5)
-        ucrChkDifference.AddToLinkedControls(ucrNudDifference, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
-        'ucrChkDifference.AddToLinkedControls(ucrReceiverElement2, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrChkDifference.AddToLinkedControls(ucrNudDifference, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+
+        'outliers Option
+        ucrChkOutlier.AddToLinkedControls(ucrNudOutlier, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2.5)
+        ttOutliers.SetToolTip(ucrChkOutlier, "Values that are further than this number of IQRs from the corresponding quartile.")
         ucrNudDifference.SetLinkedDisplayControl(lblNudDiff)
         ucrReceiverElement2.SetLinkedDisplayControl(lblElement2)
     End Sub
@@ -183,7 +185,6 @@ Public Class dlgClimaticCheckDataTemperature
         clsAsNumFunc = New RFunction
         clsDollarOperator = New ROperator
         clsOrOperator = New ROperator
-        'clsRangeOr2Opertor = New ROperator
         clsLess2Operator = New ROperator
         clsGreater2Operator = New ROperator
 
@@ -215,12 +216,8 @@ Public Class dlgClimaticCheckDataTemperature
         clsLess2Operator.SetOperation("<")
         clsGreater2Operator.SetOperation(">")
         clsGreater2Operator.AddParameter("from", "0", bIncludeArgumentName:=False, iPosition:=1)
-        ' clsRangeOr2Opertor.SetOperation("|")
         clsRangeAnd2Operator.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsGreater2Operator, iPosition:=0)
         clsRangeAnd2Operator.AddParameter("right", bIncludeArgumentName:=False, clsROperatorParameter:=clsLess2Operator, iPosition:=1)
-
-        'clsRangeAndOperator.AddParameter("left", clsROperatorParameter:=clsRangeOrOpertor, iPosition:=0, bIncludeArgumentName:=False)
-        'clsRangeAndOperator.AddParameter("right", clsROperatorParameter:=clsRangeOr2Opertor, iPosition:=1, bIncludeArgumentName:=False)
 
         'Same
         clsSameGreaterOperator.SetOperation(">=")
@@ -249,7 +246,6 @@ Public Class dlgClimaticCheckDataTemperature
         clsLessDiffOperator.SetOperation("<")
         clsLessDiffOperator.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsDiffOperator, iPosition:=0)
         clsDiffOperator.SetOperation("-")
-
 
         'Main Filter
         clsTempFilterFunc.SetRCommand("instat_calculation$new")
@@ -287,11 +283,11 @@ Public Class dlgClimaticCheckDataTemperature
         ucrReceiverElement2.SetRCode(clsDiffOperator, bReset)
         ucrNudDifference.SetRCode(clsLessDiffOperator, bReset)
         ucrNudSame.SetRCode(clsSameGreaterOperator, bReset)
+        ucrChkDifference.SetRCode(clsOrOperator, bReset)
         ucrChkRange.SetRCode(clsOrOperator, bReset)
         ucrChkRange2.SetRCode(clsOrOperator, bReset)
         ucrChkSame.SetRCode(clsOrOperator, bReset)
         ucrChkJump.SetRCode(clsOrOperator, bReset)
-        ucrChkDifference.SetRCode(clsOrOperator, bReset)
     End Sub
     Private Sub TestOkEnabled()
         'If Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverMonth.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty() AndAlso Not ucrReceiverDay.IsEmpty() AndAlso Not ucrReceiverElement.IsEmpty() AndAlso ucrNudJumpElement1Max.GetText <> "" AndAlso ucrNudJumpElement1Min.GetText <> "" AndAlso ucrNudJumpElement2Max.GetText <> "" AndAlso ucrNudJumpElement2Min.GetText <> "" AndAlso ucrNudSame.GetText <> "" AndAlso ucrNudJumpElement1Max.GetText <> "" AndAlso ucrNudJumpElement1Min.GetText <> "" AndAlso ucrNudJumpElement2Max.GetText <> "" AndAlso ucrNudJumpElement2Min.GetText <> "" AndAlso ucrNudDifference.GetText <> "" AndAlso ucrNudOutlier.GetText <> "" Then
