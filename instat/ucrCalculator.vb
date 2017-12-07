@@ -1160,4 +1160,12 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cov( )", 2)
         End If
     End Sub
+
+    Private Sub cmdRad_Click(sender As Object, e As EventArgs) Handles cmdRad.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::rad() ", 2)
+    End Sub
+
+    Private Sub cmdDeg_Click(sender As Object, e As EventArgs) Handles cmdDeg.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::deg()", 2)
+    End Sub
 End Class

@@ -1409,11 +1409,11 @@ Partial Class ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.grpMaths)
         Me.Controls.Add(Me.grpSummary)
         Me.Controls.Add(Me.grpProbabilty)
         Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.grpLogical)
-        Me.Controls.Add(Me.grpMaths)
         Me.Controls.Add(Me.grpStrings)
         Me.Controls.Add(Me.grpDates)
         Me.Controls.Add(Me.cmdHelp)
