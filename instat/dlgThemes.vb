@@ -44,15 +44,16 @@ Public Class dlgThemes
         ucrSaveTheme.SetPrefix("Theme")
         ucrSaveTheme.SetIsComboBox()
         ucrSaveTheme.SetCheckBoxText("New Theme Name")
+
+        ucrreceiverThemetoEdit.Selector = ucrSelectorThemes
+        ucrreceiverThemetoEdit.strSelectorHeading = "Themes"
+        ucrreceiverThemetoEdit.SetMeAsReceiver()
     End Sub
 
     Private Sub SetDefaults()
 
     End Sub
 
-    Private Sub ReopenDialog()
-
-    End Sub
     Private Sub TestOkEnabled()
 
     End Sub

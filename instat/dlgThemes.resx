@@ -148,7 +148,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblThemetoEdit.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="cmdThemeOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -175,7 +175,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdThemeOptions.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
+  </data>
+  <data name="ucrChkDeleteTheme.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="ucrChkDeleteTheme.Location" type="System.Drawing.Point, System.Drawing">
     <value>243, 107</value>
@@ -196,10 +199,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkDeleteTheme.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrSaveTheme.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 203</value>
+    <value>9, 182</value>
   </data>
   <data name="ucrSaveTheme.Size" type="System.Drawing.Size, System.Drawing">
     <value>254, 24</value>
@@ -217,7 +220,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSaveTheme.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -226,34 +229,34 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>423, 305</value>
+    <value>423, 279</value>
   </data>
   <data name="ucrSelectorThemes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 10</value>
+    <value>9, 32</value>
   </data>
   <data name="ucrSelectorThemes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrSelectorThemes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 180</value>
+    <value>210, 147</value>
   </data>
   <data name="ucrSelectorThemes.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;ucrSelectorThemes.Name" xml:space="preserve">
     <value>ucrSelectorThemes</value>
   </data>
   <data name="&gt;&gt;ucrSelectorThemes.Type" xml:space="preserve">
-    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>instat.ucrSelectorAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ucrSelectorThemes.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorThemes.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>0</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 239</value>
+    <value>9, 212</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 53</value>
@@ -272,9 +275,6 @@
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>6</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -310,6 +310,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrreceiverThemetoEdit.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
 </root>

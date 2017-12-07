@@ -44,8 +44,8 @@ Partial Class dlgThemes
         Me.ucrChkDeleteTheme = New instat.ucrCheck()
         Me.ucrSaveTheme = New instat.ucrSave()
         Me.ucrreceiverThemetoEdit = New instat.ucrReceiverSingle()
-        Me.ucrSelectorThemes = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSelectorThemes = New instat.ucrSelectorAddRemove()
         Me.SuspendLayout()
         '
         'lblThemetoEdit
@@ -79,28 +79,27 @@ Partial Class dlgThemes
         Me.ucrreceiverThemetoEdit.strNcFilePath = ""
         Me.ucrreceiverThemetoEdit.ucrSelector = Nothing
         '
-        'ucrSelectorThemes
-        '
-        Me.ucrSelectorThemes.bShowHiddenColumns = False
-        Me.ucrSelectorThemes.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorThemes, "ucrSelectorThemes")
-        Me.ucrSelectorThemes.Name = "ucrSelectorThemes"
-        '
         'ucrBase
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrSelectorThemes
+        '
+        Me.ucrSelectorThemes.bShowHiddenColumns = False
+        resources.ApplyResources(Me.ucrSelectorThemes, "ucrSelectorThemes")
+        Me.ucrSelectorThemes.Name = "ucrSelectorThemes"
+        '
         'dlgThemes
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrSelectorThemes)
         Me.Controls.Add(Me.ucrChkDeleteTheme)
         Me.Controls.Add(Me.ucrSaveTheme)
         Me.Controls.Add(Me.cmdThemeOptions)
         Me.Controls.Add(Me.lblThemetoEdit)
         Me.Controls.Add(Me.ucrreceiverThemetoEdit)
-        Me.Controls.Add(Me.ucrSelectorThemes)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -113,10 +112,10 @@ Partial Class dlgThemes
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrSelectorThemes As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrreceiverThemetoEdit As ucrReceiverSingle
     Friend WithEvents cmdThemeOptions As Button
     Friend WithEvents lblThemetoEdit As Label
     Friend WithEvents ucrSaveTheme As ucrSave
     Friend WithEvents ucrChkDeleteTheme As ucrCheck
+    Friend WithEvents ucrSelectorThemes As ucrSelectorAddRemove
 End Class
