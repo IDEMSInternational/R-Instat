@@ -39,8 +39,52 @@ Partial Class dlgThemes
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgThemes))
+        Me.lblThemetoEdit = New System.Windows.Forms.Label()
+        Me.cmdThemeOptions = New System.Windows.Forms.Button()
+        Me.ucrChkDeleteTheme = New instat.ucrCheck()
+        Me.ucrSaveTheme = New instat.ucrSave()
+        Me.ucrreceiverThemetoEdit = New instat.ucrReceiverSingle()
+        Me.ucrSelectorThemes = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
+        '
+        'lblThemetoEdit
+        '
+        resources.ApplyResources(Me.lblThemetoEdit, "lblThemetoEdit")
+        Me.lblThemetoEdit.Name = "lblThemetoEdit"
+        '
+        'cmdThemeOptions
+        '
+        resources.ApplyResources(Me.cmdThemeOptions, "cmdThemeOptions")
+        Me.cmdThemeOptions.Name = "cmdThemeOptions"
+        Me.cmdThemeOptions.UseVisualStyleBackColor = True
+        '
+        'ucrChkDeleteTheme
+        '
+        Me.ucrChkDeleteTheme.Checked = False
+        resources.ApplyResources(Me.ucrChkDeleteTheme, "ucrChkDeleteTheme")
+        Me.ucrChkDeleteTheme.Name = "ucrChkDeleteTheme"
+        '
+        'ucrSaveTheme
+        '
+        resources.ApplyResources(Me.ucrSaveTheme, "ucrSaveTheme")
+        Me.ucrSaveTheme.Name = "ucrSaveTheme"
+        '
+        'ucrreceiverThemetoEdit
+        '
+        Me.ucrreceiverThemetoEdit.frmParent = Me
+        resources.ApplyResources(Me.ucrreceiverThemetoEdit, "ucrreceiverThemetoEdit")
+        Me.ucrreceiverThemetoEdit.Name = "ucrreceiverThemetoEdit"
+        Me.ucrreceiverThemetoEdit.Selector = Nothing
+        Me.ucrreceiverThemetoEdit.strNcFilePath = ""
+        Me.ucrreceiverThemetoEdit.ucrSelector = Nothing
+        '
+        'ucrSelectorThemes
+        '
+        Me.ucrSelectorThemes.bShowHiddenColumns = False
+        Me.ucrSelectorThemes.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorThemes, "ucrSelectorThemes")
+        Me.ucrSelectorThemes.Name = "ucrSelectorThemes"
         '
         'ucrBase
         '
@@ -51,6 +95,12 @@ Partial Class dlgThemes
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkDeleteTheme)
+        Me.Controls.Add(Me.ucrSaveTheme)
+        Me.Controls.Add(Me.cmdThemeOptions)
+        Me.Controls.Add(Me.lblThemetoEdit)
+        Me.Controls.Add(Me.ucrreceiverThemetoEdit)
+        Me.Controls.Add(Me.ucrSelectorThemes)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -58,8 +108,15 @@ Partial Class dlgThemes
         Me.Name = "dlgThemes"
         Me.Tag = "Themes"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrSelectorThemes As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrreceiverThemetoEdit As ucrReceiverSingle
+    Friend WithEvents cmdThemeOptions As Button
+    Friend WithEvents lblThemetoEdit As Label
+    Friend WithEvents ucrSaveTheme As ucrSave
+    Friend WithEvents ucrChkDeleteTheme As ucrCheck
 End Class
