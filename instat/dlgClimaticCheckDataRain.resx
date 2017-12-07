@@ -121,6 +121,10 @@
   <data name="lblStation.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblStation.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblStation.Location" type="System.Drawing.Point, System.Drawing">
     <value>259, 22</value>
@@ -149,6 +153,9 @@
   <data name="lblDate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblDate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblDate.Location" type="System.Drawing.Point, System.Drawing">
     <value>259, 66</value>
   </data>
@@ -175,6 +182,9 @@
   </data>
   <data name="lblYear.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblYear.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblYear.Location" type="System.Drawing.Point, System.Drawing">
     <value>259, 110</value>
@@ -203,6 +213,9 @@
   <data name="lblDay.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblDay.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblDay.Location" type="System.Drawing.Point, System.Drawing">
     <value>259, 198</value>
   </data>
@@ -229,6 +242,9 @@
   </data>
   <data name="lblMonth.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblMonth.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblMonth.Location" type="System.Drawing.Point, System.Drawing">
     <value>259, 154</value>
@@ -257,6 +273,9 @@
   <data name="lblElement.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblElement.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblElement.Location" type="System.Drawing.Point, System.Drawing">
     <value>259, 242</value>
   </data>
@@ -281,20 +300,20 @@
   <data name="&gt;&gt;lblElement.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
-  <data name="lblmm.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="lblmm.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblmm.Location" type="System.Drawing.Point, System.Drawing">
-    <value>157, 211</value>
+    <value>159, 208</value>
   </data>
   <data name="lblmm.Size" type="System.Drawing.Size, System.Drawing">
-    <value>85, 13</value>
+    <value>96, 27</value>
   </data>
   <data name="lblmm.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
   <data name="lblmm.Text" xml:space="preserve">
-    <value>mm (or negative)</value>
+    <value>mm(Large or negative Value)</value>
   </data>
   <data name="&gt;&gt;lblmm.Name" xml:space="preserve">
     <value>lblmm</value>
@@ -311,8 +330,11 @@
   <data name="lblDays.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblDays.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblDays.Location" type="System.Drawing.Point, System.Drawing">
-    <value>157, 234</value>
+    <value>159, 246</value>
   </data>
   <data name="lblDays.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 13</value>
@@ -338,8 +360,11 @@
   <data name="lblRainDays.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblRainDays.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblRainDays.Location" type="System.Drawing.Point, System.Drawing">
-    <value>157, 259</value>
+    <value>159, 273</value>
   </data>
   <data name="lblRainDays.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
@@ -363,7 +388,7 @@
     <value>0</value>
   </data>
   <data name="ucrNudWetDays.Location" type="System.Drawing.Point, System.Drawing">
-    <value>106, 255</value>
+    <value>106, 269</value>
   </data>
   <data name="ucrNudWetDays.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -384,7 +409,7 @@
     <value>3</value>
   </data>
   <data name="ucrNudSame.Location" type="System.Drawing.Point, System.Drawing">
-    <value>106, 231</value>
+    <value>106, 242</value>
   </data>
   <data name="ucrNudSame.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -405,7 +430,7 @@
     <value>4</value>
   </data>
   <data name="ucrNudLarge.Location" type="System.Drawing.Point, System.Drawing">
-    <value>106, 207</value>
+    <value>106, 215</value>
   </data>
   <data name="ucrNudLarge.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -426,7 +451,7 @@
     <value>5</value>
   </data>
   <data name="ucrChkOutlier.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 303</value>
+    <value>10, 323</value>
   </data>
   <data name="ucrChkOutlier.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -447,7 +472,7 @@
     <value>6</value>
   </data>
   <data name="ucrChkDryMonth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 279</value>
+    <value>10, 296</value>
   </data>
   <data name="ucrChkDryMonth.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -468,7 +493,7 @@
     <value>7</value>
   </data>
   <data name="ucrChkWetDays.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 255</value>
+    <value>10, 269</value>
   </data>
   <data name="ucrChkWetDays.Size" type="System.Drawing.Size, System.Drawing">
     <value>92, 20</value>
@@ -489,7 +514,7 @@
     <value>8</value>
   </data>
   <data name="ucrChkSame.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 231</value>
+    <value>10, 242</value>
   </data>
   <data name="ucrChkSame.Size" type="System.Drawing.Size, System.Drawing">
     <value>92, 20</value>
@@ -510,10 +535,10 @@
     <value>9</value>
   </data>
   <data name="ucrChkLarge.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 207</value>
+    <value>10, 215</value>
   </data>
   <data name="ucrChkLarge.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 20</value>
+    <value>75, 20</value>
   </data>
   <data name="ucrChkLarge.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -537,12 +562,11 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>421, 389</value>
+    <value>421, 404</value>
   </data>
   <data name="ucrReceiverElement.Location" type="System.Drawing.Point, System.Drawing">
     <value>259, 258</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrReceiverElement.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
@@ -685,7 +709,7 @@
     <value>23</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 329</value>
+    <value>10, 350</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 52</value>
@@ -704,6 +728,9 @@
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>24</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
