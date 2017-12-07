@@ -1861,4 +1861,8 @@ Public Class frmMain
     Private Sub mnuClimaticCheckDataQCTemperatures_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataQCTemperatures.Click
         dlgClimaticCheckDataTemperature.ShowDialog()
     End Sub
+
+    Private Sub mnuPrepareColumReshapeRestoreHierachy_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumReshapeRestoreHierachy.Click
+        dlgRestoreLevelHierachy.ShowDialog()
+    End Sub
 End Class
