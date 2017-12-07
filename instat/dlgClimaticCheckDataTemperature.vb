@@ -289,12 +289,21 @@ Public Class dlgClimaticCheckDataTemperature
         ucrChkSame.SetRCode(clsOrOperator, bReset)
         ucrChkJump.SetRCode(clsOrOperator, bReset)
     End Sub
+
     Private Sub TestOkEnabled()
-        'If Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverMonth.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty() AndAlso Not ucrReceiverDay.IsEmpty() AndAlso Not ucrReceiverElement.IsEmpty() AndAlso ucrNudJumpElement1Max.GetText <> "" AndAlso ucrNudJumpElement1Min.GetText <> "" AndAlso ucrNudJumpElement2Max.GetText <> "" AndAlso ucrNudJumpElement2Min.GetText <> "" AndAlso ucrNudSame.GetText <> "" AndAlso ucrNudJumpElement1Max.GetText <> "" AndAlso ucrNudJumpElement1Min.GetText <> "" AndAlso ucrNudJumpElement2Max.GetText <> "" AndAlso ucrNudJumpElement2Min.GetText <> "" AndAlso ucrNudDifference.GetText <> "" AndAlso ucrNudOutlier.GetText <> "" Then
-        '    ucrBase.OKEnabled(True)
-        'Else
-        '    ucrBase.OKEnabled(False)
-        'End If
+        If ucrChkRange.Checked AndAlso Not ucrReceiverElement1.IsEmpty() AndAlso ucrNudRangeElement1Min.GetText <> "" AndAlso ucrNudRangeElement1Max.GetText <> "" Then
+            ucrBase.OKEnabled(True)
+        ElseIf ucrChkRange2.Checked AndAlso Not ucrReceiverElement2.IsEmpty() AndAlso ucrNudRangeElement2Min.GetText <> "" AndAlso ucrNudRangeElement2Max.GetText <> "" Then
+            ucrBase.OKEnabled(True)
+        ElseIf Not ucrReceiverElement1.IsEmpty AndAlso ucrChkSame.Checked AndAlso ucrNudSame.GetText <> "" Then
+            ucrBase.OKEnabled(True)
+        ElseIf Not ucrReceiverElement1.IsEmpty AndAlso ucrChkJump.Checked AndAlso ucrNudJump.GetText <> "" Then
+            ucrBase.OKEnabled(True)
+        ElseIf ucrChkDifference.Checked AndAlso ucrNudDifference.GetText <> "" AndAlso Not ucrReceiverElement1.IsEmpty AndAlso Not ucrReceiverElement2.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -314,10 +323,6 @@ Public Class dlgClimaticCheckDataTemperature
 
     Private Sub FilterFunc()
         clsTempFilterFunc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & ")", iPosition:=2)
-    End Sub
-
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrReceiverDay.ControlContentsChanged, ucrReceiverElement1.ControlContentsChanged, ucrNudSame.ControlContentsChanged, ucrNudRangeElement1Min.ControlContentsChanged, ucrNudRangeElement1Max.ControlContentsChanged, ucrNudRangeElement2Min.ControlContentsChanged, ucrNudRangeElement2Max.ControlContentsChanged, ucrNudJump.ControlContentsChanged, ucrNudRangeElement2Min.ControlContentsChanged, ucrNudRangeElement2Max.ControlContentsChanged, ucrNudDifference.ControlContentsChanged, ucrNudOutlier.ControlContentsChanged
-        TestOkEnabled()
     End Sub
 
     Private Sub ucrSelectorTemperature_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorTemperature.ControlValueChanged
@@ -341,5 +346,9 @@ Public Class dlgClimaticCheckDataTemperature
     Private Sub lblRangeElement2_VisibleChanged(sender As Object, e As EventArgs) Handles lblRangeElement2.VisibleChanged
         lblNudRangeElement2Min.Visible = lblRangeElement2.Visible
         lblNudRangeElement2Max.Visible = lblRangeElement2.Visible
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement1.ControlContentsChanged, ucrReceiverElement2.ControlContentsChanged, ucrNudSame.ControlContentsChanged, ucrNudRangeElement1Min.ControlContentsChanged, ucrNudRangeElement1Max.ControlContentsChanged, ucrNudRangeElement2Min.ControlContentsChanged, ucrNudRangeElement2Max.ControlContentsChanged, ucrNudJump.ControlContentsChanged, ucrNudRangeElement2Min.ControlContentsChanged, ucrNudRangeElement2Max.ControlContentsChanged, ucrNudDifference.ControlContentsChanged, ucrChkRange.ControlContentsChanged, ucrChkRange2.ControlContentsChanged, ucrChkJump.ControlContentsChanged, ucrChkDifference.ControlContentsChanged, ucrChkSame.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
