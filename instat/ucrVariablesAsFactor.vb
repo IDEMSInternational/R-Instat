@@ -56,6 +56,11 @@ Public Class ucrVariablesAsFactor
         'Switching from single to multiple receiver.
         bSingleVariable = Not bSingleVariable
         SetReceiverStatus()
+        If bSingleVariable Then
+            ucrSingleVariable.SetMeAsReceiver()
+        Else
+            ucrMultipleVariables.SetMeAsReceiver()
+        End If
         'After setting the receiver status, the SelectionChanged event is raised for the dlg's that contain the ucrVariablesAsFactors to adapt to the changes operated locally. For instance in the dlgBoxPlot, the sub UcrVariablesAsFactor1_SelectionChanged() is then called and updates it's aesthetics receivers. 
         OnSelectionChanged()
     End Sub
