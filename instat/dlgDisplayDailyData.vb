@@ -90,6 +90,10 @@ Public Class dlgDisplayDailyData
         ucrNudUpperYaxis.SetParameter(New RParameter("upper_limit", 9))
         ucrNudUpperYaxis.SetMinMax(0, Integer.MaxValue)
 
+        ucrNudOption.SetParameter(New RParameter("option", 3))
+        ucrNudOption.SetMinMax(1, 2)
+        ucrNudOption.SetRDefault("1")
+
         ucrInputBarColour.SetParameter(New RParameter("bar_colour", 7))
         dctBarColour.Add("Blue", Chr(34) & "blue" & Chr(34))
         dctBarColour.Add("Red", Chr(34) & "red" & Chr(34))
@@ -122,6 +126,8 @@ Public Class dlgDisplayDailyData
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrReceiverDate, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrReceiverDay, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrReceiverMonth, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrNudOption, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudOption.SetLinkedDisplayControl(lblOption)
         ucrReceiverDayOfYear.SetLinkedDisplayControl(lblDayOfTheYear)
         ucrReceiverDate.SetLinkedDisplayControl(lblDate)
         ucrReceiverDay.SetLinkedDisplayControl(lblDay)
@@ -152,12 +158,11 @@ Public Class dlgDisplayDailyData
         ucrReceiverYear.AddAdditionalCodeParameterPair(clsPageByFunction, New RParameter("x1", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrReceiverYear.AddAdditionalCodeParameterPair(clsConcFunction, New RParameter("year_col", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
         'ucrReceiverYear.AddAdditionalCodeParameterPair(clsSummaryTableFunction, New RParameter("Years", 3), iAdditionalPairNo:=2)
-        'ucrSelectorDisplayDailyClimaticData.AddAdditionalCodeParameterPair(clsSummaryTableFunction, New RParameter("Detain", 0), iAdditionalPairNo:=1)
         ucrReceiverElements.AddAdditionalCodeParameterPair(clsSummaryTableFunction, New RParameter("Variables", 2), iAdditionalPairNo:=1)
         ucrReceiverStations.AddAdditionalCodeParameterPair(clsConcFunction, New RParameter("station_col", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrReceiverStations.AddAdditionalCodeParameterPair(clsPageByFunction, New RParameter("x2", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
-        'ucrReceiverStations.AddAdditionalCodeParameterPair(clsSummaryTableFunction, New RParameter("Stations", 1), iAdditionalPairNo:=3)
 
+        ucrNudOption.SetRCode(clsSummaryTableFunction, bReset)
         ucrReceiverDay.SetRCode(clsConcFunction, bReset)
         ucrReceiverMonth.SetRCode(clsConcFunction, bReset)
         ucrReceiverDate.SetRCode(clsDisplayDailyGraphFunction, bReset)
@@ -207,11 +212,11 @@ Public Class dlgDisplayDailyData
         End If
     End Sub
 
-    Private Sub ucrReceiverDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverStations.ControlContentsChanged, ucrReceiverDayOfYear.ControlContentsChanged, ucrNudUpperYaxis.ControlContentsChanged, ucrInputRugColour.ControlContentsChanged, ucrInputBarColour.ControlContentsChanged, ucrPnlFrequencyDisplay.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged, ucrReceiverDay.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged
-        TestOkEnabled()
-    End Sub
-
     Private Sub ucrSelectorDisplayDailyClimaticData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDisplayDailyClimaticData.ControlValueChanged
         clsSummaryTableFunction.AddParameter("Datain", clsRFunctionParameter:=ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+    End Sub
+
+    Private Sub ucrReceiverDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverStations.ControlContentsChanged, ucrReceiverDayOfYear.ControlContentsChanged, ucrNudUpperYaxis.ControlContentsChanged, ucrInputRugColour.ControlContentsChanged, ucrInputBarColour.ControlContentsChanged, ucrPnlFrequencyDisplay.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged, ucrReceiverDay.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class

@@ -66,6 +66,8 @@ Partial Class dlgDisplayDailyData
         Me.ucrPnlFrequencyDisplay = New instat.UcrPanel()
         Me.ucrSelectorDisplayDailyClimaticData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrNudOption = New instat.ucrNud()
+        Me.lblOption = New System.Windows.Forms.Label()
         Me.grpGraph.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -261,6 +263,21 @@ Partial Class dlgDisplayDailyData
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrNudOption
+        '
+        Me.ucrNudOption.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudOption.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudOption, "ucrNudOption")
+        Me.ucrNudOption.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudOption.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudOption.Name = "ucrNudOption"
+        Me.ucrNudOption.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblOption
+        '
+        resources.ApplyResources(Me.lblOption, "lblOption")
+        Me.lblOption.Name = "lblOption"
+        '
         'dlgDisplayDailyData
         '
         resources.ApplyResources(Me, "$this")
@@ -285,6 +302,8 @@ Partial Class dlgDisplayDailyData
         Me.Controls.Add(Me.ucrPnlFrequencyDisplay)
         Me.Controls.Add(Me.ucrSelectorDisplayDailyClimaticData)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.lblOption)
+        Me.Controls.Add(Me.ucrNudOption)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -323,4 +342,6 @@ Partial Class dlgDisplayDailyData
     Friend WithEvents lblDay As Label
     Friend WithEvents lblMonth As Label
     Friend WithEvents ucrSaveGraph As ucrSave
+    Friend WithEvents lblOption As Label
+    Friend WithEvents ucrNudOption As ucrNud
 End Class

@@ -378,102 +378,6 @@
   <data name="&gt;&gt;lblYaxisUpper.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;ucrSaveGraph.Name" xml:space="preserve">
-    <value>ucrSaveGraph</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveGraph.Type" xml:space="preserve">
-    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveGraph.Parent" xml:space="preserve">
-    <value>grpGraph</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveGraph.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrInputRugColour.Name" xml:space="preserve">
-    <value>ucrInputRugColour</value>
-  </data>
-  <data name="&gt;&gt;ucrInputRugColour.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputRugColour.Parent" xml:space="preserve">
-    <value>grpGraph</value>
-  </data>
-  <data name="&gt;&gt;ucrInputRugColour.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;lblRugColor.Name" xml:space="preserve">
-    <value>lblRugColor</value>
-  </data>
-  <data name="&gt;&gt;lblRugColor.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblRugColor.Parent" xml:space="preserve">
-    <value>grpGraph</value>
-  </data>
-  <data name="&gt;&gt;lblRugColor.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrInputBarColour.Name" xml:space="preserve">
-    <value>ucrInputBarColour</value>
-  </data>
-  <data name="&gt;&gt;ucrInputBarColour.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputBarColour.Parent" xml:space="preserve">
-    <value>grpGraph</value>
-  </data>
-  <data name="&gt;&gt;ucrInputBarColour.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;lblBarColour.Name" xml:space="preserve">
-    <value>lblBarColour</value>
-  </data>
-  <data name="&gt;&gt;lblBarColour.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblBarColour.Parent" xml:space="preserve">
-    <value>grpGraph</value>
-  </data>
-  <data name="&gt;&gt;lblBarColour.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;ucrNudUpperYaxis.Name" xml:space="preserve">
-    <value>ucrNudUpperYaxis</value>
-  </data>
-  <data name="&gt;&gt;ucrNudUpperYaxis.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudUpperYaxis.Parent" xml:space="preserve">
-    <value>grpGraph</value>
-  </data>
-  <data name="&gt;&gt;ucrNudUpperYaxis.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="grpGraph.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 232</value>
-  </data>
-  <data name="grpGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 137</value>
-  </data>
-  <data name="grpGraph.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="grpGraph.Text" xml:space="preserve">
-    <value>Graph</value>
-  </data>
-  <data name="&gt;&gt;grpGraph.Name" xml:space="preserve">
-    <value>grpGraph</value>
-  </data>
-  <data name="&gt;&gt;grpGraph.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpGraph.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpGraph.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
   <data name="ucrSaveGraph.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 106</value>
   </data>
@@ -621,6 +525,30 @@
   <data name="&gt;&gt;ucrNudUpperYaxis.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="grpGraph.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 238</value>
+  </data>
+  <data name="grpGraph.Size" type="System.Drawing.Size, System.Drawing">
+    <value>277, 133</value>
+  </data>
+  <data name="grpGraph.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="grpGraph.Text" xml:space="preserve">
+    <value>Graph</value>
+  </data>
+  <data name="&gt;&gt;grpGraph.Name" xml:space="preserve">
+    <value>grpGraph</value>
+  </data>
+  <data name="&gt;&gt;grpGraph.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpGraph.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpGraph.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <data name="lblMonth.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -688,7 +616,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>422, 459</value>
+    <value>422, 437</value>
   </data>
   <data name="ucrReceiverMonth.Location" type="System.Drawing.Point, System.Drawing">
     <value>288, 124</value>
@@ -883,7 +811,7 @@
     <value>18</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 394</value>
+    <value>10, 378</value>
   </data>
   <data name="ucrBase.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -905,6 +833,60 @@
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>19</value>
+  </data>
+  <data name="lblOption.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblOption.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblOption.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 249</value>
+  </data>
+  <data name="lblOption.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 13</value>
+  </data>
+  <data name="lblOption.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="lblOption.Text" xml:space="preserve">
+    <value>Option:</value>
+  </data>
+  <data name="&gt;&gt;lblOption.Name" xml:space="preserve">
+    <value>lblOption</value>
+  </data>
+  <data name="&gt;&gt;lblOption.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblOption.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblOption.ZOrder" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="ucrNudOption.Location" type="System.Drawing.Point, System.Drawing">
+    <value>58, 246</value>
+  </data>
+  <data name="ucrNudOption.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="ucrNudOption.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 23</value>
+  </data>
+  <data name="ucrNudOption.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ucrNudOption.Name" xml:space="preserve">
+    <value>ucrNudOption</value>
+  </data>
+  <data name="&gt;&gt;ucrNudOption.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudOption.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrNudOption.ZOrder" xml:space="preserve">
+    <value>21</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
