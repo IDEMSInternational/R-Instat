@@ -43,7 +43,7 @@ Partial Class dlgThemes
         Me.cmdThemeOptions = New System.Windows.Forms.Button()
         Me.ucrChkDeleteTheme = New instat.ucrCheck()
         Me.ucrSaveTheme = New instat.ucrSave()
-        Me.ucrreceiverThemetoEdit = New instat.ucrReceiverSingle()
+        Me.ucrReceiverThemetoEdit = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorThemes = New instat.ucrSelectorAddRemove()
         Me.SuspendLayout()
@@ -70,14 +70,14 @@ Partial Class dlgThemes
         resources.ApplyResources(Me.ucrSaveTheme, "ucrSaveTheme")
         Me.ucrSaveTheme.Name = "ucrSaveTheme"
         '
-        'ucrreceiverThemetoEdit
+        'ucrReceiverThemetoEdit
         '
-        Me.ucrreceiverThemetoEdit.frmParent = Me
-        resources.ApplyResources(Me.ucrreceiverThemetoEdit, "ucrreceiverThemetoEdit")
-        Me.ucrreceiverThemetoEdit.Name = "ucrreceiverThemetoEdit"
-        Me.ucrreceiverThemetoEdit.Selector = Nothing
-        Me.ucrreceiverThemetoEdit.strNcFilePath = ""
-        Me.ucrreceiverThemetoEdit.ucrSelector = Nothing
+        Me.ucrReceiverThemetoEdit.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverThemetoEdit, "ucrReceiverThemetoEdit")
+        Me.ucrReceiverThemetoEdit.Name = "ucrReceiverThemetoEdit"
+        Me.ucrReceiverThemetoEdit.Selector = Nothing
+        Me.ucrReceiverThemetoEdit.strNcFilePath = ""
+        Me.ucrReceiverThemetoEdit.ucrSelector = Nothing
         '
         'ucrBase
         '
@@ -99,7 +99,7 @@ Partial Class dlgThemes
         Me.Controls.Add(Me.ucrSaveTheme)
         Me.Controls.Add(Me.cmdThemeOptions)
         Me.Controls.Add(Me.lblThemetoEdit)
-        Me.Controls.Add(Me.ucrreceiverThemetoEdit)
+        Me.Controls.Add(Me.ucrReceiverThemetoEdit)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -112,7 +112,7 @@ Partial Class dlgThemes
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrreceiverThemetoEdit As ucrReceiverSingle
+    Friend WithEvents ucrReceiverThemetoEdit As ucrReceiverSingle
     Friend WithEvents cmdThemeOptions As Button
     Friend WithEvents lblThemetoEdit As Label
     Friend WithEvents ucrSaveTheme As ucrSave
