@@ -56,14 +56,6 @@ Partial Class dlgDisplayDailyData
         Me.ucrNudUpperYaxis = New instat.ucrNud()
         Me.lblMonth = New System.Windows.Forms.Label()
         Me.lblDay = New System.Windows.Forms.Label()
-        Me.grpTable = New System.Windows.Forms.GroupBox()
-        Me.ucrChkDisplayMargins = New instat.ucrCheck()
-        Me.ucrSaveTable = New instat.ucrSave()
-        Me.lblMarginSummary = New System.Windows.Forms.Label()
-        Me.ucrInputComboSummary = New instat.ucrInputComboBox()
-        Me.ucrNudSigFigs = New instat.ucrNud()
-        Me.lblSigFigs = New System.Windows.Forms.Label()
-        Me.ucrChkAsHTMLTable = New instat.ucrCheck()
         Me.ucrReceiverDay = New instat.ucrReceiverSingle()
         Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
         Me.ucrReceiverElements = New instat.ucrReceiverMultiple()
@@ -75,7 +67,6 @@ Partial Class dlgDisplayDailyData
         Me.ucrSelectorDisplayDailyClimaticData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpGraph.SuspendLayout()
-        Me.grpTable.SuspendLayout()
         Me.SuspendLayout()
         '
         'rdoTable
@@ -190,65 +181,6 @@ Partial Class dlgDisplayDailyData
         resources.ApplyResources(Me.lblDay, "lblDay")
         Me.lblDay.Name = "lblDay"
         '
-        'grpTable
-        '
-        Me.grpTable.Controls.Add(Me.ucrChkDisplayMargins)
-        Me.grpTable.Controls.Add(Me.ucrSaveTable)
-        Me.grpTable.Controls.Add(Me.lblMarginSummary)
-        Me.grpTable.Controls.Add(Me.ucrInputComboSummary)
-        Me.grpTable.Controls.Add(Me.ucrNudSigFigs)
-        Me.grpTable.Controls.Add(Me.lblSigFigs)
-        Me.grpTable.Controls.Add(Me.ucrChkAsHTMLTable)
-        resources.ApplyResources(Me.grpTable, "grpTable")
-        Me.grpTable.Name = "grpTable"
-        Me.grpTable.TabStop = False
-        '
-        'ucrChkDisplayMargins
-        '
-        Me.ucrChkDisplayMargins.Checked = False
-        resources.ApplyResources(Me.ucrChkDisplayMargins, "ucrChkDisplayMargins")
-        Me.ucrChkDisplayMargins.Name = "ucrChkDisplayMargins"
-        '
-        'ucrSaveTable
-        '
-        resources.ApplyResources(Me.ucrSaveTable, "ucrSaveTable")
-        Me.ucrSaveTable.Name = "ucrSaveTable"
-        '
-        'lblMarginSummary
-        '
-        resources.ApplyResources(Me.lblMarginSummary, "lblMarginSummary")
-        Me.lblMarginSummary.Name = "lblMarginSummary"
-        Me.lblMarginSummary.Tag = "Margin Summary:"
-        '
-        'ucrInputComboSummary
-        '
-        Me.ucrInputComboSummary.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboSummary.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputComboSummary, "ucrInputComboSummary")
-        Me.ucrInputComboSummary.Name = "ucrInputComboSummary"
-        '
-        'ucrNudSigFigs
-        '
-        Me.ucrNudSigFigs.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSigFigs.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudSigFigs, "ucrNudSigFigs")
-        Me.ucrNudSigFigs.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudSigFigs.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSigFigs.Name = "ucrNudSigFigs"
-        Me.ucrNudSigFigs.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblSigFigs
-        '
-        resources.ApplyResources(Me.lblSigFigs, "lblSigFigs")
-        Me.lblSigFigs.Name = "lblSigFigs"
-        Me.lblSigFigs.Tag = "Significant_Figures:"
-        '
-        'ucrChkAsHTMLTable
-        '
-        Me.ucrChkAsHTMLTable.Checked = False
-        resources.ApplyResources(Me.ucrChkAsHTMLTable, "ucrChkAsHTMLTable")
-        Me.ucrChkAsHTMLTable.Name = "ucrChkAsHTMLTable"
-        '
         'ucrReceiverDay
         '
         Me.ucrReceiverDay.frmParent = Me
@@ -333,7 +265,6 @@ Partial Class dlgDisplayDailyData
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.grpTable)
         Me.Controls.Add(Me.lblDay)
         Me.Controls.Add(Me.lblMonth)
         Me.Controls.Add(Me.ucrReceiverDay)
@@ -360,8 +291,6 @@ Partial Class dlgDisplayDailyData
         Me.Name = "dlgDisplayDailyData"
         Me.grpGraph.ResumeLayout(False)
         Me.grpGraph.PerformLayout()
-        Me.grpTable.ResumeLayout(False)
-        Me.grpTable.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -393,13 +322,5 @@ Partial Class dlgDisplayDailyData
     Friend WithEvents ucrReceiverMonth As ucrReceiverSingle
     Friend WithEvents lblDay As Label
     Friend WithEvents lblMonth As Label
-    Friend WithEvents grpTable As GroupBox
-    Friend WithEvents ucrChkAsHTMLTable As ucrCheck
-    Friend WithEvents ucrSaveTable As ucrSave
-    Friend WithEvents ucrNudSigFigs As ucrNud
-    Friend WithEvents lblSigFigs As Label
-    Friend WithEvents lblMarginSummary As Label
-    Friend WithEvents ucrInputComboSummary As ucrInputComboBox
-    Friend WithEvents ucrChkDisplayMargins As ucrCheck
     Friend WithEvents ucrSaveGraph As ucrSave
 End Class

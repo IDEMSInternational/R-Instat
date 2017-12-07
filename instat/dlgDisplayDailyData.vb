@@ -30,24 +30,14 @@ Public Class dlgDisplayDailyData
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
-        ReopenDialog()
         bReset = False
         TestOkEnabled()
-    End Sub
-
-    Private Sub ReopenDialog()
-        If rdoGraph.Checked Then
-            grpGraph.Visible = True
-        ElseIf rdoTable.Checked Then
-            grpTable.Visible = True
-        End If
     End Sub
 
     Private Sub InitialiseDialog()
         Dim dctBarColour As New Dictionary(Of String, String)
         Dim dctRugColour As New Dictionary(Of String, String)
         Dim dctSummary As New Dictionary(Of String, String)
-        ucrBase.clsRsyntax.iCallType = 4
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrSelectorDisplayDailyClimaticData.SetParameter(New RParameter("data_name", 0))
@@ -116,21 +106,6 @@ Public Class dlgDisplayDailyData
         dctRugColour.Add("Violet", Chr(34) & "violet" & Chr(34))
         ucrInputRugColour.SetItems(dctRugColour)
 
-        ucrChkAsHTMLTable.SetParameter(New RParameter("as_html"))
-        ucrChkAsHTMLTable.SetText("HTML Table")
-        ucrChkAsHTMLTable.SetRDefault("TRUE")
-
-        ucrNudSigFigs.SetParameter(New RParameter("signif_fig"))
-        ucrNudSigFigs.SetMinMax(0, 22)
-        ucrNudSigFigs.SetRDefault(2)
-
-        ucrSaveTable.SetPrefix("summary_table")
-        ucrSaveTable.SetSaveTypeAsTable()
-        ucrSaveTable.SetDataFrameSelector(ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames)
-        ucrSaveTable.SetIsComboBox()
-        ucrSaveTable.SetCheckBoxText("Save Table")
-        ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
-
         ucrSaveGraph.SetPrefix("Graph")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames)
@@ -138,37 +113,20 @@ Public Class dlgDisplayDailyData
         ucrSaveGraph.SetCheckBoxText("Save Graph")
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
 
-        ucrChkDisplayMargins.SetParameter(New RParameter("include_margins", 9))
-        ucrChkDisplayMargins.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkDisplayMargins.SetText("Display Margins")
-        ucrChkDisplayMargins.SetRDefault("FALSE")
-
-        ucrInputComboSummary.SetParameter(New RParameter("summaries", 2))
-        dctSummary.Add("Total", "sum_label")
-        dctSummary.Add("Mean", "mean_label")
-        dctSummary.Add("Minimum", "min_label")
-        dctSummary.Add("Maximun", "max_label")
-        'currenlty can't have this because the summary is applied to the body as well as margins
-        'dctSummary.Add("Count Missing", "count_missing_label")
-        ucrInputComboSummary.SetItems(dctSummary)
-
         ucrPnlFrequencyDisplay.AddRadioButton(rdoTable)
         ucrPnlFrequencyDisplay.AddRadioButton(rdoGraph)
         ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoGraph, frmMain.clsRLink.strInstatDataObject & "$display_daily_graph")
-        ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoTable, frmMain.clsRLink.strInstatDataObject & "$summary_table")
+        ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoTable, frmMain.clsRLink.strInstatDataObject & "$DisplayDaily")
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrNudUpperYaxis, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=100)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrReceiverDayOfYear, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrReceiverDate, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrReceiverDay, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrReceiverMonth, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkAsHTMLTable, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrSaveTable, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverDayOfYear.SetLinkedDisplayControl(lblDayOfTheYear)
         ucrReceiverDate.SetLinkedDisplayControl(lblDate)
         ucrReceiverDay.SetLinkedDisplayControl(lblDay)
         ucrReceiverMonth.SetLinkedDisplayControl(lblMonth)
         ucrNudUpperYaxis.SetLinkedDisplayControl(grpGraph)
-        ucrChkAsHTMLTable.SetLinkedDisplayControl(grpTable)
     End Sub
 
     Private Sub SetDefaults()
@@ -184,16 +142,8 @@ Public Class dlgDisplayDailyData
         clsPageByFunction.SetRCommand("c")
         clsDisplayDailyGraphFunction.AddParameter("rug_colour", Chr(34) & "red" & Chr(34))
         clsDisplayDailyGraphFunction.AddParameter("bar_colour", Chr(34) & "blue" & Chr(34))
-        clsSummaryTableFunction.AddParameter("n_column_factors", "1", iPosition:=4)
-        clsSummaryTableFunction.AddParameter("summaries", "sum_label", iPosition:=2)
-        clsSummaryTableFunction.AddParameter("rnames", "FALSE", iPosition:=6)
-        clsSummaryTableFunction.AddParameter("store_results", "FALSE", iPosition:=5)
-        clsSummaryTableFunction.AddParameter("as_html", "FALSE", iPosition:=7)
-        clsSummaryTableFunction.AddParameter("factors", clsRFunctionParameter:=clsConcFunction, iPosition:=3)
-        clsSummaryTableFunction.AddParameter("page_by", clsRFunctionParameter:=clsPageByFunction, iPosition:=8)
         clsDisplayDailyGraphFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_graph")
-        clsSummaryTableFunction.SetAssignTo("last_table", strTempDataframe:=ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_table")
-        clsSummaryTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
+        clsSummaryTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$DisplayDaily")
         clsDisplayDailyGraphFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$display_daily_graph")
         ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryTableFunction)
     End Sub
@@ -201,10 +151,12 @@ Public Class dlgDisplayDailyData
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverYear.AddAdditionalCodeParameterPair(clsPageByFunction, New RParameter("x1", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrReceiverYear.AddAdditionalCodeParameterPair(clsConcFunction, New RParameter("year_col", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
-        ucrSelectorDisplayDailyClimaticData.AddAdditionalCodeParameterPair(clsSummaryTableFunction, ucrSelectorDisplayDailyClimaticData.GetParameter, iAdditionalPairNo:=1)
-        ucrReceiverElements.AddAdditionalCodeParameterPair(clsSummaryTableFunction, New RParameter("columns_to_summarise", 1), iAdditionalPairNo:=1)
+        'ucrReceiverYear.AddAdditionalCodeParameterPair(clsSummaryTableFunction, New RParameter("Years", 3), iAdditionalPairNo:=2)
+        'ucrSelectorDisplayDailyClimaticData.AddAdditionalCodeParameterPair(clsSummaryTableFunction, New RParameter("Detain", 0), iAdditionalPairNo:=1)
+        ucrReceiverElements.AddAdditionalCodeParameterPair(clsSummaryTableFunction, New RParameter("Variables", 2), iAdditionalPairNo:=1)
         ucrReceiverStations.AddAdditionalCodeParameterPair(clsConcFunction, New RParameter("station_col", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrReceiverStations.AddAdditionalCodeParameterPair(clsPageByFunction, New RParameter("x2", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
+        'ucrReceiverStations.AddAdditionalCodeParameterPair(clsSummaryTableFunction, New RParameter("Stations", 1), iAdditionalPairNo:=3)
 
         ucrReceiverDay.SetRCode(clsConcFunction, bReset)
         ucrReceiverMonth.SetRCode(clsConcFunction, bReset)
@@ -217,12 +169,7 @@ Public Class dlgDisplayDailyData
         ucrInputBarColour.SetRCode(clsDisplayDailyGraphFunction, bReset)
         ucrNudUpperYaxis.SetRCode(clsDisplayDailyGraphFunction, bReset)
         ucrReceiverElements.SetRCode(clsDisplayDailyGraphFunction, bReset)
-        ucrChkAsHTMLTable.SetRCode(clsSummaryTableFunction, bReset)
-        ucrSaveTable.SetRCode(clsSummaryTableFunction, bReset)
         ucrSaveGraph.SetRCode(clsDisplayDailyGraphFunction, bReset)
-        ucrNudSigFigs.SetRCode(clsSummaryTableFunction, bReset)
-        ucrInputComboSummary.SetRCode(clsSummaryTableFunction, bReset)
-        ucrChkDisplayMargins.SetRCode(clsSummaryTableFunction, bReset)
         ucrPnlFrequencyDisplay.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
@@ -234,7 +181,7 @@ Public Class dlgDisplayDailyData
                 ucrBase.OKEnabled(False)
             End If
         ElseIf rdoTable.Checked Then
-            If Not ucrReceiverElements.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverMonth.IsEmpty AndAlso Not ucrReceiverDay.IsEmpty Then
+            If Not ucrReceiverElements.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
@@ -264,13 +211,7 @@ Public Class dlgDisplayDailyData
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrChkAsHTMLTable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAsHTMLTable.ControlValueChanged
-        If rdoTable.Checked Then
-            If ucrChkAsHTMLTable.Checked Then
-                ucrBase.clsRsyntax.iCallType = 4
-            Else
-                ucrBase.clsRsyntax.iCallType = 2
-            End If
-        End If
+    Private Sub ucrSelectorDisplayDailyClimaticData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDisplayDailyClimaticData.ControlValueChanged
+        clsSummaryTableFunction.AddParameter("Datain", clsRFunctionParameter:=ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
     End Sub
 End Class
