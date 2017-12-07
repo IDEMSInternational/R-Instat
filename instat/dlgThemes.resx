@@ -288,28 +288,28 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ucrreceiverThemetoEdit.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrReceiverThemetoEdit.Location" type="System.Drawing.Point, System.Drawing">
     <value>243, 73</value>
   </data>
-  <data name="ucrreceiverThemetoEdit.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ucrReceiverThemetoEdit.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="ucrreceiverThemetoEdit.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrReceiverThemetoEdit.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 20</value>
   </data>
-  <data name="ucrreceiverThemetoEdit.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrReceiverThemetoEdit.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;ucrreceiverThemetoEdit.Name" xml:space="preserve">
-    <value>ucrreceiverThemetoEdit</value>
+  <data name="&gt;&gt;ucrReceiverThemetoEdit.Name" xml:space="preserve">
+    <value>ucrReceiverThemetoEdit</value>
   </data>
-  <data name="&gt;&gt;ucrreceiverThemetoEdit.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverThemetoEdit.Type" xml:space="preserve">
     <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrreceiverThemetoEdit.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverThemetoEdit.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrreceiverThemetoEdit.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverThemetoEdit.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
 </root>
