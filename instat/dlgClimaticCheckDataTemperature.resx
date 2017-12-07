@@ -280,13 +280,13 @@
     <value>392, 317</value>
   </data>
   <data name="lblElement1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 13</value>
+    <value>89, 13</value>
   </data>
   <data name="lblElement1.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
   <data name="lblElement1.Text" xml:space="preserve">
-    <value>Element 1:</value>
+    <value>Element1 (Tmax):</value>
   </data>
   <data name="&gt;&gt;lblElement1.Name" xml:space="preserve">
     <value>lblElement1</value>
@@ -307,7 +307,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblRangeElement1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 268</value>
+    <value>152, 268</value>
   </data>
   <data name="lblRangeElement1.Size" type="System.Drawing.Size, System.Drawing">
     <value>33, 13</value>
@@ -337,7 +337,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblRangeElement2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>155, 295</value>
+    <value>155, 297</value>
   </data>
   <data name="lblRangeElement2.Size" type="System.Drawing.Size, System.Drawing">
     <value>30, 13</value>
@@ -430,13 +430,13 @@
     <value>392, 365</value>
   </data>
   <data name="lblElement2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 13</value>
+    <value>86, 13</value>
   </data>
   <data name="lblElement2.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
   <data name="lblElement2.Text" xml:space="preserve">
-    <value>Element 2:</value>
+    <value>Element2 (Tmin):</value>
   </data>
   <data name="&gt;&gt;lblElement2.Name" xml:space="preserve">
     <value>lblElement2</value>
@@ -670,13 +670,13 @@
     <value>242, 426</value>
   </data>
   <data name="lblNudOutlier.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 13</value>
+    <value>47, 13</value>
   </data>
   <data name="lblNudOutlier.TabIndex" type="System.Int32, mscorlib">
     <value>44</value>
   </data>
   <data name="lblNudOutlier.Text" xml:space="preserve">
-    <value>mm</value>
+    <value>multiplier</value>
   </data>
   <data name="&gt;&gt;lblNudOutlier.Name" xml:space="preserve">
     <value>lblNudOutlier</value>
@@ -810,6 +810,9 @@
   <data name="&gt;&gt;lblNudRangeElement2Max.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <metadata name="ttOutliers.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <data name="ucrChkRange2.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 293</value>
   </data>
@@ -833,6 +836,9 @@
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>55</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
@@ -1323,11 +1329,20 @@
   <data name="&gt;&gt;ucrPnlType.ZOrder" xml:space="preserve">
     <value>45</value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Climatic Check Data Temperature</value>
+  </data>
+  <data name="&gt;&gt;ttOutliers.Name" xml:space="preserve">
+    <value>ttOutliers</value>
+  </data>
+  <data name="&gt;&gt;ttOutliers.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>dlgClimaticCheckDataTemperature</value>

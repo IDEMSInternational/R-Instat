@@ -22,6 +22,7 @@ Partial Class dlgClimaticCheckDataTemperature
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgClimaticCheckDataTemperature))
         Me.lblStation = New System.Windows.Forms.Label()
         Me.lblDate = New System.Windows.Forms.Label()
@@ -45,6 +46,7 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.lblNudRangeElement2Min = New System.Windows.Forms.Label()
         Me.lblNudRangeElement1Max = New System.Windows.Forms.Label()
         Me.lblNudRangeElement2Max = New System.Windows.Forms.Label()
+        Me.ttOutliers = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrChkRange2 = New instat.ucrCheck()
         Me.ucrReceiverElement2 = New instat.ucrReceiverSingle()
         Me.ucrNudJump = New instat.ucrNud()
@@ -498,4 +500,5 @@ Partial Class dlgClimaticCheckDataTemperature
     Friend WithEvents lblNudRangeElement2Min As Label
     Friend WithEvents lblNudRangeElement1Min As Label
     Friend WithEvents ucrChkRange2 As ucrCheck
+    Friend WithEvents ttOutliers As ToolTip
 End Class
