@@ -102,6 +102,7 @@ Public Class dlgHistogram
         ucrHistogramSelector.Reset()
         ucrHistogramSelector.SetGgplotFunction(clsBaseOperator)
         ucrSaveHist.Reset()
+        ucrVariablesAsFactorforHist.SetMeAsReceiver()
         bResetSubdialog = True
         bResetHistLayerSubdialog = True
         TempOptionsDisabledInMultipleVariablesCase()
