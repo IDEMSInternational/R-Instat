@@ -80,7 +80,6 @@ Public Class dlgDotPlot
         ucrOtherAxisReceiver.SetParameter(New RParameter("y", 1))
         ucrOtherAxisReceiver.SetParameterIsString()
         ucrOtherAxisReceiver.Selector = ucrDotPlotSelector
-        ucrOtherAxisReceiver.SetIncludedDataTypes({"factor", "numeric"}) 'Warning: Even if having "factor" only could be more appropriate for the Axis that is not BinAxis, when coming back from the LayerOptions, where x and y can take both numeric and factor values, we would get bugs if numeric was not allowed.
         ucrOtherAxisReceiver.strSelectorHeading = "Variables"
         ucrOtherAxisReceiver.bWithQuotes = False
         ucrOtherAxisReceiver.SetValuesToIgnore({Chr(34) & Chr(34)})
@@ -98,7 +97,6 @@ Public Class dlgDotPlot
         ucrVariablesAsFactorDotPlot.SetParameter(New RParameter("x"), 0)
         ucrVariablesAsFactorDotPlot.SetFactorReceiver(ucrOtherAxisReceiver) 'Could choose the ucrFactorReceiver for this purpose... 
         ucrVariablesAsFactorDotPlot.Selector = ucrDotPlotSelector
-        ucrVariablesAsFactorDotPlot.SetIncludedDataTypes({"numeric", "factor"})
         ucrVariablesAsFactorDotPlot.strSelectorHeading = "Variables"
         ucrVariablesAsFactorDotPlot.bWithQuotes = False
         ucrVariablesAsFactorDotPlot.SetParameterIsString()
@@ -128,6 +126,7 @@ Public Class dlgDotPlot
         ucrDotPlotSelector.Reset()
         ucrDotPlotSelector.SetGgplotFunction(clsBaseOperator)
         ucrSaveDotPlot.Reset()
+        ucrVariablesAsFactorDotPlot.SetMeAsReceiver()
         bResetSubdialog = True
         bResetDotLayerSubdialog = True
         'I am not sure we need this
@@ -178,10 +177,12 @@ Public Class dlgDotPlot
         sdgLayerOptions.ShowDialog()
         bResetDotLayerSubdialog = False
         iIndex = clsRDotplotGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "binaxis")
+        ' Shouldn't be needed now as the panel can read from the code and set value correctly
         If iIndex <> -1 AndAlso clsRDotplotGeomFunction.clsParameters(iIndex).strArgumentValue = Chr(34) & "y" & Chr(34) Then
             rdoYBinAxis.Checked = True
         Else
-            rdoXBinAxis.Checked = True 'Note: the default value of "binaxis" is "x"
+            rdoXBinAxis.Checked = False
+            rdoXBinAxis.Checked = True
         End If
         'Task: adapt for multivariable case...
         'Warning: In specific plots in general, we still have the bug that if ApplyOnAllLayers is unchecked on the LayerOptions, then the aesthetics will be stored in the LocalAes.

@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgDisplayDailyData
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsSummaryTableFunction, clsDisplayDailyGraphFunction, clsConcFunction As RFunction
+    Private clsSummaryTableFunction, clsDisplayDailyGraphFunction, clsConcFunction, clsPageByFunction As RFunction
 
     Private Sub dlgDisplayDailyData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -60,7 +60,7 @@ Public Class dlgDisplayDailyData
         ucrReceiverStations.bAutoFill = True
         ucrReceiverStations.SetMeAsReceiver()
 
-        ucrReceiverYear.SetParameter(New RParameter("year_col", 1, bNewIncludeArgumentName:=False))
+        ucrReceiverYear.SetParameter(New RParameter("year_col", 1))
         ucrReceiverYear.SetParameterIsString()
         ucrReceiverYear.Selector = ucrSelectorDisplayDailyClimaticData
         ucrReceiverYear.SetClimaticType("year")
@@ -175,11 +175,13 @@ Public Class dlgDisplayDailyData
         clsSummaryTableFunction = New RFunction
         clsDisplayDailyGraphFunction = New RFunction
         clsConcFunction = New RFunction
+        clsPageByFunction = New RFunction
 
         ucrSelectorDisplayDailyClimaticData.Reset()
         ucrReceiverStations.SetMeAsReceiver()
 
         clsConcFunction.SetRCommand("c")
+        clsPageByFunction.SetRCommand("c")
         clsDisplayDailyGraphFunction.AddParameter("rug_colour", Chr(34) & "red" & Chr(34))
         clsDisplayDailyGraphFunction.AddParameter("bar_colour", Chr(34) & "blue" & Chr(34))
         clsSummaryTableFunction.AddParameter("n_column_factors", "1", iPosition:=4)
@@ -188,6 +190,7 @@ Public Class dlgDisplayDailyData
         clsSummaryTableFunction.AddParameter("store_results", "FALSE", iPosition:=5)
         clsSummaryTableFunction.AddParameter("as_html", "FALSE", iPosition:=7)
         clsSummaryTableFunction.AddParameter("factors", clsRFunctionParameter:=clsConcFunction, iPosition:=3)
+        clsSummaryTableFunction.AddParameter("page_by", clsRFunctionParameter:=clsPageByFunction, iPosition:=8)
         clsDisplayDailyGraphFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_graph")
         clsSummaryTableFunction.SetAssignTo("last_table", strTempDataframe:=ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_table")
         clsSummaryTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
@@ -196,11 +199,12 @@ Public Class dlgDisplayDailyData
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverYear.AddAdditionalCodeParameterPair(clsSummaryTableFunction, New RParameter("page_by", 8), iAdditionalPairNo:=1)
+        ucrReceiverYear.AddAdditionalCodeParameterPair(clsPageByFunction, New RParameter("x1", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrReceiverYear.AddAdditionalCodeParameterPair(clsConcFunction, New RParameter("year_col", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
         ucrSelectorDisplayDailyClimaticData.AddAdditionalCodeParameterPair(clsSummaryTableFunction, ucrSelectorDisplayDailyClimaticData.GetParameter, iAdditionalPairNo:=1)
         ucrReceiverElements.AddAdditionalCodeParameterPair(clsSummaryTableFunction, New RParameter("columns_to_summarise", 1), iAdditionalPairNo:=1)
         ucrReceiverStations.AddAdditionalCodeParameterPair(clsConcFunction, New RParameter("station_col", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrReceiverStations.AddAdditionalCodeParameterPair(clsPageByFunction, New RParameter("x2", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
 
         ucrReceiverDay.SetRCode(clsConcFunction, bReset)
         ucrReceiverMonth.SetRCode(clsConcFunction, bReset)
@@ -261,10 +265,12 @@ Public Class dlgDisplayDailyData
     End Sub
 
     Private Sub ucrChkAsHTMLTable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAsHTMLTable.ControlValueChanged
-        If ucrChkAsHTMLTable.Checked Then
-            ucrBase.clsRsyntax.iCallType = 4
-        Else
-            ucrBase.clsRsyntax.iCallType = 2
+        If rdoTable.Checked Then
+            If ucrChkAsHTMLTable.Checked Then
+                ucrBase.clsRsyntax.iCallType = 4
+            Else
+                ucrBase.clsRsyntax.iCallType = 2
+            End If
         End If
     End Sub
 End Class

@@ -71,6 +71,7 @@ Public Class RLink
         Dim expTemp As SymbolicExpression
         Dim strMajor As String = ""
         Dim strMinor As String = ""
+        Dim iCurrentCallType As Integer
 
         Try
             REngine.SetEnvironmentVariables()
@@ -109,7 +110,12 @@ Public Class RLink
         End If
         For Each strLine As String In strScript.Split(Environment.NewLine)
             If strLine.Trim(vbLf).Count > 0 Then
-                RunScript(strScript:=strLine.Trim(vbLf), iCallType:=iCallType, strComment:=strComment, bSeparateThread:=bSeparateThread, bSilent:=True)
+                If strLine.Contains(strInstatDataObject & "$get_graphs") Then
+                    iCurrentCallType = 3
+                Else
+                    iCurrentCallType = iCallType
+                End If
+                RunScript(strScript:=strLine.Trim(vbLf), iCallType:=iCurrentCallType, strComment:=strComment, bSeparateThread:=bSeparateThread, bSilent:=True)
             End If
             strComment = ""
         Next
@@ -119,6 +125,25 @@ Public Class RLink
             frmPackageIssues.ShowDialog()
         End If
         bInstatObjectExists = True
+    End Sub
+
+    Public Sub RunScriptFromWindow(strNewScript As String, strNewComment As String)
+        Dim strSelectedScript As String = strNewScript
+        Dim iCallType As Integer
+        Dim bFirst As Boolean = True
+        Dim strComment As String = strNewComment
+
+        For Each strLine As String In strSelectedScript.Split(Environment.NewLine)
+            If strLine.Trim(vbLf).Count > 0 AndAlso Not strLine.Trim(vbLf).StartsWith("#") Then
+                If strLine.Contains(strInstatDataObject & "$get_graphs") Then
+                    iCallType = 3
+                Else
+                    iCallType = 0
+                End If
+                RunScript(strScript:=strLine.Trim(vbLf), iCallType:=iCallType, strComment:=strComment, bSeparateThread:=False, bSilent:=False)
+                strComment = ""
+            End If
+        Next
     End Sub
 
     Public Sub CloseREngine()
@@ -155,10 +180,14 @@ Public Class RLink
 
     Public Sub LoadInstatDataObjectFromFile(strFile As String, Optional strComment As String = "")
         Dim clsReadRDS As New RFunction
+        Dim strScript As String = ""
+        Dim strTemp As String = ""
 
         clsReadRDS.SetRCommand("readRDS")
-        clsReadRDS.AddParameter("file", strFile.Replace("\", "/"))
-        RunScript(clsReadRDS.ToScript(), strComment:=strComment)
+        clsReadRDS.AddParameter("file", Chr(34) & strFile.Replace("\", "/") & Chr(34))
+        clsReadRDS.SetAssignTo(strInstatDataObject)
+        strTemp = clsReadRDS.ToScript(strScript)
+        RunScript(strScript, strComment:=strComment)
         bInstatObjectExists = True
     End Sub
 
@@ -1235,6 +1264,22 @@ Public Class RLink
         Dim expColumn As SymbolicExpression
 
         clsGetColumnName.SetRCommand(strInstatDataObject & "$get_CRI_column_names")
+        clsGetColumnName.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
+        expColumn = RunInternalScriptGetValue(clsGetColumnName.ToScript(), bSilent:=True)
+        If expColumn IsNot Nothing AndAlso Not expColumn.Type = Internals.SymbolicExpressionType.Null Then
+            strColumn = expColumn.AsCharacter.ToArray()
+        Else
+            strColumn = Nothing
+        End If
+        Return strColumn
+    End Function
+
+    Public Function GetRedFlagColumnNames(strDataName As String) As String()
+        Dim clsGetColumnName As New RFunction
+        Dim strColumn() As String
+        Dim expColumn As SymbolicExpression
+
+        clsGetColumnName.SetRCommand(strInstatDataObject & "$get_red_flag_column_names")
         clsGetColumnName.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
         expColumn = RunInternalScriptGetValue(clsGetColumnName.ToScript(), bSilent:=True)
         If expColumn IsNot Nothing AndAlso Not expColumn.Type = Internals.SymbolicExpressionType.Null Then

@@ -117,4 +117,217 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ucrRectFill.Location" type="System.Drawing.Point, System.Drawing">
+    <value>105, 93</value>
+  </data>
+  <data name="ucrRectFill.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 21</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrRectFill.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ucrRectFill.Name" xml:space="preserve">
+    <value>ucrRectFill</value>
+  </data>
+  <data name="&gt;&gt;ucrRectFill.Type" xml:space="preserve">
+    <value>instat.ucrColors, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrRectFill.Parent" xml:space="preserve">
+    <value>grpElementRect</value>
+  </data>
+  <data name="&gt;&gt;ucrRectFill.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrRectColors.Location" type="System.Drawing.Point, System.Drawing">
+    <value>105, 68</value>
+  </data>
+  <data name="ucrRectColors.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 21</value>
+  </data>
+  <data name="ucrRectColors.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrRectColors.Name" xml:space="preserve">
+    <value>ucrRectColors</value>
+  </data>
+  <data name="&gt;&gt;ucrRectColors.Type" xml:space="preserve">
+    <value>instat.ucrColors, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrRectColors.Parent" xml:space="preserve">
+    <value>grpElementRect</value>
+  </data>
+  <data name="&gt;&gt;ucrRectColors.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrChkRectFill.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 94</value>
+  </data>
+  <data name="ucrChkRectFill.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 20</value>
+  </data>
+  <data name="ucrChkRectFill.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrChkRectFill.Name" xml:space="preserve">
+    <value>ucrChkRectFill</value>
+  </data>
+  <data name="&gt;&gt;ucrChkRectFill.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkRectFill.Parent" xml:space="preserve">
+    <value>grpElementRect</value>
+  </data>
+  <data name="&gt;&gt;ucrChkRectFill.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrChkRectSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 19</value>
+  </data>
+  <data name="ucrChkRectSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 20</value>
+  </data>
+  <data name="ucrChkRectSize.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkRectSize.Name" xml:space="preserve">
+    <value>ucrChkRectSize</value>
+  </data>
+  <data name="&gt;&gt;ucrChkRectSize.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkRectSize.Parent" xml:space="preserve">
+    <value>grpElementRect</value>
+  </data>
+  <data name="&gt;&gt;ucrChkRectSize.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrChkRectLineType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 44</value>
+  </data>
+  <data name="ucrChkRectLineType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 20</value>
+  </data>
+  <data name="ucrChkRectLineType.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrChkRectLineType.Name" xml:space="preserve">
+    <value>ucrChkRectLineType</value>
+  </data>
+  <data name="&gt;&gt;ucrChkRectLineType.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkRectLineType.Parent" xml:space="preserve">
+    <value>grpElementRect</value>
+  </data>
+  <data name="&gt;&gt;ucrChkRectLineType.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrChkRectColour.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 69</value>
+  </data>
+  <data name="ucrChkRectColour.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 20</value>
+  </data>
+  <data name="ucrChkRectColour.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrChkRectColour.Name" xml:space="preserve">
+    <value>ucrChkRectColour</value>
+  </data>
+  <data name="&gt;&gt;ucrChkRectColour.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkRectColour.Parent" xml:space="preserve">
+    <value>grpElementRect</value>
+  </data>
+  <data name="&gt;&gt;ucrChkRectColour.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="ucrNudRectSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>105, 19</value>
+  </data>
+  <data name="ucrNudRectSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudRectSize.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrNudRectSize.Name" xml:space="preserve">
+    <value>ucrNudRectSize</value>
+  </data>
+  <data name="&gt;&gt;ucrNudRectSize.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudRectSize.Parent" xml:space="preserve">
+    <value>grpElementRect</value>
+  </data>
+  <data name="&gt;&gt;ucrNudRectSize.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="ucrInputRectLineType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>105, 43</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrInputRectLineType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>21, 17, 21, 17</value>
+  </data>
+  <data name="ucrInputRectLineType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 21</value>
+  </data>
+  <data name="ucrInputRectLineType.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrInputRectLineType.Name" xml:space="preserve">
+    <value>ucrInputRectLineType</value>
+  </data>
+  <data name="&gt;&gt;ucrInputRectLineType.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputRectLineType.Parent" xml:space="preserve">
+    <value>grpElementRect</value>
+  </data>
+  <data name="&gt;&gt;ucrInputRectLineType.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="grpElementRect.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="grpElementRect.Size" type="System.Drawing.Size, System.Drawing">
+    <value>246, 119</value>
+  </data>
+  <data name="grpElementRect.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpElementRect.Text" xml:space="preserve">
+    <value>ElementRect</value>
+  </data>
+  <data name="&gt;&gt;grpElementRect.Name" xml:space="preserve">
+    <value>grpElementRect</value>
+  </data>
+  <data name="&gt;&gt;grpElementRect.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpElementRect.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpElementRect.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 123</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>ucrElementRectControl</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>instat.ucrCore, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
 </root>

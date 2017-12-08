@@ -1595,8 +1595,8 @@ data_object$set("public", "get_objects", function(object_name, type = "", force_
 data_object$set("public", "get_object_names", function(type = "", as_list = FALSE, excluded_items = c()) {
   if(type == "") out = names(private$objects)
   else {
-    if(type == model_label) out = names(private$objects)[!sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "htmlTable") %in% class(x)))]
-    else if(type == graph_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob") %in% class(x)))]
+    if(type == model_label) out = names(private$objects)[!sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "htmlTable", "ggmultiplot") %in% class(x)))]
+    else if(type == graph_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot") %in% class(x)))]
     else if(type == table_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("htmlTable", "data.frame", "list") %in% class(x)))]
     else stop("type: ", type, " not recognised")
   }
@@ -2541,7 +2541,7 @@ instat_object$set("public","define_red_flags", function(data_name, red_flags = c
 
 data_object$set("public","define_red_flags", function(red_flags = c()) {
   if(!self$is_metadata(corruption_data_label)) {
-    stop("Cannot define corruption red flags when data frame is not defined as corruption data.")
+    stop("Cannot define red flags when data frame is not defined as procurement data.")
   }
   self$append_to_variables_metadata(red_flags, corruption_red_flag_label, TRUE)
   self$append_to_variables_metadata(red_flags, corruption_index_label, TRUE)
@@ -2593,7 +2593,17 @@ data_object$set("public","get_CRI_component_column_names", function() {
 }
 )
 
-corruption_index_label
+instat_object$set("public","get_red_flag_column_names", function(data_name) {
+  self$get_data_objects(data_name)$get_red_flag_column_names()
+}
+)
+
+data_object$set("public","get_red_flag_column_names", function() {
+  include <- list(TRUE)
+  names(include) <- corruption_red_flag_label
+  return(self$get_column_names(include = include))
+}
+)
 
 instat_object$set("public","get_CRI_column_names", function(data_name) {
   self$get_data_objects(data_name)$get_CRI_column_names()
@@ -3193,17 +3203,21 @@ data_object$set("public","display_daily_graph", function(data_name, date_col = N
   year_data <- self$get_columns_from_data(year_col)
   
   graph_list <- list()
+  ngraph <- 0
   for(station_name in unique(station_data)) {
-    if(!is.null(station_col)) curr_data <- curr_data[curr_data[[station_col]] == station_name, ]
-    if(nrow(curr_data) != 0) {
-      g <- ggplot2::ggplot(data = curr_data, mapping = ggplot2::aes_(x = as.name(doy_col), y = as.name(climatic_element))) + ggplot2::geom_bar(stat  = "identity", fill = bar_colour) + ggplot2::geom_rug(data = curr_data[is.na(curr_data[[climatic_element]]), ], mapping = ggplot2::aes_(x = as.name(doy_col)), sides = "b", color = rug_colour) + ggplot2::theme_minimal() + ggplot2::coord_cartesian(ylim = c(0, upper_limit)) + ggplot2::scale_x_continuous(breaks = c(1, 32, 61, 92, 122, 153, 183, 214, 245, 275, 306, 336, 367), labels = c(month.abb, ""), limits = c(0, 367)) + facet_wrap(facets = as.formula(paste("~", year_col))) + ggplot2::ggtitle(paste(ifelse(station_name == 1, "", station_name), "Daily", climatic_element)) + ggplot2::theme(panel.grid.minor = element_blank(), plot.title = element_text(hjust = 0.5, size = 20), axis.title = element_text(size = 16)) + xlab("Date") + ylab(climatic_element) + ggplot2::theme(axis.text.x=ggplot2::element_text(angle=90))
-      if(any(curr_data[[climatic_element]] > upper_limit, na.rm = TRUE)) {
-        g <- g + ggplot2::geom_text(data = curr_data[curr_data[[climatic_element]] > upper_limit, ], mapping = ggplot2::aes_(y = upper_limit, label = as.name(climatic_element)), size = 3)
+    print(station_name)
+    if(!is.null(station_col)) curr_graph_data <- curr_data[curr_data[[station_col]] == station_name, ]
+    else curr_graph_data <- curr_data
+    if(nrow(curr_graph_data) != 0) {
+      g <- ggplot2::ggplot(data = curr_graph_data, mapping = ggplot2::aes_(x = as.name(doy_col), y = as.name(climatic_element))) + ggplot2::geom_bar(stat  = "identity", fill = bar_colour) + ggplot2::geom_rug(data = curr_graph_data[is.na(curr_graph_data[[climatic_element]]), ], mapping = ggplot2::aes_(x = as.name(doy_col)), sides = "b", color = rug_colour) + ggplot2::theme_minimal() + ggplot2::coord_cartesian(ylim = c(0, upper_limit)) + ggplot2::scale_x_continuous(breaks = c(1, 32, 61, 92, 122, 153, 183, 214, 245, 275, 306, 336, 367), labels = c(month.abb, ""), limits = c(0, 367)) + facet_wrap(facets = as.formula(paste("~", year_col))) + ggplot2::ggtitle(paste(ifelse(station_name == 1, "", station_name), "Daily", climatic_element)) + ggplot2::theme(panel.grid.minor = element_blank(), plot.title = element_text(hjust = 0.5, size = 20), axis.title = element_text(size = 16)) + xlab("Date") + ylab(climatic_element) + ggplot2::theme(axis.text.x=ggplot2::element_text(angle=90))
+      if(any(curr_graph_data[[climatic_element]] > upper_limit, na.rm = TRUE)) {
+        g <- g + ggplot2::geom_text(data = curr_graph_data[curr_graph_data[[climatic_element]] > upper_limit, ], mapping = ggplot2::aes_(y = upper_limit, label = as.name(climatic_element)), size = 3)
       }
+      ngraph <- ngraph + 1
+      graph_list[[length(graph_list) + 1]] <- g
     }
-    graph_list[[length(graph_list) + 1]] <- g
   }
-  if(length(graph_list) > 1) return(gridExtra::grid.arrange(grobs = graph_list))
+  if(ngraph > 1) return(gridExtra::grid.arrange(grobs = graph_list))
   else return(g)
 }
 )

@@ -38,40 +38,70 @@ Partial Class ucrScript
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.txtScript = New System.Windows.Forms.TextBox()
-        Me.cmdClear = New System.Windows.Forms.Button()
+        Me.mnuContextScript = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.mnuRunSelectedText = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClearContents = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOpenScript = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cmdRun = New System.Windows.Forms.Button()
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
+        Me.mnuContextScript.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtScript
         '
         Me.txtScript.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtScript.ContextMenuStrip = Me.mnuContextScript
         Me.txtScript.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtScript.Location = New System.Drawing.Point(3, 53)
+        Me.txtScript.Location = New System.Drawing.Point(3, 56)
         Me.txtScript.Multiline = True
         Me.txtScript.Name = "txtScript"
-        Me.txtScript.ReadOnly = True
         Me.txtScript.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtScript.Size = New System.Drawing.Size(405, 258)
+        Me.txtScript.Size = New System.Drawing.Size(405, 255)
         Me.txtScript.TabIndex = 0
         '
-        'cmdClear
+        'mnuContextScript
         '
-        Me.cmdClear.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.cmdClear.Location = New System.Drawing.Point(3, 23)
-        Me.cmdClear.Name = "cmdClear"
-        Me.cmdClear.Size = New System.Drawing.Size(405, 24)
-        Me.cmdClear.TabIndex = 1
-        Me.cmdClear.Text = "Clear contents"
-        Me.cmdClear.UseVisualStyleBackColor = True
+        Me.mnuContextScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuRunSelectedText, Me.mnuClearContents, Me.mnuOpenScript})
+        Me.mnuContextScript.Name = "mnuContextLogFile"
+        Me.mnuContextScript.Size = New System.Drawing.Size(167, 70)
+        '
+        'mnuRunSelectedText
+        '
+        Me.mnuRunSelectedText.Name = "mnuRunSelectedText"
+        Me.mnuRunSelectedText.Size = New System.Drawing.Size(166, 22)
+        Me.mnuRunSelectedText.Text = "Run Selected Text"
+        '
+        'mnuClearContents
+        '
+        Me.mnuClearContents.Name = "mnuClearContents"
+        Me.mnuClearContents.Size = New System.Drawing.Size(166, 22)
+        Me.mnuClearContents.Text = "Clear Contents"
+        '
+        'mnuOpenScript
+        '
+        Me.mnuOpenScript.Name = "mnuOpenScript"
+        Me.mnuOpenScript.Size = New System.Drawing.Size(166, 22)
+        Me.mnuOpenScript.Text = "Open Script"
+        '
+        'cmdRun
+        '
+        Me.cmdRun.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cmdRun.Location = New System.Drawing.Point(3, 23)
+        Me.cmdRun.Name = "cmdRun"
+        Me.cmdRun.Size = New System.Drawing.Size(405, 27)
+        Me.cmdRun.TabIndex = 1
+        Me.cmdRun.Text = "Run All"
+        Me.cmdRun.UseVisualStyleBackColor = True
         '
         'lblHeader
         '
         Me.lblHeader.BackColor = System.Drawing.Color.FromArgb(CType(CType(35, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(190, Byte), Integer))
         Me.lblHeader.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.lblHeader.ForeColor = System.Drawing.SystemColors.Control
         Me.lblHeader.Location = New System.Drawing.Point(3, 0)
         Me.lblHeader.Name = "lblHeader"
@@ -86,14 +116,15 @@ Partial Class ucrScript
         Me.tlpTableContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.tlpTableContainer.Controls.Add(Me.lblHeader, 0, 0)
         Me.tlpTableContainer.Controls.Add(Me.txtScript, 0, 2)
-        Me.tlpTableContainer.Controls.Add(Me.cmdClear, 0, 1)
+        Me.tlpTableContainer.Controls.Add(Me.cmdRun, 0, 1)
         Me.tlpTableContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tlpTableContainer.Location = New System.Drawing.Point(0, 0)
         Me.tlpTableContainer.Name = "tlpTableContainer"
         Me.tlpTableContainer.RowCount = 3
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
+        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33.0!))
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.tlpTableContainer.Size = New System.Drawing.Size(411, 314)
         Me.tlpTableContainer.TabIndex = 9
         '
@@ -105,6 +136,7 @@ Partial Class ucrScript
         Me.Name = "ucrScript"
         Me.Size = New System.Drawing.Size(411, 314)
         Me.Tag = "Script_Window"
+        Me.mnuContextScript.ResumeLayout(False)
         Me.tlpTableContainer.ResumeLayout(False)
         Me.tlpTableContainer.PerformLayout()
         Me.ResumeLayout(False)
@@ -112,7 +144,11 @@ Partial Class ucrScript
     End Sub
 
     Friend WithEvents txtScript As TextBox
-    Friend WithEvents cmdClear As Button
+    Friend WithEvents cmdRun As Button
     Friend WithEvents lblHeader As Label
     Friend WithEvents tlpTableContainer As TableLayoutPanel
+    Friend WithEvents mnuContextScript As ContextMenuStrip
+    Friend WithEvents mnuRunSelectedText As ToolStripMenuItem
+    Friend WithEvents mnuClearContents As ToolStripMenuItem
+    Friend WithEvents mnuOpenScript As ToolStripMenuItem
 End Class

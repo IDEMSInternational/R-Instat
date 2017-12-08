@@ -14,7 +14,11 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.IO
 Public Class ucrScript
+    Private strComment As String = "Code run from Script Window"
+    Public strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
+
     Public Sub CopyText()
         txtScript.Copy()
     End Sub
@@ -23,14 +27,8 @@ Public Class ucrScript
         txtScript.SelectAll()
     End Sub
 
-    Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
-        Dim dlgResponse As DialogResult
-        If txtScript.Text <> "" Then
-            dlgResponse = MessageBox.Show("Are you sure you want to clear the " & Me.Text, "Clear " & Me.Text, MessageBoxButtons.YesNo)
-            If dlgResponse = DialogResult.Yes Then
-                txtScript.Clear()
-            End If
-        End If
+    Private Sub cmdRun_Click(sender As Object, e As EventArgs) Handles cmdRun.Click
+        RunText(txtScript.Text)
     End Sub
 
     Public Sub AppendText(strText As String)
@@ -39,4 +37,55 @@ Public Class ucrScript
         txtScript.ScrollToCaret()
         txtScript.Refresh()
     End Sub
+
+    Private Sub mnuClearContents_Click(sender As Object, e As EventArgs) Handles mnuClearContents.Click
+        Dim dlgResponse As DialogResult
+        If txtScript.Text <> "" Then
+            dlgResponse = MessageBox.Show("Are you sure you want to clear the contents of the script window?" & Me.Text, "Clear " & Me.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            If dlgResponse = DialogResult.Yes Then
+                txtScript.Clear()
+            End If
+        End If
+    End Sub
+
+    Private Sub mnuRunSelectedText_Click(sender As Object, e As EventArgs) Handles mnuRunSelectedText.Click
+        If txtScript.SelectionLength > 0 AndAlso txtScript.SelectedText <> "" Then
+            RunText(txtScript.SelectedText)
+        Else
+            MessageBox.Show("You need to select some text before running" & Me.Text, "No text selected" & Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+
+        End If
+    End Sub
+
+    Private Sub RunText(strText As String)
+        If strText <> "" Then
+            If MsgBox("Running code from the script window is not yet a stable operation." & vbNewLine & vbNewLine & "Do you want to proceed?", MessageBoxButtons.YesNo, "Warning") = MsgBoxResult.Yes Then
+                frmMain.clsRLink.RunScriptFromWindow(strNewScript:=strText, strNewComment:=strComment)
+            End If
+        End If
+    End Sub
+
+    Private Sub mnuOpenScript_Click(sender As Object, e As EventArgs) Handles mnuOpenScript.Click
+        Dim clsProcessStart As New RFunction
+        Dim strScriptFilename As String = ""
+        Dim i As Integer
+
+        Try
+            If Not Directory.Exists(strRInstatLogFilesFolderPath) Then
+                Directory.CreateDirectory(strRInstatLogFilesFolderPath)
+            End If
+            strScriptFilename = "RInstatScript.R"
+
+            While File.Exists(Path.Combine(strRInstatLogFilesFolderPath, strScriptFilename))
+                i = i + 1
+                strScriptFilename = "RInstatScript" & i & ".R"
+            End While
+            File.WriteAllText(Path.Combine(strRInstatLogFilesFolderPath, strScriptFilename), frmMain.clsRLink.GetRSetupScript() & txtScript.Text)
+            Process.Start(Path.Combine(strRInstatLogFilesFolderPath, strScriptFilename))
+        Catch
+            MsgBox("Could not save the script file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
+            End
+        End Try
+    End Sub
+
 End Class

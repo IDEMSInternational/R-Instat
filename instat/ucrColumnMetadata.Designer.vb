@@ -52,6 +52,7 @@ Partial Class ucrColumnMetadata
         Me.mnuConvertText = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuConvertToLogical = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuConvertVariate = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuLevelsLabels = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuFreezeToHere = New System.Windows.Forms.ToolStripMenuItem()
@@ -62,7 +63,6 @@ Partial Class ucrColumnMetadata
         Me.mnuClearColumnFilter = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
         Me.SuspendLayout()
@@ -90,7 +90,7 @@ Partial Class ucrColumnMetadata
         '
         Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuDuplicateColumn, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertToLogical, Me.mnuConvertVariate, Me.ToolStripSeparator2, Me.mnuLevelsLabels, Me.ToolStripSeparator1, Me.mnuFreezeToHere, Me.mnuUnfreeze, Me.ToolStripSeparator3, Me.mnuSort, Me.mnuColumnFilter, Me.mnuClearColumnFilter})
         Me.columnContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.columnContextMenuStrip.Size = New System.Drawing.Size(213, 402)
+        Me.columnContextMenuStrip.Size = New System.Drawing.Size(213, 380)
         '
         'mnuColumnRename
         '
@@ -157,6 +157,11 @@ Partial Class ucrColumnMetadata
         Me.mnuConvertVariate.Size = New System.Drawing.Size(212, 22)
         Me.mnuConvertVariate.Text = "Convert to Numeric"
         '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(209, 6)
+        '
         'mnuLevelsLabels
         '
         Me.mnuLevelsLabels.Name = "mnuLevelsLabels"
@@ -208,7 +213,7 @@ Partial Class ucrColumnMetadata
         '
         Me.lblHeader.BackColor = System.Drawing.Color.FromArgb(CType(CType(35, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(190, Byte), Integer))
         Me.lblHeader.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.lblHeader.ForeColor = System.Drawing.SystemColors.Control
         Me.lblHeader.Location = New System.Drawing.Point(3, 0)
         Me.lblHeader.Name = "lblHeader"
@@ -231,11 +236,6 @@ Partial Class ucrColumnMetadata
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.tlpTableContainer.Size = New System.Drawing.Size(344, 138)
         Me.tlpTableContainer.TabIndex = 7
-        '
-        'ToolStripSeparator2
-        '
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(209, 6)
         '
         'ucrColumnMetadata
         '

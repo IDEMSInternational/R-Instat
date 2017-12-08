@@ -38,6 +38,7 @@ Partial Class dlgReferenceLevel
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgReferenceLevel))
         Me.ucrBase = New instat.ucrButtons()
         Me.lblFactorSelected = New System.Windows.Forms.Label()
         Me.ucrSelectorForReferenceLevels = New instat.ucrSelectorByDataFrameAddRemove()
@@ -47,58 +48,44 @@ Partial Class dlgReferenceLevel
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 250)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 4
         '
         'lblFactorSelected
         '
-        Me.lblFactorSelected.AutoSize = True
-        Me.lblFactorSelected.Location = New System.Drawing.Point(256, 22)
+        resources.ApplyResources(Me.lblFactorSelected, "lblFactorSelected")
         Me.lblFactorSelected.Name = "lblFactorSelected"
-        Me.lblFactorSelected.Size = New System.Drawing.Size(85, 13)
-        Me.lblFactorSelected.TabIndex = 1
         Me.lblFactorSelected.Tag = "Factor_Selected:"
-        Me.lblFactorSelected.Text = "Factor Selected:"
         '
         'ucrSelectorForReferenceLevels
         '
         Me.ucrSelectorForReferenceLevels.bShowHiddenColumns = False
         Me.ucrSelectorForReferenceLevels.bUseCurrentFilter = True
-        Me.ucrSelectorForReferenceLevels.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorForReferenceLevels.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorForReferenceLevels, "ucrSelectorForReferenceLevels")
         Me.ucrSelectorForReferenceLevels.Name = "ucrSelectorForReferenceLevels"
-        Me.ucrSelectorForReferenceLevels.Size = New System.Drawing.Size(242, 194)
-        Me.ucrSelectorForReferenceLevels.TabIndex = 0
         '
         'ucrReceiverReferenceLevels
         '
         Me.ucrReceiverReferenceLevels.frmParent = Me
-        Me.ucrReceiverReferenceLevels.Location = New System.Drawing.Point(255, 37)
-        Me.ucrReceiverReferenceLevels.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverReferenceLevels, "ucrReceiverReferenceLevels")
         Me.ucrReceiverReferenceLevels.Name = "ucrReceiverReferenceLevels"
         Me.ucrReceiverReferenceLevels.Selector = Nothing
-        Me.ucrReceiverReferenceLevels.Size = New System.Drawing.Size(127, 26)
-        Me.ucrReceiverReferenceLevels.TabIndex = 2
+        Me.ucrReceiverReferenceLevels.strNcFilePath = ""
         Me.ucrReceiverReferenceLevels.ucrSelector = Nothing
         '
         'ucrFactorReferenceLevels
         '
-        Me.ucrFactorReferenceLevels.AutoSize = True
+        resources.ApplyResources(Me.ucrFactorReferenceLevels, "ucrFactorReferenceLevels")
         Me.ucrFactorReferenceLevels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.ucrFactorReferenceLevels.clsReceiver = Nothing
-        Me.ucrFactorReferenceLevels.Location = New System.Drawing.Point(255, 63)
         Me.ucrFactorReferenceLevels.Name = "ucrFactorReferenceLevels"
         Me.ucrFactorReferenceLevels.shtCurrSheet = Nothing
-        Me.ucrFactorReferenceLevels.Size = New System.Drawing.Size(267, 181)
-        Me.ucrFactorReferenceLevels.TabIndex = 3
+        Me.ucrFactorReferenceLevels.ucrChkLevels = Nothing
         '
         'dlgReferenceLevel
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(531, 305)
         Me.Controls.Add(Me.ucrReceiverReferenceLevels)
         Me.Controls.Add(Me.ucrSelectorForReferenceLevels)
         Me.Controls.Add(Me.ucrFactorReferenceLevels)
@@ -108,9 +95,7 @@ Partial Class dlgReferenceLevel
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgReferenceLevel"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Reference_Level"
-        Me.Text = "Reference Level"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

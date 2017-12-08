@@ -20,7 +20,10 @@ Public Class dlgOneVariableGraph
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
-    Dim clsOneVarGraph As New RFunction
+    Private clsOneVarGraph As New RFunction
+    Public strDefaultDataFrame As String = ""
+    Public strDefaultColumns() As String = Nothing
+
     Private Sub dlgOneVariableGraph_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -31,6 +34,7 @@ Public Class dlgOneVariableGraph
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetDefaultColumn()
         bReset = False
         ReopenDialog()
         TestOkEnabled()
@@ -124,6 +128,19 @@ Public Class dlgOneVariableGraph
                 rdoCombine.Checked = True
             End If
         End If
+    End Sub
+
+    Private Sub SetDefaultColumn()
+        If strDefaultDataFrame <> "" Then
+            ucrSelectorOneVarGraph.SetDataframe(strDefaultDataFrame)
+        End If
+        If strDefaultColumns IsNot Nothing AndAlso strDefaultColumns.Count > 0 Then
+            For Each strVar As String In strDefaultColumns
+                ucrReceiverOneVarGraph.Add(strVar, strDefaultDataFrame)
+            Next
+        End If
+        strDefaultDataFrame = ""
+        strDefaultColumns = Nothing
     End Sub
 
     Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOneVarGraph.ControlValueChanged

@@ -38,6 +38,7 @@ Partial Class dlgClimdexIndices
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgClimdexIndices))
         Me.lblTmax = New System.Windows.Forms.Label()
         Me.lblTmin = New System.Windows.Forms.Label()
         Me.lblPrec = New System.Windows.Forms.Label()
@@ -54,132 +55,93 @@ Partial Class dlgClimdexIndices
         '
         'lblTmax
         '
-        Me.lblTmax.AutoSize = True
-        Me.lblTmax.Location = New System.Drawing.Point(256, 85)
+        resources.ApplyResources(Me.lblTmax, "lblTmax")
         Me.lblTmax.Name = "lblTmax"
-        Me.lblTmax.Size = New System.Drawing.Size(117, 13)
-        Me.lblTmax.TabIndex = 3
         Me.lblTmax.Tag = "Maximum Temperature:"
-        Me.lblTmax.Text = "Maximum Temperature:"
         '
         'lblTmin
         '
-        Me.lblTmin.AutoSize = True
-        Me.lblTmin.Location = New System.Drawing.Point(256, 126)
+        resources.ApplyResources(Me.lblTmin, "lblTmin")
         Me.lblTmin.Name = "lblTmin"
-        Me.lblTmin.Size = New System.Drawing.Size(114, 13)
-        Me.lblTmin.TabIndex = 5
         Me.lblTmin.Tag = "Minimum Temperature:"
-        Me.lblTmin.Text = "Minimum Temperature:"
         '
         'lblPrec
         '
-        Me.lblPrec.AutoSize = True
-        Me.lblPrec.Location = New System.Drawing.Point(256, 167)
+        resources.ApplyResources(Me.lblPrec, "lblPrec")
         Me.lblPrec.Name = "lblPrec"
-        Me.lblPrec.Size = New System.Drawing.Size(45, 13)
-        Me.lblPrec.TabIndex = 7
         Me.lblPrec.Tag = "Rainfall:"
-        Me.lblPrec.Text = "Rainfall:"
         '
         'cmdIndices
         '
-        Me.cmdIndices.Location = New System.Drawing.Point(337, 216)
+        resources.ApplyResources(Me.cmdIndices, "cmdIndices")
         Me.cmdIndices.Name = "cmdIndices"
-        Me.cmdIndices.Size = New System.Drawing.Size(74, 23)
-        Me.cmdIndices.TabIndex = 10
         Me.cmdIndices.Tag = "Indices..."
-        Me.cmdIndices.Text = "Indices..."
         Me.cmdIndices.UseVisualStyleBackColor = True
         '
         'lblDate
         '
-        Me.lblDate.AutoSize = True
-        Me.lblDate.Location = New System.Drawing.Point(256, 44)
+        resources.ApplyResources(Me.lblDate, "lblDate")
         Me.lblDate.Name = "lblDate"
-        Me.lblDate.Size = New System.Drawing.Size(33, 13)
-        Me.lblDate.TabIndex = 1
         Me.lblDate.Tag = "Date:"
-        Me.lblDate.Text = "Date:"
         '
         'ucrReceiverDate
         '
         Me.ucrReceiverDate.frmParent = Me
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(256, 59)
-        Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverDate, "ucrReceiverDate")
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing
-        Me.ucrReceiverDate.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverDate.strNcFilePath = ""
-        Me.ucrReceiverDate.TabIndex = 2
         Me.ucrReceiverDate.ucrSelector = Nothing
         '
         'ucrReceiverPrec
         '
         Me.ucrReceiverPrec.frmParent = Me
-        Me.ucrReceiverPrec.Location = New System.Drawing.Point(256, 182)
-        Me.ucrReceiverPrec.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverPrec, "ucrReceiverPrec")
         Me.ucrReceiverPrec.Name = "ucrReceiverPrec"
         Me.ucrReceiverPrec.Selector = Nothing
-        Me.ucrReceiverPrec.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverPrec.strNcFilePath = ""
-        Me.ucrReceiverPrec.TabIndex = 8
         Me.ucrReceiverPrec.ucrSelector = Nothing
         '
         'ucrReceiverTmin
         '
         Me.ucrReceiverTmin.frmParent = Me
-        Me.ucrReceiverTmin.Location = New System.Drawing.Point(256, 141)
-        Me.ucrReceiverTmin.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverTmin, "ucrReceiverTmin")
         Me.ucrReceiverTmin.Name = "ucrReceiverTmin"
         Me.ucrReceiverTmin.Selector = Nothing
-        Me.ucrReceiverTmin.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverTmin.strNcFilePath = ""
-        Me.ucrReceiverTmin.TabIndex = 6
         Me.ucrReceiverTmin.ucrSelector = Nothing
         '
         'ucrReceiverTmax
         '
         Me.ucrReceiverTmax.frmParent = Me
-        Me.ucrReceiverTmax.Location = New System.Drawing.Point(256, 100)
-        Me.ucrReceiverTmax.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverTmax, "ucrReceiverTmax")
         Me.ucrReceiverTmax.Name = "ucrReceiverTmax"
         Me.ucrReceiverTmax.Selector = Nothing
-        Me.ucrReceiverTmax.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverTmax.strNcFilePath = ""
-        Me.ucrReceiverTmax.TabIndex = 4
         Me.ucrReceiverTmax.ucrSelector = Nothing
         '
         'ucrSelectorClimdex
         '
         Me.ucrSelectorClimdex.bShowHiddenColumns = False
         Me.ucrSelectorClimdex.bUseCurrentFilter = True
-        Me.ucrSelectorClimdex.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorClimdex.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorClimdex, "ucrSelectorClimdex")
         Me.ucrSelectorClimdex.Name = "ucrSelectorClimdex"
-        Me.ucrSelectorClimdex.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorClimdex.TabIndex = 0
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 242)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 11
         '
         'ucrChkSave
         '
         Me.ucrChkSave.Checked = False
-        Me.ucrChkSave.Location = New System.Drawing.Point(12, 216)
+        resources.ApplyResources(Me.ucrChkSave, "ucrChkSave")
         Me.ucrChkSave.Name = "ucrChkSave"
-        Me.ucrChkSave.Size = New System.Drawing.Size(107, 20)
-        Me.ucrChkSave.TabIndex = 9
         '
-        'dlgClimdex
+        'dlgClimdexIndices
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(417, 300)
         Me.Controls.Add(Me.ucrChkSave)
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.ucrReceiverDate)
@@ -192,13 +154,11 @@ Partial Class dlgClimdexIndices
         Me.Controls.Add(Me.ucrReceiverTmax)
         Me.Controls.Add(Me.ucrSelectorClimdex)
         Me.Controls.Add(Me.ucrBase)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgClimdex"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Name = "dlgClimdexIndices"
         Me.Tag = "Climdex Indices"
-        Me.Text = "Climdex Indices"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

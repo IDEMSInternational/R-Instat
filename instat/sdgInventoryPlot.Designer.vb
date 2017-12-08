@@ -22,7 +22,8 @@ Partial Class sdgInventoryPlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrChkDisplayRainDays = New instat.ucrCheck()
+
+
         Me.ucrButtonsInventoryplot = New instat.ucrButtonsSubdialogue()
         Me.ucrColourMissing = New instat.ucrColors()
         Me.ucrColourNonMissing = New instat.ucrColors()
@@ -51,11 +52,10 @@ Partial Class sdgInventoryPlot
         Me.ucrChkDisplayRainDays.TabIndex = 19
         '
         'ucrButtonsInventoryplot
-        '
-        Me.ucrButtonsInventoryplot.Location = New System.Drawing.Point(67, 339)
+
+        resources.ApplyResources(Me.ucrButtonsInventoryplot, "ucrButtonsInventoryplot")
+
         Me.ucrButtonsInventoryplot.Name = "ucrButtonsInventoryplot"
-        Me.ucrButtonsInventoryplot.Size = New System.Drawing.Size(142, 30)
-        Me.ucrButtonsInventoryplot.TabIndex = 0
         '
         'ucrColourMissing
         '
@@ -208,8 +208,9 @@ Partial Class sdgInventoryPlot
         '
         'sdgInventoryPlot
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+
         Me.ClientSize = New System.Drawing.Size(301, 381)
         Me.Controls.Add(Me.grpRainyDays)
         Me.Controls.Add(Me.lblNonMissing)
@@ -217,15 +218,17 @@ Partial Class sdgInventoryPlot
         Me.Controls.Add(Me.ucrColourNonMissing)
         Me.Controls.Add(Me.ucrColourMissing)
         Me.Controls.Add(Me.ucrChkDisplayRainDays)
-        Me.Controls.Add(Me.ucrButtonsInventoryplot)
+    Me.Controls.Add(Me.ucrButtonsInventoryplot)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgInventoryPlot"
+
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Inventory Plot"
         Me.grpRainyDays.ResumeLayout(False)
         Me.grpRainyDays.PerformLayout()
+
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

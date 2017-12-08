@@ -45,6 +45,7 @@ Partial Class ucrLog
         Me.mnuCopy = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
+        Me.mnuRunSelectedText = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuContextLogFile.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
         Me.SuspendLayout()
@@ -64,27 +65,27 @@ Partial Class ucrLog
         '
         'mnuContextLogFile
         '
-        Me.mnuContextLogFile.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOpenLogFile, Me.mnuCopy})
+        Me.mnuContextLogFile.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOpenLogFile, Me.mnuCopy, Me.mnuRunSelectedText})
         Me.mnuContextLogFile.Name = "mnuContextLogFile"
-        Me.mnuContextLogFile.Size = New System.Drawing.Size(148, 48)
+        Me.mnuContextLogFile.Size = New System.Drawing.Size(167, 70)
         '
         'mnuOpenLogFile
         '
         Me.mnuOpenLogFile.Name = "mnuOpenLogFile"
-        Me.mnuOpenLogFile.Size = New System.Drawing.Size(147, 22)
+        Me.mnuOpenLogFile.Size = New System.Drawing.Size(166, 22)
         Me.mnuOpenLogFile.Text = "Open Log File"
         '
         'mnuCopy
         '
         Me.mnuCopy.Name = "mnuCopy"
-        Me.mnuCopy.Size = New System.Drawing.Size(147, 22)
+        Me.mnuCopy.Size = New System.Drawing.Size(166, 22)
         Me.mnuCopy.Text = "Copy"
         '
         'lblHeader
         '
         Me.lblHeader.BackColor = System.Drawing.Color.FromArgb(CType(CType(35, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(190, Byte), Integer))
         Me.lblHeader.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.lblHeader.ForeColor = System.Drawing.SystemColors.Control
         Me.lblHeader.Location = New System.Drawing.Point(3, 0)
         Me.lblHeader.Name = "lblHeader"
@@ -108,6 +109,12 @@ Partial Class ucrLog
         Me.tlpTableContainer.Size = New System.Drawing.Size(531, 415)
         Me.tlpTableContainer.TabIndex = 9
         '
+        'mnuRunSelectedText
+        '
+        Me.mnuRunSelectedText.Name = "mnuRunSelectedText"
+        Me.mnuRunSelectedText.Size = New System.Drawing.Size(166, 22)
+        Me.mnuRunSelectedText.Text = "Run Selected Text"
+        '
         'ucrLog
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -128,4 +135,5 @@ Partial Class ucrLog
     Friend WithEvents mnuOpenLogFile As ToolStripMenuItem
     Friend WithEvents mnuCopy As ToolStripMenuItem
     Friend WithEvents tlpTableContainer As TableLayoutPanel
+    Friend WithEvents mnuRunSelectedText As ToolStripMenuItem
 End Class
