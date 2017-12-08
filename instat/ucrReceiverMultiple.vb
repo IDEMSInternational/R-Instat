@@ -424,7 +424,6 @@ Public Class ucrReceiverMultiple
 
     Public Sub CheckSingleType()
         Dim strVariableTypes As List(Of String)
-        Dim strVarType As String
 
         If bSingleType Then
             If (Not IsEmpty()) Then

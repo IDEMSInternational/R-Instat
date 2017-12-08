@@ -74,7 +74,7 @@ Public Class BlockReader
         Dim chrSeparator As Char 'This is the symbol that separates the parameters in the strRCommand ( "," in the function case and the operator in the operator case).
         Dim lstAssignToCheck As New List(Of String) 'This lst is used to save the output of SplitSmart(strRCommand, "<-") checking whether the main RCommand is assigned to something.
         Dim lstParameterStrings As List(Of String) 'This is used to store each string describing each parameter of the main RCommand. Note it is impossible to decide the Position value of these parameters at this stage. 'Task, maybe use information on the dialogue once it has been linked to it ?
-        Dim strAssignTo As String 'Storing the value of the AssignTo field in the RParameter. Might be "".
+        Dim strAssignTo As String = Nothing 'Storing the value of the AssignTo field in the RParameter. Might be "".
 
         If String.IsNullOrEmpty(strRCommand) Then
             'message
