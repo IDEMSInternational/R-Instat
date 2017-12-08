@@ -179,7 +179,6 @@ Public Class ucrVariablesAsFactor
             ucrSingleVariable.Visible = True
             ucrMultipleVariables.Visible = False
             If ucrVariableSelector IsNot Nothing Then
-                'ucrSingleVariable.SetMeAsReceiver()
                 ucrVariableSelector.ucrAvailableDataFrames.clsCurrDataFrame.RemoveParameterByName("stack_data")
                 ucrVariableSelector.ucrAvailableDataFrames.clsCurrDataFrame.RemoveParameterByName("measure.vars")
                 ucrVariableSelector.ucrAvailableDataFrames.clsCurrDataFrame.RemoveParameterByName("id.vars")
@@ -187,7 +186,6 @@ Public Class ucrVariablesAsFactor
             If ucrFactorReceiver IsNot Nothing Then
                 ucrFactorReceiver.SetStackedFactorMode(False)
             End If
-            'ucrSingleVariable.SetMeAsReceiver()
             If Selector IsNot Nothing Then
                 Selector.bIsStacked = False
             End If
@@ -198,12 +196,10 @@ Public Class ucrVariablesAsFactor
             cmdVariables.Text = "Multiple Variables"
             cmdVariables.FlatStyle = FlatStyle.Flat
             If ucrVariableSelector IsNot Nothing Then
-                'ucrMultipleVariables.SetMeAsReceiver()
                 ucrVariableSelector.ucrAvailableDataFrames.clsCurrDataFrame.AddParameter("stack_data", "TRUE")
                 SetMeasureVars()
                 ucrVariableSelector.ucrAvailableDataFrames.clsCurrDataFrame.AddParameter("id.vars", GetIDVarNamesFromSelector())
             End If
-            'ucrMultipleVariables.SetMeAsReceiver()
             If Selector IsNot Nothing Then
                 Selector.bIsStacked = True
             End If
