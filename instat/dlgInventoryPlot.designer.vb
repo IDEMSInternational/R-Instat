@@ -82,7 +82,9 @@ Partial Class dlgInventoryPlot
         '
         'cmdInventoryPlotOptions
         '
+
         resources.ApplyResources(Me.cmdInventoryPlotOptions, "cmdInventoryPlotOptions")
+ master
         Me.cmdInventoryPlotOptions.Name = "cmdInventoryPlotOptions"
         Me.cmdInventoryPlotOptions.UseVisualStyleBackColor = True
         '
@@ -121,6 +123,7 @@ Partial Class dlgInventoryPlot
         '
         'ucrPnlPlotType
         '
+
         resources.ApplyResources(Me.ucrPnlPlotType, "ucrPnlPlotType")
         Me.ucrPnlPlotType.Name = "ucrPnlPlotType"
         '
@@ -129,6 +132,7 @@ Partial Class dlgInventoryPlot
         Me.ucrChkDisplayRainDays.Checked = False
         resources.ApplyResources(Me.ucrChkDisplayRainDays, "ucrChkDisplayRainDays")
         Me.ucrChkDisplayRainDays.Name = "ucrChkDisplayRainDays"
+
         '
         'ucrInputFacetBy
         '
@@ -151,7 +155,9 @@ Partial Class dlgInventoryPlot
         Me.ucrInputTitle.AddQuotesIfUnrecognised = True
         Me.ucrInputTitle.IsMultiline = False
         Me.ucrInputTitle.IsReadOnly = False
+
         resources.ApplyResources(Me.ucrInputTitle, "ucrInputTitle")
+
         Me.ucrInputTitle.Name = "ucrInputTitle"
         '
         'ucrReceiverElements
@@ -171,7 +177,9 @@ Partial Class dlgInventoryPlot
         '
         'ucrSaveGraph
         '
+
         resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
+
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         '
         'ucrChkFlipCoordinates
@@ -197,21 +205,23 @@ Partial Class dlgInventoryPlot
         Me.ucrInventoryPlotSelector.Name = "ucrInventoryPlotSelector"
         '
         'ucrBase
-        '
+
         resources.ApplyResources(Me.ucrBase, "ucrBase")
+
         Me.ucrBase.Name = "ucrBase"
         '
         'lblGraphTitle
         '
+
         resources.ApplyResources(Me.lblGraphTitle, "lblGraphTitle")
+
         Me.lblGraphTitle.Name = "lblGraphTitle"
         '
         'dlgInventoryPlot
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+
         Me.Controls.Add(Me.lblGraphTitle)
-        Me.Controls.Add(Me.ucrChkDisplayRainDays)
         Me.Controls.Add(Me.grpPlotType)
         Me.Controls.Add(Me.lblFacetBy)
         Me.Controls.Add(Me.ucrInputFacetBy)
@@ -260,6 +270,5 @@ Partial Class dlgInventoryPlot
     Friend WithEvents grpPlotType As GroupBox
     Friend WithEvents rdoyear_doy_plot As RadioButton
     Friend WithEvents rdoDatePlot As RadioButton
-    Friend WithEvents ucrChkDisplayRainDays As ucrCheck
     Friend WithEvents lblGraphTitle As Label
 End Class
