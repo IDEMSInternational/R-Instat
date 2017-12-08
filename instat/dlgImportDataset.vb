@@ -611,7 +611,6 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub FillExcelSheets(strFilePath As String)
-        Dim i As Integer
         Dim expSheet As SymbolicExpression
         Dim chrSheets As CharacterVector
 
