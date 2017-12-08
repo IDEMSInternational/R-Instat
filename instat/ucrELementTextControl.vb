@@ -24,6 +24,8 @@ Public Class ucrELementTextControl
     Public Sub InitialiseControl()
         ucrChkSize.SetText("Size")
         ucrNudsize.SetParameter(New RParameter("size"))
+        ucrNudsize.Increment = 0.1
+        ucrNudsize.Minimum = 0
         ucrChkSize.AddParameterPresentCondition(True, "size")
         ucrChkSize.AddParameterPresentCondition(False, "size", False)
 
