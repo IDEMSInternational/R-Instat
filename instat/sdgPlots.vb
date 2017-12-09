@@ -203,7 +203,7 @@ Public Class sdgPlots
         clsCoordFlipParam.SetArgumentName("coord_flip")
         clsCoordFlipParam.SetArgument(clsCoordFlipFunc)
         ucrChkHorizontalplot.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-
+        ucrChkHorizontalplot.AddParameterPresentCondition(True, "coord_flip", True)
         InitialiseTabs()
 
         'temporary disabled until implemented
