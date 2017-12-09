@@ -204,7 +204,7 @@ Public Class dlgBoxplot
         sdgPlots.ShowDialog()
         bResetSubdialog = False
 
-        'this yncs the coordflip in sdgplots and the main dlg
+        'this syncs the coordflip in sdgplots and this main dlg
         If clsBaseOperator.clsParameters.Contains(clsBaseOperator.GetParameter("coord_flip")) Then
             ucrChkHorizontalBoxplot.Checked = True
         Else
