@@ -83,8 +83,8 @@ Partial Class sdgPlots
         Me.cmdAllOptions = New System.Windows.Forms.Button()
         Me.ucrInputThemes = New instat.ucrInputComboBox()
         Me.tbpCoordinates = New System.Windows.Forms.TabPage()
-        Me.lblWarning = New System.Windows.Forms.Label()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.ucrChkHorizontalplot = New instat.ucrCheck()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
         Me.tbpLayers.SuspendLayout()
@@ -419,20 +419,21 @@ Partial Class sdgPlots
         '
         'tbpCoordinates
         '
-        Me.tbpCoordinates.Controls.Add(Me.lblWarning)
+        Me.tbpCoordinates.Controls.Add(Me.ucrChkHorizontalplot)
         resources.ApplyResources(Me.tbpCoordinates, "tbpCoordinates")
         Me.tbpCoordinates.Name = "tbpCoordinates"
         Me.tbpCoordinates.UseVisualStyleBackColor = True
-        '
-        'lblWarning
-        '
-        resources.ApplyResources(Me.lblWarning, "lblWarning")
-        Me.lblWarning.Name = "lblWarning"
         '
         'ucrBaseSubdialog
         '
         resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
+        '
+        'ucrChkHorizontalplot
+        '
+        Me.ucrChkHorizontalplot.Checked = False
+        resources.ApplyResources(Me.ucrChkHorizontalplot, "ucrChkHorizontalplot")
+        Me.ucrChkHorizontalplot.Name = "ucrChkHorizontalplot"
         '
         'sdgPlots
         '
@@ -459,7 +460,6 @@ Partial Class sdgPlots
         Me.tbpTheme.ResumeLayout(False)
         Me.tbpTheme.PerformLayout()
         Me.tbpCoordinates.ResumeLayout(False)
-        Me.tbpCoordinates.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -493,7 +493,6 @@ Partial Class sdgPlots
     Friend WithEvents ucrYAxis As ucrAxes
     Friend WithEvents ucrInputLegend As ucrInputTextBox
     Friend WithEvents tbpCoordinates As TabPage
-    Friend WithEvents lblWarning As Label
     Friend WithEvents ucrChkNoOfRowsOrColumns As ucrCheck
     Friend WithEvents ucrChkIncludeFacets As ucrCheck
     Friend WithEvents ucrChkFreeSpace As ucrCheck
@@ -510,6 +509,7 @@ Partial Class sdgPlots
     Friend WithEvents ucrInputGraphCaption As ucrInputTextBox
     Friend WithEvents ucrInputGraphSubTitle As ucrInputTextBox
     Friend WithEvents urChkSelectTheme As ucrCheck
+    Friend WithEvents ucrChkHorizontalplot As ucrCheck
 End Class
 
 
