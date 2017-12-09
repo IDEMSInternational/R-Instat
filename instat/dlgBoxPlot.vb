@@ -238,7 +238,7 @@ Public Class dlgBoxplot
         Next
 
         'this yncs the coordflip in sdgplots and the main dlg
-        If clsBaseOperator.GetParameter("coord_flip").strArgumentName = True Then
+        If clsBaseOperator.GetParameter("coord_flip").strArgumentName = "coord_flip" Then
             ucrChkHorizontalBoxplot.Checked = True
         Else
             ucrChkHorizontalBoxplot.Checked = False
