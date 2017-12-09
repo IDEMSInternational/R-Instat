@@ -30,8 +30,6 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.lblMonth = New System.Windows.Forms.Label()
         Me.lblDay = New System.Windows.Forms.Label()
         Me.lblElement1 = New System.Windows.Forms.Label()
-        Me.lblRangeElement1 = New System.Windows.Forms.Label()
-        Me.lblRangeElement2 = New System.Windows.Forms.Label()
         Me.lblRangeElement1to = New System.Windows.Forms.Label()
         Me.lblRangeElement2to = New System.Windows.Forms.Label()
         Me.lblElement2 = New System.Windows.Forms.Label()
@@ -102,16 +100,6 @@ Partial Class dlgClimaticCheckDataTemperature
         '
         resources.ApplyResources(Me.lblElement1, "lblElement1")
         Me.lblElement1.Name = "lblElement1"
-        '
-        'lblRangeElement1
-        '
-        resources.ApplyResources(Me.lblRangeElement1, "lblRangeElement1")
-        Me.lblRangeElement1.Name = "lblRangeElement1"
-        '
-        'lblRangeElement2
-        '
-        resources.ApplyResources(Me.lblRangeElement2, "lblRangeElement2")
-        Me.lblRangeElement2.Name = "lblRangeElement2"
         '
         'lblRangeElement1to
         '
@@ -418,9 +406,7 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.Controls.Add(Me.lblRangeElement1to)
         Me.Controls.Add(Me.ucrNudSame)
         Me.Controls.Add(Me.lblRangeElement2to)
-        Me.Controls.Add(Me.lblRangeElement1)
         Me.Controls.Add(Me.ucrNudDifference)
-        Me.Controls.Add(Me.lblRangeElement2)
         Me.Controls.Add(Me.ucrNudOutlier)
         Me.Controls.Add(Me.ucrNudRangeElement2Max)
         Me.Controls.Add(Me.ucrChkOutlier)
@@ -477,8 +463,6 @@ Partial Class dlgClimaticCheckDataTemperature
     Friend WithEvents ucrNudOutlier As ucrNud
     Friend WithEvents ucrNudRangeElement1Max As ucrNud
     Friend WithEvents ucrNudRangeElement1Min As ucrNud
-    Friend WithEvents lblRangeElement1 As Label
-    Friend WithEvents lblRangeElement2 As Label
     Friend WithEvents ucrNudRangeElement2Max As ucrNud
     Friend WithEvents ucrNudRangeElement2Min As ucrNud
     Friend WithEvents lblRangeElement1to As Label
