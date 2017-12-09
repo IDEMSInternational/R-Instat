@@ -38,12 +38,13 @@ Public Class dlgRestoreLevelHierachy
 
         ucrSelectorRestoreHierachy.SetParameter(New RParameter(""))
 
-        ucrReceiverKeyVariable.Selector = ucrSelectorRestoreHierachy
-        ucrReceiverKeyVariable.SetParameter(New RParameter(""))
+        ucrReceiverKeyVariables.Selector = ucrSelectorRestoreHierachy
+        ucrReceiverKeyVariables.SetParameter(New RParameter(""))
+        ucrReceiverKeyVariables.SetIncludedDataTypes({"factor"})
 
-        ucrReceiverOtherVariables.Selector = ucrSelectorRestoreHierachy
-        ucrReceiverOtherVariables.SetParameter(New RParameter(""))
-        tipRestoreHierachy.SetToolTip(ucrReceiverOtherVariables, "Variables at the same level as key column.")
+        ucrReceiverCarryVariables.Selector = ucrSelectorRestoreHierachy
+        ucrReceiverCarryVariables.SetParameter(New RParameter(""))
+        tipRestoreHierachy.SetToolTip(ucrReceiverCarryVariables, "Variables at the same level as key column.")
 
         ucrChkWarn.SetText("Warn if the other variables are not constant")
         ucrChkWarn.SetParameter(New RParameter(""))
