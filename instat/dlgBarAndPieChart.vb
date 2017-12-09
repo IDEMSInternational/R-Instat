@@ -53,8 +53,6 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub InitialiseDialog()
-        Dim clsCoordFlipFunc As New RFunction
-        Dim clsCoordFlipParam As New RParameter
         Dim clsRCoordPolarFunction As New RFunction
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
@@ -66,7 +64,6 @@ Public Class dlgBarAndPieChart
         ucrPnlOptions.AddParameterPresentCondition(rdoPieChart, "coord_polar")
         ucrPnlOptions.AddParameterPresentCondition(rdoBarChart, "coord_polar", False)
 
-        ucrPnlOptions.AddToLinkedControls(ucrChkFlipCoordinates, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrReceiverByFactor, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverByFactor.SetLinkedDisplayControl(lblByFactor)
 
@@ -99,12 +96,6 @@ Public Class dlgBarAndPieChart
         clsRCoordPolarParam.SetArgumentName("coord_polar")
         clsRCoordPolarParam.SetArgument(clsRCoordPolarFunction)
 
-        clsCoordFlipFunc.SetPackageName("ggplot2")
-        clsCoordFlipFunc.SetRCommand("coord_flip")
-        clsCoordFlipParam.SetArgumentName("coord_flip")
-        clsCoordFlipParam.SetArgument(clsCoordFlipFunc)
-        ucrChkFlipCoordinates.SetText("Flip Coordinates")
-        ucrChkFlipCoordinates.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
     End Sub
 
     Private Sub SetDefaults()
@@ -158,13 +149,11 @@ Public Class dlgBarAndPieChart
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverFirst.SetRCode(clsBarAesFunction, bReset)
         ucrReceiverFirst.AddAdditionalCodeParameterPair(clsPieAesFunction, New RParameter("fill", 0), iAdditionalPairNo:=1)
-
         ucrReceiverByFactor.SetRCode(clsBarAesFunction, bReset)
-
         ucrSaveBar.SetRCode(clsBaseOperator, bReset)
         ucrBarChartSelector.SetRCode(clsRggplotFunction, bReset)
         ucrPnlOptions.SetRCode(clsBaseOperator, bReset)
-        ucrChkFlipCoordinates.SetRCode(clsBaseOperator, bReset)
+
     End Sub
 
     Private Sub TestOkEnabled()

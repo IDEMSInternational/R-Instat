@@ -52,8 +52,6 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub InitialiseDialog()
-        Dim clsCoordFlipFunc As New RFunction
-        Dim clsCoordFlipParam As New RParameter
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.iHelpTopicID = 436
@@ -98,13 +96,6 @@ Public Class dlgBoxplot
         ucrChkVarWidth.SetText("Variable Width")
         ucrChkVarWidth.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkVarWidth.SetRDefault("FALSE")
-
-        clsCoordFlipFunc.SetPackageName("ggplot2")
-        clsCoordFlipFunc.SetRCommand("coord_flip")
-        clsCoordFlipParam.SetArgumentName("coord_flip")
-        clsCoordFlipParam.SetArgument(clsCoordFlipFunc)
-        ucrChkHorizontalBoxplot.SetText("Horizontal Plot")
-        ucrChkHorizontalBoxplot.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         ucrSaveBoxplot.SetPrefix("boxplot")
         ucrSaveBoxplot.SetIsComboBox()
@@ -173,10 +164,7 @@ Public Class dlgBoxplot
         ucrSaveBoxplot.SetRCode(clsBaseOperator, bReset)
         ucrSelectorBoxPlot.SetRCode(clsRggplotFunction, bReset)
 
-        ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
         ucrChkVarWidth.SetRCode(clsRgeomPlotFunction, bReset)
-        'passes in +cordflip
-        ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
         ucrVariablesAsFactorForBoxplot.SetRCode(clsRaesFunction, bReset)
         ucrByFactorsReceiver.SetRCode(clsRaesFunction, bReset)
         ucrByFactorsReceiver.AddAdditionalCodeParameterPair(clsLocalRaesFunction, New RParameter("group", 0), iAdditionalPairNo:=1)

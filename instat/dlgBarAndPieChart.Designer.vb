@@ -47,7 +47,6 @@ Partial Class dlgBarAndPieChart
         Me.rdoBarChart = New System.Windows.Forms.RadioButton()
         Me.cmdBarChartOptions = New System.Windows.Forms.Button()
         Me.ucrSaveBar = New instat.ucrSave()
-        Me.ucrChkFlipCoordinates = New instat.ucrCheck()
         Me.ucrReceiverByFactor = New instat.ucrReceiverSingle()
         Me.ucrReceiverFirst = New instat.ucrReceiverSingle()
         Me.ucrBarChartSelector = New instat.ucrSelectorByDataFrameAddRemove()
@@ -117,12 +116,6 @@ Partial Class dlgBarAndPieChart
         resources.ApplyResources(Me.ucrSaveBar, "ucrSaveBar")
         Me.ucrSaveBar.Name = "ucrSaveBar"
         '
-        'ucrChkFlipCoordinates
-        '
-        Me.ucrChkFlipCoordinates.Checked = False
-        resources.ApplyResources(Me.ucrChkFlipCoordinates, "ucrChkFlipCoordinates")
-        Me.ucrChkFlipCoordinates.Name = "ucrChkFlipCoordinates"
-        '
         'ucrReceiverByFactor
         '
         Me.ucrReceiverByFactor.frmParent = Me
@@ -163,7 +156,6 @@ Partial Class dlgBarAndPieChart
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ucrSaveBar)
-        Me.Controls.Add(Me.ucrChkFlipCoordinates)
         Me.Controls.Add(Me.rdoBarChart)
         Me.Controls.Add(Me.rdoPieChart)
         Me.Controls.Add(Me.cmdOptions)
@@ -195,7 +187,6 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents cmdOptions As Button
     Friend WithEvents cmdPieChartOptions As Button
     Friend WithEvents ucrSaveBar As ucrSave
-    Friend WithEvents ucrChkFlipCoordinates As ucrCheck
     Friend WithEvents rdoBarChart As RadioButton
     Friend WithEvents rdoPieChart As RadioButton
     Friend WithEvents ucrPnlOptions As UcrPanel
