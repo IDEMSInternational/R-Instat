@@ -203,6 +203,14 @@ Public Class dlgBoxplot
         sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrSelectorBoxPlot, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
+
+        'this yncs the coordflip in sdgplots and the main dlg
+        If clsBaseOperator.clsParameters.Contains(clsBaseOperator.GetParameter("coord_flip")) Then
+            ucrChkHorizontalBoxplot.Checked = True
+        Else
+            ucrChkHorizontalBoxplot.Checked = False
+        End If
+
     End Sub
 
     Private Sub cmdBoxPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdBoxPlotOptions.Click
@@ -236,13 +244,6 @@ Public Class dlgBoxplot
                 ucrSecondFactorReceiver.Add(clsParam.strArgumentValue)
             End If
         Next
-
-        'this yncs the coordflip in sdgplots and the main dlg
-        If clsBaseOperator.GetParameter("coord_flip").strArgumentName = "coord_flip" Then
-            ucrChkHorizontalBoxplot.Checked = True
-        Else
-            ucrChkHorizontalBoxplot.Checked = False
-        End If
 
         'Question to be discussed: After running through the sdgLayerOptions, the clsCurrDataFrame parameters seem to have been cleared, such that in the multiple variable case, clsCurrDataFrame needs to be repopulated with "stack", "measure.vars" and "id.vars" parameters. Actually, even when repopulated, they are still not appearing in the script. ??
         'This resets the factor receiver and causes it to be cleared of the correct variable. We don't want this.
