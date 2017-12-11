@@ -757,7 +757,7 @@
     <value>10, 293</value>
   </data>
   <data name="ucrChkRange2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 20</value>
+    <value>172, 20</value>
   </data>
   <data name="ucrChkRange2.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -811,7 +811,7 @@
     <value>10, 264</value>
   </data>
   <data name="ucrChkRange.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 20</value>
+    <value>172, 20</value>
   </data>
   <data name="ucrChkRange.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
