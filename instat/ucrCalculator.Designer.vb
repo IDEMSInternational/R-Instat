@@ -204,6 +204,9 @@ Partial Class ucrCalculator
         Me.cmdAcos = New System.Windows.Forms.Button()
         Me.cmdCos = New System.Windows.Forms.Button()
         Me.cmdSqrt = New System.Windows.Forms.Button()
+        Me.cmdnth = New System.Windows.Forms.Button()
+        Me.cmdLast = New System.Windows.Forms.Button()
+        Me.cmdFirst = New System.Windows.Forms.Button()
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSaveResultInto = New instat.ucrInputComboBox()
         Me.ucrInputTryMessage = New instat.ucrInputTextBox()
@@ -620,6 +623,9 @@ Partial Class ucrCalculator
         '
         'grpSummary
         '
+        Me.grpSummary.Controls.Add(Me.cmdFirst)
+        Me.grpSummary.Controls.Add(Me.cmdLast)
+        Me.grpSummary.Controls.Add(Me.cmdnth)
         Me.grpSummary.Controls.Add(Me.cmdCor)
         Me.grpSummary.Controls.Add(Me.cmdCov)
         Me.grpSummary.Controls.Add(Me.cmdMad)
@@ -1367,6 +1373,24 @@ Partial Class ucrCalculator
         Me.cmdSqrt.Name = "cmdSqrt"
         Me.cmdSqrt.UseVisualStyleBackColor = True
         '
+        'cmdnth
+        '
+        resources.ApplyResources(Me.cmdnth, "cmdnth")
+        Me.cmdnth.Name = "cmdnth"
+        Me.cmdnth.UseVisualStyleBackColor = True
+        '
+        'cmdLast
+        '
+        resources.ApplyResources(Me.cmdLast, "cmdLast")
+        Me.cmdLast.Name = "cmdLast"
+        Me.cmdLast.UseVisualStyleBackColor = True
+        '
+        'cmdFirst
+        '
+        resources.ApplyResources(Me.cmdFirst, "cmdFirst")
+        Me.cmdFirst.Name = "cmdFirst"
+        Me.cmdFirst.UseVisualStyleBackColor = True
+        '
         'ucrInputCalOptions
         '
         Me.ucrInputCalOptions.AddQuotesIfUnrecognised = True
@@ -1409,9 +1433,9 @@ Partial Class ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.grpMaths)
-        Me.Controls.Add(Me.grpSummary)
         Me.Controls.Add(Me.grpProbabilty)
+        Me.Controls.Add(Me.grpSummary)
+        Me.Controls.Add(Me.grpMaths)
         Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.grpLogical)
         Me.Controls.Add(Me.grpStrings)
@@ -1611,4 +1635,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdAnyDup As Button
     Friend WithEvents cmdCor As Button
     Friend WithEvents cmdCov As Button
+    Friend WithEvents cmdFirst As Button
+    Friend WithEvents cmdLast As Button
+    Friend WithEvents cmdnth As Button
 End Class
