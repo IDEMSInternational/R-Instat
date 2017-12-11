@@ -110,12 +110,19 @@ Public Class dlgClimaticCheckDataTemperature
         ucrChkRange2.SetParameter(New RParameter("range2", clsRangeAnd2Operator, 1), bNewChangeParameterValue:=False)
         ucrChkRange2.SetText("Range(Element2)")
 
+        'Linking controls
         ucrChkRange.AddToLinkedControls(ucrNudRangeElement1Min, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
         ucrChkRange.AddToLinkedControls(ucrNudRangeElement1Max, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=50)
         ucrChkRange2.AddToLinkedControls(ucrNudRangeElement2Min, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrChkRange2.AddToLinkedControls(ucrNudRangeElement2Max, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=30)
-        ucrNudRangeElement2Min.SetLinkedDisplayControl(lblNudRangeElement1Max)
-        ucrNudRangeElement2Max.SetLinkedDisplayControl(lblRangeElement2to)
+        ucrNudRangeElement2Min.SetLinkedDisplayControl(lblNudRangeElement2Min)
+        ucrNudRangeElement2Max.SetLinkedDisplayControl(lblNudRangeElement2Max)
+        ucrNudRangeElement1Max.SetLinkedDisplayControl(lblNudRangeElement1Max)
+        ucrNudRangeElement1Min.SetLinkedDisplayControl(lblNudRangeElement1Min)
+        ucrNudJump.SetLinkedDisplayControl(lblNudJump)
+        ucrNudSame.SetLinkedDisplayControl(lblNudSame)
+        ucrNudDifference.SetLinkedDisplayControl(lblNudDiff)
+        ucrReceiverElement2.SetLinkedDisplayControl(lblElement2)
 
         ucrChkSame.SetParameter(New RParameter("same", clsSameGreaterOperator, 1), bNewChangeParameterValue:=False)
         ucrChkSame.SetText("Same")
@@ -134,11 +141,11 @@ Public Class dlgClimaticCheckDataTemperature
         'Range Option
         ucrNudRangeElement1Min.SetParameter(New RParameter("from", iNewPosition:=1, bNewIncludeArgumentName:=False))
         ucrNudRangeElement1Min.SetMinMax(-50, 65)
-        ucrNudRangeElement1Min.SetLinkedDisplayControl(lblNudRangeElement1Min)
+
 
         ucrNudRangeElement1Max.SetParameter(New RParameter("To", 1, bNewIncludeArgumentName:=False))
         ucrNudRangeElement1Max.SetMinMax(-50, 65)
-        ucrNudRangeElement1Max.SetLinkedDisplayControl(lblRangeElement1to)
+
 
         ucrNudRangeElement2Min.SetParameter(New RParameter("from", 1, bNewIncludeArgumentName:=False))
         ucrNudRangeElement2Min.SetMinMax(-50, 50)
@@ -148,12 +155,12 @@ Public Class dlgClimaticCheckDataTemperature
         'Same Option
         ucrNudSame.SetParameter(New RParameter("n", 1, bNewIncludeArgumentName:=False))
         ucrNudSame.SetMinMax(2, 366)
-        ucrNudSame.SetLinkedDisplayControl(lblNudSame)
+
 
         'Jump Option
         ucrNudJump.SetParameter(New RParameter("from", iNewPosition:=1, bNewIncludeArgumentName:=False))
         ucrNudJump.SetMinMax(1, 25)
-        ucrNudJump.SetLinkedDisplayControl(lblNudJump)
+
 
         'Difference Option
         ucrNudDifference.SetParameter(New RParameter("n", iNewPosition:=1, bNewIncludeArgumentName:=False))
@@ -163,8 +170,6 @@ Public Class dlgClimaticCheckDataTemperature
         'outliers Option
         ucrChkOutlier.AddToLinkedControls(ucrNudOutlier, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2.5)
         ttOutliers.SetToolTip(ucrChkOutlier, "Values that are further than this number of IQRs from the corresponding quartile.")
-        ucrNudDifference.SetLinkedDisplayControl(lblNudDiff)
-        ucrReceiverElement2.SetLinkedDisplayControl(lblElement2)
     End Sub
 
     Private Sub SetDefaults()
@@ -336,14 +341,6 @@ Public Class dlgClimaticCheckDataTemperature
 
     Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement1.ControlValueChanged
         FilterFunc()
-    End Sub
-
-    Private Sub lblNudRangeElement1Min_VisibleChanged(sender As Object, e As EventArgs) Handles lblNudRangeElement1Min.VisibleChanged
-        lblNudRangeElement1Min.Visible = lblRangeElement1to.Visible
-    End Sub
-
-    Private Sub lblNudRangeElement2Min_VisibleChanged(sender As Object, e As EventArgs) Handles lblNudRangeElement2Min.VisibleChanged
-        lblNudRangeElement2Min.Visible = lblRangeElement2to.Visible
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement1.ControlContentsChanged, ucrReceiverElement2.ControlContentsChanged, ucrNudSame.ControlContentsChanged, ucrNudRangeElement1Min.ControlContentsChanged, ucrNudRangeElement1Max.ControlContentsChanged, ucrNudRangeElement2Min.ControlContentsChanged, ucrNudRangeElement2Max.ControlContentsChanged, ucrNudJump.ControlContentsChanged, ucrNudRangeElement2Min.ControlContentsChanged, ucrNudRangeElement2Max.ControlContentsChanged, ucrNudDifference.ControlContentsChanged, ucrChkRange.ControlContentsChanged, ucrChkRange2.ControlContentsChanged, ucrChkJump.ControlContentsChanged, ucrChkDifference.ControlContentsChanged, ucrChkSame.ControlContentsChanged
