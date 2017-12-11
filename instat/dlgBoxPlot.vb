@@ -128,6 +128,7 @@ Public Class dlgBoxplot
 
         ucrSaveBoxplot.Reset()
         sdgPlots.Reset()
+        ucrVariablesAsFactorForBoxplot.SetMeAsReceiver()
         bResetSubdialog = True
         bResetBoxLayerSubdialog = True
         'rdoBoxplot.Checked = True
