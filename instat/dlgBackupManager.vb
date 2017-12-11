@@ -29,7 +29,6 @@ Public Class dlgBackupManager
         strSelectedDataFilePath = ""
         LoadFilesInfo()
         SetButtonStates(False)
-
         'add to the list of last loaded forms
         frmMain.clsRecentItems.addToMenu(Me)
     End Sub
