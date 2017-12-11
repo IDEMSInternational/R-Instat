@@ -128,7 +128,7 @@ Public Class dlgColumnStats
     End Sub
 
     Public Sub TestOKEnabled()
-        If ((ucrChkStoreResults.Checked OrElse ucrChkPrintOutput.Checked) AndAlso Not clsSummariesList.clsParameters.Count = 0) Then
+        If ((ucrChkStoreResults.Checked OrElse ucrChkPrintOutput.Checked) AndAlso Not ucrReceiverSelectedVariables.IsEmpty AndAlso Not clsSummariesList.clsParameters.Count = 0) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
