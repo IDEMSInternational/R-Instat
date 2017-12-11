@@ -29,8 +29,13 @@ Partial Class dlgBackupManager
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(278, 244)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgBackupManager"
-        Me.Text = "dlgBackupManager"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Tag = "Backup_Manager"
+        Me.Text = "Backup Manager"
         Me.ResumeLayout(False)
 
     End Sub
