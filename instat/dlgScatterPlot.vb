@@ -121,6 +121,7 @@ Public Class dlgScatterPlot
         ucrSelectorForScatter.Reset()
         ucrSelectorForScatter.SetGgplotFunction(clsBaseOperator)
         ucrSaveScatterPlot.Reset()
+        ucrVariablesAsFactorForScatter.SetMeAsReceiver()
         sdgPlots.Reset()
         bResetSubdialog = True
         bResetlayerSubdialog = True
