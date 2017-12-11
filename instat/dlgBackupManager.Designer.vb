@@ -24,10 +24,10 @@ Partial Class dlgBackupManager
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgBackupManager))
         Me.lblBackupHeader = New System.Windows.Forms.Label()
-        Me.ucrLstViewDataBackups = New System.Windows.Forms.ListView()
-        Me.ucrLstViewColName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ucrLstViewColDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ucrLstViewSize = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ctrLstViewDataBackups = New System.Windows.Forms.ListView()
+        Me.ctrLstViewColName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ctrLstViewColDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ctrLstViewSize = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.cmdClose = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdDelete = New System.Windows.Forms.Button()
@@ -43,23 +43,23 @@ Partial Class dlgBackupManager
         '
         'ucrLstViewDataBackups
         '
-        Me.ucrLstViewDataBackups.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ucrLstViewColName, Me.ucrLstViewColDate, Me.ucrLstViewSize})
-        resources.ApplyResources(Me.ucrLstViewDataBackups, "ucrLstViewDataBackups")
-        Me.ucrLstViewDataBackups.Name = "ucrLstViewDataBackups"
-        Me.ucrLstViewDataBackups.UseCompatibleStateImageBehavior = False
-        Me.ucrLstViewDataBackups.View = System.Windows.Forms.View.Details
+        Me.ctrLstViewDataBackups.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ctrLstViewColName, Me.ctrLstViewColDate, Me.ctrLstViewSize})
+        resources.ApplyResources(Me.ctrLstViewDataBackups, "ucrLstViewDataBackups")
+        Me.ctrLstViewDataBackups.Name = "ucrLstViewDataBackups"
+        Me.ctrLstViewDataBackups.UseCompatibleStateImageBehavior = False
+        Me.ctrLstViewDataBackups.View = System.Windows.Forms.View.Details
         '
         'ucrLstViewColName
         '
-        resources.ApplyResources(Me.ucrLstViewColName, "ucrLstViewColName")
+        resources.ApplyResources(Me.ctrLstViewColName, "ucrLstViewColName")
         '
         'ucrLstViewColDate
         '
-        resources.ApplyResources(Me.ucrLstViewColDate, "ucrLstViewColDate")
+        resources.ApplyResources(Me.ctrLstViewColDate, "ucrLstViewColDate")
         '
         'ucrLstViewSize
         '
-        resources.ApplyResources(Me.ucrLstViewSize, "ucrLstViewSize")
+        resources.ApplyResources(Me.ctrLstViewSize, "ucrLstViewSize")
         '
         'cmdClose
         '
@@ -103,7 +103,7 @@ Partial Class dlgBackupManager
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.cmdSave)
         Me.Controls.Add(Me.cmdClose)
-        Me.Controls.Add(Me.ucrLstViewDataBackups)
+        Me.Controls.Add(Me.ctrLstViewDataBackups)
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.lblBackupHeader)
         Me.Controls.Add(Me.cmdDelete)
@@ -119,13 +119,13 @@ Partial Class dlgBackupManager
     End Sub
     Friend WithEvents lblBackupMessage As Label
     Friend WithEvents lblBackupHeader As Label
-    Friend WithEvents ucrLstViewDataBackups As ListView
+    Friend WithEvents ctrLstViewDataBackups As ListView
     Friend WithEvents cmdClose As Button
     Friend WithEvents cmdHelp As Button
     Friend WithEvents cmdDelete As Button
     Friend WithEvents cmdOpen As Button
-    Friend WithEvents ucrLstViewColName As ColumnHeader
-    Friend WithEvents ucrLstViewColDate As ColumnHeader
-    Friend WithEvents ucrLstViewSize As ColumnHeader
+    Friend WithEvents ctrLstViewColName As ColumnHeader
+    Friend WithEvents ctrLstViewColDate As ColumnHeader
+    Friend WithEvents ctrLstViewSize As ColumnHeader
     Friend WithEvents cmdSave As Button
 End Class

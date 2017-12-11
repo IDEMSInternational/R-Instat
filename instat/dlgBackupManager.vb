@@ -22,21 +22,22 @@ Public Class dlgBackupManager
     Private strSelectedDataFilePath As String 'holds the selected file path
 
     Private Sub dlgBackupManager_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
         'Get the default Auto save Data Folder
         strAutoSaveDataFolderPath = frmMain.strAutoSaveDataFolderPath
         'set selected data file path to empty string
         strSelectedDataFilePath = ""
-        loadFilesInfo()
-        setButtonStates(False)
-        autoTranslate(Me)
+        LoadFilesInfo()
+        SetButtonStates(False)
+
         'add to the list of last loaded forms
         frmMain.clsRecentItems.addToMenu(Me)
     End Sub
 
     'loads the files info's into the listview
-    Private Sub loadFilesInfo()
+    Private Sub LoadFilesInfo()
         'clear any previous items
-        ucrLstViewDataBackups.Items.Clear()
+        ctrLstViewDataBackups.Items.Clear()
 
         'countercheck if the folder really exists then get all the file paths inside the folder
         If Directory.Exists(strAutoSaveDataFolderPath) Then
@@ -52,18 +53,18 @@ Public Class dlgBackupManager
                 autoSavedFileInfo = New FileInfo(filePath)
                 ' Create the listviewitem and initialise it with values for the 3 columns add it to the listview 
                 With autoSavedFileInfo
-                    ucrLstViewDataBackups.Items.Add(New ListViewItem(New String() { .Name, .LastWriteTime.ToString, getConvertedFileSize(.Length)}))
+                    ctrLstViewDataBackups.Items.Add(New ListViewItem(New String() { .Name, .LastWriteTime.ToString, GetConvertedFileSize(.Length)}))
                 End With
             Next
         End If
     End Sub
 
-    Private Sub ucrLstViewDataBackups_Click(sender As Object, e As EventArgs) Handles ucrLstViewDataBackups.Click
-        testOk()
+    Private Sub ctrLstViewDataBackups_ItemSelectionChanged(sender As Object, e As ListViewItemSelectionChangedEventArgs) Handles ctrLstViewDataBackups.ItemSelectionChanged
+        TestOk()
     End Sub
 
     Private Sub cmdOpen_Click(sender As Object, e As EventArgs) Handles cmdOpen.Click
-        If (Not testOk()) Then
+        If (Not TestOk()) Then
             MsgBox("Select the file to open")
             Return
         End If
@@ -72,9 +73,9 @@ Public Class dlgBackupManager
             Return
         End If
 
-        If (ucrLstViewDataBackups.SelectedIndices.Count = 1) Then
+        If (ctrLstViewDataBackups.SelectedIndices.Count = 1) Then
             'get the selected file path. To be used in opening the file name in form Main
-            strSelectedDataFilePath = strAutoSavedDataFilePaths(ucrLstViewDataBackups.SelectedIndices(0))
+            strSelectedDataFilePath = strAutoSavedDataFilePaths(ctrLstViewDataBackups.SelectedIndices(0))
             If strSelectedDataFilePath <> "" Then
                 'pass the selected file to the sub and run the script generated
                 frmMain.clsRLink.LoadInstatDataObjectFromFile(strSelectedDataFilePath, strComment:="Loading auto recovered data file")
@@ -89,24 +90,24 @@ Public Class dlgBackupManager
             'don't allow opening of more than 1 file at a time. NOTE in future this can be changed
             MsgBox("You can only open one data file at a time")
         End If
-        setButtonStates(False)
+        SetButtonStates(False)
         Close()
     End Sub
 
     Private Sub cmdSave_Click(sender As Object, e As EventArgs) Handles cmdSave.Click
-        If (Not testOk()) Then
+        If (Not TestOk()) Then
             MsgBox("Select the file to save")
             Return
         End If
 
         'if its only one file that got selected then use the SaveFileDialog
-        If (ucrLstViewDataBackups.SelectedIndices.Count = 1) Then
+        If (ctrLstViewDataBackups.SelectedIndices.Count = 1) Then
             Using dlgSave As New SaveFileDialog
                 dlgSave.Title = "Save Data File"
                 dlgSave.Filter = "RDS Data file (*.RDS)|*.RDS"
                 If dlgSave.ShowDialog() = DialogResult.OK Then
                     'save the selected file
-                    saveFile(strAutoSavedDataFilePaths(ucrLstViewDataBackups.SelectedIndices(0)), dlgSave.FileName)
+                    SaveFile(strAutoSavedDataFilePaths(ctrLstViewDataBackups.SelectedIndices(0)), dlgSave.FileName)
                     'display success message
                     MsgBox("Data file successfully saved to " & dlgSave.FileName)
                 End If
@@ -119,7 +120,7 @@ Public Class dlgBackupManager
     End Sub
 
     Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
-        If (Not testOk()) Then
+        If (Not TestOk()) Then
             MsgBox("Select the file to delete")
             Return
         End If
@@ -129,20 +130,20 @@ Public Class dlgBackupManager
         End If
 
         'loop thro deleting the selected files
-        For i As Integer = 0 To ucrLstViewDataBackups.SelectedIndices.Count - 1
+        For i As Integer = 0 To ctrLstViewDataBackups.SelectedIndices.Count - 1
             'delete the file
-            File.Delete(strAutoSavedDataFilePaths(ucrLstViewDataBackups.SelectedIndices(i)))
+            File.Delete(strAutoSavedDataFilePaths(ctrLstViewDataBackups.SelectedIndices(i)))
         Next
 
         'then reload file info's
-        loadFilesInfo()
+        LoadFilesInfo()
         'set the button states accordingly
-        testOk()
+        TestOk()
 
     End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
-        'the help Id is not yet known
+        'the help Id for this dialog is not yet known. This is temporary
         Dim iHelpTopicID As Integer = 0
         If iHelpTopicID > 0 Then
             Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpTopicID.ToString())
@@ -157,25 +158,25 @@ Public Class dlgBackupManager
     End Sub
 
     'function to return bytes as KB,MB,GB,TB in a 2 dp string format
-    Public Function getConvertedFileSize(fileSize As ULong) As String
+    Public Function GetConvertedFileSize(lFileSize As ULong) As String
         Try
             'to hold the division result as a double for formatting
             Dim doubleBytes As Double
-            Select Case fileSize
+            Select Case lFileSize
                 Case Is >= 1099511627776
-                    doubleBytes = fileSize / 1099511627776 'TB
+                    doubleBytes = lFileSize / 1099511627776 'TB
                     Return FormatNumber(doubleBytes, 2) & " TB"
                 Case 1073741824 To 1099511627775
-                    doubleBytes = fileSize / 1073741824 'GB
+                    doubleBytes = lFileSize / 1073741824 'GB
                     Return FormatNumber(doubleBytes, 2) & " GB"
                 Case 1048576 To 1073741823
-                    doubleBytes = fileSize / 1048576 'MB
+                    doubleBytes = lFileSize / 1048576 'MB
                     Return FormatNumber(doubleBytes, 2) & " MB"
                 Case 1024 To 1048575
-                    doubleBytes = fileSize / 1024 'KB
+                    doubleBytes = lFileSize / 1024 'KB
                     Return FormatNumber(doubleBytes, 2) & " KB"
                 Case 0 To 1023
-                    doubleBytes = fileSize ' bytes
+                    doubleBytes = lFileSize ' bytes
                     Return FormatNumber(doubleBytes, 2) & " bytes"
                 Case Else
                     Return ""
@@ -186,29 +187,30 @@ Public Class dlgBackupManager
     End Function
 
     'serves 2 purposes. checks whether the open,save,delete operation are allowed and also sets the controls states
-    Private Function testOk() As Boolean
-        If (ucrLstViewDataBackups.Items.Count > 0 AndAlso ucrLstViewDataBackups.SelectedIndices.Count > 0) Then
-            setButtonStates(True)
+    Private Function TestOk() As Boolean
+        If (ctrLstViewDataBackups.Items.Count > 0 AndAlso ctrLstViewDataBackups.SelectedIndices.Count > 0) Then
+            SetButtonStates(True)
             Return True
         Else
-            setButtonStates(False)
+            SetButtonStates(False)
             Return False
         End If
     End Function
 
-    Private Sub setButtonStates(state As Boolean)
-        cmdSave.Enabled = state
-        cmdOpen.Enabled = state
-        cmdDelete.Enabled = state
+    Private Sub SetButtonStates(bState As Boolean)
+        cmdSave.Enabled = bState
+        cmdOpen.Enabled = bState
+        cmdDelete.Enabled = bState
     End Sub
 
     'copies the file to the user destination location
-    Private Sub saveFile(sourceFileName As String, destFilename As String)
+    Private Sub SaveFile(strSourceFileName As String, strDestFilename As String)
         Try
-            File.Copy(sourceFileName, destFilename, True)
+            File.Copy(strSourceFileName, strDestFilename, True)
         Catch ex As Exception
             MsgBox("Could not copy and/or delete data file." & Environment.NewLine & ex.Message, "Error copying/deleting file")
         End Try
     End Sub
+
 
 End Class
