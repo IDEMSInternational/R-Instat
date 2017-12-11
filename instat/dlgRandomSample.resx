@@ -202,7 +202,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrSelectorRandomSamples.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 40</value>
+    <value>153, 40</value>
   </data>
   <data name="ucrSelectorRandomSamples.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
