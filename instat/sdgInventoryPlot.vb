@@ -29,23 +29,28 @@ Public Class sdgInventoryPlot
 
     Private Sub InitialiseControls()
 
-        ucrColourMissing.SetParameter(New RParameter("var1"))
-        ucrColourNonMissing.SetParameter(New RParameter("var1"))
+        Dim lstControls As New List(Of Control)
+        lstControls.AddRange({grpRainyDays, lblRainLabel})
+
+        ucrColourMissing.SetParameter(New RParameter("var1", 0))
+        ucrColourNonMissing.SetParameter(New RParameter("var2", 1))
 
         ucrChkDisplayRainDays.SetParameter(New RParameter("display_rain_days", 13), bNewChangeParameterValue:=True)
         ucrChkDisplayRainDays.SetText("Display Rain Days")
         ucrChkDisplayRainDays.SetRDefault("FALSE")
-
+        ucrChkDisplayRainDays.AddParameterPresentCondition(True, "display_rain_days", True)
         ucrChkDisplayRainDays.AddToLinkedControls(ucrInputRain, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputRain.SetLinkedDisplayControl(lblRainLabel)
-        ucrInputRain.SetParameter(New RParameter("rainlabel"))
-        ucrInputRain.SetLinkedDisplayControl(grpRainyDays)
         ucrChkDisplayRainDays.AddToLinkedControls(ucrInputDry, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrInputRain.SetParameter(New RParameter("rain"))
+        ucrInputRain.SetLinkedDisplayControl(lstControls)
+
+        ucrInputDry.SetParameter(New RParameter("dry"))
         ucrInputDry.SetLinkedDisplayControl(lblDryLabel)
 
         ucrChkDisplayRainDays.AddToLinkedControls(ucrNudThresholdValue, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.85)
-        ucrNudThresholdValue.SetLinkedDisplayControl(lblRainThresholdValue)
         ucrNudThresholdValue.SetParameter(New RParameter("threashold", 1))
+        ucrNudThresholdValue.SetLinkedDisplayControl(lblRainThresholdValue)
 
         ucrChkDisplayRainDays.AddToLinkedControls(ucrRainColour, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrRainColour.SetLinkedDisplayControl(lblRainColour)

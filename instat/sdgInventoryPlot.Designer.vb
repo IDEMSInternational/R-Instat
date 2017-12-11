@@ -22,76 +22,36 @@ Partial Class sdgInventoryPlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrChkDisplayRainDays = New instat.ucrCheck()
-        Me.ucrButtonsInventoryplot = New instat.ucrButtonsSubdialogue()
-        Me.ucrColourMissing = New instat.ucrColors()
-        Me.ucrColourNonMissing = New instat.ucrColors()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgInventoryPlot))
         Me.lblMissing = New System.Windows.Forms.Label()
         Me.lblNonMissing = New System.Windows.Forms.Label()
         Me.grpRainyDays = New System.Windows.Forms.GroupBox()
-        Me.ucrInputRain = New instat.ucrInputTextBox()
         Me.lblDryColour = New System.Windows.Forms.Label()
         Me.lblRainLabel = New System.Windows.Forms.Label()
         Me.lblRainColour = New System.Windows.Forms.Label()
         Me.lblDryLabel = New System.Windows.Forms.Label()
-        Me.ucrDryColour = New instat.ucrColors()
         Me.lblRainThresholdValue = New System.Windows.Forms.Label()
+        Me.ucrInputRain = New instat.ucrInputTextBox()
+        Me.ucrDryColour = New instat.ucrColors()
         Me.ucrRainColour = New instat.ucrColors()
         Me.ucrInputDry = New instat.ucrInputTextBox()
         Me.ucrNudThresholdValue = New instat.ucrNud()
+        Me.ucrColourNonMissing = New instat.ucrColors()
+        Me.ucrColourMissing = New instat.ucrColors()
+        Me.ucrChkDisplayRainDays = New instat.ucrCheck()
+        Me.ucrButtonsInventoryplot = New instat.ucrButtonsSubdialogue()
         Me.grpRainyDays.SuspendLayout()
         Me.SuspendLayout()
         '
-        'ucrChkDisplayRainDays
-        '
-        Me.ucrChkDisplayRainDays.Checked = False
-        Me.ucrChkDisplayRainDays.Location = New System.Drawing.Point(12, 102)
-        Me.ucrChkDisplayRainDays.Name = "ucrChkDisplayRainDays"
-        Me.ucrChkDisplayRainDays.Size = New System.Drawing.Size(151, 20)
-        Me.ucrChkDisplayRainDays.TabIndex = 19
-        '
-        'ucrButtonsInventoryplot
-        '
-        Me.ucrButtonsInventoryplot.Location = New System.Drawing.Point(67, 339)
-        Me.ucrButtonsInventoryplot.Name = "ucrButtonsInventoryplot"
-        Me.ucrButtonsInventoryplot.Size = New System.Drawing.Size(142, 30)
-        Me.ucrButtonsInventoryplot.TabIndex = 0
-        '
-        'ucrColourMissing
-        '
-        Me.ucrColourMissing.AddQuotesIfUnrecognised = True
-        Me.ucrColourMissing.IsReadOnly = False
-        Me.ucrColourMissing.Location = New System.Drawing.Point(120, 21)
-        Me.ucrColourMissing.Name = "ucrColourMissing"
-        Me.ucrColourMissing.Size = New System.Drawing.Size(89, 21)
-        Me.ucrColourMissing.TabIndex = 32
-        '
-        'ucrColourNonMissing
-        '
-        Me.ucrColourNonMissing.AddQuotesIfUnrecognised = True
-        Me.ucrColourNonMissing.IsReadOnly = False
-        Me.ucrColourNonMissing.Location = New System.Drawing.Point(120, 56)
-        Me.ucrColourNonMissing.Name = "ucrColourNonMissing"
-        Me.ucrColourNonMissing.Size = New System.Drawing.Size(89, 21)
-        Me.ucrColourNonMissing.TabIndex = 31
-        '
         'lblMissing
         '
-        Me.lblMissing.AutoSize = True
-        Me.lblMissing.Location = New System.Drawing.Point(13, 21)
+        resources.ApplyResources(Me.lblMissing, "lblMissing")
         Me.lblMissing.Name = "lblMissing"
-        Me.lblMissing.Size = New System.Drawing.Size(75, 13)
-        Me.lblMissing.TabIndex = 34
-        Me.lblMissing.Text = "Missing Colour"
         '
         'lblNonMissing
         '
-        Me.lblNonMissing.AutoSize = True
-        Me.lblNonMissing.Location = New System.Drawing.Point(13, 56)
+        resources.ApplyResources(Me.lblNonMissing, "lblNonMissing")
         Me.lblNonMissing.Name = "lblNonMissing"
-        Me.lblNonMissing.Size = New System.Drawing.Size(98, 13)
-        Me.lblNonMissing.TabIndex = 33
-        Me.lblNonMissing.Text = "Non Missing Colour"
         '
         'grpRainyDays
         '
@@ -105,112 +65,104 @@ Partial Class sdgInventoryPlot
         Me.grpRainyDays.Controls.Add(Me.ucrRainColour)
         Me.grpRainyDays.Controls.Add(Me.ucrInputDry)
         Me.grpRainyDays.Controls.Add(Me.ucrNudThresholdValue)
-        Me.grpRainyDays.Location = New System.Drawing.Point(12, 128)
+        resources.ApplyResources(Me.grpRainyDays, "grpRainyDays")
         Me.grpRainyDays.Name = "grpRainyDays"
-        Me.grpRainyDays.Size = New System.Drawing.Size(261, 203)
-        Me.grpRainyDays.TabIndex = 35
         Me.grpRainyDays.TabStop = False
+        '
+        'lblDryColour
+        '
+        resources.ApplyResources(Me.lblDryColour, "lblDryColour")
+        Me.lblDryColour.Name = "lblDryColour"
+        '
+        'lblRainLabel
+        '
+        resources.ApplyResources(Me.lblRainLabel, "lblRainLabel")
+        Me.lblRainLabel.Name = "lblRainLabel"
+        '
+        'lblRainColour
+        '
+        resources.ApplyResources(Me.lblRainColour, "lblRainColour")
+        Me.lblRainColour.Name = "lblRainColour"
+        '
+        'lblDryLabel
+        '
+        resources.ApplyResources(Me.lblDryLabel, "lblDryLabel")
+        Me.lblDryLabel.Name = "lblDryLabel"
+        '
+        'lblRainThresholdValue
+        '
+        resources.ApplyResources(Me.lblRainThresholdValue, "lblRainThresholdValue")
+        Me.lblRainThresholdValue.Name = "lblRainThresholdValue"
         '
         'ucrInputRain
         '
         Me.ucrInputRain.AddQuotesIfUnrecognised = True
         Me.ucrInputRain.IsMultiline = False
         Me.ucrInputRain.IsReadOnly = False
-        Me.ucrInputRain.Location = New System.Drawing.Point(104, 19)
+        resources.ApplyResources(Me.ucrInputRain, "ucrInputRain")
         Me.ucrInputRain.Name = "ucrInputRain"
-        Me.ucrInputRain.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputRain.TabIndex = 38
-        '
-        'lblDryColour
-        '
-        Me.lblDryColour.AutoSize = True
-        Me.lblDryColour.Location = New System.Drawing.Point(18, 153)
-        Me.lblDryColour.Name = "lblDryColour"
-        Me.lblDryColour.Size = New System.Drawing.Size(56, 13)
-        Me.lblDryColour.TabIndex = 43
-        Me.lblDryColour.Text = "Dry Colour"
-        '
-        'lblRainLabel
-        '
-        Me.lblRainLabel.AutoSize = True
-        Me.lblRainLabel.Location = New System.Drawing.Point(18, 19)
-        Me.lblRainLabel.Name = "lblRainLabel"
-        Me.lblRainLabel.Size = New System.Drawing.Size(58, 13)
-        Me.lblRainLabel.TabIndex = 35
-        Me.lblRainLabel.Text = "Rain Label"
-        '
-        'lblRainColour
-        '
-        Me.lblRainColour.AutoSize = True
-        Me.lblRainColour.Location = New System.Drawing.Point(18, 118)
-        Me.lblRainColour.Name = "lblRainColour"
-        Me.lblRainColour.Size = New System.Drawing.Size(62, 13)
-        Me.lblRainColour.TabIndex = 44
-        Me.lblRainColour.Text = "Rain Colour"
-        '
-        'lblDryLabel
-        '
-        Me.lblDryLabel.AutoSize = True
-        Me.lblDryLabel.Location = New System.Drawing.Point(18, 44)
-        Me.lblDryLabel.Name = "lblDryLabel"
-        Me.lblDryLabel.Size = New System.Drawing.Size(52, 13)
-        Me.lblDryLabel.TabIndex = 36
-        Me.lblDryLabel.Text = "Dry Label"
         '
         'ucrDryColour
         '
         Me.ucrDryColour.AddQuotesIfUnrecognised = True
         Me.ucrDryColour.IsReadOnly = False
-        Me.ucrDryColour.Location = New System.Drawing.Point(104, 153)
+        resources.ApplyResources(Me.ucrDryColour, "ucrDryColour")
         Me.ucrDryColour.Name = "ucrDryColour"
-        Me.ucrDryColour.Size = New System.Drawing.Size(89, 21)
-        Me.ucrDryColour.TabIndex = 41
-        '
-        'lblRainThresholdValue
-        '
-        Me.lblRainThresholdValue.AutoSize = True
-        Me.lblRainThresholdValue.Location = New System.Drawing.Point(18, 84)
-        Me.lblRainThresholdValue.Name = "lblRainThresholdValue"
-        Me.lblRainThresholdValue.Size = New System.Drawing.Size(109, 13)
-        Me.lblRainThresholdValue.TabIndex = 37
-        Me.lblRainThresholdValue.Text = "Rain Threshold Value"
         '
         'ucrRainColour
         '
         Me.ucrRainColour.AddQuotesIfUnrecognised = True
         Me.ucrRainColour.IsReadOnly = False
-        Me.ucrRainColour.Location = New System.Drawing.Point(104, 110)
+        resources.ApplyResources(Me.ucrRainColour, "ucrRainColour")
         Me.ucrRainColour.Name = "ucrRainColour"
-        Me.ucrRainColour.Size = New System.Drawing.Size(89, 21)
-        Me.ucrRainColour.TabIndex = 42
         '
         'ucrInputDry
         '
         Me.ucrInputDry.AddQuotesIfUnrecognised = True
         Me.ucrInputDry.IsMultiline = False
         Me.ucrInputDry.IsReadOnly = False
-        Me.ucrInputDry.Location = New System.Drawing.Point(104, 44)
+        resources.ApplyResources(Me.ucrInputDry, "ucrInputDry")
         Me.ucrInputDry.Name = "ucrInputDry"
-        Me.ucrInputDry.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputDry.TabIndex = 39
         '
         'ucrNudThresholdValue
         '
         Me.ucrNudThresholdValue.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudThresholdValue.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudThresholdValue.Location = New System.Drawing.Point(143, 84)
+        resources.ApplyResources(Me.ucrNudThresholdValue, "ucrNudThresholdValue")
         Me.ucrNudThresholdValue.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudThresholdValue.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudThresholdValue.Name = "ucrNudThresholdValue"
-        Me.ucrNudThresholdValue.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudThresholdValue.TabIndex = 40
         Me.ucrNudThresholdValue.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrColourNonMissing
+        '
+        Me.ucrColourNonMissing.AddQuotesIfUnrecognised = True
+        Me.ucrColourNonMissing.IsReadOnly = False
+        resources.ApplyResources(Me.ucrColourNonMissing, "ucrColourNonMissing")
+        Me.ucrColourNonMissing.Name = "ucrColourNonMissing"
+        '
+        'ucrColourMissing
+        '
+        Me.ucrColourMissing.AddQuotesIfUnrecognised = True
+        Me.ucrColourMissing.IsReadOnly = False
+        resources.ApplyResources(Me.ucrColourMissing, "ucrColourMissing")
+        Me.ucrColourMissing.Name = "ucrColourMissing"
+        '
+        'ucrChkDisplayRainDays
+        '
+        Me.ucrChkDisplayRainDays.Checked = False
+        resources.ApplyResources(Me.ucrChkDisplayRainDays, "ucrChkDisplayRainDays")
+        Me.ucrChkDisplayRainDays.Name = "ucrChkDisplayRainDays"
+        '
+        'ucrButtonsInventoryplot
+        '
+        resources.ApplyResources(Me.ucrButtonsInventoryplot, "ucrButtonsInventoryplot")
+        Me.ucrButtonsInventoryplot.Name = "ucrButtonsInventoryplot"
         '
         'sdgInventoryPlot
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(301, 381)
         Me.Controls.Add(Me.grpRainyDays)
         Me.Controls.Add(Me.lblNonMissing)
         Me.Controls.Add(Me.lblMissing)
@@ -222,8 +174,6 @@ Partial Class sdgInventoryPlot
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgInventoryPlot"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Inventory Plot"
         Me.grpRainyDays.ResumeLayout(False)
         Me.grpRainyDays.PerformLayout()
         Me.ResumeLayout(False)
