@@ -126,6 +126,7 @@ Public Class dlgDotPlot
         ucrDotPlotSelector.Reset()
         ucrDotPlotSelector.SetGgplotFunction(clsBaseOperator)
         ucrSaveDotPlot.Reset()
+        ucrVariablesAsFactorDotPlot.SetMeAsReceiver()
         bResetSubdialog = True
         bResetDotLayerSubdialog = True
         'I am not sure we need this
