@@ -14,9 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
-Imports RDotNet
 
 Public Class dlgNewDataFrame
     Private clsOverallFunction, clsMatrixFunction As New RFunction
@@ -26,14 +24,13 @@ Public Class dlgNewDataFrame
     Private Sub dlgNewDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
-            bFirstLoad = False
-        End If
-        If bReset Then
             SetDefaults()
+            bFirstLoad = False
         End If
         SetRCodeforControls(bReset)
         bReset = False
         autoTranslate(Me)
+        'ucrNewDFName.SetLabelText("New Data Frame Name:")
     End Sub
 
     Private Sub InitialiseDialog()
@@ -54,15 +51,9 @@ Public Class dlgNewDataFrame
         ucrNewDFName.SetPrefix("data")
     End Sub
 
-    ' updating controls doesn't update the function
-    ' Sheet name is not on the dialog.
-
-    Private Sub ReopenDialog()
-    End Sub
-
     Private Sub SetDefaults()
-        Dim clsMatrixDefaultFunction As New RFunction
         clsOverallFunction = New RFunction
+        clsMatrixFunction = New RFunction
 
         ucrNewDFName.Reset()
 
@@ -70,14 +61,13 @@ Public Class dlgNewDataFrame
         clsOverallFunction.SetRCommand("data.frame")
 
         'matrix(nrow = 10, ncol = 2, Data = NA)
-        clsMatrixDefaultFunction.SetRCommand("matrix")
-        clsMatrixDefaultFunction.AddParameter("data", "NA")
-        clsMatrixDefaultFunction.AddParameter("ncol", 2)
-        clsMatrixDefaultFunction.AddParameter("nrow", 10)
+        clsMatrixFunction.SetRCommand("matrix")
+        clsMatrixFunction.AddParameter("data", "NA")
+        clsMatrixFunction.AddParameter("ncol", 2)
+        clsMatrixFunction.AddParameter("nrow", 10)
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
-        clsMatrixFunction = clsMatrixDefaultFunction.Clone()
         clsOverallFunction.AddParameter("data", clsRFunctionParameter:=clsMatrixFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
     End Sub
 
     Private Sub TestOKEnabled()
