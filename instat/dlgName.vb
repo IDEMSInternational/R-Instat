@@ -32,14 +32,9 @@ Public Class dlgName
             bFirstLoad = False
         End If
 
-        'always reset the selector to reflect any column name change. 
-        'Reset the ucrInputs too because their inputs are also determined by ucrSelectVariables selection
-        ucrSelectVariables.Reset()
+        'Reset the ucrInputs to change their bUserTyped = True so that their inputs can be changed by ucrReceiverName_ControlValueChanged()
         ucrInputNewName.Reset()
         ucrInputVariableLabel.Reset()
-
-        ucrInputNewName.SetName("")
-        ucrInputVariableLabel.SetName("")
 
         SetRCodeForControls(bReset)
         bReset = False
@@ -87,10 +82,10 @@ Public Class dlgName
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrReceiverName.IsEmpty() AndAlso ucrInputNewName.IsEmpty() Then
-            ucrBase.OKEnabled(False)
-        Else
+        If Not ucrReceiverName.IsEmpty() AndAlso Not ucrInputNewName.IsEmpty() Then
             ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
@@ -120,8 +115,8 @@ Public Class dlgName
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrReceiverName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverName.ControlValueChanged
-        'if the receiver is not emppty
+    Private Sub ucrReceiverName_ControlValueChanged() Handles ucrReceiverName.ControlValueChanged
+        'if the receiver is not empty
         If Not ucrReceiverName.IsEmpty Then
             'if the user has not typed anything then change the ucrInputNewName contents
             If Not ucrInputNewName.bUserTyped Then
@@ -148,7 +143,13 @@ Public Class dlgName
 
             End If
 
+        Else
+            'if the receiver is empty. These 2 controls should be empty
+            ucrInputNewName.SetName("")
+            ucrInputVariableLabel.SetName("")
         End If
 
     End Sub
+
+
 End Class
