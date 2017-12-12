@@ -179,17 +179,6 @@ Public Class RLink
     End Function
 
     Public Sub LoadInstatDataObjectFromFile(strFile As String, Optional bKeepExisting As Boolean = False, Optional strComment As String = "")
-        ' Dim clsReadRDS As New RFunction
-        ' Dim strScript As String = ""
-        ' Dim strTemp As String = ""
-
-        ' clsReadRDS.SetRCommand("readRDS")
-        ' clsReadRDS.AddParameter("file", Chr(34) & strFile.Replace("\", "/") & Chr(34))
-        ' clsReadRDS.SetAssignTo(strInstatDataObject)
-        ' strTemp = clsReadRDS.ToScript(strScript)
-        ' RunScript(strScript, strComment:=strComment)
-        ' bInstatObjectExists = True
-
         Dim clsImportRDS As New RFunction
         Dim clsReadRDS As New RFunction
         Dim strScript As String = ""
@@ -200,9 +189,9 @@ Public Class RLink
         clsReadRDS.SetAssignTo("new_RDS")
 
         clsImportRDS.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_RDS")
-        clsImportRDS.AddParameter("data_RDS", clsRFunctionParameter:=clsReadRDS)
+        clsImportRDS.AddParameter("data_RDS", clsRFunctionParameter:=clsReadRDS, iPosition:=0)
         'This RFunction takes booleans in capitals hence ToUpper
-        clsImportRDS.AddParameter("keep_existing", bKeepExisting.ToString.ToUpper)
+        clsImportRDS.AddParameter("keep_existing", bKeepExisting.ToString.ToUpper, iPosition:=1)
 
         strTemp = clsImportRDS.ToScript(strScript)
         RunScript(strScript & strTemp, strComment:=strComment)

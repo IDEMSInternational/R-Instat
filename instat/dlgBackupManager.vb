@@ -60,6 +60,11 @@ Public Class dlgBackupManager
 
     Private Sub ctrLstViewDataBackups_ItemSelectionChanged(sender As Object, e As ListViewItemSelectionChangedEventArgs) Handles ctrLstViewDataBackups.ItemSelectionChanged
         TestOk()
+        If ctrLstViewDataBackups.SelectedIndices.Count > 1 Then
+            'this is meant to restrict a user from attempting to open or save more than 1 file
+            cmdOpen.Enabled = False
+            cmdSave.Enabled = False
+        End If
     End Sub
 
     Private Sub cmdOpen_Click(sender As Object, e As EventArgs) Handles cmdOpen.Click
@@ -72,17 +77,13 @@ Public Class dlgBackupManager
             Return
         End If
 
-        If (ctrLstViewDataBackups.SelectedIndices.Count = 1) Then
-            'get the selected file path. To be used in opening the file name in form Main
-            strSelectedDataFilePath = strAutoSavedDataFilePaths(ctrLstViewDataBackups.SelectedIndices(0))
-            If strSelectedDataFilePath <> "" Then
-                'pass the selected file to the sub which will load the file to the instant object
-                frmMain.clsRLink.LoadInstatDataObjectFromFile(strSelectedDataFilePath, strComment:="Loading auto recovered data file")
-            End If
-        Else
-            'don't allow opening of more than 1 file at a time. NOTE in future this can be changed
-            MsgBox("You can only open one data file at a time")
+        'get the selected file path. To be used in opening the file name in form Main
+        strSelectedDataFilePath = strAutoSavedDataFilePaths(ctrLstViewDataBackups.SelectedIndices(0))
+        If strSelectedDataFilePath <> "" Then
+            'pass the selected file to the sub which will load the file to the instant object
+            frmMain.clsRLink.LoadInstatDataObjectFromFile(strSelectedDataFilePath, strComment:="Loading auto recovered data file")
         End If
+
         SetButtonStates(False)
         Close()
     End Sub
@@ -93,23 +94,16 @@ Public Class dlgBackupManager
             Return
         End If
 
-        'if its only one file that got selected then use the SaveFileDialog
-        If (ctrLstViewDataBackups.SelectedIndices.Count = 1) Then
-            Using dlgSave As New SaveFileDialog
-                dlgSave.Title = "Save Data File"
-                dlgSave.Filter = "RDS Data file (*.RDS)|*.RDS"
-                If dlgSave.ShowDialog() = DialogResult.OK Then
-                    'save the selected file
-                    SaveFile(strAutoSavedDataFilePaths(ctrLstViewDataBackups.SelectedIndices(0)), dlgSave.FileName)
-                    'display success message
-                    MsgBox("Data file successfully saved to " & dlgSave.FileName)
-                End If
-            End Using
-        Else
-            'don't allow saving of more than 1 file at a time
-            'NOTE in future this can be changed
-            MsgBox("You can only save one data file at a time")
-        End If
+        Using dlgSave As New SaveFileDialog
+            dlgSave.Title = "Save Data File"
+            dlgSave.Filter = "RDS Data file (*.RDS)|*.RDS"
+            If dlgSave.ShowDialog() = DialogResult.OK Then
+                'save the selected file
+                SaveFile(strAutoSavedDataFilePaths(ctrLstViewDataBackups.SelectedIndices(0)), dlgSave.FileName)
+                'display success message
+                MsgBox("Data file successfully saved to " & dlgSave.FileName)
+            End If
+        End Using
     End Sub
 
     Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
@@ -132,7 +126,6 @@ Public Class dlgBackupManager
         LoadFilesInfo()
         'set the button states accordingly
         TestOk()
-
     End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
