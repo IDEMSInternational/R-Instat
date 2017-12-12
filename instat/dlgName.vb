@@ -131,8 +131,8 @@ Public Class dlgName
                 Dim expItems As SymbolicExpression
 
                 colmnLabelsRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_labels")
-                colmnLabelsRFunction.AddParameter("data_name", Chr(34) & ucrSelectVariables.strCurrentDataFrame & Chr(34))
-                colmnLabelsRFunction.AddParameter("columns", ucrReceiverName.GetVariableNames(bWithQuotes:=True))
+                colmnLabelsRFunction.AddParameter("data_name", Chr(34) & ucrSelectVariables.strCurrentDataFrame & Chr(34), iPosition:=0)
+                colmnLabelsRFunction.AddParameter("columns", ucrReceiverName.GetVariableNames(bWithQuotes:=True), iPosition:=1)
 
                 expItems = frmMain.clsRLink.RunInternalScriptGetValue(colmnLabelsRFunction.ToScript(), bSilent:=True)
 
