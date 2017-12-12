@@ -22,6 +22,7 @@ Public Class dlgNewDataFrame
     Private bReset As Boolean = True
 
     Private Sub dlgNewDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -29,8 +30,7 @@ Public Class dlgNewDataFrame
         End If
         SetRCodeforControls(bReset)
         bReset = False
-        autoTranslate(Me)
-        'ucrNewDFName.SetLabelText("New Data Frame Name:")
+        ucrNewDFName.SetLabelText("New Data Frame Name:")
     End Sub
 
     Private Sub InitialiseDialog()
