@@ -60,11 +60,6 @@ Public Class dlgBackupManager
 
     Private Sub ctrLstViewDataBackups_ItemSelectionChanged(sender As Object, e As ListViewItemSelectionChangedEventArgs) Handles ctrLstViewDataBackups.ItemSelectionChanged
         TestOk()
-        If ctrLstViewDataBackups.SelectedIndices.Count > 1 Then
-            'this is meant to restrict a user from attempting to open or save more than 1 file
-            cmdOpen.Enabled = False
-            cmdSave.Enabled = False
-        End If
     End Sub
 
     Private Sub cmdOpen_Click(sender As Object, e As EventArgs) Handles cmdOpen.Click
@@ -175,18 +170,26 @@ Public Class dlgBackupManager
     'serves 2 purposes. checks whether the open,save,delete operation are allowed and also sets the controls states
     Private Function TestOk() As Boolean
         If (ctrLstViewDataBackups.Items.Count > 0 AndAlso ctrLstViewDataBackups.SelectedIndices.Count > 0) Then
-            SetButtonStates(True)
+            SetButtonStates(True, iSelectedIndices:=ctrLstViewDataBackups.SelectedIndices.Count)
             Return True
         Else
-            SetButtonStates(False)
+            SetButtonStates(False, iSelectedIndices:=ctrLstViewDataBackups.SelectedIndices.Count)
             Return False
         End If
     End Function
 
-    Private Sub SetButtonStates(bState As Boolean)
-        cmdSave.Enabled = bState
-        cmdOpen.Enabled = bState
-        cmdDelete.Enabled = bState
+    Private Sub SetButtonStates(bState As Boolean, Optional iSelectedIndices As Integer = 0)
+        'this is meant to restrict a user from attempting to open or save more than 1 file. Delete is allowed
+        If bState AndAlso iSelectedIndices > 1 Then
+            cmdOpen.Enabled = False
+            cmdSave.Enabled = False
+            cmdDelete.Enabled = bState
+        Else
+            cmdOpen.Enabled = bState
+            cmdSave.Enabled = bState
+            cmdDelete.Enabled = bState
+        End If
+
     End Sub
 
     'copies the file to the user destination location
