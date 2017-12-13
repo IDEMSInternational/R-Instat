@@ -83,8 +83,8 @@ Partial Class sdgPlots
         Me.cmdAllOptions = New System.Windows.Forms.Button()
         Me.ucrInputThemes = New instat.ucrInputComboBox()
         Me.tbpCoordinates = New System.Windows.Forms.TabPage()
-        Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
         Me.ucrChkHorizontalplot = New instat.ucrCheck()
+        Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
         Me.tbpLayers.SuspendLayout()
@@ -424,16 +424,16 @@ Partial Class sdgPlots
         Me.tbpCoordinates.Name = "tbpCoordinates"
         Me.tbpCoordinates.UseVisualStyleBackColor = True
         '
-        'ucrBaseSubdialog
-        '
-        resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
-        Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
-        '
         'ucrChkHorizontalplot
         '
         Me.ucrChkHorizontalplot.Checked = False
         resources.ApplyResources(Me.ucrChkHorizontalplot, "ucrChkHorizontalplot")
         Me.ucrChkHorizontalplot.Name = "ucrChkHorizontalplot"
+        '
+        'ucrBaseSubdialog
+        '
+        resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
+        Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         '
         'sdgPlots
         '
