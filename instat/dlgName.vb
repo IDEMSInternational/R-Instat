@@ -127,21 +127,7 @@ Public Class dlgName
             'if the user has not typed anything then change the ucrInputVariableLabel contents
             If Not ucrInputVariableLabel.bUserTyped Then
                 'get the label of the column selected(from ucrReceiverName) and set it as ucrInputVariableLabel value
-                Dim colmnLabelsRFunction = New RFunction
-                Dim expItems As SymbolicExpression
-
-                colmnLabelsRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_labels")
-                colmnLabelsRFunction.AddParameter("data_name", Chr(34) & ucrSelectVariables.strCurrentDataFrame & Chr(34), iPosition:=0)
-                colmnLabelsRFunction.AddParameter("columns", ucrReceiverName.GetVariableNames(bWithQuotes:=True), iPosition:=1)
-
-                expItems = frmMain.clsRLink.RunInternalScriptGetValue(colmnLabelsRFunction.ToScript(), bSilent:=True)
-
-                If expItems IsNot Nothing AndAlso Not (expItems.Type = Internals.SymbolicExpressionType.Null) Then
-                    For Each strLabel As String In expItems.AsCharacter.ToArray
-                        ucrInputVariableLabel.SetName(strLabel)
-                    Next
-                End If
-
+                ucrInputVariableLabel.SetName(GetColLabel())
             End If
 
         Else
@@ -151,6 +137,26 @@ Public Class dlgName
         End If
 
     End Sub
+
+    'Gets the label of the column selected(from ucrReceiverName) 
+    Private Function GetColLabel()
+        Dim strColLabel As String = ""
+        Dim colmnLabelsRFunction = New RFunction
+        Dim expItems As SymbolicExpression
+
+        colmnLabelsRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_labels")
+        colmnLabelsRFunction.AddParameter("data_name", Chr(34) & ucrSelectVariables.strCurrentDataFrame & Chr(34), iPosition:=0)
+        colmnLabelsRFunction.AddParameter("columns", ucrReceiverName.GetVariableNames(bWithQuotes:=True), iPosition:=1)
+
+        expItems = frmMain.clsRLink.RunInternalScriptGetValue(colmnLabelsRFunction.ToScript(), bSilent:=True)
+
+        If expItems IsNot Nothing AndAlso Not (expItems.Type = Internals.SymbolicExpressionType.Null) Then
+            For Each strLabel As String In expItems.AsCharacter.ToArray
+                strColLabel = strLabel
+            Next
+        End If
+        Return strColLabel
+    End Function
 
 
 End Class
