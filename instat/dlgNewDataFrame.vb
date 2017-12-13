@@ -57,14 +57,15 @@ Public Class dlgNewDataFrame
 
         ucrNewDFName.Reset()
 
-        ' Default R
+        'e.g of Function to be constructed . data.frame(data=matrix(data = NA,nrow = 10, ncol = 2))
         clsOverallFunction.SetRCommand("data.frame")
 
-        'matrix(nrow = 10, ncol = 2, Data = NA)
+        'matrix(data = NA,nrow = 10, ncol = 2)
         clsMatrixFunction.SetRCommand("matrix")
-        clsMatrixFunction.AddParameter("data", "NA")
-        clsMatrixFunction.AddParameter("ncol", 2)
-        clsMatrixFunction.AddParameter("nrow", 10)
+        clsMatrixFunction.AddParameter("data", "NA", iPosition:=0)
+        clsMatrixFunction.AddParameter("nrow", 10, iPosition:=1)
+        clsMatrixFunction.AddParameter("ncol", 2, iPosition:=2)
+
 
         clsOverallFunction.AddParameter("data", clsRFunctionParameter:=clsMatrixFunction)
         ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
