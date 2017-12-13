@@ -119,7 +119,7 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ucrNudNumberofRows.Location" type="System.Drawing.Point, System.Drawing">
-    <value>171, 252</value>
+    <value>172, 252</value>
   </data>
   <data name="ucrNudNumberofRows.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -144,7 +144,7 @@
     <value>7, 254</value>
   </data>
   <data name="ucrChkNoOfRowsOrColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 20</value>
+    <value>166, 20</value>
   </data>
   <data name="ucrChkNoOfRowsOrColumns.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>

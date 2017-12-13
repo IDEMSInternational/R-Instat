@@ -192,11 +192,7 @@ Public Class dlgBarAndPieChart
         'Warning, when coordinate flip is added to coordinates tab on sdgPLots, then link with ucrChkFlipCoordinates...
 
         'this syncs the coordflip in sdgplots and this main dlg
-        If clsBaseOperator.clsParameters.Contains(clsBaseOperator.GetParameter("coord_flip")) Then
-            ucrChkFlipCoordinates.Checked = True
-        Else
-            ucrChkFlipCoordinates.Checked = False
-        End If
+        ucrChkFlipCoordinates.SetRCode(clsBaseOperator, bReset)
     End Sub
 
     Private Sub cmdBarChartOptions_Click(sender As Object, e As EventArgs) Handles cmdBarChartOptions.Click
