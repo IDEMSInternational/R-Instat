@@ -23,7 +23,7 @@ Public Class dlgClimaticCheckDataRain
     'Large/Same/wetdays
     Private clsGroupByFunc, clsRainFilterFunc, clsRunCalcFunc, clsListFunc As New RFunction
     'Large 
-    Private clsLargeOperator As New ROperator
+    Private clsLargeOperator, clsOrLargeOperator, clsLargeLessOperator As New ROperator
     'Same
     Private clsRleFunc, clsRepFunc, clsAsNumericFunc As New RFunction
     Private clsAndOperator, clsDollarOperator, clsGreaterSameOperator As New ROperator
@@ -82,20 +82,21 @@ Public Class dlgClimaticCheckDataRain
         ucrReceiverElement.SetParameterIsString()
         ucrReceiverElement.bWithQuotes = False
 
-        ucrNudLarge.SetParameter(New RParameter("right", 1))
+        ucrNudLarge.SetParameter(New RParameter("right", 1, bNewIncludeArgumentName:=False))
+        ucrNudLarge.SetMinMax(iNewMin:=Integer.MinValue, iNewMax:=Integer.MaxValue)
 
         ucrReceiverDate.Selector = ucrSelectorRain
         ucrReceiverDate.SetClimaticType("date")
         ucrReceiverDate.bAutoFill = True
 
-        ucrChkLarge.SetParameter(New RParameter("large", clsLargeOperator, 1), bNewChangeParameterValue:=False)
+        ucrChkLarge.SetParameter(New RParameter("large", clsOrLargeOperator, 1), bNewChangeParameterValue:=False)
         ucrChkLarge.SetText("Large")
 
         ucrChkSame.SetParameter(New RParameter("same", clsGreaterSameOperator, 1), bNewChangeParameterValue:=False)
-        ucrChkSame.SetText("Consecutive")
+        ucrChkSame.SetText("Same")
 
         ucrChkWetDays.SetParameter(New RParameter("wet_days", clsGreatOperator, 1, False), bNewChangeParameterValue:=False)
-        ucrChkWetDays.SetText("Wet Days")
+        ucrChkWetDays.SetText("Consecutive")
 
         ucrNudSame.SetParameter(New RParameter("right", 1, bNewIncludeArgumentName:=False))
         ucrNudWetDays.SetParameter(New RParameter("right", 1, bNewIncludeArgumentName:=False))
@@ -106,7 +107,7 @@ Public Class dlgClimaticCheckDataRain
         ucrChkWetDays.AddToLinkedControls(ucrNudWetDays, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
         ucrNudLarge.SetLinkedDisplayControl(lblmm)
         ucrNudSame.SetLinkedDisplayControl(lblDays)
-        ucrNudWetDays.SetLinkedDisplayControl(lblDaysWet)
+        ucrNudWetDays.SetLinkedDisplayControl(lblRainDays)
     End Sub
 
     Private Sub SetDefaults()
@@ -118,8 +119,10 @@ Public Class dlgClimaticCheckDataRain
         clsDollarOperator = New ROperator
         clsOrOperator = New ROperator
         clsEqualOperator = New ROperator
+        clsLargeOperator = New ROperator
+        clsLargeLessOperator = New ROperator
 
-        clsLargeOperator.Clear()
+        clsOrLargeOperator.Clear()
         clsGreaterSameOperator.Clear()
         clsGreatOperator.Clear()
 
@@ -144,7 +147,11 @@ Public Class dlgClimaticCheckDataRain
         'Large
         clsLargeOperator.SetOperation(">")
         clsLargeOperator.AddParameter("left", iPosition:=0)
-        clsLargeOperator.AddParameter("right", "200", iPosition:=1)
+        clsOrLargeOperator.SetOperation("|")
+        clsOrLargeOperator.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsLargeOperator, iPosition:=0)
+        clsOrLargeOperator.AddParameter("right", bIncludeArgumentName:=False, clsROperatorParameter:=clsLargeLessOperator, iPosition:=1)
+        clsLargeLessOperator.SetOperation("<")
+        clsLargeLessOperator.AddParameter("right", bIncludeArgumentName:=False, strParameterValue:="-1E-8", iPosition:=1)
 
         'Same
         clsGreaterOperator.SetOperation(">")
@@ -199,6 +206,7 @@ Public Class dlgClimaticCheckDataRain
     Private Sub setRcodeForControls(bReset)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsGreaterOperator, New RParameter("left", 0), iAdditionalPairNo:=1)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsAsNumericFunc, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
+        ucrReceiverElement.AddAdditionalCodeParameterPair(clsLargeLessOperator, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
         ucrReceiverElement.SetRCode(clsLargeOperator, bReset)
 
         ucrNudLarge.SetRCode(clsLargeOperator, bReset)
@@ -211,7 +219,11 @@ Public Class dlgClimaticCheckDataRain
     End Sub
 
     Private Sub TestOkEnabled()
-
+        If Not ucrReceiverElement.IsEmpty AndAlso ((ucrChkLarge.Checked AndAlso ucrNudLarge.GetText <> "") OrElse (ucrChkSame.Checked AndAlso ucrNudSame.GetText <> "") OrElse (ucrChkWetDays.Checked AndAlso ucrNudWetDays.GetText <> "")) Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub GroupByOptions()
@@ -258,5 +270,9 @@ Public Class dlgClimaticCheckDataRain
         If strRainCol <> "" Then
             ucrReceiverElement.Add(strRainCol, strDataFrame)
         End If
+    End Sub
+
+    Private Sub ucrReceiverElement_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrChkLarge.ControlContentsChanged, ucrChkSame.ControlContentsChanged, ucrChkWetDays.ControlContentsChanged, ucrNudLarge.ControlContentsChanged, ucrNudSame.ControlContentsChanged, ucrNudWetDays.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class

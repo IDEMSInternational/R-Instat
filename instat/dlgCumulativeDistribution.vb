@@ -112,6 +112,7 @@ Public Class dlgCumulativeDistribution
         ucrCumDistSelector.SetGgplotFunction(clsBaseOperator)
         ucrCumDistSelector.Focus()
         ucrSaveCumDist.Reset()
+        ucrVariablesAsFactorforCumDist.SetMeAsReceiver()
         sdgPlots.Reset()
         bResetSubdialog = True
 
