@@ -22,8 +22,31 @@ Public Class sdgParallelPlots
         autoTranslate(Me)
     End Sub
 
+    Private Sub InitialiseControls()
+        Dim dctMissing As New Dictionary(Of String, String)
+        Dim dctOrder As New Dictionary(Of String, String)
 
-    Public Sub SetRCode()
+        dctMissing.Add("Exclude", Chr(34) & "exclude" & Chr(34))
+        dctMissing.Add("Mean", Chr(34) & "mean" & Chr(34))
+        dctMissing.Add("Median", Chr(34) & "median" & Chr(34))
+        dctMissing.Add("min10", Chr(34) & "min10" & Chr(34))
+        dctMissing.Add("Random", Chr(34) & "random" & Chr(34))
+        ucrInputMissing.SetItems(dctMissing)
 
+        dctOrder.Add("Given", Chr(34) & "given" & Chr(34))
+        dctOrder.Add("AnyClass", Chr(34) & "AnyClass" & Chr(34))
+        dctOrder.Add("AllClass", Chr(34) & "allClass" & Chr(34))
+        dctOrder.Add("Skewness", Chr(34) & "skewness" & Chr(34))
+        dctOrder.Add("Outlier", Chr(34) & "Outlier" & Chr(34))
+        ucrInputOrder.SetItems(dctOrder)
+
+    End Sub
+
+    Public Sub SetRCode(clsNewRFunction As RFunction, Optional bReset As Boolean = False)
+        If Not bControlsInitialised Then
+            InitialiseControls()
+        End If
+        clsggparcoordFunc = clsNewRFunction
+        mdlCoreControl.SetRCode(Me, clsggparcoordFunc, bReset)
     End Sub
 End Class
