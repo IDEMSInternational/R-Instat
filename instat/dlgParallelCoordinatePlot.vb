@@ -20,6 +20,15 @@ Public Class dlgParallelCoordinatePlot
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
+    Private clsBaseOperator As New ROperator
+    Private clsLabsFunction As New RFunction
+    Private clsXlabsFunction As New RFunction
+    Private clsYlabFunction As New RFunction
+    Private clsXScaleContinuousFunction As New RFunction
+    Private clsYScaleContinuousFunction As New RFunction
+    Private clsRFacetFunction As New RFunction
+    Private clsThemeFunction As New RFunction
+    Private dctThemeFunctions As Dictionary(Of String, RFunction)
 
     Private Sub dlgParallelCoordinatePlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -94,11 +103,14 @@ Public Class dlgParallelCoordinatePlot
     End Sub
 
     Private Sub SetDefaults()
+        clsBaseOperator = New ROperator
         clsggparcoordFunc = New RFunction
 
         ucrReceiverXVariables.SetMeAsReceiver()
         ucrSelectorParallelCoordinatePlot.Reset()
+        ucrSelectorParallelCoordinatePlot.SetGgplotFunction(clsBaseOperator)
         ucrSaveGraph.Reset()
+        bResetSubdialog = True
 
         clsggparcoordFunc.SetPackageName("GGally")
         clsggparcoordFunc.SetRCommand("ggparcoord")
@@ -108,13 +120,26 @@ Public Class dlgParallelCoordinatePlot
         clsggparcoordFunc.AddParameter("scale", "std")
         clsggparcoordFunc.AddParameter("alphalines", "1")
 
-        clsggparcoordFunc.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorParallelCoordinatePlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsggparcoordFunc)
-        bResetSubdialog = True
+        clsBaseOperator.SetOperation("+")
+        clsBaseOperator.AddParameter("ggparcord", clsRFunctionParameter:=clsggparcoordFunc, iPosition:=0)
+
+        clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
+        clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
+        clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
+        clsXScaleContinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
+        clsYScaleContinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
+        clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
+        clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
+        clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()
+        dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
+
+        clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorParallelCoordinatePlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
+
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseOperator, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -139,5 +164,11 @@ Public Class dlgParallelCoordinatePlot
         sdgParallelPlots.SetRCode(clsNewRFunction:=clsggparcoordFunc, bReset:=bReset)
         bResetSubdialog = False
         sdgParallelPlots.ShowDialog()
+    End Sub
+
+    Private Sub cmdPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdPlotOptions.Click
+        sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrSelectorParallelCoordinatePlot, bReset:=bResetSubdialog)
+        sdgPlots.ShowDialog()
+        bResetSubdialog = False
     End Sub
 End Class
