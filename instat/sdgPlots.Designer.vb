@@ -78,13 +78,18 @@ Partial Class sdgPlots
         Me.ucrYAxis = New instat.ucrAxes()
         Me.tbpTheme = New System.Windows.Forms.TabPage()
         Me.urChkSelectTheme = New instat.ucrCheck()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.grpCommonOptions = New System.Windows.Forms.GroupBox()
+        Me.UcrCheck4 = New instat.ucrCheck()
+        Me.UcrCheck3 = New instat.ucrCheck()
+        Me.UcrCheck2 = New instat.ucrCheck()
+        Me.ucrChkLegendPosition = New instat.ucrCheck()
         Me.lblFont = New System.Windows.Forms.Label()
         Me.cmdAllOptions = New System.Windows.Forms.Button()
         Me.ucrInputThemes = New instat.ucrInputComboBox()
         Me.tbpCoordinates = New System.Windows.Forms.TabPage()
         Me.lblWarning = New System.Windows.Forms.Label()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
         Me.tbpLayers.SuspendLayout()
@@ -93,6 +98,7 @@ Partial Class sdgPlots
         Me.tbpXAxis.SuspendLayout()
         Me.tbpYAxis.SuspendLayout()
         Me.tbpTheme.SuspendLayout()
+        Me.grpCommonOptions.SuspendLayout()
         Me.tbpCoordinates.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -378,7 +384,7 @@ Partial Class sdgPlots
         'tbpTheme
         '
         Me.tbpTheme.Controls.Add(Me.urChkSelectTheme)
-        Me.tbpTheme.Controls.Add(Me.GroupBox1)
+        Me.tbpTheme.Controls.Add(Me.grpCommonOptions)
         Me.tbpTheme.Controls.Add(Me.lblFont)
         Me.tbpTheme.Controls.Add(Me.cmdAllOptions)
         Me.tbpTheme.Controls.Add(Me.ucrInputThemes)
@@ -393,11 +399,40 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.urChkSelectTheme, "urChkSelectTheme")
         Me.urChkSelectTheme.Name = "urChkSelectTheme"
         '
-        'GroupBox1
+        'grpCommonOptions
         '
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.TabStop = False
+        Me.grpCommonOptions.Controls.Add(Me.ucrInputLegendPosition)
+        Me.grpCommonOptions.Controls.Add(Me.UcrCheck4)
+        Me.grpCommonOptions.Controls.Add(Me.UcrCheck3)
+        Me.grpCommonOptions.Controls.Add(Me.UcrCheck2)
+        Me.grpCommonOptions.Controls.Add(Me.ucrChkLegendPosition)
+        resources.ApplyResources(Me.grpCommonOptions, "grpCommonOptions")
+        Me.grpCommonOptions.Name = "grpCommonOptions"
+        Me.grpCommonOptions.TabStop = False
+        '
+        'UcrCheck4
+        '
+        Me.UcrCheck4.Checked = False
+        resources.ApplyResources(Me.UcrCheck4, "UcrCheck4")
+        Me.UcrCheck4.Name = "UcrCheck4"
+        '
+        'UcrCheck3
+        '
+        Me.UcrCheck3.Checked = False
+        resources.ApplyResources(Me.UcrCheck3, "UcrCheck3")
+        Me.UcrCheck3.Name = "UcrCheck3"
+        '
+        'UcrCheck2
+        '
+        Me.UcrCheck2.Checked = False
+        resources.ApplyResources(Me.UcrCheck2, "UcrCheck2")
+        Me.UcrCheck2.Name = "UcrCheck2"
+        '
+        'ucrChkLegendPosition
+        '
+        Me.ucrChkLegendPosition.Checked = False
+        resources.ApplyResources(Me.ucrChkLegendPosition, "ucrChkLegendPosition")
+        Me.ucrChkLegendPosition.Name = "ucrChkLegendPosition"
         '
         'lblFont
         '
@@ -434,6 +469,13 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         '
+        'ucrInputLegendPosition
+        '
+        Me.ucrInputLegendPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegendPosition.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputLegendPosition, "ucrInputLegendPosition")
+        Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
+        '
         'sdgPlots
         '
         resources.ApplyResources(Me, "$this")
@@ -458,6 +500,7 @@ Partial Class sdgPlots
         Me.tbpYAxis.ResumeLayout(False)
         Me.tbpTheme.ResumeLayout(False)
         Me.tbpTheme.PerformLayout()
+        Me.grpCommonOptions.ResumeLayout(False)
         Me.tbpCoordinates.ResumeLayout(False)
         Me.tbpCoordinates.PerformLayout()
         Me.ResumeLayout(False)
@@ -482,7 +525,7 @@ Partial Class sdgPlots
     Friend WithEvents cmdAllOptions As Button
     Friend WithEvents lblFont As Label
     Friend WithEvents ucrPlotsAdditionalLayers As ucrAdditionalLayers
-    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents grpCommonOptions As GroupBox
     Friend WithEvents ucrFacetSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents grpLegendTitle As GroupBox
     Friend WithEvents rdoLegendTitleCustom As RadioButton
@@ -510,6 +553,11 @@ Partial Class sdgPlots
     Friend WithEvents ucrInputGraphCaption As ucrInputTextBox
     Friend WithEvents ucrInputGraphSubTitle As ucrInputTextBox
     Friend WithEvents urChkSelectTheme As ucrCheck
+    Friend WithEvents UcrCheck4 As ucrCheck
+    Friend WithEvents UcrCheck3 As ucrCheck
+    Friend WithEvents UcrCheck2 As ucrCheck
+    Friend WithEvents ucrChkLegendPosition As ucrCheck
+    Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
 End Class
 
 

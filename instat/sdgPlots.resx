@@ -996,28 +996,136 @@
   <data name="&gt;&gt;urChkSelectTheme.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrInputLegendPosition.Location" type="System.Drawing.Point, System.Drawing">
+    <value>174, 19</value>
+  </data>
+  <data name="ucrInputLegendPosition.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>21, 17, 21, 17</value>
+  </data>
+  <data name="ucrInputLegendPosition.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 21</value>
+  </data>
+  <data name="ucrInputLegendPosition.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLegendPosition.Name" xml:space="preserve">
+    <value>ucrInputLegendPosition</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLegendPosition.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLegendPosition.Parent" xml:space="preserve">
+    <value>grpCommonOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLegendPosition.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="UcrCheck4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 98</value>
+  </data>
+  <data name="UcrCheck4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="UcrCheck4.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck4.Name" xml:space="preserve">
+    <value>UcrCheck4</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck4.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck4.Parent" xml:space="preserve">
+    <value>grpCommonOptions</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck4.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="UcrCheck3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 72</value>
+  </data>
+  <data name="UcrCheck3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="UcrCheck3.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck3.Name" xml:space="preserve">
+    <value>UcrCheck3</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck3.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck3.Parent" xml:space="preserve">
+    <value>grpCommonOptions</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck3.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="UcrCheck2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 46</value>
+  </data>
+  <data name="UcrCheck2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 20</value>
+  </data>
+  <data name="UcrCheck2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck2.Name" xml:space="preserve">
+    <value>UcrCheck2</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck2.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck2.Parent" xml:space="preserve">
+    <value>grpCommonOptions</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck2.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrChkLegendPosition.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 20</value>
+  </data>
+  <data name="ucrChkLegendPosition.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 20</value>
+  </data>
+  <data name="ucrChkLegendPosition.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLegendPosition.Name" xml:space="preserve">
+    <value>ucrChkLegendPosition</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLegendPosition.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLegendPosition.Parent" xml:space="preserve">
+    <value>grpCommonOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLegendPosition.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="grpCommonOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 65</value>
   </data>
-  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="grpCommonOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>455, 223</value>
   </data>
-  <data name="GroupBox1.TabIndex" type="System.Int32, mscorlib">
+  <data name="grpCommonOptions.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
+  <data name="grpCommonOptions.Text" xml:space="preserve">
     <value>Common Options</value>
   </data>
-  <data name="&gt;&gt;GroupBox1.Name" xml:space="preserve">
-    <value>GroupBox1</value>
+  <data name="&gt;&gt;grpCommonOptions.Name" xml:space="preserve">
+    <value>grpCommonOptions</value>
   </data>
-  <data name="&gt;&gt;GroupBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;grpCommonOptions.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;GroupBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;grpCommonOptions.Parent" xml:space="preserve">
     <value>tbpTheme</value>
   </data>
-  <data name="&gt;&gt;GroupBox1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;grpCommonOptions.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="lblFont.AutoSize" type="System.Boolean, mscorlib">
