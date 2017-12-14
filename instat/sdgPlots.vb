@@ -196,6 +196,23 @@ Public Class sdgPlots
         ' ucrInputThemes.SetRDefault("theme_grey()")
         ucrInputThemes.SetDropDownStyleAsNonEditable()
 
+
+        Dim dctLegendPosition As New Dictionary(Of String, String)
+        ucrChkLegendPosition.SetText("legend Position")
+        ucrChkLegendPosition.AddToLinkedControls(ucrInputLegendPosition, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
+        ucrInputLegendPosition.SetParameter(New RParameter("legend.position"))
+        dctLegendPosition.Add("None", Chr(34) & "none" & Chr(34))
+        dctLegendPosition.Add("Left", Chr(34) & "left" & Chr(34))
+        dctLegendPosition.Add("Right", Chr(34) & "right" & Chr(34))
+        dctLegendPosition.Add("Top", Chr(34) & "top" & Chr(34))
+        dctLegendPosition.Add("Bottom", Chr(34) & "bottom" & Chr(34))
+        ucrInputLegendPosition.SetItems(dctLegendPosition)
+        ucrChkLegendPosition.AddParameterPresentCondition(True, "legend.position")
+        ucrChkLegendPosition.AddParameterPresentCondition(False, "legend.position", False)
+
+
+
+
         'coordiantes tab
         ucrChkHorizontalplot.SetText("Horizontal Plot (coord-flip)")
         clsCoordFlipFunc.SetPackageName("ggplot2")
@@ -204,6 +221,7 @@ Public Class sdgPlots
         clsCoordFlipParam.SetArgument(clsCoordFlipFunc)
         ucrChkHorizontalplot.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkHorizontalplot.AddParameterPresentCondition(True, "coord_flip", True)
+
         InitialiseTabs()
 
         'temporary disabled until implemented
@@ -211,7 +229,6 @@ Public Class sdgPlots
         grpLegendTitle.Enabled = False
         tbpCoordinates.Enabled = True
         'cmdAllOptions.Enabled = False
-        GroupBox1.Visible = False
         bControlsInitialised = True
     End Sub
 
@@ -282,8 +299,15 @@ Public Class sdgPlots
         ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True)
         ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True)
 
+
+
+        'themes tab
+        ucrChkLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+
         'coordinates tab
         ucrChkHorizontalplot.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+
 
         'ucrPlotsAdditionalLayers.SetAesFunction(clsGlobalAesFunction)
         'The following two setup the ucrAdditionalLayers on the sdgPlots. Shares the global ggplot function, as well as the whole PLots RSyntax.
@@ -665,6 +689,8 @@ Public Class sdgPlots
         sdgThemes.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, bReset:=bResetThemes)
         Me.SendToBack()
         sdgThemes.ShowDialog()
+        ucrChkLegendPosition.SetRCode(clsThemeFunction, bReset:=bResetThemes, bCloneIfNeeded:=True)
+        ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset:=bResetThemes, bCloneIfNeeded:=True)
         bResetThemes = False
     End Sub
     'Warning/Task to be discussed: need to disable ok on dlg's when layers are not complete on subdialogues + warning message... 
