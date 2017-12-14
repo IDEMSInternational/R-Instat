@@ -139,7 +139,15 @@ Public Class dlgParallelCoordinatePlot
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseOperator, bReset)
+        ucrSelectorParallelCoordinatePlot.SetRCode(clsggparcoordFunc, bReset)
+        ucrReceiverXVariables.SetRCode(clsggparcoordFunc, bReset)
+        ucrReceiverFactor.SetRCode(clsggparcoordFunc, bReset)
+        ucrChkBoxplots.SetRCode(clsggparcoordFunc, bReset)
+        ucrChkPoints.SetRCode(clsggparcoordFunc, bReset)
+        ucrNudTransparency.SetRCode(clsggparcoordFunc, bReset)
+        ucrInputScale.SetRCode(clsggparcoordFunc, bReset)
+        ucrSaveGraph.SetRCode(clsBaseOperator, bReset)
+
     End Sub
 
     Private Sub TestOkEnabled()
