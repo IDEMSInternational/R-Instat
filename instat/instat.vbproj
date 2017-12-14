@@ -176,6 +176,12 @@
     <Compile Include="dlgAutoSaveRecovery.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgBackupManager.Designer.vb">
+      <DependentUpon>dlgBackupManager.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgBackupManager.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCalculationsSummary.Designer.vb">
       <DependentUpon>dlgCalculationsSummary.vb</DependentUpon>
     </Compile>
@@ -2187,6 +2193,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgAutoSaveRecovery.sw-KE.resx">
       <DependentUpon>dlgAutoSaveRecovery.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgBackupManager.resx">
+      <DependentUpon>dlgBackupManager.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCalculationsSummary.fr-FR.resx">
       <DependentUpon>dlgCalculationsSummary.vb</DependentUpon>
@@ -6188,6 +6197,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\Library\Climatic\Dodoma.rds">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\Library\Climatic\WesternKenya.RDS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

@@ -141,8 +141,8 @@ Public Class dlgLinePlot
 
         clsRaesFunction.SetPackageName("ggplot2")
         clsRaesFunction.SetRCommand("aes")
-        clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
-        clsRaesFunction.AddParameter("y", Chr(34) & Chr(34))
+        clsRaesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
+        clsRaesFunction.AddParameter("y", Chr(34) & Chr(34), iPosition:=1)
 
         clsRgeomlineplotFunction.SetPackageName("ggplot2")
         clsRgeomlineplotFunction.SetRCommand("geom_line")
@@ -241,5 +241,13 @@ Public Class dlgLinePlot
 
     Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged
+        If Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor") Then
+            clsRaesFunction.AddParameter("group", "1", iPosition:=3)
+        Else
+            clsRaesFunction.RemoveParameterByName("group")
+        End If
     End Sub
 End Class
