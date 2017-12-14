@@ -19,6 +19,7 @@ Public Class dlgParallelCoordinatePlot
     Private clsggparcoordFunc As New RFunction
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
+    Private bResetSubdialog As Boolean = False
 
     Private Sub dlgParallelCoordinatePlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -109,6 +110,7 @@ Public Class dlgParallelCoordinatePlot
 
         clsggparcoordFunc.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorParallelCoordinatePlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseRFunction(clsggparcoordFunc)
+        bResetSubdialog = True
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -131,5 +133,11 @@ Public Class dlgParallelCoordinatePlot
 
     Private Sub ucrReceiverXVariables_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverXVariables.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub cmdParcoordOptions_Click(sender As Object, e As EventArgs) Handles cmdParcoordOptions.Click
+        sdgParallelPlots.SetRCode(clsNewRFunction:=clsggparcoordFunc, bReset:=bReset)
+        bResetSubdialog = False
+        sdgParallelPlots.ShowDialog()
     End Sub
 End Class

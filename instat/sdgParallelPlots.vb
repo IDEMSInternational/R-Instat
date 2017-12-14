@@ -26,6 +26,7 @@ Public Class sdgParallelPlots
         Dim dctMissing As New Dictionary(Of String, String)
         Dim dctOrder As New Dictionary(Of String, String)
 
+        ucrInputMissing.SetParameter(New RParameter("missing"))
         dctMissing.Add("Exclude", Chr(34) & "exclude" & Chr(34))
         dctMissing.Add("Mean", Chr(34) & "mean" & Chr(34))
         dctMissing.Add("Median", Chr(34) & "median" & Chr(34))
@@ -33,6 +34,7 @@ Public Class sdgParallelPlots
         dctMissing.Add("Random", Chr(34) & "random" & Chr(34))
         ucrInputMissing.SetItems(dctMissing)
 
+        ucrInputOrder.SetParameter(New RParameter("order"))
         dctOrder.Add("Given", Chr(34) & "given" & Chr(34))
         dctOrder.Add("AnyClass", Chr(34) & "AnyClass" & Chr(34))
         dctOrder.Add("AllClass", Chr(34) & "allClass" & Chr(34))
