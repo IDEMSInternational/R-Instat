@@ -208,8 +208,8 @@ Public Class sdgPlots
 
         'temporary disabled until implemented
         ' tbpLayers.Enabled = False
-        tbpCoordinates.Enabled = True
         grpLegendTitle.Enabled = False
+        tbpCoordinates.Enabled = True
         'cmdAllOptions.Enabled = False
         GroupBox1.Visible = False
         bControlsInitialised = True
@@ -677,25 +677,5 @@ Public Class sdgPlots
                 ucr2ndFactorReceiver.SetMeAsReceiver()
             End If
         End If
-    End Sub
-
-    Private Sub ucrChkIncludeFacets_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeFacets.ControlValueChanged, ucr2ndFactorReceiver.ControlValueChanged, ucr1stFactorReceiver.ControlValueChanged
-
-    End Sub
-
-    Private Sub ucrChkFreeSpace_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrChkFreeSpace.ControlValueChanged
-
-    End Sub
-
-    Private Sub chkScales_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrChkFreeScalesY.ControlValueChanged, ucrChkFreeScalesX.ControlValueChanged
-
-    End Sub
-
-    Private Sub ucrPnlHorizonatalVertical_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlHorizonatalVertical.ControlValueChanged, ucrChkMargin.ControlValueChanged
-
-    End Sub
-
-    Private Sub LabsControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged, ucrInputGraphCaption.ControlValueChanged
-
     End Sub
 End Class
