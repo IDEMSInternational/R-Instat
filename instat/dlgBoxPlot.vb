@@ -40,9 +40,8 @@ Public Class dlgBoxplot
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
-        Else
-            'SetGeomprefixFillColourAes()
         End If
+
         If bReset Then
             SetDefaults()
         End If
@@ -82,8 +81,7 @@ Public Class dlgBoxplot
 
         ucrByFactorsReceiver.SetParameter(New RParameter("x", 1))
         ucrByFactorsReceiver.Selector = ucrSelectorBoxPlot
-        ucrByFactorsReceiver.SetIncludedDataTypes({"factor"})
-        ucrByFactorsReceiver.strSelectorHeading = "Factors"
+        ucrByFactorsReceiver.strSelectorHeading = "Varibles"
         ucrByFactorsReceiver.SetParameterIsString()
         ucrByFactorsReceiver.bWithQuotes = False
         ucrByFactorsReceiver.SetValuesToIgnore({Chr(34) & Chr(34)})
@@ -123,12 +121,14 @@ Public Class dlgBoxplot
         clsRggplotFunction = New RFunction
         clsRgeomPlotFunction = New RFunction
         clsRaesFunction = New RFunction
+        clsLocalRaesFunction = New RFunction
 
         ucrSelectorBoxPlot.Reset()
         ucrSelectorBoxPlot.SetGgplotFunction(clsBaseOperator)
 
         ucrSaveBoxplot.Reset()
         sdgPlots.Reset()
+        ucrVariablesAsFactorForBoxplot.SetMeAsReceiver()
         bResetSubdialog = True
         bResetBoxLayerSubdialog = True
         'rdoBoxplot.Checked = True
@@ -149,6 +149,11 @@ Public Class dlgBoxplot
         clsRgeomPlotFunction.SetRCommand("geom_boxplot")
         clsRgeomPlotFunction.AddParameter("varwidth", "FALSE")
 
+        clsLocalRaesFunction.SetPackageName("ggplot2")
+        clsLocalRaesFunction.SetRCommand("aes")
+        clsRgeomPlotFunction.AddParameter("boxaes", clsRFunctionParameter:=clsLocalRaesFunction, iPosition:=1, bIncludeArgumentName:=False)
+
+
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
@@ -158,7 +163,6 @@ Public Class dlgBoxplot
         clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
-        clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
         TempOptionsDisabledInMultipleVariablesCase()
@@ -175,6 +179,8 @@ Public Class dlgBoxplot
         ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
         ucrVariablesAsFactorForBoxplot.SetRCode(clsRaesFunction, bReset)
         ucrByFactorsReceiver.SetRCode(clsRaesFunction, bReset)
+        ucrByFactorsReceiver.AddAdditionalCodeParameterPair(clsLocalRaesFunction, New RParameter("group", 0), iAdditionalPairNo:=1)
+
         ucrSecondFactorReceiver.SetRCode(clsRaesFunction, bReset)
         ucrPnlPlots.SetRCode(clsRgeomPlotFunction, bReset)
     End Sub
@@ -197,6 +203,10 @@ Public Class dlgBoxplot
         sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrSelectorBoxPlot, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
+
+        'this syncs the coordflip in sdgplots and this main dlg
+        ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
+
     End Sub
 
     Private Sub cmdBoxPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdBoxPlotOptions.Click
@@ -230,6 +240,7 @@ Public Class dlgBoxplot
                 ucrSecondFactorReceiver.Add(clsParam.strArgumentValue)
             End If
         Next
+
         'Question to be discussed: After running through the sdgLayerOptions, the clsCurrDataFrame parameters seem to have been cleared, such that in the multiple variable case, clsCurrDataFrame needs to be repopulated with "stack", "measure.vars" and "id.vars" parameters. Actually, even when repopulated, they are still not appearing in the script. ??
         'This resets the factor receiver and causes it to be cleared of the correct variable. We don't want this.
         'ucrVariablesAsFactorForBoxplot.SetReceiverStatus()
@@ -270,7 +281,7 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub ucrPnlPlots_ControlValueChanged() Handles ucrPnlPlots.ControlValueChanged
-        SetGeomprefixFillColourAes()
+        SetGeomPrefixFillColourAes()
     End Sub
 
     Private Sub ucrSaveBoxplot_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveBoxplot.ControlContentsChanged, ucrVariablesAsFactorForBoxplot.ControlContentsChanged

@@ -117,4 +117,406 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="cmdEdit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>507, 251</value>
+  </data>
+  <data name="cmdEdit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 23</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cmdEdit.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="cmdEdit.Text" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="&gt;&gt;cmdEdit.Name" xml:space="preserve">
+    <value>cmdEdit</value>
+  </data>
+  <data name="&gt;&gt;cmdEdit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdEdit.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmdEdit.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="cmdDelete.Location" type="System.Drawing.Point, System.Drawing">
+    <value>583, 251</value>
+  </data>
+  <data name="cmdDelete.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 23</value>
+  </data>
+  <data name="cmdDelete.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="cmdDelete.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="&gt;&gt;cmdDelete.Name" xml:space="preserve">
+    <value>cmdDelete</value>
+  </data>
+  <data name="&gt;&gt;cmdDelete.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdDelete.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmdDelete.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="cmdAddComponent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>379, 92</value>
+  </data>
+  <data name="cmdAddComponent.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 23</value>
+  </data>
+  <data name="cmdAddComponent.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="cmdAddComponent.Text" xml:space="preserve">
+    <value>Add Component</value>
+  </data>
+  <data name="&gt;&gt;cmdAddComponent.Name" xml:space="preserve">
+    <value>cmdAddComponent</value>
+  </data>
+  <data name="&gt;&gt;cmdAddComponent.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdAddComponent.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmdAddComponent.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="lblReceiverRedFlag.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblReceiverRedFlag.Location" type="System.Drawing.Point, System.Drawing">
+    <value>224, 44</value>
+  </data>
+  <data name="lblReceiverRedFlag.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 13</value>
+  </data>
+  <data name="lblReceiverRedFlag.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblReceiverRedFlag.Text" xml:space="preserve">
+    <value>Component:</value>
+  </data>
+  <data name="&gt;&gt;lblReceiverRedFlag.Name" xml:space="preserve">
+    <value>lblReceiverRedFlag</value>
+  </data>
+  <data name="&gt;&gt;lblReceiverRedFlag.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblReceiverRedFlag.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblReceiverRedFlag.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="lblWeights.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblWeights.Location" type="System.Drawing.Point, System.Drawing">
+    <value>224, 98</value>
+  </data>
+  <data name="lblWeights.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 13</value>
+  </data>
+  <data name="lblWeights.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblWeights.Text" xml:space="preserve">
+    <value>Weights:</value>
+  </data>
+  <data name="&gt;&gt;lblWeights.Name" xml:space="preserve">
+    <value>lblWeights</value>
+  </data>
+  <data name="&gt;&gt;lblWeights.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblWeights.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblWeights.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="lblIndexComponentsList.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblIndexComponentsList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>507, 46</value>
+  </data>
+  <data name="lblIndexComponentsList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 13</value>
+  </data>
+  <data name="lblIndexComponentsList.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="lblIndexComponentsList.Text" xml:space="preserve">
+    <value>Index Components:</value>
+  </data>
+  <data name="&gt;&gt;lblIndexComponentsList.Name" xml:space="preserve">
+    <value>lblIndexComponentsList</value>
+  </data>
+  <data name="&gt;&gt;lblIndexComponentsList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblIndexComponentsList.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblIndexComponentsList.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="lstIndexComponents.Location" type="System.Drawing.Point, System.Drawing">
+    <value>506, 63</value>
+  </data>
+  <data name="lstIndexComponents.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 182</value>
+  </data>
+  <data name="lstIndexComponents.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;lstIndexComponents.Name" xml:space="preserve">
+    <value>lstIndexComponents</value>
+  </data>
+  <data name="&gt;&gt;lstIndexComponents.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lstIndexComponents.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lstIndexComponents.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblModelPreview.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblModelPreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 332</value>
+  </data>
+  <data name="lblModelPreview.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 13</value>
+  </data>
+  <data name="lblModelPreview.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="lblModelPreview.Text" xml:space="preserve">
+    <value>Preview:</value>
+  </data>
+  <data name="&gt;&gt;lblModelPreview.Name" xml:space="preserve">
+    <value>lblModelPreview</value>
+  </data>
+  <data name="&gt;&gt;lblModelPreview.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblModelPreview.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblModelPreview.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrSaveCRI.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 380</value>
+  </data>
+  <data name="ucrSaveCRI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>276, 24</value>
+  </data>
+  <data name="ucrSaveCRI.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveCRI.Name" xml:space="preserve">
+    <value>ucrSaveCRI</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveCRI.Type" xml:space="preserve">
+    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveCRI.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveCRI.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrInputCRIPreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>64, 329</value>
+  </data>
+  <data name="ucrInputCRIPreview.Size" type="System.Drawing.Size, System.Drawing">
+    <value>452, 45</value>
+  </data>
+  <data name="ucrInputCRIPreview.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;ucrInputCRIPreview.Name" xml:space="preserve">
+    <value>ucrInputCRIPreview</value>
+  </data>
+  <data name="&gt;&gt;ucrInputCRIPreview.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputCRIPreview.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputCRIPreview.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrNudWeights.Location" type="System.Drawing.Point, System.Drawing">
+    <value>279, 95</value>
+  </data>
+  <data name="ucrNudWeights.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudWeights.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrNudWeights.Name" xml:space="preserve">
+    <value>ucrNudWeights</value>
+  </data>
+  <data name="&gt;&gt;ucrNudWeights.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudWeights.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrNudWeights.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrGridWeights.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="ucrGridWeights.Location" type="System.Drawing.Point, System.Drawing">
+    <value>226, 121</value>
+  </data>
+  <data name="ucrGridWeights.Size" type="System.Drawing.Size, System.Drawing">
+    <value>263, 202</value>
+  </data>
+  <data name="ucrGridWeights.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrGridWeights.Name" xml:space="preserve">
+    <value>ucrGridWeights</value>
+  </data>
+  <data name="&gt;&gt;ucrGridWeights.Type" xml:space="preserve">
+    <value>instat.ucrFactor, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrGridWeights.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrGridWeights.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>682, 463</value>
+  </data>
+  <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 409</value>
+  </data>
+  <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>410, 52</value>
+  </data>
+  <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
+    <value>ucrBase</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Type" xml:space="preserve">
+    <value>instat.ucrButtons, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="ucrSelectorCRI.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrSelectorCRI.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectorCRI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 180</value>
+  </data>
+  <data name="ucrSelectorCRI.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorCRI.Name" xml:space="preserve">
+    <value>ucrSelectorCRI</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorCRI.Type" xml:space="preserve">
+    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorCRI.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorCRI.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="ucrChkScaleNumeric.Location" type="System.Drawing.Point, System.Drawing">
+    <value>507, 280</value>
+  </data>
+  <data name="ucrChkScaleNumeric.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 20</value>
+  </data>
+  <data name="ucrChkScaleNumeric.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;ucrChkScaleNumeric.Name" xml:space="preserve">
+    <value>ucrChkScaleNumeric</value>
+  </data>
+  <data name="&gt;&gt;ucrChkScaleNumeric.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkScaleNumeric.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkScaleNumeric.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Define CRI</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>dlgDefineCRI</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ucrReceiverRedFlag.Location" type="System.Drawing.Point, System.Drawing">
+    <value>226, 59</value>
+  </data>
+  <data name="ucrReceiverRedFlag.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverRedFlag.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverRedFlag.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverRedFlag.Name" xml:space="preserve">
+    <value>ucrReceiverRedFlag</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverRedFlag.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverRedFlag.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverRedFlag.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
 </root>

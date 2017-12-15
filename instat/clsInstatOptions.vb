@@ -280,19 +280,14 @@ Imports RDotNet
         strLanguageCultureCode = strLanguage
         Select Case strLanguageCultureCode
             Case "en-GB"
-                Thread.CurrentThread.CurrentCulture = New CultureInfo("en-GB")
                 Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-GB")
             Case "fr-FR"
-                Thread.CurrentThread.CurrentCulture = New CultureInfo("fr-FR")
                 Thread.CurrentThread.CurrentUICulture = New CultureInfo("fr-FR")
             Case "sw-KE"
-                Thread.CurrentThread.CurrentCulture = New CultureInfo("sw-KE")
                 Thread.CurrentThread.CurrentUICulture = New CultureInfo("sw-KE")
             Case "es-ES"
-                Thread.CurrentThread.CurrentCulture = New CultureInfo("es-ES")
                 Thread.CurrentThread.CurrentUICulture = New CultureInfo("es-ES")
             Case Else
-                Thread.CurrentThread.CurrentCulture = New CultureInfo("en-GB")
                 Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-GB")
         End Select
     End Sub
@@ -395,6 +390,7 @@ Imports RDotNet
 
     Public Sub SetAutoSaveDataMinutes(iNewMinutes As Integer)
         iAutoSaveDataMinutes = iNewMinutes
+        frmMain.ResetTimer()
     End Sub
 
     Public Sub SetShowWaitDialog(bNewShow As Boolean)

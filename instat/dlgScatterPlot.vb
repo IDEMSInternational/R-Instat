@@ -71,7 +71,6 @@ Public Class dlgScatterPlot
         ucrVariablesAsFactorForScatter.bWithQuotes = False
         ucrVariablesAsFactorForScatter.Selector = ucrSelectorForScatter
         ucrVariablesAsFactorForScatter.SetFactorReceiver(ucrFactorOptionalReceiver)
-        ucrVariablesAsFactorForScatter.SetIncludedDataTypes({"factor", "numeric"})
         ucrVariablesAsFactorForScatter.strSelectorHeading = "Variables"
         ucrVariablesAsFactorForScatter.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrVariablesAsFactorForScatter.bAddParameterIfEmpty = True
@@ -80,7 +79,6 @@ Public Class dlgScatterPlot
         ucrReceiverX.SetParameterIsString()
         ucrReceiverX.bWithQuotes = False
         ucrReceiverX.Selector = ucrSelectorForScatter
-        ucrReceiverX.SetIncludedDataTypes({"factor", "numeric"})
         ucrReceiverX.strSelectorHeading = "Variables"
         ucrReceiverX.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrReceiverX.bAddParameterIfEmpty = True
@@ -89,7 +87,6 @@ Public Class dlgScatterPlot
         ucrFactorOptionalReceiver.SetParameterIsString()
         ucrFactorOptionalReceiver.bWithQuotes = False
         ucrFactorOptionalReceiver.Selector = ucrSelectorForScatter
-        ucrFactorOptionalReceiver.SetIncludedDataTypes({"factor", "numeric"})
         ucrFactorOptionalReceiver.strSelectorHeading = "Variables"
 
         clsGeomSmoothFunc.SetPackageName("ggplot2")
@@ -124,13 +121,14 @@ Public Class dlgScatterPlot
         ucrSelectorForScatter.Reset()
         ucrSelectorForScatter.SetGgplotFunction(clsBaseOperator)
         ucrSaveScatterPlot.Reset()
+        ucrVariablesAsFactorForScatter.SetMeAsReceiver()
         sdgPlots.Reset()
         bResetSubdialog = True
         bResetlayerSubdialog = True
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
-        clsBaseOperator.AddParameter("scatter", clsRFunctionParameter:=clsRScatterGeomFunction)
+        clsBaseOperator.AddParameter("scatter", clsRFunctionParameter:=clsRScatterGeomFunction, iPosition:=2)
 
         clsRggplotFunction.SetPackageName("ggplot2")
         clsRggplotFunction.SetRCommand("ggplot")

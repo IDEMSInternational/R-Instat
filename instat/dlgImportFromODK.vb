@@ -46,6 +46,9 @@ Public Class dlgImportFromODK
         ucrInputChooseForm.bAllowNonConditionValues = True
 
         ucrInputUsername.SetParameter(New RParameter("username", 1))
+
+        ucrBase.clsRsyntax.bSeparateThread = False
+        ucrBase.clsRsyntax.bShowWaitDialogOverride = False
     End Sub
 
     Private Sub SetDefaults()
@@ -122,7 +125,7 @@ Public Class dlgImportFromODK
         Dim expTemp As SymbolicExpression
 
         Cursor = Cursors.WaitCursor
-        expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetFormsFunction.ToScript())
+        expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetFormsFunction.ToScript(), bSeparateThread:=False, bShowWaitDialogOverride:=False)
         Cursor = Cursors.Default
         If expTemp IsNot Nothing Then
             strFormNames = expTemp.AsCharacter().ToArray()

@@ -38,37 +38,10 @@ Partial Class sdgSimpleRegOptions
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgSimpleRegOptions))
         Me.tbGraphics = New System.Windows.Forms.TabPage()
         Me.tcGraphics = New System.Windows.Forms.TabControl()
         Me.tbModel = New System.Windows.Forms.TabPage()
-        Me.grpRugs = New System.Windows.Forms.GroupBox()
-        Me.rdoPartial = New System.Windows.Forms.RadioButton()
-        Me.rdo1 = New System.Windows.Forms.RadioButton()
-        Me.rdo2 = New System.Windows.Forms.RadioButton()
-        Me.lblWhiteSpace = New System.Windows.Forms.Label()
-        Me.lblGraphicsSignLevel = New System.Windows.Forms.Label()
-        Me.grpPlotType = New System.Windows.Forms.GroupBox()
-        Me.rdoContrast = New System.Windows.Forms.RadioButton()
-        Me.rdoConditional = New System.Windows.Forms.RadioButton()
-        Me.grpScale = New System.Windows.Forms.GroupBox()
-        Me.rdoResponse = New System.Windows.Forms.RadioButton()
-        Me.rdoLinear = New System.Windows.Forms.RadioButton()
-        Me.tbResiduals = New System.Windows.Forms.TabPage()
-        Me.grpMultiplePlots = New System.Windows.Forms.GroupBox()
-        Me.rdoSixPlots = New System.Windows.Forms.RadioButton()
-        Me.rdoFourPlots = New System.Windows.Forms.RadioButton()
-        Me.rdoChooseIndividual = New System.Windows.Forms.RadioButton()
-        Me.grpIndividualPlots = New System.Windows.Forms.GroupBox()
-        Me.tbDisplay = New System.Windows.Forms.TabPage()
-        Me.lblConfLevel = New System.Windows.Forms.Label()
-        Me.tbpRegOptions = New System.Windows.Forms.TabControl()
-        Me.tbSave = New System.Windows.Forms.TabPage()
-        Me.ucrNudConfLevel = New instat.ucrNud()
-        Me.ucrChkPvalues = New instat.ucrCheck()
-        Me.ucrChkEstimates = New instat.ucrCheck()
-        Me.ucrChkConfLimits = New instat.ucrCheck()
-        Me.ucrChkANOVA = New instat.ucrCheck()
-        Me.ucrChkModel = New instat.ucrCheck()
         Me.ucrNudWhiteSpace = New instat.ucrNud()
         Me.ucrNudGraphicsCLevel = New instat.ucrNud()
         Me.ucrChkRugs = New instat.ucrCheck()
@@ -76,10 +49,28 @@ Partial Class sdgSimpleRegOptions
         Me.ucrChkPartial = New instat.ucrCheck()
         Me.ucrChkConfIntervalband = New instat.ucrCheck()
         Me.ucrChkFittedModel = New instat.ucrCheck()
+        Me.grpRugs = New System.Windows.Forms.GroupBox()
+        Me.rdoPartial = New System.Windows.Forms.RadioButton()
+        Me.rdo1 = New System.Windows.Forms.RadioButton()
+        Me.rdo2 = New System.Windows.Forms.RadioButton()
         Me.ucrPnlPartial12 = New instat.UcrPanel()
+        Me.lblWhiteSpace = New System.Windows.Forms.Label()
+        Me.lblGraphicsSignLevel = New System.Windows.Forms.Label()
+        Me.grpPlotType = New System.Windows.Forms.GroupBox()
+        Me.rdoContrast = New System.Windows.Forms.RadioButton()
+        Me.rdoConditional = New System.Windows.Forms.RadioButton()
         Me.ucrPnlPlotType = New instat.UcrPanel()
+        Me.grpScale = New System.Windows.Forms.GroupBox()
+        Me.rdoResponse = New System.Windows.Forms.RadioButton()
+        Me.rdoLinear = New System.Windows.Forms.RadioButton()
         Me.ucrPnlScale = New instat.UcrPanel()
+        Me.tbResiduals = New System.Windows.Forms.TabPage()
+        Me.grpMultiplePlots = New System.Windows.Forms.GroupBox()
+        Me.rdoSixPlots = New System.Windows.Forms.RadioButton()
+        Me.rdoFourPlots = New System.Windows.Forms.RadioButton()
+        Me.rdoChooseIndividual = New System.Windows.Forms.RadioButton()
         Me.ucrPnlMutiplePlots = New instat.UcrPanel()
+        Me.grpIndividualPlots = New System.Windows.Forms.GroupBox()
         Me.ucrChkCooksDistance = New instat.ucrCheck()
         Me.ucrChkResidualsFitted = New instat.ucrCheck()
         Me.ucrChkScaleLocation = New instat.ucrCheck()
@@ -87,6 +78,16 @@ Partial Class sdgSimpleRegOptions
         Me.ucrChkQQ = New instat.ucrCheck()
         Me.ucrChkCooksDistanceLeverage = New instat.ucrCheck()
         Me.ucrChkResidualPlots = New instat.ucrCheck()
+        Me.tbDisplay = New System.Windows.Forms.TabPage()
+        Me.ucrNudConfLevel = New instat.ucrNud()
+        Me.ucrChkPvalues = New instat.ucrCheck()
+        Me.ucrChkEstimates = New instat.ucrCheck()
+        Me.ucrChkConfLimits = New instat.ucrCheck()
+        Me.ucrChkANOVA = New instat.ucrCheck()
+        Me.ucrChkModel = New instat.ucrCheck()
+        Me.lblConfLevel = New System.Windows.Forms.Label()
+        Me.tbpRegOptions = New System.Windows.Forms.TabControl()
+        Me.tbSave = New System.Windows.Forms.TabPage()
         Me.ucrSaveLeverageColumnName = New instat.ucrSave()
         Me.ucrSaveStdResidualsColumnName = New instat.ucrSave()
         Me.ucrSaveResidualsColumnName = New instat.ucrSave()
@@ -109,28 +110,22 @@ Partial Class sdgSimpleRegOptions
         'tbGraphics
         '
         Me.tbGraphics.Controls.Add(Me.tcGraphics)
-        Me.tbGraphics.Location = New System.Drawing.Point(4, 22)
+        resources.ApplyResources(Me.tbGraphics, "tbGraphics")
         Me.tbGraphics.Name = "tbGraphics"
-        Me.tbGraphics.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbGraphics.Size = New System.Drawing.Size(313, 316)
-        Me.tbGraphics.TabIndex = 1
         Me.tbGraphics.Tag = "Graphics"
-        Me.tbGraphics.Text = "Graphics"
         Me.tbGraphics.UseVisualStyleBackColor = True
         '
         'tcGraphics
         '
         Me.tcGraphics.Controls.Add(Me.tbModel)
         Me.tcGraphics.Controls.Add(Me.tbResiduals)
-        Me.tcGraphics.Location = New System.Drawing.Point(6, 3)
+        resources.ApplyResources(Me.tcGraphics, "tcGraphics")
         Me.tcGraphics.Name = "tcGraphics"
         Me.tcGraphics.SelectedIndex = 0
-        Me.tcGraphics.Size = New System.Drawing.Size(304, 307)
-        Me.tcGraphics.TabIndex = 0
         '
         'tbModel
         '
-        Me.tbModel.AccessibleDescription = ""
+        resources.ApplyResources(Me.tbModel, "tbModel")
         Me.tbModel.Controls.Add(Me.ucrNudWhiteSpace)
         Me.tbModel.Controls.Add(Me.ucrNudGraphicsCLevel)
         Me.tbModel.Controls.Add(Me.ucrChkRugs)
@@ -143,14 +138,59 @@ Partial Class sdgSimpleRegOptions
         Me.tbModel.Controls.Add(Me.lblGraphicsSignLevel)
         Me.tbModel.Controls.Add(Me.grpPlotType)
         Me.tbModel.Controls.Add(Me.grpScale)
-        Me.tbModel.Location = New System.Drawing.Point(4, 22)
         Me.tbModel.Name = "tbModel"
-        Me.tbModel.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbModel.Size = New System.Drawing.Size(296, 281)
-        Me.tbModel.TabIndex = 0
         Me.tbModel.Tag = "Model"
-        Me.tbModel.Text = "Model"
         Me.tbModel.UseVisualStyleBackColor = True
+        '
+        'ucrNudWhiteSpace
+        '
+        Me.ucrNudWhiteSpace.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWhiteSpace.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudWhiteSpace, "ucrNudWhiteSpace")
+        Me.ucrNudWhiteSpace.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudWhiteSpace.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWhiteSpace.Name = "ucrNudWhiteSpace"
+        Me.ucrNudWhiteSpace.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudGraphicsCLevel
+        '
+        Me.ucrNudGraphicsCLevel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudGraphicsCLevel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudGraphicsCLevel, "ucrNudGraphicsCLevel")
+        Me.ucrNudGraphicsCLevel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudGraphicsCLevel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudGraphicsCLevel.Name = "ucrNudGraphicsCLevel"
+        Me.ucrNudGraphicsCLevel.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkRugs
+        '
+        Me.ucrChkRugs.Checked = False
+        resources.ApplyResources(Me.ucrChkRugs, "ucrChkRugs")
+        Me.ucrChkRugs.Name = "ucrChkRugs"
+        '
+        'ucrChkJitter
+        '
+        Me.ucrChkJitter.Checked = False
+        resources.ApplyResources(Me.ucrChkJitter, "ucrChkJitter")
+        Me.ucrChkJitter.Name = "ucrChkJitter"
+        '
+        'ucrChkPartial
+        '
+        Me.ucrChkPartial.Checked = False
+        resources.ApplyResources(Me.ucrChkPartial, "ucrChkPartial")
+        Me.ucrChkPartial.Name = "ucrChkPartial"
+        '
+        'ucrChkConfIntervalband
+        '
+        Me.ucrChkConfIntervalband.Checked = False
+        resources.ApplyResources(Me.ucrChkConfIntervalband, "ucrChkConfIntervalband")
+        Me.ucrChkConfIntervalband.Name = "ucrChkConfIntervalband"
+        '
+        'ucrChkFittedModel
+        '
+        Me.ucrChkFittedModel.Checked = False
+        resources.ApplyResources(Me.ucrChkFittedModel, "ucrChkFittedModel")
+        Me.ucrChkFittedModel.Name = "ucrChkFittedModel"
         '
         'grpRugs
         '
@@ -158,152 +198,119 @@ Partial Class sdgSimpleRegOptions
         Me.grpRugs.Controls.Add(Me.rdo1)
         Me.grpRugs.Controls.Add(Me.rdo2)
         Me.grpRugs.Controls.Add(Me.ucrPnlPartial12)
-        Me.grpRugs.Location = New System.Drawing.Point(8, 230)
+        resources.ApplyResources(Me.grpRugs, "grpRugs")
         Me.grpRugs.Name = "grpRugs"
-        Me.grpRugs.Size = New System.Drawing.Size(190, 46)
-        Me.grpRugs.TabIndex = 1
         Me.grpRugs.TabStop = False
         '
         'rdoPartial
         '
-        Me.rdoPartial.AutoSize = True
-        Me.rdoPartial.Location = New System.Drawing.Point(14, 16)
+        resources.ApplyResources(Me.rdoPartial, "rdoPartial")
         Me.rdoPartial.Name = "rdoPartial"
-        Me.rdoPartial.Size = New System.Drawing.Size(54, 17)
-        Me.rdoPartial.TabIndex = 1
         Me.rdoPartial.TabStop = True
         Me.rdoPartial.Tag = "Partial"
-        Me.rdoPartial.Text = "Partial"
         Me.rdoPartial.UseVisualStyleBackColor = True
         '
         'rdo1
         '
-        Me.rdo1.AutoSize = True
-        Me.rdo1.Location = New System.Drawing.Point(88, 16)
+        resources.ApplyResources(Me.rdo1, "rdo1")
         Me.rdo1.Name = "rdo1"
-        Me.rdo1.Size = New System.Drawing.Size(31, 17)
-        Me.rdo1.TabIndex = 2
         Me.rdo1.TabStop = True
         Me.rdo1.Tag = "1"
-        Me.rdo1.Text = "1"
         Me.rdo1.UseVisualStyleBackColor = True
         '
         'rdo2
         '
-        Me.rdo2.AutoSize = True
-        Me.rdo2.Location = New System.Drawing.Point(139, 16)
+        resources.ApplyResources(Me.rdo2, "rdo2")
         Me.rdo2.Name = "rdo2"
-        Me.rdo2.Size = New System.Drawing.Size(31, 17)
-        Me.rdo2.TabIndex = 3
         Me.rdo2.TabStop = True
         Me.rdo2.Tag = "2"
-        Me.rdo2.Text = "2"
         Me.rdo2.UseVisualStyleBackColor = True
+        '
+        'ucrPnlPartial12
+        '
+        resources.ApplyResources(Me.ucrPnlPartial12, "ucrPnlPartial12")
+        Me.ucrPnlPartial12.Name = "ucrPnlPartial12"
         '
         'lblWhiteSpace
         '
-        Me.lblWhiteSpace.AutoSize = True
-        Me.lblWhiteSpace.Location = New System.Drawing.Point(9, 149)
+        resources.ApplyResources(Me.lblWhiteSpace, "lblWhiteSpace")
         Me.lblWhiteSpace.Name = "lblWhiteSpace"
-        Me.lblWhiteSpace.Size = New System.Drawing.Size(72, 13)
-        Me.lblWhiteSpace.TabIndex = 7
         Me.lblWhiteSpace.Tag = "White_Space:"
-        Me.lblWhiteSpace.Text = "White Space:"
         '
         'lblGraphicsSignLevel
         '
-        Me.lblGraphicsSignLevel.AutoSize = True
-        Me.lblGraphicsSignLevel.Location = New System.Drawing.Point(9, 124)
+        resources.ApplyResources(Me.lblGraphicsSignLevel, "lblGraphicsSignLevel")
         Me.lblGraphicsSignLevel.Name = "lblGraphicsSignLevel"
-        Me.lblGraphicsSignLevel.Size = New System.Drawing.Size(97, 13)
-        Me.lblGraphicsSignLevel.TabIndex = 5
         Me.lblGraphicsSignLevel.Tag = "Significance_Level:"
-        Me.lblGraphicsSignLevel.Text = "Significance Level:"
         '
         'grpPlotType
         '
         Me.grpPlotType.Controls.Add(Me.rdoContrast)
         Me.grpPlotType.Controls.Add(Me.rdoConditional)
         Me.grpPlotType.Controls.Add(Me.ucrPnlPlotType)
-        Me.grpPlotType.Location = New System.Drawing.Point(8, 33)
+        resources.ApplyResources(Me.grpPlotType, "grpPlotType")
         Me.grpPlotType.Name = "grpPlotType"
-        Me.grpPlotType.Size = New System.Drawing.Size(111, 75)
-        Me.grpPlotType.TabIndex = 3
         Me.grpPlotType.TabStop = False
         Me.grpPlotType.Tag = "Plot_type"
-        Me.grpPlotType.Text = "Plot type"
         '
         'rdoContrast
         '
-        Me.rdoContrast.AutoSize = True
-        Me.rdoContrast.Location = New System.Drawing.Point(9, 43)
+        resources.ApplyResources(Me.rdoContrast, "rdoContrast")
         Me.rdoContrast.Name = "rdoContrast"
-        Me.rdoContrast.Size = New System.Drawing.Size(64, 17)
-        Me.rdoContrast.TabIndex = 1
         Me.rdoContrast.Tag = "Contrast"
-        Me.rdoContrast.Text = "Contrast"
         Me.rdoContrast.UseVisualStyleBackColor = True
         '
         'rdoConditional
         '
-        Me.rdoConditional.AutoSize = True
-        Me.rdoConditional.Location = New System.Drawing.Point(9, 19)
+        resources.ApplyResources(Me.rdoConditional, "rdoConditional")
         Me.rdoConditional.Name = "rdoConditional"
-        Me.rdoConditional.Size = New System.Drawing.Size(77, 17)
-        Me.rdoConditional.TabIndex = 0
         Me.rdoConditional.Tag = "Conditional"
-        Me.rdoConditional.Text = "Conditional"
         Me.rdoConditional.UseVisualStyleBackColor = True
+        '
+        'ucrPnlPlotType
+        '
+        resources.ApplyResources(Me.ucrPnlPlotType, "ucrPnlPlotType")
+        Me.ucrPnlPlotType.Name = "ucrPnlPlotType"
         '
         'grpScale
         '
         Me.grpScale.Controls.Add(Me.rdoResponse)
         Me.grpScale.Controls.Add(Me.rdoLinear)
         Me.grpScale.Controls.Add(Me.ucrPnlScale)
-        Me.grpScale.Location = New System.Drawing.Point(161, 33)
+        resources.ApplyResources(Me.grpScale, "grpScale")
         Me.grpScale.Name = "grpScale"
-        Me.grpScale.Size = New System.Drawing.Size(112, 75)
-        Me.grpScale.TabIndex = 4
         Me.grpScale.TabStop = False
         Me.grpScale.Tag = "Scale"
-        Me.grpScale.Text = "Scale"
         '
         'rdoResponse
         '
-        Me.rdoResponse.AutoSize = True
-        Me.rdoResponse.Location = New System.Drawing.Point(9, 42)
+        resources.ApplyResources(Me.rdoResponse, "rdoResponse")
         Me.rdoResponse.Name = "rdoResponse"
-        Me.rdoResponse.Size = New System.Drawing.Size(73, 17)
-        Me.rdoResponse.TabIndex = 1
         Me.rdoResponse.TabStop = True
         Me.rdoResponse.Tag = "Response"
-        Me.rdoResponse.Text = "Response"
         Me.rdoResponse.UseVisualStyleBackColor = True
         '
         'rdoLinear
         '
-        Me.rdoLinear.AutoSize = True
-        Me.rdoLinear.Location = New System.Drawing.Point(9, 18)
+        resources.ApplyResources(Me.rdoLinear, "rdoLinear")
         Me.rdoLinear.Name = "rdoLinear"
-        Me.rdoLinear.Size = New System.Drawing.Size(54, 17)
-        Me.rdoLinear.TabIndex = 0
         Me.rdoLinear.TabStop = True
         Me.rdoLinear.Tag = "Linear"
-        Me.rdoLinear.Text = "Linear"
         Me.rdoLinear.UseVisualStyleBackColor = True
+        '
+        'ucrPnlScale
+        '
+        resources.ApplyResources(Me.ucrPnlScale, "ucrPnlScale")
+        Me.ucrPnlScale.Name = "ucrPnlScale"
         '
         'tbResiduals
         '
         Me.tbResiduals.Controls.Add(Me.grpMultiplePlots)
         Me.tbResiduals.Controls.Add(Me.grpIndividualPlots)
         Me.tbResiduals.Controls.Add(Me.ucrChkResidualPlots)
-        Me.tbResiduals.Location = New System.Drawing.Point(4, 22)
+        resources.ApplyResources(Me.tbResiduals, "tbResiduals")
         Me.tbResiduals.Name = "tbResiduals"
-        Me.tbResiduals.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbResiduals.Size = New System.Drawing.Size(296, 281)
-        Me.tbResiduals.TabIndex = 1
         Me.tbResiduals.Tag = "Residuals"
-        Me.tbResiduals.Text = "Residuals"
         Me.tbResiduals.UseVisualStyleBackColor = True
         '
         'grpMultiplePlots
@@ -312,49 +319,39 @@ Partial Class sdgSimpleRegOptions
         Me.grpMultiplePlots.Controls.Add(Me.rdoFourPlots)
         Me.grpMultiplePlots.Controls.Add(Me.rdoChooseIndividual)
         Me.grpMultiplePlots.Controls.Add(Me.ucrPnlMutiplePlots)
-        Me.grpMultiplePlots.Location = New System.Drawing.Point(8, 33)
+        resources.ApplyResources(Me.grpMultiplePlots, "grpMultiplePlots")
         Me.grpMultiplePlots.Name = "grpMultiplePlots"
-        Me.grpMultiplePlots.Size = New System.Drawing.Size(278, 90)
-        Me.grpMultiplePlots.TabIndex = 1
         Me.grpMultiplePlots.TabStop = False
         Me.grpMultiplePlots.Tag = ""
-        Me.grpMultiplePlots.Text = "Plots"
         '
         'rdoSixPlots
         '
-        Me.rdoSixPlots.AutoSize = True
-        Me.rdoSixPlots.Location = New System.Drawing.Point(9, 64)
+        resources.ApplyResources(Me.rdoSixPlots, "rdoSixPlots")
         Me.rdoSixPlots.Name = "rdoSixPlots"
-        Me.rdoSixPlots.Size = New System.Drawing.Size(65, 17)
-        Me.rdoSixPlots.TabIndex = 0
         Me.rdoSixPlots.TabStop = True
         Me.rdoSixPlots.Tag = "Six Plots"
-        Me.rdoSixPlots.Text = "Six Plots"
         Me.rdoSixPlots.UseVisualStyleBackColor = True
         '
         'rdoFourPlots
         '
-        Me.rdoFourPlots.AutoSize = True
-        Me.rdoFourPlots.Location = New System.Drawing.Point(9, 18)
+        resources.ApplyResources(Me.rdoFourPlots, "rdoFourPlots")
         Me.rdoFourPlots.Name = "rdoFourPlots"
-        Me.rdoFourPlots.Size = New System.Drawing.Size(72, 17)
-        Me.rdoFourPlots.TabIndex = 1
         Me.rdoFourPlots.TabStop = True
         Me.rdoFourPlots.Tag = "Four_Plots"
-        Me.rdoFourPlots.Text = "Four Plots"
         Me.rdoFourPlots.UseVisualStyleBackColor = True
         '
         'rdoChooseIndividual
         '
-        Me.rdoChooseIndividual.AutoSize = True
-        Me.rdoChooseIndividual.Location = New System.Drawing.Point(9, 41)
+        resources.ApplyResources(Me.rdoChooseIndividual, "rdoChooseIndividual")
         Me.rdoChooseIndividual.Name = "rdoChooseIndividual"
-        Me.rdoChooseIndividual.Size = New System.Drawing.Size(135, 17)
-        Me.rdoChooseIndividual.TabIndex = 3
         Me.rdoChooseIndividual.TabStop = True
         Me.rdoChooseIndividual.Tag = ""
-        Me.rdoChooseIndividual.Text = "Choose Individual Plots"
         Me.rdoChooseIndividual.UseVisualStyleBackColor = True
+        '
+        'ucrPnlMutiplePlots
+        '
+        resources.ApplyResources(Me.ucrPnlMutiplePlots, "ucrPnlMutiplePlots")
+        Me.ucrPnlMutiplePlots.Name = "ucrPnlMutiplePlots"
         '
         'grpIndividualPlots
         '
@@ -364,13 +361,52 @@ Partial Class sdgSimpleRegOptions
         Me.grpIndividualPlots.Controls.Add(Me.ucrChkResidualsLeverage)
         Me.grpIndividualPlots.Controls.Add(Me.ucrChkQQ)
         Me.grpIndividualPlots.Controls.Add(Me.ucrChkCooksDistanceLeverage)
-        Me.grpIndividualPlots.Location = New System.Drawing.Point(8, 129)
+        resources.ApplyResources(Me.grpIndividualPlots, "grpIndividualPlots")
         Me.grpIndividualPlots.Name = "grpIndividualPlots"
-        Me.grpIndividualPlots.Size = New System.Drawing.Size(278, 95)
-        Me.grpIndividualPlots.TabIndex = 2
         Me.grpIndividualPlots.TabStop = False
         Me.grpIndividualPlots.Tag = ""
-        Me.grpIndividualPlots.Text = "Individual Plots"
+        '
+        'ucrChkCooksDistance
+        '
+        Me.ucrChkCooksDistance.Checked = False
+        resources.ApplyResources(Me.ucrChkCooksDistance, "ucrChkCooksDistance")
+        Me.ucrChkCooksDistance.Name = "ucrChkCooksDistance"
+        '
+        'ucrChkResidualsFitted
+        '
+        Me.ucrChkResidualsFitted.Checked = False
+        resources.ApplyResources(Me.ucrChkResidualsFitted, "ucrChkResidualsFitted")
+        Me.ucrChkResidualsFitted.Name = "ucrChkResidualsFitted"
+        '
+        'ucrChkScaleLocation
+        '
+        Me.ucrChkScaleLocation.Checked = False
+        resources.ApplyResources(Me.ucrChkScaleLocation, "ucrChkScaleLocation")
+        Me.ucrChkScaleLocation.Name = "ucrChkScaleLocation"
+        '
+        'ucrChkResidualsLeverage
+        '
+        Me.ucrChkResidualsLeverage.Checked = False
+        resources.ApplyResources(Me.ucrChkResidualsLeverage, "ucrChkResidualsLeverage")
+        Me.ucrChkResidualsLeverage.Name = "ucrChkResidualsLeverage"
+        '
+        'ucrChkQQ
+        '
+        Me.ucrChkQQ.Checked = False
+        resources.ApplyResources(Me.ucrChkQQ, "ucrChkQQ")
+        Me.ucrChkQQ.Name = "ucrChkQQ"
+        '
+        'ucrChkCooksDistanceLeverage
+        '
+        Me.ucrChkCooksDistanceLeverage.Checked = False
+        resources.ApplyResources(Me.ucrChkCooksDistanceLeverage, "ucrChkCooksDistanceLeverage")
+        Me.ucrChkCooksDistanceLeverage.Name = "ucrChkCooksDistanceLeverage"
+        '
+        'ucrChkResidualPlots
+        '
+        Me.ucrChkResidualPlots.Checked = False
+        resources.ApplyResources(Me.ucrChkResidualPlots, "ucrChkResidualPlots")
+        Me.ucrChkResidualPlots.Name = "ucrChkResidualPlots"
         '
         'tbDisplay
         '
@@ -381,35 +417,65 @@ Partial Class sdgSimpleRegOptions
         Me.tbDisplay.Controls.Add(Me.ucrChkANOVA)
         Me.tbDisplay.Controls.Add(Me.ucrChkModel)
         Me.tbDisplay.Controls.Add(Me.lblConfLevel)
-        Me.tbDisplay.Location = New System.Drawing.Point(4, 22)
+        resources.ApplyResources(Me.tbDisplay, "tbDisplay")
         Me.tbDisplay.Name = "tbDisplay"
-        Me.tbDisplay.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbDisplay.Size = New System.Drawing.Size(313, 316)
-        Me.tbDisplay.TabIndex = 0
         Me.tbDisplay.Tag = "Display"
-        Me.tbDisplay.Text = "Display"
         Me.tbDisplay.UseVisualStyleBackColor = True
+        '
+        'ucrNudConfLevel
+        '
+        Me.ucrNudConfLevel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudConfLevel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudConfLevel, "ucrNudConfLevel")
+        Me.ucrNudConfLevel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudConfLevel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudConfLevel.Name = "ucrNudConfLevel"
+        Me.ucrNudConfLevel.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkPvalues
+        '
+        Me.ucrChkPvalues.Checked = False
+        resources.ApplyResources(Me.ucrChkPvalues, "ucrChkPvalues")
+        Me.ucrChkPvalues.Name = "ucrChkPvalues"
+        '
+        'ucrChkEstimates
+        '
+        Me.ucrChkEstimates.Checked = False
+        resources.ApplyResources(Me.ucrChkEstimates, "ucrChkEstimates")
+        Me.ucrChkEstimates.Name = "ucrChkEstimates"
+        '
+        'ucrChkConfLimits
+        '
+        Me.ucrChkConfLimits.Checked = False
+        resources.ApplyResources(Me.ucrChkConfLimits, "ucrChkConfLimits")
+        Me.ucrChkConfLimits.Name = "ucrChkConfLimits"
+        '
+        'ucrChkANOVA
+        '
+        Me.ucrChkANOVA.Checked = False
+        resources.ApplyResources(Me.ucrChkANOVA, "ucrChkANOVA")
+        Me.ucrChkANOVA.Name = "ucrChkANOVA"
+        '
+        'ucrChkModel
+        '
+        Me.ucrChkModel.Checked = False
+        resources.ApplyResources(Me.ucrChkModel, "ucrChkModel")
+        Me.ucrChkModel.Name = "ucrChkModel"
         '
         'lblConfLevel
         '
-        Me.lblConfLevel.AutoSize = True
-        Me.lblConfLevel.Location = New System.Drawing.Point(47, 118)
+        resources.ApplyResources(Me.lblConfLevel, "lblConfLevel")
         Me.lblConfLevel.Name = "lblConfLevel"
-        Me.lblConfLevel.Size = New System.Drawing.Size(93, 13)
-        Me.lblConfLevel.TabIndex = 5
         Me.lblConfLevel.Tag = "Confidence_Level:"
-        Me.lblConfLevel.Text = "Confidence Level:"
         '
         'tbpRegOptions
         '
         Me.tbpRegOptions.Controls.Add(Me.tbDisplay)
         Me.tbpRegOptions.Controls.Add(Me.tbGraphics)
         Me.tbpRegOptions.Controls.Add(Me.tbSave)
-        Me.tbpRegOptions.Location = New System.Drawing.Point(2, 3)
+        resources.ApplyResources(Me.tbpRegOptions, "tbpRegOptions")
         Me.tbpRegOptions.Name = "tbpRegOptions"
         Me.tbpRegOptions.SelectedIndex = 0
-        Me.tbpRegOptions.Size = New System.Drawing.Size(321, 342)
-        Me.tbpRegOptions.TabIndex = 0
         '
         'tbSave
         '
@@ -417,268 +483,47 @@ Partial Class sdgSimpleRegOptions
         Me.tbSave.Controls.Add(Me.ucrSaveStdResidualsColumnName)
         Me.tbSave.Controls.Add(Me.ucrSaveResidualsColumnName)
         Me.tbSave.Controls.Add(Me.ucrSaveFittedColumnName)
-        Me.tbSave.Location = New System.Drawing.Point(4, 22)
+        resources.ApplyResources(Me.tbSave, "tbSave")
         Me.tbSave.Name = "tbSave"
-        Me.tbSave.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbSave.Size = New System.Drawing.Size(313, 316)
-        Me.tbSave.TabIndex = 2
         Me.tbSave.Tag = "Save"
-        Me.tbSave.Text = "Save"
         Me.tbSave.UseVisualStyleBackColor = True
-        '
-        'ucrNudConfLevel
-        '
-        Me.ucrNudConfLevel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudConfLevel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudConfLevel.Location = New System.Drawing.Point(145, 114)
-        Me.ucrNudConfLevel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudConfLevel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudConfLevel.Name = "ucrNudConfLevel"
-        Me.ucrNudConfLevel.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudConfLevel.TabIndex = 6
-        Me.ucrNudConfLevel.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkPvalues
-        '
-        Me.ucrChkPvalues.Checked = False
-        Me.ucrChkPvalues.Location = New System.Drawing.Point(147, 37)
-        Me.ucrChkPvalues.Name = "ucrChkPvalues"
-        Me.ucrChkPvalues.Size = New System.Drawing.Size(113, 20)
-        Me.ucrChkPvalues.TabIndex = 2
-        '
-        'ucrChkEstimates
-        '
-        Me.ucrChkEstimates.Checked = False
-        Me.ucrChkEstimates.Location = New System.Drawing.Point(10, 64)
-        Me.ucrChkEstimates.Name = "ucrChkEstimates"
-        Me.ucrChkEstimates.Size = New System.Drawing.Size(113, 20)
-        Me.ucrChkEstimates.TabIndex = 3
-        '
-        'ucrChkConfLimits
-        '
-        Me.ucrChkConfLimits.Checked = False
-        Me.ucrChkConfLimits.Location = New System.Drawing.Point(10, 91)
-        Me.ucrChkConfLimits.Name = "ucrChkConfLimits"
-        Me.ucrChkConfLimits.Size = New System.Drawing.Size(113, 20)
-        Me.ucrChkConfLimits.TabIndex = 4
-        '
-        'ucrChkANOVA
-        '
-        Me.ucrChkANOVA.Checked = False
-        Me.ucrChkANOVA.Location = New System.Drawing.Point(10, 37)
-        Me.ucrChkANOVA.Name = "ucrChkANOVA"
-        Me.ucrChkANOVA.Size = New System.Drawing.Size(113, 20)
-        Me.ucrChkANOVA.TabIndex = 1
-        '
-        'ucrChkModel
-        '
-        Me.ucrChkModel.Checked = False
-        Me.ucrChkModel.Location = New System.Drawing.Point(10, 10)
-        Me.ucrChkModel.Name = "ucrChkModel"
-        Me.ucrChkModel.Size = New System.Drawing.Size(113, 20)
-        Me.ucrChkModel.TabIndex = 0
-        '
-        'ucrNudWhiteSpace
-        '
-        Me.ucrNudWhiteSpace.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudWhiteSpace.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudWhiteSpace.Location = New System.Drawing.Point(112, 147)
-        Me.ucrNudWhiteSpace.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudWhiteSpace.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudWhiteSpace.Name = "ucrNudWhiteSpace"
-        Me.ucrNudWhiteSpace.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudWhiteSpace.TabIndex = 8
-        Me.ucrNudWhiteSpace.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudGraphicsCLevel
-        '
-        Me.ucrNudGraphicsCLevel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudGraphicsCLevel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudGraphicsCLevel.Location = New System.Drawing.Point(112, 121)
-        Me.ucrNudGraphicsCLevel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudGraphicsCLevel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudGraphicsCLevel.Name = "ucrNudGraphicsCLevel"
-        Me.ucrNudGraphicsCLevel.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudGraphicsCLevel.TabIndex = 6
-        Me.ucrNudGraphicsCLevel.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkRugs
-        '
-        Me.ucrChkRugs.Checked = False
-        Me.ucrChkRugs.Location = New System.Drawing.Point(126, 179)
-        Me.ucrChkRugs.Name = "ucrChkRugs"
-        Me.ucrChkRugs.Size = New System.Drawing.Size(113, 20)
-        Me.ucrChkRugs.TabIndex = 10
-        '
-        'ucrChkJitter
-        '
-        Me.ucrChkJitter.Checked = False
-        Me.ucrChkJitter.Location = New System.Drawing.Point(10, 204)
-        Me.ucrChkJitter.Name = "ucrChkJitter"
-        Me.ucrChkJitter.Size = New System.Drawing.Size(97, 20)
-        Me.ucrChkJitter.TabIndex = 11
-        '
-        'ucrChkPartial
-        '
-        Me.ucrChkPartial.Checked = False
-        Me.ucrChkPartial.Location = New System.Drawing.Point(10, 178)
-        Me.ucrChkPartial.Name = "ucrChkPartial"
-        Me.ucrChkPartial.Size = New System.Drawing.Size(109, 20)
-        Me.ucrChkPartial.TabIndex = 9
-        '
-        'ucrChkConfIntervalband
-        '
-        Me.ucrChkConfIntervalband.Checked = False
-        Me.ucrChkConfIntervalband.Location = New System.Drawing.Point(126, 202)
-        Me.ucrChkConfIntervalband.Name = "ucrChkConfIntervalband"
-        Me.ucrChkConfIntervalband.Size = New System.Drawing.Size(113, 20)
-        Me.ucrChkConfIntervalband.TabIndex = 0
-        '
-        'ucrChkFittedModel
-        '
-        Me.ucrChkFittedModel.Checked = False
-        Me.ucrChkFittedModel.Location = New System.Drawing.Point(10, 7)
-        Me.ucrChkFittedModel.Name = "ucrChkFittedModel"
-        Me.ucrChkFittedModel.Size = New System.Drawing.Size(113, 20)
-        Me.ucrChkFittedModel.TabIndex = 0
-        '
-        'ucrPnlPartial12
-        '
-        Me.ucrPnlPartial12.Location = New System.Drawing.Point(6, 13)
-        Me.ucrPnlPartial12.Name = "ucrPnlPartial12"
-        Me.ucrPnlPartial12.Size = New System.Drawing.Size(176, 27)
-        Me.ucrPnlPartial12.TabIndex = 0
-        '
-        'ucrPnlPlotType
-        '
-        Me.ucrPnlPlotType.Location = New System.Drawing.Point(2, 13)
-        Me.ucrPnlPlotType.Name = "ucrPnlPlotType"
-        Me.ucrPnlPlotType.Size = New System.Drawing.Size(103, 56)
-        Me.ucrPnlPlotType.TabIndex = 2
-        '
-        'ucrPnlScale
-        '
-        Me.ucrPnlScale.Location = New System.Drawing.Point(6, 13)
-        Me.ucrPnlScale.Name = "ucrPnlScale"
-        Me.ucrPnlScale.Size = New System.Drawing.Size(94, 56)
-        Me.ucrPnlScale.TabIndex = 2
-        '
-        'ucrPnlMutiplePlots
-        '
-        Me.ucrPnlMutiplePlots.Location = New System.Drawing.Point(4, 12)
-        Me.ucrPnlMutiplePlots.Name = "ucrPnlMutiplePlots"
-        Me.ucrPnlMutiplePlots.Size = New System.Drawing.Size(223, 69)
-        Me.ucrPnlMutiplePlots.TabIndex = 2
-        '
-        'ucrChkCooksDistance
-        '
-        Me.ucrChkCooksDistance.Checked = False
-        Me.ucrChkCooksDistance.Location = New System.Drawing.Point(185, 67)
-        Me.ucrChkCooksDistance.Name = "ucrChkCooksDistance"
-        Me.ucrChkCooksDistance.Size = New System.Drawing.Size(94, 20)
-        Me.ucrChkCooksDistance.TabIndex = 5
-        '
-        'ucrChkResidualsFitted
-        '
-        Me.ucrChkResidualsFitted.Checked = False
-        Me.ucrChkResidualsFitted.Location = New System.Drawing.Point(15, 21)
-        Me.ucrChkResidualsFitted.Name = "ucrChkResidualsFitted"
-        Me.ucrChkResidualsFitted.Size = New System.Drawing.Size(164, 20)
-        Me.ucrChkResidualsFitted.TabIndex = 0
-        '
-        'ucrChkScaleLocation
-        '
-        Me.ucrChkScaleLocation.Checked = False
-        Me.ucrChkScaleLocation.Location = New System.Drawing.Point(185, 44)
-        Me.ucrChkScaleLocation.Name = "ucrChkScaleLocation"
-        Me.ucrChkScaleLocation.Size = New System.Drawing.Size(94, 20)
-        Me.ucrChkScaleLocation.TabIndex = 3
-        '
-        'ucrChkResidualsLeverage
-        '
-        Me.ucrChkResidualsLeverage.Checked = False
-        Me.ucrChkResidualsLeverage.Location = New System.Drawing.Point(15, 44)
-        Me.ucrChkResidualsLeverage.Name = "ucrChkResidualsLeverage"
-        Me.ucrChkResidualsLeverage.Size = New System.Drawing.Size(164, 20)
-        Me.ucrChkResidualsLeverage.TabIndex = 2
-        '
-        'ucrChkQQ
-        '
-        Me.ucrChkQQ.Checked = False
-        Me.ucrChkQQ.Location = New System.Drawing.Point(185, 21)
-        Me.ucrChkQQ.Name = "ucrChkQQ"
-        Me.ucrChkQQ.Size = New System.Drawing.Size(94, 20)
-        Me.ucrChkQQ.TabIndex = 1
-        '
-        'ucrChkCooksDistanceLeverage
-        '
-        Me.ucrChkCooksDistanceLeverage.Checked = False
-        Me.ucrChkCooksDistanceLeverage.Location = New System.Drawing.Point(15, 67)
-        Me.ucrChkCooksDistanceLeverage.Name = "ucrChkCooksDistanceLeverage"
-        Me.ucrChkCooksDistanceLeverage.Size = New System.Drawing.Size(164, 20)
-        Me.ucrChkCooksDistanceLeverage.TabIndex = 4
-        '
-        'ucrChkResidualPlots
-        '
-        Me.ucrChkResidualPlots.Checked = False
-        Me.ucrChkResidualPlots.Location = New System.Drawing.Point(10, 7)
-        Me.ucrChkResidualPlots.Name = "ucrChkResidualPlots"
-        Me.ucrChkResidualPlots.Size = New System.Drawing.Size(113, 20)
-        Me.ucrChkResidualPlots.TabIndex = 0
         '
         'ucrSaveLeverageColumnName
         '
-        Me.ucrSaveLeverageColumnName.Enabled = False
-        Me.ucrSaveLeverageColumnName.Location = New System.Drawing.Point(10, 91)
+        resources.ApplyResources(Me.ucrSaveLeverageColumnName, "ucrSaveLeverageColumnName")
         Me.ucrSaveLeverageColumnName.Name = "ucrSaveLeverageColumnName"
-        Me.ucrSaveLeverageColumnName.Size = New System.Drawing.Size(255, 24)
-        Me.ucrSaveLeverageColumnName.TabIndex = 3
         '
         'ucrSaveStdResidualsColumnName
         '
-        Me.ucrSaveStdResidualsColumnName.Enabled = False
-        Me.ucrSaveStdResidualsColumnName.Location = New System.Drawing.Point(10, 64)
+        resources.ApplyResources(Me.ucrSaveStdResidualsColumnName, "ucrSaveStdResidualsColumnName")
         Me.ucrSaveStdResidualsColumnName.Name = "ucrSaveStdResidualsColumnName"
-        Me.ucrSaveStdResidualsColumnName.Size = New System.Drawing.Size(255, 24)
-        Me.ucrSaveStdResidualsColumnName.TabIndex = 2
         '
         'ucrSaveResidualsColumnName
         '
-        Me.ucrSaveResidualsColumnName.Enabled = False
-        Me.ucrSaveResidualsColumnName.Location = New System.Drawing.Point(10, 37)
+        resources.ApplyResources(Me.ucrSaveResidualsColumnName, "ucrSaveResidualsColumnName")
         Me.ucrSaveResidualsColumnName.Name = "ucrSaveResidualsColumnName"
-        Me.ucrSaveResidualsColumnName.Size = New System.Drawing.Size(255, 24)
-        Me.ucrSaveResidualsColumnName.TabIndex = 1
         '
         'ucrSaveFittedColumnName
         '
-        Me.ucrSaveFittedColumnName.Enabled = False
-        Me.ucrSaveFittedColumnName.Location = New System.Drawing.Point(10, 10)
+        resources.ApplyResources(Me.ucrSaveFittedColumnName, "ucrSaveFittedColumnName")
         Me.ucrSaveFittedColumnName.Name = "ucrSaveFittedColumnName"
-        Me.ucrSaveFittedColumnName.Size = New System.Drawing.Size(255, 24)
-        Me.ucrSaveFittedColumnName.TabIndex = 0
         '
         'ucrSdgButtons
         '
-        Me.ucrSdgButtons.Location = New System.Drawing.Point(94, 347)
+        resources.ApplyResources(Me.ucrSdgButtons, "ucrSdgButtons")
         Me.ucrSdgButtons.Name = "ucrSdgButtons"
-        Me.ucrSdgButtons.Size = New System.Drawing.Size(142, 30)
-        Me.ucrSdgButtons.TabIndex = 1
         '
         'sdgSimpleRegOptions
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(322, 378)
         Me.Controls.Add(Me.tbpRegOptions)
         Me.Controls.Add(Me.ucrSdgButtons)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgSimpleRegOptions"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Tag = "Graph_and_Display_Options"
-        Me.Text = "Graph and Display Options"
         Me.tbGraphics.ResumeLayout(False)
         Me.tcGraphics.ResumeLayout(False)
         Me.tbModel.ResumeLayout(False)

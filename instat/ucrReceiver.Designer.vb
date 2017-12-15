@@ -38,8 +38,16 @@ Partial Class ucrReceiver
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrReceiver))
+        Me.SuspendLayout()
+        '
+        'ucrReceiver
+        '
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Name = "ucrReceiver"
+        Me.ResumeLayout(False)
+
     End Sub
 
 End Class
