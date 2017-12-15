@@ -611,7 +611,6 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub FillExcelSheets(strFilePath As String)
-        Dim i As Integer
         Dim expSheet As SymbolicExpression
         Dim chrSheets As CharacterVector
 
@@ -703,6 +702,10 @@ Public Class dlgImportDataset
         'Gets the current number of (visible) data frame before importing
         'So correct current data frame can be set after
         iDataFrameCount = frmMain.GetDataFrameCount()
+    End Sub
+
+    Private Sub ucrInputSheets_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSelectSheetExcel.ControlValueChanged
+
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk

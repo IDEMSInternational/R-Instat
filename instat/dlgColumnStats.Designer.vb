@@ -38,6 +38,7 @@ Partial Class dlgColumnStats
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgColumnStats))
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
         Me.lblByFactors = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
@@ -56,21 +57,13 @@ Partial Class dlgColumnStats
         '
         'lblSelectedVariables
         '
-        Me.lblSelectedVariables.AutoSize = True
-        Me.lblSelectedVariables.Location = New System.Drawing.Point(265, 45)
+        resources.ApplyResources(Me.lblSelectedVariables, "lblSelectedVariables")
         Me.lblSelectedVariables.Name = "lblSelectedVariables"
-        Me.lblSelectedVariables.Size = New System.Drawing.Size(125, 13)
-        Me.lblSelectedVariables.TabIndex = 1
-        Me.lblSelectedVariables.Text = "Variable(s) to Summarise:"
         '
         'lblByFactors
         '
-        Me.lblByFactors.AutoSize = True
-        Me.lblByFactors.Location = New System.Drawing.Point(265, 168)
+        resources.ApplyResources(Me.lblByFactors, "lblByFactors")
         Me.lblByFactors.Name = "lblByFactors"
-        Me.lblByFactors.Size = New System.Drawing.Size(66, 13)
-        Me.lblByFactors.TabIndex = 3
-        Me.lblByFactors.Text = "By Factor(s):"
         '
         'grpOptions
         '
@@ -78,111 +71,82 @@ Partial Class dlgColumnStats
         Me.grpOptions.Controls.Add(Me.ucrChkOmitMissing)
         Me.grpOptions.Controls.Add(Me.ucrChkPrintOutput)
         Me.grpOptions.Controls.Add(Me.ucrChkDropUnusedLevels)
-        Me.grpOptions.Location = New System.Drawing.Point(10, 196)
+        resources.ApplyResources(Me.grpOptions, "grpOptions")
         Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.Size = New System.Drawing.Size(160, 121)
-        Me.grpOptions.TabIndex = 5
         Me.grpOptions.TabStop = False
-        Me.grpOptions.Text = "Options"
         '
         'ucrChkStoreResults
         '
         Me.ucrChkStoreResults.Checked = False
-        Me.ucrChkStoreResults.Location = New System.Drawing.Point(6, 17)
+        resources.ApplyResources(Me.ucrChkStoreResults, "ucrChkStoreResults")
         Me.ucrChkStoreResults.Name = "ucrChkStoreResults"
-        Me.ucrChkStoreResults.Size = New System.Drawing.Size(148, 20)
-        Me.ucrChkStoreResults.TabIndex = 0
         '
         'ucrChkOmitMissing
         '
         Me.ucrChkOmitMissing.Checked = False
-        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(6, 92)
+        resources.ApplyResources(Me.ucrChkOmitMissing, "ucrChkOmitMissing")
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
-        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(148, 20)
-        Me.ucrChkOmitMissing.TabIndex = 3
         '
         'ucrChkPrintOutput
         '
         Me.ucrChkPrintOutput.Checked = False
-        Me.ucrChkPrintOutput.Location = New System.Drawing.Point(6, 42)
+        resources.ApplyResources(Me.ucrChkPrintOutput, "ucrChkPrintOutput")
         Me.ucrChkPrintOutput.Name = "ucrChkPrintOutput"
-        Me.ucrChkPrintOutput.Size = New System.Drawing.Size(148, 20)
-        Me.ucrChkPrintOutput.TabIndex = 1
         '
         'ucrChkDropUnusedLevels
         '
         Me.ucrChkDropUnusedLevels.Checked = False
-        Me.ucrChkDropUnusedLevels.Location = New System.Drawing.Point(6, 67)
+        resources.ApplyResources(Me.ucrChkDropUnusedLevels, "ucrChkDropUnusedLevels")
         Me.ucrChkDropUnusedLevels.Name = "ucrChkDropUnusedLevels"
-        Me.ucrChkDropUnusedLevels.Size = New System.Drawing.Size(148, 20)
-        Me.ucrChkDropUnusedLevels.TabIndex = 2
         '
         'cmdSummaries
         '
-        Me.cmdSummaries.Location = New System.Drawing.Point(247, 289)
+        resources.ApplyResources(Me.cmdSummaries, "cmdSummaries")
         Me.cmdSummaries.Name = "cmdSummaries"
-        Me.cmdSummaries.Size = New System.Drawing.Size(143, 23)
-        Me.cmdSummaries.TabIndex = 7
         Me.cmdSummaries.Tag = "Summaries"
-        Me.cmdSummaries.Text = "Summaries..."
         Me.cmdSummaries.UseVisualStyleBackColor = True
         '
         'cmdProportionsPercentages
         '
-        Me.cmdProportionsPercentages.Location = New System.Drawing.Point(247, 318)
+        resources.ApplyResources(Me.cmdProportionsPercentages, "cmdProportionsPercentages")
         Me.cmdProportionsPercentages.Name = "cmdProportionsPercentages"
-        Me.cmdProportionsPercentages.Size = New System.Drawing.Size(143, 23)
-        Me.cmdProportionsPercentages.TabIndex = 6
         Me.cmdProportionsPercentages.Tag = "Proportions/Percentages..."
-        Me.cmdProportionsPercentages.Text = "Proportions/Percentages..."
         Me.cmdProportionsPercentages.UseVisualStyleBackColor = True
         '
         'ucrReceiverByFactor
         '
         Me.ucrReceiverByFactor.frmParent = Me
-        Me.ucrReceiverByFactor.Location = New System.Drawing.Point(265, 183)
-        Me.ucrReceiverByFactor.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverByFactor, "ucrReceiverByFactor")
         Me.ucrReceiverByFactor.Name = "ucrReceiverByFactor"
         Me.ucrReceiverByFactor.Selector = Nothing
-        Me.ucrReceiverByFactor.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverByFactor.strNcFilePath = ""
-        Me.ucrReceiverByFactor.TabIndex = 4
         Me.ucrReceiverByFactor.ucrSelector = Nothing
         '
         'ucrReceiverSelectedVariables
         '
         Me.ucrReceiverSelectedVariables.frmParent = Me
-        Me.ucrReceiverSelectedVariables.Location = New System.Drawing.Point(265, 60)
-        Me.ucrReceiverSelectedVariables.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverSelectedVariables, "ucrReceiverSelectedVariables")
         Me.ucrReceiverSelectedVariables.Name = "ucrReceiverSelectedVariables"
         Me.ucrReceiverSelectedVariables.Selector = Nothing
-        Me.ucrReceiverSelectedVariables.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverSelectedVariables.strNcFilePath = ""
-        Me.ucrReceiverSelectedVariables.TabIndex = 2
         Me.ucrReceiverSelectedVariables.ucrSelector = Nothing
         '
         'ucrSelectorForColumnStatistics
         '
         Me.ucrSelectorForColumnStatistics.bShowHiddenColumns = False
         Me.ucrSelectorForColumnStatistics.bUseCurrentFilter = True
-        Me.ucrSelectorForColumnStatistics.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorForColumnStatistics.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorForColumnStatistics, "ucrSelectorForColumnStatistics")
         Me.ucrSelectorForColumnStatistics.Name = "ucrSelectorForColumnStatistics"
-        Me.ucrSelectorForColumnStatistics.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorForColumnStatistics.TabIndex = 0
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 349)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(402, 53)
-        Me.ucrBase.TabIndex = 8
         '
         'dlgColumnStats
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(416, 404)
         Me.Controls.Add(Me.cmdProportionsPercentages)
         Me.Controls.Add(Me.cmdSummaries)
         Me.Controls.Add(Me.grpOptions)
@@ -196,9 +160,7 @@ Partial Class dlgColumnStats
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgColumnStats"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Column_Statistics"
-        Me.Text = "Column Statistics"
         Me.grpOptions.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()

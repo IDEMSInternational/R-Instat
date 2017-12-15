@@ -24,6 +24,7 @@ Public Class dlgViewGraph
 
     Private Sub dlgViewGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        strGraphDisplayOption = frmMain.clsInstatOptions.strGraphDisplayOption
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -32,6 +33,7 @@ Public Class dlgViewGraph
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetGraphDisplayType()
         bReset = False
         TestOkEnabled()
     End Sub
@@ -73,6 +75,7 @@ Public Class dlgViewGraph
         clsggPlotly.AddParameter("p", clsRFunctionParameter:=clsGetGraphs)
 
         clsGetGraphs.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
+        clsGetGraphs.AddParameter("print_graph", "FALSE")
         ucrBase.clsRsyntax.SetBaseRFunction(clsggPlotly)
     End Sub
 
@@ -100,11 +103,17 @@ Public Class dlgViewGraph
     End Sub
 
     Private Sub ucrPnlDisplayOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDisplayOptions.ControlValueChanged
-        strGraphDisplayOption = frmMain.clsInstatOptions.strGraphDisplayOption
+        SetGraphDisplayType()
+    End Sub
+
+    Private Sub SetGraphDisplayType()
         If rdoDisplayInteractiveView.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsggPlotly)
-            ucrBase.clsRsyntax.iCallType = 0
+            ' Since R 3.4.2 this is the only way the RDotNet detects the plotly window should load
+            ucrBase.clsRsyntax.iCallType = 2
+            clsGetGraphs.AddParameter("print_graph", "FALSE")
         Else
+            clsGetGraphs.AddParameter("print_graph", "TRUE")
             ucrBase.clsRsyntax.SetBaseRFunction(clsGetGraphs)
             ucrBase.clsRsyntax.iCallType = 3
             If rdoDisplayOutputWindow.Checked Then

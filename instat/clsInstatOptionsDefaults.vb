@@ -35,7 +35,7 @@ Public Class clsInstatOptionsDefaults
     Public Shared ReadOnly DEFAULTstrGraphDisplayOption As String = "view_output_window"
     Public Shared ReadOnly DEFAULTbChangeDataFrame As Boolean = False
     'TODO is this sensible?
-    Public Shared ReadOnly DEFAULTstrLanguageCultureCode As String = Threading.Thread.CurrentThread.CurrentCulture.Name
+    Public Shared ReadOnly DEFAULTstrLanguageCultureCode As String = Threading.Thread.CurrentThread.CurrentUICulture.Name
     Public Shared ReadOnly DEFAULTstrWorkingDirectory As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
     Public Shared ReadOnly DEFAULTlstColourPalette As List(Of Color) = ({Color.Aqua, Color.Gray, Color.LightGreen, Color.AliceBlue, Color.Maroon, Color.Green, Color.LightPink, Color.LightSkyBlue, Color.Brown, Color.MediumPurple, Color.White}).ToList
     Public Shared ReadOnly DEFAULTiDigits As Integer = 4

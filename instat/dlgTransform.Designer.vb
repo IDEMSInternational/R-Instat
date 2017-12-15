@@ -38,6 +38,7 @@ Partial Class dlgTransform
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgTransform))
         Me.grpCalculatedTransformations = New System.Windows.Forms.GroupBox()
         Me.grpPercentageTransformations = New System.Windows.Forms.GroupBox()
         Me.lbl01Adjustment = New System.Windows.Forms.Label()
@@ -110,13 +111,10 @@ Partial Class dlgTransform
         Me.grpCalculatedTransformations.Controls.Add(Me.grpCircularTransformations)
         Me.grpCalculatedTransformations.Controls.Add(Me.grpNonNegativeTransformations)
         Me.grpCalculatedTransformations.Controls.Add(Me.grpTypeofdata)
-        Me.grpCalculatedTransformations.Location = New System.Drawing.Point(10, 183)
+        resources.ApplyResources(Me.grpCalculatedTransformations, "grpCalculatedTransformations")
         Me.grpCalculatedTransformations.Name = "grpCalculatedTransformations"
-        Me.grpCalculatedTransformations.Size = New System.Drawing.Size(292, 198)
-        Me.grpCalculatedTransformations.TabIndex = 3
         Me.grpCalculatedTransformations.TabStop = False
         Me.grpCalculatedTransformations.Tag = "Calculated_Transformations"
-        Me.grpCalculatedTransformations.Text = "Calculated Transformations"
         '
         'grpPercentageTransformations
         '
@@ -126,85 +124,56 @@ Partial Class dlgTransform
         Me.grpPercentageTransformations.Controls.Add(Me.txtAdjustment)
         Me.grpPercentageTransformations.Controls.Add(Me.rdoLogit)
         Me.grpPercentageTransformations.Controls.Add(Me.rdoAngular)
-        Me.grpPercentageTransformations.Location = New System.Drawing.Point(5, 98)
+        resources.ApplyResources(Me.grpPercentageTransformations, "grpPercentageTransformations")
         Me.grpPercentageTransformations.Name = "grpPercentageTransformations"
-        Me.grpPercentageTransformations.Size = New System.Drawing.Size(257, 81)
-        Me.grpPercentageTransformations.TabIndex = 12
         Me.grpPercentageTransformations.TabStop = False
         '
         'lbl01Adjustment
         '
-        Me.lbl01Adjustment.AutoSize = True
-        Me.lbl01Adjustment.Location = New System.Drawing.Point(116, 32)
+        resources.ApplyResources(Me.lbl01Adjustment, "lbl01Adjustment")
         Me.lbl01Adjustment.Name = "lbl01Adjustment"
-        Me.lbl01Adjustment.Size = New System.Drawing.Size(98, 13)
-        Me.lbl01Adjustment.TabIndex = 10
         Me.lbl01Adjustment.Tag = "0_and_1_Adjustment"
-        Me.lbl01Adjustment.Text = "0 and 1 Adjustment"
         '
         'rdoProbit
         '
-        Me.rdoProbit.AutoSize = True
-        Me.rdoProbit.Location = New System.Drawing.Point(6, 59)
+        resources.ApplyResources(Me.rdoProbit, "rdoProbit")
         Me.rdoProbit.Name = "rdoProbit"
-        Me.rdoProbit.Size = New System.Drawing.Size(52, 17)
-        Me.rdoProbit.TabIndex = 9
         Me.rdoProbit.TabStop = True
         Me.rdoProbit.Tag = "Probit"
-        Me.rdoProbit.Text = "Probit"
         Me.rdoProbit.UseVisualStyleBackColor = True
         '
         'lblAdjustment
         '
-        Me.lblAdjustment.AutoSize = True
-        Me.lblAdjustment.Location = New System.Drawing.Point(88, 32)
+        resources.ApplyResources(Me.lblAdjustment, "lblAdjustment")
         Me.lblAdjustment.Name = "lblAdjustment"
-        Me.lblAdjustment.Size = New System.Drawing.Size(126, 13)
-        Me.lblAdjustment.TabIndex = 7
         Me.lblAdjustment.Tag = "0%_and_100%_Adjustment"
-        Me.lblAdjustment.Text = "0% and 100% Adjustment"
         '
         'txtAdjustment
         '
-        Me.txtAdjustment.Location = New System.Drawing.Point(220, 29)
+        resources.ApplyResources(Me.txtAdjustment, "txtAdjustment")
         Me.txtAdjustment.Name = "txtAdjustment"
-        Me.txtAdjustment.Size = New System.Drawing.Size(25, 20)
-        Me.txtAdjustment.TabIndex = 6
-        Me.txtAdjustment.Text = "0"
         '
         'rdoLogit
         '
-        Me.rdoLogit.AutoSize = True
-        Me.rdoLogit.Location = New System.Drawing.Point(6, 35)
+        resources.ApplyResources(Me.rdoLogit, "rdoLogit")
         Me.rdoLogit.Name = "rdoLogit"
-        Me.rdoLogit.Size = New System.Drawing.Size(48, 17)
-        Me.rdoLogit.TabIndex = 2
         Me.rdoLogit.TabStop = True
         Me.rdoLogit.Tag = "Logit"
-        Me.rdoLogit.Text = "Logit"
         Me.rdoLogit.UseVisualStyleBackColor = True
         '
         'rdoAngular
         '
-        Me.rdoAngular.AutoSize = True
-        Me.rdoAngular.Location = New System.Drawing.Point(6, 11)
+        resources.ApplyResources(Me.rdoAngular, "rdoAngular")
         Me.rdoAngular.Name = "rdoAngular"
-        Me.rdoAngular.Size = New System.Drawing.Size(61, 17)
-        Me.rdoAngular.TabIndex = 1
         Me.rdoAngular.TabStop = True
         Me.rdoAngular.Tag = "Angular"
-        Me.rdoAngular.Text = "Angular"
         Me.rdoAngular.UseVisualStyleBackColor = True
         '
         'chkInverse
         '
-        Me.chkInverse.AutoSize = True
-        Me.chkInverse.Location = New System.Drawing.Point(6, 175)
+        resources.ApplyResources(Me.chkInverse, "chkInverse")
         Me.chkInverse.Name = "chkInverse"
-        Me.chkInverse.Size = New System.Drawing.Size(61, 17)
-        Me.chkInverse.TabIndex = 2
         Me.chkInverse.Tag = "Inverse"
-        Me.chkInverse.Text = "Inverse"
         Me.chkInverse.UseVisualStyleBackColor = True
         '
         'grpCircularTransformations
@@ -215,71 +184,48 @@ Partial Class dlgTransform
         Me.grpCircularTransformations.Controls.Add(Me.lblCycleLength)
         Me.grpCircularTransformations.Controls.Add(Me.rdoCosine)
         Me.grpCircularTransformations.Controls.Add(Me.rdoSine)
-        Me.grpCircularTransformations.Location = New System.Drawing.Point(5, 92)
+        resources.ApplyResources(Me.grpCircularTransformations, "grpCircularTransformations")
         Me.grpCircularTransformations.Name = "grpCircularTransformations"
-        Me.grpCircularTransformations.Size = New System.Drawing.Size(257, 81)
-        Me.grpCircularTransformations.TabIndex = 11
         Me.grpCircularTransformations.TabStop = False
         '
         'cmbCycleLength
         '
         Me.cmbCycleLength.FormattingEnabled = True
-        Me.cmbCycleLength.Items.AddRange(New Object() {"360", "365", "366", "24"})
-        Me.cmbCycleLength.Location = New System.Drawing.Point(225, 19)
+        Me.cmbCycleLength.Items.AddRange(New Object() {resources.GetString("cmbCycleLength.Items"), resources.GetString("cmbCycleLength.Items1"), resources.GetString("cmbCycleLength.Items2"), resources.GetString("cmbCycleLength.Items3")})
+        resources.ApplyResources(Me.cmbCycleLength, "cmbCycleLength")
         Me.cmbCycleLength.Name = "cmbCycleLength"
-        Me.cmbCycleLength.Size = New System.Drawing.Size(26, 21)
-        Me.cmbCycleLength.TabIndex = 8
         '
         'lblHarmonic
         '
-        Me.lblHarmonic.AutoSize = True
-        Me.lblHarmonic.Location = New System.Drawing.Point(152, 55)
+        resources.ApplyResources(Me.lblHarmonic, "lblHarmonic")
         Me.lblHarmonic.Name = "lblHarmonic"
-        Me.lblHarmonic.Size = New System.Drawing.Size(52, 13)
-        Me.lblHarmonic.TabIndex = 7
         Me.lblHarmonic.Tag = "Harmonic"
-        Me.lblHarmonic.Text = "Harmonic"
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(225, 52)
+        resources.ApplyResources(Me.TextBox1, "TextBox1")
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(25, 20)
-        Me.TextBox1.TabIndex = 6
-        Me.TextBox1.Text = "1"
         '
         'lblCycleLength
         '
-        Me.lblCycleLength.AutoSize = True
-        Me.lblCycleLength.Location = New System.Drawing.Point(152, 23)
+        resources.ApplyResources(Me.lblCycleLength, "lblCycleLength")
         Me.lblCycleLength.Name = "lblCycleLength"
-        Me.lblCycleLength.Size = New System.Drawing.Size(69, 13)
-        Me.lblCycleLength.TabIndex = 5
         Me.lblCycleLength.Tag = "Cycle_Length"
-        Me.lblCycleLength.Text = "Cycle Length"
         '
         'rdoCosine
         '
-        Me.rdoCosine.AutoSize = True
-        Me.rdoCosine.Location = New System.Drawing.Point(6, 47)
+        resources.ApplyResources(Me.rdoCosine, "rdoCosine")
         Me.rdoCosine.Name = "rdoCosine"
-        Me.rdoCosine.Size = New System.Drawing.Size(57, 17)
-        Me.rdoCosine.TabIndex = 2
         Me.rdoCosine.TabStop = True
         Me.rdoCosine.Tag = "Cosine"
-        Me.rdoCosine.Text = "Cosine"
         Me.rdoCosine.UseVisualStyleBackColor = True
         '
         'rdoSine
         '
-        Me.rdoSine.AutoSize = True
-        Me.rdoSine.Location = New System.Drawing.Point(6, 19)
+        resources.ApplyResources(Me.rdoSine, "rdoSine")
         Me.rdoSine.Name = "rdoSine"
-        Me.rdoSine.Size = New System.Drawing.Size(46, 17)
-        Me.rdoSine.TabIndex = 1
         Me.rdoSine.TabStop = True
         Me.rdoSine.Tag = "Sine"
-        Me.rdoSine.Text = "Sine"
         Me.rdoSine.UseVisualStyleBackColor = True
         '
         'grpNonNegativeTransformations
@@ -293,104 +239,68 @@ Partial Class dlgTransform
         Me.grpNonNegativeTransformations.Controls.Add(Me.rdoLogBase10)
         Me.grpNonNegativeTransformations.Controls.Add(Me.rdoNaturalLog)
         Me.grpNonNegativeTransformations.Controls.Add(Me.rdoSquareRoot)
-        Me.grpNonNegativeTransformations.Location = New System.Drawing.Point(6, 90)
+        resources.ApplyResources(Me.grpNonNegativeTransformations, "grpNonNegativeTransformations")
         Me.grpNonNegativeTransformations.Name = "grpNonNegativeTransformations"
-        Me.grpNonNegativeTransformations.Size = New System.Drawing.Size(257, 81)
-        Me.grpNonNegativeTransformations.TabIndex = 1
         Me.grpNonNegativeTransformations.TabStop = False
         '
         'lblConstant
         '
-        Me.lblConstant.AutoSize = True
-        Me.lblConstant.Location = New System.Drawing.Point(170, 37)
+        resources.ApplyResources(Me.lblConstant, "lblConstant")
         Me.lblConstant.Name = "lblConstant"
-        Me.lblConstant.Size = New System.Drawing.Size(49, 13)
-        Me.lblConstant.TabIndex = 8
         Me.lblConstant.Tag = "Constant"
-        Me.lblConstant.Text = "Constant"
         '
         'lblPowerValue
         '
-        Me.lblPowerValue.AutoSize = True
-        Me.lblPowerValue.Location = New System.Drawing.Point(152, 60)
+        resources.ApplyResources(Me.lblPowerValue, "lblPowerValue")
         Me.lblPowerValue.Name = "lblPowerValue"
-        Me.lblPowerValue.Size = New System.Drawing.Size(67, 13)
-        Me.lblPowerValue.TabIndex = 7
         Me.lblPowerValue.Tag = "Power_Value"
-        Me.lblPowerValue.Text = "Power Value"
         '
         'txtPowerValue
         '
-        Me.txtPowerValue.Location = New System.Drawing.Point(225, 56)
+        resources.ApplyResources(Me.txtPowerValue, "txtPowerValue")
         Me.txtPowerValue.Name = "txtPowerValue"
-        Me.txtPowerValue.Size = New System.Drawing.Size(25, 20)
-        Me.txtPowerValue.TabIndex = 6
-        Me.txtPowerValue.Text = "1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         '
         'lblZeroAdjustment
         '
-        Me.lblZeroAdjustment.AutoSize = True
-        Me.lblZeroAdjustment.Location = New System.Drawing.Point(134, 37)
+        resources.ApplyResources(Me.lblZeroAdjustment, "lblZeroAdjustment")
         Me.lblZeroAdjustment.Name = "lblZeroAdjustment"
-        Me.lblZeroAdjustment.Size = New System.Drawing.Size(84, 13)
-        Me.lblZeroAdjustment.TabIndex = 5
         Me.lblZeroAdjustment.Tag = "Zero_Adjustment"
-        Me.lblZeroAdjustment.Text = "Zero Adjustment"
         '
         'txtValue
         '
-        Me.txtValue.Location = New System.Drawing.Point(225, 33)
+        resources.ApplyResources(Me.txtValue, "txtValue")
         Me.txtValue.Name = "txtValue"
-        Me.txtValue.Size = New System.Drawing.Size(25, 20)
-        Me.txtValue.TabIndex = 4
-        Me.txtValue.Text = "0"
         '
         'rdoPower
         '
-        Me.rdoPower.AutoSize = True
-        Me.rdoPower.Location = New System.Drawing.Point(195, 12)
+        resources.ApplyResources(Me.rdoPower, "rdoPower")
         Me.rdoPower.Name = "rdoPower"
-        Me.rdoPower.Size = New System.Drawing.Size(55, 17)
-        Me.rdoPower.TabIndex = 3
         Me.rdoPower.TabStop = True
         Me.rdoPower.Tag = "Power"
-        Me.rdoPower.Text = "Power"
         Me.rdoPower.UseVisualStyleBackColor = True
         '
         'rdoLogBase10
         '
-        Me.rdoLogBase10.AutoSize = True
-        Me.rdoLogBase10.Location = New System.Drawing.Point(6, 58)
+        resources.ApplyResources(Me.rdoLogBase10, "rdoLogBase10")
         Me.rdoLogBase10.Name = "rdoLogBase10"
-        Me.rdoLogBase10.Size = New System.Drawing.Size(85, 17)
-        Me.rdoLogBase10.TabIndex = 2
         Me.rdoLogBase10.TabStop = True
         Me.rdoLogBase10.Tag = "Log_Base_10"
-        Me.rdoLogBase10.Text = "Log Base 10"
         Me.rdoLogBase10.UseVisualStyleBackColor = True
         '
         'rdoNaturalLog
         '
-        Me.rdoNaturalLog.AutoSize = True
-        Me.rdoNaturalLog.Location = New System.Drawing.Point(6, 36)
+        resources.ApplyResources(Me.rdoNaturalLog, "rdoNaturalLog")
         Me.rdoNaturalLog.Name = "rdoNaturalLog"
-        Me.rdoNaturalLog.Size = New System.Drawing.Size(80, 17)
-        Me.rdoNaturalLog.TabIndex = 1
         Me.rdoNaturalLog.TabStop = True
         Me.rdoNaturalLog.Tag = "Natural_Log"
-        Me.rdoNaturalLog.Text = "Natural Log"
         Me.rdoNaturalLog.UseVisualStyleBackColor = True
         '
         'rdoSquareRoot
         '
-        Me.rdoSquareRoot.AutoSize = True
-        Me.rdoSquareRoot.Location = New System.Drawing.Point(6, 12)
+        resources.ApplyResources(Me.rdoSquareRoot, "rdoSquareRoot")
         Me.rdoSquareRoot.Name = "rdoSquareRoot"
-        Me.rdoSquareRoot.Size = New System.Drawing.Size(80, 17)
-        Me.rdoSquareRoot.TabIndex = 0
         Me.rdoSquareRoot.TabStop = True
         Me.rdoSquareRoot.Tag = "Square_root"
-        Me.rdoSquareRoot.Text = "Square root"
         Me.rdoSquareRoot.UseVisualStyleBackColor = True
         '
         'grpTypeofdata
@@ -399,182 +309,126 @@ Partial Class dlgTransform
         Me.grpTypeofdata.Controls.Add(Me.rdoPercentage)
         Me.grpTypeofdata.Controls.Add(Me.rdoCircular)
         Me.grpTypeofdata.Controls.Add(Me.rdoNonNegative)
-        Me.grpTypeofdata.Location = New System.Drawing.Point(5, 20)
+        resources.ApplyResources(Me.grpTypeofdata, "grpTypeofdata")
         Me.grpTypeofdata.Name = "grpTypeofdata"
-        Me.grpTypeofdata.Size = New System.Drawing.Size(260, 70)
-        Me.grpTypeofdata.TabIndex = 0
         Me.grpTypeofdata.TabStop = False
         Me.grpTypeofdata.Tag = "Type_of_data"
-        Me.grpTypeofdata.Text = "Type of data"
         '
         'rdoProportion
         '
-        Me.rdoProportion.AutoSize = True
-        Me.rdoProportion.Location = New System.Drawing.Point(128, 41)
+        resources.ApplyResources(Me.rdoProportion, "rdoProportion")
         Me.rdoProportion.Name = "rdoProportion"
-        Me.rdoProportion.Size = New System.Drawing.Size(73, 17)
-        Me.rdoProportion.TabIndex = 3
         Me.rdoProportion.TabStop = True
         Me.rdoProportion.Tag = "Proportion"
-        Me.rdoProportion.Text = "Proportion"
         Me.rdoProportion.UseVisualStyleBackColor = True
         '
         'rdoPercentage
         '
-        Me.rdoPercentage.AutoSize = True
-        Me.rdoPercentage.Location = New System.Drawing.Point(128, 17)
+        resources.ApplyResources(Me.rdoPercentage, "rdoPercentage")
         Me.rdoPercentage.Name = "rdoPercentage"
-        Me.rdoPercentage.Size = New System.Drawing.Size(80, 17)
-        Me.rdoPercentage.TabIndex = 2
         Me.rdoPercentage.TabStop = True
         Me.rdoPercentage.Tag = "Percentage"
-        Me.rdoPercentage.Text = "Percentage"
         Me.rdoPercentage.UseVisualStyleBackColor = True
         '
         'rdoCircular
         '
-        Me.rdoCircular.AutoSize = True
-        Me.rdoCircular.Location = New System.Drawing.Point(7, 41)
+        resources.ApplyResources(Me.rdoCircular, "rdoCircular")
         Me.rdoCircular.Name = "rdoCircular"
-        Me.rdoCircular.Size = New System.Drawing.Size(60, 17)
-        Me.rdoCircular.TabIndex = 1
         Me.rdoCircular.TabStop = True
         Me.rdoCircular.Tag = "Circular"
-        Me.rdoCircular.Text = "Circular"
         Me.rdoCircular.UseVisualStyleBackColor = True
         '
         'rdoNonNegative
         '
-        Me.rdoNonNegative.AutoSize = True
-        Me.rdoNonNegative.Location = New System.Drawing.Point(7, 17)
+        resources.ApplyResources(Me.rdoNonNegative, "rdoNonNegative")
         Me.rdoNonNegative.Name = "rdoNonNegative"
-        Me.rdoNonNegative.Size = New System.Drawing.Size(91, 17)
-        Me.rdoNonNegative.TabIndex = 0
         Me.rdoNonNegative.TabStop = True
         Me.rdoNonNegative.Tag = "Non_Negative"
-        Me.rdoNonNegative.Text = "Non-Negative"
         Me.rdoNonNegative.UseVisualStyleBackColor = True
         '
         'grpTransformationType
         '
         Me.grpTransformationType.Controls.Add(Me.rdoOtherTransformations)
         Me.grpTransformationType.Controls.Add(Me.rdoCommonTransformations)
-        Me.grpTransformationType.Location = New System.Drawing.Point(10, 0)
+        resources.ApplyResources(Me.grpTransformationType, "grpTransformationType")
         Me.grpTransformationType.Name = "grpTransformationType"
-        Me.grpTransformationType.Size = New System.Drawing.Size(389, 42)
-        Me.grpTransformationType.TabIndex = 4
         Me.grpTransformationType.TabStop = False
         '
         'rdoOtherTransformations
         '
-        Me.rdoOtherTransformations.AutoSize = True
-        Me.rdoOtherTransformations.Location = New System.Drawing.Point(249, 11)
+        resources.ApplyResources(Me.rdoOtherTransformations, "rdoOtherTransformations")
         Me.rdoOtherTransformations.Name = "rdoOtherTransformations"
-        Me.rdoOtherTransformations.Size = New System.Drawing.Size(129, 17)
-        Me.rdoOtherTransformations.TabIndex = 1
         Me.rdoOtherTransformations.TabStop = True
         Me.rdoOtherTransformations.Tag = "Other_Transformations"
-        Me.rdoOtherTransformations.Text = "Other Transformations"
         Me.rdoOtherTransformations.UseVisualStyleBackColor = True
         '
         'rdoCommonTransformations
         '
-        Me.rdoCommonTransformations.AutoSize = True
-        Me.rdoCommonTransformations.Location = New System.Drawing.Point(6, 11)
+        resources.ApplyResources(Me.rdoCommonTransformations, "rdoCommonTransformations")
         Me.rdoCommonTransformations.Name = "rdoCommonTransformations"
-        Me.rdoCommonTransformations.Size = New System.Drawing.Size(144, 17)
-        Me.rdoCommonTransformations.TabIndex = 0
         Me.rdoCommonTransformations.TabStop = True
         Me.rdoCommonTransformations.Tag = "Common_Transformations"
-        Me.rdoCommonTransformations.Text = "Common Transformations"
         Me.rdoCommonTransformations.UseVisualStyleBackColor = True
         '
         'lblFrom
         '
-        Me.lblFrom.AutoSize = True
-        Me.lblFrom.Location = New System.Drawing.Point(255, 65)
+        resources.ApplyResources(Me.lblFrom, "lblFrom")
         Me.lblFrom.Name = "lblFrom"
-        Me.lblFrom.Size = New System.Drawing.Size(30, 13)
-        Me.lblFrom.TabIndex = 5
         Me.lblFrom.Tag = "From"
-        Me.lblFrom.Text = "From"
         '
         'lblInto
         '
-        Me.lblInto.AutoSize = True
-        Me.lblInto.Location = New System.Drawing.Point(255, 102)
+        resources.ApplyResources(Me.lblInto, "lblInto")
         Me.lblInto.Name = "lblInto"
-        Me.lblInto.Size = New System.Drawing.Size(25, 13)
-        Me.lblInto.TabIndex = 6
         Me.lblInto.Tag = "Into"
-        Me.lblInto.Text = "Into"
         '
         'txtInto
         '
-        Me.txtInto.Location = New System.Drawing.Point(292, 99)
+        resources.ApplyResources(Me.txtInto, "txtInto")
         Me.txtInto.Name = "txtInto"
-        Me.txtInto.Size = New System.Drawing.Size(105, 20)
-        Me.txtInto.TabIndex = 7
         '
         'cmdPreview
         '
-        Me.cmdPreview.Location = New System.Drawing.Point(10, 392)
+        resources.ApplyResources(Me.cmdPreview, "cmdPreview")
         Me.cmdPreview.Name = "cmdPreview"
-        Me.cmdPreview.Size = New System.Drawing.Size(75, 23)
-        Me.cmdPreview.TabIndex = 8
         Me.cmdPreview.Tag = "Preview"
-        Me.cmdPreview.Text = "Preview"
         Me.cmdPreview.UseVisualStyleBackColor = True
         '
         'cboPreview
         '
         Me.cboPreview.FormattingEnabled = True
-        Me.cboPreview.Location = New System.Drawing.Point(95, 394)
+        resources.ApplyResources(Me.cboPreview, "cboPreview")
         Me.cboPreview.Name = "cboPreview"
-        Me.cboPreview.Size = New System.Drawing.Size(280, 21)
-        Me.cboPreview.TabIndex = 9
         '
         'grpOtherTransformations
         '
         Me.grpOtherTransformations.Controls.Add(Me.grpLag)
         Me.grpOtherTransformations.Controls.Add(Me.grpTransformationsOther)
-        Me.grpOtherTransformations.Location = New System.Drawing.Point(10, 183)
+        resources.ApplyResources(Me.grpOtherTransformations, "grpOtherTransformations")
         Me.grpOtherTransformations.Name = "grpOtherTransformations"
-        Me.grpOtherTransformations.Size = New System.Drawing.Size(292, 179)
-        Me.grpOtherTransformations.TabIndex = 10
         Me.grpOtherTransformations.TabStop = False
         Me.grpOtherTransformations.Tag = "Other_Transformations"
-        Me.grpOtherTransformations.Text = "Other Transformations"
         '
         'grpLag
         '
         Me.grpLag.Controls.Add(Me.lblRows)
         Me.grpLag.Controls.Add(Me.nudLag)
-        Me.grpLag.Location = New System.Drawing.Point(135, 97)
+        resources.ApplyResources(Me.grpLag, "grpLag")
         Me.grpLag.Name = "grpLag"
-        Me.grpLag.Size = New System.Drawing.Size(104, 41)
-        Me.grpLag.TabIndex = 12
         Me.grpLag.TabStop = False
         Me.grpLag.Tag = "Lag"
-        Me.grpLag.Text = "Lag"
         '
         'lblRows
         '
-        Me.lblRows.AutoSize = True
-        Me.lblRows.Location = New System.Drawing.Point(67, 23)
+        resources.ApplyResources(Me.lblRows, "lblRows")
         Me.lblRows.Name = "lblRows"
-        Me.lblRows.Size = New System.Drawing.Size(35, 13)
-        Me.lblRows.TabIndex = 1
         Me.lblRows.Tag = "rows"
-        Me.lblRows.Text = "row(s)"
         '
         'nudLag
         '
         Me.nudLag.AllowDrop = True
-        Me.nudLag.Location = New System.Drawing.Point(29, 17)
+        resources.ApplyResources(Me.nudLag, "nudLag")
         Me.nudLag.Name = "nudLag"
-        Me.nudLag.Size = New System.Drawing.Size(31, 20)
-        Me.nudLag.TabIndex = 0
         Me.nudLag.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'grpTransformationsOther
@@ -585,113 +439,82 @@ Partial Class dlgTransform
         Me.grpTransformationsOther.Controls.Add(Me.rdoNormalScore)
         Me.grpTransformationsOther.Controls.Add(Me.rdoSort)
         Me.grpTransformationsOther.Controls.Add(Me.rdoRank)
-        Me.grpTransformationsOther.Location = New System.Drawing.Point(6, 14)
+        resources.ApplyResources(Me.grpTransformationsOther, "grpTransformationsOther")
         Me.grpTransformationsOther.Name = "grpTransformationsOther"
-        Me.grpTransformationsOther.Size = New System.Drawing.Size(114, 157)
-        Me.grpTransformationsOther.TabIndex = 1
         Me.grpTransformationsOther.TabStop = False
         '
         'rdoDifference
         '
-        Me.rdoDifference.AutoSize = True
-        Me.rdoDifference.Location = New System.Drawing.Point(6, 135)
+        resources.ApplyResources(Me.rdoDifference, "rdoDifference")
         Me.rdoDifference.Name = "rdoDifference"
-        Me.rdoDifference.Size = New System.Drawing.Size(74, 17)
-        Me.rdoDifference.TabIndex = 5
         Me.rdoDifference.TabStop = True
         Me.rdoDifference.Tag = "Difference"
-        Me.rdoDifference.Text = "Difference"
         Me.rdoDifference.UseVisualStyleBackColor = True
         '
         'rdoLag
         '
-        Me.rdoLag.AutoSize = True
-        Me.rdoLag.Location = New System.Drawing.Point(6, 110)
+        resources.ApplyResources(Me.rdoLag, "rdoLag")
         Me.rdoLag.Name = "rdoLag"
-        Me.rdoLag.Size = New System.Drawing.Size(43, 17)
-        Me.rdoLag.TabIndex = 4
         Me.rdoLag.TabStop = True
         Me.rdoLag.Tag = "Lag"
-        Me.rdoLag.Text = "Lag"
         Me.rdoLag.UseVisualStyleBackColor = True
         '
         'rdoStandardise
         '
-        Me.rdoStandardise.AutoSize = True
-        Me.rdoStandardise.Location = New System.Drawing.Point(6, 85)
+        resources.ApplyResources(Me.rdoStandardise, "rdoStandardise")
         Me.rdoStandardise.Name = "rdoStandardise"
-        Me.rdoStandardise.Size = New System.Drawing.Size(81, 17)
-        Me.rdoStandardise.TabIndex = 3
         Me.rdoStandardise.TabStop = True
         Me.rdoStandardise.Tag = "Standardise"
-        Me.rdoStandardise.Text = "Standardise"
         Me.rdoStandardise.UseVisualStyleBackColor = True
         '
         'rdoNormalScore
         '
-        Me.rdoNormalScore.AutoSize = True
-        Me.rdoNormalScore.Location = New System.Drawing.Point(6, 60)
+        resources.ApplyResources(Me.rdoNormalScore, "rdoNormalScore")
         Me.rdoNormalScore.Name = "rdoNormalScore"
-        Me.rdoNormalScore.Size = New System.Drawing.Size(89, 17)
-        Me.rdoNormalScore.TabIndex = 2
         Me.rdoNormalScore.TabStop = True
         Me.rdoNormalScore.Tag = "Normal_Score"
-        Me.rdoNormalScore.Text = "Normal Score"
         Me.rdoNormalScore.UseVisualStyleBackColor = True
         '
         'rdoSort
         '
-        Me.rdoSort.AutoSize = True
-        Me.rdoSort.Location = New System.Drawing.Point(6, 35)
+        resources.ApplyResources(Me.rdoSort, "rdoSort")
         Me.rdoSort.Name = "rdoSort"
-        Me.rdoSort.Size = New System.Drawing.Size(44, 17)
-        Me.rdoSort.TabIndex = 1
         Me.rdoSort.TabStop = True
         Me.rdoSort.Tag = "Sort"
-        Me.rdoSort.Text = "Sort"
         Me.rdoSort.UseVisualStyleBackColor = True
         '
         'rdoRank
         '
-        Me.rdoRank.AutoSize = True
-        Me.rdoRank.Location = New System.Drawing.Point(6, 10)
+        resources.ApplyResources(Me.rdoRank, "rdoRank")
         Me.rdoRank.Name = "rdoRank"
-        Me.rdoRank.Size = New System.Drawing.Size(51, 17)
-        Me.rdoRank.TabIndex = 0
         Me.rdoRank.TabStop = True
         Me.rdoRank.Tag = "Rank"
-        Me.rdoRank.Text = "Rank"
         Me.rdoRank.UseVisualStyleBackColor = True
         '
         'ucrAddRemove
         '
-        Me.ucrAddRemove.Location = New System.Drawing.Point(10, 48)
-        Me.ucrAddRemove.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrAddRemove.bShowHiddenColumns = False
+        resources.ApplyResources(Me.ucrAddRemove, "ucrAddRemove")
         Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(203, 127)
-        Me.ucrAddRemove.TabIndex = 2
         '
         'ucrReceiverFrom
         '
-        Me.ucrReceiverFrom.Location = New System.Drawing.Point(292, 65)
-        Me.ucrReceiverFrom.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFrom.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverFrom, "ucrReceiverFrom")
         Me.ucrReceiverFrom.Name = "ucrReceiverFrom"
         Me.ucrReceiverFrom.Selector = Nothing
-        Me.ucrReceiverFrom.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiverFrom.TabIndex = 1
+        Me.ucrReceiverFrom.strNcFilePath = ""
+        Me.ucrReceiverFrom.ucrSelector = Nothing
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 420)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 0
         '
         'dlgTransform
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 474)
         Me.Controls.Add(Me.grpOtherTransformations)
         Me.Controls.Add(Me.cboPreview)
         Me.Controls.Add(Me.cmdPreview)
@@ -705,9 +528,7 @@ Partial Class dlgTransform
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgTransform"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Transform"
-        Me.Text = "Transform"
         Me.grpCalculatedTransformations.ResumeLayout(False)
         Me.grpCalculatedTransformations.PerformLayout()
         Me.grpPercentageTransformations.ResumeLayout(False)

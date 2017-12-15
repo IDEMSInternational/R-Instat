@@ -117,4 +117,2170 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ucrBaseSubdialogue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>344, 621</value>
+  </data>
+  <data name="ucrBaseSubdialogue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 30</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrBaseSubdialogue.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrBaseSubdialogue.Name" xml:space="preserve">
+    <value>ucrBaseSubdialogue</value>
+  </data>
+  <data name="&gt;&gt;ucrBaseSubdialogue.Type" xml:space="preserve">
+    <value>instat.ucrButtonsSubdialogue, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrBaseSubdialogue.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrBaseSubdialogue.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrStripsSpaceWrap.Location" type="System.Drawing.Point, System.Drawing">
+    <value>275, 21</value>
+  </data>
+  <data name="ucrStripsSpaceWrap.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 125</value>
+  </data>
+  <data name="ucrStripsSpaceWrap.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrStripsSpaceWrap.Name" xml:space="preserve">
+    <value>ucrStripsSpaceWrap</value>
+  </data>
+  <data name="&gt;&gt;ucrStripsSpaceWrap.Type" xml:space="preserve">
+    <value>instat.ucrGridUnit, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrStripsSpaceWrap.Parent" xml:space="preserve">
+    <value>grpSpaceBetweenStripsAxes</value>
+  </data>
+  <data name="&gt;&gt;ucrStripsSpaceWrap.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrStripsSpaceGrid.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 21</value>
+  </data>
+  <data name="ucrStripsSpaceGrid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>258, 119</value>
+  </data>
+  <data name="ucrStripsSpaceGrid.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrStripsSpaceGrid.Name" xml:space="preserve">
+    <value>ucrStripsSpaceGrid</value>
+  </data>
+  <data name="&gt;&gt;ucrStripsSpaceGrid.Type" xml:space="preserve">
+    <value>instat.ucrGridUnit, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrStripsSpaceGrid.Parent" xml:space="preserve">
+    <value>grpSpaceBetweenStripsAxes</value>
+  </data>
+  <data name="&gt;&gt;ucrStripsSpaceGrid.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="grpSpaceBetweenStripsAxes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 255</value>
+  </data>
+  <data name="grpSpaceBetweenStripsAxes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>531, 150</value>
+  </data>
+  <data name="grpSpaceBetweenStripsAxes.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="grpSpaceBetweenStripsAxes.Text" xml:space="preserve">
+    <value>Space between Strips and Axes</value>
+  </data>
+  <data name="&gt;&gt;grpSpaceBetweenStripsAxes.Name" xml:space="preserve">
+    <value>grpSpaceBetweenStripsAxes</value>
+  </data>
+  <data name="&gt;&gt;grpSpaceBetweenStripsAxes.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpSpaceBetweenStripsAxes.Parent" xml:space="preserve">
+    <value>tbThemeFacets</value>
+  </data>
+  <data name="&gt;&gt;grpSpaceBetweenStripsAxes.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrStripBackGround.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 21</value>
+  </data>
+  <data name="ucrStripBackGround.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 128</value>
+  </data>
+  <data name="ucrStripBackGround.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrStripBackGround.Name" xml:space="preserve">
+    <value>ucrStripBackGround</value>
+  </data>
+  <data name="&gt;&gt;ucrStripBackGround.Type" xml:space="preserve">
+    <value>instat.ucrElementRectControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrStripBackGround.Parent" xml:space="preserve">
+    <value>grpFacetBackground</value>
+  </data>
+  <data name="&gt;&gt;ucrStripBackGround.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="grpFacetBackground.Location" type="System.Drawing.Point, System.Drawing">
+    <value>541, 269</value>
+  </data>
+  <data name="grpFacetBackground.Size" type="System.Drawing.Size, System.Drawing">
+    <value>263, 148</value>
+  </data>
+  <data name="grpFacetBackground.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="grpFacetBackground.Text" xml:space="preserve">
+    <value>Facet Label Background </value>
+  </data>
+  <data name="&gt;&gt;grpFacetBackground.Name" xml:space="preserve">
+    <value>grpFacetBackground</value>
+  </data>
+  <data name="&gt;&gt;grpFacetBackground.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpFacetBackground.Parent" xml:space="preserve">
+    <value>tbThemeFacets</value>
+  </data>
+  <data name="&gt;&gt;grpFacetBackground.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrStripTextYAxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>536, 21</value>
+  </data>
+  <data name="ucrStripTextYAxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 224</value>
+  </data>
+  <data name="ucrStripTextYAxis.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrStripTextYAxis.Name" xml:space="preserve">
+    <value>ucrStripTextYAxis</value>
+  </data>
+  <data name="&gt;&gt;ucrStripTextYAxis.Type" xml:space="preserve">
+    <value>instat.ucrELementTextControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrStripTextYAxis.Parent" xml:space="preserve">
+    <value>grpFacetLabels</value>
+  </data>
+  <data name="&gt;&gt;ucrStripTextYAxis.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrStripTextXAxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>275, 21</value>
+  </data>
+  <data name="ucrStripTextXAxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 224</value>
+  </data>
+  <data name="ucrStripTextXAxis.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrStripTextXAxis.Name" xml:space="preserve">
+    <value>ucrStripTextXAxis</value>
+  </data>
+  <data name="&gt;&gt;ucrStripTextXAxis.Type" xml:space="preserve">
+    <value>instat.ucrELementTextControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrStripTextXAxis.Parent" xml:space="preserve">
+    <value>grpFacetLabels</value>
+  </data>
+  <data name="&gt;&gt;ucrStripTextXAxis.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrStripText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 21</value>
+  </data>
+  <data name="ucrStripText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 224</value>
+  </data>
+  <data name="ucrStripText.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrStripText.Name" xml:space="preserve">
+    <value>ucrStripText</value>
+  </data>
+  <data name="&gt;&gt;ucrStripText.Type" xml:space="preserve">
+    <value>instat.ucrELementTextControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrStripText.Parent" xml:space="preserve">
+    <value>grpFacetLabels</value>
+  </data>
+  <data name="&gt;&gt;ucrStripText.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="grpFacetLabels.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="grpFacetLabels.Size" type="System.Drawing.Size, System.Drawing">
+    <value>798, 255</value>
+  </data>
+  <data name="grpFacetLabels.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpFacetLabels.Text" xml:space="preserve">
+    <value>Facet Labels</value>
+  </data>
+  <data name="&gt;&gt;grpFacetLabels.Name" xml:space="preserve">
+    <value>grpFacetLabels</value>
+  </data>
+  <data name="&gt;&gt;grpFacetLabels.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpFacetLabels.Parent" xml:space="preserve">
+    <value>tbThemeFacets</value>
+  </data>
+  <data name="&gt;&gt;grpFacetLabels.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tbThemeFacets.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbThemeFacets.Size" type="System.Drawing.Size, System.Drawing">
+    <value>817, 583</value>
+  </data>
+  <data name="tbThemeFacets.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="tbThemeFacets.Text" xml:space="preserve">
+    <value>Facets</value>
+  </data>
+  <data name="&gt;&gt;tbThemeFacets.Name" xml:space="preserve">
+    <value>tbThemeFacets</value>
+  </data>
+  <data name="&gt;&gt;tbThemeFacets.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbThemeFacets.Parent" xml:space="preserve">
+    <value>tbLegend</value>
+  </data>
+  <data name="&gt;&gt;tbThemeFacets.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="ucrPanelSpacingYAxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>536, 21</value>
+  </data>
+  <data name="ucrPanelSpacingYAxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>256, 119</value>
+  </data>
+  <data name="ucrPanelSpacingYAxis.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelSpacingYAxis.Name" xml:space="preserve">
+    <value>ucrPanelSpacingYAxis</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelSpacingYAxis.Type" xml:space="preserve">
+    <value>instat.ucrGridUnit, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelSpacingYAxis.Parent" xml:space="preserve">
+    <value>grpPanelSpacing</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelSpacingYAxis.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrPanelSpacingXAxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>275, 21</value>
+  </data>
+  <data name="ucrPanelSpacingXAxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 119</value>
+  </data>
+  <data name="ucrPanelSpacingXAxis.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelSpacingXAxis.Name" xml:space="preserve">
+    <value>ucrPanelSpacingXAxis</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelSpacingXAxis.Type" xml:space="preserve">
+    <value>instat.ucrGridUnit, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelSpacingXAxis.Parent" xml:space="preserve">
+    <value>grpPanelSpacing</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelSpacingXAxis.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrPanelSpacing.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 21</value>
+  </data>
+  <data name="ucrPanelSpacing.Size" type="System.Drawing.Size, System.Drawing">
+    <value>258, 119</value>
+  </data>
+  <data name="ucrPanelSpacing.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelSpacing.Name" xml:space="preserve">
+    <value>ucrPanelSpacing</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelSpacing.Type" xml:space="preserve">
+    <value>instat.ucrGridUnit, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelSpacing.Parent" xml:space="preserve">
+    <value>grpPanelSpacing</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelSpacing.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="grpPanelSpacing.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 315</value>
+  </data>
+  <data name="grpPanelSpacing.Size" type="System.Drawing.Size, System.Drawing">
+    <value>800, 150</value>
+  </data>
+  <data name="grpPanelSpacing.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="grpPanelSpacing.Text" xml:space="preserve">
+    <value>Panel Spacing</value>
+  </data>
+  <data name="&gt;&gt;grpPanelSpacing.Name" xml:space="preserve">
+    <value>grpPanelSpacing</value>
+  </data>
+  <data name="&gt;&gt;grpPanelSpacing.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpPanelSpacing.Parent" xml:space="preserve">
+    <value>tbThemePanelAndBackground</value>
+  </data>
+  <data name="&gt;&gt;grpPanelSpacing.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrPanelBackGround.Location" type="System.Drawing.Point, System.Drawing">
+    <value>275, 21</value>
+  </data>
+  <data name="ucrPanelBackGround.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 132</value>
+  </data>
+  <data name="ucrPanelBackGround.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelBackGround.Name" xml:space="preserve">
+    <value>ucrPanelBackGround</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelBackGround.Type" xml:space="preserve">
+    <value>instat.ucrElementRectControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelBackGround.Parent" xml:space="preserve">
+    <value>grpBorderAndBackground</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelBackGround.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrPanelBorder.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 21</value>
+  </data>
+  <data name="ucrPanelBorder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 132</value>
+  </data>
+  <data name="ucrPanelBorder.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelBorder.Name" xml:space="preserve">
+    <value>ucrPanelBorder</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelBorder.Type" xml:space="preserve">
+    <value>instat.ucrElementRectControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelBorder.Parent" xml:space="preserve">
+    <value>grpBorderAndBackground</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelBorder.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="grpBorderAndBackground.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 157</value>
+  </data>
+  <data name="grpBorderAndBackground.Size" type="System.Drawing.Size, System.Drawing">
+    <value>532, 151</value>
+  </data>
+  <data name="grpBorderAndBackground.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="grpBorderAndBackground.Text" xml:space="preserve">
+    <value>Panel Border and Background </value>
+  </data>
+  <data name="&gt;&gt;grpBorderAndBackground.Name" xml:space="preserve">
+    <value>grpBorderAndBackground</value>
+  </data>
+  <data name="&gt;&gt;grpBorderAndBackground.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpBorderAndBackground.Parent" xml:space="preserve">
+    <value>tbThemePanelAndBackground</value>
+  </data>
+  <data name="&gt;&gt;grpBorderAndBackground.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrPanelGridMinor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>536, 21</value>
+  </data>
+  <data name="ucrPanelGridMinor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>254, 124</value>
+  </data>
+  <data name="ucrPanelGridMinor.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelGridMinor.Name" xml:space="preserve">
+    <value>ucrPanelGridMinor</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelGridMinor.Type" xml:space="preserve">
+    <value>instat.ucrElementLineControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelGridMinor.Parent" xml:space="preserve">
+    <value>grpPanelGrid</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelGridMinor.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrPanelGridMajor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>275, 21</value>
+  </data>
+  <data name="ucrPanelGridMajor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>254, 124</value>
+  </data>
+  <data name="ucrPanelGridMajor.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelGridMajor.Name" xml:space="preserve">
+    <value>ucrPanelGridMajor</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelGridMajor.Type" xml:space="preserve">
+    <value>instat.ucrElementLineControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelGridMajor.Parent" xml:space="preserve">
+    <value>grpPanelGrid</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelGridMajor.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrPanelGrid.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 21</value>
+  </data>
+  <data name="ucrPanelGrid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>254, 124</value>
+  </data>
+  <data name="ucrPanelGrid.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelGrid.Name" xml:space="preserve">
+    <value>ucrPanelGrid</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelGrid.Type" xml:space="preserve">
+    <value>instat.ucrElementLineControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelGrid.Parent" xml:space="preserve">
+    <value>grpPanelGrid</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelGrid.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="grpPanelGrid.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 12</value>
+  </data>
+  <data name="grpPanelGrid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>786, 139</value>
+  </data>
+  <data name="grpPanelGrid.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpPanelGrid.Text" xml:space="preserve">
+    <value>Panel Grid</value>
+  </data>
+  <data name="&gt;&gt;grpPanelGrid.Name" xml:space="preserve">
+    <value>grpPanelGrid</value>
+  </data>
+  <data name="&gt;&gt;grpPanelGrid.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpPanelGrid.Parent" xml:space="preserve">
+    <value>tbThemePanelAndBackground</value>
+  </data>
+  <data name="&gt;&gt;grpPanelGrid.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tbThemePanelAndBackground.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbThemePanelAndBackground.Size" type="System.Drawing.Size, System.Drawing">
+    <value>817, 583</value>
+  </data>
+  <data name="tbThemePanelAndBackground.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="tbThemePanelAndBackground.Text" xml:space="preserve">
+    <value>Panel and Background  </value>
+  </data>
+  <data name="&gt;&gt;tbThemePanelAndBackground.Name" xml:space="preserve">
+    <value>tbThemePanelAndBackground</value>
+  </data>
+  <data name="&gt;&gt;tbThemePanelAndBackground.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbThemePanelAndBackground.Parent" xml:space="preserve">
+    <value>tbLegend</value>
+  </data>
+  <data name="&gt;&gt;tbThemePanelAndBackground.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="ucrLegendKeyWidth.Location" type="System.Drawing.Point, System.Drawing">
+    <value>536, 21</value>
+  </data>
+  <data name="ucrLegendKeyWidth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>256, 119</value>
+  </data>
+  <data name="ucrLegendKeyWidth.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendKeyWidth.Name" xml:space="preserve">
+    <value>ucrLegendKeyWidth</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendKeyWidth.Type" xml:space="preserve">
+    <value>instat.ucrGridUnit, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendKeyWidth.Parent" xml:space="preserve">
+    <value>grpLegendKeyAdjustment</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendKeyWidth.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrLegendKeyHeight.Location" type="System.Drawing.Point, System.Drawing">
+    <value>275, 21</value>
+  </data>
+  <data name="ucrLegendKeyHeight.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 119</value>
+  </data>
+  <data name="ucrLegendKeyHeight.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendKeyHeight.Name" xml:space="preserve">
+    <value>ucrLegendKeyHeight</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendKeyHeight.Type" xml:space="preserve">
+    <value>instat.ucrGridUnit, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendKeyHeight.Parent" xml:space="preserve">
+    <value>grpLegendKeyAdjustment</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendKeyHeight.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrLegendKeySize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 21</value>
+  </data>
+  <data name="ucrLegendKeySize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>258, 119</value>
+  </data>
+  <data name="ucrLegendKeySize.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendKeySize.Name" xml:space="preserve">
+    <value>ucrLegendKeySize</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendKeySize.Type" xml:space="preserve">
+    <value>instat.ucrGridUnit, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendKeySize.Parent" xml:space="preserve">
+    <value>grpLegendKeyAdjustment</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendKeySize.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="grpLegendKeyAdjustment.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 426</value>
+  </data>
+  <data name="grpLegendKeyAdjustment.Size" type="System.Drawing.Size, System.Drawing">
+    <value>800, 150</value>
+  </data>
+  <data name="grpLegendKeyAdjustment.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="grpLegendKeyAdjustment.Text" xml:space="preserve">
+    <value>Legend Key Measurement</value>
+  </data>
+  <data name="&gt;&gt;grpLegendKeyAdjustment.Name" xml:space="preserve">
+    <value>grpLegendKeyAdjustment</value>
+  </data>
+  <data name="&gt;&gt;grpLegendKeyAdjustment.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpLegendKeyAdjustment.Parent" xml:space="preserve">
+    <value>tbThemeLegend</value>
+  </data>
+  <data name="&gt;&gt;grpLegendKeyAdjustment.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrLegendText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>275, 21</value>
+  </data>
+  <data name="ucrLegendText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 224</value>
+  </data>
+  <data name="ucrLegendText.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendText.Name" xml:space="preserve">
+    <value>ucrLegendText</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendText.Type" xml:space="preserve">
+    <value>instat.ucrELementTextControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendText.Parent" xml:space="preserve">
+    <value>grpLegendTitleAndText</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendText.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrLegendTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 21</value>
+  </data>
+  <data name="ucrLegendTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 224</value>
+  </data>
+  <data name="ucrLegendTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendTitle.Name" xml:space="preserve">
+    <value>ucrLegendTitle</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendTitle.Type" xml:space="preserve">
+    <value>instat.ucrELementTextControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendTitle.Parent" xml:space="preserve">
+    <value>grpLegendTitleAndText</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendTitle.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="grpLegendTitleAndText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="grpLegendTitleAndText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>535, 255</value>
+  </data>
+  <data name="grpLegendTitleAndText.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpLegendTitleAndText.Text" xml:space="preserve">
+    <value>Legend Title and Text</value>
+  </data>
+  <data name="&gt;&gt;grpLegendTitleAndText.Name" xml:space="preserve">
+    <value>grpLegendTitleAndText</value>
+  </data>
+  <data name="&gt;&gt;grpLegendTitleAndText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpLegendTitleAndText.Parent" xml:space="preserve">
+    <value>tbThemeLegend</value>
+  </data>
+  <data name="&gt;&gt;grpLegendTitleAndText.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrInputLegendJustification.Location" type="System.Drawing.Point, System.Drawing">
+    <value>120, 126</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrInputLegendJustification.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>21, 17, 21, 17</value>
+  </data>
+  <data name="ucrInputLegendJustification.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 21</value>
+  </data>
+  <data name="ucrInputLegendJustification.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLegendJustification.Name" xml:space="preserve">
+    <value>ucrInputLegendJustification</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLegendJustification.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLegendJustification.Parent" xml:space="preserve">
+    <value>grpLegendAdjustments</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLegendJustification.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrInputLegendBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>120, 98</value>
+  </data>
+  <data name="ucrInputLegendBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>21, 17, 21, 17</value>
+  </data>
+  <data name="ucrInputLegendBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 21</value>
+  </data>
+  <data name="ucrInputLegendBox.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLegendBox.Name" xml:space="preserve">
+    <value>ucrInputLegendBox</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLegendBox.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLegendBox.Parent" xml:space="preserve">
+    <value>grpLegendAdjustments</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLegendBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrInputLegendPosition.Location" type="System.Drawing.Point, System.Drawing">
+    <value>120, 19</value>
+  </data>
+  <data name="ucrInputLegendPosition.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>21, 17, 21, 17</value>
+  </data>
+  <data name="ucrInputLegendPosition.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 21</value>
+  </data>
+  <data name="ucrInputLegendPosition.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLegendPosition.Name" xml:space="preserve">
+    <value>ucrInputLegendPosition</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLegendPosition.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLegendPosition.Parent" xml:space="preserve">
+    <value>grpLegendAdjustments</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLegendPosition.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrInputLegendDirection.Location" type="System.Drawing.Point, System.Drawing">
+    <value>120, 45</value>
+  </data>
+  <data name="ucrInputLegendDirection.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>21, 17, 21, 17</value>
+  </data>
+  <data name="ucrInputLegendDirection.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 21</value>
+  </data>
+  <data name="ucrInputLegendDirection.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLegendDirection.Name" xml:space="preserve">
+    <value>ucrInputLegendDirection</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLegendDirection.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLegendDirection.Parent" xml:space="preserve">
+    <value>grpLegendAdjustments</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLegendDirection.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrInputLegendBoxJust.Location" type="System.Drawing.Point, System.Drawing">
+    <value>120, 71</value>
+  </data>
+  <data name="ucrInputLegendBoxJust.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>21, 17, 21, 17</value>
+  </data>
+  <data name="ucrInputLegendBoxJust.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 21</value>
+  </data>
+  <data name="ucrInputLegendBoxJust.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLegendBoxJust.Name" xml:space="preserve">
+    <value>ucrInputLegendBoxJust</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLegendBoxJust.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLegendBoxJust.Parent" xml:space="preserve">
+    <value>grpLegendAdjustments</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLegendBoxJust.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrChkLegendJustification.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 128</value>
+  </data>
+  <data name="ucrChkLegendJustification.Size" type="System.Drawing.Size, System.Drawing">
+    <value>122, 20</value>
+  </data>
+  <data name="ucrChkLegendJustification.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLegendJustification.Name" xml:space="preserve">
+    <value>ucrChkLegendJustification</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLegendJustification.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLegendJustification.Parent" xml:space="preserve">
+    <value>grpLegendAdjustments</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLegendJustification.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="ucrChkLegendBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 100</value>
+  </data>
+  <data name="ucrChkLegendBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>122, 20</value>
+  </data>
+  <data name="ucrChkLegendBox.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLegendBox.Name" xml:space="preserve">
+    <value>ucrChkLegendBox</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLegendBox.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLegendBox.Parent" xml:space="preserve">
+    <value>grpLegendAdjustments</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLegendBox.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="urChkLegendPosition.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 21</value>
+  </data>
+  <data name="urChkLegendPosition.Size" type="System.Drawing.Size, System.Drawing">
+    <value>122, 20</value>
+  </data>
+  <data name="urChkLegendPosition.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;urChkLegendPosition.Name" xml:space="preserve">
+    <value>urChkLegendPosition</value>
+  </data>
+  <data name="&gt;&gt;urChkLegendPosition.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;urChkLegendPosition.Parent" xml:space="preserve">
+    <value>grpLegendAdjustments</value>
+  </data>
+  <data name="&gt;&gt;urChkLegendPosition.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="ucrChkLegendDirection.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 47</value>
+  </data>
+  <data name="ucrChkLegendDirection.Size" type="System.Drawing.Size, System.Drawing">
+    <value>122, 20</value>
+  </data>
+  <data name="ucrChkLegendDirection.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLegendDirection.Name" xml:space="preserve">
+    <value>ucrChkLegendDirection</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLegendDirection.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLegendDirection.Parent" xml:space="preserve">
+    <value>grpLegendAdjustments</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLegendDirection.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="urChkLegendBoxJust.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 73</value>
+  </data>
+  <data name="urChkLegendBoxJust.Size" type="System.Drawing.Size, System.Drawing">
+    <value>122, 20</value>
+  </data>
+  <data name="urChkLegendBoxJust.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;urChkLegendBoxJust.Name" xml:space="preserve">
+    <value>urChkLegendBoxJust</value>
+  </data>
+  <data name="&gt;&gt;urChkLegendBoxJust.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;urChkLegendBoxJust.Parent" xml:space="preserve">
+    <value>grpLegendAdjustments</value>
+  </data>
+  <data name="&gt;&gt;urChkLegendBoxJust.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="grpLegendAdjustments.Location" type="System.Drawing.Point, System.Drawing">
+    <value>550, 6</value>
+  </data>
+  <data name="grpLegendAdjustments.Size" type="System.Drawing.Size, System.Drawing">
+    <value>260, 164</value>
+  </data>
+  <data name="grpLegendAdjustments.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="grpLegendAdjustments.Text" xml:space="preserve">
+    <value>Legend Adjustments</value>
+  </data>
+  <data name="&gt;&gt;grpLegendAdjustments.Name" xml:space="preserve">
+    <value>grpLegendAdjustments</value>
+  </data>
+  <data name="&gt;&gt;grpLegendAdjustments.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpLegendAdjustments.Parent" xml:space="preserve">
+    <value>tbThemeLegend</value>
+  </data>
+  <data name="&gt;&gt;grpLegendAdjustments.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrLegendBoxBackground.Location" type="System.Drawing.Point, System.Drawing">
+    <value>275, 21</value>
+  </data>
+  <data name="ucrLegendBoxBackground.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 130</value>
+  </data>
+  <data name="ucrLegendBoxBackground.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendBoxBackground.Name" xml:space="preserve">
+    <value>ucrLegendBoxBackground</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendBoxBackground.Type" xml:space="preserve">
+    <value>instat.ucrElementRectControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendBoxBackground.Parent" xml:space="preserve">
+    <value>grpLegendBackGroundAndKey</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendBoxBackground.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrLegendBackground.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 21</value>
+  </data>
+  <data name="ucrLegendBackground.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 130</value>
+  </data>
+  <data name="ucrLegendBackground.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendBackground.Name" xml:space="preserve">
+    <value>ucrLegendBackground</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendBackground.Type" xml:space="preserve">
+    <value>instat.ucrElementRectControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendBackground.Parent" xml:space="preserve">
+    <value>grpLegendBackGroundAndKey</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendBackground.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrLegendKey.Location" type="System.Drawing.Point, System.Drawing">
+    <value>536, 21</value>
+  </data>
+  <data name="ucrLegendKey.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 130</value>
+  </data>
+  <data name="ucrLegendKey.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendKey.Name" xml:space="preserve">
+    <value>ucrLegendKey</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendKey.Type" xml:space="preserve">
+    <value>instat.ucrElementRectControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendKey.Parent" xml:space="preserve">
+    <value>grpLegendBackGroundAndKey</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendKey.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="grpLegendBackGroundAndKey.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 269</value>
+  </data>
+  <data name="grpLegendBackGroundAndKey.Size" type="System.Drawing.Size, System.Drawing">
+    <value>801, 150</value>
+  </data>
+  <data name="grpLegendBackGroundAndKey.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="grpLegendBackGroundAndKey.Text" xml:space="preserve">
+    <value>Legend Background and Key</value>
+  </data>
+  <data name="&gt;&gt;grpLegendBackGroundAndKey.Name" xml:space="preserve">
+    <value>grpLegendBackGroundAndKey</value>
+  </data>
+  <data name="&gt;&gt;grpLegendBackGroundAndKey.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpLegendBackGroundAndKey.Parent" xml:space="preserve">
+    <value>tbThemeLegend</value>
+  </data>
+  <data name="&gt;&gt;grpLegendBackGroundAndKey.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tbThemeLegend.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbThemeLegend.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbThemeLegend.Size" type="System.Drawing.Size, System.Drawing">
+    <value>817, 583</value>
+  </data>
+  <data name="tbThemeLegend.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tbThemeLegend.Text" xml:space="preserve">
+    <value>Legend</value>
+  </data>
+  <data name="&gt;&gt;tbThemeLegend.Name" xml:space="preserve">
+    <value>tbThemeLegend</value>
+  </data>
+  <data name="&gt;&gt;tbThemeLegend.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbThemeLegend.Parent" xml:space="preserve">
+    <value>tbLegend</value>
+  </data>
+  <data name="&gt;&gt;tbThemeLegend.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrThemeTitleYRightAxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>275, 21</value>
+  </data>
+  <data name="ucrThemeTitleYRightAxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>262, 227</value>
+  </data>
+  <data name="ucrThemeTitleYRightAxis.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeTitleYRightAxis.Name" xml:space="preserve">
+    <value>ucrThemeTitleYRightAxis</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeTitleYRightAxis.Type" xml:space="preserve">
+    <value>instat.ucrELementTextControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeTitleYRightAxis.Parent" xml:space="preserve">
+    <value>grpYAxisTitle</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeTitleYRightAxis.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrThemeTitleYAxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 21</value>
+  </data>
+  <data name="ucrThemeTitleYAxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>259, 227</value>
+  </data>
+  <data name="ucrThemeTitleYAxis.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeTitleYAxis.Name" xml:space="preserve">
+    <value>ucrThemeTitleYAxis</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeTitleYAxis.Type" xml:space="preserve">
+    <value>instat.ucrELementTextControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeTitleYAxis.Parent" xml:space="preserve">
+    <value>grpYAxisTitle</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeTitleYAxis.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="grpYAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="grpYAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>535, 269</value>
+  </data>
+  <data name="grpYAxisTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpYAxisTitle.Text" xml:space="preserve">
+    <value>Y-Lab Title</value>
+  </data>
+  <data name="&gt;&gt;grpYAxisTitle.Name" xml:space="preserve">
+    <value>grpYAxisTitle</value>
+  </data>
+  <data name="&gt;&gt;grpYAxisTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpYAxisTitle.Parent" xml:space="preserve">
+    <value>tbThemeYaxis</value>
+  </data>
+  <data name="&gt;&gt;grpYAxisTitle.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrThemeYRightAxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>275, 21</value>
+  </data>
+  <data name="ucrThemeYRightAxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>262, 226</value>
+  </data>
+  <data name="ucrThemeYRightAxis.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeYRightAxis.Name" xml:space="preserve">
+    <value>ucrThemeYRightAxis</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeYRightAxis.Type" xml:space="preserve">
+    <value>instat.ucrELementTextControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeYRightAxis.Parent" xml:space="preserve">
+    <value>grpTickMarkLabelsYAxis</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeYRightAxis.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrThemeLeftYAxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 21</value>
+  </data>
+  <data name="ucrThemeLeftYAxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>259, 226</value>
+  </data>
+  <data name="ucrThemeLeftYAxis.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeLeftYAxis.Name" xml:space="preserve">
+    <value>ucrThemeLeftYAxis</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeLeftYAxis.Type" xml:space="preserve">
+    <value>instat.ucrELementTextControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeLeftYAxis.Parent" xml:space="preserve">
+    <value>grpTickMarkLabelsYAxis</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeLeftYAxis.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="grpTickMarkLabelsYAxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 277</value>
+  </data>
+  <data name="grpTickMarkLabelsYAxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>535, 258</value>
+  </data>
+  <data name="grpTickMarkLabelsYAxis.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="grpTickMarkLabelsYAxis.Text" xml:space="preserve">
+    <value>Tick Mark Labels </value>
+  </data>
+  <data name="&gt;&gt;grpTickMarkLabelsYAxis.Name" xml:space="preserve">
+    <value>grpTickMarkLabelsYAxis</value>
+  </data>
+  <data name="&gt;&gt;grpTickMarkLabelsYAxis.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpTickMarkLabelsYAxis.Parent" xml:space="preserve">
+    <value>tbThemeYaxis</value>
+  </data>
+  <data name="&gt;&gt;grpTickMarkLabelsYAxis.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrTickMarksYAxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 21</value>
+  </data>
+  <data name="ucrTickMarksYAxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 123</value>
+  </data>
+  <data name="ucrTickMarksYAxis.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrTickMarksYAxis.Name" xml:space="preserve">
+    <value>ucrTickMarksYAxis</value>
+  </data>
+  <data name="&gt;&gt;ucrTickMarksYAxis.Type" xml:space="preserve">
+    <value>instat.ucrElementLineControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrTickMarksYAxis.Parent" xml:space="preserve">
+    <value>grpTickMarkers</value>
+  </data>
+  <data name="&gt;&gt;ucrTickMarksYAxis.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrYAxisLines.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 142</value>
+  </data>
+  <data name="ucrYAxisLines.Size" type="System.Drawing.Size, System.Drawing">
+    <value>254, 124</value>
+  </data>
+  <data name="ucrYAxisLines.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrYAxisLines.Name" xml:space="preserve">
+    <value>ucrYAxisLines</value>
+  </data>
+  <data name="&gt;&gt;ucrYAxisLines.Type" xml:space="preserve">
+    <value>instat.ucrElementLineControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrYAxisLines.Parent" xml:space="preserve">
+    <value>grpTickMarkers</value>
+  </data>
+  <data name="&gt;&gt;ucrYAxisLines.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="grpTickMarkers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>550, 6</value>
+  </data>
+  <data name="grpTickMarkers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>260, 269</value>
+  </data>
+  <data name="grpTickMarkers.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="grpTickMarkers.Text" xml:space="preserve">
+    <value>TickMarkers</value>
+  </data>
+  <data name="&gt;&gt;grpTickMarkers.Name" xml:space="preserve">
+    <value>grpTickMarkers</value>
+  </data>
+  <data name="&gt;&gt;grpTickMarkers.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpTickMarkers.Parent" xml:space="preserve">
+    <value>tbThemeYaxis</value>
+  </data>
+  <data name="&gt;&gt;grpTickMarkers.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tbThemeYaxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbThemeYaxis.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbThemeYaxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>817, 583</value>
+  </data>
+  <data name="tbThemeYaxis.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tbThemeYaxis.Text" xml:space="preserve">
+    <value>Y-Axis</value>
+  </data>
+  <data name="&gt;&gt;tbThemeYaxis.Name" xml:space="preserve">
+    <value>tbThemeYaxis</value>
+  </data>
+  <data name="&gt;&gt;tbThemeYaxis.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbThemeYaxis.Parent" xml:space="preserve">
+    <value>tbLegend</value>
+  </data>
+  <data name="&gt;&gt;tbThemeYaxis.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrThemeTopXAxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>275, 21</value>
+  </data>
+  <data name="ucrThemeTopXAxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>258, 224</value>
+  </data>
+  <data name="ucrThemeTopXAxis.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeTopXAxis.Name" xml:space="preserve">
+    <value>ucrThemeTopXAxis</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeTopXAxis.Type" xml:space="preserve">
+    <value>instat.ucrELementTextControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeTopXAxis.Parent" xml:space="preserve">
+    <value>grpTickMarkLabelsXAxis</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeTopXAxis.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrThemeBottomXAxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 21</value>
+  </data>
+  <data name="ucrThemeBottomXAxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>259, 224</value>
+  </data>
+  <data name="ucrThemeBottomXAxis.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeBottomXAxis.Name" xml:space="preserve">
+    <value>ucrThemeBottomXAxis</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeBottomXAxis.Type" xml:space="preserve">
+    <value>instat.ucrELementTextControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeBottomXAxis.Parent" xml:space="preserve">
+    <value>grpTickMarkLabelsXAxis</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeBottomXAxis.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="grpTickMarkLabelsXAxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 277</value>
+  </data>
+  <data name="grpTickMarkLabelsXAxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>535, 258</value>
+  </data>
+  <data name="grpTickMarkLabelsXAxis.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="grpTickMarkLabelsXAxis.Text" xml:space="preserve">
+    <value>Tick Mark Labels </value>
+  </data>
+  <data name="&gt;&gt;grpTickMarkLabelsXAxis.Name" xml:space="preserve">
+    <value>grpTickMarkLabelsXAxis</value>
+  </data>
+  <data name="&gt;&gt;grpTickMarkLabelsXAxis.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpTickMarkLabelsXAxis.Parent" xml:space="preserve">
+    <value>tbThemeXAxis</value>
+  </data>
+  <data name="&gt;&gt;grpTickMarkLabelsXAxis.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrXAxisLines.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 142</value>
+  </data>
+  <data name="ucrXAxisLines.Size" type="System.Drawing.Size, System.Drawing">
+    <value>254, 124</value>
+  </data>
+  <data name="ucrXAxisLines.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrXAxisLines.Name" xml:space="preserve">
+    <value>ucrXAxisLines</value>
+  </data>
+  <data name="&gt;&gt;ucrXAxisLines.Type" xml:space="preserve">
+    <value>instat.ucrElementLineControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrXAxisLines.Parent" xml:space="preserve">
+    <value>grpTickMarks</value>
+  </data>
+  <data name="&gt;&gt;ucrXAxisLines.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrTickMarksXAxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 21</value>
+  </data>
+  <data name="ucrTickMarksXAxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>254, 124</value>
+  </data>
+  <data name="ucrTickMarksXAxis.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrTickMarksXAxis.Name" xml:space="preserve">
+    <value>ucrTickMarksXAxis</value>
+  </data>
+  <data name="&gt;&gt;ucrTickMarksXAxis.Type" xml:space="preserve">
+    <value>instat.ucrElementLineControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrTickMarksXAxis.Parent" xml:space="preserve">
+    <value>grpTickMarks</value>
+  </data>
+  <data name="&gt;&gt;ucrTickMarksXAxis.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="grpTickMarks.Location" type="System.Drawing.Point, System.Drawing">
+    <value>550, 6</value>
+  </data>
+  <data name="grpTickMarks.Size" type="System.Drawing.Size, System.Drawing">
+    <value>260, 269</value>
+  </data>
+  <data name="grpTickMarks.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="grpTickMarks.Text" xml:space="preserve">
+    <value>TickMarkers</value>
+  </data>
+  <data name="&gt;&gt;grpTickMarks.Name" xml:space="preserve">
+    <value>grpTickMarks</value>
+  </data>
+  <data name="&gt;&gt;grpTickMarks.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpTickMarks.Parent" xml:space="preserve">
+    <value>tbThemeXAxis</value>
+  </data>
+  <data name="&gt;&gt;grpTickMarks.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrThemeTitleXTopAxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>275, 21</value>
+  </data>
+  <data name="ucrThemeTitleXTopAxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>252, 230</value>
+  </data>
+  <data name="ucrThemeTitleXTopAxis.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeTitleXTopAxis.Name" xml:space="preserve">
+    <value>ucrThemeTitleXTopAxis</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeTitleXTopAxis.Type" xml:space="preserve">
+    <value>instat.ucrELementTextControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeTitleXTopAxis.Parent" xml:space="preserve">
+    <value>grpXAxisTitle</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeTitleXTopAxis.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrThemeTitleXAxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 21</value>
+  </data>
+  <data name="ucrThemeTitleXAxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>260, 231</value>
+  </data>
+  <data name="ucrThemeTitleXAxis.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeTitleXAxis.Name" xml:space="preserve">
+    <value>ucrThemeTitleXAxis</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeTitleXAxis.Type" xml:space="preserve">
+    <value>instat.ucrELementTextControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeTitleXAxis.Parent" xml:space="preserve">
+    <value>grpXAxisTitle</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeTitleXAxis.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="grpXAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="grpXAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>535, 269</value>
+  </data>
+  <data name="grpXAxisTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpXAxisTitle.Text" xml:space="preserve">
+    <value>X-Lab Title</value>
+  </data>
+  <data name="&gt;&gt;grpXAxisTitle.Name" xml:space="preserve">
+    <value>grpXAxisTitle</value>
+  </data>
+  <data name="&gt;&gt;grpXAxisTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpXAxisTitle.Parent" xml:space="preserve">
+    <value>tbThemeXAxis</value>
+  </data>
+  <data name="&gt;&gt;grpXAxisTitle.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tbThemeXAxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbThemeXAxis.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbThemeXAxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>817, 583</value>
+  </data>
+  <data name="tbThemeXAxis.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tbThemeXAxis.Text" xml:space="preserve">
+    <value>X-Axis</value>
+  </data>
+  <data name="&gt;&gt;tbThemeXAxis.Name" xml:space="preserve">
+    <value>tbThemeXAxis</value>
+  </data>
+  <data name="&gt;&gt;tbThemeXAxis.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbThemeXAxis.Parent" xml:space="preserve">
+    <value>tbLegend</value>
+  </data>
+  <data name="&gt;&gt;tbThemeXAxis.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrTickLength.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 15</value>
+  </data>
+  <data name="ucrTickLength.Size" type="System.Drawing.Size, System.Drawing">
+    <value>256, 114</value>
+  </data>
+  <data name="ucrTickLength.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrTickLength.Name" xml:space="preserve">
+    <value>ucrTickLength</value>
+  </data>
+  <data name="&gt;&gt;ucrTickLength.Type" xml:space="preserve">
+    <value>instat.ucrGridUnit, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrTickLength.Parent" xml:space="preserve">
+    <value>grpTickLength</value>
+  </data>
+  <data name="&gt;&gt;ucrTickLength.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="grpTickLength.Location" type="System.Drawing.Point, System.Drawing">
+    <value>542, 27</value>
+  </data>
+  <data name="grpTickLength.Size" type="System.Drawing.Size, System.Drawing">
+    <value>263, 137</value>
+  </data>
+  <data name="grpTickLength.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="grpTickLength.Text" xml:space="preserve">
+    <value>grpTickLength</value>
+  </data>
+  <data name="&gt;&gt;grpTickLength.Name" xml:space="preserve">
+    <value>grpTickLength</value>
+  </data>
+  <data name="&gt;&gt;grpTickLength.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpTickLength.Parent" xml:space="preserve">
+    <value>tbXYAxes</value>
+  </data>
+  <data name="&gt;&gt;grpTickLength.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrThemeAxesLines.Location" type="System.Drawing.Point, System.Drawing">
+    <value>283, 256</value>
+  </data>
+  <data name="ucrThemeAxesLines.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 122</value>
+  </data>
+  <data name="ucrThemeAxesLines.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeAxesLines.Name" xml:space="preserve">
+    <value>ucrThemeAxesLines</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeAxesLines.Type" xml:space="preserve">
+    <value>instat.ucrElementLineControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeAxesLines.Parent" xml:space="preserve">
+    <value>tbXYAxes</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeAxesLines.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrThemeAxesTickLabels.Location" type="System.Drawing.Point, System.Drawing">
+    <value>281, 27</value>
+  </data>
+  <data name="ucrThemeAxesTickLabels.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 228</value>
+  </data>
+  <data name="ucrThemeAxesTickLabels.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeAxesTickLabels.Name" xml:space="preserve">
+    <value>ucrThemeAxesTickLabels</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeAxesTickLabels.Type" xml:space="preserve">
+    <value>instat.ucrELementTextControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeAxesTickLabels.Parent" xml:space="preserve">
+    <value>tbXYAxes</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeAxesTickLabels.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrTickMarksAxes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 256</value>
+  </data>
+  <data name="ucrTickMarksAxes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>257, 122</value>
+  </data>
+  <data name="ucrTickMarksAxes.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrTickMarksAxes.Name" xml:space="preserve">
+    <value>ucrTickMarksAxes</value>
+  </data>
+  <data name="&gt;&gt;ucrTickMarksAxes.Type" xml:space="preserve">
+    <value>instat.ucrElementLineControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrTickMarksAxes.Parent" xml:space="preserve">
+    <value>tbXYAxes</value>
+  </data>
+  <data name="&gt;&gt;ucrTickMarksAxes.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrThemeAxesTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 27</value>
+  </data>
+  <data name="ucrThemeAxesTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 228</value>
+  </data>
+  <data name="ucrThemeAxesTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeAxesTitle.Name" xml:space="preserve">
+    <value>ucrThemeAxesTitle</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeAxesTitle.Type" xml:space="preserve">
+    <value>instat.ucrELementTextControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeAxesTitle.Parent" xml:space="preserve">
+    <value>tbXYAxes</value>
+  </data>
+  <data name="&gt;&gt;ucrThemeAxesTitle.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="tbXYAxes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbXYAxes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>817, 583</value>
+  </data>
+  <data name="tbXYAxes.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="tbXYAxes.Text" xml:space="preserve">
+    <value>XY-Axes</value>
+  </data>
+  <data name="&gt;&gt;tbXYAxes.Name" xml:space="preserve">
+    <value>tbXYAxes</value>
+  </data>
+  <data name="&gt;&gt;tbXYAxes.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbXYAxes.Parent" xml:space="preserve">
+    <value>tbLegend</value>
+  </data>
+  <data name="&gt;&gt;tbXYAxes.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrPlotMargin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 24</value>
+  </data>
+  <data name="ucrPlotMargin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>257, 123</value>
+  </data>
+  <data name="ucrPlotMargin.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrPlotMargin.Name" xml:space="preserve">
+    <value>ucrPlotMargin</value>
+  </data>
+  <data name="&gt;&gt;ucrPlotMargin.Type" xml:space="preserve">
+    <value>instat.ucrGridUnit, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPlotMargin.Parent" xml:space="preserve">
+    <value>grpPlotMargin</value>
+  </data>
+  <data name="&gt;&gt;ucrPlotMargin.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="grpPlotMargin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>285, 269</value>
+  </data>
+  <data name="grpPlotMargin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>263, 153</value>
+  </data>
+  <data name="grpPlotMargin.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="grpPlotMargin.Text" xml:space="preserve">
+    <value>Plot Margin</value>
+  </data>
+  <data name="&gt;&gt;grpPlotMargin.Name" xml:space="preserve">
+    <value>grpPlotMargin</value>
+  </data>
+  <data name="&gt;&gt;grpPlotMargin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpPlotMargin.Parent" xml:space="preserve">
+    <value>tbPLot</value>
+  </data>
+  <data name="&gt;&gt;grpPlotMargin.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrPlotBackground.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 21</value>
+  </data>
+  <data name="ucrPlotBackground.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 131</value>
+  </data>
+  <data name="ucrPlotBackground.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrPlotBackground.Name" xml:space="preserve">
+    <value>ucrPlotBackground</value>
+  </data>
+  <data name="&gt;&gt;ucrPlotBackground.Type" xml:space="preserve">
+    <value>instat.ucrElementRectControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPlotBackground.Parent" xml:space="preserve">
+    <value>grpPlotBackground</value>
+  </data>
+  <data name="&gt;&gt;ucrPlotBackground.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="grpPlotBackground.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 269</value>
+  </data>
+  <data name="grpPlotBackground.Size" type="System.Drawing.Size, System.Drawing">
+    <value>269, 153</value>
+  </data>
+  <data name="grpPlotBackground.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="grpPlotBackground.Text" xml:space="preserve">
+    <value>Plot Background </value>
+  </data>
+  <data name="&gt;&gt;grpPlotBackground.Name" xml:space="preserve">
+    <value>grpPlotBackground</value>
+  </data>
+  <data name="&gt;&gt;grpPlotBackground.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpPlotBackground.Parent" xml:space="preserve">
+    <value>tbPLot</value>
+  </data>
+  <data name="&gt;&gt;grpPlotBackground.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrPlotCaption.Location" type="System.Drawing.Point, System.Drawing">
+    <value>536, 21</value>
+  </data>
+  <data name="ucrPlotCaption.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 224</value>
+  </data>
+  <data name="ucrPlotCaption.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrPlotCaption.Name" xml:space="preserve">
+    <value>ucrPlotCaption</value>
+  </data>
+  <data name="&gt;&gt;ucrPlotCaption.Type" xml:space="preserve">
+    <value>instat.ucrELementTextControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPlotCaption.Parent" xml:space="preserve">
+    <value>grpPlotTitleAndCaption</value>
+  </data>
+  <data name="&gt;&gt;ucrPlotCaption.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrPlotSubTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>275, 21</value>
+  </data>
+  <data name="ucrPlotSubTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 224</value>
+  </data>
+  <data name="ucrPlotSubTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrPlotSubTitle.Name" xml:space="preserve">
+    <value>ucrPlotSubTitle</value>
+  </data>
+  <data name="&gt;&gt;ucrPlotSubTitle.Type" xml:space="preserve">
+    <value>instat.ucrELementTextControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPlotSubTitle.Parent" xml:space="preserve">
+    <value>grpPlotTitleAndCaption</value>
+  </data>
+  <data name="&gt;&gt;ucrPlotSubTitle.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrPlotTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 21</value>
+  </data>
+  <data name="ucrPlotTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 224</value>
+  </data>
+  <data name="ucrPlotTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrPlotTitle.Name" xml:space="preserve">
+    <value>ucrPlotTitle</value>
+  </data>
+  <data name="&gt;&gt;ucrPlotTitle.Type" xml:space="preserve">
+    <value>instat.ucrELementTextControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPlotTitle.Parent" xml:space="preserve">
+    <value>grpPlotTitleAndCaption</value>
+  </data>
+  <data name="&gt;&gt;ucrPlotTitle.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="grpPlotTitleAndCaption.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="grpPlotTitleAndCaption.Size" type="System.Drawing.Size, System.Drawing">
+    <value>804, 255</value>
+  </data>
+  <data name="grpPlotTitleAndCaption.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpPlotTitleAndCaption.Text" xml:space="preserve">
+    <value>Plot Title and Caption</value>
+  </data>
+  <data name="&gt;&gt;grpPlotTitleAndCaption.Name" xml:space="preserve">
+    <value>grpPlotTitleAndCaption</value>
+  </data>
+  <data name="&gt;&gt;grpPlotTitleAndCaption.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpPlotTitleAndCaption.Parent" xml:space="preserve">
+    <value>tbPLot</value>
+  </data>
+  <data name="&gt;&gt;grpPlotTitleAndCaption.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tbPLot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbPLot.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbPLot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>817, 583</value>
+  </data>
+  <data name="tbPLot.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="tbPLot.Text" xml:space="preserve">
+    <value>Plot</value>
+  </data>
+  <data name="&gt;&gt;tbPLot.Name" xml:space="preserve">
+    <value>tbPLot</value>
+  </data>
+  <data name="&gt;&gt;tbPLot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbPLot.Parent" xml:space="preserve">
+    <value>tbLegend</value>
+  </data>
+  <data name="&gt;&gt;tbPLot.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrLegendBoxSpacing.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 21</value>
+  </data>
+  <data name="ucrLegendBoxSpacing.Size" type="System.Drawing.Size, System.Drawing">
+    <value>256, 127</value>
+  </data>
+  <data name="ucrLegendBoxSpacing.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendBoxSpacing.Name" xml:space="preserve">
+    <value>ucrLegendBoxSpacing</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendBoxSpacing.Type" xml:space="preserve">
+    <value>instat.ucrGridUnit, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendBoxSpacing.Parent" xml:space="preserve">
+    <value>grpLegendBoxSpacing</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendBoxSpacing.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="grpLegendBoxSpacing.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 172</value>
+  </data>
+  <data name="grpLegendBoxSpacing.Size" type="System.Drawing.Size, System.Drawing">
+    <value>272, 154</value>
+  </data>
+  <data name="grpLegendBoxSpacing.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="grpLegendBoxSpacing.Text" xml:space="preserve">
+    <value>Legend Box Spacing</value>
+  </data>
+  <data name="&gt;&gt;grpLegendBoxSpacing.Name" xml:space="preserve">
+    <value>grpLegendBoxSpacing</value>
+  </data>
+  <data name="&gt;&gt;grpLegendBoxSpacing.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpLegendBoxSpacing.Parent" xml:space="preserve">
+    <value>tbThemeLegendMoreOptions</value>
+  </data>
+  <data name="&gt;&gt;grpLegendBoxSpacing.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrLegendSpacingYAxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>534, 21</value>
+  </data>
+  <data name="ucrLegendSpacingYAxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>256, 119</value>
+  </data>
+  <data name="ucrLegendSpacingYAxis.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendSpacingYAxis.Name" xml:space="preserve">
+    <value>ucrLegendSpacingYAxis</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendSpacingYAxis.Type" xml:space="preserve">
+    <value>instat.ucrGridUnit, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendSpacingYAxis.Parent" xml:space="preserve">
+    <value>grpLegendSpacing</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendSpacingYAxis.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrLegendSpacingXAxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>273, 21</value>
+  </data>
+  <data name="ucrLegendSpacingXAxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 119</value>
+  </data>
+  <data name="ucrLegendSpacingXAxis.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendSpacingXAxis.Name" xml:space="preserve">
+    <value>ucrLegendSpacingXAxis</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendSpacingXAxis.Type" xml:space="preserve">
+    <value>instat.ucrGridUnit, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendSpacingXAxis.Parent" xml:space="preserve">
+    <value>grpLegendSpacing</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendSpacingXAxis.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrLegendSpacing.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 21</value>
+  </data>
+  <data name="ucrLegendSpacing.Size" type="System.Drawing.Size, System.Drawing">
+    <value>258, 119</value>
+  </data>
+  <data name="ucrLegendSpacing.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendSpacing.Name" xml:space="preserve">
+    <value>ucrLegendSpacing</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendSpacing.Type" xml:space="preserve">
+    <value>instat.ucrGridUnit, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendSpacing.Parent" xml:space="preserve">
+    <value>grpLegendSpacing</value>
+  </data>
+  <data name="&gt;&gt;ucrLegendSpacing.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="grpLegendSpacing.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="grpLegendSpacing.Size" type="System.Drawing.Size, System.Drawing">
+    <value>798, 150</value>
+  </data>
+  <data name="grpLegendSpacing.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpLegendSpacing.Text" xml:space="preserve">
+    <value>Legend Spacing</value>
+  </data>
+  <data name="&gt;&gt;grpLegendSpacing.Name" xml:space="preserve">
+    <value>grpLegendSpacing</value>
+  </data>
+  <data name="&gt;&gt;grpLegendSpacing.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpLegendSpacing.Parent" xml:space="preserve">
+    <value>tbThemeLegendMoreOptions</value>
+  </data>
+  <data name="&gt;&gt;grpLegendSpacing.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tbThemeLegendMoreOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbThemeLegendMoreOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>817, 583</value>
+  </data>
+  <data name="tbThemeLegendMoreOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="tbThemeLegendMoreOptions.Text" xml:space="preserve">
+    <value>Legend (More Options)</value>
+  </data>
+  <data name="&gt;&gt;tbThemeLegendMoreOptions.Name" xml:space="preserve">
+    <value>tbThemeLegendMoreOptions</value>
+  </data>
+  <data name="&gt;&gt;tbThemeLegendMoreOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbThemeLegendMoreOptions.Parent" xml:space="preserve">
+    <value>tbLegend</value>
+  </data>
+  <data name="&gt;&gt;tbThemeLegendMoreOptions.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="ucrPanelGridMinorYAxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>275, 251</value>
+  </data>
+  <data name="ucrPanelGridMinorYAxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>258, 224</value>
+  </data>
+  <data name="ucrPanelGridMinorYAxis.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelGridMinorYAxis.Name" xml:space="preserve">
+    <value>ucrPanelGridMinorYAxis</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelGridMinorYAxis.Type" xml:space="preserve">
+    <value>instat.ucrELementTextControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelGridMinorYAxis.Parent" xml:space="preserve">
+    <value>grpPanelGridMajorMinor</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelGridMinorYAxis.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrPanelGridMinorXAxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 251</value>
+  </data>
+  <data name="ucrPanelGridMinorXAxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>259, 224</value>
+  </data>
+  <data name="ucrPanelGridMinorXAxis.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelGridMinorXAxis.Name" xml:space="preserve">
+    <value>ucrPanelGridMinorXAxis</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelGridMinorXAxis.Type" xml:space="preserve">
+    <value>instat.ucrELementTextControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelGridMinorXAxis.Parent" xml:space="preserve">
+    <value>grpPanelGridMajorMinor</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelGridMinorXAxis.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrPanelGridMajorYAxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>275, 21</value>
+  </data>
+  <data name="ucrPanelGridMajorYAxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>258, 224</value>
+  </data>
+  <data name="ucrPanelGridMajorYAxis.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelGridMajorYAxis.Name" xml:space="preserve">
+    <value>ucrPanelGridMajorYAxis</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelGridMajorYAxis.Type" xml:space="preserve">
+    <value>instat.ucrELementTextControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelGridMajorYAxis.Parent" xml:space="preserve">
+    <value>grpPanelGridMajorMinor</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelGridMajorYAxis.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrPanelGridMajorXAxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 21</value>
+  </data>
+  <data name="ucrPanelGridMajorXAxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>259, 224</value>
+  </data>
+  <data name="ucrPanelGridMajorXAxis.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelGridMajorXAxis.Name" xml:space="preserve">
+    <value>ucrPanelGridMajorXAxis</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelGridMajorXAxis.Type" xml:space="preserve">
+    <value>instat.ucrELementTextControl, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelGridMajorXAxis.Parent" xml:space="preserve">
+    <value>grpPanelGridMajorMinor</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelGridMajorXAxis.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="grpPanelGridMajorMinor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="grpPanelGridMajorMinor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>539, 486</value>
+  </data>
+  <data name="grpPanelGridMajorMinor.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpPanelGridMajorMinor.Text" xml:space="preserve">
+    <value>Panel Grid</value>
+  </data>
+  <data name="&gt;&gt;grpPanelGridMajorMinor.Name" xml:space="preserve">
+    <value>grpPanelGridMajorMinor</value>
+  </data>
+  <data name="&gt;&gt;grpPanelGridMajorMinor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpPanelGridMajorMinor.Parent" xml:space="preserve">
+    <value>tbThemePanelMoreOptions</value>
+  </data>
+  <data name="&gt;&gt;grpPanelGridMajorMinor.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tbThemePanelMoreOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbThemePanelMoreOptions.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbThemePanelMoreOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>817, 583</value>
+  </data>
+  <data name="tbThemePanelMoreOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="tbThemePanelMoreOptions.Text" xml:space="preserve">
+    <value>Panel (More Options)</value>
+  </data>
+  <data name="&gt;&gt;tbThemePanelMoreOptions.Name" xml:space="preserve">
+    <value>tbThemePanelMoreOptions</value>
+  </data>
+  <data name="&gt;&gt;tbThemePanelMoreOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbThemePanelMoreOptions.Parent" xml:space="preserve">
+    <value>tbLegend</value>
+  </data>
+  <data name="&gt;&gt;tbThemePanelMoreOptions.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="tbLegend.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 8</value>
+  </data>
+  <data name="tbLegend.Size" type="System.Drawing.Size, System.Drawing">
+    <value>825, 609</value>
+  </data>
+  <data name="tbLegend.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tbLegend.Name" xml:space="preserve">
+    <value>tbLegend</value>
+  </data>
+  <data name="&gt;&gt;tbLegend.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbLegend.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tbLegend.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>833, 653</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Themes</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>sdgThemes</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

@@ -38,6 +38,7 @@ Partial Class dlgReplaceValues
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgReplaceValues))
         Me.grpOld = New System.Windows.Forms.GroupBox()
         Me.rdoOldValue = New System.Windows.Forms.RadioButton()
         Me.lblRangeMax = New System.Windows.Forms.Label()
@@ -78,119 +79,84 @@ Partial Class dlgReplaceValues
         Me.grpOld.Controls.Add(Me.ucrInputRangeFrom)
         Me.grpOld.Controls.Add(Me.ucrInputOldValue)
         Me.grpOld.Controls.Add(Me.ucrPnlOld)
-        Me.grpOld.Location = New System.Drawing.Point(10, 194)
+        resources.ApplyResources(Me.grpOld, "grpOld")
         Me.grpOld.Name = "grpOld"
-        Me.grpOld.Size = New System.Drawing.Size(237, 148)
-        Me.grpOld.TabIndex = 3
         Me.grpOld.TabStop = False
         Me.grpOld.Tag = "Old"
-        Me.grpOld.Text = "Old"
         '
         'rdoOldValue
         '
-        Me.rdoOldValue.AutoSize = True
-        Me.rdoOldValue.Location = New System.Drawing.Point(12, 27)
+        resources.ApplyResources(Me.rdoOldValue, "rdoOldValue")
         Me.rdoOldValue.Name = "rdoOldValue"
-        Me.rdoOldValue.Size = New System.Drawing.Size(52, 17)
-        Me.rdoOldValue.TabIndex = 1
         Me.rdoOldValue.TabStop = True
-        Me.rdoOldValue.Text = "Value"
         Me.rdoOldValue.UseVisualStyleBackColor = True
         '
         'lblRangeMax
         '
-        Me.lblRangeMax.AutoSize = True
-        Me.lblRangeMax.Location = New System.Drawing.Point(14, 117)
+        resources.ApplyResources(Me.lblRangeMax, "lblRangeMax")
         Me.lblRangeMax.Name = "lblRangeMax"
-        Me.lblRangeMax.Size = New System.Drawing.Size(54, 13)
-        Me.lblRangeMax.TabIndex = 9
         Me.lblRangeMax.Tag = "Maximum"
-        Me.lblRangeMax.Text = "Maximum:"
         '
         'rdoOldMissing
         '
-        Me.rdoOldMissing.AutoSize = True
-        Me.rdoOldMissing.Location = New System.Drawing.Point(12, 50)
+        resources.ApplyResources(Me.rdoOldMissing, "rdoOldMissing")
         Me.rdoOldMissing.Name = "rdoOldMissing"
-        Me.rdoOldMissing.Size = New System.Drawing.Size(90, 17)
-        Me.rdoOldMissing.TabIndex = 3
         Me.rdoOldMissing.TabStop = True
-        Me.rdoOldMissing.Text = "Missing Value"
         Me.rdoOldMissing.UseVisualStyleBackColor = True
         '
         'rdoOldInterval
         '
-        Me.rdoOldInterval.AutoSize = True
-        Me.rdoOldInterval.Location = New System.Drawing.Point(12, 73)
+        resources.ApplyResources(Me.rdoOldInterval, "rdoOldInterval")
         Me.rdoOldInterval.Name = "rdoOldInterval"
-        Me.rdoOldInterval.Size = New System.Drawing.Size(60, 17)
-        Me.rdoOldInterval.TabIndex = 4
         Me.rdoOldInterval.TabStop = True
-        Me.rdoOldInterval.Text = "Interval"
         Me.rdoOldInterval.UseVisualStyleBackColor = True
         '
         'lblRangeMin
         '
-        Me.lblRangeMin.AutoSize = True
-        Me.lblRangeMin.Location = New System.Drawing.Point(14, 96)
+        resources.ApplyResources(Me.lblRangeMin, "lblRangeMin")
         Me.lblRangeMin.Name = "lblRangeMin"
-        Me.lblRangeMin.Size = New System.Drawing.Size(51, 13)
-        Me.lblRangeMin.TabIndex = 6
         Me.lblRangeMin.Tag = "Minimum"
-        Me.lblRangeMin.Text = "Minimum:"
         '
         'ucrChkMax
         '
         Me.ucrChkMax.Checked = False
-        Me.ucrChkMax.Location = New System.Drawing.Point(151, 116)
+        resources.ApplyResources(Me.ucrChkMax, "ucrChkMax")
         Me.ucrChkMax.Name = "ucrChkMax"
-        Me.ucrChkMax.Size = New System.Drawing.Size(80, 20)
-        Me.ucrChkMax.TabIndex = 0
         '
         'ucrInputRangeTo
         '
         Me.ucrInputRangeTo.AddQuotesIfUnrecognised = True
         Me.ucrInputRangeTo.IsMultiline = False
         Me.ucrInputRangeTo.IsReadOnly = False
-        Me.ucrInputRangeTo.Location = New System.Drawing.Point(71, 114)
+        resources.ApplyResources(Me.ucrInputRangeTo, "ucrInputRangeTo")
         Me.ucrInputRangeTo.Name = "ucrInputRangeTo"
-        Me.ucrInputRangeTo.Size = New System.Drawing.Size(74, 21)
-        Me.ucrInputRangeTo.TabIndex = 10
         '
         'ucrChkMin
         '
         Me.ucrChkMin.Checked = False
-        Me.ucrChkMin.Location = New System.Drawing.Point(151, 93)
+        resources.ApplyResources(Me.ucrChkMin, "ucrChkMin")
         Me.ucrChkMin.Name = "ucrChkMin"
-        Me.ucrChkMin.Size = New System.Drawing.Size(80, 20)
-        Me.ucrChkMin.TabIndex = 8
         '
         'ucrInputRangeFrom
         '
         Me.ucrInputRangeFrom.AddQuotesIfUnrecognised = True
         Me.ucrInputRangeFrom.IsMultiline = False
         Me.ucrInputRangeFrom.IsReadOnly = False
-        Me.ucrInputRangeFrom.Location = New System.Drawing.Point(71, 93)
+        resources.ApplyResources(Me.ucrInputRangeFrom, "ucrInputRangeFrom")
         Me.ucrInputRangeFrom.Name = "ucrInputRangeFrom"
-        Me.ucrInputRangeFrom.Size = New System.Drawing.Size(74, 21)
-        Me.ucrInputRangeFrom.TabIndex = 7
         '
         'ucrInputOldValue
         '
         Me.ucrInputOldValue.AddQuotesIfUnrecognised = True
         Me.ucrInputOldValue.IsMultiline = False
         Me.ucrInputOldValue.IsReadOnly = False
-        Me.ucrInputOldValue.Location = New System.Drawing.Point(70, 25)
+        resources.ApplyResources(Me.ucrInputOldValue, "ucrInputOldValue")
         Me.ucrInputOldValue.Name = "ucrInputOldValue"
-        Me.ucrInputOldValue.Size = New System.Drawing.Size(92, 21)
-        Me.ucrInputOldValue.TabIndex = 2
         '
         'ucrPnlOld
         '
-        Me.ucrPnlOld.Location = New System.Drawing.Point(3, 17)
+        resources.ApplyResources(Me.ucrPnlOld, "ucrPnlOld")
         Me.ucrPnlOld.Name = "ucrPnlOld"
-        Me.ucrPnlOld.Size = New System.Drawing.Size(228, 125)
-        Me.ucrPnlOld.TabIndex = 0
         '
         'grpNew
         '
@@ -200,34 +166,23 @@ Partial Class dlgReplaceValues
         Me.grpNew.Controls.Add(Me.rdoNewMissing)
         Me.grpNew.Controls.Add(Me.rdoNewValue)
         Me.grpNew.Controls.Add(Me.ucrPnlNew)
-        Me.grpNew.Location = New System.Drawing.Point(249, 194)
+        resources.ApplyResources(Me.grpNew, "grpNew")
         Me.grpNew.Name = "grpNew"
-        Me.grpNew.Size = New System.Drawing.Size(198, 148)
-        Me.grpNew.TabIndex = 4
         Me.grpNew.TabStop = False
         Me.grpNew.Tag = "New"
-        Me.grpNew.Text = "New"
-        '
-        'rdoNewFromBelow
-        '
-        Me.rdoNewFromAbove.AutoSize = True
-        Me.rdoNewFromAbove.Location = New System.Drawing.Point(14, 73)
-        Me.rdoNewFromAbove.Name = "rdoNewFromBelow"
-        Me.rdoNewFromAbove.Size = New System.Drawing.Size(181, 17)
-        Me.rdoNewFromAbove.TabIndex = 4
-        Me.rdoNewFromAbove.TabStop = True
-        Me.rdoNewFromAbove.Text = "Value From Above"
-        Me.rdoNewFromAbove.UseVisualStyleBackColor = True
         '
         'rdoNewFromAbove
         '
-        Me.rdoNewFromBelow.AutoSize = True
-        Me.rdoNewFromBelow.Location = New System.Drawing.Point(14, 96)
-        Me.rdoNewFromBelow.Name = "rdoNewFromAbove"
-        Me.rdoNewFromBelow.Size = New System.Drawing.Size(182, 17)
-        Me.rdoNewFromBelow.TabIndex = 5
+        resources.ApplyResources(Me.rdoNewFromAbove, "rdoNewFromAbove")
+        Me.rdoNewFromAbove.Name = "rdoNewFromAbove"
+        Me.rdoNewFromAbove.TabStop = True
+        Me.rdoNewFromAbove.UseVisualStyleBackColor = True
+        '
+        'rdoNewFromBelow
+        '
+        resources.ApplyResources(Me.rdoNewFromBelow, "rdoNewFromBelow")
+        Me.rdoNewFromBelow.Name = "rdoNewFromBelow"
         Me.rdoNewFromBelow.TabStop = True
-        Me.rdoNewFromBelow.Text = "Value From Below"
         Me.rdoNewFromBelow.UseVisualStyleBackColor = True
         '
         'ucrInputNewValue
@@ -235,84 +190,59 @@ Partial Class dlgReplaceValues
         Me.ucrInputNewValue.AddQuotesIfUnrecognised = True
         Me.ucrInputNewValue.IsMultiline = False
         Me.ucrInputNewValue.IsReadOnly = False
-        Me.ucrInputNewValue.Location = New System.Drawing.Point(72, 25)
+        resources.ApplyResources(Me.ucrInputNewValue, "ucrInputNewValue")
         Me.ucrInputNewValue.Name = "ucrInputNewValue"
-        Me.ucrInputNewValue.Size = New System.Drawing.Size(93, 21)
-        Me.ucrInputNewValue.TabIndex = 2
         '
         'rdoNewMissing
         '
-        Me.rdoNewMissing.AutoSize = True
-        Me.rdoNewMissing.Location = New System.Drawing.Point(14, 50)
+        resources.ApplyResources(Me.rdoNewMissing, "rdoNewMissing")
         Me.rdoNewMissing.Name = "rdoNewMissing"
-        Me.rdoNewMissing.Size = New System.Drawing.Size(90, 17)
-        Me.rdoNewMissing.TabIndex = 3
         Me.rdoNewMissing.TabStop = True
-        Me.rdoNewMissing.Text = "Missing Value"
         Me.rdoNewMissing.UseVisualStyleBackColor = True
         '
         'rdoNewValue
         '
-        Me.rdoNewValue.AutoSize = True
-        Me.rdoNewValue.Location = New System.Drawing.Point(14, 27)
+        resources.ApplyResources(Me.rdoNewValue, "rdoNewValue")
         Me.rdoNewValue.Name = "rdoNewValue"
-        Me.rdoNewValue.Size = New System.Drawing.Size(52, 17)
-        Me.rdoNewValue.TabIndex = 1
         Me.rdoNewValue.TabStop = True
-        Me.rdoNewValue.Text = "Value"
         Me.rdoNewValue.UseVisualStyleBackColor = True
         '
         'ucrPnlNew
         '
-        Me.ucrPnlNew.Location = New System.Drawing.Point(6, 19)
+        resources.ApplyResources(Me.ucrPnlNew, "ucrPnlNew")
         Me.ucrPnlNew.Name = "ucrPnlNew"
-        Me.ucrPnlNew.Size = New System.Drawing.Size(188, 111)
-        Me.ucrPnlNew.TabIndex = 0
         '
         'lblSelectedColumns
         '
-        Me.lblSelectedColumns.AutoSize = True
-        Me.lblSelectedColumns.Location = New System.Drawing.Point(249, 46)
+        resources.ApplyResources(Me.lblSelectedColumns, "lblSelectedColumns")
         Me.lblSelectedColumns.Name = "lblSelectedColumns"
-        Me.lblSelectedColumns.Size = New System.Drawing.Size(101, 13)
-        Me.lblSelectedColumns.TabIndex = 1
         Me.lblSelectedColumns.Tag = "Selected_Column(s)"
-        Me.lblSelectedColumns.Text = "Selected Column(s):"
         '
         'ucrReceiverReplace
         '
         Me.ucrReceiverReplace.frmParent = Me
-        Me.ucrReceiverReplace.Location = New System.Drawing.Point(249, 60)
-        Me.ucrReceiverReplace.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverReplace, "ucrReceiverReplace")
         Me.ucrReceiverReplace.Name = "ucrReceiverReplace"
         Me.ucrReceiverReplace.Selector = Nothing
-        Me.ucrReceiverReplace.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverReplace.strNcFilePath = ""
-        Me.ucrReceiverReplace.TabIndex = 2
         Me.ucrReceiverReplace.ucrSelector = Nothing
         '
         'ucrSelectorReplace
         '
         Me.ucrSelectorReplace.bShowHiddenColumns = False
         Me.ucrSelectorReplace.bUseCurrentFilter = True
-        Me.ucrSelectorReplace.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorReplace.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorReplace, "ucrSelectorReplace")
         Me.ucrSelectorReplace.Name = "ucrSelectorReplace"
-        Me.ucrSelectorReplace.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorReplace.TabIndex = 0
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 350)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 5
         '
         'dlgReplaceValues
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(454, 407)
         Me.Controls.Add(Me.grpOld)
         Me.Controls.Add(Me.lblSelectedColumns)
         Me.Controls.Add(Me.grpNew)
@@ -323,9 +253,7 @@ Partial Class dlgReplaceValues
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgReplaceValues"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Replace"
-        Me.Text = "Replace Values"
         Me.grpOld.ResumeLayout(False)
         Me.grpOld.PerformLayout()
         Me.grpNew.ResumeLayout(False)

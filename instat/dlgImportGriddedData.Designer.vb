@@ -38,6 +38,7 @@ Partial Class dlgImportGriddedData
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgImportGriddedData))
         Me.lblMinLat = New System.Windows.Forms.Label()
         Me.lblMaxLat = New System.Windows.Forms.Label()
         Me.lblMinLon = New System.Windows.Forms.Label()
@@ -67,243 +68,170 @@ Partial Class dlgImportGriddedData
         '
         'lblMinLat
         '
-        Me.lblMinLat.AutoSize = True
-        Me.lblMinLat.Location = New System.Drawing.Point(11, 234)
+        resources.ApplyResources(Me.lblMinLat, "lblMinLat")
         Me.lblMinLat.Name = "lblMinLat"
-        Me.lblMinLat.Size = New System.Drawing.Size(92, 13)
-        Me.lblMinLat.TabIndex = 13
-        Me.lblMinLat.Text = "Minimum Latitude:"
         '
         'lblMaxLat
         '
-        Me.lblMaxLat.AutoSize = True
-        Me.lblMaxLat.Location = New System.Drawing.Point(225, 234)
+        resources.ApplyResources(Me.lblMaxLat, "lblMaxLat")
         Me.lblMaxLat.Name = "lblMaxLat"
-        Me.lblMaxLat.Size = New System.Drawing.Size(95, 13)
-        Me.lblMaxLat.TabIndex = 15
-        Me.lblMaxLat.Text = "Maximum Latitude:"
         '
         'lblMinLon
         '
-        Me.lblMinLon.AutoSize = True
-        Me.lblMinLon.Location = New System.Drawing.Point(11, 210)
+        resources.ApplyResources(Me.lblMinLon, "lblMinLon")
         Me.lblMinLon.Name = "lblMinLon"
-        Me.lblMinLon.Size = New System.Drawing.Size(101, 13)
-        Me.lblMinLon.TabIndex = 9
-        Me.lblMinLon.Text = "Minimum Longitude:"
         '
         'lblMaxLon
         '
-        Me.lblMaxLon.AutoSize = True
-        Me.lblMaxLon.Location = New System.Drawing.Point(225, 209)
+        resources.ApplyResources(Me.lblMaxLon, "lblMaxLon")
         Me.lblMaxLon.Name = "lblMaxLon"
-        Me.lblMaxLon.Size = New System.Drawing.Size(104, 13)
-        Me.lblMaxLon.TabIndex = 11
-        Me.lblMaxLon.Text = "Maximum Longitude:"
         '
         'lblMainDataName
         '
-        Me.lblMainDataName.AutoSize = True
-        Me.lblMainDataName.Location = New System.Drawing.Point(11, 79)
+        resources.ApplyResources(Me.lblMainDataName, "lblMainDataName")
         Me.lblMainDataName.Name = "lblMainDataName"
-        Me.lblMainDataName.Size = New System.Drawing.Size(90, 13)
-        Me.lblMainDataName.TabIndex = 4
-        Me.lblMainDataName.Text = "Main Data Name:"
         '
         'lblDownloadFrom
         '
-        Me.lblDownloadFrom.AutoSize = True
-        Me.lblDownloadFrom.Location = New System.Drawing.Point(11, 25)
+        resources.ApplyResources(Me.lblDownloadFrom, "lblDownloadFrom")
         Me.lblDownloadFrom.Name = "lblDownloadFrom"
-        Me.lblDownloadFrom.Size = New System.Drawing.Size(84, 13)
-        Me.lblDownloadFrom.TabIndex = 0
-        Me.lblDownloadFrom.Text = "Download From:"
         '
         'lblDataFile
         '
-        Me.lblDataFile.AutoSize = True
-        Me.lblDataFile.Location = New System.Drawing.Point(11, 52)
+        resources.ApplyResources(Me.lblDataFile, "lblDataFile")
         Me.lblDataFile.Name = "lblDataFile"
-        Me.lblDataFile.Size = New System.Drawing.Size(52, 13)
-        Me.lblDataFile.TabIndex = 2
-        Me.lblDataFile.Text = "Data File:"
         '
         'cmdBrowse
         '
-        Me.cmdBrowse.Location = New System.Drawing.Point(376, 258)
+        resources.ApplyResources(Me.cmdBrowse, "cmdBrowse")
         Me.cmdBrowse.Name = "cmdBrowse"
-        Me.cmdBrowse.Size = New System.Drawing.Size(62, 23)
-        Me.cmdBrowse.TabIndex = 19
-        Me.cmdBrowse.Text = "Browse"
         Me.cmdBrowse.UseVisualStyleBackColor = True
         '
         'lblExport
         '
-        Me.lblExport.AutoSize = True
-        Me.lblExport.Location = New System.Drawing.Point(11, 263)
+        resources.ApplyResources(Me.lblExport, "lblExport")
         Me.lblExport.Name = "lblExport"
-        Me.lblExport.Size = New System.Drawing.Size(116, 13)
-        Me.lblExport.TabIndex = 17
-        Me.lblExport.Text = "Temporary file location:"
         '
         'lblLocationData
         '
-        Me.lblLocationData.AutoSize = True
-        Me.lblLocationData.Location = New System.Drawing.Point(11, 106)
+        resources.ApplyResources(Me.lblLocationData, "lblLocationData")
         Me.lblLocationData.Name = "lblLocationData"
-        Me.lblLocationData.Size = New System.Drawing.Size(108, 13)
-        Me.lblLocationData.TabIndex = 6
-        Me.lblLocationData.Text = "Location Data Name:"
         '
         'grpGetArea
         '
         Me.grpGetArea.Controls.Add(Me.rdoPoint)
         Me.grpGetArea.Controls.Add(Me.rdoArea)
         Me.grpGetArea.Controls.Add(Me.ucrPnlGetArea)
-        Me.grpGetArea.Location = New System.Drawing.Point(11, 140)
+        resources.ApplyResources(Me.grpGetArea, "grpGetArea")
         Me.grpGetArea.Name = "grpGetArea"
-        Me.grpGetArea.Size = New System.Drawing.Size(197, 47)
-        Me.grpGetArea.TabIndex = 8
         Me.grpGetArea.TabStop = False
-        Me.grpGetArea.Text = "Download Type"
         '
         'rdoPoint
         '
-        Me.rdoPoint.AutoSize = True
-        Me.rdoPoint.Location = New System.Drawing.Point(120, 19)
+        resources.ApplyResources(Me.rdoPoint, "rdoPoint")
         Me.rdoPoint.Name = "rdoPoint"
-        Me.rdoPoint.Size = New System.Drawing.Size(49, 17)
-        Me.rdoPoint.TabIndex = 2
         Me.rdoPoint.TabStop = True
-        Me.rdoPoint.Text = "Point"
         Me.rdoPoint.UseVisualStyleBackColor = True
         '
         'rdoArea
         '
-        Me.rdoArea.AutoSize = True
-        Me.rdoArea.Location = New System.Drawing.Point(10, 19)
+        resources.ApplyResources(Me.rdoArea, "rdoArea")
         Me.rdoArea.Name = "rdoArea"
-        Me.rdoArea.Size = New System.Drawing.Size(47, 17)
-        Me.rdoArea.TabIndex = 1
         Me.rdoArea.TabStop = True
-        Me.rdoArea.Text = "Area"
         Me.rdoArea.UseVisualStyleBackColor = True
         '
         'ucrPnlGetArea
         '
-        Me.ucrPnlGetArea.Location = New System.Drawing.Point(7, 13)
+        resources.ApplyResources(Me.ucrPnlGetArea, "ucrPnlGetArea")
         Me.ucrPnlGetArea.Name = "ucrPnlGetArea"
-        Me.ucrPnlGetArea.Size = New System.Drawing.Size(184, 28)
-        Me.ucrPnlGetArea.TabIndex = 0
         '
         'ucrInputLocDataName
         '
         Me.ucrInputLocDataName.AddQuotesIfUnrecognised = True
         Me.ucrInputLocDataName.IsMultiline = False
         Me.ucrInputLocDataName.IsReadOnly = False
-        Me.ucrInputLocDataName.Location = New System.Drawing.Point(131, 102)
+        resources.ApplyResources(Me.ucrInputLocDataName, "ucrInputLocDataName")
         Me.ucrInputLocDataName.Name = "ucrInputLocDataName"
-        Me.ucrInputLocDataName.Size = New System.Drawing.Size(161, 21)
-        Me.ucrInputLocDataName.TabIndex = 7
         '
         'ucrInputExportFile
         '
         Me.ucrInputExportFile.AddQuotesIfUnrecognised = True
         Me.ucrInputExportFile.IsMultiline = False
         Me.ucrInputExportFile.IsReadOnly = False
-        Me.ucrInputExportFile.Location = New System.Drawing.Point(132, 259)
+        resources.ApplyResources(Me.ucrInputExportFile, "ucrInputExportFile")
         Me.ucrInputExportFile.Name = "ucrInputExportFile"
-        Me.ucrInputExportFile.Size = New System.Drawing.Size(227, 21)
-        Me.ucrInputExportFile.TabIndex = 18
         '
         'ucrInputDataFile
         '
         Me.ucrInputDataFile.AddQuotesIfUnrecognised = True
         Me.ucrInputDataFile.IsReadOnly = False
-        Me.ucrInputDataFile.Location = New System.Drawing.Point(131, 48)
+        resources.ApplyResources(Me.ucrInputDataFile, "ucrInputDataFile")
         Me.ucrInputDataFile.Name = "ucrInputDataFile"
-        Me.ucrInputDataFile.Size = New System.Drawing.Size(161, 21)
-        Me.ucrInputDataFile.TabIndex = 3
         '
         'ucrInputDownloadFrom
         '
         Me.ucrInputDownloadFrom.AddQuotesIfUnrecognised = True
         Me.ucrInputDownloadFrom.IsReadOnly = False
-        Me.ucrInputDownloadFrom.Location = New System.Drawing.Point(131, 21)
+        resources.ApplyResources(Me.ucrInputDownloadFrom, "ucrInputDownloadFrom")
         Me.ucrInputDownloadFrom.Name = "ucrInputDownloadFrom"
-        Me.ucrInputDownloadFrom.Size = New System.Drawing.Size(161, 21)
-        Me.ucrInputDownloadFrom.TabIndex = 1
         '
         'ucrInputMainDataName
         '
         Me.ucrInputMainDataName.AddQuotesIfUnrecognised = True
         Me.ucrInputMainDataName.IsMultiline = False
         Me.ucrInputMainDataName.IsReadOnly = False
-        Me.ucrInputMainDataName.Location = New System.Drawing.Point(131, 75)
+        resources.ApplyResources(Me.ucrInputMainDataName, "ucrInputMainDataName")
         Me.ucrInputMainDataName.Name = "ucrInputMainDataName"
-        Me.ucrInputMainDataName.Size = New System.Drawing.Size(161, 21)
-        Me.ucrInputMainDataName.TabIndex = 5
         '
         'ucrNudMaxLat
         '
         Me.ucrNudMaxLat.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxLat.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaxLat.Location = New System.Drawing.Point(332, 230)
+        resources.ApplyResources(Me.ucrNudMaxLat, "ucrNudMaxLat")
         Me.ucrNudMaxLat.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMaxLat.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxLat.Name = "ucrNudMaxLat"
-        Me.ucrNudMaxLat.Size = New System.Drawing.Size(72, 20)
-        Me.ucrNudMaxLat.TabIndex = 16
         Me.ucrNudMaxLat.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudMaxLon
         '
         Me.ucrNudMaxLon.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxLon.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaxLon.Location = New System.Drawing.Point(332, 205)
+        resources.ApplyResources(Me.ucrNudMaxLon, "ucrNudMaxLon")
         Me.ucrNudMaxLon.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMaxLon.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxLon.Name = "ucrNudMaxLon"
-        Me.ucrNudMaxLon.Size = New System.Drawing.Size(72, 20)
-        Me.ucrNudMaxLon.TabIndex = 12
         Me.ucrNudMaxLon.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudMinLon
         '
         Me.ucrNudMinLon.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMinLon.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMinLon.Location = New System.Drawing.Point(116, 206)
+        resources.ApplyResources(Me.ucrNudMinLon, "ucrNudMinLon")
         Me.ucrNudMinLon.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMinLon.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMinLon.Name = "ucrNudMinLon"
-        Me.ucrNudMinLon.Size = New System.Drawing.Size(72, 20)
-        Me.ucrNudMinLon.TabIndex = 10
         Me.ucrNudMinLon.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudMinLat
         '
         Me.ucrNudMinLat.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMinLat.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMinLat.Location = New System.Drawing.Point(116, 231)
+        resources.ApplyResources(Me.ucrNudMinLat, "ucrNudMinLat")
         Me.ucrNudMinLat.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMinLat.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMinLat.Name = "ucrNudMinLat"
-        Me.ucrNudMinLat.Size = New System.Drawing.Size(72, 20)
-        Me.ucrNudMinLat.TabIndex = 14
         Me.ucrNudMinLat.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(11, 287)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(416, 52)
-        Me.ucrBase.TabIndex = 20
         '
         'dlgImportGriddedData
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(455, 346)
         Me.Controls.Add(Me.grpGetArea)
         Me.Controls.Add(Me.ucrInputLocDataName)
         Me.Controls.Add(Me.lblLocationData)
@@ -329,8 +257,6 @@ Partial Class dlgImportGriddedData
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgImportGriddedData"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Import Gridded Data"
         Me.grpGetArea.ResumeLayout(False)
         Me.grpGetArea.PerformLayout()
         Me.ResumeLayout(False)

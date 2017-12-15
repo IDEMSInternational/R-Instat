@@ -38,6 +38,7 @@ Partial Class dlgSaveAs
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgSaveAs))
         Me.ucrBase = New instat.ucrButtons()
         Me.lblSaveDataTo = New System.Windows.Forms.Label()
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
@@ -47,52 +48,37 @@ Partial Class dlgSaveAs
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(11, 70)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 4
         '
         'lblSaveDataTo
         '
-        Me.lblSaveDataTo.AutoSize = True
-        Me.lblSaveDataTo.Location = New System.Drawing.Point(8, 20)
+        resources.ApplyResources(Me.lblSaveDataTo, "lblSaveDataTo")
         Me.lblSaveDataTo.Name = "lblSaveDataTo"
-        Me.lblSaveDataTo.Size = New System.Drawing.Size(77, 13)
-        Me.lblSaveDataTo.TabIndex = 0
-        Me.lblSaveDataTo.Text = "Save Data To:"
         '
         'ucrInputFilePath
         '
         Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
         Me.ucrInputFilePath.IsMultiline = False
         Me.ucrInputFilePath.IsReadOnly = False
-        Me.ucrInputFilePath.Location = New System.Drawing.Point(92, 17)
+        resources.ApplyResources(Me.ucrInputFilePath, "ucrInputFilePath")
         Me.ucrInputFilePath.Name = "ucrInputFilePath"
-        Me.ucrInputFilePath.Size = New System.Drawing.Size(316, 21)
-        Me.ucrInputFilePath.TabIndex = 1
         '
         'cmdChooseFile
         '
-        Me.cmdChooseFile.Location = New System.Drawing.Point(415, 17)
+        resources.ApplyResources(Me.cmdChooseFile, "cmdChooseFile")
         Me.cmdChooseFile.Name = "cmdChooseFile"
-        Me.cmdChooseFile.Size = New System.Drawing.Size(65, 21)
-        Me.cmdChooseFile.TabIndex = 2
-        Me.cmdChooseFile.Text = "Browse"
         Me.cmdChooseFile.UseVisualStyleBackColor = True
         '
         'lblConfirm
         '
-        Me.lblConfirm.AutoSize = True
-        Me.lblConfirm.Location = New System.Drawing.Point(96, 45)
+        resources.ApplyResources(Me.lblConfirm, "lblConfirm")
         Me.lblConfirm.Name = "lblConfirm"
-        Me.lblConfirm.Size = New System.Drawing.Size(0, 13)
-        Me.lblConfirm.TabIndex = 3
         '
         'dlgSaveAs
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(488, 130)
         Me.Controls.Add(Me.lblConfirm)
         Me.Controls.Add(Me.ucrInputFilePath)
         Me.Controls.Add(Me.lblSaveDataTo)
@@ -102,9 +88,7 @@ Partial Class dlgSaveAs
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgSaveAs"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Save_Data_As"
-        Me.Text = "Save Data As"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

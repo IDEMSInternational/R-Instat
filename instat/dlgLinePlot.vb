@@ -65,7 +65,6 @@ Public Class dlgLinePlot
 
         ucrReceiverX.SetParameter(New RParameter("x", 0))
         ucrReceiverX.Selector = ucrLinePlotSelector
-        ucrReceiverX.SetIncludedDataTypes({"numeric", "factor"})
         ucrReceiverX.strSelectorHeading = "Variables"
         ucrReceiverX.bWithQuotes = False
         ucrReceiverX.SetParameterIsString()
@@ -82,7 +81,6 @@ Public Class dlgLinePlot
         ucrVariablesAsFactorForLinePlot.SetParameter(New RParameter("y", 1))
         ucrVariablesAsFactorForLinePlot.SetFactorReceiver(ucrFactorOptionalReceiver)
         ucrVariablesAsFactorForLinePlot.Selector = ucrLinePlotSelector
-        ucrVariablesAsFactorForLinePlot.SetIncludedDataTypes({"numeric", "factor"})
         ucrVariablesAsFactorForLinePlot.strSelectorHeading = "Varibles"
         ucrVariablesAsFactorForLinePlot.SetParameterIsString()
         ucrVariablesAsFactorForLinePlot.bWithQuotes = False
@@ -93,6 +91,7 @@ Public Class dlgLinePlot
         clsGeomPointFunc.SetRCommand("geom_point")
         clsGeomPointParam.SetArgumentName("geom_point")
         clsGeomPointParam.SetArgument(clsGeomPointFunc)
+        clsGeomPointParam.Position = 3
         ucrChkPoints.SetText("Points")
         ucrChkPoints.SetParameter(clsGeomPointParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
@@ -134,7 +133,7 @@ Public Class dlgLinePlot
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
-        clsBaseOperator.AddParameter("lineplot", clsRFunctionParameter:=clsRgeomlineplotFunction)
+        clsBaseOperator.AddParameter("lineplot", clsRFunctionParameter:=clsRgeomlineplotFunction, iPosition:=2)
 
         clsRggplotFunction.SetPackageName("ggplot2")
         clsRggplotFunction.SetRCommand("ggplot")
@@ -142,8 +141,8 @@ Public Class dlgLinePlot
 
         clsRaesFunction.SetPackageName("ggplot2")
         clsRaesFunction.SetRCommand("aes")
-        clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
-        clsRaesFunction.AddParameter("y", Chr(34) & Chr(34))
+        clsRaesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
+        clsRaesFunction.AddParameter("y", Chr(34) & Chr(34), iPosition:=1)
 
         clsRgeomlineplotFunction.SetPackageName("ggplot2")
         clsRgeomlineplotFunction.SetRCommand("geom_line")
@@ -242,5 +241,13 @@ Public Class dlgLinePlot
 
     Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged
+        If Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor") Then
+            clsRaesFunction.AddParameter("group", "1", iPosition:=3)
+        Else
+            clsRaesFunction.RemoveParameterByName("group")
+        End If
     End Sub
 End Class

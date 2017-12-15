@@ -137,6 +137,7 @@ Public Class ucrGeom
         Dim clsgeom_line As New Geoms
         Dim clsgeom_linerange As New Geoms
         Dim clsgeom_map As New Geoms
+        Dim clsgeom_mosaic As New Geoms
         Dim clsgeom_path As New Geoms
         Dim clsgeom_point As New Geoms
         Dim clsgeom_pointrange As New Geoms
@@ -441,24 +442,32 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_density)
 
 
-        'clsgeom_density2d.strGeomName = "geom_density2d"
-        ''Mandatory
-        'clsgeom_density2d.AddAesParameter("x", bIsMandatory:=True)
-        'clsgeom_density2d.AddAesParameter("y", bIsMandatory:=True)
+        clsgeom_density2d.strGeomName = "geom_density2d"
+        'Mandatory
+        clsgeom_density2d.AddAesParameter("x", bIsMandatory:=True)
+        clsgeom_density2d.AddAesParameter("y", bIsMandatory:=True)
         ''optional
-        'clsgeom_density2d.AddAesParameter("alpha")
-        'clsgeom_density2d.AddAesParameter("colour")
-        'clsgeom_density2d.AddAesParameter("linetype")
-        'clsgeom_density2d.AddAesParameter("size")
+        clsgeom_density2d.AddAesParameter("alpha")
+        clsgeom_density2d.AddAesParameter("colour")
+        clsgeom_density2d.AddAesParameter("group")
+        clsgeom_density2d.AddAesParameter("linetype")
+        clsgeom_density2d.AddAesParameter("size")
 
         ''Adding layer parameters
-        'clsgeom_density2d.AddLayerParameter("stat", "list", Chr(34) & "density2d" & Chr(34))
-        'clsgeom_density2d.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_density2d.AddLayerParameter("lineend", "list", Chr(34) & "butt" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "butt" & Chr(34), Chr(34) & "square" & Chr(34)})
-        'clsgeom_density2d.AddLayerParameter("linejoin", "list", Chr(34) & "round" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "mitre" & Chr(34), Chr(34) & "bevel" & Chr(34)})
+        'not sure of other stats and positons here
+        clsgeom_density2d.AddLayerParameter("stat", "list", Chr(34) & "density2d" & Chr(34), lstParameterStrings:={Chr(34) & "density2d" & Chr(34)})
+        clsgeom_density2d.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_density2d.AddLayerParameter("lineend", "list", Chr(34) & "butt" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "butt" & Chr(34), Chr(34) & "square" & Chr(34)})
+        clsgeom_density2d.AddLayerParameter("linejoin", "list", Chr(34) & "round" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "mitre" & Chr(34), Chr(34) & "bevel" & Chr(34)})
+        clsgeom_density2d.AddLayerParameter("na.rm", "boolean", "FALSE")
+        clsgeom_density2d.AddLayerParameter("show.legend", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_density2d.AddLayerParameter("inherit.aes", "boolean", "TRUE")
+        clsgeom_density2d.AddLayerParameter("contour", "boolean", "FALSE")
         ''linemitre should 1 or a number >1
-        'clsgeom_density2d.AddLayerParameter("linemitre", "numeric", "1")
-        'lstAllGeoms.Add(clsgeom_density2d)
+        clsgeom_density2d.AddLayerParameter("linemitre", "numeric", "1")
+        clsgeom_density2d.AddLayerParameter("n", "numeric", "20")
+        clsgeom_density2d.AddLayerParameter("h", "numeric", "20")
+        lstAllGeoms.Add(clsgeom_density2d)
 
         'clsgeom_density_2d.strGeomName = "geom_density_2d"
         ''Mandatory
@@ -757,8 +766,10 @@ Public Class ucrGeom
         'Optional
         clsgeom_line.AddAesParameter("alpha", strIncludedDataTypes:={"numeric", "factor"})
         clsgeom_line.AddAesParameter("colour", strIncludedDataTypes:={"numeric", "factor"})
+        clsgeom_line.AddAesParameter("group", strIncludedDataTypes:={"numeric", "factor"})
         clsgeom_line.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
         clsgeom_line.AddAesParameter("size", strIncludedDataTypes:={"numeric", "factor"})
+
         'Adding layer parameters
         'Geom_line Parameters
 
@@ -822,6 +833,17 @@ Public Class ucrGeom
         ''linemitre should 1 or a number >1
         'clsgeom_path.AddLayerParameter("linemitre", "numeric", "1")
         'lstAllGeoms.Add(clsgeom_path)
+
+
+        'this is just a start.. needs lots of further work
+        'clsgeom_mosaic.strGeomName = "geom_mosaic"
+        ''mandatory
+        'clsgeom_mosaic.AddAesParameter("weight ", bIsMandatory:=True)
+        'clsgeom_mosaic.AddAesParameter("x", bIsMandatory:=True)
+        'clsgeom_mosaic.AddAesParameter("fill", bIsMandatory:=True)
+        'clsgeom_mosaic.AddAesParameter("conds", bIsMandatory:=True)
+        'lstAllGeoms.Add(clsgeom_mosaic)
+
 
         clsgeom_point.SetGeomName("geom_point")
         'Mandatory aesthetics : here x and y are mandatory, however, when not filled, default values "" are given. Alternatively, if we want to have at least on filled, could add bIsDependentlyMandatory:=True in both. Planning on refining the mandatory aes methods to include the "" cases systematically.
@@ -1012,29 +1034,44 @@ Public Class ucrGeom
         'clsgeom_segment.AddLayerParameter("vjust", "numeric", "0.5")
         'lstAllGeoms.Add(clsgeom_segment)
 
-        'clsgeom_smooth.strGeomName = "geom_smooth"
-        '' mandatory
-        'clsgeom_smooth.AddAesParameter("x", bIsMandatory:=True)
-        'clsgeom_smooth.AddAesParameter("y", bIsMandatory:=True)
-        '' optional 
-        'clsgeom_smooth.AddAesParameter("alpha")
-        'clsgeom_smooth.AddAesParameter("colour")
-        'clsgeom_smooth.AddAesParameter("fill")
-        'clsgeom_smooth.AddAesParameter("linetype")
-        'clsgeom_smooth.AddAesParameter("size")
-        'clsgeom_smooth.AddAesParameter("weight")
+        clsgeom_smooth.strGeomName = "geom_smooth"
+        ' mandatory
+        clsgeom_smooth.AddAesParameter("x", bIsMandatory:=True)
+        clsgeom_smooth.AddAesParameter("y", bIsMandatory:=True)
+        ' optional 
+        clsgeom_smooth.AddAesParameter("alpha")
+        clsgeom_smooth.AddAesParameter("colour")
+        clsgeom_smooth.AddAesParameter("fill")
+        clsgeom_smooth.AddAesParameter("group")
+        clsgeom_smooth.AddAesParameter("linetype")
+        clsgeom_smooth.AddAesParameter("size")
+        clsgeom_smooth.AddAesParameter("weight")
 
-        '''add  layer parameter
-        '' clsgeom_smooth.AddLayerParameter("position")
-        'clsgeom_smooth.AddLayerParameter("", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_smooth.AddLayerParameter("method", "list", Chr(34) & "lm" & Chr(34), lstParameterStrings:={Chr(34) & "glm" & Chr(34), Chr(34) & "gam" & Chr(34), Chr(34) & "loess" & Chr(34), Chr(34) & "rlm" & Chr(34)})
-        'clsgeom_smooth.AddLayerParameter("formula", "list", Chr(34) & "lm" & Chr(34), lstParameterStrings:={Chr(34) & "glm" & Chr(34), Chr(34) & "gam" & Chr(34), Chr(34) & "loess" & Chr(34), Chr(34) & "rlm" & Chr(34)})
-        'clsgeom_smooth.AddLayerParameter("se", "boolean", "TRUE")
-        'clsgeom_smooth.AddLayerParameter("na.rm", "boolean", "FALSE")
-        'clsgeom_smooth.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
-        'clsgeom_smooth.AddLayerParameter("inherit.aes", "boolean", "FALSE")
+        'add  layer parameter
+        ''****Not sure how many positions exist for geom_smooth
+        clsgeom_smooth.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34)})
+        'Can we have  stack, DoDragDrop, fill positions here)
+        clsgeom_smooth.AddLayerParameter("method", "list", Chr(34) & "lm" & Chr(34), lstParameterStrings:={Chr(34) & "lm" & Chr(34), Chr(34) & "glm" & Chr(34), Chr(34) & "gam" & Chr(34), Chr(34) & "loess" & Chr(34), Chr(34) & "rlm" & Chr(34)})
+        'formula has to be an input and we dont have that currently. its passed in like this formula= y ~ x or  formula= y ~ poly(x, 2) or formula= y ~ log(x) so the user has to type in stuff
+        'clsgeom_smooth.AddLayerParameter("formula",)
+        clsgeom_smooth.AddLayerParameter("se", "boolean", "TRUE")
+        clsgeom_smooth.AddLayerParameter("na.rm", "boolean", "FALSE")
+        clsgeom_smooth.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_smooth.AddLayerParameter("inherit.aes", "boolean", "FALSE")
 
-        'lstAllGeoms.Add(clsgeom_smooth)
+        'geom and stat are missing here as we dont know how to override the default connection between geom_smooth and stat_smooth
+        'you can have stat_smooth or geom_smooth. I am not sure how we can do that from here, changing the smothing function
+
+        clsgeom_smooth.AddLayerParameter("n", "numeric", "0")
+        clsgeom_smooth.AddLayerParameter("span", "numeric", "0", lstParameterStrings:={1, 0, 1})
+        clsgeom_smooth.AddLayerParameter("fullrange", "boolean", "FALSE")
+        clsgeom_smooth.AddLayerParameter("level", "numeric", "0.95", lstParameterStrings:={2, 0, 1})
+
+        'method.args is a list of methods passed into the moddeling function
+        'its passed in like this** method.args = list(family = "binomial") we currently dont have this too. 
+        'clsgeom_smooth.AddLayerParameter("method.args")
+
+        lstAllGeoms.Add(clsgeom_smooth)
 
         'clsgeom_spoke.strGeomName = "geom_spoke"
         ''mandatory
