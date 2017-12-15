@@ -119,6 +119,8 @@ Public Class dlgParallelCoordinatePlot
         clsggparcoordFunc.AddParameter("showPoints", "FALSE")
         clsggparcoordFunc.AddParameter("scale", "std")
         clsggparcoordFunc.AddParameter("alphalines", "1")
+        clsggparcoordFunc.AddParameter("missing", Chr(34) & "exclude" & Chr(34))
+        clsggparcoordFunc.AddParameter("order", Chr(34) & "given" & Chr(34))
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggparcord", clsRFunctionParameter:=clsggparcoordFunc, iPosition:=0)
