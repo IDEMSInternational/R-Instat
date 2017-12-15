@@ -58,6 +58,9 @@ Public Class sdgPlots
         Dim dctThemes As New Dictionary(Of String, String)
         Dim strThemes As String()
 
+        Dim clsCoordFlipFunc As New RFunction
+        Dim clsCoordFlipParam As New RParameter
+
         ucrBaseSubdialog.iHelpTopicID = 136
         'facets tab 
         'Links the factor receivers, used for creating facets, with the selector. The variables need to be factors.
@@ -193,12 +196,20 @@ Public Class sdgPlots
         ' ucrInputThemes.SetRDefault("theme_grey()")
         ucrInputThemes.SetDropDownStyleAsNonEditable()
 
+        'coordiantes tab
+        ucrChkHorizontalplot.SetText("Horizontal Plot (coord-flip)")
+        clsCoordFlipFunc.SetPackageName("ggplot2")
+        clsCoordFlipFunc.SetRCommand("coord_flip")
+        clsCoordFlipParam.SetArgumentName("coord_flip")
+        clsCoordFlipParam.SetArgument(clsCoordFlipFunc)
+        ucrChkHorizontalplot.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkHorizontalplot.AddParameterPresentCondition(True, "coord_flip", True)
         InitialiseTabs()
 
         'temporary disabled until implemented
         ' tbpLayers.Enabled = False
-        tbpCoordinates.Enabled = False
         grpLegendTitle.Enabled = False
+        tbpCoordinates.Enabled = True
         'cmdAllOptions.Enabled = False
         GroupBox1.Visible = False
         bControlsInitialised = True
@@ -270,6 +281,9 @@ Public Class sdgPlots
         'axis controls
         ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True)
         ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True)
+
+        'coordinates tab
+        ucrChkHorizontalplot.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
 
         'ucrPlotsAdditionalLayers.SetAesFunction(clsGlobalAesFunction)
         'The following two setup the ucrAdditionalLayers on the sdgPlots. Shares the global ggplot function, as well as the whole PLots RSyntax.
