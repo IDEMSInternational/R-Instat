@@ -1865,4 +1865,8 @@ Public Class frmMain
     Private Sub mnuPrepareColumReshapeRestoreHierachy_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumReshapeRestoreHierachy.Click
         dlgRestoreLevelHierachy.ShowDialog()
     End Sub
+
+    Private Sub mnuDescribeSpecificParallelCoordinatePlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificParallelCoordinatePlot.Click
+        dlgParallelCoordinatePlot.ShowDialog()
+    End Sub
 End Class
