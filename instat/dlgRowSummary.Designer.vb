@@ -50,12 +50,12 @@ Partial Class dlgRowSummary
         Me.rdoNumberofMissing = New System.Windows.Forms.RadioButton()
         Me.rdoMedian = New System.Windows.Forms.RadioButton()
         Me.rdoSum = New System.Windows.Forms.RadioButton()
-        Me.ucrPanelStatistics = New instat.UcrPanel()
+        Me.ucrChkIgnoreMissingValues = New instat.ucrCheck()
         Me.ucrSaveResults = New instat.ucrSave()
+        Me.ucrPanelStatistics = New instat.UcrPanel()
         Me.ucrSelectorForRowSummaries = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForRowSummaries = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkIgnoreMissingValues = New instat.ucrCheck()
         Me.grpStatistic.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -152,15 +152,21 @@ Partial Class dlgRowSummary
         Me.rdoSum.Tag = "Sum"
         Me.rdoSum.UseVisualStyleBackColor = True
         '
-        'ucrPanelStatistics
+        'ucrChkIgnoreMissingValues
         '
-        resources.ApplyResources(Me.ucrPanelStatistics, "ucrPanelStatistics")
-        Me.ucrPanelStatistics.Name = "ucrPanelStatistics"
+        Me.ucrChkIgnoreMissingValues.Checked = False
+        resources.ApplyResources(Me.ucrChkIgnoreMissingValues, "ucrChkIgnoreMissingValues")
+        Me.ucrChkIgnoreMissingValues.Name = "ucrChkIgnoreMissingValues"
         '
         'ucrSaveResults
         '
         resources.ApplyResources(Me.ucrSaveResults, "ucrSaveResults")
         Me.ucrSaveResults.Name = "ucrSaveResults"
+        '
+        'ucrPanelStatistics
+        '
+        resources.ApplyResources(Me.ucrPanelStatistics, "ucrPanelStatistics")
+        Me.ucrPanelStatistics.Name = "ucrPanelStatistics"
         '
         'ucrSelectorForRowSummaries
         '
@@ -182,12 +188,6 @@ Partial Class dlgRowSummary
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrChkIgnoreMissingValues
-        '
-        Me.ucrChkIgnoreMissingValues.Checked = False
-        resources.ApplyResources(Me.ucrChkIgnoreMissingValues, "ucrChkIgnoreMissingValues")
-        Me.ucrChkIgnoreMissingValues.Name = "ucrChkIgnoreMissingValues"
         '
         'dlgRowSummary
         '
