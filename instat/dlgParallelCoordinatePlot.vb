@@ -48,17 +48,20 @@ Public Class dlgParallelCoordinatePlot
 
     Private Sub InitialiseDialog()
 
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        'ucrBase.iHelpTopicID 
+        ucrBase.clsRsyntax.iCallType = 3
+
         Dim dctScale As New Dictionary(Of String, String)
 
         ucrSelectorParallelCoordinatePlot.SetParameter(New RParameter("data", 0))
         ucrSelectorParallelCoordinatePlot.SetParameterIsrfunction()
 
         ucrReceiverXVariables.SetParameter(New RParameter("columns", 1))
-        ucrReceiverXVariables.SetParameterIsString()
-        ucrReceiverXVariables.bWithQuotes = False
         ucrReceiverXVariables.strSelectorHeading = "Numerics"
         ucrReceiverXVariables.Selector = ucrSelectorParallelCoordinatePlot
         ucrReceiverXVariables.SetIncludedDataTypes({"numeric"})
+        ucrReceiverXVariables.SetParameterIsString()
 
 
         ucrReceiverFactor.SetParameter(New RParameter("groupColumn", 2))
@@ -77,7 +80,7 @@ Public Class dlgParallelCoordinatePlot
         ucrChkPoints.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkPoints.SetRDefault("FALSE")
 
-        ucrNudTransparency.SetParameter(New RParameter("alphalines", 5))
+        ucrNudTransparency.SetParameter(New RParameter("alphaLines", 5))
         ucrNudTransparency.SetMinMax(0, 1)
         ucrNudTransparency.DecimalPlaces = 2
         ucrNudTransparency.Increment = 0.01
@@ -118,9 +121,9 @@ Public Class dlgParallelCoordinatePlot
         clsggparcoordFunc.AddParameter("boxplot", "FALSE")
         clsggparcoordFunc.AddParameter("showPoints", "FALSE")
         clsggparcoordFunc.AddParameter("scale", "std")
-        clsggparcoordFunc.AddParameter("alphalines", "1")
+        clsggparcoordFunc.AddParameter("alphaLines", "1")
         clsggparcoordFunc.AddParameter("missing", Chr(34) & "exclude" & Chr(34))
-        clsggparcoordFunc.AddParameter("order", Chr(34) & "given" & Chr(34))
+        clsggparcoordFunc.AddParameter("order", Chr(34) & "anyClass" & Chr(34))
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggparcord", clsRFunctionParameter:=clsggparcoordFunc, iPosition:=0)
