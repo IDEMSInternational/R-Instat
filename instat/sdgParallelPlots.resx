@@ -119,7 +119,7 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ucrBaseSdgParallelPlot.Location" type="System.Drawing.Point, System.Drawing">
-    <value>73, 136</value>
+    <value>39, 106</value>
   </data>
   <data name="ucrBaseSdgParallelPlot.Size" type="System.Drawing.Size, System.Drawing">
     <value>142, 30</value>
@@ -140,50 +140,8 @@
   <data name="&gt;&gt;ucrBaseSdgParallelPlot.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="ucrChkMissing.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 13</value>
-  </data>
-  <data name="ucrChkMissing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
-  </data>
-  <data name="ucrChkMissing.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMissing.Name" xml:space="preserve">
-    <value>ucrChkMissing</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMissing.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMissing.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMissing.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="ucrChkOrder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 60</value>
-  </data>
-  <data name="ucrChkOrder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
-  </data>
-  <data name="ucrChkOrder.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOrder.Name" xml:space="preserve">
-    <value>ucrChkOrder</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOrder.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOrder.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOrder.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="ucrInputMissing.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 13</value>
+    <value>78, 13</value>
   </data>
   <data name="ucrInputMissing.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -201,10 +159,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputMissing.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="ucrInputOrder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 59</value>
+    <value>78, 40</value>
   </data>
   <data name="ucrInputOrder.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -222,6 +180,64 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputOrder.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblMissing.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMissing.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 13</value>
+  </data>
+  <data name="lblMissing.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 13</value>
+  </data>
+  <data name="lblMissing.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblMissing.Text" xml:space="preserve">
+    <value>Missing</value>
+  </data>
+  <data name="&gt;&gt;lblMissing.Name" xml:space="preserve">
+    <value>lblMissing</value>
+  </data>
+  <data name="&gt;&gt;lblMissing.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMissing.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblMissing.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblOrder.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblOrder.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblOrder.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 40</value>
+  </data>
+  <data name="lblOrder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>33, 13</value>
+  </data>
+  <data name="lblOrder.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblOrder.Text" xml:space="preserve">
+    <value>Order</value>
+  </data>
+  <data name="&gt;&gt;lblOrder.Name" xml:space="preserve">
+    <value>lblOrder</value>
+  </data>
+  <data name="&gt;&gt;lblOrder.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblOrder.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblOrder.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -231,9 +247,8 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>282, 178</value>
+    <value>247, 159</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
