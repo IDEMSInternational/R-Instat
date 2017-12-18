@@ -26,10 +26,6 @@ Public Class sdgParallelPlots
         Dim dctMissing As New Dictionary(Of String, String)
         Dim dctOrder As New Dictionary(Of String, String)
 
-        ucrChkMissing.SetText("Missing")
-        ucrChkMissing.AddToLinkedControls(ucrInputMissing, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkMissing.AddParameterPresentCondition(True, "missing", True)
-        ucrChkMissing.AddParameterPresentCondition(False, "missing", False)
         ucrInputMissing.SetParameter(New RParameter("missing"))
         dctMissing.Add("Exclude", Chr(34) & "exclude" & Chr(34))
         dctMissing.Add("Mean", Chr(34) & "mean" & Chr(34))
@@ -39,10 +35,6 @@ Public Class sdgParallelPlots
         ucrInputMissing.SetItems(dctMissing)
         ucrInputMissing.SetRDefault("exclude")
 
-        ucrChkOrder.SetText("Order")
-        ucrChkOrder.AddToLinkedControls(ucrInputOrder, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkOrder.AddParameterPresentCondition(True, "order", True)
-        ucrChkOrder.AddParameterPresentCondition(False, "order", False)
         ucrInputOrder.SetParameter(New RParameter("order"))
         dctOrder.Add("AnyClass", Chr(34) & "anyClass" & Chr(34))
         dctOrder.Add("AllClass", Chr(34) & "allClass" & Chr(34))

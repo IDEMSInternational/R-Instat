@@ -319,7 +319,7 @@
     <value>343, 233</value>
   </data>
   <data name="ucrNudTransparency.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 20</value>
+    <value>52, 20</value>
   </data>
   <data name="ucrNudTransparency.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -476,9 +476,6 @@
   </data>
   <data name="&gt;&gt;ucrSelectorParallelCoordinatePlot.ZOrder" xml:space="preserve">
     <value>14</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

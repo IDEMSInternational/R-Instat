@@ -24,28 +24,16 @@ Partial Class sdgParallelPlots
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgParallelPlots))
         Me.ucrBaseSdgParallelPlot = New instat.ucrButtonsSubdialogue()
-        Me.ucrChkMissing = New instat.ucrCheck()
-        Me.ucrChkOrder = New instat.ucrCheck()
         Me.ucrInputMissing = New instat.ucrInputComboBox()
         Me.ucrInputOrder = New instat.ucrInputComboBox()
+        Me.lblMissing = New System.Windows.Forms.Label()
+        Me.lblOrder = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrBaseSdgParallelPlot
         '
         resources.ApplyResources(Me.ucrBaseSdgParallelPlot, "ucrBaseSdgParallelPlot")
         Me.ucrBaseSdgParallelPlot.Name = "ucrBaseSdgParallelPlot"
-        '
-        'ucrChkMissing
-        '
-        Me.ucrChkMissing.Checked = False
-        resources.ApplyResources(Me.ucrChkMissing, "ucrChkMissing")
-        Me.ucrChkMissing.Name = "ucrChkMissing"
-        '
-        'ucrChkOrder
-        '
-        Me.ucrChkOrder.Checked = False
-        resources.ApplyResources(Me.ucrChkOrder, "ucrChkOrder")
-        Me.ucrChkOrder.Name = "ucrChkOrder"
         '
         'ucrInputMissing
         '
@@ -61,26 +49,37 @@ Partial Class sdgParallelPlots
         resources.ApplyResources(Me.ucrInputOrder, "ucrInputOrder")
         Me.ucrInputOrder.Name = "ucrInputOrder"
         '
+        'lblMissing
+        '
+        resources.ApplyResources(Me.lblMissing, "lblMissing")
+        Me.lblMissing.Name = "lblMissing"
+        '
+        'lblOrder
+        '
+        resources.ApplyResources(Me.lblOrder, "lblOrder")
+        Me.lblOrder.Name = "lblOrder"
+        '
         'sdgParallelPlots
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblOrder)
+        Me.Controls.Add(Me.lblMissing)
         Me.Controls.Add(Me.ucrInputOrder)
         Me.Controls.Add(Me.ucrInputMissing)
-        Me.Controls.Add(Me.ucrChkOrder)
-        Me.Controls.Add(Me.ucrChkMissing)
         Me.Controls.Add(Me.ucrBaseSdgParallelPlot)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgParallelPlots"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBaseSdgParallelPlot As ucrButtonsSubdialogue
-    Friend WithEvents ucrChkMissing As ucrCheck
-    Friend WithEvents ucrChkOrder As ucrCheck
     Friend WithEvents ucrInputMissing As ucrInputComboBox
     Friend WithEvents ucrInputOrder As ucrInputComboBox
+    Friend WithEvents lblMissing As Label
+    Friend WithEvents lblOrder As Label
 End Class
