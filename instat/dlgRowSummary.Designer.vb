@@ -55,6 +55,7 @@ Partial Class dlgRowSummary
         Me.ucrSelectorForRowSummaries = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForRowSummaries = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrChkIgnoreMissingValues = New instat.ucrCheck()
         Me.grpStatistic.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -182,10 +183,17 @@ Partial Class dlgRowSummary
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrChkIgnoreMissingValues
+        '
+        Me.ucrChkIgnoreMissingValues.Checked = False
+        resources.ApplyResources(Me.ucrChkIgnoreMissingValues, "ucrChkIgnoreMissingValues")
+        Me.ucrChkIgnoreMissingValues.Name = "ucrChkIgnoreMissingValues"
+        '
         'dlgRowSummary
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkIgnoreMissingValues)
         Me.Controls.Add(Me.ucrSaveResults)
         Me.Controls.Add(Me.grpStatistic)
         Me.Controls.Add(Me.cmdUserDefined)
@@ -221,4 +229,5 @@ Partial Class dlgRowSummary
     Friend WithEvents rdoSum As RadioButton
     Friend WithEvents ucrPanelStatistics As UcrPanel
     Friend WithEvents ucrSaveResults As ucrSave
+    Friend WithEvents ucrChkIgnoreMissingValues As ucrCheck
 End Class
