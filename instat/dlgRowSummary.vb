@@ -47,6 +47,12 @@ Public Class dlgRowSummary
         ucrReceiverForRowSummaries.bForceAsDataFrame = True
         ucrReceiverForRowSummaries.SetParameterIsRFunction()
 
+        ucrChkIgnoreMissingValues.SetParameter(New RParameter("na.rm", 3))
+        ucrChkIgnoreMissingValues.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkIgnoreMissingValues.SetRDefault("FALSE")
+        ucrChkIgnoreMissingValues.SetText("Ignore Missing Values")
+
+
         ucrPanelStatistics.SetParameter(New RParameter("FUN", 2))
         ucrPanelStatistics.AddRadioButton(rdoMean, "mean")
         ucrPanelStatistics.AddRadioButton(rdoMinimum, "min")
