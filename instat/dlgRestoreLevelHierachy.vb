@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class dlgRestoreLevelHierachy
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private clsDefaultFunction As New RFunction
 
     Private Sub dlgRestoreLevelHierachy_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -36,7 +37,8 @@ Public Class dlgRestoreLevelHierachy
 
     Private Sub InitialiseDialog()
 
-        ucrSelectorRestoreHierachy.SetParameter(New RParameter(""))
+        ucrSelectorRestoreHierachy.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorRestoreHierachy.SetParameterIsString()
 
         ucrReceiverKeyVariables.Selector = ucrSelectorRestoreHierachy
         ucrReceiverKeyVariables.SetParameter(New RParameter(""))
@@ -64,7 +66,12 @@ Public Class dlgRestoreLevelHierachy
     End Sub
 
     Private Sub SetDefaults()
+        clsDefaultFunction = New RFunction
+        ucrSelectorRestoreHierachy.Reset()
+        ucrReceiverKeyVariables.SetMeAsReceiver()
 
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
     Private Sub TestOkEnabled()
