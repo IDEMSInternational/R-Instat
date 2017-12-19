@@ -158,7 +158,7 @@ Public Class dlgParallelCoordinatePlot
         If Not ucrReceiverXVariables.IsEmpty AndAlso ucrSaveGraph.IsComplete Then
             ucrBase.OKEnabled(True)
         Else
-            ucrBase.OKEnabled(True)
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
