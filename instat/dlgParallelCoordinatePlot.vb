@@ -43,7 +43,6 @@ Public Class dlgParallelCoordinatePlot
         bReset = False
         autoTranslate(Me)
         TestOkEnabled()
-
     End Sub
 
     Private Sub InitialiseDialog()
@@ -140,7 +139,7 @@ Public Class dlgParallelCoordinatePlot
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorParallelCoordinatePlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
-
+        TestOkEnabled()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -156,7 +155,7 @@ Public Class dlgParallelCoordinatePlot
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverXVariables.IsEmpty Then
+        If Not ucrReceiverXVariables.IsEmpty AndAlso ucrSaveGraph.IsComplete Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(True)
@@ -169,7 +168,7 @@ Public Class dlgParallelCoordinatePlot
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverXVariables_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverXVariables.ControlContentsChanged
+    Private Sub ucrReceiverXVariables_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverXVariables.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
