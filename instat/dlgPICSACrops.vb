@@ -28,6 +28,13 @@ Public Class dlgPICSACrops
     End Sub
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 480
+
+        ' ucrNewSheetName
+        ucrSaveDataFrame.SetIsTextBox()
+        ucrSaveDataFrame.SetSaveTypeAsDataFrame()
+        ucrSaveDataFrame.SetLabelText("Save result as:")
+        ucrSaveDataFrame.SetPrefix("data")
+
     End Sub
 
     Private Sub TestOKEnabled()
@@ -37,4 +44,6 @@ Public Class dlgPICSACrops
     Private Sub SetDefaults()
         TestOKEnabled()
     End Sub
+
+
 End Class
