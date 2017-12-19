@@ -41,6 +41,26 @@ Partial Class sdgPlots
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgPlots))
         Me.tbpPlotsOptions = New System.Windows.Forms.TabControl()
         Me.tbpFacet = New System.Windows.Forms.TabPage()
+        Me.rdoHorizontal = New System.Windows.Forms.RadioButton()
+        Me.rdoVertical = New System.Windows.Forms.RadioButton()
+        Me.lblFactor2 = New System.Windows.Forms.Label()
+        Me.lblFactor1 = New System.Windows.Forms.Label()
+        Me.tbpLayers = New System.Windows.Forms.TabPage()
+        Me.tbpTitles = New System.Windows.Forms.TabPage()
+        Me.lblCaption = New System.Windows.Forms.Label()
+        Me.lblSubTitle = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.grpLegendTitle = New System.Windows.Forms.GroupBox()
+        Me.rdoLegendTitleCustom = New System.Windows.Forms.RadioButton()
+        Me.rdoLegendTitleAuto = New System.Windows.Forms.RadioButton()
+        Me.tbpXAxis = New System.Windows.Forms.TabPage()
+        Me.tbpYAxis = New System.Windows.Forms.TabPage()
+        Me.tbpTheme = New System.Windows.Forms.TabPage()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lblFont = New System.Windows.Forms.Label()
+        Me.cmdAllOptions = New System.Windows.Forms.Button()
+        Me.tbpCoordinates = New System.Windows.Forms.TabPage()
+        Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
         Me.ucrNudNumberofRows = New instat.ucrNud()
         Me.ucrChkNoOfRowsOrColumns = New instat.ucrCheck()
         Me.ucrChkIncludeFacets = New instat.ucrCheck()
@@ -49,42 +69,22 @@ Partial Class sdgPlots
         Me.ucrChkFreeScalesX = New instat.ucrCheck()
         Me.ucrChkMargin = New instat.ucrCheck()
         Me.ucrFacetSelector = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.rdoHorizontal = New System.Windows.Forms.RadioButton()
-        Me.rdoVertical = New System.Windows.Forms.RadioButton()
-        Me.lblFactor2 = New System.Windows.Forms.Label()
-        Me.lblFactor1 = New System.Windows.Forms.Label()
         Me.ucr2ndFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucr1stFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucrPnlHorizonatalVertical = New instat.UcrPanel()
-        Me.tbpLayers = New System.Windows.Forms.TabPage()
         Me.ucrPlotsAdditionalLayers = New instat.ucrAdditionalLayers()
-        Me.tbpTitles = New System.Windows.Forms.TabPage()
-        Me.lblCaption = New System.Windows.Forms.Label()
-        Me.lblSubTitle = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.grpLegendTitle = New System.Windows.Forms.GroupBox()
         Me.ucrChkOverwriteLegendTitle = New instat.ucrCheck()
         Me.ucrChkDisplayLegendTitle = New instat.ucrCheck()
         Me.ucrInputLegend = New instat.ucrInputTextBox()
-        Me.rdoLegendTitleCustom = New System.Windows.Forms.RadioButton()
-        Me.rdoLegendTitleAuto = New System.Windows.Forms.RadioButton()
         Me.ucrPnlLegendTitle = New instat.UcrPanel()
         Me.ucrInputGraphCaption = New instat.ucrInputTextBox()
         Me.ucrInputGraphSubTitle = New instat.ucrInputTextBox()
         Me.ucrInputGraphTitle = New instat.ucrInputTextBox()
-        Me.tbpXAxis = New System.Windows.Forms.TabPage()
         Me.ucrXAxis = New instat.ucrAxes()
-        Me.tbpYAxis = New System.Windows.Forms.TabPage()
         Me.ucrYAxis = New instat.ucrAxes()
-        Me.tbpTheme = New System.Windows.Forms.TabPage()
         Me.urChkSelectTheme = New instat.ucrCheck()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.lblFont = New System.Windows.Forms.Label()
-        Me.cmdAllOptions = New System.Windows.Forms.Button()
         Me.ucrInputThemes = New instat.ucrInputComboBox()
-        Me.tbpCoordinates = New System.Windows.Forms.TabPage()
-        Me.lblWarning = New System.Windows.Forms.Label()
-        Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.ucrChkHorizontalplot = New instat.ucrCheck()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
         Me.tbpLayers.SuspendLayout()
@@ -130,6 +130,151 @@ Partial Class sdgPlots
         Me.tbpFacet.Name = "tbpFacet"
         Me.tbpFacet.Tag = "Facet"
         Me.tbpFacet.UseVisualStyleBackColor = True
+        '
+        'rdoHorizontal
+        '
+        resources.ApplyResources(Me.rdoHorizontal, "rdoHorizontal")
+        Me.rdoHorizontal.Name = "rdoHorizontal"
+        Me.rdoHorizontal.TabStop = True
+        Me.rdoHorizontal.Tag = "Horizontal"
+        Me.rdoHorizontal.UseVisualStyleBackColor = True
+        '
+        'rdoVertical
+        '
+        resources.ApplyResources(Me.rdoVertical, "rdoVertical")
+        Me.rdoVertical.Name = "rdoVertical"
+        Me.rdoVertical.TabStop = True
+        Me.rdoVertical.Tag = "Vertical"
+        Me.rdoVertical.UseVisualStyleBackColor = True
+        '
+        'lblFactor2
+        '
+        resources.ApplyResources(Me.lblFactor2, "lblFactor2")
+        Me.lblFactor2.Name = "lblFactor2"
+        '
+        'lblFactor1
+        '
+        resources.ApplyResources(Me.lblFactor1, "lblFactor1")
+        Me.lblFactor1.Name = "lblFactor1"
+        Me.lblFactor1.Tag = ""
+        '
+        'tbpLayers
+        '
+        Me.tbpLayers.Controls.Add(Me.ucrPlotsAdditionalLayers)
+        resources.ApplyResources(Me.tbpLayers, "tbpLayers")
+        Me.tbpLayers.Name = "tbpLayers"
+        Me.tbpLayers.Tag = "Layers"
+        Me.tbpLayers.UseVisualStyleBackColor = True
+        '
+        'tbpTitles
+        '
+        Me.tbpTitles.Controls.Add(Me.lblCaption)
+        Me.tbpTitles.Controls.Add(Me.lblSubTitle)
+        Me.tbpTitles.Controls.Add(Me.Label1)
+        Me.tbpTitles.Controls.Add(Me.grpLegendTitle)
+        Me.tbpTitles.Controls.Add(Me.ucrInputGraphCaption)
+        Me.tbpTitles.Controls.Add(Me.ucrInputGraphSubTitle)
+        Me.tbpTitles.Controls.Add(Me.ucrInputGraphTitle)
+        resources.ApplyResources(Me.tbpTitles, "tbpTitles")
+        Me.tbpTitles.Name = "tbpTitles"
+        Me.tbpTitles.Tag = "Titles"
+        Me.tbpTitles.UseVisualStyleBackColor = True
+        '
+        'lblCaption
+        '
+        resources.ApplyResources(Me.lblCaption, "lblCaption")
+        Me.lblCaption.Name = "lblCaption"
+        '
+        'lblSubTitle
+        '
+        resources.ApplyResources(Me.lblSubTitle, "lblSubTitle")
+        Me.lblSubTitle.Name = "lblSubTitle"
+        '
+        'Label1
+        '
+        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.Name = "Label1"
+        '
+        'grpLegendTitle
+        '
+        Me.grpLegendTitle.Controls.Add(Me.ucrChkOverwriteLegendTitle)
+        Me.grpLegendTitle.Controls.Add(Me.ucrChkDisplayLegendTitle)
+        Me.grpLegendTitle.Controls.Add(Me.ucrInputLegend)
+        Me.grpLegendTitle.Controls.Add(Me.rdoLegendTitleCustom)
+        Me.grpLegendTitle.Controls.Add(Me.rdoLegendTitleAuto)
+        Me.grpLegendTitle.Controls.Add(Me.ucrPnlLegendTitle)
+        resources.ApplyResources(Me.grpLegendTitle, "grpLegendTitle")
+        Me.grpLegendTitle.Name = "grpLegendTitle"
+        Me.grpLegendTitle.TabStop = False
+        '
+        'rdoLegendTitleCustom
+        '
+        resources.ApplyResources(Me.rdoLegendTitleCustom, "rdoLegendTitleCustom")
+        Me.rdoLegendTitleCustom.Name = "rdoLegendTitleCustom"
+        Me.rdoLegendTitleCustom.TabStop = True
+        Me.rdoLegendTitleCustom.UseVisualStyleBackColor = True
+        '
+        'rdoLegendTitleAuto
+        '
+        resources.ApplyResources(Me.rdoLegendTitleAuto, "rdoLegendTitleAuto")
+        Me.rdoLegendTitleAuto.Name = "rdoLegendTitleAuto"
+        Me.rdoLegendTitleAuto.TabStop = True
+        Me.rdoLegendTitleAuto.UseVisualStyleBackColor = True
+        '
+        'tbpXAxis
+        '
+        Me.tbpXAxis.Controls.Add(Me.ucrXAxis)
+        resources.ApplyResources(Me.tbpXAxis, "tbpXAxis")
+        Me.tbpXAxis.Name = "tbpXAxis"
+        Me.tbpXAxis.UseVisualStyleBackColor = True
+        '
+        'tbpYAxis
+        '
+        Me.tbpYAxis.Controls.Add(Me.ucrYAxis)
+        resources.ApplyResources(Me.tbpYAxis, "tbpYAxis")
+        Me.tbpYAxis.Name = "tbpYAxis"
+        Me.tbpYAxis.UseVisualStyleBackColor = True
+        '
+        'tbpTheme
+        '
+        Me.tbpTheme.Controls.Add(Me.urChkSelectTheme)
+        Me.tbpTheme.Controls.Add(Me.GroupBox1)
+        Me.tbpTheme.Controls.Add(Me.lblFont)
+        Me.tbpTheme.Controls.Add(Me.cmdAllOptions)
+        Me.tbpTheme.Controls.Add(Me.ucrInputThemes)
+        resources.ApplyResources(Me.tbpTheme, "tbpTheme")
+        Me.tbpTheme.Name = "tbpTheme"
+        Me.tbpTheme.Tag = "Theme"
+        Me.tbpTheme.UseVisualStyleBackColor = True
+        '
+        'GroupBox1
+        '
+        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.TabStop = False
+        '
+        'lblFont
+        '
+        resources.ApplyResources(Me.lblFont, "lblFont")
+        Me.lblFont.Name = "lblFont"
+        '
+        'cmdAllOptions
+        '
+        resources.ApplyResources(Me.cmdAllOptions, "cmdAllOptions")
+        Me.cmdAllOptions.Name = "cmdAllOptions"
+        Me.cmdAllOptions.UseVisualStyleBackColor = True
+        '
+        'tbpCoordinates
+        '
+        Me.tbpCoordinates.Controls.Add(Me.ucrChkHorizontalplot)
+        resources.ApplyResources(Me.tbpCoordinates, "tbpCoordinates")
+        Me.tbpCoordinates.Name = "tbpCoordinates"
+        Me.tbpCoordinates.UseVisualStyleBackColor = True
+        '
+        'ucrBaseSubdialog
+        '
+        resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
+        Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         '
         'ucrNudNumberofRows
         '
@@ -184,33 +329,6 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.ucrFacetSelector, "ucrFacetSelector")
         Me.ucrFacetSelector.Name = "ucrFacetSelector"
         '
-        'rdoHorizontal
-        '
-        resources.ApplyResources(Me.rdoHorizontal, "rdoHorizontal")
-        Me.rdoHorizontal.Name = "rdoHorizontal"
-        Me.rdoHorizontal.TabStop = True
-        Me.rdoHorizontal.Tag = "Horizontal"
-        Me.rdoHorizontal.UseVisualStyleBackColor = True
-        '
-        'rdoVertical
-        '
-        resources.ApplyResources(Me.rdoVertical, "rdoVertical")
-        Me.rdoVertical.Name = "rdoVertical"
-        Me.rdoVertical.TabStop = True
-        Me.rdoVertical.Tag = "Vertical"
-        Me.rdoVertical.UseVisualStyleBackColor = True
-        '
-        'lblFactor2
-        '
-        resources.ApplyResources(Me.lblFactor2, "lblFactor2")
-        Me.lblFactor2.Name = "lblFactor2"
-        '
-        'lblFactor1
-        '
-        resources.ApplyResources(Me.lblFactor1, "lblFactor1")
-        Me.lblFactor1.Name = "lblFactor1"
-        Me.lblFactor1.Tag = ""
-        '
         'ucr2ndFactorReceiver
         '
         Me.ucr2ndFactorReceiver.frmParent = Nothing
@@ -234,59 +352,10 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.ucrPnlHorizonatalVertical, "ucrPnlHorizonatalVertical")
         Me.ucrPnlHorizonatalVertical.Name = "ucrPnlHorizonatalVertical"
         '
-        'tbpLayers
-        '
-        Me.tbpLayers.Controls.Add(Me.ucrPlotsAdditionalLayers)
-        resources.ApplyResources(Me.tbpLayers, "tbpLayers")
-        Me.tbpLayers.Name = "tbpLayers"
-        Me.tbpLayers.Tag = "Layers"
-        Me.tbpLayers.UseVisualStyleBackColor = True
-        '
         'ucrPlotsAdditionalLayers
         '
         resources.ApplyResources(Me.ucrPlotsAdditionalLayers, "ucrPlotsAdditionalLayers")
         Me.ucrPlotsAdditionalLayers.Name = "ucrPlotsAdditionalLayers"
-        '
-        'tbpTitles
-        '
-        Me.tbpTitles.Controls.Add(Me.lblCaption)
-        Me.tbpTitles.Controls.Add(Me.lblSubTitle)
-        Me.tbpTitles.Controls.Add(Me.Label1)
-        Me.tbpTitles.Controls.Add(Me.grpLegendTitle)
-        Me.tbpTitles.Controls.Add(Me.ucrInputGraphCaption)
-        Me.tbpTitles.Controls.Add(Me.ucrInputGraphSubTitle)
-        Me.tbpTitles.Controls.Add(Me.ucrInputGraphTitle)
-        resources.ApplyResources(Me.tbpTitles, "tbpTitles")
-        Me.tbpTitles.Name = "tbpTitles"
-        Me.tbpTitles.Tag = "Titles"
-        Me.tbpTitles.UseVisualStyleBackColor = True
-        '
-        'lblCaption
-        '
-        resources.ApplyResources(Me.lblCaption, "lblCaption")
-        Me.lblCaption.Name = "lblCaption"
-        '
-        'lblSubTitle
-        '
-        resources.ApplyResources(Me.lblSubTitle, "lblSubTitle")
-        Me.lblSubTitle.Name = "lblSubTitle"
-        '
-        'Label1
-        '
-        resources.ApplyResources(Me.Label1, "Label1")
-        Me.Label1.Name = "Label1"
-        '
-        'grpLegendTitle
-        '
-        Me.grpLegendTitle.Controls.Add(Me.ucrChkOverwriteLegendTitle)
-        Me.grpLegendTitle.Controls.Add(Me.ucrChkDisplayLegendTitle)
-        Me.grpLegendTitle.Controls.Add(Me.ucrInputLegend)
-        Me.grpLegendTitle.Controls.Add(Me.rdoLegendTitleCustom)
-        Me.grpLegendTitle.Controls.Add(Me.rdoLegendTitleAuto)
-        Me.grpLegendTitle.Controls.Add(Me.ucrPnlLegendTitle)
-        resources.ApplyResources(Me.grpLegendTitle, "grpLegendTitle")
-        Me.grpLegendTitle.Name = "grpLegendTitle"
-        Me.grpLegendTitle.TabStop = False
         '
         'ucrChkOverwriteLegendTitle
         '
@@ -307,20 +376,6 @@ Partial Class sdgPlots
         Me.ucrInputLegend.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputLegend, "ucrInputLegend")
         Me.ucrInputLegend.Name = "ucrInputLegend"
-        '
-        'rdoLegendTitleCustom
-        '
-        resources.ApplyResources(Me.rdoLegendTitleCustom, "rdoLegendTitleCustom")
-        Me.rdoLegendTitleCustom.Name = "rdoLegendTitleCustom"
-        Me.rdoLegendTitleCustom.TabStop = True
-        Me.rdoLegendTitleCustom.UseVisualStyleBackColor = True
-        '
-        'rdoLegendTitleAuto
-        '
-        resources.ApplyResources(Me.rdoLegendTitleAuto, "rdoLegendTitleAuto")
-        Me.rdoLegendTitleAuto.Name = "rdoLegendTitleAuto"
-        Me.rdoLegendTitleAuto.TabStop = True
-        Me.rdoLegendTitleAuto.UseVisualStyleBackColor = True
         '
         'ucrPnlLegendTitle
         '
@@ -351,64 +406,21 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.ucrInputGraphTitle, "ucrInputGraphTitle")
         Me.ucrInputGraphTitle.Name = "ucrInputGraphTitle"
         '
-        'tbpXAxis
-        '
-        Me.tbpXAxis.Controls.Add(Me.ucrXAxis)
-        resources.ApplyResources(Me.tbpXAxis, "tbpXAxis")
-        Me.tbpXAxis.Name = "tbpXAxis"
-        Me.tbpXAxis.UseVisualStyleBackColor = True
-        '
         'ucrXAxis
         '
         resources.ApplyResources(Me.ucrXAxis, "ucrXAxis")
         Me.ucrXAxis.Name = "ucrXAxis"
-        '
-        'tbpYAxis
-        '
-        Me.tbpYAxis.Controls.Add(Me.ucrYAxis)
-        resources.ApplyResources(Me.tbpYAxis, "tbpYAxis")
-        Me.tbpYAxis.Name = "tbpYAxis"
-        Me.tbpYAxis.UseVisualStyleBackColor = True
         '
         'ucrYAxis
         '
         resources.ApplyResources(Me.ucrYAxis, "ucrYAxis")
         Me.ucrYAxis.Name = "ucrYAxis"
         '
-        'tbpTheme
-        '
-        Me.tbpTheme.Controls.Add(Me.urChkSelectTheme)
-        Me.tbpTheme.Controls.Add(Me.GroupBox1)
-        Me.tbpTheme.Controls.Add(Me.lblFont)
-        Me.tbpTheme.Controls.Add(Me.cmdAllOptions)
-        Me.tbpTheme.Controls.Add(Me.ucrInputThemes)
-        resources.ApplyResources(Me.tbpTheme, "tbpTheme")
-        Me.tbpTheme.Name = "tbpTheme"
-        Me.tbpTheme.Tag = "Theme"
-        Me.tbpTheme.UseVisualStyleBackColor = True
-        '
         'urChkSelectTheme
         '
         Me.urChkSelectTheme.Checked = False
         resources.ApplyResources(Me.urChkSelectTheme, "urChkSelectTheme")
         Me.urChkSelectTheme.Name = "urChkSelectTheme"
-        '
-        'GroupBox1
-        '
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.TabStop = False
-        '
-        'lblFont
-        '
-        resources.ApplyResources(Me.lblFont, "lblFont")
-        Me.lblFont.Name = "lblFont"
-        '
-        'cmdAllOptions
-        '
-        resources.ApplyResources(Me.cmdAllOptions, "cmdAllOptions")
-        Me.cmdAllOptions.Name = "cmdAllOptions"
-        Me.cmdAllOptions.UseVisualStyleBackColor = True
         '
         'ucrInputThemes
         '
@@ -417,22 +429,11 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.ucrInputThemes, "ucrInputThemes")
         Me.ucrInputThemes.Name = "ucrInputThemes"
         '
-        'tbpCoordinates
+        'ucrChkHorizontalplot
         '
-        Me.tbpCoordinates.Controls.Add(Me.lblWarning)
-        resources.ApplyResources(Me.tbpCoordinates, "tbpCoordinates")
-        Me.tbpCoordinates.Name = "tbpCoordinates"
-        Me.tbpCoordinates.UseVisualStyleBackColor = True
-        '
-        'lblWarning
-        '
-        resources.ApplyResources(Me.lblWarning, "lblWarning")
-        Me.lblWarning.Name = "lblWarning"
-        '
-        'ucrBaseSubdialog
-        '
-        resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
-        Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
+        Me.ucrChkHorizontalplot.Checked = False
+        resources.ApplyResources(Me.ucrChkHorizontalplot, "ucrChkHorizontalplot")
+        Me.ucrChkHorizontalplot.Name = "ucrChkHorizontalplot"
         '
         'sdgPlots
         '
@@ -459,7 +460,6 @@ Partial Class sdgPlots
         Me.tbpTheme.ResumeLayout(False)
         Me.tbpTheme.PerformLayout()
         Me.tbpCoordinates.ResumeLayout(False)
-        Me.tbpCoordinates.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -493,7 +493,6 @@ Partial Class sdgPlots
     Friend WithEvents ucrYAxis As ucrAxes
     Friend WithEvents ucrInputLegend As ucrInputTextBox
     Friend WithEvents tbpCoordinates As TabPage
-    Friend WithEvents lblWarning As Label
     Friend WithEvents ucrChkNoOfRowsOrColumns As ucrCheck
     Friend WithEvents ucrChkIncludeFacets As ucrCheck
     Friend WithEvents ucrChkFreeSpace As ucrCheck
@@ -510,6 +509,7 @@ Partial Class sdgPlots
     Friend WithEvents ucrInputGraphCaption As ucrInputTextBox
     Friend WithEvents ucrInputGraphSubTitle As ucrInputTextBox
     Friend WithEvents urChkSelectTheme As ucrCheck
+    Friend WithEvents ucrChkHorizontalplot As ucrCheck
 End Class
 
 
