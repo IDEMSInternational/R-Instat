@@ -523,13 +523,13 @@ summary_Sn <- function(x, constant = 1.1926, finite.corr = missing(constant), na
 }
 
 #summary covariance
-summary_cov <- function(x, y){
-  return(cov(x,y))
+summary_cov <- function(x, y, na.rm = FALSE){
+  return(cov(x, y))
 }
 
 #summary correlations
-summary_cor <- function(x, y){
-  return(cor(x,y))
+summary_cor <- function(x, y, na.rm = FALSE){
+  return(cor(x, y))
 }
 
 instat_object$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), n_column_factors = 1, store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = TRUE, treat_columns_as_factor = FALSE, page_by = "default", as_html = TRUE, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, margin_name = "(All)", additional_filter, ...) {
