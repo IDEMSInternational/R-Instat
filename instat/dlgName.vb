@@ -32,11 +32,9 @@ Public Class dlgName
             SetDefaults()
             bFirstLoad = False
         End If
-
-        'Reset the ucrInputs to change their bUserTyped = True so that their inputs can be changed by ucrReceiverName_ControlValueChanged()
-        ucrInputNewName.Reset()
-        ucrInputVariableLabel.Reset()
-
+        If bFirstLoad Then
+            SetDefaults()
+        End If
         SetRCodeForControls(bReset)
         bReset = False
         If bUseSelectedColumn Then
@@ -120,15 +118,9 @@ Public Class dlgName
         'if the receiver is not empty
         If Not ucrReceiverName.IsEmpty Then
             'if the user has not typed anything then change the ucrInputNewName contents
-            If Not ucrInputNewName.bUserTyped Then
-                ucrInputNewName.SetName(ucrReceiverName.GetVariableNames(bWithQuotes:=False))
-            End If
-
-            'if the user has not typed anything then change the ucrInputVariableLabel contents
-            If Not ucrInputVariableLabel.bUserTyped Then
-                'get the label of the column selected(from ucrReceiverName) and set it as ucrInputVariableLabel value
-                ucrInputVariableLabel.SetName(GetColLabel())
-            End If
+            ucrInputNewName.SetName(ucrReceiverName.GetVariableNames(bWithQuotes:=False))
+            'get the label of the column selected(from ucrReceiverName) and set it as ucrInputVariableLabel value
+            ucrInputVariableLabel.SetName(GetColLabel())
 
         Else
             'if the receiver is empty. These 2 controls should be empty
@@ -141,14 +133,14 @@ Public Class dlgName
     'Gets the label of the column selected(from ucrReceiverName) 
     Private Function GetColLabel()
         Dim strColLabel As String = ""
-        Dim colmnLabelsRFunction = New RFunction
+        Dim clsColmnLabelsRFunction = New RFunction
         Dim expItems As SymbolicExpression
 
-        colmnLabelsRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_labels")
-        colmnLabelsRFunction.AddParameter("data_name", Chr(34) & ucrSelectVariables.strCurrentDataFrame & Chr(34), iPosition:=0)
-        colmnLabelsRFunction.AddParameter("columns", ucrReceiverName.GetVariableNames(bWithQuotes:=True), iPosition:=1)
+        clsColmnLabelsRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_labels")
+        clsColmnLabelsRFunction.AddParameter("data_name", Chr(34) & ucrSelectVariables.strCurrentDataFrame & Chr(34), iPosition:=0)
+        clsColmnLabelsRFunction.AddParameter("columns", ucrReceiverName.GetVariableNames(bWithQuotes:=True), iPosition:=1)
 
-        expItems = frmMain.clsRLink.RunInternalScriptGetValue(colmnLabelsRFunction.ToScript(), bSilent:=True)
+        expItems = frmMain.clsRLink.RunInternalScriptGetValue(clsColmnLabelsRFunction.ToScript(), bSilent:=True)
 
         If expItems IsNot Nothing AndAlso Not (expItems.Type = Internals.SymbolicExpressionType.Null) Then
             For Each strLabel As String In expItems.AsCharacter.ToArray
