@@ -85,22 +85,23 @@ Public Class dlgImportDataset
             RefreshFilePreview()
             RefreshFrameView()
         Else
-            If Not File.Exists(strFilePathSystem) Then
-                MsgBox("File no longer exists: " & strFilePathSystem, MsgBoxStyle.Information, "File No Longer Exists")
-                SetControlsFromFile("")
-                bDialogLoaded = True
-                RefreshFilePreview()
-                RefreshFrameView()
+            'if none of the above then try setting the displayed values from the previous contents of ucrInputFilePath.
+            If Not String.IsNullOrEmpty(ucrInputFilePath.GetText()) Then
+                If File.Exists(ucrInputFilePath.GetText()) Then
+                    SetControlsFromFile(ucrInputFilePath.GetText())
+                    bDialogLoaded = True
+                    RefreshFilePreview()
+                    RefreshFrameView()
+                Else
+                    MsgBox("File no longer exists: " & strFilePathSystem, MsgBoxStyle.Information, "File No Longer Exists")
+                    SetControlsFromFile("")
+                    bDialogLoaded = True
+                    RefreshFilePreview()
+                    RefreshFrameView()
+                End If
             End If
         End If
-        'if none of the above then try setting the displayed values from the contents of ucrInputFilePath.
-        'This happens using EditLastDialogueToolStrip to open this dialog 
-        If Not bDialogLoaded AndAlso Not String.IsNullOrEmpty(ucrInputFilePath.GetText()) AndAlso File.Exists(ucrInputFilePath.GetText()) Then
-            SetControlsFromFile(ucrInputFilePath.GetText())
-            bDialogLoaded = True
-            RefreshFilePreview()
-            RefreshFrameView()
-        End If
+
         'temprary fix for autotranslate(me) translating this to Label1. Can be removed after that
         ucrSaveFile.SetLabelText("New Data Frame Name:")
         bDialogLoaded = True
