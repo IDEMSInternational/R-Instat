@@ -100,8 +100,10 @@ Public Class sdgSummaries
 
         ucrChkPercentage.SetText("Percentage")
 
+        ucrChkCorrelations.SetParameter(New RParameter("summary_cor", 21), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_cor" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkCorrelations.SetText("Correlations")
 
+        ucrChkCovariance.SetParameter(New RParameter("summary_cov", 22), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_cov" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkCovariance.SetText("Covariance")
 
         'linking controls
@@ -126,7 +128,7 @@ Public Class sdgSummaries
         ucrNudPercentage.SetLinkedDisplayControl(lblPercentage)
         ucrNudNumber.SetLinkedDisplayControl(lblNumber)
 
-        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkUpperQuartile, ucrChkLowerQuartile, ucrChkMedianAbsoluteDeviation, ucrChkKurtosis, ucrChkCoefficientOfVariation, ucrChkSkewness, ucrChkMc, ucrChkQn, ucrChkSn})
+        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkUpperQuartile, ucrChkLowerQuartile, ucrChkMedianAbsoluteDeviation, ucrChkKurtosis, ucrChkCoefficientOfVariation, ucrChkSkewness, ucrChkMc, ucrChkQn, ucrChkSn, ucrChkCorrelations, ucrChkCovariance})
         'TODO: This needs modifying summaries functions to allow this options to be implemented.
         tbMissingOptions.Enabled = False
         For Each ctrTemp As ucrCheck In lstCheckboxes
