@@ -34,6 +34,7 @@ Public Class sdgParallelPlots
         dctMissing.Add("Random", Chr(34) & "random" & Chr(34))
         ucrInputMissing.SetItems(dctMissing)
         ucrInputMissing.SetRDefault("exclude")
+        ucrInputMissing.SetDropDownStyleAsNonEditable()
 
         ucrInputOrder.SetParameter(New RParameter("order"))
         dctOrder.Add("AnyClass", Chr(34) & "anyClass" & Chr(34))
@@ -41,6 +42,7 @@ Public Class sdgParallelPlots
         dctOrder.Add("Skewness", Chr(34) & "skewness" & Chr(34))
         dctOrder.Add("Outlying", Chr(34) & "Outlying" & Chr(34))
         ucrInputOrder.SetItems(dctOrder)
+        ucrInputOrder.SetDropDownStyleAsNonEditable()
     End Sub
 
     Public Sub SetRCode(clsNewRFunction As RFunction, Optional bReset As Boolean = False)

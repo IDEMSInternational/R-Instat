@@ -155,7 +155,7 @@ Public Class dlgParallelCoordinatePlot
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverXVariables.IsEmpty AndAlso ucrSaveGraph.IsComplete Then
+        If (Not ucrReceiverXVariables.IsEmpty AndAlso ucrReceiverXVariables.lstSelectedVariables.Items.Count > 1) AndAlso ucrSaveGraph.IsComplete Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
