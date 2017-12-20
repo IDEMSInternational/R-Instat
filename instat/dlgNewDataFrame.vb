@@ -30,6 +30,7 @@ Public Class dlgNewDataFrame
         End If
         SetRCodeforControls(bReset)
         bReset = False
+        'temporary fix for autoTranslate(Me) which overwrites the label text to Label1
         ucrNewDFName.SetLabelText("New Data Frame Name:")
     End Sub
 
@@ -37,11 +38,11 @@ Public Class dlgNewDataFrame
         ucrBase.iHelpTopicID = 6
 
         'nudRows
-        ucrNudRows.SetParameter(New RParameter("nrow"))
+        ucrNudRows.SetParameter(New RParameter("nrow", iNewPosition:=1))
         ucrNudRows.SetMinMax(1, Integer.MaxValue)
 
         'nudCols
-        ucrNudCols.SetParameter(New RParameter("ncol"))
+        ucrNudCols.SetParameter(New RParameter("ncol", iNewPosition:=2))
         ucrNudCols.SetMinMax(1, Integer.MaxValue)
 
         ' ucrNewSheetName
@@ -67,7 +68,7 @@ Public Class dlgNewDataFrame
         clsMatrixFunction.AddParameter("ncol", 2, iPosition:=2)
 
 
-        clsOverallFunction.AddParameter("data", clsRFunctionParameter:=clsMatrixFunction)
+        clsOverallFunction.AddParameter("data", clsRFunctionParameter:=clsMatrixFunction, iPosition:=0)
         ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
     End Sub
 
