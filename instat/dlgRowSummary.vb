@@ -51,6 +51,8 @@ Public Class dlgRowSummary
         ucrChkIgnoreMissingValues.AddParameterPresentCondition(False, "na.rm", False)
         ucrChkIgnoreMissingValues.SetText("Ignore Missing Values")
 
+        'linking controls
+        ucrPanelStatistics.AddToLinkedControls(ucrChkIgnoreMissingValues, {rdoMean, rdoMinimum, rdoSum, rdoMedian, rdoStandardDeviation, rdoMaximum}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPanelStatistics.SetParameter(New RParameter("FUN", 2))
         ucrPanelStatistics.AddRadioButton(rdoMean, "mean")
