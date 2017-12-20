@@ -181,7 +181,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblXVariables.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 31</value>
+    <value>270, 44</value>
   </data>
   <data name="lblXVariables.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 13</value>
@@ -211,7 +211,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 188</value>
+    <value>270, 186</value>
   </data>
   <data name="lblFactor.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 13</value>
@@ -244,13 +244,13 @@
     <value>8, 268</value>
   </data>
   <data name="lblScale.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 13</value>
+    <value>37, 13</value>
   </data>
   <data name="lblScale.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
   <data name="lblScale.Text" xml:space="preserve">
-    <value>Scale</value>
+    <value>Scale:</value>
   </data>
   <data name="&gt;&gt;lblScale.Name" xml:space="preserve">
     <value>lblScale</value>
@@ -274,13 +274,13 @@
     <value>265, 236</value>
   </data>
   <data name="lblTransparency.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 13</value>
+    <value>75, 13</value>
   </data>
   <data name="lblTransparency.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
   <data name="lblTransparency.Text" xml:space="preserve">
-    <value>Transparency</value>
+    <value>Transparency:</value>
   </data>
   <data name="&gt;&gt;lblTransparency.Name" xml:space="preserve">
     <value>lblTransparency</value>
@@ -295,7 +295,7 @@
     <value>2</value>
   </data>
   <data name="ucrSaveGraph.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 358</value>
+    <value>9, 344</value>
   </data>
   <data name="ucrSaveGraph.Size" type="System.Drawing.Size, System.Drawing">
     <value>260, 24</value>
@@ -337,7 +337,7 @@
     <value>1</value>
   </data>
   <data name="ucrChkPoints.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 332</value>
+    <value>9, 318</value>
   </data>
   <data name="ucrChkPoints.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -358,7 +358,7 @@
     <value>3</value>
   </data>
   <data name="ucrChkBoxplots.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 305</value>
+    <value>9, 292</value>
   </data>
   <data name="ucrChkBoxplots.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -379,7 +379,7 @@
     <value>4</value>
   </data>
   <data name="ucrInputScale.Location" type="System.Drawing.Point, System.Drawing">
-    <value>43, 268</value>
+    <value>48, 265</value>
   </data>
   <data name="ucrInputScale.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -400,7 +400,7 @@
     <value>5</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 388</value>
+    <value>9, 370</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 52</value>
@@ -427,10 +427,10 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>424, 450</value>
+    <value>417, 430</value>
   </data>
   <data name="ucrReceiverXVariables.Location" type="System.Drawing.Point, System.Drawing">
-    <value>268, 44</value>
+    <value>268, 59</value>
   </data>
   <data name="ucrReceiverXVariables.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
