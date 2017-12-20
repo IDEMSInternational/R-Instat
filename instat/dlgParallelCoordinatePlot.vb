@@ -66,22 +66,24 @@ Public Class dlgParallelCoordinatePlot
         ucrReceiverFactor.SetIncludedDataTypes({"factor"})
         ucrReceiverFactor.SetParameterIsString()
 
-        ucrChkBoxplots.SetParameter(New RParameter("boxplot", 3))
+        ucrChkBoxplots.SetParameter(New RParameter("boxplot", 11))
+        ' On R, 'boxplot' is the 12th item in the parameter list (but our count starts from 0) so this is position = 11
         ucrChkBoxplots.SetText("Boxplot")
         ucrChkBoxplots.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkBoxplots.SetRDefault("FALSE")
 
-        ucrChkPoints.SetParameter(New RParameter("showPoints", 4))
+        ucrChkPoints.SetParameter(New RParameter("showPoints", 8))
         ucrChkPoints.SetText("Points")
         ucrChkPoints.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkPoints.SetRDefault("FALSE")
 
-        ucrNudTransparency.SetParameter(New RParameter("alphaLines", 5))
+        ucrNudTransparency.SetParameter(New RParameter("alphaLines", 10))
         ucrNudTransparency.SetMinMax(0, 1)
         ucrNudTransparency.DecimalPlaces = 2
         ucrNudTransparency.Increment = 0.01
+        ucrNudTransparency.SetRDefault(1)
 
-        ucrInputScale.SetParameter(New RParameter("scale", 6))
+        ucrInputScale.SetParameter(New RParameter("scale", 3))
         dctScale.Add("Std", "std")
         dctScale.Add("Robust", Chr(34) & "robust" & Chr(34))
         dctScale.Add("Uniminmax", Chr(34) & "uniminmax" & Chr(34))
@@ -113,12 +115,12 @@ Public Class dlgParallelCoordinatePlot
         clsGGParCoordFunc.SetPackageName("GGally")
         clsGGParCoordFunc.SetRCommand("ggparcoord")
 
-        clsGGParCoordFunc.AddParameter("boxplot", "FALSE")
-        clsGGParCoordFunc.AddParameter("showPoints", "FALSE")
-        clsGGParCoordFunc.AddParameter("scale", "std")
-        clsGGParCoordFunc.AddParameter("alphaLines", "1")
-        clsGGParCoordFunc.AddParameter("missing", Chr(34) & "exclude" & Chr(34))
-        clsGGParCoordFunc.AddParameter("order", Chr(34) & "skewness" & Chr(34))
+        clsGGParCoordFunc.AddParameter("boxplot", "FALSE", iPosition:=11)
+        clsGGParCoordFunc.AddParameter("showPoints", "FALSE", iPosition:=8)
+        clsGGParCoordFunc.AddParameter("scale", "std", iPosition:=3)
+        clsGGParCoordFunc.AddParameter("alphaLines", "1", iPosition:=10)
+        clsGGParCoordFunc.AddParameter("missing", Chr(34) & "exclude" & Chr(34), iPosition:=6)
+        clsGGParCoordFunc.AddParameter("order", Chr(34) & "skewness" & Chr(34), iPosition:=7)
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggparcord", clsRFunctionParameter:=clsGGParCoordFunc, iPosition:=0)
@@ -147,11 +149,10 @@ Public Class dlgParallelCoordinatePlot
         ucrNudTransparency.SetRCode(clsGGParCoordFunc, bReset)
         ucrInputScale.SetRCode(clsGGParCoordFunc, bReset)
         ucrSaveGraph.SetRCode(clsBaseOperator, bReset)
-
     End Sub
 
     Private Sub TestOkEnabled()
-        If (Not ucrReceiverXVariables.IsEmpty AndAlso ucrReceiverXVariables.lstSelectedVariables.Items.Count > 1) AndAlso ucrSaveGraph.IsComplete Then
+        If (ucrReceiverXVariables.lstSelectedVariables.Items.Count > 1) AndAlso ucrSaveGraph.IsComplete AndAlso ucrNudTransparency.GetText <> "" Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -161,10 +162,6 @@ Public Class dlgParallelCoordinatePlot
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
-        TestOkEnabled()
-    End Sub
-
-    Private Sub ucrReceiverXVariables_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverXVariables.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -178,5 +175,9 @@ Public Class dlgParallelCoordinatePlot
         sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXLabsFunction, clsNewYLabTitleFunction:=clsYLabsFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrSelectorParallelCoordinatePlot, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverXVariables.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrNudTransparency.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
