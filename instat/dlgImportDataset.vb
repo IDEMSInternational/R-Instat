@@ -93,6 +93,16 @@ Public Class dlgImportDataset
                 RefreshFrameView()
             End If
         End If
+        'if none of the above then try setting the displayed values from the contents of ucrInputFilePath.
+        'This happens using EditLastDialogueToolStrip to open this dialog 
+        If Not bDialogLoaded AndAlso Not String.IsNullOrEmpty(ucrInputFilePath.GetText()) AndAlso File.Exists(ucrInputFilePath.GetText()) Then
+            SetControlsFromFile(ucrInputFilePath.GetText())
+            bDialogLoaded = True
+            RefreshFilePreview()
+            RefreshFrameView()
+        End If
+        'temprary fix for autotranslate(me) translating this to Label1. Can be removed after that
+        ucrSaveFile.SetLabelText("New Data Frame Name:")
         bDialogLoaded = True
         bReset = False
         TestOkEnabled()
