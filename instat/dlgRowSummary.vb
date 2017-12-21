@@ -47,6 +47,13 @@ Public Class dlgRowSummary
         ucrReceiverForRowSummaries.bForceAsDataFrame = True
         ucrReceiverForRowSummaries.SetParameterIsRFunction()
 
+        ucrChkIgnoreMissingValues.AddParameterPresentCondition(True, "na.rm")
+        ucrChkIgnoreMissingValues.AddParameterPresentCondition(False, "na.rm", False)
+        ucrChkIgnoreMissingValues.SetText("Ignore Missing Values")
+
+        'linking controls
+        ucrPanelStatistics.AddToLinkedControls(ucrChkIgnoreMissingValues, {rdoMean, rdoMinimum, rdoSum, rdoMedian, rdoStandardDeviation, rdoMaximum}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
         ucrPanelStatistics.SetParameter(New RParameter("FUN", 2))
         ucrPanelStatistics.AddRadioButton(rdoMean, "mean")
         ucrPanelStatistics.AddRadioButton(rdoMinimum, "min")
@@ -100,5 +107,17 @@ Public Class dlgRowSummary
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForRowSummaries.ControlContentsChanged, ucrSaveResults.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrChkIgnoreMissingValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIgnoreMissingValues.ControlValueChanged, ucrPanelStatistics.ControlValueChanged
+        If ucrChkIgnoreMissingValues.Checked Then
+            If rdoMean.Checked OrElse rdoMedian.Checked OrElse rdoSum.Checked OrElse rdoStandardDeviation.Checked OrElse rdoMinimum.Checked OrElse rdoMaximum.Checked Then
+                clsApplyFunction.AddParameter("na.rm", "TRUE", iPosition:=3)
+            Else
+                clsApplyFunction.RemoveParameterByName("na.rm")
+            End If
+        Else
+            clsApplyFunction.RemoveParameterByName("na.rm")
+        End If
     End Sub
 End Class
