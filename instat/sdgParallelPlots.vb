@@ -40,7 +40,8 @@ Public Class sdgParallelPlots
         dctOrder.Add("Any Class", Chr(34) & "anyClass" & Chr(34))
         dctOrder.Add("All Class", Chr(34) & "allClass" & Chr(34))
         dctOrder.Add("Skewness", Chr(34) & "skewness" & Chr(34))
-        dctOrder.Add("Outlying", Chr(34) & "Outlying" & Chr(34))
+        'this parameter is commented out because it uses scagnostics packeage which has not been added
+        'dctOrder.Add("Outlying", Chr(34) & "Outlying" & Chr(34))
         ucrInputOrder.SetItems(dctOrder)
         ucrInputOrder.SetDropDownStyleAsNonEditable()
     End Sub
