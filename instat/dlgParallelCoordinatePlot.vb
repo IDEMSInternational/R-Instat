@@ -115,8 +115,6 @@ Public Class dlgParallelCoordinatePlot
         clsGGParCoordFunc.SetPackageName("GGally")
         clsGGParCoordFunc.SetRCommand("ggparcoord")
 
-        clsGGParCoordFunc.AddParameter("boxplot", "FALSE", iPosition:=11)
-        clsGGParCoordFunc.AddParameter("showPoints", "FALSE", iPosition:=8)
         clsGGParCoordFunc.AddParameter("scale", "std", iPosition:=3)
         clsGGParCoordFunc.AddParameter("alphaLines", "1", iPosition:=10)
         clsGGParCoordFunc.AddParameter("missing", Chr(34) & "exclude" & Chr(34), iPosition:=6)
