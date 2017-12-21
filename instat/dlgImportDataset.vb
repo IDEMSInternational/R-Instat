@@ -58,7 +58,7 @@ Public Class dlgImportDataset
 
     Private Sub dlgImportDataset_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         bDialogLoaded = False
-        autoTranslate(Me)
+        'autoTranslate(Me)
         Me.Show()
         If bFirstLoad Then
             InitialiseDialog()
