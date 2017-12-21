@@ -2863,12 +2863,6 @@
   <data name="mnuPrepareColumnReshapeGeneralSummaries.Text" xml:space="preserve">
     <value>General Summaries...</value>
   </data>
-  <data name="mnuPrepareColumReshapeRestoreHierachy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 22</value>
-  </data>
-  <data name="mnuPrepareColumReshapeRestoreHierachy.Text" xml:space="preserve">
-    <value>Restore Hierachy</value>
-  </data>
   <data name="ToolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
     <value>190, 6</value>
   </data>
@@ -5686,6 +5680,12 @@
   <data name="&gt;&gt;CummulativeDistributionToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;mnuDescribeSpecificParallelCoordinatePlot.Name" xml:space="preserve">
+    <value>mnuDescribeSpecificParallelCoordinatePlot</value>
+  </data>
+  <data name="&gt;&gt;mnuDescribeSpecificParallelCoordinatePlot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;mnuDescribeSpecificMosaic.Name" xml:space="preserve">
     <value>mnuDescribeSpecificMosaic</value>
   </data>
@@ -7816,12 +7816,6 @@
   <data name="&gt;&gt;mnuPrepareColumnReshapeGeneralSummaries.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuPrepareColumReshapeRestoreHierachy.Name" xml:space="preserve">
-    <value>mnuPrepareColumReshapeRestoreHierachy</value>
-  </data>
-  <data name="&gt;&gt;mnuPrepareColumReshapeRestoreHierachy.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;ToolStripSeparator10.Name" xml:space="preserve">
     <value>ToolStripSeparator10</value>
   </data>
@@ -8258,12 +8252,6 @@
     <value>ExportToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;ExportToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuDescribeSpecificParallelCoordinatePlot.Name" xml:space="preserve">
-    <value>mnuDescribeSpecificParallelCoordinatePlot</value>
-  </data>
-  <data name="&gt;&gt;mnuDescribeSpecificParallelCoordinatePlot.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
