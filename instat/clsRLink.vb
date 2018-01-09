@@ -245,6 +245,29 @@ Public Class RLink
         Return lstDataFrameNames
     End Function
 
+    Public Function GetLinkedToDataFrameNames(strDataName As String, Optional bIncludeSelf As Boolean = False) As List(Of String)
+        Dim chrDataFrameNames As CharacterVector = Nothing
+        Dim lstDataFrameNames As New List(Of String)
+        Dim clsGetDataNames As New RFunction
+        Dim expNames As SymbolicExpression
+
+        clsGetDataNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_linked_to_data_name")
+        clsGetDataNames.AddParameter("from_data_frame", Chr(34) & strDataName & Chr(34), iPosition:=0)
+        If bIncludeSelf Then
+            clsGetDataNames.AddParameter("include_self", "TRUE", iPosition:=2)
+        Else
+            clsGetDataNames.AddParameter("include_self", "FALSE", iPosition:=2)
+        End If
+        If bInstatObjectExists Then
+            expNames = RunInternalScriptGetValue(clsGetDataNames.ToScript(), bSilent:=True)
+            If expNames IsNot Nothing AndAlso Not expNames.Type = Internals.SymbolicExpressionType.Null Then
+                chrDataFrameNames = expNames.AsCharacter
+                lstDataFrameNames.AddRange(chrDataFrameNames)
+            End If
+        End If
+        Return lstDataFrameNames
+    End Function
+
     Public Function GetColumnNames(strDataFrameName As String) As List(Of String)
         Dim chrCurrColumns As CharacterVector = Nothing
         Dim lstCurrColumns As New List(Of String)
