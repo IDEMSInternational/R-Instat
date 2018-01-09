@@ -46,7 +46,8 @@ instat_object$set("public", "append_summaries_to_data_object", function(out, dat
   
   exists = FALSE
   if(self$link_exists_from(data_name, factors)) {
-    summary_name <- self$get_linked_to_data_name(data_name, factors)
+    #TODO what happens if there is more than 1?
+    summary_name <- self$get_linked_to_data_name(data_name, factors)[1]
     summary_obj <- self$get_data_objects(summary_name)
     exists <- TRUE
   }
