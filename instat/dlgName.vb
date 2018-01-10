@@ -32,7 +32,7 @@ Public Class dlgName
             SetDefaults()
             bFirstLoad = False
         End If
-        If bFirstLoad Then
+        If bReset Then
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
