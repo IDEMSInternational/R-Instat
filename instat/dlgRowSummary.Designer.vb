@@ -50,8 +50,9 @@ Partial Class dlgRowSummary
         Me.rdoNumberofMissing = New System.Windows.Forms.RadioButton()
         Me.rdoMedian = New System.Windows.Forms.RadioButton()
         Me.rdoSum = New System.Windows.Forms.RadioButton()
-        Me.ucrPanelStatistics = New instat.UcrPanel()
+        Me.ucrChkIgnoreMissingValues = New instat.ucrCheck()
         Me.ucrSaveResults = New instat.ucrSave()
+        Me.ucrPanelStatistics = New instat.UcrPanel()
         Me.ucrSelectorForRowSummaries = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForRowSummaries = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
@@ -151,15 +152,21 @@ Partial Class dlgRowSummary
         Me.rdoSum.Tag = "Sum"
         Me.rdoSum.UseVisualStyleBackColor = True
         '
-        'ucrPanelStatistics
+        'ucrChkIgnoreMissingValues
         '
-        resources.ApplyResources(Me.ucrPanelStatistics, "ucrPanelStatistics")
-        Me.ucrPanelStatistics.Name = "ucrPanelStatistics"
+        Me.ucrChkIgnoreMissingValues.Checked = False
+        resources.ApplyResources(Me.ucrChkIgnoreMissingValues, "ucrChkIgnoreMissingValues")
+        Me.ucrChkIgnoreMissingValues.Name = "ucrChkIgnoreMissingValues"
         '
         'ucrSaveResults
         '
         resources.ApplyResources(Me.ucrSaveResults, "ucrSaveResults")
         Me.ucrSaveResults.Name = "ucrSaveResults"
+        '
+        'ucrPanelStatistics
+        '
+        resources.ApplyResources(Me.ucrPanelStatistics, "ucrPanelStatistics")
+        Me.ucrPanelStatistics.Name = "ucrPanelStatistics"
         '
         'ucrSelectorForRowSummaries
         '
@@ -186,6 +193,7 @@ Partial Class dlgRowSummary
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkIgnoreMissingValues)
         Me.Controls.Add(Me.ucrSaveResults)
         Me.Controls.Add(Me.grpStatistic)
         Me.Controls.Add(Me.cmdUserDefined)
@@ -221,4 +229,5 @@ Partial Class dlgRowSummary
     Friend WithEvents rdoSum As RadioButton
     Friend WithEvents ucrPanelStatistics As UcrPanel
     Friend WithEvents ucrSaveResults As ucrSave
+    Friend WithEvents ucrChkIgnoreMissingValues As ucrCheck
 End Class
