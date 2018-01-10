@@ -49,9 +49,9 @@ Public Class ucrReceiver
     'Should columns be forced as a data frame object when bParameterIsRFunction = True
     Public bForceAsDataFrame As Boolean = False
 
-    'Currently no distinction in between selector resetting and data frame changed
-    'Need option to not reset receiver when data frame changed e.g. calculations dialog
-    Public bResetWhenSelectorResets As Boolean = True
+    ' If True then this receiver can only contain a column from the selector's primary data frame
+    ' and this receiver can set the selector's primary data frame (when current receiver), resetting all other receivers
+    Public bAttachedToPrimaryDataFrame As Boolean = True
 
     Public Sub New()
         ' This call is required by the designer.
@@ -331,8 +331,12 @@ Public Class ucrReceiver
     End Sub
 
     Protected Overridable Sub Selector_ResetAll() Handles ucrSelector.ResetReceivers
-        If bResetWhenSelectorResets Then
-            Clear()
+        Clear()
+    End Sub
+
+    Private Sub ucrSelector_DataFrameChanged() Handles ucrSelector.DataFrameChanged
+        If bAttachedToPrimaryDataFrame Then
+            Selector_ResetAll()
         End If
     End Sub
 
@@ -488,4 +492,8 @@ Public Class ucrReceiver
     Public Overridable Sub SetTextColour(clrNew As Color)
 
     End Sub
+
+    Public Overridable Function GetItemsDataFrames() As List(Of String)
+        Return New List(Of String)
+    End Function
 End Class

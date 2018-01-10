@@ -61,7 +61,7 @@ Public Class sdgCalculationsSummmary
 
         ucrManipulations.lstAvailableData.View = View.List
 
-        ucrCalcSummary.ucrReceiverForCalculation.bResetWhenSelectorResets = False
+        ucrCalcSummary.ucrReceiverForCalculation.bResetWhenSelectorDataFrameChanges = False
 
         'temp until working
         ucrCalcSummary.chkSaveResultInto.Visible = False

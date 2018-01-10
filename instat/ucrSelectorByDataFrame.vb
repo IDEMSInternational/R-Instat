@@ -30,7 +30,6 @@ Public Class ucrSelectorByDataFrame
         strCurrentDataFrame = ucrAvailableDataFrames.cboAvailableDataFrames.Text
         LoadList()
         If strPrevDataFrame <> ucrAvailableDataFrames.cboAvailableDataFrames.Text Then
-            OnResetReceivers()
             OnDataFrameChanged()
         End If
     End Sub
@@ -50,7 +49,8 @@ Public Class ucrSelectorByDataFrame
         LoadList()
     End Sub
 
-    Public Sub SetDataframe(strDataframe As String, Optional bEnableDataframe As Boolean = True)
+    Public Overrides Sub SetDataframe(strDataframe As String, Optional bEnableDataframe As Boolean = True, Optional bSilent As Boolean = False)
+        bSilentDataFrameChange = bSilent
         ucrAvailableDataFrames.SetDataframe(strDataframe, bEnableDataframe)
     End Sub
 
