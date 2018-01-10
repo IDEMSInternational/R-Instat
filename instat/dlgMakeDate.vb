@@ -37,7 +37,7 @@ Public Class dlgMakeDate
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        autoTranslate(Me)
+        'autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

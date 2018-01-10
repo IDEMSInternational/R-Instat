@@ -31,7 +31,7 @@ Public Class dlgDuplicates
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        autoTranslate(Me)
+        'autoTranslate(Me)
         TestOKEnabled()
     End Sub
 
