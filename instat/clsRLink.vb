@@ -245,7 +245,7 @@ Public Class RLink
         Return lstDataFrameNames
     End Function
 
-    Public Function GetLinkedToDataFrameNames(strDataName As String, Optional bIncludeSelf As Boolean = False) As List(Of String)
+    Public Function GetLinkedToDataFrameNames(strDataName As String, Optional bIncludeSelf As Boolean = True) As List(Of String)
         Dim chrDataFrameNames As CharacterVector = Nothing
         Dim lstDataFrameNames As New List(Of String)
         Dim clsGetDataNames As New RFunction
@@ -287,14 +287,18 @@ Public Class RLink
     End Function
 
     'bIncludeOverall = True includes an extra item in the combo box for overall i.e. items not at data frame level 
-    Public Sub FillComboDataFrames(ByRef cboDataFrames As ComboBox, Optional bSetDefault As Boolean = True, Optional bIncludeOverall As Boolean = False, Optional strCurrentDataFrame As String = "")
+    Public Sub FillComboDataFrames(ByRef cboDataFrames As ComboBox, Optional bSetDefault As Boolean = True, Optional bIncludeOverall As Boolean = False, Optional strCurrentDataFrame As String = "", Optional bOnlyLinkedToPrimaryDataFrames As Boolean = False, Optional strPrimaryDataFrame As String = "", Optional bIncludePrimaryDataFrameAsLinked As Boolean = True)
         'This sub is filling the cboDataFrames with the relevant dat frame names (obtained by using GetDataFrameNames()) and potentially "[Overall]".  On thing it is doing, is setting the selected index in the cboDataFrames.
         'It is used on the ucrDataFrame in the FillComboBox sub.
         If bInstatObjectExists Then
             If bIncludeOverall Then
                 cboDataFrames.Items.Add("[Overall]") 'Task/question: explain this.
             End If
-            cboDataFrames.Items.AddRange(GetDataFrameNames().ToArray)
+            If bOnlyLinkedToPrimaryDataFrames Then
+                cboDataFrames.Items.AddRange(GetLinkedToDataFrameNames(strPrimaryDataFrame, bIncludePrimaryDataFrameAsLinked).ToArray)
+            Else
+                cboDataFrames.Items.AddRange(GetDataFrameNames().ToArray)
+            End If
             AdjustComboBoxWidth(cboDataFrames)
             'Task/Question: From what I understood, if bSetDefault is true or if the strCurrentDataFrame (given as an argument) is actually not in cboDataFrames (is this case generic or should it never happen ?), then the selected Index should be the current worksheet.
             If (bSetDefault OrElse cboDataFrames.Items.IndexOf(strCurrentDataFrame) = -1) AndAlso (grdDataView IsNot Nothing) AndAlso (grdDataView.CurrentWorksheet IsNot Nothing) Then
