@@ -154,4 +154,8 @@ Public Class ucrSelectorByDataFrame
     Public Sub SetLabelText(strText As String)
         ucrAvailableDataFrames.SetLabelText(strText)
     End Sub
+
+    Public Overrides Sub SetPrimaryDataFrameOptions(strNewPrimaryDataFrame As String, bNewOnlyLinkedToPrimaryDataFrames As Boolean, Optional bNewIncludePrimaryDataFrameAsLinked As Boolean = False)
+        ucrAvailableDataFrames.SetPrimaryDataFrameOptions(strNewPrimaryDataFrame:=strNewPrimaryDataFrame, bNewOnlyLinkedToPrimaryDataFrames:=bNewOnlyLinkedToPrimaryDataFrames, bNewIncludePrimaryDataFrameAsLinked:=bNewIncludePrimaryDataFrameAsLinked)
+    End Sub
 End Class

@@ -146,6 +146,7 @@ Public Class ucrSelector
         If conReceiver IsNot Nothing Then
             CurrentReceiver = conReceiver
             CurrentReceiver.SetColor()
+            SetPrimaryDataFrameOptions(strPrimaryDataFrame, Not CurrentReceiver.bAttachedToPrimaryDataFrame)
             If Not CurrentReceiver.IsEmpty Then
                 lstReceiverDataFrames = CurrentReceiver.GetItemsDataFrames()
                 If lstReceiverDataFrames.Count = 1 AndAlso lstReceiverDataFrames(0) <> "" AndAlso lstReceiverDataFrames(0) <> strCurrentDataFrame Then
@@ -427,6 +428,10 @@ Public Class ucrSelector
     End Sub
 
     Public Overridable Sub SetDataframe(strNewDataFrame As String, Optional bEnableDataframe As Boolean = True, Optional bSilent As Boolean = False)
+
+    End Sub
+
+    Public Overridable Sub SetPrimaryDataFrameOptions(strNewPrimaryDataFrame As String, bNewOnlyLinkedToPrimaryDataFrames As Boolean, Optional bNewIncludePrimaryDataFrameAsLinked As Boolean = False)
 
     End Sub
 End Class
