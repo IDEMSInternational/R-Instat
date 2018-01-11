@@ -121,9 +121,13 @@
   <data name="lblSelected.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblSelected.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblSelected.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 45</value>
+    <value>250, 45</value>
   </data>
   <data name="lblSelected.Size" type="System.Drawing.Size, System.Drawing">
     <value>103, 13</value>
@@ -144,7 +148,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblSelected.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
+  </data>
+  <data name="cmdUserDefined.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cmdUserDefined.Location" type="System.Drawing.Point, System.Drawing">
     <value>308, 271</value>
@@ -153,7 +160,7 @@
     <value>100, 23</value>
   </data>
   <data name="cmdUserDefined.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="cmdUserDefined.Text" xml:space="preserve">
     <value>User Define</value>
@@ -168,10 +175,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdUserDefined.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="rdoMinimum.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="rdoMinimum.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoMinimum.Location" type="System.Drawing.Point, System.Drawing">
     <value>327, 19</value>
@@ -200,6 +210,9 @@
   <data name="rdoMaximum.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="rdoMaximum.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoMaximum.Location" type="System.Drawing.Point, System.Drawing">
     <value>327, 42</value>
   </data>
@@ -226,6 +239,9 @@
   </data>
   <data name="rdoCount.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="rdoCount.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoCount.Location" type="System.Drawing.Point, System.Drawing">
     <value>204, 19</value>
@@ -254,6 +270,9 @@
   <data name="rdoMean.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="rdoMean.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoMean.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 19</value>
   </data>
@@ -280,6 +299,9 @@
   </data>
   <data name="rdoStandardDeviation.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="rdoStandardDeviation.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoStandardDeviation.Location" type="System.Drawing.Point, System.Drawing">
     <value>77, 42</value>
@@ -308,6 +330,9 @@
   <data name="rdoNumberofMissing.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="rdoNumberofMissing.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoNumberofMissing.Location" type="System.Drawing.Point, System.Drawing">
     <value>204, 42</value>
   </data>
@@ -335,6 +360,9 @@
   <data name="rdoMedian.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="rdoMedian.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoMedian.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 42</value>
   </data>
@@ -361,6 +389,9 @@
   </data>
   <data name="rdoSum.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="rdoSum.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoSum.Location" type="System.Drawing.Point, System.Drawing">
     <value>77, 19</value>
@@ -414,7 +445,7 @@
     <value>398, 70</value>
   </data>
   <data name="grpStatistic.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="grpStatistic.Text" xml:space="preserve">
     <value>Row Statistic</value>
@@ -429,7 +460,28 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpStatistic.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
+  </data>
+  <data name="ucrChkIgnoreMissingValues.Location" type="System.Drawing.Point, System.Drawing">
+    <value>250, 175</value>
+  </data>
+  <data name="ucrChkIgnoreMissingValues.Size" type="System.Drawing.Size, System.Drawing">
+    <value>158, 20</value>
+  </data>
+  <data name="ucrChkIgnoreMissingValues.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIgnoreMissingValues.Name" xml:space="preserve">
+    <value>ucrChkIgnoreMissingValues</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIgnoreMissingValues.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIgnoreMissingValues.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIgnoreMissingValues.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="ucrSaveResults.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 271</value>
@@ -438,7 +490,7 @@
     <value>269, 24</value>
   </data>
   <data name="ucrSaveResults.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;ucrSaveResults.Name" xml:space="preserve">
     <value>ucrSaveResults</value>
@@ -450,12 +502,11 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSaveResults.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrSelectorForRowSummaries.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrSelectorForRowSummaries.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
@@ -475,7 +526,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorForRowSummaries.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -493,7 +544,7 @@
     <value>410, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -505,7 +556,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -541,6 +595,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverForRowSummaries.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
 </root>
