@@ -38,8 +38,8 @@ Public Class ucrDataFrame
     'If True, only data frames linked to the primary data frame will be displayed
     'This is usually set by the current receiver of the dialog
     Private bOnlyLinkedToPrimaryDataFrames As Boolean = False
-    'If bOnlyLinkedToPrimaryDataFrames then should the primary data frame itself be displayed (if it is linked to itself)
-    Private bIncludePrimaryDataFrameAsLinked As Boolean = False
+    'If bOnlyLinkedToPrimaryDataFrames then should the primary data frame itself be displayed
+    Private bIncludePrimaryDataFrameAsLinked As Boolean = True
 
     Private Sub ucrDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         FillComboBox()
