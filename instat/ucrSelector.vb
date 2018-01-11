@@ -26,6 +26,10 @@ Public Class ucrSelector
     Public bFirstLoad As Boolean
     Public bIncludeOverall As Boolean
     Public strCurrentDataFrame As String
+    ' If a dialog has receivers which can have columns from multiple data frames
+    ' there may be a primary data frame which some receivers must be from.
+    ' Other receivers may only allow columns from data frames linked to the primary data frame
+    Public strPrimaryDataFrame As String
     Public lstIncludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
     Public lstExcludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
     Private strType As String
@@ -36,6 +40,8 @@ Public Class ucrSelector
     'Usually False as the parameter comes from the data frame selector
     Public bHasOwnParameter As Boolean = False
     Private clsGgplotOperator As ROperator = Nothing
+
+    Protected bSilentDataFrameChange As Boolean = False
 
     Public Sub New()
         ' This call is required by the designer.
@@ -67,8 +73,14 @@ Public Class ucrSelector
     End Sub
 
     Protected Sub OnDataFrameChanged()
-        RaiseEvent DataFrameChanged()
-        ClearGgplotOptions()
+        If bSilentDataFrameChange Then
+            bSilentDataFrameChange = False
+        Else
+            RaiseEvent DataFrameChanged()
+            If CurrentReceiver IsNot Nothing AndAlso CurrentReceiver.bAttachedToPrimaryDataFrame Then
+                ClearGgplotOptions()
+            End If
+        End If
     End Sub
 
     Protected Sub ClearGgplotOptions()
@@ -126,12 +138,25 @@ Public Class ucrSelector
     End Sub
 
     Public Sub SetCurrentReceiver(conReceiver As ucrReceiver)
+        Dim lstReceiverDataFrames As List(Of String)
+
         If CurrentReceiver IsNot Nothing Then
             CurrentReceiver.RemoveColor()
         End If
         If conReceiver IsNot Nothing Then
             CurrentReceiver = conReceiver
             CurrentReceiver.SetColor()
+            If Not CurrentReceiver.IsEmpty Then
+                lstReceiverDataFrames = CurrentReceiver.GetItemsDataFrames()
+                If lstReceiverDataFrames.Count = 1 AndAlso lstReceiverDataFrames(0) <> "" AndAlso lstReceiverDataFrames(0) <> strCurrentDataFrame Then
+                    SetDataframe(lstReceiverDataFrames(0), bSilent:=True)
+                End If
+            ElseIf CurrentReceiver.bAttachedToPrimaryDataFrame Then
+                If strPrimaryDataFrame <> "" AndAlso strPrimaryDataFrame <> strCurrentDataFrame Then
+                    SetDataframe(strPrimaryDataFrame, bSilent:=True)
+                End If
+            End If
+            'TODO possibly move this to avoid repetition loading list
             LoadList()
             If (TypeOf CurrentReceiver Is ucrReceiverSingle) Then
                 'lstAvailableVariable.SelectionMode = SelectionMode.One
@@ -399,5 +424,9 @@ Public Class ucrSelector
 
     Public Sub SetGgplotFunction(clsNewGgplotFunction As ROperator)
         clsGgplotOperator = clsNewGgplotFunction
+    End Sub
+
+    Public Overridable Sub SetDataframe(strNewDataFrame As String, Optional bEnableDataframe As Boolean = True, Optional bSilent As Boolean = False)
+
     End Sub
 End Class
