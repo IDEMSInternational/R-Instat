@@ -190,12 +190,11 @@ instat_object$set("public", "link_exists_from_by_to", function(first_data_frame,
 
 instat_object$set("public", "get_linked_to_data_name", function(from_data_frame, link_cols = c(), include_self = FALSE) {
   out <- c()
+  if(include_self) out <- c(out, from_data_frame)
   for(curr_link in private$.links) {
     if(curr_link$from_data_frame == from_data_frame) {
       if(length(link_cols) == 0) {
-        if(curr_link$to_data_frame != from_data_frame || (curr_link$to_data_frame == from_data_frame && include_self)) {
-          out <- c(out, curr_link$to_data_frame)
-        }
+        out <- c(out, curr_link$to_data_frame)
       }
       else {
         for(curr_link_pairs in curr_link$link_columns) {

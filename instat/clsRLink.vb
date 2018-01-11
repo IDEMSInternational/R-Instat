@@ -245,7 +245,7 @@ Public Class RLink
         Return lstDataFrameNames
     End Function
 
-    Public Function GetLinkedToDataFrameNames(strDataName As String, Optional bIncludeSelf As Boolean = False) As List(Of String)
+    Public Function GetLinkedToDataFrameNames(strDataName As String, Optional bIncludeSelf As Boolean = True) As List(Of String)
         Dim chrDataFrameNames As CharacterVector = Nothing
         Dim lstDataFrameNames As New List(Of String)
         Dim clsGetDataNames As New RFunction
@@ -287,7 +287,7 @@ Public Class RLink
     End Function
 
     'bIncludeOverall = True includes an extra item in the combo box for overall i.e. items not at data frame level 
-    Public Sub FillComboDataFrames(ByRef cboDataFrames As ComboBox, Optional bSetDefault As Boolean = True, Optional bIncludeOverall As Boolean = False, Optional strCurrentDataFrame As String = "", Optional bOnlyLinkedToPrimaryDataFrames As Boolean = False, Optional strPrimaryDataFrame As String = "", Optional bIncludePrimaryDataFrameAsLinked As Boolean = False)
+    Public Sub FillComboDataFrames(ByRef cboDataFrames As ComboBox, Optional bSetDefault As Boolean = True, Optional bIncludeOverall As Boolean = False, Optional strCurrentDataFrame As String = "", Optional bOnlyLinkedToPrimaryDataFrames As Boolean = False, Optional strPrimaryDataFrame As String = "", Optional bIncludePrimaryDataFrameAsLinked As Boolean = True)
         'This sub is filling the cboDataFrames with the relevant dat frame names (obtained by using GetDataFrameNames()) and potentially "[Overall]".  On thing it is doing, is setting the selected index in the cboDataFrames.
         'It is used on the ucrDataFrame in the FillComboBox sub.
         If bInstatObjectExists Then
