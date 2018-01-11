@@ -28,6 +28,9 @@ Public Class ucrSelectorByDataFrame
 
     Private Sub ucrAvailableDataFrames_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrAvailableDataFrames.DataFrameChanged
         strCurrentDataFrame = ucrAvailableDataFrames.cboAvailableDataFrames.Text
+        If CurrentReceiver IsNot Nothing AndAlso CurrentReceiver.bAttachedToPrimaryDataFrame Then
+            strPrimaryDataFrame = strCurrentDataFrame
+        End If
         LoadList()
         If strPrevDataFrame <> ucrAvailableDataFrames.cboAvailableDataFrames.Text Then
             OnDataFrameChanged()

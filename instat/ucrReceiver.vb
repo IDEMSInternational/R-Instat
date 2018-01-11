@@ -335,7 +335,8 @@ Public Class ucrReceiver
     End Sub
 
     Private Sub ucrSelector_DataFrameChanged() Handles ucrSelector.DataFrameChanged
-        If bAttachedToPrimaryDataFrame Then
+        'TODO This is possibly an expensive check, there may be more efficient ways of checking if this is the current receiver
+        If ucrSelector IsNot Nothing AndAlso ucrSelector.CurrentReceiver IsNot Nothing AndAlso (ucrSelector.CurrentReceiver.bAttachedToPrimaryDataFrame OrElse ucrSelector.CurrentReceiver.Equals(Me)) Then
             Selector_ResetAll()
         End If
     End Sub

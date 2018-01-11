@@ -77,7 +77,7 @@ Public Class ucrSelector
             bSilentDataFrameChange = False
         Else
             RaiseEvent DataFrameChanged()
-            If CurrentReceiver.bAttachedToPrimaryDataFrame Then
+            If CurrentReceiver IsNot Nothing AndAlso CurrentReceiver.bAttachedToPrimaryDataFrame Then
                 ClearGgplotOptions()
             End If
         End If
