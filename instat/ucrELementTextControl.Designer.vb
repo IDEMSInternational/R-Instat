@@ -178,8 +178,8 @@ Partial Class ucrELementTextControl
         '
         'ucrNudsize
         '
-        Me.ucrNudsize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudsize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudsize.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudsize.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
         resources.ApplyResources(Me.ucrNudsize, "ucrNudsize")
         Me.ucrNudsize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudsize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
