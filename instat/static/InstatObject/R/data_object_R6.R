@@ -1993,6 +1993,7 @@ data_object$set("public","set_contrasts_of_factor", function(col_name, new_contr
   else if(!is.character(new_contrasts)) {
     stop("New column name must be of type: character")
   }
+  if(new_contrasts == "user_defined") new_contrasts <- defined_contr_matrix
   contrasts(private$data[[col_name]]) <- new_contrasts
 }
 )
