@@ -28,9 +28,11 @@ Public Class ucrSelectorByDataFrame
 
     Private Sub ucrAvailableDataFrames_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrAvailableDataFrames.DataFrameChanged
         strCurrentDataFrame = ucrAvailableDataFrames.cboAvailableDataFrames.Text
+        If CurrentReceiver Is Nothing OrElse CurrentReceiver.bAttachedToPrimaryDataFrame Then
+            strPrimaryDataFrame = strCurrentDataFrame
+        End If
         LoadList()
         If strPrevDataFrame <> ucrAvailableDataFrames.cboAvailableDataFrames.Text Then
-            OnResetReceivers()
             OnDataFrameChanged()
         End If
     End Sub
@@ -50,7 +52,8 @@ Public Class ucrSelectorByDataFrame
         LoadList()
     End Sub
 
-    Public Sub SetDataframe(strDataframe As String, Optional bEnableDataframe As Boolean = True)
+    Public Overrides Sub SetDataframe(strDataframe As String, Optional bEnableDataframe As Boolean = True, Optional bSilent As Boolean = False)
+        bSilentDataFrameChange = bSilent
         ucrAvailableDataFrames.SetDataframe(strDataframe, bEnableDataframe)
     End Sub
 
@@ -150,5 +153,9 @@ Public Class ucrSelectorByDataFrame
 
     Public Sub SetLabelText(strText As String)
         ucrAvailableDataFrames.SetLabelText(strText)
+    End Sub
+
+    Public Overrides Sub SetPrimaryDataFrameOptions(strNewPrimaryDataFrame As String, bNewOnlyLinkedToPrimaryDataFrames As Boolean, Optional bNewIncludePrimaryDataFrameAsLinked As Boolean = False)
+        ucrAvailableDataFrames.SetPrimaryDataFrameOptions(strNewPrimaryDataFrame:=strNewPrimaryDataFrame, bNewOnlyLinkedToPrimaryDataFrames:=bNewOnlyLinkedToPrimaryDataFrames, bNewIncludePrimaryDataFrameAsLinked:=bNewIncludePrimaryDataFrameAsLinked)
     End Sub
 End Class

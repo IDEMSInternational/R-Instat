@@ -178,16 +178,23 @@ Public Class RLink
         Return RunInternalScript(clsLoadPackages.ToScript(), bSilent:=bSilent)
     End Function
 
-    Public Sub LoadInstatDataObjectFromFile(strFile As String, Optional strComment As String = "")
+    Public Sub LoadInstatDataObjectFromFile(strFile As String, Optional bKeepExisting As Boolean = False, Optional strComment As String = "")
+        Dim clsImportRDS As New RFunction
         Dim clsReadRDS As New RFunction
         Dim strScript As String = ""
         Dim strTemp As String = ""
 
         clsReadRDS.SetRCommand("readRDS")
         clsReadRDS.AddParameter("file", Chr(34) & strFile.Replace("\", "/") & Chr(34))
-        clsReadRDS.SetAssignTo(strInstatDataObject)
-        strTemp = clsReadRDS.ToScript(strScript)
-        RunScript(strScript, strComment:=strComment)
+        clsReadRDS.SetAssignTo("new_RDS")
+
+        clsImportRDS.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_RDS")
+        clsImportRDS.AddParameter("data_RDS", clsRFunctionParameter:=clsReadRDS, iPosition:=0)
+        'This RFunction takes booleans in capitals hence ToUpper
+        clsImportRDS.AddParameter("keep_existing", bKeepExisting.ToString.ToUpper, iPosition:=1)
+
+        strTemp = clsImportRDS.ToScript(strScript)
+        RunScript(strScript & strTemp, strComment:=strComment)
         bInstatObjectExists = True
     End Sub
 
@@ -238,6 +245,29 @@ Public Class RLink
         Return lstDataFrameNames
     End Function
 
+    Public Function GetLinkedToDataFrameNames(strDataName As String, Optional bIncludeSelf As Boolean = True) As List(Of String)
+        Dim chrDataFrameNames As CharacterVector = Nothing
+        Dim lstDataFrameNames As New List(Of String)
+        Dim clsGetDataNames As New RFunction
+        Dim expNames As SymbolicExpression
+
+        clsGetDataNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_linked_to_data_name")
+        clsGetDataNames.AddParameter("from_data_frame", Chr(34) & strDataName & Chr(34), iPosition:=0)
+        If bIncludeSelf Then
+            clsGetDataNames.AddParameter("include_self", "TRUE", iPosition:=2)
+        Else
+            clsGetDataNames.AddParameter("include_self", "FALSE", iPosition:=2)
+        End If
+        If bInstatObjectExists Then
+            expNames = RunInternalScriptGetValue(clsGetDataNames.ToScript(), bSilent:=True)
+            If expNames IsNot Nothing AndAlso Not expNames.Type = Internals.SymbolicExpressionType.Null Then
+                chrDataFrameNames = expNames.AsCharacter
+                lstDataFrameNames.AddRange(chrDataFrameNames)
+            End If
+        End If
+        Return lstDataFrameNames
+    End Function
+
     Public Function GetColumnNames(strDataFrameName As String) As List(Of String)
         Dim chrCurrColumns As CharacterVector = Nothing
         Dim lstCurrColumns As New List(Of String)
@@ -257,14 +287,18 @@ Public Class RLink
     End Function
 
     'bIncludeOverall = True includes an extra item in the combo box for overall i.e. items not at data frame level 
-    Public Sub FillComboDataFrames(ByRef cboDataFrames As ComboBox, Optional bSetDefault As Boolean = True, Optional bIncludeOverall As Boolean = False, Optional strCurrentDataFrame As String = "")
+    Public Sub FillComboDataFrames(ByRef cboDataFrames As ComboBox, Optional bSetDefault As Boolean = True, Optional bIncludeOverall As Boolean = False, Optional strCurrentDataFrame As String = "", Optional bOnlyLinkedToPrimaryDataFrames As Boolean = False, Optional strPrimaryDataFrame As String = "", Optional bIncludePrimaryDataFrameAsLinked As Boolean = True)
         'This sub is filling the cboDataFrames with the relevant dat frame names (obtained by using GetDataFrameNames()) and potentially "[Overall]".  On thing it is doing, is setting the selected index in the cboDataFrames.
         'It is used on the ucrDataFrame in the FillComboBox sub.
         If bInstatObjectExists Then
             If bIncludeOverall Then
                 cboDataFrames.Items.Add("[Overall]") 'Task/question: explain this.
             End If
-            cboDataFrames.Items.AddRange(GetDataFrameNames().ToArray)
+            If bOnlyLinkedToPrimaryDataFrames Then
+                cboDataFrames.Items.AddRange(GetLinkedToDataFrameNames(strPrimaryDataFrame, bIncludePrimaryDataFrameAsLinked).ToArray)
+            Else
+                cboDataFrames.Items.AddRange(GetDataFrameNames().ToArray)
+            End If
             AdjustComboBoxWidth(cboDataFrames)
             'Task/Question: From what I understood, if bSetDefault is true or if the strCurrentDataFrame (given as an argument) is actually not in cboDataFrames (is this case generic or should it never happen ?), then the selected Index should be the current worksheet.
             If (bSetDefault OrElse cboDataFrames.Items.IndexOf(strCurrentDataFrame) = -1) AndAlso (grdDataView IsNot Nothing) AndAlso (grdDataView.CurrentWorksheet IsNot Nothing) Then
