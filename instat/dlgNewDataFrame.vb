@@ -25,8 +25,10 @@ Public Class dlgNewDataFrame
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
+        End If
+        If bReset Then
+            SetDefaults()
         End If
         SetRCodeforControls(bReset)
         bReset = False
