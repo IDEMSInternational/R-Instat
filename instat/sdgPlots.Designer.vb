@@ -79,6 +79,8 @@ Partial Class sdgPlots
         Me.tbpTheme = New System.Windows.Forms.TabPage()
         Me.urChkSelectTheme = New instat.ucrCheck()
         Me.grpCommonOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrChkXtickMarkerAngle = New instat.ucrCheck()
+        Me.ucrNudAngle = New instat.ucrNud()
         Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
         Me.urChkLegendPosition = New instat.ucrCheck()
         Me.lblFont = New System.Windows.Forms.Label()
@@ -398,11 +400,29 @@ Partial Class sdgPlots
         '
         'grpCommonOptions
         '
+        Me.grpCommonOptions.Controls.Add(Me.ucrChkXtickMarkerAngle)
+        Me.grpCommonOptions.Controls.Add(Me.ucrNudAngle)
         Me.grpCommonOptions.Controls.Add(Me.ucrInputLegendPosition)
         Me.grpCommonOptions.Controls.Add(Me.urChkLegendPosition)
         resources.ApplyResources(Me.grpCommonOptions, "grpCommonOptions")
         Me.grpCommonOptions.Name = "grpCommonOptions"
         Me.grpCommonOptions.TabStop = False
+        '
+        'ucrChkXtickMarkerAngle
+        '
+        Me.ucrChkXtickMarkerAngle.Checked = False
+        resources.ApplyResources(Me.ucrChkXtickMarkerAngle, "ucrChkXtickMarkerAngle")
+        Me.ucrChkXtickMarkerAngle.Name = "ucrChkXtickMarkerAngle"
+        '
+        'ucrNudAngle
+        '
+        Me.ucrNudAngle.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAngle.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudAngle, "ucrNudAngle")
+        Me.ucrNudAngle.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudAngle.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAngle.Name = "ucrNudAngle"
+        Me.ucrNudAngle.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrInputLegendPosition
         '
@@ -531,6 +551,8 @@ Partial Class sdgPlots
     Friend WithEvents ucrChkHorizontalplot As ucrCheck
     Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
     Friend WithEvents urChkLegendPosition As ucrCheck
+    Friend WithEvents ucrChkXtickMarkerAngle As ucrCheck
+    Friend WithEvents ucrNudAngle As ucrNud
 End Class
 
 

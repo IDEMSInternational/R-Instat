@@ -1023,8 +1023,50 @@
   <data name="&gt;&gt;urChkSelectTheme.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="ucrChkXtickMarkerAngle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 48</value>
+  </data>
+  <data name="ucrChkXtickMarkerAngle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>135, 20</value>
+  </data>
+  <data name="ucrChkXtickMarkerAngle.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;ucrChkXtickMarkerAngle.Name" xml:space="preserve">
+    <value>ucrChkXtickMarkerAngle</value>
+  </data>
+  <data name="&gt;&gt;ucrChkXtickMarkerAngle.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkXtickMarkerAngle.Parent" xml:space="preserve">
+    <value>grpCommonOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkXtickMarkerAngle.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrNudAngle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>148, 48</value>
+  </data>
+  <data name="ucrNudAngle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudAngle.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;ucrNudAngle.Name" xml:space="preserve">
+    <value>ucrNudAngle</value>
+  </data>
+  <data name="&gt;&gt;ucrNudAngle.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudAngle.Parent" xml:space="preserve">
+    <value>grpCommonOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrNudAngle.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="ucrInputLegendPosition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>121, 20</value>
+    <value>148, 20</value>
   </data>
   <data name="ucrInputLegendPosition.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>21, 17, 21, 17</value>
@@ -1045,7 +1087,7 @@
     <value>grpCommonOptions</value>
   </data>
   <data name="&gt;&gt;ucrInputLegendPosition.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="urChkLegendPosition.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 22</value>
@@ -1066,7 +1108,7 @@
     <value>grpCommonOptions</value>
   </data>
   <data name="&gt;&gt;urChkLegendPosition.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="grpCommonOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 65</value>

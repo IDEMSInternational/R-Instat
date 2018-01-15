@@ -47,6 +47,7 @@ Public Class sdgPlots
     Private bRCodeSet As Boolean = False
     Private bResetThemes As Boolean = True
     Private ucrBaseSelector As ucrSelector
+    Dim clsElementText As New RFunction
 
     'See bLayersDefaultIsGolobal below.
 
@@ -209,6 +210,13 @@ Public Class sdgPlots
         urChkLegendPosition.AddParameterPresentCondition(True, "legend.position")
         urChkLegendPosition.AddParameterPresentCondition(False, "legend.position", False)
 
+        ucrChkXtickMarkerAngle.SetText("X Labels Angle")
+        ucrChkXtickMarkerAngle.AddToLinkedControls(ucrNudAngle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrNudAngle.SetParameter(New RParameter("angle"))
+        ucrNudAngle.SetMinMax(0, 360)
+        ucrChkXtickMarkerAngle.AddFunctionNamesCondition(True, "element_text")
+        ucrChkXtickMarkerAngle.AddFunctionNamesCondition(False, "element_text", False)
+
         'coordiantes tab
         ucrChkHorizontalplot.SetText("Horizontal Plot (coord-flip)")
         clsCoordFlipFunc.SetPackageName("ggplot2")
@@ -297,6 +305,9 @@ Public Class sdgPlots
         'themes tab
         ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         urChkLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+
+        ucrChkXtickMarkerAngle.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudAngle.SetRCode(clsElementText, bReset, bCloneIfNeeded:=True)
 
         'coordinates tab
         ucrChkHorizontalplot.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
@@ -696,10 +707,21 @@ Public Class sdgPlots
     End Sub
 
     Private Sub urChkLegendPosition_ControlValueChanged() Handles urChkLegendPosition.ControlValueChanged
-        If urChkLegendPosition.Checked Then
+        If urChkLegendPosition.Checked OrElse ucrChkXtickMarkerAngle.Checked Then
             clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction)
         Else
             clsBaseOperator.RemoveParameterByName("theme")
+        End If
+    End Sub
+
+    Private Sub ucrChkXtickMarkerAngle_ControlValueChanged() Handles ucrChkXtickMarkerAngle.ControlValueChanged
+        clsElementText.SetPackageName("ggplot2")
+        clsElementText.SetRCommand("element_text")
+
+        If ucrChkXtickMarkerAngle.Checked Then
+            clsThemeFunction.AddParameter("axis.text.x", clsRFunctionParameter:=clsElementText)
+        Else
+            clsThemeFunction.RemoveParameterByName("axis.text.x")
         End If
     End Sub
 End Class
