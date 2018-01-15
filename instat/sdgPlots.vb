@@ -214,8 +214,8 @@ Public Class sdgPlots
         ucrChkXtickMarkerAngle.AddToLinkedControls(ucrNudAngle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrNudAngle.SetParameter(New RParameter("angle"))
         ucrNudAngle.SetMinMax(0, 360)
-        ucrChkXtickMarkerAngle.AddFunctionNamesCondition(True, "element_text")
-        ucrChkXtickMarkerAngle.AddFunctionNamesCondition(False, "element_text", False)
+        ucrChkXtickMarkerAngle.AddParameterPresentCondition(True, "axis.text.x")
+        ucrChkXtickMarkerAngle.AddParameterPresentCondition(False, "axis.text.x", False)
 
         'coordiantes tab
         ucrChkHorizontalplot.SetText("Horizontal Plot (coord-flip)")
