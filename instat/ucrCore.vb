@@ -46,6 +46,7 @@ Public Class ucrCore
 
     'Optional value
     'If parameter has this value then it will be removed from RCodeStructure 
+    'TODO check implementation of this. Does not seen to be used
     Public objValueToRemoveParameter As Object
 
     'ValueChanged is raised when a new value has been set in the control
@@ -73,7 +74,7 @@ Public Class ucrCore
     Public bLinkedHideIfParameterMissing As Boolean = False
     Public bLinkedChangeToDefaultState As Boolean = False
 
-    Protected ctrLinkedDisaplyControl As Control
+    Protected lstCtrLinkedDisplayControls As List(Of Control)
 
     'We may set the R code for the control (because it's easier to set for a whole dialog)
     'but do not want the control to update from the code. Set to False in this case.
@@ -390,7 +391,15 @@ Public Class ucrCore
     End Function
 
     Public Sub SetLinkedDisplayControl(ctrNewControl As Control)
-        ctrLinkedDisaplyControl = ctrNewControl
+        Dim lstCtrNewControls As New List(Of Control)
+        lstCtrNewControls.Add(ctrNewControl)
+
+        SetLinkedDisplayControl(lstCtrNewControls)
+
+    End Sub
+
+    Public Sub SetLinkedDisplayControl(lstCtrNewControls As List(Of Control))
+        lstCtrLinkedDisplayControls = lstCtrNewControls
         SetLinkedDisplayControlVisibility()
     End Sub
 
@@ -399,10 +408,26 @@ Public Class ucrCore
     End Sub
 
     Private Sub SetLinkedDisplayControlVisibility()
-        If ctrLinkedDisaplyControl IsNot Nothing Then
-            ctrLinkedDisaplyControl.Visible = Visible
-        End If
+        SetLinkedDisplayControlVisibilityAndReturnContainsGroupBox(Visible)
     End Sub
+
+    Private Function SetLinkedDisplayControlVisibilityAndReturnContainsGroupBox(bVisible As Boolean) As Boolean
+        Dim ctr As Control
+        Dim bContainsGroupBox As Boolean = False
+
+        If lstCtrLinkedDisplayControls IsNot Nothing Then
+            For Each ctr In lstCtrLinkedDisplayControls
+                ctr.Visible = bVisible
+
+                If (TypeOf ctr Is GroupBox) Then
+                    bContainsGroupBox = True
+                End If
+            Next
+
+        End If
+
+        Return bContainsGroupBox
+    End Function
 
     Protected Overridable Sub SetToValue(objTemp As Object)
     End Sub
@@ -507,13 +532,13 @@ Public Class ucrCore
     End Sub
 
     Public Sub SetVisible(bVisible As Boolean)
-        If ctrLinkedDisaplyControl IsNot Nothing AndAlso TypeOf ctrLinkedDisaplyControl Is GroupBox Then
-            ctrLinkedDisaplyControl.Visible = bVisible
-        Else
+        'TODO: check how this should behave with linked group boxes
+        If Not SetLinkedDisplayControlVisibilityAndReturnContainsGroupBox(bVisible) Then
             Visible = bVisible
         End If
-        SetLinkedDisplayControlVisibility()
+
         bIsVisible = bVisible
+
     End Sub
 
     Public Sub SetDefaultState(objState As Object)
