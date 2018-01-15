@@ -405,7 +405,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>423, 478</value>
+    <value>423, 450</value>
   </data>
   <data name="lblGraphTitle.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>

@@ -20,7 +20,6 @@ Public Class dlgInventoryPlot
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
     Private clsDefaultRFunction As New RFunction
-
     Private clsKeyColours As New RFunction
     Private clsListFunc As New RFunction
     Private clsBreaksFunc As New RFunction
