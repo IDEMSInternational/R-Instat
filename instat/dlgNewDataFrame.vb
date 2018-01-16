@@ -14,9 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
-Imports RDotNet
 
 Public Class dlgNewDataFrame
     Private clsOverallFunction, clsMatrixFunction As New RFunction
@@ -24,18 +22,18 @@ Public Class dlgNewDataFrame
     Private bReset As Boolean = True
 
     Private Sub dlgNewDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
         End If
         If bReset Then
-            'SetDefaults()
+            SetDefaults()
         End If
         SetRCodeforControls(bReset)
         bReset = False
         'temporary fix for autoTranslate(Me) which overwrites the label text to Label1
         ucrNewDFName.SetLabelText("New Data Frame Name:")
-        'autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
