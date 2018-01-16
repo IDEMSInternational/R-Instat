@@ -48,6 +48,9 @@ Partial Class dlgUnstack
         Me.ucrNewDFName = New instat.ucrSave()
         Me.ucrChkDropMissingCombinations = New instat.ucrCheck()
         Me.ucrSelectorForUnstack = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
         Me.SuspendLayout()
         '
         'lblFactorToUnstackBy
@@ -118,10 +121,43 @@ Partial Class dlgUnstack
         resources.ApplyResources(Me.ucrSelectorForUnstack, "ucrSelectorForUnstack")
         Me.ucrSelectorForUnstack.Name = "ucrSelectorForUnstack"
         '
+        'RadioButton1
+        '
+        resources.ApplyResources(Me.RadioButton1, "RadioButton1")
+        Me.RadioButton1.BackColor = System.Drawing.SystemColors.Control
+        Me.RadioButton1.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.RadioButton1.FlatAppearance.BorderSize = 2
+        Me.RadioButton1.Name = "RadioButton1"
+        Me.RadioButton1.TabStop = True
+        Me.RadioButton1.UseVisualStyleBackColor = False
+        '
+        'RadioButton2
+        '
+        resources.ApplyResources(Me.RadioButton2, "RadioButton2")
+        Me.RadioButton2.BackColor = System.Drawing.SystemColors.Control
+        Me.RadioButton2.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.RadioButton2.FlatAppearance.BorderSize = 2
+        Me.RadioButton2.Name = "RadioButton2"
+        Me.RadioButton2.TabStop = True
+        Me.RadioButton2.UseVisualStyleBackColor = False
+        '
+        'RadioButton3
+        '
+        resources.ApplyResources(Me.RadioButton3, "RadioButton3")
+        Me.RadioButton3.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.RadioButton3.FlatAppearance.BorderSize = 2
+        Me.RadioButton3.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.RadioButton3.Name = "RadioButton3"
+        Me.RadioButton3.TabStop = True
+        Me.RadioButton3.UseVisualStyleBackColor = True
+        '
         'dlgUnstack
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.RadioButton3)
+        Me.Controls.Add(Me.RadioButton2)
+        Me.Controls.Add(Me.RadioButton1)
         Me.Controls.Add(Me.ucrNewDFName)
         Me.Controls.Add(Me.ucrChkDropMissingCombinations)
         Me.Controls.Add(Me.ucrIDColumns)
@@ -151,4 +187,7 @@ Partial Class dlgUnstack
     Friend WithEvents lblIDColumns As Label
     Friend WithEvents ucrNewDFName As ucrSave
     Friend WithEvents ucrChkDropMissingCombinations As ucrCheck
+    Friend WithEvents RadioButton3 As RadioButton
+    Friend WithEvents RadioButton2 As RadioButton
+    Friend WithEvents RadioButton1 As RadioButton
 End Class
