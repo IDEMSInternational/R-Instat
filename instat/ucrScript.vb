@@ -17,6 +17,7 @@
 Imports System.IO
 Public Class ucrScript
     Private strComment As String = "Code run from Script Window"
+    Private strCurrentDirectory As String = ""
     Public strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
 
     Public Sub CopyText()
@@ -88,9 +89,9 @@ Public Class ucrScript
         End Try
     End Sub
 
-    Private Sub SaveScriptToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuSaveScript.Click
+    Private Sub mnuSaveScript_Click(sender As Object, e As EventArgs) Handles mnuSaveScript.Click
         Using dlgSave As New SaveFileDialog
-            dlgSave.Title = "Save Script as Text File"
+            dlgSave.Title = "Save Script To File"
             dlgSave.Filter = "Text file (*.txt)|*.txt"
             dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
 
@@ -99,4 +100,19 @@ Public Class ucrScript
             End If
         End Using
     End Sub
+
+    Private Sub mnuOpenScriptFromFile_Click(sender As Object, e As EventArgs) Handles mnuOpenScriptFromFile.Click
+
+        Using dlgOpen As New OpenFileDialog
+            dlgOpen.Title = "Open Script From Text File"
+            dlgOpen.Filter = "Text File|*.txt"
+            dlgOpen.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+
+            If dlgOpen.ShowDialog() = DialogResult.OK Then
+                txtScript.Clear()
+                txtScript.Text = File.ReadAllText(dlgOpen.FileName)
+            End If
+        End Using
+    End Sub
+
 End Class

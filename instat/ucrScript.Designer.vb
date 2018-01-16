@@ -44,10 +44,11 @@ Partial Class ucrScript
         Me.mnuRunSelectedText = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClearContents = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOpenScript = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuSaveScript = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOpenScriptFromFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdRun = New System.Windows.Forms.Button()
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
-        Me.mnuSaveScript = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuContextScript.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
         Me.SuspendLayout()
@@ -66,27 +67,39 @@ Partial Class ucrScript
         '
         'mnuContextScript
         '
-        Me.mnuContextScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuRunSelectedText, Me.mnuClearContents, Me.mnuOpenScript, Me.mnuSaveScript})
+        Me.mnuContextScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuRunSelectedText, Me.mnuOpenScript, Me.mnuOpenScriptFromFile, Me.mnuSaveScript, Me.mnuClearContents})
         Me.mnuContextScript.Name = "mnuContextLogFile"
-        Me.mnuContextScript.Size = New System.Drawing.Size(167, 114)
+        Me.mnuContextScript.Size = New System.Drawing.Size(194, 136)
         '
         'mnuRunSelectedText
         '
         Me.mnuRunSelectedText.Name = "mnuRunSelectedText"
-        Me.mnuRunSelectedText.Size = New System.Drawing.Size(166, 22)
+        Me.mnuRunSelectedText.Size = New System.Drawing.Size(193, 22)
         Me.mnuRunSelectedText.Text = "Run Selected Text"
         '
         'mnuClearContents
         '
         Me.mnuClearContents.Name = "mnuClearContents"
-        Me.mnuClearContents.Size = New System.Drawing.Size(166, 22)
+        Me.mnuClearContents.Size = New System.Drawing.Size(193, 22)
         Me.mnuClearContents.Text = "Clear Contents"
         '
         'mnuOpenScript
         '
         Me.mnuOpenScript.Name = "mnuOpenScript"
-        Me.mnuOpenScript.Size = New System.Drawing.Size(166, 22)
-        Me.mnuOpenScript.Text = "Open Script"
+        Me.mnuOpenScript.Size = New System.Drawing.Size(193, 22)
+        Me.mnuOpenScript.Text = "Open Script in RStudio"
+        '
+        'mnuSaveScript
+        '
+        Me.mnuSaveScript.Name = "mnuSaveScript"
+        Me.mnuSaveScript.Size = New System.Drawing.Size(193, 22)
+        Me.mnuSaveScript.Text = "Save Script To File"
+        '
+        'mnuOpenScriptFromFile
+        '
+        Me.mnuOpenScriptFromFile.Name = "mnuOpenScriptFromFile"
+        Me.mnuOpenScriptFromFile.Size = New System.Drawing.Size(193, 22)
+        Me.mnuOpenScriptFromFile.Text = "Open Script From File"
         '
         'cmdRun
         '
@@ -129,12 +142,6 @@ Partial Class ucrScript
         Me.tlpTableContainer.Size = New System.Drawing.Size(411, 314)
         Me.tlpTableContainer.TabIndex = 9
         '
-        'mnuSaveScript
-        '
-        Me.mnuSaveScript.Name = "mnuSaveScript"
-        Me.mnuSaveScript.Size = New System.Drawing.Size(166, 22)
-        Me.mnuSaveScript.Text = "Save Script"
-        '
         'ucrScript
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -159,4 +166,5 @@ Partial Class ucrScript
     Friend WithEvents mnuClearContents As ToolStripMenuItem
     Friend WithEvents mnuOpenScript As ToolStripMenuItem
     Friend WithEvents mnuSaveScript As ToolStripMenuItem
+    Friend WithEvents mnuOpenScriptFromFile As ToolStripMenuItem
 End Class
