@@ -1104,7 +1104,8 @@ instat_object$set("public","create_factor_data_frame", function(data_name, facto
       factor_named <- factor
       names(factor_named) <- factor
       curr_factor_df_name <- self$get_linked_to_data_name(data_name, factor_named)
-      self$delete_dataframe(curr_factor_df_name)
+      # TODO what if there is more than 1?
+      if(length(curr_factor_df_name) > 0) self$delete_dataframe(curr_factor_df_name[1])
     }
     else {
       warning("replace = FALSE so no action will be taken.")
@@ -1255,7 +1256,7 @@ instat_object$set("public", "add_single_climdex_index", function(data_name, indi
     ind_data <- data.frame(factor(names(indices)), indices, row.names = NULL)
     names(ind_data) <- c(year, index_name)
     linked_data_name <- self$get_linked_to_data_name(data_name, year)
-    if(linked_data_name == "") {
+    if(length(linked_data_name) == 0) {
       data_list = list(ind_data)
       new_data_name <- paste(data_name, "by", year, sep = "_")
       new_data_name <- next_default_item(prefix = new_data_name , existing_names = self$get_data_names(), include_index = FALSE)
@@ -1267,6 +1268,8 @@ instat_object$set("public", "add_single_climdex_index", function(data_name, indi
       self$add_link(from_data_frame = data_name, to_data_frame = new_data_name, link_pairs = key_list, type = keyed_link_label)
     }
     else {
+      # TODO what if there are multiple?
+      linked_data_name <- linked_data_name[1]
       year_col_name_linked <- self$get_equivalent_columns(from_data_name = data_name, to_data_name = linked_data_name, columns = year)
       by <- year
       names(by) <- year_col_name_linked
@@ -1289,7 +1292,7 @@ instat_object$set("public", "add_single_climdex_index", function(data_name, indi
     names(ind_data) <- c(year, month, index_name)
     ind_data[[month]] <- as.numeric(ind_data[[month]])
     linked_data_name <- self$get_linked_to_data_name(data_name, c(year, month))
-    if(linked_data_name == "") {
+    if(length(linked_data_name) == 0) {
       data_list = list(ind_data)
       new_data_name <- paste(data_name, "by", year, month, sep = "_")
       new_data_name <- next_default_item(prefix = new_data_name , existing_names = self$get_data_names(), include_index = FALSE)
@@ -1301,6 +1304,8 @@ instat_object$set("public", "add_single_climdex_index", function(data_name, indi
       self$add_link(from_data_frame = data_name, to_data_frame = new_data_name, link_pairs = key_list, type = keyed_link_label)
     }
     else {
+      # TODO what if there are multiple?
+      linked_data_name <- linked_data_name[1]
       year_col_name_linked <- self$get_equivalent_columns(from_data_name = data_name, to_data_name = linked_data_name, columns = year)
       month_col_name_linked <- self$get_equivalent_columns(from_data_name = data_name, to_data_name = linked_data_name, columns = month)
       by <- c(year, month)
