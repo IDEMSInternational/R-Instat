@@ -47,6 +47,7 @@ Partial Class ucrScript
         Me.cmdRun = New System.Windows.Forms.Button()
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
+        Me.mnuSaveScript = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuContextScript.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
         Me.SuspendLayout()
@@ -65,9 +66,9 @@ Partial Class ucrScript
         '
         'mnuContextScript
         '
-        Me.mnuContextScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuRunSelectedText, Me.mnuClearContents, Me.mnuOpenScript})
+        Me.mnuContextScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuRunSelectedText, Me.mnuClearContents, Me.mnuOpenScript, Me.mnuSaveScript})
         Me.mnuContextScript.Name = "mnuContextLogFile"
-        Me.mnuContextScript.Size = New System.Drawing.Size(167, 70)
+        Me.mnuContextScript.Size = New System.Drawing.Size(167, 114)
         '
         'mnuRunSelectedText
         '
@@ -128,6 +129,12 @@ Partial Class ucrScript
         Me.tlpTableContainer.Size = New System.Drawing.Size(411, 314)
         Me.tlpTableContainer.TabIndex = 9
         '
+        'mnuSaveScript
+        '
+        Me.mnuSaveScript.Name = "mnuSaveScript"
+        Me.mnuSaveScript.Size = New System.Drawing.Size(166, 22)
+        Me.mnuSaveScript.Text = "Save Script"
+        '
         'ucrScript
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -151,4 +158,5 @@ Partial Class ucrScript
     Friend WithEvents mnuRunSelectedText As ToolStripMenuItem
     Friend WithEvents mnuClearContents As ToolStripMenuItem
     Friend WithEvents mnuOpenScript As ToolStripMenuItem
+    Friend WithEvents mnuSaveScript As ToolStripMenuItem
 End Class

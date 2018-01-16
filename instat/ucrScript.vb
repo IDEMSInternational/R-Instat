@@ -88,4 +88,15 @@ Public Class ucrScript
         End Try
     End Sub
 
+    Private Sub SaveScriptToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuSaveScript.Click
+        Using dlgSave As New SaveFileDialog
+            dlgSave.Title = "Save Script as Text File"
+            dlgSave.Filter = "Text file (*.txt)|*.txt"
+            dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+
+            If dlgSave.ShowDialog() = DialogResult.OK Then
+                My.Computer.FileSystem.WriteAllText(dlgSave.FileName, txtScript.Text, False)
+            End If
+        End Using
+    End Sub
 End Class
