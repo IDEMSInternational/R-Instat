@@ -295,12 +295,6 @@
     <Compile Include="dlgParallelCoordinatePlot.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgRestoreLevelHierachy.Designer.vb">
-      <DependentUpon>dlgRestoreLevelHierachy.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgRestoreLevelHierachy.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgVariableSets.Designer.vb">
       <DependentUpon>dlgVariableSets.vb</DependentUpon>
     </Compile>
@@ -2732,9 +2726,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRenameDataFrame.resx">
       <DependentUpon>dlgRenameDataFrame.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgRestoreLevelHierachy.resx">
-      <DependentUpon>dlgRestoreLevelHierachy.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRowNamesOrNumbers.fr-FR.resx">
       <DependentUpon>dlgRowNamesOrNumbers.vb</DependentUpon>
