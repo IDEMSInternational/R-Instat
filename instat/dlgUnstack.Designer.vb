@@ -41,16 +41,16 @@ Partial Class dlgUnstack
         Me.lblFactorToUnstackBy = New System.Windows.Forms.Label()
         Me.lblColumnToUnstack = New System.Windows.Forms.Label()
         Me.lblIDColumns = New System.Windows.Forms.Label()
+        Me.rdoSingle = New System.Windows.Forms.RadioButton()
+        Me.rdoMultiple = New System.Windows.Forms.RadioButton()
+        Me.rdoRestoreHierarchy = New System.Windows.Forms.RadioButton()
+        Me.ucrNewDFName = New instat.ucrSave()
+        Me.ucrChkDropMissingCombinations = New instat.ucrCheck()
         Me.ucrIDColumns = New instat.ucrReceiverMultiple()
         Me.ucrColumnToUnstackReceiver = New instat.ucrReceiverSingle()
         Me.ucrFactorToUnstackReceiver = New instat.ucrReceiverSingle()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrNewDFName = New instat.ucrSave()
-        Me.ucrChkDropMissingCombinations = New instat.ucrCheck()
         Me.ucrSelectorForUnstack = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
         'lblFactorToUnstackBy
@@ -70,6 +70,49 @@ Partial Class dlgUnstack
         resources.ApplyResources(Me.lblIDColumns, "lblIDColumns")
         Me.lblIDColumns.Name = "lblIDColumns"
         Me.lblIDColumns.Tag = "ID_Columns"
+        '
+        'rdoSingle
+        '
+        resources.ApplyResources(Me.rdoSingle, "rdoSingle")
+        Me.rdoSingle.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoSingle.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSingle.FlatAppearance.BorderSize = 2
+        Me.rdoSingle.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSingle.Name = "rdoSingle"
+        Me.rdoSingle.TabStop = True
+        Me.rdoSingle.UseVisualStyleBackColor = False
+        '
+        'rdoMultiple
+        '
+        resources.ApplyResources(Me.rdoMultiple, "rdoMultiple")
+        Me.rdoMultiple.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoMultiple.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMultiple.FlatAppearance.BorderSize = 2
+        Me.rdoMultiple.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMultiple.Name = "rdoMultiple"
+        Me.rdoMultiple.TabStop = True
+        Me.rdoMultiple.UseVisualStyleBackColor = False
+        '
+        'rdoRestoreHierarchy
+        '
+        resources.ApplyResources(Me.rdoRestoreHierarchy, "rdoRestoreHierarchy")
+        Me.rdoRestoreHierarchy.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoRestoreHierarchy.FlatAppearance.BorderSize = 2
+        Me.rdoRestoreHierarchy.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoRestoreHierarchy.Name = "rdoRestoreHierarchy"
+        Me.rdoRestoreHierarchy.TabStop = True
+        Me.rdoRestoreHierarchy.UseVisualStyleBackColor = True
+        '
+        'ucrNewDFName
+        '
+        resources.ApplyResources(Me.ucrNewDFName, "ucrNewDFName")
+        Me.ucrNewDFName.Name = "ucrNewDFName"
+        '
+        'ucrChkDropMissingCombinations
+        '
+        Me.ucrChkDropMissingCombinations.Checked = False
+        resources.ApplyResources(Me.ucrChkDropMissingCombinations, "ucrChkDropMissingCombinations")
+        Me.ucrChkDropMissingCombinations.Name = "ucrChkDropMissingCombinations"
         '
         'ucrIDColumns
         '
@@ -98,22 +141,6 @@ Partial Class dlgUnstack
         Me.ucrFactorToUnstackReceiver.strNcFilePath = ""
         Me.ucrFactorToUnstackReceiver.ucrSelector = Nothing
         '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrNewDFName
-        '
-        resources.ApplyResources(Me.ucrNewDFName, "ucrNewDFName")
-        Me.ucrNewDFName.Name = "ucrNewDFName"
-        '
-        'ucrChkDropMissingCombinations
-        '
-        Me.ucrChkDropMissingCombinations.Checked = False
-        resources.ApplyResources(Me.ucrChkDropMissingCombinations, "ucrChkDropMissingCombinations")
-        Me.ucrChkDropMissingCombinations.Name = "ucrChkDropMissingCombinations"
-        '
         'ucrSelectorForUnstack
         '
         Me.ucrSelectorForUnstack.bShowHiddenColumns = False
@@ -121,43 +148,18 @@ Partial Class dlgUnstack
         resources.ApplyResources(Me.ucrSelectorForUnstack, "ucrSelectorForUnstack")
         Me.ucrSelectorForUnstack.Name = "ucrSelectorForUnstack"
         '
-        'RadioButton1
+        'ucrBase
         '
-        resources.ApplyResources(Me.RadioButton1, "RadioButton1")
-        Me.RadioButton1.BackColor = System.Drawing.SystemColors.Control
-        Me.RadioButton1.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.RadioButton1.FlatAppearance.BorderSize = 2
-        Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.TabStop = True
-        Me.RadioButton1.UseVisualStyleBackColor = False
-        '
-        'RadioButton2
-        '
-        resources.ApplyResources(Me.RadioButton2, "RadioButton2")
-        Me.RadioButton2.BackColor = System.Drawing.SystemColors.Control
-        Me.RadioButton2.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.RadioButton2.FlatAppearance.BorderSize = 2
-        Me.RadioButton2.Name = "RadioButton2"
-        Me.RadioButton2.TabStop = True
-        Me.RadioButton2.UseVisualStyleBackColor = False
-        '
-        'RadioButton3
-        '
-        resources.ApplyResources(Me.RadioButton3, "RadioButton3")
-        Me.RadioButton3.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.RadioButton3.FlatAppearance.BorderSize = 2
-        Me.RadioButton3.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.RadioButton3.Name = "RadioButton3"
-        Me.RadioButton3.TabStop = True
-        Me.RadioButton3.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
         '
         'dlgUnstack
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.RadioButton3)
-        Me.Controls.Add(Me.RadioButton2)
-        Me.Controls.Add(Me.RadioButton1)
+        Me.Controls.Add(Me.rdoRestoreHierarchy)
+        Me.Controls.Add(Me.rdoMultiple)
+        Me.Controls.Add(Me.rdoSingle)
         Me.Controls.Add(Me.ucrNewDFName)
         Me.Controls.Add(Me.ucrChkDropMissingCombinations)
         Me.Controls.Add(Me.ucrIDColumns)
@@ -187,7 +189,7 @@ Partial Class dlgUnstack
     Friend WithEvents lblIDColumns As Label
     Friend WithEvents ucrNewDFName As ucrSave
     Friend WithEvents ucrChkDropMissingCombinations As ucrCheck
-    Friend WithEvents RadioButton3 As RadioButton
-    Friend WithEvents RadioButton2 As RadioButton
-    Friend WithEvents RadioButton1 As RadioButton
+    Friend WithEvents rdoRestoreHierarchy As RadioButton
+    Friend WithEvents rdoMultiple As RadioButton
+    Friend WithEvents rdoSingle As RadioButton
 End Class
