@@ -28,7 +28,7 @@ Public Class dlgNewDataFrame
             bFirstLoad = False
         End If
         If bReset Then
-            SetDefaults()
+            'SetDefaults()
         End If
         SetRCodeforControls(bReset)
         bReset = False
