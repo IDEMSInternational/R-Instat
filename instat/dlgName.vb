@@ -70,9 +70,6 @@ Public Class dlgName
         ucrInputNewName.Reset()
         ucrInputVariableLabel.Reset()
 
-        ucrInputNewName.SetName("")
-        ucrInputVariableLabel.SetName("")
-
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
 
