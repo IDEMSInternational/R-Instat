@@ -15,17 +15,26 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+
 Public Class dlgPICSACrops
     Public bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+
     Private Sub dlgPICSACrops_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+
         TestOKEnabled()
     End Sub
+
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 480
 
@@ -37,12 +46,22 @@ Public Class dlgPICSACrops
 
     End Sub
 
-    Private Sub TestOKEnabled()
-
-    End Sub
-
     Private Sub SetDefaults()
         TestOKEnabled()
+    End Sub
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        'SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
+    End Sub
+
+    Private Sub TestOKEnabled()
+
     End Sub
 
 
