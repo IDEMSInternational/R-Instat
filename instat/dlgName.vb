@@ -29,7 +29,6 @@ Public Class dlgName
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
         If bReset Then
@@ -40,7 +39,6 @@ Public Class dlgName
         If bUseSelectedColumn Then
             SetSelectedColumn()
         End If
-
     End Sub
 
     Private Sub InitialiseDialog()
