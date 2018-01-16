@@ -108,7 +108,7 @@ Partial Class dlgPICSACrops
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(403, 43)
+        Me.Label1.Location = New System.Drawing.Point(383, 71)
         Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(52, 20)
@@ -119,7 +119,7 @@ Partial Class dlgPICSACrops
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(404, 81)
+        Me.Label2.Location = New System.Drawing.Point(619, 9)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(51, 20)
@@ -130,7 +130,7 @@ Partial Class dlgPICSACrops
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(410, 115)
+        Me.Label3.Location = New System.Drawing.Point(619, 71)
         Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(45, 20)
@@ -141,7 +141,7 @@ Partial Class dlgPICSACrops
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(381, 151)
+        Me.Label4.Location = New System.Drawing.Point(619, 135)
         Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(70, 20)
@@ -152,7 +152,7 @@ Partial Class dlgPICSACrops
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(399, 229)
+        Me.Label5.Location = New System.Drawing.Point(383, 170)
         Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(52, 20)
@@ -163,7 +163,7 @@ Partial Class dlgPICSACrops
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(402, 264)
+        Me.Label6.Location = New System.Drawing.Point(383, 226)
         Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(46, 20)
@@ -605,7 +605,7 @@ Partial Class dlgPICSACrops
         'UcrReceiverEnd
         '
         Me.UcrReceiverEnd.frmParent = Me
-        Me.UcrReceiverEnd.Location = New System.Drawing.Point(461, 264)
+        Me.UcrReceiverEnd.Location = New System.Drawing.Point(387, 251)
         Me.UcrReceiverEnd.Margin = New System.Windows.Forms.Padding(0)
         Me.UcrReceiverEnd.Name = "UcrReceiverEnd"
         Me.UcrReceiverEnd.Selector = Nothing
@@ -617,7 +617,7 @@ Partial Class dlgPICSACrops
         'UcrReceiverStart
         '
         Me.UcrReceiverStart.frmParent = Me
-        Me.UcrReceiverStart.Location = New System.Drawing.Point(461, 229)
+        Me.UcrReceiverStart.Location = New System.Drawing.Point(387, 190)
         Me.UcrReceiverStart.Margin = New System.Windows.Forms.Padding(0)
         Me.UcrReceiverStart.Name = "UcrReceiverStart"
         Me.UcrReceiverStart.Selector = Nothing
@@ -629,7 +629,7 @@ Partial Class dlgPICSACrops
         'UcrReceiverDate
         '
         Me.UcrReceiverDate.frmParent = Me
-        Me.UcrReceiverDate.Location = New System.Drawing.Point(461, 43)
+        Me.UcrReceiverDate.Location = New System.Drawing.Point(387, 95)
         Me.UcrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
         Me.UcrReceiverDate.Name = "UcrReceiverDate"
         Me.UcrReceiverDate.Selector = Nothing
@@ -641,7 +641,7 @@ Partial Class dlgPICSACrops
         'UcrReceiverRainfall
         '
         Me.UcrReceiverRainfall.frmParent = Me
-        Me.UcrReceiverRainfall.Location = New System.Drawing.Point(461, 151)
+        Me.UcrReceiverRainfall.Location = New System.Drawing.Point(623, 159)
         Me.UcrReceiverRainfall.Margin = New System.Windows.Forms.Padding(0)
         Me.UcrReceiverRainfall.Name = "UcrReceiverRainfall"
         Me.UcrReceiverRainfall.Selector = Nothing
@@ -653,7 +653,7 @@ Partial Class dlgPICSACrops
         'UcrReceiverDay
         '
         Me.UcrReceiverDay.frmParent = Me
-        Me.UcrReceiverDay.Location = New System.Drawing.Point(461, 115)
+        Me.UcrReceiverDay.Location = New System.Drawing.Point(623, 97)
         Me.UcrReceiverDay.Margin = New System.Windows.Forms.Padding(0)
         Me.UcrReceiverDay.Name = "UcrReceiverDay"
         Me.UcrReceiverDay.Selector = Nothing
@@ -665,7 +665,7 @@ Partial Class dlgPICSACrops
         'UcrReceiverYear
         '
         Me.UcrReceiverYear.frmParent = Me
-        Me.UcrReceiverYear.Location = New System.Drawing.Point(461, 81)
+        Me.UcrReceiverYear.Location = New System.Drawing.Point(623, 33)
         Me.UcrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
         Me.UcrReceiverYear.Name = "UcrReceiverYear"
         Me.UcrReceiverYear.Selector = Nothing
@@ -677,7 +677,7 @@ Partial Class dlgPICSACrops
         'UcrReceiverStation
         '
         Me.UcrReceiverStation.frmParent = Me
-        Me.UcrReceiverStation.Location = New System.Drawing.Point(461, 9)
+        Me.UcrReceiverStation.Location = New System.Drawing.Point(387, 34)
         Me.UcrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
         Me.UcrReceiverStation.Name = "UcrReceiverStation"
         Me.UcrReceiverStation.Selector = Nothing
@@ -708,7 +708,7 @@ Partial Class dlgPICSACrops
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(819, 692)
+        Me.ClientSize = New System.Drawing.Size(813, 692)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrSaveDataFrame)
         Me.Controls.Add(Me.grpWater)
