@@ -390,10 +390,6 @@ Public Class frmMain
         dlgImportDataset.ShowDialog()
     End Sub
 
-    Private Sub mnuFileSaveAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAs.Click
-        dlgSaveAs.ShowDialog()
-    End Sub
-
     Private Sub mnuFileOpenFromLibrary_Click(sender As Object, e As EventArgs) Handles mnuFileOpenFromLibrary.Click
         dlgFromLibrary.ShowDialog()
     End Sub
