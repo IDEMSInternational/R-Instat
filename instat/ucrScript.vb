@@ -96,7 +96,12 @@ Public Class ucrScript
             dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
 
             If dlgSave.ShowDialog() = DialogResult.OK Then
-                My.Computer.FileSystem.WriteAllText(dlgSave.FileName, txtScript.Text, False)
+                Try
+                    File.WriteAllText(dlgSave.FileName, txtScript.Text)
+                Catch
+                    MsgBox("Could not save the script file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
+                End Try
+
             End If
         End Using
     End Sub
@@ -109,8 +114,12 @@ Public Class ucrScript
             dlgOpen.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
 
             If dlgOpen.ShowDialog() = DialogResult.OK Then
-                txtScript.Clear()
-                txtScript.Text = File.ReadAllText(dlgOpen.FileName)
+                Try
+                    txtScript.Clear()
+                    txtScript.Text = File.ReadAllText(dlgOpen.FileName)
+                Catch
+                    MsgBox("Could not open the script from file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
+                End Try
             End If
         End Using
     End Sub
