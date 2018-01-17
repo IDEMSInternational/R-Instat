@@ -988,7 +988,7 @@ Public Class frmMain
             dlgSaveFile.InitialDirectory = clsInstatOptions.strWorkingDirectory
             If dlgSaveFile.ShowDialog() = DialogResult.OK Then
                 Try
-                    File.WriteAllText(dlgSaveFile.FileName, frmLog.txtLog.Text)
+                    File.WriteAllText(dlgSaveFile.FileName, ucrLogWindow.txtLog.Text)
                 Catch
                     MsgBox("Could not save the log file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
                 End Try
@@ -1003,7 +1003,7 @@ Public Class frmMain
             dlgSaveFile.InitialDirectory = clsInstatOptions.strWorkingDirectory
             If dlgSaveFile.ShowDialog() = DialogResult.OK Then
                 Try
-                    File.WriteAllText(dlgSaveFile.FileName, frmScript.txtScript.Text)
+                    File.WriteAllText(dlgSaveFile.FileName, ucrScriptWindow.txtScript.Text)
                 Catch
                     MsgBox("Could not save the script file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
                 End Try
