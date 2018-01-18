@@ -80,6 +80,26 @@ Public Class dlgPICSACrops
         ucrReceiverRainfall.SetParameterIsString()
         ucrReceiverRainfall.Selector = ucrSelectorForCrops
 
+        'Planting single
+        ucrNudPlantingSingleDayNum.SetParameter(New RParameter(" ", 1))
+        ucrNudPlantingSingleDayNum.SetMinMax(1, 366)
+
+        'Planting Sequence From
+        ucrNudPlantingSeqFrom.SetParameter(New RParameter("from", 1))
+        ucrNudPlantingSeqFrom.SetMinMax(1, 366)
+
+        'Planting Sequence Step
+        ucrNudPlantingSeqStep.SetParameter(New RParameter("step", 1))
+        ucrNudPlantingSeqStep.SetMinMax(1, 366)
+
+        'Planting Sequence To
+        ucrNudPlantingSeqTo.SetParameter(New RParameter("to", 1))
+        ucrNudPlantingSeqTo.SetMinMax(1, 366)
+
+
+
+
+
 
         ' ucrSaveDataFrame
         ucrSaveDataFrame.SetIsTextBox()
