@@ -111,7 +111,7 @@ Public Class dlgPICSACrops
 
     Private Sub SetDefaults()
         clsCropsFunction = New RFunction
-        clsCropsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
+        clsCropsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$...")
         ucrBase.clsRsyntax.SetBaseRFunction(clsCropsFunction)
         TestOKEnabled()
     End Sub
