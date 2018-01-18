@@ -55,6 +55,11 @@ Public Class dlgUnstack
         ucrColumnToUnstackReceiver.SetParameterIsString()
         ucrColumnToUnstackReceiver.Selector = ucrSelectorForUnstack
 
+        'ucrMultipleColumnsReceiver
+        ucrMultipleColumnsReceiver.SetParameter(New RParameter("value.var", 1))
+        ucrMultipleColumnsReceiver.SetParameterIsString()
+        ucrMultipleColumnsReceiver.Selector = ucrSelectorForUnstack
+
         'ucrID
         ucrIDColumns.SetParameter(New RParameter("x", 1))
         ucrIDColumns.SetParameterIsString()
@@ -77,6 +82,22 @@ Public Class dlgUnstack
         ucrNewDFName.SetSaveTypeAsDataFrame()
         ucrNewDFName.SetDataFrameSelector(ucrSelectorForUnstack.ucrAvailableDataFrames)
         ucrNewDFName.SetLabelText("New Data Frame Name:")
+
+        ucrPnlUnstackCol.AddRadioButton(rdoSingle)
+        ucrPnlUnstackCol.AddRadioButton(rdoMultiple)
+        ucrPnlUnstackCol.AddRadioButton(rdoRestoreHierarchy)
+
+        ucrPnlUnstackCol.AddFunctionNamesCondition(rdoSingle, "dcast")
+        'ucrPnlUnstackCol.AddFunctionNamesCondition(rdoMultiple, "dcast")
+        'ucrPnlUnstackCol.AddFunctionNamesCondition(rdoRestoreHierarchy, "dcast")
+
+
+        ucrPnlUnstackCol.AddToLinkedControls(ucrColumnToUnstackReceiver, {rdoSingle}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlUnstackCol.AddToLinkedControls(ucrMultipleColumnsReceiver, {rdoMultiple}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrColumnToUnstackReceiver.SetLinkedDisplayControl(lblColumnToUnstack)
+        ucrMultipleColumnsReceiver.SetLinkedDisplayControl(lblMultipleColumns)
+
     End Sub
 
     Private Sub SetDefaults()
@@ -90,19 +111,23 @@ Public Class dlgUnstack
         clsDefaultFunction.SetRCommand("dcast")
         clsDefaultFunction.SetAssignTo(ucrSelectorForUnstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked", strTempDataframe:=ucrSelectorForUnstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked")
 
+        ucrPnlUnstackCol.SetRCode(clsDefaultFunction, bReset:=bReset, bCloneIfNeeded:=True)
+
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
         ucrSelectorForUnstack.SetRCode(clsDefaultFunction, bReset)
         ucrColumnToUnstackReceiver.SetRCode(clsDefaultFunction, bReset)
+        ucrMultipleColumnsReceiver.SetRCode(clsDefaultFunction, bReset)
         ucrNewDFName.SetRCode(clsDefaultFunction, bReset)
         ucrChkDropMissingCombinations.SetRCode(clsDefaultFunction, bReset)
         ucrFactorToUnstackReceiver.SetRCode(clsFormula, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrFactorToUnstackReceiver.IsEmpty() AndAlso Not ucrColumnToUnstackReceiver.IsEmpty() AndAlso Not ucrIDColumns.IsEmpty() AndAlso ucrNewDFName.IsComplete Then
+        If Not ucrFactorToUnstackReceiver.IsEmpty() AndAlso Not ucrColumnToUnstackReceiver.IsEmpty() AndAlso Not ucrIDColumns.IsEmpty() AndAlso Not ucrMultipleColumnsReceiver.IsEmpty AndAlso ucrNewDFName.IsComplete Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)

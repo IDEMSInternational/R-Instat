@@ -44,6 +44,8 @@ Partial Class dlgUnstack
         Me.rdoSingle = New System.Windows.Forms.RadioButton()
         Me.rdoMultiple = New System.Windows.Forms.RadioButton()
         Me.rdoRestoreHierarchy = New System.Windows.Forms.RadioButton()
+        Me.lblMultipleColumns = New System.Windows.Forms.Label()
+        Me.ucrMultipleColumnsReceiver = New instat.ucrReceiverMultiple()
         Me.ucrNewDFName = New instat.ucrSave()
         Me.ucrChkDropMissingCombinations = New instat.ucrCheck()
         Me.ucrIDColumns = New instat.ucrReceiverMultiple()
@@ -51,6 +53,7 @@ Partial Class dlgUnstack
         Me.ucrFactorToUnstackReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorForUnstack = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrPnlUnstackCol = New instat.UcrPanel()
         Me.SuspendLayout()
         '
         'lblFactorToUnstackBy
@@ -103,6 +106,20 @@ Partial Class dlgUnstack
         Me.rdoRestoreHierarchy.TabStop = True
         Me.rdoRestoreHierarchy.UseVisualStyleBackColor = True
         '
+        'lblMultipleColumns
+        '
+        resources.ApplyResources(Me.lblMultipleColumns, "lblMultipleColumns")
+        Me.lblMultipleColumns.Name = "lblMultipleColumns"
+        '
+        'ucrMultipleColumnsReceiver
+        '
+        Me.ucrMultipleColumnsReceiver.frmParent = Me
+        resources.ApplyResources(Me.ucrMultipleColumnsReceiver, "ucrMultipleColumnsReceiver")
+        Me.ucrMultipleColumnsReceiver.Name = "ucrMultipleColumnsReceiver"
+        Me.ucrMultipleColumnsReceiver.Selector = Nothing
+        Me.ucrMultipleColumnsReceiver.strNcFilePath = ""
+        Me.ucrMultipleColumnsReceiver.ucrSelector = Nothing
+        '
         'ucrNewDFName
         '
         resources.ApplyResources(Me.ucrNewDFName, "ucrNewDFName")
@@ -153,10 +170,17 @@ Partial Class dlgUnstack
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrPnlUnstackCol
+        '
+        resources.ApplyResources(Me.ucrPnlUnstackCol, "ucrPnlUnstackCol")
+        Me.ucrPnlUnstackCol.Name = "ucrPnlUnstackCol"
+        '
         'dlgUnstack
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblMultipleColumns)
+        Me.Controls.Add(Me.ucrMultipleColumnsReceiver)
         Me.Controls.Add(Me.rdoRestoreHierarchy)
         Me.Controls.Add(Me.rdoMultiple)
         Me.Controls.Add(Me.rdoSingle)
@@ -170,6 +194,7 @@ Partial Class dlgUnstack
         Me.Controls.Add(Me.ucrSelectorForUnstack)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblIDColumns)
+        Me.Controls.Add(Me.ucrPnlUnstackCol)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -192,4 +217,7 @@ Partial Class dlgUnstack
     Friend WithEvents rdoRestoreHierarchy As RadioButton
     Friend WithEvents rdoMultiple As RadioButton
     Friend WithEvents rdoSingle As RadioButton
+    Friend WithEvents lblMultipleColumns As Label
+    Friend WithEvents ucrMultipleColumnsReceiver As ucrReceiverMultiple
+    Friend WithEvents ucrPnlUnstackCol As UcrPanel
 End Class
