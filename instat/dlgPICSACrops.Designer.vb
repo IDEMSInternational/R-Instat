@@ -46,36 +46,36 @@ Partial Class dlgPICSACrops
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.grpPlantDate = New System.Windows.Forms.GroupBox()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.UcrNudPlantingSeqTo = New instat.ucrNud()
-        Me.UcrNudPlantingSeqStep = New instat.ucrNud()
-        Me.UcrNudPlantingSingleDayNum = New instat.ucrNud()
-        Me.UcrNudPlantingSeqFrom = New instat.ucrNud()
-        Me.Label7 = New System.Windows.Forms.Label()
+        Me.lblPlantingDayNum = New System.Windows.Forms.Label()
+        Me.lblPlantingTo = New System.Windows.Forms.Label()
+        Me.lblPlantingStep = New System.Windows.Forms.Label()
+        Me.ucrNudPlantingSeqTo = New instat.ucrNud()
+        Me.ucrNudPlantingSeqStep = New instat.ucrNud()
+        Me.ucrNudPlantingSingleDayNum = New instat.ucrNud()
+        Me.ucrNudPlantingSeqFrom = New instat.ucrNud()
+        Me.lblPlantingFrom = New System.Windows.Forms.Label()
         Me.rdPlantingSeq = New System.Windows.Forms.RadioButton()
         Me.rdPlantingSingle = New System.Windows.Forms.RadioButton()
         Me.grpLength = New System.Windows.Forms.GroupBox()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.UcrNudLengthSeqTo = New instat.ucrNud()
-        Me.UcrNudLengthSeqStep = New instat.ucrNud()
-        Me.UcrNudLengthSingleDays = New instat.ucrNud()
-        Me.UcrNudLengthSeqFrom = New instat.ucrNud()
-        Me.Label14 = New System.Windows.Forms.Label()
+        Me.lblLengthDay = New System.Windows.Forms.Label()
+        Me.lblLengthTo = New System.Windows.Forms.Label()
+        Me.lblLengthStep = New System.Windows.Forms.Label()
+        Me.ucrNudLengthSeqTo = New instat.ucrNud()
+        Me.ucrNudLengthSeqStep = New instat.ucrNud()
+        Me.ucrNudLengthSingleDays = New instat.ucrNud()
+        Me.ucrNudLengthSeqFrom = New instat.ucrNud()
+        Me.lblLengthFrom = New System.Windows.Forms.Label()
         Me.rdLengthSeq = New System.Windows.Forms.RadioButton()
         Me.rdLengthSingle = New System.Windows.Forms.RadioButton()
         Me.grpWater = New System.Windows.Forms.GroupBox()
-        Me.Label15 = New System.Windows.Forms.Label()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.UcrNudWaterSeqTo = New instat.ucrNud()
-        Me.UcrNudWaterSeqStep = New instat.ucrNud()
-        Me.UcrNudWaterSingleAmt = New instat.ucrNud()
-        Me.UcrNudWaterSeqFrom = New instat.ucrNud()
-        Me.Label18 = New System.Windows.Forms.Label()
+        Me.lblWaterAmt = New System.Windows.Forms.Label()
+        Me.lblWaterTo = New System.Windows.Forms.Label()
+        Me.lblWaterStep = New System.Windows.Forms.Label()
+        Me.ucrNudWaterSeqTo = New instat.ucrNud()
+        Me.ucrNudWaterSeqStep = New instat.ucrNud()
+        Me.ucrNudWaterSingleAmt = New instat.ucrNud()
+        Me.ucrNudWaterSeqFrom = New instat.ucrNud()
+        Me.lblWaterFrom = New System.Windows.Forms.Label()
         Me.rdWaterSeq = New System.Windows.Forms.RadioButton()
         Me.rdWaterSingle = New System.Windows.Forms.RadioButton()
         Me.cmdOptions = New System.Windows.Forms.Button()
@@ -173,14 +173,14 @@ Partial Class dlgPICSACrops
         '
         'grpPlantDate
         '
-        Me.grpPlantDate.Controls.Add(Me.Label10)
-        Me.grpPlantDate.Controls.Add(Me.Label9)
-        Me.grpPlantDate.Controls.Add(Me.Label8)
-        Me.grpPlantDate.Controls.Add(Me.UcrNudPlantingSeqTo)
-        Me.grpPlantDate.Controls.Add(Me.UcrNudPlantingSeqStep)
-        Me.grpPlantDate.Controls.Add(Me.UcrNudPlantingSingleDayNum)
-        Me.grpPlantDate.Controls.Add(Me.UcrNudPlantingSeqFrom)
-        Me.grpPlantDate.Controls.Add(Me.Label7)
+        Me.grpPlantDate.Controls.Add(Me.lblPlantingDayNum)
+        Me.grpPlantDate.Controls.Add(Me.lblPlantingTo)
+        Me.grpPlantDate.Controls.Add(Me.lblPlantingStep)
+        Me.grpPlantDate.Controls.Add(Me.ucrNudPlantingSeqTo)
+        Me.grpPlantDate.Controls.Add(Me.ucrNudPlantingSeqStep)
+        Me.grpPlantDate.Controls.Add(Me.ucrNudPlantingSingleDayNum)
+        Me.grpPlantDate.Controls.Add(Me.ucrNudPlantingSeqFrom)
+        Me.grpPlantDate.Controls.Add(Me.lblPlantingFrom)
         Me.grpPlantDate.Controls.Add(Me.rdPlantingSeq)
         Me.grpPlantDate.Controls.Add(Me.rdPlantingSingle)
         Me.grpPlantDate.Location = New System.Drawing.Point(10, 307)
@@ -190,101 +190,101 @@ Partial Class dlgPICSACrops
         Me.grpPlantDate.TabStop = False
         Me.grpPlantDate.Text = "Planting Date"
         '
-        'Label10
+        'lblPlantingDayNum
         '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(57, 66)
-        Me.Label10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(105, 20)
-        Me.Label10.TabIndex = 34
-        Me.Label10.Tag = ""
-        Me.Label10.Text = "Day Number :"
+        Me.lblPlantingDayNum.AutoSize = True
+        Me.lblPlantingDayNum.Location = New System.Drawing.Point(57, 66)
+        Me.lblPlantingDayNum.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblPlantingDayNum.Name = "lblPlantingDayNum"
+        Me.lblPlantingDayNum.Size = New System.Drawing.Size(105, 20)
+        Me.lblPlantingDayNum.TabIndex = 34
+        Me.lblPlantingDayNum.Tag = ""
+        Me.lblPlantingDayNum.Text = "Day Number :"
         '
-        'Label9
+        'lblPlantingTo
         '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(127, 211)
-        Me.Label9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(35, 20)
-        Me.Label9.TabIndex = 34
-        Me.Label9.Tag = ""
-        Me.Label9.Text = "To :"
+        Me.lblPlantingTo.AutoSize = True
+        Me.lblPlantingTo.Location = New System.Drawing.Point(127, 211)
+        Me.lblPlantingTo.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblPlantingTo.Name = "lblPlantingTo"
+        Me.lblPlantingTo.Size = New System.Drawing.Size(35, 20)
+        Me.lblPlantingTo.TabIndex = 34
+        Me.lblPlantingTo.Tag = ""
+        Me.lblPlantingTo.Text = "To :"
         '
-        'Label8
+        'lblPlantingStep
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(70, 176)
-        Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(98, 20)
-        Me.Label8.TabIndex = 33
-        Me.Label8.Tag = ""
-        Me.Label8.Text = "Step (days) :"
+        Me.lblPlantingStep.AutoSize = True
+        Me.lblPlantingStep.Location = New System.Drawing.Point(70, 176)
+        Me.lblPlantingStep.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblPlantingStep.Name = "lblPlantingStep"
+        Me.lblPlantingStep.Size = New System.Drawing.Size(98, 20)
+        Me.lblPlantingStep.TabIndex = 33
+        Me.lblPlantingStep.Tag = ""
+        Me.lblPlantingStep.Text = "Step (days) :"
         '
-        'UcrNudPlantingSeqTo
+        'ucrNudPlantingSeqTo
         '
-        Me.UcrNudPlantingSeqTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNudPlantingSeqTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNudPlantingSeqTo.Location = New System.Drawing.Point(178, 207)
-        Me.UcrNudPlantingSeqTo.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.UcrNudPlantingSeqTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNudPlantingSeqTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNudPlantingSeqTo.Name = "UcrNudPlantingSeqTo"
-        Me.UcrNudPlantingSeqTo.Size = New System.Drawing.Size(75, 31)
-        Me.UcrNudPlantingSeqTo.TabIndex = 32
-        Me.UcrNudPlantingSeqTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPlantingSeqTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPlantingSeqTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudPlantingSeqTo.Location = New System.Drawing.Point(178, 207)
+        Me.ucrNudPlantingSeqTo.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrNudPlantingSeqTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudPlantingSeqTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPlantingSeqTo.Name = "ucrNudPlantingSeqTo"
+        Me.ucrNudPlantingSeqTo.Size = New System.Drawing.Size(75, 31)
+        Me.ucrNudPlantingSeqTo.TabIndex = 32
+        Me.ucrNudPlantingSeqTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'UcrNudPlantingSeqStep
+        'ucrNudPlantingSeqStep
         '
-        Me.UcrNudPlantingSeqStep.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNudPlantingSeqStep.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNudPlantingSeqStep.Location = New System.Drawing.Point(178, 172)
-        Me.UcrNudPlantingSeqStep.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.UcrNudPlantingSeqStep.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNudPlantingSeqStep.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNudPlantingSeqStep.Name = "UcrNudPlantingSeqStep"
-        Me.UcrNudPlantingSeqStep.Size = New System.Drawing.Size(75, 31)
-        Me.UcrNudPlantingSeqStep.TabIndex = 31
-        Me.UcrNudPlantingSeqStep.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPlantingSeqStep.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPlantingSeqStep.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudPlantingSeqStep.Location = New System.Drawing.Point(178, 172)
+        Me.ucrNudPlantingSeqStep.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrNudPlantingSeqStep.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudPlantingSeqStep.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPlantingSeqStep.Name = "ucrNudPlantingSeqStep"
+        Me.ucrNudPlantingSeqStep.Size = New System.Drawing.Size(75, 31)
+        Me.ucrNudPlantingSeqStep.TabIndex = 31
+        Me.ucrNudPlantingSeqStep.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'UcrNudPlantingSingleDayNum
+        'ucrNudPlantingSingleDayNum
         '
-        Me.UcrNudPlantingSingleDayNum.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNudPlantingSingleDayNum.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNudPlantingSingleDayNum.Location = New System.Drawing.Point(175, 63)
-        Me.UcrNudPlantingSingleDayNum.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.UcrNudPlantingSingleDayNum.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNudPlantingSingleDayNum.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNudPlantingSingleDayNum.Name = "UcrNudPlantingSingleDayNum"
-        Me.UcrNudPlantingSingleDayNum.Size = New System.Drawing.Size(75, 31)
-        Me.UcrNudPlantingSingleDayNum.TabIndex = 30
-        Me.UcrNudPlantingSingleDayNum.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPlantingSingleDayNum.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPlantingSingleDayNum.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudPlantingSingleDayNum.Location = New System.Drawing.Point(175, 63)
+        Me.ucrNudPlantingSingleDayNum.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrNudPlantingSingleDayNum.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudPlantingSingleDayNum.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPlantingSingleDayNum.Name = "ucrNudPlantingSingleDayNum"
+        Me.ucrNudPlantingSingleDayNum.Size = New System.Drawing.Size(75, 31)
+        Me.ucrNudPlantingSingleDayNum.TabIndex = 30
+        Me.ucrNudPlantingSingleDayNum.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'UcrNudPlantingSeqFrom
+        'ucrNudPlantingSeqFrom
         '
-        Me.UcrNudPlantingSeqFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNudPlantingSeqFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNudPlantingSeqFrom.Location = New System.Drawing.Point(178, 139)
-        Me.UcrNudPlantingSeqFrom.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.UcrNudPlantingSeqFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNudPlantingSeqFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNudPlantingSeqFrom.Name = "UcrNudPlantingSeqFrom"
-        Me.UcrNudPlantingSeqFrom.Size = New System.Drawing.Size(75, 31)
-        Me.UcrNudPlantingSeqFrom.TabIndex = 29
-        Me.UcrNudPlantingSeqFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPlantingSeqFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPlantingSeqFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudPlantingSeqFrom.Location = New System.Drawing.Point(178, 139)
+        Me.ucrNudPlantingSeqFrom.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrNudPlantingSeqFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudPlantingSeqFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPlantingSeqFrom.Name = "ucrNudPlantingSeqFrom"
+        Me.ucrNudPlantingSeqFrom.Size = New System.Drawing.Size(75, 31)
+        Me.ucrNudPlantingSeqFrom.TabIndex = 29
+        Me.ucrNudPlantingSeqFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'Label7
+        'lblPlantingFrom
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(117, 142)
-        Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(54, 20)
-        Me.Label7.TabIndex = 28
-        Me.Label7.Tag = ""
-        Me.Label7.Text = "From :"
+        Me.lblPlantingFrom.AutoSize = True
+        Me.lblPlantingFrom.Location = New System.Drawing.Point(117, 142)
+        Me.lblPlantingFrom.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblPlantingFrom.Name = "lblPlantingFrom"
+        Me.lblPlantingFrom.Size = New System.Drawing.Size(54, 20)
+        Me.lblPlantingFrom.TabIndex = 28
+        Me.lblPlantingFrom.Tag = ""
+        Me.lblPlantingFrom.Text = "From :"
         '
         'rdPlantingSeq
         '
@@ -310,14 +310,14 @@ Partial Class dlgPICSACrops
         '
         'grpLength
         '
-        Me.grpLength.Controls.Add(Me.Label11)
-        Me.grpLength.Controls.Add(Me.Label12)
-        Me.grpLength.Controls.Add(Me.Label13)
-        Me.grpLength.Controls.Add(Me.UcrNudLengthSeqTo)
-        Me.grpLength.Controls.Add(Me.UcrNudLengthSeqStep)
-        Me.grpLength.Controls.Add(Me.UcrNudLengthSingleDays)
-        Me.grpLength.Controls.Add(Me.UcrNudLengthSeqFrom)
-        Me.grpLength.Controls.Add(Me.Label14)
+        Me.grpLength.Controls.Add(Me.lblLengthDay)
+        Me.grpLength.Controls.Add(Me.lblLengthTo)
+        Me.grpLength.Controls.Add(Me.lblLengthStep)
+        Me.grpLength.Controls.Add(Me.ucrNudLengthSeqTo)
+        Me.grpLength.Controls.Add(Me.ucrNudLengthSeqStep)
+        Me.grpLength.Controls.Add(Me.ucrNudLengthSingleDays)
+        Me.grpLength.Controls.Add(Me.ucrNudLengthSeqFrom)
+        Me.grpLength.Controls.Add(Me.lblLengthFrom)
         Me.grpLength.Controls.Add(Me.rdLengthSeq)
         Me.grpLength.Controls.Add(Me.rdLengthSingle)
         Me.grpLength.Location = New System.Drawing.Point(278, 307)
@@ -327,101 +327,101 @@ Partial Class dlgPICSACrops
         Me.grpLength.TabStop = False
         Me.grpLength.Text = "Length (days)"
         '
-        'Label11
+        'lblLengthDay
         '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(115, 66)
-        Me.Label11.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(53, 20)
-        Me.Label11.TabIndex = 34
-        Me.Label11.Tag = ""
-        Me.Label11.Text = "Days :"
+        Me.lblLengthDay.AutoSize = True
+        Me.lblLengthDay.Location = New System.Drawing.Point(115, 66)
+        Me.lblLengthDay.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblLengthDay.Name = "lblLengthDay"
+        Me.lblLengthDay.Size = New System.Drawing.Size(53, 20)
+        Me.lblLengthDay.TabIndex = 34
+        Me.lblLengthDay.Tag = ""
+        Me.lblLengthDay.Text = "Days :"
         '
-        'Label12
+        'lblLengthTo
         '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(133, 211)
-        Me.Label12.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(35, 20)
-        Me.Label12.TabIndex = 34
-        Me.Label12.Tag = ""
-        Me.Label12.Text = "To :"
+        Me.lblLengthTo.AutoSize = True
+        Me.lblLengthTo.Location = New System.Drawing.Point(133, 211)
+        Me.lblLengthTo.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblLengthTo.Name = "lblLengthTo"
+        Me.lblLengthTo.Size = New System.Drawing.Size(35, 20)
+        Me.lblLengthTo.TabIndex = 34
+        Me.lblLengthTo.Tag = ""
+        Me.lblLengthTo.Text = "To :"
         '
-        'Label13
+        'lblLengthStep
         '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(70, 176)
-        Me.Label13.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(98, 20)
-        Me.Label13.TabIndex = 33
-        Me.Label13.Tag = ""
-        Me.Label13.Text = "Step (days) :"
+        Me.lblLengthStep.AutoSize = True
+        Me.lblLengthStep.Location = New System.Drawing.Point(70, 176)
+        Me.lblLengthStep.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblLengthStep.Name = "lblLengthStep"
+        Me.lblLengthStep.Size = New System.Drawing.Size(98, 20)
+        Me.lblLengthStep.TabIndex = 33
+        Me.lblLengthStep.Tag = ""
+        Me.lblLengthStep.Text = "Step (days) :"
         '
-        'UcrNudLengthSeqTo
+        'ucrNudLengthSeqTo
         '
-        Me.UcrNudLengthSeqTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNudLengthSeqTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNudLengthSeqTo.Location = New System.Drawing.Point(178, 207)
-        Me.UcrNudLengthSeqTo.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.UcrNudLengthSeqTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNudLengthSeqTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNudLengthSeqTo.Name = "UcrNudLengthSeqTo"
-        Me.UcrNudLengthSeqTo.Size = New System.Drawing.Size(75, 31)
-        Me.UcrNudLengthSeqTo.TabIndex = 32
-        Me.UcrNudLengthSeqTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLengthSeqTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLengthSeqTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudLengthSeqTo.Location = New System.Drawing.Point(178, 207)
+        Me.ucrNudLengthSeqTo.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrNudLengthSeqTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLengthSeqTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLengthSeqTo.Name = "ucrNudLengthSeqTo"
+        Me.ucrNudLengthSeqTo.Size = New System.Drawing.Size(75, 31)
+        Me.ucrNudLengthSeqTo.TabIndex = 32
+        Me.ucrNudLengthSeqTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'UcrNudLengthSeqStep
+        'ucrNudLengthSeqStep
         '
-        Me.UcrNudLengthSeqStep.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNudLengthSeqStep.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNudLengthSeqStep.Location = New System.Drawing.Point(178, 172)
-        Me.UcrNudLengthSeqStep.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.UcrNudLengthSeqStep.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNudLengthSeqStep.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNudLengthSeqStep.Name = "UcrNudLengthSeqStep"
-        Me.UcrNudLengthSeqStep.Size = New System.Drawing.Size(75, 31)
-        Me.UcrNudLengthSeqStep.TabIndex = 31
-        Me.UcrNudLengthSeqStep.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLengthSeqStep.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLengthSeqStep.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudLengthSeqStep.Location = New System.Drawing.Point(178, 172)
+        Me.ucrNudLengthSeqStep.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrNudLengthSeqStep.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLengthSeqStep.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLengthSeqStep.Name = "ucrNudLengthSeqStep"
+        Me.ucrNudLengthSeqStep.Size = New System.Drawing.Size(75, 31)
+        Me.ucrNudLengthSeqStep.TabIndex = 31
+        Me.ucrNudLengthSeqStep.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'UcrNudLengthSingleDays
+        'ucrNudLengthSingleDays
         '
-        Me.UcrNudLengthSingleDays.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNudLengthSingleDays.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNudLengthSingleDays.Location = New System.Drawing.Point(175, 63)
-        Me.UcrNudLengthSingleDays.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.UcrNudLengthSingleDays.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNudLengthSingleDays.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNudLengthSingleDays.Name = "UcrNudLengthSingleDays"
-        Me.UcrNudLengthSingleDays.Size = New System.Drawing.Size(75, 31)
-        Me.UcrNudLengthSingleDays.TabIndex = 30
-        Me.UcrNudLengthSingleDays.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLengthSingleDays.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLengthSingleDays.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudLengthSingleDays.Location = New System.Drawing.Point(175, 63)
+        Me.ucrNudLengthSingleDays.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrNudLengthSingleDays.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLengthSingleDays.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLengthSingleDays.Name = "ucrNudLengthSingleDays"
+        Me.ucrNudLengthSingleDays.Size = New System.Drawing.Size(75, 31)
+        Me.ucrNudLengthSingleDays.TabIndex = 30
+        Me.ucrNudLengthSingleDays.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'UcrNudLengthSeqFrom
+        'ucrNudLengthSeqFrom
         '
-        Me.UcrNudLengthSeqFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNudLengthSeqFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNudLengthSeqFrom.Location = New System.Drawing.Point(178, 139)
-        Me.UcrNudLengthSeqFrom.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.UcrNudLengthSeqFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNudLengthSeqFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNudLengthSeqFrom.Name = "UcrNudLengthSeqFrom"
-        Me.UcrNudLengthSeqFrom.Size = New System.Drawing.Size(75, 31)
-        Me.UcrNudLengthSeqFrom.TabIndex = 29
-        Me.UcrNudLengthSeqFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLengthSeqFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLengthSeqFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudLengthSeqFrom.Location = New System.Drawing.Point(178, 139)
+        Me.ucrNudLengthSeqFrom.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrNudLengthSeqFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLengthSeqFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLengthSeqFrom.Name = "ucrNudLengthSeqFrom"
+        Me.ucrNudLengthSeqFrom.Size = New System.Drawing.Size(75, 31)
+        Me.ucrNudLengthSeqFrom.TabIndex = 29
+        Me.ucrNudLengthSeqFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'Label14
+        'lblLengthFrom
         '
-        Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(114, 142)
-        Me.Label14.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(54, 20)
-        Me.Label14.TabIndex = 28
-        Me.Label14.Tag = ""
-        Me.Label14.Text = "From :"
+        Me.lblLengthFrom.AutoSize = True
+        Me.lblLengthFrom.Location = New System.Drawing.Point(114, 142)
+        Me.lblLengthFrom.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblLengthFrom.Name = "lblLengthFrom"
+        Me.lblLengthFrom.Size = New System.Drawing.Size(54, 20)
+        Me.lblLengthFrom.TabIndex = 28
+        Me.lblLengthFrom.Tag = ""
+        Me.lblLengthFrom.Text = "From :"
         '
         'rdLengthSeq
         '
@@ -447,14 +447,14 @@ Partial Class dlgPICSACrops
         '
         'grpWater
         '
-        Me.grpWater.Controls.Add(Me.Label15)
-        Me.grpWater.Controls.Add(Me.Label16)
-        Me.grpWater.Controls.Add(Me.Label17)
-        Me.grpWater.Controls.Add(Me.UcrNudWaterSeqTo)
-        Me.grpWater.Controls.Add(Me.UcrNudWaterSeqStep)
-        Me.grpWater.Controls.Add(Me.UcrNudWaterSingleAmt)
-        Me.grpWater.Controls.Add(Me.UcrNudWaterSeqFrom)
-        Me.grpWater.Controls.Add(Me.Label18)
+        Me.grpWater.Controls.Add(Me.lblWaterAmt)
+        Me.grpWater.Controls.Add(Me.lblWaterTo)
+        Me.grpWater.Controls.Add(Me.lblWaterStep)
+        Me.grpWater.Controls.Add(Me.ucrNudWaterSeqTo)
+        Me.grpWater.Controls.Add(Me.ucrNudWaterSeqStep)
+        Me.grpWater.Controls.Add(Me.ucrNudWaterSingleAmt)
+        Me.grpWater.Controls.Add(Me.ucrNudWaterSeqFrom)
+        Me.grpWater.Controls.Add(Me.lblWaterFrom)
         Me.grpWater.Controls.Add(Me.rdWaterSeq)
         Me.grpWater.Controls.Add(Me.rdWaterSingle)
         Me.grpWater.Location = New System.Drawing.Point(546, 307)
@@ -464,101 +464,101 @@ Partial Class dlgPICSACrops
         Me.grpWater.TabStop = False
         Me.grpWater.Text = "Water (mm)"
         '
-        'Label15
+        'lblWaterAmt
         '
-        Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(95, 66)
-        Me.Label15.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(73, 20)
-        Me.Label15.TabIndex = 34
-        Me.Label15.Tag = ""
-        Me.Label15.Text = "Amount :"
+        Me.lblWaterAmt.AutoSize = True
+        Me.lblWaterAmt.Location = New System.Drawing.Point(95, 66)
+        Me.lblWaterAmt.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblWaterAmt.Name = "lblWaterAmt"
+        Me.lblWaterAmt.Size = New System.Drawing.Size(73, 20)
+        Me.lblWaterAmt.TabIndex = 34
+        Me.lblWaterAmt.Tag = ""
+        Me.lblWaterAmt.Text = "Amount :"
         '
-        'Label16
+        'lblWaterTo
         '
-        Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(133, 211)
-        Me.Label16.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(35, 20)
-        Me.Label16.TabIndex = 34
-        Me.Label16.Tag = ""
-        Me.Label16.Text = "To :"
+        Me.lblWaterTo.AutoSize = True
+        Me.lblWaterTo.Location = New System.Drawing.Point(133, 211)
+        Me.lblWaterTo.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblWaterTo.Name = "lblWaterTo"
+        Me.lblWaterTo.Size = New System.Drawing.Size(35, 20)
+        Me.lblWaterTo.TabIndex = 34
+        Me.lblWaterTo.Tag = ""
+        Me.lblWaterTo.Text = "To :"
         '
-        'Label17
+        'lblWaterStep
         '
-        Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(117, 176)
-        Me.Label17.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(51, 20)
-        Me.Label17.TabIndex = 33
-        Me.Label17.Tag = ""
-        Me.Label17.Text = "Step :"
+        Me.lblWaterStep.AutoSize = True
+        Me.lblWaterStep.Location = New System.Drawing.Point(117, 176)
+        Me.lblWaterStep.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblWaterStep.Name = "lblWaterStep"
+        Me.lblWaterStep.Size = New System.Drawing.Size(51, 20)
+        Me.lblWaterStep.TabIndex = 33
+        Me.lblWaterStep.Tag = ""
+        Me.lblWaterStep.Text = "Step :"
         '
-        'UcrNudWaterSeqTo
+        'ucrNudWaterSeqTo
         '
-        Me.UcrNudWaterSeqTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNudWaterSeqTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNudWaterSeqTo.Location = New System.Drawing.Point(178, 207)
-        Me.UcrNudWaterSeqTo.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.UcrNudWaterSeqTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNudWaterSeqTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNudWaterSeqTo.Name = "UcrNudWaterSeqTo"
-        Me.UcrNudWaterSeqTo.Size = New System.Drawing.Size(75, 31)
-        Me.UcrNudWaterSeqTo.TabIndex = 32
-        Me.UcrNudWaterSeqTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWaterSeqTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWaterSeqTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudWaterSeqTo.Location = New System.Drawing.Point(178, 207)
+        Me.ucrNudWaterSeqTo.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrNudWaterSeqTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudWaterSeqTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWaterSeqTo.Name = "ucrNudWaterSeqTo"
+        Me.ucrNudWaterSeqTo.Size = New System.Drawing.Size(75, 31)
+        Me.ucrNudWaterSeqTo.TabIndex = 32
+        Me.ucrNudWaterSeqTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'UcrNudWaterSeqStep
+        'ucrNudWaterSeqStep
         '
-        Me.UcrNudWaterSeqStep.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNudWaterSeqStep.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNudWaterSeqStep.Location = New System.Drawing.Point(178, 172)
-        Me.UcrNudWaterSeqStep.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.UcrNudWaterSeqStep.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNudWaterSeqStep.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNudWaterSeqStep.Name = "UcrNudWaterSeqStep"
-        Me.UcrNudWaterSeqStep.Size = New System.Drawing.Size(75, 31)
-        Me.UcrNudWaterSeqStep.TabIndex = 31
-        Me.UcrNudWaterSeqStep.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWaterSeqStep.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWaterSeqStep.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudWaterSeqStep.Location = New System.Drawing.Point(178, 172)
+        Me.ucrNudWaterSeqStep.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrNudWaterSeqStep.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudWaterSeqStep.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWaterSeqStep.Name = "ucrNudWaterSeqStep"
+        Me.ucrNudWaterSeqStep.Size = New System.Drawing.Size(75, 31)
+        Me.ucrNudWaterSeqStep.TabIndex = 31
+        Me.ucrNudWaterSeqStep.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'UcrNudWaterSingleAmt
+        'ucrNudWaterSingleAmt
         '
-        Me.UcrNudWaterSingleAmt.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNudWaterSingleAmt.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNudWaterSingleAmt.Location = New System.Drawing.Point(175, 63)
-        Me.UcrNudWaterSingleAmt.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.UcrNudWaterSingleAmt.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNudWaterSingleAmt.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNudWaterSingleAmt.Name = "UcrNudWaterSingleAmt"
-        Me.UcrNudWaterSingleAmt.Size = New System.Drawing.Size(75, 31)
-        Me.UcrNudWaterSingleAmt.TabIndex = 30
-        Me.UcrNudWaterSingleAmt.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWaterSingleAmt.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWaterSingleAmt.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudWaterSingleAmt.Location = New System.Drawing.Point(175, 63)
+        Me.ucrNudWaterSingleAmt.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrNudWaterSingleAmt.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudWaterSingleAmt.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWaterSingleAmt.Name = "ucrNudWaterSingleAmt"
+        Me.ucrNudWaterSingleAmt.Size = New System.Drawing.Size(75, 31)
+        Me.ucrNudWaterSingleAmt.TabIndex = 30
+        Me.ucrNudWaterSingleAmt.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'UcrNudWaterSeqFrom
+        'ucrNudWaterSeqFrom
         '
-        Me.UcrNudWaterSeqFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNudWaterSeqFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNudWaterSeqFrom.Location = New System.Drawing.Point(178, 139)
-        Me.UcrNudWaterSeqFrom.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.UcrNudWaterSeqFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNudWaterSeqFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNudWaterSeqFrom.Name = "UcrNudWaterSeqFrom"
-        Me.UcrNudWaterSeqFrom.Size = New System.Drawing.Size(75, 31)
-        Me.UcrNudWaterSeqFrom.TabIndex = 29
-        Me.UcrNudWaterSeqFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWaterSeqFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWaterSeqFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudWaterSeqFrom.Location = New System.Drawing.Point(178, 139)
+        Me.ucrNudWaterSeqFrom.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrNudWaterSeqFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudWaterSeqFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWaterSeqFrom.Name = "ucrNudWaterSeqFrom"
+        Me.ucrNudWaterSeqFrom.Size = New System.Drawing.Size(75, 31)
+        Me.ucrNudWaterSeqFrom.TabIndex = 29
+        Me.ucrNudWaterSeqFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'Label18
+        'lblWaterFrom
         '
-        Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(114, 142)
-        Me.Label18.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(54, 20)
-        Me.Label18.TabIndex = 28
-        Me.Label18.Tag = ""
-        Me.Label18.Text = "From :"
+        Me.lblWaterFrom.AutoSize = True
+        Me.lblWaterFrom.Location = New System.Drawing.Point(114, 142)
+        Me.lblWaterFrom.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblWaterFrom.Name = "lblWaterFrom"
+        Me.lblWaterFrom.Size = New System.Drawing.Size(54, 20)
+        Me.lblWaterFrom.TabIndex = 28
+        Me.lblWaterFrom.Tag = ""
+        Me.lblWaterFrom.Text = "From :"
         '
         'rdWaterSeq
         '
@@ -765,37 +765,37 @@ Partial Class dlgPICSACrops
     Friend WithEvents Label5 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents grpPlantDate As GroupBox
-    Friend WithEvents Label10 As Label
-    Friend WithEvents Label9 As Label
-    Friend WithEvents Label8 As Label
-    Friend WithEvents UcrNudPlantingSeqTo As ucrNud
-    Friend WithEvents UcrNudPlantingSeqStep As ucrNud
-    Friend WithEvents UcrNudPlantingSingleDayNum As ucrNud
-    Friend WithEvents UcrNudPlantingSeqFrom As ucrNud
-    Friend WithEvents Label7 As Label
+    Friend WithEvents lblPlantingDayNum As Label
+    Friend WithEvents lblPlantingTo As Label
+    Friend WithEvents lblPlantingStep As Label
+    Friend WithEvents ucrNudPlantingSeqTo As ucrNud
+    Friend WithEvents ucrNudPlantingSeqStep As ucrNud
+    Friend WithEvents ucrNudPlantingSingleDayNum As ucrNud
+    Friend WithEvents ucrNudPlantingSeqFrom As ucrNud
+    Friend WithEvents lblPlantingFrom As Label
     Friend WithEvents rdPlantingSeq As RadioButton
     Friend WithEvents rdPlantingSingle As RadioButton
     Friend WithEvents ucrSaveDataFrame As ucrSave
     Friend WithEvents grpWater As GroupBox
-    Friend WithEvents Label15 As Label
-    Friend WithEvents Label16 As Label
-    Friend WithEvents Label17 As Label
-    Friend WithEvents UcrNudWaterSeqTo As ucrNud
-    Friend WithEvents UcrNudWaterSeqStep As ucrNud
-    Friend WithEvents UcrNudWaterSingleAmt As ucrNud
-    Friend WithEvents UcrNudWaterSeqFrom As ucrNud
-    Friend WithEvents Label18 As Label
+    Friend WithEvents lblWaterAmt As Label
+    Friend WithEvents lblWaterTo As Label
+    Friend WithEvents lblWaterStep As Label
+    Friend WithEvents ucrNudWaterSeqTo As ucrNud
+    Friend WithEvents ucrNudWaterSeqStep As ucrNud
+    Friend WithEvents ucrNudWaterSingleAmt As ucrNud
+    Friend WithEvents ucrNudWaterSeqFrom As ucrNud
+    Friend WithEvents lblWaterFrom As Label
     Friend WithEvents rdWaterSeq As RadioButton
     Friend WithEvents rdWaterSingle As RadioButton
     Friend WithEvents grpLength As GroupBox
-    Friend WithEvents Label11 As Label
-    Friend WithEvents Label12 As Label
-    Friend WithEvents Label13 As Label
-    Friend WithEvents UcrNudLengthSeqTo As ucrNud
-    Friend WithEvents UcrNudLengthSeqStep As ucrNud
-    Friend WithEvents UcrNudLengthSingleDays As ucrNud
-    Friend WithEvents UcrNudLengthSeqFrom As ucrNud
-    Friend WithEvents Label14 As Label
+    Friend WithEvents lblLengthDay As Label
+    Friend WithEvents lblLengthTo As Label
+    Friend WithEvents lblLengthStep As Label
+    Friend WithEvents ucrNudLengthSeqTo As ucrNud
+    Friend WithEvents ucrNudLengthSeqStep As ucrNud
+    Friend WithEvents ucrNudLengthSingleDays As ucrNud
+    Friend WithEvents ucrNudLengthSeqFrom As ucrNud
+    Friend WithEvents lblLengthFrom As Label
     Friend WithEvents rdLengthSeq As RadioButton
     Friend WithEvents rdLengthSingle As RadioButton
     Friend WithEvents cmdOptions As Button
