@@ -117,7 +117,7 @@ Public Class ucrScript
             dlgOpen.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
 
             If dlgOpen.ShowDialog() = DialogResult.OK Then
-                msgWarning = MessageBox.Show("Opening a script from file will clear your current script", "Open Script From File", MessageBoxButtons.YesNo)
+                msgWarning = MessageBox.Show("Opening a script from file will clear your current script" & Environment.NewLine & "Do you want still want to open?", "Open Script From File", MessageBoxButtons.YesNo)
                 If msgWarning = DialogResult.Yes Then
                     Try
                         txtScript.Clear()
