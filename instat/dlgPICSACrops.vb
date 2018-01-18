@@ -17,6 +17,7 @@
 Imports instat.Translations
 
 Public Class dlgPICSACrops
+    Private clsCropsFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
 
@@ -38,7 +39,24 @@ Public Class dlgPICSACrops
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 480
 
-        ' ucrNewSheetName
+
+        'Selector
+        ucrSelectorForCrops.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorForCrops.SetParameterIsString()
+
+        'Station Receiver
+        ucrReceiverStation.SetParameter(New RParameter(" ", 1))
+        ucrReceiverStation.SetParameterIsString()
+        ucrReceiverStation.Selector = ucrSelectorForCrops
+        ucrReceiverStation.SetMeAsReceiver()
+
+        'Date Receiver
+        ucrReceiverDate.SetParameter(New RParameter(" ", 2))
+        ucrReceiverDate.SetParameterIsString()
+        ucrReceiverDate.Selector = ucrSelectorForCrops
+
+
+        ' ucrSaveDataFrame
         ucrSaveDataFrame.SetIsTextBox()
         ucrSaveDataFrame.SetSaveTypeAsDataFrame()
         ucrSaveDataFrame.SetLabelText("Save result as:")
@@ -47,6 +65,9 @@ Public Class dlgPICSACrops
     End Sub
 
     Private Sub SetDefaults()
+        clsCropsFunction = New RFunction
+        clsCropsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsCropsFunction)
         TestOKEnabled()
     End Sub
 

@@ -80,14 +80,14 @@ Partial Class dlgPICSACrops
         Me.rdWaterSingle = New System.Windows.Forms.RadioButton()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.ucrSaveDataFrame = New instat.ucrSave()
-        Me.UcrReceiverEnd = New instat.ucrReceiverSingle()
-        Me.UcrReceiverStart = New instat.ucrReceiverSingle()
-        Me.UcrReceiverDate = New instat.ucrReceiverSingle()
-        Me.UcrReceiverRainfall = New instat.ucrReceiverSingle()
-        Me.UcrReceiverDay = New instat.ucrReceiverSingle()
-        Me.UcrReceiverYear = New instat.ucrReceiverSingle()
-        Me.UcrReceiverStation = New instat.ucrReceiverSingle()
-        Me.UcrSelectorForCrops = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverEnd = New instat.ucrReceiverSingle()
+        Me.ucrReceiverStart = New instat.ucrReceiverSingle()
+        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
+        Me.ucrReceiverRainfall = New instat.ucrReceiverSingle()
+        Me.ucrReceiverDay = New instat.ucrReceiverSingle()
+        Me.ucrReceiverYear = New instat.ucrReceiverSingle()
+        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
+        Me.ucrSelectorForCrops = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpPlantDate.SuspendLayout()
         Me.grpLength.SuspendLayout()
@@ -602,99 +602,99 @@ Partial Class dlgPICSACrops
         Me.ucrSaveDataFrame.Size = New System.Drawing.Size(410, 37)
         Me.ucrSaveDataFrame.TabIndex = 30
         '
-        'UcrReceiverEnd
+        'ucrReceiverEnd
         '
-        Me.UcrReceiverEnd.frmParent = Me
-        Me.UcrReceiverEnd.Location = New System.Drawing.Point(387, 251)
-        Me.UcrReceiverEnd.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverEnd.Name = "UcrReceiverEnd"
-        Me.UcrReceiverEnd.Selector = Nothing
-        Me.UcrReceiverEnd.Size = New System.Drawing.Size(180, 31)
-        Me.UcrReceiverEnd.strNcFilePath = ""
-        Me.UcrReceiverEnd.TabIndex = 26
-        Me.UcrReceiverEnd.ucrSelector = Nothing
+        Me.ucrReceiverEnd.frmParent = Me
+        Me.ucrReceiverEnd.Location = New System.Drawing.Point(387, 251)
+        Me.ucrReceiverEnd.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverEnd.Name = "ucrReceiverEnd"
+        Me.ucrReceiverEnd.Selector = Nothing
+        Me.ucrReceiverEnd.Size = New System.Drawing.Size(180, 31)
+        Me.ucrReceiverEnd.strNcFilePath = ""
+        Me.ucrReceiverEnd.TabIndex = 26
+        Me.ucrReceiverEnd.ucrSelector = Nothing
         '
-        'UcrReceiverStart
+        'ucrReceiverStart
         '
-        Me.UcrReceiverStart.frmParent = Me
-        Me.UcrReceiverStart.Location = New System.Drawing.Point(387, 190)
-        Me.UcrReceiverStart.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverStart.Name = "UcrReceiverStart"
-        Me.UcrReceiverStart.Selector = Nothing
-        Me.UcrReceiverStart.Size = New System.Drawing.Size(180, 31)
-        Me.UcrReceiverStart.strNcFilePath = ""
-        Me.UcrReceiverStart.TabIndex = 19
-        Me.UcrReceiverStart.ucrSelector = Nothing
+        Me.ucrReceiverStart.frmParent = Me
+        Me.ucrReceiverStart.Location = New System.Drawing.Point(387, 190)
+        Me.ucrReceiverStart.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverStart.Name = "ucrReceiverStart"
+        Me.ucrReceiverStart.Selector = Nothing
+        Me.ucrReceiverStart.Size = New System.Drawing.Size(180, 31)
+        Me.ucrReceiverStart.strNcFilePath = ""
+        Me.ucrReceiverStart.TabIndex = 19
+        Me.ucrReceiverStart.ucrSelector = Nothing
         '
-        'UcrReceiverDate
+        'ucrReceiverDate
         '
-        Me.UcrReceiverDate.frmParent = Me
-        Me.UcrReceiverDate.Location = New System.Drawing.Point(387, 95)
-        Me.UcrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverDate.Name = "UcrReceiverDate"
-        Me.UcrReceiverDate.Selector = Nothing
-        Me.UcrReceiverDate.Size = New System.Drawing.Size(180, 31)
-        Me.UcrReceiverDate.strNcFilePath = ""
-        Me.UcrReceiverDate.TabIndex = 18
-        Me.UcrReceiverDate.ucrSelector = Nothing
+        Me.ucrReceiverDate.frmParent = Me
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(387, 95)
+        Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverDate.Name = "ucrReceiverDate"
+        Me.ucrReceiverDate.Selector = Nothing
+        Me.ucrReceiverDate.Size = New System.Drawing.Size(180, 31)
+        Me.ucrReceiverDate.strNcFilePath = ""
+        Me.ucrReceiverDate.TabIndex = 18
+        Me.ucrReceiverDate.ucrSelector = Nothing
         '
-        'UcrReceiverRainfall
+        'ucrReceiverRainfall
         '
-        Me.UcrReceiverRainfall.frmParent = Me
-        Me.UcrReceiverRainfall.Location = New System.Drawing.Point(623, 159)
-        Me.UcrReceiverRainfall.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverRainfall.Name = "UcrReceiverRainfall"
-        Me.UcrReceiverRainfall.Selector = Nothing
-        Me.UcrReceiverRainfall.Size = New System.Drawing.Size(180, 31)
-        Me.UcrReceiverRainfall.strNcFilePath = ""
-        Me.UcrReceiverRainfall.TabIndex = 17
-        Me.UcrReceiverRainfall.ucrSelector = Nothing
+        Me.ucrReceiverRainfall.frmParent = Me
+        Me.ucrReceiverRainfall.Location = New System.Drawing.Point(623, 159)
+        Me.ucrReceiverRainfall.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverRainfall.Name = "ucrReceiverRainfall"
+        Me.ucrReceiverRainfall.Selector = Nothing
+        Me.ucrReceiverRainfall.Size = New System.Drawing.Size(180, 31)
+        Me.ucrReceiverRainfall.strNcFilePath = ""
+        Me.ucrReceiverRainfall.TabIndex = 17
+        Me.ucrReceiverRainfall.ucrSelector = Nothing
         '
-        'UcrReceiverDay
+        'ucrReceiverDay
         '
-        Me.UcrReceiverDay.frmParent = Me
-        Me.UcrReceiverDay.Location = New System.Drawing.Point(623, 97)
-        Me.UcrReceiverDay.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverDay.Name = "UcrReceiverDay"
-        Me.UcrReceiverDay.Selector = Nothing
-        Me.UcrReceiverDay.Size = New System.Drawing.Size(180, 31)
-        Me.UcrReceiverDay.strNcFilePath = ""
-        Me.UcrReceiverDay.TabIndex = 16
-        Me.UcrReceiverDay.ucrSelector = Nothing
+        Me.ucrReceiverDay.frmParent = Me
+        Me.ucrReceiverDay.Location = New System.Drawing.Point(623, 97)
+        Me.ucrReceiverDay.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverDay.Name = "ucrReceiverDay"
+        Me.ucrReceiverDay.Selector = Nothing
+        Me.ucrReceiverDay.Size = New System.Drawing.Size(180, 31)
+        Me.ucrReceiverDay.strNcFilePath = ""
+        Me.ucrReceiverDay.TabIndex = 16
+        Me.ucrReceiverDay.ucrSelector = Nothing
         '
-        'UcrReceiverYear
+        'ucrReceiverYear
         '
-        Me.UcrReceiverYear.frmParent = Me
-        Me.UcrReceiverYear.Location = New System.Drawing.Point(623, 33)
-        Me.UcrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverYear.Name = "UcrReceiverYear"
-        Me.UcrReceiverYear.Selector = Nothing
-        Me.UcrReceiverYear.Size = New System.Drawing.Size(180, 31)
-        Me.UcrReceiverYear.strNcFilePath = ""
-        Me.UcrReceiverYear.TabIndex = 3
-        Me.UcrReceiverYear.ucrSelector = Nothing
+        Me.ucrReceiverYear.frmParent = Me
+        Me.ucrReceiverYear.Location = New System.Drawing.Point(623, 33)
+        Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverYear.Name = "ucrReceiverYear"
+        Me.ucrReceiverYear.Selector = Nothing
+        Me.ucrReceiverYear.Size = New System.Drawing.Size(180, 31)
+        Me.ucrReceiverYear.strNcFilePath = ""
+        Me.ucrReceiverYear.TabIndex = 3
+        Me.ucrReceiverYear.ucrSelector = Nothing
         '
-        'UcrReceiverStation
+        'ucrReceiverStation
         '
-        Me.UcrReceiverStation.frmParent = Me
-        Me.UcrReceiverStation.Location = New System.Drawing.Point(387, 34)
-        Me.UcrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverStation.Name = "UcrReceiverStation"
-        Me.UcrReceiverStation.Selector = Nothing
-        Me.UcrReceiverStation.Size = New System.Drawing.Size(180, 31)
-        Me.UcrReceiverStation.strNcFilePath = ""
-        Me.UcrReceiverStation.TabIndex = 2
-        Me.UcrReceiverStation.ucrSelector = Nothing
+        Me.ucrReceiverStation.frmParent = Me
+        Me.ucrReceiverStation.Location = New System.Drawing.Point(387, 34)
+        Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverStation.Name = "ucrReceiverStation"
+        Me.ucrReceiverStation.Selector = Nothing
+        Me.ucrReceiverStation.Size = New System.Drawing.Size(180, 31)
+        Me.ucrReceiverStation.strNcFilePath = ""
+        Me.ucrReceiverStation.TabIndex = 2
+        Me.ucrReceiverStation.ucrSelector = Nothing
         '
-        'UcrSelectorForCrops
+        'ucrSelectorForCrops
         '
-        Me.UcrSelectorForCrops.bShowHiddenColumns = False
-        Me.UcrSelectorForCrops.bUseCurrentFilter = True
-        Me.UcrSelectorForCrops.Location = New System.Drawing.Point(9, 7)
-        Me.UcrSelectorForCrops.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrSelectorForCrops.Name = "UcrSelectorForCrops"
-        Me.UcrSelectorForCrops.Size = New System.Drawing.Size(315, 277)
-        Me.UcrSelectorForCrops.TabIndex = 1
+        Me.ucrSelectorForCrops.bShowHiddenColumns = False
+        Me.ucrSelectorForCrops.bUseCurrentFilter = True
+        Me.ucrSelectorForCrops.Location = New System.Drawing.Point(9, 7)
+        Me.ucrSelectorForCrops.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorForCrops.Name = "ucrSelectorForCrops"
+        Me.ucrSelectorForCrops.Size = New System.Drawing.Size(315, 277)
+        Me.ucrSelectorForCrops.TabIndex = 1
         '
         'ucrBase
         '
@@ -714,21 +714,21 @@ Partial Class dlgPICSACrops
         Me.Controls.Add(Me.grpWater)
         Me.Controls.Add(Me.grpLength)
         Me.Controls.Add(Me.grpPlantDate)
-        Me.Controls.Add(Me.UcrReceiverEnd)
+        Me.Controls.Add(Me.ucrReceiverEnd)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.UcrReceiverStart)
-        Me.Controls.Add(Me.UcrReceiverDate)
-        Me.Controls.Add(Me.UcrReceiverRainfall)
-        Me.Controls.Add(Me.UcrReceiverDay)
+        Me.Controls.Add(Me.ucrReceiverStart)
+        Me.Controls.Add(Me.ucrReceiverDate)
+        Me.Controls.Add(Me.ucrReceiverRainfall)
+        Me.Controls.Add(Me.ucrReceiverDay)
         Me.Controls.Add(Me.lblSelectedSet)
-        Me.Controls.Add(Me.UcrReceiverYear)
-        Me.Controls.Add(Me.UcrReceiverStation)
-        Me.Controls.Add(Me.UcrSelectorForCrops)
+        Me.Controls.Add(Me.ucrReceiverYear)
+        Me.Controls.Add(Me.ucrReceiverStation)
+        Me.Controls.Add(Me.ucrSelectorForCrops)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -749,18 +749,18 @@ Partial Class dlgPICSACrops
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents UcrSelectorForCrops As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents UcrReceiverStation As ucrReceiverSingle
-    Friend WithEvents UcrReceiverYear As ucrReceiverSingle
+    Friend WithEvents ucrSelectorForCrops As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrReceiverStation As ucrReceiverSingle
+    Friend WithEvents ucrReceiverYear As ucrReceiverSingle
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents UcrReceiverStart As ucrReceiverSingle
-    Friend WithEvents UcrReceiverDate As ucrReceiverSingle
-    Friend WithEvents UcrReceiverRainfall As ucrReceiverSingle
-    Friend WithEvents UcrReceiverDay As ucrReceiverSingle
+    Friend WithEvents ucrReceiverStart As ucrReceiverSingle
+    Friend WithEvents ucrReceiverDate As ucrReceiverSingle
+    Friend WithEvents ucrReceiverRainfall As ucrReceiverSingle
+    Friend WithEvents ucrReceiverDay As ucrReceiverSingle
     Friend WithEvents lblSelectedSet As Label
-    Friend WithEvents UcrReceiverEnd As ucrReceiverSingle
+    Friend WithEvents ucrReceiverEnd As ucrReceiverSingle
     Friend WithEvents Label6 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label4 As Label
