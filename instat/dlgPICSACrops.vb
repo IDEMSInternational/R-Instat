@@ -55,6 +55,31 @@ Public Class dlgPICSACrops
         ucrReceiverDate.SetParameterIsString()
         ucrReceiverDate.Selector = ucrSelectorForCrops
 
+        'Start Receiver
+        ucrReceiverStart.SetParameter(New RParameter(" ", 3))
+        ucrReceiverStart.SetParameterIsString()
+        ucrReceiverStart.Selector = ucrSelectorForCrops
+
+        'End Receiver
+        ucrReceiverEnd.SetParameter(New RParameter(" ", 4))
+        ucrReceiverEnd.SetParameterIsString()
+        ucrReceiverEnd.Selector = ucrSelectorForCrops
+
+        'Year Receiver
+        ucrReceiverYear.SetParameter(New RParameter(" ", 4))
+        ucrReceiverYear.SetParameterIsString()
+        ucrReceiverYear.Selector = ucrSelectorForCrops
+
+        'Day Receiver
+        ucrReceiverDay.SetParameter(New RParameter(" ", 4))
+        ucrReceiverDay.SetParameterIsString()
+        ucrReceiverDay.Selector = ucrSelectorForCrops
+
+        'Rainfall Receiver
+        ucrReceiverRainfall.SetParameter(New RParameter(" ", 4))
+        ucrReceiverRainfall.SetParameterIsString()
+        ucrReceiverRainfall.Selector = ucrSelectorForCrops
+
 
         ' ucrSaveDataFrame
         ucrSaveDataFrame.SetIsTextBox()
