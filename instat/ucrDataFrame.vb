@@ -33,6 +33,13 @@ Public Class ucrDataFrame
     Private bParameterIsRFunction As Boolean = False
     'The name of the data parameter in the get data frame instat object method (should always be the same)
     Private strDataParameterNameInRFunction As String = "data_name"
+    'Same as strPrimaryDataFrame in ucrSelector
+    Private strPrimaryDataFrame As String = ""
+    'If True, only data frames linked to the primary data frame will be displayed
+    'This is usually set by the current receiver of the dialog
+    Private bOnlyLinkedToPrimaryDataFrames As Boolean = False
+    'If bOnlyLinkedToPrimaryDataFrames then should the primary data frame itself be displayed
+    Private bIncludePrimaryDataFrameAsLinked As Boolean = True
 
     Private Sub ucrDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         FillComboBox()
@@ -72,7 +79,7 @@ Public Class ucrDataFrame
         iOldText = cboAvailableDataFrames.Text
         cboAvailableDataFrames.Items.Clear()
         cboAvailableDataFrames.Text = ""
-        frmMain.clsRLink.FillComboDataFrames(cboAvailableDataFrames, bFirstLoad, strCurrentDataFrame:=iOldText)
+        frmMain.clsRLink.FillComboDataFrames(cboAvailableDataFrames, bFirstLoad, strCurrentDataFrame:=iOldText, bOnlyLinkedToPrimaryDataFrames:=bOnlyLinkedToPrimaryDataFrames, strPrimaryDataFrame:=strPrimaryDataFrame, bIncludePrimaryDataFrameAsLinked:=bIncludePrimaryDataFrameAsLinked)
         If bSetFixed AndAlso bDataFrameFixed AndAlso strFixedDataFrame <> "" Then
             SetDataframe(strFixedDataFrame, False)
         End If
@@ -228,5 +235,19 @@ Public Class ucrDataFrame
 
     Private Sub mnuRightClickSetData_Click(sender As Object, e As EventArgs) Handles mnuRightClickSetData.Click
         frmMain.SetCurrentDataFrame(cboAvailableDataFrames.Text)
+    End Sub
+
+    Public Sub SetPrimaryDataFrameOptions(strNewPrimaryDataFrame As String, bNewOnlyLinkedToPrimaryDataFrames As Boolean, Optional bNewIncludePrimaryDataFrameAsLinked As Boolean = False)
+        Dim bUpdate As Boolean = False
+
+        If (bNewOnlyLinkedToPrimaryDataFrames <> bOnlyLinkedToPrimaryDataFrames) OrElse (bNewOnlyLinkedToPrimaryDataFrames AndAlso (strPrimaryDataFrame <> strNewPrimaryDataFrame OrElse bNewIncludePrimaryDataFrameAsLinked <> bIncludePrimaryDataFrameAsLinked)) Then
+            bUpdate = True
+        End If
+        strPrimaryDataFrame = strNewPrimaryDataFrame
+        bOnlyLinkedToPrimaryDataFrames = bNewOnlyLinkedToPrimaryDataFrames
+        bNewIncludePrimaryDataFrameAsLinked = bIncludePrimaryDataFrameAsLinked
+        If bUpdate Then
+            FillComboBox()
+        End If
     End Sub
 End Class
