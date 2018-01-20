@@ -52,6 +52,18 @@ Public Class dlgClimdexIndices
         ucrReceiverDate.SetParameterIsRFunction()
         ucrReceiverDate.strSelectorHeading = "Date Variables"
 
+        ucrReceiverYear.SetParameter(New RParameter("year", 3))
+        ucrReceiverYear.SetParameterIsString()
+        ucrReceiverYear.Selector = ucrSelectorClimdex
+        ucrReceiverYear.SetClimaticType("year")
+        ucrReceiverYear.bAutoFill = True
+
+        ucrReceiverMonth.SetParameter(New RParameter("month", 4))
+        ucrReceiverMonth.SetParameterIsString()
+        ucrReceiverMonth.Selector = ucrSelectorClimdex
+        ucrReceiverMonth.SetClimaticType("month")
+        ucrReceiverMonth.bAutoFill = True
+
         ucrReceiverTmax.SetParameter(New RParameter("tmax", 1))
         ucrReceiverTmax.SetParameterIsRFunction()
         ucrReceiverTmax.Selector = ucrSelectorClimdex
@@ -318,6 +330,8 @@ Public Class dlgClimdexIndices
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrSelectorClimdex.SetRCode(clsRWriteDf, bReset)
+        ucrReceiverYear.SetRCode(clsRWriteDf, bReset)
+        ucrReceiverMonth.SetRCode(clsRWriteDf, bReset)
         ucrReceiverTmin.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverTmax.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverPrec.SetRCode(clsDefaultFunction, bReset)
