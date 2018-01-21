@@ -129,7 +129,7 @@
     <value>117, 13</value>
   </data>
   <data name="lblTmax.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>10</value>
   </data>
   <data name="lblTmax.Text" xml:space="preserve">
     <value>Maximum Temperature:</value>
@@ -156,7 +156,7 @@
     <value>114, 13</value>
   </data>
   <data name="lblTmin.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>12</value>
   </data>
   <data name="lblTmin.Text" xml:space="preserve">
     <value>Minimum Temperature:</value>
@@ -183,7 +183,7 @@
     <value>45, 13</value>
   </data>
   <data name="lblPrec.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>14</value>
   </data>
   <data name="lblPrec.Text" xml:space="preserve">
     <value>Rainfall:</value>
@@ -207,7 +207,7 @@
     <value>74, 23</value>
   </data>
   <data name="cmdIndices.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>17</value>
   </data>
   <data name="cmdIndices.Text" xml:space="preserve">
     <value>Indices...</value>
@@ -234,7 +234,7 @@
     <value>33, 13</value>
   </data>
   <data name="lblDate.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>4</value>
   </data>
   <data name="lblDate.Text" xml:space="preserve">
     <value>Date:</value>
@@ -277,7 +277,7 @@
     <value>91, 27</value>
   </data>
   <data name="rdoAnnual.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+    <value>1</value>
   </data>
   <data name="rdoAnnual.Text" xml:space="preserve">
     <value>Annual</value>
@@ -313,7 +313,7 @@
     <value>91, 27</value>
   </data>
   <data name="rdoMonthly.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
+    <value>2</value>
   </data>
   <data name="rdoMonthly.Text" xml:space="preserve">
     <value>Monthly</value>
@@ -340,7 +340,7 @@
     <value>228, 36</value>
   </data>
   <data name="ucrPnlAnnualMonthly.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;ucrPnlAnnualMonthly.Name" xml:space="preserve">
     <value>ucrPnlAnnualMonthly</value>
@@ -367,7 +367,7 @@
     <value>32, 13</value>
   </data>
   <data name="lblYear.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>6</value>
   </data>
   <data name="lblYear.Text" xml:space="preserve">
     <value>Year:</value>
@@ -397,7 +397,7 @@
     <value>40, 13</value>
   </data>
   <data name="lblMonth.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>8</value>
   </data>
   <data name="lblMonth.Text" xml:space="preserve">
     <value>Month:</value>
@@ -424,7 +424,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrReceiverYear.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;ucrReceiverYear.Name" xml:space="preserve">
     <value>ucrReceiverYear</value>
@@ -448,7 +448,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrReceiverMonth.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;ucrReceiverMonth.Name" xml:space="preserve">
     <value>ucrReceiverMonth</value>
@@ -469,7 +469,7 @@
     <value>107, 20</value>
   </data>
   <data name="ucrChkSave.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>16</value>
   </data>
   <data name="&gt;&gt;ucrChkSave.Name" xml:space="preserve">
     <value>ucrChkSave</value>
@@ -493,7 +493,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrReceiverPrec.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>15</value>
   </data>
   <data name="&gt;&gt;ucrReceiverPrec.Name" xml:space="preserve">
     <value>ucrReceiverPrec</value>
@@ -517,7 +517,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrReceiverTmin.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>13</value>
   </data>
   <data name="&gt;&gt;ucrReceiverTmin.Name" xml:space="preserve">
     <value>ucrReceiverTmin</value>
@@ -541,7 +541,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrReceiverTmax.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>11</value>
   </data>
   <data name="&gt;&gt;ucrReceiverTmax.Name" xml:space="preserve">
     <value>ucrReceiverTmax</value>
@@ -565,7 +565,7 @@
     <value>210, 180</value>
   </data>
   <data name="ucrSelectorClimdex.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;ucrSelectorClimdex.Name" xml:space="preserve">
     <value>ucrSelectorClimdex</value>
@@ -586,7 +586,7 @@
     <value>410, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>18</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -622,7 +622,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrReceiverDate.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;ucrReceiverDate.Name" xml:space="preserve">
     <value>ucrReceiverDate</value>
