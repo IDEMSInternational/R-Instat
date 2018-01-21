@@ -52,6 +52,7 @@ Partial Class dlgColumnStats
         Me.ucrReceiverSelectedVariables = New instat.ucrReceiverMultiple()
         Me.ucrSelectorForColumnStatistics = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrChkOriginalLevel = New instat.ucrCheck()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -67,6 +68,7 @@ Partial Class dlgColumnStats
         '
         'grpOptions
         '
+        Me.grpOptions.Controls.Add(Me.ucrChkOriginalLevel)
         Me.grpOptions.Controls.Add(Me.ucrChkStoreResults)
         Me.grpOptions.Controls.Add(Me.ucrChkOmitMissing)
         Me.grpOptions.Controls.Add(Me.ucrChkPrintOutput)
@@ -143,6 +145,12 @@ Partial Class dlgColumnStats
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrChkOriginalLevel
+        '
+        Me.ucrChkOriginalLevel.Checked = False
+        resources.ApplyResources(Me.ucrChkOriginalLevel, "ucrChkOriginalLevel")
+        Me.ucrChkOriginalLevel.Name = "ucrChkOriginalLevel"
+        '
         'dlgColumnStats
         '
         resources.ApplyResources(Me, "$this")
@@ -180,4 +188,5 @@ Partial Class dlgColumnStats
     Friend WithEvents ucrChkPrintOutput As ucrCheck
     Friend WithEvents ucrChkDropUnusedLevels As ucrCheck
     Friend WithEvents cmdProportionsPercentages As Button
+    Friend WithEvents ucrChkOriginalLevel As ucrCheck
 End Class
