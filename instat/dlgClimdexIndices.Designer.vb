@@ -55,6 +55,9 @@ Partial Class dlgClimdexIndices
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.lblMonth = New System.Windows.Forms.Label()
         Me.lblYear = New System.Windows.Forms.Label()
+        Me.rdoAnnual = New System.Windows.Forms.RadioButton()
+        Me.rdoMonthly = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlAnnualMonthly = New instat.UcrPanel()
         Me.SuspendLayout()
         '
         'lblTmax
@@ -172,10 +175,38 @@ Partial Class dlgClimdexIndices
         Me.lblYear.Name = "lblYear"
         Me.lblYear.Tag = "Year:"
         '
+        'rdoAnnual
+        '
+        resources.ApplyResources(Me.rdoAnnual, "rdoAnnual")
+        Me.rdoAnnual.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoAnnual.FlatAppearance.BorderSize = 2
+        Me.rdoAnnual.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoAnnual.Name = "rdoAnnual"
+        Me.rdoAnnual.TabStop = True
+        Me.rdoAnnual.UseVisualStyleBackColor = True
+        '
+        'rdoMonthly
+        '
+        resources.ApplyResources(Me.rdoMonthly, "rdoMonthly")
+        Me.rdoMonthly.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMonthly.FlatAppearance.BorderSize = 2
+        Me.rdoMonthly.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMonthly.Name = "rdoMonthly"
+        Me.rdoMonthly.TabStop = True
+        Me.rdoMonthly.UseVisualStyleBackColor = True
+        '
+        'ucrPnlAnnualMonthly
+        '
+        resources.ApplyResources(Me.ucrPnlAnnualMonthly, "ucrPnlAnnualMonthly")
+        Me.ucrPnlAnnualMonthly.Name = "ucrPnlAnnualMonthly"
+        '
         'dlgClimdexIndices
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.rdoAnnual)
+        Me.Controls.Add(Me.rdoMonthly)
+        Me.Controls.Add(Me.ucrPnlAnnualMonthly)
         Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.lblMonth)
         Me.Controls.Add(Me.ucrReceiverYear)
@@ -219,4 +250,7 @@ Partial Class dlgClimdexIndices
     Friend WithEvents lblMonth As Label
     Friend WithEvents ucrReceiverYear As ucrReceiverSingle
     Friend WithEvents ucrReceiverMonth As ucrReceiverSingle
+    Friend WithEvents rdoAnnual As RadioButton
+    Friend WithEvents rdoMonthly As RadioButton
+    Friend WithEvents ucrPnlAnnualMonthly As UcrPanel
 End Class
