@@ -173,6 +173,27 @@
   <data name="&gt;&gt;lblByFactors.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="ucrChkOriginalLevel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 42</value>
+  </data>
+  <data name="ucrChkOriginalLevel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 20</value>
+  </data>
+  <data name="ucrChkOriginalLevel.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOriginalLevel.Name" xml:space="preserve">
+    <value>ucrChkOriginalLevel</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOriginalLevel.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOriginalLevel.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOriginalLevel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrChkStoreResults.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 17</value>
   </data>
@@ -192,10 +213,10 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrChkStoreResults.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrChkOmitMissing.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 92</value>
+    <value>6, 119</value>
   </data>
   <data name="ucrChkOmitMissing.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 20</value>
@@ -213,10 +234,10 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrChkOmitMissing.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="ucrChkPrintOutput.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 42</value>
+    <value>6, 69</value>
   </data>
   <data name="ucrChkPrintOutput.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 20</value>
@@ -234,10 +255,10 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrChkPrintOutput.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="ucrChkDropUnusedLevels.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 67</value>
+    <value>6, 94</value>
   </data>
   <data name="ucrChkDropUnusedLevels.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 20</value>
@@ -255,13 +276,13 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrChkDropUnusedLevels.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="grpOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 196</value>
   </data>
   <data name="grpOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 121</value>
+    <value>160, 145</value>
   </data>
   <data name="grpOptions.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
