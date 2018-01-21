@@ -85,6 +85,11 @@ Public Class dlgClimdexIndices
         ucrReceiverPrec.bAutoFill = True
         ucrReceiverPrec.strSelectorHeading = "Rain Variables"
 
+        ucrPnlAnnualMonthly.SetParameter(New RParameter("freq", 2))
+        ucrPnlAnnualMonthly.AddRadioButton(rdoAnnual, Chr(34) & "annual" & Chr(34))
+        ucrPnlAnnualMonthly.AddRadioButton(rdoMonthly, Chr(34) & "monthly" & Chr(34))
+        ucrPnlAnnualMonthly.SetRDefault(Chr(34) & "annual" & Chr(34))
+
         ucrChkSave.SetText("Save Indices")
         ucrChkSave.bChangeParameterValue = False
     End Sub
@@ -332,6 +337,7 @@ Public Class dlgClimdexIndices
         ucrSelectorClimdex.SetRCode(clsRWriteDf, bReset)
         ucrReceiverYear.SetRCode(clsRWriteDf, bReset)
         ucrReceiverMonth.SetRCode(clsRWriteDf, bReset)
+        ucrPnlAnnualMonthly.SetRCode(clsRWriteDf, bReset)
         ucrReceiverTmin.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverTmax.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverPrec.SetRCode(clsDefaultFunction, bReset)
@@ -356,6 +362,20 @@ Public Class dlgClimdexIndices
         sdgClimdexIndices.SetRCode(clsDefaultFunction, clsRWriteDf, clsRWriteDfIndicesList, clsRMaxMissingDays, clsRBaseRange, clsRTempQTiles, clsRPrecQTiles, clsFrostDays, clsSummerDays, clsIcingDays, clsTropicalNights, clsWarmSpellDI, clsColdSpellDI, clsGrowingSeasonLength, clsMonthlyMaxDailyTMax, clsMonthlyMaxDailyTMin, clsMonthlyMinDailyTMax, clsMonthlyMinDailyTMin, clsTminBelow10Percent, clsTmaxBelow10Percent, clsTminAbove90Percent, clsTmaxAbove90Percent, clsMeanDiurnalTempRange, clsMonthlyMax1DayPrec, clsMonthlyMax5DayPrec, clsSimplePrecII, clsPrecExceed10mm, clsPrecExceed20mm, clsPrecExceedSpecifiedA, clsMaxDrySpell, clsMaxWetSpell, clsPrecExceed95Percent, clsPrecExceed99Percent, clsTotalDailyPrec, bResetSubdialog)
         bResetSubdialog = False
         sdgClimdexIndices.ShowDialog()
+    End Sub
+
+    Private Sub ucrPnlAnnualMonthly_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlAnnualMonthly.ControlContentsChanged
+        If rdoAnnual.Checked Then
+            sdgClimdexIndices.grpTminAnnual.Enabled = True
+            sdgClimdexIndices.grpTmaxAnnual.Enabled = True
+            sdgClimdexIndices.grpTmaxTminAnnual.Enabled = True
+            sdgClimdexIndices.grpPrecAnnual.Enabled = True
+        ElseIf rdoMonthly.Checked Then
+            sdgClimdexIndices.grpTminAnnual.Enabled = False
+            sdgClimdexIndices.grpTmaxAnnual.Enabled = False
+            sdgClimdexIndices.grpTmaxTminAnnual.Enabled = False
+            sdgClimdexIndices.grpPrecAnnual.Enabled = False
+        End If
     End Sub
 
     Private Sub ucrChkSave_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkSave.ControlContentsChanged
