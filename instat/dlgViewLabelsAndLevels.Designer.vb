@@ -178,7 +178,7 @@ Partial Class dlgViewFactorLabels
         Me.Controls.Add(Me.lblFactorColumns)
         Me.Controls.Add(Me.ucrReceiverVariables)
         Me.Controls.Add(Me.ucrSelectorViewLabelsAndLevels)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgViewFactorLabels"

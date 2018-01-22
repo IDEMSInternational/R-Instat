@@ -58,7 +58,7 @@ Public Class dlgImportDataset
 
     Private Sub dlgImportDataset_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         bDialogLoaded = False
-        autoTranslate(Me)
+        'autoTranslate(Me)
         Me.Show()
         If bFirstLoad Then
             InitialiseDialog()
@@ -85,14 +85,25 @@ Public Class dlgImportDataset
             RefreshFilePreview()
             RefreshFrameView()
         Else
-            If Not File.Exists(strFilePathSystem) Then
-                MsgBox("File no longer exists: " & strFilePathSystem, MsgBoxStyle.Information, "File No Longer Exists")
-                SetControlsFromFile("")
-                bDialogLoaded = True
-                RefreshFilePreview()
-                RefreshFrameView()
+            'if none of the above then try setting the displayed values from the previous contents of ucrInputFilePath.
+            If Not String.IsNullOrEmpty(ucrInputFilePath.GetText()) Then
+                If File.Exists(ucrInputFilePath.GetText()) Then
+                    SetControlsFromFile(ucrInputFilePath.GetText())
+                    bDialogLoaded = True
+                    RefreshFilePreview()
+                    RefreshFrameView()
+                Else
+                    MsgBox("File no longer exists: " & strFilePathSystem, MsgBoxStyle.Information, "File No Longer Exists")
+                    SetControlsFromFile("")
+                    bDialogLoaded = True
+                    RefreshFilePreview()
+                    RefreshFrameView()
+                End If
             End If
         End If
+
+        'temprary fix for autotranslate(me) translating this to Label1. Can be removed after that
+        ucrSaveFile.SetLabelText("New Data Frame Name:")
         bDialogLoaded = True
         bReset = False
         TestOkEnabled()
@@ -611,7 +622,6 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub FillExcelSheets(strFilePath As String)
-        Dim i As Integer
         Dim expSheet As SymbolicExpression
         Dim chrSheets As CharacterVector
 
