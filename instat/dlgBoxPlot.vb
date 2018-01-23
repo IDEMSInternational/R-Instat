@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgBoxplot
     Private clsRggplotFunction As New RFunction
@@ -113,7 +114,8 @@ Public Class dlgBoxplot
         ucrSaveBoxplot.SetDataFrameSelector(ucrSelectorBoxPlot.ucrAvailableDataFrames)
         ucrSaveBoxplot.SetAssignToIfUncheckedValue("last_graph")
 
-        '  sdgPlots.SetGgplotFunction(clsRggplotFunction)
+        ucrChkSwapParameters.SetText("swap Parameters")
+        ucrSecondFactorReceiver.AddToLinkedControls(ucrChkSwapParameters, {ucrSecondFactorReceiver.IsEmpty = True}, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Private Sub SetDefaults()
@@ -286,5 +288,16 @@ Public Class dlgBoxplot
 
     Private Sub ucrSaveBoxplot_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveBoxplot.ControlContentsChanged, ucrVariablesAsFactorForBoxplot.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub SwapFactors()
+        If ucrChkSwapParameters.Checked Then
+            ucrByFactorsReceiver.ChangeParameterName("fill")
+            ucrSecondFactorReceiver.ChangeParameterName("x")
+        End If
+    End Sub
+
+    Private Sub ucrChkSwapParameters_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSwapParameters.ControlValueChanged
+        SwapFactors()
     End Sub
 End Class

@@ -141,7 +141,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdOptions.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="lblByFactors.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -168,7 +168,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblByFactors.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="lblBySecondFactor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -195,7 +195,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblBySecondFactor.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="cmdBoxPlotOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 237</value>
@@ -219,7 +219,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdBoxPlotOptions.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -229,6 +229,27 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>425, 433</value>
+  </data>
+  <data name="ucrChkSwapParameters.Location" type="System.Drawing.Point, System.Drawing">
+    <value>254, 287</value>
+  </data>
+  <data name="ucrChkSwapParameters.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrChkSwapParameters.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSwapParameters.Name" xml:space="preserve">
+    <value>ucrChkSwapParameters</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSwapParameters.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSwapParameters.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSwapParameters.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="ucrSaveBoxplot.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 351</value>
@@ -249,7 +270,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSaveBoxplot.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrChkHorizontalBoxplot.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 325</value>
@@ -270,7 +291,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkHorizontalBoxplot.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="ucrChkVarWidth.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 299</value>
@@ -291,7 +312,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkVarWidth.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="rdoViolin.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
@@ -325,7 +346,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoViolin.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="rdoJitter.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -358,7 +379,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoJitter.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="rdoBoxplot.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -391,7 +412,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoBoxplot.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="ucrSecondFactorReceiver.Location" type="System.Drawing.Point, System.Drawing">
     <value>254, 263</value>
@@ -415,7 +436,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSecondFactorReceiver.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="ucrSelectorBoxPlot.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 50</value>
@@ -439,7 +460,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorBoxPlot.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="ucrByFactorsReceiver.Location" type="System.Drawing.Point, System.Drawing">
     <value>254, 220</value>
@@ -463,7 +484,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrByFactorsReceiver.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 376</value>
@@ -484,7 +505,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="ucrPnlPlots.Location" type="System.Drawing.Point, System.Drawing">
     <value>23, 12</value>
@@ -505,7 +526,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrPnlPlots.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -538,6 +559,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrVariablesAsFactorForBoxplot.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
 </root>
