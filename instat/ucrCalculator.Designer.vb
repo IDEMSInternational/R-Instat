@@ -207,12 +207,12 @@ Partial Class ucrCalculator
         Me.cmdAcos = New System.Windows.Forms.Button()
         Me.cmdCos = New System.Windows.Forms.Button()
         Me.cmdSqrt = New System.Windows.Forms.Button()
+        Me.cmdMode = New System.Windows.Forms.Button()
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSaveResultInto = New instat.ucrInputComboBox()
         Me.ucrInputTryMessage = New instat.ucrInputTextBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
-        Me.cmdMode = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -1393,6 +1393,12 @@ Partial Class ucrCalculator
         Me.cmdSqrt.Name = "cmdSqrt"
         Me.cmdSqrt.UseVisualStyleBackColor = True
         '
+        'cmdMode
+        '
+        resources.ApplyResources(Me.cmdMode, "cmdMode")
+        Me.cmdMode.Name = "cmdMode"
+        Me.cmdMode.UseVisualStyleBackColor = True
+        '
         'ucrInputCalOptions
         '
         Me.ucrInputCalOptions.AddQuotesIfUnrecognised = True
@@ -1430,12 +1436,6 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.Selector = Nothing
         Me.ucrReceiverForCalculation.strNcFilePath = ""
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
-        '
-        'cmdMode
-        '
-        resources.ApplyResources(Me.cmdMode, "cmdMode")
-        Me.cmdMode.Name = "cmdMode"
-        Me.cmdMode.UseVisualStyleBackColor = True
         '
         'ucrCalculator
         '
