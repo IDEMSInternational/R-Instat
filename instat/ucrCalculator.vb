@@ -1192,4 +1192,8 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::nth()", 1)
         End If
     End Sub
+
+    Private Sub cmdMode_Click(sender As Object, e As EventArgs) Handles cmdMode.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("summary_mode()", 1)
+    End Sub
 End Class
