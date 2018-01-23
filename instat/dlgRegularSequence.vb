@@ -26,7 +26,7 @@ Public Class dlgRegularSequence
     Private bUpdateBy As Boolean = False
 
     Private Sub dlgRegularSequence_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
+        'autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
