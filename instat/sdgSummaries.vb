@@ -106,6 +106,17 @@ Public Class sdgSummaries
         ucrChkCovariance.SetParameter(New RParameter("summary_cov", 22), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_cov" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkCovariance.SetText("Covariance")
 
+        ucrReceiverSecondVariable.SetMeAsReceiver()
+        'ucrReceiverSecondVariable.Selector = ucrSelectorSecondVariable
+
+        ucrChkFirst.SetText("First")
+
+        ucrChkLast.SetText("Last")
+
+        ucrChknth.SetText("nth")
+
+        ucrChkn_distinct.SetText("n_distinct")
+
         'linking controls
         ucrChkPercentile.AddToLinkedControls(ucrInputPercentile, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkProportion.AddToLinkedControls({ucrInputInequality, ucrInputValue}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
