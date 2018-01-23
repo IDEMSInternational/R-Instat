@@ -55,6 +55,7 @@ Partial Class dlgBoxplot
         Me.ucrChkVarWidth = New instat.ucrCheck()
         Me.ucrChkHorizontalBoxplot = New instat.ucrCheck()
         Me.ucrSaveBoxplot = New instat.ucrSave()
+        Me.ucrChkSwapParameters = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -175,10 +176,17 @@ Partial Class dlgBoxplot
         resources.ApplyResources(Me.ucrSaveBoxplot, "ucrSaveBoxplot")
         Me.ucrSaveBoxplot.Name = "ucrSaveBoxplot"
         '
+        'ucrChkSwapParameters
+        '
+        Me.ucrChkSwapParameters.Checked = False
+        resources.ApplyResources(Me.ucrChkSwapParameters, "ucrChkSwapParameters")
+        Me.ucrChkSwapParameters.Name = "ucrChkSwapParameters"
+        '
         'dlgBoxplot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkSwapParameters)
         Me.Controls.Add(Me.ucrSaveBoxplot)
         Me.Controls.Add(Me.ucrChkHorizontalBoxplot)
         Me.Controls.Add(Me.ucrChkVarWidth)
@@ -222,4 +230,5 @@ Partial Class dlgBoxplot
     Friend WithEvents ucrChkHorizontalBoxplot As ucrCheck
     Friend WithEvents ucrChkVarWidth As ucrCheck
     Friend WithEvents ucrPnlPlots As UcrPanel
+    Friend WithEvents ucrChkSwapParameters As ucrCheck
 End Class
