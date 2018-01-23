@@ -103,7 +103,7 @@ Public Class dlgColumnStructure
     End Sub
 
     Private Sub ucrChkColourColumnsByStructure_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkColourColumnsByStructure.ControlValueChanged
-        'assigne the appropriate Colour Metadata RFunction to the clsColourStructure RFunction accordingly
+        'assign the appropriate Colour Metadata RFunction to the clsColourStructure RFunction accordingly
         If ucrChkColourColumnsByStructure.Checked Then
             clsColourStructure = clsColourByMetadata
         Else
