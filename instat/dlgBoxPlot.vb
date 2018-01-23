@@ -82,7 +82,8 @@ Public Class dlgBoxplot
 
         ucrByFactorsReceiver.SetParameter(New RParameter("x", 1))
         ucrByFactorsReceiver.Selector = ucrSelectorBoxPlot
-        ucrByFactorsReceiver.strSelectorHeading = "Varibles"
+        ucrByFactorsReceiver.SetIncludedDataTypes({"factor"})
+        ucrByFactorsReceiver.strSelectorHeading = "Factors"
         ucrByFactorsReceiver.SetParameterIsString()
         ucrByFactorsReceiver.bWithQuotes = False
         ucrByFactorsReceiver.SetValuesToIgnore({Chr(34) & Chr(34)})
@@ -114,8 +115,10 @@ Public Class dlgBoxplot
         ucrSaveBoxplot.SetDataFrameSelector(ucrSelectorBoxPlot.ucrAvailableDataFrames)
         ucrSaveBoxplot.SetAssignToIfUncheckedValue("last_graph")
 
-        ucrChkSwapParameters.SetText("swap Parameters")
-        ucrSecondFactorReceiver.AddToLinkedControls(ucrChkSwapParameters, {ucrSecondFactorReceiver.IsEmpty = True}, bNewLinkedHideIfParameterMissing:=True)
+
+        'this control exists but hidden for now
+        ' ucrChkSwapParameters.SetText("swap Parameters")
+        'ucrSecondFactorReceiver.AddToLinkedControls(ucrChkSwapParameters, {ucrSecondFactorReceiver.IsEmpty = False}, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Private Sub SetDefaults()
@@ -151,9 +154,9 @@ Public Class dlgBoxplot
         clsRgeomPlotFunction.SetRCommand("geom_boxplot")
         clsRgeomPlotFunction.AddParameter("varwidth", "FALSE")
 
-        clsLocalRaesFunction.SetPackageName("ggplot2")
-        clsLocalRaesFunction.SetRCommand("aes")
-        clsRgeomPlotFunction.AddParameter("boxaes", clsRFunctionParameter:=clsLocalRaesFunction, iPosition:=1, bIncludeArgumentName:=False)
+        'clsLocalRaesFunction.SetPackageName("ggplot2")
+        'clsLocalRaesFunction.SetRCommand("aes")
+        'clsRgeomPlotFunction.AddParameter("boxaes", clsRFunctionParameter:=clsLocalRaesFunction, iPosition:=1, bIncludeArgumentName:=False)
 
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
@@ -181,7 +184,8 @@ Public Class dlgBoxplot
         ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
         ucrVariablesAsFactorForBoxplot.SetRCode(clsRaesFunction, bReset)
         ucrByFactorsReceiver.SetRCode(clsRaesFunction, bReset)
-        ucrByFactorsReceiver.AddAdditionalCodeParameterPair(clsLocalRaesFunction, New RParameter("group", 0), iAdditionalPairNo:=1)
+
+        ' ucrByFactorsReceiver.AddAdditionalCodeParameterPair(clsLocalRaesFunction, New RParameter("group", 0), iAdditionalPairNo:=1)
 
         ucrSecondFactorReceiver.SetRCode(clsRaesFunction, bReset)
         ucrPnlPlots.SetRCode(clsRgeomPlotFunction, bReset)
@@ -290,14 +294,15 @@ Public Class dlgBoxplot
         TestOkEnabled()
     End Sub
 
-    Private Sub SwapFactors()
-        If ucrChkSwapParameters.Checked Then
-            ucrByFactorsReceiver.ChangeParameterName("fill")
-            ucrSecondFactorReceiver.ChangeParameterName("x")
-        End If
-    End Sub
+    'this code is commented out but will work once we get the feature of linking controls with the contents of a receiver
+    'Private Sub SwapFactors()
+    '    If ucrChkSwapParameters.Checked Then
+    '        ucrByFactorsReceiver.ChangeParameterName("fill")
+    '        ucrSecondFactorReceiver.ChangeParameterName("x")
+    '    End If
+    'End Sub
 
-    Private Sub ucrChkSwapParameters_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSwapParameters.ControlValueChanged
-        SwapFactors()
-    End Sub
+    'Private Sub ucrChkSwapParameters_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSwapParameters.ControlValueChanged
+    '    SwapFactors()
+    'End Sub
 End Class
