@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgColumnStructure
     Private bReset As Boolean = True
@@ -101,6 +102,15 @@ Public Class dlgColumnStructure
         End If
     End Sub
 
+    Private Sub ucrChkColourColumnsByStructure_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkColourColumnsByStructure.ControlValueChanged
+        'assigne the appropriate Colour Metadata RFunction to the clsColourStructure RFunction accordingly
+        If ucrChkColourColumnsByStructure.Checked Then
+            clsColourStructure = clsColourByMetadata
+        Else
+            clsColourStructure = clsUncolourByMetadata
+        End If
+    End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
@@ -108,13 +118,7 @@ Public Class dlgColumnStructure
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        If ucrChkColourColumnsByStructure.Checked Then
-            frmMain.clsRLink.RunScript(clsColourByMetadata.ToScript)
-            clsColourStructure = clsColourByMetadata
-        Else
-            frmMain.clsRLink.RunScript(clsUncolourByMetadata.ToScript)
-            clsColourStructure = clsUncolourByMetadata
-        End If
+        frmMain.clsRLink.RunScript(clsColourStructure.ToScript)
     End Sub
 
     Private Sub SetColumnStructureInReceiver()
@@ -129,4 +133,5 @@ Public Class dlgColumnStructure
     Private Sub ucrSelectorColumnStructure_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorColumnStructure.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
 End Class
