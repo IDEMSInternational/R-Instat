@@ -230,6 +230,9 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>425, 433</value>
   </data>
+  <data name="ucrChkSwapParameters.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="ucrChkSwapParameters.Location" type="System.Drawing.Point, System.Drawing">
     <value>254, 287</value>
   </data>
@@ -238,9 +241,6 @@
   </data>
   <data name="ucrChkSwapParameters.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
-  </data>
-  <data name="ucrChkSwapParameters.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="&gt;&gt;ucrChkSwapParameters.Name" xml:space="preserve">
     <value>ucrChkSwapParameters</value>
