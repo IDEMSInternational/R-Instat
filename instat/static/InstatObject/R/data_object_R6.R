@@ -288,7 +288,16 @@ data_object$set("public", "get_data_frame", function(convert_to_character = FALS
       }
     }
     if(!missing(max_cols) && max_cols < ncol(out)) out <- out[1:max_cols]
-    if(!missing(max_rows) && max_rows < nrow(out)) out <- out[1:max_rows, ]
+    if(!missing(max_rows) && max_rows < nrow(out)) {
+      #for data frames with 1 col use slice because out[1:max_rows, ] will return a vector
+      if(ncol(out) == 1){
+        rnames <- row.names(out)[1:max_rows]
+        out <- as.data.frame(dplyr::slice(out,1:max_rows))
+        row.names(out) <- rnames
+      } else { 
+        out <- out[1:max_rows, ]  
+      }
+    } 
     if(convert_to_character) {
       decimal_places = self$get_variables_metadata(property = signif_figures_label, column = names(out), error_if_no_property = FALSE)
       decimal_places[is.na(decimal_places)] <- 0
