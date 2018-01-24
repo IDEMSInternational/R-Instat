@@ -116,8 +116,8 @@ Public Class dlgBoxplot
         ucrSaveBoxplot.SetAssignToIfUncheckedValue("last_graph")
 
 
-        'this control exists but hidden for now
-        ' ucrChkSwapParameters.SetText("swap Parameters")
+        'this control exists but diabled for now
+        ucrChkSwapParameters.SetText("swap Parameters")
         'ucrSecondFactorReceiver.AddToLinkedControls(ucrChkSwapParameters, {ucrSecondFactorReceiver.IsEmpty = False}, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
