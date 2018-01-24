@@ -88,8 +88,7 @@ Public Class dlgUnstack
         ucrPnlUnstackCol.AddRadioButton(rdoRestoreHierarchy)
 
         ucrPnlUnstackCol.AddFunctionNamesCondition(rdoSingle, "dcast")
-        'ucrPnlUnstackCol.AddFunctionNamesCondition(rdoMultiple, "dcast")
-        'ucrPnlUnstackCol.AddFunctionNamesCondition(rdoRestoreHierarchy, "dcast")
+        'TODO add function names conditions for rdoMultiple and rdoRestoreHierarchy
 
 
         ucrPnlUnstackCol.AddToLinkedControls(ucrColumnToUnstackReceiver, {rdoSingle}, bNewLinkedHideIfParameterMissing:=True)
@@ -121,13 +120,15 @@ Public Class dlgUnstack
         ucrSelectorForUnstack.SetRCode(clsDefaultFunction, bReset)
         ucrColumnToUnstackReceiver.SetRCode(clsDefaultFunction, bReset)
         ucrMultipleColumnsReceiver.SetRCode(clsDefaultFunction, bReset)
+        ucrPnlUnstackCol.SetRCode(clsDefaultFunction, bReset)
         ucrNewDFName.SetRCode(clsDefaultFunction, bReset)
         ucrChkDropMissingCombinations.SetRCode(clsDefaultFunction, bReset)
         ucrFactorToUnstackReceiver.SetRCode(clsFormula, bReset)
+
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrFactorToUnstackReceiver.IsEmpty() AndAlso Not ucrColumnToUnstackReceiver.IsEmpty() AndAlso Not ucrIDColumns.IsEmpty() AndAlso Not ucrMultipleColumnsReceiver.IsEmpty AndAlso ucrNewDFName.IsComplete Then
+        If Not ucrFactorToUnstackReceiver.IsEmpty() AndAlso Not ucrIDColumns.IsEmpty() AndAlso ucrNewDFName.IsComplete Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -170,4 +171,5 @@ Public Class dlgUnstack
     Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewDFName.ControlContentsChanged, ucrColumnToUnstackReceiver.ControlContentsChanged, ucrFactorToUnstackReceiver.ControlContentsChanged, ucrIDColumns.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
 End Class
