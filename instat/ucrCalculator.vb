@@ -1147,7 +1147,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCor_Click(sender As Object, e As EventArgs) Handles cmdCor.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cor(x= ,y= )", 5)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cor(x= ,y= ,use = ""everything"", method = c(""pearson"", ""kendall"", ""spearman""))", 71)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cor()", 1)
         End If
@@ -1155,7 +1155,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCov_Click(sender As Object, e As EventArgs) Handles cmdCov.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cov(x= ,y= )", 5)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cov(x= ,y= ,use = ""everything"", method = c(""pearson"", ""kendall"", ""spearman""))", 71)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cov()", 1)
         End If
@@ -1191,5 +1191,9 @@ Public Class ucrCalculator
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::nth()", 1)
         End If
+    End Sub
+
+    Private Sub cmdMode_Click(sender As Object, e As EventArgs) Handles cmdMode.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("summary_mode()", 1)
     End Sub
 End Class
