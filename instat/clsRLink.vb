@@ -138,7 +138,7 @@ Public Class RLink
                 If strLine.Contains(strInstatDataObject & "$get_graphs") Then
                     iCallType = 3
                 Else
-                    iCallType = 0
+                    iCallType = 2
                 End If
                 RunScript(strScript:=strLine.Trim(vbLf), iCallType:=iCallType, strComment:=strComment, bSeparateThread:=False, bSilent:=False)
                 strComment = ""
@@ -557,7 +557,9 @@ Public Class RLink
                 expTemp = GetSymbol(strTempAssignTo)
                 If expTemp IsNot Nothing Then
                     strTemp = String.Join(Environment.NewLine, expTemp.AsCharacter())
-                    strOutput = strOutput & strTemp & Environment.NewLine
+                    If strTemp <> "" Then
+                        strOutput = strOutput & strTemp & Environment.NewLine
+                    End If
                 End If
             Catch e As Exception
                 MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
