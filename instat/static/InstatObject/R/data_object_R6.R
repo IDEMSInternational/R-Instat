@@ -1537,7 +1537,7 @@ data_object$set("public", "filter_string", function(filter_name) {
   out = "("
   i = 1
   for(condition in curr_filter$filter_conditions) {
-    if(i != 1) out = paste(out, "&&")
+    if(i != 1) out = paste(out, "&")
     out = paste0(out, " (", condition[["column"]], " ", condition[["operation"]])
     if(condition[["operation"]] == "%in%") out = paste0(out, " c(", paste(paste0("'", condition[["value"]], "'"), collapse = ","), ")")
     else out = paste(out, condition[["value"]])
