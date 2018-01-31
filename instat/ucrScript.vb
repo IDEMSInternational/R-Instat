@@ -120,7 +120,6 @@ Public Class ucrScript
                 msgWarning = MessageBox.Show("Opening a script from file will clear your current script" & Environment.NewLine & "Do you want still want to open?", "Open Script From File", MessageBoxButtons.YesNo)
                 If msgWarning = DialogResult.Yes Then
                     Try
-                        txtScript.Clear()
                         txtScript.Text = File.ReadAllText(dlgOpen.FileName)
                     Catch
                         MsgBox("Could not open the script from file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
