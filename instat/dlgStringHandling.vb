@@ -30,7 +30,7 @@ Public Class dlgStringHandling
         If bReset Then
             SetDefaults()
         End If
-        'SetRCodeForControls(bReset)
+        SetRCodeForControls(bReset)
         bReset = False
         'autoTranslate(Me)
         TestOkEnabled()
