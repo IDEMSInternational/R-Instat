@@ -17,6 +17,7 @@
 Imports System.IO
 Public Class ucrScript
     Private strComment As String = "Code run from Script Window"
+    Private strCurrentDirectory As String = ""
     Public strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
 
     Public Sub CopyText()
@@ -86,6 +87,46 @@ Public Class ucrScript
             MsgBox("Could not save the script file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
             End
         End Try
+    End Sub
+
+    Private Sub mnuSaveScript_Click(sender As Object, e As EventArgs) Handles mnuSaveScript.Click
+        Using dlgSave As New SaveFileDialog
+            dlgSave.Title = "Save Script To File"
+            dlgSave.Filter = "Text File (*.txt)|*.txt|R Script File (*.R)|*.R"
+
+            dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+
+            If dlgSave.ShowDialog() = DialogResult.OK Then
+                Try
+                    File.WriteAllText(dlgSave.FileName, txtScript.Text)
+                Catch
+                    MsgBox("Could not save the script file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
+                End Try
+
+            End If
+        End Using
+    End Sub
+
+    Private Sub mnuOpenScriptFromFile_Click(sender As Object, e As EventArgs) Handles mnuOpenScriptFromFile.Click
+
+        Dim msgWarning As DialogResult
+
+        Using dlgOpen As New OpenFileDialog
+            dlgOpen.Title = "Open Script From Text File"
+            dlgOpen.Filter = "Text File (*.txt)|*.txt|R Script File (*.R)|*.R"
+            dlgOpen.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+
+            If dlgOpen.ShowDialog() = DialogResult.OK Then
+                msgWarning = MessageBox.Show("Opening a script from file will clear your current script" & Environment.NewLine & "Do you want still want to open?", "Open Script From File", MessageBoxButtons.YesNo)
+                If msgWarning = DialogResult.Yes Then
+                    Try
+                        txtScript.Text = File.ReadAllText(dlgOpen.FileName)
+                    Catch
+                        MsgBox("Could not open the script from file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
+                    End Try
+                End If
+            End If
+        End Using
     End Sub
 
 End Class
