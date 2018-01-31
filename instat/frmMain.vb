@@ -1862,7 +1862,7 @@ Public Class frmMain
         dlgClimaticCheckDataTemperature.ShowDialog()
     End Sub
 
-    Private Sub mnuPrepareColumReshapeRestoreHierachy_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumReshapeRestoreHierachy.Click
-        dlgRestoreLevelHierachy.ShowDialog()
+    Private Sub mnuDescribeSpecificParallelCoordinatePlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificParallelCoordinatePlot.Click
+        dlgParallelCoordinatePlot.ShowDialog()
     End Sub
 End Class

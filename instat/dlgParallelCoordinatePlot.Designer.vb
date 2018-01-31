@@ -23,29 +23,22 @@ Partial Class dlgParallelCoordinatePlot
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgParallelCoordinatePlot))
-        Me.ucrSelectorParallelCoordinatePlot = New instat.ucrSelectorByDataFrameAddRemove()
         Me.cmdParcoordOptions = New System.Windows.Forms.Button()
         Me.cmdPlotOptions = New System.Windows.Forms.Button()
-        Me.ucrReceiverXVariables = New instat.ucrReceiverMultiple()
         Me.lblXVariables = New System.Windows.Forms.Label()
-        Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
         Me.lblFactor = New System.Windows.Forms.Label()
-        Me.ucrBase = New instat.ucrButtons()
         Me.lblScale = New System.Windows.Forms.Label()
-        Me.ucrInputScale = New instat.ucrInputComboBox()
-        Me.ucrChkBoxplots = New instat.ucrCheck()
-        Me.ucrChkPoints = New instat.ucrCheck()
         Me.lblTransparency = New System.Windows.Forms.Label()
-        Me.ucrNudTransparency = New instat.ucrNud()
         Me.ucrSaveGraph = New instat.ucrSave()
+        Me.ucrNudTransparency = New instat.ucrNud()
+        Me.ucrChkPoints = New instat.ucrCheck()
+        Me.ucrChkBoxplots = New instat.ucrCheck()
+        Me.ucrInputScale = New instat.ucrInputComboBox()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
+        Me.ucrReceiverXVariables = New instat.ucrReceiverMultiple()
+        Me.ucrSelectorParallelCoordinatePlot = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
-        '
-        'ucrSelectorParallelCoordinatePlot
-        '
-        Me.ucrSelectorParallelCoordinatePlot.bShowHiddenColumns = False
-        Me.ucrSelectorParallelCoordinatePlot.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorParallelCoordinatePlot, "ucrSelectorParallelCoordinatePlot")
-        Me.ucrSelectorParallelCoordinatePlot.Name = "ucrSelectorParallelCoordinatePlot"
         '
         'cmdParcoordOptions
         '
@@ -59,67 +52,30 @@ Partial Class dlgParallelCoordinatePlot
         Me.cmdPlotOptions.Name = "cmdPlotOptions"
         Me.cmdPlotOptions.UseVisualStyleBackColor = True
         '
-        'ucrReceiverXVariables
-        '
-        Me.ucrReceiverXVariables.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverXVariables, "ucrReceiverXVariables")
-        Me.ucrReceiverXVariables.Name = "ucrReceiverXVariables"
-        Me.ucrReceiverXVariables.Selector = Nothing
-        Me.ucrReceiverXVariables.strNcFilePath = ""
-        Me.ucrReceiverXVariables.ucrSelector = Nothing
-        '
         'lblXVariables
         '
         resources.ApplyResources(Me.lblXVariables, "lblXVariables")
         Me.lblXVariables.Name = "lblXVariables"
-        '
-        'ucrReceiverFactor
-        '
-        Me.ucrReceiverFactor.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverFactor, "ucrReceiverFactor")
-        Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
-        Me.ucrReceiverFactor.Selector = Nothing
-        Me.ucrReceiverFactor.strNcFilePath = ""
-        Me.ucrReceiverFactor.ucrSelector = Nothing
         '
         'lblFactor
         '
         resources.ApplyResources(Me.lblFactor, "lblFactor")
         Me.lblFactor.Name = "lblFactor"
         '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
-        '
         'lblScale
         '
         resources.ApplyResources(Me.lblScale, "lblScale")
         Me.lblScale.Name = "lblScale"
         '
-        'ucrInputScale
-        '
-        Me.ucrInputScale.AddQuotesIfUnrecognised = True
-        Me.ucrInputScale.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputScale, "ucrInputScale")
-        Me.ucrInputScale.Name = "ucrInputScale"
-        '
-        'ucrChkBoxplots
-        '
-        Me.ucrChkBoxplots.Checked = False
-        resources.ApplyResources(Me.ucrChkBoxplots, "ucrChkBoxplots")
-        Me.ucrChkBoxplots.Name = "ucrChkBoxplots"
-        '
-        'ucrChkPoints
-        '
-        Me.ucrChkPoints.Checked = False
-        resources.ApplyResources(Me.ucrChkPoints, "ucrChkPoints")
-        Me.ucrChkPoints.Name = "ucrChkPoints"
-        '
         'lblTransparency
         '
         resources.ApplyResources(Me.lblTransparency, "lblTransparency")
         Me.lblTransparency.Name = "lblTransparency"
+        '
+        'ucrSaveGraph
+        '
+        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
         '
         'ucrNudTransparency
         '
@@ -131,10 +87,54 @@ Partial Class dlgParallelCoordinatePlot
         Me.ucrNudTransparency.Name = "ucrNudTransparency"
         Me.ucrNudTransparency.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrSaveGraph
+        'ucrChkPoints
         '
-        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
-        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrChkPoints.Checked = False
+        resources.ApplyResources(Me.ucrChkPoints, "ucrChkPoints")
+        Me.ucrChkPoints.Name = "ucrChkPoints"
+        '
+        'ucrChkBoxplots
+        '
+        Me.ucrChkBoxplots.Checked = False
+        resources.ApplyResources(Me.ucrChkBoxplots, "ucrChkBoxplots")
+        Me.ucrChkBoxplots.Name = "ucrChkBoxplots"
+        '
+        'ucrInputScale
+        '
+        Me.ucrInputScale.AddQuotesIfUnrecognised = True
+        Me.ucrInputScale.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputScale, "ucrInputScale")
+        Me.ucrInputScale.Name = "ucrInputScale"
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
+        '
+        'ucrReceiverFactor
+        '
+        Me.ucrReceiverFactor.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverFactor, "ucrReceiverFactor")
+        Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
+        Me.ucrReceiverFactor.Selector = Nothing
+        Me.ucrReceiverFactor.strNcFilePath = ""
+        Me.ucrReceiverFactor.ucrSelector = Nothing
+        '
+        'ucrReceiverXVariables
+        '
+        Me.ucrReceiverXVariables.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverXVariables, "ucrReceiverXVariables")
+        Me.ucrReceiverXVariables.Name = "ucrReceiverXVariables"
+        Me.ucrReceiverXVariables.Selector = Nothing
+        Me.ucrReceiverXVariables.strNcFilePath = ""
+        Me.ucrReceiverXVariables.ucrSelector = Nothing
+        '
+        'ucrSelectorParallelCoordinatePlot
+        '
+        Me.ucrSelectorParallelCoordinatePlot.bShowHiddenColumns = False
+        Me.ucrSelectorParallelCoordinatePlot.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorParallelCoordinatePlot, "ucrSelectorParallelCoordinatePlot")
+        Me.ucrSelectorParallelCoordinatePlot.Name = "ucrSelectorParallelCoordinatePlot"
         '
         'dlgParallelCoordinatePlot
         '
