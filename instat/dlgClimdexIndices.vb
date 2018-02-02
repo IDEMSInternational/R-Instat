@@ -20,10 +20,10 @@ Public Class dlgClimdexIndices
     Private bReset As Boolean = True
     Public bSaveIndex As Boolean = True
     Private bResetSubdialog As Boolean = False
-    Public clsDefaultFunction As New RFunction
-    Public clsRDataName, clsRPCIct, clsRChar, clsRWriteDf, clsRWriteDfIndicesList, clsRMaxMissingDays, clsRBaseRange, clsRTempQTiles, clsRPrecQTiles As New RFunction
-    Public clsFrostDays, clsSummerDays, clsIcingDays, clsTropicalNights, clsWarmSpellDI, clsColdSpellDI, clsGrowingSeasonLength, clsMonthlyMaxDailyTMax, clsMonthlyMaxDailyTMin, clsMonthlyMinDailyTMax, clsMonthlyMinDailyTMin, clsTminBelow10Percent, clsTmaxBelow10Percent, clsTminAbove90Percent, clsTmaxAbove90Percent, clsMeanDiurnalTempRange As New RFunction
-    Public clsMonthlyMax1DayPrec, clsMonthlyMax5DayPrec, clsSimplePrecII, clsPrecExceed10mm, clsPrecExceed20mm, clsPrecExceedSpecifiedA, clsMaxDrySpell, clsMaxWetSpell, clsPrecExceed95Percent, clsPrecExceed99Percent, clsTotalDailyPrec As New RFunction
+    Private clsDefaultFunction As New RFunction
+    Private clsRDataName, clsRPCIct, clsRChar, clsRWriteDf, clsRWriteDfIndicesList, clsRMaxMissingDays, clsRBaseRange, clsRTempQTiles, clsRPrecQTiles As New RFunction
+    Private clsFrostDays, clsSummerDays, clsIcingDays, clsTropicalNights, clsWarmSpellDI, clsColdSpellDI, clsGrowingSeasonLength, clsMonthlyMaxDailyTMax, clsMonthlyMaxDailyTMin, clsMonthlyMinDailyTMax, clsMonthlyMinDailyTMin, clsTminBelow10Percent, clsTmaxBelow10Percent, clsTminAbove90Percent, clsTmaxAbove90Percent, clsMeanDiurnalTempRange As New RFunction
+    Private clsMonthlyMax1DayPrec, clsMonthlyMax5DayPrec, clsSimplePrecII, clsPrecExceed10mm, clsPrecExceed20mm, clsPrecExceedSpecifiedA, clsMaxDrySpell, clsMaxWetSpell, clsPrecExceed95Percent, clsPrecExceed99Percent, clsTotalDailyPrec As New RFunction
 
     Private Sub dlgClimdex_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -371,6 +371,23 @@ Public Class dlgClimdexIndices
             sdgClimdexIndices.grpTmaxTminAnnual.Enabled = True
             sdgClimdexIndices.grpPrecAnnual.Enabled = True
         ElseIf rdoMonthly.Checked Then
+            clsRWriteDfIndicesList.RemoveParameterByName("frost")
+            clsRWriteDfIndicesList.RemoveParameterByName("tropical_nights")
+            clsRWriteDfIndicesList.RemoveParameterByName("cold_spell_duration")
+            clsRWriteDfIndicesList.RemoveParameterByName("summer")
+            clsRWriteDfIndicesList.RemoveParameterByName("icing")
+            clsRWriteDfIndicesList.RemoveParameterByName("growing_season_length")
+            clsRWriteDfIndicesList.RemoveParameterByName("cold_spell_duration")
+            clsRWriteDfIndicesList.RemoveParameterByName("simple_rain_intensity")
+            clsRWriteDfIndicesList.RemoveParameterByName("rain_above_10mm")
+            clsRWriteDfIndicesList.RemoveParameterByName("rain_above_20mm")
+            clsRWriteDfIndicesList.RemoveParameterByName("rain_above_amount")
+            clsRWriteDfIndicesList.RemoveParameterByName("warm_spell_duration")
+            clsRWriteDfIndicesList.RemoveParameterByName("max_dry_spell_length")
+            clsRWriteDfIndicesList.RemoveParameterByName("max_wet_spell_length")
+            clsRWriteDfIndicesList.RemoveParameterByName("total_rain_above_95th_percentile")
+            clsRWriteDfIndicesList.RemoveParameterByName("total_rain_above_99th_percentile")
+            clsRWriteDfIndicesList.RemoveParameterByName("total_daily_rain")
             sdgClimdexIndices.grpTminAnnual.Enabled = False
             sdgClimdexIndices.grpTmaxAnnual.Enabled = False
             sdgClimdexIndices.grpTmaxTminAnnual.Enabled = False
