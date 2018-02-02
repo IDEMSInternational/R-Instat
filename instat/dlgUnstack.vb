@@ -13,7 +13,6 @@
 '
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
 Imports instat.Translations
 
 Public Class dlgUnstack
@@ -23,7 +22,8 @@ Public Class dlgUnstack
     Private clsCarryColumns As New ROperator
     Private clsSelect As New RFunction
     Private clsUnstackedOperator, clsCommaOperator As New ROperator
-    Dim clsDefaultFunction As New RFunction
+    Private clsDcastFunction As New RFunction
+    Private clsBaseRCode As New RCodeStructure
 
 
     Private Sub dlgunstack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -93,7 +93,8 @@ Public Class dlgUnstack
 
 
         ucrPnlUnstackCol.AddFunctionNamesCondition(rdoSingle, "dcast")
-        'TODO add function names conditions for rdoMultiple and rdoRestoreHierarchy
+        ucrPnlUnstackCol.AddRCodeIsRFunctionCondition(rdoRestoreHierarchy, bNewIsPositive:=False)
+        'TODO add function name condition for rdoMultiple
 
 
         ucrPnlUnstackCol.AddToLinkedControls(ucrColumnToUnstackReceiver, {rdoSingle}, bNewLinkedHideIfParameterMissing:=True)
@@ -105,7 +106,7 @@ Public Class dlgUnstack
     End Sub
 
     Private Sub SetDefaults()
-        clsDefaultFunction = New RFunction
+        clsDcastFunction = New RFunction
         clsSelect = New RFunction
         clsUnstackedOperator = New ROperator
         clsCommaOperator = New ROperator
@@ -114,11 +115,9 @@ Public Class dlgUnstack
         ucrNewDFName.Reset()
         ucrFactorToUnstackReceiver.SetMeAsReceiver()
 
-        clsDefaultFunction.SetPackageName("reshape2")
-        clsDefaultFunction.SetRCommand("dcast")
-        clsDefaultFunction.SetAssignTo(ucrSelectorForUnstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked", strTempDataframe:=ucrSelectorForUnstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked")
-
-        ucrPnlUnstackCol.SetRCode(clsDefaultFunction, bReset:=bReset, bCloneIfNeeded:=True)
+        clsDcastFunction.SetPackageName("reshape2")
+        clsDcastFunction.SetRCommand("dcast")
+        clsDcastFunction.SetAssignTo(ucrSelectorForUnstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked", strTempDataframe:=ucrSelectorForUnstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked")
 
         clsSelect.SetPackageName("dplyr")
         clsSelect.SetRCommand("select")
@@ -126,24 +125,22 @@ Public Class dlgUnstack
 
         clsCommaOperator.SetOperation(",")
         clsUnstackedOperator.SetOperation("%>%")
-        clsUnstackedOperator.AddParameter("left", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
+        clsUnstackedOperator.AddParameter("left", clsRFunctionParameter:=clsDcastFunction, iPosition:=0)
         clsUnstackedOperator.AddParameter("right", clsRFunctionParameter:=clsSelect, iPosition:=1)
 
-
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+        clsBaseRCode = clsDcastFunction
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDcastFunction)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
         ucrFactorToUnstackReceiver.AddAdditionalCodeParameterPair(clsCommaOperator, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
-        ucrSelectorForUnstack.SetRCode(clsDefaultFunction, bReset)
-        ucrPnlUnstackCol.SetRCode(clsDefaultFunction, bReset)
+        ucrSelectorForUnstack.SetRCode(clsDcastFunction, bReset)
+        ucrPnlUnstackCol.SetRCode(clsBaseRCode, bReset)
         ucrNewDFName.AddAdditionalRCode(clsUnstackedOperator, iAdditionalPairNo:=1)
-        ucrNewDFName.SetRCode(clsDefaultFunction, bReset)
+        ucrNewDFName.SetRCode(clsDcastFunction, bReset)
         ucrReceiverCarryColumns.SetRCode(clsCommaOperator, bReset)
-        ucrChkDropMissingCombinations.SetRCode(clsDefaultFunction, bReset)
+        ucrChkDropMissingCombinations.SetRCode(clsDcastFunction, bReset)
         ucrFactorToUnstackReceiver.SetRCode(clsFormula, bReset)
-
-
     End Sub
 
     Private Sub TestOKEnabled()
@@ -169,7 +166,7 @@ Public Class dlgUnstack
     Private Sub SetFormula()
         Dim i As Integer = 0
         If Not ucrFactorToUnstackReceiver.IsEmpty AndAlso Not ucrReceiverCarryColumns.IsEmpty Then
-            clsDefaultFunction.AddParameter("formula", clsROperatorParameter:=clsFormula)
+            clsDcastFunction.AddParameter("formula", clsROperatorParameter:=clsFormula)
             clsCarryColumns.SetOperation("+")
             clsCarryColumns.ClearParameters()
             For Each strIndicatorVar As String In ucrReceiverCarryColumns.GetVariableNamesAsList
@@ -193,8 +190,10 @@ Public Class dlgUnstack
 
     Private Sub ucrPnlUnstackCol_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlUnstackCol.ControlContentsChanged
         If rdoSingle.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+            clsBaseRCode = clsDcastFunction
+            ucrBase.clsRsyntax.SetBaseRFunction(clsDcastFunction)
         ElseIf rdoRestoreHierarchy.Checked Then
+            clsBaseRCode = clsUnstackedOperator
             ucrBase.clsRsyntax.SetBaseROperator(clsUnstackedOperator)
         End If
     End Sub
