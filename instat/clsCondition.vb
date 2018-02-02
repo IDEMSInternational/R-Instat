@@ -22,6 +22,7 @@ Public Class Condition
     Private bIsParameterValuesRFunctionNames As Boolean = False
     Private bIsRSyntaxFunctionNames As Boolean = False
     Private bIsRSyntaxContainsCode As Boolean = False
+    Private bIsRCodeRFunction As Boolean = False
     Private strParameterType As String = ""
     Private strParameterName As String = ""
     Private lstValues As List(Of String) = New List(Of String)
@@ -42,6 +43,7 @@ Public Class Condition
         bIsRSyntaxContainsCode = False
         strParameterType = ""
         bIsParameterValuesRFunctionNames = False
+        bIsRCodeRFunction = False
         bIsPositive = bNewIsPositive
     End Sub
 
@@ -56,6 +58,7 @@ Public Class Condition
         bIsRSyntaxContainsCode = False
         strParameterType = ""
         bIsParameterValuesRFunctionNames = False
+        bIsRCodeRFunction = False
         bIsPositive = bNewIsPositive
     End Sub
 
@@ -74,6 +77,7 @@ Public Class Condition
         bIsRSyntaxContainsCode = False
         strParameterType = ""
         bIsParameterValuesRFunctionNames = True
+        bIsRCodeRFunction = False
         bIsPositive = bNewIsPositive
     End Sub
 
@@ -95,6 +99,7 @@ Public Class Condition
         bIsRSyntaxContainsCode = False
         strParameterType = ""
         bIsParameterValuesRFunctionNames = False
+        bIsRCodeRFunction = False
         bIsPositive = bNewIsPositive
     End Sub
 
@@ -107,6 +112,7 @@ Public Class Condition
         bIsRSyntaxContainsCode = False
         bIsParameterValuesRFunctionNames = False
         strParameterName = strParamName
+        bIsRCodeRFunction = False
         bIsPositive = bNewIsPositive
         If Not {"string", "RFunction", "ROperator"}.Contains(strType) Then
             MsgBox("Developer error: strType must be either string, RFunction or ROperator.")
@@ -126,6 +132,7 @@ Public Class Condition
         bIsRSyntaxContainsCode = False
         strParameterType = ""
         bIsParameterValuesRFunctionNames = False
+        bIsRCodeRFunction = False
         bIsPositive = bNewIsPositive
     End Sub
 
@@ -143,6 +150,21 @@ Public Class Condition
         bIsRSyntaxContainsCode = True
         strParameterType = ""
         bIsParameterValuesRFunctionNames = False
+        bIsRCodeRFunction = False
+        bIsPositive = bNewIsPositive
+    End Sub
+
+    Public Sub SetRCodeIsRFunction(Optional bNewIsPositive As Boolean = True)
+        lstValues = New List(Of String)
+        bIsFunctionNames = False
+        bIsParameterValues = False
+        bIsParameterPresent = False
+        bIsParameterType = False
+        bIsRSyntaxFunctionNames = False
+        bIsRSyntaxContainsCode = False
+        strParameterType = ""
+        bIsParameterValuesRFunctionNames = False
+        bIsRCodeRFunction = True
         bIsPositive = bNewIsPositive
     End Sub
 
@@ -209,6 +231,8 @@ Public Class Condition
             Else
                 Return Not bIsPositive
             End If
+        ElseIf bIsRCodeRFunction Then
+            Return (bIsPositive = (TypeOf clsRCode Is RFunction))
         Else
             Return True
         End If

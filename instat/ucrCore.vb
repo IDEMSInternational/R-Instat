@@ -475,6 +475,13 @@ Public Class ucrCore
         AddCondition(objControlState, clsTempCond)
     End Sub
 
+    Public Sub AddRCodeIsRFunctionCondition(objControlState As Object, Optional bNewIsPositive As Boolean = True)
+        Dim clsTempCond As New Condition
+
+        clsTempCond.SetRCodeIsRFunction(bNewIsPositive)
+        AddCondition(objControlState, clsTempCond)
+    End Sub
+
     Public Sub AddFunctionNamesCondition(objControlState As Object, lstFunctionNames As String(), Optional bNewIsPositive As Boolean = True)
         Dim clsTempCond As New Condition
 
