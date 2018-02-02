@@ -94,7 +94,7 @@ instat_object$set("public", "append_summaries_to_data_object", function(out, dat
 } 
 )
 
-instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), store_results = TRUE, drop = TRUE, na.rm = FALSE, return_output = FALSE, summary_name = NA, weights = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, perc_return_all = FALSE, silent = FALSE, additional_filter, original_level = FALSE, ...) {
+instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), store_results = TRUE, drop = TRUE, return_output = FALSE, summary_name = NA, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, perc_return_all = FALSE, silent = FALSE, additional_filter, original_level = FALSE, ...) {
   if(original_level) type <- "calculation"
   else type <- "summary"
   include_columns_to_summarise <- TRUE
@@ -162,10 +162,11 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
     for(summary_type in summaries) {
       j <- j + 1
       function_exp <- ""
-      if(!is.null(weights)) {
-        function_exp <- paste0(function_exp, ", weights = ", weights)
-      }
-      function_exp <- paste0(function_exp, ", na.rm =", na.rm, ")")
+      # if(!is.null(weights)) {
+      #   function_exp <- paste0(function_exp, ", weights = ", weights)
+      # }
+      function_exp <- paste0(function_exp, ", ... = ", ...)
+      # function_exp <- paste0(function_exp, ", na.rm =", na.rm, ")")
       if(is.null(result_names)) {
         result_name = summaries_display[j]
         if(include_columns_to_summarise) result_name = paste0(result_name, "_", column_names)
@@ -400,12 +401,10 @@ summary_coef_var_label="summary_coef_var"
 summary_median_absolute_deviation_label="summary_median_absolute_deviation"
 summary_Qn_label="summary_Qn"
 summary_Sn_label="summary_Sn"
-summary_cor_label="summary_cor"
-summary_cov_label="summary_cov"
 
 
 # list of all summary function names
-all_summaries=c(sum_label, mode_label, count_label, count_missing_label, count_non_missing_label, sd_label, var_label, median_label, range_label, min_label, max_label, mean_label,quartile_label, lower_quart_label, upper_quart_label, skewness_label, kurtosis_label, summary_coef_var_label, summary_skewness_mc_label, summary_median_absolute_deviation_label, summary_Qn_label, summary_Sn_label,summary_cor_label,summary_cov_label)
+all_summaries=c(sum_label, mode_label, count_label, count_missing_label, count_non_missing_label, sd_label, var_label, median_label, range_label, min_label, max_label, mean_label,quartile_label, lower_quart_label, upper_quart_label, skewness_label, kurtosis_label, summary_coef_var_label, summary_skewness_mc_label, summary_median_absolute_deviation_label, summary_Qn_label, summary_Sn_label)
 summary_mode <- function(x,...) {
   ux <- unique(x)
   out <- ux[which.max(tabulate(match(x, ux)))]
@@ -525,15 +524,6 @@ summary_Sn <- function(x, constant = 1.1926, finite.corr = missing(constant), na
   }
 }
 
-#summary covariance
-summary_cov <- function(x, y, na.rm = FALSE){
-  return(cov(x, y))
-}
-
-#summary correlations
-summary_cor <- function(x, y, na.rm = FALSE){
-  return(cor(x, y))
-}
 
 instat_object$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), n_column_factors = 1, store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = TRUE, treat_columns_as_factor = FALSE, page_by = "default", as_html = TRUE, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, margin_name = "(All)", additional_filter, ...) {
   if(n_column_factors == 1 && length(factors) == 0) n_column_factors <- 0
