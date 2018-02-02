@@ -180,34 +180,34 @@
   <data name="&gt;&gt;lblColumnToUnstack.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="lblIDColumns.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblCarryColumns.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblIDColumns.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblCarryColumns.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblIDColumns.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblCarryColumns.Location" type="System.Drawing.Point, System.Drawing">
     <value>271, 274</value>
   </data>
-  <data name="lblIDColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 13</value>
+  <data name="lblCarryColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>77, 13</value>
   </data>
-  <data name="lblIDColumns.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblCarryColumns.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="lblIDColumns.Text" xml:space="preserve">
-    <value>ID Columns:</value>
+  <data name="lblCarryColumns.Text" xml:space="preserve">
+    <value>Carry Columns:</value>
   </data>
-  <data name="&gt;&gt;lblIDColumns.Name" xml:space="preserve">
-    <value>lblIDColumns</value>
+  <data name="&gt;&gt;lblCarryColumns.Name" xml:space="preserve">
+    <value>lblCarryColumns</value>
   </data>
-  <data name="&gt;&gt;lblIDColumns.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblCarryColumns.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblIDColumns.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblCarryColumns.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;lblIDColumns.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblCarryColumns.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
   <data name="rdoSingle.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
@@ -402,28 +402,28 @@
   <data name="&gt;&gt;ucrChkDropMissingCombinations.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="ucrIDColumns.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrReceiverCarryColumns.Location" type="System.Drawing.Point, System.Drawing">
     <value>271, 289</value>
   </data>
-  <data name="ucrIDColumns.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ucrReceiverCarryColumns.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="ucrIDColumns.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrReceiverCarryColumns.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 98</value>
   </data>
-  <data name="ucrIDColumns.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrReceiverCarryColumns.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;ucrIDColumns.Name" xml:space="preserve">
-    <value>ucrIDColumns</value>
+  <data name="&gt;&gt;ucrReceiverCarryColumns.Name" xml:space="preserve">
+    <value>ucrReceiverCarryColumns</value>
   </data>
-  <data name="&gt;&gt;ucrIDColumns.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverCarryColumns.Type" xml:space="preserve">
     <value>instat.ucrReceiverMultiple, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrIDColumns.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverCarryColumns.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrIDColumns.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverCarryColumns.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="ucrColumnToUnstackReceiver.Location" type="System.Drawing.Point, System.Drawing">

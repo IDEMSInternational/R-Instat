@@ -40,7 +40,7 @@ Partial Class dlgUnstack
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgUnstack))
         Me.lblFactorToUnstackBy = New System.Windows.Forms.Label()
         Me.lblColumnToUnstack = New System.Windows.Forms.Label()
-        Me.lblIDColumns = New System.Windows.Forms.Label()
+        Me.lblCarryColumns = New System.Windows.Forms.Label()
         Me.rdoSingle = New System.Windows.Forms.RadioButton()
         Me.rdoMultiple = New System.Windows.Forms.RadioButton()
         Me.rdoRestoreHierarchy = New System.Windows.Forms.RadioButton()
@@ -48,7 +48,7 @@ Partial Class dlgUnstack
         Me.ucrMultipleColumnsReceiver = New instat.ucrReceiverMultiple()
         Me.ucrNewDFName = New instat.ucrSave()
         Me.ucrChkDropMissingCombinations = New instat.ucrCheck()
-        Me.ucrIDColumns = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverCarryColumns = New instat.ucrReceiverMultiple()
         Me.ucrColumnToUnstackReceiver = New instat.ucrReceiverSingle()
         Me.ucrFactorToUnstackReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorForUnstack = New instat.ucrSelectorByDataFrameAddRemove()
@@ -68,11 +68,11 @@ Partial Class dlgUnstack
         Me.lblColumnToUnstack.Name = "lblColumnToUnstack"
         Me.lblColumnToUnstack.Tag = "Column_to_Unstack:"
         '
-        'lblIDColumns
+        'lblCarryColumns
         '
-        resources.ApplyResources(Me.lblIDColumns, "lblIDColumns")
-        Me.lblIDColumns.Name = "lblIDColumns"
-        Me.lblIDColumns.Tag = "ID_Columns"
+        resources.ApplyResources(Me.lblCarryColumns, "lblCarryColumns")
+        Me.lblCarryColumns.Name = "lblCarryColumns"
+        Me.lblCarryColumns.Tag = "ID_Columns"
         '
         'rdoSingle
         '
@@ -131,14 +131,14 @@ Partial Class dlgUnstack
         resources.ApplyResources(Me.ucrChkDropMissingCombinations, "ucrChkDropMissingCombinations")
         Me.ucrChkDropMissingCombinations.Name = "ucrChkDropMissingCombinations"
         '
-        'ucrIDColumns
+        'ucrReceiverCarryColumns
         '
-        Me.ucrIDColumns.frmParent = Me
-        resources.ApplyResources(Me.ucrIDColumns, "ucrIDColumns")
-        Me.ucrIDColumns.Name = "ucrIDColumns"
-        Me.ucrIDColumns.Selector = Nothing
-        Me.ucrIDColumns.strNcFilePath = ""
-        Me.ucrIDColumns.ucrSelector = Nothing
+        Me.ucrReceiverCarryColumns.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverCarryColumns, "ucrReceiverCarryColumns")
+        Me.ucrReceiverCarryColumns.Name = "ucrReceiverCarryColumns"
+        Me.ucrReceiverCarryColumns.Selector = Nothing
+        Me.ucrReceiverCarryColumns.strNcFilePath = ""
+        Me.ucrReceiverCarryColumns.ucrSelector = Nothing
         '
         'ucrColumnToUnstackReceiver
         '
@@ -186,14 +186,14 @@ Partial Class dlgUnstack
         Me.Controls.Add(Me.rdoSingle)
         Me.Controls.Add(Me.ucrNewDFName)
         Me.Controls.Add(Me.ucrChkDropMissingCombinations)
-        Me.Controls.Add(Me.ucrIDColumns)
+        Me.Controls.Add(Me.ucrReceiverCarryColumns)
         Me.Controls.Add(Me.ucrColumnToUnstackReceiver)
         Me.Controls.Add(Me.ucrFactorToUnstackReceiver)
         Me.Controls.Add(Me.lblColumnToUnstack)
         Me.Controls.Add(Me.lblFactorToUnstackBy)
         Me.Controls.Add(Me.ucrSelectorForUnstack)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.lblIDColumns)
+        Me.Controls.Add(Me.lblCarryColumns)
         Me.Controls.Add(Me.ucrPnlUnstackCol)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -210,8 +210,8 @@ Partial Class dlgUnstack
     Friend WithEvents lblColumnToUnstack As Label
     Friend WithEvents ucrFactorToUnstackReceiver As ucrReceiverSingle
     Friend WithEvents ucrColumnToUnstackReceiver As ucrReceiverSingle
-    Friend WithEvents ucrIDColumns As ucrReceiverMultiple
-    Friend WithEvents lblIDColumns As Label
+    Friend WithEvents ucrReceiverCarryColumns As ucrReceiverMultiple
+    Friend WithEvents lblCarryColumns As Label
     Friend WithEvents ucrNewDFName As ucrSave
     Friend WithEvents ucrChkDropMissingCombinations As ucrCheck
     Friend WithEvents rdoRestoreHierarchy As RadioButton
