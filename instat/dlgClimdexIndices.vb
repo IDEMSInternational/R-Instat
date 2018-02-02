@@ -377,7 +377,6 @@ Public Class dlgClimdexIndices
             clsRWriteDfIndicesList.RemoveParameterByName("summer")
             clsRWriteDfIndicesList.RemoveParameterByName("icing")
             clsRWriteDfIndicesList.RemoveParameterByName("growing_season_length")
-            clsRWriteDfIndicesList.RemoveParameterByName("cold_spell_duration")
             clsRWriteDfIndicesList.RemoveParameterByName("simple_rain_intensity")
             clsRWriteDfIndicesList.RemoveParameterByName("rain_above_10mm")
             clsRWriteDfIndicesList.RemoveParameterByName("rain_above_20mm")
