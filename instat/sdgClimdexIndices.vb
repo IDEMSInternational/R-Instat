@@ -178,15 +178,6 @@ Public Class sdgClimdexIndices
             ucrChk.AddParameterPresentCondition(False, ucrChk.GetParameterName, False)
         Next
 
-        ' Settings tab:
-        ucrInputFreq.Enabled = False ' temp. until freq="monthly" works in r-code.
-        ucrInputFreq.SetParameter(New RParameter("freq", 2))
-        dctInputFreqPairs.Add("annual", Chr(34) & "annual" & Chr(34))
-        dctInputFreqPairs.Add("monthly", Chr(34) & "monthly" & Chr(34))
-        ucrInputFreq.SetItems(dctInputFreqPairs)
-        ucrInputFreq.SetRDefault(Chr(34) & "annual" & Chr(34))
-        ucrInputFreq.SetDropDownStyleAsNonEditable()
-
         ucrChkMaxSpellSpanYears.SetParameter(New RParameter("spells.can.span.years", 1), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True)
         ucrChkMaxSpellSpanYears.SetText("Maximum Spell Length Span Years")
         ' this is used in four functions, do we want to have four checkboxes or one? If four: can change it for each option, if one: cannot change it for each option
@@ -319,8 +310,6 @@ Public Class sdgClimdexIndices
         ucrChkMaxSpellSpanYears.AddAdditionalCodeParameterPair(clsColdSpellDI, New RParameter("spells.can.span.years", 1), iAdditionalPairNo:=2)
         ucrChkMaxSpellSpanYears.AddAdditionalCodeParameterPair(clsMaxWetSpell, New RParameter("spells.can.span.years", 1), iAdditionalPairNo:=3)
 
-        ucrInputFreq.SetRCode(clsRWriteDf, bReset, bCloneIfNeeded:=True)
-
         ucrChkFrostDays.SetParameterValue(clsFrostDays)
         ucrChkFrostDays.SetRCode(clsRWriteDfIndicesList, bReset, bCloneIfNeeded:=True)
 
@@ -430,20 +419,6 @@ Public Class sdgClimdexIndices
         End If
     End Sub
 
-    Private Sub IndicesType()
-        If ucrInputFreq.cboInput.SelectedItem = "monthly" Then
-            grpTminAnnual.Enabled = False
-            grpTmaxAnnual.Enabled = False
-            grpTmaxTminAnnual.Enabled = False
-            grpPrecAnnual.Enabled = False
-        ElseIf ucrInputFreq.cboInput.SelectedItem = "annual" Then
-            grpTminAnnual.Enabled = True
-            grpTmaxAnnual.Enabled = True
-            grpTmaxTminAnnual.Enabled = True
-            grpPrecAnnual.Enabled = True
-        End If
-    End Sub
-
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
         'IndicesHelp()
     End Sub
@@ -486,10 +461,6 @@ Public Class sdgClimdexIndices
         Next
         Return strCheckedBox
     End Function
-
-    Private Sub ucrInputFreq_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFreq.ControlContentsChanged
-        IndicesType()
-    End Sub
 
     Private Sub InitialiseTabs()
         For i = 0 To tbpClimdex.TabCount - 1
