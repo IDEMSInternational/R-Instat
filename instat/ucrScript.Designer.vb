@@ -46,12 +46,12 @@ Partial Class ucrScript
         Me.mnuOpenScriptFromFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuSaveScript = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClearContents = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCopy = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCut = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPaste = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdRun = New System.Windows.Forms.Button()
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
-        Me.CopyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PasteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuContextScript.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
         Me.SuspendLayout()
@@ -70,9 +70,9 @@ Partial Class ucrScript
         '
         'mnuContextScript
         '
-        Me.mnuContextScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuRunSelectedText, Me.mnuOpenScript, Me.mnuOpenScriptFromFile, Me.mnuSaveScript, Me.mnuClearContents, Me.CopyToolStripMenuItem, Me.CutToolStripMenuItem, Me.PasteToolStripMenuItem})
+        Me.mnuContextScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuRunSelectedText, Me.mnuOpenScript, Me.mnuOpenScriptFromFile, Me.mnuSaveScript, Me.mnuClearContents, Me.mnuCopy, Me.mnuCut, Me.mnuPaste})
         Me.mnuContextScript.Name = "mnuContextLogFile"
-        Me.mnuContextScript.Size = New System.Drawing.Size(254, 202)
+        Me.mnuContextScript.Size = New System.Drawing.Size(254, 180)
         '
         'mnuRunSelectedText
         '
@@ -103,6 +103,24 @@ Partial Class ucrScript
         Me.mnuClearContents.Name = "mnuClearContents"
         Me.mnuClearContents.Size = New System.Drawing.Size(253, 22)
         Me.mnuClearContents.Text = "Clear Script"
+        '
+        'mnuCopy
+        '
+        Me.mnuCopy.Name = "mnuCopy"
+        Me.mnuCopy.Size = New System.Drawing.Size(253, 22)
+        Me.mnuCopy.Text = "Copy"
+        '
+        'mnuCut
+        '
+        Me.mnuCut.Name = "mnuCut"
+        Me.mnuCut.Size = New System.Drawing.Size(253, 22)
+        Me.mnuCut.Text = "Cut"
+        '
+        'mnuPaste
+        '
+        Me.mnuPaste.Name = "mnuPaste"
+        Me.mnuPaste.Size = New System.Drawing.Size(253, 22)
+        Me.mnuPaste.Text = "Paste"
         '
         'cmdRun
         '
@@ -145,24 +163,6 @@ Partial Class ucrScript
         Me.tlpTableContainer.Size = New System.Drawing.Size(411, 314)
         Me.tlpTableContainer.TabIndex = 9
         '
-        'CopyToolStripMenuItem
-        '
-        Me.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem"
-        Me.CopyToolStripMenuItem.Size = New System.Drawing.Size(253, 22)
-        Me.CopyToolStripMenuItem.Text = "Copy"
-        '
-        'CutToolStripMenuItem
-        '
-        Me.CutToolStripMenuItem.Name = "CutToolStripMenuItem"
-        Me.CutToolStripMenuItem.Size = New System.Drawing.Size(253, 22)
-        Me.CutToolStripMenuItem.Text = "Cut"
-        '
-        'PasteToolStripMenuItem
-        '
-        Me.PasteToolStripMenuItem.Name = "PasteToolStripMenuItem"
-        Me.PasteToolStripMenuItem.Size = New System.Drawing.Size(253, 22)
-        Me.PasteToolStripMenuItem.Text = "Paste"
-        '
         'ucrScript
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -188,7 +188,7 @@ Partial Class ucrScript
     Friend WithEvents mnuOpenScript As ToolStripMenuItem
     Friend WithEvents mnuSaveScript As ToolStripMenuItem
     Friend WithEvents mnuOpenScriptFromFile As ToolStripMenuItem
-    Friend WithEvents CopyToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents CutToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents PasteToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuCopy As ToolStripMenuItem
+    Friend WithEvents mnuCut As ToolStripMenuItem
+    Friend WithEvents mnuPaste As ToolStripMenuItem
 End Class
