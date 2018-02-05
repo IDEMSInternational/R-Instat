@@ -129,7 +129,17 @@ Public Class ucrScript
         End Using
     End Sub
 
-    Private Sub PasteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PasteToolStripMenuItem.Click
+    Private Sub mnuCopy_Click(sender As Object, e As EventArgs) Handles mnuCopy.Click
+        Clipboard.SetText(txtScript.SelectedText)
+    End Sub
 
+    Private Sub mnuCut_Click(sender As Object, e As EventArgs) Handles mnuCut.Click
+        Clipboard.Clear()
+        Clipboard.SetText(txtScript.SelectedText)
+        txtScript.Text = ""
+    End Sub
+
+    Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
+        txtScript.Text = Clipboard.GetText()
     End Sub
 End Class
