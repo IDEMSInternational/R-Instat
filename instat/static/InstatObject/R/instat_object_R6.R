@@ -126,11 +126,11 @@ instat_object$set("public", "copy_data_object", function(data_name, new_name, fi
 
 
 instat_object$set("public", "import_RDS", function(data_RDS, keep_existing = TRUE, overwrite_existing = FALSE, include_objects = TRUE,
-                                                   include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_calculations = TRUE)
+                                                   include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_calculations = TRUE, include_comments = TRUE)
   # TODO add include_calcuations options
 {
   if("instat_object" %in% class(data_RDS)) {
-    if(!keep_existing && include_objects && include_metadata && include_logs && include_filters && include_calculations) {
+    if(!keep_existing && include_objects && include_metadata && include_logs && include_filters && include_calculations && include_comments) {
       self$replace_instat_object(new_instat_object = data_RDS)
     }
     else {
@@ -143,7 +143,15 @@ instat_object$set("public", "import_RDS", function(data_RDS, keep_existing = TRU
       }
       new_links_list <- data_RDS$get_links()
       for(data_obj_name in data_RDS$get_data_names()) {
-        data_obj_clone <- data_RDS$get_data_objects(data_obj_name)$data_clone(include_objects = include_objects, include_metadata = include_metadata, include_logs = include_logs, include_filters = include_filters, include_calculations = include_calculations)
+        # fix for loading instat objects created before comments where added
+        # In older objects "include_comments" is not an argument to data_clone
+        # data_clone now contains ... argument so further changes to data object structure will not require similar fixes
+        if("set_comments" %in% names(data_RDS$get_data_objects(data_obj_name))) {
+          data_obj_clone <- data_RDS$get_data_objects(data_obj_name)$data_clone(include_objects = include_objects, include_metadata = include_metadata, include_logs = include_logs, include_filters = include_filters, include_calculations = include_calculations, include_comments = include_comments)
+        }
+        else {
+          data_obj_clone <- data_RDS$get_data_objects(data_obj_name)$data_clone(include_objects = include_objects, include_metadata = include_metadata, include_logs = include_logs, include_filters = include_filters, include_calculations = include_calculations)
+        }
         if(data_obj_name %in% self$get_data_names() && !overwrite_existing) {
           new_name <- next_default_item(data_obj_name, self$get_data_names())
           data_obj_clone$append_to_metadata(data_name_label, new_name)
@@ -227,7 +235,7 @@ instat_object$set("public", "append_data_object", function(name, obj) {
 }
 )
 
-instat_object$set("public", "get_data_objects", function(data_name, as_list = FALSE) {
+instat_object$set("public", "get_data_objects", function(data_name, as_list = FALSE, ...) {
   if(missing(data_name)) {
     return(private$.data_objects)
   }
@@ -309,7 +317,7 @@ instat_object$set("public", "get_combined_metadata", function(convert_to_charact
 } 
 )
 
-instat_object$set("public", "get_metadata", function(name) {
+instat_object$set("public", "get_metadata", function(name, ...) {
   if(missing(name)) return(private$.metadata)
   if(!is.character(name)) stop("name must be a character")
   if(!name %in% names(private$.metadata)) stop(paste(name, "not found in metadata"))
@@ -317,7 +325,7 @@ instat_object$set("public", "get_metadata", function(name) {
 } 
 )
 
-instat_object$set("public", "get_data_names", function(as_list = FALSE, include, exclude, excluded_items, include_hidden = TRUE) { 
+instat_object$set("public", "get_data_names", function(as_list = FALSE, include, exclude, excluded_items, include_hidden = TRUE, ...) { 
   ret <- names(private$.data_objects)
   if(!include_hidden) {
     ret <- ret[sapply(ret, function(x) !isTRUE(self$get_data_objects(x)$get_metadata(label = is_hidden_label)))]
@@ -442,7 +450,7 @@ instat_object$set("public", "add_object", function(data_name, object, object_nam
 }
 ) 
 
-instat_object$set("public", "get_objects", function(data_name, object_name, include_overall = TRUE, as_list = FALSE, type = "", include_empty = FALSE, force_as_list = FALSE, print_graph = TRUE) {
+instat_object$set("public", "get_objects", function(data_name, object_name, include_overall = TRUE, as_list = FALSE, type = "", include_empty = FALSE, force_as_list = FALSE, print_graph = TRUE, ...) {
   #TODO implement force_as_list in all cases
   if(missing(data_name)) {
     if(!missing(object_name)) {
@@ -1033,7 +1041,12 @@ instat_object$set("public","get_keys", function(data_name, key_name) {
 }
 )
 
-instat_object$set("public","get_links", function(link_name) {
+instat_object$set("public","get_comments", function(data_name, comment_id) {
+  self$get_data_objects(data_name)$get_comments(comment_id)
+}
+)
+
+instat_object$set("public","get_links", function(link_name, ...) {
   if(!missing(link_name)) {
     if(!link_name %in% names(private$.links)) stop(link_name, " not found.")
     return(private$.links[[link_name]])

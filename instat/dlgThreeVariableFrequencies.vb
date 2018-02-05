@@ -37,8 +37,13 @@ Public Class dlgThreeVariableFrequencies
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        ReopenDialog()
         bReset = False
         TestOkEnabled()
+    End Sub
+
+    Private Sub ReopenDialog()
+        ChangeLocation()
     End Sub
 
     Private Sub InitialiseDialog()

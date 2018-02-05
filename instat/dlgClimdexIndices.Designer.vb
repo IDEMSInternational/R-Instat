@@ -51,6 +51,13 @@ Partial Class dlgClimdexIndices
         Me.ucrSelectorClimdex = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrChkSave = New instat.ucrCheck()
+        Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
+        Me.ucrReceiverYear = New instat.ucrReceiverSingle()
+        Me.lblMonth = New System.Windows.Forms.Label()
+        Me.lblYear = New System.Windows.Forms.Label()
+        Me.rdoAnnual = New System.Windows.Forms.RadioButton()
+        Me.rdoMonthly = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlAnnualMonthly = New instat.UcrPanel()
         Me.SuspendLayout()
         '
         'lblTmax
@@ -138,10 +145,72 @@ Partial Class dlgClimdexIndices
         resources.ApplyResources(Me.ucrChkSave, "ucrChkSave")
         Me.ucrChkSave.Name = "ucrChkSave"
         '
+        'ucrReceiverMonth
+        '
+        Me.ucrReceiverMonth.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverMonth, "ucrReceiverMonth")
+        Me.ucrReceiverMonth.Name = "ucrReceiverMonth"
+        Me.ucrReceiverMonth.Selector = Nothing
+        Me.ucrReceiverMonth.strNcFilePath = ""
+        Me.ucrReceiverMonth.ucrSelector = Nothing
+        '
+        'ucrReceiverYear
+        '
+        Me.ucrReceiverYear.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverYear, "ucrReceiverYear")
+        Me.ucrReceiverYear.Name = "ucrReceiverYear"
+        Me.ucrReceiverYear.Selector = Nothing
+        Me.ucrReceiverYear.strNcFilePath = ""
+        Me.ucrReceiverYear.ucrSelector = Nothing
+        '
+        'lblMonth
+        '
+        resources.ApplyResources(Me.lblMonth, "lblMonth")
+        Me.lblMonth.Name = "lblMonth"
+        Me.lblMonth.Tag = "Month:"
+        '
+        'lblYear
+        '
+        resources.ApplyResources(Me.lblYear, "lblYear")
+        Me.lblYear.Name = "lblYear"
+        Me.lblYear.Tag = "Year:"
+        '
+        'rdoAnnual
+        '
+        resources.ApplyResources(Me.rdoAnnual, "rdoAnnual")
+        Me.rdoAnnual.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoAnnual.FlatAppearance.BorderSize = 2
+        Me.rdoAnnual.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoAnnual.Name = "rdoAnnual"
+        Me.rdoAnnual.TabStop = True
+        Me.rdoAnnual.UseVisualStyleBackColor = True
+        '
+        'rdoMonthly
+        '
+        resources.ApplyResources(Me.rdoMonthly, "rdoMonthly")
+        Me.rdoMonthly.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMonthly.FlatAppearance.BorderSize = 2
+        Me.rdoMonthly.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMonthly.Name = "rdoMonthly"
+        Me.rdoMonthly.TabStop = True
+        Me.rdoMonthly.UseVisualStyleBackColor = True
+        '
+        'ucrPnlAnnualMonthly
+        '
+        resources.ApplyResources(Me.ucrPnlAnnualMonthly, "ucrPnlAnnualMonthly")
+        Me.ucrPnlAnnualMonthly.Name = "ucrPnlAnnualMonthly"
+        '
         'dlgClimdexIndices
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.rdoAnnual)
+        Me.Controls.Add(Me.rdoMonthly)
+        Me.Controls.Add(Me.ucrPnlAnnualMonthly)
+        Me.Controls.Add(Me.lblYear)
+        Me.Controls.Add(Me.lblMonth)
+        Me.Controls.Add(Me.ucrReceiverYear)
+        Me.Controls.Add(Me.ucrReceiverMonth)
         Me.Controls.Add(Me.ucrChkSave)
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.ucrReceiverDate)
@@ -177,4 +246,11 @@ Partial Class dlgClimdexIndices
     Friend WithEvents lblDate As Label
     Friend WithEvents ucrReceiverDate As ucrReceiverSingle
     Friend WithEvents ucrChkSave As ucrCheck
+    Friend WithEvents lblYear As Label
+    Friend WithEvents lblMonth As Label
+    Friend WithEvents ucrReceiverYear As ucrReceiverSingle
+    Friend WithEvents ucrReceiverMonth As ucrReceiverSingle
+    Friend WithEvents rdoAnnual As RadioButton
+    Friend WithEvents rdoMonthly As RadioButton
+    Friend WithEvents ucrPnlAnnualMonthly As UcrPanel
 End Class

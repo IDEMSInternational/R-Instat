@@ -2582,16 +2582,28 @@
     <value>169, 6</value>
   </data>
   <data name="mnuPrepareColumnCalculateCalculations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 22</value>
+    <value>188, 22</value>
   </data>
   <data name="mnuPrepareColumnCalculateCalculations.Text" xml:space="preserve">
     <value>Calculations...</value>
   </data>
+  <data name="mnuPrepareColumnCalculateColumnSummaries.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 22</value>
+  </data>
+  <data name="mnuPrepareColumnCalculateColumnSummaries.Text" xml:space="preserve">
+    <value>Column Summaries...</value>
+  </data>
+  <data name="mnuPrepareColumnCalculateGeneralSummaries.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 22</value>
+  </data>
+  <data name="mnuPrepareColumnCalculateGeneralSummaries.Text" xml:space="preserve">
+    <value>General Summaries...</value>
+  </data>
   <data name="ToolStripSeparator24.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 6</value>
+    <value>185, 6</value>
   </data>
   <data name="mnuPrepareCalculateDuplicateColumn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 22</value>
+    <value>188, 22</value>
   </data>
   <data name="mnuPrepareCalculateDuplicateColumn.Text" xml:space="preserve">
     <value>Duplicate Column...</value>
@@ -2600,25 +2612,25 @@
     <value>False</value>
   </data>
   <data name="mnuPrepareColumnCalculateTransform.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 22</value>
+    <value>188, 22</value>
   </data>
   <data name="mnuPrepareColumnCalculateTransform.Text" xml:space="preserve">
     <value>Transform...</value>
   </data>
   <data name="mnuPrepareColumnCalculateRank.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 22</value>
+    <value>188, 22</value>
   </data>
   <data name="mnuPrepareColumnCalculateRank.Text" xml:space="preserve">
     <value>Rank...</value>
   </data>
   <data name="mnuPrepareColumnCalculatePolynomials.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 22</value>
+    <value>188, 22</value>
   </data>
   <data name="mnuPrepareColumnCalculatePolynomials.Text" xml:space="preserve">
     <value>Polynomials...</value>
   </data>
   <data name="mnuPrepareColumnCalculateRowSummary.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 22</value>
+    <value>188, 22</value>
   </data>
   <data name="mnuPrepareColumnCalculateRowSummary.Text" xml:space="preserve">
     <value>Row Summary...</value>
@@ -3761,7 +3773,7 @@
     <value>True</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>25</value>
+    <value>168</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
@@ -5496,6 +5508,9 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>R-Instat</value>
@@ -8252,6 +8267,18 @@
     <value>ExportToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;ExportToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuPrepareColumnCalculateColumnSummaries.Name" xml:space="preserve">
+    <value>mnuPrepareColumnCalculateColumnSummaries</value>
+  </data>
+  <data name="&gt;&gt;mnuPrepareColumnCalculateColumnSummaries.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuPrepareColumnCalculateGeneralSummaries.Name" xml:space="preserve">
+    <value>mnuPrepareColumnCalculateGeneralSummaries</value>
+  </data>
+  <data name="&gt;&gt;mnuPrepareColumnCalculateGeneralSummaries.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
