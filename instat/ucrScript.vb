@@ -130,12 +130,12 @@ Public Class ucrScript
     End Sub
 
     Private Sub mnuCopy_Click(sender As Object, e As EventArgs) Handles mnuCopy.Click
-        Clipboard.SetText(txtScript.SelectedText)
+        Clipboard.SetText(txtScript.Text)
     End Sub
 
     Private Sub mnuCut_Click(sender As Object, e As EventArgs) Handles mnuCut.Click
         Clipboard.Clear()
-        Clipboard.SetText(txtScript.SelectedText)
+        Clipboard.SetText(txtScript.Text)
         txtScript.Text = ""
     End Sub
 
