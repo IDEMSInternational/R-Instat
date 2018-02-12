@@ -289,6 +289,12 @@
     <Compile Include="dlgDefineRedFlags.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgHypothesisTestsCalculator.Designer.vb">
+      <DependentUpon>dlgHypothesisTestsCalculator.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgHypothesisTestsCalculator.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgParallelCoordinatePlot.Designer.vb">
       <DependentUpon>dlgParallelCoordinatePlot.vb</DependentUpon>
     </Compile>
@@ -2606,6 +2612,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFrequency.sw-KE.resx">
       <DependentUpon>dlgFrequency.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgHypothesisTestsCalculator.resx">
+      <DependentUpon>dlgHypothesisTestsCalculator.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgImportFromCSPRO.fr-FR.resx">
       <DependentUpon>dlgImportFromCSPRO.vb</DependentUpon>
@@ -5080,6 +5089,9 @@
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
     <None Include="ClassDiagram2.cd" />
+    <Content Include="Rlapack.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="LICENCE">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -6233,7 +6245,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="obj\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
