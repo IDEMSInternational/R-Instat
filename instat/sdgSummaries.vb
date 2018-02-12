@@ -131,6 +131,16 @@ Public Class sdgSummaries
         ucrNudFraction.Increment = 0.1
         ucrNudFraction.SetRDefault(0)
 
+        ucrInputInequality.SetParameter(New RParameter("inequality", bNewIncludeArgumentName:=False))
+        Dim dctInequalityValues As New Dictionary(Of String, String)
+        dctInequalityValues.Add(">", ">")
+        dctInequalityValues.Add("<", "<")
+        dctInequalityValues.Add(">=", ">=")
+        dctInequalityValues.Add("<=", "<=")
+        dctInequalityValues.Add("==", "==")
+        ucrInputInequality.SetItems(dctInequalityValues)
+        ucrInputInequality.SetRDefault(">")
+
         'ucrPnlMissingOptions.AddRadioButton(rdoNumber)
         'ucrPnlMissingOptions.AddRadioButton(rdoPercentage)
 
