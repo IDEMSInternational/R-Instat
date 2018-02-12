@@ -116,8 +116,9 @@ Public Class dlgStringDistance
         ucrInputPatternStringDistance.SetRCode(clsStringDistFunction, bReset)
         ucrInputComboBoxMethod.SetRCode(clsStringDistFunction, bReset)
         ucrSaveStringDistance.SetRCode(clsStringDistFunction, bReset)
-        ucrPnlStringDist.SetRCode(clsCurrentFunction, bReset)
-
+        If bReset Then
+            ucrPnlStringDist.SetRCode(clsCurrentFunction, bReset)
+        End If
         ucrReceiverColumn.SetRCode(clsColumnFunction, bReset)
     End Sub
 
