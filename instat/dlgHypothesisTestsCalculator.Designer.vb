@@ -27,11 +27,11 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdPlus = New System.Windows.Forms.Button()
         Me.cmdComma = New System.Windows.Forms.Button()
         Me.cmdDelete = New System.Windows.Forms.Button()
-        Me.cmdSquiggle = New System.Windows.Forms.Button()
         Me.cmdClear = New System.Windows.Forms.Button()
         Me.cmdConf = New System.Windows.Forms.Button()
         Me.cmdBrackets = New System.Windows.Forms.Button()
         Me.cmdExponential = New System.Windows.Forms.Button()
+        Me.cmdSquiggle = New System.Windows.Forms.Button()
         Me.cmdSquareBrackets = New System.Windows.Forms.Button()
         Me.cmdTry = New System.Windows.Forms.Button()
         Me.grpTests = New System.Windows.Forms.GroupBox()
@@ -143,17 +143,6 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdDelete.Text = "Del"
         Me.cmdDelete.UseVisualStyleBackColor = True
         '
-        'cmdSquiggle
-        '
-        Me.cmdSquiggle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdSquiggle.Location = New System.Drawing.Point(73, 41)
-        Me.cmdSquiggle.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdSquiggle.Name = "cmdSquiggle"
-        Me.cmdSquiggle.Size = New System.Drawing.Size(45, 30)
-        Me.cmdSquiggle.TabIndex = 149
-        Me.cmdSquiggle.Text = "~"
-        Me.cmdSquiggle.UseVisualStyleBackColor = True
-        '
         'cmdClear
         '
         Me.cmdClear.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
@@ -201,6 +190,17 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdExponential.TabIndex = 143
         Me.cmdExponential.Text = "Alt=""two"""
         Me.cmdExponential.UseVisualStyleBackColor = True
+        '
+        'cmdSquiggle
+        '
+        Me.cmdSquiggle.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdSquiggle.Location = New System.Drawing.Point(73, 41)
+        Me.cmdSquiggle.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdSquiggle.Name = "cmdSquiggle"
+        Me.cmdSquiggle.Size = New System.Drawing.Size(45, 30)
+        Me.cmdSquiggle.TabIndex = 149
+        Me.cmdSquiggle.Text = "~"
+        Me.cmdSquiggle.UseVisualStyleBackColor = True
         '
         'cmdSquareBrackets
         '
@@ -267,7 +267,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.btnClear.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.btnClear.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnClear.Location = New System.Drawing.Point(349, 130)
+        Me.btnClear.Location = New System.Drawing.Point(348, 130)
         Me.btnClear.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(69, 30)
@@ -311,7 +311,7 @@ Partial Class dlgHypothesisTestsCalculator
         'btnPoisson
         '
         Me.btnPoisson.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnPoisson.Location = New System.Drawing.Point(349, 101)
+        Me.btnPoisson.Location = New System.Drawing.Point(348, 101)
         Me.btnPoisson.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.btnPoisson.Name = "btnPoisson"
         Me.btnPoisson.Size = New System.Drawing.Size(69, 30)
@@ -323,7 +323,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.cmdWilcox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdWilcox.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdWilcox.Location = New System.Drawing.Point(349, 43)
+        Me.cmdWilcox.Location = New System.Drawing.Point(348, 43)
         Me.cmdWilcox.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdWilcox.Name = "cmdWilcox"
         Me.cmdWilcox.Size = New System.Drawing.Size(69, 30)
@@ -368,12 +368,12 @@ Partial Class dlgHypothesisTestsCalculator
         'cmdPowerProp
         '
         Me.cmdPowerProp.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPowerProp.Location = New System.Drawing.Point(87, 72)
+        Me.cmdPowerProp.Location = New System.Drawing.Point(80, 72)
         Me.cmdPowerProp.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdPowerProp.Name = "cmdPowerProp"
         Me.cmdPowerProp.Size = New System.Drawing.Size(83, 30)
         Me.cmdPowerProp.TabIndex = 159
-        Me.cmdPowerProp.Text = "power prop"
+        Me.cmdPowerProp.Text = "power.prop"
         Me.cmdPowerProp.UseVisualStyleBackColor = True
         '
         'cmdPowerT
@@ -384,20 +384,20 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdPowerT.Name = "cmdPowerT"
         Me.cmdPowerT.Size = New System.Drawing.Size(69, 30)
         Me.cmdPowerT.TabIndex = 157
-        Me.cmdPowerT.Text = "power t"
+        Me.cmdPowerT.Text = "power.t"
         Me.cmdPowerT.UseVisualStyleBackColor = True
         '
         'cmdPaiwiseWilcox
         '
         Me.cmdPaiwiseWilcox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdPaiwiseWilcox.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPaiwiseWilcox.Location = New System.Drawing.Point(335, 72)
+        Me.cmdPaiwiseWilcox.Location = New System.Drawing.Point(324, 72)
         Me.cmdPaiwiseWilcox.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdPaiwiseWilcox.Name = "cmdPaiwiseWilcox"
-        Me.cmdPaiwiseWilcox.Size = New System.Drawing.Size(83, 30)
+        Me.cmdPaiwiseWilcox.Size = New System.Drawing.Size(93, 30)
         Me.cmdPaiwiseWilcox.TabIndex = 156
         Me.cmdPaiwiseWilcox.Tag = "Del"
-        Me.cmdPaiwiseWilcox.Text = "pairwise wilcox"
+        Me.cmdPaiwiseWilcox.Text = "pairwise.wilcox"
         Me.cmdPaiwiseWilcox.UseVisualStyleBackColor = True
         '
         'cmdKruskal
@@ -483,9 +483,9 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdPowerAnova.Location = New System.Drawing.Point(4, 72)
         Me.cmdPowerAnova.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdPowerAnova.Name = "cmdPowerAnova"
-        Me.cmdPowerAnova.Size = New System.Drawing.Size(83, 30)
+        Me.cmdPowerAnova.Size = New System.Drawing.Size(77, 30)
         Me.cmdPowerAnova.TabIndex = 146
-        Me.cmdPowerAnova.Text = "power anova"
+        Me.cmdPowerAnova.Text = "power.anova"
         Me.cmdPowerAnova.UseVisualStyleBackColor = True
         '
         'cmdCor
@@ -514,13 +514,13 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.cmdPairwiseProp.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdPairwiseProp.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPairwiseProp.Location = New System.Drawing.Point(169, 72)
+        Me.cmdPairwiseProp.Location = New System.Drawing.Point(162, 72)
         Me.cmdPairwiseProp.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdPairwiseProp.Name = "cmdPairwiseProp"
         Me.cmdPairwiseProp.Size = New System.Drawing.Size(83, 30)
         Me.cmdPairwiseProp.TabIndex = 132
         Me.cmdPairwiseProp.Tag = "Del"
-        Me.cmdPairwiseProp.Text = "pairwise Prop"
+        Me.cmdPairwiseProp.Text = "pairwise.Prop"
         Me.cmdPairwiseProp.UseVisualStyleBackColor = True
         '
         'cmdfligner
@@ -559,7 +559,7 @@ Partial Class dlgHypothesisTestsCalculator
         'cmdfisher
         '
         Me.cmdfisher.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdfisher.Location = New System.Drawing.Point(349, 14)
+        Me.cmdfisher.Location = New System.Drawing.Point(348, 14)
         Me.cmdfisher.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdfisher.Name = "cmdfisher"
         Me.cmdfisher.Size = New System.Drawing.Size(69, 30)
@@ -571,12 +571,12 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.cmdPairwiset.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdPairwiset.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPairwiset.Location = New System.Drawing.Point(252, 72)
+        Me.cmdPairwiset.Location = New System.Drawing.Point(244, 72)
         Me.cmdPairwiset.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdPairwiset.Name = "cmdPairwiset"
-        Me.cmdPairwiset.Size = New System.Drawing.Size(83, 30)
+        Me.cmdPairwiset.Size = New System.Drawing.Size(81, 30)
         Me.cmdPairwiset.TabIndex = 144
-        Me.cmdPairwiset.Text = "pairwise t"
+        Me.cmdPairwiset.Text = "pairwise.t"
         Me.cmdPairwiset.UseVisualStyleBackColor = True
         '
         'cmdMauchly
