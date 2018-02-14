@@ -142,4 +142,24 @@ Public Class ucrScript
     Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
         txtScript.Text = Clipboard.GetText()
     End Sub
+
+    Private Sub EnableCopyCut()
+        If txtScript.SelectionLength > 0 Then
+            mnuCopy.Enabled = True
+            mnuCut.Enabled = True
+            mnuRunSelectedText.Enabled = True
+        Else
+            mnuCopy.Enabled = False
+            mnuCut.Enabled = False
+            mnuRunSelectedText.Enabled = False
+        End If
+    End Sub
+
+    Private Sub ucrScript_Load(sender As Object, e As EventArgs) Handles Me.Load
+        EnableCopyCut()
+    End Sub
+
+    Private Sub txtScript_MouseUp(sender As Object, e As EventArgs) Handles txtScript.MouseUp, txtScript.KeyUp
+        EnableCopyCut()
+    End Sub
 End Class
