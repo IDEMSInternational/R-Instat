@@ -881,7 +881,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdBrackets_Click(sender As Object, e As EventArgs) Handles cmdBrackets.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("()", 2)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("( )", 1)
     End Sub
     Private Sub cmdOpeningBracket_Click(sender As Object, e As EventArgs) Handles cmdOpeningBracket.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("(")
