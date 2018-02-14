@@ -157,9 +157,27 @@ Public Class ucrScript
 
     Private Sub ucrScript_Load(sender As Object, e As EventArgs) Handles Me.Load
         EnableCopyCut()
+        EnableMenusWhenScriptNotEmpty()
     End Sub
 
     Private Sub txtScript_MouseUp(sender As Object, e As EventArgs) Handles txtScript.MouseUp, txtScript.KeyUp
         EnableCopyCut()
+    End Sub
+
+    Private Sub txtScript_TextChanged(sender As Object, e As EventArgs) Handles txtScript.TextChanged
+        EnableMenusWhenScriptNotEmpty()
+    End Sub
+    Private Sub EnableMenusWhenScriptNotEmpty()
+        If txtScript.Text <> "" Then
+            cmdRun.Enabled = True
+            mnuOpenScript.Enabled = True
+            mnuClearContents.Enabled = True
+            mnuSaveScript.Enabled = True
+        Else
+            cmdRun.Enabled = False
+            mnuOpenScript.Enabled = False
+            mnuClearContents.Enabled = False
+            mnuSaveScript.Enabled = False
+        End If
     End Sub
 End Class
