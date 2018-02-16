@@ -30,13 +30,39 @@ Public Class dlgHypothesisTestsCalculator
         TestOKEnabled()
     End Sub
 
+    Private Sub InitialiseDialog()
+        ucrReceiverForTestColumn.Selector = ucrSelectorColumn
+        ucrReceiverMultiple.Selector = ucrSelectorColumn
+        ucrReceiverForTestColumn.SetMeAsReceiver()
+        ucrChkShowArguments.SetText("Show Arguments")
+        ucrChkSaveTestObject.SetText("Save test object")
+        ucrChkBy.SetText("By")
+        ucrBase.clsRsyntax.SetCommandString("")
+        ucrSaveResultInto.SetItemsTypeAsColumns()
+        ucrSaveResultInto.SetDefaultTypeAsColumn()
+        ucrSaveResultInto.SetDataFrameSelector(ucrSelectorColumn.ucrAvailableDataFrames)
+        ucrSelectorColumn.Reset()
+        ucrSaveResultInto.SetValidationTypeAsRVariable()
+
+        'Tooltips for conf & and Alt Buttons
+        tpConf.SetToolTip(btnConf, "The confidence level can be changed for some tests to 0.9 or 0.99 etc")
+        tpAlt.SetToolTip(btnAlt, " For some hypotheses the alternative hypothesis is two sided by default, but can be changed to ""greater"" or ""less""")
+        'Temporarily disabled: Not yet functioning.
+        ucrChkBy.Enabled = False
+        ucrReceiverMultiple.Enabled = False
+        ucrChkBy.AddToLinkedControls(ucrReceiverMultiple, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkSaveTestObject.AddToLinkedControls(ucrSaveResultInto, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+    End Sub
+
     Private Sub SetDefaults()
         ucrSelectorColumn.Reset()
         ucrReceiverForTestColumn.SetMeAsReceiver()
-        'ucrBase.clsRsyntax.SetAssignTo(ucrSaveResultInto.GetText(), strTempColumn:=ucrSaveResultInto.GetText(), strTempDataframe:=ucrSelectorColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        ucrBase.clsRsyntax.SetAssignTo(ucrSaveResultInto.GetText(), strTempModel:=ucrSaveResultInto.GetText())
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 2
-
+        ucrSaveResultInto.SetPrefix("Test")
+        ucrChkShowArguments.Checked = False
+        ucrChkSaveTestObject.Checked = False
         clsAttach.SetRCommand("attach")
         clsDetach.SetRCommand("detach")
         clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorColumn.ucrAvailableDataFrames.clsCurrDataFrame)
@@ -53,28 +79,6 @@ Public Class dlgHypothesisTestsCalculator
     End Sub
 
     Private Sub TestOKEnabled()
-
-    End Sub
-
-    Private Sub InitialiseDialog()
-        ucrReceiverForTestColumn.Selector = ucrSelectorColumn
-        ucrReceiverMultiple.Selector = ucrSelectorColumn
-        ucrReceiverForTestColumn.SetMeAsReceiver()
-        ucrChkShowArguments.SetText("Show Arguments")
-        ucrChkSaveTestObject.SetText("Save test object")
-        ucrChkBy.SetText("By")
-        ucrBase.clsRsyntax.SetCommandString("")
-        ucrSaveResultInto.SetPrefix("Test")
-        ucrSaveResultInto.SetItemsTypeAsColumns()
-        ucrSaveResultInto.SetDefaultTypeAsColumn()
-        ucrSaveResultInto.SetDataFrameSelector(ucrSelectorColumn.ucrAvailableDataFrames)
-        ucrSelectorColumn.Reset()
-        ucrSaveResultInto.SetValidationTypeAsRVariable()
-
-        'Temporarily disabled: Not yet functioning.
-        ucrChkBy.Enabled = False
-        ucrReceiverMultiple.Enabled = False
-        ucrChkBy.AddToLinkedControls(ucrReceiverMultiple, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
     End Sub
 
@@ -121,11 +125,11 @@ Public Class dlgHypothesisTestsCalculator
         ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("+")
     End Sub
 
-    Private Sub cmdConf_Click(sender As Object, e As EventArgs) Handles cmdConf.Click
+    Private Sub btnConf_Click(sender As Object, e As EventArgs) Handles btnConf.Click
         ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("conf=0.95")
     End Sub
 
-    Private Sub cmdExponential_Click(sender As Object, e As EventArgs) Handles cmdExponential.Click
+    Private Sub btnAlt_Click(sender As Object, e As EventArgs) Handles btnAlt.Click
         ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("Alt=""two""")
     End Sub
 
