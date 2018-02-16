@@ -22,15 +22,16 @@ Partial Class dlgHypothesisTestsCalculator
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.lblData = New System.Windows.Forms.Label()
+        Me.components = New System.ComponentModel.Container()
+        Me.lblTest = New System.Windows.Forms.Label()
         Me.grpMainKeyboard = New System.Windows.Forms.GroupBox()
         Me.cmdPlus = New System.Windows.Forms.Button()
         Me.cmdComma = New System.Windows.Forms.Button()
         Me.cmdDelete = New System.Windows.Forms.Button()
         Me.cmdClear = New System.Windows.Forms.Button()
-        Me.cmdConf = New System.Windows.Forms.Button()
+        Me.btnConf = New System.Windows.Forms.Button()
         Me.cmdBrackets = New System.Windows.Forms.Button()
-        Me.cmdExponential = New System.Windows.Forms.Button()
+        Me.btnAlt = New System.Windows.Forms.Button()
         Me.cmdSquiggle = New System.Windows.Forms.Button()
         Me.cmdSquareBrackets = New System.Windows.Forms.Button()
         Me.cmdTry = New System.Windows.Forms.Button()
@@ -74,21 +75,23 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrSelectorColumn = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrChkShowArguments = New instat.ucrCheck()
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
+        Me.tpConf = New System.Windows.Forms.ToolTip(Me.components)
+        Me.tpAlt = New System.Windows.Forms.ToolTip(Me.components)
         Me.grpMainKeyboard.SuspendLayout()
         Me.grpTests.SuspendLayout()
         Me.SuspendLayout()
         '
-        'lblData
+        'lblTest
         '
-        Me.lblData.AutoSize = True
-        Me.lblData.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblData.Location = New System.Drawing.Point(19, 29)
-        Me.lblData.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.lblData.Name = "lblData"
-        Me.lblData.Size = New System.Drawing.Size(30, 13)
-        Me.lblData.TabIndex = 156
-        Me.lblData.Tag = "Data"
-        Me.lblData.Text = "Data"
+        Me.lblTest.AutoSize = True
+        Me.lblTest.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblTest.Location = New System.Drawing.Point(19, 29)
+        Me.lblTest.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblTest.Name = "lblTest"
+        Me.lblTest.Size = New System.Drawing.Size(28, 13)
+        Me.lblTest.TabIndex = 156
+        Me.lblTest.Tag = "Test"
+        Me.lblTest.Text = "Test"
         '
         'grpMainKeyboard
         '
@@ -96,9 +99,9 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpMainKeyboard.Controls.Add(Me.cmdComma)
         Me.grpMainKeyboard.Controls.Add(Me.cmdDelete)
         Me.grpMainKeyboard.Controls.Add(Me.cmdClear)
-        Me.grpMainKeyboard.Controls.Add(Me.cmdConf)
+        Me.grpMainKeyboard.Controls.Add(Me.btnConf)
         Me.grpMainKeyboard.Controls.Add(Me.cmdBrackets)
-        Me.grpMainKeyboard.Controls.Add(Me.cmdExponential)
+        Me.grpMainKeyboard.Controls.Add(Me.btnAlt)
         Me.grpMainKeyboard.Controls.Add(Me.cmdSquiggle)
         Me.grpMainKeyboard.Controls.Add(Me.cmdSquareBrackets)
         Me.grpMainKeyboard.Location = New System.Drawing.Point(674, 68)
@@ -155,18 +158,18 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdClear.Text = "Clear"
         Me.cmdClear.UseVisualStyleBackColor = True
         '
-        'cmdConf
+        'btnConf
         '
-        Me.cmdConf.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdConf.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdConf.Location = New System.Drawing.Point(4, 41)
-        Me.cmdConf.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdConf.Name = "cmdConf"
-        Me.cmdConf.Size = New System.Drawing.Size(70, 30)
-        Me.cmdConf.TabIndex = 147
-        Me.cmdConf.Tag = "Del"
-        Me.cmdConf.Text = "Conf=0.95"
-        Me.cmdConf.UseVisualStyleBackColor = True
+        Me.btnConf.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.btnConf.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.btnConf.Location = New System.Drawing.Point(4, 41)
+        Me.btnConf.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.btnConf.Name = "btnConf"
+        Me.btnConf.Size = New System.Drawing.Size(70, 30)
+        Me.btnConf.TabIndex = 147
+        Me.btnConf.Tag = "Del"
+        Me.btnConf.Text = "Conf=0.95"
+        Me.btnConf.UseVisualStyleBackColor = True
         '
         'cmdBrackets
         '
@@ -179,17 +182,17 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdBrackets.Text = "( )"
         Me.cmdBrackets.UseVisualStyleBackColor = True
         '
-        'cmdExponential
+        'btnAlt
         '
-        Me.cmdExponential.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdExponential.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdExponential.Location = New System.Drawing.Point(4, 70)
-        Me.cmdExponential.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdExponential.Name = "cmdExponential"
-        Me.cmdExponential.Size = New System.Drawing.Size(70, 30)
-        Me.cmdExponential.TabIndex = 143
-        Me.cmdExponential.Text = "Alt=""two"""
-        Me.cmdExponential.UseVisualStyleBackColor = True
+        Me.btnAlt.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.btnAlt.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.btnAlt.Location = New System.Drawing.Point(4, 70)
+        Me.btnAlt.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.btnAlt.Name = "btnAlt"
+        Me.btnAlt.Size = New System.Drawing.Size(70, 30)
+        Me.btnAlt.TabIndex = 143
+        Me.btnAlt.Text = "Alt=""two"""
+        Me.btnAlt.UseVisualStyleBackColor = True
         '
         'cmdSquiggle
         '
@@ -702,7 +705,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.Controls.Add(Me.grpMainKeyboard)
         Me.Controls.Add(Me.ucrSelectorColumn)
         Me.Controls.Add(Me.ucrChkShowArguments)
-        Me.Controls.Add(Me.lblData)
+        Me.Controls.Add(Me.lblTest)
         Me.Controls.Add(Me.ucrReceiverForTestColumn)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -716,7 +719,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents lblData As Label
+    Friend WithEvents lblTest As Label
     Friend WithEvents ucrReceiverForTestColumn As ucrReceiverExpression
     Friend WithEvents ucrChkShowArguments As ucrCheck
     Friend WithEvents ucrSelectorColumn As ucrSelectorByDataFrameAddRemove
@@ -726,9 +729,9 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents cmdDelete As Button
     Friend WithEvents cmdSquiggle As Button
     Friend WithEvents cmdClear As Button
-    Friend WithEvents cmdConf As Button
+    Friend WithEvents btnConf As Button
     Friend WithEvents cmdBrackets As Button
-    Friend WithEvents cmdExponential As Button
+    Friend WithEvents btnAlt As Button
     Friend WithEvents cmdSquareBrackets As Button
     Friend WithEvents ucrChkBy As ucrCheck
     Friend WithEvents ucrReceiverMultiple As ucrReceiverMultiple
@@ -768,4 +771,6 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents btnWilcox As Button
     Friend WithEvents btnClear As Button
     Friend WithEvents ucrChkSaveTestObject As ucrCheck
+    Friend WithEvents tpConf As ToolTip
+    Friend WithEvents tpAlt As ToolTip
 End Class
