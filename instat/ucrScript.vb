@@ -129,4 +129,73 @@ Public Class ucrScript
         End Using
     End Sub
 
+    Private Sub mnuCopy_Click(sender As Object, e As EventArgs) Handles mnuCopy.Click
+        Clipboard.SetText(txtScript.Text)
+    End Sub
+
+    Private Sub mnuCut_Click(sender As Object, e As EventArgs) Handles mnuCut.Click
+        Clipboard.Clear()
+        Clipboard.SetText(txtScript.Text)
+        txtScript.SelectedText = ""
+    End Sub
+
+    Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
+        Dim msgPaste As DialogResult
+
+        If Clipboard.ContainsData(DataFormats.Text) Then
+            If txtScript.SelectionLength > 0 Then
+                msgPaste = MessageBox.Show("Are you sure you want to overwrite the selected text?", "Paste to Script Window", MessageBoxButtons.YesNo)
+                If msgPaste = DialogResult.Yes Then
+                    txtScript.SelectedText = Clipboard.GetText()
+                End If
+            Else
+                If txtScript.Text = "" Then
+                    txtScript.Text = Clipboard.GetText()
+                Else
+                    txtScript.SelectionStart = txtScript.TextLength & Environment.NewLine
+                    txtScript.AppendText(Clipboard.GetText)
+                End If
+            End If
+        Else
+            MessageBox.Show("You can only paste text data on the script window?", "Paste to Script Window", MessageBoxButtons.OK)
+        End If
+    End Sub
+
+    Private Sub EnableCopyCut()
+        If txtScript.SelectionLength > 0 Then
+            mnuCopy.Enabled = True
+            mnuCut.Enabled = True
+            mnuRunSelectedText.Enabled = True
+        Else
+            mnuCopy.Enabled = False
+            mnuCut.Enabled = False
+            mnuRunSelectedText.Enabled = False
+        End If
+    End Sub
+
+    Private Sub ucrScript_Load(sender As Object, e As EventArgs) Handles Me.Load
+        EnableCopyCut()
+        EnableMenusWhenScriptNotEmpty()
+    End Sub
+
+    Private Sub txtScript_MouseUp(sender As Object, e As EventArgs) Handles txtScript.MouseUp, txtScript.KeyUp
+        EnableCopyCut()
+    End Sub
+
+    Private Sub txtScript_TextChanged(sender As Object, e As EventArgs) Handles txtScript.TextChanged
+        EnableMenusWhenScriptNotEmpty()
+    End Sub
+    Private Sub EnableMenusWhenScriptNotEmpty()
+        If txtScript.Text <> "" Then
+            cmdRun.Enabled = True
+            mnuOpenScript.Enabled = True
+            mnuClearContents.Enabled = True
+            mnuSaveScript.Enabled = True
+        Else
+            cmdRun.Enabled = False
+            mnuOpenScript.Enabled = False
+            mnuClearContents.Enabled = False
+            mnuSaveScript.Enabled = False
+        End If
+    End Sub
 End Class
