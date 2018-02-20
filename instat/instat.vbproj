@@ -6204,6 +6204,9 @@
     <Content Include="static\Library\Climatic\WesternKenya.RDS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="static\InstatObject\R\Backend_Components\DisplayDaily.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
