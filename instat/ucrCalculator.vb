@@ -881,7 +881,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdBrackets_Click(sender As Object, e As EventArgs) Handles cmdBrackets.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("()", 2)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("( )", 1)
     End Sub
     Private Sub cmdOpeningBracket_Click(sender As Object, e As EventArgs) Handles cmdOpeningBracket.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("(")
@@ -1002,7 +1002,11 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdDiff_Click(sender As Object, e As EventArgs) Handles cmdDiff.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lag()", 1)
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("c(NA,diff(x= , lag = 1, differences = 1))", 29)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("c(NA,diff())", 2)
+        End If
     End Sub
 
     Private Sub cmdEcdf_Click(sender As Object, e As EventArgs) Handles cmdEcdf.Click
