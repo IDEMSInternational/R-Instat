@@ -156,7 +156,6 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
     # In the case of counting without columns, the first column column will be the "calculated from"
     # which will add unwanted column metadata
     calculated_from <- list(column_names)
-    if(!is.null(weights)) calculated_from[[length(calculated_from) + 1]] <- weights
     names(calculated_from) <- rep(data_name, length(calculated_from))
     j <- 0
     for(summary_type in summaries) {
@@ -165,7 +164,11 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
       # if(!is.null(weights)) {
       #   function_exp <- paste0(function_exp, ", weights = ", weights)
       # }
-      function_exp <- paste0(function_exp, ", ... = ", ...)
+      extra_args <- list(...)
+      for(i in seq_along(extra_args)) {
+        function_exp <- paste0(function_exp, ", ", names(extra_args)[i], " = ", extra_args[i])
+      }
+      function_exp <- paste0(function_exp, ")")
       # function_exp <- paste0(function_exp, ", na.rm =", na.rm, ")")
       if(is.null(result_names)) {
         result_name = summaries_display[j]
@@ -175,18 +178,18 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
       else result_name <- result_names[i,j]
       if(percentage_type == "none") {
         summary_calculation <- instat_calculation$new(type = type, result_name = result_name,
-                                                      function_exp = paste0(summary_type, "(", column_names, function_exp),
+                                                      function_exp = paste0(summary_type, "(x = ", column_names, function_exp),
                                                       calculated_from = calculated_from, save = save)
       }
       else {
         values_calculation <- instat_calculation$new(type = type, result_name = result_name,
-                                                      function_exp = paste0(summary_type, "(", column_names, function_exp),
+                                                      function_exp = paste0(summary_type, "(x = ", column_names, function_exp),
                                                       calculated_from = calculated_from, save = save)
         if(percentage_type == "columns") {
           if(length(perc_total_columns) == 1) perc_col_name <- perc_total_columns
           else perc_col_name <- perc_total_columns[i]
           totals_calculation <- instat_calculation$new(type = type, result_name = paste0(summaries_display[j], "_", perc_total_columns, "_totals"),
-                                                       function_exp = paste0(summary_type, "(", perc_col_name, function_exp),
+                                                       function_exp = paste0(summary_type, "(x = ", perc_col_name, function_exp),
                                                        calculated_from = calculated_from, save = save)
         }
         else if(percentage_type == "filter") {
@@ -195,7 +198,7 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
         else if(percentage_type == "factors") {
           values_calculation$manipulations <- value_manipulations
           totals_calculation <- instat_calculation$new(type = "summary", result_name = paste0(result_name, "_totals"),
-                                                       function_exp = paste0(summary_type, "(", column_names, function_exp),
+                                                       function_exp = paste0(summary_type, "(x = ", column_names, function_exp),
                                                        calculated_from = calculated_from, save = save)
         }
         function_exp <- paste0(values_calculation$result_name, "/", totals_calculation$result_name)
@@ -401,10 +404,10 @@ summary_coef_var_label="summary_coef_var"
 summary_median_absolute_deviation_label="summary_median_absolute_deviation"
 summary_Qn_label="summary_Qn"
 summary_Sn_label="summary_Sn"
-
+cor_label="summary_cor"
 
 # list of all summary function names
-all_summaries=c(sum_label, mode_label, count_label, count_missing_label, count_non_missing_label, sd_label, var_label, median_label, range_label, min_label, max_label, mean_label,quartile_label, lower_quart_label, upper_quart_label, skewness_label, kurtosis_label, summary_coef_var_label, summary_skewness_mc_label, summary_median_absolute_deviation_label, summary_Qn_label, summary_Sn_label)
+all_summaries=c(sum_label, mode_label, count_label, count_missing_label, count_non_missing_label, sd_label, var_label, median_label, range_label, min_label, max_label, mean_label,quartile_label, lower_quart_label, upper_quart_label, skewness_label, kurtosis_label, summary_coef_var_label, summary_skewness_mc_label, summary_median_absolute_deviation_label, summary_Qn_label, summary_Sn_label, cor_label)
 summary_mode <- function(x,...) {
   ux <- unique(x)
   out <- ux[which.max(tabulate(match(x, ux)))]
@@ -524,6 +527,10 @@ summary_Sn <- function(x, constant = 1.1926, finite.corr = missing(constant), na
   }
 }
 
+# cor function
+summary_cor <- function(x, y, use = "everything", method = c("pearson", "kendall", "spearman"), ...) {
+  return(cor(x = x, y = y, use = use, method = method))
+}
 
 instat_object$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), n_column_factors = 1, store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = TRUE, treat_columns_as_factor = FALSE, page_by = "default", as_html = TRUE, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, margin_name = "(All)", additional_filter, ...) {
   if(n_column_factors == 1 && length(factors) == 0) n_column_factors <- 0
