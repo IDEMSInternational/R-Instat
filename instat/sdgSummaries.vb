@@ -92,6 +92,36 @@ Public Class sdgSummaries
         ucrChkSn.SetParameter(New RParameter("summary_Sn", 20), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_Sn" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkSn.SetText("Sn")
 
+        ucrChkPercentile.SetText("Percentile")
+
+        ucrChkProportion.SetText("Proportion")
+
+        ucrChkCount.SetText("Count")
+
+        ucrChkPercentage.SetText("Percentage")
+
+        ucrChkCorrelations.SetParameter(New RParameter("summary_cor", 21), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_cor" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkCorrelations.SetText("Correlations")
+
+        ucrChkCovariance.SetParameter(New RParameter("summary_cov", 22), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_cov" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkCovariance.SetText("Covariance")
+
+        ucrReceiverSecondVariable.SetMeAsReceiver()
+        'ucrReceiverSecondVariable.Selector = ucrSelectorSecondVariable
+
+        ucrChkFirst.SetText("First")
+
+        ucrChkLast.SetText("Last")
+
+        ucrChknth.SetText("nth")
+
+        ucrChkn_distinct.SetText("n_distinct")
+
+        'linking controls
+        ucrChkPercentile.AddToLinkedControls(ucrInputPercentile, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkProportion.AddToLinkedControls({ucrInputInequality, ucrInputValue}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkCount.AddToLinkedControls({ucrChkPercentage, ucrInputInequality, ucrInputValue}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
         ucrChkTrimmedMean.SetText("Trimmed Mean")
         ucrChkTrimmedMean.Enabled = False
         ucrNudFraction.Enabled = False
@@ -101,6 +131,16 @@ Public Class sdgSummaries
         ucrNudFraction.Increment = 0.1
         ucrNudFraction.SetRDefault(0)
 
+        ucrInputInequality.SetParameter(New RParameter("inequality", bNewIncludeArgumentName:=False))
+        Dim dctInequalityValues As New Dictionary(Of String, String)
+        dctInequalityValues.Add(">", ">")
+        dctInequalityValues.Add("<", "<")
+        dctInequalityValues.Add(">=", ">=")
+        dctInequalityValues.Add("<=", "<=")
+        dctInequalityValues.Add("==", "==")
+        ucrInputInequality.SetItems(dctInequalityValues)
+        ucrInputInequality.SetRDefault(">")
+
         'ucrPnlMissingOptions.AddRadioButton(rdoNumber)
         'ucrPnlMissingOptions.AddRadioButton(rdoPercentage)
 
@@ -109,7 +149,7 @@ Public Class sdgSummaries
         ucrNudPercentage.SetLinkedDisplayControl(lblPercentage)
         ucrNudNumber.SetLinkedDisplayControl(lblNumber)
 
-        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkUpperQuartile, ucrChkLowerQuartile, ucrChkMedianAbsoluteDeviation, ucrChkKurtosis, ucrChkCoefficientOfVariation, ucrChkSkewness, ucrChkMc, ucrChkQn, ucrChkSn})
+        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkUpperQuartile, ucrChkLowerQuartile, ucrChkMedianAbsoluteDeviation, ucrChkKurtosis, ucrChkCoefficientOfVariation, ucrChkSkewness, ucrChkMc, ucrChkQn, ucrChkSn, ucrChkCorrelations, ucrChkCovariance})
         'TODO: This needs modifying summaries functions to allow this options to be implemented.
         tbMissingOptions.Enabled = False
         For Each ctrTemp As ucrCheck In lstCheckboxes

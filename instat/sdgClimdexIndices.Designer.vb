@@ -99,9 +99,7 @@ Partial Class sdgClimdexIndices
         Me.ucrChkMaxSpellSpanYears = New instat.ucrCheck()
         Me.ucrNudN = New instat.ucrNud()
         Me.ucrNudMinBaseData = New instat.ucrNud()
-        Me.lblFreq = New System.Windows.Forms.Label()
         Me.lblMinBaseData = New System.Windows.Forms.Label()
-        Me.ucrInputFreq = New instat.ucrInputComboBox()
         Me.lblPrecQuantiles = New System.Windows.Forms.Label()
         Me.lblTempQuantiles = New System.Windows.Forms.Label()
         Me.grpMaxMissingDays = New System.Windows.Forms.GroupBox()
@@ -462,9 +460,7 @@ Partial Class sdgClimdexIndices
         Me.tbpSettings.Controls.Add(Me.ucrChkMaxSpellSpanYears)
         Me.tbpSettings.Controls.Add(Me.ucrNudN)
         Me.tbpSettings.Controls.Add(Me.ucrNudMinBaseData)
-        Me.tbpSettings.Controls.Add(Me.lblFreq)
         Me.tbpSettings.Controls.Add(Me.lblMinBaseData)
-        Me.tbpSettings.Controls.Add(Me.ucrInputFreq)
         Me.tbpSettings.Controls.Add(Me.lblPrecQuantiles)
         Me.tbpSettings.Controls.Add(Me.lblTempQuantiles)
         Me.tbpSettings.Controls.Add(Me.grpMaxMissingDays)
@@ -565,24 +561,11 @@ Partial Class sdgClimdexIndices
         Me.ucrNudMinBaseData.Name = "ucrNudMinBaseData"
         Me.ucrNudMinBaseData.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'lblFreq
-        '
-        resources.ApplyResources(Me.lblFreq, "lblFreq")
-        Me.lblFreq.Name = "lblFreq"
-        Me.lblFreq.Tag = "Frequency:"
-        '
         'lblMinBaseData
         '
         resources.ApplyResources(Me.lblMinBaseData, "lblMinBaseData")
         Me.lblMinBaseData.Name = "lblMinBaseData"
         Me.lblMinBaseData.Tag = "Minimum_Base_Data_ Present"
-        '
-        'ucrInputFreq
-        '
-        Me.ucrInputFreq.AddQuotesIfUnrecognised = True
-        Me.ucrInputFreq.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputFreq, "ucrInputFreq")
-        Me.ucrInputFreq.Name = "ucrInputFreq"
         '
         'lblPrecQuantiles
         '
@@ -744,9 +727,7 @@ Partial Class sdgClimdexIndices
     Friend WithEvents ucrChkMaxSpellSpanYears As ucrCheck
     Friend WithEvents ucrNudN As ucrNud
     Friend WithEvents ucrNudMinBaseData As ucrNud
-    Friend WithEvents lblFreq As Label
     Friend WithEvents lblMinBaseData As Label
-    Friend WithEvents ucrInputFreq As ucrInputComboBox
     Friend WithEvents lblPrecQuantiles As Label
     Friend WithEvents lblTempQuantiles As Label
     Friend WithEvents grpMaxMissingDays As GroupBox
