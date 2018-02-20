@@ -212,7 +212,7 @@ Public Class dlgMakeDate
         ucrPnlDate.AddToLinkedControls(ucrChkTwoDigitYear, {rdoTwoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkTwoDigitYear.AddToLinkedControls(ucrNudCutoff, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudCutoff.SetLinkedDisplayControl(lblCutOffTwo)
-        ucrPnlDate.AddToLinkedControls(ucrInputComboBoxMonthTwo, {rdoTwoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="365/366")
+        ucrPnlDate.AddToLinkedControls(ucrInputComboBoxMonthTwo, {rdoTwoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="366")
         ucrReceiverYearTwo.SetLinkedDisplayControl(grpTwoColumns)
 
         'when rdoThreeColumn is checked
