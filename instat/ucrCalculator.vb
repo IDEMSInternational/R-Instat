@@ -267,7 +267,7 @@ Public Class ucrCalculator
 
     Private Sub cmdRound_Click(sender As Object, e As EventArgs) Handles cmdRound.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("round(x= ,digits=0)", 10)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("round(x= , digits=0)", 11)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("round()", 1)
         End If
@@ -324,7 +324,7 @@ Public Class ucrCalculator
 
     Private Sub cmdSiginf_Click(sender As Object, e As EventArgs) Handles cmdSiginf.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("signif(x= ,digits=6)", 10)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("signif(x= , digits=6)", 11)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("signif()", 1)
         End If
@@ -380,7 +380,7 @@ Public Class ucrCalculator
 
     Private Sub cmdLog_Click(sender As Object, e As EventArgs) Handles cmdLog.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("log(x= ,base=exp(1))", 13)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("log(x= , base=exp(1))", 14)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("log()", 1)
         End If
@@ -448,7 +448,7 @@ Public Class ucrCalculator
 
     Private Sub cmdSum_Click(sender As Object, e As EventArgs) Handles cmdSum.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum(x= ,na.rm=TRUE)", 13)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum(x= , na.rm=TRUE)", 14)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum()", 1)
         End If
@@ -456,7 +456,7 @@ Public Class ucrCalculator
 
     Private Sub cmdMean_Click(sender As Object, e As EventArgs) Handles cmdMean.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("mean(x= ,trim=0 ,na.rm=TRUE)", 21)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("mean(x= , trim=0 , na.rm=TRUE)", 23)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("mean()", 1)
         End If
@@ -464,7 +464,7 @@ Public Class ucrCalculator
 
     Private Sub cmdMax_Click(sender As Object, e As EventArgs) Handles cmdMax.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("max(x= ,na.rm=TRUE)", 13)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("max(x= , na.rm=TRUE)", 14)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("max()", 1)
         End If
@@ -472,7 +472,7 @@ Public Class ucrCalculator
 
     Private Sub cmdMin_Click(sender As Object, e As EventArgs) Handles cmdMin.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("min(x= ,na.rm=TRUE)", 13)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("min(x= , na.rm=TRUE)", 14)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("min()", 1)
         End If
@@ -480,7 +480,7 @@ Public Class ucrCalculator
 
     Private Sub cmdMedian_Click(sender As Object, e As EventArgs) Handles cmdMedian.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("median(x= ,na.rm=TRUE)", 13)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("median(x= , na.rm=TRUE)", 14)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("median()", 1)
         End If
@@ -488,7 +488,7 @@ Public Class ucrCalculator
 
     Private Sub cmdVar_Click(sender As Object, e As EventArgs) Handles cmdVar.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("var(x= , y=NULL,na.rm=TRUE)", 21)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("var(x= , y=NULL, na.rm=TRUE)", 22)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("var()", 1)
         End If
@@ -512,7 +512,7 @@ Public Class ucrCalculator
 
     Private Sub cmdQuantile_Click(sender As Object, e As EventArgs) Handles cmdQuantile.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile(x= ,probs=0.5, na.rm=TRUE, names=FALSE, type=7)", 44)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile(x= , probs=0.5, na.rm=TRUE, names=FALSE, type=7)", 45)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile()", 1)
         End If
@@ -576,7 +576,7 @@ Public Class ucrCalculator
 
     Private Sub cmdSort_Click(sender As Object, e As EventArgs) Handles cmdSort.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_sort(x= ,decreasing = FALSE, na_last = TRUE, locale = ' ',)", 51)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_sort(x= , decreasing = FALSE, na_last = TRUE, locale = ' ')", 51)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_sort()", 1)
         End If
@@ -584,7 +584,7 @@ Public Class ucrCalculator
 
     Private Sub cmdReplace_Click(sender As Object, e As EventArgs) Handles cmdReplace.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_replace(string= ,pattern=' ' ,replacement=' ' )", 31)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_replace(string= , pattern=' ' , replacement=' ' )", 33)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_replace()", 1)
         End If
@@ -625,7 +625,7 @@ Public Class ucrCalculator
 
     Private Sub cmdQnorm_Click(sender As Object, e As EventArgs) Handles cmdQnorm.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qnorm(p= ,mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE)", 52)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qnorm(p= , mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE)", 53)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qnorm()", 1)
         End If
@@ -633,7 +633,7 @@ Public Class ucrCalculator
 
     Private Sub cmdQt_Click(sender As Object, e As EventArgs) Handles cmdQt.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qt(p= , df= ,lower.tail = TRUE)", 25)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qt(p= , df= , lower.tail = TRUE)", 26)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qt()", 1)
         End If
@@ -641,7 +641,7 @@ Public Class ucrCalculator
 
     Private Sub cmdQchisq_Click(sender As Object, e As EventArgs) Handles cmdQchisq.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qchisq(p= , df= ,lower.tail = TRUE)", 25)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qchisq(p= , df= , lower.tail = TRUE)", 26)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qchisq()", 1)
         End If
@@ -649,7 +649,7 @@ Public Class ucrCalculator
 
     Private Sub cmdqF_Click(sender As Object, e As EventArgs) Handles cmdqF.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qf(p= , df1= ,df2= ,lower.tail = TRUE)", 32)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qf(p= , df1= , df2= ,lower.tail = TRUE)", 33)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qf()", 1)
         End If
@@ -665,7 +665,7 @@ Public Class ucrCalculator
 
     Private Sub cmdPt_Click(sender As Object, e As EventArgs) Handles cmdPt.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pt(q= , df= ,lower.tail = TRUE)", 25)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pt(q= , df= , lower.tail = TRUE)", 26)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pt()", 1)
         End If
@@ -673,7 +673,7 @@ Public Class ucrCalculator
 
     Private Sub cmdPChisq_Click(sender As Object, e As EventArgs) Handles cmdPChisq.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pchisq(q= , df= ,lower.tail = TRUE)", 25)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pchisq(q= , df= , lower.tail = TRUE)", 26)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pt()", 1)
         End If
@@ -681,7 +681,7 @@ Public Class ucrCalculator
 
     Private Sub cmdPf_Click(sender As Object, e As EventArgs) Handles cmdPf.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pchisq(q= , df= ,lower.tail = TRUE)", 25)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pchisq(q= , df= , lower.tail = TRUE)", 26)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pchisq()", 1)
         End If
@@ -881,7 +881,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdBrackets_Click(sender As Object, e As EventArgs) Handles cmdBrackets.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("()", 2)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("( )", 1)
     End Sub
     Private Sub cmdOpeningBracket_Click(sender As Object, e As EventArgs) Handles cmdOpeningBracket.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("(")
@@ -1002,7 +1002,11 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdDiff_Click(sender As Object, e As EventArgs) Handles cmdDiff.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lag()", 1)
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("c(NA, diff(x= , lag = 1, differences = 1))", 29)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("c(NA,diff())", 2)
+        End If
     End Sub
 
     Private Sub cmdEcdf_Click(sender As Object, e As EventArgs) Handles cmdEcdf.Click
@@ -1019,7 +1023,7 @@ Public Class ucrCalculator
 
     Private Sub cmdMovMax_Click(sender As Object, e As EventArgs) Handles cmdMovMax.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmax(x= ,k=3)", 5)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmax(x= , k=3)", 6)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmax()", 1)
         End If
@@ -1027,7 +1031,7 @@ Public Class ucrCalculator
 
     Private Sub cmdMovSum_Click(sender As Object, e As EventArgs) Handles cmdMovSum.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollsum(x= ,k=3)", 5)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollsum(x= , k=3)", 6)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollsum()", 1)
         End If
@@ -1035,7 +1039,7 @@ Public Class ucrCalculator
 
     Private Sub cmMovMed_Click(sender As Object, e As EventArgs) Handles cmMovMed.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmedian(x= ,k=3)", 5)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmedian(x= , k=3)", 6)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmedian()", 1)
         End If
@@ -1071,7 +1075,7 @@ Public Class ucrCalculator
 
     Private Sub cmdIfelse_Click(sender As Object, e As EventArgs) Handles cmdIfelse.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ifelse(test= ,""yes"" ,""no"")", 13)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ifelse(test= , ""yes"" , ""no"")", 15)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ifelse()", 1)
         End If
@@ -1091,7 +1095,7 @@ Public Class ucrCalculator
 
     Private Sub cmdNear_Click(sender As Object, e As EventArgs) Handles cmdNear.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::near(x= ,y= )", 5)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::near(x= , y= )", 6)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::near()", 1)
         End If
@@ -1147,7 +1151,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCor_Click(sender As Object, e As EventArgs) Handles cmdCor.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cor(x= ,y= ,use = ""everything"", method = c(""pearson"", ""kendall"", ""spearman""))", 71)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cor(x= , y= , use = ""everything"", method = c(""pearson"", ""kendall"", ""spearman""))", 73)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cor()", 1)
         End If
@@ -1155,7 +1159,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCov_Click(sender As Object, e As EventArgs) Handles cmdCov.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cov(x= ,y= ,use = ""everything"", method = c(""pearson"", ""kendall"", ""spearman""))", 71)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cov(x= , y= , use = ""everything"", method = c(""pearson"", ""kendall"", ""spearman""))", 73)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cov()", 1)
         End If
@@ -1171,7 +1175,7 @@ Public Class ucrCalculator
 
     Private Sub cmdFirst_Click(sender As Object, e As EventArgs) Handles cmdFirst.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::first(x= ,order_by=NULL)", 15)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::first(x= , order_by=NULL)", 16)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::first()", 1)
         End If
@@ -1179,7 +1183,7 @@ Public Class ucrCalculator
 
     Private Sub cmdLast_Click(sender As Object, e As EventArgs) Handles cmdLast.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::last(x= ,order_by=NULL)", 15)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::last(x= , order_by=NULL)", 16)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::last()", 1)
         End If
@@ -1187,7 +1191,7 @@ Public Class ucrCalculator
 
     Private Sub cmdnth_Click(sender As Object, e As EventArgs) Handles cmdnth.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::nth(x= ,n= ,order_by=NULL)", 19)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::nth(x= , n= , order_by=NULL)", 21)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::nth()", 1)
         End If
