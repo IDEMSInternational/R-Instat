@@ -289,6 +289,12 @@
     <Compile Include="dlgDefineRedFlags.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgHypothesisTestsCalculator.Designer.vb">
+      <DependentUpon>dlgHypothesisTestsCalculator.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgHypothesisTestsCalculator.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgParallelCoordinatePlot.Designer.vb">
       <DependentUpon>dlgParallelCoordinatePlot.vb</DependentUpon>
     </Compile>
@@ -2606,6 +2612,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFrequency.sw-KE.resx">
       <DependentUpon>dlgFrequency.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgHypothesisTestsCalculator.resx">
+      <DependentUpon>dlgHypothesisTestsCalculator.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgImportFromCSPRO.fr-FR.resx">
       <DependentUpon>dlgImportFromCSPRO.vb</DependentUpon>
