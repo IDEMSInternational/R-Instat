@@ -20,11 +20,11 @@ Public Class dlgViewGraph
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsggPlotly, clsGetGraphs As New RFunction
-    Private strGraphDisplayOption As String
+    Private strGlobalGraphDisplayOption As String
 
     Private Sub dlgViewGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        strGraphDisplayOption = frmMain.clsInstatOptions.strGraphDisplayOption
+        strGlobalGraphDisplayOption = frmMain.clsInstatOptions.strGraphDisplayOption
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -98,10 +98,6 @@ Public Class dlgViewGraph
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        frmMain.clsInstatOptions.SetGraphDisplayOption(strGraphDisplayOption)
-    End Sub
-
     Private Sub ucrPnlDisplayOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDisplayOptions.ControlValueChanged
         SetGraphDisplayType()
     End Sub
@@ -128,5 +124,11 @@ Public Class dlgViewGraph
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrGraphReceiver.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub dlgViewGraph_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
+        If Not Me.Visible Then
+            frmMain.clsInstatOptions.SetGraphDisplayOption(strGlobalGraphDisplayOption)
+        End If
     End Sub
 End Class
