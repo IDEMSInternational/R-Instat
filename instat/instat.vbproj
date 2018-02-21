@@ -6243,6 +6243,9 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\zoo_1.8-1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="static\InstatObject\R\Backend_Components\instat_comment.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
