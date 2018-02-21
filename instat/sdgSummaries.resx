@@ -140,6 +140,106 @@
   <data name="&gt;&gt;ucrButtonsSummaries.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="&gt;&gt;rdoPercentage.Name" xml:space="preserve">
+    <value>rdoPercentage</value>
+  </data>
+  <data name="&gt;&gt;rdoPercentage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoPercentage.Parent" xml:space="preserve">
+    <value>tbMissingOptions</value>
+  </data>
+  <data name="&gt;&gt;rdoPercentage.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;rdoNumber.Name" xml:space="preserve">
+    <value>rdoNumber</value>
+  </data>
+  <data name="&gt;&gt;rdoNumber.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoNumber.Parent" xml:space="preserve">
+    <value>tbMissingOptions</value>
+  </data>
+  <data name="&gt;&gt;rdoNumber.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblPercentage.Name" xml:space="preserve">
+    <value>lblPercentage</value>
+  </data>
+  <data name="&gt;&gt;lblPercentage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblPercentage.Parent" xml:space="preserve">
+    <value>tbMissingOptions</value>
+  </data>
+  <data name="&gt;&gt;lblPercentage.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;lblNumber.Name" xml:space="preserve">
+    <value>lblNumber</value>
+  </data>
+  <data name="&gt;&gt;lblNumber.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblNumber.Parent" xml:space="preserve">
+    <value>tbMissingOptions</value>
+  </data>
+  <data name="&gt;&gt;lblNumber.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrNudPercentage.Name" xml:space="preserve">
+    <value>ucrNudPercentage</value>
+  </data>
+  <data name="&gt;&gt;ucrNudPercentage.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudPercentage.Parent" xml:space="preserve">
+    <value>tbMissingOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrNudPercentage.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrNudNumber.Name" xml:space="preserve">
+    <value>ucrNudNumber</value>
+  </data>
+  <data name="&gt;&gt;ucrNudNumber.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudNumber.Parent" xml:space="preserve">
+    <value>tbMissingOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrNudNumber.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="tbMissingOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tbMissingOptions.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbMissingOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>380, 383</value>
+  </data>
+  <data name="tbMissingOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="tbMissingOptions.Text" xml:space="preserve">
+    <value>Missing Options</value>
+  </data>
+  <data name="&gt;&gt;tbMissingOptions.Name" xml:space="preserve">
+    <value>tbMissingOptions</value>
+  </data>
+  <data name="&gt;&gt;tbMissingOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbMissingOptions.Parent" xml:space="preserve">
+    <value>tbSummaries</value>
+  </data>
+  <data name="&gt;&gt;tbMissingOptions.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="rdoPercentage.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -290,42 +390,176 @@
   <data name="&gt;&gt;ucrNudNumber.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="tbMissingOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
+  <data name="&gt;&gt;grpProportionsPercentiles.Name" xml:space="preserve">
+    <value>grpProportionsPercentiles</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="tbMissingOptions.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+  <data name="&gt;&gt;grpProportionsPercentiles.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="tbMissingOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 383</value>
+  <data name="&gt;&gt;grpProportionsPercentiles.Parent" xml:space="preserve">
+    <value>tbMore</value>
   </data>
-  <data name="tbMissingOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="&gt;&gt;grpProportionsPercentiles.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="tbMissingOptions.Text" xml:space="preserve">
-    <value>Missing Options</value>
+  <data name="&gt;&gt;grpLocation.Name" xml:space="preserve">
+    <value>grpLocation</value>
   </data>
-  <data name="&gt;&gt;tbMissingOptions.Name" xml:space="preserve">
-    <value>tbMissingOptions</value>
+  <data name="&gt;&gt;grpLocation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tbMissingOptions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;grpLocation.Parent" xml:space="preserve">
+    <value>tbMore</value>
   </data>
-  <data name="&gt;&gt;tbMissingOptions.Parent" xml:space="preserve">
-    <value>tbSummaries</value>
+  <data name="&gt;&gt;grpLocation.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
-  <data name="&gt;&gt;tbMissingOptions.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkKurtosis.Name" xml:space="preserve">
+    <value>ucrChkKurtosis</value>
+  </data>
+  <data name="&gt;&gt;ucrChkKurtosis.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkKurtosis.Parent" xml:space="preserve">
+    <value>tbMore</value>
+  </data>
+  <data name="&gt;&gt;ucrChkKurtosis.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSkewness.Name" xml:space="preserve">
+    <value>ucrChkSkewness</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSkewness.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSkewness.Parent" xml:space="preserve">
+    <value>tbMore</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSkewness.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="ucrChkProportion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 43</value>
+  <data name="&gt;&gt;ucrChkMedianAbsoluteDeviation.Name" xml:space="preserve">
+    <value>ucrChkMedianAbsoluteDeviation</value>
   </data>
-  <data name="ucrChkProportion.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 20</value>
+  <data name="&gt;&gt;ucrChkMedianAbsoluteDeviation.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="ucrChkProportion.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+  <data name="&gt;&gt;ucrChkMedianAbsoluteDeviation.Parent" xml:space="preserve">
+    <value>tbMore</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMedianAbsoluteDeviation.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCoefficientOfVariation.Name" xml:space="preserve">
+    <value>ucrChkCoefficientOfVariation</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCoefficientOfVariation.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCoefficientOfVariation.Parent" xml:space="preserve">
+    <value>tbMore</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCoefficientOfVariation.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;grpScale.Name" xml:space="preserve">
+    <value>grpScale</value>
+  </data>
+  <data name="&gt;&gt;grpScale.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpScale.Parent" xml:space="preserve">
+    <value>tbMore</value>
+  </data>
+  <data name="&gt;&gt;grpScale.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;grpSkewness.Name" xml:space="preserve">
+    <value>grpSkewness</value>
+  </data>
+  <data name="&gt;&gt;grpSkewness.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpSkewness.Parent" xml:space="preserve">
+    <value>tbMore</value>
+  </data>
+  <data name="&gt;&gt;grpSkewness.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;grpKurtosis.Name" xml:space="preserve">
+    <value>grpKurtosis</value>
+  </data>
+  <data name="&gt;&gt;grpKurtosis.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpKurtosis.Parent" xml:space="preserve">
+    <value>tbMore</value>
+  </data>
+  <data name="&gt;&gt;grpKurtosis.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;GroupBox1.Name" xml:space="preserve">
+    <value>GroupBox1</value>
+  </data>
+  <data name="&gt;&gt;GroupBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;GroupBox1.Parent" xml:space="preserve">
+    <value>tbMore</value>
+  </data>
+  <data name="&gt;&gt;GroupBox1.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="tbMore.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbMore.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbMore.Size" type="System.Drawing.Size, System.Drawing">
+    <value>380, 383</value>
+  </data>
+  <data name="tbMore.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tbMore.Text" xml:space="preserve">
+    <value>More</value>
+  </data>
+  <data name="&gt;&gt;tbMore.Name" xml:space="preserve">
+    <value>tbMore</value>
+  </data>
+  <data name="&gt;&gt;tbMore.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbMore.Parent" xml:space="preserve">
+    <value>tbSummaries</value>
+  </data>
+  <data name="&gt;&gt;tbMore.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrInputCount.Name" xml:space="preserve">
+    <value>ucrInputCount</value>
+  </data>
+  <data name="&gt;&gt;ucrInputCount.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputCount.Parent" xml:space="preserve">
+    <value>grpProportionsPercentiles</value>
+  </data>
+  <data name="&gt;&gt;ucrInputCount.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboCount.Name" xml:space="preserve">
+    <value>ucrInputComboCount</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboCount.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboCount.Parent" xml:space="preserve">
+    <value>grpProportionsPercentiles</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboCount.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;ucrChkProportion.Name" xml:space="preserve">
     <value>ucrChkProportion</value>
@@ -337,16 +571,7 @@
     <value>grpProportionsPercentiles</value>
   </data>
   <data name="&gt;&gt;ucrChkProportion.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrChkCount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>144, 15</value>
-  </data>
-  <data name="ucrChkCount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 20</value>
-  </data>
-  <data name="ucrChkCount.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;ucrChkCount.Name" xml:space="preserve">
     <value>ucrChkCount</value>
@@ -358,16 +583,7 @@
     <value>grpProportionsPercentiles</value>
   </data>
   <data name="&gt;&gt;ucrChkCount.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ucrChkPercentage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>260, 43</value>
-  </data>
-  <data name="ucrChkPercentage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 20</value>
-  </data>
-  <data name="ucrChkPercentage.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;ucrChkPercentage.Name" xml:space="preserve">
     <value>ucrChkPercentage</value>
@@ -379,58 +595,31 @@
     <value>grpProportionsPercentiles</value>
   </data>
   <data name="&gt;&gt;ucrChkPercentage.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="ucrInputValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>202, 43</value>
-  </data>
-  <data name="ucrInputValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 20</value>
-  </data>
-  <data name="ucrInputValue.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;ucrInputValue.Name" xml:space="preserve">
-    <value>ucrInputValue</value>
-  </data>
-  <data name="&gt;&gt;ucrInputValue.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputValue.Parent" xml:space="preserve">
-    <value>grpProportionsPercentiles</value>
-  </data>
-  <data name="&gt;&gt;ucrInputValue.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="ucrInputInequality.Location" type="System.Drawing.Point, System.Drawing">
-    <value>144, 43</value>
-  </data>
-  <data name="ucrInputInequality.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 25</value>
-  </data>
-  <data name="ucrInputInequality.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;ucrInputInequality.Name" xml:space="preserve">
-    <value>ucrInputInequality</value>
-  </data>
-  <data name="&gt;&gt;ucrInputInequality.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputInequality.Parent" xml:space="preserve">
-    <value>grpProportionsPercentiles</value>
-  </data>
-  <data name="&gt;&gt;ucrInputInequality.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="ucrInputPercentile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>86, 15</value>
+  <data name="&gt;&gt;ucrInputProp.Name" xml:space="preserve">
+    <value>ucrInputProp</value>
   </data>
-  <data name="ucrInputPercentile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 20</value>
+  <data name="&gt;&gt;ucrInputProp.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="ucrInputPercentile.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;ucrInputProp.Parent" xml:space="preserve">
+    <value>grpProportionsPercentiles</value>
+  </data>
+  <data name="&gt;&gt;ucrInputProp.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboProp.Name" xml:space="preserve">
+    <value>ucrInputComboProp</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboProp.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboProp.Parent" xml:space="preserve">
+    <value>grpProportionsPercentiles</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboProp.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="&gt;&gt;ucrInputPercentile.Name" xml:space="preserve">
     <value>ucrInputPercentile</value>
@@ -442,16 +631,7 @@
     <value>grpProportionsPercentiles</value>
   </data>
   <data name="&gt;&gt;ucrInputPercentile.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="ucrChkPercentile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 15</value>
-  </data>
-  <data name="ucrChkPercentile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 20</value>
-  </data>
-  <data name="ucrChkPercentile.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;ucrChkPercentile.Name" xml:space="preserve">
     <value>ucrChkPercentile</value>
@@ -463,7 +643,7 @@
     <value>grpProportionsPercentiles</value>
   </data>
   <data name="&gt;&gt;ucrChkPercentile.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="grpProportionsPercentiles.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 6</value>
@@ -489,6 +669,279 @@
   <data name="&gt;&gt;grpProportionsPercentiles.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="ucrInputCount.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="ucrInputCount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>267, 13</value>
+  </data>
+  <data name="ucrInputCount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 20</value>
+  </data>
+  <data name="ucrInputCount.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;ucrInputCount.Name" xml:space="preserve">
+    <value>ucrInputCount</value>
+  </data>
+  <data name="&gt;&gt;ucrInputCount.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputCount.Parent" xml:space="preserve">
+    <value>grpProportionsPercentiles</value>
+  </data>
+  <data name="&gt;&gt;ucrInputCount.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrInputComboCount.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="ucrInputComboCount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>210, 13</value>
+  </data>
+  <data name="ucrInputComboCount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 25</value>
+  </data>
+  <data name="ucrInputComboCount.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboCount.Name" xml:space="preserve">
+    <value>ucrInputComboCount</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboCount.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboCount.Parent" xml:space="preserve">
+    <value>grpProportionsPercentiles</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboCount.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrChkProportion.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="ucrChkProportion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 43</value>
+  </data>
+  <data name="ucrChkProportion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 20</value>
+  </data>
+  <data name="ucrChkProportion.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;ucrChkProportion.Name" xml:space="preserve">
+    <value>ucrChkProportion</value>
+  </data>
+  <data name="&gt;&gt;ucrChkProportion.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkProportion.Parent" xml:space="preserve">
+    <value>grpProportionsPercentiles</value>
+  </data>
+  <data name="&gt;&gt;ucrChkProportion.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrChkCount.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="ucrChkCount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>144, 15</value>
+  </data>
+  <data name="ucrChkCount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 20</value>
+  </data>
+  <data name="ucrChkCount.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCount.Name" xml:space="preserve">
+    <value>ucrChkCount</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCount.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCount.Parent" xml:space="preserve">
+    <value>grpProportionsPercentiles</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCount.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrChkPercentage.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="ucrChkPercentage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>201, 44</value>
+  </data>
+  <data name="ucrChkPercentage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 20</value>
+  </data>
+  <data name="ucrChkPercentage.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPercentage.Name" xml:space="preserve">
+    <value>ucrChkPercentage</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPercentage.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPercentage.Parent" xml:space="preserve">
+    <value>grpProportionsPercentiles</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPercentage.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrInputProp.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="ucrInputProp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>144, 44</value>
+  </data>
+  <data name="ucrInputProp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 20</value>
+  </data>
+  <data name="ucrInputProp.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;ucrInputProp.Name" xml:space="preserve">
+    <value>ucrInputProp</value>
+  </data>
+  <data name="&gt;&gt;ucrInputProp.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputProp.Parent" xml:space="preserve">
+    <value>grpProportionsPercentiles</value>
+  </data>
+  <data name="&gt;&gt;ucrInputProp.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="ucrInputComboProp.AccessibleName" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ucrInputComboProp.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="ucrInputComboProp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>86, 43</value>
+  </data>
+  <data name="ucrInputComboProp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 25</value>
+  </data>
+  <data name="ucrInputComboProp.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboProp.Name" xml:space="preserve">
+    <value>ucrInputComboProp</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboProp.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboProp.Parent" xml:space="preserve">
+    <value>grpProportionsPercentiles</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboProp.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="ucrInputPercentile.Location" type="System.Drawing.Point, System.Drawing">
+    <value>86, 15</value>
+  </data>
+  <data name="ucrInputPercentile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 20</value>
+  </data>
+  <data name="ucrInputPercentile.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrInputPercentile.Name" xml:space="preserve">
+    <value>ucrInputPercentile</value>
+  </data>
+  <data name="&gt;&gt;ucrInputPercentile.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputPercentile.Parent" xml:space="preserve">
+    <value>grpProportionsPercentiles</value>
+  </data>
+  <data name="&gt;&gt;ucrInputPercentile.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="ucrChkPercentile.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 15</value>
+  </data>
+  <data name="ucrChkPercentile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 20</value>
+  </data>
+  <data name="ucrChkPercentile.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPercentile.Name" xml:space="preserve">
+    <value>ucrChkPercentile</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPercentile.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPercentile.Parent" xml:space="preserve">
+    <value>grpProportionsPercentiles</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPercentile.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;lblFractionTrimmed.Name" xml:space="preserve">
+    <value>lblFractionTrimmed</value>
+  </data>
+  <data name="&gt;&gt;lblFractionTrimmed.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblFractionTrimmed.Parent" xml:space="preserve">
+    <value>grpLocation</value>
+  </data>
+  <data name="&gt;&gt;lblFractionTrimmed.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrNudFraction.Name" xml:space="preserve">
+    <value>ucrNudFraction</value>
+  </data>
+  <data name="&gt;&gt;ucrNudFraction.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudFraction.Parent" xml:space="preserve">
+    <value>grpLocation</value>
+  </data>
+  <data name="&gt;&gt;ucrNudFraction.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkTrimmedMean.Name" xml:space="preserve">
+    <value>ucrChkTrimmedMean</value>
+  </data>
+  <data name="&gt;&gt;ucrChkTrimmedMean.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkTrimmedMean.Parent" xml:space="preserve">
+    <value>grpLocation</value>
+  </data>
+  <data name="&gt;&gt;ucrChkTrimmedMean.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="grpLocation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 86</value>
+  </data>
+  <data name="grpLocation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>368, 52</value>
+  </data>
+  <data name="grpLocation.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="grpLocation.Text" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="&gt;&gt;grpLocation.Name" xml:space="preserve">
+    <value>grpLocation</value>
+  </data>
+  <data name="&gt;&gt;grpLocation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpLocation.Parent" xml:space="preserve">
+    <value>tbMore</value>
+  </data>
+  <data name="&gt;&gt;grpLocation.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="lblFractionTrimmed.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -496,13 +949,13 @@
     <value>169, 23</value>
   </data>
   <data name="lblFractionTrimmed.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 13</value>
+    <value>91, 13</value>
   </data>
   <data name="lblFractionTrimmed.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
   <data name="lblFractionTrimmed.Text" xml:space="preserve">
-    <value>Fraction Trimmed</value>
+    <value>Fraction Trimmed:</value>
   </data>
   <data name="&gt;&gt;lblFractionTrimmed.Name" xml:space="preserve">
     <value>lblFractionTrimmed</value>
@@ -557,30 +1010,6 @@
   </data>
   <data name="&gt;&gt;ucrChkTrimmedMean.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="grpLocation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 86</value>
-  </data>
-  <data name="grpLocation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>368, 52</value>
-  </data>
-  <data name="grpLocation.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="grpLocation.Text" xml:space="preserve">
-    <value>Location</value>
-  </data>
-  <data name="&gt;&gt;grpLocation.Name" xml:space="preserve">
-    <value>grpLocation</value>
-  </data>
-  <data name="&gt;&gt;grpLocation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpLocation.Parent" xml:space="preserve">
-    <value>tbMore</value>
-  </data>
-  <data name="&gt;&gt;grpLocation.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="ucrChkKurtosis.Location" type="System.Drawing.Point, System.Drawing">
     <value>19, 292</value>
@@ -666,6 +1095,54 @@
   <data name="&gt;&gt;ucrChkCoefficientOfVariation.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="&gt;&gt;ucrChkQn.Name" xml:space="preserve">
+    <value>ucrChkQn</value>
+  </data>
+  <data name="&gt;&gt;ucrChkQn.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkQn.Parent" xml:space="preserve">
+    <value>grpScale</value>
+  </data>
+  <data name="&gt;&gt;ucrChkQn.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSn.Name" xml:space="preserve">
+    <value>ucrChkSn</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSn.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSn.Parent" xml:space="preserve">
+    <value>grpScale</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSn.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="grpScale.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 139</value>
+  </data>
+  <data name="grpScale.Size" type="System.Drawing.Size, System.Drawing">
+    <value>368, 74</value>
+  </data>
+  <data name="grpScale.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="grpScale.Text" xml:space="preserve">
+    <value>Scale</value>
+  </data>
+  <data name="&gt;&gt;grpScale.Name" xml:space="preserve">
+    <value>grpScale</value>
+  </data>
+  <data name="&gt;&gt;grpScale.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpScale.Parent" xml:space="preserve">
+    <value>tbMore</value>
+  </data>
+  <data name="&gt;&gt;grpScale.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
   <data name="ucrChkQn.Location" type="System.Drawing.Point, System.Drawing">
     <value>260, 24</value>
   </data>
@@ -708,39 +1185,6 @@
   <data name="&gt;&gt;ucrChkSn.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="grpScale.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 139</value>
-  </data>
-  <data name="grpScale.Size" type="System.Drawing.Size, System.Drawing">
-    <value>368, 74</value>
-  </data>
-  <data name="grpScale.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="grpScale.Text" xml:space="preserve">
-    <value>Scale</value>
-  </data>
-  <data name="&gt;&gt;grpScale.Name" xml:space="preserve">
-    <value>grpScale</value>
-  </data>
-  <data name="&gt;&gt;grpScale.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpScale.Parent" xml:space="preserve">
-    <value>tbMore</value>
-  </data>
-  <data name="&gt;&gt;grpScale.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="ucrChkMc.Location" type="System.Drawing.Point, System.Drawing">
-    <value>260, 19</value>
-  </data>
-  <data name="ucrChkMc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 20</value>
-  </data>
-  <data name="ucrChkMc.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
   <data name="&gt;&gt;ucrChkMc.Name" xml:space="preserve">
     <value>ucrChkMc</value>
   </data>
@@ -776,6 +1220,27 @@
   </data>
   <data name="&gt;&gt;grpSkewness.ZOrder" xml:space="preserve">
     <value>7</value>
+  </data>
+  <data name="ucrChkMc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>260, 19</value>
+  </data>
+  <data name="ucrChkMc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 20</value>
+  </data>
+  <data name="ucrChkMc.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMc.Name" xml:space="preserve">
+    <value>ucrChkMc</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMc.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMc.Parent" xml:space="preserve">
+    <value>grpSkewness</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMc.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="grpKurtosis.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 274</value>
@@ -825,32 +1290,152 @@
   <data name="&gt;&gt;GroupBox1.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="tbMore.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="&gt;&gt;grpCommon.Name" xml:space="preserve">
+    <value>grpCommon</value>
+  </data>
+  <data name="&gt;&gt;grpCommon.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpCommon.Parent" xml:space="preserve">
+    <value>tbsum</value>
+  </data>
+  <data name="&gt;&gt;grpCommon.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;grpQuartiles.Name" xml:space="preserve">
+    <value>grpQuartiles</value>
+  </data>
+  <data name="&gt;&gt;grpQuartiles.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpQuartiles.Parent" xml:space="preserve">
+    <value>tbsum</value>
+  </data>
+  <data name="&gt;&gt;grpQuartiles.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;grpNotOrderedFactor.Name" xml:space="preserve">
+    <value>grpNotOrderedFactor</value>
+  </data>
+  <data name="&gt;&gt;grpNotOrderedFactor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpNotOrderedFactor.Parent" xml:space="preserve">
+    <value>tbsum</value>
+  </data>
+  <data name="&gt;&gt;grpNotOrderedFactor.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;grpNumeric.Name" xml:space="preserve">
+    <value>grpNumeric</value>
+  </data>
+  <data name="&gt;&gt;grpNumeric.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpNumeric.Parent" xml:space="preserve">
+    <value>tbsum</value>
+  </data>
+  <data name="&gt;&gt;grpNumeric.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tbsum.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
-  <data name="tbMore.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="tbsum.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
-  <data name="tbMore.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tbsum.Size" type="System.Drawing.Size, System.Drawing">
     <value>380, 383</value>
   </data>
-  <data name="tbMore.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="tbsum.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="tbMore.Text" xml:space="preserve">
-    <value>More</value>
+  <data name="tbsum.Text" xml:space="preserve">
+    <value>Summaries</value>
   </data>
-  <data name="&gt;&gt;tbMore.Name" xml:space="preserve">
-    <value>tbMore</value>
+  <data name="&gt;&gt;tbsum.Name" xml:space="preserve">
+    <value>tbsum</value>
   </data>
-  <data name="&gt;&gt;tbMore.Type" xml:space="preserve">
+  <data name="&gt;&gt;tbsum.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tbMore.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tbsum.Parent" xml:space="preserve">
     <value>tbSummaries</value>
   </data>
-  <data name="&gt;&gt;tbMore.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tbsum.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkNTotal.Name" xml:space="preserve">
+    <value>ucrChkNTotal</value>
+  </data>
+  <data name="&gt;&gt;ucrChkNTotal.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkNTotal.Parent" xml:space="preserve">
+    <value>grpCommon</value>
+  </data>
+  <data name="&gt;&gt;ucrChkNTotal.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMode.Name" xml:space="preserve">
+    <value>ucrChkMode</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMode.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMode.Parent" xml:space="preserve">
+    <value>grpCommon</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMode.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkNMissing.Name" xml:space="preserve">
+    <value>ucrChkNMissing</value>
+  </data>
+  <data name="&gt;&gt;ucrChkNMissing.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkNMissing.Parent" xml:space="preserve">
+    <value>grpCommon</value>
+  </data>
+  <data name="&gt;&gt;ucrChkNMissing.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrChkNonMissing.Name" xml:space="preserve">
+    <value>ucrChkNonMissing</value>
+  </data>
+  <data name="&gt;&gt;ucrChkNonMissing.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkNonMissing.Parent" xml:space="preserve">
+    <value>grpCommon</value>
+  </data>
+  <data name="&gt;&gt;ucrChkNonMissing.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="grpCommon.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="grpCommon.Size" type="System.Drawing.Size, System.Drawing">
+    <value>356, 87</value>
+  </data>
+  <data name="grpCommon.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpCommon.Text" xml:space="preserve">
+    <value>Common</value>
+  </data>
+  <data name="&gt;&gt;grpCommon.Name" xml:space="preserve">
+    <value>grpCommon</value>
+  </data>
+  <data name="&gt;&gt;grpCommon.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpCommon.Parent" xml:space="preserve">
+    <value>tbsum</value>
+  </data>
+  <data name="&gt;&gt;grpCommon.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="ucrChkNTotal.Location" type="System.Drawing.Point, System.Drawing">
     <value>232, 19</value>
@@ -936,29 +1521,53 @@
   <data name="&gt;&gt;ucrChkNonMissing.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="grpCommon.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 6</value>
+  <data name="&gt;&gt;ucrChkLowerQuartile.Name" xml:space="preserve">
+    <value>ucrChkLowerQuartile</value>
   </data>
-  <data name="grpCommon.Size" type="System.Drawing.Size, System.Drawing">
-    <value>356, 87</value>
+  <data name="&gt;&gt;ucrChkLowerQuartile.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="grpCommon.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;ucrChkLowerQuartile.Parent" xml:space="preserve">
+    <value>grpQuartiles</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLowerQuartile.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="grpCommon.Text" xml:space="preserve">
-    <value>Common</value>
+  <data name="&gt;&gt;ucrChkUpperQuartile.Name" xml:space="preserve">
+    <value>ucrChkUpperQuartile</value>
   </data>
-  <data name="&gt;&gt;grpCommon.Name" xml:space="preserve">
-    <value>grpCommon</value>
+  <data name="&gt;&gt;ucrChkUpperQuartile.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;grpCommon.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkUpperQuartile.Parent" xml:space="preserve">
+    <value>grpQuartiles</value>
+  </data>
+  <data name="&gt;&gt;ucrChkUpperQuartile.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="grpQuartiles.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 309</value>
+  </data>
+  <data name="grpQuartiles.Size" type="System.Drawing.Size, System.Drawing">
+    <value>356, 56</value>
+  </data>
+  <data name="grpQuartiles.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="grpQuartiles.Text" xml:space="preserve">
+    <value>Quartiles</value>
+  </data>
+  <data name="&gt;&gt;grpQuartiles.Name" xml:space="preserve">
+    <value>grpQuartiles</value>
+  </data>
+  <data name="&gt;&gt;grpQuartiles.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;grpCommon.Parent" xml:space="preserve">
+  <data name="&gt;&gt;grpQuartiles.Parent" xml:space="preserve">
     <value>tbsum</value>
   </data>
-  <data name="&gt;&gt;grpCommon.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;grpQuartiles.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="ucrChkLowerQuartile.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 19</value>
@@ -1002,29 +1611,65 @@
   <data name="&gt;&gt;ucrChkUpperQuartile.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="grpQuartiles.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 309</value>
+  <data name="&gt;&gt;ucrChkRange.Name" xml:space="preserve">
+    <value>ucrChkRange</value>
   </data>
-  <data name="grpQuartiles.Size" type="System.Drawing.Size, System.Drawing">
-    <value>356, 56</value>
+  <data name="&gt;&gt;ucrChkRange.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="grpQuartiles.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="&gt;&gt;ucrChkRange.Parent" xml:space="preserve">
+    <value>grpNotOrderedFactor</value>
   </data>
-  <data name="grpQuartiles.Text" xml:space="preserve">
-    <value>Quartiles</value>
+  <data name="&gt;&gt;ucrChkRange.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="&gt;&gt;grpQuartiles.Name" xml:space="preserve">
-    <value>grpQuartiles</value>
+  <data name="&gt;&gt;ucrChkMaximum.Name" xml:space="preserve">
+    <value>ucrChkMaximum</value>
   </data>
-  <data name="&gt;&gt;grpQuartiles.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkMaximum.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMaximum.Parent" xml:space="preserve">
+    <value>grpNotOrderedFactor</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMaximum.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMinimum.Name" xml:space="preserve">
+    <value>ucrChkMinimum</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMinimum.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMinimum.Parent" xml:space="preserve">
+    <value>grpNotOrderedFactor</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMinimum.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="grpNotOrderedFactor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 99</value>
+  </data>
+  <data name="grpNotOrderedFactor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>356, 90</value>
+  </data>
+  <data name="grpNotOrderedFactor.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="grpNotOrderedFactor.Text" xml:space="preserve">
+    <value>All but (unordered) Factor</value>
+  </data>
+  <data name="&gt;&gt;grpNotOrderedFactor.Name" xml:space="preserve">
+    <value>grpNotOrderedFactor</value>
+  </data>
+  <data name="&gt;&gt;grpNotOrderedFactor.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;grpQuartiles.Parent" xml:space="preserve">
+  <data name="&gt;&gt;grpNotOrderedFactor.Parent" xml:space="preserve">
     <value>tbsum</value>
   </data>
-  <data name="&gt;&gt;grpQuartiles.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;grpNotOrderedFactor.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="ucrChkRange.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 45</value>
@@ -1089,29 +1734,89 @@
   <data name="&gt;&gt;ucrChkMinimum.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="grpNotOrderedFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 99</value>
+  <data name="&gt;&gt;ucrChkVariance.Name" xml:space="preserve">
+    <value>ucrChkVariance</value>
   </data>
-  <data name="grpNotOrderedFactor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>356, 90</value>
+  <data name="&gt;&gt;ucrChkVariance.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="grpNotOrderedFactor.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;ucrChkVariance.Parent" xml:space="preserve">
+    <value>grpNumeric</value>
+  </data>
+  <data name="&gt;&gt;ucrChkVariance.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMedian.Name" xml:space="preserve">
+    <value>ucrChkMedian</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMedian.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMedian.Parent" xml:space="preserve">
+    <value>grpNumeric</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMedian.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="grpNotOrderedFactor.Text" xml:space="preserve">
-    <value>All but (unordered) Factor</value>
+  <data name="&gt;&gt;ucrChkStdDev.Name" xml:space="preserve">
+    <value>ucrChkStdDev</value>
   </data>
-  <data name="&gt;&gt;grpNotOrderedFactor.Name" xml:space="preserve">
-    <value>grpNotOrderedFactor</value>
+  <data name="&gt;&gt;ucrChkStdDev.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;grpNotOrderedFactor.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkStdDev.Parent" xml:space="preserve">
+    <value>grpNumeric</value>
+  </data>
+  <data name="&gt;&gt;ucrChkStdDev.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSum.Name" xml:space="preserve">
+    <value>ucrChkSum</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSum.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSum.Parent" xml:space="preserve">
+    <value>grpNumeric</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSum.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMean.Name" xml:space="preserve">
+    <value>ucrChkMean</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMean.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMean.Parent" xml:space="preserve">
+    <value>grpNumeric</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMean.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="grpNumeric.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 195</value>
+  </data>
+  <data name="grpNumeric.Size" type="System.Drawing.Size, System.Drawing">
+    <value>357, 108</value>
+  </data>
+  <data name="grpNumeric.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="grpNumeric.Text" xml:space="preserve">
+    <value>Numeric</value>
+  </data>
+  <data name="&gt;&gt;grpNumeric.Name" xml:space="preserve">
+    <value>grpNumeric</value>
+  </data>
+  <data name="&gt;&gt;grpNumeric.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;grpNotOrderedFactor.Parent" xml:space="preserve">
+  <data name="&gt;&gt;grpNumeric.Parent" xml:space="preserve">
     <value>tbsum</value>
   </data>
-  <data name="&gt;&gt;grpNotOrderedFactor.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;grpNumeric.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="ucrChkVariance.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 82</value>
@@ -1218,59 +1923,59 @@
   <data name="&gt;&gt;ucrChkMean.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="grpNumeric.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 195</value>
+  <data name="urInputN.Location" type="System.Drawing.Point, System.Drawing">
+    <value>306, 261</value>
   </data>
-  <data name="grpNumeric.Size" type="System.Drawing.Size, System.Drawing">
-    <value>357, 108</value>
+  <data name="urInputN.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 20</value>
   </data>
-  <data name="grpNumeric.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="urInputN.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
   </data>
-  <data name="grpNumeric.Text" xml:space="preserve">
-    <value>Numeric</value>
+  <data name="&gt;&gt;urInputN.Name" xml:space="preserve">
+    <value>urInputN</value>
   </data>
-  <data name="&gt;&gt;grpNumeric.Name" xml:space="preserve">
-    <value>grpNumeric</value>
+  <data name="&gt;&gt;urInputN.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;grpNumeric.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;urInputN.Parent" xml:space="preserve">
+    <value>tbTwoVariables</value>
   </data>
-  <data name="&gt;&gt;grpNumeric.Parent" xml:space="preserve">
-    <value>tbsum</value>
-  </data>
-  <data name="&gt;&gt;grpNumeric.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="tbsum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tbsum.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tbsum.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 383</value>
-  </data>
-  <data name="tbsum.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;urInputN.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="tbsum.Text" xml:space="preserve">
-    <value>Summaries</value>
+  <data name="lblInputN.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;tbsum.Name" xml:space="preserve">
-    <value>tbsum</value>
+  <data name="lblInputN.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;tbsum.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="lblInputN.Location" type="System.Drawing.Point, System.Drawing">
+    <value>286, 265</value>
   </data>
-  <data name="&gt;&gt;tbsum.Parent" xml:space="preserve">
-    <value>tbSummaries</value>
+  <data name="lblInputN.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 13</value>
   </data>
-  <data name="&gt;&gt;tbsum.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="lblInputN.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="lblInputN.Text" xml:space="preserve">
+    <value>n:</value>
+  </data>
+  <data name="&gt;&gt;lblInputN.Name" xml:space="preserve">
+    <value>lblInputN</value>
+  </data>
+  <data name="&gt;&gt;lblInputN.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblInputN.Parent" xml:space="preserve">
+    <value>tbTwoVariables</value>
+  </data>
+  <data name="&gt;&gt;lblInputN.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="ucrChkn_distinct.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 313</value>
+    <value>19, 282</value>
   </data>
   <data name="ucrChkn_distinct.Size" type="System.Drawing.Size, System.Drawing">
     <value>101, 20</value>
@@ -1288,10 +1993,10 @@
     <value>tbTwoVariables</value>
   </data>
   <data name="&gt;&gt;ucrChkn_distinct.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="ucrChkFirst.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 275</value>
+    <value>19, 261</value>
   </data>
   <data name="ucrChkFirst.Size" type="System.Drawing.Size, System.Drawing">
     <value>101, 20</value>
@@ -1309,10 +2014,10 @@
     <value>tbTwoVariables</value>
   </data>
   <data name="&gt;&gt;ucrChkFirst.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="ucrChkLast.Location" type="System.Drawing.Point, System.Drawing">
-    <value>161, 275</value>
+    <value>19, 306</value>
   </data>
   <data name="ucrChkLast.Size" type="System.Drawing.Size, System.Drawing">
     <value>101, 20</value>
@@ -1330,13 +2035,13 @@
     <value>tbTwoVariables</value>
   </data>
   <data name="&gt;&gt;ucrChkLast.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="ucrChknth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>276, 275</value>
+    <value>240, 264</value>
   </data>
   <data name="ucrChknth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 20</value>
+    <value>41, 20</value>
   </data>
   <data name="ucrChknth.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -1351,13 +2056,13 @@
     <value>tbTwoVariables</value>
   </data>
   <data name="&gt;&gt;ucrChknth.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="ucrChkCorrelations.Location" type="System.Drawing.Point, System.Drawing">
     <value>19, 220</value>
   </data>
   <data name="ucrChkCorrelations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 20</value>
+    <value>146, 20</value>
   </data>
   <data name="ucrChkCorrelations.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -1372,16 +2077,7 @@
     <value>tbTwoVariables</value>
   </data>
   <data name="&gt;&gt;ucrChkCorrelations.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="ucrChkCovariance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>260, 22</value>
-  </data>
-  <data name="ucrChkCovariance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 20</value>
-  </data>
-  <data name="ucrChkCovariance.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;ucrChkCovariance.Name" xml:space="preserve">
     <value>ucrChkCovariance</value>
@@ -1399,7 +2095,7 @@
     <value>6, 200</value>
   </data>
   <data name="grpRelationships.Size" type="System.Drawing.Size, System.Drawing">
-    <value>368, 56</value>
+    <value>368, 51</value>
   </data>
   <data name="grpRelationships.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -1417,7 +2113,7 @@
     <value>tbTwoVariables</value>
   </data>
   <data name="&gt;&gt;grpRelationships.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="lblSecondVariable.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1444,7 +2140,7 @@
     <value>tbTwoVariables</value>
   </data>
   <data name="&gt;&gt;lblSecondVariable.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="ucrSelectorSecondVariable.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 9</value>
@@ -1468,7 +2164,7 @@
     <value>tbTwoVariables</value>
   </data>
   <data name="&gt;&gt;ucrSelectorSecondVariable.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1513,7 +2209,7 @@
     <value>tbTwoVariables</value>
   </data>
   <data name="&gt;&gt;ucrReceiverSecondVariable.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="tbTwoVariables.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -1561,6 +2257,27 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tbSummaries.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrChkCovariance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>231, 20</value>
+  </data>
+  <data name="ucrChkCovariance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 20</value>
+  </data>
+  <data name="ucrChkCovariance.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCovariance.Name" xml:space="preserve">
+    <value>ucrChkCovariance</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCovariance.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCovariance.Parent" xml:space="preserve">
+    <value>grpRelationships</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCovariance.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
 </root>
