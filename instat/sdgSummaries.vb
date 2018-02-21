@@ -107,6 +107,7 @@ Public Class sdgSummaries
 
         ucrReceiverSecondVariable.Selector = ucrSelectorSecondVariable
         ucrReceiverSecondVariable.SetMeAsReceiver()
+        ucrReceiverSecondVariable.SetIncludedDataTypes({"numeric"})
 
         ucrChkFirst.SetParameter(New RParameter("summary_first", 23), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_first" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkFirst.SetText("First")
