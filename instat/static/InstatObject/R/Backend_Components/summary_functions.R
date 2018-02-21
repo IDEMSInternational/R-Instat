@@ -558,8 +558,8 @@ summary_nth <- function(x, n, order_by = NULL, default = default_missing(x), ...
 }
 
 # n_distinct function
-summary_n_distinct<- function(na.rm = FALSE, ...) {
-  return(dplyr::n_distinct(na.rm = na.rm))
+summary_n_distinct<- function(x, na.rm = FALSE, ...) {
+  return(dplyr::n_distinct(x = x, na.rm = na.rm))
 }
 
 instat_object$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), n_column_factors = 1, store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = TRUE, treat_columns_as_factor = FALSE, page_by = "default", as_html = TRUE, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, margin_name = "(All)", additional_filter, ...) {
