@@ -28,6 +28,7 @@ Partial Class frmPackageIssues
         Me.cmdInstallPackages = New System.Windows.Forms.Button()
         Me.cmdClose = New System.Windows.Forms.Button()
         Me.ucrInputPackageNames = New instat.ucrInputTextBox()
+        Me.cmdCloseRInstat = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblPacksNotInstalled
@@ -43,13 +44,13 @@ Partial Class frmPackageIssues
         '
         Me.lblPossibleSolutions.Location = New System.Drawing.Point(12, 123)
         Me.lblPossibleSolutions.Name = "lblPossibleSolutions"
-        Me.lblPossibleSolutions.Size = New System.Drawing.Size(425, 224)
+        Me.lblPossibleSolutions.Size = New System.Drawing.Size(425, 245)
         Me.lblPossibleSolutions.TabIndex = 2
         Me.lblPossibleSolutions.Text = resources.GetString("lblPossibleSolutions.Text")
         '
         'cmdInstallPackages
         '
-        Me.cmdInstallPackages.Location = New System.Drawing.Point(12, 343)
+        Me.cmdInstallPackages.Location = New System.Drawing.Point(12, 371)
         Me.cmdInstallPackages.Name = "cmdInstallPackages"
         Me.cmdInstallPackages.Size = New System.Drawing.Size(172, 23)
         Me.cmdInstallPackages.TabIndex = 3
@@ -75,11 +76,21 @@ Partial Class frmPackageIssues
         Me.ucrInputPackageNames.Size = New System.Drawing.Size(376, 63)
         Me.ucrInputPackageNames.TabIndex = 1
         '
+        'cmdCloseRInstat
+        '
+        Me.cmdCloseRInstat.Location = New System.Drawing.Point(12, 155)
+        Me.cmdCloseRInstat.Name = "cmdCloseRInstat"
+        Me.cmdCloseRInstat.Size = New System.Drawing.Size(120, 23)
+        Me.cmdCloseRInstat.TabIndex = 5
+        Me.cmdCloseRInstat.Text = "Close R-Instat now"
+        Me.cmdCloseRInstat.UseVisualStyleBackColor = True
+        '
         'frmPackageIssues
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(443, 437)
+        Me.Controls.Add(Me.cmdCloseRInstat)
         Me.Controls.Add(Me.cmdClose)
         Me.Controls.Add(Me.cmdInstallPackages)
         Me.Controls.Add(Me.lblPossibleSolutions)
@@ -101,4 +112,5 @@ Partial Class frmPackageIssues
     Friend WithEvents lblPossibleSolutions As Label
     Friend WithEvents cmdInstallPackages As Button
     Friend WithEvents cmdClose As Button
+    Friend WithEvents cmdCloseRInstat As Button
 End Class
