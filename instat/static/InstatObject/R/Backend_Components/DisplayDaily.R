@@ -1,9 +1,9 @@
-instat_object$set("public", "display_daily_table", function(data_name, climatic_element, date_col, year_col, station_col, Misscode = "-", Tracecode = "tr", Zerocode = "--", monstats = c("min", "mean", "median", "max", "IQR", "sum")) {
+instat_object$set("public", "display_daily_table", function(data_name, climatic_element, date_col, year_col, station_col, Misscode, Tracecode, Zerocode, monstats = c("min", "mean", "median", "max", "IQR", "sum")) {
   self$get_data_objects(data_name)$display_daily_table(data_name = data_name, climatic_element = climatic_element, date_col = date_col, year_col =year_col, station_col = station_col, Misscode = Misscode, Tracecode = Tracecode, Zerocode = Zerocode, monstats = monstats)
 }
 )
 
-data_object$set("public", "display_daily_table", function(data_name, climatic_element, date_col = date_col, year_col = year_col, station_col = station_col, Misscode = "-", Tracecode="tr", Zerocode="--", monstats = c("min", "mean", "median", "max", "IQR", "sum")) {
+data_object$set("public", "display_daily_table", function(data_name, climatic_element, date_col = date_col, year_col = year_col, station_col = station_col, Misscode, Tracecode, Zerocode, monstats = c("min", "mean", "median", "max", "IQR", "sum")) {
   curr_data <- self$get_data_frame()
   if(missing(station_col)) curr_data[["Station"]] <- self$get_metadata(data_name_label)
   else names(curr_data)[names(curr_data) == station_col] <- "Station"
@@ -13,7 +13,7 @@ data_object$set("public", "display_daily_table", function(data_name, climatic_el
 }
 )
 
-DisplayDaily <- function(Datain,Stations,Variables,option=1,Years,Misscode="-",Tracecode="tr",Zerocode="--",Fileout=NA,monstats=c("min","mean","median","max","IQR","sum")){
+DisplayDaily <- function(Datain,Stations,Variables,option=1,Years,Misscode,Tracecode,Zerocode,Fileout=NA,monstats=c("min","mean","median","max","IQR","sum")){
   #-----------------------------------------------------------------------#
   # Helen Greatrex, SSC, SSC-RCLIM package                                #
   #                                                                       #
@@ -231,8 +231,8 @@ DisplayDaily <- function(Datain,Stations,Variables,option=1,Years,Misscode="-",T
           #-------------------------------------------------------#
           # Deal with trace rainfall values                       #
           #-------------------------------------------------------#		 	
-          tmptrace <- which((dat[,loc] == "0.01")&(Variables[v] == "Rain"))
-          if(length(tmptrace) > 0){
+          tmptrace <- which(dat[,loc] == "0.01")
+          if(length(tmptrace) > 0 && !missing(Tracecode)){
             dat[tmptrace,loc] <- Tracecode	
           }
           
@@ -246,15 +246,15 @@ DisplayDaily <- function(Datain,Stations,Variables,option=1,Years,Misscode="-",T
           # Deal with missing values (exc non existant dates)     #
           #-------------------------------------------------------#		 	
           tmpmiss <- which(is.na(dat[,loc]) == TRUE)
-          if(length(tmpmiss) > 0){
+          if(length(tmpmiss) > 0 && !missing(Misscode)){
             dat[tmpmiss,loc] <- Misscode	
           }	
           
           #-------------------------------------------------------#
           # Deal with zero values (exc non existant dates)        #
           #-------------------------------------------------------#
-          tmpzero <- which((dat[,loc] == "0.0")&(Variables[v] == "Rain"))
-          if(length(tmpzero) > 0){
+          tmpzero <- which(dat[,loc] == "0.0")
+          if(length(tmpzero) > 0 && !missing(Zerocode)){
             dat[tmpzero,loc] <- Zerocode	
           }	
           tmpzero <- which(outstats[,(m+1)] == "0.0")
