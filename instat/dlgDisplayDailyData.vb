@@ -38,6 +38,9 @@ Public Class dlgDisplayDailyData
         Dim dctBarColour As New Dictionary(Of String, String)
         Dim dctRugColour As New Dictionary(Of String, String)
         Dim dctSummary As New Dictionary(Of String, String)
+        Dim dctMissingvalues As New Dictionary(Of String, String)
+        Dim dctTracevalues As New Dictionary(Of String, String)
+        Dim dctZeroValues As New Dictionary(Of String, String)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrSelectorDisplayDailyClimaticData.SetParameter(New RParameter("data_name", 0))
@@ -103,6 +106,33 @@ Public Class dlgDisplayDailyData
         dctSummary.Add("sum", Chr(34) & "sum" & Chr(34))
         ucrInputComboMonStat.SetItems(dctSummary)
 
+        ucrChkMissing.SetParameter(ucrInputComboMissing.GetParameter)
+        ucrChkMissing.AddParameterPresentCondition(True, "Misscode")
+        ucrChkMissing.AddParameterPresentCondition(False, "Misscode", False)
+        ucrChkMissing.SetText("Missing Values")
+        ucrInputComboMissing.SetParameter(New RParameter("Misscode", 5))
+        dctMissingvalues.Add("-", Chr(34) & "-" & Chr(34))
+        ucrInputComboMissing.SetItems(dctMissingvalues)
+        ucrInputComboMissing.bAllowNonConditionValues = True
+
+        ucrChkTrace.SetParameter(ucrInputComboTrace.GetParameter())
+        ucrChkTrace.AddParameterPresentCondition(True, "Tracecode")
+        ucrChkTrace.AddParameterPresentCondition(False, "Tracecode", False)
+        ucrChkTrace.SetText("Trace Values")
+        ucrInputComboTrace.SetParameter(New RParameter("Tracecode", 6))
+        dctTracevalues.Add("tr", Chr(34) & "tr" & Chr(34))
+        ucrInputComboTrace.SetItems(dctTracevalues)
+        ucrInputComboTrace.bAllowNonConditionValues = True
+
+        ucrChkZero.SetParameter(ucrInputComboZero.GetParameter())
+        ucrChkZero.AddParameterPresentCondition(True, "Zerocode")
+        ucrChkZero.AddParameterPresentCondition(False, "Zerocode", False)
+        ucrChkZero.SetText("Zero Values")
+        ucrInputComboZero.SetParameter(New RParameter("Zerocode", 7))
+        dctZeroValues.Add("--", Chr(34) & "--" & Chr(34))
+        ucrInputComboZero.SetItems(dctZeroValues)
+        ucrInputComboZero.bAllowNonConditionValues = True
+
         ucrSaveGraph.SetPrefix("Graph")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames)
@@ -117,6 +147,12 @@ Public Class dlgDisplayDailyData
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrNudUpperYaxis, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=100)
         'ucrPnlFrequencyDisplay.AddToLinkedControls(ucrReceiverDayOfYear, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrInputComboMonStat, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboMissing, ucrChkMissing}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboTrace, ucrChkTrace}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboZero, ucrChkZero}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkMissing.AddToLinkedControls({ucrInputComboMissing}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkTrace.AddToLinkedControls({ucrInputComboTrace}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkZero.AddToLinkedControls({ucrInputComboZero}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboMonStat.SetLinkedDisplayControl(lblMonStat)
         'ucrReceiverDayOfYear.SetLinkedDisplayControl(lblDayOfTheYear)
         ucrNudUpperYaxis.SetLinkedDisplayControl(grpGraph)
@@ -148,6 +184,12 @@ Public Class dlgDisplayDailyData
         'ucrSelectorDisplayDailyClimaticData.AddAdditionalCodeParameterPair(clsDisplayDailyTable, New RParameter("data_name", 0), iAdditionalPairNo:=1)
         ucrReceiverDate.AddAdditionalCodeParameterPair(clsDisplayDailyTable, New RParameter("date_col", 2), iAdditionalPairNo:=1)
 
+        ucrChkTrace.SetRCode(clsDisplayDailyTable, bReset)
+        ucrChkZero.SetRCode(clsDisplayDailyTable, bReset)
+        ucrChkMissing.SetRCode(clsDisplayDailyTable, bReset)
+        ucrInputComboZero.SetRCode(clsDisplayDailyTable, bReset)
+        ucrInputComboTrace.SetRCode(clsDisplayDailyTable, bReset)
+        ucrInputComboMissing.SetRCode(clsDisplayDailyTable, bReset)
         ucrInputComboMonStat.SetRCode(clsDisplayDailyTable, bReset)
         ucrReceiverDate.SetRCode(clsDisplayDailyGraphFunction, bReset)
         ucrReceiverStations.SetRCode(clsDisplayDailyGraphFunction, bReset)
@@ -165,7 +207,6 @@ Public Class dlgDisplayDailyData
     Private Sub TestOkEnabled()
         If rdoGraph.Checked AndAlso (Not ucrReceiverDate.IsEmpty OrElse Not ucrReceiverDayOfYear.IsEmpty OrElse Not ucrReceiverStations.IsEmpty) AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty AndAlso ucrNudUpperYaxis.GetText <> "" AndAlso Not ucrInputRugColour.IsEmpty AndAlso Not ucrInputBarColour.IsEmpty Then
             ucrBase.OKEnabled(True)
-            '
         ElseIf rdoTable.Checked AndAlso Not ucrReceiverElements.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
