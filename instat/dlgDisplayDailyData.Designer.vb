@@ -64,6 +64,12 @@ Partial Class dlgDisplayDailyData
         Me.ucrPnlFrequencyDisplay = New instat.UcrPanel()
         Me.ucrSelectorDisplayDailyClimaticData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrChkTrace = New instat.ucrCheck()
+        Me.ucrChkZero = New instat.ucrCheck()
+        Me.ucrChkMissing = New instat.ucrCheck()
+        Me.ucrInputComboTrace = New instat.ucrInputComboBox()
+        Me.ucrInputComboMissing = New instat.ucrInputComboBox()
+        Me.ucrInputComboZero = New instat.ucrInputComboBox()
         Me.grpGraph.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -243,11 +249,56 @@ Partial Class dlgDisplayDailyData
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrChkTrace
+        '
+        Me.ucrChkTrace.Checked = False
+        resources.ApplyResources(Me.ucrChkTrace, "ucrChkTrace")
+        Me.ucrChkTrace.Name = "ucrChkTrace"
+        '
+        'ucrChkZero
+        '
+        Me.ucrChkZero.Checked = False
+        resources.ApplyResources(Me.ucrChkZero, "ucrChkZero")
+        Me.ucrChkZero.Name = "ucrChkZero"
+        '
+        'ucrChkMissing
+        '
+        Me.ucrChkMissing.Checked = False
+        resources.ApplyResources(Me.ucrChkMissing, "ucrChkMissing")
+        Me.ucrChkMissing.Name = "ucrChkMissing"
+        '
+        'ucrInputComboTrace
+        '
+        Me.ucrInputComboTrace.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboTrace.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComboTrace, "ucrInputComboTrace")
+        Me.ucrInputComboTrace.Name = "ucrInputComboTrace"
+        '
+        'ucrInputComboMissing
+        '
+        Me.ucrInputComboMissing.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboMissing.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComboMissing, "ucrInputComboMissing")
+        Me.ucrInputComboMissing.Name = "ucrInputComboMissing"
+        '
+        'ucrInputComboZero
+        '
+        Me.ucrInputComboZero.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboZero.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComboZero, "ucrInputComboZero")
+        Me.ucrInputComboZero.Name = "ucrInputComboZero"
+        '
         'dlgDisplayDailyData
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.grpGraph)
+        Me.Controls.Add(Me.ucrInputComboZero)
+        Me.Controls.Add(Me.ucrInputComboMissing)
+        Me.Controls.Add(Me.ucrInputComboTrace)
+        Me.Controls.Add(Me.ucrChkMissing)
+        Me.Controls.Add(Me.ucrChkZero)
+        Me.Controls.Add(Me.ucrChkTrace)
         Me.Controls.Add(Me.lblMonStat)
         Me.Controls.Add(Me.ucrInputComboMonStat)
         Me.Controls.Add(Me.ucrReceiverElements)
@@ -301,4 +352,10 @@ Partial Class dlgDisplayDailyData
     Friend WithEvents ucrSaveGraph As ucrSave
     Friend WithEvents lblMonStat As Label
     Friend WithEvents ucrInputComboMonStat As ucrInputComboBox
+    Friend WithEvents ucrChkTrace As ucrCheck
+    Friend WithEvents ucrChkMissing As ucrCheck
+    Friend WithEvents ucrChkZero As ucrCheck
+    Friend WithEvents ucrInputComboZero As ucrInputComboBox
+    Friend WithEvents ucrInputComboMissing As ucrInputComboBox
+    Friend WithEvents ucrInputComboTrace As ucrInputComboBox
 End Class
