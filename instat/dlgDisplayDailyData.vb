@@ -101,6 +101,7 @@ Public Class dlgDisplayDailyData
         dctSummary.Add("max", Chr(34) & "max" & Chr(34))
         dctSummary.Add("IQR", Chr(34) & "IQR" & Chr(34))
         dctSummary.Add("sum", Chr(34) & "sum" & Chr(34))
+        ucrInputComboMonStat.SetRDefault(Chr(34) & "min" & Chr(34))
         ucrInputComboMonStat.SetItems(dctSummary)
 
         ucrSaveGraph.SetPrefix("Graph")
