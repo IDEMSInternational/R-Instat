@@ -94,6 +94,7 @@ Partial Class sdgSummaries
         Me.ucrChkMean = New instat.ucrCheck()
         Me.tbSummaries = New System.Windows.Forms.TabControl()
         Me.tbTwoVariables = New System.Windows.Forms.TabPage()
+        Me.ucrInputN = New instat.ucrInputTextBox()
         Me.lblInputN = New System.Windows.Forms.Label()
         Me.ucrChkn_distinct = New instat.ucrCheck()
         Me.ucrChkFirst = New instat.ucrCheck()
@@ -105,7 +106,6 @@ Partial Class sdgSummaries
         Me.lblSecondVariable = New System.Windows.Forms.Label()
         Me.ucrSelectorSecondVariable = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverSecondVariable = New instat.ucrReceiverSingle()
-        Me.urInputN = New instat.ucrInputTextBox()
         Me.tbMissingOptions.SuspendLayout()
         Me.tbMore.SuspendLayout()
         Me.grpProportionsPercentiles.SuspendLayout()
@@ -523,7 +523,7 @@ Partial Class sdgSummaries
         '
         'tbTwoVariables
         '
-        Me.tbTwoVariables.Controls.Add(Me.urInputN)
+        Me.tbTwoVariables.Controls.Add(Me.ucrInputN)
         Me.tbTwoVariables.Controls.Add(Me.lblInputN)
         Me.tbTwoVariables.Controls.Add(Me.ucrChkn_distinct)
         Me.tbTwoVariables.Controls.Add(Me.ucrChkFirst)
@@ -537,6 +537,14 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.tbTwoVariables, "tbTwoVariables")
         Me.tbTwoVariables.Name = "tbTwoVariables"
         Me.tbTwoVariables.UseVisualStyleBackColor = True
+        '
+        'ucrInputN
+        '
+        Me.ucrInputN.AddQuotesIfUnrecognised = True
+        Me.ucrInputN.IsMultiline = False
+        Me.ucrInputN.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputN, "ucrInputN")
+        Me.ucrInputN.Name = "ucrInputN"
         '
         'lblInputN
         '
@@ -606,14 +614,6 @@ Partial Class sdgSummaries
         Me.ucrReceiverSecondVariable.Selector = Nothing
         Me.ucrReceiverSecondVariable.strNcFilePath = ""
         Me.ucrReceiverSecondVariable.ucrSelector = Nothing
-        '
-        'urInputN
-        '
-        Me.urInputN.AddQuotesIfUnrecognised = True
-        Me.urInputN.IsMultiline = False
-        Me.urInputN.IsReadOnly = False
-        resources.ApplyResources(Me.urInputN, "urInputN")
-        Me.urInputN.Name = "urInputN"
         '
         'sdgSummaries
         '
@@ -713,5 +713,5 @@ Partial Class sdgSummaries
     Friend WithEvents lblInputN As Label
     Friend WithEvents ucrInputCount As ucrInputTextBox
     Friend WithEvents ucrInputComboCount As ucrInputComboBox
-    Friend WithEvents urInputN As ucrInputTextBox
+    Friend WithEvents ucrInputN As ucrInputTextBox
 End Class

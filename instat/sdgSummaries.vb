@@ -126,6 +126,7 @@ Public Class sdgSummaries
 
         ucrInputPercentile.SetParameter(New RParameter("probs", 7))
         ucrInputPercentile.SetValidationTypeAsNumeric()
+        ucrInputPercentile.AddQuotesIfUnrecognised = False
 
         'linking controls
         ucrChkPercentile.AddToLinkedControls(ucrInputPercentile, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.25)
@@ -133,8 +134,8 @@ Public Class sdgSummaries
         ucrChkCount.AddToLinkedControls({ucrInputComboCount, ucrInputCount}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkTrimmedMean.AddToLinkedControls(ucrNudFraction, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudFraction.SetLinkedDisplayControl(lblFractionTrimmed)
-        ucrChknth.AddToLinkedControls(urInputN, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
-        urInputN.SetLinkedDisplayControl(lblInputN)
+        ucrChknth.AddToLinkedControls(ucrInputN, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
+        ucrInputN.SetLinkedDisplayControl(lblInputN)
 
         ucrChkTrimmedMean.SetParameter(New RParameter("summary_mean", 27), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_mean" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkTrimmedMean.SetText("Trimmed Mean")
@@ -145,8 +146,9 @@ Public Class sdgSummaries
         ucrNudFraction.Increment = 0.1
         ucrNudFraction.SetRDefault(0)
 
-        urInputN.SetParameter(New RParameter("n", 6))
-        urInputN.SetValidationTypeAsNumeric()
+        ucrInputN.SetParameter(New RParameter("n", 6))
+        ucrInputN.AddQuotesIfUnrecognised = False
+        ucrInputN.SetValidationTypeAsNumeric()
 
         ucrInputComboProp.SetParameter(New RParameter("inequality"))
         Dim dctProportion As New Dictionary(Of String, String)
@@ -206,7 +208,7 @@ Public Class sdgSummaries
         'ucrInputComboProp.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrInputPercentile.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrNudFraction.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
-        urInputN.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputN.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrChkPercentile.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkTrimmedMean.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkNTotal.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
