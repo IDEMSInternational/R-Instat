@@ -143,6 +143,14 @@ Public Class ucrInputComboBox
         Return cboInput.Text
     End Function
 
+    Public Overrides Function GetValue() As Object
+        If cboInput.SelectedValue IsNot Nothing Then
+            Return cboInput.SelectedValue
+        Else
+            Return GetText()
+        End If
+    End Function
+
     Public Sub SetItems(Optional strItems As String() = Nothing, Optional bClearExisting As Boolean = True, Optional bAddConditions As Boolean = False, Optional bAddQuotes As Boolean = True)
         Dim dctValues As New Dictionary(Of String, String)
         If bAddConditions Then
@@ -282,6 +290,16 @@ Public Class ucrInputComboBox
 
         Else
 
+        End If
+    End Sub
+
+    Public Sub SetDataSource(objDataSource As Object, Optional strDisplayMember As String = "", Optional strValueMember As String = "")
+        cboInput.DataSource = objDataSource
+        If strDisplayMember <> "" Then
+            cboInput.DisplayMember = strDisplayMember
+        End If
+        If strValueMember <> "" Then
+            cboInput.ValueMember = strValueMember
         End If
     End Sub
 End Class
