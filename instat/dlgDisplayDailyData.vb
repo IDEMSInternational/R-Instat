@@ -101,7 +101,6 @@ Public Class dlgDisplayDailyData
         dctSummary.Add("max", Chr(34) & "max" & Chr(34))
         dctSummary.Add("IQR", Chr(34) & "IQR" & Chr(34))
         dctSummary.Add("sum", Chr(34) & "sum" & Chr(34))
-        ucrInputComboMonStat.SetRDefault(Chr(34) & "min" & Chr(34))
         ucrInputComboMonStat.SetItems(dctSummary)
 
         ucrSaveGraph.SetPrefix("Graph")
@@ -134,6 +133,7 @@ Public Class dlgDisplayDailyData
         clsDisplayDailyGraphFunction.AddParameter("bar_colour", Chr(34) & "blue" & Chr(34))
         clsDisplayDailyGraphFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_graph")
         clsDisplayDailyTable.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$display_daily_table")
+        clsDisplayDailyTable.AddParameter("monstats", Chr(34) & "sum" & Chr(34), iPosition:=8)
         clsDisplayDailyTable.AddParameter("Misscode", Chr(34) & "-" & Chr(34), iPosition:=5)
         clsDisplayDailyTable.AddParameter("Tracecode", Chr(34) & "tr" & Chr(34), iPosition:=6)
         clsDisplayDailyTable.AddParameter("Zerocode", Chr(34) & "--" & Chr(34), iPosition:=7)
