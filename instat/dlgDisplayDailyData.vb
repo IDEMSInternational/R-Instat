@@ -116,7 +116,7 @@ Public Class dlgDisplayDailyData
         ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoTable, frmMain.clsRLink.strInstatDataObject & "$display_daily_table")
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrNudUpperYaxis, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=100)
         'ucrPnlFrequencyDisplay.AddToLinkedControls(ucrReceiverDayOfYear, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrInputComboMonStat, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="min")
+        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrInputComboMonStat, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboMonStat.SetLinkedDisplayControl(lblMonStat)
         'ucrReceiverDayOfYear.SetLinkedDisplayControl(lblDayOfTheYear)
         ucrNudUpperYaxis.SetLinkedDisplayControl(grpGraph)
@@ -136,7 +136,6 @@ Public Class dlgDisplayDailyData
         clsDisplayDailyTable.AddParameter("Misscode", Chr(34) & "-" & Chr(34), iPosition:=5)
         clsDisplayDailyTable.AddParameter("Tracecode", Chr(34) & "tr" & Chr(34), iPosition:=6)
         clsDisplayDailyTable.AddParameter("Zerocode", Chr(34) & "--" & Chr(34), iPosition:=7)
-        clsDisplayDailyTable.AddParameter("monstats", "min", iPosition:=8)
         clsDisplayDailyGraphFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$display_daily_graph")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDisplayDailyTable)
     End Sub
