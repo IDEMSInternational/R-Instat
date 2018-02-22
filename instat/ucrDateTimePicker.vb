@@ -14,7 +14,12 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports RDotNet
+
 Public Class ucrDateTimePicker
+    ' Is the parameter value associated with the control an R Date type?
+    ' If so then the control will set the parameter value in the form of: as.Date("2000/1/1")
+    ' Otherwise, parameter value will be set as a string e.g. "2000/1/1"
     Public bIsRDate As Boolean = True
 
     Public Overrides Sub UpdateParameter(clsTempParam As RParameter)
@@ -46,6 +51,7 @@ Public Class ucrDateTimePicker
         End Set
     End Property
 
+    ' Returns an RFunction which when run in R will return a Date type object of the form as.Date("2000/1/1")
     Public Function ValueAsRDate() As RFunction
         Dim clsAsDate As New RFunction
 
@@ -56,33 +62,85 @@ Public Class ucrDateTimePicker
     End Function
 
     Protected Overrides Sub SetControlValue()
-        Dim clsDateFunction As RFunction
-        Dim clsDateValueParameter As RParameter
+        Dim clsDateCode As RCodeStructure
+        Dim strDateExpression As String
         Dim lstCurrentVariables As String() = Nothing
         Dim clsTempParameter As RParameter
         Dim bInvalid As Boolean = False
+        Dim clsIsDateFunction As RFunction
+        Dim clsAsCharacterFunction As RFunction
+        Dim expTemp As SymbolicExpression
+        Dim bParameterIsDate As Boolean
+        Dim strDateCharacter As String
+        Dim strDateComponents As String()
+
+        clsIsDateFunction = New RFunction
+        clsIsDateFunction.SetPackageName("lubridate")
+        clsIsDateFunction.SetRCommand("is.Date")
+        clsAsCharacterFunction = New RFunction
+        clsAsCharacterFunction.SetRCommand("as.character")
 
         clsTempParameter = GetParameter()
         If clsTempParameter IsNot Nothing Then
             If bChangeParameterValue Then
                 If bIsRDate Then
-                    If clsTempParameter.bIsFunction Then
-                        clsDateFunction = TryCast(clsTempParameter.clsArgumentCodeStructure, RFunction)
-                        If clsDateFunction IsNot Nothing Then
-                            If clsDateFunction.ContainsParameter("x") Then
-                                clsDateValueParameter = clsDateFunction.GetParameter("x")
-                                If clsDateValueParameter.bIsString Then
-                                    'Should we assume it is as.Date(x = '2000/1/1') or convert RFunction to character and then split?
-                                End If
+                    If clsTempParameter.bIsFunction OrElse clsTempParameter.bIsOperator Then
+                        clsDateCode = clsTempParameter.clsArgumentCodeStructure
+                        If clsDateCode IsNot Nothing Then
+                            If clsTempParameter.bIsFunction Then
+                                clsIsDateFunction.AddParameter("x", clsRFunctionParameter:=clsDateCode)
+                                clsAsCharacterFunction.AddParameter("x", clsRFunctionParameter:=clsDateCode)
+                            Else
+                                clsIsDateFunction.AddParameter("x", clsROperatorParameter:=clsDateCode)
+                                clsAsCharacterFunction.AddParameter("x", clsROperatorParameter:=clsDateCode)
                             End If
                         Else
+                            bInvalid = True
+                        End If
+                    ElseIf clsTempParameter.bIsString Then
+                        strDateExpression = clsTempParameter.strArgumentValue
+                        clsIsDateFunction.AddParameter("x", strParameterValue:=strDateExpression)
+                        clsAsCharacterFunction.AddParameter("x", strParameterValue:=strDateExpression)
+                    Else
+                        bInvalid = True
+                    End If
+                    If Not bInvalid Then
+                        ' Check if the parameter value is an R Date type object
+                        expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsIsDateFunction.ToScript(), bSilent:=True, bShowWaitDialogOverride:=False)
+                        If expTemp IsNot Nothing AndAlso expTemp.Type = Internals.SymbolicExpressionType.LogicalVector AndAlso expTemp.AsLogical.Count > 0 Then
+                            bParameterIsDate = expTemp.AsLogical(0)
+                        Else
+                            bInvalid = True
+                        End If
+                        If bParameterIsDate Then
+                            ' Convert the Date object to character so that the date can be correctly interpreted.
+                            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsAsCharacterFunction.ToScript(), bSilent:=True, bShowWaitDialogOverride:=False)
+                            If expTemp IsNot Nothing AndAlso expTemp.Type = Internals.SymbolicExpressionType.CharacterVector AndAlso expTemp.AsLogical.Count > 0 Then
+                                strDateCharacter = expTemp.AsCharacter(0)
+                                strDateComponents = strDateCharacter.Split("-")
+                                If strDateComponents.Count = 3 Then
+                                    Try
+                                        dtpDateTime.Value = New Date(strDateComponents(0), strDateComponents(1), strDateComponents(2))
+                                    Catch ex As Exception
+                                        bInvalid = True
+                                    End Try
+                                End If
+                            Else
+                                bInvalid = True
+                            End If
                         End If
                     End If
+                Else
+                    'TODO case where parameter doesn't contain an R Date object e.g. this control could be used in as.Date and store a string.
                 End If
                 If Not bInvalid Then
-                    MsgBox("Developer error: Cannot set value of control: " & Name & ". Expecting parameter value to be of form: as.Date(x = '2000/1/1')")
+                    MsgBox("Developer error: Cannot set value of control: " & Name & ". Expecting parameter value to be function which returns an R Date object")
                 End If
             End If
         End If
+    End Sub
+
+    Private Sub dtpDateTime_TextChanged(sender As Object, e As EventArgs) Handles dtpDateTime.TextChanged
+        OnControlValueChanged()
     End Sub
 End Class
