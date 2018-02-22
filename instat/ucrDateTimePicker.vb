@@ -51,12 +51,16 @@ Public Class ucrDateTimePicker
         End Set
     End Property
 
+    Public Sub SetParameterIsRDate()
+        bIsRDate = True
+    End Sub
+
     ' Returns an RFunction which when run in R will return a Date type object of the form as.Date("2000/1/1")
     Public Function ValueAsRDate() As RFunction
         Dim clsAsDate As New RFunction
 
         clsAsDate.SetRCommand("as.Date")
-        clsAsDate.AddParameter("x", Chr(34) & dtpDateTime.Value.Year & "/" & dtpDateTime.Value.Month & "/" & dtpDateTime.Value.Day)
+        clsAsDate.AddParameter("x", Chr(34) & dtpDateTime.Value.Year & "/" & dtpDateTime.Value.Month & "/" & dtpDateTime.Value.Day & Chr(34))
 
         Return clsAsDate
     End Function
@@ -120,7 +124,7 @@ Public Class ucrDateTimePicker
                                 strDateComponents = strDateCharacter.Split("-")
                                 If strDateComponents.Count = 3 Then
                                     Try
-                                        dtpDateTime.Value = New Date(strDateComponents(0), strDateComponents(1), strDateComponents(2))
+                                        dtpDateTime.Value = New Date(year:=strDateComponents(0), month:=strDateComponents(1), day:=strDateComponents(2))
                                     Catch ex As Exception
                                         bInvalid = True
                                     End Try
@@ -133,14 +137,37 @@ Public Class ucrDateTimePicker
                 Else
                     'TODO case where parameter doesn't contain an R Date object e.g. this control could be used in as.Date and store a string.
                 End If
-                If Not bInvalid Then
-                    MsgBox("Developer error: Cannot set value of control: " & Name & ". Expecting parameter value to be function which returns an R Date object")
+                If bInvalid Then
+                    MsgBox("Developer error: Cannot set value of control: " & Name & ". Expecting parameter value to be an R expression which evaluates an R Date object")
                 End If
             End If
         End If
     End Sub
 
     Private Sub dtpDateTime_TextChanged(sender As Object, e As EventArgs) Handles dtpDateTime.TextChanged
+        'OnControlValueChanged()
+    End Sub
+
+    Private Sub dtpDateTime_ValueChanged(sender As Object, e As EventArgs) Handles dtpDateTime.ValueChanged
         OnControlValueChanged()
     End Sub
+
+    Public Overrides Sub SetRDefault(objNewDefault As Object)
+        Dim dtDefault As Date
+
+        MyBase.SetRDefault(objNewDefault)
+        If Not Date.TryParse(objNewDefault, dtDefault) Then
+            MsgBox("Developer error: Cannot set the default value of control " & Me.Name & " because the value cannot be converted to a Date.")
+        End If
+    End Sub
+
+    Public Overrides Function IsRDefault() As Boolean
+        Dim dtDefault As Date
+
+        If Date.TryParse(objRDefault, dtDefault) Then
+            Return dtpDateTime.Value = dtDefault
+        Else
+            Return False
+        End If
+    End Function
 End Class
