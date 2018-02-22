@@ -1346,6 +1346,12 @@
     <Compile Include="ucrDataView.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrDateTimePicker.Designer.vb">
+      <DependentUpon>ucrDateTimePicker.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrDateTimePicker.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrDialogDisabled.Designer.vb">
       <DependentUpon>ucrDialogDisabled.vb</DependentUpon>
     </Compile>
@@ -4728,6 +4734,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDataView.sw-KE.resx">
       <DependentUpon>ucrDataView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDateTimePicker.resx">
+      <DependentUpon>ucrDateTimePicker.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDialogDisabled.fr-FR.resx">
       <DependentUpon>ucrDialogDisabled.vb</DependentUpon>
