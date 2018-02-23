@@ -22,11 +22,11 @@ Public Class sdgSummaries
     Private lstCheckboxes As New List(Of ucrCheck)
     Private ucrBaseSelector As ucrSelector
     Public strDataFrame As String
-    Public bEnableTab As Boolean = True
+    Public bEnable2VariableTab As Boolean = True
 
     Private Sub sdgDescribe_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        If Not bEnableTab Then
+        If Not bEnable2VariableTab Then
             tbTwoVariables.Enabled = False
         Else
             tbTwoVariables.Enabled = True
