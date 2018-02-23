@@ -77,6 +77,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
         Me.tpConf = New System.Windows.Forms.ToolTip(Me.components)
         Me.tpAlt = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ucrInputComboRPackage = New instat.ucrInputComboBox()
         Me.grpMainKeyboard.SuspendLayout()
         Me.grpTests.SuspendLayout()
         Me.SuspendLayout()
@@ -104,7 +105,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpMainKeyboard.Controls.Add(Me.btnAlt)
         Me.grpMainKeyboard.Controls.Add(Me.cmdSquiggle)
         Me.grpMainKeyboard.Controls.Add(Me.cmdSquareBrackets)
-        Me.grpMainKeyboard.Location = New System.Drawing.Point(674, 68)
+        Me.grpMainKeyboard.Location = New System.Drawing.Point(416, 243)
         Me.grpMainKeyboard.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.grpMainKeyboard.Name = "grpMainKeyboard"
         Me.grpMainKeyboard.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
@@ -258,11 +259,11 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpTests.Controls.Add(Me.cmdfisher)
         Me.grpTests.Controls.Add(Me.cmdPairwiset)
         Me.grpTests.Controls.Add(Me.cmdMauchly)
-        Me.grpTests.Location = New System.Drawing.Point(247, 68)
+        Me.grpTests.Location = New System.Drawing.Point(247, 77)
         Me.grpTests.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.grpTests.Name = "grpTests"
         Me.grpTests.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.grpTests.Size = New System.Drawing.Size(423, 168)
+        Me.grpTests.Size = New System.Drawing.Size(423, 167)
         Me.grpTests.TabIndex = 167
         Me.grpTests.TabStop = False
         '
@@ -596,7 +597,7 @@ Partial Class dlgHypothesisTestsCalculator
         'lblRpackage
         '
         Me.lblRpackage.AutoSize = True
-        Me.lblRpackage.Location = New System.Drawing.Point(250, 57)
+        Me.lblRpackage.Location = New System.Drawing.Point(250, 55)
         Me.lblRpackage.Name = "lblRpackage"
         Me.lblRpackage.Size = New System.Drawing.Size(63, 13)
         Me.lblRpackage.TabIndex = 168
@@ -671,9 +672,9 @@ Partial Class dlgHypothesisTestsCalculator
         'ucrChkShowArguments
         '
         Me.ucrChkShowArguments.Checked = False
-        Me.ucrChkShowArguments.Location = New System.Drawing.Point(576, 25)
+        Me.ucrChkShowArguments.Location = New System.Drawing.Point(539, 25)
         Me.ucrChkShowArguments.Name = "ucrChkShowArguments"
-        Me.ucrChkShowArguments.Size = New System.Drawing.Size(274, 20)
+        Me.ucrChkShowArguments.Size = New System.Drawing.Size(131, 20)
         Me.ucrChkShowArguments.TabIndex = 158
         '
         'ucrReceiverForTestColumn
@@ -683,16 +684,26 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrReceiverForTestColumn.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.ucrReceiverForTestColumn.Name = "ucrReceiverForTestColumn"
         Me.ucrReceiverForTestColumn.Selector = Nothing
-        Me.ucrReceiverForTestColumn.Size = New System.Drawing.Size(510, 28)
+        Me.ucrReceiverForTestColumn.Size = New System.Drawing.Size(484, 28)
         Me.ucrReceiverForTestColumn.strNcFilePath = ""
         Me.ucrReceiverForTestColumn.TabIndex = 157
         Me.ucrReceiverForTestColumn.ucrSelector = Nothing
+        '
+        'ucrInputComboRPackage
+        '
+        Me.ucrInputComboRPackage.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboRPackage.IsReadOnly = False
+        Me.ucrInputComboRPackage.Location = New System.Drawing.Point(317, 51)
+        Me.ucrInputComboRPackage.Name = "ucrInputComboRPackage"
+        Me.ucrInputComboRPackage.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputComboRPackage.TabIndex = 181
         '
         'dlgHypothesisTestsCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(848, 487)
+        Me.ClientSize = New System.Drawing.Size(677, 487)
+        Me.Controls.Add(Me.ucrInputComboRPackage)
         Me.Controls.Add(Me.ucrChkSaveTestObject)
         Me.Controls.Add(Me.ucrSaveResultInto)
         Me.Controls.Add(Me.lblRpackage)
@@ -773,4 +784,5 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents ucrChkSaveTestObject As ucrCheck
     Friend WithEvents tpConf As ToolTip
     Friend WithEvents tpAlt As ToolTip
+    Friend WithEvents ucrInputComboRPackage As ucrInputComboBox
 End Class
