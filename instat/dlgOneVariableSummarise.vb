@@ -125,9 +125,9 @@ Public Class dlgOneVariableSummarise
     Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
         sdgSummaries.SetRFunction(clsSummariesList, clsInstatSummaryFunction, ucrSelectorOneVarSummarise, bResetSubdialog)
         bResetSubdialog = False
-        sdgSummaries.bEnableTab = False
+        sdgSummaries.bEnable2VariableTab = False
         sdgSummaries.ShowDialog()
-        sdgSummaries.bEnableTab = True
+        sdgSummaries.bEnable2VariableTab = True
         TestOKEnabled()
     End Sub
 
