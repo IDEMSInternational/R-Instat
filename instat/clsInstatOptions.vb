@@ -35,6 +35,8 @@ Imports RDotNet
     Public strGraphDisplayOption As String
     Public bCommandsinOutput As Nullable(Of Boolean)
     Public bIncludeCommentDefault As Nullable(Of Boolean) 'sets the default for comments on the dialog
+    Public bShowProcurementMenu As Nullable(Of Boolean)
+    Public bShowClimaticMenu As Nullable(Of Boolean)
     Public iDigits As Nullable(Of Integer)
     Public bShowSignifStars As Nullable(Of Boolean)
     Public bChangeDataFrame As Nullable(Of Boolean)
@@ -49,6 +51,8 @@ Imports RDotNet
         bIncludeRDefaultParameters = clsInstatOptionsDefaults.DEFAULTbIncludeRDefaultParameters
         bCommandsinOutput = clsInstatOptionsDefaults.DEFAULTbCommandsinOutput
         bIncludeCommentDefault = clsInstatOptionsDefaults.DEFAULTbIncludeCommentDefault
+        bShowClimaticMenu = clsInstatOptionsDefaults.DEFAULTbShowClimaticMenu
+        bShowProcurementMenu = clsInstatOptionsDefaults.DEFAULTbShowProcurementMenu
         fntOutput = clsInstatOptionsDefaults.DEFAULTfntOutput
         clrOutput = clsInstatOptionsDefaults.DEFAULTclrOutput
         fntComment = clsInstatOptionsDefaults.DEFAULTfntComment
@@ -175,6 +179,18 @@ Imports RDotNet
             SetIncludeCommentByDefault(clsInstatOptionsDefaults.DEFAULTbIncludeCommentDefault)
         End If
 
+        If bShowProcurementMenu.HasValue Then
+            SetShowProcurementMenu(bShowProcurementMenu)
+        Else
+            SetShowProcurementMenu(clsInstatOptionsDefaults.DEFAULTbShowProcurementMenu)
+        End If
+
+        If bShowClimaticMenu.HasValue Then
+            SetShowClimaticMenu(bShowClimaticMenu)
+        Else
+            SetShowClimaticMenu(clsInstatOptionsDefaults.DEFAULTbShowClimaticMenu)
+        End If
+
         If bIncludeRDefaultParameters.HasValue Then
             SetIncludeRDefaultParameters(bIncludeRDefaultParameters)
         Else
@@ -264,19 +280,14 @@ Imports RDotNet
         strLanguageCultureCode = strLanguage
         Select Case strLanguageCultureCode
             Case "en-GB"
-                Thread.CurrentThread.CurrentCulture = New CultureInfo("en-GB")
                 Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-GB")
             Case "fr-FR"
-                Thread.CurrentThread.CurrentCulture = New CultureInfo("fr-FR")
                 Thread.CurrentThread.CurrentUICulture = New CultureInfo("fr-FR")
             Case "sw-KE"
-                Thread.CurrentThread.CurrentCulture = New CultureInfo("sw-KE")
                 Thread.CurrentThread.CurrentUICulture = New CultureInfo("sw-KE")
             Case "es-ES"
-                Thread.CurrentThread.CurrentCulture = New CultureInfo("es-ES")
                 Thread.CurrentThread.CurrentUICulture = New CultureInfo("es-ES")
             Case Else
-                Thread.CurrentThread.CurrentCulture = New CultureInfo("en-GB")
                 Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-GB")
         End Select
     End Sub
@@ -359,6 +370,16 @@ Imports RDotNet
         bIncludeCommentDefault = bNewInclude
     End Sub
 
+    Public Sub SetShowProcurementMenu(bNewShowProcurementMenu As Boolean)
+        bShowProcurementMenu = bNewShowProcurementMenu
+        frmMain.SetShowProcurementMenu(bNewShowProcurementMenu)
+    End Sub
+
+    Public Sub SetShowClimaticMenu(bNewShowClimaticMenu As Boolean)
+        bShowClimaticMenu = bNewShowClimaticMenu
+        frmMain.SetShowClimaticMenu(bNewShowClimaticMenu)
+    End Sub
+
     Public Sub SetIncludeRDefaultParameters(bNewInclude As Boolean)
         bIncludeRDefaultParameters = bNewInclude
     End Sub
@@ -369,6 +390,7 @@ Imports RDotNet
 
     Public Sub SetAutoSaveDataMinutes(iNewMinutes As Integer)
         iAutoSaveDataMinutes = iNewMinutes
+        frmMain.ResetTimer()
     End Sub
 
     Public Sub SetShowWaitDialog(bNewShow As Boolean)

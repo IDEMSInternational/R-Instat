@@ -31,7 +31,7 @@ Public Class dlgRecodeFactor
         End If
         SetRCodeforControls(bReset)
         bReset = False
-        autoTranslate(Me)
+        'autoTranslate(Me)
         TestOKEnabled()
     End Sub
 
@@ -44,6 +44,7 @@ Public Class dlgRecodeFactor
         ucrReceiverFactor.strSelectorHeading = "Factors"
         ucrReceiverFactor.SetMeAsReceiver()
         ucrReceiverFactor.SetParameterIsRFunction()
+        ucrReceiverFactor.bUseFilteredData = False
 
         ucrFactorGrid.SetReceiver(ucrReceiverFactor)
         ucrFactorGrid.SetAsViewerOnly()

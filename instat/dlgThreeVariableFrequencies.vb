@@ -37,8 +37,13 @@ Public Class dlgThreeVariableFrequencies
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        ReopenDialog()
         bReset = False
         TestOkEnabled()
+    End Sub
+
+    Private Sub ReopenDialog()
+        ChangeLocation()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -261,7 +266,7 @@ Public Class dlgThreeVariableFrequencies
         If rdoTable.Checked OrElse rdoBoth.Checked Then
             ucrBase.clsRsyntax.SetBaseROperator(clsTableBaseOperator)
             clsCurrBaseCode = clsTableBaseOperator
-            ucrBase.clsRsyntax.iCallType = 0
+            ucrBase.clsRsyntax.iCallType = 2
         ElseIf rdoGraph.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsGridArrange)
             clsCurrBaseCode = clsGraphBaseOperator

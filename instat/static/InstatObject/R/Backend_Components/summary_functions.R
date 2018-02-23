@@ -46,7 +46,8 @@ instat_object$set("public", "append_summaries_to_data_object", function(out, dat
   
   exists = FALSE
   if(self$link_exists_from(data_name, factors)) {
-    summary_name <- self$get_linked_to_data_name(data_name, factors)
+    #TODO what happens if there is more than 1?
+    summary_name <- self$get_linked_to_data_name(data_name, factors)[1]
     summary_obj <- self$get_data_objects(summary_name)
     exists <- TRUE
   }
@@ -93,7 +94,9 @@ instat_object$set("public", "append_summaries_to_data_object", function(out, dat
 } 
 )
 
-instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), store_results = TRUE, drop = TRUE, na.rm = FALSE, return_output = FALSE, summary_name = NA, weights = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, perc_return_all = FALSE, silent = FALSE, additional_filter, ...) {
+instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), store_results = TRUE, drop = TRUE, na.rm = FALSE, return_output = FALSE, summary_name = NA, weights = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, perc_return_all = FALSE, silent = FALSE, additional_filter, original_level = FALSE, ...) {
+  if(original_level) type <- "calculation"
+  else type <- "summary"
   include_columns_to_summarise <- TRUE
   if(is.null(columns_to_summarise) || length(columns_to_summarise) == 0) {
     # temporary fix for doing counts of a data frame
@@ -170,18 +173,18 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
       #TODO result_names could be horizontal/vertical vector, matrix or single value
       else result_name <- result_names[i,j]
       if(percentage_type == "none") {
-        summary_calculation <- instat_calculation$new(type = "summary", result_name = result_name,
+        summary_calculation <- instat_calculation$new(type = type, result_name = result_name,
                                                       function_exp = paste0(summary_type, "(", column_names, function_exp),
                                                       calculated_from = calculated_from, save = save)
       }
       else {
-        values_calculation <- instat_calculation$new(type = "summary", result_name = result_name,
+        values_calculation <- instat_calculation$new(type = type, result_name = result_name,
                                                       function_exp = paste0(summary_type, "(", column_names, function_exp),
                                                       calculated_from = calculated_from, save = save)
         if(percentage_type == "columns") {
           if(length(perc_total_columns) == 1) perc_col_name <- perc_total_columns
           else perc_col_name <- perc_total_columns[i]
-          totals_calculation <- instat_calculation$new(type = "summary", result_name = paste0(summaries_display[j], "_", perc_total_columns, "_totals"),
+          totals_calculation <- instat_calculation$new(type = type, result_name = paste0(summaries_display[j], "_", perc_total_columns, "_totals"),
                                                        function_exp = paste0(summary_type, "(", perc_col_name, function_exp),
                                                        calculated_from = calculated_from, save = save)
         }
@@ -585,6 +588,18 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
     else if(all(page_by %in% factors)) {
       levels_list <- lapply(page_by, function(x) levels(self$get_columns_from_data(data_name = data_name, col_names = x)))
       levels_data_frame <- expand.grid(levels_list)
+      # temp fix for having empty levels in page_by factor
+      # currently only checks each factor level separately - could still crash if missing combinations
+      # TODO fix for general case
+      tmp_data <- self$get_data_frame(data_name)
+      levels_data_frame$filter <- TRUE
+      for(i in seq_along(page_by)) {
+        tab <- table(tmp_data[[page_by[[i]]]])
+        tab <- tab[tab > 0]
+        levels_data_frame$filter <- levels_data_frame$filter & (levels_data_frame[[paste0("Var", i)]] %in% names(tab))
+      }
+      levels_data_frame <- subset(levels_data_frame, filter)
+      levels_data_frame$filter <- NULL
       for(j in 1:ncol(levels_data_frame)) {
         levels_data_frame[,j] <- paste0(page_by[j], " == ", "'", levels_data_frame[,j], "'")
       }

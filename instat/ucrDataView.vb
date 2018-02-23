@@ -41,6 +41,7 @@ Public Class ucrDataView
     Private clsGetDataFrame As New RFunction
     Private clsConvertOrderedFactor As New RFunction
     Private clsFilterApplied As New RFunction
+    Private clsHideDataFrame As New RFunction
     Public lstColumnNames As New List(Of KeyValuePair(Of String, String()))
 
     Private Sub ucrDataView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -82,6 +83,7 @@ Public Class ucrDataView
         clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
         clsConvertOrderedFactor.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
         clsFilterApplied.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$filter_applied")
+        clsHideDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_dataframe_metadata")
         clsViewDataFrame.SetRCommand("View")
         UpdateRFunctionDataFrameParameters()
     End Sub
@@ -295,10 +297,6 @@ Public Class ucrDataView
         End If
     End Sub
 
-    Private Sub insertSheet_Click(sender As Object, e As EventArgs) Handles insertSheet.Click
-        dlgNewDataFrame.ShowDialog()
-    End Sub
-
     Private Sub deleteSheet_Click(sender As Object, e As EventArgs) Handles deleteDataFrame.Click
         'Dim strScript As String
         'Dim Delete = MsgBox("Are you sure you want to delete this dataframe?" & Environment.NewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Sheet")
@@ -377,6 +375,9 @@ Public Class ucrDataView
         Dim chrCurrentFactorLevels As CharacterVector
         Dim bValid As Boolean = False
 
+        'trim white space from ends of value
+        strNewValue = strNewValue.Trim()
+
         clsGetFactorLevels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels")
         clsGetFactorLevels.AddParameter("data_name", Chr(34) & grdData.CurrentWorksheet.Name & Chr(34))
 
@@ -402,7 +403,7 @@ Public Class ucrDataView
                 Case "factor"
                     chrCurrentFactorLevels = frmMain.clsRLink.RunInternalScriptGetValue(clsGetFactorLevels.ToScript()).AsCharacter
                     If Not chrCurrentFactorLevels.Contains(strNewValue) Then
-                        MsgBox("Invalid value: " & strNewValue & Environment.NewLine & "This column is: factor. Values must be an existing level of this factor column.", MsgBoxStyle.Exclamation, "Invalid Value")
+                        MsgBox("Invalid value: '" & strNewValue & "'" & Environment.NewLine & "This column is: factor. Values must be an existing level of this factor column.", MsgBoxStyle.Exclamation, "Invalid Value")
                     Else
                         clsReplaceValue.AddParameter("new_value", Chr(34) & strNewValue & Chr(34))
                         bValid = True
@@ -412,14 +413,14 @@ Public Class ucrDataView
                         clsReplaceValue.AddParameter("new_value", strNewValue)
                         bValid = True
                     Else
-                        MsgBox("Invalid value: " & strNewValue & Environment.NewLine & "This column is: numeric. Values must be numeric.", MsgBoxStyle.Exclamation, "Invalid Value")
+                        MsgBox("Invalid value: '" & strNewValue & "'" & Environment.NewLine & "This column is: numeric. Values must be numeric.", MsgBoxStyle.Exclamation, "Invalid Value")
                     End If
                 Case "integer"
                     If Integer.TryParse(strNewValue, iValue) Then
                         clsReplaceValue.AddParameter("new_value", strNewValue)
                         bValid = True
                     Else
-                        MsgBox("Invalid value: " & strNewValue & Environment.NewLine & "This column is: integer. Values must be integer.", MsgBoxStyle.Exclamation, "Invalid Value")
+                        MsgBox("Invalid value: '" & strNewValue & "'" & Environment.NewLine & "This column is: integer. Values must be integer.", MsgBoxStyle.Exclamation, "Invalid Value")
                     End If
                     'Currently removed as this is the class for a blank column
                     'Case "logical"
@@ -760,5 +761,20 @@ Public Class ucrDataView
             mnuInsertColsBefore.Text = "Insert " & iSelectedCols & " Columns Before"
             mnuInsertColsAfter.Text = "Insert " & iSelectedCols & " Columns After"
         End If
+    End Sub
+
+    Private Sub HideSheet_Click(sender As Object, e As EventArgs) Handles HideSheet.Click
+        clsHideDataFrame.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
+        clsHideDataFrame.AddParameter("property", "is_hidden_label")
+        clsHideDataFrame.AddParameter("new_val", "TRUE")
+        RunScriptFromDataView(clsHideDataFrame.ToScript(), strComment:="Right click menu: Hide Data Frame")
+    End Sub
+
+    Private Sub unhideSheet_Click(sender As Object, e As EventArgs) Handles unhideSheet.Click
+        dlgHideDataframes.ShowDialog()
+    End Sub
+
+    Private Sub statusColumnMenu_Opening(sender As Object, e As CancelEventArgs) Handles statusColumnMenu.Opening
+        HideSheet.Enabled = (grdData.Worksheets.Count > 1)
     End Sub
 End Class

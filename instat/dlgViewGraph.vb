@@ -20,10 +20,11 @@ Public Class dlgViewGraph
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsggPlotly, clsGetGraphs As New RFunction
-    Private strGraphDisplayOption As String
+    Private strGlobalGraphDisplayOption As String
 
     Private Sub dlgViewGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        strGlobalGraphDisplayOption = frmMain.clsInstatOptions.strGraphDisplayOption
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -32,6 +33,7 @@ Public Class dlgViewGraph
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetGraphDisplayType()
         bReset = False
         TestOkEnabled()
     End Sub
@@ -73,6 +75,7 @@ Public Class dlgViewGraph
         clsggPlotly.AddParameter("p", clsRFunctionParameter:=clsGetGraphs)
 
         clsGetGraphs.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
+        clsGetGraphs.AddParameter("print_graph", "FALSE")
         ucrBase.clsRsyntax.SetBaseRFunction(clsggPlotly)
     End Sub
 
@@ -95,16 +98,18 @@ Public Class dlgViewGraph
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        frmMain.clsInstatOptions.SetGraphDisplayOption(strGraphDisplayOption)
+    Private Sub ucrPnlDisplayOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDisplayOptions.ControlValueChanged
+        SetGraphDisplayType()
     End Sub
 
-    Private Sub ucrPnlDisplayOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDisplayOptions.ControlValueChanged
-        strGraphDisplayOption = frmMain.clsInstatOptions.strGraphDisplayOption
+    Private Sub SetGraphDisplayType()
         If rdoDisplayInteractiveView.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsggPlotly)
-            ucrBase.clsRsyntax.iCallType = 0
+            ' Since R 3.4.2 this is the only way the RDotNet detects the plotly window should load
+            ucrBase.clsRsyntax.iCallType = 2
+            clsGetGraphs.AddParameter("print_graph", "FALSE")
         Else
+            clsGetGraphs.AddParameter("print_graph", "TRUE")
             ucrBase.clsRsyntax.SetBaseRFunction(clsGetGraphs)
             ucrBase.clsRsyntax.iCallType = 3
             If rdoDisplayOutputWindow.Checked Then
@@ -119,5 +124,11 @@ Public Class dlgViewGraph
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrGraphReceiver.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub dlgViewGraph_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
+        If Not Me.Visible Then
+            frmMain.clsInstatOptions.SetGraphDisplayOption(strGlobalGraphDisplayOption)
+        End If
     End Sub
 End Class

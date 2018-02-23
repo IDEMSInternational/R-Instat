@@ -38,6 +38,7 @@ Partial Class dlgColumnStructure
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgColumnStructure))
         Me.lblMeasurement = New System.Windows.Forms.Label()
         Me.lblTreatment = New System.Windows.Forms.Label()
         Me.lblLayout = New System.Windows.Forms.Label()
@@ -51,97 +52,68 @@ Partial Class dlgColumnStructure
         '
         'lblMeasurement
         '
-        Me.lblMeasurement.AutoSize = True
-        Me.lblMeasurement.Location = New System.Drawing.Point(261, 231)
+        resources.ApplyResources(Me.lblMeasurement, "lblMeasurement")
         Me.lblMeasurement.Name = "lblMeasurement"
-        Me.lblMeasurement.Size = New System.Drawing.Size(74, 13)
-        Me.lblMeasurement.TabIndex = 5
-        Me.lblMeasurement.Text = "Measurement:"
         '
         'lblTreatment
         '
-        Me.lblTreatment.AutoSize = True
-        Me.lblTreatment.Location = New System.Drawing.Point(261, 138)
+        resources.ApplyResources(Me.lblTreatment, "lblTreatment")
         Me.lblTreatment.Name = "lblTreatment"
-        Me.lblTreatment.Size = New System.Drawing.Size(58, 13)
-        Me.lblTreatment.TabIndex = 3
-        Me.lblTreatment.Text = "Treatment:"
         '
         'lblLayout
         '
-        Me.lblLayout.AutoSize = True
-        Me.lblLayout.Location = New System.Drawing.Point(261, 45)
+        resources.ApplyResources(Me.lblLayout, "lblLayout")
         Me.lblLayout.Name = "lblLayout"
-        Me.lblLayout.Size = New System.Drawing.Size(42, 13)
-        Me.lblLayout.TabIndex = 1
-        Me.lblLayout.Text = "Layout:"
         '
         'ucrChkColourColumnsByStructure
         '
         Me.ucrChkColourColumnsByStructure.Checked = False
-        Me.ucrChkColourColumnsByStructure.Location = New System.Drawing.Point(10, 206)
+        resources.ApplyResources(Me.ucrChkColourColumnsByStructure, "ucrChkColourColumnsByStructure")
         Me.ucrChkColourColumnsByStructure.Name = "ucrChkColourColumnsByStructure"
-        Me.ucrChkColourColumnsByStructure.Size = New System.Drawing.Size(210, 20)
-        Me.ucrChkColourColumnsByStructure.TabIndex = 7
         '
         'ucrReceiverMeasurement
         '
         Me.ucrReceiverMeasurement.frmParent = Me
-        Me.ucrReceiverMeasurement.Location = New System.Drawing.Point(261, 246)
-        Me.ucrReceiverMeasurement.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverMeasurement, "ucrReceiverMeasurement")
         Me.ucrReceiverMeasurement.Name = "ucrReceiverMeasurement"
         Me.ucrReceiverMeasurement.Selector = Nothing
-        Me.ucrReceiverMeasurement.Size = New System.Drawing.Size(120, 76)
         Me.ucrReceiverMeasurement.strNcFilePath = ""
-        Me.ucrReceiverMeasurement.TabIndex = 6
         Me.ucrReceiverMeasurement.ucrSelector = Nothing
         '
         'ucrReceiverTreatment
         '
         Me.ucrReceiverTreatment.frmParent = Me
-        Me.ucrReceiverTreatment.Location = New System.Drawing.Point(261, 153)
-        Me.ucrReceiverTreatment.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverTreatment, "ucrReceiverTreatment")
         Me.ucrReceiverTreatment.Name = "ucrReceiverTreatment"
         Me.ucrReceiverTreatment.Selector = Nothing
-        Me.ucrReceiverTreatment.Size = New System.Drawing.Size(120, 73)
         Me.ucrReceiverTreatment.strNcFilePath = ""
-        Me.ucrReceiverTreatment.TabIndex = 4
         Me.ucrReceiverTreatment.ucrSelector = Nothing
         '
         'ucrReceiverLayout
         '
         Me.ucrReceiverLayout.frmParent = Me
-        Me.ucrReceiverLayout.Location = New System.Drawing.Point(261, 60)
-        Me.ucrReceiverLayout.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverLayout, "ucrReceiverLayout")
         Me.ucrReceiverLayout.Name = "ucrReceiverLayout"
         Me.ucrReceiverLayout.Selector = Nothing
-        Me.ucrReceiverLayout.Size = New System.Drawing.Size(120, 74)
         Me.ucrReceiverLayout.strNcFilePath = ""
-        Me.ucrReceiverLayout.TabIndex = 2
         Me.ucrReceiverLayout.ucrSelector = Nothing
         '
         'ucrSelectorColumnStructure
         '
         Me.ucrSelectorColumnStructure.bShowHiddenColumns = False
         Me.ucrSelectorColumnStructure.bUseCurrentFilter = True
-        Me.ucrSelectorColumnStructure.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorColumnStructure.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorColumnStructure, "ucrSelectorColumnStructure")
         Me.ucrSelectorColumnStructure.Name = "ucrSelectorColumnStructure"
-        Me.ucrSelectorColumnStructure.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorColumnStructure.TabIndex = 0
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 334)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 8
         '
         'dlgColumnStructure
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(415, 391)
         Me.Controls.Add(Me.ucrChkColourColumnsByStructure)
         Me.Controls.Add(Me.lblMeasurement)
         Me.Controls.Add(Me.lblTreatment)
@@ -155,9 +127,7 @@ Partial Class dlgColumnStructure
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgColumnStructure"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Column_Structure"
-        Me.Text = "Column Structure"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

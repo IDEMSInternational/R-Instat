@@ -38,6 +38,7 @@ Partial Class dlgDefineCorruptionOutputs
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgDefineCorruptionOutputs))
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverCorruptionOutputs = New instat.ucrReceiverMultiple()
         Me.ucrSelectorCorruptionOutputs = New instat.ucrSelectorByDataFrameAddRemove()
@@ -46,45 +47,34 @@ Partial Class dlgDefineCorruptionOutputs
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 199)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 3
         '
         'ucrReceiverCorruptionOutputs
         '
         Me.ucrReceiverCorruptionOutputs.frmParent = Me
-        Me.ucrReceiverCorruptionOutputs.Location = New System.Drawing.Point(271, 60)
-        Me.ucrReceiverCorruptionOutputs.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverCorruptionOutputs, "ucrReceiverCorruptionOutputs")
         Me.ucrReceiverCorruptionOutputs.Name = "ucrReceiverCorruptionOutputs"
         Me.ucrReceiverCorruptionOutputs.Selector = Nothing
-        Me.ucrReceiverCorruptionOutputs.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverCorruptionOutputs.TabIndex = 2
+        Me.ucrReceiverCorruptionOutputs.strNcFilePath = ""
+        Me.ucrReceiverCorruptionOutputs.ucrSelector = Nothing
         '
         'ucrSelectorCorruptionOutputs
         '
         Me.ucrSelectorCorruptionOutputs.bShowHiddenColumns = False
         Me.ucrSelectorCorruptionOutputs.bUseCurrentFilter = True
-        Me.ucrSelectorCorruptionOutputs.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorCorruptionOutputs.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorCorruptionOutputs, "ucrSelectorCorruptionOutputs")
         Me.ucrSelectorCorruptionOutputs.Name = "ucrSelectorCorruptionOutputs"
-        Me.ucrSelectorCorruptionOutputs.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorCorruptionOutputs.TabIndex = 0
         '
         'lblCorruptionOutputs
         '
-        Me.lblCorruptionOutputs.AutoSize = True
-        Me.lblCorruptionOutputs.Location = New System.Drawing.Point(271, 45)
+        resources.ApplyResources(Me.lblCorruptionOutputs, "lblCorruptionOutputs")
         Me.lblCorruptionOutputs.Name = "lblCorruptionOutputs"
-        Me.lblCorruptionOutputs.Size = New System.Drawing.Size(98, 13)
-        Me.lblCorruptionOutputs.TabIndex = 1
-        Me.lblCorruptionOutputs.Text = "Corruption Outputs:"
         '
         'dlgDefineCorruptionOutputs
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(422, 260)
         Me.Controls.Add(Me.lblCorruptionOutputs)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiverCorruptionOutputs)
@@ -93,8 +83,6 @@ Partial Class dlgDefineCorruptionOutputs
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDefineCorruptionOutputs"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Define Corruption Outputs"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

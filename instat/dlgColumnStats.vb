@@ -63,9 +63,14 @@ Public Class dlgColumnStats
         ucrReceiverByFactor.SetParameterIsString()
 
         ucrChkStoreResults.SetParameter(New RParameter("store_results", 3))
-        ucrChkStoreResults.SetText("Store Results in Data Frame")
+        ucrChkStoreResults.SetText("Store Results")
         ucrChkStoreResults.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkStoreResults.SetRDefault("TRUE")
+
+        ucrChkOriginalLevel.SetParameter(New RParameter("original_level", 7))
+        ucrChkOriginalLevel.SetText("Original Level")
+        ucrChkOriginalLevel.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkOriginalLevel.SetRDefault("FALSE")
 
         ucrChkPrintOutput.SetParameter(New RParameter("return_output", 4))
         ucrChkPrintOutput.SetText("Print Results to Output Window")
@@ -81,6 +86,9 @@ Public Class dlgColumnStats
         ucrChkOmitMissing.SetText("Omit Missing Values")
         ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOmitMissing.SetRDefault("FALSE")
+
+        'linking
+        ucrChkStoreResults.AddToLinkedControls(ucrChkOriginalLevel, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Private Sub SetDefaults()
@@ -128,7 +136,7 @@ Public Class dlgColumnStats
     End Sub
 
     Public Sub TestOKEnabled()
-        If Not ucrReceiverByFactor.IsEmpty AndAlso (ucrChkStoreResults.Checked OrElse ucrChkPrintOutput.Checked) AndAlso Not clsSummariesList.clsParameters.Count = 0 Then
+        If ((ucrChkStoreResults.Checked OrElse ucrChkPrintOutput.Checked) AndAlso Not clsSummariesList.clsParameters.Count = 0) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -163,7 +171,7 @@ Public Class dlgColumnStats
         End If
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariables.ControlContentsChanged, ucrReceiverByFactor.ControlContentsChanged, ucrChkPrintOutput.ControlContentsChanged, ucrChkStoreResults.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkPrintOutput.ControlContentsChanged, ucrChkStoreResults.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class

@@ -1,0 +1,756 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <metadata name="ttClimdexIndices.TrayLocation" xml:space="preserve" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" xml:space="preserve" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>25</value>
+  </metadata>
+  <data name="cmdHelp.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>347, 438</value>
+  </data>
+  <data name="cmdHelp.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="cmdHelp.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="ucrInputThreshold.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>371, 88</value>
+  </data>
+  <data name="ucrInputThreshold.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>68, 21</value>
+  </data>
+  <data name="ucrInputThreshold.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="lblThreshold.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblThreshold.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>312, 92</value>
+  </data>
+  <data name="lblThreshold.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>57, 13</value>
+  </data>
+  <data name="lblThreshold.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblThreshold.Text" xml:space="preserve">
+    <value>Kizingiti</value>
+  </data>
+  <data name="ucrChkPrecExceedSpecifiedA.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 91</value>
+  </data>
+  <data name="ucrChkPrecExceedSpecifiedA.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>378, 18</value>
+  </data>
+  <data name="ucrChkPrecExceedSpecifiedA.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="ucrChkMaxDrySpell.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 115</value>
+  </data>
+  <data name="ucrChkMaxDrySpell.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>378, 18</value>
+  </data>
+  <data name="ucrChkMaxDrySpell.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="ucrChkPrecExceed95Percent.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 163</value>
+  </data>
+  <data name="ucrChkPrecExceed95Percent.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>378, 18</value>
+  </data>
+  <data name="ucrChkPrecExceed95Percent.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="ucrChkPrecExceed10mm.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 43</value>
+  </data>
+  <data name="ucrChkPrecExceed10mm.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>378, 18</value>
+  </data>
+  <data name="ucrChkPrecExceed10mm.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="ucrChkMaxWetSpell.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 139</value>
+  </data>
+  <data name="ucrChkMaxWetSpell.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>378, 18</value>
+  </data>
+  <data name="ucrChkMaxWetSpell.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="ucrChkPrecExceed20mm.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 67</value>
+  </data>
+  <data name="ucrChkPrecExceed20mm.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>378, 18</value>
+  </data>
+  <data name="ucrChkPrecExceed20mm.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="ucrChkPrecExceed99Percent.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 187</value>
+  </data>
+  <data name="ucrChkPrecExceed99Percent.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>378, 18</value>
+  </data>
+  <data name="ucrChkPrecExceed99Percent.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="ucrChkTotalDailyPrec.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 211</value>
+  </data>
+  <data name="ucrChkTotalDailyPrec.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>378, 18</value>
+  </data>
+  <data name="ucrChkTotalDailyPrec.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="ucrChkSimplePrecII.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 19</value>
+  </data>
+  <data name="ucrChkSimplePrecII.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>378, 18</value>
+  </data>
+  <data name="ucrChkSimplePrecII.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpPrecAnnual.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>11, 7</value>
+  </data>
+  <data name="grpPrecAnnual.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>445, 238</value>
+  </data>
+  <data name="grpPrecAnnual.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="grpPrecAnnual.Text" xml:space="preserve">
+    <value>Kila mwaka</value>
+  </data>
+  <data name="ucrChkCentreMean.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>83, 67</value>
+  </data>
+  <data name="ucrChkCentreMean.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>212, 20</value>
+  </data>
+  <data name="ucrChkCentreMean.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="ucrChkMonthlyMax5dayPrec.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 43</value>
+  </data>
+  <data name="ucrChkMonthlyMax5dayPrec.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>378, 18</value>
+  </data>
+  <data name="ucrChkMonthlyMax5dayPrec.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="ucrChkMonthlyMax1dayPrec.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 19</value>
+  </data>
+  <data name="ucrChkMonthlyMax1dayPrec.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>378, 18</value>
+  </data>
+  <data name="ucrChkMonthlyMax1dayPrec.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpPrecAnnualMonthly.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>11, 251</value>
+  </data>
+  <data name="grpPrecAnnualMonthly.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>445, 93</value>
+  </data>
+  <data name="grpPrecAnnualMonthly.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tbpPrecipitation.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbpPrecipitation.Padding" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbpPrecipitation.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>575, 397</value>
+  </data>
+  <data name="tbpPrecipitation.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="tbpPrecipitation.Text" xml:space="preserve">
+    <value>Precipitation:</value>
+  </data>
+  <data name="ucrChkMonthlyMinDailyTMin.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>8, 43</value>
+  </data>
+  <data name="ucrChkMonthlyMinDailyTMin.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>378, 18</value>
+  </data>
+  <data name="ucrChkMonthlyMinDailyTMin.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="ucrChkMonthlyMaxDailyTMin.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>8, 19</value>
+  </data>
+  <data name="ucrChkMonthlyMaxDailyTMin.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>378, 18</value>
+  </data>
+  <data name="ucrChkMonthlyMaxDailyTMin.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="ucrChkTminBelow10Percent.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>8, 67</value>
+  </data>
+  <data name="ucrChkTminBelow10Percent.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>378, 18</value>
+  </data>
+  <data name="ucrChkTminBelow10Percent.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="ucrChkTminAbove90Percent.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>8, 91</value>
+  </data>
+  <data name="ucrChkTminAbove90Percent.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>378, 18</value>
+  </data>
+  <data name="ucrChkTminAbove90Percent.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="grpTminAnnualMonthly.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>218, 15</value>
+  </data>
+  <data name="grpTminAnnualMonthly.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>334, 114</value>
+  </data>
+  <data name="grpTminAnnualMonthly.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="ucrChkColdSpellDI.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>8, 67</value>
+  </data>
+  <data name="ucrChkColdSpellDI.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>200, 18</value>
+  </data>
+  <data name="ucrChkColdSpellDI.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="ucrChkTropicalNights.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>8, 43</value>
+  </data>
+  <data name="ucrChkTropicalNights.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>150, 18</value>
+  </data>
+  <data name="ucrChkTropicalNights.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="ucrChkFrostDays.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>8, 19</value>
+  </data>
+  <data name="ucrChkFrostDays.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>150, 18</value>
+  </data>
+  <data name="ucrChkFrostDays.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpTminAnnual.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>4, 15</value>
+  </data>
+  <data name="grpTminAnnual.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>208, 114</value>
+  </data>
+  <data name="grpTminAnnual.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpTminAnnual.Text" xml:space="preserve">
+    <value>Kila mwaka</value>
+  </data>
+  <data name="grpTmin.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="grpTmin.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>562, 138</value>
+  </data>
+  <data name="grpTmin.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="ucrChkMeanDiurnalTempRange.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>8, 21</value>
+  </data>
+  <data name="ucrChkMeanDiurnalTempRange.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>320, 18</value>
+  </data>
+  <data name="ucrChkMeanDiurnalTempRange.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpTmaxTminAnnualMonthly.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>218, 14</value>
+  </data>
+  <data name="grpTmaxTminAnnualMonthly.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>334, 74</value>
+  </data>
+  <data name="grpTmaxTminAnnualMonthly.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblGSLMode.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblGSLMode.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>8, 48</value>
+  </data>
+  <data name="lblGSLMode.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>61, 13</value>
+  </data>
+  <data name="lblGSLMode.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="ucrChkGrowingSeasonLength.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>8, 21</value>
+  </data>
+  <data name="ucrChkGrowingSeasonLength.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>194, 18</value>
+  </data>
+  <data name="ucrChkGrowingSeasonLength.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="ucrInputGSLMode.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>69, 45</value>
+  </data>
+  <data name="ucrInputGSLMode.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>21, 17, 21, 17</value>
+  </data>
+  <data name="ucrInputGSLMode.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>133, 21</value>
+  </data>
+  <data name="ucrInputGSLMode.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="grpTmaxTminAnnual.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>4, 14</value>
+  </data>
+  <data name="grpTmaxTminAnnual.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>208, 74</value>
+  </data>
+  <data name="grpTmaxTminAnnual.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpTmaxTminAnnual.Text" xml:space="preserve">
+    <value>Kila mwaka</value>
+  </data>
+  <data name="grpTmaxTmin.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 297</value>
+  </data>
+  <data name="grpTmaxTmin.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>562, 94</value>
+  </data>
+  <data name="grpTmaxTmin.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="ucrChkMonthlyMaxDailyTMax.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>8, 19</value>
+  </data>
+  <data name="ucrChkMonthlyMaxDailyTMax.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>378, 18</value>
+  </data>
+  <data name="ucrChkMonthlyMaxDailyTMax.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="ucrChkTmaxAbove90Percent.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>8, 91</value>
+  </data>
+  <data name="ucrChkTmaxAbove90Percent.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>320, 18</value>
+  </data>
+  <data name="ucrChkTmaxAbove90Percent.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="ucrChkTmaxBelow10Percent.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>8, 67</value>
+  </data>
+  <data name="ucrChkTmaxBelow10Percent.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>378, 18</value>
+  </data>
+  <data name="ucrChkTmaxBelow10Percent.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="ucrChkMonthlyMinDailyTMax.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>8, 43</value>
+  </data>
+  <data name="ucrChkMonthlyMinDailyTMax.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>378, 18</value>
+  </data>
+  <data name="ucrChkMonthlyMinDailyTMax.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="grpTmaxAnnualMonthly.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>218, 16</value>
+  </data>
+  <data name="grpTmaxAnnualMonthly.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>334, 114</value>
+  </data>
+  <data name="grpTmaxAnnualMonthly.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="ucrChkSummerDays.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>8, 19</value>
+  </data>
+  <data name="ucrChkSummerDays.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>150, 18</value>
+  </data>
+  <data name="ucrChkSummerDays.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="ucrChkWarmSpellDI.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>8, 67</value>
+  </data>
+  <data name="ucrChkWarmSpellDI.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>200, 18</value>
+  </data>
+  <data name="ucrChkWarmSpellDI.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="ucrChkIcingDays.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>8, 43</value>
+  </data>
+  <data name="ucrChkIcingDays.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>150, 18</value>
+  </data>
+  <data name="ucrChkIcingDays.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="grpTmaxAnnual.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>4, 16</value>
+  </data>
+  <data name="grpTmaxAnnual.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>208, 114</value>
+  </data>
+  <data name="grpTmaxAnnual.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpTmaxAnnual.Text" xml:space="preserve">
+    <value>Kila mwaka</value>
+  </data>
+  <data name="grpTmax.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 150</value>
+  </data>
+  <data name="grpTmax.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>562, 141</value>
+  </data>
+  <data name="grpTmax.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tbpTemperature.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbpTemperature.Padding" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbpTemperature.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>575, 397</value>
+  </data>
+  <data name="tbpTemperature.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tbpTemperature.Text" xml:space="preserve">
+    <value>Halijoto</value>
+  </data>
+  <data name="ucrInputPrecQtiles.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>236, 104</value>
+  </data>
+  <data name="ucrInputPrecQtiles.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>137, 21</value>
+  </data>
+  <data name="ucrInputPrecQtiles.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="ucrInputTempQtiles.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>236, 57</value>
+  </data>
+  <data name="ucrInputTempQtiles.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>137, 21</value>
+  </data>
+  <data name="ucrInputTempQtiles.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="lblBaseTo.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblBaseTo.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>7, 47</value>
+  </data>
+  <data name="lblBaseTo.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>23, 13</value>
+  </data>
+  <data name="lblBaseTo.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblBaseTo.Text" xml:space="preserve">
+    <value>Kwenda:</value>
+  </data>
+  <data name="ucrNudUpperBase.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>73, 45</value>
+  </data>
+  <data name="ucrNudUpperBase.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudUpperBase.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblBaseFrom.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblBaseFrom.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>7, 23</value>
+  </data>
+  <data name="lblBaseFrom.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>33, 13</value>
+  </data>
+  <data name="lblBaseFrom.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblBaseFrom.Text" xml:space="preserve">
+    <value>Kutoka kwa:</value>
+  </data>
+  <data name="ucrNudLowerBase.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>73, 19</value>
+  </data>
+  <data name="ucrNudLowerBase.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudLowerBase.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="grpBaseRange.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>11, 146</value>
+  </data>
+  <data name="grpBaseRange.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>190, 76</value>
+  </data>
+  <data name="grpBaseRange.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="ucrChkNHemisphere.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>11, 231</value>
+  </data>
+  <data name="ucrChkNHemisphere.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>212, 20</value>
+  </data>
+  <data name="ucrChkNHemisphere.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="ucrChkMaxSpellSpanYears.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>236, 130</value>
+  </data>
+  <data name="ucrChkMaxSpellSpanYears.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>212, 20</value>
+  </data>
+  <data name="ucrChkMaxSpellSpanYears.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="ucrNudN.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>151, 286</value>
+  </data>
+  <data name="ucrNudN.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudN.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="ucrNudMinBaseData.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>151, 260</value>
+  </data>
+  <data name="ucrNudMinBaseData.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudMinBaseData.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="lblFreq.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFreq.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>11, 9</value>
+  </data>
+  <data name="lblFreq.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>60, 13</value>
+  </data>
+  <data name="lblFreq.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblFreq.Text" xml:space="preserve">
+    <value>Uradidi:</value>
+  </data>
+  <data name="lblMinBaseData.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMinBaseData.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>8, 264</value>
+  </data>
+  <data name="lblMinBaseData.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>143, 13</value>
+  </data>
+  <data name="lblMinBaseData.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="ucrInputFreq.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>11, 24</value>
+  </data>
+  <data name="ucrInputFreq.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>145, 21</value>
+  </data>
+  <data name="ucrInputFreq.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblPrecQuantiles.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblPrecQuantiles.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>236, 89</value>
+  </data>
+  <data name="lblPrecQuantiles.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>115, 13</value>
+  </data>
+  <data name="lblPrecQuantiles.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="lblTempQuantiles.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblTempQuantiles.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>236, 42</value>
+  </data>
+  <data name="lblTempQuantiles.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>117, 13</value>
+  </data>
+  <data name="lblTempQuantiles.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="lblMonthly.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMonthly.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>7, 49</value>
+  </data>
+  <data name="lblMonthly.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>47, 13</value>
+  </data>
+  <data name="lblMonthly.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblMonthly.Text" xml:space="preserve">
+    <value>Kila Mwezi</value>
+  </data>
+  <data name="lblAnnual.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblAnnual.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>7, 24</value>
+  </data>
+  <data name="lblAnnual.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>43, 13</value>
+  </data>
+  <data name="lblAnnual.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblAnnual.Text" xml:space="preserve">
+    <value>Kila mwaka</value>
+  </data>
+  <data name="ucrNudMonthlyMissingDays.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>73, 46</value>
+  </data>
+  <data name="ucrNudMonthlyMissingDays.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudMonthlyMissingDays.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="ucrNudAnnualMissingDays.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>73, 20</value>
+  </data>
+  <data name="ucrNudAnnualMissingDays.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudAnnualMissingDays.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="grpMaxMissingDays.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>11, 57</value>
+  </data>
+  <data name="grpMaxMissingDays.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>190, 76</value>
+  </data>
+  <data name="grpMaxMissingDays.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblN.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblN.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>8, 293</value>
+  </data>
+  <data name="lblN.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>96, 13</value>
+  </data>
+  <data name="lblN.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="tbpSettings.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbpSettings.Padding" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbpSettings.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>575, 397</value>
+  </data>
+  <data name="tbpSettings.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tbpSettings.Text" xml:space="preserve">
+    <value>Mipangilio</value>
+  </data>
+  <data name="tbpClimdex.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>8, 6</value>
+  </data>
+  <data name="tbpClimdex.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>583, 423</value>
+  </data>
+  <data name="tbpClimdex.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="ucrButtonsClimdexIndices.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>190, 435</value>
+  </data>
+  <data name="ucrButtonsClimdexIndices.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>142, 30</value>
+  </data>
+  <data name="ucrButtonsClimdexIndices.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" xml:space="preserve" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>596, 473</value>
+  </data>
+  <data name="$this.StartPosition" xml:space="preserve" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+</root>

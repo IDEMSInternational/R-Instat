@@ -37,7 +37,7 @@ Public Class dlgMakeDate
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        autoTranslate(Me)
+        'autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -212,7 +212,7 @@ Public Class dlgMakeDate
         ucrPnlDate.AddToLinkedControls(ucrChkTwoDigitYear, {rdoTwoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkTwoDigitYear.AddToLinkedControls(ucrNudCutoff, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudCutoff.SetLinkedDisplayControl(lblCutOffTwo)
-        ucrPnlDate.AddToLinkedControls(ucrInputComboBoxMonthTwo, {rdoTwoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="365/366")
+        ucrPnlDate.AddToLinkedControls(ucrInputComboBoxMonthTwo, {rdoTwoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="366")
         ucrReceiverYearTwo.SetLinkedDisplayControl(grpTwoColumns)
 
         'when rdoThreeColumn is checked
@@ -389,6 +389,7 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub ucrPnlFormat_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFormat.ControlValueChanged, ucrInputFormat.ControlValueChanged, ucrInputOrigin.ControlValueChanged
+        ucrReceiverForDate.RemoveIncludedMetadataProperty("class")
         If rdoDefaultFormat.Checked Then
             grpFormats.Hide()
             cmdHelp.Visible = False
@@ -399,7 +400,6 @@ Public Class dlgMakeDate
             cmdHelp.Visible = False
             ucrReceiverForDate.SetIncludedDataTypes({"numeric"})
         Else
-            ucrReceiverForDate.SetIncludedDataTypes({"numeric", "character", "factor", "integer"})
             grpFormats.Show()
             cmdHelp.Visible = True
         End If

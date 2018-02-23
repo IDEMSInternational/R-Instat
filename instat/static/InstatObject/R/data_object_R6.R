@@ -6,7 +6,7 @@ data_object <- R6::R6Class("data_object",
                                                  imported_from = "", 
                                                  messages = TRUE, convert=TRUE, create = TRUE, 
                                                  start_point=1, filters = list(), objects = list(),
-                                                 calculations = list(), keys = list(), keep_attributes = TRUE)
+                                                 calculations = list(), keys = list(), comments = list(), keep_attributes = TRUE)
 {
   # Set up the data object
   self$set_data(data, messages)
@@ -29,6 +29,7 @@ data_object <- R6::R6Class("data_object",
   self$set_objects(objects)
   self$set_calculations(calculations)
   self$set_keys(keys)
+  self$set_comments(comments)
   
   # If no name for the data.frame has been given in the list we create a default one.
   # Decide how to choose default name index
@@ -56,6 +57,7 @@ data_object <- R6::R6Class("data_object",
                            filters = list(),
                            objects = list(),
                            keys = list(),
+                           comments = list(),
                            calculations = list(),
                            changes = list(), 
                            .current_filter = list(),
@@ -204,9 +206,16 @@ data_object$set("public", "set_calculations", function(new_calculations) {
 )
 
 data_object$set("public", "set_keys", function(new_keys) {
-  if(!is.list(new_keys)) stop("new_objects must be of type: list")
+  if(!is.list(new_keys)) stop("new_keys must be of type: list")
   self$append_to_changes(list(Set_property, "keys"))  
   private$keys <- new_keys
+}
+)
+
+data_object$set("public", "set_comments", function(new_comments) {
+  if(!is.list(new_comments)) stop("new_comments must be of type: list")
+  self$append_to_changes(list(Set_property, "comments"))  
+  private$comments <- new_comments
 }
 )
 
@@ -288,7 +297,16 @@ data_object$set("public", "get_data_frame", function(convert_to_character = FALS
       }
     }
     if(!missing(max_cols) && max_cols < ncol(out)) out <- out[1:max_cols]
-    if(!missing(max_rows) && max_rows < nrow(out)) out <- out[1:max_rows, ]
+    if(!missing(max_rows) && max_rows < nrow(out)) {
+      #for data frames with 1 col use slice because out[1:max_rows, ] will return a vector
+      if(ncol(out) == 1){
+        rnames <- row.names(out)[1:max_rows]
+        out <- as.data.frame(dplyr::slice(out,1:max_rows))
+        row.names(out) <- rnames
+      } else { 
+        out <- out[1:max_rows, ]  
+      }
+    } 
     if(convert_to_character) {
       decimal_places = self$get_variables_metadata(property = signif_figures_label, column = names(out), error_if_no_property = FALSE)
       decimal_places[is.na(decimal_places)] <- 0
@@ -819,6 +837,9 @@ data_object$set("public", "append_to_metadata", function(property, new_value = "
   attr(private$data, property) <- new_value
   self$append_to_changes(list(Added_metadata, property, new_value))
   self$metadata_changed <- TRUE
+  # Not sure this is correct way to ensure unhidden data frames appear.
+  # Possibly better to modify the Grid Link
+  if(property == is_hidden_label) self$data_changed <- TRUE
 }
 )
 
@@ -876,6 +897,7 @@ data_object$set("public", "is_variables_metadata", function(str, col, return_vec
 
 data_object$set("public", "add_defaults_meta", function() {
   if(!self$is_metadata(is_calculated_label)) self$append_to_metadata(is_calculated_label, FALSE)
+  if(!self$is_metadata(is_hidden_label)) self$append_to_metadata(is_hidden_label, FALSE)
   if(!self$is_metadata(label_label)) self$append_to_metadata(label_label, "")
 }
 )
@@ -1524,7 +1546,7 @@ data_object$set("public", "filter_string", function(filter_name) {
   out = "("
   i = 1
   for(condition in curr_filter$filter_conditions) {
-    if(i != 1) out = paste(out, "&&")
+    if(i != 1) out = paste(out, "&")
     out = paste0(out, " (", condition[["column"]], " ", condition[["operation"]])
     if(condition[["operation"]] == "%in%") out = paste0(out, " c(", paste(paste0("'", condition[["value"]], "'"), collapse = ","), ")")
     else out = paste(out, condition[["value"]])
@@ -1591,9 +1613,9 @@ data_object$set("public", "get_objects", function(object_name, type = "", force_
 data_object$set("public", "get_object_names", function(type = "", as_list = FALSE, excluded_items = c()) {
   if(type == "") out = names(private$objects)
   else {
-    if(type == model_label) out = names(private$objects)[!sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "htmlTable") %in% class(x)))]
-    else if(type == graph_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob") %in% class(x)))]
-    else if(type == table_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("htmlTable", "data.frame") %in% class(x)))]
+    if(type == model_label) out = names(private$objects)[!sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "htmlTable", "ggmultiplot") %in% class(x)))]
+    else if(type == graph_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot") %in% class(x)))]
+    else if(type == table_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("htmlTable", "data.frame", "list") %in% class(x)))]
     else stop("type: ", type, " not recognised")
   }
   if(length(excluded_items) > 0) {
@@ -1629,15 +1651,18 @@ data_object$set("public", "reorder_objects", function(new_order) {
 }
 )
 
-data_object$set("public", "data_clone", function(include_objects = TRUE, include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_calculations = TRUE) {
+# Any data_clone method must have ... argument to ensure that when arguments are added in future this is still compatible with older versions of this code
+data_object$set("public", "data_clone", function(include_objects = TRUE, include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_calculations = TRUE, include_comments = TRUE, ...) {
   if(include_objects) new_objects <- private$objects
   else new_objects <- list()
   if(include_filters) new_filters <- lapply(private$filters, function(x) x$data_clone())
   else new_filters <- list()
   if(include_calculations) new_calculations <- lapply(private$calculations, function(x) x$data_clone())
   else new_calculations <- list()
+  if(include_comments) new_comments <- lapply(private$comments, function(x) x$data_clone())
+  else new_comments <- list()
   
-  ret <- data_object$new(data = private$data, data_name = self$get_metadata(data_name_label), filters = new_filters, objects = new_objects, calculations = new_calculations, keys = private$keys, keep_attributes = include_metadata)
+  ret <- data_object$new(data = private$data, data_name = self$get_metadata(data_name_label), filters = new_filters, objects = new_objects, calculations = new_calculations, keys = private$keys, comments = new_comments, keep_attributes = include_metadata)
   if(include_logs) ret$set_changes(private$changes)
   else ret$set_changes(list())
   if(include_filters) ret$current_filter <- self$get_current_filter()
@@ -1708,6 +1733,21 @@ data_object$set("public", "get_keys", function(key_name) {
 )
 
 data_object$set("public", "remove_key", function(key_name) {
+  if(!key_name %in% names(private$keys)) stop(key_name, " not found.")
+  private$keys[[key_name]] <- NULL
+}
+)
+
+data_object$set("public", "get_comments", function(comment_id) {
+  if(!missing(comment_id)) {
+    if(!comment_id %in% self$get_comment_ids()) stop("Could not find comment with id: ", comment_id)
+    return(private$comments[[comment_id]])
+  }
+  else return(private$comments)
+}
+)
+
+data_object$set("public", "remove_comment", function(key_name) {
   if(!key_name %in% names(private$keys)) stop(key_name, " not found.")
   private$keys[[key_name]] <- NULL
 }
@@ -1989,6 +2029,7 @@ data_object$set("public","set_contrasts_of_factor", function(col_name, new_contr
   else if(!is.character(new_contrasts)) {
     stop("New column name must be of type: character")
   }
+  if(new_contrasts == "user_defined") new_contrasts <- defined_contr_matrix
   contrasts(private$data[[col_name]]) <- new_contrasts
 }
 )
@@ -2537,7 +2578,7 @@ instat_object$set("public","define_red_flags", function(data_name, red_flags = c
 
 data_object$set("public","define_red_flags", function(red_flags = c()) {
   if(!self$is_metadata(corruption_data_label)) {
-    stop("Cannot define corruption red flags when data frame is not defined as corruption data.")
+    stop("Cannot define red flags when data frame is not defined as procurement data.")
   }
   self$append_to_variables_metadata(red_flags, corruption_red_flag_label, TRUE)
   self$append_to_variables_metadata(red_flags, corruption_index_label, TRUE)
@@ -2589,7 +2630,17 @@ data_object$set("public","get_CRI_component_column_names", function() {
 }
 )
 
-corruption_index_label
+instat_object$set("public","get_red_flag_column_names", function(data_name) {
+  self$get_data_objects(data_name)$get_red_flag_column_names()
+}
+)
+
+data_object$set("public","get_red_flag_column_names", function() {
+  include <- list(TRUE)
+  names(include) <- corruption_red_flag_label
+  return(self$get_column_names(include = include))
+}
+)
 
 instat_object$set("public","get_CRI_column_names", function(data_name) {
   self$get_data_objects(data_name)$get_CRI_column_names()
@@ -3189,17 +3240,21 @@ data_object$set("public","display_daily_graph", function(data_name, date_col = N
   year_data <- self$get_columns_from_data(year_col)
   
   graph_list <- list()
+  ngraph <- 0
   for(station_name in unique(station_data)) {
-    if(!is.null(station_col)) curr_data <- curr_data[curr_data[[station_col]] == station_name, ]
-    if(nrow(curr_data) != 0) {
-      g <- ggplot2::ggplot(data = curr_data, mapping = ggplot2::aes_(x = as.name(doy_col), y = as.name(climatic_element))) + ggplot2::geom_bar(stat  = "identity", fill = bar_colour) + ggplot2::geom_rug(data = curr_data[is.na(curr_data[[climatic_element]]), ], mapping = ggplot2::aes_(x = as.name(doy_col)), sides = "b", color = rug_colour) + ggplot2::theme_minimal() + ggplot2::coord_cartesian(ylim = c(0, upper_limit)) + ggplot2::scale_x_continuous(breaks = c(1, 32, 61, 92, 122, 153, 183, 214, 245, 275, 306, 336, 367), labels = c(month.abb, ""), limits = c(0, 367)) + facet_wrap(facets = as.formula(paste("~", year_col))) + ggplot2::ggtitle(paste(ifelse(station_name == 1, "", station_name), "Daily", climatic_element)) + ggplot2::theme(panel.grid.minor = element_blank(), plot.title = element_text(hjust = 0.5, size = 20), axis.title = element_text(size = 16)) + xlab("Date") + ylab(climatic_element) + ggplot2::theme(axis.text.x=ggplot2::element_text(angle=90))
-      if(any(curr_data[[climatic_element]] > upper_limit, na.rm = TRUE)) {
-        g <- g + ggplot2::geom_text(data = curr_data[curr_data[[climatic_element]] > upper_limit, ], mapping = ggplot2::aes_(y = upper_limit, label = as.name(climatic_element)), size = 3)
+    print(station_name)
+    if(!is.null(station_col)) curr_graph_data <- curr_data[curr_data[[station_col]] == station_name, ]
+    else curr_graph_data <- curr_data
+    if(nrow(curr_graph_data) != 0) {
+      g <- ggplot2::ggplot(data = curr_graph_data, mapping = ggplot2::aes_(x = as.name(doy_col), y = as.name(climatic_element))) + ggplot2::geom_bar(stat  = "identity", fill = bar_colour) + ggplot2::geom_rug(data = curr_graph_data[is.na(curr_graph_data[[climatic_element]]), ], mapping = ggplot2::aes_(x = as.name(doy_col)), sides = "b", color = rug_colour) + ggplot2::theme_minimal() + ggplot2::coord_cartesian(ylim = c(0, upper_limit)) + ggplot2::scale_x_continuous(breaks = c(1, 32, 61, 92, 122, 153, 183, 214, 245, 275, 306, 336, 367), labels = c(month.abb, ""), limits = c(0, 367)) + facet_wrap(facets = as.formula(paste("~", year_col))) + ggplot2::ggtitle(paste(ifelse(station_name == 1, "", station_name), "Daily", climatic_element)) + ggplot2::theme(panel.grid.minor = element_blank(), plot.title = element_text(hjust = 0.5, size = 20), axis.title = element_text(size = 16)) + xlab("Date") + ylab(climatic_element) + ggplot2::theme(axis.text.x=ggplot2::element_text(angle=90))
+      if(any(curr_graph_data[[climatic_element]] > upper_limit, na.rm = TRUE)) {
+        g <- g + ggplot2::geom_text(data = curr_graph_data[curr_graph_data[[climatic_element]] > upper_limit, ], mapping = ggplot2::aes_(y = upper_limit, label = as.name(climatic_element)), size = 3)
       }
+      ngraph <- ngraph + 1
+      graph_list[[length(graph_list) + 1]] <- g
     }
-    graph_list[[length(graph_list) + 1]] <- g
   }
-  if(length(graph_list) > 1) return(gridExtra::grid.arrange(grobs = graph_list))
+  if(ngraph > 1) return(gridExtra::grid.arrange(grobs = graph_list))
   else return(g)
 }
 )

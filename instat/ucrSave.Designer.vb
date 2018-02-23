@@ -38,6 +38,7 @@ Partial Class ucrSave
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrSave))
         Me.ucrChkSave = New instat.ucrCheck()
         Me.lblSaveText = New System.Windows.Forms.Label()
         Me.ucrInputComboSave = New instat.ucrInputComboBox()
@@ -47,49 +48,38 @@ Partial Class ucrSave
         'ucrChkSave
         '
         Me.ucrChkSave.Checked = False
-        Me.ucrChkSave.Location = New System.Drawing.Point(0, 0)
+        resources.ApplyResources(Me.ucrChkSave, "ucrChkSave")
         Me.ucrChkSave.Name = "ucrChkSave"
-        Me.ucrChkSave.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkSave.TabIndex = 0
         '
         'lblSaveText
         '
-        Me.lblSaveText.AutoSize = True
-        Me.lblSaveText.Location = New System.Drawing.Point(0, 3)
+        resources.ApplyResources(Me.lblSaveText, "lblSaveText")
         Me.lblSaveText.Name = "lblSaveText"
-        Me.lblSaveText.Size = New System.Drawing.Size(39, 13)
-        Me.lblSaveText.TabIndex = 1
-        Me.lblSaveText.Text = "Label1"
         '
         'ucrInputComboSave
         '
-        Me.ucrInputComboSave.Dock = System.Windows.Forms.DockStyle.Right
+        Me.ucrInputComboSave.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputComboSave, "ucrInputComboSave")
         Me.ucrInputComboSave.IsReadOnly = False
-        Me.ucrInputComboSave.Location = New System.Drawing.Point(250, 0)
         Me.ucrInputComboSave.Name = "ucrInputComboSave"
-        Me.ucrInputComboSave.Size = New System.Drawing.Size(173, 24)
-        Me.ucrInputComboSave.TabIndex = 2
         '
         'ucrInputTextSave
         '
-        Me.ucrInputTextSave.Dock = System.Windows.Forms.DockStyle.Right
+        Me.ucrInputTextSave.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputTextSave, "ucrInputTextSave")
         Me.ucrInputTextSave.IsMultiline = False
         Me.ucrInputTextSave.IsReadOnly = False
-        Me.ucrInputTextSave.Location = New System.Drawing.Point(77, 0)
         Me.ucrInputTextSave.Name = "ucrInputTextSave"
-        Me.ucrInputTextSave.Size = New System.Drawing.Size(173, 24)
-        Me.ucrInputTextSave.TabIndex = 3
         '
         'ucrSave
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ucrInputTextSave)
         Me.Controls.Add(Me.ucrInputComboSave)
         Me.Controls.Add(Me.lblSaveText)
         Me.Controls.Add(Me.ucrChkSave)
         Me.Name = "ucrSave"
-        Me.Size = New System.Drawing.Size(423, 24)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

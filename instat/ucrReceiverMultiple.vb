@@ -424,7 +424,6 @@ Public Class ucrReceiverMultiple
 
     Public Sub CheckSingleType()
         Dim strVariableTypes As List(Of String)
-        Dim strVarType As String
 
         If bSingleType Then
             If (Not IsEmpty()) Then
@@ -461,4 +460,8 @@ Public Class ucrReceiverMultiple
     Private Sub ucrReceiverMultiple_SelectionChanged(sender As Object, e As EventArgs) Handles Me.SelectionChanged
         CheckSingleType()
     End Sub
+
+    Public Overrides Function GetItemsDataFrames() As List(Of String)
+        Return GetCurrGroupNames()
+    End Function
 End Class

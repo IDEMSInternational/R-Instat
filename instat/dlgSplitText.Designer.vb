@@ -38,6 +38,7 @@ Partial Class dlgSplitText
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgSplitText))
         Me.lblSelectedFactor = New System.Windows.Forms.Label()
         Me.lblSplitBy = New System.Windows.Forms.Label()
         Me.lblNumberofPiecesToReturn = New System.Windows.Forms.Label()
@@ -54,135 +55,94 @@ Partial Class dlgSplitText
         '
         'lblSelectedFactor
         '
-        Me.lblSelectedFactor.AutoSize = True
-        Me.lblSelectedFactor.Location = New System.Drawing.Point(252, 77)
+        resources.ApplyResources(Me.lblSelectedFactor, "lblSelectedFactor")
         Me.lblSelectedFactor.Name = "lblSelectedFactor"
-        Me.lblSelectedFactor.Size = New System.Drawing.Size(80, 13)
-        Me.lblSelectedFactor.TabIndex = 4
         Me.lblSelectedFactor.Tag = "Selected_Factor"
-        Me.lblSelectedFactor.Text = "Column to Split:"
         '
         'lblSplitBy
         '
-        Me.lblSplitBy.AutoSize = True
-        Me.lblSplitBy.Location = New System.Drawing.Point(252, 123)
+        resources.ApplyResources(Me.lblSplitBy, "lblSplitBy")
         Me.lblSplitBy.Name = "lblSplitBy"
-        Me.lblSplitBy.Size = New System.Drawing.Size(44, 13)
-        Me.lblSplitBy.TabIndex = 6
         Me.lblSplitBy.Tag = ""
-        Me.lblSplitBy.Text = "Split by:"
         '
         'lblNumberofPiecesToReturn
         '
-        Me.lblNumberofPiecesToReturn.AutoSize = True
-        Me.lblNumberofPiecesToReturn.Location = New System.Drawing.Point(252, 170)
+        resources.ApplyResources(Me.lblNumberofPiecesToReturn, "lblNumberofPiecesToReturn")
         Me.lblNumberofPiecesToReturn.Name = "lblNumberofPiecesToReturn"
-        Me.lblNumberofPiecesToReturn.Size = New System.Drawing.Size(141, 13)
-        Me.lblNumberofPiecesToReturn.TabIndex = 8
         Me.lblNumberofPiecesToReturn.Tag = "Number_of_Pieces_to_Return"
-        Me.lblNumberofPiecesToReturn.Text = "Number of Pieces to Return:"
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 259)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 11
         '
         'rdoTextComponents
         '
-        Me.rdoTextComponents.Appearance = System.Windows.Forms.Appearance.Button
+        resources.ApplyResources(Me.rdoTextComponents, "rdoTextComponents")
         Me.rdoTextComponents.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoTextComponents.FlatAppearance.BorderSize = 2
         Me.rdoTextComponents.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoTextComponents.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoTextComponents.Location = New System.Drawing.Point(82, 12)
         Me.rdoTextComponents.Name = "rdoTextComponents"
-        Me.rdoTextComponents.Size = New System.Drawing.Size(125, 27)
-        Me.rdoTextComponents.TabIndex = 1
         Me.rdoTextComponents.TabStop = True
-        Me.rdoTextComponents.Text = "Into Text Components"
-        Me.rdoTextComponents.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoTextComponents.UseVisualStyleBackColor = True
         '
         'rdoBinaryColumns
         '
-        Me.rdoBinaryColumns.Appearance = System.Windows.Forms.Appearance.Button
+        resources.ApplyResources(Me.rdoBinaryColumns, "rdoBinaryColumns")
         Me.rdoBinaryColumns.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoBinaryColumns.FlatAppearance.BorderSize = 2
         Me.rdoBinaryColumns.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoBinaryColumns.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoBinaryColumns.Location = New System.Drawing.Point(205, 12)
         Me.rdoBinaryColumns.Name = "rdoBinaryColumns"
-        Me.rdoBinaryColumns.Size = New System.Drawing.Size(125, 27)
-        Me.rdoBinaryColumns.TabIndex = 2
         Me.rdoBinaryColumns.TabStop = True
-        Me.rdoBinaryColumns.Text = "Into Binary Columns"
-        Me.rdoBinaryColumns.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoBinaryColumns.UseVisualStyleBackColor = True
         '
         'ucrPnlSplitText
         '
-        Me.ucrPnlSplitText.Location = New System.Drawing.Point(38, 8)
+        resources.ApplyResources(Me.ucrPnlSplitText, "ucrPnlSplitText")
         Me.ucrPnlSplitText.Name = "ucrPnlSplitText"
-        Me.ucrPnlSplitText.Size = New System.Drawing.Size(309, 36)
-        Me.ucrPnlSplitText.TabIndex = 0
         '
         'ucrSaveColumn
         '
-        Me.ucrSaveColumn.Location = New System.Drawing.Point(10, 232)
+        resources.ApplyResources(Me.ucrSaveColumn, "ucrSaveColumn")
         Me.ucrSaveColumn.Name = "ucrSaveColumn"
-        Me.ucrSaveColumn.Size = New System.Drawing.Size(305, 24)
-        Me.ucrSaveColumn.TabIndex = 10
         '
         'ucrNudPieces
         '
         Me.ucrNudPieces.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPieces.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPieces.Location = New System.Drawing.Point(252, 185)
+        resources.ApplyResources(Me.ucrNudPieces, "ucrNudPieces")
         Me.ucrNudPieces.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudPieces.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPieces.Name = "ucrNudPieces"
-        Me.ucrNudPieces.Size = New System.Drawing.Size(44, 20)
-        Me.ucrNudPieces.TabIndex = 9
         Me.ucrNudPieces.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrInputPattern
         '
         Me.ucrInputPattern.AddQuotesIfUnrecognised = True
         Me.ucrInputPattern.IsReadOnly = False
-        Me.ucrInputPattern.Location = New System.Drawing.Point(252, 138)
+        resources.ApplyResources(Me.ucrInputPattern, "ucrInputPattern")
         Me.ucrInputPattern.Name = "ucrInputPattern"
-        Me.ucrInputPattern.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputPattern.TabIndex = 7
         '
         'ucrReceiverSplitTextColumn
         '
         Me.ucrReceiverSplitTextColumn.frmParent = Me
-        Me.ucrReceiverSplitTextColumn.Location = New System.Drawing.Point(252, 92)
-        Me.ucrReceiverSplitTextColumn.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverSplitTextColumn, "ucrReceiverSplitTextColumn")
         Me.ucrReceiverSplitTextColumn.Name = "ucrReceiverSplitTextColumn"
         Me.ucrReceiverSplitTextColumn.Selector = Nothing
-        Me.ucrReceiverSplitTextColumn.Size = New System.Drawing.Size(137, 20)
         Me.ucrReceiverSplitTextColumn.strNcFilePath = ""
-        Me.ucrReceiverSplitTextColumn.TabIndex = 5
         Me.ucrReceiverSplitTextColumn.ucrSelector = Nothing
         '
         'ucrSelectorSplitTextColumn
         '
         Me.ucrSelectorSplitTextColumn.bShowHiddenColumns = False
         Me.ucrSelectorSplitTextColumn.bUseCurrentFilter = True
-        Me.ucrSelectorSplitTextColumn.Location = New System.Drawing.Point(10, 42)
-        Me.ucrSelectorSplitTextColumn.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorSplitTextColumn, "ucrSelectorSplitTextColumn")
         Me.ucrSelectorSplitTextColumn.Name = "ucrSelectorSplitTextColumn"
-        Me.ucrSelectorSplitTextColumn.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorSplitTextColumn.TabIndex = 3
         '
         'dlgSplitText
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(418, 316)
         Me.Controls.Add(Me.rdoTextComponents)
         Me.Controls.Add(Me.rdoBinaryColumns)
         Me.Controls.Add(Me.ucrPnlSplitText)
@@ -199,9 +159,7 @@ Partial Class dlgSplitText
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgSplitText"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Split_Text_Column"
-        Me.Text = "Split Text Column"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

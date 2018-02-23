@@ -475,15 +475,15 @@ Public Class dlgOneVarFitModel
 
     Public Sub DataTypeAccepted()
         If rdoGeneralCase.Checked Then
-            ucrReceiverVariable.SetIncludedDataTypes({"integer", "numeric", "character", "factor"})
+            ucrReceiverVariable.RemoveIncludedMetadataProperty("class")
         ElseIf rdoExactCase.Checked Then
             If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" Then
-                ucrReceiverVariable.SetIncludedDataTypes({"integer", "numeric"})
+                ucrReceiverVariable.SetIncludedDataTypes({"numeric"})
                 If (ucrReceiverVariable.strCurrDataType = "factor" OrElse ucrReceiverVariable.strCurrDataType = "character") Then
                     ucrReceiverVariable.Clear()
                 End If
             Else
-                ucrReceiverVariable.SetIncludedDataTypes({"integer", "numeric", "character", "factor"})
+                ucrReceiverVariable.RemoveIncludedMetadataProperty("class")
             End If
         End If
     End Sub

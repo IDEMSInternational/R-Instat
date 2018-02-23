@@ -38,6 +38,7 @@ Partial Class dlgAddLink
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgAddLink))
         Me.cmdSpecifyLink = New System.Windows.Forms.Button()
         Me.lblLinkName = New System.Windows.Forms.Label()
         Me.lblFrom = New System.Windows.Forms.Label()
@@ -54,56 +55,35 @@ Partial Class dlgAddLink
         '
         'cmdSpecifyLink
         '
-        Me.cmdSpecifyLink.Location = New System.Drawing.Point(287, 171)
+        resources.ApplyResources(Me.cmdSpecifyLink, "cmdSpecifyLink")
         Me.cmdSpecifyLink.Name = "cmdSpecifyLink"
-        Me.cmdSpecifyLink.Size = New System.Drawing.Size(121, 23)
-        Me.cmdSpecifyLink.TabIndex = 6
-        Me.cmdSpecifyLink.Text = "Specify Link"
         Me.cmdSpecifyLink.UseVisualStyleBackColor = True
         '
         'lblLinkName
         '
-        Me.lblLinkName.AutoSize = True
-        Me.lblLinkName.Location = New System.Drawing.Point(10, 239)
+        resources.ApplyResources(Me.lblLinkName, "lblLinkName")
         Me.lblLinkName.Name = "lblLinkName"
-        Me.lblLinkName.Size = New System.Drawing.Size(61, 13)
-        Me.lblLinkName.TabIndex = 9
-        Me.lblLinkName.Text = "Link Name:"
         '
         'lblFrom
         '
-        Me.lblFrom.AutoSize = True
-        Me.lblFrom.Location = New System.Drawing.Point(10, 10)
+        resources.ApplyResources(Me.lblFrom, "lblFrom")
         Me.lblFrom.Name = "lblFrom"
-        Me.lblFrom.Size = New System.Drawing.Size(33, 13)
-        Me.lblFrom.TabIndex = 0
-        Me.lblFrom.Text = "From:"
         '
         'lblTo
         '
-        Me.lblTo.AutoSize = True
-        Me.lblTo.Location = New System.Drawing.Point(10, 76)
+        resources.ApplyResources(Me.lblTo, "lblTo")
         Me.lblTo.Name = "lblTo"
-        Me.lblTo.Size = New System.Drawing.Size(23, 13)
-        Me.lblTo.TabIndex = 2
-        Me.lblTo.Text = "To:"
         '
         'lblKeys
         '
-        Me.lblKeys.AutoSize = True
-        Me.lblKeys.Location = New System.Drawing.Point(168, 30)
+        resources.ApplyResources(Me.lblKeys, "lblKeys")
         Me.lblKeys.Name = "lblKeys"
-        Me.lblKeys.Size = New System.Drawing.Size(33, 13)
-        Me.lblKeys.TabIndex = 4
-        Me.lblKeys.Text = "Keys:"
         '
         'lvwLinkViewBox
         '
         Me.lvwLinkViewBox.FullRowSelect = True
-        Me.lvwLinkViewBox.Location = New System.Drawing.Point(168, 45)
+        resources.ApplyResources(Me.lvwLinkViewBox, "lvwLinkViewBox")
         Me.lvwLinkViewBox.Name = "lvwLinkViewBox"
-        Me.lvwLinkViewBox.Size = New System.Drawing.Size(240, 123)
-        Me.lvwLinkViewBox.TabIndex = 5
         Me.lvwLinkViewBox.UseCompatibleStateImageBehavior = False
         Me.lvwLinkViewBox.View = System.Windows.Forms.View.Details
         '
@@ -112,60 +92,43 @@ Partial Class dlgAddLink
         Me.ucrInputLinkName.AddQuotesIfUnrecognised = True
         Me.ucrInputLinkName.IsMultiline = False
         Me.ucrInputLinkName.IsReadOnly = False
-        Me.ucrInputLinkName.Location = New System.Drawing.Point(92, 235)
+        resources.ApplyResources(Me.ucrInputLinkName, "ucrInputLinkName")
         Me.ucrInputLinkName.Name = "ucrInputLinkName"
-        Me.ucrInputLinkName.Size = New System.Drawing.Size(316, 21)
-        Me.ucrInputLinkName.TabIndex = 10
         '
         'ucrDataSelectorTo
         '
         Me.ucrDataSelectorTo.bUseCurrentFilter = True
-        Me.ucrDataSelectorTo.Location = New System.Drawing.Point(15, 92)
-        Me.ucrDataSelectorTo.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrDataSelectorTo, "ucrDataSelectorTo")
         Me.ucrDataSelectorTo.Name = "ucrDataSelectorTo"
-        Me.ucrDataSelectorTo.Size = New System.Drawing.Size(120, 50)
-        Me.ucrDataSelectorTo.TabIndex = 3
         '
         'ucrDataSelectorFrom
         '
         Me.ucrDataSelectorFrom.bUseCurrentFilter = True
-        Me.ucrDataSelectorFrom.Location = New System.Drawing.Point(15, 26)
-        Me.ucrDataSelectorFrom.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrDataSelectorFrom, "ucrDataSelectorFrom")
         Me.ucrDataSelectorFrom.Name = "ucrDataSelectorFrom"
-        Me.ucrDataSelectorFrom.Size = New System.Drawing.Size(120, 50)
-        Me.ucrDataSelectorFrom.TabIndex = 1
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 262)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 11
         '
         'lblSelectedKey
         '
-        Me.lblSelectedKey.AutoSize = True
-        Me.lblSelectedKey.Location = New System.Drawing.Point(10, 211)
+        resources.ApplyResources(Me.lblSelectedKey, "lblSelectedKey")
         Me.lblSelectedKey.Name = "lblSelectedKey"
-        Me.lblSelectedKey.Size = New System.Drawing.Size(73, 13)
-        Me.lblSelectedKey.TabIndex = 7
-        Me.lblSelectedKey.Text = "Selected Key:"
         '
         'ucrInputSelectedKey
         '
         Me.ucrInputSelectedKey.AddQuotesIfUnrecognised = True
         Me.ucrInputSelectedKey.IsMultiline = False
         Me.ucrInputSelectedKey.IsReadOnly = True
-        Me.ucrInputSelectedKey.Location = New System.Drawing.Point(92, 208)
+        resources.ApplyResources(Me.ucrInputSelectedKey, "ucrInputSelectedKey")
         Me.ucrInputSelectedKey.Name = "ucrInputSelectedKey"
-        Me.ucrInputSelectedKey.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputSelectedKey.TabIndex = 8
         '
         'dlgAddLink
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(416, 320)
         Me.Controls.Add(Me.ucrInputSelectedKey)
         Me.Controls.Add(Me.lblSelectedKey)
         Me.Controls.Add(Me.lblKeys)
@@ -182,8 +145,6 @@ Partial Class dlgAddLink
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgAddLink"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Add Link"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

@@ -76,13 +76,12 @@ Partial Class ucrDataView
         Me.mnuFilter = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuRemoveCurrentFilter = New System.Windows.Forms.ToolStripMenuItem()
         Me.statusColumnMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.insertSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.deleteDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.renameSheet = New System.Windows.Forms.ToolStripMenuItem()
-        Me.reorderSheet = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CopySheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.HideSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.unhideSheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CopySheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.reorderSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblNoData = New System.Windows.Forms.Label()
         Me.lblRowDisplay = New System.Windows.Forms.Label()
@@ -326,15 +325,9 @@ Partial Class ucrDataView
         '
         'statusColumnMenu
         '
-        Me.statusColumnMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.insertSheet, Me.deleteDataFrame, Me.renameSheet, Me.reorderSheet, Me.CopySheet, Me.HideSheet, Me.unhideSheet, Me.ViewSheet})
+        Me.statusColumnMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.deleteDataFrame, Me.renameSheet, Me.HideSheet, Me.unhideSheet, Me.CopySheet, Me.reorderSheet, Me.ViewSheet})
         Me.statusColumnMenu.Name = "statusColumnMenu"
-        Me.statusColumnMenu.Size = New System.Drawing.Size(163, 180)
-        '
-        'insertSheet
-        '
-        Me.insertSheet.Name = "insertSheet"
-        Me.insertSheet.Size = New System.Drawing.Size(162, 22)
-        Me.insertSheet.Text = "Insert..."
+        Me.statusColumnMenu.Size = New System.Drawing.Size(163, 158)
         '
         'deleteDataFrame
         '
@@ -348,12 +341,17 @@ Partial Class ucrDataView
         Me.renameSheet.Size = New System.Drawing.Size(162, 22)
         Me.renameSheet.Text = "Rename..."
         '
-        'reorderSheet
+        'HideSheet
         '
-        Me.reorderSheet.Enabled = False
-        Me.reorderSheet.Name = "reorderSheet"
-        Me.reorderSheet.Size = New System.Drawing.Size(162, 22)
-        Me.reorderSheet.Text = "Reorder..."
+        Me.HideSheet.Name = "HideSheet"
+        Me.HideSheet.Size = New System.Drawing.Size(162, 22)
+        Me.HideSheet.Text = "Hide"
+        '
+        'unhideSheet
+        '
+        Me.unhideSheet.Name = "unhideSheet"
+        Me.unhideSheet.Size = New System.Drawing.Size(162, 22)
+        Me.unhideSheet.Text = "Unhide..."
         '
         'CopySheet
         '
@@ -361,19 +359,12 @@ Partial Class ucrDataView
         Me.CopySheet.Size = New System.Drawing.Size(162, 22)
         Me.CopySheet.Text = "Copy..."
         '
-        'HideSheet
+        'reorderSheet
         '
-        Me.HideSheet.Enabled = False
-        Me.HideSheet.Name = "HideSheet"
-        Me.HideSheet.Size = New System.Drawing.Size(162, 22)
-        Me.HideSheet.Text = "Hide"
-        '
-        'unhideSheet
-        '
-        Me.unhideSheet.Enabled = False
-        Me.unhideSheet.Name = "unhideSheet"
-        Me.unhideSheet.Size = New System.Drawing.Size(162, 22)
-        Me.unhideSheet.Text = "Unhide"
+        Me.reorderSheet.Enabled = False
+        Me.reorderSheet.Name = "reorderSheet"
+        Me.reorderSheet.Size = New System.Drawing.Size(162, 22)
+        Me.reorderSheet.Text = "Reorder..."
         '
         'ViewSheet
         '
@@ -384,7 +375,7 @@ Partial Class ucrDataView
         'lblNoData
         '
         Me.lblNoData.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblNoData.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNoData.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!)
         Me.lblNoData.Location = New System.Drawing.Point(0, 0)
         Me.lblNoData.Name = "lblNoData"
         Me.lblNoData.Size = New System.Drawing.Size(438, 238)
@@ -396,7 +387,7 @@ Partial Class ucrDataView
         'lblRowDisplay
         '
         Me.lblRowDisplay.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblRowDisplay.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblRowDisplay.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.lblRowDisplay.Location = New System.Drawing.Point(3, 264)
         Me.lblRowDisplay.Name = "lblRowDisplay"
         Me.lblRowDisplay.Size = New System.Drawing.Size(438, 20)
@@ -408,7 +399,7 @@ Partial Class ucrDataView
         '
         Me.lblHeader.BackColor = System.Drawing.Color.FromArgb(CType(CType(35, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(190, Byte), Integer))
         Me.lblHeader.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.lblHeader.ForeColor = System.Drawing.SystemColors.Control
         Me.lblHeader.Location = New System.Drawing.Point(3, 0)
         Me.lblHeader.Name = "lblHeader"
@@ -479,7 +470,6 @@ Partial Class ucrDataView
     Private WithEvents mnuInsertRowsAfter As ToolStripMenuItem
     Private WithEvents mnuDeleteRows As ToolStripMenuItem
     Friend WithEvents statusColumnMenu As ContextMenuStrip
-    Friend WithEvents insertSheet As ToolStripMenuItem
     Friend WithEvents deleteDataFrame As ToolStripMenuItem
     Friend WithEvents renameSheet As ToolStripMenuItem
     Friend WithEvents mnuColumnRename As ToolStripMenuItem
