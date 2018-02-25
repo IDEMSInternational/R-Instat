@@ -40,14 +40,16 @@ Partial Class dlgRegularSequence
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgRegularSequence))
         Me.grpSequenceDefinition = New System.Windows.Forms.GroupBox()
+        Me.ucrInputDatesBy = New instat.ucrInputTextBox()
+        Me.ucrInputComboDatesBy = New instat.ucrInputComboBox()
+        Me.ucrDateTimePickerTo = New instat.ucrDateTimePicker()
+        Me.ucrDateTimePickerFrom = New instat.ucrDateTimePicker()
         Me.ucrChkDefineAsFactor = New instat.ucrCheck()
         Me.ucrNudRepeatValues = New instat.ucrNud()
         Me.ucrInputInStepsOf = New instat.ucrInputTextBox()
         Me.ucrInputTo = New instat.ucrInputTextBox()
         Me.ucrInputFrom = New instat.ucrInputTextBox()
         Me.ucrDataFrameLengthForRegularSequence = New instat.ucrDataFrameLength()
-        Me.dtpSelectorB = New System.Windows.Forms.DateTimePicker()
-        Me.dtpSelectorA = New System.Windows.Forms.DateTimePicker()
         Me.lblLength = New System.Windows.Forms.Label()
         Me.lblTimes = New System.Windows.Forms.Label()
         Me.lblRepeatValues = New System.Windows.Forms.Label()
@@ -56,28 +58,28 @@ Partial Class dlgRegularSequence
         Me.lblFrom = New System.Windows.Forms.Label()
         Me.lblPreview = New System.Windows.Forms.Label()
         Me.txtGetPreview = New System.Windows.Forms.RichTextBox()
-        Me.grpSequenceType = New System.Windows.Forms.GroupBox()
-        Me.rdoNumeric = New System.Windows.Forms.RadioButton()
+        Me.lblMessage = New System.Windows.Forms.Label()
         Me.rdoDates = New System.Windows.Forms.RadioButton()
+        Me.rdoNumeric = New System.Windows.Forms.RadioButton()
         Me.ucrPnlSequenceType = New instat.UcrPanel()
         Me.ucrNewColumnName = New instat.ucrSave()
         Me.ucrSelectDataFrameRegularSequence = New instat.ucrDataFrame()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblMessage = New System.Windows.Forms.Label()
         Me.grpSequenceDefinition.SuspendLayout()
-        Me.grpSequenceType.SuspendLayout()
         Me.SuspendLayout()
         '
         'grpSequenceDefinition
         '
+        Me.grpSequenceDefinition.Controls.Add(Me.ucrInputDatesBy)
+        Me.grpSequenceDefinition.Controls.Add(Me.ucrInputComboDatesBy)
+        Me.grpSequenceDefinition.Controls.Add(Me.ucrDateTimePickerTo)
+        Me.grpSequenceDefinition.Controls.Add(Me.ucrDateTimePickerFrom)
         Me.grpSequenceDefinition.Controls.Add(Me.ucrChkDefineAsFactor)
         Me.grpSequenceDefinition.Controls.Add(Me.ucrNudRepeatValues)
         Me.grpSequenceDefinition.Controls.Add(Me.ucrInputInStepsOf)
         Me.grpSequenceDefinition.Controls.Add(Me.ucrInputTo)
         Me.grpSequenceDefinition.Controls.Add(Me.ucrInputFrom)
         Me.grpSequenceDefinition.Controls.Add(Me.ucrDataFrameLengthForRegularSequence)
-        Me.grpSequenceDefinition.Controls.Add(Me.dtpSelectorB)
-        Me.grpSequenceDefinition.Controls.Add(Me.dtpSelectorA)
         Me.grpSequenceDefinition.Controls.Add(Me.lblLength)
         Me.grpSequenceDefinition.Controls.Add(Me.lblTimes)
         Me.grpSequenceDefinition.Controls.Add(Me.lblRepeatValues)
@@ -89,6 +91,35 @@ Partial Class dlgRegularSequence
         Me.grpSequenceDefinition.TabStop = False
         Me.grpSequenceDefinition.Tag = "Sequence_definition"
         Me.grpSequenceDefinition.UseCompatibleTextRendering = True
+        '
+        'ucrInputDatesBy
+        '
+        Me.ucrInputDatesBy.AddQuotesIfUnrecognised = True
+        Me.ucrInputDatesBy.IsMultiline = False
+        Me.ucrInputDatesBy.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputDatesBy, "ucrInputDatesBy")
+        Me.ucrInputDatesBy.Name = "ucrInputDatesBy"
+        '
+        'ucrInputComboDatesBy
+        '
+        Me.ucrInputComboDatesBy.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboDatesBy.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComboDatesBy, "ucrInputComboDatesBy")
+        Me.ucrInputComboDatesBy.Name = "ucrInputComboDatesBy"
+        '
+        'ucrDateTimePickerTo
+        '
+        resources.ApplyResources(Me.ucrDateTimePickerTo, "ucrDateTimePickerTo")
+        Me.ucrDateTimePickerTo.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrDateTimePickerTo.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrDateTimePickerTo.Name = "ucrDateTimePickerTo"
+        '
+        'ucrDateTimePickerFrom
+        '
+        resources.ApplyResources(Me.ucrDateTimePickerFrom, "ucrDateTimePickerFrom")
+        Me.ucrDateTimePickerFrom.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrDateTimePickerFrom.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrDateTimePickerFrom.Name = "ucrDateTimePickerFrom"
         '
         'ucrChkDefineAsFactor
         '
@@ -135,16 +166,6 @@ Partial Class dlgRegularSequence
         resources.ApplyResources(Me.ucrDataFrameLengthForRegularSequence, "ucrDataFrameLengthForRegularSequence")
         Me.ucrDataFrameLengthForRegularSequence.Name = "ucrDataFrameLengthForRegularSequence"
         Me.ucrDataFrameLengthForRegularSequence.ucrDataFrameSelector = Nothing
-        '
-        'dtpSelectorB
-        '
-        resources.ApplyResources(Me.dtpSelectorB, "dtpSelectorB")
-        Me.dtpSelectorB.Name = "dtpSelectorB"
-        '
-        'dtpSelectorA
-        '
-        resources.ApplyResources(Me.dtpSelectorA, "dtpSelectorA")
-        Me.dtpSelectorA.Name = "dtpSelectorA"
         '
         'lblLength
         '
@@ -193,31 +214,33 @@ Partial Class dlgRegularSequence
         resources.ApplyResources(Me.txtGetPreview, "txtGetPreview")
         Me.txtGetPreview.Name = "txtGetPreview"
         '
-        'grpSequenceType
+        'lblMessage
         '
-        Me.grpSequenceType.Controls.Add(Me.rdoNumeric)
-        Me.grpSequenceType.Controls.Add(Me.rdoDates)
-        Me.grpSequenceType.Controls.Add(Me.ucrPnlSequenceType)
-        resources.ApplyResources(Me.grpSequenceType, "grpSequenceType")
-        Me.grpSequenceType.Name = "grpSequenceType"
-        Me.grpSequenceType.TabStop = False
-        '
-        'rdoNumeric
-        '
-        resources.ApplyResources(Me.rdoNumeric, "rdoNumeric")
-        Me.rdoNumeric.Name = "rdoNumeric"
-        Me.rdoNumeric.Tag = "Numeric"
-        Me.rdoNumeric.UseVisualStyleBackColor = True
+        Me.lblMessage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.lblMessage, "lblMessage")
+        Me.lblMessage.Name = "lblMessage"
         '
         'rdoDates
         '
         resources.ApplyResources(Me.rdoDates, "rdoDates")
+        Me.rdoDates.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDates.FlatAppearance.BorderSize = 2
+        Me.rdoDates.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoDates.Name = "rdoDates"
-        Me.rdoDates.Tag = "Dates"
         Me.rdoDates.UseVisualStyleBackColor = True
+        '
+        'rdoNumeric
+        '
+        resources.ApplyResources(Me.rdoNumeric, "rdoNumeric")
+        Me.rdoNumeric.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoNumeric.FlatAppearance.BorderSize = 2
+        Me.rdoNumeric.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoNumeric.Name = "rdoNumeric"
+        Me.rdoNumeric.UseVisualStyleBackColor = True
         '
         'ucrPnlSequenceType
         '
+        Me.ucrPnlSequenceType.AccessibleRole = System.Windows.Forms.AccessibleRole.None
         resources.ApplyResources(Me.ucrPnlSequenceType, "ucrPnlSequenceType")
         Me.ucrPnlSequenceType.Name = "ucrPnlSequenceType"
         '
@@ -237,18 +260,14 @@ Partial Class dlgRegularSequence
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'lblMessage
-        '
-        Me.lblMessage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.lblMessage, "lblMessage")
-        Me.lblMessage.Name = "lblMessage"
-        '
         'dlgRegularSequence
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.rdoNumeric)
+        Me.Controls.Add(Me.rdoDates)
+        Me.Controls.Add(Me.ucrPnlSequenceType)
         Me.Controls.Add(Me.lblMessage)
-        Me.Controls.Add(Me.grpSequenceType)
         Me.Controls.Add(Me.ucrNewColumnName)
         Me.Controls.Add(Me.txtGetPreview)
         Me.Controls.Add(Me.grpSequenceDefinition)
@@ -263,8 +282,6 @@ Partial Class dlgRegularSequence
         Me.Tag = "Entry_of_regular_sequence"
         Me.grpSequenceDefinition.ResumeLayout(False)
         Me.grpSequenceDefinition.PerformLayout()
-        Me.grpSequenceType.ResumeLayout(False)
-        Me.grpSequenceType.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -279,19 +296,20 @@ Partial Class dlgRegularSequence
     Friend WithEvents lblLength As Label
     Friend WithEvents lblTimes As Label
     Friend WithEvents lblRepeatValues As Label
-    Friend WithEvents dtpSelectorA As DateTimePicker
-    Friend WithEvents dtpSelectorB As DateTimePicker
     Friend WithEvents txtGetPreview As RichTextBox
     Friend WithEvents ucrDataFrameLengthForRegularSequence As ucrDataFrameLength
     Friend WithEvents ucrNewColumnName As ucrSave
-    Friend WithEvents grpSequenceType As GroupBox
-    Friend WithEvents rdoNumeric As RadioButton
-    Friend WithEvents rdoDates As RadioButton
-    Friend WithEvents ucrPnlSequenceType As UcrPanel
     Friend WithEvents ucrInputInStepsOf As ucrInputTextBox
     Friend WithEvents ucrInputTo As ucrInputTextBox
     Friend WithEvents ucrInputFrom As ucrInputTextBox
     Friend WithEvents ucrNudRepeatValues As ucrNud
     Friend WithEvents ucrChkDefineAsFactor As ucrCheck
     Friend WithEvents lblMessage As Label
+    Friend WithEvents ucrPnlSequenceType As UcrPanel
+    Friend WithEvents rdoDates As RadioButton
+    Friend WithEvents rdoNumeric As RadioButton
+    Friend WithEvents ucrDateTimePickerTo As ucrDateTimePicker
+    Friend WithEvents ucrDateTimePickerFrom As ucrDateTimePicker
+    Friend WithEvents ucrInputComboDatesBy As ucrInputComboBox
+    Friend WithEvents ucrInputDatesBy As ucrInputTextBox
 End Class
