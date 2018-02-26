@@ -35,15 +35,17 @@ Public Class dlgHypothesisTestsCalculator
         ucrReceiverMultiple.Selector = ucrSelectorColumn
         ucrReceiverForTestColumn.SetMeAsReceiver()
         ucrChkShowArguments.SetText("Show Arguments")
-        ucrChkSaveTestObject.SetText("Save test object")
         ucrChkBy.SetText("By")
         ucrBase.clsRsyntax.SetCommandString("")
-        ucrSaveResultInto.SetItemsTypeAsColumns()
-        ucrSaveResultInto.SetDefaultTypeAsColumn()
-        ucrSaveResultInto.SetDataFrameSelector(ucrSelectorColumn.ucrAvailableDataFrames)
+        ucrSaveResult.SetPrefix("Test")
+        ucrSaveResult.SetIsComboBox()
+        ucrSaveResult.SetSaveTypeAsModel()
+        ucrSaveResult.SetCheckBoxText("Save test object")
+        ucrSaveResult.SetDataFrameSelector(ucrSelectorColumn.ucrAvailableDataFrames)
         ucrSelectorColumn.Reset()
-        ucrSaveResultInto.SetValidationTypeAsRVariable()
 
+        ucrInputComboRPackage.SetItems({"Stats"})
+        ucrInputComboRPackage.SetDropDownStyleAsNonEditable()
         'Tooltips for conf & and Alt Buttons
         tpConf.SetToolTip(btnConf, "The confidence level can be changed for some tests to 0.9 or 0.99 etc")
         tpAlt.SetToolTip(btnAlt, " For some hypotheses the alternative hypothesis is two sided by default, but can be changed to ""greater"" or ""less""")
@@ -51,18 +53,16 @@ Public Class dlgHypothesisTestsCalculator
         ucrChkBy.Enabled = False
         ucrReceiverMultiple.Enabled = False
         ucrChkBy.AddToLinkedControls(ucrReceiverMultiple, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkSaveTestObject.AddToLinkedControls(ucrSaveResultInto, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Private Sub SetDefaults()
         ucrSelectorColumn.Reset()
         ucrReceiverForTestColumn.SetMeAsReceiver()
-        ucrBase.clsRsyntax.SetAssignTo(ucrSaveResultInto.GetText(), strTempModel:=ucrSaveResultInto.GetText())
+        ucrBase.clsRsyntax.SetAssignTo(ucrSaveResult.GetText(), strTempModel:=ucrSaveResult.GetText(), strTempDataframe:=ucrSelectorColumn.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 2
-        ucrSaveResultInto.SetPrefix("Test")
         ucrChkShowArguments.Checked = False
-        ucrChkSaveTestObject.Checked = False
+        ucrInputComboRPackage.SetName("Stats")
         clsAttach.SetRCommand("attach")
         clsDetach.SetRCommand("detach")
         clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorColumn.ucrAvailableDataFrames.clsCurrDataFrame)
@@ -88,6 +88,7 @@ Public Class dlgHypothesisTestsCalculator
         clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorColumn.ucrAvailableDataFrames.clsCurrDataFrame)
         strFunc = clsAttach.ToScript(strScript)
         frmMain.clsRLink.RunScript(strScript & strFunc)
+        ucrBase.clsRsyntax.SetAssignTo(ucrSaveResult.GetText(), strTempModel:=ucrSaveResult.GetText(), strTempDataframe:=ucrSelectorColumn.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
