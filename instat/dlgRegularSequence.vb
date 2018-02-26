@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Imports RDotNet
 
@@ -129,6 +128,8 @@ Public Class dlgRegularSequence
         clsSeqDateFunction.SetRCommand("seq.Date")
         'clsSeqDateFunction.AddParameter("length.out", ucrSelectDataFrameRegularSequence.iDataFrameLength, iPosition:=3)
         clsSeqDateFunction.AddParameter("by", Chr(34) & ucrInputDatesBy.GetText & " " & ucrInputComboDatesBy.cboInput.SelectedItem & Chr(34), iPosition:=2)
+        clsSeqDateFunction.AddParameter("from", "as.Date(x=""2018/1/1"")", iPosition:=0)
+        clsSeqDateFunction.AddParameter("to", "as.Date(x=""2018/1/1"")", iPosition:=1)
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnName.GetText, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
         ucrBase.clsRsyntax.SetBaseRFunction(clsRepFunction)
     End Sub

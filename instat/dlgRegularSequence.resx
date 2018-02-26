@@ -523,7 +523,7 @@
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="grpSequenceDefinition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 113</value>
+    <value>10, 111</value>
   </data>
   <data name="grpSequenceDefinition.Size" type="System.Drawing.Size, System.Drawing">
     <value>219, 184</value>
@@ -553,7 +553,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>222, 80</value>
+    <value>237, 80</value>
   </data>
   <data name="lblPreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 13</value>
@@ -637,7 +637,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoDates.Location" type="System.Drawing.Point, System.Drawing">
-    <value>229, 12</value>
+    <value>212, 12</value>
   </data>
   <data name="rdoDates.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 28</value>
@@ -673,7 +673,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoNumeric.Location" type="System.Drawing.Point, System.Drawing">
-    <value>130, 12</value>
+    <value>113, 12</value>
   </data>
   <data name="rdoNumeric.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 28</value>
@@ -700,7 +700,7 @@
     <value>0</value>
   </data>
   <data name="ucrPnlSequenceType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>103, 7</value>
+    <value>86, 7</value>
   </data>
   <data name="ucrPnlSequenceType.Size" type="System.Drawing.Size, System.Drawing">
     <value>256, 46</value>
@@ -742,7 +742,7 @@
     <value>4</value>
   </data>
   <data name="ucrSelectDataFrameRegularSequence.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 66</value>
+    <value>10, 59</value>
   </data>
   <data name="ucrSelectDataFrameRegularSequence.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
