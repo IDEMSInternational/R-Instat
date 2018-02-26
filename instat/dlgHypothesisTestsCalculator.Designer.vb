@@ -66,8 +66,10 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdPairwiset = New System.Windows.Forms.Button()
         Me.cmdMauchly = New System.Windows.Forms.Button()
         Me.lblRpackage = New System.Windows.Forms.Label()
-        Me.ucrChkSaveTestObject = New instat.ucrCheck()
-        Me.ucrSaveResultInto = New instat.ucrInputComboBox()
+        Me.tpConf = New System.Windows.Forms.ToolTip(Me.components)
+        Me.tpAlt = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ucrSaveResult = New instat.ucrSave()
+        Me.ucrInputComboRPackage = New instat.ucrInputComboBox()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputTryMessage = New instat.ucrInputTextBox()
         Me.ucrChkBy = New instat.ucrCheck()
@@ -75,9 +77,6 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrSelectorColumn = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrChkShowArguments = New instat.ucrCheck()
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
-        Me.tpConf = New System.Windows.Forms.ToolTip(Me.components)
-        Me.tpAlt = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ucrInputComboRPackage = New instat.ucrInputComboBox()
         Me.grpMainKeyboard.SuspendLayout()
         Me.grpTests.SuspendLayout()
         Me.SuspendLayout()
@@ -603,23 +602,21 @@ Partial Class dlgHypothesisTestsCalculator
         Me.lblRpackage.TabIndex = 168
         Me.lblRpackage.Text = "R package:"
         '
-        'ucrChkSaveTestObject
+        'ucrSaveResult
         '
-        Me.ucrChkSaveTestObject.Checked = False
-        Me.ucrChkSaveTestObject.Location = New System.Drawing.Point(19, 400)
-        Me.ucrChkSaveTestObject.Name = "ucrChkSaveTestObject"
-        Me.ucrChkSaveTestObject.Size = New System.Drawing.Size(135, 20)
-        Me.ucrChkSaveTestObject.TabIndex = 180
+        Me.ucrSaveResult.Location = New System.Drawing.Point(10, 385)
+        Me.ucrSaveResult.Name = "ucrSaveResult"
+        Me.ucrSaveResult.Size = New System.Drawing.Size(255, 24)
+        Me.ucrSaveResult.TabIndex = 182
         '
-        'ucrSaveResultInto
+        'ucrInputComboRPackage
         '
-        Me.ucrSaveResultInto.AddQuotesIfUnrecognised = True
-        Me.ucrSaveResultInto.IsReadOnly = False
-        Me.ucrSaveResultInto.Location = New System.Drawing.Point(157, 398)
-        Me.ucrSaveResultInto.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.ucrSaveResultInto.Name = "ucrSaveResultInto"
-        Me.ucrSaveResultInto.Size = New System.Drawing.Size(253, 22)
-        Me.ucrSaveResultInto.TabIndex = 179
+        Me.ucrInputComboRPackage.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboRPackage.IsReadOnly = False
+        Me.ucrInputComboRPackage.Location = New System.Drawing.Point(317, 51)
+        Me.ucrInputComboRPackage.Name = "ucrInputComboRPackage"
+        Me.ucrInputComboRPackage.Size = New System.Drawing.Size(123, 21)
+        Me.ucrInputComboRPackage.TabIndex = 181
         '
         'ucrBase
         '
@@ -689,23 +686,13 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrReceiverForTestColumn.TabIndex = 157
         Me.ucrReceiverForTestColumn.ucrSelector = Nothing
         '
-        'ucrInputComboRPackage
-        '
-        Me.ucrInputComboRPackage.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboRPackage.IsReadOnly = False
-        Me.ucrInputComboRPackage.Location = New System.Drawing.Point(317, 51)
-        Me.ucrInputComboRPackage.Name = "ucrInputComboRPackage"
-        Me.ucrInputComboRPackage.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputComboRPackage.TabIndex = 181
-        '
         'dlgHypothesisTestsCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(677, 487)
+        Me.Controls.Add(Me.ucrSaveResult)
         Me.Controls.Add(Me.ucrInputComboRPackage)
-        Me.Controls.Add(Me.ucrChkSaveTestObject)
-        Me.Controls.Add(Me.ucrSaveResultInto)
         Me.Controls.Add(Me.lblRpackage)
         Me.Controls.Add(Me.grpTests)
         Me.Controls.Add(Me.ucrBase)
@@ -775,14 +762,13 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents cmdPropTrend As Button
     Friend WithEvents cmdWilcox As Button
     Friend WithEvents lblRpackage As Label
-    Friend WithEvents ucrSaveResultInto As ucrInputComboBox
     Friend WithEvents btnProp As Button
     Friend WithEvents btnPoisson As Button
     Friend WithEvents btnT As Button
     Friend WithEvents btnWilcox As Button
     Friend WithEvents btnClear As Button
-    Friend WithEvents ucrChkSaveTestObject As ucrCheck
     Friend WithEvents tpConf As ToolTip
     Friend WithEvents tpAlt As ToolTip
     Friend WithEvents ucrInputComboRPackage As ucrInputComboBox
+    Friend WithEvents ucrSaveResult As ucrSave
 End Class
