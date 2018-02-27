@@ -26,12 +26,7 @@ Public Class sdgSummaries
 
     Private Sub sdgDescribe_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        If Not bEnable2VariableTab Then
-            tbTwoVariables.Enabled = False
-        Else
-            tbTwoVariables.Enabled = True
-        End If
-
+        tbTwoVariables.Enabled = bEnable2VariableTab
     End Sub
 
     Public Sub InitialiseControls()
