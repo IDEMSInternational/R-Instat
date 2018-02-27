@@ -48,15 +48,14 @@ Partial Class dlgDisplayDailyData
         Me.lblDayOfTheYear = New System.Windows.Forms.Label()
         Me.lblYaxisUpper = New System.Windows.Forms.Label()
         Me.grpGraph = New System.Windows.Forms.GroupBox()
-        Me.lblRugColor = New System.Windows.Forms.Label()
-        Me.lblBarColour = New System.Windows.Forms.Label()
-        Me.lblMonStat = New System.Windows.Forms.Label()
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrInputRugColour = New instat.ucrInputComboBox()
+        Me.lblRugColor = New System.Windows.Forms.Label()
         Me.ucrInputBarColour = New instat.ucrInputComboBox()
+        Me.lblBarColour = New System.Windows.Forms.Label()
         Me.ucrNudUpperYaxis = New instat.ucrNud()
+        Me.lblMonStat = New System.Windows.Forms.Label()
         Me.ucrInputComboMonStat = New instat.ucrInputComboBox()
-        Me.ucrReceiverElements = New instat.ucrReceiverMultiple()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDayOfYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
@@ -70,6 +69,9 @@ Partial Class dlgDisplayDailyData
         Me.ucrInputComboTrace = New instat.ucrInputComboBox()
         Me.ucrInputComboMissing = New instat.ucrInputComboBox()
         Me.ucrInputComboZero = New instat.ucrInputComboBox()
+        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
+        Me.ucrReceiverMultipleElements = New instat.ucrReceiverMultiple()
+        Me.lblElements = New System.Windows.Forms.Label()
         Me.grpGraph.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -136,21 +138,6 @@ Partial Class dlgDisplayDailyData
         Me.grpGraph.Name = "grpGraph"
         Me.grpGraph.TabStop = False
         '
-        'lblRugColor
-        '
-        resources.ApplyResources(Me.lblRugColor, "lblRugColor")
-        Me.lblRugColor.Name = "lblRugColor"
-        '
-        'lblBarColour
-        '
-        resources.ApplyResources(Me.lblBarColour, "lblBarColour")
-        Me.lblBarColour.Name = "lblBarColour"
-        '
-        'lblMonStat
-        '
-        resources.ApplyResources(Me.lblMonStat, "lblMonStat")
-        Me.lblMonStat.Name = "lblMonStat"
-        '
         'ucrSaveGraph
         '
         resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
@@ -163,12 +150,22 @@ Partial Class dlgDisplayDailyData
         resources.ApplyResources(Me.ucrInputRugColour, "ucrInputRugColour")
         Me.ucrInputRugColour.Name = "ucrInputRugColour"
         '
+        'lblRugColor
+        '
+        resources.ApplyResources(Me.lblRugColor, "lblRugColor")
+        Me.lblRugColor.Name = "lblRugColor"
+        '
         'ucrInputBarColour
         '
         Me.ucrInputBarColour.AddQuotesIfUnrecognised = True
         Me.ucrInputBarColour.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputBarColour, "ucrInputBarColour")
         Me.ucrInputBarColour.Name = "ucrInputBarColour"
+        '
+        'lblBarColour
+        '
+        resources.ApplyResources(Me.lblBarColour, "lblBarColour")
+        Me.lblBarColour.Name = "lblBarColour"
         '
         'ucrNudUpperYaxis
         '
@@ -180,21 +177,17 @@ Partial Class dlgDisplayDailyData
         Me.ucrNudUpperYaxis.Name = "ucrNudUpperYaxis"
         Me.ucrNudUpperYaxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
+        'lblMonStat
+        '
+        resources.ApplyResources(Me.lblMonStat, "lblMonStat")
+        Me.lblMonStat.Name = "lblMonStat"
+        '
         'ucrInputComboMonStat
         '
         Me.ucrInputComboMonStat.AddQuotesIfUnrecognised = True
         Me.ucrInputComboMonStat.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputComboMonStat, "ucrInputComboMonStat")
         Me.ucrInputComboMonStat.Name = "ucrInputComboMonStat"
-        '
-        'ucrReceiverElements
-        '
-        Me.ucrReceiverElements.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverElements, "ucrReceiverElements")
-        Me.ucrReceiverElements.Name = "ucrReceiverElements"
-        Me.ucrReceiverElements.Selector = Nothing
-        Me.ucrReceiverElements.strNcFilePath = ""
-        Me.ucrReceiverElements.ucrSelector = Nothing
         '
         'ucrReceiverYear
         '
@@ -288,10 +281,36 @@ Partial Class dlgDisplayDailyData
         resources.ApplyResources(Me.ucrInputComboZero, "ucrInputComboZero")
         Me.ucrInputComboZero.Name = "ucrInputComboZero"
         '
+        'ucrReceiverElement
+        '
+        Me.ucrReceiverElement.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverElement, "ucrReceiverElement")
+        Me.ucrReceiverElement.Name = "ucrReceiverElement"
+        Me.ucrReceiverElement.Selector = Nothing
+        Me.ucrReceiverElement.strNcFilePath = ""
+        Me.ucrReceiverElement.ucrSelector = Nothing
+        '
+        'ucrReceiverMultipleElements
+        '
+        Me.ucrReceiverMultipleElements.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverMultipleElements, "ucrReceiverMultipleElements")
+        Me.ucrReceiverMultipleElements.Name = "ucrReceiverMultipleElements"
+        Me.ucrReceiverMultipleElements.Selector = Nothing
+        Me.ucrReceiverMultipleElements.strNcFilePath = ""
+        Me.ucrReceiverMultipleElements.ucrSelector = Nothing
+        '
+        'lblElements
+        '
+        resources.ApplyResources(Me.lblElements, "lblElements")
+        Me.lblElements.Name = "lblElements"
+        '
         'dlgDisplayDailyData
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblElements)
+        Me.Controls.Add(Me.ucrReceiverMultipleElements)
+        Me.Controls.Add(Me.ucrReceiverElement)
         Me.Controls.Add(Me.grpGraph)
         Me.Controls.Add(Me.ucrInputComboZero)
         Me.Controls.Add(Me.ucrInputComboMissing)
@@ -301,7 +320,6 @@ Partial Class dlgDisplayDailyData
         Me.Controls.Add(Me.ucrChkTrace)
         Me.Controls.Add(Me.lblMonStat)
         Me.Controls.Add(Me.ucrInputComboMonStat)
-        Me.Controls.Add(Me.ucrReceiverElements)
         Me.Controls.Add(Me.ucrReceiverYear)
         Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.lblDate)
@@ -335,7 +353,6 @@ Partial Class dlgDisplayDailyData
     Friend WithEvents lblStation As Label
     Friend WithEvents ucrReceiverStations As ucrReceiverSingle
     Friend WithEvents lblElement As Label
-    Friend WithEvents ucrReceiverElements As ucrReceiverMultiple
     Friend WithEvents lblYaxisUpper As Label
     Friend WithEvents ucrReceiverDayOfYear As ucrReceiverSingle
     Friend WithEvents lblDayOfTheYear As Label
@@ -358,4 +375,7 @@ Partial Class dlgDisplayDailyData
     Friend WithEvents ucrInputComboZero As ucrInputComboBox
     Friend WithEvents ucrInputComboMissing As ucrInputComboBox
     Friend WithEvents ucrInputComboTrace As ucrInputComboBox
+    Friend WithEvents ucrReceiverElement As ucrReceiverSingle
+    Friend WithEvents ucrReceiverMultipleElements As ucrReceiverMultiple
+    Friend WithEvents lblElements As Label
 End Class
