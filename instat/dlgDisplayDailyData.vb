@@ -77,8 +77,6 @@ Public Class dlgDisplayDailyData
         ucrReceiverElement.SetParameter(New RParameter("climatic_element", 1))
         ucrReceiverElement.SetParameterIsString()
         ucrReceiverElement.Selector = ucrSelectorDisplayDailyClimaticData
-        ucrReceiverElement.SetClimaticType("rain")
-        ucrReceiverElement.bAutoFill = True
 
         ucrReceiverMultipleElements.SetParameter(New RParameter("climatic_element", 1))
         ucrReceiverMultipleElements.SetParameterIsString()
