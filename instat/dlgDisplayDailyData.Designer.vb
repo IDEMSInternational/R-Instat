@@ -70,6 +70,8 @@ Partial Class dlgDisplayDailyData
         Me.ucrInputComboMissing = New instat.ucrInputComboBox()
         Me.ucrInputComboZero = New instat.ucrInputComboBox()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
+        Me.ucrReceiverMultipleElements = New instat.ucrReceiverMultiple()
+        Me.lblElements = New System.Windows.Forms.Label()
         Me.grpGraph.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -288,10 +290,26 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverElement.strNcFilePath = ""
         Me.ucrReceiverElement.ucrSelector = Nothing
         '
+        'ucrReceiverMultipleElements
+        '
+        Me.ucrReceiverMultipleElements.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverMultipleElements, "ucrReceiverMultipleElements")
+        Me.ucrReceiverMultipleElements.Name = "ucrReceiverMultipleElements"
+        Me.ucrReceiverMultipleElements.Selector = Nothing
+        Me.ucrReceiverMultipleElements.strNcFilePath = ""
+        Me.ucrReceiverMultipleElements.ucrSelector = Nothing
+        '
+        'lblElements
+        '
+        resources.ApplyResources(Me.lblElements, "lblElements")
+        Me.lblElements.Name = "lblElements"
+        '
         'dlgDisplayDailyData
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblElements)
+        Me.Controls.Add(Me.ucrReceiverMultipleElements)
         Me.Controls.Add(Me.ucrReceiverElement)
         Me.Controls.Add(Me.grpGraph)
         Me.Controls.Add(Me.ucrInputComboZero)
@@ -358,4 +376,6 @@ Partial Class dlgDisplayDailyData
     Friend WithEvents ucrInputComboMissing As ucrInputComboBox
     Friend WithEvents ucrInputComboTrace As ucrInputComboBox
     Friend WithEvents ucrReceiverElement As ucrReceiverSingle
+    Friend WithEvents ucrReceiverMultipleElements As ucrReceiverMultiple
+    Friend WithEvents lblElements As Label
 End Class
