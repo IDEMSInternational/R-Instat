@@ -74,9 +74,16 @@ Public Class dlgDisplayDailyData
         ucrReceiverDayOfYear.SetClimaticType("doy")
         ucrReceiverDayOfYear.bAutoFill = True
 
-        ucrReceiverElements.SetParameter(New RParameter("climatic_element", 1))
-        ucrReceiverElements.SetParameterIsString()
-        ucrReceiverElements.Selector = ucrSelectorDisplayDailyClimaticData
+        ucrReceiverElement.SetParameter(New RParameter("climatic_element", 1))
+        ucrReceiverElement.SetParameterIsString()
+        ucrReceiverElement.Selector = ucrSelectorDisplayDailyClimaticData
+        ucrReceiverElement.SetClimaticType("rain")
+        ucrReceiverElement.bAutoFill = True
+
+        ucrReceiverMultipleElements.SetParameter(New RParameter("climatic_element", 1))
+        ucrReceiverMultipleElements.SetParameterIsString()
+        ucrReceiverMultipleElements.Selector = ucrSelectorDisplayDailyClimaticData
+
 
         ucrNudUpperYaxis.SetParameter(New RParameter("upper_limit", 9))
         ucrNudUpperYaxis.SetMinMax(0, Integer.MaxValue)
@@ -98,19 +105,22 @@ Public Class dlgDisplayDailyData
         ucrInputRugColour.SetItems(dctRugColour)
 
         ucrInputComboMonStat.SetParameter(New RParameter("monstats", 8))
-        dctSummary.Add("min", Chr(34) & "min" & Chr(34))
-        dctSummary.Add("mean", Chr(34) & "mean" & Chr(34))
-        dctSummary.Add("median", Chr(34) & "median" & Chr(34))
-        dctSummary.Add("max", Chr(34) & "max" & Chr(34))
+        dctSummary.Add("Sum", Chr(34) & "sum" & Chr(34))
+        dctSummary.Add("Max", Chr(34) & "max" & Chr(34))
+        dctSummary.Add("Min", Chr(34) & "min" & Chr(34))
+        dctSummary.Add("Mean", Chr(34) & "mean" & Chr(34))
+        dctSummary.Add("Median", Chr(34) & "median" & Chr(34))
         dctSummary.Add("IQR", Chr(34) & "IQR" & Chr(34))
-        dctSummary.Add("sum", Chr(34) & "sum" & Chr(34))
         ucrInputComboMonStat.SetItems(dctSummary)
+        ucrInputComboMonStat.bAllowNonConditionValues = True
 
         ucrChkMissing.SetParameter(ucrInputComboMissing.GetParameter)
         ucrChkMissing.AddParameterPresentCondition(True, "Misscode")
         ucrChkMissing.AddParameterPresentCondition(False, "Misscode", False)
         ucrChkMissing.SetText("Missing Values")
         ucrInputComboMissing.SetParameter(New RParameter("Misscode", 5))
+        dctMissingvalues.Add("M", Chr(34) & "M" & Chr(34))
+        dctMissingvalues.Add("NA", Chr(34) & "NA" & Chr(34))
         dctMissingvalues.Add("-", Chr(34) & "-" & Chr(34))
         ucrInputComboMissing.SetItems(dctMissingvalues)
         ucrInputComboMissing.bAllowNonConditionValues = True
@@ -145,16 +155,16 @@ Public Class dlgDisplayDailyData
         ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoGraph, frmMain.clsRLink.strInstatDataObject & "$display_daily_graph")
         ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoTable, frmMain.clsRLink.strInstatDataObject & "$display_daily_table")
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrNudUpperYaxis, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=100)
-        'ucrPnlFrequencyDisplay.AddToLinkedControls(ucrReceiverDayOfYear, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrReceiverMultipleElements, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=100)
+        ucrReceiverMultipleElements.SetLinkedDisplayControl(lblElements)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrInputComboMonStat, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboMissing, ucrChkMissing}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboTrace, ucrChkTrace}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboZero, ucrChkZero}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkMissing.AddToLinkedControls({ucrInputComboMissing}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkTrace.AddToLinkedControls({ucrInputComboTrace}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkZero.AddToLinkedControls({ucrInputComboZero}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkTrace.AddToLinkedControls({ucrInputComboTrace}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="tr")
+        ucrChkZero.AddToLinkedControls({ucrInputComboZero}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="--")
         ucrInputComboMonStat.SetLinkedDisplayControl(lblMonStat)
-        'ucrReceiverDayOfYear.SetLinkedDisplayControl(lblDayOfTheYear)
         ucrNudUpperYaxis.SetLinkedDisplayControl(grpGraph)
     End Sub
 
@@ -170,16 +180,13 @@ Public Class dlgDisplayDailyData
         clsDisplayDailyGraphFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_graph")
         clsDisplayDailyTable.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$display_daily_table")
         clsDisplayDailyTable.AddParameter("monstats", Chr(34) & "sum" & Chr(34), iPosition:=8)
-        clsDisplayDailyTable.AddParameter("Misscode", Chr(34) & "-" & Chr(34), iPosition:=5)
-        clsDisplayDailyTable.AddParameter("Tracecode", Chr(34) & "tr" & Chr(34), iPosition:=6)
-        clsDisplayDailyTable.AddParameter("Zerocode", Chr(34) & "--" & Chr(34), iPosition:=7)
+        clsDisplayDailyTable.AddParameter("Misscode", Chr(34) & "M" & Chr(34), iPosition:=5)
         clsDisplayDailyGraphFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$display_daily_graph")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDisplayDailyTable)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverYear.AddAdditionalCodeParameterPair(clsDisplayDailyTable, New RParameter("year_col", 3), iAdditionalPairNo:=1)
-        ucrReceiverElements.AddAdditionalCodeParameterPair(clsDisplayDailyTable, New RParameter("climatic_element", 1), iAdditionalPairNo:=1)
         ucrReceiverStations.AddAdditionalCodeParameterPair(clsDisplayDailyTable, New RParameter("station_col", 4), iAdditionalPairNo:=1)
         'ucrSelectorDisplayDailyClimaticData.AddAdditionalCodeParameterPair(clsDisplayDailyTable, New RParameter("data_name", 0), iAdditionalPairNo:=1)
         ucrReceiverDate.AddAdditionalCodeParameterPair(clsDisplayDailyTable, New RParameter("date_col", 2), iAdditionalPairNo:=1)
@@ -199,15 +206,16 @@ Public Class dlgDisplayDailyData
         ucrInputRugColour.SetRCode(clsDisplayDailyGraphFunction, bReset)
         ucrInputBarColour.SetRCode(clsDisplayDailyGraphFunction, bReset)
         ucrNudUpperYaxis.SetRCode(clsDisplayDailyGraphFunction, bReset)
-        ucrReceiverElements.SetRCode(clsDisplayDailyGraphFunction, bReset)
+        ucrReceiverElement.SetRCode(clsDisplayDailyTable, bReset)
+        ucrReceiverMultipleElements.SetRCode(clsDisplayDailyGraphFunction, bReset)
         ucrSaveGraph.SetRCode(clsDisplayDailyGraphFunction, bReset)
         ucrPnlFrequencyDisplay.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        If rdoGraph.Checked AndAlso (Not ucrReceiverDate.IsEmpty OrElse Not ucrReceiverDayOfYear.IsEmpty OrElse Not ucrReceiverStations.IsEmpty) AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty AndAlso ucrNudUpperYaxis.GetText <> "" AndAlso Not ucrInputRugColour.IsEmpty AndAlso Not ucrInputBarColour.IsEmpty Then
+        If rdoGraph.Checked AndAlso (Not ucrReceiverDate.IsEmpty OrElse Not ucrReceiverDayOfYear.IsEmpty OrElse Not ucrReceiverStations.IsEmpty) AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverMultipleElements.IsEmpty AndAlso ucrNudUpperYaxis.GetText <> "" AndAlso Not ucrInputRugColour.IsEmpty AndAlso Not ucrInputBarColour.IsEmpty Then
             ucrBase.OKEnabled(True)
-        ElseIf rdoTable.Checked AndAlso Not ucrReceiverElements.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty Then
+        ElseIf rdoTable.Checked AndAlso Not ucrReceiverElement.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -234,7 +242,7 @@ Public Class dlgDisplayDailyData
         clsDisplayDailyGraphFunction.AddParameter("data_name", Chr(34) & ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
     End Sub
 
-    Private Sub ucrReceiverDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverStations.ControlContentsChanged, ucrReceiverDayOfYear.ControlContentsChanged, ucrNudUpperYaxis.ControlContentsChanged, ucrInputRugColour.ControlContentsChanged, ucrInputBarColour.ControlContentsChanged, ucrPnlFrequencyDisplay.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged
+    Private Sub ucrReceiverDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverStations.ControlContentsChanged, ucrReceiverDayOfYear.ControlContentsChanged, ucrNudUpperYaxis.ControlContentsChanged, ucrInputRugColour.ControlContentsChanged, ucrInputBarColour.ControlContentsChanged, ucrPnlFrequencyDisplay.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverMultipleElements.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
