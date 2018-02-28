@@ -73,8 +73,9 @@ Public Class dlgRegularSequence
 
         ucrPnlSequenceType.AddRadioButton(rdoNumeric)
         ucrPnlSequenceType.AddRadioButton(rdoDates)
-        ucrPnlSequenceType.AddFunctionNamesCondition(rdoNumeric, {"seq", "rep"})
-        ucrPnlSequenceType.AddParameterValuesCondition(rdoDates, "from", "as.Date(x=""2018/1/1"")")
+
+        ucrPnlSequenceType.AddParameterValueFunctionNamesCondition(rdoNumeric, "from", "as.Date", False)
+        ucrPnlSequenceType.AddParameterValueFunctionNamesCondition(rdoDates, "from", "as.Date")
 
         ucrPnlSequenceType.AddToLinkedControls(ucrInputFrom, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrPnlSequenceType.AddToLinkedControls(ucrInputTo, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=ucrSelectDataFrameRegularSequence.iDataFrameLength)
@@ -111,7 +112,7 @@ Public Class dlgRegularSequence
 
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnName.GetText, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
         SetFromToByParameters()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsRepFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSeqFunction)
     End Sub
 
     Private Sub SetFromToByParameters()
