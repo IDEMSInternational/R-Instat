@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Imports RDotNet
 
@@ -56,23 +55,33 @@ Public Class dlgRegularSequence
         ucrNudRepeatValues.SetParameter(New RParameter("each", 1))
         ucrNudRepeatValues.SetMinMax(1, Integer.MaxValue)
 
+        ucrDateTimePickerFrom.SetParameter(New RParameter("from", 0))
+        ucrDateTimePickerFrom.SetParameterIsRDate()
+
+        ucrDateTimePickerTo.SetParameter(New RParameter("to", 1))
+        ucrDateTimePickerTo.SetParameterIsRDate()
+
+        ucrInputComboDatesBy.SetParameter(New RParameter("right", 1, bNewIncludeArgumentName:=False))
+        Dim dctBy As New Dictionary(Of String, String)
+        dctBy.Add("day", "day")
+        dctBy.Add("week", "week")
+        dctBy.Add("month", "month")
+        dctBy.Add("year", "year")
+        ucrInputComboDatesBy.SetItems(dctBy)
+
         ucrDataFrameLengthForRegularSequence.SetDataFrameSelector(ucrSelectDataFrameRegularSequence)
 
         ucrPnlSequenceType.AddRadioButton(rdoNumeric)
         ucrPnlSequenceType.AddRadioButton(rdoDates)
-        ucrPnlSequenceType.AddFunctionNamesCondition(rdoNumeric, {"seq", "rep"})
-        'ucrPnlSequenceType.AddFunctionNamesCondition(rdoDates, "as.date")
 
-        ucrPnlSequenceType.AddToLinkedControls(ucrInputFrom, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputFrom.SetLinkedDisplayControl(lblFrom)
-        ucrPnlSequenceType.AddToLinkedControls(ucrInputTo, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputTo.SetLinkedDisplayControl(lblTo)
-        ucrPnlSequenceType.AddToLinkedControls(ucrInputInStepsOf, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
-        ucrInputInStepsOf.SetLinkedDisplayControl(lblInStepsOf)
-        ucrPnlSequenceType.AddToLinkedControls(ucrNudRepeatValues, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrNudRepeatValues.SetLinkedDisplayControl(lblRepeatValues)
-        'ucrPnlSequenceType.AddToLinkedControls(dtpSelectorA, {rdoDates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrPnlSequenceType.AddToLinkedControls(dtpSelectorB, {rdoDates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlSequenceType.AddParameterValueFunctionNamesCondition(rdoNumeric, "from", "as.Date", False)
+        ucrPnlSequenceType.AddParameterValueFunctionNamesCondition(rdoDates, "from", "as.Date")
+
+        ucrPnlSequenceType.AddToLinkedControls(ucrInputFrom, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrPnlSequenceType.AddToLinkedControls(ucrInputTo, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=ucrSelectDataFrameRegularSequence.iDataFrameLength)
+        ucrPnlSequenceType.AddToLinkedControls(ucrDateTimePickerFrom, {rdoDates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="as.Date(x=""2018/1/1"")")
+        ucrPnlSequenceType.AddToLinkedControls(ucrDateTimePickerTo, {rdoDates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="as.Date(x=""2018/1/1"")")
+        ucrPnlSequenceType.AddToLinkedControls(ucrInputComboDatesBy, {rdoDates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="day")
 
         ucrNewColumnName.SetPrefix("Regular")
         ucrNewColumnName.SetDataFrameSelector(ucrSelectDataFrameRegularSequence)
@@ -80,15 +89,11 @@ Public Class dlgRegularSequence
         ucrNewColumnName.SetSaveTypeAsColumn()
         ucrNewColumnName.SetLabelText("New Column Name:")
 
-        'TODO complete dates option
-        dtpSelectorB.Visible = False
-        dtpSelectorA.Visible = False
         ucrChkDefineAsFactor.SetText("Define As Factor")
         CheckSequenceLength()
 
         'Temporarily disabled
         ucrChkDefineAsFactor.Enabled = False
-        rdoDates.Enabled = False
     End Sub
 
     Private Sub SetDefaults()
@@ -97,18 +102,33 @@ Public Class dlgRegularSequence
         ucrSelectDataFrameRegularSequence.Reset()
         ucrNewColumnName.Reset()
 
+        ucrInputComboDatesBy.SetName("day")
         clsSeqFunction.SetRCommand("seq")
-        clsSeqFunction.AddParameter("from", 1)
-        clsSeqFunction.AddParameter("to", ucrSelectDataFrameRegularSequence.iDataFrameLength)
-        clsSeqFunction.AddParameter("by", 1)
 
         clsRepFunction.SetRCommand("rep")
-        clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsSeqFunction)
-        clsRepFunction.AddParameter("each", 1)
+        clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsSeqFunction, iPosition:=0)
+        clsRepFunction.AddParameter("each", 1, iPosition:=2)
         clsRepFunction.AddParameter("length.out", ucrSelectDataFrameRegularSequence.iDataFrameLength, iPosition:=3)
 
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnName.GetText, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsRepFunction)
+        SetFromToByParameters()
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSeqFunction)
+    End Sub
+
+    Private Sub SetFromToByParameters()
+        If rdoNumeric.Checked Then
+            clsSeqFunction.AddParameter("from", 1, iPosition:=0)
+            clsSeqFunction.AddParameter("to", ucrSelectDataFrameRegularSequence.iDataFrameLength, iPosition:=1)
+            clsSeqFunction.AddParameter("by", 1, iPosition:=2)
+        Else
+            clsSeqFunction.AddParameter("from", "as.Date(x=""2018/1/1"")", iPosition:=0)
+            clsSeqFunction.AddParameter("to", "as.Date(x=""2018/1/1"")", iPosition:=1)
+            clsSeqFunction.AddParameter("by", Chr(34) & ucrInputInStepsOf.GetText & " " & ucrInputComboDatesBy.cboInput.SelectedItem & Chr(34), iPosition:=2)
+        End If
+    End Sub
+
+    Private Sub ucrPnlSequenceType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSequenceType.ControlValueChanged
+        SetFromToByParameters()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -118,6 +138,8 @@ Public Class dlgRegularSequence
         bUpdateBy = False
         'Set to base function so that control is set correctly
         'After then set to nothing so that updating is done manually
+        ucrDateTimePickerFrom.SetRCode(clsSeqFunction, bReset)
+        ucrDateTimePickerTo.SetRCode(clsSeqFunction, bReset)
         ucrNewColumnName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrNewColumnName.SetRCode(Nothing, bReset:=False, bUpdate:=False)
         ucrPnlSequenceType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
@@ -156,7 +178,7 @@ Public Class dlgRegularSequence
                 Else
                     ucrBase.OKEnabled(False)
                 End If
-            ElseIf rdoDates.Checked Then
+            ElseIf rdoDates.Checked AndAlso Not ucrInputInStepsOf.IsEmpty AndAlso Not ucrInputComboDatesBy.IsEmpty Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
@@ -191,20 +213,10 @@ Public Class dlgRegularSequence
             ucrBase.clsRsyntax.SetBaseRFunction(clsSeqFunction)
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsRepFunction)
-            clsSeqFunction.RemoveAssignTo()
+            'clsSeqFunction.RemoveAssignTo()
         End If
         SetAssignTo()
     End Sub
-
-    'Private Sub dtpSelectorA_ValueChanged(sender As Object, e As EventArgs) Handles dtpSelectorA.ValueChanged
-    '    ucrBase.clsRsyntax.AddParameter("from", "as.Date('" & Format(dtpSelectorA.Value, "yyyy/MM/dd") & "')")
-    '    CheckSequenceLength()
-    'End Sub
-
-    'Private Sub dtpSelectorB_ValueChanged(sender As Object, e As EventArgs) Handles dtpSelectorB.ValueChanged
-    '    ucrBase.clsRsyntax.AddParameter("to", "as.Date('" & Format(dtpSelectorB.Value, "yyyy/MM/dd") & "')")
-    '    CheckSequenceLength()
-    'End Sub
 
     Private Sub CheckSequenceLength()
         Dim iLength As Integer
@@ -225,7 +237,7 @@ Public Class dlgRegularSequence
             iLength = vecSequence.Length
             If iLength <> ucrSelectDataFrameRegularSequence.iDataFrameLength Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsRepFunction)
-                clsSeqFunction.RemoveAssignTo()
+                'clsSeqFunction.RemoveAssignTo()
                 clsRepFunction.AddParameter("length.out", ucrSelectDataFrameRegularSequence.iDataFrameLength, iPosition:=3)
                 strRCommand = ucrBase.clsRsyntax.clsBaseFunction.ToScript()
                 bIsAssigned = False
@@ -266,14 +278,10 @@ Public Class dlgRegularSequence
         CheckSequenceLength()
     End Sub
 
-    Private Sub ucrInputFrom_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFrom.ControlValueChanged, ucrInputTo.ControlValueChanged, ucrInputInStepsOf.ControlValueChanged
+    Private Sub ucrInputFrom_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFrom.ControlValueChanged, ucrInputTo.ControlValueChanged, ucrInputInStepsOf.ControlValueChanged
         If bUpdateBy Then
             SetInStepsOfParameter()
         End If
-    End Sub
-
-    Private Sub ucrNewColumnName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlContentsChanged, ucrInputTo.ControlContentsChanged, ucrInputFrom.ControlContentsChanged, ucrInputInStepsOf.ControlContentsChanged, ucrPnlSequenceType.ControlContentsChanged, ucrSelectDataFrameRegularSequence.ControlContentsChanged, ucrInputFrom.ControlContentsChanged, ucrInputTo.ControlContentsChanged, ucrInputInStepsOf.ControlContentsChanged, ucrNudRepeatValues.ControlContentsChanged
-        TestOKEnabled()
     End Sub
 
     Private Sub ucrNewColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlValueChanged
@@ -281,10 +289,18 @@ Public Class dlgRegularSequence
     End Sub
 
     Private Sub SetAssignTo()
-        If ucrNewColumnName.GetText() <> "" AndAlso ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text <> "" Then
+        If ucrNewColumnName.IsComplete AndAlso ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text <> "" Then
             ucrBase.clsRsyntax.SetAssignTo(ucrNewColumnName.GetText(), strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText())
         Else
             ucrBase.clsRsyntax.RemoveAssignTo()
         End If
+    End Sub
+
+    Private Sub ucrInputComboDatesBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboDatesBy.ControlValueChanged
+        SetFromToByParameters()
+    End Sub
+
+    Private Sub ucrNewColumnName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlContentsChanged, ucrInputTo.ControlContentsChanged, ucrInputFrom.ControlContentsChanged, ucrInputInStepsOf.ControlContentsChanged, ucrSelectDataFrameRegularSequence.ControlContentsChanged, ucrInputFrom.ControlContentsChanged, ucrInputTo.ControlContentsChanged, ucrInputInStepsOf.ControlContentsChanged, ucrNudRepeatValues.ControlContentsChanged, ucrPnlSequenceType.ControlContentsChanged, ucrInputComboDatesBy.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
