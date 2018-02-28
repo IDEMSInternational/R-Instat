@@ -7,16 +7,19 @@ Public Class ucrDayOfYear
     Private bParameterIsNumber As Boolean = True
     Private bParameterIsString As Boolean = False
     ' If True uses 29 February is included and 31 December = 366
-    ' Otherwise 29 December is not included and 31 December = 365
+    ' Otherwise 29 February is not included and 31 December = 365
     Private b366DayOfYear As Boolean = True
     Private dtbMonths As DataTable
     Private bFirstLoad As Boolean = True
     Private strMonthsFull As String()
     Private strMonthsAbbreviated As String()
     Private bUpdate As Boolean = True
+    Private str31Days(30) As String
+    Private str30Days(29) As String
+    Private str28Days(27) As String
+    Private str29Days(28) As String
 
     Private Sub ucrDayOfYear_Load(sender As Object, e As EventArgs) Handles Me.Load
-        Dim strDays(30) As String
 
         If bFirstLoad Then
             dtbMonths = New DataTable
@@ -33,12 +36,22 @@ Public Class ucrDayOfYear
             Next
             'TODO Display/Value member should be changeable
             ucrInputMonth.SetDataSource(dtbMonths, strDisplayMember:="Full", strValueMember:="Number")
-
+            ucrInputMonth.SetDropDownStyleAsNonEditable()
             For i As Integer = 0 To 30
-                strDays(i) = i + 1
+                str31Days(i) = i + 1
+                If i < 30 Then
+                    str30Days(i) = i + 1
+                End If
+                If i < 28 Then
+                    str28Days(i) = i + 1
+                End If
+                If i < 29 Then
+                    str29Days(i) = i + 1
+                End If
             Next
-            ucrInputDay.SetItems(strDays)
+            ucrInputDay.SetItems(str31Days)
 
+            'The individual controls do not read the R code so they are not active.
             ucrInputDay.bIsActiveRControl = False
             ucrInputMonth.bIsActiveRControl = False
             bFirstLoad = False
@@ -76,14 +89,25 @@ Public Class ucrDayOfYear
     Public Function DayOfYearNumber() As Integer
         Dim iYear As Integer
         Dim dtTemp As Date
+        Dim iMonth As Integer
+        Dim iDay As Integer
 
         If b366DayOfYear Then
             iYear = 2000
         Else
             iYear = 1999
         End If
-        dtTemp = New Date(year:=iYear, month:=ucrInputMonth.GetValue() + 1, day:=ucrInputDay.GetValue())
-        Return dtTemp.DayOfYear
+        If ucrInputMonth.GetValue() IsNot Nothing AndAlso ucrInputDay.GetValue() IsNot Nothing Then
+            Try
+                If Not Integer.TryParse(ucrInputMonth.GetValue(), iMonth) AndAlso Integer.TryParse(ucrInputDay.GetValue(), iDay) Then
+                    dtTemp = New Date(year:=iYear, month:=ucrInputMonth.GetValue() + 1, day:=ucrInputDay.GetValue())
+                    Return dtTemp.DayOfYear
+                End If
+            Catch ex As Exception
+                MsgBox("Developer error: Invalid month and/or day value. For control: " & Name & ".")
+            End Try
+        End If
+        Return 1
     End Function
 
     Protected Overrides Sub SetControlValue()
@@ -115,15 +139,19 @@ Public Class ucrDayOfYear
                                 End If
                             End If
                             If Not bInvalid Then
-                                dtTemp = New Date(year:=iYear, month:=1, day:=1).AddDays(iDayOfYearNumber - 1)
-                                strDay = dtTemp.Day
-                                strMonth = dtTemp.Month
-                                bUpdate = False
-                                ucrInputDay.SetName(dtTemp.Day)
-                                'TODO this should be done through a method in ucrInputMonth
-                                ucrInputMonth.cboInput.SelectedIndex = dtTemp.Month - 1
-                                bUpdate = True
-                                UpdateAllParameters()
+                                Try
+                                    dtTemp = New Date(year:=iYear, month:=1, day:=1).AddDays(iDayOfYearNumber - 1)
+                                    strDay = dtTemp.Day
+                                    strMonth = dtTemp.Month
+                                    bUpdate = False
+                                    ucrInputDay.SetName(dtTemp.Day)
+                                    'TODO this should be done through a method in ucrInputMonth
+                                    ucrInputMonth.cboInput.SelectedIndex = dtTemp.Month - 1
+                                    bUpdate = True
+                                    UpdateAllParameters()
+                                Catch ex As Exception
+                                    bInvalid = True
+                                End Try
                             End If
                         Else
                             bInvalid = True
@@ -144,22 +172,21 @@ Public Class ucrDayOfYear
     End Sub
 
     Public Overrides Sub SetRDefault(objNewDefault As Object)
-        Dim iDefault As Integer()
+        Dim iDefault As Integer
 
         MyBase.SetRDefault(objNewDefault)
-        iDefault = TryCast(objNewDefault, Integer())
-        If Not (iDefault IsNot Nothing AndAlso iDefault.Count = 2) Then
-            MsgBox("Developer error: Cannot set the default value of control " & Me.Name & ". The default but me a list of length 2 with day and month as integer.")
+        If Integer.TryParse(objNewDefault, iDefault) Then
+            If Not (iDefault < 1 OrElse iDefault > 366 OrElse (Not b366DayOfYear AndAlso iDefault > 365)) Then
+                MsgBox("Developer error: Cannot set the default value of control " & Me.Name & ". The default must be an integer day of the year.")
+            End If
         End If
     End Sub
 
     Public Overrides Function IsRDefault() As Boolean
-        Dim iDefault As Integer()
+        Dim iDefault As Integer
 
-        iDefault = TryCast(objRDefault, Integer())
-
-        If iDefault IsNot Nothing AndAlso iDefault.Count = 2 Then
-            Return (iDefault(0) = ucrInputDay.GetText() & iDefault(1) = ucrInputMonth.GetText())
+        If Integer.TryParse(objRDefault, iDefault) Then
+            Return (iDefault = GetValue())
         Else
             Return False
         End If
@@ -188,20 +215,40 @@ Public Class ucrDayOfYear
         Dim iMonth As Integer
         Dim iDay As Integer
         Dim iMaxFebDay As Integer
+        Dim strFebDays As String()
+        Dim iMaxDay As Integer = 31
 
         If b366DayOfYear Then
             iMaxFebDay = 29
+            strFebDays = str29Days
         Else
             iMaxFebDay = 28
+            strFebDays = str28Days
         End If
+
         If Integer.TryParse(ucrInputDay.GetValue(), iDay) Then
-            If Integer.TryParse(ucrInputMonth.GetValue(), iMonth) Then
+            If Integer.TryParse(ucrInputMonth.GetValue() + 1, iMonth) Then
                 If {4, 6, 9, 11}.Contains(iMonth) AndAlso iDay = 31 Then
                     ucrInputDay.SetName(30)
                 ElseIf iMonth = 2 AndAlso iDay > iMaxFebDay Then
                     ucrInputDay.SetName(iMaxFebDay)
                 End If
+                If {4, 6, 9, 11}.Contains(iMonth) Then
+                    ucrInputDay.SetItems(str30Days)
+                    iMaxDay = 30
+                ElseIf iMonth = 2 Then
+                    ucrInputDay.SetItems(strFebDays)
+                    iMaxDay = iMaxFebDay
+                Else
+                    ucrInputDay.SetItems(str31Days)
+                    iMaxDay = 31
+                End If
             End If
         End If
+        ucrInputDay.SetValidationTypeAsNumeric(dcmMin:=1, dcmMax:=iMaxDay)
     End Sub
+
+    Public Function IsComplete() As Boolean
+        Return (ucrInputDay.GetText() <> "" AndAlso ucrInputMonth.GetText() <> "")
+    End Function
 End Class
