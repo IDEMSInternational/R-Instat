@@ -23,7 +23,7 @@ Public Class dlgSpells
     Private clsDayFromAndTo, clsGroupBy, clsAddKeyColName As New RFunction
     Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator As New ROperator
     Private clsApplyInstatFunction, clsRRainday, clsRRaindayMatch As New RFunction
-    Private clsRRaindayOperator, clsRRaindayAndOperator, clsRRaindayLowerOperator, clsRRaindayUpperOperator, clsAdditionalConditionReplaceOperator, clsAdditionalConditionReplaceOperator2 As New ROperator
+    Private clsRRaindayOperator, clsRRaindayAndOperator, clsRRaindayLowerOperator, clsRRaindayUpperOperator, clsAdditionalConditionReplaceOperator, clsAdditionalConditionReplaceOperator2, clsGreaterThanOperator, clsLessThanOperator As New ROperator
     Private clsAdditionalCondition, clsAdditionalConditionList, clsSubSpellLength2, clsAdditionalConditionReplaceFunction As New RFunction
     Private strCurrDataName As String = ""
 
@@ -101,7 +101,7 @@ Public Class dlgSpells
         ucrInputSpellUpper.SetValidationTypeAsNumeric()
         ucrInputSpellUpper.AddQuotesIfUnrecognised = False
 
-        ucrInputCondition.SetItems({"<=", "Between", ">="})
+        ucrInputCondition.SetItems({"<=", "Between", "Outer", ">="})
         ucrInputCondition.SetDropDownStyleAsNonEditable()
 
         ucrChkConditional.SetText("Conditional on Rain etc at Start of Spell")
@@ -140,6 +140,8 @@ Public Class dlgSpells
         clsAdditionalConditionReplaceFunction.Clear()
         clsAdditionalConditionReplaceOperator2.Clear()
         clsAdditionalConditionReplaceOperator.Clear()
+        clsGreaterThanOperator.Clear()
+        clsLessThanOperator.Clear()
 
         ucrSelectorForSpells.Reset()
         ucrReceiverDate.SetMeAsReceiver()
@@ -148,7 +150,7 @@ Public Class dlgSpells
 
         ' key
         clsAddKey.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
-        clsAddKey.AddParameter("col_name", clsRFunctionParameter:=clsAddKeyColName)
+        clsAddKey.AddParameter("col_names", clsRFunctionParameter:=clsAddKeyColName)
         clsAddKeyColName.SetRCommand("c")
 
         'DayFromandTo
@@ -181,14 +183,14 @@ Public Class dlgSpells
         clsRRaindayMatch.SetRCommand("match")
         clsRRaindayMatch.AddParameter("x", clsROperatorParameter:=clsRRaindayAndOperator)
         clsRRaindayAndOperator.SetOperation("&")
-        clsRRaindayAndOperator.AddParameter("lower", clsROperatorParameter:=clsRRaindayLowerOperator, iPosition:=0)
         clsRRaindayLowerOperator.SetOperation(">=")
         clsRRaindayLowerOperator.AddParameter("min", 0, iPosition:=1)
-        clsRRaindayAndOperator.AddParameter("upper", clsROperatorParameter:=clsRRaindayUpperOperator, iPosition:=0)
         clsRRaindayUpperOperator.SetOperation("<=")
         clsRRaindayUpperOperator.AddParameter("max", 0.85, iPosition:=1)
         clsRRaindayMatch.AddParameter("table", "1", iPosition:=1)
         clsRRaindayMatch.AddParameter("nomatch", "0", iPosition:=2)
+        clsGreaterThanOperator.SetOperation(">")
+        clsLessThanOperator.SetOperation("<")
 
         ' Spell Length
         clsSpellLength.SetRCommand("instat_calculation$new")
@@ -245,6 +247,11 @@ Public Class dlgSpells
         ucrNudFrom.AddAdditionalCodeParameterPair(clsAdditionalConditionReplaceOperator2, New RParameter("list", 0), iAdditionalPairNo:=1)
         ucrReceiverDOY.AddAdditionalCodeParameterPair(clsDayFromOperator, New RParameter("doy", 0), iAdditionalPairNo:=1)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsRRaindayLowerOperator, New RParameter("rain", 0), iAdditionalPairNo:=1)
+        ucrReceiverElement.AddAdditionalCodeParameterPair(clsGreaterThanOperator, New RParameter("rain", 0), iAdditionalPairNo:=2)
+        ucrReceiverElement.AddAdditionalCodeParameterPair(clsLessThanOperator, New RParameter("rain", 0), iAdditionalPairNo:=3)
+        ucrInputSpellUpper.AddAdditionalCodeParameterPair(clsGreaterThanOperator, New RParameter("left", 1), iAdditionalPairNo:=1)
+        ucrInputSpellLower.AddAdditionalCodeParameterPair(clsLessThanOperator, New RParameter("left", 1), iAdditionalPairNo:=1)
+
 
         ucrSelectorForSpells.SetRCode(clsAddKey, bReset)
         ucrReceiverStation.SetRCode(clsAddKeyColName, bReset)
@@ -295,6 +302,11 @@ Public Class dlgSpells
                 clsRRaindayAndOperator.AddParameter("upper", clsROperatorParameter:=clsRRaindayUpperOperator, iPosition:=0)
                 clsRRaindayUpperOperator.AddParameter("max", ucrInputSpellUpper.GetText, iPosition:=1)
                 clsRRaindayOperator.AddParameter("x", clsROperatorParameter:=clsRRaindayAndOperator, iPosition:=0)
+            Case "Outer"
+                ucrInputSpellUpper.Visible = True
+                clsRRaindayAndOperator.AddParameter("upper", clsROperatorParameter:=clsGreaterThanOperator, iPosition:=0)
+                clsRRaindayAndOperator.AddParameter("lower", clsROperatorParameter:=clsLessThanOperator, iPosition:=1)
+                clsRRaindayOperator.AddParameter("x", clsROperatorParameter:=clsRRaindayAndOperator, iPosition:=2)
             Case Else
                 ucrInputSpellUpper.Visible = False
                 clsRRaindayAndOperator.RemoveParameterByName("lower")

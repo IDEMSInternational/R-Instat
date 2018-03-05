@@ -2,11 +2,13 @@
     Private bFirstLoad As Boolean = True
     Private strMissingPackages() As String
     Private clsInstallPackages As New RFunction
+    Public bCloseRInstat As Boolean = False
 
     Private Sub frmPackageIssues_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
         End If
+        bCloseRInstat = False
     End Sub
 
     Private Sub InitialiseDialog()
@@ -51,6 +53,17 @@
     End Sub
 
     Private Sub cmdClose_Click(sender As Object, e As EventArgs) Handles cmdClose.Click
+        bCloseRInstat = False
         Me.Close()
+    End Sub
+
+    Private Sub cmdCloseRInstat_Click(sender As Object, e As EventArgs) Handles cmdCloseRInstat.Click
+        Dim bConfirm As DialogResult
+
+        bConfirm = MsgBox("Are you sure you want to exit R-Instat?", MessageBoxButtons.YesNo, "Exit")
+        If bConfirm = DialogResult.Yes Then
+            bCloseRInstat = True
+            Me.Close()
+        End If
     End Sub
 End Class

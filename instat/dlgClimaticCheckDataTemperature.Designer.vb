@@ -22,6 +22,7 @@ Partial Class dlgClimaticCheckDataTemperature
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgClimaticCheckDataTemperature))
         Me.lblStation = New System.Windows.Forms.Label()
         Me.lblDate = New System.Windows.Forms.Label()
@@ -29,16 +30,24 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.lblMonth = New System.Windows.Forms.Label()
         Me.lblDay = New System.Windows.Forms.Label()
         Me.lblElement1 = New System.Windows.Forms.Label()
-        Me.lblRangeElement1 = New System.Windows.Forms.Label()
-        Me.lblRangeElement2 = New System.Windows.Forms.Label()
         Me.lblRangeElement1to = New System.Windows.Forms.Label()
         Me.lblRangeElement2to = New System.Windows.Forms.Label()
-        Me.lblJumpElement1 = New System.Windows.Forms.Label()
-        Me.lblJumpElement2 = New System.Windows.Forms.Label()
         Me.lblElement2 = New System.Windows.Forms.Label()
+        Me.rdoSatelite = New System.Windows.Forms.RadioButton()
+        Me.rdoIndividual = New System.Windows.Forms.RadioButton()
+        Me.rdoMultiple = New System.Windows.Forms.RadioButton()
+        Me.lblNudSame = New System.Windows.Forms.Label()
+        Me.lblNudJump = New System.Windows.Forms.Label()
+        Me.lblNudDiff = New System.Windows.Forms.Label()
+        Me.lblNudOutlier = New System.Windows.Forms.Label()
+        Me.lblNudRangeElement1Min = New System.Windows.Forms.Label()
+        Me.lblNudRangeElement2Min = New System.Windows.Forms.Label()
+        Me.lblNudRangeElement1Max = New System.Windows.Forms.Label()
+        Me.lblNudRangeElement2Max = New System.Windows.Forms.Label()
+        Me.ttOutliers = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ucrChkRange2 = New instat.ucrCheck()
         Me.ucrReceiverElement2 = New instat.ucrReceiverSingle()
-        Me.ucrNudJumpElement2 = New instat.ucrNud()
-        Me.ucrNudJumpElement1 = New instat.ucrNud()
+        Me.ucrNudJump = New instat.ucrNud()
         Me.ucrChkRange = New instat.ucrCheck()
         Me.ucrNudSame = New instat.ucrNud()
         Me.ucrNudDifference = New instat.ucrNud()
@@ -59,6 +68,7 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrSelectorTemperature = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrPnlType = New instat.UcrPanel()
         Me.SuspendLayout()
         '
         'lblStation
@@ -91,16 +101,6 @@ Partial Class dlgClimaticCheckDataTemperature
         resources.ApplyResources(Me.lblElement1, "lblElement1")
         Me.lblElement1.Name = "lblElement1"
         '
-        'lblRangeElement1
-        '
-        resources.ApplyResources(Me.lblRangeElement1, "lblRangeElement1")
-        Me.lblRangeElement1.Name = "lblRangeElement1"
-        '
-        'lblRangeElement2
-        '
-        resources.ApplyResources(Me.lblRangeElement2, "lblRangeElement2")
-        Me.lblRangeElement2.Name = "lblRangeElement2"
-        '
         'lblRangeElement1to
         '
         resources.ApplyResources(Me.lblRangeElement1to, "lblRangeElement1to")
@@ -111,20 +111,87 @@ Partial Class dlgClimaticCheckDataTemperature
         resources.ApplyResources(Me.lblRangeElement2to, "lblRangeElement2to")
         Me.lblRangeElement2to.Name = "lblRangeElement2to"
         '
-        'lblJumpElement1
-        '
-        resources.ApplyResources(Me.lblJumpElement1, "lblJumpElement1")
-        Me.lblJumpElement1.Name = "lblJumpElement1"
-        '
-        'lblJumpElement2
-        '
-        resources.ApplyResources(Me.lblJumpElement2, "lblJumpElement2")
-        Me.lblJumpElement2.Name = "lblJumpElement2"
-        '
         'lblElement2
         '
         resources.ApplyResources(Me.lblElement2, "lblElement2")
         Me.lblElement2.Name = "lblElement2"
+        '
+        'rdoSatelite
+        '
+        resources.ApplyResources(Me.rdoSatelite, "rdoSatelite")
+        Me.rdoSatelite.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSatelite.FlatAppearance.BorderSize = 2
+        Me.rdoSatelite.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSatelite.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoSatelite.Name = "rdoSatelite"
+        Me.rdoSatelite.UseVisualStyleBackColor = True
+        '
+        'rdoIndividual
+        '
+        resources.ApplyResources(Me.rdoIndividual, "rdoIndividual")
+        Me.rdoIndividual.Cursor = System.Windows.Forms.Cursors.Default
+        Me.rdoIndividual.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoIndividual.FlatAppearance.BorderSize = 2
+        Me.rdoIndividual.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoIndividual.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.rdoIndividual.Name = "rdoIndividual"
+        Me.rdoIndividual.UseVisualStyleBackColor = True
+        '
+        'rdoMultiple
+        '
+        resources.ApplyResources(Me.rdoMultiple, "rdoMultiple")
+        Me.rdoMultiple.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMultiple.FlatAppearance.BorderSize = 2
+        Me.rdoMultiple.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMultiple.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoMultiple.Name = "rdoMultiple"
+        Me.rdoMultiple.UseVisualStyleBackColor = True
+        '
+        'lblNudSame
+        '
+        resources.ApplyResources(Me.lblNudSame, "lblNudSame")
+        Me.lblNudSame.Name = "lblNudSame"
+        '
+        'lblNudJump
+        '
+        resources.ApplyResources(Me.lblNudJump, "lblNudJump")
+        Me.lblNudJump.Name = "lblNudJump"
+        '
+        'lblNudDiff
+        '
+        resources.ApplyResources(Me.lblNudDiff, "lblNudDiff")
+        Me.lblNudDiff.Name = "lblNudDiff"
+        '
+        'lblNudOutlier
+        '
+        resources.ApplyResources(Me.lblNudOutlier, "lblNudOutlier")
+        Me.lblNudOutlier.Name = "lblNudOutlier"
+        '
+        'lblNudRangeElement1Min
+        '
+        resources.ApplyResources(Me.lblNudRangeElement1Min, "lblNudRangeElement1Min")
+        Me.lblNudRangeElement1Min.Name = "lblNudRangeElement1Min"
+        '
+        'lblNudRangeElement2Min
+        '
+        resources.ApplyResources(Me.lblNudRangeElement2Min, "lblNudRangeElement2Min")
+        Me.lblNudRangeElement2Min.Name = "lblNudRangeElement2Min"
+        '
+        'lblNudRangeElement1Max
+        '
+        resources.ApplyResources(Me.lblNudRangeElement1Max, "lblNudRangeElement1Max")
+        Me.lblNudRangeElement1Max.Name = "lblNudRangeElement1Max"
+        '
+        'lblNudRangeElement2Max
+        '
+        resources.ApplyResources(Me.lblNudRangeElement2Max, "lblNudRangeElement2Max")
+        Me.lblNudRangeElement2Max.Name = "lblNudRangeElement2Max"
+        '
+        'ucrChkRange2
+        '
+        Me.ucrChkRange2.Checked = False
+        resources.ApplyResources(Me.ucrChkRange2, "ucrChkRange2")
+        Me.ucrChkRange2.Name = "ucrChkRange2"
         '
         'ucrReceiverElement2
         '
@@ -135,25 +202,15 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.ucrReceiverElement2.strNcFilePath = ""
         Me.ucrReceiverElement2.ucrSelector = Nothing
         '
-        'ucrNudJumpElement2
+        'ucrNudJump
         '
-        Me.ucrNudJumpElement2.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudJumpElement2, "ucrNudJumpElement2")
-        Me.ucrNudJumpElement2.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudJumpElement2.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudJumpElement2.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudJumpElement2.Name = "ucrNudJumpElement2"
-        Me.ucrNudJumpElement2.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudJumpElement1
-        '
-        Me.ucrNudJumpElement1.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudJumpElement1.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudJumpElement1, "ucrNudJumpElement1")
-        Me.ucrNudJumpElement1.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudJumpElement1.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudJumpElement1.Name = "ucrNudJumpElement1"
-        Me.ucrNudJumpElement1.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudJump.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudJump.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudJump, "ucrNudJump")
+        Me.ucrNudJump.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudJump.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudJump.Name = "ucrNudJump"
+        Me.ucrNudJump.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkRange
         '
@@ -184,8 +241,8 @@ Partial Class dlgClimaticCheckDataTemperature
         'ucrNudOutlier
         '
         Me.ucrNudOutlier.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudOutlier, "ucrNudOutlier")
         Me.ucrNudOutlier.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudOutlier, "ucrNudOutlier")
         Me.ucrNudOutlier.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudOutlier.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudOutlier.Name = "ucrNudOutlier"
@@ -194,8 +251,8 @@ Partial Class dlgClimaticCheckDataTemperature
         'ucrNudRangeElement2Max
         '
         Me.ucrNudRangeElement2Max.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudRangeElement2Max, "ucrNudRangeElement2Max")
         Me.ucrNudRangeElement2Max.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudRangeElement2Max, "ucrNudRangeElement2Max")
         Me.ucrNudRangeElement2Max.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudRangeElement2Max.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRangeElement2Max.Name = "ucrNudRangeElement2Max"
@@ -210,8 +267,8 @@ Partial Class dlgClimaticCheckDataTemperature
         'ucrNudRangeElement2Min
         '
         Me.ucrNudRangeElement2Min.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudRangeElement2Min, "ucrNudRangeElement2Min")
         Me.ucrNudRangeElement2Min.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudRangeElement2Min, "ucrNudRangeElement2Min")
         Me.ucrNudRangeElement2Min.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudRangeElement2Min.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRangeElement2Min.Name = "ucrNudRangeElement2Min"
@@ -321,23 +378,35 @@ Partial Class dlgClimaticCheckDataTemperature
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrPnlType
+        '
+        resources.ApplyResources(Me.ucrPnlType, "ucrPnlType")
+        Me.ucrPnlType.Name = "ucrPnlType"
+        '
         'dlgClimaticCheckDataTemperature
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkRange2)
+        Me.Controls.Add(Me.lblNudRangeElement2Max)
+        Me.Controls.Add(Me.lblNudRangeElement1Max)
+        Me.Controls.Add(Me.lblNudRangeElement2Min)
+        Me.Controls.Add(Me.lblNudRangeElement1Min)
+        Me.Controls.Add(Me.lblNudOutlier)
+        Me.Controls.Add(Me.lblNudDiff)
+        Me.Controls.Add(Me.lblNudJump)
+        Me.Controls.Add(Me.lblNudSame)
+        Me.Controls.Add(Me.rdoSatelite)
+        Me.Controls.Add(Me.rdoIndividual)
+        Me.Controls.Add(Me.rdoMultiple)
         Me.Controls.Add(Me.lblElement2)
         Me.Controls.Add(Me.ucrReceiverElement2)
-        Me.Controls.Add(Me.lblJumpElement1)
-        Me.Controls.Add(Me.lblJumpElement2)
-        Me.Controls.Add(Me.ucrNudJumpElement2)
-        Me.Controls.Add(Me.ucrNudJumpElement1)
+        Me.Controls.Add(Me.ucrNudJump)
         Me.Controls.Add(Me.ucrChkRange)
         Me.Controls.Add(Me.lblRangeElement1to)
         Me.Controls.Add(Me.ucrNudSame)
         Me.Controls.Add(Me.lblRangeElement2to)
-        Me.Controls.Add(Me.lblRangeElement1)
         Me.Controls.Add(Me.ucrNudDifference)
-        Me.Controls.Add(Me.lblRangeElement2)
         Me.Controls.Add(Me.ucrNudOutlier)
         Me.Controls.Add(Me.ucrNudRangeElement2Max)
         Me.Controls.Add(Me.ucrChkOutlier)
@@ -361,6 +430,7 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.Controls.Add(Me.ucrReceiverStation)
         Me.Controls.Add(Me.ucrSelectorTemperature)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.ucrPnlType)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -393,17 +463,26 @@ Partial Class dlgClimaticCheckDataTemperature
     Friend WithEvents ucrNudOutlier As ucrNud
     Friend WithEvents ucrNudRangeElement1Max As ucrNud
     Friend WithEvents ucrNudRangeElement1Min As ucrNud
-    Friend WithEvents lblRangeElement1 As Label
-    Friend WithEvents lblRangeElement2 As Label
     Friend WithEvents ucrNudRangeElement2Max As ucrNud
     Friend WithEvents ucrNudRangeElement2Min As ucrNud
     Friend WithEvents lblRangeElement1to As Label
     Friend WithEvents lblRangeElement2to As Label
     Friend WithEvents ucrChkRange As ucrCheck
-    Friend WithEvents lblJumpElement1 As Label
-    Friend WithEvents lblJumpElement2 As Label
-    Friend WithEvents ucrNudJumpElement2 As ucrNud
-    Friend WithEvents ucrNudJumpElement1 As ucrNud
+    Friend WithEvents ucrNudJump As ucrNud
     Friend WithEvents lblElement2 As Label
     Friend WithEvents ucrReceiverElement2 As ucrReceiverSingle
+    Friend WithEvents rdoSatelite As RadioButton
+    Friend WithEvents rdoIndividual As RadioButton
+    Friend WithEvents rdoMultiple As RadioButton
+    Friend WithEvents ucrPnlType As UcrPanel
+    Friend WithEvents lblNudOutlier As Label
+    Friend WithEvents lblNudDiff As Label
+    Friend WithEvents lblNudJump As Label
+    Friend WithEvents lblNudSame As Label
+    Friend WithEvents lblNudRangeElement2Max As Label
+    Friend WithEvents lblNudRangeElement1Max As Label
+    Friend WithEvents lblNudRangeElement2Min As Label
+    Friend WithEvents lblNudRangeElement1Min As Label
+    Friend WithEvents ucrChkRange2 As ucrCheck
+    Friend WithEvents ttOutliers As ToolTip
 End Class
