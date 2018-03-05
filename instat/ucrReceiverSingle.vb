@@ -325,4 +325,8 @@ Public Class ucrReceiverSingle
     Public Overrides Sub SetTextColour(clrNew As Color)
         txtReceiverSingle.ForeColor = clrNew
     End Sub
+
+    Public Overrides Function GetItemsDataFrames() As List(Of String)
+        Return New List(Of String)({strDataFrameName})
+    End Function
 End Class

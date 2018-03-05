@@ -126,11 +126,11 @@ instat_object$set("public", "copy_data_object", function(data_name, new_name, fi
 
 
 instat_object$set("public", "import_RDS", function(data_RDS, keep_existing = TRUE, overwrite_existing = FALSE, include_objects = TRUE,
-                                                   include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_calculations = TRUE)
+                                                   include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_calculations = TRUE, include_comments = TRUE)
   # TODO add include_calcuations options
 {
   if("instat_object" %in% class(data_RDS)) {
-    if(!keep_existing && include_objects && include_metadata && include_logs && include_filters && include_calculations) {
+    if(!keep_existing && include_objects && include_metadata && include_logs && include_filters && include_calculations && include_comments) {
       self$replace_instat_object(new_instat_object = data_RDS)
     }
     else {
@@ -143,7 +143,15 @@ instat_object$set("public", "import_RDS", function(data_RDS, keep_existing = TRU
       }
       new_links_list <- data_RDS$get_links()
       for(data_obj_name in data_RDS$get_data_names()) {
-        data_obj_clone <- data_RDS$get_data_objects(data_obj_name)$data_clone(include_objects = include_objects, include_metadata = include_metadata, include_logs = include_logs, include_filters = include_filters, include_calculations = include_calculations)
+        # fix for loading instat objects created before comments where added
+        # In older objects "include_comments" is not an argument to data_clone
+        # data_clone now contains ... argument so further changes to data object structure will not require similar fixes
+        if("set_comments" %in% names(data_RDS$get_data_objects(data_obj_name))) {
+          data_obj_clone <- data_RDS$get_data_objects(data_obj_name)$data_clone(include_objects = include_objects, include_metadata = include_metadata, include_logs = include_logs, include_filters = include_filters, include_calculations = include_calculations, include_comments = include_comments)
+        }
+        else {
+          data_obj_clone <- data_RDS$get_data_objects(data_obj_name)$data_clone(include_objects = include_objects, include_metadata = include_metadata, include_logs = include_logs, include_filters = include_filters, include_calculations = include_calculations)
+        }
         if(data_obj_name %in% self$get_data_names() && !overwrite_existing) {
           new_name <- next_default_item(data_obj_name, self$get_data_names())
           data_obj_clone$append_to_metadata(data_name_label, new_name)
@@ -227,7 +235,7 @@ instat_object$set("public", "append_data_object", function(name, obj) {
 }
 )
 
-instat_object$set("public", "get_data_objects", function(data_name, as_list = FALSE) {
+instat_object$set("public", "get_data_objects", function(data_name, as_list = FALSE, ...) {
   if(missing(data_name)) {
     return(private$.data_objects)
   }
@@ -309,7 +317,7 @@ instat_object$set("public", "get_combined_metadata", function(convert_to_charact
 } 
 )
 
-instat_object$set("public", "get_metadata", function(name) {
+instat_object$set("public", "get_metadata", function(name, ...) {
   if(missing(name)) return(private$.metadata)
   if(!is.character(name)) stop("name must be a character")
   if(!name %in% names(private$.metadata)) stop(paste(name, "not found in metadata"))
@@ -317,7 +325,7 @@ instat_object$set("public", "get_metadata", function(name) {
 } 
 )
 
-instat_object$set("public", "get_data_names", function(as_list = FALSE, include, exclude, excluded_items, include_hidden = TRUE) { 
+instat_object$set("public", "get_data_names", function(as_list = FALSE, include, exclude, excluded_items, include_hidden = TRUE, ...) { 
   ret <- names(private$.data_objects)
   if(!include_hidden) {
     ret <- ret[sapply(ret, function(x) !isTRUE(self$get_data_objects(x)$get_metadata(label = is_hidden_label)))]
@@ -442,7 +450,7 @@ instat_object$set("public", "add_object", function(data_name, object, object_nam
 }
 ) 
 
-instat_object$set("public", "get_objects", function(data_name, object_name, include_overall = TRUE, as_list = FALSE, type = "", include_empty = FALSE, force_as_list = FALSE, print_graph = TRUE) {
+instat_object$set("public", "get_objects", function(data_name, object_name, include_overall = TRUE, as_list = FALSE, type = "", include_empty = FALSE, force_as_list = FALSE, print_graph = TRUE, ...) {
   #TODO implement force_as_list in all cases
   if(missing(data_name)) {
     if(!missing(object_name)) {
@@ -1033,7 +1041,12 @@ instat_object$set("public","get_keys", function(data_name, key_name) {
 }
 )
 
-instat_object$set("public","get_links", function(link_name) {
+instat_object$set("public","get_comments", function(data_name, comment_id) {
+  self$get_data_objects(data_name)$get_comments(comment_id)
+}
+)
+
+instat_object$set("public","get_links", function(link_name, ...) {
   if(!missing(link_name)) {
     if(!link_name %in% names(private$.links)) stop(link_name, " not found.")
     return(private$.links[[link_name]])
@@ -1104,7 +1117,8 @@ instat_object$set("public","create_factor_data_frame", function(data_name, facto
       factor_named <- factor
       names(factor_named) <- factor
       curr_factor_df_name <- self$get_linked_to_data_name(data_name, factor_named)
-      self$delete_dataframe(curr_factor_df_name)
+      # TODO what if there is more than 1?
+      if(length(curr_factor_df_name) > 0) self$delete_dataframe(curr_factor_df_name[1])
     }
     else {
       warning("replace = FALSE so no action will be taken.")
@@ -1238,66 +1252,104 @@ instat_object$set("public", "remove_key", function(data_name, key_name) {
 }
 )
 
-instat_object$set("public", "add_climdex_indices", function(data_name, indices = list(), freq = "annual") {
+instat_object$set("public", "add_climdex_indices", function(data_name, indices = list(), freq = "annual", year, month) {
+  if(!self$get_data_objects(data_name)$get_metadata(is_climatic_label)) stop("Data must be defined as climatic to calculate climdex indices.")
+  if(missing(year)) stop("year column is required")
+  if(freq == "monthly" && missing(month)) stop("month column is required for monthly summaries")
   for(i in seq_along(indices)) {
-    l <- list(indices[[i]])
-    names(l) <- names(indices)[i]
-    self$add_single_climdex_index(data_name = data_name, indices = l)
+    self$add_single_climdex_index(data_name = data_name, indices = indices[[i]], index_name = names(indices)[i], freq = freq, year = year, month = month)
   }
 }
 )
 
-instat_object$set("public", "add_single_climdex_index", function(data_name, indices = list(), freq = "annual") {
-  if(!self$get_data_objects(data_name)$get_metadata(is_climatic_label))stop("Define data as climatic.")
-  mix_monthly_annual = c("Monthly_Minimum_of_Daily_Minimum_Temperature", "Percentage_of_Days_When_Tmax_is_Above_90th_Percentile","Percentage_of_Days_When_Tmin_is_Above_90th_Percentile","Percentage_of_Days_When_Tmax_is_Below_10th_Percentile","Percentage_of_Days_When_Tmin_is_Below_10th_Percentile", "Monthly_Maximum_Consecutive_5day_Precipitation", "Monthly_Maximum_1day_Precipitation","Monthly_Maximum_of_Daily_Maximum_Temperature", "Monthly_Maximum_of_Daily_Minimum_Temperature","Monthly_Minimum_of_Daily_Maximum_Temperature", "Mean_Diurnal_Temperature_Range")
+instat_object$set("public", "add_single_climdex_index", function(data_name, indices, index_name = "", freq = "annual", year, month) {
+  if(!self$get_data_objects(data_name)$get_metadata(is_climatic_label)) stop("Data must be defined as climatic to calculate climdex indices.")
   
-  if(((names(indices) %in% mix_monthly_annual) && freq=="monthly")){
-    yy = as.data.frame(indices[[1]],row.names = NULL)
-    yy1 <- cbind(Row.Names = rownames(yy), yy)
-    split_data = str_split_fixed(string=yy1[,1], n=2, pattern="-")
-    my_data = cbind(yy1, split_data)
-    names(my_data) = c("Year_month", names(indices), "Year", "Month")
-    my_data <- my_data[c(1,3,4,2)]
-    my_data$Year = as.integer(as.character(my_data$Year))
-    my_data$Month = as.integer(as.character(my_data$Month))
-    year_col = self$get_climatic_column_name(data_name, year_label)
-    month_col = self$get_climatic_column_name(data_name, month_label)
-    key_list = list("Year", "Month")
-    names(key_list) = c(as.name(year_col), as.name(month_col))
-    if(self$get_linked_to_data_name(data_name, key_list)==""){
-      data_list = list(my_data)
-      names(data_list) = paste(data_name, "monthly", sep = "_")
+  if(freq == "annual") {
+    ind_data <- data.frame(factor(names(indices)), indices, row.names = NULL)
+    names(ind_data) <- c(year, index_name)
+    linked_data_name <- self$get_linked_to_data_name(data_name, year)
+    if(length(linked_data_name) == 0) {
+      data_list = list(ind_data)
+      new_data_name <- paste(data_name, "by", year, sep = "_")
+      new_data_name <- next_default_item(prefix = new_data_name , existing_names = self$get_data_names(), include_index = FALSE)
+      names(data_list) <- new_data_name
       self$import_data(data_tables = data_list)
-      self$add_key(paste(data_name, "monthly", sep = "_"), c("Year", "Month"))
-      self$add_link(from_data_frame = data_name, to_data_frame = paste(data_name, "monthly", sep = "_"), link_pairs = key_list, type = keyed_link_label)
+      self$add_key(new_data_name, year)
+      key_list <- list(year)
+      names(key_list) <- year
+      self$add_link(from_data_frame = data_name, to_data_frame = new_data_name, link_pairs = key_list, type = keyed_link_label)
     }
-    else{
-      #self$merge_data(by=c("Year_month","Year", "Month"), data_name = self$get_linked_to_data_name(data_name, key_list), new_data = my_data )
-      self$merge_data(data_name = self$get_linked_to_data_name(data_name, key_list), new_data = my_data )
+    else {
+      # TODO what if there are multiple?
+      linked_data_name <- linked_data_name[1]
+      year_col_name_linked <- self$get_equivalent_columns(from_data_name = data_name, to_data_name = linked_data_name, columns = year)
+      by <- year
+      names(by) <- year_col_name_linked
+      linked_year_data <- self$get_columns_from_data(data_name = linked_data_name, col_names = year_col_name_linked)
+      linked_year_class <- class(linked_year_data)
+      year_class <- class(ind_data[[year]])
+      if(!any(linked_year_class %in% year_class)) {
+        # Only need to check numeric/integer here since year in ind_data is factor.
+        # If construction of ind_data above is changed this may need to be updated.
+        if("numeric" %in% linked_year_class) ind_data[[year]] <- as.numeric(levels(ind_data[[year]]))[ind_data[[year]]]
+        else if("integer" %in% linked_year_class) ind_data[[year]] <- as.integer(levels(ind_data[[year]]))[ind_data[[year]]]
+        # else merge may not work, but still worth trying
+      }
+      # TODO could make this a try/catch and then if merging fails put data in new data frame
+      self$merge_data(data_name = linked_data_name, new_data = ind_data, by = by)
     }
   }
-  else{
-    yy = as.data.frame(indices[[1]],row.names = NULL)
-    my_data <- cbind(Row.Names = rownames(yy), yy)
-    names(my_data) = c("Year", names(indices))
-    my_data$Year = as.integer(as.character(my_data$Year))
-    year_col = self$get_climatic_column_name(data_name, year_label)
-    key_list = list("Year")
-    names(key_list) = c(as.name(year_col))
-    if(self$get_linked_to_data_name(data_name, key_list)==""){
-      warning("Yearly_data is missing, it will be created.")
-      data_list = list(my_data)
-      names(data_list) = paste(data_name, "yearly", sep = "_")
+  else if(freq == "monthly") {
+    ind_data <- data.frame(stringr::str_split_fixed(string = names(indices), n = 2, pattern = "-"), indices, row.names = NULL)
+    names(ind_data) <- c(year, month, index_name)
+    ind_data[[month]] <- as.numeric(ind_data[[month]])
+    linked_data_name <- self$get_linked_to_data_name(data_name, c(year, month))
+    if(length(linked_data_name) == 0) {
+      data_list = list(ind_data)
+      new_data_name <- paste(data_name, "by", year, month, sep = "_")
+      new_data_name <- next_default_item(prefix = new_data_name , existing_names = self$get_data_names(), include_index = FALSE)
+      names(data_list) <- new_data_name
       self$import_data(data_tables = data_list)
-      self$add_key(paste(data_name, "yearly", sep = "_"), c("Year"))
-      self$add_link(from_data_frame = data_name, to_data_frame = paste(data_name, "yearly", sep = "_"), link_pairs = key_list, type = keyed_link_label)
+      self$add_key(new_data_name, c(year, month))
+      key_list <- list(year, month)
+      names(key_list) <- c(year, month)
+      self$add_link(from_data_frame = data_name, to_data_frame = new_data_name, link_pairs = key_list, type = keyed_link_label)
     }
-    else{
-      #self$merge_data(by=c("Year"), data_name=self$get_linked_to_data_name(data_name, key_list), new_data = my_data )
-      self$merge_data(data_name=self$get_linked_to_data_name(data_name, key_list), new_data = my_data )
+    else {
+      # TODO what if there are multiple?
+      linked_data_name <- linked_data_name[1]
+      year_col_name_linked <- self$get_equivalent_columns(from_data_name = data_name, to_data_name = linked_data_name, columns = year)
+      month_col_name_linked <- self$get_equivalent_columns(from_data_name = data_name, to_data_name = linked_data_name, columns = month)
+      by <- c(year, month)
+      names(by) <- c(year_col_name_linked, month_col_name_linked)
+      linked_year_data <- self$get_columns_from_data(data_name = linked_data_name, col_names = year_col_name_linked)
+      linked_year_class <- class(linked_year_data)
+      linked_month_data <- self$get_columns_from_data(data_name = linked_data_name, col_names = month_col_name_linked)
+      linked_month_class <- class(linked_month_data)
+      year_class <- class(ind_data[[year]])
+      month_class <- class(ind_data[[month]])
+      if(!any(linked_year_class %in% year_class)) {
+        # Only need to check numeric/integer here since year in ind_data is factor.
+        # If construction of ind_data above is changed this may need to be updated.
+        if("numeric" %in% linked_year_class) ind_data[[year]] <- as.numeric(levels(ind_data[[year]]))[ind_data[[year]]]
+        else if("integer" %in% linked_year_class) ind_data[[year]] <- as.integer(levels(ind_data[[year]]))[ind_data[[year]]]
+        # else merge may not work, but still worth trying
+      }
+      if(!all(ind_data[[month]] %in% linked_month_data)) {
+        # Only need to check month names here since month in ind_data is numeric.
+        if(all(linked_month_data) %in% month.name) {
+          ind_data[[month]] <- factor(ind_data[[month]], labels = month.name)
+        }
+        else if(all(linked_month_data) %in% month.abb) {
+          ind_data[[month]] <- factor(ind_data[[month]], labels = month.abb)
+        }
+      }
+      # TODO could make this a try/catch and then if merging fails put data in new data frame
+      self$merge_data(data_name = linked_data_name, new_data = ind_data, by = by)
     }
   }
-  
+  else stop("freq not recognised. freq must be either 'annual' or 'monthly'")
 }
 )
 

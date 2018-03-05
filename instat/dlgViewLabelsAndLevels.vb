@@ -36,7 +36,7 @@ Public Class dlgViewFactorLabels
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 517
-
+        ucrBase.clsRsyntax.iCallType = 2
         ucrReceiverVariables.SetParameter(New RParameter("x", 1))
         ucrReceiverVariables.SetParameterIsString()
         ucrReceiverVariables.SetParameterIncludeArgumentName(False)
