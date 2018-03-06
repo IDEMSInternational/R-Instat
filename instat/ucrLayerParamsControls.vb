@@ -1,6 +1,5 @@
-﻿
-' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -12,61 +11,45 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
+
 Public Class ucrLayerParamsControls
-    Public clsGeomFunction As RFunction
+    Private bControlsInitialised As Boolean = False
 
-    Public Event RParameterChanged(ucrControl As ucrLayerParamsControls)
-
-    Private Sub InitialiseControl()
-
+    Private Sub InitialiseControls()
+        ucrReceiverMetadataProperty.SetAddRemoveParameter(False)
+        ucrChkParamName.bChangeParameterValue = False
+        ucrChkParamName.AddToLinkedControls(ucrLinked:=ucrReceiverMetadataProperty, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True) ', objNewDefaultState:=1)
     End Sub
 
-    Public Sub SetGeomFunction(clsTempFunction As RFunction)
-        clsGeomFunction = clsTempFunction
-        RaiseEvent RParameterChanged(Me)
-    End Sub
-
-    Public Sub SetLayerParameter(clsTempLayerParam As LayerParameter)
-        ucrReceiverMetadataProperty.clsLayerParam = clsTempLayerParam
-        ucrReceiverMetadataProperty.SetControls()
-        If Not IsNothing(ucrReceiverMetadataProperty.clsLayerParam) Then
-            chkParamName.Visible = True
-            chkParamName.Text = ucrReceiverMetadataProperty.clsLayerParam.strLayerParameterName
-
-            If clsGeomFunction.GetParameter(ucrReceiverMetadataProperty.clsLayerParam.strLayerParameterName) Is Nothing Then
-                ucrReceiverMetadataProperty.SetValue(ucrReceiverMetadataProperty.clsLayerParam.strParameterDefaultValue)
-                chkParamName.Checked = False
-            Else
-                ucrReceiverMetadataProperty.SetValue(clsGeomFunction.GetParameter(ucrReceiverMetadataProperty.clsLayerParam.strLayerParameterName).strArgumentValue)
-                chkParamName.Checked = True
-            End If
-            ucrReceiverMetadataProperty.ctrActive.Visible = chkParamName.Checked
+    Public Sub SetControl(clsNewRCode As RCodeStructure, Optional clsNewLayerParam As LayerParameter = Nothing, Optional bReset As Boolean = False)
+        If Not bControlsInitialised Then
+            InitialiseControls()
+            bControlsInitialised = True
+        End If
+        ucrReceiverMetadataProperty.SetControls(clsNewRCode:=clsNewRCode, clsNewLayerParam:=clsNewLayerParam, bReset:=bReset)
+        ' Clear the conditions because this control could have been used for another geom (so different conditions)
+        ucrChkParamName.ClearConditions()
+        If clsNewLayerParam IsNot Nothing Then
+            ucrChkParamName.SetText(clsNewLayerParam.strLayerParameterName)
+            ucrChkParamName.AddParameterPresentCondition(True, clsNewLayerParam.strLayerParameterName)
+            ucrChkParamName.AddParameterPresentCondition(False, clsNewLayerParam.strLayerParameterName, False)
+            ucrChkParamName.Visible = True
         Else
-            chkParamName.Visible = False
+            ucrChkParamName.Visible = False
         End If
-
+        ' Set RCode only after clearing and setting conditions
+        ucrChkParamName.SetRCode(clsNewRCode, bReset)
     End Sub
 
-    Private Sub chkParamName_CheckedChanged(sender As Object, e As EventArgs) Handles chkParamName.CheckedChanged
-        ucrReceiverMetadataProperty.Visible = chkParamName.Checked
-        ucrReceiverMetadataProperty.ctrActive.Visible = True
-        RaiseEvent RParameterChanged(Me)
+    Private Sub ucrReceiverMetadataProperty_ControlContentsChanged() Handles ucrReceiverMetadataProperty.ControlContentsChanged, ucrChkParamName.ControlContentsChanged
+        OnControlContentsChanged()
     End Sub
 
-    Private Sub ucrLayerParamsControls_RParameterChanged(ucrControl As ucrLayerParamsControls) Handles Me.RParameterChanged
-        If Not IsNothing(ucrReceiverMetadataProperty.clsLayerParam) AndAlso ucrReceiverMetadataProperty.ctrActive IsNot Nothing AndAlso Not IsNothing(clsGeomFunction) Then
-            If chkParamName.Checked AndAlso ucrReceiverMetadataProperty.ctrActive.Text <> "" Then
-                clsGeomFunction.AddParameter(ucrReceiverMetadataProperty.clsLayerParam.strLayerParameterName, ucrReceiverMetadataProperty.ctrActive.Text)
-            Else
-                clsGeomFunction.RemoveParameterByName(ucrReceiverMetadataProperty.clsLayerParam.strLayerParameterName)
-            End If
-        End If
-    End Sub
-
-    Private Sub ucrReceiverMetadataProperty_ControlContentsChanged() Handles ucrReceiverMetadataProperty.ControlContentsChanged
-        RaiseEvent RParameterChanged(Me)
+    Private Sub ucrReceiverMetadataProperty_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMetadataProperty.ControlValueChanged, ucrChkParamName.ControlValueChanged
+        OnControlValueChanged()
     End Sub
 End Class

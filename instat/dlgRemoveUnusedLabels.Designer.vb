@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgRemoveUnusedLabels
     Inherits System.Windows.Forms.Form
 
@@ -39,14 +55,18 @@ Partial Class dlgRemoveUnusedLabels
         '
         'ucrDataFrame
         '
+        Me.ucrDataFrame.bUseCurrentFilter = True
         Me.ucrDataFrame.Location = New System.Drawing.Point(2, 2)
+        Me.ucrDataFrame.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataFrame.Name = "ucrDataFrame"
         Me.ucrDataFrame.Size = New System.Drawing.Size(127, 41)
         Me.ucrDataFrame.TabIndex = 1
         '
         'ucrAddRemove
         '
+        Me.ucrAddRemove.bShowHiddenColumns = False
         Me.ucrAddRemove.Location = New System.Drawing.Point(2, 59)
+        Me.ucrAddRemove.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrAddRemove.Name = "ucrAddRemove"
         Me.ucrAddRemove.Size = New System.Drawing.Size(203, 127)
         Me.ucrAddRemove.TabIndex = 2
@@ -54,7 +74,9 @@ Partial Class dlgRemoveUnusedLabels
         'ucrSelectedVariable
         '
         Me.ucrSelectedVariable.Location = New System.Drawing.Point(234, 103)
+        Me.ucrSelectedVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectedVariable.Name = "ucrSelectedVariable"
+        Me.ucrSelectedVariable.Selector = Nothing
         Me.ucrSelectedVariable.Size = New System.Drawing.Size(106, 26)
         Me.ucrSelectedVariable.TabIndex = 3
         '
@@ -89,7 +111,10 @@ Partial Class dlgRemoveUnusedLabels
         Me.Controls.Add(Me.ucrDataFrame)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgRemoveUnusedLabels"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Remove_unused_labels"
         Me.Text = "Remove Unused Labels"
         Me.ResumeLayout(False)

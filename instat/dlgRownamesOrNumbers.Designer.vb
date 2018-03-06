@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgRowNamesOrNumbers
     Inherits System.Windows.Forms.Form
 
@@ -22,202 +38,154 @@ Partial Class dlgRowNamesOrNumbers
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.grpboxOptionsforRowNamesorNumbercols = New System.Windows.Forms.GroupBox()
-        Me.lblColumnName = New System.Windows.Forms.Label()
-        Me.grpSortOptions = New System.Windows.Forms.GroupBox()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgRowNamesOrNumbers))
+        Me.ucrSelectorRowNames = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrPnlOverallOptions = New instat.UcrPanel()
+        Me.ucrReceiverRowNames = New instat.ucrReceiverSingle()
+        Me.rdoCopyRowNamesIntoFirstColumn = New System.Windows.Forms.RadioButton()
+        Me.rdoSetRowNamesFromColumn = New System.Windows.Forms.RadioButton()
+        Me.rdoResetintoPositiveIntegers = New System.Windows.Forms.RadioButton()
+        Me.rdoSortbyRowNames = New System.Windows.Forms.RadioButton()
         Me.rdoSortDescending = New System.Windows.Forms.RadioButton()
         Me.rdoSortAscending = New System.Windows.Forms.RadioButton()
-        Me.chkAsNumeric = New System.Windows.Forms.CheckBox()
-        Me.rdoSortbyRowNames = New System.Windows.Forms.RadioButton()
-        Me.rdoResetintoPositiveIntegers = New System.Windows.Forms.RadioButton()
-        Me.rdoCopyfromColumn = New System.Windows.Forms.RadioButton()
-        Me.rdoCopytoFirstColumn = New System.Windows.Forms.RadioButton()
-        Me.ucrReceiverSingleRownamesOrNumbers = New instat.ucrReceiverSingle()
-        Me.ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrNewColumnName = New instat.ucrInputTextBox()
+        Me.ucrNewColumnName = New instat.ucrSave()
+        Me.ucrChkAsNumeric = New instat.ucrCheck()
+        Me.grpboxOptionsforRowNamesorNumbercols = New System.Windows.Forms.GroupBox()
+        Me.ucrPnlSortOptions = New instat.UcrPanel()
         Me.grpboxOptionsforRowNamesorNumbercols.SuspendLayout()
-        Me.grpSortOptions.SuspendLayout()
         Me.SuspendLayout()
         '
-        'grpboxOptionsforRowNamesorNumbercols
+        'ucrSelectorRowNames
         '
-        Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.ucrNewColumnName)
-        Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.lblColumnName)
-        Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.grpSortOptions)
-        Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.rdoSortbyRowNames)
-        Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.rdoResetintoPositiveIntegers)
-        Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.rdoCopyfromColumn)
-        Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.rdoCopytoFirstColumn)
-        Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.ucrReceiverSingleRownamesOrNumbers)
-        Me.grpboxOptionsforRowNamesorNumbercols.Location = New System.Drawing.Point(230, 10)
-        Me.grpboxOptionsforRowNamesorNumbercols.Name = "grpboxOptionsforRowNamesorNumbercols"
-        Me.grpboxOptionsforRowNamesorNumbercols.Size = New System.Drawing.Size(236, 248)
-        Me.grpboxOptionsforRowNamesorNumbercols.TabIndex = 4
-        Me.grpboxOptionsforRowNamesorNumbercols.TabStop = False
-        Me.grpboxOptionsforRowNamesorNumbercols.Text = "Options"
+        Me.ucrSelectorRowNames.bShowHiddenColumns = False
+        Me.ucrSelectorRowNames.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorRowNames, "ucrSelectorRowNames")
+        Me.ucrSelectorRowNames.Name = "ucrSelectorRowNames"
         '
-        'lblColumnName
+        'ucrBase
         '
-        Me.lblColumnName.AutoSize = True
-        Me.lblColumnName.Location = New System.Drawing.Point(4, 47)
-        Me.lblColumnName.Name = "lblColumnName"
-        Me.lblColumnName.Size = New System.Drawing.Size(76, 13)
-        Me.lblColumnName.TabIndex = 13
-        Me.lblColumnName.Text = "Column Name:"
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
         '
-        'grpSortOptions
+        'ucrPnlOverallOptions
         '
-        Me.grpSortOptions.Controls.Add(Me.rdoSortDescending)
-        Me.grpSortOptions.Controls.Add(Me.rdoSortAscending)
-        Me.grpSortOptions.Controls.Add(Me.chkAsNumeric)
-        Me.grpSortOptions.Location = New System.Drawing.Point(6, 167)
-        Me.grpSortOptions.Name = "grpSortOptions"
-        Me.grpSortOptions.Size = New System.Drawing.Size(216, 76)
-        Me.grpSortOptions.TabIndex = 12
-        Me.grpSortOptions.TabStop = False
-        Me.grpSortOptions.Text = "Sort Options"
+        resources.ApplyResources(Me.ucrPnlOverallOptions, "ucrPnlOverallOptions")
+        Me.ucrPnlOverallOptions.Name = "ucrPnlOverallOptions"
+        '
+        'ucrReceiverRowNames
+        '
+        Me.ucrReceiverRowNames.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverRowNames, "ucrReceiverRowNames")
+        Me.ucrReceiverRowNames.Name = "ucrReceiverRowNames"
+        Me.ucrReceiverRowNames.Selector = Nothing
+        Me.ucrReceiverRowNames.strNcFilePath = ""
+        Me.ucrReceiverRowNames.ucrSelector = Nothing
+        '
+        'rdoCopyRowNamesIntoFirstColumn
+        '
+        resources.ApplyResources(Me.rdoCopyRowNamesIntoFirstColumn, "rdoCopyRowNamesIntoFirstColumn")
+        Me.rdoCopyRowNamesIntoFirstColumn.Name = "rdoCopyRowNamesIntoFirstColumn"
+        Me.rdoCopyRowNamesIntoFirstColumn.TabStop = True
+        Me.rdoCopyRowNamesIntoFirstColumn.UseVisualStyleBackColor = True
+        '
+        'rdoSetRowNamesFromColumn
+        '
+        resources.ApplyResources(Me.rdoSetRowNamesFromColumn, "rdoSetRowNamesFromColumn")
+        Me.rdoSetRowNamesFromColumn.Name = "rdoSetRowNamesFromColumn"
+        Me.rdoSetRowNamesFromColumn.TabStop = True
+        Me.rdoSetRowNamesFromColumn.UseVisualStyleBackColor = True
+        '
+        'rdoResetintoPositiveIntegers
+        '
+        resources.ApplyResources(Me.rdoResetintoPositiveIntegers, "rdoResetintoPositiveIntegers")
+        Me.rdoResetintoPositiveIntegers.Name = "rdoResetintoPositiveIntegers"
+        Me.rdoResetintoPositiveIntegers.TabStop = True
+        Me.rdoResetintoPositiveIntegers.UseVisualStyleBackColor = True
+        '
+        'rdoSortbyRowNames
+        '
+        resources.ApplyResources(Me.rdoSortbyRowNames, "rdoSortbyRowNames")
+        Me.rdoSortbyRowNames.Name = "rdoSortbyRowNames"
+        Me.rdoSortbyRowNames.TabStop = True
+        Me.rdoSortbyRowNames.UseVisualStyleBackColor = True
         '
         'rdoSortDescending
         '
-        Me.rdoSortDescending.AutoSize = True
-        Me.rdoSortDescending.Location = New System.Drawing.Point(90, 24)
+        resources.ApplyResources(Me.rdoSortDescending, "rdoSortDescending")
         Me.rdoSortDescending.Name = "rdoSortDescending"
-        Me.rdoSortDescending.Size = New System.Drawing.Size(82, 17)
-        Me.rdoSortDescending.TabIndex = 14
         Me.rdoSortDescending.TabStop = True
-        Me.rdoSortDescending.Text = "Descending"
         Me.rdoSortDescending.UseVisualStyleBackColor = True
         '
         'rdoSortAscending
         '
-        Me.rdoSortAscending.AutoSize = True
-        Me.rdoSortAscending.Location = New System.Drawing.Point(6, 23)
+        resources.ApplyResources(Me.rdoSortAscending, "rdoSortAscending")
         Me.rdoSortAscending.Name = "rdoSortAscending"
-        Me.rdoSortAscending.Size = New System.Drawing.Size(75, 17)
-        Me.rdoSortAscending.TabIndex = 13
         Me.rdoSortAscending.TabStop = True
-        Me.rdoSortAscending.Text = "Ascending"
         Me.rdoSortAscending.UseVisualStyleBackColor = True
-        '
-        'chkAsNumeric
-        '
-        Me.chkAsNumeric.AutoSize = True
-        Me.chkAsNumeric.Location = New System.Drawing.Point(6, 49)
-        Me.chkAsNumeric.Name = "chkAsNumeric"
-        Me.chkAsNumeric.Size = New System.Drawing.Size(168, 17)
-        Me.chkAsNumeric.TabIndex = 11
-        Me.chkAsNumeric.Text = "Treat Row Names as Numeric"
-        Me.chkAsNumeric.UseVisualStyleBackColor = True
-        '
-        'rdoSortbyRowNames
-        '
-        Me.rdoSortbyRowNames.AutoSize = True
-        Me.rdoSortbyRowNames.Location = New System.Drawing.Point(5, 144)
-        Me.rdoSortbyRowNames.Name = "rdoSortbyRowNames"
-        Me.rdoSortbyRowNames.Size = New System.Drawing.Size(119, 17)
-        Me.rdoSortbyRowNames.TabIndex = 7
-        Me.rdoSortbyRowNames.TabStop = True
-        Me.rdoSortbyRowNames.Text = "Sort by Row Names"
-        Me.rdoSortbyRowNames.UseVisualStyleBackColor = True
-        '
-        'rdoResetintoPositiveIntegers
-        '
-        Me.rdoResetintoPositiveIntegers.AutoSize = True
-        Me.rdoResetintoPositiveIntegers.Location = New System.Drawing.Point(5, 121)
-        Me.rdoResetintoPositiveIntegers.Name = "rdoResetintoPositiveIntegers"
-        Me.rdoResetintoPositiveIntegers.Size = New System.Drawing.Size(207, 17)
-        Me.rdoResetintoPositiveIntegers.TabIndex = 6
-        Me.rdoResetintoPositiveIntegers.TabStop = True
-        Me.rdoResetintoPositiveIntegers.Text = "Reset Row Names to Positive Integers"
-        Me.rdoResetintoPositiveIntegers.UseVisualStyleBackColor = True
-        '
-        'rdoCopyfromColumn
-        '
-        Me.rdoCopyfromColumn.AutoSize = True
-        Me.rdoCopyfromColumn.Location = New System.Drawing.Point(5, 77)
-        Me.rdoCopyfromColumn.Name = "rdoCopyfromColumn"
-        Me.rdoCopyfromColumn.Size = New System.Drawing.Size(163, 17)
-        Me.rdoCopyfromColumn.TabIndex = 5
-        Me.rdoCopyfromColumn.TabStop = True
-        Me.rdoCopyfromColumn.Text = "Set Row Names from Column"
-        Me.rdoCopyfromColumn.UseVisualStyleBackColor = True
-        '
-        'rdoCopytoFirstColumn
-        '
-        Me.rdoCopytoFirstColumn.AutoSize = True
-        Me.rdoCopytoFirstColumn.Location = New System.Drawing.Point(5, 19)
-        Me.rdoCopytoFirstColumn.Name = "rdoCopytoFirstColumn"
-        Me.rdoCopytoFirstColumn.Size = New System.Drawing.Size(190, 17)
-        Me.rdoCopytoFirstColumn.TabIndex = 4
-        Me.rdoCopytoFirstColumn.TabStop = True
-        Me.rdoCopytoFirstColumn.Text = "Copy Row Names into First Column"
-        Me.rdoCopytoFirstColumn.UseVisualStyleBackColor = True
-        '
-        'ucrReceiverSingleRownamesOrNumbers
-        '
-        Me.ucrReceiverSingleRownamesOrNumbers.Location = New System.Drawing.Point(24, 98)
-        Me.ucrReceiverSingleRownamesOrNumbers.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverSingleRownamesOrNumbers.Name = "ucrReceiverSingleRownamesOrNumbers"
-        Me.ucrReceiverSingleRownamesOrNumbers.Selector = Nothing
-        Me.ucrReceiverSingleRownamesOrNumbers.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSingleRownamesOrNumbers.TabIndex = 3
-        '
-        'ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers
-        '
-        Me.ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.bShowHiddenColumns = False
-        Me.ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.Name = "ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers"
-        Me.ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.TabIndex = 8
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 274)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 0
         '
         'ucrNewColumnName
         '
-        Me.ucrNewColumnName.IsReadOnly = False
-        Me.ucrNewColumnName.Location = New System.Drawing.Point(87, 44)
+        resources.ApplyResources(Me.ucrNewColumnName, "ucrNewColumnName")
         Me.ucrNewColumnName.Name = "ucrNewColumnName"
-        Me.ucrNewColumnName.Size = New System.Drawing.Size(137, 21)
-        Me.ucrNewColumnName.TabIndex = 14
+        '
+        'ucrChkAsNumeric
+        '
+        Me.ucrChkAsNumeric.Checked = False
+        resources.ApplyResources(Me.ucrChkAsNumeric, "ucrChkAsNumeric")
+        Me.ucrChkAsNumeric.Name = "ucrChkAsNumeric"
+        '
+        'grpboxOptionsforRowNamesorNumbercols
+        '
+        Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.ucrChkAsNumeric)
+        Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.rdoSortDescending)
+        Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.rdoSortAscending)
+        Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.ucrPnlSortOptions)
+        Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.ucrNewColumnName)
+        Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.rdoSortbyRowNames)
+        Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.rdoResetintoPositiveIntegers)
+        Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.rdoSetRowNamesFromColumn)
+        Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.rdoCopyRowNamesIntoFirstColumn)
+        Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.ucrReceiverRowNames)
+        Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.ucrPnlOverallOptions)
+        resources.ApplyResources(Me.grpboxOptionsforRowNamesorNumbercols, "grpboxOptionsforRowNamesorNumbercols")
+        Me.grpboxOptionsforRowNamesorNumbercols.Name = "grpboxOptionsforRowNamesorNumbercols"
+        Me.grpboxOptionsforRowNamesorNumbercols.TabStop = False
+        '
+        'ucrPnlSortOptions
+        '
+        resources.ApplyResources(Me.ucrPnlSortOptions, "ucrPnlSortOptions")
+        Me.ucrPnlSortOptions.Name = "ucrPnlSortOptions"
         '
         'dlgRowNamesOrNumbers
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(470, 330)
-        Me.Controls.Add(Me.ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers)
         Me.Controls.Add(Me.grpboxOptionsforRowNamesorNumbercols)
+        Me.Controls.Add(Me.ucrSelectorRowNames)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgRowNamesOrNumbers"
-        Me.Text = "Row Names Or Numbers"
         Me.grpboxOptionsforRowNamesorNumbercols.ResumeLayout(False)
         Me.grpboxOptionsforRowNamesorNumbercols.PerformLayout()
-        Me.grpSortOptions.ResumeLayout(False)
-        Me.grpSortOptions.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrReceiverSingleRownamesOrNumbers As ucrReceiverSingle
+    Friend WithEvents ucrSelectorRowNames As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrPnlOverallOptions As UcrPanel
+    Friend WithEvents ucrReceiverRowNames As ucrReceiverSingle
     Friend WithEvents grpboxOptionsforRowNamesorNumbercols As GroupBox
+    Friend WithEvents ucrChkAsNumeric As ucrCheck
+    Friend WithEvents ucrNewColumnName As ucrSave
+    Friend WithEvents rdoSortAscending As RadioButton
+    Friend WithEvents rdoSortDescending As RadioButton
     Friend WithEvents rdoSortbyRowNames As RadioButton
     Friend WithEvents rdoResetintoPositiveIntegers As RadioButton
-    Friend WithEvents rdoCopyfromColumn As RadioButton
-    Friend WithEvents rdoCopytoFirstColumn As RadioButton
-    Friend WithEvents ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents chkAsNumeric As CheckBox
-    Friend WithEvents grpSortOptions As GroupBox
-    Friend WithEvents rdoSortDescending As RadioButton
-    Friend WithEvents rdoSortAscending As RadioButton
-    Friend WithEvents lblColumnName As Label
-    Friend WithEvents ucrNewColumnName As ucrInputTextBox
+    Friend WithEvents rdoSetRowNamesFromColumn As RadioButton
+    Friend WithEvents rdoCopyRowNamesIntoFirstColumn As RadioButton
+    Friend WithEvents ucrPnlSortOptions As UcrPanel
 End Class

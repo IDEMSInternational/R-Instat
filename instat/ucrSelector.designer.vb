@@ -1,6 +1,22 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ucrSelector
-    Inherits System.Windows.Forms.UserControl
+    Inherits instat.ucrCore
 
     'UserControl overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()>
@@ -23,11 +39,13 @@ Partial Class ucrSelector
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrSelector))
         Me.lstAvailableVariable = New System.Windows.Forms.ListView()
         Me.SelectionMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.AddSelectedToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SelectAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ClearSelectionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AddAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SelectionMenuStrip.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -35,53 +53,51 @@ Partial Class ucrSelector
         '
         Me.lstAvailableVariable.Activation = System.Windows.Forms.ItemActivation.TwoClick
         Me.lstAvailableVariable.ContextMenuStrip = Me.SelectionMenuStrip
-        Me.lstAvailableVariable.Dock = System.Windows.Forms.DockStyle.Fill
+        resources.ApplyResources(Me.lstAvailableVariable, "lstAvailableVariable")
         Me.lstAvailableVariable.FullRowSelect = True
         Me.lstAvailableVariable.GridLines = True
         Me.lstAvailableVariable.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
         Me.lstAvailableVariable.HideSelection = False
-        Me.lstAvailableVariable.Location = New System.Drawing.Point(0, 0)
         Me.lstAvailableVariable.Name = "lstAvailableVariable"
-        Me.lstAvailableVariable.Size = New System.Drawing.Size(120, 130)
-        Me.lstAvailableVariable.TabIndex = 83
+        Me.lstAvailableVariable.ShowItemToolTips = True
         Me.lstAvailableVariable.UseCompatibleStateImageBehavior = False
         Me.lstAvailableVariable.View = System.Windows.Forms.View.Details
         '
         'SelectionMenuStrip
         '
-        Me.SelectionMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddSelectedToolStripMenuItem, Me.SelectAllToolStripMenuItem, Me.ClearSelectionToolStripMenuItem})
+        Me.SelectionMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddSelectedToolStripMenuItem, Me.SelectAllToolStripMenuItem, Me.ClearSelectionToolStripMenuItem, Me.AddAllToolStripMenuItem})
         Me.SelectionMenuStrip.Name = "SelectionMenuStrip"
-        Me.SelectionMenuStrip.Size = New System.Drawing.Size(153, 70)
+        resources.ApplyResources(Me.SelectionMenuStrip, "SelectionMenuStrip")
         '
         'AddSelectedToolStripMenuItem
         '
         Me.AddSelectedToolStripMenuItem.Name = "AddSelectedToolStripMenuItem"
-        Me.AddSelectedToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        resources.ApplyResources(Me.AddSelectedToolStripMenuItem, "AddSelectedToolStripMenuItem")
         Me.AddSelectedToolStripMenuItem.Tag = "Add_selected"
-        Me.AddSelectedToolStripMenuItem.Text = "Add Selected"
         '
         'SelectAllToolStripMenuItem
         '
         Me.SelectAllToolStripMenuItem.Name = "SelectAllToolStripMenuItem"
-        Me.SelectAllToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        resources.ApplyResources(Me.SelectAllToolStripMenuItem, "SelectAllToolStripMenuItem")
         Me.SelectAllToolStripMenuItem.Tag = "Select_All"
-        Me.SelectAllToolStripMenuItem.Text = "Select All"
         '
         'ClearSelectionToolStripMenuItem
         '
         Me.ClearSelectionToolStripMenuItem.Name = "ClearSelectionToolStripMenuItem"
-        Me.ClearSelectionToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        resources.ApplyResources(Me.ClearSelectionToolStripMenuItem, "ClearSelectionToolStripMenuItem")
         Me.ClearSelectionToolStripMenuItem.Tag = "Clear_Selection"
-        Me.ClearSelectionToolStripMenuItem.Text = "Clear Selection"
+        '
+        'AddAllToolStripMenuItem
+        '
+        Me.AddAllToolStripMenuItem.Name = "AddAllToolStripMenuItem"
+        resources.ApplyResources(Me.AddAllToolStripMenuItem, "AddAllToolStripMenuItem")
         '
         'ucrSelector
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.lstAvailableVariable)
-        Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "ucrSelector"
-        Me.Size = New System.Drawing.Size(120, 130)
         Me.SelectionMenuStrip.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -91,4 +107,5 @@ Partial Class ucrSelector
     Friend WithEvents AddSelectedToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SelectAllToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ClearSelectionToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AddAllToolStripMenuItem As ToolStripMenuItem
 End Class

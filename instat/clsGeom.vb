@@ -1,5 +1,5 @@
-﻿' Instat+R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,12 +11,12 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class Geoms
     Public strGeomName As String = ""
-    Public clsAesParameters As New List(Of AesParameter)
+    Public clsAesParameters As New List(Of AesParameters)
     Public clsLayerParameters As New List(Of LayerParameter)
 
     Public Sub SetGeomName(strTempName As String)
@@ -25,12 +25,13 @@ Public Class Geoms
 
     Public Sub AddAesParameter(strAesParameterName As String, Optional strAesParameterValue As String = Nothing, Optional strIncludedDataTypes As String() = Nothing, Optional strExcludedDataTypes As String() = Nothing, Optional bIsMandatory As Boolean = False)
         'will be adding parameters to the geom as well as the value of the parameter.
-        Dim NewAesParameter As New AesParameter
+        Dim NewAesParameter As New AesParameters
         NewAesParameter.strAesParameterName = strAesParameterName
         NewAesParameter.strAesParameterValue = strAesParameterValue
         NewAesParameter.strIncludedDataTypes = strIncludedDataTypes
         NewAesParameter.strExcludedDataTypes = strExcludedDataTypes
         NewAesParameter.bIsMandatory = bIsMandatory
+        'NewAesParameter.bIsDependentlyMandatory = bIsDependentlyMandatory
         clsAesParameters.Add(NewAesParameter)
     End Sub
 
@@ -64,13 +65,15 @@ Public Class Geoms
     End Property
 End Class
 
-Public Class AesParameter
+Public Class AesParameters
     'contains info about the geom aesthetics and urguments for the geom
     Public strAesParameterName As String
     Public strIncludedDataTypes As String()
     Public strExcludedDataTypes As String()
     Public strAesParameterValue As String
     Public bIsMandatory As Boolean
+    'Public bIsDependentlyMandatory As Boolean 'proposition for solving the situation in which one out of two aes need to be filled. For the moment not in use.
+    'Task: modify the mandatory method to have three cases: not mandatory, mandatory and partial mandatory (requires mapping to "" when not filled). Would enable to clean methods in sdgLayerOptions: ucrSdgLayerBase_ClickReturn; ucrGeomListWithAes: SetAes and dlg[SpecificGraphs]: cmd[SpecificGraph]Options_Click and SetX/YParameter.
 End Class
 
 Public Class LayerParameter

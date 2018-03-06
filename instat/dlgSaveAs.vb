@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,53 +11,82 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports System.IO
 Imports instat.Translations
-
 Public Class dlgSaveAs
-    Dim bFirstLoad As Boolean = True
+    Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+    Private clsSaveFunction As New RFunction
 
     Private Sub dlgSaveAs_Load(sender As Object, e As EventArgs) Handles Me.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
-        TestOKEnabled()
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 332
+
+        ucrInputFilePath.SetParameter(New RParameter("file", 0))
         ucrInputFilePath.IsReadOnly = True
-        ucrBase.clsRsyntax.SetFunction("saveRDS")
-        ucrBase.clsRsyntax.AddParameter("object", frmMain.clsRLink.strInstatDataObject)
-        txtConfirm.Text = "Click Ok to confirm the save"
+
+        lblConfirm.Text = "Click Ok to confirm the save"
     End Sub
 
     Private Sub SetDefaults()
+        clsSaveFunction = New RFunction
+
+        ucrInputFilePath.Reset()
         ucrInputFilePath.SetName("")
+
+        clsSaveFunction.SetRCommand("saveRDS")
+        clsSaveFunction.AddParameter("object", frmMain.clsRLink.strInstatDataObject)
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSaveFunction)
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        TestOKEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
         If Not ucrInputFilePath.IsEmpty() Then
+            lblConfirm.Show()
             ucrBase.OKEnabled(True)
         Else
+            lblConfirm.Hide()
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+    End Sub
+
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        'adds the saved file to the recent paths
-        'Disabled until implemented correctly
-        'frmMain.clsRecentItems.addToMenu(ucrInputFilePath.GetText())
         frmMain.strSaveFilePath = ucrInputFilePath.GetText()
+        frmMain.clsRecentItems.addToMenu(Replace(ucrInputFilePath.GetText(), "/", "\"))
     End Sub
 
     Private Sub cmdEditorSave_Click(sender As Object, e As EventArgs) Handles cmdChooseFile.Click
         SelectFileToSave()
+    End Sub
+
+    Private Sub ucrInputFilePath_Click(sender As Object, e As EventArgs) Handles ucrInputFilePath.Click
+        If ucrInputFilePath.IsEmpty() Then
+            SelectFileToSave()
+        End If
     End Sub
 
     Private Sub SelectFileToSave()
@@ -76,24 +105,7 @@ Public Class dlgSaveAs
         End Using
     End Sub
 
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
+    Private Sub ucrInputFilePath_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFilePath.ControlContentsChanged
         TestOKEnabled()
-    End Sub
-
-    Private Sub ucrInputFilePath_NameChanged() Handles ucrInputFilePath.NameChanged
-        If Not ucrInputFilePath.IsEmpty() Then
-            ucrBase.clsRsyntax.AddParameter("file", Chr(34) & ucrInputFilePath.GetText() & Chr(34))
-            txtConfirm.Show()
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("file")
-            txtConfirm.Hide()
-        End If
-    End Sub
-
-    Private Sub ucrInputFilePath_Click(sender As Object, e As EventArgs) Handles ucrInputFilePath.Click
-        If ucrInputFilePath.IsEmpty() Then
-            SelectFileToSave()
-        End If
     End Sub
 End Class

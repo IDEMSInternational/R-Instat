@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgDayMonth
     Inherits System.Windows.Forms.Form
 
@@ -80,6 +96,7 @@ Partial Class dlgDayMonth
         '
         'ucrInputColumnName1
         '
+        Me.ucrInputColumnName1.IsReadOnly = False
         Me.ucrInputColumnName1.Location = New System.Drawing.Point(161, 67)
         Me.ucrInputColumnName1.Name = "ucrInputColumnName1"
         Me.ucrInputColumnName1.Size = New System.Drawing.Size(100, 21)
@@ -87,6 +104,7 @@ Partial Class dlgDayMonth
         '
         'ucrInputTimePeriod
         '
+        Me.ucrInputTimePeriod.IsReadOnly = False
         Me.ucrInputTimePeriod.Location = New System.Drawing.Point(161, 94)
         Me.ucrInputTimePeriod.Name = "ucrInputTimePeriod"
         Me.ucrInputTimePeriod.Size = New System.Drawing.Size(100, 21)
@@ -94,6 +112,7 @@ Partial Class dlgDayMonth
         '
         'ucrInputRequiredTimeFormat
         '
+        Me.ucrInputRequiredTimeFormat.IsReadOnly = False
         Me.ucrInputRequiredTimeFormat.Location = New System.Drawing.Point(161, 121)
         Me.ucrInputRequiredTimeFormat.Name = "ucrInputRequiredTimeFormat"
         Me.ucrInputRequiredTimeFormat.Size = New System.Drawing.Size(100, 21)
@@ -113,6 +132,8 @@ Partial Class dlgDayMonth
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgDayMonth"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Day_Month"

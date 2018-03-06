@@ -1,17 +1,34 @@
-﻿Imports System.IO
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Imports System.IO
 Public Class clsRecentFiles
     Public mnuItems As New List(Of Form)
-    Dim strRecentFiles As String = "Recent_Files\recent.mru"
-    Dim mnuTbShowLast10 As ToolStripDropDownItem
-    Dim mnuFile As ToolStripMenuItem
-    Dim sepStart As ToolStripSeparator
-    Dim sepEnd As ToolStripSeparator
-
+    Private strRecentFilesPath As String
+    Private mnuTbShowLast10 As ToolStripDropDownItem
+    Private mnuFile As ToolStripMenuItem
+    Private mnuFileIcon As ToolStripSplitButton
+    Private sepStart As ToolStripSeparator
+    Private sepEnd As ToolStripSeparator
     ' declare a variable to contain the most recent opened items
     Private strListMRU As New List(Of String)
 
-    Public Sub setToolStripItems(dfMnuFile As ToolStripMenuItem, dfMnuToolStripDropdown As ToolStripDropDownItem, dfSepStart As ToolStripSeparator, dfSepEnd As ToolStripSeparator)
+    Public Sub setToolStripItems(dfMnuFile As ToolStripMenuItem, dfMnuFileIcon As ToolStripSplitButton, dfMnuToolStripDropdown As ToolStripDropDownItem, dfSepStart As ToolStripSeparator, dfSepEnd As ToolStripSeparator)
         mnuFile = dfMnuFile
+        mnuFileIcon = dfMnuFileIcon
         mnuTbShowLast10 = dfMnuToolStripDropdown
         sepStart = dfSepStart
         sepEnd = dfSepEnd
@@ -19,22 +36,16 @@ Public Class clsRecentFiles
         sepEnd.Visible = False
     End Sub
 
-    Private ReadOnly Property MRUPath() As String
-        'Reads the path where the list of MRU are stored
-        Get
-            ' returns a path in the static folder, but with a '.mru' extension
-            Return Path.GetFullPath(frmMain.strStaticPath & "\" & strRecentFiles)
-        End Get
-    End Property
-
     Public Sub checkOnLoad()
-        'Checks for the existe3nce of the file on form load
+        'Checks for the existence of the file on form load
         ' load recently opened files
-        If (File.Exists(MRUPath)) Then
+        strRecentFilesPath = Path.Combine(frmMain.strAppDataPath, "recent.mru")
+        If (File.Exists(strRecentFilesPath)) Then
             ' read file
-            Dim sPaths() As String = File.ReadAllLines(MRUPath)
+            Dim sPaths() As String = File.ReadAllLines(strRecentFilesPath)
             For Each sPath As String In sPaths
                 If Not String.IsNullOrEmpty(sPath) Then
+                    ' Disabled this so that you can still see files that don't exist in the list
                     ' only add files that still exist...
                     'If File.Exists(sPath) Then
                     '    ' add to the list of recently opened files
@@ -45,22 +56,20 @@ Public Class clsRecentFiles
             Next
         End If
         ' display the recently opened files if there are any items to display in the file
-        If strListMRU.Count > 0 Then UpdateItemsMenu()
+        UpdateItemsMenu()
     End Sub
 
     Public Sub saveOnClose()
-        ' temp disabled to prevent error accessing file
-        ' TODO look up app config and Setting file as alternatives
+        Dim sPath As String
 
+        strRecentFilesPath = Path.Combine(frmMain.strAppDataPath, "recent.mru")
         'saves the list of opened files on form close
         ' save MRU - delete existing files first
-        'If File.Exists(MRUPath) Then
-        'File.WriteAllText(MRUPath, "")
-        'End If
-        ' write each item to the file...
-        'For Each sPath As String In strListMRU
-        'File.AppendAllText(MRUPath, sPath & vbCrLf)
-        'Next
+        File.WriteAllText(strRecentFilesPath, "")
+        'Write each item to the file...
+        For Each sPath In strListMRU
+            File.AppendAllText(strRecentFilesPath, sPath & Environment.NewLine)
+        Next
     End Sub
 
     Public Sub addToMenu(ByVal tempObj As Object)
@@ -96,7 +105,7 @@ Public Class clsRecentFiles
     Private Sub UpdateItemsMenu()
         'clears the menu items first
         Dim clsItems As New List(Of ToolStripItem)
-        If mnuTbShowLast10 IsNot Nothing AndAlso mnuFile IsNot Nothing AndAlso clsItems IsNot Nothing AndAlso mnuItems IsNot Nothing AndAlso strListMRU IsNot Nothing Then
+        If mnuTbShowLast10 IsNot Nothing AndAlso mnuFile IsNot Nothing AndAlso mnuFileIcon IsNot Nothing AndAlso clsItems IsNot Nothing AndAlso mnuItems IsNot Nothing AndAlso strListMRU IsNot Nothing Then
             'temp collection for recent dialogs
             For Each clsMenu As ToolStripItem In mnuTbShowLast10.DropDownItems
                 If Not clsMenu.Tag Is Nothing Then
@@ -113,10 +122,19 @@ Public Class clsRecentFiles
                     End If
                 End If
             Next
+            'temp collection for recent files
+            For Each clsMenu As ToolStripItem In mnuFileIcon.DropDownItems
+                If Not clsMenu.Tag Is Nothing Then
+                    If (clsMenu.Tag.ToString().StartsWith("MRU:")) Then
+                        clsItems.Add(clsMenu)
+                    End If
+                End If
+            Next
             'go through the list and remove each from the menu
             For Each clsMenu As ToolStripItem In clsItems
                 mnuTbShowLast10.DropDownItems.Remove(clsMenu)
                 mnuFile.DropDownItems.Remove(clsMenu)
+                mnuFileIcon.DropDownItems.Remove(clsMenu)
             Next
 
             'displays items (_in reverse order) for dialogs
@@ -136,13 +154,17 @@ Public Class clsRecentFiles
                 Dim sPath As String = strListMRU(iCounter)
                 ' create new ToolStripItem, displaying the name of the file...
                 Dim clsItem As New ToolStripMenuItem(Path.GetFileName(sPath))
+                Dim clsItemIcon As New ToolStripMenuItem(Path.GetFileName(sPath))
                 ' set the tag - identifies the ToolStripItem as an MRU item and 
                 ' contains the full path so it can be opened later...
                 clsItem.Tag = "MRU:" & sPath
+                clsItemIcon.Tag = "MRU:" & sPath
                 ' hook into the click event handler so we can open the file later...
                 AddHandler clsItem.Click, AddressOf mnuFileMRU_Click
+                AddHandler clsItemIcon.Click, AddressOf mnuFileMRU_Click
                 ' insert into DropDownItems list...
-                mnuFile.DropDownItems.Insert(mnuFile.DropDownItems.Count - 2, clsItem)
+                mnuFile.DropDownItems.Insert(mnuFile.DropDownItems.Count - 1, clsItem)
+                mnuFileIcon.DropDownItems.Insert(mnuFileIcon.DropDownItems.Count, clsItemIcon)
             Next
 
             ' show separator
@@ -153,20 +175,24 @@ Public Class clsRecentFiles
     End Sub
 
     Private Sub mnuFileMRU_Click(ByVal sender As Object, ByVal e As EventArgs)
+        Dim iResult As Integer
+
         If File.Exists(DirectCast(sender, ToolStripItem).Tag.ToString().Substring(4)) Then
             'dlgImportDataset.SetFilePath(DirectCast(sender, ToolStripItem).Tag.ToString().Substring(4))
             'dlgImportDataset.SetDataName(Path.GetFileNameWithoutExtension(sender.ToString))
             'Not working as I would like because of the changes made to the Import Dataset
+            dlgImportDataset.strFileToOpenOn = DirectCast(sender, ToolStripItem).Tag.ToString().Substring(4)
             dlgImportDataset.ShowDialog()
-
         Else
-            MessageBox.Show(frmMain, "The file has either been moved or deleted", "Error trying to open file")
+            iResult = MessageBox.Show(frmMain, "File not accessible. It may have been renamed, moved or deleted." & Environment.NewLine & Environment.NewLine & "Would you like to remove this file from the list?", "Cannot access file", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
             'removes the path to the non existent file
-            strListMRU.RemoveAt(strListMRU.FindLastIndex(Function(value As String)
-                                                             Return value.Contains(sender.ToString)
-                                                         End Function))
-            'updates the interfaces
-            UpdateItemsMenu()
+            If iResult = DialogResult.Yes Then
+                strListMRU.RemoveAt(strListMRU.FindLastIndex(Function(value As String)
+                                                                 Return value.Contains(sender.ToString)
+                                                             End Function))
+                'updates the interfaces
+                UpdateItemsMenu()
+            End If
         End If
     End Sub
 
@@ -178,5 +204,4 @@ Public Class clsRecentFiles
             End If
         Next
     End Sub
-
 End Class

@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ucrAdditionalLayers
     Inherits System.Windows.Forms.UserControl
 
@@ -22,6 +38,7 @@ Partial Class ucrAdditionalLayers
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrAdditionalLayers))
         Me.cmdDelete = New System.Windows.Forms.Button()
         Me.cmdEdit = New System.Windows.Forms.Button()
         Me.cmdAdd = New System.Windows.Forms.Button()
@@ -31,52 +48,38 @@ Partial Class ucrAdditionalLayers
         '
         'cmdDelete
         '
-        Me.cmdDelete.Location = New System.Drawing.Point(139, 126)
+        resources.ApplyResources(Me.cmdDelete, "cmdDelete")
         Me.cmdDelete.Name = "cmdDelete"
-        Me.cmdDelete.Size = New System.Drawing.Size(75, 23)
-        Me.cmdDelete.TabIndex = 6
-        Me.cmdDelete.Text = "Delete"
         Me.cmdDelete.UseVisualStyleBackColor = True
         '
         'cmdEdit
         '
-        Me.cmdEdit.Location = New System.Drawing.Point(139, 97)
+        resources.ApplyResources(Me.cmdEdit, "cmdEdit")
         Me.cmdEdit.Name = "cmdEdit"
-        Me.cmdEdit.Size = New System.Drawing.Size(75, 23)
-        Me.cmdEdit.TabIndex = 7
-        Me.cmdEdit.Text = "Edit"
         Me.cmdEdit.UseVisualStyleBackColor = True
         '
         'cmdAdd
         '
-        Me.cmdAdd.Location = New System.Drawing.Point(139, 68)
+        resources.ApplyResources(Me.cmdAdd, "cmdAdd")
         Me.cmdAdd.Name = "cmdAdd"
-        Me.cmdAdd.Size = New System.Drawing.Size(75, 23)
-        Me.cmdAdd.TabIndex = 8
-        Me.cmdAdd.Text = "Add"
         Me.cmdAdd.UseVisualStyleBackColor = True
         '
         'lblLayers
         '
-        Me.lblLayers.AutoSize = True
-        Me.lblLayers.Location = New System.Drawing.Point(5, 17)
+        resources.ApplyResources(Me.lblLayers, "lblLayers")
         Me.lblLayers.Name = "lblLayers"
-        Me.lblLayers.Size = New System.Drawing.Size(87, 13)
-        Me.lblLayers.TabIndex = 5
-        Me.lblLayers.Text = "Additional Layers"
         '
         'lstLayers
         '
-        Me.lstLayers.Location = New System.Drawing.Point(8, 33)
+        Me.lstLayers.FullRowSelect = True
+        resources.ApplyResources(Me.lstLayers, "lstLayers")
         Me.lstLayers.Name = "lstLayers"
-        Me.lstLayers.Size = New System.Drawing.Size(125, 149)
-        Me.lstLayers.TabIndex = 4
         Me.lstLayers.UseCompatibleStateImageBehavior = False
         Me.lstLayers.View = System.Windows.Forms.View.List
         '
         'ucrAdditionalLayers
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.cmdDelete)
         Me.Controls.Add(Me.cmdEdit)
@@ -84,7 +87,6 @@ Partial Class ucrAdditionalLayers
         Me.Controls.Add(Me.lblLayers)
         Me.Controls.Add(Me.lstLayers)
         Me.Name = "ucrAdditionalLayers"
-        Me.Size = New System.Drawing.Size(218, 191)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

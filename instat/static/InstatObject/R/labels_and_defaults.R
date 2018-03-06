@@ -30,7 +30,10 @@ column_count_label="Column_Count"
 is_linkable="Is_Linkable"
 
 #variables_metadata labels
-display_decimal_label="Display_Decimal"
+label_label="label"
+labels_label="labels"
+signif_figures_label="Signif_Figures"
+scientific_label="Scientific"
 name_label="Name"
 is_factor_label="Is_Factor"
 #changes because attributes default is class
@@ -45,6 +48,7 @@ dependent_columns_label="Dependent_Columns"
 calculated_by_label="Calculated_By"
 dependencies_label="Dependencies"
 colour_label="Colour"
+set_prefix="set."
 
 #Variables_metadata value labels
 structure_type_1_label="Layout"
@@ -55,6 +59,9 @@ structure_type_3_label="Measurement"
 overall_label="[Overall]"
 model_label="model"
 graph_label="graph"
+table_label="table"
 
 #link labels
 keyed_link_label="keyed_link"
+
+max_labels_display=4

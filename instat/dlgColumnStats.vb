@@ -1,6 +1,5 @@
-﻿
-' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -12,125 +11,167 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Public Class dlgColumnStats
     Public bFirstLoad As Boolean = True
-    Public clsRColumnStats As New RFunction
+    Private bReset As Boolean = True
+    Private clsSummariesList As New RFunction
+    Private bResetSubdialog As Boolean = False
+    Private clsDefaultFunction As New RFunction
+    Public strDefaultDataFrame As String = ""
+    Public strDefaultVariables() As String
+    Public strDefaultFactors() As String
+
     Private Sub dlgColumnStats_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        SetDefaultColumns()
+        bReset = False
+        autoTranslate(Me)
         TestOKEnabled()
     End Sub
 
-    Private Sub TestOKEnabled()
-        If (Not ucrReceiverSelectedVariables.IsEmpty()) Then
+    Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.iCallType = 0
+        ucrBase.iHelpTopicID = 64
+
+        ucrChkDropUnusedLevels.Enabled = False ' removed this functionality so this is disabled
+
+        ucrSelectorForColumnStatistics.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorForColumnStatistics.SetParameterIsString()
+
+        ' only allow numeric variables in the first receiver, this will change once freq. tables is added
+        ucrReceiverSelectedVariables.SetParameter(New RParameter("columns_to_summarise", 1))
+        ucrReceiverSelectedVariables.SetParameterIsString()
+        ucrReceiverSelectedVariables.SetIncludedDataTypes({"numeric"})
+        ucrReceiverSelectedVariables.strSelectorHeading = "Numerics"
+        ucrReceiverSelectedVariables.Selector = ucrSelectorForColumnStatistics
+
+        ucrReceiverByFactor.SetParameter(New RParameter("factors", 2))
+        ucrReceiverByFactor.Selector = ucrSelectorForColumnStatistics
+        ucrReceiverByFactor.SetIncludedDataTypes({"factor"})
+        ucrReceiverByFactor.strSelectorHeading = "Factors"
+        ucrReceiverByFactor.SetParameterIsString()
+
+        ucrChkStoreResults.SetParameter(New RParameter("store_results", 3))
+        ucrChkStoreResults.SetText("Store Results")
+        ucrChkStoreResults.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkStoreResults.SetRDefault("TRUE")
+
+        ucrChkOriginalLevel.SetParameter(New RParameter("original_level", 7))
+        ucrChkOriginalLevel.SetText("Original Level")
+        ucrChkOriginalLevel.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkOriginalLevel.SetRDefault("FALSE")
+
+        ucrChkPrintOutput.SetParameter(New RParameter("return_output", 4))
+        ucrChkPrintOutput.SetText("Print Results to Output Window")
+        ucrChkPrintOutput.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkPrintOutput.SetRDefault("FALSE")
+
+        ucrChkDropUnusedLevels.SetParameter(New RParameter("drop", 5))
+        ucrChkDropUnusedLevels.SetText("Drop Unused Levels")
+        ucrChkDropUnusedLevels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkDropUnusedLevels.SetRDefault("FALSE")
+
+        ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 6))
+        ucrChkOmitMissing.SetText("Omit Missing Values")
+        ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkOmitMissing.SetRDefault("FALSE")
+
+        'linking
+        ucrChkStoreResults.AddToLinkedControls(ucrChkOriginalLevel, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+    End Sub
+
+    Private Sub SetDefaults()
+        clsDefaultFunction = New RFunction
+        clsSummariesList = New RFunction
+
+        ucrSelectorForColumnStatistics.Reset()
+        sdgProportionsPercentages.ucrSelectorProportionsPercentiles.Reset()
+        ucrReceiverSelectedVariables.SetMeAsReceiver()
+
+        clsSummariesList.SetRCommand("c")
+        clsSummariesList.AddParameter("summary_count_non_missing", Chr(34) & "summary_count_non_missing" & Chr(34), bIncludeArgumentName:=False)
+        clsSummariesList.AddParameter("summary_count", Chr(34) & "summary_count" & Chr(34), bIncludeArgumentName:=False)
+        clsSummariesList.AddParameter("summary_sum", Chr(34) & "summary_sum" & Chr(34), bIncludeArgumentName:=False)
+
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
+        clsDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList)
+        'Prevents an error if user chooses non count summaries with no columns to summarise
+        clsDefaultFunction.AddParameter("silent", "TRUE")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+        bResetSubdialog = True
+    End Sub
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+    Private Sub SetDefaultColumns()
+        If strDefaultDataFrame <> "" Then
+            ucrSelectorForColumnStatistics.SetDataframe(strDefaultDataFrame)
+        End If
+        If strDefaultVariables IsNot Nothing AndAlso strDefaultVariables.Count > 0 Then
+            For Each strVar As String In strDefaultVariables
+                ucrReceiverSelectedVariables.Add(strVar, strDefaultDataFrame)
+            Next
+        End If
+        If strDefaultFactors IsNot Nothing AndAlso strDefaultFactors.Count > 0 Then
+            For Each strVar As String In strDefaultFactors
+                ucrReceiverByFactor.Add(strVar, strDefaultDataFrame)
+            Next
+        End If
+        strDefaultDataFrame = ""
+        strDefaultVariables = Nothing
+        strDefaultFactors = Nothing
+    End Sub
+
+    Public Sub TestOKEnabled()
+        If ((ucrChkStoreResults.Checked OrElse ucrChkPrintOutput.Checked) AndAlso Not clsSummariesList.clsParameters.Count = 0) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub ReopenDialog()
-
-    End Sub
-
-    Private Sub SetDefaults()
-        chkStoreResults.Checked = True
-        chkPrintOutput.Checked = False
-        chkdropUnusedLevels.Checked = False
-        ucrSelectorForColumnStatistics.Reset()
-    End Sub
-
-    Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.iCallType = 2
-        ucrReceiverSelectedVariables.Selector = ucrSelectorForColumnStatistics
-        ucrReceiverByFactor.Selector = ucrSelectorForColumnStatistics
-        ucrReceiverSelectedVariables.SetMeAsReceiver()
-        ucrReceiverSelectedVariables.SetIncludedDataTypes({"numeric"})
-        ucrReceiverByFactor.SetIncludedDataTypes({"factor"}) 'This needs to change
-        ucrBase.iHelpTopicID = 64
-        clsRColumnStats.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
-        sdgSummaries.SetMyRFunction(clsRColumnStats)
-        sdgSummaries.SetDefaults()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsRColumnStats)
-    End Sub
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
         TestOKEnabled()
-    End Sub
-
-    Private Sub grpOptions_CheckedChanged(sender As Object, e As EventArgs) Handles chkdropUnusedLevels.CheckedChanged, chkPrintOutput.CheckedChanged
-        OptionParameters()
-    End Sub
-
-    Private Sub OptionParameters()
-        If chkPrintOutput.Checked Then
-            clsRColumnStats.AddParameter("return_output", "TRUE")
-        Else
-            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                clsRColumnStats.AddParameter("return_output", "FALSE")
-            Else
-                clsRColumnStats.RemoveParameterByName("return_output")
-            End If
-        End If
-        If chkdropUnusedLevels.Checked Then
-            clsRColumnStats.AddParameter("drop", "TRUE")
-        Else
-            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                clsRColumnStats.AddParameter("drop", "FALSE")
-            Else
-                clsRColumnStats.RemoveParameterByName("drop")
-            End If
-        End If
-    End Sub
-
-    Private Sub ucrSelectorForColumnStatistics_DataFrameChanged() Handles ucrSelectorForColumnStatistics.DataFrameChanged
-        clsRColumnStats.AddParameter("data_name", Chr(34) & ucrSelectorForColumnStatistics.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-    End Sub
-
-    Private Sub ucrReceiverSelectedVariables_SelectionChanged() Handles ucrReceiverSelectedVariables.SelectionChanged
-        If Not ucrReceiverSelectedVariables.IsEmpty Then
-            clsRColumnStats.AddParameter("columns_to_summarise", ucrReceiverSelectedVariables.GetVariableNames)
-        Else
-            clsRColumnStats.RemoveParameterByName("columns_to_summarise")
-        End If
-        TestOKEnabled()
-    End Sub
-
-    Private Sub chkStoreResults_CheckedChanged(sender As Object, e As EventArgs) Handles chkStoreResults.CheckedChanged
-        StoreResultsParamenter()
-    End Sub
-
-    Private Sub StoreResultsParamenter()
-        If chkStoreResults.Checked Then
-            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                clsRColumnStats.AddParameter("store_results", "TRUE")
-            Else
-                clsRColumnStats.RemoveParameterByName("store_results")
-            End If
-        Else
-            clsRColumnStats.AddParameter("store_results", "FALSE")
-        End If
-    End Sub
-
-    Private Sub ucrReceiverByFactor_SelectionChanged() Handles ucrReceiverByFactor.SelectionChanged
-        If Not ucrReceiverByFactor.IsEmpty Then
-            clsRColumnStats.AddParameter("factors", ucrReceiverByFactor.GetVariableNames)
-        Else
-            clsRColumnStats.RemoveParameterByName("factors")
-        End If
     End Sub
 
     Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
+        sdgSummaries.SetRFunction(clsSummariesList, clsDefaultFunction, ucrSelectorForColumnStatistics, bResetSubdialog)
         sdgSummaries.ShowDialog()
+        bResetSubdialog = False
+        TestOKEnabled()
+    End Sub
+
+    Private Sub cmdProportionsPercentages_Click(sender As Object, e As EventArgs) Handles cmdProportionsPercentages.Click
+        sdgProportionsPercentages.SetRFunction(clsDefaultFunction, bResetSubdialog)
+        sdgProportionsPercentages.ShowDialog()
+        bResetSubdialog = False
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrChkPrintOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPrintOutput.ControlValueChanged
+        If ucrChkPrintOutput.Checked Then
+            ucrBase.clsRsyntax.iCallType = 2
+        Else
+            ucrBase.clsRsyntax.iCallType = 0
+        End If
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkPrintOutput.ControlContentsChanged, ucrChkStoreResults.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class

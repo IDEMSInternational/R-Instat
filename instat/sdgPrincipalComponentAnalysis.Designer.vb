@@ -1,4 +1,18 @@
-﻿
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class sdgPrincipalComponentAnalysis
     Inherits System.Windows.Forms.Form
@@ -23,34 +37,55 @@ Partial Class sdgPrincipalComponentAnalysis
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgPrincipalComponentAnalysis))
         Me.tbRegOptions = New System.Windows.Forms.TabControl()
         Me.tbDisplay = New System.Windows.Forms.TabPage()
-        Me.chkResiduals = New System.Windows.Forms.CheckBox()
-        Me.chkEigenVectors = New System.Windows.Forms.CheckBox()
-        Me.chkScores = New System.Windows.Forms.CheckBox()
-        Me.chkEigenValues = New System.Windows.Forms.CheckBox()
+        Me.ucrChkRotation = New instat.ucrCheck()
+        Me.ucrChkEigenvectors = New instat.ucrCheck()
+        Me.ucrChkEigenvalues = New instat.ucrCheck()
         Me.tbGraphics = New System.Windows.Forms.TabPage()
+        Me.rdoBarPlot = New System.Windows.Forms.RadioButton()
         Me.rdoIndividualsPlot = New System.Windows.Forms.RadioButton()
+        Me.grpScree = New System.Windows.Forms.GroupBox()
+        Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
+        Me.lblFactorVariable = New System.Windows.Forms.Label()
+        Me.ucrSelectorFactor = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.grpVariablePlot = New System.Windows.Forms.GroupBox()
+        Me.rdoTextVariables = New System.Windows.Forms.RadioButton()
+        Me.rdoArrow = New System.Windows.Forms.RadioButton()
+        Me.rdoBothVariables = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlVariablesPlot = New instat.UcrPanel()
+        Me.lblLabel = New System.Windows.Forms.Label()
+        Me.GrpIndividualPlot = New System.Windows.Forms.GroupBox()
+        Me.rdoTextIndividual = New System.Windows.Forms.RadioButton()
+        Me.rdoPoint = New System.Windows.Forms.RadioButton()
+        Me.rdoBothIndividual = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlIndividualPlot = New instat.UcrPanel()
+        Me.lblChoice = New System.Windows.Forms.Label()
+        Me.ucrChkIncludePercentage = New instat.ucrCheck()
+        Me.ucrNudDim2 = New instat.ucrNud()
+        Me.ucrNudDim1 = New instat.ucrNud()
+        Me.grpGeom = New System.Windows.Forms.GroupBox()
+        Me.rdoBar = New System.Windows.Forms.RadioButton()
+        Me.rdoLine = New System.Windows.Forms.RadioButton()
+        Me.rdoBothScree = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlScreePlot = New instat.UcrPanel()
+        Me.lblChoiceScree = New System.Windows.Forms.Label()
+        Me.lblDim = New System.Windows.Forms.Label()
+        Me.ucrInputLabel2 = New instat.ucrInputComboBox()
+        Me.ucrInputLabel1 = New instat.ucrInputComboBox()
         Me.rdoBiplot = New System.Windows.Forms.RadioButton()
         Me.rdoVariablesPlot = New System.Windows.Forms.RadioButton()
         Me.rdoScreePlot = New System.Windows.Forms.RadioButton()
-        Me.tbGrapOptions = New System.Windows.Forms.TabControl()
-        Me.tbScreePlot = New System.Windows.Forms.TabPage()
-        Me.grpGeom = New System.Windows.Forms.GroupBox()
-        Me.chkBar = New System.Windows.Forms.CheckBox()
-        Me.chkLine = New System.Windows.Forms.CheckBox()
-        Me.lblChoice = New System.Windows.Forms.Label()
-        Me.cmbChoice = New System.Windows.Forms.ComboBox()
-        Me.tbVariables = New System.Windows.Forms.TabPage()
-        Me.tbIndividuals = New System.Windows.Forms.TabPage()
-        Me.tbBiplot = New System.Windows.Forms.TabPage()
+        Me.ucrPnlGraphics = New instat.UcrPanel()
         Me.tbSave = New System.Windows.Forms.TabPage()
         Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
         Me.tbRegOptions.SuspendLayout()
         Me.tbDisplay.SuspendLayout()
         Me.tbGraphics.SuspendLayout()
-        Me.tbGrapOptions.SuspendLayout()
-        Me.tbScreePlot.SuspendLayout()
+        Me.grpScree.SuspendLayout()
+        Me.grpVariablePlot.SuspendLayout()
+        Me.GrpIndividualPlot.SuspendLayout()
         Me.grpGeom.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -59,284 +94,338 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbRegOptions.Controls.Add(Me.tbDisplay)
         Me.tbRegOptions.Controls.Add(Me.tbGraphics)
         Me.tbRegOptions.Controls.Add(Me.tbSave)
-        Me.tbRegOptions.Location = New System.Drawing.Point(2, 3)
+        resources.ApplyResources(Me.tbRegOptions, "tbRegOptions")
         Me.tbRegOptions.Name = "tbRegOptions"
         Me.tbRegOptions.SelectedIndex = 0
-        Me.tbRegOptions.Size = New System.Drawing.Size(246, 206)
-        Me.tbRegOptions.TabIndex = 0
         '
         'tbDisplay
         '
-        Me.tbDisplay.Controls.Add(Me.chkResiduals)
-        Me.tbDisplay.Controls.Add(Me.chkEigenVectors)
-        Me.tbDisplay.Controls.Add(Me.chkScores)
-        Me.tbDisplay.Controls.Add(Me.chkEigenValues)
-        Me.tbDisplay.Location = New System.Drawing.Point(4, 22)
+        Me.tbDisplay.Controls.Add(Me.ucrChkRotation)
+        Me.tbDisplay.Controls.Add(Me.ucrChkEigenvectors)
+        Me.tbDisplay.Controls.Add(Me.ucrChkEigenvalues)
+        resources.ApplyResources(Me.tbDisplay, "tbDisplay")
         Me.tbDisplay.Name = "tbDisplay"
-        Me.tbDisplay.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbDisplay.Size = New System.Drawing.Size(238, 180)
-        Me.tbDisplay.TabIndex = 0
         Me.tbDisplay.Tag = "Display"
-        Me.tbDisplay.Text = "Display"
         Me.tbDisplay.UseVisualStyleBackColor = True
         '
-        'chkResiduals
+        'ucrChkRotation
         '
-        Me.chkResiduals.AutoSize = True
-        Me.chkResiduals.Location = New System.Drawing.Point(6, 84)
-        Me.chkResiduals.Name = "chkResiduals"
-        Me.chkResiduals.Size = New System.Drawing.Size(72, 17)
-        Me.chkResiduals.TabIndex = 3
-        Me.chkResiduals.Tag = "Residuals"
-        Me.chkResiduals.Text = "Residuals"
-        Me.chkResiduals.UseVisualStyleBackColor = True
+        Me.ucrChkRotation.Checked = False
+        resources.ApplyResources(Me.ucrChkRotation, "ucrChkRotation")
+        Me.ucrChkRotation.Name = "ucrChkRotation"
         '
-        'chkEigenVectors
+        'ucrChkEigenvectors
         '
-        Me.chkEigenVectors.AutoSize = True
-        Me.chkEigenVectors.Location = New System.Drawing.Point(6, 38)
-        Me.chkEigenVectors.Name = "chkEigenVectors"
-        Me.chkEigenVectors.Size = New System.Drawing.Size(92, 17)
-        Me.chkEigenVectors.TabIndex = 2
-        Me.chkEigenVectors.Tag = "Eigen_Vectors"
-        Me.chkEigenVectors.Text = "Eigen Vectors"
-        Me.chkEigenVectors.UseVisualStyleBackColor = True
+        Me.ucrChkEigenvectors.Checked = False
+        resources.ApplyResources(Me.ucrChkEigenvectors, "ucrChkEigenvectors")
+        Me.ucrChkEigenvectors.Name = "ucrChkEigenvectors"
         '
-        'chkScores
+        'ucrChkEigenvalues
         '
-        Me.chkScores.AutoSize = True
-        Me.chkScores.Location = New System.Drawing.Point(6, 61)
-        Me.chkScores.Name = "chkScores"
-        Me.chkScores.Size = New System.Drawing.Size(59, 17)
-        Me.chkScores.TabIndex = 1
-        Me.chkScores.Tag = "Scores"
-        Me.chkScores.Text = "Scores"
-        Me.chkScores.UseVisualStyleBackColor = True
-        '
-        'chkEigenValues
-        '
-        Me.chkEigenValues.AutoSize = True
-        Me.chkEigenValues.Location = New System.Drawing.Point(6, 15)
-        Me.chkEigenValues.Name = "chkEigenValues"
-        Me.chkEigenValues.Size = New System.Drawing.Size(88, 17)
-        Me.chkEigenValues.TabIndex = 0
-        Me.chkEigenValues.Tag = "Eigen_Values"
-        Me.chkEigenValues.Text = "Eigen Values"
-        Me.chkEigenValues.UseVisualStyleBackColor = True
+        Me.ucrChkEigenvalues.Checked = False
+        resources.ApplyResources(Me.ucrChkEigenvalues, "ucrChkEigenvalues")
+        Me.ucrChkEigenvalues.Name = "ucrChkEigenvalues"
         '
         'tbGraphics
         '
+        Me.tbGraphics.Controls.Add(Me.rdoBarPlot)
         Me.tbGraphics.Controls.Add(Me.rdoIndividualsPlot)
+        Me.tbGraphics.Controls.Add(Me.grpScree)
         Me.tbGraphics.Controls.Add(Me.rdoBiplot)
         Me.tbGraphics.Controls.Add(Me.rdoVariablesPlot)
         Me.tbGraphics.Controls.Add(Me.rdoScreePlot)
-        Me.tbGraphics.Controls.Add(Me.tbGrapOptions)
-        Me.tbGraphics.Location = New System.Drawing.Point(4, 22)
+        Me.tbGraphics.Controls.Add(Me.ucrPnlGraphics)
+        resources.ApplyResources(Me.tbGraphics, "tbGraphics")
         Me.tbGraphics.Name = "tbGraphics"
-        Me.tbGraphics.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbGraphics.Size = New System.Drawing.Size(238, 180)
-        Me.tbGraphics.TabIndex = 1
         Me.tbGraphics.Tag = "Graphics"
-        Me.tbGraphics.Text = "Graphics"
         Me.tbGraphics.UseVisualStyleBackColor = True
+        '
+        'rdoBarPlot
+        '
+        resources.ApplyResources(Me.rdoBarPlot, "rdoBarPlot")
+        Me.rdoBarPlot.Name = "rdoBarPlot"
+        Me.rdoBarPlot.Tag = "Bar plot"
+        Me.rdoBarPlot.UseVisualStyleBackColor = True
         '
         'rdoIndividualsPlot
         '
-        Me.rdoIndividualsPlot.AutoSize = True
-        Me.rdoIndividualsPlot.Location = New System.Drawing.Point(124, 14)
+        resources.ApplyResources(Me.rdoIndividualsPlot, "rdoIndividualsPlot")
         Me.rdoIndividualsPlot.Name = "rdoIndividualsPlot"
-        Me.rdoIndividualsPlot.Size = New System.Drawing.Size(96, 17)
-        Me.rdoIndividualsPlot.TabIndex = 11
-        Me.rdoIndividualsPlot.TabStop = True
         Me.rdoIndividualsPlot.Tag = "Individuals_Plot"
-        Me.rdoIndividualsPlot.Text = "Individuals Plot"
         Me.rdoIndividualsPlot.UseVisualStyleBackColor = True
+        '
+        'grpScree
+        '
+        Me.grpScree.Controls.Add(Me.ucrReceiverFactor)
+        Me.grpScree.Controls.Add(Me.lblFactorVariable)
+        Me.grpScree.Controls.Add(Me.ucrSelectorFactor)
+        Me.grpScree.Controls.Add(Me.grpVariablePlot)
+        Me.grpScree.Controls.Add(Me.lblLabel)
+        Me.grpScree.Controls.Add(Me.GrpIndividualPlot)
+        Me.grpScree.Controls.Add(Me.lblChoice)
+        Me.grpScree.Controls.Add(Me.ucrChkIncludePercentage)
+        Me.grpScree.Controls.Add(Me.ucrNudDim2)
+        Me.grpScree.Controls.Add(Me.ucrNudDim1)
+        Me.grpScree.Controls.Add(Me.grpGeom)
+        Me.grpScree.Controls.Add(Me.lblChoiceScree)
+        Me.grpScree.Controls.Add(Me.lblDim)
+        Me.grpScree.Controls.Add(Me.ucrInputLabel2)
+        Me.grpScree.Controls.Add(Me.ucrInputLabel1)
+        resources.ApplyResources(Me.grpScree, "grpScree")
+        Me.grpScree.Name = "grpScree"
+        Me.grpScree.TabStop = False
+        '
+        'ucrReceiverFactor
+        '
+        Me.ucrReceiverFactor.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverFactor, "ucrReceiverFactor")
+        Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
+        Me.ucrReceiverFactor.Selector = Nothing
+        Me.ucrReceiverFactor.strNcFilePath = ""
+        Me.ucrReceiverFactor.ucrSelector = Nothing
+        '
+        'lblFactorVariable
+        '
+        resources.ApplyResources(Me.lblFactorVariable, "lblFactorVariable")
+        Me.lblFactorVariable.Name = "lblFactorVariable"
+        Me.lblFactorVariable.Tag = "Factor_Variable"
+        '
+        'ucrSelectorFactor
+        '
+        Me.ucrSelectorFactor.bShowHiddenColumns = False
+        Me.ucrSelectorFactor.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorFactor, "ucrSelectorFactor")
+        Me.ucrSelectorFactor.Name = "ucrSelectorFactor"
+        '
+        'grpVariablePlot
+        '
+        Me.grpVariablePlot.Controls.Add(Me.rdoTextVariables)
+        Me.grpVariablePlot.Controls.Add(Me.rdoArrow)
+        Me.grpVariablePlot.Controls.Add(Me.rdoBothVariables)
+        Me.grpVariablePlot.Controls.Add(Me.ucrPnlVariablesPlot)
+        resources.ApplyResources(Me.grpVariablePlot, "grpVariablePlot")
+        Me.grpVariablePlot.Name = "grpVariablePlot"
+        Me.grpVariablePlot.TabStop = False
+        '
+        'rdoTextVariables
+        '
+        resources.ApplyResources(Me.rdoTextVariables, "rdoTextVariables")
+        Me.rdoTextVariables.Name = "rdoTextVariables"
+        Me.rdoTextVariables.TabStop = True
+        Me.rdoTextVariables.UseVisualStyleBackColor = True
+        '
+        'rdoArrow
+        '
+        resources.ApplyResources(Me.rdoArrow, "rdoArrow")
+        Me.rdoArrow.Name = "rdoArrow"
+        Me.rdoArrow.TabStop = True
+        Me.rdoArrow.UseVisualStyleBackColor = True
+        '
+        'rdoBothVariables
+        '
+        resources.ApplyResources(Me.rdoBothVariables, "rdoBothVariables")
+        Me.rdoBothVariables.Name = "rdoBothVariables"
+        Me.rdoBothVariables.TabStop = True
+        Me.rdoBothVariables.UseVisualStyleBackColor = True
+        '
+        'ucrPnlVariablesPlot
+        '
+        resources.ApplyResources(Me.ucrPnlVariablesPlot, "ucrPnlVariablesPlot")
+        Me.ucrPnlVariablesPlot.Name = "ucrPnlVariablesPlot"
+        '
+        'lblLabel
+        '
+        resources.ApplyResources(Me.lblLabel, "lblLabel")
+        Me.lblLabel.Name = "lblLabel"
+        '
+        'GrpIndividualPlot
+        '
+        Me.GrpIndividualPlot.Controls.Add(Me.rdoTextIndividual)
+        Me.GrpIndividualPlot.Controls.Add(Me.rdoPoint)
+        Me.GrpIndividualPlot.Controls.Add(Me.rdoBothIndividual)
+        Me.GrpIndividualPlot.Controls.Add(Me.ucrPnlIndividualPlot)
+        resources.ApplyResources(Me.GrpIndividualPlot, "GrpIndividualPlot")
+        Me.GrpIndividualPlot.Name = "GrpIndividualPlot"
+        Me.GrpIndividualPlot.TabStop = False
+        '
+        'rdoTextIndividual
+        '
+        resources.ApplyResources(Me.rdoTextIndividual, "rdoTextIndividual")
+        Me.rdoTextIndividual.Name = "rdoTextIndividual"
+        Me.rdoTextIndividual.TabStop = True
+        Me.rdoTextIndividual.UseVisualStyleBackColor = True
+        '
+        'rdoPoint
+        '
+        resources.ApplyResources(Me.rdoPoint, "rdoPoint")
+        Me.rdoPoint.Name = "rdoPoint"
+        Me.rdoPoint.TabStop = True
+        Me.rdoPoint.UseVisualStyleBackColor = True
+        '
+        'rdoBothIndividual
+        '
+        resources.ApplyResources(Me.rdoBothIndividual, "rdoBothIndividual")
+        Me.rdoBothIndividual.Name = "rdoBothIndividual"
+        Me.rdoBothIndividual.TabStop = True
+        Me.rdoBothIndividual.UseVisualStyleBackColor = True
+        '
+        'ucrPnlIndividualPlot
+        '
+        resources.ApplyResources(Me.ucrPnlIndividualPlot, "ucrPnlIndividualPlot")
+        Me.ucrPnlIndividualPlot.Name = "ucrPnlIndividualPlot"
+        '
+        'lblChoice
+        '
+        resources.ApplyResources(Me.lblChoice, "lblChoice")
+        Me.lblChoice.Name = "lblChoice"
+        '
+        'ucrChkIncludePercentage
+        '
+        Me.ucrChkIncludePercentage.Checked = False
+        resources.ApplyResources(Me.ucrChkIncludePercentage, "ucrChkIncludePercentage")
+        Me.ucrChkIncludePercentage.Name = "ucrChkIncludePercentage"
+        '
+        'ucrNudDim2
+        '
+        Me.ucrNudDim2.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDim2.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudDim2, "ucrNudDim2")
+        Me.ucrNudDim2.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudDim2.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDim2.Name = "ucrNudDim2"
+        Me.ucrNudDim2.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudDim1
+        '
+        Me.ucrNudDim1.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDim1.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudDim1, "ucrNudDim1")
+        Me.ucrNudDim1.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudDim1.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDim1.Name = "ucrNudDim1"
+        Me.ucrNudDim1.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'grpGeom
+        '
+        Me.grpGeom.Controls.Add(Me.rdoBar)
+        Me.grpGeom.Controls.Add(Me.rdoLine)
+        Me.grpGeom.Controls.Add(Me.rdoBothScree)
+        Me.grpGeom.Controls.Add(Me.ucrPnlScreePlot)
+        resources.ApplyResources(Me.grpGeom, "grpGeom")
+        Me.grpGeom.Name = "grpGeom"
+        Me.grpGeom.TabStop = False
+        Me.grpGeom.Tag = "Geom"
+        '
+        'rdoBar
+        '
+        resources.ApplyResources(Me.rdoBar, "rdoBar")
+        Me.rdoBar.Name = "rdoBar"
+        Me.rdoBar.TabStop = True
+        Me.rdoBar.UseVisualStyleBackColor = True
+        '
+        'rdoLine
+        '
+        resources.ApplyResources(Me.rdoLine, "rdoLine")
+        Me.rdoLine.Name = "rdoLine"
+        Me.rdoLine.TabStop = True
+        Me.rdoLine.UseVisualStyleBackColor = True
+        '
+        'rdoBothScree
+        '
+        resources.ApplyResources(Me.rdoBothScree, "rdoBothScree")
+        Me.rdoBothScree.Name = "rdoBothScree"
+        Me.rdoBothScree.TabStop = True
+        Me.rdoBothScree.UseVisualStyleBackColor = True
+        '
+        'ucrPnlScreePlot
+        '
+        resources.ApplyResources(Me.ucrPnlScreePlot, "ucrPnlScreePlot")
+        Me.ucrPnlScreePlot.Name = "ucrPnlScreePlot"
+        '
+        'lblChoiceScree
+        '
+        resources.ApplyResources(Me.lblChoiceScree, "lblChoiceScree")
+        Me.lblChoiceScree.Name = "lblChoiceScree"
+        Me.lblChoiceScree.Tag = "Choice:"
+        '
+        'lblDim
+        '
+        resources.ApplyResources(Me.lblDim, "lblDim")
+        Me.lblDim.Name = "lblDim"
+        '
+        'ucrInputLabel2
+        '
+        Me.ucrInputLabel2.AddQuotesIfUnrecognised = True
+        Me.ucrInputLabel2.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputLabel2, "ucrInputLabel2")
+        Me.ucrInputLabel2.Name = "ucrInputLabel2"
+        '
+        'ucrInputLabel1
+        '
+        Me.ucrInputLabel1.AddQuotesIfUnrecognised = True
+        Me.ucrInputLabel1.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputLabel1, "ucrInputLabel1")
+        Me.ucrInputLabel1.Name = "ucrInputLabel1"
         '
         'rdoBiplot
         '
-        Me.rdoBiplot.AutoSize = True
-        Me.rdoBiplot.Location = New System.Drawing.Point(124, 38)
+        resources.ApplyResources(Me.rdoBiplot, "rdoBiplot")
         Me.rdoBiplot.Name = "rdoBiplot"
-        Me.rdoBiplot.Size = New System.Drawing.Size(51, 17)
-        Me.rdoBiplot.TabIndex = 10
-        Me.rdoBiplot.TabStop = True
         Me.rdoBiplot.Tag = "Biplot"
-        Me.rdoBiplot.Text = "Biplot"
         Me.rdoBiplot.UseVisualStyleBackColor = True
         '
         'rdoVariablesPlot
         '
-        Me.rdoVariablesPlot.AutoSize = True
-        Me.rdoVariablesPlot.Location = New System.Drawing.Point(10, 38)
+        resources.ApplyResources(Me.rdoVariablesPlot, "rdoVariablesPlot")
         Me.rdoVariablesPlot.Name = "rdoVariablesPlot"
-        Me.rdoVariablesPlot.Size = New System.Drawing.Size(89, 17)
-        Me.rdoVariablesPlot.TabIndex = 9
-        Me.rdoVariablesPlot.TabStop = True
         Me.rdoVariablesPlot.Tag = "Variables_Plot"
-        Me.rdoVariablesPlot.Text = "Variables Plot"
         Me.rdoVariablesPlot.UseVisualStyleBackColor = True
         '
         'rdoScreePlot
         '
-        Me.rdoScreePlot.AutoSize = True
-        Me.rdoScreePlot.Location = New System.Drawing.Point(10, 14)
+        resources.ApplyResources(Me.rdoScreePlot, "rdoScreePlot")
         Me.rdoScreePlot.Name = "rdoScreePlot"
-        Me.rdoScreePlot.Size = New System.Drawing.Size(74, 17)
-        Me.rdoScreePlot.TabIndex = 8
-        Me.rdoScreePlot.TabStop = True
         Me.rdoScreePlot.Tag = "Scree_Plot"
-        Me.rdoScreePlot.Text = "Scree Plot"
         Me.rdoScreePlot.UseVisualStyleBackColor = True
         '
-        'tbGrapOptions
+        'ucrPnlGraphics
         '
-        Me.tbGrapOptions.Controls.Add(Me.tbScreePlot)
-        Me.tbGrapOptions.Controls.Add(Me.tbVariables)
-        Me.tbGrapOptions.Controls.Add(Me.tbIndividuals)
-        Me.tbGrapOptions.Controls.Add(Me.tbBiplot)
-        Me.tbGrapOptions.Location = New System.Drawing.Point(6, 61)
-        Me.tbGrapOptions.Name = "tbGrapOptions"
-        Me.tbGrapOptions.SelectedIndex = 0
-        Me.tbGrapOptions.Size = New System.Drawing.Size(228, 114)
-        Me.tbGrapOptions.TabIndex = 7
-        '
-        'tbScreePlot
-        '
-        Me.tbScreePlot.Controls.Add(Me.grpGeom)
-        Me.tbScreePlot.Controls.Add(Me.lblChoice)
-        Me.tbScreePlot.Controls.Add(Me.cmbChoice)
-        Me.tbScreePlot.Location = New System.Drawing.Point(4, 22)
-        Me.tbScreePlot.Name = "tbScreePlot"
-        Me.tbScreePlot.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbScreePlot.Size = New System.Drawing.Size(246, 88)
-        Me.tbScreePlot.TabIndex = 0
-        Me.tbScreePlot.Tag = "Scree_Plot"
-        Me.tbScreePlot.Text = "Scree Plot"
-        Me.tbScreePlot.UseVisualStyleBackColor = True
-        '
-        'grpGeom
-        '
-        Me.grpGeom.Controls.Add(Me.chkBar)
-        Me.grpGeom.Controls.Add(Me.chkLine)
-        Me.grpGeom.Location = New System.Drawing.Point(6, 15)
-        Me.grpGeom.Name = "grpGeom"
-        Me.grpGeom.Size = New System.Drawing.Size(99, 38)
-        Me.grpGeom.TabIndex = 6
-        Me.grpGeom.TabStop = False
-        Me.grpGeom.Tag = "Geom"
-        Me.grpGeom.Text = "Geom"
-        '
-        'chkBar
-        '
-        Me.chkBar.AutoSize = True
-        Me.chkBar.Location = New System.Drawing.Point(8, 15)
-        Me.chkBar.Name = "chkBar"
-        Me.chkBar.Size = New System.Drawing.Size(42, 17)
-        Me.chkBar.TabIndex = 2
-        Me.chkBar.Tag = "Bar"
-        Me.chkBar.Text = "Bar"
-        Me.chkBar.UseVisualStyleBackColor = True
-        '
-        'chkLine
-        '
-        Me.chkLine.AutoSize = True
-        Me.chkLine.Location = New System.Drawing.Point(52, 15)
-        Me.chkLine.Name = "chkLine"
-        Me.chkLine.Size = New System.Drawing.Size(46, 17)
-        Me.chkLine.TabIndex = 1
-        Me.chkLine.Tag = "Line"
-        Me.chkLine.Text = "Line"
-        Me.chkLine.UseVisualStyleBackColor = True
-        '
-        'lblChoice
-        '
-        Me.lblChoice.AutoSize = True
-        Me.lblChoice.Location = New System.Drawing.Point(123, 30)
-        Me.lblChoice.Name = "lblChoice"
-        Me.lblChoice.Size = New System.Drawing.Size(40, 13)
-        Me.lblChoice.TabIndex = 4
-        Me.lblChoice.Tag = "Choice"
-        Me.lblChoice.Text = "Choice"
-        '
-        'cmbChoice
-        '
-        Me.cmbChoice.FormattingEnabled = True
-        Me.cmbChoice.Items.AddRange(New Object() {"variance", "eigenvalue"})
-        Me.cmbChoice.Location = New System.Drawing.Point(168, 26)
-        Me.cmbChoice.Name = "cmbChoice"
-        Me.cmbChoice.Size = New System.Drawing.Size(50, 21)
-        Me.cmbChoice.TabIndex = 3
-        '
-        'tbVariables
-        '
-        Me.tbVariables.Location = New System.Drawing.Point(4, 22)
-        Me.tbVariables.Name = "tbVariables"
-        Me.tbVariables.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbVariables.Size = New System.Drawing.Size(246, 88)
-        Me.tbVariables.TabIndex = 1
-        Me.tbVariables.Tag = "Variables"
-        Me.tbVariables.Text = "Variables"
-        Me.tbVariables.UseVisualStyleBackColor = True
-        '
-        'tbIndividuals
-        '
-        Me.tbIndividuals.Location = New System.Drawing.Point(4, 22)
-        Me.tbIndividuals.Name = "tbIndividuals"
-        Me.tbIndividuals.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbIndividuals.Size = New System.Drawing.Size(246, 88)
-        Me.tbIndividuals.TabIndex = 2
-        Me.tbIndividuals.Tag = "Individuals"
-        Me.tbIndividuals.Text = "Individuals"
-        Me.tbIndividuals.UseVisualStyleBackColor = True
-        '
-        'tbBiplot
-        '
-        Me.tbBiplot.Location = New System.Drawing.Point(4, 22)
-        Me.tbBiplot.Name = "tbBiplot"
-        Me.tbBiplot.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbBiplot.Size = New System.Drawing.Size(220, 88)
-        Me.tbBiplot.TabIndex = 3
-        Me.tbBiplot.Tag = "Biplot"
-        Me.tbBiplot.Text = "Biplot"
-        Me.tbBiplot.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.ucrPnlGraphics, "ucrPnlGraphics")
+        Me.ucrPnlGraphics.Name = "ucrPnlGraphics"
         '
         'tbSave
         '
-        Me.tbSave.Location = New System.Drawing.Point(4, 22)
+        resources.ApplyResources(Me.tbSave, "tbSave")
         Me.tbSave.Name = "tbSave"
-        Me.tbSave.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbSave.Size = New System.Drawing.Size(238, 180)
-        Me.tbSave.TabIndex = 2
         Me.tbSave.Tag = "Save"
-        Me.tbSave.Text = "Save"
         Me.tbSave.UseVisualStyleBackColor = True
         '
         'ucrSdgButtons
         '
-        Me.ucrSdgButtons.Location = New System.Drawing.Point(56, 211)
+        resources.ApplyResources(Me.ucrSdgButtons, "ucrSdgButtons")
         Me.ucrSdgButtons.Name = "ucrSdgButtons"
-        Me.ucrSdgButtons.Size = New System.Drawing.Size(142, 30)
-        Me.ucrSdgButtons.TabIndex = 0
         '
         'sdgPrincipalComponentAnalysis
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(257, 243)
         Me.Controls.Add(Me.tbRegOptions)
         Me.Controls.Add(Me.ucrSdgButtons)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "sdgPrincipalComponentAnalysis"
         Me.Tag = "PCA_Options"
-        Me.Text = "PCA Options"
         Me.tbRegOptions.ResumeLayout(False)
         Me.tbDisplay.ResumeLayout(False)
-        Me.tbDisplay.PerformLayout()
         Me.tbGraphics.ResumeLayout(False)
         Me.tbGraphics.PerformLayout()
-        Me.tbGrapOptions.ResumeLayout(False)
-        Me.tbScreePlot.ResumeLayout(False)
-        Me.tbScreePlot.PerformLayout()
+        Me.grpScree.ResumeLayout(False)
+        Me.grpScree.PerformLayout()
+        Me.grpVariablePlot.ResumeLayout(False)
+        Me.grpVariablePlot.PerformLayout()
+        Me.GrpIndividualPlot.ResumeLayout(False)
+        Me.GrpIndividualPlot.PerformLayout()
         Me.grpGeom.ResumeLayout(False)
         Me.grpGeom.PerformLayout()
         Me.ResumeLayout(False)
@@ -347,23 +436,42 @@ Partial Class sdgPrincipalComponentAnalysis
     Friend WithEvents tbRegOptions As TabControl
     Friend WithEvents tbDisplay As TabPage
     Friend WithEvents tbGraphics As TabPage
-    Friend WithEvents chkEigenValues As CheckBox
-    Friend WithEvents chkEigenVectors As CheckBox
-    Friend WithEvents chkScores As CheckBox
-    Friend WithEvents chkResiduals As CheckBox
     Friend WithEvents tbSave As TabPage
-    Friend WithEvents grpGeom As GroupBox
-    Friend WithEvents chkBar As CheckBox
-    Friend WithEvents chkLine As CheckBox
-    Friend WithEvents lblChoice As Label
-    Friend WithEvents cmbChoice As ComboBox
     Friend WithEvents rdoIndividualsPlot As RadioButton
     Friend WithEvents rdoBiplot As RadioButton
     Friend WithEvents rdoVariablesPlot As RadioButton
     Friend WithEvents rdoScreePlot As RadioButton
-    Friend WithEvents tbGrapOptions As TabControl
-    Friend WithEvents tbScreePlot As TabPage
-    Friend WithEvents tbVariables As TabPage
-    Friend WithEvents tbIndividuals As TabPage
-    Friend WithEvents tbBiplot As TabPage
+    Friend WithEvents rdoBarPlot As RadioButton
+    Friend WithEvents ucrSelectorFactor As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents lblFactorVariable As Label
+    Friend WithEvents lblChoiceScree As Label
+    Friend WithEvents grpGeom As GroupBox
+    Friend WithEvents rdoBothScree As RadioButton
+    Friend WithEvents rdoLine As RadioButton
+    Friend WithEvents rdoBar As RadioButton
+    Friend WithEvents lblDim As Label
+    Friend WithEvents ucrReceiverFactor As ucrReceiverSingle
+    Friend WithEvents grpScree As GroupBox
+    Friend WithEvents ucrInputLabel1 As ucrInputComboBox
+    Friend WithEvents ucrChkRotation As ucrCheck
+    Friend WithEvents ucrChkEigenvectors As ucrCheck
+    Friend WithEvents ucrChkEigenvalues As ucrCheck
+    Friend WithEvents ucrNudDim2 As ucrNud
+    Friend WithEvents ucrNudDim1 As ucrNud
+    Friend WithEvents ucrPnlScreePlot As UcrPanel
+    Friend WithEvents ucrPnlGraphics As UcrPanel
+    Friend WithEvents ucrChkIncludePercentage As ucrCheck
+    Friend WithEvents ucrInputLabel2 As ucrInputComboBox
+    Friend WithEvents lblLabel As Label
+    Friend WithEvents lblChoice As Label
+    Friend WithEvents rdoBothVariables As RadioButton
+    Friend WithEvents rdoTextVariables As RadioButton
+    Friend WithEvents rdoArrow As RadioButton
+    Friend WithEvents ucrPnlVariablesPlot As UcrPanel
+    Friend WithEvents rdoBothIndividual As RadioButton
+    Friend WithEvents rdoTextIndividual As RadioButton
+    Friend WithEvents rdoPoint As RadioButton
+    Friend WithEvents ucrPnlIndividualPlot As UcrPanel
+    Friend WithEvents grpVariablePlot As GroupBox
+    Friend WithEvents GrpIndividualPlot As GroupBox
 End Class

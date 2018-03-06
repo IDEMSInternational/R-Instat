@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgRandomSubsets
     Inherits System.Windows.Forms.Form
 
@@ -22,164 +38,128 @@ Partial Class dlgRandomSubsets
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgRandomSubsets))
         Me.lblSelected = New System.Windows.Forms.Label()
         Me.lblSampleSize = New System.Windows.Forms.Label()
         Me.lblNumberOfColumns = New System.Windows.Forms.Label()
-        Me.nudSampleSize = New System.Windows.Forms.NumericUpDown()
-        Me.nudNumberOfColumns = New System.Windows.Forms.NumericUpDown()
-        Me.chkWithReplacement = New System.Windows.Forms.CheckBox()
-        Me.lblNewDataFrameName = New System.Windows.Forms.Label()
-        Me.nudSetSeed = New System.Windows.Forms.NumericUpDown()
-        Me.chkSetSeed = New System.Windows.Forms.CheckBox()
-        Me.ucrNewDataFrameName = New instat.ucrInputTextBox()
-        Me.ucrReceiverSelected = New instat.ucrReceiverSingle()
-        Me.ucrSelectorRandomSubsets = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        CType(Me.nudSampleSize, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudNumberOfColumns, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudSetSeed, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ucrNewDataFrame = New instat.ucrSave()
+        Me.ucrChkWithReplacement = New instat.ucrCheck()
+        Me.ucrChkSetSeed = New instat.ucrCheck()
+        Me.ucrNudSetSeed = New instat.ucrNud()
+        Me.ucrNudNumberOfColumns = New instat.ucrNud()
+        Me.ucrNudSampleSize = New instat.ucrNud()
+        Me.ucrSelectorRandomSubsets = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverSubsets = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
         'lblSelected
         '
-        Me.lblSelected.AutoSize = True
-        Me.lblSelected.Location = New System.Drawing.Point(255, 25)
+        resources.ApplyResources(Me.lblSelected, "lblSelected")
         Me.lblSelected.Name = "lblSelected"
-        Me.lblSelected.Size = New System.Drawing.Size(49, 13)
-        Me.lblSelected.TabIndex = 1
-        Me.lblSelected.Tag = "Selected"
-        Me.lblSelected.Text = "Selected"
+        Me.lblSelected.Tag = "Selected_Variable:"
         '
         'lblSampleSize
         '
-        Me.lblSampleSize.AutoSize = True
-        Me.lblSampleSize.Location = New System.Drawing.Point(280, 84)
+        resources.ApplyResources(Me.lblSampleSize, "lblSampleSize")
         Me.lblSampleSize.Name = "lblSampleSize"
-        Me.lblSampleSize.Size = New System.Drawing.Size(65, 13)
-        Me.lblSampleSize.TabIndex = 6
-        Me.lblSampleSize.Tag = "Sample_Size"
-        Me.lblSampleSize.Text = "Sample Size"
+        Me.lblSampleSize.Tag = "Sample_Size:"
         '
         'lblNumberOfColumns
         '
-        Me.lblNumberOfColumns.AutoSize = True
-        Me.lblNumberOfColumns.Location = New System.Drawing.Point(248, 114)
+        resources.ApplyResources(Me.lblNumberOfColumns, "lblNumberOfColumns")
         Me.lblNumberOfColumns.Name = "lblNumberOfColumns"
-        Me.lblNumberOfColumns.Size = New System.Drawing.Size(99, 13)
-        Me.lblNumberOfColumns.TabIndex = 8
-        Me.lblNumberOfColumns.Tag = "Number_of_Columns"
-        Me.lblNumberOfColumns.Text = "Number of Columns"
-        '
-        'nudSampleSize
-        '
-        Me.nudSampleSize.Location = New System.Drawing.Point(353, 77)
-        Me.nudSampleSize.Name = "nudSampleSize"
-        Me.nudSampleSize.Size = New System.Drawing.Size(53, 20)
-        Me.nudSampleSize.TabIndex = 11
-        '
-        'nudNumberOfColumns
-        '
-        Me.nudNumberOfColumns.Location = New System.Drawing.Point(353, 107)
-        Me.nudNumberOfColumns.Name = "nudNumberOfColumns"
-        Me.nudNumberOfColumns.Size = New System.Drawing.Size(53, 20)
-        Me.nudNumberOfColumns.TabIndex = 12
-        '
-        'chkWithReplacement
-        '
-        Me.chkWithReplacement.AutoSize = True
-        Me.chkWithReplacement.Location = New System.Drawing.Point(287, 170)
-        Me.chkWithReplacement.Name = "chkWithReplacement"
-        Me.chkWithReplacement.Size = New System.Drawing.Size(114, 17)
-        Me.chkWithReplacement.TabIndex = 13
-        Me.chkWithReplacement.Tag = "With_Replacement"
-        Me.chkWithReplacement.Text = "With Replacement"
-        Me.chkWithReplacement.UseVisualStyleBackColor = True
-        '
-        'lblNewDataFrameName
-        '
-        Me.lblNewDataFrameName.AutoSize = True
-        Me.lblNewDataFrameName.Location = New System.Drawing.Point(10, 205)
-        Me.lblNewDataFrameName.Name = "lblNewDataFrameName"
-        Me.lblNewDataFrameName.Size = New System.Drawing.Size(118, 13)
-        Me.lblNewDataFrameName.TabIndex = 15
-        Me.lblNewDataFrameName.Tag = "New_Data_Frame_Name"
-        Me.lblNewDataFrameName.Text = "New Data Frame Name"
-        '
-        'nudSetSeed
-        '
-        Me.nudSetSeed.Location = New System.Drawing.Point(351, 138)
-        Me.nudSetSeed.Name = "nudSetSeed"
-        Me.nudSetSeed.Size = New System.Drawing.Size(53, 20)
-        Me.nudSetSeed.TabIndex = 16
-        '
-        'chkSetSeed
-        '
-        Me.chkSetSeed.AutoSize = True
-        Me.chkSetSeed.Location = New System.Drawing.Point(294, 141)
-        Me.chkSetSeed.Name = "chkSetSeed"
-        Me.chkSetSeed.Size = New System.Drawing.Size(51, 17)
-        Me.chkSetSeed.TabIndex = 17
-        Me.chkSetSeed.Tag = "Seed"
-        Me.chkSetSeed.Text = "Seed"
-        Me.chkSetSeed.UseVisualStyleBackColor = True
-        '
-        'ucrNewDataFrameName
-        '
-        Me.ucrNewDataFrameName.Location = New System.Drawing.Point(131, 200)
-        Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
-        Me.ucrNewDataFrameName.Size = New System.Drawing.Size(145, 21)
-        Me.ucrNewDataFrameName.TabIndex = 18
-        '
-        'ucrReceiverSelected
-        '
-        Me.ucrReceiverSelected.Location = New System.Drawing.Point(257, 44)
-        Me.ucrReceiverSelected.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverSelected.Name = "ucrReceiverSelected"
-        Me.ucrReceiverSelected.Selector = Nothing
-        Me.ucrReceiverSelected.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiverSelected.TabIndex = 2
-        '
-        'ucrSelectorRandomSubsets
-        '
-        Me.ucrSelectorRandomSubsets.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorRandomSubsets.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorRandomSubsets.Name = "ucrSelectorRandomSubsets"
-        Me.ucrSelectorRandomSubsets.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorRandomSubsets.TabIndex = 0
+        Me.lblNumberOfColumns.Tag = "Number_of_Columns:"
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 227)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 10
+        '
+        'ucrNewDataFrame
+        '
+        resources.ApplyResources(Me.ucrNewDataFrame, "ucrNewDataFrame")
+        Me.ucrNewDataFrame.Name = "ucrNewDataFrame"
+        '
+        'ucrChkWithReplacement
+        '
+        Me.ucrChkWithReplacement.Checked = False
+        resources.ApplyResources(Me.ucrChkWithReplacement, "ucrChkWithReplacement")
+        Me.ucrChkWithReplacement.Name = "ucrChkWithReplacement"
+        '
+        'ucrChkSetSeed
+        '
+        Me.ucrChkSetSeed.Checked = False
+        resources.ApplyResources(Me.ucrChkSetSeed, "ucrChkSetSeed")
+        Me.ucrChkSetSeed.Name = "ucrChkSetSeed"
+        '
+        'ucrNudSetSeed
+        '
+        Me.ucrNudSetSeed.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSetSeed.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudSetSeed, "ucrNudSetSeed")
+        Me.ucrNudSetSeed.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSetSeed.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSetSeed.Name = "ucrNudSetSeed"
+        Me.ucrNudSetSeed.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudNumberOfColumns
+        '
+        Me.ucrNudNumberOfColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberOfColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudNumberOfColumns, "ucrNudNumberOfColumns")
+        Me.ucrNudNumberOfColumns.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNumberOfColumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberOfColumns.Name = "ucrNudNumberOfColumns"
+        Me.ucrNudNumberOfColumns.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudSampleSize
+        '
+        Me.ucrNudSampleSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSampleSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudSampleSize, "ucrNudSampleSize")
+        Me.ucrNudSampleSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSampleSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSampleSize.Name = "ucrNudSampleSize"
+        Me.ucrNudSampleSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrSelectorRandomSubsets
+        '
+        Me.ucrSelectorRandomSubsets.bShowHiddenColumns = False
+        Me.ucrSelectorRandomSubsets.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorRandomSubsets, "ucrSelectorRandomSubsets")
+        Me.ucrSelectorRandomSubsets.Name = "ucrSelectorRandomSubsets"
+        '
+        'ucrReceiverSubsets
+        '
+        Me.ucrReceiverSubsets.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverSubsets, "ucrReceiverSubsets")
+        Me.ucrReceiverSubsets.Name = "ucrReceiverSubsets"
+        Me.ucrReceiverSubsets.Selector = Nothing
+        Me.ucrReceiverSubsets.strNcFilePath = ""
+        Me.ucrReceiverSubsets.ucrSelector = Nothing
         '
         'dlgRandomSubsets
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 282)
-        Me.Controls.Add(Me.ucrNewDataFrameName)
-        Me.Controls.Add(Me.chkSetSeed)
-        Me.Controls.Add(Me.nudSetSeed)
-        Me.Controls.Add(Me.lblNewDataFrameName)
-        Me.Controls.Add(Me.chkWithReplacement)
-        Me.Controls.Add(Me.nudNumberOfColumns)
-        Me.Controls.Add(Me.nudSampleSize)
+        Me.Controls.Add(Me.ucrReceiverSubsets)
+        Me.Controls.Add(Me.ucrChkSetSeed)
+        Me.Controls.Add(Me.ucrChkWithReplacement)
+        Me.Controls.Add(Me.ucrNudSetSeed)
+        Me.Controls.Add(Me.ucrNudNumberOfColumns)
+        Me.Controls.Add(Me.ucrNudSampleSize)
+        Me.Controls.Add(Me.ucrNewDataFrame)
         Me.Controls.Add(Me.lblNumberOfColumns)
         Me.Controls.Add(Me.lblSampleSize)
         Me.Controls.Add(Me.lblSelected)
-        Me.Controls.Add(Me.ucrReceiverSelected)
         Me.Controls.Add(Me.ucrSelectorRandomSubsets)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgRandomSubsets"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Random_Subsets"
-        Me.Text = "Random Subsets"
-        CType(Me.nudSampleSize, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudNumberOfColumns, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudSetSeed, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -187,15 +167,15 @@ Partial Class dlgRandomSubsets
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSelectorRandomSubsets As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrReceiverSelected As ucrReceiverSingle
     Friend WithEvents lblSelected As Label
     Friend WithEvents lblSampleSize As Label
     Friend WithEvents lblNumberOfColumns As Label
-    Friend WithEvents nudSampleSize As NumericUpDown
-    Friend WithEvents nudNumberOfColumns As NumericUpDown
-    Friend WithEvents chkWithReplacement As CheckBox
-    Friend WithEvents lblNewDataFrameName As Label
     Friend WithEvents nudSetSeed As NumericUpDown
-    Friend WithEvents chkSetSeed As CheckBox
-    Friend WithEvents ucrNewDataFrameName As ucrInputTextBox
+    Friend WithEvents ucrNewDataFrame As ucrSave
+    Friend WithEvents ucrNudSampleSize As ucrNud
+    Friend WithEvents ucrNudNumberOfColumns As ucrNud
+    Friend WithEvents ucrChkWithReplacement As ucrCheck
+    Friend WithEvents ucrNudSetSeed As ucrNud
+    Friend WithEvents ucrChkSetSeed As ucrCheck
+    Friend WithEvents ucrReceiverSubsets As ucrReceiverSingle
 End Class

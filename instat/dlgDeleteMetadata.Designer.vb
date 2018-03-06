@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgDeleteMetadata
     Inherits System.Windows.Forms.Form
 
@@ -22,6 +38,7 @@ Partial Class dlgDeleteMetadata
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgDeleteMetadata))
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorForDeleteMetadata = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblMetadataToDelete = New System.Windows.Forms.Label()
@@ -30,52 +47,43 @@ Partial Class dlgDeleteMetadata
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 209)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 0
         '
         'ucrSelectorForDeleteMetadata
         '
-        Me.ucrSelectorForDeleteMetadata.Location = New System.Drawing.Point(13, 13)
-        Me.ucrSelectorForDeleteMetadata.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorForDeleteMetadata.bShowHiddenColumns = False
+        Me.ucrSelectorForDeleteMetadata.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorForDeleteMetadata, "ucrSelectorForDeleteMetadata")
         Me.ucrSelectorForDeleteMetadata.Name = "ucrSelectorForDeleteMetadata"
-        Me.ucrSelectorForDeleteMetadata.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorForDeleteMetadata.TabIndex = 1
         '
         'lblMetadataToDelete
         '
-        Me.lblMetadataToDelete.AutoSize = True
-        Me.lblMetadataToDelete.Location = New System.Drawing.Point(243, 13)
+        resources.ApplyResources(Me.lblMetadataToDelete, "lblMetadataToDelete")
         Me.lblMetadataToDelete.Name = "lblMetadataToDelete"
-        Me.lblMetadataToDelete.Size = New System.Drawing.Size(98, 13)
-        Me.lblMetadataToDelete.TabIndex = 2
-        Me.lblMetadataToDelete.Text = "Metadata to Delete"
         '
         'ucrReceiverMetadataToDelete
         '
-        Me.ucrReceiverMetadataToDelete.Location = New System.Drawing.Point(246, 30)
-        Me.ucrReceiverMetadataToDelete.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMetadataToDelete.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverMetadataToDelete, "ucrReceiverMetadataToDelete")
         Me.ucrReceiverMetadataToDelete.Name = "ucrReceiverMetadataToDelete"
         Me.ucrReceiverMetadataToDelete.Selector = Nothing
-        Me.ucrReceiverMetadataToDelete.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverMetadataToDelete.TabIndex = 3
+        Me.ucrReceiverMetadataToDelete.strNcFilePath = ""
+        Me.ucrReceiverMetadataToDelete.ucrSelector = Nothing
         '
         'dlgDeleteMetadata
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 273)
         Me.Controls.Add(Me.ucrReceiverMetadataToDelete)
         Me.Controls.Add(Me.lblMetadataToDelete)
         Me.Controls.Add(Me.ucrSelectorForDeleteMetadata)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgDeleteMetadata"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Delete Metadata"
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 

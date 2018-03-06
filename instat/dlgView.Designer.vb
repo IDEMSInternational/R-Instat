@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgView
     Inherits System.Windows.Forms.Form
 
@@ -22,138 +38,218 @@ Partial Class dlgView
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.grpDisplayFrom = New System.Windows.Forms.GroupBox()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgView))
+        Me.lblSelected = New System.Windows.Forms.Label()
+        Me.rdoDispSepOutputWindow = New System.Windows.Forms.RadioButton()
+        Me.rdoDispOutputWindow = New System.Windows.Forms.RadioButton()
         Me.rdoBottom = New System.Windows.Forms.RadioButton()
         Me.rdoTop = New System.Windows.Forms.RadioButton()
-        Me.nudNumberRows = New System.Windows.Forms.NumericUpDown()
-        Me.lblSelected = New System.Windows.Forms.Label()
+        Me.lblDisplayFrom = New System.Windows.Forms.Label()
         Me.lblNumberofRows = New System.Windows.Forms.Label()
+        Me.rdoHTMLOutputWindow = New System.Windows.Forms.RadioButton()
+        Me.rdoViewAll = New System.Windows.Forms.RadioButton()
+        Me.rdoViewSelectedColumnsRows = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlViewData = New instat.UcrPanel()
+        Me.ucrReceiverSortCol = New instat.ucrReceiverSingle()
+        Me.ucrChkSortColumn = New instat.ucrCheck()
+        Me.ucrNudNumberRows = New instat.ucrNud()
+        Me.ucrPnlDisplayFrom = New instat.UcrPanel()
+        Me.ucrChkSpecifyRows = New instat.ucrCheck()
+        Me.ucrPnlDisplayWindow = New instat.UcrPanel()
         Me.ucrReceiverView = New instat.ucrReceiverMultiple()
-        Me.ucrSelctorForView = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSelectorForView = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.grpDisplayFrom.SuspendLayout()
-        CType(Me.nudNumberRows, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'grpDisplayFrom
+        'lblSelected
         '
-        Me.grpDisplayFrom.Controls.Add(Me.rdoBottom)
-        Me.grpDisplayFrom.Controls.Add(Me.rdoTop)
-        Me.grpDisplayFrom.Location = New System.Drawing.Point(255, 176)
-        Me.grpDisplayFrom.Name = "grpDisplayFrom"
-        Me.grpDisplayFrom.Size = New System.Drawing.Size(142, 43)
-        Me.grpDisplayFrom.TabIndex = 4
-        Me.grpDisplayFrom.TabStop = False
-        Me.grpDisplayFrom.Tag = "Display_from"
-        Me.grpDisplayFrom.Text = "Display from"
+        resources.ApplyResources(Me.lblSelected, "lblSelected")
+        Me.lblSelected.Name = "lblSelected"
+        Me.lblSelected.Tag = ""
+        '
+        'rdoDispSepOutputWindow
+        '
+        resources.ApplyResources(Me.rdoDispSepOutputWindow, "rdoDispSepOutputWindow")
+        Me.rdoDispSepOutputWindow.Name = "rdoDispSepOutputWindow"
+        Me.rdoDispSepOutputWindow.TabStop = True
+        Me.rdoDispSepOutputWindow.UseVisualStyleBackColor = True
+        '
+        'rdoDispOutputWindow
+        '
+        resources.ApplyResources(Me.rdoDispOutputWindow, "rdoDispOutputWindow")
+        Me.rdoDispOutputWindow.Name = "rdoDispOutputWindow"
+        Me.rdoDispOutputWindow.TabStop = True
+        Me.rdoDispOutputWindow.UseVisualStyleBackColor = True
         '
         'rdoBottom
         '
-        Me.rdoBottom.AutoSize = True
-        Me.rdoBottom.Location = New System.Drawing.Point(78, 17)
+        resources.ApplyResources(Me.rdoBottom, "rdoBottom")
         Me.rdoBottom.Name = "rdoBottom"
-        Me.rdoBottom.Size = New System.Drawing.Size(58, 17)
-        Me.rdoBottom.TabIndex = 1
         Me.rdoBottom.TabStop = True
-        Me.rdoBottom.Tag = "Bottom"
-        Me.rdoBottom.Text = "Bottom"
         Me.rdoBottom.UseVisualStyleBackColor = True
         '
         'rdoTop
         '
-        Me.rdoTop.AutoSize = True
-        Me.rdoTop.Location = New System.Drawing.Point(9, 17)
+        resources.ApplyResources(Me.rdoTop, "rdoTop")
         Me.rdoTop.Name = "rdoTop"
-        Me.rdoTop.Size = New System.Drawing.Size(44, 17)
-        Me.rdoTop.TabIndex = 0
         Me.rdoTop.TabStop = True
-        Me.rdoTop.Tag = "Top"
-        Me.rdoTop.Text = "Top"
         Me.rdoTop.UseVisualStyleBackColor = True
         '
-        'nudNumberRows
+        'lblDisplayFrom
         '
-        Me.nudNumberRows.Location = New System.Drawing.Point(352, 150)
-        Me.nudNumberRows.Maximum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.nudNumberRows.Name = "nudNumberRows"
-        Me.nudNumberRows.Size = New System.Drawing.Size(45, 20)
-        Me.nudNumberRows.TabIndex = 4
-        '
-        'lblSelected
-        '
-        Me.lblSelected.AutoSize = True
-        Me.lblSelected.Location = New System.Drawing.Point(255, 25)
-        Me.lblSelected.Name = "lblSelected"
-        Me.lblSelected.Size = New System.Drawing.Size(101, 13)
-        Me.lblSelected.TabIndex = 7
-        Me.lblSelected.Tag = ""
-        Me.lblSelected.Text = "Selected Variable(s)"
+        resources.ApplyResources(Me.lblDisplayFrom, "lblDisplayFrom")
+        Me.lblDisplayFrom.Name = "lblDisplayFrom"
+        Me.lblDisplayFrom.Tag = ""
         '
         'lblNumberofRows
         '
-        Me.lblNumberofRows.AutoSize = True
-        Me.lblNumberofRows.Location = New System.Drawing.Point(255, 157)
+        resources.ApplyResources(Me.lblNumberofRows, "lblNumberofRows")
         Me.lblNumberofRows.Name = "lblNumberofRows"
-        Me.lblNumberofRows.Size = New System.Drawing.Size(89, 13)
-        Me.lblNumberofRows.TabIndex = 8
         Me.lblNumberofRows.Tag = "Number_of_rows"
-        Me.lblNumberofRows.Text = "Number  of Rows"
+        '
+        'rdoHTMLOutputWindow
+        '
+        resources.ApplyResources(Me.rdoHTMLOutputWindow, "rdoHTMLOutputWindow")
+        Me.rdoHTMLOutputWindow.Name = "rdoHTMLOutputWindow"
+        Me.rdoHTMLOutputWindow.TabStop = True
+        Me.rdoHTMLOutputWindow.UseVisualStyleBackColor = True
+        '
+        'rdoViewAll
+        '
+        resources.ApplyResources(Me.rdoViewAll, "rdoViewAll")
+        Me.rdoViewAll.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoViewAll.FlatAppearance.BorderSize = 2
+        Me.rdoViewAll.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoViewAll.Name = "rdoViewAll"
+        Me.rdoViewAll.UseVisualStyleBackColor = True
+        '
+        'rdoViewSelectedColumnsRows
+        '
+        resources.ApplyResources(Me.rdoViewSelectedColumnsRows, "rdoViewSelectedColumnsRows")
+        Me.rdoViewSelectedColumnsRows.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoViewSelectedColumnsRows.FlatAppearance.BorderSize = 2
+        Me.rdoViewSelectedColumnsRows.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoViewSelectedColumnsRows.Name = "rdoViewSelectedColumnsRows"
+        Me.rdoViewSelectedColumnsRows.UseVisualStyleBackColor = True
+        '
+        'ucrPnlViewData
+        '
+        resources.ApplyResources(Me.ucrPnlViewData, "ucrPnlViewData")
+        Me.ucrPnlViewData.Name = "ucrPnlViewData"
+        '
+        'ucrReceiverSortCol
+        '
+        Me.ucrReceiverSortCol.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverSortCol, "ucrReceiverSortCol")
+        Me.ucrReceiverSortCol.Name = "ucrReceiverSortCol"
+        Me.ucrReceiverSortCol.Selector = Nothing
+        Me.ucrReceiverSortCol.strNcFilePath = ""
+        Me.ucrReceiverSortCol.ucrSelector = Nothing
+        '
+        'ucrChkSortColumn
+        '
+        Me.ucrChkSortColumn.Checked = False
+        resources.ApplyResources(Me.ucrChkSortColumn, "ucrChkSortColumn")
+        Me.ucrChkSortColumn.Name = "ucrChkSortColumn"
+        '
+        'ucrNudNumberRows
+        '
+        Me.ucrNudNumberRows.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberRows.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudNumberRows, "ucrNudNumberRows")
+        Me.ucrNudNumberRows.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNumberRows.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberRows.Name = "ucrNudNumberRows"
+        Me.ucrNudNumberRows.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrPnlDisplayFrom
+        '
+        resources.ApplyResources(Me.ucrPnlDisplayFrom, "ucrPnlDisplayFrom")
+        Me.ucrPnlDisplayFrom.Name = "ucrPnlDisplayFrom"
+        '
+        'ucrChkSpecifyRows
+        '
+        Me.ucrChkSpecifyRows.Checked = False
+        resources.ApplyResources(Me.ucrChkSpecifyRows, "ucrChkSpecifyRows")
+        Me.ucrChkSpecifyRows.Name = "ucrChkSpecifyRows"
+        '
+        'ucrPnlDisplayWindow
+        '
+        resources.ApplyResources(Me.ucrPnlDisplayWindow, "ucrPnlDisplayWindow")
+        Me.ucrPnlDisplayWindow.Name = "ucrPnlDisplayWindow"
         '
         'ucrReceiverView
         '
-        Me.ucrReceiverView.Location = New System.Drawing.Point(255, 43)
-        Me.ucrReceiverView.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverView.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverView, "ucrReceiverView")
         Me.ucrReceiverView.Name = "ucrReceiverView"
         Me.ucrReceiverView.Selector = Nothing
-        Me.ucrReceiverView.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverView.TabIndex = 6
+        Me.ucrReceiverView.strNcFilePath = ""
+        Me.ucrReceiverView.ucrSelector = Nothing
         '
-        'ucrSelctorForView
+        'ucrSelectorForView
         '
-        Me.ucrSelctorForView.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelctorForView.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelctorForView.Name = "ucrSelctorForView"
-        Me.ucrSelctorForView.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelctorForView.TabIndex = 5
+        Me.ucrSelectorForView.bShowHiddenColumns = False
+        Me.ucrSelectorForView.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorForView, "ucrSelectorForView")
+        Me.ucrSelectorForView.Name = "ucrSelectorForView"
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 222)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 1
         '
         'dlgView
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 273)
+        Me.Controls.Add(Me.rdoViewAll)
+        Me.Controls.Add(Me.rdoViewSelectedColumnsRows)
+        Me.Controls.Add(Me.ucrPnlViewData)
+        Me.Controls.Add(Me.ucrReceiverSortCol)
+        Me.Controls.Add(Me.ucrChkSortColumn)
+        Me.Controls.Add(Me.rdoHTMLOutputWindow)
+        Me.Controls.Add(Me.ucrNudNumberRows)
+        Me.Controls.Add(Me.rdoBottom)
+        Me.Controls.Add(Me.rdoTop)
+        Me.Controls.Add(Me.ucrPnlDisplayFrom)
+        Me.Controls.Add(Me.ucrChkSpecifyRows)
+        Me.Controls.Add(Me.lblDisplayFrom)
         Me.Controls.Add(Me.lblNumberofRows)
+        Me.Controls.Add(Me.rdoDispOutputWindow)
+        Me.Controls.Add(Me.rdoDispSepOutputWindow)
+        Me.Controls.Add(Me.ucrPnlDisplayWindow)
         Me.Controls.Add(Me.lblSelected)
-        Me.Controls.Add(Me.nudNumberRows)
         Me.Controls.Add(Me.ucrReceiverView)
-        Me.Controls.Add(Me.ucrSelctorForView)
-        Me.Controls.Add(Me.grpDisplayFrom)
+        Me.Controls.Add(Me.ucrSelectorForView)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgView"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "View Data"
-        Me.Text = "View Data"
-        Me.grpDisplayFrom.ResumeLayout(False)
-        Me.grpDisplayFrom.PerformLayout()
-        CType(Me.nudNumberRows, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents grpDisplayFrom As GroupBox
-    Friend WithEvents rdoBottom As RadioButton
-    Friend WithEvents rdoTop As RadioButton
-    Friend WithEvents ucrSelctorForView As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectorForView As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverView As ucrReceiverMultiple
     Friend WithEvents lblSelected As Label
-    Friend WithEvents nudNumberRows As NumericUpDown
+    Friend WithEvents rdoDispSepOutputWindow As RadioButton
+    Friend WithEvents rdoDispOutputWindow As RadioButton
+    Friend WithEvents ucrPnlDisplayWindow As UcrPanel
+    Friend WithEvents ucrNudNumberRows As ucrNud
+    Friend WithEvents rdoBottom As RadioButton
+    Friend WithEvents rdoTop As RadioButton
+    Friend WithEvents ucrPnlDisplayFrom As UcrPanel
+    Friend WithEvents ucrChkSpecifyRows As ucrCheck
+    Friend WithEvents lblDisplayFrom As Label
     Friend WithEvents lblNumberofRows As Label
+    Friend WithEvents ucrChkSortColumn As ucrCheck
+    Friend WithEvents rdoHTMLOutputWindow As RadioButton
+    Friend WithEvents ucrReceiverSortCol As ucrReceiverSingle
+    Friend WithEvents rdoViewAll As RadioButton
+    Friend WithEvents rdoViewSelectedColumnsRows As RadioButton
+    Friend WithEvents ucrPnlViewData As UcrPanel
 End Class

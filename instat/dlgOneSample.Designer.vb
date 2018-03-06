@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgOneSample
     Inherits System.Windows.Forms.Form
 
@@ -23,8 +39,8 @@ Partial Class dlgOneSample
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.grpAnalysis = New System.Windows.Forms.GroupBox()
+        Me.nudValue = New System.Windows.Forms.NumericUpDown()
         Me.lblValue = New System.Windows.Forms.Label()
-        Me.txtValue = New System.Windows.Forms.TextBox()
         Me.chkSignificanceTest = New System.Windows.Forms.CheckBox()
         Me.lblParameters = New System.Windows.Forms.Label()
         Me.cboParameters = New System.Windows.Forms.ComboBox()
@@ -35,52 +51,52 @@ Partial Class dlgOneSample
         Me.lblGraphs = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.ucrReceiverDataColumn = New instat.ucrReceiverSingle()
-        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucBaseOneSample = New instat.ucrSelectorByDataFrameAddRemove()
         Me.grpAnalysis.SuspendLayout()
+        CType(Me.nudValue, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpGraphs.SuspendLayout()
         Me.SuspendLayout()
         '
         'grpAnalysis
         '
+        Me.grpAnalysis.Controls.Add(Me.nudValue)
         Me.grpAnalysis.Controls.Add(Me.lblValue)
-        Me.grpAnalysis.Controls.Add(Me.txtValue)
         Me.grpAnalysis.Controls.Add(Me.chkSignificanceTest)
         Me.grpAnalysis.Controls.Add(Me.lblParameters)
         Me.grpAnalysis.Controls.Add(Me.cboParameters)
         Me.grpAnalysis.Controls.Add(Me.lblModels)
         Me.grpAnalysis.Controls.Add(Me.cboModels)
-        Me.grpAnalysis.Location = New System.Drawing.Point(325, 19)
+        Me.grpAnalysis.Location = New System.Drawing.Point(237, 78)
         Me.grpAnalysis.Name = "grpAnalysis"
-        Me.grpAnalysis.Size = New System.Drawing.Size(220, 202)
+        Me.grpAnalysis.Size = New System.Drawing.Size(220, 153)
         Me.grpAnalysis.TabIndex = 3
         Me.grpAnalysis.TabStop = False
         Me.grpAnalysis.Tag = "Analysis"
         Me.grpAnalysis.Text = "Analysis"
         '
+        'nudValue
+        '
+        Me.nudValue.Location = New System.Drawing.Point(157, 121)
+        Me.nudValue.Name = "nudValue"
+        Me.nudValue.Size = New System.Drawing.Size(50, 20)
+        Me.nudValue.TabIndex = 7
+        '
         'lblValue
         '
         Me.lblValue.AutoSize = True
-        Me.lblValue.Location = New System.Drawing.Point(130, 156)
+        Me.lblValue.Location = New System.Drawing.Point(120, 124)
         Me.lblValue.Name = "lblValue"
-        Me.lblValue.Size = New System.Drawing.Size(34, 13)
+        Me.lblValue.Size = New System.Drawing.Size(37, 13)
         Me.lblValue.TabIndex = 5
-        Me.lblValue.Tag = "Value"
-        Me.lblValue.Text = "Value"
+        Me.lblValue.Tag = "Value:"
+        Me.lblValue.Text = "Value:"
         Me.lblValue.Visible = False
-        '
-        'txtValue
-        '
-        Me.txtValue.Location = New System.Drawing.Point(173, 153)
-        Me.txtValue.Name = "txtValue"
-        Me.txtValue.Size = New System.Drawing.Size(41, 20)
-        Me.txtValue.TabIndex = 6
-        Me.txtValue.Visible = False
         '
         'chkSignificanceTest
         '
         Me.chkSignificanceTest.AutoSize = True
-        Me.chkSignificanceTest.Location = New System.Drawing.Point(16, 156)
+        Me.chkSignificanceTest.Location = New System.Drawing.Point(6, 123)
         Me.chkSignificanceTest.Name = "chkSignificanceTest"
         Me.chkSignificanceTest.Size = New System.Drawing.Size(108, 17)
         Me.chkSignificanceTest.TabIndex = 4
@@ -91,18 +107,18 @@ Partial Class dlgOneSample
         'lblParameters
         '
         Me.lblParameters.AutoSize = True
-        Me.lblParameters.Location = New System.Drawing.Point(13, 92)
+        Me.lblParameters.Location = New System.Drawing.Point(6, 74)
         Me.lblParameters.Name = "lblParameters"
-        Me.lblParameters.Size = New System.Drawing.Size(55, 13)
+        Me.lblParameters.Size = New System.Drawing.Size(58, 13)
         Me.lblParameters.TabIndex = 2
-        Me.lblParameters.Tag = "Parameter"
-        Me.lblParameters.Text = "Parameter"
+        Me.lblParameters.Tag = "Parameter:"
+        Me.lblParameters.Text = "Parameter:"
         '
         'cboParameters
         '
         Me.cboParameters.FormattingEnabled = True
         Me.cboParameters.Items.AddRange(New Object() {"Mean            " & Global.Microsoft.VisualBasic.ChrW(9) & "   (t-interval)", "Mean, known variance (z-interval)", "Variance        " & Global.Microsoft.VisualBasic.ChrW(9) & "    (F-interval)"})
-        Me.cboParameters.Location = New System.Drawing.Point(13, 111)
+        Me.cboParameters.Location = New System.Drawing.Point(6, 90)
         Me.cboParameters.Name = "cboParameters"
         Me.cboParameters.Size = New System.Drawing.Size(201, 21)
         Me.cboParameters.TabIndex = 3
@@ -110,18 +126,18 @@ Partial Class dlgOneSample
         'lblModels
         '
         Me.lblModels.AutoSize = True
-        Me.lblModels.Location = New System.Drawing.Point(10, 34)
+        Me.lblModels.Location = New System.Drawing.Point(6, 23)
         Me.lblModels.Name = "lblModels"
-        Me.lblModels.Size = New System.Drawing.Size(41, 13)
+        Me.lblModels.Size = New System.Drawing.Size(44, 13)
         Me.lblModels.TabIndex = 0
-        Me.lblModels.Tag = "Models"
-        Me.lblModels.Text = "Models"
+        Me.lblModels.Tag = "Models:"
+        Me.lblModels.Text = "Models:"
         '
         'cboModels
         '
         Me.cboModels.FormattingEnabled = True
         Me.cboModels.Items.AddRange(New Object() {"Normal", "Proportional", "Poisson"})
-        Me.cboModels.Location = New System.Drawing.Point(13, 50)
+        Me.cboModels.Location = New System.Drawing.Point(6, 39)
         Me.cboModels.Name = "cboModels"
         Me.cboModels.Size = New System.Drawing.Size(201, 21)
         Me.cboModels.TabIndex = 1
@@ -130,19 +146,19 @@ Partial Class dlgOneSample
         'lblDataColumn
         '
         Me.lblDataColumn.AutoSize = True
-        Me.lblDataColumn.Location = New System.Drawing.Point(213, 19)
+        Me.lblDataColumn.Location = New System.Drawing.Point(240, 24)
         Me.lblDataColumn.Name = "lblDataColumn"
-        Me.lblDataColumn.Size = New System.Drawing.Size(68, 13)
+        Me.lblDataColumn.Size = New System.Drawing.Size(71, 13)
         Me.lblDataColumn.TabIndex = 1
-        Me.lblDataColumn.Tag = "Data_Column"
-        Me.lblDataColumn.Text = "Data Column"
+        Me.lblDataColumn.Tag = "Data_Column:"
+        Me.lblDataColumn.Text = "Data Column:"
         '
         'grpGraphs
         '
         Me.grpGraphs.Controls.Add(Me.lblGraphs)
-        Me.grpGraphs.Location = New System.Drawing.Point(12, 149)
+        Me.grpGraphs.Location = New System.Drawing.Point(9, 201)
         Me.grpGraphs.Name = "grpGraphs"
-        Me.grpGraphs.Size = New System.Drawing.Size(173, 130)
+        Me.grpGraphs.Size = New System.Drawing.Size(211, 66)
         Me.grpGraphs.TabIndex = 4
         Me.grpGraphs.TabStop = False
         Me.grpGraphs.Tag = "Graphs"
@@ -159,42 +175,48 @@ Partial Class dlgOneSample
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(446, 237)
+        Me.cmdOptions.Enabled = False
+        Me.cmdOptions.Location = New System.Drawing.Point(334, 244)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
+        Me.cmdOptions.Size = New System.Drawing.Size(73, 23)
         Me.cmdOptions.TabIndex = 5
-        Me.cmdOptions.Tag = "Options"
-        Me.cmdOptions.Text = "Options"
+        Me.cmdOptions.Tag = "Options..."
+        Me.cmdOptions.Text = "Options..."
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'ucrReceiverDataColumn
         '
-        Me.ucrReceiverDataColumn.Location = New System.Drawing.Point(207, 35)
+        Me.ucrReceiverDataColumn.Location = New System.Drawing.Point(238, 39)
+        Me.ucrReceiverDataColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDataColumn.Name = "ucrReceiverDataColumn"
+        Me.ucrReceiverDataColumn.Selector = Nothing
         Me.ucrReceiverDataColumn.Size = New System.Drawing.Size(110, 26)
         Me.ucrReceiverDataColumn.TabIndex = 2
         '
-        'ucrAddRemove
-        '
-        Me.ucrAddRemove.Location = New System.Drawing.Point(1, 12)
-        Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(206, 131)
-        Me.ucrAddRemove.TabIndex = 0
-        '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(73, 285)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 278)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 53)
         Me.ucrBase.TabIndex = 6
+        '
+        'ucBaseOneSample
+        '
+        Me.ucBaseOneSample.bShowHiddenColumns = False
+        Me.ucBaseOneSample.bUseCurrentFilter = True
+        Me.ucBaseOneSample.Location = New System.Drawing.Point(10, 10)
+        Me.ucBaseOneSample.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucBaseOneSample.Name = "ucBaseOneSample"
+        Me.ucBaseOneSample.Size = New System.Drawing.Size(210, 180)
+        Me.ucBaseOneSample.TabIndex = 0
         '
         'dlgOneSample
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(551, 339)
+        Me.ClientSize = New System.Drawing.Size(469, 339)
+        Me.Controls.Add(Me.ucBaseOneSample)
         Me.Controls.Add(Me.ucrReceiverDataColumn)
-        Me.Controls.Add(Me.ucrAddRemove)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.grpGraphs)
@@ -209,6 +231,7 @@ Partial Class dlgOneSample
         Me.Text = "One Sample"
         Me.grpAnalysis.ResumeLayout(False)
         Me.grpAnalysis.PerformLayout()
+        CType(Me.nudValue, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpGraphs.ResumeLayout(False)
         Me.grpGraphs.PerformLayout()
         Me.ResumeLayout(False)
@@ -223,12 +246,12 @@ Partial Class dlgOneSample
     Friend WithEvents cboModels As ComboBox
     Friend WithEvents lblDataColumn As Label
     Friend WithEvents lblValue As Label
-    Friend WithEvents txtValue As TextBox
     Friend WithEvents chkSignificanceTest As CheckBox
     Friend WithEvents grpGraphs As GroupBox
     Friend WithEvents lblGraphs As Label
     Friend WithEvents cmdOptions As Button
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
     Friend WithEvents ucrReceiverDataColumn As ucrReceiverSingle
+    Friend WithEvents ucBaseOneSample As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents nudValue As NumericUpDown
 End Class
