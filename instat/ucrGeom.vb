@@ -346,22 +346,39 @@ Public Class ucrGeom
         ''bin and binwidth could be added here as well. I am not sure if they are needed.... 
         'lstAllGeoms.Add(clsgeom_contour)
 
-        'clsgeom_count.SetGeomName("geom_count")
-        ''mandatory
-        'clsgeom_count.AddAesParameter("x", bIsMandatory:=True)
-        'clsgeom_count.AddAesParameter("y", bIsMandatory:=True)
-        ''optional
-        'clsgeom_count.AddAesParameter("alpha")
-        'clsgeom_count.AddAesParameter("colour")
-        'clsgeom_count.AddAesParameter("fill")
-        'clsgeom_count.AddAesParameter("shape")
-        'clsgeom_count.AddAesParameter("size")
-        'clsgeom_count.AddAesParameter("stroke")
+        clsgeom_count.SetGeomName("geom_count")
+        'Mandatory Aesthetics
+        clsgeom_count.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
+        clsgeom_count.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
 
-        ''adding layer parameters
-        'clsgeom_count.AddLayerParameter("stat", "list", Chr(34) & "sum" & Chr(34))
-        'clsgeom_count.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
-        'lstAllGeoms.Add(clsgeom_count)
+        'Optional Aesthetics 
+        clsgeom_count.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_count.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_count.AddAesParameter("fill", strIncludedDataTypes:={"factor", "numeric"})
+        'clsgeom_count.AddAesParameter("group", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_count.AddAesParameter("shape", strIncludedDataTypes:={"factor"})
+        clsgeom_count.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
+        'might want to remove size from here because it overrides the size of the points that is based upon the number of observations in that location
+        clsgeom_count.AddAesParameter("stroke", strIncludedDataTypes:={"factor", "numeric"})
+
+        'Global layer parameters
+        clsgeom_count.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34), "position_dodge()"})
+        'we can use position adjustment functions here as well. For "dodge" option, R gives a warning: Width Not defined. Set with `position_dodge(width = ?). So we need to be able to set the width within position_dodge option here
+        clsgeom_count.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_count.AddLayerParameter("stat", "list", Chr(34) & "sum" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "ecdf" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "summary" & Chr(34), Chr(34) & "unique" & Chr(34)}) 'Warning, stat count cannot be used with y aesthetic !!!
+        'revise the options here since identitiy and unique seem to return the plot to the orginal scatter plot. Summary option defaults to `mean_se() since no summary function supplied
+        clsgeom_count.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_count.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
+
+        'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
+        clsgeom_count.AddLayerParameter("shape", "numeric", "19", lstParameterStrings:={0, 0, 25}) 'Note: 16 and 19 seem to have exact same behaviour.
+        clsgeom_count.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_count.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'Warning: varies transparence of fill AND outline.
+        clsgeom_count.AddLayerParameter("size", "list", Chr(34) & "..n.." & Chr(34), lstParameterStrings:={Chr(34) & "..n.." & Chr(34), Chr(34) & "..prop.." & Chr(34)}) 'Note: negative size gives size 0 in general, but 'Warning, sometimesgive errors...
+        clsgeom_count.AddLayerParameter("stroke", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Use the stroke aes to change the width of the outline of the shapes. When no outline stroke overrides size. 'Warning: sometimes negative values give errors...
+        clsgeom_count.AddLayerParameter("fill", "colour", Chr(34) & "black" & Chr(34))
+
+        lstAllGeoms.Add(clsgeom_count)
 
         'clsgeom_crossbar.strGeomName = "geom_crossbar"
         ''Mandatory
