@@ -61,6 +61,10 @@ Public Class ucrInputTextBox
         Return txtInput.Text
     End Function
 
+    Public Overrides Function GetValue() As Object
+        Return GetText()
+    End Function
+
     Public Overrides Function IsEmpty() As Boolean
         If txtInput.Text = "" Then
             Return True

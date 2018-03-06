@@ -152,7 +152,7 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
-        sdgSummaries.SetRFunction(clsSummariesList, bResetSubdialog)
+        sdgSummaries.SetRFunction(clsSummariesList, clsRCustomSummary, ucrSelectorDescribeTwoVar, bResetSubdialog)
         bResetSubdialog = False
         sdgSummaries.ShowDialog()
         TestOKEnabled()
