@@ -126,6 +126,7 @@ Public Class ucrGeom
         Dim clsgeom_density2d As New Geoms
         Dim clsgeom_density_2d As New Geoms
         Dim clsgeom_dotplot As New Geoms
+        Dim clsgeom_encircle As New Geoms
         Dim clsgeom_errorbar As New Geoms
         Dim clsgeom_errorbarh As New Geoms
         Dim clsgeom_freqpoly As New Geoms
@@ -358,7 +359,7 @@ Public Class ucrGeom
         'clsgeom_count.AddAesParameter("group", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_count.AddAesParameter("shape", strIncludedDataTypes:={"factor"})
         clsgeom_count.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
-        'might want to remove size from here because it overrides the size of the points that is based upon the number of observations in that location
+        'we want to be able to assign the following options to size: ..n.. and ..prop..
         clsgeom_count.AddAesParameter("stroke", strIncludedDataTypes:={"factor", "numeric"})
 
         'Global layer parameters
@@ -374,7 +375,8 @@ Public Class ucrGeom
         clsgeom_count.AddLayerParameter("shape", "numeric", "19", lstParameterStrings:={0, 0, 25}) 'Note: 16 and 19 seem to have exact same behaviour.
         clsgeom_count.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_count.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'Warning: varies transparence of fill AND outline.
-        clsgeom_count.AddLayerParameter("size", "list", Chr(34) & "..n.." & Chr(34), lstParameterStrings:={Chr(34) & "..n.." & Chr(34), Chr(34) & "..prop.." & Chr(34)}) 'Note: negative size gives size 0 in general, but 'Warning, sometimesgive errors...
+        'clsgeom_count.AddLayerParameter("size", "list", Chr(34) & "..n.." & Chr(34), lstParameterStrings:={Chr(34) & "..n.." & Chr(34), Chr(34) & "..prop.." & Chr(34)}) 'Note: negative size gives size 0 in general, but 'Warning, sometimesgive errors...
+        ' we need for this be within the aes function not a layer parameter 
         clsgeom_count.AddLayerParameter("stroke", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Use the stroke aes to change the width of the outline of the shapes. When no outline stroke overrides size. 'Warning: sometimes negative values give errors...
         clsgeom_count.AddLayerParameter("fill", "colour", Chr(34) & "black" & Chr(34))
 
@@ -550,6 +552,12 @@ Public Class ucrGeom
         clsgeom_dotplot.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'Warning: varies transparence of fill AND outline.
 
         lstAllGeoms.Add(clsgeom_dotplot)
+
+        clsgeom_encircle.strGeomName = "geom_encircle"
+
+        'Aesthetics parameters
+        clsgeom_dotplot.AddAesParameter("x", strIncludedDataTypes:={"numeric", "factor"}) 'x is partially mandatory, need to be given value "" (or anything) when not filled.
+        clsgeom_dotplot.AddAesParameter("y", strIncludedDataTypes:={"numeric", "factor"})
 
 
         'clsgeom_errorbar.strGeomName = "geom_errorbar"
