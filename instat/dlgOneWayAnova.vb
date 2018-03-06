@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,22 +11,25 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 
 Public Class dlgOneWayANOVA
-
     Public bFirstLoad As Boolean = True
     Dim clsModel As New ROperator
 
     Private Sub dlgOneWayAnova_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaultSettings()
+            SetDefaults()
             bFirstLoad = False
+        Else
+            ReopenDialog()
         End If
 
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -35,6 +38,9 @@ Public Class dlgOneWayANOVA
         ucrYVariate.Selector = ucrAddRemoveDataFrame
         ucrFactor.Selector = ucrAddRemoveDataFrame
         ucrFactor.SetDataType("factor")
+        ucrFactor.strSelectorHeading = "Factors"
+        ucrYVariate.SetDataType("numeric")
+        ucrYVariate.strSelectorHeading = "Numerics"
         clsModel.SetOperation("~")
 
         autoTranslate(Me)
@@ -42,7 +48,7 @@ Public Class dlgOneWayANOVA
         ucrBase.iHelpTopicID = 160
     End Sub
 
-    Private Sub SetDefaultSettings()
+    Private Sub SetDefaults()
         ucrAddRemoveDataFrame.Reset()
         ucrAddRemoveDataFrame.Focus()
         ucrYVariate.SetMeAsReceiver()
@@ -50,14 +56,17 @@ Public Class dlgOneWayANOVA
 
     End Sub
 
+    Private Sub ReopenDialog()
+
+    End Sub
 
     Private Sub ucrYVariate_SelectionChanged(sender As Object, e As EventArgs) Handles ucrYVariate.SelectionChanged
-        clsModel.SetParameter(True, strValue:=ucrYVariate.GetVariableNames(bWithQuotes:=False))
+        clsModel.AddParameter(iPosition:=0, strParameterValue:=ucrYVariate.GetVariableNames(bWithQuotes:=False))
         TestOKEnabled()
     End Sub
 
     Private Sub ucrFactor_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactor.SelectionChanged
-        clsModel.SetParameter(False, strValue:=ucrFactor.GetVariableNames(bWithQuotes:=False))
+        clsModel.AddParameter(strParameterValue:=ucrFactor.GetVariableNames(bWithQuotes:=False))
         TestOKEnabled()
     End Sub
 
@@ -78,6 +87,6 @@ Public Class dlgOneWayANOVA
         sdgANOVAOptions.ShowDialog()
     End Sub
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaultSettings()
+        SetDefaults()
     End Sub
 End Class

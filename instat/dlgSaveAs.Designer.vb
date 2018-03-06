@@ -1,9 +1,25 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgSaveAs
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,70 +36,59 @@ Partial Class dlgSaveAs
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgSaveAs))
         Me.ucrBase = New instat.ucrButtons()
-        Me.cmdChooseFile = New System.Windows.Forms.Button()
         Me.lblSaveDataTo = New System.Windows.Forms.Label()
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
-        Me.txtConfirm = New System.Windows.Forms.TextBox()
+        Me.cmdChooseFile = New System.Windows.Forms.Button()
+        Me.lblConfirm = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 77)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 0
-        '
-        'cmdChooseFile
-        '
-        Me.cmdChooseFile.Location = New System.Drawing.Point(413, 22)
-        Me.cmdChooseFile.Name = "cmdChooseFile"
-        Me.cmdChooseFile.Size = New System.Drawing.Size(91, 20)
-        Me.cmdChooseFile.TabIndex = 17
-        Me.cmdChooseFile.Text = "Choose File"
-        Me.cmdChooseFile.UseVisualStyleBackColor = True
         '
         'lblSaveDataTo
         '
-        Me.lblSaveDataTo.AutoSize = True
-        Me.lblSaveDataTo.Location = New System.Drawing.Point(6, 25)
+        resources.ApplyResources(Me.lblSaveDataTo, "lblSaveDataTo")
         Me.lblSaveDataTo.Name = "lblSaveDataTo"
-        Me.lblSaveDataTo.Size = New System.Drawing.Size(77, 13)
-        Me.lblSaveDataTo.TabIndex = 18
-        Me.lblSaveDataTo.Text = "Save Data To:"
         '
         'ucrInputFilePath
         '
+        Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilePath.IsMultiline = False
         Me.ucrInputFilePath.IsReadOnly = False
-        Me.ucrInputFilePath.Location = New System.Drawing.Point(89, 22)
+        resources.ApplyResources(Me.ucrInputFilePath, "ucrInputFilePath")
         Me.ucrInputFilePath.Name = "ucrInputFilePath"
-        Me.ucrInputFilePath.Size = New System.Drawing.Size(320, 21)
-        Me.ucrInputFilePath.TabIndex = 19
         '
-        'txtConfirm
+        'cmdChooseFile
         '
-        Me.txtConfirm.Location = New System.Drawing.Point(89, 49)
-        Me.txtConfirm.Name = "txtConfirm"
-        Me.txtConfirm.ReadOnly = True
-        Me.txtConfirm.Size = New System.Drawing.Size(320, 20)
-        Me.txtConfirm.TabIndex = 21
+        resources.ApplyResources(Me.cmdChooseFile, "cmdChooseFile")
+        Me.cmdChooseFile.Name = "cmdChooseFile"
+        Me.cmdChooseFile.UseVisualStyleBackColor = True
+        '
+        'lblConfirm
+        '
+        resources.ApplyResources(Me.lblConfirm, "lblConfirm")
+        Me.lblConfirm.Name = "lblConfirm"
         '
         'dlgSaveAs
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(510, 132)
-        Me.Controls.Add(Me.txtConfirm)
+        Me.Controls.Add(Me.lblConfirm)
         Me.Controls.Add(Me.ucrInputFilePath)
         Me.Controls.Add(Me.lblSaveDataTo)
         Me.Controls.Add(Me.cmdChooseFile)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgSaveAs"
-        Me.Tag = "Save_As"
-        Me.Text = "Save As"
+        Me.Tag = "Save_Data_As"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -91,7 +96,7 @@ Partial Class dlgSaveAs
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblSaveDataTo As Label
-    Friend WithEvents cmdChooseFile As Button
     Friend WithEvents ucrInputFilePath As ucrInputTextBox
-    Friend WithEvents txtConfirm As TextBox
+    Friend WithEvents cmdChooseFile As Button
+    Friend WithEvents lblConfirm As Label
 End Class

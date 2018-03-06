@@ -1,4 +1,5 @@
-﻿' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -10,19 +11,20 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports unvell.ReoGrid
 Imports unvell.ReoGrid.Events
 
 Public Class sdgCombineGraphOptions
     Private bFirstLoad As Boolean = True
-    Public clsRsyntax As New RSyntax
+    Private bInitialiseControls As Boolean = False
+    Public clsCombineGraph As New RFunction
     Public WithEvents grdCurrSheet As Worksheet
     Public clsMatrixFunction As New RFunction
 
     Public Sub New()
-
         ' This call is required by the designer.
         InitializeComponent()
 
@@ -31,93 +33,39 @@ Public Class sdgCombineGraphOptions
         grdLayout.SetSettings(WorkbookSettings.View_ShowHorScroll, False)
         grdLayout.SheetTabNewButtonVisible = False
         grdCurrSheet = grdLayout.CurrentWorksheet
-        nudRows.Minimum = 1
-        nudRows.Minimum = 1
+        ucrNudRows.Minimum = 1
+        ucrNudColumns.Minimum = 1
         grdCurrSheet.SetSettings(WorksheetSettings.Edit_DragSelectionToMoveCells, False)
     End Sub
 
-    Private Sub sdgLayout_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If bFirstLoad Then
-            InitialiseDialog()
-            SetDefaults()
-            bFirstLoad = False
-        End If
-        Me.BringToFront()
-        LoadGraphs()
-    End Sub
+    Private Sub InitialiseControls()
+        grdCurrSheet.Rows = ucrNudRows.Value
+        grdCurrSheet.Columns = ucrNudColumns.Value
 
-    Public Sub SetDefaults()
-        ucrInputLeft.ResetText()
-        ucrInputRight.ResetText()
-        ucrInputTop.ResetText()
-        ucrInputBottom.ResetText()
-        SetDefaultRowAndColumns()
-        chkSpecifyOrder.Checked = False
+        ucrNudColumns.SetParameter(New RParameter("ncol", 1))
+        ucrNudRows.SetParameter(New RParameter("nrow", 2))
+
+        ucrInputTop.SetParameter(New RParameter("top", 2))
+        ucrInputBottom.SetParameter(New RParameter("bottom", 4))
+        ucrInputLeft.SetParameter(New RParameter("left", 5))
+        ucrInputRight.SetParameter(New RParameter("right", 6))
+
         grdLayout.Visible = False
+        ucrChkSpecifyOrder.AddParameterPresentCondition(True, "ncol")
+        ucrChkSpecifyOrder.AddParameterPresentCondition(True, "nrow")
+        ucrChkSpecifyOrder.SetText("Specify Order")
+        bInitialiseControls = True
     End Sub
 
-    Private Sub InitialiseDialog()
-        grdCurrSheet.Rows = nudRows.Value
-        grdCurrSheet.Columns = nudColumns.Value
-    End Sub
-
-    Public Sub SetRSyntax(clsNewRSyntax As RSyntax)
-        clsRsyntax = clsNewRSyntax
-    End Sub
-
-    Private Sub ucrInputTop_NameChanged() Handles ucrInputTop.NameChanged
-        If Not ucrInputTop.IsEmpty Then
-            clsRsyntax.AddParameter("top", ucrInputTop.GetText)
-        Else
-            clsRsyntax.RemoveParameter("top")
-        End If
-    End Sub
-
-    Private Sub ucrInputBottom_NameChanged() Handles ucrInputBottom.NameChanged
-        If Not ucrInputBottom.IsEmpty Then
-            clsRsyntax.AddParameter("bottom", ucrInputBottom.GetText)
-        Else
-            clsRsyntax.RemoveParameter("bottom")
-        End If
-    End Sub
-
-    Private Sub ucrInputRight_NameChanged() Handles ucrInputRight.NameChanged
-        If Not ucrInputRight.IsEmpty Then
-            clsRsyntax.AddParameter("right", ucrInputRight.GetText)
-        Else
-            clsRsyntax.RemoveParameter("right")
-        End If
-    End Sub
-
-    Private Sub ucrInputLeft_NameChanged() Handles ucrInputLeft.NameChanged
-        If Not ucrInputLeft.IsEmpty Then
-            clsRsyntax.AddParameter("left", ucrInputLeft.GetText)
-        Else
-            clsRsyntax.RemoveParameter("left")
-        End If
-
-    End Sub
-
-    Private Sub nudRows_TextChanged(sender As Object, e As EventArgs) Handles nudRows.TextChanged
-        If nudRows.Text <> "" Then
-            clsRsyntax.AddParameter("nrow", nudRows.Value)
-        Else
-            clsRsyntax.RemoveParameter("nrow")
-        End If
+    Private Sub nucrNudRows_ControlContentsChanged() Handles ucrNudRows.ControlContentsChanged
         If grdCurrSheet IsNot Nothing Then
-            grdCurrSheet.Rows = nudRows.Value
+            grdCurrSheet.Rows = ucrNudRows.Value
         End If
     End Sub
 
-    Private Sub nudColumns_TextChanged(sender As Object, e As EventArgs) Handles nudColumns.TextChanged
-        If nudColumns.Text <> "" Then
-            clsRsyntax.AddParameter("ncol", nudColumns.Value)
-        Else
-            clsRsyntax.RemoveParameter("ncol")
-        End If
-
+    Private Sub ucrNudColumns_ControlContentsChanged() Handles ucrNudColumns.ControlContentsChanged
         If grdCurrSheet IsNot Nothing Then
-            grdCurrSheet.Columns = nudColumns.Value
+            grdCurrSheet.Columns = ucrNudColumns.Value
         End If
     End Sub
 
@@ -125,8 +73,8 @@ Public Class sdgCombineGraphOptions
         Dim NoOfgraphs As Integer
         If dlgCombineforGraphics.ucrCombineGraphReceiver.lstSelectedVariables.Items.Count > 0 Then
             NoOfgraphs = dlgCombineforGraphics.ucrCombineGraphReceiver.lstSelectedVariables.Items.Count
-            nudRows.Value = Math.Ceiling(Math.Sqrt(NoOfgraphs))
-            nudColumns.Value = Math.Ceiling(NoOfgraphs / (Math.Ceiling(Math.Sqrt(NoOfgraphs))))
+            ucrNudRows.Value = Math.Ceiling(Math.Sqrt(NoOfgraphs))
+            ucrNudColumns.Value = Math.Ceiling(NoOfgraphs / (Math.Ceiling(Math.Sqrt(NoOfgraphs))))
         End If
     End Sub
 
@@ -135,10 +83,10 @@ Public Class sdgCombineGraphOptions
 
         If e.NewData.ToString() <> "" Then
             If Not IsNumeric(e.NewData) Then
-                MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "You entered a non numeric character. Please enter a numeric character withinthe range of availble graphs", MsgBoxStyle.Exclamation, "Invalid Value")
+                MsgBox("Invalid value: " & e.NewData.ToString() & Environment.NewLine & "You entered a non numeric character. Please enter a numeric character within the range of available graphs", MsgBoxStyle.Exclamation, "Invalid Value")
                 e.EndReason = EndEditReason.Cancel
             ElseIf e.NewData > lstGraphs.Items.Count Or e.NewData < 1 Then
-                MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "This number is greater than the number of availble graphs", MsgBoxStyle.Exclamation, "Invalid Value")
+                MsgBox("Invalid value: " & e.NewData.ToString() & Environment.NewLine & "This number is greater than the number of available graphs", MsgBoxStyle.Exclamation, "Invalid Value")
                 e.EndReason = EndEditReason.Cancel
             End If
         End If
@@ -178,7 +126,7 @@ Public Class sdgCombineGraphOptions
         End If
         strMatrix = "c" & "(" & strMatrix & ")"
         clsMatrixFunction.AddParameter("data", strMatrix)
-        clsRsyntax.AddParameter("layout_matrix", clsRFunctionParameter:=clsMatrixFunction)
+        clsCombineGraph.AddParameter("layout_matrix", clsRFunctionParameter:=clsMatrixFunction)
         If lstNumbers.Distinct.Count = lstGraphs.Items.Count Then
             txtLayoutMessage.Text = "Ok: Layout contains all graphs"
         Else
@@ -186,30 +134,19 @@ Public Class sdgCombineGraphOptions
         End If
     End Sub
 
-    Private Sub chkSpecifyOrder_CheckedChanged(sender As Object, e As EventArgs) Handles chkSpecifyOrder.CheckedChanged
-        If chkSpecifyOrder.Checked = True Then
-            grdLayout.Visible = True
-            'SetMatrixFunction()
-            SwitchNcolToMatrixFunc()
-        Else
-            grdLayout.Visible = False
-            RemoveNcolFromMatrixfunc()
-        End If
+    Public Sub SwitchNColToMatrixFunc()
+        clsCombineGraph.RemoveParameterByName("ncol")
+        clsCombineGraph.RemoveParameterByName("nrow")
+        clsMatrixFunction.AddParameter("ncol", ucrNudColumns.Value)
+        clsMatrixFunction.AddParameter("nrow", ucrNudRows.Value)
     End Sub
 
-    Public Sub SwitchNcolToMatrixFunc()
-        clsRsyntax.RemoveParameter("ncol")
-        clsRsyntax.RemoveParameter("nrow")
-        clsMatrixFunction.AddParameter("ncol", nudColumns.Value)
-        clsMatrixFunction.AddParameter("nrow", nudRows.Value)
-    End Sub
-
-    Public Sub RemoveNcolFromMatrixfunc()
+    Public Sub RemoveNColFromMatrixfunc()
         clsMatrixFunction.RemoveParameterByName("ncol")
         clsMatrixFunction.RemoveParameterByName("nrow")
-        clsRsyntax.RemoveParameter("layout_matrix")
-        clsRsyntax.AddParameter("nrow", nudRows.Value)
-        clsRsyntax.AddParameter("ncol", nudColumns.Value)
+        clsCombineGraph.RemoveParameterByName("layout_matrix")
+        clsCombineGraph.AddParameter("nrow", ucrNudRows.Value)
+        clsCombineGraph.AddParameter("ncol", ucrNudColumns.Value)
     End Sub
 
     Private Sub grdLayout_Leave(sender As Object, e As EventArgs) Handles grdLayout.Leave
@@ -218,5 +155,29 @@ Public Class sdgCombineGraphOptions
             SetMatrixFunction()
         End If
     End Sub
+
+    Public Sub SetRFunction(clsNewRFunction As RFunction, Optional bReset As Boolean = False)
+        If Not bInitialiseControls Then
+            InitialiseControls()
+        End If
+        clsCombineGraph = clsNewRFunction
+        SetRCode(Me, clsCombineGraph, bReset)
+        SetDefaultRowAndColumns()
+    End Sub
+
+    Private Sub ucrChkSpecifyOrder_ControlValueChanged() Handles ucrChkSpecifyOrder.ControlValueChanged
+        If ucrChkSpecifyOrder.Checked Then
+            grdLayout.Visible = True
+            SwitchNColToMatrixFunc()
+        Else
+            grdLayout.Visible = False
+            RemoveNColFromMatrixfunc()
+        End If
+    End Sub
+
+    Private Sub sdgCombineGraphOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LoadGraphs()
+    End Sub
 End Class
+
 

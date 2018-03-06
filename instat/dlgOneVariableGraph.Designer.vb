@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgOneVariableGraph
     Inherits System.Windows.Forms.Form
 
@@ -22,77 +38,119 @@ Partial Class dlgOneVariableGraph
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrSelectorOneVarGraph = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverOneVarGraph = New instat.ucrReceiverMultiple()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgOneVariableGraph))
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
+        Me.cmdGraphOptions = New System.Windows.Forms.Button()
+        Me.grpOutput = New System.Windows.Forms.GroupBox()
+        Me.rdoSingleGraphs = New System.Windows.Forms.RadioButton()
+        Me.rdoCombine = New System.Windows.Forms.RadioButton()
+        Me.rdoFacets = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlOutput = New instat.UcrPanel()
+        Me.ucrChkFlip = New instat.ucrCheck()
         Me.ucrBase = New instat.ucrButtons()
-        Me.cmdGraph = New System.Windows.Forms.Button()
-        Me.UcrSaveGraph1 = New instat.ucrSaveGraph()
+        Me.ucrReceiverOneVarGraph = New instat.ucrReceiverMultiple()
+        Me.ucrSelectorOneVarGraph = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSaveGraph = New instat.ucrSave()
+        Me.grpOutput.SuspendLayout()
         Me.SuspendLayout()
+        '
+        'lblSelectedVariables
+        '
+        resources.ApplyResources(Me.lblSelectedVariables, "lblSelectedVariables")
+        Me.lblSelectedVariables.Name = "lblSelectedVariables"
+        '
+        'cmdGraphOptions
+        '
+        resources.ApplyResources(Me.cmdGraphOptions, "cmdGraphOptions")
+        Me.cmdGraphOptions.Name = "cmdGraphOptions"
+        Me.cmdGraphOptions.UseVisualStyleBackColor = True
+        '
+        'grpOutput
+        '
+        Me.grpOutput.Controls.Add(Me.rdoSingleGraphs)
+        Me.grpOutput.Controls.Add(Me.rdoCombine)
+        Me.grpOutput.Controls.Add(Me.rdoFacets)
+        Me.grpOutput.Controls.Add(Me.ucrPnlOutput)
+        resources.ApplyResources(Me.grpOutput, "grpOutput")
+        Me.grpOutput.Name = "grpOutput"
+        Me.grpOutput.TabStop = False
+        '
+        'rdoSingleGraphs
+        '
+        resources.ApplyResources(Me.rdoSingleGraphs, "rdoSingleGraphs")
+        Me.rdoSingleGraphs.Name = "rdoSingleGraphs"
+        Me.rdoSingleGraphs.TabStop = True
+        Me.rdoSingleGraphs.UseVisualStyleBackColor = True
+        '
+        'rdoCombine
+        '
+        resources.ApplyResources(Me.rdoCombine, "rdoCombine")
+        Me.rdoCombine.Name = "rdoCombine"
+        Me.rdoCombine.TabStop = True
+        Me.rdoCombine.UseVisualStyleBackColor = True
+        '
+        'rdoFacets
+        '
+        resources.ApplyResources(Me.rdoFacets, "rdoFacets")
+        Me.rdoFacets.Name = "rdoFacets"
+        Me.rdoFacets.TabStop = True
+        Me.rdoFacets.UseVisualStyleBackColor = True
+        '
+        'ucrPnlOutput
+        '
+        resources.ApplyResources(Me.ucrPnlOutput, "ucrPnlOutput")
+        Me.ucrPnlOutput.Name = "ucrPnlOutput"
+        '
+        'ucrChkFlip
+        '
+        Me.ucrChkFlip.Checked = False
+        resources.ApplyResources(Me.ucrChkFlip, "ucrChkFlip")
+        Me.ucrChkFlip.Name = "ucrChkFlip"
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
+        '
+        'ucrReceiverOneVarGraph
+        '
+        Me.ucrReceiverOneVarGraph.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverOneVarGraph, "ucrReceiverOneVarGraph")
+        Me.ucrReceiverOneVarGraph.Name = "ucrReceiverOneVarGraph"
+        Me.ucrReceiverOneVarGraph.Selector = Nothing
+        Me.ucrReceiverOneVarGraph.strNcFilePath = ""
+        Me.ucrReceiverOneVarGraph.ucrSelector = Nothing
         '
         'ucrSelectorOneVarGraph
         '
         Me.ucrSelectorOneVarGraph.bShowHiddenColumns = False
-        Me.ucrSelectorOneVarGraph.Location = New System.Drawing.Point(5, 0)
-        Me.ucrSelectorOneVarGraph.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorOneVarGraph.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorOneVarGraph, "ucrSelectorOneVarGraph")
         Me.ucrSelectorOneVarGraph.Name = "ucrSelectorOneVarGraph"
-        Me.ucrSelectorOneVarGraph.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorOneVarGraph.TabIndex = 0
         '
-        'ucrReceiverOneVarGraph
+        'ucrSaveGraph
         '
-        Me.ucrReceiverOneVarGraph.Location = New System.Drawing.Point(229, 49)
-        Me.ucrReceiverOneVarGraph.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverOneVarGraph.Name = "ucrReceiverOneVarGraph"
-        Me.ucrReceiverOneVarGraph.Selector = Nothing
-        Me.ucrReceiverOneVarGraph.Size = New System.Drawing.Size(123, 131)
-        Me.ucrReceiverOneVarGraph.TabIndex = 1
-        '
-        'lblSelectedVariables
-        '
-        Me.lblSelectedVariables.AutoSize = True
-        Me.lblSelectedVariables.Location = New System.Drawing.Point(226, 35)
-        Me.lblSelectedVariables.Name = "lblSelectedVariables"
-        Me.lblSelectedVariables.Size = New System.Drawing.Size(98, 13)
-        Me.lblSelectedVariables.TabIndex = 2
-        Me.lblSelectedVariables.Text = "Selected Variables:"
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(5, 247)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 3
-        '
-        'cmdGraph
-        '
-        Me.cmdGraph.Location = New System.Drawing.Point(328, 218)
-        Me.cmdGraph.Name = "cmdGraph"
-        Me.cmdGraph.Size = New System.Drawing.Size(75, 23)
-        Me.cmdGraph.TabIndex = 6
-        Me.cmdGraph.Text = "Graph"
-        Me.cmdGraph.UseVisualStyleBackColor = True
-        '
-        'UcrSaveGraph1
-        '
-        Me.UcrSaveGraph1.Location = New System.Drawing.Point(5, 221)
-        Me.UcrSaveGraph1.Name = "UcrSaveGraph1"
-        Me.UcrSaveGraph1.Size = New System.Drawing.Size(265, 20)
-        Me.UcrSaveGraph1.TabIndex = 7
+        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
         '
         'dlgOneVariableGraph
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(405, 299)
-        Me.Controls.Add(Me.UcrSaveGraph1)
-        Me.Controls.Add(Me.cmdGraph)
+        Me.Controls.Add(Me.ucrSaveGraph)
+        Me.Controls.Add(Me.grpOutput)
+        Me.Controls.Add(Me.ucrChkFlip)
+        Me.Controls.Add(Me.cmdGraphOptions)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblSelectedVariables)
         Me.Controls.Add(Me.ucrReceiverOneVarGraph)
         Me.Controls.Add(Me.ucrSelectorOneVarGraph)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgOneVariableGraph"
-        Me.Text = "One Variable Graph"
+        Me.grpOutput.ResumeLayout(False)
+        Me.grpOutput.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -102,6 +160,12 @@ Partial Class dlgOneVariableGraph
     Friend WithEvents ucrReceiverOneVarGraph As ucrReceiverMultiple
     Friend WithEvents lblSelectedVariables As Label
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents cmdGraph As Button
-    Friend WithEvents UcrSaveGraph1 As ucrSaveGraph
+    Friend WithEvents cmdGraphOptions As Button
+    Friend WithEvents ucrChkFlip As ucrCheck
+    Friend WithEvents grpOutput As GroupBox
+    Friend WithEvents rdoSingleGraphs As RadioButton
+    Friend WithEvents rdoCombine As RadioButton
+    Friend WithEvents rdoFacets As RadioButton
+    Friend WithEvents ucrPnlOutput As UcrPanel
+    Friend WithEvents ucrSaveGraph As ucrSave
 End Class

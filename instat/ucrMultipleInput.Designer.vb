@@ -1,6 +1,22 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ucrMultipleInput
-    Inherits System.Windows.Forms.UserControl
+    Inherits instat.ucrCore
 
     'UserControl overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()>
@@ -22,23 +38,21 @@ Partial Class ucrMultipleInput
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrMultipleInput))
         Me.txtNumericItems = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'txtNumericItems
         '
-        Me.txtNumericItems.Location = New System.Drawing.Point(4, 4)
+        resources.ApplyResources(Me.txtNumericItems, "txtNumericItems")
         Me.txtNumericItems.Name = "txtNumericItems"
-        Me.txtNumericItems.Size = New System.Drawing.Size(143, 20)
-        Me.txtNumericItems.TabIndex = 0
         '
-        'ucrMultipleNumeric
+        'ucrMultipleInput
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.txtNumericItems)
-        Me.Name = "ucrMultipleNumeric"
-        Me.Size = New System.Drawing.Size(150, 29)
+        Me.Name = "ucrMultipleInput"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

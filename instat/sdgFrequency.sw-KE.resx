@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ucrBaseSubDialog.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>62, 178</value>
+  </data>
+  <data name="ucrBaseSubDialog.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>142, 30</value>
+  </data>
+  <data name="ucrBaseSubDialog.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="ucrPnlDisplayType.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>163, 61</value>
+  </data>
+  <data name="ucrPnlDisplayType.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>114, 90</value>
+  </data>
+  <data name="ucrPnlDisplayType.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>53</value>
+  </data>
+  <data name="rdoHorizontally.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoHorizontally.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>170, 113</value>
+  </data>
+  <data name="rdoHorizontally.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>79, 17</value>
+  </data>
+  <data name="rdoHorizontally.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>63</value>
+  </data>
+  <data name="rdoHorizontally.Text" xml:space="preserve">
+    <value>Ki&amp;mlalo</value>
+  </data>
+  <data name="rdoVertically.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoVertically.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>170, 89</value>
+  </data>
+  <data name="rdoVertically.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>67, 17</value>
+  </data>
+  <data name="rdoVertically.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>62</value>
+  </data>
+  <data name="rdoVertically.Text" xml:space="preserve">
+    <value>&amp;Kiwima</value>
+  </data>
+  <data name="rdoSeparateTables.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoSeparateTables.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>170, 65</value>
+  </data>
+  <data name="rdoSeparateTables.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>103, 17</value>
+  </data>
+  <data name="rdoSeparateTables.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>61</value>
+  </data>
+  <data name="ucrchkMargins.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>12, 89</value>
+  </data>
+  <data name="ucrchkMargins.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>131, 20</value>
+  </data>
+  <data name="ucrchkMargins.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>65</value>
+  </data>
+  <data name="ucrchkDisplay.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>12, 63</value>
+  </data>
+  <data name="ucrchkDisplay.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>131, 20</value>
+  </data>
+  <data name="ucrchkDisplay.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>64</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" xml:space="preserve" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>284, 208</value>
+  </data>
+  <data name="$this.StartPosition" xml:space="preserve" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Uradidi:</value>
+  </data>
+  <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+</root>

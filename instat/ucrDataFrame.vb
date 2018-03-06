@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,8 +11,10 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Imports instat
 Imports instat.Translations
 
 Public Class ucrDataFrame
@@ -25,10 +27,24 @@ Public Class ucrDataFrame
     Public strCurrDataFrame As String = ""
     Public bDataFrameFixed As Boolean = False
     Private strFixedDataFrame As String
+    'If the control is used to set a parameter that is a string i.e. data_name = "survey"
+    Private bParameterIsString As Boolean = False
+    'If the control is used to set a parameter that is an RFunction i.e. x = InstatDataObject$get_data_frame(data_name = "survey")
+    Private bParameterIsRFunction As Boolean = False
+    'The name of the data parameter in the get data frame instat object method (should always be the same)
+    Private strDataParameterNameInRFunction As String = "data_name"
+    'Same as strPrimaryDataFrame in ucrSelector
+    Private strPrimaryDataFrame As String = ""
+    'If True, only data frames linked to the primary data frame will be displayed
+    'This is usually set by the current receiver of the dialog
+    Private bOnlyLinkedToPrimaryDataFrames As Boolean = False
+    'If bOnlyLinkedToPrimaryDataFrames then should the primary data frame itself be displayed
+    Private bIncludePrimaryDataFrameAsLinked As Boolean = True
 
     Private Sub ucrDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         FillComboBox()
         If bFirstLoad Then
+            InitialiseControl()
             bFirstLoad = False
         End If
         SetDataFrameProperties()
@@ -36,6 +52,12 @@ Public Class ucrDataFrame
 
     Private Sub InitialiseControl()
         bUseCurrentFilter = True
+        lblDataFrame.AutoSize = True
+        bUpdateRCodeFromControl = True
+        'TODO remove this once control updated
+        cboAvailableDataFrames.DropDownStyle = ComboBoxStyle.DropDownList
+        cboAvailableDataFrames.AutoCompleteMode = AutoCompleteMode.None
+        cboAvailableDataFrames.AutoCompleteSource = AutoCompleteSource.None
     End Sub
 
     Public Sub Reset()
@@ -49,18 +71,48 @@ Public Class ucrDataFrame
     End Sub
 
     Private Sub FillComboBox(Optional bSetFixed As Boolean = True)
-        frmMain.clsRLink.FillComboDataFrames(cboAvailableDataFrames, bFirstLoad)
+        Dim iOldText As String
+        'TODO DO change DataFrameChanged event to not need these
+        Dim sender As New Object
+        Dim e As New EventArgs
+
+        iOldText = cboAvailableDataFrames.Text
+        cboAvailableDataFrames.Items.Clear()
+        cboAvailableDataFrames.Text = ""
+        frmMain.clsRLink.FillComboDataFrames(cboAvailableDataFrames, bFirstLoad, strCurrentDataFrame:=iOldText, bOnlyLinkedToPrimaryDataFrames:=bOnlyLinkedToPrimaryDataFrames, strPrimaryDataFrame:=strPrimaryDataFrame, bIncludePrimaryDataFrameAsLinked:=bIncludePrimaryDataFrameAsLinked)
         If bSetFixed AndAlso bDataFrameFixed AndAlso strFixedDataFrame <> "" Then
             SetDataframe(strFixedDataFrame, False)
+        End If
+        If cboAvailableDataFrames.Text <> iOldText Then
+            SelectedDataFrameChanged(sender, e)
         End If
     End Sub
 
     Public Event DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String)
 
     Private Sub cboAvailableDataFrames_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboAvailableDataFrames.SelectedIndexChanged
-        SetDataFrameProperties()
-        RaiseEvent DataFrameChanged(sender, e, strCurrDataFrame)
-        strCurrDataFrame = cboAvailableDataFrames.Text
+        If cboAvailableDataFrames.SelectedIndex = -1 Then
+            cboAvailableDataFrames.Text = ""
+        End If
+        If strCurrDataFrame <> cboAvailableDataFrames.Text Then
+            RaiseEvent DataFrameChanged(sender, e, strCurrDataFrame)
+            strCurrDataFrame = cboAvailableDataFrames.Text
+            SetDataFrameProperties()
+            OnControlValueChanged()
+        End If
+    End Sub
+
+    Public Overrides Sub UpdateParameter(clsTempParam As RParameter)
+        If clsTempParam IsNot Nothing Then
+            If bParameterIsString Then
+                clsTempParam.SetArgumentValue(Chr(34) & cboAvailableDataFrames.Text & Chr(34))
+            ElseIf bParameterIsRFunction Then
+                clsTempParam.SetArgument(clsCurrDataFrame)
+            End If
+        End If
+    End Sub
+
+    Private Sub SelectedDataFrameChanged(sender As Object, e As EventArgs)
     End Sub
 
     Public Sub SetDataFrameProperties()
@@ -76,7 +128,7 @@ Public Class ucrDataFrame
             clsParam.SetArgumentName("data_name")
             clsParam.SetArgumentValue(Chr(34) & cboAvailableDataFrames.Text & Chr(34))
             clsCurrDataFrame.AddParameter(clsParam)
-            clsCurrDataFrame.SetAssignTo(cboAvailableDataFrames.Text & "_temp")
+            clsCurrDataFrame.SetAssignTo(cboAvailableDataFrames.Text)
         End If
     End Sub
 
@@ -112,7 +164,7 @@ Public Class ucrDataFrame
         Set(bValue As Boolean)
             bPvtUseFilteredData = bValue
             If bPvtUseFilteredData Then
-                If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                If frmMain.clsInstatOptions IsNot Nothing AndAlso frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                     clsCurrDataFrame.AddParameter("use_current_filter", "TRUE")
                 Else
                     clsCurrDataFrame.RemoveParameterByName("use_current_filter")
@@ -122,4 +174,80 @@ Public Class ucrDataFrame
             End If
         End Set
     End Property
+
+    Private Sub mnuRightClickCopy_Click(sender As Object, e As EventArgs) Handles mnuRightClickCopy.Click
+        'TODO Combo box should be replaced by ucrInput so that context menu done automatically
+        Clipboard.SetText(cboAvailableDataFrames.SelectedText)
+    End Sub
+
+    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
+        Dim clsTempDataParameter As RParameter
+        Dim strDataFrameName As String = ""
+        Dim clsMainParameter As RParameter
+
+        MyBase.UpdateControl(bReset:=bReset, bCloneIfNeeded:=bCloneIfNeeded)
+
+        clsMainParameter = GetParameter()
+        If clsMainParameter IsNot Nothing Then
+            If bChangeParameterValue Then
+                If bParameterIsString AndAlso clsMainParameter.bIsString Then
+                    strDataFrameName = clsMainParameter.strArgumentValue
+                ElseIf bParameterIsRFunction AndAlso clsMainParameter.bIsFunction Then
+                    clsTempDataParameter = clsMainParameter.clsArgumentCodeStructure.GetParameter(strDataParameterNameInRFunction)
+                    If clsTempDataParameter IsNot Nothing Then
+                        strDataFrameName = clsMainParameter.clsArgumentCodeStructure.GetParameter(strDataParameterNameInRFunction).strArgumentValue
+                    End If
+                End If
+            End If
+        End If
+        If strDataFrameName <> "" AndAlso strDataFrameName <> strCurrDataFrame Then
+            'Substring used to removed quotes on either side
+            strDataFrameName = strDataFrameName.Substring(1, strDataFrameName.Length - 2)
+            SetDataframe(strDataFrameName)
+        End If
+    End Sub
+
+    Public Sub SetParameterIsString()
+        bParameterIsString = True
+        bParameterIsRFunction = False
+        UpdateAllParameters()
+    End Sub
+
+    Public Sub SetParameterIsRFunction()
+        bParameterIsRFunction = True
+        bParameterIsString = False
+        UpdateAllParameters()
+    End Sub
+
+    Public Overrides Function IsRDefault() As Boolean
+        Return GetParameter() IsNot Nothing AndAlso objRDefault IsNot Nothing AndAlso objRDefault.Equals(cboAvailableDataFrames.Text)
+    End Function
+
+    Private Sub ucrDataFrame_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles Me.DataFrameChanged
+        If frmMain.clsInstatOptions.bChangeDataFrame Then
+            frmMain.SetCurrentDataFrame(cboAvailableDataFrames.Text)
+        End If
+    End Sub
+
+    Public Sub SetLabelText(strText As String)
+        lblDataFrame.Text = strText
+    End Sub
+
+    Private Sub mnuRightClickSetData_Click(sender As Object, e As EventArgs) Handles mnuRightClickSetData.Click
+        frmMain.SetCurrentDataFrame(cboAvailableDataFrames.Text)
+    End Sub
+
+    Public Sub SetPrimaryDataFrameOptions(strNewPrimaryDataFrame As String, bNewOnlyLinkedToPrimaryDataFrames As Boolean, Optional bNewIncludePrimaryDataFrameAsLinked As Boolean = False)
+        Dim bUpdate As Boolean = False
+
+        If (bNewOnlyLinkedToPrimaryDataFrames <> bOnlyLinkedToPrimaryDataFrames) OrElse (bNewOnlyLinkedToPrimaryDataFrames AndAlso (strPrimaryDataFrame <> strNewPrimaryDataFrame OrElse bNewIncludePrimaryDataFrameAsLinked <> bIncludePrimaryDataFrameAsLinked)) Then
+            bUpdate = True
+        End If
+        strPrimaryDataFrame = strNewPrimaryDataFrame
+        bOnlyLinkedToPrimaryDataFrames = bNewOnlyLinkedToPrimaryDataFrames
+        bNewIncludePrimaryDataFrameAsLinked = bIncludePrimaryDataFrameAsLinked
+        If bUpdate Then
+            FillComboBox()
+        End If
+    End Sub
 End Class

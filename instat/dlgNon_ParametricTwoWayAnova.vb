@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
@@ -60,7 +60,7 @@ Public Class dlgNon_ParametricTwoWayAnova
     Public Sub TestOKEnabled()
         If (Not ucrReceiverDataColumn.IsEmpty()) And (Not ucrReceiverFirstFactor.IsEmpty()) And (Not ucrReceiverSecondFactor.IsEmpty()) Then
             clsModel1.bBrackets = False
-            clsModel1.SetParameter(True, clsOp:=clsModel)
+            clsModel1.AddParameter(iPosition:=0, clsROperatorParameter:=clsModel)
 
             ucrBaseNPTwoWayANOVA.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel1)
             ucrBaseNPTwoWayANOVA.OKEnabled(True)
@@ -75,17 +75,17 @@ Public Class dlgNon_ParametricTwoWayAnova
     End Sub
 
     Private Sub ucrReceiverDataColumn_SelectionChanged() Handles ucrReceiverDataColumn.SelectionChanged
-        clsModel.SetParameter(True, strValue:=ucrReceiverDataColumn.GetVariableNames(bWithQuotes:=False))
+        clsModel.AddParameter(iPosition:=0, strParameterValue:=ucrReceiverDataColumn.GetVariableNames(bWithQuotes:=False))
         TestOKEnabled()
     End Sub
 
     Private Sub ucrReceiverFirstFactor_SelectionChanged() Handles ucrReceiverFirstFactor.SelectionChanged
-        clsModel.SetParameter(False, strValue:=ucrReceiverFirstFactor.GetVariableNames(bWithQuotes:=False))
+        clsModel.AddParameter(strParameterValue:=ucrReceiverFirstFactor.GetVariableNames(bWithQuotes:=False))
         TestOKEnabled()
     End Sub
 
     Private Sub ucrReceiverSecondFactor_SelectionChanged() Handles ucrReceiverSecondFactor.SelectionChanged
-        clsModel1.SetParameter(False, strValue:=ucrReceiverSecondFactor.GetVariableNames(bWithQuotes:=False))
+        clsModel1.AddParameter(strParameterValue:=ucrReceiverSecondFactor.GetVariableNames(bWithQuotes:=False))
         TestOKEnabled()
     End Sub
 

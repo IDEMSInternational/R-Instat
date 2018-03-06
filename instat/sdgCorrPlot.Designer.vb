@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class sdgCorrPlot
     Inherits System.Windows.Forms.Form
 
@@ -22,390 +38,262 @@ Partial Class sdgCorrPlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.tbSdgCorrelation = New System.Windows.Forms.TabControl()
-        Me.tbDisplay = New System.Windows.Forms.TabPage()
-        Me.chkCorrelationMatrix = New System.Windows.Forms.CheckBox()
-        Me.tbGraphics = New System.Windows.Forms.TabPage()
-        Me.ucrSaveGraph = New instat.ucrSaveGraph()
-        Me.tbSaveGraphs = New System.Windows.Forms.TabControl()
-        Me.tbPairwisePlot = New System.Windows.Forms.TabPage()
-        Me.tbCorrelationPlot = New System.Windows.Forms.TabPage()
-        Me.chkLabel = New System.Windows.Forms.CheckBox()
-        Me.nudLabelAlpha = New System.Windows.Forms.NumericUpDown()
-        Me.nudMaximumSize = New System.Windows.Forms.NumericUpDown()
-        Me.nudMinimunSize = New System.Windows.Forms.NumericUpDown()
-        Me.lblMaximumSize = New System.Windows.Forms.Label()
-        Me.cmbgeom = New System.Windows.Forms.ComboBox()
-        Me.lblLabelAlpha = New System.Windows.Forms.Label()
-        Me.lblMinimumSize = New System.Windows.Forms.Label()
-        Me.lblgeom = New System.Windows.Forms.Label()
-        Me.tbScatterplotMatrix = New System.Windows.Forms.TabPage()
-        Me.chkColor = New System.Windows.Forms.CheckBox()
-        Me.lblAlpha = New System.Windows.Forms.Label()
-        Me.nudAlpha = New System.Windows.Forms.NumericUpDown()
-        Me.grpGraphOptions = New System.Windows.Forms.GroupBox()
-        Me.rdoScatterplotMatrix = New System.Windows.Forms.RadioButton()
-        Me.rdoCorrelationPlot = New System.Windows.Forms.RadioButton()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgCorrPlot))
+        Me.rdoNone = New System.Windows.Forms.RadioButton()
         Me.rdoPairwisePlot = New System.Windows.Forms.RadioButton()
+        Me.rdoCorrelationPlot = New System.Windows.Forms.RadioButton()
+        Me.rdoScatterPlotMatrix = New System.Windows.Forms.RadioButton()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.ucrPnlGraphType = New instat.UcrPanel()
+        Me.lblFactorVariable = New System.Windows.Forms.Label()
+        Me.lblAlpha = New System.Windows.Forms.Label()
+        Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrSelectFactor = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrChkLabel = New instat.ucrCheck()
+        Me.lblGeom = New System.Windows.Forms.Label()
+        Me.ucrNudAlphaCorr = New instat.ucrNud()
+        Me.ucrInputComboGeom = New instat.ucrInputComboBox()
+        Me.ucrNudMaximumSize = New instat.ucrNud()
+        Me.lblMaximumSize = New System.Windows.Forms.Label()
+        Me.ucrNudMinimunSize = New instat.ucrNud()
+        Me.lblMinimumSize = New System.Windows.Forms.Label()
+        Me.lblLabelAlpha = New System.Windows.Forms.Label()
+        Me.ucrNudAlpha = New instat.ucrNud()
+        Me.ucrReceiveFactor = New instat.ucrReceiverSingle()
+        Me.ucrSaveGraph = New instat.ucrSave()
+        Me.ucrChkColor = New instat.ucrCheck()
         Me.ucrBaseSdgCorrPlot = New instat.ucrButtonsSubdialogue()
-        Me.tbSdgCorrelation.SuspendLayout()
-        Me.tbDisplay.SuspendLayout()
-        Me.tbGraphics.SuspendLayout()
-        Me.tbSaveGraphs.SuspendLayout()
-        Me.tbCorrelationPlot.SuspendLayout()
-        CType(Me.nudLabelAlpha, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudMaximumSize, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudMinimunSize, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tbScatterplotMatrix.SuspendLayout()
-        CType(Me.nudAlpha, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.grpGraphOptions.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
+        Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
-        'tbSdgCorrelation
+        'rdoNone
         '
-        Me.tbSdgCorrelation.Controls.Add(Me.tbDisplay)
-        Me.tbSdgCorrelation.Controls.Add(Me.tbGraphics)
-        Me.tbSdgCorrelation.Location = New System.Drawing.Point(12, 12)
-        Me.tbSdgCorrelation.Name = "tbSdgCorrelation"
-        Me.tbSdgCorrelation.SelectedIndex = 0
-        Me.tbSdgCorrelation.Size = New System.Drawing.Size(274, 266)
-        Me.tbSdgCorrelation.TabIndex = 1
-        Me.tbSdgCorrelation.Tag = ""
-        '
-        'tbDisplay
-        '
-        Me.tbDisplay.Controls.Add(Me.chkCorrelationMatrix)
-        Me.tbDisplay.Location = New System.Drawing.Point(4, 22)
-        Me.tbDisplay.Name = "tbDisplay"
-        Me.tbDisplay.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbDisplay.Size = New System.Drawing.Size(266, 240)
-        Me.tbDisplay.TabIndex = 1
-        Me.tbDisplay.Tag = "Display"
-        Me.tbDisplay.Text = "Display"
-        Me.tbDisplay.UseVisualStyleBackColor = True
-        '
-        'chkCorrelationMatrix
-        '
-        Me.chkCorrelationMatrix.AutoSize = True
-        Me.chkCorrelationMatrix.Location = New System.Drawing.Point(16, 21)
-        Me.chkCorrelationMatrix.Name = "chkCorrelationMatrix"
-        Me.chkCorrelationMatrix.Size = New System.Drawing.Size(107, 17)
-        Me.chkCorrelationMatrix.TabIndex = 1
-        Me.chkCorrelationMatrix.Tag = "Correlation_Matrix"
-        Me.chkCorrelationMatrix.Text = "Correlation Matrix"
-        Me.chkCorrelationMatrix.UseVisualStyleBackColor = True
-        '
-        'tbGraphics
-        '
-        Me.tbGraphics.Controls.Add(Me.ucrSaveGraph)
-        Me.tbGraphics.Controls.Add(Me.tbSaveGraphs)
-        Me.tbGraphics.Controls.Add(Me.grpGraphOptions)
-        Me.tbGraphics.Location = New System.Drawing.Point(4, 22)
-        Me.tbGraphics.Name = "tbGraphics"
-        Me.tbGraphics.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbGraphics.Size = New System.Drawing.Size(266, 240)
-        Me.tbGraphics.TabIndex = 2
-        Me.tbGraphics.Tag = "Graphics"
-        Me.tbGraphics.Text = "Graphics"
-        Me.tbGraphics.UseVisualStyleBackColor = True
-        '
-        'ucrSaveGraph
-        '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(16, 92)
-        Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(225, 22)
-        Me.ucrSaveGraph.TabIndex = 7
-        '
-        'tbSaveGraphs
-        '
-        Me.tbSaveGraphs.Controls.Add(Me.tbPairwisePlot)
-        Me.tbSaveGraphs.Controls.Add(Me.tbCorrelationPlot)
-        Me.tbSaveGraphs.Controls.Add(Me.tbScatterplotMatrix)
-        Me.tbSaveGraphs.Location = New System.Drawing.Point(9, 120)
-        Me.tbSaveGraphs.Name = "tbSaveGraphs"
-        Me.tbSaveGraphs.SelectedIndex = 0
-        Me.tbSaveGraphs.Size = New System.Drawing.Size(252, 114)
-        Me.tbSaveGraphs.TabIndex = 6
-        '
-        'tbPairwisePlot
-        '
-        Me.tbPairwisePlot.Location = New System.Drawing.Point(4, 22)
-        Me.tbPairwisePlot.Name = "tbPairwisePlot"
-        Me.tbPairwisePlot.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbPairwisePlot.Size = New System.Drawing.Size(244, 88)
-        Me.tbPairwisePlot.TabIndex = 0
-        Me.tbPairwisePlot.Tag = "Pairwise_Plot"
-        Me.tbPairwisePlot.Text = "Pairwise Plot"
-        Me.tbPairwisePlot.UseVisualStyleBackColor = True
-        '
-        'tbCorrelationPlot
-        '
-        Me.tbCorrelationPlot.Controls.Add(Me.chkLabel)
-        Me.tbCorrelationPlot.Controls.Add(Me.nudLabelAlpha)
-        Me.tbCorrelationPlot.Controls.Add(Me.nudMaximumSize)
-        Me.tbCorrelationPlot.Controls.Add(Me.nudMinimunSize)
-        Me.tbCorrelationPlot.Controls.Add(Me.lblMaximumSize)
-        Me.tbCorrelationPlot.Controls.Add(Me.cmbgeom)
-        Me.tbCorrelationPlot.Controls.Add(Me.lblLabelAlpha)
-        Me.tbCorrelationPlot.Controls.Add(Me.lblMinimumSize)
-        Me.tbCorrelationPlot.Controls.Add(Me.lblgeom)
-        Me.tbCorrelationPlot.Location = New System.Drawing.Point(4, 22)
-        Me.tbCorrelationPlot.Name = "tbCorrelationPlot"
-        Me.tbCorrelationPlot.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbCorrelationPlot.Size = New System.Drawing.Size(244, 88)
-        Me.tbCorrelationPlot.TabIndex = 1
-        Me.tbCorrelationPlot.Tag = "Correlation_Plot"
-        Me.tbCorrelationPlot.Text = "Correlation Plot"
-        Me.tbCorrelationPlot.UseVisualStyleBackColor = True
-        '
-        'chkLabel
-        '
-        Me.chkLabel.AutoSize = True
-        Me.chkLabel.Location = New System.Drawing.Point(24, 56)
-        Me.chkLabel.Name = "chkLabel"
-        Me.chkLabel.Size = New System.Drawing.Size(52, 17)
-        Me.chkLabel.TabIndex = 9
-        Me.chkLabel.Tag = "Label"
-        Me.chkLabel.Text = "Label"
-        Me.chkLabel.UseVisualStyleBackColor = True
-        '
-        'nudLabelAlpha
-        '
-        Me.nudLabelAlpha.DecimalPlaces = 2
-        Me.nudLabelAlpha.Increment = New Decimal(New Integer() {1, 0, 0, 131072})
-        Me.nudLabelAlpha.Location = New System.Drawing.Point(177, 54)
-        Me.nudLabelAlpha.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.nudLabelAlpha.Name = "nudLabelAlpha"
-        Me.nudLabelAlpha.Size = New System.Drawing.Size(51, 20)
-        Me.nudLabelAlpha.TabIndex = 8
-        Me.nudLabelAlpha.Value = New Decimal(New Integer() {1, 0, 0, 0})
-        '
-        'nudMaximumSize
-        '
-        Me.nudMaximumSize.Location = New System.Drawing.Point(210, 31)
-        Me.nudMaximumSize.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
-        Me.nudMaximumSize.Minimum = New Decimal(New Integer() {5, 0, 0, 0})
-        Me.nudMaximumSize.Name = "nudMaximumSize"
-        Me.nudMaximumSize.Size = New System.Drawing.Size(31, 20)
-        Me.nudMaximumSize.TabIndex = 7
-        Me.nudMaximumSize.Value = New Decimal(New Integer() {6, 0, 0, 0})
-        '
-        'nudMinimunSize
-        '
-        Me.nudMinimunSize.Location = New System.Drawing.Point(96, 30)
-        Me.nudMinimunSize.Maximum = New Decimal(New Integer() {5, 0, 0, 0})
-        Me.nudMinimunSize.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.nudMinimunSize.Name = "nudMinimunSize"
-        Me.nudMinimunSize.Size = New System.Drawing.Size(31, 20)
-        Me.nudMinimunSize.TabIndex = 6
-        Me.nudMinimunSize.Value = New Decimal(New Integer() {2, 0, 0, 0})
-        '
-        'lblMaximumSize
-        '
-        Me.lblMaximumSize.AutoSize = True
-        Me.lblMaximumSize.Location = New System.Drawing.Point(132, 33)
-        Me.lblMaximumSize.Name = "lblMaximumSize"
-        Me.lblMaximumSize.Size = New System.Drawing.Size(74, 13)
-        Me.lblMaximumSize.TabIndex = 5
-        Me.lblMaximumSize.Tag = "Maximum_Size"
-        Me.lblMaximumSize.Text = "Maximum Size"
-        '
-        'cmbgeom
-        '
-        Me.cmbgeom.FormattingEnabled = True
-        Me.cmbgeom.Items.AddRange(New Object() {"tile", "circle", "text", "blank"})
-        Me.cmbgeom.Location = New System.Drawing.Point(114, 3)
-        Me.cmbgeom.Name = "cmbgeom"
-        Me.cmbgeom.Size = New System.Drawing.Size(121, 21)
-        Me.cmbgeom.TabIndex = 4
-        '
-        'lblLabelAlpha
-        '
-        Me.lblLabelAlpha.AutoSize = True
-        Me.lblLabelAlpha.Location = New System.Drawing.Point(104, 56)
-        Me.lblLabelAlpha.Name = "lblLabelAlpha"
-        Me.lblLabelAlpha.Size = New System.Drawing.Size(63, 13)
-        Me.lblLabelAlpha.TabIndex = 3
-        Me.lblLabelAlpha.Tag = "Label_Alpha"
-        Me.lblLabelAlpha.Text = "Label Alpha"
-        '
-        'lblMinimumSize
-        '
-        Me.lblMinimumSize.AutoSize = True
-        Me.lblMinimumSize.Location = New System.Drawing.Point(21, 34)
-        Me.lblMinimumSize.Name = "lblMinimumSize"
-        Me.lblMinimumSize.Size = New System.Drawing.Size(71, 13)
-        Me.lblMinimumSize.TabIndex = 1
-        Me.lblMinimumSize.Tag = "Minimum_Size"
-        Me.lblMinimumSize.Text = "Minimum Size"
-        '
-        'lblgeom
-        '
-        Me.lblgeom.AutoSize = True
-        Me.lblgeom.Location = New System.Drawing.Point(17, 12)
-        Me.lblgeom.Name = "lblgeom"
-        Me.lblgeom.Size = New System.Drawing.Size(33, 13)
-        Me.lblgeom.TabIndex = 0
-        Me.lblgeom.Tag = "geom"
-        Me.lblgeom.Text = "geom"
-        '
-        'tbScatterplotMatrix
-        '
-        Me.tbScatterplotMatrix.Controls.Add(Me.chkColor)
-        Me.tbScatterplotMatrix.Controls.Add(Me.lblAlpha)
-        Me.tbScatterplotMatrix.Controls.Add(Me.nudAlpha)
-        Me.tbScatterplotMatrix.Location = New System.Drawing.Point(4, 22)
-        Me.tbScatterplotMatrix.Name = "tbScatterplotMatrix"
-        Me.tbScatterplotMatrix.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbScatterplotMatrix.Size = New System.Drawing.Size(244, 88)
-        Me.tbScatterplotMatrix.TabIndex = 2
-        Me.tbScatterplotMatrix.Tag = "Scatterplot_Matrix"
-        Me.tbScatterplotMatrix.Text = "Scatterplot Matrix"
-        Me.tbScatterplotMatrix.UseVisualStyleBackColor = True
-        '
-        'chkColor
-        '
-        Me.chkColor.AutoSize = True
-        Me.chkColor.Location = New System.Drawing.Point(20, 38)
-        Me.chkColor.Name = "chkColor"
-        Me.chkColor.Size = New System.Drawing.Size(50, 17)
-        Me.chkColor.TabIndex = 3
-        Me.chkColor.Tag = "Color"
-        Me.chkColor.Text = "Color"
-        Me.chkColor.UseVisualStyleBackColor = True
-        '
-        'lblAlpha
-        '
-        Me.lblAlpha.AutoSize = True
-        Me.lblAlpha.Location = New System.Drawing.Point(15, 12)
-        Me.lblAlpha.Name = "lblAlpha"
-        Me.lblAlpha.Size = New System.Drawing.Size(34, 13)
-        Me.lblAlpha.TabIndex = 1
-        Me.lblAlpha.Tag = "Alpha"
-        Me.lblAlpha.Text = "Alpha"
-        '
-        'nudAlpha
-        '
-        Me.nudAlpha.DecimalPlaces = 2
-        Me.nudAlpha.Increment = New Decimal(New Integer() {1, 0, 0, 131072})
-        Me.nudAlpha.Location = New System.Drawing.Point(55, 12)
-        Me.nudAlpha.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.nudAlpha.Name = "nudAlpha"
-        Me.nudAlpha.Size = New System.Drawing.Size(51, 20)
-        Me.nudAlpha.TabIndex = 0
-        Me.nudAlpha.Value = New Decimal(New Integer() {1, 0, 0, 0})
-        '
-        'grpGraphOptions
-        '
-        Me.grpGraphOptions.Controls.Add(Me.rdoScatterplotMatrix)
-        Me.grpGraphOptions.Controls.Add(Me.rdoCorrelationPlot)
-        Me.grpGraphOptions.Controls.Add(Me.rdoPairwisePlot)
-        Me.grpGraphOptions.Location = New System.Drawing.Point(16, 2)
-        Me.grpGraphOptions.Name = "grpGraphOptions"
-        Me.grpGraphOptions.Size = New System.Drawing.Size(142, 83)
-        Me.grpGraphOptions.TabIndex = 4
-        Me.grpGraphOptions.TabStop = False
-        Me.grpGraphOptions.Tag = "Graph_Options"
-        Me.grpGraphOptions.Text = "Graph Options"
-        '
-        'rdoScatterplotMatrix
-        '
-        Me.rdoScatterplotMatrix.AutoSize = True
-        Me.rdoScatterplotMatrix.Location = New System.Drawing.Point(17, 63)
-        Me.rdoScatterplotMatrix.Name = "rdoScatterplotMatrix"
-        Me.rdoScatterplotMatrix.Size = New System.Drawing.Size(107, 17)
-        Me.rdoScatterplotMatrix.TabIndex = 2
-        Me.rdoScatterplotMatrix.TabStop = True
-        Me.rdoScatterplotMatrix.Tag = "Scatterplot_Matrix"
-        Me.rdoScatterplotMatrix.Text = "Scatterplot Matrix"
-        Me.rdoScatterplotMatrix.UseVisualStyleBackColor = True
-        '
-        'rdoCorrelationPlot
-        '
-        Me.rdoCorrelationPlot.AutoSize = True
-        Me.rdoCorrelationPlot.Location = New System.Drawing.Point(17, 40)
-        Me.rdoCorrelationPlot.Name = "rdoCorrelationPlot"
-        Me.rdoCorrelationPlot.Size = New System.Drawing.Size(96, 17)
-        Me.rdoCorrelationPlot.TabIndex = 1
-        Me.rdoCorrelationPlot.TabStop = True
-        Me.rdoCorrelationPlot.Tag = "Correlation_Plot"
-        Me.rdoCorrelationPlot.Text = "Correlation Plot"
-        Me.rdoCorrelationPlot.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.rdoNone, "rdoNone")
+        Me.rdoNone.Name = "rdoNone"
+        Me.rdoNone.UseVisualStyleBackColor = True
         '
         'rdoPairwisePlot
         '
-        Me.rdoPairwisePlot.AutoSize = True
-        Me.rdoPairwisePlot.Location = New System.Drawing.Point(17, 20)
+        resources.ApplyResources(Me.rdoPairwisePlot, "rdoPairwisePlot")
         Me.rdoPairwisePlot.Name = "rdoPairwisePlot"
-        Me.rdoPairwisePlot.Size = New System.Drawing.Size(85, 17)
-        Me.rdoPairwisePlot.TabIndex = 0
-        Me.rdoPairwisePlot.TabStop = True
-        Me.rdoPairwisePlot.Tag = "Pairwise_Plot"
-        Me.rdoPairwisePlot.Text = "Pairwise Plot"
         Me.rdoPairwisePlot.UseVisualStyleBackColor = True
+        '
+        'rdoCorrelationPlot
+        '
+        resources.ApplyResources(Me.rdoCorrelationPlot, "rdoCorrelationPlot")
+        Me.rdoCorrelationPlot.Name = "rdoCorrelationPlot"
+        Me.rdoCorrelationPlot.UseVisualStyleBackColor = True
+        '
+        'rdoScatterPlotMatrix
+        '
+        resources.ApplyResources(Me.rdoScatterPlotMatrix, "rdoScatterPlotMatrix")
+        Me.rdoScatterPlotMatrix.Name = "rdoScatterPlotMatrix"
+        Me.rdoScatterPlotMatrix.UseVisualStyleBackColor = True
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.rdoNone)
+        Me.GroupBox1.Controls.Add(Me.rdoPairwisePlot)
+        Me.GroupBox1.Controls.Add(Me.rdoCorrelationPlot)
+        Me.GroupBox1.Controls.Add(Me.rdoScatterPlotMatrix)
+        Me.GroupBox1.Controls.Add(Me.ucrPnlGraphType)
+        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.TabStop = False
+        '
+        'ucrPnlGraphType
+        '
+        resources.ApplyResources(Me.ucrPnlGraphType, "ucrPnlGraphType")
+        Me.ucrPnlGraphType.Name = "ucrPnlGraphType"
+        '
+        'lblFactorVariable
+        '
+        resources.ApplyResources(Me.lblFactorVariable, "lblFactorVariable")
+        Me.lblFactorVariable.Name = "lblFactorVariable"
+        Me.lblFactorVariable.Tag = "Factor_Variable"
+        '
+        'lblAlpha
+        '
+        resources.ApplyResources(Me.lblAlpha, "lblAlpha")
+        Me.lblAlpha.Name = "lblAlpha"
+        Me.lblAlpha.Tag = "Alpha"
+        '
+        'grpOptions
+        '
+        Me.grpOptions.Controls.Add(Me.ucrSelectFactor)
+        Me.grpOptions.Controls.Add(Me.ucrChkLabel)
+        Me.grpOptions.Controls.Add(Me.lblGeom)
+        Me.grpOptions.Controls.Add(Me.ucrNudAlphaCorr)
+        Me.grpOptions.Controls.Add(Me.ucrInputComboGeom)
+        Me.grpOptions.Controls.Add(Me.ucrNudMaximumSize)
+        Me.grpOptions.Controls.Add(Me.lblMaximumSize)
+        Me.grpOptions.Controls.Add(Me.ucrNudMinimunSize)
+        Me.grpOptions.Controls.Add(Me.lblMinimumSize)
+        Me.grpOptions.Controls.Add(Me.lblLabelAlpha)
+        resources.ApplyResources(Me.grpOptions, "grpOptions")
+        Me.grpOptions.Name = "grpOptions"
+        Me.grpOptions.TabStop = False
+        '
+        'ucrSelectFactor
+        '
+        Me.ucrSelectFactor.bShowHiddenColumns = False
+        Me.ucrSelectFactor.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectFactor, "ucrSelectFactor")
+        Me.ucrSelectFactor.Name = "ucrSelectFactor"
+        '
+        'ucrChkLabel
+        '
+        Me.ucrChkLabel.Checked = False
+        resources.ApplyResources(Me.ucrChkLabel, "ucrChkLabel")
+        Me.ucrChkLabel.Name = "ucrChkLabel"
+        '
+        'lblGeom
+        '
+        resources.ApplyResources(Me.lblGeom, "lblGeom")
+        Me.lblGeom.Name = "lblGeom"
+        Me.lblGeom.Tag = "Geom:"
+        '
+        'ucrNudAlphaCorr
+        '
+        Me.ucrNudAlphaCorr.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAlphaCorr.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudAlphaCorr, "ucrNudAlphaCorr")
+        Me.ucrNudAlphaCorr.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudAlphaCorr.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAlphaCorr.Name = "ucrNudAlphaCorr"
+        Me.ucrNudAlphaCorr.Value = New Decimal(New Integer() {100, 0, 0, 131072})
+        '
+        'ucrInputComboGeom
+        '
+        Me.ucrInputComboGeom.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboGeom.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComboGeom, "ucrInputComboGeom")
+        Me.ucrInputComboGeom.Name = "ucrInputComboGeom"
+        '
+        'ucrNudMaximumSize
+        '
+        Me.ucrNudMaximumSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaximumSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudMaximumSize, "ucrNudMaximumSize")
+        Me.ucrNudMaximumSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMaximumSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaximumSize.Name = "ucrNudMaximumSize"
+        Me.ucrNudMaximumSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblMaximumSize
+        '
+        resources.ApplyResources(Me.lblMaximumSize, "lblMaximumSize")
+        Me.lblMaximumSize.Name = "lblMaximumSize"
+        Me.lblMaximumSize.Tag = "Maximum_Size:"
+        '
+        'ucrNudMinimunSize
+        '
+        Me.ucrNudMinimunSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMinimunSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudMinimunSize, "ucrNudMinimunSize")
+        Me.ucrNudMinimunSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMinimunSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMinimunSize.Name = "ucrNudMinimunSize"
+        Me.ucrNudMinimunSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblMinimumSize
+        '
+        resources.ApplyResources(Me.lblMinimumSize, "lblMinimumSize")
+        Me.lblMinimumSize.Name = "lblMinimumSize"
+        Me.lblMinimumSize.Tag = "Minimum_Size:"
+        '
+        'lblLabelAlpha
+        '
+        resources.ApplyResources(Me.lblLabelAlpha, "lblLabelAlpha")
+        Me.lblLabelAlpha.Name = "lblLabelAlpha"
+        Me.lblLabelAlpha.Tag = "Label_Alpha:"
+        '
+        'ucrNudAlpha
+        '
+        Me.ucrNudAlpha.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAlpha.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudAlpha, "ucrNudAlpha")
+        Me.ucrNudAlpha.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudAlpha.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAlpha.Name = "ucrNudAlpha"
+        Me.ucrNudAlpha.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrReceiveFactor
+        '
+        Me.ucrReceiveFactor.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiveFactor, "ucrReceiveFactor")
+        Me.ucrReceiveFactor.Name = "ucrReceiveFactor"
+        Me.ucrReceiveFactor.Selector = Nothing
+        Me.ucrReceiveFactor.strNcFilePath = ""
+        Me.ucrReceiveFactor.ucrSelector = Nothing
+        '
+        'ucrSaveGraph
+        '
+        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        '
+        'ucrChkColor
+        '
+        Me.ucrChkColor.Checked = False
+        resources.ApplyResources(Me.ucrChkColor, "ucrChkColor")
+        Me.ucrChkColor.Name = "ucrChkColor"
         '
         'ucrBaseSdgCorrPlot
         '
-        Me.ucrBaseSdgCorrPlot.Location = New System.Drawing.Point(44, 275)
+        resources.ApplyResources(Me.ucrBaseSdgCorrPlot, "ucrBaseSdgCorrPlot")
         Me.ucrBaseSdgCorrPlot.Name = "ucrBaseSdgCorrPlot"
-        Me.ucrBaseSdgCorrPlot.Size = New System.Drawing.Size(142, 30)
-        Me.ucrBaseSdgCorrPlot.TabIndex = 0
         '
         'sdgCorrPlot
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(288, 305)
-        Me.Controls.Add(Me.tbSdgCorrelation)
+        Me.Controls.Add(Me.grpOptions)
+        Me.Controls.Add(Me.ucrNudAlpha)
+        Me.Controls.Add(Me.ucrReceiveFactor)
+        Me.Controls.Add(Me.lblAlpha)
+        Me.Controls.Add(Me.ucrSaveGraph)
+        Me.Controls.Add(Me.lblFactorVariable)
+        Me.Controls.Add(Me.ucrChkColor)
         Me.Controls.Add(Me.ucrBaseSdgCorrPlot)
+        Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "sdgCorrPlot"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "corrplot"
-        Me.Text = "corrplot"
-        Me.tbSdgCorrelation.ResumeLayout(False)
-        Me.tbDisplay.ResumeLayout(False)
-        Me.tbDisplay.PerformLayout()
-        Me.tbGraphics.ResumeLayout(False)
-        Me.tbSaveGraphs.ResumeLayout(False)
-        Me.tbCorrelationPlot.ResumeLayout(False)
-        Me.tbCorrelationPlot.PerformLayout()
-        CType(Me.nudLabelAlpha, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudMaximumSize, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudMinimunSize, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.tbScatterplotMatrix.ResumeLayout(False)
-        Me.tbScatterplotMatrix.PerformLayout()
-        CType(Me.nudAlpha, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.grpGraphOptions.ResumeLayout(False)
-        Me.grpGraphOptions.PerformLayout()
+        Me.Tag = "Correlation_Display_and_Graphics"
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
+        Me.grpOptions.ResumeLayout(False)
+        Me.grpOptions.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBaseSdgCorrPlot As ucrButtonsSubdialogue
-    Friend WithEvents tbSdgCorrelation As TabControl
-    Friend WithEvents tbDisplay As TabPage
-    Friend WithEvents chkCorrelationMatrix As CheckBox
-    Friend WithEvents tbGraphics As TabPage
-    Friend WithEvents grpGraphOptions As GroupBox
-    Friend WithEvents rdoScatterplotMatrix As RadioButton
+    Friend WithEvents grpGraphs As GroupBox
+    Friend WithEvents ucrPnlGraphType As UcrPanel
+    Friend WithEvents rdoScatterPlotMatrix As RadioButton
     Friend WithEvents rdoCorrelationPlot As RadioButton
     Friend WithEvents rdoPairwisePlot As RadioButton
-    Friend WithEvents ucrSaveGraph As ucrSaveGraph
-    Friend WithEvents tbSaveGraphs As TabControl
-    Friend WithEvents tbPairwisePlot As TabPage
-    Friend WithEvents tbCorrelationPlot As TabPage
-    Friend WithEvents tbScatterplotMatrix As TabPage
-    Friend WithEvents chkColor As CheckBox
+    Friend WithEvents rdoNone As RadioButton
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents ucrSaveGraph As ucrSave
+    Friend WithEvents ucrChkColor As ucrCheck
+    Friend WithEvents lblFactorVariable As Label
     Friend WithEvents lblAlpha As Label
-    Friend WithEvents nudAlpha As NumericUpDown
-    Friend WithEvents nudMaximumSize As NumericUpDown
-    Friend WithEvents nudMinimunSize As NumericUpDown
+    Friend WithEvents ucrReceiveFactor As ucrReceiverSingle
+    Friend WithEvents ucrSelectFactor As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrNudAlpha As ucrNud
+    Friend WithEvents grpOptions As GroupBox
+    Friend WithEvents ucrChkLabel As ucrCheck
+    Friend WithEvents lblGeom As Label
+    Friend WithEvents ucrNudAlphaCorr As ucrNud
+    Friend WithEvents ucrInputComboGeom As ucrInputComboBox
+    Friend WithEvents ucrNudMaximumSize As ucrNud
     Friend WithEvents lblMaximumSize As Label
-    Friend WithEvents cmbgeom As ComboBox
-    Friend WithEvents lblLabelAlpha As Label
+    Friend WithEvents ucrNudMinimunSize As ucrNud
     Friend WithEvents lblMinimumSize As Label
-    Friend WithEvents lblgeom As Label
-    Friend WithEvents nudLabelAlpha As NumericUpDown
-    Friend WithEvents chkLabel As CheckBox
+    Friend WithEvents lblLabelAlpha As Label
 End Class

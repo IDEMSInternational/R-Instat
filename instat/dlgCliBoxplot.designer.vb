@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgCliBoxplot
     Inherits System.Windows.Forms.Form
 
@@ -363,6 +379,7 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputTitle
         '
+        Me.ucrInputTitle.IsReadOnly = False
         Me.ucrInputTitle.Location = New System.Drawing.Point(128, 36)
         Me.ucrInputTitle.Name = "ucrInputTitle"
         Me.ucrInputTitle.Size = New System.Drawing.Size(107, 21)
@@ -370,6 +387,7 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputDataPeriod
         '
+        Me.ucrInputDataPeriod.IsReadOnly = False
         Me.ucrInputDataPeriod.Location = New System.Drawing.Point(128, 140)
         Me.ucrInputDataPeriod.Name = "ucrInputDataPeriod"
         Me.ucrInputDataPeriod.Size = New System.Drawing.Size(107, 21)
@@ -377,6 +395,7 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputVariable
         '
+        Me.ucrInputVariable.IsReadOnly = False
         Me.ucrInputVariable.Location = New System.Drawing.Point(128, 61)
         Me.ucrInputVariable.Name = "ucrInputVariable"
         Me.ucrInputVariable.Size = New System.Drawing.Size(107, 21)
@@ -384,6 +403,7 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputXLabel
         '
+        Me.ucrInputXLabel.IsReadOnly = False
         Me.ucrInputXLabel.Location = New System.Drawing.Point(128, 113)
         Me.ucrInputXLabel.Name = "ucrInputXLabel"
         Me.ucrInputXLabel.Size = New System.Drawing.Size(107, 21)
@@ -391,6 +411,7 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputWidth
         '
+        Me.ucrInputWidth.IsReadOnly = False
         Me.ucrInputWidth.Location = New System.Drawing.Point(128, 193)
         Me.ucrInputWidth.Name = "ucrInputWidth"
         Me.ucrInputWidth.Size = New System.Drawing.Size(107, 21)
@@ -398,6 +419,7 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputYLabel
         '
+        Me.ucrInputYLabel.IsReadOnly = False
         Me.ucrInputYLabel.Location = New System.Drawing.Point(128, 87)
         Me.ucrInputYLabel.Name = "ucrInputYLabel"
         Me.ucrInputYLabel.Size = New System.Drawing.Size(107, 21)
@@ -405,6 +427,7 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputFactorLab
         '
+        Me.ucrInputFactorLab.IsReadOnly = False
         Me.ucrInputFactorLab.Location = New System.Drawing.Point(128, 166)
         Me.ucrInputFactorLab.Name = "ucrInputFactorLab"
         Me.ucrInputFactorLab.Size = New System.Drawing.Size(107, 21)
@@ -412,6 +435,7 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputColour
         '
+        Me.ucrInputColour.IsReadOnly = False
         Me.ucrInputColour.Location = New System.Drawing.Point(128, 221)
         Me.ucrInputColour.Name = "ucrInputColour"
         Me.ucrInputColour.Size = New System.Drawing.Size(107, 21)
@@ -419,6 +443,7 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputLog
         '
+        Me.ucrInputLog.IsReadOnly = False
         Me.ucrInputLog.Location = New System.Drawing.Point(282, 35)
         Me.ucrInputLog.Name = "ucrInputLog"
         Me.ucrInputLog.Size = New System.Drawing.Size(91, 21)
@@ -426,6 +451,7 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputAt
         '
+        Me.ucrInputAt.IsReadOnly = False
         Me.ucrInputAt.Location = New System.Drawing.Point(282, 63)
         Me.ucrInputAt.Name = "ucrInputAt"
         Me.ucrInputAt.Size = New System.Drawing.Size(91, 21)
@@ -433,6 +459,7 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputBorder
         '
+        Me.ucrInputBorder.IsReadOnly = False
         Me.ucrInputBorder.Location = New System.Drawing.Point(282, 86)
         Me.ucrInputBorder.Name = "ucrInputBorder"
         Me.ucrInputBorder.Size = New System.Drawing.Size(91, 21)
@@ -440,6 +467,7 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputPars
         '
+        Me.ucrInputPars.IsReadOnly = False
         Me.ucrInputPars.Location = New System.Drawing.Point(282, 112)
         Me.ucrInputPars.Name = "ucrInputPars"
         Me.ucrInputPars.Size = New System.Drawing.Size(91, 21)
@@ -484,6 +512,8 @@ Partial Class dlgCliBoxplot
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgCliBoxplot"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Cliboxplot"

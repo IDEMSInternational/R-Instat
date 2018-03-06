@@ -1,5 +1,5 @@
-﻿' Instat+R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,83 +11,39 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class RFunction
-    Public clsParameters As New List(Of RParameter)
+    Inherits RCodeStructure
+
     Public strRCommand As String
-    Public strAssignTo As String
-    Public strAssignToDataFrame As String
-    Public strAssignToColumn As String
-    Public strAssignToModel As String
-    Public strAssignToGraph As String
-    Public bToBeAssigned As Boolean = False
-    Public bIsAssigned As Boolean = False
-    Public bAssignToIsPrefix As Boolean = False
-    Public bAssignToColumnWithoutNames As Boolean = False
-    Public bInsertColumnBefore As Boolean = False
+    Private strPackageName As String = ""
 
     Public Sub New()
-        RaiseEvent ParametersChanged()
+        OnParametersChanged()
     End Sub
-
-    Public Event ParametersChanged()
 
     Public Sub SetRCommand(strTemp As String)
         strRCommand = strTemp
         bIsAssigned = False
     End Sub
 
-    Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional bAssignToIsPrefix As Boolean = False, Optional bAssignToColumnWithoutNames As Boolean = False, Optional bInsertColumnBefore As Boolean = False)
-        strAssignTo = strTemp
-        If Not strTempDataframe = "" Then
-            strAssignToDataFrame = strTempDataframe
-            If Not strTempColumn = "" Then
-                strAssignToColumn = strTempColumn
-            End If
-        End If
-        If Not strTempModel = "" Then
-            strAssignToModel = strTempModel
-        End If
-        If Not strTempGraph = "" Then
-            strAssignToGraph = strTempGraph
-        End If
-        Me.bAssignToIsPrefix = bAssignToIsPrefix
-        Me.bAssignToColumnWithoutNames = bAssignToColumnWithoutNames
-        Me.bInsertColumnBefore = bInsertColumnBefore
-        bToBeAssigned = True
-        bIsAssigned = False
+    Public Sub SetPackageName(strName As String)
+        strPackageName = strName
     End Sub
 
-    Public Sub RemoveAssignTo()
-        strAssignTo = ""
-        strAssignToDataFrame = ""
-        strAssignToColumn = ""
-        strAssignToModel = ""
-        bToBeAssigned = False
-        bIsAssigned = False
-    End Sub
-
-    Public Function ToScript(Optional ByRef strScript As String = "") As String
-        Dim strTemp As String = ""
+    Public Overrides Function ToScript(Optional ByRef strScript As String = "", Optional strTemp As String = "") As String
+        'Converting the RFunction into a string that when run in R gives the appropriate output
         Dim i As Integer
-        Dim clsAddColumns As New RFunction
-        Dim clsGetColumns As New RFunction
-        Dim clsAddData As New RFunction
-        Dim clsGetData As New RFunction
-        Dim clsAddModels As New RFunction
-        Dim clsGetModels As New RFunction
-        Dim clsAddGraphs As New RFunction
-        Dim clsGetGraphs As New RFunction
-        Dim clsDataList As New RFunction
+        'For method with OrderedIndices, replace clsParameters.count by Mybase.OrderedIndices.count and i by Mybase.OrderedIndices(i)
 
-        If bIsAssigned Then
-            Return (strAssignTo)
+        'Parameters are sorted in the appropriate order and then the script is built.
+        SortParameters()
+        If strPackageName <> "" Then
+            strTemp = strPackageName & "::"
         End If
-
-        strTemp = strRCommand & "("
-
+        strTemp = strTemp & strRCommand & "("
         For i = 0 To clsParameters.Count - 1
             If i > 0 Then
                 strTemp = strTemp & ", "
@@ -95,177 +51,80 @@ Public Class RFunction
             strTemp = strTemp & clsParameters(i).ToScript(strScript)
         Next
         strTemp = strTemp & ")"
-        If bToBeAssigned Then
-            If Not frmMain.clsRLink.bInstatObjectExists Then
-                frmMain.clsRLink.CreateNewInstatObject()
+        If bToScriptAsRString Then
+            'TODO should also check assignment of parameters
+            If bToBeAssigned OrElse bIsAssigned Then
+                MsgBox("Developer error: Using bToScriptAsRString = True when RFunction is assigned will not produce the correct script. Remove assignment to use this options correctly.")
             End If
-            strScript = strScript & strAssignTo & " <- " & strTemp & vbCrLf
-            If Not strAssignToDataFrame = "" AndAlso (Not strAssignToColumn = "" OrElse bAssignToColumnWithoutNames) Then
-                clsAddColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
-                clsAddColumns.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
-                If Not bAssignToColumnWithoutNames Then
-                    clsAddColumns.AddParameter("col_name", Chr(34) & strAssignToColumn & Chr(34))
-                End If
-                clsAddColumns.AddParameter("col_data", strAssignTo)
-                If bAssignToIsPrefix Then
-                    clsAddColumns.AddParameter("use_col_name_as_prefix", "TRUE")
-                Else
-                    If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                        clsAddColumns.AddParameter("use_col_name_as_prefix", "FALSE")
-                    End If
-                End If
-                If bInsertColumnBefore Then
-                    clsAddColumns.AddParameter("before", "TRUE")
-                Else
-                    If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                        clsAddColumns.AddParameter("before", "FALSE")
-                    End If
-                End If
-                strScript = strScript & clsAddColumns.ToScript() & vbCrLf
-
-                clsGetColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
-                clsGetColumns.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
-                clsGetColumns.AddParameter("col_name", Chr(34) & strAssignToColumn & Chr(34))
-                strAssignTo = clsGetColumns.ToScript()
-
-                bIsAssigned = True
-                bToBeAssigned = False
-            ElseIf Not strAssignToModel = "" Then
-                clsAddModels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_model")
-                clsAddModels.AddParameter("model_name", Chr(34) & strAssignToModel & Chr(34))
-                clsAddModels.AddParameter("model", strAssignTo)
-                If Not strAssignToDataFrame = "" Then
-                    clsAddModels.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
-                    clsGetModels.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
-                End If
-                strScript = strScript & clsAddModels.ToScript() & vbCrLf
-
-                clsGetModels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
-                clsGetModels.AddParameter("model_name", Chr(34) & strAssignToModel & Chr(34))
-                strAssignTo = clsGetModels.ToScript()
-
-                bIsAssigned = True
-                bToBeAssigned = False
-            ElseIf Not strAssignToGraph = "" Then
-                clsAddGraphs.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_graph")
-                clsAddGraphs.AddParameter("graph_name", Chr(34) & strAssignToGraph & Chr(34))
-                clsAddGraphs.AddParameter("graph", strAssignTo)
-                If Not strAssignToDataFrame = "" Then
-                    clsAddGraphs.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
-                    clsGetGraphs.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
-                End If
-                strScript = strScript & clsAddGraphs.ToScript() & vbCrLf
-
-                clsGetGraphs.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
-                clsGetGraphs.AddParameter("graph_name", Chr(34) & strAssignToGraph & Chr(34))
-                strAssignTo = clsGetGraphs.ToScript()
-
-                bIsAssigned = True
-                bToBeAssigned = False
-            ElseIf Not strAssignToDataFrame = "" Then
-                clsAddData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
-                clsDataList.SetRCommand("list")
-                clsDataList.AddParameter(strAssignToDataFrame, strAssignTo)
-                clsAddData.AddParameter("data_tables", clsRFunctionParameter:=clsDataList)
-                strScript = strScript & clsAddData.ToScript() & vbCrLf
-
-                clsGetData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
-                clsGetData.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
-                strAssignTo = clsGetData.ToScript()
-
-                bIsAssigned = True
-                bToBeAssigned = False
-            End If
-            Return strAssignTo
-        Else
-            Return strTemp
+            'Cannot have double quotes ("") in the string because strTemp will be wrapped with ""
+            'In most cases signle quotes (') will give same functionality, though it's preferable to avoid this when constructing the RFunction
+            strTemp = strTemp.Replace(Chr(34), Chr(39))
+            strTemp = Chr(34) & strTemp & Chr(34)
         End If
+        Return MyBase.ToScript(strScript, strTemp)
     End Function
 
-    Public Sub AddParameter(strParameterName As String, Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing)
-        Dim clsParam As New RParameter
-
-        clsParam.SetArgumentName(strParameterName)
-        If Not strParameterValue = "" Then
-            clsParam.SetArgumentValue(strParameterValue)
-        End If
-        If Not clsRFunctionParameter Is Nothing Then
-            clsParam.SetArgumentFunction(clsRFunctionParameter)
-        End If
-        If Not clsROperatorParameter Is Nothing Then
-            clsParam.SetArgumentOperator(clsROperatorParameter)
-        End If
-        Me.AddParameter(clsParam)
+    Public Overrides Sub AddParameter(Optional strParameterName As String = "", Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing, Optional bIncludeArgumentName As Boolean = True, Optional iPosition As Integer = -1)
+        MyBase.AddParameter(strParameterName, strParameterValue, clsRFunctionParameter, clsROperatorParameter, bIncludeArgumentName, iPosition)
     End Sub
 
-    Public Sub AddParameter(clsParam As RParameter)
-        Dim i As Integer = -1
-        If Not clsParameters Is Nothing Then
-            If clsParam.strArgumentName IsNot Nothing Then
-                i = clsParameters.FindIndex(Function(x) x.strArgumentName.Equals(clsParam.strArgumentName))
-            End If
-        End If
-
-        If i = -1 Then
-            clsParameters.Add(clsParam)
-        Else
-            If clsParam.strArgumentValue IsNot Nothing Then
-                clsParameters(i).SetArgumentValue(clsParam.strArgumentValue)
-            End If
-            If clsParam.clsArgumentFunction IsNot Nothing Then
-                clsParameters(i).SetArgumentFunction(clsParam.clsArgumentFunction)
-            End If
-            If clsParam.clsArgumentOperator IsNot Nothing Then
-                clsParameters(i).SetArgumentOperator(clsParam.clsArgumentOperator)
-            End If
-        End If
-        bIsAssigned = False
-        RaiseEvent ParametersChanged()
+    Public Overrides Sub AddParameter(clsParam As RParameter)
+        MyBase.AddParameter(clsParam)
     End Sub
 
-    Public Function GetParameter(strName As String) As RParameter
+    Public Overrides Function GetParameter(strName As String) As RParameter
+        Dim iTempIndex As Integer = -1
         If Not clsParameters Is Nothing Then
-            Return clsParameters.Find(Function(x) x.strArgumentName = strName)
+            iTempIndex = clsParameters.FindIndex(Function(x) x.strArgumentName = strName)
+            If iTempIndex <> -1 Then
+                Return clsParameters(iTempIndex)
+            End If
         End If
         Return Nothing
     End Function
 
-    Public Sub RemoveParameterByName(strArgName)
-        Dim clsParam
-        If Not clsParameters Is Nothing Then
-            clsParam = clsParameters.Find(Function(x) x.strArgumentName = strArgName)
-            clsParameters.Remove(clsParam)
-        End If
-        bIsAssigned = False
-        RaiseEvent ParametersChanged()
+    Public Overrides Sub Clear()
+        SetRCommand("")
+        SetPackageName("")
+        MyBase.Clear()
     End Sub
 
-    Public Sub ClearParameters()
-        clsParameters.Clear()
-        bIsAssigned = False
-        RaiseEvent ParametersChanged()
+    Public Overrides Sub ClearParameters()
+        MyBase.ClearParameters()
     End Sub
 
-    Public Function Clone() As RFunction
-
+    Public Overrides Function Clone() As RCodeStructure
         Dim clsRFunction As New RFunction
         Dim clsRParam As RParameter
-        clsRFunction.strRCommand = strRCommand
+
+        'RCode properties
         clsRFunction.strAssignTo = strAssignTo
         clsRFunction.strAssignToDataFrame = strAssignToDataFrame
         clsRFunction.strAssignToColumn = strAssignToColumn
         clsRFunction.strAssignToModel = strAssignToModel
         clsRFunction.strAssignToGraph = strAssignToGraph
+        clsRFunction.strAssignToTable = strAssignToTable
         clsRFunction.bToBeAssigned = bToBeAssigned
         clsRFunction.bIsAssigned = bIsAssigned
         clsRFunction.bAssignToIsPrefix = bAssignToIsPrefix
-
+        clsRFunction.bAssignToColumnWithoutNames = bAssignToColumnWithoutNames
+        clsRFunction.bInsertColumnBefore = bInsertColumnBefore
+        clsRFunction.iNumberOfAddedParameters = iNumberOfAddedParameters
+        clsRFunction.iPosition = iPosition
+        clsRFunction.iCallType = iCallType
+        clsRFunction.bExcludeAssignedFunctionOutput = bExcludeAssignedFunctionOutput
+        clsRFunction.bClearFromGlobal = bClearFromGlobal
+        clsRFunction.bToScriptAsRString = bToScriptAsRString
+        clsRFunction.Tag = Tag
         For Each clsRParam In clsParameters
             clsRFunction.AddParameter(clsRParam.Clone)
         Next
 
-        Return clsRFunction
+        'RFunction specific properties
+        clsRFunction.strPackageName = strPackageName
+        clsRFunction.strRCommand = strRCommand
 
+        Return clsRFunction
     End Function
 
     Public ReadOnly Property iParameterCount() As Integer

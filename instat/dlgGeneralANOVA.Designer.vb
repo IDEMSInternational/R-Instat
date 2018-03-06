@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgGeneralANOVA
     Inherits System.Windows.Forms.Form
 
@@ -149,6 +165,8 @@ Partial Class dlgGeneralANOVA
         '
         'ucrSelectorGeneralANOVA
         '
+        Me.ucrSelectorGeneralANOVA.bShowHiddenColumns = False
+        Me.ucrSelectorGeneralANOVA.bUseCurrentFilter = False
         Me.ucrSelectorGeneralANOVA.Location = New System.Drawing.Point(10, 31)
         Me.ucrSelectorGeneralANOVA.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorGeneralANOVA.Name = "ucrSelectorGeneralANOVA"
@@ -181,6 +199,8 @@ Partial Class dlgGeneralANOVA
         Me.Controls.Add(Me.rdoAnalysis)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgGeneralANOVA"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "General_ANOVA"

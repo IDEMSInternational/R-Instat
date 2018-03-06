@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgFreezeColumns
     Inherits System.Windows.Forms.Form
 
@@ -30,7 +46,9 @@ Partial Class dlgFreezeColumns
         '
         'ucrSelectorByDataFrameAddRemoveforFreezeColumns
         '
-        Me.ucrSelectorByDataFrameAddRemoveforFreezeColumns.Location = New System.Drawing.Point(12, 0)
+        Me.ucrSelectorByDataFrameAddRemoveforFreezeColumns.bShowHiddenColumns = False
+        Me.ucrSelectorByDataFrameAddRemoveforFreezeColumns.bUseCurrentFilter = True
+        Me.ucrSelectorByDataFrameAddRemoveforFreezeColumns.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorByDataFrameAddRemoveforFreezeColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorByDataFrameAddRemoveforFreezeColumns.Name = "ucrSelectorByDataFrameAddRemoveforFreezeColumns"
         Me.ucrSelectorByDataFrameAddRemoveforFreezeColumns.Size = New System.Drawing.Size(210, 180)
@@ -38,40 +56,44 @@ Partial Class dlgFreezeColumns
         '
         'ucrReceiverMultipleforFreezeColumns
         '
-        Me.ucrReceiverMultipleforFreezeColumns.Location = New System.Drawing.Point(259, 80)
+        Me.ucrReceiverMultipleforFreezeColumns.frmParent = Me
+        Me.ucrReceiverMultipleforFreezeColumns.Location = New System.Drawing.Point(259, 60)
         Me.ucrReceiverMultipleforFreezeColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultipleforFreezeColumns.Name = "ucrReceiverMultipleforFreezeColumns"
         Me.ucrReceiverMultipleforFreezeColumns.Selector = Nothing
         Me.ucrReceiverMultipleforFreezeColumns.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverMultipleforFreezeColumns.TabIndex = 1
+        Me.ucrReceiverMultipleforFreezeColumns.TabIndex = 2
         '
         'ucrBaseforFreezeColumns
         '
-        Me.ucrBaseforFreezeColumns.Location = New System.Drawing.Point(12, 198)
+        Me.ucrBaseforFreezeColumns.Location = New System.Drawing.Point(10, 211)
         Me.ucrBaseforFreezeColumns.Name = "ucrBaseforFreezeColumns"
         Me.ucrBaseforFreezeColumns.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBaseforFreezeColumns.TabIndex = 2
+        Me.ucrBaseforFreezeColumns.TabIndex = 3
         '
         'lblFreezeColumns
         '
         Me.lblFreezeColumns.AutoSize = True
-        Me.lblFreezeColumns.Location = New System.Drawing.Point(259, 55)
+        Me.lblFreezeColumns.Location = New System.Drawing.Point(262, 41)
         Me.lblFreezeColumns.Name = "lblFreezeColumns"
-        Me.lblFreezeColumns.Size = New System.Drawing.Size(82, 13)
-        Me.lblFreezeColumns.TabIndex = 3
-        Me.lblFreezeColumns.Text = "Freeze Columns"
+        Me.lblFreezeColumns.Size = New System.Drawing.Size(85, 13)
+        Me.lblFreezeColumns.TabIndex = 1
+        Me.lblFreezeColumns.Text = "Freeze Columns:"
         '
         'dlgFreezeColumns
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(418, 250)
+        Me.ClientSize = New System.Drawing.Size(418, 271)
         Me.Controls.Add(Me.lblFreezeColumns)
         Me.Controls.Add(Me.ucrBaseforFreezeColumns)
         Me.Controls.Add(Me.ucrReceiverMultipleforFreezeColumns)
         Me.Controls.Add(Me.ucrSelectorByDataFrameAddRemoveforFreezeColumns)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgFreezeColumns"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Freeze Columns"
         Me.ResumeLayout(False)
         Me.PerformLayout()

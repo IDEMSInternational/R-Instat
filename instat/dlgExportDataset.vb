@@ -1,124 +1,110 @@
-﻿Imports System.IO
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Imports System.IO
 Imports instat.Translations
 Public Class dlgExportDataset
     Dim bFirstLoad As Boolean = True
-    Private clsWriteCSV, clsWriteXLSX, clsWriteOthers As New RFunction
-
-    Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
-        Dim dlgSave As New SaveFileDialog
-        dlgSave.Title = "Export file dialog"
-        dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-        dlgSave.Filter = "Comma separated file (*.csv)|*.csv|Excel files (*.xlsx)|*.xlsx|TAB-separated data (*.tsv)|*.tsv|Pipe-separated data (*.psv)|*.psv|Feather r / Python interchange format (*.feather)|*.feather|Fixed-Width format data (*.fwf)|*.fwf|Serialized r objects (*.rds)|*.rds|Saved r objects (*.RData)|*.RData|JSON(*.json)|*.json|YAML(*.yml)|*.yml|Stata(*.dta)|*.dta|SPSS(*.sav)|*.sav|XBASE database files (*.dbf)|*.dbf| Weka Attribute - Relation File Format (*.arff)|*.arff|r syntax object (*.R)|*.R|Xml(*.xml)|*.xml|HTML(*.html)|*.html"
-        If dlgSave.ShowDialog = DialogResult.OK Then
-            If dlgSave.FileName <> "" Then
-                txtExportFile.Text = Path.GetFileName(dlgSave.FileName)
-                SaveFileType(dlgSave.FileName.Replace("\", "/"))
-            End If
-        End If
-    End Sub
-
-    Private Sub txtExportFile_Click(sender As Object, e As EventArgs) Handles txtExportFile.Click
-        cmdBrowse_Click(sender, e)
-    End Sub
-
-    Private Sub setDefaultValues()
-        txtExportFile.Text = ""
-        chkOptions.Enabled = False
-        grpOptions.Enabled = False
-        ucrAvailableSheets.Reset()
-    End Sub
-
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        setDefaultValues()
-    End Sub
+    Private bReset As Boolean = True
+    Private clsDefaultFunction As New RFunction
+    Private strCurrentFileName As String
 
     Private Sub dlgExportDataset_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         If bFirstLoad Then
-            setDefaultValues()
+            InitialiseDialog()
             bFirstLoad = False
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
         TestOkEnabled()
+        autoTranslate(Me)
+    End Sub
+
+    Private Sub InitialiseDialog()
+        ucrInputExportFile.IsReadOnly = True
+        ucrAvailableSheets.SetParameter(New RParameter("x", 0))
+        ucrAvailableSheets.SetParameterIsRFunction()
+        ucrAvailableSheets.SetText("Data Frame to Export:")
+
+        ucrInputExportFile.SetParameter(New RParameter("file", 1))
+    End Sub
+
+    Private Sub SetDefaults()
+        clsDefaultFunction = New RFunction
+
+        ucrInputExportFile.SetName("")
+        ucrAvailableSheets.Reset()
+        clsDefaultFunction.SetPackageName("rio")
+        clsDefaultFunction.SetRCommand("export")
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        If txtExportFile.Text <> "" Then
+        If Not ucrInputExportFile.IsEmpty AndAlso ucrAvailableSheets.cboAvailableDataFrames.Text <> "" Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub txtExportFile_TextChanged(sender As Object, e As EventArgs) Handles txtExportFile.TextChanged
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
 
-    Private Sub SaveFileType(strFilePath As String)
-        Select Case Path.GetExtension(strFilePath)
-            Case ".csv"
-                clsWriteCSV.SetRCommand("rio::export")
-                chkOptions.Enabled = False
-                grpOptions.Enabled = False
-                clsWriteCSV.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-                clsWriteCSV.AddParameter("x", clsRFunctionParameter:=ucrAvailableSheets.clsCurrDataFrame)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsWriteCSV)
-            Case ".xlsx"
-                clsWriteXLSX.SetRCommand("rio::export")
-                chkOptions.Enabled = True
-                clsWriteXLSX.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-                clsWriteXLSX.AddParameter("x", clsRFunctionParameter:=ucrAvailableSheets.clsCurrDataFrame)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsWriteXLSX)
-            'TAB-separated data (.tsv), using write.table with row.names = FALSE.
-
-            Case ".tsv", ".psv", ".feather", ".fwf", ".rds", ".RData", ".json", ".yml", ".dta", ".sav", ".dbf", ".arff", ".R", ".xml", ".html"
-                clsWriteOthers.SetRCommand("rio::export")
-                chkOptions.Enabled = True
-                clsWriteOthers.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-                clsWriteOthers.AddParameter("x", clsRFunctionParameter:=ucrAvailableSheets.clsCurrDataFrame)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsWriteOthers)
-        End Select
+    Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
+        Using dlgSave As New SaveFileDialog
+            dlgSave.Title = "Export File Dialog"
+            dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+            If strCurrentFileName <> "" Then
+                dlgSave.FileName = Path.GetFileNameWithoutExtension(strCurrentFileName)
+                dlgSave.InitialDirectory = Path.GetDirectoryName(strCurrentFileName)
+            Else
+                dlgSave.FileName = ucrAvailableSheets.cboAvailableDataFrames.Text
+                dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+            End If
+            dlgSave.Filter = "Comma separated file (*.csv)|*.csv|Excel files (*.xlsx)|*.xlsx|TAB-separated data (*.tsv)|*.tsv|Pipe-separated data (*.psv)|*.psv|Feather r / Python interchange format (*.feather)|*.feather|Fixed-Width format data (*.fwf)|*.fwf|Serialized r objects (*.rds)|*.rds|Saved r objects (*.RData)|*.RData|JSON(*.json)|*.json|YAML(*.yml)|*.yml|Stata(*.dta)|*.dta|SPSS(*.sav)|*.sav|XBASE database files (*.dbf)|*.dbf| Weka Attribute - Relation File Format (*.arff)|*.arff|r syntax object (*.R)|*.R|Xml(*.xml)|*.xml|HTML(*.html)|*.html"
+            If dlgSave.ShowDialog = DialogResult.OK Then
+                If dlgSave.FileName <> "" Then
+                    ucrInputExportFile.SetName(Path.GetFullPath(dlgSave.FileName).ToString.Replace("\", "/"))
+                End If
+                strCurrentFileName = dlgSave.FileName
+            End If
+        End Using
     End Sub
 
-    Private Sub chkOptions_CheckStateChanged(sender As Object, e As EventArgs) Handles chkOptions.CheckStateChanged
-        If chkOptions.Checked Then
-            grpOptions.Enabled = True
-        Else
-            grpOptions.Enabled = False
-        End If
+    Private Sub ucrInputExportFile_Click(sender As Object, e As EventArgs) Handles ucrInputExportFile.Click
+        cmdBrowse_Click(sender, e)
     End Sub
 
-    Private Sub txtAuthor_Leave(sender As Object, e As EventArgs) Handles txtAuthor.Leave
-        If txtAuthor.Text <> "" Then
-            clsWriteXLSX.AddParameter("creator", Chr(34) & txtAuthor.Text & Chr(34))
-        End If
+    Private Sub ucrInputExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputExportFile.ControlContentsChanged, ucrAvailableSheets.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 
-    Private Sub txtSheetName_Leave(sender As Object, e As EventArgs) Handles txtSheetName.Leave
-        If txtSheetName.Text <> "" Then
-            clsWriteXLSX.AddParameter("sheetName", Chr(34) & txtSheetName.Text & Chr(34))
-        End If
-    End Sub
-
-    Private Sub txtRows_Leave(sender As Object, e As EventArgs) Handles txtRows.Leave
-        If txtRows.Text <> "" Then
-            clsWriteXLSX.AddParameter("startRow", txtRows.Text)
-        End If
-    End Sub
-
-    Private Sub txtCols_Leave(sender As Object, e As EventArgs) Handles txtCols.Leave
-        If txtRows.Text <> "" Then
-            clsWriteXLSX.AddParameter("startCol", txtCols.Text)
-        End If
-    End Sub
-
-    Private Sub chkRowNames_CheckStateChanged(sender As Object, e As EventArgs) Handles chkRowNames.CheckStateChanged, chkColNames.CheckStateChanged
-        If chkRowNames.Checked Then
-            ucrBase.clsRsyntax.AddParameter("rowNames", "TRUE")
-        ElseIf chkColNames.Checked Then
-            ucrBase.clsRsyntax.AddParameter("colNames", "TRUE")
-        Else
-            ucrBase.clsRsyntax.AddParameter("rowNames", "FALSE")
-            ucrBase.clsRsyntax.AddParameter("colNames", "FALSE")
-        End If
+    Private Sub ucrAvailableSheets_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrAvailableSheets.DataFrameChanged
+        strCurrentFileName = ""
     End Sub
 End Class
