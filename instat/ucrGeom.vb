@@ -383,7 +383,7 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_count)
 
         'clsgeom_crossbar.strGeomName = "geom_crossbar"
-        ''Mandatory
+        'Mandatory
         'clsgeom_crossbar.AddAesParameter("x", bIsMandatory:=True)
         'clsgeom_crossbar.AddAesParameter("ymax", bIsMandatory:=True)
         'clsgeom_crossbar.AddAesParameter("ymin", bIsMandatory:=True)
@@ -399,24 +399,42 @@ Public Class ucrGeom
         'lstAllGeoms.Add(clsgeom_crossbar)
 
         'clsgeom_curve.strGeomName = "geom_curve"
-        ''Mandatory
-        'clsgeom_curve.AddAesParameter("x", bIsMandatory:=True)
-        'clsgeom_curve.AddAesParameter("xend", bIsMandatory:=True)
-        'clsgeom_curve.AddAesParameter("y", bIsMandatory:=True)
-        'clsgeom_curve.AddAesParameter("yend", bIsMandatory:=True)
-        ''Optional
+        'Mandatory Aesthetics 
+        'the following parameters take single numeric values or a variable with a single observation 
+        'clsgeom_curve.AddAesParameter("x", bIsMandatory:=True, strIncludedDataTypes:={"numeric"})
+        'clsgeom_curve.AddAesParameter("xend", bIsMandatory:=True, strIncludedDataTypes:={"numeric"})
+        'clsgeom_curve.AddAesParameter("y", bIsMandatory:=True, strIncludedDataTypes:={"numeric"})
+        'clsgeom_curve.AddAesParameter("yend", bIsMandatory:=True, strIncludedDataTypes:={"numeric"})
+
+        'Optional Aesthetics 
         'clsgeom_curve.AddAesParameter("alpha")
         'clsgeom_curve.AddAesParameter("colour")
         'clsgeom_curve.AddAesParameter("linetype")
+        'clsgeom_curve.AddAesParameter("group")
         'clsgeom_curve.AddAesParameter("size")
 
-        ''adding layer parameters
-        'clsgeom_curve.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_curve.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_curve.AddLayerParameter("curvature", "numeric", "0.5") 'numeric values. negative values give a left hand curve while positive values give right hand curves
-        'clsgeom_curve.AddLayerParameter("angle", "numeric", "90") 'needs to be 0-180
-        'clsgeom_curve.AddLayerParameter("ncp", "numeric", "5")  'more control point creates a smoother curve
-        'clsgeom_curve.AddLayerParameter("lineend", "list", "butt", lstParameterStrings:={Chr(34) & "butt" & Chr(34), Chr(34) & "square" & Chr(34)})
+        'Layer parameter
+        'clsgeom_curve.AddLayerParameter("arrow", "list", "NULL") 'need to use arrow() command here e.g. arrow = arrow(angle = 30, length = unit(0.25, "inches"), ends = "last", type = "open") 
+        'clsgeom_curve.AddLayerParameter("lineend", "list", Chr(34) & "butt" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "butt" & Chr(34), Chr(34) & "square" & Chr(34)}) 
+        'clsgeom_curve.AddLayerParameter("curvature", "numeric", "0.5", lstParameterStrings:={1}) 'numeric values. negative values give a left hand curve while positive values give right hand curves
+        'clsgeom_curve.AddLayerParameter("angle", "numeric", "90", lstParameterStrings:={0, 0, 180}) 'needs to be 0-180
+        'clsgeom_curve.AddLayerParameter("ncp", "numeric", "5", lstParameterStrings:={0, 0})  'more control point creates a smoother curve
+
+        'Global Layer Parameters 
+        'clsgeom_curve.AddLayerParameter("stat", "list", Chr(34) & "sum" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "ecdf" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "summary" & Chr(34), Chr(34) & "unique" & Chr(34)}) 'Warning, stat count cannot be used with y aesthetic !!!
+        'revise the options here since identitiy and unique seem to return the plot to the orginal scatter plot. Summary option defaults to `mean_se() since no summary function supplied
+        'clsgeom_curve.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34), "position_dodge()"})
+        'we can use position adjustment functions here as well. For "dodge" option, R gives a warning: Width Not defined. Set with `position_dodge(width = ?). So we need to be able to set the width within position_dodge option here
+        'clsgeom_curve.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        'clsgeom_curve.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        'clsgeom_curve.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
+
+        'Aesthetics as layer parameters 
+        'clsgeom_curve.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Note: negative size gives size 0 in general, but 'Warning: sometimesgive errors...
+        'clsgeom_curve.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
+        'clsgeom_curve.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        'clsgeom_curve.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
+
         'lstAllGeoms.Add(clsgeom_curve)
 
         clsgeom_density.strGeomName = "geom_density"
@@ -1072,21 +1090,40 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_rug)
 
         'clsgeom_segment.strGeomName = "geom_segment"
-        ''mandatory
-        'clsgeom_segment.AddAesParameter("x", bIsMandatory:=True)
-        'clsgeom_segment.AddAesParameter("xend", bIsMandatory:=True)
-        'clsgeom_segment.AddAesParameter("y", bIsMandatory:=True)
-        'clsgeom_segment.AddAesParameter("yend", bIsMandatory:=True)
-        ''optional
+        'Mandatory Aesthetics 
+        'the following parameters take single numeric values or a variable with a single observation 
+        'clsgeom_segment.AddAesParameter("x", bIsMandatory:=True, strIncludedDataTypes:={"numeric"})
+        'clsgeom_segment.AddAesParameter("xend", bIsMandatory:=True, strIncludedDataTypes:={"numeric"})
+        'clsgeom_segment.AddAesParameter("y", bIsMandatory:=True, strIncludedDataTypes:={"numeric"})
+        'clsgeom_segment.AddAesParameter("yend", bIsMandatory:=True, strIncludedDataTypes:={"numeric"})
+
+
+        'Optional Aesthetics 
         'clsgeom_segment.AddAesParameter("alpha")
         'clsgeom_segment.AddAesParameter("colour")
         'clsgeom_segment.AddAesParameter("linetype")
+        'clsgeom_segment.AddAesParameter("group")
         'clsgeom_segment.AddAesParameter("size")
-        ''add  layer parameter
-        'clsgeom_segment.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_segment.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_segment.AddLayerParameter("hjust", "numeric", "0.5")
-        'clsgeom_segment.AddLayerParameter("vjust", "numeric", "0.5")
+
+        'Layer parameter
+        'clsgeom_segment.AddLayerParameter("arrow", "list", "NULL") 'need to use arrow() command here e.g. arrow = arrow(angle = 30, length = unit(0.25, "inches"), ends = "last", type = "open") 
+        'clsgeom_segment.AddLayerParameter("lineend", "list", Chr(34) & "butt" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "butt" & Chr(34), Chr(34) & "square" & Chr(34)}) 'round butt or square 
+
+        'Global Layer Parameters 
+        'clsgeom_segment.AddLayerParameter("stat", "list", Chr(34) & "sum" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "ecdf" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "summary" & Chr(34), Chr(34) & "unique" & Chr(34)}) 'Warning, stat count cannot be used with y aesthetic !!!
+        'revise the options here since identitiy and unique seem to return the plot to the orginal scatter plot. Summary option defaults to `mean_se() since no summary function supplied
+        'clsgeom_segment.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34), "position_dodge()"})
+        'we can use position adjustment functions here as well. For "dodge" option, R gives a warning: Width Not defined. Set with `position_dodge(width = ?). So we need to be able to set the width within position_dodge option here
+        'clsgeom_segment.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        'clsgeom_segment.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        'clsgeom_segment.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
+
+        'Aesthetics as layer parameters 
+        'clsgeom_segment.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Note: negative size gives size 0 in general, but 'Warning: sometimesgive errors...
+        'clsgeom_segment.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
+        'clsgeom_segment.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        'clsgeom_segment.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
+
         'lstAllGeoms.Add(clsgeom_segment)
 
         clsgeom_smooth.strGeomName = "geom_smooth"
