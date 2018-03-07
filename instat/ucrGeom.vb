@@ -206,21 +206,32 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_abline)
 
         'clsgeom_area.SetGeomName("geom_area")
-        ''mandatory aesthetics 
-        'clsgeom_area.AddAesParameter("x", bIsMandatory:=True)
-        'clsgeom_area.AddAesParameter("ymax", bIsMandatory:=True)
-        'clsgeom_area.AddAesParameter("ymin", bIsMandatory:=True)
-        ''Optional 
-        'clsgeom_area.AddAesParameter("alpha")
-        'clsgeom_area.AddAesParameter("colour")
-        'clsgeom_area.AddAesParameter("fill")
-        'clsgeom_area.AddAesParameter("linetype")
-        'clsgeom_area.AddAesParameter("size")
+        'Mandatory Aesthetics 
+        'clsgeom_area.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
+        'clsgeom_area.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True) ' y is not mandatory when stat = "bin". We also have the option to assign y = ..density.. when stat = "bin"
 
-        ''add layer parameters 
-        'clsgeom_area.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
+        'Optional Aesthetics 
+        ' geom_area is a special case of geom_ribbon where ymin is fixed to 0
+        'clsgeom_area.AddAesParameter("ymax", strIncludedDataTypes:={"factor", "numeric"})
+        'clsgeom_area.AddAesParameter("alpha", strIncludedDataTypes:={"factor"})
+        'clsgeom_area.AddAesParameter("colour", strIncludedDataTypes:={"factor"})
+        'clsgeom_area.AddAesParameter("fill", strIncludedDataTypes:={"factor"})
+        'clsgeom_area.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
+        'clsgeom_area.AddAesParameter("size", strIncludedDataTypes:={"factor"}) 'factor not advised and cannot be continuous, this error message appears in R "Error in f(...) : Aesthetics can not vary with a ribbon"
+        'clsgeom_area.AddAesParameter("group", strIncludedDataTypes:={"factor"})
+
+        'Global Layer Parameters 
+        'clsgeom_area.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "bin" & Chr(34)})
         'clsgeom_area.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34))
         'clsgeom_area.AddLayerParameter("na.rm", "boolean", "FALSE")
+
+        'Aesthetics as layer parameters  
+        'clsgeom_area.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
+        'clsgeom_area.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        'clsgeom_area.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
+        'clsgeom_area.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'Note: alpha only acts on the fill for bars. The outline is not getting transparent.
+        'clsgeom_area.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0})
+
         'lstAllGeoms.Add(clsgeom_area)
 
         clsgeom_bar.SetGeomName("geom_bar")
@@ -1241,19 +1252,40 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_text)
 
         'clsgeom_tile.strGeomName = "geom_tile"
-        ''mandatory
-        'clsgeom_tile.AddAesParameter("x", bIsMandatory:=True)
-        'clsgeom_tile.AddAesParameter("y", bIsMandatory:=True)
-        ''optional
-        'clsgeom_tile.AddAesParameter("alpha")
-        'clsgeom_tile.AddAesParameter("colour")
-        'clsgeom_tile.AddAesParameter("fill")
-        'clsgeom_tile.AddAesParameter("linetype")
-        'clsgeom_tile.AddAesParameter("size")
 
-        ''add layer parameters
+        'Mandatory Aesthetics 
+        'clsgeom_tile.AddAesParameter("x", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
+        'clsgeom_tile.AddAesParameter("y",strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
+
+        'Optional Aesthetics 
+        'clsgeom_tile.AddAesParameter("alpha", strIncludedDataTypes:={"numeric", "factor"})
+        'clsgeom_tile.AddAesParameter("colour", strIncludedDataTypes:={"numeric", "factor"})
+        'clsgeom_tile.AddAesParameter("fill", strIncludedDataTypes:={"numeric", "factor"})
+        'clsgeom_tile.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
+        'clsgeom_tile.AddAesParameter("size", strIncludedDataTypes:={"numeric", "factor"})
+        'clsgeom_tile.AddAesParameter("group")
+        'clsgeom_tile.AddAesParameter("width", strIncludedDataTypes:={"numeric"})
+        'clsgeom_tile.AddAesParameter("height", strIncludedDataTypes:={"numeric})
+
+        'Global layer parameters
         'clsgeom_tile.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
         'clsgeom_tile.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
+        'clsgeom_tile.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        'clsgeom_tile.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        'clsgeom_tile.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
+
+        'Geom Layer Parameters 
+        'clsgeom_tile.AddLayerParameter("width", "numeric")
+        'clsgeom_tile.AddLayerParameter("height", "numeric")
+
+        'Optional Aesthetics as Layer Parameters
+        'clsgeom_tile.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
+        'clsgeom_tile.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        'clsgeom_tile.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
+        'clsgeom_tile.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
+        'clsgeom_tile.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0})
+        'clsgeom_tile.AddLayerParameter("group")
+
         'lstAllGeoms.Add(clsgeom_tile)
 
         clsgeom_violin.strGeomName = "geom_violin"
@@ -1282,7 +1314,7 @@ Public Class ucrGeom
         'This parameter only matters if you are displaying multiple densities in one plot. If FALSE, the default, each density is computed on the full range of the data. If TRUE, each density is computed over the range of that group: this typically means the estimated x values will not line-up, and hence you won't be able to stack density values.
 
         'Global Layer parameters
-        'clsgeom_density.AddLayerParameter("stat", "list", Chr(34) & "density" & Chr(34), lstParameterStrings:={Chr(34) & "density" & Chr(34), Chr(34) & "identity" & Chr(34)}) 'Warning: commented out as when set to "identity", all the parameters bw, n, etc are unknown as they belong to stat_density. Think it's easier for now to not allow "identity" instead of introducing dependent exclusion of parameters.
+        'clsgeom_violin.AddLayerParameter("stat", "list", Chr(34) & "density" & Chr(34), lstParameterStrings:={Chr(34) & "density" & Chr(34), Chr(34) & "identity" & Chr(34)}) 'Warning: commented out as when set to "identity", all the parameters bw, n, etc are unknown as they belong to stat_density. Think it's easier for now to not allow "identity" instead of introducing dependent exclusion of parameters.
         clsgeom_violin.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_violin.AddLayerParameter("position", "list", Chr(34) & "dodge" & Chr(34), lstParameterStrings:={Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "jitter" & Chr(34)})
         ''Warning: "Stacked density plots: If youThen want to create a stacked density plot, you probably want To 'count' (density * n) variable instead of the default density."
