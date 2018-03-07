@@ -85,11 +85,11 @@ Public Class dlgRegularSequence
         ucrPnlSequenceType.AddParameterValueFunctionNamesCondition(rdoNumeric, "x", "seq")
         ucrPnlSequenceType.AddParameterValueFunctionNamesCondition(rdoDates, "x", "seq.Date")
 
-        ucrPnlSequenceType.AddToLinkedControls(ucrInputFrom, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
-        ucrPnlSequenceType.AddToLinkedControls(ucrInputTo, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=ucrSelectDataFrameRegularSequence.iDataFrameLength)
-        ucrPnlSequenceType.AddToLinkedControls(ucrDateTimePickerFrom, {rdoDates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="as.Date(x = " & Chr(34) & "2018/1/1" & Chr(34) & ")")
-        ucrPnlSequenceType.AddToLinkedControls(ucrDateTimePickerTo, {rdoDates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="as.Date(x = " & Chr(34) & "2018/12/31" & Chr(34) & ")")
-        ucrPnlSequenceType.AddToLinkedControls(ucrInputComboDatesBy, {rdoDates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="days")
+        ucrPnlSequenceType.AddToLinkedControls(ucrInputFrom, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlSequenceType.AddToLinkedControls(ucrInputTo, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlSequenceType.AddToLinkedControls(ucrDateTimePickerFrom, {rdoDates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlSequenceType.AddToLinkedControls(ucrDateTimePickerTo, {rdoDates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlSequenceType.AddToLinkedControls(ucrInputComboDatesBy, {rdoDates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrNewColumnName.SetPrefix("Regular")
         ucrNewColumnName.SetDataFrameSelector(ucrSelectDataFrameRegularSequence)
@@ -122,6 +122,9 @@ Public Class dlgRegularSequence
         ucrNewColumnName.Reset()
 
         clsSeqFunction.SetRCommand("seq")
+        clsSeqFunction.AddParameter("from", 1, iPosition:=0)
+        clsSeqFunction.AddParameter("to", ucrSelectDataFrameRegularSequence.iDataFrameLength, iPosition:=1)
+        clsSeqFunction.AddParameter("by", 1, iPosition:=2)
 
         clsRepFunction.SetRCommand("rep")
         clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsSeqFunction, iPosition:=0)
@@ -224,7 +227,16 @@ Public Class dlgRegularSequence
         End If
     End Sub
 
-    Private Sub SetInStepsOfParameter()
+    Private Sub SetInStepsOfDateParameter()
+        If ucrDateTimePickerTo.DateValue >= ucrDateTimePickerFrom.DateValue Then
+            clsByDateOperator.AddParameter("number", ucrInputInStepsOf.GetText(), iPosition:=0)
+        Else
+            clsByDateOperator.AddParameter("number", "-" & ucrInputInStepsOf.GetText(), iPosition:=0)
+            End If
+        CheckSequenceLength()
+    End Sub
+
+    Private Sub SetInStepsOfNumberParameter()
         Dim dcmTo As Decimal
         Dim dcmFrom As Decimal
 
@@ -232,21 +244,18 @@ Public Class dlgRegularSequence
             If Decimal.TryParse(ucrInputTo.GetText, dcmTo) AndAlso Decimal.TryParse(ucrInputFrom.GetText, dcmFrom) Then
                 If dcmTo >= dcmFrom Then
                     clsSeqFunction.AddParameter("by", ucrInputInStepsOf.GetText())
-                    clsByDateOperator.AddParameter("number", ucrInputInStepsOf.GetText(), iPosition:=0)
                 Else
                     clsSeqFunction.AddParameter("by", "-" & ucrInputInStepsOf.GetText())
-                    clsByDateOperator.AddParameter("number", "-" & ucrInputInStepsOf.GetText(), iPosition:=0)
                 End If
             Else
                 clsSeqFunction.RemoveParameterByName("by")
-                clsByDateOperator.RemoveParameterByName("number")
             End If
         Else
             clsSeqFunction.RemoveParameterByName("by")
-            clsByDateOperator.RemoveParameterByName("number")
         End If
         CheckSequenceLength()
     End Sub
+
 
     Private Sub SetBaseFunction()
         If ucrNudRepeatValues.Value = 1 Then
@@ -269,6 +278,7 @@ Public Class dlgRegularSequence
         Dim bIsAssigned As Boolean
         Dim bToBeAssigned As Boolean
         Dim clsAsCharacter As New RFunction
+        Dim clsRepClone As New RFunction
 
         lblMessage.Text = ""
         Try
@@ -278,7 +288,7 @@ Public Class dlgRegularSequence
             ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned = False
             ucrBase.clsRsyntax.RemoveParameter("length.out")
             clsAsCharacter.SetRCommand("as.character")
-            clsAsCharacter.AddParameter("x", clsRFunctionParameter:=ucrBase.clsRsyntax.clsBaseFunction.Clone())
+            clsAsCharacter.AddParameter("x", clsRFunctionParameter:=ucrBase.clsRsyntax.clsBaseFunction)
             strRCommand = clsAsCharacter.ToScript()
             expTemp = frmMain.clsRLink.RunInternalScriptGetValue(strRCommand, bSilent:=True)
             vecSequence = expTemp.AsCharacter
@@ -286,8 +296,11 @@ Public Class dlgRegularSequence
             If iLength <> ucrSelectDataFrameRegularSequence.iDataFrameLength Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsRepFunction)
                 clsRepFunction.AddParameter("length.out", ucrSelectDataFrameRegularSequence.iDataFrameLength, iPosition:=3)
+                clsRepClone = clsRepFunction.Clone()
+                clsRepClone.bToBeAssigned = False
+                clsRepClone.bIsAssigned = False
                 clsAsCharacter.SetRCommand("as.character")
-                clsAsCharacter.AddParameter("x", clsRFunctionParameter:=ucrBase.clsRsyntax.clsBaseFunction.Clone())
+                clsAsCharacter.AddParameter("x", clsRFunctionParameter:=clsRepClone)
                 strRCommand = clsAsCharacter.ToScript()
                 bIsAssigned = False
                 vecSequence = frmMain.clsRLink.RunInternalScriptGetValue(strRCommand, bSilent:=True).AsCharacter
@@ -327,9 +340,15 @@ Public Class dlgRegularSequence
         CheckSequenceLength()
     End Sub
 
-    Private Sub ucrInputFrom_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFrom.ControlValueChanged, ucrInputTo.ControlValueChanged, ucrInputInStepsOf.ControlValueChanged
+    Private Sub ucrInputNumberControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFrom.ControlValueChanged, ucrInputTo.ControlValueChanged, ucrInputInStepsOf.ControlValueChanged
         If bUpdateBy Then
-            SetInStepsOfParameter()
+            SetInStepsOfNumberParameter()
+        End If
+    End Sub
+
+    Private Sub ucrInputDateControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDateTimePickerFrom.ControlValueChanged, ucrDateTimePickerTo.ControlValueChanged, ucrInputComboDatesBy.ControlValueChanged
+        If bUpdateBy Then
+            SetInStepsOfDateParameter()
         End If
     End Sub
 
