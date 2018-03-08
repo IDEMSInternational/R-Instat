@@ -1869,4 +1869,12 @@ Public Class frmMain
     Private Sub mnuPrepareColumnCalculateGeneralSummaries_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnCalculateGeneralSummaries.Click
         dlgCalculationsSummary.ShowDialog()
     End Sub
+
+    Private Sub SPIToolStripMenuItem_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub SPIToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles SPIToolStripMenuItem.Click
+        SPI.ShowDialog()
+    End Sub
 End Class
