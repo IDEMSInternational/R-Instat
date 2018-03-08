@@ -221,9 +221,13 @@ Public Class ucrGeom
         'clsgeom_area.AddAesParameter("group", strIncludedDataTypes:={"factor"})
 
         'Global Layer Parameters 
-        'clsgeom_area.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "bin" & Chr(34)})
-        'clsgeom_area.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34))
-        'clsgeom_area.AddLayerParameter("na.rm", "boolean", "FALSE")
+        'clsgeom_area.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34), "position_dodge()"})
+        'we can use position adjustment functions here as well. For "dodge" option, R gives a warning: Width Not defined. Set with `position_dodge(width = ?). So we need to be able to set the width within position_dodge option here
+        'clsgeom_area.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        'clsgeom_area.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "bin" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "summary" & Chr(34), Chr(34) & "unique" & Chr(34)}) 'Warning, stat count cannot be used with y aesthetic !!!
+        'revise the options here since identitiy and unique seem to return the plot to the orginal scatter plot. Summary option defaults to `mean_se() since no summary function supplied
+        'clsgeom_area.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        'clsgeom_area.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
 
         'Aesthetics as layer parameters  
         'clsgeom_area.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
@@ -440,11 +444,11 @@ Public Class ucrGeom
         clsgeom_segment.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "ecdf" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "summary" & Chr(34), Chr(34) & "unique" & Chr(34)})
         'sum and summary only work when x and y parameters are set within aes(). Summary option defaults to `mean_se() since no summary function supplied
         'think it's okay to have this greyed out for now because we only tend to use stat = "identity"
-        clsgeom_segment.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
+        clsgeom_curve.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
         'other options for position are ignored when using geom segement on a scatter plot (geom_point) - R gives the following warnign: "Ignoring unknown parameters: identity"
-        clsgeom_curve.AddLayerParameter("show.legend", "list", "True", lstParameterStrings:={"NA", "True", "False"})
-        clsgeom_curve.AddLayerParameter("inherit.aes", "list", "True", lstParameterStrings:={"True", "False"})
-        clsgeom_curve.AddLayerParameter("na.rm", "list", "False", lstParameterStrings:={"True", "False"})
+        clsgeom_curve.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_curve.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_curve.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
 
         'Aesthetics as layer parameters 
         clsgeom_curve.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Note: negative size gives size 0 in general, but 'Warning: sometimesgive errors...
@@ -452,7 +456,7 @@ Public Class ucrGeom
         clsgeom_curve.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_curve.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
 
-        'lstAllGeoms.Add(clsgeom_curve)
+        lstAllGeoms.Add(clsgeom_curve)
 
         clsgeom_density.strGeomName = "geom_density"
         'Mandatory Aesthetics
@@ -1110,7 +1114,7 @@ Public Class ucrGeom
         clsgeom_segment.strGeomName = "geom_segment"
         'Mandatory Aesthetics 
         'the following parameters take single numeric values or a variable with a single observation 
-        clsgeom_segment.AddAesParameter("x", bIsMandatory:=True, strIncludedDataTypes:={"numeric"})
+        clsgeom_segment.AddAesParameter("x", bIsMandatory:=True, strIncludedDataTypes:={"numeric"}, strExcludedDataTypes:={})
         'clsgeom_segment.AddAesParameter("xend", bIsMandatory:=True, strIncludedDataTypes:={"numeric"})
         clsgeom_segment.AddAesParameter("y", bIsMandatory:=True, strIncludedDataTypes:={"numeric"})
         'clsgeom_segment.AddAesParameter("yend", bIsMandatory:=True, strIncludedDataTypes:={"numeric"})
@@ -1147,7 +1151,7 @@ Public Class ucrGeom
         clsgeom_segment.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_segment.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
 
-        'lstAllGeoms.Add(clsgeom_segment)
+        lstAllGeoms.Add(clsgeom_segment)
 
         clsgeom_smooth.strGeomName = "geom_smooth"
         ' mandatory
@@ -1263,42 +1267,42 @@ Public Class ucrGeom
         clsgeom_text.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
         lstAllGeoms.Add(clsgeom_text)
 
-        'clsgeom_tile.strGeomName = "geom_tile"
+        clsgeom_tile.strGeomName = "geom_tile"
 
         'Mandatory Aesthetics 
-        'clsgeom_tile.AddAesParameter("x", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
-        'clsgeom_tile.AddAesParameter("y",strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
+        clsgeom_tile.AddAesParameter("x", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
+        clsgeom_tile.AddAesParameter("y", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
 
         'Optional Aesthetics 
-        'clsgeom_tile.AddAesParameter("alpha", strIncludedDataTypes:={"numeric", "factor"})
-        'clsgeom_tile.AddAesParameter("colour", strIncludedDataTypes:={"numeric", "factor"})
-        'clsgeom_tile.AddAesParameter("fill", strIncludedDataTypes:={"numeric", "factor"})
-        'clsgeom_tile.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
-        'clsgeom_tile.AddAesParameter("size", strIncludedDataTypes:={"numeric", "factor"})
-        'clsgeom_tile.AddAesParameter("group")
-        'clsgeom_tile.AddAesParameter("width", strIncludedDataTypes:={"numeric"})
-        'clsgeom_tile.AddAesParameter("height", strIncludedDataTypes:={"numeric})
+        clsgeom_tile.AddAesParameter("alpha", strIncludedDataTypes:={"numeric", "factor"})
+        clsgeom_tile.AddAesParameter("colour", strIncludedDataTypes:={"numeric", "factor"})
+        clsgeom_tile.AddAesParameter("fill", strIncludedDataTypes:={"numeric", "factor"})
+        clsgeom_tile.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
+        clsgeom_tile.AddAesParameter("size", strIncludedDataTypes:={"numeric", "factor"})
+        clsgeom_tile.AddAesParameter("group")
+        clsgeom_tile.AddAesParameter("width", strIncludedDataTypes:={"numeric"})
+        clsgeom_tile.AddAesParameter("height", strIncludedDataTypes:={"numeric"})
 
         'Global layer parameters
-        'clsgeom_tile.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_tile.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_tile.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
-        'clsgeom_tile.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
-        'clsgeom_tile.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_tile.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
+        clsgeom_tile.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
+        clsgeom_tile.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_tile.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_tile.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
 
         'Geom Layer Parameters 
-        'clsgeom_tile.AddLayerParameter("width", "numeric")
-        'clsgeom_tile.AddLayerParameter("height", "numeric")
+        clsgeom_tile.AddLayerParameter("width", "numeric", "0", lstParameterStrings:={2})
+        clsgeom_tile.AddLayerParameter("height", "numeric", "0", lstParameterStrings:={2})
 
         'Optional Aesthetics as Layer Parameters
-        'clsgeom_tile.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
-        'clsgeom_tile.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
-        'clsgeom_tile.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
-        'clsgeom_tile.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
-        'clsgeom_tile.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0})
+        clsgeom_tile.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
+        clsgeom_tile.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_tile.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
+        clsgeom_tile.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
+        clsgeom_tile.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0})
         'clsgeom_tile.AddLayerParameter("group")
 
-        'lstAllGeoms.Add(clsgeom_tile)
+        lstAllGeoms.Add(clsgeom_tile)
 
         clsgeom_violin.strGeomName = "geom_violin"
         'Mandatory Aesthetics
@@ -1329,7 +1333,7 @@ Public Class ucrGeom
         'clsgeom_violin.AddLayerParameter("stat", "list", Chr(34) & "density" & Chr(34), lstParameterStrings:={Chr(34) & "density" & Chr(34), Chr(34) & "identity" & Chr(34)}) 'Warning: commented out as when set to "identity", all the parameters bw, n, etc are unknown as they belong to stat_density. Think it's easier for now to not allow "identity" instead of introducing dependent exclusion of parameters.
         clsgeom_violin.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_violin.AddLayerParameter("position", "list", Chr(34) & "dodge" & Chr(34), lstParameterStrings:={Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "jitter" & Chr(34)})
-        ''Warning: "Stacked density plots: If youThen want to create a stacked density plot, you probably want To 'count' (density * n) variable instead of the default density."
+        ''Warning: "Stacked density plots: If youThenThen want to create a stacked density plot, you probably want To 'count' (density * n) variable instead of the default density."
         ''Question to be discussed: when changing parameter position to stack, should automatically add x="..count.." in the aesthetics parameters ? Carefull to not copy count into variable receivers, add methods like for "" in the boxplt case.
         ''See global comments about position.
 
