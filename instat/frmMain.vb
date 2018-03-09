@@ -1876,4 +1876,8 @@ Public Class frmMain
     Private Sub mnuPrepareColumnCalculateGeneralSummaries_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnCalculateGeneralSummaries.Click
         dlgCalculationsSummary.ShowDialog()
     End Sub
+
+    Private Sub mnuModelHypothesis_Click(sender As Object, e As EventArgs) Handles mnuModelHypothesis.Click
+        dlgHypothesisTestsCalculator.ShowDialog()
+    End Sub
 End Class
