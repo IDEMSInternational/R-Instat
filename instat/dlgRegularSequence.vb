@@ -217,7 +217,7 @@ Public Class dlgRegularSequence
                 Else
                     ucrBase.OKEnabled(False)
                 End If
-            ElseIf rdoDates.Checked AndAlso Not ucrInputInStepsOf.IsEmpty AndAlso Not ucrInputComboDatesBy.IsEmpty Then
+            ElseIf rdoDates.Checked AndAlso Not ucrInputInStepsOf.IsEmpty AndAlso Not ucrInputComboDatesBy.IsEmpty AndAlso ucrNudRepeatValues.GetText <> "" Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
