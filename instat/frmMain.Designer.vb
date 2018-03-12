@@ -382,6 +382,8 @@ Partial Class frmMain
         Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuPrepareColumnCalculate = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnCalculateCalculations = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnCalculateColumnSummaries = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnCalculateGeneralSummaries = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator24 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuPrepareCalculateDuplicateColumn = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnCalculateTransform = New System.Windows.Forms.ToolStripMenuItem()
@@ -504,16 +506,15 @@ Partial Class frmMain
         Me.splOverall = New System.Windows.Forms.SplitContainer()
         Me.splExtraWindows = New System.Windows.Forms.SplitContainer()
         Me.splMetadata = New System.Windows.Forms.SplitContainer()
-        Me.splLogScript = New System.Windows.Forms.SplitContainer()
-        Me.splDataOutput = New System.Windows.Forms.SplitContainer()
-        Me.mnuPrepareColumnCalculateColumnSummaries = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPrepareColumnCalculateGeneralSummaries = New System.Windows.Forms.ToolStripMenuItem()
         Me.ucrColumnMeta = New instat.ucrColumnMetadata()
         Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
+        Me.splLogScript = New System.Windows.Forms.SplitContainer()
         Me.ucrLogWindow = New instat.ucrLog()
         Me.ucrScriptWindow = New instat.ucrScript()
+        Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
+        Me.mnuModelHypothesis = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -811,7 +812,7 @@ Partial Class frmMain
         '
         'mnuModel
         '
-        Me.mnuModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelProbabilityDistributions, Me.ToolStripSeparator3, Me.mnuModelOneVariable, Me.mnuModelTwoVariables, Me.mnuModelThreeVariables, Me.mnuModelFourVariables, Me.mnuModelGeneral, Me.ToolStripSeparator4, Me.mnuModelOtherOneVariable, Me.mnuModelOtherTwoVariables, Me.mnuModelOtherThreeVariables, Me.mnuModelOtherGeneral})
+        Me.mnuModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelProbabilityDistributions, Me.ToolStripSeparator3, Me.mnuModelOneVariable, Me.mnuModelTwoVariables, Me.mnuModelThreeVariables, Me.mnuModelFourVariables, Me.mnuModelGeneral, Me.ToolStripSeparator4, Me.mnuModelOtherOneVariable, Me.mnuModelOtherTwoVariables, Me.mnuModelOtherThreeVariables, Me.mnuModelOtherGeneral, Me.mnuModelHypothesis})
         Me.mnuModel.Name = "mnuModel"
         resources.ApplyResources(Me.mnuModel, "mnuModel")
         Me.mnuModel.Tag = "Model"
@@ -2514,6 +2515,17 @@ Partial Class frmMain
         resources.ApplyResources(Me.mnuPrepareColumnCalculateCalculations, "mnuPrepareColumnCalculateCalculations")
         Me.mnuPrepareColumnCalculateCalculations.Tag = "Calculations..."
         '
+        'mnuPrepareColumnCalculateColumnSummaries
+        '
+        Me.mnuPrepareColumnCalculateColumnSummaries.Name = "mnuPrepareColumnCalculateColumnSummaries"
+        resources.ApplyResources(Me.mnuPrepareColumnCalculateColumnSummaries, "mnuPrepareColumnCalculateColumnSummaries")
+        Me.mnuPrepareColumnCalculateColumnSummaries.Tag = "Column_Summaries..."
+        '
+        'mnuPrepareColumnCalculateGeneralSummaries
+        '
+        Me.mnuPrepareColumnCalculateGeneralSummaries.Name = "mnuPrepareColumnCalculateGeneralSummaries"
+        resources.ApplyResources(Me.mnuPrepareColumnCalculateGeneralSummaries, "mnuPrepareColumnCalculateGeneralSummaries")
+        '
         'ToolStripSeparator24
         '
         Me.ToolStripSeparator24.Name = "ToolStripSeparator24"
@@ -3228,6 +3240,18 @@ Partial Class frmMain
         Me.splMetadata.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splMetadata.Panel2.Controls.Add(Me.ucrDataFrameMeta)
         '
+        'ucrColumnMeta
+        '
+        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrColumnMeta, "ucrColumnMeta")
+        Me.ucrColumnMeta.Name = "ucrColumnMeta"
+        '
+        'ucrDataFrameMeta
+        '
+        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrDataFrameMeta, "ucrDataFrameMeta")
+        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
+        '
         'splLogScript
         '
         Me.splLogScript.BackColor = System.Drawing.Color.LightGray
@@ -3243,6 +3267,19 @@ Partial Class frmMain
         '
         Me.splLogScript.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splLogScript.Panel2.Controls.Add(Me.ucrScriptWindow)
+        '
+        'ucrLogWindow
+        '
+        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrLogWindow, "ucrLogWindow")
+        Me.ucrLogWindow.Name = "ucrLogWindow"
+        '
+        'ucrScriptWindow
+        '
+        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrScriptWindow, "ucrScriptWindow")
+        Me.ucrScriptWindow.Name = "ucrScriptWindow"
+        Me.ucrScriptWindow.Tag = "Script_Window"
         '
         'splDataOutput
         '
@@ -3260,42 +3297,6 @@ Partial Class frmMain
         Me.splDataOutput.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splDataOutput.Panel2.Controls.Add(Me.ucrOutput)
         '
-        'mnuPrepareColumnCalculateColumnSummaries
-        '
-        Me.mnuPrepareColumnCalculateColumnSummaries.Name = "mnuPrepareColumnCalculateColumnSummaries"
-        resources.ApplyResources(Me.mnuPrepareColumnCalculateColumnSummaries, "mnuPrepareColumnCalculateColumnSummaries")
-        Me.mnuPrepareColumnCalculateColumnSummaries.Tag = "Column_Summaries..."
-        '
-        'mnuPrepareColumnCalculateGeneralSummaries
-        '
-        Me.mnuPrepareColumnCalculateGeneralSummaries.Name = "mnuPrepareColumnCalculateGeneralSummaries"
-        resources.ApplyResources(Me.mnuPrepareColumnCalculateGeneralSummaries, "mnuPrepareColumnCalculateGeneralSummaries")
-        '
-        'ucrColumnMeta
-        '
-        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrColumnMeta, "ucrColumnMeta")
-        Me.ucrColumnMeta.Name = "ucrColumnMeta"
-        '
-        'ucrDataFrameMeta
-        '
-        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrDataFrameMeta, "ucrDataFrameMeta")
-        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
-        '
-        'ucrLogWindow
-        '
-        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrLogWindow, "ucrLogWindow")
-        Me.ucrLogWindow.Name = "ucrLogWindow"
-        '
-        'ucrScriptWindow
-        '
-        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrScriptWindow, "ucrScriptWindow")
-        Me.ucrScriptWindow.Name = "ucrScriptWindow"
-        Me.ucrScriptWindow.Tag = "Script_Window"
-        '
         'ucrDataViewer
         '
         Me.ucrDataViewer.BackColor = System.Drawing.SystemColors.Control
@@ -3309,6 +3310,11 @@ Partial Class frmMain
         Me.ucrOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         resources.ApplyResources(Me.ucrOutput, "ucrOutput")
         Me.ucrOutput.Name = "ucrOutput"
+        '
+        'mnuModelHypothesis
+        '
+        Me.mnuModelHypothesis.Name = "mnuModelHypothesis"
+        resources.ApplyResources(Me.mnuModelHypothesis, "mnuModelHypothesis")
         '
         'frmMain
         '
@@ -3829,4 +3835,5 @@ Partial Class frmMain
     Friend WithEvents mnuDescribeSpecificParallelCoordinatePlot As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnCalculateGeneralSummaries As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnCalculateColumnSummaries As ToolStripMenuItem
+    Friend WithEvents mnuModelHypothesis As ToolStripMenuItem
 End Class

@@ -62,6 +62,7 @@ Public Class frmMain
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Dim prdCustom As New clsCustomRenderer(New clsCustomColourTable)
+        Dim bClose As Boolean = False
 
         mnuBar.Renderer = prdCustom
         Tool_strip.Renderer = prdCustom
@@ -81,30 +82,32 @@ Public Class frmMain
         strStaticPath = Path.GetFullPath("static")
         strAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RInstat\")
 
-        AutoRecoverAndStartREngine()
+        bClose = AutoRecoverAndStartREngine()
+        If bClose Then
+            Application.Exit()
+        Else
+            'Do this after setting up R Link because loading options may run R code
+            LoadInstatOptions()
+            If clsInstatOptions.strLanguageCultureCode <> "en-GB" Then
+                autoTranslate(Me)
+            End If
+            'Do this after loading options because interval depends on options
+            'Interval is in milliseconds and option is in minutes
+            timer.Interval = (clsInstatOptions.iAutoSaveDataMinutes * 60 * 1000)
+            timer.Start()
 
-        'Do this after setting up R Link because loading options may run R code
-        LoadInstatOptions()
-        If clsInstatOptions.strLanguageCultureCode <> "en-GB" Then
-            autoTranslate(Me)
+            AddHandler System.Windows.Forms.Application.Idle, AddressOf Application_Idle
+
+            'Sets up the Recent items
+            clsRecentItems.setToolStripItems(mnuFile, mnuTbOpen, mnuTbLast10Dialogs, sepStart, sepEnd)
+            'checks existence of MRU list
+            clsRecentItems.checkOnLoad()
+            Cursor = Cursors.Default
+            SetMainMenusEnabled(True)
+
+            mnuViewClimaticMenu.Checked = clsInstatOptions.bShowClimaticMenu
+            mnuViewProcurementMenu.Checked = clsInstatOptions.bShowProcurementMenu
         End If
-        'Do this after loading options because interval depends on options
-        'Interval is in milliseconds and option is in minutes
-        timer.Interval = (clsInstatOptions.iAutoSaveDataMinutes * 60 * 1000)
-        timer.Start()
-
-        AddHandler System.Windows.Forms.Application.Idle, AddressOf Application_Idle
-
-        'Sets up the Recent items
-        clsRecentItems.setToolStripItems(mnuFile, mnuTbOpen, mnuTbLast10Dialogs, sepStart, sepEnd)
-        'checks existence of MRU list
-        clsRecentItems.checkOnLoad()
-        Cursor = Cursors.Default
-        SetMainMenusEnabled(True)
-
-        mnuViewClimaticMenu.Checked = clsInstatOptions.bShowClimaticMenu
-        mnuViewProcurementMenu.Checked = clsInstatOptions.bShowProcurementMenu
-
     End Sub
 
     Private Sub SetMainMenusEnabled(bEnabled As Boolean)
@@ -135,7 +138,7 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub AutoRecoverAndStartREngine()
+    Private Function AutoRecoverAndStartREngine() As Boolean
         Dim iLogFiles As Integer = 0
         Dim iInternalLogFiles As Integer = 0
         Dim iDataFiles As Integer = 0
@@ -144,9 +147,10 @@ Public Class frmMain
         Dim strAutoSavedLogFilePaths() As String = Nothing
         Dim strAutoSavedInternalLogFilePaths() As String = Nothing
         Dim strAutoSavedDataFilePaths() As String = Nothing
+        Dim bClose As Boolean = False
 
         If Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1 Then
-            clsRLink.StartREngine(clsRLink.GetRSetupScript())
+            bClose = clsRLink.StartREngine(clsRLink.GetRSetupScript())
         Else
             If (Directory.Exists(strAutoSaveLogFolderPath)) Then
                 strAutoSavedLogFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveLogFolderPath).ToArray
@@ -170,33 +174,36 @@ Public Class frmMain
                     strDataFilePath = dlgAutoSaveRecovery.GetDataFilePath()
                 End If
             End If
-            clsRLink.StartREngine(strScript)
-            If strDataFilePath <> "" Then
-                clsRLink.LoadInstatDataObjectFromFile(strDataFilePath, strComment:="Loading auto recovered data file")
-            End If
-            If iLogFiles > 0 Then
-                Try
-                    File.Delete(strAutoSavedLogFilePaths(0))
-                Catch ex As Exception
-                    MsgBox("Could not delete backup log file" & Environment.NewLine, "Error deleting file")
-                End Try
-            End If
-            If iInternalLogFiles > 0 Then
-                Try
-                    File.Delete(strAutoSavedInternalLogFilePaths(0))
-                Catch ex As Exception
-                    MsgBox("Could not delete backup internal log file." & Environment.NewLine & ex.Message, "Error deleting file")
-                End Try
-            End If
-            If iDataFiles > 0 Then
-                Try
-                    File.Delete(strAutoSavedDataFilePaths(0))
-                Catch ex As Exception
-                    MsgBox("Could not delete back data file." & Environment.NewLine & ex.Message, "Error deleting file")
-                End Try
+            bClose = clsRLink.StartREngine(strScript)
+            If Not bClose Then
+                If strDataFilePath <> "" Then
+                    clsRLink.LoadInstatDataObjectFromFile(strDataFilePath, strComment:="Loading auto recovered data file")
+                End If
+                If iLogFiles > 0 Then
+                    Try
+                        File.Delete(strAutoSavedLogFilePaths(0))
+                    Catch ex As Exception
+                        MsgBox("Could not delete backup log file" & Environment.NewLine, "Error deleting file")
+                    End Try
+                End If
+                If iInternalLogFiles > 0 Then
+                    Try
+                        File.Delete(strAutoSavedInternalLogFilePaths(0))
+                    Catch ex As Exception
+                        MsgBox("Could not delete backup internal log file." & Environment.NewLine & ex.Message, "Error deleting file")
+                    End Try
+                End If
+                If iDataFiles > 0 Then
+                    Try
+                        File.Delete(strAutoSavedDataFilePaths(0))
+                    Catch ex As Exception
+                        MsgBox("Could not delete back data file." & Environment.NewLine & ex.Message, "Error deleting file")
+                    End Try
+                End If
             End If
         End If
-    End Sub
+        Return bClose
+    End Function
 
     Private Sub InitialiseOutputWindow()
         clsRLink.SetOutput(ucrOutput.ucrRichTextBox)
@@ -1868,5 +1875,9 @@ Public Class frmMain
 
     Private Sub mnuPrepareColumnCalculateGeneralSummaries_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnCalculateGeneralSummaries.Click
         dlgCalculationsSummary.ShowDialog()
+    End Sub
+
+    Private Sub mnuModelHypothesis_Click(sender As Object, e As EventArgs) Handles mnuModelHypothesis.Click
+        dlgHypothesisTestsCalculator.ShowDialog()
     End Sub
 End Class
