@@ -414,12 +414,11 @@ Public Class ucrGeom
         'lstAllGeoms.Add(clsgeom_crossbar)
 
         clsgeom_curve.strGeomName = "geom_curve"
-        'Mandatory Aesthetics 
-        'the following parameters take single numeric values or a variable with a single observation 
+        'Mandatory Aesthetics  
         clsgeom_curve.AddAesParameter("x", bIsMandatory:=True, strIncludedDataTypes:={"numeric"})
-        'clsgeom_curve.AddAesParameter("xend", bIsMandatory:=TRUE, strIncludedDataTypes:={"numeric"})
+        clsgeom_curve.AddAesParameter("xend", bIsMandatory:=True, strIncludedDataTypes:={"numeric"})
         clsgeom_curve.AddAesParameter("y", bIsMandatory:=True, strIncludedDataTypes:={"numeric"})
-        'clsgeom_curve.AddAesParameter("yend", bIsMandatory:=TRUE, strIncludedDataTypes:={"numeric"})
+        clsgeom_curve.AddAesParameter("yend", bIsMandatory:=True, strIncludedDataTypes:={"numeric"})
 
         'Optional Aesthetics 
         clsgeom_curve.AddAesParameter("alpha", strIncludedDataTypes:=({"factor", "numeric"}))
@@ -441,11 +440,11 @@ Public Class ucrGeom
         clsgeom_curve.AddLayerParameter("ncp", "numeric", "5", lstParameterStrings:={0, 0})  'more control point creates a smoother curve
 
         'Global Layer Parameters 
-        clsgeom_segment.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "ecdf" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "summary" & Chr(34), Chr(34) & "unique" & Chr(34)})
+        clsgeom_curve.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "ecdf" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "summary" & Chr(34), Chr(34) & "unique" & Chr(34)})
         'sum and summary only work when x and y parameters are set within aes(). Summary option defaults to `mean_se() since no summary function supplied
         'think it's okay to have this greyed out for now because we only tend to use stat = "identity"
         clsgeom_curve.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
-        'other options for position are ignored when using geom segement on a scatter plot (geom_point) - R gives the following warnign: "Ignoring unknown parameters: identity"
+        'other options for position are ignored when using geom curve on a scatter plot (geom_point) - R gives the following warnign: "Ignoring unknown parameters: identity"
         clsgeom_curve.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_curve.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
         clsgeom_curve.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
@@ -1113,12 +1112,11 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_rug)
 
         clsgeom_segment.strGeomName = "geom_segment"
-        'Mandatory Aesthetics 
-        'the following parameters take single numeric values or a variable with a single observation 
+        'Mandatory Aesthetics  
         clsgeom_segment.AddAesParameter("x", bIsMandatory:=True, strIncludedDataTypes:={"numeric"}, strExcludedDataTypes:={})
-        'clsgeom_segment.AddAesParameter("xend", bIsMandatory:=TRUE, strIncludedDataTypes:={"numeric"})
+        clsgeom_segment.AddAesParameter("xend", bIsMandatory:=True, strIncludedDataTypes:={"numeric"})
         clsgeom_segment.AddAesParameter("y", bIsMandatory:=True, strIncludedDataTypes:={"numeric"})
-        'clsgeom_segment.AddAesParameter("yend", bIsMandatory:=TRUE, strIncludedDataTypes:={"numeric"})
+        clsgeom_segment.AddAesParameter("yend", bIsMandatory:=True, strIncludedDataTypes:={"numeric"})
 
         'Optional Aesthetics 
         clsgeom_segment.AddAesParameter("alpha", strIncludedDataTypes:=({"factor", "numeric"}))
