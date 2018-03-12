@@ -87,9 +87,9 @@ Public Class dlgRegularSequence
 
         ucrPnlSequenceType.AddToLinkedControls(ucrInputFrom, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlSequenceType.AddToLinkedControls(ucrInputTo, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlSequenceType.AddToLinkedControls(ucrDateTimePickerFrom, {rdoDates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=Chr(34) & "2018/1/1" & Chr(34))
-        ucrPnlSequenceType.AddToLinkedControls(ucrDateTimePickerTo, {rdoDates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=Chr(34) & "2018/12/31" & Chr(34))
-        ucrPnlSequenceType.AddToLinkedControls(ucrInputComboDatesBy, {rdoDates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="days")
+        ucrPnlSequenceType.AddToLinkedControls(ucrDateTimePickerFrom, {rdoDates}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlSequenceType.AddToLinkedControls(ucrDateTimePickerTo, {rdoDates}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlSequenceType.AddToLinkedControls(ucrInputComboDatesBy, {rdoDates}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrNewColumnName.SetPrefix("Regular")
         ucrNewColumnName.SetDataFrameSelector(ucrSelectDataFrameRegularSequence)
