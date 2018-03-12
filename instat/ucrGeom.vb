@@ -181,8 +181,8 @@ Public Class ucrGeom
         'Task: add warning message to user...
         'Adding aesthetics parametters
         'Mandatory Aesthetics
-        clsgeom_abline.AddAesParameter("slope", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
-        clsgeom_abline.AddAesParameter("intercept", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True) '(required) intercept with the y axis of the line (the "b" in "y=ax+b") 
+        clsgeom_abline.AddAesParameter("slope", strIncludedDataTypes:={"numeric"})
+        clsgeom_abline.AddAesParameter("intercept", strIncludedDataTypes:={"numeric"}) '(required) intercept with the y axis of the line (the "b" in "y=ax+b") 
         'Warning/to be discussed: when these are set as parameters, they are not really mandatory... should we introduce a partially mandatory method nbr 2 ? For now I think it can be left like this...
         'Optional aesthetics
         clsgeom_abline.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
@@ -623,7 +623,7 @@ Public Class ucrGeom
         'Task: add warning message to user...
         'Adding aesthetics parametters
         'Mandatory Aesthetics
-        clsgeom_hline.AddAesParameter("yintercept", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        clsgeom_hline.AddAesParameter("yintercept", strIncludedDataTypes:={"numeric"})
         'Warning/to be discussed: when this is set as parameter, it is not really mandatory... should we introduce a partially mandatory method nbr 2 ? For now I think it can be left like this...
         'Optional aesthetics
         clsgeom_hline.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
@@ -1212,7 +1212,7 @@ Public Class ucrGeom
         'Task: add warning message to user...
         'Adding aesthetics parametters
         'Mandatory Aesthetics
-        clsgeom_vline.AddAesParameter("xintercept", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        clsgeom_vline.AddAesParameter("xintercept", strIncludedDataTypes:={"numeric"})
         'Warning/to be discussed: when this is set as parameter, it is not really mandatory... should we introduce a partially mandatory method nbr 2 ? For now I think it can be left like this...
         'Optional aesthetics
         clsgeom_vline.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
