@@ -16,11 +16,16 @@
 
 Public Class Geoms
     Public strGeomName As String = ""
+    Public strGeomPackage As String = "ggplot2"
     Public clsAesParameters As New List(Of AesParameters)
     Public clsLayerParameters As New List(Of LayerParameter)
 
     Public Sub SetGeomName(strTempName As String)
         strGeomName = strTempName
+    End Sub
+
+    Public Sub SetGeomPackage(strNewPackage As String)
+        strGeomPackage = strNewPackage
     End Sub
 
     Public Sub AddAesParameter(strAesParameterName As String, Optional strAesParameterValue As String = Nothing, Optional strIncludedDataTypes As String() = Nothing, Optional strExcludedDataTypes As String() = Nothing, Optional bIsMandatory As Boolean = False)
