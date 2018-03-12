@@ -595,9 +595,9 @@ Public Class ucrGeom
         clsgeom_encircle.SetGeomName("geom_encircle")
 
         'Mandatory Aesthetics 
-        clsgeom_encircle.AddAesParameter("x", strIncludedDataTypes:={"numeric", "factor"})
+        clsgeom_encircle.AddAesParameter("x", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
         ' will want to be able to take a subset of the data here, so the encircle circles points with those requirments
-        clsgeom_encircle.AddAesParameter("y", strIncludedDataTypes:={"numeric", "factor"})
+        clsgeom_encircle.AddAesParameter("y", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
 
         'Optional Aesthetics 
         clsgeom_encircle.AddAesParameter("alpha", strIncludedDataTypes:=({"factor", "numeric"})) 'Varies transparence of the fill.
