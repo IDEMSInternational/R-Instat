@@ -126,60 +126,55 @@ Public Class sdgSummaries
 
         'linking controls
         ucrChkPercentile.AddToLinkedControls(ucrInputPercentile, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.25)
-        ucrChkProportion.AddToLinkedControls({ucrInputComboProp, ucrChkPercentage, ucrInputProp}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkCount.AddToLinkedControls({ucrInputComboCount, ucrInputCount}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkTrimmedMean.AddToLinkedControls(ucrNudFraction, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrNudFraction.SetLinkedDisplayControl(lblFractionTrimmed)
         ucrChknth.AddToLinkedControls(ucrInputN, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
+        ucrChkProportion.AddToLinkedControls(ucrInputComboTest, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkProportion.AddToLinkedControls(ucrInputValue, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrChkProportion.AddToLinkedControls(ucrChkPercentage, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkCount.AddToLinkedControls(ucrInputComboTest, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkCount.AddToLinkedControls(ucrInputValue, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+
         ucrInputN.SetLinkedDisplayControl(lblInputN)
+        ucrNudFraction.SetLinkedDisplayControl(lblFractionTrimmed)
 
         ucrChkTrimmedMean.SetParameter(New RParameter("summary_mean", 27), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_mean" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkTrimmedMean.SetText("Trimmed Mean")
 
         ucrNudFraction.SetParameter(New RParameter("trim", 5))
         ucrNudFraction.Maximum = 0.5
-        ucrNudFraction.DecimalPlaces = 1
-        ucrNudFraction.Increment = 0.1
+        ucrNudFraction.DecimalPlaces = 2
+        ucrNudFraction.Increment = 0.01
         ucrNudFraction.SetRDefault(0)
 
         ucrInputN.SetParameter(New RParameter("n", 6))
         ucrInputN.AddQuotesIfUnrecognised = False
         ucrInputN.SetValidationTypeAsNumeric()
 
-        ucrInputComboProp.SetParameter(New RParameter("test", 7))
+        ucrInputComboTest.SetParameter(New RParameter("test", 7))
         Dim dctProportion As New Dictionary(Of String, String)
-        dctProportion.Add("<", "<")
-        dctProportion.Add("<=", "<=")
-        dctProportion.Add(">", ">")
-        dctProportion.Add(">=", ">=")
-        dctProportion.Add("==", "==")
-        ucrInputComboProp.SetItems(dctProportion)
-        ucrInputComboProp.SetDropDownStyleAsNonEditable()
-        ucrInputComboProp.SetRDefault("==")
+        dctProportion.Add("<", Chr(34) & "'<'" & Chr(34))
+        dctProportion.Add("<=", Chr(34) & "'<='" & Chr(34))
+        dctProportion.Add(">", Chr(34) & "'>'" & Chr(34))
+        dctProportion.Add(">=", Chr(34) & "'>='" & Chr(34))
+        dctProportion.Add("==", Chr(34) & "'=='" & Chr(34))
+        ucrInputComboTest.SetItems(dctProportion)
+        ucrInputComboTest.SetDropDownStyleAsNonEditable()
+        ucrInputComboTest.SetRDefault(Chr(34) & "'=='" & Chr(34))
 
-        ucrInputProp.SetParameter(New RParameter("value", 8))
-        ucrInputProp.SetValidationTypeAsNumeric()
-        ucrInputProp.AddQuotesIfUnrecognised = False
+        ucrInputValue.SetParameter(New RParameter("value", 8))
+        ucrInputValue.SetValidationTypeAsNumeric()
+        ucrInputValue.AddQuotesIfUnrecognised = False
 
         ucrChkProportion.SetParameter(New RParameter("proportion_calc", 28), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "proportion_calc" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkProportion.SetText("Proportion")
 
         ucrChkPercentage.SetParameter(New RParameter("As_percentage", 9))
         ucrChkPercentage.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkPercentage.SetText("Percentage")
+        ucrChkPercentage.SetRDefault("FALSE")
+        ucrChkPercentage.SetText("As Percentage")
 
+        ucrChkCount.SetParameter(New RParameter("count_calc", 29), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "count_calc" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkCount.SetText("Count")
-
-        ucrInputComboCount.SetParameter(New RParameter("inequality"))
-        Dim dctCount As New Dictionary(Of String, String)
-        dctCount.Add("<", "<")
-        dctCount.Add("<=", "<=")
-        dctCount.Add(">", ">")
-        dctCount.Add(">=", ">=")
-        dctCount.Add("==", "==")
-        ucrInputComboCount.SetItems(dctProportion)
-        ucrInputComboCount.SetDropDownStyleAsNonEditable()
-        ucrInputComboCount.SetRDefault(">")
 
         'ucrPnlMissingOptions.AddRadioButton(rdoNumber)
         'ucrPnlMissingOptions.AddRadioButton(rdoPercentage)
@@ -189,7 +184,7 @@ Public Class sdgSummaries
         ucrNudPercentage.SetLinkedDisplayControl(lblPercentage)
         ucrNudNumber.SetLinkedDisplayControl(lblNumber)
 
-        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkUpperQuartile, ucrChkLowerQuartile, ucrChkMedianAbsoluteDeviation, ucrChkKurtosis, ucrChkCoefficientOfVariation, ucrChkSkewness, ucrChkMc, ucrChkQn, ucrChkSn, ucrChkCorrelations, ucrChkCovariance, ucrChkFirst, ucrChkLast, ucrChknth, ucrChkn_distinct, ucrChkTrimmedMean, ucrChkPercentile, ucrChkProportion})
+        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkUpperQuartile, ucrChkLowerQuartile, ucrChkMedianAbsoluteDeviation, ucrChkKurtosis, ucrChkCoefficientOfVariation, ucrChkSkewness, ucrChkMc, ucrChkQn, ucrChkSn, ucrChkCorrelations, ucrChkCovariance, ucrChkFirst, ucrChkLast, ucrChknth, ucrChkn_distinct, ucrChkTrimmedMean, ucrChkPercentile, ucrChkProportion, ucrChkCount})
         'TODO: This needs modifying summaries functions to allow this options to be implemented.
         tbMissingOptions.Enabled = False
         For Each ctrTemp As ucrCheck In lstCheckboxes
@@ -213,13 +208,13 @@ Public Class sdgSummaries
             ucrSelectorSecondVariable.SetDataframe(strDataFrame, False)
         End If
 
-        'ucrInputComboCount.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrChkPercentage.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputProp.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputComboProp.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputValue.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputComboTest.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrInputPercentile.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrNudFraction.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrInputN.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkCount.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkProportion.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkPercentile.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkTrimmedMean.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
