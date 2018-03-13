@@ -415,10 +415,10 @@ Public Class ucrGeom
 
         clsgeom_curve.strGeomName = "geom_curve"
         'Mandatory Aesthetics  
-        clsgeom_curve.AddAesParameter("x", bIsMandatory:=True, strIncludedDataTypes:={"numeric"})
-        clsgeom_curve.AddAesParameter("xend", bIsMandatory:=True, strIncludedDataTypes:={"numeric"})
-        clsgeom_curve.AddAesParameter("y", bIsMandatory:=True, strIncludedDataTypes:={"numeric"})
-        clsgeom_curve.AddAesParameter("yend", bIsMandatory:=True, strIncludedDataTypes:={"numeric"})
+        clsgeom_curve.AddAesParameter("x", strIncludedDataTypes:={"numeric"})
+        clsgeom_curve.AddAesParameter("xend", strIncludedDataTypes:={"numeric"})
+        clsgeom_curve.AddAesParameter("y", strIncludedDataTypes:={"numeric"})
+        clsgeom_curve.AddAesParameter("yend", strIncludedDataTypes:={"numeric"})
 
         'Optional Aesthetics 
         clsgeom_curve.AddAesParameter("alpha", strIncludedDataTypes:=({"factor", "numeric"}))
@@ -1113,10 +1113,10 @@ Public Class ucrGeom
 
         clsgeom_segment.strGeomName = "geom_segment"
         'Mandatory Aesthetics  
-        clsgeom_segment.AddAesParameter("x", bIsMandatory:=True, strIncludedDataTypes:={"numeric"}, strExcludedDataTypes:={})
-        clsgeom_segment.AddAesParameter("xend", bIsMandatory:=True, strIncludedDataTypes:={"numeric"})
-        clsgeom_segment.AddAesParameter("y", bIsMandatory:=True, strIncludedDataTypes:={"numeric"})
-        clsgeom_segment.AddAesParameter("yend", bIsMandatory:=True, strIncludedDataTypes:={"numeric"})
+        clsgeom_segment.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, strExcludedDataTypes:={})
+        clsgeom_segment.AddAesParameter("xend", strIncludedDataTypes:={"numeric"})
+        clsgeom_segment.AddAesParameter("y", strIncludedDataTypes:={"numeric"})
+        clsgeom_segment.AddAesParameter("yend", strIncludedDataTypes:={"numeric"})
 
         'Optional Aesthetics 
         clsgeom_segment.AddAesParameter("alpha", strIncludedDataTypes:=({"factor", "numeric"}))
