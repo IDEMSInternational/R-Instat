@@ -95,12 +95,6 @@ Public Class sdgSummaries
         ucrChkSn.SetParameter(New RParameter("summary_Sn", 20), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_Sn" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkSn.SetText("Sn")
 
-        ucrChkProportion.SetText("Proportion")
-
-        ucrChkCount.SetText("Count")
-
-        ucrChkPercentage.SetText("Percentage")
-
         ucrChkCorrelations.SetParameter(New RParameter("summary_cor", 21), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_cor" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkCorrelations.SetText("Correlations")
 
@@ -152,7 +146,7 @@ Public Class sdgSummaries
         ucrInputN.AddQuotesIfUnrecognised = False
         ucrInputN.SetValidationTypeAsNumeric()
 
-        ucrInputComboProp.SetParameter(New RParameter("inequality"))
+        ucrInputComboProp.SetParameter(New RParameter("test", 7))
         Dim dctProportion As New Dictionary(Of String, String)
         dctProportion.Add("<", "<")
         dctProportion.Add("<=", "<=")
@@ -161,7 +155,20 @@ Public Class sdgSummaries
         dctProportion.Add("==", "==")
         ucrInputComboProp.SetItems(dctProportion)
         ucrInputComboProp.SetDropDownStyleAsNonEditable()
-        ucrInputComboProp.SetRDefault(">")
+        ucrInputComboProp.SetRDefault("==")
+
+        ucrInputProp.SetParameter(New RParameter("value", 8))
+        ucrInputProp.SetValidationTypeAsNumeric()
+        ucrInputProp.AddQuotesIfUnrecognised = False
+
+        ucrChkProportion.SetParameter(New RParameter("proportion_calc", 28), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "proportion_calc" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkProportion.SetText("Proportion")
+
+        ucrChkPercentage.SetParameter(New RParameter("As_percentage", 9))
+        ucrChkPercentage.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkPercentage.SetText("Percentage")
+
+        ucrChkCount.SetText("Count")
 
         ucrInputComboCount.SetParameter(New RParameter("inequality"))
         Dim dctCount As New Dictionary(Of String, String)
@@ -182,7 +189,7 @@ Public Class sdgSummaries
         ucrNudPercentage.SetLinkedDisplayControl(lblPercentage)
         ucrNudNumber.SetLinkedDisplayControl(lblNumber)
 
-        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkUpperQuartile, ucrChkLowerQuartile, ucrChkMedianAbsoluteDeviation, ucrChkKurtosis, ucrChkCoefficientOfVariation, ucrChkSkewness, ucrChkMc, ucrChkQn, ucrChkSn, ucrChkCorrelations, ucrChkCovariance, ucrChkFirst, ucrChkLast, ucrChknth, ucrChkn_distinct, ucrChkTrimmedMean, ucrChkPercentile})
+        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkUpperQuartile, ucrChkLowerQuartile, ucrChkMedianAbsoluteDeviation, ucrChkKurtosis, ucrChkCoefficientOfVariation, ucrChkSkewness, ucrChkMc, ucrChkQn, ucrChkSn, ucrChkCorrelations, ucrChkCovariance, ucrChkFirst, ucrChkLast, ucrChknth, ucrChkn_distinct, ucrChkTrimmedMean, ucrChkPercentile, ucrChkProportion})
         'TODO: This needs modifying summaries functions to allow this options to be implemented.
         tbMissingOptions.Enabled = False
         For Each ctrTemp As ucrCheck In lstCheckboxes
@@ -207,10 +214,13 @@ Public Class sdgSummaries
         End If
 
         'ucrInputComboCount.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
-        'ucrInputComboProp.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkPercentage.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputProp.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputComboProp.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrInputPercentile.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrNudFraction.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrInputN.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkProportion.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkPercentile.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkTrimmedMean.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkNTotal.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
