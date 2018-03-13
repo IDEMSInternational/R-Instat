@@ -241,7 +241,7 @@ instat_object$set("public", "summary", function(data_name, columns_to_summarise,
   calculated_from[[1]] <- list(data_name = data_name, columns = columns_to_summarise)
   #TODO Change this to store sub_calculations for each column
   alltypes_collection <- c(count_non_missing_label, count_missing_label, count_label, mode_label)
-  numeric_collection <- c(count_non_missing_label, count_missing_label, count_label, mode_label, min_label, max_label, mean_label, sd_label, range_label, median_label, sum_label, var_label, lower_quart_label, upper_quart_label, skewness_label, summary_skewness_mc_label, kurtosis_label, summary_coef_var_label, summary_median_absolute_deviation_label, summary_Qn_label, summary_Sn_label, cor_label, cov_label, first_label, last_label, nth_label, n_distinct_label, proportion_label)
+  numeric_collection <- c(count_non_missing_label, count_missing_label, count_label, mode_label, min_label, max_label, mean_label, sd_label, range_label, median_label, sum_label, var_label, lower_quart_label, upper_quart_label, skewness_label, summary_skewness_mc_label, kurtosis_label, summary_coef_var_label, summary_median_absolute_deviation_label, summary_Qn_label, summary_Sn_label, cor_label, cov_label, first_label, last_label, nth_label, n_distinct_label, proportion_label, count_calc_label)
   factor_collection <-  c(count_non_missing_label, count_missing_label, count_label, mode_label) #maximum and minimum labels should be added when we distinguish ordered factors
   ordered_factor_collection <-  c(count_non_missing_label, count_missing_label, count_label, mode_label, min_label, max_label)
   i = 1
@@ -411,9 +411,10 @@ last_label="summary_last"
 nth_label="summary_nth"
 n_distinct_label="summary_n_distinct"
 proportion_label="proportion_calc"
+count_calc_label="count_calc"
 
 # list of all summary function names
-all_summaries=c(sum_label, mode_label, count_label, count_missing_label, count_non_missing_label, sd_label, var_label, median_label, range_label, min_label, max_label, mean_label,quartile_label, lower_quart_label, upper_quart_label, skewness_label, kurtosis_label, summary_coef_var_label, summary_skewness_mc_label, summary_median_absolute_deviation_label, summary_Qn_label, summary_Sn_label, cor_label, cov_label,first_label, last_label, nth_label, n_distinct_label, proportion_label)
+all_summaries=c(sum_label, mode_label, count_label, count_missing_label, count_non_missing_label, sd_label, var_label, median_label, range_label, min_label, max_label, mean_label,quartile_label, lower_quart_label, upper_quart_label, skewness_label, kurtosis_label, summary_coef_var_label, summary_skewness_mc_label, summary_median_absolute_deviation_label, summary_Qn_label, summary_Sn_label, cor_label, cov_label,first_label, last_label, nth_label, n_distinct_label, proportion_label, count_calc_label)
 summary_mode <- function(x,...) {
   ux <- unique(x)
   out <- ux[which.max(tabulate(match(x, ux)))]
@@ -564,12 +565,18 @@ summary_n_distinct<- function(x, na.rm = FALSE, ...) {
 }
 
 #Proportions functions
-proportion_calc <- function(x, test = "==", value, As_percentage = FALSE ){ 
+proportion_calc <- function(x, test = "==", value, As_percentage = FALSE, ... ){ 
   y <- x[eval(parse(text = paste("x", value, sep = test)))]
   if (!As_percentage){ return(length(y)/length(x))
   }else{return(noquote(paste0((length(y)/length(x))*100 ,"%")))
   } 
 }
+
+#count function
+count_calc <- function(x, test = "==", value, ...){ 
+  return(length(x[eval(parse(text = paste("x", value, sep = test)))]))
+}
+
 
 instat_object$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), n_column_factors = 1, store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = TRUE, treat_columns_as_factor = FALSE, page_by = "default", as_html = TRUE, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, margin_name = "(All)", additional_filter, ...) {
   if(n_column_factors == 1 && length(factors) == 0) n_column_factors <- 0
