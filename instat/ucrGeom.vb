@@ -1178,7 +1178,7 @@ Public Class ucrGeom
 
         'adding layer parameters
         'Geom_density layer parameters
-        clsgeom_violin.AddLayerParameter("draw_quantiles", "list", Chr(34) & "not(NULL)" & Chr(34), lstParameterStrings:={Chr(34) & "not(NULL)" & Chr(34), "0.25", "0.5", "0.75", "c(0.25, 0.5)", "c(0.25, 0.75)", "c(0.5,0.75)", "c(0.25,0.5,0.75)"}) 'If not(NULL) (default), draw horizontal lines at the given quantiles of the density estimate.
+        clsgeom_violin.AddLayerParameter("draw_quantiles", "list", Chr(34) & "NULL" & Chr(34), lstParameterStrings:={Chr(34) & "NULL" & Chr(34), "0.25", "0.5", "0.75", "c(0.25, 0.5)", "c(0.25, 0.75)", "c(0.5,0.75)", "c(0.25,0.5,0.75)"}) 'If not(NULL) (default), draw horizontal lines at the given quantiles of the density estimate - confusing instructions; it's say NULL is the default and when it not NULL and soemthing else then draw horizontal lines at the given quantiles of the density estimate
         clsgeom_violin.AddLayerParameter("trim", "boolean", "TRUE") 'If TRUE (default), trim the tails of the violins to the range of the data. If FALSE, don't trim the tails.
         clsgeom_violin.AddLayerParameter("trim", "list", Chr(34) & "area" & Chr(34), lstParameterStrings:={Chr(34) & "area" & Chr(34), Chr(34) & "count" & Chr(34), Chr(34) & "width" & Chr(34)}) 'if "area" (default), all violins have the same area (before trimming the tails). If "count", areas are scaled proportionally to the number of observations. If "width", all violins have the same maximum width.
         clsgeom_violin.AddLayerParameter("bw", "list", Chr(34) & "nrd0" & Chr(34), lstParameterStrings:={Chr(34) & "nrd0" & Chr(34), Chr(34) & "SJ" & Chr(34), Chr(34) & "nrd" & Chr(34), Chr(34) & "ucv" & Chr(34), Chr(34) & "bcv" & Chr(34)}) 'Bandwidth.
