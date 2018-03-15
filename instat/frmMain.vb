@@ -310,6 +310,7 @@ Public Class frmMain
     End Sub
 
     Private Sub RegularSequenceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnGenerateRegularSequence.Click
+        dlgRegularSequence.bSetDefaultRdo = True
         dlgRegularSequence.ShowDialog()
     End Sub
 
@@ -1879,5 +1880,15 @@ Public Class frmMain
 
     Private Sub mnuModelHypothesis_Click(sender As Object, e As EventArgs) Handles mnuModelHypothesis.Click
         dlgHypothesisTestsCalculator.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareColumnGenerateDate_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnGenerateDate.Click
+        dlgRegularSequence.bSetDefaultRdo = False
+        dlgRegularSequence.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDatesGenerateDates_Click(sender As Object, e As EventArgs) Handles mnuClimaticDatesGenerateDates.Click
+        dlgRegularSequence.bSetDefaultRdo = False
+        dlgRegularSequence.ShowDialog()
     End Sub
 End Class
