@@ -44,7 +44,7 @@ Public Class dlgHypothesisTestsCalculator
         ucrSaveResult.SetDataFrameSelector(ucrSelectorColumn.ucrAvailableDataFrames)
         ucrSelectorColumn.Reset()
 
-        ucrInputComboRPackage.SetItems({"Stats"})
+        ucrInputComboRPackage.SetItems({"Stats", "Agricolae"})
         ucrInputComboRPackage.SetDropDownStyleAsNonEditable()
         'Tooltips for conf & and Alt Buttons
         tpConf.SetToolTip(btnConf, "The confidence level can be changed for some tests to 0.9 or 0.99 etc")
@@ -449,6 +449,119 @@ Public Class dlgHypothesisTestsCalculator
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("PP.test(x =, lshort = TRUE)", 150)
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("PP.test( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdBIB_Click(sender As Object, e As EventArgs) Handles cmdBIB.Click
+        If ucrChkShowArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("agricolae::BIB.test(block, trt, y, test = c(""lsd"",""tukey"",""duncan"",""waller"",""snk""), alpha = 0.05, group = TRUE,console=FALSE)", 150)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("agricolae::BIB.test( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdDuncan_Click(sender As Object, e As EventArgs) Handles cmdDuncan.Click
+        If ucrChkShowArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("agricolae::duncan.test(y, trt, DFerror, MSerror, alpha = 0.05, group=TRUE, main = NULL,console=FALSE)", 150)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("agricolae::duncan.test( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdDurbin_Click(sender As Object, e As EventArgs) Handles cmdDurbin.Click
+        If ucrChkShowArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("agricolae::durbin.test(judge, trt, evaluation, alpha = 0.05, group =TRUE, main = NULL, console=FALSE)", 150)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("agricolae::durbin.test( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdAgriFriedman_Click(sender As Object, e As EventArgs) Handles cmdAgriFriedman.Click
+        If ucrChkShowArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("agricolae::friedman(judge, trt, evaluation, alpha = 0.05, group = True, main = NULL, Console = False)", 150)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("agricolae::friedman( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdAgriKruskal_Click(sender As Object, e As EventArgs) Handles cmdAgriKruskal.Click
+        If ucrChkShowArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("agricolae::kruskal(y, trt, alpha = 0.05, p.adj = c(""none"", ""holm"", ""hommel"", ""hochberg"", ""bonferroni"", ""BH"", ""BY"", ""fdr""), group = True, main = NULL, Console = False)", 150)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("agricolae::kruskal( )", 1)
+        End If
+
+    End Sub
+
+    Private Sub cmdLSD_Click(sender As Object, e As EventArgs) Handles cmdLSD.Click
+        If ucrChkShowArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("agricolae::LSD.test(y, trt, DFerror, MSerror, alpha = 0.05, p.adj = c(""none"", ""holm"", ""hommel"", ""hochberg"", ""bonferroni"", ""BH"", ""BY"", ""fdr""), group = True, main = NULL, Console = False)", 150)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("agricolae::LSD.test( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdMedian_Click(sender As Object, e As EventArgs) Handles cmdMedian.Click
+        If ucrChkShowArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("agricolae::Median.test(y, trt, alpha = 0.05, correct =T RUE, simulate.p.value = FALSE, group = TRUE, main = NULL, console=TRUE)", 150)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("agricolae::Median.test( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdAgriNonAdditivity_Click(sender As Object, e As EventArgs) Handles cmdAgriNonAdditivity.Click
+        If ucrChkShowArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("agricolae::nonadditivity(y, factor1, factor2, df, MSerror)", 150)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("agricolae::nonadditivity( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdPBIB_Click(sender As Object, e As EventArgs) Handles cmdPBIB.Click
+        If ucrChkShowArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("agricolae::PBIB.test(block, trt, replication, y, k, method = c(""REML"", ""ML"", ""VC""), test = c(""lsd"", ""tukey""), alpha = 0.05, Console = False, group = True)", 150)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("agricolae::PBIB.test( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdREGW_Click(sender As Object, e As EventArgs) Handles cmdREGW.Click
+        If ucrChkShowArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("agricolae::REGW.test(y, trt, DFerror, MSerror, alpha = 0.05, group = TRUE, main = NULL, console = FALSE)", 150)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("agricolae::REGW.test( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdScheffe_Click(sender As Object, e As EventArgs) Handles cmdScheffe.Click
+        If ucrChkShowArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("agricolae::scheffe.test(y, trt, DFerror, MSerror, Fc, alpha = 0.05, group=TRUE, main = NULL, console=FALSE )", 150)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("agricolae::scheffe.test( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdSNK_Click(sender As Object, e As EventArgs) Handles cmdSNK.Click
+        If ucrChkShowArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("agricolae::SNK.test(y, trt, DFerror, MSerror, alpha = 0.05, group = TRUE, main = NULL,console = FALSE)", 150)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("agricolae::SNK.test( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdWaerden_Click(sender As Object, e As EventArgs) Handles cmdWaerden.Click
+        If ucrChkShowArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("agricolae::waerden.test(y, trt, alpha = 0.05, group = TRUE, main = NULL, console = FALSE)", 150)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("agricolae::waerden.test( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdAgriWaller_Click(sender As Object, e As EventArgs) Handles cmdAgriWaller.Click
+        If ucrChkShowArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("agricolae::waller.test(y, trt, DFerror, MSerror, Fc, K = 100, group = TRUE, main = NULL, console = FALSE)", 150)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("agricolae::waller.test( )", 1)
         End If
     End Sub
 
