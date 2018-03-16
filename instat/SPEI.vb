@@ -14,13 +14,14 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
-
+Imports instat
+Imports instat.Translations
 Public Class SPI
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
-    Private clsSPIFunction As New RFunction
+    Private clsSPIFunction, clsPrintFunction As New RFunction
+
     Private Sub SPEI_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
@@ -36,81 +37,91 @@ Public Class SPI
 
 
     Private Sub InitialiseDialog()
-        UcrBase.clsRsyntax.iCallType = 0
-        UcrBase.iHelpTopicID = 510
+        ucrBase.clsRsyntax.iCallType = 0
+        ucrBase.iHelpTopicID = 510
         rdoPET.Enabled = False
 
         ucrSelectorVariable.SetParameterIsString()
-        UcrReceiverDate.SetParameterIsString()
+        ucrReceiverDate.SetParameterIsString()
 
         'receivers:
         ' by receivers
-        UcrReceiverData.SetParameterIsString()
-        UcrReceiverData.SetParameter(New RParameter("data", 0))
-        UcrReceiverData.Selector = ucrSelectorVariable
-        UcrReceiverData.bAutoFill = True
-        UcrReceiverData.strSelectorHeading = "Variables"
+        ucrReceiverData.SetParameterIsRFunction()
+        ucrReceiverData.SetParameter(New RParameter("data", 0))
+        ucrReceiverData.Selector = ucrSelectorVariable
+        ucrReceiverData.bAutoFill = True
+        ucrReceiverData.strSelectorHeading = "Variables"
 
 
-        UcrReceiverYear.SetParameterIsString()
-        UcrReceiverYear.Selector = ucrSelectorVariable
+        ucrReceiverYear.SetParameterIsString()
+        ucrReceiverYear.Selector = ucrSelectorVariable
         ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
         ucrReceiverYear.bAutoFill = True
-        UcrReceiverYear.strSelectorHeading = "Year Variables"
+        ucrReceiverYear.strSelectorHeading = "Year Variables"
 
-        UcrReceiverMonth.SetParameterIsString()
-        UcrReceiverMonth.Selector = ucrSelectorVariable
-        UcrReceiverMonth.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "month" & Chr(34)})
-        UcrReceiverMonth.bAutoFill = True
-        UcrReceiverMonth.strSelectorHeading = "Month Variables"
+        ucrReceiverMonth.SetParameterIsString()
+        ucrReceiverMonth.Selector = ucrSelectorVariable
+        ucrReceiverMonth.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "month" & Chr(34)})
+        ucrReceiverMonth.bAutoFill = True
+        ucrReceiverMonth.strSelectorHeading = "Month Variables"
 
-        UcrReceiverDate.SetParameterIsString()
-        UcrReceiverDate.Selector = ucrSelectorVariable
-        UcrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "month" & Chr(34)})
-        UcrReceiverDate.bAutoFill = True
-        UcrReceiverDate.strSelectorHeading = "Date Variables"
+        ucrReceiverDate.SetParameterIsString()
+        ucrReceiverDate.Selector = ucrSelectorVariable
+        ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "month" & Chr(34)})
+        ucrReceiverDate.bAutoFill = True
+        ucrReceiverDate.strSelectorHeading = "Date Variables"
 
         'setting up Nuds
 
-
+        UcrtimeScale.SetParameter(New RParameter("scale", 1))
+        UcrtimeScale.SetMinMax(1, 24)
 
         ' others
 
-        UcrReceiverDate.SetParameterIsString()
-        UcrReceiverDate.Selector = ucrSelectorVariable
-        UcrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
-        UcrReceiverDate.bAutoFill = True
-        UcrReceiverDate.strSelectorHeading = "Date Variables"
+        ucrReceiverDate.SetParameterIsString()
+        ucrReceiverDate.Selector = ucrSelectorVariable
+        ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
+        ucrReceiverDate.bAutoFill = True
+        ucrReceiverDate.strSelectorHeading = "Date Variables"
 
         ucrChkOmitMissingValues.SetParameter(New RParameter("na.rm", 6))
         ucrChkOmitMissingValues.SetText("Omit Missing Values")
         ucrChkOmitMissingValues.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOmitMissingValues.SetRDefault("FALSE")
 
+
     End Sub
     Private Sub SetDefaults()
         clsSPIFunction.SetPackageName("SPEI")
         clsSPIFunction.SetRCommand("spei")
-        clsSPIFunction.AddParameter("data")
-        clsSPIFunction.AddParameter("scale")
-        clsSPIFunction.AddParameter("na.rm")
-        UcrBase.clsRsyntax.SetBaseRFunction(clsSPIFunction)
+        clsPrintFunction.SetRCommand("print")
+
+        clsSPIFunction.AddParameter("data", iPosition:=0)
+        clsSPIFunction.AddParameter("na.rm", iPosition:=6)
+        clsSPIFunction.AddParameter("scale", 1, iPosition:=1)
+        'clsPrintFunction.AddParameter("clsSPIFunction", iPosition:=0)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSPIFunction)
+
+
+
     End Sub
     Private Sub SetRCodeForControls(bReset As Boolean)
-        UcrReceiverData.SetRCode(clsSPIFunction, bReset)
+        UcrtimeScale.SetRCode(clsSPIFunction, bReset)
+        ucrChkOmitMissingValues.SetRCode(clsSPIFunction, bReset)
+        ucrReceiverData.SetRCode(clsSPIFunction, bReset)
     End Sub
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles UcrReceiverData.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlContentsChanged
         TestOKEnabled()
     End Sub
     Private Sub TestOKEnabled()
-        If UcrReceiverData.IsEmpty Then
-            UcrBase.OKEnabled(False)
+        If ucrReceiverData.IsEmpty Then
+            ucrBase.OKEnabled(False)
         Else
-            UcrBase.OKEnabled(True)
+            ucrBase.OKEnabled(True)
         End If
     End Sub
 
-    Private Sub TimeScale_ValueChanged(sender As Object, e As EventArgs) Handles TimeScale.ValueChanged
+    Private Sub TimeScale_ValueChanged(sender As Object, e As EventArgs)
 
     End Sub
 
