@@ -145,6 +145,7 @@ Public Class ucrDateTimePicker
     End Sub
 
     Private Sub dtpDateTime_TextChanged(sender As Object, e As EventArgs) Handles dtpDateTime.TextChanged
+        'TODO not sure what to raise here (if anything)
         'OnControlValueChanged()
     End Sub
 
@@ -169,5 +170,9 @@ Public Class ucrDateTimePicker
         Else
             Return False
         End If
+    End Function
+
+    Public Function DateValue() As Date
+        Return dtpDateTime.Value
     End Function
 End Class
