@@ -743,11 +743,11 @@
   <data name="mnuModelOtherGeneral.Text" xml:space="preserve">
     <value>Other (General)</value>
   </data>
-  <data name="mnuModelHypothesis.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuModelHypothesisTests.Size" type="System.Drawing.Size, System.Drawing">
     <value>201, 22</value>
   </data>
-  <data name="mnuModelHypothesis.Text" xml:space="preserve">
-    <value>Hypothesis</value>
+  <data name="mnuModelHypothesisTests.Text" xml:space="preserve">
+    <value>Hypothesis Tests...</value>
   </data>
   <data name="mnuModel.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 20</value>
@@ -3773,7 +3773,7 @@
     <value>True</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>168</value>
+    <value>99</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
@@ -5509,9 +5509,6 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>R-Instat</value>
   </data>
@@ -6085,10 +6082,10 @@
   <data name="&gt;&gt;mnuModelOtherGeneralLogLinear.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuModelHypothesis.Name" xml:space="preserve">
-    <value>mnuModelHypothesis</value>
+  <data name="&gt;&gt;mnuModelHypothesisTests.Name" xml:space="preserve">
+    <value>mnuModelHypothesisTests</value>
   </data>
-  <data name="&gt;&gt;mnuModelHypothesis.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuModelHypothesisTests.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuClimaticExamine.Name" xml:space="preserve">

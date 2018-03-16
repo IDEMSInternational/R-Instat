@@ -1878,7 +1878,7 @@ Public Class frmMain
         dlgCalculationsSummary.ShowDialog()
     End Sub
 
-    Private Sub mnuModelHypothesis_Click(sender As Object, e As EventArgs) Handles mnuModelHypothesis.Click
+    Private Sub mnuModelHypothesisTests_Click(sender As Object, e As EventArgs) Handles mnuModelHypothesisTests.Click
         dlgHypothesisTestsCalculator.ShowDialog()
     End Sub
 
