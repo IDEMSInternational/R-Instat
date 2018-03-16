@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgStemAndLeaf
     Inherits System.Windows.Forms.Form
 
@@ -31,12 +47,14 @@ Partial Class dlgStemAndLeaf
         'ucrReceiverStemAndLeaf
         '
         Me.ucrReceiverStemAndLeaf.frmParent = Me
-        Me.ucrReceiverStemAndLeaf.Location = New System.Drawing.Point(258, 60)
+        Me.ucrReceiverStemAndLeaf.Location = New System.Drawing.Point(256, 60)
         Me.ucrReceiverStemAndLeaf.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStemAndLeaf.Name = "ucrReceiverStemAndLeaf"
         Me.ucrReceiverStemAndLeaf.Selector = Nothing
-        Me.ucrReceiverStemAndLeaf.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverStemAndLeaf.Size = New System.Drawing.Size(120, 26)
+        Me.ucrReceiverStemAndLeaf.strNcFilePath = ""
         Me.ucrReceiverStemAndLeaf.TabIndex = 2
+        Me.ucrReceiverStemAndLeaf.ucrSelector = Nothing
         '
         'ucrBase
         '
@@ -69,7 +87,7 @@ Partial Class dlgStemAndLeaf
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(411, 254)
+        Me.ClientSize = New System.Drawing.Size(416, 259)
         Me.Controls.Add(Me.ucrStemLeafSelector)
         Me.Controls.Add(Me.lblSelectedVariable)
         Me.Controls.Add(Me.ucrBase)

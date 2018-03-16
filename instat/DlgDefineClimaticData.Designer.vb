@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class DlgDefineClimaticData
     Inherits System.Windows.Forms.Form
 
@@ -22,6 +38,7 @@ Partial Class DlgDefineClimaticData
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DlgDefineClimaticData))
         Me.grpElements = New System.Windows.Forms.GroupBox()
         Me.ucrReceiverWindDirection = New instat.ucrReceiverSingle()
         Me.ucrReceiverRain = New instat.ucrReceiverSingle()
@@ -78,325 +95,217 @@ Partial Class DlgDefineClimaticData
         Me.grpElements.Controls.Add(Me.ucrReceiverMinTemp)
         Me.grpElements.Controls.Add(Me.lblWindSpeed)
         Me.grpElements.Controls.Add(Me.lblWindDirection)
-        Me.grpElements.Location = New System.Drawing.Point(308, 3)
+        resources.ApplyResources(Me.grpElements, "grpElements")
         Me.grpElements.Name = "grpElements"
-        Me.grpElements.Size = New System.Drawing.Size(146, 411)
-        Me.grpElements.TabIndex = 3
         Me.grpElements.TabStop = False
-        Me.grpElements.Text = "Elements"
         '
         'ucrReceiverWindDirection
         '
-        Me.ucrReceiverWindDirection.bAddRemoveParameter = True
-        Me.ucrReceiverWindDirection.bChangeParameterValue = True
         Me.ucrReceiverWindDirection.frmParent = Me
-        Me.ucrReceiverWindDirection.Location = New System.Drawing.Point(14, 217)
-        Me.ucrReceiverWindDirection.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverWindDirection, "ucrReceiverWindDirection")
         Me.ucrReceiverWindDirection.Name = "ucrReceiverWindDirection"
         Me.ucrReceiverWindDirection.Selector = Nothing
-        Me.ucrReceiverWindDirection.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverWindDirection.TabIndex = 9
+        Me.ucrReceiverWindDirection.strNcFilePath = ""
+        Me.ucrReceiverWindDirection.ucrSelector = Nothing
         '
         'ucrReceiverRain
         '
-        Me.ucrReceiverRain.bAddRemoveParameter = True
-        Me.ucrReceiverRain.bChangeParameterValue = True
         Me.ucrReceiverRain.frmParent = Me
-        Me.ucrReceiverRain.Location = New System.Drawing.Point(14, 37)
-        Me.ucrReceiverRain.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverRain, "ucrReceiverRain")
         Me.ucrReceiverRain.Name = "ucrReceiverRain"
         Me.ucrReceiverRain.Selector = Nothing
-        Me.ucrReceiverRain.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverRain.TabIndex = 1
+        Me.ucrReceiverRain.strNcFilePath = ""
+        Me.ucrReceiverRain.ucrSelector = Nothing
         '
         'ucrReceiverSunshine
         '
-        Me.ucrReceiverSunshine.bAddRemoveParameter = True
-        Me.ucrReceiverSunshine.bChangeParameterValue = True
         Me.ucrReceiverSunshine.frmParent = Me
-        Me.ucrReceiverSunshine.Location = New System.Drawing.Point(14, 262)
-        Me.ucrReceiverSunshine.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverSunshine, "ucrReceiverSunshine")
         Me.ucrReceiverSunshine.Name = "ucrReceiverSunshine"
         Me.ucrReceiverSunshine.Selector = Nothing
-        Me.ucrReceiverSunshine.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSunshine.TabIndex = 11
+        Me.ucrReceiverSunshine.strNcFilePath = ""
+        Me.ucrReceiverSunshine.ucrSelector = Nothing
         '
         'lblRain
         '
-        Me.lblRain.AutoSize = True
-        Me.lblRain.Location = New System.Drawing.Point(14, 18)
+        resources.ApplyResources(Me.lblRain, "lblRain")
         Me.lblRain.Name = "lblRain"
-        Me.lblRain.Size = New System.Drawing.Size(32, 13)
-        Me.lblRain.TabIndex = 0
-        Me.lblRain.Text = "Rain:"
         '
         'ucrReceiverRadiation
         '
-        Me.ucrReceiverRadiation.bAddRemoveParameter = True
-        Me.ucrReceiverRadiation.bChangeParameterValue = True
         Me.ucrReceiverRadiation.frmParent = Me
-        Me.ucrReceiverRadiation.Location = New System.Drawing.Point(14, 309)
-        Me.ucrReceiverRadiation.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverRadiation, "ucrReceiverRadiation")
         Me.ucrReceiverRadiation.Name = "ucrReceiverRadiation"
         Me.ucrReceiverRadiation.Selector = Nothing
-        Me.ucrReceiverRadiation.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverRadiation.TabIndex = 13
+        Me.ucrReceiverRadiation.strNcFilePath = ""
+        Me.ucrReceiverRadiation.ucrSelector = Nothing
         '
         'ucrReceiverMaxTemp
         '
-        Me.ucrReceiverMaxTemp.bAddRemoveParameter = True
-        Me.ucrReceiverMaxTemp.bChangeParameterValue = True
         Me.ucrReceiverMaxTemp.frmParent = Me
-        Me.ucrReceiverMaxTemp.Location = New System.Drawing.Point(14, 127)
-        Me.ucrReceiverMaxTemp.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverMaxTemp, "ucrReceiverMaxTemp")
         Me.ucrReceiverMaxTemp.Name = "ucrReceiverMaxTemp"
         Me.ucrReceiverMaxTemp.Selector = Nothing
-        Me.ucrReceiverMaxTemp.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverMaxTemp.TabIndex = 5
+        Me.ucrReceiverMaxTemp.strNcFilePath = ""
+        Me.ucrReceiverMaxTemp.ucrSelector = Nothing
         '
         'ucrReceiverCloudCover
         '
-        Me.ucrReceiverCloudCover.bAddRemoveParameter = True
-        Me.ucrReceiverCloudCover.bChangeParameterValue = True
         Me.ucrReceiverCloudCover.frmParent = Me
-        Me.ucrReceiverCloudCover.Location = New System.Drawing.Point(14, 351)
-        Me.ucrReceiverCloudCover.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverCloudCover, "ucrReceiverCloudCover")
         Me.ucrReceiverCloudCover.Name = "ucrReceiverCloudCover"
         Me.ucrReceiverCloudCover.Selector = Nothing
-        Me.ucrReceiverCloudCover.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverCloudCover.TabIndex = 15
+        Me.ucrReceiverCloudCover.strNcFilePath = ""
+        Me.ucrReceiverCloudCover.ucrSelector = Nothing
         '
         'lblMaxTemp
         '
-        Me.lblMaxTemp.AutoSize = True
-        Me.lblMaxTemp.Location = New System.Drawing.Point(14, 108)
+        resources.ApplyResources(Me.lblMaxTemp, "lblMaxTemp")
         Me.lblMaxTemp.Name = "lblMaxTemp"
-        Me.lblMaxTemp.Size = New System.Drawing.Size(117, 13)
-        Me.lblMaxTemp.TabIndex = 4
-        Me.lblMaxTemp.Text = "Maximum Temperature:"
         '
         'lblCloudCover
         '
-        Me.lblCloudCover.AutoSize = True
-        Me.lblCloudCover.Location = New System.Drawing.Point(14, 333)
+        resources.ApplyResources(Me.lblCloudCover, "lblCloudCover")
         Me.lblCloudCover.Name = "lblCloudCover"
-        Me.lblCloudCover.Size = New System.Drawing.Size(68, 13)
-        Me.lblCloudCover.TabIndex = 14
-        Me.lblCloudCover.Text = "Cloud Cover:"
         '
         'lblMinTemp
         '
-        Me.lblMinTemp.AutoSize = True
-        Me.lblMinTemp.Location = New System.Drawing.Point(14, 63)
+        resources.ApplyResources(Me.lblMinTemp, "lblMinTemp")
         Me.lblMinTemp.Name = "lblMinTemp"
-        Me.lblMinTemp.Size = New System.Drawing.Size(111, 13)
-        Me.lblMinTemp.TabIndex = 2
-        Me.lblMinTemp.Text = "Minimum Temperature"
         '
         'lblRadiation
         '
-        Me.lblRadiation.AutoSize = True
-        Me.lblRadiation.Location = New System.Drawing.Point(14, 288)
+        resources.ApplyResources(Me.lblRadiation, "lblRadiation")
         Me.lblRadiation.Name = "lblRadiation"
-        Me.lblRadiation.Size = New System.Drawing.Size(55, 13)
-        Me.lblRadiation.TabIndex = 12
-        Me.lblRadiation.Text = "Radiation:"
         '
         'ucrReceiverWindSpeed
         '
-        Me.ucrReceiverWindSpeed.bAddRemoveParameter = True
-        Me.ucrReceiverWindSpeed.bChangeParameterValue = True
         Me.ucrReceiverWindSpeed.frmParent = Me
-        Me.ucrReceiverWindSpeed.Location = New System.Drawing.Point(14, 172)
-        Me.ucrReceiverWindSpeed.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverWindSpeed, "ucrReceiverWindSpeed")
         Me.ucrReceiverWindSpeed.Name = "ucrReceiverWindSpeed"
         Me.ucrReceiverWindSpeed.Selector = Nothing
-        Me.ucrReceiverWindSpeed.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverWindSpeed.TabIndex = 7
+        Me.ucrReceiverWindSpeed.strNcFilePath = ""
+        Me.ucrReceiverWindSpeed.ucrSelector = Nothing
         '
         'lblSunshine
         '
-        Me.lblSunshine.AutoSize = True
-        Me.lblSunshine.Location = New System.Drawing.Point(14, 243)
+        resources.ApplyResources(Me.lblSunshine, "lblSunshine")
         Me.lblSunshine.Name = "lblSunshine"
-        Me.lblSunshine.Size = New System.Drawing.Size(85, 13)
-        Me.lblSunshine.TabIndex = 10
-        Me.lblSunshine.Text = "Sunshine Hours:"
         '
         'ucrReceiverMinTemp
         '
-        Me.ucrReceiverMinTemp.bAddRemoveParameter = True
-        Me.ucrReceiverMinTemp.bChangeParameterValue = True
         Me.ucrReceiverMinTemp.frmParent = Me
-        Me.ucrReceiverMinTemp.Location = New System.Drawing.Point(14, 82)
-        Me.ucrReceiverMinTemp.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverMinTemp, "ucrReceiverMinTemp")
         Me.ucrReceiverMinTemp.Name = "ucrReceiverMinTemp"
         Me.ucrReceiverMinTemp.Selector = Nothing
-        Me.ucrReceiverMinTemp.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverMinTemp.TabIndex = 3
+        Me.ucrReceiverMinTemp.strNcFilePath = ""
+        Me.ucrReceiverMinTemp.ucrSelector = Nothing
         '
         'lblWindSpeed
         '
-        Me.lblWindSpeed.AutoSize = True
-        Me.lblWindSpeed.Location = New System.Drawing.Point(14, 153)
+        resources.ApplyResources(Me.lblWindSpeed, "lblWindSpeed")
         Me.lblWindSpeed.Name = "lblWindSpeed"
-        Me.lblWindSpeed.Size = New System.Drawing.Size(69, 13)
-        Me.lblWindSpeed.TabIndex = 6
-        Me.lblWindSpeed.Text = "Wind Speed:"
         '
         'lblWindDirection
         '
-        Me.lblWindDirection.AutoSize = True
-        Me.lblWindDirection.Location = New System.Drawing.Point(14, 198)
+        resources.ApplyResources(Me.lblWindDirection, "lblWindDirection")
         Me.lblWindDirection.Name = "lblWindDirection"
-        Me.lblWindDirection.Size = New System.Drawing.Size(80, 13)
-        Me.lblWindDirection.TabIndex = 8
-        Me.lblWindDirection.Text = "Wind Direction:"
         '
         'lblStationName
         '
-        Me.lblStationName.AutoSize = True
-        Me.lblStationName.Location = New System.Drawing.Point(7, 18)
+        resources.ApplyResources(Me.lblStationName, "lblStationName")
         Me.lblStationName.Name = "lblStationName"
-        Me.lblStationName.Size = New System.Drawing.Size(38, 13)
-        Me.lblStationName.TabIndex = 0
-        Me.lblStationName.Text = "Name:"
         '
         'ucrReceiverStationName
         '
-        Me.ucrReceiverStationName.bAddRemoveParameter = True
-        Me.ucrReceiverStationName.bChangeParameterValue = True
         Me.ucrReceiverStationName.frmParent = Me
-        Me.ucrReceiverStationName.Location = New System.Drawing.Point(7, 34)
-        Me.ucrReceiverStationName.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverStationName, "ucrReceiverStationName")
         Me.ucrReceiverStationName.Name = "ucrReceiverStationName"
         Me.ucrReceiverStationName.Selector = Nothing
-        Me.ucrReceiverStationName.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverStationName.TabIndex = 1
+        Me.ucrReceiverStationName.strNcFilePath = ""
+        Me.ucrReceiverStationName.ucrSelector = Nothing
         '
         'lblDOY
         '
-        Me.lblDOY.AutoSize = True
-        Me.lblDOY.Location = New System.Drawing.Point(15, 181)
+        resources.ApplyResources(Me.lblDOY, "lblDOY")
         Me.lblDOY.Name = "lblDOY"
-        Me.lblDOY.Size = New System.Drawing.Size(66, 13)
-        Me.lblDOY.TabIndex = 8
-        Me.lblDOY.Text = "Day of Year:"
         '
         'ucrReceiverDOY
         '
-        Me.ucrReceiverDOY.bAddRemoveParameter = True
-        Me.ucrReceiverDOY.bChangeParameterValue = True
         Me.ucrReceiverDOY.frmParent = Me
-        Me.ucrReceiverDOY.Location = New System.Drawing.Point(15, 198)
-        Me.ucrReceiverDOY.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverDOY, "ucrReceiverDOY")
         Me.ucrReceiverDOY.Name = "ucrReceiverDOY"
         Me.ucrReceiverDOY.Selector = Nothing
-        Me.ucrReceiverDOY.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverDOY.TabIndex = 9
+        Me.ucrReceiverDOY.strNcFilePath = ""
+        Me.ucrReceiverDOY.ucrSelector = Nothing
         '
         'ucrReceiverDay
         '
-        Me.ucrReceiverDay.bAddRemoveParameter = True
-        Me.ucrReceiverDay.bChangeParameterValue = True
         Me.ucrReceiverDay.frmParent = Me
-        Me.ucrReceiverDay.Location = New System.Drawing.Point(15, 157)
-        Me.ucrReceiverDay.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverDay, "ucrReceiverDay")
         Me.ucrReceiverDay.Name = "ucrReceiverDay"
         Me.ucrReceiverDay.Selector = Nothing
-        Me.ucrReceiverDay.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverDay.TabIndex = 7
+        Me.ucrReceiverDay.strNcFilePath = ""
+        Me.ucrReceiverDay.ucrSelector = Nothing
         '
         'lblDay
         '
-        Me.lblDay.AutoSize = True
-        Me.lblDay.Location = New System.Drawing.Point(15, 140)
+        resources.ApplyResources(Me.lblDay, "lblDay")
         Me.lblDay.Name = "lblDay"
-        Me.lblDay.Size = New System.Drawing.Size(29, 13)
-        Me.lblDay.TabIndex = 6
-        Me.lblDay.Text = "Day:"
         '
         'ucrReceiverMonth
         '
-        Me.ucrReceiverMonth.bAddRemoveParameter = True
-        Me.ucrReceiverMonth.bChangeParameterValue = True
         Me.ucrReceiverMonth.frmParent = Me
-        Me.ucrReceiverMonth.Location = New System.Drawing.Point(15, 116)
-        Me.ucrReceiverMonth.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverMonth, "ucrReceiverMonth")
         Me.ucrReceiverMonth.Name = "ucrReceiverMonth"
         Me.ucrReceiverMonth.Selector = Nothing
-        Me.ucrReceiverMonth.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverMonth.TabIndex = 5
+        Me.ucrReceiverMonth.strNcFilePath = ""
+        Me.ucrReceiverMonth.ucrSelector = Nothing
         '
         'lblMonth
         '
-        Me.lblMonth.AutoSize = True
-        Me.lblMonth.Location = New System.Drawing.Point(15, 99)
+        resources.ApplyResources(Me.lblMonth, "lblMonth")
         Me.lblMonth.Name = "lblMonth"
-        Me.lblMonth.Size = New System.Drawing.Size(40, 13)
-        Me.lblMonth.TabIndex = 4
-        Me.lblMonth.Text = "Month:"
         '
         'ucrReceiverYear
         '
-        Me.ucrReceiverYear.bAddRemoveParameter = True
-        Me.ucrReceiverYear.bChangeParameterValue = True
         Me.ucrReceiverYear.frmParent = Me
-        Me.ucrReceiverYear.Location = New System.Drawing.Point(15, 75)
-        Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverYear, "ucrReceiverYear")
         Me.ucrReceiverYear.Name = "ucrReceiverYear"
         Me.ucrReceiverYear.Selector = Nothing
-        Me.ucrReceiverYear.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverYear.TabIndex = 3
+        Me.ucrReceiverYear.strNcFilePath = ""
+        Me.ucrReceiverYear.ucrSelector = Nothing
         '
         'lblYear
         '
-        Me.lblYear.AutoSize = True
-        Me.lblYear.Location = New System.Drawing.Point(15, 58)
+        resources.ApplyResources(Me.lblYear, "lblYear")
         Me.lblYear.Name = "lblYear"
-        Me.lblYear.Size = New System.Drawing.Size(32, 13)
-        Me.lblYear.TabIndex = 2
-        Me.lblYear.Text = "Year:"
         '
         'ucrReceiverDate
         '
-        Me.ucrReceiverDate.bAddRemoveParameter = True
-        Me.ucrReceiverDate.bChangeParameterValue = True
         Me.ucrReceiverDate.frmParent = Me
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(15, 34)
-        Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverDate, "ucrReceiverDate")
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing
-        Me.ucrReceiverDate.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverDate.TabIndex = 1
+        Me.ucrReceiverDate.strNcFilePath = ""
+        Me.ucrReceiverDate.ucrSelector = Nothing
         '
         'lblDate
         '
-        Me.lblDate.AutoSize = True
-        Me.lblDate.Location = New System.Drawing.Point(15, 17)
+        resources.ApplyResources(Me.lblDate, "lblDate")
         Me.lblDate.Name = "lblDate"
-        Me.lblDate.Size = New System.Drawing.Size(33, 13)
-        Me.lblDate.TabIndex = 0
-        Me.lblDate.Text = "Date:"
         '
         'ucrSelectorDefineClimaticData
         '
-        Me.ucrSelectorDefineClimaticData.bAddRemoveParameter = True
-        Me.ucrSelectorDefineClimaticData.bChangeParameterValue = True
         Me.ucrSelectorDefineClimaticData.bShowHiddenColumns = False
         Me.ucrSelectorDefineClimaticData.bUseCurrentFilter = True
-        Me.ucrSelectorDefineClimaticData.Location = New System.Drawing.Point(13, 2)
-        Me.ucrSelectorDefineClimaticData.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorDefineClimaticData, "ucrSelectorDefineClimaticData")
         Me.ucrSelectorDefineClimaticData.Name = "ucrSelectorDefineClimaticData"
-        Me.ucrSelectorDefineClimaticData.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorDefineClimaticData.TabIndex = 0
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(13, 419)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(423, 52)
-        Me.ucrBase.TabIndex = 4
         '
         'grpDateTime
         '
@@ -410,42 +319,33 @@ Partial Class DlgDefineClimaticData
         Me.grpDateTime.Controls.Add(Me.ucrReceiverMonth)
         Me.grpDateTime.Controls.Add(Me.ucrReceiverDay)
         Me.grpDateTime.Controls.Add(Me.lblDay)
-        Me.grpDateTime.Location = New System.Drawing.Point(154, 192)
+        resources.ApplyResources(Me.grpDateTime, "grpDateTime")
         Me.grpDateTime.Name = "grpDateTime"
-        Me.grpDateTime.Size = New System.Drawing.Size(148, 222)
-        Me.grpDateTime.TabIndex = 2
         Me.grpDateTime.TabStop = False
         Me.grpDateTime.Tag = ""
-        Me.grpDateTime.Text = "Date and time"
         '
         'grpStation
         '
         Me.grpStation.Controls.Add(Me.lblStationName)
         Me.grpStation.Controls.Add(Me.ucrReceiverStationName)
-        Me.grpStation.Location = New System.Drawing.Point(13, 192)
+        resources.ApplyResources(Me.grpStation, "grpStation")
         Me.grpStation.Name = "grpStation"
-        Me.grpStation.Size = New System.Drawing.Size(137, 61)
-        Me.grpStation.TabIndex = 1
         Me.grpStation.TabStop = False
         Me.grpStation.Tag = ""
-        Me.grpStation.Text = "Station"
         '
         'DlgDefineClimaticData
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(466, 480)
         Me.Controls.Add(Me.grpStation)
         Me.Controls.Add(Me.grpDateTime)
         Me.Controls.Add(Me.grpElements)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSelectorDefineClimaticData)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "DlgDefineClimaticData"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Define Climatic Data"
         Me.grpElements.ResumeLayout(False)
         Me.grpElements.PerformLayout()
         Me.grpDateTime.ResumeLayout(False)

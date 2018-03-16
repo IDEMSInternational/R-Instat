@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
@@ -21,6 +21,7 @@ Public Class dlgAddComment
     Private strSelectedDataFrame As String = ""
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+
     Private Sub dlgAddComment_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -39,32 +40,16 @@ Public Class dlgAddComment
         TestOKEnabled()
     End Sub
 
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-    End Sub
-
-    Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
-        strSelectedColumn = strColumn
-        strSelectedDataFrame = strDataFrame
-        bUseSelectedColumn = True
-    End Sub
-
-    Private Sub SetDefaultColumn()
-        ucrSelectorAddComment.SetDataframe(strSelectedDataFrame)
-        ucrReceiverColumn.Add(strSelectedColumn, strSelectedDataFrame)
-        bUseSelectedColumn = False
-    End Sub
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 508
         ucrReceiverColumn.Selector = ucrSelectorAddComment
         ucrReceiverColumn.SetMeAsReceiver()
+        ucrReceiverRow.Selector = ucrSelectorAddComment
+        ucrReceiverRow.SetMeAsReceiver()
         ucrPnlCellOrRow.AddRadioButton(rdoCell)
         ucrPnlCellOrRow.AddRadioButton(rdoRow)
         ucrPnlCellOrRow.AddToLinkedControls(ucrReceiverRow, {rdoRow}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-
-    End Sub
-    Private Sub TestOKEnabled()
-
+        ucrPnlCellOrRow.bAllowNonConditionValues = True
     End Sub
 
     Private Sub SetDefaults()
@@ -73,10 +58,35 @@ Public Class dlgAddComment
         ucrInputComment.IsMultiline = True
     End Sub
 
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+    Private Sub TestOKEnabled()
+        ucrBase.OKEnabled(False) ' Temporary
+    End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
 
+    Private Sub SetDefaultColumn()
+        rdoRow.Checked = True
+        SetRCodeForControls(True)
+        ucrSelectorAddComment.SetDataframe(strSelectedDataFrame)
+        ucrReceiverColumn.Add(strSelectedColumn, strSelectedDataFrame)
+        bUseSelectedColumn = False
+    End Sub
+
+    Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
+        strSelectedColumn = strColumn
+        strSelectedDataFrame = strDataFrame
+        bUseSelectedColumn = True
+    End Sub
+
+    Private Sub Control_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumn.ControlContentsChanged, ucrReceiverColumn.ControlContentsChanged, ucrInputComment.ControlContentsChanged, ucrPnlCellOrRow.ControlContentsChanged
+        TestOKEnabled()
+    End Sub
 End Class

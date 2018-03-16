@@ -117,4 +117,268 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblFactorToUnstackBy.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblFactorToUnstackBy.Location" type="System.Drawing.Point, System.Drawing">
+    <value>268, 45</value>
+  </data>
+  <data name="lblFactorToUnstackBy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 13</value>
+  </data>
+  <data name="lblFactorToUnstackBy.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblFactorToUnstackBy.Text" xml:space="preserve">
+    <value>Factor to Unstack by:</value>
+  </data>
+  <data name="&gt;&gt;lblFactorToUnstackBy.Name" xml:space="preserve">
+    <value>lblFactorToUnstackBy</value>
+  </data>
+  <data name="&gt;&gt;lblFactorToUnstackBy.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblFactorToUnstackBy.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblFactorToUnstackBy.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="lblColumnToUnstack.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblColumnToUnstack.Location" type="System.Drawing.Point, System.Drawing">
+    <value>268, 91</value>
+  </data>
+  <data name="lblColumnToUnstack.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 13</value>
+  </data>
+  <data name="lblColumnToUnstack.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblColumnToUnstack.Text" xml:space="preserve">
+    <value>Column to Unstack:</value>
+  </data>
+  <data name="&gt;&gt;lblColumnToUnstack.Name" xml:space="preserve">
+    <value>lblColumnToUnstack</value>
+  </data>
+  <data name="&gt;&gt;lblColumnToUnstack.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblColumnToUnstack.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblColumnToUnstack.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="lblIDColumns.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblIDColumns.Location" type="System.Drawing.Point, System.Drawing">
+    <value>268, 137</value>
+  </data>
+  <data name="lblIDColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 13</value>
+  </data>
+  <data name="lblIDColumns.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lblIDColumns.Text" xml:space="preserve">
+    <value>ID Columns:</value>
+  </data>
+  <data name="&gt;&gt;lblIDColumns.Name" xml:space="preserve">
+    <value>lblIDColumns</value>
+  </data>
+  <data name="&gt;&gt;lblIDColumns.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblIDColumns.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblIDColumns.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>416, 349</value>
+  </data>
+  <data name="ucrNewDFName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 266</value>
+  </data>
+  <data name="ucrNewDFName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>307, 24</value>
+  </data>
+  <data name="ucrNewDFName.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;ucrNewDFName.Name" xml:space="preserve">
+    <value>ucrNewDFName</value>
+  </data>
+  <data name="&gt;&gt;ucrNewDFName.Type" xml:space="preserve">
+    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNewDFName.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrNewDFName.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrChkDropMissingCombinations.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 239</value>
+  </data>
+  <data name="ucrChkDropMissingCombinations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>159, 20</value>
+  </data>
+  <data name="ucrChkDropMissingCombinations.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDropMissingCombinations.Name" xml:space="preserve">
+    <value>ucrChkDropMissingCombinations</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDropMissingCombinations.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDropMissingCombinations.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDropMissingCombinations.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrColumnToUnstackReceiver.Location" type="System.Drawing.Point, System.Drawing">
+    <value>268, 106</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrColumnToUnstackReceiver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrColumnToUnstackReceiver.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrColumnToUnstackReceiver.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrColumnToUnstackReceiver.Name" xml:space="preserve">
+    <value>ucrColumnToUnstackReceiver</value>
+  </data>
+  <data name="&gt;&gt;ucrColumnToUnstackReceiver.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrColumnToUnstackReceiver.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrColumnToUnstackReceiver.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrFactorToUnstackReceiver.Location" type="System.Drawing.Point, System.Drawing">
+    <value>268, 60</value>
+  </data>
+  <data name="ucrFactorToUnstackReceiver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrFactorToUnstackReceiver.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrFactorToUnstackReceiver.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrFactorToUnstackReceiver.Name" xml:space="preserve">
+    <value>ucrFactorToUnstackReceiver</value>
+  </data>
+  <data name="&gt;&gt;ucrFactorToUnstackReceiver.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrFactorToUnstackReceiver.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrFactorToUnstackReceiver.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrSelectorForUnstack.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
+  </data>
+  <data name="ucrSelectorForUnstack.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectorForUnstack.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 180</value>
+  </data>
+  <data name="ucrSelectorForUnstack.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorForUnstack.Name" xml:space="preserve">
+    <value>ucrSelectorForUnstack</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorForUnstack.Type" xml:space="preserve">
+    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorForUnstack.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorForUnstack.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 292</value>
+  </data>
+  <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>410, 52</value>
+  </data>
+  <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
+    <value>ucrBase</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Type" xml:space="preserve">
+    <value>instat.ucrButtons, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Unstack Columns</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>dlgUnstack</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ucrIDColumns.Location" type="System.Drawing.Point, System.Drawing">
+    <value>268, 152</value>
+  </data>
+  <data name="ucrIDColumns.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrIDColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 110</value>
+  </data>
+  <data name="ucrIDColumns.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrIDColumns.Name" xml:space="preserve">
+    <value>ucrIDColumns</value>
+  </data>
+  <data name="&gt;&gt;ucrIDColumns.Type" xml:space="preserve">
+    <value>instat.ucrReceiverMultiple, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrIDColumns.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrIDColumns.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
 </root>

@@ -1,5 +1,14 @@
-# a link can contain multiple ways to link two data frames
-link <- R6Class("link",
+# A link is a relationship between two data frames
+# from_data_frame : character - the name of the first data frame of the link
+# to_data_frame   : character - the name of the second data frame of the link
+# type            : character - the type of link e.g. "keyed"
+# link_columns    : list      - a list where each element defines how the data frames are linked
+#                               It is a list because two data frames may be linked in different ways
+#                               Each element of the list is a named character vector 
+#                               where the name-element pairs of the vector define linking columns between the data frames
+#                               the name is the name of column in from_data_frame
+#                               the element is the corresponding name of a column in to_data_frame
+link <- R6::R6Class("link",
                        public = list(
                          initialize = function(from_data_frame = "", to_data_frame = "", type = "", link_columns = list()) {
                            self$from_data_frame <- from_data_frame
@@ -20,10 +29,45 @@ link <- R6Class("link",
                        active = list()
 )
 
-link$set("public", "data_clone", function() {
+link$set("public", "data_clone", function(...) {
   ret <- link$new(from_data_frame = self$from_data_frame, to_data_frame = self$to_data_frame,
                   type = self$type, link_columns = self$link_columns)
   return(ret)
+}
+)
+
+link$set("public", "rename_data_frame_in_link", function(old_data_name, new_data_name) {
+  if(self$from_data_frame == old_data_name) self$from_data_frame <- new_data_name
+  if(self$to_data_frame == old_data_name) self$to_data_frame <- new_data_name
+}
+)
+
+link$set("public", "rename_column_in_link", function(data_name, old_column_name, new_column_name) {
+  print(self$link_columns)
+  if(self$from_data_frame == data_name) {
+    for(i in seq_along(self$link_columns)) {
+      names(self$link_columns[[i]])[which(old_column_name %in% names(self$link_columns[[i]]))] <- new_column_name
+    }
+  }
+  if(self$to_data_frame == data_name) {
+    for(i in seq_along(self$link_columns)) {
+      self$link_columns[[i]][which(old_column_name %in% self$link_columns[[i]])] <- new_column_name
+    }
+  }
+}
+)
+
+instat_object$set("public", "update_links_rename_data_frame", function(old_data_name, new_data_name) {
+  for(i in seq_along(private$.links)) {
+    private$.links[[i]]$rename_data_frame_in_link(old_data_name, new_data_name)
+  }
+}
+)
+
+instat_object$set("public", "update_links_rename_column", function(data_name, old_column_name, new_column_name) {
+  for(i in seq_along(private$.links)) {
+    private$.links[[i]]$rename_column_in_link(data_name, old_column_name, new_column_name)
+  }
 }
 )
 
@@ -65,12 +109,12 @@ instat_object$set("public", "add_link", function(from_data_frame, to_data_frame,
     found <- FALSE
     for(curr_link_pairs in curr_link_columns) {
       # Are these the right checks on the link columns?
-      if(from_on_left && length(link_pairs) == length(curr_link_pairs) && (setequal(link_pairs, curr_link_pairs) || setequal(names(link_pairs), names(curr_link_pairs)))) {
+      if(from_on_left && length(link_pairs) == length(curr_link_pairs) && setequal(names(link_pairs), names(curr_link_pairs))) {
         message("A link with these columns already exists. A new link will not be added.")
         found <- TRUE
         break
       }
-      else if(!from_on_left && length(link_pairs) == length(curr_link_pairs) && (setequal(link_pairs, names(curr_link_pairs)) || setequal(names(link_pairs), curr_link_pairs))) {
+      else if(!from_on_left && length(link_pairs) == length(curr_link_pairs) && (setequal(link_pairs, names(curr_link_pairs)))) {
         message("A link with these columns already exists. A new link will not be added.")
         found <- TRUE
         break
@@ -90,6 +134,25 @@ instat_object$set("public", "add_link", function(from_data_frame, to_data_frame,
       }
     }
   }
+}
+)
+
+instat_object$set("public", "get_link_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c(), exclude_self_links = TRUE) {
+  if(exclude_self_links) {
+    out <- c()
+    i <- 1
+    for(link in private$.links) {
+      if(link$from_data_frame != link$to_data_frame) out <- c(out, names(private$.links)[i])
+      i <- i + 1
+    }
+  }
+  else out <- names(private$.links)
+  if(as_list) {
+    lst <- list()
+    lst[[overall_label]] <- out
+    return(lst)
+  }
+  else return(out)
 }
 )
 
@@ -125,28 +188,37 @@ instat_object$set("public", "link_exists_from_by_to", function(first_data_frame,
 }
 )
 
-instat_object$set("public", "get_linked_to_data_name", function(from_data_frame, link_pairs) {
+instat_object$set("public", "get_linked_to_data_name", function(from_data_frame, link_cols = c(), include_self = FALSE) {
+  out <- c()
+  if(include_self) out <- c(out, from_data_frame)
   for(curr_link in private$.links) {
     if(curr_link$from_data_frame == from_data_frame) {
-      for(curr_link_pairs in curr_link$link_columns) {
-        if(length(link_pairs) == length(curr_link_pairs) && setequal(link_pairs, names(curr_link_pairs))) {
-          return(curr_link$to_data_frame)
+      if(length(link_cols) == 0) {
+        out <- c(out, curr_link$to_data_frame)
+      }
+      else {
+        for(curr_link_pairs in curr_link$link_columns) {
+          if(length(link_cols) == length(curr_link_pairs) && setequal(link_cols, names(curr_link_pairs))) {
+            out <- c(out, curr_link$to_data_frame)
+          }
         }
       }
     }
   }
-  return("")
+  return(unique(out))
 }
 )
 
 instat_object$set("public", "get_linked_to_definition", function(from_data_frame, link_pairs) {
   to_data_name <- self$get_linked_to_data_name(from_data_frame, link_pairs)
-  if(to_data_name != "") {
+  if(length(to_data_name) > 0) {
+    # TODO what happens if there is more than 1?
+    to_data_name <- to_data_name[1]
     curr_link <- self$get_link_between(from_data_frame, to_data_name)
     for(curr_link in private$.links) {
       for(curr_link_pairs in curr_link$link_columns) {
         if(length(link_pairs) == length(curr_link_pairs) && setequal(link_pairs, names(curr_link_pairs))) {
-          return(list(to_data_name, as.vector(curr_link_pairs)))
+          return(list(to_data_name, as.vector(curr_link_pairs[link_pairs])))
         }
       }
     }
@@ -270,5 +342,18 @@ instat_object$set("public", "get_link_between", function(from_data_frame, to_dat
     }
   }
   return(NULL)
+}
+)
+
+instat_object$set("public", "view_link", function(link_name) {
+  temp_link <- self$get_links(link_name)
+  out <- ""
+  if(length(temp_link) > 0) {
+    out <- cat(paste(
+                      paste("Link name:", link_name),
+                      paste("From data frame:", temp_link$from_data_frame),
+                      paste("To data frame:", temp_link$to_data_frame),
+                      paste("Link Columns:", paste(names(temp_link$link_columns), "=", temp_link$link_columns, collapse = ", ")), sep = "\n"))
+  }
 }
 )

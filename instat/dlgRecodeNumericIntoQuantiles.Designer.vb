@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgRecodeNumericIntoQuantiles
     Inherits System.Windows.Forms.Form
 
@@ -36,7 +52,7 @@ Partial Class dlgRecodeNumericIntoQuantiles
         'lblNumberOfQuantiles
         '
         Me.lblNumberOfQuantiles.AutoSize = True
-        Me.lblNumberOfQuantiles.Location = New System.Drawing.Point(242, 103)
+        Me.lblNumberOfQuantiles.Location = New System.Drawing.Point(244, 94)
         Me.lblNumberOfQuantiles.Name = "lblNumberOfQuantiles"
         Me.lblNumberOfQuantiles.Size = New System.Drawing.Size(106, 13)
         Me.lblNumberOfQuantiles.TabIndex = 3
@@ -46,7 +62,7 @@ Partial Class dlgRecodeNumericIntoQuantiles
         'lblQuantileAlgorithm
         '
         Me.lblQuantileAlgorithm.AutoSize = True
-        Me.lblQuantileAlgorithm.Location = New System.Drawing.Point(242, 133)
+        Me.lblQuantileAlgorithm.Location = New System.Drawing.Point(244, 119)
         Me.lblQuantileAlgorithm.Name = "lblQuantileAlgorithm"
         Me.lblQuantileAlgorithm.Size = New System.Drawing.Size(95, 13)
         Me.lblQuantileAlgorithm.TabIndex = 5
@@ -74,7 +90,7 @@ Partial Class dlgRecodeNumericIntoQuantiles
         '
         Me.ucrNudQuantileAlgorithm.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudQuantileAlgorithm.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudQuantileAlgorithm.Location = New System.Drawing.Point(350, 131)
+        Me.ucrNudQuantileAlgorithm.Location = New System.Drawing.Point(350, 117)
         Me.ucrNudQuantileAlgorithm.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudQuantileAlgorithm.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudQuantileAlgorithm.Name = "ucrNudQuantileAlgorithm"
@@ -86,7 +102,7 @@ Partial Class dlgRecodeNumericIntoQuantiles
         '
         Me.ucrNudNumberOfQuantiles.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfQuantiles.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNumberOfQuantiles.Location = New System.Drawing.Point(350, 101)
+        Me.ucrNudNumberOfQuantiles.Location = New System.Drawing.Point(350, 91)
         Me.ucrNudNumberOfQuantiles.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNumberOfQuantiles.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfQuantiles.Name = "ucrNudNumberOfQuantiles"
@@ -102,7 +118,9 @@ Partial Class dlgRecodeNumericIntoQuantiles
         Me.ucrReceiverNumeric.Name = "ucrReceiverNumeric"
         Me.ucrReceiverNumeric.Selector = Nothing
         Me.ucrReceiverNumeric.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverNumeric.strNcFilePath = ""
         Me.ucrReceiverNumeric.TabIndex = 2
+        Me.ucrReceiverNumeric.ucrSelector = Nothing
         '
         'ucrBase
         '
@@ -125,7 +143,7 @@ Partial Class dlgRecodeNumericIntoQuantiles
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 287)
+        Me.ClientSize = New System.Drawing.Size(416, 286)
         Me.Controls.Add(Me.lblSelectedVariable)
         Me.Controls.Add(Me.ucrNewColumnName)
         Me.Controls.Add(Me.ucrNudQuantileAlgorithm)

@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,13 +11,14 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
 Public Class dlgHideShowColumns
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Public strSelectedDataFrame As String = ""
     Private clsHiddenColumns As New RFunction
     Private Sub dlgHideShowColumns_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -32,14 +33,6 @@ Public Class dlgHideShowColumns
         bReset = False
         TestOKEnabled()
         autoTranslate(Me)
-    End Sub
-
-    Private Sub TestOKEnabled()
-        If ucrSelectorForHiddenColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
     End Sub
 
     Private Sub InitialiseDialog()
@@ -58,27 +51,43 @@ Public Class dlgHideShowColumns
         ucrReceiverHiddenColumns.bExcludeFromSelector = True
     End Sub
 
-    Private Sub SetHiddenColumnsInReceiver()
-        ucrReceiverHiddenColumns.AddItemsWithMetadataProperty(ucrSelectorForHiddenColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Is_Hidden", {"TRUE"})
-    End Sub
-
     Private Sub SetDefaults()
         Dim clsHiddenColumns = New RFunction
+
         ucrSelectorForHiddenColumns.Reset()
         SetHiddenColumnsInReceiver()
-        clsHiddenColumns.AddParameter("col_names", "c()")
+
         clsHiddenColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_hidden_columns")
+        clsHiddenColumns.AddParameter("col_names", "c()")
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsHiddenColumns)
+    End Sub
+
+    Public Sub SetCurrentDataframe(strDataFrame As String)
+        strSelectedDataFrame = strDataFrame
+        ucrSelectorForHiddenColumns.SetDataframe(strSelectedDataFrame)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
+    Private Sub TestOKEnabled()
+        If ucrSelectorForHiddenColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
+    End Sub
+
+    Private Sub SetHiddenColumnsInReceiver()
+        ucrReceiverHiddenColumns.AddItemsWithMetadataProperty(ucrSelectorForHiddenColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Is_Hidden", {"TRUE"})
     End Sub
 
     Private Sub ucrSelectorForHiddenColumns_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForHiddenColumns.ControlContentsChanged

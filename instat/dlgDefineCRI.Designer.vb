@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgDefineCRI
     Inherits System.Windows.Forms.Form
 
@@ -22,6 +38,7 @@ Partial Class dlgDefineCRI
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgDefineCRI))
         Me.cmdEdit = New System.Windows.Forms.Button()
         Me.cmdDelete = New System.Windows.Forms.Button()
         Me.cmdAddComponent = New System.Windows.Forms.Button()
@@ -42,157 +59,113 @@ Partial Class dlgDefineCRI
         '
         'cmdEdit
         '
-        Me.cmdEdit.Location = New System.Drawing.Point(533, 158)
+        resources.ApplyResources(Me.cmdEdit, "cmdEdit")
         Me.cmdEdit.Name = "cmdEdit"
-        Me.cmdEdit.Size = New System.Drawing.Size(58, 23)
-        Me.cmdEdit.TabIndex = 4
-        Me.cmdEdit.Text = "Edit"
         Me.cmdEdit.UseVisualStyleBackColor = True
         '
         'cmdDelete
         '
-        Me.cmdDelete.Location = New System.Drawing.Point(597, 158)
+        resources.ApplyResources(Me.cmdDelete, "cmdDelete")
         Me.cmdDelete.Name = "cmdDelete"
-        Me.cmdDelete.Size = New System.Drawing.Size(58, 23)
-        Me.cmdDelete.TabIndex = 5
-        Me.cmdDelete.Text = "Delete"
         Me.cmdDelete.UseVisualStyleBackColor = True
         '
         'cmdAddComponent
         '
-        Me.cmdAddComponent.Location = New System.Drawing.Point(396, 92)
+        resources.ApplyResources(Me.cmdAddComponent, "cmdAddComponent")
         Me.cmdAddComponent.Name = "cmdAddComponent"
-        Me.cmdAddComponent.Size = New System.Drawing.Size(133, 23)
-        Me.cmdAddComponent.TabIndex = 6
-        Me.cmdAddComponent.Text = "Add Component of Index"
         Me.cmdAddComponent.UseVisualStyleBackColor = True
         '
         'lblReceiverRedFlag
         '
-        Me.lblReceiverRedFlag.AutoSize = True
-        Me.lblReceiverRedFlag.Location = New System.Drawing.Point(237, 44)
+        resources.ApplyResources(Me.lblReceiverRedFlag, "lblReceiverRedFlag")
         Me.lblReceiverRedFlag.Name = "lblReceiverRedFlag"
-        Me.lblReceiverRedFlag.Size = New System.Drawing.Size(64, 13)
-        Me.lblReceiverRedFlag.TabIndex = 7
-        Me.lblReceiverRedFlag.Text = "Component:"
         '
         'lblWeights
         '
-        Me.lblWeights.AutoSize = True
-        Me.lblWeights.Location = New System.Drawing.Point(237, 98)
+        resources.ApplyResources(Me.lblWeights, "lblWeights")
         Me.lblWeights.Name = "lblWeights"
-        Me.lblWeights.Size = New System.Drawing.Size(49, 13)
-        Me.lblWeights.TabIndex = 8
-        Me.lblWeights.Text = "Weights:"
         '
         'lblIndexComponentsList
         '
-        Me.lblIndexComponentsList.AutoSize = True
-        Me.lblIndexComponentsList.Location = New System.Drawing.Point(535, 42)
+        resources.ApplyResources(Me.lblIndexComponentsList, "lblIndexComponentsList")
         Me.lblIndexComponentsList.Name = "lblIndexComponentsList"
-        Me.lblIndexComponentsList.Size = New System.Drawing.Size(98, 13)
-        Me.lblIndexComponentsList.TabIndex = 9
-        Me.lblIndexComponentsList.Text = "Index Components:"
         '
         'lstIndexComponents
         '
         Me.lstIndexComponents.FullRowSelect = True
-        Me.lstIndexComponents.Location = New System.Drawing.Point(534, 59)
+        resources.ApplyResources(Me.lstIndexComponents, "lstIndexComponents")
         Me.lstIndexComponents.Name = "lstIndexComponents"
-        Me.lstIndexComponents.Size = New System.Drawing.Size(122, 93)
-        Me.lstIndexComponents.TabIndex = 14
         Me.lstIndexComponents.UseCompatibleStateImageBehavior = False
         Me.lstIndexComponents.View = System.Windows.Forms.View.Details
         '
         'lblModelPreview
         '
-        Me.lblModelPreview.AutoSize = True
-        Me.lblModelPreview.Location = New System.Drawing.Point(8, 295)
+        resources.ApplyResources(Me.lblModelPreview, "lblModelPreview")
         Me.lblModelPreview.Name = "lblModelPreview"
-        Me.lblModelPreview.Size = New System.Drawing.Size(80, 13)
-        Me.lblModelPreview.TabIndex = 15
-        Me.lblModelPreview.Text = "Preview:"
         '
         'ucrSaveCRI
         '
-        Me.ucrSaveCRI.Location = New System.Drawing.Point(10, 320)
+        resources.ApplyResources(Me.ucrSaveCRI, "ucrSaveCRI")
         Me.ucrSaveCRI.Name = "ucrSaveCRI"
-        Me.ucrSaveCRI.Size = New System.Drawing.Size(276, 24)
-        Me.ucrSaveCRI.TabIndex = 17
         '
         'ucrInputCRIPreview
         '
         Me.ucrInputCRIPreview.AddQuotesIfUnrecognised = True
         Me.ucrInputCRIPreview.IsMultiline = False
         Me.ucrInputCRIPreview.IsReadOnly = False
-        Me.ucrInputCRIPreview.Location = New System.Drawing.Point(92, 292)
+        resources.ApplyResources(Me.ucrInputCRIPreview, "ucrInputCRIPreview")
         Me.ucrInputCRIPreview.Name = "ucrInputCRIPreview"
-        Me.ucrInputCRIPreview.Size = New System.Drawing.Size(437, 21)
-        Me.ucrInputCRIPreview.TabIndex = 16
         '
         'ucrNudWeights
         '
         Me.ucrNudWeights.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWeights.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudWeights.Location = New System.Drawing.Point(292, 95)
+        resources.ApplyResources(Me.ucrNudWeights, "ucrNudWeights")
         Me.ucrNudWeights.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudWeights.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWeights.Name = "ucrNudWeights"
-        Me.ucrNudWeights.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudWeights.TabIndex = 13
         Me.ucrNudWeights.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrGridWeights
         '
-        Me.ucrGridWeights.AutoSize = True
+        resources.ApplyResources(Me.ucrGridWeights, "ucrGridWeights")
         Me.ucrGridWeights.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.ucrGridWeights.clsReceiver = Nothing
-        Me.ucrGridWeights.Location = New System.Drawing.Point(239, 114)
         Me.ucrGridWeights.Name = "ucrGridWeights"
         Me.ucrGridWeights.shtCurrSheet = Nothing
-        Me.ucrGridWeights.Size = New System.Drawing.Size(290, 141)
-        Me.ucrGridWeights.TabIndex = 12
+        Me.ucrGridWeights.ucrChkLevels = Nothing
         '
         'ucrReceiverRedFlag
         '
         Me.ucrReceiverRedFlag.frmParent = Me
-        Me.ucrReceiverRedFlag.Location = New System.Drawing.Point(239, 59)
-        Me.ucrReceiverRedFlag.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverRedFlag, "ucrReceiverRedFlag")
         Me.ucrReceiverRedFlag.Name = "ucrReceiverRedFlag"
         Me.ucrReceiverRedFlag.Selector = Nothing
-        Me.ucrReceiverRedFlag.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverRedFlag.TabIndex = 11
+        Me.ucrReceiverRedFlag.strNcFilePath = ""
+        Me.ucrReceiverRedFlag.ucrSelector = Nothing
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 350)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 3
         '
         'ucrSelectorCRI
         '
         Me.ucrSelectorCRI.bShowHiddenColumns = False
         Me.ucrSelectorCRI.bUseCurrentFilter = True
-        Me.ucrSelectorCRI.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorCRI.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorCRI, "ucrSelectorCRI")
         Me.ucrSelectorCRI.Name = "ucrSelectorCRI"
-        Me.ucrSelectorCRI.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorCRI.TabIndex = 2
         '
         'ucrChkScaleNumeric
         '
         Me.ucrChkScaleNumeric.Checked = False
-        Me.ucrChkScaleNumeric.Location = New System.Drawing.Point(535, 187)
+        resources.ApplyResources(Me.ucrChkScaleNumeric, "ucrChkScaleNumeric")
         Me.ucrChkScaleNumeric.Name = "ucrChkScaleNumeric"
-        Me.ucrChkScaleNumeric.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkScaleNumeric.TabIndex = 1
         '
         'dlgDefineCRI
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(682, 414)
         Me.Controls.Add(Me.ucrSaveCRI)
         Me.Controls.Add(Me.ucrInputCRIPreview)
         Me.Controls.Add(Me.lblModelPreview)
@@ -213,8 +186,6 @@ Partial Class dlgDefineCRI
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDefineCRI"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Define CRI"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ucrDistributionsWithParameters
     Inherits instat.ucrDistributions
 
@@ -22,111 +38,99 @@ Partial Class ucrDistributionsWithParameters
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrDistributionsWithParameters))
         Me.lblDistributionParameters = New System.Windows.Forms.Label()
         Me.lblParameter1 = New System.Windows.Forms.Label()
         Me.lblParameter2 = New System.Windows.Forms.Label()
         Me.lblParameter3 = New System.Windows.Forms.Label()
-        Me.txtParameter1 = New System.Windows.Forms.TextBox()
-        Me.txtParameter2 = New System.Windows.Forms.TextBox()
-        Me.txtParameter3 = New System.Windows.Forms.TextBox()
-        Me.txtParameter4 = New System.Windows.Forms.TextBox()
         Me.lblParameter4 = New System.Windows.Forms.Label()
+        Me.ucrInputParameter1 = New instat.ucrInputTextBox()
+        Me.ucrInputParameter2 = New instat.ucrInputTextBox()
+        Me.ucrInputParameter3 = New instat.ucrInputTextBox()
+        Me.ucrInputParameter4 = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
         'lblDistributionParameters
         '
-        Me.lblDistributionParameters.AutoSize = True
-        Me.lblDistributionParameters.Location = New System.Drawing.Point(6, 45)
+        resources.ApplyResources(Me.lblDistributionParameters, "lblDistributionParameters")
         Me.lblDistributionParameters.Name = "lblDistributionParameters"
-        Me.lblDistributionParameters.Size = New System.Drawing.Size(118, 13)
-        Me.lblDistributionParameters.TabIndex = 2
         Me.lblDistributionParameters.Tag = "distribution_parameters:"
-        Me.lblDistributionParameters.Text = "Distribution Parameters:"
         '
         'lblParameter1
         '
-        Me.lblParameter1.AutoSize = True
-        Me.lblParameter1.Location = New System.Drawing.Point(9, 76)
+        resources.ApplyResources(Me.lblParameter1, "lblParameter1")
         Me.lblParameter1.Name = "lblParameter1"
-        Me.lblParameter1.Size = New System.Drawing.Size(0, 13)
-        Me.lblParameter1.TabIndex = 3
         '
         'lblParameter2
         '
-        Me.lblParameter2.AutoSize = True
-        Me.lblParameter2.Location = New System.Drawing.Point(9, 105)
+        resources.ApplyResources(Me.lblParameter2, "lblParameter2")
         Me.lblParameter2.Name = "lblParameter2"
-        Me.lblParameter2.Size = New System.Drawing.Size(0, 13)
-        Me.lblParameter2.TabIndex = 4
         '
         'lblParameter3
         '
-        Me.lblParameter3.AutoSize = True
-        Me.lblParameter3.Location = New System.Drawing.Point(9, 135)
+        resources.ApplyResources(Me.lblParameter3, "lblParameter3")
         Me.lblParameter3.Name = "lblParameter3"
-        Me.lblParameter3.Size = New System.Drawing.Size(0, 13)
-        Me.lblParameter3.TabIndex = 5
-        '
-        'txtParameter1
-        '
-        Me.txtParameter1.Location = New System.Drawing.Point(95, 73)
-        Me.txtParameter1.Name = "txtParameter1"
-        Me.txtParameter1.Size = New System.Drawing.Size(100, 20)
-        Me.txtParameter1.TabIndex = 6
-        '
-        'txtParameter2
-        '
-        Me.txtParameter2.Location = New System.Drawing.Point(95, 102)
-        Me.txtParameter2.Name = "txtParameter2"
-        Me.txtParameter2.Size = New System.Drawing.Size(100, 20)
-        Me.txtParameter2.TabIndex = 7
-        '
-        'txtParameter3
-        '
-        Me.txtParameter3.Location = New System.Drawing.Point(95, 132)
-        Me.txtParameter3.Name = "txtParameter3"
-        Me.txtParameter3.Size = New System.Drawing.Size(100, 20)
-        Me.txtParameter3.TabIndex = 8
-        '
-        'txtParameter4
-        '
-        Me.txtParameter4.Location = New System.Drawing.Point(95, 158)
-        Me.txtParameter4.Name = "txtParameter4"
-        Me.txtParameter4.Size = New System.Drawing.Size(100, 20)
-        Me.txtParameter4.TabIndex = 10
         '
         'lblParameter4
         '
-        Me.lblParameter4.AutoSize = True
-        Me.lblParameter4.Location = New System.Drawing.Point(9, 165)
+        resources.ApplyResources(Me.lblParameter4, "lblParameter4")
         Me.lblParameter4.Name = "lblParameter4"
-        Me.lblParameter4.Size = New System.Drawing.Size(0, 13)
-        Me.lblParameter4.TabIndex = 9
+        '
+        'ucrInputParameter1
+        '
+        Me.ucrInputParameter1.AddQuotesIfUnrecognised = True
+        Me.ucrInputParameter1.IsMultiline = False
+        Me.ucrInputParameter1.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputParameter1, "ucrInputParameter1")
+        Me.ucrInputParameter1.Name = "ucrInputParameter1"
+        '
+        'ucrInputParameter2
+        '
+        Me.ucrInputParameter2.AddQuotesIfUnrecognised = True
+        Me.ucrInputParameter2.IsMultiline = False
+        Me.ucrInputParameter2.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputParameter2, "ucrInputParameter2")
+        Me.ucrInputParameter2.Name = "ucrInputParameter2"
+        '
+        'ucrInputParameter3
+        '
+        Me.ucrInputParameter3.AddQuotesIfUnrecognised = True
+        Me.ucrInputParameter3.IsMultiline = False
+        Me.ucrInputParameter3.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputParameter3, "ucrInputParameter3")
+        Me.ucrInputParameter3.Name = "ucrInputParameter3"
+        '
+        'ucrInputParameter4
+        '
+        Me.ucrInputParameter4.AddQuotesIfUnrecognised = True
+        Me.ucrInputParameter4.IsMultiline = False
+        Me.ucrInputParameter4.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputParameter4, "ucrInputParameter4")
+        Me.ucrInputParameter4.Name = "ucrInputParameter4"
         '
         'ucrDistributionsWithParameters
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.txtParameter4)
+        Me.Controls.Add(Me.ucrInputParameter3)
+        Me.Controls.Add(Me.ucrInputParameter4)
+        Me.Controls.Add(Me.ucrInputParameter2)
+        Me.Controls.Add(Me.ucrInputParameter1)
         Me.Controls.Add(Me.lblParameter4)
-        Me.Controls.Add(Me.txtParameter3)
-        Me.Controls.Add(Me.txtParameter2)
-        Me.Controls.Add(Me.txtParameter1)
         Me.Controls.Add(Me.lblParameter3)
         Me.Controls.Add(Me.lblParameter2)
         Me.Controls.Add(Me.lblParameter1)
         Me.Controls.Add(Me.lblDistributionParameters)
         Me.Name = "ucrDistributionsWithParameters"
-        Me.Size = New System.Drawing.Size(221, 194)
         Me.Controls.SetChildIndex(Me.lblDistributionParameters, 0)
         Me.Controls.SetChildIndex(Me.lblParameter1, 0)
         Me.Controls.SetChildIndex(Me.lblParameter2, 0)
         Me.Controls.SetChildIndex(Me.lblParameter3, 0)
-        Me.Controls.SetChildIndex(Me.txtParameter1, 0)
-        Me.Controls.SetChildIndex(Me.txtParameter2, 0)
-        Me.Controls.SetChildIndex(Me.txtParameter3, 0)
         Me.Controls.SetChildIndex(Me.lblParameter4, 0)
-        Me.Controls.SetChildIndex(Me.txtParameter4, 0)
+        Me.Controls.SetChildIndex(Me.ucrInputParameter1, 0)
+        Me.Controls.SetChildIndex(Me.ucrInputParameter2, 0)
+        Me.Controls.SetChildIndex(Me.ucrInputParameter4, 0)
+        Me.Controls.SetChildIndex(Me.ucrInputParameter3, 0)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -136,9 +140,9 @@ Partial Class ucrDistributionsWithParameters
     Friend WithEvents lblParameter1 As Label
     Friend WithEvents lblParameter2 As Label
     Friend WithEvents lblParameter3 As Label
-    Friend WithEvents txtParameter1 As TextBox
-    Friend WithEvents txtParameter2 As TextBox
-    Friend WithEvents txtParameter3 As TextBox
-    Friend WithEvents txtParameter4 As TextBox
     Friend WithEvents lblParameter4 As Label
+    Friend WithEvents ucrInputParameter1 As ucrInputTextBox
+    Friend WithEvents ucrInputParameter2 As ucrInputTextBox
+    Friend WithEvents ucrInputParameter3 As ucrInputTextBox
+    Friend WithEvents ucrInputParameter4 As ucrInputTextBox
 End Class

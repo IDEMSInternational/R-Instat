@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,14 +11,15 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Imports System.IO
 
 Public Class dlgOpenSST
     'Private intLines As Integer
-    Private clsReadFile As RFunction
+    Private clsReadFile As New RFunction
     Private clsRBaseCPT, clsBaseNetCDF, clsRCDF As New RFunction
     Private strTempWorkbookName As String
     Dim bFirstLoad As Boolean

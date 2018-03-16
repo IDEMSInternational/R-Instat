@@ -1,16 +1,19 @@
-﻿'Instat-R
-'Copyright (C) 2015
-'This program is free software: you can redistribute it and/or modify
-'it under the terms of the GNU General Public License as published by
-'the Free Software Foundation, either version 3 of the License, or
-'(at your option) any later version.
-'This program is distributed in the hope that it will be useful,
-'but WITHOUT ANY WARRANTY; without even the implied warranty of
-'MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'GNU General Public License for more details.
-'You should have received a copy of the GNU General Public License k
-'along with this program.  If not, see <http://www.gnu.org/licenses/>.
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Imports RDotNet
 
@@ -45,14 +48,16 @@ Public Class dlgMetadata
         '     Also need to get current values of metadata to set in ucrReceiverMetadataProperty
 
         clsLayerParam.strLayerParameterDataType = "list"
-        ucrNewValue.clsLayerParam = clsLayerParam
-        ucrNewValue.SetControls()
-        ucrReceiverChooseProperty.Selector = ucrSelectByMetadata
-        ucrReceiverChooseColumns.Selector = ucrSelectByMetadata
-        ucrReceiverChooseProperty.SetMeAsReceiver()
-        ucrBase.iHelpTopicID = 391
-        ucrReceiverChooseColumns.SetItemType("column")
-        ucrReceiverChooseProperty.SetItemType("metadata")
+        'To be updated, not correct
+        'ucrNewValue.SetControls(Nothing, clsLayerParam)
+        ucrNewValue.bIsActiveRControl = False
+
+        'ucrReceiverChooseProperty.Selector = ucrSelectByMetadata
+        'ucrReceiverChooseColumns.Selector = ucrSelectByMetadata
+        'ucrReceiverChooseProperty.SetMeAsReceiver()
+        ucrBase.iHelpTopicID = 53
+        'ucrReceiverChooseColumns.SetItemType("column")
+        'ucrReceiverChooseProperty.SetItemType("metadata")
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$append_to_variables_metadata")
         clsGetVarMetadata.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
         ucrCurrentValue.IsReadOnly = True
@@ -130,7 +135,8 @@ Public Class dlgMetadata
                 clsLayerParam.lstParameterStrings = strCurrMetadataValues.Distinct.ToArray
                 bListSet = True
             End If
-            ucrNewValue.SetControls()
+            'To be updated, not correct
+            ucrNewValue.SetControls(Nothing, clsLayerParam)
         End If
         If Not bSetCurrentValue Then
             ucrCurrentValue.SetName("")
