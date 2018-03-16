@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,16 +11,15 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 
 Public Class dlgStemAndLeaf
-    Public bFirstLoad As Boolean = True
-    Public bReset As Boolean = True
-
+    Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+    Private clsStemAndLeaf As New RFunction
     Private Sub dlgStemAndLeaf_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -43,14 +42,15 @@ Public Class dlgStemAndLeaf
         ucrReceiverStemAndLeaf.SetParameterIsRFunction()
         ucrReceiverStemAndLeaf.Selector = ucrStemLeafSelector
         ucrReceiverStemAndLeaf.SetIncludedDataTypes({"numeric"})
+        ucrReceiverStemAndLeaf.SetMeAsReceiver()
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        clsStemAndLeaf = New RFunction
 
-        ucrReceiverStemAndLeaf.SetMeAsReceiver()
-        clsDefaultFunction.SetRCommand("stem")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        clsStemAndLeaf.SetPackageName("graphics")
+        clsStemAndLeaf.SetRCommand("stem")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsStemAndLeaf)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)

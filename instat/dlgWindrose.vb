@@ -1,6 +1,5 @@
-﻿
-' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -12,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports RDotNet
 Imports instat.Translations
 Public Class dlgWindrose
@@ -38,29 +38,28 @@ Public Class dlgWindrose
         TestOkEnabled()
     End Sub
 
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-    End Sub
-
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.iCallType = 3
         ucrBase.iHelpTopicID = 452
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        ucrNudNoOfColumns.Visible = False
+        ucrNudNoOfColumns.Visible = False ' temporarily disabled
 
-        ucrReceiverWindSpeed.Selector = ucrWindRoseSelector
         ucrReceiverWindSpeed.SetParameter(New RParameter("speed", 0))
+        ucrReceiverWindSpeed.Selector = ucrWindRoseSelector
         ucrReceiverWindSpeed.SetIncludedDataTypes({"numeric"})
+        ucrReceiverWindSpeed.strSelectorHeading = "Numerics"
         ucrReceiverWindSpeed.SetParameterIsRFunction()
 
-        ucrReceiverWindDirection.Selector = ucrWindRoseSelector
         ucrReceiverWindDirection.SetParameter(New RParameter("direction", 1))
+        ucrReceiverWindDirection.Selector = ucrWindRoseSelector
         ucrReceiverWindDirection.SetIncludedDataTypes({"numeric"})
+        ucrReceiverWindDirection.strSelectorHeading = "Numerics"
         ucrReceiverWindDirection.SetParameterIsRFunction()
 
+        ucrReceiverFacet.SetParameter(New RParameter("facet", 2))
         ucrReceiverFacet.Selector = ucrWindRoseSelector
         ucrReceiverFacet.SetIncludedDataTypes({"factor"})
-        ucrReceiverFacet.SetParameter(New RParameter("facet", 2))
+        ucrReceiverFacet.strSelectorHeading = "Factors"
         ucrReceiverFacet.SetParameterIsRFunction()
 
         ucrNudNoOfColumns.SetParameter(New RParameter("n_col", 7))
@@ -68,7 +67,7 @@ Public Class dlgWindrose
         ucrNudNoOfColumns.SetRDefault(1)
         ucrNudNoOfColumns.Minimum = 1
 
-        ucrSaveGraph.SetPrefix("Windrose")
+        ucrSaveGraph.SetPrefix("windrose")
         ucrSaveGraph.SetDataFrameSelector(ucrWindRoseSelector.ucrAvailableDataFrames)
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetIsComboBox()
@@ -83,13 +82,16 @@ Public Class dlgWindrose
         ucrSaveGraph.Reset()
         ucrReceiverWindSpeed.SetMeAsReceiver()
 
+        clsDefaultRFunction.SetPackageName("clifro")
         clsDefaultRFunction.SetRCommand("windrose")
-        clsDefaultRFunction.AddParameter("n_col", 1)
         clsDefaultRFunction.AddParameter("ggtheme", Chr(34) & "minimal" & Chr(34))
-        clsDefaultRFunction.AddParameter("speed_cuts", Chr(34) & "NA" & Chr(34))
         clsDefaultRFunction.SetAssignTo("last_graph", strTempDataframe:=ucrWindRoseSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
         bResetSubDialog = True
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -106,17 +108,10 @@ Public Class dlgWindrose
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverFacet_Load() Handles ucrReceiverFacet.ControlValueChanged
-        GetMaxValue()
-        If ucrReceiverFacet.IsEmpty Then
-            ucrNudNoOfColumns.Visible = False
-        Else
-            ucrNudNoOfColumns.Visible = True
-        End If
-    End Sub
-
-    Private Sub ucrReceiverWindSpeed_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWindSpeed.ControlContentsChanged, ucrReceiverWindDirection.ControlContentsChanged, ucrNudNoOfColumns.ControlContentsChanged, ucrReceiverFacet.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
-        TestOkEnabled()
+    Private Sub cmdWindroseOptions_Click(sender As Object, e As EventArgs) Handles cmdWindroseOptions.Click
+        sdgWindrose.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubDialog)
+        bResetSubDialog = False
+        sdgWindrose.ShowDialog()
     End Sub
 
     Private Sub GetMaxValue()
@@ -131,14 +126,20 @@ Public Class dlgWindrose
         ucrNudNoOfColumns.Maximum = iColMax
     End Sub
 
+    Private Sub ucrReceiverFacet_ControlValueChanged() Handles ucrReceiverFacet.ControlValueChanged
+        GetMaxValue()
+        If ucrReceiverFacet.IsEmpty Then
+            ucrNudNoOfColumns.Visible = False
+        Else
+            ucrNudNoOfColumns.Visible = True
+        End If
+    End Sub
+
     Private Sub ucrWindRoseSelector_DataFrameChanged() Handles ucrWindRoseSelector.ControlValueChanged
         clsFactorColumn.AddParameter("data_name", Chr(34) & ucrWindRoseSelector.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
     End Sub
 
-    Private Sub cmdWindroseOptions_Click(sender As Object, e As EventArgs) Handles cmdWindroseOptions.Click
-        sdgWindrose.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubDialog)
-        bResetSubDialog = False
-        sdgWindrose.ShowDialog()
+    Private Sub ucrReceiverWindSpeed_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWindSpeed.ControlContentsChanged, ucrReceiverWindDirection.ControlContentsChanged, ucrNudNoOfColumns.ControlContentsChanged, ucrReceiverFacet.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
+        TestOkEnabled()
     End Sub
-
 End Class

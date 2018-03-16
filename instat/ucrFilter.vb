@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class ucrFilter
@@ -48,7 +48,7 @@ Public Class ucrFilter
         End If
         ClearConditions()
         If strDefaultDataFrame <> "" Then
-            ucrSelectorForFitler.SetDataframe(strDefaultDataFrame)
+            ucrSelectorForFitler.SetDataframe(strDefaultDataFrame, False)
         End If
         If strDefaultColumn <> "" Then
             ucrFilterByReceiver.Add(strDefaultColumn)
@@ -60,8 +60,11 @@ Public Class ucrFilter
         ucrFilterPreview.txtInput.ReadOnly = True
         ucrFilterByReceiver.Selector = ucrSelectorForFitler
         ucrFilterOperation.SetItems({"==", "<", "<=", ">", ">=", "!="})
+        ucrFilterOperation.SetDropDownStyleAsNonEditable()
         ucrFactorLevels.SetAsMultipleSelector()
         ucrFactorLevels.SetReceiver(ucrFilterByReceiver)
+        ucrFactorLevels.SetIncludeLevels(False)
+        ucrFactorLevels.bIncludeNA = True
         clsFilterView.bForceIncludeOperation = False
         lstFilters.Columns.Add("Variable")
         lstFilters.Columns.Add("Condition")
@@ -69,6 +72,7 @@ Public Class ucrFilter
         ucrInputFilterName.SetDataFrameSelector(ucrSelectorForFitler.ucrAvailableDataFrames)
         ucrInputFilterName.SetPrefix("Filter")
         ucrInputFilterName.SetDefaultTypeAsFilter()
+        ucrSelectorForFitler.btnDataOptions.Visible = False
     End Sub
 
     Private Sub SetDefaults()
@@ -161,10 +165,10 @@ Public Class ucrFilter
 
     Private Sub SetToggleButtonSettings()
         If ucrFactorLevels.IsAllSelected() Then
-            cmdToggleSelectAll.Text = "Deselect All"
+            cmdToggleSelectAll.Text = "Deselect All Levels"
             cmdToggleSelectAll.FlatStyle = FlatStyle.Flat
         Else
-            cmdToggleSelectAll.Text = "Select All"
+            cmdToggleSelectAll.Text = "Select All Levels"
             cmdToggleSelectAll.FlatStyle = FlatStyle.Popup
         End If
     End Sub
@@ -204,10 +208,12 @@ Public Class ucrFilter
     End Sub
 
     Private Sub ucrInputFilterName_NameChanged() Handles ucrInputFilterName.NameChanged
-        If Not ucrInputFilterName.IsEmpty() Then
-            clsFilterFunction.AddParameter("filter_name", Chr(34) & ucrInputFilterName.GetText() & Chr(34))
-        Else
-            clsFilterFunction.RemoveParameterByName("filter_name")
+        If clsFilterFunction IsNot Nothing Then
+            If Not ucrInputFilterName.IsEmpty() Then
+                clsFilterFunction.AddParameter("filter_name", Chr(34) & ucrInputFilterName.GetText() & Chr(34))
+            Else
+                clsFilterFunction.RemoveParameterByName("filter_name")
+            End If
         End If
     End Sub
 

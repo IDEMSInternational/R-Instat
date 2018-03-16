@@ -12,4 +12,94 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="cmdOk.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>0, 26</value>
+  </data>
+  <data name="cmdOk.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="cmdOk.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="cmdOk.Text" xml:space="preserve">
+    <value>Sawa</value>
+  </data>
+  <data name="cmdCancel.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>160, 26</value>
+  </data>
+  <data name="cmdCancel.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="cmdCancel.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="cmdCancel.Text" xml:space="preserve">
+    <value>Funga</value>
+  </data>
+  <data name="cmdReset.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>79, 26</value>
+  </data>
+  <data name="cmdReset.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="cmdReset.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="cmdReset.Text" xml:space="preserve">
+    <value>Weka upya</value>
+  </data>
+  <data name="cmdHelp.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>241, 26</value>
+  </data>
+  <data name="cmdHelp.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="cmdHelp.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="cmdHelp.Text" xml:space="preserve">
+    <value>Msaada</value>
+  </data>
+  <data name="cmdPaste.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>323, 26</value>
+  </data>
+  <data name="cmdPaste.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="cmdPaste.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="chkComment.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkComment.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>0, 3</value>
+  </data>
+  <data name="chkComment.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>73, 17</value>
+  </data>
+  <data name="chkComment.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="chkComment.Text" xml:space="preserve">
+    <value>Maoni:</value>
+  </data>
+  <data name="txtComment.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>82, 1</value>
+  </data>
+  <data name="txtComment.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>316, 20</value>
+  </data>
+  <data name="txtComment.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" xml:space="preserve" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>410, 52</value>
+  </data>
+  <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

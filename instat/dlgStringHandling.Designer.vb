@@ -1,9 +1,25 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgStringHandling
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,203 +36,393 @@ Partial Class dlgStringHandling
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectorStringHandling = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrInputPattern = New instat.ucrInputTextBox()
-        Me.ucrSave = New instat.ucrSave()
-        Me.ucrInputReplaceBy = New instat.ucrInputTextBox()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgStringHandling))
         Me.lblColumn = New System.Windows.Forms.Label()
-        Me.lblRepalceBy = New System.Windows.Forms.Label()
+        Me.lblReplaceBy = New System.Windows.Forms.Label()
         Me.lblPattern = New System.Windows.Forms.Label()
-        Me.ucrReceiverStringHandling = New instat.ucrReceiverSingle()
         Me.rdoCount = New System.Windows.Forms.RadioButton()
         Me.rdoReplace = New System.Windows.Forms.RadioButton()
         Me.rdoLocate = New System.Windows.Forms.RadioButton()
         Me.rdoExtract = New System.Windows.Forms.RadioButton()
         Me.rdoDetect = New System.Windows.Forms.RadioButton()
+        Me.rdoReplaceAll = New System.Windows.Forms.RadioButton()
+        Me.grpRegex = New System.Windows.Forms.GroupBox()
+        Me.cmdClear = New System.Windows.Forms.Button()
+        Me.cmdBackSlash = New System.Windows.Forms.Button()
+        Me.cmdWBackSlash = New System.Windows.Forms.Button()
+        Me.cmdDollarSign = New System.Windows.Forms.Button()
+        Me.cmdOpenCloseParenthesis = New System.Windows.Forms.Button()
+        Me.cmdBackSlashd = New System.Windows.Forms.Button()
+        Me.cmdBackSlashs = New System.Windows.Forms.Button()
+        Me.cmdPower = New System.Windows.Forms.Button()
+        Me.cmdOpenBracketCaretClosedBracket = New System.Windows.Forms.Button()
+        Me.cmdPlus = New System.Windows.Forms.Button()
+        Me.cmdBackSlashw = New System.Windows.Forms.Button()
+        Me.cmdMultiply = New System.Windows.Forms.Button()
+        Me.cmdOpenCloseBrace = New System.Windows.Forms.Button()
+        Me.cmdOpenClosedBracket = New System.Windows.Forms.Button()
+        Me.cmdSingleQuote = New System.Windows.Forms.Button()
+        Me.cmdQuote = New System.Windows.Forms.Button()
+        Me.cmdQuestionMark = New System.Windows.Forms.Button()
+        Me.cmdDBackSlah = New System.Windows.Forms.Button()
+        Me.cmdStar = New System.Windows.Forms.Button()
+        Me.cmdBbackSlash = New System.Windows.Forms.Button()
+        Me.cmdBackSlashb = New System.Windows.Forms.Button()
+        Me.cmdSbackSlash = New System.Windows.Forms.Button()
+        Me.cmdOr = New System.Windows.Forms.Button()
+        Me.rdoFixed = New System.Windows.Forms.RadioButton()
+        Me.rdoRegex = New System.Windows.Forms.RadioButton()
+        Me.ucrSaveStringHandling = New instat.ucrSave()
+        Me.ucrReceiverForRegexExpression = New instat.ucrReceiverExpression()
+        Me.ucrPnlFixedRegex = New instat.UcrPanel()
+        Me.ucrChkIncludeRegularExpressions = New instat.ucrCheck()
+        Me.ucrReceiverStringHandling = New instat.ucrReceiverSingle()
+        Me.ucrInputReplaceBy = New instat.ucrInputTextBox()
+        Me.ucrInputPattern = New instat.ucrInputTextBox()
+        Me.ucrSelectorStringHandling = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlStringHandling = New instat.UcrPanel()
+        Me.grpRegex.SuspendLayout()
         Me.SuspendLayout()
         '
-        'ucrBase
+        'lblColumn
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 295)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 0
+        resources.ApplyResources(Me.lblColumn, "lblColumn")
+        Me.lblColumn.Name = "lblColumn"
         '
-        'ucrSelectorStringHandling
+        'lblReplaceBy
         '
-        Me.ucrSelectorStringHandling.bShowHiddenColumns = False
-        Me.ucrSelectorStringHandling.bUseCurrentFilter = True
-        Me.ucrSelectorStringHandling.Location = New System.Drawing.Point(10, 55)
-        Me.ucrSelectorStringHandling.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorStringHandling.Name = "ucrSelectorStringHandling"
-        Me.ucrSelectorStringHandling.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorStringHandling.TabIndex = 2
+        resources.ApplyResources(Me.lblReplaceBy, "lblReplaceBy")
+        Me.lblReplaceBy.Name = "lblReplaceBy"
         '
-        'ucrInputPattern
+        'lblPattern
         '
-        Me.ucrInputPattern.AddQuotesIfUnrecognised = True
-        Me.ucrInputPattern.IsMultiline = False
-        Me.ucrInputPattern.IsReadOnly = False
-        Me.ucrInputPattern.Location = New System.Drawing.Point(240, 142)
-        Me.ucrInputPattern.Name = "ucrInputPattern"
-        Me.ucrInputPattern.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputPattern.TabIndex = 4
+        resources.ApplyResources(Me.lblPattern, "lblPattern")
+        Me.lblPattern.Name = "lblPattern"
         '
-        'ucrSave
+        'rdoCount
         '
-        Me.ucrSave.Location = New System.Drawing.Point(10, 260)
-        Me.ucrSave.Name = "ucrSave"
-        Me.ucrSave.Size = New System.Drawing.Size(406, 24)
-        Me.ucrSave.TabIndex = 5
+        resources.ApplyResources(Me.rdoCount, "rdoCount")
+        Me.rdoCount.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoCount.FlatAppearance.BorderSize = 2
+        Me.rdoCount.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoCount.Name = "rdoCount"
+        Me.rdoCount.TabStop = True
+        Me.rdoCount.UseVisualStyleBackColor = True
+        '
+        'rdoReplace
+        '
+        resources.ApplyResources(Me.rdoReplace, "rdoReplace")
+        Me.rdoReplace.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoReplace.FlatAppearance.BorderSize = 2
+        Me.rdoReplace.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoReplace.Name = "rdoReplace"
+        Me.rdoReplace.TabStop = True
+        Me.rdoReplace.UseVisualStyleBackColor = True
+        '
+        'rdoLocate
+        '
+        resources.ApplyResources(Me.rdoLocate, "rdoLocate")
+        Me.rdoLocate.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoLocate.FlatAppearance.BorderSize = 2
+        Me.rdoLocate.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoLocate.Name = "rdoLocate"
+        Me.rdoLocate.TabStop = True
+        Me.rdoLocate.UseVisualStyleBackColor = True
+        '
+        'rdoExtract
+        '
+        resources.ApplyResources(Me.rdoExtract, "rdoExtract")
+        Me.rdoExtract.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoExtract.FlatAppearance.BorderSize = 2
+        Me.rdoExtract.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoExtract.Name = "rdoExtract"
+        Me.rdoExtract.TabStop = True
+        Me.rdoExtract.UseVisualStyleBackColor = True
+        '
+        'rdoDetect
+        '
+        resources.ApplyResources(Me.rdoDetect, "rdoDetect")
+        Me.rdoDetect.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDetect.FlatAppearance.BorderSize = 2
+        Me.rdoDetect.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDetect.Name = "rdoDetect"
+        Me.rdoDetect.TabStop = True
+        Me.rdoDetect.UseVisualStyleBackColor = True
+        '
+        'rdoReplaceAll
+        '
+        resources.ApplyResources(Me.rdoReplaceAll, "rdoReplaceAll")
+        Me.rdoReplaceAll.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoReplaceAll.FlatAppearance.BorderSize = 2
+        Me.rdoReplaceAll.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoReplaceAll.Name = "rdoReplaceAll"
+        Me.rdoReplaceAll.TabStop = True
+        Me.rdoReplaceAll.UseVisualStyleBackColor = True
+        '
+        'grpRegex
+        '
+        Me.grpRegex.Controls.Add(Me.cmdClear)
+        Me.grpRegex.Controls.Add(Me.cmdBackSlash)
+        Me.grpRegex.Controls.Add(Me.cmdWBackSlash)
+        Me.grpRegex.Controls.Add(Me.cmdDollarSign)
+        Me.grpRegex.Controls.Add(Me.cmdOpenCloseParenthesis)
+        Me.grpRegex.Controls.Add(Me.cmdBackSlashd)
+        Me.grpRegex.Controls.Add(Me.cmdBackSlashs)
+        Me.grpRegex.Controls.Add(Me.cmdPower)
+        Me.grpRegex.Controls.Add(Me.cmdOpenBracketCaretClosedBracket)
+        Me.grpRegex.Controls.Add(Me.cmdPlus)
+        Me.grpRegex.Controls.Add(Me.cmdBackSlashw)
+        Me.grpRegex.Controls.Add(Me.cmdMultiply)
+        Me.grpRegex.Controls.Add(Me.cmdOpenCloseBrace)
+        Me.grpRegex.Controls.Add(Me.cmdOpenClosedBracket)
+        Me.grpRegex.Controls.Add(Me.cmdSingleQuote)
+        Me.grpRegex.Controls.Add(Me.cmdQuote)
+        Me.grpRegex.Controls.Add(Me.cmdQuestionMark)
+        Me.grpRegex.Controls.Add(Me.cmdDBackSlah)
+        Me.grpRegex.Controls.Add(Me.cmdStar)
+        Me.grpRegex.Controls.Add(Me.cmdBbackSlash)
+        Me.grpRegex.Controls.Add(Me.cmdBackSlashb)
+        Me.grpRegex.Controls.Add(Me.cmdSbackSlash)
+        Me.grpRegex.Controls.Add(Me.cmdOr)
+        resources.ApplyResources(Me.grpRegex, "grpRegex")
+        Me.grpRegex.Name = "grpRegex"
+        Me.grpRegex.TabStop = False
+        '
+        'cmdClear
+        '
+        resources.ApplyResources(Me.cmdClear, "cmdClear")
+        Me.cmdClear.Name = "cmdClear"
+        Me.cmdClear.UseVisualStyleBackColor = True
+        '
+        'cmdBackSlash
+        '
+        resources.ApplyResources(Me.cmdBackSlash, "cmdBackSlash")
+        Me.cmdBackSlash.Name = "cmdBackSlash"
+        Me.cmdBackSlash.UseVisualStyleBackColor = True
+        '
+        'cmdWBackSlash
+        '
+        resources.ApplyResources(Me.cmdWBackSlash, "cmdWBackSlash")
+        Me.cmdWBackSlash.Name = "cmdWBackSlash"
+        Me.cmdWBackSlash.UseVisualStyleBackColor = True
+        '
+        'cmdDollarSign
+        '
+        resources.ApplyResources(Me.cmdDollarSign, "cmdDollarSign")
+        Me.cmdDollarSign.Name = "cmdDollarSign"
+        Me.cmdDollarSign.UseVisualStyleBackColor = True
+        '
+        'cmdOpenCloseParenthesis
+        '
+        resources.ApplyResources(Me.cmdOpenCloseParenthesis, "cmdOpenCloseParenthesis")
+        Me.cmdOpenCloseParenthesis.Name = "cmdOpenCloseParenthesis"
+        Me.cmdOpenCloseParenthesis.UseVisualStyleBackColor = True
+        '
+        'cmdBackSlashd
+        '
+        resources.ApplyResources(Me.cmdBackSlashd, "cmdBackSlashd")
+        Me.cmdBackSlashd.Name = "cmdBackSlashd"
+        Me.cmdBackSlashd.UseVisualStyleBackColor = True
+        '
+        'cmdBackSlashs
+        '
+        resources.ApplyResources(Me.cmdBackSlashs, "cmdBackSlashs")
+        Me.cmdBackSlashs.Name = "cmdBackSlashs"
+        Me.cmdBackSlashs.Tag = "Del"
+        Me.cmdBackSlashs.UseVisualStyleBackColor = True
+        '
+        'cmdPower
+        '
+        resources.ApplyResources(Me.cmdPower, "cmdPower")
+        Me.cmdPower.Name = "cmdPower"
+        Me.cmdPower.UseVisualStyleBackColor = True
+        '
+        'cmdOpenBracketCaretClosedBracket
+        '
+        resources.ApplyResources(Me.cmdOpenBracketCaretClosedBracket, "cmdOpenBracketCaretClosedBracket")
+        Me.cmdOpenBracketCaretClosedBracket.Name = "cmdOpenBracketCaretClosedBracket"
+        Me.cmdOpenBracketCaretClosedBracket.UseVisualStyleBackColor = True
+        '
+        'cmdPlus
+        '
+        resources.ApplyResources(Me.cmdPlus, "cmdPlus")
+        Me.cmdPlus.Name = "cmdPlus"
+        Me.cmdPlus.UseVisualStyleBackColor = True
+        '
+        'cmdBackSlashw
+        '
+        resources.ApplyResources(Me.cmdBackSlashw, "cmdBackSlashw")
+        Me.cmdBackSlashw.Name = "cmdBackSlashw"
+        Me.cmdBackSlashw.UseVisualStyleBackColor = True
+        '
+        'cmdMultiply
+        '
+        resources.ApplyResources(Me.cmdMultiply, "cmdMultiply")
+        Me.cmdMultiply.Name = "cmdMultiply"
+        Me.cmdMultiply.UseVisualStyleBackColor = True
+        '
+        'cmdOpenCloseBrace
+        '
+        resources.ApplyResources(Me.cmdOpenCloseBrace, "cmdOpenCloseBrace")
+        Me.cmdOpenCloseBrace.Name = "cmdOpenCloseBrace"
+        Me.cmdOpenCloseBrace.UseVisualStyleBackColor = True
+        '
+        'cmdOpenClosedBracket
+        '
+        resources.ApplyResources(Me.cmdOpenClosedBracket, "cmdOpenClosedBracket")
+        Me.cmdOpenClosedBracket.Name = "cmdOpenClosedBracket"
+        Me.cmdOpenClosedBracket.UseVisualStyleBackColor = True
+        '
+        'cmdSingleQuote
+        '
+        resources.ApplyResources(Me.cmdSingleQuote, "cmdSingleQuote")
+        Me.cmdSingleQuote.Name = "cmdSingleQuote"
+        Me.cmdSingleQuote.UseVisualStyleBackColor = True
+        '
+        'cmdQuote
+        '
+        resources.ApplyResources(Me.cmdQuote, "cmdQuote")
+        Me.cmdQuote.Name = "cmdQuote"
+        Me.cmdQuote.UseVisualStyleBackColor = True
+        '
+        'cmdQuestionMark
+        '
+        resources.ApplyResources(Me.cmdQuestionMark, "cmdQuestionMark")
+        Me.cmdQuestionMark.Name = "cmdQuestionMark"
+        Me.cmdQuestionMark.UseVisualStyleBackColor = True
+        '
+        'cmdDBackSlah
+        '
+        resources.ApplyResources(Me.cmdDBackSlah, "cmdDBackSlah")
+        Me.cmdDBackSlah.Name = "cmdDBackSlah"
+        Me.cmdDBackSlah.UseVisualStyleBackColor = True
+        '
+        'cmdStar
+        '
+        resources.ApplyResources(Me.cmdStar, "cmdStar")
+        Me.cmdStar.Name = "cmdStar"
+        Me.cmdStar.UseVisualStyleBackColor = True
+        '
+        'cmdBbackSlash
+        '
+        resources.ApplyResources(Me.cmdBbackSlash, "cmdBbackSlash")
+        Me.cmdBbackSlash.Name = "cmdBbackSlash"
+        Me.cmdBbackSlash.UseVisualStyleBackColor = True
+        '
+        'cmdBackSlashb
+        '
+        resources.ApplyResources(Me.cmdBackSlashb, "cmdBackSlashb")
+        Me.cmdBackSlashb.Name = "cmdBackSlashb"
+        Me.cmdBackSlashb.UseVisualStyleBackColor = True
+        '
+        'cmdSbackSlash
+        '
+        resources.ApplyResources(Me.cmdSbackSlash, "cmdSbackSlash")
+        Me.cmdSbackSlash.Name = "cmdSbackSlash"
+        Me.cmdSbackSlash.UseVisualStyleBackColor = True
+        '
+        'cmdOr
+        '
+        resources.ApplyResources(Me.cmdOr, "cmdOr")
+        Me.cmdOr.Name = "cmdOr"
+        Me.cmdOr.UseVisualStyleBackColor = True
+        '
+        'rdoFixed
+        '
+        resources.ApplyResources(Me.rdoFixed, "rdoFixed")
+        Me.rdoFixed.Name = "rdoFixed"
+        Me.rdoFixed.TabStop = True
+        Me.rdoFixed.UseVisualStyleBackColor = True
+        '
+        'rdoRegex
+        '
+        resources.ApplyResources(Me.rdoRegex, "rdoRegex")
+        Me.rdoRegex.Name = "rdoRegex"
+        Me.rdoRegex.TabStop = True
+        Me.rdoRegex.UseVisualStyleBackColor = True
+        '
+        'ucrSaveStringHandling
+        '
+        resources.ApplyResources(Me.ucrSaveStringHandling, "ucrSaveStringHandling")
+        Me.ucrSaveStringHandling.Name = "ucrSaveStringHandling"
+        '
+        'ucrReceiverForRegexExpression
+        '
+        Me.ucrReceiverForRegexExpression.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverForRegexExpression, "ucrReceiverForRegexExpression")
+        Me.ucrReceiverForRegexExpression.Name = "ucrReceiverForRegexExpression"
+        Me.ucrReceiverForRegexExpression.Selector = Nothing
+        Me.ucrReceiverForRegexExpression.strNcFilePath = ""
+        Me.ucrReceiverForRegexExpression.ucrSelector = Nothing
+        '
+        'ucrPnlFixedRegex
+        '
+        resources.ApplyResources(Me.ucrPnlFixedRegex, "ucrPnlFixedRegex")
+        Me.ucrPnlFixedRegex.Name = "ucrPnlFixedRegex"
+        '
+        'ucrChkIncludeRegularExpressions
+        '
+        Me.ucrChkIncludeRegularExpressions.Checked = False
+        resources.ApplyResources(Me.ucrChkIncludeRegularExpressions, "ucrChkIncludeRegularExpressions")
+        Me.ucrChkIncludeRegularExpressions.Name = "ucrChkIncludeRegularExpressions"
+        '
+        'ucrReceiverStringHandling
+        '
+        Me.ucrReceiverStringHandling.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverStringHandling, "ucrReceiverStringHandling")
+        Me.ucrReceiverStringHandling.Name = "ucrReceiverStringHandling"
+        Me.ucrReceiverStringHandling.Selector = Nothing
+        Me.ucrReceiverStringHandling.strNcFilePath = ""
+        Me.ucrReceiverStringHandling.ucrSelector = Nothing
         '
         'ucrInputReplaceBy
         '
         Me.ucrInputReplaceBy.AddQuotesIfUnrecognised = True
         Me.ucrInputReplaceBy.IsMultiline = False
         Me.ucrInputReplaceBy.IsReadOnly = False
-        Me.ucrInputReplaceBy.Location = New System.Drawing.Point(241, 192)
+        resources.ApplyResources(Me.ucrInputReplaceBy, "ucrInputReplaceBy")
         Me.ucrInputReplaceBy.Name = "ucrInputReplaceBy"
-        Me.ucrInputReplaceBy.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputReplaceBy.TabIndex = 6
         '
-        'lblColumn
+        'ucrInputPattern
         '
-        Me.lblColumn.AutoSize = True
-        Me.lblColumn.Location = New System.Drawing.Point(237, 78)
-        Me.lblColumn.Name = "lblColumn"
-        Me.lblColumn.Size = New System.Drawing.Size(42, 13)
-        Me.lblColumn.TabIndex = 7
-        Me.lblColumn.Text = "Column"
+        Me.ucrInputPattern.AddQuotesIfUnrecognised = True
+        Me.ucrInputPattern.IsMultiline = False
+        Me.ucrInputPattern.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputPattern, "ucrInputPattern")
+        Me.ucrInputPattern.Name = "ucrInputPattern"
         '
-        'lblRepalceBy
+        'ucrSelectorStringHandling
         '
-        Me.lblRepalceBy.AutoSize = True
-        Me.lblRepalceBy.Location = New System.Drawing.Point(238, 176)
-        Me.lblRepalceBy.Name = "lblRepalceBy"
-        Me.lblRepalceBy.Size = New System.Drawing.Size(59, 13)
-        Me.lblRepalceBy.TabIndex = 8
-        Me.lblRepalceBy.Text = "ReplaceBy"
+        Me.ucrSelectorStringHandling.bShowHiddenColumns = False
+        Me.ucrSelectorStringHandling.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorStringHandling, "ucrSelectorStringHandling")
+        Me.ucrSelectorStringHandling.Name = "ucrSelectorStringHandling"
         '
-        'lblPattern
+        'ucrBase
         '
-        Me.lblPattern.AutoSize = True
-        Me.lblPattern.Location = New System.Drawing.Point(238, 126)
-        Me.lblPattern.Name = "lblPattern"
-        Me.lblPattern.Size = New System.Drawing.Size(41, 13)
-        Me.lblPattern.TabIndex = 9
-        Me.lblPattern.Text = "Pattern"
-        '
-        'ucrReceiverStringHandling
-        '
-        Me.ucrReceiverStringHandling.frmParent = Me
-        Me.ucrReceiverStringHandling.Location = New System.Drawing.Point(240, 91)
-        Me.ucrReceiverStringHandling.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverStringHandling.Name = "ucrReceiverStringHandling"
-        Me.ucrReceiverStringHandling.Selector = Nothing
-        Me.ucrReceiverStringHandling.Size = New System.Drawing.Size(138, 20)
-        Me.ucrReceiverStringHandling.TabIndex = 10
-        '
-        'rdoCount
-        '
-        Me.rdoCount.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoCount.AutoSize = True
-        Me.rdoCount.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoCount.FlatAppearance.BorderSize = 2
-        Me.rdoCount.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoCount.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoCount.Location = New System.Drawing.Point(102, 12)
-        Me.rdoCount.Name = "rdoCount"
-        Me.rdoCount.Size = New System.Drawing.Size(49, 27)
-        Me.rdoCount.TabIndex = 11
-        Me.rdoCount.TabStop = True
-        Me.rdoCount.Text = "Count"
-        Me.rdoCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoCount.UseVisualStyleBackColor = True
-        '
-        'rdoReplace
-        '
-        Me.rdoReplace.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoReplace.AutoSize = True
-        Me.rdoReplace.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoReplace.FlatAppearance.BorderSize = 2
-        Me.rdoReplace.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoReplace.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoReplace.Location = New System.Drawing.Point(303, 12)
-        Me.rdoReplace.Name = "rdoReplace"
-        Me.rdoReplace.Size = New System.Drawing.Size(61, 27)
-        Me.rdoReplace.TabIndex = 12
-        Me.rdoReplace.TabStop = True
-        Me.rdoReplace.Text = "Replace"
-        Me.rdoReplace.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoReplace.UseVisualStyleBackColor = True
-        '
-        'rdoLocate
-        '
-        Me.rdoLocate.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoLocate.AutoSize = True
-        Me.rdoLocate.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoLocate.FlatAppearance.BorderSize = 2
-        Me.rdoLocate.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoLocate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoLocate.Location = New System.Drawing.Point(251, 12)
-        Me.rdoLocate.Name = "rdoLocate"
-        Me.rdoLocate.Size = New System.Drawing.Size(54, 27)
-        Me.rdoLocate.TabIndex = 13
-        Me.rdoLocate.TabStop = True
-        Me.rdoLocate.Text = "Locate"
-        Me.rdoLocate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoLocate.UseVisualStyleBackColor = True
-        '
-        'rdoExtract
-        '
-        Me.rdoExtract.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoExtract.AutoSize = True
-        Me.rdoExtract.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoExtract.FlatAppearance.BorderSize = 2
-        Me.rdoExtract.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoExtract.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoExtract.Location = New System.Drawing.Point(199, 12)
-        Me.rdoExtract.Name = "rdoExtract"
-        Me.rdoExtract.Size = New System.Drawing.Size(54, 27)
-        Me.rdoExtract.TabIndex = 14
-        Me.rdoExtract.TabStop = True
-        Me.rdoExtract.Text = "Extract"
-        Me.rdoExtract.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoExtract.UseVisualStyleBackColor = True
-        '
-        'rdoDetect
-        '
-        Me.rdoDetect.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoDetect.AutoSize = True
-        Me.rdoDetect.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoDetect.FlatAppearance.BorderSize = 2
-        Me.rdoDetect.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoDetect.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoDetect.Location = New System.Drawing.Point(148, 12)
-        Me.rdoDetect.Name = "rdoDetect"
-        Me.rdoDetect.Size = New System.Drawing.Size(53, 27)
-        Me.rdoDetect.TabIndex = 15
-        Me.rdoDetect.TabStop = True
-        Me.rdoDetect.Text = "Detect"
-        Me.rdoDetect.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoDetect.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
         '
         'ucrPnlStringHandling
         '
-        Me.ucrPnlStringHandling.Location = New System.Drawing.Point(83, 1)
+        resources.ApplyResources(Me.ucrPnlStringHandling, "ucrPnlStringHandling")
         Me.ucrPnlStringHandling.Name = "ucrPnlStringHandling"
-        Me.ucrPnlStringHandling.Size = New System.Drawing.Size(281, 51)
-        Me.ucrPnlStringHandling.TabIndex = 16
         '
         'dlgStringHandling
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(428, 355)
+        Me.Controls.Add(Me.ucrSaveStringHandling)
+        Me.Controls.Add(Me.rdoRegex)
+        Me.Controls.Add(Me.rdoFixed)
+        Me.Controls.Add(Me.ucrReceiverForRegexExpression)
+        Me.Controls.Add(Me.ucrPnlFixedRegex)
+        Me.Controls.Add(Me.grpRegex)
+        Me.Controls.Add(Me.ucrChkIncludeRegularExpressions)
+        Me.Controls.Add(Me.rdoReplaceAll)
         Me.Controls.Add(Me.rdoDetect)
         Me.Controls.Add(Me.rdoExtract)
         Me.Controls.Add(Me.rdoLocate)
@@ -224,10 +430,9 @@ Partial Class dlgStringHandling
         Me.Controls.Add(Me.rdoCount)
         Me.Controls.Add(Me.ucrReceiverStringHandling)
         Me.Controls.Add(Me.lblPattern)
-        Me.Controls.Add(Me.lblRepalceBy)
+        Me.Controls.Add(Me.lblReplaceBy)
         Me.Controls.Add(Me.lblColumn)
         Me.Controls.Add(Me.ucrInputReplaceBy)
-        Me.Controls.Add(Me.ucrSave)
         Me.Controls.Add(Me.ucrInputPattern)
         Me.Controls.Add(Me.ucrSelectorStringHandling)
         Me.Controls.Add(Me.ucrBase)
@@ -236,8 +441,7 @@ Partial Class dlgStringHandling
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgStringHandling"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "String Handling"
+        Me.grpRegex.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -246,10 +450,9 @@ Partial Class dlgStringHandling
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSelectorStringHandling As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrInputPattern As ucrInputTextBox
-    Friend WithEvents ucrSave As ucrSave
     Friend WithEvents ucrInputReplaceBy As ucrInputTextBox
     Friend WithEvents lblColumn As Label
-    Friend WithEvents lblRepalceBy As Label
+    Friend WithEvents lblReplaceBy As Label
     Friend WithEvents lblPattern As Label
     Friend WithEvents ucrReceiverStringHandling As ucrReceiverSingle
     Friend WithEvents rdoDetect As RadioButton
@@ -258,4 +461,35 @@ Partial Class dlgStringHandling
     Friend WithEvents rdoReplace As RadioButton
     Friend WithEvents rdoCount As RadioButton
     Friend WithEvents ucrPnlStringHandling As UcrPanel
+    Friend WithEvents rdoReplaceAll As RadioButton
+    Friend WithEvents ucrChkIncludeRegularExpressions As ucrCheck
+    Friend WithEvents grpRegex As GroupBox
+    Friend WithEvents cmdOpenCloseParenthesis As Button
+    Friend WithEvents cmdBackSlashd As Button
+    Friend WithEvents cmdBackSlashs As Button
+    Friend WithEvents cmdPower As Button
+    Friend WithEvents cmdOpenBracketCaretClosedBracket As Button
+    Friend WithEvents cmdPlus As Button
+    Friend WithEvents cmdBackSlashw As Button
+    Friend WithEvents cmdMultiply As Button
+    Friend WithEvents cmdOpenCloseBrace As Button
+    Friend WithEvents cmdOpenClosedBracket As Button
+    Friend WithEvents cmdSingleQuote As Button
+    Friend WithEvents cmdQuote As Button
+    Friend WithEvents cmdQuestionMark As Button
+    Friend WithEvents cmdDBackSlah As Button
+    Friend WithEvents cmdStar As Button
+    Friend WithEvents cmdBbackSlash As Button
+    Friend WithEvents cmdBackSlashb As Button
+    Friend WithEvents cmdSbackSlash As Button
+    Friend WithEvents cmdOr As Button
+    Friend WithEvents cmdDollarSign As Button
+    Friend WithEvents cmdWBackSlash As Button
+    Friend WithEvents cmdBackSlash As Button
+    Friend WithEvents ucrReceiverForRegexExpression As ucrReceiverExpression
+    Friend WithEvents cmdClear As Button
+    Friend WithEvents rdoRegex As RadioButton
+    Friend WithEvents rdoFixed As RadioButton
+    Friend WithEvents ucrPnlFixedRegex As UcrPanel
+    Friend WithEvents ucrSaveStringHandling As ucrSave
 End Class

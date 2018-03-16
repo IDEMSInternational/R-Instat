@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgReorderColumns
     Inherits System.Windows.Forms.Form
 
@@ -22,70 +38,55 @@ Partial Class dlgReorderColumns
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgReorderColumns))
         Me.lblColumns = New System.Windows.Forms.Label()
         Me.ucrReorderColumns = New instat.ucrReorder()
-        Me.ucrBase = New instat.ucrButtons()
         Me.ucrDataFrameSelect = New instat.ucrDataFrame()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
         'lblColumns
         '
-        Me.lblColumns.AutoSize = True
-        Me.lblColumns.Location = New System.Drawing.Point(207, 33)
+        resources.ApplyResources(Me.lblColumns, "lblColumns")
         Me.lblColumns.Name = "lblColumns"
-        Me.lblColumns.Size = New System.Drawing.Size(103, 13)
-        Me.lblColumns.TabIndex = 11
-        Me.lblColumns.Text = "Columns to Reorder:"
         '
         'ucrReorderColumns
         '
-        Me.ucrReorderColumns.Location = New System.Drawing.Point(201, 45)
+        resources.ApplyResources(Me.ucrReorderColumns, "ucrReorderColumns")
         Me.ucrReorderColumns.Name = "ucrReorderColumns"
-        Me.ucrReorderColumns.Size = New System.Drawing.Size(154, 139)
-        Me.ucrReorderColumns.TabIndex = 13
         Me.ucrReorderColumns.ucrDataFrameList = Nothing
         Me.ucrReorderColumns.ucrReceiver = Nothing
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ucrBase.Location = New System.Drawing.Point(10, 192)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 10
         '
         'ucrDataFrameSelect
         '
         Me.ucrDataFrameSelect.bUseCurrentFilter = True
-        Me.ucrDataFrameSelect.Location = New System.Drawing.Point(10, 10)
-        Me.ucrDataFrameSelect.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrDataFrameSelect, "ucrDataFrameSelect")
         Me.ucrDataFrameSelect.Name = "ucrDataFrameSelect"
-        Me.ucrDataFrameSelect.Size = New System.Drawing.Size(120, 40)
-        Me.ucrDataFrameSelect.TabIndex = 14
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
         '
         'dlgReorderColumns
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 245)
-        Me.Controls.Add(Me.ucrDataFrameSelect)
-        Me.Controls.Add(Me.ucrReorderColumns)
-        Me.Controls.Add(Me.lblColumns)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.ucrReorderColumns)
+        Me.Controls.Add(Me.ucrDataFrameSelect)
+        Me.Controls.Add(Me.lblColumns)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgReorderColumns"
         Me.ShowIcon = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Reorder Columns"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents lblColumns As Label
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrReorderColumns As ucrReorder
     Friend WithEvents ucrDataFrameSelect As ucrDataFrame
+    Friend WithEvents ucrReorderColumns As ucrReorder
 End Class

@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Imports RDotNet
 
@@ -23,11 +24,13 @@ Public Class dlgCalculator
     Dim clsDetach As New RFunction
     Public bFirstLoad As Boolean = True
     Public iHelpCalcID As Integer
+    Private iBasicWidth As Integer
 
     Private Sub dlgCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
+            iBasicWidth = Me.Width
             SetDefaults()
             bFirstLoad = False
         Else
@@ -50,16 +53,12 @@ Public Class dlgCalculator
 
     Private Sub SetDefaults()
         ucrCalc.ucrSaveResultInto.SetPrefix("Calc")
-        ucrCalc.ucrSaveResultInto.Reset()
-        ucrCalc.ucrInputCalOptions.Reset()
-        ucrCalc.ucrSelectorForCalculations.Reset()
         ucrCalc.ucrInputCalOptions.SetName("Basic")
+        ucrCalc.Reset()
         ucrCalc.chkShowArguments.Checked = False
         ucrCalc.chkSaveResultInto.Checked = True
         SaveResults()
         ucrCalc.ucrSelectorForCalculations.bUseCurrentFilter = False
-        ucrCalc.cmdDoy.Enabled = False
-        ucrCalc.cmdDek.Enabled = False
         ucrBase.Visible = True
     End Sub
 
@@ -123,7 +122,7 @@ Public Class dlgCalculator
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs)
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         TestOKEnabled()
     End Sub
@@ -135,21 +134,21 @@ Public Class dlgCalculator
     Private Sub CalculationsOptions()
         Select Case ucrCalc.ucrInputCalOptions.GetText
             Case "Maths"
-                Me.Size = New System.Drawing.Size(680, 435)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.38, Me.Height)
             Case "Logical and Symbols"
-                Me.Size = New System.Drawing.Size(627, 435)
-            Case "Statistics"
-                Me.Size = New System.Drawing.Size(588, 435)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.46, Me.Height)
+            Case "Summary"
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.49, Me.Height)
             Case "Strings (Character Columns)"
-                Me.Size = New System.Drawing.Size(630, 435)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.41, Me.Height)
             Case "Probability"
-                Me.Size = New System.Drawing.Size(810, 435)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.59, Me.Height)
             Case "Dates"
-                Me.Size = New System.Drawing.Size(660, 435)
-            Case "Rows"
-                Me.Size = New System.Drawing.Size(615, 435)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.3, Me.Height)
+            Case "Transform"
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.35, Me.Height)
             Case Else
-                Me.Size = New System.Drawing.Size(510, 435)
+                Me.Size = New System.Drawing.Size(iBasicWidth, Me.Height)
         End Select
     End Sub
 

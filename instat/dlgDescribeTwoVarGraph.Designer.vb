@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgDescribeTwoVarGraph
     Inherits System.Windows.Forms.Form
 
@@ -22,96 +38,88 @@ Partial Class dlgDescribeTwoVarGraph
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgDescribeTwoVarGraph))
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.lblSecondVariable = New System.Windows.Forms.Label()
         Me.lblFirstVariables = New System.Windows.Forms.Label()
-        Me.ucrSecondVariableReceiver = New instat.ucrReceiverSingle()
-        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrFlipCoordinates = New instat.ucrCheck()
+        Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrReceiverMultipleTwoVar = New instat.ucrVariablesAsFactor()
-        Me.ucrTwoVarGraphSave = New instat.ucrSaveGraph()
+        Me.ucrSecondVariableReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorTwoVarGraph = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(280, 224)
+        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(101, 23)
-        Me.cmdOptions.TabIndex = 11
         Me.cmdOptions.Tag = "Options..."
-        Me.cmdOptions.Text = "Options..."
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'lblSecondVariable
         '
-        Me.lblSecondVariable.AutoSize = True
-        Me.lblSecondVariable.Location = New System.Drawing.Point(260, 176)
+        resources.ApplyResources(Me.lblSecondVariable, "lblSecondVariable")
         Me.lblSecondVariable.Name = "lblSecondVariable"
-        Me.lblSecondVariable.Size = New System.Drawing.Size(88, 13)
-        Me.lblSecondVariable.TabIndex = 14
-        Me.lblSecondVariable.Text = "Second Variable:"
         '
         'lblFirstVariables
         '
-        Me.lblFirstVariables.AutoSize = True
-        Me.lblFirstVariables.Location = New System.Drawing.Point(282, 42)
+        resources.ApplyResources(Me.lblFirstVariables, "lblFirstVariables")
         Me.lblFirstVariables.Name = "lblFirstVariables"
-        Me.lblFirstVariables.Size = New System.Drawing.Size(78, 13)
-        Me.lblFirstVariables.TabIndex = 16
         Me.lblFirstVariables.Tag = "First_Variable(s)"
-        Me.lblFirstVariables.Text = "First Variable(s)"
         '
-        'ucrSecondVariableReceiver
+        'ucrFlipCoordinates
         '
-        Me.ucrSecondVariableReceiver.Location = New System.Drawing.Point(261, 191)
-        Me.ucrSecondVariableReceiver.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSecondVariableReceiver.Name = "ucrSecondVariableReceiver"
-        Me.ucrSecondVariableReceiver.Selector = Nothing
-        Me.ucrSecondVariableReceiver.Size = New System.Drawing.Size(120, 20)
-        Me.ucrSecondVariableReceiver.TabIndex = 13
+        Me.ucrFlipCoordinates.Checked = False
+        resources.ApplyResources(Me.ucrFlipCoordinates, "ucrFlipCoordinates")
+        Me.ucrFlipCoordinates.Name = "ucrFlipCoordinates"
         '
-        'ucrBase
+        'ucrSaveGraph
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 253)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 0
+        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
         '
         'ucrReceiverMultipleTwoVar
         '
-        Me.ucrReceiverMultipleTwoVar.Location = New System.Drawing.Point(261, 35)
+        Me.ucrReceiverMultipleTwoVar.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverMultipleTwoVar, "ucrReceiverMultipleTwoVar")
         Me.ucrReceiverMultipleTwoVar.Name = "ucrReceiverMultipleTwoVar"
-        Me.ucrReceiverMultipleTwoVar.Size = New System.Drawing.Size(120, 143)
-        Me.ucrReceiverMultipleTwoVar.TabIndex = 15
+        Me.ucrReceiverMultipleTwoVar.Selector = Nothing
+        Me.ucrReceiverMultipleTwoVar.strNcFilePath = ""
+        Me.ucrReceiverMultipleTwoVar.ucrSelector = Nothing
         Me.ucrReceiverMultipleTwoVar.ucrVariableSelector = Nothing
         '
-        'ucrTwoVarGraphSave
+        'ucrSecondVariableReceiver
         '
-        Me.ucrTwoVarGraphSave.Location = New System.Drawing.Point(12, 227)
-        Me.ucrTwoVarGraphSave.Name = "ucrTwoVarGraphSave"
-        Me.ucrTwoVarGraphSave.Size = New System.Drawing.Size(265, 20)
-        Me.ucrTwoVarGraphSave.TabIndex = 12
+        Me.ucrSecondVariableReceiver.frmParent = Me
+        resources.ApplyResources(Me.ucrSecondVariableReceiver, "ucrSecondVariableReceiver")
+        Me.ucrSecondVariableReceiver.Name = "ucrSecondVariableReceiver"
+        Me.ucrSecondVariableReceiver.Selector = Nothing
+        Me.ucrSecondVariableReceiver.strNcFilePath = ""
+        Me.ucrSecondVariableReceiver.ucrSelector = Nothing
         '
         'ucrSelectorTwoVarGraph
         '
         Me.ucrSelectorTwoVarGraph.bShowHiddenColumns = False
         Me.ucrSelectorTwoVarGraph.bUseCurrentFilter = True
-        Me.ucrSelectorTwoVarGraph.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorTwoVarGraph.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorTwoVarGraph, "ucrSelectorTwoVarGraph")
         Me.ucrSelectorTwoVarGraph.Name = "ucrSelectorTwoVarGraph"
-        Me.ucrSelectorTwoVarGraph.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorTwoVarGraph.TabIndex = 8
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
         '
         'dlgDescribeTwoVarGraph
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(427, 314)
+        Me.Controls.Add(Me.ucrFlipCoordinates)
+        Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.lblFirstVariables)
         Me.Controls.Add(Me.ucrReceiverMultipleTwoVar)
         Me.Controls.Add(Me.lblSecondVariable)
         Me.Controls.Add(Me.ucrSecondVariableReceiver)
-        Me.Controls.Add(Me.ucrTwoVarGraphSave)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrSelectorTwoVarGraph)
         Me.Controls.Add(Me.ucrBase)
@@ -119,19 +127,18 @@ Partial Class dlgDescribeTwoVarGraph
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDescribeTwoVarGraph"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Two Variable Graph"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrTwoVarGraphSave As ucrSaveGraph
     Friend WithEvents cmdOptions As Button
     Friend WithEvents ucrSelectorTwoVarGraph As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrSecondVariableReceiver As ucrReceiverSingle
     Friend WithEvents lblSecondVariable As Label
     Friend WithEvents ucrReceiverMultipleTwoVar As ucrVariablesAsFactor
     Friend WithEvents lblFirstVariables As Label
+    Friend WithEvents ucrSaveGraph As ucrSave
+    Friend WithEvents ucrFlipCoordinates As ucrCheck
 End Class

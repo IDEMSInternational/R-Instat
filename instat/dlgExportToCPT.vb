@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports System.IO
 Imports instat
 Imports instat.Translations
@@ -42,7 +43,8 @@ Public Class dlgExportToCPT
         ucrLocationDataFrame.Reset()
         ucrReceiverYears.SetMeAsReceiver()
         ucrChkLong.Checked = True
-        clsDefaultFunction.SetRCommand("rio::export")
+        clsDefaultFunction.SetPackageName("rio")
+        clsDefaultFunction.SetRCommand("export")
         clsDefaultFunction.AddParameter("x", clsRFunctionParameter:=clsOutput)
         clsDefaultFunction.AddParameter("sep", Chr(34) & "\t" & Chr(34))
         clsDefaultFunction.AddParameter("quote", "FALSE")
@@ -67,19 +69,23 @@ Public Class dlgExportToCPT
         ucrReceiverMultipleDataColumns.SetParameterIsString()
         ucrReceiverMultipleDataColumns.SetLinkedDisplayControl(lblDataColumns)
 
+
         ucrReceiverDataColumn.Selector = ucrSSTDataframe
         ucrReceiverDataColumn.SetParameter(New RParameter("sst_cols", 4))
         ucrReceiverDataColumn.SetParameterIsString()
         ucrReceiverDataColumn.SetLinkedDisplayControl(lblDataColumn)
+        ucrReceiverDataColumn.strSelectorHeading = "Numerics"
 
         ucrReceiverYears.Selector = ucrSSTDataframe
         ucrReceiverYears.SetParameter(New RParameter("year_col", 5))
         ucrReceiverYears.SetParameterIsString()
+        ucrReceiverYears.strSelectorHeading = "Numerics"
 
         ucrReceiverStations.Selector = ucrSSTDataframe
         ucrReceiverStations.SetParameter(New RParameter("station_col", 6))
         ucrReceiverStations.SetParameterIsString()
         ucrReceiverStations.SetLinkedDisplayControl(lblStations)
+        ucrReceiverStations.strSelectorHeading = "Factors"
 
         ucrChkLong.SetParameter(New RParameter("long", 7))
         ucrChkLong.SetText("Long Data Format")

@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
@@ -23,6 +23,7 @@ Public Class DlgDefineClimaticData
     Dim clsTypesFunction As New RFunction
     Dim lstReceivers As New List(Of ucrReceiverSingle)
     Dim lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
+    Private clsDefaultFunction As New RFunction
 
     Private Sub DlgDefineClimaticData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -35,12 +36,7 @@ Public Class DlgDefineClimaticData
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        ReopenDialog()
         TestOKEnabled()
-    End Sub
-
-    Private Sub ReopenDialog()
-
     End Sub
 
     Private Sub InitialiseDialog()
@@ -51,8 +47,8 @@ Public Class DlgDefineClimaticData
         Dim kvpCloudCover As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("cloud_cover", {"cloud"}.ToList())
         Dim kvpTempMax As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("temp_max", {"tmax", "tx", "max", "tempmax"}.ToList())
         Dim kvpTempMin As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("temp_min", {"tmin", "tn", "min", "tempmin"}.ToList())
-        Dim kvpRadiation As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("radiation", {"radiation"}.ToList())
-        Dim kvpSunshineHours As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("sunshine_hours", {"sunshine"}.ToList())
+        Dim kvpRadiation As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("radiation", {"radiation", "rad"}.ToList())
+        Dim kvpSunshineHours As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("sunshine_hours", {"sunshine", "sunh"}.ToList())
         Dim kvpWindDirection As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("wind_direction", {"winddirection"}.ToList())
         Dim kvpWindSpeed As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("wind_speed", {"windspeed"}.ToList())
         Dim kvpYear As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("year", {"year"}.ToList())
@@ -80,42 +76,31 @@ Public Class DlgDefineClimaticData
         ucrReceiverDay.Tag = "day"
         ucrReceiverDOY.Tag = "doy"
 
+        ucrReceiverDate.SetIncludedDataTypes({"Date"})
+
         SetRSelector()
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        clsDefaultFunction = New RFunction
 
         ucrSelectorDefineClimaticData.Reset()
         ucrReceiverDate.SetMeAsReceiver()
+
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$define_as_climatic")
         clsTypesFunction.SetRCommand("c")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-        ucrBase.clsRsyntax.AddParameter("types", clsRFunctionParameter:=clsTypesFunction)
+
+        clsDefaultFunction.AddParameter("types", clsRFunctionParameter:=clsTypesFunction)
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+
 
         AutoFillReceivers()
     End Sub
 
-    Public Sub SetRCodeForControls(bReset As Boolean)
+    Private Sub SetRCodeForControls(bReset As Boolean)
         ucrSelectorDefineClimaticData.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        SetRcodesforReceivers(bReset)
-    End Sub
-
-    Private Sub SetRcodesforReceivers(bReset As Boolean)
-        Dim ucrTempReceiver As ucrReceiver
-        For Each ucrTempReceiver In lstReceivers
-            ucrTempReceiver.SetRCode(clsTypesFunction, bReset)
-        Next
-    End Sub
-
-    Private Sub SetRSelector()
-        Dim ucrTempReceiver As ucrReceiver
-        For Each ucrTempReceiver In lstReceivers
-            ucrTempReceiver.SetParameter(New RParameter(ucrTempReceiver.Tag))
-            ucrTempReceiver.Selector = ucrSelectorDefineClimaticData
-            ucrTempReceiver.SetParameterIsString()
-            ucrTempReceiver.bExcludeFromSelector = True
-        Next
+        SetRCodesforReceivers(bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -130,6 +115,23 @@ Public Class DlgDefineClimaticData
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
+    End Sub
+
+    Private Sub SetRCodesforReceivers(bReset As Boolean)
+        Dim ucrTempReceiver As ucrReceiver
+        For Each ucrTempReceiver In lstReceivers
+            ucrTempReceiver.SetRCode(clsTypesFunction, bReset)
+        Next
+    End Sub
+
+    Private Sub SetRSelector()
+        Dim ucrTempReceiver As ucrReceiver
+        For Each ucrTempReceiver In lstReceivers
+            ucrTempReceiver.SetParameter(New RParameter(ucrTempReceiver.Tag))
+            ucrTempReceiver.Selector = ucrSelectorDefineClimaticData
+            ucrTempReceiver.SetParameterIsString()
+            ucrTempReceiver.bExcludeFromSelector = True
+        Next
     End Sub
 
     Private Sub AutoFillReceivers()
@@ -177,11 +179,11 @@ Public Class DlgDefineClimaticData
         Return lstValues
     End Function
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged
-        TestOKEnabled()
-    End Sub
-
     Private Sub Selector_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDefineClimaticData.ControlContentsChanged
         AutoFillReceivers()
+    End Sub
+
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class

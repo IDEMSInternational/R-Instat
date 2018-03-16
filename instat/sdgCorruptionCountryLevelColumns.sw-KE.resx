@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="$this.AutoScaleDimensions" xml:space="preserve" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>523, 288</value>
+  </data>
+  <data name="lblSS2009.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSS2009.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>395, 27</value>
+  </data>
+  <data name="lblSS2009.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>51, 13</value>
+  </data>
+  <data name="lblSS2009.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="ucrReceiverSS2009.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>395, 42</value>
+  </data>
+  <data name="ucrReceiverSS2009.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverSS2009.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverSS2009.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="ucrBase.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>186, 252</value>
+  </data>
+  <data name="ucrBase.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>142, 30</value>
+  </data>
+  <data name="ucrBase.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="lblCountryISO2.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblCountryISO2.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>251, 70</value>
+  </data>
+  <data name="lblCountryISO2.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>73, 13</value>
+  </data>
+  <data name="lblCountryISO2.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="ucrReceiverISO2.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>251, 85</value>
+  </data>
+  <data name="ucrReceiverISO2.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverISO2.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverISO2.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="ucrCountryLevelSelector.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
+  </data>
+  <data name="ucrCountryLevelSelector.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrCountryLevelSelector.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>210, 180</value>
+  </data>
+  <data name="ucrCountryLevelSelector.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblCountry.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblCountry.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>251, 27</value>
+  </data>
+  <data name="lblCountry.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>46, 13</value>
+  </data>
+  <data name="lblCountry.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblCountry.Text" xml:space="preserve">
+    <value>Nchi</value>
+  </data>
+  <data name="lblSS2011.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSS2011.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>395, 70</value>
+  </data>
+  <data name="lblSS2011.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>51, 13</value>
+  </data>
+  <data name="lblSS2011.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="lblWBPPP.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblWBPPP.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>251, 156</value>
+  </data>
+  <data name="lblWBPPP.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>52, 13</value>
+  </data>
+  <data name="lblWBPPP.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="ucrReceiverSS2013.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>395, 128</value>
+  </data>
+  <data name="ucrReceiverSS2013.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverSS2013.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverSS2013.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="ucrReceiverWBPPP.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>251, 171</value>
+  </data>
+  <data name="ucrReceiverWBPPP.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverWBPPP.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverWBPPP.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="lblSS2013.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSS2013.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>395, 113</value>
+  </data>
+  <data name="lblSS2013.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>48, 13</value>
+  </data>
+  <data name="lblSS2013.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="ucrReceiverSS2011.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>395, 85</value>
+  </data>
+  <data name="ucrReceiverSS2011.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverSS2011.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverSS2011.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="ucrReceiverCountry.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>251, 42</value>
+  </data>
+  <data name="ucrReceiverCountry.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverCountry.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverCountry.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblCountryISO3.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblCountryISO3.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>251, 113</value>
+  </data>
+  <data name="lblCountryISO3.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>73, 13</value>
+  </data>
+  <data name="lblCountryISO3.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="ucrReceiverISO3.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>251, 128</value>
+  </data>
+  <data name="ucrReceiverISO3.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverISO3.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverISO3.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lblSS2015.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSS2015.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>395, 156</value>
+  </data>
+  <data name="lblSS2015.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>51, 13</value>
+  </data>
+  <data name="lblSS2015.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="ucrReceiverSS2015.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>395, 171</value>
+  </data>
+  <data name="ucrReceiverSS2015.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverSS2015.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverSS2015.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="lblSmallState.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSmallState.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>251, 201</value>
+  </data>
+  <data name="lblSmallState.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>63, 13</value>
+  </data>
+  <data name="lblSmallState.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="$this.StartPosition" xml:space="preserve" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="ucrReceiverSmallState.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>251, 216</value>
+  </data>
+  <data name="ucrReceiverSmallState.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverSmallState.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverSmallState.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+</root>

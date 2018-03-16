@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgReferenceLevel
     Inherits System.Windows.Forms.Form
 
@@ -22,6 +38,7 @@ Partial Class dlgReferenceLevel
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgReferenceLevel))
         Me.ucrBase = New instat.ucrButtons()
         Me.lblFactorSelected = New System.Windows.Forms.Label()
         Me.ucrSelectorForReferenceLevels = New instat.ucrSelectorByDataFrameAddRemove()
@@ -31,56 +48,44 @@ Partial Class dlgReferenceLevel
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 250)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 0
         '
         'lblFactorSelected
         '
-        Me.lblFactorSelected.AutoSize = True
-        Me.lblFactorSelected.Location = New System.Drawing.Point(256, 19)
+        resources.ApplyResources(Me.lblFactorSelected, "lblFactorSelected")
         Me.lblFactorSelected.Name = "lblFactorSelected"
-        Me.lblFactorSelected.Size = New System.Drawing.Size(85, 13)
-        Me.lblFactorSelected.TabIndex = 4
         Me.lblFactorSelected.Tag = "Factor_Selected:"
-        Me.lblFactorSelected.Text = "Factor Selected:"
         '
         'ucrSelectorForReferenceLevels
         '
         Me.ucrSelectorForReferenceLevels.bShowHiddenColumns = False
         Me.ucrSelectorForReferenceLevels.bUseCurrentFilter = True
-        Me.ucrSelectorForReferenceLevels.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorForReferenceLevels.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorForReferenceLevels, "ucrSelectorForReferenceLevels")
         Me.ucrSelectorForReferenceLevels.Name = "ucrSelectorForReferenceLevels"
-        Me.ucrSelectorForReferenceLevels.Size = New System.Drawing.Size(242, 194)
-        Me.ucrSelectorForReferenceLevels.TabIndex = 8
         '
         'ucrReceiverReferenceLevels
         '
-        Me.ucrReceiverReferenceLevels.Location = New System.Drawing.Point(255, 34)
-        Me.ucrReceiverReferenceLevels.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverReferenceLevels.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverReferenceLevels, "ucrReceiverReferenceLevels")
         Me.ucrReceiverReferenceLevels.Name = "ucrReceiverReferenceLevels"
         Me.ucrReceiverReferenceLevels.Selector = Nothing
-        Me.ucrReceiverReferenceLevels.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiverReferenceLevels.TabIndex = 9
+        Me.ucrReceiverReferenceLevels.strNcFilePath = ""
+        Me.ucrReceiverReferenceLevels.ucrSelector = Nothing
         '
         'ucrFactorReferenceLevels
         '
-        Me.ucrFactorReferenceLevels.AutoSize = True
+        resources.ApplyResources(Me.ucrFactorReferenceLevels, "ucrFactorReferenceLevels")
         Me.ucrFactorReferenceLevels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.ucrFactorReferenceLevels.clsReceiver = Nothing
-        Me.ucrFactorReferenceLevels.Location = New System.Drawing.Point(255, 63)
         Me.ucrFactorReferenceLevels.Name = "ucrFactorReferenceLevels"
         Me.ucrFactorReferenceLevels.shtCurrSheet = Nothing
-        Me.ucrFactorReferenceLevels.Size = New System.Drawing.Size(267, 181)
-        Me.ucrFactorReferenceLevels.TabIndex = 7
+        Me.ucrFactorReferenceLevels.ucrChkLevels = Nothing
         '
         'dlgReferenceLevel
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(531, 309)
         Me.Controls.Add(Me.ucrReceiverReferenceLevels)
         Me.Controls.Add(Me.ucrSelectorForReferenceLevels)
         Me.Controls.Add(Me.ucrFactorReferenceLevels)
@@ -90,9 +95,7 @@ Partial Class dlgReferenceLevel
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgReferenceLevel"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Reference_Level"
-        Me.Text = "Reference Level"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

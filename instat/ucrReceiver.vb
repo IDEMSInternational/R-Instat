@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat
@@ -29,8 +29,11 @@ Public Class ucrReceiver
     Public bExcludeFromSelector As Boolean = False
     Public Event SelectionChanged(sender As Object, e As EventArgs)
     Public WithEvents frmParent As Form
+    Public bRemoveLabels As Boolean = False
 
     Public strDatabaseQuery As String = ""
+
+    Private strPrvNcFilePath As String = ""
 
     Public bAddParameterIfEmpty As Boolean = False
     'If the control is used to set a parameter that is a string i.e. column = "ID"
@@ -38,13 +41,17 @@ Public Class ucrReceiver
     'If the control is used to set a parameter that is an RFunction i.e. x = InstatDataObject$get_columns_from_data()
     Protected bParameterIsRFunction As Boolean = False
     'The name of the data parameter in the get columns instat object method (should always be the same)
-    Protected strColumnsParameterNameInRFunction As String = "col_names"
+    Protected strItemsParameterNameInRFunction As String = "col_names"
 
     'Should quotes be used when bParameterIsString = False
     Public bWithQuotes As Boolean = True
 
     'Should columns be forced as a data frame object when bParameterIsRFunction = True
     Public bForceAsDataFrame As Boolean = False
+
+    ' If True then this receiver can only contain a column from the selector's primary data frame
+    ' and this receiver can set the selector's primary data frame (when current receiver), resetting all other receivers
+    Public bAttachedToPrimaryDataFrame As Boolean = True
 
     Public Sub New()
         ' This call is required by the designer.
@@ -66,10 +73,14 @@ Public Class ucrReceiver
     End Sub
 
     Public Overridable Sub RemoveSelected()
-        If Selector IsNot Nothing Then
+        If IsCurrentReceiver() Then
             Selector.LoadList()
         End If
     End Sub
+
+    Private Function IsCurrentReceiver() As Boolean
+        Return Selector IsNot Nothing AndAlso Selector.CurrentReceiver IsNot Nothing AndAlso Selector.CurrentReceiver.Equals(Me)
+    End Function
 
     Public Overridable Sub Remove(strItems As String())
 
@@ -90,6 +101,18 @@ Public Class ucrReceiver
     Public Overridable Sub RemoveColor()
 
     End Sub
+
+    Public Property strNcFilePath As String
+        Get
+            Return strPrvNcFilePath
+        End Get
+        Set(strFilePath As String)
+            strPrvNcFilePath = strFilePath
+            If IsCurrentReceiver() Then
+                Selector.LoadList()
+            End If
+        End Set
+    End Property
 
     Public Overridable Function GetVariables(Optional bForceAsDataFrame As Boolean = False) As RFunction
         Dim clsGetVariablesFunc As New RFunction
@@ -113,7 +136,7 @@ Public Class ucrReceiver
     End Sub
 
     Private Sub ucrReceiver_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        translateEach(Controls)
+        translateEach(Controls, Me)
         If bFirstLoad Then
             frmParent = ParentForm
             'Remove this line so that single/multiple code can run things on first load as well
@@ -163,23 +186,54 @@ Public Class ucrReceiver
         OnControlValueChanged()
     End Sub
 
-    'TODO remove this method and replace with SetIncludedDataTypes
-    Public Sub SetDataType(strTemp As String)
-        AddIncludedMetadataProperty("class", {Chr(34) & strTemp & Chr(34)})
+    ' If bStrict = True then only columns of the type specific will be included
+    ' If bStict = False then a less strict condition will be made for which columns are included, depending on the type
+    ' as specified below.
+    ' SetDataType("numeric", False) will exclude factor and character columns (so numeric, logical, Date etc. will be included)
+    ' SetDataType("factor", False) will include factor and logical columns
+    Public Sub SetDataType(strTemp As String, Optional bStrict As Boolean = False)
+        If Not bStrict Then
+            If strTemp = "numeric" Then
+                AddExcludedMetadataProperty("class", {Chr(34) & "factor" & Chr(34), Chr(34) & "character" & Chr(34)})
+            ElseIf strTemp = "factor" Then
+                AddIncludedMetadataProperty("class", {Chr(34) & "factor" & Chr(34), Chr(34) & "logical" & Chr(34)})
+            Else
+                AddIncludedMetadataProperty("class", {Chr(34) & strTemp & Chr(34)})
+            End If
+        Else
+            AddIncludedMetadataProperty("class", {Chr(34) & strTemp & Chr(34)})
+        End If
     End Sub
 
-    Public Sub SetIncludedDataTypes(strInclude As String())
+    'bStrict used as described in SetDataType.
+    'Currently only checks if strInclude has exactly one item.
+    Public Overridable Sub SetIncludedDataTypes(strInclude As String(), Optional bStrict As Boolean = False)
         Dim strTypes(strInclude.Count - 1) As String
 
         Array.Copy(strInclude, strTypes, strInclude.Length)
         'If the two previous lines where not added, the modification of value performed on strTypes was immediately performed on strInclude, then the argument passed into the function such as clsCurrGeom.clsAesParameters(i).strIncludedDataTypes in ucrGeomListWithAes.SetParameters would have been edited (i.e. quotes would have been added to the types names in the strIncludedDataTypes of the i'th AesParameter of the current Geom...), which we don't want !
+
         For i = 0 To strInclude.Count - 1
             strTypes(i) = Chr(34) & strInclude(i) & Chr(34)
         Next
-        AddIncludedMetadataProperty("class", strTypes)
+        If Not bStrict Then
+            If strTypes.Count = 1 Then
+                If strTypes(0) = Chr(34) & "numeric" & Chr(34) Then
+                    AddExcludedMetadataProperty("class", {Chr(34) & "factor" & Chr(34), Chr(34) & "character" & Chr(34)})
+                ElseIf strTypes(0) = Chr(34) & "factor" & Chr(34) Then
+                    AddIncludedMetadataProperty("class", {Chr(34) & "factor" & Chr(34), Chr(34) & "logical" & Chr(34)})
+                Else
+                    AddIncludedMetadataProperty("class", strTypes)
+                End If
+            Else
+                AddIncludedMetadataProperty("class", strTypes)
+            End If
+        Else
+            AddIncludedMetadataProperty("class", strTypes)
+        End If
     End Sub
 
-    Public Sub SetExcludedDataTypes(strExclude As String())
+    Public Overridable Sub SetExcludedDataTypes(strExclude As String())
         Dim strTypes(strExclude.Count - 1) As String
 
         Array.Copy(strExclude, strTypes, strExclude.Length)
@@ -215,7 +269,7 @@ Public Class ucrReceiver
         '    lstExcludedMetadataProperties.RemoveAt(iExcludeIndex)
         'End If
 
-        If Selector IsNot Nothing Then
+        If IsCurrentReceiver() Then
             Selector.LoadList()
         End If
 
@@ -228,7 +282,7 @@ Public Class ucrReceiver
         If iIncludeIndex <> -1 Then
             lstIncludedMetadataProperties.RemoveAt(iIncludeIndex)
         End If
-        If Selector IsNot Nothing Then
+        If IsCurrentReceiver() Then
             Selector.LoadList()
         End If
 
@@ -241,7 +295,7 @@ Public Class ucrReceiver
         If iIncludeIndex <> -1 Then
             lstExcludedMetadataProperties.RemoveAt(iIncludeIndex)
         End If
-        If Selector IsNot Nothing Then
+        If IsCurrentReceiver() Then
             Selector.LoadList()
         End If
     End Sub
@@ -271,13 +325,20 @@ Public Class ucrReceiver
         '    lstIncludedMetadataProperties.RemoveAt(iIncludeIndex)
         'End If
 
-        If Selector IsNot Nothing Then
+        If IsCurrentReceiver() Then
             Selector.LoadList()
         End If
     End Sub
 
     Protected Overridable Sub Selector_ResetAll() Handles ucrSelector.ResetReceivers
         Clear()
+    End Sub
+
+    Private Sub ucrSelector_DataFrameChanged() Handles ucrSelector.DataFrameChanged
+        'TODO This is possibly an expensive check, there may be more efficient ways of checking if this is the current receiver
+        If ucrSelector IsNot Nothing AndAlso ucrSelector.CurrentReceiver IsNot Nothing AndAlso (ucrSelector.CurrentReceiver.bAttachedToPrimaryDataFrame OrElse ucrSelector.CurrentReceiver.Equals(Me)) Then
+            Selector_ResetAll()
+        End If
     End Sub
 
     Protected Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
@@ -295,13 +356,34 @@ Public Class ucrReceiver
 
     Public Sub SetItemType(strNewType As String)
         strType = strNewType
-        If Selector IsNot Nothing Then
+        Select Case strType
+            Case "column"
+                strItemsParameterNameInRFunction = "col_names"
+            Case "dataframe"
+                strItemsParameterNameInRFunction = "data_name"
+            Case "metadata"
+                'TODO what should this be?
+                strItemsParameterNameInRFunction = ""
+            Case "graph"
+                strItemsParameterNameInRFunction = "graph_name"
+            Case "model"
+                strItemsParameterNameInRFunction = "model_name"
+            Case "table"
+                strItemsParameterNameInRFunction = "table_name"
+            Case "filter"
+                strItemsParameterNameInRFunction = "filter_name"
+            Case "link"
+                strItemsParameterNameInRFunction = "link_name"
+            Case "object"
+                strItemsParameterNameInRFunction = "object_name"
+        End Select
+        If IsCurrentReceiver() Then
             Selector.LoadList()
         End If
         bTypeSet = True
     End Sub
 
-    Public Overridable Sub Add(strItem As String, Optional strDataFrame As String = "")
+    Public Overridable Sub Add(strItem As String, Optional strDataFrame As String = "", Optional bFixReceiver As Boolean = False)
         'SetMeAsReceiver()
         'For i = 0 To Selector.lstAvailableVariable.Items.Count - 1
         '    If Selector.lstAvailableVariable.Items(i).Text = strItem Then
@@ -334,9 +416,9 @@ Public Class ucrReceiver
                         lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.strArgumentValue)
                     End If
                 ElseIf bParameterIsRFunction AndAlso clsTempParameter.bIsFunction Then
-                    clsTempDataParameter = clsTempParameter.clsArgumentCodeStructure.GetParameter(strColumnsParameterNameInRFunction)
+                    clsTempDataParameter = clsTempParameter.clsArgumentCodeStructure.GetParameter(strItemsParameterNameInRFunction)
                     If clsTempDataParameter IsNot Nothing Then
-                        lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.clsArgumentCodeStructure.GetParameter(strColumnsParameterNameInRFunction).strArgumentValue)
+                        lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.clsArgumentCodeStructure.GetParameter(strItemsParameterNameInRFunction).strArgumentValue)
                     End If
                 End If
                 Clear()
@@ -353,7 +435,7 @@ Public Class ucrReceiver
         End If
     End Sub
 
-    Protected Overrides Sub UpdateParameter(clsTempParam As RParameter)
+    Public Overrides Sub UpdateParameter(clsTempParam As RParameter)
         If clsTempParam Is Nothing Then
             clsTempParam = New RParameter
         End If
@@ -403,4 +485,16 @@ Public Class ucrReceiver
             ucrSelector = ucrNewSelector
         End Set
     End Property
+
+    Protected Overrides Sub ResetControlValue()
+        Clear()
+    End Sub
+
+    Public Overridable Sub SetTextColour(clrNew As Color)
+
+    End Sub
+
+    Public Overridable Function GetItemsDataFrames() As List(Of String)
+        Return New List(Of String)
+    End Function
 End Class

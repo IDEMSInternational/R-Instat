@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports RDotNet
@@ -70,7 +70,7 @@ Public Class ucrReceiverMultiple
             lstSelectedVariables.SelectedItems.CopyTo(tempObjects, 0)
             For Each objItem In tempObjects
                 lstSelectedVariables.Items.Remove(objItem)
-                Selector.RemoveFromVariablesList(objItem.Text)
+                Selector.RemoveFromVariablesList(objItem.Text, objItem.Tag)
             Next
         End If
         OnSelectionChanged()
@@ -81,11 +81,14 @@ Public Class ucrReceiverMultiple
         MyBase.Remove(strItems)
         Dim strTempItem As String
 
-        For Each strTempItem In strItems
-            lstSelectedVariables.Items.RemoveByKey(strTempItem)
-            Selector.RemoveFromVariablesList(strTempItem)
-        Next
-        OnSelectionChanged()
+        If strItems.Count > 0 Then
+            For Each strTempItem In strItems
+                lstSelectedVariables.Items.RemoveByKey(strTempItem)
+                'TODO pass data frame for variables
+                Selector.RemoveFromVariablesList(strTempItem)
+            Next
+            OnSelectionChanged()
+        End If
     End Sub
 
     Public Overrides Sub Clear()
@@ -135,6 +138,10 @@ Public Class ucrReceiverMultiple
                         If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                             clsGetVariablesFunc.AddParameter("force_as_data_frame", "FALSE")
                         End If
+                    End If
+                    If bRemoveLabels Then
+                        'temp fix to bug in sjPlot needing labels removed for factor columns
+                        clsGetVariablesFunc.AddParameter("remove_labels", "TRUE")
                     End If
                     If bUseFilteredData Then
                         If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
@@ -315,13 +322,14 @@ Public Class ucrReceiverMultiple
                 lstSelectedVariables.Items.Add(kvpTempItem.Value).Group = grpCurr
                 lstSelectedVariables.Items(lstSelectedVariables.Items.Count - 1).Tag = kvpTempItem.Key
                 lstSelectedVariables.Items(lstSelectedVariables.Items.Count - 1).Name = kvpTempItem.Value
-                Selector.AddToVariablesList(kvpTempItem.Value)
+                lstSelectedVariables.Items(lstSelectedVariables.Items.Count - 1).ToolTipText = kvpTempItem.Value
+                Selector.AddToVariablesList(kvpTempItem.Value, kvpTempItem.Key)
             End If
         Next
         OnSelectionChanged()
     End Sub
 
-    Public Overrides Sub Add(strItem As String, Optional strDataFrame As String = "")
+    Public Overrides Sub Add(strItem As String, Optional strDataFrame As String = "", Optional bFixreceiver As Boolean = False)
         Dim kvpItems(0) As KeyValuePair(Of String, String)
         If strDataFrame = "" Then
             For i = 0 To Selector.lstAvailableVariable.Items.Count - 1
@@ -332,6 +340,8 @@ Public Class ucrReceiverMultiple
         End If
         kvpItems(0) = New KeyValuePair(Of String, String)(strDataFrame, strItem)
         AddMultiple(kvpItems)
+
+        lstSelectedVariables.Enabled = Not bFixreceiver
     End Sub
 
     Public Sub AddItemsWithMetadataProperty(strCurrentDataFrame As String, strProperty As String, strValues As String())
@@ -346,6 +356,7 @@ Public Class ucrReceiverMultiple
         Dim strDataTypes As New List(Of String)
         Dim strDataFrame As String
         Dim strCurrentType As String
+        Dim expTypes As SymbolicExpression
 
         If Selector IsNot Nothing Then
             If bTypeSet Then
@@ -360,9 +371,15 @@ Public Class ucrReceiverMultiple
                 clsGetDataType.AddParameter("property", "data_type_label")
                 clsGetDataType.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
                 clsGetDataType.AddParameter("column", GetVariableNames())
-                strDataTypes = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript()).AsCharacter.ToList()
+                expTypes = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript(), bSilent:=True)
+                If expTypes IsNot Nothing AndAlso expTypes.Type <> Internals.SymbolicExpressionType.Null Then
+                    strDataTypes = expTypes.AsCharacter.ToList()
+                End If
                 If bUnique Then
                     strDataTypes = strDataTypes.Distinct().ToList()
+                End If
+                If strDataTypes.Count = 2 AndAlso strDataTypes.Contains("ordered") AndAlso strDataTypes.Contains("factor") Then
+                    strDataTypes = {"factor"}.ToList
                 End If
             End If
         End If
@@ -407,7 +424,6 @@ Public Class ucrReceiverMultiple
 
     Public Sub CheckSingleType()
         Dim strVariableTypes As List(Of String)
-        Dim strVarType As String
 
         If bSingleType Then
             If (Not IsEmpty()) Then
@@ -415,7 +431,7 @@ Public Class ucrReceiverMultiple
                 If strVariableTypes.Count > 1 AndAlso Not (strVariableTypes.Count = 2 AndAlso strVariableTypes.Contains("numeric") AndAlso strVariableTypes.Contains("integer")) AndAlso Not (strVariableTypes.Count = 2 AndAlso strVariableTypes.Contains("factor") AndAlso strVariableTypes.Contains("ordered,factor")) Then
                     MsgBox("Cannot add these variables. All variables must be of the same data type.", MsgBoxStyle.OkOnly, "Cannot add variables.")
                     Clear()
-                Else
+                ElseIf strVariableTypes.Count > 0 Then
                     If strVariableTypes(0) = "integer" Then
                         SetDataType("numeric")
                     ElseIf strVariableTypes(0) = "ordered,factor" Then
@@ -423,6 +439,8 @@ Public Class ucrReceiverMultiple
                     Else
                         SetDataType(strVariableTypes(0))
                     End If
+                Else
+                    RemoveIncludedMetadataProperty(strProperty:="class")
                 End If
             Else
                 RemoveIncludedMetadataProperty(strProperty:="class")
@@ -442,4 +460,8 @@ Public Class ucrReceiverMultiple
     Private Sub ucrReceiverMultiple_SelectionChanged(sender As Object, e As EventArgs) Handles Me.SelectionChanged
         CheckSingleType()
     End Sub
+
+    Public Overrides Function GetItemsDataFrames() As List(Of String)
+        Return GetCurrGroupNames()
+    End Function
 End Class

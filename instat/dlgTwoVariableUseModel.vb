@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Imports RDotNet
 Public Class dlgTwoVariableUseModel
@@ -42,14 +43,18 @@ Public Class dlgTwoVariableUseModel
     End Sub
 
     Private Sub InitialiseDialog()
+        'Temporary fix: Bugs if you run the dialogue the second time
+        ' sdgSimpleRegOptions.chkFittedModel.Enabled = False
+        'autoplot function does not support glm/lm models
+        '  sdgSimpleRegOptions.chkFittedModel.Enabled = False
         'ucrBase.iHelpTopicID = 
         ucrBaseUseModel.clsRsyntax.SetOperation("+")
-        ucrSelectorUseModel.SetItemType("model")
+        ucrReceiverUseModel.SetItemType("model")
         ucrReceiverUseModel.Selector = ucrSelectorUseModel
         clsRCommand.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
         ucrBaseUseModel.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRCommand)
         ucrModel.IsReadOnly = True
-        sdgSimpleRegOptions.SetRModelFunction(clsRCommand)
+        ' sdgSimpleRegOptions.SetRModelFunction(clsRCommand)
         sdgSimpleRegOptions.SetRDataFrame(ucrSelectorUseModel.ucrAvailableDataFrames)
         ucrReceiverUseModel.strSelectorHeading = "Models"
     End Sub
@@ -63,7 +68,7 @@ Public Class dlgTwoVariableUseModel
     End Sub
 
     Private Sub ucrBaseUseModel_ClickOk(sender As Object, e As EventArgs) Handles ucrBaseUseModel.ClickOk
-        sdgSimpleRegOptions.RegOptions()
+        'sdgSimpleRegOptions.RegOptions()
     End Sub
 
     Private Sub TestOkEnabled()

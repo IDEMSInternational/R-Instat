@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports RDotNet
@@ -22,25 +22,33 @@ Public Class ucrSelector
     Public Event ResetReceivers()
     Public Event VariablesInReceiversChanged()
     Public Event DataFrameChanged()
-    Public lstVariablesInReceivers As List(Of String)
+    Public lstVariablesInReceivers As List(Of Tuple(Of String, String))
     Public bFirstLoad As Boolean
     Public bIncludeOverall As Boolean
     Public strCurrentDataFrame As String
+    ' If a dialog has receivers which can have columns from multiple data frames
+    ' there may be a primary data frame which some receivers must be from.
+    ' Other receivers may only allow columns from data frames linked to the primary data frame
+    Public strPrimaryDataFrame As String
     Public lstIncludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
     Public lstExcludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
     Private strType As String
     Private bShowHiddenCols As Boolean = False
-
+    Private WithEvents ucrLinkedSelector As ucrSelector
+    Public bIsStacked As Boolean = False
     'Does the selector have its own parameter
     'Usually False as the parameter comes from the data frame selector
     Public bHasOwnParameter As Boolean = False
+    Private clsGgplotOperator As ROperator = Nothing
+
+    Protected bSilentDataFrameChange As Boolean = False
 
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        lstVariablesInReceivers = New List(Of String)
+        lstVariablesInReceivers = New List(Of Tuple(Of String, String))
         bFirstLoad = True
         bIncludeOverall = False
         strCurrentDataFrame = ""
@@ -65,27 +73,57 @@ Public Class ucrSelector
     End Sub
 
     Protected Sub OnDataFrameChanged()
-        RaiseEvent DataFrameChanged()
+        If bSilentDataFrameChange Then
+            bSilentDataFrameChange = False
+        Else
+            RaiseEvent DataFrameChanged()
+            If CurrentReceiver IsNot Nothing AndAlso CurrentReceiver.bAttachedToPrimaryDataFrame Then
+                ClearGgplotOptions()
+            End If
+        End If
+    End Sub
+
+    Protected Sub ClearGgplotOptions()
+        If clsGgplotOperator IsNot Nothing Then
+            clsGgplotOperator.RemoveParameterByName("facets")
+        End If
+    End Sub
+
+    Public Overridable Sub EnableDataOptions(strCurrentType As String)
+
     End Sub
 
     Public Overridable Sub LoadList()
         Dim lstCombinedMetadataLists As List(Of List(Of KeyValuePair(Of String, String())))
         Dim strExclud As String() = Nothing
-
+        Dim strCurrentType As String
         If CurrentReceiver IsNot Nothing Then
             lstCombinedMetadataLists = CombineMetadataLists(CurrentReceiver.lstIncludedMetadataProperties, CurrentReceiver.lstExcludedMetadataProperties)
             If CurrentReceiver.bExcludeFromSelector Then
-                strExclud = lstVariablesInReceivers.ToArray
+                strExclud = GetVariablesInReceiver().ToArray
             End If
             If CurrentReceiver.bTypeSet Then
-                frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=CurrentReceiver.GetItemType(), lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1), strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame, strExcludedItems:=strExclud, strDatabaseQuery:=CurrentReceiver.strDatabaseQuery)
+                strCurrentType = CurrentReceiver.GetItemType()
+                frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=CurrentReceiver.GetItemType(), lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1), strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame, strExcludedItems:=strExclud, strDatabaseQuery:=CurrentReceiver.strDatabaseQuery, strNcFilePath:=CurrentReceiver.strNcFilePath)
             Else
-                frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=strType, lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1), strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame, strExcludedItems:=strExclud, strDatabaseQuery:=CurrentReceiver.strDatabaseQuery)
+                strCurrentType = strType
+                frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=strType, lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1), strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame, strExcludedItems:=strExclud, strDatabaseQuery:=CurrentReceiver.strDatabaseQuery, strNcFilePath:=CurrentReceiver.strNcFilePath)
             End If
-        Else
-            frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=strType, lstIncludedDataTypes:=lstIncludedMetadataProperties, lstExcludedDataTypes:=lstExcludedMetadataProperties, strDataFrameName:=strCurrentDataFrame)
+            EnableDataOptions(strCurrentType)
+            'Removed as probably don't need to load when no current receiver
+            'Else
+            'frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=strType, lstIncludedDataTypes:=lstIncludedMetadataProperties, lstExcludedDataTypes:=lstExcludedMetadataProperties, strDataFrameName:=strCurrentDataFrame)
         End If
     End Sub
+
+    Private Function GetVariablesInReceiver() As List(Of String)
+        Dim lstVars As New List(Of String)
+
+        For Each tplTemp As Tuple(Of String, String) In lstVariablesInReceivers
+            lstVars.Add(tplTemp.Item1)
+        Next
+        Return lstVars
+    End Function
 
     Public Overridable Sub Reset()
         RaiseEvent ResetReceivers()
@@ -100,12 +138,26 @@ Public Class ucrSelector
     End Sub
 
     Public Sub SetCurrentReceiver(conReceiver As ucrReceiver)
+        Dim lstReceiverDataFrames As List(Of String)
+
         If CurrentReceiver IsNot Nothing Then
             CurrentReceiver.RemoveColor()
         End If
         If conReceiver IsNot Nothing Then
             CurrentReceiver = conReceiver
             CurrentReceiver.SetColor()
+            SetPrimaryDataFrameOptions(strPrimaryDataFrame, Not CurrentReceiver.bAttachedToPrimaryDataFrame)
+            If Not CurrentReceiver.IsEmpty Then
+                lstReceiverDataFrames = CurrentReceiver.GetItemsDataFrames()
+                If lstReceiverDataFrames.Count = 1 AndAlso lstReceiverDataFrames(0) <> "" AndAlso lstReceiverDataFrames(0) <> strCurrentDataFrame Then
+                    SetDataframe(lstReceiverDataFrames(0), bSilent:=True)
+                End If
+            ElseIf CurrentReceiver.bAttachedToPrimaryDataFrame Then
+                If strPrimaryDataFrame <> "" AndAlso strPrimaryDataFrame <> strCurrentDataFrame Then
+                    SetDataframe(strPrimaryDataFrame, bSilent:=True)
+                End If
+            End If
+            'TODO possibly move this to avoid repetition loading list
             LoadList()
             If (TypeOf CurrentReceiver Is ucrReceiverSingle) Then
                 'lstAvailableVariable.SelectionMode = SelectionMode.One
@@ -120,7 +172,7 @@ Public Class ucrSelector
     End Sub
 
     Public Sub AddAll()
-        If CurrentReceiver IsNot Nothing AndAlso (lstAvailableVariable.SelectedItems.Count > 0) Then
+        If CurrentReceiver IsNot Nothing Then
             SelectAll()
             Add()
         End If
@@ -152,6 +204,7 @@ Public Class ucrSelector
     'End Sub
 
     Public Sub ShowDataOptionsDialog()
+        sdgDataOptions.SetCurrentDataFrame(strCurrentDataFrame, False)
         sdgDataOptions.ShowDialog()
         SetDataOptionsSettings()
     End Sub
@@ -192,13 +245,29 @@ Public Class ucrSelector
         SelectAll()
     End Sub
 
-    Public Sub AddToVariablesList(strVariable As String)
-        lstVariablesInReceivers.Add(strVariable)
-        RaiseEvent VariablesInReceiversChanged()
+    Public Sub SetLinkedSelector(ucrNewLinkedSelector As ucrSelector)
+        ucrLinkedSelector = ucrNewLinkedSelector
     End Sub
 
-    Public Sub RemoveFromVariablesList(strVariable As String)
-        lstVariablesInReceivers.Remove(strVariable)
+    Public Sub AddToVariablesList(strVariable As String, Optional strDataFrame As String = "")
+        If strDataFrame = "" OrElse strDataFrame = strCurrentDataFrame Then
+            lstVariablesInReceivers.Add(New Tuple(Of String, String)(strVariable, strDataFrame))
+            If ucrLinkedSelector IsNot Nothing Then
+                ucrLinkedSelector.AddToVariablesList(strVariable, strCurrentDataFrame)
+            End If
+            RaiseEvent VariablesInReceiversChanged()
+        End If
+    End Sub
+
+    Public Sub RemoveFromVariablesList(strVariable As String, Optional strDataFrame As String = "")
+        For i As Integer = lstVariablesInReceivers.Count - 1 To 0 Step -1
+            If lstVariablesInReceivers(i).Item1 = strVariable AndAlso (strDataFrame = "" OrElse lstVariablesInReceivers(i).Item2 = strDataFrame) Then
+                lstVariablesInReceivers.RemoveAt(i)
+            End If
+        Next
+        If ucrLinkedSelector IsNot Nothing Then
+            ucrLinkedSelector.RemoveFromVariablesList(strVariable, strCurrentDataFrame)
+        End If
         RaiseEvent VariablesInReceiversChanged()
     End Sub
 
@@ -323,9 +392,46 @@ Public Class ucrSelector
         lstAvailableVariable.EndUpdate()
     End Sub
 
-    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
+    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
         If bHasOwnParameter Then
-            MyBase.UpdateControl(bReset)
+            MyBase.UpdateControl(bReset:=bReset, bCloneIfNeeded:=bCloneIfNeeded)
         End If
+    End Sub
+
+    Private Sub SelectionMenuStrip_VisibleChanged(sender As Object, e As EventArgs) Handles SelectionMenuStrip.VisibleChanged
+        If SelectionMenuStrip.Visible Then
+            If CurrentReceiver IsNot Nothing Then
+                AddSelectedToolStripMenuItem.Enabled = True
+                If TypeOf CurrentReceiver Is ucrReceiverSingle Then
+                    AddAllToolStripMenuItem.Enabled = False
+                    SelectAllToolStripMenuItem.Enabled = False
+                ElseIf TypeOf CurrentReceiver Is ucrReceiverMultiple Then
+                    AddAllToolStripMenuItem.Enabled = True
+                    SelectAllToolStripMenuItem.Enabled = True
+                Else
+                    MsgBox("Current receiver is neither ucrReceiverSingle or ucrReceiverMultiple. Cannot determine visibility of menu items.")
+                End If
+            Else
+                AddSelectedToolStripMenuItem.Enabled = False
+                AddAllToolStripMenuItem.Enabled = False
+                SelectAllToolStripMenuItem.Enabled = False
+            End If
+        End If
+    End Sub
+
+    Public Function HasStackedVariables() As Boolean
+        Return bIsStacked OrElse (ucrLinkedSelector IsNot Nothing AndAlso ucrLinkedSelector.bIsStacked)
+    End Function
+
+    Public Sub SetGgplotFunction(clsNewGgplotFunction As ROperator)
+        clsGgplotOperator = clsNewGgplotFunction
+    End Sub
+
+    Public Overridable Sub SetDataframe(strNewDataFrame As String, Optional bEnableDataframe As Boolean = True, Optional bSilent As Boolean = False)
+
+    End Sub
+
+    Public Overridable Sub SetPrimaryDataFrameOptions(strNewPrimaryDataFrame As String, bNewOnlyLinkedToPrimaryDataFrames As Boolean, Optional bNewIncludePrimaryDataFrameAsLinked As Boolean = False)
+
     End Sub
 End Class

@@ -1,51 +1,122 @@
-# Necessary packages for the Instat Object
-packs_lib <- c("reshape2", "lubridate","plyr", "dplyr", "rtf", "openxlsx", "ggplot2", "extRemes", "GGally", "agridat", "DAAG", "FactoMineR", "plotrix", "candisc", "R6", "openair", "circular", "survival", "Evapotranspiration", "clifro", "devtools", "factoextra", "circlize", "CircStats", "gridExtra", "ggfortify", "rio", "readxl", "lme4", "dummies", "ggthemes", "lazyeval", "stringr", "httr", "jsonlite", "fitdistrplus", "visreg", "climdex.pcic", "mosaic", "ncdf4", "getPass", "RMySQL", "DBI", "EnvStats", "signmedian.test", "sjPlot", "sjmisc")
+# Necessary packages for R-Instat
+# packs_lib <- c("reshape2", "lubridate","plyr", "dplyr", "rtf", "openxlsx", "ggplot2", "extRemes", "GGally", "agridat", "DAAG", "FactoMineR", "plotrix", "candisc", "R6", "openair", "circular", "survival", "Evapotranspiration", "clifro", "devtools", "factoextra", "circlize", "CircStats", "gridExtra", "ggfortify", "rio", "readxl", "lme4", "dummies", "ggthemes", "lazyeval", "stringr", "httr", "jsonlite", "fitdistrplus", "visreg", "climdex.pcic", "mosaic", "ncdf4", "getPass", "RMySQL", "DBI", "EnvStats", "signmedian.test", "sjPlot", "sjmisc", "plotly", "svglite", "htmlTable", "rje", "tidyr", "faraway", "ncdf.tools", "rrefine", "dae", "gapminder", "questionr", "nycflights13", "Lahman", "ncdf4.helpers", "RcppRoll", "cmsaf", "sjlabelled", "maptools", "RColorBrewer", "colorRamps", "mapdata", "rworldmap", "rworldxtra", "e1071", "robustbase", "wakefield")
 # Packages including dependencies (generated from miniCRAN package)
-packs <- c("reshape2", "lubridate", "plyr", "dplyr", "rtf", "openxlsx", 
-  "ggplot2", "extRemes", "GGally", "agridat", "DAAG", "FactoMineR", 
-  "plotrix", "candisc", "R6", "openair", "circular", "survival", 
-  "Evapotranspiration", "clifro", "devtools", "factoextra", "circlize", 
-  "CircStats", "gridExtra", "ggfortify", "rio", "readxl", "lme4", 
-  "dummies", "ggthemes", "lazyeval", "stringr", "httr", "jsonlite", 
-  "fitdistrplus", "visreg", "climdex.pcic", "mosaic", "ncdf4", 
-  "getPass", "RMySQL", "DBI", "EnvStats", "signmedian.test", "sjPlot", 
-  "sjmisc", "Rcpp", "stringi", "magrittr", "assertthat", "tibble", 
-  "BH", "R.oo", "R.methodsS3", "digest", "gtable", "MASS", "scales", 
-  "RColorBrewer", "dichromat", "munsell", "labeling", "colorspace", 
-  "Lmoments", "distillery", "car", "mgcv", "nnet", "pbkrtest", 
-  "quantreg", "nlme", "Matrix", "SparseM", "MatrixModels", "lattice", 
-  "minqa", "nloptr", "RcppEigen", "progress", "reshape", "prettyunits", 
-  "latticeExtra", "cluster", "ellipse", "flashClust", "leaps", 
-  "scatterplot3d", "knitr", "evaluate", "highr", "markdown", "yaml", 
-  "mime", "heplots", "maps", "mapproj", "hexbin", "boot", "zoo", 
-  "XML", "selectr", "RCurl", "bitops", "memoise", "whisker", "rstudioapi", 
-  "git2r", "withr", "curl", "openssl", "abind", "dendextend", "ggpubr", 
-  "ggrepel", "tidyr", "fpc", "viridis", "ggsci", "mclust", "flexmix", 
-  "prabclus", "class", "diptest", "mvtnorm", "robustbase", "kernlab", 
-  "trimcluster", "modeltools", "DEoptimR", "GlobalOptions", "shape", 
-  "urltools", "foreign", "haven", "readODS", "xml2", "data.table", 
-  "readr", "csvy", "hms", "cellranger", "triebeard", "rematch", 
-  "PCICt", "caTools", "mosaicData", "ggdendro", "broom", "effects", 
-  "merTools", "modelr", "psych", "purrr", "sjstats", "arm", "DT", 
-  "shiny", "blme", "mnormt", "stringdist", "coin", "lmtest", "sandwich", 
-  "coda", "multcomp", "htmltools", "htmlwidgets", "httpuv", "xtable", 
-  "sourcetools", "TH.data", "codetools")
-success <- invisible(sapply(packs, function(x) length(find.package(x, quiet = TRUE))>0))
-if(!all(success)) install.packages(names(success)[!success], repos = paste0("file:///", getwd(), "/extras"), type = "win.binary")
-#success <- suppressWarnings(sapply(packs, require, character.only = TRUE))
-#if(!all(success)) install.packages(names(success)[!success], repos = paste0("file:///", getwd(), "/RPackages"), type = "win.binary")
-#require will ensure packages load correctly, but not sensible to load all
-#sapply(names(success)[!success], require, character.only = TRUE)
-#Needed when ggfortify was not on CRAN
-#if(!suppressWarnings(require(ggfortify))) install.packages(paste0(getwd(), "/RPackages", "/ggfortify_0.1.0.tar.gz"), repos = NULL, type="source")
-for(pack in packs_lib) {
-  library(pack, character.only = TRUE)
+packs <- c("abind", "agridat", "arm", "assertthat", "backports", 
+           "base64enc", "bayesplot", "BH", "bindr", "bindrcpp", "bitops", 
+           "blme", "boot", "broom", "candisc", "car", "carData", "caTools", 
+           "cellranger", "checkmate", "chron", "circlize", "CircStats", 
+           "circular", "class", "classInt", "cli", "clifro", "climdex.pcic", 
+           "cluster", "cmsaf", "coda", "codetools", "coin", "colorRamps", 
+           "colorspace", "cowplot", "crayon", "crosstalk", "curl", "DAAG", 
+           "dae", "data.table", "DBI", "dendextend", "DEoptimR", "devtools", 
+           "dichromat", "digest", "diptest", "distillery", "dotCall64", 
+           "dplyr", "DT", "dummies", "e1071", "effects", "ellipse", "emmeans", 
+           "EnvStats", "estimability", "evaluate", "Evapotranspiration", 
+           "extRemes", "factoextra", "FactoMineR", "faraway", "fields", 
+           "fitdistrplus", "flashClust", "flexmix", "forcats", "foreach", 
+           "foreign", "fpc", "gapminder", "gdata", "gdtools", "getPass", 
+           "GGally", "ggdendro", "ggeffects", "ggformula", "ggfortify", 
+           "ggplot2", "ggpubr", "ggrepel", "ggsci", "ggsignif", "ggthemes", 
+           "git2r", "glmmTMB", "GlobalOptions", "glue", "gplots", "gridExtra", 
+           "gtable", "gtools", "haven", "heplots", "hexbin", "highr", "hms", 
+           "htmlTable", "htmltools", "htmlwidgets", "httpuv", "httr", "iterators", 
+           "JBTools", "jsonlite", "kernlab", "KernSmooth", "knitr", "labeling", 
+           "labelled", "Lahman", "lattice", "latticeExtra", "lazyeval", 
+           "leaps", "lme4", "Lmoments", "lmtest", "lubridate", "magrittr", 
+           "mapdata", "mapproj", "maps", "maptools", "markdown", "MASS", 
+           "Matrix", "MatrixModels", "mclust", "memoise", "merTools", "mgcv", 
+           "mime", "miniUI", "minqa", "mnormt", "modelr", "modeltools", 
+           "mosaic", "mosaicCore", "mosaicData", "multcomp", "munsell", 
+           "mvtnorm", "ncdf.tools", "ncdf4.helpers", "ncdf4", "nlme", "nloptr", 
+           "nnet", "nortest", "nycflights13", "openair", "openssl", "openxlsx", 
+           "pbkrtest", "PCICt", "pillar", "pkgconfig", "plogr", "plotly", 
+           "plotrix", "plyr", "prabclus", "prediction", "prettyunits", "progress", 
+           "psych", "purrr", "pwr", "quantreg", "questionr", "R.methodsS3", 
+           "R.oo", "R6", "raster", "RColorBrewer", "Rcpp", "RcppEigen", 
+           "RcppRoll", "RCurl", "readr", "readxl", "rematch", "reshape", 
+           "reshape2", "rio", "rje", "rlang", "rlist", "RMySQL", "RNetCDF", 
+           "robustbase", "rrefine", "rstudioapi", "rtf", "rworldmap", "rworldxtra", 
+           "sandwich", "scales", "scatterplot3d", "selectr", "shape", "shiny", 
+           "signmedian.test", "sjlabelled", "sjmisc", "sjPlot", "sjstats", 
+           "snakecase", "sourcetools", "sp", "spam", "SparseM", "stringdist", 
+           "stringi", "stringr", "survey", "survival", "svglite", "TH.data", 
+           "tibble", "tidyr", "tidyselect", "TMB", "trimcluster", "utf8", 
+           "viridis", "viridisLite", "visreg", "wakefield", "whisker", "withr", 
+           "XML", "xtable", "yaml", "zoo")
+
+versions <- c("1.4-5", "1.13", "1.9-3", "0.2.0", "1.1.2", "0.1-3", 
+              "1.4.0", "1.66.0-1", "0.1", "0.2", "1.0-6", "1.0-4", "1.3-20", 
+              "0.4.3", "0.8-0", "2.1-6", "3.0-0", "1.17.1", "1.1.0", "1.8.5", 
+              "2.3-52", "0.4.3", "0.2-4", "0.4-93", "7.3-14", "0.1-24", "1.0.0", 
+              "3.1-5", "1.1-6", "2.0.6", "1.9.0", "0.19-1", "0.2-15", "1.2-2", 
+              "2.3", "1.3-2", "0.9.2", "1.3.4", "1.0.0", "3.1", "1.22", "3.0-12", 
+              "1.10.4-3", "0.7", "1.7.0", "1.0-8", "1.13.5", "2.0-0", "0.6.15", 
+              "0.75-7", "1.0-4", "0.9-5.2", "0.7.4", "0.4", "1.5.6", "1.6-8", 
+              "4.0-0", "0.4.1", "1.1", "2.3.0", "1.3", "0.10.1", "1.12", "2.0-8", 
+              "1.0.5", "1.39", "1.0.7", "9.6", "1.0-9", "1.01-2", "2.3-14", 
+              "0.3.0", "1.4.4", "0.8-69", "2.1-11", "0.3.0", "2.18.0", "0.1.6", 
+              "0.2-2", "1.3.2", "0.1-20", "0.3.1", "0.6.2", "0.4.2", "2.2.1", 
+              "0.1.6", "0.7.0", "2.8", "0.4.0", "3.4.0", "0.21.0", "0.2.0", 
+              "0.0.12", "1.2.0", "3.0.1", "2.3", "0.2.0", "3.5.0", "1.1.1", 
+              "1.3-4", "1.27.2", "0.6", "0.4.1", "1.11.2", "0.3.6", "1.0", 
+              "1.3.5", "1.3.1", "1.0.9", "0.7.2.9", "1.5", "0.9-25", "2.23-15", 
+              "1.19", "0.3", "1.0.1", "6.0-0", "0.20-35", "0.6-28", "0.2.1", 
+              "3.0", "1.1-15", "1.2-3", "0.9-35", "1.7.2", "1.5", "2.2-6", 
+              "1.2-5", "3.2.0", "0.9-2", "0.8", "7.3-48", "1.2-12", "0.4-1", 
+              "5.4", "1.1.0", "0.3.0", "1.8-23", "0.5", "0.1.1", "1.2.4", "1.5-5", 
+              "0.1.1", "0.2-21", "1.1.1", "0.4.2", "0.16.0", "1.4-8", "0.4.3", 
+              "1.0-7", "0.7.1.295", "0.3-3", "1.16", "3.1-131.1", "1.0.4", 
+              "7.3-12", "1.0-4", "0.2.2", "2.1-5", "1.0", "4.0.17", "0.4-7", 
+              "0.5-4", "1.1.0", "2.0.1", "0.1-1", "4.7.1", "3.7", "1.8.4", 
+              "2.2-6", "0.2.0", "1.0.2", "1.1.2", "1.7.8", "0.2.4", "1.2-1", 
+              "5.35", "0.6.2", "1.7.1", "1.21.0", "2.2.2", "2.6-7", "1.1-2", 
+              "0.12.15", "0.3.3.4.0", "0.2.2", "1.95-4.10", "1.1.1", "1.0.0", 
+              "1.0.1", "0.8.7", "1.4.3", "0.5.9", "1.9", "0.1.6", "0.4.6.1", 
+              "0.10.13", "1.9-1", "0.92-8", "1.0", "0.7", "0.4-11", "1.3-6", 
+              "1.01", "2.4-0", "0.5.0", "0.3-40", "0.3-1", "1.4.4", "1.0.5", 
+              "1.5.1", "1.0.7", "2.7.0", "2.4.1", "0.14.1", "0.8.1", "0.1.6", 
+              "1.2-7", "2.1-2", "1.77", "0.9.4.6", "1.1.6", "1.3.0", "3.33", 
+              "2.41-3", "1.2.1", "1.0-8", "1.4.2", "0.8.0", "0.2.3", "1.7.12", 
+              "0.1-2", "1.1.3", "0.5.0", "0.3.0", "2.4-1", "0.3.0", "0.3-2", 
+              "2.1.1", "3.98-1.10", "1.8-2", "2.1.16", "1.8-1")
+
+##################################################
+
+# Returns package names from packs which are not installed with the correct version
+packages_not_installed <- function() {
+  success <- invisible(mapply(function(p, v) length(find.package(p, quiet = TRUE)) > 0 && compareVersion(as.character(packageVersion(p)), v) >= 0, packs, versions))
+  return(names(success)[!success])
 }
+
+load_R_Instat_packages <- function() {
+  # ggthemes temp added because themes list doesn't contain package names
+  # sp needed for plot.region() function which requires sp loaded but gives errors through R-Instat
+  # plyr and dplyr loaded in order to avoid conflicts
+  # ggplot2 loaded for convenience
+  # svglite and ggofrtify needed for View Graph dialog
+  # PCICt needed to access PCICt class when importing NET cdf files
+  packs_to_load <- c("plyr", "dplyr", "ggplot2", "ggthemes", "svglite", "ggfortify", "PCICt", "sp")
+  for(pack in packs_to_load) {
+    try(library(pack, character.only = TRUE))
+  }
+}
+
+# Returns package names from packs_to_load which are not loaded
+packages_not_loaded <- function() {
+  return(packs_to_load[!packs_to_load %in% .packages()])
+}
+
+##################################################
+
+success <- invisible(mapply(function(p, v) length(find.package(p, quiet = TRUE)) > 0 && compareVersion(as.character(packageVersion(p)), v) >= 0, packs, versions))
+if(!all(success)) install.packages(names(success)[!success], repos = paste0("file:///", getwd(), "/extras"), type = "win.binary")
+
+load_R_Instat_packages()
 
 setwd(dirname(parent.frame(2)$ofile))
 source("instat_object_R6.R")
 source("data_object_R6.R")
 source("labels_and_defaults.R")
 source("stand_alone_functions.R")
-files <- sort(dir(file.path(getwd(), 'Backend_Components/'),pattern=".R$", full.names = TRUE))
-lapply(files, source, chdir = TRUE)
+files <- sort(dir(file.path(getwd(), 'Backend_Components/'), pattern=".R$", full.names = TRUE))
+invisible(lapply(files, source, chdir = TRUE))

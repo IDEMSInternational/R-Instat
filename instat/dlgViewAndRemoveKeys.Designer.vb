@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgViewAndRemoveKeys
     Inherits System.Windows.Forms.Form
 
@@ -22,63 +38,68 @@ Partial Class dlgViewAndRemoveKeys
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgViewAndRemoveKeys))
         Me.lblSelectedKey = New System.Windows.Forms.Label()
-        Me.ucrChkRemoveKey = New instat.ucrCheck()
         Me.ucrReceiverSelectedKey = New instat.ucrReceiverSingle()
         Me.ucrSelectorKeys = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.rdoDeleteKey = New System.Windows.Forms.RadioButton()
+        Me.rdoViewKey = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlKeys = New instat.UcrPanel()
         Me.SuspendLayout()
         '
         'lblSelectedKey
         '
-        Me.lblSelectedKey.AutoSize = True
-        Me.lblSelectedKey.Location = New System.Drawing.Point(266, 45)
+        resources.ApplyResources(Me.lblSelectedKey, "lblSelectedKey")
         Me.lblSelectedKey.Name = "lblSelectedKey"
-        Me.lblSelectedKey.Size = New System.Drawing.Size(73, 13)
-        Me.lblSelectedKey.TabIndex = 1
-        Me.lblSelectedKey.Text = "Selected Key:"
-        '
-        'ucrChkRemoveKey
-        '
-        Me.ucrChkRemoveKey.Checked = False
-        Me.ucrChkRemoveKey.Location = New System.Drawing.Point(266, 87)
-        Me.ucrChkRemoveKey.Name = "ucrChkRemoveKey"
-        Me.ucrChkRemoveKey.Size = New System.Drawing.Size(145, 20)
-        Me.ucrChkRemoveKey.TabIndex = 3
         '
         'ucrReceiverSelectedKey
         '
         Me.ucrReceiverSelectedKey.frmParent = Me
-        Me.ucrReceiverSelectedKey.Location = New System.Drawing.Point(266, 60)
-        Me.ucrReceiverSelectedKey.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverSelectedKey, "ucrReceiverSelectedKey")
         Me.ucrReceiverSelectedKey.Name = "ucrReceiverSelectedKey"
         Me.ucrReceiverSelectedKey.Selector = Nothing
-        Me.ucrReceiverSelectedKey.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSelectedKey.TabIndex = 2
+        Me.ucrReceiverSelectedKey.strNcFilePath = ""
+        Me.ucrReceiverSelectedKey.ucrSelector = Nothing
         '
         'ucrSelectorKeys
         '
         Me.ucrSelectorKeys.bShowHiddenColumns = False
         Me.ucrSelectorKeys.bUseCurrentFilter = True
-        Me.ucrSelectorKeys.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorKeys.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorKeys, "ucrSelectorKeys")
         Me.ucrSelectorKeys.Name = "ucrSelectorKeys"
-        Me.ucrSelectorKeys.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorKeys.TabIndex = 0
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 203)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 4
+        '
+        'rdoDeleteKey
+        '
+        resources.ApplyResources(Me.rdoDeleteKey, "rdoDeleteKey")
+        Me.rdoDeleteKey.Name = "rdoDeleteKey"
+        Me.rdoDeleteKey.TabStop = True
+        Me.rdoDeleteKey.UseVisualStyleBackColor = True
+        '
+        'rdoViewKey
+        '
+        resources.ApplyResources(Me.rdoViewKey, "rdoViewKey")
+        Me.rdoViewKey.Name = "rdoViewKey"
+        Me.rdoViewKey.TabStop = True
+        Me.rdoViewKey.UseVisualStyleBackColor = True
+        '
+        'ucrPnlKeys
+        '
+        resources.ApplyResources(Me.ucrPnlKeys, "ucrPnlKeys")
+        Me.ucrPnlKeys.Name = "ucrPnlKeys"
         '
         'dlgViewAndRemoveKeys
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(424, 260)
-        Me.Controls.Add(Me.ucrChkRemoveKey)
+        Me.Controls.Add(Me.rdoDeleteKey)
+        Me.Controls.Add(Me.rdoViewKey)
+        Me.Controls.Add(Me.ucrPnlKeys)
         Me.Controls.Add(Me.lblSelectedKey)
         Me.Controls.Add(Me.ucrReceiverSelectedKey)
         Me.Controls.Add(Me.ucrSelectorKeys)
@@ -87,8 +108,6 @@ Partial Class dlgViewAndRemoveKeys
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgViewAndRemoveKeys"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "View and Remove Keys"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -98,5 +117,7 @@ Partial Class dlgViewAndRemoveKeys
     Friend WithEvents ucrSelectorKeys As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverSelectedKey As ucrReceiverSingle
     Friend WithEvents lblSelectedKey As Label
-    Friend WithEvents ucrChkRemoveKey As ucrCheck
+    Friend WithEvents rdoDeleteKey As RadioButton
+    Friend WithEvents rdoViewKey As RadioButton
+    Friend WithEvents ucrPnlKeys As UcrPanel
 End Class

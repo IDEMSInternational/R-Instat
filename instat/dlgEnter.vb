@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
@@ -50,6 +50,7 @@ Public Class dlgEnter
         ucrSaveEnterResultInto.SetDefaultTypeAsColumn()
         ucrSaveEnterResultInto.SetDataFrameSelector(ucrDataFrameEnter)
         ucrSaveEnterResultInto.SetValidationTypeAsRVariable()
+        cmdTry.Enabled = False
     End Sub
     Private Sub SetDefaults()
         chkShowEnterArguments.Checked = False
@@ -75,7 +76,7 @@ Public Class dlgEnter
 
     Private Sub SaveResults()
         If chkSaveEnterResultInto.Checked Then
-            ucrBase.clsRsyntax.SetAssignTo(ucrSaveEnterResultInto.GetText(), strTempColumn:=ucrSaveEnterResultInto.GetText(), strTempDataframe:=ucrDataFrameEnter.cboAvailableDataFrames.Text)
+            ucrBase.clsRsyntax.SetAssignTo(ucrSaveEnterResultInto.GetText(), strTempColumn:=ucrSaveEnterResultInto.GetText(), strTempDataframe:=ucrDataFrameEnter.cboAvailableDataFrames.Text, bRequireCorrectLength:=False)
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
             ucrBase.clsRsyntax.iCallType = 0
         Else
