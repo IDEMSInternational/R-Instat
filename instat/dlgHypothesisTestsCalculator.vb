@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Imports RDotNet
 Public Class dlgHypothesisTestsCalculator
@@ -213,7 +212,7 @@ Public Class dlgHypothesisTestsCalculator
         End If
     End Sub
 
-    Private Sub cmdBox_Click(sender As Object, e As EventArgs) Handles cmdBox.Click
+    Private Sub cmdbox_Click(sender As Object, e As EventArgs) Handles cmdbox.Click
         If ucrChkShowArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("Box.test(x= , lag = 1, type = c(""Box-Pierce"", ""Ljung-Box""), fitdf = 0)", 59)
         Else
@@ -413,11 +412,43 @@ Public Class dlgHypothesisTestsCalculator
         End If
     End Sub
 
-    Private Sub btnWilcox_Click(sender As Object, e As EventArgs) Handles btnWilcox.Click
+    Private Sub btnWilcox_Click(sender As Object, e As EventArgs)
         If ucrChkShowArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("wilcox.test(x= , y = NULL,alternative = c(""two.sided"", ""less"", ""greater""), mu = 0, paired = FALSE, exact = NULL, correct = TRUE,conf.int = FALSE, conf.level = 0.95)", 150)
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("wilcox.test( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdAnsari_Click(sender As Object, e As EventArgs) Handles cmdAnsari.Click
+        If ucrChkShowArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("ansari.test(ansari.test(x =, y=,alternative = c(""two.sided"", ""less"", ""greater""), exact = NULL, conf.int = FALSE, conf.level = 0.95,))", 150)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("ansari.test( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdMantelhaen_Click(sender As Object, e As EventArgs) Handles cmdMantelhaen.Click
+        If ucrChkShowArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("mantelhaen.test(x =, y = NULL, z = NULL,alternative = c(""two.sided"", ""less"", ""greater""),correct = TRUE, exact = FALSE, conf.level = 0.95)", 150)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("mantelhaen.test( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdQuade_Click(sender As Object, e As EventArgs) Handles cmdQuade.Click
+        If ucrChkShowArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("quade.test(y =, groups, blocks)", 150)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("quade.test( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdPP_Click(sender As Object, e As EventArgs) Handles cmdPP.Click
+        If ucrChkShowArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("PP.test(x =, lshort = TRUE)", 150)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("PP.test( )", 1)
         End If
     End Sub
 

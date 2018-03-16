@@ -35,10 +35,9 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdSquiggle = New System.Windows.Forms.Button()
         Me.cmdSquareBrackets = New System.Windows.Forms.Button()
         Me.cmdTry = New System.Windows.Forms.Button()
-        Me.grpTests = New System.Windows.Forms.GroupBox()
+        Me.grpStats1 = New System.Windows.Forms.GroupBox()
         Me.btnClear = New System.Windows.Forms.Button()
         Me.btnT = New System.Windows.Forms.Button()
-        Me.btnWilcox = New System.Windows.Forms.Button()
         Me.btnProp = New System.Windows.Forms.Button()
         Me.btnPoisson = New System.Windows.Forms.Button()
         Me.cmdWilcox = New System.Windows.Forms.Button()
@@ -50,7 +49,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdPaiwiseWilcox = New System.Windows.Forms.Button()
         Me.cmdKruskal = New System.Windows.Forms.Button()
         Me.cmdChisq = New System.Windows.Forms.Button()
-        Me.cmdBox = New System.Windows.Forms.Button()
+        Me.cmdbox = New System.Windows.Forms.Button()
         Me.cmdKs = New System.Windows.Forms.Button()
         Me.cmdFriedman = New System.Windows.Forms.Button()
         Me.cmdOneway = New System.Windows.Forms.Button()
@@ -77,8 +76,15 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrSelectorColumn = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrChkShowArguments = New instat.ucrCheck()
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
+        Me.cmdAnsari = New System.Windows.Forms.Button()
+        Me.cmdMantelhaen = New System.Windows.Forms.Button()
+        Me.cmdQuade = New System.Windows.Forms.Button()
+        Me.cmdPP = New System.Windows.Forms.Button()
+        Me.grpStats2 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.grpMainKeyboard.SuspendLayout()
-        Me.grpTests.SuspendLayout()
+        Me.grpStats1.SuspendLayout()
+        Me.grpStats2.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblTest
@@ -104,7 +110,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpMainKeyboard.Controls.Add(Me.btnAlt)
         Me.grpMainKeyboard.Controls.Add(Me.cmdSquiggle)
         Me.grpMainKeyboard.Controls.Add(Me.cmdSquareBrackets)
-        Me.grpMainKeyboard.Location = New System.Drawing.Point(416, 243)
+        Me.grpMainKeyboard.Location = New System.Drawing.Point(412, 273)
         Me.grpMainKeyboard.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.grpMainKeyboard.Name = "grpMainKeyboard"
         Me.grpMainKeyboard.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
@@ -227,50 +233,38 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdTry.Text = "Try"
         Me.cmdTry.UseVisualStyleBackColor = True
         '
-        'grpTests
+        'grpStats1
         '
-        Me.grpTests.Controls.Add(Me.btnClear)
-        Me.grpTests.Controls.Add(Me.btnT)
-        Me.grpTests.Controls.Add(Me.btnWilcox)
-        Me.grpTests.Controls.Add(Me.btnProp)
-        Me.grpTests.Controls.Add(Me.btnPoisson)
-        Me.grpTests.Controls.Add(Me.cmdWilcox)
-        Me.grpTests.Controls.Add(Me.cmdVar)
-        Me.grpTests.Controls.Add(Me.cmdShapiro)
-        Me.grpTests.Controls.Add(Me.cmdPropTrend)
-        Me.grpTests.Controls.Add(Me.cmdPowerProp)
-        Me.grpTests.Controls.Add(Me.cmdPowerT)
-        Me.grpTests.Controls.Add(Me.cmdPaiwiseWilcox)
-        Me.grpTests.Controls.Add(Me.cmdKruskal)
-        Me.grpTests.Controls.Add(Me.cmdChisq)
-        Me.grpTests.Controls.Add(Me.cmdBox)
-        Me.grpTests.Controls.Add(Me.cmdKs)
-        Me.grpTests.Controls.Add(Me.cmdFriedman)
-        Me.grpTests.Controls.Add(Me.cmdOneway)
-        Me.grpTests.Controls.Add(Me.cmdMood)
-        Me.grpTests.Controls.Add(Me.cmdPowerAnova)
-        Me.grpTests.Controls.Add(Me.cmdCor)
-        Me.grpTests.Controls.Add(Me.cmdMcnemar)
-        Me.grpTests.Controls.Add(Me.cmdPairwiseProp)
-        Me.grpTests.Controls.Add(Me.cmdfligner)
-        Me.grpTests.Controls.Add(Me.cmdBinom)
-        Me.grpTests.Controls.Add(Me.cmdBartlett)
-        Me.grpTests.Controls.Add(Me.cmdfisher)
-        Me.grpTests.Controls.Add(Me.cmdPairwiset)
-        Me.grpTests.Controls.Add(Me.cmdMauchly)
-        Me.grpTests.Location = New System.Drawing.Point(247, 77)
-        Me.grpTests.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.grpTests.Name = "grpTests"
-        Me.grpTests.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.grpTests.Size = New System.Drawing.Size(423, 167)
-        Me.grpTests.TabIndex = 6
-        Me.grpTests.TabStop = False
+        Me.grpStats1.Controls.Add(Me.btnT)
+        Me.grpStats1.Controls.Add(Me.btnProp)
+        Me.grpStats1.Controls.Add(Me.btnPoisson)
+        Me.grpStats1.Controls.Add(Me.cmdVar)
+        Me.grpStats1.Controls.Add(Me.cmdShapiro)
+        Me.grpStats1.Controls.Add(Me.cmdWilcox)
+        Me.grpStats1.Controls.Add(Me.cmdKruskal)
+        Me.grpStats1.Controls.Add(Me.cmdChisq)
+        Me.grpStats1.Controls.Add(Me.cmdbox)
+        Me.grpStats1.Controls.Add(Me.cmdKs)
+        Me.grpStats1.Controls.Add(Me.cmdFriedman)
+        Me.grpStats1.Controls.Add(Me.cmdOneway)
+        Me.grpStats1.Controls.Add(Me.cmdCor)
+        Me.grpStats1.Controls.Add(Me.cmdBinom)
+        Me.grpStats1.Controls.Add(Me.cmdBartlett)
+        Me.grpStats1.Controls.Add(Me.cmdfisher)
+        Me.grpStats1.Location = New System.Drawing.Point(247, 77)
+        Me.grpStats1.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.grpStats1.Name = "grpStats1"
+        Me.grpStats1.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.grpStats1.Size = New System.Drawing.Size(287, 141)
+        Me.grpStats1.TabIndex = 6
+        Me.grpStats1.TabStop = False
+        Me.grpStats1.Text = "Stats1"
         '
         'btnClear
         '
         Me.btnClear.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.btnClear.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnClear.Location = New System.Drawing.Point(348, 130)
+        Me.btnClear.Location = New System.Drawing.Point(220, 105)
         Me.btnClear.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(69, 30)
@@ -281,7 +275,7 @@ Partial Class dlgHypothesisTestsCalculator
         'btnT
         '
         Me.btnT.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnT.Location = New System.Drawing.Point(73, 130)
+        Me.btnT.Location = New System.Drawing.Point(73, 104)
         Me.btnT.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.btnT.Name = "btnT"
         Me.btnT.Size = New System.Drawing.Size(69, 30)
@@ -289,21 +283,10 @@ Partial Class dlgHypothesisTestsCalculator
         Me.btnT.Text = "t"
         Me.btnT.UseVisualStyleBackColor = True
         '
-        'btnWilcox
-        '
-        Me.btnWilcox.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnWilcox.Location = New System.Drawing.Point(211, 130)
-        Me.btnWilcox.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.btnWilcox.Name = "btnWilcox"
-        Me.btnWilcox.Size = New System.Drawing.Size(69, 30)
-        Me.btnWilcox.TabIndex = 166
-        Me.btnWilcox.Text = "wilcox"
-        Me.btnWilcox.UseVisualStyleBackColor = True
-        '
         'btnProp
         '
         Me.btnProp.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnProp.Location = New System.Drawing.Point(280, 130)
+        Me.btnProp.Location = New System.Drawing.Point(211, 74)
         Me.btnProp.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.btnProp.Name = "btnProp"
         Me.btnProp.Size = New System.Drawing.Size(69, 30)
@@ -314,7 +297,7 @@ Partial Class dlgHypothesisTestsCalculator
         'btnPoisson
         '
         Me.btnPoisson.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnPoisson.Location = New System.Drawing.Point(348, 101)
+        Me.btnPoisson.Location = New System.Drawing.Point(142, 74)
         Me.btnPoisson.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.btnPoisson.Name = "btnPoisson"
         Me.btnPoisson.Size = New System.Drawing.Size(69, 30)
@@ -326,7 +309,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.cmdWilcox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdWilcox.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdWilcox.Location = New System.Drawing.Point(348, 43)
+        Me.cmdWilcox.Location = New System.Drawing.Point(211, 104)
         Me.cmdWilcox.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdWilcox.Name = "cmdWilcox"
         Me.cmdWilcox.Size = New System.Drawing.Size(69, 30)
@@ -338,7 +321,7 @@ Partial Class dlgHypothesisTestsCalculator
         'cmdVar
         '
         Me.cmdVar.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdVar.Location = New System.Drawing.Point(142, 130)
+        Me.cmdVar.Location = New System.Drawing.Point(142, 104)
         Me.cmdVar.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdVar.Name = "cmdVar"
         Me.cmdVar.Size = New System.Drawing.Size(69, 30)
@@ -349,7 +332,7 @@ Partial Class dlgHypothesisTestsCalculator
         'cmdShapiro
         '
         Me.cmdShapiro.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdShapiro.Location = New System.Drawing.Point(4, 130)
+        Me.cmdShapiro.Location = New System.Drawing.Point(4, 104)
         Me.cmdShapiro.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdShapiro.Name = "cmdShapiro"
         Me.cmdShapiro.Size = New System.Drawing.Size(69, 30)
@@ -360,7 +343,7 @@ Partial Class dlgHypothesisTestsCalculator
         'cmdPropTrend
         '
         Me.cmdPropTrend.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPropTrend.Location = New System.Drawing.Point(280, 101)
+        Me.cmdPropTrend.Location = New System.Drawing.Point(5, 104)
         Me.cmdPropTrend.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdPropTrend.Name = "cmdPropTrend"
         Me.cmdPropTrend.Size = New System.Drawing.Size(69, 30)
@@ -371,7 +354,7 @@ Partial Class dlgHypothesisTestsCalculator
         'cmdPowerProp
         '
         Me.cmdPowerProp.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPowerProp.Location = New System.Drawing.Point(80, 72)
+        Me.cmdPowerProp.Location = New System.Drawing.Point(146, 74)
         Me.cmdPowerProp.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdPowerProp.Name = "cmdPowerProp"
         Me.cmdPowerProp.Size = New System.Drawing.Size(83, 30)
@@ -382,7 +365,7 @@ Partial Class dlgHypothesisTestsCalculator
         'cmdPowerT
         '
         Me.cmdPowerT.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPowerT.Location = New System.Drawing.Point(211, 101)
+        Me.cmdPowerT.Location = New System.Drawing.Point(229, 74)
         Me.cmdPowerT.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdPowerT.Name = "cmdPowerT"
         Me.cmdPowerT.Size = New System.Drawing.Size(69, 30)
@@ -394,7 +377,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.cmdPaiwiseWilcox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdPaiwiseWilcox.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPaiwiseWilcox.Location = New System.Drawing.Point(324, 72)
+        Me.cmdPaiwiseWilcox.Location = New System.Drawing.Point(229, 44)
         Me.cmdPaiwiseWilcox.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdPaiwiseWilcox.Name = "cmdPaiwiseWilcox"
         Me.cmdPaiwiseWilcox.Size = New System.Drawing.Size(93, 30)
@@ -406,7 +389,7 @@ Partial Class dlgHypothesisTestsCalculator
         'cmdKruskal
         '
         Me.cmdKruskal.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdKruskal.Location = New System.Drawing.Point(211, 43)
+        Me.cmdKruskal.Location = New System.Drawing.Point(211, 44)
         Me.cmdKruskal.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdKruskal.Name = "cmdKruskal"
         Me.cmdKruskal.Size = New System.Drawing.Size(69, 30)
@@ -425,21 +408,21 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdChisq.Text = "chisq"
         Me.cmdChisq.UseVisualStyleBackColor = True
         '
-        'cmdBox
+        'cmdbox
         '
-        Me.cmdBox.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdBox.Location = New System.Drawing.Point(142, 14)
-        Me.cmdBox.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdBox.Name = "cmdBox"
-        Me.cmdBox.Size = New System.Drawing.Size(69, 30)
-        Me.cmdBox.TabIndex = 153
-        Me.cmdBox.Text = " Box"
-        Me.cmdBox.UseVisualStyleBackColor = True
+        Me.cmdbox.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdbox.Location = New System.Drawing.Point(142, 14)
+        Me.cmdbox.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdbox.Name = "cmdbox"
+        Me.cmdbox.Size = New System.Drawing.Size(69, 30)
+        Me.cmdbox.TabIndex = 153
+        Me.cmdbox.Text = " box"
+        Me.cmdbox.UseVisualStyleBackColor = True
         '
         'cmdKs
         '
         Me.cmdKs.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdKs.Location = New System.Drawing.Point(142, 43)
+        Me.cmdKs.Location = New System.Drawing.Point(4, 74)
         Me.cmdKs.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdKs.Name = "cmdKs"
         Me.cmdKs.Size = New System.Drawing.Size(69, 30)
@@ -450,7 +433,7 @@ Partial Class dlgHypothesisTestsCalculator
         'cmdFriedman
         '
         Me.cmdFriedman.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFriedman.Location = New System.Drawing.Point(73, 43)
+        Me.cmdFriedman.Location = New System.Drawing.Point(142, 44)
         Me.cmdFriedman.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdFriedman.Name = "cmdFriedman"
         Me.cmdFriedman.Size = New System.Drawing.Size(69, 30)
@@ -461,7 +444,7 @@ Partial Class dlgHypothesisTestsCalculator
         'cmdOneway
         '
         Me.cmdOneway.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdOneway.Location = New System.Drawing.Point(142, 101)
+        Me.cmdOneway.Location = New System.Drawing.Point(73, 74)
         Me.cmdOneway.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdOneway.Name = "cmdOneway"
         Me.cmdOneway.Size = New System.Drawing.Size(69, 30)
@@ -472,7 +455,7 @@ Partial Class dlgHypothesisTestsCalculator
         'cmdMood
         '
         Me.cmdMood.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMood.Location = New System.Drawing.Point(73, 101)
+        Me.cmdMood.Location = New System.Drawing.Point(74, 44)
         Me.cmdMood.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdMood.Name = "cmdMood"
         Me.cmdMood.Size = New System.Drawing.Size(69, 30)
@@ -483,7 +466,7 @@ Partial Class dlgHypothesisTestsCalculator
         'cmdPowerAnova
         '
         Me.cmdPowerAnova.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPowerAnova.Location = New System.Drawing.Point(4, 72)
+        Me.cmdPowerAnova.Location = New System.Drawing.Point(74, 74)
         Me.cmdPowerAnova.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdPowerAnova.Name = "cmdPowerAnova"
         Me.cmdPowerAnova.Size = New System.Drawing.Size(77, 30)
@@ -494,7 +477,7 @@ Partial Class dlgHypothesisTestsCalculator
         'cmdCor
         '
         Me.cmdCor.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCor.Location = New System.Drawing.Point(280, 14)
+        Me.cmdCor.Location = New System.Drawing.Point(4, 44)
         Me.cmdCor.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdCor.Name = "cmdCor"
         Me.cmdCor.Size = New System.Drawing.Size(69, 30)
@@ -505,7 +488,7 @@ Partial Class dlgHypothesisTestsCalculator
         'cmdMcnemar
         '
         Me.cmdMcnemar.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMcnemar.Location = New System.Drawing.Point(4, 101)
+        Me.cmdMcnemar.Location = New System.Drawing.Point(5, 44)
         Me.cmdMcnemar.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdMcnemar.Name = "cmdMcnemar"
         Me.cmdMcnemar.Size = New System.Drawing.Size(69, 30)
@@ -517,7 +500,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.cmdPairwiseProp.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdPairwiseProp.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPairwiseProp.Location = New System.Drawing.Point(162, 72)
+        Me.cmdPairwiseProp.Location = New System.Drawing.Point(142, 44)
         Me.cmdPairwiseProp.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdPairwiseProp.Name = "cmdPairwiseProp"
         Me.cmdPairwiseProp.Size = New System.Drawing.Size(83, 30)
@@ -529,7 +512,7 @@ Partial Class dlgHypothesisTestsCalculator
         'cmdfligner
         '
         Me.cmdfligner.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdfligner.Location = New System.Drawing.Point(4, 43)
+        Me.cmdfligner.Location = New System.Drawing.Point(74, 14)
         Me.cmdfligner.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdfligner.Name = "cmdfligner"
         Me.cmdfligner.Size = New System.Drawing.Size(69, 30)
@@ -562,7 +545,7 @@ Partial Class dlgHypothesisTestsCalculator
         'cmdfisher
         '
         Me.cmdfisher.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdfisher.Location = New System.Drawing.Point(348, 14)
+        Me.cmdfisher.Location = New System.Drawing.Point(73, 44)
         Me.cmdfisher.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdfisher.Name = "cmdfisher"
         Me.cmdfisher.Size = New System.Drawing.Size(69, 30)
@@ -574,10 +557,10 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.cmdPairwiset.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdPairwiset.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPairwiset.Location = New System.Drawing.Point(244, 72)
+        Me.cmdPairwiset.Location = New System.Drawing.Point(5, 74)
         Me.cmdPairwiset.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdPairwiset.Name = "cmdPairwiset"
-        Me.cmdPairwiset.Size = New System.Drawing.Size(81, 30)
+        Me.cmdPairwiset.Size = New System.Drawing.Size(69, 30)
         Me.cmdPairwiset.TabIndex = 144
         Me.cmdPairwiset.Text = "pairwise.t"
         Me.cmdPairwiset.UseVisualStyleBackColor = True
@@ -585,7 +568,7 @@ Partial Class dlgHypothesisTestsCalculator
         'cmdMauchly
         '
         Me.cmdMauchly.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMauchly.Location = New System.Drawing.Point(280, 43)
+        Me.cmdMauchly.Location = New System.Drawing.Point(217, 14)
         Me.cmdMauchly.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdMauchly.Name = "cmdMauchly"
         Me.cmdMauchly.Size = New System.Drawing.Size(69, 30)
@@ -686,15 +669,95 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrReceiverForTestColumn.TabIndex = 1
         Me.ucrReceiverForTestColumn.ucrSelector = Nothing
         '
+        'cmdAnsari
+        '
+        Me.cmdAnsari.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdAnsari.Location = New System.Drawing.Point(5, 14)
+        Me.cmdAnsari.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdAnsari.Name = "cmdAnsari"
+        Me.cmdAnsari.Size = New System.Drawing.Size(69, 30)
+        Me.cmdAnsari.TabIndex = 169
+        Me.cmdAnsari.Text = "ansari"
+        Me.cmdAnsari.UseVisualStyleBackColor = True
+        '
+        'cmdMantelhaen
+        '
+        Me.cmdMantelhaen.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdMantelhaen.Location = New System.Drawing.Point(142, 14)
+        Me.cmdMantelhaen.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdMantelhaen.Name = "cmdMantelhaen"
+        Me.cmdMantelhaen.Size = New System.Drawing.Size(70, 30)
+        Me.cmdMantelhaen.TabIndex = 170
+        Me.cmdMantelhaen.Text = "mantelhaen"
+        Me.cmdMantelhaen.UseVisualStyleBackColor = True
+        '
+        'cmdQuade
+        '
+        Me.cmdQuade.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdQuade.Location = New System.Drawing.Point(147, 105)
+        Me.cmdQuade.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdQuade.Name = "cmdQuade"
+        Me.cmdQuade.Size = New System.Drawing.Size(69, 30)
+        Me.cmdQuade.TabIndex = 171
+        Me.cmdQuade.Text = "quade"
+        Me.cmdQuade.UseVisualStyleBackColor = True
+        '
+        'cmdPP
+        '
+        Me.cmdPP.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPP.Location = New System.Drawing.Point(74, 105)
+        Me.cmdPP.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdPP.Name = "cmdPP"
+        Me.cmdPP.Size = New System.Drawing.Size(69, 28)
+        Me.cmdPP.TabIndex = 172
+        Me.cmdPP.Text = "PP"
+        Me.cmdPP.UseVisualStyleBackColor = True
+        '
+        'grpStats2
+        '
+        Me.grpStats2.Controls.Add(Me.cmdPP)
+        Me.grpStats2.Controls.Add(Me.cmdQuade)
+        Me.grpStats2.Controls.Add(Me.btnClear)
+        Me.grpStats2.Controls.Add(Me.cmdAnsari)
+        Me.grpStats2.Controls.Add(Me.cmdfligner)
+        Me.grpStats2.Controls.Add(Me.cmdMcnemar)
+        Me.grpStats2.Controls.Add(Me.cmdMantelhaen)
+        Me.grpStats2.Controls.Add(Me.cmdMauchly)
+        Me.grpStats2.Controls.Add(Me.cmdMood)
+        Me.grpStats2.Controls.Add(Me.cmdPairwiset)
+        Me.grpStats2.Controls.Add(Me.cmdPropTrend)
+        Me.grpStats2.Controls.Add(Me.cmdPowerAnova)
+        Me.grpStats2.Controls.Add(Me.cmdPairwiseProp)
+        Me.grpStats2.Controls.Add(Me.cmdPaiwiseWilcox)
+        Me.grpStats2.Controls.Add(Me.cmdPowerT)
+        Me.grpStats2.Controls.Add(Me.cmdPowerProp)
+        Me.grpStats2.Location = New System.Drawing.Point(539, 77)
+        Me.grpStats2.Name = "grpStats2"
+        Me.grpStats2.Size = New System.Drawing.Size(379, 160)
+        Me.grpStats2.TabIndex = 14
+        Me.grpStats2.TabStop = False
+        Me.grpStats2.Text = "Stats2"
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Location = New System.Drawing.Point(625, 285)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(200, 100)
+        Me.GroupBox2.TabIndex = 15
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "GroupBox2"
+        '
         'dlgHypothesisTestsCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(677, 487)
+        Me.ClientSize = New System.Drawing.Size(891, 487)
+        Me.Controls.Add(Me.GroupBox2)
+        Me.Controls.Add(Me.grpStats2)
         Me.Controls.Add(Me.ucrSaveResult)
         Me.Controls.Add(Me.ucrInputComboRPackage)
         Me.Controls.Add(Me.lblRpackage)
-        Me.Controls.Add(Me.grpTests)
+        Me.Controls.Add(Me.grpStats1)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrInputTryMessage)
         Me.Controls.Add(Me.cmdTry)
@@ -712,7 +775,8 @@ Partial Class dlgHypothesisTestsCalculator
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Hypothesis Tests"
         Me.grpMainKeyboard.ResumeLayout(False)
-        Me.grpTests.ResumeLayout(False)
+        Me.grpStats1.ResumeLayout(False)
+        Me.grpStats2.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -736,12 +800,12 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents ucrInputTryMessage As ucrInputTextBox
     Friend WithEvents cmdTry As Button
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents grpTests As GroupBox
+    Friend WithEvents grpStats1 As GroupBox
     Friend WithEvents cmdPowerT As Button
     Friend WithEvents cmdPaiwiseWilcox As Button
     Friend WithEvents cmdKruskal As Button
     Friend WithEvents cmdChisq As Button
-    Friend WithEvents cmdBox As Button
+    Friend WithEvents cmdbox As Button
     Friend WithEvents cmdKs As Button
     Friend WithEvents cmdFriedman As Button
     Friend WithEvents cmdOneway As Button
@@ -765,10 +829,15 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents btnProp As Button
     Friend WithEvents btnPoisson As Button
     Friend WithEvents btnT As Button
-    Friend WithEvents btnWilcox As Button
     Friend WithEvents btnClear As Button
     Friend WithEvents tpConf As ToolTip
     Friend WithEvents tpAlt As ToolTip
     Friend WithEvents ucrInputComboRPackage As ucrInputComboBox
     Friend WithEvents ucrSaveResult As ucrSave
+    Friend WithEvents cmdPP As Button
+    Friend WithEvents cmdQuade As Button
+    Friend WithEvents cmdMantelhaen As Button
+    Friend WithEvents cmdAnsari As Button
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents grpStats2 As GroupBox
 End Class
