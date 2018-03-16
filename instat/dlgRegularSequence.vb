@@ -26,7 +26,7 @@ Public Class dlgRegularSequence
     Private clsByDateOperator As New ROperator
     Private clsDefaultStartDate As RFunction
     Private clsDefaultEndDate As RFunction
-    Public bSetDefaultRdo As Boolean
+    Public bNumericIsDefault As Boolean
 
     Private Sub dlgRegularSequence_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'autoTranslate(Me)
@@ -37,13 +37,13 @@ Public Class dlgRegularSequence
         If bReset Then
             SetDefaults()
         End If
-        setDefaultRdo()
+        SetDefaultRdo()
         SetRCodeForControls(bReset)
         bReset = False
     End Sub
     'This sub is meant to set the default radiobutton on diffrent places on the Menu.
-    Private Sub setDefaultRdo()
-        If bSetDefaultRdo Then
+    Private Sub SetDefaultRdo()
+        If bNumericIsDefault Then
             rdoNumeric.Checked = True
         Else
             rdoDates.Checked = True
@@ -215,7 +215,7 @@ Public Class dlgRegularSequence
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
-        setDefaultRdo()
+        SetDefaultRdo()
         TestOKEnabled()
     End Sub
 
