@@ -20,10 +20,12 @@ Public Class dlgHypothesisTestsCalculator
     Private clsAttach As New RFunction
     Private clsDetach As New RFunction
     Public bFirstLoad As Boolean = True
+    Private iBasicWidth As Integer
     Private Sub dlgHypothesisTestsCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
+            iBasicWidth = Me.Width
             SetDefaults()
             bFirstLoad = False
         End If
@@ -575,6 +577,23 @@ Public Class dlgHypothesisTestsCalculator
         Else
             ucrReceiverForTestColumn.SetMeAsReceiver()
         End If
+    End Sub
+
+    Private Sub ucrInputComboRPackage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboRPackage.ControlValueChanged
+        Select Case ucrInputComboRPackage.GetText
+            Case "Stats"
+                grpAgricolae.Visible = False
+                grpStats1.Visible = True
+                grpStats2.Visible = True
+                Me.Size = New Size(iBasicWidth, Me.Height)
+            Case "Agricolae"
+                Me.Size = New Size(iBasicWidth * 0.75, Me.Height)
+                grpStats1.Visible = False
+                grpStats2.Visible = False
+                grpAgricolae.Visible = True
+            Case Else
+                Me.Size = New Size(iBasicWidth, Me.Height)
+        End Select
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset

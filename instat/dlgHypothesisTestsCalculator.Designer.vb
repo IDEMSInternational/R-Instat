@@ -67,6 +67,26 @@ Partial Class dlgHypothesisTestsCalculator
         Me.lblRpackage = New System.Windows.Forms.Label()
         Me.tpConf = New System.Windows.Forms.ToolTip(Me.components)
         Me.tpAlt = New System.Windows.Forms.ToolTip(Me.components)
+        Me.cmdAnsari = New System.Windows.Forms.Button()
+        Me.cmdMantelhaen = New System.Windows.Forms.Button()
+        Me.cmdQuade = New System.Windows.Forms.Button()
+        Me.cmdPP = New System.Windows.Forms.Button()
+        Me.grpStats2 = New System.Windows.Forms.GroupBox()
+        Me.grpAgricolae = New System.Windows.Forms.GroupBox()
+        Me.cmdPBIB = New System.Windows.Forms.Button()
+        Me.cmdAgriKruskal = New System.Windows.Forms.Button()
+        Me.cmdScheffe = New System.Windows.Forms.Button()
+        Me.cmdDurbin = New System.Windows.Forms.Button()
+        Me.cmdAgriFriedman = New System.Windows.Forms.Button()
+        Me.cmdSNK = New System.Windows.Forms.Button()
+        Me.cmdWaerden = New System.Windows.Forms.Button()
+        Me.cmdAgriWaller = New System.Windows.Forms.Button()
+        Me.cmdAgriNonAdditivity = New System.Windows.Forms.Button()
+        Me.cmdMedian = New System.Windows.Forms.Button()
+        Me.cmdREGW = New System.Windows.Forms.Button()
+        Me.cmdLSD = New System.Windows.Forms.Button()
+        Me.cmdDuncan = New System.Windows.Forms.Button()
+        Me.cmdBIB = New System.Windows.Forms.Button()
         Me.ucrSaveResult = New instat.ucrSave()
         Me.ucrInputComboRPackage = New instat.ucrInputComboBox()
         Me.ucrBase = New instat.ucrButtons()
@@ -76,26 +96,6 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrSelectorColumn = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrChkShowArguments = New instat.ucrCheck()
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
-        Me.cmdAnsari = New System.Windows.Forms.Button()
-        Me.cmdMantelhaen = New System.Windows.Forms.Button()
-        Me.cmdQuade = New System.Windows.Forms.Button()
-        Me.cmdPP = New System.Windows.Forms.Button()
-        Me.grpStats2 = New System.Windows.Forms.GroupBox()
-        Me.grpAgricolae = New System.Windows.Forms.GroupBox()
-        Me.cmdBIB = New System.Windows.Forms.Button()
-        Me.cmdDuncan = New System.Windows.Forms.Button()
-        Me.cmdLSD = New System.Windows.Forms.Button()
-        Me.cmdREGW = New System.Windows.Forms.Button()
-        Me.cmdMedian = New System.Windows.Forms.Button()
-        Me.cmdAgriNonAdditivity = New System.Windows.Forms.Button()
-        Me.cmdAgriWaller = New System.Windows.Forms.Button()
-        Me.cmdWaerden = New System.Windows.Forms.Button()
-        Me.cmdSNK = New System.Windows.Forms.Button()
-        Me.cmdAgriFriedman = New System.Windows.Forms.Button()
-        Me.cmdDurbin = New System.Windows.Forms.Button()
-        Me.cmdScheffe = New System.Windows.Forms.Button()
-        Me.cmdAgriKruskal = New System.Windows.Forms.Button()
-        Me.cmdPBIB = New System.Windows.Forms.Button()
         Me.grpMainKeyboard.SuspendLayout()
         Me.grpStats1.SuspendLayout()
         Me.grpStats2.SuspendLayout()
@@ -125,7 +125,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpMainKeyboard.Controls.Add(Me.btnAlt)
         Me.grpMainKeyboard.Controls.Add(Me.cmdSquiggle)
         Me.grpMainKeyboard.Controls.Add(Me.cmdSquareBrackets)
-        Me.grpMainKeyboard.Location = New System.Drawing.Point(414, 251)
+        Me.grpMainKeyboard.Location = New System.Drawing.Point(414, 248)
         Me.grpMainKeyboard.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.grpMainKeyboard.Name = "grpMainKeyboard"
         Me.grpMainKeyboard.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
@@ -266,7 +266,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpStats1.Controls.Add(Me.cmdBinom)
         Me.grpStats1.Controls.Add(Me.cmdBartlett)
         Me.grpStats1.Controls.Add(Me.cmdfisher)
-        Me.grpStats1.Location = New System.Drawing.Point(247, 77)
+        Me.grpStats1.Location = New System.Drawing.Point(248, 79)
         Me.grpStats1.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.grpStats1.Name = "grpStats1"
         Me.grpStats1.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
@@ -600,90 +600,6 @@ Partial Class dlgHypothesisTestsCalculator
         Me.lblRpackage.TabIndex = 4
         Me.lblRpackage.Text = "R package:"
         '
-        'ucrSaveResult
-        '
-        Me.ucrSaveResult.Location = New System.Drawing.Point(10, 385)
-        Me.ucrSaveResult.Name = "ucrSaveResult"
-        Me.ucrSaveResult.Size = New System.Drawing.Size(255, 24)
-        Me.ucrSaveResult.TabIndex = 12
-        '
-        'ucrInputComboRPackage
-        '
-        Me.ucrInputComboRPackage.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboRPackage.IsReadOnly = False
-        Me.ucrInputComboRPackage.Location = New System.Drawing.Point(317, 51)
-        Me.ucrInputComboRPackage.Name = "ucrInputComboRPackage"
-        Me.ucrInputComboRPackage.Size = New System.Drawing.Size(123, 21)
-        Me.ucrInputComboRPackage.TabIndex = 5
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 426)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(452, 52)
-        Me.ucrBase.TabIndex = 13
-        '
-        'ucrInputTryMessage
-        '
-        Me.ucrInputTryMessage.AddQuotesIfUnrecognised = True
-        Me.ucrInputTryMessage.IsMultiline = False
-        Me.ucrInputTryMessage.IsReadOnly = True
-        Me.ucrInputTryMessage.Location = New System.Drawing.Point(89, 354)
-        Me.ucrInputTryMessage.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.ucrInputTryMessage.Name = "ucrInputTryMessage"
-        Me.ucrInputTryMessage.Size = New System.Drawing.Size(321, 22)
-        Me.ucrInputTryMessage.TabIndex = 11
-        '
-        'ucrChkBy
-        '
-        Me.ucrChkBy.Checked = False
-        Me.ucrChkBy.Location = New System.Drawing.Point(218, 251)
-        Me.ucrChkBy.Name = "ucrChkBy"
-        Me.ucrChkBy.Size = New System.Drawing.Size(69, 20)
-        Me.ucrChkBy.TabIndex = 7
-        '
-        'ucrReceiverMultiple
-        '
-        Me.ucrReceiverMultiple.frmParent = Me
-        Me.ucrReceiverMultiple.Location = New System.Drawing.Point(290, 251)
-        Me.ucrReceiverMultiple.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverMultiple.Name = "ucrReceiverMultiple"
-        Me.ucrReceiverMultiple.Selector = Nothing
-        Me.ucrReceiverMultiple.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverMultiple.strNcFilePath = ""
-        Me.ucrReceiverMultiple.TabIndex = 8
-        Me.ucrReceiverMultiple.ucrSelector = Nothing
-        '
-        'ucrSelectorColumn
-        '
-        Me.ucrSelectorColumn.bShowHiddenColumns = False
-        Me.ucrSelectorColumn.bUseCurrentFilter = True
-        Me.ucrSelectorColumn.Location = New System.Drawing.Point(19, 56)
-        Me.ucrSelectorColumn.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorColumn.Name = "ucrSelectorColumn"
-        Me.ucrSelectorColumn.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorColumn.TabIndex = 3
-        '
-        'ucrChkShowArguments
-        '
-        Me.ucrChkShowArguments.Checked = False
-        Me.ucrChkShowArguments.Location = New System.Drawing.Point(539, 25)
-        Me.ucrChkShowArguments.Name = "ucrChkShowArguments"
-        Me.ucrChkShowArguments.Size = New System.Drawing.Size(131, 20)
-        Me.ucrChkShowArguments.TabIndex = 2
-        '
-        'ucrReceiverForTestColumn
-        '
-        Me.ucrReceiverForTestColumn.frmParent = Me
-        Me.ucrReceiverForTestColumn.Location = New System.Drawing.Point(50, 25)
-        Me.ucrReceiverForTestColumn.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.ucrReceiverForTestColumn.Name = "ucrReceiverForTestColumn"
-        Me.ucrReceiverForTestColumn.Selector = Nothing
-        Me.ucrReceiverForTestColumn.Size = New System.Drawing.Size(484, 28)
-        Me.ucrReceiverForTestColumn.strNcFilePath = ""
-        Me.ucrReceiverForTestColumn.TabIndex = 1
-        Me.ucrReceiverForTestColumn.ucrSelector = Nothing
-        '
         'cmdAnsari
         '
         Me.cmdAnsari.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -769,155 +685,12 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpAgricolae.Controls.Add(Me.cmdLSD)
         Me.grpAgricolae.Controls.Add(Me.cmdDuncan)
         Me.grpAgricolae.Controls.Add(Me.cmdBIB)
-        Me.grpAgricolae.Location = New System.Drawing.Point(578, 236)
+        Me.grpAgricolae.Location = New System.Drawing.Point(247, 78)
         Me.grpAgricolae.Name = "grpAgricolae"
         Me.grpAgricolae.Size = New System.Drawing.Size(314, 140)
         Me.grpAgricolae.TabIndex = 15
         Me.grpAgricolae.TabStop = False
         Me.grpAgricolae.Text = "Agricolae"
-        '
-        'cmdBIB
-        '
-        Me.cmdBIB.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdBIB.Location = New System.Drawing.Point(6, 19)
-        Me.cmdBIB.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdBIB.Name = "cmdBIB"
-        Me.cmdBIB.Size = New System.Drawing.Size(77, 30)
-        Me.cmdBIB.TabIndex = 173
-        Me.cmdBIB.Text = "BIB"
-        Me.cmdBIB.UseVisualStyleBackColor = True
-        '
-        'cmdDuncan
-        '
-        Me.cmdDuncan.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDuncan.Location = New System.Drawing.Point(82, 19)
-        Me.cmdDuncan.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdDuncan.Name = "cmdDuncan"
-        Me.cmdDuncan.Size = New System.Drawing.Size(77, 30)
-        Me.cmdDuncan.TabIndex = 174
-        Me.cmdDuncan.Text = "duncan"
-        Me.cmdDuncan.UseVisualStyleBackColor = True
-        '
-        'cmdLSD
-        '
-        Me.cmdLSD.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdLSD.Location = New System.Drawing.Point(82, 48)
-        Me.cmdLSD.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdLSD.Name = "cmdLSD"
-        Me.cmdLSD.Size = New System.Drawing.Size(77, 30)
-        Me.cmdLSD.TabIndex = 175
-        Me.cmdLSD.Text = "LSD"
-        Me.cmdLSD.UseVisualStyleBackColor = True
-        '
-        'cmdREGW
-        '
-        Me.cmdREGW.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdREGW.Location = New System.Drawing.Point(82, 78)
-        Me.cmdREGW.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdREGW.Name = "cmdREGW"
-        Me.cmdREGW.Size = New System.Drawing.Size(77, 30)
-        Me.cmdREGW.TabIndex = 176
-        Me.cmdREGW.Text = "REGW"
-        Me.cmdREGW.UseVisualStyleBackColor = True
-        '
-        'cmdMedian
-        '
-        Me.cmdMedian.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMedian.Location = New System.Drawing.Point(158, 48)
-        Me.cmdMedian.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdMedian.Name = "cmdMedian"
-        Me.cmdMedian.Size = New System.Drawing.Size(77, 30)
-        Me.cmdMedian.TabIndex = 177
-        Me.cmdMedian.Text = "median"
-        Me.cmdMedian.UseVisualStyleBackColor = True
-        '
-        'cmdAgriNonAdditivity
-        '
-        Me.cmdAgriNonAdditivity.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdAgriNonAdditivity.Location = New System.Drawing.Point(234, 48)
-        Me.cmdAgriNonAdditivity.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdAgriNonAdditivity.Name = "cmdAgriNonAdditivity"
-        Me.cmdAgriNonAdditivity.Size = New System.Drawing.Size(77, 30)
-        Me.cmdAgriNonAdditivity.TabIndex = 178
-        Me.cmdAgriNonAdditivity.Text = "nonadditivity "
-        Me.cmdAgriNonAdditivity.UseVisualStyleBackColor = True
-        '
-        'cmdAgriWaller
-        '
-        Me.cmdAgriWaller.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdAgriWaller.Location = New System.Drawing.Point(158, 107)
-        Me.cmdAgriWaller.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdAgriWaller.Name = "cmdAgriWaller"
-        Me.cmdAgriWaller.Size = New System.Drawing.Size(77, 30)
-        Me.cmdAgriWaller.TabIndex = 179
-        Me.cmdAgriWaller.Text = "waller "
-        Me.cmdAgriWaller.UseVisualStyleBackColor = True
-        '
-        'cmdWaerden
-        '
-        Me.cmdWaerden.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdWaerden.Location = New System.Drawing.Point(82, 107)
-        Me.cmdWaerden.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdWaerden.Name = "cmdWaerden"
-        Me.cmdWaerden.Size = New System.Drawing.Size(77, 30)
-        Me.cmdWaerden.TabIndex = 180
-        Me.cmdWaerden.Text = "waerden"
-        Me.cmdWaerden.UseVisualStyleBackColor = True
-        '
-        'cmdSNK
-        '
-        Me.cmdSNK.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdSNK.Location = New System.Drawing.Point(6, 107)
-        Me.cmdSNK.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdSNK.Name = "cmdSNK"
-        Me.cmdSNK.Size = New System.Drawing.Size(77, 30)
-        Me.cmdSNK.TabIndex = 181
-        Me.cmdSNK.Text = "SNK"
-        Me.cmdSNK.UseVisualStyleBackColor = True
-        '
-        'cmdAgriFriedman
-        '
-        Me.cmdAgriFriedman.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdAgriFriedman.Location = New System.Drawing.Point(234, 19)
-        Me.cmdAgriFriedman.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdAgriFriedman.Name = "cmdAgriFriedman"
-        Me.cmdAgriFriedman.Size = New System.Drawing.Size(77, 30)
-        Me.cmdAgriFriedman.TabIndex = 182
-        Me.cmdAgriFriedman.Text = "friedman"
-        Me.cmdAgriFriedman.UseVisualStyleBackColor = True
-        '
-        'cmdDurbin
-        '
-        Me.cmdDurbin.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDurbin.Location = New System.Drawing.Point(158, 19)
-        Me.cmdDurbin.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdDurbin.Name = "cmdDurbin"
-        Me.cmdDurbin.Size = New System.Drawing.Size(77, 30)
-        Me.cmdDurbin.TabIndex = 183
-        Me.cmdDurbin.Text = "durbin"
-        Me.cmdDurbin.UseVisualStyleBackColor = True
-        '
-        'cmdScheffe
-        '
-        Me.cmdScheffe.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdScheffe.Location = New System.Drawing.Point(158, 78)
-        Me.cmdScheffe.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdScheffe.Name = "cmdScheffe"
-        Me.cmdScheffe.Size = New System.Drawing.Size(77, 30)
-        Me.cmdScheffe.TabIndex = 184
-        Me.cmdScheffe.Text = "scheffe"
-        Me.cmdScheffe.UseVisualStyleBackColor = True
-        '
-        'cmdAgriKruskal
-        '
-        Me.cmdAgriKruskal.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdAgriKruskal.Location = New System.Drawing.Point(6, 48)
-        Me.cmdAgriKruskal.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdAgriKruskal.Name = "cmdAgriKruskal"
-        Me.cmdAgriKruskal.Size = New System.Drawing.Size(77, 30)
-        Me.cmdAgriKruskal.TabIndex = 185
-        Me.cmdAgriKruskal.Text = "kruskal"
-        Me.cmdAgriKruskal.UseVisualStyleBackColor = True
         '
         'cmdPBIB
         '
@@ -930,12 +703,238 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdPBIB.Text = "PBIB"
         Me.cmdPBIB.UseVisualStyleBackColor = True
         '
+        'cmdAgriKruskal
+        '
+        Me.cmdAgriKruskal.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdAgriKruskal.Location = New System.Drawing.Point(6, 48)
+        Me.cmdAgriKruskal.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdAgriKruskal.Name = "cmdAgriKruskal"
+        Me.cmdAgriKruskal.Size = New System.Drawing.Size(77, 30)
+        Me.cmdAgriKruskal.TabIndex = 185
+        Me.cmdAgriKruskal.Text = "kruskal"
+        Me.cmdAgriKruskal.UseVisualStyleBackColor = True
+        '
+        'cmdScheffe
+        '
+        Me.cmdScheffe.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdScheffe.Location = New System.Drawing.Point(158, 78)
+        Me.cmdScheffe.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdScheffe.Name = "cmdScheffe"
+        Me.cmdScheffe.Size = New System.Drawing.Size(77, 30)
+        Me.cmdScheffe.TabIndex = 184
+        Me.cmdScheffe.Text = "scheffe"
+        Me.cmdScheffe.UseVisualStyleBackColor = True
+        '
+        'cmdDurbin
+        '
+        Me.cmdDurbin.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdDurbin.Location = New System.Drawing.Point(158, 19)
+        Me.cmdDurbin.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdDurbin.Name = "cmdDurbin"
+        Me.cmdDurbin.Size = New System.Drawing.Size(77, 30)
+        Me.cmdDurbin.TabIndex = 183
+        Me.cmdDurbin.Text = "durbin"
+        Me.cmdDurbin.UseVisualStyleBackColor = True
+        '
+        'cmdAgriFriedman
+        '
+        Me.cmdAgriFriedman.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdAgriFriedman.Location = New System.Drawing.Point(234, 19)
+        Me.cmdAgriFriedman.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdAgriFriedman.Name = "cmdAgriFriedman"
+        Me.cmdAgriFriedman.Size = New System.Drawing.Size(77, 30)
+        Me.cmdAgriFriedman.TabIndex = 182
+        Me.cmdAgriFriedman.Text = "friedman"
+        Me.cmdAgriFriedman.UseVisualStyleBackColor = True
+        '
+        'cmdSNK
+        '
+        Me.cmdSNK.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdSNK.Location = New System.Drawing.Point(6, 107)
+        Me.cmdSNK.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdSNK.Name = "cmdSNK"
+        Me.cmdSNK.Size = New System.Drawing.Size(77, 30)
+        Me.cmdSNK.TabIndex = 181
+        Me.cmdSNK.Text = "SNK"
+        Me.cmdSNK.UseVisualStyleBackColor = True
+        '
+        'cmdWaerden
+        '
+        Me.cmdWaerden.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdWaerden.Location = New System.Drawing.Point(82, 107)
+        Me.cmdWaerden.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdWaerden.Name = "cmdWaerden"
+        Me.cmdWaerden.Size = New System.Drawing.Size(77, 30)
+        Me.cmdWaerden.TabIndex = 180
+        Me.cmdWaerden.Text = "waerden"
+        Me.cmdWaerden.UseVisualStyleBackColor = True
+        '
+        'cmdAgriWaller
+        '
+        Me.cmdAgriWaller.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdAgriWaller.Location = New System.Drawing.Point(158, 107)
+        Me.cmdAgriWaller.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdAgriWaller.Name = "cmdAgriWaller"
+        Me.cmdAgriWaller.Size = New System.Drawing.Size(77, 30)
+        Me.cmdAgriWaller.TabIndex = 179
+        Me.cmdAgriWaller.Text = "waller "
+        Me.cmdAgriWaller.UseVisualStyleBackColor = True
+        '
+        'cmdAgriNonAdditivity
+        '
+        Me.cmdAgriNonAdditivity.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdAgriNonAdditivity.Location = New System.Drawing.Point(234, 48)
+        Me.cmdAgriNonAdditivity.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdAgriNonAdditivity.Name = "cmdAgriNonAdditivity"
+        Me.cmdAgriNonAdditivity.Size = New System.Drawing.Size(77, 30)
+        Me.cmdAgriNonAdditivity.TabIndex = 178
+        Me.cmdAgriNonAdditivity.Text = "nonadditivity "
+        Me.cmdAgriNonAdditivity.UseVisualStyleBackColor = True
+        '
+        'cmdMedian
+        '
+        Me.cmdMedian.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdMedian.Location = New System.Drawing.Point(158, 48)
+        Me.cmdMedian.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdMedian.Name = "cmdMedian"
+        Me.cmdMedian.Size = New System.Drawing.Size(77, 30)
+        Me.cmdMedian.TabIndex = 177
+        Me.cmdMedian.Text = "median"
+        Me.cmdMedian.UseVisualStyleBackColor = True
+        '
+        'cmdREGW
+        '
+        Me.cmdREGW.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdREGW.Location = New System.Drawing.Point(82, 78)
+        Me.cmdREGW.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdREGW.Name = "cmdREGW"
+        Me.cmdREGW.Size = New System.Drawing.Size(77, 30)
+        Me.cmdREGW.TabIndex = 176
+        Me.cmdREGW.Text = "REGW"
+        Me.cmdREGW.UseVisualStyleBackColor = True
+        '
+        'cmdLSD
+        '
+        Me.cmdLSD.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdLSD.Location = New System.Drawing.Point(82, 48)
+        Me.cmdLSD.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdLSD.Name = "cmdLSD"
+        Me.cmdLSD.Size = New System.Drawing.Size(77, 30)
+        Me.cmdLSD.TabIndex = 175
+        Me.cmdLSD.Text = "LSD"
+        Me.cmdLSD.UseVisualStyleBackColor = True
+        '
+        'cmdDuncan
+        '
+        Me.cmdDuncan.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdDuncan.Location = New System.Drawing.Point(82, 19)
+        Me.cmdDuncan.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdDuncan.Name = "cmdDuncan"
+        Me.cmdDuncan.Size = New System.Drawing.Size(77, 30)
+        Me.cmdDuncan.TabIndex = 174
+        Me.cmdDuncan.Text = "duncan"
+        Me.cmdDuncan.UseVisualStyleBackColor = True
+        '
+        'cmdBIB
+        '
+        Me.cmdBIB.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdBIB.Location = New System.Drawing.Point(6, 19)
+        Me.cmdBIB.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdBIB.Name = "cmdBIB"
+        Me.cmdBIB.Size = New System.Drawing.Size(77, 30)
+        Me.cmdBIB.TabIndex = 173
+        Me.cmdBIB.Text = "BIB"
+        Me.cmdBIB.UseVisualStyleBackColor = True
+        '
+        'ucrSaveResult
+        '
+        Me.ucrSaveResult.Location = New System.Drawing.Point(10, 385)
+        Me.ucrSaveResult.Name = "ucrSaveResult"
+        Me.ucrSaveResult.Size = New System.Drawing.Size(255, 24)
+        Me.ucrSaveResult.TabIndex = 12
+        '
+        'ucrInputComboRPackage
+        '
+        Me.ucrInputComboRPackage.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboRPackage.IsReadOnly = False
+        Me.ucrInputComboRPackage.Location = New System.Drawing.Point(317, 51)
+        Me.ucrInputComboRPackage.Name = "ucrInputComboRPackage"
+        Me.ucrInputComboRPackage.Size = New System.Drawing.Size(123, 21)
+        Me.ucrInputComboRPackage.TabIndex = 5
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(12, 426)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(452, 52)
+        Me.ucrBase.TabIndex = 13
+        '
+        'ucrInputTryMessage
+        '
+        Me.ucrInputTryMessage.AddQuotesIfUnrecognised = True
+        Me.ucrInputTryMessage.IsMultiline = False
+        Me.ucrInputTryMessage.IsReadOnly = True
+        Me.ucrInputTryMessage.Location = New System.Drawing.Point(89, 354)
+        Me.ucrInputTryMessage.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.ucrInputTryMessage.Name = "ucrInputTryMessage"
+        Me.ucrInputTryMessage.Size = New System.Drawing.Size(321, 22)
+        Me.ucrInputTryMessage.TabIndex = 11
+        '
+        'ucrChkBy
+        '
+        Me.ucrChkBy.Checked = False
+        Me.ucrChkBy.Location = New System.Drawing.Point(218, 251)
+        Me.ucrChkBy.Name = "ucrChkBy"
+        Me.ucrChkBy.Size = New System.Drawing.Size(69, 20)
+        Me.ucrChkBy.TabIndex = 7
+        '
+        'ucrReceiverMultiple
+        '
+        Me.ucrReceiverMultiple.frmParent = Me
+        Me.ucrReceiverMultiple.Location = New System.Drawing.Point(290, 251)
+        Me.ucrReceiverMultiple.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMultiple.Name = "ucrReceiverMultiple"
+        Me.ucrReceiverMultiple.Selector = Nothing
+        Me.ucrReceiverMultiple.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverMultiple.strNcFilePath = ""
+        Me.ucrReceiverMultiple.TabIndex = 8
+        Me.ucrReceiverMultiple.ucrSelector = Nothing
+        '
+        'ucrSelectorColumn
+        '
+        Me.ucrSelectorColumn.bShowHiddenColumns = False
+        Me.ucrSelectorColumn.bUseCurrentFilter = True
+        Me.ucrSelectorColumn.Location = New System.Drawing.Point(19, 56)
+        Me.ucrSelectorColumn.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorColumn.Name = "ucrSelectorColumn"
+        Me.ucrSelectorColumn.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorColumn.TabIndex = 3
+        '
+        'ucrChkShowArguments
+        '
+        Me.ucrChkShowArguments.Checked = False
+        Me.ucrChkShowArguments.Location = New System.Drawing.Point(539, 25)
+        Me.ucrChkShowArguments.Name = "ucrChkShowArguments"
+        Me.ucrChkShowArguments.Size = New System.Drawing.Size(131, 20)
+        Me.ucrChkShowArguments.TabIndex = 2
+        '
+        'ucrReceiverForTestColumn
+        '
+        Me.ucrReceiverForTestColumn.frmParent = Me
+        Me.ucrReceiverForTestColumn.Location = New System.Drawing.Point(50, 25)
+        Me.ucrReceiverForTestColumn.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.ucrReceiverForTestColumn.Name = "ucrReceiverForTestColumn"
+        Me.ucrReceiverForTestColumn.Selector = Nothing
+        Me.ucrReceiverForTestColumn.Size = New System.Drawing.Size(484, 28)
+        Me.ucrReceiverForTestColumn.strNcFilePath = ""
+        Me.ucrReceiverForTestColumn.TabIndex = 1
+        Me.ucrReceiverForTestColumn.ucrSelector = Nothing
+        '
         'dlgHypothesisTestsCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(904, 487)
-        Me.Controls.Add(Me.grpAgricolae)
+        Me.ClientSize = New System.Drawing.Size(877, 487)
         Me.Controls.Add(Me.grpStats2)
         Me.Controls.Add(Me.ucrSaveResult)
         Me.Controls.Add(Me.ucrInputComboRPackage)
@@ -951,6 +950,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.Controls.Add(Me.ucrChkShowArguments)
         Me.Controls.Add(Me.lblTest)
         Me.Controls.Add(Me.ucrReceiverForTestColumn)
+        Me.Controls.Add(Me.grpAgricolae)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
