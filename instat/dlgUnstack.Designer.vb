@@ -39,7 +39,6 @@ Partial Class dlgUnstack
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgUnstack))
         Me.lblFactorToUnstackBy = New System.Windows.Forms.Label()
-        Me.lblColumnToUnstack = New System.Windows.Forms.Label()
         Me.lblCarryColumns = New System.Windows.Forms.Label()
         Me.rdoSingle = New System.Windows.Forms.RadioButton()
         Me.rdoMultiple = New System.Windows.Forms.RadioButton()
@@ -49,7 +48,6 @@ Partial Class dlgUnstack
         Me.ucrNewDFName = New instat.ucrSave()
         Me.ucrChkDropMissingCombinations = New instat.ucrCheck()
         Me.ucrReceiverCarryColumns = New instat.ucrReceiverMultiple()
-        Me.ucrColumnToUnstackReceiver = New instat.ucrReceiverSingle()
         Me.ucrFactorToUnstackReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorForUnstack = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
@@ -61,12 +59,6 @@ Partial Class dlgUnstack
         resources.ApplyResources(Me.lblFactorToUnstackBy, "lblFactorToUnstackBy")
         Me.lblFactorToUnstackBy.Name = "lblFactorToUnstackBy"
         Me.lblFactorToUnstackBy.Tag = "Factor_to_Unstack_By"
-        '
-        'lblColumnToUnstack
-        '
-        resources.ApplyResources(Me.lblColumnToUnstack, "lblColumnToUnstack")
-        Me.lblColumnToUnstack.Name = "lblColumnToUnstack"
-        Me.lblColumnToUnstack.Tag = "Column_to_Unstack:"
         '
         'lblCarryColumns
         '
@@ -140,15 +132,6 @@ Partial Class dlgUnstack
         Me.ucrReceiverCarryColumns.strNcFilePath = ""
         Me.ucrReceiverCarryColumns.ucrSelector = Nothing
         '
-        'ucrColumnToUnstackReceiver
-        '
-        Me.ucrColumnToUnstackReceiver.frmParent = Me
-        resources.ApplyResources(Me.ucrColumnToUnstackReceiver, "ucrColumnToUnstackReceiver")
-        Me.ucrColumnToUnstackReceiver.Name = "ucrColumnToUnstackReceiver"
-        Me.ucrColumnToUnstackReceiver.Selector = Nothing
-        Me.ucrColumnToUnstackReceiver.strNcFilePath = ""
-        Me.ucrColumnToUnstackReceiver.ucrSelector = Nothing
-        '
         'ucrFactorToUnstackReceiver
         '
         Me.ucrFactorToUnstackReceiver.frmParent = Me
@@ -187,9 +170,7 @@ Partial Class dlgUnstack
         Me.Controls.Add(Me.ucrNewDFName)
         Me.Controls.Add(Me.ucrChkDropMissingCombinations)
         Me.Controls.Add(Me.ucrReceiverCarryColumns)
-        Me.Controls.Add(Me.ucrColumnToUnstackReceiver)
         Me.Controls.Add(Me.ucrFactorToUnstackReceiver)
-        Me.Controls.Add(Me.lblColumnToUnstack)
         Me.Controls.Add(Me.lblFactorToUnstackBy)
         Me.Controls.Add(Me.ucrSelectorForUnstack)
         Me.Controls.Add(Me.ucrBase)
@@ -207,9 +188,7 @@ Partial Class dlgUnstack
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSelectorForUnstack As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblFactorToUnstackBy As Label
-    Friend WithEvents lblColumnToUnstack As Label
     Friend WithEvents ucrFactorToUnstackReceiver As ucrReceiverSingle
-    Friend WithEvents ucrColumnToUnstackReceiver As ucrReceiverSingle
     Friend WithEvents ucrReceiverCarryColumns As ucrReceiverMultiple
     Friend WithEvents lblCarryColumns As Label
     Friend WithEvents ucrNewDFName As ucrSave

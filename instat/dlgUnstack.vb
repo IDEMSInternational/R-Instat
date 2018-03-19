@@ -54,10 +54,6 @@ Public Class dlgUnstack
         ucrFactorToUnstackReceiver.SetDataType("factor")
         ucrFactorToUnstackReceiver.strSelectorHeading = "Factors"
 
-        ''ucrColumn
-        'ucrColumnToUnstackReceiver.SetParameter(New RParameter("value.var", 4))
-        'ucrColumnToUnstackReceiver.SetParameterIsString()
-        'ucrColumnToUnstackReceiver.Selector = ucrSelectorForUnstack
 
         ''ucrMultipleColumnsReceiver
         'ucrMultipleColumnsReceiver.SetParameter(New RParameter("value.var", 1))
@@ -96,11 +92,8 @@ Public Class dlgUnstack
         ucrPnlUnstackCol.AddRCodeIsRFunctionCondition(rdoRestoreHierarchy, bNewIsPositive:=False)
         'TODO add function name condition for rdoMultiple
 
-
-        ucrPnlUnstackCol.AddToLinkedControls(ucrColumnToUnstackReceiver, {rdoSingle}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlUnstackCol.AddToLinkedControls(ucrMultipleColumnsReceiver, {rdoMultiple}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrColumnToUnstackReceiver.SetLinkedDisplayControl(lblColumnToUnstack)
         ucrMultipleColumnsReceiver.SetLinkedDisplayControl(lblMultipleColumns)
 
     End Sub
@@ -184,7 +177,7 @@ Public Class dlgUnstack
         SetFormula()
     End Sub
 
-    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewDFName.ControlContentsChanged, ucrColumnToUnstackReceiver.ControlContentsChanged, ucrFactorToUnstackReceiver.ControlContentsChanged, ucrReceiverCarryColumns.ControlContentsChanged
+    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewDFName.ControlContentsChanged, ucrFactorToUnstackReceiver.ControlContentsChanged, ucrReceiverCarryColumns.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
