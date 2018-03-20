@@ -110,7 +110,7 @@ Public Class dlgUnstack
 
         clsDcastFunction.SetPackageName("reshape2")
         clsDcastFunction.SetRCommand("dcast")
-        clsDcastFunction.SetAssignTo(ucrSelectorForUnstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked", strTempDataframe:=ucrSelectorForUnstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked")
+        clsDcastFunction.SetAssignTo(ucrSelectorForUnstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_unstacked", strTempDataframe:=ucrSelectorForUnstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_unstacked")
 
         clsSelect.SetPackageName("dplyr")
         clsSelect.SetRCommand("select")
