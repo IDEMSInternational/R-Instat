@@ -46,7 +46,6 @@ Public Class dlgSummaryTables
         ucrInputPageBy.Enabled = False ' temporarily disabled
 
         'summary_name = NA - 8
-
         ucrSelectorSummaryTables.SetParameter(New RParameter("data_name", 0))
         ucrSelectorSummaryTables.SetParameterIsString()
 
@@ -173,9 +172,11 @@ Public Class dlgSummaryTables
     End Sub
 
     Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
-        sdgSummaries.SetRFunction(clsSummariesList, bResetSubdialog)
+        sdgSummaries.SetRFunction(clsSummariesList, clsDefaultFunction, ucrSelectorSummaryTables, bResetSubdialog)
         bResetSubdialog = False
+        sdgSummaries.bEnable2VariableTab = False
         sdgSummaries.ShowDialog()
+        sdgSummaries.bEnable2VariableTab = True
         TestOKEnabled()
     End Sub
 
