@@ -301,6 +301,12 @@
     <Compile Include="dlgParallelCoordinatePlot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgSPI.Designer.vb">
+      <DependentUpon>dlgSPI.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSPI.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgVariableSets.Designer.vb">
       <DependentUpon>dlgVariableSets.vb</DependentUpon>
     </Compile>
@@ -2765,6 +2771,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSpells.sw-KE.resx">
       <DependentUpon>dlgSpells.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSPI.resx">
+      <DependentUpon>dlgSPI.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgStandardiseCountryNames.fr-FR.resx">
       <DependentUpon>dlgStandardiseCountryNames.vb</DependentUpon>
