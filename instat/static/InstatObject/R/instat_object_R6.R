@@ -1581,3 +1581,81 @@ instat_object$set("public","get_variable_sets", function(data_name, set_names, f
   self$get_data_objects(data_name)$get_variable_sets(set_names = set_names, force_as_list = force_as_list)
 }
 )
+
+instat_object$set("public", "crops_definitions", function(data_name, year, station, rain, rain_totals, plant_days, plant_lengths, season_data_name, start_day, end_day) {
+  plant_day_name <- "plant_day"
+  plant_length_name <- "plant_length"
+  rain_total_name <- "rain_total"
+  
+  if(missing(year)) stop("Year column mustbe specified.")
+  if(missing(station)) by <- year
+  else by <- c(year, station)
+  season_by <- self$get_equivalent_columns(from_data_name = data_name, columns = by, to_data_name = season_data_name)
+  if(is.null(season_by)) stop("The data frames specified must be linked by the year/station columns.")
+  year_col <- self$get_columns_from_data(data_name, year)
+  unique_year <- na.omit(unique(year_col))
+  if(!missing(station)) {
+    station_col <- self$get_columns_from_data(data_name, station)
+    unique_station <- na.omit(unique(station_col))
+    df <- setNames(expand.grid(rain_totals, plant_lengths, plant_days, unique_year, unique_station), c(rain_total_name, plant_length_name, plant_day_name, year, station))
+  }
+  else {
+    df <- setNames(expand.grid(rain_totals, plant_lengths, plant_days, unique_year), c(rain_total_name, plant_length_name, plant_day_name, year))
+  }
+  join_by <- by
+  names(join_by) <- season_by
+  season_data <- self$get_data_frame(season_data_name)
+  vars <- c(season_by, start_day, end_day)
+  col_names_exp <- c()
+  i <- 1
+  for(col_name in vars) {
+    col_names_exp[[i]] <- lazyeval::interp(~ var, var = as.name(col_name))
+    i <- i + 1
+  }
+  season_data <- season_data %>% dplyr::select_(.dots = col_names_exp)
+  df <- dplyr::left_join(df, season_data, by = join_by)
+  
+  df$plant_day_cond <- (df[[start_day]] <= df[[plant_day_name]])
+  df$length_cond <- (df[[plant_day_name]] + df[[plant_length_name]] <= df[[end_day]])
+
+  calculated_from <- as.list(by)
+  names(calculated_from) <- rep(data_name, length(by))
+  calculated_from <- as.list(calculated_from)
+  by_calc <- instat_calculation$new(type = "by", calculated_from = calculated_from)
+  
+  calculated_from <- list(rain)
+  names(calculated_from) <- data_name
+  rain_total_calculation <- instat_calculation$new(type = "summary", result_name = "rain_total_actual",
+                                                   function_exp = paste0("summary_sum(x = ", rain, ", na.rm = TRUE)"),
+                                                   calculated_from = calculated_from, save = 0, 
+                                                   manipulations = list(by_calc))
+  rain_total_output <- self$run_instat_calculation(rain_total_calculation)
+  df <- dplyr::left_join(df, rain_total_output, by = by)
+  df$rain_cond <- (df[[rain_total_name]] <= df[["rain_total_actual"]])
+  
+  df$overal_cond <- (df$plant_day_cond & df$length_cond & df$rain_cond)
+  crops_name <- "crop_def"
+  crops_name <- next_default_item(prefix = crops_name, existing_names = self$get_data_names(), include_index = FALSE)
+  data_tables <- list(df)
+  names(data_tables) <- crops_name
+  self$import_data(data_tables = data_tables)
+  crops_by <- season_by
+  names(crops_by) <- by
+  self$add_link(crops_name, season_data_name, crops_by, keyed_link_label)
+  # if(definition_props) {
+  #   calc_from <- list(plant_day_name, plant_length_name, rain_total_name)
+  #   names(calc_from) <- rep()
+  #   plant_group <- instat_calculation$new(type = "by", calculated_from = list("table_calculations" = "plant_day"))
+  #   length_group <- instat_calculation$new(type = "by", calculated_from = list("table_calculations" = "length"))
+  #   total_group <- instat_calculation$new(type = "by", calculated_from = list("table_calculations" = "total"))
+  #   
+  #   propor_table <- instat_calculation$new(function_exp="length(x = overall[overall == TRUE])/length(x = overall)",
+  #                                          save = 2, calculated_from = list("table_calculations"="overall"),
+  #                                          manipulations = list(plant_group, length_group, total_group),
+  #                                          type="summary", result_name = "proportion")
+  #   InstatDataObject$apply_instat_calculation(propor_table)
+  #   
+  #   propor_table <- InstatDataObject$get_data_frame("table_calculations_by_plant_day_length_total")
+  # }
+}
+)
