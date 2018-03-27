@@ -19,6 +19,7 @@ Public Class ROperator
     Public bForceIncludeOperation As Boolean = False
     Public strOperation As String
     Public bBrackets As Boolean = True
+    Public bSpaceAroundOperation As Boolean = True
 
     Public Sub New(Optional strOp As String = "", Optional bBracketsTemp As Boolean = True)
         SetOperation(strOp, bBracketsTemp)
@@ -31,8 +32,15 @@ Public Class ROperator
     End Sub
 
     Public Overrides Function ToScript(Optional ByRef strScript As String = "", Optional strTemp As String = "") As String
+        Dim strAdjustedOperation As String
+
         'Parameters are sorted in the appropriate order and then the script is built.
         SortParameters()
+        If bSpaceAroundOperation Then
+            strAdjustedOperation = Chr(32) & strOperation & Chr(32)
+        Else
+            strAdjustedOperation = strOperation
+        End If
         If clsParameters.Count > 0 Then
             If clsParameters(0) IsNot Nothing Then
                 If clsParameters(0).bIsOperator AndAlso bBrackets Then
@@ -42,11 +50,12 @@ Public Class ROperator
                 End If
                 'If there's only one parameter and bForceIncludeOperation then we include the operator
                 'The position of the operator depends on the parameter position
+
                 If bForceIncludeOperation AndAlso clsParameters.Count = 1 Then
                     If clsParameters(0).Position = 0 Then
-                        strTemp = strTemp & Chr(32) & strOperation & Chr(32)
+                        strTemp = strTemp & strAdjustedOperation
                     Else
-                        strTemp = Chr(32) & strOperation & Chr(32) & strTemp
+                        strTemp = strAdjustedOperation & strTemp
                     End If
                 End If
             Else
@@ -54,7 +63,7 @@ Public Class ROperator
             End If
             For Each clsParam In clsParameters.GetRange(1, clsParameters.Count - 1)
                 'If bIncludeOperation Then
-                strTemp = strTemp & Chr(32) & strOperation & Chr(32)
+                strTemp = strTemp & strAdjustedOperation
                 strTemp = strTemp & clsParam.ToScript(strScript)
             Next
             If bToScriptAsRString Then
@@ -129,13 +138,14 @@ Public Class ROperator
         clsTempROperator.bToScriptAsRString = bToScriptAsRString
         clsTempROperator.Tag = Tag
         For Each clsRParam In clsParameters
-            clsTempROperator.AddParameter(clsRParam.Clone)
+            clsTempROperator.AddParameter(clsRParam.Clone())
         Next
 
         'ROperator specific properties
         clsTempROperator.bForceIncludeOperation = bForceIncludeOperation
         clsTempROperator.strOperation = strOperation
         clsTempROperator.bBrackets = bBrackets
+        clsTempROperator.bSpaceAroundOperation = bSpaceAroundOperation
 
         Return clsTempROperator
     End Function

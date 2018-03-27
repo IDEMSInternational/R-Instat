@@ -66,12 +66,13 @@ Public Class RLink
     Private strRVersionMajorRequired As String = "3"
     Private strRVersionMinorRequired As String = "4"
 
-    Public Sub StartREngine(Optional strScript As String = "", Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True)
+    Public Function StartREngine(Optional strScript As String = "", Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True) As Boolean
         Dim strMissingPackages() As String
         Dim expTemp As SymbolicExpression
         Dim strMajor As String = ""
         Dim strMinor As String = ""
         Dim iCurrentCallType As Integer
+        Dim bClose As Boolean = False
 
         Try
             REngine.SetEnvironmentVariables()
@@ -123,9 +124,11 @@ Public Class RLink
         If strMissingPackages IsNot Nothing AndAlso strMissingPackages.Count > 0 Then
             frmPackageIssues.SetMissingPackages(strMissingPackages)
             frmPackageIssues.ShowDialog()
+            bClose = frmPackageIssues.bCloseRInstat
         End If
         bInstatObjectExists = True
-    End Sub
+        Return bClose
+    End Function
 
     Public Sub RunScriptFromWindow(strNewScript As String, strNewComment As String)
         Dim strSelectedScript As String = strNewScript
@@ -138,7 +141,7 @@ Public Class RLink
                 If strLine.Contains(strInstatDataObject & "$get_graphs") Then
                     iCallType = 3
                 Else
-                    iCallType = 0
+                    iCallType = 2
                 End If
                 RunScript(strScript:=strLine.Trim(vbLf), iCallType:=iCallType, strComment:=strComment, bSeparateThread:=False, bSilent:=False)
                 strComment = ""
@@ -557,7 +560,9 @@ Public Class RLink
                 expTemp = GetSymbol(strTempAssignTo)
                 If expTemp IsNot Nothing Then
                     strTemp = String.Join(Environment.NewLine, expTemp.AsCharacter())
-                    strOutput = strOutput & strTemp & Environment.NewLine
+                    If strTemp <> "" Then
+                        strOutput = strOutput & strTemp & Environment.NewLine
+                    End If
                 End If
             Catch e As Exception
                 MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
