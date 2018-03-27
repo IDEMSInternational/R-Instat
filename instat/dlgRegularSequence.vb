@@ -18,7 +18,6 @@ Imports instat.Translations
 Imports RDotNet
 
 Public Class dlgRegularSequence
-    Private bIsExtended As Boolean = False
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsSeqFunction, clsRepFunction As New RFunction
@@ -27,6 +26,7 @@ Public Class dlgRegularSequence
     Private clsByDateOperator As New ROperator
     Private clsDefaultStartDate As RFunction
     Private clsDefaultEndDate As RFunction
+    Public bNumericIsDefault As Boolean
 
     Private Sub dlgRegularSequence_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'autoTranslate(Me)
@@ -37,8 +37,17 @@ Public Class dlgRegularSequence
         If bReset Then
             SetDefaults()
         End If
+        SetDefaultRdo()
         SetRCodeForControls(bReset)
         bReset = False
+    End Sub
+    'This sub is meant to set the default radiobutton on diffrent places on the Menu.
+    Private Sub SetDefaultRdo()
+        If bNumericIsDefault Then
+            rdoNumeric.Checked = True
+        Else
+            rdoDates.Checked = True
+        End If
     End Sub
 
     Private Sub InitialiseDialog()
@@ -206,6 +215,7 @@ Public Class dlgRegularSequence
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
+        SetDefaultRdo()
         TestOKEnabled()
     End Sub
 
@@ -232,7 +242,7 @@ Public Class dlgRegularSequence
             clsByDateOperator.AddParameter("number", ucrInputInStepsOf.GetText(), iPosition:=0)
         Else
             clsByDateOperator.AddParameter("number", "-" & ucrInputInStepsOf.GetText(), iPosition:=0)
-            End If
+        End If
         CheckSequenceLength()
     End Sub
 
