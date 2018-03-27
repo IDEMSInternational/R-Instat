@@ -63,9 +63,14 @@ Public Class dlgColumnStats
         ucrReceiverByFactor.SetParameterIsString()
 
         ucrChkStoreResults.SetParameter(New RParameter("store_results", 3))
-        ucrChkStoreResults.SetText("Store Results in Data Frame")
+        ucrChkStoreResults.SetText("Store Results")
         ucrChkStoreResults.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkStoreResults.SetRDefault("TRUE")
+
+        ucrChkOriginalLevel.SetParameter(New RParameter("original_level", 7))
+        ucrChkOriginalLevel.SetText("Original Level")
+        ucrChkOriginalLevel.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkOriginalLevel.SetRDefault("FALSE")
 
         ucrChkPrintOutput.SetParameter(New RParameter("return_output", 4))
         ucrChkPrintOutput.SetText("Print Results to Output Window")
@@ -81,6 +86,9 @@ Public Class dlgColumnStats
         ucrChkOmitMissing.SetText("Omit Missing Values")
         ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOmitMissing.SetRDefault("FALSE")
+
+        'linking
+        ucrChkStoreResults.AddToLinkedControls(ucrChkOriginalLevel, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Private Sub SetDefaults()
@@ -142,7 +150,7 @@ Public Class dlgColumnStats
     End Sub
 
     Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
-        sdgSummaries.SetRFunction(clsSummariesList, bResetSubdialog)
+        sdgSummaries.SetRFunction(clsSummariesList, clsDefaultFunction, ucrSelectorForColumnStatistics, bResetSubdialog)
         sdgSummaries.ShowDialog()
         bResetSubdialog = False
         TestOKEnabled()

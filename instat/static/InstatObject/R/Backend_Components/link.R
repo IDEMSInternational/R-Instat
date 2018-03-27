@@ -29,7 +29,7 @@ link <- R6::R6Class("link",
                        active = list()
 )
 
-link$set("public", "data_clone", function() {
+link$set("public", "data_clone", function(...) {
   ret <- link$new(from_data_frame = self$from_data_frame, to_data_frame = self$to_data_frame,
                   type = self$type, link_columns = self$link_columns)
   return(ret)

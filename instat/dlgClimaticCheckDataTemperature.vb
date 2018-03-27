@@ -143,15 +143,15 @@ Public Class dlgClimaticCheckDataTemperature
         'Nuds for the respective options
         'Range Option
         ucrNudRangeElement1Min.SetParameter(New RParameter("from", iNewPosition:=1, bNewIncludeArgumentName:=False))
-        ucrNudRangeElement1Min.SetMinMax(-50, 65)
+        ucrNudRangeElement1Min.SetMinMax(-35, 65)
 
         ucrNudRangeElement1Max.SetParameter(New RParameter("To", 1, bNewIncludeArgumentName:=False))
-        ucrNudRangeElement1Max.SetMinMax(-50, 65)
+        ucrNudRangeElement1Max.SetMinMax(-35, 65)
 
         ucrNudRangeElement2Min.SetParameter(New RParameter("from", 1, bNewIncludeArgumentName:=False))
-        ucrNudRangeElement2Min.SetMinMax(-50, 50)
+        ucrNudRangeElement2Min.SetMinMax(-50, 40)
         ucrNudRangeElement2Max.SetParameter(New RParameter("from", 1, bNewIncludeArgumentName:=False))
-        ucrNudRangeElement2Max.SetMinMax(-50, 50)
+        ucrNudRangeElement2Max.SetMinMax(-50, 40)
 
         'Same Option
         ucrNudSame.SetParameter(New RParameter("n", 1, bNewIncludeArgumentName:=False))
@@ -163,7 +163,9 @@ Public Class dlgClimaticCheckDataTemperature
 
         'Difference Option
         ucrNudDifference.SetParameter(New RParameter("n", iNewPosition:=1, bNewIncludeArgumentName:=False))
-        ucrNudDifference.SetMinMax(-5, 5)
+        ucrNudDifference.SetMinMax(-10, 10)
+        ucrNudDifference.DecimalPlaces = 1
+        ucrNudDifference.Increment = 0.1
         ucrChkDifference.AddToLinkedControls(ucrNudDifference, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
 
         'outliers Option
