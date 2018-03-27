@@ -190,9 +190,9 @@ Public Class ucrGeom
         clsgeom_abline.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
         clsgeom_abline.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
         'Adding layer parameters
-        'Geom_hline parameters
-        clsgeom_abline.AddLayerParameter("slope", "numeric", "0") 'Parameters that control the position of the line. If these are set, data, mapping and show.legend are overridden
-        clsgeom_abline.AddLayerParameter("intercept", "numeric", "0")
+        'Geom_abline parameters
+        clsgeom_abline.AddLayerParameter("slope", "numeric", "0", lstParameterStrings:={2}) 'Parameters that control the position of the line. If these are set, data, mapping and show.legend are overridden
+        clsgeom_abline.AddLayerParameter("intercept", "numeric", "0", lstParameterStrings:={2})
         'Task: add warning message to user...
         'Global Layer parameters
         clsgeom_abline.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
@@ -632,7 +632,7 @@ Public Class ucrGeom
         clsgeom_hline.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
         'Adding layer parameters
         'Geom_hline parameters
-        clsgeom_hline.AddLayerParameter("yintercept", "numeric", "0") 'Parameter that controls the position of the line. If this is set, data, mapping and show.legend are overridden
+        clsgeom_hline.AddLayerParameter("yintercept", "numeric", "0", lstParameterStrings:={2}) 'Parameter that controls the position of the line. If this is set, data, mapping and show.legend are overridden
         'Task: add warning message to user...
         'Global Layer parameters
         clsgeom_hline.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
@@ -1221,7 +1221,7 @@ Public Class ucrGeom
         clsgeom_vline.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
         'Adding layer parameters
         'Geom_hline parameters
-        clsgeom_vline.AddLayerParameter("xintercept", "numeric", "0") 'Parameter that controls the position of the line. If this is set, data, mapping and show.legend are overridden
+        clsgeom_vline.AddLayerParameter("xintercept", "numeric", "0", lstParameterStrings:={2}) 'Parameter that controls the position of the line. If this is set, data, mapping and show.legend are overridden
         'Task: add warning message to user...
         'Global Layer parameters
         clsgeom_vline.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
