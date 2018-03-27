@@ -61,7 +61,7 @@ Public Class dlgViewObjects
 
         'we are disabling this for now until they're working correctly.
         rdoStructure.Enabled = False
-        rdoAllContents.Enabled = False
+        'rdoAllContents.Enabled = False
         rdoComponent.Enabled = False
     End Sub
 
