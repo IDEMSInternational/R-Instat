@@ -18,7 +18,8 @@ Imports instat.Translations
 Public Class dlgDisplayDailyData
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDisplayDailyTable, clsDisplayDailyGraphFunction As New RFunction
+    Private lstCheckboxes As New List(Of ucrCheck)
+    Private clsDisplayDailyTable, clsDisplayDailyGraphFunction, clsConcFunction As New RFunction
 
     Private Sub dlgDisplayDailyData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -41,6 +42,8 @@ Public Class dlgDisplayDailyData
         Dim dctMissingvalues As New Dictionary(Of String, String)
         Dim dctTracevalues As New Dictionary(Of String, String)
         Dim dctZeroValues As New Dictionary(Of String, String)
+        lstCheckboxes = New List(Of ucrCheck)
+
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrSelectorDisplayDailyClimaticData.SetParameter(New RParameter("data_name", 0))
@@ -102,15 +105,26 @@ Public Class dlgDisplayDailyData
         dctRugColour.Add("Violet", Chr(34) & "violet" & Chr(34))
         ucrInputRugColour.SetItems(dctRugColour)
 
-        ucrInputComboMonStat.SetParameter(New RParameter("monstats", 8))
-        dctSummary.Add("Sum", Chr(34) & "sum" & Chr(34))
-        dctSummary.Add("Max", Chr(34) & "max" & Chr(34))
-        dctSummary.Add("Min", Chr(34) & "min" & Chr(34))
-        dctSummary.Add("Mean", Chr(34) & "mean" & Chr(34))
-        dctSummary.Add("Median", Chr(34) & "median" & Chr(34))
-        dctSummary.Add("IQR", Chr(34) & "IQR" & Chr(34))
-        ucrInputComboMonStat.SetItems(dctSummary)
-        ucrInputComboMonStat.bAllowNonConditionValues = True
+        ucrChkSum.SetParameter(New RParameter("sum", 0), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "sum" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkSum.SetText("Sum")
+
+        ucrChkMax.SetParameter(New RParameter("max", 1), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "max" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkMax.SetText("Max")
+
+        ucrChkMin.SetParameter(New RParameter("min", 2), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "min" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkMin.SetText("Min")
+
+        ucrChkMean.SetParameter(New RParameter("mean", 3), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "mean" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkMean.SetText("Mean")
+
+        ucrChkMedian.SetParameter(New RParameter("median", 4), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "median" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkMedian.SetText("Median")
+
+        ucrChkIQR.SetParameter(New RParameter("IQR", 5), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "IQR" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkIQR.SetText("IQR")
+
+
+        lstCheckboxes.AddRange({ucrChkSum, ucrChkMax, ucrChkMin, ucrChkMean, ucrChkMedian, ucrChkIQR})
 
         ucrChkMissing.SetParameter(ucrInputComboMissing.GetParameter)
         ucrChkMissing.AddParameterPresentCondition(True, "Misscode")
@@ -155,32 +169,45 @@ Public Class dlgDisplayDailyData
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrNudUpperYaxis, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=100)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrReceiverMultipleElements, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=100)
         ucrReceiverMultipleElements.SetLinkedDisplayControl(lblElements)
-        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrInputComboMonStat, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboMissing, ucrChkMissing}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboTrace, ucrChkTrace}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboZero, ucrChkZero}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkMissing.AddToLinkedControls({ucrInputComboMissing}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkTrace.AddToLinkedControls({ucrInputComboTrace}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="tr")
         ucrChkZero.AddToLinkedControls({ucrInputComboZero}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="--")
-        ucrInputComboMonStat.SetLinkedDisplayControl(lblMonStat)
         ucrNudUpperYaxis.SetLinkedDisplayControl(grpGraph)
     End Sub
 
     Private Sub SetDefaults()
         clsDisplayDailyTable = New RFunction
         clsDisplayDailyGraphFunction = New RFunction
+        clsConcFunction = New RFunction
 
         ucrSelectorDisplayDailyClimaticData.Reset()
         ucrReceiverStations.SetMeAsReceiver()
+
+        clsConcFunction.SetRCommand("c")
+        clsConcFunction.AddParameter("sum", Chr(34) & "sum" & Chr(34), bIncludeArgumentName:=False)
+        clsConcFunction.AddParameter("min", Chr(34) & "min" & Chr(34), bIncludeArgumentName:=False)
+        clsConcFunction.AddParameter("max", Chr(34) & "max" & Chr(34), bIncludeArgumentName:=False)
+        clsConcFunction.AddParameter("mean", Chr(34) & "mean" & Chr(34), bIncludeArgumentName:=False)
+        clsConcFunction.AddParameter("median", Chr(34) & "median" & Chr(34), bIncludeArgumentName:=False)
+        clsConcFunction.AddParameter("IQR", Chr(34) & "IQR" & Chr(34), bIncludeArgumentName:=False)
 
         clsDisplayDailyGraphFunction.AddParameter("rug_colour", Chr(34) & "red" & Chr(34))
         clsDisplayDailyGraphFunction.AddParameter("bar_colour", Chr(34) & "blue" & Chr(34))
         clsDisplayDailyGraphFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_graph")
         clsDisplayDailyTable.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$display_daily_table")
-        clsDisplayDailyTable.AddParameter("monstats", Chr(34) & "sum" & Chr(34), iPosition:=8)
+        clsDisplayDailyTable.AddParameter("monstats", clsRFunctionParameter:=clsConcFunction, iPosition:=8)
         clsDisplayDailyTable.AddParameter("Misscode", Chr(34) & "M" & Chr(34), iPosition:=5)
         clsDisplayDailyGraphFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$display_daily_graph")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDisplayDailyTable)
+
+        For Each ctrTemp As ucrCheck In lstCheckboxes
+            ctrTemp.SetParameterIncludeArgumentName(False)
+            ctrTemp.SetRDefault(Chr(34) & Chr(34))
+        Next
+
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -189,13 +216,19 @@ Public Class dlgDisplayDailyData
         'ucrSelectorDisplayDailyClimaticData.AddAdditionalCodeParameterPair(clsDisplayDailyTable, New RParameter("data_name", 0), iAdditionalPairNo:=1)
         ucrReceiverDate.AddAdditionalCodeParameterPair(clsDisplayDailyTable, New RParameter("date_col", 2), iAdditionalPairNo:=1)
 
+        ucrChkSum.SetRCode(clsConcFunction, bReset)
+        ucrChkMax.SetRCode(clsConcFunction, bReset)
+        ucrChkMin.SetRCode(clsConcFunction, bReset)
+        ucrChkMean.SetRCode(clsConcFunction, bReset)
+        ucrChkMedian.SetRCode(clsConcFunction, bReset)
+        ucrChkIQR.SetRCode(clsConcFunction, bReset)
+
         ucrChkTrace.SetRCode(clsDisplayDailyTable, bReset)
         ucrChkZero.SetRCode(clsDisplayDailyTable, bReset)
         ucrChkMissing.SetRCode(clsDisplayDailyTable, bReset)
         ucrInputComboZero.SetRCode(clsDisplayDailyTable, bReset)
         ucrInputComboTrace.SetRCode(clsDisplayDailyTable, bReset)
         ucrInputComboMissing.SetRCode(clsDisplayDailyTable, bReset)
-        ucrInputComboMonStat.SetRCode(clsDisplayDailyTable, bReset)
         ucrReceiverDate.SetRCode(clsDisplayDailyGraphFunction, bReset)
         ucrReceiverStations.SetRCode(clsDisplayDailyGraphFunction, bReset)
         ucrReceiverDayOfYear.SetRCode(clsDisplayDailyGraphFunction, bReset)
