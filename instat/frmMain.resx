@@ -581,6 +581,12 @@
   <data name="ToolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
     <value>198, 6</value>
   </data>
+  <data name="mnuModelHypothesisTests.Size" type="System.Drawing.Size, System.Drawing">
+    <value>201, 22</value>
+  </data>
+  <data name="mnuModelHypothesisTests.Text" xml:space="preserve">
+    <value>Hypothesis Tests...</value>
+  </data>
   <data name="mnuModelOtherOneVariableExactResults.Size" type="System.Drawing.Size, System.Drawing">
     <value>166, 22</value>
   </data>
@@ -742,12 +748,6 @@
   </data>
   <data name="mnuModelOtherGeneral.Text" xml:space="preserve">
     <value>Other (General)</value>
-  </data>
-  <data name="mnuModelHypothesisTests.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 22</value>
-  </data>
-  <data name="mnuModelHypothesisTests.Text" xml:space="preserve">
-    <value>Hypothesis Tests...</value>
   </data>
   <data name="mnuModel.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 20</value>
@@ -1085,17 +1085,17 @@
   <data name="mnuClimaticDatesMakeDate.Text" xml:space="preserve">
     <value>Make Date...</value>
   </data>
-  <data name="mnuClimaticDatesUseDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 22</value>
-  </data>
-  <data name="mnuClimaticDatesUseDate.Text" xml:space="preserve">
-    <value>Use Date...</value>
-  </data>
   <data name="mnuClimaticDatesInfillMissingDates.Size" type="System.Drawing.Size, System.Drawing">
     <value>182, 22</value>
   </data>
   <data name="mnuClimaticDatesInfillMissingDates.Text" xml:space="preserve">
     <value>Infill Missing Dates...</value>
+  </data>
+  <data name="mnuClimaticDatesUseDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>182, 22</value>
+  </data>
+  <data name="mnuClimaticDatesUseDate.Text" xml:space="preserve">
+    <value>Use Date...</value>
   </data>
   <data name="mnuClimaticDatesMakeTime.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2827,17 +2827,17 @@
   <data name="mnuPrepareColumnMakeDate.Text" xml:space="preserve">
     <value>Make Date...</value>
   </data>
-  <data name="mnuPrepareColumnUseDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 22</value>
-  </data>
-  <data name="mnuPrepareColumnUseDate.Text" xml:space="preserve">
-    <value>Use Date...</value>
-  </data>
   <data name="mnuPrepareColumnInfillMissingDates.Size" type="System.Drawing.Size, System.Drawing">
     <value>182, 22</value>
   </data>
   <data name="mnuPrepareColumnInfillMissingDates.Text" xml:space="preserve">
     <value>Infill Missing Dates...</value>
+  </data>
+  <data name="mnuPrepareColumnUseDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>182, 22</value>
+  </data>
+  <data name="mnuPrepareColumnUseDate.Text" xml:space="preserve">
+    <value>Use Date...</value>
   </data>
   <data name="mnuPrepareColumnMakeTime.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
