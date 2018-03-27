@@ -48,14 +48,22 @@ Partial Class dlgDisplayDailyData
         Me.lblDayOfTheYear = New System.Windows.Forms.Label()
         Me.lblYaxisUpper = New System.Windows.Forms.Label()
         Me.grpGraph = New System.Windows.Forms.GroupBox()
+        Me.lblRugColor = New System.Windows.Forms.Label()
+        Me.lblBarColour = New System.Windows.Forms.Label()
+        Me.lblElements = New System.Windows.Forms.Label()
+        Me.grpSummary = New System.Windows.Forms.GroupBox()
+        Me.ucrReceiverMultipleElements = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrInputRugColour = New instat.ucrInputComboBox()
-        Me.lblRugColor = New System.Windows.Forms.Label()
         Me.ucrInputBarColour = New instat.ucrInputComboBox()
-        Me.lblBarColour = New System.Windows.Forms.Label()
         Me.ucrNudUpperYaxis = New instat.ucrNud()
-        Me.lblMonStat = New System.Windows.Forms.Label()
-        Me.ucrInputComboMonStat = New instat.ucrInputComboBox()
+        Me.ucrInputComboZero = New instat.ucrInputComboBox()
+        Me.ucrInputComboMissing = New instat.ucrInputComboBox()
+        Me.ucrInputComboTrace = New instat.ucrInputComboBox()
+        Me.ucrChkMissing = New instat.ucrCheck()
+        Me.ucrChkZero = New instat.ucrCheck()
+        Me.ucrChkTrace = New instat.ucrCheck()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDayOfYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
@@ -63,16 +71,14 @@ Partial Class dlgDisplayDailyData
         Me.ucrPnlFrequencyDisplay = New instat.UcrPanel()
         Me.ucrSelectorDisplayDailyClimaticData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkTrace = New instat.ucrCheck()
-        Me.ucrChkZero = New instat.ucrCheck()
-        Me.ucrChkMissing = New instat.ucrCheck()
-        Me.ucrInputComboTrace = New instat.ucrInputComboBox()
-        Me.ucrInputComboMissing = New instat.ucrInputComboBox()
-        Me.ucrInputComboZero = New instat.ucrInputComboBox()
-        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
-        Me.ucrReceiverMultipleElements = New instat.ucrReceiverMultiple()
-        Me.lblElements = New System.Windows.Forms.Label()
+        Me.ucrChkMax = New instat.ucrCheck()
+        Me.ucrChkIQR = New instat.ucrCheck()
+        Me.ucrChkMedian = New instat.ucrCheck()
+        Me.ucrChkSum = New instat.ucrCheck()
+        Me.ucrChkMin = New instat.ucrCheck()
+        Me.ucrChkMean = New instat.ucrCheck()
         Me.grpGraph.SuspendLayout()
+        Me.grpSummary.SuspendLayout()
         Me.SuspendLayout()
         '
         'rdoTable
@@ -138,6 +144,51 @@ Partial Class dlgDisplayDailyData
         Me.grpGraph.Name = "grpGraph"
         Me.grpGraph.TabStop = False
         '
+        'lblRugColor
+        '
+        resources.ApplyResources(Me.lblRugColor, "lblRugColor")
+        Me.lblRugColor.Name = "lblRugColor"
+        '
+        'lblBarColour
+        '
+        resources.ApplyResources(Me.lblBarColour, "lblBarColour")
+        Me.lblBarColour.Name = "lblBarColour"
+        '
+        'lblElements
+        '
+        resources.ApplyResources(Me.lblElements, "lblElements")
+        Me.lblElements.Name = "lblElements"
+        '
+        'grpSummary
+        '
+        Me.grpSummary.Controls.Add(Me.ucrChkMax)
+        Me.grpSummary.Controls.Add(Me.ucrChkIQR)
+        Me.grpSummary.Controls.Add(Me.ucrChkMedian)
+        Me.grpSummary.Controls.Add(Me.ucrChkSum)
+        Me.grpSummary.Controls.Add(Me.ucrChkMin)
+        Me.grpSummary.Controls.Add(Me.ucrChkMean)
+        resources.ApplyResources(Me.grpSummary, "grpSummary")
+        Me.grpSummary.Name = "grpSummary"
+        Me.grpSummary.TabStop = False
+        '
+        'ucrReceiverMultipleElements
+        '
+        Me.ucrReceiverMultipleElements.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverMultipleElements, "ucrReceiverMultipleElements")
+        Me.ucrReceiverMultipleElements.Name = "ucrReceiverMultipleElements"
+        Me.ucrReceiverMultipleElements.Selector = Nothing
+        Me.ucrReceiverMultipleElements.strNcFilePath = ""
+        Me.ucrReceiverMultipleElements.ucrSelector = Nothing
+        '
+        'ucrReceiverElement
+        '
+        Me.ucrReceiverElement.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverElement, "ucrReceiverElement")
+        Me.ucrReceiverElement.Name = "ucrReceiverElement"
+        Me.ucrReceiverElement.Selector = Nothing
+        Me.ucrReceiverElement.strNcFilePath = ""
+        Me.ucrReceiverElement.ucrSelector = Nothing
+        '
         'ucrSaveGraph
         '
         resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
@@ -150,22 +201,12 @@ Partial Class dlgDisplayDailyData
         resources.ApplyResources(Me.ucrInputRugColour, "ucrInputRugColour")
         Me.ucrInputRugColour.Name = "ucrInputRugColour"
         '
-        'lblRugColor
-        '
-        resources.ApplyResources(Me.lblRugColor, "lblRugColor")
-        Me.lblRugColor.Name = "lblRugColor"
-        '
         'ucrInputBarColour
         '
         Me.ucrInputBarColour.AddQuotesIfUnrecognised = True
         Me.ucrInputBarColour.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputBarColour, "ucrInputBarColour")
         Me.ucrInputBarColour.Name = "ucrInputBarColour"
-        '
-        'lblBarColour
-        '
-        resources.ApplyResources(Me.lblBarColour, "lblBarColour")
-        Me.lblBarColour.Name = "lblBarColour"
         '
         'ucrNudUpperYaxis
         '
@@ -177,17 +218,44 @@ Partial Class dlgDisplayDailyData
         Me.ucrNudUpperYaxis.Name = "ucrNudUpperYaxis"
         Me.ucrNudUpperYaxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'lblMonStat
+        'ucrInputComboZero
         '
-        resources.ApplyResources(Me.lblMonStat, "lblMonStat")
-        Me.lblMonStat.Name = "lblMonStat"
+        Me.ucrInputComboZero.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboZero.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComboZero, "ucrInputComboZero")
+        Me.ucrInputComboZero.Name = "ucrInputComboZero"
         '
-        'ucrInputComboMonStat
+        'ucrInputComboMissing
         '
-        Me.ucrInputComboMonStat.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboMonStat.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputComboMonStat, "ucrInputComboMonStat")
-        Me.ucrInputComboMonStat.Name = "ucrInputComboMonStat"
+        Me.ucrInputComboMissing.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboMissing.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComboMissing, "ucrInputComboMissing")
+        Me.ucrInputComboMissing.Name = "ucrInputComboMissing"
+        '
+        'ucrInputComboTrace
+        '
+        Me.ucrInputComboTrace.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboTrace.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComboTrace, "ucrInputComboTrace")
+        Me.ucrInputComboTrace.Name = "ucrInputComboTrace"
+        '
+        'ucrChkMissing
+        '
+        Me.ucrChkMissing.Checked = False
+        resources.ApplyResources(Me.ucrChkMissing, "ucrChkMissing")
+        Me.ucrChkMissing.Name = "ucrChkMissing"
+        '
+        'ucrChkZero
+        '
+        Me.ucrChkZero.Checked = False
+        resources.ApplyResources(Me.ucrChkZero, "ucrChkZero")
+        Me.ucrChkZero.Name = "ucrChkZero"
+        '
+        'ucrChkTrace
+        '
+        Me.ucrChkTrace.Checked = False
+        resources.ApplyResources(Me.ucrChkTrace, "ucrChkTrace")
+        Me.ucrChkTrace.Name = "ucrChkTrace"
         '
         'ucrReceiverYear
         '
@@ -242,67 +310,41 @@ Partial Class dlgDisplayDailyData
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'ucrChkTrace
+        'ucrChkMax
         '
-        Me.ucrChkTrace.Checked = False
-        resources.ApplyResources(Me.ucrChkTrace, "ucrChkTrace")
-        Me.ucrChkTrace.Name = "ucrChkTrace"
+        Me.ucrChkMax.Checked = False
+        resources.ApplyResources(Me.ucrChkMax, "ucrChkMax")
+        Me.ucrChkMax.Name = "ucrChkMax"
         '
-        'ucrChkZero
+        'ucrChkIQR
         '
-        Me.ucrChkZero.Checked = False
-        resources.ApplyResources(Me.ucrChkZero, "ucrChkZero")
-        Me.ucrChkZero.Name = "ucrChkZero"
+        Me.ucrChkIQR.Checked = False
+        resources.ApplyResources(Me.ucrChkIQR, "ucrChkIQR")
+        Me.ucrChkIQR.Name = "ucrChkIQR"
         '
-        'ucrChkMissing
+        'ucrChkMedian
         '
-        Me.ucrChkMissing.Checked = False
-        resources.ApplyResources(Me.ucrChkMissing, "ucrChkMissing")
-        Me.ucrChkMissing.Name = "ucrChkMissing"
+        Me.ucrChkMedian.Checked = False
+        resources.ApplyResources(Me.ucrChkMedian, "ucrChkMedian")
+        Me.ucrChkMedian.Name = "ucrChkMedian"
         '
-        'ucrInputComboTrace
+        'ucrChkSum
         '
-        Me.ucrInputComboTrace.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboTrace.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputComboTrace, "ucrInputComboTrace")
-        Me.ucrInputComboTrace.Name = "ucrInputComboTrace"
+        Me.ucrChkSum.Checked = False
+        resources.ApplyResources(Me.ucrChkSum, "ucrChkSum")
+        Me.ucrChkSum.Name = "ucrChkSum"
         '
-        'ucrInputComboMissing
+        'ucrChkMin
         '
-        Me.ucrInputComboMissing.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboMissing.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputComboMissing, "ucrInputComboMissing")
-        Me.ucrInputComboMissing.Name = "ucrInputComboMissing"
+        Me.ucrChkMin.Checked = False
+        resources.ApplyResources(Me.ucrChkMin, "ucrChkMin")
+        Me.ucrChkMin.Name = "ucrChkMin"
         '
-        'ucrInputComboZero
+        'ucrChkMean
         '
-        Me.ucrInputComboZero.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboZero.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputComboZero, "ucrInputComboZero")
-        Me.ucrInputComboZero.Name = "ucrInputComboZero"
-        '
-        'ucrReceiverElement
-        '
-        Me.ucrReceiverElement.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverElement, "ucrReceiverElement")
-        Me.ucrReceiverElement.Name = "ucrReceiverElement"
-        Me.ucrReceiverElement.Selector = Nothing
-        Me.ucrReceiverElement.strNcFilePath = ""
-        Me.ucrReceiverElement.ucrSelector = Nothing
-        '
-        'ucrReceiverMultipleElements
-        '
-        Me.ucrReceiverMultipleElements.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverMultipleElements, "ucrReceiverMultipleElements")
-        Me.ucrReceiverMultipleElements.Name = "ucrReceiverMultipleElements"
-        Me.ucrReceiverMultipleElements.Selector = Nothing
-        Me.ucrReceiverMultipleElements.strNcFilePath = ""
-        Me.ucrReceiverMultipleElements.ucrSelector = Nothing
-        '
-        'lblElements
-        '
-        resources.ApplyResources(Me.lblElements, "lblElements")
-        Me.lblElements.Name = "lblElements"
+        Me.ucrChkMean.Checked = False
+        resources.ApplyResources(Me.ucrChkMean, "ucrChkMean")
+        Me.ucrChkMean.Name = "ucrChkMean"
         '
         'dlgDisplayDailyData
         '
@@ -318,8 +360,6 @@ Partial Class dlgDisplayDailyData
         Me.Controls.Add(Me.ucrChkMissing)
         Me.Controls.Add(Me.ucrChkZero)
         Me.Controls.Add(Me.ucrChkTrace)
-        Me.Controls.Add(Me.lblMonStat)
-        Me.Controls.Add(Me.ucrInputComboMonStat)
         Me.Controls.Add(Me.ucrReceiverYear)
         Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.lblDate)
@@ -334,12 +374,14 @@ Partial Class dlgDisplayDailyData
         Me.Controls.Add(Me.ucrPnlFrequencyDisplay)
         Me.Controls.Add(Me.ucrSelectorDisplayDailyClimaticData)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.grpSummary)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDisplayDailyData"
         Me.grpGraph.ResumeLayout(False)
         Me.grpGraph.PerformLayout()
+        Me.grpSummary.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -367,8 +409,6 @@ Partial Class dlgDisplayDailyData
     Friend WithEvents ucrInputBarColour As ucrInputComboBox
     Friend WithEvents lblBarColour As Label
     Friend WithEvents ucrSaveGraph As ucrSave
-    Friend WithEvents lblMonStat As Label
-    Friend WithEvents ucrInputComboMonStat As ucrInputComboBox
     Friend WithEvents ucrChkTrace As ucrCheck
     Friend WithEvents ucrChkMissing As ucrCheck
     Friend WithEvents ucrChkZero As ucrCheck
@@ -378,4 +418,11 @@ Partial Class dlgDisplayDailyData
     Friend WithEvents ucrReceiverElement As ucrReceiverSingle
     Friend WithEvents ucrReceiverMultipleElements As ucrReceiverMultiple
     Friend WithEvents lblElements As Label
+    Friend WithEvents ucrChkSum As ucrCheck
+    Friend WithEvents ucrChkMax As ucrCheck
+    Friend WithEvents ucrChkMin As ucrCheck
+    Friend WithEvents ucrChkMean As ucrCheck
+    Friend WithEvents ucrChkMedian As ucrCheck
+    Friend WithEvents ucrChkIQR As ucrCheck
+    Friend WithEvents grpSummary As GroupBox
 End Class
