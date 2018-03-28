@@ -175,7 +175,9 @@ Public Class dlgCorrelation
         ucrNudConfidenceInterval.SetRCode(clsCorrelationTestFunction, bReset)
         ucrReceiverFirstColumn.SetRCode(clsCorrelationTestFunction, bReset)
         ucrReceiverSecondColumn.SetRCode(clsCorrelationTestFunction, bReset)
-        ucrPnlColumns.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        If bReset Then
+            ucrPnlColumns.SetRCode(clsCorrelationTestFunction, bReset)
+        End If
         ucrPnlMethod.SetRCode(clsCorrelationTestFunction, bReset)
         ucrPnlCompletePairwise.SetRCode(clsCorrelationFunction, bReset)
         ucrSaveModel.AddAdditionalRCode(clsCorrelationTestFunction, 1)
