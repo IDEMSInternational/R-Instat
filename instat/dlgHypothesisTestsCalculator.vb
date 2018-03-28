@@ -17,9 +17,10 @@
 Imports instat.Translations
 Imports RDotNet
 Public Class dlgHypothesisTestsCalculator
+    Public bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
     Private clsAttach As New RFunction
     Private clsDetach As New RFunction
-    Public bFirstLoad As Boolean = True
     Private iBasicWidth As Integer
     Private Sub dlgHypothesisTestsCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -30,6 +31,8 @@ Public Class dlgHypothesisTestsCalculator
             bFirstLoad = False
         End If
         TestOKEnabled()
+        SetRcodeForControls(bReset)
+        bReset = False
     End Sub
 
     Private Sub InitialiseDialog()
@@ -43,8 +46,8 @@ Public Class dlgHypothesisTestsCalculator
         ucrSaveResult.SetIsComboBox()
         ucrSaveResult.SetSaveTypeAsModel()
         ucrSaveResult.SetCheckBoxText("Save test object")
+        ucrSaveResult.SetAssignToIfUncheckedValue("Last_Test")
         ucrSaveResult.SetDataFrameSelector(ucrSelectorColumn.ucrAvailableDataFrames)
-        ucrSelectorColumn.Reset()
 
         ucrInputComboRPackage.SetItems({"Stats", "Agricolae"})
         ucrInputComboRPackage.SetDropDownStyleAsNonEditable()
@@ -60,7 +63,9 @@ Public Class dlgHypothesisTestsCalculator
     Private Sub SetDefaults()
         ucrSelectorColumn.Reset()
         ucrReceiverForTestColumn.SetMeAsReceiver()
-        ucrBase.clsRsyntax.SetAssignTo(ucrSaveResult.GetText(), strTempModel:=ucrSaveResult.GetText(), strTempDataframe:=ucrSelectorColumn.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
+        ucrSaveResult.Reset()
+        ucrSaveResult.ucrChkSave.Checked = False
+        ucrBase.clsRsyntax.SetAssignTo("Last_Test", strTempModel:="Last_Test", strTempDataframe:=ucrSelectorColumn.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 2
         ucrChkShowArguments.Checked = False
@@ -71,6 +76,10 @@ Public Class dlgHypothesisTestsCalculator
         clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorColumn.ucrAvailableDataFrames.clsCurrDataFrame)
         clsDetach.AddParameter("unload", "TRUE")
 
+    End Sub
+
+    Private Sub SetRcodeForControls(bReset As Boolean)
+        ucrSaveResult.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub ucrReceiverForTestColumn_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForTestColumn.SelectionChanged
@@ -647,6 +656,7 @@ Public Class dlgHypothesisTestsCalculator
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRcodeForControls(True)
         TestOKEnabled()
     End Sub
 
