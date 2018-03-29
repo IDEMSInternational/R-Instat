@@ -173,7 +173,7 @@ Public Class Condition
         Dim clsTempFunc As RFunction
 
         If bIsParameterValues Then
-            If clsParameter IsNot Nothing Then
+            If clsParameter IsNot Nothing AndAlso clsParameter.strArgumentName IsNot Nothing AndAlso clsParameter.strArgumentName = strParameterName Then
                 clsTempParam = clsParameter
             Else
                 clsTempParam = clsRCode.GetParameter(strParameterName)

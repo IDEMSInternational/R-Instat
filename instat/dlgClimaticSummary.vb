@@ -254,7 +254,7 @@ Public Class dlgClimaticSummary
     End Sub
 
     Private Sub cmdSummary_Click(sender As Object, e As EventArgs) Handles cmdSummary.Click
-        sdgSummaries.SetRFunction(clsSummariesList, bResetSubdialog)
+        sdgSummaries.SetRFunction(clsSummariesList, clsDefaultFunction, ucrSelectorVariable, bResetSubdialog)
         bResetSubdialog = False
         sdgSummaries.ShowDialog()
         TestOKEnabled()

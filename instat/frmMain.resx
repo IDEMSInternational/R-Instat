@@ -581,6 +581,12 @@
   <data name="ToolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
     <value>198, 6</value>
   </data>
+  <data name="mnuModelHypothesisTests.Size" type="System.Drawing.Size, System.Drawing">
+    <value>201, 22</value>
+  </data>
+  <data name="mnuModelHypothesisTests.Text" xml:space="preserve">
+    <value>Hypothesis Tests...</value>
+  </data>
   <data name="mnuModelOtherOneVariableExactResults.Size" type="System.Drawing.Size, System.Drawing">
     <value>166, 22</value>
   </data>
@@ -1067,9 +1073,6 @@
   <data name="ToolStripSeparator18.Size" type="System.Drawing.Size, System.Drawing">
     <value>209, 6</value>
   </data>
-  <data name="mnuClimaticDatesGenerateDates.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="mnuClimaticDatesGenerateDates.Size" type="System.Drawing.Size, System.Drawing">
     <value>182, 22</value>
   </data>
@@ -1082,17 +1085,17 @@
   <data name="mnuClimaticDatesMakeDate.Text" xml:space="preserve">
     <value>Make Date...</value>
   </data>
-  <data name="mnuClimaticDatesUseDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 22</value>
-  </data>
-  <data name="mnuClimaticDatesUseDate.Text" xml:space="preserve">
-    <value>Use Date...</value>
-  </data>
   <data name="mnuClimaticDatesInfillMissingDates.Size" type="System.Drawing.Size, System.Drawing">
     <value>182, 22</value>
   </data>
   <data name="mnuClimaticDatesInfillMissingDates.Text" xml:space="preserve">
     <value>Infill Missing Dates...</value>
+  </data>
+  <data name="mnuClimaticDatesUseDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>182, 22</value>
+  </data>
+  <data name="mnuClimaticDatesUseDate.Text" xml:space="preserve">
+    <value>Use Date...</value>
   </data>
   <data name="mnuClimaticDatesMakeTime.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2582,16 +2585,28 @@
     <value>169, 6</value>
   </data>
   <data name="mnuPrepareColumnCalculateCalculations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 22</value>
+    <value>188, 22</value>
   </data>
   <data name="mnuPrepareColumnCalculateCalculations.Text" xml:space="preserve">
     <value>Calculations...</value>
   </data>
+  <data name="mnuPrepareColumnCalculateColumnSummaries.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 22</value>
+  </data>
+  <data name="mnuPrepareColumnCalculateColumnSummaries.Text" xml:space="preserve">
+    <value>Column Summaries...</value>
+  </data>
+  <data name="mnuPrepareColumnCalculateGeneralSummaries.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 22</value>
+  </data>
+  <data name="mnuPrepareColumnCalculateGeneralSummaries.Text" xml:space="preserve">
+    <value>General Summaries...</value>
+  </data>
   <data name="ToolStripSeparator24.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 6</value>
+    <value>185, 6</value>
   </data>
   <data name="mnuPrepareCalculateDuplicateColumn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 22</value>
+    <value>188, 22</value>
   </data>
   <data name="mnuPrepareCalculateDuplicateColumn.Text" xml:space="preserve">
     <value>Duplicate Column...</value>
@@ -2600,25 +2615,25 @@
     <value>False</value>
   </data>
   <data name="mnuPrepareColumnCalculateTransform.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 22</value>
+    <value>188, 22</value>
   </data>
   <data name="mnuPrepareColumnCalculateTransform.Text" xml:space="preserve">
     <value>Transform...</value>
   </data>
   <data name="mnuPrepareColumnCalculateRank.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 22</value>
+    <value>188, 22</value>
   </data>
   <data name="mnuPrepareColumnCalculateRank.Text" xml:space="preserve">
     <value>Rank...</value>
   </data>
   <data name="mnuPrepareColumnCalculatePolynomials.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 22</value>
+    <value>188, 22</value>
   </data>
   <data name="mnuPrepareColumnCalculatePolynomials.Text" xml:space="preserve">
     <value>Polynomials...</value>
   </data>
   <data name="mnuPrepareColumnCalculateRowSummary.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 22</value>
+    <value>188, 22</value>
   </data>
   <data name="mnuPrepareColumnCalculateRowSummary.Text" xml:space="preserve">
     <value>Row Summary...</value>
@@ -2800,9 +2815,6 @@
   <data name="mnuPrepareColumnText.Text" xml:space="preserve">
     <value>Column: Text</value>
   </data>
-  <data name="mnuPrepareColumnGenerateDate.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="mnuPrepareColumnGenerateDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>182, 22</value>
   </data>
@@ -2815,17 +2827,17 @@
   <data name="mnuPrepareColumnMakeDate.Text" xml:space="preserve">
     <value>Make Date...</value>
   </data>
-  <data name="mnuPrepareColumnUseDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 22</value>
-  </data>
-  <data name="mnuPrepareColumnUseDate.Text" xml:space="preserve">
-    <value>Use Date...</value>
-  </data>
   <data name="mnuPrepareColumnInfillMissingDates.Size" type="System.Drawing.Size, System.Drawing">
     <value>182, 22</value>
   </data>
   <data name="mnuPrepareColumnInfillMissingDates.Text" xml:space="preserve">
     <value>Infill Missing Dates...</value>
+  </data>
+  <data name="mnuPrepareColumnUseDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>182, 22</value>
+  </data>
+  <data name="mnuPrepareColumnUseDate.Text" xml:space="preserve">
+    <value>Use Date...</value>
   </data>
   <data name="mnuPrepareColumnMakeTime.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -3761,7 +3773,7 @@
     <value>True</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>25</value>
+    <value>99</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
@@ -6070,6 +6082,12 @@
   <data name="&gt;&gt;mnuModelOtherGeneralLogLinear.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;mnuModelHypothesisTests.Name" xml:space="preserve">
+    <value>mnuModelHypothesisTests</value>
+  </data>
+  <data name="&gt;&gt;mnuModelHypothesisTests.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;mnuClimaticExamine.Name" xml:space="preserve">
     <value>mnuClimaticExamine</value>
   </data>
@@ -7538,6 +7556,18 @@
     <value>mnuPrepareColumnCalculateCalculations</value>
   </data>
   <data name="&gt;&gt;mnuPrepareColumnCalculateCalculations.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuPrepareColumnCalculateColumnSummaries.Name" xml:space="preserve">
+    <value>mnuPrepareColumnCalculateColumnSummaries</value>
+  </data>
+  <data name="&gt;&gt;mnuPrepareColumnCalculateColumnSummaries.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuPrepareColumnCalculateGeneralSummaries.Name" xml:space="preserve">
+    <value>mnuPrepareColumnCalculateGeneralSummaries</value>
+  </data>
+  <data name="&gt;&gt;mnuPrepareColumnCalculateGeneralSummaries.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator24.Name" xml:space="preserve">

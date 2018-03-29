@@ -42,7 +42,6 @@ Public Class dlgOneVariableSummarise
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 410
         ucrBase.clsRsyntax.iCallType = 2
-
         'The selector is only used for one of the functions. Therefore it's parameter name is always the same. So this can be done in Initialise.
         ucrSelectorOneVarSummarise.SetParameter(New RParameter("data_name", 0))
         ucrSelectorOneVarSummarise.SetParameterIsString()
@@ -124,9 +123,11 @@ Public Class dlgOneVariableSummarise
     End Sub
 
     Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
-        sdgSummaries.SetRFunction(clsSummariesList, bResetSubdialog)
+        sdgSummaries.SetRFunction(clsSummariesList, clsInstatSummaryFunction, ucrSelectorOneVarSummarise, bResetSubdialog)
         bResetSubdialog = False
+        sdgSummaries.bEnable2VariableTab = False
         sdgSummaries.ShowDialog()
+        sdgSummaries.bEnable2VariableTab = True
         TestOKEnabled()
     End Sub
 

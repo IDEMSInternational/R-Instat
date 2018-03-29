@@ -134,6 +134,7 @@ Partial Class frmMain
         Me.mnuModelOtherGeneralANOVAGeneral = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelOtherGeneralRegression = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelOtherGeneralLogLinear = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuModelHypothesisTests = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticExamine = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticProcess = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticEvaporation = New System.Windows.Forms.ToolStripMenuItem()
@@ -382,6 +383,8 @@ Partial Class frmMain
         Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuPrepareColumnCalculate = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnCalculateCalculations = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnCalculateColumnSummaries = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnCalculateGeneralSummaries = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator24 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuPrepareCalculateDuplicateColumn = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnCalculateTransform = New System.Windows.Forms.ToolStripMenuItem()
@@ -809,7 +812,7 @@ Partial Class frmMain
         '
         'mnuModel
         '
-        Me.mnuModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelProbabilityDistributions, Me.ToolStripSeparator3, Me.mnuModelOneVariable, Me.mnuModelTwoVariables, Me.mnuModelThreeVariables, Me.mnuModelFourVariables, Me.mnuModelGeneral, Me.ToolStripSeparator4, Me.mnuModelOtherOneVariable, Me.mnuModelOtherTwoVariables, Me.mnuModelOtherThreeVariables, Me.mnuModelOtherGeneral})
+        Me.mnuModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelProbabilityDistributions, Me.ToolStripSeparator3, Me.mnuModelOneVariable, Me.mnuModelTwoVariables, Me.mnuModelThreeVariables, Me.mnuModelFourVariables, Me.mnuModelGeneral, Me.ToolStripSeparator4, Me.mnuModelHypothesisTests, Me.mnuModelOtherOneVariable, Me.mnuModelOtherTwoVariables, Me.mnuModelOtherThreeVariables, Me.mnuModelOtherGeneral})
         Me.mnuModel.Name = "mnuModel"
         resources.ApplyResources(Me.mnuModel, "mnuModel")
         Me.mnuModel.Tag = "Model"
@@ -1097,6 +1100,11 @@ Partial Class frmMain
         Me.mnuModelOtherGeneralLogLinear.Name = "mnuModelOtherGeneralLogLinear"
         Me.mnuModelOtherGeneralLogLinear.Tag = "Log_Linear"
         '
+        'mnuModelHypothesisTests
+        '
+        Me.mnuModelHypothesisTests.Name = "mnuModelHypothesisTests"
+        resources.ApplyResources(Me.mnuModelHypothesisTests, "mnuModelHypothesisTests")
+        '
         'mnuClimaticExamine
         '
         resources.ApplyResources(Me.mnuClimaticExamine, "mnuClimaticExamine")
@@ -1371,14 +1379,14 @@ Partial Class frmMain
         '
         'mnuClimaticDates
         '
-        Me.mnuClimaticDates.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticDatesGenerateDates, Me.mnuClimaticDatesMakeDate, Me.mnuClimaticDatesUseDate, Me.mnuClimaticDatesInfillMissingDates, Me.mnuClimaticDatesMakeTime, Me.mnuClimaticDatesUseTime})
+        Me.mnuClimaticDates.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticDatesGenerateDates, Me.mnuClimaticDatesMakeDate, Me.mnuClimaticDatesInfillMissingDates, Me.mnuClimaticDatesUseDate, Me.mnuClimaticDatesMakeTime, Me.mnuClimaticDatesUseTime})
         Me.mnuClimaticDates.Name = "mnuClimaticDates"
         resources.ApplyResources(Me.mnuClimaticDates, "mnuClimaticDates")
         '
         'mnuClimaticDatesGenerateDates
         '
-        resources.ApplyResources(Me.mnuClimaticDatesGenerateDates, "mnuClimaticDatesGenerateDates")
         Me.mnuClimaticDatesGenerateDates.Name = "mnuClimaticDatesGenerateDates"
+        resources.ApplyResources(Me.mnuClimaticDatesGenerateDates, "mnuClimaticDatesGenerateDates")
         '
         'mnuClimaticDatesMakeDate
         '
@@ -2501,7 +2509,7 @@ Partial Class frmMain
         '
         'mnuPrepareColumnCalculate
         '
-        Me.mnuPrepareColumnCalculate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnCalculateCalculations, Me.ToolStripSeparator24, Me.mnuPrepareCalculateDuplicateColumn, Me.mnuPrepareColumnCalculateTransform, Me.mnuPrepareColumnCalculateRank, Me.mnuPrepareColumnCalculatePolynomials, Me.mnuPrepareColumnCalculateRowSummary})
+        Me.mnuPrepareColumnCalculate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnCalculateCalculations, Me.mnuPrepareColumnCalculateColumnSummaries, Me.mnuPrepareColumnCalculateGeneralSummaries, Me.ToolStripSeparator24, Me.mnuPrepareCalculateDuplicateColumn, Me.mnuPrepareColumnCalculateTransform, Me.mnuPrepareColumnCalculateRank, Me.mnuPrepareColumnCalculatePolynomials, Me.mnuPrepareColumnCalculateRowSummary})
         Me.mnuPrepareColumnCalculate.Name = "mnuPrepareColumnCalculate"
         resources.ApplyResources(Me.mnuPrepareColumnCalculate, "mnuPrepareColumnCalculate")
         Me.mnuPrepareColumnCalculate.Tag = "Column:_Calculate"
@@ -2511,6 +2519,17 @@ Partial Class frmMain
         Me.mnuPrepareColumnCalculateCalculations.Name = "mnuPrepareColumnCalculateCalculations"
         resources.ApplyResources(Me.mnuPrepareColumnCalculateCalculations, "mnuPrepareColumnCalculateCalculations")
         Me.mnuPrepareColumnCalculateCalculations.Tag = "Calculations..."
+        '
+        'mnuPrepareColumnCalculateColumnSummaries
+        '
+        Me.mnuPrepareColumnCalculateColumnSummaries.Name = "mnuPrepareColumnCalculateColumnSummaries"
+        resources.ApplyResources(Me.mnuPrepareColumnCalculateColumnSummaries, "mnuPrepareColumnCalculateColumnSummaries")
+        Me.mnuPrepareColumnCalculateColumnSummaries.Tag = "Column_Summaries..."
+        '
+        'mnuPrepareColumnCalculateGeneralSummaries
+        '
+        Me.mnuPrepareColumnCalculateGeneralSummaries.Name = "mnuPrepareColumnCalculateGeneralSummaries"
+        resources.ApplyResources(Me.mnuPrepareColumnCalculateGeneralSummaries, "mnuPrepareColumnCalculateGeneralSummaries")
         '
         'ToolStripSeparator24
         '
@@ -2724,14 +2743,14 @@ Partial Class frmMain
         '
         'mnuPrepareColumnDate
         '
-        Me.mnuPrepareColumnDate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnGenerateDate, Me.mnuPrepareColumnMakeDate, Me.mnuPrepareColumnUseDate, Me.mnuPrepareColumnInfillMissingDates, Me.mnuPrepareColumnMakeTime, Me.mnuPrepareColumnUseTime})
+        Me.mnuPrepareColumnDate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnGenerateDate, Me.mnuPrepareColumnMakeDate, Me.mnuPrepareColumnInfillMissingDates, Me.mnuPrepareColumnUseDate, Me.mnuPrepareColumnMakeTime, Me.mnuPrepareColumnUseTime})
         Me.mnuPrepareColumnDate.Name = "mnuPrepareColumnDate"
         resources.ApplyResources(Me.mnuPrepareColumnDate, "mnuPrepareColumnDate")
         '
         'mnuPrepareColumnGenerateDate
         '
-        resources.ApplyResources(Me.mnuPrepareColumnGenerateDate, "mnuPrepareColumnGenerateDate")
         Me.mnuPrepareColumnGenerateDate.Name = "mnuPrepareColumnGenerateDate"
+        resources.ApplyResources(Me.mnuPrepareColumnGenerateDate, "mnuPrepareColumnGenerateDate")
         '
         'mnuPrepareColumnMakeDate
         '
@@ -3814,4 +3833,7 @@ Partial Class frmMain
     Friend WithEvents OpenNETcdfFileToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificMosaic As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificParallelCoordinatePlot As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnCalculateGeneralSummaries As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnCalculateColumnSummaries As ToolStripMenuItem
+    Friend WithEvents mnuModelHypothesisTests As ToolStripMenuItem
 End Class
