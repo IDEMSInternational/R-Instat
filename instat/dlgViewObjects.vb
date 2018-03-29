@@ -18,7 +18,8 @@ Imports instat.Translations
 Public Class dlgViewObjects
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsViewObjectFunction As New RFunction
+    Private clsGetObjectsFunction As New RFunction
+    Private clsObjectStructureFunction As New RFunction
 
     Private Sub dlgViewObjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -60,32 +61,40 @@ Public Class dlgViewObjects
         'ucrPnlContentsToView.SetRDefault(Chr(34) & "" & Chr(34))
 
         'we are disabling this for now until they're working correctly.
-        rdoStructure.Enabled = False
+        'rdoStructure.Enabled = False
         'rdoAllContents.Enabled = False
         rdoComponent.Enabled = False
     End Sub
 
     Private Sub SetDefaults()
-        clsViewObjectFunction = New RFunction
+        clsGetObjectsFunction = New RFunction
+        clsObjectStructureFunction = New RFunction
 
         ucrSelectorForViewObject.Reset()
-        rdoViewGraph.Checked = True
-        SetiCallType()
+        rdoStructure.Checked = True
+        SetICallType()
 
-        clsViewObjectFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsViewObjectFunction)
+        clsGetObjectsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
+
+        clsObjectStructureFunction.SetRCommand("str")
+        clsObjectStructureFunction.AddParameter(New RParameter("object", clsGetObjectsFunction, iNewPosition:=0))
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsObjectStructureFunction)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrSelectorForViewObject.SetRCode(clsGetObjectsFunction, bReset)
+        ucrReceiverSelectedObject.SetRCode(clsGetObjectsFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverSelectedObject.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        'If Not ucrReceiverSelectedObject.IsEmpty Then
+        '    ucrBase.OKEnabled(True)
+        'Else
+        '    ucrBase.OKEnabled(False)
+        'End If
+
+        ucrBase.OKEnabled(Not ucrReceiverSelectedObject.IsEmpty)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -94,7 +103,7 @@ Public Class dlgViewObjects
         TestOKEnabled()
     End Sub
 
-    Private Sub SetiCallType()
+    Private Sub SetICallType()
         If rdoViewGraph.Checked Then
             ucrBase.clsRsyntax.iCallType = 3
         Else
@@ -103,7 +112,7 @@ Public Class dlgViewObjects
     End Sub
 
     Private Sub ucrPnlContentsToReview_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlContentsToView.ControlContentsChanged
-        SetiCallType()
+        SetICallType()
     End Sub
 
     Private Sub ucrReceiverSelectedObject_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedObject.ControlContentsChanged
