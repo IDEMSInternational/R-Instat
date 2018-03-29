@@ -14,9 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
-Imports RDotNet
 
 Public Class dlgNewDataFrame
     Private clsOverallFunction, clsMatrixFunction As New RFunction
@@ -24,6 +22,7 @@ Public Class dlgNewDataFrame
     Private bReset As Boolean = True
 
     Private Sub dlgNewDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -33,18 +32,19 @@ Public Class dlgNewDataFrame
         End If
         SetRCodeforControls(bReset)
         bReset = False
-        'autoTranslate(Me)
+        'temporary fix for autoTranslate(Me) which overwrites the label text to Label1
+        ucrNewDFName.SetLabelText("New Data Frame Name:")
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 6
 
         'nudRows
-        ucrNudRows.SetParameter(New RParameter("nrow"))
+        ucrNudRows.SetParameter(New RParameter("nrow", iNewPosition:=1))
         ucrNudRows.SetMinMax(1, Integer.MaxValue)
 
         'nudCols
-        ucrNudCols.SetParameter(New RParameter("ncol"))
+        ucrNudCols.SetParameter(New RParameter("ncol", iNewPosition:=2))
         ucrNudCols.SetMinMax(1, Integer.MaxValue)
 
         ' ucrNewSheetName
@@ -61,23 +61,22 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsMatrixDefaultFunction As New RFunction
         clsOverallFunction = New RFunction
+        clsMatrixFunction = New RFunction
 
         ucrNewDFName.Reset()
 
-        ' Default R
+        'e.g of Function to be constructed . data.frame(data=matrix(data = NA,nrow = 10, ncol = 2))
         clsOverallFunction.SetRCommand("data.frame")
 
-        'matrix(nrow = 10, ncol = 2, Data = NA)
-        clsMatrixDefaultFunction.SetRCommand("matrix")
-        clsMatrixDefaultFunction.AddParameter("data", "NA")
-        clsMatrixDefaultFunction.AddParameter("ncol", 2)
-        clsMatrixDefaultFunction.AddParameter("nrow", 10)
+        'matrix(data = NA,nrow = 10, ncol = 2)
+        clsMatrixFunction.SetRCommand("matrix")
+        clsMatrixFunction.AddParameter("data", "NA", iPosition:=0)
+        clsMatrixFunction.AddParameter("nrow", 10, iPosition:=1)
+        clsMatrixFunction.AddParameter("ncol", 2, iPosition:=2)
 
+        clsOverallFunction.AddParameter("data", clsRFunctionParameter:=clsMatrixFunction, iPosition:=0)
         ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
-        clsMatrixFunction = clsMatrixDefaultFunction.Clone()
-        clsOverallFunction.AddParameter("data", clsRFunctionParameter:=clsMatrixFunction)
     End Sub
 
     Private Sub TestOKEnabled()

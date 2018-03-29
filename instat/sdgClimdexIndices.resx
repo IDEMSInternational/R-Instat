@@ -122,7 +122,7 @@
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cmdHelp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>347, 438</value>
+    <value>339, 438</value>
   </data>
   <data name="cmdHelp.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -1153,7 +1153,7 @@
     <value>1</value>
   </data>
   <data name="ucrInputPrecQtiles.Location" type="System.Drawing.Point, System.Drawing">
-    <value>236, 104</value>
+    <value>236, 83</value>
   </data>
   <data name="ucrInputPrecQtiles.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -1174,7 +1174,7 @@
     <value>0</value>
   </data>
   <data name="ucrInputTempQtiles.Location" type="System.Drawing.Point, System.Drawing">
-    <value>236, 57</value>
+    <value>236, 40</value>
   </data>
   <data name="ucrInputTempQtiles.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -1291,7 +1291,7 @@
     <value>3</value>
   </data>
   <data name="grpBaseRange.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 146</value>
+    <value>11, 109</value>
   </data>
   <data name="grpBaseRange.Size" type="System.Drawing.Size, System.Drawing">
     <value>190, 76</value>
@@ -1315,7 +1315,7 @@
     <value>2</value>
   </data>
   <data name="ucrChkNHemisphere.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 231</value>
+    <value>11, 192</value>
   </data>
   <data name="ucrChkNHemisphere.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 20</value>
@@ -1336,7 +1336,7 @@
     <value>3</value>
   </data>
   <data name="ucrChkMaxSpellSpanYears.Location" type="System.Drawing.Point, System.Drawing">
-    <value>236, 130</value>
+    <value>236, 111</value>
   </data>
   <data name="ucrChkMaxSpellSpanYears.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 20</value>
@@ -1357,7 +1357,7 @@
     <value>4</value>
   </data>
   <data name="ucrNudN.Location" type="System.Drawing.Point, System.Drawing">
-    <value>151, 286</value>
+    <value>151, 258</value>
   </data>
   <data name="ucrNudN.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -1378,7 +1378,7 @@
     <value>5</value>
   </data>
   <data name="ucrNudMinBaseData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>151, 260</value>
+    <value>151, 224</value>
   </data>
   <data name="ucrNudMinBaseData.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -1398,38 +1398,11 @@
   <data name="&gt;&gt;ucrNudMinBaseData.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="lblFreq.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblFreq.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 9</value>
-  </data>
-  <data name="lblFreq.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 13</value>
-  </data>
-  <data name="lblFreq.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="lblFreq.Text" xml:space="preserve">
-    <value>Frequency:</value>
-  </data>
-  <data name="&gt;&gt;lblFreq.Name" xml:space="preserve">
-    <value>lblFreq</value>
-  </data>
-  <data name="&gt;&gt;lblFreq.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblFreq.Parent" xml:space="preserve">
-    <value>tbpSettings</value>
-  </data>
-  <data name="&gt;&gt;lblFreq.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
   <data name="lblMinBaseData.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lblMinBaseData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 264</value>
+    <value>8, 228</value>
   </data>
   <data name="lblMinBaseData.Size" type="System.Drawing.Size, System.Drawing">
     <value>143, 13</value>
@@ -1450,34 +1423,13 @@
     <value>tbpSettings</value>
   </data>
   <data name="&gt;&gt;lblMinBaseData.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="ucrInputFreq.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 24</value>
-  </data>
-  <data name="ucrInputFreq.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 21</value>
-  </data>
-  <data name="ucrInputFreq.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrInputFreq.Name" xml:space="preserve">
-    <value>ucrInputFreq</value>
-  </data>
-  <data name="&gt;&gt;ucrInputFreq.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputFreq.Parent" xml:space="preserve">
-    <value>tbpSettings</value>
-  </data>
-  <data name="&gt;&gt;ucrInputFreq.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>7</value>
   </data>
   <data name="lblPrecQuantiles.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lblPrecQuantiles.Location" type="System.Drawing.Point, System.Drawing">
-    <value>236, 89</value>
+    <value>236, 68</value>
   </data>
   <data name="lblPrecQuantiles.Size" type="System.Drawing.Size, System.Drawing">
     <value>115, 13</value>
@@ -1498,13 +1450,13 @@
     <value>tbpSettings</value>
   </data>
   <data name="&gt;&gt;lblPrecQuantiles.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>8</value>
   </data>
   <data name="lblTempQuantiles.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lblTempQuantiles.Location" type="System.Drawing.Point, System.Drawing">
-    <value>236, 42</value>
+    <value>236, 24</value>
   </data>
   <data name="lblTempQuantiles.Size" type="System.Drawing.Size, System.Drawing">
     <value>117, 13</value>
@@ -1525,7 +1477,7 @@
     <value>tbpSettings</value>
   </data>
   <data name="&gt;&gt;lblTempQuantiles.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>9</value>
   </data>
   <data name="lblMonthly.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1624,7 +1576,7 @@
     <value>3</value>
   </data>
   <data name="grpMaxMissingDays.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 57</value>
+    <value>11, 24</value>
   </data>
   <data name="grpMaxMissingDays.Size" type="System.Drawing.Size, System.Drawing">
     <value>190, 76</value>
@@ -1645,13 +1597,13 @@
     <value>tbpSettings</value>
   </data>
   <data name="&gt;&gt;grpMaxMissingDays.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>10</value>
   </data>
   <data name="lblN.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lblN.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 293</value>
+    <value>8, 263</value>
   </data>
   <data name="lblN.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 13</value>
@@ -1672,7 +1624,7 @@
     <value>tbpSettings</value>
   </data>
   <data name="&gt;&gt;lblN.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>11</value>
   </data>
   <data name="tbpSettings.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -1723,7 +1675,7 @@
     <value>1</value>
   </data>
   <data name="ucrButtonsClimdexIndices.Location" type="System.Drawing.Point, System.Drawing">
-    <value>190, 435</value>
+    <value>182, 435</value>
   </data>
   <data name="ucrButtonsClimdexIndices.Size" type="System.Drawing.Size, System.Drawing">
     <value>142, 30</value>

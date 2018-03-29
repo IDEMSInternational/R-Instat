@@ -150,7 +150,7 @@ Public Class dlgSpells
 
         ' key
         clsAddKey.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
-        clsAddKey.AddParameter("col_name", clsRFunctionParameter:=clsAddKeyColName)
+        clsAddKey.AddParameter("col_names", clsRFunctionParameter:=clsAddKeyColName)
         clsAddKeyColName.SetRCommand("c")
 
         'DayFromandTo

@@ -6,7 +6,7 @@ data_object <- R6::R6Class("data_object",
                                                  imported_from = "", 
                                                  messages = TRUE, convert=TRUE, create = TRUE, 
                                                  start_point=1, filters = list(), objects = list(),
-                                                 calculations = list(), keys = list(), keep_attributes = TRUE)
+                                                 calculations = list(), keys = list(), comments = list(), keep_attributes = TRUE)
 {
   # Set up the data object
   self$set_data(data, messages)
@@ -29,6 +29,7 @@ data_object <- R6::R6Class("data_object",
   self$set_objects(objects)
   self$set_calculations(calculations)
   self$set_keys(keys)
+  self$set_comments(comments)
   
   # If no name for the data.frame has been given in the list we create a default one.
   # Decide how to choose default name index
@@ -56,6 +57,7 @@ data_object <- R6::R6Class("data_object",
                            filters = list(),
                            objects = list(),
                            keys = list(),
+                           comments = list(),
                            calculations = list(),
                            changes = list(), 
                            .current_filter = list(),
@@ -204,9 +206,16 @@ data_object$set("public", "set_calculations", function(new_calculations) {
 )
 
 data_object$set("public", "set_keys", function(new_keys) {
-  if(!is.list(new_keys)) stop("new_objects must be of type: list")
+  if(!is.list(new_keys)) stop("new_keys must be of type: list")
   self$append_to_changes(list(Set_property, "keys"))  
   private$keys <- new_keys
+}
+)
+
+data_object$set("public", "set_comments", function(new_comments) {
+  if(!is.list(new_comments)) stop("new_comments must be of type: list")
+  self$append_to_changes(list(Set_property, "comments"))  
+  private$comments <- new_comments
 }
 )
 
@@ -288,7 +297,16 @@ data_object$set("public", "get_data_frame", function(convert_to_character = FALS
       }
     }
     if(!missing(max_cols) && max_cols < ncol(out)) out <- out[1:max_cols]
-    if(!missing(max_rows) && max_rows < nrow(out)) out <- out[1:max_rows, ]
+    if(!missing(max_rows) && max_rows < nrow(out)) {
+      #for data frames with 1 col use slice because out[1:max_rows, ] will return a vector
+      if(ncol(out) == 1){
+        rnames <- row.names(out)[1:max_rows]
+        out <- as.data.frame(dplyr::slice(out,1:max_rows))
+        row.names(out) <- rnames
+      } else { 
+        out <- out[1:max_rows, ]  
+      }
+    } 
     if(convert_to_character) {
       decimal_places = self$get_variables_metadata(property = signif_figures_label, column = names(out), error_if_no_property = FALSE)
       decimal_places[is.na(decimal_places)] <- 0
@@ -1528,7 +1546,7 @@ data_object$set("public", "filter_string", function(filter_name) {
   out = "("
   i = 1
   for(condition in curr_filter$filter_conditions) {
-    if(i != 1) out = paste(out, "&&")
+    if(i != 1) out = paste(out, "&")
     out = paste0(out, " (", condition[["column"]], " ", condition[["operation"]])
     if(condition[["operation"]] == "%in%") out = paste0(out, " c(", paste(paste0("'", condition[["value"]], "'"), collapse = ","), ")")
     else out = paste(out, condition[["value"]])
@@ -1633,15 +1651,18 @@ data_object$set("public", "reorder_objects", function(new_order) {
 }
 )
 
-data_object$set("public", "data_clone", function(include_objects = TRUE, include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_calculations = TRUE) {
+# Any data_clone method must have ... argument to ensure that when arguments are added in future this is still compatible with older versions of this code
+data_object$set("public", "data_clone", function(include_objects = TRUE, include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_calculations = TRUE, include_comments = TRUE, ...) {
   if(include_objects) new_objects <- private$objects
   else new_objects <- list()
   if(include_filters) new_filters <- lapply(private$filters, function(x) x$data_clone())
   else new_filters <- list()
   if(include_calculations) new_calculations <- lapply(private$calculations, function(x) x$data_clone())
   else new_calculations <- list()
+  if(include_comments) new_comments <- lapply(private$comments, function(x) x$data_clone())
+  else new_comments <- list()
   
-  ret <- data_object$new(data = private$data, data_name = self$get_metadata(data_name_label), filters = new_filters, objects = new_objects, calculations = new_calculations, keys = private$keys, keep_attributes = include_metadata)
+  ret <- data_object$new(data = private$data, data_name = self$get_metadata(data_name_label), filters = new_filters, objects = new_objects, calculations = new_calculations, keys = private$keys, comments = new_comments, keep_attributes = include_metadata)
   if(include_logs) ret$set_changes(private$changes)
   else ret$set_changes(list())
   if(include_filters) ret$current_filter <- self$get_current_filter()
@@ -1712,6 +1733,21 @@ data_object$set("public", "get_keys", function(key_name) {
 )
 
 data_object$set("public", "remove_key", function(key_name) {
+  if(!key_name %in% names(private$keys)) stop(key_name, " not found.")
+  private$keys[[key_name]] <- NULL
+}
+)
+
+data_object$set("public", "get_comments", function(comment_id) {
+  if(!missing(comment_id)) {
+    if(!comment_id %in% self$get_comment_ids()) stop("Could not find comment with id: ", comment_id)
+    return(private$comments[[comment_id]])
+  }
+  else return(private$comments)
+}
+)
+
+data_object$set("public", "remove_comment", function(key_name) {
   if(!key_name %in% names(private$keys)) stop(key_name, " not found.")
   private$keys[[key_name]] <- NULL
 }
