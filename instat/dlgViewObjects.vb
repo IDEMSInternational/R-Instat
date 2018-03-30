@@ -21,6 +21,7 @@ Public Class dlgViewObjects
     Private clsGetObjectsFunction As RFunction
     Private clsShowObjectStructureFunction As RFunction
     Private clsShowObjectContentsFunction As RFunction
+    Private clsShowGraphFunction As RFunction
 
     Private Sub dlgViewObjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -52,7 +53,7 @@ Public Class dlgViewObjects
         ucrReceiverSelectedObject.SetItemType("object")
         ucrReceiverSelectedObject.bAutoFill = True
 
-        ucrPnlContentsToView.bAllowNonConditionValues = True ' temporary
+        'ucrPnlContentsToView.bAllowNonConditionValues = True ' temporary
         'add radio buttons to the panel rdo's
         ucrPnlContentsToView.AddRadioButton(rdoStructure)
         ucrPnlContentsToView.AddRadioButton(rdoAllContents)
@@ -69,6 +70,7 @@ Public Class dlgViewObjects
         clsGetObjectsFunction = New RFunction
         clsShowObjectStructureFunction = New RFunction
         clsShowObjectContentsFunction = New RFunction
+        clsShowGraphFunction = New RFunction
 
         'reset controls to default states
         ucrSelectorForViewObject.Reset()
@@ -86,6 +88,10 @@ Public Class dlgViewObjects
         clsShowObjectContentsFunction.SetRCommand("show")
         clsShowObjectContentsFunction.AddParameter(New RParameter("object", clsGetObjectsFunction, iNewPosition:=0))
 
+        'set R function for showing graph
+        clsShowGraphFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
+        clsShowGraphFunction.AddParameter("print_graph", "TRUE")
+
         'set the base function
         ucrBase.clsRsyntax.SetBaseRFunction(clsShowObjectStructureFunction)
     End Sub
@@ -93,7 +99,7 @@ Public Class dlgViewObjects
     Private Sub SetRCodeforControls(bReset As Boolean)
         ucrSelectorForViewObject.SetRCode(clsGetObjectsFunction, bReset)
         ucrReceiverSelectedObject.SetRCode(clsGetObjectsFunction, bReset)
-        ucrPnlContentsToView.SetRCode(clsShowObjectStructureFunction, bReset)
+        'ucrPnlContentsToView.SetRCode(clsShowObjectStructureFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -120,19 +126,32 @@ Public Class dlgViewObjects
     End Sub
 
     Private Sub ucrPnlContentsToReview_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlContentsToView.ControlContentsChanged
-
+        'set the appropriate Base RFunction
         If rdoStructure.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsShowObjectStructureFunction)
         ElseIf rdoAllContents.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsShowObjectContentsFunction)
         ElseIf rdoViewGraph.Checked Then
-            'TODO
-            'VIEW OBJECT GRAPH
+            SetGraphParameters()
+            ucrBase.clsRsyntax.SetBaseRFunction(clsShowGraphFunction)
         End If
         SetICallType()
     End Sub
 
     Private Sub ucrReceiverSelectedObject_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedObject.ControlContentsChanged
         TestOKEnabled()
+        SetGraphParameters()
+    End Sub
+
+    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+        SetGraphParameters()
+    End Sub
+
+    'This is being called in several place because we don't have a BeforeToScripts Click event
+    Private Sub SetGraphParameters()
+        If rdoViewGraph.Checked Then
+            clsShowGraphFunction.AddParameter(strParameterName:="data_name", strParameterValue:=Chr(34) & ucrSelectorForViewObject.strCurrentDataFrame & Chr(34), iPosition:=0)
+            clsShowGraphFunction.AddParameter(strParameterName:="graph_name", strParameterValue:=ucrReceiverSelectedObject.GetVariableNames(bWithQuotes:=True), iPosition:=1)
+        End If
     End Sub
 End Class
