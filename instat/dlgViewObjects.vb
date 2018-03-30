@@ -18,8 +18,9 @@ Imports instat.Translations
 Public Class dlgViewObjects
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsGetObjectsFunction As New RFunction
-    Private clsObjectStructureFunction As New RFunction
+    Private clsGetObjectsFunction As RFunction
+    Private clsShowObjectStructureFunction As RFunction
+    Private clsShowObjectContentsFunction As RFunction
 
     Private Sub dlgViewObjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -52,39 +53,47 @@ Public Class dlgViewObjects
         ucrReceiverSelectedObject.bAutoFill = True
 
         ucrPnlContentsToView.bAllowNonConditionValues = True ' temporary
-        ' rdo's
-        'ucrPnlContentsToView.SetParameter(New RParameter("", 2))
-        'ucrPnlContentsToView.AddRadioButton(rdoStructure, Chr(34) & "" & Chr(34))
-        'ucrPnlContentsToView.AddRadioButton(rdoAllContents, Chr(34) & " " & Chr(34))
-        'ucrPnlContentsToView.AddRadioButton(rdoComponent, Chr(34) & " " & Chr(34))
-        'ucrPnlContentsToView.AddRadioButton(rdoViewGraph, Chr(34) & " " & Chr(34))
-        'ucrPnlContentsToView.SetRDefault(Chr(34) & "" & Chr(34))
+        'add radio buttons to the panel rdo's
+        ucrPnlContentsToView.AddRadioButton(rdoStructure)
+        ucrPnlContentsToView.AddRadioButton(rdoAllContents)
+        'ucrPnlContentsToView.AddRadioButton(rdoComponent)
+        ucrPnlContentsToView.AddRadioButton(rdoViewGraph)
 
         'we are disabling this for now until they're working correctly.
-        'rdoStructure.Enabled = False
         'rdoAllContents.Enabled = False
         rdoComponent.Enabled = False
     End Sub
 
     Private Sub SetDefaults()
+        'initialise the Rfunctions
         clsGetObjectsFunction = New RFunction
-        clsObjectStructureFunction = New RFunction
+        clsShowObjectStructureFunction = New RFunction
+        clsShowObjectContentsFunction = New RFunction
 
+        'reset controls to default states
         ucrSelectorForViewObject.Reset()
         rdoStructure.Checked = True
         SetICallType()
 
+        'set R function for getting objects
         clsGetObjectsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
 
-        clsObjectStructureFunction.SetRCommand("str")
-        clsObjectStructureFunction.AddParameter(New RParameter("object", clsGetObjectsFunction, iNewPosition:=0))
+        'set R function for showing selected object structure
+        clsShowObjectStructureFunction.SetRCommand("str")
+        clsShowObjectStructureFunction.AddParameter(New RParameter("object", clsGetObjectsFunction, iNewPosition:=0))
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsObjectStructureFunction)
+        'set R function for showing selected object contents
+        clsShowObjectContentsFunction.SetRCommand("show")
+        clsShowObjectContentsFunction.AddParameter(New RParameter("object", clsGetObjectsFunction, iNewPosition:=0))
+
+        'set the base function
+        ucrBase.clsRsyntax.SetBaseRFunction(clsShowObjectStructureFunction)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
         ucrSelectorForViewObject.SetRCode(clsGetObjectsFunction, bReset)
         ucrReceiverSelectedObject.SetRCode(clsGetObjectsFunction, bReset)
+        ucrPnlContentsToView.SetRCode(clsShowObjectStructureFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -93,7 +102,6 @@ Public Class dlgViewObjects
         'Else
         '    ucrBase.OKEnabled(False)
         'End If
-
         ucrBase.OKEnabled(Not ucrReceiverSelectedObject.IsEmpty)
     End Sub
 
@@ -112,6 +120,15 @@ Public Class dlgViewObjects
     End Sub
 
     Private Sub ucrPnlContentsToReview_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlContentsToView.ControlContentsChanged
+
+        If rdoStructure.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsShowObjectStructureFunction)
+        ElseIf rdoAllContents.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsShowObjectContentsFunction)
+        ElseIf rdoViewGraph.Checked Then
+            'TODO
+            'VIEW OBJECT GRAPH
+        End If
         SetICallType()
     End Sub
 
