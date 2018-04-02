@@ -1651,9 +1651,14 @@ instat_object$set("public", "crops_definitions", function(data_name, year, stati
     propor_table <- instat_calculation$new(function_exp="length(x = overal_cond[overal_cond == TRUE])/length(x = overal_cond)",
                                            save = 2, calculated_from = prop_calc_from,
                                            manipulations = list(grouping),
-                                           type="summary", result_name = "prop_success")
+                                           type="summary", result_name = "prop_success", result_data_frame = "crop_prop")
     
     prop_data_frame <- self$run_instat_calculation(propor_table, display = TRUE)
+    
+    prop_data_frame$prop_success <- round(prop_data_frame$prop_success, 2)
+    prop_table_unstacked <- reshape2::dcast(formula = as.formula(paste(plant_length_name, "+", rain_total_name, "~", plant_day_name)), data = prop_data_frame, value.var = "prop_success")
+    prop_table_split <- split(prop_table_unstacked, prop_table_unstacked[[plant_length_name]])
+    return(prop_table_split)
   }
 }
 )
