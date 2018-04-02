@@ -1582,7 +1582,7 @@ instat_object$set("public","get_variable_sets", function(data_name, set_names, f
 }
 )
 
-instat_object$set("public", "crops_definitions", function(data_name, year, station, rain, rain_totals, plant_days, plant_lengths, season_data_name, start_day, end_day) {
+instat_object$set("public", "crops_definitions", function(data_name, year, station, rain, rain_totals, plant_days, plant_lengths, season_data_name, start_day, end_day, definition_props = TRUE) {
   plant_day_name <- "plant_day"
   plant_length_name <- "plant_length"
   rain_total_name <- "rain_total"
@@ -1642,20 +1642,18 @@ instat_object$set("public", "crops_definitions", function(data_name, year, stati
   crops_by <- season_by
   names(crops_by) <- by
   self$add_link(crops_name, season_data_name, crops_by, keyed_link_label)
-  # if(definition_props) {
-  #   calc_from <- list(plant_day_name, plant_length_name, rain_total_name)
-  #   names(calc_from) <- rep()
-  #   plant_group <- instat_calculation$new(type = "by", calculated_from = list("table_calculations" = "plant_day"))
-  #   length_group <- instat_calculation$new(type = "by", calculated_from = list("table_calculations" = "length"))
-  #   total_group <- instat_calculation$new(type = "by", calculated_from = list("table_calculations" = "total"))
-  #   
-  #   propor_table <- instat_calculation$new(function_exp="length(x = overall[overall == TRUE])/length(x = overall)",
-  #                                          save = 2, calculated_from = list("table_calculations"="overall"),
-  #                                          manipulations = list(plant_group, length_group, total_group),
-  #                                          type="summary", result_name = "proportion")
-  #   InstatDataObject$apply_instat_calculation(propor_table)
-  #   
-  #   propor_table <- InstatDataObject$get_data_frame("table_calculations_by_plant_day_length_total")
-  # }
+  if(definition_props) {
+    calc_from <- list(plant_day_name, plant_length_name, rain_total_name)
+    names(calc_from) <- rep(crops_name, 3)
+    grouping <- instat_calculation$new(type = "by", calculated_from = calc_from)
+    prop_calc_from <- list("overal_cond")
+    names(prop_calc_from) <- crops_name
+    propor_table <- instat_calculation$new(function_exp="length(x = overal_cond[overal_cond == TRUE])/length(x = overal_cond)",
+                                           save = 2, calculated_from = prop_calc_from,
+                                           manipulations = list(grouping),
+                                           type="summary", result_name = "prop_success")
+    
+    prop_data_frame <- self$run_instat_calculation(propor_table, display = TRUE)
+  }
 }
 )
