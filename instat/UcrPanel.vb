@@ -81,7 +81,7 @@ Public Class UcrPanel
         End If
     End Sub
 
-    Protected Overrides Sub SetToValue(objTemp As Object)
+    Public Overrides Sub SetToValue(objTemp As Object)
         Dim rdoTemp As RadioButton
 
         If objTemp IsNot Nothing Then
