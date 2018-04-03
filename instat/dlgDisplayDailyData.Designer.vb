@@ -52,12 +52,15 @@ Partial Class dlgDisplayDailyData
         Me.lblBarColour = New System.Windows.Forms.Label()
         Me.lblElements = New System.Windows.Forms.Label()
         Me.grpSummary = New System.Windows.Forms.GroupBox()
+        Me.ucrChkSumMissing = New instat.ucrCheck()
+        Me.ucrChkMax = New instat.ucrCheck()
+        Me.ucrChkIQR = New instat.ucrCheck()
+        Me.ucrChkMedian = New instat.ucrCheck()
+        Me.ucrChkSum = New instat.ucrCheck()
+        Me.ucrChkMin = New instat.ucrCheck()
+        Me.ucrChkMean = New instat.ucrCheck()
         Me.ucrReceiverMultipleElements = New instat.ucrReceiverMultiple()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
-        Me.ucrSaveGraph = New instat.ucrSave()
-        Me.ucrInputRugColour = New instat.ucrInputComboBox()
-        Me.ucrInputBarColour = New instat.ucrInputComboBox()
-        Me.ucrNudUpperYaxis = New instat.ucrNud()
         Me.ucrInputComboZero = New instat.ucrInputComboBox()
         Me.ucrInputComboMissing = New instat.ucrInputComboBox()
         Me.ucrInputComboTrace = New instat.ucrInputComboBox()
@@ -71,12 +74,10 @@ Partial Class dlgDisplayDailyData
         Me.ucrPnlFrequencyDisplay = New instat.UcrPanel()
         Me.ucrSelectorDisplayDailyClimaticData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkMax = New instat.ucrCheck()
-        Me.ucrChkIQR = New instat.ucrCheck()
-        Me.ucrChkMedian = New instat.ucrCheck()
-        Me.ucrChkSum = New instat.ucrCheck()
-        Me.ucrChkMin = New instat.ucrCheck()
-        Me.ucrChkMean = New instat.ucrCheck()
+        Me.ucrSaveGraph = New instat.ucrSave()
+        Me.ucrInputRugColour = New instat.ucrInputComboBox()
+        Me.ucrInputBarColour = New instat.ucrInputComboBox()
+        Me.ucrNudUpperYaxis = New instat.ucrNud()
         Me.grpGraph.SuspendLayout()
         Me.grpSummary.SuspendLayout()
         Me.SuspendLayout()
@@ -161,6 +162,7 @@ Partial Class dlgDisplayDailyData
         '
         'grpSummary
         '
+        Me.grpSummary.Controls.Add(Me.ucrChkSumMissing)
         Me.grpSummary.Controls.Add(Me.ucrChkMax)
         Me.grpSummary.Controls.Add(Me.ucrChkIQR)
         Me.grpSummary.Controls.Add(Me.ucrChkMedian)
@@ -170,6 +172,48 @@ Partial Class dlgDisplayDailyData
         resources.ApplyResources(Me.grpSummary, "grpSummary")
         Me.grpSummary.Name = "grpSummary"
         Me.grpSummary.TabStop = False
+        '
+        'ucrChkSumMissing
+        '
+        Me.ucrChkSumMissing.Checked = False
+        resources.ApplyResources(Me.ucrChkSumMissing, "ucrChkSumMissing")
+        Me.ucrChkSumMissing.Name = "ucrChkSumMissing"
+        '
+        'ucrChkMax
+        '
+        Me.ucrChkMax.Checked = False
+        resources.ApplyResources(Me.ucrChkMax, "ucrChkMax")
+        Me.ucrChkMax.Name = "ucrChkMax"
+        '
+        'ucrChkIQR
+        '
+        Me.ucrChkIQR.Checked = False
+        resources.ApplyResources(Me.ucrChkIQR, "ucrChkIQR")
+        Me.ucrChkIQR.Name = "ucrChkIQR"
+        '
+        'ucrChkMedian
+        '
+        Me.ucrChkMedian.Checked = False
+        resources.ApplyResources(Me.ucrChkMedian, "ucrChkMedian")
+        Me.ucrChkMedian.Name = "ucrChkMedian"
+        '
+        'ucrChkSum
+        '
+        Me.ucrChkSum.Checked = False
+        resources.ApplyResources(Me.ucrChkSum, "ucrChkSum")
+        Me.ucrChkSum.Name = "ucrChkSum"
+        '
+        'ucrChkMin
+        '
+        Me.ucrChkMin.Checked = False
+        resources.ApplyResources(Me.ucrChkMin, "ucrChkMin")
+        Me.ucrChkMin.Name = "ucrChkMin"
+        '
+        'ucrChkMean
+        '
+        Me.ucrChkMean.Checked = False
+        resources.ApplyResources(Me.ucrChkMean, "ucrChkMean")
+        Me.ucrChkMean.Name = "ucrChkMean"
         '
         'ucrReceiverMultipleElements
         '
@@ -188,35 +232,6 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverElement.Selector = Nothing
         Me.ucrReceiverElement.strNcFilePath = ""
         Me.ucrReceiverElement.ucrSelector = Nothing
-        '
-        'ucrSaveGraph
-        '
-        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
-        Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        '
-        'ucrInputRugColour
-        '
-        Me.ucrInputRugColour.AddQuotesIfUnrecognised = True
-        Me.ucrInputRugColour.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputRugColour, "ucrInputRugColour")
-        Me.ucrInputRugColour.Name = "ucrInputRugColour"
-        '
-        'ucrInputBarColour
-        '
-        Me.ucrInputBarColour.AddQuotesIfUnrecognised = True
-        Me.ucrInputBarColour.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputBarColour, "ucrInputBarColour")
-        Me.ucrInputBarColour.Name = "ucrInputBarColour"
-        '
-        'ucrNudUpperYaxis
-        '
-        Me.ucrNudUpperYaxis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudUpperYaxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudUpperYaxis, "ucrNudUpperYaxis")
-        Me.ucrNudUpperYaxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudUpperYaxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudUpperYaxis.Name = "ucrNudUpperYaxis"
-        Me.ucrNudUpperYaxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrInputComboZero
         '
@@ -310,50 +325,43 @@ Partial Class dlgDisplayDailyData
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'ucrChkMax
+        'ucrSaveGraph
         '
-        Me.ucrChkMax.Checked = False
-        resources.ApplyResources(Me.ucrChkMax, "ucrChkMax")
-        Me.ucrChkMax.Name = "ucrChkMax"
+        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
         '
-        'ucrChkIQR
+        'ucrInputRugColour
         '
-        Me.ucrChkIQR.Checked = False
-        resources.ApplyResources(Me.ucrChkIQR, "ucrChkIQR")
-        Me.ucrChkIQR.Name = "ucrChkIQR"
+        Me.ucrInputRugColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputRugColour.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputRugColour, "ucrInputRugColour")
+        Me.ucrInputRugColour.Name = "ucrInputRugColour"
         '
-        'ucrChkMedian
+        'ucrInputBarColour
         '
-        Me.ucrChkMedian.Checked = False
-        resources.ApplyResources(Me.ucrChkMedian, "ucrChkMedian")
-        Me.ucrChkMedian.Name = "ucrChkMedian"
+        Me.ucrInputBarColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputBarColour.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputBarColour, "ucrInputBarColour")
+        Me.ucrInputBarColour.Name = "ucrInputBarColour"
         '
-        'ucrChkSum
+        'ucrNudUpperYaxis
         '
-        Me.ucrChkSum.Checked = False
-        resources.ApplyResources(Me.ucrChkSum, "ucrChkSum")
-        Me.ucrChkSum.Name = "ucrChkSum"
-        '
-        'ucrChkMin
-        '
-        Me.ucrChkMin.Checked = False
-        resources.ApplyResources(Me.ucrChkMin, "ucrChkMin")
-        Me.ucrChkMin.Name = "ucrChkMin"
-        '
-        'ucrChkMean
-        '
-        Me.ucrChkMean.Checked = False
-        resources.ApplyResources(Me.ucrChkMean, "ucrChkMean")
-        Me.ucrChkMean.Name = "ucrChkMean"
+        Me.ucrNudUpperYaxis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudUpperYaxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudUpperYaxis, "ucrNudUpperYaxis")
+        Me.ucrNudUpperYaxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudUpperYaxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudUpperYaxis.Name = "ucrNudUpperYaxis"
+        Me.ucrNudUpperYaxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'dlgDisplayDailyData
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.grpSummary)
         Me.Controls.Add(Me.lblElements)
         Me.Controls.Add(Me.ucrReceiverMultipleElements)
         Me.Controls.Add(Me.ucrReceiverElement)
-        Me.Controls.Add(Me.grpGraph)
         Me.Controls.Add(Me.ucrInputComboZero)
         Me.Controls.Add(Me.ucrInputComboMissing)
         Me.Controls.Add(Me.ucrInputComboTrace)
@@ -374,7 +382,7 @@ Partial Class dlgDisplayDailyData
         Me.Controls.Add(Me.ucrPnlFrequencyDisplay)
         Me.Controls.Add(Me.ucrSelectorDisplayDailyClimaticData)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.grpSummary)
+        Me.Controls.Add(Me.grpGraph)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -425,4 +433,5 @@ Partial Class dlgDisplayDailyData
     Friend WithEvents ucrChkMedian As ucrCheck
     Friend WithEvents ucrChkIQR As ucrCheck
     Friend WithEvents grpSummary As GroupBox
+    Friend WithEvents ucrChkSumMissing As ucrCheck
 End Class
