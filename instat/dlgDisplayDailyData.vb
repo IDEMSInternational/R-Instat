@@ -123,6 +123,10 @@ Public Class dlgDisplayDailyData
         ucrChkIQR.SetParameter(New RParameter("IQR", 5), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "IQR" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkIQR.SetText("IQR")
 
+        'Missing is not yet implemented as a summary in the display_daily_table function
+        'ucrChkSumMissing.SetParameter(New RParameter("summary_count_missing", 5), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_count_missing" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkSumMissing.Enabled = False
+        ucrChkSumMissing.SetText("Summary Missing")
 
         lstCheckboxes.AddRange({ucrChkSum, ucrChkMax, ucrChkMin, ucrChkMean, ucrChkMedian, ucrChkIQR})
 
@@ -131,7 +135,8 @@ Public Class dlgDisplayDailyData
         ucrChkMissing.AddParameterPresentCondition(False, "Misscode", False)
         ucrChkMissing.SetText("Missing Values")
         ucrInputComboMissing.SetParameter(New RParameter("Misscode", 5))
-        dctMissingvalues.Add("M", Chr(34) & "M" & Chr(34))
+        dctMissingvalues.Add("m", Chr(34) & "m" & Chr(34))
+        dctMissingvalues.Add("miss", Chr(34) & "miss" & Chr(34))
         dctMissingvalues.Add("NA", Chr(34) & "NA" & Chr(34))
         dctMissingvalues.Add("-", Chr(34) & "-" & Chr(34))
         ucrInputComboMissing.SetItems(dctMissingvalues)
@@ -172,6 +177,9 @@ Public Class dlgDisplayDailyData
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboMissing, ucrChkMissing}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboTrace, ucrChkTrace}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboZero, ucrChkZero}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkSum, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkSum.SetLinkedDisplayControl(grpSummary)
+
         ucrChkMissing.AddToLinkedControls({ucrInputComboMissing}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkTrace.AddToLinkedControls({ucrInputComboTrace}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="tr")
         ucrChkZero.AddToLinkedControls({ucrInputComboZero}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="--")
@@ -187,19 +195,12 @@ Public Class dlgDisplayDailyData
         ucrReceiverStations.SetMeAsReceiver()
 
         clsConcFunction.SetRCommand("c")
-        clsConcFunction.AddParameter("sum", Chr(34) & "sum" & Chr(34), bIncludeArgumentName:=False)
-        clsConcFunction.AddParameter("min", Chr(34) & "min" & Chr(34), bIncludeArgumentName:=False)
-        clsConcFunction.AddParameter("max", Chr(34) & "max" & Chr(34), bIncludeArgumentName:=False)
-        clsConcFunction.AddParameter("mean", Chr(34) & "mean" & Chr(34), bIncludeArgumentName:=False)
-        clsConcFunction.AddParameter("median", Chr(34) & "median" & Chr(34), bIncludeArgumentName:=False)
-        clsConcFunction.AddParameter("IQR", Chr(34) & "IQR" & Chr(34), bIncludeArgumentName:=False)
-
         clsDisplayDailyGraphFunction.AddParameter("rug_colour", Chr(34) & "red" & Chr(34))
         clsDisplayDailyGraphFunction.AddParameter("bar_colour", Chr(34) & "blue" & Chr(34))
         clsDisplayDailyGraphFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_graph")
         clsDisplayDailyTable.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$display_daily_table")
         clsDisplayDailyTable.AddParameter("monstats", clsRFunctionParameter:=clsConcFunction, iPosition:=8)
-        clsDisplayDailyTable.AddParameter("Misscode", Chr(34) & "M" & Chr(34), iPosition:=5)
+        clsDisplayDailyTable.AddParameter("Misscode", Chr(34) & "m" & Chr(34), iPosition:=5)
         clsDisplayDailyGraphFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$display_daily_graph")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDisplayDailyTable)
 
@@ -222,6 +223,7 @@ Public Class dlgDisplayDailyData
         ucrChkMean.SetRCode(clsConcFunction, bReset)
         ucrChkMedian.SetRCode(clsConcFunction, bReset)
         ucrChkIQR.SetRCode(clsConcFunction, bReset)
+        'ucrChkSumMissing.SetRCode(clsConcFunction, bReset)
 
         ucrChkTrace.SetRCode(clsDisplayDailyTable, bReset)
         ucrChkZero.SetRCode(clsDisplayDailyTable, bReset)
@@ -246,7 +248,7 @@ Public Class dlgDisplayDailyData
     Private Sub TestOkEnabled()
         If rdoGraph.Checked AndAlso (Not ucrReceiverDate.IsEmpty OrElse Not ucrReceiverDayOfYear.IsEmpty OrElse Not ucrReceiverStations.IsEmpty) AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverMultipleElements.IsEmpty AndAlso ucrNudUpperYaxis.GetText <> "" AndAlso Not ucrInputRugColour.IsEmpty AndAlso Not ucrInputBarColour.IsEmpty Then
             ucrBase.OKEnabled(True)
-        ElseIf rdoTable.Checked AndAlso Not ucrReceiverElement.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso (ucrChkSum.Checked OrElse ucrChkMin.Checked OrElse ucrChkMax.Checked OrElse ucrChkMean.Checked OrElse ucrChkMedian.Checked OrElse ucrChkIQR.Checked)
+        ElseIf rdoTable.Checked AndAlso Not ucrReceiverElement.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso (ucrChkSum.Checked OrElse ucrChkMin.Checked OrElse ucrChkMax.Checked OrElse ucrChkMean.Checked OrElse ucrChkMedian.Checked OrElse ucrChkIQR.Checked) 'OrElse ucrChkSumMissing.Checked)
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -273,7 +275,7 @@ Public Class dlgDisplayDailyData
         clsDisplayDailyGraphFunction.AddParameter("data_name", Chr(34) & ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
     End Sub
 
-    Private Sub ucrReceiverDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverStations.ControlContentsChanged, ucrReceiverDayOfYear.ControlContentsChanged, ucrNudUpperYaxis.ControlContentsChanged, ucrInputRugColour.ControlContentsChanged, ucrInputBarColour.ControlContentsChanged, ucrPnlFrequencyDisplay.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverMultipleElements.ControlContentsChanged, ucrChkSum.ControlContentsChanged, ucrChkMax.ControlContentsChanged, ucrChkMin.ControlContentsChanged, ucrChkMean.ControlContentsChanged, ucrChkMedian.ControlContentsChanged, ucrChkIQR.ControlContentsChanged
+    Private Sub ucrReceiverDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverStations.ControlContentsChanged, ucrReceiverDayOfYear.ControlContentsChanged, ucrNudUpperYaxis.ControlContentsChanged, ucrInputRugColour.ControlContentsChanged, ucrInputBarColour.ControlContentsChanged, ucrPnlFrequencyDisplay.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverMultipleElements.ControlContentsChanged, ucrChkSum.ControlContentsChanged, ucrChkMax.ControlContentsChanged, ucrChkMin.ControlContentsChanged, ucrChkMean.ControlContentsChanged, ucrChkMedian.ControlContentsChanged, ucrChkIQR.ControlContentsChanged ', ucrChkSumMissing.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
