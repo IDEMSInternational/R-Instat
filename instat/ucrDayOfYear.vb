@@ -129,10 +129,6 @@ Public Class ucrDayOfYear
     Protected Overrides Sub SetControlValue()
         Dim strDayOfYearNumber As String
         Dim iDayOfYearNumber As Integer
-        Dim iYear As Integer
-        Dim dtTemp As Date
-        Dim strMonth As String
-        Dim strDay As String
         Dim clsTempParameter As RParameter
         Dim bInvalid As Boolean = False
 
@@ -143,32 +139,7 @@ Public Class ucrDayOfYear
                     If clsTempParameter.bIsString Then
                         strDayOfYearNumber = clsTempParameter.strArgumentValue
                         If Integer.TryParse(strDayOfYearNumber, iDayOfYearNumber) Then
-                            If b366DayOfYear Then
-                                iYear = 2000
-                                If iDayOfYearNumber < 1 OrElse iDayOfYearNumber > 366 Then
-                                    bInvalid = True
-                                End If
-                            Else
-                                iYear = 1999
-                                If iDayOfYearNumber < 1 OrElse iDayOfYearNumber > 365 Then
-                                    bInvalid = True
-                                End If
-                            End If
-                            If Not bInvalid Then
-                                Try
-                                    dtTemp = New Date(year:=iYear, month:=1, day:=1).AddDays(iDayOfYearNumber - 1)
-                                    strDay = dtTemp.Day
-                                    strMonth = dtTemp.Month
-                                    bUpdate = False
-                                    ucrInputDay.SetName(dtTemp.Day)
-                                    'TODO this should be done through a method in ucrInputMonth
-                                    ucrInputMonth.cboInput.SelectedIndex = dtTemp.Month - 1
-                                    bUpdate = True
-                                    UpdateAllParameters()
-                                Catch ex As Exception
-                                    bInvalid = True
-                                End Try
-                            End If
+                            bInvalid = SetValue(iDayOfYearNumber)
                         Else
                             bInvalid = True
                         End If
@@ -267,4 +238,40 @@ Public Class ucrDayOfYear
     Public Function IsComplete() As Boolean
         Return (ucrInputDay.GetText() <> "" AndAlso ucrInputMonth.GetText() <> "")
     End Function
+
+    Public Function SetValue(iDoy As Integer) As Boolean
+        Dim iYear As Integer
+        Dim dtTemp As Date
+        Dim bInvalid As Boolean = False
+
+        If b366DayOfYear Then
+            iYear = 2000
+            If iDoy < 1 OrElse iDoy > 366 Then
+                bInvalid = True
+            End If
+        Else
+            iYear = 1999
+            If iDoy < 1 OrElse iDoy > 365 Then
+                bInvalid = True
+            End If
+        End If
+        If Not bInvalid Then
+            Try
+                dtTemp = New Date(year:=iYear, month:=1, day:=1).AddDays(iDoy - 1)
+                bUpdate = False
+                ucrInputDay.SetName(dtTemp.Day)
+                'TODO this should be done through a method in ucrInputMonth
+                ucrInputMonth.cboInput.SelectedIndex = dtTemp.Month - 1
+                bUpdate = True
+                UpdateAllParameters()
+            Catch ex As Exception
+                bInvalid = True
+            End Try
+        End If
+        Return bInvalid
+    End Function
+
+    Public Sub SetValue(iDay As Integer, iMonth As Integer)
+
+    End Sub
 End Class
