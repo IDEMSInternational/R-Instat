@@ -749,7 +749,7 @@ instat_calculation$set("public", "get_dependencies", function(depens = c()) {
 }
 )
 
-calc_from_list <- function(x) {
+calc_from_convert <- function(x) {
   calc_list <- list()
   for(i in seq_along(x)) {
     for(j in seq_along(x[[i]])) {

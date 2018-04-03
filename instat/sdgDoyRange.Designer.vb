@@ -27,18 +27,19 @@ Partial Class sdgDoyRange
         Me.rdoFromVariable = New System.Windows.Forms.RadioButton()
         Me.ucrPnlFrom = New instat.UcrPanel()
         Me.grpFrom = New System.Windows.Forms.GroupBox()
-        Me.ucrDoyFrom = New instat.ucrDayOfYear()
         Me.ucrReceiverFrom = New instat.ucrReceiverSingle()
+        Me.ucrDoyFrom = New instat.ucrDayOfYear()
         Me.ucrSelectorDoy = New instat.ucrSelectorByDataFrameAddRemove()
         Me.grpTo = New System.Windows.Forms.GroupBox()
+        Me.ucrNudToDiff = New instat.ucrNud()
+        Me.lblToPlus = New System.Windows.Forms.Label()
+        Me.rdoToFixedDiff = New System.Windows.Forms.RadioButton()
         Me.ucrReceiverTo = New instat.ucrReceiverSingle()
         Me.ucrDoyTo = New instat.ucrDayOfYear()
         Me.rdoToVariable = New System.Windows.Forms.RadioButton()
         Me.rdoToFixed = New System.Windows.Forms.RadioButton()
         Me.ucrPnlTo = New instat.UcrPanel()
-        Me.rdoToFixedDiff = New System.Windows.Forms.RadioButton()
-        Me.ucrNudToDiff = New instat.ucrNud()
-        Me.lblToDiff = New System.Windows.Forms.Label()
+        Me.lblToDays = New System.Windows.Forms.Label()
         Me.grpFrom.SuspendLayout()
         Me.grpTo.SuspendLayout()
         Me.SuspendLayout()
@@ -93,13 +94,6 @@ Partial Class sdgDoyRange
         Me.grpFrom.TabStop = False
         Me.grpFrom.Text = "From"
         '
-        'ucrDoyFrom
-        '
-        Me.ucrDoyFrom.Location = New System.Drawing.Point(16, 84)
-        Me.ucrDoyFrom.Name = "ucrDoyFrom"
-        Me.ucrDoyFrom.Size = New System.Drawing.Size(209, 21)
-        Me.ucrDoyFrom.TabIndex = 5
-        '
         'ucrReceiverFrom
         '
         Me.ucrReceiverFrom.frmParent = Me
@@ -111,6 +105,13 @@ Partial Class sdgDoyRange
         Me.ucrReceiverFrom.strNcFilePath = ""
         Me.ucrReceiverFrom.TabIndex = 5
         Me.ucrReceiverFrom.ucrSelector = Nothing
+        '
+        'ucrDoyFrom
+        '
+        Me.ucrDoyFrom.Location = New System.Drawing.Point(16, 84)
+        Me.ucrDoyFrom.Name = "ucrDoyFrom"
+        Me.ucrDoyFrom.Size = New System.Drawing.Size(209, 21)
+        Me.ucrDoyFrom.TabIndex = 5
         '
         'ucrSelectorDoy
         '
@@ -124,8 +125,9 @@ Partial Class sdgDoyRange
         '
         'grpTo
         '
+        Me.grpTo.Controls.Add(Me.lblToDays)
         Me.grpTo.Controls.Add(Me.ucrNudToDiff)
-        Me.grpTo.Controls.Add(Me.lblToDiff)
+        Me.grpTo.Controls.Add(Me.lblToPlus)
         Me.grpTo.Controls.Add(Me.rdoToFixedDiff)
         Me.grpTo.Controls.Add(Me.ucrReceiverTo)
         Me.grpTo.Controls.Add(Me.ucrDoyTo)
@@ -138,6 +140,39 @@ Partial Class sdgDoyRange
         Me.grpTo.TabIndex = 6
         Me.grpTo.TabStop = False
         Me.grpTo.Text = "To"
+        '
+        'ucrNudToDiff
+        '
+        Me.ucrNudToDiff.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudToDiff.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudToDiff.Location = New System.Drawing.Point(53, 83)
+        Me.ucrNudToDiff.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudToDiff.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudToDiff.Name = "ucrNudToDiff"
+        Me.ucrNudToDiff.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudToDiff.TabIndex = 7
+        Me.ucrNudToDiff.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblToPlus
+        '
+        Me.lblToPlus.AutoSize = True
+        Me.lblToPlus.BackColor = System.Drawing.Color.Transparent
+        Me.lblToPlus.Location = New System.Drawing.Point(19, 87)
+        Me.lblToPlus.Name = "lblToPlus"
+        Me.lblToPlus.Size = New System.Drawing.Size(26, 13)
+        Me.lblToPlus.TabIndex = 8
+        Me.lblToPlus.Text = "plus"
+        '
+        'rdoToFixedDiff
+        '
+        Me.rdoToFixedDiff.AutoSize = True
+        Me.rdoToFixedDiff.Location = New System.Drawing.Point(191, 32)
+        Me.rdoToFixedDiff.Name = "rdoToFixedDiff"
+        Me.rdoToFixedDiff.Size = New System.Drawing.Size(102, 17)
+        Me.rdoToFixedDiff.TabIndex = 6
+        Me.rdoToFixedDiff.TabStop = True
+        Me.rdoToFixedDiff.Text = "Fixed Difference"
+        Me.rdoToFixedDiff.UseVisualStyleBackColor = True
         '
         'ucrReceiverTo
         '
@@ -187,37 +222,15 @@ Partial Class sdgDoyRange
         Me.ucrPnlTo.Size = New System.Drawing.Size(296, 36)
         Me.ucrPnlTo.TabIndex = 3
         '
-        'rdoToFixedDiff
+        'lblToDays
         '
-        Me.rdoToFixedDiff.AutoSize = True
-        Me.rdoToFixedDiff.Location = New System.Drawing.Point(191, 32)
-        Me.rdoToFixedDiff.Name = "rdoToFixedDiff"
-        Me.rdoToFixedDiff.Size = New System.Drawing.Size(102, 17)
-        Me.rdoToFixedDiff.TabIndex = 6
-        Me.rdoToFixedDiff.TabStop = True
-        Me.rdoToFixedDiff.Text = "Fixed Difference"
-        Me.rdoToFixedDiff.UseVisualStyleBackColor = True
-        '
-        'ucrNudToDiff
-        '
-        Me.ucrNudToDiff.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudToDiff.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudToDiff.Location = New System.Drawing.Point(53, 83)
-        Me.ucrNudToDiff.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudToDiff.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudToDiff.Name = "ucrNudToDiff"
-        Me.ucrNudToDiff.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudToDiff.TabIndex = 7
-        Me.ucrNudToDiff.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblToDiff
-        '
-        Me.lblToDiff.AutoSize = True
-        Me.lblToDiff.Location = New System.Drawing.Point(19, 87)
-        Me.lblToDiff.Name = "lblToDiff"
-        Me.lblToDiff.Size = New System.Drawing.Size(118, 13)
-        Me.lblToDiff.TabIndex = 8
-        Me.lblToDiff.Text = "Plus                       days"
+        Me.lblToDays.AutoSize = True
+        Me.lblToDays.BackColor = System.Drawing.Color.Transparent
+        Me.lblToDays.Location = New System.Drawing.Point(109, 87)
+        Me.lblToDays.Name = "lblToDays"
+        Me.lblToDays.Size = New System.Drawing.Size(29, 13)
+        Me.lblToDays.TabIndex = 9
+        Me.lblToDays.Text = "days"
         '
         'sdgDoyRange
         '
@@ -250,7 +263,7 @@ Partial Class sdgDoyRange
     Friend WithEvents ucrReceiverFrom As ucrReceiverSingle
     Friend WithEvents grpTo As GroupBox
     Friend WithEvents ucrNudToDiff As ucrNud
-    Friend WithEvents lblToDiff As Label
+    Friend WithEvents lblToPlus As Label
     Friend WithEvents rdoToFixedDiff As RadioButton
     Friend WithEvents ucrReceiverTo As ucrReceiverSingle
     Friend WithEvents ucrDoyTo As ucrDayOfYear
@@ -259,4 +272,5 @@ Partial Class sdgDoyRange
     Friend WithEvents ucrPnlTo As UcrPanel
     Friend WithEvents ucrSelectorDoy As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrDoyFrom As ucrDayOfYear
+    Friend WithEvents lblToDays As Label
 End Class

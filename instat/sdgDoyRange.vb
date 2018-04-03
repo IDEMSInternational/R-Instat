@@ -14,11 +14,11 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Imports RDotNet
 
 Public Class sdgDoyRange
-
     Private clsDoyFilterCalc As RFunction
     Private clsCalcFromList As RFunction
     Private clsCalcFromMainDataFrame As RFunction
@@ -26,12 +26,14 @@ Public Class sdgDoyRange
     Private clsDayToOperator As ROperator
     Private bControlsInitialised As Boolean = False
     Private strMainDataFrame As String
+    Private strDoyColumn As String
+    Private bUpdate As Boolean = True
 
     Private Sub sdgDoyRange_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
 
-    Public Sub Setup(clsNewDoyFilterCalc As RFunction, clsNewDayFromOperator As ROperator, clsNewDayToOperator As ROperator, clsNewCalcFromList As RFunction, strNewMainDataFrame As String)
+    Public Sub Setup(clsNewDoyFilterCalc As RFunction, clsNewDayFromOperator As ROperator, clsNewDayToOperator As ROperator, clsNewCalcFromList As RFunction, strNewMainDataFrame As String, strNewDoyColumn As String)
         Dim iFrom As Integer
         Dim iTo As Integer
         Dim iDiff As Integer
@@ -45,13 +47,18 @@ Public Class sdgDoyRange
         Dim clsDiffParam As RParameter
 
         If Not bControlsInitialised Then
+            bUpdate = False
             InitialiseControls()
+            bUpdate = True
         End If
         clsDoyFilterCalc = clsNewDoyFilterCalc
         clsDayFromOperator = clsNewDayFromOperator
         clsDayToOperator = clsNewDayToOperator
         clsCalcFromList = clsNewCalcFromList
         strMainDataFrame = strNewMainDataFrame
+        strDoyColumn = strNewDoyColumn
+
+        ucrSelectorDoy.SetPrimaryDataFrameOptions(strMainDataFrame, True, True)
 
         clsFindDfFunc.SetRCommand("find_df_from_calc_from")
         clsFindDfFunc.AddParameter("x", clsRFunctionParameter:=clsCalcFromList, iPosition:=0)
@@ -63,7 +70,7 @@ Public Class sdgDoyRange
                     rdoFromFixed.Checked = True
                     ucrDoyFrom.SetValue(iFrom)
                 Else
-                    clsFindDfFunc.AddParameter("column", strParameterValue:=clsFromParam.strArgumentValue, iPosition:=1)
+                    clsFindDfFunc.AddParameter("column", strParameterValue:=Chr(34) & clsFromParam.strArgumentValue & Chr(34), iPosition:=1)
                     expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsFindDfFunc.ToScript(), bSilent:=True, bShowWaitDialogOverride:=False)
                     If expTemp IsNot Nothing AndAlso expTemp.Type = Internals.SymbolicExpressionType.CharacterVector Then
                         chrTemp = expTemp.AsCharacter
@@ -77,7 +84,7 @@ Public Class sdgDoyRange
             End If
         End If
 
-        clsToParam = clsDayFromOperator.GetParameter("to")
+        clsToParam = clsDayToOperator.GetParameter("to")
         If clsToParam IsNot Nothing Then
             If clsToParam.bIsString AndAlso clsToParam.strArgumentValue IsNot Nothing Then
                 If Integer.TryParse(clsToParam.strArgumentValue, iTo) Then
@@ -112,7 +119,7 @@ Public Class sdgDoyRange
 
     Public Sub InitialiseControls()
         ucrNudToDiff.SetMinMax(1, 366)
-        ucrNudToDiff.SetLinkedDisplayControl(lblToDiff)
+        ucrNudToDiff.SetLinkedDisplayControl(lblToPlus)
 
         ucrPnlFrom.AddRadioButton(rdoFromFixed)
         ucrPnlFrom.AddRadioButton(rdoFromVariable)
@@ -122,7 +129,7 @@ Public Class sdgDoyRange
         ucrPnlTo.AddRadioButton(rdoToFixed)
         ucrPnlTo.AddRadioButton(rdoToVariable)
         ucrPnlTo.AddRadioButton(rdoToFixedDiff)
-        ucrPnlTo.AddToLinkedControls(ucrDoyFrom, {rdoToFixed}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlTo.AddToLinkedControls(ucrDoyTo, {rdoToFixed}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTo.AddToLinkedControls(ucrReceiverTo, {rdoToVariable}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTo.AddToLinkedControls(ucrNudToDiff, {rdoToFixedDiff}, bNewLinkedHideIfParameterMissing:=True)
 
@@ -136,27 +143,82 @@ Public Class sdgDoyRange
     End Sub
 
     Private Sub Fromrdo_CheckedChanged(sender As Object, e As EventArgs) Handles rdoFromFixed.CheckedChanged, rdoFromVariable.CheckedChanged
-        If rdoFromFixed.Checked Then
-            clsDayFromOperator.AddParameter("from", strParameterValue:=ucrDoyFrom.GetValue(), iPosition:=1)
-        ElseIf rdoFromVariable.Checked Then
-            clsDayFromOperator.AddParameter("from", strParameterValue:=ucrReceiverFrom.GetVariableNames(), iPosition:=1)
+        UpdateFromValues()
+        If rdoFromVariable.Checked Then
+            ucrReceiverFrom.SetMeAsReceiver()
+        End If
+        SetSelectorVisible()
+    End Sub
+
+    Private Sub SetSelectorVisible()
+        ucrSelectorDoy.Visible = (rdoFromVariable.Checked OrElse rdoToVariable.Checked)
+    End Sub
+
+    Private Sub UpdateFromValues()
+        If bUpdate Then
+            If rdoFromFixed.Checked Then
+                clsDayFromOperator.AddParameter("from", strParameterValue:=ucrDoyFrom.GetValue(), iPosition:=1)
+            ElseIf rdoFromVariable.Checked Then
+                clsDayFromOperator.AddParameter("from", strParameterValue:=ucrReceiverFrom.GetVariableNames(False), iPosition:=1)
+            End If
+            UpdateCalculatedFrom()
+        End If
+    End Sub
+
+    Private Sub Tordo_CheckedChanged(sender As Object, e As EventArgs) Handles rdoToFixed.CheckedChanged, rdoToVariable.CheckedChanged, rdoToFixedDiff.CheckedChanged
+        UpdateToValues()
+        If rdoToVariable.Checked Then
+            ucrReceiverTo.SetMeAsReceiver()
+        End If
+        lblToDays.Visible = rdoToFixedDiff.Checked
+        SetSelectorVisible()
+    End Sub
+
+    Public Sub UpdateToValues()
+        Dim clsFixedDiffOp As New ROperator
+
+        If bUpdate Then
+            If rdoToFixed.Checked Then
+                clsDayToOperator.AddParameter("to", strParameterValue:=ucrDoyTo.GetValue(), iPosition:=1)
+            ElseIf rdoToVariable.Checked Then
+                clsDayToOperator.AddParameter("to", strParameterValue:=ucrReceiverTo.GetVariableNames(False), iPosition:=1)
+            ElseIf rdoToFixedDiff.Checked Then
+                clsFixedDiffOp.SetOperation("+")
+                If clsDayFromOperator.ContainsParameter("from") Then
+                    clsFixedDiffOp.AddParameter("value", strParameterValue:=clsDayFromOperator.GetParameter("from").strArgumentValue, iPosition:=0)
+                    clsFixedDiffOp.AddParameter("diff", strParameterValue:=ucrNudToDiff.Value, iPosition:=1)
+                    clsFixedDiffOp.bBrackets = True
+                    clsDayToOperator.AddParameter("to", clsROperatorParameter:=clsFixedDiffOp, iPosition:=1)
+                End If
+            End If
+            UpdateCalculatedFrom()
         End If
     End Sub
 
     Private Sub UpdateCalculatedFrom()
         Dim clsCList As New RFunction
 
-        clsCList.SetRCommand("c")
-        clsCalcFromList.ClearParameters()
-        clsCalcFromList.AddParameter(strMainDataFrame, clsRFunctionParameter:=clsCalcFromMainDataFrame, iPosition:=0)
-        If rdoFromVariable.Checked OrElse rdoToVariable.Checked Then
-            If rdoFromVariable.Checked Then
-                clsCList.AddParameter("0", ucrReceiverFrom.GetVariableNames(), iPosition:=0, bIncludeArgumentName:=False)
+        If bUpdate Then
+            clsCalcFromList.ClearParameters()
+            clsCalcFromList.AddParameter(strMainDataFrame, Chr(34) & strDoyColumn & Chr(34), iPosition:=0)
+            If rdoFromVariable.Checked OrElse rdoToVariable.Checked Then
+                clsCList.SetRCommand("c")
+                If rdoFromVariable.Checked Then
+                    clsCList.AddParameter("0", ucrReceiverFrom.GetVariableNames(), iPosition:=0, bIncludeArgumentName:=False)
+                End If
+                If rdoToVariable.Checked Then
+                    clsCList.AddParameter("1", ucrReceiverTo.GetVariableNames(), iPosition:=1, bIncludeArgumentName:=False)
+                End If
+                clsCalcFromList.AddParameter(ucrSelectorDoy.ucrAvailableDataFrames.cboAvailableDataFrames.Text, clsRFunctionParameter:=clsCList, iPosition:=1)
             End If
-            If rdoToVariable.Checked Then
-                clsCList.AddParameter("1", ucrReceiverTo.GetVariableNames(), iPosition:=1, bIncludeArgumentName:=False)
-            End If
-            clsCalcFromList.AddParameter(ucrSelectorDoy.ucrAvailableDataFrames.cboAvailableDataFrames.Text, clsRFunctionParameter:=clsCList, iPosition:=1)
         End If
+    End Sub
+
+    Private Sub ToControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDoyTo.ControlValueChanged, ucrNudToDiff.ControlValueChanged, ucrReceiverTo.ControlValueChanged
+        UpdateToValues()
+    End Sub
+
+    Private Sub FromControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDoyFrom.ControlValueChanged, ucrReceiverFrom.ControlValueChanged
+        UpdateFromValues()
     End Sub
 End Class
