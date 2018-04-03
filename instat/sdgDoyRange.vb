@@ -17,8 +17,36 @@
 Imports instat.Translations
 
 Public Class sdgDoyRange
+
+    Private clsDoyFilterCalc As RFunction
+    Private clsDayFromOperator As ROperator
+    Private clsDayToOperator As ROperator
+    Private bControlsInitialised As Boolean = False
+
+
     Private Sub sdgDoyRange_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+    End Sub
+
+    Public Sub Setup(clsNewDoyFilterCalc As RFunction, clsNewDayFromOperator As ROperator, clsNewDayToOperator As ROperator)
+        Dim iFrom As Integer
+        Dim iTo As Integer
+        Dim clsFromParam As RParameter
+
+        If Not bControlsInitialised Then
+            InitialiseControls()
+        End If
+        clsDoyFilterCalc = clsNewDoyFilterCalc
+        clsDayFromOperator = clsNewDayFromOperator
+        clsDayToOperator = clsNewDayToOperator
+
+        clsFromParam = clsDayFromOperator.GetParameter("from")
+        If clsFromParam IsNot Nothing AndAlso clsFromParam.bIsString AndAlso clsFromParam.strArgumentValue IsNot Nothing Then
+            If Integer.TryParse(clsFromParam.strArgumentValue, iFrom) Then
+                rdoFromFixed.Checked = True
+                ucrDoyFrom
+            End If
+        End If
     End Sub
 
     Public Sub InitialiseControls()
@@ -39,5 +67,10 @@ Public Class sdgDoyRange
 
         ucrReceiverFrom.Selector = ucrSelectorDoy
         ucrReceiverTo.Selector = ucrSelectorDoy
+
+        ucrDoyFrom.SetParameterIsNumber()
+        ucrDoyTo.SetParameterIsNumber()
+
+        bControlsInitialised = True
     End Sub
 End Class
