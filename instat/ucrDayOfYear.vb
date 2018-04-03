@@ -139,7 +139,7 @@ Public Class ucrDayOfYear
                     If clsTempParameter.bIsString Then
                         strDayOfYearNumber = clsTempParameter.strArgumentValue
                         If Integer.TryParse(strDayOfYearNumber, iDayOfYearNumber) Then
-                            bInvalid = SetValue(iDayOfYearNumber)
+                            bInvalid = Not SetValue(iDayOfYearNumber)
                         Else
                             bInvalid = True
                         End If
@@ -242,20 +242,20 @@ Public Class ucrDayOfYear
     Public Function SetValue(iDoy As Integer) As Boolean
         Dim iYear As Integer
         Dim dtTemp As Date
-        Dim bInvalid As Boolean = False
+        Dim bSuccess As Boolean = True
 
         If b366DayOfYear Then
             iYear = 2000
             If iDoy < 1 OrElse iDoy > 366 Then
-                bInvalid = True
+                bSuccess = False
             End If
         Else
             iYear = 1999
             If iDoy < 1 OrElse iDoy > 365 Then
-                bInvalid = True
+                bSuccess = False
             End If
         End If
-        If Not bInvalid Then
+        If Not bSuccess Then
             Try
                 dtTemp = New Date(year:=iYear, month:=1, day:=1).AddDays(iDoy - 1)
                 bUpdate = False
@@ -265,10 +265,10 @@ Public Class ucrDayOfYear
                 bUpdate = True
                 UpdateAllParameters()
             Catch ex As Exception
-                bInvalid = True
+                bSuccess = False
             End Try
         End If
-        Return bInvalid
+        Return bSuccess
     End Function
 
     Public Sub SetValue(iDay As Integer, iMonth As Integer)
