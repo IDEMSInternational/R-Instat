@@ -16,6 +16,8 @@
 
 Imports instat.Translations
 Public Class dlgDisplayDailyData
+    Private iBasicHeight As Integer
+    Private iBaseMaxY As Integer
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private lstCheckboxes As New List(Of ucrCheck)
@@ -24,6 +26,8 @@ Public Class dlgDisplayDailyData
     Private Sub dlgDisplayDailyData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
+            iBasicHeight = Me.Height
+            iBaseMaxY = ucrBase.Location.Y
             InitialiseDialog()
             bFirstLoad = False
         End If
@@ -31,6 +35,7 @@ Public Class dlgDisplayDailyData
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        DialogSize()
         bReset = False
         TestOkEnabled()
     End Sub
@@ -261,7 +266,18 @@ Public Class dlgDisplayDailyData
         TestOkEnabled()
     End Sub
 
+    Private Sub DialogSize()
+        If rdoGraph.Checked Then
+            Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight * 0.86)
+            ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.2)
+        ElseIf rdoTable.Checked Then
+            Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight)
+            ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
+        End If
+    End Sub
+
     Private Sub ucrPnlFrequencyDisplay_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFrequencyDisplay.ControlValueChanged
+        DialogSize()
         If rdoGraph.Checked Then
             ucrBase.clsRsyntax.iCallType = 3
             ucrBase.clsRsyntax.SetBaseRFunction(clsDisplayDailyGraphFunction)
