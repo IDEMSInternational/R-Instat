@@ -134,7 +134,9 @@ Public Class dlgCorrelation
         clsRGraphicsFuction.SetRCommand("ggpairs")
         clsRGraphicsFuction.iCallType = 3
         clsRGraphicsFuction.bExcludeAssignedFunctionOutput = False
-        clsRGraphicsFuction.AddParameter("data", clsRFunctionParameter:=clsTempFunc)
+        clsRGraphicsFuction.AddParameter("data", clsRFunctionParameter:=clsTempFunc, iPosition:=0)
+        'clsRGraphicsFuction.AddParameter("upper", "list(continuous =GGally::wrap('cor', method =" & Chr(34) & "spearman" & Chr(34) & "))")
+        'clsRGraphicsFuction.AddParameter("lower", "list(continuous = 'cor')")
 
         clsRGGscatMatrixFunction.SetPackageName("GGally")
         clsRGGscatMatrixFunction.SetRCommand("ggscatmat")
@@ -170,6 +172,8 @@ Public Class dlgCorrelation
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrPnlMethod.AddAdditionalCodeParameterPair(clsCorrelationFunction, New RParameter("method", 4), iAdditionalPairNo:=1)
+        'ucrPnlMethod.AddAdditionalCodeParameterPair(clsRGGcorrGraphicsFunction, New RParameter("method", 2), iAdditionalPairNo:=2)
+        ' ucrPnlMethod.AddAdditionalCodeParameterPair(clsRGraphicsFuction, New RParameter("method", 2), iAdditionalPairNo:=3)
         '        ucrReceiverMultipleColumns.AddAdditionalCodeParameterPair(clsRGraphicsFuction, New RParameter("columns", 1), iAdditionalPairNo:=1) ' this has to be done manually for now as it needs to be a string for this function but r function for another
         ucrReceiverMultipleColumns.SetRCode(clsCorrelationFunction, bReset)
         ucrNudConfidenceInterval.SetRCode(clsCorrelationTestFunction, bReset)
@@ -269,7 +273,7 @@ Public Class dlgCorrelation
     End Sub
 
     Private Sub ucrReceiverMultipleColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleColumns.ControlValueChanged
-        clsRGraphicsFuction.AddParameter("columns", ucrReceiverMultipleColumns.GetVariableNames())
+        clsRGraphicsFuction.AddParameter("columns", ucrReceiverMultipleColumns.GetVariableNames(), iPosition:=1)
     End Sub
 
     Private Sub ucrPnlGraphType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumns.ControlValueChanged
