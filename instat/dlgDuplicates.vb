@@ -19,7 +19,7 @@ Imports instat.Translations
 Public Class dlgDuplicates
     Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
-    Private clsDuplicated2, clsDuplicated, clsStreakFunction, clsSubsetCol As New RFunction
+    Private clsDuplicated2, clsDuplicated, clsStreakFunction, clsSubsetCol, clsdupCountIndex As New RFunction
 
     Private Sub dlgDuplicatesConstructed_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -37,6 +37,7 @@ Public Class dlgDuplicates
 
     Private Sub InitialiseDialog()
         Dim dctConditions As New Dictionary(Of String, String)
+        Dim dctType As New Dictionary(Of String, String)
 
         ucrBase.clsRsyntax.iCallType = 0
 
@@ -49,16 +50,19 @@ Public Class dlgDuplicates
         ucrPnlOptions.AddFunctionNamesCondition(rdoSuccessiveValues, "duplicated_cases")
 
         ucrPnlOptions.AddToLinkedControls(ucrReceiverForSelectedVariables, {rdoSelectedVariables}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls(ucrPnlDuplicates, {rdoSelectedVariables, rdoDataFrame}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoAllDuplicateCases)
+        ucrPnlOptions.AddToLinkedControls(ucrPnlDuplicates, {rdoDataFrame, rdoSelectedVariables}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoAllDuplicateCases)
         ucrPnlOptions.AddToLinkedControls({ucrChkOmitValues, ucrChkTolerance, ucrReceiverForSuccessiveValues}, {rdoSuccessiveValues}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlDuplicates.AddRadioButton(rdoAllDuplicateCases)
         ucrPnlDuplicates.AddRadioButton(rdoDuplicatesOnly)
         ucrPnlDuplicates.AddRadioButton(rdoIndexNumberOfDuplicates)
 
+        ucrPnlDuplicates.AddToLinkedControls(ucrInputComboType, {rdoIndexNumberOfDuplicates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboType.SetLinkedDisplayControl(lblType)
+
         ucrPnlDuplicates.AddFunctionNamesCondition(rdoAllDuplicateCases, "duplicated2")
         ucrPnlDuplicates.AddFunctionNamesCondition(rdoDuplicatesOnly, "duplicated")
-        rdoIndexNumberOfDuplicates.Enabled = False 'for now until it's working properly
+
 
         ' for rdoSuccessiveVariables this is ran as a string, it isn't run for rdoSelectedVariables.For rdodataframe this is ran as an r-function so we are doing this manually but passing the parameter in the additional code pair
         ucrSelectorDuplicateswithVariables.SetParameter(New RParameter("x", 0))
@@ -105,6 +109,13 @@ Public Class dlgDuplicates
         ucrInputConditions.SetItems(dctConditions)
         ucrInputConditions.SetDropDownStyleAsNonEditable()
 
+        ucrInputComboType.SetParameter(New RParameter("type", 1))
+        dctType.Add("Count", Chr(34) & "count" & Chr(34))
+        dctType.Add("Index", Chr(34) & "index" & Chr(34))
+        ucrInputComboType.SetRDefault(Chr(34) & "count" & Chr(34))
+        ucrInputComboType.SetDropDownStyleAsNonEditable()
+        ucrInputComboType.SetItems(dctType)
+
         ucrNewColumnName.SetPrefix("dup")
         ucrNewColumnName.SetDataFrameSelector(ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames)
         ucrNewColumnName.SetIsComboBox()
@@ -117,6 +128,7 @@ Public Class dlgDuplicates
         clsDuplicated2 = New RFunction
         clsStreakFunction = New RFunction
         clsSubsetCol = New RFunction
+        clsdupCountIndex = New RFunction
 
         SetDataFrameOrColumns()
         ucrNewColumnName.Reset()
@@ -133,6 +145,8 @@ Public Class dlgDuplicates
         clsStreakFunction.SetRCommand("duplicated_cases")
         clsStreakFunction.AddParameter("ignore", "NULL")
 
+        clsdupCountIndex.SetRCommand("duplicated_count_index")
+
         clsSubsetCol.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnName.GetText, strTempDataframe:=ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDuplicated2)
@@ -141,9 +155,13 @@ Public Class dlgDuplicates
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverForSelectedVariables.AddAdditionalCodeParameterPair(clsDuplicated2, New RParameter("x", 1), iAdditionalPairNo:=1)
         ucrSelectorDuplicateswithVariables.AddAdditionalCodeParameterPair(clsDuplicated2, New RParameter("x", 0), iAdditionalPairNo:=1)
-        ucrNewColumnName.AddAdditionalRCode(clsDuplicated2, 1)
-        ucrNewColumnName.AddAdditionalRCode(clsStreakFunction, 2)
+        ucrSelectorDuplicateswithVariables.AddAdditionalCodeParameterPair(clsdupCountIndex, New RParameter("x", 0), iAdditionalPairNo:=2)
+        ucrNewColumnName.AddAdditionalRCode(clsDuplicated2, iAdditionalPairNo:=1)
+        ucrNewColumnName.AddAdditionalRCode(clsStreakFunction, iAdditionalPairNo:=2)
+        ucrNewColumnName.AddAdditionalRCode(clsdupCountIndex, iAdditionalPairNo:=3)
 
+
+        ucrInputComboType.SetRCode(clsdupCountIndex, bReset)
         ucrReceiverForSuccessiveValues.SetRCode(clsStreakFunction, bReset)
         ucrChkOmitValues.SetRCode(clsStreakFunction, bReset)
         ucrInputOmitValues.SetRCode(clsStreakFunction, bReset)
@@ -204,6 +222,7 @@ Public Class dlgDuplicates
             ' note that we have to run this here because the parameter x is used for both functions and all four radio buttons
             clsDuplicated.AddParameter("x", clsRFunctionParameter:=ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
             clsDuplicated2.AddParameter("x", clsRFunctionParameter:=ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+            clsdupCountIndex.AddParameter("x", clsRFunctionParameter:=ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         ElseIf rdoSelectedVariables.Checked Then
             ucrReceiverForSelectedVariables.SetMeAsReceiver()
             ucrReceiverForSelectedVariables.SetParameterIsRFunction()
@@ -221,6 +240,8 @@ Public Class dlgDuplicates
                 ucrBase.clsRsyntax.SetBaseRFunction(clsDuplicated2)
             ElseIf rdoDuplicatesOnly.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsDuplicated)
+            ElseIf rdoIndexNumberOfDuplicates.Checked Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsdupCountIndex)
             End If
         ElseIf rdoSuccessiveValues.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsStreakFunction)
