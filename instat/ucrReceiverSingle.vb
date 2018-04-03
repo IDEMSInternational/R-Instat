@@ -316,7 +316,7 @@ Public Class ucrReceiverSingle
                 AddHandler ParentForm.Shown, AddressOf ParentForm_Shown
             End If
             bFirstLoad = False
-            If Selector IsNot Nothing AndAlso Not Selector.CurrentReceiver.Equals(Me) Then
+            If Selector IsNot Nothing AndAlso Selector.CurrentReceiver IsNot Nothing AndAlso Not Selector.CurrentReceiver.Equals(Me) Then
                 RemoveColor()
             End If
         End If
