@@ -48,8 +48,12 @@ Partial Class dlgDisplayDailyData
         Me.lblDayOfTheYear = New System.Windows.Forms.Label()
         Me.lblYaxisUpper = New System.Windows.Forms.Label()
         Me.grpGraph = New System.Windows.Forms.GroupBox()
+        Me.ucrSaveGraph = New instat.ucrSave()
+        Me.ucrInputRugColour = New instat.ucrInputComboBox()
         Me.lblRugColor = New System.Windows.Forms.Label()
+        Me.ucrInputBarColour = New instat.ucrInputComboBox()
         Me.lblBarColour = New System.Windows.Forms.Label()
+        Me.ucrNudUpperYaxis = New instat.ucrNud()
         Me.lblElements = New System.Windows.Forms.Label()
         Me.grpSummary = New System.Windows.Forms.GroupBox()
         Me.ucrChkSumMissing = New instat.ucrCheck()
@@ -74,10 +78,6 @@ Partial Class dlgDisplayDailyData
         Me.ucrPnlFrequencyDisplay = New instat.UcrPanel()
         Me.ucrSelectorDisplayDailyClimaticData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSaveGraph = New instat.ucrSave()
-        Me.ucrInputRugColour = New instat.ucrInputComboBox()
-        Me.ucrInputBarColour = New instat.ucrInputComboBox()
-        Me.ucrNudUpperYaxis = New instat.ucrNud()
         Me.grpGraph.SuspendLayout()
         Me.grpSummary.SuspendLayout()
         Me.SuspendLayout()
@@ -145,15 +145,44 @@ Partial Class dlgDisplayDailyData
         Me.grpGraph.Name = "grpGraph"
         Me.grpGraph.TabStop = False
         '
+        'ucrSaveGraph
+        '
+        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        '
+        'ucrInputRugColour
+        '
+        Me.ucrInputRugColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputRugColour.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputRugColour, "ucrInputRugColour")
+        Me.ucrInputRugColour.Name = "ucrInputRugColour"
+        '
         'lblRugColor
         '
         resources.ApplyResources(Me.lblRugColor, "lblRugColor")
         Me.lblRugColor.Name = "lblRugColor"
         '
+        'ucrInputBarColour
+        '
+        Me.ucrInputBarColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputBarColour.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputBarColour, "ucrInputBarColour")
+        Me.ucrInputBarColour.Name = "ucrInputBarColour"
+        '
         'lblBarColour
         '
         resources.ApplyResources(Me.lblBarColour, "lblBarColour")
         Me.lblBarColour.Name = "lblBarColour"
+        '
+        'ucrNudUpperYaxis
+        '
+        Me.ucrNudUpperYaxis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudUpperYaxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudUpperYaxis, "ucrNudUpperYaxis")
+        Me.ucrNudUpperYaxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudUpperYaxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudUpperYaxis.Name = "ucrNudUpperYaxis"
+        Me.ucrNudUpperYaxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblElements
         '
@@ -324,35 +353,6 @@ Partial Class dlgDisplayDailyData
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrSaveGraph
-        '
-        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
-        Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        '
-        'ucrInputRugColour
-        '
-        Me.ucrInputRugColour.AddQuotesIfUnrecognised = True
-        Me.ucrInputRugColour.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputRugColour, "ucrInputRugColour")
-        Me.ucrInputRugColour.Name = "ucrInputRugColour"
-        '
-        'ucrInputBarColour
-        '
-        Me.ucrInputBarColour.AddQuotesIfUnrecognised = True
-        Me.ucrInputBarColour.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputBarColour, "ucrInputBarColour")
-        Me.ucrInputBarColour.Name = "ucrInputBarColour"
-        '
-        'ucrNudUpperYaxis
-        '
-        Me.ucrNudUpperYaxis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudUpperYaxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudUpperYaxis, "ucrNudUpperYaxis")
-        Me.ucrNudUpperYaxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudUpperYaxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudUpperYaxis.Name = "ucrNudUpperYaxis"
-        Me.ucrNudUpperYaxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'dlgDisplayDailyData
         '

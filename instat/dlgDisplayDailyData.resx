@@ -382,7 +382,7 @@
     <value>9, 106</value>
   </data>
   <data name="ucrSaveGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 24</value>
+    <value>261, 24</value>
   </data>
   <data name="ucrSaveGraph.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -579,114 +579,6 @@
   <data name="&gt;&gt;lblElements.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;ucrChkSumMissing.Name" xml:space="preserve">
-    <value>ucrChkSumMissing</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSumMissing.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSumMissing.Parent" xml:space="preserve">
-    <value>grpSummary</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSumMissing.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMax.Name" xml:space="preserve">
-    <value>ucrChkMax</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMax.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMax.Parent" xml:space="preserve">
-    <value>grpSummary</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMax.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrChkIQR.Name" xml:space="preserve">
-    <value>ucrChkIQR</value>
-  </data>
-  <data name="&gt;&gt;ucrChkIQR.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkIQR.Parent" xml:space="preserve">
-    <value>grpSummary</value>
-  </data>
-  <data name="&gt;&gt;ucrChkIQR.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMedian.Name" xml:space="preserve">
-    <value>ucrChkMedian</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMedian.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMedian.Parent" xml:space="preserve">
-    <value>grpSummary</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMedian.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSum.Name" xml:space="preserve">
-    <value>ucrChkSum</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSum.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSum.Parent" xml:space="preserve">
-    <value>grpSummary</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSum.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMin.Name" xml:space="preserve">
-    <value>ucrChkMin</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMin.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMin.Parent" xml:space="preserve">
-    <value>grpSummary</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMin.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMean.Name" xml:space="preserve">
-    <value>ucrChkMean</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMean.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMean.Parent" xml:space="preserve">
-    <value>grpSummary</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMean.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="grpSummary.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 233</value>
-  </data>
-  <data name="grpSummary.Size" type="System.Drawing.Size, System.Drawing">
-    <value>235, 133</value>
-  </data>
-  <data name="grpSummary.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="grpSummary.Text" xml:space="preserve">
-    <value>Summary</value>
-  </data>
-  <data name="&gt;&gt;grpSummary.Name" xml:space="preserve">
-    <value>grpSummary</value>
-  </data>
-  <data name="&gt;&gt;grpSummary.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpSummary.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpSummary.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="ucrChkSumMissing.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 97</value>
   </data>
@@ -834,6 +726,30 @@
   <data name="&gt;&gt;ucrChkMean.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="grpSummary.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 233</value>
+  </data>
+  <data name="grpSummary.Size" type="System.Drawing.Size, System.Drawing">
+    <value>235, 133</value>
+  </data>
+  <data name="grpSummary.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="grpSummary.Text" xml:space="preserve">
+    <value>Summary</value>
+  </data>
+  <data name="&gt;&gt;grpSummary.Name" xml:space="preserve">
+    <value>grpSummary</value>
+  </data>
+  <data name="&gt;&gt;grpSummary.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpSummary.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpSummary.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -841,7 +757,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>423, 501</value>
+    <value>423, 514</value>
   </data>
   <data name="ucrReceiverElement.Location" type="System.Drawing.Point, System.Drawing">
     <value>289, 253</value>
@@ -1160,6 +1076,9 @@
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>23</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
