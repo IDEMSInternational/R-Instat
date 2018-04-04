@@ -85,7 +85,6 @@ Public Class dlgCorrelation
         ucrPnlMethod.AddRadioButton(rdoPearson, Chr(34) & "pearson" & Chr(34))
         ucrPnlMethod.AddRadioButton(rdoKendall, Chr(34) & "kendall" & Chr(34))
         ucrPnlMethod.AddRadioButton(rdoSpearman, Chr(34) & "spearman" & Chr(34))
-        ucrPnlMethod.SetRDefault(Chr(34) & "pearson" & Chr(34))
 
         ucrPnlCompletePairwise.SetParameter(New RParameter("use", 5))
         ucrPnlCompletePairwise.AddRadioButton(rdoCompleteRowsOnly, Chr(34) & "complete.obs" & Chr(34))
@@ -187,7 +186,7 @@ Public Class dlgCorrelation
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrPnlMethod.AddAdditionalCodeParameterPair(clsCorrelationFunction, New RParameter("method", 4), iAdditionalPairNo:=1)
         ucrPnlMethod.AddAdditionalCodeParameterPair(clsWrap2Function, New RParameter("method", 2), iAdditionalPairNo:=2)
-        ' ucrPnlMethod.AddAdditionalCodeParameterPair(clsRGraphicsFuction, New RParameter("method", 2), iAdditionalPairNo:=3)
+        ucrPnlMethod.AddAdditionalCodeParameterPair(clsRGGcorrGraphicsFunction, New RParameter("method", 2), iAdditionalPairNo:=3)
         '        ucrReceiverMultipleColumns.AddAdditionalCodeParameterPair(clsRGraphicsFuction, New RParameter("columns", 1), iAdditionalPairNo:=1) ' this has to be done manually for now as it needs to be a string for this function but r function for another
         ucrReceiverMultipleColumns.SetRCode(clsCorrelationFunction, bReset)
         ucrNudConfidenceInterval.SetRCode(clsCorrelationTestFunction, bReset)
