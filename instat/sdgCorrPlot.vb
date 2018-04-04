@@ -46,6 +46,12 @@ Public Class sdgCorrPlot
         ucrNudAlphaCorr.DecimalPlaces = 2
         ucrNudAlphaCorr.Increment = 0.01
 
+        ucrNudAlpha.SetParameter(New RParameter("alpha", 3))
+        ucrNudAlpha.SetMinMax(0, 1)
+        ucrNudAlpha.DecimalPlaces = 2
+        ucrNudAlpha.Increment = 0.01
+        ucrNudAlpha.SetRDefault(1)
+
         ucrSaveGraph.SetPrefix("CorGraph")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(dlgCorrelation.ucrSelectorCorrelation.ucrAvailableDataFrames)
@@ -53,14 +59,11 @@ Public Class sdgCorrPlot
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
 
-        ucrReceiveFactor.SetParameter(New RParameter("data", 1))
-        ucrReceiveFactor.SetParameterIsRFunction()
-        ucrReceiveFactor.Selector = ucrSelectFactor
-        ucrReceiveFactor.strSelectorHeading = "Numerics"
-        ucrReceiveFactor.SetDataType("factor")
-        ucrReceiveFactor.SetMeAsReceiver()
-
-        ucrSelectFactor.Reset()
+        ucrReceiverFactor.SetParameter(New RParameter("color", 2))
+        ucrReceiverFactor.Selector = ucrSelectorFactor
+        ucrReceiverFactor.strSelectorHeading = "Factors"
+        ucrReceiverFactor.SetDataType("factor")
+        ucrReceiverFactor.SetMeAsReceiver()
 
         ucrPnlGraphType.AddToLinkedControls(ucrInputComboGeom, {rdoCorrelationPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="tile")
         ucrPnlGraphType.AddToLinkedControls(ucrNudMinimunSize, {rdoCorrelationPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -74,11 +77,11 @@ Public Class sdgCorrPlot
         ucrPnlGraphType.SetLinkedDisplayControl(grpOptions)
         ucrInputComboGeom.SetLinkedDisplayControl(lblGeom)
 
-        ucrPnlGraphType.AddToLinkedControls(ucrSelectFactor, {rdoScatterPlotMatrix}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlGraphType.AddToLinkedControls(ucrReceiveFactor, {rdoScatterPlotMatrix}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlGraphType.AddToLinkedControls(ucrChkColor, {rdoScatterPlotMatrix}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrPnlGraphType.AddToLinkedControls(ucrSelectorFactor, {rdoScatterPlotMatrix}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlGraphType.AddToLinkedControls(ucrReceiverFactor, {rdoScatterPlotMatrix}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGraphType.AddToLinkedControls(ucrNudAlpha, {rdoScatterPlotMatrix}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrReceiveFactor.SetLinkedDisplayControl(lblFactorVariable)
+        ucrReceiverFactor.SetLinkedDisplayControl(lblFactor)
         ucrNudAlpha.SetLinkedDisplayControl(lblAlpha)
 
         ucrInputComboGeom.SetParameter(New RParameter("geom", 3))
@@ -117,11 +120,15 @@ Public Class sdgCorrPlot
         ucrInputComboGeom.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
         ucrNudAlphaCorr.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
         ucrChkLabel.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
-        ucrSaveGraph.AddAdditionalRCode(clsRGraphicsFuction, 1)
         ucrSaveGraph.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkColor.SetRSyntax(clsRsyntax, bReset)
+        ucrSaveGraph.AddAdditionalRCode(clsRGraphicsFuction, iAdditionalPairNo:=1)
+        ucrSaveGraph.AddAdditionalRCode(clsRGGscatmatrixFunction, iAdditionalPairNo:=2)
         ucrPnlGraphType.SetRSyntax(clsRsyntax, bReset)
+        ucrNudAlpha.SetRCode(clsRGGscatmatrixFunction, bReset, bCloneIfNeeded:=True)
         Visibility()
+        If bReset Then
+            ucrSelectorFactor.Reset()
+        End If
     End Sub
 
     Private Sub Visibility()
@@ -143,6 +150,7 @@ Public Class sdgCorrPlot
     End Sub
 
     Private Sub ucrPnlGraphType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGraphType.ControlValueChanged
+        Visibility()
         If rdoCorrelationPlot.Checked Then
             clsRsyntax.AddToAfterCodes(clsRGGcorrGraphicsFunction, iPosition:=1)
             clsRsyntax.RemoveFromAfterCodes(clsRGraphicsFuction)
@@ -160,5 +168,9 @@ Public Class sdgCorrPlot
             clsRsyntax.RemoveFromAfterCodes(clsRGraphicsFuction)
             clsRsyntax.RemoveFromAfterCodes(clsRGGscatmatrixFunction)
         End If
+    End Sub
+
+    Private Sub ucrReceiverFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlValueChanged
+        clsRGGscatmatrixFunction.AddParameter("color", ucrReceiverFactor.GetVariableNames(), iPosition:=2)
     End Sub
 End Class
