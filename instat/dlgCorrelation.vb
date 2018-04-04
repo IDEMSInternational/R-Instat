@@ -66,8 +66,6 @@ Public Class dlgCorrelation
         ucrReceiverMultipleColumns.SetIncludedDataTypes({"numeric", "logical"})
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        'TODO: Fix bugs produced when rdoScatterplotMatrix is checked. Disabled for now
-        sdgCorrPlot.rdoScatterPlotMatrix.Enabled = False
 
         ucrNudConfidenceInterval.SetParameter(New RParameter("conf.level", 3))
         ucrNudConfidenceInterval.SetMinMax(0, 1)
@@ -154,7 +152,7 @@ Public Class dlgCorrelation
         clsRGGscatMatrixFunction.SetRCommand("ggscatmat")
         clsRGGscatMatrixFunction.iCallType = 3
         clsRGGscatMatrixFunction.bExcludeAssignedFunctionOutput = False
-        clsRGGscatMatrixFunction.AddParameter("data", clsRFunctionParameter:=clsTempFunc)
+        clsRGGscatMatrixFunction.AddParameter("data", clsRFunctionParameter:=clsTempFunc, iPosition:=0)
 
         clsCorrelationTestFunction.SetRCommand("cor.test")
         clsCorrelationTestFunction.iCallType = 2
@@ -186,6 +184,7 @@ Public Class dlgCorrelation
         ucrPnlMethod.AddAdditionalCodeParameterPair(clsCorrelationFunction, New RParameter("method", 4), iAdditionalPairNo:=1)
         ucrPnlMethod.AddAdditionalCodeParameterPair(clsWrap2Function, New RParameter("method", 2), iAdditionalPairNo:=2)
         ucrPnlMethod.AddAdditionalCodeParameterPair(clsRGGcorrGraphicsFunction, New RParameter("method", 2), iAdditionalPairNo:=3)
+        ucrPnlMethod.AddAdditionalCodeParameterPair(clsRGGscatMatrixFunction, New RParameter("corMethod", 4), iAdditionalPairNo:=4)
         '        ucrReceiverMultipleColumns.AddAdditionalCodeParameterPair(clsRGraphicsFuction, New RParameter("columns", 1), iAdditionalPairNo:=1) ' this has to be done manually for now as it needs to be a string for this function but r function for another
         ucrReceiverMultipleColumns.SetRCode(clsCorrelationFunction, bReset)
         ucrNudConfidenceInterval.SetRCode(clsCorrelationTestFunction, bReset)
@@ -277,6 +276,7 @@ Public Class dlgCorrelation
 
     Private Sub ucrReceiverMultipleColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleColumns.ControlValueChanged
         clsRGraphicsFuction.AddParameter("columns", ucrReceiverMultipleColumns.GetVariableNames(), iPosition:=1)
+        clsRGGscatMatrixFunction.AddParameter("columns", ucrReceiverMultipleColumns.GetVariableNames(), iPosition:=1)
     End Sub
 
     Private Sub ucrPnlGraphType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumns.ControlValueChanged
