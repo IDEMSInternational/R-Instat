@@ -1257,15 +1257,6 @@
   <data name="&gt;&gt;grpNumeric.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="ucrChkCovariance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>231, 19</value>
-  </data>
-  <data name="ucrChkCovariance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 20</value>
-  </data>
-  <data name="ucrChkCovariance.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
   <data name="&gt;&gt;ucrChkCovariance.Name" xml:space="preserve">
     <value>ucrChkCovariance</value>
   </data>
@@ -1277,15 +1268,6 @@
   </data>
   <data name="&gt;&gt;ucrChkCovariance.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="ucrChkCorrelations.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 19</value>
-  </data>
-  <data name="ucrChkCorrelations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 20</value>
-  </data>
-  <data name="ucrChkCorrelations.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
   </data>
   <data name="&gt;&gt;ucrChkCorrelations.Name" xml:space="preserve">
     <value>ucrChkCorrelations</value>
@@ -1386,6 +1368,15 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>404, 487</value>
   </data>
+  <data name="ucrButtonsSummaries.Location" type="System.Drawing.Point, System.Drawing">
+    <value>131, 455</value>
+  </data>
+  <data name="ucrButtonsSummaries.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 30</value>
+  </data>
+  <data name="ucrButtonsSummaries.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
   <data name="&gt;&gt;ucrButtonsSummaries.Name" xml:space="preserve">
     <value>ucrButtonsSummaries</value>
   </data>
@@ -1483,6 +1474,27 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tbSummaries.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrChkn_distinct.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 75</value>
+  </data>
+  <data name="ucrChkn_distinct.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 20</value>
+  </data>
+  <data name="ucrChkn_distinct.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;ucrChkn_distinct.Name" xml:space="preserve">
+    <value>ucrChkn_distinct</value>
+  </data>
+  <data name="&gt;&gt;ucrChkn_distinct.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkn_distinct.Parent" xml:space="preserve">
+    <value>grpCommon</value>
+  </data>
+  <data name="&gt;&gt;ucrChkn_distinct.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="ucrChkNTotal.Location" type="System.Drawing.Point, System.Drawing">
@@ -2202,6 +2214,48 @@
   <data name="&gt;&gt;ucrChkKurtosis.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="ucrChkCovariance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>231, 19</value>
+  </data>
+  <data name="ucrChkCovariance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 20</value>
+  </data>
+  <data name="ucrChkCovariance.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCovariance.Name" xml:space="preserve">
+    <value>ucrChkCovariance</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCovariance.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCovariance.Parent" xml:space="preserve">
+    <value>grpRelationships</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCovariance.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrChkCorrelations.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 19</value>
+  </data>
+  <data name="ucrChkCorrelations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 20</value>
+  </data>
+  <data name="ucrChkCorrelations.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCorrelations.Name" xml:space="preserve">
+    <value>ucrChkCorrelations</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCorrelations.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCorrelations.Parent" xml:space="preserve">
+    <value>grpRelationships</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCorrelations.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="ucrNudPercentage.Location" type="System.Drawing.Point, System.Drawing">
     <value>319, 66</value>
   </data>
@@ -2243,47 +2297,5 @@
   </data>
   <data name="&gt;&gt;ucrNudNumber.ZOrder" xml:space="preserve">
     <value>5</value>
-  </data>
-  <data name="ucrButtonsSummaries.Location" type="System.Drawing.Point, System.Drawing">
-    <value>136, 461</value>
-  </data>
-  <data name="ucrButtonsSummaries.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 30</value>
-  </data>
-  <data name="ucrButtonsSummaries.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrButtonsSummaries.Name" xml:space="preserve">
-    <value>ucrButtonsSummaries</value>
-  </data>
-  <data name="&gt;&gt;ucrButtonsSummaries.Type" xml:space="preserve">
-    <value>instat.ucrButtonsSubdialogue, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrButtonsSummaries.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrButtonsSummaries.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ucrChkn_distinct.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 75</value>
-  </data>
-  <data name="ucrChkn_distinct.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 20</value>
-  </data>
-  <data name="ucrChkn_distinct.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="&gt;&gt;ucrChkn_distinct.Name" xml:space="preserve">
-    <value>ucrChkn_distinct</value>
-  </data>
-  <data name="&gt;&gt;ucrChkn_distinct.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkn_distinct.Parent" xml:space="preserve">
-    <value>grpCommon</value>
-  </data>
-  <data name="&gt;&gt;ucrChkn_distinct.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
 </root>
