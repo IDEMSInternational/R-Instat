@@ -62,6 +62,7 @@ Partial Class sdgSummaries
         Me.tbTwoVariables = New System.Windows.Forms.TabPage()
         Me.grpRelationships = New System.Windows.Forms.GroupBox()
         Me.lblSecondVariable = New System.Windows.Forms.Label()
+        Me.ucrChkn_distinct = New instat.ucrCheck()
         Me.ucrChkNTotal = New instat.ucrCheck()
         Me.ucrChkMode = New instat.ucrCheck()
         Me.ucrChkNMissing = New instat.ucrCheck()
@@ -103,7 +104,6 @@ Partial Class sdgSummaries
         Me.ucrNudPercentage = New instat.ucrNud()
         Me.ucrNudNumber = New instat.ucrNud()
         Me.ucrButtonsSummaries = New instat.ucrButtonsSubdialogue()
-        Me.ucrChkn_distinct = New instat.ucrCheck()
         Me.tbMissingOptions.SuspendLayout()
         Me.tbMore.SuspendLayout()
         Me.grpPosition.SuspendLayout()
@@ -323,6 +323,12 @@ Partial Class sdgSummaries
         '
         resources.ApplyResources(Me.lblSecondVariable, "lblSecondVariable")
         Me.lblSecondVariable.Name = "lblSecondVariable"
+        '
+        'ucrChkn_distinct
+        '
+        Me.ucrChkn_distinct.Checked = False
+        resources.ApplyResources(Me.ucrChkn_distinct, "ucrChkn_distinct")
+        Me.ucrChkn_distinct.Name = "ucrChkn_distinct"
         '
         'ucrChkNTotal
         '
@@ -591,12 +597,6 @@ Partial Class sdgSummaries
         '
         resources.ApplyResources(Me.ucrButtonsSummaries, "ucrButtonsSummaries")
         Me.ucrButtonsSummaries.Name = "ucrButtonsSummaries"
-        '
-        'ucrChkn_distinct
-        '
-        Me.ucrChkn_distinct.Checked = False
-        resources.ApplyResources(Me.ucrChkn_distinct, "ucrChkn_distinct")
-        Me.ucrChkn_distinct.Name = "ucrChkn_distinct"
         '
         'sdgSummaries
         '
