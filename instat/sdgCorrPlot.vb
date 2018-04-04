@@ -20,6 +20,8 @@ Public Class sdgCorrPlot
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
     Private clsRsyntax As RSyntax
+    Private ucrBaseSelector As ucrSelector
+    Public strDataFrame As String
 
     Private Sub sdgCorrPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -105,10 +107,18 @@ Public Class sdgCorrPlot
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewcorrelationFunction As RFunction, clsNewRGGcorrGraphicsFunction As RFunction, clsNewRGraphicsFuction As RFunction, clsNewRTempFunction As RFunction, clsNewRGGscatmatrixFunction As RFunction, strColFunction As String, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewcorrelationFunction As RFunction, clsNewRGGcorrGraphicsFunction As RFunction, clsNewRGraphicsFuction As RFunction, clsNewRTempFunction As RFunction, clsNewRGGscatmatrixFunction As RFunction, strColFunction As String, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
+
+        'This is meant to force selector select the current dataframe as selected in the main dialog
+        ucrBaseSelector = ucrNewBaseSelector
+        If ucrBaseSelector IsNot Nothing AndAlso ucrBaseSelector.strCurrentDataFrame <> "" Then
+            strDataFrame = ucrBaseSelector.strCurrentDataFrame
+            ucrSelectorFactor.SetDataframe(strDataFrame, False)
+        End If
+
         clsRsyntax = clsNewRSyntax
         clsCorrelationFunction = clsNewcorrelationFunction
         clsRGGcorrGraphicsFunction = clsNewRGGcorrGraphicsFunction
