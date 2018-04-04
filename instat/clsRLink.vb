@@ -71,6 +71,7 @@ Public Class RLink
         Dim expTemp As SymbolicExpression
         Dim strMajor As String = ""
         Dim strMinor As String = ""
+        Dim iMinor2 As Integer
         Dim iCurrentCallType As Integer
         Dim bClose As Boolean = False
 
@@ -92,8 +93,16 @@ Public Class RLink
             If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
                 strMinor = expTemp.AsCharacter(0)
             End If
-            If Not (strMajor = strRVersionMajorRequired AndAlso strMinor.Count > 0 AndAlso strMinor(0) = strRVersionMinorRequired) Then
-                MsgBox("Your current version of R is outdated. You are currently running R version " & strMajor & "." & strMinor & vbNewLine & "R-Instat requires version " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".0 or later." & vbNewLine & "Rerun the installation to install an updated version of R or download the latest version from https://cran.r-project.org/ and restart R-Instat.", MsgBoxStyle.Critical, "R Version outdated.")
+            ' TEMPORARY strMinor(2) = "4" is required because R 3.4.3 has a bug and so R 3.4.4 is required
+            ' Once R 3.5.1 is released this can be removed. Error message should also be updated.
+            If strMinor.Count >= 3 AndAlso Integer.TryParse(strMinor(2), iMinor2) Then
+                If Not (strMajor = strRVersionMajorRequired AndAlso strMinor.Count > 0 AndAlso strMinor(0) = strRVersionMinorRequired AndAlso iMinor2 >= 4) Then
+                    MsgBox("Your current version of R is outdated. You are currently running R version: " & strMajor & "." & strMinor & vbNewLine & "R-Instat requires version " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".4 or later." & vbNewLine & "Rerun the installation to install an updated version of R or download the latest version from https://cran.r-project.org/ and restart R-Instat.", MsgBoxStyle.Critical, "R Version outdated.")
+                    Application.Exit()
+                    Environment.Exit(0)
+                End If
+            Else
+                MsgBox("Could not determine version of R installed on your machine. R-Instat requires version: " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".4 or later." & vbNewLine & "Rerun the installation to install an updated version of R or download the latest version from https://cran.r-project.org/ and restart R-Instat.", MsgBoxStyle.Critical, "R Version error.")
                 Application.Exit()
                 Environment.Exit(0)
             End If
