@@ -14,13 +14,12 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgSPI
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
-    Private clsSPIFunction, clsPrintFunction As New RFunction
+    Private clsSPIFunction, clsSPEIFunction, clsLISTFunction, clsPRINTSPIFunction, clsPRINTSPEIFunction As New RFunction
 
     Private Sub dlgSPI_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -35,11 +34,9 @@ Public Class dlgSPI
         TestOKEnabled()
     End Sub
 
-
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.iHelpTopicID = 510
-        rdoPET.Enabled = False
 
         ucrSelectorVariable.SetParameterIsString()
         ucrReceiverDate.SetParameterIsString()
@@ -51,7 +48,6 @@ Public Class dlgSPI
         ucrReceiverData.Selector = ucrSelectorVariable
         ucrReceiverData.bAutoFill = True
         ucrReceiverData.strSelectorHeading = "Variables"
-
 
         ucrReceiverYear.SetParameterIsString()
         ucrReceiverYear.Selector = ucrSelectorVariable
@@ -73,8 +69,8 @@ Public Class dlgSPI
 
         'setting up Nuds
 
-        UcrtimeScale.SetParameter(New RParameter("scale", 1))
-        UcrtimeScale.SetMinMax(1, 24)
+        ucrTimeScale.SetParameter(New RParameter("scale", 1))
+        ucrTimeScale.SetMinMax(1, 24)
 
         ' others
 
@@ -89,30 +85,78 @@ Public Class dlgSPI
         ucrChkOmitMissingValues.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOmitMissingValues.SetRDefault("FALSE")
 
+        'panel
+
+        ucrPnlType.SetParameter(New RParameter("type", 0))
+        ucrPnlType.AddRadioButton(RdoTri, Chr(34) & "triangular" & Chr(34))
+        ucrPnlType.AddRadioButton(Rdocirc, Chr(34) & "circular" & Chr(34))
+        ucrPnlType.AddRadioButton(RdoRect, Chr(34) & "rectangular" & Chr(34))
+        ucrPnlType.AddRadioButton(RdoGaus, Chr(34) & "gaussian" & Chr(34))
+        ucrPnlType.SetRDefault(Chr(34) & "rectangular" & Chr(34))
+
+        'ucrshift
+        ucrKernShift.SetParameter(New RParameter("shift", 1))
+        ucrKernShift.SetMinMax(0, 24)
+
+        'ucrpnlInd
+        ucrPnlInd.AddRadioButton(rdoSPI)
+        ucrPnlInd.AddRadioButton(rdoSPEI)
 
     End Sub
+
     Private Sub SetDefaults()
+        clsSPEIFunction = New RFunction
+        clsSPIFunction = New RFunction
+        clsLISTFunction = New RFunction
+        clsPRINTSPIFunction = New RFunction
+        clsPRINTSPEIFunction = New RFunction
+
+        ucrSelectorVariable.Reset()
+
+        clsLISTFunction.SetRCommand("list")
+        clsLISTFunction.AddParameter("type", Chr(34) & "rectangular" & Chr(34), iPosition:=0)
+        clsLISTFunction.AddParameter("shift", 0, iPosition:=1)
+
         clsSPIFunction.SetPackageName("SPEI")
-        clsSPIFunction.SetRCommand("spei")
-        clsPrintFunction.SetRCommand("print")
-
-        clsSPIFunction.AddParameter("data", iPosition:=0)
-        clsSPIFunction.AddParameter("na.rm", iPosition:=6)
+        clsSPIFunction.SetRCommand("spi")
         clsSPIFunction.AddParameter("scale", 1, iPosition:=1)
-        'clsPrintFunction.AddParameter("clsSPIFunction", iPosition:=0)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsSPIFunction)
+        clsSPIFunction.AddParameter("kernel", clsRFunctionParameter:=clsLISTFunction, iPosition:=2)
 
+        clsSPEIFunction.SetPackageName("SPEI")
+        clsSPEIFunction.SetRCommand("spei")
+        clsSPEIFunction.AddParameter("scale", 1, iPosition:=1)
+        clsSPEIFunction.AddParameter("kernel", clsRFunctionParameter:=clsLISTFunction, iPosition:=2)
 
+        ucrSaveIndex.SetSaveTypeAsColumn()
+        ucrSaveIndex.SetDataFrameSelector(ucrSelectorVariable.ucrAvailableDataFrames)
+        ucrSaveIndex.SetLabelText("Save Index into:")
+        ucrSaveIndex.SetIsTextBox()
+        ucrSaveIndex.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
 
+        clsPRINTSPIFunction.SetRCommand("print")
+        clsPRINTSPIFunction.AddParameter(clsRFunctionParameter:=clsSPIFunction)
+        clsPRINTSPEIFunction.SetRCommand("print")
+        clsPRINTSPEIFunction.AddParameter(clsRFunctionParameter:=clsSPEIFunction)
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsPRINTSPIFunction)
     End Sub
+
     Private Sub SetRCodeForControls(bReset As Boolean)
-        UcrtimeScale.SetRCode(clsSPIFunction, bReset)
+        ucrTimeScale.SetRCode(clsSPIFunction, bReset)
+        ucrTimeScale.AddAdditionalCodeParameterPair(clsSPEIFunction, New RParameter("scale"), iAdditionalPairNo:=1)
         ucrChkOmitMissingValues.SetRCode(clsSPIFunction, bReset)
+        ucrChkOmitMissingValues.AddAdditionalCodeParameterPair(clsSPEIFunction, New RParameter("na.rm"), iAdditionalPairNo:=1)
         ucrReceiverData.SetRCode(clsSPIFunction, bReset)
+        ucrReceiverData.AddAdditionalCodeParameterPair(clsSPEIFunction, New RParameter("data"), iAdditionalPairNo:=1)
+        ucrPnlType.SetRCode(clsSPEIFunction, bReset)
+        ucrPnlType.SetRCode(clsSPIFunction, bReset)
+        ucrPnlType.SetRCode(clsLISTFunction, bReset)
+        ucrKernShift.SetRCode(clsLISTFunction, bReset)
+        ucrSaveIndex.SetRCode(clsPRINTSPIFunction, bReset)
+        ucrSaveIndex.SetRCode(clsPRINTSPEIFunction, bReset)
+
     End Sub
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlContentsChanged
-        TestOKEnabled()
-    End Sub
+
     Private Sub TestOKEnabled()
         If ucrReceiverData.IsEmpty Then
             ucrBase.OKEnabled(False)
@@ -121,9 +165,26 @@ Public Class dlgSPI
         End If
     End Sub
 
-    Private Sub TimeScale_ValueChanged(sender As Object, e As EventArgs)
-
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
     End Sub
 
+    Private Sub UcrPnlInd_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlInd.ControlContentsChanged
+        If rdoSPI.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsPRINTSPIFunction)
+            clsPRINTSPIFunction.SetAssignTo("spi", strTempDataframe:=ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="spi", bAssignToIsPrefix:=True)
+            ucrSaveIndex.SetPrefix("spi")
+        ElseIf rdoSPEI.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsPRINTSPEIFunction)
+            clsPRINTSPEIFunction.SetAssignTo("spei", strTempDataframe:=ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="spei", bAssignToIsPrefix:=True)
+            ucrSaveIndex.SetPrefix("spei")
+        Else
+        End If
+    End Sub
 
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlContentsChanged
+        TestOKEnabled()
+    End Sub
 End Class
