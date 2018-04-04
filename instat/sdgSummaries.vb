@@ -272,16 +272,17 @@ Public Class sdgSummaries
         End If
     End Sub
 
-    Private Sub ucrChkCorrelations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCorrelations.ControlValueChanged, ucrChkCovariance.ControlValueChanged, ucrChkFirst.ControlValueChanged, ucrChkLast.ControlValueChanged, ucrChknth.ControlValueChanged, ucrChkn_distinct.ControlValueChanged, ucrReceiverSecondVariable.ControlValueChanged
+    Private Sub ucrChkCorrelations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCorrelations.ControlValueChanged, ucrChkCovariance.ControlValueChanged, ucrReceiverSecondVariable.ControlValueChanged
         If ucrChkCorrelations.Checked OrElse ucrChkCovariance.Checked Then
             clsDefaultFunction.AddParameter("y", ucrReceiverSecondVariable.GetVariableNames, iPosition:=3)
         Else
             clsDefaultFunction.RemoveParameterByName("y")
         End If
-        If ucrChkFirst.Checked OrElse ucrChkLast.Checked OrElse ucrChknth.Checked Then
-            clsDefaultFunction.AddParameter("order_by", ucrReceiverSecondVariable.GetVariableNames, iPosition:=4)
-        Else
-            clsDefaultFunction.RemoveParameterByName("order_by")
-        End If
+        'This might be required when order_by parameter is implemented for last,first and nth functions
+        '    If ucrChkFirst.Checked OrElse ucrChkLast.Checked OrElse ucrChknth.Checked Then
+        '        clsDefaultFunction.AddParameter("order_by", ucrReceiverSecondVariable.GetVariableNames, iPosition:=4)
+        '    Else
+        '        clsDefaultFunction.RemoveParameterByName("order_by")
+        '    End If
     End Sub
 End Class
