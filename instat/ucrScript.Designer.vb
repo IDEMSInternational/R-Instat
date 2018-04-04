@@ -70,9 +70,9 @@ Partial Class ucrScript
         '
         'mnuContextScript
         '
-        Me.mnuContextScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuRunSelectedText, Me.mnuOpenScript, Me.mnuOpenScriptFromFile, Me.mnuSaveScript, Me.mnuClearContents, Me.mnuCopy, Me.mnuCut, Me.mnuPaste})
+        Me.mnuContextScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCut, Me.mnuCopy, Me.mnuPaste, Me.mnuRunSelectedText, Me.mnuOpenScript, Me.mnuOpenScriptFromFile, Me.mnuSaveScript, Me.mnuClearContents})
         Me.mnuContextScript.Name = "mnuContextLogFile"
-        Me.mnuContextScript.Size = New System.Drawing.Size(254, 180)
+        Me.mnuContextScript.Size = New System.Drawing.Size(254, 202)
         '
         'mnuRunSelectedText
         '
