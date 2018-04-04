@@ -728,6 +728,12 @@
     <Compile Include="sdgDescribeTwoVarGraph.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgDoyRange.Designer.vb">
+      <DependentUpon>sdgDoyRange.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgDoyRange.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgFactorDataFrame.Designer.vb">
       <DependentUpon>sdgFactorDataFrame.vb</DependentUpon>
     </Compile>
@@ -3662,6 +3668,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDescribeTwoVarGraph.sw-KE.resx">
       <DependentUpon>sdgDescribeTwoVarGraph.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDoyRange.resx">
+      <DependentUpon>sdgDoyRange.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgFactorDataFrame.fr-FR.resx">
       <DependentUpon>sdgFactorDataFrame.vb</DependentUpon>
