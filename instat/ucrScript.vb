@@ -66,7 +66,7 @@ Public Class ucrScript
         End If
     End Sub
 
-    Private Sub mnuOpenScript_Click(sender As Object, e As EventArgs) Handles mnuOpenScript.Click
+    Private Sub mnuOpenScript_Click(sender As Object, e As EventArgs) Handles mnuOpenScriptasFile.Click
         Dim clsProcessStart As New RFunction
         Dim strScriptFilename As String = ""
         Dim i As Integer
@@ -107,7 +107,7 @@ Public Class ucrScript
         End Using
     End Sub
 
-    Private Sub mnuOpenScriptFromFile_Click(sender As Object, e As EventArgs) Handles mnuOpenScriptFromFile.Click
+    Private Sub mnuOpenScriptFromFile_Click(sender As Object, e As EventArgs) Handles mnuLoadScriptFromFile.Click
 
         Dim msgWarning As DialogResult
 
@@ -188,12 +188,12 @@ Public Class ucrScript
     Private Sub EnableMenusWhenScriptNotEmpty()
         If txtScript.Text <> "" Then
             cmdRun.Enabled = True
-            mnuOpenScript.Enabled = True
+            mnuOpenScriptasFile.Enabled = True
             mnuClearContents.Enabled = True
             mnuSaveScript.Enabled = True
         Else
             cmdRun.Enabled = False
-            mnuOpenScript.Enabled = False
+            mnuOpenScriptasFile.Enabled = False
             mnuClearContents.Enabled = False
             mnuSaveScript.Enabled = False
         End If
@@ -207,5 +207,9 @@ Public Class ucrScript
             'Clear the undo buffer to prevent last action from being redone.
             txtScript.ClearUndo()
         End If
+    End Sub
+
+    Private Sub mnuRunAllText_Click(sender As Object, e As EventArgs) Handles mnuRunAllText.Click
+        RunText(txtScript.Text)
     End Sub
 End Class
