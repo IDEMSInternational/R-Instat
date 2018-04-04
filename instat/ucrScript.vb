@@ -198,4 +198,14 @@ Public Class ucrScript
             mnuSaveScript.Enabled = False
         End If
     End Sub
+
+    Private Sub mnuUndo_Click(sender As Object, e As EventArgs) Handles mnuUndo.Click
+        'Determine if last operation can be undone in text box.   
+        If txtScript.CanUndo = True Then
+            'Undo the last operation.
+            txtScript.Undo()
+            'Clear the undo buffer to prevent last action from being redone.
+            txtScript.ClearUndo()
+        End If
+    End Sub
 End Class
