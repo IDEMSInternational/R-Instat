@@ -36,7 +36,6 @@ Public Class dlgCorrelation
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
-        ReopenDialog()
         SetDefaultColumn()
         TestOKEnabled()
     End Sub
@@ -247,15 +246,6 @@ Public Class dlgCorrelation
         sdgCorrPlot.SetRCode(ucrBase.clsRsyntax, clsCorrelationFunction, clsRGGcorrGraphicsFunction, clsRGraphicsFuction, clsRTempFunction, clsRGGscatMatrixFunction, clsColFunction, bReset:=bResetSubdialog)
         sdgCorrPlot.ShowDialog()
         bResetSubdialog = False
-    End Sub
-
-    Private Sub ReopenDialog()
-        ucrPnlCompletePairwise.bAllowNonConditionValues = True ' temp fix. Otherwise developer error if you close and reopen on the "Two Columns" radio button since this won't be visible
-        If rdoMultipleColumns.Checked Then
-            grpMissing.Visible = True
-        Else
-            grpMissing.Visible = False
-        End If
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk

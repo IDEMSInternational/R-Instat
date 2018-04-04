@@ -121,6 +121,7 @@ Public Class sdgCorrPlot
         ucrSaveGraph.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
         ucrChkColor.SetRSyntax(clsRsyntax, bReset)
         ucrPnlGraphType.SetRSyntax(clsRsyntax, bReset)
+        Visibility()
     End Sub
 
     Private Sub Visibility()
@@ -158,9 +159,6 @@ Public Class sdgCorrPlot
             clsRsyntax.RemoveFromAfterCodes(clsRGGcorrGraphicsFunction)
             clsRsyntax.RemoveFromAfterCodes(clsRGraphicsFuction)
             clsRsyntax.RemoveFromAfterCodes(clsRGGscatmatrixFunction)
-        End If
-        If rdoCorrelationPlot.Checked Then
-            Visibility()
         End If
     End Sub
 End Class
