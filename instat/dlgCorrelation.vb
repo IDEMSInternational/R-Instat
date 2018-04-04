@@ -18,7 +18,8 @@ Imports instat.Translations
 Public Class dlgCorrelation
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Private clsCorrelationTestFunction, clsRGGcorrGraphicsFunction, clsRGraphicsFuction, clsRGGscatMatrixFunction, clsCorrelationFunction, clsRTempFunction, clsTempFunc As New RFunction
+    Private clsCorrelationTestFunction, clsRGGcorrGraphicsFunction, clsRGGscatMatrixFunction, clsCorrelationFunction, clsRTempFunction, clsTempFunc As New RFunction
+    Private clsRGraphicsFuction, clsList1Function, clsList2Function, clsWrap1Function, clsWrap2Function As New RFunction
     Private clsColFunction As String
     Private bResetSubdialog As Boolean = False
     Public strDefaultDataFrame As String = ""
@@ -119,6 +120,10 @@ Public Class dlgCorrelation
         clsCorrelationFunction = New RFunction
         clsRGGcorrGraphicsFunction = New RFunction
         clsRGraphicsFuction = New RFunction
+        clsList1Function = New RFunction
+        clsWrap1Function = New RFunction
+        clsList2Function = New RFunction
+        clsWrap2Function = New RFunction
         clsRGGscatMatrixFunction = New RFunction
         clsTempFunc = New RFunction
         bResetSubdialog = True
@@ -135,8 +140,17 @@ Public Class dlgCorrelation
         clsRGraphicsFuction.iCallType = 3
         clsRGraphicsFuction.bExcludeAssignedFunctionOutput = False
         clsRGraphicsFuction.AddParameter("data", clsRFunctionParameter:=clsTempFunc, iPosition:=0)
-        'clsRGraphicsFuction.AddParameter("upper", "list(continuous =GGally::wrap('cor', method =" & Chr(34) & "spearman" & Chr(34) & "))")
-        'clsRGraphicsFuction.AddParameter("lower", "list(continuous = 'cor')")
+        clsList1Function.SetRCommand("list")
+        clsList1Function.AddParameter("continuous", Chr(39) & "cor" & Chr(39))
+        clsWrap1Function.SetPackageName("GGally")
+        clsWrap1Function.SetRCommand("wrap")
+        clsRGraphicsFuction.AddParameter("lower", clsRFunctionParameter:=clsList1Function, iPosition:=3)
+        clsList2Function.SetRCommand("list")
+        clsWrap2Function.SetPackageName("GGally")
+        clsWrap2Function.SetRCommand("wrap")
+        clsWrap2Function.AddParameter("cor", Chr(39) & "cor" & Chr(39), bIncludeArgumentName:=False, iPosition:=0)
+        clsList2Function.AddParameter("continuous", clsRFunctionParameter:=clsWrap2Function)
+        clsRGraphicsFuction.AddParameter("upper", clsRFunctionParameter:=clsList2Function, iPosition:=2)
 
         clsRGGscatMatrixFunction.SetPackageName("GGally")
         clsRGGscatMatrixFunction.SetRCommand("ggscatmat")
@@ -172,7 +186,7 @@ Public Class dlgCorrelation
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrPnlMethod.AddAdditionalCodeParameterPair(clsCorrelationFunction, New RParameter("method", 4), iAdditionalPairNo:=1)
-        'ucrPnlMethod.AddAdditionalCodeParameterPair(clsRGGcorrGraphicsFunction, New RParameter("method", 2), iAdditionalPairNo:=2)
+        ucrPnlMethod.AddAdditionalCodeParameterPair(clsWrap2Function, New RParameter("method", 2), iAdditionalPairNo:=2)
         ' ucrPnlMethod.AddAdditionalCodeParameterPair(clsRGraphicsFuction, New RParameter("method", 2), iAdditionalPairNo:=3)
         '        ucrReceiverMultipleColumns.AddAdditionalCodeParameterPair(clsRGraphicsFuction, New RParameter("columns", 1), iAdditionalPairNo:=1) ' this has to be done manually for now as it needs to be a string for this function but r function for another
         ucrReceiverMultipleColumns.SetRCode(clsCorrelationFunction, bReset)
