@@ -45,6 +45,9 @@ Partial Class sdgSummaries
         Me.lblPercentage = New System.Windows.Forms.Label()
         Me.lblNumber = New System.Windows.Forms.Label()
         Me.tbMore = New System.Windows.Forms.TabPage()
+        Me.grpPosition = New System.Windows.Forms.GroupBox()
+        Me.lblInputN = New System.Windows.Forms.Label()
+        Me.grpProportionsPercentiles = New System.Windows.Forms.GroupBox()
         Me.grpLocation = New System.Windows.Forms.GroupBox()
         Me.lblFractionTrimmed = New System.Windows.Forms.Label()
         Me.grpScale = New System.Windows.Forms.GroupBox()
@@ -57,7 +60,6 @@ Partial Class sdgSummaries
         Me.grpNumeric = New System.Windows.Forms.GroupBox()
         Me.tbSummaries = New System.Windows.Forms.TabControl()
         Me.tbTwoVariables = New System.Windows.Forms.TabPage()
-        Me.lblInputN = New System.Windows.Forms.Label()
         Me.grpRelationships = New System.Windows.Forms.GroupBox()
         Me.lblSecondVariable = New System.Windows.Forms.Label()
         Me.ucrChkNTotal = New instat.ucrCheck()
@@ -74,6 +76,17 @@ Partial Class sdgSummaries
         Me.ucrChkStdDev = New instat.ucrCheck()
         Me.ucrChkSum = New instat.ucrCheck()
         Me.ucrChkMean = New instat.ucrCheck()
+        Me.ucrInputN = New instat.ucrInputTextBox()
+        Me.ucrChkFirst = New instat.ucrCheck()
+        Me.ucrChkLast = New instat.ucrCheck()
+        Me.ucrChknth = New instat.ucrCheck()
+        Me.ucrChkProportion = New instat.ucrCheck()
+        Me.ucrChkCount = New instat.ucrCheck()
+        Me.ucrChkPercentage = New instat.ucrCheck()
+        Me.ucrInputValue = New instat.ucrInputTextBox()
+        Me.ucrInputComboTest = New instat.ucrInputComboBox()
+        Me.ucrInputPercentile = New instat.ucrInputTextBox()
+        Me.ucrChkPercentile = New instat.ucrCheck()
         Me.ucrNudFraction = New instat.ucrNud()
         Me.ucrChkTrimmedMean = New instat.ucrCheck()
         Me.ucrChkQn = New instat.ucrCheck()
@@ -83,28 +96,18 @@ Partial Class sdgSummaries
         Me.ucrChkMc = New instat.ucrCheck()
         Me.ucrChkSkewness = New instat.ucrCheck()
         Me.ucrChkKurtosis = New instat.ucrCheck()
-        Me.ucrInputN = New instat.ucrInputTextBox()
         Me.ucrChkCovariance = New instat.ucrCheck()
         Me.ucrChkCorrelations = New instat.ucrCheck()
-        Me.ucrChkn_distinct = New instat.ucrCheck()
-        Me.ucrChkFirst = New instat.ucrCheck()
-        Me.ucrChkLast = New instat.ucrCheck()
-        Me.ucrChknth = New instat.ucrCheck()
         Me.ucrSelectorSecondVariable = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverSecondVariable = New instat.ucrReceiverSingle()
         Me.ucrNudPercentage = New instat.ucrNud()
         Me.ucrNudNumber = New instat.ucrNud()
         Me.ucrButtonsSummaries = New instat.ucrButtonsSubdialogue()
-        Me.grpProportionsPercentiles = New System.Windows.Forms.GroupBox()
-        Me.ucrChkProportion = New instat.ucrCheck()
-        Me.ucrChkCount = New instat.ucrCheck()
-        Me.ucrChkPercentage = New instat.ucrCheck()
-        Me.ucrInputValue = New instat.ucrInputTextBox()
-        Me.ucrInputComboTest = New instat.ucrInputComboBox()
-        Me.ucrInputPercentile = New instat.ucrInputTextBox()
-        Me.ucrChkPercentile = New instat.ucrCheck()
+        Me.ucrChkn_distinct = New instat.ucrCheck()
         Me.tbMissingOptions.SuspendLayout()
         Me.tbMore.SuspendLayout()
+        Me.grpPosition.SuspendLayout()
+        Me.grpProportionsPercentiles.SuspendLayout()
         Me.grpLocation.SuspendLayout()
         Me.grpScale.SuspendLayout()
         Me.grpSkewness.SuspendLayout()
@@ -117,7 +120,6 @@ Partial Class sdgSummaries
         Me.tbSummaries.SuspendLayout()
         Me.tbTwoVariables.SuspendLayout()
         Me.grpRelationships.SuspendLayout()
-        Me.grpProportionsPercentiles.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbMissingOptions
@@ -158,6 +160,7 @@ Partial Class sdgSummaries
         '
         'tbMore
         '
+        Me.tbMore.Controls.Add(Me.grpPosition)
         Me.tbMore.Controls.Add(Me.grpProportionsPercentiles)
         Me.tbMore.Controls.Add(Me.grpLocation)
         Me.tbMore.Controls.Add(Me.grpScale)
@@ -166,6 +169,35 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.tbMore, "tbMore")
         Me.tbMore.Name = "tbMore"
         Me.tbMore.UseVisualStyleBackColor = True
+        '
+        'grpPosition
+        '
+        Me.grpPosition.Controls.Add(Me.ucrInputN)
+        Me.grpPosition.Controls.Add(Me.lblInputN)
+        Me.grpPosition.Controls.Add(Me.ucrChkFirst)
+        Me.grpPosition.Controls.Add(Me.ucrChkLast)
+        Me.grpPosition.Controls.Add(Me.ucrChknth)
+        resources.ApplyResources(Me.grpPosition, "grpPosition")
+        Me.grpPosition.Name = "grpPosition"
+        Me.grpPosition.TabStop = False
+        '
+        'lblInputN
+        '
+        resources.ApplyResources(Me.lblInputN, "lblInputN")
+        Me.lblInputN.Name = "lblInputN"
+        '
+        'grpProportionsPercentiles
+        '
+        Me.grpProportionsPercentiles.Controls.Add(Me.ucrChkProportion)
+        Me.grpProportionsPercentiles.Controls.Add(Me.ucrChkCount)
+        Me.grpProportionsPercentiles.Controls.Add(Me.ucrChkPercentage)
+        Me.grpProportionsPercentiles.Controls.Add(Me.ucrInputValue)
+        Me.grpProportionsPercentiles.Controls.Add(Me.ucrInputComboTest)
+        Me.grpProportionsPercentiles.Controls.Add(Me.ucrInputPercentile)
+        Me.grpProportionsPercentiles.Controls.Add(Me.ucrChkPercentile)
+        resources.ApplyResources(Me.grpProportionsPercentiles, "grpProportionsPercentiles")
+        Me.grpProportionsPercentiles.Name = "grpProportionsPercentiles"
+        Me.grpProportionsPercentiles.TabStop = False
         '
         'grpLocation
         '
@@ -218,6 +250,7 @@ Partial Class sdgSummaries
         '
         'grpCommon
         '
+        Me.grpCommon.Controls.Add(Me.ucrChkn_distinct)
         Me.grpCommon.Controls.Add(Me.ucrChkNTotal)
         Me.grpCommon.Controls.Add(Me.ucrChkMode)
         Me.grpCommon.Controls.Add(Me.ucrChkNMissing)
@@ -270,24 +303,13 @@ Partial Class sdgSummaries
         '
         'tbTwoVariables
         '
-        Me.tbTwoVariables.Controls.Add(Me.ucrInputN)
-        Me.tbTwoVariables.Controls.Add(Me.lblInputN)
         Me.tbTwoVariables.Controls.Add(Me.grpRelationships)
         Me.tbTwoVariables.Controls.Add(Me.lblSecondVariable)
-        Me.tbTwoVariables.Controls.Add(Me.ucrChkn_distinct)
-        Me.tbTwoVariables.Controls.Add(Me.ucrChkFirst)
-        Me.tbTwoVariables.Controls.Add(Me.ucrChkLast)
-        Me.tbTwoVariables.Controls.Add(Me.ucrChknth)
         Me.tbTwoVariables.Controls.Add(Me.ucrSelectorSecondVariable)
         Me.tbTwoVariables.Controls.Add(Me.ucrReceiverSecondVariable)
         resources.ApplyResources(Me.tbTwoVariables, "tbTwoVariables")
         Me.tbTwoVariables.Name = "tbTwoVariables"
         Me.tbTwoVariables.UseVisualStyleBackColor = True
-        '
-        'lblInputN
-        '
-        resources.ApplyResources(Me.lblInputN, "lblInputN")
-        Me.lblInputN.Name = "lblInputN"
         '
         'grpRelationships
         '
@@ -386,6 +408,79 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.ucrChkMean, "ucrChkMean")
         Me.ucrChkMean.Name = "ucrChkMean"
         '
+        'ucrInputN
+        '
+        Me.ucrInputN.AddQuotesIfUnrecognised = True
+        Me.ucrInputN.IsMultiline = False
+        Me.ucrInputN.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputN, "ucrInputN")
+        Me.ucrInputN.Name = "ucrInputN"
+        '
+        'ucrChkFirst
+        '
+        Me.ucrChkFirst.Checked = False
+        resources.ApplyResources(Me.ucrChkFirst, "ucrChkFirst")
+        Me.ucrChkFirst.Name = "ucrChkFirst"
+        '
+        'ucrChkLast
+        '
+        Me.ucrChkLast.Checked = False
+        resources.ApplyResources(Me.ucrChkLast, "ucrChkLast")
+        Me.ucrChkLast.Name = "ucrChkLast"
+        '
+        'ucrChknth
+        '
+        Me.ucrChknth.Checked = False
+        resources.ApplyResources(Me.ucrChknth, "ucrChknth")
+        Me.ucrChknth.Name = "ucrChknth"
+        '
+        'ucrChkProportion
+        '
+        Me.ucrChkProportion.Checked = False
+        resources.ApplyResources(Me.ucrChkProportion, "ucrChkProportion")
+        Me.ucrChkProportion.Name = "ucrChkProportion"
+        '
+        'ucrChkCount
+        '
+        Me.ucrChkCount.Checked = False
+        resources.ApplyResources(Me.ucrChkCount, "ucrChkCount")
+        Me.ucrChkCount.Name = "ucrChkCount"
+        '
+        'ucrChkPercentage
+        '
+        Me.ucrChkPercentage.Checked = False
+        resources.ApplyResources(Me.ucrChkPercentage, "ucrChkPercentage")
+        Me.ucrChkPercentage.Name = "ucrChkPercentage"
+        '
+        'ucrInputValue
+        '
+        Me.ucrInputValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputValue.IsMultiline = False
+        Me.ucrInputValue.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputValue, "ucrInputValue")
+        Me.ucrInputValue.Name = "ucrInputValue"
+        '
+        'ucrInputComboTest
+        '
+        resources.ApplyResources(Me.ucrInputComboTest, "ucrInputComboTest")
+        Me.ucrInputComboTest.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboTest.IsReadOnly = False
+        Me.ucrInputComboTest.Name = "ucrInputComboTest"
+        '
+        'ucrInputPercentile
+        '
+        Me.ucrInputPercentile.AddQuotesIfUnrecognised = True
+        Me.ucrInputPercentile.IsMultiline = False
+        Me.ucrInputPercentile.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputPercentile, "ucrInputPercentile")
+        Me.ucrInputPercentile.Name = "ucrInputPercentile"
+        '
+        'ucrChkPercentile
+        '
+        Me.ucrChkPercentile.Checked = False
+        resources.ApplyResources(Me.ucrChkPercentile, "ucrChkPercentile")
+        Me.ucrChkPercentile.Name = "ucrChkPercentile"
+        '
         'ucrNudFraction
         '
         Me.ucrNudFraction.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
@@ -444,14 +539,6 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.ucrChkKurtosis, "ucrChkKurtosis")
         Me.ucrChkKurtosis.Name = "ucrChkKurtosis"
         '
-        'ucrInputN
-        '
-        Me.ucrInputN.AddQuotesIfUnrecognised = True
-        Me.ucrInputN.IsMultiline = False
-        Me.ucrInputN.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputN, "ucrInputN")
-        Me.ucrInputN.Name = "ucrInputN"
-        '
         'ucrChkCovariance
         '
         Me.ucrChkCovariance.Checked = False
@@ -463,30 +550,6 @@ Partial Class sdgSummaries
         Me.ucrChkCorrelations.Checked = False
         resources.ApplyResources(Me.ucrChkCorrelations, "ucrChkCorrelations")
         Me.ucrChkCorrelations.Name = "ucrChkCorrelations"
-        '
-        'ucrChkn_distinct
-        '
-        Me.ucrChkn_distinct.Checked = False
-        resources.ApplyResources(Me.ucrChkn_distinct, "ucrChkn_distinct")
-        Me.ucrChkn_distinct.Name = "ucrChkn_distinct"
-        '
-        'ucrChkFirst
-        '
-        Me.ucrChkFirst.Checked = False
-        resources.ApplyResources(Me.ucrChkFirst, "ucrChkFirst")
-        Me.ucrChkFirst.Name = "ucrChkFirst"
-        '
-        'ucrChkLast
-        '
-        Me.ucrChkLast.Checked = False
-        resources.ApplyResources(Me.ucrChkLast, "ucrChkLast")
-        Me.ucrChkLast.Name = "ucrChkLast"
-        '
-        'ucrChknth
-        '
-        Me.ucrChknth.Checked = False
-        resources.ApplyResources(Me.ucrChknth, "ucrChknth")
-        Me.ucrChknth.Name = "ucrChknth"
         '
         'ucrSelectorSecondVariable
         '
@@ -529,65 +592,11 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.ucrButtonsSummaries, "ucrButtonsSummaries")
         Me.ucrButtonsSummaries.Name = "ucrButtonsSummaries"
         '
-        'grpProportionsPercentiles
+        'ucrChkn_distinct
         '
-        Me.grpProportionsPercentiles.Controls.Add(Me.ucrChkProportion)
-        Me.grpProportionsPercentiles.Controls.Add(Me.ucrChkCount)
-        Me.grpProportionsPercentiles.Controls.Add(Me.ucrChkPercentage)
-        Me.grpProportionsPercentiles.Controls.Add(Me.ucrInputValue)
-        Me.grpProportionsPercentiles.Controls.Add(Me.ucrInputComboTest)
-        Me.grpProportionsPercentiles.Controls.Add(Me.ucrInputPercentile)
-        Me.grpProportionsPercentiles.Controls.Add(Me.ucrChkPercentile)
-        resources.ApplyResources(Me.grpProportionsPercentiles, "grpProportionsPercentiles")
-        Me.grpProportionsPercentiles.Name = "grpProportionsPercentiles"
-        Me.grpProportionsPercentiles.TabStop = False
-        '
-        'ucrChkProportion
-        '
-        Me.ucrChkProportion.Checked = False
-        resources.ApplyResources(Me.ucrChkProportion, "ucrChkProportion")
-        Me.ucrChkProportion.Name = "ucrChkProportion"
-        '
-        'ucrChkCount
-        '
-        Me.ucrChkCount.Checked = False
-        resources.ApplyResources(Me.ucrChkCount, "ucrChkCount")
-        Me.ucrChkCount.Name = "ucrChkCount"
-        '
-        'ucrChkPercentage
-        '
-        Me.ucrChkPercentage.Checked = False
-        resources.ApplyResources(Me.ucrChkPercentage, "ucrChkPercentage")
-        Me.ucrChkPercentage.Name = "ucrChkPercentage"
-        '
-        'ucrInputValue
-        '
-        Me.ucrInputValue.AddQuotesIfUnrecognised = True
-        Me.ucrInputValue.IsMultiline = False
-        Me.ucrInputValue.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputValue, "ucrInputValue")
-        Me.ucrInputValue.Name = "ucrInputValue"
-        '
-        'ucrInputComboTest
-        '
-        resources.ApplyResources(Me.ucrInputComboTest, "ucrInputComboTest")
-        Me.ucrInputComboTest.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboTest.IsReadOnly = False
-        Me.ucrInputComboTest.Name = "ucrInputComboTest"
-        '
-        'ucrInputPercentile
-        '
-        Me.ucrInputPercentile.AddQuotesIfUnrecognised = True
-        Me.ucrInputPercentile.IsMultiline = False
-        Me.ucrInputPercentile.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputPercentile, "ucrInputPercentile")
-        Me.ucrInputPercentile.Name = "ucrInputPercentile"
-        '
-        'ucrChkPercentile
-        '
-        Me.ucrChkPercentile.Checked = False
-        resources.ApplyResources(Me.ucrChkPercentile, "ucrChkPercentile")
-        Me.ucrChkPercentile.Name = "ucrChkPercentile"
+        Me.ucrChkn_distinct.Checked = False
+        resources.ApplyResources(Me.ucrChkn_distinct, "ucrChkn_distinct")
+        Me.ucrChkn_distinct.Name = "ucrChkn_distinct"
         '
         'sdgSummaries
         '
@@ -603,6 +612,9 @@ Partial Class sdgSummaries
         Me.tbMissingOptions.ResumeLayout(False)
         Me.tbMissingOptions.PerformLayout()
         Me.tbMore.ResumeLayout(False)
+        Me.grpPosition.ResumeLayout(False)
+        Me.grpPosition.PerformLayout()
+        Me.grpProportionsPercentiles.ResumeLayout(False)
         Me.grpLocation.ResumeLayout(False)
         Me.grpLocation.PerformLayout()
         Me.grpScale.ResumeLayout(False)
@@ -617,7 +629,6 @@ Partial Class sdgSummaries
         Me.tbTwoVariables.ResumeLayout(False)
         Me.tbTwoVariables.PerformLayout()
         Me.grpRelationships.ResumeLayout(False)
-        Me.grpProportionsPercentiles.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -671,12 +682,6 @@ Partial Class sdgSummaries
     Friend WithEvents ucrChkCorrelations As ucrCheck
     Friend WithEvents grpRelationships As GroupBox
     Friend WithEvents ucrChkCovariance As ucrCheck
-    Friend WithEvents ucrChkn_distinct As ucrCheck
-    Friend WithEvents ucrChkFirst As ucrCheck
-    Friend WithEvents ucrChkLast As ucrCheck
-    Friend WithEvents ucrChknth As ucrCheck
-    Friend WithEvents lblInputN As Label
-    Friend WithEvents ucrInputN As ucrInputTextBox
     Friend WithEvents ucrNudFraction As ucrNud
     Friend WithEvents grpProportionsPercentiles As GroupBox
     Friend WithEvents ucrChkProportion As ucrCheck
@@ -686,4 +691,11 @@ Partial Class sdgSummaries
     Friend WithEvents ucrInputComboTest As ucrInputComboBox
     Friend WithEvents ucrInputPercentile As ucrInputTextBox
     Friend WithEvents ucrChkPercentile As ucrCheck
+    Friend WithEvents grpPosition As GroupBox
+    Friend WithEvents ucrInputN As ucrInputTextBox
+    Friend WithEvents lblInputN As Label
+    Friend WithEvents ucrChkFirst As ucrCheck
+    Friend WithEvents ucrChkLast As ucrCheck
+    Friend WithEvents ucrChknth As ucrCheck
+    Friend WithEvents ucrChkn_distinct As ucrCheck
 End Class
