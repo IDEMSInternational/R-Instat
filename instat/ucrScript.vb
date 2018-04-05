@@ -201,7 +201,7 @@ Public Class ucrScript
 
     Private Sub Menu_Undo(sender As Object, e As EventArgs) Handles mnuUndo.Click
         'Determine if last operation can be undone in text box.   
-        If txtScript.CanUndo = True Then
+        If txtScript.CanUndo Then
             'Undo the last operation.
             txtScript.Undo()
             'Clear the undo buffer to prevent last action from being redone.
