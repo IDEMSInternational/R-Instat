@@ -126,7 +126,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="rdoAnnual.Location" type="System.Drawing.Point, System.Drawing">
-    <value>36, 14</value>
+    <value>35, 14</value>
   </data>
   <data name="rdoAnnual.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 27</value>
@@ -160,7 +160,7 @@
     <value>Flat</value>
   </data>
   <data name="rdoAnnualVariable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>268, 14</value>
+    <value>267, 14</value>
   </data>
   <data name="rdoAnnualVariable.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 27</value>
@@ -193,7 +193,7 @@
     <value>Flat</value>
   </data>
   <data name="rdoWithinYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 14</value>
+    <value>151, 14</value>
   </data>
   <data name="rdoWithinYear.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 27</value>
@@ -355,7 +355,7 @@
     <value>6</value>
   </data>
   <data name="cmdSummary.Location" type="System.Drawing.Point, System.Drawing">
-    <value>302, 349</value>
+    <value>302, 325</value>
   </data>
   <data name="cmdSummary.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 26</value>
@@ -406,7 +406,7 @@
     <value>4</value>
   </data>
   <data name="ucrSelectorVariable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 48</value>
+    <value>10, 48</value>
   </data>
   <data name="ucrSelectorVariable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -436,13 +436,13 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>415, 436</value>
+    <value>415, 421</value>
   </data>
   <data name="cmdDoyRange.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdDoyRange.Location" type="System.Drawing.Point, System.Drawing">
-    <value>175, 349</value>
+    <value>184, 325</value>
   </data>
   <data name="cmdDoyRange.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 26</value>
@@ -550,10 +550,10 @@
     <value>3</value>
   </data>
   <data name="grpOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 233</value>
+    <value>10, 233</value>
   </data>
   <data name="grpOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 113</value>
+    <value>160, 118</value>
   </data>
   <data name="grpOptions.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -694,7 +694,7 @@
     <value>15</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 381</value>
+    <value>10, 363</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>399, 52</value>
@@ -715,7 +715,7 @@
     <value>19</value>
   </data>
   <data name="ucrPnlAnnualWithin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 10</value>
+    <value>17, 10</value>
   </data>
   <data name="ucrPnlAnnualWithin.Size" type="System.Drawing.Size, System.Drawing">
     <value>381, 35</value>
