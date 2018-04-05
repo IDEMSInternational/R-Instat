@@ -273,6 +273,8 @@ DisplayDaily <- function(Datain,Stations,Variables,option=1,Years,Misscode,Trace
         #----------------------------------------------------------#				    
         out[dim(out)[1]+1,] <- "____"
         out[dim(out)[1],1] <- "STATS"
+        # temp fix to shorten display name of summary function
+        outstats[,1][outstats[,1] == "summary_count_missing"] <- "n_missing"
         out <- rbind(out,outstats)
         
         #----------------------------------------------------------#
