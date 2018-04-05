@@ -178,8 +178,10 @@ Public Class dlgPICSACrops
     Private Sub SetDefaults()
         clsCropsFunction = New RFunction
 
-        ucrSelectorForCrops.Reset()
+        'Currently this must come before reset to ensure autofilling is done correctly
+        'Once autofilling is being triggered correctly this can go after Reset.
         ucrReceiverStation.SetMeAsReceiver()
+        ucrSelectorForCrops.Reset()
 
         'Crops Function
         clsCropsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$crops_definitions")
