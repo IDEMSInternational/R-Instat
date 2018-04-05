@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Imports RDotNet
 
@@ -140,6 +139,7 @@ Public Class sdgDoyRange
         ucrDoyTo.SetParameterIsNumber()
 
         bControlsInitialised = True
+        ucrSelectorDoy.Reset()
     End Sub
 
     Private Sub Fromrdo_CheckedChanged(sender As Object, e As EventArgs) Handles rdoFromFixed.CheckedChanged, rdoFromVariable.CheckedChanged
