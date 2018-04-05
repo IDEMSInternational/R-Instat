@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 
 Public Class dlgPICSACrops
@@ -33,69 +34,80 @@ Public Class dlgPICSACrops
         End If
         SetRCodeForControls(bReset)
         bReset = False
-
-        TestOKEnabled()
+        TestOkEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 480
 
-        ucrSelectorForCrops.SetParameter(New RParameter("data_name", 1))
+        ' Sub dialog not yet created.
+        cmdOptions.Visible = False
+
+        ucrSelectorForCrops.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForCrops.SetParameterIsString()
 
-        'Station Receiver
-        ucrReceiverStation.Selector = ucrSelectorForCrops
-        ucrReceiverStation.SetClimaticType("station")
-        ucrReceiverStation.bAutoFill = True
-
-        'Date Receiver
-        ucrReceiverDate.Selector = ucrSelectorForCrops
-        ucrReceiverDate.SetClimaticType("date")
-        ucrReceiverDate.bAutoFill = True
-
-        'Start Receiver
-        ucrReceiverStart.SetParameter(New RParameter("start_day", 8))
-        ucrReceiverStart.Selector = ucrSelectorForCrops
-        ucrReceiverStart.SetClimaticType("start")
-        ucrReceiverStart.bAutoFill = True
-
-        'End Receiver
-        ucrReceiverEnd.SetParameter(New RParameter("end_day", 9))
-        ucrReceiverEnd.Selector = ucrSelectorForCrops
-        ucrReceiverEnd.SetClimaticType("end")
-        ucrReceiverEnd.bAutoFill = True
-
         'Year Receiver
-        ucrReceiverYear.SetParameter(New RParameter("year", 2))
         ucrReceiverYear.Selector = ucrSelectorForCrops
+        ucrReceiverYear.SetParameter(New RParameter("year", 1))
+        ucrReceiverYear.SetParameterIsString()
         ucrReceiverYear.SetClimaticType("year")
         ucrReceiverYear.bAutoFill = True
 
-        'Day Receiver
-        ucrReceiverDay.Selector = ucrSelectorForCrops
-        ucrReceiverDay.SetClimaticType("day")
-        ucrReceiverDay.bAutoFill = True
+        'Station Receiver
+        ucrReceiverStation.Selector = ucrSelectorForCrops
+        ucrReceiverStation.SetParameter(New RParameter("station", 2))
+        ucrReceiverStation.SetParameterIsString()
+        ucrReceiverStation.SetClimaticType("station")
+        ucrReceiverStation.bAutoFill = True
 
-        'Rainfall Receiver
+        'Rain Receiver
         ucrReceiverRainfall.SetParameter(New RParameter("rain", 3))
         ucrReceiverRainfall.Selector = ucrSelectorForCrops
+        ucrReceiverRainfall.SetParameterIsString()
         ucrReceiverRainfall.SetClimaticType("rain")
         ucrReceiverRainfall.bAutoFill = True
 
+        'Day Receiver
+        ucrReceiverDay.Selector = ucrSelectorForCrops
+        ucrReceiverDay.SetParameter(New RParameter("day", 4))
+        ucrReceiverDay.SetParameterIsString()
+        ucrReceiverDay.SetClimaticType("doy")
+        ucrReceiverDay.bAutoFill = True
+
+        'Start Receiver
+        ucrReceiverStart.SetParameter(New RParameter("start_day", 8))
+        ucrReceiverStart.SetParameterIsString()
+        ucrReceiverStart.SetDataType("numeric")
+        ucrReceiverStart.Selector = ucrSelectorForCrops
+        ucrReceiverStart.bAttachedToPrimaryDataFrame = False
+
+        'End Receiver
+        ucrReceiverEnd.Selector = ucrSelectorForCrops
+        ucrReceiverEnd.SetParameter(New RParameter("end_day", 9))
+        ucrReceiverEnd.SetParameterIsString()
+        ucrReceiverEnd.SetDataType("numeric")
+        ucrReceiverEnd.bAttachedToPrimaryDataFrame = False
+
         'Planting date 
-        ucrTxtBoxPlantingDate.SetParameter(New RParameter("planting_days", 5))
-        ucrTxtBoxPlantingDate.SetValidationTypeAsNumeric()
-        ucrTxtBoxPlantingDate.AddQuotesIfUnrecognised = False
+        ucrInputPlantingDates.SetParameter(New RParameter("plant_days", 5))
+        ucrInputPlantingDates.SetValidationTypeAsNumericList()
+        ucrInputPlantingDates.SetItems({"120", "80, 90, 100, 110, 120", "92, 122, 153"})
+        ucrInputPlantingDates.AddQuotesIfUnrecognised = False
+        ucrInputPlantingDates.bAllowNonConditionValues = True
 
         'Planting Length 
-        ucrTxtBoxPlantingLength.SetParameter(New RParameter("planting_length", 6))
-        ucrTxtBoxPlantingLength.SetValidationTypeAsNumeric()
-        ucrTxtBoxPlantingLength.AddQuotesIfUnrecognised = False
+        ucrInputPlantingLengths.SetParameter(New RParameter("plant_lengths", 6))
+        ucrInputPlantingLengths.SetValidationTypeAsNumericList()
+        ucrInputPlantingLengths.SetItems({"120", "100, 110, 120, 130, 140", "80, 90, 100, 110", "120, 150, 180"})
+        ucrInputPlantingLengths.AddQuotesIfUnrecognised = False
+        ucrInputPlantingLengths.bAllowNonConditionValues = True
 
         'Water amount 
-        ucrTxtBoxWaterAmount.SetParameter(New RParameter("rain_totals", 4))
-        ucrTxtBoxWaterAmount.SetValidationTypeAsNumeric()
-        ucrTxtBoxWaterAmount.AddQuotesIfUnrecognised = False
+        ucrInputWaterAmounts.SetParameter(New RParameter("rain_totals", 4))
+        ucrInputWaterAmounts.SetValidationTypeAsNumericList()
+        ucrInputWaterAmounts.SetItems({"600", "300, 400, 500, 600, 700", "300, 500, 700"})
+        ucrInputWaterAmounts.AddQuotesIfUnrecognised = False
+        ucrInputWaterAmounts.bAllowNonConditionValues = True
 
         'Planting Date Panel
         'ucrPnlPlantingDate.SetParameter(New RParameter("planting_days", clsCropsFunction, 5))
@@ -151,74 +163,61 @@ Public Class dlgPICSACrops
         'ucrNudWaterSeqStep.SetParameter(New RParameter("step", clsSeqRainfall))
         'ucrNudWaterSeqTo.SetParameter(New RParameter("to", clsSeqRainfall))
 
-        'ucrSaveDataFrame
-        'ucrSaveDataFrame.SetParameter(New RParameter("definition_props", 8))
-        ucrChkDataProp.SetText("Data Frame of Proportions")
-        ucrChkDataProp.SetParameter(New RParameter("definition_props", 8))
+        ucrChkDataProp.SetText("Calculate Proportions")
+        ucrChkDataProp.SetParameter(New RParameter("definition_props", 8), bNewChangeParameterValue:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkDataProp.SetRDefault("TRUE")
 
-        ucrChkPrintDataProp.SetText("Print Data Frame")
-        ucrChkPrintDataProp.SetParameter(New RParameter("print_table", 9))
+        ucrChkPrintDataProp.SetText("Print Proportions Table(s)")
+        ucrChkPrintDataProp.SetParameter(New RParameter("print_table", 9), bNewChangeParameterValue:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkPrintDataProp.SetRDefault("TRUE")
 
         'Linking of controls
-        ucrChkDataProp.AddToLinkedControls(ucrChkPrintDataProp, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
-
+        ucrChkDataProp.AddToLinkedControls(ucrChkPrintDataProp, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
     End Sub
 
     Private Sub SetDefaults()
         clsCropsFunction = New RFunction
-        clsCropsFunction.Clear()
 
         ucrSelectorForCrops.Reset()
         ucrReceiverStation.SetMeAsReceiver()
-        ucrTxtBoxPlantingDate.Reset()
-        ucrTxtBoxPlantingLength.Reset()
-        ucrTxtBoxWaterAmount.Reset()
 
         'Crops Function
         clsCropsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$crops_definitions")
-        clsCropsFunction.AddParameter("data_name", iPosition:=0)
-        clsCropsFunction.AddParameter("year")
-        clsCropsFunction.AddParameter("rain")
-        clsCropsFunction.AddParameter("rain_totals")
-        clsCropsFunction.AddParameter("plant_days")
-        clsCropsFunction.AddParameter("plant_length")
-        clsCropsFunction.AddParameter("season_data_name")
-        clsCropsFunction.AddParameter("start_day")
-        clsCropsFunction.AddParameter("end_day")
-        clsCropsFunction.AddParameter("definition_props")
-        clsCropsFunction.AddParameter("print_table")
-        clsCropsFunction.SetAssignTo("crops_data")
+        ' Temp disabled until list working correctly
+        'clsCropsFunction.AddParameter("plant_days", "120")
+        'clsCropsFunction.AddParameter("plant_lengths", "120")
+        'clsCropsFunction.AddParameter("rain_totals", "600")
+        ucrInputPlantingDates.SetName("120")
+        ucrInputPlantingLengths.SetName("120")
+        ucrInputWaterAmounts.SetName("600")
+        clsCropsFunction.AddParameter("definition_props", "TRUE", iPosition:=11)
+        clsCropsFunction.AddParameter("print_table", "TRUE", iPosition:=12)
         ucrBase.clsRsyntax.SetBaseRFunction(clsCropsFunction)
-
-        'Planting date seq function 
-        'clsSeqPlantingDate.SetRCommand("seq")
-        'clsSeqPlantingDate.AddParameter("from", iPosition:=0)
-        'clsSeqPlantingDate.AddParameter("step", iPosition:=0)
-        'clsSeqPlantingDate.AddParameter("to", iPosition:=0)
-
-        'Planting date seq function 
-        'clsSeqPlantingLength.SetRCommand("seq")
-        'clsSeqPlantingLength.AddParameter("from", iPosition:=0)
-        'clsSeqPlantingLength.AddParameter("step", iPosition:=0)
-        'clsSeqPlantingLength.AddParameter("to", iPosition:=0)
-
-        'Rainfall amount seq function 
-        'clsSeqRainfall.SetRCommand("seq")
-        'clsSeqRainfall.AddParameter("from", iPosition:=0)
-        'clsSeqRainfall.AddParameter("step", iPosition:=0)
-        'clsSeqRainfall.AddParameter("to", iPosition:=0)
 
         TestOkEnabled()
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
+        'TODO This should be done further done.
+        ' This ensures the correct data frame is set before attempting to fill the receiver
+        ucrReceiverYear.SetMeAsReceiver()
+        ucrSelectorForCrops.SetDataframe(ucrReceiverYear.GetDataName())
+        'Disabled as selector cannot yet auto set when multiple data frame are selected.
+        'ucrSelectorForCrops.SetRCode(clsCropsFunction, bReset)
         ucrReceiverYear.SetRCode(clsCropsFunction, bReset)
+        ucrReceiverStation.SetRCode(clsCropsFunction, bReset)
         ucrReceiverRainfall.SetRCode(clsCropsFunction, bReset)
+        ucrReceiverDay.SetRCode(clsCropsFunction, bReset)
+        ucrReceiverStart.SetMeAsReceiver()
+        ucrSelectorForCrops.SetDataframe(ucrReceiverStart.GetDataName())
         ucrReceiverStart.SetRCode(clsCropsFunction, bReset)
         ucrReceiverEnd.SetRCode(clsCropsFunction, bReset)
-        ucrTxtBoxPlantingDate.SetRCode(clsCropsFunction, bReset)
-        ucrTxtBoxPlantingLength.SetRCode(clsCropsFunction, bReset)
-        ucrTxtBoxWaterAmount.SetRCode(clsCropsFunction, bReset)
+
+        ' Disabled as list validation not working correctly with reading/writing controls
+        'ucrInputPlantingDates.SetRCode(clsCropsFunction, bReset)
+        'ucrInputPlantingLengths.SetRCode(clsCropsFunction, bReset)
+        'ucrInputWaterAmounts.SetRCode(clsCropsFunction, bReset)
+
         ucrChkDataProp.SetRCode(clsCropsFunction, bReset)
         ucrChkPrintDataProp.SetRCode(clsCropsFunction, bReset)
     End Sub
@@ -226,73 +225,50 @@ Public Class dlgPICSACrops
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
-        TestOKEnabled()
+        TestOkEnabled()
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverRainfall.IsEmpty AndAlso Not ucrReceiverStart.IsEmpty AndAlso ucrReceiverEnd.IsEmpty AndAlso Not ucrTxtBoxPlantingDate.IsEmpty AndAlso Not ucrTxtBoxPlantingLength.IsEmpty AndAlso Not ucrTxtBoxWaterAmount.IsEmpty Then
+        If Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverRainfall.IsEmpty AndAlso Not ucrReceiverStart.IsEmpty AndAlso Not ucrReceiverDay.IsEmpty AndAlso Not ucrReceiverEnd.IsEmpty AndAlso Not ucrInputPlantingDates.IsEmpty AndAlso Not ucrInputPlantingLengths.IsEmpty AndAlso Not ucrInputWaterAmounts.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    'Private Sub PlantingSingleOrSeq()
-    'If rdPlantingSingle.Checked Then
-    '       clsCropsFunction.AddParameter("planting_days", strParameterValue:=ucrNudPlantingSingleDayNum.Value, iPosition:=5)
-    'ElseIf rdPlantingSeq.Checked Then
-    '       clsCropsFunction.AddParameter("planting_days", clsRFunctionParameter:=clsSeqPlantingDate, iPosition:=5)
-    'End If
-    'End Sub
+    Private Sub ucrReceiverYear_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlContentsChanged, ucrReceiverRainfall.ControlContentsChanged, ucrReceiverStart.ControlContentsChanged, ucrReceiverEnd.ControlContentsChanged, ucrReceiverDay.ControlContentsChanged, ucrInputPlantingDates.ControlContentsChanged, ucrInputPlantingLengths.ControlContentsChanged, ucrInputWaterAmounts.ControlContentsChanged
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrInputPlantingDates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPlantingDates.ControlValueChanged
+        If ucrInputPlantingDates.IsEmpty Then
+            clsCropsFunction.RemoveParameterByName("plant_days")
+        Else
+            clsCropsFunction.AddParameter("plant_days", "c(" & ucrInputPlantingDates.GetText() & ")", iPosition:=6)
+        End If
+    End Sub
+
+    Private Sub ucrInputPlantingLengths_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPlantingLengths.ControlValueChanged
+        If ucrInputPlantingLengths.IsEmpty Then
+            clsCropsFunction.RemoveParameterByName("plant_lengths")
+        Else
+            clsCropsFunction.AddParameter("plant_lengths", "c(" & ucrInputPlantingLengths.GetText() & ")", iPosition:=7)
+        End If
+    End Sub
+
+    Private Sub ucrInputWaterAmounts_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputWaterAmounts.ControlValueChanged
+        If ucrInputWaterAmounts.IsEmpty Then
+            clsCropsFunction.RemoveParameterByName("rain_totals")
+        Else
+            clsCropsFunction.AddParameter("rain_totals", "c(" & ucrInputWaterAmounts.GetText() & ")", iPosition:=8)
+        End If
+    End Sub
 
     Private Sub ucrSelectorForCrops_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForCrops.ControlValueChanged
-        clsCropsFunction.AddParameter("data_name", ucrSelectorForCrops.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
-    End Sub
-
-    Private Sub ucrReceiverYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlValueChanged
-        clsCropsFunction.AddParameter("year", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & ")", iPosition:=2)
-    End Sub
-
-    Private Sub ucrReceiverRainfall_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRainfall.ControlValueChanged
-        clsCropsFunction.AddParameter("rain", "list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames & ")")
-    End Sub
-
-    Private Sub ucrReceiverStart_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStart.ControlValueChanged
-        clsCropsFunction.AddParameter("start_day", "list(" & strCurrDataName & "=" & ucrReceiverStart.GetVariableNames & ")")
-    End Sub
-
-    Private Sub ucrReceiverEnd_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverEnd.ControlValueChanged
-        clsCropsFunction.AddParameter("end_day", "list(" & strCurrDataName & "=" & ucrReceiverEnd.GetVariableNames & ")")
-    End Sub
-
-    Private Sub ucrTxtBoxPlantingDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrTxtBoxPlantingDate.ControlValueChanged
-        clsCropsFunction.AddParameter("planting_days", ucrTxtBoxPlantingDate.GetText, iPosition:=5)
-    End Sub
-
-    Private Sub ucrTxtBoxPlantingLength_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrTxtBoxPlantingLength.ControlValueChanged
-        clsCropsFunction.AddParameter("planting_length", ucrTxtBoxPlantingLength.GetText, iPosition:=6)
-    End Sub
-
-    Private Sub ucrTxtBoxWaterAmount_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrTxtBoxWaterAmount.ControlValueChanged
-        clsCropsFunction.AddParameter("rain_totals", ucrTxtBoxPlantingDate.GetText, iPosition:=4)
-    End Sub
-
-    Private Sub ucrChkDataProp_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkDataProp.ControlContentsChanged
-        If ucrChkDataProp.Checked Then
-            clsCropsFunction.AddParameter("definition_props ", "TRUE", iPosition:=8)
+        If ucrSelectorForCrops.CurrentReceiver Is Nothing OrElse ucrSelectorForCrops.CurrentReceiver.bAttachedToPrimaryDataFrame Then
+            clsCropsFunction.AddParameter("data_name", Chr(34) & ucrSelectorForCrops.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
         Else
-            clsCropsFunction.AddParameter("definition_props", "FALSE", iPosition:=8)
+            clsCropsFunction.AddParameter("season_data_name", Chr(34) & ucrSelectorForCrops.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=8)
         End If
     End Sub
-
-    Private Sub ucrChkPrintDataProp_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkPrintDataProp.ControlContentsChanged
-        If ucrChkDataProp.Checked AndAlso ucrChkPrintDataProp.Checked Then
-            clsCropsFunction.AddParameter("print_table", "TRUE", iPosition:=9)
-        ElseIf ucrChkDataProp.Checked AndAlso Not ucrChkPrintDataProp.Checked Then
-            clsCropsFunction.AddParameter("definition_props", "FALSE", iPosition:=9)
-        ElseIf Not ucrChkDataProp.Checked Then
-            clsCropsFunction.AddParameter("definition_props", "FALSE", iPosition:=9)
-        End If
-    End Sub
-
 End Class

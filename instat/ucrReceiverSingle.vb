@@ -288,7 +288,7 @@ Public Class ucrReceiverSingle
     End Sub
 
     Public Sub CheckAutoFill()
-        If bAutoFill Then
+        If bAutoFill AndAlso Selector.CurrentReceiver IsNot Nothing AndAlso Selector.CurrentReceiver.bAttachedToPrimaryDataFrame Then
             If Selector IsNot Nothing Then
                 SetMeAsReceiver()
                 If Selector.lstAvailableVariable.Items.Count = 1 Then
