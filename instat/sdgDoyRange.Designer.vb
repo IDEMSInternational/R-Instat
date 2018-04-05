@@ -102,7 +102,7 @@ Partial Class sdgDoyRange
         '
         Me.lblToDays.AutoSize = True
         Me.lblToDays.BackColor = System.Drawing.Color.Transparent
-        Me.lblToDays.Location = New System.Drawing.Point(277, 70)
+        Me.lblToDays.Location = New System.Drawing.Point(102, 72)
         Me.lblToDays.Name = "lblToDays"
         Me.lblToDays.Size = New System.Drawing.Size(29, 13)
         Me.lblToDays.TabIndex = 9
@@ -112,7 +112,7 @@ Partial Class sdgDoyRange
         '
         Me.lblToPlus.AutoSize = True
         Me.lblToPlus.BackColor = System.Drawing.Color.Transparent
-        Me.lblToPlus.Location = New System.Drawing.Point(189, 70)
+        Me.lblToPlus.Location = New System.Drawing.Point(16, 72)
         Me.lblToPlus.Name = "lblToPlus"
         Me.lblToPlus.Size = New System.Drawing.Size(30, 13)
         Me.lblToPlus.TabIndex = 8
@@ -143,7 +143,7 @@ Partial Class sdgDoyRange
         'rdoToFixed
         '
         Me.rdoToFixed.AutoSize = True
-        Me.rdoToFixed.Location = New System.Drawing.Point(14, 28)
+        Me.rdoToFixed.Location = New System.Drawing.Point(16, 28)
         Me.rdoToFixed.Name = "rdoToFixed"
         Me.rdoToFixed.Size = New System.Drawing.Size(72, 17)
         Me.rdoToFixed.TabIndex = 1
@@ -155,7 +155,7 @@ Partial Class sdgDoyRange
         '
         Me.ucrNudToDiff.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudToDiff.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudToDiff.Location = New System.Drawing.Point(224, 66)
+        Me.ucrNudToDiff.Location = New System.Drawing.Point(50, 68)
         Me.ucrNudToDiff.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudToDiff.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudToDiff.Name = "ucrNudToDiff"
@@ -166,7 +166,7 @@ Partial Class sdgDoyRange
         'ucrReceiverTo
         '
         Me.ucrReceiverTo.frmParent = Nothing
-        Me.ucrReceiverTo.Location = New System.Drawing.Point(98, 67)
+        Me.ucrReceiverTo.Location = New System.Drawing.Point(14, 67)
         Me.ucrReceiverTo.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTo.Name = "ucrReceiverTo"
         Me.ucrReceiverTo.Selector = Nothing
@@ -177,7 +177,7 @@ Partial Class sdgDoyRange
         '
         'ucrDoyTo
         '
-        Me.ucrDoyTo.Location = New System.Drawing.Point(14, 67)
+        Me.ucrDoyTo.Location = New System.Drawing.Point(16, 67)
         Me.ucrDoyTo.Name = "ucrDoyTo"
         Me.ucrDoyTo.Size = New System.Drawing.Size(209, 21)
         Me.ucrDoyTo.TabIndex = 5
@@ -202,7 +202,7 @@ Partial Class sdgDoyRange
         'ucrReceiverFrom
         '
         Me.ucrReceiverFrom.frmParent = Nothing
-        Me.ucrReceiverFrom.Location = New System.Drawing.Point(120, 67)
+        Me.ucrReceiverFrom.Location = New System.Drawing.Point(36, 68)
         Me.ucrReceiverFrom.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFrom.Name = "ucrReceiverFrom"
         Me.ucrReceiverFrom.Selector = Nothing
