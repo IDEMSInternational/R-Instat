@@ -254,7 +254,7 @@ Public Class ucrReorder
         End If
     End Sub
 
-    Protected Overrides Sub SetToValue(objTemp As Object)
+    Public Overrides Sub SetToValue(objTemp As Object)
         Dim strTemp As String()
         Dim chrTemp As CharacterVector
 

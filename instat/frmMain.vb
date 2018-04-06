@@ -71,6 +71,11 @@ Public Class frmMain
         'temporary
         mnuHelpAboutRInstat.Visible = False
 
+        ' This must be fixed because CurrentCulture affects functions such as Decimal.TryParse
+        ' e.g. "1.0" fails Decimal.TryParse if CurrentCulture = "fr-FR" because it expects "1,0"
+        ' Decimal point must be `.` and not `,` because R only accepts `.`
+        Thread.CurrentThread.CurrentCulture = New CultureInfo("en-GB")
+
         InitialiseOutputWindow()
         clsGrids.SetDataViewer(ucrDataViewer)
         clsGrids.SetMetadata(ucrDataFrameMeta.grdMetaData)
