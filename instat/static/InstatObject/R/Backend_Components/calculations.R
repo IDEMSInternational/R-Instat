@@ -748,3 +748,23 @@ instat_calculation$set("public", "get_dependencies", function(depens = c()) {
   return(depens)
 }
 )
+
+calc_from_convert <- function(x) {
+  calc_list <- list()
+  for(i in seq_along(x)) {
+    for(j in seq_along(x[[i]])) {
+      calc_list[[length(calc_list) + 1]] <- x[[i]][j]
+      names(calc_list)[length(calc_list)] <- names(x)[i]
+    }
+  }
+  return(calc_list)
+}
+
+# given a column name (column) and a calculated_from list (x)
+# this returns the name of the data frame the column is associated with
+find_df_from_calc_from <- function(x, column) {
+  for(i in seq_along(x)) {
+    if(column %in% x[[i]]) return(names(x)[i])
+  }
+  return("")
+}
