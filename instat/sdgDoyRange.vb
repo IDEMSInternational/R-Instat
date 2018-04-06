@@ -107,7 +107,7 @@ Public Class sdgDoyRange
                     clsDiffParam = clsFixedDiffOp.GetParameter("diff")
                     If clsDiffParam.bIsString AndAlso clsDiffParam.strArgumentValue IsNot Nothing Then
                         If Integer.TryParse(clsDiffParam.strArgumentValue, iDiff) Then
-                            rdoToFixedDiff.Checked = True
+                            rdoLength.Checked = True
                             ucrNudToDiff.SetToValue(iDiff)
                         End If
                     End If
@@ -127,10 +127,10 @@ Public Class sdgDoyRange
 
         ucrPnlTo.AddRadioButton(rdoToFixed)
         ucrPnlTo.AddRadioButton(rdoToVariable)
-        ucrPnlTo.AddRadioButton(rdoToFixedDiff)
+        ucrPnlTo.AddRadioButton(rdoLength)
         ucrPnlTo.AddToLinkedControls(ucrDoyTo, {rdoToFixed}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTo.AddToLinkedControls(ucrReceiverTo, {rdoToVariable}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlTo.AddToLinkedControls(ucrNudToDiff, {rdoToFixedDiff}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlTo.AddToLinkedControls(ucrNudToDiff, {rdoLength}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrReceiverFrom.Selector = ucrSelectorDoy
         ucrReceiverTo.Selector = ucrSelectorDoy
@@ -165,12 +165,12 @@ Public Class sdgDoyRange
         End If
     End Sub
 
-    Private Sub Tordo_CheckedChanged(sender As Object, e As EventArgs) Handles rdoToFixed.CheckedChanged, rdoToVariable.CheckedChanged, rdoToFixedDiff.CheckedChanged
+    Private Sub Tordo_CheckedChanged(sender As Object, e As EventArgs) Handles rdoToFixed.CheckedChanged, rdoToVariable.CheckedChanged, rdoLength.CheckedChanged
         UpdateToValues()
         If rdoToVariable.Checked Then
             ucrReceiverTo.SetMeAsReceiver()
         End If
-        lblToDays.Visible = rdoToFixedDiff.Checked
+        lblToDays.Visible = rdoLength.Checked
         SetSelectorVisible()
     End Sub
 
@@ -182,7 +182,7 @@ Public Class sdgDoyRange
                 clsDayToOperator.AddParameter("to", strParameterValue:=ucrDoyTo.GetValue(), iPosition:=1)
             ElseIf rdoToVariable.Checked Then
                 clsDayToOperator.AddParameter("to", strParameterValue:=ucrReceiverTo.GetVariableNames(False), iPosition:=1)
-            ElseIf rdoToFixedDiff.Checked Then
+            ElseIf rdoLength.Checked Then
                 clsFixedDiffOp.SetOperation("+")
                 If clsDayFromOperator.ContainsParameter("from") Then
                     clsFixedDiffOp.AddParameter("value", strParameterValue:=clsDayFromOperator.GetParameter("from").strArgumentValue, iPosition:=0)
