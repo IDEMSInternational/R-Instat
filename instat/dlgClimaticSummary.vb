@@ -75,8 +75,9 @@ Public Class dlgClimaticSummary
 
         ucrReceiverWithinYear.SetParameter(New RParameter("within_variable", 2, False))
         ucrReceiverWithinYear.SetParameterIsString()
-        ucrReceiverWithinYear.strSelectorHeading = "Variables"
+        ucrReceiverWithinYear.strSelectorHeading = "Factors"
         ucrReceiverWithinYear.Selector = ucrSelectorVariable
+        ucrReceiverWithinYear.SetDataType("factor")
 
         ' summary
         ucrReceiverElement.SetParameter(New RParameter("columns_to_summarise", 0))
@@ -101,13 +102,6 @@ Public Class dlgClimaticSummary
         ucrReceiverDOY.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "doy" & Chr(34)})
         ucrReceiverDOY.bAutoFill = True
         ucrReceiverDOY.strSelectorHeading = "Day Variables"
-
-        ''setting up Nuds
-        'ucrNudFrom.SetParameter(New RParameter("from", 1))
-        'ucrNudFrom.SetMinMax(1, 365)
-
-        'ucrNudTo.SetParameter(New RParameter("to", 1))
-        'ucrNudTo.SetMinMax(2, 366)
 
         ''TODO: set up this receiver for annual-variable
         'ucrReceiverFrom.Selector = ucrSelectorVariable
@@ -206,8 +200,6 @@ Public Class dlgClimaticSummary
         ucrReceiverDOY.AddAdditionalCodeParameterPair(clsFromConditionOperator, New RParameter("doy", 0), iAdditionalPairNo:=1)
 
         ucrReceiverDOY.SetRCode(clsToConditionOperator, bReset)
-        'ucrNudTo.SetRCode(clsDayToOperator, bReset)
-        'ucrNudFrom.SetRCode(clsDayFromOperator, bReset)
 
         ucrSelectorVariable.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverElement.SetRCode(clsDefaultFunction, bReset)
