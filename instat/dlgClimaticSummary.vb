@@ -139,6 +139,8 @@ Public Class dlgClimaticSummary
         'ucrReceiverFrom.SetLinkedDisplayControl(lblReceiverFrom)
         'ucrReceiverTo.SetLinkedDisplayControl(lblReceiverTo)
         ucrReceiverWithinYear.SetLinkedDisplayControl(lblWithinYear)
+
+        ucrInputFilterPreview.IsReadOnly = True
     End Sub
 
     Private Sub SetDefaults()

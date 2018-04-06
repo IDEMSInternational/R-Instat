@@ -106,6 +106,8 @@ Public Class dlgSpells
         ucrInputNewColumnName.SetParameter(New RParameter("result_name", 2))
         ucrInputNewColumnName.SetDataFrameSelector(ucrSelectorForSpells.ucrAvailableDataFrames)
         ucrInputNewColumnName.SetName("spells")
+
+        ucrInputFilterPreview.IsReadOnly = True
     End Sub
 
     Private Sub SetDefaults()
