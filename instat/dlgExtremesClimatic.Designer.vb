@@ -43,18 +43,16 @@ Partial Class dlgExtremesClimatic
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lblDayOfYear = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.cmdDoyRange = New System.Windows.Forms.Button()
         Me.ucrInputThresholdValue = New instat.ucrInputTextBox()
         Me.ucrInputThresholdOperator = New instat.ucrInputComboBox()
         Me.lblValues = New System.Windows.Forms.Label()
-        Me.ucrNudTo = New instat.ucrNud()
         Me.ucrChkMissingValues = New instat.ucrCheck()
-        Me.ucrNudFrom = New instat.ucrNud()
-        Me.lblFrom = New System.Windows.Forms.Label()
-        Me.lblTo = New System.Windows.Forms.Label()
         Me.rdoMin = New System.Windows.Forms.RadioButton()
         Me.rdoMax = New System.Windows.Forms.RadioButton()
         Me.ucrPnlMaxMin = New instat.UcrPanel()
         Me.ucrChkDayNumber = New instat.ucrCheck()
+        Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
         Me.rdoMinMax = New System.Windows.Forms.RadioButton()
         Me.rdoPeaks = New System.Windows.Forms.RadioButton()
         Me.lblElement = New System.Windows.Forms.Label()
@@ -69,6 +67,7 @@ Partial Class dlgExtremesClimatic
         Me.ucrSelectorClimaticExtremes = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlExtremesType = New instat.UcrPanel()
+        Me.lblFilterPreview = New System.Windows.Forms.Label()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -110,14 +109,11 @@ Partial Class dlgExtremesClimatic
         '
         'grpOptions
         '
+        Me.grpOptions.Controls.Add(Me.cmdDoyRange)
         Me.grpOptions.Controls.Add(Me.ucrInputThresholdValue)
         Me.grpOptions.Controls.Add(Me.ucrInputThresholdOperator)
         Me.grpOptions.Controls.Add(Me.lblValues)
-        Me.grpOptions.Controls.Add(Me.ucrNudTo)
         Me.grpOptions.Controls.Add(Me.ucrChkMissingValues)
-        Me.grpOptions.Controls.Add(Me.ucrNudFrom)
-        Me.grpOptions.Controls.Add(Me.lblFrom)
-        Me.grpOptions.Controls.Add(Me.lblTo)
         Me.grpOptions.Controls.Add(Me.rdoMin)
         Me.grpOptions.Controls.Add(Me.rdoMax)
         Me.grpOptions.Controls.Add(Me.ucrPnlMaxMin)
@@ -129,14 +125,25 @@ Partial Class dlgExtremesClimatic
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
         '
+        'cmdDoyRange
+        '
+        Me.cmdDoyRange.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdDoyRange.Location = New System.Drawing.Point(10, 14)
+        Me.cmdDoyRange.Name = "cmdDoyRange"
+        Me.cmdDoyRange.Size = New System.Drawing.Size(105, 26)
+        Me.cmdDoyRange.TabIndex = 26
+        Me.cmdDoyRange.Tag = ""
+        Me.cmdDoyRange.Text = "Day Range"
+        Me.cmdDoyRange.UseVisualStyleBackColor = True
+        '
         'ucrInputThresholdValue
         '
         Me.ucrInputThresholdValue.AddQuotesIfUnrecognised = True
         Me.ucrInputThresholdValue.IsMultiline = False
         Me.ucrInputThresholdValue.IsReadOnly = False
-        Me.ucrInputThresholdValue.Location = New System.Drawing.Point(126, 44)
+        Me.ucrInputThresholdValue.Location = New System.Drawing.Point(116, 44)
         Me.ucrInputThresholdValue.Name = "ucrInputThresholdValue"
-        Me.ucrInputThresholdValue.Size = New System.Drawing.Size(77, 21)
+        Me.ucrInputThresholdValue.Size = New System.Drawing.Size(67, 21)
         Me.ucrInputThresholdValue.TabIndex = 8
         '
         'ucrInputThresholdOperator
@@ -145,7 +152,7 @@ Partial Class dlgExtremesClimatic
         Me.ucrInputThresholdOperator.IsReadOnly = False
         Me.ucrInputThresholdOperator.Location = New System.Drawing.Point(46, 43)
         Me.ucrInputThresholdOperator.Name = "ucrInputThresholdOperator"
-        Me.ucrInputThresholdOperator.Size = New System.Drawing.Size(72, 21)
+        Me.ucrInputThresholdOperator.Size = New System.Drawing.Size(68, 21)
         Me.ucrInputThresholdOperator.TabIndex = 6
         '
         'lblValues
@@ -157,18 +164,6 @@ Partial Class dlgExtremesClimatic
         Me.lblValues.TabIndex = 5
         Me.lblValues.Text = "Value:"
         '
-        'ucrNudTo
-        '
-        Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTo.Location = New System.Drawing.Point(153, 18)
-        Me.ucrNudTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTo.Name = "ucrNudTo"
-        Me.ucrNudTo.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudTo.TabIndex = 3
-        Me.ucrNudTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'ucrChkMissingValues
         '
         Me.ucrChkMissingValues.Checked = False
@@ -176,37 +171,6 @@ Partial Class dlgExtremesClimatic
         Me.ucrChkMissingValues.Name = "ucrChkMissingValues"
         Me.ucrChkMissingValues.Size = New System.Drawing.Size(194, 20)
         Me.ucrChkMissingValues.TabIndex = 11
-        '
-        'ucrNudFrom
-        '
-        Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudFrom.Location = New System.Drawing.Point(46, 18)
-        Me.ucrNudFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFrom.Name = "ucrNudFrom"
-        Me.ucrNudFrom.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudFrom.TabIndex = 1
-        Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblFrom
-        '
-        Me.lblFrom.AutoSize = True
-        Me.lblFrom.Location = New System.Drawing.Point(6, 21)
-        Me.lblFrom.Name = "lblFrom"
-        Me.lblFrom.Size = New System.Drawing.Size(33, 13)
-        Me.lblFrom.TabIndex = 0
-        Me.lblFrom.Text = "From:"
-        '
-        'lblTo
-        '
-        Me.lblTo.AutoSize = True
-        Me.lblTo.Location = New System.Drawing.Point(127, 21)
-        Me.lblTo.Name = "lblTo"
-        Me.lblTo.Size = New System.Drawing.Size(23, 13)
-        Me.lblTo.TabIndex = 2
-        Me.lblTo.Tag = ""
-        Me.lblTo.Text = "To:"
         '
         'rdoMin
         '
@@ -242,8 +206,18 @@ Partial Class dlgExtremesClimatic
         Me.ucrChkDayNumber.Checked = False
         Me.ucrChkDayNumber.Location = New System.Drawing.Point(10, 95)
         Me.ucrChkDayNumber.Name = "ucrChkDayNumber"
-        Me.ucrChkDayNumber.Size = New System.Drawing.Size(194, 20)
+        Me.ucrChkDayNumber.Size = New System.Drawing.Size(173, 20)
         Me.ucrChkDayNumber.TabIndex = 10
+        '
+        'ucrInputFilterPreview
+        '
+        Me.ucrInputFilterPreview.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilterPreview.IsMultiline = False
+        Me.ucrInputFilterPreview.IsReadOnly = True
+        Me.ucrInputFilterPreview.Location = New System.Drawing.Point(88, 392)
+        Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
+        Me.ucrInputFilterPreview.Size = New System.Drawing.Size(314, 22)
+        Me.ucrInputFilterPreview.TabIndex = 16
         '
         'rdoMinMax
         '
@@ -288,19 +262,19 @@ Partial Class dlgExtremesClimatic
         '
         'lblNewColName
         '
-        Me.lblNewColName.Location = New System.Drawing.Point(10, 394)
+        Me.lblNewColName.Location = New System.Drawing.Point(8, 428)
         Me.lblNewColName.Name = "lblNewColName"
         Me.lblNewColName.Size = New System.Drawing.Size(119, 13)
-        Me.lblNewColName.TabIndex = 15
+        Me.lblNewColName.TabIndex = 17
         Me.lblNewColName.Text = "New Column Name:"
         '
         'lblNewDFName
         '
         Me.lblNewDFName.AutoSize = True
-        Me.lblNewDFName.Location = New System.Drawing.Point(10, 394)
+        Me.lblNewDFName.Location = New System.Drawing.Point(10, 428)
         Me.lblNewDFName.Name = "lblNewDFName"
         Me.lblNewDFName.Size = New System.Drawing.Size(121, 13)
-        Me.lblNewDFName.TabIndex = 18
+        Me.lblNewDFName.TabIndex = 1
         Me.lblNewDFName.Text = "New Data Frame Name:"
         '
         'ucrInputSave
@@ -308,10 +282,10 @@ Partial Class dlgExtremesClimatic
         Me.ucrInputSave.AddQuotesIfUnrecognised = True
         Me.ucrInputSave.IsMultiline = False
         Me.ucrInputSave.IsReadOnly = False
-        Me.ucrInputSave.Location = New System.Drawing.Point(131, 391)
+        Me.ucrInputSave.Location = New System.Drawing.Point(132, 427)
         Me.ucrInputSave.Name = "ucrInputSave"
         Me.ucrInputSave.Size = New System.Drawing.Size(170, 21)
-        Me.ucrInputSave.TabIndex = 16
+        Me.ucrInputSave.TabIndex = 18
         '
         'ucrReceiverElement
         '
@@ -385,10 +359,10 @@ Partial Class dlgExtremesClimatic
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 418)
+        Me.ucrBase.Location = New System.Drawing.Point(4, 449)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(398, 52)
-        Me.ucrBase.TabIndex = 17
+        Me.ucrBase.TabIndex = 19
         '
         'ucrPnlExtremesType
         '
@@ -397,11 +371,21 @@ Partial Class dlgExtremesClimatic
         Me.ucrPnlExtremesType.Size = New System.Drawing.Size(218, 37)
         Me.ucrPnlExtremesType.TabIndex = 0
         '
+        'lblFilterPreview
+        '
+        Me.lblFilterPreview.Location = New System.Drawing.Point(9, 392)
+        Me.lblFilterPreview.Name = "lblFilterPreview"
+        Me.lblFilterPreview.Size = New System.Drawing.Size(76, 22)
+        Me.lblFilterPreview.TabIndex = 15
+        Me.lblFilterPreview.Text = "Filter Preview:"
+        '
         'dlgExtremesClimatic
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(414, 476)
+        Me.ClientSize = New System.Drawing.Size(414, 502)
+        Me.Controls.Add(Me.lblFilterPreview)
+        Me.Controls.Add(Me.ucrInputFilterPreview)
         Me.Controls.Add(Me.lblNewColName)
         Me.Controls.Add(Me.ucrInputSave)
         Me.Controls.Add(Me.lblElement)
@@ -460,9 +444,8 @@ Partial Class dlgExtremesClimatic
     Friend WithEvents ucrPnlMaxMin As UcrPanel
     Friend WithEvents lblNewColName As Label
     Friend WithEvents ucrChkMissingValues As ucrCheck
-    Friend WithEvents ucrNudTo As ucrNud
-    Friend WithEvents ucrNudFrom As ucrNud
-    Friend WithEvents lblFrom As Label
-    Friend WithEvents lblTo As Label
     Friend WithEvents lblNewDFName As Label
+    Friend WithEvents cmdDoyRange As Button
+    Friend WithEvents ucrInputFilterPreview As ucrInputTextBox
+    Friend WithEvents lblFilterPreview As Label
 End Class
