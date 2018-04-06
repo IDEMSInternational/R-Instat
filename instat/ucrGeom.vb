@@ -182,8 +182,8 @@ Public Class ucrGeom
         'Task: add warning message to user...
         'Adding aesthetics parametters
         'Mandatory Aesthetics
-        clsgeom_abline.AddAesParameter("slope", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
-        clsgeom_abline.AddAesParameter("intercept", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True) '(required) intercept with the y axis of the line (the "b" in "y=ax+b") 
+        clsgeom_abline.AddAesParameter("slope", strIncludedDataTypes:={"numeric"})
+        clsgeom_abline.AddAesParameter("intercept", strIncludedDataTypes:={"numeric"}) '(required) intercept with the y axis of the line (the "b" in "y=ax+b") 
         'Warning/to be discussed: when these are set as parameters, they are not really mandatory... should we introduce a partially mandatory method nbr 2 ? For now I think it can be left like this...
         'Optional aesthetics
         clsgeom_abline.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
@@ -191,9 +191,9 @@ Public Class ucrGeom
         clsgeom_abline.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
         clsgeom_abline.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
         'Adding layer parameters
-        'Geom_hline parameters
-        clsgeom_abline.AddLayerParameter("slope", "numeric", "0") 'Parameters that control the position of the line. If these are set, data, mapping and show.legend are overridden
-        clsgeom_abline.AddLayerParameter("intercept", "numeric", "0")
+        'Geom_abline parameters
+        clsgeom_abline.AddLayerParameter("slope", "numeric", "0", lstParameterStrings:={2}) 'Parameters that control the position of the line. If these are set, data, mapping and show.legend are overridden
+        clsgeom_abline.AddLayerParameter("intercept", "numeric", "0", lstParameterStrings:={2})
         'Task: add warning message to user...
         'Global Layer parameters
         clsgeom_abline.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
@@ -718,7 +718,7 @@ Public Class ucrGeom
         'Task: add warning message to user...
         'Adding aesthetics parametters
         'Mandatory Aesthetics
-        clsgeom_hline.AddAesParameter("yintercept", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        clsgeom_hline.AddAesParameter("yintercept", strIncludedDataTypes:={"numeric"})
         'Warning/to be discussed: when this is set as parameter, it is not really mandatory... should we introduce a partially mandatory method nbr 2 ? For now I think it can be left like this...
         'Optional aesthetics
         clsgeom_hline.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
@@ -727,7 +727,7 @@ Public Class ucrGeom
         clsgeom_hline.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
         'Adding layer parameters
         'Geom_hline parameters
-        clsgeom_hline.AddLayerParameter("yintercept", "numeric", "0") 'Parameter that controls the position of the line. If this is set, data, mapping and show.legend are overridden
+        clsgeom_hline.AddLayerParameter("yintercept", "numeric", "0", lstParameterStrings:={2}) 'Parameter that controls the position of the line. If this is set, data, mapping and show.legend are overridden
         'Task: add warning message to user...
         'Global Layer parameters
         clsgeom_hline.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
@@ -1317,7 +1317,7 @@ Public Class ucrGeom
 
         'adding layer parameters
         'Geom_density layer parameters
-        clsgeom_violin.AddLayerParameter("draw_quantiles", "list", Chr(34) & "not(NULL)" & Chr(34), lstParameterStrings:={Chr(34) & "not(NULL)" & Chr(34), "0.25", "0.5", "0.75", "c(0.25, 0.5)", "c(0.25, 0.75)", "c(0.5,0.75)", "c(0.25,0.5,0.75)"}) 'If not(NULL) (default), draw horizontal lines at the given quantiles of the density estimate.
+        clsgeom_violin.AddLayerParameter("draw_quantiles", "list", "NULL", lstParameterStrings:={"NULL", "0.25", "0.5", "0.75", "c(0.25, 0.5)", "c(0.25, 0.75)", "c(0.5,0.75)", "c(0.25,0.5,0.75)"}) 'If not(NULL) (default), draw horizontal lines at the given quantiles of the density estimate - confusing instructions; it's say NULL is the default and when it not NULL and soemthing else then draw horizontal lines at the given quantiles of the density estimate
         clsgeom_violin.AddLayerParameter("trim", "boolean", "TRUE") 'If TRUE (default), trim the tails of the violins to the range of the data. If FALSE, don't trim the tails.
         clsgeom_violin.AddLayerParameter("trim", "list", Chr(34) & "area" & Chr(34), lstParameterStrings:={Chr(34) & "area" & Chr(34), Chr(34) & "count" & Chr(34), Chr(34) & "width" & Chr(34)}) 'if "area" (default), all violins have the same area (before trimming the tails). If "count", areas are scaled proportionally to the number of observations. If "width", all violins have the same maximum width.
         clsgeom_violin.AddLayerParameter("bw", "list", Chr(34) & "nrd0" & Chr(34), lstParameterStrings:={Chr(34) & "nrd0" & Chr(34), Chr(34) & "SJ" & Chr(34), Chr(34) & "nrd" & Chr(34), Chr(34) & "ucv" & Chr(34), Chr(34) & "bcv" & Chr(34)}) 'Bandwidth.
@@ -1351,7 +1351,7 @@ Public Class ucrGeom
         'Task: add warning message to user...
         'Adding aesthetics parametters
         'Mandatory Aesthetics
-        clsgeom_vline.AddAesParameter("xintercept", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        clsgeom_vline.AddAesParameter("xintercept", strIncludedDataTypes:={"numeric"})
         'Warning/to be discussed: when this is set as parameter, it is not really mandatory... should we introduce a partially mandatory method nbr 2 ? For now I think it can be left like this...
         'Optional aesthetics
         clsgeom_vline.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
@@ -1360,7 +1360,7 @@ Public Class ucrGeom
         clsgeom_vline.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
         'Adding layer parameters
         'Geom_hline parameters
-        clsgeom_vline.AddLayerParameter("xintercept", "numeric", "0") 'Parameter that controls the position of the line. If this is set, data, mapping and show.legend are overridden
+        clsgeom_vline.AddLayerParameter("xintercept", "numeric", "0", lstParameterStrings:={2}) 'Parameter that controls the position of the line. If this is set, data, mapping and show.legend are overridden
         'Task: add warning message to user...
         'Global Layer parameters
         clsgeom_vline.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
