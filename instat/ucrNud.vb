@@ -147,7 +147,7 @@ Public Class ucrNud
         Return nudUpDown.Text
     End Function
 
-    Protected Overrides Sub SetToValue(objTemp As Object)
+    Public Overrides Sub SetToValue(objTemp As Object)
         Dim dNewValue As Decimal
         If objTemp Is Nothing Then
             'If no value reset to a default value

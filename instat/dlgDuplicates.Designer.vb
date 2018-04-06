@@ -32,20 +32,22 @@ Partial Class dlgDuplicates
         Me.ttDuplicates = New System.Windows.Forms.ToolTip(Me.components)
         Me.rdoSuccessiveValues = New System.Windows.Forms.RadioButton()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.lblSelectedVariable = New System.Windows.Forms.Label()
+        Me.lblVariablesToDuplicate = New System.Windows.Forms.Label()
+        Me.lblType = New System.Windows.Forms.Label()
+        Me.ucrInputComboType = New instat.ucrInputComboBox()
+        Me.ucrReceiverForSelectedVariables = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverForSuccessiveValues = New instat.ucrReceiverSingle()
+        Me.ucrPnlDuplicates = New instat.UcrPanel()
+        Me.ucrNewColumnName = New instat.ucrSave()
+        Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSelectorDuplicateswithVariables = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrInputOmitValues = New instat.ucrInputTextBox()
         Me.ucrInputTolerance = New instat.ucrInputTextBox()
         Me.ucrChkTolerance = New instat.ucrCheck()
         Me.ucrChkOmitValues = New instat.ucrCheck()
         Me.ucrInputConditions = New instat.ucrInputComboBox()
-        Me.lblSelectedVariable = New System.Windows.Forms.Label()
-        Me.lblVariablesToDuplicate = New System.Windows.Forms.Label()
-        Me.ucrReceiverForSelectedVariables = New instat.ucrReceiverMultiple()
-        Me.ucrReceiverForSuccessiveValues = New instat.ucrReceiverSingle()
-        Me.ucrNewColumnName = New instat.ucrSave()
-        Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectorDuplicateswithVariables = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrPnlDuplicates = New instat.UcrPanel()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -111,6 +113,75 @@ Partial Class dlgDuplicates
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.TabStop = False
         '
+        'lblSelectedVariable
+        '
+        resources.ApplyResources(Me.lblSelectedVariable, "lblSelectedVariable")
+        Me.lblSelectedVariable.Name = "lblSelectedVariable"
+        Me.lblSelectedVariable.Tag = ""
+        '
+        'lblVariablesToDuplicate
+        '
+        resources.ApplyResources(Me.lblVariablesToDuplicate, "lblVariablesToDuplicate")
+        Me.lblVariablesToDuplicate.Name = "lblVariablesToDuplicate"
+        Me.lblVariablesToDuplicate.Tag = ""
+        '
+        'lblType
+        '
+        resources.ApplyResources(Me.lblType, "lblType")
+        Me.lblType.Name = "lblType"
+        '
+        'ucrInputComboType
+        '
+        Me.ucrInputComboType.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboType.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComboType, "ucrInputComboType")
+        Me.ucrInputComboType.Name = "ucrInputComboType"
+        '
+        'ucrReceiverForSelectedVariables
+        '
+        Me.ucrReceiverForSelectedVariables.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverForSelectedVariables, "ucrReceiverForSelectedVariables")
+        Me.ucrReceiverForSelectedVariables.Name = "ucrReceiverForSelectedVariables"
+        Me.ucrReceiverForSelectedVariables.Selector = Nothing
+        Me.ucrReceiverForSelectedVariables.strNcFilePath = ""
+        Me.ucrReceiverForSelectedVariables.ucrSelector = Nothing
+        '
+        'ucrReceiverForSuccessiveValues
+        '
+        Me.ucrReceiverForSuccessiveValues.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverForSuccessiveValues, "ucrReceiverForSuccessiveValues")
+        Me.ucrReceiverForSuccessiveValues.Name = "ucrReceiverForSuccessiveValues"
+        Me.ucrReceiverForSuccessiveValues.Selector = Nothing
+        Me.ucrReceiverForSuccessiveValues.strNcFilePath = ""
+        Me.ucrReceiverForSuccessiveValues.ucrSelector = Nothing
+        '
+        'ucrPnlDuplicates
+        '
+        resources.ApplyResources(Me.ucrPnlDuplicates, "ucrPnlDuplicates")
+        Me.ucrPnlDuplicates.Name = "ucrPnlDuplicates"
+        '
+        'ucrNewColumnName
+        '
+        resources.ApplyResources(Me.ucrNewColumnName, "ucrNewColumnName")
+        Me.ucrNewColumnName.Name = "ucrNewColumnName"
+        '
+        'ucrPnlOptions
+        '
+        resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
+        Me.ucrPnlOptions.Name = "ucrPnlOptions"
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
+        '
+        'ucrSelectorDuplicateswithVariables
+        '
+        Me.ucrSelectorDuplicateswithVariables.bShowHiddenColumns = False
+        Me.ucrSelectorDuplicateswithVariables.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorDuplicateswithVariables, "ucrSelectorDuplicateswithVariables")
+        Me.ucrSelectorDuplicateswithVariables.Name = "ucrSelectorDuplicateswithVariables"
+        '
         'ucrInputOmitValues
         '
         Me.ucrInputOmitValues.AddQuotesIfUnrecognised = True
@@ -146,68 +217,14 @@ Partial Class dlgDuplicates
         resources.ApplyResources(Me.ucrInputConditions, "ucrInputConditions")
         Me.ucrInputConditions.Name = "ucrInputConditions"
         '
-        'lblSelectedVariable
-        '
-        resources.ApplyResources(Me.lblSelectedVariable, "lblSelectedVariable")
-        Me.lblSelectedVariable.Name = "lblSelectedVariable"
-        Me.lblSelectedVariable.Tag = ""
-        '
-        'lblVariablesToDuplicate
-        '
-        resources.ApplyResources(Me.lblVariablesToDuplicate, "lblVariablesToDuplicate")
-        Me.lblVariablesToDuplicate.Name = "lblVariablesToDuplicate"
-        Me.lblVariablesToDuplicate.Tag = ""
-        '
-        'ucrReceiverForSelectedVariables
-        '
-        Me.ucrReceiverForSelectedVariables.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverForSelectedVariables, "ucrReceiverForSelectedVariables")
-        Me.ucrReceiverForSelectedVariables.Name = "ucrReceiverForSelectedVariables"
-        Me.ucrReceiverForSelectedVariables.Selector = Nothing
-        Me.ucrReceiverForSelectedVariables.strNcFilePath = ""
-        Me.ucrReceiverForSelectedVariables.ucrSelector = Nothing
-        '
-        'ucrReceiverForSuccessiveValues
-        '
-        Me.ucrReceiverForSuccessiveValues.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverForSuccessiveValues, "ucrReceiverForSuccessiveValues")
-        Me.ucrReceiverForSuccessiveValues.Name = "ucrReceiverForSuccessiveValues"
-        Me.ucrReceiverForSuccessiveValues.Selector = Nothing
-        Me.ucrReceiverForSuccessiveValues.strNcFilePath = ""
-        Me.ucrReceiverForSuccessiveValues.ucrSelector = Nothing
-        '
-        'ucrNewColumnName
-        '
-        resources.ApplyResources(Me.ucrNewColumnName, "ucrNewColumnName")
-        Me.ucrNewColumnName.Name = "ucrNewColumnName"
-        '
-        'ucrPnlOptions
-        '
-        resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
-        Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrSelectorDuplicateswithVariables
-        '
-        Me.ucrSelectorDuplicateswithVariables.bShowHiddenColumns = False
-        Me.ucrSelectorDuplicateswithVariables.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorDuplicateswithVariables, "ucrSelectorDuplicateswithVariables")
-        Me.ucrSelectorDuplicateswithVariables.Name = "ucrSelectorDuplicateswithVariables"
-        '
-        'ucrPnlDuplicates
-        '
-        resources.ApplyResources(Me.ucrPnlDuplicates, "ucrPnlDuplicates")
-        Me.ucrPnlDuplicates.Name = "ucrPnlDuplicates"
-        '
         'dlgDuplicates
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.grpOptions)
+        Me.Controls.Add(Me.lblType)
         Me.Controls.Add(Me.lblVariablesToDuplicate)
+        Me.Controls.Add(Me.ucrInputComboType)
         Me.Controls.Add(Me.ucrReceiverForSelectedVariables)
         Me.Controls.Add(Me.lblSelectedVariable)
         Me.Controls.Add(Me.rdoSuccessiveValues)
@@ -222,7 +239,6 @@ Partial Class dlgDuplicates
         Me.Controls.Add(Me.ucrPnlOptions)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSelectorDuplicateswithVariables)
-        Me.Controls.Add(Me.grpOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -255,4 +271,6 @@ Partial Class dlgDuplicates
     Friend WithEvents ucrReceiverForSelectedVariables As ucrReceiverMultiple
     Friend WithEvents lblVariablesToDuplicate As Label
     Friend WithEvents ucrInputOmitValues As ucrInputTextBox
+    Friend WithEvents lblType As Label
+    Friend WithEvents ucrInputComboType As ucrInputComboBox
 End Class
