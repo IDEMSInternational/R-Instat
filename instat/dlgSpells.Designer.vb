@@ -42,12 +42,9 @@ Partial Class dlgSpells
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lblDOY = New System.Windows.Forms.Label()
-        Me.lblTo = New System.Windows.Forms.Label()
-        Me.lblFrom = New System.Windows.Forms.Label()
         Me.lblThreshold = New System.Windows.Forms.Label()
         Me.grpRainParameters = New System.Windows.Forms.GroupBox()
-        Me.ucrNudTo = New instat.ucrNud()
-        Me.ucrNudFrom = New instat.ucrNud()
+        Me.cmdDoyRange = New System.Windows.Forms.Button()
         Me.ucrInputSpellLower = New instat.ucrInputTextBox()
         Me.ucrInputCondition = New instat.ucrInputComboBox()
         Me.ucrInputSpellUpper = New instat.ucrInputTextBox()
@@ -68,7 +65,7 @@ Partial Class dlgSpells
         'lblElement
         '
         Me.lblElement.AutoSize = True
-        Me.lblElement.Location = New System.Drawing.Point(247, 204)
+        Me.lblElement.Location = New System.Drawing.Point(247, 197)
         Me.lblElement.Name = "lblElement"
         Me.lblElement.Size = New System.Drawing.Size(48, 13)
         Me.lblElement.TabIndex = 9
@@ -77,7 +74,7 @@ Partial Class dlgSpells
         'lblDate
         '
         Me.lblDate.AutoSize = True
-        Me.lblDate.Location = New System.Drawing.Point(247, 44)
+        Me.lblDate.Location = New System.Drawing.Point(247, 71)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(33, 13)
         Me.lblDate.TabIndex = 1
@@ -86,7 +83,7 @@ Partial Class dlgSpells
         'lblYear
         '
         Me.lblYear.AutoSize = True
-        Me.lblYear.Location = New System.Drawing.Point(247, 84)
+        Me.lblYear.Location = New System.Drawing.Point(247, 113)
         Me.lblYear.Name = "lblYear"
         Me.lblYear.Size = New System.Drawing.Size(32, 13)
         Me.lblYear.TabIndex = 3
@@ -95,30 +92,11 @@ Partial Class dlgSpells
         'lblDOY
         '
         Me.lblDOY.AutoSize = True
-        Me.lblDOY.Location = New System.Drawing.Point(247, 124)
+        Me.lblDOY.Location = New System.Drawing.Point(247, 154)
         Me.lblDOY.Name = "lblDOY"
         Me.lblDOY.Size = New System.Drawing.Size(66, 13)
         Me.lblDOY.TabIndex = 5
         Me.lblDOY.Text = "Day of Year:"
-        '
-        'lblTo
-        '
-        Me.lblTo.AutoSize = True
-        Me.lblTo.Location = New System.Drawing.Point(186, 16)
-        Me.lblTo.Name = "lblTo"
-        Me.lblTo.Size = New System.Drawing.Size(45, 13)
-        Me.lblTo.TabIndex = 2
-        Me.lblTo.Tag = ""
-        Me.lblTo.Text = "To Day:"
-        '
-        'lblFrom
-        '
-        Me.lblFrom.AutoSize = True
-        Me.lblFrom.Location = New System.Drawing.Point(6, 16)
-        Me.lblFrom.Name = "lblFrom"
-        Me.lblFrom.Size = New System.Drawing.Size(55, 13)
-        Me.lblFrom.TabIndex = 0
-        Me.lblFrom.Text = "From Day:"
         '
         'lblThreshold
         '
@@ -132,43 +110,27 @@ Partial Class dlgSpells
         '
         'grpRainParameters
         '
-        Me.grpRainParameters.Controls.Add(Me.ucrNudTo)
-        Me.grpRainParameters.Controls.Add(Me.ucrNudFrom)
+        Me.grpRainParameters.Controls.Add(Me.cmdDoyRange)
         Me.grpRainParameters.Controls.Add(Me.ucrInputSpellLower)
         Me.grpRainParameters.Controls.Add(Me.ucrInputCondition)
         Me.grpRainParameters.Controls.Add(Me.ucrInputSpellUpper)
         Me.grpRainParameters.Controls.Add(Me.lblThreshold)
-        Me.grpRainParameters.Controls.Add(Me.lblFrom)
-        Me.grpRainParameters.Controls.Add(Me.lblTo)
-        Me.grpRainParameters.Location = New System.Drawing.Point(9, 242)
+        Me.grpRainParameters.Location = New System.Drawing.Point(10, 242)
         Me.grpRainParameters.Name = "grpRainParameters"
         Me.grpRainParameters.Size = New System.Drawing.Size(304, 74)
-        Me.grpRainParameters.TabIndex = 11
+        Me.grpRainParameters.TabIndex = 12
         Me.grpRainParameters.TabStop = False
         '
-        'ucrNudTo
+        'cmdDoyRange
         '
-        Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTo.Location = New System.Drawing.Point(237, 14)
-        Me.ucrNudTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTo.Name = "ucrNudTo"
-        Me.ucrNudTo.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudTo.TabIndex = 3
-        Me.ucrNudTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudFrom
-        '
-        Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudFrom.Location = New System.Drawing.Point(63, 14)
-        Me.ucrNudFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFrom.Name = "ucrNudFrom"
-        Me.ucrNudFrom.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudFrom.TabIndex = 1
-        Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.cmdDoyRange.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdDoyRange.Location = New System.Drawing.Point(9, 12)
+        Me.cmdDoyRange.Name = "cmdDoyRange"
+        Me.cmdDoyRange.Size = New System.Drawing.Size(105, 26)
+        Me.cmdDoyRange.TabIndex = 0
+        Me.cmdDoyRange.Tag = ""
+        Me.cmdDoyRange.Text = "Day Range"
+        Me.cmdDoyRange.UseVisualStyleBackColor = True
         '
         'ucrInputSpellLower
         '
@@ -202,7 +164,7 @@ Partial Class dlgSpells
         'lblStation
         '
         Me.lblStation.AutoSize = True
-        Me.lblStation.Location = New System.Drawing.Point(247, 164)
+        Me.lblStation.Location = New System.Drawing.Point(247, 29)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(43, 13)
         Me.lblStation.TabIndex = 7
@@ -214,7 +176,7 @@ Partial Class dlgSpells
         Me.lblNewColumnName.Location = New System.Drawing.Point(6, 352)
         Me.lblNewColumnName.Name = "lblNewColumnName"
         Me.lblNewColumnName.Size = New System.Drawing.Size(101, 13)
-        Me.lblNewColumnName.TabIndex = 13
+        Me.lblNewColumnName.TabIndex = 14
         Me.lblNewColumnName.Text = "New Column Name:"
         '
         'ucrInputNewColumnName
@@ -222,23 +184,23 @@ Partial Class dlgSpells
         Me.ucrInputNewColumnName.AddQuotesIfUnrecognised = True
         Me.ucrInputNewColumnName.IsMultiline = False
         Me.ucrInputNewColumnName.IsReadOnly = False
-        Me.ucrInputNewColumnName.Location = New System.Drawing.Point(113, 349)
+        Me.ucrInputNewColumnName.Location = New System.Drawing.Point(111, 349)
         Me.ucrInputNewColumnName.Name = "ucrInputNewColumnName"
         Me.ucrInputNewColumnName.Size = New System.Drawing.Size(187, 21)
-        Me.ucrInputNewColumnName.TabIndex = 14
+        Me.ucrInputNewColumnName.TabIndex = 15
         '
         'ucrChkConditional
         '
         Me.ucrChkConditional.Checked = False
-        Me.ucrChkConditional.Location = New System.Drawing.Point(9, 322)
+        Me.ucrChkConditional.Location = New System.Drawing.Point(10, 322)
         Me.ucrChkConditional.Name = "ucrChkConditional"
         Me.ucrChkConditional.Size = New System.Drawing.Size(193, 20)
-        Me.ucrChkConditional.TabIndex = 12
+        Me.ucrChkConditional.TabIndex = 13
         '
         'ucrReceiverStation
         '
         Me.ucrReceiverStation.frmParent = Me
-        Me.ucrReceiverStation.Location = New System.Drawing.Point(247, 179)
+        Me.ucrReceiverStation.Location = New System.Drawing.Point(247, 45)
         Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStation.Name = "ucrReceiverStation"
         Me.ucrReceiverStation.Selector = Nothing
@@ -250,7 +212,7 @@ Partial Class dlgSpells
         'ucrReceiverDOY
         '
         Me.ucrReceiverDOY.frmParent = Me
-        Me.ucrReceiverDOY.Location = New System.Drawing.Point(247, 139)
+        Me.ucrReceiverDOY.Location = New System.Drawing.Point(247, 171)
         Me.ucrReceiverDOY.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDOY.Name = "ucrReceiverDOY"
         Me.ucrReceiverDOY.Selector = Nothing
@@ -262,7 +224,7 @@ Partial Class dlgSpells
         'ucrReceiverYear
         '
         Me.ucrReceiverYear.frmParent = Me
-        Me.ucrReceiverYear.Location = New System.Drawing.Point(247, 99)
+        Me.ucrReceiverYear.Location = New System.Drawing.Point(247, 129)
         Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverYear.Name = "ucrReceiverYear"
         Me.ucrReceiverYear.Selector = Nothing
@@ -274,7 +236,7 @@ Partial Class dlgSpells
         'ucrReceiverDate
         '
         Me.ucrReceiverDate.frmParent = Me
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(247, 59)
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(247, 87)
         Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing
@@ -286,7 +248,7 @@ Partial Class dlgSpells
         'ucrReceiverElement
         '
         Me.ucrReceiverElement.frmParent = Me
-        Me.ucrReceiverElement.Location = New System.Drawing.Point(247, 219)
+        Me.ucrReceiverElement.Location = New System.Drawing.Point(247, 213)
         Me.ucrReceiverElement.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverElement.Name = "ucrReceiverElement"
         Me.ucrReceiverElement.Selector = Nothing
@@ -299,7 +261,7 @@ Partial Class dlgSpells
         '
         Me.ucrSelectorForSpells.bShowHiddenColumns = False
         Me.ucrSelectorForSpells.bUseCurrentFilter = True
-        Me.ucrSelectorForSpells.Location = New System.Drawing.Point(9, 9)
+        Me.ucrSelectorForSpells.Location = New System.Drawing.Point(10, 22)
         Me.ucrSelectorForSpells.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForSpells.Name = "ucrSelectorForSpells"
         Me.ucrSelectorForSpells.Size = New System.Drawing.Size(210, 180)
@@ -307,10 +269,10 @@ Partial Class dlgSpells
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 376)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 376)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
-        Me.ucrBase.TabIndex = 15
+        Me.ucrBase.TabIndex = 0
         '
         'dlgSpells
         '
@@ -360,15 +322,12 @@ Partial Class dlgSpells
     Friend WithEvents grpRainParameters As GroupBox
     Friend WithEvents ucrInputCondition As ucrInputComboBox
     Friend WithEvents lblThreshold As Label
-    Friend WithEvents lblFrom As Label
-    Friend WithEvents lblTo As Label
     Friend WithEvents lblStation As Label
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
     Friend WithEvents ucrInputSpellLower As ucrInputTextBox
     Friend WithEvents ucrInputSpellUpper As ucrInputTextBox
-    Friend WithEvents ucrNudTo As ucrNud
-    Friend WithEvents ucrNudFrom As ucrNud
     Friend WithEvents ucrChkConditional As ucrCheck
     Friend WithEvents lblNewColumnName As Label
     Friend WithEvents ucrInputNewColumnName As ucrInputTextBox
+    Friend WithEvents cmdDoyRange As Button
 End Class
