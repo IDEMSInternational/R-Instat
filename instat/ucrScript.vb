@@ -24,6 +24,10 @@ Public Class ucrScript
         txtScript.Copy()
     End Sub
 
+    Public Sub CutText()
+        txtScript.Cut()
+    End Sub
+
     Public Sub SelectAllText()
         txtScript.SelectAll()
     End Sub
@@ -130,34 +134,18 @@ Public Class ucrScript
     End Sub
 
     Private Sub mnuCopy_Click(sender As Object, e As EventArgs) Handles mnuCopy.Click
-        Clipboard.SetText(txtScript.Text)
+        CopyText()
     End Sub
 
     Private Sub mnuCut_Click(sender As Object, e As EventArgs) Handles mnuCut.Click
-        Clipboard.Clear()
-        Clipboard.SetText(txtScript.Text)
-        txtScript.SelectedText = ""
+        CutText()
     End Sub
 
     Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
-        Dim msgPaste As DialogResult
-
         If Clipboard.ContainsData(DataFormats.Text) Then
-            If txtScript.SelectionLength > 0 Then
-                msgPaste = MessageBox.Show("Are you sure you want to overwrite the selected text?", "Paste to Script Window", MessageBoxButtons.YesNo)
-                If msgPaste = DialogResult.Yes Then
-                    txtScript.SelectedText = Clipboard.GetText()
-                End If
-            Else
-                If txtScript.Text = "" Then
-                    txtScript.Text = Clipboard.GetText()
-                Else
-                    txtScript.SelectionStart = txtScript.TextLength & Environment.NewLine
-                    txtScript.AppendText(Clipboard.GetText)
-                End If
-            End If
+            txtScript.Paste()
         Else
-            MessageBox.Show("You can only paste text data on the script window?", "Paste to Script Window", MessageBoxButtons.OK)
+            MessageBox.Show("You can only paste text data on the script window", "Paste to Script Window", MessageBoxButtons.OK)
         End If
     End Sub
 
