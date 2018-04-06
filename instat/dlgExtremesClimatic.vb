@@ -21,6 +21,7 @@ Public Class dlgExtremesClimatic
     Private clsExtreme As New RFunction
     Private strCurrDataName As String = ""
     Private clsGroupByFunction, clsRunCalcFunction, clsDayFromAndTo, clsDayManipulation As New RFunction
+    Private clsDayFilterCalcFromConvert, clsDayFilterCalcFromList As New RFunction
     Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator As New ROperator
     Private clsCurrCalc As RFunction
     ' Min/Max Options
@@ -80,13 +81,6 @@ Public Class dlgExtremesClimatic
         ucrReceiverElement.bWithQuotes = False
         ucrReceiverElement.strSelectorHeading = "Numerics"
         ucrReceiverElement.SetDataType("numeric")
-
-        'to/from
-        ucrNudFrom.SetParameter(New RParameter("from", 1))
-        ucrNudFrom.SetMinMax(1, 366)
-
-        ucrNudTo.SetParameter(New RParameter("to", 1))
-        ucrNudTo.SetMinMax(2, 366)
 
         ' Panel Options
         ucrPnlExtremesType.AddRadioButton(rdoMinMax)
@@ -150,6 +144,12 @@ Public Class dlgExtremesClimatic
         ucrSelectorClimaticExtremes.Reset()
         SetCalculationValues()
 
+        clsDayFilterCalcFromConvert = New RFunction
+        clsDayFilterCalcFromConvert.SetRCommand("calc_from_convert")
+        clsDayFilterCalcFromList = New RFunction
+        clsDayFilterCalcFromList.SetRCommand("list")
+        clsDayFilterCalcFromConvert.AddParameter("x", clsRFunctionParameter:=clsDayFilterCalcFromList, iPosition:=0)
+
         ' Days
         clsDayFromAndToOperator.bToScriptAsRString = True
         clsDayFromAndTo.SetRCommand("instat_calculation$new")
@@ -162,7 +162,9 @@ Public Class dlgExtremesClimatic
         clsDayFromAndToOperator.AddParameter("to_operator", clsROperatorParameter:=clsDayToOperator, iPosition:=1)
         clsDayToOperator.SetOperation("<=")
         clsDayToOperator.AddParameter("to", 366, iPosition:=1)
+        clsDayFromAndTo.AddParameter("calculated_from", clsRFunctionParameter:=clsDayFilterCalcFromConvert, iPosition:=2)
         clsDayFromAndTo.SetAssignTo("day_from_and_to")
+        ucrInputFilterPreview.SetName(clsDayFromAndToOperator.ToScript())
 
         ' For the Min/Max option:
         clsGroupByFunction.SetRCommand("instat_calculation$new")
@@ -213,8 +215,6 @@ Public Class dlgExtremesClimatic
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsPeaksFilterOperator, New RParameter("left"), iAdditionalPairNo:=1)
 
         ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
-        ucrNudFrom.SetRCode(clsDayFromOperator, bReset)
-        ucrNudTo.SetRCode(clsDayToOperator, bReset)
 
         '        ucrInputThresholdOperator.SetRCode(clsPeaksFilterFunction, bReset)
         ucrInputThresholdValue.SetRCode(clsPeaksFilterOperator, bReset)
@@ -228,7 +228,7 @@ Public Class dlgExtremesClimatic
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverDate.IsEmpty() AndAlso Not ucrReceiverDOY.IsEmpty() AndAlso Not ucrReceiverElement.IsEmpty() AndAlso Not ucrReceiverYear.IsEmpty() AndAlso Not ucrInputSave.IsEmpty AndAlso ucrNudFrom.GetText <> "" AndAlso ucrNudTo.GetText <> "" AndAlso ((rdoPeaks.Checked AndAlso Not ucrInputThresholdValue.IsEmpty) OrElse rdoMinMax.Checked) Then
+        If Not ucrReceiverDate.IsEmpty() AndAlso Not ucrReceiverDOY.IsEmpty() AndAlso Not ucrReceiverElement.IsEmpty() AndAlso Not ucrReceiverYear.IsEmpty() AndAlso Not ucrInputSave.IsEmpty AndAlso ((rdoPeaks.Checked AndAlso Not ucrInputThresholdValue.IsEmpty) OrElse rdoMinMax.Checked) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -290,10 +290,6 @@ Public Class dlgExtremesClimatic
         End If
     End Sub
 
-    Private Sub DayOfYear()
-        clsDayFromAndTo.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")", iPosition:=2)
-    End Sub
-
     Private Sub MinMaxFunction()
         clsMinMaxSummariseFunction.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames() & ")", iPosition:=2)
     End Sub
@@ -307,10 +303,15 @@ Public Class dlgExtremesClimatic
         SetAssignName()
     End Sub
 
+    Private Sub cmdDoyRange_Click(sender As Object, e As EventArgs) Handles cmdDoyRange.Click
+        sdgDoyRange.Setup(clsNewDoyFilterCalc:=clsDayFromAndTo, clsNewDayFromOperator:=clsDayFromOperator, clsNewDayToOperator:=clsDayToOperator, clsNewCalcFromList:=clsDayFilterCalcFromList, strNewMainDataFrame:=ucrSelectorClimaticExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strNewDoyColumn:=ucrReceiverDOY.GetVariableNames(False))
+        sdgDoyRange.ShowDialog()
+        ucrInputFilterPreview.SetName(clsDayFromAndToOperator.ToScript())
+    End Sub
+
     Private Sub ucrSelectorClimaticExtremes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorClimaticExtremes.ControlValueChanged
         strCurrDataName = Chr(34) & ucrSelectorClimaticExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
         GroupByOptions()
-        DayOfYear()
         MinMaxFunction()
         PeaksFunction()
     End Sub
@@ -320,12 +321,14 @@ Public Class dlgExtremesClimatic
         PeaksFunction()
     End Sub
 
-    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
+    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrSelectorClimaticExtremes.ControlValueChanged, ucrReceiverDOY.ControlContentsChanged
         GroupByOptions()
-    End Sub
 
-    Private Sub ucrReceiverDOY_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDOY.ControlValueChanged
-        DayOfYear()
+        If Not ucrReceiverDOY.IsEmpty Then
+            clsDayFilterCalcFromList.AddParameter(ucrSelectorClimaticExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strParameterValue:=ucrReceiverDOY.GetVariableNames(), iPosition:=0)
+        Else
+            clsDayFilterCalcFromList.RemoveParameterByName(ucrSelectorClimaticExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        End If
     End Sub
 
     Private Sub ucrReceiverYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlValueChanged
@@ -336,7 +339,7 @@ Public Class dlgExtremesClimatic
         SetCalculationValues()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrInputSave.ControlContentsChanged, ucrInputThresholdValue.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrNudTo.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrInputSave.ControlContentsChanged, ucrInputThresholdValue.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
