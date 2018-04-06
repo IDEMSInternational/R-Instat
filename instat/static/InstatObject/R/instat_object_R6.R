@@ -1582,7 +1582,7 @@ instat_object$set("public","get_variable_sets", function(data_name, set_names, f
 }
 )
 
-instat_object$set("public", "crops_definitions", function(data_name, year, station, rain, rain_totals, plant_days, plant_lengths, season_data_name, start_day, end_day, definition_props = TRUE, print_table = TRUE) {
+instat_object$set("public", "crops_definitions", function(data_name, year, station, rain, day, rain_totals, plant_days, plant_lengths, season_data_name, start_day, end_day, definition_props = TRUE, print_table = TRUE) {
   plant_day_name <- "plant_day"
   plant_length_name <- "plant_length"
   rain_total_name <- "rain_total"
@@ -1604,6 +1604,7 @@ instat_object$set("public", "crops_definitions", function(data_name, year, stati
   }
   join_by <- by
   names(join_by) <- season_by
+  daily_data <- self$get_data_frame(data_name)
   season_data <- self$get_data_frame(season_data_name)
   vars <- c(season_by, start_day, end_day)
   col_names_exp <- c()
@@ -1615,25 +1616,20 @@ instat_object$set("public", "crops_definitions", function(data_name, year, stati
   season_data <- season_data %>% dplyr::select_(.dots = col_names_exp)
   df <- dplyr::left_join(df, season_data, by = join_by)
   
+  # Plant day condition
   df$plant_day_cond <- (df[[start_day]] <= df[[plant_day_name]])
-  df$length_cond <- (df[[plant_day_name]] + df[[plant_length_name]] <= df[[end_day]])
-
-  calculated_from <- as.list(by)
-  names(calculated_from) <- rep(data_name, length(by))
-  calculated_from <- as.list(calculated_from)
-  by_calc <- instat_calculation$new(type = "by", calculated_from = calculated_from)
   
-  calculated_from <- list(rain)
-  names(calculated_from) <- data_name
-  rain_total_calculation <- instat_calculation$new(type = "summary", result_name = "rain_total_actual",
-                                                   function_exp = paste0("summary_sum(x = ", rain, ", na.rm = TRUE)"),
-                                                   calculated_from = calculated_from, save = 0, 
-                                                   manipulations = list(by_calc))
-  rain_total_output <- self$run_instat_calculation(rain_total_calculation)
-  df <- dplyr::left_join(df, rain_total_output, by = by)
+  # Plant length condition
+  df$length_cond <- (df[[plant_day_name]] + df[[plant_length_name]] <= df[[end_day]])
+  
+  # Rain total condition
+  df[["rain_total_actual"]] <- sapply(1:nrow(df), 
+                                      function(x) sum(daily_data[[rain]][daily_data[[year]] == df[[year]][x]][seq(df[[plant_day_name]][x], length = df[[plant_length_name]][x])], na.rm = TRUE))
   df$rain_cond <- (df[[rain_total_name]] <= df[["rain_total_actual"]])
   
-  df$overal_cond <- (df$plant_day_cond & df$length_cond & df$rain_cond)
+  # All three conditions met
+  df$overall_cond <- (df$plant_day_cond & df$length_cond & df$rain_cond)
+  
   crops_name <- "crop_def"
   crops_name <- next_default_item(prefix = crops_name, existing_names = self$get_data_names(), include_index = FALSE)
   data_tables <- list(df)
@@ -1646,9 +1642,9 @@ instat_object$set("public", "crops_definitions", function(data_name, year, stati
     calc_from <- list(plant_day_name, plant_length_name, rain_total_name)
     names(calc_from) <- rep(crops_name, 3)
     grouping <- instat_calculation$new(type = "by", calculated_from = calc_from)
-    prop_calc_from <- list("overal_cond")
+    prop_calc_from <- list("overall_cond")
     names(prop_calc_from) <- crops_name
-    propor_table <- instat_calculation$new(function_exp="length(x = overal_cond[overal_cond == TRUE])/length(x = overal_cond)",
+    propor_table <- instat_calculation$new(function_exp="length(x = overall_cond[overall_cond == TRUE])/length(x = overall_cond)",
                                            save = 2, calculated_from = prop_calc_from,
                                            manipulations = list(grouping),
                                            type="summary", result_name = "prop_success", result_data_frame = "crop_prop")
