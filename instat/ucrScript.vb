@@ -148,7 +148,6 @@ Public Class ucrScript
                     txtScript.Text = Clipboard.GetText()
                 Else
                     txtScript.SelectionStart = txtScript.TextLength & Environment.NewLine
-                    txtScript.SelectionLength = 1
                     txtScript.AppendText(Clipboard.GetText)
                 End If
             End If
