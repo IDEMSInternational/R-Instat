@@ -15,13 +15,13 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports RDotNet
+
 Public Class dlgViewObjects
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsGetObjectsFunction As RFunction
     Private clsShowObjectStructureFunction As RFunction
-    Private clsShowObjectContentsFunction As RFunction
-    Private clsShowGraphFunction As RFunction
 
     Private Sub dlgViewObjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -51,17 +51,17 @@ Public Class dlgViewObjects
         ucrReceiverSelectedObject.SetMeAsReceiver()
         ucrReceiverSelectedObject.strSelectorHeading = "Objects"
         ucrReceiverSelectedObject.SetItemType("object")
-        ucrReceiverSelectedObject.bAutoFill = True
+        'ucrReceiverSelectedObject.bAutoFill = True
 
-        'ucrPnlContentsToView.bAllowNonConditionValues = True ' temporary
+        ucrPnlContentsToView.bAllowNonConditionValues = True
         'add radio buttons to the panel rdo's
+        ucrPnlContentsToView.AddRadioButton(rdoPrint)
         ucrPnlContentsToView.AddRadioButton(rdoStructure)
         ucrPnlContentsToView.AddRadioButton(rdoAllContents)
-        'ucrPnlContentsToView.AddRadioButton(rdoComponent)
-        ucrPnlContentsToView.AddRadioButton(rdoViewGraph)
+        ucrPnlContentsToView.AddRadioButton(rdoComponent)
 
         'we are disabling this for now until they're working correctly.
-        'rdoAllContents.Enabled = False
+        rdoAllContents.Enabled = False
         rdoComponent.Enabled = False
     End Sub
 
@@ -69,13 +69,10 @@ Public Class dlgViewObjects
         'initialise the Rfunctions
         clsGetObjectsFunction = New RFunction
         clsShowObjectStructureFunction = New RFunction
-        clsShowObjectContentsFunction = New RFunction
-        clsShowGraphFunction = New RFunction
 
         'reset controls to default states
         ucrSelectorForViewObject.Reset()
-        rdoStructure.Checked = True
-        SetICallType()
+        rdoPrint.Checked = True
 
         'set R function for getting objects
         clsGetObjectsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
@@ -84,22 +81,13 @@ Public Class dlgViewObjects
         clsShowObjectStructureFunction.SetRCommand("str")
         clsShowObjectStructureFunction.AddParameter(New RParameter("object", clsGetObjectsFunction, iNewPosition:=0))
 
-        'set R function for showing selected object contents
-        clsShowObjectContentsFunction.SetRCommand("show")
-        clsShowObjectContentsFunction.AddParameter(New RParameter("object", clsGetObjectsFunction, iNewPosition:=0))
-
-        'set R function for showing graph
-        clsShowGraphFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
-        clsShowGraphFunction.AddParameter("print_graph", "TRUE")
-
         'set the base function
-        ucrBase.clsRsyntax.SetBaseRFunction(clsShowObjectStructureFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsGetObjectsFunction)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
         ucrSelectorForViewObject.SetRCode(clsGetObjectsFunction, bReset)
         ucrReceiverSelectedObject.SetRCode(clsGetObjectsFunction, bReset)
-        'ucrPnlContentsToView.SetRCode(clsShowObjectStructureFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -118,7 +106,7 @@ Public Class dlgViewObjects
     End Sub
 
     Private Sub SetICallType()
-        If rdoViewGraph.Checked Then
+        If Not rdoStructure.Checked AndAlso IsSelectedObjectGraph() Then
             ucrBase.clsRsyntax.iCallType = 3
         Else
             ucrBase.clsRsyntax.iCallType = 2
@@ -127,31 +115,43 @@ Public Class dlgViewObjects
 
     Private Sub ucrPnlContentsToReview_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlContentsToView.ControlContentsChanged
         'set the appropriate Base RFunction
-        If rdoStructure.Checked Then
+        If rdoPrint.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsGetObjectsFunction)
+        ElseIf rdoStructure.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsShowObjectStructureFunction)
-        ElseIf rdoAllContents.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsShowObjectContentsFunction)
-        ElseIf rdoViewGraph.Checked Then
-            SetGraphParameters()
-            ucrBase.clsRsyntax.SetBaseRFunction(clsShowGraphFunction)
         End If
         SetICallType()
     End Sub
 
     Private Sub ucrReceiverSelectedObject_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedObject.ControlContentsChanged
         TestOKEnabled()
-        SetGraphParameters()
+        SetICallType()
     End Sub
 
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        SetGraphParameters()
-    End Sub
+    Private Function IsSelectedObjectGraph() As Boolean
+        Dim bGraph As Boolean = False
+        Dim clsGetGraphNames As RFunction
+        Dim expItems As SymbolicExpression
+        Dim strArr As String()
 
-    'This is being called in several place because we don't have a BeforeToScripts Click event
-    Private Sub SetGraphParameters()
-        If rdoViewGraph.Checked Then
-            clsShowGraphFunction.AddParameter(strParameterName:="data_name", strParameterValue:=Chr(34) & ucrSelectorForViewObject.strCurrentDataFrame & Chr(34), iPosition:=0)
-            clsShowGraphFunction.AddParameter(strParameterName:="graph_name", strParameterValue:=ucrReceiverSelectedObject.GetVariableNames(bWithQuotes:=True), iPosition:=1)
+        clsGetGraphNames = New RFunction
+        clsGetGraphNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graph_names")
+        clsGetGraphNames.AddParameter(strParameterName:="data_name", strParameterValue:=Chr(34) & ucrSelectorForViewObject.strCurrentDataFrame & Chr(34), iPosition:=0)
+
+        expItems = frmMain.clsRLink.RunInternalScriptGetValue(clsGetGraphNames.ToScript(), bSilent:=True)
+
+        If expItems IsNot Nothing AndAlso Not (expItems.Type = Internals.SymbolicExpressionType.Null) Then
+            strArr = expItems.AsCharacter.ToArray
+            If strArr IsNot Nothing AndAlso strArr.Length > 0 Then
+                If strArr(0) = ucrReceiverSelectedObject.GetVariableNames(bWithQuotes:=False) Then
+                    bGraph = True
+                End If
+            Else
+                bGraph = False
+            End If
         End If
-    End Sub
+
+        Return bGraph
+    End Function
+
 End Class
