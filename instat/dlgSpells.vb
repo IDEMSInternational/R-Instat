@@ -20,11 +20,12 @@ Public Class dlgSpells
     Private bReset As Boolean = True
     Private clsAddKey, clsSpellLength, clsMaxValueManipulation, clsSubSpellLength1 As New RFunction
     Private clsMaxValue, clsMaxValueList, clsMaxValueFunction As New RFunction
-    Private clsDayFromAndTo, clsGroupBy, clsAddKeyColName As New RFunction
+    Private clsDayFromAndTo, clsGroupBy, clsAddKeyColName, clsDayFilterCalcFromConvert, clsDayFilterCalcFromList As New RFunction
     Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator As New ROperator
     Private clsApplyInstatFunction, clsRRainday, clsRRaindayMatch As New RFunction
     Private clsRRaindayOperator, clsRRaindayAndOperator, clsRRaindayLowerOperator, clsRRaindayUpperOperator, clsAdditionalConditionReplaceOperator, clsAdditionalConditionReplaceOperator2, clsGreaterThanOperator, clsLessThanOperator As New ROperator
     Private clsAdditionalCondition, clsAdditionalConditionList, clsSubSpellLength2, clsAdditionalConditionReplaceFunction As New RFunction
+
     Private strCurrDataName As String = ""
 
     Private Sub dlgSpells_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -87,12 +88,6 @@ Public Class dlgSpells
         clsSubSpellLength1.SetRCommand("list")
         clsMaxValueList.SetRCommand("list")
 
-        ucrNudFrom.SetParameter(New RParameter("from", 1))
-        ucrNudFrom.SetMinMax(1, 365)
-
-        ucrNudTo.SetParameter(New RParameter("to", 1))
-        ucrNudTo.SetMinMax(2, 366)
-
         ucrInputSpellLower.SetParameter(New RParameter("min", 1))
         ucrInputSpellLower.SetValidationTypeAsNumeric()
         ucrInputSpellLower.AddQuotesIfUnrecognised = False
@@ -153,6 +148,12 @@ Public Class dlgSpells
         clsAddKey.AddParameter("col_names", clsRFunctionParameter:=clsAddKeyColName)
         clsAddKeyColName.SetRCommand("c")
 
+        clsDayFilterCalcFromConvert = New RFunction
+        clsDayFilterCalcFromConvert.SetRCommand("calc_from_convert")
+        clsDayFilterCalcFromList = New RFunction
+        clsDayFilterCalcFromList.SetRCommand("list")
+        clsDayFilterCalcFromConvert.AddParameter("x", clsRFunctionParameter:=clsDayFilterCalcFromList, iPosition:=0)
+
         'DayFromandTo
         clsDayFromAndToOperator.bToScriptAsRString = True
         clsDayFromAndTo.SetRCommand("instat_calculation$new")
@@ -166,6 +167,7 @@ Public Class dlgSpells
         clsDayToOperator.SetOperation("<=")
         clsDayToOperator.AddParameter("to", 366)
         clsDayFromAndTo.SetAssignTo("day_from_and_to")
+        clsDayFromAndTo.AddParameter("calculated_from", clsRFunctionParameter:=clsDayFilterCalcFromConvert, iPosition:=2)
 
         ' group
         clsGroupBy.SetRCommand("instat_calculation$new")
@@ -213,7 +215,6 @@ Public Class dlgSpells
         clsAdditionalCondition.SetAssignTo("additional_condition")
         clsAdditionalConditionReplaceFunction.SetRCommand("replace")
         clsAdditionalConditionReplaceFunction.AddParameter("x", strRainDay, iPosition:=0)
-        clsAdditionalConditionReplaceFunction.AddParameter("list", ucrNudFrom.Value - 1, iPosition:=1)
         clsAdditionalConditionReplaceFunction.AddParameter("values", "0", iPosition:=2)
         clsAdditionalConditionList.SetRCommand("list")
         clsAdditionalConditionList.AddParameter("sub1", clsRFunctionParameter:=clsRRainday)
@@ -244,7 +245,6 @@ Public Class dlgSpells
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrNudFrom.AddAdditionalCodeParameterPair(clsAdditionalConditionReplaceOperator2, New RParameter("list", 0), iAdditionalPairNo:=1)
         ucrReceiverDOY.AddAdditionalCodeParameterPair(clsDayFromOperator, New RParameter("doy", 0), iAdditionalPairNo:=1)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsRRaindayLowerOperator, New RParameter("rain", 0), iAdditionalPairNo:=1)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsGreaterThanOperator, New RParameter("rain", 0), iAdditionalPairNo:=2)
@@ -258,9 +258,6 @@ Public Class dlgSpells
         ucrReceiverDate.SetRCode(clsAddKeyColName, bReset)
 
         ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
-        ucrNudFrom.SetRCode(clsDayFromOperator, bReset)
-        ucrNudTo.SetRCode(clsDayToOperator, bReset)
-
         ucrReceiverElement.SetRCode(clsRRaindayUpperOperator, bReset)
         ucrInputSpellLower.SetRCode(clsRRaindayLowerOperator, bReset)
         ucrInputSpellUpper.SetRCode(clsRRaindayUpperOperator, bReset)
@@ -268,8 +265,13 @@ Public Class dlgSpells
         '        ucrChkConditional.SetRCode(clsSubSpellLength1, bReset)
     End Sub
 
+    Private Sub cmdDoyRange_Click(sender As Object, e As EventArgs) Handles cmdDoyRange.Click
+        sdgDoyRange.Setup(clsNewDoyFilterCalc:=clsDayFromAndTo, clsNewDayFromOperator:=clsDayFromOperator, clsNewDayToOperator:=clsDayToOperator, clsNewCalcFromList:=clsDayFilterCalcFromList, strNewMainDataFrame:=ucrSelectorForSpells.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strNewDoyColumn:=ucrReceiverDOY.GetVariableNames(False))
+        sdgDoyRange.ShowDialog()
+    End Sub
+
     Private Sub TestOKEnabled()
-        If Not ucrReceiverElement.IsEmpty AndAlso Not ucrInputNewColumnName.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso ucrInputSpellLower.Text <> "" AndAlso ucrNudFrom.GetText <> "" AndAlso ucrNudTo.GetText <> "" AndAlso ((ucrInputCondition.GetText = "Between" AndAlso ucrInputSpellUpper.Text <> "") OrElse ucrInputCondition.GetText <> "Between") Then
+        If Not ucrReceiverElement.IsEmpty AndAlso Not ucrInputNewColumnName.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso ucrInputSpellLower.Text <> "" AndAlso ((ucrInputCondition.GetText = "Between" AndAlso ucrInputSpellUpper.Text <> "") OrElse ucrInputCondition.GetText <> "Between") Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -317,10 +319,6 @@ Public Class dlgSpells
         End Select
     End Sub
 
-    Private Sub DayBoundaries()
-        clsDayFromAndTo.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")")
-    End Sub
-
     Private Sub RainDays()
         clsRRainday.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames() & ")", iPosition:=0)
     End Sub
@@ -330,6 +328,14 @@ Public Class dlgSpells
             clsGroupBy.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & "," & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames & ")")
         Else
             clsGroupBy.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & ")")
+        End If
+    End Sub
+
+    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDOY.ControlValueChanged, ucrSelectorForSpells.ControlValueChanged
+        If Not ucrReceiverDOY.IsEmpty Then
+            clsDayFilterCalcFromList.AddParameter(ucrSelectorForSpells.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strParameterValue:=ucrReceiverDOY.GetVariableNames(), iPosition:=0)
+        Else
+            clsDayFilterCalcFromList.RemoveParameterByName(ucrSelectorForSpells.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         End If
     End Sub
 
@@ -344,7 +350,6 @@ Public Class dlgSpells
 
     Private Sub ucrSelectorForSpells_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrSelectorForSpells.ControlContentsChanged
         strCurrDataName = Chr(34) & ucrSelectorForSpells.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
-        DayBoundaries()
         RainDays()
         GroupByOptions()
     End Sub
@@ -357,15 +362,11 @@ Public Class dlgSpells
         RainDays()
     End Sub
 
-    Private Sub ucrReceiverDOY_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDOY.ControlValueChanged
-        DayBoundaries()
+    Private Sub ucrSelectorVariable_DataFrameChanged() Handles ucrSelectorForSpells.DataFrameChanged
+        clsDayFilterCalcFromList.ClearParameters()
     End Sub
 
-    Private Sub ucrNudFrom_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudFrom.ControlValueChanged
-        clsAdditionalConditionReplaceFunction.AddParameter("list", ucrNudFrom.Value - 1, iPosition:=1)
-    End Sub
-
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrInputNewColumnName.ControlContentsChanged, ucrInputCondition.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrNudTo.ControlContentsChanged, ucrInputSpellLower.ControlContentsChanged, ucrInputSpellUpper.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrInputNewColumnName.ControlContentsChanged, ucrInputCondition.ControlContentsChanged, ucrInputSpellLower.ControlContentsChanged, ucrInputSpellUpper.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
