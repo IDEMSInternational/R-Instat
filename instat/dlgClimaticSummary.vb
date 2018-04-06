@@ -280,7 +280,7 @@ Public Class dlgClimaticSummary
         End If
     End Sub
 
-    Private Sub ucrPnlAnnualWithin_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlAnnualWithin.ControlValueChanged
+    Private Sub ucrPnlAnnualWithin_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlAnnualWithin.ControlValueChanged, ucrReceiverWithinYear.ControlValueChanged
         ReceiverFocus()
         If rdoWithinYear.Checked Then
             clsDefaultFactors.AddParameter("within_variable", ucrReceiverWithinYear.GetVariableNames, bIncludeArgumentName:=False, iPosition:=2)
