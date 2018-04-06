@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgExtremesClimatic
     Private bFirstload As Boolean = True
@@ -29,6 +30,21 @@ Public Class dlgExtremesClimatic
     ' Peak Options
     Private clsPeaksFilterOperator As New ROperator
     Private clsPeaksFilterFunction As New RFunction
+
+    'Carry column code
+    Private clsCombinationCalc As New RFunction
+    Private clsCombinationSubCalcs As New RFunction
+    Private clsCombinationManipulations As New RFunction
+    Private clsFirstDateSummary As New RFunction
+    Private clsFirstFunction As New RFunction
+    Private clsLastDateSummary As New RFunction
+    Private clsLastFunction As New RFunction
+    Private clsNSummary As New RFunction
+    Private clsNFunction As New RFunction
+    Private clsDateCarryCalcFromList As New RFunction
+    Private clsFilterExtremeCalc As New RFunction
+    Private clsFilterExtremeSubCalcs As New RFunction
+    Private clsFilterExtremeExp As New ROperator
 
     Private Sub dlgExtremesClimatic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -47,8 +63,6 @@ Public Class dlgExtremesClimatic
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 203
-        'disabling control for now.
-        ucrChkDayNumber.Enabled = False
 
         ucrReceiverYear.Selector = ucrSelectorClimaticExtremes
         ucrReceiverYear.SetClimaticType("year")
@@ -61,8 +75,11 @@ Public Class dlgExtremesClimatic
         ucrReceiverStation.strSelectorHeading = "Station Variables"
 
         '' What is Date used for in this?
+        ucrReceiverDate.SetParameter(New RParameter("x", 0))
         ucrReceiverDate.SetClimaticType("date")
         ucrReceiverDate.SetMeAsReceiver()
+        ucrReceiverDate.SetParameterIsString()
+        ucrReceiverDate.bWithQuotes = False
         ucrReceiverDate.Selector = ucrSelectorClimaticExtremes
         ucrReceiverDate.bAutoFill = True
         ucrReceiverDate.strSelectorHeading = "Date Variables"
@@ -86,7 +103,7 @@ Public Class dlgExtremesClimatic
         ucrPnlExtremesType.AddRadioButton(rdoMinMax)
         ucrPnlExtremesType.AddRadioButton(rdoPeaks)
         ucrPnlExtremesType.AddParameterValuesCondition(rdoPeaks, "type", Chr(34) & "filter" & Chr(34))
-        ucrPnlExtremesType.AddParameterValuesCondition(rdoMinMax, "type", Chr(34) & "summary" & Chr(34))
+        ucrPnlExtremesType.AddParameterValuesCondition(rdoMinMax, "type", {Chr(34) & "summary" & Chr(34), Chr(34) & "combination" & Chr(34)})
 
         ' Min/Max Option
         ucrPnlMaxMin.AddRadioButton(rdoMax)
@@ -94,7 +111,17 @@ Public Class dlgExtremesClimatic
         ucrPnlMaxMin.AddFunctionNamesCondition(rdoMax, "max")
         ucrPnlMaxMin.AddFunctionNamesCondition(rdoMin, "min")
 
-        ucrChkDayNumber.SetText("Include Day of Occurrence")
+        ucrChkFirstDate.SetText("Include First Date of Occurrence")
+        ucrChkFirstDate.AddParameterPresentCondition(True, "sub1", True)
+        ucrChkFirstDate.AddParameterPresentCondition(False, "sub1", False)
+
+        ucrChkNDates.SetText("Include N Occurances")
+        ucrChkNDates.AddParameterPresentCondition(True, "sub2", True)
+        ucrChkNDates.AddParameterPresentCondition(False, "sub2", False)
+
+        ucrChkLastDate.SetText("Include Last Date of Occurrence")
+        ucrChkLastDate.AddParameterPresentCondition(True, "sub3", True)
+        ucrChkLastDate.AddParameterPresentCondition(False, "sub3", False)
 
         ucrChkMissingValues.SetParameter(New RParameter("na.rm", 1))
         ucrChkMissingValues.SetText("Include Missing Values")
@@ -124,6 +151,10 @@ Public Class dlgExtremesClimatic
         ucrPnlExtremesType.AddToLinkedControls(ucrInputThresholdValue, {rdoPeaks}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="60")
         ucrPnlExtremesType.AddToLinkedControls(ucrPnlMaxMin, {rdoMinMax}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlExtremesType.AddToLinkedControls(ucrChkMissingValues, {rdoMinMax}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlExtremesType.AddToLinkedControls(ucrChkFirstDate, {rdoMinMax}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlExtremesType.AddToLinkedControls(ucrChkLastDate, {rdoMinMax}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlExtremesType.AddToLinkedControls(ucrChkNDates, {rdoMinMax}, bNewLinkedHideIfParameterMissing:=True)
+
         ucrPnlMaxMin.SetLinkedDisplayControl(lblNewColName)
     End Sub
 
@@ -140,6 +171,20 @@ Public Class dlgExtremesClimatic
         clsMinMaxManipulationsFunction.Clear()
         clsPeaksFilterFunction.Clear()
         clsPeaksFilterOperator.Clear()
+
+        clsCombinationCalc.Clear()
+        clsCombinationSubCalcs.Clear()
+        clsCombinationManipulations.Clear()
+        clsFirstDateSummary.Clear()
+        clsFirstFunction.Clear()
+        clsLastDateSummary.Clear()
+        clsLastFunction.Clear()
+        clsNSummary.Clear()
+        clsNFunction.Clear()
+        clsDateCarryCalcFromList.Clear()
+        clsFilterExtremeCalc.Clear()
+        clsFilterExtremeSubCalcs.Clear()
+        clsFilterExtremeExp.Clear()
 
         ucrSelectorClimaticExtremes.Reset()
         SetCalculationValues()
@@ -164,7 +209,7 @@ Public Class dlgExtremesClimatic
         clsDayToOperator.AddParameter("to", 366, iPosition:=1)
         clsDayFromAndTo.AddParameter("calculated_from", clsRFunctionParameter:=clsDayFilterCalcFromConvert, iPosition:=2)
         clsDayFromAndTo.SetAssignTo("day_from_and_to")
-        ucrInputFilterPreview.SetName(clsDayFromAndToOperator.ToScript())
+        UpdateDayFilterPreview()
 
         ' For the Min/Max option:
         clsGroupByFunction.SetRCommand("instat_calculation$new")
@@ -200,6 +245,68 @@ Public Class dlgExtremesClimatic
         clsPeaksFilterFunction.AddParameter("save", 2, iPosition:=3)
         clsPeaksFilterFunction.SetAssignTo("peak_filter")
 
+        'Code for carry columns
+        clsCombinationCalc.SetRCommand("instat_calculation$new")
+        clsCombinationCalc.AddParameter("type", Chr(34) & "combination" & Chr(34), iPosition:=0)
+        clsCombinationCalc.AddParameter("sub_calculations", clsRFunctionParameter:=clsCombinationSubCalcs, iPosition:=1)
+        clsCombinationCalc.AddParameter("manipulations", clsRFunctionParameter:=clsCombinationManipulations, iPosition:=2)
+        clsCombinationCalc.SetAssignTo("overall_calc")
+
+        clsCombinationSubCalcs.SetRCommand("list")
+        clsCombinationSubCalcs.AddParameter("sub1", clsRFunctionParameter:=clsFirstDateSummary, iPosition:=0, bIncludeArgumentName:=False)
+        clsCombinationSubCalcs.AddParameter("sub2", clsRFunctionParameter:=clsNSummary, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsCombinationManipulations.SetRCommand("list")
+        clsCombinationManipulations.AddParameter("manip1", clsRFunctionParameter:=clsGroupByFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsCombinationManipulations.AddParameter("manip2", clsRFunctionParameter:=clsDayFromAndTo, iPosition:=1, bIncludeArgumentName:=False)
+        clsCombinationManipulations.AddParameter("manip3", clsRFunctionParameter:=clsFilterExtremeCalc, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsDateCarryCalcFromList.SetRCommand("list")
+
+        clsFirstDateSummary.SetRCommand("instat_calculation$new")
+        clsFirstDateSummary.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
+        clsFirstDateSummary.AddParameter("function_exp", clsRFunctionParameter:=clsFirstFunction, iPosition:=1)
+        clsFirstDateSummary.AddParameter("calculated_from", clsRFunctionParameter:=clsDateCarryCalcFromList, iPosition:=2)
+        clsFirstDateSummary.AddParameter("save", "2", iPosition:=4)
+        clsFirstDateSummary.SetAssignTo("first_date_summary")
+
+        clsFirstFunction.SetPackageName("dplyr")
+        clsFirstFunction.SetRCommand("first")
+        clsFirstFunction.bToScriptAsRString = True
+
+        clsLastDateSummary.SetRCommand("instat_calculation$new")
+        clsLastDateSummary.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
+        clsLastDateSummary.AddParameter("function_exp", clsRFunctionParameter:=clsLastFunction, iPosition:=1)
+        clsLastDateSummary.AddParameter("calculated_from", clsRFunctionParameter:=clsDateCarryCalcFromList, iPosition:=2)
+        clsLastDateSummary.AddParameter("save", "2", iPosition:=4)
+        clsLastDateSummary.SetAssignTo("last_date_summary")
+
+        clsLastFunction.SetPackageName("dplyr")
+        clsLastFunction.SetRCommand("last")
+        clsLastFunction.bToScriptAsRString = True
+
+        clsNSummary.SetRCommand("instat_calculation$new")
+        clsNSummary.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
+        clsNSummary.AddParameter("function_exp", clsRFunctionParameter:=clsNFunction, iPosition:=1)
+        clsNSummary.AddParameter("calculated_from", clsRFunctionParameter:=clsDateCarryCalcFromList, iPosition:=2)
+        clsNSummary.AddParameter("save", "2", iPosition:=4)
+        clsNSummary.SetAssignTo("n_dates_summary")
+
+        clsNFunction.SetRCommand("summary_count")
+        clsNFunction.bToScriptAsRString = True
+
+        clsFilterExtremeCalc.SetRCommand("instat_calculation$new")
+        clsFilterExtremeCalc.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
+        clsFilterExtremeCalc.AddParameter("function_exp", clsROperatorParameter:=clsFilterExtremeExp, iPosition:=1)
+        clsFilterExtremeCalc.AddParameter("sub_calculations", clsRFunctionParameter:=clsFilterExtremeSubCalcs, iPosition:=2)
+        clsFilterExtremeCalc.SetAssignTo("filter_extreme_dates")
+
+        clsFilterExtremeSubCalcs.SetRCommand("list")
+        clsFilterExtremeSubCalcs.AddParameter("sub1", clsRFunctionParameter:=clsMinMaxSummariseFunction, bIncludeArgumentName:=False)
+
+        clsFilterExtremeExp.SetOperation("==")
+        clsFilterExtremeExp.bToScriptAsRString = True
+
         'Overall Calculation
         clsRunCalcFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         'This is a dummy function used to set the R code of the ucrPnlExtremesType
@@ -213,6 +320,9 @@ Public Class dlgExtremesClimatic
         ucrReceiverDOY.AddAdditionalCodeParameterPair(clsDayFromOperator, New RParameter("doy", 0), iAdditionalPairNo:=1)
         ucrInputSave.AddAdditionalCodeParameterPair(clsPeaksFilterFunction, New RParameter("result_data_frame"), iAdditionalPairNo:=1)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsPeaksFilterOperator, New RParameter("left"), iAdditionalPairNo:=1)
+        ucrReceiverElement.AddAdditionalCodeParameterPair(clsFilterExtremeExp, New RParameter("left", 0), iAdditionalPairNo:=2)
+        ucrReceiverDate.AddAdditionalCodeParameterPair(clsLastFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
+        ucrReceiverDate.AddAdditionalCodeParameterPair(clsNFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
 
         ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
 
@@ -225,6 +335,11 @@ Public Class dlgExtremesClimatic
 
         ucrInputSave.SetRCode(clsMinMaxSummariseFunction, bReset)
         ucrPnlExtremesType.SetRCode(clsCurrCalc, bReset)
+
+        ucrReceiverDate.SetRCode(clsFirstFunction, bReset)
+        ucrChkFirstDate.SetRCode(clsCombinationSubCalcs, bReset)
+        ucrChkNDates.SetRCode(clsCombinationSubCalcs, bReset)
+        ucrChkLastDate.SetRCode(clsCombinationSubCalcs, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -255,13 +370,16 @@ Public Class dlgExtremesClimatic
 
     Private Sub SetCalculationValues()
         If rdoMinMax.Checked Then
-            clsCurrCalc = clsMinMaxSummariseFunction
-
             If rdoMin.Checked Then
                 clsMinMaxFuncExp.SetRCommand("min")
             ElseIf rdoMax.Checked Then
                 clsMinMaxFuncExp.SetRCommand("max")
             Else
+            End If
+            If ucrChkFirstDate.Checked OrElse ucrChkNDates.Checked OrElse ucrChkLastDate.Checked Then
+                clsCurrCalc = clsCombinationCalc
+            Else
+                clsCurrCalc = clsMinMaxSummariseFunction
             End If
         ElseIf rdoPeaks.Checked Then
             clsCurrCalc = clsPeaksFilterFunction
@@ -292,6 +410,7 @@ Public Class dlgExtremesClimatic
 
     Private Sub MinMaxFunction()
         clsMinMaxSummariseFunction.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames() & ")", iPosition:=2)
+        clsFilterExtremeCalc.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames() & ")", iPosition:=2)
     End Sub
 
     Private Sub PeaksFunction()
@@ -306,7 +425,7 @@ Public Class dlgExtremesClimatic
     Private Sub cmdDoyRange_Click(sender As Object, e As EventArgs) Handles cmdDoyRange.Click
         sdgDoyRange.Setup(clsNewDoyFilterCalc:=clsDayFromAndTo, clsNewDayFromOperator:=clsDayFromOperator, clsNewDayToOperator:=clsDayToOperator, clsNewCalcFromList:=clsDayFilterCalcFromList, strNewMainDataFrame:=ucrSelectorClimaticExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strNewDoyColumn:=ucrReceiverDOY.GetVariableNames(False))
         sdgDoyRange.ShowDialog()
-        ucrInputFilterPreview.SetName(clsDayFromAndToOperator.ToScript())
+        UpdateDayFilterPreview()
     End Sub
 
     Private Sub ucrSelectorClimaticExtremes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorClimaticExtremes.ControlValueChanged
@@ -314,6 +433,7 @@ Public Class dlgExtremesClimatic
         GroupByOptions()
         MinMaxFunction()
         PeaksFunction()
+        SetDateCalcFrom()
     End Sub
 
     Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlValueChanged
@@ -329,6 +449,7 @@ Public Class dlgExtremesClimatic
         Else
             clsDayFilterCalcFromList.RemoveParameterByName(ucrSelectorClimaticExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         End If
+        UpdateDayFilterPreview()
     End Sub
 
     Private Sub ucrReceiverYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlValueChanged
@@ -341,5 +462,64 @@ Public Class dlgExtremesClimatic
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrInputSave.ControlContentsChanged, ucrInputThresholdValue.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrSelectorClimaticExtremes_DataFrameChanged() Handles ucrSelectorClimaticExtremes.DataFrameChanged
+        clsDayFilterCalcFromList.ClearParameters()
+    End Sub
+
+    Private Sub UpdateDayFilterPreview()
+        If ucrReceiverDOY.IsEmpty Then
+            ucrInputFilterPreview.SetName("")
+        Else
+            ucrInputFilterPreview.SetName(clsDayFromAndToOperator.ToScript())
+        End If
+    End Sub
+
+    Private Sub ucrChkFirstDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFirstDate.ControlValueChanged
+        If ucrChkFirstDate.Checked Then
+            clsCombinationSubCalcs.AddParameter("sub1", clsRFunctionParameter:=clsFirstDateSummary, iPosition:=0, bIncludeArgumentName:=False)
+        Else
+            clsCombinationSubCalcs.RemoveParameterByName("sub1")
+        End If
+        SetCalculationValues()
+    End Sub
+
+    Private Sub ucrChkNDates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNDates.ControlValueChanged
+        If ucrChkNDates.Checked Then
+            clsCombinationSubCalcs.AddParameter("sub2", clsRFunctionParameter:=clsNSummary, iPosition:=1, bIncludeArgumentName:=False)
+        Else
+            clsCombinationSubCalcs.RemoveParameterByName("sub2")
+        End If
+        SetCalculationValues()
+    End Sub
+
+    Private Sub ucrChkLastDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLastDate.ControlValueChanged
+        If ucrChkLastDate.Checked Then
+            clsCombinationSubCalcs.AddParameter("sub3", clsRFunctionParameter:=clsLastDateSummary, iPosition:=2, bIncludeArgumentName:=False)
+        Else
+            clsCombinationSubCalcs.RemoveParameterByName("sub3")
+        End If
+        SetCalculationValues()
+    End Sub
+
+    Private Sub ucrReceiverDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlValueChanged
+        SetDateCalcFrom()
+    End Sub
+
+    Private Sub SetDateCalcFrom()
+        clsDateCarryCalcFromList.ClearParameters()
+        clsDateCarryCalcFromList.AddParameter(strCurrDataName, ucrReceiverDate.GetVariableNames(), iPosition:=0)
+    End Sub
+
+    Private Sub SetResultNameCarryColumns()
+        clsFirstDateSummary.AddParameter("result_name", Chr(34) & "Date_first_" & ucrInputSave.GetText() & Chr(34), iPosition:=3)
+        clsLastDateSummary.AddParameter("result_name", Chr(34) & "Date_last_" & ucrInputSave.GetText() & Chr(34), iPosition:=3)
+        clsNSummary.AddParameter("result_name", Chr(34) & "n_" & ucrInputSave.GetText() & Chr(34), iPosition:=3)
+    End Sub
+
+    Private Sub ucrInputSave_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSave.ControlValueChanged
+        SetResultNameCarryColumns()
+        clsFilterExtremeExp.AddParameter("right", ucrInputSave.GetText(), iPosition:=1)
     End Sub
 End Class
