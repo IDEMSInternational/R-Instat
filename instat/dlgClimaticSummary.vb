@@ -139,6 +139,8 @@ Public Class dlgClimaticSummary
         'ucrReceiverFrom.SetLinkedDisplayControl(lblReceiverFrom)
         'ucrReceiverTo.SetLinkedDisplayControl(lblReceiverTo)
         ucrReceiverWithinYear.SetLinkedDisplayControl(lblWithinYear)
+
+        ucrInputFilterPreview.IsReadOnly = True
     End Sub
 
     Private Sub SetDefaults()
@@ -262,6 +264,7 @@ Public Class dlgClimaticSummary
     Private Sub cmdDoyRange_Click(sender As Object, e As EventArgs) Handles cmdDoyRange.Click
         sdgDoyRange.Setup(clsNewDoyFilterCalc:=clsDayFilterCalc, clsNewDayFromOperator:=clsFromConditionOperator, clsNewDayToOperator:=clsToConditionOperator, clsNewCalcFromList:=clsDayFilterCalcFromList, strNewMainDataFrame:=ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strNewDoyColumn:=ucrReceiverDOY.GetVariableNames(False))
         sdgDoyRange.ShowDialog()
+        UpdateDayFilterPreview()
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDOY.ControlValueChanged, ucrSelectorVariable.ControlValueChanged
@@ -270,6 +273,7 @@ Public Class dlgClimaticSummary
         Else
             clsDayFilterCalcFromList.RemoveParameterByName(ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         End If
+        UpdateDayFilterPreview()
     End Sub
 
     Private Sub ucrPnlAnnualWithin_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlAnnualWithin.ControlValueChanged, ucrReceiverWithinYear.ControlValueChanged
@@ -295,5 +299,13 @@ Public Class dlgClimaticSummary
 
     Private Sub ucrSelectorVariable_DataFrameChanged() Handles ucrSelectorVariable.DataFrameChanged
         clsDayFilterCalcFromList.ClearParameters()
+    End Sub
+
+    Private Sub UpdateDayFilterPreview()
+        If ucrReceiverDOY.IsEmpty Then
+            ucrInputFilterPreview.SetName("")
+        Else
+            ucrInputFilterPreview.SetName(clsFromAndToConditionOperator.ToScript())
+        End If
     End Sub
 End Class
