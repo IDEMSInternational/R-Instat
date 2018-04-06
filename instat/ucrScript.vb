@@ -141,16 +141,7 @@ Public Class ucrScript
 
     Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
         If Clipboard.ContainsData(DataFormats.Text) Then
-            If txtScript.SelectionLength > 0 Then
-                txtScript.SelectedText = Clipboard.GetText()
-            Else
-                If txtScript.Text = "" Then
-                    txtScript.Text = Clipboard.GetText()
-                Else
-                    txtScript.SelectionStart = txtScript.TextLength & Environment.NewLine
-                    txtScript.AppendText(Clipboard.GetText)
-                End If
-            End If
+            txtScript.Paste()
         Else
             MessageBox.Show("You can only paste text data on the script window", "Paste to Script Window", MessageBoxButtons.OK)
         End If
