@@ -74,7 +74,7 @@ Public Class dlgViewObjects
         ucrSelectorForViewObject.Reset()
         rdoPrint.Checked = True
 
-        'set R function for getting objects
+        'set R function for getting and viewing objects
         clsGetObjectsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
 
         'set R function for showing selected object structure
@@ -91,11 +91,6 @@ Public Class dlgViewObjects
     End Sub
 
     Private Sub TestOKEnabled()
-        'If Not ucrReceiverSelectedObject.IsEmpty Then
-        '    ucrBase.OKEnabled(True)
-        'Else
-        '    ucrBase.OKEnabled(False)
-        'End If
         ucrBase.OKEnabled(Not ucrReceiverSelectedObject.IsEmpty)
     End Sub
 
@@ -120,6 +115,7 @@ Public Class dlgViewObjects
         ElseIf rdoStructure.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsShowObjectStructureFunction)
         End If
+        'set the iCallType
         SetICallType()
     End Sub
 
