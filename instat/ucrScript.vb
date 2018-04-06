@@ -24,6 +24,10 @@ Public Class ucrScript
         txtScript.Copy()
     End Sub
 
+    Public Sub CutText()
+        txtScript.Cut()
+    End Sub
+
     Public Sub SelectAllText()
         txtScript.SelectAll()
     End Sub
@@ -130,13 +134,11 @@ Public Class ucrScript
     End Sub
 
     Private Sub mnuCopy_Click(sender As Object, e As EventArgs) Handles mnuCopy.Click
-        Clipboard.SetText(txtScript.SelectedText)
+        CopyText()
     End Sub
 
     Private Sub mnuCut_Click(sender As Object, e As EventArgs) Handles mnuCut.Click
-        Clipboard.Clear()
-        Clipboard.SetText(txtScript.SelectedText)
-        txtScript.SelectedText = ""
+        CutText()
     End Sub
 
     Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
