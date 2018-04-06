@@ -43,23 +43,25 @@ Partial Class dlgExtremesClimatic
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lblDayOfYear = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
-        Me.cmdDoyRange = New System.Windows.Forms.Button()
-        Me.ucrInputThresholdValue = New instat.ucrInputTextBox()
-        Me.ucrInputThresholdOperator = New instat.ucrInputComboBox()
         Me.lblValues = New System.Windows.Forms.Label()
-        Me.ucrChkMissingValues = New instat.ucrCheck()
         Me.rdoMin = New System.Windows.Forms.RadioButton()
         Me.rdoMax = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlMaxMin = New instat.UcrPanel()
-        Me.ucrChkDayNumber = New instat.ucrCheck()
-        Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
+        Me.cmdDoyRange = New System.Windows.Forms.Button()
         Me.rdoMinMax = New System.Windows.Forms.RadioButton()
         Me.rdoPeaks = New System.Windows.Forms.RadioButton()
         Me.lblElement = New System.Windows.Forms.Label()
         Me.lblNewColName = New System.Windows.Forms.Label()
         Me.lblNewDFName = New System.Windows.Forms.Label()
+        Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
         Me.ucrInputSave = New instat.ucrInputTextBox()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
+        Me.ucrChkLastDate = New instat.ucrCheck()
+        Me.ucrChkNDates = New instat.ucrCheck()
+        Me.ucrInputThresholdValue = New instat.ucrInputTextBox()
+        Me.ucrInputThresholdOperator = New instat.ucrInputComboBox()
+        Me.ucrChkMissingValues = New instat.ucrCheck()
+        Me.ucrPnlMaxMin = New instat.UcrPanel()
+        Me.ucrChkFirstDate = New instat.ucrCheck()
         Me.ucrReceiverDOY = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
@@ -67,7 +69,6 @@ Partial Class dlgExtremesClimatic
         Me.ucrSelectorClimaticExtremes = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlExtremesType = New instat.UcrPanel()
-        Me.lblFilterPreview = New System.Windows.Forms.Label()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -109,7 +110,8 @@ Partial Class dlgExtremesClimatic
         '
         'grpOptions
         '
-        Me.grpOptions.Controls.Add(Me.cmdDoyRange)
+        Me.grpOptions.Controls.Add(Me.ucrChkLastDate)
+        Me.grpOptions.Controls.Add(Me.ucrChkNDates)
         Me.grpOptions.Controls.Add(Me.ucrInputThresholdValue)
         Me.grpOptions.Controls.Add(Me.ucrInputThresholdOperator)
         Me.grpOptions.Controls.Add(Me.lblValues)
@@ -117,65 +119,27 @@ Partial Class dlgExtremesClimatic
         Me.grpOptions.Controls.Add(Me.rdoMin)
         Me.grpOptions.Controls.Add(Me.rdoMax)
         Me.grpOptions.Controls.Add(Me.ucrPnlMaxMin)
-        Me.grpOptions.Controls.Add(Me.ucrChkDayNumber)
+        Me.grpOptions.Controls.Add(Me.ucrChkFirstDate)
         Me.grpOptions.Location = New System.Drawing.Point(10, 237)
         Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.Size = New System.Drawing.Size(210, 148)
+        Me.grpOptions.Size = New System.Drawing.Size(210, 173)
         Me.grpOptions.TabIndex = 14
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
         '
-        'cmdDoyRange
-        '
-        Me.cmdDoyRange.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDoyRange.Location = New System.Drawing.Point(10, 14)
-        Me.cmdDoyRange.Name = "cmdDoyRange"
-        Me.cmdDoyRange.Size = New System.Drawing.Size(105, 26)
-        Me.cmdDoyRange.TabIndex = 26
-        Me.cmdDoyRange.Tag = ""
-        Me.cmdDoyRange.Text = "Day Range"
-        Me.cmdDoyRange.UseVisualStyleBackColor = True
-        '
-        'ucrInputThresholdValue
-        '
-        Me.ucrInputThresholdValue.AddQuotesIfUnrecognised = True
-        Me.ucrInputThresholdValue.IsMultiline = False
-        Me.ucrInputThresholdValue.IsReadOnly = False
-        Me.ucrInputThresholdValue.Location = New System.Drawing.Point(116, 44)
-        Me.ucrInputThresholdValue.Name = "ucrInputThresholdValue"
-        Me.ucrInputThresholdValue.Size = New System.Drawing.Size(67, 21)
-        Me.ucrInputThresholdValue.TabIndex = 8
-        '
-        'ucrInputThresholdOperator
-        '
-        Me.ucrInputThresholdOperator.AddQuotesIfUnrecognised = True
-        Me.ucrInputThresholdOperator.IsReadOnly = False
-        Me.ucrInputThresholdOperator.Location = New System.Drawing.Point(46, 43)
-        Me.ucrInputThresholdOperator.Name = "ucrInputThresholdOperator"
-        Me.ucrInputThresholdOperator.Size = New System.Drawing.Size(68, 21)
-        Me.ucrInputThresholdOperator.TabIndex = 6
-        '
         'lblValues
         '
         Me.lblValues.AutoSize = True
-        Me.lblValues.Location = New System.Drawing.Point(7, 48)
+        Me.lblValues.Location = New System.Drawing.Point(7, 26)
         Me.lblValues.Name = "lblValues"
         Me.lblValues.Size = New System.Drawing.Size(37, 13)
         Me.lblValues.TabIndex = 5
         Me.lblValues.Text = "Value:"
         '
-        'ucrChkMissingValues
-        '
-        Me.ucrChkMissingValues.Checked = False
-        Me.ucrChkMissingValues.Location = New System.Drawing.Point(10, 121)
-        Me.ucrChkMissingValues.Name = "ucrChkMissingValues"
-        Me.ucrChkMissingValues.Size = New System.Drawing.Size(194, 20)
-        Me.ucrChkMissingValues.TabIndex = 11
-        '
         'rdoMin
         '
         Me.rdoMin.AutoSize = True
-        Me.rdoMin.Location = New System.Drawing.Point(10, 46)
+        Me.rdoMin.Location = New System.Drawing.Point(10, 24)
         Me.rdoMin.Name = "rdoMin"
         Me.rdoMin.Size = New System.Drawing.Size(101, 17)
         Me.rdoMin.TabIndex = 4
@@ -186,7 +150,7 @@ Partial Class dlgExtremesClimatic
         'rdoMax
         '
         Me.rdoMax.AutoSize = True
-        Me.rdoMax.Location = New System.Drawing.Point(10, 70)
+        Me.rdoMax.Location = New System.Drawing.Point(10, 48)
         Me.rdoMax.Name = "rdoMax"
         Me.rdoMax.Size = New System.Drawing.Size(104, 17)
         Me.rdoMax.TabIndex = 9
@@ -194,30 +158,16 @@ Partial Class dlgExtremesClimatic
         Me.rdoMax.Text = "Maximum Values"
         Me.rdoMax.UseVisualStyleBackColor = True
         '
-        'ucrPnlMaxMin
+        'cmdDoyRange
         '
-        Me.ucrPnlMaxMin.Location = New System.Drawing.Point(6, 40)
-        Me.ucrPnlMaxMin.Name = "ucrPnlMaxMin"
-        Me.ucrPnlMaxMin.Size = New System.Drawing.Size(131, 49)
-        Me.ucrPnlMaxMin.TabIndex = 7
-        '
-        'ucrChkDayNumber
-        '
-        Me.ucrChkDayNumber.Checked = False
-        Me.ucrChkDayNumber.Location = New System.Drawing.Point(10, 95)
-        Me.ucrChkDayNumber.Name = "ucrChkDayNumber"
-        Me.ucrChkDayNumber.Size = New System.Drawing.Size(173, 20)
-        Me.ucrChkDayNumber.TabIndex = 10
-        '
-        'ucrInputFilterPreview
-        '
-        Me.ucrInputFilterPreview.AddQuotesIfUnrecognised = True
-        Me.ucrInputFilterPreview.IsMultiline = False
-        Me.ucrInputFilterPreview.IsReadOnly = True
-        Me.ucrInputFilterPreview.Location = New System.Drawing.Point(88, 392)
-        Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
-        Me.ucrInputFilterPreview.Size = New System.Drawing.Size(314, 22)
-        Me.ucrInputFilterPreview.TabIndex = 16
+        Me.cmdDoyRange.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdDoyRange.Location = New System.Drawing.Point(13, 428)
+        Me.cmdDoyRange.Name = "cmdDoyRange"
+        Me.cmdDoyRange.Size = New System.Drawing.Size(105, 26)
+        Me.cmdDoyRange.TabIndex = 26
+        Me.cmdDoyRange.Tag = ""
+        Me.cmdDoyRange.Text = "Day Range"
+        Me.cmdDoyRange.UseVisualStyleBackColor = True
         '
         'rdoMinMax
         '
@@ -262,7 +212,7 @@ Partial Class dlgExtremesClimatic
         '
         'lblNewColName
         '
-        Me.lblNewColName.Location = New System.Drawing.Point(8, 428)
+        Me.lblNewColName.Location = New System.Drawing.Point(16, 468)
         Me.lblNewColName.Name = "lblNewColName"
         Me.lblNewColName.Size = New System.Drawing.Size(119, 13)
         Me.lblNewColName.TabIndex = 17
@@ -271,18 +221,28 @@ Partial Class dlgExtremesClimatic
         'lblNewDFName
         '
         Me.lblNewDFName.AutoSize = True
-        Me.lblNewDFName.Location = New System.Drawing.Point(10, 428)
+        Me.lblNewDFName.Location = New System.Drawing.Point(18, 468)
         Me.lblNewDFName.Name = "lblNewDFName"
         Me.lblNewDFName.Size = New System.Drawing.Size(121, 13)
         Me.lblNewDFName.TabIndex = 1
         Me.lblNewDFName.Text = "New Data Frame Name:"
+        '
+        'ucrInputFilterPreview
+        '
+        Me.ucrInputFilterPreview.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilterPreview.IsMultiline = False
+        Me.ucrInputFilterPreview.IsReadOnly = True
+        Me.ucrInputFilterPreview.Location = New System.Drawing.Point(130, 431)
+        Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
+        Me.ucrInputFilterPreview.Size = New System.Drawing.Size(242, 22)
+        Me.ucrInputFilterPreview.TabIndex = 16
         '
         'ucrInputSave
         '
         Me.ucrInputSave.AddQuotesIfUnrecognised = True
         Me.ucrInputSave.IsMultiline = False
         Me.ucrInputSave.IsReadOnly = False
-        Me.ucrInputSave.Location = New System.Drawing.Point(132, 427)
+        Me.ucrInputSave.Location = New System.Drawing.Point(140, 467)
         Me.ucrInputSave.Name = "ucrInputSave"
         Me.ucrInputSave.Size = New System.Drawing.Size(170, 21)
         Me.ucrInputSave.TabIndex = 18
@@ -298,6 +258,64 @@ Partial Class dlgExtremesClimatic
         Me.ucrReceiverElement.strNcFilePath = ""
         Me.ucrReceiverElement.TabIndex = 13
         Me.ucrReceiverElement.ucrSelector = Nothing
+        '
+        'ucrChkLastDate
+        '
+        Me.ucrChkLastDate.Checked = False
+        Me.ucrChkLastDate.Location = New System.Drawing.Point(9, 121)
+        Me.ucrChkLastDate.Name = "ucrChkLastDate"
+        Me.ucrChkLastDate.Size = New System.Drawing.Size(195, 20)
+        Me.ucrChkLastDate.TabIndex = 13
+        '
+        'ucrChkNDates
+        '
+        Me.ucrChkNDates.Checked = False
+        Me.ucrChkNDates.Location = New System.Drawing.Point(10, 97)
+        Me.ucrChkNDates.Name = "ucrChkNDates"
+        Me.ucrChkNDates.Size = New System.Drawing.Size(194, 20)
+        Me.ucrChkNDates.TabIndex = 12
+        '
+        'ucrInputThresholdValue
+        '
+        Me.ucrInputThresholdValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputThresholdValue.IsMultiline = False
+        Me.ucrInputThresholdValue.IsReadOnly = False
+        Me.ucrInputThresholdValue.Location = New System.Drawing.Point(116, 22)
+        Me.ucrInputThresholdValue.Name = "ucrInputThresholdValue"
+        Me.ucrInputThresholdValue.Size = New System.Drawing.Size(67, 21)
+        Me.ucrInputThresholdValue.TabIndex = 8
+        '
+        'ucrInputThresholdOperator
+        '
+        Me.ucrInputThresholdOperator.AddQuotesIfUnrecognised = True
+        Me.ucrInputThresholdOperator.IsReadOnly = False
+        Me.ucrInputThresholdOperator.Location = New System.Drawing.Point(46, 21)
+        Me.ucrInputThresholdOperator.Name = "ucrInputThresholdOperator"
+        Me.ucrInputThresholdOperator.Size = New System.Drawing.Size(68, 21)
+        Me.ucrInputThresholdOperator.TabIndex = 6
+        '
+        'ucrChkMissingValues
+        '
+        Me.ucrChkMissingValues.Checked = False
+        Me.ucrChkMissingValues.Location = New System.Drawing.Point(10, 147)
+        Me.ucrChkMissingValues.Name = "ucrChkMissingValues"
+        Me.ucrChkMissingValues.Size = New System.Drawing.Size(194, 20)
+        Me.ucrChkMissingValues.TabIndex = 11
+        '
+        'ucrPnlMaxMin
+        '
+        Me.ucrPnlMaxMin.Location = New System.Drawing.Point(6, 18)
+        Me.ucrPnlMaxMin.Name = "ucrPnlMaxMin"
+        Me.ucrPnlMaxMin.Size = New System.Drawing.Size(131, 49)
+        Me.ucrPnlMaxMin.TabIndex = 7
+        '
+        'ucrChkFirstDate
+        '
+        Me.ucrChkFirstDate.Checked = False
+        Me.ucrChkFirstDate.Location = New System.Drawing.Point(10, 73)
+        Me.ucrChkFirstDate.Name = "ucrChkFirstDate"
+        Me.ucrChkFirstDate.Size = New System.Drawing.Size(194, 20)
+        Me.ucrChkFirstDate.TabIndex = 10
         '
         'ucrReceiverDOY
         '
@@ -359,7 +377,7 @@ Partial Class dlgExtremesClimatic
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(4, 449)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 503)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(398, 52)
         Me.ucrBase.TabIndex = 19
@@ -371,20 +389,12 @@ Partial Class dlgExtremesClimatic
         Me.ucrPnlExtremesType.Size = New System.Drawing.Size(218, 37)
         Me.ucrPnlExtremesType.TabIndex = 0
         '
-        'lblFilterPreview
-        '
-        Me.lblFilterPreview.Location = New System.Drawing.Point(9, 392)
-        Me.lblFilterPreview.Name = "lblFilterPreview"
-        Me.lblFilterPreview.Size = New System.Drawing.Size(76, 22)
-        Me.lblFilterPreview.TabIndex = 15
-        Me.lblFilterPreview.Text = "Filter Preview:"
-        '
         'dlgExtremesClimatic
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(414, 502)
-        Me.Controls.Add(Me.lblFilterPreview)
+        Me.ClientSize = New System.Drawing.Size(414, 556)
+        Me.Controls.Add(Me.cmdDoyRange)
         Me.Controls.Add(Me.ucrInputFilterPreview)
         Me.Controls.Add(Me.lblNewColName)
         Me.Controls.Add(Me.ucrInputSave)
@@ -432,7 +442,7 @@ Partial Class dlgExtremesClimatic
     Friend WithEvents ucrPnlExtremesType As UcrPanel
     Friend WithEvents rdoPeaks As RadioButton
     Friend WithEvents rdoMinMax As RadioButton
-    Friend WithEvents ucrChkDayNumber As ucrCheck
+    Friend WithEvents ucrChkFirstDate As ucrCheck
     Friend WithEvents lblElement As Label
     Friend WithEvents ucrReceiverElement As ucrReceiverSingle
     Friend WithEvents ucrInputSave As ucrInputTextBox
@@ -447,5 +457,6 @@ Partial Class dlgExtremesClimatic
     Friend WithEvents lblNewDFName As Label
     Friend WithEvents cmdDoyRange As Button
     Friend WithEvents ucrInputFilterPreview As ucrInputTextBox
-    Friend WithEvents lblFilterPreview As Label
+    Friend WithEvents ucrChkLastDate As ucrCheck
+    Friend WithEvents ucrChkNDates As ucrCheck
 End Class
