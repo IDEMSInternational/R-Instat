@@ -195,7 +195,7 @@ Public Class dlgPICSACrops
         clsCropsFunction.AddParameter("definition_props", "TRUE", iPosition:=11)
         clsCropsFunction.AddParameter("print_table", "TRUE", iPosition:=12)
         ucrBase.clsRsyntax.SetBaseRFunction(clsCropsFunction)
-
+        ucrBase.clsRsyntax.iCallType = 2
         TestOkEnabled()
     End Sub
 
