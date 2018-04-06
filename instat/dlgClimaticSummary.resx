@@ -331,16 +331,16 @@
     <value>True</value>
   </data>
   <data name="lblElement.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 150</value>
+    <value>260, 150</value>
   </data>
   <data name="lblElement.Size" type="System.Drawing.Size, System.Drawing">
-    <value>33, 13</value>
+    <value>48, 13</value>
   </data>
   <data name="lblElement.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
   <data name="lblElement.Text" xml:space="preserve">
-    <value>Data:</value>
+    <value>Element:</value>
   </data>
   <data name="&gt;&gt;lblElement.Name" xml:space="preserve">
     <value>lblElement</value>
@@ -465,15 +465,6 @@
   <data name="&gt;&gt;cmdDoyRange.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="ucrChkOmitMissingValues.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 93</value>
-  </data>
-  <data name="ucrChkOmitMissingValues.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 20</value>
-  </data>
-  <data name="ucrChkOmitMissingValues.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
   <data name="&gt;&gt;ucrChkOmitMissingValues.Name" xml:space="preserve">
     <value>ucrChkOmitMissingValues</value>
   </data>
@@ -484,15 +475,6 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrChkOmitMissingValues.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrChkStoreResults.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 17</value>
-  </data>
-  <data name="ucrChkStoreResults.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 20</value>
-  </data>
-  <data name="ucrChkStoreResults.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="&gt;&gt;ucrChkStoreResults.Name" xml:space="preserve">
@@ -507,15 +489,6 @@
   <data name="&gt;&gt;ucrChkStoreResults.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="ucrChkPrintOutput.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 42</value>
-  </data>
-  <data name="ucrChkPrintOutput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 20</value>
-  </data>
-  <data name="ucrChkPrintOutput.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
   <data name="&gt;&gt;ucrChkPrintOutput.Name" xml:space="preserve">
     <value>ucrChkPrintOutput</value>
   </data>
@@ -526,15 +499,6 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrChkPrintOutput.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="ucrChkDropUnusedLevels.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 67</value>
-  </data>
-  <data name="ucrChkDropUnusedLevels.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 20</value>
-  </data>
-  <data name="ucrChkDropUnusedLevels.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="&gt;&gt;ucrChkDropUnusedLevels.Name" xml:space="preserve">
@@ -574,7 +538,7 @@
     <value>1</value>
   </data>
   <data name="ucrReceiverElement.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 165</value>
+    <value>259, 166</value>
   </data>
   <data name="ucrReceiverElement.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -598,7 +562,7 @@
     <value>11</value>
   </data>
   <data name="ucrReceiverDOY.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 247</value>
+    <value>259, 248</value>
   </data>
   <data name="ucrReceiverDOY.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -622,7 +586,7 @@
     <value>12</value>
   </data>
   <data name="ucrReceiverYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 206</value>
+    <value>259, 207</value>
   </data>
   <data name="ucrReceiverYear.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -769,6 +733,90 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverWithinYear.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrChkOmitMissingValues.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 93</value>
+  </data>
+  <data name="ucrChkOmitMissingValues.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 20</value>
+  </data>
+  <data name="ucrChkOmitMissingValues.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOmitMissingValues.Name" xml:space="preserve">
+    <value>ucrChkOmitMissingValues</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOmitMissingValues.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOmitMissingValues.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOmitMissingValues.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrChkStoreResults.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 17</value>
+  </data>
+  <data name="ucrChkStoreResults.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 20</value>
+  </data>
+  <data name="ucrChkStoreResults.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkStoreResults.Name" xml:space="preserve">
+    <value>ucrChkStoreResults</value>
+  </data>
+  <data name="&gt;&gt;ucrChkStoreResults.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkStoreResults.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkStoreResults.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrChkPrintOutput.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 42</value>
+  </data>
+  <data name="ucrChkPrintOutput.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 20</value>
+  </data>
+  <data name="ucrChkPrintOutput.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPrintOutput.Name" xml:space="preserve">
+    <value>ucrChkPrintOutput</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPrintOutput.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPrintOutput.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPrintOutput.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrChkDropUnusedLevels.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 67</value>
+  </data>
+  <data name="ucrChkDropUnusedLevels.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 20</value>
+  </data>
+  <data name="ucrChkDropUnusedLevels.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDropUnusedLevels.Name" xml:space="preserve">
+    <value>ucrChkDropUnusedLevels</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDropUnusedLevels.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDropUnusedLevels.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDropUnusedLevels.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
 </root>
