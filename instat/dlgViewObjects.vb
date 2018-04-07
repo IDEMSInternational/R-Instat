@@ -51,14 +51,16 @@ Public Class dlgViewObjects
         ucrReceiverSelectedObject.SetMeAsReceiver()
         ucrReceiverSelectedObject.strSelectorHeading = "Objects"
         ucrReceiverSelectedObject.SetItemType("object")
-        'ucrReceiverSelectedObject.bAutoFill = True
+        ucrReceiverSelectedObject.bAutoFill = True
 
-        ucrPnlContentsToView.bAllowNonConditionValues = True
         'add radio buttons to the panel rdo's
         ucrPnlContentsToView.AddRadioButton(rdoPrint)
         ucrPnlContentsToView.AddRadioButton(rdoStructure)
-        ucrPnlContentsToView.AddRadioButton(rdoAllContents)
-        ucrPnlContentsToView.AddRadioButton(rdoComponent)
+        'ucrPnlContentsToView.AddRadioButton(rdoAllContents) 'to be added later
+        'ucrPnlContentsToView.AddRadioButton(rdoComponent) 'to be added later
+
+        ucrPnlContentsToView.AddFunctionNamesCondition(rdoPrint, frmMain.clsRLink.strInstatDataObject & "$get_objects")
+        ucrPnlContentsToView.AddFunctionNamesCondition(rdoStructure, "str")
 
         'we are disabling this for now until they're working correctly.
         rdoAllContents.Enabled = False
@@ -72,7 +74,6 @@ Public Class dlgViewObjects
 
         'reset controls to default states
         ucrSelectorForViewObject.Reset()
-        rdoPrint.Checked = True
 
         'set R function for getting and viewing objects
         clsGetObjectsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
@@ -88,6 +89,7 @@ Public Class dlgViewObjects
     Private Sub SetRCodeforControls(bReset As Boolean)
         ucrSelectorForViewObject.SetRCode(clsGetObjectsFunction, bReset)
         ucrReceiverSelectedObject.SetRCode(clsGetObjectsFunction, bReset)
+        ucrPnlContentsToView.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -138,10 +140,8 @@ Public Class dlgViewObjects
 
         If expItems IsNot Nothing AndAlso Not (expItems.Type = Internals.SymbolicExpressionType.Null) Then
             strArr = expItems.AsCharacter.ToArray
-            If strArr IsNot Nothing AndAlso strArr.Length > 0 Then
-                If strArr(0) = ucrReceiverSelectedObject.GetVariableNames(bWithQuotes:=False) Then
-                    bGraph = True
-                End If
+            If strArr IsNot Nothing Then
+                bGraph = strArr.Contains(ucrReceiverSelectedObject.GetVariableNames(bWithQuotes:=False))
             Else
                 bGraph = False
             End If
