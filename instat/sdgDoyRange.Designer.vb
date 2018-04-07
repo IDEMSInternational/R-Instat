@@ -25,20 +25,20 @@ Partial Class sdgDoyRange
         Me.rdoFromFixed = New System.Windows.Forms.RadioButton()
         Me.rdoFromVariable = New System.Windows.Forms.RadioButton()
         Me.grpFrom = New System.Windows.Forms.GroupBox()
-        Me.grpTo = New System.Windows.Forms.GroupBox()
-        Me.lblToDays = New System.Windows.Forms.Label()
-        Me.lblToPlus = New System.Windows.Forms.Label()
-        Me.rdoToFixedDiff = New System.Windows.Forms.RadioButton()
-        Me.rdoToVariable = New System.Windows.Forms.RadioButton()
-        Me.rdoToFixed = New System.Windows.Forms.RadioButton()
-        Me.ucrNudToDiff = New instat.ucrNud()
-        Me.ucrReceiverTo = New instat.ucrReceiverSingle()
-        Me.ucrDoyTo = New instat.ucrDayOfYear()
-        Me.ucrPnlTo = New instat.UcrPanel()
-        Me.ucrSelectorDoy = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverFrom = New instat.ucrReceiverSingle()
         Me.ucrDoyFrom = New instat.ucrDayOfYear()
         Me.ucrPnlFrom = New instat.UcrPanel()
+        Me.grpTo = New System.Windows.Forms.GroupBox()
+        Me.lblToDays = New System.Windows.Forms.Label()
+        Me.ucrNudToDiff = New instat.ucrNud()
+        Me.lblToPlus = New System.Windows.Forms.Label()
+        Me.rdoLength = New System.Windows.Forms.RadioButton()
+        Me.ucrReceiverTo = New instat.ucrReceiverSingle()
+        Me.ucrDoyTo = New instat.ucrDayOfYear()
+        Me.rdoToVariable = New System.Windows.Forms.RadioButton()
+        Me.rdoToFixed = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlTo = New instat.UcrPanel()
+        Me.ucrSelectorDoy = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBaseSub = New instat.ucrButtonsSubdialogue()
         Me.grpFrom.SuspendLayout()
         Me.grpTo.SuspendLayout()
@@ -80,12 +80,38 @@ Partial Class sdgDoyRange
         Me.grpFrom.TabStop = False
         Me.grpFrom.Text = "From"
         '
+        'ucrReceiverFrom
+        '
+        Me.ucrReceiverFrom.frmParent = Me
+        Me.ucrReceiverFrom.Location = New System.Drawing.Point(36, 68)
+        Me.ucrReceiverFrom.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFrom.Name = "ucrReceiverFrom"
+        Me.ucrReceiverFrom.Selector = Nothing
+        Me.ucrReceiverFrom.Size = New System.Drawing.Size(124, 20)
+        Me.ucrReceiverFrom.strNcFilePath = ""
+        Me.ucrReceiverFrom.TabIndex = 5
+        Me.ucrReceiverFrom.ucrSelector = Nothing
+        '
+        'ucrDoyFrom
+        '
+        Me.ucrDoyFrom.Location = New System.Drawing.Point(36, 67)
+        Me.ucrDoyFrom.Name = "ucrDoyFrom"
+        Me.ucrDoyFrom.Size = New System.Drawing.Size(209, 21)
+        Me.ucrDoyFrom.TabIndex = 5
+        '
+        'ucrPnlFrom
+        '
+        Me.ucrPnlFrom.Location = New System.Drawing.Point(28, 17)
+        Me.ucrPnlFrom.Name = "ucrPnlFrom"
+        Me.ucrPnlFrom.Size = New System.Drawing.Size(186, 36)
+        Me.ucrPnlFrom.TabIndex = 3
+        '
         'grpTo
         '
         Me.grpTo.Controls.Add(Me.lblToDays)
         Me.grpTo.Controls.Add(Me.ucrNudToDiff)
         Me.grpTo.Controls.Add(Me.lblToPlus)
-        Me.grpTo.Controls.Add(Me.rdoToFixedDiff)
+        Me.grpTo.Controls.Add(Me.rdoLength)
         Me.grpTo.Controls.Add(Me.ucrReceiverTo)
         Me.grpTo.Controls.Add(Me.ucrDoyTo)
         Me.grpTo.Controls.Add(Me.rdoToVariable)
@@ -108,6 +134,18 @@ Partial Class sdgDoyRange
         Me.lblToDays.TabIndex = 9
         Me.lblToDays.Text = "days"
         '
+        'ucrNudToDiff
+        '
+        Me.ucrNudToDiff.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudToDiff.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudToDiff.Location = New System.Drawing.Point(50, 68)
+        Me.ucrNudToDiff.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudToDiff.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudToDiff.Name = "ucrNudToDiff"
+        Me.ucrNudToDiff.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudToDiff.TabIndex = 7
+        Me.ucrNudToDiff.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'lblToPlus
         '
         Me.lblToPlus.AutoSize = True
@@ -118,16 +156,35 @@ Partial Class sdgDoyRange
         Me.lblToPlus.TabIndex = 8
         Me.lblToPlus.Text = "Plus:"
         '
-        'rdoToFixedDiff
+        'rdoLength
         '
-        Me.rdoToFixedDiff.AutoSize = True
-        Me.rdoToFixedDiff.Location = New System.Drawing.Point(189, 28)
-        Me.rdoToFixedDiff.Name = "rdoToFixedDiff"
-        Me.rdoToFixedDiff.Size = New System.Drawing.Size(102, 17)
-        Me.rdoToFixedDiff.TabIndex = 6
-        Me.rdoToFixedDiff.TabStop = True
-        Me.rdoToFixedDiff.Text = "Fixed Difference"
-        Me.rdoToFixedDiff.UseVisualStyleBackColor = True
+        Me.rdoLength.AutoSize = True
+        Me.rdoLength.Location = New System.Drawing.Point(189, 28)
+        Me.rdoLength.Name = "rdoLength"
+        Me.rdoLength.Size = New System.Drawing.Size(58, 17)
+        Me.rdoLength.TabIndex = 6
+        Me.rdoLength.TabStop = True
+        Me.rdoLength.Text = "Length"
+        Me.rdoLength.UseVisualStyleBackColor = True
+        '
+        'ucrReceiverTo
+        '
+        Me.ucrReceiverTo.frmParent = Me
+        Me.ucrReceiverTo.Location = New System.Drawing.Point(14, 67)
+        Me.ucrReceiverTo.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverTo.Name = "ucrReceiverTo"
+        Me.ucrReceiverTo.Selector = Nothing
+        Me.ucrReceiverTo.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverTo.strNcFilePath = ""
+        Me.ucrReceiverTo.TabIndex = 5
+        Me.ucrReceiverTo.ucrSelector = Nothing
+        '
+        'ucrDoyTo
+        '
+        Me.ucrDoyTo.Location = New System.Drawing.Point(16, 67)
+        Me.ucrDoyTo.Name = "ucrDoyTo"
+        Me.ucrDoyTo.Size = New System.Drawing.Size(209, 21)
+        Me.ucrDoyTo.TabIndex = 5
         '
         'rdoToVariable
         '
@@ -151,37 +208,6 @@ Partial Class sdgDoyRange
         Me.rdoToFixed.Text = "Fixed Day"
         Me.rdoToFixed.UseVisualStyleBackColor = True
         '
-        'ucrNudToDiff
-        '
-        Me.ucrNudToDiff.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudToDiff.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudToDiff.Location = New System.Drawing.Point(50, 68)
-        Me.ucrNudToDiff.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudToDiff.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudToDiff.Name = "ucrNudToDiff"
-        Me.ucrNudToDiff.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudToDiff.TabIndex = 7
-        Me.ucrNudToDiff.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrReceiverTo
-        '
-        Me.ucrReceiverTo.frmParent = Nothing
-        Me.ucrReceiverTo.Location = New System.Drawing.Point(14, 67)
-        Me.ucrReceiverTo.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverTo.Name = "ucrReceiverTo"
-        Me.ucrReceiverTo.Selector = Nothing
-        Me.ucrReceiverTo.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverTo.strNcFilePath = ""
-        Me.ucrReceiverTo.TabIndex = 5
-        Me.ucrReceiverTo.ucrSelector = Nothing
-        '
-        'ucrDoyTo
-        '
-        Me.ucrDoyTo.Location = New System.Drawing.Point(16, 67)
-        Me.ucrDoyTo.Name = "ucrDoyTo"
-        Me.ucrDoyTo.Size = New System.Drawing.Size(209, 21)
-        Me.ucrDoyTo.TabIndex = 5
-        '
         'ucrPnlTo
         '
         Me.ucrPnlTo.Location = New System.Drawing.Point(6, 17)
@@ -198,32 +224,6 @@ Partial Class sdgDoyRange
         Me.ucrSelectorDoy.Name = "ucrSelectorDoy"
         Me.ucrSelectorDoy.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorDoy.TabIndex = 0
-        '
-        'ucrReceiverFrom
-        '
-        Me.ucrReceiverFrom.frmParent = Nothing
-        Me.ucrReceiverFrom.Location = New System.Drawing.Point(36, 68)
-        Me.ucrReceiverFrom.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFrom.Name = "ucrReceiverFrom"
-        Me.ucrReceiverFrom.Selector = Nothing
-        Me.ucrReceiverFrom.Size = New System.Drawing.Size(124, 20)
-        Me.ucrReceiverFrom.strNcFilePath = ""
-        Me.ucrReceiverFrom.TabIndex = 5
-        Me.ucrReceiverFrom.ucrSelector = Nothing
-        '
-        'ucrDoyFrom
-        '
-        Me.ucrDoyFrom.Location = New System.Drawing.Point(36, 67)
-        Me.ucrDoyFrom.Name = "ucrDoyFrom"
-        Me.ucrDoyFrom.Size = New System.Drawing.Size(209, 21)
-        Me.ucrDoyFrom.TabIndex = 5
-        '
-        'ucrPnlFrom
-        '
-        Me.ucrPnlFrom.Location = New System.Drawing.Point(28, 17)
-        Me.ucrPnlFrom.Name = "ucrPnlFrom"
-        Me.ucrPnlFrom.Size = New System.Drawing.Size(186, 36)
-        Me.ucrPnlFrom.TabIndex = 3
         '
         'ucrBaseSub
         '
@@ -264,7 +264,7 @@ Partial Class sdgDoyRange
     Friend WithEvents grpTo As GroupBox
     Friend WithEvents ucrNudToDiff As ucrNud
     Friend WithEvents lblToPlus As Label
-    Friend WithEvents rdoToFixedDiff As RadioButton
+    Friend WithEvents rdoLength As RadioButton
     Friend WithEvents ucrReceiverTo As ucrReceiverSingle
     Friend WithEvents ucrDoyTo As ucrDayOfYear
     Friend WithEvents rdoToVariable As RadioButton
