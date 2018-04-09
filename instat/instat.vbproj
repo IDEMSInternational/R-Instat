@@ -289,6 +289,12 @@
     <Compile Include="dlgDefineRedFlags.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgEvapotranspiration.Designer.vb">
+      <DependentUpon>dlgEvapotranspiration.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgEvapotranspiration.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgHypothesisTestsCalculator.Designer.vb">
       <DependentUpon>dlgHypothesisTestsCalculator.vb</DependentUpon>
     </Compile>
@@ -2582,6 +2588,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgEnter.sw-KE.resx">
       <DependentUpon>dlgEnter.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgEvapotranspiration.resx">
+      <DependentUpon>dlgEvapotranspiration.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExportGraphAsImage.fr-FR.resx">
       <DependentUpon>dlgExportGraphAsImage.vb</DependentUpon>
