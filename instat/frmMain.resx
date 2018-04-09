@@ -1364,26 +1364,29 @@
   <data name="mnuClimaticDescribe.Text" xml:space="preserve">
     <value>Describe</value>
   </data>
+  <data name="mnuClimaticPICSARainfall.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="mnuClimaticPICSARainfall.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="mnuClimaticPICSARainfall.Text" xml:space="preserve">
     <value>Rainfall...</value>
   </data>
+  <data name="mnuClimaticPICSATemperature.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="mnuClimaticPICSATemperature.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="mnuClimaticPICSATemperature.Text" xml:space="preserve">
     <value>Temperature...</value>
   </data>
   <data name="mnuClimaticPICSACrops.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="mnuClimaticPICSACrops.Text" xml:space="preserve">
     <value>Crops...</value>
-  </data>
-  <data name="mnuClimaticPICSA.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="mnuClimaticPICSA.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 22</value>
@@ -5962,6 +5965,12 @@
   <data name="&gt;&gt;ToolStripSeparator4.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;mnuModelHypothesisTests.Name" xml:space="preserve">
+    <value>mnuModelHypothesisTests</value>
+  </data>
+  <data name="&gt;&gt;mnuModelHypothesisTests.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;mnuModelOtherOneVariable.Name" xml:space="preserve">
     <value>mnuModelOtherOneVariable</value>
   </data>
@@ -6080,12 +6089,6 @@
     <value>mnuModelOtherGeneralLogLinear</value>
   </data>
   <data name="&gt;&gt;mnuModelOtherGeneralLogLinear.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuModelHypothesisTests.Name" xml:space="preserve">
-    <value>mnuModelHypothesisTests</value>
-  </data>
-  <data name="&gt;&gt;mnuModelHypothesisTests.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuClimaticExamine.Name" xml:space="preserve">
@@ -6412,16 +6415,16 @@
   <data name="&gt;&gt;mnuClimaticDatesMakeDate.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuClimaticDatesUseDate.Name" xml:space="preserve">
-    <value>mnuClimaticDatesUseDate</value>
-  </data>
-  <data name="&gt;&gt;mnuClimaticDatesUseDate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;mnuClimaticDatesInfillMissingDates.Name" xml:space="preserve">
     <value>mnuClimaticDatesInfillMissingDates</value>
   </data>
   <data name="&gt;&gt;mnuClimaticDatesInfillMissingDates.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticDatesUseDate.Name" xml:space="preserve">
+    <value>mnuClimaticDatesUseDate</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticDatesUseDate.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuClimaticDatesMakeTime.Name" xml:space="preserve">
@@ -7804,16 +7807,16 @@
   <data name="&gt;&gt;mnuPrepareColumnMakeDate.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuPrepareColumnUseDate.Name" xml:space="preserve">
-    <value>mnuPrepareColumnUseDate</value>
-  </data>
-  <data name="&gt;&gt;mnuPrepareColumnUseDate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;mnuPrepareColumnInfillMissingDates.Name" xml:space="preserve">
     <value>mnuPrepareColumnInfillMissingDates</value>
   </data>
   <data name="&gt;&gt;mnuPrepareColumnInfillMissingDates.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuPrepareColumnUseDate.Name" xml:space="preserve">
+    <value>mnuPrepareColumnUseDate</value>
+  </data>
+  <data name="&gt;&gt;mnuPrepareColumnUseDate.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuPrepareColumnMakeTime.Name" xml:space="preserve">
