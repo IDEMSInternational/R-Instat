@@ -1091,10 +1091,10 @@
   <data name="ToolStripSeparator46.Size" type="System.Drawing.Size, System.Drawing">
     <value>186, 6</value>
   </data>
-  <data name="ToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuClimaticPrepareEvapotranspiration.Size" type="System.Drawing.Size, System.Drawing">
     <value>189, 22</value>
   </data>
-  <data name="ToolStripMenuItem3.Text" xml:space="preserve">
+  <data name="mnuClimaticPrepareEvapotranspiration.Text" xml:space="preserve">
     <value>Evapotranspiration...</value>
   </data>
   <data name="mnuClimaticPrepareSummary.Enabled" type="System.Boolean, mscorlib">
@@ -2785,10 +2785,10 @@
   <data name="mnuPrepareColumnFactorLevelsLabels.Text" xml:space="preserve">
     <value>Levels/Labels...</value>
   </data>
-  <data name="ToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuPrepareFactorViewLabels.Size" type="System.Drawing.Size, System.Drawing">
     <value>179, 22</value>
   </data>
-  <data name="ToolStripMenuItem2.Text" xml:space="preserve">
+  <data name="mnuPrepareFactorViewLabels.Text" xml:space="preserve">
     <value>View Labels...</value>
   </data>
   <data name="mnuPrepareColumnFactorReorderLevels.Size" type="System.Drawing.Size, System.Drawing">
@@ -6538,6 +6538,18 @@
   <data name="&gt;&gt;mnuClimaticPrepareEndOfRains.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;ToolStripSeparator46.Name" xml:space="preserve">
+    <value>ToolStripSeparator46</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator46.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticPrepareEvapotranspiration.Name" xml:space="preserve">
+    <value>mnuClimaticPrepareEvapotranspiration</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticPrepareEvapotranspiration.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;mnuClimaticPrepareSummary.Name" xml:space="preserve">
     <value>mnuClimaticPrepareSummary</value>
   </data>
@@ -7714,10 +7726,10 @@
   <data name="&gt;&gt;mnuPrepareColumnFactorLevelsLabels.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItem2.Name" xml:space="preserve">
-    <value>ToolStripMenuItem2</value>
+  <data name="&gt;&gt;mnuPrepareFactorViewLabels.Name" xml:space="preserve">
+    <value>mnuPrepareFactorViewLabels</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItem2.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuPrepareFactorViewLabels.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuPrepareColumnFactorReorderLevels.Name" xml:space="preserve">
@@ -8294,18 +8306,6 @@
     <value>ExportToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;ExportToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ToolStripSeparator46.Name" xml:space="preserve">
-    <value>ToolStripSeparator46</value>
-  </data>
-  <data name="&gt;&gt;ToolStripSeparator46.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ToolStripMenuItem3.Name" xml:space="preserve">
-    <value>ToolStripMenuItem3</value>
-  </data>
-  <data name="&gt;&gt;ToolStripMenuItem3.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
