@@ -515,6 +515,8 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
+        Me.ToolStripSeparator46 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1451,7 +1453,7 @@ Partial Class frmMain
         '
         'mnuClimaticPrepare
         '
-        Me.mnuClimaticPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCimaticPrepareTransform, Me.ToolStripSeparator37, Me.mnuClimaticPrepareClimaticSummaries, Me.mnuClimaticPrepareStartoftheRains, Me.mnuClimaticPrepareSpells, Me.mnuClimaticPrepareExtremes, Me.mnuClimaticPrepareEndOfRains, Me.mnuClimaticPrepareSummary, Me.mnuClimaticPrepareNewWorksheet, Me.mnuClimaticPrepareImportDailyData, Me.mnuClimaticPrepareMakeFactor, Me.mnuClimaticPrepareShiftDailyData, Me.mnuClimaticPrepareUnstackDailyData, Me.mnuClimaticPrepareStackDailyData})
+        Me.mnuClimaticPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCimaticPrepareTransform, Me.ToolStripSeparator37, Me.mnuClimaticPrepareClimaticSummaries, Me.mnuClimaticPrepareStartoftheRains, Me.mnuClimaticPrepareSpells, Me.mnuClimaticPrepareExtremes, Me.mnuClimaticPrepareEndOfRains, Me.ToolStripSeparator46, Me.ToolStripMenuItem3, Me.mnuClimaticPrepareSummary, Me.mnuClimaticPrepareNewWorksheet, Me.mnuClimaticPrepareImportDailyData, Me.mnuClimaticPrepareMakeFactor, Me.mnuClimaticPrepareShiftDailyData, Me.mnuClimaticPrepareUnstackDailyData, Me.mnuClimaticPrepareStackDailyData})
         Me.mnuClimaticPrepare.Name = "mnuClimaticPrepare"
         resources.ApplyResources(Me.mnuClimaticPrepare, "mnuClimaticPrepare")
         Me.mnuClimaticPrepare.Tag = "Prepare"
@@ -3316,6 +3318,16 @@ Partial Class frmMain
         resources.ApplyResources(Me.ucrOutput, "ucrOutput")
         Me.ucrOutput.Name = "ucrOutput"
         '
+        'ToolStripSeparator46
+        '
+        Me.ToolStripSeparator46.Name = "ToolStripSeparator46"
+        resources.ApplyResources(Me.ToolStripSeparator46, "ToolStripSeparator46")
+        '
+        'ToolStripMenuItem3
+        '
+        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
+        resources.ApplyResources(Me.ToolStripMenuItem3, "ToolStripMenuItem3")
+        '
         'frmMain
         '
         resources.ApplyResources(Me, "$this")
@@ -3836,4 +3848,6 @@ Partial Class frmMain
     Friend WithEvents mnuPrepareColumnCalculateGeneralSummaries As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnCalculateColumnSummaries As ToolStripMenuItem
     Friend WithEvents mnuModelHypothesisTests As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator46 As ToolStripSeparator
+    Friend WithEvents ToolStripMenuItem3 As ToolStripMenuItem
 End Class

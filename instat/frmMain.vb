@@ -1896,4 +1896,8 @@ Public Class frmMain
         dlgRegularSequence.bNumericIsDefault = False
         dlgRegularSequence.ShowDialog()
     End Sub
+
+    Private Sub ToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem3.Click
+        dlgEvapotranspiration.ShowDialog()
+    End Sub
 End Class
