@@ -75,8 +75,9 @@ Public Class dlgClimaticSummary
 
         ucrReceiverWithinYear.SetParameter(New RParameter("within_variable", 2, False))
         ucrReceiverWithinYear.SetParameterIsString()
-        ucrReceiverWithinYear.strSelectorHeading = "Variables"
+        ucrReceiverWithinYear.strSelectorHeading = "Factors"
         ucrReceiverWithinYear.Selector = ucrSelectorVariable
+        ucrReceiverWithinYear.SetDataType("factor")
 
         ' summary
         ucrReceiverElement.SetParameter(New RParameter("columns_to_summarise", 0))
@@ -101,13 +102,6 @@ Public Class dlgClimaticSummary
         ucrReceiverDOY.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "doy" & Chr(34)})
         ucrReceiverDOY.bAutoFill = True
         ucrReceiverDOY.strSelectorHeading = "Day Variables"
-
-        ''setting up Nuds
-        'ucrNudFrom.SetParameter(New RParameter("from", 1))
-        'ucrNudFrom.SetMinMax(1, 365)
-
-        'ucrNudTo.SetParameter(New RParameter("to", 1))
-        'ucrNudTo.SetMinMax(2, 366)
 
         ''TODO: set up this receiver for annual-variable
         'ucrReceiverFrom.Selector = ucrSelectorVariable
@@ -145,6 +139,8 @@ Public Class dlgClimaticSummary
         'ucrReceiverFrom.SetLinkedDisplayControl(lblReceiverFrom)
         'ucrReceiverTo.SetLinkedDisplayControl(lblReceiverTo)
         ucrReceiverWithinYear.SetLinkedDisplayControl(lblWithinYear)
+
+        ucrInputFilterPreview.IsReadOnly = True
     End Sub
 
     Private Sub SetDefaults()
@@ -206,8 +202,6 @@ Public Class dlgClimaticSummary
         ucrReceiverDOY.AddAdditionalCodeParameterPair(clsFromConditionOperator, New RParameter("doy", 0), iAdditionalPairNo:=1)
 
         ucrReceiverDOY.SetRCode(clsToConditionOperator, bReset)
-        'ucrNudTo.SetRCode(clsDayToOperator, bReset)
-        'ucrNudFrom.SetRCode(clsDayFromOperator, bReset)
 
         ucrSelectorVariable.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverElement.SetRCode(clsDefaultFunction, bReset)
@@ -270,6 +264,7 @@ Public Class dlgClimaticSummary
     Private Sub cmdDoyRange_Click(sender As Object, e As EventArgs) Handles cmdDoyRange.Click
         sdgDoyRange.Setup(clsNewDoyFilterCalc:=clsDayFilterCalc, clsNewDayFromOperator:=clsFromConditionOperator, clsNewDayToOperator:=clsToConditionOperator, clsNewCalcFromList:=clsDayFilterCalcFromList, strNewMainDataFrame:=ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strNewDoyColumn:=ucrReceiverDOY.GetVariableNames(False))
         sdgDoyRange.ShowDialog()
+        UpdateDayFilterPreview()
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDOY.ControlValueChanged, ucrSelectorVariable.ControlValueChanged
@@ -278,6 +273,7 @@ Public Class dlgClimaticSummary
         Else
             clsDayFilterCalcFromList.RemoveParameterByName(ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         End If
+        UpdateDayFilterPreview()
     End Sub
 
     Private Sub ucrPnlAnnualWithin_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlAnnualWithin.ControlValueChanged, ucrReceiverWithinYear.ControlValueChanged
@@ -303,5 +299,13 @@ Public Class dlgClimaticSummary
 
     Private Sub ucrSelectorVariable_DataFrameChanged() Handles ucrSelectorVariable.DataFrameChanged
         clsDayFilterCalcFromList.ClearParameters()
+    End Sub
+
+    Private Sub UpdateDayFilterPreview()
+        If ucrReceiverDOY.IsEmpty Then
+            ucrInputFilterPreview.SetName("")
+        Else
+            ucrInputFilterPreview.SetName(clsFromAndToConditionOperator.ToScript())
+        End If
     End Sub
 End Class
