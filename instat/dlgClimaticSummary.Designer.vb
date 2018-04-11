@@ -47,18 +47,10 @@ Partial Class dlgClimaticSummary
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lblDay = New System.Windows.Forms.Label()
         Me.lblElement = New System.Windows.Forms.Label()
-        Me.lblTo = New System.Windows.Forms.Label()
-        Me.lblFrom = New System.Windows.Forms.Label()
-        Me.lblReceiverTo = New System.Windows.Forms.Label()
-        Me.lblReceiverFrom = New System.Windows.Forms.Label()
         Me.cmdSummary = New System.Windows.Forms.Button()
         Me.lblWithinYear = New System.Windows.Forms.Label()
         Me.ucrSelectorVariable = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverWithinYear = New instat.ucrReceiverSingle()
-        Me.ucrReceiverFrom = New instat.ucrReceiverSingle()
-        Me.ucrReceiverTo = New instat.ucrReceiverSingle()
-        Me.ucrNudTo = New instat.ucrNud()
-        Me.ucrNudFrom = New instat.ucrNud()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrReceiverDOY = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
@@ -67,10 +59,12 @@ Partial Class dlgClimaticSummary
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlAnnualWithin = New instat.UcrPanel()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrChkOmitMissingValues = New instat.ucrCheck()
         Me.ucrChkStoreResults = New instat.ucrCheck()
         Me.ucrChkPrintOutput = New instat.ucrCheck()
         Me.ucrChkDropUnusedLevels = New instat.ucrCheck()
-        Me.ucrChkOmitMissingValues = New instat.ucrCheck()
+        Me.cmdDoyRange = New System.Windows.Forms.Button()
+        Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -129,26 +123,6 @@ Partial Class dlgClimaticSummary
         resources.ApplyResources(Me.lblElement, "lblElement")
         Me.lblElement.Name = "lblElement"
         '
-        'lblTo
-        '
-        resources.ApplyResources(Me.lblTo, "lblTo")
-        Me.lblTo.Name = "lblTo"
-        '
-        'lblFrom
-        '
-        resources.ApplyResources(Me.lblFrom, "lblFrom")
-        Me.lblFrom.Name = "lblFrom"
-        '
-        'lblReceiverTo
-        '
-        resources.ApplyResources(Me.lblReceiverTo, "lblReceiverTo")
-        Me.lblReceiverTo.Name = "lblReceiverTo"
-        '
-        'lblReceiverFrom
-        '
-        resources.ApplyResources(Me.lblReceiverFrom, "lblReceiverFrom")
-        Me.lblReceiverFrom.Name = "lblReceiverFrom"
-        '
         'cmdSummary
         '
         resources.ApplyResources(Me.cmdSummary, "cmdSummary")
@@ -176,44 +150,6 @@ Partial Class dlgClimaticSummary
         Me.ucrReceiverWithinYear.Selector = Nothing
         Me.ucrReceiverWithinYear.strNcFilePath = ""
         Me.ucrReceiverWithinYear.ucrSelector = Nothing
-        '
-        'ucrReceiverFrom
-        '
-        Me.ucrReceiverFrom.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverFrom, "ucrReceiverFrom")
-        Me.ucrReceiverFrom.Name = "ucrReceiverFrom"
-        Me.ucrReceiverFrom.Selector = Nothing
-        Me.ucrReceiverFrom.strNcFilePath = ""
-        Me.ucrReceiverFrom.ucrSelector = Nothing
-        '
-        'ucrReceiverTo
-        '
-        Me.ucrReceiverTo.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverTo, "ucrReceiverTo")
-        Me.ucrReceiverTo.Name = "ucrReceiverTo"
-        Me.ucrReceiverTo.Selector = Nothing
-        Me.ucrReceiverTo.strNcFilePath = ""
-        Me.ucrReceiverTo.ucrSelector = Nothing
-        '
-        'ucrNudTo
-        '
-        Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudTo, "ucrNudTo")
-        Me.ucrNudTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTo.Name = "ucrNudTo"
-        Me.ucrNudTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudFrom
-        '
-        Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudFrom, "ucrNudFrom")
-        Me.ucrNudFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFrom.Name = "ucrNudFrom"
-        Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrReceiverElement
         '
@@ -280,6 +216,12 @@ Partial Class dlgClimaticSummary
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.TabStop = False
         '
+        'ucrChkOmitMissingValues
+        '
+        Me.ucrChkOmitMissingValues.Checked = False
+        resources.ApplyResources(Me.ucrChkOmitMissingValues, "ucrChkOmitMissingValues")
+        Me.ucrChkOmitMissingValues.Name = "ucrChkOmitMissingValues"
+        '
         'ucrChkStoreResults
         '
         Me.ucrChkStoreResults.Checked = False
@@ -298,29 +240,32 @@ Partial Class dlgClimaticSummary
         resources.ApplyResources(Me.ucrChkDropUnusedLevels, "ucrChkDropUnusedLevels")
         Me.ucrChkDropUnusedLevels.Name = "ucrChkDropUnusedLevels"
         '
-        'ucrChkOmitMissingValues
+        'cmdDoyRange
         '
-        Me.ucrChkOmitMissingValues.Checked = False
-        resources.ApplyResources(Me.ucrChkOmitMissingValues, "ucrChkOmitMissingValues")
-        Me.ucrChkOmitMissingValues.Name = "ucrChkOmitMissingValues"
+        resources.ApplyResources(Me.cmdDoyRange, "cmdDoyRange")
+        Me.cmdDoyRange.Name = "cmdDoyRange"
+        Me.cmdDoyRange.Tag = ""
+        Me.cmdDoyRange.UseVisualStyleBackColor = True
+        '
+        'ucrInputFilterPreview
+        '
+        Me.ucrInputFilterPreview.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilterPreview.IsMultiline = False
+        Me.ucrInputFilterPreview.IsReadOnly = True
+        resources.ApplyResources(Me.ucrInputFilterPreview, "ucrInputFilterPreview")
+        Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
         '
         'dlgClimaticSummary
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputFilterPreview)
+        Me.Controls.Add(Me.cmdDoyRange)
         Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.ucrSelectorVariable)
         Me.Controls.Add(Me.ucrReceiverWithinYear)
         Me.Controls.Add(Me.lblWithinYear)
         Me.Controls.Add(Me.cmdSummary)
-        Me.Controls.Add(Me.lblReceiverFrom)
-        Me.Controls.Add(Me.lblReceiverTo)
-        Me.Controls.Add(Me.ucrReceiverFrom)
-        Me.Controls.Add(Me.ucrReceiverTo)
-        Me.Controls.Add(Me.lblFrom)
-        Me.Controls.Add(Me.lblTo)
-        Me.Controls.Add(Me.ucrNudTo)
-        Me.Controls.Add(Me.ucrNudFrom)
         Me.Controls.Add(Me.lblElement)
         Me.Controls.Add(Me.lblDay)
         Me.Controls.Add(Me.lblYear)
@@ -361,14 +306,6 @@ Partial Class dlgClimaticSummary
     Friend WithEvents lblDay As Label
     Friend WithEvents lblYear As Label
     Friend WithEvents lblDate As Label
-    Friend WithEvents lblFrom As Label
-    Friend WithEvents lblTo As Label
-    Friend WithEvents ucrNudTo As ucrNud
-    Friend WithEvents ucrNudFrom As ucrNud
-    Friend WithEvents lblReceiverFrom As Label
-    Friend WithEvents lblReceiverTo As Label
-    Friend WithEvents ucrReceiverFrom As ucrReceiverSingle
-    Friend WithEvents ucrReceiverTo As ucrReceiverSingle
     Friend WithEvents cmdSummary As Button
     Friend WithEvents lblWithinYear As Label
     Friend WithEvents ucrReceiverWithinYear As ucrReceiverSingle
@@ -378,4 +315,6 @@ Partial Class dlgClimaticSummary
     Friend WithEvents ucrChkPrintOutput As ucrCheck
     Friend WithEvents ucrChkDropUnusedLevels As ucrCheck
     Friend WithEvents ucrChkOmitMissingValues As ucrCheck
+    Friend WithEvents cmdDoyRange As Button
+    Friend WithEvents ucrInputFilterPreview As ucrInputTextBox
 End Class
