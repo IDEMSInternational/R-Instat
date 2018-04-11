@@ -64,6 +64,7 @@ Partial Class dlgClimaticSummary
         Me.ucrChkPrintOutput = New instat.ucrCheck()
         Me.ucrChkDropUnusedLevels = New instat.ucrCheck()
         Me.cmdDoyRange = New System.Windows.Forms.Button()
+        Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -246,10 +247,19 @@ Partial Class dlgClimaticSummary
         Me.cmdDoyRange.Tag = ""
         Me.cmdDoyRange.UseVisualStyleBackColor = True
         '
+        'ucrInputFilterPreview
+        '
+        Me.ucrInputFilterPreview.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilterPreview.IsMultiline = False
+        Me.ucrInputFilterPreview.IsReadOnly = True
+        resources.ApplyResources(Me.ucrInputFilterPreview, "ucrInputFilterPreview")
+        Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
+        '
         'dlgClimaticSummary
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputFilterPreview)
         Me.Controls.Add(Me.cmdDoyRange)
         Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.ucrSelectorVariable)
@@ -306,4 +316,5 @@ Partial Class dlgClimaticSummary
     Friend WithEvents ucrChkDropUnusedLevels As ucrCheck
     Friend WithEvents ucrChkOmitMissingValues As ucrCheck
     Friend WithEvents cmdDoyRange As Button
+    Friend WithEvents ucrInputFilterPreview As ucrInputTextBox
 End Class

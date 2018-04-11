@@ -1205,6 +1205,18 @@
   <data name="mnuClimaticPrepareEndOfRains.Text" xml:space="preserve">
     <value>End of Rains...</value>
   </data>
+  <data name="ToolStripSeparator46.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 6</value>
+  </data>
+  <data name="mnuClimaticPrepareEvapotranspiration.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuClimaticPrepareEvapotranspiration.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="mnuClimaticPrepareEvapotranspiration.Text" xml:space="preserve">
+    <value>Evapotranspiration...</value>
+  </data>
   <data name="mnuClimaticPrepareSummary.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -1368,7 +1380,7 @@
     <value>False</value>
   </data>
   <data name="mnuClimaticPICSARainfall.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>150, 22</value>
   </data>
   <data name="mnuClimaticPICSARainfall.Text" xml:space="preserve">
     <value>Rainfall...</value>
@@ -1377,13 +1389,13 @@
     <value>False</value>
   </data>
   <data name="mnuClimaticPICSATemperature.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>150, 22</value>
   </data>
   <data name="mnuClimaticPICSATemperature.Text" xml:space="preserve">
     <value>Temperature...</value>
   </data>
   <data name="mnuClimaticPICSACrops.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>150, 22</value>
   </data>
   <data name="mnuClimaticPICSACrops.Text" xml:space="preserve">
     <value>Crops...</value>
@@ -2728,10 +2740,10 @@
   <data name="mnuPrepareColumnFactorLevelsLabels.Text" xml:space="preserve">
     <value>Levels/Labels...</value>
   </data>
-  <data name="ToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuPrepareFactorViewLabels.Size" type="System.Drawing.Size, System.Drawing">
     <value>179, 22</value>
   </data>
-  <data name="ToolStripMenuItem2.Text" xml:space="preserve">
+  <data name="mnuPrepareFactorViewLabels.Text" xml:space="preserve">
     <value>View Labels...</value>
   </data>
   <data name="mnuPrepareColumnFactorReorderLevels.Size" type="System.Drawing.Size, System.Drawing">
@@ -5512,6 +5524,9 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>R-Instat</value>
   </data>
@@ -6527,6 +6542,18 @@
     <value>mnuClimaticPrepareEndOfRains</value>
   </data>
   <data name="&gt;&gt;mnuClimaticPrepareEndOfRains.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator46.Name" xml:space="preserve">
+    <value>ToolStripSeparator46</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator46.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticPrepareEvapotranspiration.Name" xml:space="preserve">
+    <value>mnuClimaticPrepareEvapotranspiration</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticPrepareEvapotranspiration.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuClimaticPrepareSummary.Name" xml:space="preserve">
@@ -7705,10 +7732,10 @@
   <data name="&gt;&gt;mnuPrepareColumnFactorLevelsLabels.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItem2.Name" xml:space="preserve">
-    <value>ToolStripMenuItem2</value>
+  <data name="&gt;&gt;mnuPrepareFactorViewLabels.Name" xml:space="preserve">
+    <value>mnuPrepareFactorViewLabels</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItem2.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuPrepareFactorViewLabels.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuPrepareColumnFactorReorderLevels.Name" xml:space="preserve">
