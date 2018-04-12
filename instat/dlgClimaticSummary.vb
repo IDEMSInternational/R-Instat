@@ -37,6 +37,7 @@ Public Class dlgClimaticSummary
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
+        WithinYearLabelReceiverLocation()
         TestOKEnabled()
     End Sub
 
@@ -54,12 +55,14 @@ Public Class dlgClimaticSummary
 
         'panel setting
         ucrPnlAnnualWithin.AddRadioButton(rdoAnnual)
-        ucrPnlAnnualWithin.AddRadioButton(rdoWithinYear)
         ucrPnlAnnualWithin.AddRadioButton(rdoAnnualWithinYear)
+        ucrPnlAnnualWithin.AddRadioButton(rdoWithinYear)
 
-        ucrPnlAnnualWithin.AddParameterPresentCondition(rdoAnnualWithinYear, "within_variable", True)
         ucrPnlAnnualWithin.AddParameterPresentCondition(rdoAnnual, "within_variable", False)
-        ucrPnlAnnualWithin.AddParameterValuesCondition(rdoWithinYear, "within_variable", True)
+        ucrPnlAnnualWithin.AddParameterPresentCondition(rdoAnnualWithinYear, "within_variable", True)
+        ucrPnlAnnualWithin.AddParameterPresentCondition(rdoAnnualWithinYear, "year", True)
+        ucrPnlAnnualWithin.AddParameterPresentCondition(rdoWithinYear, "within_variable", True)
+        ucrPnlAnnualWithin.AddParameterPresentCondition(rdoWithinYear, "year", False)
 
         'receivers:
         ' by receivers
@@ -106,10 +109,6 @@ Public Class dlgClimaticSummary
         ucrReceiverDOY.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "doy" & Chr(34)})
         ucrReceiverDOY.bAutoFill = True
         ucrReceiverDOY.strSelectorHeading = "Day Variables"
-
-        ''TODO: set up this receiver for annual-variable
-        'ucrReceiverFrom.Selector = ucrSelectorVariable
-        'ucrReceiverTo.Selector = ucrSelectorVariable
 
         ' Other checkbox options
         ucrChkStoreResults.SetParameter(New RParameter("store_results", 3))
@@ -284,14 +283,9 @@ Public Class dlgClimaticSummary
         UpdateDayFilterPreview()
     End Sub
 
-    Private Sub ucrPnlAnnualWithin_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlAnnualWithin.ControlValueChanged, ucrReceiverWithinYear.ControlValueChanged
+    Private Sub ucrPnlAnnualWithin_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlAnnualWithin.ControlValueChanged
         ReceiverFocus()
         WithinYearLabelReceiverLocation()
-        If rdoAnnualWithinYear.Checked OrElse rdoWithinYear.Checked Then
-            clsDefaultFactors.AddParameter("within_variable", ucrReceiverWithinYear.GetVariableNames, bIncludeArgumentName:=False, iPosition:=2)
-        Else
-            clsDefaultFactors.RemoveParameterByName("within_variable")
-        End If
     End Sub
 
     Private Sub ucrChkPrintOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPrintOutput.ControlValueChanged
