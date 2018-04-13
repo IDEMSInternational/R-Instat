@@ -5553,9 +5553,9 @@
     <Content Include="static\Library\Climatic\WesternKenya.RDS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="static\InstatObject\R\Backend_Components\DisplayDaily.R">
+    <Content Include="static\InstatObject\R\Backend_Components\DisplayDaily.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="static\InstatObject\R\Backend_Components\instat_comment.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
