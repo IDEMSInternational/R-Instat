@@ -17,35 +17,52 @@
 Imports instat.Translations
 Public Class dlgThemes
     Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
     Private Sub dlgThemes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
-
         End If
+
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
         autoTranslate(Me)
         TestOkEnabled()
     End Sub
 
+    Private Sub SetRCodeForControls(bReset As Boolean)
+
+    End Sub
+
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 440
+
+        ucrChkDeleteTheme.SetText("Delete Theme")
+        ucrSaveTheme.SetPrefix("Theme")
+        ucrSaveTheme.SetIsComboBox()
+        ucrSaveTheme.SetCheckBoxText("New Theme Name")
+
+        ucrreceiverThemetoEdit.Selector = ucrSelectorThemes
+        ucrreceiverThemetoEdit.strSelectorHeading = "Themes"
+        ucrreceiverThemetoEdit.SetMeAsReceiver()
     End Sub
 
     Private Sub SetDefaults()
 
     End Sub
 
-    Private Sub ReopenDialog()
-
-    End Sub
     Private Sub TestOkEnabled()
 
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+    End Sub
+
+    Private Sub cmdThemeOptions_Click(sender As Object, e As EventArgs) Handles cmdThemeOptions.Click
+        sdgThemes.ShowDialog()
     End Sub
 End Class

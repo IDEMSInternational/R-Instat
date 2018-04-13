@@ -777,4 +777,8 @@ Public Class ucrDataView
     Private Sub statusColumnMenu_Opening(sender As Object, e As CancelEventArgs) Handles statusColumnMenu.Opening
         HideSheet.Enabled = (grdData.Worksheets.Count > 1)
     End Sub
+
+    Private Sub mnuReorderColumns_Click(sender As Object, e As EventArgs) Handles mnuReorderColumns.Click
+        dlgReorderColumns.ShowDialog()
+    End Sub
 End Class

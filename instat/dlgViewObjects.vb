@@ -15,10 +15,13 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports RDotNet
+
 Public Class dlgViewObjects
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsViewObjectFunction As New RFunction
+    Private clsGetObjectsFunction As RFunction
+    Private clsShowObjectStructureFunction As RFunction
 
     Private Sub dlgViewObjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -50,42 +53,47 @@ Public Class dlgViewObjects
         ucrReceiverSelectedObject.SetItemType("object")
         ucrReceiverSelectedObject.bAutoFill = True
 
-        ucrPnlContentsToView.bAllowNonConditionValues = True ' temporary
-        ' rdo's
-        'ucrPnlContentsToView.SetParameter(New RParameter("", 2))
-        'ucrPnlContentsToView.AddRadioButton(rdoStructure, Chr(34) & "" & Chr(34))
-        'ucrPnlContentsToView.AddRadioButton(rdoAllContents, Chr(34) & " " & Chr(34))
-        'ucrPnlContentsToView.AddRadioButton(rdoComponent, Chr(34) & " " & Chr(34))
-        'ucrPnlContentsToView.AddRadioButton(rdoViewGraph, Chr(34) & " " & Chr(34))
-        'ucrPnlContentsToView.SetRDefault(Chr(34) & "" & Chr(34))
+        'add radio buttons to the panel rdo's
+        ucrPnlContentsToView.AddRadioButton(rdoPrint)
+        ucrPnlContentsToView.AddRadioButton(rdoStructure)
+        'ucrPnlContentsToView.AddRadioButton(rdoAllContents) 'to be added later
+        'ucrPnlContentsToView.AddRadioButton(rdoComponent) 'to be added later
+
+        ucrPnlContentsToView.AddFunctionNamesCondition(rdoPrint, frmMain.clsRLink.strInstatDataObject & "$get_objects")
+        ucrPnlContentsToView.AddFunctionNamesCondition(rdoStructure, "str")
 
         'we are disabling this for now until they're working correctly.
-        rdoStructure.Enabled = False
         rdoAllContents.Enabled = False
         rdoComponent.Enabled = False
     End Sub
 
     Private Sub SetDefaults()
-        clsViewObjectFunction = New RFunction
+        'initialise the Rfunctions
+        clsGetObjectsFunction = New RFunction
+        clsShowObjectStructureFunction = New RFunction
 
+        'reset controls to default states
         ucrSelectorForViewObject.Reset()
-        rdoViewGraph.Checked = True
-        SetiCallType()
 
-        clsViewObjectFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsViewObjectFunction)
+        'set R function for getting and viewing objects
+        clsGetObjectsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
+
+        'set R function for showing selected object structure
+        clsShowObjectStructureFunction.SetRCommand("str")
+        clsShowObjectStructureFunction.AddParameter(New RParameter("object", clsGetObjectsFunction, iNewPosition:=0))
+
+        'set the base function
+        ucrBase.clsRsyntax.SetBaseRFunction(clsGetObjectsFunction)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrSelectorForViewObject.SetRCode(clsGetObjectsFunction, bReset)
+        ucrReceiverSelectedObject.SetRCode(clsGetObjectsFunction, bReset)
+        ucrPnlContentsToView.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverSelectedObject.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        ucrBase.OKEnabled(Not ucrReceiverSelectedObject.IsEmpty)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -94,8 +102,8 @@ Public Class dlgViewObjects
         TestOKEnabled()
     End Sub
 
-    Private Sub SetiCallType()
-        If rdoViewGraph.Checked Then
+    Private Sub SetICallType()
+        If Not rdoStructure.Checked AndAlso IsSelectedObjectGraph() Then
             ucrBase.clsRsyntax.iCallType = 3
         Else
             ucrBase.clsRsyntax.iCallType = 2
@@ -103,10 +111,43 @@ Public Class dlgViewObjects
     End Sub
 
     Private Sub ucrPnlContentsToReview_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlContentsToView.ControlContentsChanged
-        SetiCallType()
+        'set the appropriate Base RFunction
+        If rdoPrint.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsGetObjectsFunction)
+        ElseIf rdoStructure.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsShowObjectStructureFunction)
+        End If
+        'set the iCallType
+        SetICallType()
     End Sub
 
     Private Sub ucrReceiverSelectedObject_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedObject.ControlContentsChanged
         TestOKEnabled()
+        SetICallType()
     End Sub
+
+    Private Function IsSelectedObjectGraph() As Boolean
+        Dim bGraph As Boolean = False
+        Dim clsGetGraphNames As RFunction
+        Dim expItems As SymbolicExpression
+        Dim strArr As String()
+
+        clsGetGraphNames = New RFunction
+        clsGetGraphNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graph_names")
+        clsGetGraphNames.AddParameter(strParameterName:="data_name", strParameterValue:=Chr(34) & ucrSelectorForViewObject.strCurrentDataFrame & Chr(34), iPosition:=0)
+
+        expItems = frmMain.clsRLink.RunInternalScriptGetValue(clsGetGraphNames.ToScript(), bSilent:=True)
+
+        If expItems IsNot Nothing AndAlso Not (expItems.Type = Internals.SymbolicExpressionType.Null) Then
+            strArr = expItems.AsCharacter.ToArray
+            If strArr IsNot Nothing Then
+                bGraph = strArr.Contains(ucrReceiverSelectedObject.GetVariableNames(bWithQuotes:=False))
+            Else
+                bGraph = False
+            End If
+        End If
+
+        Return bGraph
+    End Function
+
 End Class
