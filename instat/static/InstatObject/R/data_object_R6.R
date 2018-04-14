@@ -34,9 +34,9 @@ data_object <- R6::R6Class("data_object",
   # If no name for the data.frame has been given in the list we create a default one.
   # Decide how to choose default name index
   if ( !(is.null(data_name) || data_name == "" || missing(data_name))) {
-    if(data_name != make.names(data_name)) {
+    if(data_name != make.names(iconv(data_name, to = "ASCII//TRANSLIT", sub = "."))) {
       message("data_name is invalid. It will be made valid automatically.")
-      data_name <- make.names(data_name)
+      data_name <- make.names(iconv(data_name, to = "ASCII//TRANSLIT", sub = "."))
     }
     self$append_to_metadata(data_name_label, data_name)
   }
@@ -128,9 +128,9 @@ data_object$set("public", "set_data", function(new_data, messages=TRUE, check_na
       message("data is empty. Data will be an empty data frame.")
     }
     if(check_names) {
-      valid_names <- make.names(names(new_data))
+      valid_names <- make.names(iconv(names(new_data), to = "ASCII//TRANSLIT", sub = "."))
       if(!all(names(new_data) == valid_names)) {
-        warning("Not all column names are syntactically valid. make.names() will be used to force them to be valid.")
+        warning("Not all column names are syntactically valid. make.names() and iconv() will be used to force them to be valid.")
         names(new_data) <- valid_names
       }
     }
@@ -538,7 +538,7 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
     }
     if(use_col_name_as_prefix) curr_col_name = self$get_next_default_column_name(col_name)
     else curr_col_name = col_name[[i]]
-    curr_col_name <- make.names(curr_col_name)
+    curr_col_name <- make.names(iconv(curr_col_name, to = "ASCII//TRANSLIT", sub = "."))
     new_col_names <- c(new_col_names, curr_col_name)
     if(curr_col_name %in% self$get_column_names()) {
       message(paste("A column named", curr_col_name, "already exists. The column will be replaced in the data"))
@@ -1420,7 +1420,7 @@ data_object$set("public", "set_col_names", function(col_names) {
   if(missing(col_names)) col_names = 1:ncol(self$get_data_frame(use_current_filter = FALSE))
   if(length(col_names) != ncol(self$get_data_frame(use_current_filter = FALSE))) stop("col_names must be a vector of same length as the data")
   if(anyDuplicated(col_names) != 0) stop("col_names must be unique")
-  names(private$data) <- make.names(col_names)
+  names(private$data) <- make.names(iconv(col_names, to = "ASCII//TRANSLIT", sub = "."))
   self$data_changed <- TRUE
 }
 )
