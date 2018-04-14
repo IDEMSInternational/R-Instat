@@ -61,10 +61,20 @@ Public Class frmMain
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        Dim prdCustom As New clsCustomRenderer(New clsCustomColourTable)
+        Dim bClose As Boolean = False
+
+        mnuBar.Renderer = prdCustom
+        Tool_strip.Renderer = prdCustom
         SetMainMenusEnabled(False)
         Cursor = Cursors.WaitCursor
         'temporary
         mnuHelpAboutRInstat.Visible = False
+
+        ' This must be fixed because CurrentCulture affects functions such as Decimal.TryParse
+        ' e.g. "1.0" fails Decimal.TryParse if CurrentCulture = "fr-FR" because it expects "1,0"
+        ' Decimal point must be `.` and not `,` because R only accepts `.`
+        Thread.CurrentThread.CurrentCulture = New CultureInfo("en-GB")
 
         InitialiseOutputWindow()
         clsGrids.SetDataViewer(ucrDataViewer)
@@ -77,24 +87,32 @@ Public Class frmMain
         strStaticPath = Path.GetFullPath("static")
         strAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RInstat\")
 
-        AutoRecoverAndStartREngine()
+        bClose = AutoRecoverAndStartREngine()
+        If bClose Then
+            Application.Exit()
+        Else
+            'Do this after setting up R Link because loading options may run R code
+            LoadInstatOptions()
+            If clsInstatOptions.strLanguageCultureCode <> "en-GB" Then
+                autoTranslate(Me)
+            End If
+            'Do this after loading options because interval depends on options
+            'Interval is in milliseconds and option is in minutes
+            timer.Interval = (clsInstatOptions.iAutoSaveDataMinutes * 60 * 1000)
+            timer.Start()
 
-        'Do this after setting up R Link becuase setup edits Output window which is changed by Options
-        LoadInstatOptions()
+            AddHandler System.Windows.Forms.Application.Idle, AddressOf Application_Idle
 
-        'Do this after loading options because interval depends on options
-        'Interval is in milliseconds and option is in minutes
-        timer.Interval = (clsInstatOptions.iAutoSaveDataMinutes * 60 * 1000)
-        timer.Start()
+            'Sets up the Recent items
+            clsRecentItems.setToolStripItems(mnuFile, mnuTbOpen, mnuTbLast10Dialogs, sepStart, sepEnd)
+            'checks existence of MRU list
+            clsRecentItems.checkOnLoad()
+            Cursor = Cursors.Default
+            SetMainMenusEnabled(True)
 
-        AddHandler System.Windows.Forms.Application.Idle, AddressOf Application_Idle
-
-        'Sets up the Recent items
-        clsRecentItems.setToolStripItems(mnuFile, mnuTbShowLast10, sepStart, sepEnd)
-        'checks existence of MRU list
-        clsRecentItems.checkOnLoad()
-        Cursor = Cursors.Default
-        SetMainMenusEnabled(True)
+            mnuViewClimaticMenu.Checked = clsInstatOptions.bShowClimaticMenu
+            mnuViewProcurementMenu.Checked = clsInstatOptions.bShowProcurementMenu
+        End If
     End Sub
 
     Private Sub SetMainMenusEnabled(bEnabled As Boolean)
@@ -114,12 +132,18 @@ Public Class frmMain
     Private Sub Application_Idle(sender As Object, e As EventArgs)
         If clsInstatOptions.bAutoSaveData AndAlso Not timer.Enabled AndAlso (ActiveForm Is Nothing OrElse ActiveForm.Equals(Me)) AndAlso Not clsRLink.bRCodeRunning Then
             AutoSaveData()
+            ResetTimer()
+        End If
+    End Sub
+
+    Public Sub ResetTimer()
+        If clsInstatOptions IsNot Nothing AndAlso clsInstatOptions.bAutoSaveData IsNot Nothing AndAlso clsInstatOptions.bAutoSaveData Then
             timer.Interval = (clsInstatOptions.iAutoSaveDataMinutes * 60 * 1000)
             timer.Start()
         End If
     End Sub
 
-    Private Sub AutoRecoverAndStartREngine()
+    Private Function AutoRecoverAndStartREngine() As Boolean
         Dim iLogFiles As Integer = 0
         Dim iInternalLogFiles As Integer = 0
         Dim iDataFiles As Integer = 0
@@ -128,9 +152,10 @@ Public Class frmMain
         Dim strAutoSavedLogFilePaths() As String = Nothing
         Dim strAutoSavedInternalLogFilePaths() As String = Nothing
         Dim strAutoSavedDataFilePaths() As String = Nothing
+        Dim bClose As Boolean = False
 
         If Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1 Then
-            clsRLink.StartREngine(clsRLink.GetRSetupScript())
+            bClose = clsRLink.StartREngine(clsRLink.GetRSetupScript())
         Else
             If (Directory.Exists(strAutoSaveLogFolderPath)) Then
                 strAutoSavedLogFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveLogFolderPath).ToArray
@@ -152,36 +177,38 @@ Public Class frmMain
                     dlgAutoSaveRecovery.ShowDialog()
                     strScript = dlgAutoSaveRecovery.GetScript()
                     strDataFilePath = dlgAutoSaveRecovery.GetDataFilePath()
-                Else
-                    If iLogFiles > 0 Then
-                        Try
-                            File.Delete(strAutoSavedLogFilePaths(0))
-                        Catch ex As Exception
-                            MsgBox("Could not delete backup log file" & Environment.NewLine, "Error deleting file")
-                        End Try
-                    End If
-                    If iInternalLogFiles > 0 Then
-                        Try
-                            File.Delete(strAutoSavedInternalLogFilePaths(0))
-                        Catch ex As Exception
-                            MsgBox("Could not delete backup internal log file." & Environment.NewLine & ex.Message, "Error deleting file")
-                        End Try
-                    End If
-                    If iDataFiles > 0 Then
-                        Try
-                            File.Delete(strAutoSavedDataFilePaths(0))
-                        Catch ex As Exception
-                            MsgBox("Could not delete back data file." & Environment.NewLine & ex.Message, "Error deleting file")
-                        End Try
-                    End If
                 End If
             End If
-            clsRLink.StartREngine(strScript)
-            If strDataFilePath <> "" Then
-                clsRLink.LoadInstatDataObjectFromFile(strDataFilePath, strComment:="Loading auto recovered data file")
+            bClose = clsRLink.StartREngine(strScript)
+            If Not bClose Then
+                If strDataFilePath <> "" Then
+                    clsRLink.LoadInstatDataObjectFromFile(strDataFilePath, strComment:="Loading auto recovered data file")
+                End If
+                If iLogFiles > 0 Then
+                    Try
+                        File.Delete(strAutoSavedLogFilePaths(0))
+                    Catch ex As Exception
+                        MsgBox("Could not delete backup log file" & Environment.NewLine, "Error deleting file")
+                    End Try
+                End If
+                If iInternalLogFiles > 0 Then
+                    Try
+                        File.Delete(strAutoSavedInternalLogFilePaths(0))
+                    Catch ex As Exception
+                        MsgBox("Could not delete backup internal log file." & Environment.NewLine & ex.Message, "Error deleting file")
+                    End Try
+                End If
+                If iDataFiles > 0 Then
+                    Try
+                        File.Delete(strAutoSavedDataFilePaths(0))
+                    Catch ex As Exception
+                        MsgBox("Could not delete back data file." & Environment.NewLine & ex.Message, "Error deleting file")
+                    End Try
+                End If
             End If
         End If
-    End Sub
+        Return bClose
+    End Function
 
     Private Sub InitialiseOutputWindow()
         clsRLink.SetOutput(ucrOutput.ucrRichTextBox)
@@ -211,6 +238,12 @@ Public Class frmMain
         mnuViewDataFrameMetadata.Checked = False
         mnuViewColumnMetadata.Checked = False
         mnuViewScriptWindow.Checked = False
+
+        mnuTbDataView.Checked = True
+        mnuTbOutput.Checked = True
+        mnuTbColumnMetadata.Checked = False
+        mnuTbLog.Checked = False
+
         UpdateLayout()
     End Sub
 
@@ -232,11 +265,11 @@ Public Class frmMain
                     'FileStream.Close()
                 End Using
             Catch ex As Exception
-                MsgBox("Error attempting to use file:" & strFilePath & Environment.NewLine & "The file may be in use by another program or the file does not contain an instance of InstatOptions." & Environment.NewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error opening file")
+                MsgBox("Could not load options from:" & strFilePath & Environment.NewLine & "The file may be in use by another program or the file does not contain an instance of InstatOptions." & Environment.NewLine & "Options will be reset to factory defaults." & vbNewLine & "System error message: " & ex.Message, MsgBoxStyle.Information, "Cannot open options file")
                 clsInstatOptions = New InstatOptions
             End Try
         Else
-            MsgBox("File:" & strFilePath & " does not exist." & Environment.NewLine & "File will not be loaded.", MsgBoxStyle.Critical)
+            MsgBox("Options file:" & strFilePath & " does not exist." & Environment.NewLine & "File will not be loaded." & vbNewLine & "Options will be reset to factory defaults.", MsgBoxStyle.Information)
             clsInstatOptions = New InstatOptions
         End If
     End Sub
@@ -246,10 +279,15 @@ Public Class frmMain
 
         Try
             Using FileStream As Stream = File.Create(strFilePath)
-                serializer.Serialize(FileStream, clsInstatOptions)
-                'TODO Check whether this is needed or not. Using should do it automatically.
-                '     Also check general structure of this code.
-                'FileStream.Close()
+                'If the program is closed during startup of the RLink e.g. if R is not installed correctly
+                'then clsInstatOptions = Nothing because this is initialised after setup.
+                'Hence we do not need to save or give an error message.
+                If clsInstatOptions IsNot Nothing Then
+                    serializer.Serialize(FileStream, clsInstatOptions)
+                    'TODO Check whether this is needed or not. Using should do it automatically.
+                    '     Also check general structure of this code.
+                    'FileStream.Close()
+                End If
             End Using
         Catch ex As Exception
             MsgBox("Error attempting to save to file:" & strFilePath & Environment.NewLine & "The file may be in use by another program." & Environment.NewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error saving to file")
@@ -277,6 +315,7 @@ Public Class frmMain
     End Sub
 
     Private Sub RegularSequenceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnGenerateRegularSequence.Click
+        dlgRegularSequence.bNumericIsDefault = True
         dlgRegularSequence.ShowDialog()
     End Sub
 
@@ -293,7 +332,7 @@ Public Class frmMain
     End Sub
 
     Private Sub SummaryToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificSummary.Click
-        dlgNewSummaryTables.ShowDialog()
+        dlgSummaryTables.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareAddColumnTransform_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnCalculateTransform.Click
@@ -337,16 +376,8 @@ Public Class frmMain
     '    dlgNon_ParametricTwoWayAnova.ShowDialog()
     'End Sub
 
-    Private Sub NewWorksheetToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareNewWorksheet.Click
-        dlgNewWorksheet.ShowDialog()
-    End Sub
-
     Private Sub ImportDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareImportDailyData.Click
 
-    End Sub
-
-    Private Sub MakeFactorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareMakeFactor.Click
-        dlgMakeFactor.ShowDialog()
     End Sub
 
     Private Sub ShiftDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareShiftDailyData.Click
@@ -370,10 +401,6 @@ Public Class frmMain
 
     Private Sub mnuFileOpenFromFile_Click(sender As Object, e As EventArgs) Handles mnuFileOpenFromFile.Click
         dlgImportDataset.ShowDialog()
-    End Sub
-
-    Private Sub mnuFileSaveAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAs.Click
-        dlgSaveAs.ShowDialog()
     End Sub
 
     Private Sub mnuFileOpenFromLibrary_Click(sender As Object, e As EventArgs) Handles mnuFileOpenFromLibrary.Click
@@ -418,6 +445,10 @@ Public Class frmMain
                 splOverall.Panel1Collapsed = True
             End If
         End If
+        mnuTbDataView.Checked = mnuViewDataView.Checked
+        mnuTbOutput.Checked = mnuViewOutputWindow.Checked
+        mnuTbColumnMetadata.Checked = mnuViewColumnMetadata.Checked
+        mnuTbLog.Checked = mnuViewLog.Checked
     End Sub
 
     Private Sub mnuWindowVariable_Click(sender As Object, e As EventArgs) Handles mnuViewColumnMetadata.Click
@@ -498,22 +529,11 @@ Public Class frmMain
         dlgDeleteRowsOrColums.ShowDialog()
     End Sub
 
-    Private Sub EditLastDialogueToolStrip_Click(sender As Object, e As EventArgs) Handles EditLastDialogueToolStrip.Click
+    Private Sub EditLastDialogueToolStrip_Click(sender As Object, e As EventArgs) Handles mnuTbEditLastDialog.Click
         If clsRecentItems.mnuItems.Count > 0 Then
             clsRecentItems.mnuItems.Last.ShowDialog()
         End If
     End Sub
-
-    Private Sub mnuTbNew_Click(sender As Object, e As EventArgs) Handles mnuTbNew.Click
-        mnuFileNewDataFrame_Click(sender, e)
-    End Sub
-
-
-    Private Sub mnuTbOpen_Click(sender As Object, e As EventArgs) Handles mnuTbOpen.Click
-        mnuFileOpenFromFile_Click(sender, e)
-    End Sub
-
-
 
     Private Sub mnuTbSave_Click(sender As Object, e As EventArgs) Handles mnuTbSave.Click
         mnuFileSave_Click(sender, e)
@@ -534,10 +554,6 @@ Public Class frmMain
 
     Private Sub mnuTbCopy_Click(sender As Object, e As EventArgs) Handles mnuTbCopy.Click
         mnuEditCopy_Click(sender, e)
-    End Sub
-
-    Private Sub mnuTbPrint_Click(sender As Object, e As EventArgs) Handles mnuTbPrint.Click
-        mnuFilePrint_Click(sender, e)
     End Sub
 
     Private Sub mnuHelpHelp_Click(sender As Object, e As EventArgs)
@@ -577,10 +593,10 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareFactorLabel_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorLevelsLabels.Click
-        dlgLabels.ShowDialog()
+        dlgLabelsLevels.ShowDialog()
     End Sub
 
-    Private Sub mnuPrepareFactorViewLabels_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click
+    Private Sub mnuPrepareFactorViewLabels_Click(sender As Object, e As EventArgs) Handles mnuPrepareFactorViewLabels.Click
         dlgViewFactorLabels.ShowDialog()
     End Sub
 
@@ -733,10 +749,6 @@ Public Class frmMain
         dlgNon_ParametricOneSampleTests.ShowDialog()
     End Sub
 
-    Private Sub mnuModelOtherOneVariableGoodnessofFit_Click(sender As Object, e As EventArgs) Handles mnuModelOtherOneVariableGoodnessofFit.Click
-        dlgGoodnessofFit.ShowDialog()
-    End Sub
-
     Private Sub mnuModelOtherTwoVariablesSimpleRegression_Click(sender As Object, e As EventArgs) Handles mnuModelOtherTwoVariablesSimpleRegression.Click
         dlgTwoVariableFitModel.ShowDialog()
     End Sub
@@ -767,10 +779,6 @@ Public Class frmMain
 
     Private Sub mnuModelOtherGeneralANOVAGeneral_Click(sender As Object, e As EventArgs) Handles mnuModelOtherGeneralANOVAGeneral.Click
         dlgGeneralANOVA.ShowDialog()
-    End Sub
-
-    Private Sub mnuModelOtherGeneralRegression_Click(sender As Object, e As EventArgs) Handles mnuModelOtherGeneralRegression.Click
-        dlgGeneralRegression.ShowDialog()
     End Sub
 
     Private Sub OutputWindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuViewOutputWindow.Click
@@ -853,7 +861,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuDescribeOneVariableSummarise_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableSummarise.Click
-        dlgDescribeOneVariable.ShowDialog()
+        dlgOneVariableSummarise.ShowDialog()
     End Sub
 
     Private Sub mnuDescribeOneVariableGraph_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableGraph.Click
@@ -871,11 +879,15 @@ Public Class frmMain
                 If (Not System.IO.Directory.Exists(strAppDataPath)) Then
                     System.IO.Directory.CreateDirectory(strAppDataPath)
                 End If
-                clsRecentItems.saveOnClose()
-                SaveInstatOptions(Path.Combine(strAppDataPath, strInstatOptionsFile))
-                DeleteAutoSaveData()
-                DeleteAutoSaveLog()
-                DeleteAutoSaveDebugLog()
+                If clsRLink IsNot Nothing AndAlso clsRLink.bREngineInitialised Then
+                    clsRecentItems.saveOnClose()
+                    If clsInstatOptions IsNot Nothing Then
+                        SaveInstatOptions(Path.Combine(strAppDataPath, strInstatOptionsFile))
+                    End If
+                    DeleteAutoSaveData()
+                    DeleteAutoSaveLog()
+                    DeleteAutoSaveDebugLog()
+                End If
                 clsRLink.CloseREngine()
             Catch ex As Exception
                 MsgBox("Error attempting to save setting files to App Data folder." & Environment.NewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error saving settings")
@@ -985,7 +997,7 @@ Public Class frmMain
             dlgSaveFile.InitialDirectory = clsInstatOptions.strWorkingDirectory
             If dlgSaveFile.ShowDialog() = DialogResult.OK Then
                 Try
-                    File.WriteAllText(dlgSaveFile.FileName, frmLog.txtLog.Text)
+                    File.WriteAllText(dlgSaveFile.FileName, ucrLogWindow.txtLog.Text)
                 Catch
                     MsgBox("Could not save the log file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
                 End Try
@@ -1000,7 +1012,7 @@ Public Class frmMain
             dlgSaveFile.InitialDirectory = clsInstatOptions.strWorkingDirectory
             If dlgSaveFile.ShowDialog() = DialogResult.OK Then
                 Try
-                    File.WriteAllText(dlgSaveFile.FileName, frmScript.txtScript.Text)
+                    File.WriteAllText(dlgSaveFile.FileName, ucrScriptWindow.txtScript.Text)
                 Catch
                     MsgBox("Could not save the script file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
                 End Try
@@ -1088,7 +1100,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticOrganiseEventsWaterBalance_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareEndOfRains.Click
-        dlgWaterBalance.ShowDialog()
+        dlgEndOfRainsSeason.ShowDialog()
     End Sub
 
     Private Sub mnuOrganiseColumnGenerateCountInFactor_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnGenerateCountInFactor.Click
@@ -1128,7 +1140,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimdex_Click(sender As Object, e As EventArgs) Handles mnuClimdex.Click
-        dlgClimdex.ShowDialog()
+        dlgClimdexIndices.ShowDialog()
     End Sub
 
     Private Sub mnuDescribeOtherGraphicsDialogsWindRose_Click(sender As Object, e As EventArgs)
@@ -1259,16 +1271,12 @@ Public Class frmMain
         dlgNewMarkovChains.ShowDialog()
     End Sub
 
-    Private Sub mnuCliDefineClimaticData_Click(sender As Object, e As EventArgs) Handles mnuCliDefineClimaticData.Click
+    Private Sub mnuClimaticDefineClimaticData_Click(sender As Object, e As EventArgs) Handles mnuClimaticDefineClimaticData.Click
         DlgDefineClimaticData.ShowDialog()
     End Sub
 
-    Private Sub InventoryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InventoryToolStripMenuItem.Click
+    Private Sub mnuClimaticCheckDataInventory_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataInventory.Click
         dlgInventoryPlot.ShowDialog()
-    End Sub
-
-    Private Sub DisplayDailyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplayDailyToolStripMenuItem.Click
-        dlgDisplayDaily.ShowDialog()
     End Sub
 
     Private Sub mnuClimateFileClimSoft_Click(sender As Object, e As EventArgs) Handles mnuClimateFileClimSoft.Click
@@ -1335,7 +1343,7 @@ Public Class frmMain
         dlgCanonicalCorrelationAnalysis.ShowDialog()
     End Sub
 
-    Private Sub mnuCorruptionDefineCorruptionData_Click(sender As Object, e As EventArgs) Handles mnuCorruptionDefineCorruptionData.Click
+    Private Sub mnuProcurementDefineData_Click(sender As Object, e As EventArgs) Handles mnuProcurementDefineData.Click
         dlgDefineCorruption.ShowDialog()
     End Sub
 
@@ -1343,10 +1351,10 @@ Public Class frmMain
         dlgCumulativeDistribution.ShowDialog()
     End Sub
 
-    Private Sub FilterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FilterToolStripMenuItem.Click
+    Private Sub mnuProcurementPrepareFilterByCountry_Click(sender As Object, e As EventArgs) Handles mnuProcurementPrepareFilterByCountry.Click
         Dim lstDataNames As List(Of String)
 
-        dlgRestrict.bIsSubsetDialog = True
+        dlgRestrict.bIsSubsetDialog = False
         lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
         If lstDataNames.Count > 0 Then
             dlgRestrict.strDefaultDataframe = lstDataNames(0)
@@ -1364,20 +1372,12 @@ Public Class frmMain
         dlgFitCorruptionModel.ShowDialog()
     End Sub
 
-    Private Sub DefineRedFlagsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DefineRedFlagsToolStripMenuItem.Click
+    Private Sub mnuProcurementDefineRedFlags_Click(sender As Object, e As EventArgs) Handles mnuProcurementDefineRedFlags.Click
         dlgDefineRedFlags.ShowDialog()
-    End Sub
-
-    Private Sub mnuDescribeTwoVariablesTabulate_Click(sender As Object, e As EventArgs)
-
     End Sub
 
     Private Sub mnuDescribeTwoVariablesFrequencies_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoVariablesFrequencies.Click
         dlgTwoWayFrequencies.ShowDialog()
-    End Sub
-
-    Private Sub SummaryToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgNewSummaryTables.ShowDialog()
     End Sub
 
     Private Sub ImportFromCSPROToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportFromCSPROToolStripMenuItem.Click
@@ -1392,11 +1392,11 @@ Public Class frmMain
         dlgOpenNetCDF.ShowDialog()
     End Sub
 
-    Private Sub DefineOutputsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DefineOutputsToolStripMenuItem.Click
+    Private Sub mnuProcurementDefineCorruption_Click(sender As Object, e As EventArgs)
         dlgDefineCorruptionOutputs.ShowDialog()
     End Sub
 
-    Private Sub DefineCorruptionFreeCategoriesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SetRefLevelToolStripMenuItem.Click
+    Private Sub mnuProcurementPrepareSetFactorReferenceLevel_Click(sender As Object, e As EventArgs) Handles mnuProcurementPrepareSetFactorReferenceLevel.Click
         Dim lstDataNames As List(Of String)
 
         lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
@@ -1406,7 +1406,7 @@ Public Class frmMain
         dlgReferenceLevel.ShowDialog()
     End Sub
 
-    Private Sub DefineContractValueCategoriesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DefineContractValueCategoriesToolStripMenuItem.Click
+    Private Sub mnuProcurementPrepareDefineContractValueCategories_Click(sender As Object, e As EventArgs) Handles mnuProcurementPrepareDefineContractValueCategories.Click
         Dim lstDataNames As List(Of String)
 
         lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
@@ -1424,11 +1424,11 @@ Public Class frmMain
         dlgRecodeNumeric.ShowDialog()
     End Sub
 
-    Private Sub MergeAdditionalDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MergeAdditionalDataToolStripMenuItem.Click
+    Private Sub mnuProcurementPrepareMergeAdditionalData_Click(sender As Object, e As EventArgs) Handles mnuProcurementPrepareMergeAdditionalData.Click
         dlgMerge.ShowDialog()
     End Sub
 
-    Private Sub UseAwardDateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UseAwardDateToolStripMenuItem.Click
+    Private Sub mnuProcurementPrepareUseAwardDate_Click(sender As Object, e As EventArgs) Handles mnuProcurementPrepareUseAwardDate.Click
         Dim lstDataNames As List(Of String)
 
         lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
@@ -1446,29 +1446,25 @@ Public Class frmMain
         dlgOneWayFrequencies.ShowDialog()
     End Sub
 
-    Private Sub CalculateCRIToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CalculateCRIToolStripMenuItem.Click
-        dlgDefineCRI.ShowDialog()
-    End Sub
+    'Private Sub mnuProcurementPrepareStandardiseCountryName_Click(sender As Object, e As EventArgs)
+    '    Dim lstDataNames As List(Of String)
 
-    Private Sub CountryNamesCorrectionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CountryNamesCorrectionsToolStripMenuItem.Click
-        Dim lstDataNames As List(Of String)
+    '    lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
+    '    If lstDataNames.Count > 0 Then
+    '        dlgStandardiseCountryNames.strDefaultDataFrame = lstDataNames(0)
+    '        dlgStandardiseCountryNames.strDefaultColumn = clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_country_label")
+    '    Else
+    '        dlgStandardiseCountryNames.strDefaultDataFrame = ""
+    '        dlgStandardiseCountryNames.strDefaultColumn = ""
+    '    End If
+    '    dlgStandardiseCountryNames.ShowDialog()
+    'End Sub
 
-        lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
-        If lstDataNames.Count > 0 Then
-            dlgStandardiseCountryNames.strDefaultDataFrame = lstDataNames(0)
-            dlgStandardiseCountryNames.strDefaultColumn = clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_country_label")
-        Else
-            dlgStandardiseCountryNames.strDefaultDataFrame = ""
-            dlgStandardiseCountryNames.strDefaultColumn = ""
-        End If
-        dlgStandardiseCountryNames.ShowDialog()
-    End Sub
-
-    Private Sub RecodeNumericIntoQuantilesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RecodeNumericIntoQuantilesToolStripMenuItem.Click
+    Private Sub mnuProcurementPrepareRecodeNumericIntoQuantiles_Click(sender As Object, e As EventArgs) Handles mnuProcurementPrepareRecodeNumericIntoQuantiles.Click
         dlgRecodeNumericIntoQuantiles.ShowDialog()
     End Sub
 
-    Private Sub ResetToDefaultLayoutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ResetToDefaultLayoutToolStripMenuItem.Click
+    Private Sub mnuViewResetToDefaultLayout_Click(sender As Object, e As EventArgs) Handles mnuViewResetToDefaultLayout.Click
         SetToDefaultLayout()
     End Sub
 
@@ -1555,17 +1551,26 @@ Public Class frmMain
     Private Sub FrequencyTablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FrequencyTablesToolStripMenuItem.Click
         dlgSummaryBarOrPieChart.ShowDialog()
     End Sub
-
-    Private Sub DispalyClimaticDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DispalyClimaticDataToolStripMenuItem.Click
-        dlgDisplayDailyClimaticData.ShowDialog()
-    End Sub
-
     Private Sub mnuClimaticPrepareClimaticSummaries_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareClimaticSummaries.Click
         dlgClimaticSummary.ShowDialog()
     End Sub
 
+    Public Function GetDataFrameCount() As Integer
+        If ucrDataViewer IsNot Nothing AndAlso ucrDataViewer.grdData IsNot Nothing Then
+            Return ucrDataViewer.grdData.Worksheets.Count
+        Else
+            Return 0
+        End If
+    End Function
+
     Public Sub SetCurrentDataFrame(strDataName As String)
         ucrDataViewer.SetCurrentDataFrame(strDataName)
+        ucrColumnMeta.SetCurrentDataFrame(strDataName)
+    End Sub
+
+    Public Sub SetCurrentDataFrame(iIndex As Integer)
+        ucrDataViewer.SetCurrentDataFrame(iIndex)
+        ucrColumnMeta.SetCurrentDataFrame(iIndex)
     End Sub
 
     Private Sub WindroseToolStripMenuItem_Click(sender As Object, e As EventArgs)
@@ -1643,14 +1648,257 @@ Public Class frmMain
     End Sub
 
     Private Sub DuplicatesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DuplicatesToolStripMenuItem.Click
-        dlgDuplicatesConstructed.ShowDialog()
+        dlgDuplicates.ShowDialog()
     End Sub
 
-    Private Sub BoxplotsConceptualisedAndConstructedToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles BoxplotsConceptualisedAndConstructedToolStripMenuItem.Click
+    Private Sub mnuClimaticCheckDataBoxplot_Click_1(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataBoxplot.Click
         dlgClimaticBoxPlot.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticDescribeWindSpeedDirectionWindRose_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeWindSpeedDirectionWindRose.Click
         dlgWindrose.ShowDialog()
     End Sub
+
+    Private Sub mnuClimaticCMSAFPlotRegion_Click(sender As Object, e As EventArgs) Handles mnuClimaticCMSAFPlotRegion.Click
+        dlgPlotRegion.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticCheckDataDisplayDaily_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataDisplayDaily.Click
+        dlgDisplayDailyData.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareColumnInfillMissingDates_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnInfillMissingDates.Click
+        dlgInfill.ShowDialog()
+    End Sub
+
+    Private Sub mnuDataView_Click(sender As Object, e As EventArgs) Handles mnuTbDataView.Click
+        mnuViewDataView.Checked = Not mnuViewDataView.Checked
+        UpdateLayout()
+    End Sub
+
+    Private Sub mnuTbOutput_Click(sender As Object, e As EventArgs) Handles mnuTbOutput.Click
+        mnuViewOutputWindow.Checked = Not mnuViewOutputWindow.Checked
+        UpdateLayout()
+    End Sub
+
+    Private Sub mnuTbColumnMetadata_Click(sender As Object, e As EventArgs) Handles mnuTbColumnMetadata.Click
+        mnuViewColumnMetadata.Checked = Not mnuViewColumnMetadata.Checked
+        UpdateLayout()
+    End Sub
+
+    Private Sub mnuTbLog_Click(sender As Object, e As EventArgs) Handles mnuTbLog.Click
+        mnuViewLog.Checked = Not mnuViewLog.Checked
+        UpdateLayout()
+    End Sub
+
+    Private Sub mnuTbResetLayout_Click(sender As Object, e As EventArgs) Handles mnuTbResetLayout.Click
+        SetToDefaultLayout()
+    End Sub
+
+    Public Sub SetToolbarHeight(iHeight As Integer)
+        'Not currently working, do not use this method
+        'Tool_strip.ImageScalingSize = New Size(iHeight, iHeight)
+    End Sub
+
+    Private Sub mnuTbOpenFromLibrary_Click(sender As Object, e As EventArgs) Handles mnuTbOpenFromLibrary.Click
+        dlgFromLibrary.ShowDialog()
+    End Sub
+
+    Private Sub mnuTbOpen_ButtonClick(sender As Object, e As EventArgs) Handles mnuTbOpen.ButtonClick
+        dlgImportDataset.ShowDialog()
+    End Sub
+
+    Public Sub SetShowProcurementMenu(bNewShowProcurementMenu As Boolean)
+        mnuProcurement.Visible = bNewShowProcurementMenu
+        mnuViewProcurementMenu.Checked = bNewShowProcurementMenu
+    End Sub
+
+    Public Sub SetShowClimaticMenu(bNewShowClimaticMenu As Boolean)
+        mnuClimatic.Visible = bNewShowClimaticMenu
+        mnuViewClimaticMenu.Checked = bNewShowClimaticMenu
+    End Sub
+
+    Private Sub mnuViewClimaticMenu_Click(sender As Object, e As EventArgs) Handles mnuViewClimaticMenu.Click
+        clsInstatOptions.SetShowClimaticMenu(Not mnuViewClimaticMenu.Checked)
+    End Sub
+
+    Private Sub mnuViewProcurementMenu_Click(sender As Object, e As EventArgs) Handles mnuViewProcurementMenu.Click
+        clsInstatOptions.SetShowProcurementMenu(Not mnuViewProcurementMenu.Checked)
+    End Sub
+
+    Private Sub mnuPrepareCheckDataBoxplot_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataBoxplot.Click
+        dlgBoxplot.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareCheckDataOneVariableGraph_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataOneVariableGraph.Click
+        dlgOneVariableGraph.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareCheckDataOneVariableSummarise_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataOneVariableSummarise.Click
+        dlgOneVariableSummarise.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareCheckDataOneWayFrequencies_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataOneWayFrequencies.Click
+        dlgOneWayFrequencies.ShowDialog()
+    End Sub
+
+    Private Sub SummariseRedFlagsByCountryorOtherToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SummariseRedFlagsByCountryorOtherToolStripMenuItem.Click
+        Dim lstDataNames As List(Of String)
+
+        lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
+        If lstDataNames.Count > 0 Then
+            dlgColumnStats.strDefaultDataFrame = lstDataNames(0)
+            dlgColumnStats.strDefaultVariables = clsRLink.GetRedFlagColumnNames(lstDataNames(0))
+            dlgColumnStats.strDefaultFactors = {clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_country_label")}
+        Else
+            dlgColumnStats.strDefaultDataFrame = ""
+            dlgColumnStats.strDefaultVariables = Nothing
+            dlgColumnStats.strDefaultFactors = Nothing
+        End If
+        dlgColumnStats.ShowDialog()
+    End Sub
+
+    Private Sub mnuProcurementCalculateCRI_Click(sender As Object, e As EventArgs) Handles mnuProcurementCalculateCRI.Click
+        dlgDefineCRI.ShowDialog()
+    End Sub
+
+    Private Sub mnuProcurementDefineCorruption_Click_1(sender As Object, e As EventArgs) Handles mnuProcurementDefineCorruption.Click
+        dlgDefineCorruptionOutputs.ShowDialog()
+    End Sub
+
+    Private Sub SummariseRedFlagsByCountryAndYearorOtherToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SummariseRedFlagsByCountryAndYearorOtherToolStripMenuItem.Click
+        Dim lstDataNames As List(Of String)
+
+        lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
+        If lstDataNames.Count > 0 Then
+            dlgColumnStats.strDefaultDataFrame = lstDataNames(0)
+            dlgColumnStats.strDefaultVariables = clsRLink.GetRedFlagColumnNames(lstDataNames(0))
+            dlgColumnStats.strDefaultFactors = {clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_country_label"), clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_fiscal_year_label")}
+        Else
+            dlgColumnStats.strDefaultDataFrame = ""
+        dlgColumnStats.strDefaultVariables = Nothing
+        dlgColumnStats.strDefaultFactors = Nothing
+        End If
+        dlgColumnStats.ShowDialog()
+    End Sub
+
+    Private Sub OneVariableSummariseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OneVariableSummariseToolStripMenuItem.Click
+        Dim lstDataNames As List(Of String)
+        Dim lstColumns As New List(Of String)
+        Dim strRedFlags() As String
+
+        lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
+        If lstDataNames.Count > 0 Then
+            dlgOneVariableSummarise.strDefaultDataFrame = lstDataNames(0)
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_country_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_single_bidder_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_all_bids_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_procurement_type_3_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_tax_haven_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_contract_sector_label"))
+            strRedFlags = clsRLink.GetRedFlagColumnNames(lstDataNames(0))
+            If strRedFlags IsNot Nothing Then
+                lstColumns.AddRange(strRedFlags)
+            End If
+            lstColumns.RemoveAll(Function(x) x = "")
+            lstColumns = lstColumns.Distinct.ToList
+            dlgOneVariableSummarise.strDefaultColumns = lstColumns.ToArray()
+        Else
+            dlgOneVariableSummarise.strDefaultDataFrame = ""
+            dlgOneVariableSummarise.strDefaultColumns = Nothing
+        End If
+        dlgOneVariableSummarise.ShowDialog()
+    End Sub
+
+    Private Sub OneVariableGraphToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OneVariableGraphToolStripMenuItem.Click
+        Dim lstDataNames As List(Of String)
+        Dim lstColumns As New List(Of String)
+        Dim strRedFlags() As String
+
+        lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
+        If lstDataNames.Count > 0 Then
+            dlgOneVariableGraph.strDefaultDataFrame = lstDataNames(0)
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_country_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_single_bidder_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_all_bids_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_procurement_type_3_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_tax_haven_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_contract_sector_label"))
+            strRedFlags = clsRLink.GetRedFlagColumnNames(lstDataNames(0))
+            If strRedFlags IsNot Nothing Then
+                lstColumns.AddRange(strRedFlags)
+            End If
+            lstColumns.RemoveAll(Function(x) x = "")
+            dlgOneVariableGraph.strDefaultColumns = lstColumns.ToArray()
+        Else
+            dlgOneVariableGraph.strDefaultDataFrame = ""
+            dlgOneVariableGraph.strDefaultColumns = Nothing
+        End If
+        dlgOneVariableGraph.ShowDialog()
+    End Sub
+
+    Private Sub CorrelationsRedFlagsOrOthersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CorrelationsRedFlagsOrOthersToolStripMenuItem.Click
+        Dim lstDataNames As List(Of String)
+        Dim strComponentColumnNames() As String
+
+        lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
+        If lstDataNames.Count > 0 Then
+            dlgCorrelation.strDefaultDataFrame = lstDataNames(0)
+            strComponentColumnNames = clsRLink.GetRedFlagColumnNames(lstDataNames(0))
+            If strComponentColumnNames IsNot Nothing AndAlso strComponentColumnNames.Count > 0 Then
+                dlgCorrelation.strDefaultColumns = strComponentColumnNames
+            End If
+        Else
+            dlgCorrelation.strDefaultDataFrame = ""
+            dlgCorrelation.strDefaultColumns = Nothing
+        End If
+        dlgCorrelation.ShowDialog()
+    End Sub
+
+    Private Sub MapCountryValuesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MapCountryValuesToolStripMenuItem.Click
+        dlgCountryColouredMap.ShowDialog()
+    End Sub
+
+    Private Sub OpenNETcdfFileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenNETcdfFileToolStripMenuItem.Click
+        dlgOpenNetCDF.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticCheckDataQCRainfall_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataQCRainfall.Click
+        dlgClimaticCheckDataRain.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticCheckDataQCTemperatures_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataQCTemperatures.Click
+        dlgClimaticCheckDataTemperature.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeSpecificParallelCoordinatePlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificParallelCoordinatePlot.Click
+        dlgParallelCoordinatePlot.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareColumnCalculateColumnSummaries_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnCalculateColumnSummaries.Click
+        dlgColumnStats.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareColumnCalculateGeneralSummaries_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnCalculateGeneralSummaries.Click
+        dlgCalculationsSummary.ShowDialog()
+    End Sub
+
+    Private Sub mnuModelHypothesisTests_Click(sender As Object, e As EventArgs) Handles mnuModelHypothesisTests.Click
+        dlgHypothesisTestsCalculator.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareColumnGenerateDate_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnGenerateDate.Click
+        dlgRegularSequence.bNumericIsDefault = False
+        dlgRegularSequence.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDatesGenerateDates_Click(sender As Object, e As EventArgs) Handles mnuClimaticDatesGenerateDates.Click
+        dlgRegularSequence.bNumericIsDefault = False
+        dlgRegularSequence.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticPrepareEvapotranspiration_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareEvapotranspiration.Click
+        dlgEvapotranspiration.ShowDialog()
+    End Sub
+
 End Class

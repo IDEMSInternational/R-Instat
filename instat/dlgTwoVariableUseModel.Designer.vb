@@ -93,6 +93,8 @@ Partial Class dlgTwoVariableUseModel
         '
         'ucrModel
         '
+        Me.ucrModel.AddQuotesIfUnrecognised = True
+        Me.ucrModel.IsMultiline = False
         Me.ucrModel.IsReadOnly = False
         Me.ucrModel.Location = New System.Drawing.Point(97, 199)
         Me.ucrModel.Name = "ucrModel"
@@ -101,12 +103,15 @@ Partial Class dlgTwoVariableUseModel
         '
         'ucrReceiverUseModel
         '
+        Me.ucrReceiverUseModel.frmParent = Me
         Me.ucrReceiverUseModel.Location = New System.Drawing.Point(256, 52)
         Me.ucrReceiverUseModel.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverUseModel.Name = "ucrReceiverUseModel"
         Me.ucrReceiverUseModel.Selector = Nothing
         Me.ucrReceiverUseModel.Size = New System.Drawing.Size(120, 22)
+        Me.ucrReceiverUseModel.strNcFilePath = ""
         Me.ucrReceiverUseModel.TabIndex = 2
+        Me.ucrReceiverUseModel.ucrSelector = Nothing
         '
         'ucrSelectorUseModel
         '
@@ -138,7 +143,7 @@ Partial Class dlgTwoVariableUseModel
         Me.Controls.Add(Me.ucrReceiverUseModel)
         Me.Controls.Add(Me.ucrSelectorUseModel)
         Me.Controls.Add(Me.ucrBaseUseModel)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgTwoVariableUseModel"

@@ -37,7 +37,7 @@ Public Class dlgMakeDate
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        autoTranslate(Me)
+        'autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -80,6 +80,9 @@ Public Class dlgMakeDate
         dctDateFormat.Add("Year(4-digit)/Month(Full Name)/Day", Chr(34) & "%Y/%B/%d" & Chr(34))
         dctDateFormat.Add("Year(4-digit)-Month(abbr)-Day", Chr(34) & "%Y-%b-%d" & Chr(34))
         dctDateFormat.Add("Year(4-digit)/Month(abbr)/Day", Chr(34) & "%Y/%b/%d" & Chr(34))
+        dctDateFormat.Add("Year(4 digit)MonthDay(YEARMODA)", Chr(34) & "%Y%m%d" & Chr(34))
+
+        dctDateFormat.Add("Year(4-digit)Doy(Julian)", Chr(34) & "%Y%j" & Chr(34))
 
         dctDateFormat.Add("Day-Month-Year(4-digit)", Chr(34) & "%d-%m-%Y" & Chr(34))
         dctDateFormat.Add("Day/Month/Year(4-digit)", Chr(34) & "%d/%m/%Y" & Chr(34))
@@ -153,7 +156,7 @@ Public Class dlgMakeDate
         ucrPnlFormat.AddRadioButton(rdoDefaultFormat)
         ucrPnlFormat.AddRadioButton(rdoSpecifyFormat)
         ucrPnlFormat.AddRadioButton(rdoSpecifyOrigin)
-
+        ttMakeDate.SetToolTip(rdoDefaultFormat, "This will try 'Year(4-digit)-Month-Day %Y-%m-%d' then 'Year(4-digit)/Month/Day %Y/%m/%d' on the first non-NA element")
         ucrPnlDate.AddFunctionNamesCondition(rdoSingleColumn, "as.Date")
         ucrPnlDate.AddFunctionNamesCondition(rdoTwoColumns, frmMain.clsRLink.strInstatDataObject & "$make_date_yeardoy")
         ucrPnlDate.AddFunctionNamesCondition(rdoThreeColumns, frmMain.clsRLink.strInstatDataObject & "$make_date_yearmonthday")
@@ -210,7 +213,7 @@ Public Class dlgMakeDate
         ucrPnlDate.AddToLinkedControls(ucrChkTwoDigitYear, {rdoTwoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkTwoDigitYear.AddToLinkedControls(ucrNudCutoff, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudCutoff.SetLinkedDisplayControl(lblCutOffTwo)
-        ucrPnlDate.AddToLinkedControls(ucrInputComboBoxMonthTwo, {rdoTwoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="365/366")
+        ucrPnlDate.AddToLinkedControls(ucrInputComboBoxMonthTwo, {rdoTwoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="366")
         ucrReceiverYearTwo.SetLinkedDisplayControl(grpTwoColumns)
 
         'when rdoThreeColumn is checked
@@ -339,9 +342,7 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub SelectorHeader()
-        If rdoDefaultFormat.Checked Then
-            ucrReceiverForDate.strSelectorHeading = "Characters"
-        ElseIf rdoSpecifyOrigin.Checked Then
+        If rdoSpecifyOrigin.Checked Then
             ucrReceiverForDate.strSelectorHeading = "Numerics"
         Else
             ucrReceiverForDate.strSelectorHeading = "Variables"
@@ -389,10 +390,10 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub ucrPnlFormat_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFormat.ControlValueChanged, ucrInputFormat.ControlValueChanged, ucrInputOrigin.ControlValueChanged
+        ucrReceiverForDate.RemoveIncludedMetadataProperty("class")
         If rdoDefaultFormat.Checked Then
             grpFormats.Hide()
             cmdHelp.Visible = False
-            ucrReceiverForDate.SetIncludedDataTypes({"character", "factor"})
             ucrBase.clsRsyntax.RemoveParameter("format")
             ucrBase.clsRsyntax.RemoveParameter("origin")
         ElseIf rdoSpecifyOrigin.Checked Then
@@ -400,7 +401,6 @@ Public Class dlgMakeDate
             cmdHelp.Visible = False
             ucrReceiverForDate.SetIncludedDataTypes({"numeric"})
         Else
-            ucrReceiverForDate.SetIncludedDataTypes({"numeric", "character", "factor", "integer"})
             grpFormats.Show()
             cmdHelp.Visible = True
         End If

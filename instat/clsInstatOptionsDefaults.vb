@@ -18,6 +18,8 @@ Public Class clsInstatOptionsDefaults
     Public Shared ReadOnly DEFAULTbIncludeRDefaultParameters As Boolean = False
     Public Shared ReadOnly DEFAULTbCommandsinOutput As Boolean = True
     Public Shared ReadOnly DEFAULTbIncludeCommentDefault As Boolean = True
+    Public Shared ReadOnly DEFAULTbShowProcurementMenu As Boolean = True
+    Public Shared ReadOnly DEFAULTbShowClimaticMenu As Boolean = True
     Public Shared ReadOnly DEFAULTfntOutput As Font = New Font(FontFamily.GenericMonospace, 11, FontStyle.Regular)
     Public Shared ReadOnly DEFAULTclrOutput As Color = Color.Blue
     Public Shared ReadOnly DEFAULTfntComment As Font = New Font(FontFamily.GenericSansSerif, 11, FontStyle.Regular)
@@ -33,7 +35,7 @@ Public Class clsInstatOptionsDefaults
     Public Shared ReadOnly DEFAULTstrGraphDisplayOption As String = "view_output_window"
     Public Shared ReadOnly DEFAULTbChangeDataFrame As Boolean = False
     'TODO is this sensible?
-    Public Shared ReadOnly DEFAULTstrLanguageCultureCode As String = Threading.Thread.CurrentThread.CurrentCulture.Name
+    Public Shared ReadOnly DEFAULTstrLanguageCultureCode As String = Threading.Thread.CurrentThread.CurrentUICulture.Name
     Public Shared ReadOnly DEFAULTstrWorkingDirectory As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
     Public Shared ReadOnly DEFAULTlstColourPalette As List(Of Color) = ({Color.Aqua, Color.Gray, Color.LightGreen, Color.AliceBlue, Color.Maroon, Color.Green, Color.LightPink, Color.LightSkyBlue, Color.Brown, Color.MediumPurple, Color.White}).ToList
     Public Shared ReadOnly DEFAULTiDigits As Integer = 4
@@ -42,4 +44,5 @@ Public Class clsInstatOptionsDefaults
     Public Shared ReadOnly DEFAULTiAutoSaveDataMinutes As Integer = 10
     Public Shared ReadOnly DEFAULTbShowWaitDialog As Boolean = True
     Public Shared ReadOnly DEFAULTiWaitTimeDelaySeconds As Integer = 2
+    Public Shared ReadOnly DEFAULTiToolbarHeight As Integer = 30
 End Class

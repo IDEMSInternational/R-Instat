@@ -38,6 +38,7 @@ Partial Class sdgCorruptionCountryLevelColumns
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgCorruptionCountryLevelColumns))
         Me.ucrReceiverSmallState = New instat.ucrReceiverSingle()
         Me.lblSmallState = New System.Windows.Forms.Label()
         Me.lblCountryISO2 = New System.Windows.Forms.Label()
@@ -63,196 +64,145 @@ Partial Class sdgCorruptionCountryLevelColumns
         'ucrReceiverSmallState
         '
         Me.ucrReceiverSmallState.frmParent = Me
-        Me.ucrReceiverSmallState.Location = New System.Drawing.Point(251, 216)
-        Me.ucrReceiverSmallState.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverSmallState, "ucrReceiverSmallState")
         Me.ucrReceiverSmallState.Name = "ucrReceiverSmallState"
         Me.ucrReceiverSmallState.Selector = Nothing
-        Me.ucrReceiverSmallState.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSmallState.TabIndex = 10
+        Me.ucrReceiverSmallState.strNcFilePath = ""
+        Me.ucrReceiverSmallState.ucrSelector = Nothing
         '
         'lblSmallState
         '
-        Me.lblSmallState.AutoSize = True
-        Me.lblSmallState.Location = New System.Drawing.Point(251, 201)
+        resources.ApplyResources(Me.lblSmallState, "lblSmallState")
         Me.lblSmallState.Name = "lblSmallState"
-        Me.lblSmallState.Size = New System.Drawing.Size(63, 13)
-        Me.lblSmallState.TabIndex = 9
-        Me.lblSmallState.Text = "Small State:"
         '
         'lblCountryISO2
         '
-        Me.lblCountryISO2.AutoSize = True
-        Me.lblCountryISO2.Location = New System.Drawing.Point(251, 70)
+        resources.ApplyResources(Me.lblCountryISO2, "lblCountryISO2")
         Me.lblCountryISO2.Name = "lblCountryISO2"
-        Me.lblCountryISO2.Size = New System.Drawing.Size(73, 13)
-        Me.lblCountryISO2.TabIndex = 3
-        Me.lblCountryISO2.Text = "Country ISO2:"
         '
         'ucrReceiverISO2
         '
         Me.ucrReceiverISO2.frmParent = Me
-        Me.ucrReceiverISO2.Location = New System.Drawing.Point(251, 85)
-        Me.ucrReceiverISO2.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverISO2, "ucrReceiverISO2")
         Me.ucrReceiverISO2.Name = "ucrReceiverISO2"
         Me.ucrReceiverISO2.Selector = Nothing
-        Me.ucrReceiverISO2.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverISO2.TabIndex = 4
+        Me.ucrReceiverISO2.strNcFilePath = ""
+        Me.ucrReceiverISO2.ucrSelector = Nothing
         '
         'ucrCountryLevelSelector
         '
         Me.ucrCountryLevelSelector.bShowHiddenColumns = False
         Me.ucrCountryLevelSelector.bUseCurrentFilter = True
-        Me.ucrCountryLevelSelector.Location = New System.Drawing.Point(10, 10)
-        Me.ucrCountryLevelSelector.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrCountryLevelSelector, "ucrCountryLevelSelector")
         Me.ucrCountryLevelSelector.Name = "ucrCountryLevelSelector"
-        Me.ucrCountryLevelSelector.Size = New System.Drawing.Size(210, 180)
-        Me.ucrCountryLevelSelector.TabIndex = 0
         '
         'lblCountry
         '
-        Me.lblCountry.AutoSize = True
-        Me.lblCountry.Location = New System.Drawing.Point(251, 27)
+        resources.ApplyResources(Me.lblCountry, "lblCountry")
         Me.lblCountry.Name = "lblCountry"
-        Me.lblCountry.Size = New System.Drawing.Size(46, 13)
-        Me.lblCountry.TabIndex = 1
-        Me.lblCountry.Text = "Country:"
         '
         'ucrReceiverCountry
         '
         Me.ucrReceiverCountry.frmParent = Me
-        Me.ucrReceiverCountry.Location = New System.Drawing.Point(251, 42)
-        Me.ucrReceiverCountry.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverCountry, "ucrReceiverCountry")
         Me.ucrReceiverCountry.Name = "ucrReceiverCountry"
         Me.ucrReceiverCountry.Selector = Nothing
-        Me.ucrReceiverCountry.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverCountry.TabIndex = 2
+        Me.ucrReceiverCountry.strNcFilePath = ""
+        Me.ucrReceiverCountry.ucrSelector = Nothing
         '
         'ucrReceiverSS2015
         '
         Me.ucrReceiverSS2015.frmParent = Me
-        Me.ucrReceiverSS2015.Location = New System.Drawing.Point(395, 171)
-        Me.ucrReceiverSS2015.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverSS2015, "ucrReceiverSS2015")
         Me.ucrReceiverSS2015.Name = "ucrReceiverSS2015"
         Me.ucrReceiverSS2015.Selector = Nothing
-        Me.ucrReceiverSS2015.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSS2015.TabIndex = 18
+        Me.ucrReceiverSS2015.strNcFilePath = ""
+        Me.ucrReceiverSS2015.ucrSelector = Nothing
         '
         'lblSS2015
         '
-        Me.lblSS2015.AutoSize = True
-        Me.lblSS2015.Location = New System.Drawing.Point(395, 156)
+        resources.ApplyResources(Me.lblSS2015, "lblSS2015")
         Me.lblSS2015.Name = "lblSS2015"
-        Me.lblSS2015.Size = New System.Drawing.Size(51, 13)
-        Me.lblSS2015.TabIndex = 17
-        Me.lblSS2015.Text = "SS 2015:"
         '
         'ucrReceiverISO3
         '
         Me.ucrReceiverISO3.frmParent = Me
-        Me.ucrReceiverISO3.Location = New System.Drawing.Point(251, 128)
-        Me.ucrReceiverISO3.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverISO3, "ucrReceiverISO3")
         Me.ucrReceiverISO3.Name = "ucrReceiverISO3"
         Me.ucrReceiverISO3.Selector = Nothing
-        Me.ucrReceiverISO3.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverISO3.TabIndex = 6
+        Me.ucrReceiverISO3.strNcFilePath = ""
+        Me.ucrReceiverISO3.ucrSelector = Nothing
         '
         'lblCountryISO3
         '
-        Me.lblCountryISO3.AutoSize = True
-        Me.lblCountryISO3.Location = New System.Drawing.Point(251, 113)
+        resources.ApplyResources(Me.lblCountryISO3, "lblCountryISO3")
         Me.lblCountryISO3.Name = "lblCountryISO3"
-        Me.lblCountryISO3.Size = New System.Drawing.Size(73, 13)
-        Me.lblCountryISO3.TabIndex = 5
-        Me.lblCountryISO3.Text = "Country ISO3:"
         '
         'ucrReceiverSS2011
         '
         Me.ucrReceiverSS2011.frmParent = Me
-        Me.ucrReceiverSS2011.Location = New System.Drawing.Point(395, 85)
-        Me.ucrReceiverSS2011.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverSS2011, "ucrReceiverSS2011")
         Me.ucrReceiverSS2011.Name = "ucrReceiverSS2011"
         Me.ucrReceiverSS2011.Selector = Nothing
-        Me.ucrReceiverSS2011.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSS2011.TabIndex = 14
+        Me.ucrReceiverSS2011.strNcFilePath = ""
+        Me.ucrReceiverSS2011.ucrSelector = Nothing
         '
         'lblSS2013
         '
-        Me.lblSS2013.AutoSize = True
-        Me.lblSS2013.Location = New System.Drawing.Point(395, 113)
+        resources.ApplyResources(Me.lblSS2013, "lblSS2013")
         Me.lblSS2013.Name = "lblSS2013"
-        Me.lblSS2013.Size = New System.Drawing.Size(48, 13)
-        Me.lblSS2013.TabIndex = 15
-        Me.lblSS2013.Text = "SS 2013"
         '
         'ucrReceiverWBPPP
         '
         Me.ucrReceiverWBPPP.frmParent = Me
-        Me.ucrReceiverWBPPP.Location = New System.Drawing.Point(251, 171)
-        Me.ucrReceiverWBPPP.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverWBPPP, "ucrReceiverWBPPP")
         Me.ucrReceiverWBPPP.Name = "ucrReceiverWBPPP"
         Me.ucrReceiverWBPPP.Selector = Nothing
-        Me.ucrReceiverWBPPP.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverWBPPP.TabIndex = 8
+        Me.ucrReceiverWBPPP.strNcFilePath = ""
+        Me.ucrReceiverWBPPP.ucrSelector = Nothing
         '
         'ucrReceiverSS2013
         '
         Me.ucrReceiverSS2013.frmParent = Me
-        Me.ucrReceiverSS2013.Location = New System.Drawing.Point(395, 128)
-        Me.ucrReceiverSS2013.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverSS2013, "ucrReceiverSS2013")
         Me.ucrReceiverSS2013.Name = "ucrReceiverSS2013"
         Me.ucrReceiverSS2013.Selector = Nothing
-        Me.ucrReceiverSS2013.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSS2013.TabIndex = 16
+        Me.ucrReceiverSS2013.strNcFilePath = ""
+        Me.ucrReceiverSS2013.ucrSelector = Nothing
         '
         'lblWBPPP
         '
-        Me.lblWBPPP.AutoSize = True
-        Me.lblWBPPP.Location = New System.Drawing.Point(251, 156)
+        resources.ApplyResources(Me.lblWBPPP, "lblWBPPP")
         Me.lblWBPPP.Name = "lblWBPPP"
-        Me.lblWBPPP.Size = New System.Drawing.Size(52, 13)
-        Me.lblWBPPP.TabIndex = 7
-        Me.lblWBPPP.Text = "WB PPP:"
         '
         'lblSS2011
         '
-        Me.lblSS2011.AutoSize = True
-        Me.lblSS2011.Location = New System.Drawing.Point(395, 70)
+        resources.ApplyResources(Me.lblSS2011, "lblSS2011")
         Me.lblSS2011.Name = "lblSS2011"
-        Me.lblSS2011.Size = New System.Drawing.Size(51, 13)
-        Me.lblSS2011.TabIndex = 13
-        Me.lblSS2011.Text = "SS 2011:"
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(186, 252)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(142, 30)
-        Me.ucrBase.TabIndex = 19
         '
         'lblSS2009
         '
-        Me.lblSS2009.AutoSize = True
-        Me.lblSS2009.Location = New System.Drawing.Point(395, 27)
+        resources.ApplyResources(Me.lblSS2009, "lblSS2009")
         Me.lblSS2009.Name = "lblSS2009"
-        Me.lblSS2009.Size = New System.Drawing.Size(51, 13)
-        Me.lblSS2009.TabIndex = 11
-        Me.lblSS2009.Text = "SS 2009:"
         '
         'ucrReceiverSS2009
         '
         Me.ucrReceiverSS2009.frmParent = Me
-        Me.ucrReceiverSS2009.Location = New System.Drawing.Point(395, 42)
-        Me.ucrReceiverSS2009.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverSS2009, "ucrReceiverSS2009")
         Me.ucrReceiverSS2009.Name = "ucrReceiverSS2009"
         Me.ucrReceiverSS2009.Selector = Nothing
-        Me.ucrReceiverSS2009.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSS2009.TabIndex = 12
+        Me.ucrReceiverSS2009.strNcFilePath = ""
+        Me.ucrReceiverSS2009.ucrSelector = Nothing
         '
         'sdgCorruptionCountryLevelColumns
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(523, 288)
         Me.Controls.Add(Me.lblSS2009)
         Me.Controls.Add(Me.ucrReceiverSS2009)
         Me.Controls.Add(Me.ucrBase)
@@ -277,8 +227,6 @@ Partial Class sdgCorruptionCountryLevelColumns
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgCorruptionCountryLevelColumns"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Country Level Columns"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

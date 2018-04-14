@@ -30,7 +30,7 @@ Public Class dlgCombine
         End If
         SetRCodeforControls(bReset)
         bReset = False
-        autoTranslate(Me)
+        'autoTranslate(Me)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
@@ -48,7 +48,7 @@ Public Class dlgCombine
         ucrFactorsReceiver.Selector = ucrSelectorCombineFactors
         ucrFactorsReceiver.SetMeAsReceiver()
         ucrFactorsReceiver.bUseFilteredData = False
-        ucrFactorsReceiver.SetIncludedDataTypes({"factor"})
+        ucrFactorsReceiver.SetIncludedDataTypes({"factor"}, bStrict:=True)
 
         ' Input Column Name
         ucrNewColName.SetIsTextBox()

@@ -21,7 +21,7 @@ Public Class dlgCountinFactor
     Private clsDefaultFunction As New RFunction
 
     Private Sub dlgCountinFactor_Load(sender As Object, e As EventArgs) Handles Me.Load
-        autoTranslate(Me)
+        'autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -41,7 +41,7 @@ Public Class dlgCountinFactor
         ucrCountReceiver.SetParameter(New RParameter("nesting.fac", 0))
         ucrCountReceiver.SetParameterIsRFunction()
         ucrCountReceiver.Selector = ucrCountSelector
-        ucrCountReceiver.SetIncludedDataTypes({"factor"})
+        ucrCountReceiver.SetIncludedDataTypes({"factor"}, bStrict:=True)
         ucrCountReceiver.strSelectorHeading = "Factors"
         ucrCountReceiver.SetMeAsReceiver()
         ucrCountReceiver.bUseFilteredData = False

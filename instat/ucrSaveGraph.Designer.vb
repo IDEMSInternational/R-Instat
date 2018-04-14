@@ -38,36 +38,32 @@ Partial Class ucrSaveGraph
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrSaveGraph))
         Me.ucrInputGraphName = New instat.ucrInputComboBox()
         Me.chkSaveGraph = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'ucrInputGraphName
         '
-        Me.ucrInputGraphName.Location = New System.Drawing.Point(86, 0)
+        Me.ucrInputGraphName.AddQuotesIfUnrecognised = True
+        Me.ucrInputGraphName.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputGraphName, "ucrInputGraphName")
         Me.ucrInputGraphName.Name = "ucrInputGraphName"
-        Me.ucrInputGraphName.Size = New System.Drawing.Size(180, 20)
-        Me.ucrInputGraphName.TabIndex = 0
         '
         'chkSaveGraph
         '
-        Me.chkSaveGraph.AutoSize = True
-        Me.chkSaveGraph.Location = New System.Drawing.Point(0, 3)
+        resources.ApplyResources(Me.chkSaveGraph, "chkSaveGraph")
         Me.chkSaveGraph.Name = "chkSaveGraph"
-        Me.chkSaveGraph.Size = New System.Drawing.Size(83, 17)
-        Me.chkSaveGraph.TabIndex = 1
         Me.chkSaveGraph.Tag = "Save_Graph"
-        Me.chkSaveGraph.Text = "Save Graph"
         Me.chkSaveGraph.UseVisualStyleBackColor = True
         '
         'ucrSaveGraph
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.chkSaveGraph)
         Me.Controls.Add(Me.ucrInputGraphName)
         Me.Name = "ucrSaveGraph"
-        Me.Size = New System.Drawing.Size(265, 20)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

@@ -37,6 +37,7 @@ Public Class dlgImportDataset
     Public strCurrentDirectory As String
     Public strFileToOpenOn As String
     Private bDialogLoaded As Boolean
+    Private iDataFrameCount As Integer
 
     Public Sub New()
 
@@ -57,7 +58,7 @@ Public Class dlgImportDataset
 
     Private Sub dlgImportDataset_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         bDialogLoaded = False
-        autoTranslate(Me)
+        'autoTranslate(Me)
         Me.Show()
         If bFirstLoad Then
             InitialiseDialog()
@@ -84,14 +85,25 @@ Public Class dlgImportDataset
             RefreshFilePreview()
             RefreshFrameView()
         Else
-            If Not File.Exists(strFilePathSystem) Then
-                MsgBox("File no longer exists: " & strFilePathSystem, MsgBoxStyle.Information, "File No Longer Exists")
-                SetControlsFromFile("")
-                bDialogLoaded = True
-                RefreshFilePreview()
-                RefreshFrameView()
+            'if none of the above then try setting the displayed values from the previous contents of ucrInputFilePath.
+            If Not String.IsNullOrEmpty(ucrInputFilePath.GetText()) Then
+                If File.Exists(ucrInputFilePath.GetText()) Then
+                    SetControlsFromFile(ucrInputFilePath.GetText())
+                    bDialogLoaded = True
+                    RefreshFilePreview()
+                    RefreshFrameView()
+                Else
+                    MsgBox("File no longer exists: " & strFilePathSystem, MsgBoxStyle.Information, "File No Longer Exists")
+                    SetControlsFromFile("")
+                    bDialogLoaded = True
+                    RefreshFilePreview()
+                    RefreshFrameView()
+                End If
             End If
         End If
+
+        'temprary fix for autotranslate(me) translating this to Label1. Can be removed after that
+        ucrSaveFile.SetLabelText("New Data Frame Name:")
         bDialogLoaded = True
         bReset = False
         TestOkEnabled()
@@ -610,7 +622,6 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub FillExcelSheets(strFilePath As String)
-        Dim i As Integer
         Dim expSheet As SymbolicExpression
         Dim chrSheets As CharacterVector
 
@@ -691,16 +702,30 @@ Public Class dlgImportDataset
                 clsImportExcel.AddParameter("which", ucrInputSelectSheetExcel.cboInput.SelectedIndex + 1)
                 If Not ucrSaveFile.UserTyped() Then
                     ucrSaveFile.SetName(ucrInputSelectSheetExcel.GetText(), bSilent:=True)
+                    ucrSaveFile.Focus()
                 End If
             End If
             RefreshFrameView()
         End If
     End Sub
 
+    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+        'Gets the current number of (visible) data frame before importing
+        'So correct current data frame can be set after
+        iDataFrameCount = frmMain.GetDataFrameCount()
+    End Sub
+
+    Private Sub ucrInputSheets_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSelectSheetExcel.ControlValueChanged
+
+    End Sub
+
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         ' add the item to the MRU (Most Recently Used) list...
         'Disabled until implemented correctly
         frmMain.clsRecentItems.addToMenu(strFilePathSystem)
+        'Sets the current data frame as the first new data frame
+        'Needed so that if multiple data frames imported, the last one is not the current data frame
+        frmMain.SetCurrentDataFrame(iDataFrameCount)
     End Sub
 
     Private Sub CSVControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkStringsAsFactorsCSV.ControlValueChanged, ucrInputNAStringsCSV.ControlValueChanged, ucrInputEncodingCSV.ControlValueChanged, ucrInputSeparatorCSV.ControlValueChanged, ucrInputHeadersCSV.ControlValueChanged, ucrInputDecimalCSV.ControlValueChanged, ucrNudLinesToSkipCSV.ControlValueChanged, ucrPnlRowNamesCSV.ControlValueChanged

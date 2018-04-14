@@ -54,6 +54,10 @@ Public Class ucrInput
         Return ""
     End Function
 
+    Public Overridable Function GetValue() As Object
+        Return Nothing
+    End Function
+
     Public Overridable Sub Reset()
         bUserTyped = False
     End Sub
@@ -452,7 +456,7 @@ Public Class ucrInput
         End Set
     End Property
 
-    Protected Overrides Sub SetToValue(objTemp As Object)
+    Public Overrides Sub SetToValue(objTemp As Object)
         If objTemp IsNot Nothing Then
             SetName(objTemp.ToString())
         Else

@@ -322,13 +322,14 @@ Public Class ucrReceiverMultiple
                 lstSelectedVariables.Items.Add(kvpTempItem.Value).Group = grpCurr
                 lstSelectedVariables.Items(lstSelectedVariables.Items.Count - 1).Tag = kvpTempItem.Key
                 lstSelectedVariables.Items(lstSelectedVariables.Items.Count - 1).Name = kvpTempItem.Value
+                lstSelectedVariables.Items(lstSelectedVariables.Items.Count - 1).ToolTipText = kvpTempItem.Value
                 Selector.AddToVariablesList(kvpTempItem.Value, kvpTempItem.Key)
             End If
         Next
         OnSelectionChanged()
     End Sub
 
-    Public Overrides Sub Add(strItem As String, Optional strDataFrame As String = "")
+    Public Overrides Sub Add(strItem As String, Optional strDataFrame As String = "", Optional bFixreceiver As Boolean = False)
         Dim kvpItems(0) As KeyValuePair(Of String, String)
         If strDataFrame = "" Then
             For i = 0 To Selector.lstAvailableVariable.Items.Count - 1
@@ -339,6 +340,8 @@ Public Class ucrReceiverMultiple
         End If
         kvpItems(0) = New KeyValuePair(Of String, String)(strDataFrame, strItem)
         AddMultiple(kvpItems)
+
+        lstSelectedVariables.Enabled = Not bFixreceiver
     End Sub
 
     Public Sub AddItemsWithMetadataProperty(strCurrentDataFrame As String, strProperty As String, strValues As String())
@@ -421,7 +424,6 @@ Public Class ucrReceiverMultiple
 
     Public Sub CheckSingleType()
         Dim strVariableTypes As List(Of String)
-        Dim strVarType As String
 
         If bSingleType Then
             If (Not IsEmpty()) Then
@@ -429,7 +431,7 @@ Public Class ucrReceiverMultiple
                 If strVariableTypes.Count > 1 AndAlso Not (strVariableTypes.Count = 2 AndAlso strVariableTypes.Contains("numeric") AndAlso strVariableTypes.Contains("integer")) AndAlso Not (strVariableTypes.Count = 2 AndAlso strVariableTypes.Contains("factor") AndAlso strVariableTypes.Contains("ordered,factor")) Then
                     MsgBox("Cannot add these variables. All variables must be of the same data type.", MsgBoxStyle.OkOnly, "Cannot add variables.")
                     Clear()
-                Else
+                ElseIf strVariableTypes.Count > 0 Then
                     If strVariableTypes(0) = "integer" Then
                         SetDataType("numeric")
                     ElseIf strVariableTypes(0) = "ordered,factor" Then
@@ -437,6 +439,8 @@ Public Class ucrReceiverMultiple
                     Else
                         SetDataType(strVariableTypes(0))
                     End If
+                Else
+                    RemoveIncludedMetadataProperty(strProperty:="class")
                 End If
             Else
                 RemoveIncludedMetadataProperty(strProperty:="class")
@@ -456,4 +460,8 @@ Public Class ucrReceiverMultiple
     Private Sub ucrReceiverMultiple_SelectionChanged(sender As Object, e As EventArgs) Handles Me.SelectionChanged
         CheckSingleType()
     End Sub
+
+    Public Overrides Function GetItemsDataFrames() As List(Of String)
+        Return GetCurrGroupNames()
+    End Function
 End Class

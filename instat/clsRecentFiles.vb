@@ -20,13 +20,15 @@ Public Class clsRecentFiles
     Private strRecentFilesPath As String
     Private mnuTbShowLast10 As ToolStripDropDownItem
     Private mnuFile As ToolStripMenuItem
+    Private mnuFileIcon As ToolStripSplitButton
     Private sepStart As ToolStripSeparator
     Private sepEnd As ToolStripSeparator
     ' declare a variable to contain the most recent opened items
     Private strListMRU As New List(Of String)
 
-    Public Sub setToolStripItems(dfMnuFile As ToolStripMenuItem, dfMnuToolStripDropdown As ToolStripDropDownItem, dfSepStart As ToolStripSeparator, dfSepEnd As ToolStripSeparator)
+    Public Sub setToolStripItems(dfMnuFile As ToolStripMenuItem, dfMnuFileIcon As ToolStripSplitButton, dfMnuToolStripDropdown As ToolStripDropDownItem, dfSepStart As ToolStripSeparator, dfSepEnd As ToolStripSeparator)
         mnuFile = dfMnuFile
+        mnuFileIcon = dfMnuFileIcon
         mnuTbShowLast10 = dfMnuToolStripDropdown
         sepStart = dfSepStart
         sepEnd = dfSepEnd
@@ -103,7 +105,7 @@ Public Class clsRecentFiles
     Private Sub UpdateItemsMenu()
         'clears the menu items first
         Dim clsItems As New List(Of ToolStripItem)
-        If mnuTbShowLast10 IsNot Nothing AndAlso mnuFile IsNot Nothing AndAlso clsItems IsNot Nothing AndAlso mnuItems IsNot Nothing AndAlso strListMRU IsNot Nothing Then
+        If mnuTbShowLast10 IsNot Nothing AndAlso mnuFile IsNot Nothing AndAlso mnuFileIcon IsNot Nothing AndAlso clsItems IsNot Nothing AndAlso mnuItems IsNot Nothing AndAlso strListMRU IsNot Nothing Then
             'temp collection for recent dialogs
             For Each clsMenu As ToolStripItem In mnuTbShowLast10.DropDownItems
                 If Not clsMenu.Tag Is Nothing Then
@@ -120,10 +122,19 @@ Public Class clsRecentFiles
                     End If
                 End If
             Next
+            'temp collection for recent files
+            For Each clsMenu As ToolStripItem In mnuFileIcon.DropDownItems
+                If Not clsMenu.Tag Is Nothing Then
+                    If (clsMenu.Tag.ToString().StartsWith("MRU:")) Then
+                        clsItems.Add(clsMenu)
+                    End If
+                End If
+            Next
             'go through the list and remove each from the menu
             For Each clsMenu As ToolStripItem In clsItems
                 mnuTbShowLast10.DropDownItems.Remove(clsMenu)
                 mnuFile.DropDownItems.Remove(clsMenu)
+                mnuFileIcon.DropDownItems.Remove(clsMenu)
             Next
 
             'displays items (_in reverse order) for dialogs
@@ -143,13 +154,17 @@ Public Class clsRecentFiles
                 Dim sPath As String = strListMRU(iCounter)
                 ' create new ToolStripItem, displaying the name of the file...
                 Dim clsItem As New ToolStripMenuItem(Path.GetFileName(sPath))
+                Dim clsItemIcon As New ToolStripMenuItem(Path.GetFileName(sPath))
                 ' set the tag - identifies the ToolStripItem as an MRU item and 
                 ' contains the full path so it can be opened later...
                 clsItem.Tag = "MRU:" & sPath
+                clsItemIcon.Tag = "MRU:" & sPath
                 ' hook into the click event handler so we can open the file later...
                 AddHandler clsItem.Click, AddressOf mnuFileMRU_Click
+                AddHandler clsItemIcon.Click, AddressOf mnuFileMRU_Click
                 ' insert into DropDownItems list...
                 mnuFile.DropDownItems.Insert(mnuFile.DropDownItems.Count - 1, clsItem)
+                mnuFileIcon.DropDownItems.Insert(mnuFileIcon.DropDownItems.Count, clsItemIcon)
             Next
 
             ' show separator

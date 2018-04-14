@@ -21,6 +21,10 @@ Public Class ucrButtons
     Public iHelpTopicID As Integer
     Public bFirstLoad As Boolean
     Public strComment As String
+    Public Event BeforeClickOk(sender As Object, e As EventArgs)
+    Public Event ClickOk(sender As Object, e As EventArgs)
+    Public Event ClickReset(sender As Object, e As EventArgs)
+    Public Event ClickClose(sender As Object, e As EventArgs)
 
     Public Sub New()
         ' This call is required by the designer.
@@ -35,6 +39,7 @@ Public Class ucrButtons
 
     Private Sub cmdCancel_Click(sender As Object, e As EventArgs) Handles cmdCancel.Click
         Me.ParentForm.Hide()
+        RaiseEvent ClickClose(sender, e)
     End Sub
 
     Private Sub cmdReset_Click(sender As Object, e As EventArgs) Handles cmdReset.Click
@@ -42,14 +47,12 @@ Public Class ucrButtons
         RaiseEvent ClickReset(sender, e)
     End Sub
 
-    Public Event BeforeClickOk(sender As Object, e As EventArgs)
-    Public Event ClickOk(sender As Object, e As EventArgs)
-    Public Event ClickReset(sender As Object, e As EventArgs)
-
     Private Sub cmdOk_Click(sender As Object, e As EventArgs) Handles cmdOk.Click
         Dim lstCurrentEnabled As New List(Of Boolean)
         Dim ctrTempControl As Control
         Dim j As Integer
+
+        'this is getting the current controls on the form and disables then to prevent user to interract with form when its running
 
         For Each ctrTempControl In ParentForm.Controls
             lstCurrentEnabled.Add(ctrTempControl.Enabled)
@@ -89,8 +92,11 @@ Public Class ucrButtons
         Dim lstAssignToCodes As New List(Of RCodeStructure)
         Dim lstAssignToStrings As New List(Of String)
 
+        'rm is the R function to remove the created objects from the memory at the end of the script and c is the function that puts them together in a list
         clsRemoveFunc.SetRCommand("rm")
         clsRemoveListFun.SetRCommand("c")
+
+        'this sets the comment for the script
         If chkComment.Checked Then
             strComments = txtComment.Text
         Else
@@ -148,13 +154,14 @@ Public Class ucrButtons
                 Else
                     strComment = ""
                 End If
-                frmMain.clsRLink.RunScript(lstAfterScripts(i), iCallType:=lstAfterCodes(i).iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread)
+                frmMain.clsRLink.RunScript(lstAfterScripts(i), iCallType:=lstAfterCodes(i).iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread, bShowWaitDialogOverride:=clsRsyntax.bShowWaitDialogOverride)
             Else
                 frmMain.AddToScriptWindow(lstAfterScripts(i))
             End If
         Next
 
         'Clear variables from global environment
+        'TODO check that this line could be removed
         clsRemoveFunc.ClearParameters()
         'TODO remove assign to instat object
         'lstAssignToStrings.RemoveAll(Function(x) x = frmMain.clsRLink.strInstatDataObject)
@@ -188,7 +195,7 @@ Public Class ucrButtons
 
     Private Sub ucrButtons_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         frmMain.clsRecentItems.addToMenu(Me.Parent)
-        translateEach(Controls)
+        translateEach(Controls, Me)
         If bFirstLoad Then
             SetDefaults()
             bFirstLoad = False

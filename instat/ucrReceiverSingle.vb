@@ -43,7 +43,7 @@ Public Class ucrReceiverSingle
 
     End Sub
 
-    Public Overrides Sub Add(strItem As String, Optional strDataFrame As String = "")
+    Public Overrides Sub Add(strItem As String, Optional strDataFrame As String = "", Optional bFixReceiver As Boolean = False)
         Dim clsGetDataType As New RFunction
         Dim strCurrentItemType As String
         Dim expColumnType As SymbolicExpression
@@ -118,6 +118,7 @@ Public Class ucrReceiverSingle
             If bRemove Then
                 RemoveSelected()
             End If
+            txtReceiverSingle.Enabled = Not bFixReceiver
         End If
     End Sub
 
@@ -287,12 +288,14 @@ Public Class ucrReceiverSingle
     End Sub
 
     Public Sub CheckAutoFill()
-        If bAutoFill Then
-            If Selector IsNot Nothing Then
-                SetMeAsReceiver()
-                If Selector.lstAvailableVariable.Items.Count = 1 Then
-                    Add(Selector.lstAvailableVariable.Items(0).Text, Selector.strCurrentDataFrame)
-                End If
+        'TODO When there are receivers with bAttachedToPrimaryDataFrame = False
+        '     don't always want to autofill when dataframe is changed.
+        '     Something like AndAlso Selector.CurrentReceiver.bAttachedToPrimaryDataFrame
+        '     except always want to autofill when resetting regardless of current receiver
+        If bAutoFill AndAlso Selector IsNot Nothing AndAlso (Selector.CurrentReceiver Is Nothing OrElse Selector.CurrentReceiver.bAttachedToPrimaryDataFrame) Then
+            SetMeAsReceiver()
+            If Selector.lstAvailableVariable.Items.Count = 1 Then
+                Add(Selector.lstAvailableVariable.Items(0).Text, Selector.strCurrentDataFrame)
             End If
         End If
     End Sub
@@ -315,7 +318,7 @@ Public Class ucrReceiverSingle
                 AddHandler ParentForm.Shown, AddressOf ParentForm_Shown
             End If
             bFirstLoad = False
-            If Selector IsNot Nothing AndAlso Not Selector.CurrentReceiver.Equals(Me) Then
+            If Selector IsNot Nothing AndAlso Selector.CurrentReceiver IsNot Nothing AndAlso Not Selector.CurrentReceiver.Equals(Me) Then
                 RemoveColor()
             End If
         End If
@@ -324,4 +327,8 @@ Public Class ucrReceiverSingle
     Public Overrides Sub SetTextColour(clrNew As Color)
         txtReceiverSingle.ForeColor = clrNew
     End Sub
+
+    Public Overrides Function GetItemsDataFrames() As List(Of String)
+        Return New List(Of String)({strDataFrameName})
+    End Function
 End Class

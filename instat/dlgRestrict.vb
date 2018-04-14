@@ -45,7 +45,7 @@ Public Class dlgRestrict
     End Sub
 
     Private Sub dlgRestrict_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
+        'autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -117,8 +117,8 @@ Public Class dlgRestrict
     End Sub
 
     Private Sub OpenNewFilterSubDialog()
-        sdgCreateFilter.ucrCreateFilter.SetDefaultDataFrame(strDefaultDataframe)
-        If strDefaultColumn <> "" Then
+        sdgCreateFilter.ucrCreateFilter.SetDefaultDataFrame(ucrSelectorFilter.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        If strDefaultColumn <> "" AndAlso ucrSelectorFilter.ucrAvailableDataFrames.cboAvailableDataFrames.Text = strDefaultDataframe Then
             sdgCreateFilter.ucrCreateFilter.SetDefaultColumn(strDefaultColumn)
         End If
         sdgCreateFilter.ShowDialog()

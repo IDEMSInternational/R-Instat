@@ -42,6 +42,7 @@ Public Class dlgInfill
         ucrReceiverDate.SetParameter(New RParameter("date_name", 1))
         ucrReceiverDate.SetParameterIsString()
         ucrReceiverDate.strSelectorHeading = "Date"
+        ucrReceiverDate.bAutoFill = True
 
         'Set ucrreceiver factors
         ucrReceiverFactors.SetIncludedDataTypes({"factor"})
@@ -55,6 +56,10 @@ Public Class dlgInfill
         ucrInfillSelector.SetParameter(New RParameter("data_name", 0))
         ucrInfillSelector.SetParameterIsString()
 
+        ucrChkResort.SetParameter(New RParameter("resort", 3))
+        ucrChkResort.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkResort.SetRDefault("TRUE")
+        ucrChkResort.SetText("Sort Data after Infilling")
     End Sub
 
     Private Sub SetDefaults()

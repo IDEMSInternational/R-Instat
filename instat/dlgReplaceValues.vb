@@ -20,6 +20,8 @@ Public Class dlgReplaceValues
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsReplace As New RFunction
+    Private strVarType As String = ""
+
     Private Sub dlgReplace_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -54,11 +56,25 @@ Public Class dlgReplaceValues
         ucrPnlOld.AddRadioButton(rdoOldMissing)
         ucrPnlOld.AddRadioButton(rdoOldInterval)
 
-        ucrPnlOld.AddParameterPresentCondition(rdoOldValue, "old_value")
         ucrPnlOld.AddParameterValuesCondition(rdoOldMissing, "old_is_missing", "TRUE")
-        ucrPnlOld.AddParameterPresentCondition(rdoOldInterval, "start_value")
-        ucrPnlOld.AddParameterPresentCondition(rdoOldInterval, "end_value")
+        ucrPnlOld.AddParameterPresentCondition(rdoOldValue, "old_is_missing", False)
+        ucrPnlOld.AddParameterPresentCondition(rdoOldInterval, "old_is_missing", False)
 
+        ucrPnlOld.AddParameterPresentCondition(rdoOldValue, "old_value")
+        ucrPnlOld.AddParameterPresentCondition(rdoOldMissing, "old_value", False)
+        ucrPnlOld.AddParameterPresentCondition(rdoOldInterval, "old_value", False)
+
+        ucrPnlOld.AddParameterPresentCondition(rdoOldInterval, "start_value")
+        ucrPnlOld.AddParameterPresentCondition(rdoOldMissing, "start_value", False)
+        ucrPnlOld.AddParameterPresentCondition(rdoOldValue, "start_value", False)
+
+        ucrPnlOld.AddParameterPresentCondition(rdoOldInterval, "end_value")
+        ucrPnlOld.AddParameterPresentCondition(rdoOldMissing, "end_value", False)
+        ucrPnlOld.AddParameterPresentCondition(rdoOldValue, "end_value", False)
+        'Temp fix otherwise you get a developer error on reopening the dialog when on rdoOldMissing
+        ucrPnlOld.bAllowNonConditionValues = True
+
+        ucrPnlOld.AddToLinkedControls(ucrPnlNew, {rdoOldInterval, rdoOldValue, rdoOldMissing}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoNewMissing)
         ucrPnlOld.AddToLinkedControls(ucrInputOldValue, {rdoOldValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
         ucrPnlOld.AddToLinkedControls(ucrInputRangeFrom, {rdoOldInterval}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrPnlOld.AddToLinkedControls(ucrInputRangeTo, {rdoOldInterval}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
@@ -146,14 +162,10 @@ Public Class dlgReplaceValues
     End Sub
 
     Private Sub TestOKEnabled()
-        If (Not ucrReceiverReplace.IsEmpty()) Then
-            If (((rdoOldValue.Checked AndAlso Not ucrInputOldValue.IsEmpty) OrElse (rdoOldInterval.Checked AndAlso Not ucrInputRangeFrom.IsEmpty() AndAlso Not ucrInputRangeTo.IsEmpty()) OrElse rdoOldMissing.Checked) AndAlso ((rdoNewValue.Checked AndAlso Not ucrInputNewValue.IsEmpty) OrElse rdoNewMissing.Checked) OrElse rdoNewFromBelow.Checked OrElse rdoNewFromAbove.Checked) Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
-        Else
+        If ucrReceiverReplace.IsEmpty() OrElse (rdoOldInterval.Checked AndAlso (ucrInputRangeFrom.IsEmpty() OrElse ucrInputRangeTo.IsEmpty())) OrElse (rdoOldValue.Checked AndAlso ucrInputOldValue.IsEmpty AndAlso {"numeric", "integer"}.Contains(strVarType)) OrElse (rdoNewValue.Checked AndAlso ucrInputNewValue.IsEmpty AndAlso {"numeric", "integer"}.Contains(strVarType)) Then
             ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
         End If
     End Sub
 
@@ -164,9 +176,7 @@ Public Class dlgReplaceValues
     End Sub
 
     Private Sub InputValue()
-        Dim strVarType As String
-
-        If Not ucrReceiverReplace.IsEmpty Then
+        If Not ucrReceiverReplace.IsEmpty AndAlso ucrReceiverReplace.GetCurrentItemTypes(True).Count > 0 Then
             strVarType = ucrReceiverReplace.GetCurrentItemTypes(True)(0)
             If rdoOldValue.Checked Then
                 If (strVarType = "numeric" OrElse strVarType = "integer") Then
@@ -206,13 +216,15 @@ Public Class dlgReplaceValues
                 clsReplace.RemoveParameterByName("locf")
                 clsReplace.RemoveParameterByName("from_last")
             End If
+        Else
+            strVarType = ""
         End If
     End Sub
 
     Private Sub EnableRange()
         Dim strVarType As String
 
-        If Not ucrReceiverReplace.IsEmpty Then
+        If Not ucrReceiverReplace.IsEmpty AndAlso ucrReceiverReplace.GetCurrentItemTypes(True).Count > 0 Then
             strVarType = ucrReceiverReplace.GetCurrentItemTypes(True)(0)
         Else
             strVarType = ""

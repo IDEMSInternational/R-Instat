@@ -117,4 +117,409 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="rdoMme.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="rdoMme.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 33</value>
+  </data>
+  <data name="rdoMme.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 17</value>
+  </data>
+  <data name="rdoMme.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rdoMme.Text" xml:space="preserve">
+    <value>Moments (MME)</value>
+  </data>
+  <data name="&gt;&gt;rdoMme.Name" xml:space="preserve">
+    <value>rdoMme</value>
+  </data>
+  <data name="&gt;&gt;rdoMme.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoMme.Parent" xml:space="preserve">
+    <value>tbFittingMethod</value>
+  </data>
+  <data name="&gt;&gt;rdoMme.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rdoQme.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoQme.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 56</value>
+  </data>
+  <data name="rdoQme.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 17</value>
+  </data>
+  <data name="rdoQme.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="rdoQme.Text" xml:space="preserve">
+    <value>Quartiles (QME)</value>
+  </data>
+  <data name="&gt;&gt;rdoQme.Name" xml:space="preserve">
+    <value>rdoQme</value>
+  </data>
+  <data name="&gt;&gt;rdoQme.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoQme.Parent" xml:space="preserve">
+    <value>tbFittingMethod</value>
+  </data>
+  <data name="&gt;&gt;rdoQme.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rdoMle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoMle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
+  </data>
+  <data name="rdoMle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>151, 17</value>
+  </data>
+  <data name="rdoMle.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoMle.Text" xml:space="preserve">
+    <value>Maximum Likelihood (MLE)</value>
+  </data>
+  <data name="&gt;&gt;rdoMle.Name" xml:space="preserve">
+    <value>rdoMle</value>
+  </data>
+  <data name="&gt;&gt;rdoMle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoMle.Parent" xml:space="preserve">
+    <value>tbFittingMethod</value>
+  </data>
+  <data name="&gt;&gt;rdoMle.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="rdoMge.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoMge.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 79</value>
+  </data>
+  <data name="rdoMge.Size" type="System.Drawing.Size, System.Drawing">
+    <value>132, 17</value>
+  </data>
+  <data name="rdoMge.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="rdoMge.Text" xml:space="preserve">
+    <value>Goodness of Fit (MGE)</value>
+  </data>
+  <data name="&gt;&gt;rdoMge.Name" xml:space="preserve">
+    <value>rdoMge</value>
+  </data>
+  <data name="&gt;&gt;rdoMge.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoMge.Parent" xml:space="preserve">
+    <value>tbFittingMethod</value>
+  </data>
+  <data name="&gt;&gt;rdoMge.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrPnlFitMethod.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 6</value>
+  </data>
+  <data name="ucrPnlFitMethod.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 114</value>
+  </data>
+  <data name="ucrPnlFitMethod.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlFitMethod.Name" xml:space="preserve">
+    <value>ucrPnlFitMethod</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlFitMethod.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlFitMethod.Parent" xml:space="preserve">
+    <value>tbFittingMethod</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlFitMethod.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="tbFittingMethod.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tbFittingMethod.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbFittingMethod.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 151</value>
+  </data>
+  <data name="tbFittingMethod.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tbFittingMethod.Text" xml:space="preserve">
+    <value>Fitting Method</value>
+  </data>
+  <data name="&gt;&gt;tbFittingMethod.Name" xml:space="preserve">
+    <value>tbFittingMethod</value>
+  </data>
+  <data name="&gt;&gt;tbFittingMethod.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbFittingMethod.Parent" xml:space="preserve">
+    <value>tbFittingOptions</value>
+  </data>
+  <data name="&gt;&gt;tbFittingMethod.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rdoSANN.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoSANN.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 102</value>
+  </data>
+  <data name="rdoSANN.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 17</value>
+  </data>
+  <data name="rdoSANN.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="rdoSANN.Text" xml:space="preserve">
+    <value>SANN</value>
+  </data>
+  <data name="&gt;&gt;rdoSANN.Name" xml:space="preserve">
+    <value>rdoSANN</value>
+  </data>
+  <data name="&gt;&gt;rdoSANN.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoSANN.Parent" xml:space="preserve">
+    <value>tbOptimisationMethod</value>
+  </data>
+  <data name="&gt;&gt;rdoSANN.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rdoDefault.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoDefault.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
+  </data>
+  <data name="rdoDefault.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 17</value>
+  </data>
+  <data name="rdoDefault.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoDefault.Text" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="&gt;&gt;rdoDefault.Name" xml:space="preserve">
+    <value>rdoDefault</value>
+  </data>
+  <data name="&gt;&gt;rdoDefault.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoDefault.Parent" xml:space="preserve">
+    <value>tbOptimisationMethod</value>
+  </data>
+  <data name="&gt;&gt;rdoDefault.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rdoCG.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoCG.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 79</value>
+  </data>
+  <data name="rdoCG.Size" type="System.Drawing.Size, System.Drawing">
+    <value>138, 17</value>
+  </data>
+  <data name="rdoCG.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="rdoCG.Text" xml:space="preserve">
+    <value>Conjugent Gradent (CG)</value>
+  </data>
+  <data name="&gt;&gt;rdoCG.Name" xml:space="preserve">
+    <value>rdoCG</value>
+  </data>
+  <data name="&gt;&gt;rdoCG.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoCG.Parent" xml:space="preserve">
+    <value>tbOptimisationMethod</value>
+  </data>
+  <data name="&gt;&gt;rdoCG.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="rdoNelderMead.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoNelderMead.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 33</value>
+  </data>
+  <data name="rdoNelderMead.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 17</value>
+  </data>
+  <data name="rdoNelderMead.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rdoNelderMead.Text" xml:space="preserve">
+    <value>Nelder-Mead</value>
+  </data>
+  <data name="&gt;&gt;rdoNelderMead.Name" xml:space="preserve">
+    <value>rdoNelderMead</value>
+  </data>
+  <data name="&gt;&gt;rdoNelderMead.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoNelderMead.Parent" xml:space="preserve">
+    <value>tbOptimisationMethod</value>
+  </data>
+  <data name="&gt;&gt;rdoNelderMead.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="rdoBFGS.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoBFGS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 56</value>
+  </data>
+  <data name="rdoBFGS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 17</value>
+  </data>
+  <data name="rdoBFGS.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="rdoBFGS.Text" xml:space="preserve">
+    <value>BFGS</value>
+  </data>
+  <data name="&gt;&gt;rdoBFGS.Name" xml:space="preserve">
+    <value>rdoBFGS</value>
+  </data>
+  <data name="&gt;&gt;rdoBFGS.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoBFGS.Parent" xml:space="preserve">
+    <value>tbOptimisationMethod</value>
+  </data>
+  <data name="&gt;&gt;rdoBFGS.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrPnlOptimisation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="ucrPnlOptimisation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>165, 120</value>
+  </data>
+  <data name="ucrPnlOptimisation.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOptimisation.Name" xml:space="preserve">
+    <value>ucrPnlOptimisation</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOptimisation.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOptimisation.Parent" xml:space="preserve">
+    <value>tbOptimisationMethod</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOptimisation.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="tbOptimisationMethod.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbOptimisationMethod.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbOptimisationMethod.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 151</value>
+  </data>
+  <data name="tbOptimisationMethod.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tbOptimisationMethod.Text" xml:space="preserve">
+    <value>Optimisation</value>
+  </data>
+  <data name="&gt;&gt;tbOptimisationMethod.Name" xml:space="preserve">
+    <value>tbOptimisationMethod</value>
+  </data>
+  <data name="&gt;&gt;tbOptimisationMethod.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbOptimisationMethod.Parent" xml:space="preserve">
+    <value>tbFittingOptions</value>
+  </data>
+  <data name="&gt;&gt;tbOptimisationMethod.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tbFittingOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 7</value>
+  </data>
+  <data name="tbFittingOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>201, 177</value>
+  </data>
+  <data name="tbFittingOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tbFittingOptions.Name" xml:space="preserve">
+    <value>tbFittingOptions</value>
+  </data>
+  <data name="&gt;&gt;tbFittingOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbFittingOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tbFittingOptions.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>33, 191</value>
+  </data>
+  <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 30</value>
+  </data>
+  <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
+    <value>ucrBase</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Type" xml:space="preserve">
+    <value>instat.ucrButtonsSubdialogue, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>209, 225</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Fitting Options</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>sdgOneVarFitModel</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

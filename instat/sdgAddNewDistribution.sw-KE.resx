@@ -12,4 +12,175 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ucrBaseSubDialog.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>13, 344</value>
+  </data>
+  <data name="ucrBaseSubDialog.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>142, 30</value>
+  </data>
+  <data name="ucrBaseSubDialog.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="ucrNewDistributions.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="ucrNewDistributions.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>253, 194</value>
+  </data>
+  <data name="ucrNewDistributions.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="nudYlimUpper.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>137, 43</value>
+  </data>
+  <data name="nudYlimUpper.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>42, 20</value>
+  </data>
+  <data name="nudYlimUpper.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="nudXlimUpper.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>137, 16</value>
+  </data>
+  <data name="nudXlimUpper.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>42, 20</value>
+  </data>
+  <data name="nudXlimUpper.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="nudYlimLower.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>78, 43</value>
+  </data>
+  <data name="nudYlimLower.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>42, 20</value>
+  </data>
+  <data name="nudYlimLower.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="nudXlimLower.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>78, 16</value>
+  </data>
+  <data name="nudXlimLower.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>42, 20</value>
+  </data>
+  <data name="nudXlimLower.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblYlim.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblYlim.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>7, 46</value>
+  </data>
+  <data name="lblYlim.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>26, 13</value>
+  </data>
+  <data name="lblYlim.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblXlim.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblXlim.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>7, 20</value>
+  </data>
+  <data name="lblXlim.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>26, 13</value>
+  </data>
+  <data name="lblXlim.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpChangeLimits.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>13, 198</value>
+  </data>
+  <data name="grpChangeLimits.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>200, 71</value>
+  </data>
+  <data name="grpChangeLimits.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="grpChangeLimits.Text" xml:space="preserve">
+    <value>Badilisha Mipaka</value>
+  </data>
+  <data name="rdoProbability.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoProbability.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>104, 15</value>
+  </data>
+  <data name="rdoProbability.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>73, 17</value>
+  </data>
+  <data name="rdoProbability.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoDensity.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoDensity.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>7, 15</value>
+  </data>
+  <data name="rdoDensity.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>60, 17</value>
+  </data>
+  <data name="rdoDensity.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rdoDensity.Text" xml:space="preserve">
+    <value>Uzito</value>
+  </data>
+  <data name="grpPlot.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>13, 276</value>
+  </data>
+  <data name="grpPlot.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>200, 36</value>
+  </data>
+  <data name="grpPlot.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="grpPlot.Text" xml:space="preserve">
+    <value>Ploti</value>
+  </data>
+  <data name="cmdAddDistribution.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>13, 315</value>
+  </data>
+  <data name="cmdAddDistribution.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 23</value>
+  </data>
+  <data name="cmdAddDistribution.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lstAddedDistribution.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>271, 44</value>
+  </data>
+  <data name="lstAddedDistribution.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 147</value>
+  </data>
+  <data name="lstAddedDistribution.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lblAddedDistribution.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblAddedDistribution.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>268, 28</value>
+  </data>
+  <data name="lblAddedDistribution.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>93, 13</value>
+  </data>
+  <data name="lblAddedDistribution.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" xml:space="preserve" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>395, 375</value>
+  </data>
+  <data name="$this.StartPosition" xml:space="preserve" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>
