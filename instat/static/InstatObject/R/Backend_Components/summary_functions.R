@@ -3,7 +3,12 @@ data_object$set("public", "merge_data", function(new_data, by = NULL, type = "le
   #TODO how to use match argument with dplyr join functions
   old_metadata <- attributes(private$data)
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
-
+  by_col_attributes <- list()
+  if(!is.null(by)) {
+    for(i in seq_along(by)) {
+      by_col_attributes[[names(by)[[i]]]] <- get_column_attributes(curr_data[[names(by)[[i]]]])
+    }
+  }
   if(type == "left") {
     new_data <- dplyr::left_join(curr_data, new_data, by)
   }
@@ -28,6 +33,11 @@ data_object$set("public", "merge_data", function(new_data, by = NULL, type = "le
   self$append_to_metadata(is_calculated_label, TRUE)
   self$add_defaults_meta()
   self$add_defaults_variables_metadata(setdiff(names(new_data), names(curr_data)))
+  if(!is.null(by)) {
+    for(i in seq_along(by_col_attributes)) {
+      self$append_column_attributes(col_name = names(by_col_attributes)[i], new_attr = by_col_attributes[[i]])
+    }
+  }
 }
 )
 
@@ -36,7 +46,8 @@ instat_object$set("public", "append_summaries_to_data_object", function(out, dat
   
   exists = FALSE
   if(self$link_exists_from(data_name, factors)) {
-    summary_name <- self$get_linked_to_data_name(data_name, factors)
+    #TODO what happens if there is more than 1?
+    summary_name <- self$get_linked_to_data_name(data_name, factors)[1]
     summary_obj <- self$get_data_objects(summary_name)
     exists <- TRUE
   }
@@ -83,7 +94,9 @@ instat_object$set("public", "append_summaries_to_data_object", function(out, dat
 } 
 )
 
-instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), store_results = TRUE, drop = TRUE, na.rm = FALSE, return_output = FALSE, summary_name = NA, weights = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, perc_return_all = FALSE, silent = FALSE, additional_filter, ...) {
+instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), store_results = TRUE, drop = TRUE, return_output = FALSE, summary_name = NA, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, perc_return_all = FALSE, silent = FALSE, additional_filter, original_level = FALSE, ...) {
+  if(original_level) type <- "calculation"
+  else type <- "summary"
   include_columns_to_summarise <- TRUE
   if(is.null(columns_to_summarise) || length(columns_to_summarise) == 0) {
     # temporary fix for doing counts of a data frame
@@ -143,16 +156,20 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
     # In the case of counting without columns, the first column column will be the "calculated from"
     # which will add unwanted column metadata
     calculated_from <- list(column_names)
-    if(!is.null(weights)) calculated_from[[length(calculated_from) + 1]] <- weights
     names(calculated_from) <- rep(data_name, length(calculated_from))
     j <- 0
     for(summary_type in summaries) {
       j <- j + 1
       function_exp <- ""
-      if(!is.null(weights)) {
-        function_exp <- paste0(function_exp, ", weights = ", weights)
+      # if(!is.null(weights)) {
+      #   function_exp <- paste0(function_exp, ", weights = ", weights)
+      # }
+      extra_args <- list(...)
+      for(i in seq_along(extra_args)) {
+        function_exp <- paste0(function_exp, ", ", names(extra_args)[i], " = ", extra_args[i])
       }
-      function_exp <- paste0(function_exp, ", na.rm =", na.rm, ")")
+      function_exp <- paste0(function_exp, ")")
+      # function_exp <- paste0(function_exp, ", na.rm =", na.rm, ")")
       if(is.null(result_names)) {
         result_name = summaries_display[j]
         if(include_columns_to_summarise) result_name = paste0(result_name, "_", column_names)
@@ -160,19 +177,19 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
       #TODO result_names could be horizontal/vertical vector, matrix or single value
       else result_name <- result_names[i,j]
       if(percentage_type == "none") {
-        summary_calculation <- instat_calculation$new(type = "summary", result_name = result_name,
-                                                      function_exp = paste0(summary_type, "(", column_names, function_exp),
+        summary_calculation <- instat_calculation$new(type = type, result_name = result_name,
+                                                      function_exp = paste0(summary_type, "(x = ", column_names, function_exp),
                                                       calculated_from = calculated_from, save = save)
       }
       else {
-        values_calculation <- instat_calculation$new(type = "summary", result_name = result_name,
-                                                      function_exp = paste0(summary_type, "(", column_names, function_exp),
+        values_calculation <- instat_calculation$new(type = type, result_name = result_name,
+                                                      function_exp = paste0(summary_type, "(x = ", column_names, function_exp),
                                                       calculated_from = calculated_from, save = save)
         if(percentage_type == "columns") {
           if(length(perc_total_columns) == 1) perc_col_name <- perc_total_columns
           else perc_col_name <- perc_total_columns[i]
-          totals_calculation <- instat_calculation$new(type = "summary", result_name = paste0(summaries_display[j], "_", perc_total_columns, "_totals"),
-                                                       function_exp = paste0(summary_type, "(", perc_col_name, function_exp),
+          totals_calculation <- instat_calculation$new(type = type, result_name = paste0(summaries_display[j], "_", perc_total_columns, "_totals"),
+                                                       function_exp = paste0(summary_type, "(x = ", perc_col_name, function_exp),
                                                        calculated_from = calculated_from, save = save)
         }
         else if(percentage_type == "filter") {
@@ -181,7 +198,7 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
         else if(percentage_type == "factors") {
           values_calculation$manipulations <- value_manipulations
           totals_calculation <- instat_calculation$new(type = "summary", result_name = paste0(result_name, "_totals"),
-                                                       function_exp = paste0(summary_type, "(", column_names, function_exp),
+                                                       function_exp = paste0(summary_type, "(x = ", column_names, function_exp),
                                                        calculated_from = calculated_from, save = save)
         }
         function_exp <- paste0(values_calculation$result_name, "/", totals_calculation$result_name)
@@ -224,7 +241,7 @@ instat_object$set("public", "summary", function(data_name, columns_to_summarise,
   calculated_from[[1]] <- list(data_name = data_name, columns = columns_to_summarise)
   #TODO Change this to store sub_calculations for each column
   alltypes_collection <- c(count_non_missing_label, count_missing_label, count_label, mode_label)
-  numeric_collection <- c(count_non_missing_label, count_missing_label, count_label, mode_label, min_label, max_label, mean_label, sd_label, range_label, median_label, sum_label, var_label)
+  numeric_collection <- c(count_non_missing_label, count_missing_label, count_label, mode_label, min_label, max_label, mean_label, sd_label, range_label, median_label, sum_label, var_label, lower_quart_label, upper_quart_label, skewness_label, summary_skewness_mc_label, kurtosis_label, summary_coef_var_label, summary_median_absolute_deviation_label, summary_Qn_label, summary_Sn_label, cor_label, cov_label, first_label, last_label, nth_label, n_distinct_label, proportion_label, count_calc_label)
   factor_collection <-  c(count_non_missing_label, count_missing_label, count_label, mode_label) #maximum and minimum labels should be added when we distinguish ordered factors
   ordered_factor_collection <-  c(count_non_missing_label, count_missing_label, count_label, mode_label, min_label, max_label)
   i = 1
@@ -277,8 +294,8 @@ instat_object$set("public", "summary", function(data_name, columns_to_summarise,
     else {
       calc_columns <- NULL
     }
-  }
-  return(calc_columns)
+	}
+       return(calc_columns)
 }
 )
 
@@ -377,10 +394,27 @@ range_label = "summary_range"
 min_label="summary_min"
 max_label="summary_max"
 mean_label="summary_mean"
-#quartiles need to be added as a summary
+quartile_label="summary_quartile"
+lower_quart_label="lower_quartile"
+upper_quart_label="upper_quartile"
+skewness_label="summary_skewness"
+summary_skewness_mc_label="summary_skewness_mc"
+kurtosis_label="summary_kurtosis"
+summary_coef_var_label="summary_coef_var"
+summary_median_absolute_deviation_label="summary_median_absolute_deviation"
+summary_Qn_label="summary_Qn"
+summary_Sn_label="summary_Sn"
+cor_label="summary_cor"
+cov_label="summary_cov"
+first_label="summary_first"
+last_label="summary_last"
+nth_label="summary_nth"
+n_distinct_label="summary_n_distinct"
+proportion_label="proportion_calc"
+count_calc_label="count_calc"
 
 # list of all summary function names
-all_summaries=c(sum_label, mode_label, count_label, count_missing_label, count_non_missing_label, sd_label, var_label, median_label, range_label, min_label, max_label, mean_label)
+all_summaries=c(sum_label, mode_label, count_label, count_missing_label, count_non_missing_label, sd_label, var_label, median_label, range_label, min_label, max_label, mean_label,quartile_label, lower_quart_label, upper_quart_label, skewness_label, kurtosis_label, summary_coef_var_label, summary_skewness_mc_label, summary_median_absolute_deviation_label, summary_Qn_label, summary_Sn_label, cor_label, cov_label,first_label, last_label, nth_label, n_distinct_label, proportion_label, count_calc_label)
 summary_mode <- function(x,...) {
   ux <- unique(x)
   out <- ux[which.max(tabulate(match(x, ux)))]
@@ -391,7 +425,7 @@ summary_mode <- function(x,...) {
 
 summary_mean <- function (x, add_cols, weights="", na.rm = FALSE, trim = 0,...) {
   if( length(x)==0 || (na.rm && length(x[!is.na(x)])==0) ) return(NA)
-  else return(mean(x, na.rm=na.rm, trim = trim))
+  else return(mean(x, na.rm = na.rm, trim = trim))
 }
 
 summary_sum <- function (x, na.rm = FALSE,...) {
@@ -430,15 +464,119 @@ summary_min <- function (x, na.rm = FALSE,...) {
   else return(min(x, na.rm = na.rm))
 } 
 
-#get the range of the data
+# get the range of the data
 summary_range <- function(x, na.rm = FALSE, ...) {
   return(max(x, na.rm = na.rm) - min(x, na.rm = na.rm))
 }
 
 # median function
-summary_median <- function(x, na.rm = FALSE,...) {
+summary_median <- function(x, na.rm = FALSE, ...) {
   return(median(x, na.rm = na.rm))
 }
+
+# quantile function
+summary_quantile <- function(x, na.rm = FALSE, probs, ...) {
+  if(!na.rm && anyNA(x)) return(NA)
+  # This prevents multiple values being returned
+  else return(quantile(x, na.rm = na.rm, probs = probs)[[1]])
+}
+
+# lower quartile function
+lower_quartile <- function(x, na.rm = FALSE, ...) {
+  return(summary_quantile(x, na.rm = na.rm, probs = 0.25))
+}
+
+# upper quartile function
+upper_quartile <- function(x, na.rm = FALSE, ...) {
+  return(summary_quantile(x, na.rm = na.rm, probs = 0.75))
+}
+
+# Skewness e1071 function
+summary_skewness <- function(x, na.rm = FALSE, type = 2, ...) {
+  return(e1071::skewness(x, na.rm = na.rm, type = type))
+}
+
+# skewness mc function
+summary_skewness_mc <- function(x, na.rm = FALSE, ...) {
+  return(robustbase::mc(x, na.rm = na.rm))
+}
+
+# kurtosis function
+summary_kurtosis <- function(x, na.rm = FALSE, type = 2, ...) {
+  return(e1071::kurtosis(x, na.rm = na.rm, type = type))
+}
+
+# Coefficient of Variation function
+summary_coef_var <- function(x, ...) {
+  return(summary_sd(x) / summary_mean(x))
+}
+
+# median absolute deviation function
+summary_median_absolute_deviation <- function(x, constant = 1.4826, na.rm = FALSE, low = FALSE, high = FALSE, ...) {
+  return(stats::mad(x, constant = constant, na.rm = na.rm, low = low, high = high))  
+}
+
+# Qn function
+summary_Qn <- function(x, constant = 2.21914, finite.corr = missing(constant), na.rm = FALSE, ...) {
+  if(!na.rm && anyNA(x)) return(NA)
+  else {
+    x <- x[!is.na(x)]
+    return(robustbase::Qn(x, constant = constant, finite.corr = finite.corr))
+  }
+}
+
+# Sn function
+summary_Sn <- function(x, constant = 1.1926, finite.corr = missing(constant), na.rm = FALSE, ...) {
+  if(!na.rm && anyNA(x)) return(NA)
+  else {
+    x <- x[!is.na(x)]
+    return(robustbase::Qn(x, constant = constant, finite.corr = finite.corr))
+  }
+}
+
+# cor function
+summary_cor <- function(x, y, use = "everything", method = c("pearson", "kendall", "spearman"), ...) {
+  return(cor(x = x, y = y, use = use, method = method))
+}
+
+# cov function
+summary_cov <- function(x, y, use = "everything", method = c("pearson", "kendall", "spearman"), ...) {
+  return(cov(x = x, y = y, use = use, method = method))
+}
+
+# first function
+summary_first <- function(x, order_by = NULL, default = default_missing(x), ...) {
+  return(dplyr::first(x = x, order_by = order_by, default = default))
+}
+
+# last function
+summary_last <- function(x, order_by = NULL, default = default_missing(x), ...) {
+  return(dplyr::last(x = x, order_by = order_by, default = default))
+}
+
+# nth function
+summary_nth <- function(x, n, order_by = NULL, default = default_missing(x), ...) {
+  return(dplyr::nth(x = x, n = n, order_by = order_by, default = default_missing(x)))
+}
+
+# n_distinct function
+summary_n_distinct<- function(x, na.rm = FALSE, ...) {
+  return(dplyr::n_distinct(x = x, na.rm = na.rm))
+}
+
+#Proportions functions
+proportion_calc <- function(x, test = "==", value, As_percentage = FALSE, ... ){ 
+  y <- x[eval(parse(text = paste("x", value, sep = test)))]
+  if (!As_percentage){ return(length(y)/length(x))
+  }else{return(noquote(paste0((length(y)/length(x))*100 ,"%")))
+  } 
+}
+
+#count function
+count_calc <- function(x, test = "==", value, ...){ 
+  return(length(x[eval(parse(text = paste("x", value, sep = test)))]))
+}
+
 
 instat_object$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), n_column_factors = 1, store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = TRUE, treat_columns_as_factor = FALSE, page_by = "default", as_html = TRUE, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, margin_name = "(All)", additional_filter, ...) {
   if(n_column_factors == 1 && length(factors) == 0) n_column_factors <- 0
@@ -506,6 +644,18 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
     else if(all(page_by %in% factors)) {
       levels_list <- lapply(page_by, function(x) levels(self$get_columns_from_data(data_name = data_name, col_names = x)))
       levels_data_frame <- expand.grid(levels_list)
+      # temp fix for having empty levels in page_by factor
+      # currently only checks each factor level separately - could still crash if missing combinations
+      # TODO fix for general case
+      tmp_data <- self$get_data_frame(data_name)
+      levels_data_frame$filter <- TRUE
+      for(i in seq_along(page_by)) {
+        tab <- table(tmp_data[[page_by[[i]]]])
+        tab <- tab[tab > 0]
+        levels_data_frame$filter <- levels_data_frame$filter & (levels_data_frame[[paste0("Var", i)]] %in% names(tab))
+      }
+      levels_data_frame <- subset(levels_data_frame, filter)
+      levels_data_frame$filter <- NULL
       for(j in 1:ncol(levels_data_frame)) {
         levels_data_frame[,j] <- paste0(page_by[j], " == ", "'", levels_data_frame[,j], "'")
       }

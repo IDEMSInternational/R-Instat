@@ -25,6 +25,7 @@ Public Class ucrAdditionalLayers
     Public bReset As Boolean = True
     Public lstLayerComplete As New List(Of Boolean)
     Public iLayerIndex As Integer
+    Public iParameterPosition As Integer
     Private strGlobalDataFrame As String
     Public bSetGlobalIsDefault As Boolean = True
     'Deciding if the first layer needs to be used for global aesthetics. 
@@ -38,6 +39,7 @@ Public Class ucrAdditionalLayers
         clsGlobalAesFunction = clsNewAesFunc
         clsGgplotFunction = clsRNewggplotFunc
         iLayerIndex = 0
+        iParameterPosition = 0
         lstLayers.Clear()
         lstLayerComplete.Clear()
         lstLayers.HideSelection = False
@@ -46,6 +48,7 @@ Public Class ucrAdditionalLayers
             strTempGeomName = GetGeomName(clsTempParam)
             If strTempGeomName <> "" Then
                 AddLayers(strTempGeomName, bFromLayerSubDialog:=False)
+                iParameterPosition = Math.Max(iParameterPosition, clsTempParam.Position)
             End If
         Next
         strGlobalDataFrame = strNewGlobalDataFrame
@@ -95,6 +98,7 @@ Public Class ucrAdditionalLayers
 
         If lviCurrentItem Is Nothing Then
             iLayerIndex = iLayerIndex + 1
+            iParameterPosition = iParameterPosition + 1
             strLayerName = iLayerIndex & "." & strGeomName
             lviLayer = New ListViewItem(text:=strLayerName)
             lstLayers.Items.Add(lviLayer)
@@ -122,7 +126,7 @@ Public Class ucrAdditionalLayers
 
         'Note: as the GeomFunction on sdgLayerOptions will be edited for different layers, it cannot be linked like clsGgplotFunction would, it needs to be cloned.
         If bFromLayerSubDialog Then
-            clsBaseOperator.AddParameter(strParameterName:=strLayerName, clsRFunctionParameter:=sdgLayerOptions.clsGeomFunction.Clone(), iPosition:=iLayerIndex)
+            clsBaseOperator.AddParameter(strParameterName:=strLayerName, clsRFunctionParameter:=sdgLayerOptions.clsGeomFunction.Clone(), iPosition:=iParameterPosition)
         End If
         'When the number of Layers in the lstLayers on ucrAdditionalLayers need to check if OK is enabled on dlgGeneralForGraphics.
         RaiseEvent NumberOfLayersChanged()

@@ -50,50 +50,48 @@ Partial Class ucrColumnMetadata
         Me.mnuConvertToFactor = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCovertToOrderedFactors = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuConvertText = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuConvertToLogical = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuConvertVariate = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuConvertToDate = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuConvert = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuLevelsLabels = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuHideColumns = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuUnhideColumns = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuUnhideAllColumns = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripMenuItem21 = New System.Windows.Forms.ToolStripSeparator()
-        Me.FreezeToHereToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.UnfreezeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFreezeToHere = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuUnfreeze = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
-        Me.SortToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.columnFilterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.clearColumnFilterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuSort = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuColumnFilter = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClearColumnFilter = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblHeader = New System.Windows.Forms.Label()
+        Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
+        Me.mnuReorderColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.columnContextMenuStrip.SuspendLayout()
+        Me.tlpTableContainer.SuspendLayout()
         Me.SuspendLayout()
         '
         'grdVariables
         '
-        Me.grdVariables.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grdVariables.BackColor = System.Drawing.Color.White
         Me.grdVariables.ColumnHeaderContextMenuStrip = Nothing
+        Me.grdVariables.Dock = System.Windows.Forms.DockStyle.Fill
         Me.grdVariables.LeadHeaderContextMenuStrip = Nothing
-        Me.grdVariables.Location = New System.Drawing.Point(0, 20)
+        Me.grdVariables.Location = New System.Drawing.Point(3, 23)
         Me.grdVariables.Name = "grdVariables"
         Me.grdVariables.RowHeaderContextMenuStrip = Me.columnContextMenuStrip
         Me.grdVariables.Script = Nothing
         Me.grdVariables.SheetTabContextMenuStrip = Nothing
         Me.grdVariables.SheetTabNewButtonVisible = True
         Me.grdVariables.SheetTabVisible = True
-        Me.grdVariables.SheetTabWidth = 200
+        Me.grdVariables.SheetTabWidth = 154
         Me.grdVariables.ShowScrollEndSpacing = True
-        Me.grdVariables.Size = New System.Drawing.Size(344, 118)
+        Me.grdVariables.Size = New System.Drawing.Size(338, 112)
         Me.grdVariables.TabIndex = 2
         Me.grdVariables.Text = "Variables"
         '
         'columnContextMenuStrip
         '
-        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuDuplicateColumn, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertVariate, Me.mnuConvertToDate, Me.mnuConvert, Me.ToolStripSeparator1, Me.mnuHideColumns, Me.mnuUnhideColumns, Me.mnuUnhideAllColumns, Me.toolStripMenuItem21, Me.FreezeToHereToolStripMenuItem, Me.UnfreezeToolStripMenuItem, Me.ToolStripSeparator3, Me.SortToolStripMenuItem, Me.columnFilterToolStripMenuItem, Me.clearColumnFilterToolStripMenuItem})
+        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuDuplicateColumn, Me.mnuReorderColumns, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertToLogical, Me.mnuConvertVariate, Me.ToolStripSeparator2, Me.mnuLevelsLabels, Me.ToolStripSeparator1, Me.mnuFreezeToHere, Me.mnuUnfreeze, Me.ToolStripSeparator3, Me.mnuSort, Me.mnuColumnFilter, Me.mnuClearColumnFilter})
         Me.columnContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.columnContextMenuStrip.Size = New System.Drawing.Size(213, 468)
+        Me.columnContextMenuStrip.Size = New System.Drawing.Size(213, 424)
         '
         'mnuColumnRename
         '
@@ -148,110 +146,113 @@ Partial Class ucrColumnMetadata
         Me.mnuConvertText.Size = New System.Drawing.Size(212, 22)
         Me.mnuConvertText.Text = "Convert to Character"
         '
+        'mnuConvertToLogical
+        '
+        Me.mnuConvertToLogical.Name = "mnuConvertToLogical"
+        Me.mnuConvertToLogical.Size = New System.Drawing.Size(212, 22)
+        Me.mnuConvertToLogical.Text = "Convert to Logical"
+        '
         'mnuConvertVariate
         '
         Me.mnuConvertVariate.Name = "mnuConvertVariate"
         Me.mnuConvertVariate.Size = New System.Drawing.Size(212, 22)
         Me.mnuConvertVariate.Text = "Convert to Numeric"
         '
-        'mnuConvertToDate
+        'ToolStripSeparator2
         '
-        Me.mnuConvertToDate.Name = "mnuConvertToDate"
-        Me.mnuConvertToDate.Size = New System.Drawing.Size(212, 22)
-        Me.mnuConvertToDate.Text = "Convert to Date..."
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(209, 6)
         '
-        'mnuConvert
+        'mnuLevelsLabels
         '
-        Me.mnuConvert.Name = "mnuConvert"
-        Me.mnuConvert.Size = New System.Drawing.Size(212, 22)
-        Me.mnuConvert.Text = "Convert..."
+        Me.mnuLevelsLabels.Name = "mnuLevelsLabels"
+        Me.mnuLevelsLabels.Size = New System.Drawing.Size(212, 22)
+        Me.mnuLevelsLabels.Text = "Levels/Labels..."
+        Me.mnuLevelsLabels.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
         Me.ToolStripSeparator1.Size = New System.Drawing.Size(209, 6)
         '
-        'mnuHideColumns
+        'mnuFreezeToHere
         '
-        Me.mnuHideColumns.Name = "mnuHideColumns"
-        Me.mnuHideColumns.Size = New System.Drawing.Size(212, 22)
-        Me.mnuHideColumns.Text = "Hide"
+        Me.mnuFreezeToHere.Name = "mnuFreezeToHere"
+        Me.mnuFreezeToHere.Size = New System.Drawing.Size(212, 22)
+        Me.mnuFreezeToHere.Text = "Freeze to Here"
         '
-        'mnuUnhideColumns
+        'mnuUnfreeze
         '
-        Me.mnuUnhideColumns.Name = "mnuUnhideColumns"
-        Me.mnuUnhideColumns.Size = New System.Drawing.Size(212, 22)
-        Me.mnuUnhideColumns.Text = "Unhide..."
-        '
-        'mnuUnhideAllColumns
-        '
-        Me.mnuUnhideAllColumns.Name = "mnuUnhideAllColumns"
-        Me.mnuUnhideAllColumns.Size = New System.Drawing.Size(212, 22)
-        Me.mnuUnhideAllColumns.Tag = "Unhide_All"
-        Me.mnuUnhideAllColumns.Text = "Unhide All"
-        '
-        'toolStripMenuItem21
-        '
-        Me.toolStripMenuItem21.Name = "toolStripMenuItem21"
-        Me.toolStripMenuItem21.Size = New System.Drawing.Size(209, 6)
-        '
-        'FreezeToHereToolStripMenuItem
-        '
-        Me.FreezeToHereToolStripMenuItem.Name = "FreezeToHereToolStripMenuItem"
-        Me.FreezeToHereToolStripMenuItem.Size = New System.Drawing.Size(212, 22)
-        Me.FreezeToHereToolStripMenuItem.Text = "Freeze to Here"
-        '
-        'UnfreezeToolStripMenuItem
-        '
-        Me.UnfreezeToolStripMenuItem.Name = "UnfreezeToolStripMenuItem"
-        Me.UnfreezeToolStripMenuItem.Size = New System.Drawing.Size(212, 22)
-        Me.UnfreezeToolStripMenuItem.Text = "Unfreeze"
+        Me.mnuUnfreeze.Name = "mnuUnfreeze"
+        Me.mnuUnfreeze.Size = New System.Drawing.Size(212, 22)
+        Me.mnuUnfreeze.Text = "Unfreeze"
         '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
         Me.ToolStripSeparator3.Size = New System.Drawing.Size(209, 6)
         '
-        'SortToolStripMenuItem
+        'mnuSort
         '
-        Me.SortToolStripMenuItem.Name = "SortToolStripMenuItem"
-        Me.SortToolStripMenuItem.Size = New System.Drawing.Size(212, 22)
-        Me.SortToolStripMenuItem.Text = "Sort..."
+        Me.mnuSort.Name = "mnuSort"
+        Me.mnuSort.Size = New System.Drawing.Size(212, 22)
+        Me.mnuSort.Text = "Sort..."
         '
-        'columnFilterToolStripMenuItem
+        'mnuColumnFilter
         '
-        Me.columnFilterToolStripMenuItem.Name = "columnFilterToolStripMenuItem"
-        Me.columnFilterToolStripMenuItem.Size = New System.Drawing.Size(212, 22)
-        Me.columnFilterToolStripMenuItem.Text = "Filter..."
+        Me.mnuColumnFilter.Name = "mnuColumnFilter"
+        Me.mnuColumnFilter.Size = New System.Drawing.Size(212, 22)
+        Me.mnuColumnFilter.Text = "Filter..."
         '
-        'clearColumnFilterToolStripMenuItem
+        'mnuClearColumnFilter
         '
-        Me.clearColumnFilterToolStripMenuItem.Name = "clearColumnFilterToolStripMenuItem"
-        Me.clearColumnFilterToolStripMenuItem.Size = New System.Drawing.Size(212, 22)
-        Me.clearColumnFilterToolStripMenuItem.Text = "Remove Current Filter"
+        Me.mnuClearColumnFilter.Name = "mnuClearColumnFilter"
+        Me.mnuClearColumnFilter.Size = New System.Drawing.Size(212, 22)
+        Me.mnuClearColumnFilter.Text = "Remove Current Filter"
         '
         'lblHeader
         '
         Me.lblHeader.BackColor = System.Drawing.Color.FromArgb(CType(CType(35, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(190, Byte), Integer))
-        Me.lblHeader.Dock = System.Windows.Forms.DockStyle.Top
-        Me.lblHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHeader.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.lblHeader.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblHeader.Location = New System.Drawing.Point(0, 0)
+        Me.lblHeader.Location = New System.Drawing.Point(3, 0)
         Me.lblHeader.Name = "lblHeader"
-        Me.lblHeader.Size = New System.Drawing.Size(344, 20)
+        Me.lblHeader.Size = New System.Drawing.Size(338, 20)
         Me.lblHeader.TabIndex = 6
         Me.lblHeader.Text = "Column Metadata"
         Me.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'tlpTableContainer
+        '
+        Me.tlpTableContainer.ColumnCount = 1
+        Me.tlpTableContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tlpTableContainer.Controls.Add(Me.grdVariables, 0, 1)
+        Me.tlpTableContainer.Controls.Add(Me.lblHeader, 0, 0)
+        Me.tlpTableContainer.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tlpTableContainer.Location = New System.Drawing.Point(0, 0)
+        Me.tlpTableContainer.Name = "tlpTableContainer"
+        Me.tlpTableContainer.RowCount = 2
+        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tlpTableContainer.Size = New System.Drawing.Size(344, 138)
+        Me.tlpTableContainer.TabIndex = 7
+        '
+        'mnuReorderColumns
+        '
+        Me.mnuReorderColumns.Name = "mnuReorderColumns"
+        Me.mnuReorderColumns.Size = New System.Drawing.Size(212, 22)
+        Me.mnuReorderColumns.Text = "Reorder Column(s)"
         '
         'ucrColumnMetadata
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.lblHeader)
-        Me.Controls.Add(Me.grdVariables)
+        Me.Controls.Add(Me.tlpTableContainer)
         Me.Name = "ucrColumnMetadata"
         Me.Size = New System.Drawing.Size(344, 138)
         Me.columnContextMenuStrip.ResumeLayout(False)
+        Me.tlpTableContainer.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -269,17 +270,16 @@ Partial Class ucrColumnMetadata
     Friend WithEvents mnuCovertToOrderedFactors As ToolStripMenuItem
     Friend WithEvents mnuConvertText As ToolStripMenuItem
     Friend WithEvents mnuConvertVariate As ToolStripMenuItem
-    Friend WithEvents mnuConvertToDate As ToolStripMenuItem
-    Friend WithEvents mnuConvert As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
-    Private WithEvents mnuHideColumns As ToolStripMenuItem
-    Private WithEvents mnuUnhideColumns As ToolStripMenuItem
-    Friend WithEvents mnuUnhideAllColumns As ToolStripMenuItem
-    Private WithEvents toolStripMenuItem21 As ToolStripSeparator
-    Friend WithEvents FreezeToHereToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents UnfreezeToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuFreezeToHere As ToolStripMenuItem
+    Friend WithEvents mnuUnfreeze As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
-    Friend WithEvents SortToolStripMenuItem As ToolStripMenuItem
-    Private WithEvents columnFilterToolStripMenuItem As ToolStripMenuItem
-    Private WithEvents clearColumnFilterToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuSort As ToolStripMenuItem
+    Private WithEvents mnuColumnFilter As ToolStripMenuItem
+    Private WithEvents mnuClearColumnFilter As ToolStripMenuItem
+    Friend WithEvents mnuConvertToLogical As ToolStripMenuItem
+    Friend WithEvents tlpTableContainer As TableLayoutPanel
+    Friend WithEvents mnuLevelsLabels As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
+    Friend WithEvents mnuReorderColumns As ToolStripMenuItem
 End Class

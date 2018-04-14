@@ -363,16 +363,18 @@ Public Class dlgDescribeTwoVarGraph
         ElseIf (strVarType <> "numeric" AndAlso strVarType <> "integer") AndAlso (strVarType <> "numeric" AndAlso strVarType <> "integer") Then
             clsBaseOperator.RemoveParameterByName("geom_line")
             clsRFacet.AddParameter("scale", Chr(34) & "free_x" & Chr(34))
-            Select Case sdgDescribeTwoVarGraph.ucrCategoricalByCategorical.GetText
-                Case "Dot plot"
-                    DotPlot()
-                    clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRDotAesFunction, iPosition:=0)
-                    clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRDotPlotGeom, iPosition:=1)
-                Case "Bar plot"
-                    BarPlot()
-                    clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRBarAesFunction, iPosition:=0)
-                    clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRBarPlotGeom, iPosition:=1)
-            End Select
+            If sdgDescribeTwoVarGraph.ucrCategoricalByCategorical IsNot Nothing Then
+                Select Case sdgDescribeTwoVarGraph.ucrCategoricalByCategorical.GetText
+                    Case "Dot plot"
+                        DotPlot()
+                        clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRDotAesFunction, iPosition:=0)
+                        clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRDotPlotGeom, iPosition:=1)
+                    Case "Bar plot"
+                        BarPlot()
+                        clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRBarAesFunction, iPosition:=0)
+                        clsBaseOperator.AddParameter("geom", clsRFunctionParameter:=clsRBarPlotGeom, iPosition:=1)
+                End Select
+            End If
             'Should never reach this case
         Else
             MsgBox("Developer error: Unrecognised column types. Graph may be blank or produce an error.", MsgBoxStyle.Critical)

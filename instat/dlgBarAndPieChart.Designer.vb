@@ -38,185 +38,139 @@ Partial Class dlgBarAndPieChart
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.lblFactor = New System.Windows.Forms.Label()
-        Me.lblSecondFactor = New System.Windows.Forms.Label()
-        Me.cmdBarChartOptions = New System.Windows.Forms.Button()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgBarAndPieChart))
+        Me.lblVariable = New System.Windows.Forms.Label()
+        Me.lblByFactor = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.cmdPieChartOptions = New System.Windows.Forms.Button()
         Me.rdoPieChart = New System.Windows.Forms.RadioButton()
         Me.rdoBarChart = New System.Windows.Forms.RadioButton()
+        Me.cmdBarChartOptions = New System.Windows.Forms.Button()
         Me.ucrSaveBar = New instat.ucrSave()
         Me.ucrChkFlipCoordinates = New instat.ucrCheck()
-        Me.ucrSecondReceiver = New instat.ucrReceiverSingle()
-        Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
+        Me.ucrReceiverByFactor = New instat.ucrReceiverSingle()
+        Me.ucrReceiverFirst = New instat.ucrReceiverSingle()
         Me.ucrBarChartSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.SuspendLayout()
         '
-        'lblFactor
+        'lblVariable
         '
-        Me.lblFactor.AutoSize = True
-        Me.lblFactor.Location = New System.Drawing.Point(255, 69)
-        Me.lblFactor.Name = "lblFactor"
-        Me.lblFactor.Size = New System.Drawing.Size(40, 13)
-        Me.lblFactor.TabIndex = 4
-        Me.lblFactor.Tag = "Factor:"
-        Me.lblFactor.Text = "Factor:"
+        resources.ApplyResources(Me.lblVariable, "lblVariable")
+        Me.lblVariable.Name = "lblVariable"
+        Me.lblVariable.Tag = "Variable:"
         '
-        'lblSecondFactor
+        'lblByFactor
         '
-        Me.lblSecondFactor.AutoSize = True
-        Me.lblSecondFactor.Location = New System.Drawing.Point(254, 120)
-        Me.lblSecondFactor.Name = "lblSecondFactor"
-        Me.lblSecondFactor.Size = New System.Drawing.Size(128, 13)
-        Me.lblSecondFactor.TabIndex = 6
-        Me.lblSecondFactor.Tag = "Second_Factor:"
-        Me.lblSecondFactor.Text = "Second Factor (Optional):"
-        '
-        'cmdBarChartOptions
-        '
-        Me.cmdBarChartOptions.Location = New System.Drawing.Point(11, 230)
-        Me.cmdBarChartOptions.Name = "cmdBarChartOptions"
-        Me.cmdBarChartOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdBarChartOptions.TabIndex = 9
-        Me.cmdBarChartOptions.Tag = "Bar_Chart_Options"
-        Me.cmdBarChartOptions.Text = "Bar Chart Options"
-        Me.cmdBarChartOptions.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.lblByFactor, "lblByFactor")
+        Me.lblByFactor.Name = "lblByFactor"
+        Me.lblByFactor.Tag = "By_Factor:"
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(10, 262)
+        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdOptions.TabIndex = 10
         Me.cmdOptions.Tag = "Plot_Options..."
-        Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'cmdPieChartOptions
         '
-        Me.cmdPieChartOptions.Location = New System.Drawing.Point(12, 231)
+        resources.ApplyResources(Me.cmdPieChartOptions, "cmdPieChartOptions")
         Me.cmdPieChartOptions.Name = "cmdPieChartOptions"
-        Me.cmdPieChartOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdPieChartOptions.TabIndex = 9
         Me.cmdPieChartOptions.Tag = "Pie_Chart_Options"
-        Me.cmdPieChartOptions.Text = "Pie Chart Options"
         Me.cmdPieChartOptions.UseVisualStyleBackColor = True
         '
         'rdoPieChart
         '
-        Me.rdoPieChart.Appearance = System.Windows.Forms.Appearance.Button
+        resources.ApplyResources(Me.rdoPieChart, "rdoPieChart")
         Me.rdoPieChart.BackColor = System.Drawing.SystemColors.Control
         Me.rdoPieChart.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoPieChart.FlatAppearance.BorderSize = 2
         Me.rdoPieChart.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoPieChart.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoPieChart.Location = New System.Drawing.Point(176, 12)
         Me.rdoPieChart.Name = "rdoPieChart"
-        Me.rdoPieChart.Size = New System.Drawing.Size(100, 28)
-        Me.rdoPieChart.TabIndex = 2
         Me.rdoPieChart.TabStop = True
         Me.rdoPieChart.Tag = "Pie_Chart"
-        Me.rdoPieChart.Text = "Pie Chart"
-        Me.rdoPieChart.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoPieChart.UseVisualStyleBackColor = False
         '
         'rdoBarChart
         '
-        Me.rdoBarChart.Appearance = System.Windows.Forms.Appearance.Button
+        resources.ApplyResources(Me.rdoBarChart, "rdoBarChart")
         Me.rdoBarChart.BackColor = System.Drawing.SystemColors.Control
         Me.rdoBarChart.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoBarChart.FlatAppearance.BorderSize = 2
         Me.rdoBarChart.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoBarChart.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoBarChart.Location = New System.Drawing.Point(78, 12)
         Me.rdoBarChart.Name = "rdoBarChart"
-        Me.rdoBarChart.Size = New System.Drawing.Size(100, 28)
-        Me.rdoBarChart.TabIndex = 1
         Me.rdoBarChart.TabStop = True
         Me.rdoBarChart.Tag = "Bar_Chart"
-        Me.rdoBarChart.Text = "Bar Chart"
-        Me.rdoBarChart.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoBarChart.UseVisualStyleBackColor = False
+        '
+        'cmdBarChartOptions
+        '
+        resources.ApplyResources(Me.cmdBarChartOptions, "cmdBarChartOptions")
+        Me.cmdBarChartOptions.Name = "cmdBarChartOptions"
+        Me.cmdBarChartOptions.Tag = "Bar_Chart_Options"
+        Me.cmdBarChartOptions.UseVisualStyleBackColor = True
         '
         'ucrSaveBar
         '
-        Me.ucrSaveBar.Location = New System.Drawing.Point(10, 306)
+        resources.ApplyResources(Me.ucrSaveBar, "ucrSaveBar")
         Me.ucrSaveBar.Name = "ucrSaveBar"
-        Me.ucrSaveBar.Size = New System.Drawing.Size(313, 24)
-        Me.ucrSaveBar.TabIndex = 11
         '
         'ucrChkFlipCoordinates
         '
         Me.ucrChkFlipCoordinates.Checked = False
-        Me.ucrChkFlipCoordinates.Location = New System.Drawing.Point(255, 168)
+        resources.ApplyResources(Me.ucrChkFlipCoordinates, "ucrChkFlipCoordinates")
         Me.ucrChkFlipCoordinates.Name = "ucrChkFlipCoordinates"
-        Me.ucrChkFlipCoordinates.Size = New System.Drawing.Size(166, 20)
-        Me.ucrChkFlipCoordinates.TabIndex = 8
         '
-        'ucrSecondReceiver
+        'ucrReceiverByFactor
         '
-        Me.ucrSecondReceiver.frmParent = Me
-        Me.ucrSecondReceiver.Location = New System.Drawing.Point(255, 135)
-        Me.ucrSecondReceiver.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSecondReceiver.Name = "ucrSecondReceiver"
-        Me.ucrSecondReceiver.Selector = Nothing
-        Me.ucrSecondReceiver.Size = New System.Drawing.Size(120, 20)
-        Me.ucrSecondReceiver.strNcFilePath = ""
-        Me.ucrSecondReceiver.TabIndex = 7
-        Me.ucrSecondReceiver.ucrSelector = Nothing
+        Me.ucrReceiverByFactor.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverByFactor, "ucrReceiverByFactor")
+        Me.ucrReceiverByFactor.Name = "ucrReceiverByFactor"
+        Me.ucrReceiverByFactor.Selector = Nothing
+        Me.ucrReceiverByFactor.strNcFilePath = ""
+        Me.ucrReceiverByFactor.ucrSelector = Nothing
         '
-        'ucrFactorReceiver
+        'ucrReceiverFirst
         '
-        Me.ucrFactorReceiver.frmParent = Me
-        Me.ucrFactorReceiver.Location = New System.Drawing.Point(255, 85)
-        Me.ucrFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
-        Me.ucrFactorReceiver.Selector = Nothing
-        Me.ucrFactorReceiver.Size = New System.Drawing.Size(120, 20)
-        Me.ucrFactorReceiver.strNcFilePath = ""
-        Me.ucrFactorReceiver.TabIndex = 5
-        Me.ucrFactorReceiver.ucrSelector = Nothing
+        Me.ucrReceiverFirst.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverFirst, "ucrReceiverFirst")
+        Me.ucrReceiverFirst.Name = "ucrReceiverFirst"
+        Me.ucrReceiverFirst.Selector = Nothing
+        Me.ucrReceiverFirst.strNcFilePath = ""
+        Me.ucrReceiverFirst.ucrSelector = Nothing
         '
         'ucrBarChartSelector
         '
         Me.ucrBarChartSelector.bShowHiddenColumns = False
         Me.ucrBarChartSelector.bUseCurrentFilter = True
-        Me.ucrBarChartSelector.Location = New System.Drawing.Point(10, 41)
-        Me.ucrBarChartSelector.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrBarChartSelector, "ucrBarChartSelector")
         Me.ucrBarChartSelector.Name = "ucrBarChartSelector"
-        Me.ucrBarChartSelector.Size = New System.Drawing.Size(210, 180)
-        Me.ucrBarChartSelector.TabIndex = 3
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 336)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 12
         '
         'ucrPnlOptions
         '
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(65, 6)
+        resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        Me.ucrPnlOptions.Size = New System.Drawing.Size(211, 36)
-        Me.ucrPnlOptions.TabIndex = 0
         '
         'dlgBarAndPieChart
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(433, 400)
         Me.Controls.Add(Me.ucrSaveBar)
         Me.Controls.Add(Me.ucrChkFlipCoordinates)
         Me.Controls.Add(Me.rdoBarChart)
         Me.Controls.Add(Me.rdoPieChart)
         Me.Controls.Add(Me.cmdOptions)
-        Me.Controls.Add(Me.lblSecondFactor)
-        Me.Controls.Add(Me.lblFactor)
-        Me.Controls.Add(Me.ucrSecondReceiver)
-        Me.Controls.Add(Me.ucrFactorReceiver)
+        Me.Controls.Add(Me.lblByFactor)
+        Me.Controls.Add(Me.lblVariable)
+        Me.Controls.Add(Me.ucrReceiverByFactor)
+        Me.Controls.Add(Me.ucrReceiverFirst)
         Me.Controls.Add(Me.ucrBarChartSelector)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.cmdBarChartOptions)
@@ -226,9 +180,7 @@ Partial Class dlgBarAndPieChart
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgBarAndPieChart"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Bar_And_Pie_Chart"
-        Me.Text = "Bar and Pie Chart"
+        Me.Tag = "Bar_and_Pie_Chart"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -236,11 +188,10 @@ Partial Class dlgBarAndPieChart
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrBarChartSelector As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrFactorReceiver As ucrReceiverSingle
-    Friend WithEvents ucrSecondReceiver As ucrReceiverSingle
-    Friend WithEvents lblFactor As Label
-    Friend WithEvents lblSecondFactor As Label
-    Friend WithEvents cmdBarChartOptions As Button
+    Friend WithEvents ucrReceiverFirst As ucrReceiverSingle
+    Friend WithEvents ucrReceiverByFactor As ucrReceiverSingle
+    Friend WithEvents lblVariable As Label
+    Friend WithEvents lblByFactor As Label
     Friend WithEvents cmdOptions As Button
     Friend WithEvents cmdPieChartOptions As Button
     Friend WithEvents ucrSaveBar As ucrSave
@@ -248,4 +199,5 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents rdoBarChart As RadioButton
     Friend WithEvents rdoPieChart As RadioButton
     Friend WithEvents ucrPnlOptions As UcrPanel
+    Friend WithEvents cmdBarChartOptions As Button
 End Class

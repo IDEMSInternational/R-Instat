@@ -16,17 +16,22 @@
 
 Imports instat.Translations
 Public Class sdgSummaries
-    Public clsListFunction As New RFunction
+    Public clsListFunction, clsDefaultFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
-    Public strSummariesParameter As String
     Private lstCheckboxes As New List(Of ucrCheck)
+    Private ucrBaseSelector As ucrSelector
+    Public strDataFrame As String
+    Public bEnable2VariableTab As Boolean = True
 
     Private Sub sdgDescribe_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        tbTwoVariables.Enabled = bEnable2VariableTab
     End Sub
 
     Public Sub InitialiseControls()
+        lstCheckboxes = New List(Of ucrCheck)
+
         ucrChkNonMissing.SetParameter(New RParameter("summary_count_non_missing", 1), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_count_non_missing" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkNonMissing.SetText("N Non Missing")
 
@@ -63,12 +68,125 @@ Public Class sdgSummaries
         ucrChkVariance.SetParameter(New RParameter("summary_var", 12), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_var" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkVariance.SetText("Variance")
 
-        ucrChkQuartiles.SetParameter(New RParameter("summary_quartiles", 13), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_quartiles" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkQuartiles.Enabled = False 'To be enabled once quartiles summary function has is implemented in Instat object
-        ucrChkQuartiles.SetText("Quartiles")
+        ucrChkUpperQuartile.SetParameter(New RParameter("upper_quartile", 13), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "upper_quartile" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkUpperQuartile.SetText("Upper Quartile")
 
-        lstCheckboxes = New List(Of ucrCheck)
-        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkQuartiles})
+        ucrChkLowerQuartile.SetParameter(New RParameter("lower_quartile", 14), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "lower_quartile" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkLowerQuartile.SetText("Lower Quartile")
+
+        ucrChkKurtosis.SetParameter(New RParameter("summary_kurtosis", 15), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_kurtosis" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkKurtosis.SetText("Kurtosis")
+
+        ucrChkSkewness.SetParameter(New RParameter("summary_skewness", 16), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_skewness" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkSkewness.SetText("Skewness(3rd Moment)")
+
+        ucrChkMc.SetParameter(New RParameter("summary_skewness_mc", 20), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_skewness_mc" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkMc.SetText("mc")
+
+        ucrChkCoefficientOfVariation.SetParameter(New RParameter("summary_coef_var", 17), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_coef_var" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkCoefficientOfVariation.SetText("Coefficient Of Variation")
+
+        ucrChkMedianAbsoluteDeviation.SetParameter(New RParameter("summary_median_absolute_deviation", 18), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_median_absolute_deviation" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkMedianAbsoluteDeviation.SetText("Median Absolute Deviation (MAD)")
+
+        ucrChkQn.SetParameter(New RParameter("summary_Qn", 19), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_Qn" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkQn.SetText("Qn")
+
+        ucrChkSn.SetParameter(New RParameter("summary_Sn", 20), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_Sn" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkSn.SetText("Sn")
+
+        ucrChkCorrelations.SetParameter(New RParameter("summary_cor", 21), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_cor" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkCorrelations.SetText("Correlations")
+
+        ucrChkCovariance.SetParameter(New RParameter("summary_cov", 22), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_cov" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkCovariance.SetText("Covariance")
+
+        ucrReceiverSecondVariable.Selector = ucrSelectorSecondVariable
+        ucrReceiverSecondVariable.SetMeAsReceiver()
+        ucrReceiverSecondVariable.SetIncludedDataTypes({"numeric"})
+
+        ucrChkFirst.SetParameter(New RParameter("summary_first", 23), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_first" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkFirst.SetText("First")
+
+        ucrChkLast.SetParameter(New RParameter("summary_last", 24), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_last" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkLast.SetText("Last")
+
+        ucrChknth.SetParameter(New RParameter("summary_nth", 25), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_nth" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChknth.SetText("nth")
+
+        ucrChkn_distinct.SetParameter(New RParameter("summary_n_distinct", 26), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_n_distinct" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkn_distinct.SetText("n_distinct")
+
+        ucrChkPercentile.SetParameter(New RParameter("summary_quantile", 27), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_quantile" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkPercentile.SetText("Percentile")
+
+        ucrInputPercentile.SetParameter(New RParameter("probs", 7))
+        ucrInputPercentile.SetValidationTypeAsNumeric()
+        ucrInputPercentile.AddQuotesIfUnrecognised = False
+
+        'linking controls
+        ucrChkPercentile.AddToLinkedControls(ucrInputPercentile, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.25)
+        ucrChkTrimmedMean.AddToLinkedControls(ucrNudFraction, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChknth.AddToLinkedControls(ucrInputN, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
+        ucrChkProportion.AddToLinkedControls(ucrInputComboTest, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkProportion.AddToLinkedControls(ucrInputValue, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrChkProportion.AddToLinkedControls(ucrChkPercentage, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkCount.AddToLinkedControls(ucrInputComboTest, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkCount.AddToLinkedControls(ucrInputValue, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+
+        ucrInputN.SetLinkedDisplayControl(lblInputN)
+        ucrNudFraction.SetLinkedDisplayControl(lblFractionTrimmed)
+
+        ucrChkTrimmedMean.SetParameter(New RParameter("summary_mean", 27), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_mean" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkTrimmedMean.SetText("Trimmed Mean")
+
+        ucrNudFraction.SetParameter(New RParameter("trim", 5))
+        ucrNudFraction.Maximum = 0.5
+        ucrNudFraction.DecimalPlaces = 2
+        ucrNudFraction.Increment = 0.01
+        ucrNudFraction.SetRDefault(0)
+
+        ucrInputN.SetParameter(New RParameter("n", 6))
+        ucrInputN.AddQuotesIfUnrecognised = False
+        ucrInputN.SetValidationTypeAsNumeric()
+
+        ucrInputComboTest.SetParameter(New RParameter("test", 7))
+        Dim dctProportion As New Dictionary(Of String, String)
+        dctProportion.Add("<", Chr(34) & "'<'" & Chr(34))
+        dctProportion.Add("<=", Chr(34) & "'<='" & Chr(34))
+        dctProportion.Add(">", Chr(34) & "'>'" & Chr(34))
+        dctProportion.Add(">=", Chr(34) & "'>='" & Chr(34))
+        dctProportion.Add("==", Chr(34) & "'=='" & Chr(34))
+        ucrInputComboTest.SetItems(dctProportion)
+        ucrInputComboTest.SetDropDownStyleAsNonEditable()
+        ucrInputComboTest.SetRDefault(Chr(34) & "'=='" & Chr(34))
+
+        ucrInputValue.SetParameter(New RParameter("value", 8))
+        ucrInputValue.SetValidationTypeAsNumeric()
+        ucrInputValue.AddQuotesIfUnrecognised = False
+
+        ucrChkProportion.SetParameter(New RParameter("proportion_calc", 28), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "proportion_calc" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkProportion.SetText("Proportion")
+
+        ucrChkPercentage.SetParameter(New RParameter("As_percentage", 9))
+        ucrChkPercentage.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkPercentage.SetRDefault("FALSE")
+        ucrChkPercentage.SetText("As Percentage")
+
+        ucrChkCount.SetParameter(New RParameter("count_calc", 29), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "count_calc" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkCount.SetText("Count")
+
+        'ucrPnlMissingOptions.AddRadioButton(rdoNumber)
+        'ucrPnlMissingOptions.AddRadioButton(rdoPercentage)
+
+        'ucrPnlMissingOptions.AddToLinkedControls({ucrNudNumber}, {rdoNumber}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        'ucrPnlMissingOptions.AddToLinkedControls({ucrNudPercentage}, {rdoPercentage}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudPercentage.SetLinkedDisplayControl(lblPercentage)
+        ucrNudNumber.SetLinkedDisplayControl(lblNumber)
+
+        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkUpperQuartile, ucrChkLowerQuartile, ucrChkMedianAbsoluteDeviation, ucrChkKurtosis, ucrChkCoefficientOfVariation, ucrChkSkewness, ucrChkMc, ucrChkQn, ucrChkSn, ucrChkCorrelations, ucrChkCovariance, ucrChkFirst, ucrChkLast, ucrChknth, ucrChkn_distinct, ucrChkTrimmedMean, ucrChkPercentile, ucrChkProportion, ucrChkCount})
+        'TODO: This needs modifying summaries functions to allow this options to be implemented.
+        tbMissingOptions.Enabled = False
         For Each ctrTemp As ucrCheck In lstCheckboxes
             ctrTemp.SetParameterIncludeArgumentName(False)
             ctrTemp.SetRDefault(Chr(34) & Chr(34))
@@ -76,12 +194,62 @@ Public Class sdgSummaries
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRFunction(clsNewRFunction As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsNewRFunction As RFunction, clsNewDefaultFunction As RFunction, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
         clsListFunction = clsNewRFunction
-        SetRCode(Me, clsListFunction, bReset)
+        clsDefaultFunction = clsNewDefaultFunction
+
+        'This is meant to force selector select the current dataframe as selected in the main dialog
+        ucrBaseSelector = ucrNewBaseSelector
+        If ucrBaseSelector IsNot Nothing AndAlso ucrBaseSelector.strCurrentDataFrame <> "" Then
+            strDataFrame = ucrBaseSelector.strCurrentDataFrame
+            ucrSelectorSecondVariable.SetDataframe(strDataFrame, False)
+        End If
+
+        ucrChkPercentage.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputValue.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputComboTest.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputPercentile.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudFraction.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputN.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkCount.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkProportion.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkPercentile.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkTrimmedMean.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkNTotal.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkNonMissing.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkNMissing.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkMean.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkMinimum.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkMode.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkMaximum.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkMedian.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkStdDev.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkVariance.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkRange.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkSum.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkUpperQuartile.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkLowerQuartile.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkMedianAbsoluteDeviation.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkKurtosis.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkCoefficientOfVariation.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkSkewness.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkMc.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkQn.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkSn.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkCorrelations.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkCovariance.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkFirst.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkLast.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChknth.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkn_distinct.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+
+        If bReset Then
+            tbSummaries.SelectedIndex = 0
+            ucrSelectorSecondVariable.Reset()
+        End If
     End Sub
 
     Public ReadOnly Property SummaryCount As Integer
@@ -102,5 +270,19 @@ Public Class sdgSummaries
         If SummaryCount = 0 Then
             MsgBox("No summaries selected. Ok will not be enabled on the main dialog.", Title:="No summaries selected", Buttons:=MsgBoxStyle.Information)
         End If
+    End Sub
+
+    Private Sub ucrChkCorrelations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCorrelations.ControlValueChanged, ucrChkCovariance.ControlValueChanged, ucrReceiverSecondVariable.ControlValueChanged
+        If ucrChkCorrelations.Checked OrElse ucrChkCovariance.Checked Then
+            clsDefaultFunction.AddParameter("y", ucrReceiverSecondVariable.GetVariableNames, iPosition:=3)
+        Else
+            clsDefaultFunction.RemoveParameterByName("y")
+        End If
+        'This might be required when order_by parameter is implemented for last,first and nth functions
+        '    If ucrChkFirst.Checked OrElse ucrChkLast.Checked OrElse ucrChknth.Checked Then
+        '        clsDefaultFunction.AddParameter("order_by", ucrReceiverSecondVariable.GetVariableNames, iPosition:=4)
+        '    Else
+        '        clsDefaultFunction.RemoveParameterByName("order_by")
+        '    End If
     End Sub
 End Class

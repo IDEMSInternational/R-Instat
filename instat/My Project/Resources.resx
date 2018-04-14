@@ -1582,4 +1582,31 @@
   <data name="Shape2" xml:space="preserve">
     <value>Shape2</value>
   </data>
+  <data name="columnmetadata" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\columnmetadata.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dataview" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dataview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="last10dialogs" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\last10dialogs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="lastdialog" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lastdialog.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="openfromfile" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\openfromfile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="openfromlibrary" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\openfromlibrary.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="output2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\output2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="scriptwindow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\script.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="resetlayout" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\resetlayout.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

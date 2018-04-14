@@ -48,6 +48,7 @@ dependent_columns_label="Dependent_Columns"
 calculated_by_label="Calculated_By"
 dependencies_label="Dependencies"
 colour_label="Colour"
+set_prefix="set."
 
 #Variables_metadata value labels
 structure_type_1_label="Layout"

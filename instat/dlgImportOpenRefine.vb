@@ -22,7 +22,7 @@ Public Class dlgImportOpenRefine
     Private clsImportFunction As New RFunction
 
     Private Sub dlgImportOpenRefine_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
+        'autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -39,7 +39,6 @@ Public Class dlgImportOpenRefine
         ucrBase.iHelpTopicID = 467
 
         ucrInputProjectName.SetParameter(New RParameter("project.name", 0))
-        ucrInputProjectName.SetValidationTypeAsRVariable()
         ucrInputProjectName.SetRDefault("NULL")
 
         ucrInputProjectID.SetParameter(New RParameter("project.id", 1))

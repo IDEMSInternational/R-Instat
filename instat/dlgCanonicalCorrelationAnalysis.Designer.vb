@@ -38,6 +38,7 @@ Partial Class dlgCanonicalCorrelationAnalysis
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgCanonicalCorrelationAnalysis))
         Me.lblYVariables = New System.Windows.Forms.Label()
         Me.lblXVariables = New System.Windows.Forms.Label()
         Me.cmdCCAOptions = New System.Windows.Forms.Button()
@@ -50,87 +51,62 @@ Partial Class dlgCanonicalCorrelationAnalysis
         '
         'lblYVariables
         '
-        Me.lblYVariables.AutoSize = True
-        Me.lblYVariables.Location = New System.Drawing.Point(266, 168)
+        resources.ApplyResources(Me.lblYVariables, "lblYVariables")
         Me.lblYVariables.Name = "lblYVariables"
-        Me.lblYVariables.Size = New System.Drawing.Size(63, 13)
-        Me.lblYVariables.TabIndex = 3
         Me.lblYVariables.Tag = "Y_Variables:"
-        Me.lblYVariables.Text = "Y Variables:"
         '
         'lblXVariables
         '
-        Me.lblXVariables.AutoSize = True
-        Me.lblXVariables.Location = New System.Drawing.Point(266, 45)
+        resources.ApplyResources(Me.lblXVariables, "lblXVariables")
         Me.lblXVariables.Name = "lblXVariables"
-        Me.lblXVariables.Size = New System.Drawing.Size(63, 13)
-        Me.lblXVariables.TabIndex = 1
         Me.lblXVariables.Tag = "X_Variables:"
-        Me.lblXVariables.Text = "X Variables:"
         '
         'cmdCCAOptions
         '
-        Me.cmdCCAOptions.Location = New System.Drawing.Point(289, 290)
+        resources.ApplyResources(Me.cmdCCAOptions, "cmdCCAOptions")
         Me.cmdCCAOptions.Name = "cmdCCAOptions"
-        Me.cmdCCAOptions.Size = New System.Drawing.Size(120, 23)
-        Me.cmdCCAOptions.TabIndex = 6
         Me.cmdCCAOptions.Tag = "Options"
-        Me.cmdCCAOptions.Text = "Options"
         Me.cmdCCAOptions.UseVisualStyleBackColor = True
         '
         'ucrReceiverXVariables
         '
         Me.ucrReceiverXVariables.frmParent = Me
-        Me.ucrReceiverXVariables.Location = New System.Drawing.Point(266, 60)
-        Me.ucrReceiverXVariables.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverXVariables, "ucrReceiverXVariables")
         Me.ucrReceiverXVariables.Name = "ucrReceiverXVariables"
         Me.ucrReceiverXVariables.Selector = Nothing
-        Me.ucrReceiverXVariables.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverXVariables.strNcFilePath = ""
-        Me.ucrReceiverXVariables.TabIndex = 2
         Me.ucrReceiverXVariables.ucrSelector = Nothing
         '
         'ucrReceiverYVariables
         '
         Me.ucrReceiverYVariables.frmParent = Me
-        Me.ucrReceiverYVariables.Location = New System.Drawing.Point(266, 183)
-        Me.ucrReceiverYVariables.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverYVariables, "ucrReceiverYVariables")
         Me.ucrReceiverYVariables.Name = "ucrReceiverYVariables"
         Me.ucrReceiverYVariables.Selector = Nothing
-        Me.ucrReceiverYVariables.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverYVariables.strNcFilePath = ""
-        Me.ucrReceiverYVariables.TabIndex = 4
         Me.ucrReceiverYVariables.ucrSelector = Nothing
         '
         'ucrSelectorCCA
         '
         Me.ucrSelectorCCA.bShowHiddenColumns = False
         Me.ucrSelectorCCA.bUseCurrentFilter = True
-        Me.ucrSelectorCCA.Location = New System.Drawing.Point(10, 9)
-        Me.ucrSelectorCCA.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorCCA, "ucrSelectorCCA")
         Me.ucrSelectorCCA.Name = "ucrSelectorCCA"
-        Me.ucrSelectorCCA.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorCCA.TabIndex = 0
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 316)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 7
         '
         'ucrSaveResult
         '
-        Me.ucrSaveResult.Location = New System.Drawing.Point(10, 290)
+        resources.ApplyResources(Me.ucrSaveResult, "ucrSaveResult")
         Me.ucrSaveResult.Name = "ucrSaveResult"
-        Me.ucrSaveResult.Size = New System.Drawing.Size(255, 24)
-        Me.ucrSaveResult.TabIndex = 5
         '
         'dlgCanonicalCorrelationAnalysis
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(416, 371)
         Me.Controls.Add(Me.ucrSaveResult)
         Me.Controls.Add(Me.ucrReceiverYVariables)
         Me.Controls.Add(Me.ucrReceiverXVariables)
@@ -143,9 +119,7 @@ Partial Class dlgCanonicalCorrelationAnalysis
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgCanonicalCorrelationAnalysis"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Canonical_Correlation_Analysis"
-        Me.Text = "Canonical Correlations"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

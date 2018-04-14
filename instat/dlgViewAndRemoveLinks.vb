@@ -84,6 +84,12 @@ Public Class dlgViewAndRemoveLinks
         ucrSelectorLinks.Reset()
     End Sub
 
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
+    End Sub
+
     Private Sub ucrPnlLinks_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlLinks.ControlValueChanged
         If rdoDeleteLink.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsDeleteLinks)

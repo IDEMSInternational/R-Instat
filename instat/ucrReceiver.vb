@@ -49,9 +49,9 @@ Public Class ucrReceiver
     'Should columns be forced as a data frame object when bParameterIsRFunction = True
     Public bForceAsDataFrame As Boolean = False
 
-    'Currently no distinction in between selector resetting and data frame changed
-    'Need option to not reset receiver when data frame changed e.g. calculations dialog
-    Public bResetWhenSelectorResets As Boolean = True
+    ' If True then this receiver can only contain a column from the selector's primary data frame
+    ' and this receiver can set the selector's primary data frame (when current receiver), resetting all other receivers
+    Public bAttachedToPrimaryDataFrame As Boolean = True
 
     Public Sub New()
         ' This call is required by the designer.
@@ -136,7 +136,7 @@ Public Class ucrReceiver
     End Sub
 
     Private Sub ucrReceiver_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        translateEach(Controls)
+        translateEach(Controls, Me)
         If bFirstLoad Then
             frmParent = ParentForm
             'Remove this line so that single/multiple code can run things on first load as well
@@ -186,20 +186,51 @@ Public Class ucrReceiver
         OnControlValueChanged()
     End Sub
 
-    'TODO remove this method and replace with SetIncludedDataTypes
-    Public Sub SetDataType(strTemp As String)
-        AddIncludedMetadataProperty("class", {Chr(34) & strTemp & Chr(34)})
+    ' If bStrict = True then only columns of the type specific will be included
+    ' If bStict = False then a less strict condition will be made for which columns are included, depending on the type
+    ' as specified below.
+    ' SetDataType("numeric", False) will exclude factor and character columns (so numeric, logical, Date etc. will be included)
+    ' SetDataType("factor", False) will include factor and logical columns
+    Public Sub SetDataType(strTemp As String, Optional bStrict As Boolean = False)
+        If Not bStrict Then
+            If strTemp = "numeric" Then
+                AddExcludedMetadataProperty("class", {Chr(34) & "factor" & Chr(34), Chr(34) & "character" & Chr(34)})
+            ElseIf strTemp = "factor" Then
+                AddIncludedMetadataProperty("class", {Chr(34) & "factor" & Chr(34), Chr(34) & "logical" & Chr(34)})
+            Else
+                AddIncludedMetadataProperty("class", {Chr(34) & strTemp & Chr(34)})
+            End If
+        Else
+            AddIncludedMetadataProperty("class", {Chr(34) & strTemp & Chr(34)})
+        End If
     End Sub
 
-    Public Overridable Sub SetIncludedDataTypes(strInclude As String())
+    'bStrict used as described in SetDataType.
+    'Currently only checks if strInclude has exactly one item.
+    Public Overridable Sub SetIncludedDataTypes(strInclude As String(), Optional bStrict As Boolean = False)
         Dim strTypes(strInclude.Count - 1) As String
 
         Array.Copy(strInclude, strTypes, strInclude.Length)
         'If the two previous lines where not added, the modification of value performed on strTypes was immediately performed on strInclude, then the argument passed into the function such as clsCurrGeom.clsAesParameters(i).strIncludedDataTypes in ucrGeomListWithAes.SetParameters would have been edited (i.e. quotes would have been added to the types names in the strIncludedDataTypes of the i'th AesParameter of the current Geom...), which we don't want !
+
         For i = 0 To strInclude.Count - 1
             strTypes(i) = Chr(34) & strInclude(i) & Chr(34)
         Next
-        AddIncludedMetadataProperty("class", strTypes)
+        If Not bStrict Then
+            If strTypes.Count = 1 Then
+                If strTypes(0) = Chr(34) & "numeric" & Chr(34) Then
+                    AddExcludedMetadataProperty("class", {Chr(34) & "factor" & Chr(34), Chr(34) & "character" & Chr(34)})
+                ElseIf strTypes(0) = Chr(34) & "factor" & Chr(34) Then
+                    AddIncludedMetadataProperty("class", {Chr(34) & "factor" & Chr(34), Chr(34) & "logical" & Chr(34)})
+                Else
+                    AddIncludedMetadataProperty("class", strTypes)
+                End If
+            Else
+                AddIncludedMetadataProperty("class", strTypes)
+            End If
+        Else
+            AddIncludedMetadataProperty("class", strTypes)
+        End If
     End Sub
 
     Public Overridable Sub SetExcludedDataTypes(strExclude As String())
@@ -300,8 +331,13 @@ Public Class ucrReceiver
     End Sub
 
     Protected Overridable Sub Selector_ResetAll() Handles ucrSelector.ResetReceivers
-        If bResetWhenSelectorResets Then
-            Clear()
+        Clear()
+    End Sub
+
+    Private Sub ucrSelector_DataFrameChanged() Handles ucrSelector.DataFrameChanged
+        'TODO This is possibly an expensive check, there may be more efficient ways of checking if this is the current receiver
+        If ucrSelector IsNot Nothing AndAlso ucrSelector.CurrentReceiver IsNot Nothing AndAlso (ucrSelector.CurrentReceiver.bAttachedToPrimaryDataFrame OrElse ucrSelector.CurrentReceiver.Equals(Me)) Then
+            Selector_ResetAll()
         End If
     End Sub
 
@@ -347,7 +383,7 @@ Public Class ucrReceiver
         bTypeSet = True
     End Sub
 
-    Public Overridable Sub Add(strItem As String, Optional strDataFrame As String = "")
+    Public Overridable Sub Add(strItem As String, Optional strDataFrame As String = "", Optional bFixReceiver As Boolean = False)
         'SetMeAsReceiver()
         'For i = 0 To Selector.lstAvailableVariable.Items.Count - 1
         '    If Selector.lstAvailableVariable.Items(i).Text = strItem Then
@@ -457,4 +493,8 @@ Public Class ucrReceiver
     Public Overridable Sub SetTextColour(clrNew As Color)
 
     End Sub
+
+    Public Overridable Function GetItemsDataFrames() As List(Of String)
+        Return New List(Of String)
+    End Function
 End Class

@@ -14,6 +14,8 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat.Translations
+
 Public Class sdgCreateFilter
     Public clsCurrentFilter As RFunction
     Public bFilterDefined As Boolean
@@ -29,5 +31,9 @@ Public Class sdgCreateFilter
 
     Private Sub ucrCreateFilter_FilterChanged() Handles ucrCreateFilter.FilterChanged
         bFilterDefined = ucrCreateFilter.bFilterDefined
+    End Sub
+
+    Private Sub sdgCreateFilter_Load(sender As Object, e As EventArgs) Handles Me.Load
+        autoTranslate(Me)
     End Sub
 End Class

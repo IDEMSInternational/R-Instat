@@ -38,73 +38,57 @@ Partial Class dlgCopyDataFrame
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrDataFrameCopySheets = New instat.ucrDataFrame()
-        Me.ucrInputLabel = New instat.ucrInputTextBox()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgCopyDataFrame))
         Me.lblLabel = New System.Windows.Forms.Label()
-        Me.ucrInputNewDataFrameName = New instat.ucrInputTextBox()
         Me.lblNewName = New System.Windows.Forms.Label()
+        Me.ucrInputLabel = New instat.ucrInputTextBox()
+        Me.ucrInputNewDataFrameName = New instat.ucrInputTextBox()
+        Me.ucrDataFrameCopySheets = New instat.ucrDataFrame()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
-        'ucrBase
+        'lblLabel
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 117)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 5
+        resources.ApplyResources(Me.lblLabel, "lblLabel")
+        Me.lblLabel.Name = "lblLabel"
         '
-        'ucrDataFrameCopySheets
+        'lblNewName
         '
-        Me.ucrDataFrameCopySheets.bUseCurrentFilter = True
-        Me.ucrDataFrameCopySheets.Location = New System.Drawing.Point(10, 10)
-        Me.ucrDataFrameCopySheets.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrDataFrameCopySheets.Name = "ucrDataFrameCopySheets"
-        Me.ucrDataFrameCopySheets.Size = New System.Drawing.Size(120, 40)
-        Me.ucrDataFrameCopySheets.TabIndex = 0
+        resources.ApplyResources(Me.lblNewName, "lblNewName")
+        Me.lblNewName.Name = "lblNewName"
+        Me.lblNewName.Tag = "New_Name"
         '
         'ucrInputLabel
         '
         Me.ucrInputLabel.AddQuotesIfUnrecognised = True
         Me.ucrInputLabel.IsMultiline = False
         Me.ucrInputLabel.IsReadOnly = False
-        Me.ucrInputLabel.Location = New System.Drawing.Point(196, 79)
+        resources.ApplyResources(Me.ucrInputLabel, "ucrInputLabel")
         Me.ucrInputLabel.Name = "ucrInputLabel"
-        Me.ucrInputLabel.Size = New System.Drawing.Size(131, 22)
-        Me.ucrInputLabel.TabIndex = 4
-        '
-        'lblLabel
-        '
-        Me.lblLabel.AutoSize = True
-        Me.lblLabel.Location = New System.Drawing.Point(196, 64)
-        Me.lblLabel.Name = "lblLabel"
-        Me.lblLabel.Size = New System.Drawing.Size(94, 13)
-        Me.lblLabel.TabIndex = 3
-        Me.lblLabel.Text = "Data Frame Label:"
         '
         'ucrInputNewDataFrameName
         '
         Me.ucrInputNewDataFrameName.AddQuotesIfUnrecognised = True
         Me.ucrInputNewDataFrameName.IsMultiline = False
         Me.ucrInputNewDataFrameName.IsReadOnly = False
-        Me.ucrInputNewDataFrameName.Location = New System.Drawing.Point(196, 29)
+        resources.ApplyResources(Me.ucrInputNewDataFrameName, "ucrInputNewDataFrameName")
         Me.ucrInputNewDataFrameName.Name = "ucrInputNewDataFrameName"
-        Me.ucrInputNewDataFrameName.Size = New System.Drawing.Size(131, 21)
-        Me.ucrInputNewDataFrameName.TabIndex = 2
         '
-        'lblNewName
+        'ucrDataFrameCopySheets
         '
-        Me.lblNewName.Location = New System.Drawing.Point(196, 14)
-        Me.lblNewName.Name = "lblNewName"
-        Me.lblNewName.Size = New System.Drawing.Size(100, 26)
-        Me.lblNewName.TabIndex = 1
-        Me.lblNewName.Tag = "New_Name"
-        Me.lblNewName.Text = "New Name:"
+        Me.ucrDataFrameCopySheets.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrDataFrameCopySheets, "ucrDataFrameCopySheets")
+        Me.ucrDataFrameCopySheets.Name = "ucrDataFrameCopySheets"
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
         '
         'dlgCopyDataFrame
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 175)
         Me.Controls.Add(Me.ucrInputLabel)
         Me.Controls.Add(Me.lblLabel)
         Me.Controls.Add(Me.ucrInputNewDataFrameName)
@@ -115,8 +99,6 @@ Partial Class dlgCopyDataFrame
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgCopyDataFrame"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Copy Data Frame"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

@@ -14,6 +14,8 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.ComponentModel
+
 Public Class sdgMerge
     Private clsRSyntax As New RSyntax
     Private bControlsInitialised As Boolean = False
@@ -263,5 +265,45 @@ Public Class sdgMerge
 
     Private Sub SecondSubsetControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMergeWithSubsetSecond.ControlValueChanged, ucrReceiverSecondSelected.ControlValueChanged
         SetYParameter()
+    End Sub
+
+    Private Sub sdgMerge_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        Dim lstMatchingColumns As New List(Of String)
+
+        ' If user has chosen subset of columns we need to ensure 'by' columns are also included.
+
+        ' If user has specified the 'by' columns manually then we just check these
+        ' otherwise we check all columns with the same name in both data frames as this is what the 'by' will be by default.
+        If rdoChooseColumns.Checked Then
+            If ucrChkMergeWithSubsetFirst.Checked Then
+                For Each clsTmpParam As RParameter In clsByList.clsParameters
+                    If Not ucrReceiverFirstSelected.GetVariableNamesAsList.Contains(clsTmpParam.strArgumentName.Trim(Chr(34))) Then
+                        ucrReceiverFirstSelected.Add(clsTmpParam.strArgumentName.Trim(Chr(34)), ucrSelectorColumnsToIncludeFirst.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+                    End If
+                Next
+            End If
+            If ucrChkMergeWithSubsetSecond.Checked Then
+                For Each clsTmpParam As RParameter In clsByList.clsParameters
+                    If Not ucrReceiverFirstSelected.GetVariableNamesAsList.Contains(clsTmpParam.strArgumentValue.Trim(Chr(34))) Then
+                        ucrReceiverSecondSelected.Add(clsTmpParam.strArgumentValue.Trim(Chr(34)), ucrSelectorColumnsToIncludeSecond.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+                    End If
+                Next
+            End If
+        Else
+            If ucrChkMergeWithSubsetFirst.Checked OrElse ucrChkMergeWithSubsetSecond.Checked Then
+                For i As Integer = 0 To ucrSelectorColumnsToIncludeFirst.lstAvailableVariable.Items.Count - 1
+                    For j As Integer = 0 To ucrSelectorColumnsToIncludeSecond.lstAvailableVariable.Items.Count - 1
+                        If ucrSelectorColumnsToIncludeFirst.lstAvailableVariable.Items(i).Text = ucrSelectorColumnsToIncludeSecond.lstAvailableVariable.Items(j).Text Then
+                            lstMatchingColumns.Add(ucrSelectorColumnsToIncludeFirst.lstAvailableVariable.Items(i).Text)
+                            Exit For
+                        End If
+                    Next
+                Next
+                For Each strTemp As String In lstMatchingColumns
+                    ucrReceiverFirstSelected.Add(strTemp, ucrSelectorColumnsToIncludeFirst.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+                    ucrReceiverSecondSelected.Add(strTemp, ucrSelectorColumnsToIncludeSecond.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+                Next
+            End If
+        End If
     End Sub
 End Class

@@ -20,10 +20,11 @@ Public Class dlgViewGraph
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsggPlotly, clsGetGraphs As New RFunction
-    Private strGraphDisplayOption As String
+    Private strGlobalGraphDisplayOption As String
 
     Private Sub dlgViewGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        strGlobalGraphDisplayOption = frmMain.clsInstatOptions.strGraphDisplayOption
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -32,6 +33,7 @@ Public Class dlgViewGraph
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetGraphDisplayType()
         bReset = False
         TestOkEnabled()
     End Sub
@@ -47,21 +49,18 @@ Public Class dlgViewGraph
         'Receiver
         ucrGraphReceiver.SetParameter(New RParameter("graph_name", 1))
         ucrGraphReceiver.strSelectorHeading = "Ggplot Graphs"
+        ucrGraphReceiver.bAutoFill = True
         ucrGraphReceiver.SetParameterIsString()
         ucrGraphReceiver.SetItemType("graph")
         ucrGraphReceiver.Selector = ucrGraphsSelector
         ucrGraphReceiver.SetMeAsReceiver()
 
+        ' We don't specify rdos in the new system here. This is because the automatic detection of the radio buttons relies on VB options, not R code
         'Group Options panel
         ucrPnlDisplayOptions.AddRadioButton(rdoDisplayOutputWindow)
         ucrPnlDisplayOptions.AddRadioButton(rdoDisplayRViewer)
         'ucrPnlDisplayOptions.AddRadioButton(rdoDisplaySeparateWindow) ' TODO: Add code for this
         ucrPnlDisplayOptions.AddRadioButton(rdoDisplayInteractiveView)
-
-        ucrPnlDisplayOptions.AddFunctionNamesCondition(rdoDisplayOutputWindow, frmMain.clsRLink.strInstatDataObject & "$get_graphs")
-        ucrPnlDisplayOptions.AddFunctionNamesCondition(rdoDisplayRViewer, frmMain.clsRLink.strInstatDataObject & "$get_graphs")
-        'ucrPnlDisplayOptions.AddFunctionNamesCondition(rdoDisplaySeparateWindow, frmMain.clsRLink.strInstatDataObject & "$get_graphs")
-        ucrPnlDisplayOptions.AddFunctionNamesCondition(rdoDisplayInteractiveView, "ggplotly")
     End Sub
 
     Private Sub SetDefaults()
@@ -69,26 +68,27 @@ Public Class dlgViewGraph
         clsGetGraphs = New RFunction
 
         ucrGraphsSelector.Reset()
+        rdoDisplayInteractiveView.Checked = True
 
         clsggPlotly.SetPackageName("plotly")
         clsggPlotly.SetRCommand("ggplotly")
         clsggPlotly.AddParameter("p", clsRFunctionParameter:=clsGetGraphs)
 
         clsGetGraphs.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
+        clsGetGraphs.AddParameter("print_graph", "FALSE")
         ucrBase.clsRsyntax.SetBaseRFunction(clsggPlotly)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrGraphReceiver.SetRCode(clsGetGraphs, bReset)
         ucrGraphsSelector.SetRCode(clsGetGraphs, bReset)
-        ucrPnlDisplayOptions.SetRCode(clsggPlotly, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrGraphReceiver.IsEmpty Then
-            ucrBase.OKEnabled(False)
-        Else
+        If Not ucrGraphReceiver.IsEmpty Then
             ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
@@ -98,31 +98,37 @@ Public Class dlgViewGraph
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        strGraphDisplayOption = frmMain.clsInstatOptions.strGraphDisplayOption
-        If rdoDisplayOutputWindow.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsGetGraphs)
-            frmMain.clsInstatOptions.SetGraphDisplayOption("view_output_window")
-            ucrBase.clsRsyntax.iCallType = 3
-        ElseIf rdoDisplayRViewer.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsGetGraphs)
-            frmMain.clsInstatOptions.SetGraphDisplayOption("view_R_viewer")
-            ucrBase.clsRsyntax.iCallType = 3
-        ElseIf rdoDisplaySeparateWindow.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsGetGraphs)
-            frmMain.clsInstatOptions.SetGraphDisplayOption("view_separate_window")
-            ucrBase.clsRsyntax.iCallType = 3
-        ElseIf rdoDisplayInteractiveView.Checked Then
-      ucrBase.clsRsyntax.SetBaseRFunction(clsggPlotly)
-            ucrBase.clsRsyntax.iCallType = 0
-        End If
+    Private Sub ucrPnlDisplayOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDisplayOptions.ControlValueChanged
+        SetGraphDisplayType()
     End Sub
 
-    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        frmMain.clsInstatOptions.SetGraphDisplayOption(strGraphDisplayOption)
+    Private Sub SetGraphDisplayType()
+        If rdoDisplayInteractiveView.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsggPlotly)
+            ' Since R 3.4.2 this is the only way the RDotNet detects the plotly window should load
+            ucrBase.clsRsyntax.iCallType = 2
+            clsGetGraphs.AddParameter("print_graph", "FALSE")
+        Else
+            clsGetGraphs.AddParameter("print_graph", "TRUE")
+            ucrBase.clsRsyntax.SetBaseRFunction(clsGetGraphs)
+            ucrBase.clsRsyntax.iCallType = 3
+            If rdoDisplayOutputWindow.Checked Then
+                frmMain.clsInstatOptions.SetGraphDisplayOption("view_output_window")
+            ElseIf rdoDisplayRViewer.Checked Then
+                frmMain.clsInstatOptions.SetGraphDisplayOption("view_R_viewer")
+            ElseIf rdoDisplaySeparateWindow.Checked Then
+                frmMain.clsInstatOptions.SetGraphDisplayOption("view_separate_window")
+            End If
+        End If
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrGraphReceiver.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub dlgViewGraph_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
+        If Not Me.Visible Then
+            frmMain.clsInstatOptions.SetGraphDisplayOption(strGlobalGraphDisplayOption)
+        End If
     End Sub
 End Class

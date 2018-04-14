@@ -38,76 +38,84 @@ Partial Class dlgLinePlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgLinePlot))
         Me.lblXVariable = New System.Windows.Forms.Label()
         Me.lblAvailable = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.cmdLineOptions = New System.Windows.Forms.Button()
         Me.lblFactorOptional = New System.Windows.Forms.Label()
+        Me.ucrChkWithSE = New instat.ucrCheck()
+        Me.ucrChkLineofBestFit = New instat.ucrCheck()
+        Me.ucrChkPoints = New instat.ucrCheck()
+        Me.ucrSave = New instat.ucrSave()
         Me.ucrVariablesAsFactorForLinePlot = New instat.ucrVariablesAsFactor()
         Me.ucrLinePlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
-        Me.ucrSave = New instat.ucrSave()
-        Me.ucrChkPoints = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblXVariable
         '
-        Me.lblXVariable.AutoSize = True
-        Me.lblXVariable.Location = New System.Drawing.Point(249, 189)
+        resources.ApplyResources(Me.lblXVariable, "lblXVariable")
         Me.lblXVariable.Name = "lblXVariable"
-        Me.lblXVariable.Size = New System.Drawing.Size(58, 13)
-        Me.lblXVariable.TabIndex = 2
         Me.lblXVariable.Tag = "X_Variable:"
-        Me.lblXVariable.Text = "X Variable:"
         '
         'lblAvailable
         '
-        Me.lblAvailable.AutoSize = True
-        Me.lblAvailable.Location = New System.Drawing.Point(27, 15)
+        resources.ApplyResources(Me.lblAvailable, "lblAvailable")
         Me.lblAvailable.Name = "lblAvailable"
-        Me.lblAvailable.Size = New System.Drawing.Size(0, 13)
-        Me.lblAvailable.TabIndex = 1
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(10, 227)
+        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(119, 23)
-        Me.cmdOptions.TabIndex = 6
         Me.cmdOptions.Tag = "Options"
-        Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'cmdLineOptions
         '
-        Me.cmdLineOptions.Location = New System.Drawing.Point(10, 198)
+        resources.ApplyResources(Me.cmdLineOptions, "cmdLineOptions")
         Me.cmdLineOptions.Name = "cmdLineOptions"
-        Me.cmdLineOptions.Size = New System.Drawing.Size(119, 23)
-        Me.cmdLineOptions.TabIndex = 7
         Me.cmdLineOptions.Tag = "Line_Options"
-        Me.cmdLineOptions.Text = "Line Options"
         Me.cmdLineOptions.UseVisualStyleBackColor = True
         '
         'lblFactorOptional
         '
-        Me.lblFactorOptional.AutoSize = True
-        Me.lblFactorOptional.Location = New System.Drawing.Point(249, 233)
+        resources.ApplyResources(Me.lblFactorOptional, "lblFactorOptional")
         Me.lblFactorOptional.Name = "lblFactorOptional"
-        Me.lblFactorOptional.Size = New System.Drawing.Size(88, 13)
-        Me.lblFactorOptional.TabIndex = 4
         Me.lblFactorOptional.Tag = "Factor_Optional:"
-        Me.lblFactorOptional.Text = "Factor (Optional):"
+        '
+        'ucrChkWithSE
+        '
+        Me.ucrChkWithSE.Checked = False
+        resources.ApplyResources(Me.ucrChkWithSE, "ucrChkWithSE")
+        Me.ucrChkWithSE.Name = "ucrChkWithSE"
+        '
+        'ucrChkLineofBestFit
+        '
+        Me.ucrChkLineofBestFit.Checked = False
+        resources.ApplyResources(Me.ucrChkLineofBestFit, "ucrChkLineofBestFit")
+        Me.ucrChkLineofBestFit.Name = "ucrChkLineofBestFit"
+        '
+        'ucrChkPoints
+        '
+        Me.ucrChkPoints.Checked = False
+        resources.ApplyResources(Me.ucrChkPoints, "ucrChkPoints")
+        Me.ucrChkPoints.Name = "ucrChkPoints"
+        '
+        'ucrSave
+        '
+        resources.ApplyResources(Me.ucrSave, "ucrSave")
+        Me.ucrSave.Name = "ucrSave"
         '
         'ucrVariablesAsFactorForLinePlot
         '
         Me.ucrVariablesAsFactorForLinePlot.frmParent = Me
-        Me.ucrVariablesAsFactorForLinePlot.Location = New System.Drawing.Point(249, 30)
+        resources.ApplyResources(Me.ucrVariablesAsFactorForLinePlot, "ucrVariablesAsFactorForLinePlot")
         Me.ucrVariablesAsFactorForLinePlot.Name = "ucrVariablesAsFactorForLinePlot"
         Me.ucrVariablesAsFactorForLinePlot.Selector = Nothing
-        Me.ucrVariablesAsFactorForLinePlot.Size = New System.Drawing.Size(125, 136)
-        Me.ucrVariablesAsFactorForLinePlot.TabIndex = 1
+        Me.ucrVariablesAsFactorForLinePlot.strNcFilePath = ""
         Me.ucrVariablesAsFactorForLinePlot.ucrSelector = Nothing
         Me.ucrVariablesAsFactorForLinePlot.ucrVariableSelector = Nothing
         '
@@ -115,61 +123,38 @@ Partial Class dlgLinePlot
         '
         Me.ucrLinePlotSelector.bShowHiddenColumns = False
         Me.ucrLinePlotSelector.bUseCurrentFilter = True
-        Me.ucrLinePlotSelector.Location = New System.Drawing.Point(10, 10)
-        Me.ucrLinePlotSelector.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrLinePlotSelector, "ucrLinePlotSelector")
         Me.ucrLinePlotSelector.Name = "ucrLinePlotSelector"
-        Me.ucrLinePlotSelector.Size = New System.Drawing.Size(242, 189)
-        Me.ucrLinePlotSelector.TabIndex = 0
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 308)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 10
         '
         'ucrFactorOptionalReceiver
         '
         Me.ucrFactorOptionalReceiver.frmParent = Me
-        Me.ucrFactorOptionalReceiver.Location = New System.Drawing.Point(249, 248)
-        Me.ucrFactorOptionalReceiver.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrFactorOptionalReceiver, "ucrFactorOptionalReceiver")
         Me.ucrFactorOptionalReceiver.Name = "ucrFactorOptionalReceiver"
         Me.ucrFactorOptionalReceiver.Selector = Nothing
-        Me.ucrFactorOptionalReceiver.Size = New System.Drawing.Size(125, 26)
-        Me.ucrFactorOptionalReceiver.TabIndex = 5
+        Me.ucrFactorOptionalReceiver.strNcFilePath = ""
         Me.ucrFactorOptionalReceiver.ucrSelector = Nothing
         '
         'ucrReceiverX
         '
         Me.ucrReceiverX.frmParent = Me
-        Me.ucrReceiverX.Location = New System.Drawing.Point(249, 204)
-        Me.ucrReceiverX.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverX, "ucrReceiverX")
         Me.ucrReceiverX.Name = "ucrReceiverX"
         Me.ucrReceiverX.Selector = Nothing
-        Me.ucrReceiverX.Size = New System.Drawing.Size(125, 26)
-        Me.ucrReceiverX.TabIndex = 3
+        Me.ucrReceiverX.strNcFilePath = ""
         Me.ucrReceiverX.ucrSelector = Nothing
         '
-        'ucrSave
+        'dlgLinePlot
         '
-        Me.ucrSave.Location = New System.Drawing.Point(10, 282)
-        Me.ucrSave.Name = "ucrSave"
-        Me.ucrSave.Size = New System.Drawing.Size(254, 24)
-        Me.ucrSave.TabIndex = 9
-        '
-        'ucrChkPoints
-        '
-        Me.ucrChkPoints.Checked = False
-        Me.ucrChkPoints.Location = New System.Drawing.Point(10, 256)
-        Me.ucrChkPoints.Name = "ucrChkPoints"
-        Me.ucrChkPoints.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkPoints.TabIndex = 8
-        '
-        'dlgPlot
-        '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 364)
+        Me.Controls.Add(Me.ucrChkWithSE)
+        Me.Controls.Add(Me.ucrChkLineofBestFit)
         Me.Controls.Add(Me.ucrChkPoints)
         Me.Controls.Add(Me.ucrSave)
         Me.Controls.Add(Me.ucrVariablesAsFactorForLinePlot)
@@ -185,10 +170,8 @@ Partial Class dlgLinePlot
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgPlot"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Name = "dlgLinePlot"
         Me.Tag = "Line_Plot"
-        Me.Text = "Line Plot"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -205,4 +188,6 @@ Partial Class dlgLinePlot
     Friend WithEvents ucrVariablesAsFactorForLinePlot As ucrVariablesAsFactor
     Friend WithEvents ucrChkPoints As ucrCheck
     Friend WithEvents ucrSave As ucrSave
+    Friend WithEvents ucrChkLineofBestFit As ucrCheck
+    Friend WithEvents ucrChkWithSE As ucrCheck
 End Class

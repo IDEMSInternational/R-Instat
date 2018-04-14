@@ -21,6 +21,9 @@ Public Class dlgCorrelation
     Private clsCorrelationTestFunction, clsRGGcorrGraphicsFunction, clsRGraphicsFuction, clsRGGscatMatrixFunction, clsCorrelationFunction, clsRTempFunction, clsTempFunc As New RFunction
     Private clsColFunction As String
     Private bResetSubdialog As Boolean = False
+    Public strDefaultDataFrame As String = ""
+    Public strDefaultColumns() As String = Nothing
+
     Private Sub dlgCorrelation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
@@ -33,6 +36,7 @@ Public Class dlgCorrelation
         bReset = False
         autoTranslate(Me)
         ReopenDialog()
+        SetDefaultColumn()
         TestOKEnabled()
     End Sub
 
@@ -44,20 +48,22 @@ Public Class dlgCorrelation
         ucrReceiverFirstColumn.SetParameterIsRFunction()
         ucrReceiverFirstColumn.Selector = ucrSelectorCorrelation
         ucrReceiverFirstColumn.strSelectorHeading = "Numerics"
-        ucrReceiverMultipleColumns.Selector = ucrSelectorCorrelation
-        ucrReceiverFirstColumn.SetDataType("numeric")
+        ' cor.test only accepts numeric columns so need to be strict
+        ucrReceiverFirstColumn.SetDataType("numeric", bStrict:=True)
 
         ucrReceiverSecondColumn.SetParameter(New RParameter("y", 1))
         ucrReceiverSecondColumn.SetParameterIsRFunction()
         ucrReceiverSecondColumn.strSelectorHeading = "Numerics"
         ucrReceiverSecondColumn.Selector = ucrSelectorCorrelation
-        ucrReceiverSecondColumn.SetDataType("numeric")
+        ' cor.test only accepts numeric columns so need to be strict
+        ucrReceiverSecondColumn.SetDataType("numeric", bStrict:=True)
 
         ucrReceiverMultipleColumns.SetParameter(New RParameter("x", 2))
         ucrReceiverMultipleColumns.Selector = ucrSelectorCorrelation
         ucrReceiverMultipleColumns.strSelectorHeading = "Numerics"
         ucrReceiverMultipleColumns.SetParameterIsRFunction()
-        ucrReceiverMultipleColumns.SetDataType("numeric")
+        ' cor accepts numeric and logical columns
+        ucrReceiverMultipleColumns.SetIncludedDataTypes({"numeric", "logical"})
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         'TODO: Fix bugs produced when rdoScatterplotMatrix is checked. Disabled for now
@@ -119,6 +125,7 @@ Public Class dlgCorrelation
 
         ucrSelectorCorrelation.Reset()
         ucrSaveModel.Reset()
+        ucrReceiverFirstColumn.SetMeAsReceiver()
 
         clsTempFunc = ucrSelectorCorrelation.ucrAvailableDataFrames.clsCurrDataFrame
         clsTempFunc.AddParameter("remove_attr", "TRUE")
@@ -173,6 +180,20 @@ Public Class dlgCorrelation
         ucrPnlCompletePairwise.SetRCode(clsCorrelationFunction, bReset)
         ucrSaveModel.AddAdditionalRCode(clsCorrelationTestFunction, 1)
         ucrSaveModel.SetRCode(clsCorrelationFunction, bReset)
+    End Sub
+
+    Private Sub SetDefaultColumn()
+        If strDefaultDataFrame <> "" Then
+            ucrSelectorCorrelation.SetDataframe(strDefaultDataFrame)
+            rdoMultipleColumns.Checked = True
+        End If
+        If strDefaultColumns IsNot Nothing AndAlso strDefaultColumns.Count > 0 Then
+            For Each strVar As String In strDefaultColumns
+                ucrReceiverMultipleColumns.Add(strVar, strDefaultDataFrame)
+            Next
+        End If
+        strDefaultDataFrame = ""
+        strDefaultColumns = Nothing
     End Sub
 
     Public Sub TestOKEnabled()

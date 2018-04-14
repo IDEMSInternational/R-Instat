@@ -126,11 +126,11 @@ instat_object$set("public", "copy_data_object", function(data_name, new_name, fi
 
 
 instat_object$set("public", "import_RDS", function(data_RDS, keep_existing = TRUE, overwrite_existing = FALSE, include_objects = TRUE,
-                                                   include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_calculations = TRUE)
+                                                   include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_calculations = TRUE, include_comments = TRUE)
   # TODO add include_calcuations options
 {
   if("instat_object" %in% class(data_RDS)) {
-    if(!keep_existing && include_objects && include_metadata && include_logs && include_filters && include_calculations) {
+    if(!keep_existing && include_objects && include_metadata && include_logs && include_filters && include_calculations && include_comments) {
       self$replace_instat_object(new_instat_object = data_RDS)
     }
     else {
@@ -143,7 +143,15 @@ instat_object$set("public", "import_RDS", function(data_RDS, keep_existing = TRU
       }
       new_links_list <- data_RDS$get_links()
       for(data_obj_name in data_RDS$get_data_names()) {
-        data_obj_clone <- data_RDS$get_data_objects(data_obj_name)$data_clone(include_objects = include_objects, include_metadata = include_metadata, include_logs = include_logs, include_filters = include_filters, include_calculations = include_calculations)
+        # fix for loading instat objects created before comments where added
+        # In older objects "include_comments" is not an argument to data_clone
+        # data_clone now contains ... argument so further changes to data object structure will not require similar fixes
+        if("set_comments" %in% names(data_RDS$get_data_objects(data_obj_name))) {
+          data_obj_clone <- data_RDS$get_data_objects(data_obj_name)$data_clone(include_objects = include_objects, include_metadata = include_metadata, include_logs = include_logs, include_filters = include_filters, include_calculations = include_calculations, include_comments = include_comments)
+        }
+        else {
+          data_obj_clone <- data_RDS$get_data_objects(data_obj_name)$data_clone(include_objects = include_objects, include_metadata = include_metadata, include_logs = include_logs, include_filters = include_filters, include_calculations = include_calculations)
+        }
         if(data_obj_name %in% self$get_data_names() && !overwrite_existing) {
           new_name <- next_default_item(data_obj_name, self$get_data_names())
           data_obj_clone$append_to_metadata(data_name_label, new_name)
@@ -227,7 +235,7 @@ instat_object$set("public", "append_data_object", function(name, obj) {
 }
 )
 
-instat_object$set("public", "get_data_objects", function(data_name, as_list = FALSE) {
+instat_object$set("public", "get_data_objects", function(data_name, as_list = FALSE, ...) {
   if(missing(data_name)) {
     return(private$.data_objects)
   }
@@ -281,6 +289,16 @@ instat_object$set("public", "get_column_data_types", function(data_name, columns
 }
 )
 
+instat_object$set("public", "get_column_labels", function(data_name, columns) {
+  return(self$get_data_objects(data_name)$get_column_labels(columns = columns))
+}
+)
+
+instat_object$set("public", "get_data_frame_metadata", function(data_name, label, include_calculated = TRUE, excluded_not_for_display = TRUE) {
+  return(self$get_data_objects(data_name)$get_metadata(label = label, include_calculated = include_calculated, excluded_not_for_display = excluded_not_for_display))
+}
+)
+
 instat_object$set("public", "get_combined_metadata", function(convert_to_character = FALSE) { 
   retlist <- data.frame()
   i = 1
@@ -299,7 +317,7 @@ instat_object$set("public", "get_combined_metadata", function(convert_to_charact
 } 
 )
 
-instat_object$set("public", "get_metadata", function(name) {
+instat_object$set("public", "get_metadata", function(name, ...) {
   if(missing(name)) return(private$.metadata)
   if(!is.character(name)) stop("name must be a character")
   if(!name %in% names(private$.metadata)) stop(paste(name, "not found in metadata"))
@@ -307,9 +325,13 @@ instat_object$set("public", "get_metadata", function(name) {
 } 
 )
 
-instat_object$set("public", "get_data_names", function(as_list = FALSE, include, exclude, excluded_items) { 
-  if(as_list) return(list(data_names = names(private$.data_objects)))
-  else return(names(private$.data_objects))
+instat_object$set("public", "get_data_names", function(as_list = FALSE, include, exclude, excluded_items, include_hidden = TRUE, ...) { 
+  ret <- names(private$.data_objects)
+  if(!include_hidden) {
+    ret <- ret[sapply(ret, function(x) !isTRUE(self$get_data_objects(x)$get_metadata(label = is_hidden_label)))]
+  }
+  if(as_list) return(list(data_names = ret))
+  else return(ret)
 } 
 )
 
@@ -428,7 +450,7 @@ instat_object$set("public", "add_object", function(data_name, object, object_nam
 }
 ) 
 
-instat_object$set("public", "get_objects", function(data_name, object_name, include_overall = TRUE, as_list = FALSE, type = "", include_empty = FALSE, force_as_list = FALSE) {
+instat_object$set("public", "get_objects", function(data_name, object_name, include_overall = TRUE, as_list = FALSE, type = "", include_empty = FALSE, force_as_list = FALSE, print_graph = TRUE, ...) {
   #TODO implement force_as_list in all cases
   if(missing(data_name)) {
     if(!missing(object_name)) {
@@ -441,7 +463,11 @@ instat_object$set("public", "get_objects", function(data_name, object_name, incl
       if(include_overall) out[[overall_label]] <- private$.objects[self$get_object_names(data_name = overall_label, type = type)]
       if(!include_empty) out = out[sapply(out, function(x) length(x) > 0)]
     }
-    return(out)
+    if(!missing(object_name) && length(object_name) == 1) {
+      if(print_graph && (ggplot2::is.ggplot(out) || any(c("gg", "ggmultiplot") %in% class(out)))) return(print(out))
+      else return(out)
+    }
+    else return(out)
   }
   else {
     if(data_name == overall_label) {
@@ -458,7 +484,10 @@ instat_object$set("public", "get_objects", function(data_name, object_name, incl
       lst[[data_name]][[object_name]] <- out
       return(lst)
     }
-    else return(out)
+    else {
+      if(print_graph && (ggplot2::is.ggplot(out) || any(c("gg", "ggmultiplot") %in% class(out)))) return(print(out))
+      else return(out)
+    }
   }
 }
 )
@@ -575,8 +604,8 @@ instat_object$set("public", "add_graph", function(data_name, graph, graph_name) 
 }
 )
 
-instat_object$set("public", "get_graphs", function(data_name, graph_name, include_overall = TRUE, force_as_list = FALSE) {
-  self$get_objects(data_name = data_name, object_name = graph_name, include_overall = include_overall, type = graph_label, force_as_list = force_as_list)
+instat_object$set("public", "get_graphs", function(data_name, graph_name, include_overall = TRUE, force_as_list = FALSE, print_graph = TRUE) {
+  self$get_objects(data_name = data_name, object_name = graph_name, include_overall = include_overall, type = graph_label, force_as_list = force_as_list, print_graph = print_graph)
 }
 )
 
@@ -669,6 +698,7 @@ instat_object$set("public", "replace_value_in_data", function(data_name, col_nam
 
 instat_object$set("public", "rename_column_in_data", function(data_name, column_name, new_val, label = "") {
   self$get_data_objects(data_name)$rename_column_in_data(column_name, new_val, label)
+  self$update_links_rename_column(data_name = data_name, old_column_name = column_name, new_column_name = new_val)
 } 
 )
 
@@ -768,8 +798,8 @@ instat_object$set("public", "get_column_factor_levels", function(data_name,col_n
 } 
 )
 
-instat_object$set("public", "get_factor_data_frame", function(data_name, col_name = "", include_levels = TRUE) {
-  self$get_data_objects(data_name)$get_factor_data_frame(col_name = col_name, include_levels = include_levels)
+instat_object$set("public", "get_factor_data_frame", function(data_name, col_name = "", include_levels = TRUE, include_NA_level = FALSE) {
+  self$get_data_objects(data_name)$get_factor_data_frame(col_name = col_name, include_levels = include_levels, include_NA_level = include_NA_level)
 } 
 )
 
@@ -795,8 +825,8 @@ instat_object$set("public", "rename_dataframe", function(data_name, new_value = 
 }
 )
 
-instat_object$set("public", "convert_column_to_type", function(data_name, col_names = c(), to_type, factor_values = NULL, set_digits, set_decimals = FALSE, keep_attr = TRUE, ignore_labels = FALSE) {
-  self$get_data_objects(data_name)$convert_column_to_type(col_names = col_names, to_type = to_type, factor_values = factor_values, set_digits = set_digits,set_decimals = set_decimals, keep_attr = keep_attr, ignore_labels = ignore_labels)
+instat_object$set("public", "convert_column_to_type", function(data_name, col_names = c(), to_type, factor_values = NULL, set_digits, set_decimals = FALSE, keep_attr = TRUE, ignore_labels = FALSE, keep.labels = TRUE) {
+  self$get_data_objects(data_name)$convert_column_to_type(col_names = col_names, to_type = to_type, factor_values = factor_values, set_digits = set_digits,set_decimals = set_decimals, keep_attr = keep_attr, ignore_labels = ignore_labels, keep.labels = keep.labels)
 }
 )
 
@@ -908,6 +938,21 @@ instat_object$set("public","unhide_all_columns", function(data_name) {
 } 
 )
 
+instat_object$set("public","set_hidden_data_frames", function(data_names = c()) {
+  invisible(sapply(data_names, function(x) self$append_to_dataframe_metadata(data_name = x, property = is_hidden_label, new_val = TRUE)))
+  unhide_data_names <- setdiff(self$get_data_names(), data_names)
+  invisible(sapply(unhide_data_names, function(x) self$append_to_dataframe_metadata(data_name = x, property = is_hidden_label, new_val = FALSE)))
+} 
+)
+
+instat_object$set("public","get_hidden_data_frames", function() {
+  all_data_names <- names(private$.data_objects)
+  visible_data_names <- all_data_names[sapply(all_data_names, function(x) !isTRUE(self$get_data_objects(x)$get_metadata(label = is_hidden_label)))]
+  hidden_data_names <- setdiff(all_data_names, visible_data_names)
+  return(hidden_data_names)
+} 
+)
+
 instat_object$set("public","set_row_names", function(data_name, row_names) {
   self$get_data_objects(data_name)$set_row_names(row_names = row_names)
 } 
@@ -996,7 +1041,12 @@ instat_object$set("public","get_keys", function(data_name, key_name) {
 }
 )
 
-instat_object$set("public","get_links", function(link_name) {
+instat_object$set("public","get_comments", function(data_name, comment_id) {
+  self$get_data_objects(data_name)$get_comments(comment_id)
+}
+)
+
+instat_object$set("public","get_links", function(link_name, ...) {
   if(!missing(link_name)) {
     if(!link_name %in% names(private$.links)) stop(link_name, " not found.")
     return(private$.links[[link_name]])
@@ -1067,7 +1117,8 @@ instat_object$set("public","create_factor_data_frame", function(data_name, facto
       factor_named <- factor
       names(factor_named) <- factor
       curr_factor_df_name <- self$get_linked_to_data_name(data_name, factor_named)
-      self$delete_dataframe(curr_factor_df_name)
+      # TODO what if there is more than 1?
+      if(length(curr_factor_df_name) > 0) self$delete_dataframe(curr_factor_df_name[1])
     }
     else {
       warning("replace = FALSE so no action will be taken.")
@@ -1119,7 +1170,7 @@ instat_object$set("public","make_inventory_plot", function(data_name, date_col, 
 }
 )
 
-instat_object$set("public", "import_NetCDF", function(nc, name, only_data_vars = TRUE, keep_raw_time = TRUE, include_metadata = TRUE) {
+instat_object$set("public", "import_NetCDF", function(nc, name, only_data_vars = TRUE, keep_raw_time = TRUE, include_metadata = TRUE, boundary) {
   if(only_data_vars) {
     all_var_names <- ncdf4.helpers::nc.get.variable.list(nc)
   }
@@ -1148,10 +1199,14 @@ instat_object$set("public", "import_NetCDF", function(nc, name, only_data_vars =
   for(i in seq_along(var_groups)) {
     if(use_prefix) curr_name <- paste0(name, "_", i)
     else curr_name <- name
-    data_names <- c(data_names, curr_name)
-    data_list[[curr_name]] <- nc_as_data_frame(nc, var_groups[[i]], keep_raw_time = keep_raw_time, include_metadata = include_metadata)
+    if(!missing(boundary)) curr_boundary <- boundary[names(boundary) %in% dim_groups[[i]]]
+    else curr_boundary <- NULL
+    curr_name <- make.names(curr_name)
+    curr_name <- next_default_item(curr_name, self$get_data_names(), include_index = FALSE)
+    data_list[[curr_name]] <- nc_as_data_frame(nc, var_groups[[i]], keep_raw_time = keep_raw_time, include_metadata = include_metadata, boundary = curr_boundary)
     tmp_list <- list()
     tmp_list[[curr_name]] <- data_list[[curr_name]]
+    data_names <- c(data_names, curr_name)
     self$import_data(data_tables = tmp_list)
     self$add_key(curr_name, dim_groups[[i]])
   }
@@ -1182,8 +1237,8 @@ instat_object$set("public", "import_NetCDF", function(nc, name, only_data_vars =
 # }
 # )
 
-instat_object$set("public", "infill_missing_dates", function(data_name, date_name, factors) {
-  self$get_data_objects(data_name)$infill_missing_dates(date_name = date_name, factor = factors)
+instat_object$set("public", "infill_missing_dates", function(data_name, date_name, factors, resort = TRUE) {
+  self$get_data_objects(data_name)$infill_missing_dates(date_name = date_name, factor = factors, resort = resort)
 }
 )
 
@@ -1197,66 +1252,104 @@ instat_object$set("public", "remove_key", function(data_name, key_name) {
 }
 )
 
-instat_object$set("public", "add_climdex_indices", function(data_name, indices = list(), freq = "annual") {
+instat_object$set("public", "add_climdex_indices", function(data_name, indices = list(), freq = "annual", year, month) {
+  if(!self$get_data_objects(data_name)$get_metadata(is_climatic_label)) stop("Data must be defined as climatic to calculate climdex indices.")
+  if(missing(year)) stop("year column is required")
+  if(freq == "monthly" && missing(month)) stop("month column is required for monthly summaries")
   for(i in seq_along(indices)) {
-    l <- list(indices[[i]])
-    names(l) <- names(indices)[i]
-    self$add_single_climdex_index(data_name = data_name, indices = l)
+    self$add_single_climdex_index(data_name = data_name, indices = indices[[i]], index_name = names(indices)[i], freq = freq, year = year, month = month)
   }
 }
 )
 
-instat_object$set("public", "add_single_climdex_index", function(data_name, indices = list(), freq = "annual") {
-  if(!self$get_data_objects(data_name)$get_metadata(is_climatic_label))stop("Define data as climatic.")
-  mix_monthly_annual = c("Monthly_Minimum_of_Daily_Minimum_Temperature", "Percentage_of_Days_When_Tmax_is_Above_90th_Percentile","Percentage_of_Days_When_Tmin_is_Above_90th_Percentile","Percentage_of_Days_When_Tmax_is_Below_10th_Percentile","Percentage_of_Days_When_Tmin_is_Below_10th_Percentile", "Monthly_Maximum_Consecutive_5day_Precipitation", "Monthly_Maximum_1day_Precipitation","Monthly_Maximum_of_Daily_Maximum_Temperature", "Monthly_Maximum_of_Daily_Minimum_Temperature","Monthly_Minimum_of_Daily_Maximum_Temperature", "Mean_Diurnal_Temperature_Range")
+instat_object$set("public", "add_single_climdex_index", function(data_name, indices, index_name = "", freq = "annual", year, month) {
+  if(!self$get_data_objects(data_name)$get_metadata(is_climatic_label)) stop("Data must be defined as climatic to calculate climdex indices.")
   
-  if(((names(indices) %in% mix_monthly_annual) && freq=="monthly")){
-    yy = as.data.frame(indices[[1]],row.names = NULL)
-    yy1 <- cbind(Row.Names = rownames(yy), yy)
-    split_data = str_split_fixed(string=yy1[,1], n=2, pattern="-")
-    my_data = cbind(yy1, split_data)
-    names(my_data) = c("Year_month", names(indices), "Year", "Month")
-    my_data <- my_data[c(1,3,4,2)]
-    my_data$Year = as.integer(as.character(my_data$Year))
-    my_data$Month = as.integer(as.character(my_data$Month))
-    year_col = self$get_climatic_column_name(data_name, year_label)
-    month_col = self$get_climatic_column_name(data_name, month_label)
-    key_list = list("Year", "Month")
-    names(key_list) = c(as.name(year_col), as.name(month_col))
-    if(self$get_linked_to_data_name(data_name, key_list)==""){
-      data_list = list(my_data)
-      names(data_list) = paste(data_name, "monthly", sep = "_")
+  if(freq == "annual") {
+    ind_data <- data.frame(factor(names(indices)), indices, row.names = NULL)
+    names(ind_data) <- c(year, index_name)
+    linked_data_name <- self$get_linked_to_data_name(data_name, year)
+    if(length(linked_data_name) == 0) {
+      data_list = list(ind_data)
+      new_data_name <- paste(data_name, "by", year, sep = "_")
+      new_data_name <- next_default_item(prefix = new_data_name , existing_names = self$get_data_names(), include_index = FALSE)
+      names(data_list) <- new_data_name
       self$import_data(data_tables = data_list)
-      self$add_key(paste(data_name, "monthly", sep = "_"), c("Year", "Month"))
-      self$add_link(from_data_frame = data_name, to_data_frame = paste(data_name, "monthly", sep = "_"), link_pairs = key_list, type = keyed_link_label)
+      self$add_key(new_data_name, year)
+      key_list <- list(year)
+      names(key_list) <- year
+      self$add_link(from_data_frame = data_name, to_data_frame = new_data_name, link_pairs = key_list, type = keyed_link_label)
     }
-    else{
-      #self$merge_data(by=c("Year_month","Year", "Month"), data_name = self$get_linked_to_data_name(data_name, key_list), new_data = my_data )
-      self$merge_data(data_name = self$get_linked_to_data_name(data_name, key_list), new_data = my_data )
+    else {
+      # TODO what if there are multiple?
+      linked_data_name <- linked_data_name[1]
+      year_col_name_linked <- self$get_equivalent_columns(from_data_name = data_name, to_data_name = linked_data_name, columns = year)
+      by <- year
+      names(by) <- year_col_name_linked
+      linked_year_data <- self$get_columns_from_data(data_name = linked_data_name, col_names = year_col_name_linked)
+      linked_year_class <- class(linked_year_data)
+      year_class <- class(ind_data[[year]])
+      if(!any(linked_year_class %in% year_class)) {
+        # Only need to check numeric/integer here since year in ind_data is factor.
+        # If construction of ind_data above is changed this may need to be updated.
+        if("numeric" %in% linked_year_class) ind_data[[year]] <- as.numeric(levels(ind_data[[year]]))[ind_data[[year]]]
+        else if("integer" %in% linked_year_class) ind_data[[year]] <- as.integer(levels(ind_data[[year]]))[ind_data[[year]]]
+        # else merge may not work, but still worth trying
+      }
+      # TODO could make this a try/catch and then if merging fails put data in new data frame
+      self$merge_data(data_name = linked_data_name, new_data = ind_data, by = by)
     }
   }
-  else{
-    yy = as.data.frame(indices[[1]],row.names = NULL)
-    my_data <- cbind(Row.Names = rownames(yy), yy)
-    names(my_data) = c("Year", names(indices))
-    my_data$Year = as.integer(as.character(my_data$Year))
-    year_col = self$get_climatic_column_name(data_name, year_label)
-    key_list = list("Year")
-    names(key_list) = c(as.name(year_col))
-    if(self$get_linked_to_data_name(data_name, key_list)==""){
-      warning("Yearly_data is missing, it will be created.")
-      data_list = list(my_data)
-      names(data_list) = paste(data_name, "yearly", sep = "_")
+  else if(freq == "monthly") {
+    ind_data <- data.frame(stringr::str_split_fixed(string = names(indices), n = 2, pattern = "-"), indices, row.names = NULL)
+    names(ind_data) <- c(year, month, index_name)
+    ind_data[[month]] <- as.numeric(ind_data[[month]])
+    linked_data_name <- self$get_linked_to_data_name(data_name, c(year, month))
+    if(length(linked_data_name) == 0) {
+      data_list = list(ind_data)
+      new_data_name <- paste(data_name, "by", year, month, sep = "_")
+      new_data_name <- next_default_item(prefix = new_data_name , existing_names = self$get_data_names(), include_index = FALSE)
+      names(data_list) <- new_data_name
       self$import_data(data_tables = data_list)
-      self$add_key(paste(data_name, "yearly", sep = "_"), c("Year"))
-      self$add_link(from_data_frame = data_name, to_data_frame = paste(data_name, "yearly", sep = "_"), link_pairs = key_list, type = keyed_link_label)
+      self$add_key(new_data_name, c(year, month))
+      key_list <- list(year, month)
+      names(key_list) <- c(year, month)
+      self$add_link(from_data_frame = data_name, to_data_frame = new_data_name, link_pairs = key_list, type = keyed_link_label)
     }
-    else{
-      #self$merge_data(by=c("Year"), data_name=self$get_linked_to_data_name(data_name, key_list), new_data = my_data )
-      self$merge_data(data_name=self$get_linked_to_data_name(data_name, key_list), new_data = my_data )
+    else {
+      # TODO what if there are multiple?
+      linked_data_name <- linked_data_name[1]
+      year_col_name_linked <- self$get_equivalent_columns(from_data_name = data_name, to_data_name = linked_data_name, columns = year)
+      month_col_name_linked <- self$get_equivalent_columns(from_data_name = data_name, to_data_name = linked_data_name, columns = month)
+      by <- c(year, month)
+      names(by) <- c(year_col_name_linked, month_col_name_linked)
+      linked_year_data <- self$get_columns_from_data(data_name = linked_data_name, col_names = year_col_name_linked)
+      linked_year_class <- class(linked_year_data)
+      linked_month_data <- self$get_columns_from_data(data_name = linked_data_name, col_names = month_col_name_linked)
+      linked_month_class <- class(linked_month_data)
+      year_class <- class(ind_data[[year]])
+      month_class <- class(ind_data[[month]])
+      if(!any(linked_year_class %in% year_class)) {
+        # Only need to check numeric/integer here since year in ind_data is factor.
+        # If construction of ind_data above is changed this may need to be updated.
+        if("numeric" %in% linked_year_class) ind_data[[year]] <- as.numeric(levels(ind_data[[year]]))[ind_data[[year]]]
+        else if("integer" %in% linked_year_class) ind_data[[year]] <- as.integer(levels(ind_data[[year]]))[ind_data[[year]]]
+        # else merge may not work, but still worth trying
+      }
+      if(!all(ind_data[[month]] %in% linked_month_data)) {
+        # Only need to check month names here since month in ind_data is numeric.
+        if(all(linked_month_data) %in% month.name) {
+          ind_data[[month]] <- factor(ind_data[[month]], labels = month.name)
+        }
+        else if(all(linked_month_data) %in% month.abb) {
+          ind_data[[month]] <- factor(ind_data[[month]], labels = month.abb)
+        }
+      }
+      # TODO could make this a try/catch and then if merging fails put data in new data frame
+      self$merge_data(data_name = linked_data_name, new_data = ind_data, by = by)
     }
   }
-  
+  else stop("freq not recognised. freq must be either 'annual' or 'monthly'")
 }
 )
 
@@ -1457,4 +1550,111 @@ instat_object$set("public", "export_workspace", function(data_names, file, inclu
 instat_object$set("public", "set_links", function(new_links) {
   private$.links <- new_links
 } 
+)
+
+instat_object$set("public","display_daily_graph", function(data_name, date_col = NULL, station_col = NULL, year_col = NULL, doy_col = NULL, climatic_element = NULL, upper_limit = 100, bar_colour = "blue", rug_colour = "red") {
+  self$get_data_objects(data_name)$display_daily_graph(date_col = date_col,station_col = station_col, year_col = year_col, doy_col = doy_col, climatic_element = climatic_element, rug_colour = rug_colour, bar_colour = bar_colour, upper_limit = upper_limit)
+}
+)
+
+instat_object$set("public","create_variable_set", function(data_name, set_name, columns) {
+  self$get_data_objects(data_name)$create_variable_set(set_name = set_name, columns = columns)
+}
+)
+
+instat_object$set("public","update_variable_set", function(data_name, set_name, columns, new_set_name) {
+  self$get_data_objects(data_name)$update_variable_set(set_name = set_name, columns = columns, new_set_name = new_set_name)
+}
+)
+
+instat_object$set("public","delete_variable_sets", function(data_name, set_names) {
+  self$get_data_objects(data_name)$delete_variable_sets(set_names = set_names)
+}
+)
+
+instat_object$set("public","get_variable_sets_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
+  self$get_data_objects(data_name)$get_variable_sets_names(include_overall = include_overall, include = include, exclude = exclude, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items)
+}
+)
+
+instat_object$set("public","get_variable_sets", function(data_name, set_names, force_as_list = FALSE) {
+  self$get_data_objects(data_name)$get_variable_sets(set_names = set_names, force_as_list = force_as_list)
+}
+)
+
+instat_object$set("public", "crops_definitions", function(data_name, year, station, rain, day, rain_totals, plant_days, plant_lengths, season_data_name, start_day, end_day, definition_props = TRUE, print_table = TRUE) {
+  plant_day_name <- "plant_day"
+  plant_length_name <- "plant_length"
+  rain_total_name <- "rain_total"
+  
+  if(missing(year)) stop("Year column mustbe specified.")
+  if(missing(station)) by <- year
+  else by <- c(year, station)
+  season_by <- self$get_equivalent_columns(from_data_name = data_name, columns = by, to_data_name = season_data_name)
+  if(is.null(season_by)) stop("The data frames specified must be linked by the year/station columns.")
+  year_col <- self$get_columns_from_data(data_name, year)
+  unique_year <- na.omit(unique(year_col))
+  if(!missing(station)) {
+    station_col <- self$get_columns_from_data(data_name, station)
+    unique_station <- na.omit(unique(station_col))
+    df <- setNames(expand.grid(rain_totals, plant_lengths, plant_days, unique_year, unique_station), c(rain_total_name, plant_length_name, plant_day_name, year, station))
+  }
+  else {
+    df <- setNames(expand.grid(rain_totals, plant_lengths, plant_days, unique_year), c(rain_total_name, plant_length_name, plant_day_name, year))
+  }
+  join_by <- by
+  names(join_by) <- season_by
+  daily_data <- self$get_data_frame(data_name)
+  season_data <- self$get_data_frame(season_data_name)
+  vars <- c(season_by, start_day, end_day)
+  col_names_exp <- c()
+  i <- 1
+  for(col_name in vars) {
+    col_names_exp[[i]] <- lazyeval::interp(~ var, var = as.name(col_name))
+    i <- i + 1
+  }
+  season_data <- season_data %>% dplyr::select_(.dots = col_names_exp)
+  df <- dplyr::left_join(df, season_data, by = join_by)
+  
+  # Plant day condition
+  df$plant_day_cond <- (df[[start_day]] <= df[[plant_day_name]])
+  
+  # Plant length condition
+  df$length_cond <- (df[[plant_day_name]] + df[[plant_length_name]] <= df[[end_day]])
+  
+  # Rain total condition
+  df[["rain_total_actual"]] <- sapply(1:nrow(df), 
+                                      function(x) sum(daily_data[[rain]][daily_data[[year]] == df[[year]][x]][seq(df[[plant_day_name]][x], length = df[[plant_length_name]][x])], na.rm = TRUE))
+  df$rain_cond <- (df[[rain_total_name]] <= df[["rain_total_actual"]])
+  
+  # All three conditions met
+  df$overall_cond <- (df$plant_day_cond & df$length_cond & df$rain_cond)
+  
+  crops_name <- "crop_def"
+  crops_name <- next_default_item(prefix = crops_name, existing_names = self$get_data_names(), include_index = FALSE)
+  data_tables <- list(df)
+  names(data_tables) <- crops_name
+  self$import_data(data_tables = data_tables)
+  crops_by <- season_by
+  names(crops_by) <- by
+  self$add_link(crops_name, season_data_name, crops_by, keyed_link_label)
+  if(definition_props) {
+    calc_from <- list(plant_day_name, plant_length_name, rain_total_name)
+    names(calc_from) <- rep(crops_name, 3)
+    grouping <- instat_calculation$new(type = "by", calculated_from = calc_from)
+    prop_calc_from <- list("overall_cond")
+    names(prop_calc_from) <- crops_name
+    propor_table <- instat_calculation$new(function_exp="length(x = overall_cond[overall_cond == TRUE])/length(x = overall_cond)",
+                                           save = 2, calculated_from = prop_calc_from,
+                                           manipulations = list(grouping),
+                                           type="summary", result_name = "prop_success", result_data_frame = "crop_prop")
+    prop_data_frame <- self$run_instat_calculation(propor_table, display = TRUE)
+    if(print_table) {
+      prop_data_frame$prop_success <- round(prop_data_frame$prop_success, 2)
+      prop_table_unstacked <- reshape2::dcast(formula = as.formula(paste(plant_length_name, "+", rain_total_name, "~", plant_day_name)), data = prop_data_frame, value.var = "prop_success")
+      prop_table_split <- split(prop_table_unstacked, prop_table_unstacked[[plant_length_name]])
+      return(prop_table_split)
+    }
+  }
+}
 )

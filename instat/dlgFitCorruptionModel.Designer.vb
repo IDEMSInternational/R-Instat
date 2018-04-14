@@ -38,6 +38,7 @@ Partial Class dlgFitCorruptionModel
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgFitCorruptionModel))
         Me.cmdDisplayOptions = New System.Windows.Forms.Button()
         Me.lblModelPreview = New System.Windows.Forms.Label()
         Me.lblControlVariables = New System.Windows.Forms.Label()
@@ -54,124 +55,86 @@ Partial Class dlgFitCorruptionModel
         '
         'cmdDisplayOptions
         '
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(9, 262)
+        resources.ApplyResources(Me.cmdDisplayOptions, "cmdDisplayOptions")
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
-        Me.cmdDisplayOptions.Size = New System.Drawing.Size(105, 23)
-        Me.cmdDisplayOptions.TabIndex = 9
-        Me.cmdDisplayOptions.Text = "Display Options..."
         Me.cmdDisplayOptions.UseVisualStyleBackColor = True
         '
         'lblModelPreview
         '
-        Me.lblModelPreview.AutoSize = True
-        Me.lblModelPreview.Location = New System.Drawing.Point(7, 297)
+        resources.ApplyResources(Me.lblModelPreview, "lblModelPreview")
         Me.lblModelPreview.Name = "lblModelPreview"
-        Me.lblModelPreview.Size = New System.Drawing.Size(80, 13)
-        Me.lblModelPreview.TabIndex = 7
-        Me.lblModelPreview.Text = "Model Preview:"
         '
         'lblControlVariables
         '
-        Me.lblControlVariables.AutoSize = True
-        Me.lblControlVariables.Location = New System.Drawing.Point(266, 66)
+        resources.ApplyResources(Me.lblControlVariables, "lblControlVariables")
         Me.lblControlVariables.Name = "lblControlVariables"
-        Me.lblControlVariables.Size = New System.Drawing.Size(89, 13)
-        Me.lblControlVariables.TabIndex = 3
-        Me.lblControlVariables.Text = "Control Variables:"
         '
         'lblCorruptionOutput
         '
-        Me.lblCorruptionOutput.AutoSize = True
-        Me.lblCorruptionOutput.Location = New System.Drawing.Point(266, 21)
+        resources.ApplyResources(Me.lblCorruptionOutput, "lblCorruptionOutput")
         Me.lblCorruptionOutput.Name = "lblCorruptionOutput"
-        Me.lblCorruptionOutput.Size = New System.Drawing.Size(93, 13)
-        Me.lblCorruptionOutput.TabIndex = 1
-        Me.lblCorruptionOutput.Text = "Corruption Output:"
         '
         'lblIndicators
         '
-        Me.lblIndicators.AutoSize = True
-        Me.lblIndicators.Location = New System.Drawing.Point(265, 176)
+        resources.ApplyResources(Me.lblIndicators, "lblIndicators")
         Me.lblIndicators.Name = "lblIndicators"
-        Me.lblIndicators.Size = New System.Drawing.Size(56, 13)
-        Me.lblIndicators.TabIndex = 5
-        Me.lblIndicators.Text = "Indicators:"
         '
         'ucrSaveCorruptionModel
         '
-        Me.ucrSaveCorruptionModel.Location = New System.Drawing.Point(10, 323)
+        resources.ApplyResources(Me.ucrSaveCorruptionModel, "ucrSaveCorruptionModel")
         Me.ucrSaveCorruptionModel.Name = "ucrSaveCorruptionModel"
-        Me.ucrSaveCorruptionModel.Size = New System.Drawing.Size(288, 24)
-        Me.ucrSaveCorruptionModel.TabIndex = 10
         '
         'ucrInputModelPreview
         '
         Me.ucrInputModelPreview.AddQuotesIfUnrecognised = True
         Me.ucrInputModelPreview.IsMultiline = False
         Me.ucrInputModelPreview.IsReadOnly = False
-        Me.ucrInputModelPreview.Location = New System.Drawing.Point(91, 295)
+        resources.ApplyResources(Me.ucrInputModelPreview, "ucrInputModelPreview")
         Me.ucrInputModelPreview.Name = "ucrInputModelPreview"
-        Me.ucrInputModelPreview.Size = New System.Drawing.Size(315, 21)
-        Me.ucrInputModelPreview.TabIndex = 8
         '
         'ucrReceiverOutput
         '
         Me.ucrReceiverOutput.frmParent = Me
-        Me.ucrReceiverOutput.Location = New System.Drawing.Point(265, 36)
-        Me.ucrReceiverOutput.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverOutput, "ucrReceiverOutput")
         Me.ucrReceiverOutput.Name = "ucrReceiverOutput"
         Me.ucrReceiverOutput.Selector = Nothing
-        Me.ucrReceiverOutput.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverOutput.strNcFilePath = ""
-        Me.ucrReceiverOutput.TabIndex = 2
         Me.ucrReceiverOutput.ucrSelector = Nothing
         '
         'ucrReceiverIndicators
         '
         Me.ucrReceiverIndicators.frmParent = Me
-        Me.ucrReceiverIndicators.Location = New System.Drawing.Point(265, 191)
-        Me.ucrReceiverIndicators.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverIndicators, "ucrReceiverIndicators")
         Me.ucrReceiverIndicators.Name = "ucrReceiverIndicators"
         Me.ucrReceiverIndicators.Selector = Nothing
-        Me.ucrReceiverIndicators.Size = New System.Drawing.Size(120, 85)
         Me.ucrReceiverIndicators.strNcFilePath = ""
-        Me.ucrReceiverIndicators.TabIndex = 6
         Me.ucrReceiverIndicators.ucrSelector = Nothing
         '
         'ucrReceiverControlVariables
         '
         Me.ucrReceiverControlVariables.frmParent = Me
-        Me.ucrReceiverControlVariables.Location = New System.Drawing.Point(265, 81)
-        Me.ucrReceiverControlVariables.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverControlVariables, "ucrReceiverControlVariables")
         Me.ucrReceiverControlVariables.Name = "ucrReceiverControlVariables"
         Me.ucrReceiverControlVariables.Selector = Nothing
-        Me.ucrReceiverControlVariables.Size = New System.Drawing.Size(120, 85)
         Me.ucrReceiverControlVariables.strNcFilePath = ""
-        Me.ucrReceiverControlVariables.TabIndex = 4
         Me.ucrReceiverControlVariables.ucrSelector = Nothing
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 351)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 11
         '
         'ucrSelectorFitModel
         '
         Me.ucrSelectorFitModel.bShowHiddenColumns = False
         Me.ucrSelectorFitModel.bUseCurrentFilter = True
-        Me.ucrSelectorFitModel.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorFitModel.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorFitModel, "ucrSelectorFitModel")
         Me.ucrSelectorFitModel.Name = "ucrSelectorFitModel"
-        Me.ucrSelectorFitModel.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorFitModel.TabIndex = 0
         '
         'dlgFitCorruptionModel
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(424, 410)
         Me.Controls.Add(Me.lblIndicators)
         Me.Controls.Add(Me.lblCorruptionOutput)
         Me.Controls.Add(Me.lblControlVariables)
@@ -188,8 +151,6 @@ Partial Class dlgFitCorruptionModel
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgFitCorruptionModel"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Fit Model"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

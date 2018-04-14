@@ -6,7 +6,7 @@ data_object <- R6::R6Class("data_object",
                                                  imported_from = "", 
                                                  messages = TRUE, convert=TRUE, create = TRUE, 
                                                  start_point=1, filters = list(), objects = list(),
-                                                 calculations = list(), keys = list(), keep_attributes = TRUE)
+                                                 calculations = list(), keys = list(), comments = list(), keep_attributes = TRUE)
 {
   # Set up the data object
   self$set_data(data, messages)
@@ -29,13 +29,14 @@ data_object <- R6::R6Class("data_object",
   self$set_objects(objects)
   self$set_calculations(calculations)
   self$set_keys(keys)
+  self$set_comments(comments)
   
   # If no name for the data.frame has been given in the list we create a default one.
   # Decide how to choose default name index
   if ( !(is.null(data_name) || data_name == "" || missing(data_name))) {
-    if(data_name != make.names(data_name)) {
+    if(data_name != make.names(iconv(data_name, to = "ASCII//TRANSLIT", sub = "."))) {
       message("data_name is invalid. It will be made valid automatically.")
-      data_name <- make.names(data_name)
+      data_name <- make.names(iconv(data_name, to = "ASCII//TRANSLIT", sub = "."))
     }
     self$append_to_metadata(data_name_label, data_name)
   }
@@ -56,6 +57,7 @@ data_object <- R6::R6Class("data_object",
                            filters = list(),
                            objects = list(),
                            keys = list(),
+                           comments = list(),
                            calculations = list(),
                            changes = list(), 
                            .current_filter = list(),
@@ -126,9 +128,9 @@ data_object$set("public", "set_data", function(new_data, messages=TRUE, check_na
       message("data is empty. Data will be an empty data frame.")
     }
     if(check_names) {
-      valid_names <- make.names(names(new_data))
+      valid_names <- make.names(iconv(names(new_data), to = "ASCII//TRANSLIT", sub = "."))
       if(!all(names(new_data) == valid_names)) {
-        warning("Not all column names are syntactically valid. make.names() will be used to force them to be valid.")
+        warning("Not all column names are syntactically valid. make.names() and iconv() will be used to force them to be valid.")
         names(new_data) <- valid_names
       }
     }
@@ -204,9 +206,16 @@ data_object$set("public", "set_calculations", function(new_calculations) {
 )
 
 data_object$set("public", "set_keys", function(new_keys) {
-  if(!is.list(new_keys)) stop("new_objects must be of type: list")
+  if(!is.list(new_keys)) stop("new_keys must be of type: list")
   self$append_to_changes(list(Set_property, "keys"))  
   private$keys <- new_keys
+}
+)
+
+data_object$set("public", "set_comments", function(new_comments) {
+  if(!is.list(new_comments)) stop("new_comments must be of type: list")
+  self$append_to_changes(list(Set_property, "comments"))  
+  private$comments <- new_comments
 }
 )
 
@@ -288,7 +297,16 @@ data_object$set("public", "get_data_frame", function(convert_to_character = FALS
       }
     }
     if(!missing(max_cols) && max_cols < ncol(out)) out <- out[1:max_cols]
-    if(!missing(max_rows) && max_rows < nrow(out)) out <- out[1:max_rows, ]
+    if(!missing(max_rows) && max_rows < nrow(out)) {
+      #for data frames with 1 col use slice because out[1:max_rows, ] will return a vector
+      if(ncol(out) == 1){
+        rnames <- row.names(out)[1:max_rows]
+        out <- as.data.frame(dplyr::slice(out,1:max_rows))
+        row.names(out) <- rnames
+      } else { 
+        out <- out[1:max_rows, ]  
+      }
+    } 
     if(convert_to_character) {
       decimal_places = self$get_variables_metadata(property = signif_figures_label, column = names(out), error_if_no_property = FALSE)
       decimal_places[is.na(decimal_places)] <- 0
@@ -404,6 +422,12 @@ data_object$set("public", "get_column_data_types", function(columns) {
 }
 )
 
+data_object$set("public", "get_column_labels", function(columns) {
+  if(missing(columns)) return(as.vector(sapply(private$data, function(x) paste(attr(x, "label"), collapse = ","))))
+  else return(as.vector(sapply(private$data[columns], function(x) paste(attr(x, "label"), collapse = ","), USE.NAMES = FALSE)))
+}
+)
+
 data_object$set("public", "clear_variables_metadata", function() {
   for(column in self$get_data_frame(use_current_filter = FALSE)) {
     for(name in names(attributes(column))) {
@@ -514,7 +538,7 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
     }
     if(use_col_name_as_prefix) curr_col_name = self$get_next_default_column_name(col_name)
     else curr_col_name = col_name[[i]]
-    curr_col_name <- make.names(curr_col_name)
+    curr_col_name <- make.names(iconv(curr_col_name, to = "ASCII//TRANSLIT", sub = "."))
     new_col_names <- c(new_col_names, curr_col_name)
     if(curr_col_name %in% self$get_column_names()) {
       message(paste("A column named", curr_col_name, "already exists. The column will be replaced in the data"))
@@ -813,6 +837,9 @@ data_object$set("public", "append_to_metadata", function(property, new_value = "
   attr(private$data, property) <- new_value
   self$append_to_changes(list(Added_metadata, property, new_value))
   self$metadata_changed <- TRUE
+  # Not sure this is correct way to ensure unhidden data frames appear.
+  # Possibly better to modify the Grid Link
+  if(property == is_hidden_label) self$data_changed <- TRUE
 }
 )
 
@@ -870,6 +897,7 @@ data_object$set("public", "is_variables_metadata", function(str, col, return_vec
 
 data_object$set("public", "add_defaults_meta", function() {
   if(!self$is_metadata(is_calculated_label)) self$append_to_metadata(is_calculated_label, FALSE)
+  if(!self$is_metadata(is_hidden_label)) self$append_to_metadata(is_hidden_label, FALSE)
   if(!self$is_metadata(label_label)) self$append_to_metadata(label_label, "")
 }
 )
@@ -886,7 +914,7 @@ data_object$set("public", "add_defaults_variables_metadata", function(column_nam
     if(!self$is_variables_metadata(scientific_label, column)) {
       self$append_to_variables_metadata(column, scientific_label, FALSE)
     }
-    if(!self$is_variables_metadata(signif_figures_label, column)) {
+    if(!self$is_variables_metadata(signif_figures_label, column) || is.na(self$get_variables_metadata(property = signif_figures_label, column = column))) {
       self$append_to_variables_metadata(column, signif_figures_label, get_default_significant_figures(self$get_columns_from_data(column, use_current_filter = FALSE)))
     }
     if(self$is_variables_metadata(labels_label, column)) {
@@ -1003,18 +1031,19 @@ data_object$set("public", "get_data_frame_length", function(use_current_filter =
 }
 )
 
-data_object$set("public", "get_factor_data_frame", function(col_name = "", include_levels = TRUE) {
+data_object$set("public", "get_factor_data_frame", function(col_name = "", include_levels = TRUE, include_NA_level = FALSE) {
   if(!(col_name %in% self$get_column_names())) stop(col_name, " is not a column name,")
   col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
   if(!(is.factor(col_data))) stop(col_name, " is not a factor column")
   
-  counts <- as.data.frame(table(col_data))
+  counts <- data.frame(table(col_data))
   counts <- plyr::rename(counts, replace = c("col_data" = "Label"))
+  counts[["Label"]] <- as.character(counts[["Label"]])
   counts[["Ord."]] <- 1:nrow(counts)
   if(include_levels) {
     if(self$is_variables_metadata(str = labels_label, col = col_name)) {
       curr_levels <- self$get_variables_metadata(property = labels_label, column = col_name, direct_from_attributes = TRUE)
-      curr_levels <- data.frame(Label = names(curr_levels), Level = as.vector(curr_levels))
+      curr_levels <- data.frame(Label = names(curr_levels), Level = as.vector(curr_levels), stringsAsFactors = FALSE)
       counts <- dplyr::left_join(counts, curr_levels, by = "Label")
     }
     else {
@@ -1024,6 +1053,11 @@ data_object$set("public", "get_factor_data_frame", function(col_name = "", inclu
     counts <- counts[c("Ord.", "Label", "Level", "Freq")]
   }
   else counts <- counts[c("Ord.", "Label", "Freq")]
+  if(include_NA_level) {
+    missing_count <- sum(is.na(col_data))
+    if(include_levels) counts[nrow(counts) + 1, ] <- c("-", "NA", "-", missing_count)
+    else counts[nrow(counts) + 1, ] <- c("-", "(NA)", missing_count)
+  }
   return(counts)
 }
 )
@@ -1071,14 +1105,14 @@ data_object$set("public", "sort_dataframe", function(col_names = c(), decreasing
 }
 )
 
-data_object$set("public", "convert_column_to_type", function(col_names = c(), to_type, factor_values = NULL, set_digits, set_decimals = FALSE, keep_attr = TRUE, ignore_labels = FALSE) {
+data_object$set("public", "convert_column_to_type", function(col_names = c(), to_type, factor_values = NULL, set_digits, set_decimals = FALSE, keep_attr = TRUE, ignore_labels = FALSE, keep.labels = TRUE) {
   if(!all(col_names %in% self$get_column_names())) stop("Some column names not found in the data")
   
   if(length(to_type) !=1 ) {
     stop("to_type must be a character of length one")
   }
   
-  if(!(to_type %in% c("integer", "factor", "numeric", "character", "ordered_factor"))) {
+  if(!(to_type %in% c("integer", "factor", "numeric", "character", "ordered_factor", "logical"))) {
     stop(to_type, " is not a valid type to convert to")
   }
   
@@ -1124,7 +1158,7 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
     }
     else if(to_type == "numeric") {
       if(ignore_labels) {
-        new_col <- sjlabelled::as_numeric(curr_col)
+        new_col <- sjlabelled::as_numeric(curr_col, keep.labels = keep.labels)
       }
       else {
         if(self$is_variables_metadata(labels_label, col_name) && !is.numeric(curr_col)) {
@@ -1140,15 +1174,23 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
           }
           new_col <- as.numeric(curr_labels[as.character(curr_col)])
         }
-        else new_col <- sjlabelled::as_numeric(curr_col)
+        else new_col <- sjlabelled::as_numeric(curr_col, keep.labels = keep.labels)
       }
     }
     else if(to_type == "character") {
       new_col <- sjmisc::to_character(curr_col) 
     }
+    else if(to_type == "logical") {
+      if(is.logical.like(curr_col)) new_col <- as.logical(curr_col)
+      else stop("Column is not numeric or contains values other than 0 and 1. Converting to logical would result in losing information.")
+    }
+    
     self$add_columns_to_data(col_name = col_name, col_data = new_col)
     
     if(keep_attr) {
+      if(to_type %in% c("numeric", "integer") && signif_figures_label %in% names(tmp_attr) && is.na(tmp_attr[[signif_figures_label]])) {
+       tmp_attr[[signif_figures_label]] <- NULL
+      }
       self$append_column_attributes(col_name = col_name, new_attr = tmp_attr)
     }
   }
@@ -1286,8 +1328,8 @@ data_object$set("public", "get_column_names", function(as_list = FALSE, include 
         if(!data_type_label %in% names(curr_var_metadata)) curr_var_metadata[[data_type_label]] <- class(private$data[[col]])
         #TODO this is a temp compatibility solution for how the class of ordered factor used to be shown when getting metadata
         if(length(curr_var_metadata[[data_type_label]]) == 2 && all(curr_var_metadata[[data_type_label]] %in% c("ordered", "factor"))) curr_var_metadata[[data_type_label]] <- "ordered,factor"
-        if(all(c(names(include), names(exclude)) %in% names(curr_var_metadata)) && all(sapply(names(include), function(prop) curr_var_metadata[[prop]] %in% include[[prop]]))
-           && all(sapply(names(exclude), function(prop) !curr_var_metadata[[prop]] %in% exclude[[prop]]))) {
+        if(all(c(names(include), names(exclude)) %in% names(curr_var_metadata)) && all(sapply(names(include), function(prop) any(curr_var_metadata[[prop]] %in% include[[prop]])))
+           && all(sapply(names(exclude), function(prop) !any(curr_var_metadata[[prop]] %in% exclude[[prop]])))) {
           out <- c(out, col)
         }
       }
@@ -1378,7 +1420,7 @@ data_object$set("public", "set_col_names", function(col_names) {
   if(missing(col_names)) col_names = 1:ncol(self$get_data_frame(use_current_filter = FALSE))
   if(length(col_names) != ncol(self$get_data_frame(use_current_filter = FALSE))) stop("col_names must be a vector of same length as the data")
   if(anyDuplicated(col_names) != 0) stop("col_names must be unique")
-  names(private$data) <- make.names(col_names)
+  names(private$data) <- make.names(iconv(col_names, to = "ASCII//TRANSLIT", sub = "."))
   self$data_changed <- TRUE
 }
 )
@@ -1504,7 +1546,7 @@ data_object$set("public", "filter_string", function(filter_name) {
   out = "("
   i = 1
   for(condition in curr_filter$filter_conditions) {
-    if(i != 1) out = paste(out, "&&")
+    if(i != 1) out = paste(out, "&")
     out = paste0(out, " (", condition[["column"]], " ", condition[["operation"]])
     if(condition[["operation"]] == "%in%") out = paste0(out, " c(", paste(paste0("'", condition[["value"]], "'"), collapse = ","), ")")
     else out = paste(out, condition[["value"]])
@@ -1571,9 +1613,9 @@ data_object$set("public", "get_objects", function(object_name, type = "", force_
 data_object$set("public", "get_object_names", function(type = "", as_list = FALSE, excluded_items = c()) {
   if(type == "") out = names(private$objects)
   else {
-    if(type == model_label) out = names(private$objects)[!sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "htmlTable") %in% class(x)))]
-    else if(type == graph_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob") %in% class(x)))]
-    else if(type == table_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("htmlTable", "data.frame") %in% class(x)))]
+    if(type == model_label) out = names(private$objects)[!sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "htmlTable", "ggmultiplot") %in% class(x)))]
+    else if(type == graph_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot") %in% class(x)))]
+    else if(type == table_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("htmlTable", "data.frame", "list") %in% class(x)))]
     else stop("type: ", type, " not recognised")
   }
   if(length(excluded_items) > 0) {
@@ -1609,15 +1651,18 @@ data_object$set("public", "reorder_objects", function(new_order) {
 }
 )
 
-data_object$set("public", "data_clone", function(include_objects = TRUE, include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_calculations = TRUE) {
+# Any data_clone method must have ... argument to ensure that when arguments are added in future this is still compatible with older versions of this code
+data_object$set("public", "data_clone", function(include_objects = TRUE, include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_calculations = TRUE, include_comments = TRUE, ...) {
   if(include_objects) new_objects <- private$objects
   else new_objects <- list()
   if(include_filters) new_filters <- lapply(private$filters, function(x) x$data_clone())
   else new_filters <- list()
   if(include_calculations) new_calculations <- lapply(private$calculations, function(x) x$data_clone())
   else new_calculations <- list()
+  if(include_comments) new_comments <- lapply(private$comments, function(x) x$data_clone())
+  else new_comments <- list()
   
-  ret <- data_object$new(data = private$data, data_name = self$get_metadata(data_name_label), filters = new_filters, objects = new_objects, calculations = new_calculations, keys = private$keys, keep_attributes = include_metadata)
+  ret <- data_object$new(data = private$data, data_name = self$get_metadata(data_name_label), filters = new_filters, objects = new_objects, calculations = new_calculations, keys = private$keys, comments = new_comments, keep_attributes = include_metadata)
   if(include_logs) ret$set_changes(private$changes)
   else ret$set_changes(list())
   if(include_filters) ret$current_filter <- self$get_current_filter()
@@ -1649,11 +1694,9 @@ data_object$set("public", "unfreeze_columns", function() {
 #TODO maybe get ride of this method as that you can't create a key without
 #     the instat object also creating a self link
 data_object$set("public", "add_key", function(col_names, key_name) {
-  if(anyDuplicated(self$get_columns_from_data(col_names, use_current_filter = FALSE)) > 0) {
+  cols <- self$get_columns_from_data(col_names, use_current_filter = FALSE)
+  if(anyDuplicated(cols) > 0) {
     stop("key columns must have unique combinations")
-  }
-  if(sum(is.na(self$get_columns_from_data(col_names, use_current_filter = FALSE))) > 0) {
-    stop("key columns cannot have missing values")
   }
   if(self$is_key(col_names)) {
     warning("A key with these columns already exists. No action will be taken.")
@@ -1690,6 +1733,21 @@ data_object$set("public", "get_keys", function(key_name) {
 )
 
 data_object$set("public", "remove_key", function(key_name) {
+  if(!key_name %in% names(private$keys)) stop(key_name, " not found.")
+  private$keys[[key_name]] <- NULL
+}
+)
+
+data_object$set("public", "get_comments", function(comment_id) {
+  if(!missing(comment_id)) {
+    if(!comment_id %in% self$get_comment_ids()) stop("Could not find comment with id: ", comment_id)
+    return(private$comments[[comment_id]])
+  }
+  else return(private$comments)
+}
+)
+
+data_object$set("public", "remove_comment", function(key_name) {
   if(!key_name %in% names(private$keys)) stop(key_name, " not found.")
   private$keys[[key_name]] <- NULL
 }
@@ -1971,6 +2029,7 @@ data_object$set("public","set_contrasts_of_factor", function(col_name, new_contr
   else if(!is.character(new_contrasts)) {
     stop("New column name must be of type: character")
   }
+  if(new_contrasts == "user_defined") new_contrasts <- defined_contr_matrix
   contrasts(private$data[[col_name]]) <- new_contrasts
 }
 )
@@ -2294,7 +2353,7 @@ data_object$set("public","make_inventory_plot", function(date_col, station_col =
 }
 )
 
-data_object$set("public","infill_missing_dates", function(date_name, factors) {
+data_object$set("public","infill_missing_dates", function(date_name, factors, resort = TRUE) {
   date_col <- self$get_columns_from_data(date_name)
   if(!lubridate::is.Date(date_col)) stop(date_name, " is not a Date column.")
   if(anyNA(date_col)) stop("Cannot do infilling as date column has missing values")
@@ -2309,7 +2368,7 @@ data_object$set("public","infill_missing_dates", function(date_name, factors) {
       names(full_dates) <- date_name
       self$merge_data(full_dates, by = date_name, type = "full")
       message("Missing dates infilled.")
-      self$sort_dataframe(col_names = date_name)
+      if(resort) self$sort_dataframe(col_names = date_name)
     }
   }
   else {
@@ -2338,8 +2397,10 @@ data_object$set("public","infill_missing_dates", function(date_name, factors) {
     }
     if(merge_required) {
       all_dates_factors <- plyr::rbind.fill(full_dates_list)
-      self$merge_data(all_dates_factors, by = c(date_name, factors), type = "full")
-      self$sort_dataframe(col_names = c(date_name, factors))
+      by <- c(date_name, factors)
+      names(by) <- by
+      self$merge_data(all_dates_factors, by = by, type = "full")
+      if(resort) self$sort_dataframe(col_names = c(factors, date_name))
     }
   }
 }
@@ -2517,7 +2578,7 @@ instat_object$set("public","define_red_flags", function(data_name, red_flags = c
 
 data_object$set("public","define_red_flags", function(red_flags = c()) {
   if(!self$is_metadata(corruption_data_label)) {
-    stop("Cannot define corruption red flags when data frame is not defined as corruption data.")
+    stop("Cannot define red flags when data frame is not defined as procurement data.")
   }
   self$append_to_variables_metadata(red_flags, corruption_red_flag_label, TRUE)
   self$append_to_variables_metadata(red_flags, corruption_index_label, TRUE)
@@ -2554,6 +2615,30 @@ data_object$set("public","define_as_procurement_country_level_data", function(ty
 
 data_object$set("public","is_corruption_type_present", function(type) {
   return(self$is_metadata(corruption_data_label) && !is.na(self$get_metadata(corruption_data_label)) && self$is_variables_metadata(corruption_type_label) && (type %in% self$get_variables_metadata(property = corruption_type_label)))
+}
+)
+
+instat_object$set("public","get_CRI_component_column_names", function(data_name) {
+  self$get_data_objects(data_name)$get_CRI_component_column_names()
+}
+)
+
+data_object$set("public","get_CRI_component_column_names", function() {
+  include <- list(TRUE)
+  names(include) <- corruption_index_label
+  return(self$get_column_names(include = include))
+}
+)
+
+instat_object$set("public","get_red_flag_column_names", function(data_name) {
+  self$get_data_objects(data_name)$get_red_flag_column_names()
+}
+)
+
+data_object$set("public","get_red_flag_column_names", function() {
+  include <- list(TRUE)
+  names(include) <- corruption_red_flag_label
+  return(self$get_column_names(include = include))
 }
 )
 
@@ -3121,5 +3206,114 @@ data_object$set("public", "append_column_attributes", function(col_name, new_att
   for(i in seq_along(new_attr)) {
     self$append_to_variables_metadata(property = tmp_names[i], col_names = col_name, new_val = new_attr[[i]])
   }
+}
+)
+
+#Creating display daily climatic elements graphs
+data_object$set("public","display_daily_graph", function(data_name, date_col = NULL, station_col = NULL, year_col = NULL, doy_col = NULL, climatic_element = NULL, rug_colour = "red", bar_colour = "blue", upper_limit = 100) {
+  if(!self$is_climatic_data()) stop("Data is not defined as climatic.")
+  if(missing(date_col)) stop("Date columns must be specified.")
+  if(missing(climatic_element)) stop("Element column(s) must be specified.")
+  #if(!all(c(date_col, station_col, year_col, doy_col, climatic_element)) %in% self$get_column_names()) {
+    # stop("Not all specified columns found in the data")
+  # }
+  date_data <- self$get_columns_from_data(date_col)
+  if(!lubridate::is.Date(date_data)) stop(paste(date_col, " must be of type Date."))
+  #Extracting  year and day of the year
+    if(is.null(year_col)) {
+      if(is.null(self$get_climatic_column_name(year_label))) {
+        self$split_date(col_name = date_col, year = TRUE)
+      }
+      year_col <- self$get_climatic_column_name(year_label)
+    }
+  if(is.null(doy_col)) {
+    if(is.null(self$get_climatic_column_name(doy_label))) {
+      self$split_date(col_name = date_col, day_in_year = TRUE)
+    }
+    doy_col <- self$get_climatic_column_name(doy_label)
+  }
+  curr_data <- self$get_data_frame()
+  if(!is.null(station_col)) {
+    station_data <- self$get_columns_from_data(station_col)
+  }
+  else station_data <- 1
+  year_data <- self$get_columns_from_data(year_col)
+  
+  graph_list <- list()
+  ngraph <- 0
+  for(station_name in unique(station_data)) {
+    print(station_name)
+    if(!is.null(station_col)) curr_graph_data <- curr_data[curr_data[[station_col]] == station_name, ]
+    else curr_graph_data <- curr_data
+    if(nrow(curr_graph_data) != 0) {
+      g <- ggplot2::ggplot(data = curr_graph_data, mapping = ggplot2::aes_(x = as.name(doy_col), y = as.name(climatic_element))) + ggplot2::geom_bar(stat  = "identity", fill = bar_colour) + ggplot2::geom_rug(data = curr_graph_data[is.na(curr_graph_data[[climatic_element]]), ], mapping = ggplot2::aes_(x = as.name(doy_col)), sides = "b", color = rug_colour) + ggplot2::theme_minimal() + ggplot2::coord_cartesian(ylim = c(0, upper_limit)) + ggplot2::scale_x_continuous(breaks = c(1, 32, 61, 92, 122, 153, 183, 214, 245, 275, 306, 336, 367), labels = c(month.abb, ""), limits = c(0, 367)) + facet_wrap(facets = as.formula(paste("~", year_col))) + ggplot2::ggtitle(paste(ifelse(station_name == 1, "", station_name), "Daily", climatic_element)) + ggplot2::theme(panel.grid.minor = element_blank(), plot.title = element_text(hjust = 0.5, size = 20), axis.title = element_text(size = 16)) + xlab("Date") + ylab(climatic_element) + ggplot2::theme(axis.text.x=ggplot2::element_text(angle=90))
+      if(any(curr_graph_data[[climatic_element]] > upper_limit, na.rm = TRUE)) {
+        g <- g + ggplot2::geom_text(data = curr_graph_data[curr_graph_data[[climatic_element]] > upper_limit, ], mapping = ggplot2::aes_(y = upper_limit, label = as.name(climatic_element)), size = 3)
+      }
+      ngraph <- ngraph + 1
+      graph_list[[length(graph_list) + 1]] <- g
+    }
+  }
+  if(ngraph > 1) return(gridExtra::grid.arrange(grobs = graph_list))
+  else return(g)
+}
+)
+
+data_object$set("public", "get_variables_metadata_names", function(columns) {
+  if(missing(columns)) columns <- self$get_column_names()
+  cols <- self$get_columns_from_data(columns, force_as_data_frame = TRUE)
+  return(unique(as.character(unlist(sapply(cols, function(x) names(attributes(x)))))))
+}
+)
+
+data_object$set("public", "create_variable_set", function(set_name, columns) {
+  adjusted_set_name <- paste0(set_prefix, set_name)
+  if(adjusted_set_name %in% self$get_variables_metadata_names()) warning("A set named ", set_name, " already exists and will be replaced.")
+  self$append_to_variables_metadata(col_names = setdiff(self$get_column_names(), columns), property = adjusted_set_name, new_val = FALSE)
+  self$append_to_variables_metadata(col_names = columns, property = adjusted_set_name, new_val = TRUE)
+}
+)
+
+data_object$set("public", "update_variable_set", function(set_name, columns, new_set_name) {
+  if(!missing(new_set_name) && new_set_name != set_name) {
+    self$delete_variable_sets(set_names = set_name)
+  }
+  suppressWarnings(self$create_variable_set(set_name = new_set_name, columns = columns))
+}
+)
+
+data_object$set("public", "delete_variable_sets", function(set_names) {
+  adjusted_set_names <- paste0(set_prefix, set_names)
+  if(!all(adjusted_set_names %in% self$get_variables_metadata_names())) {
+    warning("Some of the variable set names were not found. Sets will not be deleted.")
+  }
+  else {
+    sapply(adjusted_set_names, function(x) self$append_to_variables_metadata(col_names = self$get_column_names(), property = x, new_val = NULL))
+  }
+}
+)
+
+data_object$set("public", "get_variable_sets_names", function(include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
+  metadata_names <- self$get_variables_metadata_names()
+  set_names <- stringr::str_sub(metadata_names[startsWith(metadata_names, set_prefix)], start = nchar(set_prefix) + 1)
+  if(as_list) {
+    out <- list()
+    out[[self$get_metadata(data_name_label)]] <- set_names
+  }
+  else out <- set_names
+  return(out)
+}
+)
+
+data_object$set("public", "get_variable_sets", function(set_names, force_as_list) {
+  curr_set_names <- self$get_variable_sets_names()
+  if(!missing(set_names) && !all(set_names %in% curr_set_names)) stop("Not all of: ", paste(set_name, collapse = ", "), "exist as variable sets.")
+  include_lists <- rep(list(TRUE), length(set_names))
+  names(include_lists) <- paste0(set_prefix, set_names)
+  out <- lapply(seq_along(include_lists), function(i) self$get_column_names(include = include_lists[i]))
+  if(length(set_names) == 1 && !force_as_list) {
+    out <- as.character(unlist(out))
+  }
+  return(out)
 }
 )
