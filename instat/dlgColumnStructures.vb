@@ -18,7 +18,8 @@ Imports instat.Translations
 Public Class dlgColumnStructure
     Private bReset As Boolean = True
     Private clsColourByMetadata, clsColumnStructure, clsUncolourByMetadata As New RFunction
-    'clsCourByStructure is here to construct the R-command that will colour columns according to their type in case it is required (see relevant tick box).
+    'this RFunction is just used for setting the appropriate RCODE of the ucrChkColourColumnsByStructure control
+    Private clsColourStructure As New RFunction
     Private bFirstLoad As Boolean = True
     Private Sub ucrSelectorColumnStructures_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
@@ -59,13 +60,13 @@ Public Class dlgColumnStructure
         ucrChkColourColumnsByStructure.SetText("Colour Columns by Structure")
         ucrChkColourColumnsByStructure.AddFunctionNamesCondition(True, frmMain.clsRLink.strInstatDataObject & "$set_column_colours_by_metadata")
         ucrChkColourColumnsByStructure.AddFunctionNamesCondition(False, frmMain.clsRLink.strInstatDataObject & "$remove_column_colours")
-        ucrChkColourColumnsByStructure.AddFunctionNamesCondition(True, frmMain.clsRLink.strInstatDataObject & "$remove_column_colours")
     End Sub
 
     Private Sub SetDefaults()
         clsColourByMetadata = New RFunction
         clsColumnStructure = New RFunction
         clsUncolourByMetadata = New RFunction
+        clsColourStructure = clsUncolourByMetadata
 
         ucrSelectorColumnStructure.Reset()
         SetColumnStructureInReceiver()
@@ -89,7 +90,7 @@ Public Class dlgColumnStructure
         ucrReceiverLayout.SetRCode(clsColumnStructure, bReset)
         ucrReceiverTreatment.SetRCode(clsColumnStructure, bReset)
         ucrReceiverMeasurement.SetRCode(clsColumnStructure, bReset)
-        ucrChkColourColumnsByStructure.SetRCode(clsUncolourByMetadata, bReset)
+        ucrChkColourColumnsByStructure.SetRCode(clsColourStructure, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -100,6 +101,15 @@ Public Class dlgColumnStructure
         End If
     End Sub
 
+    Private Sub ucrChkColourColumnsByStructure_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkColourColumnsByStructure.ControlValueChanged
+        'assign the appropriate Colour Metadata RFunction to the clsColourStructure RFunction accordingly
+        If ucrChkColourColumnsByStructure.Checked Then
+            clsColourStructure = clsColourByMetadata
+        Else
+            clsColourStructure = clsUncolourByMetadata
+        End If
+    End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
@@ -107,11 +117,7 @@ Public Class dlgColumnStructure
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        If ucrChkColourColumnsByStructure.Checked Then
-            frmMain.clsRLink.RunScript(clsColourByMetadata.ToScript)
-        Else
-            frmMain.clsRLink.RunScript(clsUncolourByMetadata.ToScript)
-        End If
+        frmMain.clsRLink.RunScript(clsColourStructure.ToScript)
     End Sub
 
     Private Sub SetColumnStructureInReceiver()
@@ -126,4 +132,5 @@ Public Class dlgColumnStructure
     Private Sub ucrSelectorColumnStructure_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorColumnStructure.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
 End Class
