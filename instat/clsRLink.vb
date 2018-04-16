@@ -487,7 +487,7 @@ Public Class RLink
                         If Not bSuccess Then
                             Evaluate("graphics.off()", bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
                             strGraphDisplayOption = "view_R_viewer"
-                            MsgBox("A problem occured saving your graph in the temporary location: " & strTempGraphsDirectory & vbNewLine & vbNewLine & "To ensure graphs can be viewed, graphs will now appear in a pop up R viewer. You can change this setting in Tools > Options: Graph Display if this later becomes resolved.", MsgBoxStyle.Exclamation)
+                            MsgBox("A problem occured saving graphs in the temporary location: " & strTempGraphsDirectory & vbNewLine & vbNewLine & "To ensure graphs can still be viewed, graphs will now appear in a pop up R viewer." & vbNewLine & "Restarting R-Instat and/or your machine usually resolves this. You can change this setting back in Tools > Options: 'Graph Display' if this later becomes resolved.", MsgBoxStyle.Exclamation)
                         End If
                         'need to boost resolution of the devices, it's not as good as with ggsave.
                     End If
