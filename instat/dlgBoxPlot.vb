@@ -256,18 +256,24 @@ Public Class dlgBoxplot
         If rdoBoxplot.Checked Then
             clsRgeomPlotFunction.SetRCommand("geom_boxplot")
             clsRgeomPlotFunction.AddParameter("outlier.colour", Chr(34) & "red" & Chr(34), iPosition:=1)
+            clsRgeomPlotFunction.RemoveParameterByName("Height")
+            clsRgeomPlotFunction.RemoveParameterByName("width")
             ucrSaveBoxplot.SetPrefix("boxplot")
             ucrSecondFactorReceiver.ChangeParameterName("fill")
             cmdBoxPlotOptions.Text = "Boxplot Options"
         ElseIf rdoJitter.Checked Then
             clsRgeomPlotFunction.SetRCommand("geom_jitter")
             clsRgeomPlotFunction.RemoveParameterByName("outlier.colour")
+            clsRgeomPlotFunction.AddParameter("Height", 0.2, iPosition:=1)
+            clsRgeomPlotFunction.AddParameter("width", 0.0, iPosition:=2)
             ucrSaveBoxplot.SetPrefix("jitter")
             ucrSecondFactorReceiver.ChangeParameterName("colour")
             cmdBoxPlotOptions.Text = "Jitter Options"
         Else
             clsRgeomPlotFunction.SetRCommand("geom_violin")
             clsRgeomPlotFunction.RemoveParameterByName("outlier.colour")
+            clsRgeomPlotFunction.RemoveParameterByName("Height")
+            clsRgeomPlotFunction.RemoveParameterByName("width")
             ucrSaveBoxplot.SetPrefix("violin")
             ucrSecondFactorReceiver.ChangeParameterName("fill")
             cmdBoxPlotOptions.Text = "Violin Options"
