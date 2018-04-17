@@ -130,7 +130,7 @@ Public Class ucrCheck
         End If
     End Function
 
-    Protected Overrides Sub SetToValue(objTemp As Object)
+    Public Overrides Sub SetToValue(objTemp As Object)
         Dim bTempValue As Boolean
 
         If objTemp Is Nothing Then

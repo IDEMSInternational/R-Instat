@@ -43,7 +43,7 @@ Partial Class dlgViewObjects
         Me.rdoStructure = New System.Windows.Forms.RadioButton()
         Me.rdoAllContents = New System.Windows.Forms.RadioButton()
         Me.rdoComponent = New System.Windows.Forms.RadioButton()
-        Me.rdoViewGraph = New System.Windows.Forms.RadioButton()
+        Me.rdoPrint = New System.Windows.Forms.RadioButton()
         Me.ucrReceiverSelectedObject = New instat.ucrReceiverSingle()
         Me.ucrSelectorForViewObject = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
@@ -79,12 +79,12 @@ Partial Class dlgViewObjects
         Me.rdoComponent.Tag = "Component"
         Me.rdoComponent.UseVisualStyleBackColor = True
         '
-        'rdoViewGraph
+        'rdoPrint
         '
-        resources.ApplyResources(Me.rdoViewGraph, "rdoViewGraph")
-        Me.rdoViewGraph.Name = "rdoViewGraph"
-        Me.rdoViewGraph.TabStop = True
-        Me.rdoViewGraph.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.rdoPrint, "rdoPrint")
+        Me.rdoPrint.Name = "rdoPrint"
+        Me.rdoPrint.TabStop = True
+        Me.rdoPrint.UseVisualStyleBackColor = True
         '
         'ucrReceiverSelectedObject
         '
@@ -116,7 +116,7 @@ Partial Class dlgViewObjects
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.rdoViewGraph)
+        Me.Controls.Add(Me.rdoPrint)
         Me.Controls.Add(Me.rdoComponent)
         Me.Controls.Add(Me.rdoAllContents)
         Me.Controls.Add(Me.rdoStructure)
@@ -142,6 +142,6 @@ Partial Class dlgViewObjects
     Friend WithEvents rdoStructure As RadioButton
     Friend WithEvents rdoAllContents As RadioButton
     Friend WithEvents rdoComponent As RadioButton
-    Friend WithEvents rdoViewGraph As RadioButton
+    Friend WithEvents rdoPrint As RadioButton
     Friend WithEvents ucrPnlContentsToView As UcrPanel
 End Class
