@@ -456,7 +456,7 @@ Public Class ucrInput
         End Set
     End Property
 
-    Protected Overrides Sub SetToValue(objTemp As Object)
+    Public Overrides Sub SetToValue(objTemp As Object)
         If objTemp IsNot Nothing Then
             SetName(objTemp.ToString())
         Else
