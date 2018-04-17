@@ -38,7 +38,6 @@ Public Class dlgSPI
         ucrBase.iHelpTopicID = 510
 
         ucrSelectorVariable.SetParameterIsString()
-        ucrReceiverDate.SetParameterIsString()
 
         'receivers:
         ' by receivers
@@ -50,19 +49,19 @@ Public Class dlgSPI
 
         ucrReceiverYear.SetParameterIsString()
         ucrReceiverYear.Selector = ucrSelectorVariable
-        ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
+        ucrReceiverYear.SetClimaticType("year")
         ucrReceiverYear.bAutoFill = True
         ucrReceiverYear.strSelectorHeading = "Year Variables"
 
         ucrReceiverMonth.SetParameterIsString()
         ucrReceiverMonth.Selector = ucrSelectorVariable
-        ucrReceiverMonth.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "month" & Chr(34)})
+        ucrReceiverMonth.SetClimaticType("month")
         ucrReceiverMonth.bAutoFill = True
         ucrReceiverMonth.strSelectorHeading = "Month Variables"
 
         ucrReceiverDate.SetParameterIsString()
         ucrReceiverDate.Selector = ucrSelectorVariable
-        ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "month" & Chr(34)})
+        ucrReceiverDate.SetClimaticType("date")
         ucrReceiverDate.bAutoFill = True
         ucrReceiverDate.strSelectorHeading = "Date Variables"
 
