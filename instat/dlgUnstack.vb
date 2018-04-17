@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 
 Public Class dlgUnstack
@@ -158,15 +159,20 @@ Public Class dlgUnstack
 
     Private Sub SetFormula()
         Dim i As Integer = 0
-        If Not ucrFactorToUnstackReceiver.IsEmpty AndAlso Not ucrReceiverCarryColumns.IsEmpty Then
-            clsDcastFunction.AddParameter("formula", clsROperatorParameter:=clsFormula)
-            clsCarryColumns.SetOperation("+")
-            clsCarryColumns.ClearParameters()
-            For Each strIndicatorVar As String In ucrReceiverCarryColumns.GetVariableNamesAsList
-                clsCarryColumns.AddParameter(i, strIndicatorVar, iPosition:=i)
-                i = i + 1
-            Next
+        If ucrReceiverCarryColumns.lstSelectedVariables.Items.Count > 1 Then
+            If Not ucrFactorToUnstackReceiver.IsEmpty AndAlso Not ucrReceiverCarryColumns.IsEmpty Then
+                clsDcastFunction.AddParameter("formula", clsROperatorParameter:=clsFormula)
+                clsCarryColumns.SetOperation("+")
+                clsCarryColumns.ClearParameters()
+                For Each strIndicatorVar As String In ucrReceiverCarryColumns.GetVariableNamesAsList
+                    clsCarryColumns.AddParameter(i, strIndicatorVar, iPosition:=i)
+                    i = i + 1
+                Next
+            End If
+        Else
+            clsCarryColumns.AddParameter(i, ucrReceiverCarryColumns.GetVariableNames(bWithQuotes:=False), iPosition:=i)
         End If
+
     End Sub
 
     Private Sub ucrSelector_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForUnstack.ControlValueChanged
@@ -189,5 +195,9 @@ Public Class dlgUnstack
             clsBaseRCode = clsUnstackedOperator
             ucrBase.clsRsyntax.SetBaseROperator(clsUnstackedOperator)
         End If
+    End Sub
+
+    Private Sub ucrFactorToUnstackReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorToUnstackReceiver.ControlValueChanged
+        ucrReceiverCarryColumns.Add(ucrFactorToUnstackReceiver.GetVariableNames(bWithQuotes:=False))
     End Sub
 End Class
