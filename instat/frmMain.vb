@@ -596,7 +596,7 @@ Public Class frmMain
         dlgLabelsLevels.ShowDialog()
     End Sub
 
-    Private Sub mnuPrepareFactorViewLabels_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click
+    Private Sub mnuPrepareFactorViewLabels_Click(sender As Object, e As EventArgs) Handles mnuPrepareFactorViewLabels.Click
         dlgViewFactorLabels.ShowDialog()
     End Sub
 
@@ -1896,4 +1896,9 @@ Public Class frmMain
         dlgRegularSequence.bNumericIsDefault = False
         dlgRegularSequence.ShowDialog()
     End Sub
+
+    Private Sub mnuClimaticPrepareEvapotranspiration_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareEvapotranspiration.Click
+        dlgEvapotranspiration.ShowDialog()
+    End Sub
+
 End Class

@@ -428,4 +428,8 @@ Public Class ucrColumnMetadata
             mnuInsertColsAfter.Text = "Insert " & iSelectedCols & " Columns After"
         End If
     End Sub
+
+    Private Sub mnuReorderColumns_Click(sender As Object, e As EventArgs) Handles mnuReorderColumns.Click
+        dlgReorderColumns.ShowDialog()
+    End Sub
 End Class

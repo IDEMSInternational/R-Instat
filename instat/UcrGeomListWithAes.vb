@@ -318,7 +318,7 @@ Public Class ucrGeomListWithParameters
 
             'Here the global ggplot function takes the relevant "mapping" and "data" parameters as required by "ApplyOnAllLayers".
             clsGgplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsGlobalAesFunction, iPosition:=1)
-            clsGgplotFunction.AddParameter("data", clsRFunctionParameter:=ucrGeomWithAesSelector.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+            clsGgplotFunction.AddParameter("data", clsRFunctionParameter:=ucrGeomWithAesSelector.ucrAvailableDataFrames.clsCurrDataFrame.Clone(), iPosition:=0)
 
             strGlobalDataFrame = ucrGeomWithAesSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text
             clsCurrentAesFunction = clsGlobalAesFunction
