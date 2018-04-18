@@ -372,28 +372,28 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>416, 370</value>
   </data>
-  <data name="ucrFactorToUnstackReceiver.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrReceiverFactorToUnstackby.Location" type="System.Drawing.Point, System.Drawing">
     <value>268, 78</value>
   </data>
-  <data name="ucrFactorToUnstackReceiver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ucrReceiverFactorToUnstackby.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="ucrFactorToUnstackReceiver.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrReceiverFactorToUnstackby.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 20</value>
   </data>
-  <data name="ucrFactorToUnstackReceiver.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrReceiverFactorToUnstackby.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;ucrFactorToUnstackReceiver.Name" xml:space="preserve">
-    <value>ucrFactorToUnstackReceiver</value>
+  <data name="&gt;&gt;ucrReceiverFactorToUnstackby.Name" xml:space="preserve">
+    <value>ucrReceiverFactorToUnstackby</value>
   </data>
-  <data name="&gt;&gt;ucrFactorToUnstackReceiver.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverFactorToUnstackby.Type" xml:space="preserve">
     <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrFactorToUnstackReceiver.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverFactorToUnstackby.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrFactorToUnstackReceiver.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverFactorToUnstackby.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="ucrSelectorForUnstack.Location" type="System.Drawing.Point, System.Drawing">
