@@ -131,7 +131,7 @@ Public Class dlgDisplayDailyData
         ucrChkSumMissing.SetParameter(New RParameter("summary_count_missing", 6), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_count_missing" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkSumMissing.SetText("N Missing")
 
-        lstCheckboxes.AddRange({ucrChkSum, ucrChkMax, ucrChkMin, ucrChkMean, ucrChkMedian, ucrChkIQR})
+        lstCheckboxes.AddRange({ucrChkSum, ucrChkMax, ucrChkMin, ucrChkMean, ucrChkMedian, ucrChkIQR, ucrChkSumMissing})
 
         ucrChkMissing.SetParameter(ucrInputComboMissing.GetParameter)
         ucrChkMissing.AddParameterPresentCondition(True, "Misscode")
