@@ -39,8 +39,6 @@ Public Class dlgHistogram
             'setdefaults
             InitialiseDialog()
             bFirstLoad = False
-        Else
-            SetDialogOptions()
         End If
 
         If bReset Then
@@ -51,6 +49,7 @@ Public Class dlgHistogram
         bReset = False
         autoTranslate(Me)
         TestOkEnabled()
+        SetOptionsButtonstext()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -181,30 +180,44 @@ Public Class dlgHistogram
     End Sub
 
     Private Sub SetDialogOptions()
-        If rdoHistogram.Checked = True Then
+        If rdoHistogram.Checked Then
             clsRgeomPlotFunction.SetRCommand("geom_histogram")
             ucrFactorReceiver.ChangeParameterName("fill")
-            cmdHistogramOptions.Text = "Histogram Options"
-            cmdHistogramOptions.Size = New Size(120, 25)
+            SetOptionsButtonstext()
             If Not ucrSaveHist.bUserTyped Then
                 ucrSaveHist.SetPrefix("histogram")
             End If
-        ElseIf rdoDensity.Checked = True Then
+        ElseIf rdoDensity.Checked Then
             clsRgeomPlotFunction.SetRCommand("geom_density")
             ucrFactorReceiver.ChangeParameterName("colour")
-            cmdHistogramOptions.Text = "Density Options"
-            cmdHistogramOptions.Size = New Size(120, 25)
+            SetOptionsButtonstext()
+
             If Not ucrSaveHist.bUserTyped Then
                 ucrSaveHist.SetPrefix("density")
             End If
-        ElseIf rdoFrequencyPolygon.Checked = True Then
+        ElseIf rdoFrequencyPolygon.Checked Then
             clsRgeomPlotFunction.SetRCommand("geom_freqpoly")
             ucrFactorReceiver.ChangeParameterName("colour")
-            cmdHistogramOptions.Text = "Frequency Polygon Options"
-            cmdHistogramOptions.Size = New Size(160, 25)
+            SetOptionsButtonstext()
+
             If Not ucrSaveHist.bUserTyped Then
                 ucrSaveHist.SetPrefix("frequency_polygon")
             End If
+        End If
+    End Sub
+
+    Private Sub SetOptionsButtonstext()
+        If rdoHistogram.Checked Then
+            cmdHistogramOptions.Text = "Histogram Options"
+            cmdHistogramOptions.Size = New Size(120, 25)
+
+        ElseIf rdoDensity.Checked Then
+            cmdHistogramOptions.Text = "Density Options"
+            cmdHistogramOptions.Size = New Size(120, 25)
+
+        ElseIf rdoFrequencyPolygon.Checked Then
+            cmdHistogramOptions.Text = "Frequency Polygon Options"
+            cmdHistogramOptions.Size = New Size(160, 25)
         End If
     End Sub
 
