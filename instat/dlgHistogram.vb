@@ -183,27 +183,24 @@ Public Class dlgHistogram
         If rdoHistogram.Checked Then
             clsRgeomPlotFunction.SetRCommand("geom_histogram")
             ucrFactorReceiver.ChangeParameterName("fill")
-            SetOptionsButtonstext()
             If Not ucrSaveHist.bUserTyped Then
                 ucrSaveHist.SetPrefix("histogram")
             End If
         ElseIf rdoDensity.Checked Then
             clsRgeomPlotFunction.SetRCommand("geom_density")
             ucrFactorReceiver.ChangeParameterName("colour")
-            SetOptionsButtonstext()
-
             If Not ucrSaveHist.bUserTyped Then
                 ucrSaveHist.SetPrefix("density")
             End If
         ElseIf rdoFrequencyPolygon.Checked Then
             clsRgeomPlotFunction.SetRCommand("geom_freqpoly")
             ucrFactorReceiver.ChangeParameterName("colour")
-            SetOptionsButtonstext()
 
             If Not ucrSaveHist.bUserTyped Then
                 ucrSaveHist.SetPrefix("frequency_polygon")
             End If
         End If
+        SetOptionsButtonstext()
     End Sub
 
     Private Sub SetOptionsButtonstext()
