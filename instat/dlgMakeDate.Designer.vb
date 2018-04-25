@@ -50,6 +50,7 @@ Partial Class dlgMakeDate
         Me.lblDayofYear = New System.Windows.Forms.Label()
         Me.ucrReceiverDayTwo = New instat.ucrReceiverSingle()
         Me.grpSingleColumn = New System.Windows.Forms.GroupBox()
+        Me.ucrDtpSpecifyOrigin = New instat.ucrDateTimePicker()
         Me.grpFormatField = New System.Windows.Forms.GroupBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -60,7 +61,7 @@ Partial Class dlgMakeDate
         Me.UcrInputComboBox3 = New instat.ucrInputComboBox()
         Me.UcrInputComboBox4 = New instat.ucrInputComboBox()
         Me.rdoSpecifyFormat = New System.Windows.Forms.RadioButton()
-        Me.rdoSpecifyOrigin = New System.Windows.Forms.RadioButton()
+        Me.rdoOrigin = New System.Windows.Forms.RadioButton()
         Me.rdoDefaultFormat = New System.Windows.Forms.RadioButton()
         Me.ucrPnlFormat = New instat.UcrPanel()
         Me.ucrReceiverForDate = New instat.ucrReceiverSingle()
@@ -83,11 +84,11 @@ Partial Class dlgMakeDate
         Me.grpFormats = New System.Windows.Forms.GroupBox()
         Me.txtTextDateFormats = New System.Windows.Forms.RichTextBox()
         Me.cmdHelp = New System.Windows.Forms.Button()
+        Me.ttMakeDate = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrPnlDate = New instat.UcrPanel()
         Me.ucrSaveDate = New instat.ucrSave()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorMakeDate = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ttMakeDate = New System.Windows.Forms.ToolTip(Me.components)
         Me.grpTwoColumns.SuspendLayout()
         Me.grpSingleColumn.SuspendLayout()
         Me.grpFormatField.SuspendLayout()
@@ -167,9 +168,10 @@ Partial Class dlgMakeDate
         '
         'grpSingleColumn
         '
+        Me.grpSingleColumn.Controls.Add(Me.ucrDtpSpecifyOrigin)
         Me.grpSingleColumn.Controls.Add(Me.grpFormatField)
         Me.grpSingleColumn.Controls.Add(Me.rdoSpecifyFormat)
-        Me.grpSingleColumn.Controls.Add(Me.rdoSpecifyOrigin)
+        Me.grpSingleColumn.Controls.Add(Me.rdoOrigin)
         Me.grpSingleColumn.Controls.Add(Me.rdoDefaultFormat)
         Me.grpSingleColumn.Controls.Add(Me.ucrPnlFormat)
         Me.grpSingleColumn.Controls.Add(Me.ucrReceiverForDate)
@@ -178,6 +180,13 @@ Partial Class dlgMakeDate
         resources.ApplyResources(Me.grpSingleColumn, "grpSingleColumn")
         Me.grpSingleColumn.Name = "grpSingleColumn"
         Me.grpSingleColumn.TabStop = False
+        '
+        'ucrDtpSpecifyOrigin
+        '
+        resources.ApplyResources(Me.ucrDtpSpecifyOrigin, "ucrDtpSpecifyOrigin")
+        Me.ucrDtpSpecifyOrigin.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrDtpSpecifyOrigin.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrDtpSpecifyOrigin.Name = "ucrDtpSpecifyOrigin"
         '
         'grpFormatField
         '
@@ -248,12 +257,12 @@ Partial Class dlgMakeDate
         Me.rdoSpecifyFormat.TabStop = True
         Me.rdoSpecifyFormat.UseVisualStyleBackColor = True
         '
-        'rdoSpecifyOrigin
+        'rdoOrigin
         '
-        resources.ApplyResources(Me.rdoSpecifyOrigin, "rdoSpecifyOrigin")
-        Me.rdoSpecifyOrigin.Name = "rdoSpecifyOrigin"
-        Me.rdoSpecifyOrigin.TabStop = True
-        Me.rdoSpecifyOrigin.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.rdoOrigin, "rdoOrigin")
+        Me.rdoOrigin.Name = "rdoOrigin"
+        Me.rdoOrigin.TabStop = True
+        Me.rdoOrigin.UseVisualStyleBackColor = True
         '
         'rdoDefaultFormat
         '
@@ -500,7 +509,7 @@ Partial Class dlgMakeDate
     Friend WithEvents ucrInputOrigin As ucrInputComboBox
     Friend WithEvents ucrReceiverForDate As ucrReceiverSingle
     Friend WithEvents rdoSpecifyFormat As RadioButton
-    Friend WithEvents rdoSpecifyOrigin As RadioButton
+    Friend WithEvents rdoOrigin As RadioButton
     Friend WithEvents rdoDefaultFormat As RadioButton
     Friend WithEvents ucrPnlFormat As UcrPanel
     Friend WithEvents grpFormatField As GroupBox
@@ -520,4 +529,5 @@ Partial Class dlgMakeDate
     Friend WithEvents txtTextDateFormats As RichTextBox
     Friend WithEvents cmdHelp As Button
     Friend WithEvents ttMakeDate As ToolTip
+    Friend WithEvents ucrDtpSpecifyOrigin As ucrDateTimePicker
 End Class
