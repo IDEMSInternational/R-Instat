@@ -164,6 +164,10 @@
   <data name="lblCutOffTwo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblCutOffTwo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblCutOffTwo.Location" type="System.Drawing.Point, System.Drawing">
     <value>127, 57</value>
   </data>
@@ -212,6 +216,9 @@
   <data name="lblYearTwo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblYearTwo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblYearTwo.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 19</value>
   </data>
@@ -239,11 +246,17 @@
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>27</value>
+  </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>521, 466</value>
+    <value>599, 466</value>
+  </data>
+  <data name="cmdHelp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cmdHelp.Location" type="System.Drawing.Point, System.Drawing">
     <value>426, 377</value>
@@ -336,15 +349,17 @@ Examples:
   <data name="&gt;&gt;grpFormats.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="rdoThreeColumns.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
   </data>
   <data name="rdoThreeColumns.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
+  <data name="rdoThreeColumns.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoThreeColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>315, 11</value>
+    <value>356, 11</value>
   </data>
   <data name="rdoThreeColumns.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 28</value>
@@ -376,8 +391,11 @@ Examples:
   <data name="rdoTwoColumns.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
+  <data name="rdoTwoColumns.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoTwoColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>180, 11</value>
+    <value>221, 11</value>
   </data>
   <data name="rdoTwoColumns.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 28</value>
@@ -409,8 +427,11 @@ Examples:
   <data name="rdoSingleColumn.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
+  <data name="rdoSingleColumn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoSingleColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>45, 11</value>
+    <value>86, 11</value>
   </data>
   <data name="rdoSingleColumn.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 28</value>
@@ -437,7 +458,7 @@ Examples:
     <value>4</value>
   </data>
   <data name="ucrPnlDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 7</value>
+    <value>74, 7</value>
   </data>
   <data name="ucrPnlDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>450, 35</value>
@@ -478,8 +499,32 @@ Examples:
   <data name="&gt;&gt;ucrSaveDate.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="ucrDtpSpecifyOrigin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>126, 122</value>
+  </data>
+  <data name="ucrDtpSpecifyOrigin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>203, 21</value>
+  </data>
+  <data name="ucrDtpSpecifyOrigin.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpSpecifyOrigin.Name" xml:space="preserve">
+    <value>ucrDtpSpecifyOrigin</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpSpecifyOrigin.Type" xml:space="preserve">
+    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpSpecifyOrigin.Parent" xml:space="preserve">
+    <value>grpSingleColumn</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpSpecifyOrigin.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 99</value>
@@ -508,6 +553,9 @@ Examples:
   <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="Label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 73</value>
   </data>
@@ -535,6 +583,9 @@ Examples:
   <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="Label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 47</value>
   </data>
@@ -561,6 +612,9 @@ Examples:
   </data>
   <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="Label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 21</value>
@@ -692,10 +746,13 @@ Examples:
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;grpFormatField.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="rdoSpecifyFormat.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="rdoSpecifyFormat.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoSpecifyFormat.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 122</value>
@@ -719,37 +776,43 @@ Examples:
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;rdoSpecifyFormat.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
-  <data name="rdoSpecifyOrigin.AutoSize" type="System.Boolean, mscorlib">
+  <data name="rdoOrigin.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="rdoSpecifyOrigin.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="rdoOrigin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoOrigin.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 93</value>
   </data>
-  <data name="rdoSpecifyOrigin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 17</value>
+  <data name="rdoOrigin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 17</value>
   </data>
-  <data name="rdoSpecifyOrigin.TabIndex" type="System.Int32, mscorlib">
+  <data name="rdoOrigin.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="rdoSpecifyOrigin.Text" xml:space="preserve">
-    <value>Specify Origin</value>
+  <data name="rdoOrigin.Text" xml:space="preserve">
+    <value>Origin</value>
   </data>
-  <data name="&gt;&gt;rdoSpecifyOrigin.Name" xml:space="preserve">
-    <value>rdoSpecifyOrigin</value>
+  <data name="&gt;&gt;rdoOrigin.Name" xml:space="preserve">
+    <value>rdoOrigin</value>
   </data>
-  <data name="&gt;&gt;rdoSpecifyOrigin.Type" xml:space="preserve">
+  <data name="&gt;&gt;rdoOrigin.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rdoSpecifyOrigin.Parent" xml:space="preserve">
+  <data name="&gt;&gt;rdoOrigin.Parent" xml:space="preserve">
     <value>grpSingleColumn</value>
   </data>
-  <data name="&gt;&gt;rdoSpecifyOrigin.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;rdoOrigin.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="rdoDefaultFormat.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="rdoDefaultFormat.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoDefaultFormat.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 64</value>
@@ -773,7 +836,7 @@ Examples:
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;rdoDefaultFormat.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="ucrPnlFormat.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 59</value>
@@ -794,7 +857,7 @@ Examples:
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;ucrPnlFormat.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="ucrReceiverForDate.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 34</value>
@@ -818,7 +881,7 @@ Examples:
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;ucrReceiverForDate.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="ucrInputFormat.Location" type="System.Drawing.Point, System.Drawing">
     <value>128, 122</value>
@@ -839,7 +902,7 @@ Examples:
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;ucrInputFormat.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="ucrInputOrigin.Location" type="System.Drawing.Point, System.Drawing">
     <value>128, 92</value>
@@ -860,13 +923,13 @@ Examples:
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;ucrInputOrigin.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="grpSingleColumn.Location" type="System.Drawing.Point, System.Drawing">
     <value>258, 51</value>
   </data>
   <data name="grpSingleColumn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>252, 320</value>
+    <value>335, 320</value>
   </data>
   <data name="grpSingleColumn.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -888,6 +951,9 @@ Examples:
   </data>
   <data name="lblYearOption.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblYearOption.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblYearOption.Location" type="System.Drawing.Point, System.Drawing">
     <value>116, 17</value>
@@ -915,6 +981,9 @@ Examples:
   </data>
   <data name="lblMonthOption.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblMonthOption.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblMonthOption.Location" type="System.Drawing.Point, System.Drawing">
     <value>116, 59</value>
@@ -985,6 +1054,9 @@ Examples:
   <data name="lblDayofMonth.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblDayofMonth.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblDayofMonth.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 103</value>
   </data>
@@ -1012,6 +1084,9 @@ Examples:
   <data name="lblMonthThree.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblMonthThree.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblMonthThree.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 60</value>
   </data>
@@ -1038,6 +1113,9 @@ Examples:
   </data>
   <data name="lblYearThree.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblYearThree.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblYearThree.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 19</value>
@@ -1248,6 +1326,9 @@ Examples:
   </data>
   <data name="lblDayofYear.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblDayofYear.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblDayofYear.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 86</value>
