@@ -104,6 +104,7 @@ Public Class dlgMakeDate
         ucrInputOrigin.SetParameter(New RParameter("origin", 1))
         dctDateOrigin.Add("Excel", Chr(34) & "1899-12-30" & Chr(34))
         dctDateOrigin.Add("Gregorian", Chr(34) & "1600-03-01" & Chr(34))
+        dctDateOrigin.Add("Specify", Chr(34) & ucrDtpSpecifyOrigin.DateValue.Date & Chr(34))
         ucrInputOrigin.SetItems(dctDateOrigin)
         ucrInputOrigin.SetDropDownStyleAsNonEditable()
 
@@ -155,7 +156,7 @@ Public Class dlgMakeDate
 
         ucrPnlFormat.AddRadioButton(rdoDefaultFormat)
         ucrPnlFormat.AddRadioButton(rdoSpecifyFormat)
-        ucrPnlFormat.AddRadioButton(rdoSpecifyOrigin)
+        ucrPnlFormat.AddRadioButton(rdoOrigin)
         ttMakeDate.SetToolTip(rdoDefaultFormat, "This will try 'Year(4-digit)-Month-Day %Y-%m-%d' then 'Year(4-digit)/Month/Day %Y/%m/%d' on the first non-NA element")
         ucrPnlDate.AddFunctionNamesCondition(rdoSingleColumn, "as.Date")
         ucrPnlDate.AddFunctionNamesCondition(rdoTwoColumns, frmMain.clsRLink.strInstatDataObject & "$make_date_yeardoy")
@@ -203,7 +204,8 @@ Public Class dlgMakeDate
 
         ''linking up ucrinputs for format and origin
         ucrPnlFormat.AddToLinkedControls(ucrInputFormat, {rdoSpecifyFormat}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Year(4-digit)-Month-Day")
-        ucrPnlFormat.AddToLinkedControls(ucrInputOrigin, {rdoSpecifyOrigin}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Excel")
+        ucrPnlFormat.AddToLinkedControls(ucrInputOrigin, {rdoOrigin}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Excel")
+        ucrInputOrigin.AddToLinkedControls(ucrDtpSpecifyOrigin, {"Specify"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'when rdoTwoColumn is checked
         ucrPnlDate.AddToLinkedControls(ucrReceiverYearTwo, {rdoTwoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -342,7 +344,7 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub SelectorHeader()
-        If rdoSpecifyOrigin.Checked Then
+        If rdoOrigin.Checked Then
             ucrReceiverForDate.strSelectorHeading = "Numerics"
         Else
             ucrReceiverForDate.strSelectorHeading = "Variables"
@@ -396,7 +398,7 @@ Public Class dlgMakeDate
             cmdHelp.Visible = False
             ucrBase.clsRsyntax.RemoveParameter("format")
             ucrBase.clsRsyntax.RemoveParameter("origin")
-        ElseIf rdoSpecifyOrigin.Checked Then
+        ElseIf rdoOrigin.Checked Then
             grpFormats.Hide()
             cmdHelp.Visible = False
             ucrReceiverForDate.SetIncludedDataTypes({"numeric"})
@@ -417,6 +419,10 @@ Public Class dlgMakeDate
         End If
         SetReceivers()
         SetRCodeForControls(False)
+    End Sub
+
+    Private Sub ucrDtpSpecifyOrigin_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDtpSpecifyOrigin.ControlValueChanged
+        clsDateFunction.AddParameter("origin", Chr(34) & ucrDtpSpecifyOrigin.DateValue.Date & Chr(34), iPosition:=1)
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDayTwo.ControlContentsChanged, ucrSaveDate.ControlContentsChanged, ucrReceiverYearTwo.ControlContentsChanged, ucrReceiverForDate.ControlContentsChanged, ucrReceiverYearThree.ControlContentsChanged, ucrReceiverMonthThree.ControlContentsChanged, ucrReceiverDayThree.ControlContentsChanged
