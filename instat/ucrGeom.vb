@@ -33,6 +33,7 @@ Public Class ucrGeom
     Public strGlobalDataFrame As String = ""
     Protected ucrBaseSelector As ucrSelectorByDataFrame
     Private iCurrentGeomIndex As Integer = -1
+    Public bPauseChanges As Boolean = False
 
     Public Sub New()
 
@@ -1379,23 +1380,25 @@ Public Class ucrGeom
         Dim clsParam As New LayerParameter
         Dim iNewGeomIndex As Integer
 
-        iNewGeomIndex = lstAllGeoms.FindIndex(Function(x) x.strGeomName = ucrInputGeoms.GetText())
-        If iCurrentGeomIndex = -1 Then
-            iCurrentGeomIndex = lstAllGeoms.FindIndex(Function(x) x.strGeomName = clsGeomFunction.strRCommand)
-        End If
-        If iNewGeomIndex <> -1 Then
-            clsCurrGeom = lstAllGeoms(iNewGeomIndex)
-            If iNewGeomIndex <> iCurrentGeomIndex Then
-                For Each clsParam In lstAllGeoms(iCurrentGeomIndex).clsLayerParameters
-                    clsGeomFunction.RemoveParameterByName(clsParam.strLayerParameterName)
-                Next
-                clsGeomFunction.SetPackageName(clsCurrGeom.strGeomPackage)
-                clsGeomFunction.SetRCommand(clsCurrGeom.strGeomName)
-                iCurrentGeomIndex = iNewGeomIndex
-                RaiseEvent GeomChanged()
-            Else
-                clsGeomFunction.SetPackageName(clsCurrGeom.strGeomPackage)
-                clsGeomFunction.SetRCommand(clsCurrGeom.strGeomName)
+        If Not bPauseChanges Then
+            iNewGeomIndex = lstAllGeoms.FindIndex(Function(x) x.strGeomName = ucrInputGeoms.GetText())
+            If iCurrentGeomIndex = -1 Then
+                iCurrentGeomIndex = lstAllGeoms.FindIndex(Function(x) x.strGeomName = clsGeomFunction.strRCommand)
+            End If
+            If iNewGeomIndex <> -1 Then
+                clsCurrGeom = lstAllGeoms(iNewGeomIndex)
+                If iNewGeomIndex <> iCurrentGeomIndex Then
+                    For Each clsParam In lstAllGeoms(iCurrentGeomIndex).clsLayerParameters
+                        clsGeomFunction.RemoveParameterByName(clsParam.strLayerParameterName)
+                    Next
+                    clsGeomFunction.SetPackageName(clsCurrGeom.strGeomPackage)
+                    clsGeomFunction.SetRCommand(clsCurrGeom.strGeomName)
+                    iCurrentGeomIndex = iNewGeomIndex
+                    RaiseEvent GeomChanged()
+                Else
+                    clsGeomFunction.SetPackageName(clsCurrGeom.strGeomPackage)
+                    clsGeomFunction.SetRCommand(clsCurrGeom.strGeomName)
+                End If
             End If
         End If
     End Sub
