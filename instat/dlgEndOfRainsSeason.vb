@@ -142,7 +142,7 @@ Public Class dlgEndOfRainsSeason
         ucrNudAmount.SetMinMax() ' min and max
         ucrNudAmount.DecimalPlaces = 2
         ucrNudAmount.Increment = 0.1
-        ucrNudAmount.SetLinkedDisplayControl(lblAmount)
+        ucrNudAmount.SetLinkedDisplayControl(lblLastAmount)
 
         ucrNudTotalOverDays.SetParameter(New RParameter("n", 1))
         ucrNudTotalOverDays.SetMinMax(1, 366)
