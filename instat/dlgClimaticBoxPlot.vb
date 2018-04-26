@@ -99,7 +99,7 @@ Public Class dlgClimaticBoxPlot
         ucrReceiverWithinYear.SetDataType("factor")
 
         ' summary
-        ucrReceiverElement.SetParameter(New RParameter("columns_to_summarise", 0))
+        ucrReceiverElement.SetParameter(New RParameter("y", 0))
         ucrReceiverElement.SetParameterIsString()
         ucrReceiverElement.strSelectorHeading = "Variables"
         ucrReceiverElement.Selector = ucrSelectorClimaticBoxPlot
@@ -112,10 +112,9 @@ Public Class dlgClimaticBoxPlot
         ucrChkOmitBelow.SetDefaultState("FALSE")
 
         ucrNudOmitBelow.SetParameter(New RParameter("", 10))
-        'ucrNudOmitBelow.SetMinMax(0, 1)
         ucrNudOmitBelow.DecimalPlaces = 2
-        ucrNudOmitBelow.Increment = 0.01
-        ucrNudOmitBelow.SetRDefault(0.05)
+        ucrNudOmitBelow.Increment = 0.1
+        ucrChkOmitBelow.AddToLinkedControls(ucrNudOmitBelow, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.85)
 
         ' others
         ucrReceiverDate.SetParameter(New RParameter("date", 1))
@@ -150,13 +149,13 @@ Public Class dlgClimaticBoxPlot
         ucrChkVerticalXTickMarkers.SetParameter(clsThemeParam, bNewAddRemoveParameter:=True, bNewChangeParameterValue:=False)
 
         dctFacet.Add("x", "x")
-        dctFacet.Add("Facet 1", Chr(34) & "facet 1" & Chr(34))
-        dctFacet.Add("Facet 2", Chr(34) & "facet 2" & Chr(34))
+        dctFacet.Add("Facet 1", Chr(34) & "facet_wrap" & Chr(34))
+        dctFacet.Add("Facet 2", Chr(34) & "facet_grid" & Chr(34))
         dctFacet.Add("None", Chr(34) & "none" & Chr(34))
 
         ucrInputStation.SetParameter(New RParameter("scale", 3))
         ucrInputStation.SetItems(dctFacet)
-        ucrInputStation.SetRDefault("Facet 1")
+        ucrInputStation.SetRDefault("none")
         ucrInputStation.SetDropDownStyleAsNonEditable()
 
         ucrInputYear.SetParameter(New RParameter("scale", 3))
@@ -242,11 +241,10 @@ Public Class dlgClimaticBoxPlot
 
         ucrChkVarWidth.SetRCode(clsRgeomPlotFunction, bReset)
         ucrPnlPlots.SetRCode(clsRgeomPlotFunction, bReset)
-        'ucrVariablesAsFactorForClimaticBoxplot.SetRCode(clsRaesFunction, bReset)
+
+        ucrReceiverElement.SetRCode(clsRaesFunction, bReset)
 
         'ucrReceiverXVariable.SetRCode(clsAsFactor, bReset)
-        'ucrVariablesAsFactorForClimaticBoxplot.SetRCode(clsRaesFunction, bReset)
-
         'ucrReceiverFacetBy.SetRCode(clsFacetGridOp, bReset)
         'ucrReceiver2ndFacet.SetRCode(clsFacetGridOp, bReset)
         'ucrChkMargins.SetRCode(clsFacetFunction, bReset)
@@ -392,25 +390,48 @@ Public Class dlgClimaticBoxPlot
     '        clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsFactor, iPosition:=1)
     '    End If
     'End Sub
+    Private Sub ucrInput_SelectedValueChanged(sender As Object, e As EventArgs)
+        If ucrInputStation.ToString.Contains("x") Then
+            ucrInputYear.ResetText()
+            ucrInputWithinYear.SetText("None")
+        ElseIf ucrInputYear.ToString.Contains("x")
+            ucrInputStation.ResetText()
+            ucrInputWithinYear.SetText("None")
+        ElseIf ucrInputWithinYear.ToString.Contains("x")
+            ucrInputStation.ResetText()
+            ucrInputYear.ResetText()
+        ElseIf ucrInputStation.ToString.Contains("Facet 1")
+            ucrInputWithinYear.ResetText()
+            ucrInputYear.ResetText()
+        ElseIf ucrInputYear.ToString.Contains("Facet 1")
+            ucrInputStation.SetText("None")
+            ucrInputWithinYear.ResetText()
+        ElseIf ucrInputWithinYear.ToString.Contains("Facet 1")
+            ucrInputStation.SetText("None")
+            ucrInputYear.ResetText()
+        ElseIf ucrInputStation.ToString.Contains("Facet 2")
 
-    Private Sub ucrVariablesAsFactorForClimaticBoxplot_ControlValueChanged(ucrChangedControl As ucrCore)
-        '  SetColourFillAes()
+        End If
     End Sub
 
-    'Private Sub SetColourFillAes()
-    '    If Not ucrVariablesAsFactorForClimaticBoxplot.IsEmpty AndAlso Not ucrVariablesAsFactorForClimaticBoxplot.bSingleVariable Then
-    '        If rdoJitter.Checked Then
-    '            clsRaesFunction.AddParameter("colour", "variable", iPosition:=2)
-    '            clsRaesFunction.RemoveParameterByName("fill")
-    '        Else
-    '            clsRaesFunction.AddParameter("fill", "variable", , iPosition:=2)
-    '            clsRaesFunction.RemoveParameterByName("colour")
-    '        End If
-    '    Else
-    '        clsRaesFunction.RemoveParameterByName("fill")
-    '        clsRaesFunction.RemoveParameterByName("colour")
-    '    End If
-    'End Sub
+    Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore)
+        SetColourFillAes()
+    End Sub
+
+    Private Sub SetColourFillAes()
+        If Not ucrReceiverElement.IsEmpty Then
+            If rdoJitter.Checked Then
+                clsRaesFunction.AddParameter("colour", "variable", iPosition:=2)
+                clsRaesFunction.RemoveParameterByName("fill")
+            Else
+                clsRaesFunction.AddParameter("fill", "variable", , iPosition:=2)
+                clsRaesFunction.RemoveParameterByName("colour")
+            End If
+        Else
+            clsRaesFunction.RemoveParameterByName("fill")
+            clsRaesFunction.RemoveParameterByName("colour")
+        End If
+    End Sub
 
     'Private Sub ucrReceiverFacetBy_ControlValueChanged(ucrChangedControl As ucrCore)
     '    SecondFacetReceiverEnabled()
