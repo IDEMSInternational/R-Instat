@@ -1439,8 +1439,8 @@ Partial Class frmMain
         '
         'mnuClimaticCheckDataBoxplot
         '
-        Me.mnuClimaticCheckDataBoxplot.Name = "mnuClimaticCheckDataBoxplot"
         resources.ApplyResources(Me.mnuClimaticCheckDataBoxplot, "mnuClimaticCheckDataBoxplot")
+        Me.mnuClimaticCheckDataBoxplot.Name = "mnuClimaticCheckDataBoxplot"
         '
         'mnuClimaticCheckDataQCRainfall
         '
