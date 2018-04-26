@@ -52,8 +52,6 @@ Public Class dlgColumnStats
         ' only allow numeric variables in the first receiver, this will change once freq. tables is added
         ucrReceiverSelectedVariables.SetParameter(New RParameter("columns_to_summarise", 1))
         ucrReceiverSelectedVariables.SetParameterIsString()
-        ucrReceiverSelectedVariables.SetIncludedDataTypes({"numeric"})
-        ucrReceiverSelectedVariables.strSelectorHeading = "Numerics"
         ucrReceiverSelectedVariables.Selector = ucrSelectorForColumnStatistics
 
         ucrReceiverByFactor.SetParameter(New RParameter("factors", 2))
