@@ -43,6 +43,7 @@ Partial Class ucrColumnMetadata
         Me.columnContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuColumnRename = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDuplicateColumn = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuReorderColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuInsertColsBefore = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuInsertColsAfter = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDeleteCol = New System.Windows.Forms.ToolStripMenuItem()
@@ -63,7 +64,6 @@ Partial Class ucrColumnMetadata
         Me.mnuClearColumnFilter = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
-        Me.mnuReorderColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
         Me.SuspendLayout()
@@ -104,6 +104,12 @@ Partial Class ucrColumnMetadata
         Me.mnuDuplicateColumn.Name = "mnuDuplicateColumn"
         Me.mnuDuplicateColumn.Size = New System.Drawing.Size(212, 22)
         Me.mnuDuplicateColumn.Text = "Duplicate Column..."
+        '
+        'mnuReorderColumns
+        '
+        Me.mnuReorderColumns.Name = "mnuReorderColumns"
+        Me.mnuReorderColumns.Size = New System.Drawing.Size(212, 22)
+        Me.mnuReorderColumns.Text = "Reorder Column(s)..."
         '
         'mnuInsertColsBefore
         '
@@ -237,12 +243,6 @@ Partial Class ucrColumnMetadata
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.tlpTableContainer.Size = New System.Drawing.Size(344, 138)
         Me.tlpTableContainer.TabIndex = 7
-        '
-        'mnuReorderColumns
-        '
-        Me.mnuReorderColumns.Name = "mnuReorderColumns"
-        Me.mnuReorderColumns.Size = New System.Drawing.Size(212, 22)
-        Me.mnuReorderColumns.Text = "Reorder Column(s)"
         '
         'ucrColumnMetadata
         '
