@@ -52,6 +52,15 @@ Public Class dlgEndOfRainsSeason
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim lstAmountLabels As New List(Of Control)
+        lstAmountLabels.AddRange({lblLastAmount, lblLastAmountMM})
+
+        Dim lstCapacityLabels As New List(Of Control)
+        lstCapacityLabels.AddRange({lblCapacity, lblCapacityMM})
+
+        Dim lstWBLabels As New List(Of Control)
+        lstWBLabels.AddRange({lblWaterBalanceLessThan, lblWaterBalanceMM})
+
         ucrSelectorForWaterBalance.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForWaterBalance.SetParameterIsString()
 
@@ -112,17 +121,18 @@ Public Class dlgEndOfRainsSeason
         ucrReceiverEvaporation.Selector = ucrSelectorForWaterBalance
         ucrReceiverEvaporation.SetParameterIsRFunction()
         ucrReceiverEvaporation.bWithQuotes = False
+        ucrReceiverEvaporation.bAttachedToPrimaryDataFrame = False
 
         ucrNudWBLessThan.SetParameter(New RParameter("rightMaxMin", 1, False))
         ucrNudWBLessThan.SetMinMax(0, Integer.MaxValue)
         ucrNudWBLessThan.Increment = 0.5
         ucrNudWBLessThan.DecimalPlaces = 2
-        ucrNudWBLessThan.SetLinkedDisplayControl(lblWaterBalanceLessThan)
+        ucrNudWBLessThan.SetLinkedDisplayControl(lstWBLabels)
 
         ucrNudCapacity.SetParameter(New RParameter("values", 1, False))
         ucrNudCapacity.SetMinMax(1, Integer.MaxValue)
         ucrNudCapacity.Increment = 10
-        ucrNudCapacity.SetLinkedDisplayControl(lblCapacity)
+        ucrNudCapacity.SetLinkedDisplayControl(lstCapacityLabels)
 
         ucrInputWBColName.SetParameter(New RParameter("result_name", 3))
         ucrInputWBColName.SetName("end_season")
@@ -142,7 +152,7 @@ Public Class dlgEndOfRainsSeason
         ucrNudAmount.SetMinMax() ' min and max
         ucrNudAmount.DecimalPlaces = 2
         ucrNudAmount.Increment = 0.1
-        ucrNudAmount.SetLinkedDisplayControl(lblLastAmount)
+        ucrNudAmount.SetLinkedDisplayControl(lstAmountLabels)
 
         ucrNudTotalOverDays.SetParameter(New RParameter("n", 1))
         ucrNudTotalOverDays.SetMinMax(1, 366)
