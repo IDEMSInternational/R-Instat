@@ -34,7 +34,6 @@ Public Class dlgLinePlot
     Private bResetSubdialog As Boolean = True
     Private clsLocalRaesFunction As New RFunction
     Private bResetLineLayerSubdialog As Boolean = True
-
     Private clsGeomSmoothFunc As New RFunction
     Private clsGeomSmoothParameter As New RParameter
 
@@ -243,9 +242,16 @@ Public Class dlgLinePlot
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged
-        If Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor") Then
+    Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged, ucrFactorOptionalReceiver.ControlValueChanged
+        SetGroupParam()
+    End Sub
+
+    Private Sub SetGroupParam()
+        If (Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor")) AndAlso ucrFactorOptionalReceiver.IsEmpty Then
             clsRaesFunction.AddParameter("group", "1", iPosition:=3)
+
+        ElseIf (Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor")) AndAlso Not ucrFactorOptionalReceiver.IsEmpty Then
+            clsRaesFunction.AddParameter("group", ucrFactorOptionalReceiver.GetVariableNames(False), iPosition:=3)
         Else
             clsRaesFunction.RemoveParameterByName("group")
         End If
