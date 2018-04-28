@@ -50,6 +50,7 @@ Public Class dlgBoxplot
         bReset = False
         autoTranslate(Me)
         TestOkEnabled()
+        SetOptionsButtonstext()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -258,16 +259,24 @@ Public Class dlgBoxplot
             clsRgeomPlotFunction.SetRCommand("geom_boxplot")
             ucrSaveBoxplot.SetPrefix("boxplot")
             ucrSecondFactorReceiver.ChangeParameterName("fill")
-            cmdBoxPlotOptions.Text = "Boxplot Options"
         ElseIf rdoJitter.Checked Then
             clsRgeomPlotFunction.SetRCommand("geom_jitter")
             ucrSaveBoxplot.SetPrefix("jitter")
             ucrSecondFactorReceiver.ChangeParameterName("colour")
-            cmdBoxPlotOptions.Text = "Jitter Options"
         Else
             clsRgeomPlotFunction.SetRCommand("geom_violin")
             ucrSaveBoxplot.SetPrefix("violin")
             ucrSecondFactorReceiver.ChangeParameterName("fill")
+        End If
+        SetOptionsButtonstext()
+    End Sub
+
+    Private Sub SetOptionsButtonstext()
+        If rdoBoxplot.Checked Then
+            cmdBoxPlotOptions.Text = "Boxplot Options"
+        ElseIf rdoJitter.Checked Then
+            cmdBoxPlotOptions.Text = "Jitter Options"
+        Else
             cmdBoxPlotOptions.Text = "Violin Options"
         End If
     End Sub
