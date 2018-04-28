@@ -2111,19 +2111,19 @@ data_object$set("public","split_date", function(col_name = "", week = FALSE, mon
 	}
 	if(day_in_year) {
     day_in_year_vector <- as.integer(lubridate::yday(col_data))
-	  col_name <- next_default_item(prefix = "day_in_year", existing_names = self$get_column_names(), include_index = FALSE)
+	  col_name <- next_default_item(prefix = "doy_365", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = day_in_year_vector)
     if(self$is_climatic_data()) self$set_climatic_types(types = c(doy = col_name))
   }
   if(day_in_year_366) {
     day_in_year_366_vector <- as.integer(yday_366(col_data))
-    col_name <- next_default_item(prefix = "doy_366", existing_names = self$get_column_names(), include_index = FALSE)
+    col_name <- next_default_item(prefix = "doy", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = day_in_year_366_vector)
     if(self$is_climatic_data()) self$set_climatic_types(types = c(doy = col_name))
   }
   if(dekade) {
     dekade_vector <- as.integer(dekade(col_data))
-    col_name <- next_default_item(prefix = "dekade", existing_names = self$get_column_names(), include_index = FALSE)
+    col_name <- next_default_item(prefix = "dekad", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = dekade_vector)
   }
   if(pentad) {
