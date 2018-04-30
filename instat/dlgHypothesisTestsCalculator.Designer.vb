@@ -94,7 +94,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrChkBy = New instat.ucrCheck()
         Me.ucrReceiverMultiple = New instat.ucrReceiverMultiple()
         Me.ucrSelectorColumn = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrChkShowArguments = New instat.ucrCheck()
+        Me.ucrChkIncludeArguments = New instat.ucrCheck()
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
         Me.grpMainKeyboard.SuspendLayout()
         Me.grpStats1.SuspendLayout()
@@ -902,6 +902,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'ucrSelectorColumn
         '
+        Me.ucrSelectorColumn.bDropUnusedFilterLevels = False
         Me.ucrSelectorColumn.bShowHiddenColumns = False
         Me.ucrSelectorColumn.bUseCurrentFilter = True
         Me.ucrSelectorColumn.Location = New System.Drawing.Point(19, 56)
@@ -910,13 +911,13 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrSelectorColumn.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorColumn.TabIndex = 3
         '
-        'ucrChkShowArguments
+        'ucrChkIncludeArguments
         '
-        Me.ucrChkShowArguments.Checked = False
-        Me.ucrChkShowArguments.Location = New System.Drawing.Point(539, 25)
-        Me.ucrChkShowArguments.Name = "ucrChkShowArguments"
-        Me.ucrChkShowArguments.Size = New System.Drawing.Size(131, 20)
-        Me.ucrChkShowArguments.TabIndex = 2
+        Me.ucrChkIncludeArguments.Checked = False
+        Me.ucrChkIncludeArguments.Location = New System.Drawing.Point(539, 25)
+        Me.ucrChkIncludeArguments.Name = "ucrChkIncludeArguments"
+        Me.ucrChkIncludeArguments.Size = New System.Drawing.Size(131, 20)
+        Me.ucrChkIncludeArguments.TabIndex = 2
         '
         'ucrReceiverForTestColumn
         '
@@ -947,7 +948,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.Controls.Add(Me.ucrReceiverMultiple)
         Me.Controls.Add(Me.grpMainKeyboard)
         Me.Controls.Add(Me.ucrSelectorColumn)
-        Me.Controls.Add(Me.ucrChkShowArguments)
+        Me.Controls.Add(Me.ucrChkIncludeArguments)
         Me.Controls.Add(Me.lblTest)
         Me.Controls.Add(Me.ucrReceiverForTestColumn)
         Me.Controls.Add(Me.grpAgricolae)
@@ -967,7 +968,7 @@ Partial Class dlgHypothesisTestsCalculator
     End Sub
     Friend WithEvents lblTest As Label
     Friend WithEvents ucrReceiverForTestColumn As ucrReceiverExpression
-    Friend WithEvents ucrChkShowArguments As ucrCheck
+    Friend WithEvents ucrChkIncludeArguments As ucrCheck
     Friend WithEvents ucrSelectorColumn As ucrSelectorByDataFrameAddRemove
     Friend WithEvents grpMainKeyboard As GroupBox
     Friend WithEvents cmdPlus As Button
