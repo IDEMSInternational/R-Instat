@@ -252,17 +252,17 @@ instat_object$set("public", "get_data_objects", function(data_name, as_list = FA
 }
 )
 
-instat_object$set("public", "get_data_frame", function(data_name, convert_to_character = FALSE, stack_data = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", remove_attr = FALSE, retain_attr = FALSE, max_cols, max_rows, ...) {
+instat_object$set("public", "get_data_frame", function(data_name, convert_to_character = FALSE, stack_data = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", remove_attr = FALSE, retain_attr = FALSE, max_cols, max_rows, drop_unused_filter_levels = FALSE, ...) {
   if(!stack_data) {
     if(missing(data_name)) data_name <- self$get_data_names()
     if(length(data_name) > 1) {
       retlist <- list()
       for (curr_name in data_name) {
-        retlist[[curr_name]] = self$get_data_objects(curr_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name, remove_attr = remove_attr, retain_attr = retain_attr, max_cols = max_cols, max_rows = max_rows)
+        retlist[[curr_name]] = self$get_data_objects(curr_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name, remove_attr = remove_attr, retain_attr = retain_attr, max_cols = max_cols, max_rows = max_rows, drop_unused_filter_levels = drop_unused_filter_levels)
       }
       return(retlist)
     }
-    else return(self$get_data_objects(data_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name, remove_attr = remove_attr, retain_attr = retain_attr, max_cols = max_cols, max_rows = max_rows))
+    else return(self$get_data_objects(data_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name, remove_attr = remove_attr, retain_attr = retain_attr, max_cols = max_cols, max_rows = max_rows, drop_unused_filter_levels = drop_unused_filter_levels))
   }
   else {
     if(missing(data_name)) stop("data to be stacked is missing")
@@ -425,11 +425,11 @@ instat_object$set("public", "add_columns_to_data", function(data_name, col_name 
 }
 )
 
-instat_object$set("public", "get_columns_from_data", function(data_name, col_names, from_stacked_data = FALSE, force_as_data_frame = FALSE, use_current_filter = TRUE, remove_labels = FALSE) {
+instat_object$set("public", "get_columns_from_data", function(data_name, col_names, from_stacked_data = FALSE, force_as_data_frame = FALSE, use_current_filter = TRUE, remove_labels = FALSE, drop_unused_filter_levels = FALSE) {
   if(missing(data_name)) stop("data_name is required")
   if(!from_stacked_data) {
     if(!data_name %in% names(private$.data_objects)) stop(data_name, "not found")
-    self$get_data_objects(data_name)$get_columns_from_data(col_names, force_as_data_frame, use_current_filter = use_current_filter, remove_labels = remove_labels)
+    self$get_data_objects(data_name)$get_columns_from_data(col_names, force_as_data_frame, use_current_filter = use_current_filter, remove_labels = remove_labels, drop_unused_filter_levels = drop_unused_filter_levels)
   }
   else {
     if(!exists(data_name)) stop(paste(data_name, "not found."))
@@ -1150,8 +1150,8 @@ instat_object$set("public","create_factor_data_frame", function(data_name, facto
 }
 )
 
-instat_object$set("public","split_date", function(data_name, col_name = "", year = FALSE, day = FALSE, week = FALSE,  month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, day_in_month = FALSE, day_in_year = FALSE,  leap_year = FALSE, day_in_year_366 = FALSE, dekade = FALSE, pentad = FALSE, s_doy = FALSE, s_year = FALSE, s_start_day_in_month = 1, s_start_month = 8) {
-  self$get_data_objects(data_name)$split_date(col_name = col_name , week = week, month_val = month_val,  month_abbr = month_abbr, month_name = month_name, weekday_val = weekday_val, weekday_abbr = weekday_abbr,  weekday_name =  weekday_name, day = day, year = year, day_in_month = day_in_month, day_in_year = day_in_year,  leap_year =  leap_year, day_in_year_366 = day_in_year_366, dekade = dekade, pentad = pentad, s_doy = s_doy, s_year = s_year, s_start_day_in_month = s_start_day_in_month, s_start_month = s_start_month)
+instat_object$set("public","split_date", function(data_name, col_name = "", year = FALSE, day = FALSE, week = FALSE,  month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, day_in_month = FALSE, day_in_year = FALSE,  leap_year = FALSE, day_in_year_366 = FALSE, dekade = FALSE, pentad = FALSE, quarter = FALSE, s_doy = FALSE, s_year = FALSE, s_start_day_in_month = 1, s_start_month = 8) {
+  self$get_data_objects(data_name)$split_date(col_name = col_name , week = week, month_val = month_val,  month_abbr = month_abbr, month_name = month_name, weekday_val = weekday_val, weekday_abbr = weekday_abbr,  weekday_name =  weekday_name, day = day, year = year, day_in_month = day_in_month, day_in_year = day_in_year,  leap_year =  leap_year, day_in_year_366 = day_in_year_366, dekade = dekade, pentad = pentad, quarter = quarter, s_doy = s_doy, s_year = s_year, s_start_day_in_month = s_start_day_in_month, s_start_month = s_start_month)
 }
 )
 
