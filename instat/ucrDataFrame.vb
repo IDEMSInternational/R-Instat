@@ -24,6 +24,7 @@ Public Class ucrDataFrame
     Public bFirstLoad As Boolean = True
     Private bIncludeOverall As Boolean = False
     Private bPvtUseFilteredData As Boolean
+    Private bPvtDropUnusedFilterLevels As Boolean = False
     Public strCurrDataFrame As String = ""
     Public bDataFrameFixed As Boolean = False
     Private strFixedDataFrame As String
@@ -171,6 +172,24 @@ Public Class ucrDataFrame
                 End If
             Else
                 clsCurrDataFrame.AddParameter("use_current_filter", "FALSE")
+            End If
+        End Set
+    End Property
+
+    Public Property bDropUnusedFilterLevels As Boolean
+        Get
+            Return bPvtDropUnusedFilterLevels
+        End Get
+        Set(bValue As Boolean)
+            bPvtDropUnusedFilterLevels = bValue
+            If bPvtDropUnusedFilterLevels Then
+                clsCurrDataFrame.AddParameter("drop_unused_filter_levels", "TRUE")
+            Else
+                If frmMain.clsInstatOptions IsNot Nothing AndAlso frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                    clsCurrDataFrame.AddParameter("drop_unused_filter_levels", "FALSE")
+                Else
+                    clsCurrDataFrame.RemoveParameterByName("drop_unused_filter_levels")
+                End If
             End If
         End Set
     End Property

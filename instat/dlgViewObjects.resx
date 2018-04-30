@@ -150,13 +150,13 @@
     <value>True</value>
   </data>
   <data name="rdoStructure.Location" type="System.Drawing.Point, System.Drawing">
-    <value>256, 93</value>
+    <value>256, 116</value>
   </data>
   <data name="rdoStructure.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 17</value>
   </data>
   <data name="rdoStructure.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="rdoStructure.Text" xml:space="preserve">
     <value>Structure</value>
@@ -177,13 +177,13 @@
     <value>True</value>
   </data>
   <data name="rdoAllContents.Location" type="System.Drawing.Point, System.Drawing">
-    <value>256, 116</value>
+    <value>256, 136</value>
   </data>
   <data name="rdoAllContents.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 17</value>
   </data>
   <data name="rdoAllContents.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="rdoAllContents.Text" xml:space="preserve">
     <value>All Contents</value>
@@ -204,13 +204,13 @@
     <value>True</value>
   </data>
   <data name="rdoComponent.Location" type="System.Drawing.Point, System.Drawing">
-    <value>256, 139</value>
+    <value>256, 158</value>
   </data>
   <data name="rdoComponent.Size" type="System.Drawing.Size, System.Drawing">
     <value>79, 17</value>
   </data>
   <data name="rdoComponent.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="rdoComponent.Text" xml:space="preserve">
     <value>Component</value>
@@ -227,31 +227,31 @@
   <data name="&gt;&gt;rdoComponent.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="rdoViewGraph.AutoSize" type="System.Boolean, mscorlib">
+  <data name="rdoPrint.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="rdoViewGraph.Location" type="System.Drawing.Point, System.Drawing">
-    <value>256, 162</value>
+  <data name="rdoPrint.Location" type="System.Drawing.Point, System.Drawing">
+    <value>256, 94</value>
   </data>
-  <data name="rdoViewGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 17</value>
+  <data name="rdoPrint.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 17</value>
   </data>
-  <data name="rdoViewGraph.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+  <data name="rdoPrint.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
-  <data name="rdoViewGraph.Text" xml:space="preserve">
-    <value>View Graph</value>
+  <data name="rdoPrint.Text" xml:space="preserve">
+    <value>Print</value>
   </data>
-  <data name="&gt;&gt;rdoViewGraph.Name" xml:space="preserve">
-    <value>rdoViewGraph</value>
+  <data name="&gt;&gt;rdoPrint.Name" xml:space="preserve">
+    <value>rdoPrint</value>
   </data>
-  <data name="&gt;&gt;rdoViewGraph.Type" xml:space="preserve">
+  <data name="&gt;&gt;rdoPrint.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rdoViewGraph.Parent" xml:space="preserve">
+  <data name="&gt;&gt;rdoPrint.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;rdoViewGraph.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;rdoPrint.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -261,7 +261,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>417, 259</value>
+    <value>416, 262</value>
   </data>
   <data name="ucrSelectorForViewObject.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
@@ -289,7 +289,10 @@
     <value>6</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 198</value>
+    <value>10, 206</value>
+  </data>
+  <data name="ucrBase.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 52</value>
@@ -312,8 +315,11 @@
   <data name="ucrPnlContentsToView.Location" type="System.Drawing.Point, System.Drawing">
     <value>250, 90</value>
   </data>
+  <data name="ucrPnlContentsToView.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 8, 6, 8</value>
+  </data>
   <data name="ucrPnlContentsToView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 94</value>
+    <value>120, 100</value>
   </data>
   <data name="ucrPnlContentsToView.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
