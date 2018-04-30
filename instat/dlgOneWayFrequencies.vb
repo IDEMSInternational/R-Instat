@@ -49,6 +49,7 @@ Public Class dlgOneWayFrequencies
         ucrReceiverOneWayFreq.bForceAsDataFrame = True
         ucrReceiverOneWayFreq.Selector = ucrSelectorOneWayFreq
         ucrReceiverOneWayFreq.strSelectorHeading = "Variables"
+        ucrReceiverOneWayFreq.bDropUnusedFilterLevels = True
         'temp fix to bug in sjPlot
         ucrReceiverOneWayFreq.bRemoveLabels = True
 

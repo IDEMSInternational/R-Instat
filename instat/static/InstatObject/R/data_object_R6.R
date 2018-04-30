@@ -251,7 +251,7 @@ data_object$set("public", "set_metadata_changed", function(new_val) {
 }
 )
 
-data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", stack_data = FALSE, remove_attr = FALSE, retain_attr = FALSE, max_cols, max_rows, ...) {
+data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", stack_data = FALSE, remove_attr = FALSE, retain_attr = FALSE, max_cols, max_rows, drop_unused_filter_levels = FALSE, ...) {
   if(!stack_data) {
     if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) {
       hidden <- self$get_variables_metadata(property = is_hidden_label)
@@ -266,6 +266,8 @@ data_object$set("public", "get_data_frame", function(convert_to_character = FALS
       }
       else {
         out <- out[self$current_filter, ]
+        #TODO This needs to be done for all cases!
+        if(drop_unused_filter_levels) out <- drop_unused_levels(out, self$get_current_filter_column_names())
       }
     }
     else {
@@ -561,14 +563,14 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
 )
 
 #A bug in sjPlot requires removing labels when a factor column already has labels, using remove_labels for this if needed.
-data_object$set("public", "get_columns_from_data", function(col_names, force_as_data_frame = FALSE, use_current_filter = TRUE, remove_labels = FALSE) {
+data_object$set("public", "get_columns_from_data", function(col_names, force_as_data_frame = FALSE, use_current_filter = TRUE, remove_labels = FALSE, drop_unused_filter_levels = FALSE) {
   if(missing(col_names)) stop("no col_names to return")
   #if(!all(col_names %in% self$get_column_names())) stop("Not all column names were found in data")
   if(!all(col_names %in% names(private$data))) stop("Not all column names were found in data")
   
   if(length(col_names)==1) {
     if(force_as_data_frame) {
-      dat <- self$get_data_frame(use_current_filter = use_current_filter)[col_names]
+      dat <- self$get_data_frame(use_current_filter = use_current_filter, drop_unused_filter_levels = drop_unused_filter_levels)[col_names]
       if(remove_labels) {
         for(i in seq_along(dat)) {
           if(!is.numeric(dat[[i]])) attr(dat[[i]], "labels") <- NULL
@@ -577,13 +579,13 @@ data_object$set("public", "get_columns_from_data", function(col_names, force_as_
       return(dat)
     }
     else {
-      dat <- self$get_data_frame(use_current_filter = use_current_filter)[[col_names]]
+      dat <- self$get_data_frame(use_current_filter = use_current_filter, drop_unused_filter_levels = drop_unused_filter_levels)[[col_names]]
       if(remove_labels && !is.numeric(dat)) attr(dat, "labels") <- NULL
       return(dat)
     }
   }
   else {
-    dat <- self$get_data_frame(use_current_filter = use_current_filter)[col_names]
+    dat <- self$get_data_frame(use_current_filter = use_current_filter, drop_unused_filter_levels = drop_unused_filter_levels)[col_names]
     if(remove_labels) {
       for(i in seq_along(dat)) {
         if(!is.numeric(dat[[i]])) attr(dat[[i]], "labels") <- NULL
@@ -1530,6 +1532,23 @@ data_object$set("public", "get_filter_as_logical", function(filter_name) {
 }
 )
 
+data_object$set("public", "get_filter_column_names", function(filter_name) {
+  curr_filter <- self$get_filter(filter_name)
+  column_names <- c()
+  for(i in seq_along(curr_filter$filter_conditions)) {
+    column_names <- c(column_names, curr_filter$filter_conditions[[i]][["column"]])
+  }
+  return(column_names)
+}
+)
+
+data_object$set("public", "get_current_filter_column_names", function() {
+  return(self$get_filter_column_names(private$.current_filter$name))
+}
+)
+
+
+
 data_object$set("public", "filter_applied", function() {
   return(!private$.current_filter$parameters[["is_no_filter"]])
 }
@@ -2035,7 +2054,7 @@ data_object$set("public","set_contrasts_of_factor", function(col_name, new_contr
 )
 
 #This method gets a date column and extracts part of the information such as year, month, week, weekday etc(depending on which parameters are set) and creates their respective new column(s)
-data_object$set("public","split_date", function(col_name = "", week = FALSE, month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, year = FALSE, day = FALSE, day_in_month = FALSE, day_in_year = FALSE, leap_year = FALSE, day_in_year_366 = FALSE, dekade = FALSE, pentad = FALSE, s_doy = FALSE, s_year = FALSE, s_start_day_in_month = 1, s_start_month = 8) {
+data_object$set("public","split_date", function(col_name = "", week = FALSE, month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, year = FALSE, day = FALSE, day_in_month = FALSE, day_in_year = FALSE, leap_year = FALSE, day_in_year_366 = FALSE, dekade = FALSE, pentad = FALSE, quarter = FALSE, s_doy = FALSE, s_year = FALSE, s_start_day_in_month = 1, s_start_month = 8) {
   col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
   if(!lubridate::is.Date(col_data)) stop("This column must be a date or time!")
   if(day) {
@@ -2111,6 +2130,11 @@ data_object$set("public","split_date", function(col_name = "", week = FALSE, mon
     pentad_vector <- as.integer(pentad(col_data))
     col_name <- next_default_item(prefix = "pentad", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = pentad_vector)
+  }
+  if(quarter) {
+    quarter_vector <- lubridate::quarter(col_data, with_year = FALSE, fiscal_start = 1)
+    col_name <- next_default_item(prefix = "quarter", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = quarter_vector)
   }
 	if(leap_year) {
     leap_year_vector <- lubridate::leap_year(col_data)

@@ -24,6 +24,7 @@ Public Class ucrReceiver
     Public bFirstShown As Boolean
     Public strSelectorHeading As String
     Public bUseFilteredData As Boolean = True
+    Public bDropUnusedFilterLevels As Boolean = False
     Public bTypeSet As Boolean
     Protected strType As String
     Public bExcludeFromSelector As Boolean = False
