@@ -41,14 +41,17 @@ Partial Class ucrScript
         Me.components = New System.ComponentModel.Container()
         Me.txtScript = New System.Windows.Forms.TextBox()
         Me.mnuContextScript = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.mnuCut = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCopy = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPaste = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuUndo = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RToolStripMenuItem = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuRunSelectedText = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOpenScript = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOpenScriptFromFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuRunAllText = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOpenScriptasFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuLoadScriptFromFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuSaveScript = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClearContents = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuCopy = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuCut = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPaste = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdRun = New System.Windows.Forms.Button()
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
@@ -70,57 +73,78 @@ Partial Class ucrScript
         '
         'mnuContextScript
         '
-        Me.mnuContextScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuRunSelectedText, Me.mnuOpenScript, Me.mnuOpenScriptFromFile, Me.mnuSaveScript, Me.mnuClearContents, Me.mnuCopy, Me.mnuCut, Me.mnuPaste})
+        Me.mnuContextScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCut, Me.mnuCopy, Me.mnuPaste, Me.mnuUndo, Me.RToolStripMenuItem, Me.mnuRunSelectedText, Me.mnuRunAllText, Me.mnuOpenScriptasFile, Me.mnuLoadScriptFromFile, Me.mnuSaveScript, Me.mnuClearContents})
         Me.mnuContextScript.Name = "mnuContextLogFile"
-        Me.mnuContextScript.Size = New System.Drawing.Size(254, 180)
+        Me.mnuContextScript.Size = New System.Drawing.Size(193, 252)
+        '
+        'mnuCut
+        '
+        Me.mnuCut.Name = "mnuCut"
+        Me.mnuCut.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.X), System.Windows.Forms.Keys)
+        Me.mnuCut.Size = New System.Drawing.Size(192, 22)
+        Me.mnuCut.Text = "Cut"
+        '
+        'mnuCopy
+        '
+        Me.mnuCopy.Name = "mnuCopy"
+        Me.mnuCopy.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
+        Me.mnuCopy.Size = New System.Drawing.Size(192, 22)
+        Me.mnuCopy.Text = "Copy"
+        '
+        'mnuPaste
+        '
+        Me.mnuPaste.Name = "mnuPaste"
+        Me.mnuPaste.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.V), System.Windows.Forms.Keys)
+        Me.mnuPaste.Size = New System.Drawing.Size(192, 22)
+        Me.mnuPaste.Text = "Paste"
+        '
+        'mnuUndo
+        '
+        Me.mnuUndo.Name = "mnuUndo"
+        Me.mnuUndo.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Z), System.Windows.Forms.Keys)
+        Me.mnuUndo.Size = New System.Drawing.Size(192, 22)
+        Me.mnuUndo.Text = "Undo"
+        '
+        'RToolStripMenuItem
+        '
+        Me.RToolStripMenuItem.Name = "RToolStripMenuItem"
+        Me.RToolStripMenuItem.Size = New System.Drawing.Size(189, 6)
         '
         'mnuRunSelectedText
         '
         Me.mnuRunSelectedText.Name = "mnuRunSelectedText"
-        Me.mnuRunSelectedText.Size = New System.Drawing.Size(253, 22)
+        Me.mnuRunSelectedText.Size = New System.Drawing.Size(192, 22)
         Me.mnuRunSelectedText.Text = "Run Selected Text"
         '
-        'mnuOpenScript
+        'mnuRunAllText
         '
-        Me.mnuOpenScript.Name = "mnuOpenScript"
-        Me.mnuOpenScript.Size = New System.Drawing.Size(253, 22)
-        Me.mnuOpenScript.Text = "Open Script in RStudio/Text Editor"
+        Me.mnuRunAllText.Name = "mnuRunAllText"
+        Me.mnuRunAllText.Size = New System.Drawing.Size(192, 22)
+        Me.mnuRunAllText.Text = "Run All Text"
         '
-        'mnuOpenScriptFromFile
+        'mnuOpenScriptasFile
         '
-        Me.mnuOpenScriptFromFile.Name = "mnuOpenScriptFromFile"
-        Me.mnuOpenScriptFromFile.Size = New System.Drawing.Size(253, 22)
-        Me.mnuOpenScriptFromFile.Text = "Open Script From File..."
+        Me.mnuOpenScriptasFile.Name = "mnuOpenScriptasFile"
+        Me.mnuOpenScriptasFile.Size = New System.Drawing.Size(192, 22)
+        Me.mnuOpenScriptasFile.Text = "Open Script as File"
+        '
+        'mnuLoadScriptFromFile
+        '
+        Me.mnuLoadScriptFromFile.Name = "mnuLoadScriptFromFile"
+        Me.mnuLoadScriptFromFile.Size = New System.Drawing.Size(192, 22)
+        Me.mnuLoadScriptFromFile.Text = "Load Script from File..."
         '
         'mnuSaveScript
         '
         Me.mnuSaveScript.Name = "mnuSaveScript"
-        Me.mnuSaveScript.Size = New System.Drawing.Size(253, 22)
+        Me.mnuSaveScript.Size = New System.Drawing.Size(192, 22)
         Me.mnuSaveScript.Text = "Save Script..."
         '
         'mnuClearContents
         '
         Me.mnuClearContents.Name = "mnuClearContents"
-        Me.mnuClearContents.Size = New System.Drawing.Size(253, 22)
+        Me.mnuClearContents.Size = New System.Drawing.Size(192, 22)
         Me.mnuClearContents.Text = "Clear Script"
-        '
-        'mnuCopy
-        '
-        Me.mnuCopy.Name = "mnuCopy"
-        Me.mnuCopy.Size = New System.Drawing.Size(253, 22)
-        Me.mnuCopy.Text = "Copy"
-        '
-        'mnuCut
-        '
-        Me.mnuCut.Name = "mnuCut"
-        Me.mnuCut.Size = New System.Drawing.Size(253, 22)
-        Me.mnuCut.Text = "Cut"
-        '
-        'mnuPaste
-        '
-        Me.mnuPaste.Name = "mnuPaste"
-        Me.mnuPaste.Size = New System.Drawing.Size(253, 22)
-        Me.mnuPaste.Text = "Paste"
         '
         'cmdRun
         '
@@ -185,10 +209,13 @@ Partial Class ucrScript
     Friend WithEvents mnuContextScript As ContextMenuStrip
     Friend WithEvents mnuRunSelectedText As ToolStripMenuItem
     Friend WithEvents mnuClearContents As ToolStripMenuItem
-    Friend WithEvents mnuOpenScript As ToolStripMenuItem
+    Friend WithEvents mnuOpenScriptasFile As ToolStripMenuItem
     Friend WithEvents mnuSaveScript As ToolStripMenuItem
-    Friend WithEvents mnuOpenScriptFromFile As ToolStripMenuItem
+    Friend WithEvents mnuLoadScriptFromFile As ToolStripMenuItem
     Friend WithEvents mnuCopy As ToolStripMenuItem
     Friend WithEvents mnuCut As ToolStripMenuItem
     Friend WithEvents mnuPaste As ToolStripMenuItem
+    Friend WithEvents mnuUndo As ToolStripMenuItem
+    Friend WithEvents RToolStripMenuItem As ToolStripSeparator
+    Friend WithEvents mnuRunAllText As ToolStripMenuItem
 End Class

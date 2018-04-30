@@ -64,7 +64,11 @@ Public Class sdgLayerOptions
         clsGeomFunction = clsNewGeomFunc
         clsAesFunction = clsNewGlobalAesFunc
         clsGgplotFunction = clsNewGgPlot
+        ' This prevents ucrGeomWithAes affecting ucrLayerParameter before ucrLayerParameter.Setup has run
+        ' Setup must be complete first so that controls are in sync
+        ucrLayerParameter.bPauseChanges = True
         ucrGeomWithAes.Setup(clsNewGgPlot, clsNewGeomFunc, clsNewGlobalAesFunc, clsNewLocalAes, bFixGeom, ucrNewBaseSelector, bApplyAesGlobally, iNumVariablesForGeoms, bReset, strDataFrame)
+        ucrLayerParameter.bPauseChanges = False
         ucrLayerParameter.Setup(clsNewGgPlot, clsNewGeomFunc, clsNewGlobalAesFunc, clsNewLocalAes, bFixGeom, ucrNewBaseSelector, bApplyAesGlobally, iNumVariablesForGeoms, bReset, strDataFrame)
     End Sub
 
