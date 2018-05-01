@@ -69,6 +69,8 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.ucrSelectorTemperature = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlType = New instat.UcrPanel()
+        Me.ucrChkIncludeCalculatedColumns = New instat.ucrCheck()
+        Me.ucrChkIncludeLogicalColumns = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblStation
@@ -368,6 +370,7 @@ Partial Class dlgClimaticCheckDataTemperature
         '
         'ucrSelectorTemperature
         '
+        Me.ucrSelectorTemperature.bDropUnusedFilterLevels = False
         Me.ucrSelectorTemperature.bShowHiddenColumns = False
         Me.ucrSelectorTemperature.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorTemperature, "ucrSelectorTemperature")
@@ -383,10 +386,24 @@ Partial Class dlgClimaticCheckDataTemperature
         resources.ApplyResources(Me.ucrPnlType, "ucrPnlType")
         Me.ucrPnlType.Name = "ucrPnlType"
         '
+        'ucrChkIncludeCalculatedColumns
+        '
+        Me.ucrChkIncludeCalculatedColumns.Checked = False
+        resources.ApplyResources(Me.ucrChkIncludeCalculatedColumns, "ucrChkIncludeCalculatedColumns")
+        Me.ucrChkIncludeCalculatedColumns.Name = "ucrChkIncludeCalculatedColumns"
+        '
+        'ucrChkIncludeLogicalColumns
+        '
+        Me.ucrChkIncludeLogicalColumns.Checked = False
+        resources.ApplyResources(Me.ucrChkIncludeLogicalColumns, "ucrChkIncludeLogicalColumns")
+        Me.ucrChkIncludeLogicalColumns.Name = "ucrChkIncludeLogicalColumns"
+        '
         'dlgClimaticCheckDataTemperature
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkIncludeLogicalColumns)
+        Me.Controls.Add(Me.ucrChkIncludeCalculatedColumns)
         Me.Controls.Add(Me.ucrChkRange2)
         Me.Controls.Add(Me.lblNudRangeElement2Max)
         Me.Controls.Add(Me.lblNudRangeElement1Max)
@@ -485,4 +502,6 @@ Partial Class dlgClimaticCheckDataTemperature
     Friend WithEvents lblNudRangeElement1Min As Label
     Friend WithEvents ucrChkRange2 As ucrCheck
     Friend WithEvents ttOutliers As ToolTip
+    Friend WithEvents ucrChkIncludeCalculatedColumns As ucrCheck
+    Friend WithEvents ucrChkIncludeLogicalColumns As ucrCheck
 End Class
