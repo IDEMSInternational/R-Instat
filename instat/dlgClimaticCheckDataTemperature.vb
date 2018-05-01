@@ -37,6 +37,7 @@ Public Class dlgClimaticCheckDataTemperature
         autoTranslate(Me)
         If bFirstload Then
             InitialiseDialog()
+            RangeDifference()
             bFirstload = False
         End If
         If bReset Then
@@ -94,7 +95,7 @@ Public Class dlgClimaticCheckDataTemperature
         ucrReceiverDay.SetParameterIsString()
         ucrReceiverDay.bWithQuotes = False
         ucrReceiverDay.bAutoFill = True
-        ucrReceiverDay.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "doy" & Chr(34)})
+        ucrReceiverDay.SetClimaticType("doy")
         ucrReceiverDay.strSelectorHeading = "Day Variables"
 
         'Element Receiver
@@ -160,6 +161,8 @@ Public Class dlgClimaticCheckDataTemperature
         'Jump Option
         ucrNudJump.SetParameter(New RParameter("from", iNewPosition:=1, bNewIncludeArgumentName:=False))
         ucrNudJump.SetMinMax(1, 25)
+        ucrNudJump.DecimalPlaces = 1
+        ucrNudJump.Increment = 0.1
 
         'Difference Option
         ucrNudDifference.SetParameter(New RParameter("n", iNewPosition:=1, bNewIncludeArgumentName:=False))
@@ -167,6 +170,10 @@ Public Class dlgClimaticCheckDataTemperature
         ucrNudDifference.DecimalPlaces = 1
         ucrNudDifference.Increment = 0.1
         ucrChkDifference.AddToLinkedControls(ucrNudDifference, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+
+        ucrChkIncludeCalculatedColumns.SetText("Include calculated columns")
+
+        ucrChkIncludeLogicalColumns.SetText("Include logical columns")
 
         'outliers Option
         ucrChkOutlier.AddToLinkedControls(ucrNudOutlier, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2.5)
@@ -350,8 +357,19 @@ Public Class dlgClimaticCheckDataTemperature
         GroupByOptions()
     End Sub
 
+    Private Sub RangeDifference()
+        If ucrReceiverElement2.IsEmpty Then
+            ucrChkRange2.Enabled = False
+            ucrChkDifference.Enabled = False
+        Else
+            ucrChkRange2.Enabled = True
+            ucrChkDifference.Enabled = True
+        End If
+    End Sub
+
     Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement1.ControlValueChanged, ucrReceiverElement2.ControlValueChanged, ucrChkRange.ControlValueChanged, ucrChkRange2.ControlValueChanged
         FilterFunc()
+        RangeDifference()
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement1.ControlContentsChanged, ucrReceiverElement2.ControlContentsChanged, ucrNudSame.ControlContentsChanged, ucrNudRangeElement1Min.ControlContentsChanged, ucrNudRangeElement1Max.ControlContentsChanged, ucrNudRangeElement2Min.ControlContentsChanged, ucrNudRangeElement2Max.ControlContentsChanged, ucrNudJump.ControlContentsChanged, ucrNudRangeElement2Min.ControlContentsChanged, ucrNudRangeElement2Max.ControlContentsChanged, ucrNudDifference.ControlContentsChanged, ucrChkRange.ControlContentsChanged, ucrChkRange2.ControlContentsChanged, ucrChkJump.ControlContentsChanged, ucrChkDifference.ControlContentsChanged, ucrChkSame.ControlContentsChanged
