@@ -43,17 +43,6 @@ Public Class sdgCorrPlot
         ucrChkLabel.SetText("Label")
         ucrChkLabel.SetRDefault("FALSE")
 
-        ucrNudAlphaCorr.SetParameter(New RParameter("label_alpha", 5))
-        ucrNudAlphaCorr.SetMinMax(0, 1)
-        ucrNudAlphaCorr.DecimalPlaces = 2
-        ucrNudAlphaCorr.Increment = 0.01
-
-        ucrNudAlpha.SetParameter(New RParameter("alpha", 3))
-        ucrNudAlpha.SetMinMax(0, 1)
-        ucrNudAlpha.DecimalPlaces = 2
-        ucrNudAlpha.Increment = 0.01
-        ucrNudAlpha.SetRDefault(1)
-
         ucrSaveGraph.SetPrefix("CorGraph")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(dlgCorrelation.ucrSelectorCorrelation.ucrAvailableDataFrames)
@@ -70,21 +59,16 @@ Public Class sdgCorrPlot
         ucrPnlGraphType.AddToLinkedControls(ucrInputComboGeom, {rdoCorrelationPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="tile")
         ucrPnlGraphType.AddToLinkedControls(ucrNudMinimunSize, {rdoCorrelationPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGraphType.AddToLinkedControls(ucrNudMaximumSize, {rdoCorrelationPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlGraphType.AddToLinkedControls(ucrNudAlphaCorr, {rdoCorrelationPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrPnlGraphType.AddToLinkedControls(ucrChkLabel, {rdoCorrelationPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGraphType.AddToLinkedControls(ucrSaveGraph, {rdoPairwisePlot, rdoCorrelationPlot, rdoScatterPlotMatrix}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudMinimunSize.SetLinkedDisplayControl(lblMinimumSize)
         ucrNudMaximumSize.SetLinkedDisplayControl(lblMaximumSize)
-        ucrNudAlphaCorr.SetLinkedDisplayControl(lblLabelAlpha)
         ucrPnlGraphType.SetLinkedDisplayControl(grpOptions)
         ucrInputComboGeom.SetLinkedDisplayControl(lblGeom)
 
-
         ucrPnlGraphType.AddToLinkedControls(ucrSelectorFactor, {rdoScatterPlotMatrix}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGraphType.AddToLinkedControls(ucrReceiverFactor, {rdoScatterPlotMatrix}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlGraphType.AddToLinkedControls(ucrNudAlpha, {rdoScatterPlotMatrix}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverFactor.SetLinkedDisplayControl(lblFactor)
-        ucrNudAlpha.SetLinkedDisplayControl(lblAlpha)
 
         ucrInputComboGeom.SetParameter(New RParameter("geom", 3))
         dctGeom.Add("Tile", Chr(34) & "tile" & Chr(34))
@@ -128,13 +112,11 @@ Public Class sdgCorrPlot
         ucrNudMaximumSize.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
         ucrNudMinimunSize.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputComboGeom.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
-        ucrNudAlphaCorr.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
         ucrChkLabel.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
         ucrSaveGraph.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
         ucrSaveGraph.AddAdditionalRCode(clsRGraphicsFuction, iAdditionalPairNo:=1)
         ucrSaveGraph.AddAdditionalRCode(clsRGGscatmatrixFunction, iAdditionalPairNo:=2)
         ucrPnlGraphType.SetRSyntax(clsRsyntax, bReset)
-        ucrNudAlpha.SetRCode(clsRGGscatmatrixFunction, bReset, bCloneIfNeeded:=True)
         Visibility()
         If bReset Then
             ucrSelectorFactor.Reset()
