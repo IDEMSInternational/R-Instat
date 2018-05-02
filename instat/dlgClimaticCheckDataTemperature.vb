@@ -110,17 +110,17 @@ Public Class dlgClimaticCheckDataTemperature
         ucrReceiverElement2.bWithQuotes = False
 
         'Checkboxes for options
-        ucrChkRange.SetParameter(New RParameter("range", clsRangeOrOperator, 1), bNewChangeParameterValue:=False)
-        ucrChkRange.SetText("Acceptable Range(Element1)")
+        ucrChkRangeElement1.SetParameter(New RParameter("range", clsRangeOrOperator, 1), bNewChangeParameterValue:=False)
+        ucrChkRangeElement1.SetText("Acceptable Range(Element1)")
 
-        ucrChkRange2.SetParameter(New RParameter("range2", clsRange2OrOperator, 1), bNewChangeParameterValue:=False)
-        ucrChkRange2.SetText("Acceptable Range(Element2)")
+        ucrChkRangeElement2.SetParameter(New RParameter("range2", clsRange2OrOperator, 1), bNewChangeParameterValue:=False)
+        ucrChkRangeElement2.SetText("Acceptable Range(Element2)")
 
         'Linking controls
-        ucrChkRange.AddToLinkedControls(ucrNudRangeElement1Min, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
-        ucrChkRange.AddToLinkedControls(ucrNudRangeElement1Max, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=50)
-        ucrChkRange2.AddToLinkedControls(ucrNudRangeElement2Min, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
-        ucrChkRange2.AddToLinkedControls(ucrNudRangeElement2Max, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=30)
+        ucrChkRangeElement1.AddToLinkedControls(ucrNudRangeElement1Min, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
+        ucrChkRangeElement1.AddToLinkedControls(ucrNudRangeElement1Max, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=50)
+        ucrChkRangeElement2.AddToLinkedControls(ucrNudRangeElement2Min, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrChkRangeElement2.AddToLinkedControls(ucrNudRangeElement2Max, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=30)
         ucrNudRangeElement2Min.SetLinkedDisplayControl(lstLabels2)
         ucrNudRangeElement1Min.SetLinkedDisplayControl(lstLabels)
         ucrNudJump.SetLinkedDisplayControl(lblNudJump)
@@ -297,16 +297,16 @@ Public Class dlgClimaticCheckDataTemperature
         ucrNudDifference.SetRCode(clsLessDiffOperator, bReset)
         ucrNudSame.SetRCode(clsSameGreaterOperator, bReset)
         ucrChkDifference.SetRCode(clsOrOperator, bReset)
-        ucrChkRange.SetRCode(clsOrOperator, bReset)
-        ucrChkRange2.SetRCode(clsOrOperator, bReset)
+        ucrChkRangeElement1.SetRCode(clsOrOperator, bReset)
+        ucrChkRangeElement2.SetRCode(clsOrOperator, bReset)
         ucrChkSame.SetRCode(clsOrOperator, bReset)
         ucrChkJump.SetRCode(clsOrOperator, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrChkRange.Checked AndAlso Not ucrReceiverElement1.IsEmpty() AndAlso ucrNudRangeElement1Min.GetText <> "" AndAlso ucrNudRangeElement1Max.GetText <> "" Then
+        If ucrChkRangeElement1.Checked AndAlso Not ucrReceiverElement1.IsEmpty() AndAlso ucrNudRangeElement1Min.GetText <> "" AndAlso ucrNudRangeElement1Max.GetText <> "" Then
             ucrBase.OKEnabled(True)
-        ElseIf ucrChkRange2.Checked AndAlso Not ucrReceiverElement2.IsEmpty() AndAlso ucrNudRangeElement2Min.GetText <> "" AndAlso ucrNudRangeElement2Max.GetText <> "" Then
+        ElseIf ucrChkRangeElement2.Checked AndAlso Not ucrReceiverElement2.IsEmpty() AndAlso ucrNudRangeElement2Min.GetText <> "" AndAlso ucrNudRangeElement2Max.GetText <> "" Then
             ucrBase.OKEnabled(True)
         ElseIf Not ucrReceiverElement1.IsEmpty AndAlso ucrChkSame.Checked AndAlso ucrNudSame.GetText <> "" Then
             ucrBase.OKEnabled(True)
@@ -335,16 +335,21 @@ Public Class dlgClimaticCheckDataTemperature
     End Sub
 
     Private Sub FilterFunc()
-        If ucrChkRange.Checked Then
+        If ucrChkRangeElement1.Checked Then
             If Not ucrReceiverElement1.IsEmpty Then
                 clsTempFilterFunc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & ")", iPosition:=2)
             End If
-        ElseIf ucrChkRange2.Checked Then
+        ElseIf ucrChkRangeElement2.Checked Then
             If Not ucrReceiverElement2.IsEmpty Then
                 clsTempFilterFunc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement2.GetVariableNames & ")", iPosition:=2)
             End If
         Else
             clsTempFilterFunc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & ")", iPosition:=2)
+        End If
+        If ucrChkRangeElement1.Checked AndAlso ucrChkRangeElement2.Checked OrElse ucrChkDifference.Checked Then
+            If Not ucrReceiverElement1.IsEmpty AndAlso Not ucrReceiverElement2.IsEmpty Then
+                clsTempFilterFunc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & "," & strCurrDataFrame & "=" & ucrReceiverElement2.GetVariableNames & ")", iPosition:=2)
+            End If
         End If
     End Sub
 
@@ -358,21 +363,24 @@ Public Class dlgClimaticCheckDataTemperature
     End Sub
 
     Private Sub RangeDifference()
-        If ucrReceiverElement2.IsEmpty Then
-            ucrChkRange2.Enabled = False
-            ucrChkDifference.Enabled = False
+        If Not ucrReceiverElement2.IsEmpty Then
+            ucrChkRangeElement2.Enabled = True
         Else
-            ucrChkRange2.Enabled = True
+            ucrChkRangeElement2.Enabled = False
+        End If
+        If Not ucrReceiverElement1.IsEmpty AndAlso Not ucrReceiverElement2.IsEmpty Then
             ucrChkDifference.Enabled = True
+        Else
+            ucrChkDifference.Enabled = False
         End If
     End Sub
 
-    Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement1.ControlValueChanged, ucrReceiverElement2.ControlValueChanged, ucrChkRange.ControlValueChanged, ucrChkRange2.ControlValueChanged
+    Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement1.ControlValueChanged, ucrReceiverElement2.ControlValueChanged, ucrChkRangeElement1.ControlValueChanged, ucrChkRangeElement2.ControlValueChanged, ucrChkDifference.ControlValueChanged
         FilterFunc()
         RangeDifference()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement1.ControlContentsChanged, ucrReceiverElement2.ControlContentsChanged, ucrNudSame.ControlContentsChanged, ucrNudRangeElement1Min.ControlContentsChanged, ucrNudRangeElement1Max.ControlContentsChanged, ucrNudRangeElement2Min.ControlContentsChanged, ucrNudRangeElement2Max.ControlContentsChanged, ucrNudJump.ControlContentsChanged, ucrNudRangeElement2Min.ControlContentsChanged, ucrNudRangeElement2Max.ControlContentsChanged, ucrNudDifference.ControlContentsChanged, ucrChkRange.ControlContentsChanged, ucrChkRange2.ControlContentsChanged, ucrChkJump.ControlContentsChanged, ucrChkDifference.ControlContentsChanged, ucrChkSame.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement1.ControlContentsChanged, ucrReceiverElement2.ControlContentsChanged, ucrNudSame.ControlContentsChanged, ucrNudRangeElement1Min.ControlContentsChanged, ucrNudRangeElement1Max.ControlContentsChanged, ucrNudRangeElement2Min.ControlContentsChanged, ucrNudRangeElement2Max.ControlContentsChanged, ucrNudJump.ControlContentsChanged, ucrNudRangeElement2Min.ControlContentsChanged, ucrNudRangeElement2Max.ControlContentsChanged, ucrNudDifference.ControlContentsChanged, ucrChkRangeElement1.ControlContentsChanged, ucrChkRangeElement2.ControlContentsChanged, ucrChkJump.ControlContentsChanged, ucrChkDifference.ControlContentsChanged, ucrChkSame.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
