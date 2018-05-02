@@ -983,3 +983,10 @@ get_installed_packages_with_data <- function() {
   pack_data <- pack_data[["results"]]
   return(unique(pack_data[,1]))
 }
+
+drop_unused_levels <- function(dat, columns) {
+  for(i in seq_along(columns)) {
+    if(is.factor(dat[[columns[i]]])) dat[[columns[i]]] <- droplevels(dat[[columns[i]]])
+  }
+  return(dat)
+}

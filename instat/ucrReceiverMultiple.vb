@@ -152,6 +152,15 @@ Public Class ucrReceiverMultiple
                     Else
                         clsGetVariablesFunc.AddParameter("use_current_filter", "FALSE")
                     End If
+                    If bDropUnusedFilterLevels Then
+                        clsGetVariablesFunc.AddParameter("drop_unused_filter_levels", "TRUE")
+                    Else
+                        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                            clsGetVariablesFunc.AddParameter("drop_unused_filter_levels", "FALSE")
+                        Else
+                            clsGetVariablesFunc.RemoveParameterByName("drop_unused_filter_levels")
+                        End If
+                    End If
                 Case "filter"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_filter")
                     clsGetVariablesFunc.AddParameter("filter_name", GetVariableNames())
