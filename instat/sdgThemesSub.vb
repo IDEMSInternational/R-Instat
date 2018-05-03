@@ -19,16 +19,17 @@ Imports instat
     Imports instat.Translations
 
     Public Class sdgThemesSub
-        Public bControlsInitialised As Boolean = False
-        Private clsElementLine, clsElementRect, clsElementXAxisLine, clsElementYAxisLine, clsElementText, clsThemeFunction As New RFunction
-        Private clsBaseOperator As New ROperator
-        Private dctThemeFunctions As New Dictionary(Of String, RFunction)
+    Public bControlsInitialised As Boolean = False
+    Private clsTheme, clsElementPlotTitle, clsAxesTitles, clsXElementTitle, clsYElementTitle, clsAllLabels, clsXAxisLables, clsYAxisLabels, clsAllTickMarks, clsXAxisTickMarks, clsYAxisTickMarks, clsUnitAxisTickLength, clsAllAxisLines, clsXAxisLine, clsYAxisLine As New RFunction
+    Private clsAllPanelGrid, clsPanelGridMajor, clsPanelGridMinor, clsPanelBackground, clsPanelBorder As New RFunction
+    Private clsBaseOperator As New ROperator
+    Private dctThemeFunctions As New Dictionary(Of String, RFunction)
 
-        Private Sub sdgThemesSub_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            autoTranslate(Me)
-        End Sub
+    Private Sub sdgThemesSub_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
+    End Sub
 
-        Public Sub InitialiseControls()
+    Public Sub InitialiseControls()
         ucrPlotTitle.SetLabel("Plot Title")
         ucrThemeTitleXAxis.SetLabel("X-Axis Title")
         ucrThemeTitleYAxis.SetLabel("Y-Axis Title")
@@ -54,34 +55,41 @@ Imports instat
         ucrrdoSpecific.SetText("Specific")
 
         'Need to link all check boxes to ucrTextThemes
-        ucrChkAllLabels.AddToLinkedControls(ucrThemeAxesTickLabels, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
+        'ucrChkAllLabels.AddToLinkedControls(ucrThemeAxesTickLabels, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
     End Sub
 
-    Public Sub SetRCode(clsBaseOperator As ROperator, clsNewThemeFunction As RFunction, dctNewThemeFunctions As Dictionary(Of String, RFunction), Optional bReset As Boolean = False)
-        'Titles
-        Dim clsElementPlotTitle As New RFunction
-        Dim clsAxesTitles As New RFunction
-        Dim clsXElementTitle As New RFunction
-        Dim clsYElementTitle As New RFunction
-        'Labels 
-        Dim clsAllLabels As New RFunction
-        Dim clsXAxisLables As New RFunction
-        Dim clsYAxisLabels As New RFunction
-        'Tick Markers 
-        Dim clsAllTickMarks As New RFunction
-        Dim clsXAxisTickMarks As New RFunction
-        Dim clsYAxisTickMarks As New RFunction
-        'Lines 
-        Dim clsAllAxisLines As New RFunction
-        Dim clsXAxisLine As New RFunction
-        Dim clsYAxisLine As New RFunction
+    Public Sub SetDefaults()
 
-        Dim clsElementLineAxes As New RFunction
-        Dim clsXElementLine As New RFunction
-        Dim clsYElementLine As New RFunction
-        Dim clsElementLineXAxis As New RFunction
-        Dim clsElementLineYAxis As New RFunction
-        Dim clsUnitAxisTickLength As New RFunction
+    End Sub
+
+    Public Sub SetRCode()
+        'Theme command 
+        clsTheme = New RFunction
+        'Titles
+        clsElementPlotTitle = New RFunction
+        clsAxesTitles = New RFunction
+        clsXElementTitle = New RFunction
+        clsYElementTitle = New RFunction
+        'Labels 
+        clsAllLabels = New RFunction
+        clsXAxisLables = New RFunction
+        clsYAxisLabels = New RFunction
+        'Tick Markers 
+        clsAllTickMarks = New RFunction
+        clsXAxisTickMarks = New RFunction
+        clsYAxisTickMarks = New RFunction
+        clsUnitAxisTickLength = New RFunction
+        'Lines 
+        clsAllAxisLines = New RFunction
+        clsXAxisLine = New RFunction
+        clsYAxisLine = New RFunction
+        'Panel
+        clsAllPanelGrid = New RFunction
+        clsPanelGridMajor = New RFunction
+        clsPanelGridMinor = New RFunction
+        'Background 
+        clsPanelBackground = New RFunction
+        clsPanelBorder = New RFunction
 
         Dim clsElementLegendText As New RFunction
         Dim clsElementLegendTitle As New RFunction
@@ -93,17 +101,9 @@ Imports instat
         Dim clsElementPanelBackGround As New RFunction
         Dim clsElementPlotBackground As New RFunction
 
-        Dim clsElementPanelGrid As New RFunction
-        Dim clsElementPanelGridMajor As New RFunction
-        Dim clsElementPanelGridMinor As New RFunction
 
-        Dim clsUnitLegendSize As New RFunction
-        Dim clsUnitLegendHeight As New RFunction
-        Dim clsUnitLegendWidth As New RFunction
 
-        If Not bControlsInitialised Then
-            InitialiseControls()
-        End If
+
         clsThemeFunction = clsNewThemeFunction
         ' The position MUST be larger than the position of the theme_* argument
         ' Otherwise the choice of theme will overwrite the options selected here.
