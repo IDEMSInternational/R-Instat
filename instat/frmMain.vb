@@ -71,6 +71,11 @@ Public Class frmMain
         'temporary
         mnuHelpAboutRInstat.Visible = False
 
+        ' This must be fixed because CurrentCulture affects functions such as Decimal.TryParse
+        ' e.g. "1.0" fails Decimal.TryParse if CurrentCulture = "fr-FR" because it expects "1,0"
+        ' Decimal point must be `.` and not `,` because R only accepts `.`
+        Thread.CurrentThread.CurrentCulture = New CultureInfo("en-GB")
+
         InitialiseOutputWindow()
         clsGrids.SetDataViewer(ucrDataViewer)
         clsGrids.SetMetadata(ucrDataFrameMeta.grdMetaData)
@@ -310,6 +315,7 @@ Public Class frmMain
     End Sub
 
     Private Sub RegularSequenceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnGenerateRegularSequence.Click
+        dlgRegularSequence.bNumericIsDefault = True
         dlgRegularSequence.ShowDialog()
     End Sub
 
@@ -590,7 +596,7 @@ Public Class frmMain
         dlgLabelsLevels.ShowDialog()
     End Sub
 
-    Private Sub mnuPrepareFactorViewLabels_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click
+    Private Sub mnuPrepareFactorViewLabels_Click(sender As Object, e As EventArgs) Handles mnuPrepareFactorViewLabels.Click
         dlgViewFactorLabels.ShowDialog()
     End Sub
 
@@ -1877,7 +1883,25 @@ Public Class frmMain
         dlgCalculationsSummary.ShowDialog()
     End Sub
 
-    Private Sub mnuModelHypothesis_Click(sender As Object, e As EventArgs) Handles mnuModelHypothesis.Click
+    Private Sub mnuModelHypothesisTests_Click(sender As Object, e As EventArgs) Handles mnuModelHypothesisTests.Click
         dlgHypothesisTestsCalculator.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareColumnGenerateDate_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnGenerateDate.Click
+        dlgRegularSequence.bNumericIsDefault = False
+        dlgRegularSequence.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDatesGenerateDates_Click(sender As Object, e As EventArgs) Handles mnuClimaticDatesGenerateDates.Click
+        dlgRegularSequence.bNumericIsDefault = False
+        dlgRegularSequence.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticPrepareEvapotranspiration_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareEvapotranspiration.Click
+        dlgEvapotranspiration.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticSPI_Click(sender As Object, e As EventArgs) Handles mnuClimaticSPI.Click
+        dlgSPI.ShowDialog()
     End Sub
 End Class

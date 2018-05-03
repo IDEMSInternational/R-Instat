@@ -184,6 +184,15 @@ Public Class ucrReceiverSingle
                     Else
                         clsGetVariablesFunc.AddParameter("use_current_filter", "FALSE")
                     End If
+                    If bDropUnusedFilterLevels Then
+                        clsGetVariablesFunc.AddParameter("drop_unused_filter_levels", "TRUE")
+                    Else
+                        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                            clsGetVariablesFunc.AddParameter("drop_unused_filter_levels", "FALSE")
+                        Else
+                            clsGetVariablesFunc.RemoveParameterByName("drop_unused_filter_levels")
+                        End If
+                    End If
                 Case "filter"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_filter")
                     clsGetVariablesFunc.AddParameter("filter_name", GetVariableNames())
@@ -288,12 +297,14 @@ Public Class ucrReceiverSingle
     End Sub
 
     Public Sub CheckAutoFill()
-        If bAutoFill Then
-            If Selector IsNot Nothing Then
-                SetMeAsReceiver()
-                If Selector.lstAvailableVariable.Items.Count = 1 Then
-                    Add(Selector.lstAvailableVariable.Items(0).Text, Selector.strCurrentDataFrame)
-                End If
+        'TODO When there are receivers with bAttachedToPrimaryDataFrame = False
+        '     don't always want to autofill when dataframe is changed.
+        '     Something like AndAlso Selector.CurrentReceiver.bAttachedToPrimaryDataFrame
+        '     except always want to autofill when resetting regardless of current receiver
+        If bAutoFill AndAlso Selector IsNot Nothing AndAlso (Selector.CurrentReceiver Is Nothing OrElse Selector.CurrentReceiver.bAttachedToPrimaryDataFrame) Then
+            SetMeAsReceiver()
+            If Selector.lstAvailableVariable.Items.Count = 1 Then
+                Add(Selector.lstAvailableVariable.Items(0).Text, Selector.strCurrentDataFrame)
             End If
         End If
     End Sub
@@ -316,7 +327,7 @@ Public Class ucrReceiverSingle
                 AddHandler ParentForm.Shown, AddressOf ParentForm_Shown
             End If
             bFirstLoad = False
-            If Selector IsNot Nothing AndAlso Not Selector.CurrentReceiver.Equals(Me) Then
+            If Selector IsNot Nothing AndAlso Selector.CurrentReceiver IsNot Nothing AndAlso Not Selector.CurrentReceiver.Equals(Me) Then
                 RemoveColor()
             End If
         End If
