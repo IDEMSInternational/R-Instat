@@ -196,6 +196,9 @@ Public Class dlgMakeDate
         ucrSelectorMakeDate.SetParameter(New RParameter("data_name", 0))
         ucrSelectorMakeDate.SetParameterIsString()
 
+        ucrDtpSpecifyOrigin.SetParameter(New RParameter("origin", 1))
+        ucrDtpSpecifyOrigin.SetParameterIsRDate()
+
         'when rdoSingleColumn is checked
         ucrPnlDate.AddToLinkedControls(ucrPnlFormat, {rdoSingleColumn}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoDefaultFormat)
         ucrPnlDate.AddToLinkedControls(ucrPnlFormat, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -277,6 +280,7 @@ Public Class dlgMakeDate
         ucrReceiverForDate.SetRCode(clsDateFunction, bReset)
         ucrInputFormat.SetRCode(clsDateFunction, bReset)
         ucrInputOrigin.SetRCode(clsDateFunction, bReset)
+        ucrDtpSpecifyOrigin.SetRCode(clsDateFunction, bReset)
 
         ucrInputMonthOption.SetRCode(clsMakeYearMonthDay, bReset)
         ucrInputYearOption.SetRCode(clsMakeYearMonthDay, bReset)
@@ -419,10 +423,6 @@ Public Class dlgMakeDate
         End If
         SetReceivers()
         SetRCodeForControls(False)
-    End Sub
-
-    Private Sub ucrDtpSpecifyOrigin_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDtpSpecifyOrigin.ControlValueChanged
-        clsDateFunction.AddParameter("origin", Chr(34) & ucrDtpSpecifyOrigin.DateValue.Date & Chr(34), iPosition:=1)
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDayTwo.ControlContentsChanged, ucrSaveDate.ControlContentsChanged, ucrReceiverYearTwo.ControlContentsChanged, ucrReceiverForDate.ControlContentsChanged, ucrReceiverYearThree.ControlContentsChanged, ucrReceiverMonthThree.ControlContentsChanged, ucrReceiverDayThree.ControlContentsChanged
