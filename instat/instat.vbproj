@@ -151,6 +151,7 @@
     <Compile Include="clsInstatOptionsDefaults.vb" />
     <Compile Include="clsRCodeStructure.vb" />
     <Compile Include="clsRegressionDefaults.vb" />
+    <Compile Include="clsThemeSubFunctions.vb" />
     <Compile Include="sdgThemesSub.Designer.vb">
       <DependentUpon>sdgThemesSub.vb</DependentUpon>
     </Compile>
@@ -5150,8 +5151,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
-    <None Include="ClassDiagram2.cd" />
     <Content Include="LICENCE">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
