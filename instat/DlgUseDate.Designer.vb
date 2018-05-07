@@ -68,6 +68,8 @@ Partial Class dlgUseDate
         Me.ucrReceiverUseDate = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorUseDate = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrChkShiftQuarter = New instat.ucrCheck()
+        Me.ucrChkQuarter = New instat.ucrCheck()
         Me.grpShifted.SuspendLayout()
         Me.grpOthers.SuspendLayout()
         Me.grpFullName.SuspendLayout()
@@ -82,6 +84,7 @@ Partial Class dlgUseDate
         '
         'grpShifted
         '
+        Me.grpShifted.Controls.Add(Me.ucrChkShiftQuarter)
         Me.grpShifted.Controls.Add(Me.lblMonth)
         Me.grpShifted.Controls.Add(Me.ucrInputComboBoxMonth)
         Me.grpShifted.Controls.Add(Me.lblDay)
@@ -133,6 +136,7 @@ Partial Class dlgUseDate
         '
         'grpOthers
         '
+        Me.grpOthers.Controls.Add(Me.ucrChkQuarter)
         Me.grpOthers.Controls.Add(Me.ucrChkLeapYear)
         Me.grpOthers.Controls.Add(Me.ucrChkDekad)
         Me.grpOthers.Controls.Add(Me.ucrChkPentad)
@@ -269,10 +273,23 @@ Partial Class dlgUseDate
         '
         'ucrSelectorUseDate
         '
+        Me.ucrSelectorUseDate.bDropUnusedFilterLevels = False
         Me.ucrSelectorUseDate.bShowHiddenColumns = False
         Me.ucrSelectorUseDate.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorUseDate, "ucrSelectorUseDate")
         Me.ucrSelectorUseDate.Name = "ucrSelectorUseDate"
+        '
+        'ucrChkShiftQuarter
+        '
+        Me.ucrChkShiftQuarter.Checked = False
+        resources.ApplyResources(Me.ucrChkShiftQuarter, "ucrChkShiftQuarter")
+        Me.ucrChkShiftQuarter.Name = "ucrChkShiftQuarter"
+        '
+        'ucrChkQuarter
+        '
+        Me.ucrChkQuarter.Checked = False
+        resources.ApplyResources(Me.ucrChkQuarter, "ucrChkQuarter")
+        Me.ucrChkQuarter.Name = "ucrChkQuarter"
         '
         'dlgUseDate
         '
@@ -331,4 +348,6 @@ Partial Class dlgUseDate
     Friend WithEvents grpShifted As GroupBox
     Friend WithEvents lblMonth As Label
     Friend WithEvents ucrInputComboBoxMonth As ucrInputComboBox
+    Friend WithEvents ucrChkShiftQuarter As ucrCheck
+    Friend WithEvents ucrChkQuarter As ucrCheck
 End Class

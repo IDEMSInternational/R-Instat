@@ -54,38 +54,43 @@ Public Class dlgUseDate
         ucrReceiverUseDate.SetParameterIsString()
 
         'Check boxes
-        ucrChkYear.SetParameter(New RParameter("year", 2))
+        ucrChkYear.SetParameter(New RParameter("year", 9))
         ucrChkYear.SetText("Year")
         ucrChkYear.SetRDefault("FALSE")
 
-        ucrChkWeekday.SetParameter(New RParameter("weekday_val", 3))
+        ucrChkWeekday.SetParameter(New RParameter("weekday_val", 6))
         ucrChkWeekday.SetText("Weekday")
         ucrChkWeekday.SetRDefault("FALSE")
 
-        ucrChkWeek.SetParameter(New RParameter("week", 4))
+        ucrChkWeek.SetParameter(New RParameter("week", 2))
         ucrChkWeek.SetText("Week")
         ucrChkWeek.SetRDefault("FALSE")
 
-        ucrChkMonth.SetParameter(New RParameter("month_val", 5))
+        ucrChkMonth.SetParameter(New RParameter("month_val", 3))
         ucrChkMonth.SetText("Month")
         ucrChkMonth.SetRDefault("FALSE")
 
-        ucrChkDayYear366.SetParameter(New RParameter("day_in_year_366", 6))
+        ucrChkDayYear366.SetParameter(New RParameter("day_in_year_366", 14))
         ucrChkDayYear366.SetText("Day in Year (366)")
         ucrChkDayYear366.SetRDefault("FALSE")
 
-        ucrChkShiftYear.SetParameter(New RParameter("s_year", 7))
+        ucrChkShiftYear.SetParameter(New RParameter("s_year", 19))
         ucrChkShiftYear.SetText("Shift Year")
         ucrChkShiftYear.SetRDefault("FALSE")
 
-        ucrChkShiftDay.SetParameter(New RParameter("s_doy", 8))
+        ucrChkShiftDay.SetParameter(New RParameter("s_doy", 18))
         ucrChkShiftDay.SetText("Shift Day")
         ucrChkShiftDay.SetRDefault("FALSE")
 
-        ucrNudShiftStartDay.SetParameter(New RParameter("s_start_day", 9))
+        'TODO change parameter number accordingly
+        ' ucrChkShiftQuarter.SetParameter(New RParameter("s_quarter", 7))
+        ucrChkShiftQuarter.SetText("Shift Quarter")
+        ucrChkShiftQuarter.SetRDefault("FALSE")
+
+        ucrNudShiftStartDay.SetParameter(New RParameter("s_start_day_in_month", 20))
         ucrNudShiftStartDay.SetRDefault(1)
 
-        ucrInputComboBoxMonth.SetParameter(New RParameter("s_start_month", 10))
+        ucrInputComboBoxMonth.SetParameter(New RParameter("s_start_month", 21))
         Dim dctMonth As New Dictionary(Of String, String)
         dctMonth.Add("January", 1)
         dctMonth.Add("February", 2)
@@ -106,19 +111,19 @@ Public Class dlgUseDate
         'TODO This should probably be the default for this control, hence this is temporary
         ucrInputComboBoxMonth.bUpdateRCodeFromControl = False
 
-        ucrChkDayInYear.SetParameter(New RParameter("day_in_year", 11))
+        ucrChkDayInYear.SetParameter(New RParameter("day_in_year", 12))
         ucrChkDayInYear.SetText("Day in Year")
         ucrChkDayInYear.SetRDefault("FALSE")
 
-        ucrChkDay.SetParameter(New RParameter("day_in_month", 12))
+        ucrChkDay.SetParameter(New RParameter("day_in_month", 11))
         ucrChkDay.SetText("Day")
         ucrChkDay.SetRDefault("FALSE")
 
-        ucrChkFullWeekday.SetParameter(New RParameter("weekday_name", 13))
+        ucrChkFullWeekday.SetParameter(New RParameter("weekday_name", 8))
         ucrChkFullWeekday.SetText("Weekday")
         ucrChkFullWeekday.SetRDefault("FALSE")
 
-        ucrChkFullMonth.SetParameter(New RParameter("month_name", 14))
+        ucrChkFullMonth.SetParameter(New RParameter("month_name", 5))
         ucrChkFullMonth.SetText("Month")
         ucrChkFullMonth.SetRDefault("FALSE")
 
@@ -130,15 +135,19 @@ Public Class dlgUseDate
         ucrChkPentad.SetText("Pentad")
         ucrChkPentad.SetRDefault("FALSE")
 
-        ucrChkLeapYear.SetParameter(New RParameter("leap_year", 17))
+        ucrChkQuarter.SetParameter(New RParameter("quarter", 17))
+        ucrChkQuarter.SetText("Quarter")
+        ucrChkQuarter.SetRDefault("FALSE")
+
+        ucrChkLeapYear.SetParameter(New RParameter("leap_year", 13))
         ucrChkLeapYear.SetText("Leap Year")
         ucrChkLeapYear.SetRDefault("FALSE")
 
-        ucrChkAbbrWeekday.SetParameter(New RParameter("weekday_abbr", 18))
+        ucrChkAbbrWeekday.SetParameter(New RParameter("weekday_abbr", 7))
         ucrChkAbbrWeekday.SetText("Weekday")
         ucrChkAbbrWeekday.SetRDefault("FALSE")
 
-        ucrChkAbbrMonth.SetParameter(New RParameter("month_abbr", 19))
+        ucrChkAbbrMonth.SetParameter(New RParameter("month_abbr", 4))
         ucrChkAbbrMonth.SetText("Month")
         ucrChkAbbrMonth.SetRDefault("FALSE")
     End Sub
@@ -158,7 +167,7 @@ Public Class dlgUseDate
     End Sub
 
     Private Sub TestOKEnabled()
-        If (Not (ucrReceiverUseDate.IsEmpty) AndAlso (ucrChkYear.Checked OrElse ucrChkWeekday.Checked OrElse ucrChkWeek.Checked OrElse ucrChkPentad.Checked OrElse ucrChkMonth.Checked OrElse ucrChkLeapYear.Checked OrElse ucrChkFullWeekday.Checked OrElse ucrChkFullMonth.Checked OrElse ucrChkDekad.Checked OrElse ucrChkDayYear366.Checked OrElse ucrChkDayInYear.Checked OrElse ucrChkDay.Checked OrElse ucrChkAbbrWeekday.Checked OrElse ucrChkAbbrMonth.Checked OrElse ucrChkShiftYear.Checked OrElse ucrChkShiftDay.Checked AndAlso Not ucrInputComboBoxMonth.IsEmpty AndAlso ucrNudShiftStartDay.GetText <> "")) Then
+        If (Not (ucrReceiverUseDate.IsEmpty) AndAlso (ucrChkYear.Checked OrElse ucrChkWeekday.Checked OrElse ucrChkWeek.Checked OrElse ucrChkPentad.Checked OrElse ucrChkQuarter.Checked OrElse ucrChkMonth.Checked OrElse ucrChkLeapYear.Checked OrElse ucrChkFullWeekday.Checked OrElse ucrChkFullMonth.Checked OrElse ucrChkDekad.Checked OrElse ucrChkDayYear366.Checked OrElse ucrChkDayInYear.Checked OrElse ucrChkDay.Checked OrElse ucrChkAbbrWeekday.Checked OrElse ucrChkAbbrMonth.Checked OrElse ucrChkShiftYear.Checked OrElse ucrChkShiftDay.Checked AndAlso Not ucrInputComboBoxMonth.IsEmpty AndAlso ucrNudShiftStartDay.GetText <> "")) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -203,7 +212,7 @@ Public Class dlgUseDate
         End If
     End Sub
 
-    Private Sub ucrReceiverUseDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverUseDate.ControlContentsChanged, ucrChkYear.ControlContentsChanged, ucrChkWeekday.ControlContentsChanged, ucrChkWeek.ControlContentsChanged, ucrChkPentad.ControlContentsChanged, ucrChkMonth.ControlContentsChanged, ucrChkLeapYear.ControlContentsChanged, ucrChkFullWeekday.ControlContentsChanged, ucrChkFullMonth.ControlContentsChanged, ucrChkDekad.ControlContentsChanged, ucrChkDayYear366.ControlContentsChanged, ucrChkDayInYear.ControlContentsChanged, ucrChkDay.ControlContentsChanged, ucrChkAbbrWeekday.ControlContentsChanged, ucrChkAbbrMonth.ControlContentsChanged, ucrChkShiftDay.ControlContentsChanged, ucrChkShiftYear.ControlContentsChanged, ucrChkShiftDay.ControlContentsChanged, ucrInputComboBoxMonth.ControlContentsChanged, ucrNudShiftStartDay.ControlContentsChanged
+    Private Sub ucrReceiverUseDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverUseDate.ControlContentsChanged, ucrChkYear.ControlContentsChanged, ucrChkWeekday.ControlContentsChanged, ucrChkWeek.ControlContentsChanged, ucrChkPentad.ControlContentsChanged, ucrChkQuarter.ControlContentsChanged, ucrChkMonth.ControlContentsChanged, ucrChkLeapYear.ControlContentsChanged, ucrChkFullWeekday.ControlContentsChanged, ucrChkFullMonth.ControlContentsChanged, ucrChkDekad.ControlContentsChanged, ucrChkDayYear366.ControlContentsChanged, ucrChkDayInYear.ControlContentsChanged, ucrChkDay.ControlContentsChanged, ucrChkAbbrWeekday.ControlContentsChanged, ucrChkAbbrMonth.ControlContentsChanged, ucrChkShiftDay.ControlContentsChanged, ucrChkShiftYear.ControlContentsChanged, ucrChkShiftDay.ControlContentsChanged, ucrInputComboBoxMonth.ControlContentsChanged, ucrNudShiftStartDay.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class

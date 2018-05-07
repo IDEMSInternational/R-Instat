@@ -123,10 +123,14 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblDateVariable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>254, 44</value>
+    <value>381, 68</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblDateVariable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="lblDateVariable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 13</value>
+    <value>106, 20</value>
   </data>
   <data name="lblDateVariable.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -146,14 +150,41 @@
   <data name="&gt;&gt;lblDateVariable.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="ucrChkShiftQuarter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 106</value>
+  </data>
+  <data name="ucrChkShiftQuarter.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
+  </data>
+  <data name="ucrChkShiftQuarter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 31</value>
+  </data>
+  <data name="ucrChkShiftQuarter.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftQuarter.Name" xml:space="preserve">
+    <value>ucrChkShiftQuarter</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftQuarter.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftQuarter.Parent" xml:space="preserve">
+    <value>grpShifted</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftQuarter.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="lblMonth.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lblMonth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 73</value>
+    <value>15, 150</value>
+  </data>
+  <data name="lblMonth.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="lblMonth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 13</value>
+    <value>58, 20</value>
   </data>
   <data name="lblMonth.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -171,13 +202,16 @@
     <value>grpShifted</value>
   </data>
   <data name="&gt;&gt;lblMonth.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrInputComboBoxMonth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>56, 70</value>
+    <value>84, 146</value>
+  </data>
+  <data name="ucrInputComboBoxMonth.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>14, 18, 14, 18</value>
   </data>
   <data name="ucrInputComboBoxMonth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 21</value>
+    <value>122, 32</value>
   </data>
   <data name="ucrInputComboBoxMonth.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -192,16 +226,19 @@
     <value>grpShifted</value>
   </data>
   <data name="&gt;&gt;ucrInputComboBoxMonth.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="lblDay.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lblDay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 98</value>
+    <value>26, 189</value>
+  </data>
+  <data name="lblDay.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="lblDay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 13</value>
+    <value>41, 20</value>
   </data>
   <data name="lblDay.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -219,13 +256,16 @@
     <value>grpShifted</value>
   </data>
   <data name="&gt;&gt;lblDay.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="ucrChkShiftYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 46</value>
+    <value>20, 68</value>
+  </data>
+  <data name="ucrChkShiftYear.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
   </data>
   <data name="ucrChkShiftYear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>150, 31</value>
   </data>
   <data name="ucrChkShiftYear.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -240,13 +280,16 @@
     <value>grpShifted</value>
   </data>
   <data name="&gt;&gt;ucrChkShiftYear.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="ucrNudShiftStartDay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>57, 95</value>
+    <value>85, 184</value>
+  </data>
+  <data name="ucrNudShiftStartDay.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
   </data>
   <data name="ucrNudShiftStartDay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+    <value>75, 31</value>
   </data>
   <data name="ucrNudShiftStartDay.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -261,13 +304,16 @@
     <value>grpShifted</value>
   </data>
   <data name="&gt;&gt;ucrNudShiftStartDay.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="ucrChkShiftDay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 19</value>
+    <value>20, 29</value>
+  </data>
+  <data name="ucrChkShiftDay.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
   </data>
   <data name="ucrChkShiftDay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 20</value>
+    <value>141, 31</value>
   </data>
   <data name="ucrChkShiftDay.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -282,13 +328,19 @@
     <value>grpShifted</value>
   </data>
   <data name="&gt;&gt;ucrChkShiftDay.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="grpShifted.Location" type="System.Drawing.Point, System.Drawing">
-    <value>236, 201</value>
+    <value>351, 301</value>
+  </data>
+  <data name="grpShifted.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="grpShifted.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="grpShifted.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 125</value>
+    <value>214, 220</value>
   </data>
   <data name="grpShifted.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -308,11 +360,38 @@
   <data name="&gt;&gt;grpShifted.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ucrChkQuarter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>498, 29</value>
+  </data>
+  <data name="ucrChkQuarter.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
+  </data>
+  <data name="ucrChkQuarter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 31</value>
+  </data>
+  <data name="ucrChkQuarter.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrChkQuarter.Name" xml:space="preserve">
+    <value>ucrChkQuarter</value>
+  </data>
+  <data name="&gt;&gt;ucrChkQuarter.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkQuarter.Parent" xml:space="preserve">
+    <value>grpOthers</value>
+  </data>
+  <data name="&gt;&gt;ucrChkQuarter.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrChkLeapYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 19</value>
+    <value>9, 29</value>
+  </data>
+  <data name="ucrChkLeapYear.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
   </data>
   <data name="ucrChkLeapYear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>150, 31</value>
   </data>
   <data name="ucrChkLeapYear.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -327,13 +406,16 @@
     <value>grpOthers</value>
   </data>
   <data name="&gt;&gt;ucrChkLeapYear.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrChkDekad.Location" type="System.Drawing.Point, System.Drawing">
-    <value>221, 19</value>
+    <value>334, 29</value>
+  </data>
+  <data name="ucrChkDekad.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
   </data>
   <data name="ucrChkDekad.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>150, 31</value>
   </data>
   <data name="ucrChkDekad.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -348,13 +430,16 @@
     <value>grpOthers</value>
   </data>
   <data name="&gt;&gt;ucrChkDekad.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="ucrChkPentad.Location" type="System.Drawing.Point, System.Drawing">
-    <value>112, 19</value>
+    <value>170, 29</value>
+  </data>
+  <data name="ucrChkPentad.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
   </data>
   <data name="ucrChkPentad.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>150, 31</value>
   </data>
   <data name="ucrChkPentad.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -369,13 +454,19 @@
     <value>grpOthers</value>
   </data>
   <data name="&gt;&gt;ucrChkPentad.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="grpOthers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 330</value>
+    <value>15, 523</value>
+  </data>
+  <data name="grpOthers.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="grpOthers.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="grpOthers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>369, 48</value>
+    <value>668, 74</value>
   </data>
   <data name="grpOthers.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -396,10 +487,13 @@
     <value>0</value>
   </data>
   <data name="ucrChkFullWeekday.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 17</value>
+    <value>9, 26</value>
+  </data>
+  <data name="ucrChkFullWeekday.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
   </data>
   <data name="ucrChkFullWeekday.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 20</value>
+    <value>135, 31</value>
   </data>
   <data name="ucrChkFullWeekday.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -417,10 +511,13 @@
     <value>0</value>
   </data>
   <data name="ucrChkFullMonth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 43</value>
+    <value>9, 66</value>
+  </data>
+  <data name="ucrChkFullMonth.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
   </data>
   <data name="ucrChkFullMonth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 20</value>
+    <value>135, 31</value>
   </data>
   <data name="ucrChkFullMonth.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -438,10 +535,16 @@
     <value>1</value>
   </data>
   <data name="grpFullName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>385, 201</value>
+    <value>572, 303</value>
+  </data>
+  <data name="grpFullName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="grpFullName.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="grpFullName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 89</value>
+    <value>159, 107</value>
   </data>
   <data name="grpFullName.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -462,10 +565,13 @@
     <value>3</value>
   </data>
   <data name="ucrChkAbbrMonth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 43</value>
+    <value>8, 66</value>
+  </data>
+  <data name="ucrChkAbbrMonth.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
   </data>
   <data name="ucrChkAbbrMonth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 20</value>
+    <value>141, 31</value>
   </data>
   <data name="ucrChkAbbrMonth.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -483,10 +589,13 @@
     <value>0</value>
   </data>
   <data name="ucrChkAbbrWeekday.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 17</value>
+    <value>8, 26</value>
+  </data>
+  <data name="ucrChkAbbrWeekday.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
   </data>
   <data name="ucrChkAbbrWeekday.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 20</value>
+    <value>141, 31</value>
   </data>
   <data name="ucrChkAbbrWeekday.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -504,10 +613,16 @@
     <value>1</value>
   </data>
   <data name="grpAbbreviation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>386, 290</value>
+    <value>573, 413</value>
+  </data>
+  <data name="grpAbbreviation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="grpAbbreviation.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="grpAbbreviation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 88</value>
+    <value>158, 108</value>
   </data>
   <data name="grpAbbreviation.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -528,10 +643,13 @@
     <value>5</value>
   </data>
   <data name="ucrChkDayYear366.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 69</value>
+    <value>162, 106</value>
+  </data>
+  <data name="ucrChkDayYear366.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
   </data>
   <data name="ucrChkDayYear366.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 20</value>
+    <value>164, 31</value>
   </data>
   <data name="ucrChkDayYear366.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -549,10 +667,13 @@
     <value>0</value>
   </data>
   <data name="ucrChkYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 17</value>
+    <value>9, 26</value>
+  </data>
+  <data name="ucrChkYear.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
   </data>
   <data name="ucrChkYear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>150, 31</value>
   </data>
   <data name="ucrChkYear.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -570,10 +691,13 @@
     <value>1</value>
   </data>
   <data name="ucrChkDayInYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 43</value>
+    <value>162, 66</value>
+  </data>
+  <data name="ucrChkDayInYear.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
   </data>
   <data name="ucrChkDayInYear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 20</value>
+    <value>141, 31</value>
   </data>
   <data name="ucrChkDayInYear.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -591,10 +715,13 @@
     <value>2</value>
   </data>
   <data name="ucrChkMonth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 43</value>
+    <value>9, 66</value>
+  </data>
+  <data name="ucrChkMonth.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
   </data>
   <data name="ucrChkMonth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>150, 31</value>
   </data>
   <data name="ucrChkMonth.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -612,10 +739,13 @@
     <value>3</value>
   </data>
   <data name="ucrChkDay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 69</value>
+    <value>9, 106</value>
+  </data>
+  <data name="ucrChkDay.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
   </data>
   <data name="ucrChkDay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>150, 31</value>
   </data>
   <data name="ucrChkDay.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -633,10 +763,13 @@
     <value>4</value>
   </data>
   <data name="ucrChkWeekday.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 17</value>
+    <value>162, 26</value>
+  </data>
+  <data name="ucrChkWeekday.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
   </data>
   <data name="ucrChkWeekday.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 20</value>
+    <value>141, 31</value>
   </data>
   <data name="ucrChkWeekday.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -654,10 +787,13 @@
     <value>5</value>
   </data>
   <data name="ucrChkWeek.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 95</value>
+    <value>9, 146</value>
+  </data>
+  <data name="ucrChkWeek.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
   </data>
   <data name="ucrChkWeek.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>150, 31</value>
   </data>
   <data name="ucrChkWeek.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -675,10 +811,16 @@
     <value>6</value>
   </data>
   <data name="grpValues.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 199</value>
+    <value>15, 300</value>
+  </data>
+  <data name="grpValues.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="grpValues.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="grpValues.Size" type="System.Drawing.Size, System.Drawing">
-    <value>220, 125</value>
+    <value>330, 220</value>
   </data>
   <data name="grpValues.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -702,16 +844,19 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>9, 20</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>502, 444</value>
+    <value>737, 693</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 384</value>
+    <value>15, 606</value>
+  </data>
+  <data name="ucrBase.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 8, 6, 8</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>407, 52</value>
+    <value>610, 80</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -729,14 +874,13 @@
     <value>6</value>
   </data>
   <data name="ucrSelectorUseDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 10</value>
+    <value>15, 15</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrSelectorUseDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrSelectorUseDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 180</value>
+    <value>315, 277</value>
   </data>
   <data name="ucrSelectorUseDate.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -753,6 +897,9 @@
   <data name="&gt;&gt;ucrSelectorUseDate.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -766,13 +913,13 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverUseDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>254, 59</value>
+    <value>381, 91</value>
   </data>
   <data name="ucrReceiverUseDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverUseDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>151, 20</value>
+    <value>226, 31</value>
   </data>
   <data name="ucrReceiverUseDate.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
