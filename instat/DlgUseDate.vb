@@ -82,6 +82,10 @@ Public Class dlgUseDate
         ucrChkShiftDay.SetText("Shift Day")
         ucrChkShiftDay.SetRDefault("FALSE")
 
+        ucrChkShiftQuarter.SetParameter(New RParameter("quarter", 7))
+        ucrChkShiftQuarter.SetText("Shift Quarter")
+        ucrChkShiftQuarter.SetRDefault("FALSE")
+
         ucrNudShiftStartDay.SetParameter(New RParameter("s_start_day", 9))
         ucrNudShiftStartDay.SetRDefault(1)
 
