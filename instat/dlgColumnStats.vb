@@ -119,11 +119,13 @@ Public Class dlgColumnStats
             ucrSelectorForColumnStatistics.SetDataframe(strDefaultDataFrame)
         End If
         If strDefaultVariables IsNot Nothing AndAlso strDefaultVariables.Count > 0 Then
+            ucrReceiverSelectedVariables.Clear()
             For Each strVar As String In strDefaultVariables
                 ucrReceiverSelectedVariables.Add(strVar, strDefaultDataFrame)
             Next
         End If
         If strDefaultFactors IsNot Nothing AndAlso strDefaultFactors.Count > 0 Then
+            ucrReceiverByFactor.Clear()
             For Each strVar As String In strDefaultFactors
                 ucrReceiverByFactor.Add(strVar, strDefaultDataFrame)
             Next

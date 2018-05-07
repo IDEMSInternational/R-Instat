@@ -73,6 +73,7 @@ Public Class dlgTwoWayFrequencies
         'setting selector
         ucrSelectorTwoWayFrequencies.SetParameter(New RParameter("data", 0))
         ucrSelectorTwoWayFrequencies.SetParameterIsrfunction()
+        ucrSelectorTwoWayFrequencies.bDropUnusedFilterLevels = True
 
         'ucrReceiverWeights
         ucrReceiverWeights.SetParameter(New RParameter("weight.by", 3))
