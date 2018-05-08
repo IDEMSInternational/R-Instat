@@ -341,6 +341,7 @@ Public Class sdgPlots
             End If
             If clsFacetFunction.strRCommand = "facet_grid" Then
                 clsFacetFunction.AddParameter(ucrChkFreeSpace.GetParameter())
+                ucrPnlHorizonatalVertical.Visible = False
                 If ucrChkMargin.Checked Then
                     clsFacetFunction.AddParameter(ucrChkMargin.GetParameter())
                 Else
@@ -557,10 +558,12 @@ Public Class sdgPlots
                 ucrChkNoOfRowsOrColumns.Visible = False
                 ucrNudNumberofRows.Visible = False
             Else
+                ucrPnlHorizonatalVertical.Visible = True
                 ucrChkNoOfRowsOrColumns.Visible = True
                 ucrNudNumberofRows.Visible = ucrChkNoOfRowsOrColumns.Checked
             End If
         Else
+            ucrPnlHorizonatalVertical.Visible = False
             ucrChkNoOfRowsOrColumns.Visible = False
             ucrNudNumberofRows.Visible = False
         End If
