@@ -247,7 +247,10 @@ nc_get_dim_min_max <- function(nc, dimension, time_as_date = TRUE) {
   return(bounds)
 }
 
-nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = TRUE, boundary = NULL) {
+nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = TRUE, boundary = NULL, lon_points = NULL, lat_points = NULL) {
+  if(sum(is.null(lon_points), is.null(lat_points)) == 1) stop("You must specificy both lon_points and lat_points")
+  has_points <- (sum(is.null(lon_points), is.null(lat_points)) == 2)
+  if(has_points && length(lon_points) != length(lat_points)) stop("lon_points and lat_points have unequal lengths.")
   dim_names <- ncdf4.helpers::nc.get.dim.names(nc, vars[1])
   dim_values <- list()
   for(dim_name in dim_names) {
@@ -271,7 +274,7 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
         if(dim %in% dim_axes) {
           dim_var <- names(dim_axes)[which(dim_axes == dim)]
           curr_dim_values <- dim_values[[dim_var]]
-          if(dim_var %in% names(boundary)) {
+          if(dim_var %in% names(boundary) && !(has_points && dim %in% c("X", "Y"))) {
             if(dim == "T") {
               ind <- integer(0)
               try({
@@ -282,10 +285,9 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
               })
             }
             else ind <- which(curr_dim_values >= boundary[[dim_var]][1] & curr_dim_values <= boundary[[dim_var]][2])
+            
             if(length(ind) == 0) {
-              warning("No values within the range specified for", dim_var, "All values will be included.")
-              start <- c(start, 1)
-              count <- c(count, length(curr_dim_values))
+              stop("No values within the range specified for", dim_var, ".")
             }
             else {
               start <- c(start, min(ind))
@@ -309,6 +311,48 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
     start <- NA
     count <- NA
   }
+  start_list <- list()
+  count_list <- list()
+  dim_values_list <- list()
+  if(has_points) {
+    curr_start <- start
+    curr_count <- count
+    curr_dim_values <-dim_values
+    
+    dim_axes <- ncdf4.helpers::nc.get.dim.axes(nc, vars[1])
+    x_var <- names(dim_axes)[which(dim_axes == "X")]
+    y_var <- names(dim_axes)[which(dim_axes == "Y")]
+    xs <- dim_values[[x_var]]
+    ys <- dim_values[[y_var]]
+    if(length(xs) >= 2) x_dist <- abs(xs[2] - xs[1])
+    else x_dist <- 0
+    if(length(xs) >= 2) y_dist <- abs(ys[1] - ys[2])
+    else y_dist <- 0
+    for(i in seq_along(lon_points)) {
+      x_possible <- xs[which(xs >= (lon_points[i] - x_dist) & xs <= (lon_points[i] + x_dist))]
+      y_possible <- ys[which(ys >= (lat_points[i] - y_dist) & ys <= (lat_points[i] + y_dist))]
+      xy_possible <- expand.grid(x_possible, y_possible)
+      point_ind <- which.min(sp::spDistsN1(pts = as.matrix(xy_possible), pt = c(lon_points[i], lat_points[i]), longlat = TRUE))
+      x_ind <- which(xs == xy_possible[point_ind, 1])[1]
+      curr_start[1] <- x_ind
+      curr_count[1]  <- 1
+      curr_dim_values[[x_var]] <- curr_dim_values[[x_var]][x_ind]
+      y_ind <- which(ys == xy_possible[point_ind, 2])
+      curr_start[2] <- y_ind
+      curr_count[2]  <- 1
+      curr_dim_values[[y_var]] <- curr_dim_values[[y_var]][y_ind]
+      
+      start_list[[i]] <- curr_start
+      count_list[[i]] <- curr_count
+      dim_values_list[[i]] <- curr_dim_values
+    }
+  }
+  else {
+    start_list[[1]] <- start
+    count_list[[1]] <- count
+    dim_values_list[[1]] <- dim_values
+  }
+  # TODO Do this for each item in start_list then merge together
   var_data <- expand.grid(dim_values, KEEP.OUT.ATTRS = FALSE)
   for(i in seq_along(var_data)) {
     attr(var_data[[i]], "dim") <- NULL
