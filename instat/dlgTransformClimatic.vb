@@ -74,6 +74,7 @@ Public Class dlgTransformClimatic
         ucrReceiverData.SetParameter(New RParameter("data", 0, bNewIncludeArgumentName:=False))
         ucrReceiverData.SetParameterIsString()
         ucrReceiverData.bWithQuotes = False
+        ucrReceiverData.bAutoFill = True
         ucrReceiverData.Selector = ucrSelectorTransform
         ucrReceiverData.strSelectorHeading = "Numerics"
         ucrReceiverData.SetIncludedDataTypes({"numeric"})

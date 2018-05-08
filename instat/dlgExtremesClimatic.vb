@@ -95,8 +95,9 @@ Public Class dlgExtremesClimatic
         ucrReceiverElement.Selector = ucrSelectorClimaticExtremes
         ucrReceiverElement.SetParameterIsString()
         ucrReceiverElement.bWithQuotes = False
+        ucrReceiverElement.bAutoFill = True
         ucrReceiverElement.strSelectorHeading = "Numerics"
-        ucrReceiverElement.SetDataType("numeric")
+        ucrReceiverElement.SetIncludedDataTypes({"numeric"})
 
         ' Panel Options
         ucrPnlExtremesType.AddRadioButton(rdoMinMax)
