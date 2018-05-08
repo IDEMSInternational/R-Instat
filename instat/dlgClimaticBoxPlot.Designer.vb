@@ -28,6 +28,21 @@ Partial Class dlgClimaticBoxPlot
         Me.rdoViolin = New System.Windows.Forms.RadioButton()
         Me.rdoJitter = New System.Windows.Forms.RadioButton()
         Me.rdoBoxplot = New System.Windows.Forms.RadioButton()
+        Me.lblWithinYear = New System.Windows.Forms.Label()
+        Me.lblElement = New System.Windows.Forms.Label()
+        Me.lblYear = New System.Windows.Forms.Label()
+        Me.lblDate = New System.Windows.Forms.Label()
+        Me.lblStation = New System.Windows.Forms.Label()
+        Me.ucrChkOmitBelow = New instat.ucrCheck()
+        Me.ucrNudOmitBelow = New instat.ucrNud()
+        Me.ucrInputWithinYear = New instat.ucrInputComboBox()
+        Me.ucrInputYear = New instat.ucrInputComboBox()
+        Me.ucrInputStation = New instat.ucrInputComboBox()
+        Me.ucrReceiverWithinYear = New instat.ucrReceiverSingle()
+        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
+        Me.ucrReceiverYear = New instat.ucrReceiverSingle()
+        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
+        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrChkVerticalXTickMarkers = New instat.ucrCheck()
         Me.ucrPnlPlots = New instat.UcrPanel()
         Me.ucrBase = New instat.ucrButtons()
@@ -35,21 +50,6 @@ Partial Class dlgClimaticBoxPlot
         Me.ucrChkHorizontalBoxplot = New instat.ucrCheck()
         Me.ucrChkVarWidth = New instat.ucrCheck()
         Me.ucrSelectorClimaticBoxPlot = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverWithinYear = New instat.ucrReceiverSingle()
-        Me.lblWithinYear = New System.Windows.Forms.Label()
-        Me.lblElement = New System.Windows.Forms.Label()
-        Me.lblYear = New System.Windows.Forms.Label()
-        Me.lblDate = New System.Windows.Forms.Label()
-        Me.lblStation = New System.Windows.Forms.Label()
-        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
-        Me.ucrReceiverYear = New instat.ucrReceiverSingle()
-        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
-        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
-        Me.ucrInputStation = New instat.ucrInputComboBox()
-        Me.ucrInputYear = New instat.ucrInputComboBox()
-        Me.ucrInputWithinYear = New instat.ucrInputComboBox()
-        Me.ucrNudOmitBelow = New instat.ucrNud()
-        Me.ucrChkOmitBelow = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'cmdBoxPlotOptions
@@ -96,6 +96,113 @@ Partial Class dlgClimaticBoxPlot
         Me.rdoBoxplot.TabStop = True
         Me.rdoBoxplot.UseVisualStyleBackColor = True
         '
+        'lblWithinYear
+        '
+        resources.ApplyResources(Me.lblWithinYear, "lblWithinYear")
+        Me.lblWithinYear.Name = "lblWithinYear"
+        '
+        'lblElement
+        '
+        resources.ApplyResources(Me.lblElement, "lblElement")
+        Me.lblElement.Name = "lblElement"
+        '
+        'lblYear
+        '
+        resources.ApplyResources(Me.lblYear, "lblYear")
+        Me.lblYear.Name = "lblYear"
+        '
+        'lblDate
+        '
+        resources.ApplyResources(Me.lblDate, "lblDate")
+        Me.lblDate.Name = "lblDate"
+        '
+        'lblStation
+        '
+        resources.ApplyResources(Me.lblStation, "lblStation")
+        Me.lblStation.Name = "lblStation"
+        '
+        'ucrChkOmitBelow
+        '
+        Me.ucrChkOmitBelow.Checked = False
+        resources.ApplyResources(Me.ucrChkOmitBelow, "ucrChkOmitBelow")
+        Me.ucrChkOmitBelow.Name = "ucrChkOmitBelow"
+        '
+        'ucrNudOmitBelow
+        '
+        Me.ucrNudOmitBelow.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudOmitBelow.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudOmitBelow, "ucrNudOmitBelow")
+        Me.ucrNudOmitBelow.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudOmitBelow.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudOmitBelow.Name = "ucrNudOmitBelow"
+        Me.ucrNudOmitBelow.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputWithinYear
+        '
+        Me.ucrInputWithinYear.AddQuotesIfUnrecognised = True
+        Me.ucrInputWithinYear.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputWithinYear, "ucrInputWithinYear")
+        Me.ucrInputWithinYear.Name = "ucrInputWithinYear"
+        '
+        'ucrInputYear
+        '
+        Me.ucrInputYear.AddQuotesIfUnrecognised = True
+        Me.ucrInputYear.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputYear, "ucrInputYear")
+        Me.ucrInputYear.Name = "ucrInputYear"
+        '
+        'ucrInputStation
+        '
+        Me.ucrInputStation.AddQuotesIfUnrecognised = True
+        Me.ucrInputStation.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputStation, "ucrInputStation")
+        Me.ucrInputStation.Name = "ucrInputStation"
+        '
+        'ucrReceiverWithinYear
+        '
+        Me.ucrReceiverWithinYear.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverWithinYear, "ucrReceiverWithinYear")
+        Me.ucrReceiverWithinYear.Name = "ucrReceiverWithinYear"
+        Me.ucrReceiverWithinYear.Selector = Nothing
+        Me.ucrReceiverWithinYear.strNcFilePath = ""
+        Me.ucrReceiverWithinYear.ucrSelector = Nothing
+        '
+        'ucrReceiverElement
+        '
+        Me.ucrReceiverElement.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverElement, "ucrReceiverElement")
+        Me.ucrReceiverElement.Name = "ucrReceiverElement"
+        Me.ucrReceiverElement.Selector = Nothing
+        Me.ucrReceiverElement.strNcFilePath = ""
+        Me.ucrReceiverElement.ucrSelector = Nothing
+        '
+        'ucrReceiverYear
+        '
+        Me.ucrReceiverYear.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverYear, "ucrReceiverYear")
+        Me.ucrReceiverYear.Name = "ucrReceiverYear"
+        Me.ucrReceiverYear.Selector = Nothing
+        Me.ucrReceiverYear.strNcFilePath = ""
+        Me.ucrReceiverYear.ucrSelector = Nothing
+        '
+        'ucrReceiverDate
+        '
+        Me.ucrReceiverDate.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverDate, "ucrReceiverDate")
+        Me.ucrReceiverDate.Name = "ucrReceiverDate"
+        Me.ucrReceiverDate.Selector = Nothing
+        Me.ucrReceiverDate.strNcFilePath = ""
+        Me.ucrReceiverDate.ucrSelector = Nothing
+        '
+        'ucrReceiverStation
+        '
+        Me.ucrReceiverStation.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverStation, "ucrReceiverStation")
+        Me.ucrReceiverStation.Name = "ucrReceiverStation"
+        Me.ucrReceiverStation.Selector = Nothing
+        Me.ucrReceiverStation.strNcFilePath = ""
+        Me.ucrReceiverStation.ucrSelector = Nothing
+        '
         'ucrChkVerticalXTickMarkers
         '
         Me.ucrChkVerticalXTickMarkers.Checked = False
@@ -135,113 +242,6 @@ Partial Class dlgClimaticBoxPlot
         Me.ucrSelectorClimaticBoxPlot.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorClimaticBoxPlot, "ucrSelectorClimaticBoxPlot")
         Me.ucrSelectorClimaticBoxPlot.Name = "ucrSelectorClimaticBoxPlot"
-        '
-        'ucrReceiverWithinYear
-        '
-        Me.ucrReceiverWithinYear.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverWithinYear, "ucrReceiverWithinYear")
-        Me.ucrReceiverWithinYear.Name = "ucrReceiverWithinYear"
-        Me.ucrReceiverWithinYear.Selector = Nothing
-        Me.ucrReceiverWithinYear.strNcFilePath = ""
-        Me.ucrReceiverWithinYear.ucrSelector = Nothing
-        '
-        'lblWithinYear
-        '
-        resources.ApplyResources(Me.lblWithinYear, "lblWithinYear")
-        Me.lblWithinYear.Name = "lblWithinYear"
-        '
-        'lblElement
-        '
-        resources.ApplyResources(Me.lblElement, "lblElement")
-        Me.lblElement.Name = "lblElement"
-        '
-        'lblYear
-        '
-        resources.ApplyResources(Me.lblYear, "lblYear")
-        Me.lblYear.Name = "lblYear"
-        '
-        'lblDate
-        '
-        resources.ApplyResources(Me.lblDate, "lblDate")
-        Me.lblDate.Name = "lblDate"
-        '
-        'lblStation
-        '
-        resources.ApplyResources(Me.lblStation, "lblStation")
-        Me.lblStation.Name = "lblStation"
-        '
-        'ucrReceiverElement
-        '
-        Me.ucrReceiverElement.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverElement, "ucrReceiverElement")
-        Me.ucrReceiverElement.Name = "ucrReceiverElement"
-        Me.ucrReceiverElement.Selector = Nothing
-        Me.ucrReceiverElement.strNcFilePath = ""
-        Me.ucrReceiverElement.ucrSelector = Nothing
-        '
-        'ucrReceiverYear
-        '
-        Me.ucrReceiverYear.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverYear, "ucrReceiverYear")
-        Me.ucrReceiverYear.Name = "ucrReceiverYear"
-        Me.ucrReceiverYear.Selector = Nothing
-        Me.ucrReceiverYear.strNcFilePath = ""
-        Me.ucrReceiverYear.ucrSelector = Nothing
-        '
-        'ucrReceiverDate
-        '
-        Me.ucrReceiverDate.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverDate, "ucrReceiverDate")
-        Me.ucrReceiverDate.Name = "ucrReceiverDate"
-        Me.ucrReceiverDate.Selector = Nothing
-        Me.ucrReceiverDate.strNcFilePath = ""
-        Me.ucrReceiverDate.ucrSelector = Nothing
-        '
-        'ucrReceiverStation
-        '
-        Me.ucrReceiverStation.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverStation, "ucrReceiverStation")
-        Me.ucrReceiverStation.Name = "ucrReceiverStation"
-        Me.ucrReceiverStation.Selector = Nothing
-        Me.ucrReceiverStation.strNcFilePath = ""
-        Me.ucrReceiverStation.ucrSelector = Nothing
-        '
-        'ucrInputStation
-        '
-        Me.ucrInputStation.AddQuotesIfUnrecognised = True
-        Me.ucrInputStation.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputStation, "ucrInputStation")
-        Me.ucrInputStation.Name = "ucrInputStation"
-        '
-        'ucrInputYear
-        '
-        Me.ucrInputYear.AddQuotesIfUnrecognised = True
-        Me.ucrInputYear.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputYear, "ucrInputYear")
-        Me.ucrInputYear.Name = "ucrInputYear"
-        '
-        'ucrInputWithinYear
-        '
-        Me.ucrInputWithinYear.AddQuotesIfUnrecognised = True
-        Me.ucrInputWithinYear.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputWithinYear, "ucrInputWithinYear")
-        Me.ucrInputWithinYear.Name = "ucrInputWithinYear"
-        '
-        'ucrNudOmitBelow
-        '
-        Me.ucrNudOmitBelow.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudOmitBelow.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudOmitBelow, "ucrNudOmitBelow")
-        Me.ucrNudOmitBelow.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudOmitBelow.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudOmitBelow.Name = "ucrNudOmitBelow"
-        Me.ucrNudOmitBelow.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkOmitBelow
-        '
-        Me.ucrChkOmitBelow.Checked = False
-        resources.ApplyResources(Me.ucrChkOmitBelow, "ucrChkOmitBelow")
-        Me.ucrChkOmitBelow.Name = "ucrChkOmitBelow"
         '
         'dlgClimaticBoxPlot
         '

@@ -74,6 +74,7 @@ Public Class dlgClimaticBoxPlot
         ucrPnlPlots.AddFunctionNamesCondition(rdoJitter, "geom_jitter")
         ucrPnlPlots.AddFunctionNamesCondition(rdoViolin, "geom_violin")
         ucrPnlPlots.AddToLinkedControls(ucrChkVarWidth, {rdoBoxplot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlPlots.AddToLinkedControls(ucrChkOmitBelow, {rdoJitter}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSelectorClimaticBoxPlot.SetParameter(New RParameter("data", 0))
         ucrSelectorClimaticBoxPlot.SetParameterIsrfunction()
@@ -155,12 +156,12 @@ Public Class dlgClimaticBoxPlot
 
         ucrInputStation.SetParameter(New RParameter("none"))
         ucrInputStation.SetItems(dctFacet)
-        'ucrInputStation.SetRDefault("none")
+        ucrInputStation.SetRDefault("none")
         ucrInputStation.SetDropDownStyleAsNonEditable()
 
         ucrInputYear.SetParameter(New RParameter("none"))
         ucrInputYear.SetItems(dctFacet)
-        'ucrInputYear.SetRDefault("none")
+        ucrInputYear.SetRDefault("none")
         ucrInputYear.SetDropDownStyleAsNonEditable()
 
         ucrInputWithinYear.SetParameter(New RParameter("x"))
@@ -241,6 +242,7 @@ Public Class dlgClimaticBoxPlot
 
         ucrChkVarWidth.SetRCode(clsRgeomPlotFunction, bReset)
         ucrPnlPlots.SetRCode(clsRgeomPlotFunction, bReset)
+        ucrChkOmitBelow.SetRCode(clsRgeomPlotFunction, bReset)
 
         ucrReceiverElement.SetRCode(clsRaesFunction, bReset)
         ucrInputStation.SetRCode(clsRaesFunction, bReset)
