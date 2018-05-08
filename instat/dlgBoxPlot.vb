@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
 Imports instat.Translations
 Public Class dlgBoxplot
     Private clsRggplotFunction As New RFunction
@@ -50,7 +49,9 @@ Public Class dlgBoxplot
         bReset = False
         autoTranslate(Me)
         TestOkEnabled()
+
         SetOptionsButtonstext()
+
     End Sub
 
     Private Sub InitialiseDialog()
@@ -116,7 +117,6 @@ Public Class dlgBoxplot
         ucrSaveBoxplot.SetDataFrameSelector(ucrSelectorBoxPlot.ucrAvailableDataFrames)
         ucrSaveBoxplot.SetAssignToIfUncheckedValue("last_graph")
 
-
         'this control exists but diabled for now
         ucrChkSwapParameters.SetText("swap Parameters")
         'ucrSecondFactorReceiver.AddToLinkedControls(ucrChkSwapParameters, {ucrSecondFactorReceiver.IsEmpty = False}, bNewLinkedHideIfParameterMissing:=True)
@@ -153,7 +153,8 @@ Public Class dlgBoxplot
 
         clsRgeomPlotFunction.SetPackageName("ggplot2")
         clsRgeomPlotFunction.SetRCommand("geom_boxplot")
-        clsRgeomPlotFunction.AddParameter("varwidth", "FALSE")
+        clsRgeomPlotFunction.AddParameter("varwidth", "FALSE", iPosition:=0)
+        clsRgeomPlotFunction.AddParameter("outlier.colour", Chr(34) & "red" & Chr(34), iPosition:=1)
 
         'clsLocalRaesFunction.SetPackageName("ggplot2")
         'clsLocalRaesFunction.SetRCommand("aes")
@@ -257,16 +258,32 @@ Public Class dlgBoxplot
         'Sets geom function, fill and colour aesthetics and ucrsave prefix
         If rdoBoxplot.Checked Then
             clsRgeomPlotFunction.SetRCommand("geom_boxplot")
+            clsRgeomPlotFunction.AddParameter("outlier.colour", Chr(34) & "red" & Chr(34), iPosition:=1)
+            clsRgeomPlotFunction.RemoveParameterByName("Height")
+            clsRgeomPlotFunction.RemoveParameterByName("width")
             ucrSaveBoxplot.SetPrefix("boxplot")
             ucrSecondFactorReceiver.ChangeParameterName("fill")
+
+            SetOptionsButtonText()
+
         ElseIf rdoJitter.Checked Then
             clsRgeomPlotFunction.SetRCommand("geom_jitter")
+            clsRgeomPlotFunction.RemoveParameterByName("outlier.colour")
+            clsRgeomPlotFunction.AddParameter("Height", 0.2, iPosition:=1)
+            clsRgeomPlotFunction.AddParameter("width", 0.0, iPosition:=2)
             ucrSaveBoxplot.SetPrefix("jitter")
             ucrSecondFactorReceiver.ChangeParameterName("colour")
+
+            SetOptionsButtonText()
+
         Else
             clsRgeomPlotFunction.SetRCommand("geom_violin")
+            clsRgeomPlotFunction.RemoveParameterByName("outlier.colour")
+            clsRgeomPlotFunction.RemoveParameterByName("Height")
+            clsRgeomPlotFunction.RemoveParameterByName("width")
             ucrSaveBoxplot.SetPrefix("violin")
             ucrSecondFactorReceiver.ChangeParameterName("fill")
+
         End If
         SetOptionsButtonstext()
     End Sub
@@ -278,9 +295,22 @@ Public Class dlgBoxplot
             cmdBoxPlotOptions.Text = "Jitter Options"
         Else
             cmdBoxPlotOptions.Text = "Violin Options"
+
+            SetOptionsButtonText()
+
         End If
     End Sub
 
+
+    Private Sub SetOptionsButtonText()
+        If rdoBoxplot.Checked Then
+            cmdBoxPlotOptions.Text = "Boxplot Options"
+        ElseIf rdoJitter.Checked Then
+            cmdBoxPlotOptions.Text = "Jitter Options"
+        Else
+            cmdBoxPlotOptions.Text = "Violin Options"
+        End If
+    End Sub
     Private Sub TempOptionsDisabledInMultipleVariablesCase()
         If ucrVariablesAsFactorForBoxplot.bSingleVariable Then
             cmdBoxPlotOptions.Enabled = True
