@@ -168,6 +168,7 @@ Public Class dlgClimaticSummary
         clsDayFilterCalc.AddParameter("calculated_from", clsRFunctionParameter:=clsDayFilterCalcFromConvert, iPosition:=2)
 
         clsFromAndToConditionOperator.SetOperation("&")
+        clsFromAndToConditionOperator.bBrackets = False
         clsFromAndToConditionOperator.AddParameter("from", clsROperatorParameter:=clsFromConditionOperator, iPosition:=0)
         clsFromConditionOperator.SetOperation(">=") ' doy = DOYreceiver in position 0. This is always the case
         clsFromConditionOperator.AddParameter("from", 1, iPosition:=1)
