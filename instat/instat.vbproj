@@ -661,12 +661,6 @@
     <Compile Include="dlgViewGraph.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Form1.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmGraphDisplay.Designer.vb">
       <DependentUpon>frmGraphDisplay.vb</DependentUpon>
     </Compile>
@@ -3518,9 +3512,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgColumnStructures.sw-KE.resx">
       <DependentUpon>dlgColumnStructures.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmGraphDisplay.fr-FR.resx">
       <DependentUpon>frmGraphDisplay.vb</DependentUpon>
