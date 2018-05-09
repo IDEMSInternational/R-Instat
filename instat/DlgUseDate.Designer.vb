@@ -70,8 +70,6 @@ Partial Class dlgUseDate
         Me.ucrReceiverUseDate = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorUseDate = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrNudFiscalStart = New instat.ucrNud()
-        Me.lblStartMonth = New System.Windows.Forms.Label()
         Me.grpShifted.SuspendLayout()
         Me.grpOthers.SuspendLayout()
         Me.grpFullName.SuspendLayout()
@@ -86,8 +84,6 @@ Partial Class dlgUseDate
         '
         'grpShifted
         '
-        Me.grpShifted.Controls.Add(Me.lblStartMonth)
-        Me.grpShifted.Controls.Add(Me.ucrNudFiscalStart)
         Me.grpShifted.Controls.Add(Me.ucrChkShiftQuarter)
         Me.grpShifted.Controls.Add(Me.lblMonth)
         Me.grpShifted.Controls.Add(Me.ucrInputComboBoxMonth)
@@ -295,21 +291,6 @@ Partial Class dlgUseDate
         resources.ApplyResources(Me.ucrSelectorUseDate, "ucrSelectorUseDate")
         Me.ucrSelectorUseDate.Name = "ucrSelectorUseDate"
         '
-        'ucrNudFiscalStart
-        '
-        Me.ucrNudFiscalStart.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFiscalStart.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudFiscalStart, "ucrNudFiscalStart")
-        Me.ucrNudFiscalStart.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudFiscalStart.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFiscalStart.Name = "ucrNudFiscalStart"
-        Me.ucrNudFiscalStart.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblStartMonth
-        '
-        resources.ApplyResources(Me.lblStartMonth, "lblStartMonth")
-        Me.lblStartMonth.Name = "lblStartMonth"
-        '
         'dlgUseDate
         '
         resources.ApplyResources(Me, "$this")
@@ -369,6 +350,4 @@ Partial Class dlgUseDate
     Friend WithEvents ucrInputComboBoxMonth As ucrInputComboBox
     Friend WithEvents ucrChkShiftQuarter As ucrCheck
     Friend WithEvents ucrChkQuarter As ucrCheck
-    Friend WithEvents ucrNudFiscalStart As ucrNud
-    Friend WithEvents lblStartMonth As Label
 End Class
