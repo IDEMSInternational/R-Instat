@@ -301,7 +301,6 @@ Public Class dlgBoxplot
         End If
     End Sub
 
-
     Private Sub SetOptionsButtonText()
         If rdoBoxplot.Checked Then
             cmdBoxPlotOptions.Text = "Boxplot Options"
