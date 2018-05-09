@@ -199,9 +199,9 @@ Partial Class dlgClimaticCheckDataTemperature
         'ucrInputNewColumnName
         '
         Me.ucrInputNewColumnName.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputNewColumnName, "ucrInputNewColumnName")
         Me.ucrInputNewColumnName.IsMultiline = False
         Me.ucrInputNewColumnName.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputNewColumnName, "ucrInputNewColumnName")
         Me.ucrInputNewColumnName.Name = "ucrInputNewColumnName"
         '
         'ucrChkIncludeLogicalColumns
