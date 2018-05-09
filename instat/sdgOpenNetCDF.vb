@@ -187,7 +187,9 @@ Public Class sdgOpenNetCDF
                 strDimAxes = expTemp.AsCharacter.ToArray
                 dctAxesNames = New Dictionary(Of String, String)
                 For i As Integer = 0 To strDimNames.Count - 1
-                    dctAxesNames.Add(strDimAxes(i), strDimNames(i))
+                    If strDimAxes(i) IsNot Nothing Then
+                        dctAxesNames.Add(strDimAxes(i), strDimNames(i))
+                    End If
                 Next
             Else
                 strDimNames = Nothing
@@ -336,10 +338,10 @@ Public Class sdgOpenNetCDF
         If Not bUpdating Then
             If rdoRange.Checked Then
                 If dctAxesNames.ContainsKey("X") Then
-                    clsBoundaryListFunction.AddParameter(dctAxesNames("X"), clsRFunctionParameter:=lstFunctions(1))
+                    clsBoundaryListFunction.AddParameter(dctAxesNames("X"), clsRFunctionParameter:=clsXLimitsFunction)
                 End If
                 If dctAxesNames.ContainsKey("Y") Then
-                    clsBoundaryListFunction.AddParameter(dctAxesNames("Y"), clsRFunctionParameter:=lstFunctions(2))
+                    clsBoundaryListFunction.AddParameter(dctAxesNames("Y"), clsRFunctionParameter:=clsYLimitsFunction)
                 End If
                 clsImportNetcdfFunction.RemoveParameterByName("lon_points")
                 clsImportNetcdfFunction.RemoveParameterByName("lat_points")

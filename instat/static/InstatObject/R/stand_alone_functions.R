@@ -285,9 +285,10 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
               })
             }
             else ind <- which(curr_dim_values >= boundary[[dim_var]][1] & curr_dim_values <= boundary[[dim_var]][2])
-            
+            # TODO This is temporary solution for when there is only one value for a dimension and there are rounding difference
+            if(length(ind) == 0 && length(curr_dim_values) == 1 && round(curr_dim_values, 3) == round(boundary[[dim_var]][1], 3) && round(curr_dim_values, 3) == round(boundary[[dim_var]][2], 3)) ind <- 1
             if(length(ind) == 0) {
-              stop("No values within the range specified for", dim_var, ".")
+              stop("No values within the range specified for ", dim_var, ".")
             }
             else {
               start <- c(start, min(ind))
@@ -385,7 +386,7 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
         time_df[[paste0(time_var, "_full")]] <- posixct_time
         time_df[[paste0(time_var, "_date")]] <- as.Date(posixct_time)
       })
-      if(ncol(time_df) > 1) var_data <- dplyr::full_join(curr_var_data, time_df, by = time_var)
+      if(ncol(time_df) > 1) curr_var_data <- dplyr::full_join(curr_var_data, time_df, by = time_var)
       if(!keep_raw_time) {
         var_data[[time_var]] <- NULL
         included_vars <- included_vars[-which(included_vars == time_var)]
