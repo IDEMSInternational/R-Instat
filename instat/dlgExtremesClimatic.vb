@@ -76,7 +76,6 @@ Public Class dlgExtremesClimatic
         '' What is Date used for in this?
         ucrReceiverDate.SetParameter(New RParameter("x", 0))
         ucrReceiverDate.SetClimaticType("date")
-        ucrReceiverDate.SetMeAsReceiver()
         ucrReceiverDate.SetParameterIsString()
         ucrReceiverDate.bWithQuotes = False
         ucrReceiverDate.Selector = ucrSelectorClimaticExtremes
@@ -189,6 +188,7 @@ Public Class dlgExtremesClimatic
         clsFilterExtremeExp.Clear()
 
         ucrSelectorClimaticExtremes.Reset()
+        ucrReceiverElement.SetMeAsReceiver()
         SetCalculationValues()
 
         clsDayFilterCalcFromConvert = New RFunction
