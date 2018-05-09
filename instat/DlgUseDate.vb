@@ -115,8 +115,6 @@ Public Class dlgUseDate
         ucrChkShiftQuarter.SetText("Shift Quarter")
         ucrChkShiftQuarter.SetRDefault("FALSE")
 
-        'with year parameter  19 ?
-
         ucrChkShiftDay.SetParameter(New RParameter("s_doy", 20))
         ucrChkShiftDay.SetText("Shift Day")
         ucrChkShiftDay.SetRDefault("FALSE")
