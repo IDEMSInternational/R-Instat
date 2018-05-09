@@ -86,15 +86,6 @@ Public Class dlgClimaticSummary
         ucrReceiverWithinYear.Selector = ucrSelectorVariable
         ucrReceiverWithinYear.SetDataType("factor")
 
-        ' summary
-        ucrReceiverElement.SetParameter(New RParameter("columns_to_summarise", 0))
-        ucrReceiverElement.SetParameterIsString()
-        ucrReceiverElement.strSelectorHeading = "Variables"
-        ucrReceiverElement.Selector = ucrSelectorVariable
-        ucrReceiverElement.SetIncludedDataTypes({"numeric"})
-        ucrReceiverElement.bAutoFill = True
-        ucrReceiverElement.bWithQuotes = False
-
         ' others
         ucrReceiverDate.SetParameter(New RParameter("date", 1))
         ucrReceiverDate.SetParameterIsString()
@@ -110,6 +101,15 @@ Public Class dlgClimaticSummary
         ucrReceiverDOY.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "doy" & Chr(34)})
         ucrReceiverDOY.bAutoFill = True
         ucrReceiverDOY.strSelectorHeading = "Day Variables"
+
+        ' summary
+        ucrReceiverElement.SetParameter(New RParameter("columns_to_summarise", 0))
+        ucrReceiverElement.SetParameterIsString()
+        ucrReceiverElement.strSelectorHeading = "Variables"
+        ucrReceiverElement.Selector = ucrSelectorVariable
+        ucrReceiverElement.SetIncludedDataTypes({"numeric"})
+        ucrReceiverElement.bAutoFill = True
+        ucrReceiverElement.bWithQuotes = False
 
         ' Other checkbox options
         ucrChkStoreResults.SetParameter(New RParameter("store_results", 3))
