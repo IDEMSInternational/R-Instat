@@ -756,6 +756,9 @@
   <data name="lblNewColumnName.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblNewColumnName.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="lblNewColumnName.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -782,6 +785,9 @@
   </data>
   <data name="&gt;&gt;lblNewColumnName.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="ucrInputNewColumnName.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="ucrInputNewColumnName.Location" type="System.Drawing.Point, System.Drawing">
     <value>115, 485</value>

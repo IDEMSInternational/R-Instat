@@ -178,13 +178,14 @@ Public Class dlgClimaticCheckDataTemperature
         ucrChkIncludeLogicalColumns.AddParameterPresentCondition(True, "sub", True)
         ucrChkIncludeLogicalColumns.AddParameterPresentCondition(False, "sub", False)
 
-        ucrChkIncludeLogicalColumns.AddToLinkedControls(ucrInputNewColumnName, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputNewColumnName.SetLinkedDisplayControl(lblNewColumnName)
+        'ucrChkIncludeLogicalColumns.AddToLinkedControls(ucrInputNewColumnName, {True}, bNewLinkedHideIfParameterMissing:=True)
+        'ucrInputNewColumnName.SetLinkedDisplayControl(lblNewColumnName)
 
+        'TODO:To be added in future.
         'save
-        ucrInputNewColumnName.SetParameter(New RParameter("result_name", 2))
-        ucrInputNewColumnName.SetDataFrameSelector(ucrSelectorTemperature.ucrAvailableDataFrames)
-        ucrInputNewColumnName.SetName("Qc")
+        'ucrInputNewColumnName.SetParameter(New RParameter("result_name", 2))
+        'ucrInputNewColumnName.SetDataFrameSelector(ucrSelectorTemperature.ucrAvailableDataFrames)
+        'ucrInputNewColumnName.SetName("Qc")
 
         'outliers Option
         ucrChkOutlier.AddToLinkedControls(ucrNudOutlier, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2.5)
@@ -334,7 +335,7 @@ Public Class dlgClimaticCheckDataTemperature
         ucrChkRangeElement2.SetRCode(clsOrOperator, bReset)
         ucrChkSame.SetRCode(clsOrOperator, bReset)
         ucrChkJump.SetRCode(clsOrOperator, bReset)
-        ucrInputNewColumnName.SetRCode(clsCalcFilterFunc, bReset)
+        'ucrInputNewColumnName.SetRCode(clsCalcFilterFunc, bReset)
         ucrChkIncludeLogicalColumns.SetRCode(clsFilterListFunc, bReset)
     End Sub
 
