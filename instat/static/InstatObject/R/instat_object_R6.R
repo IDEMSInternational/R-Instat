@@ -1170,7 +1170,7 @@ instat_object$set("public","make_inventory_plot", function(data_name, date_col, 
 }
 )
 
-instat_object$set("public", "import_NetCDF", function(nc, name, only_data_vars = TRUE, keep_raw_time = TRUE, include_metadata = TRUE, boundary) {
+instat_object$set("public", "import_NetCDF", function(nc, name, only_data_vars = TRUE, keep_raw_time = TRUE, include_metadata = TRUE, boundary, lon_points = NULL, lat_points = NULL) {
   if(only_data_vars) {
     all_var_names <- ncdf4.helpers::nc.get.variable.list(nc)
   }
@@ -1203,7 +1203,7 @@ instat_object$set("public", "import_NetCDF", function(nc, name, only_data_vars =
     else curr_boundary <- NULL
     curr_name <- make.names(curr_name)
     curr_name <- next_default_item(curr_name, self$get_data_names(), include_index = FALSE)
-    data_list[[curr_name]] <- nc_as_data_frame(nc, var_groups[[i]], keep_raw_time = keep_raw_time, include_metadata = include_metadata, boundary = curr_boundary)
+    data_list[[curr_name]] <- nc_as_data_frame(nc, var_groups[[i]], keep_raw_time = keep_raw_time, include_metadata = include_metadata, boundary = curr_boundary, lon_points = lon_points, lat_points = lat_points)
     tmp_list <- list()
     tmp_list[[curr_name]] <- data_list[[curr_name]]
     data_names <- c(data_names, curr_name)
