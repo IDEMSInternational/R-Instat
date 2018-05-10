@@ -31,7 +31,7 @@ Public Class sdgOpenNetCDF
     Private lstDims As List(Of String)
     Private lstFunctions As List(Of RFunction)
     Private strFilePath As String
-    Private dctAxesNames As Dictionary(Of String, String)
+    Private dctAxesNames As New Dictionary(Of String, String)
     Private bUpdating As Boolean = False
 
     Private Sub sdgOpenNetCDF_Load(sender As Object, e As EventArgs) Handles MyBase.Load
