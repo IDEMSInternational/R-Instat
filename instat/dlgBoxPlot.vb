@@ -139,7 +139,7 @@ Public Class dlgBoxplot
         clsBoxplotFunc = New RFunction
         clsJitterplotFunc = New RFunction
         clsViolinplotFunc = New RFunction
-        clsCurrGeomFunc = New RFunction
+        'clsCurrGeomFunc = New RFunction
 
         ucrSelectorBoxPlot.Reset()
         ucrSelectorBoxPlot.SetGgplotFunction(clsBaseOperator)
@@ -162,7 +162,7 @@ Public Class dlgBoxplot
         'Setting operation and adding parameters to baseoperator
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
-        clsBaseOperator.AddParameter("geomfunc", clsRFunctionParameter:=clsCurrGeomFunc, iPosition:=2)
+        clsBaseOperator.AddParameter("geomfunc", clsRFunctionParameter:=clsBoxplotFunc, iPosition:=2)
 
         clsRggplotFunction.SetPackageName("ggplot2")
         clsRggplotFunction.SetRCommand("ggplot")
@@ -266,7 +266,6 @@ Public Class dlgBoxplot
     Private Sub SetGeomPrefixFillColourAes()
         'Sets geom function, fill and colour aesthetics and ucrsave prefix
         If rdoBoxplot.Checked Then
-            clsBoxplotFunc.AddParameter("outlier.colour", Chr(34) & "red" & Chr(34), iPosition:=1)
             ucrSaveBoxplot.SetPrefix("boxplot")
             ucrSecondFactorReceiver.ChangeParameterName("fill")
             clsCurrGeomFunc = clsBoxplotFunc
@@ -285,6 +284,10 @@ Public Class dlgBoxplot
             ucrSecondFactorReceiver.ChangeParameterName("fill")
             clsCurrGeomFunc = clsViolinplotFunc
         End If
+        'TODO Am not sure why the geomfunc parameter which carries clsCurrGeomFunc(current geom function) 
+        'does Not Update() properly when readio buttons are changed
+        'hence i have to force it to update properly after this if statement
+        clsBaseOperator.AddParameter("geomfunc", clsRFunctionParameter:=clsCurrGeomFunc, iPosition:=2)
         SetOptionsButtonstext()
     End Sub
 
@@ -295,21 +298,9 @@ Public Class dlgBoxplot
             cmdBoxPlotOptions.Text = "Jitter Options"
         Else
             cmdBoxPlotOptions.Text = "Violin Options"
-
-            SetOptionsButtonText()
-
         End If
     End Sub
 
-    Private Sub SetOptionsButtonText()
-        If rdoBoxplot.Checked Then
-            cmdBoxPlotOptions.Text = "Boxplot Options"
-        ElseIf rdoJitter.Checked Then
-            cmdBoxPlotOptions.Text = "Jitter Options"
-        Else
-            cmdBoxPlotOptions.Text = "Violin Options"
-        End If
-    End Sub
     Private Sub TempOptionsDisabledInMultipleVariablesCase()
         If ucrVariablesAsFactorForBoxplot.bSingleVariable Then
             cmdBoxPlotOptions.Enabled = True
