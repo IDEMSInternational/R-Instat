@@ -1095,6 +1095,27 @@
   <data name="&gt;&gt;tbSubset.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="ucrChkIncludeRequestedPoints.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 96</value>
+  </data>
+  <data name="ucrChkIncludeRequestedPoints.Size" type="System.Drawing.Size, System.Drawing">
+    <value>295, 20</value>
+  </data>
+  <data name="ucrChkIncludeRequestedPoints.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIncludeRequestedPoints.Name" xml:space="preserve">
+    <value>ucrChkIncludeRequestedPoints</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIncludeRequestedPoints.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIncludeRequestedPoints.Parent" xml:space="preserve">
+    <value>tbOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIncludeRequestedPoints.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrChkOnlyDataVariables.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 18</value>
   </data>
@@ -1114,7 +1135,7 @@
     <value>tbOptions</value>
   </data>
   <data name="&gt;&gt;ucrChkOnlyDataVariables.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrChkKeepRawTime.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 44</value>
@@ -1135,7 +1156,7 @@
     <value>tbOptions</value>
   </data>
   <data name="&gt;&gt;ucrChkKeepRawTime.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="ucrChkIncludeMetadata.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 70</value>
@@ -1156,7 +1177,7 @@
     <value>tbOptions</value>
   </data>
   <data name="&gt;&gt;ucrChkIncludeMetadata.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="tbOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -1235,9 +1256,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>839, 468</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
