@@ -247,12 +247,13 @@ nc_get_dim_min_max <- function(nc, dimension, time_as_date = TRUE) {
   return(bounds)
 }
 
-nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = TRUE, boundary = NULL, lon_points = NULL, lat_points = NULL) {
+nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = TRUE, boundary = NULL, lon_points = NULL, lat_points = NULL, show_requested_points = TRUE) {
   if(sum(is.null(lon_points), is.null(lat_points)) == 1) stop("You must specificy both lon_points and lat_points")
   has_points <- (sum(is.null(lon_points), is.null(lat_points)) == 0)
   if(has_points && length(lon_points) != length(lat_points)) stop("lon_points and lat_points have unequal lengths.")
   dim_names <- ncdf4.helpers::nc.get.dim.names(nc, vars[1])
   dim_values <- list()
+  requested_points_added <- FALSE
   for(dim_name in dim_names) {
     #why no wrapper for this in ncdf4.helper?
     dim_values[[dim_name]] <- nc$dim[[dim_name]]$vals
@@ -332,10 +333,15 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
       curr_start[1] <- x_ind
       curr_count[1]  <- 1
       curr_dim_values[[x_var]] <- curr_dim_values[[x_var]][x_ind]
-      y_ind <- which(ys == xy_possible[point_ind, 2])
+      y_ind <- which(ys == xy_possible[point_ind, 2])[1]
       curr_start[2] <- y_ind
       curr_count[2]  <- 1
       curr_dim_values[[y_var]] <- curr_dim_values[[y_var]][y_ind]
+      if(show_requested_points) {
+        curr_dim_values[[paste0("requested_", x_var)]] <- lon_points[i]
+        curr_dim_values[[paste0("requested_", y_var)]] <- lat_points[i]
+        requested_points_added <- TRUE
+      }
       
       start_list[[i]] <- curr_start
       count_list[[i]] <- curr_count
@@ -357,7 +363,7 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
     for(j in seq_along(curr_var_data)) {
       attr(curr_var_data[[j]], "dim") <- NULL
     }
-    names(curr_var_data) <- dim_names
+    names(curr_var_data) <- names(curr_dim_values)
     included_vars <- dim_names
     for(var in vars) {
       curr_dim_names <- ncdf4.helpers::nc.get.dim.names(nc, var)
