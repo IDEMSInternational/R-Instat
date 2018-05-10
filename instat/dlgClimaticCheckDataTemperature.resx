@@ -831,9 +831,6 @@
   <data name="&gt;&gt;ucrChkIncludeLogicalColumns.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="ucrChkIncludeCalculatedColumns.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="ucrChkIncludeCalculatedColumns.Location" type="System.Drawing.Point, System.Drawing">
     <value>291, 456</value>
   </data>
@@ -1370,9 +1367,6 @@
   </data>
   <data name="&gt;&gt;ucrPnlType.ZOrder" xml:space="preserve">
     <value>47</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
