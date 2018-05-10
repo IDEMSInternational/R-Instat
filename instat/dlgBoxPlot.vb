@@ -104,7 +104,7 @@ Public Class dlgBoxplot
         ucrSecondFactorReceiver.SetParameterIsString()
         ucrSecondFactorReceiver.bWithQuotes = False
 
-        ucrChkVarWidth.SetParameter(New RParameter("varwidth", 1))
+        ucrChkVarWidth.SetParameter(New RParameter("varwidth", 0))
         ucrChkVarWidth.SetText("Variable Width")
         ucrChkVarWidth.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkVarWidth.SetRDefault("FALSE")
