@@ -22,7 +22,7 @@ Public Class dlgMakeDate
     Private bUseSelectedColumn As Boolean = False
     Private strSelectedColumn As String = ""
     Private strSelectedDataFrame As String = ""
-    Private clsDateFunction, clsMakeYearDay, clsHelp, clsMakeYearMonthDay As New RFunction
+    Private clsDateFunction, clsMakeYearDay, clsHelp, clsMakeYearMonthDay, clsDefaultDate As New RFunction
 
     Private Sub dlgMakeDate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -101,11 +101,7 @@ Public Class dlgMakeDate
         ucrInputFormat.SetItems(dctDateFormat)
         ucrInputFormat.SetDropDownStyleAsEditable(bAdditionsAllowed:=True)
 
-        ucrInputOrigin.SetParameter(New RParameter("origin", 1))
-        dctDateOrigin.Add("Excel", Chr(34) & "1899-12-30" & Chr(34))
-        dctDateOrigin.Add("Gregorian", Chr(34) & "1600-03-01" & Chr(34))
-        dctDateOrigin.Add("Specify", Chr(34) & ucrDtpSpecifyOrigin.DateValue.Date & Chr(34))
-        ucrInputOrigin.SetItems(dctDateOrigin)
+        ucrInputOrigin.SetItems({"Excel", "Gregorian", "Specify"})
         ucrInputOrigin.SetDropDownStyleAsNonEditable()
 
         ucrInputYearOption.SetParameter(New RParameter("year_format", 6))
@@ -199,6 +195,10 @@ Public Class dlgMakeDate
         ucrDtpSpecifyOrigin.SetParameter(New RParameter("origin", 1))
         ucrDtpSpecifyOrigin.SetParameterIsRDate()
 
+        clsDefaultDate = New RFunction
+        clsDefaultDate.SetRCommand("as.Date")
+        clsDefaultDate.AddParameter("x", Chr(34) & "1899/12/30" & Chr(34))
+
         'when rdoSingleColumn is checked
         ucrPnlDate.AddToLinkedControls(ucrPnlFormat, {rdoSingleColumn}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoDefaultFormat)
         ucrPnlDate.AddToLinkedControls(ucrPnlFormat, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -208,7 +208,7 @@ Public Class dlgMakeDate
         ''linking up ucrinputs for format and origin
         ucrPnlFormat.AddToLinkedControls(ucrInputFormat, {rdoSpecifyFormat}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Year(4-digit)-Month-Day")
         ucrPnlFormat.AddToLinkedControls(ucrInputOrigin, {rdoOrigin}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Excel")
-        ucrInputOrigin.AddToLinkedControls(ucrDtpSpecifyOrigin, {"Specify"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputOrigin.AddToLinkedControls(ucrDtpSpecifyOrigin, {"Excel", "Gregorian", "Specify"}, bNewLinkedHideIfParameterMissing:=True)
 
         'when rdoTwoColumn is checked
         ucrPnlDate.AddToLinkedControls(ucrReceiverYearTwo, {rdoTwoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -269,6 +269,7 @@ Public Class dlgMakeDate
         clsMakeYearMonthDay.AddParameter("day_format", Chr(34) & "%d" & Chr(34))
         clsMakeYearDay.AddParameter("year_format", Chr(34) & "%Y" & Chr(34))
         clsDateFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverForDate.GetVariables())
+        clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsDefaultDate)
         clsDateFunction.SetAssignTo(ucrSaveDate.GetText, strTempDataframe:=ucrSelectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveDate.GetText)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDateFunction)
     End Sub
@@ -400,6 +401,7 @@ Public Class dlgMakeDate
         If rdoDefaultFormat.Checked Then
             grpFormats.Hide()
             cmdHelp.Visible = False
+            ucrReceiverForDate.SetExcludedDataTypes({"numeric"})
             ucrBase.clsRsyntax.RemoveParameter("format")
             ucrBase.clsRsyntax.RemoveParameter("origin")
         ElseIf rdoOrigin.Checked Then
@@ -407,10 +409,22 @@ Public Class dlgMakeDate
             cmdHelp.Visible = False
             ucrReceiverForDate.SetIncludedDataTypes({"numeric"})
         Else
+            ucrReceiverForDate.SetExcludedDataTypes({"numeric"})
             grpFormats.Show()
             cmdHelp.Visible = True
         End If
         SelectorHeader()
+        If ucrInputOrigin.GetText = "Excel" Then
+            ucrDtpSpecifyOrigin.Enabled = False
+            clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsDefaultDate)
+            ' ucrDtpSpecifyOrigin.dtpDateTime.Value = New Date(2018 / 1 / 1)
+        ElseIf ucrInputOrigin.GetText = "Gregorian" Then
+            ucrDtpSpecifyOrigin.Enabled = False
+            'clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsGregorianDefault)
+            'ucrDtpSpecifyOrigin.dtpDateTime.Value = New Date(2018 / 1 / 1)
+        Else
+            ucrDtpSpecifyOrigin.Enabled = True
+        End If
     End Sub
 
     Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDate.ControlValueChanged
