@@ -20,6 +20,9 @@ Public Class dlgClimaticCheckDataTemperature
     Private bReset As Boolean = True
     Private strCurrDataFrame As String
     Private clsGroupByFunc, clsListFunc, clsTempFilterFunc, clsRunCalcFunc As New RFunction
+    'outliers
+    Private clsGroupByMonth, clsListForOutlierManipulations, clsOutlierLimitUpperFunc, clsOutlierLimitUpperCalc, clsOutlierLimitLowerFunc, clsOutlierLimitLowerCalc, clsListSubCalc As New RFunction
+    Private clsOutlierUpperOperator, clsOutlierLowerOperator, clsOutlierOperator As New ROperator
     'Range
     Private clsGreaterEqualToOperator, clsLessEqualToOperator, clsRangeOrOperator, clsRangeOr2Opertor, clsGreaterEqualTo2Operator, clsLessEqualTo2Operator, clsRange2OrOperator As New ROperator
     'Jump
@@ -54,9 +57,6 @@ Public Class dlgClimaticCheckDataTemperature
         rdoSatelite.Enabled = False
         rdoIndividual.Checked = True
 
-        ucrChkOutlier.Enabled = False
-        ucrNudOutlier.Enabled = False
-        lblNudOutlier.Enabled = False
         Dim lstLabels As New List(Of Control)
         lstLabels.AddRange({lblRangeElement1to, lblNudRangeElement1Min, lblNudRangeElement1Max})
 
@@ -169,7 +169,6 @@ Public Class dlgClimaticCheckDataTemperature
         ucrChkDifference.AddToLinkedControls(ucrNudDifference, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
 
         'outliers Option
-        ucrChkOutlier.AddToLinkedControls(ucrNudOutlier, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2.5)
         ttOutliers.SetToolTip(ucrChkOutlier, "Values that are further than this number of IQRs from the corresponding quartile.")
     End Sub
 
@@ -253,6 +252,14 @@ Public Class dlgClimaticCheckDataTemperature
         clsLessDiffOperator.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsDiffOperator, iPosition:=0)
         clsDiffOperator.SetOperation("-")
 
+        'Group By Month for Outliers 
+        clsGroupByMonth.SetRCommand("instat_calculation$new")
+        clsGroupByMonth.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=0)
+        clsGroupByMonth.SetAssignTo("grouping_month")
+
+        clsListForOutlierManipulations.SetRCommand("list")
+        clsListForOutlierManipulations.AddParameter("sub1", clsRFunctionParameter:=clsGroupByMonth, bIncludeArgumentName:=False, iPosition:=0)
+
         'Main Filter
         clsTempFilterFunc.SetRCommand("instat_calculation$new")
         clsTempFilterFunc.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
@@ -324,6 +331,17 @@ Public Class dlgClimaticCheckDataTemperature
             clsTempFilterFunc.AddParameter("manipulations", clsRFunctionParameter:=clsListFunc, iPosition:=3)
         Else
             clsTempFilterFunc.RemoveParameterByName("manipulations")
+        End If
+    End Sub
+
+    Private Sub GroupByMonth()
+        If Not ucrReceiverMonth.IsEmpty Then
+            clsGroupByMonth.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverMonth.GetVariableNames & ")", iPosition:=1)
+            clsOutlierLimitUpperCalc.AddParameter("manipulations", clsRFunctionParameter:=clsListForOutlierManipulations, iPosition:=3)
+            clsOutlierLimitLowerCalc.AddParameter("manipulations", clsRFunctionParameter:=clsListForOutlierManipulations, iPosition:=3)
+        Else
+            clsOutlierLimitUpperCalc.RemoveParameterByName("manipulations")
+            clsOutlierLimitLowerCalc.RemoveParameterByName("manipulations")
         End If
     End Sub
 

@@ -39,7 +39,6 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.lblNudSame = New System.Windows.Forms.Label()
         Me.lblNudJump = New System.Windows.Forms.Label()
         Me.lblNudDiff = New System.Windows.Forms.Label()
-        Me.lblNudOutlier = New System.Windows.Forms.Label()
         Me.lblNudRangeElement1Min = New System.Windows.Forms.Label()
         Me.lblNudRangeElement2Min = New System.Windows.Forms.Label()
         Me.lblNudRangeElement1Max = New System.Windows.Forms.Label()
@@ -51,7 +50,6 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.ucrChkRange = New instat.ucrCheck()
         Me.ucrNudSame = New instat.ucrNud()
         Me.ucrNudDifference = New instat.ucrNud()
-        Me.ucrNudOutlier = New instat.ucrNud()
         Me.ucrNudRangeElement2Max = New instat.ucrNud()
         Me.ucrChkOutlier = New instat.ucrCheck()
         Me.ucrNudRangeElement2Min = New instat.ucrNud()
@@ -162,11 +160,6 @@ Partial Class dlgClimaticCheckDataTemperature
         resources.ApplyResources(Me.lblNudDiff, "lblNudDiff")
         Me.lblNudDiff.Name = "lblNudDiff"
         '
-        'lblNudOutlier
-        '
-        resources.ApplyResources(Me.lblNudOutlier, "lblNudOutlier")
-        Me.lblNudOutlier.Name = "lblNudOutlier"
-        '
         'lblNudRangeElement1Min
         '
         resources.ApplyResources(Me.lblNudRangeElement1Min, "lblNudRangeElement1Min")
@@ -237,16 +230,6 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.ucrNudDifference.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDifference.Name = "ucrNudDifference"
         Me.ucrNudDifference.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudOutlier
-        '
-        Me.ucrNudOutlier.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudOutlier.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudOutlier, "ucrNudOutlier")
-        Me.ucrNudOutlier.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudOutlier.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudOutlier.Name = "ucrNudOutlier"
-        Me.ucrNudOutlier.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudRangeElement2Max
         '
@@ -368,6 +351,7 @@ Partial Class dlgClimaticCheckDataTemperature
         '
         'ucrSelectorTemperature
         '
+        Me.ucrSelectorTemperature.bDropUnusedFilterLevels = False
         Me.ucrSelectorTemperature.bShowHiddenColumns = False
         Me.ucrSelectorTemperature.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorTemperature, "ucrSelectorTemperature")
@@ -392,7 +376,6 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.Controls.Add(Me.lblNudRangeElement1Max)
         Me.Controls.Add(Me.lblNudRangeElement2Min)
         Me.Controls.Add(Me.lblNudRangeElement1Min)
-        Me.Controls.Add(Me.lblNudOutlier)
         Me.Controls.Add(Me.lblNudDiff)
         Me.Controls.Add(Me.lblNudJump)
         Me.Controls.Add(Me.lblNudSame)
@@ -407,7 +390,6 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.Controls.Add(Me.ucrNudSame)
         Me.Controls.Add(Me.lblRangeElement2to)
         Me.Controls.Add(Me.ucrNudDifference)
-        Me.Controls.Add(Me.ucrNudOutlier)
         Me.Controls.Add(Me.ucrNudRangeElement2Max)
         Me.Controls.Add(Me.ucrChkOutlier)
         Me.Controls.Add(Me.ucrNudRangeElement2Min)
@@ -460,7 +442,6 @@ Partial Class dlgClimaticCheckDataTemperature
     Friend WithEvents ucrChkDifference As ucrCheck
     Friend WithEvents ucrNudSame As ucrNud
     Friend WithEvents ucrNudDifference As ucrNud
-    Friend WithEvents ucrNudOutlier As ucrNud
     Friend WithEvents ucrNudRangeElement1Max As ucrNud
     Friend WithEvents ucrNudRangeElement1Min As ucrNud
     Friend WithEvents ucrNudRangeElement2Max As ucrNud
@@ -475,7 +456,6 @@ Partial Class dlgClimaticCheckDataTemperature
     Friend WithEvents rdoIndividual As RadioButton
     Friend WithEvents rdoMultiple As RadioButton
     Friend WithEvents ucrPnlType As UcrPanel
-    Friend WithEvents lblNudOutlier As Label
     Friend WithEvents lblNudDiff As Label
     Friend WithEvents lblNudJump As Label
     Friend WithEvents lblNudSame As Label
