@@ -105,8 +105,9 @@ Public Class dlgClimaticCheckDataRain
 
         ucrChkOutlier.SetParameter(New RParameter("outlier.limit", clsOutlierOperator, 1, False), bNewChangeParameterValue:=False)
         ucrChkSkewedData.SetParameter(New RParameter("bskewedcalc", 3), bNewChangeParameterValue:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkSkewedData.SetRDefault("FALSE")
         ucrNudSkewnessWeight.SetParameter(New RParameter("skewnessweight", 4))
-        ucrNudSkewnessWeight.SetDefaultState("4")
+        ucrNudSkewnessWeight.SetRDefault("4")
 
         'Linking of controls
         ucrChkLarge.AddToLinkedControls(ucrNudLarge, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=200)
