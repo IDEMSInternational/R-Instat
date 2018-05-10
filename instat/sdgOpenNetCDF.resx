@@ -144,47 +144,113 @@
   <data name="&gt;&gt;ucrSelectorPoints.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+  <data name="rdoSinglePoint.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>839, 468</value>
+  <data name="rdoSinglePoint.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
   </data>
-  <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>176, 433</value>
+  <data name="rdoSinglePoint.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 30</value>
+  <data name="rdoSinglePoint.Location" type="System.Drawing.Point, System.Drawing">
+    <value>286, 13</value>
   </data>
-  <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="rdoSinglePoint.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 27</value>
   </data>
-  <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
-    <value>ucrBase</value>
+  <data name="rdoSinglePoint.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
   </data>
-  <data name="&gt;&gt;ucrBase.Type" xml:space="preserve">
-    <value>instat.ucrButtonsSubdialogue, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="rdoSinglePoint.Text" xml:space="preserve">
+    <value>Single Point</value>
   </data>
-  <data name="&gt;&gt;ucrBase.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="rdoSinglePoint.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
   </data>
-  <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;rdoSinglePoint.Name" xml:space="preserve">
+    <value>rdoSinglePoint</value>
+  </data>
+  <data name="&gt;&gt;rdoSinglePoint.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoSinglePoint.Parent" xml:space="preserve">
+    <value>grpLocation</value>
+  </data>
+  <data name="&gt;&gt;rdoSinglePoint.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterParent</value>
+  <data name="rdoPoints.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>NetCDF Options</value>
+  <data name="rdoPoints.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>sdgOpenNetCDF</value>
+  <data name="rdoPoints.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="rdoPoints.Location" type="System.Drawing.Point, System.Drawing">
+    <value>184, 13</value>
+  </data>
+  <data name="rdoPoints.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 27</value>
+  </data>
+  <data name="rdoPoints.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="rdoPoints.Text" xml:space="preserve">
+    <value>Points</value>
+  </data>
+  <data name="rdoPoints.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoPoints.Name" xml:space="preserve">
+    <value>rdoPoints</value>
+  </data>
+  <data name="&gt;&gt;rdoPoints.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoPoints.Parent" xml:space="preserve">
+    <value>grpLocation</value>
+  </data>
+  <data name="&gt;&gt;rdoPoints.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rdoRange.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoRange.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoRange.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoRange.Location" type="System.Drawing.Point, System.Drawing">
+    <value>82, 13</value>
+  </data>
+  <data name="rdoRange.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 27</value>
+  </data>
+  <data name="rdoRange.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="rdoRange.Text" xml:space="preserve">
+    <value>Range</value>
+  </data>
+  <data name="rdoRange.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoRange.Name" xml:space="preserve">
+    <value>rdoRange</value>
+  </data>
+  <data name="&gt;&gt;rdoRange.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoRange.Parent" xml:space="preserve">
+    <value>grpLocation</value>
+  </data>
+  <data name="&gt;&gt;rdoRange.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="ucrReceiverPointsY.Location" type="System.Drawing.Point, System.Drawing">
     <value>119, 77</value>
@@ -208,7 +274,7 @@
     <value>grpLocation</value>
   </data>
   <data name="&gt;&gt;ucrReceiverPointsY.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>3</value>
   </data>
   <data name="ucrReceiverPointsX.Location" type="System.Drawing.Point, System.Drawing">
     <value>119, 50</value>
@@ -232,7 +298,7 @@
     <value>grpLocation</value>
   </data>
   <data name="&gt;&gt;ucrReceiverPointsX.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>4</value>
   </data>
   <data name="ucrInputPointY.Location" type="System.Drawing.Point, System.Drawing">
     <value>119, 77</value>
@@ -253,7 +319,7 @@
     <value>grpLocation</value>
   </data>
   <data name="&gt;&gt;ucrInputPointY.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="ucrInputPointX.Location" type="System.Drawing.Point, System.Drawing">
     <value>119, 50</value>
@@ -274,93 +340,6 @@
     <value>grpLocation</value>
   </data>
   <data name="&gt;&gt;ucrInputPointX.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="rdoSinglePoint.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="rdoSinglePoint.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdoSinglePoint.Location" type="System.Drawing.Point, System.Drawing">
-    <value>310, 19</value>
-  </data>
-  <data name="rdoSinglePoint.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 17</value>
-  </data>
-  <data name="rdoSinglePoint.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="rdoSinglePoint.Text" xml:space="preserve">
-    <value>Single Point</value>
-  </data>
-  <data name="&gt;&gt;rdoSinglePoint.Name" xml:space="preserve">
-    <value>rdoSinglePoint</value>
-  </data>
-  <data name="&gt;&gt;rdoSinglePoint.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoSinglePoint.Parent" xml:space="preserve">
-    <value>grpLocation</value>
-  </data>
-  <data name="&gt;&gt;rdoSinglePoint.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="rdoPoints.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="rdoPoints.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdoPoints.Location" type="System.Drawing.Point, System.Drawing">
-    <value>190, 19</value>
-  </data>
-  <data name="rdoPoints.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 17</value>
-  </data>
-  <data name="rdoPoints.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="rdoPoints.Text" xml:space="preserve">
-    <value>Points</value>
-  </data>
-  <data name="&gt;&gt;rdoPoints.Name" xml:space="preserve">
-    <value>rdoPoints</value>
-  </data>
-  <data name="&gt;&gt;rdoPoints.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoPoints.Parent" xml:space="preserve">
-    <value>grpLocation</value>
-  </data>
-  <data name="&gt;&gt;rdoPoints.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="rdoRange.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="rdoRange.Location" type="System.Drawing.Point, System.Drawing">
-    <value>70, 19</value>
-  </data>
-  <data name="rdoRange.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 17</value>
-  </data>
-  <data name="rdoRange.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="rdoRange.Text" xml:space="preserve">
-    <value>Range</value>
-  </data>
-  <data name="&gt;&gt;rdoRange.Name" xml:space="preserve">
-    <value>rdoRange</value>
-  </data>
-  <data name="&gt;&gt;rdoRange.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoRange.Parent" xml:space="preserve">
-    <value>grpLocation</value>
-  </data>
-  <data name="&gt;&gt;rdoRange.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="ucrPnlLocation.Location" type="System.Drawing.Point, System.Drawing">
@@ -386,6 +365,9 @@
   </data>
   <data name="lblX.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblX.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblX.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 53</value>
@@ -456,6 +438,9 @@
   <data name="lblMinY.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblMinY.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblMinY.Location" type="System.Drawing.Point, System.Drawing">
     <value>117, 80</value>
   </data>
@@ -504,6 +489,9 @@
   <data name="lblY.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblY.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblY.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 80</value>
   </data>
@@ -531,6 +519,9 @@
   <data name="lblMaxX.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblMaxX.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblMaxX.Location" type="System.Drawing.Point, System.Drawing">
     <value>293, 53</value>
   </data>
@@ -557,6 +548,9 @@
   </data>
   <data name="lblMinX.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblMinX.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblMinX.Location" type="System.Drawing.Point, System.Drawing">
     <value>117, 53</value>
@@ -605,6 +599,9 @@
   </data>
   <data name="lblMaxY.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblMaxY.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblMaxY.Location" type="System.Drawing.Point, System.Drawing">
     <value>293, 80</value>
@@ -657,6 +654,9 @@
   <data name="lblMaxS.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblMaxS.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblMaxS.Location" type="System.Drawing.Point, System.Drawing">
     <value>303, 332</value>
   </data>
@@ -683,6 +683,9 @@
   </data>
   <data name="lblMinS.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblMinS.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblMinS.Location" type="System.Drawing.Point, System.Drawing">
     <value>127, 331</value>
@@ -711,6 +714,9 @@
   <data name="lblS.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblS.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblS.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 332</value>
   </data>
@@ -737,6 +743,9 @@
   </data>
   <data name="lblZ.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblZ.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblZ.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 305</value>
@@ -807,6 +816,9 @@
   <data name="lblMaxT.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblMaxT.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblMaxT.Location" type="System.Drawing.Point, System.Drawing">
     <value>303, 359</value>
   </data>
@@ -854,6 +866,9 @@
   </data>
   <data name="lblMinT.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblMinT.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblMinT.Location" type="System.Drawing.Point, System.Drawing">
     <value>127, 359</value>
@@ -903,6 +918,9 @@
   <data name="lblMaxZ.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblMaxZ.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblMaxZ.Location" type="System.Drawing.Point, System.Drawing">
     <value>303, 305</value>
   </data>
@@ -951,6 +969,9 @@
   <data name="lblT.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblT.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblT.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 359</value>
   </data>
@@ -998,6 +1019,9 @@
   </data>
   <data name="lblMinZ.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblMinZ.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblMinZ.Location" type="System.Drawing.Point, System.Drawing">
     <value>127, 305</value>
@@ -1141,7 +1165,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>475, 397</value>
+    <value>711, 397</value>
   </data>
   <data name="tbOptions.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1181,5 +1205,50 @@
   </data>
   <data name="&gt;&gt;tbNetCDF.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>176, 433</value>
+  </data>
+  <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 30</value>
+  </data>
+  <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
+    <value>ucrBase</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Type" xml:space="preserve">
+    <value>instat.ucrButtonsSubdialogue, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>839, 468</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>NetCDF Options</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>sdgOpenNetCDF</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>
