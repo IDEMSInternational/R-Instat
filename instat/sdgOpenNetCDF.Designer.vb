@@ -56,9 +56,20 @@ Partial Class sdgOpenNetCDF
         Me.ucrChkKeepRawTime = New instat.ucrCheck()
         Me.ucrChkIncludeMetadata = New instat.ucrCheck()
         Me.ucrBase = New instat.ucrButtonsSubdialogue()
+        Me.grpLocation = New System.Windows.Forms.GroupBox()
+        Me.ucrPnlLocation = New instat.UcrPanel()
+        Me.rdoRange = New System.Windows.Forms.RadioButton()
+        Me.rdoPoints = New System.Windows.Forms.RadioButton()
+        Me.rdoSinglePoint = New System.Windows.Forms.RadioButton()
+        Me.ucrInputPointX = New instat.ucrInputTextBox()
+        Me.ucrInputPointY = New instat.ucrInputTextBox()
+        Me.ucrReceiverPointsX = New instat.ucrReceiverSingle()
+        Me.ucrReceiverPointsY = New instat.ucrReceiverSingle()
+        Me.ucrSelectorPoints = New instat.ucrSelectorByDataFrameAddRemove()
         Me.tbNetCDF.SuspendLayout()
         Me.tbSubset.SuspendLayout()
         Me.tbOptions.SuspendLayout()
+        Me.grpLocation.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbNetCDF
@@ -71,12 +82,12 @@ Partial Class sdgOpenNetCDF
         '
         'tbSubset
         '
+        Me.tbSubset.Controls.Add(Me.ucrSelectorPoints)
+        Me.tbSubset.Controls.Add(Me.grpLocation)
         Me.tbSubset.Controls.Add(Me.lblMaxS)
         Me.tbSubset.Controls.Add(Me.lblMinS)
         Me.tbSubset.Controls.Add(Me.lblS)
         Me.tbSubset.Controls.Add(Me.lblZ)
-        Me.tbSubset.Controls.Add(Me.lblY)
-        Me.tbSubset.Controls.Add(Me.lblMinX)
         Me.tbSubset.Controls.Add(Me.dtpMinT)
         Me.tbSubset.Controls.Add(Me.dtpMaxT)
         Me.tbSubset.Controls.Add(Me.lblMaxT)
@@ -85,18 +96,10 @@ Partial Class sdgOpenNetCDF
         Me.tbSubset.Controls.Add(Me.ucrInputMaxS)
         Me.tbSubset.Controls.Add(Me.lblMaxZ)
         Me.tbSubset.Controls.Add(Me.ucrInputMaxZ)
-        Me.tbSubset.Controls.Add(Me.lblMaxY)
-        Me.tbSubset.Controls.Add(Me.ucrInputMaxY)
-        Me.tbSubset.Controls.Add(Me.lblMaxX)
-        Me.tbSubset.Controls.Add(Me.ucrInputMaxX)
         Me.tbSubset.Controls.Add(Me.lblT)
         Me.tbSubset.Controls.Add(Me.ucrInputMinS)
         Me.tbSubset.Controls.Add(Me.lblMinZ)
         Me.tbSubset.Controls.Add(Me.ucrInputMinZ)
-        Me.tbSubset.Controls.Add(Me.lblMinY)
-        Me.tbSubset.Controls.Add(Me.ucrInputMinY)
-        Me.tbSubset.Controls.Add(Me.lblX)
-        Me.tbSubset.Controls.Add(Me.ucrInputMinX)
         resources.ApplyResources(Me.tbSubset, "tbSubset")
         Me.tbSubset.Name = "tbSubset"
         Me.tbSubset.UseVisualStyleBackColor = True
@@ -290,6 +293,98 @@ Partial Class sdgOpenNetCDF
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'grpLocation
+        '
+        Me.grpLocation.Controls.Add(Me.ucrReceiverPointsY)
+        Me.grpLocation.Controls.Add(Me.ucrReceiverPointsX)
+        Me.grpLocation.Controls.Add(Me.ucrInputPointY)
+        Me.grpLocation.Controls.Add(Me.ucrInputPointX)
+        Me.grpLocation.Controls.Add(Me.rdoSinglePoint)
+        Me.grpLocation.Controls.Add(Me.rdoPoints)
+        Me.grpLocation.Controls.Add(Me.rdoRange)
+        Me.grpLocation.Controls.Add(Me.ucrPnlLocation)
+        Me.grpLocation.Controls.Add(Me.lblX)
+        Me.grpLocation.Controls.Add(Me.ucrInputMinX)
+        Me.grpLocation.Controls.Add(Me.ucrInputMinY)
+        Me.grpLocation.Controls.Add(Me.lblMinY)
+        Me.grpLocation.Controls.Add(Me.ucrInputMaxX)
+        Me.grpLocation.Controls.Add(Me.lblY)
+        Me.grpLocation.Controls.Add(Me.lblMaxX)
+        Me.grpLocation.Controls.Add(Me.lblMinX)
+        Me.grpLocation.Controls.Add(Me.ucrInputMaxY)
+        Me.grpLocation.Controls.Add(Me.lblMaxY)
+        resources.ApplyResources(Me.grpLocation, "grpLocation")
+        Me.grpLocation.Name = "grpLocation"
+        Me.grpLocation.TabStop = False
+        '
+        'ucrPnlLocation
+        '
+        resources.ApplyResources(Me.ucrPnlLocation, "ucrPnlLocation")
+        Me.ucrPnlLocation.Name = "ucrPnlLocation"
+        '
+        'rdoRange
+        '
+        resources.ApplyResources(Me.rdoRange, "rdoRange")
+        Me.rdoRange.Name = "rdoRange"
+        Me.rdoRange.TabStop = True
+        Me.rdoRange.UseVisualStyleBackColor = True
+        '
+        'rdoPoints
+        '
+        resources.ApplyResources(Me.rdoPoints, "rdoPoints")
+        Me.rdoPoints.Name = "rdoPoints"
+        Me.rdoPoints.TabStop = True
+        Me.rdoPoints.UseVisualStyleBackColor = True
+        '
+        'rdoSinglePoint
+        '
+        resources.ApplyResources(Me.rdoSinglePoint, "rdoSinglePoint")
+        Me.rdoSinglePoint.Name = "rdoSinglePoint"
+        Me.rdoSinglePoint.TabStop = True
+        Me.rdoSinglePoint.UseVisualStyleBackColor = True
+        '
+        'ucrInputPointX
+        '
+        Me.ucrInputPointX.AddQuotesIfUnrecognised = True
+        Me.ucrInputPointX.IsMultiline = False
+        Me.ucrInputPointX.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputPointX, "ucrInputPointX")
+        Me.ucrInputPointX.Name = "ucrInputPointX"
+        '
+        'ucrInputPointY
+        '
+        Me.ucrInputPointY.AddQuotesIfUnrecognised = True
+        Me.ucrInputPointY.IsMultiline = False
+        Me.ucrInputPointY.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputPointY, "ucrInputPointY")
+        Me.ucrInputPointY.Name = "ucrInputPointY"
+        '
+        'ucrReceiverPointsX
+        '
+        Me.ucrReceiverPointsX.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverPointsX, "ucrReceiverPointsX")
+        Me.ucrReceiverPointsX.Name = "ucrReceiverPointsX"
+        Me.ucrReceiverPointsX.Selector = Nothing
+        Me.ucrReceiverPointsX.strNcFilePath = ""
+        Me.ucrReceiverPointsX.ucrSelector = Nothing
+        '
+        'ucrReceiverPointsY
+        '
+        Me.ucrReceiverPointsY.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverPointsY, "ucrReceiverPointsY")
+        Me.ucrReceiverPointsY.Name = "ucrReceiverPointsY"
+        Me.ucrReceiverPointsY.Selector = Nothing
+        Me.ucrReceiverPointsY.strNcFilePath = ""
+        Me.ucrReceiverPointsY.ucrSelector = Nothing
+        '
+        'ucrSelectorPoints
+        '
+        Me.ucrSelectorPoints.bDropUnusedFilterLevels = False
+        Me.ucrSelectorPoints.bShowHiddenColumns = False
+        Me.ucrSelectorPoints.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorPoints, "ucrSelectorPoints")
+        Me.ucrSelectorPoints.Name = "ucrSelectorPoints"
+        '
         'sdgOpenNetCDF
         '
         resources.ApplyResources(Me, "$this")
@@ -304,6 +399,8 @@ Partial Class sdgOpenNetCDF
         Me.tbSubset.ResumeLayout(False)
         Me.tbSubset.PerformLayout()
         Me.tbOptions.ResumeLayout(False)
+        Me.grpLocation.ResumeLayout(False)
+        Me.grpLocation.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -340,4 +437,14 @@ Partial Class sdgOpenNetCDF
     Friend WithEvents ucrInputMinY As ucrInputTextBox
     Friend WithEvents lblX As Label
     Friend WithEvents ucrInputMinX As ucrInputTextBox
+    Friend WithEvents grpLocation As GroupBox
+    Friend WithEvents rdoSinglePoint As RadioButton
+    Friend WithEvents rdoPoints As RadioButton
+    Friend WithEvents rdoRange As RadioButton
+    Friend WithEvents ucrPnlLocation As UcrPanel
+    Friend WithEvents ucrReceiverPointsY As ucrReceiverSingle
+    Friend WithEvents ucrReceiverPointsX As ucrReceiverSingle
+    Friend WithEvents ucrInputPointY As ucrInputTextBox
+    Friend WithEvents ucrInputPointX As ucrInputTextBox
+    Friend WithEvents ucrSelectorPoints As ucrSelectorByDataFrameAddRemove
 End Class
