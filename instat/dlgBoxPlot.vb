@@ -159,6 +159,14 @@ Public Class dlgBoxplot
         clsBoxplotFunc.AddParameter("varwidth", "FALSE", iPosition:=0)
         clsBoxplotFunc.AddParameter("outlier.colour", Chr(34) & "red" & Chr(34), iPosition:=1)
 
+        clsViolinplotFunc.SetPackageName("ggplot2")
+        clsViolinplotFunc.SetRCommand("geom_violin")
+
+        clsJitterplotFunc.SetPackageName("ggplot2")
+        clsJitterplotFunc.SetRCommand("geom_jitter")
+        clsJitterplotFunc.AddParameter("Height", 0.2, iPosition:=1)
+        clsJitterplotFunc.AddParameter("width", 0.0, iPosition:=2)
+
         'Setting operation and adding parameters to baseoperator
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -270,16 +278,10 @@ Public Class dlgBoxplot
             ucrSecondFactorReceiver.ChangeParameterName("fill")
             clsCurrGeomFunc = clsBoxplotFunc
         ElseIf rdoJitter.Checked Then
-            clsJitterplotFunc.SetPackageName("ggplot2")
-            clsJitterplotFunc.SetRCommand("geom_jitter")
-            clsJitterplotFunc.AddParameter("Height", 0.2, iPosition:=1)
-            clsJitterplotFunc.AddParameter("width", 0.0, iPosition:=2)
             ucrSaveBoxplot.SetPrefix("jitter")
             ucrSecondFactorReceiver.ChangeParameterName("colour")
             clsCurrGeomFunc = clsJitterplotFunc
         Else
-            clsViolinplotFunc.SetPackageName("ggplot2")
-            clsViolinplotFunc.SetRCommand("geom_violin")
             ucrSaveBoxplot.SetPrefix("violin")
             ucrSecondFactorReceiver.ChangeParameterName("fill")
             clsCurrGeomFunc = clsViolinplotFunc
