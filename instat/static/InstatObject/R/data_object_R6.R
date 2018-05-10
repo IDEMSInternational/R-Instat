@@ -2385,7 +2385,9 @@ data_object$set("public","infill_missing_dates", function(date_name, factors, re
       message("Attempting to infill ", (length(full_dates) - length(date_col)), " missing dates...")
       full_dates <- data.frame(full_dates)
       names(full_dates) <- date_name
-      self$merge_data(full_dates, by = date_name, type = "full")
+      by <- date_name
+      names(by) <- date_name
+      self$merge_data(full_dates, by = by, type = "full")
       message("Missing dates infilled.")
       if(resort) self$sort_dataframe(col_names = date_name)
     }
