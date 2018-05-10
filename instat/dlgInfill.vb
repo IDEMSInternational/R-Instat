@@ -35,6 +35,7 @@ Public Class dlgInfill
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 497
 
+        ucrBase.clsRsyntax.iCallType = 2
         'Set receiver
         ucrReceiverDate.Selector = ucrInfillSelector
         ucrReceiverDate.SetMeAsReceiver()
