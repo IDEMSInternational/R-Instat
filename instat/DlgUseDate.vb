@@ -127,7 +127,20 @@ Public Class dlgUseDate
         ucrNudShiftStartDay.SetRDefault(1)
 
         ucrInputComboBoxMonth.SetParameter(New RParameter("s_start_month", 23))
-        ucrInputComboBoxMonth.SetItems(getMonths())
+        Dim dctMonth As New Dictionary(Of String, String)
+        dctMonth.Add("January", 1)
+        dctMonth.Add("February", 2)
+        dctMonth.Add("March", 3)
+        dctMonth.Add("April", 4)
+        dctMonth.Add("May", 5)
+        dctMonth.Add("June", 6)
+        dctMonth.Add("July", 7)
+        dctMonth.Add("August", 8)
+        dctMonth.Add("September", 9)
+        dctMonth.Add("October", 10)
+        dctMonth.Add("November", 11)
+        dctMonth.Add("December", 12)
+        ucrInputComboBoxMonth.SetItems(dctMonth)
         ucrInputComboBoxMonth.SetRDefault(8)
         ucrInputComboBoxMonth.SetDropDownStyleAsNonEditable()
         'TODO This should probably be the default for this control, hence this is temporary
@@ -199,20 +212,4 @@ Public Class dlgUseDate
         TestOKEnabled()
     End Sub
 
-    Private Function getMonths() As Dictionary(Of String, String)
-        Dim dctMonth As New Dictionary(Of String, String)
-        dctMonth.Add("January", 1)
-        dctMonth.Add("February", 2)
-        dctMonth.Add("March", 3)
-        dctMonth.Add("April", 4)
-        dctMonth.Add("May", 5)
-        dctMonth.Add("June", 6)
-        dctMonth.Add("July", 7)
-        dctMonth.Add("August", 8)
-        dctMonth.Add("September", 9)
-        dctMonth.Add("October", 10)
-        dctMonth.Add("November", 11)
-        dctMonth.Add("December", 12)
-        Return dctMonth
-    End Function
 End Class
