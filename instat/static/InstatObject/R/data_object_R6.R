@@ -2382,13 +2382,12 @@ data_object$set("public","infill_missing_dates", function(date_name, factors, re
     max <- max(date_col)
     full_dates <- seq(min, max, by = "day")
     if(length(full_dates) > length(date_col)) {
-      message("Attempting to infill ", (length(full_dates) - length(date_col)), " missing dates...")
+      cat("Infilling ", (length(full_dates) - length(date_col)), " missing dates", "\n")
       full_dates <- data.frame(full_dates)
       names(full_dates) <- date_name
       by <- date_name
       names(by) <- date_name
       self$merge_data(full_dates, by = by, type = "full")
-      message("Missing dates infilled.")
       if(resort) self$sort_dataframe(col_names = date_name)
     }
   }
@@ -2406,7 +2405,7 @@ data_object$set("public","infill_missing_dates", function(date_name, factors, re
     for(j in 1:nrow(date_ranges)) {
       full_dates <- seq(date_ranges$Min[j], date_ranges$Max[j], by = "day")
       if(length(full_dates) > date_lengths[[2]][j]) {
-        message("Attempting to infill ", (length(full_dates) - date_lengths[[2]][j]), " missing dates for ", paste(unlist(date_ranges[1:length(factors)][j, ]), collapse = "-"))
+        cat("Infilling ", (length(full_dates) - date_lengths[[2]][j]), " missing dates for ", paste(unlist(date_ranges[1:length(factors)][j, ]), collapse = "-"), "\n")
         merge_required <- TRUE
       }
       full_dates <- data.frame(full_dates)
