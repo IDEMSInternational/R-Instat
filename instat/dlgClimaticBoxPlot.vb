@@ -153,6 +153,7 @@ Public Class dlgClimaticBoxPlot
         ucrChkVerticalXTickMarkers.SetText("Vertical X Tick Markers")
         ucrChkVerticalXTickMarkers.SetParameter(clsThemeParam, bNewAddRemoveParameter:=True, bNewChangeParameterValue:=False)
 
+        ucrInputStation.SetParameter(New RParameter("none"))
         dctStation.Add("Facet 1", Chr(34) & "facet_wrap" & Chr(34))
         dctStation.Add("Facet 2", Chr(34) & "facet_grid" & Chr(34))
         dctStation.Add("None", Chr(34) & "none" & Chr(34))
@@ -394,6 +395,20 @@ Public Class dlgClimaticBoxPlot
     '        clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsFactor, iPosition:=1)
     '    End If
     'End Sub
+    Private Sub FacetsCheck()
+        If Not ucrInputStation.IsEmpty AndAlso Not ucrInputYear.IsEmpty AndAlso Not ucrInputWithinYear.IsEmpty Then
+            If ucrInputStation.Text = "Facet 2" AndAlso (ucrInputYear.Text <> "Facet 1" OrElse ucrInputWithinYear.Text <> "Facet1") Then
+                MsgBox("Facet 2 requires Facet 1.", vbOKOnly)
+                ucrInputStation.SetText("None")
+            ElseIf ucrInputYear.Text = "Facet 2" AndAlso (ucrInputStation.Text <> "Facet 1" OrElse ucrInputWithinYear.Text <> "Facet1") Then
+                MsgBox("Facet 2 requires Facet 1.", vbOKOnly)
+                ucrInputYear.SetText("None")
+            ElseIf ucrInputWithinYear.Text = "Facet 2" AndAlso (ucrInputYear.Text <> "Facet 1" OrElse ucrInputStation.Text <> "Facet1") Then
+                MsgBox("Facet 2 requires Facet 1.", vbOKOnly)
+                ucrInputWithinYear.SetText("None")
+            End If
+        End If
+    End Sub
 
     Private Sub ChangeParameter()
         If Not ucrReceiverStation.IsEmpty Then
@@ -455,6 +470,7 @@ Public Class dlgClimaticBoxPlot
         '    MarginsEnabled()
         ChangeParameter()
         CheckComboBox()
+        FacetsCheck()
     End Sub
 
     Private Sub ucrSelectorClimaticBoxPlot_DataFrameChanged() Handles ucrSelectorClimaticBoxPlot.DataFrameChanged
