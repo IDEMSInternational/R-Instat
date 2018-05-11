@@ -356,7 +356,7 @@ Public Class dlgMakeDate
         If rdoOrigin.Checked Then
             ucrReceiverForDate.strSelectorHeading = "Numerics"
         Else
-            ucrReceiverForDate.strSelectorHeading = "Variables"
+            ucrReceiverForDate.strSelectorHeading = "Non Numeric"
         End If
     End Sub
 
@@ -408,14 +408,17 @@ Public Class dlgMakeDate
             ucrReceiverForDate.SetExcludedDataTypes({"numeric"})
             ucrBase.clsRsyntax.RemoveParameter("format")
             ucrBase.clsRsyntax.RemoveParameter("origin")
-        ElseIf rdoOrigin.Checked Then
-            grpFormats.Hide()
-            cmdHelp.Visible = False
-            ucrReceiverForDate.SetIncludedDataTypes({"numeric"})
-        Else
-            ucrReceiverForDate.SetExcludedDataTypes({"numeric"})
+            ElseIf rdoOrigin.Checked Then
+                grpFormats.Hide()
+                cmdHelp.Visible = False
+                ucrReceiverForDate.SetIncludedDataTypes({"numeric"})
+            Else
+                ucrReceiverForDate.SetExcludedDataTypes({"numeric"})
             grpFormats.Show()
             cmdHelp.Visible = True
+        End If
+        If Not ucrReceiverForDate.IsEmpty AndAlso Not ucrSelectorMakeDate.ContainsVariable(ucrReceiverForDate.GetVariableNames(False)) Then
+            ucrReceiverForDate.Clear()
         End If
         SelectorHeader()
         If ucrInputOrigin.GetText = "Excel" Then
