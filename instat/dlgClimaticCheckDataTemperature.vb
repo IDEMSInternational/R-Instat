@@ -106,7 +106,7 @@ Public Class dlgClimaticCheckDataTemperature
         ucrReceiverElement1.bWithQuotes = False
 
         ucrReceiverElement2.Selector = ucrSelectorTemperature
-        ucrReceiverElement2.SetParameter(New RParameter("x", iNewPosition:=1, bNewIncludeArgumentName:=False))
+        ucrReceiverElement2.SetParameter(New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False))
         ucrReceiverElement2.SetParameterIsString()
         ucrReceiverElement2.bWithQuotes = False
 
@@ -280,8 +280,8 @@ Public Class dlgClimaticCheckDataTemperature
         clsOutlierLimitUpperCalc.AddParameter("result_name", Chr(34) & strUpper_Outlier_Limit_Tmax & Chr(34), iPosition:=4)
         clsOutlierLimitUpperCalc.AddParameter("save", "0", iPosition:=5)
         clsOutlierLimitUpperCalc.SetAssignTo("upper_outlier_limit_Tmax")
+        clsOutlierLimitUpperFunc.AddParameter("bupperlimit", "TRUE")
         clsOutlierLimitUpperFunc.SetRCommand("summary_outlier_limit")
-
         clsOutlierLimitUpperFunc.bToScriptAsRString = True
 
         'Lower outlier limit Function and Calc
@@ -291,6 +291,7 @@ Public Class dlgClimaticCheckDataTemperature
         clsOutlierLimitLowerCalc.AddParameter("result_name", Chr(34) & strLower_Outlier_Limit_Tmax & Chr(34), iPosition:=4)
         clsOutlierLimitLowerCalc.AddParameter("save", "0", iPosition:=5)
         clsOutlierLimitLowerCalc.SetAssignTo("lower_outlier_limit_Tmax")
+        clsOutlierLimitLowerFunc.AddParameter("bupperlimit", "FALSE")
         clsOutlierLimitLowerFunc.SetRCommand("summary_outlier_limit")
         clsOutlierLimitLowerFunc.bToScriptAsRString = True
 
@@ -310,6 +311,7 @@ Public Class dlgClimaticCheckDataTemperature
         clsOutlierLimitUpperCalcTmin.AddParameter("result_name", Chr(34) & strUpper_Outlier_Limit_Tmin & Chr(34), iPosition:=4)
         clsOutlierLimitUpperCalcTmin.AddParameter("save", "0", iPosition:=5)
         clsOutlierLimitUpperCalcTmin.SetAssignTo("upper_outlier_limit_Tmin")
+        clsOutlierLimitUpperFuncTmin.AddParameter("bupperlimit", "TRUE")
         clsOutlierLimitUpperFuncTmin.SetRCommand("summary_outlier_limit")
         clsOutlierLimitUpperFuncTmin.bToScriptAsRString = True
 
@@ -320,6 +322,7 @@ Public Class dlgClimaticCheckDataTemperature
         clsOutlierLimitLowerCalcTmin.AddParameter("result_name", Chr(34) & strLower_Outlier_Limit_Tmin & Chr(34), iPosition:=4)
         clsOutlierLimitLowerCalcTmin.AddParameter("save", "0", iPosition:=5)
         clsOutlierLimitLowerCalcTmin.SetAssignTo("lower_outlier_limit_Tmin")
+        clsOutlierLimitLowerFuncTmin.AddParameter("bupperlimit", "FALSE")
         clsOutlierLimitLowerFuncTmin.SetRCommand("summary_outlier_limit")
         clsOutlierLimitLowerFuncTmin.bToScriptAsRString = True
 
@@ -334,7 +337,7 @@ Public Class dlgClimaticCheckDataTemperature
         clsOutlierUpperOperatorTmin.SetOperation(">")
         clsOutlierUpperOperatorTmin.AddParameter("right", strUpper_Outlier_Limit_Tmin, iPosition:=1)
 
-        'Upper Outlier Operator 
+        'Lower Outlier Operator 
         clsOutlierLowerOperatorTmin.SetOperation("<")
         clsOutlierLowerOperatorTmin.AddParameter("right", strLower_Outlier_Limit_Tmin, iPosition:=1)
 
@@ -367,7 +370,7 @@ Public Class dlgClimaticCheckDataTemperature
         ucrReceiverElement1.AddAdditionalCodeParameterPair(clsOutlierLimitUpperFunc, New RParameter("x", 0), iAdditionalPairNo:=7)
         ucrReceiverElement1.AddAdditionalCodeParameterPair(clsOutlierLimitLowerFunc, New RParameter("x", 0), iAdditionalPairNo:=8)
         ucrReceiverElement2.AddAdditionalCodeParameterPair(clsGreaterEqualTo2Operator, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
-        ucrReceiverElement2.AddAdditionalCodeParameterPair(clsLessEqualTo2Operator, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
+        ucrReceiverElement2.AddAdditionalCodeParameterPair(clsDiffOperator, New RParameter("right", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
         ucrReceiverElement2.AddAdditionalCodeParameterPair(clsOutlierUpperOperatorTmin, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
         ucrReceiverElement2.AddAdditionalCodeParameterPair(clsOutlierLowerOperatorTmin, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=4)
         ucrReceiverElement2.AddAdditionalCodeParameterPair(clsOutlierLimitUpperFuncTmin, New RParameter("x", 0), iAdditionalPairNo:=5)
@@ -379,10 +382,10 @@ Public Class dlgClimaticCheckDataTemperature
         ucrNudRangeElement2Max.SetRCode(clsGreaterEqualTo2Operator, bReset)
         ucrNudRangeElement2Min.SetRCode(clsLessEqualTo2Operator, bReset)
         ucrReceiverElement1.SetRCode(clsLessEqualToOperator, bReset)
+        ucrReceiverElement2.SetRCode(clsLessEqualTo2Operator, bReset)
         ucrNudRangeElement1Min.SetRCode(clsLessEqualToOperator, bReset)
         ucrNudRangeElement1Max.SetRCode(clsGreaterEqualToOperator, bReset)
         ucrNudJump.SetRCode(clsJumpGreaterOperator, bReset)
-        ucrReceiverElement2.SetRCode(clsDiffOperator, bReset)
         ucrNudDifference.SetRCode(clsLessDiffOperator, bReset)
         ucrNudSame.SetRCode(clsSameGreaterOperator, bReset)
         ucrChkDifference.SetRCode(clsOrOperator, bReset)
@@ -394,25 +397,64 @@ Public Class dlgClimaticCheckDataTemperature
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrChkRange.Checked AndAlso Not ucrReceiverElement1.IsEmpty() AndAlso ucrNudRangeElement1Min.GetText <> "" AndAlso ucrNudRangeElement1Max.GetText <> "" Then
-            ucrBase.OKEnabled(True)
-        ElseIf ucrChkRange2.Checked AndAlso Not ucrReceiverElement2.IsEmpty() AndAlso ucrNudRangeElement2Min.GetText <> "" AndAlso ucrNudRangeElement2Max.GetText <> "" Then
-            ucrBase.OKEnabled(True)
-        ElseIf Not ucrReceiverElement1.IsEmpty AndAlso ucrChkSame.Checked AndAlso ucrNudSame.GetText <> "" Then
-            ucrBase.OKEnabled(True)
-        ElseIf Not ucrReceiverElement1.IsEmpty AndAlso ucrChkJump.Checked AndAlso ucrNudJump.GetText <> "" Then
-            ucrBase.OKEnabled(True)
-        ElseIf ucrChkDifference.Checked AndAlso ucrNudDifference.GetText <> "" AndAlso Not ucrReceiverElement1.IsEmpty AndAlso Not ucrReceiverElement2.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        ElseIf ucrChkOutlier.Checked AndAlso Not ucrReceiverElement1.IsEmpty() Then
-            ucrBase.OKEnabled(True)
-        ElseIf ucrChkOutlier.Checked AndAlso Not ucrReceiverElement2.IsEmpty() Then
-            ucrBase.OKEnabled(True)
-        ElseIf ucrChkOutlier.Checked AndAlso Not ucrReceiverElement1.IsEmpty() AndAlso Not ucrReceiverElement2.IsEmpty() Then
-            ucrBase.OKEnabled(True)
-        Else
+
+        Dim bEnable As Boolean = False
+
+        If ucrReceiverElement1.IsEmpty() AndAlso ucrReceiverElement2.IsEmpty() Then
             ucrBase.OKEnabled(False)
+            Exit Sub
+        ElseIf ucrReceiverElement1.IsEmpty() OrElse ucrReceiverElement2.IsEmpty() AndAlso ucrChkDifference.Checked Then
+            ucrBase.OKEnabled(False)
+            Exit Sub
         End If
+
+        If ucrChkRange.Checked Then
+            If Not ucrReceiverElement1.IsEmpty() AndAlso ucrNudRangeElement1Min.GetText <> "" AndAlso ucrNudRangeElement1Max.GetText <> "" Then
+                bEnable = True
+            Else
+                ucrBase.OKEnabled(False)
+                Exit Sub
+            End If
+        End If
+        If ucrChkRange2.Checked Then
+            If Not ucrReceiverElement2.IsEmpty() AndAlso ucrNudRangeElement2Min.GetText <> "" AndAlso ucrNudRangeElement2Max.GetText <> "" Then
+                bEnable = True
+            Else
+                ucrBase.OKEnabled(False)
+                Exit Sub
+            End If
+        End If
+        If ucrChkSame.Checked Then
+            If ucrNudSame.GetText <> "" Then
+                bEnable = True
+            Else
+                ucrBase.OKEnabled(False)
+                Exit Sub
+            End If
+        End If
+        If ucrChkJump.Checked Then
+            If ucrNudJump.GetText <> "" Then
+                bEnable = True
+            Else
+                ucrBase.OKEnabled(False)
+                Exit Sub
+            End If
+        End If
+        If ucrChkDifference.Checked Then
+            If ucrNudDifference.GetText <> "" Then
+                bEnable = True
+            Else
+                ucrBase.OKEnabled(False)
+                Exit Sub
+            End If
+
+        End If
+        If ucrChkOutlier.Checked Then
+            bEnable = True
+        End If
+
+        ucrBase.OKEnabled(bEnable)
+
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -439,32 +481,30 @@ Public Class dlgClimaticCheckDataTemperature
             ElseIf ucrReceiverElement1.IsEmpty() Then
                 clsOutlierLimitUpperCalc.RemoveParameterByName("manipulations")
                 clsOutlierLimitLowerCalc.RemoveParameterByName("manipulations")
-            ElseIf Not ucrReceiverElement2.IsEmpty() Then
+            End If
+            If Not ucrReceiverElement2.IsEmpty() Then
                 clsOutlierLimitUpperCalcTmin.AddParameter("manipulations", clsRFunctionParameter:=clsListForOutlierManipulations, iPosition:=3)
                 clsOutlierLimitLowerCalcTmin.AddParameter("manipulations", clsRFunctionParameter:=clsListForOutlierManipulations, iPosition:=3)
             ElseIf ucrReceiverElement2.IsEmpty Then
                 clsOutlierLimitUpperCalcTmin.RemoveParameterByName("manipulations")
                 clsOutlierLimitLowerCalcTmin.RemoveParameterByName("manipulations")
             End If
+        Else
+            clsOutlierLimitUpperCalc.RemoveParameterByName("manipulations")
+            clsOutlierLimitLowerCalc.RemoveParameterByName("manipulations")
+            clsOutlierLimitUpperCalcTmin.RemoveParameterByName("manipulations")
+            clsOutlierLimitLowerCalcTmin.RemoveParameterByName("manipulations")
         End If
     End Sub
 
     Private Sub OutlierLimitCalc()
         If Not ucrReceiverElement1.IsEmpty Then
-            clsOutlierLimitUpperFunc.AddParameter("bupperlimit", "TRUE", iPosition:=1)
-            clsOutlierLimitLowerFunc.AddParameter("bupperlimit", "FALSE", iPosition:=1)
             clsOutlierLimitUpperCalc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & ")", iPosition:=2)
             clsOutlierLimitLowerCalc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & ")", iPosition:=2)
-        ElseIf Not ucrReceiverElement2.IsEmpty Then
-            clsOutlierLimitUpperFuncTmin.AddParameter("bupperlimit", "TRUE", iPosition:=1)
-            clsOutlierLimitLowerFuncTmin.AddParameter("bupperlimit", "FALSE", iPosition:=1)
+        End If
+        If Not ucrReceiverElement2.IsEmpty Then
             clsOutlierLimitUpperCalcTmin.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement2.GetVariableNames & ")", iPosition:=2)
             clsOutlierLimitLowerCalcTmin.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement2.GetVariableNames & ")", iPosition:=2)
-            'ElseIf Not ucrReceiverElement1.IsEmpty AndAlso Not ucrReceiverElement2.IsEmpty Then
-            'clsOutlierLimitUpperCalc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & ")", iPosition:=2)
-            'clsOutlierLimitLowerCalc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & ")", iPosition:=2)
-            'clsOutlierLimitUpperCalcTmin.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement2.GetVariableNames & ")", iPosition:=2)
-            'clsOutlierLimitLowerCalcTmin.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement2.GetVariableNames & ")", iPosition:=2)
         End If
     End Sub
 
@@ -504,6 +544,7 @@ Public Class dlgClimaticCheckDataTemperature
     Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement1.ControlValueChanged, ucrReceiverElement2.ControlValueChanged, ucrChkRange.ControlValueChanged, ucrChkRange2.ControlValueChanged
         FilterFunc()
         OutlierLimitCalc()
+        GroupByMonth()
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement1.ControlContentsChanged, ucrReceiverElement2.ControlContentsChanged, ucrNudSame.ControlContentsChanged, ucrNudRangeElement1Min.ControlContentsChanged, ucrNudRangeElement1Max.ControlContentsChanged, ucrNudRangeElement2Min.ControlContentsChanged, ucrNudRangeElement2Max.ControlContentsChanged, ucrNudJump.ControlContentsChanged, ucrNudRangeElement2Min.ControlContentsChanged, ucrNudRangeElement2Max.ControlContentsChanged, ucrNudDifference.ControlContentsChanged, ucrChkRange.ControlContentsChanged, ucrChkRange2.ControlContentsChanged, ucrChkJump.ControlContentsChanged, ucrChkDifference.ControlContentsChanged, ucrChkSame.ControlContentsChanged, ucrChkOutlier.ControlContentsChanged
