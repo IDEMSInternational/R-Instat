@@ -45,23 +45,18 @@ Partial Class sdgCorrPlot
         Me.rdoScatterPlotMatrix = New System.Windows.Forms.RadioButton()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.ucrPnlGraphType = New instat.UcrPanel()
-        Me.lblFactorVariable = New System.Windows.Forms.Label()
-        Me.lblAlpha = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
-        Me.ucrSelectFactor = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.lblFactor = New System.Windows.Forms.Label()
+        Me.ucrSelectorFactor = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
         Me.ucrChkLabel = New instat.ucrCheck()
         Me.lblGeom = New System.Windows.Forms.Label()
-        Me.ucrNudAlphaCorr = New instat.ucrNud()
         Me.ucrInputComboGeom = New instat.ucrInputComboBox()
         Me.ucrNudMaximumSize = New instat.ucrNud()
         Me.lblMaximumSize = New System.Windows.Forms.Label()
         Me.ucrNudMinimunSize = New instat.ucrNud()
         Me.lblMinimumSize = New System.Windows.Forms.Label()
-        Me.lblLabelAlpha = New System.Windows.Forms.Label()
-        Me.ucrNudAlpha = New instat.ucrNud()
-        Me.ucrReceiveFactor = New instat.ucrReceiverSingle()
         Me.ucrSaveGraph = New instat.ucrSave()
-        Me.ucrChkColor = New instat.ucrCheck()
         Me.ucrBaseSdgCorrPlot = New instat.ucrButtonsSubdialogue()
         Me.GroupBox1.SuspendLayout()
         Me.grpOptions.SuspendLayout()
@@ -107,40 +102,42 @@ Partial Class sdgCorrPlot
         resources.ApplyResources(Me.ucrPnlGraphType, "ucrPnlGraphType")
         Me.ucrPnlGraphType.Name = "ucrPnlGraphType"
         '
-        'lblFactorVariable
-        '
-        resources.ApplyResources(Me.lblFactorVariable, "lblFactorVariable")
-        Me.lblFactorVariable.Name = "lblFactorVariable"
-        Me.lblFactorVariable.Tag = "Factor_Variable"
-        '
-        'lblAlpha
-        '
-        resources.ApplyResources(Me.lblAlpha, "lblAlpha")
-        Me.lblAlpha.Name = "lblAlpha"
-        Me.lblAlpha.Tag = "Alpha"
-        '
         'grpOptions
         '
-        Me.grpOptions.Controls.Add(Me.ucrSelectFactor)
+        Me.grpOptions.Controls.Add(Me.lblFactor)
+        Me.grpOptions.Controls.Add(Me.ucrSelectorFactor)
+        Me.grpOptions.Controls.Add(Me.ucrReceiverFactor)
         Me.grpOptions.Controls.Add(Me.ucrChkLabel)
         Me.grpOptions.Controls.Add(Me.lblGeom)
-        Me.grpOptions.Controls.Add(Me.ucrNudAlphaCorr)
         Me.grpOptions.Controls.Add(Me.ucrInputComboGeom)
         Me.grpOptions.Controls.Add(Me.ucrNudMaximumSize)
         Me.grpOptions.Controls.Add(Me.lblMaximumSize)
         Me.grpOptions.Controls.Add(Me.ucrNudMinimunSize)
         Me.grpOptions.Controls.Add(Me.lblMinimumSize)
-        Me.grpOptions.Controls.Add(Me.lblLabelAlpha)
         resources.ApplyResources(Me.grpOptions, "grpOptions")
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.TabStop = False
         '
-        'ucrSelectFactor
+        'lblFactor
         '
-        Me.ucrSelectFactor.bShowHiddenColumns = False
-        Me.ucrSelectFactor.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectFactor, "ucrSelectFactor")
-        Me.ucrSelectFactor.Name = "ucrSelectFactor"
+        resources.ApplyResources(Me.lblFactor, "lblFactor")
+        Me.lblFactor.Name = "lblFactor"
+        '
+        'ucrSelectorFactor
+        '
+        Me.ucrSelectorFactor.bShowHiddenColumns = False
+        Me.ucrSelectorFactor.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorFactor, "ucrSelectorFactor")
+        Me.ucrSelectorFactor.Name = "ucrSelectorFactor"
+        '
+        'ucrReceiverFactor
+        '
+        Me.ucrReceiverFactor.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverFactor, "ucrReceiverFactor")
+        Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
+        Me.ucrReceiverFactor.Selector = Nothing
+        Me.ucrReceiverFactor.strNcFilePath = ""
+        Me.ucrReceiverFactor.ucrSelector = Nothing
         '
         'ucrChkLabel
         '
@@ -153,16 +150,6 @@ Partial Class sdgCorrPlot
         resources.ApplyResources(Me.lblGeom, "lblGeom")
         Me.lblGeom.Name = "lblGeom"
         Me.lblGeom.Tag = "Geom:"
-        '
-        'ucrNudAlphaCorr
-        '
-        Me.ucrNudAlphaCorr.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAlphaCorr.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudAlphaCorr, "ucrNudAlphaCorr")
-        Me.ucrNudAlphaCorr.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudAlphaCorr.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAlphaCorr.Name = "ucrNudAlphaCorr"
-        Me.ucrNudAlphaCorr.Value = New Decimal(New Integer() {100, 0, 0, 131072})
         '
         'ucrInputComboGeom
         '
@@ -203,41 +190,10 @@ Partial Class sdgCorrPlot
         Me.lblMinimumSize.Name = "lblMinimumSize"
         Me.lblMinimumSize.Tag = "Minimum_Size:"
         '
-        'lblLabelAlpha
-        '
-        resources.ApplyResources(Me.lblLabelAlpha, "lblLabelAlpha")
-        Me.lblLabelAlpha.Name = "lblLabelAlpha"
-        Me.lblLabelAlpha.Tag = "Label_Alpha:"
-        '
-        'ucrNudAlpha
-        '
-        Me.ucrNudAlpha.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAlpha.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudAlpha, "ucrNudAlpha")
-        Me.ucrNudAlpha.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudAlpha.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAlpha.Name = "ucrNudAlpha"
-        Me.ucrNudAlpha.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrReceiveFactor
-        '
-        Me.ucrReceiveFactor.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiveFactor, "ucrReceiveFactor")
-        Me.ucrReceiveFactor.Name = "ucrReceiveFactor"
-        Me.ucrReceiveFactor.Selector = Nothing
-        Me.ucrReceiveFactor.strNcFilePath = ""
-        Me.ucrReceiveFactor.ucrSelector = Nothing
-        '
         'ucrSaveGraph
         '
         resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        '
-        'ucrChkColor
-        '
-        Me.ucrChkColor.Checked = False
-        resources.ApplyResources(Me.ucrChkColor, "ucrChkColor")
-        Me.ucrChkColor.Name = "ucrChkColor"
         '
         'ucrBaseSdgCorrPlot
         '
@@ -248,15 +204,10 @@ Partial Class sdgCorrPlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.grpOptions)
-        Me.Controls.Add(Me.ucrNudAlpha)
-        Me.Controls.Add(Me.ucrReceiveFactor)
-        Me.Controls.Add(Me.lblAlpha)
         Me.Controls.Add(Me.ucrSaveGraph)
-        Me.Controls.Add(Me.lblFactorVariable)
-        Me.Controls.Add(Me.ucrChkColor)
         Me.Controls.Add(Me.ucrBaseSdgCorrPlot)
         Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.grpOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -267,7 +218,6 @@ Partial Class sdgCorrPlot
         Me.grpOptions.ResumeLayout(False)
         Me.grpOptions.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
@@ -280,20 +230,15 @@ Partial Class sdgCorrPlot
     Friend WithEvents rdoNone As RadioButton
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents ucrSaveGraph As ucrSave
-    Friend WithEvents ucrChkColor As ucrCheck
-    Friend WithEvents lblFactorVariable As Label
-    Friend WithEvents lblAlpha As Label
-    Friend WithEvents ucrReceiveFactor As ucrReceiverSingle
-    Friend WithEvents ucrSelectFactor As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrNudAlpha As ucrNud
     Friend WithEvents grpOptions As GroupBox
     Friend WithEvents ucrChkLabel As ucrCheck
     Friend WithEvents lblGeom As Label
-    Friend WithEvents ucrNudAlphaCorr As ucrNud
     Friend WithEvents ucrInputComboGeom As ucrInputComboBox
     Friend WithEvents ucrNudMaximumSize As ucrNud
     Friend WithEvents lblMaximumSize As Label
     Friend WithEvents ucrNudMinimunSize As ucrNud
     Friend WithEvents lblMinimumSize As Label
-    Friend WithEvents lblLabelAlpha As Label
+    Friend WithEvents ucrReceiverFactor As ucrReceiverSingle
+    Friend WithEvents ucrSelectorFactor As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents lblFactor As Label
 End Class
