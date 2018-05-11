@@ -25,6 +25,7 @@ Public Class dlgClimaticCheckDataTemperature
     Private clsFilterListFunc, clsFilterFunc As New RFunction
     'calculated columns
     Private clsJumpDiffCalcFunc, clsDiffCalcFunc, clsListDiffFunc As New RFunction
+    Private clsDiffTempOperator As New ROperator
 
     Private clsDummyFunc As New RFunction
     'Range
@@ -310,11 +311,12 @@ Public Class dlgClimaticCheckDataTemperature
         clsRawFilterFunc.SetAssignTo("Raw_Filter")
 
         clsFilterListFunc.SetRCommand("list")
+        clsFilterListFunc.AddParameter("sub", clsRFunctionParameter:=clsCalcFilterFunc, bIncludeArgumentName:=False)
 
         'calculated columns
         clsJumpDiffCalcFunc.SetRCommand("instat_calculation$new")
         clsJumpDiffCalcFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
-        clsJumpDiffCalcFunc.AddParameter("function_exp", Chr(34) & "c(diff(Tn),NA)" & Chr(34), iPosition:=1)
+        clsJumpDiffCalcFunc.AddParameter("function_exp", Chr(34) & "c(diff(Tx),NA)" & Chr(34), iPosition:=1)
         clsJumpDiffCalcFunc.AddParameter("sub_calculations", clsRFunctionParameter:=clsFilterListFunc, iPosition:=2)
         clsJumpDiffCalcFunc.AddParameter("save", "2", iPosition:=3)
         clsJumpDiffCalcFunc.AddParameter("result_name", Chr(34) & "jump" & Chr(34), iPosition:=4)
@@ -322,14 +324,17 @@ Public Class dlgClimaticCheckDataTemperature
 
         clsDiffCalcFunc.SetRCommand("instat_calculation$new")
         clsDiffCalcFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
-        clsDiffCalcFunc.AddParameter("function_exp", Chr(34) & "Tx-Tn" & Chr(34), iPosition:=1)
+        clsDiffCalcFunc.AddParameter("function_exp", clsROperatorParameter:=clsDiffTempOperator, iPosition:=1)
         clsDiffCalcFunc.AddParameter("sub_calculations", clsRFunctionParameter:=clsListDiffFunc, iPosition:=2)
         clsDiffCalcFunc.AddParameter("save", "2", iPosition:=3)
         clsDiffCalcFunc.AddParameter("result_name", Chr(34) & "diff" & Chr(34), iPosition:=4)
         clsDiffCalcFunc.SetAssignTo("diff_calculation")
 
         clsListDiffFunc.SetRCommand("list")
-
+        clsListDiffFunc.AddParameter("sub1", clsRFunctionParameter:=clsCalcFilterFunc, bIncludeArgumentName:=False, iPosition:=0)
+        clsListDiffFunc.AddParameter("sub2", clsRFunctionParameter:=clsJumpDiffCalcFunc, bIncludeArgumentName:=False, iPosition:=1)
+        clsDiffTempOperator.SetOperation("-")
+        clsDiffTempOperator.bToScriptAsRString = True
 
         clsFilterFunc.SetAssignTo("filtered_data")
         'Combined
@@ -350,8 +355,10 @@ Public Class dlgClimaticCheckDataTemperature
         ucrReceiverElement1.AddAdditionalCodeParameterPair(clsDiffFunc, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
         ucrReceiverElement1.AddAdditionalCodeParameterPair(clsDiffOperator, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
         ucrReceiverElement1.AddAdditionalCodeParameterPair(clsAsNumFunc, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=4)
+        ucrReceiverElement1.AddAdditionalCodeParameterPair(clsDiffTempOperator, New RParameter("tmax", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=5)
         ucrReceiverElement2.AddAdditionalCodeParameterPair(clsGreaterEqualTo2Operator, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrReceiverElement2.AddAdditionalCodeParameterPair(clsLessEqualTo2Operator, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
+        ucrReceiverElement2.AddAdditionalCodeParameterPair(clsDiffTempOperator, New RParameter("tmin", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
 
         ucrNudRangeElement2Max.SetRCode(clsGreaterEqualTo2Operator, bReset)
         ucrNudRangeElement2Min.SetRCode(clsLessEqualTo2Operator, bReset)
@@ -462,7 +469,11 @@ Public Class dlgClimaticCheckDataTemperature
         If ucrChkIncludeLogicalColumns.Checked Then
             clsFilterListFunc.AddParameter("sub", clsRFunctionParameter:=clsCalcFilterFunc, bIncludeArgumentName:=False)
             clsDummyFunc = clsFilterFunc
-        ElseIf ucrChkIncludeCalculatedColumns.Checked Then
+        Else
+            clsFilterListFunc.RemoveParameterByName("sub")
+            clsDummyFunc = clsRawFilterFunc
+        End If
+        If ucrChkIncludeCalculatedColumns.Checked Then
             If Not ucrReceiverElement1.IsEmpty AndAlso Not ucrReceiverElement2.IsEmpty Then
                 clsListDiffFunc.AddParameter("sub1", clsRFunctionParameter:=clsCalcFilterFunc, bIncludeArgumentName:=False, iPosition:=0)
                 clsListDiffFunc.AddParameter("sub2", clsRFunctionParameter:=clsJumpDiffCalcFunc, bIncludeArgumentName:=False, iPosition:=1)
@@ -471,7 +482,8 @@ Public Class dlgClimaticCheckDataTemperature
                 clsDummyFunc = clsJumpDiffCalcFunc
             End If
         Else
-            clsDummyFunc = clsRawFilterFunc
+            clsListDiffFunc.RemoveParameterByName("sub1")
+            clsListDiffFunc.RemoveParameterByName("sub2")
         End If
         clsRunCalcFunc.AddParameter("calc", clsRFunctionParameter:=clsDummyFunc, iPosition:=0)
     End Sub
