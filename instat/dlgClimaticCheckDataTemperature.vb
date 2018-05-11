@@ -63,9 +63,8 @@ Public Class dlgClimaticCheckDataTemperature
         rdoSatelite.Enabled = False
         rdoIndividual.Checked = True
 
-        ucrChkOutlier.Enabled = False
-        ucrNudOutlier.Enabled = False
-        lblNudOutlier.Enabled = False
+        ucrChkIncludeCalculatedColumns.Enabled = False
+
         Dim lstLabels As New List(Of Control)
         lstLabels.AddRange({lblRangeElement1to, lblNudRangeElement1Min, lblNudRangeElement1Max})
 
@@ -119,10 +118,10 @@ Public Class dlgClimaticCheckDataTemperature
 
         'Checkboxes for options
         ucrChkRangeElement1.SetParameter(New RParameter("range", clsRangeOrOperator, 1), bNewChangeParameterValue:=False)
-        ucrChkRangeElement1.SetText("Acceptable Range(Element1)")
+        ucrChkRangeElement1.SetText("Acceptable Range (Element1)")
 
         ucrChkRangeElement2.SetParameter(New RParameter("range2", clsRange2OrOperator, 1), bNewChangeParameterValue:=False)
-        ucrChkRangeElement2.SetText("Acceptable Range(Element2)")
+        ucrChkRangeElement2.SetText("Acceptable Range (Element2)")
 
         'Linking controls
         ucrChkRangeElement1.AddToLinkedControls(ucrNudRangeElement1Min, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
@@ -137,11 +136,11 @@ Public Class dlgClimaticCheckDataTemperature
         ucrReceiverElement2.SetLinkedDisplayControl(lblElement2)
 
         ucrChkSame.SetParameter(New RParameter("same", clsSameGreaterOperator, 1), bNewChangeParameterValue:=False)
-        ucrChkSame.SetText("Same")
+        ucrChkSame.SetText("Same (Element1)")
         ucrChkSame.AddToLinkedControls(ucrNudSame, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=4)
 
         ucrChkJump.SetParameter(New RParameter("jump", clsJumpGreaterOperator, 1), bNewChangeParameterValue:=False)
-        ucrChkJump.SetText("Jump")
+        ucrChkJump.SetText("Jump (Element1)")
         ucrChkJump.AddToLinkedControls(ucrNudJump, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
 
         ucrChkDifference.SetParameter(New RParameter("diff", clsLessDiffOperator, 1), bNewChangeParameterValue:=False)
@@ -197,7 +196,7 @@ Public Class dlgClimaticCheckDataTemperature
         'ucrInputNewColumnName.SetName("Qc")
 
         'outliers Option
-        ucrChkOutlier.AddToLinkedControls(ucrNudOutlier, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2.5)
+
         ttOutliers.SetToolTip(ucrChkOutlier, "Values that are further than this number of IQRs from the corresponding quartile.")
     End Sub
 
