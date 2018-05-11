@@ -6,6 +6,7 @@ data_object$set("public", "merge_data", function(new_data, by = NULL, type = "le
   by_col_attributes <- list()
   if(!is.null(by)) {
     for(i in seq_along(by)) {
+      # TODO also check that !is.null(names(by)) ?
       by_col_attributes[[names(by)[[i]]]] <- get_column_attributes(curr_data[[names(by)[[i]]]])
     }
   }
