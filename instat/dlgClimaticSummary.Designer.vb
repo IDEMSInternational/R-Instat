@@ -191,15 +191,6 @@ Partial Class dlgClimaticSummary
         resources.ApplyResources(Me.ucrSelectorVariable, "ucrSelectorVariable")
         Me.ucrSelectorVariable.Name = "ucrSelectorVariable"
         '
-        'ucrReceiverWithinYear
-        '
-        Me.ucrReceiverWithinYear.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverWithinYear, "ucrReceiverWithinYear")
-        Me.ucrReceiverWithinYear.Name = "ucrReceiverWithinYear"
-        Me.ucrReceiverWithinYear.Selector = Nothing
-        Me.ucrReceiverWithinYear.strNcFilePath = ""
-        Me.ucrReceiverWithinYear.ucrSelector = Nothing
-        '
         'ucrReceiverElement
         '
         Me.ucrReceiverElement.frmParent = Me
@@ -208,6 +199,15 @@ Partial Class dlgClimaticSummary
         Me.ucrReceiverElement.Selector = Nothing
         Me.ucrReceiverElement.strNcFilePath = ""
         Me.ucrReceiverElement.ucrSelector = Nothing
+        '
+        'ucrReceiverWithinYear
+        '
+        Me.ucrReceiverWithinYear.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverWithinYear, "ucrReceiverWithinYear")
+        Me.ucrReceiverWithinYear.Name = "ucrReceiverWithinYear"
+        Me.ucrReceiverWithinYear.Selector = Nothing
+        Me.ucrReceiverWithinYear.strNcFilePath = ""
+        Me.ucrReceiverWithinYear.ucrSelector = Nothing
         '
         'ucrReceiverDOY
         '
@@ -271,15 +271,15 @@ Partial Class dlgClimaticSummary
         Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.lblStation)
-        Me.Controls.Add(Me.ucrReceiverElement)
         Me.Controls.Add(Me.ucrReceiverDOY)
         Me.Controls.Add(Me.ucrReceiverYear)
         Me.Controls.Add(Me.ucrReceiverDate)
         Me.Controls.Add(Me.ucrReceiverStation)
+        Me.Controls.Add(Me.ucrReceiverElement)
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.rdoAnnualWithinYear)
         Me.Controls.Add(Me.rdoWithinYear)
         Me.Controls.Add(Me.rdoAnnual)
-        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrPnlAnnualWithin)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
