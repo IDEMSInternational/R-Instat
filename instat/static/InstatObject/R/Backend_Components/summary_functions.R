@@ -400,6 +400,7 @@ lower_quart_label="lower_quartile"
 upper_quart_label="upper_quartile"
 skewness_label="summary_skewness"
 summary_skewness_mc_label="summary_skewness_mc"
+summary_outlier_limit_label = "summary_outlier_limit"
 kurtosis_label="summary_kurtosis"
 summary_coef_var_label="summary_coef_var"
 summary_median_absolute_deviation_label="summary_median_absolute_deviation"
@@ -415,7 +416,7 @@ proportion_label="proportion_calc"
 count_calc_label="count_calc"
 
 # list of all summary function names
-all_summaries=c(sum_label, mode_label, count_label, count_missing_label, count_non_missing_label, sd_label, var_label, median_label, range_label, min_label, max_label, mean_label,quartile_label, lower_quart_label, upper_quart_label, skewness_label, kurtosis_label, summary_coef_var_label, summary_skewness_mc_label, summary_median_absolute_deviation_label, summary_Qn_label, summary_Sn_label, cor_label, cov_label,first_label, last_label, nth_label, n_distinct_label, proportion_label, count_calc_label)
+all_summaries=c(sum_label, mode_label, count_label, count_missing_label, count_non_missing_label, sd_label, var_label, median_label, range_label, min_label, max_label, mean_label,quartile_label, lower_quart_label, upper_quart_label, skewness_label, kurtosis_label, summary_coef_var_label, summary_skewness_mc_label, summary_outlier_limit_label, summary_median_absolute_deviation_label, summary_Qn_label, summary_Sn_label, cor_label, cov_label,first_label, last_label, nth_label, n_distinct_label, proportion_label, count_calc_label)
 summary_mode <- function(x,...) {
   ux <- unique(x)
   out <- ux[which.max(tabulate(match(x, ux)))]
@@ -500,6 +501,24 @@ summary_skewness <- function(x, na.rm = FALSE, type = 2, ...) {
 # skewness mc function
 summary_skewness_mc <- function(x, na.rm = FALSE, ...) {
   return(robustbase::mc(x, na.rm = na.rm))
+}
+
+# outlier limit 
+summary_outlier_limit <- function(x, coef = 1.5, bupperlimit=TRUE, bskewedcalc=FALSE, skewnessweight = 4,na.rm = T){ 
+  
+  quart <- quantile(x, na.rm = na.rm)
+  Q1 <- quart[[2]]
+  Q3 <- quart[[4]]
+  IQR <- Q3 - Q1
+  MC <- 0
+  if(bskewedcalc){
+    MC <- robustbase::mc(x, na.rm = na.rm)
+  }
+  if(bupperlimit){
+    Q3 + coef*exp(skewnessweight*MC)*IQR
+  } else {
+    Q1 - coef*exp(-skewnessweight*MC)*IQR
+  }
 }
 
 # kurtosis function
