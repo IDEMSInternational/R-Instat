@@ -48,6 +48,9 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrSelectorRain = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrChkSkewedData = New instat.ucrCheck()
+        Me.ucrNudSkewnessWeight = New instat.ucrNud()
+        Me.lblSkewnessWeight = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblStation
@@ -221,10 +224,34 @@ Partial Class dlgClimaticCheckDataRain
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrChkSkewedData
+        '
+        Me.ucrChkSkewedData.Checked = False
+        resources.ApplyResources(Me.ucrChkSkewedData, "ucrChkSkewedData")
+        Me.ucrChkSkewedData.Name = "ucrChkSkewedData"
+        '
+        'ucrNudSkewnessWeight
+        '
+        Me.ucrNudSkewnessWeight.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSkewnessWeight.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudSkewnessWeight, "ucrNudSkewnessWeight")
+        Me.ucrNudSkewnessWeight.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSkewnessWeight.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSkewnessWeight.Name = "ucrNudSkewnessWeight"
+        Me.ucrNudSkewnessWeight.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblSkewnessWeight
+        '
+        resources.ApplyResources(Me.lblSkewnessWeight, "lblSkewnessWeight")
+        Me.lblSkewnessWeight.Name = "lblSkewnessWeight"
+        '
         'dlgClimaticCheckDataRain
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblSkewnessWeight)
+        Me.Controls.Add(Me.ucrNudSkewnessWeight)
+        Me.Controls.Add(Me.ucrChkSkewedData)
         Me.Controls.Add(Me.lblRainDays)
         Me.Controls.Add(Me.lblDays)
         Me.Controls.Add(Me.lblmm)
@@ -284,4 +311,7 @@ Partial Class dlgClimaticCheckDataRain
     Friend WithEvents lblmm As Label
     Friend WithEvents lblDays As Label
     Friend WithEvents lblRainDays As Label
+    Friend WithEvents ucrChkSkewedData As ucrCheck
+    Friend WithEvents lblSkewnessWeight As Label
+    Friend WithEvents ucrNudSkewnessWeight As ucrNud
 End Class

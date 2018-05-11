@@ -503,8 +503,8 @@ summary_skewness_mc <- function(x, na.rm = FALSE, ...) {
   return(robustbase::mc(x, na.rm = na.rm))
 }
 
-# outlier limit 
-summary_outlier_limit <- function(x, coef = 1.5, bupperlimit=TRUE, bskewedcalc=FALSE, skewnessweight = 4,na.rm = T){ 
+# skewness outlier limit function
+summary_outlier_limit <- function(x, coef = 1.5, bupperlimit=TRUE, bskewedcalc=FALSE, skewnessweight = 4,na.rm = TRUE, ...){ 
   
   quart <- quantile(x, na.rm = na.rm)
   Q1 <- quart[[2]]
