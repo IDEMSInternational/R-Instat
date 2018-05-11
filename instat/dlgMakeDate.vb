@@ -22,7 +22,7 @@ Public Class dlgMakeDate
     Private bUseSelectedColumn As Boolean = False
     Private strSelectedColumn As String = ""
     Private strSelectedDataFrame As String = ""
-    Private clsDateFunction, clsMakeYearDay, clsHelp, clsMakeYearMonthDay, clsDefaultDate As New RFunction
+    Private clsDateFunction, clsMakeYearDay, clsHelp, clsMakeYearMonthDay, clsDefaultDate, clsGregorianDefault As New RFunction
 
     Private Sub dlgMakeDate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -199,6 +199,10 @@ Public Class dlgMakeDate
         clsDefaultDate.SetRCommand("as.Date")
         clsDefaultDate.AddParameter("x", Chr(34) & "1899/12/30" & Chr(34))
 
+        clsGregorianDefault = New RFunction
+        clsGregorianDefault.SetRCommand("as.Date")
+        clsGregorianDefault.AddParameter("x", Chr(34) & "1600/03/01" & Chr(34))
+
         'when rdoSingleColumn is checked
         ucrPnlDate.AddToLinkedControls(ucrPnlFormat, {rdoSingleColumn}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoDefaultFormat)
         ucrPnlDate.AddToLinkedControls(ucrPnlFormat, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -208,7 +212,7 @@ Public Class dlgMakeDate
         ''linking up ucrinputs for format and origin
         ucrPnlFormat.AddToLinkedControls(ucrInputFormat, {rdoSpecifyFormat}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Year(4-digit)-Month-Day")
         ucrPnlFormat.AddToLinkedControls(ucrInputOrigin, {rdoOrigin}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Excel")
-        ucrInputOrigin.AddToLinkedControls(ucrDtpSpecifyOrigin, {"Excel", "Gregorian", "Specify"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputOrigin.AddToLinkedControls(ucrDtpSpecifyOrigin, {"Specify"}, bNewLinkedHideIfParameterMissing:=True)
 
         'when rdoTwoColumn is checked
         ucrPnlDate.AddToLinkedControls(ucrReceiverYearTwo, {rdoTwoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -415,15 +419,9 @@ Public Class dlgMakeDate
         End If
         SelectorHeader()
         If ucrInputOrigin.GetText = "Excel" Then
-            ucrDtpSpecifyOrigin.Enabled = False
             clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsDefaultDate)
-            ' ucrDtpSpecifyOrigin.dtpDateTime.Value = New Date(2018 / 1 / 1)
         ElseIf ucrInputOrigin.GetText = "Gregorian" Then
-            ucrDtpSpecifyOrigin.Enabled = False
-            'clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsGregorianDefault)
-            'ucrDtpSpecifyOrigin.dtpDateTime.Value = New Date(2018 / 1 / 1)
-        Else
-            ucrDtpSpecifyOrigin.Enabled = True
+            clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsGregorianDefault)
         End If
     End Sub
 
