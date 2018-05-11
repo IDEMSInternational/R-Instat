@@ -46,6 +46,8 @@ Partial Class dlgBarAndPieChart
         Me.rdoPieChart = New System.Windows.Forms.RadioButton()
         Me.rdoBarChart = New System.Windows.Forms.RadioButton()
         Me.cmdBarChartOptions = New System.Windows.Forms.Button()
+        Me.ucrChkBarChartPosition = New instat.ucrCheck()
+        Me.ucrInputBarChartPosition = New instat.ucrInputComboBox()
         Me.ucrSaveBar = New instat.ucrSave()
         Me.ucrChkFlipCoordinates = New instat.ucrCheck()
         Me.ucrReceiverByFactor = New instat.ucrReceiverSingle()
@@ -112,6 +114,19 @@ Partial Class dlgBarAndPieChart
         Me.cmdBarChartOptions.Tag = "Bar_Chart_Options"
         Me.cmdBarChartOptions.UseVisualStyleBackColor = True
         '
+        'ucrChkBarChartPosition
+        '
+        Me.ucrChkBarChartPosition.Checked = False
+        resources.ApplyResources(Me.ucrChkBarChartPosition, "ucrChkBarChartPosition")
+        Me.ucrChkBarChartPosition.Name = "ucrChkBarChartPosition"
+        '
+        'ucrInputBarChartPosition
+        '
+        Me.ucrInputBarChartPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputBarChartPosition.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputBarChartPosition, "ucrInputBarChartPosition")
+        Me.ucrInputBarChartPosition.Name = "ucrInputBarChartPosition"
+        '
         'ucrSaveBar
         '
         resources.ApplyResources(Me.ucrSaveBar, "ucrSaveBar")
@@ -143,6 +158,7 @@ Partial Class dlgBarAndPieChart
         '
         'ucrBarChartSelector
         '
+        Me.ucrBarChartSelector.bDropUnusedFilterLevels = False
         Me.ucrBarChartSelector.bShowHiddenColumns = False
         Me.ucrBarChartSelector.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrBarChartSelector, "ucrBarChartSelector")
@@ -162,6 +178,8 @@ Partial Class dlgBarAndPieChart
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkBarChartPosition)
+        Me.Controls.Add(Me.ucrInputBarChartPosition)
         Me.Controls.Add(Me.ucrSaveBar)
         Me.Controls.Add(Me.ucrChkFlipCoordinates)
         Me.Controls.Add(Me.rdoBarChart)
@@ -200,4 +218,6 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents rdoPieChart As RadioButton
     Friend WithEvents ucrPnlOptions As UcrPanel
     Friend WithEvents cmdBarChartOptions As Button
+    Friend WithEvents ucrChkBarChartPosition As ucrCheck
+    Friend WithEvents ucrInputBarChartPosition As ucrInputComboBox
 End Class
