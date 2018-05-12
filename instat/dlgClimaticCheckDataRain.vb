@@ -21,9 +21,9 @@ Public Class dlgClimaticCheckDataRain
     Private strCurrDataName As String = ""
     Private strRain As String = "Rain"
     'Large/Same/wetdays
-    Private clsGroupByFunc, clsRainFilterFunc, clsRunCalcFunc, clsListFunc As New RFunction
+    Private clsGroupByFunc, clsRainFilterFunc, clsRunCalcFunc, clsListFunc, clsGroupByMonth, clsListForOutlierManipulations, clsRainyDaysFunc, clsOutlierLimitFunc, clsOutlierLimitCalcFunc, clsListSubCalc As New RFunction
     'Large 
-    Private clsLargeOperator, clsOrLargeOperator, clsLargeLessOperator As New ROperator
+    Private clsLargeOperator, clsOrLargeOperator, clsLargeLessOperator, clsOutlierOperator, clsRainyDaysOperator As New ROperator
     'Same
     Private clsRleFunc, clsRepFunc, clsAsNumericFunc As New RFunction
     Private clsAndOperator, clsDollarOperator, clsGreaterSameOperator As New ROperator
@@ -59,7 +59,9 @@ Public Class dlgClimaticCheckDataRain
         ucrChkDryMonth.SetText("Dry Month")
         ucrChkDryMonth.Enabled = False
         ucrChkOutlier.SetText("Outlier")
-        ucrChkOutlier.Enabled = False
+        ucrChkOutlier.Checked = False
+        ucrChkSkewedData.SetText("Skewed Data")
+        ucrChkSkewedData.Checked = False
 
         ucrReceiverStation.Selector = ucrSelectorRain
         ucrReceiverStation.SetClimaticType("station")
@@ -101,13 +103,23 @@ Public Class dlgClimaticCheckDataRain
         ucrNudSame.SetParameter(New RParameter("right", 1, bNewIncludeArgumentName:=False))
         ucrNudWetDays.SetParameter(New RParameter("right", 1, bNewIncludeArgumentName:=False))
 
+        ucrChkOutlier.SetParameter(New RParameter("outlier.limit", clsOutlierOperator, 1, False), bNewChangeParameterValue:=False)
+        ucrChkSkewedData.SetParameter(New RParameter("bskewedcalc", 3), bNewChangeParameterValue:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkSkewedData.SetRDefault("FALSE")
+        ucrNudSkewnessWeight.SetParameter(New RParameter("skewnessweight", 4))
+        ucrNudSkewnessWeight.SetRDefault("4")
+
         'Linking of controls
         ucrChkLarge.AddToLinkedControls(ucrNudLarge, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=200)
         ucrChkSame.AddToLinkedControls(ucrNudSame, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
         ucrChkWetDays.AddToLinkedControls(ucrNudWetDays, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
+        ucrChkOutlier.AddToLinkedControls(ucrChkSkewedData, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
+        ucrChkSkewedData.AddToLinkedControls(ucrNudSkewnessWeight, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
+
         ucrNudLarge.SetLinkedDisplayControl(lblmm)
         ucrNudSame.SetLinkedDisplayControl(lblDays)
         ucrNudWetDays.SetLinkedDisplayControl(lblRainDays)
+        ucrNudSkewnessWeight.SetLinkedDisplayControl(lblSkewnessWeight)
     End Sub
 
     Private Sub SetDefaults()
@@ -121,7 +133,10 @@ Public Class dlgClimaticCheckDataRain
         clsEqualOperator = New ROperator
         clsLargeOperator = New ROperator
         clsLargeLessOperator = New ROperator
+        Dim strOutlier_Limit As String = "outlier_limit"
 
+        clsRainyDaysOperator.Clear()
+        clsOutlierOperator.Clear()
         clsOrLargeOperator.Clear()
         clsGreaterSameOperator.Clear()
         clsGreatOperator.Clear()
@@ -190,6 +205,44 @@ Public Class dlgClimaticCheckDataRain
         clsMultiplOperator.AddParameter("right", bIncludeArgumentName:=False, clsRFunctionParameter:=clsCumSumFuc, iPosition:=1)
         clsCumSumFuc.AddParameter("x", bIncludeArgumentName:=False, clsROperatorParameter:=clsGreaterOperator, iPosition:=0)
 
+        'Group By Month 
+        clsGroupByMonth.SetRCommand("instat_calculation$new")
+        clsGroupByMonth.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=0)
+        clsGroupByMonth.SetAssignTo("grouping_month")
+
+        clsListForOutlierManipulations.SetRCommand("list")
+        clsListForOutlierManipulations.AddParameter("sub1", clsRFunctionParameter:=clsGroupByMonth, bIncludeArgumentName:=False, iPosition:=0)
+        clsListForOutlierManipulations.AddParameter("sub2", clsRFunctionParameter:=clsRainyDaysFunc, bIncludeArgumentName:=False, iPosition:=1)
+
+        'Rainy Days Operator
+        clsRainyDaysOperator.SetOperation(">")
+        clsRainyDaysOperator.AddParameter("left", iPosition:=0)
+        clsRainyDaysOperator.AddParameter("right", "0.85", iPosition:=1, bIncludeArgumentName:=False)
+        clsRainyDaysOperator.bBrackets = True
+        clsRainyDaysOperator.bToScriptAsRString = True
+
+        clsRainyDaysFunc.SetRCommand("instat_calculation$new")
+        clsRainyDaysFunc.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
+        clsRainyDaysFunc.AddParameter("function_exp", clsROperatorParameter:=clsRainyDaysOperator, iPosition:=0)
+        clsRainyDaysFunc.SetAssignTo("rainydays_filter")
+
+        'Outlier Limit function
+        clsOutlierLimitCalcFunc.SetRCommand("instat_calculation$new")
+        clsOutlierLimitCalcFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        clsOutlierLimitCalcFunc.AddParameter("function_exp", clsRFunctionParameter:=clsOutlierLimitFunc, iPosition:=1)
+        clsOutlierLimitCalcFunc.AddParameter("result_name", Chr(34) & strOutlier_Limit & Chr(34), iPosition:=4)
+        clsOutlierLimitCalcFunc.AddParameter("save", "0", iPosition:=5)
+        clsOutlierLimitCalcFunc.SetAssignTo("outlier_limit")
+        clsOutlierLimitFunc.SetRCommand("summary_outlier_limit")
+        clsOutlierLimitFunc.bToScriptAsRString = True
+
+        clsListSubCalc.SetRCommand("list")
+        clsListSubCalc.AddParameter("sub1", clsRFunctionParameter:=clsOutlierLimitCalcFunc, bIncludeArgumentName:=False, iPosition:=0)
+
+        'Outlier Operator 
+        clsOutlierOperator.SetOperation(">")
+        clsOutlierOperator.AddParameter("right", strOutlier_Limit, iPosition:=1)
+
         'Combined filters
         clsOrOperator.SetOperation("|")
         clsOrOperator.bBrackets = True
@@ -197,6 +250,7 @@ Public Class dlgClimaticCheckDataRain
 
         clsRainFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsOrOperator, iPosition:=1)
 
+        ' Run Calc funct
         clsRunCalcFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsRunCalcFunc.AddParameter("calc", clsRFunctionParameter:=clsRainFilterFunc)
         clsRunCalcFunc.AddParameter("display", "FALSE")
@@ -207,6 +261,9 @@ Public Class dlgClimaticCheckDataRain
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsGreaterOperator, New RParameter("left", 0), iAdditionalPairNo:=1)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsAsNumericFunc, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsLargeLessOperator, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
+        ucrReceiverElement.AddAdditionalCodeParameterPair(clsOutlierOperator, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=4)
+        ucrReceiverElement.AddAdditionalCodeParameterPair(clsOutlierLimitFunc, New RParameter("x", 0), iAdditionalPairNo:=5)
+        ucrReceiverElement.AddAdditionalCodeParameterPair(clsRainyDaysOperator, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=6)
         ucrReceiverElement.SetRCode(clsLargeOperator, bReset)
 
         ucrNudLarge.SetRCode(clsLargeOperator, bReset)
@@ -216,10 +273,14 @@ Public Class dlgClimaticCheckDataRain
         ucrChkLarge.SetRCode(clsOrOperator, bReset)
         ucrChkSame.SetRCode(clsOrOperator, bReset)
         ucrChkWetDays.SetRCode(clsOrOperator, bReset)
+
+        ucrChkOutlier.SetRCode(clsOrOperator, bReset)
+        ucrChkSkewedData.SetRCode(clsOutlierLimitFunc, bReset)
+        ucrNudSkewnessWeight.SetRCode(clsOutlierLimitFunc, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverElement.IsEmpty AndAlso ((ucrChkLarge.Checked AndAlso ucrNudLarge.GetText <> "") OrElse (ucrChkSame.Checked AndAlso ucrNudSame.GetText <> "") OrElse (ucrChkWetDays.Checked AndAlso ucrNudWetDays.GetText <> "")) Then
+        If Not ucrReceiverElement.IsEmpty AndAlso ((ucrChkLarge.Checked AndAlso ucrNudLarge.GetText <> "") OrElse (ucrChkSame.Checked AndAlso ucrNudSame.GetText <> "") OrElse (ucrChkWetDays.Checked AndAlso ucrNudWetDays.GetText <> "") OrElse (ucrChkOutlier.Checked) OrElse (ucrChkSkewedData.Checked AndAlso ucrNudSkewnessWeight.GetText <> "")) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -235,8 +296,30 @@ Public Class dlgClimaticCheckDataRain
         End If
     End Sub
 
+    Private Sub GroupByMonth()
+        If Not ucrReceiverMonth.IsEmpty Then
+            clsGroupByMonth.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverMonth.GetVariableNames & ")", iPosition:=1)
+            clsOutlierLimitCalcFunc.AddParameter("manipulations", clsRFunctionParameter:=clsListForOutlierManipulations, iPosition:=3)
+        Else
+            clsOutlierLimitCalcFunc.RemoveParameterByName("manipulations")
+        End If
+    End Sub
+
     Private Sub FilterFunction()
         clsRainFilterFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames & ")", iPosition:=2)
+        If ucrChkOutlier.Checked Then
+            clsRainFilterFunc.AddParameter("sub_calculations", clsRFunctionParameter:=clsListSubCalc, iPosition:=5)
+        Else
+            clsRainFilterFunc.RemoveParameterByName("sub_calculations")
+        End If
+    End Sub
+
+    Private Sub RainyDays()
+        clsRainyDaysFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames & ")", iPosition:=2)
+    End Sub
+
+    Private Sub OutlierLimitCalc()
+        clsOutlierLimitCalcFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames & ")", iPosition:=2)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -245,19 +328,25 @@ Public Class dlgClimaticCheckDataRain
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
+    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrReceiverMonth.ControlValueChanged
         GroupByOptions()
+        GroupByMonth()
     End Sub
 
     Private Sub ucrSelectorRain_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorRain.ControlValueChanged
-        strCurrDataName = Chr(34) & ucrSelectorRain.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
+        strCurrDataName = Chr(34) & ucrSelectorRain.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34)
         GroupByOptions()
         FilterFunction()
+        GroupByMonth()
+        RainyDays()
+        OutlierLimitCalc()
         AutoFillRainColumn()
     End Sub
 
     Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlValueChanged, ucrNudLarge.ControlValueChanged
         FilterFunction()
+        RainyDays()
+        OutlierLimitCalc()
     End Sub
 
     Private Sub AutoFillRainColumn()
@@ -272,7 +361,8 @@ Public Class dlgClimaticCheckDataRain
         End If
     End Sub
 
-    Private Sub ucrReceiverElement_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrChkLarge.ControlContentsChanged, ucrChkSame.ControlContentsChanged, ucrChkWetDays.ControlContentsChanged, ucrNudLarge.ControlContentsChanged, ucrNudSame.ControlContentsChanged, ucrNudWetDays.ControlContentsChanged
+    Private Sub ucrReceiverElement_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrChkLarge.ControlContentsChanged, ucrChkSame.ControlContentsChanged, ucrChkWetDays.ControlContentsChanged, ucrNudLarge.ControlContentsChanged, ucrNudSame.ControlContentsChanged, ucrNudWetDays.ControlContentsChanged, ucrChkOutlier.ControlContentsChanged, ucrChkSkewedData.ControlContentsChanged
         TestOkEnabled()
+        FilterFunction()
     End Sub
 End Class

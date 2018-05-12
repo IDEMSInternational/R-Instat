@@ -77,6 +77,7 @@ Public Class ucrDateTimePicker
         Dim bParameterIsDate As Boolean
         Dim strDateCharacter As String
         Dim strDateComponents As String()
+        Dim dtNewDate As Date
 
         clsIsDateFunction = New RFunction
         clsIsDateFunction.SetPackageName("lubridate")
@@ -106,7 +107,8 @@ Public Class ucrDateTimePicker
                         clsIsDateFunction.AddParameter("x", strParameterValue:=strDateExpression)
                         clsAsCharacterFunction.AddParameter("x", strParameterValue:=strDateExpression)
                     Else
-                        bInvalid = True
+                        'TODO This is when there is no value in the parameter. Should it give an error?
+                        Exit Sub
                     End If
                     If Not bInvalid Then
                         ' Check if the parameter value is an R Date type object
@@ -124,7 +126,15 @@ Public Class ucrDateTimePicker
                                 strDateComponents = strDateCharacter.Split("-")
                                 If strDateComponents.Count = 3 Then
                                     Try
-                                        dtpDateTime.Value = New Date(year:=strDateComponents(0), month:=strDateComponents(1), day:=strDateComponents(2))
+                                        dtNewDate = New Date(year:=strDateComponents(0), month:=strDateComponents(1), day:=strDateComponents(2))
+                                        'TODO Should this give an error or be allowed?
+                                        If dtNewDate < dtpDateTime.MinDate Then
+                                            dtpDateTime.Value = dtpDateTime.MinDate
+                                        ElseIf dtNewDate > dtpDateTime.MaxDate Then
+                                            dtpDateTime.Value = dtpDateTime.MaxDate
+                                        Else
+                                            dtpDateTime.Value = dtNewDate
+                                        End If
                                     Catch ex As Exception
                                         bInvalid = True
                                     End Try
