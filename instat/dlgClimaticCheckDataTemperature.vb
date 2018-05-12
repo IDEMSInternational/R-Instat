@@ -605,7 +605,7 @@ Public Class dlgClimaticCheckDataTemperature
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverMonth_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMonth.ControlValueChanged
+    Private Sub ucrReceiverMonth_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMonth.ControlValueChanged, ucrReceiverElement1.ControlValueChanged, ucrReceiverElement2.ControlValueChanged
         GroupByMonth()
     End Sub
 End Class
