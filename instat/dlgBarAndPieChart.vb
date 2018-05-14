@@ -109,7 +109,7 @@ Public Class dlgBarAndPieChart
 
         'Setting new position controls
         ucrChkBarChartPosition.SetText("Bar Chart Position")
-        ucrChkBarChartPosition.AddToLinkedControls(ucrInputBarChartPosition, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkBarChartPosition.AddToLinkedControls(ucrLinked:=ucrInputBarChartPosition, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="dodge")
         ucrChkBarChartPosition.AddParameterPresentCondition(True, "position")
         ucrChkBarChartPosition.AddParameterPresentCondition(False, "position", False)
 
@@ -280,21 +280,9 @@ Public Class dlgBarAndPieChart
 
     Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged
         SetDialogOptions()
-        AddDodgePostionParam()
     End Sub
 
     Private Sub CoreControls_ContentsChanged() Handles ucrReceiverFirst.ControlContentsChanged, ucrSaveBar.ControlContentsChanged
         TestOkEnabled()
-    End Sub
-
-    Private Sub Controls_ContentsChanged() Handles ucrReceiverFirst.ControlValueChanged, ucrReceiverByFactor.ControlValueChanged
-        AddDodgePostionParam()
-    End Sub
-    Private Sub AddDodgePostionParam()
-        If rdoBarChart.Checked AndAlso Not ucrReceiverByFactor.IsEmpty AndAlso Not ucrReceiverFirst.IsEmpty Then
-            clsRgeomBarFunction.AddParameter("position", Chr(34) & "dodge" & Chr(34), iPosition:=0)
-        Else
-            clsRgeomBarFunction.RemoveParameterByName("position")
-        End If
     End Sub
 End Class

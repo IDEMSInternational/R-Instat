@@ -337,7 +337,7 @@
     <value>141, 235</value>
   </data>
   <data name="ucrChkBarChartPosition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 20</value>
+    <value>131, 20</value>
   </data>
   <data name="ucrChkBarChartPosition.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -355,7 +355,7 @@
     <value>0</value>
   </data>
   <data name="ucrInputBarChartPosition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 234</value>
+    <value>274, 234</value>
   </data>
   <data name="ucrInputBarChartPosition.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>21, 17, 21, 17</value>
