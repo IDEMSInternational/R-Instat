@@ -159,6 +159,24 @@ Public Class ucrGeom
         Dim clsgeom_violin As New Geoms
         Dim clsgeom_vline As New Geoms
 
+        Dim clsgeom_statsummary As New Geoms
+
+        clsgeom_statsummary.SetGeomName("stat_summary")
+        'mandatory aesthetics
+        clsgeom_statsummary.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_statsummary.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_statsummary.AddAesParameter("group", strIncludedDataTypes:={"factor", "numeric"})
+
+        'layer params
+        clsgeom_statsummary.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_statsummary.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_statsummary.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_statsummary.AddLayerParameter("size", "numeric", "1.5", lstParameterStrings:={1, 0})
+        clsgeom_statsummary.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+
+        lstAllGeoms.Add(clsgeom_statsummary)
+
+
         'Global comments:
         'WARNING: Most of the comments describing the parameters have been copied from the ggplot2 documentation: http://docs.ggplot2.org/current/
         'Warning: cannot use default values like NULL in the specification of our aesthetics as parameters (fill, colour, ...) as running a command like "ggplot(survey, aes(x="",y=Yield)) + geom_boxplot(colour = NULL)" will give an error (Error: Aesthetics must be either length 1 or the same as the data (4): colour). 
