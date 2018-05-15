@@ -2054,11 +2054,10 @@ data_object$set("public","set_contrasts_of_factor", function(col_name, new_contr
 )
 
 #This method gets a date column and extracts part of the information such as year, month, week, weekday etc(depending on which parameters are set) and creates their respective new column(s)
-data_object$set("public","split_date", function(col_name = "", week = FALSE, month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, year = FALSE, day = FALSE, day_in_month = FALSE, day_in_year = FALSE, leap_year = FALSE, day_in_year_366 = FALSE, dekade = FALSE, pentad = FALSE, s_doy = FALSE, s_year = FALSE, s_start_day_in_month = 1, s_start_month = 8) {
+data_object$set("public","split_date", function(col_name = "", week = FALSE, month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, year = FALSE, day = FALSE, day_in_month = FALSE, day_in_year = FALSE, leap_year = FALSE, day_in_year_366 = FALSE, dekade = FALSE, pentad = FALSE, quarter = FALSE, s_quarter = FALSE, with_year = FALSE, s_doy = FALSE, s_year = FALSE, s_start_day_in_month = 1, s_start_month = 8) {
   col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
   if(!lubridate::is.Date(col_data)) stop("This column must be a date or time!")
   if(day) {
-
     day_vector <- lubridate::day(col_data)
 	  col_name <- next_default_item(prefix = "day", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = day_vector)
@@ -2111,25 +2110,35 @@ data_object$set("public","split_date", function(col_name = "", week = FALSE, mon
 	}
 	if(day_in_year) {
     day_in_year_vector <- as.integer(lubridate::yday(col_data))
-	  col_name <- next_default_item(prefix = "day_in_year", existing_names = self$get_column_names(), include_index = FALSE)
+	  col_name <- next_default_item(prefix = "doy_365", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = day_in_year_vector)
     if(self$is_climatic_data()) self$set_climatic_types(types = c(doy = col_name))
   }
   if(day_in_year_366) {
     day_in_year_366_vector <- as.integer(yday_366(col_data))
-    col_name <- next_default_item(prefix = "doy_366", existing_names = self$get_column_names(), include_index = FALSE)
+    col_name <- next_default_item(prefix = "doy", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = day_in_year_366_vector)
     if(self$is_climatic_data()) self$set_climatic_types(types = c(doy = col_name))
   }
   if(dekade) {
     dekade_vector <- as.integer(dekade(col_data))
-    col_name <- next_default_item(prefix = "dekade", existing_names = self$get_column_names(), include_index = FALSE)
+    col_name <- next_default_item(prefix = "dekad", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = dekade_vector)
   }
   if(pentad) {
     pentad_vector <- as.integer(pentad(col_data))
     col_name <- next_default_item(prefix = "pentad", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = pentad_vector)
+  }
+  if(quarter){
+      quarter_vector <- lubridate::quarter(col_data, with_year = with_year)
+      col_name <- next_default_item(prefix = "quarter", existing_names = self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name = col_name, col_data = quarter_vector)
+    }
+   if(s_quarter){                         
+      s_quarter_vector <- lubridate::quarter(col_data, with_year = with_year, fiscal_start = s_start_month)
+      col_name <- next_default_item(prefix = "s_quarter", existing_names = self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name = col_name, col_data = s_quarter_vector)
   }
 	if(leap_year) {
     leap_year_vector <- lubridate::leap_year(col_data)
@@ -2382,11 +2391,12 @@ data_object$set("public","infill_missing_dates", function(date_name, factors, re
     max <- max(date_col)
     full_dates <- seq(min, max, by = "day")
     if(length(full_dates) > length(date_col)) {
-      message("Attempting to infill ", (length(full_dates) - length(date_col)), " missing dates...")
+      cat("Infilling ", (length(full_dates) - length(date_col)), " missing dates", "\n")
       full_dates <- data.frame(full_dates)
       names(full_dates) <- date_name
-      self$merge_data(full_dates, by = date_name, type = "full")
-      message("Missing dates infilled.")
+      by <- date_name
+      names(by) <- date_name
+      self$merge_data(full_dates, by = by, type = "full")
       if(resort) self$sort_dataframe(col_names = date_name)
     }
   }
@@ -2404,7 +2414,7 @@ data_object$set("public","infill_missing_dates", function(date_name, factors, re
     for(j in 1:nrow(date_ranges)) {
       full_dates <- seq(date_ranges$Min[j], date_ranges$Max[j], by = "day")
       if(length(full_dates) > date_lengths[[2]][j]) {
-        message("Attempting to infill ", (length(full_dates) - date_lengths[[2]][j]), " missing dates for ", paste(unlist(date_ranges[1:length(factors)][j, ]), collapse = "-"))
+        cat("Infilling ", (length(full_dates) - date_lengths[[2]][j]), " missing dates for ", paste(unlist(date_ranges[1:length(factors)][j, ]), collapse = "-"), "\n")
         merge_required <- TRUE
       }
       full_dates <- data.frame(full_dates)
