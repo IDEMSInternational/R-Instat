@@ -278,6 +278,15 @@ Partial Class dlgTransformClimatic
         resources.ApplyResources(Me.ucrPnlTransform, "ucrPnlTransform")
         Me.ucrPnlTransform.Name = "ucrPnlTransform"
         '
+        'ucrReceiverData
+        '
+        Me.ucrReceiverData.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverData, "ucrReceiverData")
+        Me.ucrReceiverData.Name = "ucrReceiverData"
+        Me.ucrReceiverData.Selector = Nothing
+        Me.ucrReceiverData.strNcFilePath = ""
+        Me.ucrReceiverData.ucrSelector = Nothing
+        '
         'ucrReceiverStation
         '
         Me.ucrReceiverStation.frmParent = Me
@@ -312,15 +321,6 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverDate.strNcFilePath = ""
         Me.ucrReceiverDate.ucrSelector = Nothing
         '
-        'ucrReceiverData
-        '
-        Me.ucrReceiverData.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverData, "ucrReceiverData")
-        Me.ucrReceiverData.Name = "ucrReceiverData"
-        Me.ucrReceiverData.Selector = Nothing
-        Me.ucrReceiverData.strNcFilePath = ""
-        Me.ucrReceiverData.ucrSelector = Nothing
-        '
         'ucrBase
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
@@ -339,15 +339,15 @@ Partial Class dlgTransformClimatic
         Me.Controls.Add(Me.rdoCount)
         Me.Controls.Add(Me.ucrPnlTransform)
         Me.Controls.Add(Me.lblStation)
-        Me.Controls.Add(Me.ucrReceiverStation)
-        Me.Controls.Add(Me.ucrSelectorTransform)
+        Me.Controls.Add(Me.ucrReceiverDate)
         Me.Controls.Add(Me.ucrReceiverYear)
+        Me.Controls.Add(Me.ucrReceiverStation)
+        Me.Controls.Add(Me.ucrReceiverData)
+        Me.Controls.Add(Me.ucrSelectorTransform)
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.lblDate)
-        Me.Controls.Add(Me.ucrReceiverDate)
         Me.Controls.Add(Me.lblData)
-        Me.Controls.Add(Me.ucrReceiverData)
-        Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
