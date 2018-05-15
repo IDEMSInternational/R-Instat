@@ -58,10 +58,6 @@ Public Class dlgClimaticCheckDataRain
         'temp disabled untill implemented
         ucrChkDryMonth.SetText("Dry Month")
         ucrChkDryMonth.Enabled = False
-        ucrChkOutlier.SetText("Outlier")
-        ucrChkOutlier.Checked = False
-        ucrChkSkewedData.SetText("Skewed Data")
-        ucrChkSkewedData.Checked = False
 
         ucrReceiverStation.Selector = ucrSelectorRain
         ucrReceiverStation.SetClimaticType("station")
@@ -104,22 +100,33 @@ Public Class dlgClimaticCheckDataRain
         ucrNudWetDays.SetParameter(New RParameter("right", 1, bNewIncludeArgumentName:=False))
 
         ucrChkOutlier.SetParameter(New RParameter("outlier.limit", clsOutlierOperator, 1, False), bNewChangeParameterValue:=False)
-        ucrChkSkewedData.SetParameter(New RParameter("bskewedcalc", 3), bNewChangeParameterValue:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkSkewedData.SetRDefault("FALSE")
+        ucrChkOutlier.SetText("Outlier")
+
+        ucrNudCoeff.SetParameter(New RParameter("coeff"))
+        ucrNudCoeff.DecimalPlaces = 1
+        ucrNudCoeff.Increment = 0.1
+        ucrNudCoeff.SetRDefault("1.5")
+
         ucrNudSkewnessWeight.SetParameter(New RParameter("skewnessweight", 4))
+        ucrNudSkewnessWeight.DecimalPlaces = 1
+        ucrNudSkewnessWeight.Increment = 0.1
         ucrNudSkewnessWeight.SetRDefault("4")
+
+        ucrChkOmitZero.SetText("Omit Zero")
 
         'Linking of controls
         ucrChkLarge.AddToLinkedControls(ucrNudLarge, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=200)
         ucrChkSame.AddToLinkedControls(ucrNudSame, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
         ucrChkWetDays.AddToLinkedControls(ucrNudWetDays, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
-        ucrChkOutlier.AddToLinkedControls(ucrChkSkewedData, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
-        ucrChkSkewedData.AddToLinkedControls(ucrNudSkewnessWeight, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
+        ucrChkOutlier.AddToLinkedControls(ucrChkOmitZero, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
+        ucrChkOutlier.AddToLinkedControls(ucrNudCoeff, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1.5)
+        ucrChkOutlier.AddToLinkedControls(ucrNudSkewnessWeight, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=4)
 
         ucrNudLarge.SetLinkedDisplayControl(lblmm)
         ucrNudSame.SetLinkedDisplayControl(lblDays)
         ucrNudWetDays.SetLinkedDisplayControl(lblRainDays)
         ucrNudSkewnessWeight.SetLinkedDisplayControl(lblSkewnessWeight)
+        ucrNudCoeff.SetLinkedDisplayControl(lblCoeff)
     End Sub
 
     Private Sub SetDefaults()
@@ -212,7 +219,6 @@ Public Class dlgClimaticCheckDataRain
 
         clsListForOutlierManipulations.SetRCommand("list")
         clsListForOutlierManipulations.AddParameter("sub1", clsRFunctionParameter:=clsGroupByMonth, bIncludeArgumentName:=False, iPosition:=0)
-        clsListForOutlierManipulations.AddParameter("sub2", clsRFunctionParameter:=clsRainyDaysFunc, bIncludeArgumentName:=False, iPosition:=1)
 
         'Rainy Days Operator
         clsRainyDaysOperator.SetOperation(">")
@@ -222,8 +228,6 @@ Public Class dlgClimaticCheckDataRain
         clsRainyDaysOperator.bToScriptAsRString = True
 
         clsRainyDaysFunc.SetRCommand("instat_calculation$new")
-        clsRainyDaysFunc.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
-        clsRainyDaysFunc.AddParameter("function_exp", clsROperatorParameter:=clsRainyDaysOperator, iPosition:=0)
         clsRainyDaysFunc.SetAssignTo("rainydays_filter")
 
         'Outlier Limit function
@@ -234,6 +238,7 @@ Public Class dlgClimaticCheckDataRain
         clsOutlierLimitCalcFunc.AddParameter("save", "0", iPosition:=5)
         clsOutlierLimitCalcFunc.SetAssignTo("outlier_limit")
         clsOutlierLimitFunc.SetRCommand("summary_outlier_limit")
+        clsOutlierLimitFunc.AddParameter("bskewedcalc", "TRUE")
         clsOutlierLimitFunc.bToScriptAsRString = True
 
         clsListSubCalc.SetRCommand("list")
@@ -275,12 +280,13 @@ Public Class dlgClimaticCheckDataRain
         ucrChkWetDays.SetRCode(clsOrOperator, bReset)
 
         ucrChkOutlier.SetRCode(clsOrOperator, bReset)
-        ucrChkSkewedData.SetRCode(clsOutlierLimitFunc, bReset)
+        ucrChkOmitZero.SetRCode(clsRainyDaysFunc)
         ucrNudSkewnessWeight.SetRCode(clsOutlierLimitFunc, bReset)
+        ucrNudCoeff.SetRCode(clsOutlierLimitFunc, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverElement.IsEmpty AndAlso ((ucrChkLarge.Checked AndAlso ucrNudLarge.GetText <> "") OrElse (ucrChkSame.Checked AndAlso ucrNudSame.GetText <> "") OrElse (ucrChkWetDays.Checked AndAlso ucrNudWetDays.GetText <> "") OrElse (ucrChkOutlier.Checked) OrElse (ucrChkSkewedData.Checked AndAlso ucrNudSkewnessWeight.GetText <> "")) Then
+        If Not ucrReceiverElement.IsEmpty AndAlso ((ucrChkLarge.Checked AndAlso ucrNudLarge.GetText <> "") OrElse (ucrChkSame.Checked AndAlso ucrNudSame.GetText <> "") OrElse (ucrChkWetDays.Checked AndAlso ucrNudWetDays.GetText <> "") OrElse (ucrChkOutlier.Checked AndAlso ucrNudSkewnessWeight.GetText <> "" AndAlso ucrNudCoeff.GetText <> "")) OrElse ucrChkOmitZero.Checked Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -322,6 +328,19 @@ Public Class dlgClimaticCheckDataRain
         clsOutlierLimitCalcFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames & ")", iPosition:=2)
     End Sub
 
+    Private Sub OmitZero()
+        If ucrChkOmitZero.Checked Then
+            clsRainyDaysFunc.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
+            clsRainyDaysFunc.AddParameter("function_exp", clsROperatorParameter:=clsRainyDaysOperator, iPosition:=0)
+            clsListForOutlierManipulations.AddParameter("sub2", clsRFunctionParameter:=clsRainyDaysFunc, bIncludeArgumentName:=False, iPosition:=1)
+        Else
+            clsRainyDaysFunc.RemoveParameterByName("type")
+            clsRainyDaysFunc.RemoveParameterByName("function_exp")
+            clsListForOutlierManipulations.RemoveParameterByName("sub2")
+        End If
+
+    End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         setRcodeForControls(True)
@@ -361,8 +380,9 @@ Public Class dlgClimaticCheckDataRain
         End If
     End Sub
 
-    Private Sub ucrReceiverElement_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrChkLarge.ControlContentsChanged, ucrChkSame.ControlContentsChanged, ucrChkWetDays.ControlContentsChanged, ucrNudLarge.ControlContentsChanged, ucrNudSame.ControlContentsChanged, ucrNudWetDays.ControlContentsChanged, ucrChkOutlier.ControlContentsChanged, ucrChkSkewedData.ControlContentsChanged
+    Private Sub ucrReceiverElement_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrChkLarge.ControlContentsChanged, ucrChkSame.ControlContentsChanged, ucrChkWetDays.ControlContentsChanged, ucrNudLarge.ControlContentsChanged, ucrNudSame.ControlContentsChanged, ucrNudWetDays.ControlContentsChanged, ucrChkOutlier.ControlContentsChanged, ucrChkOmitZero.ControlContentsChanged
         TestOkEnabled()
         FilterFunction()
+        OmitZero()
     End Sub
 End Class

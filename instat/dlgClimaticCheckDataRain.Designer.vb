@@ -48,9 +48,11 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrSelectorRain = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkSkewedData = New instat.ucrCheck()
         Me.ucrNudSkewnessWeight = New instat.ucrNud()
         Me.lblSkewnessWeight = New System.Windows.Forms.Label()
+        Me.lblCoeff = New System.Windows.Forms.Label()
+        Me.ucrNudCoeff = New instat.ucrNud()
+        Me.ucrChkOmitZero = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblStation
@@ -214,6 +216,7 @@ Partial Class dlgClimaticCheckDataRain
         '
         'ucrSelectorRain
         '
+        Me.ucrSelectorRain.bDropUnusedFilterLevels = False
         Me.ucrSelectorRain.bShowHiddenColumns = False
         Me.ucrSelectorRain.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorRain, "ucrSelectorRain")
@@ -223,12 +226,6 @@ Partial Class dlgClimaticCheckDataRain
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrChkSkewedData
-        '
-        Me.ucrChkSkewedData.Checked = False
-        resources.ApplyResources(Me.ucrChkSkewedData, "ucrChkSkewedData")
-        Me.ucrChkSkewedData.Name = "ucrChkSkewedData"
         '
         'ucrNudSkewnessWeight
         '
@@ -245,13 +242,36 @@ Partial Class dlgClimaticCheckDataRain
         resources.ApplyResources(Me.lblSkewnessWeight, "lblSkewnessWeight")
         Me.lblSkewnessWeight.Name = "lblSkewnessWeight"
         '
+        'lblCoeff
+        '
+        resources.ApplyResources(Me.lblCoeff, "lblCoeff")
+        Me.lblCoeff.Name = "lblCoeff"
+        '
+        'ucrNudCoeff
+        '
+        Me.ucrNudCoeff.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCoeff.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudCoeff, "ucrNudCoeff")
+        Me.ucrNudCoeff.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudCoeff.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCoeff.Name = "ucrNudCoeff"
+        Me.ucrNudCoeff.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkOmitZero
+        '
+        Me.ucrChkOmitZero.Checked = False
+        resources.ApplyResources(Me.ucrChkOmitZero, "ucrChkOmitZero")
+        Me.ucrChkOmitZero.Name = "ucrChkOmitZero"
+        '
         'dlgClimaticCheckDataRain
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkOmitZero)
+        Me.Controls.Add(Me.ucrNudCoeff)
+        Me.Controls.Add(Me.lblCoeff)
         Me.Controls.Add(Me.lblSkewnessWeight)
         Me.Controls.Add(Me.ucrNudSkewnessWeight)
-        Me.Controls.Add(Me.ucrChkSkewedData)
         Me.Controls.Add(Me.lblRainDays)
         Me.Controls.Add(Me.lblDays)
         Me.Controls.Add(Me.lblmm)
@@ -311,7 +331,9 @@ Partial Class dlgClimaticCheckDataRain
     Friend WithEvents lblmm As Label
     Friend WithEvents lblDays As Label
     Friend WithEvents lblRainDays As Label
-    Friend WithEvents ucrChkSkewedData As ucrCheck
     Friend WithEvents lblSkewnessWeight As Label
     Friend WithEvents ucrNudSkewnessWeight As ucrNud
+    Friend WithEvents ucrChkOmitZero As ucrCheck
+    Friend WithEvents ucrNudCoeff As ucrNud
+    Friend WithEvents lblCoeff As Label
 End Class

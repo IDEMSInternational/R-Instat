@@ -71,6 +71,8 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.ucrSelectorTemperature = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlType = New instat.UcrPanel()
+        Me.lblCoeff = New System.Windows.Forms.Label()
+        Me.ucrNudCoeff = New instat.ucrNud()
         Me.SuspendLayout()
         '
         'lblStation
@@ -396,10 +398,27 @@ Partial Class dlgClimaticCheckDataTemperature
         resources.ApplyResources(Me.ucrPnlType, "ucrPnlType")
         Me.ucrPnlType.Name = "ucrPnlType"
         '
+        'lblCoeff
+        '
+        resources.ApplyResources(Me.lblCoeff, "lblCoeff")
+        Me.lblCoeff.Name = "lblCoeff"
+        '
+        'ucrNudCoeff
+        '
+        Me.ucrNudCoeff.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCoeff.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudCoeff, "ucrNudCoeff")
+        Me.ucrNudCoeff.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudCoeff.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCoeff.Name = "ucrNudCoeff"
+        Me.ucrNudCoeff.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'dlgClimaticCheckDataTemperature
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrNudCoeff)
+        Me.Controls.Add(Me.lblCoeff)
         Me.Controls.Add(Me.lblNewColumnName)
         Me.Controls.Add(Me.ucrInputNewColumnName)
         Me.Controls.Add(Me.ucrChkIncludeLogicalColumns)
@@ -502,4 +521,6 @@ Partial Class dlgClimaticCheckDataTemperature
     Friend WithEvents ucrChkIncludeLogicalColumns As ucrCheck
     Friend WithEvents lblNewColumnName As Label
     Friend WithEvents ucrInputNewColumnName As ucrInputTextBox
+    Friend WithEvents ucrNudCoeff As ucrNud
+    Friend WithEvents lblCoeff As Label
 End Class
