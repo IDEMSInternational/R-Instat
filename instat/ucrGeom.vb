@@ -159,6 +159,8 @@ Public Class ucrGeom
         Dim clsgeom_violin As New Geoms
         Dim clsgeom_vline As New Geoms
 
+        'Am additng this here for easy working and can be moved later to an alphabetically correct postion
+
         Dim clsgeom_statsummary As New Geoms
 
         clsgeom_statsummary.SetGeomName("stat_summary")
@@ -173,7 +175,13 @@ Public Class ucrGeom
         clsgeom_statsummary.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
         clsgeom_statsummary.AddLayerParameter("size", "numeric", "1.5", lstParameterStrings:={1, 0})
         clsgeom_statsummary.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_statsummary.AddLayerParameter("geom", "list", Chr(34) & "point" & Chr(34), lstParameterStrings:={Chr(34) & "line" & Chr(34), Chr(34) & "point" & Chr(34), Chr(34) & "bar" & Chr(34)})
 
+        'These are the list of parameters on the documentation, am yet to find out more
+        clsgeom_statsummary.AddLayerParameter("fun.data", "list", Chr(34) & "mean_cl_boot" & Chr(34), lstParameterStrings:={Chr(34) & "mean_sdl" & Chr(34), Chr(34) & "mean_cl_boot" & Chr(34)})
+        clsgeom_statsummary.AddLayerParameter("fun.y", "list", Chr(34) & "mean" & Chr(34), lstParameterStrings:={Chr(34) & "median" & Chr(34), Chr(34) & "mean" & Chr(34)})
+        clsgeom_statsummary.AddLayerParameter("fun.ymin", "list", Chr(34) & "min" & Chr(34), lstParameterStrings:={Chr(34) & "min" & Chr(34)})
+        clsgeom_statsummary.AddLayerParameter("fun.ymax", "list", Chr(34) & "max" & Chr(34), lstParameterStrings:={Chr(34) & "max" & Chr(34)})
         lstAllGeoms.Add(clsgeom_statsummary)
 
 
