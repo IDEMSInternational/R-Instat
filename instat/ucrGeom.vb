@@ -165,8 +165,8 @@ Public Class ucrGeom
 
         clsgeom_statsummary.SetGeomName("stat_summary")
         'mandatory aesthetics
-        clsgeom_statsummary.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"})
-        clsgeom_statsummary.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_statsummary.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
+        clsgeom_statsummary.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
         clsgeom_statsummary.AddAesParameter("group", strIncludedDataTypes:={"factor", "numeric"})
 
         'layer params
