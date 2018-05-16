@@ -50,10 +50,11 @@ Partial Class dlgEndOfRainsSeason
         Me.lblWaterBalanceLessThan = New System.Windows.Forms.Label()
         Me.lblEndRainsColName = New System.Windows.Forms.Label()
         Me.lblWBColName = New System.Windows.Forms.Label()
+        Me.cmdDoyRange = New System.Windows.Forms.Button()
+        Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
         Me.ucrNudTotalOverDays = New instat.ucrNud()
         Me.ucrNudAmount = New instat.ucrNud()
         Me.ucrChkEndOfRains = New instat.ucrCheck()
-        Me.ucrChkEvaporationAsReceiver = New instat.ucrCheck()
         Me.ucrReceiverEvaporation = New instat.ucrReceiverSingle()
         Me.ucrChkEndOfSeason = New instat.ucrCheck()
         Me.ucrNudWBLessThan = New instat.ucrNud()
@@ -68,14 +69,14 @@ Partial Class dlgEndOfRainsSeason
         Me.ucrSelectorForWaterBalance = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputEvaporation = New instat.ucrInputTextBox()
-        Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
-        Me.cmdDoyRange = New System.Windows.Forms.Button()
+        Me.ucrRdoValueEvaporation = New instat.ucrRadio()
+        Me.ucrRdoVariableEvaporation = New instat.ucrRadio()
         Me.SuspendLayout()
         '
         'lblYear
         '
         Me.lblYear.AutoSize = True
-        Me.lblYear.Location = New System.Drawing.Point(255, 108)
+        Me.lblYear.Location = New System.Drawing.Point(250, 108)
         Me.lblYear.Name = "lblYear"
         Me.lblYear.Size = New System.Drawing.Size(32, 13)
         Me.lblYear.TabIndex = 5
@@ -84,7 +85,7 @@ Partial Class dlgEndOfRainsSeason
         'lblDate
         '
         Me.lblDate.AutoSize = True
-        Me.lblDate.Location = New System.Drawing.Point(254, 67)
+        Me.lblDate.Location = New System.Drawing.Point(250, 62)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(33, 13)
         Me.lblDate.TabIndex = 3
@@ -93,7 +94,7 @@ Partial Class dlgEndOfRainsSeason
         'lblDOY
         '
         Me.lblDOY.AutoSize = True
-        Me.lblDOY.Location = New System.Drawing.Point(254, 150)
+        Me.lblDOY.Location = New System.Drawing.Point(250, 152)
         Me.lblDOY.Name = "lblDOY"
         Me.lblDOY.Size = New System.Drawing.Size(66, 13)
         Me.lblDOY.TabIndex = 7
@@ -102,7 +103,7 @@ Partial Class dlgEndOfRainsSeason
         'lblCapacity
         '
         Me.lblCapacity.AutoSize = True
-        Me.lblCapacity.Location = New System.Drawing.Point(150, 320)
+        Me.lblCapacity.Location = New System.Drawing.Point(116, 322)
         Me.lblCapacity.Name = "lblCapacity"
         Me.lblCapacity.Size = New System.Drawing.Size(51, 13)
         Me.lblCapacity.TabIndex = 14
@@ -112,7 +113,7 @@ Partial Class dlgEndOfRainsSeason
         'lblRainfall
         '
         Me.lblRainfall.AutoSize = True
-        Me.lblRainfall.Location = New System.Drawing.Point(253, 192)
+        Me.lblRainfall.Location = New System.Drawing.Point(250, 196)
         Me.lblRainfall.Name = "lblRainfall"
         Me.lblRainfall.Size = New System.Drawing.Size(70, 13)
         Me.lblRainfall.TabIndex = 9
@@ -121,7 +122,7 @@ Partial Class dlgEndOfRainsSeason
         'lblEvaporation
         '
         Me.lblEvaporation.AutoSize = True
-        Me.lblEvaporation.Location = New System.Drawing.Point(152, 355)
+        Me.lblEvaporation.Location = New System.Drawing.Point(116, 354)
         Me.lblEvaporation.Name = "lblEvaporation"
         Me.lblEvaporation.Size = New System.Drawing.Size(67, 13)
         Me.lblEvaporation.TabIndex = 18
@@ -130,7 +131,7 @@ Partial Class dlgEndOfRainsSeason
         'lblStation
         '
         Me.lblStation.AutoSize = True
-        Me.lblStation.Location = New System.Drawing.Point(254, 28)
+        Me.lblStation.Location = New System.Drawing.Point(250, 17)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(43, 13)
         Me.lblStation.TabIndex = 1
@@ -139,7 +140,7 @@ Partial Class dlgEndOfRainsSeason
         'lblAmount
         '
         Me.lblAmount.AutoSize = True
-        Me.lblAmount.Location = New System.Drawing.Point(150, 287)
+        Me.lblAmount.Location = New System.Drawing.Point(116, 288)
         Me.lblAmount.Name = "lblAmount"
         Me.lblAmount.Size = New System.Drawing.Size(46, 13)
         Me.lblAmount.TabIndex = 22
@@ -148,7 +149,7 @@ Partial Class dlgEndOfRainsSeason
         'lblTotalOverDays
         '
         Me.lblTotalOverDays.AutoSize = True
-        Me.lblTotalOverDays.Location = New System.Drawing.Point(295, 287)
+        Me.lblTotalOverDays.Location = New System.Drawing.Point(277, 288)
         Me.lblTotalOverDays.Name = "lblTotalOverDays"
         Me.lblTotalOverDays.Size = New System.Drawing.Size(66, 13)
         Me.lblTotalOverDays.TabIndex = 24
@@ -157,7 +158,7 @@ Partial Class dlgEndOfRainsSeason
         'lblWaterBalanceLessThan
         '
         Me.lblWaterBalanceLessThan.AutoSize = True
-        Me.lblWaterBalanceLessThan.Location = New System.Drawing.Point(295, 320)
+        Me.lblWaterBalanceLessThan.Location = New System.Drawing.Point(250, 322)
         Me.lblWaterBalanceLessThan.Name = "lblWaterBalanceLessThan"
         Me.lblWaterBalanceLessThan.Size = New System.Drawing.Size(93, 13)
         Me.lblWaterBalanceLessThan.TabIndex = 16
@@ -167,7 +168,7 @@ Partial Class dlgEndOfRainsSeason
         'lblEndRainsColName
         '
         Me.lblEndRainsColName.AutoSize = True
-        Me.lblEndRainsColName.Location = New System.Drawing.Point(6, 417)
+        Me.lblEndRainsColName.Location = New System.Drawing.Point(6, 450)
         Me.lblEndRainsColName.Name = "lblEndRainsColName"
         Me.lblEndRainsColName.Size = New System.Drawing.Size(140, 13)
         Me.lblEndRainsColName.TabIndex = 28
@@ -177,18 +178,39 @@ Partial Class dlgEndOfRainsSeason
         'lblWBColName
         '
         Me.lblWBColName.AutoSize = True
-        Me.lblWBColName.Location = New System.Drawing.Point(6, 390)
+        Me.lblWBColName.Location = New System.Drawing.Point(6, 422)
         Me.lblWBColName.Name = "lblWBColName"
         Me.lblWBColName.Size = New System.Drawing.Size(149, 13)
         Me.lblWBColName.TabIndex = 26
         Me.lblWBColName.Tag = "Water Balance Col Name:"
         Me.lblWBColName.Text = "End of Season Column Name:"
         '
+        'cmdDoyRange
+        '
+        Me.cmdDoyRange.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdDoyRange.Location = New System.Drawing.Point(8, 241)
+        Me.cmdDoyRange.Name = "cmdDoyRange"
+        Me.cmdDoyRange.Size = New System.Drawing.Size(105, 26)
+        Me.cmdDoyRange.TabIndex = 11
+        Me.cmdDoyRange.Tag = ""
+        Me.cmdDoyRange.Text = "Day Range"
+        Me.cmdDoyRange.UseVisualStyleBackColor = True
+        '
+        'ucrInputFilterPreview
+        '
+        Me.ucrInputFilterPreview.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilterPreview.IsMultiline = False
+        Me.ucrInputFilterPreview.IsReadOnly = True
+        Me.ucrInputFilterPreview.Location = New System.Drawing.Point(119, 244)
+        Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
+        Me.ucrInputFilterPreview.Size = New System.Drawing.Size(242, 22)
+        Me.ucrInputFilterPreview.TabIndex = 12
+        '
         'ucrNudTotalOverDays
         '
         Me.ucrNudTotalOverDays.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTotalOverDays.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTotalOverDays.Location = New System.Drawing.Point(361, 286)
+        Me.ucrNudTotalOverDays.Location = New System.Drawing.Point(349, 286)
         Me.ucrNudTotalOverDays.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudTotalOverDays.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTotalOverDays.Name = "ucrNudTotalOverDays"
@@ -200,7 +222,7 @@ Partial Class dlgEndOfRainsSeason
         '
         Me.ucrNudAmount.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAmount.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudAmount.Location = New System.Drawing.Point(197, 286)
+        Me.ucrNudAmount.Location = New System.Drawing.Point(169, 286)
         Me.ucrNudAmount.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudAmount.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAmount.Name = "ucrNudAmount"
@@ -213,25 +235,17 @@ Partial Class dlgEndOfRainsSeason
         Me.ucrChkEndOfRains.Checked = False
         Me.ucrChkEndOfRains.Location = New System.Drawing.Point(9, 286)
         Me.ucrChkEndOfRains.Name = "ucrChkEndOfRains"
-        Me.ucrChkEndOfRains.Size = New System.Drawing.Size(135, 20)
+        Me.ucrChkEndOfRains.Size = New System.Drawing.Size(101, 20)
         Me.ucrChkEndOfRains.TabIndex = 21
-        '
-        'ucrChkEvaporationAsReceiver
-        '
-        Me.ucrChkEvaporationAsReceiver.Checked = False
-        Me.ucrChkEvaporationAsReceiver.Location = New System.Drawing.Point(394, 354)
-        Me.ucrChkEvaporationAsReceiver.Name = "ucrChkEvaporationAsReceiver"
-        Me.ucrChkEvaporationAsReceiver.Size = New System.Drawing.Size(168, 20)
-        Me.ucrChkEvaporationAsReceiver.TabIndex = 20
         '
         'ucrReceiverEvaporation
         '
         Me.ucrReceiverEvaporation.frmParent = Me
-        Me.ucrReceiverEvaporation.Location = New System.Drawing.Point(218, 353)
+        Me.ucrReceiverEvaporation.Location = New System.Drawing.Point(280, 382)
         Me.ucrReceiverEvaporation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverEvaporation.Name = "ucrReceiverEvaporation"
         Me.ucrReceiverEvaporation.Selector = Nothing
-        Me.ucrReceiverEvaporation.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverEvaporation.Size = New System.Drawing.Size(139, 20)
         Me.ucrReceiverEvaporation.strNcFilePath = ""
         Me.ucrReceiverEvaporation.TabIndex = 19
         Me.ucrReceiverEvaporation.ucrSelector = Nothing
@@ -241,14 +255,14 @@ Partial Class dlgEndOfRainsSeason
         Me.ucrChkEndOfSeason.Checked = False
         Me.ucrChkEndOfSeason.Location = New System.Drawing.Point(8, 320)
         Me.ucrChkEndOfSeason.Name = "ucrChkEndOfSeason"
-        Me.ucrChkEndOfSeason.Size = New System.Drawing.Size(135, 20)
+        Me.ucrChkEndOfSeason.Size = New System.Drawing.Size(105, 20)
         Me.ucrChkEndOfSeason.TabIndex = 13
         '
         'ucrNudWBLessThan
         '
         Me.ucrNudWBLessThan.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWBLessThan.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudWBLessThan.Location = New System.Drawing.Point(394, 320)
+        Me.ucrNudWBLessThan.Location = New System.Drawing.Point(349, 320)
         Me.ucrNudWBLessThan.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudWBLessThan.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWBLessThan.Name = "ucrNudWBLessThan"
@@ -260,7 +274,7 @@ Partial Class dlgEndOfRainsSeason
         '
         Me.ucrNudCapacity.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCapacity.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudCapacity.Location = New System.Drawing.Point(202, 320)
+        Me.ucrNudCapacity.Location = New System.Drawing.Point(169, 320)
         Me.ucrNudCapacity.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudCapacity.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCapacity.Name = "ucrNudCapacity"
@@ -273,7 +287,7 @@ Partial Class dlgEndOfRainsSeason
         Me.ucrInputWBColName.AddQuotesIfUnrecognised = True
         Me.ucrInputWBColName.IsMultiline = False
         Me.ucrInputWBColName.IsReadOnly = False
-        Me.ucrInputWBColName.Location = New System.Drawing.Point(158, 386)
+        Me.ucrInputWBColName.Location = New System.Drawing.Point(158, 419)
         Me.ucrInputWBColName.Name = "ucrInputWBColName"
         Me.ucrInputWBColName.Size = New System.Drawing.Size(167, 21)
         Me.ucrInputWBColName.TabIndex = 27
@@ -283,7 +297,7 @@ Partial Class dlgEndOfRainsSeason
         Me.ucrInputEndRainColName.AddQuotesIfUnrecognised = True
         Me.ucrInputEndRainColName.IsMultiline = False
         Me.ucrInputEndRainColName.IsReadOnly = False
-        Me.ucrInputEndRainColName.Location = New System.Drawing.Point(158, 413)
+        Me.ucrInputEndRainColName.Location = New System.Drawing.Point(158, 449)
         Me.ucrInputEndRainColName.Name = "ucrInputEndRainColName"
         Me.ucrInputEndRainColName.Size = New System.Drawing.Size(167, 21)
         Me.ucrInputEndRainColName.TabIndex = 29
@@ -291,7 +305,7 @@ Partial Class dlgEndOfRainsSeason
         'ucrReceiverStation
         '
         Me.ucrReceiverStation.frmParent = Me
-        Me.ucrReceiverStation.Location = New System.Drawing.Point(253, 43)
+        Me.ucrReceiverStation.Location = New System.Drawing.Point(253, 30)
         Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStation.Name = "ucrReceiverStation"
         Me.ucrReceiverStation.Selector = Nothing
@@ -303,7 +317,7 @@ Partial Class dlgEndOfRainsSeason
         'ucrReceiverYear
         '
         Me.ucrReceiverYear.frmParent = Me
-        Me.ucrReceiverYear.Location = New System.Drawing.Point(253, 123)
+        Me.ucrReceiverYear.Location = New System.Drawing.Point(253, 121)
         Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverYear.Name = "ucrReceiverYear"
         Me.ucrReceiverYear.Selector = Nothing
@@ -315,7 +329,7 @@ Partial Class dlgEndOfRainsSeason
         'ucrReceiverDate
         '
         Me.ucrReceiverDate.frmParent = Me
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(253, 82)
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(253, 75)
         Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing
@@ -339,7 +353,7 @@ Partial Class dlgEndOfRainsSeason
         'ucrReceiverRainfall
         '
         Me.ucrReceiverRainfall.frmParent = Me
-        Me.ucrReceiverRainfall.Location = New System.Drawing.Point(253, 207)
+        Me.ucrReceiverRainfall.Location = New System.Drawing.Point(253, 209)
         Me.ucrReceiverRainfall.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverRainfall.Name = "ucrReceiverRainfall"
         Me.ucrReceiverRainfall.Selector = Nothing
@@ -361,7 +375,7 @@ Partial Class dlgEndOfRainsSeason
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(8, 436)
+        Me.ucrBase.Location = New System.Drawing.Point(8, 476)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 56)
         Me.ucrBase.TabIndex = 30
@@ -371,37 +385,32 @@ Partial Class dlgEndOfRainsSeason
         Me.ucrInputEvaporation.AddQuotesIfUnrecognised = True
         Me.ucrInputEvaporation.IsMultiline = False
         Me.ucrInputEvaporation.IsReadOnly = False
-        Me.ucrInputEvaporation.Location = New System.Drawing.Point(218, 353)
+        Me.ucrInputEvaporation.Location = New System.Drawing.Point(280, 351)
         Me.ucrInputEvaporation.Name = "ucrInputEvaporation"
-        Me.ucrInputEvaporation.Size = New System.Drawing.Size(143, 21)
+        Me.ucrInputEvaporation.Size = New System.Drawing.Size(139, 21)
         Me.ucrInputEvaporation.TabIndex = 26
         '
-        'ucrInputFilterPreview
+        'ucrRdoValueEvaporation
         '
-        Me.ucrInputFilterPreview.AddQuotesIfUnrecognised = True
-        Me.ucrInputFilterPreview.IsMultiline = False
-        Me.ucrInputFilterPreview.IsReadOnly = True
-        Me.ucrInputFilterPreview.Location = New System.Drawing.Point(119, 244)
-        Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
-        Me.ucrInputFilterPreview.Size = New System.Drawing.Size(242, 22)
-        Me.ucrInputFilterPreview.TabIndex = 12
+        Me.ucrRdoValueEvaporation.Location = New System.Drawing.Point(189, 352)
+        Me.ucrRdoValueEvaporation.Name = "ucrRdoValueEvaporation"
+        Me.ucrRdoValueEvaporation.Size = New System.Drawing.Size(85, 20)
+        Me.ucrRdoValueEvaporation.TabIndex = 31
         '
-        'cmdDoyRange
+        'ucrRdoVariableEvaporation
         '
-        Me.cmdDoyRange.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDoyRange.Location = New System.Drawing.Point(8, 241)
-        Me.cmdDoyRange.Name = "cmdDoyRange"
-        Me.cmdDoyRange.Size = New System.Drawing.Size(105, 26)
-        Me.cmdDoyRange.TabIndex = 11
-        Me.cmdDoyRange.Tag = ""
-        Me.cmdDoyRange.Text = "Day Range"
-        Me.cmdDoyRange.UseVisualStyleBackColor = True
+        Me.ucrRdoVariableEvaporation.Location = New System.Drawing.Point(189, 382)
+        Me.ucrRdoVariableEvaporation.Name = "ucrRdoVariableEvaporation"
+        Me.ucrRdoVariableEvaporation.Size = New System.Drawing.Size(85, 20)
+        Me.ucrRdoVariableEvaporation.TabIndex = 32
         '
         'dlgEndOfRainsSeason
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(574, 496)
+        Me.ClientSize = New System.Drawing.Size(475, 532)
+        Me.Controls.Add(Me.ucrRdoVariableEvaporation)
+        Me.Controls.Add(Me.ucrRdoValueEvaporation)
         Me.Controls.Add(Me.ucrInputFilterPreview)
         Me.Controls.Add(Me.cmdDoyRange)
         Me.Controls.Add(Me.ucrNudTotalOverDays)
@@ -409,7 +418,6 @@ Partial Class dlgEndOfRainsSeason
         Me.Controls.Add(Me.ucrNudAmount)
         Me.Controls.Add(Me.lblAmount)
         Me.Controls.Add(Me.ucrChkEndOfRains)
-        Me.Controls.Add(Me.ucrChkEvaporationAsReceiver)
         Me.Controls.Add(Me.ucrReceiverEvaporation)
         Me.Controls.Add(Me.ucrChkEndOfSeason)
         Me.Controls.Add(Me.lblEvaporation)
@@ -472,10 +480,11 @@ Partial Class dlgEndOfRainsSeason
     Friend WithEvents lblWBColName As Label
     Friend WithEvents ucrInputWBColName As ucrInputTextBox
     Friend WithEvents lblWaterBalanceLessThan As Label
-    Friend WithEvents ucrChkEvaporationAsReceiver As ucrCheck
     Friend WithEvents ucrReceiverEvaporation As ucrReceiverSingle
     Friend WithEvents ucrChkEndOfSeason As ucrCheck
     Friend WithEvents ucrChkEndOfRains As ucrCheck
     Friend WithEvents ucrInputFilterPreview As ucrInputTextBox
     Friend WithEvents cmdDoyRange As Button
+    Friend WithEvents ucrRdoVariableEvaporation As ucrRadio
+    Friend WithEvents ucrRdoValueEvaporation As ucrRadio
 End Class
