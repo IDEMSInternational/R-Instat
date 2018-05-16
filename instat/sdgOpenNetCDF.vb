@@ -31,7 +31,7 @@ Public Class sdgOpenNetCDF
     Private lstDims As List(Of String)
     Private lstFunctions As List(Of RFunction)
     Private strFilePath As String
-    Private dctAxesNames As Dictionary(Of String, String)
+    Private dctAxesNames As New Dictionary(Of String, String)
     Private bUpdating As Boolean = False
 
     Private Sub sdgOpenNetCDF_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -100,6 +100,10 @@ Public Class sdgOpenNetCDF
         ucrChkIncludeMetadata.SetParameter(New RParameter("include_metadata", 4))
         ucrChkIncludeMetadata.SetText("Include Metadata")
         ucrChkIncludeMetadata.SetRDefault("TRUE")
+
+        ucrChkIncludeRequestedPoints.SetParameter(New RParameter("show_requested_points", 5))
+        ucrChkIncludeRequestedPoints.SetText("Include requested points in data (if specified)")
+        ucrChkIncludeRequestedPoints.SetRDefault("TRUE")
 
         ucrReceiverPointsX.Selector = ucrSelectorPoints
         ucrReceiverPointsY.Selector = ucrSelectorPoints
@@ -282,7 +286,7 @@ Public Class sdgOpenNetCDF
                             lstMaxTextBoxes(i).Visible = False
                             lstMinLabels(i).Visible = False
                             lstMaxLabels(i).Visible = False
-                            lstAxesLabels(i).Text = "No " & lstDims(i) & " dimension."
+                            lstAxesLabels(i).Text = "No " & lstDims(i) & " dimension detected."
                         End If
                     End If
                 Next
@@ -303,10 +307,12 @@ Public Class sdgOpenNetCDF
         ucrChkOnlyDataVariables.SetRCode(clsImportNetcdfFunction, bReset, bCloneIfNeeded:=True)
         ucrChkKeepRawTime.SetRCode(clsImportNetcdfFunction, bReset, bCloneIfNeeded:=True)
         ucrChkIncludeMetadata.SetRCode(clsImportNetcdfFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkIncludeRequestedPoints.SetRCode(clsImportNetcdfFunction, bReset, bCloneIfNeeded:=True)
 
         ucrPnlLocation.SetRCode(clsImportNetcdfFunction, bReset, bCloneIfNeeded:=True)
 
         If bReset Then
+            ucrSelectorPoints.Reset()
             ucrReceiverPointsX.SetMeAsReceiver()
         End If
         bUpdating = False
@@ -335,6 +341,7 @@ Public Class sdgOpenNetCDF
     End Sub
 
     Private Sub SetLocationParameters()
+        'TODO If x or y are not detected 
         If Not bUpdating Then
             If rdoRange.Checked Then
                 If dctAxesNames.ContainsKey("X") Then
