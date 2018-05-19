@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgClimaticCheckDataTemperature
     Private bFirstload As Boolean = True
@@ -23,22 +22,24 @@ Public Class dlgClimaticCheckDataTemperature
     Private clsGroupByFunc, clsGroupingListFunc, clsCalcFilterFunc, clsRunCalcFunc As New RFunction
     'logical columns
     Private clsFilterListFunc, clsFilterFunc As New RFunction
+    'Jump
+    Private clsJumpCodeElement1, clsJumpCodeElement2 As New clsQCJumpRCode
+    Private clsJumpOp, clsJumpListSubCalc As New ROperator
     'Range
     Private clsGreaterEqualToOperator, clsLessEqualToOperator, clsRangeOrOperator, clsRangeOr2Opertor, clsGreaterEqualTo2Operator, clsLessEqualTo2Operator, clsRange2OrOperator As New ROperator
-    'Jump
-    Private clsConcFunc, clsDiffFunc, clsAbsFunc As New RFunction
-    Private clsJumpGreaterOperator As New ROperator
     'Same
-    Private clsRepFunc, clsRleFunc, clsAsNumFunc As New RFunction
-    Private clsDollarOperator, clsSameGreaterOperator As New ROperator
+    Private clsSameCodeElement1 As New clsQCSameRCode
+    Private clsSameCodeElement2 As New clsQCSameRCode
+    Private clsSameOp As New ROperator
     'Difference
     Private clsDiffOperator, clsLessDiffOperator As New ROperator
     'Combined
     Private clsOrOperator As New ROperator
+    Private clsListSubCalc As New RFunction
     'outliers
-    Private clsGroupByMonth, clsListForOutlierManipulations, clsOutlierLimitUpperFunc, clsOutlierLimitUpperCalc, clsOutlierLimitLowerFunc, clsOutlierLimitLowerCalc, clsListSubCalc As New RFunction
+    Private clsGroupByMonth, clsListForOutlierManipulations, clsOutlierLimitUpperFunc, clsOutlierLimitUpperCalc, clsOutlierLimitLowerFunc, clsOutlierLimitLowerCalc As New RFunction
     Private clsOutlierLimitUpperFuncTmin, clsOutlierLimitUpperCalcTmin, clsOutlierLimitLowerFuncTmin, clsOutlierLimitLowerCalcTmin As New RFunction
-    Private clsOutlierUpperOperator, clsOutlierLowerOperator As New ROperator
+    Private clsOutlierUpperOperator, clsOutlierLowerOperator, clsOutlierListSubCalc As New ROperator
     Private clsOutlierUpperOperatorTmin, clsOutlierLowerOperatorTmin As New ROperator
     Private clsOutlierCombinedOperator As New ROperator
 
@@ -63,7 +64,7 @@ Public Class dlgClimaticCheckDataTemperature
         rdoSatelite.Enabled = False
         rdoIndividual.Checked = True
 
-        ucrChkIncludeCalculatedColumns.Enabled = False
+        'ucrChkIncludeCalculatedColumns.Enabled = False
 
         Dim lstLabels As New List(Of Control)
         lstLabels.AddRange({lblRangeElement1to, lblNudRangeElement1Min, lblNudRangeElement1Max})
@@ -135,11 +136,11 @@ Public Class dlgClimaticCheckDataTemperature
         ucrNudDifference.SetLinkedDisplayControl(lblNudDiff)
         ucrReceiverElement2.SetLinkedDisplayControl(lblElement2)
 
-        ucrChkSame.SetParameter(New RParameter("same", clsSameGreaterOperator, 1), bNewChangeParameterValue:=False)
+        ucrChkSame.SetParameter(New RParameter("same", clsSameOp, 1), bNewChangeParameterValue:=False)
         ucrChkSame.SetText("Same (Element1)")
         ucrChkSame.AddToLinkedControls(ucrNudSame, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=4)
 
-        ucrChkJump.SetParameter(New RParameter("jump", clsJumpGreaterOperator, 1), bNewChangeParameterValue:=False)
+        ucrChkJump.SetParameter(New RParameter("jump", clsJumpOp, 1), bNewChangeParameterValue:=False)
         ucrChkJump.SetText("Jump (Element1)")
         ucrChkJump.AddToLinkedControls(ucrNudJump, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
 
@@ -167,7 +168,7 @@ Public Class dlgClimaticCheckDataTemperature
         ucrNudSame.SetMinMax(2, 366)
 
         'Jump Option
-        ucrNudJump.SetParameter(New RParameter("from", iNewPosition:=1, bNewIncludeArgumentName:=False))
+        ucrNudJump.SetParameter(New RParameter("right", iNewPosition:=1, bNewIncludeArgumentName:=False))
         ucrNudJump.SetMinMax(1, 25)
         ucrNudJump.DecimalPlaces = 1
         ucrNudJump.Increment = 0.1
@@ -190,19 +191,11 @@ Public Class dlgClimaticCheckDataTemperature
         'ucrChkIncludeLogicalColumns.AddToLinkedControls(ucrInputNewColumnName, {True}, bNewLinkedHideIfParameterMissing:=True)
         'ucrInputNewColumnName.SetLinkedDisplayControl(lblNewColumnName)
 
-        'TODO:To be added in future.
-        'save
-        'ucrInputNewColumnName.SetParameter(New RParameter("result_name", 2))
-        'ucrInputNewColumnName.SetDataFrameSelector(ucrSelectorTemperature.ucrAvailableDataFrames)
-        'ucrInputNewColumnName.SetName("Qc")
-
         'outliers Option
-
         ttOutliers.SetToolTip(ucrChkOutlier, "Values that are further than this number of IQRs from the corresponding quartile.")
     End Sub
 
     Private Sub SetDefaults()
-        Dim strLengths As String = "lengths"
         Dim strUpper_Outlier_Limit_Tmax As String = "upper_outlier_limit_Tmax"
         Dim strLower_Outlier_Limit_Tmax As String = "lower_outlier_limit_Tmax"
         Dim strUpper_Outlier_Limit_Tmin As String = "upper_outlier_limit_Tmin"
@@ -216,14 +209,8 @@ Public Class dlgClimaticCheckDataTemperature
         clsRunCalcFunc = New RFunction
         clsGreaterEqualToOperator = New ROperator
         clsLessEqualToOperator = New ROperator
-        clsConcFunc = New RFunction
-        clsDiffFunc = New RFunction
-        clsAbsFunc = New RFunction
+
         clsDiffOperator = New ROperator
-        clsRepFunc = New RFunction
-        clsRleFunc = New RFunction
-        clsAsNumFunc = New RFunction
-        clsDollarOperator = New ROperator
         clsOrOperator = New ROperator
         clsLessEqualTo2Operator = New ROperator
         clsGreaterEqualTo2Operator = New ROperator
@@ -235,8 +222,7 @@ Public Class dlgClimaticCheckDataTemperature
 
         clsRangeOrOperator.Clear()
         clsRange2OrOperator.Clear()
-        clsSameGreaterOperator.Clear()
-        clsJumpGreaterOperator.Clear()
+
         clsLessDiffOperator.Clear()
 
         ucrSelectorTemperature.Reset()
@@ -265,27 +251,16 @@ Public Class dlgClimaticCheckDataTemperature
         clsRange2OrOperator.AddParameter("right", bIncludeArgumentName:=False, clsROperatorParameter:=clsGreaterEqualTo2Operator, iPosition:=1)
 
         'Same
-        clsSameGreaterOperator.SetOperation(">=")
-        clsSameGreaterOperator.AddParameter("left", bIncludeArgumentName:=False, clsRFunctionParameter:=clsRepFunc, iPosition:=0)
-        clsRepFunc.SetRCommand("rep")
-        clsRepFunc.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsDollarOperator, iPosition:=0)
-        clsRepFunc.AddParameter("right", bIncludeArgumentName:=False, clsROperatorParameter:=clsDollarOperator, iPosition:=1)
-        clsAsNumFunc.SetRCommand("as.numeric")
-        clsRleFunc.SetRCommand("rle")
-        clsRleFunc.AddParameter("left", bIncludeArgumentName:=False, clsRFunctionParameter:=clsAsNumFunc, iPosition:=0)
-        clsDollarOperator.SetOperation("$")
-        clsDollarOperator.AddParameter("left", bIncludeArgumentName:=False, clsRFunctionParameter:=clsRleFunc, iPosition:=0)
-        clsDollarOperator.AddParameter("right", strParameterValue:=strLengths, bIncludeArgumentName:=False, iPosition:=1)
+        clsSameCodeElement1.SetDefaults()
+        clsSameCodeElement2.SetDefaults()
+
+        clsSameOp.SetOperation("|")
 
         'Jump
-        clsConcFunc.SetRCommand("c")
-        clsConcFunc.AddParameter("left", "NA", bIncludeArgumentName:=False, iPosition:=0)
-        clsConcFunc.AddParameter("right", bIncludeArgumentName:=False, clsRFunctionParameter:=clsDiffFunc, iPosition:=1)
-        clsAbsFunc.SetRCommand("abs")
-        clsAbsFunc.AddParameter("diff", bIncludeArgumentName:=False, clsRFunctionParameter:=clsConcFunc, iPosition:=0)
-        clsDiffFunc.SetRCommand("diff")
-        clsJumpGreaterOperator.SetOperation(">")
-        clsJumpGreaterOperator.AddParameter("left", bIncludeArgumentName:=False, clsRFunctionParameter:=clsAbsFunc, iPosition:=0)
+        clsJumpCodeElement1.SetDefaults("1")
+        clsJumpCodeElement2.SetDefaults("2")
+
+        clsJumpOp.SetOperation("|")
 
         'Difference
         clsLessDiffOperator.SetOperation("<")
@@ -356,6 +331,8 @@ Public Class dlgClimaticCheckDataTemperature
 
         'Sub Calculations List for temp_filter
         clsListSubCalc.SetRCommand("list")
+        clsOutlierListSubCalc.SetOperation(",")
+        clsJumpListSubCalc.SetOperation(",")
 
         'Upper Outlier Operator 
         clsOutlierUpperOperatorTmin.SetOperation(">")
@@ -374,6 +351,7 @@ Public Class dlgClimaticCheckDataTemperature
         clsCalcFilterFunc.AddParameter("result_name", Chr(34) & "QC" & Chr(34))
         clsCalcFilterFunc.SetAssignTo("Filter_Calculation")
         clsCalcFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsOrOperator, iPosition:=1)
+        clsCalcFilterFunc.AddParameter("sub_calculations", clsRFunctionParameter:=clsListSubCalc, iPosition:=2)
 
         'Logical columns 
         clsFilterFunc.SetRCommand("instat_calculation$new")
@@ -401,30 +379,44 @@ Public Class dlgClimaticCheckDataTemperature
 
     Private Sub SetRCodeForControls(bReset)
         ucrReceiverElement1.AddAdditionalCodeParameterPair(clsGreaterEqualToOperator, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
-        ucrReceiverElement1.AddAdditionalCodeParameterPair(clsDiffFunc, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
-        ucrReceiverElement1.AddAdditionalCodeParameterPair(clsDiffOperator, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
-        ucrReceiverElement1.AddAdditionalCodeParameterPair(clsAsNumFunc, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=4)
-        ucrReceiverElement1.AddAdditionalCodeParameterPair(clsOutlierUpperOperator, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=5)
-        ucrReceiverElement1.AddAdditionalCodeParameterPair(clsOutlierLowerOperator, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=6)
-        ucrReceiverElement1.AddAdditionalCodeParameterPair(clsOutlierLimitUpperFunc, New RParameter("x", 0), iAdditionalPairNo:=7)
-        ucrReceiverElement1.AddAdditionalCodeParameterPair(clsOutlierLimitLowerFunc, New RParameter("x", 0), iAdditionalPairNo:=8)
+        ucrReceiverElement1.AddAdditionalCodeParameterPair(clsDiffOperator, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
+        clsSameCodeElement1.SetElementParameters(ucrReceiverElement1, iAdditionalPairNo:=3)
+        ucrReceiverElement1.AddAdditionalCodeParameterPair(clsOutlierUpperOperator, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=4)
+        ucrReceiverElement1.AddAdditionalCodeParameterPair(clsOutlierLowerOperator, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=5)
+        ucrReceiverElement1.AddAdditionalCodeParameterPair(clsOutlierLimitUpperFunc, New RParameter("x", 0), iAdditionalPairNo:=6)
+        ucrReceiverElement1.AddAdditionalCodeParameterPair(clsOutlierLimitLowerFunc, New RParameter("x", 0), iAdditionalPairNo:=7)
+        clsJumpCodeElement1.SetElementParameters(ucrReceiverElement1, iAdditionalPairNo1:=8, iAdditionalPairNo2:=9, iAdditionalPairNo3:=10, iAdditionalPairNo4:=11)
+
         ucrReceiverElement2.AddAdditionalCodeParameterPair(clsGreaterEqualTo2Operator, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrReceiverElement2.AddAdditionalCodeParameterPair(clsLessEqualTo2Operator, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
         ucrReceiverElement2.AddAdditionalCodeParameterPair(clsOutlierUpperOperatorTmin, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
         ucrReceiverElement2.AddAdditionalCodeParameterPair(clsOutlierLowerOperatorTmin, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=4)
         ucrReceiverElement2.AddAdditionalCodeParameterPair(clsOutlierLimitUpperFuncTmin, New RParameter("x", 0), iAdditionalPairNo:=5)
         ucrReceiverElement2.AddAdditionalCodeParameterPair(clsOutlierLimitLowerFuncTmin, New RParameter("x", 0), iAdditionalPairNo:=6)
-        ucrChkOutlier.AddAdditionalCodeParameterPair(clsCalcFilterFunc, New RParameter("sub_calculations", strParamValue:=clsListSubCalc), iAdditionalPairNo:=1)
+        clsSameCodeElement2.SetElementParameters(ucrReceiverElement2, iAdditionalPairNo:=7)
+        clsJumpCodeElement2.SetElementParameters(ucrReceiverElement2, iAdditionalPairNo1:=8, iAdditionalPairNo2:=9, iAdditionalPairNo3:=10, iAdditionalPairNo4:=11)
+
+        ucrChkOutlier.AddAdditionalCodeParameterPair(clsListSubCalc, New RParameter("outliers", strParamValue:=clsOutlierListSubCalc, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrChkJump.AddAdditionalCodeParameterPair(clsListSubCalc, New RParameter("jump", strParamValue:=clsJumpListSubCalc, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+
+        ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsJumpCodeElement1.clsJumpTestFunction, New RParameter("save"), iAdditionalPairNo:=1)
+        ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsJumpCodeElement2.clsJumpTestFunction, New RParameter("save"), iAdditionalPairNo:=2)
+
+        ucrChkIncludeCalculatedColumns.AddAdditionalCodeParameterPair(clsJumpCodeElement1.clsJumpCalcFunction, New RParameter("save"), iAdditionalPairNo:=1)
+        ucrChkIncludeCalculatedColumns.AddAdditionalCodeParameterPair(clsJumpCodeElement2.clsJumpCalcFunction, New RParameter("save"), iAdditionalPairNo:=2)
+
+        ucrNudJump.AddAdditionalCodeParameterPair(clsJumpCodeElement2.clsGreaterJumpOperator, (New RParameter("n", 1, bNewIncludeArgumentName:=False)))
+        ucrNudSame.AddAdditionalCodeParameterPair(clsSameCodeElement2.clsSameGreaterOperator, (New RParameter("n", 1, bNewIncludeArgumentName:=False)))
 
         ucrNudRangeElement2Max.SetRCode(clsGreaterEqualTo2Operator, bReset)
         ucrNudRangeElement2Min.SetRCode(clsLessEqualTo2Operator, bReset)
         ucrReceiverElement1.SetRCode(clsLessEqualToOperator, bReset)
         ucrNudRangeElement1Min.SetRCode(clsLessEqualToOperator, bReset)
         ucrNudRangeElement1Max.SetRCode(clsGreaterEqualToOperator, bReset)
-        ucrNudJump.SetRCode(clsJumpGreaterOperator, bReset)
+        ucrNudJump.SetRCode(clsJumpCodeElement1.clsGreaterJumpOperator, bReset)
         ucrReceiverElement2.SetRCode(clsDiffOperator, bReset)
         ucrNudDifference.SetRCode(clsLessDiffOperator, bReset)
-        ucrNudSame.SetRCode(clsSameGreaterOperator, bReset)
+        ucrNudSame.SetRCode(clsSameCodeElement1.clsSameGreaterOperator, bReset)
         ucrChkDifference.SetRCode(clsOrOperator, bReset)
         ucrChkRangeElement1.SetRCode(clsOrOperator, bReset)
         ucrChkRangeElement2.SetRCode(clsOrOperator, bReset)
@@ -444,7 +436,7 @@ Public Class dlgClimaticCheckDataTemperature
         ElseIf ucrReceiverElement1.IsEmpty() OrElse ucrReceiverElement2.IsEmpty() AndAlso ucrChkDifference.Checked Then
             ucrBase.OKEnabled(False)
             Exit Sub
-        ElseIf ucrReceiverElement1.IsEmpty() AndAlso (ucrChkRangeElement1.Checked OrElse ucrChkSame.Checked OrElse ucrChkJump.Checked) Then
+        ElseIf ucrReceiverElement1.IsEmpty() AndAlso ucrChkRangeElement1.Checked Then
             ucrBase.OKEnabled(False)
             Exit Sub
         ElseIf ucrReceiverElement2.IsEmpty() AndAlso ucrChkRangeElement2.Checked Then
@@ -544,47 +536,55 @@ Public Class dlgClimaticCheckDataTemperature
     End Sub
 
     Private Sub FilterFunc()
+
         If Not ucrReceiverElement1.IsEmpty Then
+            clsSameOp.AddParameter("same1", clsROperatorParameter:=clsSameCodeElement1.clsSameGreaterOperator, bIncludeArgumentName:=False)
+            clsJumpOp.AddParameter("jump1", clsROperatorParameter:=clsJumpCodeElement1.clsGreaterJumpOperator, bIncludeArgumentName:=False)
+            clsJumpListSubCalc.AddParameter("sub1", clsRFunctionParameter:=clsJumpCodeElement1.clsJumpTestFunction, bIncludeArgumentName:=False)
             clsOutlierLimitUpperCalc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & ")", iPosition:=2)
             clsOutlierLimitLowerCalc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & ")", iPosition:=2)
+            clsOutlierListSubCalc.AddParameter("sub1", clsRFunctionParameter:=clsOutlierLimitUpperCalc, bIncludeArgumentName:=False, iPosition:=0)
+            clsOutlierListSubCalc.AddParameter("sub2", clsRFunctionParameter:=clsOutlierLimitLowerCalc, bIncludeArgumentName:=False, iPosition:=1)
+            clsOutlierCombinedOperator.AddParameter("sub1", clsROperatorParameter:=clsOutlierUpperOperator, bIncludeArgumentName:=False)
+            clsOutlierCombinedOperator.AddParameter("sub2", clsROperatorParameter:=clsOutlierLowerOperator, bIncludeArgumentName:=False)
+        Else
+            clsSameOp.RemoveParameterByName("same1")
+            clsJumpOp.RemoveParameterByName("jump1")
+            clsJumpListSubCalc.RemoveParameterByName("sub1")
+            clsOutlierListSubCalc.RemoveParameterByName("sub1")
+            clsOutlierListSubCalc.RemoveParameterByName("sub2")
+            clsOutlierCombinedOperator.RemoveParameterByName("sub1")
+            clsOutlierCombinedOperator.RemoveParameterByName("sub2")
         End If
         If Not ucrReceiverElement2.IsEmpty Then
+            clsSameOp.AddParameter("same2", clsROperatorParameter:=clsSameCodeElement2.clsSameGreaterOperator, bIncludeArgumentName:=False)
+            clsJumpOp.AddParameter("jump2", clsROperatorParameter:=clsJumpCodeElement2.clsGreaterJumpOperator, bIncludeArgumentName:=False)
+            clsJumpListSubCalc.AddParameter("sub2", clsRFunctionParameter:=clsJumpCodeElement2.clsJumpTestFunction, bIncludeArgumentName:=False)
             clsOutlierLimitUpperCalcTmin.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement2.GetVariableNames & ")", iPosition:=2)
             clsOutlierLimitLowerCalcTmin.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement2.GetVariableNames & ")", iPosition:=2)
+            clsOutlierListSubCalc.AddParameter("sub3", clsRFunctionParameter:=clsOutlierLimitUpperCalcTmin, bIncludeArgumentName:=False, iPosition:=2)
+            clsOutlierListSubCalc.AddParameter("sub4", clsRFunctionParameter:=clsOutlierLimitLowerCalcTmin, bIncludeArgumentName:=False, iPosition:=3)
+            clsOutlierCombinedOperator.AddParameter("sub3", clsROperatorParameter:=clsOutlierUpperOperatorTmin, bIncludeArgumentName:=False)
+            clsOutlierCombinedOperator.AddParameter("sub4", clsROperatorParameter:=clsOutlierLowerOperatorTmin, bIncludeArgumentName:=False)
+        Else
+            clsSameOp.RemoveParameterByName("same2")
+            clsJumpOp.RemoveParameterByName("jump2")
+            clsJumpListSubCalc.RemoveParameterByName("sub2")
+            clsOutlierListSubCalc.RemoveParameterByName("sub3")
+            clsOutlierListSubCalc.RemoveParameterByName("sub4")
+            clsOutlierCombinedOperator.RemoveParameterByName("sub3")
+            clsOutlierCombinedOperator.RemoveParameterByName("sub4")
         End If
+
         If Not ucrReceiverElement1.IsEmpty AndAlso Not ucrReceiverElement2.IsEmpty Then
             clsCalcFilterFunc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & "," & strCurrDataFrame & "=" & ucrReceiverElement2.GetVariableNames & ")", iPosition:=2)
             clsFilterFunc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & "," & strCurrDataFrame & "=" & ucrReceiverElement2.GetVariableNames & ")", iPosition:=2)
-            clsListSubCalc.AddParameter("sub1", clsRFunctionParameter:=clsOutlierLimitUpperCalc, bIncludeArgumentName:=False, iPosition:=0)
-            clsListSubCalc.AddParameter("sub2", clsRFunctionParameter:=clsOutlierLimitLowerCalc, bIncludeArgumentName:=False, iPosition:=1)
-            clsListSubCalc.AddParameter("sub3", clsRFunctionParameter:=clsOutlierLimitUpperCalcTmin, bIncludeArgumentName:=False, iPosition:=2)
-            clsListSubCalc.AddParameter("sub4", clsRFunctionParameter:=clsOutlierLimitLowerCalcTmin, bIncludeArgumentName:=False, iPosition:=3)
-            clsOutlierCombinedOperator.AddParameter("sub1", clsROperatorParameter:=clsOutlierUpperOperator, bIncludeArgumentName:=False)
-            clsOutlierCombinedOperator.AddParameter("sub2", clsROperatorParameter:=clsOutlierLowerOperator, bIncludeArgumentName:=False)
-            clsOutlierCombinedOperator.AddParameter("sub3", clsROperatorParameter:=clsOutlierUpperOperatorTmin, bIncludeArgumentName:=False)
-            clsOutlierCombinedOperator.AddParameter("sub4", clsROperatorParameter:=clsOutlierLowerOperatorTmin, bIncludeArgumentName:=False)
         ElseIf Not ucrReceiverElement1.IsEmpty Then
             clsCalcFilterFunc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & ")", iPosition:=2)
             clsFilterFunc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & ")", iPosition:=2)
-            clsListSubCalc.AddParameter("sub1", clsRFunctionParameter:=clsOutlierLimitUpperCalc, bIncludeArgumentName:=False, iPosition:=0)
-            clsListSubCalc.AddParameter("sub2", clsRFunctionParameter:=clsOutlierLimitLowerCalc, bIncludeArgumentName:=False, iPosition:=1)
-            clsListSubCalc.RemoveParameterByName("sub3")
-            clsListSubCalc.RemoveParameterByName("sub4")
-            clsOutlierCombinedOperator.AddParameter("sub1", clsROperatorParameter:=clsOutlierUpperOperator, bIncludeArgumentName:=False)
-            clsOutlierCombinedOperator.AddParameter("sub2", clsROperatorParameter:=clsOutlierLowerOperator, bIncludeArgumentName:=False)
-            clsOutlierCombinedOperator.RemoveParameterByName("sub3")
-            clsOutlierCombinedOperator.RemoveParameterByName("sub4")
         ElseIf Not ucrReceiverElement2.IsEmpty Then
             clsCalcFilterFunc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement2.GetVariableNames & ")", iPosition:=2)
             clsFilterFunc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement2.GetVariableNames & ")", iPosition:=2)
-            clsListSubCalc.AddParameter("sub3", clsRFunctionParameter:=clsOutlierLimitUpperCalcTmin, bIncludeArgumentName:=False, iPosition:=2)
-            clsListSubCalc.AddParameter("sub4", clsRFunctionParameter:=clsOutlierLimitLowerCalcTmin, bIncludeArgumentName:=False, iPosition:=3)
-            clsListSubCalc.RemoveParameterByName("sub1")
-            clsListSubCalc.RemoveParameterByName("sub2")
-            clsOutlierCombinedOperator.AddParameter("sub3", clsROperatorParameter:=clsOutlierUpperOperatorTmin, bIncludeArgumentName:=False)
-            clsOutlierCombinedOperator.AddParameter("sub4", clsROperatorParameter:=clsOutlierLowerOperatorTmin, bIncludeArgumentName:=False)
-            clsOutlierCombinedOperator.RemoveParameterByName("sub1")
-            clsOutlierCombinedOperator.RemoveParameterByName("sub2")
         End If
     End Sub
 
@@ -595,7 +595,6 @@ Public Class dlgClimaticCheckDataTemperature
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
         GroupByOptions()
     End Sub
-
 
     Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement1.ControlValueChanged, ucrReceiverElement2.ControlValueChanged
         FilterFunc()
