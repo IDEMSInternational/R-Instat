@@ -20,6 +20,8 @@ Public Class clsQCJumpRCode
     Public clsJumpCalcFunction, clsJumpTestFunction As New RFunction
     Private clsLagMinusOperator, clsLeadMinusOperator As New ROperator
     Public clsGreaterJumpOperator As New ROperator
+    Private clsJumpListFunc As New RFunction
+    Public strTestName As String
 
     Public Sub SetDefaults(strElementName As String)
         Dim strlargest_jump As String = "largest_jump" & strElementName
@@ -31,6 +33,7 @@ Public Class clsQCJumpRCode
         clsAbsFunc = New RFunction
         clsAbsLeadFunction = New RFunction
         clsJumpCalcFunction = New RFunction
+        clsJumpListFunc = New RFunction
 
         clsLagMinusOperator = New ROperator
 
@@ -67,14 +70,16 @@ Public Class clsQCJumpRCode
         clsJumpCalcFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsJumpCalcFunction.AddParameter("function_exp", clsRFunctionParameter:=clsPmaxFunction, iPosition:=1)
         clsJumpCalcFunction.AddParameter("result_name", Chr(34) & strlargest_jump & Chr(34), iPosition:=4)
-        clsJumpCalcFunction.AddParameter("sub_calculations", clsRFunctionParameter:=clsPmaxFunction, iPosition:=2)
         clsJumpCalcFunction.SetAssignTo("largest_jump" & strElementName)
 
+        strTestName = strjump_test
+        clsJumpListFunc.SetRCommand("list")
+        clsJumpListFunc.AddParameter("sub1", clsRFunctionParameter:=clsJumpCalcFunction, bIncludeArgumentName:=False)
         clsJumpTestFunction.SetRCommand("instat_calculation$new")
         clsJumpTestFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsJumpTestFunction.AddParameter("function_exp", clsROperatorParameter:=clsGreaterJumpOperator, iPosition:=1)
-        clsJumpTestFunction.AddParameter("result_name", Chr(34) & strjump_test & Chr(34), iPosition:=4)
-        clsJumpTestFunction.AddParameter("sub_calculations", clsRFunctionParameter:=clsJumpCalcFunction, iPosition:=2)
+        clsJumpTestFunction.AddParameter("result_name", Chr(34) & strTestName & Chr(34), iPosition:=4)
+        clsJumpTestFunction.AddParameter("sub_calculations", clsRFunctionParameter:=clsJumpListFunc, iPosition:=2)
         clsJumpTestFunction.SetAssignTo("largest_test_jump" & strElementName)
 
         clsGreaterJumpOperator.SetOperation(">")
