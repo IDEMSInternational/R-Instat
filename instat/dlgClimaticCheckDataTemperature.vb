@@ -25,6 +25,7 @@ Public Class dlgClimaticCheckDataTemperature
     'Jump
     Private clsJumpCodeElement1, clsJumpCodeElement2 As New clsQCJumpRCode
     Private clsJumpOp, clsJumpListSubCalc As New ROperator
+
     'Range
     Private clsGreaterEqualToOperator, clsLessEqualToOperator, clsRangeOrOperator, clsRangeOr2Opertor, clsGreaterEqualTo2Operator, clsLessEqualTo2Operator, clsRange2OrOperator As New ROperator
     'Same
@@ -366,6 +367,9 @@ Public Class dlgClimaticCheckDataTemperature
         clsFilterListFunc.AddParameter("sub", clsRFunctionParameter:=clsCalcFilterFunc, bIncludeArgumentName:=False)
 
         clsFilterFunc.SetAssignTo("filtered_data")
+
+
+        'clsJumpListFunc.
         'Combined
         clsOrOperator.SetOperation("|")
         clsOrOperator.bBrackets = False
@@ -539,7 +543,7 @@ Public Class dlgClimaticCheckDataTemperature
 
         If Not ucrReceiverElement1.IsEmpty Then
             clsSameOp.AddParameter("same1", clsROperatorParameter:=clsSameCodeElement1.clsSameGreaterOperator, bIncludeArgumentName:=False)
-            clsJumpOp.AddParameter("jump1", clsROperatorParameter:=clsJumpCodeElement1.clsGreaterJumpOperator, bIncludeArgumentName:=False)
+            clsJumpOp.AddParameter("jump1", strParameterValue:=clsJumpCodeElement1.strTestName, bIncludeArgumentName:=False)
             clsJumpListSubCalc.AddParameter("sub1", clsRFunctionParameter:=clsJumpCodeElement1.clsJumpTestFunction, bIncludeArgumentName:=False)
             clsOutlierLimitUpperCalc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & ")", iPosition:=2)
             clsOutlierLimitLowerCalc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & ")", iPosition:=2)
@@ -558,7 +562,7 @@ Public Class dlgClimaticCheckDataTemperature
         End If
         If Not ucrReceiverElement2.IsEmpty Then
             clsSameOp.AddParameter("same2", clsROperatorParameter:=clsSameCodeElement2.clsSameGreaterOperator, bIncludeArgumentName:=False)
-            clsJumpOp.AddParameter("jump2", clsROperatorParameter:=clsJumpCodeElement2.clsGreaterJumpOperator, bIncludeArgumentName:=False)
+            clsJumpOp.AddParameter("jump2", strParameterValue:=clsJumpCodeElement2.strTestName, bIncludeArgumentName:=False)
             clsJumpListSubCalc.AddParameter("sub2", clsRFunctionParameter:=clsJumpCodeElement2.clsJumpTestFunction, bIncludeArgumentName:=False)
             clsOutlierLimitUpperCalcTmin.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement2.GetVariableNames & ")", iPosition:=2)
             clsOutlierLimitLowerCalcTmin.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement2.GetVariableNames & ")", iPosition:=2)
@@ -579,12 +583,18 @@ Public Class dlgClimaticCheckDataTemperature
         If Not ucrReceiverElement1.IsEmpty AndAlso Not ucrReceiverElement2.IsEmpty Then
             clsCalcFilterFunc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & "," & strCurrDataFrame & "=" & ucrReceiverElement2.GetVariableNames & ")", iPosition:=2)
             clsFilterFunc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & "," & strCurrDataFrame & "=" & ucrReceiverElement2.GetVariableNames & ")", iPosition:=2)
+            clsJumpCodeElement1.clsJumpCalcFunction.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & "," & strCurrDataFrame & "=" & ucrReceiverElement2.GetVariableNames & ")", iPosition:=2)
+            clsJumpCodeElement2.clsJumpCalcFunction.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & "," & strCurrDataFrame & "=" & ucrReceiverElement2.GetVariableNames & ")", iPosition:=2)
         ElseIf Not ucrReceiverElement1.IsEmpty Then
             clsCalcFilterFunc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & ")", iPosition:=2)
             clsFilterFunc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & ")", iPosition:=2)
+            clsJumpCodeElement1.clsJumpCalcFunction.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & ")", iPosition:=2)
+            clsJumpCodeElement2.clsJumpCalcFunction.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & ")", iPosition:=2)
         ElseIf Not ucrReceiverElement2.IsEmpty Then
             clsCalcFilterFunc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement2.GetVariableNames & ")", iPosition:=2)
             clsFilterFunc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement2.GetVariableNames & ")", iPosition:=2)
+            clsJumpCodeElement1.clsJumpCalcFunction.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement2.GetVariableNames & ")", iPosition:=2)
+            clsJumpCodeElement2.clsJumpCalcFunction.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement2.GetVariableNames & ")", iPosition:=2)
         End If
     End Sub
 
