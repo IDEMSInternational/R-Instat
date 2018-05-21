@@ -359,43 +359,6 @@ Public Class dlgClimaticBoxPlot
         End If
     End Sub
 
-    'Private Sub AddRemoveFacets()
-    '    If Not ucrReceiverFacetBy.IsEmpty Then
-    '        clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction, iPosition:=3)
-    '    Else
-    '        clsBaseOperator.RemoveParameterByName("facets")
-    '    End If
-    'End Sub
-
-    'Private Sub SetFacets()
-    '    If Not ucrReceiverFacetBy.IsEmpty AndAlso ucrReceiver2ndFacet.IsEmpty Then
-    '        clsFacetFunction.SetRCommand("facet_wrap")
-    '        clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetWrapOp, bIncludeArgumentName:=False, iPosition:=0)
-    '    ElseIf Not ucrReceiverFacetBy.IsEmpty AndAlso Not ucrReceiver2ndFacet.IsEmpty Then
-    '        clsFacetFunction.SetRCommand("facet_grid")
-    '        clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetGridOp, bIncludeArgumentName:=False, iPosition:=0)
-    '    End If
-    'End Sub
-
-    'Private Sub SecondFacetReceiverEnabled()
-    '    If bRCodeUpdated Then
-    '        If ucrReceiverFacetBy.IsEmpty() Then
-    '            ucrReceiver2ndFacet.Clear()
-    '            ucrReceiver2ndFacet.Enabled = False
-    '        Else
-    '            ucrReceiver2ndFacet.Enabled = True
-    '        End If
-    '    End If
-    'End Sub
-
-    'Private Sub ucrReceiverXVariable_ControlValueChanged(ucrChangedControl As ucrCore)
-    '    If ucrReceiverXVariable.IsEmpty Then
-    '        clsRaesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=1)
-    '    Else
-    '        clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsFactor, iPosition:=1)
-    '    End If
-    'End Sub
-
     Private Sub ChangeParameter()
         If ucrInputYear.GetText = strXAxis Then
             ucrReceiverYear.SetParameter(New RParameter("x", 1))
