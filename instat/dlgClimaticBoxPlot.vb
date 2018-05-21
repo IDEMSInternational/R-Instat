@@ -29,13 +29,20 @@ Public Class dlgClimaticBoxPlot
     Private clsXScaleContinuousFunction As New RFunction
     Private clsYScaleContinuousFunction As New RFunction
     Private clsFacetFunction As New RFunction
-    Private clsFacetWrapOp As New ROperator
-    Private clsFacetGridOp As New ROperator
+    Private clsFacetOp As New ROperator
+    Private clsFacetRowOp As New ROperator
+    Private clsFacetColOp As New ROperator
     Private clsThemeFunction As New RFunction
     Private dctThemeFunctions As Dictionary(Of String, RFunction)
     Private bResetSubdialog As Boolean = True
     Private bResetBoxLayerSubdialog As Boolean = True
     Private clsAsFactor As New RFunction
+
+    Private strFacetRow As String = "Facet Row"
+    Private strFacetCol As String = "Facet Column"
+    Private strXAxis As String = "X Axis"
+    Private strColour As String = "Colour Axis"
+    Private strNone As String = "None"
 
     Private Sub dlgClimaticBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -60,8 +67,7 @@ Public Class dlgClimaticBoxPlot
         Dim clsThemeFunc As New RFunction
         Dim clsTextElementFunc As New RFunction
         Dim clsThemeParam As New RParameter
-        Dim dctStation As New Dictionary(Of String, String)
-        Dim dctFacet As New Dictionary(Of String, String)
+        ' Dim dctCombo As New Dictionary(Of String, String)
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         'ucrBase.iHelpTopicID = ""
@@ -80,7 +86,7 @@ Public Class dlgClimaticBoxPlot
         ucrSelectorClimaticBoxPlot.SetParameter(New RParameter("data", 0))
         ucrSelectorClimaticBoxPlot.SetParameterIsrfunction()
 
-        ucrReceiverStation.SetParameter(New RParameter("station", 0, False))
+        'ucrReceiverStation.SetParameter(New RParameter("station", 0, False))
         ucrReceiverStation.SetParameterIsString()
         ucrReceiverStation.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiverStation.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "station" & Chr(34)})
@@ -155,30 +161,20 @@ Public Class dlgClimaticBoxPlot
         ucrChkVerticalXTickMarkers.SetText("Vertical X Tick Markers")
         ucrChkVerticalXTickMarkers.SetParameter(clsThemeParam, bNewAddRemoveParameter:=True, bNewChangeParameterValue:=False)
 
-        ucrInputStation.SetParameter(New RParameter("none"))
-        dctStation.Add("Facet 1", Chr(34) & "facet_wrap" & Chr(34))
-        dctStation.Add("Facet 2", Chr(34) & "facet_grid" & Chr(34))
-        dctStation.Add("None", Chr(34) & "none" & Chr(34))
-        ucrInputStation.SetItems(dctStation)
-        ucrInputStation.SetText("None")
+        'dctCombo.Add(strXAxis, strXAxis)
+        'dctCombo.Add(strColour, strColour)
+        'dctCombo.Add(strFacetRow, strFacetRow)
+        'dctCombo.Add(strFacetCol, strFacetCol)
+        'dctCombo.Add(strNone, strNone)
+
+        ucrInputStation.SetItems({strXAxis, strColour, strFacetRow, strFacetCol, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
 
-        dctFacet.Add("x", "x")
-        dctFacet.Add("Facet 1", Chr(34) & "facet_wrap" & Chr(34))
-        dctFacet.Add("Facet 2", Chr(34) & "facet_grid" & Chr(34))
-        dctFacet.Add("None", Chr(34) & "none" & Chr(34))
-
-        ucrInputYear.SetParameter(New RParameter("none"))
-        ucrInputYear.SetItems(dctFacet)
+        ucrInputYear.SetItems({strXAxis, strColour, strFacetRow, strFacetCol, strNone})
         ucrInputYear.SetDropDownStyleAsNonEditable()
-        ucrInputYear.SetText("None")
 
-        ucrInputWithinYear.SetParameter(New RParameter("x"))
-        ucrInputWithinYear.SetItems(dctFacet)
+        ucrInputWithinYear.SetItems({strXAxis, strColour, strFacetRow, strFacetCol, strNone})
         ucrInputWithinYear.SetDropDownStyleAsNonEditable()
-        ucrInputWithinYear.SetText("x")
-
-
 
         ucrSavePlot.SetPrefix("boxplot")
         ucrSavePlot.SetIsComboBox()
@@ -194,15 +190,21 @@ Public Class dlgClimaticBoxPlot
         clsRgeomPlotFunction = New RFunction
         clsRaesFunction = New RFunction
         clsFacetFunction = New RFunction
-        clsFacetWrapOp = New ROperator
-        clsFacetGridOp = New ROperator
+        clsFacetOp = New ROperator
+        clsFacetRowOp = New ROperator
+        clsFacetColOp = New ROperator
         clsAsFactor = New RFunction
         clsAsFactor.SetRCommand("as.factor")
 
         clsFacetFunction.SetPackageName("ggplot2")
-        clsFacetWrapOp.SetOperation("~")
-        clsFacetWrapOp.bForceIncludeOperation = True
-        clsFacetGridOp.SetOperation("~")
+        clsFacetRowOp.SetOperation("+")
+        clsFacetColOp.SetOperation("+")
+        clsFacetOp.SetOperation("~")
+        clsFacetOp.bForceIncludeOperation = True
+        clsFacetOp.AddParameter("left", clsROperatorParameter:=clsFacetRowOp, iPosition:=0)
+        clsFacetOp.AddParameter("right", clsROperatorParameter:=clsFacetColOp, iPosition:=1)
+        clsFacetFunction.AddParameter("facet", clsROperatorParameter:=clsFacetOp)
+
         ucrSelectorClimaticBoxPlot.Reset()
         ucrSavePlot.Reset()
         sdgPlots.Reset()
@@ -210,10 +212,13 @@ Public Class dlgClimaticBoxPlot
         bResetBoxLayerSubdialog = True
         ucrReceiverStation.SetMeAsReceiver()
 
+        ucrInputStation.SetText(strNone)
+        ucrInputYear.SetText(strNone)
+        ucrInputWithinYear.SetText(strXAxis)
+
         clsBaseOperator.SetOperation("+")
-        clsBaseOperator.RemoveParameterByName("facets")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
-        clsBaseOperator.AddParameter("geomfunc", clsRFunctionParameter:=clsRgeomPlotFunction, iPosition:=2)
+        clsBaseOperator.AddParameter("geomfunc", clsRFunctionParameter:=clsRgeomPlotFunction, iPosition:=2) 'TODO Check this line
 
         clsRggplotFunction.SetPackageName("ggplot2")
         clsRggplotFunction.SetRCommand("ggplot")
@@ -244,10 +249,7 @@ Public Class dlgClimaticBoxPlot
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         bRCodeUpdated = False
-
-        'ucrReceiverFacetBy.AddAdditionalCodeParameterPair(clsFacetWrapOp, New RParameter("var1", iNewPosition:=1), iAdditionalPairNo:=1)
         ucrSavePlot.SetRCode(clsBaseOperator, bReset)
-
         ucrSelectorClimaticBoxPlot.SetRCode(clsRggplotFunction, bReset)
         ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
         ucrChkVerticalXTickMarkers.SetRCode(clsBaseOperator, bReset)
@@ -257,21 +259,9 @@ Public Class dlgClimaticBoxPlot
         ucrChkOmitBelow.SetRCode(clsRgeomPlotFunction, bReset)
 
         ucrReceiverElement.SetRCode(clsRaesFunction, bReset)
-        ucrReceiverWithinYear.SetRCode(clsRaesFunction, bReset)
-        ucrReceiverYear.SetRCode(clsRaesFunction, bReset)
-
-        'ucrInputStation.SetRCode(clsRaesFunction, bReset)
-        'ucrInputYear.SetRCode(clsRaesFunction)
-        'ucrInputWithinYear.SetRCode(clsRaesFunction, bReset)
-
-        'ucrReceiverXVariable.SetRCode(clsAsFactor, bReset)
-        'ucrReceiverFacetBy.SetRCode(clsFacetGridOp, bReset)
-        'ucrReceiver2ndFacet.SetRCode(clsFacetGridOp, bReset)
-        'ucrChkMargins.SetRCode(clsFacetFunction, bReset)
 
         bRCodeUpdated = True
-        'SecondFacetReceiverEnabled()
-        'MarginsEnabled()
+
     End Sub
 
     Private Sub TestOKEnabled()
@@ -280,8 +270,6 @@ Public Class dlgClimaticBoxPlot
         Else
             ucrBase.OKEnabled(False)
         End If
-
-
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -407,61 +395,14 @@ Public Class dlgClimaticBoxPlot
     '        clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsFactor, iPosition:=1)
     '    End If
     'End Sub
-    Private Sub FacetsCheck()
-        If Not ucrInputStation.IsEmpty AndAlso Not ucrInputYear.IsEmpty AndAlso Not ucrInputWithinYear.IsEmpty Then
-            If ucrInputStation.Text = "Facet 2" AndAlso (ucrInputYear.Text <> "Facet 1" OrElse ucrInputWithinYear.Text <> "Facet1") Then
-                MsgBox("Facet 2 requires Facet 1.", vbOKOnly)
-                ucrInputStation.SetText("None")
-            ElseIf ucrInputYear.Text = "Facet 2" AndAlso (ucrInputStation.Text <> "Facet 1" OrElse ucrInputWithinYear.Text <> "Facet1") Then
-                MsgBox("Facet 2 requires Facet 1.", vbOKOnly)
-                ucrInputYear.SetText("None")
-            ElseIf ucrInputWithinYear.Text = "Facet 2" AndAlso (ucrInputYear.Text <> "Facet 1" OrElse ucrInputStation.Text <> "Facet1") Then
-                MsgBox("Facet 2 requires Facet 1.", vbOKOnly)
-                ucrInputWithinYear.SetText("None")
-            End If
-        End If
-    End Sub
 
     Private Sub ChangeParameter()
-        If ucrInputYear.GetText = "x" Then
+        If ucrInputYear.GetText = strXAxis Then
             ucrReceiverYear.SetParameter(New RParameter("x", 1))
-        ElseIf ucrInputWithinYear.GetText = "x" Then
+        ElseIf ucrInputWithinYear.GetText = strXAxis Then
             ucrReceiverWithinYear.SetParameter(New RParameter("x", 1))
         End If
 
-
-
-        'If Not ucrReceiverStation.IsEmpty Then
-        '    If ucrInputStation.Text = "Facet 1" Then
-        '        ucrReceiverStation.SetParameter(New RParameter("facet_wrap"))
-        '        ucrInputStation.SetParameter(New RParameter("facet_wrap"))
-        '    ElseIf ucrInputStation.Text = "Facet 2" Then
-        '        ucrReceiverStation.SetParameter(New RParameter("facet_grid"))
-        '        ucrInputStation.SetParameter(New RParameter("facet_grid"))
-        '    End If
-        'ElseIf Not ucrReceiverYear.IsEmpty Then
-        '    If ucrInputYear.Text = "x" Then
-        '        ucrReceiverYear.SetParameter(New RParameter("x", 0, False))
-        '        ucrInputYear.SetParameter(New RParameter("x"))
-        '    ElseIf ucrInputYear.GetText = "Facet 1" Then
-        '        ucrReceiverYear.SetParameter(New RParameter("facet_wrap"))
-        '        ucrInputYear.SetParameter(New RParameter("facet_wrap"))
-        '    ElseIf ucrInputYear.Text = "Facet 2" Then
-        '        ucrReceiverYear.SetParameter(New RParameter("facet_grid"))
-        '        ucrInputYear.SetParameter(New RParameter("facet_grid"))
-        '    End If
-        'ElseIf Not ucrReceiverWithinYear.IsEmpty Then
-        '    If ucrInputWithinYear.Text = "x" Then
-        '        ucrReceiverWithinYear.SetParameter(New RParameter("x", 0, False))
-        '        ucrInputWithinYear.SetParameter(New RParameter("x"))
-        '    ElseIf ucrInputWithinYear.Text = "Facet 1" Then
-        '        ucrReceiverWithinYear.SetParameter(New RParameter("facet_wrap"))
-        '        ucrInputWithinYear.SetParameter(New RParameter("facet_wrap"))
-        '    ElseIf ucrInputWithinYear.Text = "Facet 2" Then
-        '        ucrReceiverWithinYear.SetParameter(New RParameter("facet_grid"))
-        '        ucrInputWithinYear.SetParameter(New RParameter("facet_grid"))
-        '    End If
-        'End If
     End Sub
 
     Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore)
@@ -483,14 +424,42 @@ Public Class dlgClimaticBoxPlot
         End If
     End Sub
 
-    Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputStation.ControlValueChanged, ucrInputYear.ControlValueChanged, ucrInputWithinYear.ControlValueChanged
-        '    SecondFacetReceiverEnabled()
-        '    SetFacets()
-        '    AddRemoveFacets()
-        '    MarginsEnabled()
+    Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrInputComboBox) Handles ucrInputStation.ControlValueChanged, ucrInputYear.ControlValueChanged, ucrInputWithinYear.ControlValueChanged
+        Dim ucrTempReciever As ucrReceiver
+        Dim strTemp As String
+
+        If ucrChangedControl.IsLinkedTo(ucrReceiverStation) Then
+            strTemp = "station"
+            ucrTempReciever = ucrReceiverStation
+        ElseIf ucrChangedControl.IsLinkedTo(ucrReceiverYear) Then
+            strTemp = "year"
+            ucrTempReciever = ucrReceiverYear
+        Else ucrChangedControl.IsLinkedTo(ucrReceiverWithinYear)
+            strTemp = "withinyear"
+            ucrTempReciever = ucrReceiverWithinYear
+        End If
+
+        If ucrChangedControl.GetText = strXAxis Then
+            ucrTempReciever.SetParameter(New RParameter("x"))
+            ucrTempReciever.SetRCode(clsRaesFunction, bReset)
+        ElseIf ucrChangedControl.GetText = strColour Then
+            ucrTempReciever.SetParameter(New RParameter("colour"))
+            ucrTempReciever.SetRCode(clsRaesFunction, bReset)
+        ElseIf ucrChangedControl.GetText = strFacetRow Then
+            ucrTempReciever.SetParameter(New RParameter(strTemp))
+            ucrTempReciever.SetRCode(clsFacetRowOp, bReset)
+        ElseIf ucrChangedControl.GetText = strFacetCol Then
+            ucrTempReciever.SetParameter(New RParameter(strTemp))
+            ucrTempReciever.SetRCode(clsFacetColOp, bReset)
+        Else
+            ucrTempReciever.ClearCodeAndParameters()
+        End If
+
+        ucrReceiverWithinYear.SetRCode(clsRaesFunction, bReset)
+        ucrReceiverYear.SetRCode(clsRaesFunction, bReset)
+
         ChangeParameter()
         CheckComboBox()
-        ' FacetsCheck()
     End Sub
 
     Private Sub ucrSelectorClimaticBoxPlot_DataFrameChanged() Handles ucrSelectorClimaticBoxPlot.DataFrameChanged
@@ -502,35 +471,25 @@ Public Class dlgClimaticBoxPlot
     End Sub
 
     Private Sub CheckComboBox()
-        If Not ucrInputStation.IsEmpty AndAlso Not ucrInputYear.IsEmpty AndAlso Not ucrInputWithinYear.IsEmpty Then
-            If ucrInputStation.Text <> "None" Then
-                If ucrInputStation.Text = ucrInputYear.Text Then
-                    MsgBox("You can not have more than one x variable, Facet 1 or Facet 2 at the same time.", vbOKOnly)
-                    ucrInputYear.SetText("None")
-                ElseIf ucrInputStation.Text = ucrInputWithinYear.Text Then
-                    MsgBox("You cannot have more than one x variable, Facet 1 or Facet 2 at the same time.", vbOKOnly)
-                    ucrInputWithinYear.SetText("None")
-                End If
-            End If
+        If ucrInputStation.GetText <> strNone AndAlso ucrInputYear.GetText <> strNone AndAlso ucrInputWithinYear.GetText <> strNone Then
+            If ucrInputStation.GetText = strXAxis AndAlso ucrInputYear.GetText = strXAxis Then
+                MsgBox("You cannot have more than one x variable.", vbOKOnly)
+                ucrInputYear.SetText(strNone)
+            ElseIf ucrInputStation.GetText = strXAxis AndAlso ucrInputWithinYear.GetText = strXAxis Then
+                MsgBox("You cannot have more than one x variable.", vbOKOnly)
+                ucrInputWithinYear.SetText(strNone)
 
-            If ucrInputYear.Text <> "None" Then
-                If ucrInputYear.Text = ucrInputStation.Text Then
-                    MsgBox("You cannot have more than one x variable, Facet 1 or Facet 2 at the same time.", vbOKOnly)
-                    ucrInputStation.SetText("None")
-                ElseIf ucrInputYear.Text = ucrInputWithinYear.Text Then
-                    MsgBox("You cannot have more than one x variable, Facet 1 or Facet 2 at the same time.", vbOKOnly)
-                    ucrInputWithinYear.SetText("None")
-                End If
-            End If
-            If ucrInputWithinYear.Text <> "None" Then
-                If ucrInputWithinYear.Text = ucrInputYear.Text Then
-                    MsgBox("You cannot have more than one x variable, Facet 1 or Facet 2 at the same time.", vbOKOnly)
-                    ucrInputStation.SetText("None")
-                ElseIf ucrInputWithinYear.Text = ucrInputYear.Text Then
-                    MsgBox("You cannot have more than one x variable, Facet 1 or Facet 2 at the same time.", vbOKOnly)
-                    ucrInputYear.SetText("None")
-                End If
+            ElseIf ucrInputYear.GetText = strXAxis AndAlso ucrInputWithinYear.GetText = strXAxis
+                MsgBox("You cannot have more than one x variable.", vbOKOnly)
+                ucrInputWithinYear.SetText(strNone)
+
+            ElseIf ucrInputYear.GetText = strXAxis AndAlso ucrInputWithinYear.GetText = strXAxis
+                MsgBox("You cannot have more than one x variable.", vbOKOnly)
+                ucrInputWithinYear.SetText(strNone)
             End If
         End If
+
     End Sub
+
+
 End Class
