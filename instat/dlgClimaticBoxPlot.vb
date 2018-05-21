@@ -459,7 +459,6 @@ Public Class dlgClimaticBoxPlot
         ucrReceiverYear.SetRCode(clsRaesFunction, bReset)
 
         ChangeParameter()
-        CheckComboBox()
     End Sub
 
     Private Sub ucrSelectorClimaticBoxPlot_DataFrameChanged() Handles ucrSelectorClimaticBoxPlot.DataFrameChanged
@@ -469,27 +468,5 @@ Public Class dlgClimaticBoxPlot
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSavePlot.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged
         TestOKEnabled()
     End Sub
-
-    Private Sub CheckComboBox()
-        If ucrInputStation.GetText <> strNone AndAlso ucrInputYear.GetText <> strNone AndAlso ucrInputWithinYear.GetText <> strNone Then
-            If ucrInputStation.GetText = strXAxis AndAlso ucrInputYear.GetText = strXAxis Then
-                MsgBox("You cannot have more than one x variable.", vbOKOnly)
-                ucrInputYear.SetText(strNone)
-            ElseIf ucrInputStation.GetText = strXAxis AndAlso ucrInputWithinYear.GetText = strXAxis Then
-                MsgBox("You cannot have more than one x variable.", vbOKOnly)
-                ucrInputWithinYear.SetText(strNone)
-
-            ElseIf ucrInputYear.GetText = strXAxis AndAlso ucrInputWithinYear.GetText = strXAxis
-                MsgBox("You cannot have more than one x variable.", vbOKOnly)
-                ucrInputWithinYear.SetText(strNone)
-
-            ElseIf ucrInputYear.GetText = strXAxis AndAlso ucrInputWithinYear.GetText = strXAxis
-                MsgBox("You cannot have more than one x variable.", vbOKOnly)
-                ucrInputWithinYear.SetText(strNone)
-            End If
-        End If
-
-    End Sub
-
 
 End Class
