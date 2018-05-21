@@ -2059,6 +2059,7 @@ Partial Class frmMain
         '
         'stsStrip
         '
+        Me.stsStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.stsStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tstatus})
         resources.ApplyResources(Me.stsStrip, "stsStrip")
         Me.stsStrip.Name = "stsStrip"
@@ -2226,6 +2227,7 @@ Partial Class frmMain
         '
         Me.mnuBar.AllowMerge = False
         Me.mnuBar.BackColor = System.Drawing.SystemColors.ControlLightLight
+        Me.mnuBar.ImageScalingSize = New System.Drawing.Size(24, 24)
         resources.ApplyResources(Me.mnuBar, "mnuBar")
         Me.mnuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuEdit, Me.mnuPrepare, Me.mnuDescribe, Me.mnuModel, Me.mnuClimatic, Me.mnuProcurement, Me.mnuTools, Me.mnuView, Me.mnuHelp})
         Me.mnuBar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
