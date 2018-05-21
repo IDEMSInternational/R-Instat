@@ -109,7 +109,7 @@ Public Class dlgBarAndPieChart
 
         'Setting new position controls
         ucrChkBarChartPosition.SetText("Bar Chart Position")
-        ucrChkBarChartPosition.AddToLinkedControls(ucrLinked:=ucrInputBarChartPosition, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="dodge")
+        ucrChkBarChartPosition.AddToLinkedControls(ucrLinked:=ucrInputBarChartPosition, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkBarChartPosition.AddParameterPresentCondition(True, "position")
         ucrChkBarChartPosition.AddParameterPresentCondition(False, "position", False)
 
