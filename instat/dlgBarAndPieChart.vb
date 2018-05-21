@@ -229,6 +229,9 @@ Public Class dlgBarAndPieChart
         Else
             ucrReceiverByFactor.Clear()
         End If
+        'Allows for sync with the layer parameters
+        ucrInputBarChartPosition.SetRCode(clsRgeomBarFunction, bReset)
+        ucrChkBarChartPosition.SetRCode(clsRgeomBarFunction, bReset)
         TestOkEnabled()
     End Sub
 
