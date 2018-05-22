@@ -268,8 +268,8 @@ Public Class dlgImportDataset
         ucrInputMaxRowsExcel.AddQuotesIfUnrecognised = False
         ucrInputMaxRowsExcel.SetValidationTypeAsNumeric()
 
-        UcrChkGenerateColumns.SetText("Generate Columns")
-        UcrChkGenerateColumns.SetParameter(New RParameter("col_names"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="FALSE", strNewValueIfUnchecked:="TRUE")
+        UcrChkGenerateColumns.SetText("First row is column headers")
+        UcrChkGenerateColumns.SetParameter(New RParameter("col_names"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         UcrChkGenerateColumns.SetRDefault("TRUE")
 
         'hide since no longer using openxlsx package
