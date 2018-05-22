@@ -128,12 +128,14 @@ Public Class dlgClimaticCheckDataTemperature
         ucrChkRangeElement1.AddToLinkedControls(ucrNudRangeElement1Max, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=50)
         ucrChkRangeElement2.AddToLinkedControls(ucrNudRangeElement2Min, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrChkRangeElement2.AddToLinkedControls(ucrNudRangeElement2Max, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=30)
+        ucrChkOutlier.AddToLinkedControls(ucrNudCoeff, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1.5)
         ucrNudRangeElement2Min.SetLinkedDisplayControl(lstLabels2)
         ucrNudRangeElement1Min.SetLinkedDisplayControl(lstLabels)
         ucrNudJump.SetLinkedDisplayControl(lblNudJump)
         ucrNudSame.SetLinkedDisplayControl(lblNudSame)
         ucrNudDifference.SetLinkedDisplayControl(lblNudDiff)
         ucrReceiverElement2.SetLinkedDisplayControl(lblElement2)
+        ucrNudCoeff.SetLinkedDisplayControl(lblCoeff)
 
         ucrChkSame.SetParameter(New RParameter("same", clsSameGreaterOperator, 1), bNewChangeParameterValue:=False)
         ucrChkSame.SetText("Same (Element1)")
@@ -148,6 +150,10 @@ Public Class dlgClimaticCheckDataTemperature
 
         ucrChkOutlier.SetParameter(New RParameter("Combined_outlier", clsOutlierCombinedOperator, 1), bNewChangeParameterValue:=False)
         ucrChkOutlier.SetText("Outlier")
+
+        ucrNudCoeff.SetParameter(New RParameter("coeff"))
+        ucrNudCoeff.DecimalPlaces = 1
+        ucrNudCoeff.Increment = 0.1
 
         'Nuds for the respective options
         'Range Option
@@ -415,6 +421,9 @@ Public Class dlgClimaticCheckDataTemperature
         ucrReceiverElement2.AddAdditionalCodeParameterPair(clsOutlierLimitUpperFuncTmin, New RParameter("x", 0), iAdditionalPairNo:=5)
         ucrReceiverElement2.AddAdditionalCodeParameterPair(clsOutlierLimitLowerFuncTmin, New RParameter("x", 0), iAdditionalPairNo:=6)
         ucrChkOutlier.AddAdditionalCodeParameterPair(clsCalcFilterFunc, New RParameter("sub_calculations", strParamValue:=clsListSubCalc), iAdditionalPairNo:=1)
+        ucrNudCoeff.AddAdditionalCodeParameterPair(clsOutlierLimitLowerFunc, New RParameter("coeff"), iAdditionalPairNo:=1)
+        ucrNudCoeff.AddAdditionalCodeParameterPair(clsOutlierLimitLowerFuncTmin, New RParameter("coeff"), iAdditionalPairNo:=2)
+        ucrNudCoeff.AddAdditionalCodeParameterPair(clsOutlierLimitUpperFuncTmin, New RParameter("coeff"), iAdditionalPairNo:=3)
 
         ucrNudRangeElement2Max.SetRCode(clsGreaterEqualTo2Operator, bReset)
         ucrNudRangeElement2Min.SetRCode(clsLessEqualTo2Operator, bReset)
@@ -432,6 +441,7 @@ Public Class dlgClimaticCheckDataTemperature
         ucrChkJump.SetRCode(clsOrOperator, bReset)
         ucrChkIncludeLogicalColumns.SetRCode(clsCalcFilterFunc, bReset)
         ucrChkOutlier.SetRCode(clsOrOperator, bReset)
+        ucrNudCoeff.SetRCode(clsOutlierLimitUpperFunc)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -491,10 +501,14 @@ Public Class dlgClimaticCheckDataTemperature
                 ucrBase.OKEnabled(False)
                 Exit Sub
             End If
-
         End If
         If ucrChkOutlier.Checked Then
-            bEnable = True
+            If ucrNudCoeff.GetText <> "" Then
+                bEnable = True
+            Else
+                ucrBase.OKEnabled(False)
+                Exit Sub
+            End If
         End If
 
         ucrBase.OKEnabled(bEnable)
@@ -595,7 +609,6 @@ Public Class dlgClimaticCheckDataTemperature
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
         GroupByOptions()
     End Sub
-
 
     Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement1.ControlValueChanged, ucrReceiverElement2.ControlValueChanged
         FilterFunc()
