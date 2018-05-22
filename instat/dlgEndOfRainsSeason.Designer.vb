@@ -68,10 +68,10 @@ Partial Class dlgEndOfRainsSeason
         Me.ucrSelectorForWaterBalance = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlEvaporation = New instat.UcrPanel()
-        Me.rdoValueEvaporation = New instat.ucrRadio()
-        Me.rdoVariableEvaporation = New instat.ucrRadio()
         Me.ucrInputEvaporation = New instat.ucrInputTextBox()
         Me.ucrReceiverEvaporation = New instat.ucrReceiverSingle()
+        Me.rdoValueEvaporation = New System.Windows.Forms.RadioButton()
+        Me.rdoVariableEvaporation = New System.Windows.Forms.RadioButton()
         Me.SuspendLayout()
         '
         'lblYear
@@ -376,26 +376,12 @@ Partial Class dlgEndOfRainsSeason
         Me.ucrPnlEvaporation.Size = New System.Drawing.Size(240, 67)
         Me.ucrPnlEvaporation.TabIndex = 33
         '
-        'rdoValueEvaporation
-        '
-        Me.rdoValueEvaporation.Location = New System.Drawing.Point(189, 352)
-        Me.rdoValueEvaporation.Name = "rdoValueEvaporation"
-        Me.rdoValueEvaporation.Size = New System.Drawing.Size(85, 20)
-        Me.rdoValueEvaporation.TabIndex = 34
-        '
-        'rdoVariableEvaporation
-        '
-        Me.rdoVariableEvaporation.Location = New System.Drawing.Point(189, 382)
-        Me.rdoVariableEvaporation.Name = "rdoVariableEvaporation"
-        Me.rdoVariableEvaporation.Size = New System.Drawing.Size(85, 20)
-        Me.rdoVariableEvaporation.TabIndex = 35
-        '
         'ucrInputEvaporation
         '
         Me.ucrInputEvaporation.AddQuotesIfUnrecognised = True
         Me.ucrInputEvaporation.IsMultiline = False
         Me.ucrInputEvaporation.IsReadOnly = False
-        Me.ucrInputEvaporation.Location = New System.Drawing.Point(280, 351)
+        Me.ucrInputEvaporation.Location = New System.Drawing.Point(257, 352)
         Me.ucrInputEvaporation.Name = "ucrInputEvaporation"
         Me.ucrInputEvaporation.Size = New System.Drawing.Size(139, 21)
         Me.ucrInputEvaporation.TabIndex = 36
@@ -403,7 +389,7 @@ Partial Class dlgEndOfRainsSeason
         'ucrReceiverEvaporation
         '
         Me.ucrReceiverEvaporation.frmParent = Me
-        Me.ucrReceiverEvaporation.Location = New System.Drawing.Point(280, 382)
+        Me.ucrReceiverEvaporation.Location = New System.Drawing.Point(257, 382)
         Me.ucrReceiverEvaporation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverEvaporation.Name = "ucrReceiverEvaporation"
         Me.ucrReceiverEvaporation.Selector = Nothing
@@ -412,15 +398,37 @@ Partial Class dlgEndOfRainsSeason
         Me.ucrReceiverEvaporation.TabIndex = 37
         Me.ucrReceiverEvaporation.ucrSelector = Nothing
         '
+        'rdoValueEvaporation
+        '
+        Me.rdoValueEvaporation.AutoSize = True
+        Me.rdoValueEvaporation.Location = New System.Drawing.Point(189, 352)
+        Me.rdoValueEvaporation.Name = "rdoValueEvaporation"
+        Me.rdoValueEvaporation.Size = New System.Drawing.Size(52, 17)
+        Me.rdoValueEvaporation.TabIndex = 38
+        Me.rdoValueEvaporation.TabStop = True
+        Me.rdoValueEvaporation.Text = "Value"
+        Me.rdoValueEvaporation.UseVisualStyleBackColor = True
+        '
+        'rdoVariableEvaporation
+        '
+        Me.rdoVariableEvaporation.AutoSize = True
+        Me.rdoVariableEvaporation.Location = New System.Drawing.Point(189, 382)
+        Me.rdoVariableEvaporation.Name = "rdoVariableEvaporation"
+        Me.rdoVariableEvaporation.Size = New System.Drawing.Size(63, 17)
+        Me.rdoVariableEvaporation.TabIndex = 39
+        Me.rdoVariableEvaporation.TabStop = True
+        Me.rdoVariableEvaporation.Text = "Variable"
+        Me.rdoVariableEvaporation.UseVisualStyleBackColor = True
+        '
         'dlgEndOfRainsSeason
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(475, 532)
-        Me.Controls.Add(Me.ucrReceiverEvaporation)
-        Me.Controls.Add(Me.ucrInputEvaporation)
         Me.Controls.Add(Me.rdoVariableEvaporation)
         Me.Controls.Add(Me.rdoValueEvaporation)
+        Me.Controls.Add(Me.ucrReceiverEvaporation)
+        Me.Controls.Add(Me.ucrInputEvaporation)
         Me.Controls.Add(Me.ucrPnlEvaporation)
         Me.Controls.Add(Me.ucrInputFilterPreview)
         Me.Controls.Add(Me.cmdDoyRange)
@@ -492,9 +500,9 @@ Partial Class dlgEndOfRainsSeason
     Friend WithEvents ucrChkEndOfRains As ucrCheck
     Friend WithEvents ucrInputFilterPreview As ucrInputTextBox
     Friend WithEvents cmdDoyRange As Button
-    Friend WithEvents rdoVariableEvaporation As ucrRadio
-    Friend WithEvents rdoValueEvaporation As ucrRadio
     Friend WithEvents ucrPnlEvaporation As UcrPanel
     Friend WithEvents ucrInputEvaporation As ucrInputTextBox
     Friend WithEvents ucrReceiverEvaporation As ucrReceiverSingle
+    Friend WithEvents rdoVariableEvaporation As RadioButton
+    Friend WithEvents rdoValueEvaporation As RadioButton
 End Class
