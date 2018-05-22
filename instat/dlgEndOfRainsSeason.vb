@@ -100,9 +100,7 @@ Public Class dlgEndOfRainsSeason
         ucrReceiverYear.strSelectorHeading = "Year Variables"
 
         ucrReceiverEvaporation.Selector = ucrSelectorForWaterBalance
-        ucrReceiverEvaporation.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
-        ucrReceiverEvaporation.bAutoFill = True
-        ucrReceiverEvaporation.SetParameter(New RParameter("evaporation"))
+        ucrReceiverEvaporation.SetParameter(New RParameter("evaporation", 1))
 
         'WATER BALANCE
         ucrChkEndOfSeason.SetText("End of Season")
@@ -119,7 +117,7 @@ Public Class dlgEndOfRainsSeason
         ucrChkEndOfSeason.AddToLinkedControls(ucrInputWBColName, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="end_season")
         ucrChkEndOfSeason.SetLinkedDisplayControl(lblEvaporation)
 
-        ucrInputEvaporation.SetParameter(New RParameter("evaporation"))
+        ucrInputEvaporation.SetParameter(New RParameter("evaporation", 1, False))
         ucrInputEvaporation.SetValidationTypeAsNumeric()
         ucrInputEvaporation.AddQuotesIfUnrecognised = False
 
@@ -636,5 +634,10 @@ Public Class dlgEndOfRainsSeason
 
     Private Sub ucrPnlEvaporation_ContextMenuChanged(sender As Object, e As EventArgs) Handles ucrPnlEvaporation.ContextMenuChanged
         TestOKEnabled()
+        If rdoValueEvaporation.Checked Then
+            ucrInputEvaporation.Visible = True
+        ElseIf rdoVariableEvaporation.Checked Then
+            ucrReceiverEvaporation.SetMeAsReceiver()
+        End If
     End Sub
 End Class
