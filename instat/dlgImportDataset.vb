@@ -268,6 +268,10 @@ Public Class dlgImportDataset
         ucrInputMaxRowsExcel.AddQuotesIfUnrecognised = False
         ucrInputMaxRowsExcel.SetValidationTypeAsNumeric()
 
+        UcrChkGenerateColumns.SetText("Generate Columns")
+        UcrChkGenerateColumns.SetParameter(New RParameter("col_names"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="FALSE", strNewValueIfUnchecked:="TRUE")
+        UcrChkGenerateColumns.SetRDefault("TRUE")
+
         'hide since no longer using openxlsx package
         ucrInputNamedRegions.Hide()
         lblNamedRegion.Hide()
@@ -425,6 +429,7 @@ Public Class dlgImportDataset
         ucrInputSelectSheetExcel.SetRCode(clsImportExcel, bReset)
         ucrInputMissingValueStringExcel.SetRCode(clsImportExcel, bReset)
         ucrChkTrimWSExcel.SetRCode(clsImportExcel, bReset)
+        UcrChkGenerateColumns.SetRCode(clsImportExcel, bReset)
     End Sub
 
     Private Sub TextPreviewVisible(bVisible As Boolean)
@@ -742,7 +747,7 @@ Public Class dlgImportDataset
         RefreshFrameView()
     End Sub
 
-    Private Sub ExcelControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputMaxRowsExcel.ControlValueChanged, ucrChkTrimWSExcel.ControlValueChanged, ucrNudRowsToSkipExcel.ControlValueChanged, ucrChkMaxRowsExcel.ControlValueChanged, ucrInputMaxRowsExcel.ControlValueChanged, ucrInputMissingValueStringExcel.ControlValueChanged
+    Private Sub ExcelControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputMaxRowsExcel.ControlValueChanged, ucrChkTrimWSExcel.ControlValueChanged, ucrNudRowsToSkipExcel.ControlValueChanged, ucrChkMaxRowsExcel.ControlValueChanged, ucrInputMaxRowsExcel.ControlValueChanged, ucrInputMissingValueStringExcel.ControlValueChanged, UcrChkGenerateColumns.ControlValueChanged
         RefreshFrameView()
     End Sub
 End Class

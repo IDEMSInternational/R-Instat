@@ -53,27 +53,30 @@ Partial Class dlgImportDataset
         Me.cmdBrowse = New System.Windows.Forms.Button()
         Me.grpCSV = New System.Windows.Forms.GroupBox()
         Me.lblNAStringsCSV = New System.Windows.Forms.Label()
+        Me.ucrChkStringsAsFactorsCSV = New instat.ucrCheck()
+        Me.ucrNudLinesToSkipCSV = New instat.ucrNud()
         Me.rdoRowNamesNoCSV = New System.Windows.Forms.RadioButton()
         Me.rdoRowNamesYesCSV = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlRowNamesCSV = New instat.UcrPanel()
+        Me.ucrInputHeadersCSV = New instat.ucrInputComboBox()
+        Me.ucrInputNAStringsCSV = New instat.ucrInputTextBox()
+        Me.ucrInputDecimalCSV = New instat.ucrInputComboBox()
+        Me.ucrInputSeparatorCSV = New instat.ucrInputComboBox()
+        Me.ucrInputEncodingCSV = New instat.ucrInputComboBox()
         Me.grpExcel = New System.Windows.Forms.GroupBox()
-        Me.lblMissingValueStringExcel = New System.Windows.Forms.Label()
-        Me.lblNamedRegion = New System.Windows.Forms.Label()
-        Me.lblRowToSkipExcel = New System.Windows.Forms.Label()
-        Me.lblSelectSheetExcel = New System.Windows.Forms.Label()
-        Me.grpRDS = New System.Windows.Forms.GroupBox()
-        Me.lblCannotImport = New System.Windows.Forms.Label()
-        Me.lblNoPreview = New System.Windows.Forms.Label()
-        Me.lblLinesToPreview = New System.Windows.Forms.Label()
-        Me.cmdRefreshPreview = New System.Windows.Forms.Button()
-        Me.ucrNudPreviewLines = New instat.ucrNud()
+        Me.UcrChkGenerateColumns = New instat.ucrCheck()
         Me.ucrChkMaxRowsExcel = New instat.ucrCheck()
         Me.ucrChkTrimWSExcel = New instat.ucrCheck()
         Me.ucrNudRowsToSkipExcel = New instat.ucrNud()
         Me.ucrInputMaxRowsExcel = New instat.ucrInputTextBox()
+        Me.lblMissingValueStringExcel = New System.Windows.Forms.Label()
         Me.ucrInputMissingValueStringExcel = New instat.ucrInputTextBox()
         Me.ucrInputNamedRegions = New instat.ucrInputComboBox()
+        Me.lblNamedRegion = New System.Windows.Forms.Label()
         Me.ucrInputSelectSheetExcel = New instat.ucrInputComboBox()
-        Me.ucrSaveFile = New instat.ucrSave()
+        Me.lblRowToSkipExcel = New System.Windows.Forms.Label()
+        Me.lblSelectSheetExcel = New System.Windows.Forms.Label()
+        Me.grpRDS = New System.Windows.Forms.GroupBox()
         Me.ucrChkOverwriteRDS = New instat.ucrCheck()
         Me.ucrChkImportObjectsRDS = New instat.ucrCheck()
         Me.ucrChkImportCalculationsRDS = New instat.ucrCheck()
@@ -81,14 +84,12 @@ Partial Class dlgImportDataset
         Me.ucrChkImportFiltersRDS = New instat.ucrCheck()
         Me.ucrChkImportMetadataRDS = New instat.ucrCheck()
         Me.ucrChkKeepExistingDataRDS = New instat.ucrCheck()
-        Me.ucrChkStringsAsFactorsCSV = New instat.ucrCheck()
-        Me.ucrNudLinesToSkipCSV = New instat.ucrNud()
-        Me.ucrPnlRowNamesCSV = New instat.UcrPanel()
-        Me.ucrInputHeadersCSV = New instat.ucrInputComboBox()
-        Me.ucrInputNAStringsCSV = New instat.ucrInputTextBox()
-        Me.ucrInputDecimalCSV = New instat.ucrInputComboBox()
-        Me.ucrInputSeparatorCSV = New instat.ucrInputComboBox()
-        Me.ucrInputEncodingCSV = New instat.ucrInputComboBox()
+        Me.lblCannotImport = New System.Windows.Forms.Label()
+        Me.lblNoPreview = New System.Windows.Forms.Label()
+        Me.lblLinesToPreview = New System.Windows.Forms.Label()
+        Me.cmdRefreshPreview = New System.Windows.Forms.Button()
+        Me.ucrNudPreviewLines = New instat.ucrNud()
+        Me.ucrSaveFile = New instat.ucrSave()
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpCSV.SuspendLayout()
@@ -156,7 +157,7 @@ Partial Class dlgImportDataset
         Me.grdDataPreview.SheetTabContextMenuStrip = Nothing
         Me.grdDataPreview.SheetTabNewButtonVisible = False
         Me.grdDataPreview.SheetTabVisible = True
-        Me.grdDataPreview.SheetTabWidth = 60
+        Me.grdDataPreview.SheetTabWidth = 90
         Me.grdDataPreview.ShowScrollEndSpacing = True
         '
         'lblFileOpenPath
@@ -204,6 +205,22 @@ Partial Class dlgImportDataset
         resources.ApplyResources(Me.lblNAStringsCSV, "lblNAStringsCSV")
         Me.lblNAStringsCSV.Name = "lblNAStringsCSV"
         '
+        'ucrChkStringsAsFactorsCSV
+        '
+        Me.ucrChkStringsAsFactorsCSV.Checked = False
+        resources.ApplyResources(Me.ucrChkStringsAsFactorsCSV, "ucrChkStringsAsFactorsCSV")
+        Me.ucrChkStringsAsFactorsCSV.Name = "ucrChkStringsAsFactorsCSV"
+        '
+        'ucrNudLinesToSkipCSV
+        '
+        Me.ucrNudLinesToSkipCSV.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLinesToSkipCSV.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudLinesToSkipCSV, "ucrNudLinesToSkipCSV")
+        Me.ucrNudLinesToSkipCSV.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
+        Me.ucrNudLinesToSkipCSV.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLinesToSkipCSV.Name = "ucrNudLinesToSkipCSV"
+        Me.ucrNudLinesToSkipCSV.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'rdoRowNamesNoCSV
         '
         resources.ApplyResources(Me.rdoRowNamesNoCSV, "rdoRowNamesNoCSV")
@@ -220,8 +237,50 @@ Partial Class dlgImportDataset
         Me.rdoRowNamesYesCSV.Tag = "Yes"
         Me.rdoRowNamesYesCSV.UseVisualStyleBackColor = True
         '
+        'ucrPnlRowNamesCSV
+        '
+        resources.ApplyResources(Me.ucrPnlRowNamesCSV, "ucrPnlRowNamesCSV")
+        Me.ucrPnlRowNamesCSV.Name = "ucrPnlRowNamesCSV"
+        '
+        'ucrInputHeadersCSV
+        '
+        Me.ucrInputHeadersCSV.AddQuotesIfUnrecognised = True
+        Me.ucrInputHeadersCSV.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputHeadersCSV, "ucrInputHeadersCSV")
+        Me.ucrInputHeadersCSV.Name = "ucrInputHeadersCSV"
+        '
+        'ucrInputNAStringsCSV
+        '
+        Me.ucrInputNAStringsCSV.AddQuotesIfUnrecognised = True
+        Me.ucrInputNAStringsCSV.IsMultiline = False
+        Me.ucrInputNAStringsCSV.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputNAStringsCSV, "ucrInputNAStringsCSV")
+        Me.ucrInputNAStringsCSV.Name = "ucrInputNAStringsCSV"
+        '
+        'ucrInputDecimalCSV
+        '
+        Me.ucrInputDecimalCSV.AddQuotesIfUnrecognised = True
+        Me.ucrInputDecimalCSV.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputDecimalCSV, "ucrInputDecimalCSV")
+        Me.ucrInputDecimalCSV.Name = "ucrInputDecimalCSV"
+        '
+        'ucrInputSeparatorCSV
+        '
+        Me.ucrInputSeparatorCSV.AddQuotesIfUnrecognised = True
+        Me.ucrInputSeparatorCSV.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputSeparatorCSV, "ucrInputSeparatorCSV")
+        Me.ucrInputSeparatorCSV.Name = "ucrInputSeparatorCSV"
+        '
+        'ucrInputEncodingCSV
+        '
+        Me.ucrInputEncodingCSV.AddQuotesIfUnrecognised = True
+        Me.ucrInputEncodingCSV.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputEncodingCSV, "ucrInputEncodingCSV")
+        Me.ucrInputEncodingCSV.Name = "ucrInputEncodingCSV"
+        '
         'grpExcel
         '
+        Me.grpExcel.Controls.Add(Me.UcrChkGenerateColumns)
         Me.grpExcel.Controls.Add(Me.ucrChkMaxRowsExcel)
         Me.grpExcel.Controls.Add(Me.ucrChkTrimWSExcel)
         Me.grpExcel.Controls.Add(Me.ucrNudRowsToSkipExcel)
@@ -237,69 +296,11 @@ Partial Class dlgImportDataset
         Me.grpExcel.Name = "grpExcel"
         Me.grpExcel.TabStop = False
         '
-        'lblMissingValueStringExcel
+        'UcrChkGenerateColumns
         '
-        resources.ApplyResources(Me.lblMissingValueStringExcel, "lblMissingValueStringExcel")
-        Me.lblMissingValueStringExcel.Name = "lblMissingValueStringExcel"
-        '
-        'lblNamedRegion
-        '
-        resources.ApplyResources(Me.lblNamedRegion, "lblNamedRegion")
-        Me.lblNamedRegion.Name = "lblNamedRegion"
-        '
-        'lblRowToSkipExcel
-        '
-        resources.ApplyResources(Me.lblRowToSkipExcel, "lblRowToSkipExcel")
-        Me.lblRowToSkipExcel.Name = "lblRowToSkipExcel"
-        '
-        'lblSelectSheetExcel
-        '
-        resources.ApplyResources(Me.lblSelectSheetExcel, "lblSelectSheetExcel")
-        Me.lblSelectSheetExcel.Name = "lblSelectSheetExcel"
-        '
-        'grpRDS
-        '
-        Me.grpRDS.Controls.Add(Me.ucrChkOverwriteRDS)
-        Me.grpRDS.Controls.Add(Me.ucrChkImportObjectsRDS)
-        Me.grpRDS.Controls.Add(Me.ucrChkImportCalculationsRDS)
-        Me.grpRDS.Controls.Add(Me.ucrChkImportChangesLogRDS)
-        Me.grpRDS.Controls.Add(Me.ucrChkImportFiltersRDS)
-        Me.grpRDS.Controls.Add(Me.ucrChkImportMetadataRDS)
-        Me.grpRDS.Controls.Add(Me.ucrChkKeepExistingDataRDS)
-        resources.ApplyResources(Me.grpRDS, "grpRDS")
-        Me.grpRDS.Name = "grpRDS"
-        Me.grpRDS.TabStop = False
-        '
-        'lblCannotImport
-        '
-        resources.ApplyResources(Me.lblCannotImport, "lblCannotImport")
-        Me.lblCannotImport.Name = "lblCannotImport"
-        '
-        'lblNoPreview
-        '
-        resources.ApplyResources(Me.lblNoPreview, "lblNoPreview")
-        Me.lblNoPreview.Name = "lblNoPreview"
-        '
-        'lblLinesToPreview
-        '
-        resources.ApplyResources(Me.lblLinesToPreview, "lblLinesToPreview")
-        Me.lblLinesToPreview.Name = "lblLinesToPreview"
-        '
-        'cmdRefreshPreview
-        '
-        resources.ApplyResources(Me.cmdRefreshPreview, "cmdRefreshPreview")
-        Me.cmdRefreshPreview.Name = "cmdRefreshPreview"
-        Me.cmdRefreshPreview.UseVisualStyleBackColor = True
-        '
-        'ucrNudPreviewLines
-        '
-        Me.ucrNudPreviewLines.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPreviewLines.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudPreviewLines, "ucrNudPreviewLines")
-        Me.ucrNudPreviewLines.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudPreviewLines.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPreviewLines.Name = "ucrNudPreviewLines"
-        Me.ucrNudPreviewLines.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.UcrChkGenerateColumns.Checked = False
+        resources.ApplyResources(Me.UcrChkGenerateColumns, "UcrChkGenerateColumns")
+        Me.UcrChkGenerateColumns.Name = "UcrChkGenerateColumns"
         '
         'ucrChkMaxRowsExcel
         '
@@ -331,6 +332,11 @@ Partial Class dlgImportDataset
         resources.ApplyResources(Me.ucrInputMaxRowsExcel, "ucrInputMaxRowsExcel")
         Me.ucrInputMaxRowsExcel.Name = "ucrInputMaxRowsExcel"
         '
+        'lblMissingValueStringExcel
+        '
+        resources.ApplyResources(Me.lblMissingValueStringExcel, "lblMissingValueStringExcel")
+        Me.lblMissingValueStringExcel.Name = "lblMissingValueStringExcel"
+        '
         'ucrInputMissingValueStringExcel
         '
         Me.ucrInputMissingValueStringExcel.AddQuotesIfUnrecognised = True
@@ -346,6 +352,11 @@ Partial Class dlgImportDataset
         resources.ApplyResources(Me.ucrInputNamedRegions, "ucrInputNamedRegions")
         Me.ucrInputNamedRegions.Name = "ucrInputNamedRegions"
         '
+        'lblNamedRegion
+        '
+        resources.ApplyResources(Me.lblNamedRegion, "lblNamedRegion")
+        Me.lblNamedRegion.Name = "lblNamedRegion"
+        '
         'ucrInputSelectSheetExcel
         '
         Me.ucrInputSelectSheetExcel.AddQuotesIfUnrecognised = True
@@ -353,10 +364,28 @@ Partial Class dlgImportDataset
         resources.ApplyResources(Me.ucrInputSelectSheetExcel, "ucrInputSelectSheetExcel")
         Me.ucrInputSelectSheetExcel.Name = "ucrInputSelectSheetExcel"
         '
-        'ucrSaveFile
+        'lblRowToSkipExcel
         '
-        resources.ApplyResources(Me.ucrSaveFile, "ucrSaveFile")
-        Me.ucrSaveFile.Name = "ucrSaveFile"
+        resources.ApplyResources(Me.lblRowToSkipExcel, "lblRowToSkipExcel")
+        Me.lblRowToSkipExcel.Name = "lblRowToSkipExcel"
+        '
+        'lblSelectSheetExcel
+        '
+        resources.ApplyResources(Me.lblSelectSheetExcel, "lblSelectSheetExcel")
+        Me.lblSelectSheetExcel.Name = "lblSelectSheetExcel"
+        '
+        'grpRDS
+        '
+        Me.grpRDS.Controls.Add(Me.ucrChkOverwriteRDS)
+        Me.grpRDS.Controls.Add(Me.ucrChkImportObjectsRDS)
+        Me.grpRDS.Controls.Add(Me.ucrChkImportCalculationsRDS)
+        Me.grpRDS.Controls.Add(Me.ucrChkImportChangesLogRDS)
+        Me.grpRDS.Controls.Add(Me.ucrChkImportFiltersRDS)
+        Me.grpRDS.Controls.Add(Me.ucrChkImportMetadataRDS)
+        Me.grpRDS.Controls.Add(Me.ucrChkKeepExistingDataRDS)
+        resources.ApplyResources(Me.grpRDS, "grpRDS")
+        Me.grpRDS.Name = "grpRDS"
+        Me.grpRDS.TabStop = False
         '
         'ucrChkOverwriteRDS
         '
@@ -400,62 +429,41 @@ Partial Class dlgImportDataset
         resources.ApplyResources(Me.ucrChkKeepExistingDataRDS, "ucrChkKeepExistingDataRDS")
         Me.ucrChkKeepExistingDataRDS.Name = "ucrChkKeepExistingDataRDS"
         '
-        'ucrChkStringsAsFactorsCSV
+        'lblCannotImport
         '
-        Me.ucrChkStringsAsFactorsCSV.Checked = False
-        resources.ApplyResources(Me.ucrChkStringsAsFactorsCSV, "ucrChkStringsAsFactorsCSV")
-        Me.ucrChkStringsAsFactorsCSV.Name = "ucrChkStringsAsFactorsCSV"
+        resources.ApplyResources(Me.lblCannotImport, "lblCannotImport")
+        Me.lblCannotImport.Name = "lblCannotImport"
         '
-        'ucrNudLinesToSkipCSV
+        'lblNoPreview
         '
-        Me.ucrNudLinesToSkipCSV.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLinesToSkipCSV.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudLinesToSkipCSV, "ucrNudLinesToSkipCSV")
-        Me.ucrNudLinesToSkipCSV.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
-        Me.ucrNudLinesToSkipCSV.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLinesToSkipCSV.Name = "ucrNudLinesToSkipCSV"
-        Me.ucrNudLinesToSkipCSV.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        resources.ApplyResources(Me.lblNoPreview, "lblNoPreview")
+        Me.lblNoPreview.Name = "lblNoPreview"
         '
-        'ucrPnlRowNamesCSV
+        'lblLinesToPreview
         '
-        resources.ApplyResources(Me.ucrPnlRowNamesCSV, "ucrPnlRowNamesCSV")
-        Me.ucrPnlRowNamesCSV.Name = "ucrPnlRowNamesCSV"
+        resources.ApplyResources(Me.lblLinesToPreview, "lblLinesToPreview")
+        Me.lblLinesToPreview.Name = "lblLinesToPreview"
         '
-        'ucrInputHeadersCSV
+        'cmdRefreshPreview
         '
-        Me.ucrInputHeadersCSV.AddQuotesIfUnrecognised = True
-        Me.ucrInputHeadersCSV.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputHeadersCSV, "ucrInputHeadersCSV")
-        Me.ucrInputHeadersCSV.Name = "ucrInputHeadersCSV"
+        resources.ApplyResources(Me.cmdRefreshPreview, "cmdRefreshPreview")
+        Me.cmdRefreshPreview.Name = "cmdRefreshPreview"
+        Me.cmdRefreshPreview.UseVisualStyleBackColor = True
         '
-        'ucrInputNAStringsCSV
+        'ucrNudPreviewLines
         '
-        Me.ucrInputNAStringsCSV.AddQuotesIfUnrecognised = True
-        Me.ucrInputNAStringsCSV.IsMultiline = False
-        Me.ucrInputNAStringsCSV.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputNAStringsCSV, "ucrInputNAStringsCSV")
-        Me.ucrInputNAStringsCSV.Name = "ucrInputNAStringsCSV"
+        Me.ucrNudPreviewLines.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPreviewLines.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudPreviewLines, "ucrNudPreviewLines")
+        Me.ucrNudPreviewLines.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudPreviewLines.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPreviewLines.Name = "ucrNudPreviewLines"
+        Me.ucrNudPreviewLines.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrInputDecimalCSV
+        'ucrSaveFile
         '
-        Me.ucrInputDecimalCSV.AddQuotesIfUnrecognised = True
-        Me.ucrInputDecimalCSV.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputDecimalCSV, "ucrInputDecimalCSV")
-        Me.ucrInputDecimalCSV.Name = "ucrInputDecimalCSV"
-        '
-        'ucrInputSeparatorCSV
-        '
-        Me.ucrInputSeparatorCSV.AddQuotesIfUnrecognised = True
-        Me.ucrInputSeparatorCSV.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSeparatorCSV, "ucrInputSeparatorCSV")
-        Me.ucrInputSeparatorCSV.Name = "ucrInputSeparatorCSV"
-        '
-        'ucrInputEncodingCSV
-        '
-        Me.ucrInputEncodingCSV.AddQuotesIfUnrecognised = True
-        Me.ucrInputEncodingCSV.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputEncodingCSV, "ucrInputEncodingCSV")
-        Me.ucrInputEncodingCSV.Name = "ucrInputEncodingCSV"
+        resources.ApplyResources(Me.ucrSaveFile, "ucrSaveFile")
+        Me.ucrSaveFile.Name = "ucrSaveFile"
         '
         'ucrInputFilePath
         '
@@ -491,7 +499,6 @@ Partial Class dlgImportDataset
         Me.Controls.Add(Me.txtTextFilePreview)
         Me.Controls.Add(Me.lblDataFrame)
         Me.Controls.Add(Me.lblTextFilePreview)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgImportDataset"
@@ -558,4 +565,5 @@ Partial Class dlgImportDataset
     Friend WithEvents ucrNudPreviewLines As ucrNud
     Friend WithEvents lblLinesToPreview As Label
     Friend WithEvents cmdRefreshPreview As Button
+    Friend WithEvents UcrChkGenerateColumns As ucrCheck
 End Class
