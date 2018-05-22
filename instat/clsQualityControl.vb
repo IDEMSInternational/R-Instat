@@ -15,7 +15,6 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class clsQCJumpRCode
-    'Jump
     Private clsLagFunction, clsAbsLagFunction, clsLeadFunction, clsPmaxFunction, clsAbsFunc, clsAbsLeadFunction As New RFunction
     Public clsJumpCalcFunction, clsJumpTestFunction As New RFunction
     Private clsLagMinusOperator, clsLeadMinusOperator As New ROperator
@@ -25,7 +24,7 @@ Public Class clsQCJumpRCode
 
     Public Sub SetDefaults(strElementName As String)
         Dim strlargest_jump As String = "largest_jump" & strElementName
-        Dim strjump_test As String = "jump_test" & strElementName
+        Dim strjump_test As String = "Jump" & strElementName
 
         clsLagFunction = New RFunction
         clsAbsLagFunction = New RFunction
@@ -99,12 +98,18 @@ End Class
 
 
 Public Class clsQCSameRCode
-    Private clsRepFunc, clsRleFunc, clsAsNumFunc As New RFunction
+    Private clsRleFunc, clsAsNumFunc, clsSameListFunc As New RFunction
+    Public clsSameCalcFunction, clsSameTestFunction As New RFunction
     Private clsDollarOperator As New ROperator
     Public clsSameGreaterOperator As New ROperator
+    Public clsRepFunc As New RFunction
+    Public strTestName As String
 
-    Public Sub SetDefaults()
+    Public Sub SetDefaults(strElementName As String)
         Dim strLengths As String = "lengths"
+        Dim strlargest_Same As String = "Largest_Same" & strElementName
+        Dim strSame_test As String = "Same" & strElementName
+
         clsRepFunc = New RFunction
         clsRleFunc = New RFunction
         clsAsNumFunc = New RFunction
@@ -112,8 +117,6 @@ Public Class clsQCSameRCode
 
         clsSameGreaterOperator.Clear()
 
-        clsSameGreaterOperator.SetOperation(">=")
-        clsSameGreaterOperator.AddParameter("left", bIncludeArgumentName:=False, clsRFunctionParameter:=clsRepFunc, iPosition:=0)
         clsRepFunc.SetRCommand("rep")
         clsRepFunc.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsDollarOperator, iPosition:=0)
         clsRepFunc.AddParameter("right", bIncludeArgumentName:=False, clsROperatorParameter:=clsDollarOperator, iPosition:=1)
@@ -124,9 +127,74 @@ Public Class clsQCSameRCode
         clsDollarOperator.AddParameter("left", bIncludeArgumentName:=False, clsRFunctionParameter:=clsRleFunc, iPosition:=0)
         clsDollarOperator.AddParameter("right", strParameterValue:=strLengths, bIncludeArgumentName:=False, iPosition:=1)
 
+        clsSameCalcFunction.SetRCommand("instat_calculation$new")
+        clsSameCalcFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        clsSameCalcFunction.AddParameter("function_exp", clsRFunctionParameter:=clsRepFunc, iPosition:=1)
+        clsSameCalcFunction.AddParameter("result_name", Chr(34) & strlargest_Same & Chr(34), iPosition:=4)
+        clsSameCalcFunction.SetAssignTo("Largest_Same" & strElementName)
+        clsRepFunc.bToScriptAsRString = True
+
+        strTestName = strSame_test
+        clsSameListFunc.SetRCommand("list")
+        clsSameListFunc.AddParameter("sub1", clsRFunctionParameter:=clsSameCalcFunction, bIncludeArgumentName:=False)
+
+        clsSameTestFunction.SetRCommand("instat_calculation$new")
+        clsSameTestFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        clsSameTestFunction.AddParameter("function_exp", clsROperatorParameter:=clsSameGreaterOperator, iPosition:=1)
+        clsSameTestFunction.AddParameter("result_name", Chr(34) & strTestName & Chr(34), iPosition:=4)
+        clsSameTestFunction.AddParameter("sub_calculations", clsRFunctionParameter:=clsSameListFunc, iPosition:=2)
+        clsSameTestFunction.SetAssignTo("Largest_test_same" & strElementName)
+
+        clsSameGreaterOperator.SetOperation(">=")
+        clsSameGreaterOperator.bToScriptAsRString = True
+        clsSameGreaterOperator.AddParameter("left", bIncludeArgumentName:=False, clsRFunctionParameter:=clsSameCalcFunction, iPosition:=0)
     End Sub
 
     Public Sub SetElementParameters(ucrNewControl As ucrCore, iAdditionalPairNo As Integer)
         ucrNewControl.AddAdditionalCodeParameterPair(clsAsNumFunc, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=iAdditionalPairNo)
     End Sub
 End Class
+
+Public Class clsQCDifferenceRCode
+    Public clsDiffOperator, clsLessDiffOperator As New ROperator
+    Public clsDiffCalcFunction, clsDiffTestFunction As New RFunction
+    Private clsListFunc As New RFunction
+    Public strTestName As String
+
+    Public Sub SetDefaults()
+
+        Dim strDiffCalc As String = "diff_calculation"
+        Dim strDiffTest As String = "diff"
+
+        clsDiffOperator = New ROperator
+        clsDiffCalcFunction = New RFunction
+        clsListFunc = New RFunction
+        clsLessDiffOperator.Clear()
+        clsLessDiffOperator.SetOperation("<")
+        clsLessDiffOperator.bToScriptAsRString = True
+        clsLessDiffOperator.AddParameter("left", bIncludeArgumentName:=False, clsRFunctionParameter:=clsDiffCalcFunction, iPosition:=0)
+        clsDiffOperator.SetOperation("-")
+        clsDiffOperator.bToScriptAsRString = True
+
+        clsDiffCalcFunction.SetRCommand("instat_calculation$new")
+        clsDiffCalcFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        clsDiffCalcFunction.AddParameter("function_exp", clsROperatorParameter:=clsDiffOperator, iPosition:=1)
+        clsDiffCalcFunction.AddParameter("result_name", Chr(34) & strDiffCalc & Chr(34), iPosition:=4)
+        clsDiffCalcFunction.SetAssignTo("diff_calculation")
+
+        strTestName = strDiffTest
+        clsListFunc.SetRCommand("list")
+        clsListFunc.AddParameter("sub1", bIncludeArgumentName:=False, clsRFunctionParameter:=clsDiffCalcFunction, iPosition:=0)
+        clsDiffTestFunction.SetRCommand("instat_calculation$new")
+        clsDiffTestFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        clsDiffTestFunction.AddParameter("function_exp", clsROperatorParameter:=clsLessDiffOperator, iPosition:=1)
+        clsDiffTestFunction.AddParameter("result_name", Chr(34) & strTestName & Chr(34), iPosition:=4)
+        clsDiffTestFunction.AddParameter("sub_calculations", clsRFunctionParameter:=clsListFunc, iPosition:=2)
+        clsDiffTestFunction.SetAssignTo("diff_test_calculation")
+    End Sub
+
+    Public Sub SetElementParameters(ucrNewControl As ucrCore, iAdditionalPairNo As Integer)
+        ucrNewControl.AddAdditionalCodeParameterPair(clsDiffOperator, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=iAdditionalPairNo)
+    End Sub
+End Class
+
