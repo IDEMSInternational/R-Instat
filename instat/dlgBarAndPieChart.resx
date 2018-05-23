@@ -333,29 +333,8 @@
   <data name="&gt;&gt;cmdBarChartOptions.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
-  <data name="ucrChkBarChartPosition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>141, 235</value>
-  </data>
-  <data name="ucrChkBarChartPosition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 20</value>
-  </data>
-  <data name="ucrChkBarChartPosition.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="&gt;&gt;ucrChkBarChartPosition.Name" xml:space="preserve">
-    <value>ucrChkBarChartPosition</value>
-  </data>
-  <data name="&gt;&gt;ucrChkBarChartPosition.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkBarChartPosition.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkBarChartPosition.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="ucrInputBarChartPosition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>274, 234</value>
+    <value>255, 188</value>
   </data>
   <data name="ucrInputBarChartPosition.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>21, 17, 21, 17</value>
@@ -428,6 +407,33 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>415, 400</value>
+  </data>
+  <data name="lblPosition.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblPosition.Location" type="System.Drawing.Point, System.Drawing">
+    <value>252, 170</value>
+  </data>
+  <data name="lblPosition.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 13</value>
+  </data>
+  <data name="lblPosition.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="lblPosition.Text" xml:space="preserve">
+    <value>Bar Chart Position:</value>
+  </data>
+  <data name="&gt;&gt;lblPosition.Name" xml:space="preserve">
+    <value>lblPosition</value>
+  </data>
+  <data name="&gt;&gt;lblPosition.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblPosition.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblPosition.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="ucrReceiverFirst.Location" type="System.Drawing.Point, System.Drawing">
     <value>255, 91</value>
