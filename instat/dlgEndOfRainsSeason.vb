@@ -591,6 +591,11 @@ Public Class dlgEndOfRainsSeason
         clsEndRainRollingSum.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & ")", iPosition:=3)
     End Sub
 
+    Private Sub EvaportionChange()
+        clsWBWaterBalanceMin.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverEvaporation.GetVariableNames & ")", iPosition:=3)
+        clsWBWaterBalanceMax.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverEvaporation.GetVariableNames & ")", iPosition:=3)
+    End Sub
+
     Private Sub ucrReceiverStationYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlValueChanged, ucrReceiverStation.ControlValueChanged
         GroupBy()
         YearChange()
@@ -614,6 +619,10 @@ Public Class dlgEndOfRainsSeason
         RainfallChange()
     End Sub
 
+    Private Sub ucrReceiverEvaporation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverEvaporation.ControlValueChanged
+        EvaportionChange()
+    End Sub
+
     Private Sub ucrSelectorForWaterBalance_DataFrameChanged() Handles ucrSelectorForWaterBalance.DataFrameChanged
         clsDayFilterCalcFromList.ClearParameters()
     End Sub
@@ -622,7 +631,7 @@ Public Class dlgEndOfRainsSeason
         If ucrChkEvaporationAsReceiver.Checked Then
             ucrReceiverEvaporation.SetMeAsReceiver()
         Else
-            ucrReceiverDate.SetMeAsReceiver()
+            ucrReceiverRainfall.SetMeAsReceiver()
         End If
     End Sub
 
