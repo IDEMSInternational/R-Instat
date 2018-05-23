@@ -198,3 +198,37 @@ Public Class clsQCDifferenceRCode
     End Sub
 End Class
 
+Public Class clsQCAcceptableRange
+    Public clsGreaterEqualToOperator, clsLessEqualToOperator, clsRangeOrOperator As New ROperator
+    Public clsAcceptableRangeFunc As New RFunction
+    Public strTestName As String
+    Public Sub SetDefaults(strElementName As String)
+        Dim strAcceptableRange As String = "Acceptable_Range" & strElementName
+        Dim strRangeName As String = "Range" & strElementName
+
+        clsGreaterEqualToOperator = New ROperator
+        clsLessEqualToOperator = New ROperator
+
+        clsRangeOrOperator.Clear()
+
+        strTestName = strRangeName
+        clsGreaterEqualToOperator.SetOperation(">=")
+        clsLessEqualToOperator.SetOperation("<=")
+        clsRangeOrOperator.SetOperation("|")
+        clsRangeOrOperator.bBrackets = False
+        clsRangeOrOperator.bToScriptAsRString = True
+        clsRangeOrOperator.AddParameter("left", clsROperatorParameter:=clsLessEqualToOperator, iPosition:=0, bIncludeArgumentName:=False)
+        clsRangeOrOperator.AddParameter("right", clsROperatorParameter:=clsGreaterEqualToOperator, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsAcceptableRangeFunc.SetRCommand("instat_calculation$new")
+        clsAcceptableRangeFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        clsAcceptableRangeFunc.AddParameter("function_exp", clsROperatorParameter:=clsRangeOrOperator, iPosition:=1)
+        clsAcceptableRangeFunc.AddParameter("result_name", Chr(34) & strRangeName & Chr(34), iPosition:=4)
+        clsAcceptableRangeFunc.SetAssignTo("Acceptable_Range" & strElementName)
+    End Sub
+
+    Public Sub SetElementParameters(ucrNewControl As ucrCore, iAdditionalPairNo As Integer, iAdditionalPairNo1 As Integer) ', iAdditionalPairNo2 As Integer)
+        ucrNewControl.AddAdditionalCodeParameterPair(clsGreaterEqualToOperator, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=iAdditionalPairNo)
+    End Sub
+End Class
+
