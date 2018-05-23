@@ -112,7 +112,7 @@ Public Class dlgBarAndPieChart
         dctPositionPairs.Add("Stack", Chr(34) & "stack" & Chr(34))
         dctPositionPairs.Add("Dodge", Chr(34) & "dodge" & Chr(34))
         dctPositionPairs.Add("Identity", Chr(34) & "identity" & Chr(34))
-        dctPositionPairs.Add("jitter", Chr(34) & "jitter" & Chr(34))
+        dctPositionPairs.Add("Jitter", Chr(34) & "jitter" & Chr(34))
         dctPositionPairs.Add("Fill", Chr(34) & "fill" & Chr(34))
         ucrInputBarChartPosition.SetItems(dctPositionPairs)
         ucrInputBarChartPosition.SetDropDownStyleAsNonEditable()

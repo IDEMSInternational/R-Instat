@@ -415,13 +415,13 @@
     <value>252, 170</value>
   </data>
   <data name="lblPosition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 13</value>
+    <value>47, 13</value>
   </data>
   <data name="lblPosition.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
   <data name="lblPosition.Text" xml:space="preserve">
-    <value>Bar Chart Position:</value>
+    <value>Position:</value>
   </data>
   <data name="&gt;&gt;lblPosition.Name" xml:space="preserve">
     <value>lblPosition</value>
