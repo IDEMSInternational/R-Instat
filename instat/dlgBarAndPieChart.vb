@@ -65,7 +65,8 @@ Public Class dlgBarAndPieChart
         ucrPnlOptions.AddRadioButton(rdoPieChart)
         ucrPnlOptions.AddParameterPresentCondition(rdoPieChart, "coord_polar")
         ucrPnlOptions.AddParameterPresentCondition(rdoBarChart, "coord_polar", False)
-        ucrPnlOptions.AddToLinkedControls(ucrChkBarChartPosition, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrInputBarChartPosition, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputBarChartPosition.SetLinkedDisplayControl(lblPosition)
 
         ucrPnlOptions.AddToLinkedControls(ucrChkFlipCoordinates, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrReceiverByFactor, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -107,14 +108,7 @@ Public Class dlgBarAndPieChart
         ucrChkFlipCoordinates.SetText("Flip Coordinates")
         ucrChkFlipCoordinates.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
-        'Setting new position controls
-        ucrChkBarChartPosition.SetText("Bar Chart Position")
-        ucrChkBarChartPosition.AddToLinkedControls(ucrLinked:=ucrInputBarChartPosition, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkBarChartPosition.AddParameterPresentCondition(True, "position")
-        ucrChkBarChartPosition.AddParameterPresentCondition(False, "position", False)
-
         ucrInputBarChartPosition.SetParameter(New RParameter("position", 0))
-        ucrInputBarChartPosition.bAddRemoveParameter = False
         dctPositionPairs.Add("Stack", Chr(34) & "stack" & Chr(34))
         dctPositionPairs.Add("Dodge", Chr(34) & "dodge" & Chr(34))
         dctPositionPairs.Add("Identity", Chr(34) & "identity" & Chr(34))
@@ -122,6 +116,8 @@ Public Class dlgBarAndPieChart
         dctPositionPairs.Add("Fill", Chr(34) & "fill" & Chr(34))
         ucrInputBarChartPosition.SetItems(dctPositionPairs)
         ucrInputBarChartPosition.SetDropDownStyleAsNonEditable()
+        ucrInputBarChartPosition.SetRDefault(Chr(34) & "stack" & Chr(34))
+
     End Sub
 
     Private Sub SetDefaults()
@@ -183,7 +179,6 @@ Public Class dlgBarAndPieChart
         ucrPnlOptions.SetRCode(clsBaseOperator, bReset)
         ucrChkFlipCoordinates.SetRCode(clsBaseOperator, bReset)
         ucrInputBarChartPosition.SetRCode(clsRgeomBarFunction, bReset)
-        ucrChkBarChartPosition.SetRCode(clsRgeomBarFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -231,7 +226,6 @@ Public Class dlgBarAndPieChart
         End If
         'Allows for sync with the layer parameters
         ucrInputBarChartPosition.SetRCode(clsRgeomBarFunction, bReset)
-        ucrChkBarChartPosition.SetRCode(clsRgeomBarFunction, bReset)
         TestOkEnabled()
     End Sub
 
