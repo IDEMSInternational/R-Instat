@@ -633,11 +633,13 @@ Public Class dlgEndOfRainsSeason
     End Sub
 
     Private Sub ucrPnlEvaporation_ContextMenuChanged(sender As Object, e As EventArgs) Handles ucrPnlEvaporation.ContextMenuChanged
-        TestOKEnabled()
         If rdoValueEvaporation.Checked Then
-            ucrInputEvaporation.Visible = True
+            clsPMaxOperatorMax.AddParameter("evaporation", "ucrInputEvaporation.GetText", clsROperatorParameter:=clsPMaxOperatorMax, bIncludeArgumentName:=False)
+            clsPMaxOperatorMin.AddParameter("evaporation", "ucrInputEvaporation.GetText", clsROperatorParameter:=clsPMaxOperatorMin, bIncludeArgumentName:=False)
         ElseIf rdoVariableEvaporation.Checked Then
-            ucrReceiverEvaporation.SetMeAsReceiver()
+            clsPMaxOperatorMax.AddParameter("evaporation", "ucrReceiverEvaporation.GetVariable", clsROperatorParameter:=clsPMaxOperatorMax, bIncludeArgumentName:=False)
+            clsPMaxOperatorMin.AddParameter("evaporation", "ucrReceiverEvaporation.GetVariable", clsROperatorParameter:=clsPMaxOperatorMin, bIncludeArgumentName:=False)
         End If
+        TestOKEnabled()
     End Sub
 End Class

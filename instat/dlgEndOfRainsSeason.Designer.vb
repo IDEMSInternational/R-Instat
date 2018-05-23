@@ -123,7 +123,7 @@ Partial Class dlgEndOfRainsSeason
         'lblEvaporation
         '
         Me.lblEvaporation.AutoSize = True
-        Me.lblEvaporation.Location = New System.Drawing.Point(116, 354)
+        Me.lblEvaporation.Location = New System.Drawing.Point(95, 354)
         Me.lblEvaporation.Name = "lblEvaporation"
         Me.lblEvaporation.Size = New System.Drawing.Size(67, 13)
         Me.lblEvaporation.TabIndex = 18
@@ -159,7 +159,7 @@ Partial Class dlgEndOfRainsSeason
         'lblWaterBalanceLessThan
         '
         Me.lblWaterBalanceLessThan.AutoSize = True
-        Me.lblWaterBalanceLessThan.Location = New System.Drawing.Point(250, 322)
+        Me.lblWaterBalanceLessThan.Location = New System.Drawing.Point(247, 322)
         Me.lblWaterBalanceLessThan.Name = "lblWaterBalanceLessThan"
         Me.lblWaterBalanceLessThan.Size = New System.Drawing.Size(93, 13)
         Me.lblWaterBalanceLessThan.TabIndex = 16
@@ -211,7 +211,7 @@ Partial Class dlgEndOfRainsSeason
         '
         Me.ucrNudTotalOverDays.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTotalOverDays.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTotalOverDays.Location = New System.Drawing.Point(349, 286)
+        Me.ucrNudTotalOverDays.Location = New System.Drawing.Point(346, 286)
         Me.ucrNudTotalOverDays.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudTotalOverDays.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTotalOverDays.Name = "ucrNudTotalOverDays"
@@ -251,7 +251,7 @@ Partial Class dlgEndOfRainsSeason
         '
         Me.ucrNudWBLessThan.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWBLessThan.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudWBLessThan.Location = New System.Drawing.Point(349, 320)
+        Me.ucrNudWBLessThan.Location = New System.Drawing.Point(346, 320)
         Me.ucrNudWBLessThan.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudWBLessThan.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWBLessThan.Name = "ucrNudWBLessThan"
@@ -371,9 +371,9 @@ Partial Class dlgEndOfRainsSeason
         '
         'ucrPnlEvaporation
         '
-        Me.ucrPnlEvaporation.Location = New System.Drawing.Point(189, 346)
+        Me.ucrPnlEvaporation.Location = New System.Drawing.Point(98, 346)
         Me.ucrPnlEvaporation.Name = "ucrPnlEvaporation"
-        Me.ucrPnlEvaporation.Size = New System.Drawing.Size(240, 67)
+        Me.ucrPnlEvaporation.Size = New System.Drawing.Size(315, 67)
         Me.ucrPnlEvaporation.TabIndex = 33
         '
         'ucrInputEvaporation
@@ -424,7 +424,7 @@ Partial Class dlgEndOfRainsSeason
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(475, 532)
+        Me.ClientSize = New System.Drawing.Size(416, 532)
         Me.Controls.Add(Me.rdoVariableEvaporation)
         Me.Controls.Add(Me.rdoValueEvaporation)
         Me.Controls.Add(Me.ucrReceiverEvaporation)
