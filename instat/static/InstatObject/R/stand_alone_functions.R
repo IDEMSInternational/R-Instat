@@ -222,9 +222,9 @@ dekade <- function(date) {
   return(temp_dekade)
 }
 
-pentad <- function(date) {
-  m <- lubridate::month(date)
-  temp_pentad <- 6 * (m) - 5 + (m > 5) + (m > 10) + (m > 15) + (m > 20) + (m > 25)
+pentad <- function(day, year){
+  leap_year <- lubridate::leap_year(Dodoma$Year)
+  temp_pentad <- ceiling((Dodoma$Day - leap_year*(Dodoma$Day > 59)) / 5)
   return(temp_pentad)
 }
 
