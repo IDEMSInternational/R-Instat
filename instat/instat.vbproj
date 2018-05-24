@@ -842,6 +842,12 @@
     <Compile Include="sdgProportionsPercentages.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgSaveColumnPosition.Designer.vb">
+      <DependentUpon>sdgSaveColumnPosition.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgSaveColumnPosition.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgThemes.Designer.vb">
       <DependentUpon>sdgThemes.vb</DependentUpon>
     </Compile>
@@ -3283,6 +3289,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgProportionsPercentages.sw-KE.resx">
       <DependentUpon>sdgProportionsPercentages.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgSaveColumnPosition.resx">
+      <DependentUpon>sdgSaveColumnPosition.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSummaries.resx">
       <DependentUpon>sdgSummaries.vb</DependentUpon>
