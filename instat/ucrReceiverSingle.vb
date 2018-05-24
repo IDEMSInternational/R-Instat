@@ -21,6 +21,8 @@ Public Class ucrReceiverSingle
     Public strCurrDataType As String
     Public Event WithMeSelectionChanged(ucrChangedReceiver As ucrReceiverSingle)
     Public bAutoFill As Boolean = False
+    'We have not added this to multiple receiver because we have no case yet that we want not to print graph
+    Public bPrintGraph As Boolean = True
 
     Public Sub New()
         ' This call is required by the designer.
@@ -202,6 +204,9 @@ Public Class ucrReceiverSingle
                 Case "graph"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
                     clsGetVariablesFunc.AddParameter("graph_name", GetVariableNames())
+                    If Not bPrintGraph Then
+                        clsGetVariablesFunc.AddParameter("print_graph", "FALSE")
+                    End If
                 Case "model"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
                     clsGetVariablesFunc.AddParameter("model_name", GetVariableNames())
