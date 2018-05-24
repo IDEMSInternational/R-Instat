@@ -123,8 +123,8 @@ Public Class dlgUseDate
         ucrChkShiftYear.SetText("Shift Year")
         ucrChkShiftYear.SetRDefault("FALSE")
 
-        ucrNudShiftStartDay.SetParameter(New RParameter("s_start_day_in_month", 22))
-        ucrNudShiftStartDay.SetRDefault(1)
+        'ucrNudShiftStartDay.SetParameter(New RParameter("s_start_day_in_month", 22))
+        'ucrNudShiftStartDay.SetRDefault(1)
 
         ucrInputComboBoxMonth.SetParameter(New RParameter("s_start_month", 23))
         Dim dctMonth As New Dictionary(Of String, String)
@@ -163,7 +163,7 @@ Public Class dlgUseDate
     End Sub
 
     Private Sub TestOKEnabled()
-        If (Not (ucrReceiverUseDate.IsEmpty) AndAlso (ucrChkYear.Checked OrElse ucrChkWeekday.Checked OrElse ucrChkWeek.Checked OrElse ucrChkPentad.Checked OrElse ucrChkQuarter.Checked OrElse ucrChkMonth.Checked OrElse ucrChkLeapYear.Checked OrElse ucrChkFullWeekday.Checked OrElse ucrChkFullMonth.Checked OrElse ucrChkDekad.Checked OrElse ucrChkDayInYear.Checked OrElse ucrChkAbbrWeekday.Checked OrElse ucrChkAbbrMonth.Checked OrElse ucrChkShiftYear.Checked OrElse ucrChkShiftDay.Checked OrElse ucrChkShiftQuarter.Checked AndAlso Not ucrInputComboBoxMonth.IsEmpty AndAlso ucrNudShiftStartDay.GetText <> "")) Then
+        If (Not (ucrReceiverUseDate.IsEmpty) AndAlso (ucrChkYear.Checked OrElse ucrChkWeekday.Checked OrElse ucrChkWeek.Checked OrElse ucrChkPentad.Checked OrElse ucrChkQuarter.Checked OrElse ucrChkMonth.Checked OrElse ucrChkLeapYear.Checked OrElse ucrChkFullWeekday.Checked OrElse ucrChkFullMonth.Checked OrElse ucrChkDekad.Checked OrElse ucrChkDayInYear.Checked OrElse ucrChkAbbrWeekday.Checked OrElse ucrChkAbbrMonth.Checked OrElse ucrChkShiftYear.Checked OrElse ucrChkShiftDay.Checked OrElse ucrChkShiftQuarter.Checked AndAlso Not ucrInputComboBoxMonth.IsEmpty)) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -193,13 +193,15 @@ Public Class dlgUseDate
         'Also by defining it as a variable, I don't have to repeat this line many times.
         strMonth = ucrInputComboBoxMonth.GetText()
         If strMonth = "February" Then
-            ucrNudShiftStartDay.SetMinMax(1, 28)
+            'ucrNudShiftStartDay.SetMinMax(1, 28)
             'Creating an array of strings and checking if strMonth is contained in it means you can group similar conditions together
         ElseIf {"April", "June", "September", "November"}.Contains(strMonth) Then
-            ucrNudShiftStartDay.SetMinMax(1, 30)
+            'ucrNudShiftStartDay.SetMinMax(1, 30)
             'By leaving the biggest group of months for the Else, there is less typing needed
         Else
-            ucrNudShiftStartDay.SetMinMax(1, 31)
+            'ucrNudShiftStartDay.SetMinMax(1, 31)
+
+
             'Alternative (this is safer because it checks the final conditions instead of in Else):
             'ElseIf {"January", "March", "July", "August", "October", "December"}.Contains(strMonth) Then
             '    ucrNudShiftStartDay.SetMinMax(1, 33)
@@ -208,7 +210,7 @@ Public Class dlgUseDate
         End If
     End Sub
 
-    Private Sub ucrReceiverUseDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverUseDate.ControlContentsChanged, ucrChkYear.ControlContentsChanged, ucrChkWeekday.ControlContentsChanged, ucrChkWeek.ControlContentsChanged, ucrChkPentad.ControlContentsChanged, ucrChkQuarter.ControlContentsChanged, ucrChkMonth.ControlContentsChanged, ucrChkLeapYear.ControlContentsChanged, ucrChkFullWeekday.ControlContentsChanged, ucrChkFullMonth.ControlContentsChanged, ucrChkDekad.ControlContentsChanged, ucrChkDayInYear.ControlContentsChanged, ucrChkAbbrWeekday.ControlContentsChanged, ucrChkAbbrMonth.ControlContentsChanged, ucrChkShiftDay.ControlContentsChanged, ucrChkShiftYear.ControlContentsChanged, ucrChkShiftDay.ControlContentsChanged, ucrChkShiftQuarter.ControlContentsChanged, ucrInputComboBoxMonth.ControlContentsChanged, ucrNudShiftStartDay.ControlContentsChanged
+    Private Sub ucrReceiverUseDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverUseDate.ControlContentsChanged, ucrChkYear.ControlContentsChanged, ucrChkWeekday.ControlContentsChanged, ucrChkWeek.ControlContentsChanged, ucrChkPentad.ControlContentsChanged, ucrChkQuarter.ControlContentsChanged, ucrChkMonth.ControlContentsChanged, ucrChkLeapYear.ControlContentsChanged, ucrChkFullWeekday.ControlContentsChanged, ucrChkFullMonth.ControlContentsChanged, ucrChkDekad.ControlContentsChanged, ucrChkDayInYear.ControlContentsChanged, ucrChkAbbrWeekday.ControlContentsChanged, ucrChkAbbrMonth.ControlContentsChanged, ucrChkShiftDay.ControlContentsChanged, ucrChkShiftYear.ControlContentsChanged, ucrChkShiftDay.ControlContentsChanged, ucrChkShiftQuarter.ControlContentsChanged, ucrInputComboBoxMonth.ControlContentsChanged
         TestOKEnabled()
     End Sub
 

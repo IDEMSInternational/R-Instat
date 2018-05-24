@@ -153,8 +153,23 @@
   <data name="&gt;&gt;lblDateVariable.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="TableLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="TableLayoutPanel1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="TableLayoutPanel1.CellBorderStyle" type="System.Windows.Forms.TableLayoutPanelCellBorderStyle, System.Windows.Forms">
+    <value>Inset</value>
+  </data>
+  <data name="TableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="UcrCheck4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
   <data name="UcrCheck4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>473, 93</value>
+    <value>468, 115</value>
   </data>
   <data name="UcrCheck4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>9, 12, 9, 12</value>
@@ -172,400 +187,13 @@
     <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;UcrCheck4.Parent" xml:space="preserve">
-    <value>grpShifted</value>
+    <value>TableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;UcrCheck4.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="UcrCheck3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>406, 92</value>
-  </data>
-  <data name="UcrCheck3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 12, 9, 12</value>
-  </data>
-  <data name="UcrCheck3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 31</value>
-  </data>
-  <data name="UcrCheck3.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="&gt;&gt;UcrCheck3.Name" xml:space="preserve">
-    <value>UcrCheck3</value>
-  </data>
-  <data name="&gt;&gt;UcrCheck3.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrCheck3.Parent" xml:space="preserve">
-    <value>grpShifted</value>
-  </data>
-  <data name="&gt;&gt;UcrCheck3.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="UcrCheck2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>341, 92</value>
-  </data>
-  <data name="UcrCheck2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 12, 9, 12</value>
-  </data>
-  <data name="UcrCheck2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 31</value>
-  </data>
-  <data name="UcrCheck2.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="&gt;&gt;UcrCheck2.Name" xml:space="preserve">
-    <value>UcrCheck2</value>
-  </data>
-  <data name="&gt;&gt;UcrCheck2.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrCheck2.Parent" xml:space="preserve">
-    <value>grpShifted</value>
-  </data>
-  <data name="&gt;&gt;UcrCheck2.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="ucrChkAbbrMonth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>177, 92</value>
-  </data>
-  <data name="ucrChkAbbrMonth.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 12, 9, 12</value>
-  </data>
-  <data name="ucrChkAbbrMonth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 31</value>
-  </data>
-  <data name="ucrChkAbbrMonth.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAbbrMonth.Name" xml:space="preserve">
-    <value>ucrChkAbbrMonth</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAbbrMonth.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAbbrMonth.Parent" xml:space="preserve">
-    <value>grpShifted</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAbbrMonth.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="Label9.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>455, 22</value>
-  </data>
-  <data name="Label9.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 20</value>
-  </data>
-  <data name="Label9.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="Label9.Text" xml:space="preserve">
-    <value>Quarter</value>
-  </data>
-  <data name="&gt;&gt;Label9.Name" xml:space="preserve">
-    <value>Label9</value>
-  </data>
-  <data name="&gt;&gt;Label9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label9.Parent" xml:space="preserve">
-    <value>grpShifted</value>
-  </data>
-  <data name="&gt;&gt;Label9.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="ucrChkDekad.Location" type="System.Drawing.Point, System.Drawing">
-    <value>406, 65</value>
-  </data>
-  <data name="ucrChkDekad.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 12, 9, 12</value>
-  </data>
-  <data name="ucrChkDekad.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 31</value>
-  </data>
-  <data name="ucrChkDekad.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDekad.Name" xml:space="preserve">
-    <value>ucrChkDekad</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDekad.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDekad.Parent" xml:space="preserve">
-    <value>grpShifted</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDekad.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="ucrChkFullMonth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>177, 121</value>
-  </data>
-  <data name="ucrChkFullMonth.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 12, 9, 12</value>
-  </data>
-  <data name="ucrChkFullMonth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>21, 31</value>
-  </data>
-  <data name="ucrChkFullMonth.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrChkFullMonth.Name" xml:space="preserve">
-    <value>ucrChkFullMonth</value>
-  </data>
-  <data name="&gt;&gt;ucrChkFullMonth.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkFullMonth.Parent" xml:space="preserve">
-    <value>grpShifted</value>
-  </data>
-  <data name="&gt;&gt;ucrChkFullMonth.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="ucrChkPentad.Location" type="System.Drawing.Point, System.Drawing">
-    <value>341, 65</value>
-  </data>
-  <data name="ucrChkPentad.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 12, 9, 12</value>
-  </data>
-  <data name="ucrChkPentad.Size" type="System.Drawing.Size, System.Drawing">
-    <value>31, 31</value>
-  </data>
-  <data name="ucrChkPentad.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrChkPentad.Name" xml:space="preserve">
-    <value>ucrChkPentad</value>
-  </data>
-  <data name="&gt;&gt;ucrChkPentad.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkPentad.Parent" xml:space="preserve">
-    <value>grpShifted</value>
-  </data>
-  <data name="&gt;&gt;ucrChkPentad.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="Label8.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>391, 22</value>
-  </data>
-  <data name="Label8.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 20</value>
-  </data>
-  <data name="Label8.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="Label8.Text" xml:space="preserve">
-    <value>Dekad</value>
-  </data>
-  <data name="&gt;&gt;Label8.Name" xml:space="preserve">
-    <value>Label8</value>
-  </data>
-  <data name="&gt;&gt;Label8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
-    <value>grpShifted</value>
-  </data>
-  <data name="&gt;&gt;Label8.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="Label7.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 125</value>
-  </data>
-  <data name="Label7.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 20</value>
-  </data>
-  <data name="Label7.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="Label7.Text" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="&gt;&gt;Label7.Name" xml:space="preserve">
-    <value>Label7</value>
-  </data>
-  <data name="&gt;&gt;Label7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label7.Parent" xml:space="preserve">
-    <value>grpShifted</value>
-  </data>
-  <data name="&gt;&gt;Label7.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="ucrChkMonth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>177, 65</value>
-  </data>
-  <data name="ucrChkMonth.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 12, 9, 12</value>
-  </data>
-  <data name="ucrChkMonth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 31</value>
-  </data>
-  <data name="ucrChkMonth.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMonth.Name" xml:space="preserve">
-    <value>ucrChkMonth</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMonth.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMonth.Parent" xml:space="preserve">
-    <value>grpShifted</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMonth.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="Label6.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 97</value>
-  </data>
-  <data name="Label6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 20</value>
-  </data>
-  <data name="Label6.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="Label6.Text" xml:space="preserve">
-    <value>Abb. Name</value>
-  </data>
-  <data name="&gt;&gt;Label6.Name" xml:space="preserve">
-    <value>Label6</value>
-  </data>
-  <data name="&gt;&gt;Label6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
-    <value>grpShifted</value>
-  </data>
-  <data name="&gt;&gt;Label6.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="lblDay.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblDay.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblDay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>275, 167</value>
-  </data>
-  <data name="lblDay.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="lblDay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 20</value>
-  </data>
-  <data name="lblDay.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="lblDay.Text" xml:space="preserve">
-    <value>Day:</value>
-  </data>
-  <data name="&gt;&gt;lblDay.Name" xml:space="preserve">
-    <value>lblDay</value>
-  </data>
-  <data name="&gt;&gt;lblDay.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblDay.Parent" xml:space="preserve">
-    <value>grpShifted</value>
-  </data>
-  <data name="&gt;&gt;lblDay.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="ucrNudShiftStartDay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>329, 163</value>
-  </data>
-  <data name="ucrNudShiftStartDay.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 12, 9, 12</value>
-  </data>
-  <data name="ucrNudShiftStartDay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 31</value>
-  </data>
-  <data name="ucrNudShiftStartDay.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;ucrNudShiftStartDay.Name" xml:space="preserve">
-    <value>ucrNudShiftStartDay</value>
-  </data>
-  <data name="&gt;&gt;ucrNudShiftStartDay.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudShiftStartDay.Parent" xml:space="preserve">
-    <value>grpShifted</value>
-  </data>
-  <data name="&gt;&gt;ucrNudShiftStartDay.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="Label5.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 65</value>
-  </data>
-  <data name="Label5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 20</value>
-  </data>
-  <data name="Label5.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="Label5.Text" xml:space="preserve">
-    <value>Numeric</value>
-  </data>
-  <data name="&gt;&gt;Label5.Name" xml:space="preserve">
-    <value>Label5</value>
-  </data>
-  <data name="&gt;&gt;Label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
-    <value>grpShifted</value>
-  </data>
-  <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
-    <value>14</value>
+  <data name="Label4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
   </data>
   <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -574,7 +202,7 @@
     <value>NoControl</value>
   </data>
   <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>107, 22</value>
+    <value>106, 14</value>
   </data>
   <data name="Label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -595,10 +223,373 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
-    <value>grpShifted</value>
+    <value>TableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;Label4.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="Label9.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="Label9.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>449, 14</value>
+  </data>
+  <data name="Label9.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 20</value>
+  </data>
+  <data name="Label9.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
+  </data>
+  <data name="Label9.Text" xml:space="preserve">
+    <value>Quarter</value>
+  </data>
+  <data name="&gt;&gt;Label9.Name" xml:space="preserve">
+    <value>Label9</value>
+  </data>
+  <data name="&gt;&gt;Label9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label9.Parent" xml:space="preserve">
+    <value>TableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;Label9.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="UcrCheck3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="UcrCheck3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>398, 115</value>
+  </data>
+  <data name="UcrCheck3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
+  </data>
+  <data name="UcrCheck3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>25, 31</value>
+  </data>
+  <data name="UcrCheck3.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck3.Name" xml:space="preserve">
+    <value>UcrCheck3</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck3.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck3.Parent" xml:space="preserve">
+    <value>TableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck3.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrChkShiftQuarter.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="ucrChkShiftQuarter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>467, 58</value>
+  </data>
+  <data name="ucrChkShiftQuarter.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
+  </data>
+  <data name="ucrChkShiftQuarter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 31</value>
+  </data>
+  <data name="ucrChkShiftQuarter.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftQuarter.Name" xml:space="preserve">
+    <value>ucrChkShiftQuarter</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftQuarter.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftQuarter.Parent" xml:space="preserve">
+    <value>TableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftQuarter.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="UcrCheck2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="UcrCheck2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>330, 115</value>
+  </data>
+  <data name="UcrCheck2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
+  </data>
+  <data name="UcrCheck2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>25, 31</value>
+  </data>
+  <data name="UcrCheck2.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck2.Name" xml:space="preserve">
+    <value>UcrCheck2</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck2.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck2.Parent" xml:space="preserve">
+    <value>TableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck2.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="ucrChkDekad.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="ucrChkDekad.Location" type="System.Drawing.Point, System.Drawing">
+    <value>396, 58</value>
+  </data>
+  <data name="ucrChkDekad.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
+  </data>
+  <data name="ucrChkDekad.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 31</value>
+  </data>
+  <data name="ucrChkDekad.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDekad.Name" xml:space="preserve">
+    <value>ucrChkDekad</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDekad.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDekad.Parent" xml:space="preserve">
+    <value>TableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDekad.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="ucrChkShiftYear.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="ucrChkShiftYear.Location" type="System.Drawing.Point, System.Drawing">
+    <value>116, 58</value>
+  </data>
+  <data name="ucrChkShiftYear.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
+  </data>
+  <data name="ucrChkShiftYear.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 31</value>
+  </data>
+  <data name="ucrChkShiftYear.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftYear.Name" xml:space="preserve">
+    <value>ucrChkShiftYear</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftYear.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftYear.Parent" xml:space="preserve">
+    <value>TableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftYear.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="Label8.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="Label8.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>383, 14</value>
+  </data>
+  <data name="Label8.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 20</value>
+  </data>
+  <data name="Label8.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="Label8.Text" xml:space="preserve">
+    <value>Dekad</value>
+  </data>
+  <data name="&gt;&gt;Label8.Name" xml:space="preserve">
+    <value>Label8</value>
+  </data>
+  <data name="&gt;&gt;Label8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
+    <value>TableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;Label8.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="ucrChkAbbrMonth.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="ucrChkAbbrMonth.Location" type="System.Drawing.Point, System.Drawing">
+    <value>173, 115</value>
+  </data>
+  <data name="ucrChkAbbrMonth.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
+  </data>
+  <data name="ucrChkAbbrMonth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>25, 31</value>
+  </data>
+  <data name="ucrChkAbbrMonth.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAbbrMonth.Name" xml:space="preserve">
+    <value>ucrChkAbbrMonth</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAbbrMonth.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAbbrMonth.Parent" xml:space="preserve">
+    <value>TableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAbbrMonth.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="Label6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="Label6.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 120</value>
+  </data>
+  <data name="Label6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 20</value>
+  </data>
+  <data name="Label6.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="Label6.Text" xml:space="preserve">
+    <value>Abb. Name</value>
+  </data>
+  <data name="&gt;&gt;Label6.Name" xml:space="preserve">
+    <value>Label6</value>
+  </data>
+  <data name="&gt;&gt;Label6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
+    <value>TableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;Label6.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="ucrChkPentad.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="ucrChkPentad.Location" type="System.Drawing.Point, System.Drawing">
+    <value>327, 58</value>
+  </data>
+  <data name="ucrChkPentad.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
+  </data>
+  <data name="ucrChkPentad.Size" type="System.Drawing.Size, System.Drawing">
+    <value>31, 31</value>
+  </data>
+  <data name="ucrChkPentad.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPentad.Name" xml:space="preserve">
+    <value>ucrChkPentad</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPentad.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPentad.Parent" xml:space="preserve">
+    <value>TableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPentad.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="ucrChkFullMonth.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="ucrChkFullMonth.Location" type="System.Drawing.Point, System.Drawing">
+    <value>175, 172</value>
+  </data>
+  <data name="ucrChkFullMonth.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
+  </data>
+  <data name="ucrChkFullMonth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>21, 31</value>
+  </data>
+  <data name="ucrChkFullMonth.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFullMonth.Name" xml:space="preserve">
+    <value>ucrChkFullMonth</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFullMonth.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFullMonth.Parent" xml:space="preserve">
+    <value>TableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFullMonth.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="Label7.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="Label7.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>26, 177</value>
+  </data>
+  <data name="Label7.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 20</value>
+  </data>
+  <data name="Label7.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="Label7.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="&gt;&gt;Label7.Name" xml:space="preserve">
+    <value>Label7</value>
+  </data>
+  <data name="&gt;&gt;Label7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label7.Parent" xml:space="preserve">
+    <value>TableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;Label7.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="Label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
   </data>
   <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -607,7 +598,7 @@
     <value>NoControl</value>
   </data>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>163, 22</value>
+    <value>159, 14</value>
   </data>
   <data name="Label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -628,10 +619,76 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
-    <value>grpShifted</value>
+    <value>TableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="ucrChkMonth.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="ucrChkMonth.Location" type="System.Drawing.Point, System.Drawing">
+    <value>171, 58</value>
+  </data>
+  <data name="ucrChkMonth.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
+  </data>
+  <data name="ucrChkMonth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 31</value>
+  </data>
+  <data name="ucrChkMonth.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMonth.Name" xml:space="preserve">
+    <value>ucrChkMonth</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMonth.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMonth.Parent" xml:space="preserve">
+    <value>TableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMonth.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="Label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>313, 14</value>
+  </data>
+  <data name="Label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 20</value>
+  </data>
+  <data name="Label1.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Pentad</value>
+  </data>
+  <data name="&gt;&gt;Label1.Name" xml:space="preserve">
+    <value>Label1</value>
+  </data>
+  <data name="&gt;&gt;Label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
+    <value>TableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
     <value>16</value>
+  </data>
+  <data name="Label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
   </data>
   <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -640,7 +697,7 @@
     <value>NoControl</value>
   </data>
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>234, 22</value>
+    <value>223, 4</value>
   </data>
   <data name="Label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -662,67 +719,103 @@ Year(366)</value>
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
-    <value>grpShifted</value>
+    <value>TableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
-  <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="ucrChkShiftDay.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
   </data>
-  <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="ucrChkShiftDay.Location" type="System.Drawing.Point, System.Drawing">
+    <value>250, 58</value>
   </data>
-  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>322, 22</value>
-  </data>
-  <data name="Label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 20</value>
-  </data>
-  <data name="Label1.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="Label1.Text" xml:space="preserve">
-    <value>Pentad</value>
-  </data>
-  <data name="&gt;&gt;Label1.Name" xml:space="preserve">
-    <value>Label1</value>
-  </data>
-  <data name="&gt;&gt;Label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
-    <value>grpShifted</value>
-  </data>
-  <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
-    <value>18</value>
-  </data>
-  <data name="ucrChkShiftQuarter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>473, 65</value>
-  </data>
-  <data name="ucrChkShiftQuarter.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ucrChkShiftDay.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>9, 12, 9, 12</value>
   </data>
-  <data name="ucrChkShiftQuarter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>26, 31</value>
+  <data name="ucrChkShiftDay.Size" type="System.Drawing.Size, System.Drawing">
+    <value>25, 31</value>
   </data>
-  <data name="ucrChkShiftQuarter.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="ucrChkShiftDay.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="&gt;&gt;ucrChkShiftQuarter.Name" xml:space="preserve">
-    <value>ucrChkShiftQuarter</value>
+  <data name="&gt;&gt;ucrChkShiftDay.Name" xml:space="preserve">
+    <value>ucrChkShiftDay</value>
   </data>
-  <data name="&gt;&gt;ucrChkShiftQuarter.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkShiftDay.Type" xml:space="preserve">
     <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrChkShiftQuarter.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkShiftDay.Parent" xml:space="preserve">
+    <value>TableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftDay.ZOrder" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="Label5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="Label5.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 63</value>
+  </data>
+  <data name="Label5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 20</value>
+  </data>
+  <data name="Label5.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Numeric</value>
+  </data>
+  <data name="&gt;&gt;Label5.Name" xml:space="preserve">
+    <value>Label5</value>
+  </data>
+  <data name="&gt;&gt;Label5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
+    <value>TableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="TableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 18</value>
+  </data>
+  <data name="TableLayoutPanel1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="TableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="TableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>520, 219</value>
+  </data>
+  <data name="TableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;TableLayoutPanel1.Name" xml:space="preserve">
+    <value>TableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;TableLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TableLayoutPanel1.Parent" xml:space="preserve">
     <value>grpShifted</value>
   </data>
-  <data name="&gt;&gt;ucrChkShiftQuarter.ZOrder" xml:space="preserve">
-    <value>19</value>
+  <data name="&gt;&gt;TableLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="TableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="UcrCheck4" Row="2" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="Label4" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="Label9" Row="0" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="UcrCheck3" Row="2" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftQuarter" Row="1" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="UcrCheck2" Row="2" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkDekad" Row="1" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftYear" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="Label8" Row="0" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkAbbrMonth" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="Label6" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkPentad" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkFullMonth" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="Label7" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="Label3" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkMonth" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="Label1" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="Label2" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftDay" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="Label5" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="lblMonth.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -731,7 +824,7 @@ Year(366)</value>
     <value>NoControl</value>
   </data>
   <data name="lblMonth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 169</value>
+    <value>8, 249</value>
   </data>
   <data name="lblMonth.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -755,10 +848,10 @@ Year(366)</value>
     <value>grpShifted</value>
   </data>
   <data name="&gt;&gt;lblMonth.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>1</value>
   </data>
   <data name="ucrInputComboBoxMonth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 163</value>
+    <value>134, 243</value>
   </data>
   <data name="ucrInputComboBoxMonth.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>14, 18, 14, 18</value>
@@ -779,55 +872,7 @@ Year(366)</value>
     <value>grpShifted</value>
   </data>
   <data name="&gt;&gt;ucrInputComboBoxMonth.ZOrder" xml:space="preserve">
-    <value>21</value>
-  </data>
-  <data name="ucrChkShiftYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 65</value>
-  </data>
-  <data name="ucrChkShiftYear.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 12, 9, 12</value>
-  </data>
-  <data name="ucrChkShiftYear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 31</value>
-  </data>
-  <data name="ucrChkShiftYear.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrChkShiftYear.Name" xml:space="preserve">
-    <value>ucrChkShiftYear</value>
-  </data>
-  <data name="&gt;&gt;ucrChkShiftYear.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkShiftYear.Parent" xml:space="preserve">
-    <value>grpShifted</value>
-  </data>
-  <data name="&gt;&gt;ucrChkShiftYear.ZOrder" xml:space="preserve">
-    <value>22</value>
-  </data>
-  <data name="ucrChkShiftDay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>258, 65</value>
-  </data>
-  <data name="ucrChkShiftDay.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 12, 9, 12</value>
-  </data>
-  <data name="ucrChkShiftDay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 31</value>
-  </data>
-  <data name="ucrChkShiftDay.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrChkShiftDay.Name" xml:space="preserve">
-    <value>ucrChkShiftDay</value>
-  </data>
-  <data name="&gt;&gt;ucrChkShiftDay.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkShiftDay.Parent" xml:space="preserve">
-    <value>grpShifted</value>
-  </data>
-  <data name="&gt;&gt;ucrChkShiftDay.ZOrder" xml:space="preserve">
-    <value>23</value>
+    <value>2</value>
   </data>
   <data name="grpShifted.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 297</value>
@@ -839,7 +884,7 @@ Year(366)</value>
     <value>4, 5, 4, 5</value>
   </data>
   <data name="grpShifted.Size" type="System.Drawing.Size, System.Drawing">
-    <value>522, 204</value>
+    <value>530, 283</value>
   </data>
   <data name="grpShifted.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -856,32 +901,23 @@ Year(366)</value>
   <data name="&gt;&gt;grpShifted.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="ucrChkQuarter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>261, 103</value>
+  <data name="TableLayoutPanel2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="ucrChkQuarter.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 12, 9, 12</value>
+  <data name="TableLayoutPanel2.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
-  <data name="ucrChkQuarter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 31</value>
+  <data name="TableLayoutPanel2.CellBorderStyle" type="System.Windows.Forms.TableLayoutPanelCellBorderStyle, System.Windows.Forms">
+    <value>Inset</value>
   </data>
-  <data name="ucrChkQuarter.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="TableLayoutPanel2.ColumnCount" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
-  <data name="&gt;&gt;ucrChkQuarter.Name" xml:space="preserve">
-    <value>ucrChkQuarter</value>
-  </data>
-  <data name="&gt;&gt;ucrChkQuarter.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkQuarter.Parent" xml:space="preserve">
-    <value>grpOthers</value>
-  </data>
-  <data name="&gt;&gt;ucrChkQuarter.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="ucrChkYear.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
   </data>
   <data name="ucrChkYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>261, 133</value>
+    <value>245, 172</value>
   </data>
   <data name="ucrChkYear.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>9, 12, 9, 12</value>
@@ -899,127 +935,43 @@ Year(366)</value>
     <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ucrChkYear.Parent" xml:space="preserve">
-    <value>grpOthers</value>
+    <value>TableLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;ucrChkYear.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ucrChkFullWeekday.Location" type="System.Drawing.Point, System.Drawing">
-    <value>329, 132</value>
-  </data>
-  <data name="ucrChkFullWeekday.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 12, 9, 12</value>
-  </data>
-  <data name="ucrChkFullWeekday.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 31</value>
-  </data>
-  <data name="ucrChkFullWeekday.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;ucrChkFullWeekday.Name" xml:space="preserve">
-    <value>ucrChkFullWeekday</value>
+  <data name="ucrChkQuarter.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
   </data>
-  <data name="&gt;&gt;ucrChkFullWeekday.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="ucrChkQuarter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>243, 115</value>
   </data>
-  <data name="&gt;&gt;ucrChkFullWeekday.Parent" xml:space="preserve">
-    <value>grpOthers</value>
-  </data>
-  <data name="&gt;&gt;ucrChkFullWeekday.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="ucrChkAbbrWeekday.Location" type="System.Drawing.Point, System.Drawing">
-    <value>329, 104</value>
-  </data>
-  <data name="ucrChkAbbrWeekday.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ucrChkQuarter.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>9, 12, 9, 12</value>
   </data>
-  <data name="ucrChkAbbrWeekday.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 31</value>
+  <data name="ucrChkQuarter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 31</value>
   </data>
-  <data name="ucrChkAbbrWeekday.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAbbrWeekday.Name" xml:space="preserve">
-    <value>ucrChkAbbrWeekday</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAbbrWeekday.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAbbrWeekday.Parent" xml:space="preserve">
-    <value>grpOthers</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAbbrWeekday.ZOrder" xml:space="preserve">
+  <data name="ucrChkQuarter.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="Label17.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;ucrChkQuarter.Name" xml:space="preserve">
+    <value>ucrChkQuarter</value>
   </data>
-  <data name="Label17.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;ucrChkQuarter.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="Label17.Location" type="System.Drawing.Point, System.Drawing">
-    <value>392, 24</value>
+  <data name="&gt;&gt;ucrChkQuarter.Parent" xml:space="preserve">
+    <value>TableLayoutPanel2</value>
   </data>
-  <data name="Label17.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+  <data name="&gt;&gt;ucrChkQuarter.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
-  <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 20</value>
-  </data>
-  <data name="Label17.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
-  <data name="Label17.Text" xml:space="preserve">
-    <value>Leap year</value>
-  </data>
-  <data name="&gt;&gt;Label17.Name" xml:space="preserve">
-    <value>Label17</value>
-  </data>
-  <data name="&gt;&gt;Label17.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label17.Parent" xml:space="preserve">
-    <value>grpOthers</value>
-  </data>
-  <data name="&gt;&gt;Label17.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="Label16.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label16.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Label16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>309, 24</value>
-  </data>
-  <data name="Label16.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 20</value>
-  </data>
-  <data name="Label16.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
-  </data>
-  <data name="Label16.Text" xml:space="preserve">
-    <value>Weekday</value>
-  </data>
-  <data name="&gt;&gt;Label16.Name" xml:space="preserve">
-    <value>Label16</value>
-  </data>
-  <data name="&gt;&gt;Label16.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label16.Parent" xml:space="preserve">
-    <value>grpOthers</value>
-  </data>
-  <data name="&gt;&gt;Label16.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="ucrChkDayInYear.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
   </data>
   <data name="ucrChkDayInYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>191, 75</value>
+    <value>180, 58</value>
   </data>
   <data name="ucrChkDayInYear.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>9, 12, 9, 12</value>
@@ -1037,13 +989,143 @@ Year(366)</value>
     <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ucrChkDayInYear.Parent" xml:space="preserve">
-    <value>grpOthers</value>
+    <value>TableLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;ucrChkDayInYear.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="Label18.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="Label18.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label18.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label18.Location" type="System.Drawing.Point, System.Drawing">
+    <value>106, 4</value>
+  </data>
+  <data name="Label18.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label18.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 40</value>
+  </data>
+  <data name="Label18.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="Label18.Text" xml:space="preserve">
+    <value>Day in
+Month</value>
+  </data>
+  <data name="&gt;&gt;Label18.Name" xml:space="preserve">
+    <value>Label18</value>
+  </data>
+  <data name="&gt;&gt;Label18.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label18.Parent" xml:space="preserve">
+    <value>TableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;Label18.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrChkFullWeekday.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="ucrChkFullWeekday.Location" type="System.Drawing.Point, System.Drawing">
+    <value>318, 172</value>
+  </data>
+  <data name="ucrChkFullWeekday.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
+  </data>
+  <data name="ucrChkFullWeekday.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 31</value>
+  </data>
+  <data name="ucrChkFullWeekday.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFullWeekday.Name" xml:space="preserve">
+    <value>ucrChkFullWeekday</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFullWeekday.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFullWeekday.Parent" xml:space="preserve">
+    <value>TableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFullWeekday.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="Label20.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="Label20.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label20.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label20.Location" type="System.Drawing.Point, System.Drawing">
+    <value>378, 14</value>
+  </data>
+  <data name="Label20.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label20.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 20</value>
+  </data>
+  <data name="Label20.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="Label20.Text" xml:space="preserve">
+    <value>Leap Year</value>
+  </data>
+  <data name="&gt;&gt;Label20.Name" xml:space="preserve">
+    <value>Label20</value>
+  </data>
+  <data name="&gt;&gt;Label20.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label20.Parent" xml:space="preserve">
+    <value>TableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;Label20.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="ucrChkAbbrWeekday.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="ucrChkAbbrWeekday.Location" type="System.Drawing.Point, System.Drawing">
+    <value>318, 115</value>
+  </data>
+  <data name="ucrChkAbbrWeekday.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
+  </data>
+  <data name="ucrChkAbbrWeekday.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 31</value>
+  </data>
+  <data name="ucrChkAbbrWeekday.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAbbrWeekday.Name" xml:space="preserve">
+    <value>ucrChkAbbrWeekday</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAbbrWeekday.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAbbrWeekday.Parent" xml:space="preserve">
+    <value>TableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAbbrWeekday.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="ucrChkWeek.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
   <data name="ucrChkWeek.Location" type="System.Drawing.Point, System.Drawing">
-    <value>261, 75</value>
+    <value>243, 58</value>
   </data>
   <data name="ucrChkWeek.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>9, 12, 9, 12</value>
@@ -1061,236 +1143,16 @@ Year(366)</value>
     <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ucrChkWeek.Parent" xml:space="preserve">
-    <value>grpOthers</value>
+    <value>TableLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;ucrChkWeek.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="ucrChkWeekday.Location" type="System.Drawing.Point, System.Drawing">
-    <value>329, 75</value>
-  </data>
-  <data name="ucrChkWeekday.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 12, 9, 12</value>
-  </data>
-  <data name="ucrChkWeekday.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 31</value>
-  </data>
-  <data name="ucrChkWeekday.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;ucrChkWeekday.Name" xml:space="preserve">
-    <value>ucrChkWeekday</value>
-  </data>
-  <data name="&gt;&gt;ucrChkWeekday.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkWeekday.Parent" xml:space="preserve">
-    <value>grpOthers</value>
-  </data>
-  <data name="&gt;&gt;ucrChkWeekday.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="Label15.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label15.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Label15.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 24</value>
-  </data>
-  <data name="Label15.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
-  </data>
-  <data name="Label15.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
-  </data>
-  <data name="Label15.Text" xml:space="preserve">
-    <value>Week</value>
-  </data>
-  <data name="&gt;&gt;Label15.Name" xml:space="preserve">
-    <value>Label15</value>
-  </data>
-  <data name="&gt;&gt;Label15.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label15.Parent" xml:space="preserve">
-    <value>grpOthers</value>
-  </data>
-  <data name="&gt;&gt;Label15.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="Label14.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label14.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Label14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>185, 24</value>
-  </data>
-  <data name="Label14.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 40</value>
-  </data>
-  <data name="Label14.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
-  </data>
-  <data name="Label14.Text" xml:space="preserve">
-    <value>Day inYear</value>
-  </data>
-  <data name="&gt;&gt;Label14.Name" xml:space="preserve">
-    <value>Label14</value>
-  </data>
-  <data name="&gt;&gt;Label14.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label14.Parent" xml:space="preserve">
-    <value>grpOthers</value>
-  </data>
-  <data name="&gt;&gt;Label14.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="Label10.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 139</value>
-  </data>
-  <data name="Label10.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 20</value>
-  </data>
-  <data name="Label10.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="Label10.Text" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="&gt;&gt;Label10.Name" xml:space="preserve">
-    <value>Label10</value>
-  </data>
-  <data name="&gt;&gt;Label10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label10.Parent" xml:space="preserve">
-    <value>grpOthers</value>
-  </data>
-  <data name="&gt;&gt;Label10.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="Label11.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 107</value>
-  </data>
-  <data name="Label11.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 20</value>
-  </data>
-  <data name="Label11.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="Label11.Text" xml:space="preserve">
-    <value>Abb. Name</value>
-  </data>
-  <data name="&gt;&gt;Label11.Name" xml:space="preserve">
-    <value>Label11</value>
-  </data>
-  <data name="&gt;&gt;Label11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label11.Parent" xml:space="preserve">
-    <value>grpOthers</value>
-  </data>
-  <data name="&gt;&gt;Label11.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="Label12.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 75</value>
-  </data>
-  <data name="Label12.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 20</value>
-  </data>
-  <data name="Label12.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="Label12.Text" xml:space="preserve">
-    <value>Numeric</value>
-  </data>
-  <data name="&gt;&gt;Label12.Name" xml:space="preserve">
-    <value>Label12</value>
-  </data>
-  <data name="&gt;&gt;Label12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label12.Parent" xml:space="preserve">
-    <value>grpOthers</value>
-  </data>
-  <data name="&gt;&gt;Label12.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="Label13.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label13.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Label13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>114, 23</value>
-  </data>
-  <data name="Label13.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 40</value>
-  </data>
-  <data name="Label13.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="Label13.Text" xml:space="preserve">
-    <value>Day in
-Month</value>
-  </data>
-  <data name="&gt;&gt;Label13.Name" xml:space="preserve">
-    <value>Label13</value>
-  </data>
-  <data name="&gt;&gt;Label13.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label13.Parent" xml:space="preserve">
-    <value>grpOthers</value>
-  </data>
-  <data name="&gt;&gt;Label13.ZOrder" xml:space="preserve">
-    <value>14</value>
+  <data name="UcrCheck1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
   </data>
   <data name="UcrCheck1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>122, 75</value>
+    <value>121, 58</value>
   </data>
   <data name="UcrCheck1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>9, 12, 9, 12</value>
@@ -1308,13 +1170,260 @@ Month</value>
     <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;UcrCheck1.Parent" xml:space="preserve">
-    <value>grpOthers</value>
+    <value>TableLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;UcrCheck1.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="Label21.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="Label21.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label21.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label21.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 120</value>
+  </data>
+  <data name="Label21.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label21.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 20</value>
+  </data>
+  <data name="Label21.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="Label21.Text" xml:space="preserve">
+    <value>Abb. Name</value>
+  </data>
+  <data name="&gt;&gt;Label21.Name" xml:space="preserve">
+    <value>Label21</value>
+  </data>
+  <data name="&gt;&gt;Label21.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label21.Parent" xml:space="preserve">
+    <value>TableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;Label21.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="Label22.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="Label22.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label22.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label22.Location" type="System.Drawing.Point, System.Drawing">
+    <value>26, 177</value>
+  </data>
+  <data name="Label22.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label22.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 20</value>
+  </data>
+  <data name="Label22.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="Label22.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="&gt;&gt;Label22.Name" xml:space="preserve">
+    <value>Label22</value>
+  </data>
+  <data name="&gt;&gt;Label22.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label22.Parent" xml:space="preserve">
+    <value>TableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;Label22.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="Label23.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="Label23.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label23.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label23.Location" type="System.Drawing.Point, System.Drawing">
+    <value>170, 4</value>
+  </data>
+  <data name="Label23.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label23.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 40</value>
+  </data>
+  <data name="Label23.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="Label23.Text" xml:space="preserve">
+    <value>Day in
+Year</value>
+  </data>
+  <data name="&gt;&gt;Label23.Name" xml:space="preserve">
+    <value>Label23</value>
+  </data>
+  <data name="&gt;&gt;Label23.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label23.Parent" xml:space="preserve">
+    <value>TableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;Label23.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="ucrChkWeekday.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="ucrChkWeekday.Location" type="System.Drawing.Point, System.Drawing">
+    <value>318, 58</value>
+  </data>
+  <data name="ucrChkWeekday.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
+  </data>
+  <data name="ucrChkWeekday.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 31</value>
+  </data>
+  <data name="ucrChkWeekday.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeekday.Name" xml:space="preserve">
+    <value>ucrChkWeekday</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeekday.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeekday.Parent" xml:space="preserve">
+    <value>TableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeekday.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="Label24.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="Label24.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label24.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label24.Location" type="System.Drawing.Point, System.Drawing">
+    <value>293, 14</value>
+  </data>
+  <data name="Label24.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label24.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 20</value>
+  </data>
+  <data name="Label24.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="Label24.Text" xml:space="preserve">
+    <value>Weekday</value>
+  </data>
+  <data name="&gt;&gt;Label24.Name" xml:space="preserve">
+    <value>Label24</value>
+  </data>
+  <data name="&gt;&gt;Label24.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label24.Parent" xml:space="preserve">
+    <value>TableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;Label24.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="Label25.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="Label25.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label25.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label25.Location" type="System.Drawing.Point, System.Drawing">
+    <value>233, 14</value>
+  </data>
+  <data name="Label25.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label25.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="Label25.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="Label25.Text" xml:space="preserve">
+    <value>Week</value>
+  </data>
+  <data name="&gt;&gt;Label25.Name" xml:space="preserve">
+    <value>Label25</value>
+  </data>
+  <data name="&gt;&gt;Label25.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label25.Parent" xml:space="preserve">
+    <value>TableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;Label25.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="Label26.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="Label26.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label26.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label26.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 63</value>
+  </data>
+  <data name="Label26.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="Label26.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 20</value>
+  </data>
+  <data name="Label26.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="Label26.Text" xml:space="preserve">
+    <value>Numeric</value>
+  </data>
+  <data name="&gt;&gt;Label26.Name" xml:space="preserve">
+    <value>Label26</value>
+  </data>
+  <data name="&gt;&gt;Label26.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label26.Parent" xml:space="preserve">
+    <value>TableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;Label26.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
+  <data name="ucrChkLeapYear.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
   <data name="ucrChkLeapYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>400, 75</value>
+    <value>405, 58</value>
   </data>
   <data name="ucrChkLeapYear.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>9, 12, 9, 12</value>
@@ -1332,13 +1441,43 @@ Month</value>
     <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ucrChkLeapYear.Parent" xml:space="preserve">
-    <value>grpOthers</value>
+    <value>TableLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;ucrChkLeapYear.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
+  <data name="TableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 13</value>
+  </data>
+  <data name="TableLayoutPanel2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="TableLayoutPanel2.RowCount" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="TableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>469, 219</value>
+  </data>
+  <data name="TableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;TableLayoutPanel2.Name" xml:space="preserve">
+    <value>TableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;TableLayoutPanel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TableLayoutPanel2.Parent" xml:space="preserve">
+    <value>grpOthers</value>
+  </data>
+  <data name="&gt;&gt;TableLayoutPanel2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="TableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="ucrChkYear" Row="3" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkQuarter" Row="2" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkDayInYear" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="Label18" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkFullWeekday" Row="3" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="Label20" Row="0" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkAbbrWeekday" Row="2" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkWeek" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="UcrCheck1" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="Label21" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="Label22" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="Label23" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkWeekday" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="Label24" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="Label25" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="Label26" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkLeapYear" Row="1" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
   <data name="grpOthers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 500</value>
+    <value>15, 580</value>
   </data>
   <data name="grpOthers.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -1347,7 +1486,7 @@ Month</value>
     <value>4, 5, 4, 5</value>
   </data>
   <data name="grpOthers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>522, 187</value>
+    <value>530, 233</value>
   </data>
   <data name="grpOthers.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -1371,10 +1510,10 @@ Month</value>
     <value>9, 20</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>624, 778</value>
+    <value>638, 915</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 692</value>
+    <value>15, 823</value>
   </data>
   <data name="ucrBase.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -1420,6 +1559,9 @@ Month</value>
   </data>
   <data name="&gt;&gt;ucrSelectorUseDate.ZOrder" xml:space="preserve">
     <value>5</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
