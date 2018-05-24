@@ -506,7 +506,7 @@ Public Class dlgEndOfRainsSeason
         ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsRollingSumFunction, New RParameter("x", 0), iAdditionalPairNo:=4)
         ucrReceiverEvaporation.AddAdditionalCodeParameterPair(clsPMaxOperatorMin, New RParameter("evaporation", bNewIncludeArgumentName:=False, iNewPosition:=1), iAdditionalPairNo:=1)
         ucrNudWBLessThan.AddAdditionalCodeParameterPair(clsWBWaterFilterMinOperator, ucrNudWBLessThan.GetParameter(), iAdditionalPairNo:=1)
-        ucrInputEvaporation.AddAdditionalCodeParameterPair(clsPMaxOperatorMin, New RParameter("evaporation", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrInputEvaporation.AddAdditionalCodeParameterPair(clsPMaxOperatorMax, New RParameter("evaporation", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrNudCapacity.AddAdditionalCodeParameterPair(clsWBReplaceNAMaxFunction, ucrNudCapacity.GetParameter(), iAdditionalPairNo:=1)
         ucrNudCapacity.AddAdditionalCodeParameterPair(clsPMinFunctionMin, ucrNudCapacity.GetParameter(), iAdditionalPairNo:=2)
         'ucrPnlEvaporation.AddAdditionalCodeParameterPair(clsPMaxOperatorMin, iAdditionalPairNo:=1)
@@ -531,7 +531,7 @@ Public Class dlgEndOfRainsSeason
 
         ucrNudWBLessThan.SetRCode(clsWBWaterFilterMaxOperator, bReset)
 
-        ucrInputEvaporation.SetRCode(clsPMaxOperatorMax, bReset)
+        ucrInputEvaporation.SetRCode(clsPMaxOperatorMin, bReset)
         'ucrPnlEvaporation.SetRCode(clsPMaxFunctionMax, bReset)
         ucrNudCapacity.SetRCode(clsPMinFunctionMax, bReset)
 
@@ -632,12 +632,12 @@ Public Class dlgEndOfRainsSeason
     Private Sub Evaporation()
         If rdoValueEvaporation.Checked AndAlso Not ucrInputEvaporation.IsEmpty Then
             ucrInputEvaporation.SetParameter(New RParameter("evaporation", 1, False))
-            clsPMaxOperatorMax.AddParameter("evaporation", ucrInputEvaporation.GetText(), bIncludeArgumentName:=False)
-            clsPMaxOperatorMin.AddParameter("evaporation", ucrInputEvaporation.GetText(), bIncludeArgumentName:=False)
+            clsPMaxOperatorMin.AddParameter("evaporation", ucrInputEvaporation.GetText(), iPosition:=1, bIncludeArgumentName:=False)
+            clsPMaxOperatorMax.AddParameter("evaporation", ucrInputEvaporation.GetText(), iPosition:=1, bIncludeArgumentName:=False)
         ElseIf rdoVariableEvaporation.Checked AndAlso Not ucrReceiverEvaporation.IsEmpty Then
             ucrReceiverEvaporation.SetParameter(New RParameter("evaporation", 1, False))
-            clsPMaxOperatorMax.AddParameter("evaporation", ucrReceiverEvaporation.GetVariableNames(), bIncludeArgumentName:=False)
-            clsPMaxOperatorMin.AddParameter("evaporation", ucrReceiverEvaporation.GetVariableNames(), bIncludeArgumentName:=False)
+            'clsPMaxOperatorMin.AddParameter("evaporation", ucrReceiverEvaporation.GetParameterName(), iPosition:=1)
+            'clsPMaxOperatorMax.AddParameter("evaporation", ucrReceiverEvaporation.GetParameterName(), iPosition:=1)
         End If
     End Sub
 End Class
