@@ -107,7 +107,7 @@ Public Class clsQCSameRCode
     Public Sub SetDefaults(strElementName As String)
         Dim strLengths As String = "lengths"
         Dim strlargest_Same As String = "largest_same" & strElementName
-        Dim strSame_test As String = "Same" & strElementName
+        Dim strSame_test As String = "same" & strElementName
 
         clsRepFunc = New RFunction
         clsRleFunc = New RFunction
@@ -225,10 +225,10 @@ Public Class clsQCAcceptableRange
         clsAcceptableRangeFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsAcceptableRangeFunc.AddParameter("function_exp", clsROperatorParameter:=clsRangeOrOperator, iPosition:=1)
         clsAcceptableRangeFunc.AddParameter("result_name", Chr(34) & strRangeName & Chr(34), iPosition:=4)
-        clsAcceptableRangeFunc.SetAssignTo("acceptable_range" & strElementName)
+        clsAcceptableRangeFunc.SetAssignTo("acceptable_range_test_" & strElementName)
     End Sub
 
-    Public Sub SetElementParameters(ucrNewControl As ucrCore, iAdditionalPairNo As Integer, iAdditionalPairNo1 As Integer) ', iAdditionalPairNo2 As Integer)
+    Public Sub SetElementParameters(ucrNewControl As ucrCore, iAdditionalPairNo As Integer)
         ucrNewControl.AddAdditionalCodeParameterPair(clsGreaterEqualToOperator, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=iAdditionalPairNo)
     End Sub
 End Class
