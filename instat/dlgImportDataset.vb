@@ -742,10 +742,6 @@ Public Class dlgImportDataset
         frmMain.SetCurrentDataFrame(iDataFrameCount)
     End Sub
 
-    Private Sub ucrInputSheets_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSelectSheetExcel.ControlValueChanged
-
-    End Sub
-
     Private Sub CSVControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkStringsAsFactorsCSV.ControlValueChanged, ucrInputMissingValueStringCSV.ControlValueChanged, ucrInputEncodingCSV.ControlValueChanged, ucrInputSeparatorCSV.ControlValueChanged, ucrInputHeadersCSV.ControlValueChanged, ucrInputDecimalCSV.ControlValueChanged, ucrNudRowsToSkipCSV.ControlValueChanged
         RefreshFrameView()
     End Sub
