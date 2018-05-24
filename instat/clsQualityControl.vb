@@ -15,11 +15,10 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class clsQCJumpRCode
-    Private clsLagFunction, clsAbsLagFunction, clsLeadFunction, clsPmaxFunction, clsAbsFunc, clsAbsLeadFunction As New RFunction
-    Public clsJumpCalcFunction, clsJumpTestFunction As New RFunction
+    Private clsLagFunction, clsAbsLagFunction, clsLeadFunction, clsPmaxFunction, clsAbsFunc, clsAbsLeadFunction, clsJumpListFunc As New RFunction
     Private clsLagMinusOperator, clsLeadMinusOperator As New ROperator
+    Public clsJumpCalcFunction, clsJumpTestFunction As New RFunction
     Public clsGreaterJumpOperator As New ROperator
-    Private clsJumpListFunc As New RFunction
     Public strTestName As String
 
     Public Sub SetDefaults(strElementName As String)
@@ -99,15 +98,15 @@ End Class
 
 Public Class clsQCSameRCode
     Private clsRleFunc, clsAsNumFunc, clsSameListFunc As New RFunction
-    Public clsSameCalcFunction, clsSameTestFunction As New RFunction
     Private clsDollarOperator As New ROperator
+    Public clsSameCalcFunction, clsSameTestFunction As New RFunction
     Public clsSameGreaterOperator As New ROperator
     Public clsRepFunc As New RFunction
     Public strTestName As String
 
     Public Sub SetDefaults(strElementName As String)
         Dim strLengths As String = "lengths"
-        Dim strlargest_Same As String = "Largest_Same" & strElementName
+        Dim strlargest_Same As String = "largest_same" & strElementName
         Dim strSame_test As String = "Same" & strElementName
 
         clsRepFunc = New RFunction
@@ -124,6 +123,7 @@ Public Class clsQCSameRCode
         clsRleFunc.SetRCommand("rle")
         clsRleFunc.AddParameter("left", bIncludeArgumentName:=False, clsRFunctionParameter:=clsAsNumFunc, iPosition:=0)
         clsDollarOperator.SetOperation("$")
+        clsDollarOperator.bSpaceAroundOperation = False
         clsDollarOperator.AddParameter("left", bIncludeArgumentName:=False, clsRFunctionParameter:=clsRleFunc, iPosition:=0)
         clsDollarOperator.AddParameter("right", strParameterValue:=strLengths, bIncludeArgumentName:=False, iPosition:=1)
 
@@ -131,7 +131,7 @@ Public Class clsQCSameRCode
         clsSameCalcFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsSameCalcFunction.AddParameter("function_exp", clsRFunctionParameter:=clsRepFunc, iPosition:=1)
         clsSameCalcFunction.AddParameter("result_name", Chr(34) & strlargest_Same & Chr(34), iPosition:=4)
-        clsSameCalcFunction.SetAssignTo("Largest_Same" & strElementName)
+        clsSameCalcFunction.SetAssignTo("largest_same" & strElementName)
         clsRepFunc.bToScriptAsRString = True
 
         strTestName = strSame_test
@@ -143,7 +143,7 @@ Public Class clsQCSameRCode
         clsSameTestFunction.AddParameter("function_exp", clsROperatorParameter:=clsSameGreaterOperator, iPosition:=1)
         clsSameTestFunction.AddParameter("result_name", Chr(34) & strTestName & Chr(34), iPosition:=4)
         clsSameTestFunction.AddParameter("sub_calculations", clsRFunctionParameter:=clsSameListFunc, iPosition:=2)
-        clsSameTestFunction.SetAssignTo("Largest_test_same" & strElementName)
+        clsSameTestFunction.SetAssignTo("largest_test_same" & strElementName)
 
         clsSameGreaterOperator.SetOperation(">=")
         clsSameGreaterOperator.bToScriptAsRString = True
@@ -202,9 +202,10 @@ Public Class clsQCAcceptableRange
     Public clsGreaterEqualToOperator, clsLessEqualToOperator, clsRangeOrOperator As New ROperator
     Public clsAcceptableRangeFunc As New RFunction
     Public strTestName As String
+
     Public Sub SetDefaults(strElementName As String)
-        Dim strAcceptableRange As String = "Acceptable_Range" & strElementName
-        Dim strRangeName As String = "Range" & strElementName
+        Dim strAcceptableRange As String = "acceptable_range" & strElementName
+        Dim strRangeName As String = "range" & strElementName
 
         clsGreaterEqualToOperator = New ROperator
         clsLessEqualToOperator = New ROperator
@@ -224,7 +225,7 @@ Public Class clsQCAcceptableRange
         clsAcceptableRangeFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsAcceptableRangeFunc.AddParameter("function_exp", clsROperatorParameter:=clsRangeOrOperator, iPosition:=1)
         clsAcceptableRangeFunc.AddParameter("result_name", Chr(34) & strRangeName & Chr(34), iPosition:=4)
-        clsAcceptableRangeFunc.SetAssignTo("Acceptable_Range" & strElementName)
+        clsAcceptableRangeFunc.SetAssignTo("acceptable_range" & strElementName)
     End Sub
 
     Public Sub SetElementParameters(ucrNewControl As ucrCore, iAdditionalPairNo As Integer, iAdditionalPairNo1 As Integer) ', iAdditionalPairNo2 As Integer)
