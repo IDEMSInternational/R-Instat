@@ -44,6 +44,8 @@ Public Class dlgClimaticBoxPlot
     Private strColour As String = "Colour Axis"
     Private strNone As String = "None"
 
+    Private dctComboReceiver As New Dictionary(Of ucrInputComboBox, ucrReceiverSingle)
+
     Private Sub dlgClimaticBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -83,6 +85,7 @@ Public Class dlgClimaticBoxPlot
         ucrSelectorClimaticBoxPlot.SetParameterIsrfunction()
 
         ucrReceiverStation.SetParameterIsString()
+        ucrReceiverStation.SetParameter(New RParameter(""))
         ucrReceiverStation.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiverStation.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "station" & Chr(34)})
         ucrReceiverStation.bAutoFill = True
@@ -91,6 +94,7 @@ Public Class dlgClimaticBoxPlot
         ucrReceiverStation.strSelectorHeading = "Station Variables"
 
         ucrReceiverYear.SetParameterIsString()
+        ucrReceiverYear.SetParameter(New RParameter(""))
         ucrReceiverYear.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
         ucrReceiverYear.bAutoFill = True
@@ -104,7 +108,6 @@ Public Class dlgClimaticBoxPlot
         ucrReceiverWithinYear.strSelectorHeading = "Factors"
         ucrReceiverWithinYear.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiverWithinYear.SetIncludedDataTypes({"factor"})
-        ucrReceiverWithinYear.bAutoFill = True
         ucrReceiverWithinYear.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrReceiverWithinYear.bAddParameterIfEmpty = True
 
@@ -115,7 +118,10 @@ Public Class dlgClimaticBoxPlot
         ucrReceiverElement.strSelectorHeading = "Variables"
         ucrReceiverElement.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiverElement.SetIncludedDataTypes({"numeric"})
-        ucrReceiverElement.bAutoFill = True
+
+        dctComboReceiver.Add(ucrInputStation, ucrReceiverStation)
+        dctComboReceiver.Add(ucrInputYear, ucrReceiverYear)
+        dctComboReceiver.Add(ucrInputWithinYear, ucrReceiverWithinYear)
 
         ucrChkOmitBelow.SetParameter(New RParameter("width"))
         ucrChkOmitBelow.SetText("Omit Below")
@@ -205,8 +211,11 @@ Public Class dlgClimaticBoxPlot
         ucrReceiverStation.SetMeAsReceiver()
 
         ucrInputStation.SetText(strNone)
+        ucrInputStation.bUpdateRCodeFromControl = True
         ucrInputYear.SetText(strNone)
+        ucrInputYear.bUpdateRCodeFromControl = True
         ucrInputWithinYear.SetText(strXAxis)
+        ucrInputWithinYear.bUpdateRCodeFromControl = True
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -318,35 +327,19 @@ Public Class dlgClimaticBoxPlot
     End Sub
 
     Private Sub AutoFill()
-        Dim strYearCol As String
-        Dim strWithinYearCol As String
-        Dim strStationCol As String
+        Dim strMonthCol As String
         Dim strDataFrame As String
-        Dim strDateCol As String
         Dim strRainCol As String
 
         strDataFrame = ucrSelectorClimaticBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text
-        strDateCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "date_label")
-        strYearCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "year_label")
-        strWithinYearCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "within_year_label")
-        strStationCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "station_label")
+        strMonthCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "month_label")
         strRainCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "rain_label")
 
         If strRainCol <> "" Then
             ucrReceiverElement.Add(strRainCol, strDataFrame)
         End If
-        If strStationCol <> "" Then
-            ucrReceiverStation.Add(strRainCol, strDataFrame)
-        End If
-        If strDateCol <> "" Then
-            ucrReceiverDate.Add(strRainCol, strDataFrame)
-        End If
-
-        If strYearCol <> "" Then
-            ucrReceiverYear.Add(strYearCol, strDataFrame)
-        End If
-        If strWithinYearCol <> "" Then
-            ucrReceiverWithinYear.Add(strWithinYearCol, strDataFrame)
+        If strMonthCol <> "" Then
+            ucrReceiverWithinYear.Add(strMonthCol, strDataFrame)
         End If
     End Sub
 
@@ -392,42 +385,36 @@ Public Class dlgClimaticBoxPlot
     End Sub
 
     Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrInputComboBox) Handles ucrInputStation.ControlValueChanged, ucrInputYear.ControlValueChanged, ucrInputWithinYear.ControlValueChanged
-        Dim ucrTempReciever As ucrReceiver
-        Dim strTemp As String
+        Dim ucrTempReciever As ucrReceiver = Nothing
+        Dim strTemp As String = ""
 
-        If ucrChangedControl.IsLinkedTo(ucrReceiverStation) Then
-            strTemp = "station"
-            ucrTempReciever = ucrReceiverStation
-        ElseIf ucrChangedControl.IsLinkedTo(ucrReceiverYear) Then
-            strTemp = "year"
-            ucrTempReciever = ucrReceiverYear
-        Else ucrChangedControl.IsLinkedTo(ucrReceiverWithinYear)
-            strTemp = "withinyear"
-            ucrTempReciever = ucrReceiverWithinYear
+        clsRaesFunction.RemoveParameterByName("x")
+        clsRaesFunction.RemoveParameterByName("color")
+        clsRaesFunction.RemoveParameterByName("fill")
+
+        clsFacetColOp.RemoveParameterByName("col")
+        clsFacetRowOp.RemoveParameterByName("row")
+
+        For Each ucrInputTemp As ucrInputComboBox In dctComboReceiver.Keys
+            strTemp = ucrInputTemp.GetText()
+            dctComboReceiver(ucrInputTemp).SetRCode(Nothing)
+            If strTemp = strXAxis Then
+                dctComboReceiver(ucrInputTemp).ChangeParameterName("x")
+                dctComboReceiver(ucrInputTemp).SetRCode(clsRaesFunction)
+            ElseIf strTemp = strColour
+                dctComboReceiver(ucrInputTemp).ChangeParameterName("color")
+                dctComboReceiver(ucrInputTemp).SetRCode(clsRaesFunction)
+            ElseIf strTemp = strFacetCol
+                dctComboReceiver(ucrInputTemp).ChangeParameterName("col")
+                dctComboReceiver(ucrInputTemp).SetRCode(clsFacetColOp)
+            ElseIf strTemp = strFacetRow
+                dctComboReceiver(ucrInputTemp).ChangeParameterName("row")
+                dctComboReceiver(ucrInputTemp).SetRCode(clsFacetRowOp)
+            End If
+        Next
+        If Not clsRaesFunction.ContainsParameter("x") Then
+            clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
         End If
-
-        If ucrChangedControl.GetText = strXAxis Then
-            ucrTempReciever.SetParameter(New RParameter("x"))
-            ucrTempReciever.SetRCode(clsRaesFunction, bReset)
-        ElseIf ucrChangedControl.GetText = strColour Then
-            ucrTempReciever.SetParameter(New RParameter("fill"))
-            ucrTempReciever.SetRCode(clsRaesFunction, bReset)
-        ElseIf ucrChangedControl.GetText = strFacetRow Then
-            ucrTempReciever.SetParameter(New RParameter(strTemp))
-            ucrTempReciever.SetRCode(clsFacetRowOp, bReset)
-        ElseIf ucrChangedControl.GetText = strFacetCol Then
-            ucrTempReciever.SetParameter(New RParameter(strTemp))
-            ucrTempReciever.SetRCode(clsFacetColOp, bReset)
-        Else
-            ucrTempReciever.ClearCodeAndParameters()
-        End If
-
-        ucrReceiverStation.SetRCode(clsRaesFunction, bReset)
-        ucrReceiverYear.SetRCode(clsRaesFunction, bReset)
-        ucrReceiverWithinYear.SetRCode(clsRaesFunction, bReset)
-
-        ChangeParameter()
-        ChangeFill()
     End Sub
 
     Private Sub ucrSelectorClimaticBoxPlot_DataFrameChanged() Handles ucrSelectorClimaticBoxPlot.DataFrameChanged
@@ -437,5 +424,4 @@ Public Class dlgClimaticBoxPlot
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSavePlot.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged
         TestOKEnabled()
     End Sub
-
 End Class

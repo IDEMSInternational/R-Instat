@@ -238,6 +238,7 @@ Partial Class dlgClimaticBoxPlot
         '
         'ucrSelectorClimaticBoxPlot
         '
+        'Me.ucrSelectorClimaticBoxPlot.bDropUnusedFilterLevels = False
         Me.ucrSelectorClimaticBoxPlot.bShowHiddenColumns = False
         Me.ucrSelectorClimaticBoxPlot.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorClimaticBoxPlot, "ucrSelectorClimaticBoxPlot")
