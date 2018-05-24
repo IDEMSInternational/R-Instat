@@ -21,6 +21,7 @@ Public Class dlgColumnStats
     Private clsSummariesList As New RFunction
     Private bResetSubdialog As Boolean = False
     Private clsDefaultFunction As New RFunction
+    Private clsDataFrameFunction As New RFunction
     Public strDefaultDataFrame As String = ""
     Public strDefaultVariables() As String
     Public strDefaultFactors() As String
@@ -102,16 +103,20 @@ Public Class dlgColumnStats
         clsSummariesList.AddParameter("summary_count", Chr(34) & "summary_count" & Chr(34), bIncludeArgumentName:=False)
         clsSummariesList.AddParameter("summary_sum", Chr(34) & "summary_sum" & Chr(34), bIncludeArgumentName:=False)
 
+        clsDataFrameFunction.SetRCommand("data.frame")
+
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
         clsDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList)
         'Prevents an error if user chooses non count summaries with no columns to summarise
         clsDefaultFunction.AddParameter("silent", "TRUE")
+        clsDefaultFunction.AddParameter("x", clsRFunctionParameter:=clsDataFrameFunction)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
         bResetSubdialog = True
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrReceiverSelectedVariables.AddAdditionalCodeParameterPair(clsDataFrameFunction, New RParameter("a", bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
     End Sub
 
     Private Sub SetDefaultColumns()
