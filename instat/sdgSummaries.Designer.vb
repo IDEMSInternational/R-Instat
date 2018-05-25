@@ -60,6 +60,9 @@ Partial Class sdgSummaries
         Me.grpNumeric = New System.Windows.Forms.GroupBox()
         Me.tbSummaries = New System.Windows.Forms.TabControl()
         Me.tbTwoVariables = New System.Windows.Forms.TabPage()
+        Me.grpMissing = New System.Windows.Forms.GroupBox()
+        Me.rdoPairwise = New System.Windows.Forms.RadioButton()
+        Me.rdoCompleteRows = New System.Windows.Forms.RadioButton()
         Me.grpRelationships = New System.Windows.Forms.GroupBox()
         Me.lblSecondVariable = New System.Windows.Forms.Label()
         Me.ucrChkn_distinct = New instat.ucrCheck()
@@ -97,6 +100,7 @@ Partial Class sdgSummaries
         Me.ucrChkMc = New instat.ucrCheck()
         Me.ucrChkSkewness = New instat.ucrCheck()
         Me.ucrChkKurtosis = New instat.ucrCheck()
+        Me.ucrPnlMissing = New instat.UcrPanel()
         Me.ucrChkCovariance = New instat.ucrCheck()
         Me.ucrChkCorrelations = New instat.ucrCheck()
         Me.ucrSelectorSecondVariable = New instat.ucrSelectorByDataFrameAddRemove()
@@ -119,6 +123,7 @@ Partial Class sdgSummaries
         Me.grpNumeric.SuspendLayout()
         Me.tbSummaries.SuspendLayout()
         Me.tbTwoVariables.SuspendLayout()
+        Me.grpMissing.SuspendLayout()
         Me.grpRelationships.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -138,12 +143,12 @@ Partial Class sdgSummaries
         '
         resources.ApplyResources(Me.rdoPercentage, "rdoPercentage")
         Me.rdoPercentage.Name = "rdoPercentage"
-        Me.rdoPercentage.TabStop = True
         Me.rdoPercentage.UseVisualStyleBackColor = True
         '
         'rdoNumber
         '
         resources.ApplyResources(Me.rdoNumber, "rdoNumber")
+        Me.rdoNumber.Checked = True
         Me.rdoNumber.Name = "rdoNumber"
         Me.rdoNumber.TabStop = True
         Me.rdoNumber.UseVisualStyleBackColor = True
@@ -303,6 +308,7 @@ Partial Class sdgSummaries
         '
         'tbTwoVariables
         '
+        Me.tbTwoVariables.Controls.Add(Me.grpMissing)
         Me.tbTwoVariables.Controls.Add(Me.grpRelationships)
         Me.tbTwoVariables.Controls.Add(Me.lblSecondVariable)
         Me.tbTwoVariables.Controls.Add(Me.ucrSelectorSecondVariable)
@@ -310,6 +316,29 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.tbTwoVariables, "tbTwoVariables")
         Me.tbTwoVariables.Name = "tbTwoVariables"
         Me.tbTwoVariables.UseVisualStyleBackColor = True
+        '
+        'grpMissing
+        '
+        Me.grpMissing.Controls.Add(Me.rdoPairwise)
+        Me.grpMissing.Controls.Add(Me.rdoCompleteRows)
+        Me.grpMissing.Controls.Add(Me.ucrPnlMissing)
+        resources.ApplyResources(Me.grpMissing, "grpMissing")
+        Me.grpMissing.Name = "grpMissing"
+        Me.grpMissing.TabStop = False
+        '
+        'rdoPairwise
+        '
+        resources.ApplyResources(Me.rdoPairwise, "rdoPairwise")
+        Me.rdoPairwise.Name = "rdoPairwise"
+        Me.rdoPairwise.TabStop = True
+        Me.rdoPairwise.UseVisualStyleBackColor = True
+        '
+        'rdoCompleteRows
+        '
+        resources.ApplyResources(Me.rdoCompleteRows, "rdoCompleteRows")
+        Me.rdoCompleteRows.Name = "rdoCompleteRows"
+        Me.rdoCompleteRows.TabStop = True
+        Me.rdoCompleteRows.UseVisualStyleBackColor = True
         '
         'grpRelationships
         '
@@ -545,6 +574,11 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.ucrChkKurtosis, "ucrChkKurtosis")
         Me.ucrChkKurtosis.Name = "ucrChkKurtosis"
         '
+        'ucrPnlMissing
+        '
+        resources.ApplyResources(Me.ucrPnlMissing, "ucrPnlMissing")
+        Me.ucrPnlMissing.Name = "ucrPnlMissing"
+        '
         'ucrChkCovariance
         '
         Me.ucrChkCovariance.Checked = False
@@ -559,6 +593,7 @@ Partial Class sdgSummaries
         '
         'ucrSelectorSecondVariable
         '
+        Me.ucrSelectorSecondVariable.bDropUnusedFilterLevels = False
         Me.ucrSelectorSecondVariable.bShowHiddenColumns = False
         Me.ucrSelectorSecondVariable.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorSecondVariable, "ucrSelectorSecondVariable")
@@ -628,6 +663,8 @@ Partial Class sdgSummaries
         Me.tbSummaries.ResumeLayout(False)
         Me.tbTwoVariables.ResumeLayout(False)
         Me.tbTwoVariables.PerformLayout()
+        Me.grpMissing.ResumeLayout(False)
+        Me.grpMissing.PerformLayout()
         Me.grpRelationships.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -698,4 +735,8 @@ Partial Class sdgSummaries
     Friend WithEvents ucrChkLast As ucrCheck
     Friend WithEvents ucrChknth As ucrCheck
     Friend WithEvents ucrChkn_distinct As ucrCheck
+    Friend WithEvents grpMissing As GroupBox
+    Friend WithEvents rdoCompleteRows As RadioButton
+    Friend WithEvents ucrPnlMissing As UcrPanel
+    Friend WithEvents rdoPairwise As RadioButton
 End Class
