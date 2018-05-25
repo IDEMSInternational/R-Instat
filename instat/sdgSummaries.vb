@@ -101,6 +101,10 @@ Public Class sdgSummaries
         ucrChkCovariance.SetParameter(New RParameter("summary_cov", 22), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_cov" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkCovariance.SetText("Covariance")
 
+        ucrPnlMissing.SetParameter(New RParameter("use", 5))
+        ucrPnlMissing.AddRadioButton(rdoCompleteRows, Chr(34) & "complete.obs" & Chr(34))
+        ucrPnlMissing.AddRadioButton(rdoPairwise, Chr(34) & "pairwise.complete.obs" & Chr(34))
+
         ucrReceiverSecondVariable.Selector = ucrSelectorSecondVariable
         ucrReceiverSecondVariable.SetMeAsReceiver()
         ucrReceiverSecondVariable.SetIncludedDataTypes({"numeric"})
@@ -245,6 +249,7 @@ Public Class sdgSummaries
         ucrChkLast.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChknth.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkn_distinct.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrPnlMissing.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
 
         If bReset Then
             tbSummaries.SelectedIndex = 0
@@ -285,4 +290,13 @@ Public Class sdgSummaries
         '        clsDefaultFunction.RemoveParameterByName("order_by")
         '    End If
     End Sub
+
+    Private Sub ucrPnlMissing_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMissing.ControlValueChanged
+        If rdoPairwise.Checked Then
+            clsDefaultFunction.AddParameter("use", Chr(34) & "pairwise.complete.obs" & Chr(34))
+        ElseIf rdoCompleteRows.Checked Then
+            clsDefaultFunction.AddParameter("use", Chr(34) & "complete.obs" & Chr(34))
+        End If
+    End Sub
+
 End Class
