@@ -377,4 +377,8 @@ Public Class ucrSave
             Return ucrInputTextSave.bUserTyped
         End If
     End Function
+
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgSaveColumnPosition.ShowDialog()
+    End Sub
 End Class
