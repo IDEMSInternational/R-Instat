@@ -101,10 +101,6 @@ Public Class sdgSummaries
         ucrChkCovariance.SetParameter(New RParameter("summary_cov", 22), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_cov" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkCovariance.SetText("Covariance")
 
-        ucrPnlMissing.SetParameter(New RParameter("use", 5))
-        ucrPnlMissing.AddRadioButton(rdoCompleteRows, Chr(34) & "complete.obs" & Chr(34))
-        ucrPnlMissing.AddRadioButton(rdoPairwise, Chr(34) & "pairwise.complete.obs" & Chr(34))
-
         ucrReceiverSecondVariable.Selector = ucrSelectorSecondVariable
         ucrReceiverSecondVariable.SetMeAsReceiver()
         ucrReceiverSecondVariable.SetIncludedDataTypes({"numeric"})
@@ -141,10 +137,10 @@ Public Class sdgSummaries
         ucrInputN.SetLinkedDisplayControl(lblInputN)
         ucrNudFraction.SetLinkedDisplayControl(lblFractionTrimmed)
 
-        ucrChkTrimmedMean.SetParameter(New RParameter("summary_mean", 27), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_mean" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkTrimmedMean.SetParameter(New RParameter("summary_trimmed_mean", 27), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_trimmed_mean" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkTrimmedMean.SetText("Trimmed Mean")
 
-        ucrNudFraction.SetParameter(New RParameter("trim", 5))
+        ucrNudFraction.SetParameter(New RParameter("trimmed", 5))
         ucrNudFraction.Maximum = 0.5
         ucrNudFraction.DecimalPlaces = 2
         ucrNudFraction.Increment = 0.01
@@ -180,11 +176,14 @@ Public Class sdgSummaries
         ucrChkCount.SetParameter(New RParameter("count_calc", 29), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "count_calc" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkCount.SetText("Count")
 
-        'ucrPnlMissingOptions.AddRadioButton(rdoNumber)
-        'ucrPnlMissingOptions.AddRadioButton(rdoPercentage)
+        ucrChkIncludeMissingOpt.SetText("Inlcude Missing Options")
+        ucrChkIncludeMissingOpt.AddToLinkedControls(ucrPnlMissingOptions, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        'ucrPnlMissingOptions.AddToLinkedControls({ucrNudNumber}, {rdoNumber}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrPnlMissingOptions.AddToLinkedControls({ucrNudPercentage}, {rdoPercentage}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMissingOptions.AddRadioButton(rdoNumber)
+        ucrPnlMissingOptions.AddRadioButton(rdoPercentage)
+
+        ucrPnlMissingOptions.AddToLinkedControls({ucrNudNumber}, {rdoNumber}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMissingOptions.AddToLinkedControls({ucrNudPercentage}, {rdoPercentage}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudPercentage.SetLinkedDisplayControl(lblPercentage)
         ucrNudNumber.SetLinkedDisplayControl(lblNumber)
 
@@ -249,7 +248,6 @@ Public Class sdgSummaries
         ucrChkLast.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChknth.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkn_distinct.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrPnlMissing.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
 
         If bReset Then
             tbSummaries.SelectedIndex = 0
@@ -291,12 +289,5 @@ Public Class sdgSummaries
         '    End If
     End Sub
 
-    Private Sub ucrPnlMissing_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMissing.ControlValueChanged
-        If rdoPairwise.Checked Then
-            clsDefaultFunction.AddParameter("use", Chr(34) & "pairwise.complete.obs" & Chr(34))
-        ElseIf rdoCompleteRows.Checked Then
-            clsDefaultFunction.AddParameter("use", Chr(34) & "complete.obs" & Chr(34))
-        End If
-    End Sub
 
 End Class

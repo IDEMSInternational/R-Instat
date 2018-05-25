@@ -117,83 +117,65 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="rdoPercentage.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="rdoPercentage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="rdoPercentage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 46</value>
+  <data name="ucrNudPercentage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>318, 85</value>
   </data>
-  <data name="rdoPercentage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 17</value>
+  <data name="ucrNudPercentage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
   </data>
-  <data name="rdoPercentage.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrNudPercentage.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
   </data>
-  <data name="rdoPercentage.Text" xml:space="preserve">
-    <value>Percentage</value>
+  <data name="&gt;&gt;ucrNudPercentage.Name" xml:space="preserve">
+    <value>ucrNudPercentage</value>
   </data>
-  <data name="&gt;&gt;rdoPercentage.Name" xml:space="preserve">
-    <value>rdoPercentage</value>
+  <data name="&gt;&gt;ucrNudPercentage.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;rdoPercentage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoPercentage.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrNudPercentage.Parent" xml:space="preserve">
     <value>tbMissingOptions</value>
   </data>
-  <data name="&gt;&gt;rdoPercentage.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrNudPercentage.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="rdoNumber.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="ucrNudNumber.Location" type="System.Drawing.Point, System.Drawing">
+    <value>318, 85</value>
   </data>
-  <data name="rdoNumber.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="ucrNudNumber.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
   </data>
-  <data name="rdoNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 23</value>
+  <data name="ucrNudNumber.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
   </data>
-  <data name="rdoNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 17</value>
+  <data name="&gt;&gt;ucrNudNumber.Name" xml:space="preserve">
+    <value>ucrNudNumber</value>
   </data>
-  <data name="rdoNumber.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;ucrNudNumber.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="rdoNumber.Text" xml:space="preserve">
-    <value>Number</value>
-  </data>
-  <data name="&gt;&gt;rdoNumber.Name" xml:space="preserve">
-    <value>rdoNumber</value>
-  </data>
-  <data name="&gt;&gt;rdoNumber.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoNumber.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrNudNumber.Parent" xml:space="preserve">
     <value>tbMissingOptions</value>
   </data>
-  <data name="&gt;&gt;rdoNumber.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrNudNumber.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="lblPercentage.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblPercentage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lblPercentage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 70</value>
+    <value>6, 87</value>
   </data>
   <data name="lblPercentage.Size" type="System.Drawing.Size, System.Drawing">
     <value>308, 13</value>
   </data>
   <data name="lblPercentage.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>11</value>
   </data>
   <data name="lblPercentage.Text" xml:space="preserve">
     <value>Summary set to missing if more than this percentage are missing:</value>
@@ -217,13 +199,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 70</value>
+    <value>6, 87</value>
   </data>
   <data name="lblNumber.Size" type="System.Drawing.Size, System.Drawing">
     <value>280, 13</value>
   </data>
   <data name="lblNumber.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>10</value>
   </data>
   <data name="lblNumber.Text" xml:space="preserve">
     <value>Summary set to missing if more than this value are missing:</value>
@@ -240,47 +222,107 @@
   <data name="&gt;&gt;lblNumber.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="ucrNudPercentage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>319, 66</value>
+  <data name="rdoPercentage.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="ucrNudPercentage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+  <data name="rdoPercentage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="ucrNudPercentage.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="rdoPercentage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 55</value>
   </data>
-  <data name="&gt;&gt;ucrNudPercentage.Name" xml:space="preserve">
-    <value>ucrNudPercentage</value>
+  <data name="rdoPercentage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 17</value>
   </data>
-  <data name="&gt;&gt;ucrNudPercentage.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="rdoPercentage.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
   </data>
-  <data name="&gt;&gt;ucrNudPercentage.Parent" xml:space="preserve">
+  <data name="rdoPercentage.Text" xml:space="preserve">
+    <value>Percentage</value>
+  </data>
+  <data name="&gt;&gt;rdoPercentage.Name" xml:space="preserve">
+    <value>rdoPercentage</value>
+  </data>
+  <data name="&gt;&gt;rdoPercentage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoPercentage.Parent" xml:space="preserve">
     <value>tbMissingOptions</value>
   </data>
-  <data name="&gt;&gt;ucrNudPercentage.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;rdoPercentage.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="ucrNudNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>318, 66</value>
+  <data name="rdoNumber.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="ucrNudNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+  <data name="rdoNumber.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="ucrNudNumber.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="rdoNumber.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 32</value>
   </data>
-  <data name="&gt;&gt;ucrNudNumber.Name" xml:space="preserve">
-    <value>ucrNudNumber</value>
+  <data name="rdoNumber.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 17</value>
   </data>
-  <data name="&gt;&gt;ucrNudNumber.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="rdoNumber.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
   </data>
-  <data name="&gt;&gt;ucrNudNumber.Parent" xml:space="preserve">
+  <data name="rdoNumber.Text" xml:space="preserve">
+    <value>Number</value>
+  </data>
+  <data name="&gt;&gt;rdoNumber.Name" xml:space="preserve">
+    <value>rdoNumber</value>
+  </data>
+  <data name="&gt;&gt;rdoNumber.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoNumber.Parent" xml:space="preserve">
     <value>tbMissingOptions</value>
   </data>
-  <data name="&gt;&gt;ucrNudNumber.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;rdoNumber.ZOrder" xml:space="preserve">
     <value>5</value>
+  </data>
+  <data name="ucrPnlMissingOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 25</value>
+  </data>
+  <data name="ucrPnlMissingOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>361, 89</value>
+  </data>
+  <data name="ucrPnlMissingOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlMissingOptions.Name" xml:space="preserve">
+    <value>ucrPnlMissingOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlMissingOptions.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlMissingOptions.Parent" xml:space="preserve">
+    <value>tbMissingOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlMissingOptions.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="ucrChkIncludeMissingOpt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 6</value>
+  </data>
+  <data name="ucrChkIncludeMissingOpt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="ucrChkIncludeMissingOpt.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIncludeMissingOpt.Name" xml:space="preserve">
+    <value>ucrChkIncludeMissingOpt</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIncludeMissingOpt.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIncludeMissingOpt.Parent" xml:space="preserve">
+    <value>tbMissingOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIncludeMissingOpt.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="tbMissingOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -1401,111 +1443,6 @@
   <data name="&gt;&gt;tbsum.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="rdoPairwise.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="rdoPairwise.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdoPairwise.Location" type="System.Drawing.Point, System.Drawing">
-    <value>231, 19</value>
-  </data>
-  <data name="rdoPairwise.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 17</value>
-  </data>
-  <data name="rdoPairwise.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="rdoPairwise.Text" xml:space="preserve">
-    <value>Pairwise</value>
-  </data>
-  <data name="&gt;&gt;rdoPairwise.Name" xml:space="preserve">
-    <value>rdoPairwise</value>
-  </data>
-  <data name="&gt;&gt;rdoPairwise.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoPairwise.Parent" xml:space="preserve">
-    <value>grpMissing</value>
-  </data>
-  <data name="&gt;&gt;rdoPairwise.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="rdoCompleteRows.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="rdoCompleteRows.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdoCompleteRows.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 19</value>
-  </data>
-  <data name="rdoCompleteRows.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 17</value>
-  </data>
-  <data name="rdoCompleteRows.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="rdoCompleteRows.Text" xml:space="preserve">
-    <value>Complete rows only</value>
-  </data>
-  <data name="&gt;&gt;rdoCompleteRows.Name" xml:space="preserve">
-    <value>rdoCompleteRows</value>
-  </data>
-  <data name="&gt;&gt;rdoCompleteRows.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoCompleteRows.Parent" xml:space="preserve">
-    <value>grpMissing</value>
-  </data>
-  <data name="&gt;&gt;rdoCompleteRows.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ucrPnlMissing.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 19</value>
-  </data>
-  <data name="ucrPnlMissing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>338, 30</value>
-  </data>
-  <data name="ucrPnlMissing.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlMissing.Name" xml:space="preserve">
-    <value>ucrPnlMissing</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlMissing.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlMissing.Parent" xml:space="preserve">
-    <value>grpMissing</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlMissing.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="grpMissing.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 275</value>
-  </data>
-  <data name="grpMissing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>368, 55</value>
-  </data>
-  <data name="grpMissing.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="grpMissing.Text" xml:space="preserve">
-    <value>Missing </value>
-  </data>
-  <data name="&gt;&gt;grpMissing.Name" xml:space="preserve">
-    <value>grpMissing</value>
-  </data>
-  <data name="&gt;&gt;grpMissing.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpMissing.Parent" xml:space="preserve">
-    <value>tbTwoVariables</value>
-  </data>
-  <data name="&gt;&gt;grpMissing.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="ucrChkCovariance.Location" type="System.Drawing.Point, System.Drawing">
     <value>231, 19</value>
   </data>
@@ -1570,7 +1507,7 @@
     <value>tbTwoVariables</value>
   </data>
   <data name="&gt;&gt;grpRelationships.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="lblSecondVariable.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1600,7 +1537,7 @@
     <value>tbTwoVariables</value>
   </data>
   <data name="&gt;&gt;lblSecondVariable.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="ucrSelectorSecondVariable.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 9</value>
@@ -1624,7 +1561,7 @@
     <value>tbTwoVariables</value>
   </data>
   <data name="&gt;&gt;ucrSelectorSecondVariable.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1655,9 +1592,6 @@
   </data>
   <data name="&gt;&gt;ucrButtonsSummaries.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
@@ -1693,7 +1627,7 @@
     <value>tbTwoVariables</value>
   </data>
   <data name="&gt;&gt;ucrReceiverSecondVariable.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="tbTwoVariables.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
