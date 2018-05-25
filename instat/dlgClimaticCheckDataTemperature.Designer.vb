@@ -39,19 +39,19 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.lblNudSame = New System.Windows.Forms.Label()
         Me.lblNudJump = New System.Windows.Forms.Label()
         Me.lblNudDiff = New System.Windows.Forms.Label()
-        Me.lblNudOutlier = New System.Windows.Forms.Label()
         Me.lblNudRangeElement1Min = New System.Windows.Forms.Label()
         Me.lblNudRangeElement2Min = New System.Windows.Forms.Label()
         Me.lblNudRangeElement1Max = New System.Windows.Forms.Label()
         Me.lblNudRangeElement2Max = New System.Windows.Forms.Label()
         Me.ttOutliers = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ucrChkRange2 = New instat.ucrCheck()
+        Me.ucrChkIncludeLogicalColumns = New instat.ucrCheck()
+        Me.ucrChkIncludeCalculatedColumns = New instat.ucrCheck()
+        Me.ucrChkRangeElement2 = New instat.ucrCheck()
         Me.ucrReceiverElement2 = New instat.ucrReceiverSingle()
         Me.ucrNudJump = New instat.ucrNud()
-        Me.ucrChkRange = New instat.ucrCheck()
+        Me.ucrChkRangeElement1 = New instat.ucrCheck()
         Me.ucrNudSame = New instat.ucrNud()
         Me.ucrNudDifference = New instat.ucrNud()
-        Me.ucrNudOutlier = New instat.ucrNud()
         Me.ucrNudRangeElement2Max = New instat.ucrNud()
         Me.ucrChkOutlier = New instat.ucrCheck()
         Me.ucrNudRangeElement2Min = New instat.ucrNud()
@@ -162,11 +162,6 @@ Partial Class dlgClimaticCheckDataTemperature
         resources.ApplyResources(Me.lblNudDiff, "lblNudDiff")
         Me.lblNudDiff.Name = "lblNudDiff"
         '
-        'lblNudOutlier
-        '
-        resources.ApplyResources(Me.lblNudOutlier, "lblNudOutlier")
-        Me.lblNudOutlier.Name = "lblNudOutlier"
-        '
         'lblNudRangeElement1Min
         '
         resources.ApplyResources(Me.lblNudRangeElement1Min, "lblNudRangeElement1Min")
@@ -187,11 +182,23 @@ Partial Class dlgClimaticCheckDataTemperature
         resources.ApplyResources(Me.lblNudRangeElement2Max, "lblNudRangeElement2Max")
         Me.lblNudRangeElement2Max.Name = "lblNudRangeElement2Max"
         '
-        'ucrChkRange2
+        'ucrChkIncludeLogicalColumns
         '
-        Me.ucrChkRange2.Checked = False
-        resources.ApplyResources(Me.ucrChkRange2, "ucrChkRange2")
-        Me.ucrChkRange2.Name = "ucrChkRange2"
+        Me.ucrChkIncludeLogicalColumns.Checked = False
+        resources.ApplyResources(Me.ucrChkIncludeLogicalColumns, "ucrChkIncludeLogicalColumns")
+        Me.ucrChkIncludeLogicalColumns.Name = "ucrChkIncludeLogicalColumns"
+        '
+        'ucrChkIncludeCalculatedColumns
+        '
+        Me.ucrChkIncludeCalculatedColumns.Checked = False
+        resources.ApplyResources(Me.ucrChkIncludeCalculatedColumns, "ucrChkIncludeCalculatedColumns")
+        Me.ucrChkIncludeCalculatedColumns.Name = "ucrChkIncludeCalculatedColumns"
+        '
+        'ucrChkRangeElement2
+        '
+        Me.ucrChkRangeElement2.Checked = False
+        resources.ApplyResources(Me.ucrChkRangeElement2, "ucrChkRangeElement2")
+        Me.ucrChkRangeElement2.Name = "ucrChkRangeElement2"
         '
         'ucrReceiverElement2
         '
@@ -212,11 +219,11 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.ucrNudJump.Name = "ucrNudJump"
         Me.ucrNudJump.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrChkRange
+        'ucrChkRangeElement1
         '
-        Me.ucrChkRange.Checked = False
-        resources.ApplyResources(Me.ucrChkRange, "ucrChkRange")
-        Me.ucrChkRange.Name = "ucrChkRange"
+        Me.ucrChkRangeElement1.Checked = False
+        resources.ApplyResources(Me.ucrChkRangeElement1, "ucrChkRangeElement1")
+        Me.ucrChkRangeElement1.Name = "ucrChkRangeElement1"
         '
         'ucrNudSame
         '
@@ -237,16 +244,6 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.ucrNudDifference.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDifference.Name = "ucrNudDifference"
         Me.ucrNudDifference.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudOutlier
-        '
-        Me.ucrNudOutlier.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudOutlier.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudOutlier, "ucrNudOutlier")
-        Me.ucrNudOutlier.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudOutlier.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudOutlier.Name = "ucrNudOutlier"
-        Me.ucrNudOutlier.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudRangeElement2Max
         '
@@ -368,6 +365,7 @@ Partial Class dlgClimaticCheckDataTemperature
         '
         'ucrSelectorTemperature
         '
+        Me.ucrSelectorTemperature.bDropUnusedFilterLevels = False
         Me.ucrSelectorTemperature.bShowHiddenColumns = False
         Me.ucrSelectorTemperature.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorTemperature, "ucrSelectorTemperature")
@@ -387,12 +385,13 @@ Partial Class dlgClimaticCheckDataTemperature
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrChkRange2)
+        Me.Controls.Add(Me.ucrChkIncludeLogicalColumns)
+        Me.Controls.Add(Me.ucrChkIncludeCalculatedColumns)
+        Me.Controls.Add(Me.ucrChkRangeElement2)
         Me.Controls.Add(Me.lblNudRangeElement2Max)
         Me.Controls.Add(Me.lblNudRangeElement1Max)
         Me.Controls.Add(Me.lblNudRangeElement2Min)
         Me.Controls.Add(Me.lblNudRangeElement1Min)
-        Me.Controls.Add(Me.lblNudOutlier)
         Me.Controls.Add(Me.lblNudDiff)
         Me.Controls.Add(Me.lblNudJump)
         Me.Controls.Add(Me.lblNudSame)
@@ -402,12 +401,11 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.Controls.Add(Me.lblElement2)
         Me.Controls.Add(Me.ucrReceiverElement2)
         Me.Controls.Add(Me.ucrNudJump)
-        Me.Controls.Add(Me.ucrChkRange)
+        Me.Controls.Add(Me.ucrChkRangeElement1)
         Me.Controls.Add(Me.lblRangeElement1to)
         Me.Controls.Add(Me.ucrNudSame)
         Me.Controls.Add(Me.lblRangeElement2to)
         Me.Controls.Add(Me.ucrNudDifference)
-        Me.Controls.Add(Me.ucrNudOutlier)
         Me.Controls.Add(Me.ucrNudRangeElement2Max)
         Me.Controls.Add(Me.ucrChkOutlier)
         Me.Controls.Add(Me.ucrNudRangeElement2Min)
@@ -460,14 +458,13 @@ Partial Class dlgClimaticCheckDataTemperature
     Friend WithEvents ucrChkDifference As ucrCheck
     Friend WithEvents ucrNudSame As ucrNud
     Friend WithEvents ucrNudDifference As ucrNud
-    Friend WithEvents ucrNudOutlier As ucrNud
     Friend WithEvents ucrNudRangeElement1Max As ucrNud
     Friend WithEvents ucrNudRangeElement1Min As ucrNud
     Friend WithEvents ucrNudRangeElement2Max As ucrNud
     Friend WithEvents ucrNudRangeElement2Min As ucrNud
     Friend WithEvents lblRangeElement1to As Label
     Friend WithEvents lblRangeElement2to As Label
-    Friend WithEvents ucrChkRange As ucrCheck
+    Friend WithEvents ucrChkRangeElement1 As ucrCheck
     Friend WithEvents ucrNudJump As ucrNud
     Friend WithEvents lblElement2 As Label
     Friend WithEvents ucrReceiverElement2 As ucrReceiverSingle
@@ -475,7 +472,6 @@ Partial Class dlgClimaticCheckDataTemperature
     Friend WithEvents rdoIndividual As RadioButton
     Friend WithEvents rdoMultiple As RadioButton
     Friend WithEvents ucrPnlType As UcrPanel
-    Friend WithEvents lblNudOutlier As Label
     Friend WithEvents lblNudDiff As Label
     Friend WithEvents lblNudJump As Label
     Friend WithEvents lblNudSame As Label
@@ -483,6 +479,8 @@ Partial Class dlgClimaticCheckDataTemperature
     Friend WithEvents lblNudRangeElement1Max As Label
     Friend WithEvents lblNudRangeElement2Min As Label
     Friend WithEvents lblNudRangeElement1Min As Label
-    Friend WithEvents ucrChkRange2 As ucrCheck
+    Friend WithEvents ucrChkRangeElement2 As ucrCheck
     Friend WithEvents ttOutliers As ToolTip
+    Friend WithEvents ucrChkIncludeCalculatedColumns As ucrCheck
+    Friend WithEvents ucrChkIncludeLogicalColumns As ucrCheck
 End Class

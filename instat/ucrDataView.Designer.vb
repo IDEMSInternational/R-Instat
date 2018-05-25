@@ -43,6 +43,7 @@ Partial Class ucrDataView
         Me.columnContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuColumnRename = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDuplicateColumn = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuReorderColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuInsertColsBefore = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuInsertColsAfter = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDeleteCol = New System.Windows.Forms.ToolStripMenuItem()
@@ -88,7 +89,6 @@ Partial Class ucrDataView
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
         Me.pnlDataContainer = New System.Windows.Forms.Panel()
-        Me.mnuReorderColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowContextMenuStrip.SuspendLayout()
@@ -133,6 +133,12 @@ Partial Class ucrDataView
         Me.mnuDuplicateColumn.Name = "mnuDuplicateColumn"
         Me.mnuDuplicateColumn.Size = New System.Drawing.Size(212, 22)
         Me.mnuDuplicateColumn.Text = "Duplicate Column..."
+        '
+        'mnuReorderColumns
+        '
+        Me.mnuReorderColumns.Name = "mnuReorderColumns"
+        Me.mnuReorderColumns.Size = New System.Drawing.Size(212, 22)
+        Me.mnuReorderColumns.Text = "Reorder Column(s)..."
         '
         'mnuInsertColsBefore
         '
@@ -435,12 +441,6 @@ Partial Class ucrDataView
         Me.pnlDataContainer.Name = "pnlDataContainer"
         Me.pnlDataContainer.Size = New System.Drawing.Size(438, 238)
         Me.pnlDataContainer.TabIndex = 7
-        '
-        'mnuReorderColumns
-        '
-        Me.mnuReorderColumns.Name = "mnuReorderColumns"
-        Me.mnuReorderColumns.Size = New System.Drawing.Size(212, 22)
-        Me.mnuReorderColumns.Text = "Reorder Column(s)"
         '
         'ucrDataView
         '
