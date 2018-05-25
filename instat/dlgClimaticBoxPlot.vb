@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 Public Class dlgClimaticBoxPlot
     Private bFirstLoad As Boolean = True
@@ -44,6 +45,7 @@ Public Class dlgClimaticBoxPlot
     Private strColour As String = "Colour Axis"
     Private strNone As String = "None"
 
+    Private bUpdateComboOptions As Boolean = True
     Private dctComboReceiver As New Dictionary(Of ucrInputComboBox, ucrReceiverSingle)
 
     Private Sub dlgClimaticBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -55,6 +57,7 @@ Public Class dlgClimaticBoxPlot
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        AutoFill()
         bReset = False
         autoTranslate(Me)
         TestOKEnabled()
@@ -195,10 +198,14 @@ Public Class dlgClimaticBoxPlot
         clsAsFactor.SetRCommand("as.factor")
 
         clsFacetFunction.SetPackageName("ggplot2")
+        clsFacetFunction.SetRCommand("facet_grid")
         clsFacetRowOp.SetOperation("+")
+        clsFacetRowOp.bBrackets = False
         clsFacetColOp.SetOperation("+")
+        clsFacetColOp.bBrackets = False
         clsFacetOp.SetOperation("~")
         clsFacetOp.bForceIncludeOperation = True
+        clsFacetOp.bBrackets = False
         clsFacetOp.AddParameter("left", clsROperatorParameter:=clsFacetRowOp, iPosition:=0)
         clsFacetOp.AddParameter("right", clsROperatorParameter:=clsFacetColOp, iPosition:=1)
         clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetOp)
@@ -260,9 +267,7 @@ Public Class dlgClimaticBoxPlot
         ucrChkOmitBelow.SetRCode(clsRgeomPlotFunction, bReset)
 
         ucrReceiverElement.SetRCode(clsRaesFunction, bReset)
-
         bRCodeUpdated = True
-
     End Sub
 
     Private Sub TestOKEnabled()
@@ -276,6 +281,7 @@ Public Class dlgClimaticBoxPlot
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
+        AutoFill()
         TestOKEnabled()
     End Sub
 
@@ -343,32 +349,6 @@ Public Class dlgClimaticBoxPlot
         End If
     End Sub
 
-    Private Sub ChangeParameter()
-        If ucrInputStation.GetText = strXAxis Then
-            ucrReceiverStation.SetParameter(New RParameter("x", 1))
-        ElseIf ucrInputYear.GetText = strXAxis Then
-            ucrReceiverYear.SetParameter(New RParameter("x", 1))
-        ElseIf ucrInputWithinYear.GetText = strXAxis Then
-            ucrReceiverWithinYear.SetParameter(New RParameter("x", 1))
-        End If
-
-    End Sub
-
-    Private Sub ChangeFill()
-        If ucrInputStation.GetText = strColour Then
-            ucrReceiverStation.SetParameter(New RParameter("fill", 2))
-        ElseIf ucrInputYear.GetText = strColour Then
-            ucrReceiverYear.SetParameter(New RParameter("fill", 2))
-        ElseIf ucrInputWithinYear.GetText = strColour Then
-            ucrReceiverWithinYear.SetParameter(New RParameter("fill", 2))
-        End If
-
-    End Sub
-
-    Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore)
-        SetColourFillAes()
-    End Sub
-
     Private Sub SetColourFillAes()
         If Not ucrReceiverElement.IsEmpty Then
             If rdoJitter.Checked Then
@@ -387,33 +367,48 @@ Public Class dlgClimaticBoxPlot
     Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrInputComboBox) Handles ucrInputStation.ControlValueChanged, ucrInputYear.ControlValueChanged, ucrInputWithinYear.ControlValueChanged
         Dim ucrTempReciever As ucrReceiver = Nothing
         Dim strTemp As String = ""
+        Dim strChangedText As String = ""
 
-        clsRaesFunction.RemoveParameterByName("x")
-        clsRaesFunction.RemoveParameterByName("color")
-        clsRaesFunction.RemoveParameterByName("fill")
+        If bUpdateComboOptions Then
+            clsRaesFunction.RemoveParameterByName("x")
+            clsRaesFunction.RemoveParameterByName("color")
+            clsRaesFunction.RemoveParameterByName("fill")
 
-        clsFacetColOp.RemoveParameterByName("col")
-        clsFacetRowOp.RemoveParameterByName("row")
+            clsFacetColOp.RemoveParameterByName("col")
+            clsFacetRowOp.RemoveParameterByName("row")
+            clsBaseOperator.RemoveParameterByName("facets")
 
-        For Each ucrInputTemp As ucrInputComboBox In dctComboReceiver.Keys
-            strTemp = ucrInputTemp.GetText()
-            dctComboReceiver(ucrInputTemp).SetRCode(Nothing)
-            If strTemp = strXAxis Then
-                dctComboReceiver(ucrInputTemp).ChangeParameterName("x")
-                dctComboReceiver(ucrInputTemp).SetRCode(clsRaesFunction)
-            ElseIf strTemp = strColour
-                dctComboReceiver(ucrInputTemp).ChangeParameterName("color")
-                dctComboReceiver(ucrInputTemp).SetRCode(clsRaesFunction)
-            ElseIf strTemp = strFacetCol
-                dctComboReceiver(ucrInputTemp).ChangeParameterName("col")
-                dctComboReceiver(ucrInputTemp).SetRCode(clsFacetColOp)
-            ElseIf strTemp = strFacetRow
-                dctComboReceiver(ucrInputTemp).ChangeParameterName("row")
-                dctComboReceiver(ucrInputTemp).SetRCode(clsFacetRowOp)
+            strChangedText = ucrChangedControl.GetText()
+            If strChangedText <> strNone Then
+                For Each ucrInputTemp As ucrInputComboBox In dctComboReceiver.Keys
+                    If Not ucrInputTemp.Equals(ucrChangedControl) AndAlso ucrInputTemp.GetText() = strChangedText Then
+                        bUpdateComboOptions = False
+                        ucrInputTemp.SetName(strNone)
+                        bUpdateComboOptions = True
+                    End If
+                Next
             End If
-        Next
-        If Not clsRaesFunction.ContainsParameter("x") Then
-            clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
+            For Each ucrInputTemp As ucrInputComboBox In dctComboReceiver.Keys
+                strTemp = ucrInputTemp.GetText()
+                dctComboReceiver(ucrInputTemp).SetRCode(Nothing)
+                If strTemp = strXAxis Then
+                    dctComboReceiver(ucrInputTemp).ChangeParameterName("x")
+                    dctComboReceiver(ucrInputTemp).SetRCode(clsRaesFunction)
+                ElseIf strTemp = strColour Then
+                    dctComboReceiver(ucrInputTemp).ChangeParameterName("color")
+                    dctComboReceiver(ucrInputTemp).SetRCode(clsRaesFunction)
+                ElseIf strTemp = strFacetCol Then
+                    dctComboReceiver(ucrInputTemp).ChangeParameterName("col")
+                    dctComboReceiver(ucrInputTemp).SetRCode(clsFacetColOp)
+                ElseIf strTemp = strFacetRow Then
+                    dctComboReceiver(ucrInputTemp).ChangeParameterName("row")
+                    dctComboReceiver(ucrInputTemp).SetRCode(clsFacetRowOp)
+                End If
+            Next
+            If Not clsRaesFunction.ContainsParameter("x") Then
+                clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
+            End If
+            AddRemoveFacets()
         End If
     End Sub
 
@@ -423,5 +418,40 @@ Public Class dlgClimaticBoxPlot
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSavePlot.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub AddRemoveFacets()
+        Dim strText As String
+        Dim bCol As Boolean = False
+        Dim bRow As Boolean = False
+
+        clsBaseOperator.RemoveParameterByName("facets")
+        For Each kvpTemp As KeyValuePair(Of ucrInputComboBox, ucrReceiverSingle) In dctComboReceiver
+            strText = kvpTemp.Key.GetText()
+            If strText = strFacetCol OrElse strText = strFacetRow AndAlso Not kvpTemp.Value.IsEmpty Then
+                clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
+                If strText = strFacetCol Then
+                    bCol = True
+                End If
+                If strText = strFacetRow Then
+                    bRow = True
+                End If
+                Exit For
+            End If
+        Next
+        If bRow Then
+            clsFacetOp.AddParameter("left", clsROperatorParameter:=clsFacetRowOp, iPosition:=0)
+        Else
+            clsFacetOp.AddParameter("left", ".", iPosition:=0)
+        End If
+        If bCol Then
+            clsFacetOp.AddParameter("right", clsROperatorParameter:=clsFacetColOp, iPosition:=1)
+        Else
+            clsFacetOp.AddParameter("right", ".", iPosition:=1)
+        End If
+    End Sub
+
+    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrReceiverWithinYear.ControlValueChanged, ucrReceiverYear.ControlValueChanged
+        AddRemoveFacets()
     End Sub
 End Class
