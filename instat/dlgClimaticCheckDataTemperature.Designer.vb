@@ -44,6 +44,8 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.lblNudRangeElement1Max = New System.Windows.Forms.Label()
         Me.lblNudRangeElement2Max = New System.Windows.Forms.Label()
         Me.ttOutliers = New System.Windows.Forms.ToolTip(Me.components)
+        Me.lblCoeff = New System.Windows.Forms.Label()
+        Me.ucrNudCoeff = New instat.ucrNud()
         Me.ucrChkIncludeLogicalColumns = New instat.ucrCheck()
         Me.ucrChkIncludeCalculatedColumns = New instat.ucrCheck()
         Me.ucrChkRangeElement2 = New instat.ucrCheck()
@@ -69,8 +71,6 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.ucrSelectorTemperature = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlType = New instat.UcrPanel()
-        Me.ucrNudCoeff = New instat.ucrNud()
-        Me.lblCoeff = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblStation
@@ -183,6 +183,21 @@ Partial Class dlgClimaticCheckDataTemperature
         '
         resources.ApplyResources(Me.lblNudRangeElement2Max, "lblNudRangeElement2Max")
         Me.lblNudRangeElement2Max.Name = "lblNudRangeElement2Max"
+        '
+        'lblCoeff
+        '
+        resources.ApplyResources(Me.lblCoeff, "lblCoeff")
+        Me.lblCoeff.Name = "lblCoeff"
+        '
+        'ucrNudCoeff
+        '
+        Me.ucrNudCoeff.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCoeff.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudCoeff, "ucrNudCoeff")
+        Me.ucrNudCoeff.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudCoeff.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCoeff.Name = "ucrNudCoeff"
+        Me.ucrNudCoeff.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkIncludeLogicalColumns
         '
@@ -382,21 +397,6 @@ Partial Class dlgClimaticCheckDataTemperature
         '
         resources.ApplyResources(Me.ucrPnlType, "ucrPnlType")
         Me.ucrPnlType.Name = "ucrPnlType"
-        '
-        'ucrNudCoeff
-        '
-        Me.ucrNudCoeff.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudCoeff.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudCoeff, "ucrNudCoeff")
-        Me.ucrNudCoeff.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudCoeff.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudCoeff.Name = "ucrNudCoeff"
-        Me.ucrNudCoeff.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblCoeff
-        '
-        resources.ApplyResources(Me.lblCoeff, "lblCoeff")
-        Me.lblCoeff.Name = "lblCoeff"
         '
         'dlgClimaticCheckDataTemperature
         '
