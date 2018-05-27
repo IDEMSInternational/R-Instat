@@ -44,8 +44,6 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.lblNudRangeElement1Max = New System.Windows.Forms.Label()
         Me.lblNudRangeElement2Max = New System.Windows.Forms.Label()
         Me.ttOutliers = New System.Windows.Forms.ToolTip(Me.components)
-        Me.lblNewColumnName = New System.Windows.Forms.Label()
-        Me.ucrInputNewColumnName = New instat.ucrInputTextBox()
         Me.ucrChkIncludeLogicalColumns = New instat.ucrCheck()
         Me.ucrChkIncludeCalculatedColumns = New instat.ucrCheck()
         Me.ucrChkRangeElement2 = New instat.ucrCheck()
@@ -183,19 +181,6 @@ Partial Class dlgClimaticCheckDataTemperature
         '
         resources.ApplyResources(Me.lblNudRangeElement2Max, "lblNudRangeElement2Max")
         Me.lblNudRangeElement2Max.Name = "lblNudRangeElement2Max"
-        '
-        'lblNewColumnName
-        '
-        resources.ApplyResources(Me.lblNewColumnName, "lblNewColumnName")
-        Me.lblNewColumnName.Name = "lblNewColumnName"
-        '
-        'ucrInputNewColumnName
-        '
-        Me.ucrInputNewColumnName.AddQuotesIfUnrecognised = True
-        resources.ApplyResources(Me.ucrInputNewColumnName, "ucrInputNewColumnName")
-        Me.ucrInputNewColumnName.IsMultiline = False
-        Me.ucrInputNewColumnName.IsReadOnly = False
-        Me.ucrInputNewColumnName.Name = "ucrInputNewColumnName"
         '
         'ucrChkIncludeLogicalColumns
         '
@@ -400,8 +385,6 @@ Partial Class dlgClimaticCheckDataTemperature
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.lblNewColumnName)
-        Me.Controls.Add(Me.ucrInputNewColumnName)
         Me.Controls.Add(Me.ucrChkIncludeLogicalColumns)
         Me.Controls.Add(Me.ucrChkIncludeCalculatedColumns)
         Me.Controls.Add(Me.ucrChkRangeElement2)
@@ -500,6 +483,4 @@ Partial Class dlgClimaticCheckDataTemperature
     Friend WithEvents ttOutliers As ToolTip
     Friend WithEvents ucrChkIncludeCalculatedColumns As ucrCheck
     Friend WithEvents ucrChkIncludeLogicalColumns As ucrCheck
-    Friend WithEvents lblNewColumnName As Label
-    Friend WithEvents ucrInputNewColumnName As ucrInputTextBox
 End Class
