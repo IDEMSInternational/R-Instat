@@ -429,7 +429,7 @@ Public Class ucrCore
         Return bContainsGroupBox
     End Function
 
-    Protected Overridable Sub SetToValue(objTemp As Object)
+    Public Overridable Sub SetToValue(objTemp As Object)
     End Sub
 
     Public Sub AddCondition(objControlState As Object, clsCond As Condition)

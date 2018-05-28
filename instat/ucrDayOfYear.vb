@@ -1,4 +1,20 @@
-﻿Imports instat
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Imports instat
 
 Public Class ucrDayOfYear
     ' Is the parameter value associated with the control a number
@@ -10,7 +26,6 @@ Public Class ucrDayOfYear
     ' Otherwise 29 February is not included and 31 December = 365
     Private b366DayOfYear As Boolean = True
     Private dtbMonths As DataTable
-    Private bFirstLoad As Boolean = True
     Private strMonthsFull As String()
     Private strMonthsAbbreviated As String()
     Private bUpdate As Boolean = True
@@ -19,43 +34,48 @@ Public Class ucrDayOfYear
     Private str28Days(27) As String
     Private str29Days(28) As String
 
-    Private Sub ucrDayOfYear_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Public Sub New()
 
-        If bFirstLoad Then
-            dtbMonths = New DataTable
-            dtbMonths.Columns.Add("Number", GetType(Integer))
-            dtbMonths.Columns.Add("Full", GetType(String))
-            dtbMonths.Columns.Add("Abbreviated", GetType(String))
-            'TODO should we use these instead of fixed English names?
-            'System.Globalization.DateTimeFormatInfo.InvariantInfo.MonthNames
-            'System.Globalization.DateTimeFormatInfo.InvariantInfo.AbbreviatedMonthNames
-            strMonthsFull = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"}
-            strMonthsAbbreviated = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"}
-            For i As Integer = 0 To 11
-                dtbMonths.Rows.Add(i, strMonthsFull(i), strMonthsAbbreviated(i))
-            Next
-            'TODO Display/Value member should be changeable
-            ucrInputMonth.SetDataSource(dtbMonths, strDisplayMember:="Full", strValueMember:="Number")
-            ucrInputMonth.SetDropDownStyleAsNonEditable()
-            For i As Integer = 0 To 30
-                str31Days(i) = i + 1
-                If i < 30 Then
-                    str30Days(i) = i + 1
-                End If
-                If i < 28 Then
-                    str28Days(i) = i + 1
-                End If
-                If i < 29 Then
-                    str29Days(i) = i + 1
-                End If
-            Next
-            ucrInputDay.SetItems(str31Days)
+        ' This call is required by the designer.
+        InitializeComponent()
 
-            'The individual controls do not read the R code so they are not active.
-            ucrInputDay.bIsActiveRControl = False
-            ucrInputMonth.bIsActiveRControl = False
-            bFirstLoad = False
-        End If
+        ' Add any initialization after the InitializeComponent() call.
+        InitialiseControls()
+    End Sub
+
+    Private Sub InitialiseControls()
+        dtbMonths = New DataTable
+        dtbMonths.Columns.Add("Number", GetType(Integer))
+        dtbMonths.Columns.Add("Full", GetType(String))
+        dtbMonths.Columns.Add("Abbreviated", GetType(String))
+        'TODO should we use these instead of fixed English names?
+        'System.Globalization.DateTimeFormatInfo.InvariantInfo.MonthNames
+        'System.Globalization.DateTimeFormatInfo.InvariantInfo.AbbreviatedMonthNames
+        strMonthsFull = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"}
+        strMonthsAbbreviated = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"}
+        For i As Integer = 0 To 11
+            dtbMonths.Rows.Add(i, strMonthsFull(i), strMonthsAbbreviated(i))
+        Next
+        'TODO Display/Value member should be changeable
+        ucrInputMonth.SetDataSource(dtbMonths, strDisplayMember:="Full", strValueMember:="Number")
+        ucrInputMonth.SetDropDownStyleAsNonEditable()
+        For i As Integer = 0 To 30
+            str31Days(i) = i + 1
+            If i < 30 Then
+                str30Days(i) = i + 1
+            End If
+            If i < 28 Then
+                str28Days(i) = i + 1
+            End If
+            If i < 29 Then
+                str29Days(i) = i + 1
+            End If
+        Next
+        ucrInputDay.SetItems(str31Days)
+
+        'The individual controls do not read the R code so they are not active.
+        ucrInputDay.bIsActiveRControl = False
+        ucrInputMonth.bIsActiveRControl = False
     End Sub
 
     Public Overrides Sub UpdateParameter(clsTempParam As RParameter)
@@ -99,7 +119,7 @@ Public Class ucrDayOfYear
         End If
         If ucrInputMonth.GetValue() IsNot Nothing AndAlso ucrInputDay.GetValue() IsNot Nothing Then
             Try
-                If Not Integer.TryParse(ucrInputMonth.GetValue(), iMonth) AndAlso Integer.TryParse(ucrInputDay.GetValue(), iDay) Then
+                If Integer.TryParse(ucrInputMonth.GetValue(), iMonth) AndAlso Integer.TryParse(ucrInputDay.GetValue(), iDay) Then
                     dtTemp = New Date(year:=iYear, month:=ucrInputMonth.GetValue() + 1, day:=ucrInputDay.GetValue())
                     Return dtTemp.DayOfYear
                 End If
@@ -113,10 +133,6 @@ Public Class ucrDayOfYear
     Protected Overrides Sub SetControlValue()
         Dim strDayOfYearNumber As String
         Dim iDayOfYearNumber As Integer
-        Dim iYear As Integer
-        Dim dtTemp As Date
-        Dim strMonth As String
-        Dim strDay As String
         Dim clsTempParameter As RParameter
         Dim bInvalid As Boolean = False
 
@@ -127,32 +143,7 @@ Public Class ucrDayOfYear
                     If clsTempParameter.bIsString Then
                         strDayOfYearNumber = clsTempParameter.strArgumentValue
                         If Integer.TryParse(strDayOfYearNumber, iDayOfYearNumber) Then
-                            If b366DayOfYear Then
-                                iYear = 2000
-                                If iDayOfYearNumber < 1 OrElse iDayOfYearNumber > 366 Then
-                                    bInvalid = True
-                                End If
-                            Else
-                                iYear = 1999
-                                If iDayOfYearNumber < 1 OrElse iDayOfYearNumber > 365 Then
-                                    bInvalid = True
-                                End If
-                            End If
-                            If Not bInvalid Then
-                                Try
-                                    dtTemp = New Date(year:=iYear, month:=1, day:=1).AddDays(iDayOfYearNumber - 1)
-                                    strDay = dtTemp.Day
-                                    strMonth = dtTemp.Month
-                                    bUpdate = False
-                                    ucrInputDay.SetName(dtTemp.Day)
-                                    'TODO this should be done through a method in ucrInputMonth
-                                    ucrInputMonth.cboInput.SelectedIndex = dtTemp.Month - 1
-                                    bUpdate = True
-                                    UpdateAllParameters()
-                                Catch ex As Exception
-                                    bInvalid = True
-                                End Try
-                            End If
+                            bInvalid = Not SetValue(iDayOfYearNumber)
                         Else
                             bInvalid = True
                         End If
@@ -251,4 +242,40 @@ Public Class ucrDayOfYear
     Public Function IsComplete() As Boolean
         Return (ucrInputDay.GetText() <> "" AndAlso ucrInputMonth.GetText() <> "")
     End Function
+
+    Public Function SetValue(iDoy As Integer) As Boolean
+        Dim iYear As Integer
+        Dim dtTemp As Date
+        Dim bSuccess As Boolean = True
+
+        If b366DayOfYear Then
+            iYear = 2000
+            If iDoy < 1 OrElse iDoy > 366 Then
+                bSuccess = False
+            End If
+        Else
+            iYear = 1999
+            If iDoy < 1 OrElse iDoy > 365 Then
+                bSuccess = False
+            End If
+        End If
+        If bSuccess Then
+            Try
+                dtTemp = New Date(year:=iYear, month:=1, day:=1).AddDays(iDoy - 1)
+                bUpdate = False
+                ucrInputDay.SetName(dtTemp.Day)
+                'TODO this should be done through a method in ucrInputMonth
+                ucrInputMonth.cboInput.SelectedIndex = dtTemp.Month - 1
+                bUpdate = True
+                UpdateAllParameters()
+            Catch ex As Exception
+                bSuccess = False
+            End Try
+        End If
+        Return bSuccess
+    End Function
+
+    Public Sub SetValue(iDay As Integer, iMonth As Integer)
+
+    End Sub
 End Class

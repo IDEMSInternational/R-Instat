@@ -24,6 +24,10 @@ Public Class ucrScript
         txtScript.Copy()
     End Sub
 
+    Public Sub CutText()
+        txtScript.Cut()
+    End Sub
+
     Public Sub SelectAllText()
         txtScript.SelectAll()
     End Sub
@@ -66,7 +70,7 @@ Public Class ucrScript
         End If
     End Sub
 
-    Private Sub mnuOpenScript_Click(sender As Object, e As EventArgs) Handles mnuOpenScript.Click
+    Private Sub mnuOpenScript_Click(sender As Object, e As EventArgs) Handles mnuOpenScriptasFile.Click
         Dim clsProcessStart As New RFunction
         Dim strScriptFilename As String = ""
         Dim i As Integer
@@ -107,7 +111,7 @@ Public Class ucrScript
         End Using
     End Sub
 
-    Private Sub mnuOpenScriptFromFile_Click(sender As Object, e As EventArgs) Handles mnuOpenScriptFromFile.Click
+    Private Sub mnuOpenScriptFromFile_Click(sender As Object, e As EventArgs) Handles mnuLoadScriptFromFile.Click
 
         Dim msgWarning As DialogResult
 
@@ -130,34 +134,18 @@ Public Class ucrScript
     End Sub
 
     Private Sub mnuCopy_Click(sender As Object, e As EventArgs) Handles mnuCopy.Click
-        Clipboard.SetText(txtScript.Text)
+        CopyText()
     End Sub
 
     Private Sub mnuCut_Click(sender As Object, e As EventArgs) Handles mnuCut.Click
-        Clipboard.Clear()
-        Clipboard.SetText(txtScript.Text)
-        txtScript.SelectedText = ""
+        CutText()
     End Sub
 
     Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
-        Dim msgPaste As DialogResult
-
         If Clipboard.ContainsData(DataFormats.Text) Then
-            If txtScript.SelectionLength > 0 Then
-                msgPaste = MessageBox.Show("Are you sure you want to overwrite the selected text?", "Paste to Script Window", MessageBoxButtons.YesNo)
-                If msgPaste = DialogResult.Yes Then
-                    txtScript.SelectedText = Clipboard.GetText()
-                End If
-            Else
-                If txtScript.Text = "" Then
-                    txtScript.Text = Clipboard.GetText()
-                Else
-                    txtScript.SelectionStart = txtScript.TextLength & Environment.NewLine
-                    txtScript.AppendText(Clipboard.GetText)
-                End If
-            End If
+            txtScript.Paste()
         Else
-            MessageBox.Show("You can only paste text data on the script window?", "Paste to Script Window", MessageBoxButtons.OK)
+            MessageBox.Show("You can only paste text data on the script window", "Paste to Script Window", MessageBoxButtons.OK)
         End If
     End Sub
 
@@ -188,14 +176,28 @@ Public Class ucrScript
     Private Sub EnableMenusWhenScriptNotEmpty()
         If txtScript.Text <> "" Then
             cmdRun.Enabled = True
-            mnuOpenScript.Enabled = True
+            mnuOpenScriptasFile.Enabled = True
             mnuClearContents.Enabled = True
             mnuSaveScript.Enabled = True
         Else
             cmdRun.Enabled = False
-            mnuOpenScript.Enabled = False
+            mnuOpenScriptasFile.Enabled = False
             mnuClearContents.Enabled = False
             mnuSaveScript.Enabled = False
         End If
+    End Sub
+
+    Private Sub Menu_Undo(sender As Object, e As EventArgs) Handles mnuUndo.Click
+        'Determine if last operation can be undone in text box.   
+        If txtScript.CanUndo Then
+            'Undo the last operation.
+            txtScript.Undo()
+            'Clear the undo buffer to prevent last action from being redone.
+            txtScript.ClearUndo()
+        End If
+    End Sub
+
+    Private Sub mnuRunAllText_Click(sender As Object, e As EventArgs) Handles mnuRunAllText.Click
+        RunText(txtScript.Text)
     End Sub
 End Class
