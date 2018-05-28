@@ -39,6 +39,10 @@ Public Class dlgClimaticBoxPlot
     Private bResetBoxLayerSubdialog As Boolean = True
     Private clsAsFactor As New RFunction
 
+    Private clsFilteredDataOperator As New ROperator
+    Private clsFilterElementOperator As New ROperator
+    Private clsFilterElementFunction As New RFunction
+
     Private strFacetRow As String = "Facet Row"
     Private strFacetCol As String = "Facet Column"
     Private strXAxis As String = "X Axis"
@@ -85,9 +89,8 @@ Public Class dlgClimaticBoxPlot
         ucrPnlPlots.AddFunctionNamesCondition(rdoJitter, "geom_jitter")
         ucrPnlPlots.AddFunctionNamesCondition(rdoViolin, "geom_violin")
         ucrPnlPlots.AddToLinkedControls(ucrChkVarWidth, {rdoBoxplot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlPlots.AddToLinkedControls(ucrChkOmitBelow, {rdoJitter}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrSelectorClimaticBoxPlot.SetParameter(New RParameter("data", 0))
+        ucrSelectorClimaticBoxPlot.SetParameter(New RParameter("left", 0))
         ucrSelectorClimaticBoxPlot.SetParameterIsrfunction()
 
         ucrReceiverStation.SetParameterIsString()
@@ -129,12 +132,11 @@ Public Class dlgClimaticBoxPlot
         dctComboReceiver.Add(ucrInputYear, ucrReceiverYear)
         dctComboReceiver.Add(ucrInputWithinYear, ucrReceiverWithinYear)
 
-        ucrChkOmitBelow.SetParameter(New RParameter("width"))
         ucrChkOmitBelow.SetText("Omit Below")
-        ucrChkOmitBelow.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkOmitBelow.SetDefaultState("FALSE")
+        ucrChkOmitBelow.AddParameterPresentCondition(True, "right", True)
+        ucrChkOmitBelow.AddParameterPresentCondition(False, "right", False)
 
-        ucrNudOmitBelow.SetParameter(New RParameter("width"))
+        ucrNudOmitBelow.SetParameter(New RParameter("right"))
         ucrNudOmitBelow.DecimalPlaces = 2
         ucrNudOmitBelow.Increment = 0.1
         ucrChkOmitBelow.AddToLinkedControls(ucrNudOmitBelow, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.85)
@@ -200,6 +202,10 @@ Public Class dlgClimaticBoxPlot
         clsAsFactor = New RFunction
         clsAsFactor.SetRCommand("as.factor")
 
+        clsFilteredDataOperator = New ROperator
+        clsFilterElementOperator = New ROperator
+        clsFilterElementFunction = New RFunction
+
         clsFacetFunction.SetPackageName("ggplot2")
         clsFacetFunction.SetRCommand("facet_grid")
         clsFacetRowOp.SetOperation("+")
@@ -212,6 +218,17 @@ Public Class dlgClimaticBoxPlot
         clsFacetOp.AddParameter("left", clsROperatorParameter:=clsFacetRowOp, iPosition:=0)
         clsFacetOp.AddParameter("right", clsROperatorParameter:=clsFacetColOp, iPosition:=1)
         clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetOp)
+
+        clsFilterElementOperator.SetOperation(">")
+        clsFilterElementOperator.bBrackets = False
+
+        clsFilterElementFunction.SetPackageName("dplyr")
+        clsFilterElementFunction.SetRCommand("filter")
+        clsFilterElementFunction.AddParameter("expression", clsROperatorParameter:=clsFilterElementOperator, bIncludeArgumentName:=False)
+
+        clsFilteredDataOperator.SetOperation("%>%")
+        clsFilteredDataOperator.bBrackets = False
+        clsRggplotFunction.AddParameter("data", clsROperatorParameter:=clsFilteredDataOperator, iPosition:=0)
 
         ucrSelectorClimaticBoxPlot.Reset()
         ucrSavePlot.Reset()
@@ -261,20 +278,22 @@ Public Class dlgClimaticBoxPlot
     Private Sub SetRCodeForControls(bReset As Boolean)
         bRCodeUpdated = False
         ucrSavePlot.SetRCode(clsBaseOperator, bReset)
-        ucrSelectorClimaticBoxPlot.SetRCode(clsRggplotFunction, bReset)
+        ucrSelectorClimaticBoxPlot.SetRCode(clsFilteredDataOperator, bReset)
         ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
         ucrChkVerticalXTickMarkers.SetRCode(clsBaseOperator, bReset)
 
         ucrChkVarWidth.SetRCode(clsRgeomPlotFunction, bReset)
         ucrPnlPlots.SetRCode(clsRgeomPlotFunction, bReset)
-        ucrChkOmitBelow.SetRCode(clsRgeomPlotFunction, bReset)
 
         ucrReceiverElement.SetRCode(clsRaesFunction, bReset)
+        ucrReceiverElement.AddAdditionalCodeParameterPair(clsFilterElementOperator, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrChkOmitBelow.SetRCode(clsFilteredDataOperator, bReset)
+        ucrNudOmitBelow.SetRCode(clsFilterElementOperator, bReset)
         bRCodeUpdated = True
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverElement.IsEmpty OrElse ucrSavePlot.IsComplete Then
+        If Not ucrReceiverElement.IsEmpty OrElse Not ucrSavePlot.IsComplete Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -391,12 +410,15 @@ Public Class dlgClimaticBoxPlot
             dctComboReceiver(ucrInputTemp).SetRCode(Nothing)
             If strTemp = strXAxis Then
                 dctComboReceiver(ucrInputTemp).ChangeParameterName("x")
+                dctComboReceiver(ucrInputTemp).SetParameterIncludeArgumentName(True)
                 dctComboReceiver(ucrInputTemp).SetRCode(clsRaesFunction)
             ElseIf strTemp = strColour Then
                 If rdoJitter.Checked Then
                     dctComboReceiver(ucrInputTemp).ChangeParameterName("color")
+                    dctComboReceiver(ucrInputTemp).SetParameterIncludeArgumentName(True)
                 ElseIf rdoBoxplot.Checked OrElse rdoViolin.Checked Then
                     dctComboReceiver(ucrInputTemp).ChangeParameterName("fill")
+                    dctComboReceiver(ucrInputTemp).SetParameterIncludeArgumentName(True)
                 End If
                 dctComboReceiver(ucrInputTemp).SetRCode(clsRaesFunction)
             ElseIf strTemp = strFacetCol Then
@@ -455,6 +477,17 @@ Public Class dlgClimaticBoxPlot
         End If
     End Sub
 
+    Private Sub OmitFilter()
+        If ucrChkOmitBelow.Checked Then
+            clsFilteredDataOperator.AddParameter("right", clsRFunctionParameter:=clsFilterElementFunction, iPosition:=1)
+        Else
+            clsFilteredDataOperator.RemoveParameterByName("right")
+        End If
+    End Sub
+
+    Private Sub ucrChkOmitBelow_CheckedChanged() Handles ucrChkOmitBelow.ControlValueChanged
+        OmitFilter()
+    End Sub
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrReceiverWithinYear.ControlValueChanged, ucrReceiverYear.ControlValueChanged
         AddRemoveFacets()
     End Sub
