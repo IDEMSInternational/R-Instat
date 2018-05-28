@@ -292,7 +292,7 @@ Public Class dlgClimaticBoxPlot
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverElement.IsEmpty OrElse Not ucrSavePlot.IsComplete Then
+        If Not ucrReceiverElement.IsEmpty AndAlso ucrSavePlot.IsComplete Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
