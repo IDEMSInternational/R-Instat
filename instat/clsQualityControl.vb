@@ -20,9 +20,10 @@ Public Class clsQCJumpRCode
     Public clsJumpCalcFunction, clsJumpTestFunction As New RFunction
     Public clsGreaterJumpOperator As New ROperator
     Public strTestName As String
+    Public strCalcName As String
 
     Public Sub SetDefaults(strElementName As String)
-        Dim strlargest_jump As String = "Jump"
+        Dim strlargest_jump As String = "Jump" & strElementName
         Dim strjump_test As String = "jump" & strElementName
 
         clsLagFunction = New RFunction
@@ -64,10 +65,11 @@ Public Class clsQCJumpRCode
         clsPmaxFunction.AddParameter("na.rm", "TRUE", iPosition:=2)
         clsPmaxFunction.bToScriptAsRString = True
 
+        strCalcName = strlargest_jump
         clsJumpCalcFunction.SetRCommand("instat_calculation$new")
         clsJumpCalcFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsJumpCalcFunction.AddParameter("function_exp", clsRFunctionParameter:=clsPmaxFunction, iPosition:=1)
-        clsJumpCalcFunction.AddParameter("result_name", Chr(34) & strlargest_jump & Chr(34), iPosition:=4)
+        clsJumpCalcFunction.AddParameter("result_name", Chr(34) & strCalcName & Chr(34), iPosition:=4)
         clsJumpCalcFunction.SetAssignTo("largest_jump" & strElementName)
 
         strTestName = strjump_test
@@ -103,10 +105,11 @@ Public Class clsQCSameRCode
     Public clsSameGreaterOperator As New ROperator
     Public clsRepFunc As New RFunction
     Public strTestName As String
+    Public strCalcName As String
 
     Public Sub SetDefaults(strElementName As String)
         Dim strLengths As String = "lengths"
-        Dim strlargest_Same As String = "Same"
+        Dim strlargest_Same As String = "Same" & strElementName
         Dim strSame_test As String = "same" & strElementName
 
         clsRepFunc = New RFunction
@@ -127,10 +130,11 @@ Public Class clsQCSameRCode
         clsDollarOperator.AddParameter("left", bIncludeArgumentName:=False, clsRFunctionParameter:=clsRleFunc, iPosition:=0)
         clsDollarOperator.AddParameter("right", strParameterValue:=strLengths, bIncludeArgumentName:=False, iPosition:=1)
 
+        strCalcName = strlargest_Same
         clsSameCalcFunction.SetRCommand("instat_calculation$new")
         clsSameCalcFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsSameCalcFunction.AddParameter("function_exp", clsRFunctionParameter:=clsRepFunc, iPosition:=1)
-        clsSameCalcFunction.AddParameter("result_name", Chr(34) & strlargest_Same & Chr(34), iPosition:=4)
+        clsSameCalcFunction.AddParameter("result_name", Chr(34) & strCalcName & Chr(34), iPosition:=4)
         clsSameCalcFunction.SetAssignTo("largest_same" & strElementName)
         clsRepFunc.bToScriptAsRString = True
 
