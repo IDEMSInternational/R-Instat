@@ -775,7 +775,7 @@
     <value>1</value>
   </data>
   <data name="ucrChkIncludeLogicalColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 456</value>
+    <value>19, 467</value>
   </data>
   <data name="ucrChkIncludeLogicalColumns.Size" type="System.Drawing.Size, System.Drawing">
     <value>228, 20</value>
@@ -796,10 +796,10 @@
     <value>2</value>
   </data>
   <data name="ucrChkIncludeCalculatedColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>291, 456</value>
+    <value>291, 467</value>
   </data>
   <data name="ucrChkIncludeCalculatedColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>228, 20</value>
+    <value>210, 20</value>
   </data>
   <data name="ucrChkIncludeCalculatedColumns.TabIndex" type="System.Int32, mscorlib">
     <value>45</value>
@@ -847,7 +847,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>527, 561</value>
+    <value>527, 577</value>
   </data>
   <data name="ucrNudJump.Location" type="System.Drawing.Point, System.Drawing">
     <value>188, 356</value>
@@ -1270,7 +1270,7 @@
     <value>43</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 494</value>
+    <value>10, 517</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 52</value>
@@ -1310,6 +1310,30 @@
   </data>
   <data name="&gt;&gt;ucrPnlType.ZOrder" xml:space="preserve">
     <value>45</value>
+  </data>
+  <data name="grpLogicalCalcualtedColumn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 451</value>
+  </data>
+  <data name="grpLogicalCalcualtedColumn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>509, 45</value>
+  </data>
+  <data name="grpLogicalCalcualtedColumn.TabIndex" type="System.Int32, mscorlib">
+    <value>46</value>
+  </data>
+  <data name="grpLogicalCalcualtedColumn.Text" xml:space="preserve">
+    <value>Include in Original Data</value>
+  </data>
+  <data name="&gt;&gt;grpLogicalCalcualtedColumn.Name" xml:space="preserve">
+    <value>grpLogicalCalcualtedColumn</value>
+  </data>
+  <data name="&gt;&gt;grpLogicalCalcualtedColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpLogicalCalcualtedColumn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpLogicalCalcualtedColumn.ZOrder" xml:space="preserve">
+    <value>46</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

@@ -71,6 +71,7 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.ucrSelectorTemperature = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlType = New instat.UcrPanel()
+        Me.grpLogicalCalcualtedColumn = New System.Windows.Forms.GroupBox()
         Me.SuspendLayout()
         '
         'lblStation
@@ -398,6 +399,12 @@ Partial Class dlgClimaticCheckDataTemperature
         resources.ApplyResources(Me.ucrPnlType, "ucrPnlType")
         Me.ucrPnlType.Name = "ucrPnlType"
         '
+        'grpLogicalCalcualtedColumn
+        '
+        resources.ApplyResources(Me.grpLogicalCalcualtedColumn, "grpLogicalCalcualtedColumn")
+        Me.grpLogicalCalcualtedColumn.Name = "grpLogicalCalcualtedColumn"
+        Me.grpLogicalCalcualtedColumn.TabStop = False
+        '
         'dlgClimaticCheckDataTemperature
         '
         resources.ApplyResources(Me, "$this")
@@ -448,6 +455,7 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.Controls.Add(Me.ucrSelectorTemperature)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrPnlType)
+        Me.Controls.Add(Me.grpLogicalCalcualtedColumn)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -504,4 +512,5 @@ Partial Class dlgClimaticCheckDataTemperature
     Friend WithEvents ucrChkIncludeLogicalColumns As ucrCheck
     Friend WithEvents ucrNudCoeff As ucrNud
     Friend WithEvents lblCoeff As Label
+    Friend WithEvents grpLogicalCalcualtedColumn As GroupBox
 End Class
