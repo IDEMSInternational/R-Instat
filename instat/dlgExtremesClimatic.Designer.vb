@@ -54,7 +54,6 @@ Partial Class dlgExtremesClimatic
         Me.lblNewDFName = New System.Windows.Forms.Label()
         Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
         Me.ucrInputSave = New instat.ucrInputTextBox()
-        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrChkLastDate = New instat.ucrCheck()
         Me.ucrChkNDates = New instat.ucrCheck()
         Me.ucrInputThresholdValue = New instat.ucrInputTextBox()
@@ -66,9 +65,11 @@ Partial Class dlgExtremesClimatic
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
+        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrSelectorClimaticExtremes = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlExtremesType = New instat.UcrPanel()
+        Me.ucrChkDisplayDates = New instat.ucrCheck()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -247,18 +248,6 @@ Partial Class dlgExtremesClimatic
         Me.ucrInputSave.Size = New System.Drawing.Size(170, 21)
         Me.ucrInputSave.TabIndex = 18
         '
-        'ucrReceiverElement
-        '
-        Me.ucrReceiverElement.frmParent = Me
-        Me.ucrReceiverElement.Location = New System.Drawing.Point(251, 263)
-        Me.ucrReceiverElement.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverElement.Name = "ucrReceiverElement"
-        Me.ucrReceiverElement.Selector = Nothing
-        Me.ucrReceiverElement.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverElement.strNcFilePath = ""
-        Me.ucrReceiverElement.TabIndex = 13
-        Me.ucrReceiverElement.ucrSelector = Nothing
-        '
         'ucrChkLastDate
         '
         Me.ucrChkLastDate.Checked = False
@@ -365,8 +354,21 @@ Partial Class dlgExtremesClimatic
         Me.ucrReceiverStation.TabIndex = 5
         Me.ucrReceiverStation.ucrSelector = Nothing
         '
+        'ucrReceiverElement
+        '
+        Me.ucrReceiverElement.frmParent = Me
+        Me.ucrReceiverElement.Location = New System.Drawing.Point(251, 263)
+        Me.ucrReceiverElement.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverElement.Name = "ucrReceiverElement"
+        Me.ucrReceiverElement.Selector = Nothing
+        Me.ucrReceiverElement.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverElement.strNcFilePath = ""
+        Me.ucrReceiverElement.TabIndex = 13
+        Me.ucrReceiverElement.ucrSelector = Nothing
+        '
         'ucrSelectorClimaticExtremes
         '
+        Me.ucrSelectorClimaticExtremes.bDropUnusedFilterLevels = False
         Me.ucrSelectorClimaticExtremes.bShowHiddenColumns = False
         Me.ucrSelectorClimaticExtremes.bUseCurrentFilter = True
         Me.ucrSelectorClimaticExtremes.Location = New System.Drawing.Point(10, 44)
@@ -389,11 +391,20 @@ Partial Class dlgExtremesClimatic
         Me.ucrPnlExtremesType.Size = New System.Drawing.Size(218, 37)
         Me.ucrPnlExtremesType.TabIndex = 0
         '
+        'ucrChkDisplayDates
+        '
+        Me.ucrChkDisplayDates.Checked = False
+        Me.ucrChkDisplayDates.Location = New System.Drawing.Point(226, 310)
+        Me.ucrChkDisplayDates.Name = "ucrChkDisplayDates"
+        Me.ucrChkDisplayDates.Size = New System.Drawing.Size(152, 20)
+        Me.ucrChkDisplayDates.TabIndex = 27
+        '
         'dlgExtremesClimatic
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(414, 556)
+        Me.Controls.Add(Me.ucrChkDisplayDates)
         Me.Controls.Add(Me.cmdDoyRange)
         Me.Controls.Add(Me.ucrInputFilterPreview)
         Me.Controls.Add(Me.lblNewColName)
@@ -459,4 +470,5 @@ Partial Class dlgExtremesClimatic
     Friend WithEvents ucrInputFilterPreview As ucrInputTextBox
     Friend WithEvents ucrChkLastDate As ucrCheck
     Friend WithEvents ucrChkNDates As ucrCheck
+    Friend WithEvents ucrChkDisplayDates As ucrCheck
 End Class
