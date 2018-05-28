@@ -43,6 +43,7 @@ Partial Class ucrDataView
         Me.columnContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuColumnRename = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDuplicateColumn = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuReorderColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuInsertColsBefore = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuInsertColsAfter = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDeleteCol = New System.Windows.Forms.ToolStripMenuItem()
@@ -117,9 +118,9 @@ Partial Class ucrDataView
         '
         'columnContextMenuStrip
         '
-        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuDuplicateColumn, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertToLogical, Me.mnuConvertVariate, Me.ToolStripSeparator1, Me.mnuLevelsLabels, Me.toolStripMenuItem21, Me.mnuFreezeToHere, Me.mnuUnfreeze, Me.ToolStripSeparator3, Me.mnuSort, Me.mnuColumnFilter, Me.mnuClearColumnFilter})
+        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuDuplicateColumn, Me.mnuReorderColumns, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertToLogical, Me.mnuConvertVariate, Me.ToolStripSeparator1, Me.mnuLevelsLabels, Me.toolStripMenuItem21, Me.mnuFreezeToHere, Me.mnuUnfreeze, Me.ToolStripSeparator3, Me.mnuSort, Me.mnuColumnFilter, Me.mnuClearColumnFilter})
         Me.columnContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.columnContextMenuStrip.Size = New System.Drawing.Size(213, 380)
+        Me.columnContextMenuStrip.Size = New System.Drawing.Size(213, 424)
         '
         'mnuColumnRename
         '
@@ -132,6 +133,12 @@ Partial Class ucrDataView
         Me.mnuDuplicateColumn.Name = "mnuDuplicateColumn"
         Me.mnuDuplicateColumn.Size = New System.Drawing.Size(212, 22)
         Me.mnuDuplicateColumn.Text = "Duplicate Column..."
+        '
+        'mnuReorderColumns
+        '
+        Me.mnuReorderColumns.Name = "mnuReorderColumns"
+        Me.mnuReorderColumns.Size = New System.Drawing.Size(212, 22)
+        Me.mnuReorderColumns.Text = "Reorder Column(s)..."
         '
         'mnuInsertColsBefore
         '
@@ -502,4 +509,5 @@ Partial Class ucrDataView
     Friend WithEvents pnlDataContainer As Panel
     Friend WithEvents mnuLevelsLabels As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents mnuReorderColumns As ToolStripMenuItem
 End Class
