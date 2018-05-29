@@ -486,7 +486,7 @@ Partial Class dlgStartofRains
         Me.ucrBase.Location = New System.Drawing.Point(9, 527)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
-        Me.ucrBase.TabIndex = 14
+        Me.ucrBase.TabIndex = 19
         '
         'lblStation
         '
@@ -574,7 +574,7 @@ Partial Class dlgStartofRains
         Me.lblNewColumnNameDoy.Location = New System.Drawing.Point(6, 472)
         Me.lblNewColumnNameDoy.Name = "lblNewColumnNameDoy"
         Me.lblNewColumnNameDoy.Size = New System.Drawing.Size(101, 13)
-        Me.lblNewColumnNameDoy.TabIndex = 23
+        Me.lblNewColumnNameDoy.TabIndex = 13
         Me.lblNewColumnNameDoy.Text = "New Column Name:"
         '
         'ucrInputNewDoyColumnName
@@ -585,7 +585,7 @@ Partial Class dlgStartofRains
         Me.ucrInputNewDoyColumnName.Location = New System.Drawing.Point(110, 468)
         Me.ucrInputNewDoyColumnName.Name = "ucrInputNewDoyColumnName"
         Me.ucrInputNewDoyColumnName.Size = New System.Drawing.Size(187, 21)
-        Me.ucrInputNewDoyColumnName.TabIndex = 22
+        Me.ucrInputNewDoyColumnName.TabIndex = 14
         '
         'lblNewColumnNameDate
         '
@@ -593,7 +593,7 @@ Partial Class dlgStartofRains
         Me.lblNewColumnNameDate.Location = New System.Drawing.Point(6, 501)
         Me.lblNewColumnNameDate.Name = "lblNewColumnNameDate"
         Me.lblNewColumnNameDate.Size = New System.Drawing.Size(101, 13)
-        Me.lblNewColumnNameDate.TabIndex = 25
+        Me.lblNewColumnNameDate.TabIndex = 16
         Me.lblNewColumnNameDate.Text = "New Column Name:"
         '
         'ucrInputNewDateColumnName
@@ -604,7 +604,7 @@ Partial Class dlgStartofRains
         Me.ucrInputNewDateColumnName.Location = New System.Drawing.Point(111, 497)
         Me.ucrInputNewDateColumnName.Name = "ucrInputNewDateColumnName"
         Me.ucrInputNewDateColumnName.Size = New System.Drawing.Size(187, 21)
-        Me.ucrInputNewDateColumnName.TabIndex = 24
+        Me.ucrInputNewDateColumnName.TabIndex = 17
         '
         'ucrChkAsDoy
         '
@@ -612,7 +612,7 @@ Partial Class dlgStartofRains
         Me.ucrChkAsDoy.Location = New System.Drawing.Point(339, 468)
         Me.ucrChkAsDoy.Name = "ucrChkAsDoy"
         Me.ucrChkAsDoy.Size = New System.Drawing.Size(143, 20)
-        Me.ucrChkAsDoy.TabIndex = 26
+        Me.ucrChkAsDoy.TabIndex = 15
         '
         'ucrChkAsDate
         '
@@ -620,7 +620,7 @@ Partial Class dlgStartofRains
         Me.ucrChkAsDate.Location = New System.Drawing.Point(339, 501)
         Me.ucrChkAsDate.Name = "ucrChkAsDate"
         Me.ucrChkAsDate.Size = New System.Drawing.Size(143, 20)
-        Me.ucrChkAsDate.TabIndex = 27
+        Me.ucrChkAsDate.TabIndex = 18
         '
         'dlgStartofRains
         '
