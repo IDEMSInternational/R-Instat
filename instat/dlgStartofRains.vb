@@ -17,9 +17,9 @@
 Imports instat.Translations
 
 Public Class dlgStartofRains
-    Public clsRainyDays, clsRainyDaysFunction, clsFirstDOYPerYear, clsManipulationFirstDOYPerYear, clsCombinedFilter, clsCombinedList As New RFunction
+    Private clsRainyDays, clsRainyDaysFunction, clsFirstDOYPerYear, clsFirstDatePerYear, clsCombinationCalc, clsListSubCalc, clsManipulationisList, clsManipulationFirstDOYPerYear, clsCombinedFilter, clsCombinedList As New RFunction
     Private clsDayFromAndTo, clsGroupBy, clsAddKey, clsAddKeyColName, clsApplyInstatFunction As New RFunction
-    Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator, clsRainyDaysOperator, clsFirstDOYPerYearOperator, clsCombineOperator, clsRainCombineOperator, clsTRCombineOperator, clsRDCombineOperator, clsDSCombineOperator, clsDPCombineOperator As New ROperator
+    Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator, clsRainyDaysOperator, clsFirstDOYPerYearOperator, clsFirstDatePerYearOperator, clsCombineOperator, clsRainCombineOperator, clsTRCombineOperator, clsRDCombineOperator, clsDSCombineOperator, clsDPCombineOperator As New ROperator
     Private clsDayFilterCalcFromConvert, clsDayFilterCalcFromList As New RFunction
     'Total Rainfall classes
     Private clsTRRollingSum, clsTRRollingSumFunction, clsTRWetSpell, clsTRWetSpellList, clsTRWetSpellFunction As New RFunction
@@ -68,6 +68,7 @@ Public Class dlgStartofRains
 
         ucrReceiverDate.SetParameter(New RParameter("date", 0, False))
         ucrReceiverDate.SetParameterIsString()
+        ucrReceiverDate.bWithQuotes = False
         ucrReceiverDate.Selector = ucrSelectorForStartofRains
         ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
         ucrReceiverDate.bAutoFill = True
@@ -182,7 +183,24 @@ Public Class dlgStartofRains
         'save
         ucrInputNewDoyColumnName.SetParameter(New RParameter("result_name", 2))
         ucrInputNewDoyColumnName.SetDataFrameSelector(ucrSelectorForStartofRains.ucrAvailableDataFrames)
-        ucrInputNewDoyColumnName.SetName("start")
+        ucrInputNewDoyColumnName.SetName("start_doy")
+
+        ucrInputNewDateColumnName.SetParameter(New RParameter("result_name", 2))
+        ucrInputNewDateColumnName.SetDataFrameSelector(ucrSelectorForStartofRains.ucrAvailableDataFrames)
+        ucrInputNewDateColumnName.SetName("start_date")
+
+        ucrChkAsDoy.AddToLinkedControls(ucrInputNewDoyColumnName, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkAsDate.AddToLinkedControls(ucrInputNewDateColumnName, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputNewDoyColumnName.SetLinkedDisplayControl(lblNewColumnNameDoy)
+        ucrInputNewDateColumnName.SetLinkedDisplayControl(lblNewColumnNameDate)
+
+        ucrChkAsDoy.AddParameterPresentCondition(True, "sub1", True)
+        ucrChkAsDoy.AddParameterPresentCondition(False, "sub1", False)
+        ucrChkAsDoy.SetText("As Doy")
+
+        ucrChkAsDate.AddParameterPresentCondition(True, "sub2", True)
+        ucrChkAsDate.AddParameterPresentCondition(False, "sub2", False)
+        ucrChkAsDate.SetText("As Date")
     End Sub
 
     Private Sub SetDefaults()
@@ -206,6 +224,8 @@ Public Class dlgStartofRains
         clsFirstDOYPerYearOperator.Clear()
         clsCombinedFilter.Clear()
         clsCombinedList.Clear()
+        clsCombinationCalc.Clear()
+        clsListSubCalc.Clear()
 
         clsTRRollingSum.Clear()
         clsTRRollingSumFunction.Clear()
@@ -249,6 +269,7 @@ Public Class dlgStartofRains
         ' Adding a key
         clsAddKey.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
         clsAddKey.AddParameter("col_name", clsRFunctionParameter:=clsAddKeyColName)
+        clsAddKey.AddParameter("data_name", strCurrDataName, iPosition:=0)
         clsAddKeyColName.SetRCommand("c")
 
         clsDayFilterCalcFromConvert = New RFunction
@@ -464,26 +485,49 @@ Public Class dlgStartofRains
         ' First DOY
         clsFirstDOYPerYearOperator.bToScriptAsRString = True
         clsFirstDOYPerYear.SetRCommand("instat_calculation$new")
-        clsManipulationFirstDOYPerYear.SetRCommand("list")
-        clsManipulationFirstDOYPerYear.AddParameter("group_sub", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False, iPosition:=0)
-        clsManipulationFirstDOYPerYear.AddParameter("dry_spell_sub", clsRFunctionParameter:=clsCombinedFilter, bIncludeArgumentName:=False, iPosition:=1)
-        clsManipulationFirstDOYPerYear.AddParameter("day_sub", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False, iPosition:=2)
-        clsFirstDOYPerYear.AddParameter("manipulations", clsRFunctionParameter:=clsManipulationFirstDOYPerYear, iPosition:=5)
         clsFirstDOYPerYear.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
         clsFirstDOYPerYear.AddParameter("function_exp", clsROperatorParameter:=clsFirstDOYPerYearOperator, iPosition:=1)
         clsFirstDOYPerYearOperator.SetOperation("[")
         clsFirstDOYPerYearOperator.AddParameter("rightside", "1 ]", iPosition:=1)
-        clsFirstDOYPerYear.AddParameter("result_name", Chr(34) & "start" & Chr(34), iPosition:=2)
+        clsFirstDOYPerYear.AddParameter("result_name", Chr(34) & "start_doy" & Chr(34), iPosition:=2)
         clsFirstDOYPerYear.AddParameter("save", 2, iPosition:=6)
-        clsFirstDOYPerYear.SetAssignTo("start_of_rains")
+        clsFirstDOYPerYear.SetAssignTo("start_of_rains_doy")
 
+        'First Date
+        clsFirstDatePerYear.SetRCommand("instat_calculation$new")
+        clsFirstDatePerYear.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
+        clsFirstDatePerYear.AddParameter("function_exp", clsROperatorParameter:=clsFirstDatePerYearOperator, iPosition:=1)
+        clsFirstDatePerYearOperator.SetOperation("[")
+        clsFirstDatePerYearOperator.bToScriptAsRString = True
+        clsFirstDatePerYearOperator.AddParameter("rightside", "1 ]", iPosition:=1)
+        clsFirstDatePerYear.AddParameter("save", 2, iPosition:=6)
+        clsFirstDatePerYear.AddParameter("result_name", Chr(34) & "start_date" & Chr(34), iPosition:=2)
+        clsFirstDatePerYear.SetAssignTo("start_of_rains_date")
+
+        'Combination
+        clsCombinationCalc.SetRCommand("instat_calculation$new")
+        clsCombinationCalc.AddParameter("type", Chr(34) & "combination" & Chr(34), iPosition:=0)
+        clsCombinationCalc.AddParameter("sub_calculation", clsRFunctionParameter:=clsListSubCalc, iPosition:=1)
+        clsCombinationCalc.AddParameter("manipulation", clsRFunctionParameter:=clsManipulationisList, iPosition:=2)
+        clsCombinationCalc.SetAssignTo("start_combined")
+
+        'Sub_Calculations List
+        clsListSubCalc.SetRCommand("list")
+        clsListSubCalc.AddParameter("sub1", iPosition:=0, clsRFunctionParameter:=clsFirstDOYPerYear, bIncludeArgumentName:=False)
+
+        'Manipulation List
+        clsManipulationisList.SetRCommand("list")
+        clsManipulationisList.AddParameter("manp1", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False)
+        clsManipulationisList.AddParameter("manp2", clsRFunctionParameter:=clsCombinedFilter, bIncludeArgumentName:=False)
+        clsManipulationisList.AddParameter("manp3", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False)
+
+        'Run Calculations
         clsApplyInstatFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsApplyInstatFunction.AddParameter("display", "FALSE", iPosition:=1)
-        clsApplyInstatFunction.AddParameter("calc", clsRFunctionParameter:=clsFirstDOYPerYear, iPosition:=0)
+        clsApplyInstatFunction.AddParameter("calc", clsRFunctionParameter:=clsCombinationCalc, iPosition:=0)
 
         'Base Function
         ucrBase.clsRsyntax.SetBaseRFunction(clsApplyInstatFunction)
-
         'DefaultNudValue()
     End Sub
 
@@ -497,13 +541,14 @@ Public Class dlgStartofRains
         ucrNudDPRainPeriod.AddAdditionalCodeParameterPair(clsDPOverallIntervalFunctionOperatorRight, ucrNudDPRainPeriod.GetParameter(), iAdditionalPairNo:=1)
 
         ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
-
+        ucrChkAsDoy.SetRCode(clsListSubCalc, bReset)
+        ucrChkAsDate.SetRCode(clsListSubCalc, bReset)
         ucrNudThreshold.SetRCode(clsRainyDaysOperator, bReset)
 
         ucrReceiverStation.SetRCode(clsAddKeyColName, bReset)
-        ucrReceiverDate.SetRCode(clsAddKeyColName, bReset)
-        ucrSelectorForStartofRains.SetRCode(clsAddKey, bReset)
+        ucrReceiverDate.SetRCode(clsFirstDatePerYearOperator, bReset)
         ucrInputNewDoyColumnName.SetRCode(clsFirstDOYPerYear, bReset)
+        ucrInputNewDateColumnName.SetRCode(clsFirstDatePerYear, bReset)
 
         'Total Rainfall
         ucrChkTotalRainfall.SetRCode(clsCombinedList, bReset)
@@ -593,6 +638,8 @@ Public Class dlgStartofRains
 
     Private Sub DayBoundaries()
         clsFirstDOYPerYear.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")", iPosition:=3)
+        clsFirstDatePerYear.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDate.GetVariableNames() & ")", iPosition:=3)
+        clsAddKeyColName.AddParameter("date", ucrReceiverDate.GetVariableNames(), bIncludeArgumentName:=False, iPosition:=0)
     End Sub
 
     Private Sub RainDays()
@@ -649,6 +696,26 @@ Public Class dlgStartofRains
 
     Private Sub ucrSelectorForStartofRains_DataFrameChanged() Handles ucrSelectorForStartofRains.DataFrameChanged
         clsDayFilterCalcFromList.ClearParameters()
+    End Sub
+
+    Private Sub ucrReceiverDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlValueChanged
+        DayBoundaries()
+    End Sub
+
+    Private Sub ucrChkAsDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAsDate.ControlValueChanged
+        If ucrChkAsDate.Checked Then
+            clsListSubCalc.AddParameter("sub2", iPosition:=1, clsRFunctionParameter:=clsFirstDatePerYear, bIncludeArgumentName:=False)
+        Else
+            clsListSubCalc.RemoveParameterByName("sub2")
+        End If
+    End Sub
+
+    Private Sub ucrChkAsDoy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAsDoy.ControlValueChanged
+        If ucrChkAsDoy.Checked Then
+            clsListSubCalc.AddParameter("sub1", iPosition:=1, clsRFunctionParameter:=clsFirstDOYPerYear, bIncludeArgumentName:=False)
+        Else
+            clsListSubCalc.RemoveParameterByName("sub1")
+        End If
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRainfall.ControlContentsChanged, ucrInputNewDoyColumnName.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrNudThreshold.ControlContentsChanged, ucrChkNumberOfRainyDays.ControlContentsChanged, ucrNudRDMinimumDays.ControlContentsChanged, ucrNudRDOutOfDays.ControlContentsChanged, ucrChkTotalRainfall.ControlContentsChanged, ucrNudTROverDays.ControlContentsChanged, ucrPnlTRCalculateBy.ControlContentsChanged, ucrNudTRAmount.ControlContentsChanged, ucrNudTRPercentile.ControlContentsChanged, ucrChkDrySpell.ControlContentsChanged, ucrNudDSMaximumDays.ControlContentsChanged, ucrNudDSLengthOfTime.ControlContentsChanged, ucrNudDPMaxRain.ControlContentsChanged
