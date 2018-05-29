@@ -191,16 +191,14 @@ Public Class dlgStartofRains
 
         ucrChkAsDoy.AddToLinkedControls(ucrInputNewDoyColumnName, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkAsDate.AddToLinkedControls(ucrInputNewDateColumnName, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputNewDoyColumnName.SetLinkedDisplayControl(lblNewColumnNameDoy)
-        ucrInputNewDateColumnName.SetLinkedDisplayControl(lblNewColumnNameDate)
 
         ucrChkAsDoy.AddParameterPresentCondition(True, "sub1", True)
         ucrChkAsDoy.AddParameterPresentCondition(False, "sub1", False)
-        ucrChkAsDoy.SetText("As Doy")
+        ucrChkAsDoy.SetText("Display doy column")
 
         ucrChkAsDate.AddParameterPresentCondition(True, "sub2", True)
         ucrChkAsDate.AddParameterPresentCondition(False, "sub2", False)
-        ucrChkAsDate.SetText("As Date")
+        ucrChkAsDate.SetText("Display Date column")
     End Sub
 
     Private Sub SetDefaults()
