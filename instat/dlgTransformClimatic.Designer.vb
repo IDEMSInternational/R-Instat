@@ -52,24 +52,28 @@ Partial Class dlgTransformClimatic
         Me.lblNewColName = New System.Windows.Forms.Label()
         Me.lblCountOver = New System.Windows.Forms.Label()
         Me.grpTransform = New System.Windows.Forms.GroupBox()
-        Me.ucrInputSpellUpper = New instat.ucrInputTextBox()
-        Me.ucrInputCondition = New instat.ucrInputComboBox()
-        Me.ucrInputEvaporation = New instat.ucrInputTextBox()
         Me.lblCondition = New System.Windows.Forms.Label()
         Me.lblWBEvaporation = New System.Windows.Forms.Label()
+        Me.lblWBCapacity = New System.Windows.Forms.Label()
+        Me.rdoEvapValue = New System.Windows.Forms.RadioButton()
+        Me.rdoEvapVariable = New System.Windows.Forms.RadioButton()
+        Me.ucrReceiverEvap = New instat.ucrReceiverSingle()
+        Me.ucrInputEvaporation = New instat.ucrInputTextBox()
+        Me.ucrInputSpellUpper = New instat.ucrInputTextBox()
+        Me.ucrInputCondition = New instat.ucrInputComboBox()
+        Me.ucrPnlEvap = New instat.UcrPanel()
         Me.ucrInputSpellLower = New instat.ucrInputTextBox()
         Me.ucrNudSumOver = New instat.ucrNud()
-        Me.lblWBCapacity = New System.Windows.Forms.Label()
         Me.ucrNudWBCapacity = New instat.ucrNud()
         Me.ucrInputSum = New instat.ucrInputComboBox()
         Me.ucrNudCountOver = New instat.ucrNud()
         Me.ucrInputColName = New instat.ucrInputTextBox()
         Me.ucrPnlTransform = New instat.UcrPanel()
-        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
-        Me.ucrSelectorTransform = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
+        Me.ucrReceiverYear = New instat.ucrReceiverSingle()
+        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrReceiverData = New instat.ucrReceiverSingle()
+        Me.ucrSelectorTransform = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpTransform.SuspendLayout()
         Me.SuspendLayout()
@@ -161,10 +165,14 @@ Partial Class dlgTransformClimatic
         '
         'grpTransform
         '
+        Me.grpTransform.Controls.Add(Me.ucrReceiverEvap)
+        Me.grpTransform.Controls.Add(Me.rdoEvapVariable)
+        Me.grpTransform.Controls.Add(Me.ucrInputEvaporation)
+        Me.grpTransform.Controls.Add(Me.rdoEvapValue)
         Me.grpTransform.Controls.Add(Me.ucrInputSpellUpper)
         Me.grpTransform.Controls.Add(Me.lblSumRows)
         Me.grpTransform.Controls.Add(Me.ucrInputCondition)
-        Me.grpTransform.Controls.Add(Me.ucrInputEvaporation)
+        Me.grpTransform.Controls.Add(Me.ucrPnlEvap)
         Me.grpTransform.Controls.Add(Me.lblCondition)
         Me.grpTransform.Controls.Add(Me.lblWBEvaporation)
         Me.grpTransform.Controls.Add(Me.ucrInputSpellLower)
@@ -178,6 +186,55 @@ Partial Class dlgTransformClimatic
         resources.ApplyResources(Me.grpTransform, "grpTransform")
         Me.grpTransform.Name = "grpTransform"
         Me.grpTransform.TabStop = False
+        '
+        'lblCondition
+        '
+        resources.ApplyResources(Me.lblCondition, "lblCondition")
+        Me.lblCondition.Name = "lblCondition"
+        Me.lblCondition.Tag = "Condition:"
+        '
+        'lblWBEvaporation
+        '
+        resources.ApplyResources(Me.lblWBEvaporation, "lblWBEvaporation")
+        Me.lblWBEvaporation.Name = "lblWBEvaporation"
+        Me.lblWBEvaporation.Tag = "Evaporation"
+        '
+        'lblWBCapacity
+        '
+        resources.ApplyResources(Me.lblWBCapacity, "lblWBCapacity")
+        Me.lblWBCapacity.Name = "lblWBCapacity"
+        Me.lblWBCapacity.Tag = "Capacity"
+        '
+        'rdoEvapValue
+        '
+        resources.ApplyResources(Me.rdoEvapValue, "rdoEvapValue")
+        Me.rdoEvapValue.Name = "rdoEvapValue"
+        Me.rdoEvapValue.TabStop = True
+        Me.rdoEvapValue.UseVisualStyleBackColor = True
+        '
+        'rdoEvapVariable
+        '
+        resources.ApplyResources(Me.rdoEvapVariable, "rdoEvapVariable")
+        Me.rdoEvapVariable.Name = "rdoEvapVariable"
+        Me.rdoEvapVariable.TabStop = True
+        Me.rdoEvapVariable.UseVisualStyleBackColor = True
+        '
+        'ucrReceiverEvap
+        '
+        Me.ucrReceiverEvap.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverEvap, "ucrReceiverEvap")
+        Me.ucrReceiverEvap.Name = "ucrReceiverEvap"
+        Me.ucrReceiverEvap.Selector = Nothing
+        Me.ucrReceiverEvap.strNcFilePath = ""
+        Me.ucrReceiverEvap.ucrSelector = Nothing
+        '
+        'ucrInputEvaporation
+        '
+        Me.ucrInputEvaporation.AddQuotesIfUnrecognised = True
+        Me.ucrInputEvaporation.IsMultiline = False
+        Me.ucrInputEvaporation.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputEvaporation, "ucrInputEvaporation")
+        Me.ucrInputEvaporation.Name = "ucrInputEvaporation"
         '
         'ucrInputSpellUpper
         '
@@ -194,25 +251,10 @@ Partial Class dlgTransformClimatic
         resources.ApplyResources(Me.ucrInputCondition, "ucrInputCondition")
         Me.ucrInputCondition.Name = "ucrInputCondition"
         '
-        'ucrInputEvaporation
+        'ucrPnlEvap
         '
-        Me.ucrInputEvaporation.AddQuotesIfUnrecognised = True
-        Me.ucrInputEvaporation.IsMultiline = False
-        Me.ucrInputEvaporation.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputEvaporation, "ucrInputEvaporation")
-        Me.ucrInputEvaporation.Name = "ucrInputEvaporation"
-        '
-        'lblCondition
-        '
-        resources.ApplyResources(Me.lblCondition, "lblCondition")
-        Me.lblCondition.Name = "lblCondition"
-        Me.lblCondition.Tag = "Condition:"
-        '
-        'lblWBEvaporation
-        '
-        resources.ApplyResources(Me.lblWBEvaporation, "lblWBEvaporation")
-        Me.lblWBEvaporation.Name = "lblWBEvaporation"
-        Me.lblWBEvaporation.Tag = "Evaporation"
+        resources.ApplyResources(Me.ucrPnlEvap, "ucrPnlEvap")
+        Me.ucrPnlEvap.Name = "ucrPnlEvap"
         '
         'ucrInputSpellLower
         '
@@ -231,12 +273,6 @@ Partial Class dlgTransformClimatic
         Me.ucrNudSumOver.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSumOver.Name = "ucrNudSumOver"
         Me.ucrNudSumOver.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblWBCapacity
-        '
-        resources.ApplyResources(Me.lblWBCapacity, "lblWBCapacity")
-        Me.lblWBCapacity.Name = "lblWBCapacity"
-        Me.lblWBCapacity.Tag = "Capacity"
         '
         'ucrNudWBCapacity
         '
@@ -278,30 +314,14 @@ Partial Class dlgTransformClimatic
         resources.ApplyResources(Me.ucrPnlTransform, "ucrPnlTransform")
         Me.ucrPnlTransform.Name = "ucrPnlTransform"
         '
-        'ucrReceiverData
+        'ucrReceiverDate
         '
-        Me.ucrReceiverData.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverData, "ucrReceiverData")
-        Me.ucrReceiverData.Name = "ucrReceiverData"
-        Me.ucrReceiverData.Selector = Nothing
-        Me.ucrReceiverData.strNcFilePath = ""
-        Me.ucrReceiverData.ucrSelector = Nothing
-        '
-        'ucrReceiverStation
-        '
-        Me.ucrReceiverStation.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverStation, "ucrReceiverStation")
-        Me.ucrReceiverStation.Name = "ucrReceiverStation"
-        Me.ucrReceiverStation.Selector = Nothing
-        Me.ucrReceiverStation.strNcFilePath = ""
-        Me.ucrReceiverStation.ucrSelector = Nothing
-        '
-        'ucrSelectorTransform
-        '
-        Me.ucrSelectorTransform.bShowHiddenColumns = False
-        Me.ucrSelectorTransform.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorTransform, "ucrSelectorTransform")
-        Me.ucrSelectorTransform.Name = "ucrSelectorTransform"
+        Me.ucrReceiverDate.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverDate, "ucrReceiverDate")
+        Me.ucrReceiverDate.Name = "ucrReceiverDate"
+        Me.ucrReceiverDate.Selector = Nothing
+        Me.ucrReceiverDate.strNcFilePath = ""
+        Me.ucrReceiverDate.ucrSelector = Nothing
         '
         'ucrReceiverYear
         '
@@ -312,14 +332,31 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverYear.strNcFilePath = ""
         Me.ucrReceiverYear.ucrSelector = Nothing
         '
-        'ucrReceiverDate
+        'ucrReceiverStation
         '
-        Me.ucrReceiverDate.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverDate, "ucrReceiverDate")
-        Me.ucrReceiverDate.Name = "ucrReceiverDate"
-        Me.ucrReceiverDate.Selector = Nothing
-        Me.ucrReceiverDate.strNcFilePath = ""
-        Me.ucrReceiverDate.ucrSelector = Nothing
+        Me.ucrReceiverStation.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverStation, "ucrReceiverStation")
+        Me.ucrReceiverStation.Name = "ucrReceiverStation"
+        Me.ucrReceiverStation.Selector = Nothing
+        Me.ucrReceiverStation.strNcFilePath = ""
+        Me.ucrReceiverStation.ucrSelector = Nothing
+        '
+        'ucrReceiverData
+        '
+        Me.ucrReceiverData.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverData, "ucrReceiverData")
+        Me.ucrReceiverData.Name = "ucrReceiverData"
+        Me.ucrReceiverData.Selector = Nothing
+        Me.ucrReceiverData.strNcFilePath = ""
+        Me.ucrReceiverData.ucrSelector = Nothing
+        '
+        'ucrSelectorTransform
+        '
+        Me.ucrSelectorTransform.bDropUnusedFilterLevels = False
+        Me.ucrSelectorTransform.bShowHiddenColumns = False
+        Me.ucrSelectorTransform.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorTransform, "ucrSelectorTransform")
+        Me.ucrSelectorTransform.Name = "ucrSelectorTransform"
         '
         'ucrBase
         '
@@ -382,7 +419,6 @@ Partial Class dlgTransformClimatic
     Friend WithEvents lblNewColName As Label
     Friend WithEvents ucrNudCountOver As ucrNud
     Friend WithEvents lblCountOver As Label
-    Friend WithEvents ucrInputEvaporation As ucrInputTextBox
     Friend WithEvents lblWBEvaporation As Label
     Friend WithEvents ucrNudWBCapacity As ucrNud
     Friend WithEvents lblWBCapacity As Label
@@ -391,4 +427,9 @@ Partial Class dlgTransformClimatic
     Friend WithEvents ucrInputSpellUpper As ucrInputTextBox
     Friend WithEvents ucrInputCondition As ucrInputComboBox
     Friend WithEvents lblCondition As Label
+    Friend WithEvents ucrReceiverEvap As ucrReceiverSingle
+    Friend WithEvents rdoEvapVariable As RadioButton
+    Friend WithEvents ucrInputEvaporation As ucrInputTextBox
+    Friend WithEvents rdoEvapValue As RadioButton
+    Friend WithEvents ucrPnlEvap As UcrPanel
 End Class
