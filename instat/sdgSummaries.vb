@@ -288,6 +288,4 @@ Public Class sdgSummaries
         '        clsDefaultFunction.RemoveParameterByName("order_by")
         '    End If
     End Sub
-
-
 End Class
