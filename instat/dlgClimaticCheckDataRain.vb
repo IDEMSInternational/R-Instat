@@ -14,34 +14,32 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgClimaticCheckDataRain
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private strCurrDataName As String = ""
-    Private strRain As String = "Rain"
     'Large/Same/wetdays
     Private clsGroupByFunc, clsRainFilterFunc, clsRunCalcFunc, clsListFunc, clsGroupByMonth, clsListForOutlierManipulations, clsRainyDaysFunc, clsOutlierLimitFunc, clsOutlierLimitCalcFunc As New RFunction
     'Large 
     Private clsLargeTestCalcFunc As New RFunction
     Private clsLargeOperator, clsOrLargeOperator, clsLargeLessOperator, clsOutlierOperator, clsRainyDaysOperator As New ROperator
-    Private strLarge As String = "large_test_calculation"
     Private clsManipList As New RFunction
+    Private strLargeTest As String = "Large"
     'Same
     Private clsRleFunc, clsRepFunc, clsAsNumericFunc As New RFunction
     Private clsSameCalcFunc, clsSameTestFunc As New RFunction
     Private clsAndOperator, clsDollarOperator, clsGreaterSameOperator As New ROperator
-    Private strSameCalc As String = "same_calculation"
-    Private strSameTestCalc As String = "same_test_calculation"
     Private clsSameList As New RFunction
+    Private strSameCalc As String = "same"
+    Private strSameTestCalc As String = "Same"
     'Wetdays
     Private clsCumSumFuc, clsCumMaxFunc As New RFunction
     Private clsGreaterOperator, clsMinusOperator, clsMultiplOperator, clsGreatOperator, clsEqualOperator As New ROperator
     Private clsCumulativeCalcFunc, clsCumulativeTestFunc As New RFunction
-    Private strCumulativeCalc As String = "cumulative_calculation"
-    Private strCumulativeTestCalc As String = "cumulative_test_calculation"
     Private clsCumulativeList As New RFunction
+    Private strCumulativeCalc As String = "Wet_days"
+    Private strCumulativeTestCalc As String = "wet_days"
     'Combined Filters
     Private clsOrOperator As New ROperator
     Private clsListSubCalc As New RFunction
@@ -102,23 +100,22 @@ Public Class dlgClimaticCheckDataRain
         ucrReceiverDate.SetClimaticType("date")
         ucrReceiverDate.bAutoFill = True
 
-        ucrChkLarge.SetParameter(New RParameter("large", clsLargeTestCalcFunc, 1), bNewChangeParameterValue:=False)
+        ucrChkLarge.SetParameter(New RParameter("large", strLargeTest, 1), bNewChangeParameterValue:=False)
         ucrChkLarge.SetText("Large")
 
-        ucrChkSame.SetParameter(New RParameter("same", clsSameTestFunc, 1), bNewChangeParameterValue:=False)
+        ucrChkSame.SetParameter(New RParameter("same", strSameTestCalc, 1), bNewChangeParameterValue:=False)
         ucrChkSame.SetText("Same")
 
-        ucrChkWetDays.SetParameter(New RParameter("wet_days", clsCumulativeTestFunc, 1, False), bNewChangeParameterValue:=False)
+        ucrChkWetDays.SetParameter(New RParameter("wet_days", strCumulativeTestCalc, 1, False), bNewChangeParameterValue:=False)
         ucrChkWetDays.SetText("Consecutive")
 
         ucrNudSame.SetParameter(New RParameter("right", 1, bNewIncludeArgumentName:=False))
         ucrNudWetDays.SetParameter(New RParameter("right", 1, bNewIncludeArgumentName:=False))
 
         ucrChkOutlier.SetParameter(New RParameter("outlier.limit", clsOutlierOperator, 1, False), bNewChangeParameterValue:=False)
-
         ucrChkOutlier.SetText("Outlier")
 
-        ucrNudCoeff.SetParameter(New RParameter("coeff"))
+        ucrNudCoeff.SetParameter(New RParameter("coeff", 1))
         ucrNudCoeff.DecimalPlaces = 1
         ucrNudCoeff.Increment = 0.1
         ucrNudCoeff.SetRDefault("1.5")
@@ -126,7 +123,6 @@ Public Class dlgClimaticCheckDataRain
         ucrNudSkewnessWeight.SetParameter(New RParameter("skewnessweight", 4))
         ucrNudSkewnessWeight.DecimalPlaces = 1
         ucrNudSkewnessWeight.Increment = 0.1
-
         ucrNudSkewnessWeight.SetRDefault("4")
 
         ucrChkOmitZero.SetText("Omit Zero")
@@ -221,7 +217,7 @@ Public Class dlgClimaticCheckDataRain
         clsLargeTestCalcFunc.SetRCommand("instat_calculation$new")
         clsLargeTestCalcFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsLargeTestCalcFunc.AddParameter("function_exp", clsROperatorParameter:=clsOrLargeOperator, iPosition:=1)
-        clsLargeTestCalcFunc.AddParameter("result_name", Chr(34) & strLarge & Chr(34))
+        clsLargeTestCalcFunc.AddParameter("result_name", Chr(34) & strLargeTest & Chr(34))
         clsLargeTestCalcFunc.SetAssignTo("large_test_calculation")
 
         'Same
