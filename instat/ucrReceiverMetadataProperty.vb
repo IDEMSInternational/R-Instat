@@ -80,6 +80,8 @@ Public Class ucrReceiverMetadataProperty
                         ucrInputCboParamValue.SetItems()
                     End If
                 End If
+            ElseIf ctrActive.Equals(ucrColor) Then
+                ucrColor.SetColours()
             End If
             ctrActive.SetRCode(clsNewRCode, bReset, bCloneIfNeeded:=True)
         End If
