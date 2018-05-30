@@ -186,11 +186,11 @@ Public Class dlgClimaticCheckDataTemperature
         ucrNudDifference.Increment = 0.1
         ucrChkDifference.AddToLinkedControls(ucrNudDifference, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
 
-        ucrChkIncludeCalculatedColumns.SetText("Include calculated columns")
+        ucrChkIncludeCalculatedColumns.SetText("Calculated columns")
         ucrChkIncludeCalculatedColumns.SetParameter(New RParameter("save", 4))
         ucrChkIncludeCalculatedColumns.SetValuesCheckedAndUnchecked("2", "0")
 
-        ucrChkIncludeLogicalColumns.SetText("Include logical columns")
+        ucrChkIncludeLogicalColumns.SetText("Logical columns")
         ucrChkIncludeLogicalColumns.SetParameter(New RParameter("save", 4))
         ucrChkIncludeLogicalColumns.SetValuesCheckedAndUnchecked("2", "0")
 
