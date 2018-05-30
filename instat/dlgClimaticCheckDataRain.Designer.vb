@@ -34,10 +34,12 @@ Partial Class dlgClimaticCheckDataRain
         Me.lblRainDays = New System.Windows.Forms.Label()
         Me.lblSkewnessWeight = New System.Windows.Forms.Label()
         Me.grpLogicalCalculatedColumns = New System.Windows.Forms.GroupBox()
+        Me.lblCoeff = New System.Windows.Forms.Label()
+        Me.ucrNudCoeff = New instat.ucrNud()
+        Me.ucrChkOmitZero = New instat.ucrCheck()
         Me.ucrChkCalculatedColumns = New instat.ucrCheck()
         Me.ucrChkLogicalColumns = New instat.ucrCheck()
         Me.ucrNudSkewnessWeight = New instat.ucrNud()
-        Me.ucrChkSkewedData = New instat.ucrCheck()
         Me.ucrNudWetDays = New instat.ucrNud()
         Me.ucrNudSame = New instat.ucrNud()
         Me.ucrNudLarge = New instat.ucrNud()
@@ -112,6 +114,27 @@ Partial Class dlgClimaticCheckDataRain
         Me.grpLogicalCalculatedColumns.Name = "grpLogicalCalculatedColumns"
         Me.grpLogicalCalculatedColumns.TabStop = False
         '
+        'lblCoeff
+        '
+        resources.ApplyResources(Me.lblCoeff, "lblCoeff")
+        Me.lblCoeff.Name = "lblCoeff"
+        '
+        'ucrNudCoeff
+        '
+        Me.ucrNudCoeff.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCoeff.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudCoeff, "ucrNudCoeff")
+        Me.ucrNudCoeff.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudCoeff.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCoeff.Name = "ucrNudCoeff"
+        Me.ucrNudCoeff.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkOmitZero
+        '
+        Me.ucrChkOmitZero.Checked = False
+        resources.ApplyResources(Me.ucrChkOmitZero, "ucrChkOmitZero")
+        Me.ucrChkOmitZero.Name = "ucrChkOmitZero"
+        '
         'ucrChkCalculatedColumns
         '
         Me.ucrChkCalculatedColumns.Checked = False
@@ -133,12 +156,6 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrNudSkewnessWeight.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSkewnessWeight.Name = "ucrNudSkewnessWeight"
         Me.ucrNudSkewnessWeight.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkSkewedData
-        '
-        Me.ucrChkSkewedData.Checked = False
-        resources.ApplyResources(Me.ucrChkSkewedData, "ucrChkSkewedData")
-        Me.ucrChkSkewedData.Name = "ucrChkSkewedData"
         '
         'ucrNudWetDays
         '
@@ -271,11 +288,13 @@ Partial Class dlgClimaticCheckDataRain
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblCoeff)
+        Me.Controls.Add(Me.ucrNudCoeff)
+        Me.Controls.Add(Me.ucrChkOmitZero)
         Me.Controls.Add(Me.ucrChkCalculatedColumns)
         Me.Controls.Add(Me.ucrChkLogicalColumns)
         Me.Controls.Add(Me.lblSkewnessWeight)
         Me.Controls.Add(Me.ucrNudSkewnessWeight)
-        Me.Controls.Add(Me.ucrChkSkewedData)
         Me.Controls.Add(Me.lblRainDays)
         Me.Controls.Add(Me.lblDays)
         Me.Controls.Add(Me.lblmm)
@@ -336,10 +355,12 @@ Partial Class dlgClimaticCheckDataRain
     Friend WithEvents lblmm As Label
     Friend WithEvents lblDays As Label
     Friend WithEvents lblRainDays As Label
-    Friend WithEvents ucrChkSkewedData As ucrCheck
     Friend WithEvents lblSkewnessWeight As Label
     Friend WithEvents ucrNudSkewnessWeight As ucrNud
     Friend WithEvents ucrChkCalculatedColumns As ucrCheck
     Friend WithEvents ucrChkLogicalColumns As ucrCheck
     Friend WithEvents grpLogicalCalculatedColumns As GroupBox
+    Friend WithEvents ucrChkOmitZero As ucrCheck
+    Friend WithEvents lblCoeff As Label
+    Friend WithEvents ucrNudCoeff As ucrNud
 End Class
