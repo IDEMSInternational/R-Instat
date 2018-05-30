@@ -71,7 +71,7 @@ Public Class dlgDuplicateColumns
         ucrReceiverDuplicateColumns.SetMeAsReceiver()
         ucrReceiverDuplicateColumns.bUseFilteredData = False
 
-        'For keep as original option 
+        'For change type check box 
         ucrChkChangeType.SetText("Change type")
         ucrChkChangeType.AddRSyntaxContainsFunctionNamesCondition(True, {frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type"}, bNewIsPositive:=True)
         ucrChkChangeType.AddRSyntaxContainsFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type"}, bNewIsPositive:=False)
