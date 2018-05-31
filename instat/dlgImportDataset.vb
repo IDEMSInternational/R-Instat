@@ -246,6 +246,7 @@ Public Class dlgImportDataset
 
         ucrChkTrimWSExcel.SetText("Trim Trailing White Space")
         ucrChkTrimWSExcel.SetParameter(New RParameter("trim_ws"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkTrimWSExcel.SetRDefault("TRUE")
 
         ucrNudRowsToSkipExcel.SetParameter(New RParameter("skip"))
         ucrNudRowsToSkipExcel.Minimum = 0
@@ -276,7 +277,6 @@ Public Class dlgImportDataset
         ucrPanelFixedWidthText.AddFunctionNamesCondition(rdoSeparatortext, "import", bNewIsPositive:=True)
         ucrPanelFixedWidthText.AddFunctionNamesCondition(rdoFixedWidthText, "read_table", bNewIsPositive:=True)
         ucrPanelFixedWidthText.AddFunctionNamesCondition(rdoFixedWidthWhiteSpacesText, "read_table2", bNewIsPositive:=True)
-        'ucrPanelFixedWidthText.bAllowNonConditionValues = True
 
         ucrChkColumnNamesText.SetText("First Row is Column Headers")
         ucrChkColumnNamesText.SetParameter(New RParameter("col_names"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
