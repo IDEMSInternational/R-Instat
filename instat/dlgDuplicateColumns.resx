@@ -127,13 +127,10 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>347, 17</value>
-  </data>
-  <data name="lblColumns.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>228, 11</value>
   </data>
   <data name="lblColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 20</value>
+    <value>105, 13</value>
   </data>
   <data name="lblColumns.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -160,13 +157,10 @@
     <value>NoControl</value>
   </data>
   <data name="lblNewColumnName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 552</value>
-  </data>
-  <data name="lblNewColumnName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>7, 345</value>
   </data>
   <data name="lblNewColumnName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 20</value>
+    <value>101, 13</value>
   </data>
   <data name="lblNewColumnName.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -186,96 +180,6 @@
   <data name="&gt;&gt;lblNewColumnName.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;rdoBefore.Name" xml:space="preserve">
-    <value>rdoBefore</value>
-  </data>
-  <data name="&gt;&gt;rdoBefore.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoBefore.Parent" xml:space="preserve">
-    <value>grpDuplicatedColumn</value>
-  </data>
-  <data name="&gt;&gt;rdoBefore.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;rdoEnd.Name" xml:space="preserve">
-    <value>rdoEnd</value>
-  </data>
-  <data name="&gt;&gt;rdoEnd.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoEnd.Parent" xml:space="preserve">
-    <value>grpDuplicatedColumn</value>
-  </data>
-  <data name="&gt;&gt;rdoEnd.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;rdoAfter.Name" xml:space="preserve">
-    <value>rdoAfter</value>
-  </data>
-  <data name="&gt;&gt;rdoAfter.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoAfter.Parent" xml:space="preserve">
-    <value>grpDuplicatedColumn</value>
-  </data>
-  <data name="&gt;&gt;rdoAfter.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;rdoBeginning.Name" xml:space="preserve">
-    <value>rdoBeginning</value>
-  </data>
-  <data name="&gt;&gt;rdoBeginning.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoBeginning.Parent" xml:space="preserve">
-    <value>grpDuplicatedColumn</value>
-  </data>
-  <data name="&gt;&gt;rdoBeginning.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlDuplicateColPosition.Name" xml:space="preserve">
-    <value>ucrPnlDuplicateColPosition</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlDuplicateColPosition.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlDuplicateColPosition.Parent" xml:space="preserve">
-    <value>grpDuplicatedColumn</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlDuplicateColPosition.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="grpDuplicatedColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>704, 132</value>
-  </data>
-  <data name="grpDuplicatedColumn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
-  </data>
-  <data name="grpDuplicatedColumn.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
-  </data>
-  <data name="grpDuplicatedColumn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>272, 117</value>
-  </data>
-  <data name="grpDuplicatedColumn.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="grpDuplicatedColumn.Text" xml:space="preserve">
-    <value>Position of Duplicated Column</value>
-  </data>
-  <data name="&gt;&gt;grpDuplicatedColumn.Name" xml:space="preserve">
-    <value>grpDuplicatedColumn</value>
-  </data>
-  <data name="&gt;&gt;grpDuplicatedColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpDuplicatedColumn.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpDuplicatedColumn.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
   <data name="rdoBefore.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -283,13 +187,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoBefore.Location" type="System.Drawing.Point, System.Drawing">
-    <value>21, 69</value>
-  </data>
-  <data name="rdoBefore.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+    <value>14, 45</value>
   </data>
   <data name="rdoBefore.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 24</value>
+    <value>56, 17</value>
   </data>
   <data name="rdoBefore.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -316,13 +217,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoEnd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>176, 71</value>
-  </data>
-  <data name="rdoEnd.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+    <value>117, 46</value>
   </data>
   <data name="rdoEnd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 24</value>
+    <value>44, 17</value>
   </data>
   <data name="rdoEnd.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -349,13 +247,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoAfter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>176, 36</value>
-  </data>
-  <data name="rdoAfter.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+    <value>117, 23</value>
   </data>
   <data name="rdoAfter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 24</value>
+    <value>47, 17</value>
   </data>
   <data name="rdoAfter.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -382,13 +277,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoBeginning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>21, 33</value>
-  </data>
-  <data name="rdoBeginning.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+    <value>14, 21</value>
   </data>
   <data name="rdoBeginning.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 24</value>
+    <value>72, 17</value>
   </data>
   <data name="rdoBeginning.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -408,119 +300,53 @@
   <data name="&gt;&gt;rdoBeginning.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;rdoConvertToLogical.Name" xml:space="preserve">
-    <value>rdoConvertToLogical</value>
+  <data name="ucrPnlDuplicateColPosition.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 19</value>
   </data>
-  <data name="&gt;&gt;rdoConvertToLogical.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ucrPnlDuplicateColPosition.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 8, 6, 8</value>
   </data>
-  <data name="&gt;&gt;rdoConvertToLogical.Parent" xml:space="preserve">
-    <value>grpConvertTo</value>
+  <data name="ucrPnlDuplicateColPosition.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 47</value>
   </data>
-  <data name="&gt;&gt;rdoConvertToLogical.ZOrder" xml:space="preserve">
+  <data name="ucrPnlDuplicateColPosition.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;rdoConvertToCharacter.Name" xml:space="preserve">
-    <value>rdoConvertToCharacter</value>
+  <data name="&gt;&gt;ucrPnlDuplicateColPosition.Name" xml:space="preserve">
+    <value>ucrPnlDuplicateColPosition</value>
   </data>
-  <data name="&gt;&gt;rdoConvertToCharacter.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoConvertToCharacter.Parent" xml:space="preserve">
-    <value>grpConvertTo</value>
-  </data>
-  <data name="&gt;&gt;rdoConvertToCharacter.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;rdoConvertToInteger.Name" xml:space="preserve">
-    <value>rdoConvertToInteger</value>
-  </data>
-  <data name="&gt;&gt;rdoConvertToInteger.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoConvertToInteger.Parent" xml:space="preserve">
-    <value>grpConvertTo</value>
-  </data>
-  <data name="&gt;&gt;rdoConvertToInteger.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;rdoConvertToNumeric.Name" xml:space="preserve">
-    <value>rdoConvertToNumeric</value>
-  </data>
-  <data name="&gt;&gt;rdoConvertToNumeric.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoConvertToNumeric.Parent" xml:space="preserve">
-    <value>grpConvertTo</value>
-  </data>
-  <data name="&gt;&gt;rdoConvertToNumeric.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;rdoConvertToOrderedFactor.Name" xml:space="preserve">
-    <value>rdoConvertToOrderedFactor</value>
-  </data>
-  <data name="&gt;&gt;rdoConvertToOrderedFactor.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoConvertToOrderedFactor.Parent" xml:space="preserve">
-    <value>grpConvertTo</value>
-  </data>
-  <data name="&gt;&gt;rdoConvertToOrderedFactor.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;rdoConvertToFactor.Name" xml:space="preserve">
-    <value>rdoConvertToFactor</value>
-  </data>
-  <data name="&gt;&gt;rdoConvertToFactor.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoConvertToFactor.Parent" xml:space="preserve">
-    <value>grpConvertTo</value>
-  </data>
-  <data name="&gt;&gt;rdoConvertToFactor.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlConvertTo.Name" xml:space="preserve">
-    <value>ucrPnlConvertTo</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlConvertTo.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrPnlDuplicateColPosition.Type" xml:space="preserve">
     <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrPnlConvertTo.Parent" xml:space="preserve">
-    <value>grpConvertTo</value>
+  <data name="&gt;&gt;ucrPnlDuplicateColPosition.Parent" xml:space="preserve">
+    <value>grpDuplicatedColumn</value>
   </data>
-  <data name="&gt;&gt;ucrPnlConvertTo.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="&gt;&gt;ucrPnlDuplicateColPosition.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
-  <data name="grpConvertTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>342, 122</value>
+  <data name="grpDuplicatedColumn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>468, 86</value>
   </data>
-  <data name="grpConvertTo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+  <data name="grpDuplicatedColumn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 76</value>
   </data>
-  <data name="grpConvertTo.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+  <data name="grpDuplicatedColumn.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
-  <data name="grpConvertTo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>354, 174</value>
+  <data name="grpDuplicatedColumn.Text" xml:space="preserve">
+    <value>Position of Duplicated Column</value>
   </data>
-  <data name="grpConvertTo.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+  <data name="&gt;&gt;grpDuplicatedColumn.Name" xml:space="preserve">
+    <value>grpDuplicatedColumn</value>
   </data>
-  <data name="grpConvertTo.Text" xml:space="preserve">
-    <value>Convert To</value>
-  </data>
-  <data name="&gt;&gt;grpConvertTo.Name" xml:space="preserve">
-    <value>grpConvertTo</value>
-  </data>
-  <data name="&gt;&gt;grpConvertTo.Type" xml:space="preserve">
+  <data name="&gt;&gt;grpDuplicatedColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;grpConvertTo.Parent" xml:space="preserve">
+  <data name="&gt;&gt;grpDuplicatedColumn.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;grpConvertTo.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="&gt;&gt;grpDuplicatedColumn.ZOrder" xml:space="preserve">
+    <value>13</value>
   </data>
   <data name="rdoConvertToLogical.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -529,13 +355,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoConvertToLogical.Location" type="System.Drawing.Point, System.Drawing">
-    <value>235, 114</value>
-  </data>
-  <data name="rdoConvertToLogical.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+    <value>149, 72</value>
   </data>
   <data name="rdoConvertToLogical.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 24</value>
+    <value>59, 17</value>
   </data>
   <data name="rdoConvertToLogical.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -562,13 +385,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoConvertToCharacter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 114</value>
-  </data>
-  <data name="rdoConvertToCharacter.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+    <value>16, 72</value>
   </data>
   <data name="rdoConvertToCharacter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 24</value>
+    <value>71, 17</value>
   </data>
   <data name="rdoConvertToCharacter.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -595,13 +415,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoConvertToInteger.Location" type="System.Drawing.Point, System.Drawing">
-    <value>235, 78</value>
-  </data>
-  <data name="rdoConvertToInteger.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+    <value>149, 49</value>
   </data>
   <data name="rdoConvertToInteger.Size" type="System.Drawing.Size, System.Drawing">
-    <value>85, 24</value>
+    <value>58, 17</value>
   </data>
   <data name="rdoConvertToInteger.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -628,13 +445,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoConvertToNumeric.Location" type="System.Drawing.Point, System.Drawing">
-    <value>235, 44</value>
-  </data>
-  <data name="rdoConvertToNumeric.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+    <value>149, 27</value>
   </data>
   <data name="rdoConvertToNumeric.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 24</value>
+    <value>64, 17</value>
   </data>
   <data name="rdoConvertToNumeric.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -661,13 +475,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoConvertToOrderedFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 78</value>
-  </data>
-  <data name="rdoConvertToOrderedFactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+    <value>16, 49</value>
   </data>
   <data name="rdoConvertToOrderedFactor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 24</value>
+    <value>96, 17</value>
   </data>
   <data name="rdoConvertToOrderedFactor.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -694,13 +505,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoConvertToFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 44</value>
-  </data>
-  <data name="rdoConvertToFactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+    <value>16, 27</value>
   </data>
   <data name="rdoConvertToFactor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 24</value>
+    <value>55, 17</value>
   </data>
   <data name="rdoConvertToFactor.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -720,82 +528,52 @@
   <data name="&gt;&gt;rdoConvertToFactor.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;rdoConvertDefault.Name" xml:space="preserve">
-    <value>rdoConvertDefault</value>
+  <data name="ucrPnlConvertTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 17</value>
   </data>
-  <data name="&gt;&gt;rdoConvertDefault.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ucrPnlConvertTo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 8, 6, 8</value>
   </data>
-  <data name="&gt;&gt;rdoConvertDefault.Parent" xml:space="preserve">
-    <value>grpFactorToNumericOptions</value>
+  <data name="ucrPnlConvertTo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>220, 85</value>
   </data>
-  <data name="&gt;&gt;rdoConvertDefault.ZOrder" xml:space="preserve">
+  <data name="ucrPnlConvertTo.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;rdoConvertOrdinals.Name" xml:space="preserve">
-    <value>rdoConvertOrdinals</value>
+  <data name="&gt;&gt;ucrPnlConvertTo.Name" xml:space="preserve">
+    <value>ucrPnlConvertTo</value>
   </data>
-  <data name="&gt;&gt;rdoConvertOrdinals.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoConvertOrdinals.Parent" xml:space="preserve">
-    <value>grpFactorToNumericOptions</value>
-  </data>
-  <data name="&gt;&gt;rdoConvertOrdinals.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;rdoConvertLevels.Name" xml:space="preserve">
-    <value>rdoConvertLevels</value>
-  </data>
-  <data name="&gt;&gt;rdoConvertLevels.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoConvertLevels.Parent" xml:space="preserve">
-    <value>grpFactorToNumericOptions</value>
-  </data>
-  <data name="&gt;&gt;rdoConvertLevels.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlConvertFactorToNumericOptions.Name" xml:space="preserve">
-    <value>ucrPnlConvertFactorToNumericOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlConvertFactorToNumericOptions.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrPnlConvertTo.Type" xml:space="preserve">
     <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrPnlConvertFactorToNumericOptions.Parent" xml:space="preserve">
-    <value>grpFactorToNumericOptions</value>
+  <data name="&gt;&gt;ucrPnlConvertTo.Parent" xml:space="preserve">
+    <value>grpConvertTo</value>
   </data>
-  <data name="&gt;&gt;ucrPnlConvertFactorToNumericOptions.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;ucrPnlConvertTo.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
-  <data name="grpFactorToNumericOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>346, 372</value>
+  <data name="grpConvertTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>228, 82</value>
   </data>
-  <data name="grpFactorToNumericOptions.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+  <data name="grpConvertTo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>235, 108</value>
   </data>
-  <data name="grpFactorToNumericOptions.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+  <data name="grpConvertTo.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
   </data>
-  <data name="grpFactorToNumericOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>214, 142</value>
+  <data name="grpConvertTo.Text" xml:space="preserve">
+    <value>Convert To</value>
   </data>
-  <data name="grpFactorToNumericOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+  <data name="&gt;&gt;grpConvertTo.Name" xml:space="preserve">
+    <value>grpConvertTo</value>
   </data>
-  <data name="grpFactorToNumericOptions.Text" xml:space="preserve">
-    <value>Factor Options</value>
-  </data>
-  <data name="&gt;&gt;grpFactorToNumericOptions.Name" xml:space="preserve">
-    <value>grpFactorToNumericOptions</value>
-  </data>
-  <data name="&gt;&gt;grpFactorToNumericOptions.Type" xml:space="preserve">
+  <data name="&gt;&gt;grpConvertTo.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;grpFactorToNumericOptions.Parent" xml:space="preserve">
+  <data name="&gt;&gt;grpConvertTo.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;grpFactorToNumericOptions.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;grpConvertTo.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="rdoConvertDefault.AutoSize" type="System.Boolean, mscorlib">
@@ -805,13 +583,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoConvertDefault.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 34</value>
-  </data>
-  <data name="rdoConvertDefault.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+    <value>14, 28</value>
   </data>
   <data name="rdoConvertDefault.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 24</value>
+    <value>59, 17</value>
   </data>
   <data name="rdoConvertDefault.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -838,13 +613,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoConvertOrdinals.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 102</value>
-  </data>
-  <data name="rdoConvertOrdinals.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+    <value>14, 72</value>
   </data>
   <data name="rdoConvertOrdinals.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 24</value>
+    <value>115, 17</value>
   </data>
   <data name="rdoConvertOrdinals.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -871,13 +643,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoConvertLevels.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 68</value>
-  </data>
-  <data name="rdoConvertLevels.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+    <value>14, 50</value>
   </data>
   <data name="rdoConvertLevels.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 24</value>
+    <value>114, 17</value>
   </data>
   <data name="rdoConvertLevels.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -897,14 +666,62 @@
   <data name="&gt;&gt;rdoConvertLevels.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="ucrPnlConvertFactorToNumericOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 22</value>
+  </data>
+  <data name="ucrPnlConvertFactorToNumericOptions.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 8, 6, 8</value>
+  </data>
+  <data name="ucrPnlConvertFactorToNumericOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 74</value>
+  </data>
+  <data name="ucrPnlConvertFactorToNumericOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlConvertFactorToNumericOptions.Name" xml:space="preserve">
+    <value>ucrPnlConvertFactorToNumericOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlConvertFactorToNumericOptions.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlConvertFactorToNumericOptions.Parent" xml:space="preserve">
+    <value>grpFactorToNumericOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlConvertFactorToNumericOptions.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="grpFactorToNumericOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>228, 233</value>
+  </data>
+  <data name="grpFactorToNumericOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 102</value>
+  </data>
+  <data name="grpFactorToNumericOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="grpFactorToNumericOptions.Text" xml:space="preserve">
+    <value>Factor Options</value>
+  </data>
+  <data name="&gt;&gt;grpFactorToNumericOptions.Name" xml:space="preserve">
+    <value>grpFactorToNumericOptions</value>
+  </data>
+  <data name="&gt;&gt;grpFactorToNumericOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpFactorToNumericOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpFactorToNumericOptions.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <data name="ucrChkChangeType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>353, 81</value>
+    <value>228, 55</value>
   </data>
   <data name="ucrChkChangeType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 12, 9, 12</value>
+    <value>6, 8, 6, 8</value>
   </data>
   <data name="ucrChkChangeType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 31</value>
+    <value>100, 20</value>
   </data>
   <data name="ucrChkChangeType.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -922,13 +739,13 @@
     <value>0</value>
   </data>
   <data name="ucrChkConvertCreateLabels.Location" type="System.Drawing.Point, System.Drawing">
-    <value>553, 313</value>
+    <value>369, 194</value>
   </data>
   <data name="ucrChkConvertCreateLabels.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 12, 9, 12</value>
+    <value>6, 8, 6, 8</value>
   </data>
   <data name="ucrChkConvertCreateLabels.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 31</value>
+    <value>100, 20</value>
   </data>
   <data name="ucrChkConvertCreateLabels.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -946,13 +763,13 @@
     <value>1</value>
   </data>
   <data name="ucrChkConvertKeepAttributes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>342, 313</value>
+    <value>228, 194</value>
   </data>
   <data name="ucrChkConvertKeepAttributes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 12, 9, 12</value>
+    <value>6, 8, 6, 8</value>
   </data>
   <data name="ucrChkConvertKeepAttributes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 31</value>
+    <value>120, 20</value>
   </data>
   <data name="ucrChkConvertKeepAttributes.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -970,13 +787,13 @@
     <value>2</value>
   </data>
   <data name="ucrNudConvertDisplayDecimals.Location" type="System.Drawing.Point, System.Drawing">
-    <value>783, 433</value>
+    <value>358, 221</value>
   </data>
   <data name="ucrNudConvertDisplayDecimals.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 12, 9, 12</value>
+    <value>6, 8, 6, 8</value>
   </data>
   <data name="ucrNudConvertDisplayDecimals.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 31</value>
+    <value>50, 20</value>
   </data>
   <data name="ucrNudConvertDisplayDecimals.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -994,13 +811,13 @@
     <value>3</value>
   </data>
   <data name="ucrChkConvertSpecifyDecimalsToDisplay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>588, 433</value>
+    <value>228, 221</value>
   </data>
   <data name="ucrChkConvertSpecifyDecimalsToDisplay.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 12, 9, 12</value>
+    <value>6, 8, 6, 8</value>
   </data>
   <data name="ucrChkConvertSpecifyDecimalsToDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 31</value>
+    <value>125, 20</value>
   </data>
   <data name="ucrChkConvertSpecifyDecimalsToDisplay.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1015,64 +832,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkConvertSpecifyDecimalsToDisplay.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="ucrPnlConvertFactorToNumericOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 48</value>
-  </data>
-  <data name="ucrPnlConvertFactorToNumericOptions.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 12, 9, 12</value>
-  </data>
-  <data name="ucrPnlConvertFactorToNumericOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 100</value>
-  </data>
-  <data name="ucrPnlConvertFactorToNumericOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlConvertFactorToNumericOptions.Name" xml:space="preserve">
-    <value>ucrPnlConvertFactorToNumericOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlConvertFactorToNumericOptions.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlConvertFactorToNumericOptions.Parent" xml:space="preserve">
-    <value>grpFactorToNumericOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlConvertFactorToNumericOptions.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="ucrPnlConvertTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 26</value>
-  </data>
-  <data name="ucrPnlConvertTo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 12, 9, 12</value>
-  </data>
-  <data name="ucrPnlConvertTo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>333, 131</value>
-  </data>
-  <data name="ucrPnlConvertTo.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlConvertTo.Name" xml:space="preserve">
-    <value>ucrPnlConvertTo</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlConvertTo.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlConvertTo.Parent" xml:space="preserve">
-    <value>grpConvertTo</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlConvertTo.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="ucrInputDuplicateColumnName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>176, 545</value>
+    <value>117, 340</value>
   </data>
   <data name="ucrInputDuplicateColumnName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>14, 18, 14, 18</value>
+    <value>9, 12, 9, 12</value>
   </data>
   <data name="ucrInputDuplicateColumnName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 32</value>
+    <value>140, 21</value>
   </data>
   <data name="ucrInputDuplicateColumnName.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1093,19 +862,19 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>9, 20</value>
+    <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>984, 689</value>
+    <value>651, 432</value>
   </data>
   <data name="ucrSelectorForDuplicateColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 15</value>
+    <value>10, 10</value>
   </data>
   <data name="ucrSelectorForDuplicateColumn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrSelectorForDuplicateColumn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>315, 277</value>
+    <value>210, 180</value>
   </data>
   <data name="ucrSelectorForDuplicateColumn.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1123,13 +892,13 @@
     <value>10</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 592</value>
+    <value>9, 371</value>
   </data>
   <data name="ucrBase.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 8, 6, 8</value>
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>598, 82</value>
+    <value>399, 53</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1146,12 +915,6 @@
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
-  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -1165,13 +928,13 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverDuplicateColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>347, 40</value>
+    <value>228, 28</value>
   </data>
   <data name="ucrReceiverDuplicateColumns.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverDuplicateColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>194, 31</value>
+    <value>129, 20</value>
   </data>
   <data name="ucrReceiverDuplicateColumns.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1187,29 +950,5 @@
   </data>
   <data name="&gt;&gt;ucrReceiverDuplicateColumns.ZOrder" xml:space="preserve">
     <value>9</value>
-  </data>
-  <data name="ucrPnlDuplicateColPosition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 29</value>
-  </data>
-  <data name="ucrPnlDuplicateColPosition.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 12, 9, 12</value>
-  </data>
-  <data name="ucrPnlDuplicateColPosition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>249, 73</value>
-  </data>
-  <data name="ucrPnlDuplicateColPosition.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlDuplicateColPosition.Name" xml:space="preserve">
-    <value>ucrPnlDuplicateColPosition</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlDuplicateColPosition.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlDuplicateColPosition.Parent" xml:space="preserve">
-    <value>grpDuplicatedColumn</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlDuplicateColPosition.ZOrder" xml:space="preserve">
-    <value>4</value>
   </data>
 </root>
