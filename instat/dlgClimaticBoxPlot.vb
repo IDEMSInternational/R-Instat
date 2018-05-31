@@ -308,9 +308,11 @@ Public Class dlgClimaticBoxPlot
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsFacetFunction, ucrNewBaseSelector:=ucrSelectorClimaticBoxPlot, bReset:=bResetSubdialog)
-        'this is a temporaly fix because we have facets done on the main dialog
+        'this is a temporary fix because we have facets done on the main dialog
         sdgPlots.tbpFacet.Enabled = False
         sdgPlots.ShowDialog()
+        ucrChkVerticalXTickMarkers.SetRCode(clsBaseOperator, bReset)
+        ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
         bResetSubdialog = False
     End Sub
 
@@ -340,6 +342,7 @@ Public Class dlgClimaticBoxPlot
     Private Sub cmdBoxPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdBoxPlotOptions.Click
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomPlotFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorClimaticBoxPlot, bApplyAesGlobally:=True, bReset:=bResetBoxLayerSubdialog)
         sdgLayerOptions.ShowDialog()
+        ucrChkVarWidth.SetRCode(clsRgeomPlotFunction, bReset)
         bResetBoxLayerSubdialog = False
         For Each clsParam In clsRaesFunction.clsParameters
             If clsParam.strArgumentName = "x" Then
