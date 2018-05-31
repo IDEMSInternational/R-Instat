@@ -543,11 +543,7 @@ Public Class dlgImportDataset
             clsImportDAT.AddParameter("file", Chr(34) & strFilePathR & Chr(34))
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportDAT)
         ElseIf strFileExt = ".xlsx" OrElse strFileExt = ".xls" Then
-            If strFileExt = ".xlsx" Then
-                strFileType = "XLSX"
-            Else
-                strFileType = "XLS"
-            End If
+            strFileType = If(strFileExt = ".xlsx", "XLSX", "XLS")
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportExcel)
             grpExcel.Show()
             FillExcelSheets(strFilePath)
