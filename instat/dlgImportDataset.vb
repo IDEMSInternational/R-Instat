@@ -37,7 +37,6 @@ Public Class dlgImportDataset
     Private iDataFrameCount As Integer
 
     Public Sub New()
-
         ' This call is required by the designer.
         InitializeComponent()
 
@@ -320,6 +319,7 @@ Public Class dlgImportDataset
 
         clsImportCSV.SetPackageName("rio")
         clsImportCSV.SetRCommand("import")
+        'clsImportCSV.AddParameter("stringsAsFactors", True)
 
         clsImport.SetPackageName("rio")
         clsImport.SetRCommand("import")
@@ -340,6 +340,12 @@ Public Class dlgImportDataset
         clsImportRDS.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_RDS")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsImport)
+
+        strFilePathSystem = ""
+        strCurrentDirectory = ""
+        strFileToOpenOn = ""
+        strFilePathR = ""
+        strFileType = ""
 
         ucrNudPreviewLines.Value = 10
 
@@ -778,23 +784,26 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub UcrPanelFixedWidthText_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPanelFixedWidthText.ControlValueChanged
-        grpCSV.Visible = False
-        grpText.Visible = False
-        If rdoFixedWidthText.Checked OrElse rdoFixedWidthWhiteSpacesText.Checked Then
-            If rdoFixedWidthText.Checked Then
-                clsImportFixedWidthText.SetRCommand("read_table")
-            Else
-                clsImportFixedWidthText.SetRCommand("read_table2")
+        If strFileType = "TXT" Then
+            grpCSV.Visible = False
+            grpText.Visible = False
+            If rdoFixedWidthText.Checked OrElse rdoFixedWidthWhiteSpacesText.Checked Then
+                If rdoFixedWidthText.Checked Then
+                    clsImportFixedWidthText.SetRCommand("read_table")
+                Else
+                    clsImportFixedWidthText.SetRCommand("read_table2")
+                End If
+                ucrBase.clsRsyntax.SetBaseRFunction(clsImportFixedWidthText)
+                grpText.Visible = True
+                RefreshFilePreview("TXT")
+            ElseIf rdoSeparatortext.Checked
+                ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSV)
+                grpCSV.Visible = True
+                RefreshFilePreview("CSV")
             End If
-            ucrBase.clsRsyntax.SetBaseRFunction(clsImportFixedWidthText)
-            grpText.Visible = True
-            RefreshFilePreview("TXT")
-        ElseIf rdoSeparatortext.Checked
-            ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSV)
-            grpCSV.Visible = True
-            RefreshFilePreview("CSV")
+            RefreshFrameView()
         End If
-        RefreshFrameView()
+
     End Sub
 
 End Class
