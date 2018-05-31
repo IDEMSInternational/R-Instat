@@ -69,7 +69,7 @@ Partial Class dlgImportDataset
         Me.lblRowsToSkipText = New System.Windows.Forms.Label()
         Me.ucrNudMaxRowsText = New instat.ucrNud()
         Me.ucrChkMaxRowsText = New instat.ucrCheck()
-        Me.UcrPanelFixedWidthText = New instat.UcrPanel()
+        Me.ucrPanelFixedWidthText = New instat.UcrPanel()
         Me.ucrChkColumnNamesText = New instat.ucrCheck()
         Me.ucrNudRowsToSkipText = New instat.ucrNud()
         Me.ucrInputMissingValueStringText = New instat.ucrInputTextBox()
@@ -285,7 +285,7 @@ Partial Class dlgImportDataset
         Me.grpText.Controls.Add(Me.ucrChkMaxRowsText)
         Me.grpText.Controls.Add(Me.rdoFixedWidthWhiteSpacesText)
         Me.grpText.Controls.Add(Me.rdoFixedWidthText)
-        Me.grpText.Controls.Add(Me.UcrPanelFixedWidthText)
+        Me.grpText.Controls.Add(Me.ucrPanelFixedWidthText)
         Me.grpText.Controls.Add(Me.ucrChkColumnNamesText)
         Me.grpText.Controls.Add(Me.lblMissingValueStringText)
         Me.grpText.Controls.Add(Me.ucrNudRowsToSkipText)
@@ -335,10 +335,10 @@ Partial Class dlgImportDataset
         resources.ApplyResources(Me.ucrChkMaxRowsText, "ucrChkMaxRowsText")
         Me.ucrChkMaxRowsText.Name = "ucrChkMaxRowsText"
         '
-        'UcrPanelFixedWidthText
+        'ucrPanelFixedWidthText
         '
-        resources.ApplyResources(Me.UcrPanelFixedWidthText, "UcrPanelFixedWidthText")
-        Me.UcrPanelFixedWidthText.Name = "UcrPanelFixedWidthText"
+        resources.ApplyResources(Me.ucrPanelFixedWidthText, "ucrPanelFixedWidthText")
+        Me.ucrPanelFixedWidthText.Name = "ucrPanelFixedWidthText"
         '
         'ucrChkColumnNamesText
         '
@@ -655,7 +655,7 @@ Partial Class dlgImportDataset
     Friend WithEvents ucrNudRowsToSkipText As ucrNud
     Friend WithEvents ucrInputMissingValueStringText As ucrInputTextBox
     Friend WithEvents lblRowsToSkipText As Label
-    Friend WithEvents UcrPanelFixedWidthText As UcrPanel
+    Friend WithEvents ucrPanelFixedWidthText As UcrPanel
     Friend WithEvents rdoFixedWidthWhiteSpacesText As RadioButton
     Friend WithEvents rdoFixedWidthText As RadioButton
     Friend WithEvents ucrChkMaxRowsText As ucrCheck

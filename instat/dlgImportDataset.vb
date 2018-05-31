@@ -271,9 +271,9 @@ Public Class dlgImportDataset
 
         '##############################################################
         'Text controls
-        UcrPanelFixedWidthText.AddRadioButton(rdoFixedWidthText)
-        UcrPanelFixedWidthText.AddRadioButton(rdoFixedWidthWhiteSpacesText)
-        UcrPanelFixedWidthText.bAllowNonConditionValues = True
+        ucrPanelFixedWidthText.AddRadioButton(rdoFixedWidthText)
+        ucrPanelFixedWidthText.AddRadioButton(rdoFixedWidthWhiteSpacesText)
+        ucrPanelFixedWidthText.bAllowNonConditionValues = True
 
         ucrChkColumnNamesText.SetText("First Row is Column Headers")
         ucrChkColumnNamesText.SetParameter(New RParameter("col_names"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
@@ -437,7 +437,7 @@ Public Class dlgImportDataset
 
         'TEXT CONTROLS 
         ucrChkColumnNamesText.SetRCode(clsImportText, bReset)
-        UcrPanelFixedWidthText.SetRCode(clsImportText, bReset)
+        ucrPanelFixedWidthText.SetRCode(clsImportText, bReset)
         ucrInputMissingValueStringText.SetRCode(clsImportText, bReset)
         ucrNudRowsToSkipText.SetRCode(clsImportText, bReset)
         ucrNudMaxRowsText.SetRCode(clsImportText, bReset)
@@ -758,7 +758,7 @@ Public Class dlgImportDataset
         RefreshFrameView()
     End Sub
 
-    Private Sub UcrPanelFixedWidthText_ControlValueChanged(ucrChangedControl As ucrCore) Handles UcrPanelFixedWidthText.ControlValueChanged
+    Private Sub UcrPanelFixedWidthText_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPanelFixedWidthText.ControlValueChanged
         If rdoFixedWidthText.Checked Then
             clsImportText.SetRCommand("read_table")
         ElseIf rdoFixedWidthWhiteSpacesText.Checked
