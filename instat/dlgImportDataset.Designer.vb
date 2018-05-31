@@ -74,6 +74,7 @@ Partial Class dlgImportDataset
         Me.ucrNudRowsToSkipText = New instat.ucrNud()
         Me.ucrInputMissingValueStringText = New instat.ucrInputTextBox()
         Me.ucrNudPreviewLines = New instat.ucrNud()
+        Me.ucrNudMaxRowsExcel = New instat.ucrNud()
         Me.ucrChkColumnNamesExcel = New instat.ucrCheck()
         Me.ucrChkMaxRowsExcel = New instat.ucrCheck()
         Me.ucrChkTrimWSExcel = New instat.ucrCheck()
@@ -89,6 +90,7 @@ Partial Class dlgImportDataset
         Me.ucrChkImportMetadataRDS = New instat.ucrCheck()
         Me.ucrChkKeepExistingDataRDS = New instat.ucrCheck()
         Me.ucrSaveFile = New instat.ucrSave()
+        Me.ucrNudMaxRowsCSV = New instat.ucrNud()
         Me.ucrChkMaxRowsCSV = New instat.ucrCheck()
         Me.ucrChkStringsAsFactorsCSV = New instat.ucrCheck()
         Me.ucrNudRowsToSkipCSV = New instat.ucrNud()
@@ -99,8 +101,6 @@ Partial Class dlgImportDataset
         Me.ucrInputEncodingCSV = New instat.ucrInputComboBox()
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrNudMaxRowsExcel = New instat.ucrNud()
-        Me.ucrNudMaxRowsCSV = New instat.ucrNud()
         Me.grpCSV.SuspendLayout()
         Me.grpExcel.SuspendLayout()
         Me.grpRDS.SuspendLayout()
@@ -161,7 +161,7 @@ Partial Class dlgImportDataset
         Me.grdDataPreview.SheetTabContextMenuStrip = Nothing
         Me.grdDataPreview.SheetTabNewButtonVisible = False
         Me.grdDataPreview.SheetTabVisible = True
-        Me.grdDataPreview.SheetTabWidth = 90
+        Me.grdDataPreview.SheetTabWidth = 60
         Me.grdDataPreview.ShowScrollEndSpacing = True
         '
         'lblFileOpenPath
@@ -183,7 +183,6 @@ Partial Class dlgImportDataset
         '
         'grpCSV
         '
-        resources.ApplyResources(Me.grpCSV, "grpCSV")
         Me.grpCSV.Controls.Add(Me.ucrNudMaxRowsCSV)
         Me.grpCSV.Controls.Add(Me.ucrChkMaxRowsCSV)
         Me.grpCSV.Controls.Add(Me.lblNAStringsCSV)
@@ -199,6 +198,7 @@ Partial Class dlgImportDataset
         Me.grpCSV.Controls.Add(Me.lblSeparatorCSV)
         Me.grpCSV.Controls.Add(Me.lblRowsToSkipCSV)
         Me.grpCSV.Controls.Add(Me.lblDecimalCSV)
+        resources.ApplyResources(Me.grpCSV, "grpCSV")
         Me.grpCSV.Name = "grpCSV"
         Me.grpCSV.TabStop = False
         '
@@ -209,7 +209,6 @@ Partial Class dlgImportDataset
         '
         'grpExcel
         '
-        resources.ApplyResources(Me.grpExcel, "grpExcel")
         Me.grpExcel.Controls.Add(Me.ucrNudMaxRowsExcel)
         Me.grpExcel.Controls.Add(Me.ucrChkColumnNamesExcel)
         Me.grpExcel.Controls.Add(Me.ucrChkMaxRowsExcel)
@@ -222,6 +221,7 @@ Partial Class dlgImportDataset
         Me.grpExcel.Controls.Add(Me.ucrInputSelectSheetExcel)
         Me.grpExcel.Controls.Add(Me.lblRowToSkipExcel)
         Me.grpExcel.Controls.Add(Me.lblSelectSheetExcel)
+        resources.ApplyResources(Me.grpExcel, "grpExcel")
         Me.grpExcel.Name = "grpExcel"
         Me.grpExcel.TabStop = False
         '
@@ -247,7 +247,6 @@ Partial Class dlgImportDataset
         '
         'grpRDS
         '
-        resources.ApplyResources(Me.grpRDS, "grpRDS")
         Me.grpRDS.Controls.Add(Me.ucrChkOverwriteRDS)
         Me.grpRDS.Controls.Add(Me.ucrChkImportObjectsRDS)
         Me.grpRDS.Controls.Add(Me.ucrChkImportCalculationsRDS)
@@ -255,6 +254,7 @@ Partial Class dlgImportDataset
         Me.grpRDS.Controls.Add(Me.ucrChkImportFiltersRDS)
         Me.grpRDS.Controls.Add(Me.ucrChkImportMetadataRDS)
         Me.grpRDS.Controls.Add(Me.ucrChkKeepExistingDataRDS)
+        resources.ApplyResources(Me.grpRDS, "grpRDS")
         Me.grpRDS.Name = "grpRDS"
         Me.grpRDS.TabStop = False
         '
@@ -281,7 +281,6 @@ Partial Class dlgImportDataset
         '
         'grpText
         '
-        resources.ApplyResources(Me.grpText, "grpText")
         Me.grpText.Controls.Add(Me.ucrNudMaxRowsText)
         Me.grpText.Controls.Add(Me.ucrChkMaxRowsText)
         Me.grpText.Controls.Add(Me.rdoFixedWidthWhiteSpacesText)
@@ -292,6 +291,7 @@ Partial Class dlgImportDataset
         Me.grpText.Controls.Add(Me.ucrNudRowsToSkipText)
         Me.grpText.Controls.Add(Me.ucrInputMissingValueStringText)
         Me.grpText.Controls.Add(Me.lblRowsToSkipText)
+        resources.ApplyResources(Me.grpText, "grpText")
         Me.grpText.Name = "grpText"
         Me.grpText.TabStop = False
         '
@@ -373,6 +373,16 @@ Partial Class dlgImportDataset
         Me.ucrNudPreviewLines.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPreviewLines.Name = "ucrNudPreviewLines"
         Me.ucrNudPreviewLines.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudMaxRowsExcel
+        '
+        Me.ucrNudMaxRowsExcel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxRowsExcel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudMaxRowsExcel, "ucrNudMaxRowsExcel")
+        Me.ucrNudMaxRowsExcel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMaxRowsExcel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxRowsExcel.Name = "ucrNudMaxRowsExcel"
+        Me.ucrNudMaxRowsExcel.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkColumnNamesExcel
         '
@@ -471,6 +481,16 @@ Partial Class dlgImportDataset
         resources.ApplyResources(Me.ucrSaveFile, "ucrSaveFile")
         Me.ucrSaveFile.Name = "ucrSaveFile"
         '
+        'ucrNudMaxRowsCSV
+        '
+        Me.ucrNudMaxRowsCSV.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxRowsCSV.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudMaxRowsCSV, "ucrNudMaxRowsCSV")
+        Me.ucrNudMaxRowsCSV.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMaxRowsCSV.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxRowsCSV.Name = "ucrNudMaxRowsCSV"
+        Me.ucrNudMaxRowsCSV.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'ucrChkMaxRowsCSV
         '
         Me.ucrChkMaxRowsCSV.Checked = False
@@ -542,26 +562,6 @@ Partial Class dlgImportDataset
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'ucrNudMaxRowsExcel
-        '
-        Me.ucrNudMaxRowsExcel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMaxRowsExcel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudMaxRowsExcel, "ucrNudMaxRowsExcel")
-        Me.ucrNudMaxRowsExcel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudMaxRowsExcel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMaxRowsExcel.Name = "ucrNudMaxRowsExcel"
-        Me.ucrNudMaxRowsExcel.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudMaxRowsCSV
-        '
-        Me.ucrNudMaxRowsCSV.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMaxRowsCSV.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudMaxRowsCSV, "ucrNudMaxRowsCSV")
-        Me.ucrNudMaxRowsCSV.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudMaxRowsCSV.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMaxRowsCSV.Name = "ucrNudMaxRowsCSV"
-        Me.ucrNudMaxRowsCSV.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'dlgImportDataset
         '
         resources.ApplyResources(Me, "$this")
@@ -584,6 +584,7 @@ Partial Class dlgImportDataset
         Me.Controls.Add(Me.txtTextFilePreview)
         Me.Controls.Add(Me.lblDataFrame)
         Me.Controls.Add(Me.lblTextFilePreview)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgImportDataset"
