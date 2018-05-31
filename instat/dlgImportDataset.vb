@@ -56,7 +56,6 @@ Public Class dlgImportDataset
     Private Sub dlgImportDataset_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         bDialogLoaded = False
         'autoTranslate(Me)
-        'Me.Show()
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -318,7 +317,6 @@ Public Class dlgImportDataset
 
         clsImportCSV.SetPackageName("rio")
         clsImportCSV.SetRCommand("import")
-        'clsImportCSV.AddParameter("stringsAsFactors", "TRUE")
 
         clsImport.SetPackageName("rio")
         clsImport.SetRCommand("import")
@@ -511,7 +509,6 @@ Public Class dlgImportDataset
 
         ucrInputFilePath.SetName(strFilePathR)
 
-        'ucrSaveFile.Show()
         grpRDS.Hide()
         grpExcel.Hide()
         grpCSV.Hide()
@@ -523,16 +520,13 @@ Public Class dlgImportDataset
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportRDS)
             clsImportRDS.AddParameter("data_RDS", clsRFunctionParameter:=clsReadRDS)
             grpRDS.Show()
-            'ucrSaveFile.Hide()
         ElseIf strFileExt = ".txt" Then
             strFileType = "TXT"
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportText)
-            'TextPreviewVisible(True)
             grpText.Show()
         ElseIf strFileExt = ".csv" Then
             strFileType = "CSV"
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSV)
-            'TextPreviewVisible(True)
             grpCSV.Show()
         ElseIf strFileExt = ".dat" Then
             strFileType = "DAT"
