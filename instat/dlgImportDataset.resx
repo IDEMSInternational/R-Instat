@@ -378,34 +378,34 @@
   <data name="&gt;&gt;lblFileOpenPath.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
-  <data name="lblRowsToSkipCSV.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblLinesToSkipCSV.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblRowsToSkipCSV.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblLinesToSkipCSV.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblRowsToSkipCSV.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblLinesToSkipCSV.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 275</value>
   </data>
-  <data name="lblRowsToSkipCSV.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 13</value>
+  <data name="lblLinesToSkipCSV.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 13</value>
   </data>
-  <data name="lblRowsToSkipCSV.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblLinesToSkipCSV.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
-  <data name="lblRowsToSkipCSV.Text" xml:space="preserve">
-    <value>Rows To Skip:</value>
+  <data name="lblLinesToSkipCSV.Text" xml:space="preserve">
+    <value>Lines To Skip:</value>
   </data>
-  <data name="&gt;&gt;lblRowsToSkipCSV.Name" xml:space="preserve">
-    <value>lblRowsToSkipCSV</value>
+  <data name="&gt;&gt;lblLinesToSkipCSV.Name" xml:space="preserve">
+    <value>lblLinesToSkipCSV</value>
   </data>
-  <data name="&gt;&gt;lblRowsToSkipCSV.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblLinesToSkipCSV.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblRowsToSkipCSV.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblLinesToSkipCSV.Parent" xml:space="preserve">
     <value>grpCSV</value>
   </data>
-  <data name="&gt;&gt;lblRowsToSkipCSV.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblLinesToSkipCSV.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
   <data name="cmdBrowse.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -1047,117 +1047,6 @@
   <data name="&gt;&gt;grpExcel.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;ucrChkOverwriteRDS.Name" xml:space="preserve">
-    <value>ucrChkOverwriteRDS</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOverwriteRDS.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOverwriteRDS.Parent" xml:space="preserve">
-    <value>grpRDS</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOverwriteRDS.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportObjectsRDS.Name" xml:space="preserve">
-    <value>ucrChkImportObjectsRDS</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportObjectsRDS.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportObjectsRDS.Parent" xml:space="preserve">
-    <value>grpRDS</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportObjectsRDS.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportCalculationsRDS.Name" xml:space="preserve">
-    <value>ucrChkImportCalculationsRDS</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportCalculationsRDS.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportCalculationsRDS.Parent" xml:space="preserve">
-    <value>grpRDS</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportCalculationsRDS.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportChangesLogRDS.Name" xml:space="preserve">
-    <value>ucrChkImportChangesLogRDS</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportChangesLogRDS.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportChangesLogRDS.Parent" xml:space="preserve">
-    <value>grpRDS</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportChangesLogRDS.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportFiltersRDS.Name" xml:space="preserve">
-    <value>ucrChkImportFiltersRDS</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportFiltersRDS.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportFiltersRDS.Parent" xml:space="preserve">
-    <value>grpRDS</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportFiltersRDS.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportMetadataRDS.Name" xml:space="preserve">
-    <value>ucrChkImportMetadataRDS</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportMetadataRDS.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportMetadataRDS.Parent" xml:space="preserve">
-    <value>grpRDS</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportMetadataRDS.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;ucrChkKeepExistingDataRDS.Name" xml:space="preserve">
-    <value>ucrChkKeepExistingDataRDS</value>
-  </data>
-  <data name="&gt;&gt;ucrChkKeepExistingDataRDS.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkKeepExistingDataRDS.Parent" xml:space="preserve">
-    <value>grpRDS</value>
-  </data>
-  <data name="&gt;&gt;ucrChkKeepExistingDataRDS.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="grpRDS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 130</value>
-  </data>
-  <data name="grpRDS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>227, 218</value>
-  </data>
-  <data name="grpRDS.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="grpRDS.Text" xml:space="preserve">
-    <value>Import RDS options</value>
-  </data>
-  <data name="grpRDS.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;grpRDS.Name" xml:space="preserve">
-    <value>grpRDS</value>
-  </data>
-  <data name="&gt;&gt;grpRDS.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpRDS.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpRDS.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
   <data name="ucrChkOverwriteRDS.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 185</value>
   </data>
@@ -1325,6 +1214,33 @@
   </data>
   <data name="&gt;&gt;ucrChkKeepExistingDataRDS.ZOrder" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="grpRDS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 130</value>
+  </data>
+  <data name="grpRDS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>227, 218</value>
+  </data>
+  <data name="grpRDS.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="grpRDS.Text" xml:space="preserve">
+    <value>Import RDS options</value>
+  </data>
+  <data name="grpRDS.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;grpRDS.Name" xml:space="preserve">
+    <value>grpRDS</value>
+  </data>
+  <data name="&gt;&gt;grpRDS.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpRDS.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpRDS.ZOrder" xml:space="preserve">
+    <value>9</value>
   </data>
   <data name="lblCannotImport.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1612,34 +1528,34 @@ Modify options or select a different file.</value>
   <data name="&gt;&gt;ucrInputMissingValueStringText.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="lblRowsToSkipText.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblLinesToSkipText.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblRowsToSkipText.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblLinesToSkipText.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblRowsToSkipText.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblLinesToSkipText.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 97</value>
   </data>
-  <data name="lblRowsToSkipText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 13</value>
+  <data name="lblLinesToSkipText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 13</value>
   </data>
-  <data name="lblRowsToSkipText.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblLinesToSkipText.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
-  <data name="lblRowsToSkipText.Text" xml:space="preserve">
-    <value>Rows To Skip:</value>
+  <data name="lblLinesToSkipText.Text" xml:space="preserve">
+    <value>Lines To Skip:</value>
   </data>
-  <data name="&gt;&gt;lblRowsToSkipText.Name" xml:space="preserve">
-    <value>lblRowsToSkipText</value>
+  <data name="&gt;&gt;lblLinesToSkipText.Name" xml:space="preserve">
+    <value>lblLinesToSkipText</value>
   </data>
-  <data name="&gt;&gt;lblRowsToSkipText.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblLinesToSkipText.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblRowsToSkipText.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblLinesToSkipText.Parent" xml:space="preserve">
     <value>grpText</value>
   </data>
-  <data name="&gt;&gt;lblRowsToSkipText.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblLinesToSkipText.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="grpText.Location" type="System.Drawing.Point, System.Drawing">
