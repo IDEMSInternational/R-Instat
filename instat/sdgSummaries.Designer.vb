@@ -40,6 +40,14 @@ Partial Class sdgSummaries
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgSummaries))
         Me.tbMissingOptions = New System.Windows.Forms.TabPage()
+        Me.ucrNudPercentage = New instat.ucrNud()
+        Me.ucrNudNumber = New instat.ucrNud()
+        Me.lblPercentage = New System.Windows.Forms.Label()
+        Me.lblNumber = New System.Windows.Forms.Label()
+        Me.rdoPercentage = New System.Windows.Forms.RadioButton()
+        Me.rdoNumber = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlMissingOptions = New instat.UcrPanel()
+        Me.ucrChkIncludeMissingOpt = New instat.ucrCheck()
         Me.tbMore = New System.Windows.Forms.TabPage()
         Me.grpPosition = New System.Windows.Forms.GroupBox()
         Me.ucrInputN = New instat.ucrInputTextBox()
@@ -98,14 +106,6 @@ Partial Class sdgSummaries
         Me.ucrSelectorSecondVariable = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverSecondVariable = New instat.ucrReceiverSingle()
         Me.ucrButtonsSummaries = New instat.ucrButtonsSubdialogue()
-        Me.ucrChkIncludeMissingOpt = New instat.ucrCheck()
-        Me.ucrPnlMissingOptions = New instat.UcrPanel()
-        Me.rdoNumber = New System.Windows.Forms.RadioButton()
-        Me.rdoPercentage = New System.Windows.Forms.RadioButton()
-        Me.lblNumber = New System.Windows.Forms.Label()
-        Me.lblPercentage = New System.Windows.Forms.Label()
-        Me.ucrNudNumber = New instat.ucrNud()
-        Me.ucrNudPercentage = New instat.ucrNud()
         Me.tbMissingOptions.SuspendLayout()
         Me.tbMore.SuspendLayout()
         Me.grpPosition.SuspendLayout()
@@ -137,6 +137,61 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.tbMissingOptions, "tbMissingOptions")
         Me.tbMissingOptions.Name = "tbMissingOptions"
         Me.tbMissingOptions.UseVisualStyleBackColor = True
+        '
+        'ucrNudPercentage
+        '
+        Me.ucrNudPercentage.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPercentage.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudPercentage, "ucrNudPercentage")
+        Me.ucrNudPercentage.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudPercentage.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPercentage.Name = "ucrNudPercentage"
+        Me.ucrNudPercentage.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudNumber
+        '
+        Me.ucrNudNumber.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumber.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudNumber, "ucrNudNumber")
+        Me.ucrNudNumber.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNumber.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumber.Name = "ucrNudNumber"
+        Me.ucrNudNumber.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblPercentage
+        '
+        resources.ApplyResources(Me.lblPercentage, "lblPercentage")
+        Me.lblPercentage.Name = "lblPercentage"
+        '
+        'lblNumber
+        '
+        resources.ApplyResources(Me.lblNumber, "lblNumber")
+        Me.lblNumber.Name = "lblNumber"
+        '
+        'rdoPercentage
+        '
+        resources.ApplyResources(Me.rdoPercentage, "rdoPercentage")
+        Me.rdoPercentage.Name = "rdoPercentage"
+        Me.rdoPercentage.UseVisualStyleBackColor = True
+        '
+        'rdoNumber
+        '
+        resources.ApplyResources(Me.rdoNumber, "rdoNumber")
+        Me.rdoNumber.Checked = True
+        Me.rdoNumber.Name = "rdoNumber"
+        Me.rdoNumber.TabStop = True
+        Me.rdoNumber.UseVisualStyleBackColor = True
+        '
+        'ucrPnlMissingOptions
+        '
+        resources.ApplyResources(Me.ucrPnlMissingOptions, "ucrPnlMissingOptions")
+        Me.ucrPnlMissingOptions.Name = "ucrPnlMissingOptions"
+        '
+        'ucrChkIncludeMissingOpt
+        '
+        Me.ucrChkIncludeMissingOpt.Checked = False
+        resources.ApplyResources(Me.ucrChkIncludeMissingOpt, "ucrChkIncludeMissingOpt")
+        Me.ucrChkIncludeMissingOpt.Name = "ucrChkIncludeMissingOpt"
         '
         'tbMore
         '
@@ -558,61 +613,6 @@ Partial Class sdgSummaries
         '
         resources.ApplyResources(Me.ucrButtonsSummaries, "ucrButtonsSummaries")
         Me.ucrButtonsSummaries.Name = "ucrButtonsSummaries"
-        '
-        'ucrChkIncludeMissingOpt
-        '
-        Me.ucrChkIncludeMissingOpt.Checked = False
-        resources.ApplyResources(Me.ucrChkIncludeMissingOpt, "ucrChkIncludeMissingOpt")
-        Me.ucrChkIncludeMissingOpt.Name = "ucrChkIncludeMissingOpt"
-        '
-        'ucrPnlMissingOptions
-        '
-        resources.ApplyResources(Me.ucrPnlMissingOptions, "ucrPnlMissingOptions")
-        Me.ucrPnlMissingOptions.Name = "ucrPnlMissingOptions"
-        '
-        'rdoNumber
-        '
-        resources.ApplyResources(Me.rdoNumber, "rdoNumber")
-        Me.rdoNumber.Checked = True
-        Me.rdoNumber.Name = "rdoNumber"
-        Me.rdoNumber.TabStop = True
-        Me.rdoNumber.UseVisualStyleBackColor = True
-        '
-        'rdoPercentage
-        '
-        resources.ApplyResources(Me.rdoPercentage, "rdoPercentage")
-        Me.rdoPercentage.Name = "rdoPercentage"
-        Me.rdoPercentage.UseVisualStyleBackColor = True
-        '
-        'lblNumber
-        '
-        resources.ApplyResources(Me.lblNumber, "lblNumber")
-        Me.lblNumber.Name = "lblNumber"
-        '
-        'lblPercentage
-        '
-        resources.ApplyResources(Me.lblPercentage, "lblPercentage")
-        Me.lblPercentage.Name = "lblPercentage"
-        '
-        'ucrNudNumber
-        '
-        Me.ucrNudNumber.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNumber.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudNumber, "ucrNudNumber")
-        Me.ucrNudNumber.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudNumber.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNumber.Name = "ucrNudNumber"
-        Me.ucrNudNumber.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudPercentage
-        '
-        Me.ucrNudPercentage.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPercentage.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudPercentage, "ucrNudPercentage")
-        Me.ucrNudPercentage.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudPercentage.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPercentage.Name = "ucrNudPercentage"
-        Me.ucrNudPercentage.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'sdgSummaries
         '
