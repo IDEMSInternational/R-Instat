@@ -102,8 +102,6 @@ Public Class dlgColumnStats
         clsSummariesList.AddParameter("summary_count", Chr(34) & "summary_count" & Chr(34), bIncludeArgumentName:=False)
         clsSummariesList.AddParameter("summary_sum", Chr(34) & "summary_sum" & Chr(34), bIncludeArgumentName:=False)
 
-
-
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
         clsDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList)
         'Prevents an error if user chooses non count summaries with no columns to summarise
