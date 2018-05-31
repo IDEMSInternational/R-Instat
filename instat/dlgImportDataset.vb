@@ -19,7 +19,7 @@ Imports RDotNet
 
 Public Class dlgImportDataset
 
-    Private clsImportText, clsImportCSV, clsImportDAT, clsImportRDS, clsReadRDS, clsImportExcel, clsImport As RFunction
+    Private clsImportFixedWidthText, clsImportCSV, clsImportDAT, clsImportRDS, clsReadRDS, clsImportExcel, clsImport As RFunction
     Private clsGetExcelSheetNames As RFunction
     Private bFirstLoad As Boolean
     Public bFromLibrary As Boolean
@@ -271,9 +271,13 @@ Public Class dlgImportDataset
 
         '##############################################################
         'Text controls
+        ucrPanelFixedWidthText.AddRadioButton(rdoSeparatortext)
         ucrPanelFixedWidthText.AddRadioButton(rdoFixedWidthText)
         ucrPanelFixedWidthText.AddRadioButton(rdoFixedWidthWhiteSpacesText)
-        ucrPanelFixedWidthText.bAllowNonConditionValues = True
+        ucrPanelFixedWidthText.AddFunctionNamesCondition(rdoSeparatortext, "import", bNewIsPositive:=True)
+        ucrPanelFixedWidthText.AddFunctionNamesCondition(rdoFixedWidthText, "read_table", bNewIsPositive:=True)
+        ucrPanelFixedWidthText.AddFunctionNamesCondition(rdoFixedWidthWhiteSpacesText, "read_table2", bNewIsPositive:=True)
+        'ucrPanelFixedWidthText.bAllowNonConditionValues = True
 
         ucrChkColumnNamesText.SetText("First Row is Column Headers")
         ucrChkColumnNamesText.SetParameter(New RParameter("col_names"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
@@ -295,11 +299,10 @@ Public Class dlgImportDataset
         ucrNudMaxRowsText.Minimum = 0
         ucrNudMaxRowsText.Maximum = Decimal.MaxValue
 
-
     End Sub
 
     Private Sub SetDefaults()
-        clsImportText = New RFunction
+        clsImportFixedWidthText = New RFunction
         clsImportCSV = New RFunction
         clsImportRDS = New RFunction
         clsImportExcel = New RFunction
@@ -308,8 +311,8 @@ Public Class dlgImportDataset
         clsImportDAT = New RFunction
         clsGetExcelSheetNames = New RFunction
 
-        clsImportText.SetPackageName("readr")
-        clsImportText.SetRCommand("read_table")
+        clsImportFixedWidthText.SetPackageName("readr")
+        clsImportFixedWidthText.SetRCommand("read_table")
 
         clsImportExcel.SetPackageName("rio")
         clsImportExcel.SetRCommand("import")
@@ -336,18 +339,19 @@ Public Class dlgImportDataset
 
         clsImportRDS.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_RDS")
 
+        ucrBase.clsRsyntax.SetBaseRFunction(clsImport)
+
         ucrNudPreviewLines.Value = 10
 
+        ucrPanelFixedWidthText.Hide()
         grpText.Hide()
         grpCSV.Hide()
         grpRDS.Hide()
         grpExcel.Hide()
-        txtTextFilePreview.Hide()
-        lblTextFilePreview.Hide()
+        TextPreviewVisible(False)
         lblNoPreview.Hide()
         lblCannotImport.Hide()
-        lblDataFrame.Hide()
-        grdDataPreview.Hide()
+        GridPreviewVisible(False)
         ucrSaveFile.Hide()
     End Sub
 
@@ -420,7 +424,7 @@ Public Class dlgImportDataset
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportText, New RParameter("file", 0), iAdditionalPairNo:=1)
+        ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportFixedWidthText, New RParameter("file", 0), iAdditionalPairNo:=1)
         ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportCSV, New RParameter("file", 0), iAdditionalPairNo:=2)
         ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportDAT, New RParameter("file", 0), iAdditionalPairNo:=3)
         ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportExcel, New RParameter("file", 0), iAdditionalPairNo:=4)
@@ -429,19 +433,20 @@ Public Class dlgImportDataset
         ucrInputFilePath.SetRCode(clsImport, bReset)
 
         'Save control
-        ucrSaveFile.AddAdditionalRCode(clsImportText, iAdditionalPairNo:=1)
+        ucrSaveFile.AddAdditionalRCode(clsImportFixedWidthText, iAdditionalPairNo:=1)
         ucrSaveFile.AddAdditionalRCode(clsImportCSV, iAdditionalPairNo:=2)
         ucrSaveFile.AddAdditionalRCode(clsImportDAT, iAdditionalPairNo:=3)
         ucrSaveFile.AddAdditionalRCode(clsImportExcel, iAdditionalPairNo:=4)
         ucrSaveFile.SetRCode(clsImport, bReset)
 
+        'Used by both text and csv functions
+        ucrPanelFixedWidthText.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         'TEXT CONTROLS 
-        ucrChkColumnNamesText.SetRCode(clsImportText, bReset)
-        ucrPanelFixedWidthText.SetRCode(clsImportText, bReset)
-        ucrInputMissingValueStringText.SetRCode(clsImportText, bReset)
-        ucrNudRowsToSkipText.SetRCode(clsImportText, bReset)
-        ucrNudMaxRowsText.SetRCode(clsImportText, bReset)
-        ucrChkMaxRowsText.SetRCode(clsImportText, bReset)
+        ucrChkColumnNamesText.SetRCode(clsImportFixedWidthText, bReset)
+        ucrInputMissingValueStringText.SetRCode(clsImportFixedWidthText, bReset)
+        ucrNudRowsToSkipText.SetRCode(clsImportFixedWidthText, bReset)
+        ucrNudMaxRowsText.SetRCode(clsImportFixedWidthText, bReset)
+        ucrChkMaxRowsText.SetRCode(clsImportFixedWidthText, bReset)
 
         'CSV CONTROLS
         ucrInputSeparatorCSV.SetRCode(clsImportCSV, bReset)
@@ -509,10 +514,11 @@ Public Class dlgImportDataset
 
         ucrInputFilePath.SetName(strFilePathR)
 
+        grpText.Hide()
+        ucrPanelFixedWidthText.Hide()
         grpRDS.Hide()
         grpExcel.Hide()
         grpCSV.Hide()
-        grpText.Hide()
         'TODO This needs to be different when RDS is a data frame
         'need to be able to detect RDS as data.frame/Instat Object
         If strFileExt = ".rds" Then
@@ -522,11 +528,15 @@ Public Class dlgImportDataset
             grpRDS.Show()
         ElseIf strFileExt = ".txt" Then
             strFileType = "TXT"
-            ucrBase.clsRsyntax.SetBaseRFunction(clsImportText)
-            grpText.Show()
+            'by default the textfiles will be imported using the function we use for csv
+            ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSV)
+            ucrPanelFixedWidthText.Show()
+            grpCSV.Text = "Import Text Options"
+            grpCSV.Show()
         ElseIf strFileExt = ".csv" Then
             strFileType = "CSV"
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSV)
+            grpCSV.Text = "Import CSV Options"
             grpCSV.Show()
         ElseIf strFileExt = ".dat" Then
             strFileType = "DAT"
@@ -558,14 +568,19 @@ Public Class dlgImportDataset
         RefreshFrameView()
     End Sub
 
-    Public Sub RefreshFilePreview()
+    Public Sub RefreshFilePreview(Optional strNewFileType As String = "")
+        Dim rowsToSkip As Integer
         If bDialogLoaded Then
-            If (strFileType = "CSV" OrElse strFileType = "TXT") AndAlso strFilePathSystem <> "" Then
+            If strNewFileType = "" Then
+                strNewFileType = strFileType
+            End If
+            If (strNewFileType = "CSV" OrElse strNewFileType = "TXT") AndAlso strFilePathSystem <> "" Then
                 TextPreviewVisible(True)
+                rowsToSkip = If(strNewFileType = "CSV", ucrNudRowsToSkipCSV.Value, ucrNudRowsToSkipText.Value)
                 Try
                     Using sReader As New StreamReader(strFilePathSystem)
                         txtTextFilePreview.Text = ""
-                        For i = 1 To ucrNudPreviewLines.Value + ucrNudRowsToSkipCSV.Value + 1
+                        For i = 1 To ucrNudPreviewLines.Value + rowsToSkip + 1
                             txtTextFilePreview.Text = txtTextFilePreview.Text & sReader.ReadLine() & Environment.NewLine
                             If sReader.Peek() = -1 Then
                                 Exit For
@@ -603,9 +618,17 @@ Public Class dlgImportDataset
             bValid = False
             If {"TXT", "CSV", "XLSX", "XLS"}.Contains(strFileType) AndAlso Not ucrInputFilePath.IsEmpty() Then
                 If strFileType = "TXT" Then
-                    clsTempImport = clsImportText.Clone()
-                    strRowMaxParamName = "n_max"
-                    clsTempImport.AddParameter("na", Chr(34) & ucrInputMissingValueStringText.GetText & Chr(34))
+                    If rdoSeparatortext.Checked Then
+                        'for separtor we use the function used for csv
+                        clsTempImport = clsImportCSV.Clone()
+                        strRowMaxParamName = "nrows"
+                        clsTempImport.AddParameter("na.strings", Chr(34) & ucrInputMissingValueStringCSV.GetText & Chr(34))
+                    Else
+                        clsTempImport = clsImportFixedWidthText.Clone()
+                        strRowMaxParamName = "n_max"
+                        clsTempImport.AddParameter("na", Chr(34) & ucrInputMissingValueStringText.GetText & Chr(34))
+                    End If
+
                 ElseIf strFileType = "CSV" Then
                     clsTempImport = clsImportCSV.Clone()
                     strRowMaxParamName = "nrows"
@@ -759,10 +782,21 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub UcrPanelFixedWidthText_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPanelFixedWidthText.ControlValueChanged
-        If rdoFixedWidthText.Checked Then
-            clsImportText.SetRCommand("read_table")
-        ElseIf rdoFixedWidthWhiteSpacesText.Checked
-            clsImportText.SetRCommand("read_table2")
+        grpCSV.Visible = False
+        grpText.Visible = False
+        If rdoFixedWidthText.Checked OrElse rdoFixedWidthWhiteSpacesText.Checked Then
+            If rdoFixedWidthText.Checked Then
+                clsImportFixedWidthText.SetRCommand("read_table")
+            Else
+                clsImportFixedWidthText.SetRCommand("read_table2")
+            End If
+            ucrBase.clsRsyntax.SetBaseRFunction(clsImportFixedWidthText)
+            grpText.Visible = True
+            RefreshFilePreview("TXT")
+        ElseIf rdoSeparatortext.Checked
+            ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSV)
+            grpCSV.Visible = True
+            RefreshFilePreview("CSV")
         End If
         RefreshFrameView()
     End Sub
