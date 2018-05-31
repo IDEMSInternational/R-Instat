@@ -33,7 +33,7 @@ Public Class dlgDuplicateColumns
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsDuplicateFunction As New RFunction
-    Private clsConvertFunction As New RFunction
+    Private clsConvertFunction As RFunction
     Public strSelectedDataFrame As String = ""
     Private bUseSelectedColumn As Boolean = False
     Private strSelectedColumn As String = ""
@@ -141,6 +141,8 @@ Public Class dlgDuplicateColumns
     Private Sub SetDefaults()
         clsDuplicateFunction = New RFunction
         clsConvertFunction = New RFunction
+        'ucrBase.clsRsyntax.ClearCodes()
+        ucrBase.clsRsyntax.lstAfterCodes.Clear()
 
         ucrSelectorForDuplicateColumn.Reset()
         ucrInputDuplicateColumnName.bAllowNonConditionValues = True
@@ -154,9 +156,8 @@ Public Class dlgDuplicateColumns
 
         'set up convert function
         clsConvertFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
-        clsConvertFunction.AddParameter("to_type", Chr(34) & "factor" & Chr(34))
-        'set the data_name parameter of the Convert Function with the new value of the receiver
-        clsConvertFunction.AddParameter("data_name", Chr(34) & ucrSelectorForDuplicateColumn.strCurrentDataFrame & Chr(34))
+        clsConvertFunction.AddParameter("to_type", Chr(34) & "factor" & Chr(34), iPosition:=2)
+        clsConvertFunction.AddParameter("data_name", Chr(34) & ucrSelectorForDuplicateColumn.strCurrentDataFrame & Chr(34), iPosition:=0)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
@@ -164,6 +165,7 @@ Public Class dlgDuplicateColumns
         ucrSelectorForDuplicateColumn.SetRCode(clsDuplicateFunction, bReset)
         ucrReceiverDuplicateColumns.SetRCode(clsDuplicateFunction, bReset)
         ucrPnlDuplicateColPosition.SetRCode(clsDuplicateFunction, bReset)
+        ucrInputDuplicateColumnName.AddAdditionalCodeParameterPair(clsConvertFunction, New RParameter("col_names", 1), iAdditionalPairNo:=1)
         ucrInputDuplicateColumnName.SetRCode(clsDuplicateFunction, bReset)
 
         ucrPnlConvertTo.SetRCode(clsConvertFunction, bReset)
@@ -173,8 +175,8 @@ Public Class dlgDuplicateColumns
         ucrChkConvertKeepAttributes.SetRCode(clsConvertFunction, bReset)
         ucrChkConvertCreateLabels.SetRCode(clsConvertFunction, bReset)
 
+        ucrChkChangeType.SetRCode(clsConvertFunction)
         ucrChkChangeType.SetRSyntax(ucrBase.clsRsyntax, bReset)
-        'SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -255,7 +257,7 @@ Public Class dlgDuplicateColumns
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrChkSetSeed_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkChangeType.ControlValueChanged
+    Private Sub ucrChkChangeType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkChangeType.ControlValueChanged
         'Remove the Convert Function if change type is unchecked
         If ucrChkChangeType.Checked Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsConvertFunction, iPosition:=0)
@@ -264,13 +266,8 @@ Public Class dlgDuplicateColumns
         End If
     End Sub
 
-    Private Sub ucrInputColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputDuplicateColumnName.ControlValueChanged
-        'set the col_name parameter of the Convert Function with the new value of the receiver
-        clsConvertFunction.AddParameter("col_names", Chr(34) & ucrInputDuplicateColumnName.GetValue & Chr(34))
-    End Sub
-
     Private Sub ucrSelectorForDuplicateColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForDuplicateColumn.ControlValueChanged
-        'also change the data_name parameter value of the Convert Function with the new value of the receiver
-        clsConvertFunction.AddParameter("data_name", Chr(34) & ucrSelectorForDuplicateColumn.strCurrentDataFrame & Chr(34))
+        'also change the data_name parameter value of the Convert Function with the new value of the selector
+        clsConvertFunction.AddParameter("data_name", Chr(34) & ucrSelectorForDuplicateColumn.strCurrentDataFrame & Chr(34), iPosition:=0)
     End Sub
 End Class
