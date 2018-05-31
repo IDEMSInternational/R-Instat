@@ -220,13 +220,13 @@
     <value>5, 62</value>
   </data>
   <data name="lblHeadersCSV.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 13</value>
+    <value>143, 13</value>
   </data>
   <data name="lblHeadersCSV.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="lblHeadersCSV.Text" xml:space="preserve">
-    <value>First Row is Column Headers:</value>
+    <value>First Line is Column Headers:</value>
   </data>
   <data name="&gt;&gt;lblHeadersCSV.Name" xml:space="preserve">
     <value>lblHeadersCSV</value>
