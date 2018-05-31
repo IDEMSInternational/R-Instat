@@ -409,6 +409,7 @@ Partial Class dlgUseDate
         Me.Controls.Add(Me.lblDateVariable)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSelectorUseDate)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgUseDate"
