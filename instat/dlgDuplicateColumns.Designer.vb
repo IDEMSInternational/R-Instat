@@ -305,7 +305,7 @@ Partial Class dlgDuplicateColumns
         Me.Controls.Add(Me.lblColumns)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.grpDuplicatedColumn)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDuplicateColumns"
