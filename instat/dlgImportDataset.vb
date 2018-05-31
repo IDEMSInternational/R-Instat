@@ -274,7 +274,7 @@ Public Class dlgImportDataset
         ucrPanelFixedWidthText.AddRadioButton(rdoSeparatortext)
         ucrPanelFixedWidthText.AddRadioButton(rdoFixedWidthText)
         ucrPanelFixedWidthText.AddRadioButton(rdoFixedWidthWhiteSpacesText)
-        ucrPanelFixedWidthText.AddFunctionNamesCondition(rdoSeparatortext, "import", bNewIsPositive:=True)
+        ucrPanelFixedWidthText.AddFunctionNamesCondition(rdoSeparatortext, {"read_table", "read_table2"}, bNewIsPositive:=False)
         ucrPanelFixedWidthText.AddFunctionNamesCondition(rdoFixedWidthText, "read_table", bNewIsPositive:=True)
         ucrPanelFixedWidthText.AddFunctionNamesCondition(rdoFixedWidthWhiteSpacesText, "read_table2", bNewIsPositive:=True)
 
