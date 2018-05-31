@@ -319,7 +319,7 @@ Public Class dlgImportDataset
 
         clsImportCSV.SetPackageName("rio")
         clsImportCSV.SetRCommand("import")
-        'clsImportCSV.AddParameter("stringsAsFactors", True)
+        clsImportCSV.AddParameter("stringsAsFactors", "TRUE")
 
         clsImport.SetPackageName("rio")
         clsImport.SetRCommand("import")
