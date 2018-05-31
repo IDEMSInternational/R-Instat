@@ -75,7 +75,8 @@ Public Class dlgDuplicateColumns
         ucrChkChangeType.SetText("Change type")
         ucrChkChangeType.AddRSyntaxContainsFunctionNamesCondition(True, {frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type"}, bNewIsPositive:=True)
         ucrChkChangeType.AddRSyntaxContainsFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type"}, bNewIsPositive:=False)
-        ucrChkChangeType.AddToLinkedControls(ucrPnlConvertTo, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkChangeType.AddToLinkedControls(ucrPnlConvertTo, {True}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkChangeType.AddToLinkedControls(ucrChkConvertKeepAttributes, {True}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
 
         'For convert to column type options
         ucrPnlConvertTo.SetLinkedDisplayControl(grpConvertTo)
