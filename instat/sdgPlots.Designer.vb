@@ -446,7 +446,6 @@ Partial Class sdgPlots
         Me.MinimizeBox = False
         Me.Name = "sdgPlots"
         Me.Tag = "Plot_Options"
-        Me.TopMost = True
         Me.tbpPlotsOptions.ResumeLayout(False)
         Me.tbpFacet.ResumeLayout(False)
         Me.tbpFacet.PerformLayout()
