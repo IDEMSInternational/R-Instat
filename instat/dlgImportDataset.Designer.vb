@@ -48,7 +48,7 @@ Partial Class dlgImportDataset
         Me.txtTextFilePreview = New System.Windows.Forms.TextBox()
         Me.grdDataPreview = New unvell.ReoGrid.ReoGridControl()
         Me.lblFileOpenPath = New System.Windows.Forms.Label()
-        Me.lblRowsToSkipCSV = New System.Windows.Forms.Label()
+        Me.lblLinesToSkipCSV = New System.Windows.Forms.Label()
         Me.cmdBrowse = New System.Windows.Forms.Button()
         Me.grpCSV = New System.Windows.Forms.GroupBox()
         Me.ucrNudMaxRowsCSV = New instat.ucrNud()
@@ -89,12 +89,12 @@ Partial Class dlgImportDataset
         Me.grpText = New System.Windows.Forms.GroupBox()
         Me.ucrNudMaxRowsText = New instat.ucrNud()
         Me.ucrChkMaxRowsText = New instat.ucrCheck()
-        Me.ucrPanelFixedWidthText = New instat.UcrPanel()
         Me.ucrChkColumnNamesText = New instat.ucrCheck()
         Me.lblMissingValueStringText = New System.Windows.Forms.Label()
         Me.ucrNudRowsToSkipText = New instat.ucrNud()
         Me.ucrInputMissingValueStringText = New instat.ucrInputTextBox()
-        Me.lblRowsToSkipText = New System.Windows.Forms.Label()
+        Me.lblLinesToSkipText = New System.Windows.Forms.Label()
+        Me.ucrPanelFixedWidthText = New instat.UcrPanel()
         Me.ucrNudPreviewLines = New instat.ucrNud()
         Me.ucrSaveFile = New instat.ucrSave()
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
@@ -170,10 +170,10 @@ Partial Class dlgImportDataset
         resources.ApplyResources(Me.lblFileOpenPath, "lblFileOpenPath")
         Me.lblFileOpenPath.Name = "lblFileOpenPath"
         '
-        'lblRowsToSkipCSV
+        'lblLinesToSkipCSV
         '
-        resources.ApplyResources(Me.lblRowsToSkipCSV, "lblRowsToSkipCSV")
-        Me.lblRowsToSkipCSV.Name = "lblRowsToSkipCSV"
+        resources.ApplyResources(Me.lblLinesToSkipCSV, "lblLinesToSkipCSV")
+        Me.lblLinesToSkipCSV.Name = "lblLinesToSkipCSV"
         '
         'cmdBrowse
         '
@@ -197,7 +197,7 @@ Partial Class dlgImportDataset
         Me.grpCSV.Controls.Add(Me.lblEncodingCSV)
         Me.grpCSV.Controls.Add(Me.lblHeadersCSV)
         Me.grpCSV.Controls.Add(Me.lblSeparatorCSV)
-        Me.grpCSV.Controls.Add(Me.lblRowsToSkipCSV)
+        Me.grpCSV.Controls.Add(Me.lblLinesToSkipCSV)
         Me.grpCSV.Controls.Add(Me.lblDecimalCSV)
         resources.ApplyResources(Me.grpCSV, "grpCSV")
         Me.grpCSV.Name = "grpCSV"
@@ -458,7 +458,7 @@ Partial Class dlgImportDataset
         Me.grpText.Controls.Add(Me.lblMissingValueStringText)
         Me.grpText.Controls.Add(Me.ucrNudRowsToSkipText)
         Me.grpText.Controls.Add(Me.ucrInputMissingValueStringText)
-        Me.grpText.Controls.Add(Me.lblRowsToSkipText)
+        Me.grpText.Controls.Add(Me.lblLinesToSkipText)
         resources.ApplyResources(Me.grpText, "grpText")
         Me.grpText.Name = "grpText"
         Me.grpText.TabStop = False
@@ -478,11 +478,6 @@ Partial Class dlgImportDataset
         Me.ucrChkMaxRowsText.Checked = False
         resources.ApplyResources(Me.ucrChkMaxRowsText, "ucrChkMaxRowsText")
         Me.ucrChkMaxRowsText.Name = "ucrChkMaxRowsText"
-        '
-        'ucrPanelFixedWidthText
-        '
-        resources.ApplyResources(Me.ucrPanelFixedWidthText, "ucrPanelFixedWidthText")
-        Me.ucrPanelFixedWidthText.Name = "ucrPanelFixedWidthText"
         '
         'ucrChkColumnNamesText
         '
@@ -513,10 +508,15 @@ Partial Class dlgImportDataset
         resources.ApplyResources(Me.ucrInputMissingValueStringText, "ucrInputMissingValueStringText")
         Me.ucrInputMissingValueStringText.Name = "ucrInputMissingValueStringText"
         '
-        'lblRowsToSkipText
+        'lblLinesToSkipText
         '
-        resources.ApplyResources(Me.lblRowsToSkipText, "lblRowsToSkipText")
-        Me.lblRowsToSkipText.Name = "lblRowsToSkipText"
+        resources.ApplyResources(Me.lblLinesToSkipText, "lblLinesToSkipText")
+        Me.lblLinesToSkipText.Name = "lblLinesToSkipText"
+        '
+        'ucrPanelFixedWidthText
+        '
+        resources.ApplyResources(Me.ucrPanelFixedWidthText, "ucrPanelFixedWidthText")
+        Me.ucrPanelFixedWidthText.Name = "ucrPanelFixedWidthText"
         '
         'ucrNudPreviewLines
         '
@@ -629,7 +629,7 @@ Partial Class dlgImportDataset
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents grdDataPreview As unvell.ReoGrid.ReoGridControl
     Friend WithEvents lblFileOpenPath As Label
-    Friend WithEvents lblRowsToSkipCSV As Label
+    Friend WithEvents lblLinesToSkipCSV As Label
     Friend WithEvents cmdBrowse As Button
     Friend WithEvents grpCSV As GroupBox
     Friend WithEvents grpExcel As GroupBox
@@ -672,7 +672,7 @@ Partial Class dlgImportDataset
     Friend WithEvents lblMissingValueStringText As Label
     Friend WithEvents ucrNudRowsToSkipText As ucrNud
     Friend WithEvents ucrInputMissingValueStringText As ucrInputTextBox
-    Friend WithEvents lblRowsToSkipText As Label
+    Friend WithEvents lblLinesToSkipText As Label
     Friend WithEvents ucrPanelFixedWidthText As UcrPanel
     Friend WithEvents ucrChkMaxRowsText As ucrCheck
     Friend WithEvents ucrChkMaxRowsCSV As ucrCheck
