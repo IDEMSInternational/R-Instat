@@ -591,24 +591,24 @@ summary_n_distinct<- function(x, na.rm = FALSE, ...) {
 }
 
 #Proportions functions
-proportion_calc <- function(x, test = "==", value, As_percentage = FALSE, na.rm = FALSE,... ){ 
+proportion_calc <- function(x, prop_test = "==", prop_value, As_percentage = FALSE, na.rm = FALSE,... ){ 
   if(!na.rm){
     if(sum(is.na(x)) > 0) return(NA)
-    y <- x[eval(parse(text = paste("x", value, sep = test)))]
+    y <- x[eval(parse(text = paste("x", prop_value, sep = prop_test)))]
     if(!As_percentage){return(length(y)/length(x))}
     else {return(noquote(paste0((length(y)/length(x))*100 ,"%")))}  
   }
   else {
     remove.na <- na.omit(x)
-    y <- remove.na[eval(parse(text = paste("remove.na", value, sep = test)))]
+    y <- remove.na[eval(parse(text = paste("remove.na", prop_value, sep = prop_test)))]
     if (!As_percentage){ return(length(y)/length(remove.na))}
     else{return(noquote(paste0((length(y)/length(remove.na))*100 ,"%")))}
   }
 }
 
 #count function
-count_calc <- function(x, test = "==", value, ...){ 
-  return(length(x[eval(parse(text = paste("x", value, sep = test)))]))
+count_calc <- function(x, count_test = "==", count_value, ...){ 
+  return(length(x[eval(parse(text = paste("x", count_value, sep = count_test)))]))
 }
 
 
