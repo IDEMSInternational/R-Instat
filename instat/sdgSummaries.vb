@@ -23,6 +23,7 @@ Public Class sdgSummaries
     Private ucrBaseSelector As ucrSelector
     Public strDataFrame As String
     Public bEnable2VariableTab As Boolean = True
+    Public bOkEnabled As Boolean = True
 
     Private Sub sdgDescribe_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -133,6 +134,9 @@ Public Class sdgSummaries
         ucrChkProportion.AddToLinkedControls(ucrChkPercentage, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkCount.AddToLinkedControls(ucrInputComboCountTest, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkCount.AddToLinkedControls(ucrInputCountValue, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrChkIncludeMissingOpt.AddToLinkedControls(ucrPnlMissingOptions, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMissingOptions.AddToLinkedControls({ucrNudNumber}, {rdoNumber}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMissingOptions.AddToLinkedControls({ucrNudPercentage}, {rdoPercentage}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrInputN.SetLinkedDisplayControl(lblInputN)
         ucrNudFraction.SetLinkedDisplayControl(lblFractionTrimmed)
@@ -192,13 +196,10 @@ Public Class sdgSummaries
         ucrChkCount.SetText("Count")
 
         ucrChkIncludeMissingOpt.SetText("Inlcude Missing Options")
-        ucrChkIncludeMissingOpt.AddToLinkedControls(ucrPnlMissingOptions, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlMissingOptions.AddRadioButton(rdoNumber)
         ucrPnlMissingOptions.AddRadioButton(rdoPercentage)
 
-        ucrPnlMissingOptions.AddToLinkedControls({ucrNudNumber}, {rdoNumber}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlMissingOptions.AddToLinkedControls({ucrNudPercentage}, {rdoPercentage}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudPercentage.SetLinkedDisplayControl(lblPercentage)
         ucrNudNumber.SetLinkedDisplayControl(lblNumber)
 
@@ -210,6 +211,7 @@ Public Class sdgSummaries
             ctrTemp.SetRDefault(Chr(34) & Chr(34))
         Next
         bControlsInitialised = True
+        MissingOptionsVisibilty()
     End Sub
 
     Public Sub SetRFunction(clsNewRFunction As RFunction, clsNewDefaultFunction As RFunction, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False)
@@ -288,11 +290,30 @@ Public Class sdgSummaries
         'Temp solution to telling user why OK not enabled. Should be something on the main dialog to show this instead.
         'Maybe, number of summaries selected.
         If SummaryCount = 0 Then
-            MsgBox("No summaries selected. Ok will not be enabled on the main dialog.", Title:="No summaries selected", Buttons:=MsgBoxStyle.Information)
+            MsgBox("No summaries selected. Ok will Not be enabled on the main dialog.", Title:="No summaries selected", Buttons:=MsgBoxStyle.Information)
+        End If
+        If (ucrChkCorrelations.Checked OrElse ucrChkCovariance.Checked) AndAlso ucrReceiverSecondVariable.IsEmpty Then
+            MsgBox("Second Variable receiver in Two-Variables tab is empty. Ok will Not be enabled on the main dialog.", Title:="Second Variable Receiver", Buttons:=MsgBoxStyle.Information)
+            bOkEnabled = False
+        Else
+            bOkEnabled = True
+        End If
+    End Sub
+
+    Private Sub MissingOptionsVisibilty()
+        If ucrChkCorrelations.Checked OrElse ucrChkCovariance.Checked Then
+            ucrSelectorSecondVariable.Show()
+            ucrReceiverSecondVariable.Show()
+            lblSecondVariable.Show()
+        Else
+            ucrSelectorSecondVariable.Hide()
+            ucrReceiverSecondVariable.Hide()
+            lblSecondVariable.Hide()
         End If
     End Sub
 
     Private Sub ucrChkCorrelations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCorrelations.ControlValueChanged, ucrChkCovariance.ControlValueChanged, ucrReceiverSecondVariable.ControlValueChanged
+        MissingOptionsVisibilty()
         If ucrChkCorrelations.Checked OrElse ucrChkCovariance.Checked Then
             clsDefaultFunction.AddParameter("y", ucrReceiverSecondVariable.GetVariableNames, iPosition:=3)
         Else

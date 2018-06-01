@@ -56,6 +56,8 @@ Partial Class sdgSummaries
         Me.ucrChkLast = New instat.ucrCheck()
         Me.ucrChknth = New instat.ucrCheck()
         Me.grpProportionsPercentiles = New System.Windows.Forms.GroupBox()
+        Me.ucrInputCountValue = New instat.ucrInputTextBox()
+        Me.ucrInputComboCountTest = New instat.ucrInputComboBox()
         Me.ucrChkProportion = New instat.ucrCheck()
         Me.ucrChkCount = New instat.ucrCheck()
         Me.ucrChkPercentage = New instat.ucrCheck()
@@ -106,8 +108,6 @@ Partial Class sdgSummaries
         Me.ucrSelectorSecondVariable = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverSecondVariable = New instat.ucrReceiverSingle()
         Me.ucrButtonsSummaries = New instat.ucrButtonsSubdialogue()
-        Me.ucrInputCountValue = New instat.ucrInputTextBox()
-        Me.ucrInputComboCountTest = New instat.ucrInputComboBox()
         Me.tbMissingOptions.SuspendLayout()
         Me.tbMore.SuspendLayout()
         Me.grpPosition.SuspendLayout()
@@ -263,6 +263,21 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.grpProportionsPercentiles, "grpProportionsPercentiles")
         Me.grpProportionsPercentiles.Name = "grpProportionsPercentiles"
         Me.grpProportionsPercentiles.TabStop = False
+        '
+        'ucrInputCountValue
+        '
+        Me.ucrInputCountValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputCountValue.IsMultiline = False
+        Me.ucrInputCountValue.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputCountValue, "ucrInputCountValue")
+        Me.ucrInputCountValue.Name = "ucrInputCountValue"
+        '
+        'ucrInputComboCountTest
+        '
+        resources.ApplyResources(Me.ucrInputComboCountTest, "ucrInputComboCountTest")
+        Me.ucrInputComboCountTest.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboCountTest.IsReadOnly = False
+        Me.ucrInputComboCountTest.Name = "ucrInputComboCountTest"
         '
         'ucrChkProportion
         '
@@ -617,21 +632,6 @@ Partial Class sdgSummaries
         '
         resources.ApplyResources(Me.ucrButtonsSummaries, "ucrButtonsSummaries")
         Me.ucrButtonsSummaries.Name = "ucrButtonsSummaries"
-        '
-        'ucrInputCountValue
-        '
-        Me.ucrInputCountValue.AddQuotesIfUnrecognised = True
-        Me.ucrInputCountValue.IsMultiline = False
-        Me.ucrInputCountValue.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputCountValue, "ucrInputCountValue")
-        Me.ucrInputCountValue.Name = "ucrInputCountValue"
-        '
-        'ucrInputComboCountTest
-        '
-        resources.ApplyResources(Me.ucrInputComboCountTest, "ucrInputComboCountTest")
-        Me.ucrInputComboCountTest.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboCountTest.IsReadOnly = False
-        Me.ucrInputComboCountTest.Name = "ucrInputComboCountTest"
         '
         'sdgSummaries
         '
