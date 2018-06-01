@@ -32,9 +32,7 @@ Public Class dlgPICSARainfall
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
     Private bResetSubdialog As Boolean = True
     Private clsLocalRaesFunction As New RFunction
-    Private bResetLineLayerSubdialog As Boolean = True
-    Private clsGeomSmoothFunc As New RFunction
-    Private clsGeomSmoothParameter As New RParameter
+    Private clsGeomPoint As New RFunction
 
     Private Sub dlgPCSARainfall_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -50,8 +48,6 @@ Public Class dlgPICSARainfall
         TestOkEnabled()
     End Sub
     Private Sub InitialiseDialog()
-        Dim clsGeomPointFunc As New RFunction
-        Dim clsGeomPointParam As New RParameter
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
@@ -62,11 +58,11 @@ Public Class dlgPICSARainfall
 
         ucrReceiverX.SetParameter(New RParameter("x", 0))
         ucrReceiverX.Selector = ucrPICSARainfallSelector
-        ucrReceiverX.strSelectorHeading = "Variables"
+        ucrReceiverX.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
+        ucrReceiverX.bAutoFill = True
         ucrReceiverX.bWithQuotes = False
-        ucrReceiverX.SetParameterIsString()
-        ucrReceiverX.SetValuesToIgnore({Chr(34) & Chr(34)})
-        ucrReceiverX.bAddParameterIfEmpty = True
+        ucrReceiverX.SetIncludedDataTypes({"factor"})
+        ucrReceiverX.strSelectorHeading = "Year Variables"
 
         ucrFactorOptionalReceiver.SetParameter(New RParameter("colour", 2))
         ucrFactorOptionalReceiver.Selector = ucrPICSARainfallSelector
@@ -84,22 +80,11 @@ Public Class dlgPICSARainfall
         ucrVariablesAsFactor.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrVariablesAsFactor.bAddParameterIfEmpty = True
 
-        clsGeomPointFunc.SetPackageName("ggplot2")
-        clsGeomPointFunc.SetRCommand("geom_point")
-        clsGeomPointParam.SetArgumentName("geom_point")
-        clsGeomPointParam.SetArgument(clsGeomPointFunc)
-        clsGeomPointParam.Position = 3
-        ucrChkPoints.SetText("Points")
-        ucrChkPoints.SetParameter(clsGeomPointParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkPoints.SetText("Add Points")
+        ucrChkPoints.AddParameterPresentCondition(True, "points")
+        ucrChkPoints.AddParameterPresentCondition(False, "points", False)
 
-        clsGeomSmoothFunc.SetPackageName("ggplot2")
-        clsGeomSmoothFunc.SetRCommand("geom_smooth")
-        clsGeomSmoothFunc.AddParameter("method", Chr(34) & "lm" & Chr(34), iPosition:=0)
-        clsGeomSmoothFunc.AddParameter("se", "FALSE", iPosition:=1)
-        clsGeomSmoothParameter.SetArgumentName("geom_smooth")
-        clsGeomSmoothParameter.SetArgument(clsGeomSmoothFunc)
-
-        ucrSave.SetPrefix("lineplot")
+        ucrSave.SetPrefix("PICSA_Rainfall_Graph")
         ucrSave.SetIsComboBox()
         ucrSave.SetSaveTypeAsGraph()
         ucrSave.SetCheckBoxText("Save Graph")
@@ -112,15 +97,14 @@ Public Class dlgPICSARainfall
         clsRgeomlineplotFunction = New RFunction
         clsRaesFunction = New RFunction
         clsBaseOperator = New ROperator
+        clsGeomPoint = New RFunction
+
 
         ucrPICSARainfallSelector.Reset()
         ucrPICSARainfallSelector.SetGgplotFunction(clsBaseOperator)
         ucrSave.Reset()
         ucrVariablesAsFactor.SetMeAsReceiver()
         bResetSubdialog = True
-        bResetLineLayerSubdialog = True
-
-
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -138,6 +122,10 @@ Public Class dlgPICSARainfall
         clsRgeomlineplotFunction.SetPackageName("ggplot2")
         clsRgeomlineplotFunction.SetRCommand("geom_line")
 
+        clsGeomPoint.SetPackageName("ggplot2")
+        clsGeomPoint.SetRCommand("geom_point")
+        clsBaseOperator.AddParameter("points", clsRFunctionParameter:=clsGeomPoint)
+
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
@@ -148,8 +136,6 @@ Public Class dlgPICSARainfall
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction
         clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
-        clsGeomSmoothFunc.AddParameter("se", "FALSE", iPosition:=1)
-        clsBaseOperator.RemoveParameterByName("geom_point")
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrPICSARainfallSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
         TempOptionsDisabledInMultipleVariablesCase()
