@@ -175,7 +175,7 @@ Public Class dlgDuplicateColumns
         ucrChkConvertKeepAttributes.SetRCode(clsConvertFunction, bReset)
         ucrChkConvertCreateLabels.SetRCode(clsConvertFunction, bReset)
 
-        ucrChkChangeType.SetRCode(clsConvertFunction)
+        'ucrChkChangeType.SetRCode(clsConvertFunction)
         ucrChkChangeType.SetRSyntax(ucrBase.clsRsyntax, bReset)
     End Sub
 
