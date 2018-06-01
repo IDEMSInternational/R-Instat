@@ -23,12 +23,43 @@ Partial Class sdgPICSARainfallGraph
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgPICSARainfallGraph))
+        Me.ucrSdgPICSARainfalbuttons = New instat.ucrButtonsSubdialogue()
+        Me.ucrChkPlotMean = New instat.ucrCheck()
+        Me.ucrChkPlotMedian = New instat.ucrCheck()
+        Me.ucrChkPlotTerciles = New instat.ucrCheck()
         Me.SuspendLayout()
+        '
+        'ucrSdgPICSARainfalbuttons
+        '
+        resources.ApplyResources(Me.ucrSdgPICSARainfalbuttons, "ucrSdgPICSARainfalbuttons")
+        Me.ucrSdgPICSARainfalbuttons.Name = "ucrSdgPICSARainfalbuttons"
+        '
+        'ucrChkPlotMean
+        '
+        Me.ucrChkPlotMean.Checked = False
+        resources.ApplyResources(Me.ucrChkPlotMean, "ucrChkPlotMean")
+        Me.ucrChkPlotMean.Name = "ucrChkPlotMean"
+        '
+        'ucrChkPlotMedian
+        '
+        Me.ucrChkPlotMedian.Checked = False
+        resources.ApplyResources(Me.ucrChkPlotMedian, "ucrChkPlotMedian")
+        Me.ucrChkPlotMedian.Name = "ucrChkPlotMedian"
+        '
+        'ucrChkPlotTerciles
+        '
+        Me.ucrChkPlotTerciles.Checked = False
+        resources.ApplyResources(Me.ucrChkPlotTerciles, "ucrChkPlotTerciles")
+        Me.ucrChkPlotTerciles.Name = "ucrChkPlotTerciles"
         '
         'sdgPICSARainfallGraph
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkPlotTerciles)
+        Me.Controls.Add(Me.ucrChkPlotMedian)
+        Me.Controls.Add(Me.ucrChkPlotMean)
+        Me.Controls.Add(Me.ucrSdgPICSARainfalbuttons)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -36,4 +67,9 @@ Partial Class sdgPICSARainfallGraph
         Me.ResumeLayout(False)
 
     End Sub
+
+    Friend WithEvents ucrSdgPICSARainfalbuttons As ucrButtonsSubdialogue
+    Friend WithEvents ucrChkPlotMean As ucrCheck
+    Friend WithEvents ucrChkPlotMedian As ucrCheck
+    Friend WithEvents ucrChkPlotTerciles As ucrCheck
 End Class
