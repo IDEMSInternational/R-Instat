@@ -23,43 +23,16 @@ Partial Class sdgSaveColumnPosition
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgSaveColumnPosition))
-        Me.ucrSelectorSaveColumnPosition = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverColumn = New instat.ucrReceiverSingle()
-        Me.ucrPnlColumnPosition = New instat.UcrPanel()
-        Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
         Me.lblColumn = New System.Windows.Forms.Label()
         Me.rdoStart = New System.Windows.Forms.RadioButton()
         Me.rdoEnd = New System.Windows.Forms.RadioButton()
         Me.rdoBeforeOrAfterColumn = New System.Windows.Forms.RadioButton()
         Me.ucrInputBeforeAfter = New instat.ucrInputComboBox()
+        Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.ucrReceiverColumn = New instat.ucrReceiverSingle()
+        Me.ucrSelectorSaveColumnPosition = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrPnlColumnPosition = New instat.UcrPanel()
         Me.SuspendLayout()
-        '
-        'ucrSelectorSaveColumnPosition
-        '
-        Me.ucrSelectorSaveColumnPosition.bDropUnusedFilterLevels = False
-        Me.ucrSelectorSaveColumnPosition.bShowHiddenColumns = False
-        Me.ucrSelectorSaveColumnPosition.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorSaveColumnPosition, "ucrSelectorSaveColumnPosition")
-        Me.ucrSelectorSaveColumnPosition.Name = "ucrSelectorSaveColumnPosition"
-        '
-        'ucrReceiverColumn
-        '
-        Me.ucrReceiverColumn.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverColumn, "ucrReceiverColumn")
-        Me.ucrReceiverColumn.Name = "ucrReceiverColumn"
-        Me.ucrReceiverColumn.Selector = Nothing
-        Me.ucrReceiverColumn.strNcFilePath = ""
-        Me.ucrReceiverColumn.ucrSelector = Nothing
-        '
-        'ucrPnlColumnPosition
-        '
-        resources.ApplyResources(Me.ucrPnlColumnPosition, "ucrPnlColumnPosition")
-        Me.ucrPnlColumnPosition.Name = "ucrPnlColumnPosition"
-        '
-        'ucrBaseSubdialog
-        '
-        resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
-        Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         '
         'lblColumn
         '
@@ -93,6 +66,33 @@ Partial Class sdgSaveColumnPosition
         Me.ucrInputBeforeAfter.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputBeforeAfter, "ucrInputBeforeAfter")
         Me.ucrInputBeforeAfter.Name = "ucrInputBeforeAfter"
+        '
+        'ucrBaseSubdialog
+        '
+        resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
+        Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
+        '
+        'ucrReceiverColumn
+        '
+        Me.ucrReceiverColumn.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverColumn, "ucrReceiverColumn")
+        Me.ucrReceiverColumn.Name = "ucrReceiverColumn"
+        Me.ucrReceiverColumn.Selector = Nothing
+        Me.ucrReceiverColumn.strNcFilePath = ""
+        Me.ucrReceiverColumn.ucrSelector = Nothing
+        '
+        'ucrSelectorSaveColumnPosition
+        '
+        Me.ucrSelectorSaveColumnPosition.bDropUnusedFilterLevels = False
+        Me.ucrSelectorSaveColumnPosition.bShowHiddenColumns = False
+        Me.ucrSelectorSaveColumnPosition.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorSaveColumnPosition, "ucrSelectorSaveColumnPosition")
+        Me.ucrSelectorSaveColumnPosition.Name = "ucrSelectorSaveColumnPosition"
+        '
+        'ucrPnlColumnPosition
+        '
+        resources.ApplyResources(Me.ucrPnlColumnPosition, "ucrPnlColumnPosition")
+        Me.ucrPnlColumnPosition.Name = "ucrPnlColumnPosition"
         '
         'sdgSaveColumnPosition
         '

@@ -14,8 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
-
 Public Class ucrSave
     Public bFirstLoad As Boolean = True
     Private bShowCheckBox As Boolean = True
@@ -29,6 +27,7 @@ Public Class ucrSave
     Private bAssignToColumnWithoutNames As Boolean = False
     Private bInsertColumnBefore As Boolean = False
     Private strAssignToIfUnchecked As String = ""
+    Private clsRcodeStructure As RCodeStructure
 
     Private Sub ucrSave_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -110,9 +109,23 @@ Public Class ucrSave
         UpdateRCode()
     End Sub
 
-    Public Sub SetAssignToBooleans(Optional bTempAssignToIsPrefix As Boolean = False, Optional bTempAssignToColumnWithoutNames As Boolean = False, Optional bTempInsertColumnBefore As Boolean = False)
+    Public Sub SetAssignToBooleans(bTempAssignToIsPrefix As Boolean, bTempAssignToColumnWithoutNames As Boolean, bTempInsertColumnBefore As Boolean)
+        '    bAssignToIsPrefix = bTempAssignToIsPrefix
+        '    bAssignToColumnWithoutNames = bTempAssignToColumnWithoutNames
+        '    bInsertColumnBefore = bTempInsertColumnBefore
+        '    UpdateRCode()
+    End Sub
+
+    Public Sub SetbAssignToIsPrefix(bTempAssignToIsPrefix As Boolean)
         bAssignToIsPrefix = bTempAssignToIsPrefix
+        UpdateRCode()
+    End Sub
+
+    Public Sub SetbAssignToColumnWithoutNames(bTempAssignToColumnWithoutNames As Boolean)
         bAssignToColumnWithoutNames = bTempAssignToColumnWithoutNames
+        UpdateRCode()
+    End Sub
+    Public Sub SetbInsertColumnBefore(bTempInsertColumnBefore As Boolean)
         bInsertColumnBefore = bTempInsertColumnBefore
         UpdateRCode()
     End Sub
@@ -379,6 +392,7 @@ Public Class ucrSave
     End Function
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        ' sdgSaveColumnPosition.SetRCode()
         sdgSaveColumnPosition.ShowDialog()
     End Sub
 End Class

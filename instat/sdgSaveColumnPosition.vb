@@ -1,6 +1,7 @@
 ﻿Imports instat.Translations
 Public Class sdgSaveColumnPosition
-    Dim clsRFunction As New RFunction
+    Private clsRFunction As New RFunction
+    Private bControlsInitialised As Boolean = False
     Private Sub sdgSaveColumnPosition_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
@@ -31,10 +32,16 @@ Public Class sdgSaveColumnPosition
         dctBeforeAfter.Add("After", "FALSE")
         ucrInputBeforeAfter.SetItems(dctBeforeAfter)
         ucrInputBeforeAfter.SetDropDownStyleAsNonEditable()
+        bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsBasefunc As RFunction)
-        clsRFunction = clsBasefunc
+    Public Sub SetRCode(clsAddColumnsToData As RFunction, Optional bReset As Boolean = False)
+        If Not bControlsInitialised Then
+            InitialiseControls()
+        End If
+
+        clsRFunction = clsAddColumnsToData
+        SetRCode(clsRFunction, bReset)
     End Sub
 
 

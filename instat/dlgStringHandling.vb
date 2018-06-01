@@ -308,9 +308,9 @@ Public Class dlgStringHandling
             End If
         End If
         If rdoLocate.Checked Then
-            ucrSaveStringHandling.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
+            ucrSaveStringHandling.SetbAssignToIsPrefix(bTempAssignToIsPrefix:=True)
         Else
-            ucrSaveStringHandling.SetAssignToBooleans(bTempAssignToIsPrefix:=False)
+            ucrSaveStringHandling.SetbAssignToIsPrefix(bTempAssignToIsPrefix:=False)
         End If
     End Sub
 

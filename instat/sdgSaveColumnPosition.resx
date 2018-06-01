@@ -117,119 +117,44 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ucrSelectorSaveColumnPosition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 122</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblColumn.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ucrSelectorSaveColumnPosition.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+  <data name="lblColumn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="ucrSelectorSaveColumnPosition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 186</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblColumn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>257, 168</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ucrSelectorSaveColumnPosition.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblColumn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 13</value>
+  </data>
+  <data name="lblColumn.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="lblColumn.Text" xml:space="preserve">
+    <value>Column</value>
+  </data>
+  <data name="&gt;&gt;lblColumn.Name" xml:space="preserve">
+    <value>lblColumn</value>
+  </data>
+  <data name="&gt;&gt;lblColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblColumn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblColumn.ZOrder" xml:space="preserve">
     <value>4</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorSaveColumnPosition.Name" xml:space="preserve">
-    <value>ucrSelectorSaveColumnPosition</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorSaveColumnPosition.Type" xml:space="preserve">
-    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorSaveColumnPosition.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorSaveColumnPosition.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>405, 355</value>
-  </data>
-  <data name="ucrInputBeforeAfter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>145, 93</value>
-  </data>
-  <data name="ucrInputBeforeAfter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 21</value>
-  </data>
-  <data name="ucrInputBeforeAfter.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;ucrInputBeforeAfter.Name" xml:space="preserve">
-    <value>ucrInputBeforeAfter</value>
-  </data>
-  <data name="&gt;&gt;ucrInputBeforeAfter.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputBeforeAfter.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputBeforeAfter.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="rdoBeforeOrAfterColumn.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="rdoBeforeOrAfterColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 93</value>
-  </data>
-  <data name="rdoBeforeOrAfterColumn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 17</value>
-  </data>
-  <data name="rdoBeforeOrAfterColumn.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="rdoBeforeOrAfterColumn.Text" xml:space="preserve">
-    <value>Before or After Column</value>
-  </data>
-  <data name="&gt;&gt;rdoBeforeOrAfterColumn.Name" xml:space="preserve">
-    <value>rdoBeforeOrAfterColumn</value>
-  </data>
-  <data name="&gt;&gt;rdoBeforeOrAfterColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoBeforeOrAfterColumn.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;rdoBeforeOrAfterColumn.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="rdoEnd.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="rdoEnd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 59</value>
-  </data>
-  <data name="rdoEnd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 17</value>
-  </data>
-  <data name="rdoEnd.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="rdoEnd.Text" xml:space="preserve">
-    <value>End</value>
-  </data>
-  <data name="&gt;&gt;rdoEnd.Name" xml:space="preserve">
-    <value>rdoEnd</value>
-  </data>
-  <data name="&gt;&gt;rdoEnd.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoEnd.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;rdoEnd.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="rdoStart.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="rdoStart.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoStart.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 25</value>
@@ -255,32 +180,86 @@
   <data name="&gt;&gt;rdoStart.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="lblColumn.AutoSize" type="System.Boolean, mscorlib">
+  <data name="rdoEnd.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 168</value>
+  <data name="rdoEnd.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="lblColumn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 13</value>
+  <data name="rdoEnd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 59</value>
   </data>
-  <data name="lblColumn.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+  <data name="rdoEnd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 17</value>
   </data>
-  <data name="lblColumn.Text" xml:space="preserve">
-    <value>Column</value>
+  <data name="rdoEnd.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
   </data>
-  <data name="&gt;&gt;lblColumn.Name" xml:space="preserve">
-    <value>lblColumn</value>
+  <data name="rdoEnd.Text" xml:space="preserve">
+    <value>End</value>
   </data>
-  <data name="&gt;&gt;lblColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;rdoEnd.Name" xml:space="preserve">
+    <value>rdoEnd</value>
   </data>
-  <data name="&gt;&gt;lblColumn.Parent" xml:space="preserve">
+  <data name="&gt;&gt;rdoEnd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoEnd.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;lblColumn.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;rdoEnd.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="rdoBeforeOrAfterColumn.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoBeforeOrAfterColumn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoBeforeOrAfterColumn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 93</value>
+  </data>
+  <data name="rdoBeforeOrAfterColumn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 17</value>
+  </data>
+  <data name="rdoBeforeOrAfterColumn.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="rdoBeforeOrAfterColumn.Text" xml:space="preserve">
+    <value>Before or After Column</value>
+  </data>
+  <data name="&gt;&gt;rdoBeforeOrAfterColumn.Name" xml:space="preserve">
+    <value>rdoBeforeOrAfterColumn</value>
+  </data>
+  <data name="&gt;&gt;rdoBeforeOrAfterColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoBeforeOrAfterColumn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoBeforeOrAfterColumn.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrInputBeforeAfter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>145, 93</value>
+  </data>
+  <data name="ucrInputBeforeAfter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 21</value>
+  </data>
+  <data name="ucrInputBeforeAfter.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;ucrInputBeforeAfter.Name" xml:space="preserve">
+    <value>ucrInputBeforeAfter</value>
+  </data>
+  <data name="&gt;&gt;ucrInputBeforeAfter.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputBeforeAfter.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputBeforeAfter.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="ucrBaseSubdialog.Location" type="System.Drawing.Point, System.Drawing">
     <value>124, 320</value>
@@ -303,11 +282,44 @@
   <data name="&gt;&gt;ucrBaseSubdialog.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>405, 355</value>
+  </data>
+  <data name="ucrSelectorSaveColumnPosition.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 122</value>
+  </data>
+  <data name="ucrSelectorSaveColumnPosition.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectorSaveColumnPosition.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 186</value>
+  </data>
+  <data name="ucrSelectorSaveColumnPosition.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorSaveColumnPosition.Name" xml:space="preserve">
+    <value>ucrSelectorSaveColumnPosition</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorSaveColumnPosition.Type" xml:space="preserve">
+    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorSaveColumnPosition.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorSaveColumnPosition.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
   <data name="ucrPnlColumnPosition.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 13</value>
   </data>
   <data name="ucrPnlColumnPosition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 115</value>
+    <value>136, 101</value>
   </data>
   <data name="ucrPnlColumnPosition.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>

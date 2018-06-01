@@ -113,13 +113,13 @@ Public Class dlgRandomSample
 
     Private Sub SetNewColumName()
         If ucrNudNumberOfSamples.Value = 1 Then
-            ucrSaveRandomSamples.SetAssignToBooleans(bTempAssignToIsPrefix:=False)
+            ucrSaveRandomSamples.SetbAssignToIsPrefix(bTempAssignToIsPrefix:=False)
             ucrSaveRandomSamples.SetLabelText("New Column Name:")
             If Not ucrSaveRandomSamples.bUserTyped Then
                 ucrSaveRandomSamples.SetPrefix("random_sample")
             End If
         Else
-            ucrSaveRandomSamples.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
+            ucrSaveRandomSamples.SetbAssignToIsPrefix(bTempAssignToIsPrefix:=True)
             ucrSaveRandomSamples.SetLabelText("Prefix for New Columns:")
             If Not ucrSaveRandomSamples.bUserTyped Then
                 ucrSaveRandomSamples.SetPrefix("")

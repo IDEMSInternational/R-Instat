@@ -93,7 +93,7 @@ Public Class dlgRowNamesOrNumbers
         ucrNewColumnName.SetSaveTypeAsColumn()
         ucrNewColumnName.SetDataFrameSelector(ucrSelectorRowNames.ucrAvailableDataFrames)
         ucrNewColumnName.SetLabelText("Column Name:")
-        ucrNewColumnName.SetAssignToBooleans(bTempInsertColumnBefore:=True)
+        ucrNewColumnName.SetbInsertColumnBefore(bTempInsertColumnBefore:=True)
     End Sub
 
     Private Sub SetDefaults()

@@ -175,7 +175,7 @@
     <value>250, 0</value>
   </data>
   <data name="ucrInputComboSave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 45</value>
+    <value>173, 31</value>
   </data>
   <data name="ucrInputComboSave.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -199,7 +199,7 @@
     <value>77, 0</value>
   </data>
   <data name="ucrInputTextSave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 45</value>
+    <value>173, 31</value>
   </data>
   <data name="ucrInputTextSave.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -217,7 +217,7 @@
     <value>1</value>
   </data>
   <data name="cmdOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>250, 19</value>
+    <value>250, -2</value>
   </data>
   <data name="cmdOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -247,7 +247,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>423, 45</value>
+    <value>423, 31</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ucrSave</value>
