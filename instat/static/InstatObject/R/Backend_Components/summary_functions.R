@@ -510,7 +510,7 @@ summary_skewness_mc <- function(x, na.rm = FALSE, ...) {
 }
 
 # skewness outlier limit function
-summary_outlier_limit <- function(x, coef = 1.5, bupperlimit=TRUE, bskewedcalc=FALSE, skewnessweight = 4,na.rm = TRUE, ...){ 
+summary_outlier_limit <- function(x, coef = 1.5, bupperlimit = TRUE, bskewedcalc = FALSE, skewnessweight = 4, na.rm = TRUE, ...){ 
   
   quart <- quantile(x, na.rm = na.rm)
   Q1 <- quart[[2]]
@@ -561,12 +561,12 @@ summary_Sn <- function(x, constant = 1.1926, finite.corr = missing(constant), na
 }
 
 # cor function
-summary_cor <- function(x, y, use = "everything", method = c("pearson", "kendall", "spearman"), ...) {
+summary_cor <- function(x, y, method = c("pearson", "kendall", "spearman"), use = c( "everything", "all.obs", "complete.obs", "na.or.complete", "pairwise.complete.obs"), ...) {
   return(cor(x = x, y = y, use = use, method = method))
 }
 
 # cov function
-summary_cov <- function(x, y, use = "everything", method = c("pearson", "kendall", "spearman"), ...) {
+summary_cov <- function(x, y, method = c("pearson", "kendall", "spearman"), use = c( "everything", "all.obs", "complete.obs", "na.or.complete", "pairwise.complete.obs"), ...) {
   return(cov(x = x, y = y, use = use, method = method))
 }
 
