@@ -36,7 +36,6 @@ Public Class dlgClimaticBoxPlot
     Private dctThemeFunctions As Dictionary(Of String, RFunction)
     Private bResetSubdialog As Boolean = True
     Private bResetBoxLayerSubdialog As Boolean = True
-    Private clsAsFactor As New RFunction
 
     Private clsFilteredDataOperator As New ROperator
     Private clsFilterElementOperator As New ROperator
@@ -198,8 +197,6 @@ Public Class dlgClimaticBoxPlot
         clsFacetOp = New ROperator
         clsFacetRowOp = New ROperator
         clsFacetColOp = New ROperator
-        clsAsFactor = New RFunction
-        clsAsFactor.SetRCommand("as.factor")
 
         clsFilteredDataOperator = New ROperator
         clsFilterElementOperator = New ROperator
@@ -284,8 +281,8 @@ Public Class dlgClimaticBoxPlot
         ucrChkVarWidth.SetRCode(clsRgeomPlotFunction, bReset)
         ucrPnlPlots.SetRCode(clsRgeomPlotFunction, bReset)
 
-        ucrReceiverElement.SetRCode(clsRaesFunction, bReset)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsFilterElementOperator, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrReceiverElement.SetRCode(clsRaesFunction, bReset)
         ucrChkOmitBelow.SetRCode(clsFilteredDataOperator, bReset)
         ucrNudOmitBelow.SetRCode(clsFilterElementOperator, bReset)
         bRCodeUpdated = True

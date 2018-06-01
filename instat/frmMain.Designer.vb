@@ -228,6 +228,7 @@ Partial Class frmMain
         Me.ToolStripSeparator17 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticDescribeGeneral = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator31 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuClimaticSPI = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPICSA = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPICSARainfall = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPICSATemperature = New System.Windows.Forms.ToolStripMenuItem()
@@ -517,7 +518,6 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
-        Me.mnuClimaticSPI = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1439,8 +1439,8 @@ Partial Class frmMain
         '
         'mnuClimaticCheckDataBoxplot
         '
-        resources.ApplyResources(Me.mnuClimaticCheckDataBoxplot, "mnuClimaticCheckDataBoxplot")
         Me.mnuClimaticCheckDataBoxplot.Name = "mnuClimaticCheckDataBoxplot"
+        resources.ApplyResources(Me.mnuClimaticCheckDataBoxplot, "mnuClimaticCheckDataBoxplot")
         '
         'mnuClimaticCheckDataQCRainfall
         '
@@ -1602,6 +1602,11 @@ Partial Class frmMain
         '
         Me.ToolStripSeparator31.Name = "ToolStripSeparator31"
         resources.ApplyResources(Me.ToolStripSeparator31, "ToolStripSeparator31")
+        '
+        'mnuClimaticSPI
+        '
+        Me.mnuClimaticSPI.Name = "mnuClimaticSPI"
+        resources.ApplyResources(Me.mnuClimaticSPI, "mnuClimaticSPI")
         '
         'mnuClimaticPICSA
         '
@@ -3330,11 +3335,6 @@ Partial Class frmMain
         Me.ucrOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         resources.ApplyResources(Me.ucrOutput, "ucrOutput")
         Me.ucrOutput.Name = "ucrOutput"
-        '
-        'mnuClimaticSPI
-        '
-        Me.mnuClimaticSPI.Name = "mnuClimaticSPI"
-        resources.ApplyResources(Me.mnuClimaticSPI, "mnuClimaticSPI")
         '
         'frmMain
         '
