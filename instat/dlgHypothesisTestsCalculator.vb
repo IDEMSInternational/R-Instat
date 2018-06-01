@@ -52,8 +52,8 @@ Public Class dlgHypothesisTestsCalculator
         ucrInputComboRPackage.SetItems({"Stats", "Agricolae"})
         ucrInputComboRPackage.SetDropDownStyleAsNonEditable()
         'Tooltips for conf & and Alt Buttons
-        tpConf.SetToolTip(btnConf, "The confidence level can be changed for some tests to 0.9 or 0.99 etc")
-        tpAlt.SetToolTip(btnAlt, " For some hypotheses the alternative hypothesis is two sided by default, but can be changed to ""greater"" or ""less""")
+        tpConf.SetToolTip(cmdConf, "The confidence level can be changed for some tests to 0.9 or 0.99 etc")
+        tpAlt.SetToolTip(cmdAlt, " For some hypotheses the alternative hypothesis is two sided by default, but can be changed to ""greater"" or ""less""")
         'Temporarily disabled: Not yet functioning.
         ucrChkBy.Enabled = False
         ucrReceiverMultiple.Enabled = False
@@ -141,11 +141,11 @@ Public Class dlgHypothesisTestsCalculator
         ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("+")
     End Sub
 
-    Private Sub btnConf_Click(sender As Object, e As EventArgs) Handles btnConf.Click
+    Private Sub cmdConf_Click(sender As Object, e As EventArgs) Handles cmdConf.Click
         ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("conf=0.95")
     End Sub
 
-    Private Sub btnAlt_Click(sender As Object, e As EventArgs) Handles btnAlt.Click
+    Private Sub cmdAlt_Click(sender As Object, e As EventArgs) Handles cmdAlt.Click
         ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("Alt=""two""")
     End Sub
 
@@ -423,7 +423,7 @@ Public Class dlgHypothesisTestsCalculator
         End If
     End Sub
 
-    Private Sub btnPoisson_Click(sender As Object, e As EventArgs) Handles btnPoisson.Click
+    Private Sub cmdPoisson_Click(sender As Object, e As EventArgs) Handles cmdPoisson.Click
         clear()
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("poisson.test(x = , T = 1, r = 1, alternative = c(""two.sided"", ""less"", ""greater""), conf.level = 0.95)", 83)
@@ -432,7 +432,7 @@ Public Class dlgHypothesisTestsCalculator
         End If
     End Sub
 
-    Private Sub btnProp_Click(sender As Object, e As EventArgs) Handles btnProp.Click
+    Private Sub cmdProp_Click(sender As Object, e As EventArgs) Handles cmdProp.Click
         clear()
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("prop.test(x = , n = , p = NULL, alternative = c(""two.sided"", ""less"", ""greater""), conf.level = 0.95, correct = TRUE)", 99)
@@ -441,20 +441,12 @@ Public Class dlgHypothesisTestsCalculator
         End If
     End Sub
 
-    Private Sub btnT_Click(sender As Object, e As EventArgs) Handles btnT.Click
+    Private Sub cmdT_Click(sender As Object, e As EventArgs) Handles cmdT.Click
         clear()
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("t.test(x= , y = NULL, alternative = c(""two.sided"", ""less"", ""greater""), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)", 122)
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("t.test( )", 1)
-        End If
-    End Sub
-
-    Private Sub btnWilcox_Click(sender As Object, e As EventArgs)
-        If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("wilcox.test(x = , y = NULL, alternative = c(""two.sided"", ""less"", ""greater""), mu = 0, paired = FALSE, exact = NULL, correct = TRUE, conf.int = FALSE, conf.level = 0.95)", 150)
-        Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("wilcox.test( )", 1)
         End If
     End Sub
 
@@ -621,7 +613,7 @@ Public Class dlgHypothesisTestsCalculator
         End If
     End Sub
 
-    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+    Private Sub cmdClearStats2_Click(sender As Object, e As EventArgs) Handles cmdClearStats2.Click
         ucrReceiverForTestColumn.Clear()
     End Sub
 
