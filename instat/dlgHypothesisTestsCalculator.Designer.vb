@@ -29,16 +29,16 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdComma = New System.Windows.Forms.Button()
         Me.cmdDelete = New System.Windows.Forms.Button()
         Me.cmdClear = New System.Windows.Forms.Button()
-        Me.btnConf = New System.Windows.Forms.Button()
+        Me.cmdConf = New System.Windows.Forms.Button()
         Me.cmdBrackets = New System.Windows.Forms.Button()
-        Me.btnAlt = New System.Windows.Forms.Button()
+        Me.cmdAlt = New System.Windows.Forms.Button()
         Me.cmdSquiggle = New System.Windows.Forms.Button()
         Me.cmdSquareBrackets = New System.Windows.Forms.Button()
         Me.cmdTry = New System.Windows.Forms.Button()
         Me.grpStats1 = New System.Windows.Forms.GroupBox()
-        Me.btnT = New System.Windows.Forms.Button()
-        Me.btnProp = New System.Windows.Forms.Button()
-        Me.btnPoisson = New System.Windows.Forms.Button()
+        Me.cmdT = New System.Windows.Forms.Button()
+        Me.cmdProp = New System.Windows.Forms.Button()
+        Me.cmdPoisson = New System.Windows.Forms.Button()
         Me.cmdVar = New System.Windows.Forms.Button()
         Me.cmdShapiro = New System.Windows.Forms.Button()
         Me.cmdWilcox = New System.Windows.Forms.Button()
@@ -52,7 +52,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdBinom = New System.Windows.Forms.Button()
         Me.cmdBartlett = New System.Windows.Forms.Button()
         Me.cmdfisher = New System.Windows.Forms.Button()
-        Me.btnClear = New System.Windows.Forms.Button()
+        Me.cmdClearStats2 = New System.Windows.Forms.Button()
         Me.cmdPropTrend = New System.Windows.Forms.Button()
         Me.cmdPowerProp = New System.Windows.Forms.Button()
         Me.cmdPowerT = New System.Windows.Forms.Button()
@@ -120,9 +120,9 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpMainKeyboard.Controls.Add(Me.cmdComma)
         Me.grpMainKeyboard.Controls.Add(Me.cmdDelete)
         Me.grpMainKeyboard.Controls.Add(Me.cmdClear)
-        Me.grpMainKeyboard.Controls.Add(Me.btnConf)
+        Me.grpMainKeyboard.Controls.Add(Me.cmdConf)
         Me.grpMainKeyboard.Controls.Add(Me.cmdBrackets)
-        Me.grpMainKeyboard.Controls.Add(Me.btnAlt)
+        Me.grpMainKeyboard.Controls.Add(Me.cmdAlt)
         Me.grpMainKeyboard.Controls.Add(Me.cmdSquiggle)
         Me.grpMainKeyboard.Controls.Add(Me.cmdSquareBrackets)
         Me.grpMainKeyboard.Location = New System.Drawing.Point(414, 248)
@@ -179,18 +179,18 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdClear.Text = "Clear"
         Me.cmdClear.UseVisualStyleBackColor = True
         '
-        'btnConf
+        'cmdConf
         '
-        Me.btnConf.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.btnConf.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnConf.Location = New System.Drawing.Point(4, 41)
-        Me.btnConf.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.btnConf.Name = "btnConf"
-        Me.btnConf.Size = New System.Drawing.Size(70, 30)
-        Me.btnConf.TabIndex = 147
-        Me.btnConf.Tag = "Del"
-        Me.btnConf.Text = "Conf=0.95"
-        Me.btnConf.UseVisualStyleBackColor = True
+        Me.cmdConf.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdConf.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdConf.Location = New System.Drawing.Point(4, 41)
+        Me.cmdConf.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdConf.Name = "cmdConf"
+        Me.cmdConf.Size = New System.Drawing.Size(70, 30)
+        Me.cmdConf.TabIndex = 147
+        Me.cmdConf.Tag = "Del"
+        Me.cmdConf.Text = "Conf=0.95"
+        Me.cmdConf.UseVisualStyleBackColor = True
         '
         'cmdBrackets
         '
@@ -203,17 +203,17 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdBrackets.Text = "( )"
         Me.cmdBrackets.UseVisualStyleBackColor = True
         '
-        'btnAlt
+        'cmdAlt
         '
-        Me.btnAlt.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.btnAlt.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnAlt.Location = New System.Drawing.Point(4, 70)
-        Me.btnAlt.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.btnAlt.Name = "btnAlt"
-        Me.btnAlt.Size = New System.Drawing.Size(70, 30)
-        Me.btnAlt.TabIndex = 143
-        Me.btnAlt.Text = "Alt=""two"""
-        Me.btnAlt.UseVisualStyleBackColor = True
+        Me.cmdAlt.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdAlt.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdAlt.Location = New System.Drawing.Point(4, 70)
+        Me.cmdAlt.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdAlt.Name = "cmdAlt"
+        Me.cmdAlt.Size = New System.Drawing.Size(70, 30)
+        Me.cmdAlt.TabIndex = 143
+        Me.cmdAlt.Text = "Alt=""two"""
+        Me.cmdAlt.UseVisualStyleBackColor = True
         '
         'cmdSquiggle
         '
@@ -250,9 +250,9 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'grpStats1
         '
-        Me.grpStats1.Controls.Add(Me.btnT)
-        Me.grpStats1.Controls.Add(Me.btnProp)
-        Me.grpStats1.Controls.Add(Me.btnPoisson)
+        Me.grpStats1.Controls.Add(Me.cmdT)
+        Me.grpStats1.Controls.Add(Me.cmdProp)
+        Me.grpStats1.Controls.Add(Me.cmdPoisson)
         Me.grpStats1.Controls.Add(Me.cmdVar)
         Me.grpStats1.Controls.Add(Me.cmdShapiro)
         Me.grpStats1.Controls.Add(Me.cmdWilcox)
@@ -275,38 +275,38 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpStats1.TabStop = False
         Me.grpStats1.Text = "Stats1"
         '
-        'btnT
+        'cmdT
         '
-        Me.btnT.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnT.Location = New System.Drawing.Point(73, 104)
-        Me.btnT.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.btnT.Name = "btnT"
-        Me.btnT.Size = New System.Drawing.Size(69, 30)
-        Me.btnT.TabIndex = 167
-        Me.btnT.Text = "t"
-        Me.btnT.UseVisualStyleBackColor = True
+        Me.cmdT.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdT.Location = New System.Drawing.Point(73, 104)
+        Me.cmdT.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdT.Name = "cmdT"
+        Me.cmdT.Size = New System.Drawing.Size(69, 30)
+        Me.cmdT.TabIndex = 167
+        Me.cmdT.Text = "t"
+        Me.cmdT.UseVisualStyleBackColor = True
         '
-        'btnProp
+        'cmdProp
         '
-        Me.btnProp.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnProp.Location = New System.Drawing.Point(211, 74)
-        Me.btnProp.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.btnProp.Name = "btnProp"
-        Me.btnProp.Size = New System.Drawing.Size(69, 30)
-        Me.btnProp.TabIndex = 165
-        Me.btnProp.Text = "prop"
-        Me.btnProp.UseVisualStyleBackColor = True
+        Me.cmdProp.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdProp.Location = New System.Drawing.Point(211, 74)
+        Me.cmdProp.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdProp.Name = "cmdProp"
+        Me.cmdProp.Size = New System.Drawing.Size(69, 30)
+        Me.cmdProp.TabIndex = 165
+        Me.cmdProp.Text = "prop"
+        Me.cmdProp.UseVisualStyleBackColor = True
         '
-        'btnPoisson
+        'cmdPoisson
         '
-        Me.btnPoisson.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnPoisson.Location = New System.Drawing.Point(142, 74)
-        Me.btnPoisson.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.btnPoisson.Name = "btnPoisson"
-        Me.btnPoisson.Size = New System.Drawing.Size(69, 30)
-        Me.btnPoisson.TabIndex = 164
-        Me.btnPoisson.Text = "poisson"
-        Me.btnPoisson.UseVisualStyleBackColor = True
+        Me.cmdPoisson.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPoisson.Location = New System.Drawing.Point(142, 74)
+        Me.cmdPoisson.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdPoisson.Name = "cmdPoisson"
+        Me.cmdPoisson.Size = New System.Drawing.Size(69, 30)
+        Me.cmdPoisson.TabIndex = 164
+        Me.cmdPoisson.Text = "poisson"
+        Me.cmdPoisson.UseVisualStyleBackColor = True
         '
         'cmdVar
         '
@@ -453,17 +453,17 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdfisher.Text = " fisher"
         Me.cmdfisher.UseVisualStyleBackColor = True
         '
-        'btnClear
+        'cmdClearStats2
         '
-        Me.btnClear.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.btnClear.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnClear.Location = New System.Drawing.Point(231, 101)
-        Me.btnClear.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(86, 30)
-        Me.btnClear.TabIndex = 168
-        Me.btnClear.Text = "Clear"
-        Me.btnClear.UseVisualStyleBackColor = True
+        Me.cmdClearStats2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdClearStats2.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdClearStats2.Location = New System.Drawing.Point(231, 101)
+        Me.cmdClearStats2.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdClearStats2.Name = "cmdClearStats2"
+        Me.cmdClearStats2.Size = New System.Drawing.Size(86, 30)
+        Me.cmdClearStats2.TabIndex = 168
+        Me.cmdClearStats2.Text = "Clear"
+        Me.cmdClearStats2.UseVisualStyleBackColor = True
         '
         'cmdPropTrend
         '
@@ -648,7 +648,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.grpStats2.Controls.Add(Me.cmdPP)
         Me.grpStats2.Controls.Add(Me.cmdQuade)
-        Me.grpStats2.Controls.Add(Me.btnClear)
+        Me.grpStats2.Controls.Add(Me.cmdClearStats2)
         Me.grpStats2.Controls.Add(Me.cmdAnsari)
         Me.grpStats2.Controls.Add(Me.cmdfligner)
         Me.grpStats2.Controls.Add(Me.cmdMcnemar)
@@ -976,9 +976,9 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents cmdDelete As Button
     Friend WithEvents cmdSquiggle As Button
     Friend WithEvents cmdClear As Button
-    Friend WithEvents btnConf As Button
+    Friend WithEvents cmdConf As Button
     Friend WithEvents cmdBrackets As Button
-    Friend WithEvents btnAlt As Button
+    Friend WithEvents cmdAlt As Button
     Friend WithEvents cmdSquareBrackets As Button
     Friend WithEvents ucrChkBy As ucrCheck
     Friend WithEvents ucrReceiverMultiple As ucrReceiverMultiple
@@ -1011,10 +1011,10 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents cmdPropTrend As Button
     Friend WithEvents cmdWilcox As Button
     Friend WithEvents lblRpackage As Label
-    Friend WithEvents btnProp As Button
-    Friend WithEvents btnPoisson As Button
-    Friend WithEvents btnT As Button
-    Friend WithEvents btnClear As Button
+    Friend WithEvents cmdProp As Button
+    Friend WithEvents cmdPoisson As Button
+    Friend WithEvents cmdT As Button
+    Friend WithEvents cmdClearStats2 As Button
     Friend WithEvents tpConf As ToolTip
     Friend WithEvents tpAlt As ToolTip
     Friend WithEvents ucrInputComboRPackage As ucrInputComboBox
