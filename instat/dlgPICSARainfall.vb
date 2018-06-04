@@ -60,10 +60,9 @@ Public Class dlgPICSARainfall
         ucrReceiverX.SetParameter(New RParameter("x", 0))
         ucrReceiverX.Selector = ucrPICSARainfallSelector
         ucrReceiverX.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
+        ucrReceiverX.strSelectorHeading = "Year"
         ucrReceiverX.bAutoFill = True
         ucrReceiverX.bWithQuotes = False
-        ucrReceiverX.SetIncludedDataTypes({"factor"})
-        ucrReceiverX.strSelectorHeading = "Year Variables"
 
         ucrFactorOptionalReceiver.SetParameter(New RParameter("colour", 2))
         ucrFactorOptionalReceiver.Selector = ucrPICSARainfallSelector
@@ -117,8 +116,6 @@ Public Class dlgPICSARainfall
 
         clsRaesFunction.SetPackageName("ggplot2")
         clsRaesFunction.SetRCommand("aes")
-        clsRaesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
-        clsRaesFunction.AddParameter("y", Chr(34) & Chr(34), iPosition:=1)
 
         clsRgeomlineplotFunction.SetPackageName("ggplot2")
         clsRgeomlineplotFunction.SetRCommand("geom_line")
@@ -159,8 +156,7 @@ Public Class dlgPICSARainfall
             ucrBase.OKEnabled(True)
         End If
     End Sub
-
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs)
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
     End Sub
@@ -197,7 +193,7 @@ Public Class dlgPICSARainfall
         bResetLineLayerSubdialog = False
         'Coming from the sdgLayerOptions, clsRaesFunction and others has been modified. One then needs to display these modifications on the dlgScatteredPlot.
 
-        'The aesthetics parameters on the main dialog are repopulated as required. 
+        'The aesthetics parameters on the main dialog are repopulated as required.
         For Each clsParam In clsRaesFunction.clsParameters
             If clsParam.strArgumentName = "x" Then
                 If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
@@ -218,5 +214,13 @@ Public Class dlgPICSARainfall
             End If
         Next
         TestOkEnabled()
+    End Sub
+
+    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactor.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrReceiverX.ControlContentsChanged
+
+    End Sub
+
+    Private Sub UcrVariablesAsFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactor.ControlValueChanged
+
     End Sub
 End Class
