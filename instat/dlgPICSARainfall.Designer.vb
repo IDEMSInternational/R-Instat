@@ -49,19 +49,21 @@ Partial Class dlgPICSARainfall
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.lblXVariable = New System.Windows.Forms.Label()
         Me.lblAvailable = New System.Windows.Forms.Label()
+        Me.cmdOptions = New System.Windows.Forms.Button()
+        Me.cmdLineOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'ucrChkPoints
         '
         Me.ucrChkPoints.Checked = False
-        Me.ucrChkPoints.Location = New System.Drawing.Point(9, 255)
+        Me.ucrChkPoints.Location = New System.Drawing.Point(9, 291)
         Me.ucrChkPoints.Name = "ucrChkPoints"
         Me.ucrChkPoints.Size = New System.Drawing.Size(100, 24)
         Me.ucrChkPoints.TabIndex = 22
         '
         'ucrSave
         '
-        Me.ucrSave.Location = New System.Drawing.Point(9, 303)
+        Me.ucrSave.Location = New System.Drawing.Point(9, 321)
         Me.ucrSave.Name = "ucrSave"
         Me.ucrSave.Size = New System.Drawing.Size(254, 24)
         Me.ucrSave.TabIndex = 25
@@ -81,7 +83,7 @@ Partial Class dlgPICSARainfall
         'cmdPICSAOptions
         '
         Me.cmdPICSAOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPICSAOptions.Location = New System.Drawing.Point(9, 201)
+        Me.cmdPICSAOptions.Location = New System.Drawing.Point(9, 260)
         Me.cmdPICSAOptions.Name = "cmdPICSAOptions"
         Me.cmdPICSAOptions.Size = New System.Drawing.Size(119, 23)
         Me.cmdPICSAOptions.TabIndex = 21
@@ -102,7 +104,7 @@ Partial Class dlgPICSARainfall
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 330)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 348)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 26
@@ -162,11 +164,35 @@ Partial Class dlgPICSARainfall
         Me.lblAvailable.Size = New System.Drawing.Size(0, 13)
         Me.lblAvailable.TabIndex = 15
         '
+        'cmdOptions
+        '
+        Me.cmdOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdOptions.Location = New System.Drawing.Point(9, 231)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(119, 23)
+        Me.cmdOptions.TabIndex = 28
+        Me.cmdOptions.Tag = "Options"
+        Me.cmdOptions.Text = "Plot Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
+        '
+        'cmdLineOptions
+        '
+        Me.cmdLineOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdLineOptions.Location = New System.Drawing.Point(9, 201)
+        Me.cmdLineOptions.Name = "cmdLineOptions"
+        Me.cmdLineOptions.Size = New System.Drawing.Size(119, 23)
+        Me.cmdLineOptions.TabIndex = 29
+        Me.cmdLineOptions.Tag = "Line_Options"
+        Me.cmdLineOptions.Text = "Line Options"
+        Me.cmdLineOptions.UseVisualStyleBackColor = True
+        '
         'dlgPICSARainfall
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(429, 388)
+        Me.ClientSize = New System.Drawing.Size(429, 407)
+        Me.Controls.Add(Me.cmdLineOptions)
+        Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrChkPoints)
         Me.Controls.Add(Me.ucrSave)
         Me.Controls.Add(Me.ucrVariablesAsFactor)
@@ -199,4 +225,6 @@ Partial Class dlgPICSARainfall
     Friend WithEvents ucrReceiverX As ucrReceiverSingle
     Friend WithEvents lblXVariable As Label
     Friend WithEvents lblAvailable As Label
+    Friend WithEvents cmdOptions As Button
+    Friend WithEvents cmdLineOptions As Button
 End Class
