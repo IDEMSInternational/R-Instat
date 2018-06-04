@@ -208,6 +208,7 @@ Partial Class dlgPICSARainfall
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgPICSARainfall"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "PICSA Rainfall Graphs"
         Me.ResumeLayout(False)
         Me.PerformLayout()
