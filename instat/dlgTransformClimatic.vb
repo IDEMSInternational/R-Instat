@@ -137,9 +137,9 @@ Public Class dlgTransformClimatic
         ucrNudWBCapacity.Increment = 10
         ucrNudWBCapacity.SetLinkedDisplayControl(lblWBCapacity)
 
-
         ucrInputEvaporation.SetValidationTypeAsNumeric()
         ucrInputEvaporation.AddQuotesIfUnrecognised = False
+        ucrInputEvaporation.SetParameter(New RParameter("evaporation.value", 1, False))
         ucrInputEvaporation.SetLinkedDisplayControl(lblWBEvaporation)
 
         ucrReceiverEvap.Selector = ucrSelectorTransform
@@ -147,6 +147,7 @@ Public Class dlgTransformClimatic
         ucrReceiverEvap.bWithQuotes = False
         ucrReceiverEvap.strSelectorHeading = "Numerics"
         ucrReceiverEvap.SetIncludedDataTypes({"numeric"})
+        ucrReceiverEvap.SetParameter(New RParameter("evaporation.var", 1, False))
 
         ' Save Options
         ucrInputColName.SetParameter(New RParameter("result_name", 2))
@@ -247,7 +248,7 @@ Public Class dlgTransformClimatic
         clsPMaxFunctionMax.AddParameter("calculation", clsROperatorParameter:=clsPMaxOperatorMax, iPosition:=0, bIncludeArgumentName:=False)
         clsPMaxOperatorMax.SetOperation("-")
         clsPMaxOperatorMax.AddParameter("first", "x + y", iPosition:=0)
-        clsPMaxOperatorMax.AddParameter("evaporation", 5, iPosition:=1, bIncludeArgumentName:=False)
+        'clsPMaxOperatorMax.AddParameter("evaporation", 5, iPosition:=1, bIncludeArgumentName:=False)
         clsPMaxFunctionMax.AddParameter("0", 0, iPosition:=1, bIncludeArgumentName:=False)
         clsPMinFunctionMax.AddParameter("capacity", 60, iPosition:=1, bIncludeArgumentName:=False)
         clsRWaterBalanceFunction.AddParameter("replace_na", iPosition:=1, bIncludeArgumentName:=False)
@@ -439,11 +440,9 @@ Public Class dlgTransformClimatic
 
     Private Sub ucrPnlEvap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlEvap.ControlValueChanged
         If rdoEvapValue.Checked Then
-            ucrInputEvaporation.SetParameter(New RParameter("evaporation", 1, bNewIncludeArgumentName:=False))
-            clsPMaxOperatorMax.AddParameter("evaporation", iPosition:=1)
+            clsPMaxOperatorMax.AddParameter("evaporation.value", 5, iPosition:=1, bIncludeArgumentName:=False)
         ElseIf rdoEvapVariable.Checked Then
-            ucrReceiverEvap.SetParameter(New RParameter("evaporation", 1))
-            clsPMaxOperatorMax.AddParameter("evaporation", ucrReceiverEvap.GetParameterName(), iPosition:=1)
+            clsPMaxOperatorMax.AddParameter("evaporation.var", iPosition:=1)
         End If
         TestOkEnabled()
     End Sub
