@@ -102,7 +102,7 @@ Public Class dlgEndOfRainsSeason
         ucrReceiverEvaporation.Selector = ucrSelectorForWaterBalance
         ucrReceiverEvaporation.SetParameterIsRFunction()
         ucrReceiverEvaporation.bWithQuotes = False
-        'ucrReceiverEvaporation.SetParameter(New RParameter("evaporation", 1))
+        ucrReceiverEvaporation.SetParameter(New RParameter("evaporation.var", 1))
 
         'WATER BALANCE
         ucrChkEndOfSeason.SetText("End of Season")
@@ -119,7 +119,7 @@ Public Class dlgEndOfRainsSeason
         ucrChkEndOfSeason.AddToLinkedControls(ucrInputWBColName, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="end_season")
         ucrPnlEvaporation.SetLinkedDisplayControl(lblEvaporation)
 
-        'ucrInputEvaporation.SetParameter(New RParameter("evaporation", 1, False))
+        ucrInputEvaporation.SetParameter(New RParameter("evaporation.val", 1, False))
         ucrInputEvaporation.SetValidationTypeAsNumeric()
         ucrInputEvaporation.AddQuotesIfUnrecognised = False
 
@@ -632,13 +632,12 @@ Public Class dlgEndOfRainsSeason
 
     Private Sub Evaporation()
         If rdoValueEvaporation.Checked Then
-            ucrInputEvaporation.SetParameter(New RParameter("evaporation", 1, False))
-            clsPMaxOperatorMin.AddParameter("evaporation", ucrInputEvaporation.GetText(), iPosition:=1, bIncludeArgumentName:=False)
-            clsPMaxOperatorMax.AddParameter("evaporation", ucrInputEvaporation.GetText(), iPosition:=1, bIncludeArgumentName:=False)
+            clsPMaxOperatorMin.AddParameter("evaporation.val", ucrInputEvaporation.GetText(), iPosition:=1, bIncludeArgumentName:=False)
+            clsPMaxOperatorMax.AddParameter("evaporation.val", ucrInputEvaporation.GetText(), iPosition:=1, bIncludeArgumentName:=False)
         ElseIf rdoVariableEvaporation.Checked Then
             ucrReceiverEvaporation.SetParameter(New RParameter("evaporation", 1, False))
-            clsPMaxOperatorMin.AddParameter("evaporation", ucrReceiverEvaporation.GetParameterName(), iPosition:=1)
-            clsPMaxOperatorMax.AddParameter("evaporation", ucrReceiverEvaporation.GetParameterName(), iPosition:=1)
+            clsPMaxOperatorMin.AddParameter("evaporation.var", ucrReceiverEvaporation.GetParameterName(), iPosition:=1)
+            clsPMaxOperatorMax.AddParameter("evaporation.var", ucrReceiverEvaporation.GetParameterName(), iPosition:=1)
         End If
     End Sub
 End Class
