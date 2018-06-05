@@ -38,10 +38,8 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrInputYFrom = New instat.ucrInputTextBox()
         Me.ucrNudXaxisLabelSize = New instat.ucrNud()
         Me.ucrNudXAxisAngle = New instat.ucrNud()
+        Me.ucrNudYAxisLabelsSize = New instat.ucrNud()
         Me.ucrNudYAxisTitleSize = New instat.ucrNud()
-        Me.ucrChkAddTercillesLabel = New instat.ucrCheck()
-        Me.ucrChkAddMedianLabel = New instat.ucrCheck()
-        Me.ucrChkAddMeanLabel = New instat.ucrCheck()
         Me.ucrChkAddLabel = New instat.ucrCheck()
         Me.ucrChkXaxisLabelSize = New instat.ucrCheck()
         Me.ucrInputSubFootNote = New instat.ucrInputTextBox()
@@ -53,9 +51,10 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrSpecifyXAxisTickMarks = New instat.ucrCheck()
         Me.ucrSpecifyYAxisTickMarks = New instat.ucrCheck()
         Me.ucrChkYAxisTitle = New instat.ucrCheck()
-        Me.ucrChkPlotTerciles = New instat.ucrCheck()
-        Me.ucrChkPlotMedian = New instat.ucrCheck()
-        Me.ucrChkPlotMean = New instat.ucrCheck()
+        Me.ucrChkAddTerciles = New instat.ucrCheck()
+        Me.ucrChkAddMedian = New instat.ucrCheck()
+        Me.ucrChkYAxisLabelsSize = New instat.ucrCheck()
+        Me.ucrChkAddMean = New instat.ucrCheck()
         Me.ucrSdgPICSARainfalbuttons = New instat.ucrButtonsSubdialogue()
         Me.SuspendLayout()
         '
@@ -162,6 +161,16 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrNudXAxisAngle.Name = "ucrNudXAxisAngle"
         Me.ucrNudXAxisAngle.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
+        'ucrNudYAxisLabelsSize
+        '
+        Me.ucrNudYAxisLabelsSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudYAxisLabelsSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudYAxisLabelsSize, "ucrNudYAxisLabelsSize")
+        Me.ucrNudYAxisLabelsSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudYAxisLabelsSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudYAxisLabelsSize.Name = "ucrNudYAxisLabelsSize"
+        Me.ucrNudYAxisLabelsSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'ucrNudYAxisTitleSize
         '
         Me.ucrNudYAxisTitleSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
@@ -171,24 +180,6 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrNudYAxisTitleSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudYAxisTitleSize.Name = "ucrNudYAxisTitleSize"
         Me.ucrNudYAxisTitleSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkAddTercillesLabel
-        '
-        Me.ucrChkAddTercillesLabel.Checked = False
-        resources.ApplyResources(Me.ucrChkAddTercillesLabel, "ucrChkAddTercillesLabel")
-        Me.ucrChkAddTercillesLabel.Name = "ucrChkAddTercillesLabel"
-        '
-        'ucrChkAddMedianLabel
-        '
-        Me.ucrChkAddMedianLabel.Checked = False
-        resources.ApplyResources(Me.ucrChkAddMedianLabel, "ucrChkAddMedianLabel")
-        Me.ucrChkAddMedianLabel.Name = "ucrChkAddMedianLabel"
-        '
-        'ucrChkAddMeanLabel
-        '
-        Me.ucrChkAddMeanLabel.Checked = False
-        resources.ApplyResources(Me.ucrChkAddMeanLabel, "ucrChkAddMeanLabel")
-        Me.ucrChkAddMeanLabel.Name = "ucrChkAddMeanLabel"
         '
         'ucrChkAddLabel
         '
@@ -262,23 +253,29 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.ucrChkYAxisTitle, "ucrChkYAxisTitle")
         Me.ucrChkYAxisTitle.Name = "ucrChkYAxisTitle"
         '
-        'ucrChkPlotTerciles
+        'ucrChkAddTerciles
         '
-        Me.ucrChkPlotTerciles.Checked = False
-        resources.ApplyResources(Me.ucrChkPlotTerciles, "ucrChkPlotTerciles")
-        Me.ucrChkPlotTerciles.Name = "ucrChkPlotTerciles"
+        Me.ucrChkAddTerciles.Checked = False
+        resources.ApplyResources(Me.ucrChkAddTerciles, "ucrChkAddTerciles")
+        Me.ucrChkAddTerciles.Name = "ucrChkAddTerciles"
         '
-        'ucrChkPlotMedian
+        'ucrChkAddMedian
         '
-        Me.ucrChkPlotMedian.Checked = False
-        resources.ApplyResources(Me.ucrChkPlotMedian, "ucrChkPlotMedian")
-        Me.ucrChkPlotMedian.Name = "ucrChkPlotMedian"
+        Me.ucrChkAddMedian.Checked = False
+        resources.ApplyResources(Me.ucrChkAddMedian, "ucrChkAddMedian")
+        Me.ucrChkAddMedian.Name = "ucrChkAddMedian"
         '
-        'ucrChkPlotMean
+        'ucrChkYAxisLabelsSize
         '
-        Me.ucrChkPlotMean.Checked = False
-        resources.ApplyResources(Me.ucrChkPlotMean, "ucrChkPlotMean")
-        Me.ucrChkPlotMean.Name = "ucrChkPlotMean"
+        Me.ucrChkYAxisLabelsSize.Checked = False
+        resources.ApplyResources(Me.ucrChkYAxisLabelsSize, "ucrChkYAxisLabelsSize")
+        Me.ucrChkYAxisLabelsSize.Name = "ucrChkYAxisLabelsSize"
+        '
+        'ucrChkAddMean
+        '
+        Me.ucrChkAddMean.Checked = False
+        resources.ApplyResources(Me.ucrChkAddMean, "ucrChkAddMean")
+        Me.ucrChkAddMean.Name = "ucrChkAddMean"
         '
         'ucrSdgPICSARainfalbuttons
         '
@@ -303,11 +300,9 @@ Partial Class sdgPICSARainfallGraph
         Me.Controls.Add(Me.lblYTo)
         Me.Controls.Add(Me.ucrNudXaxisLabelSize)
         Me.Controls.Add(Me.ucrNudXAxisAngle)
+        Me.Controls.Add(Me.ucrNudYAxisLabelsSize)
         Me.Controls.Add(Me.ucrNudYAxisTitleSize)
         Me.Controls.Add(Me.lblYAxisTitleSize)
-        Me.Controls.Add(Me.ucrChkAddTercillesLabel)
-        Me.Controls.Add(Me.ucrChkAddMedianLabel)
-        Me.Controls.Add(Me.ucrChkAddMeanLabel)
         Me.Controls.Add(Me.ucrChkAddLabel)
         Me.Controls.Add(Me.ucrChkXaxisLabelSize)
         Me.Controls.Add(Me.ucrInputSubFootNote)
@@ -319,9 +314,10 @@ Partial Class sdgPICSARainfallGraph
         Me.Controls.Add(Me.ucrSpecifyXAxisTickMarks)
         Me.Controls.Add(Me.ucrSpecifyYAxisTickMarks)
         Me.Controls.Add(Me.ucrChkYAxisTitle)
-        Me.Controls.Add(Me.ucrChkPlotTerciles)
-        Me.Controls.Add(Me.ucrChkPlotMedian)
-        Me.Controls.Add(Me.ucrChkPlotMean)
+        Me.Controls.Add(Me.ucrChkAddTerciles)
+        Me.Controls.Add(Me.ucrChkAddMedian)
+        Me.Controls.Add(Me.ucrChkYAxisLabelsSize)
+        Me.Controls.Add(Me.ucrChkAddMean)
         Me.Controls.Add(Me.ucrSdgPICSARainfalbuttons)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -333,9 +329,9 @@ Partial Class sdgPICSARainfallGraph
     End Sub
 
     Friend WithEvents ucrSdgPICSARainfalbuttons As ucrButtonsSubdialogue
-    Friend WithEvents ucrChkPlotMean As ucrCheck
-    Friend WithEvents ucrChkPlotMedian As ucrCheck
-    Friend WithEvents ucrChkPlotTerciles As ucrCheck
+    Friend WithEvents ucrChkAddMean As ucrCheck
+    Friend WithEvents ucrChkAddMedian As ucrCheck
+    Friend WithEvents ucrChkAddTerciles As ucrCheck
     Friend WithEvents ucrChkYAxisTitle As ucrCheck
     Friend WithEvents ucrInputYAxisTitle As ucrInputTextBox
     Friend WithEvents lblYAxisTitleSize As Label
@@ -345,9 +341,6 @@ Partial Class sdgPICSARainfallGraph
     Friend WithEvents ucrChkXaxisLabelSize As ucrCheck
     Friend WithEvents ucrNudXaxisLabelSize As ucrNud
     Friend WithEvents ucrChkAddLabel As ucrCheck
-    Friend WithEvents ucrChkAddMeanLabel As ucrCheck
-    Friend WithEvents ucrChkAddMedianLabel As ucrCheck
-    Friend WithEvents ucrChkAddTercillesLabel As ucrCheck
     Friend WithEvents ucrChkFootNote As ucrCheck
     Friend WithEvents ucrInputFootNote As ucrInputTextBox
     Friend WithEvents ucrChkSubFootNote As ucrCheck
@@ -366,4 +359,6 @@ Partial Class sdgPICSARainfallGraph
     Friend WithEvents ucrInputXFrom As ucrInputTextBox
     Friend WithEvents ucrInputXTo As ucrInputTextBox
     Friend WithEvents ucrInputXInStepsOf As ucrInputTextBox
+    Friend WithEvents ucrChkYAxisLabelsSize As ucrCheck
+    Friend WithEvents ucrNudYAxisLabelsSize As ucrNud
 End Class
