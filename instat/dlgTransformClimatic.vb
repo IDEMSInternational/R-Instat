@@ -143,7 +143,7 @@ Public Class dlgTransformClimatic
         ucrInputEvaporation.SetLinkedDisplayControl(lblWBEvaporation)
 
         ucrReceiverEvap.Selector = ucrSelectorTransform
-        ucrReceiverEvap.SetParameterIsString()
+        ucrReceiverEvap.SetParameterIsRFunction()
         ucrReceiverEvap.bWithQuotes = False
         ucrReceiverEvap.strSelectorHeading = "Numerics"
         ucrReceiverEvap.SetIncludedDataTypes({"numeric"})
