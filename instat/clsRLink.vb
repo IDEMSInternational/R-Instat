@@ -80,7 +80,8 @@ Public Class RLink
             clsEngine = REngine.GetInstance()
             clsEngine.Initialize()
         Catch ex As Exception
-            MsgBox(ex.Message & Environment.NewLine & "Could not establish connection to R." & vbNewLine & "R-Instat requires version " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".0 or later." & vbNewLine & "Rerun the installation to install R or download the latest version from https://cran.r-project.org/ and restart R-Instat." & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Cannot initialise R connection.")
+            ' Modified message since currently not working for R 3.5.0
+            MsgBox(ex.Message & Environment.NewLine & "Could not establish connection to R." & vbNewLine & "R-Instat requires version " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".4 of R." & vbNewLine & "Note that R-Instat does not currently work with R 3.5.0 or above. Try reruning the installation to install R 3.4.4 or download R 3.4.4 from https://cran.r-project.org/bin/windows/base/old/3.4.4/ and restart R-Instat." & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Cannot initialise R connection.")
             Application.Exit()
             Environment.Exit(0)
         End Try
@@ -97,12 +98,12 @@ Public Class RLink
             ' Once R 3.5.1 is released this can be removed. Error message should also be updated.
             If strMinor.Count >= 3 AndAlso Integer.TryParse(strMinor(2), iMinor2) Then
                 If Not (strMajor = strRVersionMajorRequired AndAlso strMinor.Count > 0 AndAlso strMinor(0) = strRVersionMinorRequired AndAlso iMinor2 >= 4) Then
-                    MsgBox("Your current version of R is outdated. You are currently running R version: " & strMajor & "." & strMinor & vbNewLine & "R-Instat requires version " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".4 or later." & vbNewLine & "Rerun the installation to install an updated version of R or download the latest version from https://cran.r-project.org/ and restart R-Instat.", MsgBoxStyle.Critical, "R Version outdated.")
+                    MsgBox("Your current version of R is outdated or you have R 3.5.0 and above which is currently not supported by R-Instat. You are currently running R version: " & strMajor & "." & strMinor & vbNewLine & "R-Instat requires version " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".4." & vbNewLine & "Try reruning the installation to install R 3.4.4 or download R 3.4.4 from https://cran.r-project.org/bin/windows/base/old/3.4.4/ and restart R-Instat.", MsgBoxStyle.Critical, "R Version not supported.")
                     Application.Exit()
                     Environment.Exit(0)
                 End If
             Else
-                MsgBox("Could not determine version of R installed on your machine. R-Instat requires version: " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".4 or later." & vbNewLine & "Rerun the installation to install an updated version of R or download the latest version from https://cran.r-project.org/ and restart R-Instat.", MsgBoxStyle.Critical, "R Version error.")
+                MsgBox("Could not determine version of R installed on your machine. R-Instat requires version: " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".4." & vbNewLine & "Try uninstalling any versions of R and rerun the installation to install R 3.4.4 or download R 3.4.4 from https://cran.r-project.org/bin/windows/base/old/3.4.4/ and restart R-Instat.", MsgBoxStyle.Critical, "R Version error.")
                 Application.Exit()
                 Environment.Exit(0)
             End If
