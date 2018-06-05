@@ -64,8 +64,12 @@ Public Class dlgOptions
         rtbCommentPreview.Text = strPreviewText
         rtbOutputPreview.Text = strPreviewText
         SetView()
+
         'temp disabled as not functioning yet
         rdoSpanish.Enabled = False
+        rdoFrench.Enabled = False
+        rdoKiswahili.Enabled = False
+
         ucrNudDigits.SetMinMax(0, 22)
         ucrChkIncludeCommentsbyDefault.SetText("Include Comments by Default")
         ucrChkViewClimaticMenu.SetText("Show Climatic Menu")
