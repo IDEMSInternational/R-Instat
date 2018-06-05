@@ -227,8 +227,17 @@ Public Class ucrCore
         UpdateLinkedControls(bReset)
     End Sub
 
+    'Private Sub RemoveParameterFromRCode()
+    '    If Not clsRCode Is Nothing Then
+    '        clsRCode.RemoveParameter(clsParameter)
+    '    End If
+    'End Sub
+
     Public Overridable Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False, Optional bUpdate As Boolean = True, Optional bCloneIfNeeded As Boolean = False)
         If clsRCode Is Nothing OrElse Not clsRCode.Equals(clsNewCodeStructure) Then
+            '    If Not clsRCode Is Nothing Then
+            '        RemoveParameterFromRCode()
+            '    End If
             clsRCode = clsNewCodeStructure
             If clsRCode IsNot Nothing AndAlso bUpdateRCodeFromControl AndAlso CanUpdate() AndAlso bUpdate Then
                 UpdateRCode(bReset)
@@ -297,6 +306,10 @@ Public Class ucrCore
     End Sub
 
     Public Overridable Sub SetParameter(clsNewParameter As RParameter, Optional iIndex As Integer = 0)
+        ''this should be removing the old parameter from the rcode before replacing it. Currently only implemented for iIndex =0
+        'If iIndex = 0 Then
+        '    RemoveParameterFromRCode()
+        'End If
         lstAllRParameters(iIndex) = clsNewParameter
     End Sub
 
@@ -632,6 +645,7 @@ Public Class ucrCore
             Return lstAllRParameters(0)
         End Get
         Set(bNewRParameter As RParameter)
+            'RemoveParameterFromRCode()
             lstAllRParameters(0) = bNewRParameter
         End Set
     End Property
@@ -650,6 +664,7 @@ Public Class ucrCore
     End Sub
 
     Public Overridable Sub ClearCodeAndParameters()
+        'Shouldn't this be removing them properly by removing the parameters from the functions first?
         lstAllRCodes = New List(Of RCodeStructure)
         lstAllRParameters = New List(Of RParameter)
         'Ensures there is always something at index 0
