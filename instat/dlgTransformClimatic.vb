@@ -71,13 +71,6 @@ Public Class dlgTransformClimatic
         'ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoWaterBalance, "sub1", "instat_calculation$new", False)
 
         ' Setting receivers
-        ucrReceiverData.SetParameter(New RParameter("data", 0, bNewIncludeArgumentName:=False))
-        ucrReceiverData.SetParameterIsString()
-        ucrReceiverData.bWithQuotes = False
-        ucrReceiverData.Selector = ucrSelectorTransform
-        ucrReceiverData.strSelectorHeading = "Numerics"
-        ucrReceiverData.SetIncludedDataTypes({"numeric"})
-
         ucrReceiverStation.Selector = ucrSelectorTransform
         ucrReceiverStation.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "station" & Chr(34)})
         ucrReceiverStation.bAutoFill = True
@@ -93,6 +86,14 @@ Public Class dlgTransformClimatic
         ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
         ucrReceiverDate.bAutoFill = True
         ucrReceiverDate.strSelectorHeading = "Date Variables"
+
+        ucrReceiverData.SetParameter(New RParameter("data", 0, bNewIncludeArgumentName:=False))
+        ucrReceiverData.SetParameterIsString()
+        ucrReceiverData.bWithQuotes = False
+        ucrReceiverData.bAutoFill = True
+        ucrReceiverData.Selector = ucrSelectorTransform
+        ucrReceiverData.strSelectorHeading = "Numerics"
+        ucrReceiverData.SetIncludedDataTypes({"numeric"})
 
         ' Moving
         ucrInputSum.SetParameter(New RParameter("FUN", 0))
@@ -180,7 +181,7 @@ Public Class dlgTransformClimatic
         clsPMaxOperatorMax = New ROperator
 
         ucrSelectorTransform.Reset()
-        ucrReceiverDate.SetMeAsReceiver()
+        ucrReceiverData.SetMeAsReceiver()
 
         ' Count and Spells: Rainday
         clsRRaindayMatch.bToScriptAsRString = True
