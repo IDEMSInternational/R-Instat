@@ -352,7 +352,7 @@ Partial Class dlgTransformClimatic
         '
         'ucrSelectorTransform
         '
-        Me.ucrSelectorTransform.bDropUnusedFilterLevels = False
+        'Me.ucrSelectorTransform.bDropUnusedFilterLevels = False
         Me.ucrSelectorTransform.bShowHiddenColumns = False
         Me.ucrSelectorTransform.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorTransform, "ucrSelectorTransform")

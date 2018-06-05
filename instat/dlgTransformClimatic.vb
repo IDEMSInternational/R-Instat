@@ -247,7 +247,7 @@ Public Class dlgTransformClimatic
         clsPMaxFunctionMax.AddParameter("calculation", clsROperatorParameter:=clsPMaxOperatorMax, iPosition:=0, bIncludeArgumentName:=False)
         clsPMaxOperatorMax.SetOperation("-")
         clsPMaxOperatorMax.AddParameter("first", "x + y", iPosition:=0)
-        clsPMaxOperatorMax.AddParameter("evaporation", 5, iPosition:=1, bIncludeArgumentName:=False)
+        'clsPMaxOperatorMax.AddParameter("evaporation", 5, iPosition:=1, bIncludeArgumentName:=False)
         clsPMaxFunctionMax.AddParameter("0", 0, iPosition:=1, bIncludeArgumentName:=False)
         clsPMinFunctionMax.AddParameter("capacity", 60, iPosition:=1, bIncludeArgumentName:=False)
         clsRWaterBalanceFunction.AddParameter("replace_na", iPosition:=1, bIncludeArgumentName:=False)
@@ -445,5 +445,6 @@ Public Class dlgTransformClimatic
             ucrReceiverEvap.SetParameter(New RParameter("evaporation", 1))
             clsPMaxOperatorMax.AddParameter("evaporation")
         End If
+        TestOkEnabled()
     End Sub
 End Class
