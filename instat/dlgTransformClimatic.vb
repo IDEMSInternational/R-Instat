@@ -441,8 +441,10 @@ Public Class dlgTransformClimatic
     Private Sub ucrPnlEvap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlEvap.ControlValueChanged
         If rdoEvapValue.Checked Then
             clsPMaxOperatorMax.AddParameter("evaporation.value", 5, iPosition:=1, bIncludeArgumentName:=False)
+            clsPMaxOperatorMax.RemoveParameterByName("evaporation.var")
         ElseIf rdoEvapVariable.Checked Then
-            clsPMaxOperatorMax.AddParameter("evaporation.var", iPosition:=1)
+            clsPMaxOperatorMax.AddParameter("evaporation.var", iPosition:=1, bIncludeArgumentName:=False)
+            clsPMaxOperatorMax.RemoveParameterByName("evaporation.value")
         End If
         TestOkEnabled()
     End Sub
