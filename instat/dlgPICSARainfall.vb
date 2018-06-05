@@ -57,6 +57,15 @@ Public Class dlgPICSARainfall
         ucrPICSARainfallSelector.SetParameter(New RParameter("data", 0))
         ucrPICSARainfallSelector.SetParameterIsrfunction()
 
+        ucrVariablesAsFactor.SetParameter(New RParameter("y", 1))
+        ucrVariablesAsFactor.SetFactorReceiver(ucrFactorOptionalReceiver)
+        ucrVariablesAsFactor.Selector = ucrPICSARainfallSelector
+        ucrVariablesAsFactor.strSelectorHeading = "Varibles"
+        ucrVariablesAsFactor.SetParameterIsString()
+        ucrVariablesAsFactor.bWithQuotes = False
+        ucrVariablesAsFactor.SetValuesToIgnore({Chr(34) & Chr(34)})
+        ucrVariablesAsFactor.bAddParameterIfEmpty = True
+
         ucrReceiverX.SetParameter(New RParameter("x", 0))
         ucrReceiverX.Selector = ucrPICSARainfallSelector
         ucrReceiverX.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
@@ -70,15 +79,6 @@ Public Class dlgPICSARainfall
         ucrFactorOptionalReceiver.strSelectorHeading = "Factors"
         ucrFactorOptionalReceiver.bWithQuotes = False
         ucrFactorOptionalReceiver.SetParameterIsString()
-
-        ucrVariablesAsFactor.SetParameter(New RParameter("y", 1))
-        ucrVariablesAsFactor.SetFactorReceiver(ucrFactorOptionalReceiver)
-        ucrVariablesAsFactor.Selector = ucrPICSARainfallSelector
-        ucrVariablesAsFactor.strSelectorHeading = "Varibles"
-        ucrVariablesAsFactor.SetParameterIsString()
-        ucrVariablesAsFactor.bWithQuotes = False
-        ucrVariablesAsFactor.SetValuesToIgnore({Chr(34) & Chr(34)})
-        ucrVariablesAsFactor.bAddParameterIfEmpty = True
 
         ucrChkPoints.SetText("Add Points")
         ucrChkPoints.AddParameterPresentCondition(True, "points")
@@ -178,6 +178,7 @@ Public Class dlgPICSARainfall
     End Sub
 
     Private Sub cmdPICSAOptions_Click(sender As Object, e As EventArgs) Handles cmdPICSAOptions.Click
+        sdgPICSARainfallGraph.SetRcode()
         sdgPICSARainfallGraph.ShowDialog()
     End Sub
 

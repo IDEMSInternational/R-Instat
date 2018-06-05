@@ -25,6 +25,42 @@ Public Class sdgPICSARainfallGraph
         ucrChkPlotMean.SetText("Plot Mean")
         ucrChkPlotMedian.SetText("Plot Median")
         ucrChkPlotTerciles.SetText("Plot Terciles")
+        ucrChkYAxisTitle.SetText("Y Axis Title")
+        ucrChkXaxisAngle.SetText("X Axis Angle")
+        ucrChkXaxisLabelSize.SetText("X Axis Label Size")
+
+        ucrSpecifyYAxisTickMarks.AddToLinkedControls(ucrInputYAxisTitle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrSpecifyYAxisTickMarks.AddToLinkedControls(ucrNudYAxisTitleSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudYAxisTitleSize.SetLinkedDisplayControl(lblYAxisTitleSize)
+
+        ucrChkXaxisAngle.AddToLinkedControls(ucrNudXAxisAngle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkXaxisLabelSize.AddToLinkedControls(ucrNudXaxisLabelSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkAddLabel.SetText("Add label")
+        ucrChkAddMeanLabel.SetText("Add Mean label")
+        ucrChkAddMedianLabel.SetText("Add Median label")
+        ucrChkAddTercillesLabel.SetText("Add Tercilles label")
+        ucrChkAddLabel.AddToLinkedControls({ucrChkAddMeanLabel, ucrChkAddMedianLabel, ucrChkAddTercillesLabel}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkFootNote.SetText("Foot Note")
+        ucrChkFootNote.AddToLinkedControls(ucrInputFootNote, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkSubFootNote.SetText("Sub Foot Note")
+        ucrChkSubFootNote.AddToLinkedControls(ucrInputSubFootNote, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+
+        ucrSpecifyYAxisTickMarks.SetText("Specify Y Axis Tick Marks")
+        ucrSpecifyYAxisTickMarks.AddToLinkedControls({ucrInputYFrom, ucrInputYTo, ucrInputYInStepsOf}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputYFrom.SetLinkedDisplayControl(lblYFrom)
+        ucrInputYTo.SetLinkedDisplayControl(lblYTo)
+        ucrInputYInStepsOf.SetLinkedDisplayControl(lblYInStepsOf)
+
+        ucrSpecifyXAxisTickMarks.SetText("Specify x Axis Tick Marks")
+        ucrSpecifyYAxisTickMarks.AddToLinkedControls({ucrInputXFrom, ucrInputXTo, ucrInputXInStepsOf}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputXFrom.SetLinkedDisplayControl(lblXFrom)
+        ucrInputXTo.SetLinkedDisplayControl(lblXTo)
+        ucrInputXInStepsOf.SetLinkedDisplayControl(lblXInStepsOf)
+
+        bControlsInitialised = True
     End Sub
 
     Public Sub SetRcode()
@@ -32,4 +68,6 @@ Public Class sdgPICSARainfallGraph
             InitialiseControls()
         End If
     End Sub
+
+
 End Class
