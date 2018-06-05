@@ -192,7 +192,7 @@ Public Class dlgClimaticCheckDataRain
         clsRainFilterFunc.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
         clsRainFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsOrOperator, iPosition:=1)
         clsRainFilterFunc.AddParameter("sub_calculations", clsRFunctionParameter:=clsListSubCalc, iPosition:=2)
-        clsRainFilterFunc.AddParameter("manipulations", clsRFunctionParameter:=clsManipList, iPosition:=3)
+        'clsRainFilterFunc.AddParameter("manipulations", clsRFunctionParameter:=clsManipList, iPosition:=3)
         clsRainFilterFunc.AddParameter("result_data_frame", Chr(34) & "Rainfall_Filter" & Chr(34), iPosition:=4)
         clsRainFilterFunc.AddParameter("save", 2, iPosition:=5)
         clsRainFilterFunc.SetAssignTo("rainfall_filter")
@@ -413,6 +413,9 @@ Public Class dlgClimaticCheckDataRain
     Private Sub GroupByOptions()
         If Not ucrReceiverStation.IsEmpty Then
             clsGroupByFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames & ")", iPosition:=1)
+            clsRainFilterFunc.AddParameter("manipulations", clsRFunctionParameter:=clsManipList, iPosition:=3)
+        Else
+            clsRainFilterFunc.RemoveParameterByName("manipulations")
         End If
     End Sub
 
