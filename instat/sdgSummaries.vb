@@ -129,10 +129,10 @@ Public Class sdgSummaries
         ucrChkPercentile.AddToLinkedControls(ucrInputPercentile, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.25)
         ucrChkTrimmedMean.AddToLinkedControls(ucrNudFraction, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChknth.AddToLinkedControls(ucrInputN, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
-        ucrChkProportion.AddToLinkedControls(ucrInputComboPropTest, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkProportion.AddToLinkedControls(ucrInputComboPropTest, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="==")
         ucrChkProportion.AddToLinkedControls(ucrInputPropValue, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrChkProportion.AddToLinkedControls(ucrChkPercentage, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkCount.AddToLinkedControls(ucrInputComboCountTest, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkCount.AddToLinkedControls(ucrInputComboCountTest, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="==")
         ucrChkCount.AddToLinkedControls(ucrInputCountValue, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrChkIncludeMissingOpt.AddToLinkedControls(ucrPnlMissingOptions, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMissingOptions.AddToLinkedControls({ucrNudNumber}, {rdoNumber}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -163,13 +163,12 @@ Public Class sdgSummaries
         dctProportionTest.Add("==", Chr(34) & "'=='" & Chr(34))
         ucrInputComboPropTest.SetItems(dctProportionTest)
         ucrInputComboPropTest.SetDropDownStyleAsNonEditable()
-        ucrInputComboPropTest.SetRDefault(Chr(34) & "'=='" & Chr(34))
 
         ucrInputPropValue.SetParameter(New RParameter("prop_value", 8))
         ucrInputPropValue.SetValidationTypeAsNumeric()
         ucrInputPropValue.AddQuotesIfUnrecognised = False
 
-        ucrInputComboCountTest.SetParameter(New RParameter("prop_test", 7))
+        ucrInputComboCountTest.SetParameter(New RParameter("count_test", 7))
         Dim dctCountTest As New Dictionary(Of String, String)
         dctCountTest.Add("<", Chr(34) & "'<'" & Chr(34))
         dctCountTest.Add("<=", Chr(34) & "'<='" & Chr(34))
@@ -178,7 +177,6 @@ Public Class sdgSummaries
         dctCountTest.Add("==", Chr(34) & "'=='" & Chr(34))
         ucrInputComboCountTest.SetItems(dctCountTest)
         ucrInputComboCountTest.SetDropDownStyleAsNonEditable()
-        ucrInputComboCountTest.SetRDefault(Chr(34) & "'=='" & Chr(34))
 
         ucrInputCountValue.SetParameter(New RParameter("count_value", 8))
         ucrInputCountValue.SetValidationTypeAsNumeric()
