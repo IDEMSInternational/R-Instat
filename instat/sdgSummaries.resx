@@ -1701,6 +1701,54 @@
   <data name="&gt;&gt;tbTwoVariables.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="ucrChkStandardErrorOfMean.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 21</value>
+  </data>
+  <data name="ucrChkStandardErrorOfMean.Size" type="System.Drawing.Size, System.Drawing">
+    <value>295, 20</value>
+  </data>
+  <data name="ucrChkStandardErrorOfMean.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkStandardErrorOfMean.Name" xml:space="preserve">
+    <value>ucrChkStandardErrorOfMean</value>
+  </data>
+  <data name="&gt;&gt;ucrChkStandardErrorOfMean.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkStandardErrorOfMean.Parent" xml:space="preserve">
+    <value>tbModel</value>
+  </data>
+  <data name="&gt;&gt;ucrChkStandardErrorOfMean.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tbModel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbModel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbModel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>377, 439</value>
+  </data>
+  <data name="tbModel.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="tbModel.Text" xml:space="preserve">
+    <value>Model</value>
+  </data>
+  <data name="&gt;&gt;tbModel.Name" xml:space="preserve">
+    <value>tbModel</value>
+  </data>
+  <data name="&gt;&gt;tbModel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbModel.Parent" xml:space="preserve">
+    <value>tbSummaries</value>
+  </data>
+  <data name="&gt;&gt;tbModel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <data name="tbSummaries.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 7</value>
   </data>

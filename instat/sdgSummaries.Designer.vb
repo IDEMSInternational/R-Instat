@@ -107,6 +107,8 @@ Partial Class sdgSummaries
         Me.lblSecondVariable = New System.Windows.Forms.Label()
         Me.ucrSelectorSecondVariable = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverSecondVariable = New instat.ucrReceiverSingle()
+        Me.tbModel = New System.Windows.Forms.TabPage()
+        Me.ucrChkStandardErrorOfMean = New instat.ucrCheck()
         Me.ucrButtonsSummaries = New instat.ucrButtonsSubdialogue()
         Me.tbMissingOptions.SuspendLayout()
         Me.tbMore.SuspendLayout()
@@ -124,6 +126,7 @@ Partial Class sdgSummaries
         Me.tbSummaries.SuspendLayout()
         Me.tbTwoVariables.SuspendLayout()
         Me.grpRelationships.SuspendLayout()
+        Me.tbModel.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbMissingOptions
@@ -572,6 +575,7 @@ Partial Class sdgSummaries
         Me.tbSummaries.Controls.Add(Me.tbMore)
         Me.tbSummaries.Controls.Add(Me.tbTwoVariables)
         Me.tbSummaries.Controls.Add(Me.tbMissingOptions)
+        Me.tbSummaries.Controls.Add(Me.tbModel)
         resources.ApplyResources(Me.tbSummaries, "tbSummaries")
         Me.tbSummaries.Name = "tbSummaries"
         Me.tbSummaries.SelectedIndex = 0
@@ -628,6 +632,19 @@ Partial Class sdgSummaries
         Me.ucrReceiverSecondVariable.strNcFilePath = ""
         Me.ucrReceiverSecondVariable.ucrSelector = Nothing
         '
+        'tbModel
+        '
+        Me.tbModel.Controls.Add(Me.ucrChkStandardErrorOfMean)
+        resources.ApplyResources(Me.tbModel, "tbModel")
+        Me.tbModel.Name = "tbModel"
+        Me.tbModel.UseVisualStyleBackColor = True
+        '
+        'ucrChkStandardErrorOfMean
+        '
+        Me.ucrChkStandardErrorOfMean.Checked = False
+        resources.ApplyResources(Me.ucrChkStandardErrorOfMean, "ucrChkStandardErrorOfMean")
+        Me.ucrChkStandardErrorOfMean.Name = "ucrChkStandardErrorOfMean"
+        '
         'ucrButtonsSummaries
         '
         resources.ApplyResources(Me.ucrButtonsSummaries, "ucrButtonsSummaries")
@@ -664,6 +681,7 @@ Partial Class sdgSummaries
         Me.tbTwoVariables.ResumeLayout(False)
         Me.tbTwoVariables.PerformLayout()
         Me.grpRelationships.ResumeLayout(False)
+        Me.tbModel.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -737,4 +755,6 @@ Partial Class sdgSummaries
     Friend WithEvents lblNumber As Label
     Friend WithEvents ucrInputCountValue As ucrInputTextBox
     Friend WithEvents ucrInputComboCountTest As ucrInputComboBox
+    Friend WithEvents tbModel As TabPage
+    Friend WithEvents ucrChkStandardErrorOfMean As ucrCheck
 End Class
