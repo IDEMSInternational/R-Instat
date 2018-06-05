@@ -95,6 +95,8 @@ Public Class dlgClimaticCheckDataRain
         ucrReceiverElement.Selector = ucrSelectorRain
         ucrReceiverElement.SetParameterIsString()
         ucrReceiverElement.bWithQuotes = False
+        ucrReceiverMonth.SetClimaticType("rain")
+        ucrReceiverMonth.bAutoFill = True
 
         ucrNudLarge.SetParameter(New RParameter("right", 1, bNewIncludeArgumentName:=False))
         ucrNudLarge.SetMinMax(iNewMin:=Integer.MinValue, iNewMax:=Integer.MaxValue)
@@ -397,7 +399,7 @@ Public Class dlgClimaticCheckDataRain
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverElement.IsEmpty AndAlso ((ucrChkLarge.Checked AndAlso ucrNudLarge.GetText <> "") OrElse (ucrChkSame.Checked AndAlso ucrNudSame.GetText <> "") OrElse (ucrChkWetDays.Checked AndAlso ucrNudWetDays.GetText <> "") OrElse (ucrChkOutlier.Checked AndAlso ucrNudSkewnessWeight.GetText <> "" AndAlso ucrNudCoeff.GetText <> "")) OrElse ucrChkOmitZero.Checked Then
+        If Not ucrReceiverElement.IsEmpty AndAlso ((ucrChkLarge.Checked AndAlso ucrNudLarge.GetText <> "") OrElse (ucrChkSame.Checked AndAlso ucrNudSame.GetText <> "") OrElse (ucrChkWetDays.Checked AndAlso ucrNudWetDays.GetText <> "") OrElse (ucrChkOutlier.Checked AndAlso ucrNudSkewnessWeight.GetText <> "" AndAlso ucrNudCoeff.GetText <> "")) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
