@@ -595,20 +595,27 @@ proportion_calc <- function(x, prop_test = "==", prop_value, As_percentage = FAL
   if(!na.rm){
     if(sum(is.na(x)) > 0) return(NA)
     y <- x[eval(parse(text = paste("x", prop_value, sep = prop_test)))]
-    if(!As_percentage){return(length(y)/length(x))}
-    else {return(noquote(paste0((length(y)/length(x))*100 ,"%")))}  
+    if(!As_percentage){return(round(length(y)/length(x),digits = 2))}
+    else {return(noquote(paste0(round((length(y)/length(x)*100),digits = 2 ),"%")))}  
   }
   else {
     remove.na <- na.omit(x)
     y <- remove.na[eval(parse(text = paste("remove.na", prop_value, sep = prop_test)))]
-    if (!As_percentage){ return(length(y)/length(remove.na))}
-    else{return(noquote(paste0((length(y)/length(remove.na))*100 ,"%")))}
+    if (!As_percentage){ return(round(length(y)/length(remove.na), digits = 2))}
+    else{return(noquote(paste0(round(length(y)/length(remove.na)*100, digits = 2 ),"%")))}
   }
 }
 
 #count function
-count_calc <- function(x, count_test = "==", count_value, ...){ 
-  return(length(x[eval(parse(text = paste("x", count_value, sep = count_test)))]))
+count_calc <- function(x, count_test = "==", count_value, na.rm = FALSE, ...){ 
+  if (!na.rm){
+    if (sum(is.na(x)) > 0) return(NA)
+    return(length(x[eval(parse(text = paste("x", count_value, sep = count_test)))]))
+  }
+  else{
+    y <- na.omit(x)
+    return(length(y[eval(parse(text = paste("y", count_value, sep = count_test)))]))
+  }
 }
 
 
