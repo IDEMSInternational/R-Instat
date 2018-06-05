@@ -618,6 +618,19 @@ count_calc <- function(x, count_test = "==", count_value, na.rm = FALSE, ...){
   }
 }
 
+#standard error of mean function
+
+standard_error_mean <- function(x, na.rm = FALSE, ...){
+  if (!na.rm){
+    if(sum(is.na(x) > 0)) return(NA)
+     return(sd(x)/sqrt(length(x)))
+  }
+  else{
+    y <- na.omit(x)
+    return(sd(y)/sqrt(length(y)))
+  }
+}
+
 
 instat_object$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), n_column_factors = 1, store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = TRUE, treat_columns_as_factor = FALSE, page_by = "default", as_html = TRUE, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, margin_name = "(All)", additional_filter, ...) {
   if(n_column_factors == 1 && length(factors) == 0) n_column_factors <- 0
