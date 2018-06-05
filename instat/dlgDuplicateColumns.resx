@@ -163,7 +163,7 @@
     <value>101, 13</value>
   </data>
   <data name="lblNewColumnName.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>27</value>
   </data>
   <data name="lblNewColumnName.Text" xml:space="preserve">
     <value>New Column Name:</value>
@@ -193,7 +193,7 @@
     <value>56, 17</value>
   </data>
   <data name="rdoBefore.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>24</value>
   </data>
   <data name="rdoBefore.Text" xml:space="preserve">
     <value>Before</value>
@@ -223,7 +223,7 @@
     <value>44, 17</value>
   </data>
   <data name="rdoEnd.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>26</value>
   </data>
   <data name="rdoEnd.Text" xml:space="preserve">
     <value>End</value>
@@ -253,7 +253,7 @@
     <value>47, 17</value>
   </data>
   <data name="rdoAfter.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>25</value>
   </data>
   <data name="rdoAfter.Text" xml:space="preserve">
     <value>After</value>
@@ -283,7 +283,7 @@
     <value>72, 17</value>
   </data>
   <data name="rdoBeginning.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>23</value>
   </data>
   <data name="rdoBeginning.Text" xml:space="preserve">
     <value>Beginning</value>
@@ -310,7 +310,7 @@
     <value>166, 47</value>
   </data>
   <data name="ucrPnlDuplicateColPosition.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>22</value>
   </data>
   <data name="&gt;&gt;ucrPnlDuplicateColPosition.Name" xml:space="preserve">
     <value>ucrPnlDuplicateColPosition</value>
@@ -331,7 +331,7 @@
     <value>181, 76</value>
   </data>
   <data name="grpDuplicatedColumn.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>21</value>
   </data>
   <data name="grpDuplicatedColumn.Text" xml:space="preserve">
     <value>Position of Duplicated Column</value>
@@ -361,7 +361,7 @@
     <value>59, 17</value>
   </data>
   <data name="rdoConvertToLogical.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>11</value>
   </data>
   <data name="rdoConvertToLogical.Text" xml:space="preserve">
     <value>Logical</value>
@@ -391,7 +391,7 @@
     <value>71, 17</value>
   </data>
   <data name="rdoConvertToCharacter.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>8</value>
   </data>
   <data name="rdoConvertToCharacter.Text" xml:space="preserve">
     <value>Character</value>
@@ -421,7 +421,7 @@
     <value>58, 17</value>
   </data>
   <data name="rdoConvertToInteger.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>10</value>
   </data>
   <data name="rdoConvertToInteger.Text" xml:space="preserve">
     <value>Integer</value>
@@ -451,7 +451,7 @@
     <value>64, 17</value>
   </data>
   <data name="rdoConvertToNumeric.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>9</value>
   </data>
   <data name="rdoConvertToNumeric.Text" xml:space="preserve">
     <value>Numeric</value>
@@ -481,7 +481,7 @@
     <value>96, 17</value>
   </data>
   <data name="rdoConvertToOrderedFactor.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>7</value>
   </data>
   <data name="rdoConvertToOrderedFactor.Text" xml:space="preserve">
     <value>Ordered Factor</value>
@@ -511,7 +511,7 @@
     <value>55, 17</value>
   </data>
   <data name="rdoConvertToFactor.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>6</value>
   </data>
   <data name="rdoConvertToFactor.Text" xml:space="preserve">
     <value>Factor</value>
@@ -538,7 +538,7 @@
     <value>220, 85</value>
   </data>
   <data name="ucrPnlConvertTo.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;ucrPnlConvertTo.Name" xml:space="preserve">
     <value>ucrPnlConvertTo</value>
@@ -559,7 +559,7 @@
     <value>235, 108</value>
   </data>
   <data name="grpConvertTo.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>4</value>
   </data>
   <data name="grpConvertTo.Text" xml:space="preserve">
     <value>Convert To</value>
@@ -589,7 +589,7 @@
     <value>59, 17</value>
   </data>
   <data name="rdoConvertDefault.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>18</value>
   </data>
   <data name="rdoConvertDefault.Text" xml:space="preserve">
     <value>Default</value>
@@ -619,7 +619,7 @@
     <value>115, 17</value>
   </data>
   <data name="rdoConvertOrdinals.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>20</value>
   </data>
   <data name="rdoConvertOrdinals.Text" xml:space="preserve">
     <value>Always Use Values</value>
@@ -649,7 +649,7 @@
     <value>114, 17</value>
   </data>
   <data name="rdoConvertLevels.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>19</value>
   </data>
   <data name="rdoConvertLevels.Text" xml:space="preserve">
     <value>Always Use Levels</value>
@@ -676,7 +676,7 @@
     <value>141, 74</value>
   </data>
   <data name="ucrPnlConvertFactorToNumericOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>17</value>
   </data>
   <data name="&gt;&gt;ucrPnlConvertFactorToNumericOptions.Name" xml:space="preserve">
     <value>ucrPnlConvertFactorToNumericOptions</value>
@@ -697,7 +697,7 @@
     <value>156, 102</value>
   </data>
   <data name="grpFactorToNumericOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>16</value>
   </data>
   <data name="grpFactorToNumericOptions.Text" xml:space="preserve">
     <value>Factor Options</value>
@@ -724,7 +724,7 @@
     <value>100, 20</value>
   </data>
   <data name="ucrChkChangeType.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;ucrChkChangeType.Name" xml:space="preserve">
     <value>ucrChkChangeType</value>
@@ -748,7 +748,7 @@
     <value>100, 20</value>
   </data>
   <data name="ucrChkConvertCreateLabels.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="&gt;&gt;ucrChkConvertCreateLabels.Name" xml:space="preserve">
     <value>ucrChkConvertCreateLabels</value>
@@ -772,7 +772,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrChkConvertKeepAttributes.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="&gt;&gt;ucrChkConvertKeepAttributes.Name" xml:space="preserve">
     <value>ucrChkConvertKeepAttributes</value>
@@ -787,7 +787,7 @@
     <value>2</value>
   </data>
   <data name="ucrNudConvertDisplayDecimals.Location" type="System.Drawing.Point, System.Drawing">
-    <value>358, 221</value>
+    <value>425, 221</value>
   </data>
   <data name="ucrNudConvertDisplayDecimals.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -796,7 +796,7 @@
     <value>50, 20</value>
   </data>
   <data name="ucrNudConvertDisplayDecimals.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>15</value>
   </data>
   <data name="&gt;&gt;ucrNudConvertDisplayDecimals.Name" xml:space="preserve">
     <value>ucrNudConvertDisplayDecimals</value>
@@ -817,10 +817,10 @@
     <value>6, 8, 6, 8</value>
   </data>
   <data name="ucrChkConvertSpecifyDecimalsToDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 20</value>
+    <value>180, 20</value>
   </data>
   <data name="ucrChkConvertSpecifyDecimalsToDisplay.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>14</value>
   </data>
   <data name="&gt;&gt;ucrChkConvertSpecifyDecimalsToDisplay.Name" xml:space="preserve">
     <value>ucrChkConvertSpecifyDecimalsToDisplay</value>
@@ -844,7 +844,7 @@
     <value>140, 21</value>
   </data>
   <data name="ucrInputDuplicateColumnName.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>28</value>
   </data>
   <data name="&gt;&gt;ucrInputDuplicateColumnName.Name" xml:space="preserve">
     <value>ucrInputDuplicateColumnName</value>
@@ -901,7 +901,7 @@
     <value>399, 53</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>29</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
