@@ -54,6 +54,11 @@ Public Class dlgUnstack
         ucrReceiverFactorToUnstackby.SetDataType("factor")
         ucrReceiverFactorToUnstackby.strSelectorHeading = "Factors"
 
+        'ucrColumn
+        ucrReceiverColumnToUnstack.SetParameter(New RParameter("value.var", 4))
+        ucrReceiverColumnToUnstack.SetParameterIsString()
+        ucrReceiverColumnToUnstack.Selector = ucrSelectorForUnstack
+
         ''ucrMultipleColumnsReceiver
         'ucrMultipleColumnsReceiver.SetParameter(New RParameter("value.var", 1))
         'ucrMultipleColumnsReceiver.SetParameterIsString()
@@ -85,7 +90,9 @@ Public Class dlgUnstack
         ucrPnlUnstackCol.AddRCodeIsRFunctionCondition(rdoRestoreHierarchy, bNewIsPositive:=False)
         'TODO add function name condition for rdoMultiple
 
+        ucrPnlUnstackCol.AddToLinkedControls(ucrReceiverColumnToUnstack, {rdoSingle}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlUnstackCol.AddToLinkedControls(ucrMultipleColumnsReceiver, {rdoMultiple}, bNewLinkedHideIfParameterMissing:=True)
+        ucrReceiverColumnToUnstack.SetLinkedDisplayControl(lblColumnToUnstack)
         ucrMultipleColumnsReceiver.SetLinkedDisplayControl(lblMultipleColumns)
     End Sub
 
@@ -129,6 +136,7 @@ Public Class dlgUnstack
         ucrReceiverFactorToUnstackby.AddAdditionalCodeParameterPair(clsCommaOperator, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrNewDFName.AddAdditionalRCode(clsUnstackedOperator, iAdditionalPairNo:=1)
         ucrSelectorForUnstack.SetRCode(clsDcastFunction, bReset)
+        ucrReceiverColumnToUnstack.SetRCode(clsDcastFunction, bReset)
         ucrPnlUnstackCol.SetRCode(clsBaseRCode, bReset)
         ucrNewDFName.SetRCode(clsBaseRCode, bReset)
         ucrReceiverCarryColumns.SetRCode(clsCommaOperator, bReset)
@@ -193,6 +201,7 @@ Public Class dlgUnstack
             clsBaseRCode = clsUnstackedOperator
             ucrBase.clsRsyntax.SetBaseROperator(clsUnstackedOperator)
             clsDcastFunction.RemoveAssignTo()
+            clsDcastFunction.RemoveParameterByName("value.var")
         End If
         ucrNewDFName.SetRCode(clsBaseRCode)
         SetFormula()

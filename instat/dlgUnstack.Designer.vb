@@ -52,6 +52,8 @@ Partial Class dlgUnstack
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlUnstackCol = New instat.UcrPanel()
         Me.ucrMultipleColumnsReceiver = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverColumnToUnstack = New instat.ucrReceiverSingle()
+        Me.lblColumnToUnstack = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblFactorToUnstackBy
@@ -134,6 +136,7 @@ Partial Class dlgUnstack
         '
         'ucrSelectorForUnstack
         '
+        Me.ucrSelectorForUnstack.bDropUnusedFilterLevels = False
         Me.ucrSelectorForUnstack.bShowHiddenColumns = False
         Me.ucrSelectorForUnstack.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorForUnstack, "ucrSelectorForUnstack")
@@ -158,10 +161,27 @@ Partial Class dlgUnstack
         Me.ucrMultipleColumnsReceiver.strNcFilePath = ""
         Me.ucrMultipleColumnsReceiver.ucrSelector = Nothing
         '
+        'ucrReceiverColumnToUnstack
+        '
+        Me.ucrReceiverColumnToUnstack.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverColumnToUnstack, "ucrReceiverColumnToUnstack")
+        Me.ucrReceiverColumnToUnstack.Name = "ucrReceiverColumnToUnstack"
+        Me.ucrReceiverColumnToUnstack.Selector = Nothing
+        Me.ucrReceiverColumnToUnstack.strNcFilePath = ""
+        Me.ucrReceiverColumnToUnstack.ucrSelector = Nothing
+        '
+        'lblColumnToUnstack
+        '
+        resources.ApplyResources(Me.lblColumnToUnstack, "lblColumnToUnstack")
+        Me.lblColumnToUnstack.Name = "lblColumnToUnstack"
+        Me.lblColumnToUnstack.Tag = "Column_to_Unstack:"
+        '
         'dlgUnstack
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrReceiverColumnToUnstack)
+        Me.Controls.Add(Me.lblColumnToUnstack)
         Me.Controls.Add(Me.rdoRestoreHierarchy)
         Me.Controls.Add(Me.rdoMultiple)
         Me.Controls.Add(Me.rdoSingle)
@@ -199,4 +219,6 @@ Partial Class dlgUnstack
     Friend WithEvents lblMultipleColumns As Label
     Friend WithEvents ucrMultipleColumnsReceiver As ucrReceiverMultiple
     Friend WithEvents ucrPnlUnstackCol As UcrPanel
+    Friend WithEvents ucrReceiverColumnToUnstack As ucrReceiverSingle
+    Friend WithEvents lblColumnToUnstack As Label
 End Class
