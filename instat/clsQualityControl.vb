@@ -20,10 +20,11 @@ Public Class clsQCJumpRCode
     Public clsJumpCalcFunction, clsJumpTestFunction As New RFunction
     Public clsGreaterJumpOperator As New ROperator
     Public strTestName As String
+    Public strCalcName As String
 
     Public Sub SetDefaults(strElementName As String)
-        Dim strlargest_jump As String = "largest_jump" & strElementName
-        Dim strjump_test As String = "Jump" & strElementName
+        Dim strlargest_jump As String = "Jump" & strElementName
+        Dim strjump_test As String = "jump" & strElementName
 
         clsLagFunction = New RFunction
         clsAbsLagFunction = New RFunction
@@ -64,10 +65,11 @@ Public Class clsQCJumpRCode
         clsPmaxFunction.AddParameter("na.rm", "TRUE", iPosition:=2)
         clsPmaxFunction.bToScriptAsRString = True
 
+        strCalcName = strlargest_jump
         clsJumpCalcFunction.SetRCommand("instat_calculation$new")
         clsJumpCalcFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsJumpCalcFunction.AddParameter("function_exp", clsRFunctionParameter:=clsPmaxFunction, iPosition:=1)
-        clsJumpCalcFunction.AddParameter("result_name", Chr(34) & strlargest_jump & Chr(34), iPosition:=4)
+        clsJumpCalcFunction.AddParameter("result_name", Chr(34) & strCalcName & Chr(34), iPosition:=4)
         clsJumpCalcFunction.SetAssignTo("largest_jump" & strElementName)
 
         strTestName = strjump_test
@@ -103,10 +105,11 @@ Public Class clsQCSameRCode
     Public clsSameGreaterOperator As New ROperator
     Public clsRepFunc As New RFunction
     Public strTestName As String
+    Public strCalcName As String
 
     Public Sub SetDefaults(strElementName As String)
         Dim strLengths As String = "lengths"
-        Dim strlargest_Same As String = "largest_same" & strElementName
+        Dim strlargest_Same As String = "Same" & strElementName
         Dim strSame_test As String = "same" & strElementName
 
         clsRepFunc = New RFunction
@@ -127,10 +130,11 @@ Public Class clsQCSameRCode
         clsDollarOperator.AddParameter("left", bIncludeArgumentName:=False, clsRFunctionParameter:=clsRleFunc, iPosition:=0)
         clsDollarOperator.AddParameter("right", strParameterValue:=strLengths, bIncludeArgumentName:=False, iPosition:=1)
 
+        strCalcName = strlargest_Same
         clsSameCalcFunction.SetRCommand("instat_calculation$new")
         clsSameCalcFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsSameCalcFunction.AddParameter("function_exp", clsRFunctionParameter:=clsRepFunc, iPosition:=1)
-        clsSameCalcFunction.AddParameter("result_name", Chr(34) & strlargest_Same & Chr(34), iPosition:=4)
+        clsSameCalcFunction.AddParameter("result_name", Chr(34) & strCalcName & Chr(34), iPosition:=4)
         clsSameCalcFunction.SetAssignTo("largest_same" & strElementName)
         clsRepFunc.bToScriptAsRString = True
 
@@ -147,7 +151,7 @@ Public Class clsQCSameRCode
 
         clsSameGreaterOperator.SetOperation(">=")
         clsSameGreaterOperator.bToScriptAsRString = True
-        clsSameGreaterOperator.AddParameter("left", bIncludeArgumentName:=False, clsRFunctionParameter:=clsSameCalcFunction, iPosition:=0)
+        clsSameGreaterOperator.AddParameter("left", bIncludeArgumentName:=False, strParameterValue:=strlargest_Same, iPosition:=0)
     End Sub
 
     Public Sub SetElementParameters(ucrNewControl As ucrCore, iAdditionalPairNo As Integer)
@@ -163,7 +167,7 @@ Public Class clsQCDifferenceRCode
 
     Public Sub SetDefaults()
 
-        Dim strDiffCalc As String = "diff_calculation"
+        Dim strDiffCalc As String = "Diff"
         Dim strDiffTest As String = "diff"
 
         clsDiffOperator = New ROperator
@@ -172,7 +176,7 @@ Public Class clsQCDifferenceRCode
         clsLessDiffOperator.Clear()
         clsLessDiffOperator.SetOperation("<")
         clsLessDiffOperator.bToScriptAsRString = True
-        clsLessDiffOperator.AddParameter("left", bIncludeArgumentName:=False, clsRFunctionParameter:=clsDiffCalcFunction, iPosition:=0)
+        clsLessDiffOperator.AddParameter("left", bIncludeArgumentName:=False, strParameterValue:=strDiffCalc, iPosition:=0)
         clsDiffOperator.SetOperation("-")
         clsDiffOperator.bToScriptAsRString = True
 
@@ -200,11 +204,10 @@ End Class
 
 Public Class clsQCAcceptableRange
     Public clsGreaterEqualToOperator, clsLessEqualToOperator, clsRangeOrOperator As New ROperator
-    Public clsAcceptableRangeFunc As New RFunction
+    Public clsAcceptableRangeTestFunc As New RFunction
     Public strTestName As String
 
     Public Sub SetDefaults(strElementName As String)
-        Dim strAcceptableRange As String = "acceptable_range" & strElementName
         Dim strRangeName As String = "range" & strElementName
 
         clsGreaterEqualToOperator = New ROperator
@@ -221,11 +224,11 @@ Public Class clsQCAcceptableRange
         clsRangeOrOperator.AddParameter("left", clsROperatorParameter:=clsLessEqualToOperator, iPosition:=0, bIncludeArgumentName:=False)
         clsRangeOrOperator.AddParameter("right", clsROperatorParameter:=clsGreaterEqualToOperator, iPosition:=1, bIncludeArgumentName:=False)
 
-        clsAcceptableRangeFunc.SetRCommand("instat_calculation$new")
-        clsAcceptableRangeFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
-        clsAcceptableRangeFunc.AddParameter("function_exp", clsROperatorParameter:=clsRangeOrOperator, iPosition:=1)
-        clsAcceptableRangeFunc.AddParameter("result_name", Chr(34) & strRangeName & Chr(34), iPosition:=4)
-        clsAcceptableRangeFunc.SetAssignTo("acceptable_range_test_" & strElementName)
+        clsAcceptableRangeTestFunc.SetRCommand("instat_calculation$new")
+        clsAcceptableRangeTestFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        clsAcceptableRangeTestFunc.AddParameter("function_exp", clsROperatorParameter:=clsRangeOrOperator, iPosition:=1)
+        clsAcceptableRangeTestFunc.AddParameter("result_name", Chr(34) & strRangeName & Chr(34), iPosition:=4)
+        clsAcceptableRangeTestFunc.SetAssignTo("acceptable_range_test_" & strElementName)
     End Sub
 
     Public Sub SetElementParameters(ucrNewControl As ucrCore, iAdditionalPairNo As Integer)
