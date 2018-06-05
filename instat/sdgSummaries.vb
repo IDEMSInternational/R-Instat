@@ -201,7 +201,10 @@ Public Class sdgSummaries
         ucrNudPercentage.SetLinkedDisplayControl(lblPercentage)
         ucrNudNumber.SetLinkedDisplayControl(lblNumber)
 
-        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkUpperQuartile, ucrChkLowerQuartile, ucrChkMedianAbsoluteDeviation, ucrChkKurtosis, ucrChkCoefficientOfVariation, ucrChkSkewness, ucrChkMc, ucrChkQn, ucrChkSn, ucrChkCorrelations, ucrChkCovariance, ucrChkFirst, ucrChkLast, ucrChknth, ucrChkn_distinct, ucrChkTrimmedMean, ucrChkPercentile, ucrChkProportion, ucrChkCount})
+        ucrChkStandardErrorOfMean.SetParameter(New RParameter("standard_error_mean", 30), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "standard_error_mean" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkStandardErrorOfMean.SetText("Standard Error of the Mean")
+
+        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkUpperQuartile, ucrChkLowerQuartile, ucrChkMedianAbsoluteDeviation, ucrChkKurtosis, ucrChkCoefficientOfVariation, ucrChkSkewness, ucrChkMc, ucrChkQn, ucrChkSn, ucrChkCorrelations, ucrChkCovariance, ucrChkFirst, ucrChkLast, ucrChknth, ucrChkn_distinct, ucrChkTrimmedMean, ucrChkPercentile, ucrChkProportion, ucrChkCount, ucrChkStandardErrorOfMean})
         'TODO: This needs modifying summaries functions to allow this options to be implemented.
         tbMissingOptions.Enabled = False
         For Each ctrTemp As ucrCheck In lstCheckboxes
@@ -265,6 +268,7 @@ Public Class sdgSummaries
         ucrChkLast.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChknth.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkn_distinct.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkStandardErrorOfMean.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
 
         If bReset Then
             tbSummaries.SelectedIndex = 0
