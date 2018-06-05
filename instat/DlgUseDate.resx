@@ -166,7 +166,7 @@
     <value>None</value>
   </data>
   <data name="ucrChkShiftQuarterAbbr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>337, 85</value>
+    <value>230, 85</value>
   </data>
   <data name="ucrChkShiftQuarterAbbr.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -232,7 +232,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblShiftQuarter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>324, 16</value>
+    <value>217, 16</value>
   </data>
   <data name="lblShiftQuarter.Size" type="System.Drawing.Size, System.Drawing">
     <value>42, 13</value>
@@ -259,7 +259,7 @@
     <value>None</value>
   </data>
   <data name="ucrChkShiftDekadAbbr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>282, 85</value>
+    <value>338, 85</value>
   </data>
   <data name="ucrChkShiftDekadAbbr.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -286,7 +286,7 @@
     <value>None</value>
   </data>
   <data name="ucrChkShiftQuarterNum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>337, 52</value>
+    <value>230, 52</value>
   </data>
   <data name="ucrChkShiftQuarterNum.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -313,7 +313,7 @@
     <value>None</value>
   </data>
   <data name="ucrChkShiftPentadAbbr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>230, 85</value>
+    <value>282, 85</value>
   </data>
   <data name="ucrChkShiftPentadAbbr.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -340,7 +340,7 @@
     <value>None</value>
   </data>
   <data name="ucrChkShiftDekadNum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>282, 52</value>
+    <value>338, 52</value>
   </data>
   <data name="ucrChkShiftDekadNum.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -400,7 +400,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblShiftDekad.Location" type="System.Drawing.Point, System.Drawing">
-    <value>270, 16</value>
+    <value>326, 16</value>
   </data>
   <data name="lblShiftDekad.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 13</value>
@@ -487,7 +487,7 @@
     <value>None</value>
   </data>
   <data name="ucrChkShiftPentadNum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>230, 52</value>
+    <value>282, 52</value>
   </data>
   <data name="ucrChkShiftPentadNum.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -640,7 +640,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblShiftPentad.Location" type="System.Drawing.Point, System.Drawing">
-    <value>217, 16</value>
+    <value>269, 16</value>
   </data>
   <data name="lblShiftPentad.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 13</value>
@@ -771,7 +771,7 @@ Year
     <value>4</value>
   </data>
   <data name="s.Size" type="System.Drawing.Size, System.Drawing">
-    <value>376, 144</value>
+    <value>378, 144</value>
   </data>
   <data name="s.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -789,7 +789,7 @@ Year
     <value>0</value>
   </data>
   <data name="s.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="ucrChkShiftQuarterAbbr" Row="2" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="lblShiftYear" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblShiftQuarter" Row="0" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftDekadAbbr" Row="2" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftQuarterNum" Row="1" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftPentadAbbr" Row="2" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftDekadNum" Row="1" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftYearNum" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblShiftDekad" Row="0" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftMonthAbbr" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblShiftAbbr" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftPentadNum" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftMonthName" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblShift" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblShiftMonth" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftMonthNum" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblShiftPentad" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="lblShiftDayInYear366" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftDayInYearNum366" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="lblShiftNumeric" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Absolute,50,Absolute,50,Absolute,50,Absolute,50,Absolute,50,Absolute,56" /&gt;&lt;Rows Styles="AutoSize,0,Absolute,31,Absolute,31,Absolute,31" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="ucrChkShiftQuarterAbbr" Row="2" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="lblShiftYear" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblShiftQuarter" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftDekadAbbr" Row="2" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftQuarterNum" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftPentadAbbr" Row="2" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftDekadNum" Row="1" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftYearNum" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblShiftDekad" Row="0" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftMonthAbbr" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblShiftAbbr" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftPentadNum" Row="1" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftMonthName" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblShift" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblShiftMonth" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftMonthNum" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblShiftPentad" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="lblShiftDayInYear366" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftDayInYearNum366" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="lblShiftNumeric" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Absolute,50,Absolute,50,Absolute,50,Absolute,50,Absolute,50,Absolute,58" /&gt;&lt;Rows Styles="AutoSize,0,Absolute,31,Absolute,31,Absolute,31" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="lblShiftStartingMonth.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1030,7 +1030,7 @@ Month</value>
     <value>NoControl</value>
   </data>
   <data name="lblLeapYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>276, 3</value>
+    <value>277, 3</value>
   </data>
   <data name="lblLeapYear.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 26</value>
@@ -1365,7 +1365,7 @@ Year</value>
     <value>None</value>
   </data>
   <data name="ucrChkLeapYearNum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>285, 39</value>
+    <value>286, 39</value>
   </data>
   <data name="ucrChkLeapYearNum.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -1401,7 +1401,7 @@ Year</value>
     <value>4</value>
   </data>
   <data name="tblLayoutOthers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>324, 131</value>
+    <value>326, 131</value>
   </data>
   <data name="tblLayoutOthers.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -1419,7 +1419,7 @@ Year</value>
     <value>0</value>
   </data>
   <data name="tblLayoutOthers.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="ucrChkWeekName" Row="3" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkWeekAbbr" Row="2" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkDayInYearNum" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblDayInMonth" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkWeekdayName" Row="3" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="lblLeapYear" Row="0" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkWeekdayAbbr" Row="2" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkWeekNum" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkDayInMonthNum" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblAbbr" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblName" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblDayInYear" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkWeekdayNum" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="lblWeekDay" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="lblWeek" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="lblNumeric" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkLeapYearNum" Row="1" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Absolute,50,Absolute,50,Absolute,50,Absolute,50,Absolute,56" /&gt;&lt;Rows Styles="AutoSize,0,Absolute,31,Absolute,31,Absolute,31" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="ucrChkWeekName" Row="3" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkWeekAbbr" Row="2" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkDayInYearNum" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblDayInMonth" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkWeekdayName" Row="3" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="lblLeapYear" Row="0" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkWeekdayAbbr" Row="2" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkWeekNum" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkDayInMonthNum" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblAbbr" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblName" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblDayInYear" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkWeekdayNum" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="lblWeekDay" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="lblWeek" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="lblNumeric" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkLeapYearNum" Row="1" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Absolute,50,Absolute,50,Absolute,50,Absolute,50,Absolute,58" /&gt;&lt;Rows Styles="AutoSize,0,Absolute,31,Absolute,31,Absolute,31" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="grpOthers.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 384</value>
@@ -1449,7 +1449,7 @@ Year</value>
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>416, 591</value>
+    <value>572, 591</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 532</value>
