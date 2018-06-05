@@ -121,7 +121,7 @@ Public Class sdgSummaries
         ucrChkPercentile.SetText("Percentile")
 
         ucrInputPercentile.SetParameter(New RParameter("probs", 7))
-        ucrInputPercentile.SetValidationTypeAsNumeric()
+        ucrInputPercentile.SetValidationTypeAsNumeric(dcmMin:=0, dcmMax:=1)
         ucrInputPercentile.AddQuotesIfUnrecognised = False
 
         'linking controls
@@ -288,6 +288,4 @@ Public Class sdgSummaries
         '        clsDefaultFunction.RemoveParameterByName("order_by")
         '    End If
     End Sub
-
-
 End Class
