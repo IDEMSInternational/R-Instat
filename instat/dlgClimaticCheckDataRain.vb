@@ -457,6 +457,7 @@ Public Class dlgClimaticCheckDataRain
         RainyDays()
         OutlierLimitCalc()
         CalculatedFromCalc()
+        TestOkEnabled()
     End Sub
 
     Private Sub AutoFillRainColumn()
