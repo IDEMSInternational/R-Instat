@@ -96,17 +96,6 @@ Public Class dlgDuplicateColumns
         ucrPnlConvertFactorToNumericOptions.SetRDefault("NULL")
         ucrPnlConvertFactorToNumericOptions.SetLinkedDisplayControl(grpFactorToNumericOptions)
 
-        'ucrChkConvertSpecifyDecimalsToDisplay.SetParameter(New RParameter("set_digits", 4))
-        'ucrChkConvertSpecifyDecimalsToDisplay.SetText("Specify Decimals (from Numeric)")
-        'ucrChkConvertSpecifyDecimalsToDisplay.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        'ucrChkConvertSpecifyDecimalsToDisplay.SetRDefault("FALSE")
-        'ucrChkConvertSpecifyDecimalsToDisplay.AddToLinkedControls(ucrLinked:=ucrNudConvertDisplayDecimals, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
-        'ucrNudConvertDisplayDecimals.SetParameter(New RParameter("set_decimals", 5))
-        'ucrNudConvertDisplayDecimals.Minimum = 1
-        'ucrNudConvertDisplayDecimals.Increment = 1
-        'ucrNudConvertDisplayDecimals.SetRDefault("4")
-
         ucrChkConvertSpecifyDecimalsToDisplay.SetParameter(New RParameter("set_decimals", 4))
         ucrChkConvertSpecifyDecimalsToDisplay.SetText("Specify Decimals (from Numeric)")
         ucrChkConvertSpecifyDecimalsToDisplay.SetRDefault("FALSE")
