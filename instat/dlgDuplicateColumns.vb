@@ -27,12 +27,11 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgDuplicateColumns
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDuplicateFunction As New RFunction
+    Private clsDuplicateFunction As RFunction
     Private clsConvertFunction As RFunction
     Public strSelectedDataFrame As String = ""
     Private bUseSelectedColumn As Boolean = False
@@ -97,16 +96,26 @@ Public Class dlgDuplicateColumns
         ucrPnlConvertFactorToNumericOptions.SetRDefault("NULL")
         ucrPnlConvertFactorToNumericOptions.SetLinkedDisplayControl(grpFactorToNumericOptions)
 
-        ucrChkConvertSpecifyDecimalsToDisplay.SetParameter(New RParameter("set_digits", 4))
-        ucrChkConvertSpecifyDecimalsToDisplay.SetText("Specify Decimals (from Numeric)")
-        ucrChkConvertSpecifyDecimalsToDisplay.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkConvertSpecifyDecimalsToDisplay.SetRDefault("FALSE")
-        ucrChkConvertSpecifyDecimalsToDisplay.AddToLinkedControls(ucrLinked:=ucrNudConvertDisplayDecimals, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        'ucrChkConvertSpecifyDecimalsToDisplay.SetParameter(New RParameter("set_digits", 4))
+        'ucrChkConvertSpecifyDecimalsToDisplay.SetText("Specify Decimals (from Numeric)")
+        'ucrChkConvertSpecifyDecimalsToDisplay.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        'ucrChkConvertSpecifyDecimalsToDisplay.SetRDefault("FALSE")
+        'ucrChkConvertSpecifyDecimalsToDisplay.AddToLinkedControls(ucrLinked:=ucrNudConvertDisplayDecimals, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrNudConvertDisplayDecimals.SetParameter(New RParameter("set_decimals", 5))
-        ucrNudConvertDisplayDecimals.Minimum = 1
+        'ucrNudConvertDisplayDecimals.SetParameter(New RParameter("set_decimals", 5))
+        'ucrNudConvertDisplayDecimals.Minimum = 1
+        'ucrNudConvertDisplayDecimals.Increment = 1
+        'ucrNudConvertDisplayDecimals.SetRDefault("4")
+
+        ucrChkConvertSpecifyDecimalsToDisplay.SetParameter(New RParameter("set_decimals", 4))
+        ucrChkConvertSpecifyDecimalsToDisplay.SetText("Specify Decimals (from Numeric)")
+        ucrChkConvertSpecifyDecimalsToDisplay.SetRDefault("FALSE")
+        ucrChkConvertSpecifyDecimalsToDisplay.AddToLinkedControls(ucrNudConvertDisplayDecimals, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrNudConvertDisplayDecimals.SetParameter(New RParameter("set_digits", 5))
+        ucrNudConvertDisplayDecimals.Minimum = 0
         ucrNudConvertDisplayDecimals.Increment = 1
-        ucrNudConvertDisplayDecimals.SetRDefault("4")
+        ucrNudConvertDisplayDecimals.SetRDefault("0")
 
         ucrChkConvertKeepAttributes.SetParameter(New RParameter("keep_attr", 6))
         ucrChkConvertKeepAttributes.SetText("Keep Attributes")
@@ -115,7 +124,6 @@ Public Class dlgDuplicateColumns
         ucrPnlConvertTo.AddToLinkedControls(ucrChkConvertCreateLabels, {rdoConvertToNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkConvertCreateLabels.SetParameter(New RParameter("keep.labels", 7))
         ucrChkConvertCreateLabels.SetText("Create Labels")
-        ucrChkConvertCreateLabels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkConvertCreateLabels.SetRDefault("TRUE")
 
         'column position options
@@ -136,16 +144,15 @@ Public Class dlgDuplicateColumns
         ucrInputDuplicateColumnName.SetItemsTypeAsColumns()
         ucrInputDuplicateColumnName.SetDefaultTypeAsColumn()
         ucrInputDuplicateColumnName.SetValidationTypeAsRVariable()
+        ucrInputDuplicateColumnName.bAllowNonConditionValues = True
     End Sub
 
     Private Sub SetDefaults()
         clsDuplicateFunction = New RFunction
         clsConvertFunction = New RFunction
-        'ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.lstAfterCodes.Clear()
 
         ucrSelectorForDuplicateColumn.Reset()
-        ucrInputDuplicateColumnName.bAllowNonConditionValues = True
         ucrInputDuplicateColumnName.Reset()
         ucrInputDuplicateColumnName.SetName("")
 
@@ -175,7 +182,6 @@ Public Class dlgDuplicateColumns
         ucrChkConvertKeepAttributes.SetRCode(clsConvertFunction, bReset)
         ucrChkConvertCreateLabels.SetRCode(clsConvertFunction, bReset)
 
-        'ucrChkChangeType.SetRCode(clsConvertFunction)
         ucrChkChangeType.SetRSyntax(ucrBase.clsRsyntax, bReset)
     End Sub
 
