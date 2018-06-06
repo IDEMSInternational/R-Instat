@@ -349,7 +349,7 @@
     <value>tbSummaries</value>
   </data>
   <data name="&gt;&gt;tbMissingOptions.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="ucrInputN.Location" type="System.Drawing.Point, System.Drawing">
     <value>298, 17</value>
@@ -1747,7 +1747,7 @@
     <value>tbSummaries</value>
   </data>
   <data name="&gt;&gt;tbModel.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="tbSummaries.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 7</value>

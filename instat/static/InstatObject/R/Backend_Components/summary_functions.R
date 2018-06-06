@@ -596,14 +596,22 @@ proportion_calc <- function(x, prop_test = "==", prop_value, As_percentage = FAL
   if(!na.rm){
     if(sum(is.na(x)) > 0) return(NA)
     y <- x[eval(parse(text = paste("x", prop_value, sep = prop_test)))]
-    if(!As_percentage){return(round(length(y)/length(x),digits = 2))}
-    else {return(paste0(round((length(y)/length(x)*100),digits = 2 )))}  
+    if(!As_percentage){
+      return(round(length(y)/length(x),digits = 2))
+      }
+    else {
+      return(round((length(y)/length(x)*100),digits = 2 ))
+      }  
   }
   else {
     remove.na <- na.omit(x)
     y <- remove.na[eval(parse(text = paste("remove.na", prop_value, sep = prop_test)))]
-    if (!As_percentage){ return(round(length(y)/length(remove.na), digits = 2))}
-    else{return(paste0(round(length(y)/length(remove.na)*100, digits = 2 )))}
+    if (!As_percentage){
+      return(round(length(y)/length(remove.na), digits = 2))
+      }
+    else{
+      return(round(length(y)/length(remove.na)*100, digits = 2 ))
+      }
   }
 }
 
