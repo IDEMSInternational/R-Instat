@@ -56,6 +56,8 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrSelectorRain = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.cmdOmitMonths = New System.Windows.Forms.Button()
+        Me.grpLogicalCalculatedColumns.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblStation
@@ -110,6 +112,8 @@ Partial Class dlgClimaticCheckDataRain
         '
         'grpLogicalCalculatedColumns
         '
+        Me.grpLogicalCalculatedColumns.Controls.Add(Me.ucrChkLogicalColumns)
+        Me.grpLogicalCalculatedColumns.Controls.Add(Me.ucrChkCalculatedColumns)
         resources.ApplyResources(Me.grpLogicalCalculatedColumns, "grpLogicalCalculatedColumns")
         Me.grpLogicalCalculatedColumns.Name = "grpLogicalCalculatedColumns"
         Me.grpLogicalCalculatedColumns.TabStop = False
@@ -284,15 +288,20 @@ Partial Class dlgClimaticCheckDataRain
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'cmdOmitMonths
+        '
+        resources.ApplyResources(Me.cmdOmitMonths, "cmdOmitMonths")
+        Me.cmdOmitMonths.Name = "cmdOmitMonths"
+        Me.cmdOmitMonths.UseVisualStyleBackColor = True
+        '
         'dlgClimaticCheckDataRain
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmdOmitMonths)
         Me.Controls.Add(Me.lblCoeff)
         Me.Controls.Add(Me.ucrNudCoeff)
         Me.Controls.Add(Me.ucrChkOmitZero)
-        Me.Controls.Add(Me.ucrChkCalculatedColumns)
-        Me.Controls.Add(Me.ucrChkLogicalColumns)
         Me.Controls.Add(Me.lblSkewnessWeight)
         Me.Controls.Add(Me.ucrNudSkewnessWeight)
         Me.Controls.Add(Me.lblRainDays)
@@ -325,6 +334,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgClimaticCheckDataRain"
+        Me.grpLogicalCalculatedColumns.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -363,4 +373,5 @@ Partial Class dlgClimaticCheckDataRain
     Friend WithEvents ucrChkOmitZero As ucrCheck
     Friend WithEvents lblCoeff As Label
     Friend WithEvents ucrNudCoeff As ucrNud
+    Friend WithEvents cmdOmitMonths As Button
 End Class
