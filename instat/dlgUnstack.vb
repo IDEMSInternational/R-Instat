@@ -26,8 +26,13 @@ Public Class dlgUnstack
     Private clsDcastFunction As New RFunction
     Private clsBaseRCode As New RCodeStructure
 
+    Private iReceiverMaxY As Integer
+    Private iReceiverLabelMaxY As Integer
+
     Private Sub dlgunstack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
+            iReceiverMaxY = ucrReceiverCarryColumns.Location.Y
+            iReceiverLabelMaxY = lblCarryColumns.Location.Y
             InitialiseDialog()
             bFirstLoad = False
         End If
@@ -203,7 +208,18 @@ Public Class dlgUnstack
             clsDcastFunction.RemoveAssignTo()
         End If
         ucrNewDFName.SetRCode(clsBaseRCode)
+        CarryColumnsLabelReceiverLocation()
         SetFormula()
+    End Sub
+
+    Private Sub CarryColumnsLabelReceiverLocation()
+        If rdoRestoreHierarchy.Checked Then
+            lblCarryColumns.Location = New Point(lblCarryColumns.Location.X, iReceiverLabelMaxY / 1.4)
+            ucrReceiverCarryColumns.Location = New Point(ucrReceiverCarryColumns.Location.X, iReceiverMaxY / 1.35)
+        Else
+            lblCarryColumns.Location = New Point(lblCarryColumns.Location.X, iReceiverLabelMaxY)
+            ucrReceiverCarryColumns.Location = New Point(ucrReceiverCarryColumns.Location.X, iReceiverMaxY)
+        End If
     End Sub
 
     Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewDFName.ControlContentsChanged, ucrReceiverFactorToUnstackby.ControlContentsChanged, ucrReceiverCarryColumns.ControlContentsChanged
