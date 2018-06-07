@@ -108,7 +108,7 @@ Public Class dlgClimaticBoxPlot
         ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
         ucrReceiverYear.bAutoFill = True
         ucrReceiverYear.bWithQuotes = False
-        ucrReceiverYear.SetIncludedDataTypes({"numeric"})
+        ucrReceiverYear.SetIncludedDataTypes({"numeric", "factor"})
         ucrReceiverYear.strSelectorHeading = "Year Variables"
 
         ucrReceiverWithinYear.SetParameter(New RParameter("x", 1))
