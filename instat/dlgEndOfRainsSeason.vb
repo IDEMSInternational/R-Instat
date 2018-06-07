@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgEndOfRainsSeason
     Private bFirstload As Boolean = True
@@ -91,7 +92,7 @@ Public Class dlgEndOfRainsSeason
         ucrReceiverDOY.strSelectorHeading = "Day Variables"
 
         ucrReceiverRainfall.SetParameter(New RParameter("x", 0))
-        ucrReceiverRainfall.SetParameterIsRFunction()
+        ucrReceiverRainfall.SetParameterIsString()
         ucrReceiverRainfall.bWithQuotes = False
         ucrReceiverRainfall.Selector = ucrSelectorForWaterBalance
         ucrReceiverRainfall.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "rain" & Chr(34)})
@@ -104,7 +105,7 @@ Public Class dlgEndOfRainsSeason
         ucrReceiverYear.strSelectorHeading = "Year Variables"
 
         ucrReceiverEvaporation.Selector = ucrSelectorForWaterBalance
-        ucrReceiverEvaporation.SetParameterIsRFunction()
+        ucrReceiverEvaporation.SetParameterIsString()
         ucrReceiverEvaporation.bWithQuotes = False
         ucrReceiverEvaporation.SetParameter(New RParameter("x", 0))
 
@@ -637,7 +638,8 @@ Public Class dlgEndOfRainsSeason
         Evaporation()
     End Sub
 
-    Private Sub ucrPnlEvaporation_ContextMenuChanged(sender As Object, e As EventArgs) Handles ucrPnlEvaporation.ContextMenuChanged
+
+    Private Sub ucrPnlEvaporation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlEvaporation.ControlValueChanged
         Evaporation()
         TestOKEnabled()
     End Sub
@@ -671,4 +673,5 @@ Public Class dlgEndOfRainsSeason
             clsPMaxOperatorMin.RemoveParameterByName("evaporation.val")
         End If
     End Sub
+
 End Class
