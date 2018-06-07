@@ -90,7 +90,7 @@ Public Class dlgUnstack
         ucrPnlUnstackCol.AddRCodeIsRFunctionCondition(rdoRestoreHierarchy, bNewIsPositive:=False)
         'TODO add function name condition for rdoMultiple
 
-        ucrPnlUnstackCol.AddToLinkedControls(ucrReceiverColumnToUnstack, {rdoSingle}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlUnstackCol.AddToLinkedControls(ucrReceiverColumnToUnstack, {rdoSingle}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlUnstackCol.AddToLinkedControls(ucrMultipleColumnsReceiver, {rdoMultiple}, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverColumnToUnstack.SetLinkedDisplayControl(lblColumnToUnstack)
         ucrMultipleColumnsReceiver.SetLinkedDisplayControl(lblMultipleColumns)
@@ -201,7 +201,6 @@ Public Class dlgUnstack
             clsBaseRCode = clsUnstackedOperator
             ucrBase.clsRsyntax.SetBaseROperator(clsUnstackedOperator)
             clsDcastFunction.RemoveAssignTo()
-            clsDcastFunction.RemoveParameterByName("value.var")
         End If
         ucrNewDFName.SetRCode(clsBaseRCode)
         SetFormula()
