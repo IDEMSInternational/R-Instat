@@ -388,6 +388,9 @@ Public Class dlgClimaticBoxPlot
                         ucrInputTemp.SetName(strNone)
                         bUpdateComboOptions = True
                     End If
+                    If strChangedText = strXasFactor AndAlso ucrInputTemp.GetText = strXAxis OrElse strChangedText = strXAxis AndAlso ucrInputTemp.GetText = strXasFactor Then
+                        ucrInputTemp.SetName(strNone)
+                    End If
                 Next
             End If
             UpdateParameters()
