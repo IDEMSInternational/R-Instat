@@ -40,12 +40,14 @@ Public Class dlgClimaticBoxPlot
     Private clsFilteredDataOperator As New ROperator
     Private clsFilterElementOperator As New ROperator
     Private clsFilterElementFunction As New RFunction
+    Private clsAsFactorFunction As New RFunction
 
     Private strFacetRow As String = "Facet Row"
     Private strFacetCol As String = "Facet Column"
     Private strXAxis As String = "X Axis"
     Private strColour As String = "Colour Axis"
     Private strNone As String = "None"
+    Private strXasFactor As String = "X Axis Factor"
 
     Private bUpdateComboOptions As Boolean = True
     Private bUpdatingParameters As Boolean = False
@@ -97,7 +99,7 @@ Public Class dlgClimaticBoxPlot
         ucrReceiverStation.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "station" & Chr(34)})
         ucrReceiverStation.bAutoFill = True
         ucrReceiverStation.bWithQuotes = False
-        ucrReceiverWithinYear.SetIncludedDataTypes({"factor"})
+        ucrReceiverStation.SetIncludedDataTypes({"factor"})
         ucrReceiverStation.strSelectorHeading = "Station Variables"
 
         ucrReceiverYear.SetParameterIsString()
@@ -106,7 +108,7 @@ Public Class dlgClimaticBoxPlot
         ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
         ucrReceiverYear.bAutoFill = True
         ucrReceiverYear.bWithQuotes = False
-        ucrReceiverYear.SetIncludedDataTypes({"factor"})
+        ucrReceiverYear.SetIncludedDataTypes({"numeric"})
         ucrReceiverYear.strSelectorHeading = "Year Variables"
 
         ucrReceiverWithinYear.SetParameter(New RParameter("x", 1))
@@ -119,7 +121,7 @@ Public Class dlgClimaticBoxPlot
         ucrReceiverWithinYear.bAddParameterIfEmpty = True
 
         ' summary
-        ucrReceiverElement.SetParameter(New RParameter("y", 1))
+        ucrReceiverElement.SetParameter(New RParameter("y", 0))
         ucrReceiverElement.SetParameterIsString()
         ucrReceiverElement.bWithQuotes = False
         ucrReceiverElement.strSelectorHeading = "Variables"
@@ -174,7 +176,7 @@ Public Class dlgClimaticBoxPlot
         ucrInputStation.SetItems({strXAxis, strColour, strFacetRow, strFacetCol, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
 
-        ucrInputYear.SetItems({strXAxis, strColour, strFacetRow, strFacetCol, strNone})
+        ucrInputYear.SetItems({strXAxis, strXasFactor, strColour, strFacetRow, strFacetCol, strNone})
         ucrInputYear.SetDropDownStyleAsNonEditable()
 
         ucrInputWithinYear.SetItems({strXAxis, strColour, strFacetRow, strFacetCol, strNone})
@@ -201,6 +203,7 @@ Public Class dlgClimaticBoxPlot
         clsFilteredDataOperator = New ROperator
         clsFilterElementOperator = New ROperator
         clsFilterElementFunction = New RFunction
+        clsAsFactorFunction = New RFunction
 
         clsFacetFunction.SetPackageName("ggplot2")
         clsFacetFunction.SetRCommand("facet_grid")
@@ -251,6 +254,8 @@ Public Class dlgClimaticBoxPlot
         clsRaesFunction.SetPackageName("ggplot2")
         clsRaesFunction.SetRCommand("aes")
         clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
+
+        clsAsFactorFunction.SetRCommand("as.factor")
 
         clsRgeomPlotFunction.SetPackageName("ggplot2")
         clsRgeomPlotFunction.SetRCommand("geom_boxplot")
@@ -411,6 +416,11 @@ Public Class dlgClimaticBoxPlot
                 dctComboReceiver(ucrInputTemp).ChangeParameterName("x")
                 dctComboReceiver(ucrInputTemp).SetParameterIncludeArgumentName(True)
                 dctComboReceiver(ucrInputTemp).SetRCode(clsRaesFunction)
+            ElseIf strTemp = strXasFactor Then
+                dctComboReceiver(ucrInputTemp).ChangeParameterName("x")
+                dctComboReceiver(ucrInputTemp).SetParameterIncludeArgumentName(False)
+                dctComboReceiver(ucrInputTemp).SetRCode(clsAsFactorFunction)
+                clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsFactorFunction, iPosition:=1)
             ElseIf strTemp = strColour Then
                 If rdoJitter.Checked Then
                     dctComboReceiver(ucrInputTemp).ChangeParameterName("color")
