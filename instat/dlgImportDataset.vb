@@ -343,7 +343,6 @@ Public Class dlgImportDataset
 
         strFilePathSystem = ""
         strCurrentDirectory = ""
-        strFileToOpenOn = ""
         strFilePathR = ""
         strFileType = ""
 
