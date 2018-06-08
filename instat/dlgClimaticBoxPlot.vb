@@ -42,6 +42,7 @@ Public Class dlgClimaticBoxPlot
     Private clsFilterElementFunction As New RFunction
     Private clsAsFactorFunction As New RFunction
 
+    Private strFacetWrap As String = "Facet Wrap"
     Private strFacetRow As String = "Facet Row"
     Private strFacetCol As String = "Facet Column"
     Private strXAxis As String = "X Axis"
@@ -173,13 +174,13 @@ Public Class dlgClimaticBoxPlot
         ucrChkVerticalXTickMarkers.SetText("Vertical X Tick Markers")
         ucrChkVerticalXTickMarkers.SetParameter(clsThemeParam, bNewAddRemoveParameter:=True, bNewChangeParameterValue:=False)
 
-        ucrInputStation.SetItems({strXAxis, strColour, strFacetRow, strFacetCol, strNone})
+        ucrInputStation.SetItems({strXAxis, strColour, strFacetWrap, strFacetRow, strFacetCol, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
 
-        ucrInputYear.SetItems({strXAxis, strXasFactor, strColour, strFacetRow, strFacetCol, strNone})
+        ucrInputYear.SetItems({strXAxis, strXasFactor, strColour, strFacetWrap, strFacetRow, strFacetCol, strNone})
         ucrInputYear.SetDropDownStyleAsNonEditable()
 
-        ucrInputWithinYear.SetItems({strXAxis, strColour, strFacetRow, strFacetCol, strNone})
+        ucrInputWithinYear.SetItems({strXAxis, strColour, strFacetWrap, strFacetRow, strFacetCol, strNone})
         ucrInputWithinYear.SetDropDownStyleAsNonEditable()
 
         ucrSavePlot.SetPrefix("boxplot")
@@ -206,7 +207,6 @@ Public Class dlgClimaticBoxPlot
         clsAsFactorFunction = New RFunction
 
         clsFacetFunction.SetPackageName("ggplot2")
-        clsFacetFunction.SetRCommand("facet_grid")
         clsFacetRowOp.SetOperation("+")
         clsFacetRowOp.bBrackets = False
         clsFacetColOp.SetOperation("+")
@@ -214,8 +214,6 @@ Public Class dlgClimaticBoxPlot
         clsFacetOp.SetOperation("~")
         clsFacetOp.bForceIncludeOperation = True
         clsFacetOp.bBrackets = False
-        clsFacetOp.AddParameter("left", clsROperatorParameter:=clsFacetRowOp, iPosition:=0)
-        clsFacetOp.AddParameter("right", clsROperatorParameter:=clsFacetColOp, iPosition:=1)
         clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetOp)
 
         clsFilterElementOperator.SetOperation(">")
@@ -339,6 +337,7 @@ Public Class dlgClimaticBoxPlot
             End If
         End If
         UpdateParameters()
+        AddRemoveFacets()
     End Sub
 
     Private Sub cmdBoxPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdBoxPlotOptions.Click
@@ -391,6 +390,9 @@ Public Class dlgClimaticBoxPlot
                     If strChangedText = strXasFactor AndAlso ucrInputTemp.GetText = strXAxis OrElse strChangedText = strXAxis AndAlso ucrInputTemp.GetText = strXasFactor Then
                         ucrInputTemp.SetName(strNone)
                     End If
+                    If strChangedText = strFacetWrap AndAlso ucrInputTemp.GetText = strFacetRow OrElse strChangedText = strFacetRow AndAlso ucrInputTemp.GetText = strFacetWrap OrElse strChangedText = strFacetWrap AndAlso ucrInputTemp.GetText = strFacetCol OrElse strChangedText = strFacetCol AndAlso ucrInputTemp.GetText = strFacetWrap Then
+                        ucrInputTemp.SetName(strNone)
+                    End If
                 Next
             End If
             UpdateParameters()
@@ -406,6 +408,7 @@ Public Class dlgClimaticBoxPlot
         clsRaesFunction.RemoveParameterByName("fill")
 
         For Each ucrInputTemp As ucrInputComboBox In dctComboReceiver.Keys
+            clsFacetOp.RemoveParameterByName("wrap" & ucrInputTemp.Name)
             clsFacetColOp.RemoveParameterByName("col" & ucrInputTemp.Name)
             clsFacetRowOp.RemoveParameterByName("row" & ucrInputTemp.Name)
         Next
@@ -433,6 +436,9 @@ Public Class dlgClimaticBoxPlot
                     dctComboReceiver(ucrInputTemp).SetParameterIncludeArgumentName(True)
                 End If
                 dctComboReceiver(ucrInputTemp).SetRCode(clsRaesFunction)
+            ElseIf strTemp = strFacetWrap Then
+                dctComboReceiver(ucrInputTemp).ChangeParameterName("wrap" & ucrInputTemp.Name)
+                dctComboReceiver(ucrInputTemp).SetRCode(clsFacetOp)
             ElseIf strTemp = strFacetCol Then
                 dctComboReceiver(ucrInputTemp).ChangeParameterName("col" & ucrInputTemp.Name)
                 dctComboReceiver(ucrInputTemp).SetRCode(clsFacetColOp)
@@ -457,6 +463,7 @@ Public Class dlgClimaticBoxPlot
 
     Private Sub AddRemoveFacets()
         Dim strText As String
+        Dim bWrap As Boolean = False
         Dim bCol As Boolean = False
         Dim bRow As Boolean = False
 
@@ -464,7 +471,10 @@ Public Class dlgClimaticBoxPlot
             clsBaseOperator.RemoveParameterByName("facets")
             For Each kvpTemp As KeyValuePair(Of ucrInputComboBox, ucrReceiverSingle) In dctComboReceiver
                 strText = kvpTemp.Key.GetText()
-                If strText = strFacetCol OrElse strText = strFacetRow AndAlso Not kvpTemp.Value.IsEmpty Then
+                If strText = strFacetWrap OrElse strText = strFacetCol OrElse strText = strFacetRow AndAlso Not kvpTemp.Value.IsEmpty Then
+                    If strText = strFacetWrap Then
+                        bWrap = True
+                    End If
                     If strText = strFacetCol Then
                         bCol = True
                     End If
@@ -473,18 +483,31 @@ Public Class dlgClimaticBoxPlot
                     End If
                 End If
             Next
-            If bRow OrElse bCol Then
+            If bWrap OrElse bRow OrElse bCol Then
                 clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
+            End If
+            If bWrap Then
+                clsFacetFunction.SetRCommand("facet_wrap")
+                clsFacetOp.AddParameter("wrap", iPosition:=0)
+            Else
+                clsFacetOp.RemoveParameterByName("wrap")
+            End If
+            If bRow OrElse bCol Then
+                clsFacetFunction.SetRCommand("facet_grid")
             End If
             If bRow Then
                 clsFacetOp.AddParameter("left", clsROperatorParameter:=clsFacetRowOp, iPosition:=0)
-            Else
+            ElseIf bCol AndAlso bWrap = False Then
                 clsFacetOp.AddParameter("left", ".", iPosition:=0)
+            Else
+                clsFacetOp.RemoveParameterByName("left")
             End If
             If bCol Then
                 clsFacetOp.AddParameter("right", clsROperatorParameter:=clsFacetColOp, iPosition:=1)
-            Else
+            ElseIf bRow AndAlso bWrap = False Then
                 clsFacetOp.AddParameter("right", ".", iPosition:=1)
+            Else
+                clsFacetOp.RemoveParameterByName("right")
             End If
         End If
     End Sub
