@@ -342,7 +342,6 @@ Public Class dlgStartofRains
         clsTRRollingSumFunction.bToScriptAsRString = True
 
         clsListToTalRain.SetRCommand("list")
-        clsListToTalRain.AddParameter("manip1", clsRFunctionParameter:=clsGroupByStation, bIncludeArgumentName:=False)
 
         'SOR_Filter
         'clsDayFromAndToOperator.bToScriptAsRString = True
@@ -352,13 +351,13 @@ Public Class dlgStartofRains
         clsSORFilter.AddParameter("sub_calculations", clsRFunctionParameter:=clsListSubCalc, iPosition:=4)
         clsSORFilter.SetAssignTo("start_of_rains_filter")
 
-        clsSORFilterIfelse.SetRCommand("ifelse")
-        clsSORFilterIfelse.AddParameter("start", clsRFunctionParameter:=clsSORFilterIsNA, bIncludeArgumentName:=False)
-
         clsSORFilterIsNA.SetRCommand("is.na")
-        clsSORFilterIsNA.AddParameter("is.na", clsROperatorParameter:=clsSORFilterOperator, bIncludeArgumentName:=False, iPosition:=0)
+        clsSORFilterIsNA.AddParameter("start", clsROperatorParameter:=clsSORFilterOperator, bIncludeArgumentName:=False)
+
+        clsSORFilterIfelse.SetRCommand("ifelse")
+        clsSORFilterIfelse.AddParameter("is.na", clsRFunctionParameter:=clsSORFilterIsNA, bIncludeArgumentName:=False, iPosition:=0)
         clsSORFilterIfelse.AddParameter("366", "366", bIncludeArgumentName:=False, iPosition:=1)
-        clsSORFilterIfelse.AddParameter("SOR_day", strParameterValue:=strStartDoy, bIncludeArgumentName:=False, iPosition:=2)
+        clsSORFilterIfelse.AddParameter("start", clsROperatorParameter:=clsSORFilterOperator, bIncludeArgumentName:=False, iPosition:=2)
 
         clsLessFilterOperator.SetOperation("<=")
         clsLessFilterOperator.AddParameter("right", clsRFunctionParameter:=clsSORFilterIfelse, bIncludeArgumentName:=False, iPosition:=1)
@@ -606,7 +605,6 @@ Public Class dlgStartofRains
 
         clsCombinationManipList.SetRCommand("list")
         clsCombinationManipList.AddParameter("manip1", clsRFunctionParameter:=clsSORFilter, bIncludeArgumentName:=False, iPosition:=0)
-        clsCombinationManipList.AddParameter("manip2", clsRFunctionParameter:=clsGroupByStationYear, bIncludeArgumentName:=False, iPosition:=1)
 
         clsCombinationSubCalcList.SetRCommand("list")
         clsCombinationSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsSORStart, bIncludeArgumentName:=False, iPosition:=0)
@@ -620,7 +618,6 @@ Public Class dlgStartofRains
         clsManipStartFirstList.SetRCommand("list")
         clsManipStartFirstList.AddParameter("manp1", clsRFunctionParameter:=clsCombinedFilter, bIncludeArgumentName:=False, iPosition:=0)
         clsManipStartFirstList.AddParameter("manp2", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False, iPosition:=1)
-        clsManipStartFirstList.AddParameter("manp3", clsRFunctionParameter:=clsGroupByStationYear, bIncludeArgumentName:=False, iPosition:=2)
 
         'Run Calculations
         clsApplyInstatFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
@@ -746,8 +743,10 @@ Public Class dlgStartofRains
 
     Private Sub GroupByStationOptions()
         If Not ucrReceiverStation.IsEmpty Then
-            clsGroupByStation.AddParameter("calculated_from", "list("& strCurrDataName & "=" & ucrReceiverStation.GetVariableNames & ")", iPosition:=3)
+            clsListToTalRain.AddParameter("manip1", clsRFunctionParameter:=clsGroupByStation, bIncludeArgumentName:=False)
+            clsGroupByStation.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames & ")", iPosition:=3)
         Else
+            clsListToTalRain.RemoveParameterByName("manip1")
             clsGroupByStation.RemoveParameterByName("calculated_from")
         End If
     End Sub
@@ -755,7 +754,11 @@ Public Class dlgStartofRains
     Private Sub GroupByStationYearOptions()
         If Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty Then
             clsGroupByStationYear.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & "," & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames & ")", iPosition:=3)
+            clsCombinationManipList.AddParameter("manip2", clsRFunctionParameter:=clsGroupByStationYear, bIncludeArgumentName:=False, iPosition:=1)
+            clsManipStartFirstList.AddParameter("manp3", clsRFunctionParameter:=clsGroupByStationYear, bIncludeArgumentName:=False, iPosition:=2)
         Else
+            clsCombinationManipList.RemoveParameterByName("manip2")
+            clsManipStartFirstList.RemoveParameterByName("manp3")
             clsGroupByStationYear.RemoveParameterByName("calculated_from")
         End If
     End Sub
