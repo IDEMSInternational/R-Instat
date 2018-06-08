@@ -687,6 +687,9 @@ Public Class dlgStartofRains
         Else
             bOkEnabled = False
         End If
+        If Not (ucrChkTotalRainfall.Checked OrElse ucrChkNumberOfRainyDays.Checked OrElse ucrChkDrySpell.Checked OrElse ucrChkDryPeriod.Checked) Then
+            bOkEnabled = False
+        End If
         If ucrChkAsDoy.Checked AndAlso ucrChkAsDate.Checked Then
             If Not ucrInputNewDoyColumnName.IsEmpty AndAlso Not ucrInputNewDateColumnName.IsEmpty Then
                 bOkEnabled = True
