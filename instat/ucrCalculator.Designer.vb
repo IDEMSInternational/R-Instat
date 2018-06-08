@@ -46,7 +46,7 @@ Partial Class ucrCalculator
         Me.chkShowArguments = New System.Windows.Forms.CheckBox()
         Me.grpBasic = New System.Windows.Forms.GroupBox()
         Me.cmdClear = New System.Windows.Forms.Button()
-        Me.cmdDelete = New System.Windows.Forms.Button()
+        Me.cmdComma = New System.Windows.Forms.Button()
         Me.cmdBrackets = New System.Windows.Forms.Button()
         Me.cmdPower = New System.Windows.Forms.Button()
         Me.cmdDivide = New System.Windows.Forms.Button()
@@ -98,6 +98,7 @@ Partial Class ucrCalculator
         Me.cmdLead = New System.Windows.Forms.Button()
         Me.cmdLag = New System.Windows.Forms.Button()
         Me.grpSummary = New System.Windows.Forms.GroupBox()
+        Me.cmdMode = New System.Windows.Forms.Button()
         Me.cmdFirst = New System.Windows.Forms.Button()
         Me.cmdLast = New System.Windows.Forms.Button()
         Me.cmdnth = New System.Windows.Forms.Button()
@@ -207,12 +208,12 @@ Partial Class ucrCalculator
         Me.cmdAcos = New System.Windows.Forms.Button()
         Me.cmdCos = New System.Windows.Forms.Button()
         Me.cmdSqrt = New System.Windows.Forms.Button()
-        Me.cmdMode = New System.Windows.Forms.Button()
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSaveResultInto = New instat.ucrInputComboBox()
         Me.ucrInputTryMessage = New instat.ucrInputTextBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
+        Me.cmdNA = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -256,7 +257,7 @@ Partial Class ucrCalculator
         'grpBasic
         '
         Me.grpBasic.Controls.Add(Me.cmdClear)
-        Me.grpBasic.Controls.Add(Me.cmdDelete)
+        Me.grpBasic.Controls.Add(Me.cmdComma)
         Me.grpBasic.Controls.Add(Me.cmdBrackets)
         Me.grpBasic.Controls.Add(Me.cmdPower)
         Me.grpBasic.Controls.Add(Me.cmdDivide)
@@ -284,11 +285,11 @@ Partial Class ucrCalculator
         Me.cmdClear.Name = "cmdClear"
         Me.cmdClear.UseVisualStyleBackColor = True
         '
-        'cmdDelete
+        'cmdComma
         '
-        resources.ApplyResources(Me.cmdDelete, "cmdDelete")
-        Me.cmdDelete.Name = "cmdDelete"
-        Me.cmdDelete.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdComma, "cmdComma")
+        Me.cmdComma.Name = "cmdComma"
+        Me.cmdComma.UseVisualStyleBackColor = True
         '
         'cmdBrackets
         '
@@ -654,6 +655,12 @@ Partial Class ucrCalculator
         Me.grpSummary.Name = "grpSummary"
         Me.grpSummary.TabStop = False
         '
+        'cmdMode
+        '
+        resources.ApplyResources(Me.cmdMode, "cmdMode")
+        Me.cmdMode.Name = "cmdMode"
+        Me.cmdMode.UseVisualStyleBackColor = True
+        '
         'cmdFirst
         '
         resources.ApplyResources(Me.cmdFirst, "cmdFirst")
@@ -912,6 +919,7 @@ Partial Class ucrCalculator
         '
         'grpLogical
         '
+        Me.grpLogical.Controls.Add(Me.cmdNA)
         Me.grpLogical.Controls.Add(Me.cmdNear)
         Me.grpLogical.Controls.Add(Me.cmdBetween)
         Me.grpLogical.Controls.Add(Me.cmdIsFalse)
@@ -1393,12 +1401,6 @@ Partial Class ucrCalculator
         Me.cmdSqrt.Name = "cmdSqrt"
         Me.cmdSqrt.UseVisualStyleBackColor = True
         '
-        'cmdMode
-        '
-        resources.ApplyResources(Me.cmdMode, "cmdMode")
-        Me.cmdMode.Name = "cmdMode"
-        Me.cmdMode.UseVisualStyleBackColor = True
-        '
         'ucrInputCalOptions
         '
         Me.ucrInputCalOptions.AddQuotesIfUnrecognised = True
@@ -1437,15 +1439,21 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.strNcFilePath = ""
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
+        'cmdNA
+        '
+        resources.ApplyResources(Me.cmdNA, "cmdNA")
+        Me.cmdNA.Name = "cmdNA"
+        Me.cmdNA.UseVisualStyleBackColor = True
+        '
         'ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.grpLogical)
         Me.Controls.Add(Me.grpSummary)
         Me.Controls.Add(Me.grpProbabilty)
         Me.Controls.Add(Me.grpMaths)
         Me.Controls.Add(Me.grpTransform)
-        Me.Controls.Add(Me.grpLogical)
         Me.Controls.Add(Me.grpStrings)
         Me.Controls.Add(Me.grpDates)
         Me.Controls.Add(Me.cmdHelp)
@@ -1606,7 +1614,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdSum As Button
     Friend WithEvents cmdMiss As Button
     Friend WithEvents cmdLength As Button
-    Friend WithEvents cmdDelete As Button
+    Friend WithEvents cmdComma As Button
     Friend WithEvents cmdClear As Button
     Friend WithEvents cmdMultiply As Button
     Friend WithEvents cmdpercentrank As Button
@@ -1647,4 +1655,6 @@ Partial Class ucrCalculator
     Friend WithEvents cmdLast As Button
     Friend WithEvents cmdnth As Button
     Friend WithEvents cmdMode As Button
+    Friend WithEvents Button1 As Button
+    Friend WithEvents cmdNA As Button
 End Class

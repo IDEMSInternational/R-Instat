@@ -153,8 +153,8 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("<")
     End Sub
 
-    Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
-        ucrReceiverForCalculation.Backspace()
+    Private Sub cmdComma_Click(sender As Object, e As EventArgs) Handles cmdComma.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(",")
     End Sub
 
     Private Sub cmdPi_Click(sender As Object, e As EventArgs) Handles cmdPi.Click
@@ -1199,5 +1199,9 @@ Public Class ucrCalculator
 
     Private Sub cmdMode_Click(sender As Object, e As EventArgs) Handles cmdMode.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("summary_mode()", 1)
+    End Sub
+
+    Private Sub cmdNA_Click(sender As Object, e As EventArgs) Handles cmdNA.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("NA")
     End Sub
 End Class

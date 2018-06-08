@@ -1312,7 +1312,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticPICSARainfall_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSARainfall.Click
-        dlgPCSARainfall.ShowDialog()
+        dlgPICSARainfall.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticPICSATemperature_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSATemperature.Click
@@ -1901,4 +1901,7 @@ Public Class frmMain
         dlgEvapotranspiration.ShowDialog()
     End Sub
 
+    Private Sub mnuClimaticSPI_Click(sender As Object, e As EventArgs) Handles mnuClimaticSPI.Click
+        dlgSPI.ShowDialog()
+    End Sub
 End Class

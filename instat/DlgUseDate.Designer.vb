@@ -41,6 +41,7 @@ Partial Class dlgUseDate
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgUseDate))
         Me.lblDateVariable = New System.Windows.Forms.Label()
         Me.grpShifted = New System.Windows.Forms.GroupBox()
+        Me.ucrChkShiftQuarter = New instat.ucrCheck()
         Me.lblMonth = New System.Windows.Forms.Label()
         Me.ucrInputComboBoxMonth = New instat.ucrInputComboBox()
         Me.lblDay = New System.Windows.Forms.Label()
@@ -48,6 +49,7 @@ Partial Class dlgUseDate
         Me.ucrNudShiftStartDay = New instat.ucrNud()
         Me.ucrChkShiftDay = New instat.ucrCheck()
         Me.grpOthers = New System.Windows.Forms.GroupBox()
+        Me.ucrChkQuarter = New instat.ucrCheck()
         Me.ucrChkLeapYear = New instat.ucrCheck()
         Me.ucrChkDekad = New instat.ucrCheck()
         Me.ucrChkPentad = New instat.ucrCheck()
@@ -82,6 +84,7 @@ Partial Class dlgUseDate
         '
         'grpShifted
         '
+        Me.grpShifted.Controls.Add(Me.ucrChkShiftQuarter)
         Me.grpShifted.Controls.Add(Me.lblMonth)
         Me.grpShifted.Controls.Add(Me.ucrInputComboBoxMonth)
         Me.grpShifted.Controls.Add(Me.lblDay)
@@ -91,6 +94,12 @@ Partial Class dlgUseDate
         resources.ApplyResources(Me.grpShifted, "grpShifted")
         Me.grpShifted.Name = "grpShifted"
         Me.grpShifted.TabStop = False
+        '
+        'ucrChkShiftQuarter
+        '
+        Me.ucrChkShiftQuarter.Checked = False
+        resources.ApplyResources(Me.ucrChkShiftQuarter, "ucrChkShiftQuarter")
+        Me.ucrChkShiftQuarter.Name = "ucrChkShiftQuarter"
         '
         'lblMonth
         '
@@ -133,12 +142,19 @@ Partial Class dlgUseDate
         '
         'grpOthers
         '
+        Me.grpOthers.Controls.Add(Me.ucrChkQuarter)
         Me.grpOthers.Controls.Add(Me.ucrChkLeapYear)
         Me.grpOthers.Controls.Add(Me.ucrChkDekad)
         Me.grpOthers.Controls.Add(Me.ucrChkPentad)
         resources.ApplyResources(Me.grpOthers, "grpOthers")
         Me.grpOthers.Name = "grpOthers"
         Me.grpOthers.TabStop = False
+        '
+        'ucrChkQuarter
+        '
+        Me.ucrChkQuarter.Checked = False
+        resources.ApplyResources(Me.ucrChkQuarter, "ucrChkQuarter")
+        Me.ucrChkQuarter.Name = "ucrChkQuarter"
         '
         'ucrChkLeapYear
         '
@@ -269,6 +285,7 @@ Partial Class dlgUseDate
         '
         'ucrSelectorUseDate
         '
+        Me.ucrSelectorUseDate.bDropUnusedFilterLevels = False
         Me.ucrSelectorUseDate.bShowHiddenColumns = False
         Me.ucrSelectorUseDate.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorUseDate, "ucrSelectorUseDate")
@@ -331,4 +348,6 @@ Partial Class dlgUseDate
     Friend WithEvents grpShifted As GroupBox
     Friend WithEvents lblMonth As Label
     Friend WithEvents ucrInputComboBoxMonth As ucrInputComboBox
+    Friend WithEvents ucrChkShiftQuarter As ucrCheck
+    Friend WithEvents ucrChkQuarter As ucrCheck
 End Class

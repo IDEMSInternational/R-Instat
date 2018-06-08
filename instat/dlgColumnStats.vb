@@ -52,8 +52,6 @@ Public Class dlgColumnStats
         ' only allow numeric variables in the first receiver, this will change once freq. tables is added
         ucrReceiverSelectedVariables.SetParameter(New RParameter("columns_to_summarise", 1))
         ucrReceiverSelectedVariables.SetParameterIsString()
-        ucrReceiverSelectedVariables.SetIncludedDataTypes({"numeric"})
-        ucrReceiverSelectedVariables.strSelectorHeading = "Numerics"
         ucrReceiverSelectedVariables.Selector = ucrSelectorForColumnStatistics
 
         ucrReceiverByFactor.SetParameter(New RParameter("factors", 2))
@@ -121,11 +119,13 @@ Public Class dlgColumnStats
             ucrSelectorForColumnStatistics.SetDataframe(strDefaultDataFrame)
         End If
         If strDefaultVariables IsNot Nothing AndAlso strDefaultVariables.Count > 0 Then
+            ucrReceiverSelectedVariables.Clear()
             For Each strVar As String In strDefaultVariables
                 ucrReceiverSelectedVariables.Add(strVar, strDefaultDataFrame)
             Next
         End If
         If strDefaultFactors IsNot Nothing AndAlso strDefaultFactors.Count > 0 Then
+            ucrReceiverByFactor.Clear()
             For Each strVar As String In strDefaultFactors
                 ucrReceiverByFactor.Add(strVar, strDefaultDataFrame)
             Next
@@ -136,7 +136,7 @@ Public Class dlgColumnStats
     End Sub
 
     Public Sub TestOKEnabled()
-        If ((ucrChkStoreResults.Checked OrElse ucrChkPrintOutput.Checked) AndAlso Not clsSummariesList.clsParameters.Count = 0) Then
+        If ((ucrChkStoreResults.Checked OrElse ucrChkPrintOutput.Checked) AndAlso Not clsSummariesList.clsParameters.Count = 0) AndAlso sdgSummaries.bOkEnabled Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -161,6 +161,14 @@ Public Class dlgColumnStats
         sdgProportionsPercentages.ShowDialog()
         bResetSubdialog = False
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrChkOmitMissing_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOmitMissing.ControlValueChanged
+        If clsSummariesList.ContainsParameter("summary_cor") OrElse clsSummariesList.ContainsParameter("summary_cov") Then
+            clsDefaultFunction.AddParameter("use", Chr(34) & "'na.or.complete'" & Chr(34))
+        Else
+            clsDefaultFunction.RemoveParameterByName("use")
+        End If
     End Sub
 
     Private Sub ucrChkPrintOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPrintOutput.ControlValueChanged
