@@ -1139,9 +1139,6 @@
   <data name="mnuClimaticCheckDataDisplayDaily.Text" xml:space="preserve">
     <value>Display Daily...</value>
   </data>
-  <data name="mnuClimaticCheckDataBoxplot.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="mnuClimaticCheckDataBoxplot.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 22</value>
   </data>
@@ -1375,6 +1372,12 @@
   </data>
   <data name="mnuClimaticDescribe.Text" xml:space="preserve">
     <value>Describe</value>
+  </data>
+  <data name="mnuClimaticSPI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="mnuClimaticSPI.Text" xml:space="preserve">
+    <value>SPI...</value>
   </data>
   <data name="mnuClimaticPICSARainfall.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2014,7 +2017,7 @@
     <value>No worksheet loaded</value>
   </data>
   <data name="stsStrip.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 479</value>
+    <value>0, 460</value>
   </data>
   <data name="stsStrip.Size" type="System.Drawing.Size, System.Drawing">
     <value>834, 22</value>
@@ -2501,7 +2504,7 @@
     <value>200, 22</value>
   </data>
   <data name="mnuPrepareDataFrameHideColumns.Text" xml:space="preserve">
-    <value>Hide Columns...</value>
+    <value>Hide/Show Columns...</value>
   </data>
   <data name="mnuPrepareDataFrameFreezeColumns.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -3394,8 +3397,11 @@
   <data name="ucrColumnMeta.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="ucrColumnMeta.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
   <data name="ucrColumnMeta.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 188</value>
+    <value>74, 178</value>
   </data>
   <data name="ucrColumnMeta.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3430,8 +3436,11 @@
   <data name="ucrDataFrameMeta.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="ucrDataFrameMeta.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
   <data name="ucrDataFrameMeta.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 188</value>
+    <value>177, 178</value>
   </data>
   <data name="ucrDataFrameMeta.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3461,10 +3470,10 @@
     <value>1</value>
   </data>
   <data name="splMetadata.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 188</value>
+    <value>256, 178</value>
   </data>
   <data name="splMetadata.SplitterDistance" type="System.Int32, mscorlib">
-    <value>75</value>
+    <value>74</value>
   </data>
   <data name="splMetadata.SplitterWidth" type="System.Int32, mscorlib">
     <value>5</value>
@@ -3508,8 +3517,11 @@
   <data name="ucrLogWindow.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="ucrLogWindow.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
   <data name="ucrLogWindow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 188</value>
+    <value>181, 178</value>
   </data>
   <data name="ucrLogWindow.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3544,8 +3556,11 @@
   <data name="ucrScriptWindow.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="ucrScriptWindow.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
   <data name="ucrScriptWindow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>386, 188</value>
+    <value>387, 178</value>
   </data>
   <data name="ucrScriptWindow.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3575,10 +3590,10 @@
     <value>1</value>
   </data>
   <data name="splLogScript.Size" type="System.Drawing.Size, System.Drawing">
-    <value>573, 188</value>
+    <value>573, 178</value>
   </data>
   <data name="splLogScript.SplitterDistance" type="System.Int32, mscorlib">
-    <value>182</value>
+    <value>181</value>
   </data>
   <data name="splLogScript.SplitterWidth" type="System.Int32, mscorlib">
     <value>5</value>
@@ -3611,7 +3626,7 @@
     <value>1</value>
   </data>
   <data name="splExtraWindows.Size" type="System.Drawing.Size, System.Drawing">
-    <value>834, 188</value>
+    <value>834, 178</value>
   </data>
   <data name="splExtraWindows.SplitterDistance" type="System.Int32, mscorlib">
     <value>256</value>
@@ -3658,8 +3673,11 @@
   <data name="ucrDataViewer.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="ucrDataViewer.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
   <data name="ucrDataViewer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>385, 225</value>
+    <value>384, 216</value>
   </data>
   <data name="ucrDataViewer.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3694,8 +3712,11 @@
   <data name="ucrOutput.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="ucrOutput.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
   <data name="ucrOutput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>444, 225</value>
+    <value>445, 216</value>
   </data>
   <data name="ucrOutput.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3725,10 +3746,10 @@
     <value>1</value>
   </data>
   <data name="splDataOutput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>834, 225</value>
+    <value>834, 216</value>
   </data>
   <data name="splDataOutput.SplitterDistance" type="System.Int32, mscorlib">
-    <value>385</value>
+    <value>384</value>
   </data>
   <data name="splDataOutput.SplitterWidth" type="System.Int32, mscorlib">
     <value>5</value>
@@ -3761,10 +3782,10 @@
     <value>1</value>
   </data>
   <data name="splOverall.Size" type="System.Drawing.Size, System.Drawing">
-    <value>834, 418</value>
+    <value>834, 399</value>
   </data>
   <data name="splOverall.SplitterDistance" type="System.Int32, mscorlib">
-    <value>188</value>
+    <value>178</value>
   </data>
   <data name="splOverall.SplitterWidth" type="System.Int32, mscorlib">
     <value>5</value>
@@ -3788,13 +3809,13 @@
     <value>True</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>99</value>
+    <value>29</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>834, 501</value>
+    <value>834, 482</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -5524,9 +5545,6 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>R-Instat</value>
   </data>
@@ -6663,6 +6681,12 @@
   </data>
   <data name="&gt;&gt;ToolStripSeparator31.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticSPI.Name" xml:space="preserve">
+    <value>mnuClimaticSPI</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticSPI.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuClimaticPICSA.Name" xml:space="preserve">
     <value>mnuClimaticPICSA</value>

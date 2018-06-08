@@ -19,7 +19,7 @@ Public Class dlgEndOfRainsSeason
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private clsAddKey, clsAddKeyColName, clsGroupBy, clsDayFromAndTo As New RFunction
-    Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator, clsWaterBalanceOperator, clsDifferenceOperation As New ROperator
+    Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator, clsWaterBalanceOperator, clsDifferenceOperation, clsOrOperation As New ROperator
     Private clsDayFilterCalcFromConvert, clsDayFilterCalcFromList As New RFunction
     '60
     Private clsWBReplaceNAMax, clsWBReplaceNAMaxFunction, clsWBReplaceNAMaxFunctionList, clsWBWaterBalanceMax, clsWBWaterFilterMax, clsWBWaterFilterMaxList, clsWBFirstWaterBalanceMax, clsWBFirstWaterBalanceManipulationMax, clsWaterBalanceMaxList, clsReduceFunctionMax, clsPMinFunctionMax, clsPMaxFunctionMax As New RFunction
@@ -29,7 +29,7 @@ Public Class dlgEndOfRainsSeason
     Private clsWBWaterFilterMinOperator, clsWBFirstWaterBalanceMinOperator, clsPMaxOperatorMin As New ROperator
 
     Private clsCombinationBase, clsEndRainBase, clsCombinationBaseList, clsWaterBalanceList, clsWaterBalanceFunction, clsWaterBalance As New RFunction
-    Private clsDifference, clsDifferenceList As New RFunction
+    Private clsDifference, clsDifferenceList, clsIsNAFunction As New RFunction
 
     'EoR
     Private clsEndRainFilter, clsEndRainLastInstance, clsEndRainLastInstanceFunction, clsEndRainLastInstanceList, clsEndRainFilterList, clsEndRainRollingSum, clsRollingSumFunction, clsEndRainLastInstanceManipulationList As New RFunction
@@ -213,6 +213,7 @@ Public Class dlgEndOfRainsSeason
         clsWaterBalanceMaxList.Clear()
         clsDifference.Clear()
         clsDifferenceOperation.Clear()
+        clsOrOperation.Clear()
         clsWaterBalance.Clear()
         clsWaterBalanceFunction.Clear()
         clsWaterBalanceOperator.Clear()
@@ -412,13 +413,18 @@ Public Class dlgEndOfRainsSeason
 
         'Difference
         clsWaterBalanceFunction.bToScriptAsRString = True
+        clsIsNAFunction.SetRCommand("is.na")
+        clsOrOperation.SetOperation("|")
+        clsOrOperation.AddParameter("left", strDifference & "!= 0", iPosition:=0)
+        clsOrOperation.AddParameter("right", clsRFunctionParameter:=clsIsNAFunction, iPosition:=1)
+        clsIsNAFunction.AddParameter("x", strDifference, bIncludeArgumentName:=False)
         clsWaterBalanceList.SetRCommand("list")
         clsWaterBalance.SetRCommand("instat_calculation$new")
         clsWaterBalance.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsWaterBalance.AddParameter("function_exp", clsRFunctionParameter:=clsWaterBalanceFunction, iPosition:=1)
         clsWaterBalanceFunction.SetRCommand("replace")
         clsWaterBalanceFunction.AddParameter("x", strFirstWaterBalanceMin, iPosition:=0)
-        clsWaterBalanceFunction.AddParameter("list", strDifference & "!= 0", iPosition:=1) 'clsROperatorParameter:=clsWaterBalanceOperator, iPosition:=1)
+        clsWaterBalanceFunction.AddParameter("list", clsROperatorParameter:=clsOrOperation, iPosition:=1) 'clsROperatorParameter:=clsWaterBalanceOperator, iPosition:=1)
         clsWaterBalanceFunction.AddParameter("values", "NA", iPosition:=2)
         'Chr(34) & "replace(" & strFirstWaterBalanceMin & ", Difference != 0, NA)" & Chr(34), iPosition:=1)
         clsWaterBalance.AddParameter("result_name", Chr(34) & ucrInputWBColName.GetText() & Chr(34), iPosition:=2)
