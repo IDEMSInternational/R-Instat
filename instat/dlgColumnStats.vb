@@ -136,7 +136,7 @@ Public Class dlgColumnStats
     End Sub
 
     Public Sub TestOKEnabled()
-        If ((ucrChkStoreResults.Checked OrElse ucrChkPrintOutput.Checked) AndAlso Not clsSummariesList.clsParameters.Count = 0) Then
+        If ((ucrChkStoreResults.Checked OrElse ucrChkPrintOutput.Checked) AndAlso Not clsSummariesList.clsParameters.Count = 0) AndAlso sdgSummaries.bOkEnabled Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -161,6 +161,14 @@ Public Class dlgColumnStats
         sdgProportionsPercentages.ShowDialog()
         bResetSubdialog = False
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrChkOmitMissing_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOmitMissing.ControlValueChanged
+        If clsSummariesList.ContainsParameter("summary_cor") OrElse clsSummariesList.ContainsParameter("summary_cov") Then
+            clsDefaultFunction.AddParameter("use", Chr(34) & "'na.or.complete'" & Chr(34))
+        Else
+            clsDefaultFunction.RemoveParameterByName("use")
+        End If
     End Sub
 
     Private Sub ucrChkPrintOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPrintOutput.ControlValueChanged
