@@ -541,6 +541,7 @@ Public Class dlgStartofRains
         clsCombinedFilter.SetAssignTo("overall_combined_filter")
 
         clsCombinedList.SetRCommand("list")
+        clsCombinedList.AddParameter("tr_sub", clsRFunctionParameter:=clsTRRollingSum, bIncludeArgumentName:=False)
 
         ' run always
         clsCombineOperator.AddParameter("rainfall", clsROperatorParameter:=clsRainCombineOperator, iPosition:=0)
@@ -758,7 +759,6 @@ Public Class dlgStartofRains
 
     Private Sub DayBoundaries()
         clsSORFilter.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")", iPosition:=3)
-        ' clsFirstDatePerYear.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDate.GetVariableNames() & ")", iPosition:=3)
         clsAddKeyColName.AddParameter("date", ucrReceiverDate.GetVariableNames(), bIncludeArgumentName:=False, iPosition:=0)
     End Sub
 
