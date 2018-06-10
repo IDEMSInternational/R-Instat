@@ -40,15 +40,32 @@ Public Class dlgCombine
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 39
+        Dim dctInputSeparator As New Dictionary(Of String, String)
 
         'ucrReceiver
-        ucrFactorsReceiver.SetParameter(New RParameter("x"))
+        ucrFactorsReceiver.SetParameter(New RParameter("x", 0))
         ucrFactorsReceiver.strSelectorHeading = "Factors"
         ucrFactorsReceiver.SetParameterIsRFunction()
         ucrFactorsReceiver.Selector = ucrSelectorCombineFactors
         ucrFactorsReceiver.SetMeAsReceiver()
         ucrFactorsReceiver.bUseFilteredData = False
         ucrFactorsReceiver.SetIncludedDataTypes({"factor"}, bStrict:=True)
+
+        ucrInputSeparator.SetParameter(New RParameter("sep", 2))
+        dctInputSeparator.Add("Period .", "stringr::fixed(" & Chr(34) & "." & Chr(34) & ")")
+        dctInputSeparator.Add("Space ( )", "stringr::fixed(" & Chr(34) & " " & Chr(34) & ")")
+        dctInputSeparator.Add("Colon :", Chr(34) & ":" & Chr(34))
+        dctInputSeparator.Add("Hyphen -", "stringr::fixed(" & Chr(34) & "-" & Chr(34) & ")")
+        dctInputSeparator.Add("Underscore _", Chr(34) & "_" & Chr(34))
+        ucrInputSeparator.SetItems(dctInputSeparator)
+        ucrInputSeparator.SetLinkedDisplayControl(lblSeparator)
+        ucrInputSeparator.SetRDefault("stringr::fixed(" & Chr(34) & "." & Chr(34) & ")")
+        ucrInputSeparator.bAllowNonConditionValues = True
+
+        ucrChkLexOrder.SetParameter(New RParameter("lex.order", 3))
+        ucrChkLexOrder.SetText("Lexical Order")
+        ucrChkLexOrder.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkLexOrder.SetRDefault("FALSE")
 
         ' Input Column Name
         ucrNewColName.SetIsTextBox()
@@ -58,7 +75,7 @@ Public Class dlgCombine
         ucrNewColName.SetLabelText("New Column Name:")
 
         'chkbox
-        ucrChkDropUnusedLevels.SetParameter(New RParameter("drop"))
+        ucrChkDropUnusedLevels.SetParameter(New RParameter("drop", 1))
         ucrChkDropUnusedLevels.SetText("Drop Unused Levels")
         ucrChkDropUnusedLevels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkDropUnusedLevels.SetRDefault("FALSE")
