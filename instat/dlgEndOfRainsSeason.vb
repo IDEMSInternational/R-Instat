@@ -20,6 +20,7 @@ Public Class dlgEndOfRainsSeason
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private strReplaceNAMin As String = "rain_NA_as_0"
+    Private strReplaceNAMax As String = "rain_NA_as_60"
     Private strEvapReplaceNA As String = "evap_NA_as_value"
     Private clsAddKey, clsAddKeyColName, clsGroupBy, clsDayFromAndTo As New RFunction
     Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator, clsWaterBalanceOperator, clsDifferenceOperation As New ROperator
@@ -30,7 +31,7 @@ Public Class dlgEndOfRainsSeason
     '0
     Private clsWBReplaceNAMin, clsWBReplaceNAMinFunction, clsWBReplaceNAMinFunctionList, clsWBWaterBalanceMin, clsWBWaterFilterMin, clsWBWaterFilterMinList, clsWBFirstWaterBalanceMin, clsWBFirstWaterBalanceMinList, clsWBWaterBalanceMinList, clsReduceFunctionMin, clsPMinFunctionMin, clsPMaxFunctionMin As New RFunction
     Private clsEvaporationReplaceNAFunc, clsEvaporationReplaceNA, clsEvaporationReplaceNAFuncList As New RFunction
-    Private clsReduceOpEvap As New ROperator
+    Private clsReduceOpEvapMin, clsReduceOpEvapMax As New ROperator
 
     Private Sub UcrPanel1_Load(sender As Object, e As EventArgs) Handles ucrPnlEvaporation.Load
 
@@ -140,7 +141,7 @@ Public Class dlgEndOfRainsSeason
         ucrNudWBLessThan.DecimalPlaces = 2
         ucrNudWBLessThan.SetLinkedDisplayControl(lblWaterBalanceLessThan)
 
-        ucrNudCapacity.SetParameter(New RParameter("values", 1, False))
+        ucrNudCapacity.SetParameter(New RParameter("values", 1))
         ucrNudCapacity.SetMinMax(1, Integer.MaxValue)
         ucrNudCapacity.Increment = 10
         ucrNudCapacity.SetLinkedDisplayControl(lblCapacity)
@@ -179,7 +180,6 @@ Public Class dlgEndOfRainsSeason
     Private Sub SetDefaults()
         Dim strWaterBalanceMax As String = "water_balance_max"
         Dim strFirstWaterBalanceMax As String = "first_water_balance_max"
-        Dim strReplaceNAMax As String = "replace_NA_max"
         Dim strFirstWaterBalanceMin As String = "first_water_balance_min"
         Dim strWaterBalanceMin As String = "water_balance_min"
         Dim strDifference As String = "difference"
@@ -229,7 +229,8 @@ Public Class dlgEndOfRainsSeason
         clsEvaporationReplaceNAFunc.Clear()
         clsEvaporationReplaceNA.Clear()
         clsEvaporationReplaceNAFuncList.Clear()
-        clsReduceOpEvap.Clear()
+        clsReduceOpEvapMin.Clear()
+        clsReduceOpEvapMax.Clear()
 
         clsEndRainFilter.Clear()
         clsEndRainFilterOperator.Clear()
@@ -316,7 +317,7 @@ Public Class dlgEndOfRainsSeason
         clsPMaxOperatorMax.AddParameter("first", "x + y", iPosition:=0)
         'clsPMaxOperatorMax.AddParameter("evaporation", 5, iPosition:=1, bIncludeArgumentName:=False)
         clsPMaxFunctionMax.AddParameter("0", 0, iPosition:=1, bIncludeArgumentName:=False)
-        clsPMinFunctionMax.AddParameter("values", 60, iPosition:=1, bIncludeArgumentName:=False)
+        clsPMinFunctionMax.AddParameter("values", 60, iPosition:=1)
         clsReduceFunctionMax.AddParameter("replace_na", strReplaceNAMax, iPosition:=1, bIncludeArgumentName:=False)
         clsReduceFunctionMax.AddParameter("accumulate", "TRUE", iPosition:=2)
         ''"Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText & ", 0), " & ucrNudCapacity.Value & "), Replace_NA_Max, accumulate=TRUE)" & Chr(34))
@@ -377,7 +378,7 @@ Public Class dlgEndOfRainsSeason
         clsPMaxOperatorMin.AddParameter("first", "x + y", iPosition:=0)
         'clsPMaxOperatorMin.AddParameter("evaporation", 5, iPosition:=1, bIncludeArgumentName:=False)
         clsPMaxFunctionMin.AddParameter("0", 0, iPosition:=1, bIncludeArgumentName:=False)
-        clsPMinFunctionMin.AddParameter("values", 60, iPosition:=1, bIncludeArgumentName:=False)
+        clsPMinFunctionMin.AddParameter("values", 60, iPosition:=1)
         clsReduceFunctionMin.AddParameter("replace_na", strReplaceNAMin, iPosition:=1, bIncludeArgumentName:=False)
         clsReduceFunctionMin.AddParameter("accumulate", "TRUE", iPosition:=2)
         clsWBWaterBalanceMin.AddParameter("result_name", Chr(34) & strWaterBalanceMin & Chr(34), iPosition:=2)
@@ -663,11 +664,17 @@ Public Class dlgEndOfRainsSeason
             clsEvaporationReplaceNA.AddParameter("result_name", Chr(34) & strEvapReplaceNA & Chr(34), iPosition:=2)
             clsEvaporationReplaceNA.SetAssignTo(strEvapReplaceNA)
 
-            clsReduceOpEvap.SetOperation("-")
-            clsReduceOpEvap.AddParameter("first", strReplaceNAMin, iPosition:=0)
-            clsReduceOpEvap.AddParameter("second", strEvapReplaceNA, iPosition:=1)
-            clsReduceFunctionMin.AddParameter("replace_na", clsROperatorParameter:=clsReduceOpEvap, iPosition:=1, bIncludeArgumentName:=False)
+            clsReduceOpEvapMin.SetOperation("-")
+            clsReduceOpEvapMin.AddParameter("first", strReplaceNAMin, iPosition:=0)
+            clsReduceOpEvapMin.AddParameter("second", strEvapReplaceNA, iPosition:=1)
+            clsReduceFunctionMin.AddParameter("replace_na", clsROperatorParameter:=clsReduceOpEvapMin, iPosition:=1, bIncludeArgumentName:=False)
             clsWBWaterBalanceMinList.AddParameter("sub2", clsRFunctionParameter:=clsEvaporationReplaceNA, bIncludeArgumentName:=False)
+
+            clsReduceOpEvapMax.SetOperation("-")
+            clsReduceOpEvapMax.AddParameter("first", strReplaceNAMax, iPosition:=0)
+            clsReduceOpEvapMax.AddParameter("second", strEvapReplaceNA, iPosition:=1)
+            clsReduceFunctionMax.AddParameter("replace_na", clsROperatorParameter:=clsReduceOpEvapMax, iPosition:=1, bIncludeArgumentName:=False)
+            clsWaterBalanceMaxList.AddParameter("sub2", clsRFunctionParameter:=clsEvaporationReplaceNA, bIncludeArgumentName:=False)
 
             clsPMaxOperatorMax.RemoveParameterByName("evaporation.val")
             clsPMaxOperatorMin.RemoveParameterByName("evaporation.val")
