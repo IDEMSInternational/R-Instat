@@ -87,6 +87,11 @@ Public Class dlgStartofRains
         ucrReceiverDOY.bAutoFill = True
         ucrReceiverDOY.strSelectorHeading = "Day Variables"
 
+        ucrReceiverYear.Selector = ucrSelectorForStartofRains
+        ucrReceiverYear.SetClimaticType("year")
+        ucrReceiverYear.bAutoFill = True
+        ucrReceiverYear.strSelectorHeading = "Year Variables"
+
         ucrReceiverRainfall.SetParameter(New RParameter("x", 0))
         ucrReceiverRainfall.SetParameterIsString()
         ucrReceiverRainfall.bWithQuotes = False
@@ -94,8 +99,6 @@ Public Class dlgStartofRains
         ucrReceiverRainfall.Selector = ucrSelectorForStartofRains
         ucrReceiverRainfall.SetClimaticType("rain")
         ucrReceiverRainfall.bAutoFill = True
-
-        ucrReceiverYear.strSelectorHeading = "Year Variables"
 
         ucrNudThreshold.SetParameter(New RParameter("threshold", 1))
         ucrNudThreshold.DecimalPlaces = 2
@@ -180,10 +183,6 @@ Public Class dlgStartofRains
         ucrChkDryPeriod.AddToLinkedControls(ucrNudDPMaxRain, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=40)
         ucrChkDryPeriod.AddToLinkedControls(ucrNudDPOverallInterval, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=45)
         ucrChkDryPeriod.AddToLinkedControls(ucrNudDPRainPeriod, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=30)
-
-        ucrReceiverYear.Selector = ucrSelectorForStartofRains
-        ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
-        ucrReceiverYear.bAutoFill = True
 
         'save
         ucrInputNewDoyColumnName.SetParameter(New RParameter("result_name", 2))
@@ -270,7 +269,7 @@ Public Class dlgStartofRains
         clsDSCombineOperator.Clear()
         clsDPCombineOperator.Clear()
 
-        ucrReceiverDate.SetMeAsReceiver()
+        ucrReceiverRainfall.SetMeAsReceiver()
         ucrSelectorForStartofRains.Reset()
 
         ' Adding a key
@@ -709,17 +708,14 @@ Public Class dlgStartofRains
             If rdoTRAmount.Checked Then
                 clsCombinedList.RemoveParameterByName("tr_perc_sub")
                 clsTRCombineOperator.RemoveParameterByName("tr_perc")
-                'clsTRCombineOperator.AddParameter("tr_amount", strParameterValue:=ucrNudTRAmount.Value, iPosition:=1)
             Else
                 clsCombinedList.AddParameter("tr_perc_sub", clsRFunctionParameter:=clsTRWetSpell, bIncludeArgumentName:=False)
-                'clsTRCombineOperator.RemoveParameterByName("tr_amount")
                 clsTRCombineOperator.AddParameter("tr_perc", strParameterValue:=strWetSpell, iPosition:=1)
             End If
         Else
             clsCombinedList.RemoveParameterByName("tr_perc_sub")
             clsCombineOperator.RemoveParameterByName("total_rainfall")
             clsTRCombineOperator.RemoveParameterByName("tr_perc")
-            clsTRCombineOperator.RemoveParameterByName("tr_amount")
         End If
     End Sub
 
