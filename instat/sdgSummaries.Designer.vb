@@ -56,11 +56,13 @@ Partial Class sdgSummaries
         Me.ucrChkLast = New instat.ucrCheck()
         Me.ucrChknth = New instat.ucrCheck()
         Me.grpProportionsPercentiles = New System.Windows.Forms.GroupBox()
+        Me.ucrInputCountValue = New instat.ucrInputTextBox()
+        Me.ucrInputComboCountTest = New instat.ucrInputComboBox()
         Me.ucrChkProportion = New instat.ucrCheck()
         Me.ucrChkCount = New instat.ucrCheck()
         Me.ucrChkPercentage = New instat.ucrCheck()
-        Me.ucrInputValue = New instat.ucrInputTextBox()
-        Me.ucrInputComboTest = New instat.ucrInputComboBox()
+        Me.ucrInputPropValue = New instat.ucrInputTextBox()
+        Me.ucrInputComboPropTest = New instat.ucrInputComboBox()
         Me.ucrInputPercentile = New instat.ucrInputTextBox()
         Me.ucrChkPercentile = New instat.ucrCheck()
         Me.grpLocation = New System.Windows.Forms.GroupBox()
@@ -105,6 +107,8 @@ Partial Class sdgSummaries
         Me.lblSecondVariable = New System.Windows.Forms.Label()
         Me.ucrSelectorSecondVariable = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverSecondVariable = New instat.ucrReceiverSingle()
+        Me.tbModel = New System.Windows.Forms.TabPage()
+        Me.ucrChkStandardErrorOfMean = New instat.ucrCheck()
         Me.ucrButtonsSummaries = New instat.ucrButtonsSubdialogue()
         Me.tbMissingOptions.SuspendLayout()
         Me.tbMore.SuspendLayout()
@@ -122,6 +126,7 @@ Partial Class sdgSummaries
         Me.tbSummaries.SuspendLayout()
         Me.tbTwoVariables.SuspendLayout()
         Me.grpRelationships.SuspendLayout()
+        Me.tbModel.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbMissingOptions
@@ -249,16 +254,33 @@ Partial Class sdgSummaries
         '
         'grpProportionsPercentiles
         '
+        Me.grpProportionsPercentiles.Controls.Add(Me.ucrInputCountValue)
+        Me.grpProportionsPercentiles.Controls.Add(Me.ucrInputComboCountTest)
         Me.grpProportionsPercentiles.Controls.Add(Me.ucrChkProportion)
         Me.grpProportionsPercentiles.Controls.Add(Me.ucrChkCount)
         Me.grpProportionsPercentiles.Controls.Add(Me.ucrChkPercentage)
-        Me.grpProportionsPercentiles.Controls.Add(Me.ucrInputValue)
-        Me.grpProportionsPercentiles.Controls.Add(Me.ucrInputComboTest)
+        Me.grpProportionsPercentiles.Controls.Add(Me.ucrInputPropValue)
+        Me.grpProportionsPercentiles.Controls.Add(Me.ucrInputComboPropTest)
         Me.grpProportionsPercentiles.Controls.Add(Me.ucrInputPercentile)
         Me.grpProportionsPercentiles.Controls.Add(Me.ucrChkPercentile)
         resources.ApplyResources(Me.grpProportionsPercentiles, "grpProportionsPercentiles")
         Me.grpProportionsPercentiles.Name = "grpProportionsPercentiles"
         Me.grpProportionsPercentiles.TabStop = False
+        '
+        'ucrInputCountValue
+        '
+        Me.ucrInputCountValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputCountValue.IsMultiline = False
+        Me.ucrInputCountValue.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputCountValue, "ucrInputCountValue")
+        Me.ucrInputCountValue.Name = "ucrInputCountValue"
+        '
+        'ucrInputComboCountTest
+        '
+        resources.ApplyResources(Me.ucrInputComboCountTest, "ucrInputComboCountTest")
+        Me.ucrInputComboCountTest.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboCountTest.IsReadOnly = False
+        Me.ucrInputComboCountTest.Name = "ucrInputComboCountTest"
         '
         'ucrChkProportion
         '
@@ -278,20 +300,20 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.ucrChkPercentage, "ucrChkPercentage")
         Me.ucrChkPercentage.Name = "ucrChkPercentage"
         '
-        'ucrInputValue
+        'ucrInputPropValue
         '
-        Me.ucrInputValue.AddQuotesIfUnrecognised = True
-        Me.ucrInputValue.IsMultiline = False
-        Me.ucrInputValue.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputValue, "ucrInputValue")
-        Me.ucrInputValue.Name = "ucrInputValue"
+        Me.ucrInputPropValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputPropValue.IsMultiline = False
+        Me.ucrInputPropValue.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputPropValue, "ucrInputPropValue")
+        Me.ucrInputPropValue.Name = "ucrInputPropValue"
         '
-        'ucrInputComboTest
+        'ucrInputComboPropTest
         '
-        resources.ApplyResources(Me.ucrInputComboTest, "ucrInputComboTest")
-        Me.ucrInputComboTest.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboTest.IsReadOnly = False
-        Me.ucrInputComboTest.Name = "ucrInputComboTest"
+        resources.ApplyResources(Me.ucrInputComboPropTest, "ucrInputComboPropTest")
+        Me.ucrInputComboPropTest.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboPropTest.IsReadOnly = False
+        Me.ucrInputComboPropTest.Name = "ucrInputComboPropTest"
         '
         'ucrInputPercentile
         '
@@ -552,6 +574,7 @@ Partial Class sdgSummaries
         Me.tbSummaries.Controls.Add(Me.tbsum)
         Me.tbSummaries.Controls.Add(Me.tbMore)
         Me.tbSummaries.Controls.Add(Me.tbTwoVariables)
+        Me.tbSummaries.Controls.Add(Me.tbModel)
         Me.tbSummaries.Controls.Add(Me.tbMissingOptions)
         resources.ApplyResources(Me.tbSummaries, "tbSummaries")
         Me.tbSummaries.Name = "tbSummaries"
@@ -609,6 +632,19 @@ Partial Class sdgSummaries
         Me.ucrReceiverSecondVariable.strNcFilePath = ""
         Me.ucrReceiverSecondVariable.ucrSelector = Nothing
         '
+        'tbModel
+        '
+        Me.tbModel.Controls.Add(Me.ucrChkStandardErrorOfMean)
+        resources.ApplyResources(Me.tbModel, "tbModel")
+        Me.tbModel.Name = "tbModel"
+        Me.tbModel.UseVisualStyleBackColor = True
+        '
+        'ucrChkStandardErrorOfMean
+        '
+        Me.ucrChkStandardErrorOfMean.Checked = False
+        resources.ApplyResources(Me.ucrChkStandardErrorOfMean, "ucrChkStandardErrorOfMean")
+        Me.ucrChkStandardErrorOfMean.Name = "ucrChkStandardErrorOfMean"
+        '
         'ucrButtonsSummaries
         '
         resources.ApplyResources(Me.ucrButtonsSummaries, "ucrButtonsSummaries")
@@ -645,6 +681,7 @@ Partial Class sdgSummaries
         Me.tbTwoVariables.ResumeLayout(False)
         Me.tbTwoVariables.PerformLayout()
         Me.grpRelationships.ResumeLayout(False)
+        Me.tbModel.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -697,8 +734,8 @@ Partial Class sdgSummaries
     Friend WithEvents ucrChkProportion As ucrCheck
     Friend WithEvents ucrChkCount As ucrCheck
     Friend WithEvents ucrChkPercentage As ucrCheck
-    Friend WithEvents ucrInputValue As ucrInputTextBox
-    Friend WithEvents ucrInputComboTest As ucrInputComboBox
+    Friend WithEvents ucrInputPropValue As ucrInputTextBox
+    Friend WithEvents ucrInputComboPropTest As ucrInputComboBox
     Friend WithEvents ucrInputPercentile As ucrInputTextBox
     Friend WithEvents ucrChkPercentile As ucrCheck
     Friend WithEvents grpPosition As GroupBox
@@ -716,4 +753,8 @@ Partial Class sdgSummaries
     Friend WithEvents ucrNudNumber As ucrNud
     Friend WithEvents lblPercentage As Label
     Friend WithEvents lblNumber As Label
+    Friend WithEvents ucrInputCountValue As ucrInputTextBox
+    Friend WithEvents ucrInputComboCountTest As ucrInputComboBox
+    Friend WithEvents tbModel As TabPage
+    Friend WithEvents ucrChkStandardErrorOfMean As ucrCheck
 End Class
