@@ -15,7 +15,8 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class clsStartOfRains
-    Public clsIsNaIfelse, clsSumIsNA As New RFunction
+    Public Shared clsIsNaIfelse As New RFunction
+    Private clsSumIsNA As New RFunction
     Public clsSORFilterOperator As New ROperator
     Private clsGreaterIfelseOp As New ROperator
     Private clsNotIsNA, clsSumFunc As New RFunction
@@ -47,5 +48,9 @@ Public Class clsStartOfRains
         clsSumFunc.AddParameter("is.na", clsRFunctionParameter:=clsSumIsNA, bIncludeArgumentName:=False)
 
         clsSumIsNA.SetRCommand("is.na")
+    End Sub
+
+    Public Sub SetControlParameters(ucrNewControl As ucrCore, iAdditionalPairNo As Integer)
+        ucrNewControl.AddAdditionalCodeParameterPair(clsSumIsNA, New RParameter("Rain", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=iAdditionalPairNo)
     End Sub
 End Class
