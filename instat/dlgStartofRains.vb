@@ -26,7 +26,7 @@ Public Class dlgStartofRains
     Private clsLessFilterOperator As New ROperator
     Private clsSORStart, clsSORStatus, clsSORStartIfelse, clsSORIsNA As New RFunction
     Private clsSORStartSummary As New clsStartOfRains
-    Private clsSORStatusSummary As New clsStartOfRains
+    Private clsNewIsNaIfelse As RFunction
 
     'Rainy Day classes
     Private clsRDRollingRainDays, clsRDRollingRainDaysFunction, clsRDRollingRainDaysSub As New RFunction
@@ -367,11 +367,14 @@ Public Class dlgStartofRains
         clsSORStart.AddParameter("save", 2, iPosition:=4)
         clsSORStart.SetAssignTo("start_of_rains_start")
 
-        clsSORStartSummary.clsIsNaIfelse.bToScriptAsRString = True
+        clsSORStartSummary.SetDefaults()
+
+        clsNewIsNaIfelse = clsStartOfRains.clsIsNaIfelse.Clone
+        clsNewIsNaIfelse.bToScriptAsRString = True
 
         clsSORStatus.SetRCommand("instat_calculation$new")
         clsSORStatus.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
-        clsSORStatus.AddParameter("function_exp", clsRFunctionParameter:=clsSORStartSummary.clsIsNaIfelse, iPosition:=1)
+        clsSORStatus.AddParameter("function_exp", clsRFunctionParameter:=clsNewIsNaIfelse, iPosition:=1)
         clsSORStatus.AddParameter("result_name", Chr(34) & strStartStatus & Chr(34), iPosition:=3)
         clsSORStatus.AddParameter("save", 2, iPosition:=4)
         clsSORStatus.SetAssignTo("start_of_rains_status")
@@ -382,11 +385,8 @@ Public Class dlgStartofRains
         clsSORStartIfelse.AddParameter("NA", "NA", bIncludeArgumentName:=False, iPosition:=1)
         clsSORStartIfelse.AddParameter("start_doy", strParameterValue:=clsSORStartSummary.strStartDoy, bIncludeArgumentName:=False, iPosition:=2)
 
-        clsSORStartSummary.SetDefaults()
-        clsSORStatusSummary.SetDefaults()
-
         clsSORIsNA.SetRCommand("is.na")
-        clsSORIsNA.AddParameter("ifelse", clsRFunctionParameter:=clsSORStatusSummary.clsIsNaIfelse, bIncludeArgumentName:=False)
+        clsSORIsNA.AddParameter("ifelse", clsRFunctionParameter:=clsStartOfRains.clsIsNaIfelse, bIncludeArgumentName:=False)
 
         ' Quantile checked:
         ' this function is associated with that rdo.
@@ -522,6 +522,7 @@ Public Class dlgStartofRains
 
         ' run always
         clsCombineOperator.AddParameter("rainfall", clsROperatorParameter:=clsRainCombineOperator, iPosition:=0)
+        clsCombineOperator.AddParameter("total_rainfall", clsROperatorParameter:=clsTRCombineOperator, iPosition:=1)
         clsCombineOperator.bToScriptAsRString = True
         clsCombineOperator.SetOperation("&")
 
@@ -616,8 +617,7 @@ Public Class dlgStartofRains
         ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsRainyDaysOperator, New RParameter("Rain", 1), iAdditionalPairNo:=1)
         ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsDPRainInDaysFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
         ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsRainCombineOperator, New RParameter("rain", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
-        ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsSORStartSummary.clsSumIsNA, New RParameter("rain", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=4)
-        ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsSORStatusSummary.clsSumIsNA, New RParameter("rain", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=5)
+        clsSORStartSummary.SetControlParameters(ucrReceiverRainfall, iAdditionalPairNo:=4)
         ucrNudThreshold.AddAdditionalCodeParameterPair(clsRainCombineOperator, New RParameter("rain_threshold", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrNudDPRainPeriod.AddAdditionalCodeParameterPair(clsDPOverallIntervalFunctionOperatorRight, ucrNudDPRainPeriod.GetParameter(), iAdditionalPairNo:=1)
 
@@ -703,7 +703,6 @@ Public Class dlgStartofRains
     End Sub
 
     Private Sub CombinedFilter()
-        clsCombineOperator.AddParameter("total_rainfall", clsROperatorParameter:=clsTRCombineOperator, iPosition:=1)
         If ucrChkTotalRainfall.Checked Then
             If rdoTRAmount.Checked Then
                 clsCombinedList.RemoveParameterByName("tr_perc_sub")
