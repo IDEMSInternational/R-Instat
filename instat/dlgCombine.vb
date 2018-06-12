@@ -55,6 +55,7 @@ Public Class dlgCombine
         ucrInputSeparator.SetItems(dctInputSeparator)
         ucrInputSeparator.SetLinkedDisplayControl(lblSeparator)
         ucrInputSeparator.SetRDefault(Chr(34) & "." & Chr(34))
+        ucrInputSeparator.bAllowNonConditionValues = True
 
         ucrChkLexOrder.SetParameter(New RParameter("lex.order"))
         ucrChkLexOrder.SetText("Lexical Order")
