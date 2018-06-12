@@ -15,16 +15,21 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class clsStartOfRains
-    Public Shared clsIsNaIfelse As New RFunction
-    Private clsSumIsNA As New RFunction
+    Public clsIsNaIfelse As New RFunction
+    Private clsSumIsNA, clsSumFunc As New RFunction
     Public clsSORFilterOperator As New ROperator
     Private clsGreaterIfelseOp As New ROperator
-    Private clsNotIsNA, clsSumFunc As New RFunction
+    Private clsNotIsNA As New RFunction
     Public strStartDoy As String = "start_doy"
 
     Public Sub SetDefaults()
-
         clsSumFunc.Clear()
+        clsIsNaIfelse.Clear()
+        clsGreaterIfelseOp.Clear()
+        clsNotIsNA.Clear()
+        clsSORFilterOperator.Clear()
+        clsSumIsNA.Clear()
+
 
         clsIsNaIfelse.SetRCommand("ifelse")
         clsIsNaIfelse.AddParameter("sum", clsROperatorParameter:=clsGreaterIfelseOp, bIncludeArgumentName:=False, iPosition:=0)
