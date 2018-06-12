@@ -31,9 +31,12 @@ Public Class dlgTransformClimatic
     ' Water Balance
     Private clsPMinFunctionMax, clsPMaxFunctionMax, clsRWaterBalanceFunction As New RFunction
     Private clsPMaxOperatorMax As New ROperator
+    Private clsEvaporationReplaceNAFunc, clsEvaporationReplaceNA, clsEvaporationReplaceNAFuncList As New RFunction
+    Private clsReduceOpEvapValue As New ROperator
 
     Private strCurrDataName As String = ""
     Private strRainDay As String = "rain_day"
+    Private strEvapReplaceNA As String = "evap_NA_as_value"
 
     Private Sub dlgTransformClimatic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -143,7 +146,7 @@ Public Class dlgTransformClimatic
         ucrInputEvaporation.SetLinkedDisplayControl(lblWBEvaporation)
 
         ucrReceiverEvap.Selector = ucrSelectorTransform
-        ucrReceiverEvap.SetParameterIsRFunction()
+        ucrReceiverEvap.SetParameterIsString()
         ucrReceiverEvap.bWithQuotes = False
         ucrReceiverEvap.strSelectorHeading = "Numerics"
         ucrReceiverEvap.SetIncludedDataTypes({"numeric"})
@@ -168,6 +171,8 @@ Public Class dlgTransformClimatic
         ucrPnlEvap.AddRadioButton(rdoEvapVariable)
         ucrPnlEvap.AddToLinkedControls(ucrInputEvaporation, {rdoEvapValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
         ucrPnlEvap.AddToLinkedControls(ucrReceiverEvap, {rdoEvapVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
+        ucrPnlEvap.AddToLinkedControls(ucrInputReplaceNAEvap, {rdoEvapVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
+
     End Sub
 
     Private Sub SetDefaults()
@@ -443,13 +448,17 @@ Public Class dlgTransformClimatic
     End Sub
 
     Private Sub ucrPnlEvap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlEvap.ControlValueChanged
+        Evaporation()
+        TestOkEnabled()
+    End Sub
+
+    Private Sub Evaporation()
         If rdoEvapValue.Checked Then
             clsPMaxOperatorMax.AddParameter("evaporation.value", 5, iPosition:=1, bIncludeArgumentName:=False)
-            clsPMaxOperatorMax.RemoveParameterByName("evaporation.var")
+            'clsPMaxOperatorMax.RemoveParameterByName("evaporation.var")
         ElseIf rdoEvapVariable.Checked Then
-            clsPMaxOperatorMax.AddParameter("evaporation.var", iPosition:=1, bIncludeArgumentName:=False)
+            'clsPMaxOperatorMax.AddParameter("evaporation.var", iPosition:=1, bIncludeArgumentName:=False)
             clsPMaxOperatorMax.RemoveParameterByName("evaporation.value")
         End If
-        TestOkEnabled()
     End Sub
 End Class
