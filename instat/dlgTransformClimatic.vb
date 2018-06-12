@@ -375,6 +375,10 @@ Public Class dlgTransformClimatic
         End If
     End Sub
 
+    Private Sub lblYear_Click(sender As Object, e As EventArgs) Handles lblYear.Click
+
+    End Sub
+
     Private Sub MovingColNames()
         Select Case ucrInputSum.GetText
             Case "Sum"

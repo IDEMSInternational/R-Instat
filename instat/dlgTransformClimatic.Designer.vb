@@ -75,6 +75,8 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverData = New instat.ucrReceiverSingle()
         Me.ucrSelectorTransform = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.lblReplaceNAEvap = New System.Windows.Forms.Label()
+        Me.UcrInputTextBox1 = New instat.ucrInputTextBox()
         Me.grpTransform.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -165,6 +167,8 @@ Partial Class dlgTransformClimatic
         '
         'grpTransform
         '
+        Me.grpTransform.Controls.Add(Me.UcrInputTextBox1)
+        Me.grpTransform.Controls.Add(Me.lblReplaceNAEvap)
         Me.grpTransform.Controls.Add(Me.ucrReceiverEvap)
         Me.grpTransform.Controls.Add(Me.rdoEvapVariable)
         Me.grpTransform.Controls.Add(Me.ucrInputEvaporation)
@@ -363,6 +367,19 @@ Partial Class dlgTransformClimatic
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'lblReplaceNAEvap
+        '
+        resources.ApplyResources(Me.lblReplaceNAEvap, "lblReplaceNAEvap")
+        Me.lblReplaceNAEvap.Name = "lblReplaceNAEvap"
+        '
+        'UcrInputTextBox1
+        '
+        Me.UcrInputTextBox1.AddQuotesIfUnrecognised = True
+        Me.UcrInputTextBox1.IsMultiline = False
+        Me.UcrInputTextBox1.IsReadOnly = False
+        resources.ApplyResources(Me.UcrInputTextBox1, "UcrInputTextBox1")
+        Me.UcrInputTextBox1.Name = "UcrInputTextBox1"
+        '
         'dlgTransformClimatic
         '
         resources.ApplyResources(Me, "$this")
@@ -432,4 +449,6 @@ Partial Class dlgTransformClimatic
     Friend WithEvents ucrInputEvaporation As ucrInputTextBox
     Friend WithEvents rdoEvapValue As RadioButton
     Friend WithEvents ucrPnlEvap As UcrPanel
+    Friend WithEvents UcrInputTextBox1 As ucrInputTextBox
+    Friend WithEvents lblReplaceNAEvap As Label
 End Class
