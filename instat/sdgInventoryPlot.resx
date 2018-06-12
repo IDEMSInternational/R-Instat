@@ -117,14 +117,414 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblMissing.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblMissing.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblMissing.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 21</value>
+  </data>
+  <data name="lblMissing.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 13</value>
+  </data>
+  <data name="lblMissing.TabIndex" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="lblMissing.Text" xml:space="preserve">
+    <value>Missing Colour</value>
+  </data>
+  <data name="&gt;&gt;lblMissing.Name" xml:space="preserve">
+    <value>lblMissing</value>
+  </data>
+  <data name="&gt;&gt;lblMissing.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMissing.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblMissing.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblNonMissing.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblNonMissing.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblNonMissing.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 56</value>
+  </data>
+  <data name="lblNonMissing.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 13</value>
+  </data>
+  <data name="lblNonMissing.TabIndex" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="lblNonMissing.Text" xml:space="preserve">
+    <value>Non Missing Colour</value>
+  </data>
+  <data name="&gt;&gt;lblNonMissing.Name" xml:space="preserve">
+    <value>lblNonMissing</value>
+  </data>
+  <data name="&gt;&gt;lblNonMissing.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblNonMissing.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblNonMissing.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrInputRain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>104, 19</value>
+  </data>
+  <data name="ucrInputRain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 21</value>
+  </data>
+  <data name="ucrInputRain.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="&gt;&gt;ucrInputRain.Name" xml:space="preserve">
+    <value>ucrInputRain</value>
+  </data>
+  <data name="&gt;&gt;ucrInputRain.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputRain.Parent" xml:space="preserve">
+    <value>grpRainyDays</value>
+  </data>
+  <data name="&gt;&gt;ucrInputRain.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblDryColour.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblDryColour.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblDryColour.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 153</value>
+  </data>
+  <data name="lblDryColour.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 13</value>
+  </data>
+  <data name="lblDryColour.TabIndex" type="System.Int32, mscorlib">
+    <value>43</value>
+  </data>
+  <data name="lblDryColour.Text" xml:space="preserve">
+    <value>Dry Colour</value>
+  </data>
+  <data name="&gt;&gt;lblDryColour.Name" xml:space="preserve">
+    <value>lblDryColour</value>
+  </data>
+  <data name="&gt;&gt;lblDryColour.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblDryColour.Parent" xml:space="preserve">
+    <value>grpRainyDays</value>
+  </data>
+  <data name="&gt;&gt;lblDryColour.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblRainLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblRainLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblRainLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 19</value>
+  </data>
+  <data name="lblRainLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 13</value>
+  </data>
+  <data name="lblRainLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="lblRainLabel.Text" xml:space="preserve">
+    <value>Rain Label</value>
+  </data>
+  <data name="&gt;&gt;lblRainLabel.Name" xml:space="preserve">
+    <value>lblRainLabel</value>
+  </data>
+  <data name="&gt;&gt;lblRainLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblRainLabel.Parent" xml:space="preserve">
+    <value>grpRainyDays</value>
+  </data>
+  <data name="&gt;&gt;lblRainLabel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblRainColour.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblRainColour.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblRainColour.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 118</value>
+  </data>
+  <data name="lblRainColour.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 13</value>
+  </data>
+  <data name="lblRainColour.TabIndex" type="System.Int32, mscorlib">
+    <value>44</value>
+  </data>
+  <data name="lblRainColour.Text" xml:space="preserve">
+    <value>Rain Colour</value>
+  </data>
+  <data name="&gt;&gt;lblRainColour.Name" xml:space="preserve">
+    <value>lblRainColour</value>
+  </data>
+  <data name="&gt;&gt;lblRainColour.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblRainColour.Parent" xml:space="preserve">
+    <value>grpRainyDays</value>
+  </data>
+  <data name="&gt;&gt;lblRainColour.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblDryLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblDryLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblDryLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 44</value>
+  </data>
+  <data name="lblDryLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 13</value>
+  </data>
+  <data name="lblDryLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="lblDryLabel.Text" xml:space="preserve">
+    <value>Dry Label</value>
+  </data>
+  <data name="&gt;&gt;lblDryLabel.Name" xml:space="preserve">
+    <value>lblDryLabel</value>
+  </data>
+  <data name="&gt;&gt;lblDryLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblDryLabel.Parent" xml:space="preserve">
+    <value>grpRainyDays</value>
+  </data>
+  <data name="&gt;&gt;lblDryLabel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrDryColour.Location" type="System.Drawing.Point, System.Drawing">
+    <value>104, 153</value>
+  </data>
+  <data name="ucrDryColour.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 21</value>
+  </data>
+  <data name="ucrDryColour.TabIndex" type="System.Int32, mscorlib">
+    <value>41</value>
+  </data>
+  <data name="&gt;&gt;ucrDryColour.Name" xml:space="preserve">
+    <value>ucrDryColour</value>
+  </data>
+  <data name="&gt;&gt;ucrDryColour.Type" xml:space="preserve">
+    <value>instat.ucrColors, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrDryColour.Parent" xml:space="preserve">
+    <value>grpRainyDays</value>
+  </data>
+  <data name="&gt;&gt;ucrDryColour.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="lblRainThresholdValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblRainThresholdValue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblRainThresholdValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 84</value>
+  </data>
+  <data name="lblRainThresholdValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 13</value>
+  </data>
+  <data name="lblRainThresholdValue.TabIndex" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
+  <data name="lblRainThresholdValue.Text" xml:space="preserve">
+    <value>Rain Threshold Value</value>
+  </data>
+  <data name="&gt;&gt;lblRainThresholdValue.Name" xml:space="preserve">
+    <value>lblRainThresholdValue</value>
+  </data>
+  <data name="&gt;&gt;lblRainThresholdValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblRainThresholdValue.Parent" xml:space="preserve">
+    <value>grpRainyDays</value>
+  </data>
+  <data name="&gt;&gt;lblRainThresholdValue.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="ucrRainColour.Location" type="System.Drawing.Point, System.Drawing">
+    <value>104, 110</value>
+  </data>
+  <data name="ucrRainColour.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 21</value>
+  </data>
+  <data name="ucrRainColour.TabIndex" type="System.Int32, mscorlib">
+    <value>42</value>
+  </data>
+  <data name="&gt;&gt;ucrRainColour.Name" xml:space="preserve">
+    <value>ucrRainColour</value>
+  </data>
+  <data name="&gt;&gt;ucrRainColour.Type" xml:space="preserve">
+    <value>instat.ucrColors, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrRainColour.Parent" xml:space="preserve">
+    <value>grpRainyDays</value>
+  </data>
+  <data name="&gt;&gt;ucrRainColour.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="ucrInputDry.Location" type="System.Drawing.Point, System.Drawing">
+    <value>104, 44</value>
+  </data>
+  <data name="ucrInputDry.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 21</value>
+  </data>
+  <data name="ucrInputDry.TabIndex" type="System.Int32, mscorlib">
+    <value>39</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDry.Name" xml:space="preserve">
+    <value>ucrInputDry</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDry.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDry.Parent" xml:space="preserve">
+    <value>grpRainyDays</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDry.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="ucrNudThresholdValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>143, 84</value>
+  </data>
+  <data name="ucrNudThresholdValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudThresholdValue.TabIndex" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <data name="&gt;&gt;ucrNudThresholdValue.Name" xml:space="preserve">
+    <value>ucrNudThresholdValue</value>
+  </data>
+  <data name="&gt;&gt;ucrNudThresholdValue.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudThresholdValue.Parent" xml:space="preserve">
+    <value>grpRainyDays</value>
+  </data>
+  <data name="&gt;&gt;ucrNudThresholdValue.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="grpRainyDays.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 128</value>
+  </data>
+  <data name="grpRainyDays.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 190</value>
+  </data>
+  <data name="grpRainyDays.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="&gt;&gt;grpRainyDays.Name" xml:space="preserve">
+    <value>grpRainyDays</value>
+  </data>
+  <data name="&gt;&gt;grpRainyDays.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpRainyDays.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpRainyDays.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrColourNonMissing.Location" type="System.Drawing.Point, System.Drawing">
+    <value>120, 56</value>
+  </data>
+  <data name="ucrColourNonMissing.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 21</value>
+  </data>
+  <data name="ucrColourNonMissing.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
+  </data>
+  <data name="&gt;&gt;ucrColourNonMissing.Name" xml:space="preserve">
+    <value>ucrColourNonMissing</value>
+  </data>
+  <data name="&gt;&gt;ucrColourNonMissing.Type" xml:space="preserve">
+    <value>instat.ucrColors, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrColourNonMissing.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrColourNonMissing.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrColourMissing.Location" type="System.Drawing.Point, System.Drawing">
+    <value>120, 21</value>
+  </data>
+  <data name="ucrColourMissing.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 21</value>
+  </data>
+  <data name="ucrColourMissing.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="&gt;&gt;ucrColourMissing.Name" xml:space="preserve">
+    <value>ucrColourMissing</value>
+  </data>
+  <data name="&gt;&gt;ucrColourMissing.Type" xml:space="preserve">
+    <value>instat.ucrColors, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrColourMissing.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrColourMissing.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrChkDisplayRainDays.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 102</value>
+  </data>
+  <data name="ucrChkDisplayRainDays.Size" type="System.Drawing.Size, System.Drawing">
+    <value>151, 20</value>
+  </data>
+  <data name="ucrChkDisplayRainDays.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDisplayRainDays.Name" xml:space="preserve">
+    <value>ucrChkDisplayRainDays</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDisplayRainDays.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDisplayRainDays.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDisplayRainDays.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
   <data name="ucrButtonsInventoryplot.Location" type="System.Drawing.Point, System.Drawing">
-    <value>63, 205</value>
+    <value>63, 324</value>
   </data>
   <data name="ucrButtonsInventoryplot.Size" type="System.Drawing.Size, System.Drawing">
     <value>142, 30</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrButtonsInventoryplot.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -138,7 +538,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrButtonsInventoryplot.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>6</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -147,9 +547,8 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>284, 261</value>
+    <value>301, 364</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
   </data>
