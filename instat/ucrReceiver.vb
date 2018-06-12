@@ -41,8 +41,11 @@ Public Class ucrReceiver
     Protected bParameterIsString As Boolean = False
     'If the control is used to set a parameter that is an RFunction i.e. x = InstatDataObject$get_columns_from_data()
     Protected bParameterIsRFunction As Boolean = False
-    'The name of the data parameter in the get columns instat object method (should always be the same)
+    'The name of the parameter which contains the items in the get instat object method (depends on the type of items in the receiver)
     Protected strItemsParameterNameInRFunction As String = "col_names"
+
+    'Name of the data name parameter in the get instat object method (depends on the type of items in the receiver)
+    Protected strDataFrameParameterNameInRFunction As String = "data_name"
 
     'Should quotes be used when bParameterIsString = False
     Public bWithQuotes As Boolean = True
@@ -53,6 +56,9 @@ Public Class ucrReceiver
     ' If True then this receiver can only contain a column from the selector's primary data frame
     ' and this receiver can set the selector's primary data frame (when current receiver), resetting all other receivers
     Public bAttachedToPrimaryDataFrame As Boolean = True
+
+    ' If not attached to primary data frame, should only data frames linked to the primary data frame be shown.
+    Public bOnlyLinkedToPrimaryDataFrames As Boolean = True
 
     Public Sub New()
         ' This call is required by the designer.
@@ -408,6 +414,7 @@ Public Class ucrReceiver
         Dim clsTempDataParameter As RParameter
         Dim lstCurrentVariables As String() = Nothing
         Dim clsTempParameter As RParameter
+        Dim strTempDataName As String = ""
 
         clsTempParameter = GetParameter()
         If clsTempParameter IsNot Nothing Then
@@ -416,19 +423,30 @@ Public Class ucrReceiver
                     If strValuesToIgnore Is Nothing OrElse (Not strValuesToIgnore.Contains(clsTempParameter.strArgumentValue)) Then
                         lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.strArgumentValue)
                     End If
+                    'TODO how to recover the data frame name in this case
                 ElseIf bParameterIsRFunction AndAlso clsTempParameter.bIsFunction Then
                     clsTempDataParameter = clsTempParameter.clsArgumentCodeStructure.GetParameter(strItemsParameterNameInRFunction)
                     If clsTempDataParameter IsNot Nothing Then
                         lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.clsArgumentCodeStructure.GetParameter(strItemsParameterNameInRFunction).strArgumentValue)
                     End If
+                    'TODO Should this the same for other item types?
+                    If strType = "column" Then
+                        clsTempDataParameter = clsTempParameter.clsArgumentCodeStructure.GetParameter(strDataFrameParameterNameInRFunction)
+                        If clsTempDataParameter IsNot Nothing Then
+                            strTempDataName = clsTempParameter.clsArgumentCodeStructure.GetParameter(strDataFrameParameterNameInRFunction).strArgumentValue.Trim(Chr(34))
+                        End If
+                    End If
                 End If
                 Clear()
                 If lstCurrentVariables IsNot Nothing Then
                     For Each strTemp As String In lstCurrentVariables
-                        'TODO This only works if the selector is updated before receivers!
+                        'TODO This only works if the selector is updated before receivers and dialog only uses one data frame!
                         '     Needs to change eventually.
                         If Selector IsNot Nothing AndAlso strTemp <> "" Then
-                            Add(strTemp, Selector.strCurrentDataFrame)
+                            If strTempDataName = "" Then
+                                strTempDataName = Selector.strCurrentDataFrame
+                            End If
+                            Add(strTemp, strTempDataName)
                         End If
                     Next
                 End If

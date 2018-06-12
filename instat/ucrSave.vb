@@ -29,6 +29,7 @@ Public Class ucrSave
     Private bAssignToColumnWithoutNames As Boolean = False
     Private bInsertColumnBefore As Boolean = False
     Private strAssignToIfUnchecked As String = ""
+    Private strGlobalDataName As String = ""
 
     Private Sub ucrSave_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -73,10 +74,16 @@ Public Class ucrSave
     End Sub
 
     Public Sub SetCheckBoxText(strText As String)
+        Dim g As Graphics = ucrChkSave.chkCheck.CreateGraphics
+        Dim s As SizeF
+
         ucrChkSave.SetText(strText)
         bShowLabel = False
         bShowCheckBox = True
         LabelOrCheckboxSettings()
+        ' "[box]" allows for a sufficient amount of space for the box of the checkbox
+        s = g.MeasureString(ucrChkSave.chkCheck.Text & "[box]", ucrChkSave.chkCheck.Font)
+        ucrChkSave.Width = Math.Max(100, s.Width)
     End Sub
 
     Public Sub SetIsComboBox()
@@ -265,6 +272,8 @@ Public Class ucrSave
                 Else
                     If ucrDataFrameSelector IsNot Nothing Then
                         strDataName = ucrDataFrameSelector.cboAvailableDataFrames.Text
+                    Else
+                        strDataName = strGlobalDataName
                     End If
                     If bShowCheckBox AndAlso Not ucrChkSave.Checked Then
                         strSaveName = strAssignToIfUnchecked
@@ -377,4 +386,9 @@ Public Class ucrSave
             Return ucrInputTextSave.bUserTyped
         End If
     End Function
+
+    Public Sub SetGlobalDataName(strNewGlobalDataName As String)
+        strGlobalDataName = strNewGlobalDataName
+        UpdateAssignTo()
+    End Sub
 End Class
