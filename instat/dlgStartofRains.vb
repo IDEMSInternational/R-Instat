@@ -263,7 +263,6 @@ Public Class dlgStartofRains
         clsDPOverallIntervalFunctionOperatorRight.Clear()
         clsApplyInstatFunction.Clear()
 
-        clsCombineOperator.Clear()
         clsTRCombineOperator.Clear()
         clsRDCombineOperator.Clear()
         clsDSCombineOperator.Clear()
@@ -605,7 +604,6 @@ Public Class dlgStartofRains
 
         'Base Function
         ucrBase.clsRsyntax.SetBaseRFunction(clsApplyInstatFunction)
-        'DefaultNudValue()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
