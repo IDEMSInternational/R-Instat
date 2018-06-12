@@ -86,6 +86,8 @@ Public Class dlgCompareColumns
         ucrSaveLogical.SetCheckBoxText("Save logical values for second column")
         ucrSaveLogical.SetSaveTypeAsColumn()
         ucrSaveLogical.SetIsTextBox()
+        ' This ensures the assign text is correctly cleared when resetting
+        ucrSaveLogical.bUpdateRCodeFromControl = False
     End Sub
 
     Private Sub SetDefaults()
@@ -96,6 +98,7 @@ Public Class dlgCompareColumns
 
         ucrSelectorCompareColumns.Reset()
         ucrReceiverFirst.SetMeAsReceiver()
+        ucrSaveLogical.Reset()
 
         clsCompareColumns.SetRCommand("compare_columns")
         clsYinXOperator.SetOperation("%in%")
@@ -121,14 +124,14 @@ Public Class dlgCompareColumns
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverFirst.IsEmpty AndAlso Not ucrReceiverSecond.IsEmpty Then
+        If Not ucrReceiverFirst.IsEmpty AndAlso Not ucrReceiverSecond.IsEmpty AndAlso ucrSaveLogical.IsComplete() Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub Receivers_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirst.ControlContentsChanged, ucrReceiverSecond.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirst.ControlContentsChanged, ucrReceiverSecond.ControlContentsChanged, ucrSaveLogical.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -148,6 +151,16 @@ Public Class dlgCompareColumns
             ucrBase.clsRsyntax.AddToAfterCodes(clsYinXOperator, iPosition:=1)
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsYinXOperator)
+        End If
+    End Sub
+
+    Private Sub ucrReceiverFirst_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirst.ControlValueChanged
+        If Not ucrSaveLogical.bUserTyped Then
+            If ucrReceiverFirst.IsEmpty Then
+                ucrSaveLogical.SetName("")
+            Else
+                ucrSaveLogical.SetName("in_" & ucrReceiverFirst.GetVariableNames(False))
+            End If
         End If
     End Sub
 End Class
