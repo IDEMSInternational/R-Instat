@@ -293,6 +293,7 @@ Public Class dlgTransformClimatic
         ucrReceiverData.AddAdditionalCodeParameterPair(clsRRaindayLowerOperator, New RParameter("rain", 0), iAdditionalPairNo:=2)
         ucrReceiverData.AddAdditionalCodeParameterPair(clsRRaindayUpperOperator, New RParameter("rain", 0), iAdditionalPairNo:=3)
         ucrReceiverData.AddAdditionalCodeParameterPair(clsRWaterBalanceFunction, New RParameter("replace_na", 1, False), iAdditionalPairNo:=4)
+        ucrReceiverData.AddAdditionalCodeParameterPair(clsReduceOpEvapValue, New RParameter("left", 0, False), iAdditionalPairNo:=5)
 
         ucrPnlTransform.SetRCode(clsRTransform, bReset)
 
@@ -454,13 +455,10 @@ Public Class dlgTransformClimatic
     Private Sub Evaporation()
         If rdoEvapValue.Checked Then
             clsPMaxOperatorMax.AddParameter("evaporation.value", 5, iPosition:=1, bIncludeArgumentName:=False)
-            clsRWaterBalanceFunction.AddParameter("replace_na", ucrReceiverData.GetParameterName(), iPosition:=1, bIncludeArgumentName:=False)
         ElseIf rdoEvapVariable.Checked Then
+            clsReduceOpEvapValue.SetOperation("-")
             clsRWaterBalanceFunction.AddParameter("replace_na", clsROperatorParameter:=clsReduceOpEvapValue, iPosition:=1, bIncludeArgumentName:=False)
             clsPMaxOperatorMax.RemoveParameterByName("evaporation.value")
-            clsReduceOpEvapValue.SetOperation("-")
-            clsReduceOpEvapValue.AddParameter("left", ucrReceiverData.GetVariabl, bIncludeArgumentName:=False, iPosition:=0)
-            clsReduceOpEvapValue.AddParameter("right", ucrReceiverEvap.GetParameterName(), bIncludeArgumentName:=False, iPosition:=1)
         End If
     End Sub
 
