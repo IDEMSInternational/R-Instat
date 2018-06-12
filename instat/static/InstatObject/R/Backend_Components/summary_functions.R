@@ -427,9 +427,25 @@ summary_mode <- function(x,...) {
   else return(out)
 }
 
-summary_mean <- function (x, add_cols, weights="", na.rm = FALSE, trim = 0,...) {
+na_check <- function(x, na_type = "n", na_max_n = NULL, na_max_prop = NULL, na_FUN = NULL, ...) {
+  if(na_type == "n") {
+    return(summary_count_missing(x) <= na_max_n)
+  }
+  else if(na_type == "prop") {
+    return(summary_count_missing(x)/summary_count(x) <= na_max_prop)
+  }
+  else if(na_type == "FUN") {
+    return(na_FUN(x, ...))
+  }
+  else stop("Invalid na_type specified for missing values check.")
+}
+
+summary_mean <- function (x, add_cols, weights="", na.rm = FALSE, trim = 0, na_type = "", ...) {
   if( length(x)==0 || (na.rm && length(x[!is.na(x)])==0) ) return(NA)
-  else return(mean(x, na.rm = na.rm, trim = trim))
+  else {
+    if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+    else return(mean(x, na.rm = na.rm, trim = trim))
+  }
 }
 
 summary_trimmed_mean <- function (x, add_cols, weights="", na.rm = FALSE, trimmed = 0,...) {

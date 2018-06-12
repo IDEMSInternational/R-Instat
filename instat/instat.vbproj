@@ -314,6 +314,12 @@
     <Compile Include="dlgParallelCoordinatePlot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgReshapeClimatic.Designer.vb">
+      <DependentUpon>dlgReshapeClimatic.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgReshapeClimatic.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgSPI.Designer.vb">
       <DependentUpon>dlgSPI.vb</DependentUpon>
     </Compile>
@@ -2567,6 +2573,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRenameDataFrame.resx">
       <DependentUpon>dlgRenameDataFrame.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReshapeClimatic.resx">
+      <DependentUpon>dlgReshapeClimatic.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRowNamesOrNumbers.sw-KE.resx">
       <DependentUpon>dlgRowNamesOrNumbers.vb</DependentUpon>
