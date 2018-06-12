@@ -52,8 +52,6 @@ Partial Class dlgTransformClimatic
         Me.lblNewColName = New System.Windows.Forms.Label()
         Me.lblCountOver = New System.Windows.Forms.Label()
         Me.grpTransform = New System.Windows.Forms.GroupBox()
-        Me.ucrInputReplaceNAEvap = New instat.ucrInputTextBox()
-        Me.lblReplaceNAEvap = New System.Windows.Forms.Label()
         Me.ucrReceiverEvap = New instat.ucrReceiverSingle()
         Me.rdoEvapVariable = New System.Windows.Forms.RadioButton()
         Me.ucrInputEvaporation = New instat.ucrInputTextBox()
@@ -167,8 +165,6 @@ Partial Class dlgTransformClimatic
         '
         'grpTransform
         '
-        Me.grpTransform.Controls.Add(Me.ucrInputReplaceNAEvap)
-        Me.grpTransform.Controls.Add(Me.lblReplaceNAEvap)
         Me.grpTransform.Controls.Add(Me.ucrReceiverEvap)
         Me.grpTransform.Controls.Add(Me.rdoEvapVariable)
         Me.grpTransform.Controls.Add(Me.ucrInputEvaporation)
@@ -190,19 +186,6 @@ Partial Class dlgTransformClimatic
         resources.ApplyResources(Me.grpTransform, "grpTransform")
         Me.grpTransform.Name = "grpTransform"
         Me.grpTransform.TabStop = False
-        '
-        'ucrInputReplaceNAEvap
-        '
-        Me.ucrInputReplaceNAEvap.AddQuotesIfUnrecognised = True
-        Me.ucrInputReplaceNAEvap.IsMultiline = False
-        Me.ucrInputReplaceNAEvap.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputReplaceNAEvap, "ucrInputReplaceNAEvap")
-        Me.ucrInputReplaceNAEvap.Name = "ucrInputReplaceNAEvap"
-        '
-        'lblReplaceNAEvap
-        '
-        resources.ApplyResources(Me.lblReplaceNAEvap, "lblReplaceNAEvap")
-        Me.lblReplaceNAEvap.Name = "lblReplaceNAEvap"
         '
         'ucrReceiverEvap
         '
@@ -449,6 +432,4 @@ Partial Class dlgTransformClimatic
     Friend WithEvents ucrInputEvaporation As ucrInputTextBox
     Friend WithEvents rdoEvapValue As RadioButton
     Friend WithEvents ucrPnlEvap As UcrPanel
-    Friend WithEvents ucrInputReplaceNAEvap As ucrInputTextBox
-    Friend WithEvents lblReplaceNAEvap As Label
 End Class
