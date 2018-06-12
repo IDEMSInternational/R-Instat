@@ -455,6 +455,8 @@ Public Class dlgTransformClimatic
     Private Sub Evaporation()
         If rdoEvapValue.Checked Then
             clsPMaxOperatorMax.AddParameter("evaporation.value", 5, iPosition:=1, bIncludeArgumentName:=False)
+            clsRWaterBalanceFunction.AddParameter("replace_na", strReplaceNAMin, iPosition:=1, bIncludeArgumentName:=False)
+            clsWBWaterBalanceMinList.RemoveParameterByName("sub2")
             'clsPMaxOperatorMax.RemoveParameterByName("evaporation.var")
         ElseIf rdoEvapVariable.Checked Then
             'clsPMaxOperatorMax.AddParameter("evaporation.var", iPosition:=1, bIncludeArgumentName:=False)
