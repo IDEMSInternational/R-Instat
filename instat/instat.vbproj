@@ -230,6 +230,12 @@
     <Compile Include="dlgClimSoft.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCompareColumns.Designer.vb">
+      <DependentUpon>dlgCompareColumns.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCompareColumns.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCompareModels.Designer.vb">
       <DependentUpon>dlgCompareModels.vb</DependentUpon>
     </Compile>
@@ -306,6 +312,12 @@
       <DependentUpon>dlgParallelCoordinatePlot.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgParallelCoordinatePlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgReshapeClimatic.Designer.vb">
+      <DependentUpon>dlgReshapeClimatic.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgReshapeClimatic.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgSPI.Designer.vb">
@@ -2374,6 +2386,9 @@
     <EmbeddedResource Include="dlgCombineText.sw-KE.resx">
       <DependentUpon>dlgCombineText.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCompareColumns.resx">
+      <DependentUpon>dlgCompareColumns.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgCompareModels.resx">
       <DependentUpon>dlgCompareModels.vb</DependentUpon>
     </EmbeddedResource>
@@ -2558,6 +2573,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRenameDataFrame.resx">
       <DependentUpon>dlgRenameDataFrame.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReshapeClimatic.resx">
+      <DependentUpon>dlgReshapeClimatic.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRowNamesOrNumbers.sw-KE.resx">
       <DependentUpon>dlgRowNamesOrNumbers.vb</DependentUpon>
