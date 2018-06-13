@@ -180,6 +180,8 @@ Public Class dlgUseDate
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
+        'ucrInputComboBoxStartingMonth.AddAdditionalCodeParameterPair(clsDefaultFunction, New RParameter("n"), iAdditionalPairNo:=1)
+        'ucrInputComboBoxStartingMonth.SetRCode(clsDefaultFunction, bReset)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 

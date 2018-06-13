@@ -222,11 +222,15 @@ dekade <- function(date) {
   return(temp_dekade)
 }
 
+pentad_test <- function(date){
+	temp_pentad <- 6 * ()
+}
+
 pentad <- function(date){
 	year <- as.numeric(format(date, "%Y"))
 	day <- as.numeric(format(date, "%d"))
   leap_year <- lubridate::leap_year(year)
-  temp_pentad <- ceiling((day - leap_year*(day > 59)) / 5)
+  temp_pentad <- ceiling((day - leap_year*(day > 59)) / 6)
   return(temp_pentad)
 }
 

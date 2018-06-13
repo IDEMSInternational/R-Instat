@@ -2106,12 +2106,12 @@ data_object$set("public","split_date", function(col_name = "", year = FALSE, lea
     self$add_columns_to_data(col_name = col_name, col_data = month_val_vector)
   }
   if(month_abbr) {
-    month_abbr_vector <- lubridate::month(col_data, label = TRUE)
+    month_abbr_vector <- forcats::fct_shift(f = (lubridate::month(col_data, label = TRUE)), n = (s_start_month - 1))
     col_name <- next_default_item(prefix = "month_abbr", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = month_abbr_vector)
   }
-  if(month_name) {
-    month_name_vector <- lubridate::month(col_data, label = TRUE, abbr = FALSE)
+  if(month_name) { 
+    month_name_vector <- forcats::fct_shift(f = (lubridate::month(col_data, label = TRUE, abbr = FALSE)), n = (s_start_month - 1))
     col_name <- next_default_item(prefix = "month_name", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = month_name_vector)
   }
