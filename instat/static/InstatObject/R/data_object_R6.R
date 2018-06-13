@@ -2101,7 +2101,8 @@ data_object$set("public","split_date", function(col_name = "", year = FALSE, lea
 
   #TODO. Shifting of month
    if(month_val) {
-    month_val_vector <- as.integer(lubridate::month(col_data))
+	month_val_vector <- ((as.integer(lubridate::month(col_data))) + (13 - s_start_month)) %% 12
+	month_val_vector <- ifelse(month_val_vector == 0, 12, month_val_vector)
     col_name <- next_default_item(prefix = "month_val", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = month_val_vector)
   }
@@ -2165,14 +2166,16 @@ data_object$set("public","split_date", function(col_name = "", year = FALSE, lea
   
   if(dekad_val) {
     # TODO. shift function when s_start_month > 1
-    dekad_val_vector <- as.integer(dekade(col_data))
+	dekad_val_vector <- ((as.integer(dekade(col_data))) + (37 - s_start_month)) %% 36
+	dekad_val_vector <- ifelse(dekad_val_vector == 0, 36, dekad_val_vector)
     col_name <- next_default_item(prefix = "dekad", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = dekad_val_vector)
   }
   
   if(pentad_val) {
     # TODO. shift function when s_start_month > 1
-    pentad_val_vector <- as.integer(pentad(col_data))
+	pentad_val_vector <- ((as.integer(pentad(col_data))) + (73 - s_start_month)) %% 72
+	pentad_val_vector <- ifelse(pentad_val_vector == 0, 72, pentad_val_vector)
     col_name <- next_default_item(prefix = "pentad", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = pentad_val_vector)
   }
