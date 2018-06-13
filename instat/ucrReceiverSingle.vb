@@ -23,6 +23,9 @@ Public Class ucrReceiverSingle
     Public bAutoFill As Boolean = False
     'We have not added this to multiple receiver because we have no case yet that we want not to print graph
     Public bPrintGraph As Boolean = True
+    'If True variable will be assigned to e.g. DF.x instead of x (where DF is strDataFrameName and x is receiver value)
+    'This is useful e.g. to ensure uniqueness when a dialog uses multiple data frames
+    Public bIncludeDataFrameInAssignment As Boolean = False
 
     Public Sub New()
         ' This call is required by the designer.
@@ -222,7 +225,11 @@ Public Class ucrReceiverSingle
             End Select
 
             'TODO make this an option set in Options menu
-            clsGetVariablesFunc.SetAssignTo(txtReceiverSingle.Text)
+            If bIncludeDataFrameInAssignment AndAlso strDataFrameName <> "" Then
+                clsGetVariablesFunc.SetAssignTo(strDataFrameName & "." & txtReceiverSingle.Text)
+            Else
+                clsGetVariablesFunc.SetAssignTo(txtReceiverSingle.Text)
+            End If
             Return clsGetVariablesFunc
         Else
             Return clsGetVariablesFunc
