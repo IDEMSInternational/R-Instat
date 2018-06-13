@@ -26,8 +26,13 @@ Public Class dlgUnstack
     Private clsDcastFunction As New RFunction
     Private clsBaseRCode As New RCodeStructure
 
+    Private iReceiverMaxY As Integer
+    Private iReceiverLabelMaxY As Integer
+
     Private Sub dlgunstack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
+            iReceiverMaxY = ucrReceiverCarryColumns.Location.Y
+            iReceiverLabelMaxY = lblCarryColumns.Location.Y
             InitialiseDialog()
             bFirstLoad = False
         End If
@@ -53,6 +58,11 @@ Public Class dlgUnstack
         ucrReceiverFactorToUnstackby.Selector = ucrSelectorForUnstack
         ucrReceiverFactorToUnstackby.SetDataType("factor")
         ucrReceiverFactorToUnstackby.strSelectorHeading = "Factors"
+
+        'ucrColumn
+        ucrReceiverColumnToUnstack.SetParameter(New RParameter("value.var", 4))
+        ucrReceiverColumnToUnstack.SetParameterIsString()
+        ucrReceiverColumnToUnstack.Selector = ucrSelectorForUnstack
 
         ''ucrMultipleColumnsReceiver
         'ucrMultipleColumnsReceiver.SetParameter(New RParameter("value.var", 1))
@@ -85,7 +95,9 @@ Public Class dlgUnstack
         ucrPnlUnstackCol.AddRCodeIsRFunctionCondition(rdoRestoreHierarchy, bNewIsPositive:=False)
         'TODO add function name condition for rdoMultiple
 
+        ucrPnlUnstackCol.AddToLinkedControls(ucrReceiverColumnToUnstack, {rdoSingle}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlUnstackCol.AddToLinkedControls(ucrMultipleColumnsReceiver, {rdoMultiple}, bNewLinkedHideIfParameterMissing:=True)
+        ucrReceiverColumnToUnstack.SetLinkedDisplayControl(lblColumnToUnstack)
         ucrMultipleColumnsReceiver.SetLinkedDisplayControl(lblMultipleColumns)
     End Sub
 
@@ -110,7 +122,6 @@ Public Class dlgUnstack
         clsDcastFunction.SetPackageName("reshape2")
         clsDcastFunction.SetRCommand("dcast")
         clsDcastFunction.AddParameter("formula", clsROperatorParameter:=clsFormula, iPosition:=1)
-        clsDcastFunction.SetAssignTo(ucrSelectorForUnstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_unstacked", strTempDataframe:=ucrSelectorForUnstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_unstacked")
 
         clsSelectFunction.SetPackageName("dplyr")
         clsSelectFunction.SetRCommand("select")
@@ -129,6 +140,7 @@ Public Class dlgUnstack
         ucrReceiverFactorToUnstackby.AddAdditionalCodeParameterPair(clsCommaOperator, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrNewDFName.AddAdditionalRCode(clsUnstackedOperator, iAdditionalPairNo:=1)
         ucrSelectorForUnstack.SetRCode(clsDcastFunction, bReset)
+        ucrReceiverColumnToUnstack.SetRCode(clsDcastFunction, bReset)
         ucrPnlUnstackCol.SetRCode(clsBaseRCode, bReset)
         ucrNewDFName.SetRCode(clsBaseRCode, bReset)
         ucrReceiverCarryColumns.SetRCode(clsCommaOperator, bReset)
@@ -195,7 +207,18 @@ Public Class dlgUnstack
             clsDcastFunction.RemoveAssignTo()
         End If
         ucrNewDFName.SetRCode(clsBaseRCode)
+        CarryColumnsLabelReceiverLocation()
         SetFormula()
+    End Sub
+
+    Private Sub CarryColumnsLabelReceiverLocation()
+        If rdoRestoreHierarchy.Checked Then
+            lblCarryColumns.Location = New Point(lblCarryColumns.Location.X, iReceiverLabelMaxY / 1.4)
+            ucrReceiverCarryColumns.Location = New Point(ucrReceiverCarryColumns.Location.X, iReceiverMaxY / 1.35)
+        Else
+            lblCarryColumns.Location = New Point(lblCarryColumns.Location.X, iReceiverLabelMaxY)
+            ucrReceiverCarryColumns.Location = New Point(ucrReceiverCarryColumns.Location.X, iReceiverMaxY)
+        End If
     End Sub
 
     Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewDFName.ControlContentsChanged, ucrReceiverFactorToUnstackby.ControlContentsChanged, ucrReceiverCarryColumns.ControlContentsChanged
