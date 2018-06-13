@@ -214,7 +214,7 @@ Public Class dlgStartofRains
         Dim strDPOverallIntervalRain As String = "dp_overall_interval_rain"
         Dim strRollSumRain As String = "roll_sum_Rain"
         Dim strStartDate As String = "start_date"
-        Dim strStartStatus As String = "status"
+        Dim strStartStatus As String = "start_status"
 
         clsAddKey.Clear()
         clsAddKeyColName.Clear()
