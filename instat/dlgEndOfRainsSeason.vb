@@ -33,10 +33,6 @@ Public Class dlgEndOfRainsSeason
     Private clsEvaporationReplaceNAFunc, clsEvaporationReplaceNA, clsEvaporationReplaceNAFuncList As New RFunction
     Private clsReduceOpEvapMin, clsReduceOpEvapMax As New ROperator
 
-    Private Sub ucrChkEvaporationAsReceiver_Load(sender As Object, e As EventArgs)
-
-    End Sub
-
     Private clsWBWaterFilterMinOperator, clsWBFirstWaterBalanceMinOperator, clsPMaxOperatorMin As New ROperator
 
     Private clsCombinationBase, clsEndRainBase, clsCombinationBaseList, clsWaterBalanceList, clsWaterBalanceFunction, clsWaterBalance As New RFunction
