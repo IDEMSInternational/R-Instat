@@ -309,7 +309,7 @@ Public Class dlgEndOfRainsSeason
         clsPMaxFunctionMax.AddParameter("calculation", clsROperatorParameter:=clsPMaxOperatorMax, iPosition:=0, bIncludeArgumentName:=False)
         clsPMaxOperatorMax.SetOperation("-")
         clsPMaxOperatorMax.AddParameter("first", "x + y", iPosition:=0)
-        clsPMaxOperatorMax.AddParameter("evaporation", 5, iPosition:=1, bIncludeArgumentName:=False)
+        'clsPMaxOperatorMax.AddParameter("evaporation", 5, iPosition:=1, bIncludeArgumentName:=False)
         clsPMaxFunctionMax.AddParameter("0", 0, iPosition:=1, bIncludeArgumentName:=False)
         clsPMinFunctionMax.AddParameter("values", 60, iPosition:=1)
         clsReduceFunctionMax.AddParameter("replace_na", strReplaceNAMax, iPosition:=1, bIncludeArgumentName:=False)
@@ -370,7 +370,7 @@ Public Class dlgEndOfRainsSeason
         clsPMaxFunctionMin.AddParameter("calculation", clsROperatorParameter:=clsPMaxOperatorMin, iPosition:=0, bIncludeArgumentName:=False)
         clsPMaxOperatorMin.SetOperation("-")
         clsPMaxOperatorMin.AddParameter("first", "x + y", iPosition:=0)
-        clsPMaxOperatorMin.AddParameter("evaporation", 5, iPosition:=1, bIncludeArgumentName:=False)
+        'clsPMaxOperatorMin.AddParameter("evaporation", 5, iPosition:=1, bIncludeArgumentName:=False)
         clsPMaxFunctionMin.AddParameter("0", 0, iPosition:=1, bIncludeArgumentName:=False)
         clsPMinFunctionMin.AddParameter("values", 60, iPosition:=1)
         clsReduceFunctionMin.AddParameter("replace_na", strReplaceNAMin, iPosition:=1, bIncludeArgumentName:=False)
@@ -639,8 +639,8 @@ Public Class dlgEndOfRainsSeason
 
     Private Sub Evaporation()
         If rdoValueEvaporation.Checked Then
-            'clsPMaxOperatorMin.AddParameter("evaporation", 5, iPosition:=1, bIncludeArgumentName:=False)
-            'clsPMaxOperatorMax.AddParameter("evaporation", 5, iPosition:=1, bIncludeArgumentName:=False)
+            clsPMaxOperatorMin.AddParameter("evaporation", 5, iPosition:=1, bIncludeArgumentName:=False)
+            clsPMaxOperatorMax.AddParameter("evaporation", 5, iPosition:=1, bIncludeArgumentName:=False)
             clsReduceFunctionMin.AddParameter("replace_na", strReplaceNAMin, iPosition:=1, bIncludeArgumentName:=False)
             clsReduceFunctionMax.AddParameter("replace_na", strReplaceNAMax, iPosition:=1, bIncludeArgumentName:=False)
             clsWBWaterBalanceMinList.RemoveParameterByName("sub2")
@@ -671,8 +671,8 @@ Public Class dlgEndOfRainsSeason
             clsReduceFunctionMax.AddParameter("replace_na", clsROperatorParameter:=clsReduceOpEvapMax, iPosition:=1, bIncludeArgumentName:=False)
             clsWaterBalanceMaxList.AddParameter("sub2", clsRFunctionParameter:=clsEvaporationReplaceNA, bIncludeArgumentName:=False)
 
-            clsPMaxOperatorMax.RemoveParameterByName("evaporation.val")
-            clsPMaxOperatorMin.RemoveParameterByName("evaporation.val")
+            clsPMaxOperatorMax.RemoveParameterByName("evaporation")
+            clsPMaxOperatorMin.RemoveParameterByName("evaporation")
         End If
     End Sub
 End Class
