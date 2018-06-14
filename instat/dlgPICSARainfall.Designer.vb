@@ -38,7 +38,6 @@ Partial Class dlgPICSARainfall
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.cmdPICSAOptions = New System.Windows.Forms.Button()
         Me.lblFactorOptional = New System.Windows.Forms.Label()
         Me.lblXVariable = New System.Windows.Forms.Label()
         Me.lblAvailable = New System.Windows.Forms.Label()
@@ -51,19 +50,8 @@ Partial Class dlgPICSARainfall
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
         Me.ucrVariablesAsFactorForPicsa = New instat.ucrVariablesAsFactor()
+        Me.cmdPICSAOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
-        '
-        'cmdPICSAOptions
-        '
-        Me.cmdPICSAOptions.Enabled = False
-        Me.cmdPICSAOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPICSAOptions.Location = New System.Drawing.Point(9, 260)
-        Me.cmdPICSAOptions.Name = "cmdPICSAOptions"
-        Me.cmdPICSAOptions.Size = New System.Drawing.Size(119, 23)
-        Me.cmdPICSAOptions.TabIndex = 21
-        Me.cmdPICSAOptions.Tag = ""
-        Me.cmdPICSAOptions.Text = "PICSA Options"
-        Me.cmdPICSAOptions.UseVisualStyleBackColor = True
         '
         'lblFactorOptional
         '
@@ -187,6 +175,18 @@ Partial Class dlgPICSARainfall
         Me.ucrVariablesAsFactorForPicsa.ucrSelector = Nothing
         Me.ucrVariablesAsFactorForPicsa.ucrVariableSelector = Nothing
         '
+        'cmdPICSAOptions
+        '
+        Me.cmdPICSAOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPICSAOptions.Location = New System.Drawing.Point(9, 260)
+        Me.cmdPICSAOptions.Name = "cmdPICSAOptions"
+        Me.cmdPICSAOptions.Size = New System.Drawing.Size(119, 23)
+        Me.cmdPICSAOptions.TabIndex = 21
+        Me.cmdPICSAOptions.Tag = ""
+        Me.cmdPICSAOptions.Text = "PICSA Options"
+        Me.cmdPICSAOptions.UseVisualStyleBackColor = True
+        Me.cmdPICSAOptions.Enabled = False
+        '
         'dlgPICSARainfall
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -218,7 +218,6 @@ Partial Class dlgPICSARainfall
 
     Friend WithEvents ucrChkPoints As ucrCheck
     Friend WithEvents ucrSave As ucrSave
-    Friend WithEvents cmdPICSAOptions As Button
     Friend WithEvents ucrPICSARainfallSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrFactorOptionalReceiver As ucrReceiverSingle
@@ -229,4 +228,5 @@ Partial Class dlgPICSARainfall
     Friend WithEvents cmdOptions As Button
     Friend WithEvents cmdLineOptions As Button
     Friend WithEvents ucrVariablesAsFactorForPicsa As ucrVariablesAsFactor
+    Friend WithEvents cmdPICSAOptions As Button
 End Class
