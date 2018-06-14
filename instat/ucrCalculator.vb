@@ -184,6 +184,7 @@ Public Class ucrCalculator
                 grpStrings.Visible = False
                 grpProbabilty.Visible = False
                 grpTransform.Visible = False
+                grpDates.Visible = False
                 iHelpCalcID = 126
                 Me.Size = New Size(iBasicWidth * 1.38, Me.Height)
             Case "Logical and Symbols"
