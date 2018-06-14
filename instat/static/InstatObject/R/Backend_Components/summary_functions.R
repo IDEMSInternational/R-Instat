@@ -415,9 +415,10 @@ nth_label="summary_nth"
 n_distinct_label="summary_n_distinct"
 proportion_label="proportion_calc"
 count_calc_label="count_calc"
+standard_error_mean_label="standard_error_mean"
 
 # list of all summary function names
-all_summaries=c(sum_label, mode_label, count_label, count_missing_label, count_non_missing_label, sd_label, var_label, median_label, range_label, min_label, max_label, mean_label, trimmed_mean_label, quartile_label, lower_quart_label, upper_quart_label, skewness_label, kurtosis_label, summary_coef_var_label, summary_skewness_mc_label, summary_outlier_limit_label, summary_median_absolute_deviation_label, summary_Qn_label, summary_Sn_label, cor_label, cov_label,first_label, last_label, nth_label, n_distinct_label, proportion_label, count_calc_label)
+all_summaries=c(sum_label, mode_label, count_label, count_missing_label, count_non_missing_label, sd_label, var_label, median_label, range_label, min_label, max_label, mean_label, trimmed_mean_label, quartile_label, lower_quart_label, upper_quart_label, skewness_label, kurtosis_label, summary_coef_var_label, summary_skewness_mc_label, summary_outlier_limit_label, summary_median_absolute_deviation_label, summary_Qn_label, summary_Sn_label, cor_label, cov_label,first_label, last_label, nth_label, n_distinct_label, proportion_label, count_calc_label,standard_error_mean_label)
 summary_mode <- function(x,...) {
   ux <- unique(x)
   out <- ux[which.max(tabulate(match(x, ux)))]
@@ -426,9 +427,25 @@ summary_mode <- function(x,...) {
   else return(out)
 }
 
-summary_mean <- function (x, add_cols, weights="", na.rm = FALSE, trim = 0,...) {
+na_check <- function(x, na_type = "n", na_max_n = NULL, na_max_prop = NULL, na_FUN = NULL, ...) {
+  if(na_type == "n") {
+    return(summary_count_missing(x) <= na_max_n)
+  }
+  else if(na_type == "prop") {
+    return(summary_count_missing(x)/summary_count(x) <= na_max_prop)
+  }
+  else if(na_type == "FUN") {
+    return(na_FUN(x, ...))
+  }
+  else stop("Invalid na_type specified for missing values check.")
+}
+
+summary_mean <- function (x, add_cols, weights="", na.rm = FALSE, trim = 0, na_type = "", ...) {
   if( length(x)==0 || (na.rm && length(x[!is.na(x)])==0) ) return(NA)
-  else return(mean(x, na.rm = na.rm, trim = trim))
+  else {
+    if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+    else return(mean(x, na.rm = na.rm, trim = trim))
+  }
 }
 
 summary_trimmed_mean <- function (x, add_cols, weights="", na.rm = FALSE, trimmed = 0,...) {
@@ -510,7 +527,7 @@ summary_skewness_mc <- function(x, na.rm = FALSE, ...) {
 }
 
 # skewness outlier limit function
-summary_outlier_limit <- function(x, coef = 1.5, bupperlimit=TRUE, bskewedcalc=FALSE, skewnessweight = 4,na.rm = TRUE, ...){ 
+summary_outlier_limit <- function(x, coef = 1.5, bupperlimit = TRUE, bskewedcalc = FALSE, skewnessweight = 4, na.rm = TRUE, ...){ 
   
   quart <- quantile(x, na.rm = na.rm)
   Q1 <- quart[[2]]
@@ -561,12 +578,12 @@ summary_Sn <- function(x, constant = 1.1926, finite.corr = missing(constant), na
 }
 
 # cor function
-summary_cor <- function(x, y, use = "everything", method = c("pearson", "kendall", "spearman"), ...) {
+summary_cor <- function(x, y, method = c("pearson", "kendall", "spearman"), use = c( "everything", "all.obs", "complete.obs", "na.or.complete", "pairwise.complete.obs"), ...) {
   return(cor(x = x, y = y, use = use, method = method))
 }
 
 # cov function
-summary_cov <- function(x, y, use = "everything", method = c("pearson", "kendall", "spearman"), ...) {
+summary_cov <- function(x, y, method = c("pearson", "kendall", "spearman"), use = c( "everything", "all.obs", "complete.obs", "na.or.complete", "pairwise.complete.obs"), ...) {
   return(cov(x = x, y = y, use = use, method = method))
 }
 
@@ -591,24 +608,52 @@ summary_n_distinct<- function(x, na.rm = FALSE, ...) {
 }
 
 #Proportions functions
-proportion_calc <- function(x, test = "==", value, As_percentage = FALSE, na.rm = FALSE,... ){ 
+proportion_calc <- function(x, prop_test = "==", prop_value, As_percentage = FALSE, na.rm = FALSE,... ){ 
   if(!na.rm){
     if(sum(is.na(x)) > 0) return(NA)
-    y <- x[eval(parse(text = paste("x", value, sep = test)))]
-    if(!As_percentage){return(length(y)/length(x))}
-    else {return(noquote(paste0((length(y)/length(x))*100 ,"%")))}  
+    y <- x[eval(parse(text = paste("x", prop_value, sep = prop_test)))]
+    if(!As_percentage){
+      return(round(length(y)/length(x),digits = 2))
+      }
+    else {
+      return(round((length(y)/length(x)*100),digits = 2 ))
+      }  
   }
   else {
     remove.na <- na.omit(x)
-    y <- remove.na[eval(parse(text = paste("remove.na", value, sep = test)))]
-    if (!As_percentage){ return(length(y)/length(remove.na))}
-    else{return(noquote(paste0((length(y)/length(remove.na))*100 ,"%")))}
+    y <- remove.na[eval(parse(text = paste("remove.na", prop_value, sep = prop_test)))]
+    if (!As_percentage){
+      return(round(length(y)/length(remove.na), digits = 2))
+      }
+    else{
+      return(round(length(y)/length(remove.na)*100, digits = 2 ))
+      }
   }
 }
 
 #count function
-count_calc <- function(x, test = "==", value, ...){ 
-  return(length(x[eval(parse(text = paste("x", value, sep = test)))]))
+count_calc <- function(x, count_test = "==", count_value, na.rm = FALSE, ...){ 
+  if (!na.rm){
+    if (sum(is.na(x)) > 0) return(NA)
+    return(length(x[eval(parse(text = paste("x", count_value, sep = count_test)))]))
+  }
+  else{
+    y <- na.omit(x)
+    return(length(y[eval(parse(text = paste("y", count_value, sep = count_test)))]))
+  }
+}
+
+#standard error of mean function
+
+standard_error_mean <- function(x, na.rm = FALSE, ...){
+  if (!na.rm){
+    if(sum(is.na(x) > 0)) return(NA)
+     return(sd(x)/sqrt(length(x)))
+  }
+  else{
+    y <- na.omit(x)
+    return(sd(y)/sqrt(length(y)))
+  }
 }
 
 
