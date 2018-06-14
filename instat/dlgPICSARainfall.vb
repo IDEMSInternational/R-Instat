@@ -167,7 +167,8 @@ Public Class dlgPICSARainfall
 
     Private Sub TempOptionsDisabledInMultipleVariablesCase()
         If ucrVariablesAsFactorForPicsa.bSingleVariable Then
-            cmdPICSAOptions.Enabled = True
+            'Added this because this sub is called on sed defaults and  it over writes the enabled property 
+            cmdPICSAOptions.Enabled = False
             cmdLineOptions.Enabled = True
             cmdOptions.Enabled = True
         Else
