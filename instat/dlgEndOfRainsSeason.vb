@@ -149,7 +149,7 @@ Public Class dlgEndOfRainsSeason
         ucrChkEndOfRains.SetText("End of Rains")
 
         ucrChkEndOfRains.AddToLinkedControls(ucrNudAmount, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
-        ucrChkEndOfRains.AddToLinkedControls(ucrNudTotalOverDays, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
+        ucrChkEndOfRains.AddToLinkedControls(ucrNudTotalOverDays, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrChkEndOfRains.AddToLinkedControls(ucrInputEndRainColName, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="end_rain")
 
         ucrNudAmount.SetParameter(New RParameter("threshold", 1, False))
@@ -445,7 +445,7 @@ Public Class dlgEndOfRainsSeason
         clsEndRainRollingSum.AddParameter("function_exp", clsRFunctionParameter:=clsRollingSumFunction, iPosition:=1)
         clsRollingSumFunction.SetPackageName("RcppRoll")
         clsRollingSumFunction.SetRCommand("roll_sumr")
-        clsRollingSumFunction.AddParameter("n", 2, iPosition:=1)
+        clsRollingSumFunction.AddParameter("n", 1, iPosition:=1)
         clsRollingSumFunction.AddParameter("fill", "NA", iPosition:=2)
         clsRollingSumFunction.AddParameter("na.rm", "FALSE", iPosition:=3)
         clsEndRainRollingSum.AddParameter("result_name", Chr(34) & strRollingSum & Chr(34), iPosition:=2)
