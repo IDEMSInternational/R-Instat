@@ -245,7 +245,7 @@ Public Class dlgEndOfRainsSeason
         clsCombinationBaseList.Clear()
 
         ucrSelectorForWaterBalance.Reset()
-        ucrReceiverDate.SetMeAsReceiver()
+        ucrReceiverRainfall.SetMeAsReceiver()
         ucrInputEndRainColName.Reset()
         ucrInputWBColName.Reset()
 
@@ -276,6 +276,7 @@ Public Class dlgEndOfRainsSeason
         clsDayFromOperator.SetOperation(">=")
         clsDayFromOperator.AddParameter("from", 1, iPosition:=1)
         clsDayFromAndToOperator.AddParameter("to_operator", clsROperatorParameter:=clsDayToOperator, iPosition:=1)
+        clsDayFromAndToOperator.bBrackets = False
         clsDayToOperator.SetOperation("<=")
         clsDayToOperator.AddParameter("to", 366, iPosition:=1)
         clsDayFromAndTo.SetAssignTo("day_from_and_to")
