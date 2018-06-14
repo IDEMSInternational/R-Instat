@@ -639,8 +639,8 @@ Public Class dlgEndOfRainsSeason
 
     Private Sub Evaporation()
         If rdoValueEvaporation.Checked Then
-            'clsPMaxOperatorMin.AddParameter("evaporation.val", 5, iPosition:=1, bIncludeArgumentName:=False)
-            'clsPMaxOperatorMax.AddParameter("evaporation.val", 5, iPosition:=1, bIncludeArgumentName:=False)
+            'clsPMaxOperatorMin.AddParameter("evaporation", 5, iPosition:=1, bIncludeArgumentName:=False)
+            'clsPMaxOperatorMax.AddParameter("evaporation", 5, iPosition:=1, bIncludeArgumentName:=False)
             clsReduceFunctionMin.AddParameter("replace_na", strReplaceNAMin, iPosition:=1, bIncludeArgumentName:=False)
             clsReduceFunctionMax.AddParameter("replace_na", strReplaceNAMax, iPosition:=1, bIncludeArgumentName:=False)
             clsWBWaterBalanceMinList.RemoveParameterByName("sub2")
