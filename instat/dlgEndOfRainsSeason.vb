@@ -249,6 +249,7 @@ Public Class dlgEndOfRainsSeason
         clsAddKey.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
         clsAddKey.AddParameter("col_name", clsRFunctionParameter:=clsAddKeyColName)
         clsAddKeyColName.SetRCommand("c")
+        clsAddKey.AddParameter("data_name", strCurrDataName)
 
         'group by
         clsGroupBy.SetRCommand("instat_calculation$new")
