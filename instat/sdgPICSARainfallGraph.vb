@@ -17,6 +17,8 @@
 Imports instat.Translations
 Public Class sdgPICSARainfallGraph
     Private bControlsInitialised As Boolean = False
+    Private clsBaseOperator As ROperator
+    Private clsYlabFunc As RFunction
     Private Sub sdgPICSARainfallGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
@@ -33,6 +35,9 @@ Public Class sdgPICSARainfallGraph
         ucrChkYAxisTitle.AddToLinkedControls(ucrInputYAxisTitle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkYAxisTitle.AddToLinkedControls(ucrNudYAxisTitleSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudYAxisTitleSize.SetLinkedDisplayControl(lblYAxisTitleSize)
+        ucrChkYAxisTitle.SetParameter(New RParameter("ylab", clsYlabFunc, 1), bNewChangeParameterValue:=False)
+        ucrChkYAxisTitle.AddParameterPresentCondition(True, "ylab")
+        ucrInputYAxisTitle.SetParameter(New RParameter("label"))
 
         ucrChkYAxisLabelsSize.AddToLinkedControls(ucrNudYAxisLabelsSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
@@ -63,11 +68,20 @@ Public Class sdgPICSARainfallGraph
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRcode()
+    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewYLabTitleFunction As RFunction = Nothing, Optional bReset As Boolean = False)
+
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
+
+        clsBaseOperator = clsNewOperator
+        clsYlabFunc = clsNewYLabTitleFunction
+
+        If Not clsBaseOperator.ContainsParameter("ylab") Then
+            clsBaseOperator.AddParameter(clsRFunctionParameter:=GgplotDefaults.clsYlabTitleFunction.Clone)
+        End If
+
+        ucrChkYAxisTitle.SetRCode(clsBaseOperator, bReset)
+        ucrInputYAxisTitle.SetRCode(clsYlabFunc, bReset)
     End Sub
-
-
 End Class

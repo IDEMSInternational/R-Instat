@@ -34,6 +34,8 @@ Public Class dlgPICSARainfall
     Private bResetLineLayerSubdialog As Boolean = True
     Private clsLocalRaesFunction As New RFunction
     Private clsGeomPoint As New RFunction
+    Private clsPointsFunc As New RFunction
+    Private clsPointsParam As New RParameter
 
     Private Sub dlgPCSARainfall_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -49,7 +51,6 @@ Public Class dlgPICSARainfall
         TestOkEnabled()
     End Sub
     Private Sub InitialiseDialog()
-
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
         ucrBase.iHelpTopicID = 118
@@ -57,19 +58,11 @@ Public Class dlgPICSARainfall
         ucrPICSARainfallSelector.SetParameter(New RParameter("data", 0))
         ucrPICSARainfallSelector.SetParameterIsrfunction()
 
-        ucrVariablesAsFactor.SetParameter(New RParameter("y", 1))
-        ucrVariablesAsFactor.SetFactorReceiver(ucrFactorOptionalReceiver)
-        ucrVariablesAsFactor.Selector = ucrPICSARainfallSelector
-        ucrVariablesAsFactor.strSelectorHeading = "Varibles"
-        ucrVariablesAsFactor.SetParameterIsString()
-        ucrVariablesAsFactor.bWithQuotes = False
-        ucrVariablesAsFactor.SetValuesToIgnore({Chr(34) & Chr(34)})
-        ucrVariablesAsFactor.bAddParameterIfEmpty = True
-
         ucrReceiverX.SetParameter(New RParameter("x", 0))
+        ucrReceiverX.SetParameterIsString()
         ucrReceiverX.Selector = ucrPICSARainfallSelector
-        ucrReceiverX.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
-        ucrReceiverX.strSelectorHeading = "Year"
+        ucrReceiverX.SetClimaticType("year")
+        ucrReceiverX.strSelectorHeading = "Year Variables"
         ucrReceiverX.bAutoFill = True
         ucrReceiverX.bWithQuotes = False
 
@@ -80,9 +73,23 @@ Public Class dlgPICSARainfall
         ucrFactorOptionalReceiver.bWithQuotes = False
         ucrFactorOptionalReceiver.SetParameterIsString()
 
+        ucrVariablesAsFactorForPicsa.SetParameter(New RParameter("y", 1))
+        ucrVariablesAsFactorForPicsa.SetFactorReceiver(ucrFactorOptionalReceiver)
+        ucrVariablesAsFactorForPicsa.Selector = ucrPICSARainfallSelector
+        ucrVariablesAsFactorForPicsa.strSelectorHeading = "Varibles"
+        ucrVariablesAsFactorForPicsa.SetParameterIsString()
+        ucrVariablesAsFactorForPicsa.bWithQuotes = False
+
         ucrChkPoints.SetText("Add Points")
         ucrChkPoints.AddParameterPresentCondition(True, "points")
         ucrChkPoints.AddParameterPresentCondition(False, "points", False)
+        clsPointsFunc.SetPackageName("ggplot2")
+        clsPointsFunc.SetRCommand("geom_point")
+        clsPointsParam.SetArgumentName("points")
+        clsPointsParam.SetArgument(clsPointsFunc)
+        clsPointsFunc.AddParameter("size", "3")
+        clsPointsFunc.AddParameter("colour", Chr(34) & "red" & Chr(34))
+        ucrChkPoints.SetParameter(clsPointsParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         ucrSave.SetPrefix("PICSA_Rainfall_Graph")
         ucrSave.SetIsComboBox()
@@ -97,12 +104,11 @@ Public Class dlgPICSARainfall
         clsRgeomlineplotFunction = New RFunction
         clsRaesFunction = New RFunction
         clsBaseOperator = New ROperator
-        clsGeomPoint = New RFunction
 
         ucrPICSARainfallSelector.Reset()
         ucrPICSARainfallSelector.SetGgplotFunction(clsBaseOperator)
         ucrSave.Reset()
-        ucrVariablesAsFactor.SetMeAsReceiver()
+        ucrVariablesAsFactorForPicsa.SetMeAsReceiver()
         bResetSubdialog = True
         bResetLineLayerSubdialog = True
 
@@ -119,10 +125,7 @@ Public Class dlgPICSARainfall
 
         clsRgeomlineplotFunction.SetPackageName("ggplot2")
         clsRgeomlineplotFunction.SetRCommand("geom_line")
-
-        clsGeomPoint.SetPackageName("ggplot2")
-        clsGeomPoint.SetRCommand("geom_point")
-        clsBaseOperator.AddParameter("points", clsRFunctionParameter:=clsGeomPoint)
+        clsBaseOperator.AddParameter(clsPointsParam)
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -143,14 +146,14 @@ Public Class dlgPICSARainfall
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrPICSARainfallSelector.SetRCode(clsRggplotFunction, bReset)
         ucrReceiverX.SetRCode(clsRaesFunction, bReset)
-        ucrVariablesAsFactor.SetRCode(clsRaesFunction, bReset)
         ucrFactorOptionalReceiver.SetRCode(clsRaesFunction, bReset)
         ucrSave.SetRCode(clsBaseOperator, bReset)
         ucrChkPoints.SetRCode(clsBaseOperator, bReset)
+        ucrVariablesAsFactorForPicsa.SetRCode(clsRaesFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrSave.IsComplete OrElse (ucrReceiverX.IsEmpty AndAlso ucrVariablesAsFactor.IsEmpty) Then
+        If (ucrVariablesAsFactorForPicsa.IsEmpty OrElse ucrReceiverX.IsEmpty) OrElse Not ucrSave.IsComplete Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -162,24 +165,24 @@ Public Class dlgPICSARainfall
     End Sub
 
     Private Sub TempOptionsDisabledInMultipleVariablesCase()
-        If ucrVariablesAsFactor.bSingleVariable Then
+        If ucrVariablesAsFactorForPicsa.bSingleVariable Then
             cmdPICSAOptions.Enabled = True
+            cmdLineOptions.Enabled = True
+            cmdOptions.Enabled = True
         Else
             cmdPICSAOptions.Enabled = False
-
+            cmdLineOptions.Enabled = False
+            cmdOptions.Enabled = False
         End If
     End Sub
-    Private Sub UcrVariablesAsFactor_ControlValueChanged() Handles ucrVariablesAsFactor.ControlValueChanged
+    Private Sub ucrVariablesAsFactorForPicsa_ControlValueChanged() Handles ucrVariablesAsFactorForPicsa.ControlValueChanged
         TempOptionsDisabledInMultipleVariablesCase()
     End Sub
 
-    Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrVariablesAsFactor.ControlContentsChanged, ucrSave.ControlContentsChanged
-        TestOkEnabled()
-    End Sub
-
     Private Sub cmdPICSAOptions_Click(sender As Object, e As EventArgs) Handles cmdPICSAOptions.Click
-        sdgPICSARainfallGraph.SetRcode()
+        sdgPICSARainfallGraph.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYLabTitleFunction:=clsYlabFunction, bReset:=bResetSubdialog)
         sdgPICSARainfallGraph.ShowDialog()
+        bResetSubdialog = False
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
@@ -204,11 +207,11 @@ Public Class dlgPICSARainfall
                 End If
                 'In the y case, the vlue stored in the clsReasFunction in the multiplevariables case is "value", however that one shouldn't be written in the multiple variables receiver (otherwise it would stack all variables and the stack ("value") itself!).
                 'Warning: what if someone used the name value for one of it's variables independently from the multiple variables method ? Here if the receiver is actually in single mode, the variable "value" will still be given back, which throws the problem back to the creation of "value" in the multiple receiver case.
-            ElseIf clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactor.bSingleVariable) Then
+            ElseIf clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForPicsa.bSingleVariable) Then
                 'Still might be in the case of bSingleVariable with mapping y="".
                 If clsParam.strArgumentValue = (Chr(34) & Chr(34)) Then
-                    ucrVariablesAsFactor.Clear()
-                Else ucrVariablesAsFactor.Add(clsParam.strArgumentValue)
+                    ucrVariablesAsFactorForPicsa.Clear()
+                Else ucrVariablesAsFactorForPicsa.Add(clsParam.strArgumentValue)
                 End If
             ElseIf clsParam.strArgumentName = "colour" Then
                 ucrFactorOptionalReceiver.Add(clsParam.strArgumentValue)
@@ -217,11 +220,7 @@ Public Class dlgPICSARainfall
         TestOkEnabled()
     End Sub
 
-    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactor.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrReceiverX.ControlContentsChanged
-
-    End Sub
-
-    Private Sub UcrVariablesAsFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactor.ControlValueChanged
-
+    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForPicsa.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrReceiverX.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
