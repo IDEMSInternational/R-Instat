@@ -2179,6 +2179,8 @@ data_object$set("public","split_date", function(col_name = "", year = FALSE, lea
     col_name <- next_default_item(prefix = "pentad", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = pentad_val_vector)
   }
+
+  month_name_vector <- forcats::fct_shift(f = (lubridate::month(col_data, label = TRUE, abbr = FALSE)), n = (s_start_month - 1))
   
   if(week_val) {
     week_Val_vector <- as.integer(lubridate::week(col_data))
