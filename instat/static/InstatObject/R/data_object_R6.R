@@ -2105,16 +2105,19 @@ data_object$set("public","split_date", function(col_name = "", year = FALSE, lea
 	month_val_vector <- ifelse(month_val_vector == 0, 12, month_val_vector)
     col_name <- next_default_item(prefix = "month_val", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = month_val_vector)
+	if(self$is_climatic_data()) self$set_climatic_types(types = c(month_val = col_name))
   }
   if(month_abbr) {
     month_abbr_vector <- forcats::fct_shift(f = (lubridate::month(col_data, label = TRUE)), n = (s_start_month - 1))
     col_name <- next_default_item(prefix = "month_abbr", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = month_abbr_vector)
+	if(self$is_climatic_data()) self$set_climatic_types(types = c(month_abbr = col_name))
   }
   if(month_name) { 
     month_name_vector <- forcats::fct_shift(f = (lubridate::month(col_data, label = TRUE, abbr = FALSE)), n = (s_start_month - 1))
     col_name <- next_default_item(prefix = "month_name", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = month_name_vector)
+	if(self$is_climatic_data()) self$set_climatic_types(types = c(month_name = col_name))
   }
   
   if(day) {
@@ -2134,6 +2137,7 @@ data_object$set("public","split_date", function(col_name = "", year = FALSE, lea
       col_name <- next_default_item(prefix = "s_doy", existing_names = self$get_column_names(), include_index = FALSE)
       self$add_columns_to_data(col_name = col_name, col_data = temp_s_doy)
       self$append_to_variables_metadata(col_names = col_name, property = label_label, new_val = paste("Shifted day of year by", (s_start_day - 1), "days"))
+	  if(self$is_climatic_data()) self$set_climatic_types(types = c(s_doy = col_name))
     }else{
       day_in_year_366_vector <- as.integer(yday_366(col_data))
       col_name <- next_default_item(prefix = "doy", existing_names = self$get_column_names(), include_index = FALSE)
@@ -2154,7 +2158,6 @@ data_object$set("public","split_date", function(col_name = "", year = FALSE, lea
   
   if(quarter_val){
     if(s_shift){
-      if(s_start_month %% 1 != 0 || s_start_month < 1 || s_start_month > 12) stop("shift_start_month must be an integer between 1 and 12. ", s_start_month, " is invalid.")
       s_quarter_val_vector <- lubridate::quarter(col_data, with_year = with_year, fiscal_start = s_start_month)
       col_name <- next_default_item(prefix = "s_quarter", existing_names = self$get_column_names(), include_index = FALSE)
       self$add_columns_to_data(col_name = col_name, col_data = s_quarter_val_vector)
