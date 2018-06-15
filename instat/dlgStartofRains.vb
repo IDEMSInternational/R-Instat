@@ -26,7 +26,7 @@ Public Class dlgStartofRains
     Private clsLessFilterOperator As New ROperator
     Private clsSORStart, clsSORStatus, clsSORStartIfelse, clsSORIsNA As New RFunction
     Private clsSORStartSummary As New clsStartOfRains
-    Private clsNewIsNaIfelse As RFunction
+    Private clsSORStatusSummary As New clsStartOfRains
 
     'Rainy Day classes
     Private clsRDRollingRainDays, clsRDRollingRainDaysFunction, clsRDRollingRainDaysSub As New RFunction
@@ -214,7 +214,7 @@ Public Class dlgStartofRains
         Dim strDPOverallIntervalRain As String = "dp_overall_interval_rain"
         Dim strRollSumRain As String = "roll_sum_Rain"
         Dim strStartDate As String = "start_date"
-        Dim strStartStatus As String = "status"
+        Dim strStartStatus As String = "start_status"
 
         clsAddKey.Clear()
         clsAddKeyColName.Clear()
@@ -263,7 +263,6 @@ Public Class dlgStartofRains
         clsDPOverallIntervalFunctionOperatorRight.Clear()
         clsApplyInstatFunction.Clear()
 
-        clsCombineOperator.Clear()
         clsTRCombineOperator.Clear()
         clsRDCombineOperator.Clear()
         clsDSCombineOperator.Clear()
@@ -368,13 +367,13 @@ Public Class dlgStartofRains
         clsSORStart.SetAssignTo("start_of_rains_start")
 
         clsSORStartSummary.SetDefaults()
+        clsSORStatusSummary.SetDefaults()
 
-        clsNewIsNaIfelse = clsStartOfRains.clsIsNaIfelse.Clone
-        clsNewIsNaIfelse.bToScriptAsRString = True
+        clsSORStatusSummary.clsIsNaIfelse.bToScriptAsRString = True
 
         clsSORStatus.SetRCommand("instat_calculation$new")
         clsSORStatus.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
-        clsSORStatus.AddParameter("function_exp", clsRFunctionParameter:=clsNewIsNaIfelse, iPosition:=1)
+        clsSORStatus.AddParameter("function_exp", clsRFunctionParameter:=clsSORStatusSummary.clsIsNaIfelse, iPosition:=1)
         clsSORStatus.AddParameter("result_name", Chr(34) & strStartStatus & Chr(34), iPosition:=3)
         clsSORStatus.AddParameter("save", 2, iPosition:=4)
         clsSORStatus.SetAssignTo("start_of_rains_status")
@@ -386,7 +385,7 @@ Public Class dlgStartofRains
         clsSORStartIfelse.AddParameter("start_doy", strParameterValue:=clsSORStartSummary.strStartDoy, bIncludeArgumentName:=False, iPosition:=2)
 
         clsSORIsNA.SetRCommand("is.na")
-        clsSORIsNA.AddParameter("ifelse", clsRFunctionParameter:=clsStartOfRains.clsIsNaIfelse, bIncludeArgumentName:=False)
+        clsSORIsNA.AddParameter("ifelse", clsRFunctionParameter:=clsSORStartSummary.clsIsNaIfelse, bIncludeArgumentName:=False)
 
         ' Quantile checked:
         ' this function is associated with that rdo.
@@ -522,7 +521,6 @@ Public Class dlgStartofRains
 
         ' run always
         clsCombineOperator.AddParameter("rainfall", clsROperatorParameter:=clsRainCombineOperator, iPosition:=0)
-        clsCombineOperator.AddParameter("total_rainfall", clsROperatorParameter:=clsTRCombineOperator, iPosition:=1)
         clsCombineOperator.bToScriptAsRString = True
         clsCombineOperator.SetOperation("&")
 
@@ -532,7 +530,6 @@ Public Class dlgStartofRains
         ' run if chkTR is checked
         clsTRCombineOperator.SetOperation(">")
         clsTRCombineOperator.AddParameter("tr_left", strRollSumRain, iPosition:=0)
-        clsTRCombineOperator.AddParameter("tr_amount", 20, bIncludeArgumentName:=False, iPosition:=1)
 
         ' run if chkRD is checked
         clsRDCombineOperator.SetOperation(">=")
@@ -607,7 +604,6 @@ Public Class dlgStartofRains
 
         'Base Function
         ucrBase.clsRsyntax.SetBaseRFunction(clsApplyInstatFunction)
-        'DefaultNudValue()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -618,7 +614,7 @@ Public Class dlgStartofRains
         ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsDPRainInDaysFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
         ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsRainCombineOperator, New RParameter("rain", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
         clsSORStartSummary.SetControlParameters(ucrReceiverRainfall, iAdditionalPairNo:=4)
-        ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsNewIsNaIfelse, New RParameter("rain", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=4)
+        clsSORStatusSummary.SetControlParameters(ucrReceiverRainfall, iAdditionalPairNo:=5)
 
         ucrNudThreshold.AddAdditionalCodeParameterPair(clsRainCombineOperator, New RParameter("rain_threshold", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrNudDPRainPeriod.AddAdditionalCodeParameterPair(clsDPOverallIntervalFunctionOperatorRight, ucrNudDPRainPeriod.GetParameter(), iAdditionalPairNo:=1)
@@ -705,17 +701,20 @@ Public Class dlgStartofRains
     End Sub
 
     Private Sub CombinedFilter()
+        clsCombineOperator.AddParameter("total_rainfall", clsROperatorParameter:=clsTRCombineOperator, iPosition:=1)
         If ucrChkTotalRainfall.Checked Then
             If rdoTRAmount.Checked Then
                 clsCombinedList.RemoveParameterByName("tr_perc_sub")
                 clsTRCombineOperator.RemoveParameterByName("tr_perc")
+                clsTRCombineOperator.AddParameter("tr_amount", ucrNudTRAmount.Value, bIncludeArgumentName:=False, iPosition:=1)
             Else
+                clsTRCombineOperator.RemoveParameterByName("tr_amount")
                 clsCombinedList.AddParameter("tr_perc_sub", clsRFunctionParameter:=clsTRWetSpell, bIncludeArgumentName:=False)
                 clsTRCombineOperator.AddParameter("tr_perc", strParameterValue:=strWetSpell, iPosition:=1)
             End If
         Else
+            clsTRCombineOperator.RemoveParameterByName("tr_amount")
             clsCombinedList.RemoveParameterByName("tr_perc_sub")
-            clsCombineOperator.RemoveParameterByName("total_rainfall")
             clsTRCombineOperator.RemoveParameterByName("tr_perc")
         End If
     End Sub
@@ -761,7 +760,7 @@ Public Class dlgStartofRains
         clsDPRainInDays.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames & ")", iPosition:=3)
     End Sub
 
-    Private Sub ucrChkTotalRainfall_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTotalRainfall.ControlValueChanged, ucrPnlTRCalculateBy.ControlValueChanged
+    Private Sub ucrChkTotalRainfall_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTotalRainfall.ControlValueChanged, ucrPnlTRCalculateBy.ControlValueChanged, ucrNudTRAmount.ControlValueChanged
         CombinedFilter()
     End Sub
 
