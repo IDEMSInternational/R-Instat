@@ -183,6 +183,12 @@
     <Compile Include="dlgBackupManager.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCalculateTreatmentDifferences.Designer.vb">
+      <DependentUpon>dlgCalculateTreatmentDifferences.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCalculateTreatmentDifferences.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCalculationsSummary.Designer.vb">
       <DependentUpon>dlgCalculationsSummary.vb</DependentUpon>
     </Compile>
@@ -241,6 +247,12 @@
       <DependentUpon>dlgCompareModels.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgCompareModels.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgCompareTreatmentLines.Designer.vb">
+      <DependentUpon>dlgCompareTreatmentLines.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCompareTreatmentLines.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgCopyDataFrame.Designer.vb">
@@ -2243,6 +2255,9 @@
     <EmbeddedResource Include="dlgBackupManager.resx">
       <DependentUpon>dlgBackupManager.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCalculateTreatmentDifferences.resx">
+      <DependentUpon>dlgCalculateTreatmentDifferences.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgCalculationsSummary.resx">
       <DependentUpon>dlgCalculationsSummary.vb</DependentUpon>
     </EmbeddedResource>
@@ -2395,6 +2410,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCompareModels.sw-KE.resx">
       <DependentUpon>dlgCompareModels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCompareTreatmentLines.resx">
+      <DependentUpon>dlgCompareTreatmentLines.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgContrasts.resx">
       <DependentUpon>dlgContrasts.vb</DependentUpon>
