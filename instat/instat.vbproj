@@ -152,6 +152,7 @@
     <Compile Include="clsQualityControl.vb" />
     <Compile Include="clsRCodeStructure.vb" />
     <Compile Include="clsRegressionDefaults.vb" />
+    <Compile Include="clsStartOfRains.vb" />
     <Compile Include="dlgAddComment.Designer.vb">
       <DependentUpon>dlgAddComment.vb</DependentUpon>
     </Compile>
@@ -180,6 +181,12 @@
       <DependentUpon>dlgBackupManager.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgBackupManager.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgCalculateTreatmentDifferences.Designer.vb">
+      <DependentUpon>dlgCalculateTreatmentDifferences.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCalculateTreatmentDifferences.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgCalculationsSummary.Designer.vb">
@@ -230,10 +237,22 @@
     <Compile Include="dlgClimSoft.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCompareColumns.Designer.vb">
+      <DependentUpon>dlgCompareColumns.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCompareColumns.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCompareModels.Designer.vb">
       <DependentUpon>dlgCompareModels.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgCompareModels.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgCompareTreatmentLines.Designer.vb">
+      <DependentUpon>dlgCompareTreatmentLines.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCompareTreatmentLines.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgCopyDataFrame.Designer.vb">
@@ -306,6 +325,12 @@
       <DependentUpon>dlgParallelCoordinatePlot.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgParallelCoordinatePlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgReshapeClimatic.Designer.vb">
+      <DependentUpon>dlgReshapeClimatic.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgReshapeClimatic.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgSPI.Designer.vb">
@@ -2230,6 +2255,9 @@
     <EmbeddedResource Include="dlgBackupManager.resx">
       <DependentUpon>dlgBackupManager.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCalculateTreatmentDifferences.resx">
+      <DependentUpon>dlgCalculateTreatmentDifferences.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgCalculationsSummary.resx">
       <DependentUpon>dlgCalculationsSummary.vb</DependentUpon>
     </EmbeddedResource>
@@ -2374,11 +2402,17 @@
     <EmbeddedResource Include="dlgCombineText.sw-KE.resx">
       <DependentUpon>dlgCombineText.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCompareColumns.resx">
+      <DependentUpon>dlgCompareColumns.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgCompareModels.resx">
       <DependentUpon>dlgCompareModels.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCompareModels.sw-KE.resx">
       <DependentUpon>dlgCompareModels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCompareTreatmentLines.resx">
+      <DependentUpon>dlgCompareTreatmentLines.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgContrasts.resx">
       <DependentUpon>dlgContrasts.vb</DependentUpon>
@@ -2558,6 +2592,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRenameDataFrame.resx">
       <DependentUpon>dlgRenameDataFrame.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReshapeClimatic.resx">
+      <DependentUpon>dlgReshapeClimatic.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRowNamesOrNumbers.sw-KE.resx">
       <DependentUpon>dlgRowNamesOrNumbers.vb</DependentUpon>

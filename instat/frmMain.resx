@@ -1379,26 +1379,23 @@
   <data name="mnuClimaticSPI.Text" xml:space="preserve">
     <value>SPI...</value>
   </data>
-  <data name="mnuClimaticPICSARainfall.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="mnuClimaticPICSARainfall.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 22</value>
+    <value>157, 22</value>
   </data>
   <data name="mnuClimaticPICSARainfall.Text" xml:space="preserve">
-    <value>Rainfall...</value>
+    <value>Rainfall Graph...</value>
   </data>
   <data name="mnuClimaticPICSATemperature.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="mnuClimaticPICSATemperature.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 22</value>
+    <value>157, 22</value>
   </data>
   <data name="mnuClimaticPICSATemperature.Text" xml:space="preserve">
     <value>Temperature...</value>
   </data>
   <data name="mnuClimaticPICSACrops.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 22</value>
+    <value>157, 22</value>
   </data>
   <data name="mnuClimaticPICSACrops.Text" xml:space="preserve">
     <value>Crops...</value>
@@ -2527,11 +2524,17 @@
   <data name="mnuPrepareDataFrame.Text" xml:space="preserve">
     <value>Data Frame</value>
   </data>
-  <data name="DuplicatesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuPrepareCheckDataDuplicates.Size" type="System.Drawing.Size, System.Drawing">
     <value>245, 22</value>
   </data>
-  <data name="DuplicatesToolStripMenuItem.Text" xml:space="preserve">
+  <data name="mnuPrepareCheckDataDuplicates.Text" xml:space="preserve">
     <value>Duplicates...</value>
+  </data>
+  <data name="mnuPrepareCheckDataCompareColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 22</value>
+  </data>
+  <data name="mnuPrepareCheckDataCompareColumns.Text" xml:space="preserve">
+    <value>Compare Columns...</value>
   </data>
   <data name="mnuPrepareCheckDataBoxplot.Size" type="System.Drawing.Size, System.Drawing">
     <value>245, 22</value>
@@ -7528,10 +7531,16 @@
   <data name="&gt;&gt;mnuPrepareCheckData.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DuplicatesToolStripMenuItem.Name" xml:space="preserve">
-    <value>DuplicatesToolStripMenuItem</value>
+  <data name="&gt;&gt;mnuPrepareCheckDataDuplicates.Name" xml:space="preserve">
+    <value>mnuPrepareCheckDataDuplicates</value>
   </data>
-  <data name="&gt;&gt;DuplicatesToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuPrepareCheckDataDuplicates.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuPrepareCheckDataCompareColumns.Name" xml:space="preserve">
+    <value>mnuPrepareCheckDataCompareColumns</value>
+  </data>
+  <data name="&gt;&gt;mnuPrepareCheckDataCompareColumns.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuPrepareCheckDataBoxplot.Name" xml:space="preserve">
