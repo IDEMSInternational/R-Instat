@@ -39,20 +39,56 @@ Partial Class dlgCombine
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgCombine))
-        Me.ucrSelectorCombineFactors = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrFactorsReceiver = New instat.ucrReceiverMultiple()
         Me.lblFactors = New System.Windows.Forms.Label()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkDropUnusedLevels = New instat.ucrCheck()
+        Me.lblSeparator = New System.Windows.Forms.Label()
+        Me.ucrChkLexOrder = New instat.ucrCheck()
+        Me.ucrInputSeparator = New instat.ucrInputComboBox()
         Me.ucrNewColName = New instat.ucrSave()
+        Me.ucrChkDropUnusedLevels = New instat.ucrCheck()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrFactorsReceiver = New instat.ucrReceiverMultiple()
+        Me.ucrSelectorCombineFactors = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
         '
-        'ucrSelectorCombineFactors
+        'lblFactors
         '
-        Me.ucrSelectorCombineFactors.bShowHiddenColumns = False
-        Me.ucrSelectorCombineFactors.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorCombineFactors, "ucrSelectorCombineFactors")
-        Me.ucrSelectorCombineFactors.Name = "ucrSelectorCombineFactors"
+        resources.ApplyResources(Me.lblFactors, "lblFactors")
+        Me.lblFactors.Name = "lblFactors"
+        Me.lblFactors.Tag = "Factors_Selected:"
+        '
+        'lblSeparator
+        '
+        resources.ApplyResources(Me.lblSeparator, "lblSeparator")
+        Me.lblSeparator.Name = "lblSeparator"
+        '
+        'ucrChkLexOrder
+        '
+        Me.ucrChkLexOrder.Checked = False
+        resources.ApplyResources(Me.ucrChkLexOrder, "ucrChkLexOrder")
+        Me.ucrChkLexOrder.Name = "ucrChkLexOrder"
+        '
+        'ucrInputSeparator
+        '
+        Me.ucrInputSeparator.AddQuotesIfUnrecognised = True
+        Me.ucrInputSeparator.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputSeparator, "ucrInputSeparator")
+        Me.ucrInputSeparator.Name = "ucrInputSeparator"
+        '
+        'ucrNewColName
+        '
+        resources.ApplyResources(Me.ucrNewColName, "ucrNewColName")
+        Me.ucrNewColName.Name = "ucrNewColName"
+        '
+        'ucrChkDropUnusedLevels
+        '
+        Me.ucrChkDropUnusedLevels.Checked = False
+        resources.ApplyResources(Me.ucrChkDropUnusedLevels, "ucrChkDropUnusedLevels")
+        Me.ucrChkDropUnusedLevels.Name = "ucrChkDropUnusedLevels"
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
         '
         'ucrFactorsReceiver
         '
@@ -63,32 +99,21 @@ Partial Class dlgCombine
         Me.ucrFactorsReceiver.strNcFilePath = ""
         Me.ucrFactorsReceiver.ucrSelector = Nothing
         '
-        'lblFactors
+        'ucrSelectorCombineFactors
         '
-        resources.ApplyResources(Me.lblFactors, "lblFactors")
-        Me.lblFactors.Name = "lblFactors"
-        Me.lblFactors.Tag = "Factors_Selected:"
-        '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrChkDropUnusedLevels
-        '
-        Me.ucrChkDropUnusedLevels.Checked = False
-        resources.ApplyResources(Me.ucrChkDropUnusedLevels, "ucrChkDropUnusedLevels")
-        Me.ucrChkDropUnusedLevels.Name = "ucrChkDropUnusedLevels"
-        '
-        'ucrNewColName
-        '
-        resources.ApplyResources(Me.ucrNewColName, "ucrNewColName")
-        Me.ucrNewColName.Name = "ucrNewColName"
+        Me.ucrSelectorCombineFactors.bDropUnusedFilterLevels = False
+        Me.ucrSelectorCombineFactors.bShowHiddenColumns = False
+        Me.ucrSelectorCombineFactors.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorCombineFactors, "ucrSelectorCombineFactors")
+        Me.ucrSelectorCombineFactors.Name = "ucrSelectorCombineFactors"
         '
         'dlgCombine
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblSeparator)
+        Me.Controls.Add(Me.ucrChkLexOrder)
+        Me.Controls.Add(Me.ucrInputSeparator)
         Me.Controls.Add(Me.ucrNewColName)
         Me.Controls.Add(Me.ucrChkDropUnusedLevels)
         Me.Controls.Add(Me.lblFactors)
@@ -101,6 +126,7 @@ Partial Class dlgCombine
         Me.Name = "dlgCombine"
         Me.Tag = "Combine_Factors"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents ucrSelectorCombineFactors As ucrSelectorByDataFrameAddRemove
@@ -109,4 +135,7 @@ Partial Class dlgCombine
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrNewColName As ucrSave
     Friend WithEvents ucrChkDropUnusedLevels As ucrCheck
+    Friend WithEvents ucrChkLexOrder As ucrCheck
+    Friend WithEvents ucrInputSeparator As ucrInputComboBox
+    Friend WithEvents lblSeparator As Label
 End Class

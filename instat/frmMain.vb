@@ -1312,7 +1312,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticPICSARainfall_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSARainfall.Click
-        dlgPCSARainfall.ShowDialog()
+        dlgPICSARainfall.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticPICSATemperature_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSATemperature.Click
@@ -1647,7 +1647,7 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub DuplicatesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DuplicatesToolStripMenuItem.Click
+    Private Sub mnuPrepareCheckDataDuplicates_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataDuplicates.Click
         dlgDuplicates.ShowDialog()
     End Sub
 
@@ -1776,8 +1776,8 @@ Public Class frmMain
             dlgColumnStats.strDefaultFactors = {clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_country_label"), clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_fiscal_year_label")}
         Else
             dlgColumnStats.strDefaultDataFrame = ""
-        dlgColumnStats.strDefaultVariables = Nothing
-        dlgColumnStats.strDefaultFactors = Nothing
+            dlgColumnStats.strDefaultVariables = Nothing
+            dlgColumnStats.strDefaultFactors = Nothing
         End If
         dlgColumnStats.ShowDialog()
     End Sub
@@ -1903,5 +1903,9 @@ Public Class frmMain
 
     Private Sub mnuClimaticSPI_Click(sender As Object, e As EventArgs) Handles mnuClimaticSPI.Click
         dlgSPI.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareCheckDataCompareColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataCompareColumns.Click
+        dlgCompareColumns.ShowDialog()
     End Sub
 End Class
