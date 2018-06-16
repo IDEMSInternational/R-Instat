@@ -15,26 +15,44 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgPCSARainfall
-    Public bFirstLoad As Boolean = True
-    Private Sub dlgPCSARainfall_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
+
+Public Class dlgCompareTreatmentLines
+    Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+
+
+    Private Sub dlgCompareTreatmentLines_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
-        TestOKEnabled()
-    End Sub
-    Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 118
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeforControls(bReset)
+        bReset = False
+        'autoTranslate(Me)
     End Sub
 
-    Private Sub TestOKEnabled()
+    Private Sub InitialiseDialog()
 
     End Sub
 
     Private Sub SetDefaults()
-        TestOKEnabled()
+
     End Sub
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+    End Sub
+
+    Private Sub TestOkEnabled()
+
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeforControls(True)
+        TestOkEnabled()
+    End Sub
+
 End Class
