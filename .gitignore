@@ -233,3 +233,7 @@ ModelManifest.xml
 /instat/static/InstatObject/R/examples_R6.R
 /instat/static/InstatObject/R/.Rhistory
 /instat/static/InstatObject/R/examples.R
+
+# Resource files
+*fr-FR.resx
+*fr-FR.xlf
