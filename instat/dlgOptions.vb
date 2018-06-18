@@ -229,8 +229,7 @@ Public Class dlgOptions
         autoTranslate(Me)
 
         If frmMain.Visible AndAlso strCurrLanguageCulture <> strPrevLanguageCulture Then
-            autoTranslate(frmMain)
-            'TODO translation containers within frmMain here
+            frmMain.TranslateFrmMainMenu()
         End If
         strPrevLanguageCulture = strCurrLanguageCulture
         'disables the command after running it
