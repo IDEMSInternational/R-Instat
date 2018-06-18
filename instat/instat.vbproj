@@ -321,6 +321,12 @@
     <Compile Include="dlgHypothesisTestsCalculator.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgMergeAdditionalData.Designer.vb">
+      <DependentUpon>dlgMergeAdditionalData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgMergeAdditionalData.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgParallelCoordinatePlot.Designer.vb">
       <DependentUpon>dlgParallelCoordinatePlot.vb</DependentUpon>
     </Compile>
@@ -2550,6 +2556,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMerge.sw-KE.resx">
       <DependentUpon>dlgMerge.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMergeAdditionalData.resx">
+      <DependentUpon>dlgMergeAdditionalData.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgNewMarkovChains.sw-KE.resx">
       <DependentUpon>dlgNewMarkovChains.vb</DependentUpon>
