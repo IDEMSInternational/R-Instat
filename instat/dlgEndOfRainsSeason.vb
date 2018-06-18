@@ -646,7 +646,7 @@ Public Class dlgEndOfRainsSeason
             clsWBWaterBalanceMinList.RemoveParameterByName("sub2")
             clsWaterBalanceMaxList.RemoveParameterByName("sub2")
         ElseIf rdoVariableEvaporation.Checked Then
-            ucrReceiverEvaporation.Focus()
+            ucrReceiverEvaporation.SetMeAsReceiver()
             clsEvaporationReplaceNAFunc.bToScriptAsRString = True
             clsEvaporationReplaceNA.SetRCommand("instat_calculation$new")
             clsEvaporationReplaceNA.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
@@ -654,7 +654,6 @@ Public Class dlgEndOfRainsSeason
             clsEvaporationReplaceNAFunc.SetRCommand("replace")
             clsEvaporationReplaceNAFunc.AddParameter("list", clsRFunctionParameter:=clsEvaporationReplaceNAFuncList, iPosition:=1)
             clsEvaporationReplaceNAFuncList.SetRCommand("is.na")
-            clsEvaporationReplaceNAFunc.AddParameter("values", 5, iPosition:=2)
             clsEvaporationReplaceNA.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverEvaporation.GetVariableNames & ")")
             clsEvaporationReplaceNA.AddParameter("result_name", Chr(34) & strEvapReplaceNA & Chr(34), iPosition:=2)
             clsEvaporationReplaceNA.SetAssignTo(strEvapReplaceNA)
