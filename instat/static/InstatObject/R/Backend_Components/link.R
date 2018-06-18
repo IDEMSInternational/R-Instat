@@ -299,9 +299,16 @@ instat_object$set("public", "get_equivalent_columns", function(from_data_name, c
 }
 )
 
-instat_object$set("public", "link_exists_between", function(from_data_frame, to_data_frame) {
-  return(any(sapply(private$.links, function(link) link$from_data_frame == from_data_frame && link$to_data_frame == to_data_frame))
-         || any(sapply(private$.links, function(link) link$from_data_frame == to_data_frame && link$to_data_frame == from_data_frame)))
+# If ordered = TRUE then from_data_frame must be from_data_frame in the link
+# otherwise from_data_frame could be to_data_frame in the link
+instat_object$set("public", "link_exists_between", function(from_data_frame, to_data_frame, ordered = FALSE) {
+  if(ordered) {
+    return(any(sapply(private$.links, function(link) link$from_data_frame == from_data_frame && link$to_data_frame == to_data_frame)))
+  }
+  else {
+    return(any(sapply(private$.links, function(link) link$from_data_frame == from_data_frame && link$to_data_frame == to_data_frame))
+           || any(sapply(private$.links, function(link) link$from_data_frame == to_data_frame && link$to_data_frame == from_data_frame)))
+  }
 }
 )
 
@@ -335,10 +342,19 @@ instat_object$set("public", "link_between_containing", function(from_data_frame,
 }
 )
 
-instat_object$set("public", "get_link_between", function(from_data_frame, to_data_frame) {
-  for(curr_link in private$.links) {
-    if((curr_link$from_data_frame == from_data_frame && curr_link$to_data_frame == to_data_frame) || (curr_link$from_data_frame == to_data_frame && curr_link$to_data_frame == from_data_frame)) {
-      return(curr_link)
+instat_object$set("public", "get_link_between", function(from_data_frame, to_data_frame, ordered = FALSE) {
+  if(ordered) {
+    for(curr_link in private$.links) {
+      if((curr_link$from_data_frame == from_data_frame && curr_link$to_data_frame == to_data_frame)) {
+        return(curr_link)
+      }
+    }
+  }
+  else {
+    for(curr_link in private$.links) {
+      if((curr_link$from_data_frame == from_data_frame && curr_link$to_data_frame == to_data_frame) || (curr_link$from_data_frame == to_data_frame && curr_link$to_data_frame == from_data_frame)) {
+        return(curr_link)
+      }
     }
   }
   return(NULL)
