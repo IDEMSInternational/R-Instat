@@ -182,9 +182,7 @@ Partial Class sdgSummaries
         'rdoNumber
         '
         resources.ApplyResources(Me.rdoNumber, "rdoNumber")
-        Me.rdoNumber.Checked = True
         Me.rdoNumber.Name = "rdoNumber"
-        Me.rdoNumber.TabStop = True
         Me.rdoNumber.UseVisualStyleBackColor = True
         '
         'ucrPnlMissingOptions
