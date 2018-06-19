@@ -21,6 +21,7 @@ Public Class dlgHypothesisTestsCalculator
     Private bReset As Boolean = True
     Private clsAttach As New RFunction
     Private clsDetach As New RFunction
+    Private strPackageName As String
     Private Sub dlgHypothesisTestsCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -630,14 +631,17 @@ Public Class dlgHypothesisTestsCalculator
     Private Sub ucrInputComboRPackage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboRPackage.ControlValueChanged
         Select Case ucrInputComboRPackage.GetText
             Case "Stats1"
+                strPackageName = "stats"
                 grpAgricolae.Visible = False
                 grpStats1.Visible = True
                 grpStats2.Visible = False
             Case "Stats2"
+                strPackageName = "stats"
                 grpAgricolae.Visible = False
                 grpStats1.Visible = False
                 grpStats2.Visible = True
             Case "Agricolae"
+                strPackageName = "agricolae"
                 grpStats1.Visible = False
                 grpStats2.Visible = False
                 grpAgricolae.Visible = True
@@ -648,6 +652,15 @@ Public Class dlgHypothesisTestsCalculator
         SetDefaults()
         SetRcodeForControls(True)
         TestOKEnabled()
+    End Sub
+
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        Dim clsHelp As New RFunction
+        clsHelp.SetPackageName("utils")
+        clsHelp.SetRCommand("help")
+        clsHelp.AddParameter("package", Chr(34) & strPackageName & Chr(34))
+        clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
+        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Opening help page for" & " " & strPackageName & " " & "Package. Generated from dialog Hypothesis Tests", iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
     End Sub
 
     Private Sub ucrSaveResult_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverForTestColumn.ControlContentsChanged

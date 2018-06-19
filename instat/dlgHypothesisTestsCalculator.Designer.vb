@@ -96,6 +96,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrSelectorColumn = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrChkIncludeArguments = New instat.ucrCheck()
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
+        Me.cmdHelp = New System.Windows.Forms.Button()
         Me.grpMainKeyboard.SuspendLayout()
         Me.grpStats1.SuspendLayout()
         Me.grpStats2.SuspendLayout()
@@ -931,11 +932,22 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrReceiverForTestColumn.TabIndex = 1
         Me.ucrReceiverForTestColumn.ucrSelector = Nothing
         '
+        'cmdHelp
+        '
+        Me.cmdHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdHelp.Location = New System.Drawing.Point(478, 224)
+        Me.cmdHelp.Name = "cmdHelp"
+        Me.cmdHelp.Size = New System.Drawing.Size(75, 23)
+        Me.cmdHelp.TabIndex = 16
+        Me.cmdHelp.Text = "Help"
+        Me.cmdHelp.UseVisualStyleBackColor = True
+        '
         'dlgHypothesisTestsCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(590, 487)
+        Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.ucrReceiverMultiple)
         Me.Controls.Add(Me.grpStats2)
         Me.Controls.Add(Me.grpStats1)
@@ -1039,4 +1051,5 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents cmdLSD As Button
     Friend WithEvents cmdDuncan As Button
     Friend WithEvents cmdBIB As Button
+    Friend WithEvents cmdHelp As Button
 End Class
