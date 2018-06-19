@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgStartofRains
     Private clsRainyDays, clsRainyDaysFunction, clsFirstDOYPerYear, clsFirstDatePerYear, clsCombinationCalc, clsCombinationManipList, clsCombinationSubCalcList, clsListSubCalc, clsManipStartFirstList, clsManipulationFirstDOYPerYear, clsCombinedFilter, clsCombinedList As New RFunction
@@ -582,7 +581,6 @@ Public Class dlgStartofRains
         clsFirstDatePerYear.AddParameter("result_name", Chr(34) & strStartDate & Chr(34), iPosition:=2)
         clsFirstDatePerYear.AddParameter("manipulations", clsRFunctionParameter:=clsManipStartFirstList, iPosition:=7)
         clsFirstDatePerYear.SetAssignTo("start_of_rains_date")
-
 
         'Combination
         clsCombinationCalc.SetRCommand("instat_calculation$new")
