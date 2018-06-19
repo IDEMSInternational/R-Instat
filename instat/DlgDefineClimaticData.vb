@@ -16,6 +16,7 @@
 
 Imports instat.Translations
 Imports System.Text.RegularExpressions
+Imports RDotNet
 
 Public Class DlgDefineClimaticData
     Public bFirstLoad As Boolean = True
@@ -24,6 +25,7 @@ Public Class DlgDefineClimaticData
     Dim lstReceivers As New List(Of ucrReceiverSingle)
     Dim lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
     Private clsDefaultFunction As New RFunction
+    Private clsAnyDuplicatesFunction, clsConcFunc As New RFunction
 
     Private Sub DlgDefineClimaticData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -185,5 +187,34 @@ Public Class DlgDefineClimaticData
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub cmdCheckUnique_Click(sender As Object, e As EventArgs) Handles cmdCheckUnique.Click
+        Dim iAnyDuplicated As Integer
+
+        clsConcFunc.SetRCommand("c")
+        clsConcFunc.AddParameter("x1", ucrReceiverDate.GetVariableNames(), bIncludeArgumentName:=False)
+        clsConcFunc.AddParameter("x2", ucrReceiverStationName.GetVariableNames(), bIncludeArgumentName:=False)
+
+        clsAnyDuplicatesFunction.SetRCommand("anyDuplicated")
+
+        clsAnyDuplicatesFunction.AddParameter("x", clsRFunctionParameter:=clsConcFunc)
+        Try
+            iAnyDuplicated = frmMain.clsRLink.RunInternalScriptGetValue(clsAnyDuplicatesFunction.ToScript()).AsInteger(0)
+        Catch ex As Exception
+            iAnyDuplicated = -1
+        End Try
+        'bUniqueChecked = False
+        If iAnyDuplicated = -1 Then
+            ucrInputCheckInput.SetName("Developer error! Could not check uniqueness.")
+            ucrInputCheckInput.txtInput.BackColor = Color.Yellow
+        ElseIf iAnyDuplicated > 0 Then
+            ucrInputCheckInput.SetName("Column(s) cannot define a key. Entries not unique.")
+            ucrInputCheckInput.txtInput.BackColor = Color.LightCoral
+        Else
+            ucrInputCheckInput.SetName("Column(s) can define a key.")
+            ucrInputCheckInput.txtInput.BackColor = Color.LightGreen
+            'bUniqueChecked = True
+        End If
     End Sub
 End Class
