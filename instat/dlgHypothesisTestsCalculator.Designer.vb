@@ -87,12 +87,12 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdLSD = New System.Windows.Forms.Button()
         Me.cmdDuncan = New System.Windows.Forms.Button()
         Me.cmdBIB = New System.Windows.Forms.Button()
+        Me.ucrReceiverMultiple = New instat.ucrReceiverMultiple()
         Me.ucrSaveResult = New instat.ucrSave()
         Me.ucrInputComboRPackage = New instat.ucrInputComboBox()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputTryMessage = New instat.ucrInputTextBox()
         Me.ucrChkBy = New instat.ucrCheck()
-        Me.ucrReceiverMultiple = New instat.ucrReceiverMultiple()
         Me.ucrSelectorColumn = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrChkIncludeArguments = New instat.ucrCheck()
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
@@ -125,7 +125,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpMainKeyboard.Controls.Add(Me.cmdAlt)
         Me.grpMainKeyboard.Controls.Add(Me.cmdSquiggle)
         Me.grpMainKeyboard.Controls.Add(Me.cmdSquareBrackets)
-        Me.grpMainKeyboard.Location = New System.Drawing.Point(414, 248)
+        Me.grpMainKeyboard.Location = New System.Drawing.Point(386, 247)
         Me.grpMainKeyboard.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.grpMainKeyboard.Name = "grpMainKeyboard"
         Me.grpMainKeyboard.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
@@ -266,7 +266,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpStats1.Controls.Add(Me.cmdBinom)
         Me.grpStats1.Controls.Add(Me.cmdBartlett)
         Me.grpStats1.Controls.Add(Me.cmdfisher)
-        Me.grpStats1.Location = New System.Drawing.Point(248, 79)
+        Me.grpStats1.Location = New System.Drawing.Point(266, 76)
         Me.grpStats1.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.grpStats1.Name = "grpStats1"
         Me.grpStats1.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
@@ -662,7 +662,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpStats2.Controls.Add(Me.cmdPaiwiseWilcox)
         Me.grpStats2.Controls.Add(Me.cmdPowerT)
         Me.grpStats2.Controls.Add(Me.cmdPowerProp)
-        Me.grpStats2.Location = New System.Drawing.Point(550, 79)
+        Me.grpStats2.Location = New System.Drawing.Point(247, 79)
         Me.grpStats2.Name = "grpStats2"
         Me.grpStats2.Size = New System.Drawing.Size(325, 135)
         Me.grpStats2.TabIndex = 14
@@ -685,7 +685,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpAgricolae.Controls.Add(Me.cmdLSD)
         Me.grpAgricolae.Controls.Add(Me.cmdDuncan)
         Me.grpAgricolae.Controls.Add(Me.cmdBIB)
-        Me.grpAgricolae.Location = New System.Drawing.Point(247, 79)
+        Me.grpAgricolae.Location = New System.Drawing.Point(252, 79)
         Me.grpAgricolae.Name = "grpAgricolae"
         Me.grpAgricolae.Size = New System.Drawing.Size(314, 134)
         Me.grpAgricolae.TabIndex = 15
@@ -846,11 +846,23 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdBIB.Text = "BIB"
         Me.cmdBIB.UseVisualStyleBackColor = True
         '
+        'ucrReceiverMultiple
+        '
+        Me.ucrReceiverMultiple.frmParent = Me
+        Me.ucrReceiverMultiple.Location = New System.Drawing.Point(250, 250)
+        Me.ucrReceiverMultiple.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMultiple.Name = "ucrReceiverMultiple"
+        Me.ucrReceiverMultiple.Selector = Nothing
+        Me.ucrReceiverMultiple.Size = New System.Drawing.Size(113, 100)
+        Me.ucrReceiverMultiple.strNcFilePath = ""
+        Me.ucrReceiverMultiple.TabIndex = 8
+        Me.ucrReceiverMultiple.ucrSelector = Nothing
+        '
         'ucrSaveResult
         '
         Me.ucrSaveResult.Location = New System.Drawing.Point(10, 385)
         Me.ucrSaveResult.Name = "ucrSaveResult"
-        Me.ucrSaveResult.Size = New System.Drawing.Size(255, 24)
+        Me.ucrSaveResult.Size = New System.Drawing.Size(277, 24)
         Me.ucrSaveResult.TabIndex = 12
         '
         'ucrInputComboRPackage
@@ -883,22 +895,10 @@ Partial Class dlgHypothesisTestsCalculator
         'ucrChkBy
         '
         Me.ucrChkBy.Checked = False
-        Me.ucrChkBy.Location = New System.Drawing.Point(218, 251)
+        Me.ucrChkBy.Location = New System.Drawing.Point(251, 226)
         Me.ucrChkBy.Name = "ucrChkBy"
         Me.ucrChkBy.Size = New System.Drawing.Size(69, 20)
         Me.ucrChkBy.TabIndex = 7
-        '
-        'ucrReceiverMultiple
-        '
-        Me.ucrReceiverMultiple.frmParent = Me
-        Me.ucrReceiverMultiple.Location = New System.Drawing.Point(290, 251)
-        Me.ucrReceiverMultiple.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverMultiple.Name = "ucrReceiverMultiple"
-        Me.ucrReceiverMultiple.Selector = Nothing
-        Me.ucrReceiverMultiple.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverMultiple.strNcFilePath = ""
-        Me.ucrReceiverMultiple.TabIndex = 8
-        Me.ucrReceiverMultiple.ucrSelector = Nothing
         '
         'ucrSelectorColumn
         '
@@ -914,7 +914,7 @@ Partial Class dlgHypothesisTestsCalculator
         'ucrChkIncludeArguments
         '
         Me.ucrChkIncludeArguments.Checked = False
-        Me.ucrChkIncludeArguments.Location = New System.Drawing.Point(539, 25)
+        Me.ucrChkIncludeArguments.Location = New System.Drawing.Point(445, 25)
         Me.ucrChkIncludeArguments.Name = "ucrChkIncludeArguments"
         Me.ucrChkIncludeArguments.Size = New System.Drawing.Size(131, 20)
         Me.ucrChkIncludeArguments.TabIndex = 2
@@ -926,7 +926,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrReceiverForTestColumn.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.ucrReceiverForTestColumn.Name = "ucrReceiverForTestColumn"
         Me.ucrReceiverForTestColumn.Selector = Nothing
-        Me.ucrReceiverForTestColumn.Size = New System.Drawing.Size(484, 28)
+        Me.ucrReceiverForTestColumn.Size = New System.Drawing.Size(390, 27)
         Me.ucrReceiverForTestColumn.strNcFilePath = ""
         Me.ucrReceiverForTestColumn.TabIndex = 1
         Me.ucrReceiverForTestColumn.ucrSelector = Nothing
@@ -935,9 +935,10 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(889, 487)
-        Me.Controls.Add(Me.grpStats1)
+        Me.ClientSize = New System.Drawing.Size(590, 487)
+        Me.Controls.Add(Me.ucrReceiverMultiple)
         Me.Controls.Add(Me.grpStats2)
+        Me.Controls.Add(Me.grpStats1)
         Me.Controls.Add(Me.ucrSaveResult)
         Me.Controls.Add(Me.ucrInputComboRPackage)
         Me.Controls.Add(Me.lblRpackage)
@@ -945,7 +946,6 @@ Partial Class dlgHypothesisTestsCalculator
         Me.Controls.Add(Me.ucrInputTryMessage)
         Me.Controls.Add(Me.cmdTry)
         Me.Controls.Add(Me.ucrChkBy)
-        Me.Controls.Add(Me.ucrReceiverMultiple)
         Me.Controls.Add(Me.grpMainKeyboard)
         Me.Controls.Add(Me.ucrSelectorColumn)
         Me.Controls.Add(Me.ucrChkIncludeArguments)
