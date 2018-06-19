@@ -21,12 +21,10 @@ Public Class dlgHypothesisTestsCalculator
     Private bReset As Boolean = True
     Private clsAttach As New RFunction
     Private clsDetach As New RFunction
-    Private iBasicWidth As Integer
     Private Sub dlgHypothesisTestsCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            iBasicWidth = Me.Width
             SetDefaults()
             bFirstLoad = False
         End If
@@ -49,7 +47,7 @@ Public Class dlgHypothesisTestsCalculator
         ucrSaveResult.SetAssignToIfUncheckedValue("Last_Test")
         ucrSaveResult.SetDataFrameSelector(ucrSelectorColumn.ucrAvailableDataFrames)
 
-        ucrInputComboRPackage.SetItems({"Stats", "Agricolae"})
+        ucrInputComboRPackage.SetItems({"Stats1", "Stats2", "Agricolae"})
         ucrInputComboRPackage.SetDropDownStyleAsNonEditable()
         'Tooltips for conf & and Alt Buttons
         tpConf.SetToolTip(cmdConf, "The confidence level can be changed for some tests to 0.9 or 0.99 etc")
@@ -69,7 +67,7 @@ Public Class dlgHypothesisTestsCalculator
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 2
         ucrChkIncludeArguments.Checked = False
-        ucrInputComboRPackage.SetName("Stats")
+        ucrInputComboRPackage.SetName("Stats1")
         clsAttach.SetRCommand("attach")
         clsDetach.SetRCommand("detach")
         clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorColumn.ucrAvailableDataFrames.clsCurrDataFrame)
@@ -631,18 +629,18 @@ Public Class dlgHypothesisTestsCalculator
 
     Private Sub ucrInputComboRPackage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboRPackage.ControlValueChanged
         Select Case ucrInputComboRPackage.GetText
-            Case "Stats"
+            Case "Stats1"
                 grpAgricolae.Visible = False
                 grpStats1.Visible = True
+                grpStats2.Visible = False
+            Case "Stats2"
+                grpAgricolae.Visible = False
+                grpStats1.Visible = False
                 grpStats2.Visible = True
-                Me.Size = New Size(iBasicWidth, Me.Height)
             Case "Agricolae"
-                Me.Size = New Size(iBasicWidth * 0.75, Me.Height)
                 grpStats1.Visible = False
                 grpStats2.Visible = False
                 grpAgricolae.Visible = True
-            Case Else
-                Me.Size = New Size(iBasicWidth, Me.Height)
         End Select
     End Sub
 
