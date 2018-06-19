@@ -31,7 +31,7 @@ Public Class dlgCompareTreatmentLines
         End If
         SetRCodeforControls(bReset)
         bReset = False
-        'autoTranslate(Me)
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
