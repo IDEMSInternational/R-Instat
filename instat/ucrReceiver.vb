@@ -375,6 +375,8 @@ Public Class ucrReceiver
                 strItemsParameterNameInRFunction = "graph_name"
             Case "model"
                 strItemsParameterNameInRFunction = "model_name"
+            Case "Surv"
+                strItemsParameterNameInRFunction = "surv_name"
             Case "table"
                 strItemsParameterNameInRFunction = "table_name"
             Case "filter"
