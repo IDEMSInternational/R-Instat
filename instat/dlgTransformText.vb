@@ -27,7 +27,7 @@ Public Class dlgTransformText
     Private iNewColMaxY As Integer
 
     Private Sub dlgTransformText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'autoTranslate(Me)
+        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             iFullHeight = Me.Height

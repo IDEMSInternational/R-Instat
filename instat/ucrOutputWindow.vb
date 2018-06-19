@@ -22,7 +22,7 @@ Imports instat.Translations
 Public Class ucrOutputWindow
     'TEST temporary
     Private Sub ucrOutputWindow_Load(sender As Object, e As EventArgs) Handles Me.Load
-        'autoTranslate(Me)
+        autoTranslate(Me)
     End Sub
 
     'Protected Overrides Sub OnFormClosing(ByVal e As FormClosingEventArgs)
