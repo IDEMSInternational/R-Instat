@@ -596,6 +596,7 @@ Public Class RLink
         Dim strCommand As String
 
         expTemp = Nothing
+        'TODO Bug here if strScript is multiple lines. Wrong value will be returned
         strCommand = strVariableName & "<-" & strScript
         If clsEngine IsNot Nothing Then
             Evaluate(strCommand, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)

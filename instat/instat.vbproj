@@ -2070,6 +2070,12 @@
     <Compile Include="ucrInputConfidenceLimit.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrInputFactorLevels.Designer.vb">
+      <DependentUpon>ucrInputFactorLevels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrInputFactorLevels.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrInputTextBox.Designer.vb">
       <DependentUpon>ucrInputTextBox.vb</DependentUpon>
     </Compile>
