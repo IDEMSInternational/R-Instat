@@ -166,10 +166,6 @@ Public Class ucrSave
                 ucrInputComboSave.SetDefaultTypeAsModel()
                 ucrInputComboSave.SetItemsTypeAsModels()
                 ucrInputTextSave.SetDefaultTypeAsModel()
-            Case "Surv"
-                ucrInputComboSave.SetDefaultTypeAsSurv()
-                ucrInputComboSave.SetItemsTypeAsSurv()
-                ucrInputTextSave.SetDefaultTypeAsSurv()
             Case "table"
                 ucrInputComboSave.SetDefaultTypeAsTable()
                 ucrInputComboSave.SetItemsTypeAsTables()
@@ -193,10 +189,6 @@ Public Class ucrSave
 
     Public Sub SetSaveTypeAsModel()
         SetSaveType("model")
-    End Sub
-
-    Public Sub SetSaveTypeAsSurv()
-        SetSaveType("Surv")
     End Sub
 
     Public Sub SetSaveTypeAsTable()

@@ -101,11 +101,6 @@ Public Class ucrInput
         SetDefaultName()
     End Sub
 
-    Public Sub SetDefaultTypeAsSurv()
-        strDefaultType = "Surv"
-        SetDefaultName()
-    End Sub
-
     Public Sub SetDefaultTypeAsTable()
         strDefaultType = "Table"
         SetDefaultName()
