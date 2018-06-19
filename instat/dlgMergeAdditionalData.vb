@@ -23,6 +23,8 @@ Public Class dlgMergeAdditionalData
     Private bReset As Boolean = True
     Private clsLeftJoin As RFunction
     Private clsByList As RFunction
+    Private bResetSubdialog As Boolean = True
+    Private bBySpecified As Boolean
 
     Private Sub dlgMergeAdditionalData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -68,6 +70,7 @@ Public Class dlgMergeAdditionalData
 
         SetDataFrameAssign()
         ucrBase.clsRsyntax.SetBaseRFunction(clsLeftJoin)
+        bResetSubdialog = True
     End Sub
 
     Private Sub SetRCodeforControls(bResetControls As Boolean)
@@ -76,7 +79,7 @@ Public Class dlgMergeAdditionalData
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrFirstDataFrame.cboAvailableDataFrames.Text <> "" AndAlso ucrSecondSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso Not ucrReceiverSecond.IsEmpty() Then
+        If ucrFirstDataFrame.cboAvailableDataFrames.Text <> "" AndAlso ucrSecondSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso Not ucrReceiverSecond.IsEmpty() AndAlso bBySpecified Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -109,7 +112,6 @@ Public Class dlgMergeAdditionalData
         Dim clsGetLink As New RFunction
         Dim clsItemOperator As New ROperator
         Dim chrColumns As CharacterVector
-        Dim strMergeBy As String
 
         clsByList.ClearParameters()
         If ucrFirstDataFrame.cboAvailableDataFrames.Text <> "" AndAlso ucrSecondSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
@@ -127,16 +129,18 @@ Public Class dlgMergeAdditionalData
                     clsByList.AddParameter(Chr(34) & chrColumns.Names(i) & Chr(34), Chr(34) & chrColumns(i) & Chr(34))
                     ucrReceiverSecond.Add(chrColumns(i), ucrSecondSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
                 Next
-                strMergeBy = clsByList.ToScript()
-                ucrInputMergingBy.SetName(strMergeBy.Substring(2, strMergeBy.Length - 3).Replace(Chr(34), ""))
                 clsLeftJoin.AddParameter("by", clsRFunctionParameter:=clsByList, iPosition:=2)
+                PopulateMergeByText()
+                bBySpecified = True
             Else
                 ucrInputMergingBy.SetName("No link between these data frames. Click 'Modify' to specify merging columns.")
                 clsLeftJoin.RemoveParameterByName("by")
+                bBySpecified = False
             End If
         Else
             ucrInputMergingBy.SetName("")
             clsLeftJoin.RemoveParameterByName("by")
+            bBySpecified = False
         End If
     End Sub
 
@@ -146,5 +150,62 @@ Public Class dlgMergeAdditionalData
 
     Private Sub ucrSecondSelector_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSecondSelector.ControlValueChanged
         GetLinkInformation()
+    End Sub
+
+    Private Sub cmdModify_Click(sender As Object, e As EventArgs) Handles cmdModify.Click
+        sdgMerge.Setup(ucrFirstDataFrame.cboAvailableDataFrames.Text, ucrSecondSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, clsLeftJoin, clsByList, bResetSubdialog, False)
+        sdgMerge.ShowDialog()
+        PopulateMergeByText()
+        bResetSubdialog = False
+        TestOkEnabled()
+    End Sub
+
+    Private Sub PopulateMergeByText()
+        Dim strMergeBy As String
+        Dim clsNames1 As New RFunction
+        Dim clsNames2 As New RFunction
+        Dim clsIntersect As New RFunction
+        Dim expTemp As SymbolicExpression
+        Dim chrColumns As CharacterVector
+        Dim strTemp As String = ""
+        Dim strScript As String = ""
+
+        If clsLeftJoin.ContainsParameter("by") AndAlso clsByList.clsParameters.Count > 0 Then
+            strMergeBy = clsByList.ToScript()
+            ucrInputMergingBy.SetName(strMergeBy.Substring(2, strMergeBy.Length - 3).Replace(Chr(34), ""))
+            For i As Integer = 0 To clsByList.clsParameters.Count - 1
+                ucrReceiverSecond.Add(clsByList.clsParameters(i).strArgumentValue.Replace(Chr(34), ""), ucrSecondSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            Next
+        Else
+            strMergeBy = ""
+            clsNames1.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_names")
+            clsNames1.AddParameter("data_name", Chr(34) & ucrFirstDataFrame.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+            clsNames2.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_names")
+            clsNames2.AddParameter("data_name", Chr(34) & ucrSecondSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+            clsIntersect.SetPackageName("dplyr")
+            clsIntersect.SetRCommand("intersect")
+            clsIntersect.AddParameter("x", clsRFunctionParameter:=clsNames1, iPosition:=0)
+            clsIntersect.AddParameter("y", clsRFunctionParameter:=clsNames2, iPosition:=1)
+            strScript = clsIntersect.ToScript(strTemp)
+            strScript = strTemp & strScript
+            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(strScript, bSilent:=True)
+            If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
+                chrColumns = expTemp.AsCharacter
+                If chrColumns.Count > 0 Then
+                    For i As Integer = 0 To chrColumns.Count - 1
+                        If i <> 0 Then
+                            strMergeBy = strMergeBy & ", "
+                        End If
+                        strMergeBy = strMergeBy & chrColumns(i) & "=" & chrColumns(i)
+                        ucrReceiverSecond.Add(chrColumns(i), ucrSecondSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+                    Next
+                    bBySpecified = True
+                Else
+                    strMergeBy = "No columns with the same name. Click 'Modify' to specify merging columns."
+                    bBySpecified = False
+                End If
+            End If
+            ucrInputMergingBy.SetName(strMergeBy)
+        End If
     End Sub
 End Class
