@@ -250,7 +250,7 @@ Partial Class dlgStartofRains
         Me.cmdDoyRange.Location = New System.Drawing.Point(159, 8)
         Me.cmdDoyRange.Name = "cmdDoyRange"
         Me.cmdDoyRange.Size = New System.Drawing.Size(105, 26)
-        Me.cmdDoyRange.TabIndex = 27
+        Me.cmdDoyRange.TabIndex = 2
         Me.cmdDoyRange.Tag = ""
         Me.cmdDoyRange.Text = "Day Range"
         Me.cmdDoyRange.UseVisualStyleBackColor = True
@@ -271,7 +271,7 @@ Partial Class dlgStartofRains
         Me.lblDOY.Location = New System.Drawing.Point(263, 158)
         Me.lblDOY.Name = "lblDOY"
         Me.lblDOY.Size = New System.Drawing.Size(66, 13)
-        Me.lblDOY.TabIndex = 9
+        Me.lblDOY.TabIndex = 7
         Me.lblDOY.Text = "Day of Year:"
         '
         'lblDate
@@ -289,7 +289,7 @@ Partial Class dlgStartofRains
         Me.lblYear.Location = New System.Drawing.Point(263, 115)
         Me.lblYear.Name = "lblYear"
         Me.lblYear.Size = New System.Drawing.Size(32, 13)
-        Me.lblYear.TabIndex = 7
+        Me.lblYear.TabIndex = 5
         Me.lblYear.Text = "Year:"
         '
         'lblStation
@@ -307,7 +307,7 @@ Partial Class dlgStartofRains
         Me.lblRainfall.Location = New System.Drawing.Point(263, 201)
         Me.lblRainfall.Name = "lblRainfall"
         Me.lblRainfall.Size = New System.Drawing.Size(70, 13)
-        Me.lblRainfall.TabIndex = 17
+        Me.lblRainfall.TabIndex = 9
         Me.lblRainfall.Text = "Rain Column:"
         '
         'ucrInputNewStatusColumnName
@@ -318,7 +318,7 @@ Partial Class dlgStartofRains
         Me.ucrInputNewStatusColumnName.Location = New System.Drawing.Point(543, 477)
         Me.ucrInputNewStatusColumnName.Name = "ucrInputNewStatusColumnName"
         Me.ucrInputNewStatusColumnName.Size = New System.Drawing.Size(117, 21)
-        Me.ucrInputNewStatusColumnName.TabIndex = 20
+        Me.ucrInputNewStatusColumnName.TabIndex = 19
         '
         'ucrChkStatus
         '
@@ -326,7 +326,7 @@ Partial Class dlgStartofRains
         Me.ucrChkStatus.Location = New System.Drawing.Point(454, 477)
         Me.ucrChkStatus.Name = "ucrChkStatus"
         Me.ucrChkStatus.Size = New System.Drawing.Size(84, 20)
-        Me.ucrChkStatus.TabIndex = 19
+        Me.ucrChkStatus.TabIndex = 18
         '
         'ucrChkAsDate
         '
@@ -334,7 +334,7 @@ Partial Class dlgStartofRains
         Me.ucrChkAsDate.Location = New System.Drawing.Point(256, 477)
         Me.ucrChkAsDate.Name = "ucrChkAsDate"
         Me.ucrChkAsDate.Size = New System.Drawing.Size(51, 20)
-        Me.ucrChkAsDate.TabIndex = 14
+        Me.ucrChkAsDate.TabIndex = 16
         '
         'ucrChkAsDoy
         '
@@ -342,7 +342,7 @@ Partial Class dlgStartofRains
         Me.ucrChkAsDoy.Location = New System.Drawing.Point(15, 477)
         Me.ucrChkAsDoy.Name = "ucrChkAsDoy"
         Me.ucrChkAsDoy.Size = New System.Drawing.Size(83, 20)
-        Me.ucrChkAsDoy.TabIndex = 12
+        Me.ucrChkAsDoy.TabIndex = 14
         '
         'ucrInputNewDateColumnName
         '
@@ -352,7 +352,7 @@ Partial Class dlgStartofRains
         Me.ucrInputNewDateColumnName.Location = New System.Drawing.Point(314, 477)
         Me.ucrInputNewDateColumnName.Name = "ucrInputNewDateColumnName"
         Me.ucrInputNewDateColumnName.Size = New System.Drawing.Size(115, 21)
-        Me.ucrInputNewDateColumnName.TabIndex = 15
+        Me.ucrInputNewDateColumnName.TabIndex = 17
         '
         'ucrInputNewDoyColumnName
         '
@@ -362,7 +362,7 @@ Partial Class dlgStartofRains
         Me.ucrInputNewDoyColumnName.Location = New System.Drawing.Point(101, 477)
         Me.ucrInputNewDoyColumnName.Name = "ucrInputNewDoyColumnName"
         Me.ucrInputNewDoyColumnName.Size = New System.Drawing.Size(127, 21)
-        Me.ucrInputNewDoyColumnName.TabIndex = 13
+        Me.ucrInputNewDoyColumnName.TabIndex = 15
         '
         'ucrReceiverStation
         '
@@ -397,7 +397,7 @@ Partial Class dlgStartofRains
         Me.ucrReceiverYear.Selector = Nothing
         Me.ucrReceiverYear.Size = New System.Drawing.Size(143, 20)
         Me.ucrReceiverYear.strNcFilePath = ""
-        Me.ucrReceiverYear.TabIndex = 8
+        Me.ucrReceiverYear.TabIndex = 6
         Me.ucrReceiverYear.ucrSelector = Nothing
         '
         'ucrReceiverDOY
@@ -409,7 +409,7 @@ Partial Class dlgStartofRains
         Me.ucrReceiverDOY.Selector = Nothing
         Me.ucrReceiverDOY.Size = New System.Drawing.Size(143, 20)
         Me.ucrReceiverDOY.strNcFilePath = ""
-        Me.ucrReceiverDOY.TabIndex = 10
+        Me.ucrReceiverDOY.TabIndex = 8
         Me.ucrReceiverDOY.ucrSelector = Nothing
         '
         'ucrReceiverRainfall
@@ -421,7 +421,7 @@ Partial Class dlgStartofRains
         Me.ucrReceiverRainfall.Selector = Nothing
         Me.ucrReceiverRainfall.Size = New System.Drawing.Size(143, 20)
         Me.ucrReceiverRainfall.strNcFilePath = ""
-        Me.ucrReceiverRainfall.TabIndex = 18
+        Me.ucrReceiverRainfall.TabIndex = 10
         Me.ucrReceiverRainfall.ucrSelector = Nothing
         '
         'ucrInputFilterPreview
@@ -432,7 +432,7 @@ Partial Class dlgStartofRains
         Me.ucrInputFilterPreview.Location = New System.Drawing.Point(277, 11)
         Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
         Me.ucrInputFilterPreview.Size = New System.Drawing.Size(242, 22)
-        Me.ucrInputFilterPreview.TabIndex = 28
+        Me.ucrInputFilterPreview.TabIndex = 3
         '
         'ucrNudThreshold
         '
@@ -621,14 +621,14 @@ Partial Class dlgStartofRains
         Me.ucrBase.Location = New System.Drawing.Point(9, 519)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
-        Me.ucrBase.TabIndex = 16
+        Me.ucrBase.TabIndex = 20
         '
         'grpDisplay
         '
         Me.grpDisplay.Location = New System.Drawing.Point(9, 457)
         Me.grpDisplay.Name = "grpDisplay"
         Me.grpDisplay.Size = New System.Drawing.Size(679, 49)
-        Me.grpDisplay.TabIndex = 21
+        Me.grpDisplay.TabIndex = 13
         Me.grpDisplay.TabStop = False
         Me.grpDisplay.Text = "Display"
         '
