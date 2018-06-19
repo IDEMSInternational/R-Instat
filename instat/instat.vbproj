@@ -303,6 +303,12 @@
     <Compile Include="dlgDefineCRI.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgDefineOptionsByContext.Designer.vb">
+      <DependentUpon>dlgDefineOptionsByContext.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDefineOptionsByContext.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDefineRedFlags.Designer.vb">
       <DependentUpon>dlgDefineRedFlags.vb</DependentUpon>
     </Compile>
@@ -319,6 +325,12 @@
       <DependentUpon>dlgHypothesisTestsCalculator.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgHypothesisTestsCalculator.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgMergeAdditionalData.Designer.vb">
+      <DependentUpon>dlgMergeAdditionalData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgMergeAdditionalData.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgParallelCoordinatePlot.Designer.vb">
@@ -2479,6 +2491,9 @@
     <EmbeddedResource Include="dlgDefineCRI.sw-KE.resx">
       <DependentUpon>dlgDefineCRI.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgDefineOptionsByContext.resx">
+      <DependentUpon>dlgDefineOptionsByContext.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDefineRedFlags.resx">
       <DependentUpon>dlgDefineRedFlags.vb</DependentUpon>
     </EmbeddedResource>
@@ -2550,6 +2565,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMerge.sw-KE.resx">
       <DependentUpon>dlgMerge.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMergeAdditionalData.resx">
+      <DependentUpon>dlgMergeAdditionalData.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgNewMarkovChains.sw-KE.resx">
       <DependentUpon>dlgNewMarkovChains.vb</DependentUpon>
@@ -5390,6 +5408,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\Library\Climatic\Guinea\Koundara.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\Backend_Components\options_by_context.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
