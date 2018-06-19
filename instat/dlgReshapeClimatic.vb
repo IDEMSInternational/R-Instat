@@ -19,6 +19,7 @@ Imports instat.Translations
 Public Class dlgReshapeClimaticData
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private clsGridtoDataFunc As New RFunction
 
 
     Private Sub dlgReshapeClimaticData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -40,6 +41,44 @@ Public Class dlgReshapeClimaticData
         ucrPnlReshapeClimaticData.AddRadioButton(rdoMonth)
         ucrPnlReshapeClimaticData.AddRadioButton(rdoDay)
 
+        ucrSelectorReshapeClimaticData.SetParameter(New RParameter("x", 0))
+        ucrSelectorReshapeClimaticData.SetParameterIsString()
+
+
+        ucrReceiverStation.Selector = ucrSelectorReshapeClimaticData
+        ucrReceiverStationTwo.Selector = ucrSelectorReshapeClimaticData
+        ucrReceiverStationThree.Selector = ucrSelectorReshapeClimaticData
+
+        ucrReceiverYear.Selector = ucrSelectorReshapeClimaticData
+        ucrReceiverYearTwo.Selector = ucrSelectorReshapeClimaticData
+        ucrReceiverYearThree.Selector = ucrSelectorReshapeClimaticData
+
+        ucrReceiverMonth.Selector = ucrSelectorReshapeClimaticData
+        ucrReceiverMonthTwo.Selector = ucrSelectorReshapeClimaticData
+        ucrReceiverMonthThree.Selector = ucrSelectorReshapeClimaticData
+
+        ucrReceiverDayofYear.Selector = ucrSelectorReshapeClimaticData
+        ucrReceiverDayofMonth.Selector = ucrSelectorReshapeClimaticData
+        ucrReceiverDayofMonthTwo.Selector = ucrSelectorReshapeClimaticData
+
+        'rdoYear
+        ucrReceiverYear.SetParameter(New RParameter("year", 3))
+        ucrReceiverDayofYear.SetParameter(New RParameter("day", 1))
+        ucrReceiverDayofMonth.SetParameter(New RParameter("month", 2))
+        ucrReceiverStation.SetParameter(New RParameter("sortcols"))
+
+        'rdoMonth
+        ucrReceiverYearTwo.SetParameter(New RParameter("year", 3))
+        ucrReceiverDayofMonth.SetParameter(New RParameter("day", 1))
+        ucrReceiverMonth.SetParameter(New RParameter("month", 2))
+        ucrReceiverStationTwo.SetParameter(New RParameter("sortcols"))
+
+        'rdoDay
+        ucrReceiverYearThree.SetParameter(New RParameter("year", 3))
+        ucrReceiverDayofMonthTwo.SetParameter(New RParameter("day", 1))
+        ucrReceiverMonthTwo.SetParameter(New RParameter("month", 2))
+        ucrReceiverStationThree.SetParameter(New RParameter("sortcols"))
+
         ' ucrPnlReshapeClimaticData.s(grpYear, {rdoYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         'ucrPnlReshapeClimaticData.AddToLinkedControls(grpMonth, {rdoMonth})
         'ucrPnlReshapeClimaticData.AddToLinkedControls(ucrChkVarWidth, {rdoDay}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -47,10 +86,15 @@ Public Class dlgReshapeClimaticData
     End Sub
 
     Private Sub SetDefaults()
+        clsGridtoDataFunc = New RFunction
+        ucrSelectorReshapeClimaticData.Reset()
 
+        clsGridtoDataFunc.SetRCommand("grid2data")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsGridtoDataFunc)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
