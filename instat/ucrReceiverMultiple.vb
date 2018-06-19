@@ -170,7 +170,7 @@ Public Class ucrReceiverMultiple
                 Case "graph"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
                     clsGetVariablesFunc.AddParameter("graph_name", GetVariableNames())
-                Case "Surv"
+                Case "surv"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_surv")
                     clsGetVariablesFunc.AddParameter("surv_name", GetVariableNames())
                 Case "model"

@@ -866,7 +866,7 @@ Public Class RLink
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_model_names")
                 Case "graph"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_graph_names")
-                Case "Surv"
+                Case "surv"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_surv_names")
                 Case "dataframe"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_data_names")
