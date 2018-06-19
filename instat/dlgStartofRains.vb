@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgStartofRains
     Private clsRainyDays, clsRainyDaysFunction, clsFirstDOYPerYear, clsFirstDatePerYear, clsCombinationCalc, clsCombinationManipList, clsCombinationSubCalcList, clsListSubCalc, clsManipStartFirstList, clsManipulationFirstDOYPerYear, clsCombinedFilter, clsCombinedList As New RFunction
@@ -193,16 +194,25 @@ Public Class dlgStartofRains
         ucrInputNewDateColumnName.SetDataFrameSelector(ucrSelectorForStartofRains.ucrAvailableDataFrames)
         ucrInputNewDateColumnName.SetName("start_date")
 
+        ucrInputNewStatusColumnName.SetParameter(New RParameter("result_name", 2))
+        ucrInputNewStatusColumnName.SetDataFrameSelector(ucrSelectorForStartofRains.ucrAvailableDataFrames)
+        ucrInputNewStatusColumnName.SetName("start_status")
+
         ucrChkAsDoy.AddToLinkedControls(ucrInputNewDoyColumnName, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkAsDate.AddToLinkedControls(ucrInputNewDateColumnName, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkStatus.AddToLinkedControls(ucrInputNewStatusColumnName, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkAsDoy.AddParameterPresentCondition(True, "sub1", True)
         ucrChkAsDoy.AddParameterPresentCondition(False, "sub1", False)
-        ucrChkAsDoy.SetText("Display Day of Year Column")
+        ucrChkAsDoy.SetText("Day of Year")
 
         ucrChkAsDate.AddParameterPresentCondition(True, "sub2", True)
         ucrChkAsDate.AddParameterPresentCondition(False, "sub2", False)
-        ucrChkAsDate.SetText("Display Date Column")
+        ucrChkAsDate.SetText("Date")
+
+        ucrChkStatus.AddParameterPresentCondition(True, "sub2", True)
+        ucrChkStatus.AddParameterPresentCondition(False, "sub2", False)
+        ucrChkStatus.SetText("Occurrence")
     End Sub
 
     Private Sub SetDefaults()
@@ -231,6 +241,7 @@ Public Class dlgStartofRains
         clsCombinedList.Clear()
         clsCombinationCalc.Clear()
         clsListSubCalc.Clear()
+        clsCombinationSubCalcList.Clear()
 
         clsTRRollingSum.Clear()
         clsTRRollingSumFunction = New RFunction
@@ -586,7 +597,6 @@ Public Class dlgStartofRains
 
         clsCombinationSubCalcList.SetRCommand("list")
         clsCombinationSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsSORStart, bIncludeArgumentName:=False, iPosition:=0)
-        clsCombinationSubCalcList.AddParameter("sub2", clsRFunctionParameter:=clsSORStatus, bIncludeArgumentName:=False, iPosition:=1)
 
         'Sub_Calculations List
         clsListSubCalc.SetRCommand("list")
@@ -621,6 +631,7 @@ Public Class dlgStartofRains
 
         ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
         ucrChkAsDoy.SetRCode(clsListSubCalc, bReset)
+        ucrChkStatus.SetRCode(clsCombinationSubCalcList, bReset)
         ucrChkAsDate.SetRCode(clsListSubCalc, bReset)
         ucrNudThreshold.SetRCode(clsRainyDaysOperator, bReset)
 
@@ -629,6 +640,7 @@ Public Class dlgStartofRains
         ucrReceiverDate.SetRCode(clsFirstDate, bReset)
         ucrInputNewDoyColumnName.SetRCode(clsFirstDOYPerYear, bReset)
         ucrInputNewDateColumnName.SetRCode(clsFirstDatePerYear, bReset)
+        ucrInputNewStatusColumnName.SetRCode(clsSORStatus, bReset)
 
         'Total Rainfall
         ucrChkTotalRainfall.SetRCode(clsCombinedList, bReset)
@@ -823,6 +835,14 @@ Public Class dlgStartofRains
             clsListSubCalc.AddParameter("sub1", iPosition:=1, clsRFunctionParameter:=clsFirstDOYPerYear, bIncludeArgumentName:=False)
         Else
             clsListSubCalc.RemoveParameterByName("sub1")
+        End If
+    End Sub
+
+    Private Sub ucrChkStatus_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStatus.ControlValueChanged
+        If ucrChkStatus.Checked Then
+            clsCombinationSubCalcList.AddParameter("sub2", clsRFunctionParameter:=clsSORStatus, bIncludeArgumentName:=False, iPosition:=1)
+        Else
+            clsCombinationSubCalcList.RemoveParameterByName("sub2")
         End If
     End Sub
 
