@@ -373,7 +373,6 @@ Partial Class frmMain
         Me.ColourByPropertyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataDuplicates = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPrepareCheckDataCompareColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataBoxplot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataOneVariableSummarise = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataOneVariableGraph = New System.Windows.Forms.ToolStripMenuItem()
@@ -519,6 +518,7 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
+        Me.mnuPrepareCheckDataCompareColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1617,8 +1617,8 @@ Partial Class frmMain
         '
         'mnuClimaticPICSARainfall
         '
-        Me.mnuClimaticPICSARainfall.Name = "mnuClimaticPICSARainfall"
         resources.ApplyResources(Me.mnuClimaticPICSARainfall, "mnuClimaticPICSARainfall")
+        Me.mnuClimaticPICSARainfall.Name = "mnuClimaticPICSARainfall"
         '
         'mnuClimaticPICSATemperature
         '
@@ -2472,11 +2472,6 @@ Partial Class frmMain
         '
         Me.mnuPrepareCheckDataDuplicates.Name = "mnuPrepareCheckDataDuplicates"
         resources.ApplyResources(Me.mnuPrepareCheckDataDuplicates, "mnuPrepareCheckDataDuplicates")
-        '
-        'mnuPrepareCheckDataCompareColumns
-        '
-        Me.mnuPrepareCheckDataCompareColumns.Name = "mnuPrepareCheckDataCompareColumns"
-        resources.ApplyResources(Me.mnuPrepareCheckDataCompareColumns, "mnuPrepareCheckDataCompareColumns")
         '
         'mnuPrepareCheckDataBoxplot
         '
@@ -3341,6 +3336,11 @@ Partial Class frmMain
         Me.ucrOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         resources.ApplyResources(Me.ucrOutput, "ucrOutput")
         Me.ucrOutput.Name = "ucrOutput"
+        '
+        'mnuPrepareCheckDataCompareColumns
+        '
+        Me.mnuPrepareCheckDataCompareColumns.Name = "mnuPrepareCheckDataCompareColumns"
+        resources.ApplyResources(Me.mnuPrepareCheckDataCompareColumns, "mnuPrepareCheckDataCompareColumns")
         '
         'frmMain
         '

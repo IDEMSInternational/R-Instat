@@ -93,9 +93,9 @@ Public Class frmMain
         Else
             'Do this after setting up R Link because loading options may run R code
             LoadInstatOptions()
-            'Must come after loading options as options may change language.
-            TranslateFrmMainMenu()
-
+            If clsInstatOptions.strLanguageCultureCode <> "en-GB" Then
+                autoTranslate(Me)
+            End If
             'Do this after loading options because interval depends on options
             'Interval is in milliseconds and option is in minutes
             timer.Interval = (clsInstatOptions.iAutoSaveDataMinutes * 60 * 1000)
@@ -115,11 +115,6 @@ Public Class frmMain
         End If
     End Sub
 
-    ' TODO This is used instead of autoTranslate so that split container isn't shifted
-    ' Need to fix this so that all of frmMain can be translated
-    Public Sub TranslateFrmMainMenu()
-        translateMenu(mnuBar.Items, Me)
-    End Sub
     Private Sub SetMainMenusEnabled(bEnabled As Boolean)
         mnuFile.Enabled = bEnabled
         mnuEdit.Enabled = bEnabled
