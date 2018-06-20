@@ -19,7 +19,7 @@ Imports RDotNet
 Public Class ucrInputFactorLevels
     Private WithEvents ucrReceiverFactor As ucrReceiverSingle
     Private clsLevels As New RFunction
-    Public bLevelsWithQuotes As Boolean = True
+    Public strQuotes As String = Chr(34)
 
     Public Sub New()
 
@@ -39,8 +39,8 @@ Public Class ucrInputFactorLevels
     Private Sub ucrReceiverFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlValueChanged
         Dim expTemp As SymbolicExpression
         Dim strLevels() As String
+        Dim lstLevels As New List(Of String)
         Dim clsFactor As RFunction
-        Dim dctLevels As New Dictionary(Of String, String)
 
         If ucrReceiverFactor.IsEmpty Then
             SetItems()
@@ -61,9 +61,9 @@ Public Class ucrInputFactorLevels
                     Enabled = False
                 End Try
                 For i As Integer = 0 To strLevels.Count - 1
-                    dctLevels.Add(strLevels(i), If(bLevelsWithQuotes, Chr(34) & strLevels(i) & Chr(34), strLevels(i)))
+                    lstLevels.Add(strQuotes & strLevels(i) & strQuotes)
                 Next
-                SetItems(dctLevels)
+                SetItems(lstLevels.ToArray())
             End If
         End If
     End Sub

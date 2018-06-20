@@ -46,6 +46,8 @@ Public Class dlgCompareTreatmentLines
 
     ' Data unstacking, diff calculation and merge codes
     Private clsLeftJoin As New RFunction
+    Private clsFilter As New RFunction
+    Private clsFilterInOperator As New ROperator
     Private clsDCast As New RFunction
     Private clsDCastFormula As New ROperator
     Private clsPipeOperator As New ROperator
@@ -77,7 +79,7 @@ Public Class dlgCompareTreatmentLines
         'ucrBase.iHelpTopicID = 
         ucrBase.clsRsyntax.iCallType = 3
 
-        ucrSelectorPlot.SetParameter(New RParameter("x", 0))
+        ucrSelectorPlot.SetParameter(New RParameter("data", 0))
         ucrSelectorPlot.SetParameterIsrfunction()
 
         ucrReceiverMeasurement.SetParameter(New RParameter("y", 1))
@@ -96,12 +98,13 @@ Public Class dlgCompareTreatmentLines
 
         ucrInputFactorTreatment1.SetParameter(New RParameter("left", 0))
         ucrInputFactorTreatment1.SetFactorReceiver(ucrReceiverTreatments)
-        ucrInputFactorTreatment1.bLevelsWithQuotes = False
+        ucrInputFactorTreatment1.AddQuotesIfUnrecognised = False
+        ucrInputFactorTreatment1.strQuotes = "`"
 
         ucrInputFactorTreatment2.SetParameter(New RParameter("right", 1))
         ucrInputFactorTreatment2.SetFactorReceiver(ucrReceiverTreatments)
         ucrInputFactorTreatment2.AddQuotesIfUnrecognised = False
-        ucrInputFactorTreatment2.bLevelsWithQuotes = False
+        ucrInputFactorTreatment2.strQuotes = "`"
 
         ucrReceiverID.SetParameter(New RParameter("left", 0))
         ucrReceiverID.Selector = ucrSelectorPlot
@@ -138,6 +141,8 @@ Public Class dlgCompareTreatmentLines
 
         ' Data manipulation code
         clsLeftJoin = New RFunction
+        clsFilter = New RFunction
+        clsFilterInOperator = New ROperator
         clsPipeOperator = New ROperator
         clsDCast = New RFunction
         clsDCastFormula = New ROperator
@@ -151,7 +156,14 @@ Public Class dlgCompareTreatmentLines
         clsLeftJoin.SetRCommand("left_join")
         SetLeftJoinAssignTo()
 
+        clsLeftJoin.AddParameter("x", clsRFunctionParameter:=clsFilter, iPosition:=0)
         clsLeftJoin.AddParameter("y", clsROperatorParameter:=clsPipeOperator, iPosition:=1)
+
+        clsFilter.SetPackageName("dplyr")
+        clsFilter.SetRCommand("filter")
+        clsFilter.AddParameter("1", clsROperatorParameter:=clsFilterInOperator, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsFilterInOperator.SetOperation("%in%")
 
         clsPipeOperator.SetOperation("%>%")
 
@@ -228,14 +240,16 @@ Public Class dlgCompareTreatmentLines
     Private Sub SetRCodeforControls(bResetControls As Boolean)
         ucrSelectorPlot.AddAdditionalCodeParameterPair(clsPipeOperator, ucrSelectorPlot.GetParameter(), iAdditionalPairNo:=1)
         ucrReceiverTreatments.AddAdditionalCodeParameterPair(clsRaesGlobalFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=1)
+        ucrReceiverTreatments.AddAdditionalCodeParameterPair(clsFilterInOperator, New RParameter("0", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
         ucrReceiverID.AddAdditionalCodeParameterPair(clsRaesLineFunction, New RParameter("group", iNewPosition:=0), iAdditionalPairNo:=1)
 
-        ucrInputFactorTreatment1.SetRCode(clsDiffOperator, bReset)
-        ucrInputFactorTreatment2.SetRCode(clsDiffOperator, bReset)
         ucrReceiverMeasurement.SetRCode(clsRaesGlobalFunction, bResetControls)
         ucrReceiverTreatments.SetRCode(clsDCastFormula, bResetControls)
+        'Needs to be done after linked receiver is set
+        ucrInputFactorTreatment1.SetRCode(clsDiffOperator, bReset)
+        ucrInputFactorTreatment2.SetRCode(clsDiffOperator, bReset)
         ucrReceiverID.SetRCode(clsDCastFormula, bResetControls)
-        ucrSelectorPlot.SetRCode(clsLeftJoin, bResetControls)
+        ucrSelectorPlot.SetRCode(clsFilter, bResetControls)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -273,6 +287,14 @@ Public Class dlgCompareTreatmentLines
             clsLeftJoin.RemoveParameterByName("by")
         Else
             clsLeftJoin.AddParameter("by", ucrReceiverID.GetVariableNames(), iPosition:=2)
+        End If
+    End Sub
+
+    Private Sub InputFactorTreatmentControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFactorTreatment1.ControlValueChanged, ucrInputFactorTreatment2.ControlValueChanged
+        If Not ucrInputFactorTreatment1.IsEmpty() AndAlso Not ucrInputFactorTreatment2.IsEmpty Then
+            clsFilterInOperator.AddParameter("1", "c(" & Chr(34) & ucrInputFactorTreatment1.GetText().Trim("`") & Chr(34) & ", " & Chr(34) & ucrInputFactorTreatment2.GetText().Trim("`") & Chr(34) & ")", iPosition:=1)
+        Else
+            clsFilterInOperator.RemoveParameterByName("1")
         End If
     End Sub
 End Class
