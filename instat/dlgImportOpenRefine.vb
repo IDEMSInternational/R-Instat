@@ -22,7 +22,7 @@ Public Class dlgImportOpenRefine
     Private clsImportFunction As New RFunction
 
     Private Sub dlgImportOpenRefine_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'autoTranslate(Me)
+        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False

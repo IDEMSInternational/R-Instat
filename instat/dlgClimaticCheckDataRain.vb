@@ -45,7 +45,6 @@ Public Class dlgClimaticCheckDataRain
     Private clsListSubCalc As New RFunction
 
     Private Sub dlgRain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstload Then
             InitialiseDialog()
         End If
