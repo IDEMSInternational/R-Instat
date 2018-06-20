@@ -978,7 +978,7 @@ Public Class RLink
         End If
     End Sub
 
-    Public Sub SelectColumnsWithMetadataProperty(ucrCurrentReceiver As ucrReceiverMultiple, strDataFrameName As String, strProperty As String, strValues As String())
+    Public Sub SelectColumnsWithMetadataProperty(ucrCurrentReceiver As ucrReceiver, strDataFrameName As String, strProperty As String, strValues As String())
         Dim vecColumns As GenericVector
         Dim chrCurrColumns As CharacterVector
         Dim i As Integer
@@ -987,6 +987,7 @@ Public Class RLink
         Dim kvpInclude As KeyValuePair(Of String, String())
         Dim lstItems As New List(Of KeyValuePair(Of String, String))
         Dim expColumns As SymbolicExpression
+        Dim ucrReceiverTempMultiple As ucrReceiverMultiple
 
         kvpInclude = New KeyValuePair(Of String, String())(strProperty, strValues)
         ucrCurrentReceiver.Selector.LoadList()
@@ -1015,8 +1016,15 @@ Public Class RLink
                     For Each strColumn As String In chrCurrColumns
                         lstItems.Add(New KeyValuePair(Of String, String)(strDataFrameName, strColumn))
                     Next
-                    ucrCurrentReceiver.AddMultiple(lstItems.ToArray())
                 Next
+                If TypeOf ucrCurrentReceiver Is ucrReceiverSingle Then
+                    If lstItems.Count > 0 Then
+                        ucrCurrentReceiver.Add(lstItems(0).Value, lstItems(0).Key)
+                    End If
+                ElseIf TypeOf ucrCurrentReceiver Is ucrReceiverMultiple Then
+                    ucrReceiverTempMultiple = DirectCast(ucrCurrentReceiver, ucrReceiverMultiple)
+                    ucrReceiverTempMultiple.AddMultiple(lstItems.ToArray())
+                End If
             End If
         End If
         ucrCurrentReceiver.Selector.LoadList()
