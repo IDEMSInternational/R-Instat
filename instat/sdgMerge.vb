@@ -17,10 +17,10 @@
 Imports System.ComponentModel
 
 Public Class sdgMerge
-    Private clsRSyntax As New RSyntax
     Private bControlsInitialised As Boolean = False
     Private clsByList As New RFunction
     Private clsMerge As RFunction
+    Private bEnableColumnSelection As Boolean = True
 
     'Private Sub sdgMerge_Load(sender As Object, e As EventArgs) Handles MyBase.Load
     'End Sub
@@ -72,16 +72,18 @@ Public Class sdgMerge
         bControlsInitialised = True
     End Sub
 
-    Public Sub Setup(strFirstDataName As String, strSecondDataName As String, clsNewMerge As RFunction, clsNewByList As RFunction, bReset As Boolean)
+    Public Sub Setup(strFirstDataName As String, strSecondDataName As String, clsNewMerge As RFunction, clsNewByList As RFunction, bReset As Boolean, Optional bNewEnableColumnSelection As Boolean = True)
         If Not bControlsInitialised Then
             InitiatiseControls()
         End If
         ucrSelectorFirstDF.SetDataframe(strFirstDataName, False)
         ucrSelectorSecondDF.SetDataframe(strSecondDataName, False)
 
-        ucrSelectorColumnsToIncludeFirst.SetDataframe(strFirstDataName, False)
-        ucrSelectorColumnsToIncludeSecond.SetDataframe(strSecondDataName, False)
-
+        If bNewEnableColumnSelection Then
+            ucrSelectorColumnsToIncludeFirst.SetDataframe(strFirstDataName, False)
+            ucrSelectorColumnsToIncludeSecond.SetDataframe(strSecondDataName, False)
+        End If
+        bEnableColumnSelection = bNewEnableColumnSelection
         clsMerge = clsNewMerge
         clsByList = clsNewByList
         ResetKeyList()
@@ -93,20 +95,22 @@ Public Class sdgMerge
         End If
 
         ucrPnlMergeByOptions.SetRCode(clsMerge, bReset, bCloneIfNeeded:=True)
-        ucrChkMergeWithSubsetFirst.SetRCode(clsMerge, bReset, bCloneIfNeeded:=True)
-        ucrChkMergeWithSubsetSecond.SetRCode(clsMerge, bReset, bCloneIfNeeded:=True)
-        If ucrChkMergeWithSubsetFirst.Checked Then
-            ucrReceiverFirstSelected.SetRCode(clsMerge, bReset, bCloneIfNeeded:=True)
-        Else
-            ucrReceiverFirstSelected.Clear()
+        If bNewEnableColumnSelection Then
+            ucrChkMergeWithSubsetFirst.SetRCode(clsMerge, bReset, bCloneIfNeeded:=True)
+            ucrChkMergeWithSubsetSecond.SetRCode(clsMerge, bReset, bCloneIfNeeded:=True)
+            If ucrChkMergeWithSubsetFirst.Checked Then
+                ucrReceiverFirstSelected.SetRCode(clsMerge, bReset, bCloneIfNeeded:=True)
+            Else
+                ucrReceiverFirstSelected.Clear()
+            End If
+            If ucrChkMergeWithSubsetSecond.Checked Then
+                ucrReceiverSecondSelected.SetRCode(clsMerge, bReset, bCloneIfNeeded:=True)
+            Else
+                ucrReceiverSecondSelected.Clear()
+            End If
+            SetXParameter()
+            SetYParameter()
         End If
-        If ucrChkMergeWithSubsetSecond.Checked Then
-            ucrReceiverSecondSelected.SetRCode(clsMerge, bReset, bCloneIfNeeded:=True)
-        Else
-            ucrReceiverSecondSelected.Clear()
-        End If
-        SetXParameter()
-        SetYParameter()
     End Sub
 
     Public ReadOnly Property IsComplete() As Boolean
@@ -304,6 +308,16 @@ Public Class sdgMerge
                     ucrReceiverSecondSelected.Add(strTemp, ucrSelectorColumnsToIncludeSecond.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
                 Next
             End If
+        End If
+    End Sub
+
+    Private Sub sdgMerge_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bEnableColumnSelection Then
+            If tbcMergeOptions.TabPages.Count <> 2 Then
+                tbcMergeOptions.TabPages.Add(value:=tpIncludeColumns)
+            End If
+        Else
+            tbcMergeOptions.TabPages.Remove(tpIncludeColumns)
         End If
     End Sub
 End Class
