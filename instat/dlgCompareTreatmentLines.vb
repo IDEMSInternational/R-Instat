@@ -95,18 +95,25 @@ Public Class dlgCompareTreatmentLines
         ucrChkIncludeBoxplot.AddParameterPresentCondition(True, "geom_boxplot")
         ucrChkIncludeBoxplot.AddParameterPresentCondition(False, "geom_boxplot", False)
         ucrChkIncludeBoxplot.AddToLinkedControls(ucrNudTransparency, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeBoxplot.AddToLinkedControls(ucrChkBoxplotOnlyComplete, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrNudTransparency.SetLinkedDisplayControl(lblTransparency)
         ucrNudTransparency.SetParameter(New RParameter("alpha", iNewPosition:=1))
         ucrNudTransparency.SetMinMax(0, 1)
         ucrNudTransparency.DecimalPlaces = 2
 
-        ucrChkHline.SetText("Horizontal Line")
-        ucrChkHline.bAddRemoveParameter = True
-        ucrChkHline.bChangeParameterValue = False
-        ucrChkHline.AddParameterPresentCondition(True, "geom_hline")
-        ucrChkHline.AddParameterPresentCondition(False, "geom_hline", False)
-        ucrChkHline.AddToLinkedControls(ucrInputHlineValue, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkBoxplotOnlyComplete.SetText("Complete records only")
+        ucrChkBoxplotOnlyComplete.bAddRemoveParameter = True
+        ucrChkBoxplotOnlyComplete.bChangeParameterValue = False
+        ucrChkBoxplotOnlyComplete.AddParameterPresentCondition(True, "right")
+        ucrChkBoxplotOnlyComplete.AddParameterPresentCondition(False, "right", False)
+
+        ucrChkIncludeHline.SetText("Include Horizontal Line")
+        ucrChkIncludeHline.bAddRemoveParameter = True
+        ucrChkIncludeHline.bChangeParameterValue = False
+        ucrChkIncludeHline.AddParameterPresentCondition(True, "geom_hline")
+        ucrChkIncludeHline.AddParameterPresentCondition(False, "geom_hline", False)
+        ucrChkIncludeHline.AddToLinkedControls(ucrInputHlineValue, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrInputHlineValue.SetParameter(New RParameter("yintercept", iNewPosition:=2))
         ucrInputHlineValue.SetLinkedDisplayControl(lblHlineValue)
@@ -153,18 +160,18 @@ Public Class dlgCompareTreatmentLines
         ucrInputContext1.SetName(strNone)
         ucrInputContext2.SetName(strNone)
 
-        SetLeftJoinAssignTo()
+        SetMergeDataAssignTo()
 
         clsCompareLines.clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsCompareLines.clsBaseOperator)
     End Sub
 
     Private Sub SetRCodeforControls(bResetControls As Boolean)
-        clsCompareLines.SetRCodeforControls(ucrSelectorPlot, ucrReceiverOption, ucrReceiverID, ucrReceiverMeasurement, ucrInputFactorOption1, ucrInputFactorOption2, ucrChkColourByDifference, ucrChkIncludeBoxplot, ucrNudTransparency, ucrChkHline, ucrInputHlineValue, bResetControls)
+        clsCompareLines.SetRCodeforControls(ucrSelectorPlot, ucrReceiverOption, ucrReceiverID, ucrReceiverMeasurement, ucrInputFactorOption1, ucrInputFactorOption2, ucrChkColourByDifference, ucrChkIncludeBoxplot, ucrNudTransparency, ucrChkBoxplotOnlyComplete, ucrChkIncludeHline, ucrInputHlineValue, bResetControls)
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverMeasurement.IsEmpty() AndAlso Not ucrReceiverOption.IsEmpty() AndAlso Not ucrInputFactorOption1.IsEmpty() AndAlso Not ucrInputFactorOption2.IsEmpty() AndAlso ucrSavePlot.IsComplete() AndAlso Not ucrReceiverID.IsEmpty() AndAlso (Not ucrChkIncludeBoxplot.Checked OrElse ucrNudTransparency.GetText() <> "") AndAlso (Not ucrChkHline.Checked OrElse Not ucrInputHlineValue.IsEmpty()) Then
+        If Not ucrReceiverMeasurement.IsEmpty() AndAlso Not ucrReceiverOption.IsEmpty() AndAlso Not ucrInputFactorOption1.IsEmpty() AndAlso Not ucrInputFactorOption2.IsEmpty() AndAlso ucrSavePlot.IsComplete() AndAlso Not ucrReceiverID.IsEmpty() AndAlso (Not ucrChkIncludeBoxplot.Checked OrElse ucrNudTransparency.GetText() <> "") AndAlso (Not ucrChkIncludeHline.Checked OrElse Not ucrInputHlineValue.IsEmpty()) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -178,7 +185,7 @@ Public Class dlgCompareTreatmentLines
     End Sub
 
     Private Sub ucrSelectorPlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorPlot.ControlValueChanged
-        SetLeftJoinAssignTo()
+        SetMergeDataAssignTo()
     End Sub
 
     Private Sub ucrReceiverMeasurement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMeasurement.ControlValueChanged
@@ -269,23 +276,31 @@ Public Class dlgCompareTreatmentLines
         End If
     End Sub
 
-    Private Sub ucrChkHline_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkHline.ControlValueChanged
-        If ucrChkHline.Checked Then
+    Private Sub ucrChkHline_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeHline.ControlValueChanged
+        If ucrChkIncludeHline.Checked Then
             clsCompareLines.clsBaseOperator.AddParameter("geom_hline", clsRFunctionParameter:=clsCompareLines.clsHlineGeom, iPosition:=4)
         Else
             clsCompareLines.clsBaseOperator.RemoveParameterByName("geom_hline")
         End If
     End Sub
 
-    Private Sub ucrReceiverMeasurement_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMeasurement.ControlContentsChanged, ucrReceiverOption.ControlContentsChanged, ucrInputFactorOption1.ControlContentsChanged, ucrInputFactorOption2.ControlContentsChanged, ucrReceiverID.ControlContentsChanged, ucrChkIncludeBoxplot.ControlContentsChanged, ucrNudTransparency.ControlContentsChanged, ucrChkHline.ControlContentsChanged, ucrInputHlineValue.ControlContentsChanged
+    Private Sub ucrReceiverMeasurement_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMeasurement.ControlContentsChanged, ucrReceiverOption.ControlContentsChanged, ucrInputFactorOption1.ControlContentsChanged, ucrInputFactorOption2.ControlContentsChanged, ucrReceiverID.ControlContentsChanged, ucrChkIncludeBoxplot.ControlContentsChanged, ucrNudTransparency.ControlContentsChanged, ucrChkIncludeHline.ControlContentsChanged, ucrInputHlineValue.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
-    Public Sub SetLeftJoinAssignTo()
+    Public Sub SetMergeDataAssignTo()
         If ucrSelectorPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-            clsCompareLines.clsLeftJoin.SetAssignTo(ucrSelectorPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_with_diff")
+            clsCompareLines.clsFilterMissingOperator.SetAssignTo(ucrSelectorPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_with_diff")
         Else
-            clsCompareLines.clsPipeOperator.RemoveAssignTo()
+            clsCompareLines.clsFilterMissingOperator.RemoveAssignTo()
+        End If
+    End Sub
+
+    Private Sub ucrChkBoxplotOnlyComplete_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBoxplotOnlyComplete.ControlValueChanged
+        If ucrChkBoxplotOnlyComplete.Checked Then
+            clsCompareLines.clsFilterMissingOperator.AddParameter("right", clsRFunctionParameter:=clsCompareLines.clsFilterMissingFunction, iPosition:=1)
+        Else
+            clsCompareLines.clsFilterMissingOperator.RemoveParameterByName("right")
         End If
     End Sub
 End Class
