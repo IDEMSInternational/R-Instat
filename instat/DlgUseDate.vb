@@ -211,5 +211,4 @@ Public Class dlgUseDate
     Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverUseDate.ControlContentsChanged, ucrChkWeekName.ControlContentsChanged, ucrChkWeekdayNum.ControlContentsChanged, ucrChkWeekNum.ControlContentsChanged, ucrChkShiftPentadNum.ControlContentsChanged, ucrChkWeekAbbr.ControlContentsChanged, ucrChkShiftMonthNum.ControlContentsChanged, ucrChkLeapYearNum.ControlContentsChanged, ucrChkWeekdayName.ControlContentsChanged, ucrChkShiftMonthName.ControlContentsChanged, ucrChkShiftDekadNum.ControlContentsChanged, ucrChkDayInMonthNum.ControlContentsChanged, ucrChkDayInYearNum.ControlContentsChanged, ucrChkWeekdayAbbr.ControlContentsChanged, ucrChkShiftMonthAbbr.ControlContentsChanged, ucrChkShiftDayInYearNum366.ControlContentsChanged, ucrChkShiftYearNum.ControlContentsChanged, ucrChkShiftDayInYearNum366.ControlContentsChanged, ucrChkShiftQuarterNum.ControlContentsChanged, ucrInputComboBoxStartingMonth.ControlContentsChanged
         TestOKEnabled()
     End Sub
-
 End Class
