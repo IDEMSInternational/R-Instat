@@ -29,7 +29,7 @@ Public Class dlgDefineCRI
     Private strWeightColumn As String = "Weight"
 
     Private Sub dlgDefineCRI_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'autoTranslate(Me)
+        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False

@@ -30,7 +30,7 @@ Public Class dlgRowSummary
         End If
         SetRCodeforControls(bReset)
         bReset = False
-        'autoTranslate(Me)
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
