@@ -46,7 +46,6 @@ Public Class dlgExtremesClimatic
     Private clsFilterExtremeExp As New ROperator
 
     Private Sub dlgExtremesClimatic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstload Then
             InitialiseDialog()
             bFirstload = False
