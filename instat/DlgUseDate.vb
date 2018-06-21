@@ -120,23 +120,19 @@ Public Class dlgUseDate
         ucrChkShiftPentadNum.SetParameter(New RParameter("pentad_val", 16))
         ucrChkShiftPentadNum.SetText("")
         ucrChkShiftPentadNum.SetRDefault("FALSE")
-        'ucrChkShiftPentadNum.Enabled = False
 
         ucrChkShiftPentadAbbr.SetParameter(New RParameter("pentad_abbr", 17))
         ucrChkShiftPentadAbbr.SetText("")
         ucrChkShiftPentadAbbr.SetRDefault("FALSE")
-        ucrChkShiftPentadAbbr.Enabled = False 'TODO. Temporary
 
         'dekad
         ucrChkShiftDekadNum.SetParameter(New RParameter("dekad_val", 18))
         ucrChkShiftDekadNum.SetText("")
         ucrChkShiftDekadNum.SetRDefault("FALSE")
-        'ucrChkShiftDekadNum.Enabled = False
 
         ucrChkShiftDekadAbbr.SetParameter(New RParameter("dekad_abbr", 19))
         ucrChkShiftDekadAbbr.SetText("")
         ucrChkShiftDekadAbbr.SetRDefault("FALSE")
-        ucrChkShiftDekadAbbr.Enabled = False 'TODO. Temporary
 
         'quarter
         ucrChkShiftQuarterNum.SetParameter(New RParameter("quarter_val", 20))

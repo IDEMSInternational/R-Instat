@@ -2166,22 +2166,37 @@ data_object$set("public","split_date", function(col_name = "", year = FALSE, lea
   
   if(dekad_val) {
     # TODO. shift function when s_start_month > 1
-	dekad_val_vector <- ((as.integer(dekade(col_data))) - (s_start_month - 1)*3) %% 36
+	dekad_val_vector <- ((as.numeric(dekade(col_data))) - (s_start_month - 1)*3) %% 36
 	dekad_val_vector <- ifelse(dekad_val_vector == 0, 36, dekad_val_vector)
     col_name <- next_default_item(prefix = "dekad", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = dekad_val_vector)
   }
+
+  if(dekad_abbr){
+  	  month_abbr_vector <- forcats::fct_shift(f = (lubridate::month(col_data, label = TRUE)), n = (s_start_month - 1))
+	  dekad_val_vector <- ((as.numeric(dekade(col_data))) - (s_start_month - 1)*3) %% 36
+	  dekad_val_vector <- ifelse(dekad_val_vector == 0, 36, dekad_val_vector)
+	  dekad_abbr_vector <- paste(month_abbr_vector, dekad_val_vector, sep = "")
+	  col_name <- next_default_item(prefix = "dekad_abbr", existing_names = self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name = col_name, col_data = dekad_abbr_vector)
+  }
   
   if(pentad_val) {
-    # TODO. shift function when s_start_month > 1
 	pentad_val_vector <- ((as.integer(pentad(col_data))) - (s_start_month - 1)*6) %% 72
 	pentad_val_vector <- ifelse(pentad_val_vector == 0, 72, pentad_val_vector)
     col_name <- next_default_item(prefix = "pentad", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = pentad_val_vector)
   }
 
-  month_name_vector <- forcats::fct_shift(f = (lubridate::month(col_data, label = TRUE, abbr = FALSE)), n = (s_start_month - 1))
-  
+  if(pentad_abbr){
+	month_name_vector <- forcats::fct_shift(f = (lubridate::month(col_data, label = TRUE, abbr = FALSE)), n = (s_start_month - 1))
+	pentad_val_vector <- ((as.integer(pentad(col_data))) - (s_start_month - 1)*6) %% 72
+	pentad_val_vector <- ifelse(pentad_val_vector == 0, 72, pentad_val_vector)
+	pentad_abbr_vector <- paste(month_abbr_vector, pentad_val_vector, sep = "")
+	col_name <- next_default_item(prefix = "pentad_abbr", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = pentad_abbr_vector)
+  }
+
   if(week_val) {
     week_Val_vector <- as.integer(lubridate::week(col_data))
 	  col_name <- next_default_item(prefix = "week_val", existing_names = self$get_column_names(), include_index = FALSE)
