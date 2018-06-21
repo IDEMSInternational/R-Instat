@@ -121,10 +121,19 @@ Public Class dlgClimaticBoxPlot
         ucrReceiverWithinYear.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrReceiverWithinYear.bAddParameterIfEmpty = True
 
+        ' others
+        ucrReceiverDate.SetParameter(New RParameter("date", 1))
+        ucrReceiverDate.SetParameterIsString()
+        ucrReceiverDate.Selector = ucrSelectorClimaticBoxPlot
+        ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
+        ucrReceiverDate.bAutoFill = True
+        ucrReceiverDate.strSelectorHeading = "Date Variables"
+
         ' summary
         ucrReceiverElement.SetParameter(New RParameter("y", 0))
         ucrReceiverElement.SetParameterIsString()
         ucrReceiverElement.bWithQuotes = False
+        ucrReceiverElement.bAutoFill = True
         ucrReceiverElement.strSelectorHeading = "Variables"
         ucrReceiverElement.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiverElement.SetIncludedDataTypes({"numeric"})
@@ -141,15 +150,6 @@ Public Class dlgClimaticBoxPlot
         ucrNudOmitBelow.DecimalPlaces = 2
         ucrNudOmitBelow.Increment = 0.1
         ucrChkOmitBelow.AddToLinkedControls(ucrNudOmitBelow, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.85)
-
-        ' others
-        ucrReceiverDate.SetParameter(New RParameter("date", 1))
-        ucrReceiverDate.SetParameterIsString()
-        ucrReceiverDate.Selector = ucrSelectorClimaticBoxPlot
-        ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
-        ucrReceiverDate.bAutoFill = True
-        ucrReceiverDate.strSelectorHeading = "Date Variables"
-
 
         ucrChkVarWidth.SetParameter(New RParameter("varwidth", 0))
         ucrChkVarWidth.SetText("Variable Width")
@@ -232,7 +232,7 @@ Public Class dlgClimaticBoxPlot
         sdgPlots.Reset()
         bResetSubdialog = True
         bResetBoxLayerSubdialog = True
-        ucrReceiverStation.SetMeAsReceiver()
+        ucrReceiverElement.SetMeAsReceiver()
 
         ucrInputStation.SetText(strNone)
         ucrInputStation.bUpdateRCodeFromControl = True
@@ -457,7 +457,7 @@ Public Class dlgClimaticBoxPlot
         AutoFill()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSavePlot.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrSavePlot.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
