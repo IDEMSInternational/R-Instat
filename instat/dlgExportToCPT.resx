@@ -795,4 +795,292 @@
   <data name="rdoTwoDF.Text" xml:space="preserve">
     <value>Two Data Frames</value>
   </data>
+  <data name="$this.Text2" xml:space="preserve">
+    <value>Export to CPT</value>
+  </data>
+  <data name="&gt;&gt;$this.Name2" xml:space="preserve">
+    <value>dlgExportToCPT</value>
+  </data>
+  <data name="&gt;&gt;$this.Type2" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblElement.Name1" xml:space="preserve">
+    <value>lblElement</value>
+  </data>
+  <data name="&gt;&gt;lblElement.Parent1" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblElement.Type1" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblElement.ZOrder1" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;lblLatitude.Name1" xml:space="preserve">
+    <value>lblLatitude</value>
+  </data>
+  <data name="&gt;&gt;lblLatitude.Parent1" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblLatitude.Type1" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblLatitude.ZOrder1" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;lblLongitude.Name1" xml:space="preserve">
+    <value>lblLongitude</value>
+  </data>
+  <data name="&gt;&gt;lblLongitude.Parent1" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblLongitude.Type1" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblLongitude.ZOrder1" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;lblStationElement.Name1" xml:space="preserve">
+    <value>lblStationElement</value>
+  </data>
+  <data name="&gt;&gt;lblStationElement.Parent1" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblStationElement.Type1" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblStationElement.ZOrder1" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;lblStationLatLon.Name1" xml:space="preserve">
+    <value>lblStationLatLon</value>
+  </data>
+  <data name="&gt;&gt;lblStationLatLon.Parent1" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblStationLatLon.Type1" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblStationLatLon.ZOrder1" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;lblStationOneDF.Name1" xml:space="preserve">
+    <value>lblStationOneDF</value>
+  </data>
+  <data name="&gt;&gt;lblStationOneDF.Parent1" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblStationOneDF.Type1" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblStationOneDF.ZOrder1" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblYear.Name1" xml:space="preserve">
+    <value>lblYear</value>
+  </data>
+  <data name="&gt;&gt;lblYear.Parent1" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblYear.Type1" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblYear.ZOrder1" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;rdoOneDF.Name1" xml:space="preserve">
+    <value>rdoOneDF</value>
+  </data>
+  <data name="&gt;&gt;rdoOneDF.Parent1" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoOneDF.Type1" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoOneDF.ZOrder1" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;rdoTwoDF.Name1" xml:space="preserve">
+    <value>rdoTwoDF</value>
+  </data>
+  <data name="&gt;&gt;rdoTwoDF.Parent1" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoTwoDF.Type1" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoTwoDF.ZOrder1" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Name1" xml:space="preserve">
+    <value>ucrBase</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Parent1" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Type1" xml:space="preserve">
+    <value>instat.ucrButtons, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.ZOrder1" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLongData.Name1" xml:space="preserve">
+    <value>ucrChkLongData</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLongData.Parent1" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLongData.Type1" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLongData.ZOrder1" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlNoOfDF.Name1" xml:space="preserve">
+    <value>ucrPnlNoOfDF</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlNoOfDF.Parent1" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlNoOfDF.Type1" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlNoOfDF.ZOrder1" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverElement.Name1" xml:space="preserve">
+    <value>ucrReceiverElement</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverElement.Parent1" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverElement.Type1" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverElement.ZOrder1" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;UcrReceiverLatitude.Name1" xml:space="preserve">
+    <value>UcrReceiverLatitude</value>
+  </data>
+  <data name="&gt;&gt;UcrReceiverLatitude.Parent1" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;UcrReceiverLatitude.Type1" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;UcrReceiverLatitude.ZOrder1" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;UcrReceiverLongitude.Name1" xml:space="preserve">
+    <value>UcrReceiverLongitude</value>
+  </data>
+  <data name="&gt;&gt;UcrReceiverLongitude.Parent1" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;UcrReceiverLongitude.Type1" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;UcrReceiverLongitude.ZOrder1" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverStationElementData.Name1" xml:space="preserve">
+    <value>ucrReceiverStationElementData</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverStationElementData.Parent1" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverStationElementData.Type1" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverStationElementData.ZOrder1" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverStationLatLon.Name1" xml:space="preserve">
+    <value>ucrReceiverStationLatLon</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverStationLatLon.Parent1" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverStationLatLon.Type1" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverStationLatLon.ZOrder1" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverYear.Name1" xml:space="preserve">
+    <value>ucrReceiverYear</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverYear.Parent1" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverYear.Type1" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverYear.ZOrder1" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="&gt;&gt;UcrSaveExportFile.Name1" xml:space="preserve">
+    <value>UcrSaveExportFile</value>
+  </data>
+  <data name="&gt;&gt;UcrSaveExportFile.Parent1" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;UcrSaveExportFile.Type1" xml:space="preserve">
+    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;UcrSaveExportFile.ZOrder1" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrSectorTwoDF.Name1" xml:space="preserve">
+    <value>ucrSectorTwoDF</value>
+  </data>
+  <data name="&gt;&gt;ucrSectorTwoDF.Parent1" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSectorTwoDF.Type1" xml:space="preserve">
+    <value>instat.ucrDataFrame, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSectorTwoDF.ZOrder1" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorExporCPT.Name1" xml:space="preserve">
+    <value>ucrSelectorExporCPT</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorExporCPT.Parent1" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorExporCPT.Type1" xml:space="preserve">
+    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorExporCPT.ZOrder1" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="lblElement.Text1" xml:space="preserve">
+    <value>Element:</value>
+  </data>
+  <data name="lblLatitude.Text1" xml:space="preserve">
+    <value>Latitude:</value>
+  </data>
+  <data name="lblLongitude.Text1" xml:space="preserve">
+    <value>Longitude:</value>
+  </data>
+  <data name="lblStationElement.Text1" xml:space="preserve">
+    <value>Station (element dataset):</value>
+  </data>
+  <data name="lblStationLatLon.Text1" xml:space="preserve">
+    <value>Station (lat, lon dataset):</value>
+  </data>
+  <data name="lblStationOneDF.Text1" xml:space="preserve">
+    <value>Station</value>
+  </data>
+  <data name="lblYear.Text1" xml:space="preserve">
+    <value>Year:</value>
+  </data>
+  <data name="rdoOneDF.Text1" xml:space="preserve">
+    <value>One Data Frame</value>
+  </data>
+  <data name="rdoTwoDF.Text1" xml:space="preserve">
+    <value>Two Data Frames</value>
+  </data>
 </root>
