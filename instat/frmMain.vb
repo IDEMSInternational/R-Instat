@@ -566,8 +566,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuTbHelp_Click(sender As Object, e As EventArgs) Handles mnuTbHelp.Click
-        'mnuHelpHelp_Click(sender, e)
-        dlgCompareTreatmentLines.ShowDialog()
+        mnuHelpHelp_Click(sender, e)
     End Sub
 
     Private Sub mnuPrepareFactorRecode_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorRecodeFactor.Click
