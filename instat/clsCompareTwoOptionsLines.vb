@@ -44,6 +44,8 @@ Public Class clsCompareTwoOptionsLines
     Public clsFacetColOp As New ROperator
 
     ' Data unstacking, diff calculation and merge codes
+    Public clsFilterMissingOperator As New ROperator
+    Public clsFilterMissingFunction As New RFunction
     Public clsLeftJoin As New RFunction
     Public clsFilter As New RFunction
     Public clsFilterInOperator As New ROperator
@@ -74,6 +76,8 @@ Public Class clsCompareTwoOptionsLines
         clsFacetRowOp = New ROperator
         clsFacetColOp = New ROperator
 
+        clsFilterMissingOperator = New ROperator
+        clsFilterMissingFunction = New RFunction
         clsLeftJoin = New RFunction
         clsFilter = New RFunction
         clsFilterInOperator = New ROperator
@@ -87,6 +91,14 @@ Public Class clsCompareTwoOptionsLines
         clsCutLabels = New RFunction
 
         ' Data manipulation code
+        clsFilterMissingOperator.SetOperation("%>%")
+        clsFilterMissingOperator.AddParameter("left", clsRFunctionParameter:=clsLeftJoin, iPosition:=0)
+        clsFilterMissingOperator.AddParameter("right", clsRFunctionParameter:=clsFilterMissingFunction, iPosition:=1)
+
+        clsFilterMissingFunction.SetPackageName("dplyr")
+        clsFilterMissingFunction.SetRCommand("filter")
+        clsFilterMissingFunction.AddParameter("0", "!is.na(" & strDiff & ")", bIncludeArgumentName:=False)
+
         clsLeftJoin.SetPackageName("dplyr")
         clsLeftJoin.SetRCommand("left_join")
 
@@ -137,7 +149,7 @@ Public Class clsCompareTwoOptionsLines
 
         clsRggplotFunction.SetPackageName("ggplot2")
         clsRggplotFunction.SetRCommand("ggplot")
-        clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=clsLeftJoin, iPosition:=0)
+        clsRggplotFunction.AddParameter("data", clsROperatorParameter:=clsFilterMissingOperator, iPosition:=0)
         clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesGlobalFunction, iPosition:=1)
 
         clsRaesGlobalFunction.SetPackageName("ggplot2")
@@ -176,7 +188,7 @@ Public Class clsCompareTwoOptionsLines
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
     End Sub
 
-    Public Sub SetRCodeforControls(ucrSelectorPlot As ucrSelectorByDataFrameAddRemove, ucrReceiverOption As ucrReceiverSingle, ucrReceiverID As ucrReceiverSingle, ucrReceiverMeasurement As ucrReceiverSingle, ucrInputFactorOption1 As ucrInputFactorLevels, ucrInputFactorOption2 As ucrInputFactorLevels, ucrChkColourByDifference As ucrCheck, ucrChkIncludeBoxplot As ucrCheck, ucrNudTransparency As ucrNud, ucrChkHline As ucrCheck, ucrInputHlineValue As ucrInputTextBox, bResetControls As Boolean)
+    Public Sub SetRCodeforControls(ucrSelectorPlot As ucrSelectorByDataFrameAddRemove, ucrReceiverOption As ucrReceiverSingle, ucrReceiverID As ucrReceiverSingle, ucrReceiverMeasurement As ucrReceiverSingle, ucrInputFactorOption1 As ucrInputFactorLevels, ucrInputFactorOption2 As ucrInputFactorLevels, ucrChkColourByDifference As ucrCheck, ucrChkIncludeBoxplot As ucrCheck, ucrNudTransparency As ucrNud, ucrChkBoxplotOnlyComplete As ucrCheck, ucrChkHline As ucrCheck, ucrInputHlineValue As ucrInputTextBox, bResetControls As Boolean)
         ucrSelectorPlot.AddAdditionalCodeParameterPair(clsPipeOperator, ucrSelectorPlot.GetParameter(), iAdditionalPairNo:=1)
         ucrReceiverOption.AddAdditionalCodeParameterPair(clsRaesGlobalFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=1)
         ucrReceiverOption.AddAdditionalCodeParameterPair(clsFilterInOperator, New RParameter("0", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
@@ -192,6 +204,7 @@ Public Class clsCompareTwoOptionsLines
         ucrChkColourByDifference.SetRCode(clsRaesLineFunction, bResetControls)
         ucrChkIncludeBoxplot.SetRCode(clsBaseOperator, bResetControls)
         ucrNudTransparency.SetRCode(clsBoxplotGeom, bResetControls)
+        ucrChkBoxplotOnlyComplete.SetRCode(clsFilterMissingOperator, bResetControls)
         ucrChkHline.SetRCode(clsBaseOperator, bResetControls)
         ucrInputHlineValue.SetRCode(clsHlineGeom, bResetControls)
     End Sub

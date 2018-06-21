@@ -38,10 +38,9 @@ Partial Class dlgCompareTreatmentLines
         Me.grpOptions = New System.Windows.Forms.GroupBox()
         Me.ucrInputHlineValue = New instat.ucrInputTextBox()
         Me.lblHlineValue = New System.Windows.Forms.Label()
-        Me.ucrChkHline = New instat.ucrCheck()
+        Me.ucrChkIncludeHline = New instat.ucrCheck()
         Me.lblTransparency = New System.Windows.Forms.Label()
         Me.ucrNudTransparency = New instat.ucrNud()
-        Me.ucrChkIncludeBoxplot = New instat.ucrCheck()
         Me.ucrChkColourByDifference = New instat.ucrCheck()
         Me.ucrInputFactorOption2 = New instat.ucrInputFactorLevels()
         Me.ucrInputFactorOption1 = New instat.ucrInputFactorLevels()
@@ -51,6 +50,8 @@ Partial Class dlgCompareTreatmentLines
         Me.ucrSelectorPlot = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrSavePlot = New instat.ucrSave()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrChkIncludeBoxplot = New instat.ucrCheck()
+        Me.ucrChkBoxplotOnlyComplete = New instat.ucrCheck()
         Me.GroupBox1.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -136,9 +137,10 @@ Partial Class dlgCompareTreatmentLines
         '
         'grpOptions
         '
+        Me.grpOptions.Controls.Add(Me.ucrChkBoxplotOnlyComplete)
         Me.grpOptions.Controls.Add(Me.ucrInputHlineValue)
         Me.grpOptions.Controls.Add(Me.lblHlineValue)
-        Me.grpOptions.Controls.Add(Me.ucrChkHline)
+        Me.grpOptions.Controls.Add(Me.ucrChkIncludeHline)
         Me.grpOptions.Controls.Add(Me.lblTransparency)
         Me.grpOptions.Controls.Add(Me.ucrNudTransparency)
         Me.grpOptions.Controls.Add(Me.ucrChkIncludeBoxplot)
@@ -160,11 +162,11 @@ Partial Class dlgCompareTreatmentLines
         resources.ApplyResources(Me.lblHlineValue, "lblHlineValue")
         Me.lblHlineValue.Name = "lblHlineValue"
         '
-        'ucrChkHline
+        'ucrChkIncludeHline
         '
-        Me.ucrChkHline.Checked = False
-        resources.ApplyResources(Me.ucrChkHline, "ucrChkHline")
-        Me.ucrChkHline.Name = "ucrChkHline"
+        Me.ucrChkIncludeHline.Checked = False
+        resources.ApplyResources(Me.ucrChkIncludeHline, "ucrChkIncludeHline")
+        Me.ucrChkIncludeHline.Name = "ucrChkIncludeHline"
         '
         'lblTransparency
         '
@@ -180,12 +182,6 @@ Partial Class dlgCompareTreatmentLines
         Me.ucrNudTransparency.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTransparency.Name = "ucrNudTransparency"
         Me.ucrNudTransparency.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkIncludeBoxplot
-        '
-        Me.ucrChkIncludeBoxplot.Checked = False
-        resources.ApplyResources(Me.ucrChkIncludeBoxplot, "ucrChkIncludeBoxplot")
-        Me.ucrChkIncludeBoxplot.Name = "ucrChkIncludeBoxplot"
         '
         'ucrChkColourByDifference
         '
@@ -252,6 +248,18 @@ Partial Class dlgCompareTreatmentLines
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrChkIncludeBoxplot
+        '
+        Me.ucrChkIncludeBoxplot.Checked = False
+        resources.ApplyResources(Me.ucrChkIncludeBoxplot, "ucrChkIncludeBoxplot")
+        Me.ucrChkIncludeBoxplot.Name = "ucrChkIncludeBoxplot"
+        '
+        'ucrChkBoxplotOnlyComplete
+        '
+        Me.ucrChkBoxplotOnlyComplete.Checked = False
+        resources.ApplyResources(Me.ucrChkBoxplotOnlyComplete, "ucrChkBoxplotOnlyComplete")
+        Me.ucrChkBoxplotOnlyComplete.Name = "ucrChkBoxplotOnlyComplete"
+        '
         'dlgCompareTreatmentLines
         '
         resources.ApplyResources(Me, "$this")
@@ -306,10 +314,11 @@ Partial Class dlgCompareTreatmentLines
     Friend WithEvents lblContext2 As Label
     Friend WithEvents lblContext1 As Label
     Friend WithEvents grpOptions As GroupBox
-    Friend WithEvents ucrChkIncludeBoxplot As ucrCheck
     Friend WithEvents lblTransparency As Label
     Friend WithEvents ucrNudTransparency As ucrNud
-    Friend WithEvents ucrChkHline As ucrCheck
+    Friend WithEvents ucrChkIncludeHline As ucrCheck
     Friend WithEvents ucrInputHlineValue As ucrInputTextBox
     Friend WithEvents lblHlineValue As Label
+    Friend WithEvents ucrChkBoxplotOnlyComplete As ucrCheck
+    Friend WithEvents ucrChkIncludeBoxplot As ucrCheck
 End Class

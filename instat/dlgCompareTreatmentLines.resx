@@ -360,8 +360,29 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>523, 521</value>
   </data>
+  <data name="ucrChkBoxplotOnlyComplete.Location" type="System.Drawing.Point, System.Drawing">
+    <value>31, 105</value>
+  </data>
+  <data name="ucrChkBoxplotOnlyComplete.Size" type="System.Drawing.Size, System.Drawing">
+    <value>178, 20</value>
+  </data>
+  <data name="ucrChkBoxplotOnlyComplete.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="&gt;&gt;ucrChkBoxplotOnlyComplete.Name" xml:space="preserve">
+    <value>ucrChkBoxplotOnlyComplete</value>
+  </data>
+  <data name="&gt;&gt;ucrChkBoxplotOnlyComplete.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkBoxplotOnlyComplete.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkBoxplotOnlyComplete.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrInputHlineValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>89, 126</value>
+    <value>89, 155</value>
   </data>
   <data name="ucrInputHlineValue.Size" type="System.Drawing.Size, System.Drawing">
     <value>107, 21</value>
@@ -379,7 +400,7 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrInputHlineValue.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="lblHlineValue.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -388,7 +409,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblHlineValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>44, 130</value>
+    <value>44, 159</value>
   </data>
   <data name="lblHlineValue.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 13</value>
@@ -409,28 +430,28 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;lblHlineValue.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
-  <data name="ucrChkHline.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 107</value>
+  <data name="ucrChkIncludeHline.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 136</value>
   </data>
-  <data name="ucrChkHline.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrChkIncludeHline.Size" type="System.Drawing.Size, System.Drawing">
     <value>178, 20</value>
   </data>
-  <data name="ucrChkHline.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrChkIncludeHline.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
   </data>
-  <data name="&gt;&gt;ucrChkHline.Name" xml:space="preserve">
-    <value>ucrChkHline</value>
+  <data name="&gt;&gt;ucrChkIncludeHline.Name" xml:space="preserve">
+    <value>ucrChkIncludeHline</value>
   </data>
-  <data name="&gt;&gt;ucrChkHline.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkIncludeHline.Type" xml:space="preserve">
     <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrChkHline.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkIncludeHline.Parent" xml:space="preserve">
     <value>grpOptions</value>
   </data>
-  <data name="&gt;&gt;ucrChkHline.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;ucrChkIncludeHline.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="lblTransparency.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -460,7 +481,7 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;lblTransparency.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="ucrNudTransparency.Location" type="System.Drawing.Point, System.Drawing">
     <value>114, 79</value>
@@ -481,7 +502,7 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrNudTransparency.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="ucrChkIncludeBoxplot.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 55</value>
@@ -502,7 +523,7 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrChkIncludeBoxplot.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="ucrChkColourByDifference.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 29</value>
@@ -523,7 +544,7 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrChkColourByDifference.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="grpOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 213</value>
