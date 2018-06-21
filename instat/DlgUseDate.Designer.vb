@@ -40,7 +40,6 @@ Partial Class dlgUseDate
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgUseDate))
         Me.lblDateVariable = New System.Windows.Forms.Label()
-        Me.grpShifted = New System.Windows.Forms.GroupBox()
         Me.s = New System.Windows.Forms.TableLayoutPanel()
         Me.lblShiftYear = New System.Windows.Forms.Label()
         Me.lblDayInMonth = New System.Windows.Forms.Label()
@@ -68,7 +67,6 @@ Partial Class dlgUseDate
         Me.lblShiftDekad = New System.Windows.Forms.Label()
         Me.ucrChkShiftPentadNum = New instat.ucrCheck()
         Me.lblShiftPentad = New System.Windows.Forms.Label()
-        Me.grpOthers = New System.Windows.Forms.GroupBox()
         Me.tblLayoutOthers = New System.Windows.Forms.TableLayoutPanel()
         Me.ucrChkWeekName = New instat.ucrCheck()
         Me.ucrChkWeekAbbr = New instat.ucrCheck()
@@ -86,9 +84,7 @@ Partial Class dlgUseDate
         Me.ucrReceiverUseDate = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorUseDate = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.grpShifted.SuspendLayout()
         Me.s.SuspendLayout()
-        Me.grpOthers.SuspendLayout()
         Me.tblLayoutOthers.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -96,15 +92,6 @@ Partial Class dlgUseDate
         '
         resources.ApplyResources(Me.lblDateVariable, "lblDateVariable")
         Me.lblDateVariable.Name = "lblDateVariable"
-        '
-        'grpShifted
-        '
-        Me.grpShifted.Controls.Add(Me.s)
-        Me.grpShifted.Controls.Add(Me.lblShiftStartingMonth)
-        Me.grpShifted.Controls.Add(Me.ucrInputComboBoxStartingMonth)
-        resources.ApplyResources(Me.grpShifted, "grpShifted")
-        Me.grpShifted.Name = "grpShifted"
-        Me.grpShifted.TabStop = False
         '
         's
         '
@@ -271,13 +258,6 @@ Partial Class dlgUseDate
         resources.ApplyResources(Me.lblShiftPentad, "lblShiftPentad")
         Me.lblShiftPentad.Name = "lblShiftPentad"
         '
-        'grpOthers
-        '
-        Me.grpOthers.Controls.Add(Me.tblLayoutOthers)
-        resources.ApplyResources(Me.grpOthers, "grpOthers")
-        Me.grpOthers.Name = "grpOthers"
-        Me.grpOthers.TabStop = False
-        '
         'tblLayoutOthers
         '
         resources.ApplyResources(Me.tblLayoutOthers, "tblLayoutOthers")
@@ -403,8 +383,10 @@ Partial Class dlgUseDate
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.grpOthers)
-        Me.Controls.Add(Me.grpShifted)
+        Me.Controls.Add(Me.tblLayoutOthers)
+        Me.Controls.Add(Me.s)
+        Me.Controls.Add(Me.ucrInputComboBoxStartingMonth)
+        Me.Controls.Add(Me.lblShiftStartingMonth)
         Me.Controls.Add(Me.ucrReceiverUseDate)
         Me.Controls.Add(Me.lblDateVariable)
         Me.Controls.Add(Me.ucrBase)
@@ -413,12 +395,8 @@ Partial Class dlgUseDate
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgUseDate"
-        Me.grpShifted.ResumeLayout(False)
-        Me.grpShifted.PerformLayout()
         Me.s.ResumeLayout(False)
         Me.s.PerformLayout()
-        Me.grpOthers.ResumeLayout(False)
-        Me.grpOthers.PerformLayout()
         Me.tblLayoutOthers.ResumeLayout(False)
         Me.tblLayoutOthers.PerformLayout()
         Me.ResumeLayout(False)
@@ -430,7 +408,6 @@ Partial Class dlgUseDate
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblDateVariable As Label
     Friend WithEvents ucrReceiverUseDate As ucrReceiverSingle
-    Friend WithEvents grpOthers As GroupBox
     Friend WithEvents ucrChkDayInYearNum As ucrCheck
     Friend WithEvents ucrChkWeekdayNum As ucrCheck
     Friend WithEvents ucrChkWeekNum As ucrCheck
@@ -445,7 +422,6 @@ Partial Class dlgUseDate
     Friend WithEvents ucrChkShiftPentadNum As ucrCheck
     Friend WithEvents ucrChkShiftDayInYearNum366 As ucrCheck
     Friend WithEvents ucrChkShiftYearNum As ucrCheck
-    Friend WithEvents grpShifted As GroupBox
     Friend WithEvents lblShiftStartingMonth As Label
     Friend WithEvents ucrInputComboBoxStartingMonth As ucrInputComboBox
     Friend WithEvents ucrChkShiftQuarterNum As ucrCheck
