@@ -516,4 +516,11 @@ Public Class ucrReceiver
     Public Overridable Function GetItemsDataFrames() As List(Of String)
         Return New List(Of String)
     End Function
+
+    Public Sub AddItemsWithMetadataProperty(strCurrentDataFrame As String, strProperty As String, strValues As String())
+        If Selector IsNot Nothing Then
+            SetMeAsReceiver()
+            frmMain.clsRLink.SelectColumnsWithMetadataProperty(Me, strCurrentDataFrame, strProperty, strValues)
+        End If
+    End Sub
 End Class
