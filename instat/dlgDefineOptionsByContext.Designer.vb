@@ -53,12 +53,18 @@ Partial Class dlgDefineOptionsByContext
         Me.ucrInputKeyCheck = New instat.ucrInputTextBox()
         Me.ucrInputKeyColumns = New instat.ucrInputTextBox()
         Me.lblKeyColumns = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblKeyCheck = New System.Windows.Forms.Label()
         Me.cmdModify = New System.Windows.Forms.Button()
+        Me.grpBlockingVariables = New System.Windows.Forms.GroupBox()
+        Me.lblBlockingMain = New System.Windows.Forms.Label()
+        Me.lblBlockingOther = New System.Windows.Forms.Label()
+        Me.ucrReceiverBlockingOther = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverBlocking1 = New instat.ucrReceiverSingle()
         Me.grpContexts.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.grpMeasurements.SuspendLayout()
         Me.grpIDs.SuspendLayout()
+        Me.grpBlockingVariables.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -91,7 +97,7 @@ Partial Class dlgDefineOptionsByContext
         'ucrReceiverOptionOther
         '
         Me.ucrReceiverOptionOther.frmParent = Me
-        Me.ucrReceiverOptionOther.Location = New System.Drawing.Point(9, 80)
+        Me.ucrReceiverOptionOther.Location = New System.Drawing.Point(6, 80)
         Me.ucrReceiverOptionOther.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverOptionOther.Name = "ucrReceiverOptionOther"
         Me.ucrReceiverOptionOther.Selector = Nothing
@@ -103,7 +109,7 @@ Partial Class dlgDefineOptionsByContext
         'ucrReceiverContextOther
         '
         Me.ucrReceiverContextOther.frmParent = Me
-        Me.ucrReceiverContextOther.Location = New System.Drawing.Point(9, 237)
+        Me.ucrReceiverContextOther.Location = New System.Drawing.Point(6, 212)
         Me.ucrReceiverContextOther.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverContextOther.Name = "ucrReceiverContextOther"
         Me.ucrReceiverContextOther.Selector = Nothing
@@ -115,7 +121,7 @@ Partial Class dlgDefineOptionsByContext
         'lblContextsOther
         '
         Me.lblContextsOther.AutoSize = True
-        Me.lblContextsOther.Location = New System.Drawing.Point(6, 218)
+        Me.lblContextsOther.Location = New System.Drawing.Point(6, 193)
         Me.lblContextsOther.Name = "lblContextsOther"
         Me.lblContextsOther.Size = New System.Drawing.Size(80, 13)
         Me.lblContextsOther.TabIndex = 4
@@ -124,7 +130,7 @@ Partial Class dlgDefineOptionsByContext
         'ucrReceiverMeasurementOther
         '
         Me.ucrReceiverMeasurementOther.frmParent = Me
-        Me.ucrReceiverMeasurementOther.Location = New System.Drawing.Point(9, 81)
+        Me.ucrReceiverMeasurementOther.Location = New System.Drawing.Point(6, 80)
         Me.ucrReceiverMeasurementOther.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMeasurementOther.Name = "ucrReceiverMeasurementOther"
         Me.ucrReceiverMeasurementOther.Selector = Nothing
@@ -136,7 +142,7 @@ Partial Class dlgDefineOptionsByContext
         'lblMeasurementOther
         '
         Me.lblMeasurementOther.AutoSize = True
-        Me.lblMeasurementOther.Location = New System.Drawing.Point(6, 62)
+        Me.lblMeasurementOther.Location = New System.Drawing.Point(6, 61)
         Me.lblMeasurementOther.Name = "lblMeasurementOther"
         Me.lblMeasurementOther.Size = New System.Drawing.Size(108, 13)
         Me.lblMeasurementOther.TabIndex = 6
@@ -145,7 +151,7 @@ Partial Class dlgDefineOptionsByContext
         'ucrReceiverOption1
         '
         Me.ucrReceiverOption1.frmParent = Me
-        Me.ucrReceiverOption1.Location = New System.Drawing.Point(9, 34)
+        Me.ucrReceiverOption1.Location = New System.Drawing.Point(6, 34)
         Me.ucrReceiverOption1.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverOption1.Name = "ucrReceiverOption1"
         Me.ucrReceiverOption1.Selector = Nothing
@@ -166,7 +172,7 @@ Partial Class dlgDefineOptionsByContext
         'lblMeasurement1
         '
         Me.lblMeasurement1.AutoSize = True
-        Me.lblMeasurement1.Location = New System.Drawing.Point(6, 16)
+        Me.lblMeasurement1.Location = New System.Drawing.Point(6, 17)
         Me.lblMeasurement1.Name = "lblMeasurement1"
         Me.lblMeasurement1.Size = New System.Drawing.Size(100, 13)
         Me.lblMeasurement1.TabIndex = 13
@@ -175,7 +181,7 @@ Partial Class dlgDefineOptionsByContext
         'ucrReceiverMeasurement1
         '
         Me.ucrReceiverMeasurement1.frmParent = Me
-        Me.ucrReceiverMeasurement1.Location = New System.Drawing.Point(9, 33)
+        Me.ucrReceiverMeasurement1.Location = New System.Drawing.Point(6, 34)
         Me.ucrReceiverMeasurement1.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMeasurement1.Name = "ucrReceiverMeasurement1"
         Me.ucrReceiverMeasurement1.Selector = Nothing
@@ -187,7 +193,7 @@ Partial Class dlgDefineOptionsByContext
         'lblContext2
         '
         Me.lblContext2.AutoSize = True
-        Me.lblContext2.Location = New System.Drawing.Point(6, 72)
+        Me.lblContext2.Location = New System.Drawing.Point(6, 61)
         Me.lblContext2.Name = "lblContext2"
         Me.lblContext2.Size = New System.Drawing.Size(86, 13)
         Me.lblContext2.TabIndex = 19
@@ -196,7 +202,7 @@ Partial Class dlgDefineOptionsByContext
         'ucrReceiverContext2
         '
         Me.ucrReceiverContext2.frmParent = Me
-        Me.ucrReceiverContext2.Location = New System.Drawing.Point(9, 89)
+        Me.ucrReceiverContext2.Location = New System.Drawing.Point(6, 80)
         Me.ucrReceiverContext2.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverContext2.Name = "ucrReceiverContext2"
         Me.ucrReceiverContext2.Selector = Nothing
@@ -208,7 +214,7 @@ Partial Class dlgDefineOptionsByContext
         'lblContext1
         '
         Me.lblContext1.AutoSize = True
-        Me.lblContext1.Location = New System.Drawing.Point(6, 27)
+        Me.lblContext1.Location = New System.Drawing.Point(6, 17)
         Me.lblContext1.Name = "lblContext1"
         Me.lblContext1.Size = New System.Drawing.Size(72, 13)
         Me.lblContext1.TabIndex = 17
@@ -217,7 +223,7 @@ Partial Class dlgDefineOptionsByContext
         'ucrReceiverContext1
         '
         Me.ucrReceiverContext1.frmParent = Me
-        Me.ucrReceiverContext1.Location = New System.Drawing.Point(9, 44)
+        Me.ucrReceiverContext1.Location = New System.Drawing.Point(6, 34)
         Me.ucrReceiverContext1.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverContext1.Name = "ucrReceiverContext1"
         Me.ucrReceiverContext1.Selector = Nothing
@@ -229,7 +235,7 @@ Partial Class dlgDefineOptionsByContext
         'lblContext4
         '
         Me.lblContext4.AutoSize = True
-        Me.lblContext4.Location = New System.Drawing.Point(6, 167)
+        Me.lblContext4.Location = New System.Drawing.Point(6, 151)
         Me.lblContext4.Name = "lblContext4"
         Me.lblContext4.Size = New System.Drawing.Size(79, 13)
         Me.lblContext4.TabIndex = 23
@@ -238,7 +244,7 @@ Partial Class dlgDefineOptionsByContext
         'ucrReceiverContext4
         '
         Me.ucrReceiverContext4.frmParent = Me
-        Me.ucrReceiverContext4.Location = New System.Drawing.Point(9, 184)
+        Me.ucrReceiverContext4.Location = New System.Drawing.Point(6, 168)
         Me.ucrReceiverContext4.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverContext4.Name = "ucrReceiverContext4"
         Me.ucrReceiverContext4.Selector = Nothing
@@ -250,7 +256,7 @@ Partial Class dlgDefineOptionsByContext
         'lblContext3
         '
         Me.lblContext3.AutoSize = True
-        Me.lblContext3.Location = New System.Drawing.Point(6, 122)
+        Me.lblContext3.Location = New System.Drawing.Point(6, 106)
         Me.lblContext3.Name = "lblContext3"
         Me.lblContext3.Size = New System.Drawing.Size(73, 13)
         Me.lblContext3.TabIndex = 21
@@ -259,7 +265,7 @@ Partial Class dlgDefineOptionsByContext
         'ucrReceiverContext3
         '
         Me.ucrReceiverContext3.frmParent = Me
-        Me.ucrReceiverContext3.Location = New System.Drawing.Point(9, 139)
+        Me.ucrReceiverContext3.Location = New System.Drawing.Point(6, 123)
         Me.ucrReceiverContext3.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverContext3.Name = "ucrReceiverContext3"
         Me.ucrReceiverContext3.Selector = Nothing
@@ -280,9 +286,9 @@ Partial Class dlgDefineOptionsByContext
         Me.grpContexts.Controls.Add(Me.ucrReceiverContext3)
         Me.grpContexts.Controls.Add(Me.ucrReceiverContext2)
         Me.grpContexts.Controls.Add(Me.lblContext2)
-        Me.grpContexts.Location = New System.Drawing.Point(404, 12)
+        Me.grpContexts.Location = New System.Drawing.Point(450, 12)
         Me.grpContexts.Name = "grpContexts"
-        Me.grpContexts.Size = New System.Drawing.Size(148, 349)
+        Me.grpContexts.Size = New System.Drawing.Size(136, 321)
         Me.grpContexts.TabIndex = 24
         Me.grpContexts.TabStop = False
         Me.grpContexts.Text = "Contexts"
@@ -293,9 +299,9 @@ Partial Class dlgDefineOptionsByContext
         Me.grpOptions.Controls.Add(Me.lblOptionOther)
         Me.grpOptions.Controls.Add(Me.ucrReceiverOptionOther)
         Me.grpOptions.Controls.Add(Me.ucrReceiverOption1)
-        Me.grpOptions.Location = New System.Drawing.Point(243, 12)
+        Me.grpOptions.Location = New System.Drawing.Point(301, 13)
         Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.Size = New System.Drawing.Size(153, 187)
+        Me.grpOptions.Size = New System.Drawing.Size(136, 187)
         Me.grpOptions.TabIndex = 25
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
@@ -306,9 +312,9 @@ Partial Class dlgDefineOptionsByContext
         Me.grpMeasurements.Controls.Add(Me.lblMeasurementOther)
         Me.grpMeasurements.Controls.Add(Me.ucrReceiverMeasurementOther)
         Me.grpMeasurements.Controls.Add(Me.ucrReceiverMeasurement1)
-        Me.grpMeasurements.Location = New System.Drawing.Point(243, 206)
+        Me.grpMeasurements.Location = New System.Drawing.Point(301, 206)
         Me.grpMeasurements.Name = "grpMeasurements"
-        Me.grpMeasurements.Size = New System.Drawing.Size(155, 192)
+        Me.grpMeasurements.Size = New System.Drawing.Size(136, 192)
         Me.grpMeasurements.TabIndex = 26
         Me.grpMeasurements.TabStop = False
         Me.grpMeasurements.Text = "Measurements"
@@ -319,9 +325,9 @@ Partial Class dlgDefineOptionsByContext
         Me.grpIDs.Controls.Add(Me.lblIDOther)
         Me.grpIDs.Controls.Add(Me.ucrReceiverIDOther)
         Me.grpIDs.Controls.Add(Me.ucrReceiverID1)
-        Me.grpIDs.Location = New System.Drawing.Point(10, 211)
+        Me.grpIDs.Location = New System.Drawing.Point(10, 206)
         Me.grpIDs.Name = "grpIDs"
-        Me.grpIDs.Size = New System.Drawing.Size(153, 187)
+        Me.grpIDs.Size = New System.Drawing.Size(136, 187)
         Me.grpIDs.TabIndex = 26
         Me.grpIDs.TabStop = False
         Me.grpIDs.Text = "IDs"
@@ -347,7 +353,7 @@ Partial Class dlgDefineOptionsByContext
         'ucrReceiverIDOther
         '
         Me.ucrReceiverIDOther.frmParent = Me
-        Me.ucrReceiverIDOther.Location = New System.Drawing.Point(9, 80)
+        Me.ucrReceiverIDOther.Location = New System.Drawing.Point(6, 80)
         Me.ucrReceiverIDOther.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverIDOther.Name = "ucrReceiverIDOther"
         Me.ucrReceiverIDOther.Selector = Nothing
@@ -359,7 +365,7 @@ Partial Class dlgDefineOptionsByContext
         'ucrReceiverID1
         '
         Me.ucrReceiverID1.frmParent = Me
-        Me.ucrReceiverID1.Location = New System.Drawing.Point(9, 34)
+        Me.ucrReceiverID1.Location = New System.Drawing.Point(6, 34)
         Me.ucrReceiverID1.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverID1.Name = "ucrReceiverID1"
         Me.ucrReceiverID1.Selector = Nothing
@@ -397,14 +403,14 @@ Partial Class dlgDefineOptionsByContext
         Me.lblKeyColumns.TabIndex = 10
         Me.lblKeyColumns.Text = "Key Columns:"
         '
-        'Label1
+        'lblKeyCheck
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(17, 451)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(62, 13)
-        Me.Label1.TabIndex = 29
-        Me.Label1.Text = "Key Check:"
+        Me.lblKeyCheck.AutoSize = True
+        Me.lblKeyCheck.Location = New System.Drawing.Point(17, 451)
+        Me.lblKeyCheck.Name = "lblKeyCheck"
+        Me.lblKeyCheck.Size = New System.Drawing.Size(62, 13)
+        Me.lblKeyCheck.TabIndex = 29
+        Me.lblKeyCheck.Text = "Key Check:"
         '
         'cmdModify
         '
@@ -415,13 +421,69 @@ Partial Class dlgDefineOptionsByContext
         Me.cmdModify.Text = "Modify"
         Me.cmdModify.UseVisualStyleBackColor = True
         '
+        'grpBlockingVariables
+        '
+        Me.grpBlockingVariables.Controls.Add(Me.lblBlockingMain)
+        Me.grpBlockingVariables.Controls.Add(Me.lblBlockingOther)
+        Me.grpBlockingVariables.Controls.Add(Me.ucrReceiverBlockingOther)
+        Me.grpBlockingVariables.Controls.Add(Me.ucrReceiverBlocking1)
+        Me.grpBlockingVariables.Location = New System.Drawing.Point(156, 206)
+        Me.grpBlockingVariables.Name = "grpBlockingVariables"
+        Me.grpBlockingVariables.Size = New System.Drawing.Size(136, 187)
+        Me.grpBlockingVariables.TabIndex = 27
+        Me.grpBlockingVariables.TabStop = False
+        Me.grpBlockingVariables.Text = "Blocking Variables"
+        '
+        'lblBlockingMain
+        '
+        Me.lblBlockingMain.AutoSize = True
+        Me.lblBlockingMain.Location = New System.Drawing.Point(6, 17)
+        Me.lblBlockingMain.Name = "lblBlockingMain"
+        Me.lblBlockingMain.Size = New System.Drawing.Size(118, 13)
+        Me.lblBlockingMain.TabIndex = 9
+        Me.lblBlockingMain.Text = "Main Blocking Variable:"
+        '
+        'lblBlockingOther
+        '
+        Me.lblBlockingOther.AutoSize = True
+        Me.lblBlockingOther.Location = New System.Drawing.Point(6, 61)
+        Me.lblBlockingOther.Name = "lblBlockingOther"
+        Me.lblBlockingOther.Size = New System.Drawing.Size(126, 13)
+        Me.lblBlockingOther.TabIndex = 2
+        Me.lblBlockingOther.Text = "Other Blocking Variables:"
+        '
+        'ucrReceiverBlockingOther
+        '
+        Me.ucrReceiverBlockingOther.frmParent = Me
+        Me.ucrReceiverBlockingOther.Location = New System.Drawing.Point(6, 80)
+        Me.ucrReceiverBlockingOther.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverBlockingOther.Name = "ucrReceiverBlockingOther"
+        Me.ucrReceiverBlockingOther.Selector = Nothing
+        Me.ucrReceiverBlockingOther.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverBlockingOther.strNcFilePath = ""
+        Me.ucrReceiverBlockingOther.TabIndex = 3
+        Me.ucrReceiverBlockingOther.ucrSelector = Nothing
+        '
+        'ucrReceiverBlocking1
+        '
+        Me.ucrReceiverBlocking1.frmParent = Me
+        Me.ucrReceiverBlocking1.Location = New System.Drawing.Point(6, 34)
+        Me.ucrReceiverBlocking1.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverBlocking1.Name = "ucrReceiverBlocking1"
+        Me.ucrReceiverBlocking1.Selector = Nothing
+        Me.ucrReceiverBlocking1.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverBlocking1.strNcFilePath = ""
+        Me.ucrReceiverBlocking1.TabIndex = 8
+        Me.ucrReceiverBlocking1.ucrSelector = Nothing
+        '
         'dlgDefineOptionsByContext
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(564, 537)
+        Me.ClientSize = New System.Drawing.Size(596, 537)
+        Me.Controls.Add(Me.grpBlockingVariables)
         Me.Controls.Add(Me.cmdModify)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.lblKeyCheck)
         Me.Controls.Add(Me.lblKeyColumns)
         Me.Controls.Add(Me.ucrInputKeyColumns)
         Me.Controls.Add(Me.ucrInputKeyCheck)
@@ -446,6 +508,8 @@ Partial Class dlgDefineOptionsByContext
         Me.grpMeasurements.PerformLayout()
         Me.grpIDs.ResumeLayout(False)
         Me.grpIDs.PerformLayout()
+        Me.grpBlockingVariables.ResumeLayout(False)
+        Me.grpBlockingVariables.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -482,6 +546,11 @@ Partial Class dlgDefineOptionsByContext
     Friend WithEvents grpMeasurements As GroupBox
     Friend WithEvents grpOptions As GroupBox
     Friend WithEvents grpContexts As GroupBox
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblKeyCheck As Label
     Friend WithEvents cmdModify As Button
+    Friend WithEvents grpBlockingVariables As GroupBox
+    Friend WithEvents lblBlockingMain As Label
+    Friend WithEvents lblBlockingOther As Label
+    Friend WithEvents ucrReceiverBlockingOther As ucrReceiverMultiple
+    Friend WithEvents ucrReceiverBlocking1 As ucrReceiverSingle
 End Class
