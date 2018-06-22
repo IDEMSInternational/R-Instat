@@ -21,7 +21,9 @@ Public Class dlgCompareTreatmentLines
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = True
     Private bResetBoxLayerSubdialog As Boolean = True
+    Private bDefaultsSet As Boolean = True
     Private clsCompareLines As New clsCompareTwoOptionsLines
+    Private clsComparePoints As New clsCompareTwoOptionsPoints
 
     ' String constants for Context variables
     Public strFacetRow As String = "Facet Row"
@@ -53,16 +55,18 @@ Public Class dlgCompareTreatmentLines
         ucrReceiverMeasurement.SetParameter(New RParameter("y", 1))
         ucrReceiverMeasurement.Selector = ucrSelectorPlot
         ucrReceiverMeasurement.SetIncludedDataTypes({"numeric"})
-        ucrReceiverMeasurement.strSelectorHeading = "Numerics"
+        ucrReceiverMeasurement.strSelectorHeading = "Measurements"
         ucrReceiverMeasurement.SetParameterIsString()
         ucrReceiverMeasurement.bWithQuotes = False
+        ucrReceiverMeasurement.SetOptionsByContextTypesAllMeasurements()
 
         ucrReceiverOption.SetParameter(New RParameter("right", 1))
         ucrReceiverOption.Selector = ucrSelectorPlot
         ucrReceiverOption.SetIncludedDataTypes({"factor"})
-        ucrReceiverOption.strSelectorHeading = "Factors"
+        ucrReceiverOption.strSelectorHeading = "Options"
         ucrReceiverOption.SetParameterIsString()
         ucrReceiverOption.bWithQuotes = False
+        ucrReceiverOption.SetOptionsByContextTypesAllOptions()
 
         ucrInputFactorOption1.SetParameter(New RParameter("left", 0))
         ucrInputFactorOption1.SetFactorReceiver(ucrReceiverOption)
@@ -78,10 +82,13 @@ Public Class dlgCompareTreatmentLines
         ucrReceiverID.Selector = ucrSelectorPlot
         ucrReceiverID.SetParameterIsString()
         ucrReceiverID.bWithQuotes = False
+        ucrReceiverID.strSelectorHeading = "IDs"
+        ucrReceiverID.SetOptionsByContextTypesAllIDs()
 
         clsCompareLines.clsColourParam.SetArgumentName("colour")
         clsCompareLines.clsColourParam.SetArgumentValue(clsCompareLines.strDiffCode)
         clsCompareLines.clsColourParam.Position = 1
+
         ucrChkColourByDifference.SetText("Colour lines by difference")
         ucrChkColourByDifference.SetParameter(clsCompareLines.clsColourParam)
         ucrChkColourByDifference.bAddRemoveParameter = True
@@ -123,10 +130,14 @@ Public Class dlgCompareTreatmentLines
         ucrReceiverContext1.Selector = ucrSelectorPlot
         ucrReceiverContext1.SetParameterIsString()
         ucrReceiverContext1.bWithQuotes = False
+        ucrReceiverContext1.strSelectorHeading = "Contexts/Options/Blockings"
+        ucrReceiverContext1.SetOptionsByContextTypesAllOptionsContextsBlockings()
 
         ucrReceiverContext2.Selector = ucrSelectorPlot
         ucrReceiverContext2.SetParameterIsString()
         ucrReceiverContext2.bWithQuotes = False
+        ucrReceiverContext2.strSelectorHeading = "Contexts/Options/Blockings"
+        ucrReceiverContext2.SetOptionsByContextTypesAllOptionsContextsBlockings()
 
         ucrInputContext1.SetItems({strFacetRow, strFacetCol, strNone})
         ucrInputContext1.SetDropDownStyleAsNonEditable()
@@ -143,12 +154,18 @@ Public Class dlgCompareTreatmentLines
     End Sub
 
     Private Sub SetDefaults()
+        bDefaultsSet = False
 
         clsCompareLines.SetDefaults()
+        clsComparePoints.SetDefaults()
+
+        clsComparePoints.clsFacetColOp = clsCompareLines.clsFacetColOp
+        clsComparePoints.clsFacetRowOp = clsCompareLines.clsFacetRowOp
+        clsComparePoints.clsFacetOp = clsCompareLines.clsFacetOp
+        clsComparePoints.clsRFacetFunction = clsCompareLines.clsRFacetFunction
 
         ucrSelectorPlot.Reset()
         ucrSelectorPlot.SetGgplotFunction(clsCompareLines.clsBaseOperator)
-        ucrReceiverMeasurement.SetMeAsReceiver()
 
         ucrSavePlot.Reset()
         sdgPlots.Reset()
@@ -160,10 +177,13 @@ Public Class dlgCompareTreatmentLines
         ucrInputContext1.SetName(strNone)
         ucrInputContext2.SetName(strNone)
 
-        SetMergeDataAssignTo()
+        SetDataAssignTo()
 
         clsCompareLines.clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsCompareLines.clsBaseOperator)
+        bDefaultsSet = True
+        AutoAddDefaults()
+        ucrReceiverMeasurement.SetMeAsReceiver()
     End Sub
 
     Private Sub SetRCodeforControls(bResetControls As Boolean)
@@ -185,14 +205,17 @@ Public Class dlgCompareTreatmentLines
     End Sub
 
     Private Sub ucrSelectorPlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorPlot.ControlValueChanged
-        SetMergeDataAssignTo()
+        SetDataAssignTo()
+        AutoAddDefaults()
     End Sub
 
     Private Sub ucrReceiverMeasurement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMeasurement.ControlValueChanged
         If ucrReceiverMeasurement.IsEmpty() Then
             clsCompareLines.clsDCast.RemoveParameterByName("value.var")
+            clsComparePoints.clsDCast.RemoveParameterByName("value.var")
         Else
             clsCompareLines.clsDCast.AddParameter("value.var", ucrReceiverMeasurement.GetVariableNames(), iPosition:=7)
+            clsComparePoints.clsDCast.AddParameter("value.var", ucrReceiverMeasurement.GetVariableNames(), iPosition:=7)
         End If
     End Sub
 
@@ -207,12 +230,16 @@ Public Class dlgCompareTreatmentLines
     Private Sub InputFactorTreatmentControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFactorOption1.ControlValueChanged, ucrInputFactorOption2.ControlValueChanged
         If Not ucrInputFactorOption1.IsEmpty() AndAlso Not ucrInputFactorOption2.IsEmpty Then
             clsCompareLines.clsFilterInOperator.AddParameter("1", "c(" & Chr(34) & ucrInputFactorOption1.GetText().Trim("`") & Chr(34) & ", " & Chr(34) & ucrInputFactorOption2.GetText().Trim("`") & Chr(34) & ")", iPosition:=1)
+            clsComparePoints.clsRaesGlobalFunction.AddParameter("y", ucrInputFactorOption1.GetText(), iPosition:=1)
+            clsComparePoints.clsRaesGlobalFunction.AddParameter("x", ucrInputFactorOption2.GetText(), iPosition:=0)
         Else
-            clsCompareLines.clsFilterInOperator.RemoveParameterByName("1")
+            clsCompareLines.clsFilterInOperator.RemoveParameterByName("x")
+            clsComparePoints.clsRaesGlobalFunction.RemoveParameterByName("x")
+            clsComparePoints.clsRaesGlobalFunction.RemoveParameterByName("y")
         End If
     End Sub
 
-    Private Sub ContextControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputContext1.ControlValueChanged, ucrInputContext2.ControlValueChanged, ucrReceiverContext1.ControlValueChanged, ucrReceiverContext2.ControlValueChanged
+    Private Sub ContextControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputContext1.ControlValueChanged, ucrInputContext2.ControlValueChanged, ucrInputContext3.ControlValueChanged, ucrReceiverContext1.ControlValueChanged, ucrReceiverContext2.ControlValueChanged, ucrReceiverContext3.ControlValueChanged
         Dim iRowVars As Integer = 0
         Dim iColVars As Integer = 0
 
@@ -288,11 +315,13 @@ Public Class dlgCompareTreatmentLines
         TestOkEnabled()
     End Sub
 
-    Public Sub SetMergeDataAssignTo()
+    Public Sub SetDataAssignTo()
         If ucrSelectorPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
             clsCompareLines.clsFilterMissingOperator.SetAssignTo(ucrSelectorPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_with_diff")
+            clsComparePoints.clsDCast.SetAssignTo(ucrSelectorPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_unstacked")
         Else
             clsCompareLines.clsFilterMissingOperator.RemoveAssignTo()
+            clsComparePoints.clsDCast.RemoveAssignTo()
         End If
     End Sub
 
@@ -301,6 +330,16 @@ Public Class dlgCompareTreatmentLines
             clsCompareLines.clsFilterMissingOperator.AddParameter("right", clsRFunctionParameter:=clsCompareLines.clsFilterMissingFunction, iPosition:=1)
         Else
             clsCompareLines.clsFilterMissingOperator.RemoveParameterByName("right")
+        End If
+    End Sub
+
+    Private Sub AutoAddDefaults()
+        If bDefaultsSet Then
+            ucrReceiverMeasurement.AddItemsWithMetadataProperty(ucrSelectorPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "O_by_C_Type", {"measurement_1_label"})
+            ucrReceiverOption.AddItemsWithMetadataProperty(ucrSelectorPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "O_by_C_Type", {"option_1_label"})
+            ucrReceiverID.AddItemsWithMetadataProperty(ucrSelectorPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "O_by_C_Type", {"id_1_label"})
+            ucrReceiverContext1.AddItemsWithMetadataProperty(ucrSelectorPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "O_by_C_Type", {"context_1_label"})
+            ucrReceiverContext2.AddItemsWithMetadataProperty(ucrSelectorPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "O_by_C_Type", {"context_2_label"})
         End If
     End Sub
 End Class

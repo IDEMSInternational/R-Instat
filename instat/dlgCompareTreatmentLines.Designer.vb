@@ -31,17 +31,19 @@ Partial Class dlgCompareTreatmentLines
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lblContext2 = New System.Windows.Forms.Label()
         Me.lblContext1 = New System.Windows.Forms.Label()
+        Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.lblHlineValue = New System.Windows.Forms.Label()
+        Me.lblTransparency = New System.Windows.Forms.Label()
+        Me.ucrChkBoxplotOnlyComplete = New instat.ucrCheck()
+        Me.ucrInputHlineValue = New instat.ucrInputTextBox()
+        Me.ucrChkIncludeHline = New instat.ucrCheck()
+        Me.ucrNudTransparency = New instat.ucrNud()
+        Me.ucrChkIncludeBoxplot = New instat.ucrCheck()
+        Me.ucrChkColourByDifference = New instat.ucrCheck()
         Me.ucrInputContext2 = New instat.ucrInputComboBox()
         Me.ucrReceiverContext2 = New instat.ucrReceiverSingle()
         Me.ucrInputContext1 = New instat.ucrInputComboBox()
         Me.ucrReceiverContext1 = New instat.ucrReceiverSingle()
-        Me.grpOptions = New System.Windows.Forms.GroupBox()
-        Me.ucrInputHlineValue = New instat.ucrInputTextBox()
-        Me.lblHlineValue = New System.Windows.Forms.Label()
-        Me.ucrChkIncludeHline = New instat.ucrCheck()
-        Me.lblTransparency = New System.Windows.Forms.Label()
-        Me.ucrNudTransparency = New instat.ucrNud()
-        Me.ucrChkColourByDifference = New instat.ucrCheck()
         Me.ucrInputFactorOption2 = New instat.ucrInputFactorLevels()
         Me.ucrInputFactorOption1 = New instat.ucrInputFactorLevels()
         Me.ucrReceiverID = New instat.ucrReceiverSingle()
@@ -50,8 +52,9 @@ Partial Class dlgCompareTreatmentLines
         Me.ucrSelectorPlot = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrSavePlot = New instat.ucrSave()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkIncludeBoxplot = New instat.ucrCheck()
-        Me.ucrChkBoxplotOnlyComplete = New instat.ucrCheck()
+        Me.lblContext3 = New System.Windows.Forms.Label()
+        Me.ucrInputContext3 = New instat.ucrInputComboBox()
+        Me.ucrReceiverContext3 = New instat.ucrReceiverSingle()
         Me.GroupBox1.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -83,6 +86,9 @@ Partial Class dlgCompareTreatmentLines
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.lblContext3)
+        Me.GroupBox1.Controls.Add(Me.ucrInputContext3)
+        Me.GroupBox1.Controls.Add(Me.ucrReceiverContext3)
         Me.GroupBox1.Controls.Add(Me.lblContext2)
         Me.GroupBox1.Controls.Add(Me.lblContext1)
         Me.GroupBox1.Controls.Add(Me.ucrInputContext2)
@@ -103,6 +109,72 @@ Partial Class dlgCompareTreatmentLines
         resources.ApplyResources(Me.lblContext1, "lblContext1")
         Me.lblContext1.Name = "lblContext1"
         '
+        'grpOptions
+        '
+        Me.grpOptions.Controls.Add(Me.ucrChkBoxplotOnlyComplete)
+        Me.grpOptions.Controls.Add(Me.ucrInputHlineValue)
+        Me.grpOptions.Controls.Add(Me.lblHlineValue)
+        Me.grpOptions.Controls.Add(Me.ucrChkIncludeHline)
+        Me.grpOptions.Controls.Add(Me.lblTransparency)
+        Me.grpOptions.Controls.Add(Me.ucrNudTransparency)
+        Me.grpOptions.Controls.Add(Me.ucrChkIncludeBoxplot)
+        Me.grpOptions.Controls.Add(Me.ucrChkColourByDifference)
+        resources.ApplyResources(Me.grpOptions, "grpOptions")
+        Me.grpOptions.Name = "grpOptions"
+        Me.grpOptions.TabStop = False
+        '
+        'lblHlineValue
+        '
+        resources.ApplyResources(Me.lblHlineValue, "lblHlineValue")
+        Me.lblHlineValue.Name = "lblHlineValue"
+        '
+        'lblTransparency
+        '
+        resources.ApplyResources(Me.lblTransparency, "lblTransparency")
+        Me.lblTransparency.Name = "lblTransparency"
+        '
+        'ucrChkBoxplotOnlyComplete
+        '
+        Me.ucrChkBoxplotOnlyComplete.Checked = False
+        resources.ApplyResources(Me.ucrChkBoxplotOnlyComplete, "ucrChkBoxplotOnlyComplete")
+        Me.ucrChkBoxplotOnlyComplete.Name = "ucrChkBoxplotOnlyComplete"
+        '
+        'ucrInputHlineValue
+        '
+        Me.ucrInputHlineValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputHlineValue.IsMultiline = False
+        Me.ucrInputHlineValue.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputHlineValue, "ucrInputHlineValue")
+        Me.ucrInputHlineValue.Name = "ucrInputHlineValue"
+        '
+        'ucrChkIncludeHline
+        '
+        Me.ucrChkIncludeHline.Checked = False
+        resources.ApplyResources(Me.ucrChkIncludeHline, "ucrChkIncludeHline")
+        Me.ucrChkIncludeHline.Name = "ucrChkIncludeHline"
+        '
+        'ucrNudTransparency
+        '
+        Me.ucrNudTransparency.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTransparency.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudTransparency, "ucrNudTransparency")
+        Me.ucrNudTransparency.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTransparency.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTransparency.Name = "ucrNudTransparency"
+        Me.ucrNudTransparency.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkIncludeBoxplot
+        '
+        Me.ucrChkIncludeBoxplot.Checked = False
+        resources.ApplyResources(Me.ucrChkIncludeBoxplot, "ucrChkIncludeBoxplot")
+        Me.ucrChkIncludeBoxplot.Name = "ucrChkIncludeBoxplot"
+        '
+        'ucrChkColourByDifference
+        '
+        Me.ucrChkColourByDifference.Checked = False
+        resources.ApplyResources(Me.ucrChkColourByDifference, "ucrChkColourByDifference")
+        Me.ucrChkColourByDifference.Name = "ucrChkColourByDifference"
+        '
         'ucrInputContext2
         '
         Me.ucrInputContext2.AddQuotesIfUnrecognised = True
@@ -112,7 +184,7 @@ Partial Class dlgCompareTreatmentLines
         '
         'ucrReceiverContext2
         '
-        Me.ucrReceiverContext2.frmParent = Me
+        Me.ucrReceiverContext2.frmParent = Nothing
         resources.ApplyResources(Me.ucrReceiverContext2, "ucrReceiverContext2")
         Me.ucrReceiverContext2.Name = "ucrReceiverContext2"
         Me.ucrReceiverContext2.Selector = Nothing
@@ -128,66 +200,12 @@ Partial Class dlgCompareTreatmentLines
         '
         'ucrReceiverContext1
         '
-        Me.ucrReceiverContext1.frmParent = Me
+        Me.ucrReceiverContext1.frmParent = Nothing
         resources.ApplyResources(Me.ucrReceiverContext1, "ucrReceiverContext1")
         Me.ucrReceiverContext1.Name = "ucrReceiverContext1"
         Me.ucrReceiverContext1.Selector = Nothing
         Me.ucrReceiverContext1.strNcFilePath = ""
         Me.ucrReceiverContext1.ucrSelector = Nothing
-        '
-        'grpOptions
-        '
-        Me.grpOptions.Controls.Add(Me.ucrChkBoxplotOnlyComplete)
-        Me.grpOptions.Controls.Add(Me.ucrInputHlineValue)
-        Me.grpOptions.Controls.Add(Me.lblHlineValue)
-        Me.grpOptions.Controls.Add(Me.ucrChkIncludeHline)
-        Me.grpOptions.Controls.Add(Me.lblTransparency)
-        Me.grpOptions.Controls.Add(Me.ucrNudTransparency)
-        Me.grpOptions.Controls.Add(Me.ucrChkIncludeBoxplot)
-        Me.grpOptions.Controls.Add(Me.ucrChkColourByDifference)
-        resources.ApplyResources(Me.grpOptions, "grpOptions")
-        Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.TabStop = False
-        '
-        'ucrInputHlineValue
-        '
-        Me.ucrInputHlineValue.AddQuotesIfUnrecognised = True
-        Me.ucrInputHlineValue.IsMultiline = False
-        Me.ucrInputHlineValue.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputHlineValue, "ucrInputHlineValue")
-        Me.ucrInputHlineValue.Name = "ucrInputHlineValue"
-        '
-        'lblHlineValue
-        '
-        resources.ApplyResources(Me.lblHlineValue, "lblHlineValue")
-        Me.lblHlineValue.Name = "lblHlineValue"
-        '
-        'ucrChkIncludeHline
-        '
-        Me.ucrChkIncludeHline.Checked = False
-        resources.ApplyResources(Me.ucrChkIncludeHline, "ucrChkIncludeHline")
-        Me.ucrChkIncludeHline.Name = "ucrChkIncludeHline"
-        '
-        'lblTransparency
-        '
-        resources.ApplyResources(Me.lblTransparency, "lblTransparency")
-        Me.lblTransparency.Name = "lblTransparency"
-        '
-        'ucrNudTransparency
-        '
-        Me.ucrNudTransparency.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTransparency.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudTransparency, "ucrNudTransparency")
-        Me.ucrNudTransparency.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudTransparency.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTransparency.Name = "ucrNudTransparency"
-        Me.ucrNudTransparency.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkColourByDifference
-        '
-        Me.ucrChkColourByDifference.Checked = False
-        resources.ApplyResources(Me.ucrChkColourByDifference, "ucrChkColourByDifference")
-        Me.ucrChkColourByDifference.Name = "ucrChkColourByDifference"
         '
         'ucrInputFactorOption2
         '
@@ -248,17 +266,26 @@ Partial Class dlgCompareTreatmentLines
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'ucrChkIncludeBoxplot
+        'lblContext3
         '
-        Me.ucrChkIncludeBoxplot.Checked = False
-        resources.ApplyResources(Me.ucrChkIncludeBoxplot, "ucrChkIncludeBoxplot")
-        Me.ucrChkIncludeBoxplot.Name = "ucrChkIncludeBoxplot"
+        resources.ApplyResources(Me.lblContext3, "lblContext3")
+        Me.lblContext3.Name = "lblContext3"
         '
-        'ucrChkBoxplotOnlyComplete
+        'ucrInputContext3
         '
-        Me.ucrChkBoxplotOnlyComplete.Checked = False
-        resources.ApplyResources(Me.ucrChkBoxplotOnlyComplete, "ucrChkBoxplotOnlyComplete")
-        Me.ucrChkBoxplotOnlyComplete.Name = "ucrChkBoxplotOnlyComplete"
+        Me.ucrInputContext3.AddQuotesIfUnrecognised = True
+        Me.ucrInputContext3.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputContext3, "ucrInputContext3")
+        Me.ucrInputContext3.Name = "ucrInputContext3"
+        '
+        'ucrReceiverContext3
+        '
+        Me.ucrReceiverContext3.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverContext3, "ucrReceiverContext3")
+        Me.ucrReceiverContext3.Name = "ucrReceiverContext3"
+        Me.ucrReceiverContext3.Selector = Nothing
+        Me.ucrReceiverContext3.strNcFilePath = ""
+        Me.ucrReceiverContext3.ucrSelector = Nothing
         '
         'dlgCompareTreatmentLines
         '
@@ -321,4 +348,7 @@ Partial Class dlgCompareTreatmentLines
     Friend WithEvents lblHlineValue As Label
     Friend WithEvents ucrChkBoxplotOnlyComplete As ucrCheck
     Friend WithEvents ucrChkIncludeBoxplot As ucrCheck
+    Friend WithEvents lblContext3 As Label
+    Friend WithEvents ucrInputContext3 As ucrInputComboBox
+    Friend WithEvents ucrReceiverContext3 As ucrReceiverSingle
 End Class
