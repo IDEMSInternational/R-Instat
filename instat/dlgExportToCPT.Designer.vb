@@ -39,15 +39,15 @@ Partial Class dlgExportToCPT
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgExportToCPT))
-        Me.lblYear = New System.Windows.Forms.Label()
-        Me.lblElement = New System.Windows.Forms.Label()
-        Me.lblStationLatLon = New System.Windows.Forms.Label()
-        Me.rdoOneDF = New System.Windows.Forms.RadioButton()
         Me.rdoTwoDF = New System.Windows.Forms.RadioButton()
-        Me.lblLatitude = New System.Windows.Forms.Label()
-        Me.lblLongitude = New System.Windows.Forms.Label()
+        Me.rdoOneDF = New System.Windows.Forms.RadioButton()
         Me.lblStationElement = New System.Windows.Forms.Label()
         Me.lblStationOneDF = New System.Windows.Forms.Label()
+        Me.lblYear = New System.Windows.Forms.Label()
+        Me.lblElement = New System.Windows.Forms.Label()
+        Me.lblLatitude = New System.Windows.Forms.Label()
+        Me.lblLongitude = New System.Windows.Forms.Label()
+        Me.lblStationLatLon = New System.Windows.Forms.Label()
         Me.ucrSectorTwoDF = New instat.ucrDataFrame()
         Me.UcrSaveExportFile = New instat.ucrSave()
         Me.ucrReceiverStationElementData = New instat.ucrReceiverSingle()
@@ -62,23 +62,14 @@ Partial Class dlgExportToCPT
         Me.ucrSelectorExporCPT = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
         '
-        'lblYear
+        'rdoTwoDF
         '
-        resources.ApplyResources(Me.lblYear, "lblYear")
-        Me.lblYear.Name = "lblYear"
-        Me.lblYear.Tag = "Years:"
-        '
-        'lblElement
-        '
-        resources.ApplyResources(Me.lblElement, "lblElement")
-        Me.lblElement.Name = "lblElement"
-        Me.lblElement.Tag = "Element:"
-        '
-        'lblStationLatLon
-        '
-        resources.ApplyResources(Me.lblStationLatLon, "lblStationLatLon")
-        Me.lblStationLatLon.Name = "lblStationLatLon"
-        Me.lblStationLatLon.Tag = "Station"
+        resources.ApplyResources(Me.rdoTwoDF, "rdoTwoDF")
+        Me.rdoTwoDF.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoTwoDF.FlatAppearance.BorderSize = 2
+        Me.rdoTwoDF.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoTwoDF.Name = "rdoTwoDF"
+        Me.rdoTwoDF.UseVisualStyleBackColor = True
         '
         'rdoOneDF
         '
@@ -87,44 +78,46 @@ Partial Class dlgExportToCPT
         Me.rdoOneDF.FlatAppearance.BorderSize = 2
         Me.rdoOneDF.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoOneDF.Name = "rdoOneDF"
-        Me.rdoOneDF.TabStop = True
         Me.rdoOneDF.UseVisualStyleBackColor = True
-        '
-        'rdoTwoDF
-        '
-        resources.ApplyResources(Me.rdoTwoDF, "rdoTwoDF")
-        Me.rdoTwoDF.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoTwoDF.FlatAppearance.BorderSize = 2
-        Me.rdoTwoDF.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoTwoDF.Name = "rdoTwoDF"
-        Me.rdoTwoDF.TabStop = True
-        Me.rdoTwoDF.UseVisualStyleBackColor = True
-        '
-        'lblLatitude
-        '
-        resources.ApplyResources(Me.lblLatitude, "lblLatitude")
-        Me.lblLatitude.Name = "lblLatitude"
-        Me.lblLatitude.Tag = "Latitude"
-        '
-        'lblLongitude
-        '
-        resources.ApplyResources(Me.lblLongitude, "lblLongitude")
-        Me.lblLongitude.Name = "lblLongitude"
-        Me.lblLongitude.Tag = "Longitude"
         '
         'lblStationElement
         '
         resources.ApplyResources(Me.lblStationElement, "lblStationElement")
         Me.lblStationElement.Name = "lblStationElement"
-        Me.lblStationElement.Tag = "StationElement"
         '
         'lblStationOneDF
         '
         resources.ApplyResources(Me.lblStationOneDF, "lblStationOneDF")
         Me.lblStationOneDF.Name = "lblStationOneDF"
         '
+        'lblYear
+        '
+        resources.ApplyResources(Me.lblYear, "lblYear")
+        Me.lblYear.Name = "lblYear"
+        '
+        'lblElement
+        '
+        resources.ApplyResources(Me.lblElement, "lblElement")
+        Me.lblElement.Name = "lblElement"
+        '
+        'lblLatitude
+        '
+        resources.ApplyResources(Me.lblLatitude, "lblLatitude")
+        Me.lblLatitude.Name = "lblLatitude"
+        '
+        'lblLongitude
+        '
+        resources.ApplyResources(Me.lblLongitude, "lblLongitude")
+        Me.lblLongitude.Name = "lblLongitude"
+        '
+        'lblStationLatLon
+        '
+        resources.ApplyResources(Me.lblStationLatLon, "lblStationLatLon")
+        Me.lblStationLatLon.Name = "lblStationLatLon"
+        '
         'ucrSectorTwoDF
         '
+        Me.ucrSectorTwoDF.bDropUnusedFilterLevels = False
         Me.ucrSectorTwoDF.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSectorTwoDF, "ucrSectorTwoDF")
         Me.ucrSectorTwoDF.Name = "ucrSectorTwoDF"
@@ -206,6 +199,7 @@ Partial Class dlgExportToCPT
         '
         'ucrSelectorExporCPT
         '
+        Me.ucrSelectorExporCPT.bDropUnusedFilterLevels = False
         Me.ucrSelectorExporCPT.bShowHiddenColumns = False
         Me.ucrSelectorExporCPT.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorExporCPT, "ucrSelectorExporCPT")
@@ -215,23 +209,23 @@ Partial Class dlgExportToCPT
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblStationLatLon)
+        Me.Controls.Add(Me.lblLongitude)
+        Me.Controls.Add(Me.lblLatitude)
+        Me.Controls.Add(Me.lblElement)
+        Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.lblStationOneDF)
+        Me.Controls.Add(Me.lblStationElement)
+        Me.Controls.Add(Me.rdoOneDF)
+        Me.Controls.Add(Me.rdoTwoDF)
         Me.Controls.Add(Me.ucrSectorTwoDF)
         Me.Controls.Add(Me.UcrSaveExportFile)
         Me.Controls.Add(Me.ucrReceiverStationElementData)
-        Me.Controls.Add(Me.lblStationElement)
-        Me.Controls.Add(Me.lblLongitude)
         Me.Controls.Add(Me.UcrReceiverLongitude)
-        Me.Controls.Add(Me.lblLatitude)
         Me.Controls.Add(Me.UcrReceiverLatitude)
-        Me.Controls.Add(Me.rdoTwoDF)
-        Me.Controls.Add(Me.rdoOneDF)
         Me.Controls.Add(Me.ucrPnlNoOfDF)
         Me.Controls.Add(Me.ucrChkLongData)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.lblStationLatLon)
-        Me.Controls.Add(Me.lblElement)
-        Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.ucrReceiverStationLatLon)
         Me.Controls.Add(Me.ucrReceiverElement)
         Me.Controls.Add(Me.ucrReceiverYear)
@@ -249,21 +243,21 @@ Partial Class dlgExportToCPT
     Friend WithEvents ucrReceiverYear As ucrReceiverSingle
     Friend WithEvents ucrReceiverElement As ucrReceiverSingle
     Friend WithEvents ucrReceiverStationLatLon As ucrReceiverSingle
-    Friend WithEvents lblYear As Label
-    Friend WithEvents lblElement As Label
-    Friend WithEvents lblStationLatLon As Label
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrChkLongData As ucrCheck
-    Friend WithEvents rdoTwoDF As RadioButton
-    Friend WithEvents rdoOneDF As RadioButton
     Friend WithEvents ucrPnlNoOfDF As UcrPanel
-    Friend WithEvents lblLatitude As Label
     Friend WithEvents UcrReceiverLatitude As ucrReceiverSingle
     Friend WithEvents ucrReceiverStationElementData As ucrReceiverSingle
-    Friend WithEvents lblStationElement As Label
-    Friend WithEvents lblLongitude As Label
     Friend WithEvents UcrReceiverLongitude As ucrReceiverSingle
     Friend WithEvents UcrSaveExportFile As ucrSave
     Friend WithEvents ucrSectorTwoDF As ucrDataFrame
+    Friend WithEvents lblYear As Label
     Friend WithEvents lblStationOneDF As Label
+    Friend WithEvents lblStationElement As Label
+    Friend WithEvents rdoOneDF As RadioButton
+    Friend WithEvents rdoTwoDF As RadioButton
+    Friend WithEvents lblElement As Label
+    Friend WithEvents lblStationLatLon As Label
+    Friend WithEvents lblLongitude As Label
+    Friend WithEvents lblLatitude As Label
 End Class
