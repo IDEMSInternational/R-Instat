@@ -22,8 +22,10 @@
 
     ' Geoms (layers)
     Public clsPointGeom As New RFunction
+    Public clsPointAes As New RFunction
     Public clsSmoothGeom As New RFunction
-    Public clsAblineGeom As New RFunction
+    Public clsAblineXYGeom As New RFunction
+    Public clsAblineMeanDiffGeom As New RFunction
 
     ' Not yet implemented
     ' Additional functions for plot subdialog
@@ -52,8 +54,10 @@
         clsRggplotFunction = New RFunction
         clsRaesGlobalFunction = New RFunction
         clsPointGeom = New RFunction
+        clsPointAes = New RFunction
         clsSmoothGeom = New RFunction
-        clsAblineGeom = New RFunction
+        clsAblineXYGeom = New RFunction
+        clsAblineMeanDiffGeom = New RFunction
 
         clsRFacetFunction = New RFunction
         clsFacetOp = New ROperator
@@ -72,6 +76,7 @@
         clsDCast.AddParameter("fun.aggregate", "mean", iPosition:=2)
 
         clsDCastFormula.SetOperation("~")
+        clsDCastFormula.bBrackets = False
         clsDCastFormula.AddParameter("left", clsROperatorParameter:=clsDCastIDFormula, iPosition:=0)
 
         clsDCastIDFormula.SetOperation("+")
@@ -80,6 +85,7 @@
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
         clsBaseOperator.AddParameter("geom_line", clsRFunctionParameter:=clsPointGeom, iPosition:=2)
+        clsBaseOperator.AddParameter("geom_ablineXY", clsRFunctionParameter:=clsAblineXYGeom, iPosition:=3)
 
         clsRggplotFunction.SetPackageName("ggplot2")
         clsRggplotFunction.SetRCommand("ggplot")
@@ -91,18 +97,25 @@
 
         clsPointGeom.SetPackageName("ggplot2")
         clsPointGeom.SetRCommand("geom_point")
+        clsPointGeom.AddParameter("mapping", clsRFunctionParameter:=clsPointAes, iPosition:=0)
+
+        clsPointAes.SetPackageName("ggplot2")
+        clsPointAes.SetRCommand("aes")
 
         clsSmoothGeom.SetPackageName("ggplot2")
         clsSmoothGeom.SetRCommand("geom_smooth")
         clsSmoothGeom.AddParameter("se", "FALSE", iPosition:=6)
-        clsSmoothGeom.AddParameter("method", Chr(34) & "loes" & Chr(34), iPosition:=4)
+        clsSmoothGeom.AddParameter("method", Chr(34) & "loess" & Chr(34), iPosition:=4)
         clsSmoothGeom.AddParameter("alpha", "0.5", iPosition:=10)
 
-        clsAblineGeom.SetPackageName("ggplot2")
-        clsAblineGeom.SetRCommand("geom_abline")
-        clsAblineGeom.AddParameter("slope", "1", iPosition:=2)
-        clsAblineGeom.AddParameter("intercept", clsRFunctionParameter:=clsMean, iPosition:=3)
-        clsAblineGeom.AddParameter("col", Chr(34) & "red" & Chr(34), iPosition:=10)
+        clsAblineXYGeom.SetPackageName("ggplot2")
+        clsAblineXYGeom.SetRCommand("geom_abline")
+
+        clsAblineMeanDiffGeom.SetPackageName("ggplot2")
+        clsAblineMeanDiffGeom.SetRCommand("geom_abline")
+        clsAblineMeanDiffGeom.AddParameter("slope", "1", iPosition:=2)
+        clsAblineMeanDiffGeom.AddParameter("intercept", clsRFunctionParameter:=clsMean, iPosition:=3)
+        clsAblineMeanDiffGeom.AddParameter("col", Chr(34) & "red" & Chr(34), iPosition:=10)
 
         clsMean.SetRCommand("mean")
 
@@ -122,22 +135,16 @@
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
     End Sub
 
-    Public Sub SetRCodeforControls(ucrSelectorPlot As ucrSelectorByDataFrameAddRemove, ucrReceiverOption As ucrReceiverSingle, ucrReceiverID As ucrReceiverSingle, ucrReceiverMeasurement As ucrReceiverSingle, ucrInputFactorOption1 As ucrInputFactorLevels, ucrInputFactorOption2 As ucrInputFactorLevels, ucrChkColourByDifference As ucrCheck, ucrChkIncludeBoxplot As ucrCheck, ucrNudTransparency As ucrNud, ucrChkBoxplotOnlyComplete As ucrCheck, ucrChkHline As ucrCheck, ucrInputHlineValue As ucrInputTextBox, bResetControls As Boolean)
-        ucrSelectorPlot.AddAdditionalCodeParameterPair(clsDCast, ucrSelectorPlot.GetParameter(), iAdditionalPairNo:=2)
-        ucrReceiverOption.AddAdditionalCodeParameterPair(clsDCastFormula, New RParameter("right", iNewPosition:=1), iAdditionalPairNo:=2)
-        ucrReceiverID.AddAdditionalCodeParameterPair(clsDCastIDFormula, New RParameter("left", iNewPosition:=0), iAdditionalPairNo:=2)
+    Public Sub SetRCodeforControls(ucrSelectorPlot As ucrSelectorByDataFrameAddRemove, ucrReceiverOption As ucrReceiverSingle, ucrReceiverID As ucrReceiverSingle, ucrReceiverMeasurement As ucrReceiverSingle, ucrInputFactorOption1 As ucrInputFactorLevels, ucrInputFactorOption2 As ucrInputFactorLevels, ucrChkColourByDifference As ucrCheck, ucrChkIncludeBoxplot As ucrCheck, ucrNudTransparency As ucrNud, ucrChkBoxplotOnlyComplete As ucrCheck, ucrChkHline As ucrCheck, ucrInputHlineValue As ucrInputTextBox, ucrSavePlot As ucrSave, ucrReceiverContext1 As ucrReceiverSingle, ucrReceiverContext2 As ucrReceiverSingle, ucrReceiverContext3 As ucrReceiverSingle, ucrChkIncludeSmoothLine As ucrCheck, ucrChkIncludeMeanLine As ucrCheck, bResetControls As Boolean)
+        ucrSavePlot.AddAdditionalRCode(clsBaseOperator, iAdditionalPairNo:=1)
+        ucrReceiverOption.AddAdditionalCodeParameterPair(clsDCastFormula, New RParameter("right", iNewPosition:=1), iAdditionalPairNo:=1)
+        ucrReceiverID.AddAdditionalCodeParameterPair(clsDCastIDFormula, New RParameter("left", iNewPosition:=0), iAdditionalPairNo:=1)
 
-        ucrReceiverMeasurement.SetRCode(clsRaesGlobalFunction, bResetControls)
-        ucrReceiverOption.SetRCode(clsDCastFormula, bResetControls)
-        'Needs to be done after linked receiver is set
-        ucrInputFactorOption1.SetRCode(clsDiffOperator, bResetControls)
-        ucrInputFactorOption2.SetRCode(clsDiffOperator, bResetControls)
-        ucrReceiverID.SetRCode(clsDCastFormula, bResetControls)
-        ucrChkColourByDifference.SetRCode(clsRaesLineFunction, bResetControls)
-        ucrChkIncludeBoxplot.SetRCode(clsBaseOperator, bResetControls)
-        ucrNudTransparency.SetRCode(clsBoxplotGeom, bResetControls)
-        ucrChkBoxplotOnlyComplete.SetRCode(clsFilterMissingOperator, bResetControls)
-        ucrChkHline.SetRCode(clsBaseOperator, bResetControls)
-        ucrInputHlineValue.SetRCode(clsHlineGeom, bResetControls)
+        ucrReceiverContext1.SetRCode(clsDCastIDFormula, bResetControls)
+        ucrReceiverContext2.SetRCode(clsDCastIDFormula, bResetControls)
+        ucrReceiverContext3.SetRCode(clsDCastIDFormula, bResetControls)
+        ucrChkIncludeSmoothLine.SetRCode(clsBaseOperator, bResetControls)
+        'Disabled until working
+        'ucrChkIncludeMeanLine.SetRCode(clsBaseOperator, bResetControls)
     End Sub
 End Class
