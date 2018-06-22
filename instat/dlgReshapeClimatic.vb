@@ -32,7 +32,7 @@ Public Class dlgReshapeClimaticData
         End If
         SetRCodeforControls(bReset)
         bReset = False
-        'autoTranslate(Me)
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -63,25 +63,71 @@ Public Class dlgReshapeClimaticData
 
         'rdoYear
         ucrReceiverYear.SetParameter(New RParameter("year", 3))
+        ucrReceiverYear.SetParameterIsString()
+        ucrReceiverYear.bWithQuotes = False
+
         ucrReceiverDayofYear.SetParameter(New RParameter("day", 1))
-        ucrReceiverDayofMonth.SetParameter(New RParameter("month", 2))
-        ucrReceiverStation.SetParameter(New RParameter("sortcols"))
+        ucrReceiverDayofYear.SetParameterIsString()
+        ucrReceiverDayofYear.bWithQuotes = False
+        ucrReceiverDayofYear.bAutoFill = True
+
+        ucrReceiverMonth.SetParameter(New RParameter("month", 2))
+        ucrReceiverMonth.SetParameterIsString()
+        ucrReceiverMonth.bWithQuotes = False
+        ucrReceiverMonth.bAutoFill = True
+
+        ucrReceiverStation.SetParameter(New RParameter("sortcols", 4))
+        ucrReceiverStation.SetParameterIsString()
+        ucrReceiverStation.bWithQuotes = False
+        ucrReceiverStation.bAutoFill = True
 
         'rdoMonth
         ucrReceiverYearTwo.SetParameter(New RParameter("year", 3))
+        ucrReceiverYearTwo.SetParameterIsString()
+        ucrReceiverYearTwo.bWithQuotes = False
+        ucrReceiverYearTwo.bAutoFill = True
+
         ucrReceiverDayofMonth.SetParameter(New RParameter("day", 1))
-        ucrReceiverMonth.SetParameter(New RParameter("month", 2))
-        ucrReceiverStationTwo.SetParameter(New RParameter("sortcols"))
+        ucrReceiverDayofMonth.SetParameterIsString()
+        ucrReceiverDayofMonth.bWithQuotes = False
+        ucrReceiverDayofMonth.bAutoFill = True
+
+        ucrReceiverMonthTwo.SetParameter(New RParameter("month", 2))
+        ucrReceiverMonthTwo.SetParameterIsString()
+        ucrReceiverMonthTwo.bWithQuotes = False
+
+        ucrReceiverStationTwo.SetParameter(New RParameter("sortcols", 4))
+        ucrReceiverStationTwo.SetParameterIsString()
+        ucrReceiverStationTwo.bWithQuotes = False
+        ucrReceiverStationTwo.bAutoFill = True
 
         'rdoDay
         ucrReceiverYearThree.SetParameter(New RParameter("year", 3))
-        ucrReceiverDayofMonthTwo.SetParameter(New RParameter("day", 1))
-        ucrReceiverMonthTwo.SetParameter(New RParameter("month", 2))
-        ucrReceiverStationThree.SetParameter(New RParameter("sortcols"))
+        ucrReceiverYearThree.SetParameterIsString()
+        ucrReceiverYearThree.bWithQuotes = False
+        ucrReceiverYearThree.bAutoFill = True
 
-        ' ucrPnlReshapeClimaticData.s(grpYear, {rdoYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrPnlReshapeClimaticData.AddToLinkedControls(grpMonth, {rdoMonth})
-        'ucrPnlReshapeClimaticData.AddToLinkedControls(ucrChkVarWidth, {rdoDay}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrReceiverDayofMonthTwo.SetParameter(New RParameter("day", 1))
+        ucrReceiverDayofMonthTwo.SetParameterIsString()
+        ucrReceiverDayofMonthTwo.bWithQuotes = False
+
+        ucrReceiverMonthThree.SetParameter(New RParameter("month", 2))
+        ucrReceiverMonthThree.SetParameterIsString()
+        ucrReceiverMonthThree.bWithQuotes = False
+        ucrReceiverMonthThree.bAutoFill = True
+
+        ucrReceiverStationThree.SetParameter(New RParameter("sortcols", 4))
+        ucrReceiverStationThree.SetParameterIsString()
+        ucrReceiverStationThree.bWithQuotes = False
+        ucrReceiverStationThree.bAutoFill = True
+
+        ucrPnlReshapeClimaticData.AddToLinkedControls(ucrReceiverStation, {rdoYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlReshapeClimaticData.AddToLinkedControls(ucrReceiverStationTwo, {rdoMonth}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlReshapeClimaticData.AddToLinkedControls(ucrReceiverStationThree, {rdoDay}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrReceiverStation.SetLinkedDisplayControl(grpYear)
+        ucrReceiverStationTwo.SetLinkedDisplayControl(grpMonth)
+        ucrReceiverStationThree.SetLinkedDisplayControl(grpDay)
 
     End Sub
 
@@ -107,23 +153,24 @@ Public Class dlgReshapeClimaticData
         SetRCodeforControls(True)
         TestOkEnabled()
     End Sub
-    Private Sub GroupBoxDisplayOnReopen()
-        If rdoYear.Checked Then
-            grpDay.Visible = False
-            grpMonth.Visible = False
-            grpYear.Visible = True
-        ElseIf rdoMonth.Checked Then
-            grpMonth.Visible = True
-            grpYear.Visible = False
-            grpDay.Visible = False
-        Else
-            grpDay.Visible = True
-            grpMonth.Visible = False
-            grpYear.Visible = False
-        End If
-    End Sub
 
     Private Sub ucrPnlReshapeClimaticData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlReshapeClimaticData.ControlValueChanged
-        GroupBoxDisplayOnReopen()
+        If rdoYear.Checked Then
+            clsGridtoDataFunc.AddParameter("year", Chr(34) & "columns" & Chr(34))
+            ucrReceiverYear.GetVariableNamesAsList()
+        Else
+            'clsGridtoDataFunc.RemoveParameterByName("year")
+        End If
+        If rdoMonth.Checked Then
+            clsGridtoDataFunc.AddParameter("month", Chr(34) & "columns" & Chr(34))
+        Else
+
+            'clsGridtoDataFunc.RemoveParameterByName("month")
+        End If
+        If rdoDay.Checked Then
+            clsGridtoDataFunc.AddParameter("day", Chr(34) & "columns" & Chr(34))
+        Else
+            'clsGridtoDataFunc.RemoveParameterByName("day")
+        End If
     End Sub
 End Class

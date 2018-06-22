@@ -28,35 +28,35 @@ Partial Class dlgReshapeClimaticData
         Me.rdoMonth = New System.Windows.Forms.RadioButton()
         Me.rdoYear = New System.Windows.Forms.RadioButton()
         Me.grpDay = New System.Windows.Forms.GroupBox()
-        Me.grpMonth = New System.Windows.Forms.GroupBox()
-        Me.ucrReceiverStationTwo = New instat.ucrReceiverSingle()
-        Me.ucrReceiverDayofMonth = New instat.ucrReceiverSingle()
-        Me.ucrReceiverMonthTwo = New instat.ucrReceiverMultiple()
-        Me.lblStationTwo = New System.Windows.Forms.Label()
-        Me.lblYearTwo = New System.Windows.Forms.Label()
-        Me.lblMonthTwo = New System.Windows.Forms.Label()
-        Me.lblDayofMonth = New System.Windows.Forms.Label()
-        Me.ucrReceiverYearTwo = New instat.ucrReceiverSingle()
-        Me.ucrReceiverStationThree = New instat.ucrReceiverSingle()
-        Me.ucrReceiverMonthThree = New instat.ucrReceiverSingle()
-        Me.ucrReceiverDayofMonthTwo = New instat.ucrReceiverMultiple()
         Me.lblStationThree = New System.Windows.Forms.Label()
         Me.lblYearThree = New System.Windows.Forms.Label()
         Me.lblMonthThree = New System.Windows.Forms.Label()
         Me.lblDayofMonthTwo = New System.Windows.Forms.Label()
+        Me.grpMonth = New System.Windows.Forms.GroupBox()
+        Me.lblStationTwo = New System.Windows.Forms.Label()
+        Me.lblYearTwo = New System.Windows.Forms.Label()
+        Me.lblMonthTwo = New System.Windows.Forms.Label()
+        Me.lblDayofMonth = New System.Windows.Forms.Label()
         Me.grpYear = New System.Windows.Forms.GroupBox()
-        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
-        Me.ucrReceiverDayofYear = New instat.ucrReceiverSingle()
-        Me.ucrReceiverYear = New instat.ucrReceiverMultiple()
         Me.lblStation = New System.Windows.Forms.Label()
         Me.lblMonth = New System.Windows.Forms.Label()
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lblDayofYear = New System.Windows.Forms.Label()
+        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
+        Me.ucrReceiverDayofYear = New instat.ucrReceiverSingle()
+        Me.ucrReceiverYear = New instat.ucrReceiverMultiple()
         Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
+        Me.ucrReceiverDayofMonth = New instat.ucrReceiverSingle()
+        Me.ucrReceiverMonthTwo = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverYearTwo = New instat.ucrReceiverSingle()
+        Me.ucrReceiverStationTwo = New instat.ucrReceiverSingle()
+        Me.ucrReceiverStationThree = New instat.ucrReceiverSingle()
+        Me.ucrReceiverMonthThree = New instat.ucrReceiverSingle()
+        Me.ucrReceiverDayofMonthTwo = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverYearThree = New instat.ucrReceiverSingle()
         Me.ucrPnlReshapeClimaticData = New instat.UcrPanel()
         Me.ucrSelectorReshapeClimaticData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrReceiverYearThree = New instat.ucrReceiverSingle()
         Me.grpDay.SuspendLayout()
         Me.grpMonth.SuspendLayout()
         Me.grpYear.SuspendLayout()
@@ -111,6 +111,26 @@ Partial Class dlgReshapeClimaticData
         Me.grpDay.Name = "grpDay"
         Me.grpDay.TabStop = False
         '
+        'lblStationThree
+        '
+        resources.ApplyResources(Me.lblStationThree, "lblStationThree")
+        Me.lblStationThree.Name = "lblStationThree"
+        '
+        'lblYearThree
+        '
+        resources.ApplyResources(Me.lblYearThree, "lblYearThree")
+        Me.lblYearThree.Name = "lblYearThree"
+        '
+        'lblMonthThree
+        '
+        resources.ApplyResources(Me.lblMonthThree, "lblMonthThree")
+        Me.lblMonthThree.Name = "lblMonthThree"
+        '
+        'lblDayofMonthTwo
+        '
+        resources.ApplyResources(Me.lblDayofMonthTwo, "lblDayofMonthTwo")
+        Me.lblDayofMonthTwo.Name = "lblDayofMonthTwo"
+        '
         'grpMonth
         '
         Me.grpMonth.Controls.Add(Me.ucrReceiverDayofMonth)
@@ -124,33 +144,6 @@ Partial Class dlgReshapeClimaticData
         resources.ApplyResources(Me.grpMonth, "grpMonth")
         Me.grpMonth.Name = "grpMonth"
         Me.grpMonth.TabStop = False
-        '
-        'ucrReceiverStationTwo
-        '
-        Me.ucrReceiverStationTwo.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverStationTwo, "ucrReceiverStationTwo")
-        Me.ucrReceiverStationTwo.Name = "ucrReceiverStationTwo"
-        Me.ucrReceiverStationTwo.Selector = Nothing
-        Me.ucrReceiverStationTwo.strNcFilePath = ""
-        Me.ucrReceiverStationTwo.ucrSelector = Nothing
-        '
-        'ucrReceiverDayofMonth
-        '
-        Me.ucrReceiverDayofMonth.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverDayofMonth, "ucrReceiverDayofMonth")
-        Me.ucrReceiverDayofMonth.Name = "ucrReceiverDayofMonth"
-        Me.ucrReceiverDayofMonth.Selector = Nothing
-        Me.ucrReceiverDayofMonth.strNcFilePath = ""
-        Me.ucrReceiverDayofMonth.ucrSelector = Nothing
-        '
-        'ucrReceiverMonthTwo
-        '
-        Me.ucrReceiverMonthTwo.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverMonthTwo, "ucrReceiverMonthTwo")
-        Me.ucrReceiverMonthTwo.Name = "ucrReceiverMonthTwo"
-        Me.ucrReceiverMonthTwo.Selector = Nothing
-        Me.ucrReceiverMonthTwo.strNcFilePath = ""
-        Me.ucrReceiverMonthTwo.ucrSelector = Nothing
         '
         'lblStationTwo
         '
@@ -172,62 +165,6 @@ Partial Class dlgReshapeClimaticData
         resources.ApplyResources(Me.lblDayofMonth, "lblDayofMonth")
         Me.lblDayofMonth.Name = "lblDayofMonth"
         '
-        'ucrReceiverYearTwo
-        '
-        Me.ucrReceiverYearTwo.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverYearTwo, "ucrReceiverYearTwo")
-        Me.ucrReceiverYearTwo.Name = "ucrReceiverYearTwo"
-        Me.ucrReceiverYearTwo.Selector = Nothing
-        Me.ucrReceiverYearTwo.strNcFilePath = ""
-        Me.ucrReceiverYearTwo.ucrSelector = Nothing
-        '
-        'ucrReceiverStationThree
-        '
-        Me.ucrReceiverStationThree.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverStationThree, "ucrReceiverStationThree")
-        Me.ucrReceiverStationThree.Name = "ucrReceiverStationThree"
-        Me.ucrReceiverStationThree.Selector = Nothing
-        Me.ucrReceiverStationThree.strNcFilePath = ""
-        Me.ucrReceiverStationThree.ucrSelector = Nothing
-        '
-        'ucrReceiverMonthThree
-        '
-        Me.ucrReceiverMonthThree.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverMonthThree, "ucrReceiverMonthThree")
-        Me.ucrReceiverMonthThree.Name = "ucrReceiverMonthThree"
-        Me.ucrReceiverMonthThree.Selector = Nothing
-        Me.ucrReceiverMonthThree.strNcFilePath = ""
-        Me.ucrReceiverMonthThree.ucrSelector = Nothing
-        '
-        'ucrReceiverDayofMonthTwo
-        '
-        Me.ucrReceiverDayofMonthTwo.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverDayofMonthTwo, "ucrReceiverDayofMonthTwo")
-        Me.ucrReceiverDayofMonthTwo.Name = "ucrReceiverDayofMonthTwo"
-        Me.ucrReceiverDayofMonthTwo.Selector = Nothing
-        Me.ucrReceiverDayofMonthTwo.strNcFilePath = ""
-        Me.ucrReceiverDayofMonthTwo.ucrSelector = Nothing
-        '
-        'lblStationThree
-        '
-        resources.ApplyResources(Me.lblStationThree, "lblStationThree")
-        Me.lblStationThree.Name = "lblStationThree"
-        '
-        'lblYearThree
-        '
-        resources.ApplyResources(Me.lblYearThree, "lblYearThree")
-        Me.lblYearThree.Name = "lblYearThree"
-        '
-        'lblMonthThree
-        '
-        resources.ApplyResources(Me.lblMonthThree, "lblMonthThree")
-        Me.lblMonthThree.Name = "lblMonthThree"
-        '
-        'lblDayofMonthTwo
-        '
-        resources.ApplyResources(Me.lblDayofMonthTwo, "lblDayofMonthTwo")
-        Me.lblDayofMonthTwo.Name = "lblDayofMonthTwo"
-        '
         'grpYear
         '
         Me.grpYear.Controls.Add(Me.ucrReceiverStation)
@@ -241,33 +178,6 @@ Partial Class dlgReshapeClimaticData
         resources.ApplyResources(Me.grpYear, "grpYear")
         Me.grpYear.Name = "grpYear"
         Me.grpYear.TabStop = False
-        '
-        'ucrReceiverStation
-        '
-        Me.ucrReceiverStation.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverStation, "ucrReceiverStation")
-        Me.ucrReceiverStation.Name = "ucrReceiverStation"
-        Me.ucrReceiverStation.Selector = Nothing
-        Me.ucrReceiverStation.strNcFilePath = ""
-        Me.ucrReceiverStation.ucrSelector = Nothing
-        '
-        'ucrReceiverDayofYear
-        '
-        Me.ucrReceiverDayofYear.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverDayofYear, "ucrReceiverDayofYear")
-        Me.ucrReceiverDayofYear.Name = "ucrReceiverDayofYear"
-        Me.ucrReceiverDayofYear.Selector = Nothing
-        Me.ucrReceiverDayofYear.strNcFilePath = ""
-        Me.ucrReceiverDayofYear.ucrSelector = Nothing
-        '
-        'ucrReceiverYear
-        '
-        Me.ucrReceiverYear.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverYear, "ucrReceiverYear")
-        Me.ucrReceiverYear.Name = "ucrReceiverYear"
-        Me.ucrReceiverYear.Selector = Nothing
-        Me.ucrReceiverYear.strNcFilePath = ""
-        Me.ucrReceiverYear.ucrSelector = Nothing
         '
         'lblStation
         '
@@ -289,14 +199,113 @@ Partial Class dlgReshapeClimaticData
         resources.ApplyResources(Me.lblDayofYear, "lblDayofYear")
         Me.lblDayofYear.Name = "lblDayofYear"
         '
+        'ucrReceiverStation
+        '
+        Me.ucrReceiverStation.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverStation, "ucrReceiverStation")
+        Me.ucrReceiverStation.Name = "ucrReceiverStation"
+        Me.ucrReceiverStation.Selector = Nothing
+        Me.ucrReceiverStation.strNcFilePath = ""
+        Me.ucrReceiverStation.ucrSelector = Nothing
+        '
+        'ucrReceiverDayofYear
+        '
+        Me.ucrReceiverDayofYear.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverDayofYear, "ucrReceiverDayofYear")
+        Me.ucrReceiverDayofYear.Name = "ucrReceiverDayofYear"
+        Me.ucrReceiverDayofYear.Selector = Nothing
+        Me.ucrReceiverDayofYear.strNcFilePath = ""
+        Me.ucrReceiverDayofYear.ucrSelector = Nothing
+        '
+        'ucrReceiverYear
+        '
+        Me.ucrReceiverYear.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverYear, "ucrReceiverYear")
+        Me.ucrReceiverYear.Name = "ucrReceiverYear"
+        Me.ucrReceiverYear.Selector = Nothing
+        Me.ucrReceiverYear.strNcFilePath = ""
+        Me.ucrReceiverYear.ucrSelector = Nothing
+        '
         'ucrReceiverMonth
         '
-        Me.ucrReceiverMonth.frmParent = Me
+        Me.ucrReceiverMonth.frmParent = Nothing
         resources.ApplyResources(Me.ucrReceiverMonth, "ucrReceiverMonth")
         Me.ucrReceiverMonth.Name = "ucrReceiverMonth"
         Me.ucrReceiverMonth.Selector = Nothing
         Me.ucrReceiverMonth.strNcFilePath = ""
         Me.ucrReceiverMonth.ucrSelector = Nothing
+        '
+        'ucrReceiverDayofMonth
+        '
+        Me.ucrReceiverDayofMonth.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverDayofMonth, "ucrReceiverDayofMonth")
+        Me.ucrReceiverDayofMonth.Name = "ucrReceiverDayofMonth"
+        Me.ucrReceiverDayofMonth.Selector = Nothing
+        Me.ucrReceiverDayofMonth.strNcFilePath = ""
+        Me.ucrReceiverDayofMonth.ucrSelector = Nothing
+        '
+        'ucrReceiverMonthTwo
+        '
+        Me.ucrReceiverMonthTwo.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverMonthTwo, "ucrReceiverMonthTwo")
+        Me.ucrReceiverMonthTwo.Name = "ucrReceiverMonthTwo"
+        Me.ucrReceiverMonthTwo.Selector = Nothing
+        Me.ucrReceiverMonthTwo.strNcFilePath = ""
+        Me.ucrReceiverMonthTwo.ucrSelector = Nothing
+        '
+        'ucrReceiverYearTwo
+        '
+        Me.ucrReceiverYearTwo.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverYearTwo, "ucrReceiverYearTwo")
+        Me.ucrReceiverYearTwo.Name = "ucrReceiverYearTwo"
+        Me.ucrReceiverYearTwo.Selector = Nothing
+        Me.ucrReceiverYearTwo.strNcFilePath = ""
+        Me.ucrReceiverYearTwo.ucrSelector = Nothing
+        '
+        'ucrReceiverStationTwo
+        '
+        Me.ucrReceiverStationTwo.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverStationTwo, "ucrReceiverStationTwo")
+        Me.ucrReceiverStationTwo.Name = "ucrReceiverStationTwo"
+        Me.ucrReceiverStationTwo.Selector = Nothing
+        Me.ucrReceiverStationTwo.strNcFilePath = ""
+        Me.ucrReceiverStationTwo.ucrSelector = Nothing
+        '
+        'ucrReceiverStationThree
+        '
+        Me.ucrReceiverStationThree.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverStationThree, "ucrReceiverStationThree")
+        Me.ucrReceiverStationThree.Name = "ucrReceiverStationThree"
+        Me.ucrReceiverStationThree.Selector = Nothing
+        Me.ucrReceiverStationThree.strNcFilePath = ""
+        Me.ucrReceiverStationThree.ucrSelector = Nothing
+        '
+        'ucrReceiverMonthThree
+        '
+        Me.ucrReceiverMonthThree.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverMonthThree, "ucrReceiverMonthThree")
+        Me.ucrReceiverMonthThree.Name = "ucrReceiverMonthThree"
+        Me.ucrReceiverMonthThree.Selector = Nothing
+        Me.ucrReceiverMonthThree.strNcFilePath = ""
+        Me.ucrReceiverMonthThree.ucrSelector = Nothing
+        '
+        'ucrReceiverDayofMonthTwo
+        '
+        Me.ucrReceiverDayofMonthTwo.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverDayofMonthTwo, "ucrReceiverDayofMonthTwo")
+        Me.ucrReceiverDayofMonthTwo.Name = "ucrReceiverDayofMonthTwo"
+        Me.ucrReceiverDayofMonthTwo.Selector = Nothing
+        Me.ucrReceiverDayofMonthTwo.strNcFilePath = ""
+        Me.ucrReceiverDayofMonthTwo.ucrSelector = Nothing
+        '
+        'ucrReceiverYearThree
+        '
+        Me.ucrReceiverYearThree.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverYearThree, "ucrReceiverYearThree")
+        Me.ucrReceiverYearThree.Name = "ucrReceiverYearThree"
+        Me.ucrReceiverYearThree.Selector = Nothing
+        Me.ucrReceiverYearThree.strNcFilePath = ""
+        Me.ucrReceiverYearThree.ucrSelector = Nothing
         '
         'ucrPnlReshapeClimaticData
         '
@@ -315,15 +324,6 @@ Partial Class dlgReshapeClimaticData
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrReceiverYearThree
-        '
-        Me.ucrReceiverYearThree.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverYearThree, "ucrReceiverYearThree")
-        Me.ucrReceiverYearThree.Name = "ucrReceiverYearThree"
-        Me.ucrReceiverYearThree.Selector = Nothing
-        Me.ucrReceiverYearThree.strNcFilePath = ""
-        Me.ucrReceiverYearThree.ucrSelector = Nothing
         '
         'dlgReshapeClimaticData
         '
