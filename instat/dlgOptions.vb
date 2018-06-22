@@ -67,7 +67,6 @@ Public Class dlgOptions
 
         'temp disabled as not functioning yet
         rdoSpanish.Enabled = False
-        rdoFrench.Enabled = False
         rdoKiswahili.Enabled = False
 
         ucrNudDigits.SetMinMax(0, 22)

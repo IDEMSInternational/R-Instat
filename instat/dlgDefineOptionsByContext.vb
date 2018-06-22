@@ -36,6 +36,13 @@ Public Class dlgDefineOptionsByContext
     End Sub
 
     Private Sub InitialiseDialog()
+        'TODO not yet implemented
+        lblKeyColumns.Hide()
+        ucrInputKeyCheck.Hide()
+        ucrInputKeyColumns.Hide()
+        lblKeyCheck.Hide()
+        cmdModify.Hide()
+
         ucrSelectorOptionsByContext.SetParameterIsString()
         ucrSelectorOptionsByContext.SetParameter(New RParameter("data_name", 0))
 
@@ -93,6 +100,16 @@ Public Class dlgDefineOptionsByContext
         ucrReceiverIDOther.SetParameterIsString()
         ucrReceiverIDOther.SetParameter(New RParameter("id_other", 11))
         ucrReceiverIDOther.bExcludeFromSelector = True
+
+        ucrReceiverBlocking1.Selector = ucrSelectorOptionsByContext
+        ucrReceiverBlocking1.SetParameterIsString()
+        ucrReceiverBlocking1.SetParameter(New RParameter("blocking_1", 12))
+        ucrReceiverBlocking1.bExcludeFromSelector = True
+
+        ucrReceiverBlockingOther.Selector = ucrSelectorOptionsByContext
+        ucrReceiverBlockingOther.SetParameterIsString()
+        ucrReceiverBlockingOther.SetParameter(New RParameter("blocking_other", 13))
+        ucrReceiverBlockingOther.bExcludeFromSelector = True
     End Sub
 
     Private Sub SetDefaults()
@@ -122,6 +139,8 @@ Public Class dlgDefineOptionsByContext
         ucrReceiverMeasurementOther.SetRCode(clsTypes, bResetControls)
         ucrReceiverID1.SetRCode(clsTypes, bResetControls)
         ucrReceiverIDOther.SetRCode(clsTypes, bResetControls)
+        ucrReceiverBlocking1.SetRCode(clsTypes, bResetControls)
+        ucrReceiverBlockingOther.SetRCode(clsTypes, bResetControls)
 
         SetColumnStructureInReceiver()
     End Sub
@@ -156,6 +175,9 @@ Public Class dlgDefineOptionsByContext
 
             ucrReceiverID1.AddItemsWithMetadataProperty(ucrSelectorOptionsByContext.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "O_by_C_Type", {"id_1_label"})
             ucrReceiverIDOther.AddItemsWithMetadataProperty(ucrSelectorOptionsByContext.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "O_by_C_Type", {"id_other_label"})
+
+            ucrReceiverBlocking1.AddItemsWithMetadataProperty(ucrSelectorOptionsByContext.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "O_by_C_Type", {"blocking_1_label"})
+            ucrReceiverBlockingOther.AddItemsWithMetadataProperty(ucrSelectorOptionsByContext.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "O_by_C_Type", {"blocking_other_label"})
 
             ucrReceiverOption1.SetMeAsReceiver()
         End If
