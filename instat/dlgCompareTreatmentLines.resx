@@ -270,86 +270,56 @@
   <data name="&gt;&gt;lblTreatment2.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="lblContext2.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblContext3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblContext2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblContext3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblContext2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 73</value>
+  <data name="lblContext3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 119</value>
   </data>
-  <data name="lblContext2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblContext3.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 13</value>
   </data>
-  <data name="lblContext2.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+  <data name="lblContext3.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
   </data>
-  <data name="lblContext2.Text" xml:space="preserve">
+  <data name="lblContext3.Text" xml:space="preserve">
     <value>Second Context:</value>
   </data>
-  <data name="&gt;&gt;lblContext2.Name" xml:space="preserve">
-    <value>lblContext2</value>
+  <data name="&gt;&gt;lblContext3.Name" xml:space="preserve">
+    <value>lblContext3</value>
   </data>
-  <data name="&gt;&gt;lblContext2.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblContext3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblContext2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblContext3.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
-  <data name="&gt;&gt;lblContext2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblContext3.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="lblContext1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="ucrInputContext3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>141, 134</value>
   </data>
-  <data name="lblContext1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblContext1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 26</value>
-  </data>
-  <data name="lblContext1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 13</value>
-  </data>
-  <data name="lblContext1.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="lblContext1.Text" xml:space="preserve">
-    <value>First Context:</value>
-  </data>
-  <data name="&gt;&gt;lblContext1.Name" xml:space="preserve">
-    <value>lblContext1</value>
-  </data>
-  <data name="&gt;&gt;lblContext1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblContext1.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
-  </data>
-  <data name="&gt;&gt;lblContext1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ucrInputContext2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>141, 88</value>
-  </data>
-  <data name="ucrInputContext2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrInputContext3.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 21</value>
   </data>
-  <data name="ucrInputContext2.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="ucrInputContext3.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
   </data>
-  <data name="&gt;&gt;ucrInputContext2.Name" xml:space="preserve">
-    <value>ucrInputContext2</value>
+  <data name="&gt;&gt;ucrInputContext3.Name" xml:space="preserve">
+    <value>ucrInputContext3</value>
   </data>
-  <data name="&gt;&gt;ucrInputContext2.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputContext3.Type" xml:space="preserve">
     <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrInputContext2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputContext3.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
-  <data name="&gt;&gt;ucrInputContext2.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;ucrInputContext3.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -762,6 +732,111 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="ucrReceiverContext3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 134</value>
+  </data>
+  <data name="ucrReceiverContext3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverContext3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverContext3.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverContext3.Name" xml:space="preserve">
+    <value>ucrReceiverContext3</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverContext3.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverContext3.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverContext3.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblContext2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblContext2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblContext2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 73</value>
+  </data>
+  <data name="lblContext2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 13</value>
+  </data>
+  <data name="lblContext2.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="lblContext2.Text" xml:space="preserve">
+    <value>Second Context:</value>
+  </data>
+  <data name="&gt;&gt;lblContext2.Name" xml:space="preserve">
+    <value>lblContext2</value>
+  </data>
+  <data name="&gt;&gt;lblContext2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblContext2.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
+  </data>
+  <data name="&gt;&gt;lblContext2.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblContext1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblContext1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblContext1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 26</value>
+  </data>
+  <data name="lblContext1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 13</value>
+  </data>
+  <data name="lblContext1.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="lblContext1.Text" xml:space="preserve">
+    <value>First Context:</value>
+  </data>
+  <data name="&gt;&gt;lblContext1.Name" xml:space="preserve">
+    <value>lblContext1</value>
+  </data>
+  <data name="&gt;&gt;lblContext1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblContext1.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
+  </data>
+  <data name="&gt;&gt;lblContext1.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrInputContext2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>141, 88</value>
+  </data>
+  <data name="ucrInputContext2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 21</value>
+  </data>
+  <data name="ucrInputContext2.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrInputContext2.Name" xml:space="preserve">
+    <value>ucrInputContext2</value>
+  </data>
+  <data name="&gt;&gt;ucrInputContext2.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputContext2.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
+  </data>
+  <data name="&gt;&gt;ucrInputContext2.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
   <data name="ucrReceiverContext2.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 88</value>
   </data>
@@ -784,7 +859,7 @@
     <value>GroupBox1</value>
   </data>
   <data name="&gt;&gt;ucrReceiverContext2.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>6</value>
   </data>
   <data name="ucrInputContext1.Location" type="System.Drawing.Point, System.Drawing">
     <value>141, 41</value>
@@ -805,7 +880,7 @@
     <value>GroupBox1</value>
   </data>
   <data name="&gt;&gt;ucrInputContext1.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>7</value>
   </data>
   <data name="ucrReceiverContext1.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 41</value>
@@ -829,13 +904,13 @@
     <value>GroupBox1</value>
   </data>
   <data name="&gt;&gt;ucrReceiverContext1.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>8</value>
   </data>
   <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>263, 265</value>
   </data>
   <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>248, 132</value>
+    <value>248, 164</value>
   </data>
   <data name="GroupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
