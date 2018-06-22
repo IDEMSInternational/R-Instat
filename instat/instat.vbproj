@@ -145,6 +145,7 @@
   <ItemGroup>
     <Compile Include="clsBlockReader.vb" />
     <Compile Include="clsCompareTwoOptionsLines.vb" />
+    <Compile Include="clsCompareTwoOptionsPoints.vb" />
     <Compile Include="clsCondition.vb" />
     <Compile Include="clsCustomColourTable.vb" />
     <Compile Include="clsCustomRenderer.vb" />
