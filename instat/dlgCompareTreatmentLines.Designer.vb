@@ -29,17 +29,24 @@ Partial Class dlgCompareTreatmentLines
         Me.lblOption1 = New System.Windows.Forms.Label()
         Me.lblTreatment2 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lblContext3 = New System.Windows.Forms.Label()
         Me.lblContext2 = New System.Windows.Forms.Label()
         Me.lblContext1 = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
         Me.lblHlineValue = New System.Windows.Forms.Label()
         Me.lblTransparency = New System.Windows.Forms.Label()
+        Me.rdoLines = New System.Windows.Forms.RadioButton()
+        Me.rdoPoints = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlCompareType = New instat.UcrPanel()
+        Me.ucrChkIncludeSmoothLine = New instat.ucrCheck()
         Me.ucrChkBoxplotOnlyComplete = New instat.ucrCheck()
         Me.ucrInputHlineValue = New instat.ucrInputTextBox()
         Me.ucrChkIncludeHline = New instat.ucrCheck()
         Me.ucrNudTransparency = New instat.ucrNud()
         Me.ucrChkIncludeBoxplot = New instat.ucrCheck()
         Me.ucrChkColourByDifference = New instat.ucrCheck()
+        Me.ucrInputContext3 = New instat.ucrInputComboBox()
+        Me.ucrReceiverContext3 = New instat.ucrReceiverSingle()
         Me.ucrInputContext2 = New instat.ucrInputComboBox()
         Me.ucrReceiverContext2 = New instat.ucrReceiverSingle()
         Me.ucrInputContext1 = New instat.ucrInputComboBox()
@@ -52,9 +59,7 @@ Partial Class dlgCompareTreatmentLines
         Me.ucrSelectorPlot = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrSavePlot = New instat.ucrSave()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblContext3 = New System.Windows.Forms.Label()
-        Me.ucrInputContext3 = New instat.ucrInputComboBox()
-        Me.ucrReceiverContext3 = New instat.ucrReceiverSingle()
+        Me.ucrChkIncludeMeanLine = New instat.ucrCheck()
         Me.GroupBox1.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -99,6 +104,11 @@ Partial Class dlgCompareTreatmentLines
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
         '
+        'lblContext3
+        '
+        resources.ApplyResources(Me.lblContext3, "lblContext3")
+        Me.lblContext3.Name = "lblContext3"
+        '
         'lblContext2
         '
         resources.ApplyResources(Me.lblContext2, "lblContext2")
@@ -111,6 +121,8 @@ Partial Class dlgCompareTreatmentLines
         '
         'grpOptions
         '
+        Me.grpOptions.Controls.Add(Me.ucrChkIncludeMeanLine)
+        Me.grpOptions.Controls.Add(Me.ucrChkIncludeSmoothLine)
         Me.grpOptions.Controls.Add(Me.ucrChkBoxplotOnlyComplete)
         Me.grpOptions.Controls.Add(Me.ucrInputHlineValue)
         Me.grpOptions.Controls.Add(Me.lblHlineValue)
@@ -132,6 +144,31 @@ Partial Class dlgCompareTreatmentLines
         '
         resources.ApplyResources(Me.lblTransparency, "lblTransparency")
         Me.lblTransparency.Name = "lblTransparency"
+        '
+        'rdoLines
+        '
+        resources.ApplyResources(Me.rdoLines, "rdoLines")
+        Me.rdoLines.Name = "rdoLines"
+        Me.rdoLines.TabStop = True
+        Me.rdoLines.UseVisualStyleBackColor = True
+        '
+        'rdoPoints
+        '
+        resources.ApplyResources(Me.rdoPoints, "rdoPoints")
+        Me.rdoPoints.Name = "rdoPoints"
+        Me.rdoPoints.TabStop = True
+        Me.rdoPoints.UseVisualStyleBackColor = True
+        '
+        'ucrPnlCompareType
+        '
+        resources.ApplyResources(Me.ucrPnlCompareType, "ucrPnlCompareType")
+        Me.ucrPnlCompareType.Name = "ucrPnlCompareType"
+        '
+        'ucrChkIncludeSmoothLine
+        '
+        Me.ucrChkIncludeSmoothLine.Checked = False
+        resources.ApplyResources(Me.ucrChkIncludeSmoothLine, "ucrChkIncludeSmoothLine")
+        Me.ucrChkIncludeSmoothLine.Name = "ucrChkIncludeSmoothLine"
         '
         'ucrChkBoxplotOnlyComplete
         '
@@ -174,6 +211,22 @@ Partial Class dlgCompareTreatmentLines
         Me.ucrChkColourByDifference.Checked = False
         resources.ApplyResources(Me.ucrChkColourByDifference, "ucrChkColourByDifference")
         Me.ucrChkColourByDifference.Name = "ucrChkColourByDifference"
+        '
+        'ucrInputContext3
+        '
+        Me.ucrInputContext3.AddQuotesIfUnrecognised = True
+        Me.ucrInputContext3.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputContext3, "ucrInputContext3")
+        Me.ucrInputContext3.Name = "ucrInputContext3"
+        '
+        'ucrReceiverContext3
+        '
+        Me.ucrReceiverContext3.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverContext3, "ucrReceiverContext3")
+        Me.ucrReceiverContext3.Name = "ucrReceiverContext3"
+        Me.ucrReceiverContext3.Selector = Nothing
+        Me.ucrReceiverContext3.strNcFilePath = ""
+        Me.ucrReceiverContext3.ucrSelector = Nothing
         '
         'ucrInputContext2
         '
@@ -266,31 +319,19 @@ Partial Class dlgCompareTreatmentLines
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'lblContext3
+        'ucrChkIncludeMeanLine
         '
-        resources.ApplyResources(Me.lblContext3, "lblContext3")
-        Me.lblContext3.Name = "lblContext3"
-        '
-        'ucrInputContext3
-        '
-        Me.ucrInputContext3.AddQuotesIfUnrecognised = True
-        Me.ucrInputContext3.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputContext3, "ucrInputContext3")
-        Me.ucrInputContext3.Name = "ucrInputContext3"
-        '
-        'ucrReceiverContext3
-        '
-        Me.ucrReceiverContext3.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverContext3, "ucrReceiverContext3")
-        Me.ucrReceiverContext3.Name = "ucrReceiverContext3"
-        Me.ucrReceiverContext3.Selector = Nothing
-        Me.ucrReceiverContext3.strNcFilePath = ""
-        Me.ucrReceiverContext3.ucrSelector = Nothing
+        Me.ucrChkIncludeMeanLine.Checked = False
+        resources.ApplyResources(Me.ucrChkIncludeMeanLine, "ucrChkIncludeMeanLine")
+        Me.ucrChkIncludeMeanLine.Name = "ucrChkIncludeMeanLine"
         '
         'dlgCompareTreatmentLines
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.rdoPoints)
+        Me.Controls.Add(Me.rdoLines)
+        Me.Controls.Add(Me.ucrPnlCompareType)
         Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.lblTreatment2)
@@ -351,4 +392,9 @@ Partial Class dlgCompareTreatmentLines
     Friend WithEvents lblContext3 As Label
     Friend WithEvents ucrInputContext3 As ucrInputComboBox
     Friend WithEvents ucrReceiverContext3 As ucrReceiverSingle
+    Friend WithEvents rdoPoints As RadioButton
+    Friend WithEvents rdoLines As RadioButton
+    Friend WithEvents ucrPnlCompareType As UcrPanel
+    Friend WithEvents ucrChkIncludeSmoothLine As ucrCheck
+    Friend WithEvents ucrChkIncludeMeanLine As ucrCheck
 End Class
