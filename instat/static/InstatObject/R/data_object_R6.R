@@ -966,7 +966,7 @@ data_object$set("public", "reorder_columns_in_data", function(col_order) {
     }
   }
   else if(is.character(col_order)) {
-    if(!(setequal(col_order,names(private$data)))) stop("Invalid column order")
+    if(!(dplyr::setequal(col_order,names(private$data)))) stop("Invalid column order")
   }
   else stop("column order must be a numeric or character vector")
   old_metadata <- attributes(private$data)
