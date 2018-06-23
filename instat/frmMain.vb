@@ -1967,4 +1967,8 @@ Public Class frmMain
     Private Sub mnuOptionsByContextModelFitModel_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextModelFitModel.Click
         dlgOptionsByContextFitModel.ShowDialog()
     End Sub
+
+    Private Sub mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions.Click
+        dlgCalculateTreatmentDifferences.ShowDialog()
+    End Sub
 End Class

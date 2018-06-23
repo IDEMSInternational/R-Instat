@@ -539,6 +539,8 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
+        Me.mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator48 = New System.Windows.Forms.ToolStripSeparator()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3240,7 +3242,7 @@ Partial Class frmMain
         '
         'mnuOptionsByContextPrepare
         '
-        Me.mnuOptionsByContextPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextMergeAdditionalData, Me.mnuOptionsByContextPrepareStack, Me.mnuOptionsByContextPrepareUnstack})
+        Me.mnuOptionsByContextPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions, Me.ToolStripSeparator48, Me.mnuOptionsByContextMergeAdditionalData, Me.mnuOptionsByContextPrepareStack, Me.mnuOptionsByContextPrepareUnstack})
         Me.mnuOptionsByContextPrepare.Name = "mnuOptionsByContextPrepare"
         resources.ApplyResources(Me.mnuOptionsByContextPrepare, "mnuOptionsByContextPrepare")
         '
@@ -3466,6 +3468,16 @@ Partial Class frmMain
         Me.ucrOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         resources.ApplyResources(Me.ucrOutput, "ucrOutput")
         Me.ucrOutput.Name = "ucrOutput"
+        '
+        'mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions
+        '
+        Me.mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions.Name = "mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions"
+        resources.ApplyResources(Me.mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions, "mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions")
+        '
+        'ToolStripSeparator48
+        '
+        Me.ToolStripSeparator48.Name = "ToolStripSeparator48"
+        resources.ApplyResources(Me.ToolStripSeparator48, "ToolStripSeparator48")
         '
         'frmMain
         '
@@ -4011,4 +4023,6 @@ Partial Class frmMain
     Friend WithEvents mnuOptionsByContextCheckDataOneVariableGraph As ToolStripMenuItem
     Friend WithEvents mnuOptionsByContextCheckDataOneVariableFrequencies As ToolStripMenuItem
     Friend WithEvents mnuViewOptionsByContextMenu As ToolStripMenuItem
+    Friend WithEvents mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator48 As ToolStripSeparator
 End Class
