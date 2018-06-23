@@ -16,6 +16,7 @@
 
 Imports System.IO
 Imports RDotNet
+Imports instat.Translations
 
 Public Class dlgImportDataset
 
