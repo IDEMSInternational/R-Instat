@@ -128,6 +128,7 @@ Public Class frmMain
         mnuModel.Enabled = bEnabled
         mnuClimatic.Enabled = bEnabled
         mnuProcurement.Enabled = bEnabled
+        mnuOptionsByContext.Enabled = bEnabled
         mnuTools.Enabled = bEnabled
         mnuView.Enabled = bEnabled
         mnuHelp.Enabled = bEnabled
@@ -1723,6 +1724,11 @@ Public Class frmMain
         mnuViewClimaticMenu.Checked = bNewShowClimaticMenu
     End Sub
 
+    Public Sub SetShowOptionsByContextMenu(bNewShowOptionsByContextMenu As Boolean)
+        mnuOptionsByContext.Visible = bNewShowOptionsByContextMenu
+        mnuViewOptionsByContextMenu.Checked = bNewShowOptionsByContextMenu
+    End Sub
+
     Private Sub mnuViewClimaticMenu_Click(sender As Object, e As EventArgs) Handles mnuViewClimaticMenu.Click
         clsInstatOptions.SetShowClimaticMenu(Not mnuViewClimaticMenu.Checked)
     End Sub
@@ -1951,6 +1957,14 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuViewOptionsByContextMenu_Click(sender As Object, e As EventArgs) Handles mnuViewOptionsByContextMenu.Click
+        clsInstatOptions.SetShowOptionsByContextMenu(Not mnuViewOptionsByContextMenu.Checked)
+    End Sub
 
+    Private Sub mnuOptionsByContextDescribeCompareTwoTreatments_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextDescribeCompareTwoTreatments.Click
+        dlgCompareTreatmentLines.ShowDialog()
+    End Sub
+
+    Private Sub mnuOptionsByContextModelFitModel_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextModelFitModel.Click
+        dlgOptionsByContextFitModel.ShowDialog()
     End Sub
 End Class
