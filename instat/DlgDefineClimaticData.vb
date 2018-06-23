@@ -97,22 +97,22 @@ Public Class DlgDefineClimaticData
         ucrBase.clsRsyntax.ClearCodes()
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$define_as_climatic")
+        clsDefaultFunction.AddParameter("types", clsRFunctionParameter:=clsTypesFunction)
+
         clsTypesFunction.SetRCommand("c")
 
         clsConcFunction.SetRCommand("c")
 
         clsAddKeyFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
-        clsAddKeyFunction.AddParameter("col_names", clsRFunctionParameter:=clsConcFunction)
-        clsDefaultFunction.AddParameter("types", clsRFunctionParameter:=clsTypesFunction)
-
         clsAddKeyFunction.AddParameter("data_name", Chr(34) & strCurrentDataframeName & Chr(34), iPosition:=0)
+        clsAddKeyFunction.AddParameter("col_names", clsRFunctionParameter:=clsConcFunction)
+
         clsAnyDuplicatesFunction.SetRCommand("anyDuplicated")
-
-        clsGetColFunction.AddParameter("data_name", Chr(34) & strCurrentDataframeName & Chr(34))
-        clsGetColFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
-        clsGetColFunction.AddParameter("col_names", clsRFunctionParameter:=clsConcFunction)
-
         clsAnyDuplicatesFunction.AddParameter("x", clsRFunctionParameter:=clsGetColFunction)
+
+        clsGetColFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        clsGetColFunction.AddParameter("data_name", Chr(34) & strCurrentDataframeName & Chr(34))
+        clsGetColFunction.AddParameter("col_names", clsRFunctionParameter:=clsConcFunction)
 
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAddKeyFunction)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
@@ -215,6 +215,7 @@ Public Class DlgDefineClimaticData
 
     Private Sub cmdCheckUnique_Click(sender As Object, e As EventArgs) Handles cmdCheckUnique.Click
         Dim iAnyDuplicated As Integer
+
         Try
             iAnyDuplicated = frmMain.clsRLink.RunInternalScriptGetValue(clsAnyDuplicatesFunction.ToScript()).AsInteger(0)
         Catch ex As Exception
@@ -265,6 +266,8 @@ Public Class DlgDefineClimaticData
 
     Private Sub ucrSelectorDefineClimaticData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDefineClimaticData.ControlValueChanged
         strCurrentDataframeName = ucrSelectorDefineClimaticData.strCurrentDataFrame
+        clsAddKeyFunction.AddParameter("data_name", Chr(34) & strCurrentDataframeName & Chr(34), iPosition:=0)
+        clsGetColFunction.AddParameter("data_name", Chr(34) & strCurrentDataframeName & Chr(34), iPosition:=0)
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged
