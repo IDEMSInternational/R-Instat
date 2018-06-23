@@ -166,7 +166,7 @@ Partial Class dlgOptionsByContextFitModel
         Me.grpContexts.Controls.Add(Me.ucrReceiverContext3)
         Me.grpContexts.Controls.Add(Me.ucrReceiverContext2)
         Me.grpContexts.Controls.Add(Me.lblContext2)
-        Me.grpContexts.Location = New System.Drawing.Point(407, 55)
+        Me.grpContexts.Location = New System.Drawing.Point(407, 23)
         Me.grpContexts.Name = "grpContexts"
         Me.grpContexts.Size = New System.Drawing.Size(136, 308)
         Me.grpContexts.TabIndex = 10
