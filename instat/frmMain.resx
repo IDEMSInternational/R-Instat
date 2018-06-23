@@ -845,71 +845,77 @@
   <data name="mnuClimaticHeatSum.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="mnuView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 20</value>
-  </data>
-  <data name="mnuView.Text" xml:space="preserve">
-    <value>View</value>
-  </data>
   <data name="mnuViewDataView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
+    <value>210, 22</value>
   </data>
   <data name="mnuViewDataView.Text" xml:space="preserve">
     <value>Data View</value>
   </data>
   <data name="mnuViewOutputWindow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
+    <value>210, 22</value>
   </data>
   <data name="mnuViewOutputWindow.Text" xml:space="preserve">
     <value>Output Window</value>
   </data>
   <data name="mnuViewLog.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
+    <value>210, 22</value>
   </data>
   <data name="mnuViewLog.Text" xml:space="preserve">
     <value>Log Window</value>
   </data>
   <data name="mnuViewScriptWindow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
+    <value>210, 22</value>
   </data>
   <data name="mnuViewScriptWindow.Text" xml:space="preserve">
     <value>Script Window</value>
   </data>
   <data name="mnuViewColumnMetadata.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
+    <value>210, 22</value>
   </data>
   <data name="mnuViewColumnMetadata.Text" xml:space="preserve">
     <value>Column Metadata</value>
   </data>
   <data name="mnuViewDataFrameMetadata.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
+    <value>210, 22</value>
   </data>
   <data name="mnuViewDataFrameMetadata.Text" xml:space="preserve">
     <value>Data Frame Metadata</value>
   </data>
   <data name="ToolStripSeparator22.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 6</value>
+    <value>207, 6</value>
   </data>
   <data name="mnuViewClimaticMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
+    <value>210, 22</value>
   </data>
   <data name="mnuViewClimaticMenu.Text" xml:space="preserve">
     <value>Climatic Menu</value>
   </data>
   <data name="mnuViewProcurementMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
+    <value>210, 22</value>
   </data>
   <data name="mnuViewProcurementMenu.Text" xml:space="preserve">
     <value>Procurement Menu</value>
   </data>
+  <data name="mnuViewOptionsByContextMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 22</value>
+  </data>
+  <data name="mnuViewOptionsByContextMenu.Text" xml:space="preserve">
+    <value>Options by Context Menu</value>
+  </data>
   <data name="ToolStripSeparator39.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 6</value>
+    <value>207, 6</value>
   </data>
   <data name="mnuViewResetToDefaultLayout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
+    <value>210, 22</value>
   </data>
   <data name="mnuViewResetToDefaultLayout.Text" xml:space="preserve">
     <value>Reset to Default Layout</value>
+  </data>
+  <data name="mnuView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 20</value>
+  </data>
+  <data name="mnuView.Text" xml:space="preserve">
+    <value>View</value>
   </data>
   <data name="mnuHelp.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 20</value>
@@ -1022,101 +1028,17 @@
   <metadata name="SaveFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>638, 56</value>
   </metadata>
-  <data name="mnuClimaticFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
-  </data>
-  <data name="mnuClimaticFile.Text" xml:space="preserve">
-    <value>File</value>
-  </data>
-  <data name="ToolStripSeparator18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 6</value>
-  </data>
-  <data name="mnuClimaticDates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
-  </data>
-  <data name="mnuClimaticDates.Text" xml:space="preserve">
-    <value>Dates</value>
-  </data>
-  <data name="mnuClimaticDefineClimaticData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
-  </data>
-  <data name="mnuClimaticDefineClimaticData.Text" xml:space="preserve">
-    <value>Define Climatic Data...</value>
-  </data>
-  <data name="mnuClimaticCheckData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
-  </data>
-  <data name="mnuClimaticCheckData.Text" xml:space="preserve">
-    <value>Check Data</value>
-  </data>
-  <data name="mnuClimaticPrepare.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
-  </data>
-  <data name="mnuClimaticPrepare.Text" xml:space="preserve">
-    <value>Prepare</value>
-  </data>
-  <data name="mnuClimdex.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
-  </data>
-  <data name="mnuClimdex.Text" xml:space="preserve">
-    <value>Climdex...</value>
-  </data>
-  <data name="ToolStripSeparator30.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 6</value>
-  </data>
-  <data name="mnuClimaticDescribe.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
-  </data>
-  <data name="mnuClimaticDescribe.Text" xml:space="preserve">
-    <value>Describe</value>
-  </data>
-  <data name="mnuClimaticSPI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
-  </data>
-  <data name="mnuClimaticSPI.Text" xml:space="preserve">
-    <value>SPI...</value>
-  </data>
-  <data name="mnuClimaticPICSA.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
-  </data>
-  <data name="mnuClimaticPICSA.Text" xml:space="preserve">
-    <value>PICSA</value>
-  </data>
-  <data name="mnuCMSAF.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
-  </data>
-  <data name="mnuCMSAF.Text" xml:space="preserve">
-    <value>CM SAF</value>
-  </data>
-  <data name="mnuClimaticModels.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
-  </data>
-  <data name="mnuClimaticModels.Text" xml:space="preserve">
-    <value>Model</value>
-  </data>
-  <data name="ToolStripSeparator23.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 6</value>
-  </data>
-  <data name="mnuClimaticSCF.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
-  </data>
-  <data name="mnuClimaticSCF.Text" xml:space="preserve">
-    <value>Seasonal Forecast Support</value>
-  </data>
-  <data name="mnuClimateMethods.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
-  </data>
-  <data name="mnuClimateMethods.Text" xml:space="preserve">
-    <value>Climate Methods</value>
-  </data>
-  <data name="mnuClimateMethods.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="mnuClimatic.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 20</value>
   </data>
   <data name="mnuClimatic.Text" xml:space="preserve">
     <value>Climatic</value>
+  </data>
+  <data name="mnuClimaticFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="mnuClimaticFile.Text" xml:space="preserve">
+    <value>File</value>
   </data>
   <data name="mnuClimaticFileOpensst.Size" type="System.Drawing.Size, System.Drawing">
     <value>215, 22</value>
@@ -1160,6 +1082,15 @@
   <data name="mnuClimaticFileExportToCPT.Text" xml:space="preserve">
     <value>Export to CPT...</value>
   </data>
+  <data name="ToolStripSeparator18.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 6</value>
+  </data>
+  <data name="mnuClimaticDates.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="mnuClimaticDates.Text" xml:space="preserve">
+    <value>Dates</value>
+  </data>
   <data name="mnuClimaticDatesGenerateDates.Size" type="System.Drawing.Size, System.Drawing">
     <value>182, 22</value>
   </data>
@@ -1202,38 +1133,53 @@
   <data name="mnuClimaticDatesUseTime.Text" xml:space="preserve">
     <value>Use Time...</value>
   </data>
+  <data name="mnuClimaticDefineClimaticData.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="mnuClimaticDefineClimaticData.Text" xml:space="preserve">
+    <value>Define Climatic Data...</value>
+  </data>
+  <data name="mnuClimaticCheckData.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="mnuClimaticCheckData.Text" xml:space="preserve">
+    <value>Check Data</value>
+  </data>
   <data name="mnuClimaticCheckDataInventory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuClimaticCheckDataInventory.Text" xml:space="preserve">
     <value>Inventory...</value>
   </data>
   <data name="mnuClimaticCheckDataDisplayDaily.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuClimaticCheckDataDisplayDaily.Text" xml:space="preserve">
     <value>Display Daily...</value>
   </data>
-  <data name="mnuClimaticCheckDataBoxplot.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="mnuClimaticCheckDataBoxplot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuClimaticCheckDataBoxplot.Text" xml:space="preserve">
     <value>Boxplot...</value>
   </data>
   <data name="mnuClimaticCheckDataQCRainfall.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuClimaticCheckDataQCRainfall.Text" xml:space="preserve">
     <value>QC Rainfall...</value>
   </data>
   <data name="mnuClimaticCheckDataQCTemperatures.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuClimaticCheckDataQCTemperatures.Text" xml:space="preserve">
     <value>QC Temperatures...</value>
+  </data>
+  <data name="mnuClimaticPrepare.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="mnuClimaticPrepare.Text" xml:space="preserve">
+    <value>Prepare</value>
   </data>
   <data name="mnuCimaticPrepareTransform.Size" type="System.Drawing.Size, System.Drawing">
     <value>189, 22</value>
@@ -1370,6 +1316,21 @@
   <data name="mnuClimaticPrepareStackDailyData.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="mnuClimdex.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="mnuClimdex.Text" xml:space="preserve">
+    <value>Climdex...</value>
+  </data>
+  <data name="ToolStripSeparator30.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 6</value>
+  </data>
+  <data name="mnuClimaticDescribe.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="mnuClimaticDescribe.Text" xml:space="preserve">
+    <value>Describe</value>
+  </data>
   <data name="mnuClimaticDescribeRainfall.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -1424,35 +1385,56 @@
   <data name="ToolStripSeparator31.Size" type="System.Drawing.Size, System.Drawing">
     <value>196, 6</value>
   </data>
-  <data name="mnuClimaticPICSARainfall.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="mnuClimaticSPI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="mnuClimaticSPI.Text" xml:space="preserve">
+    <value>SPI...</value>
+  </data>
+  <data name="mnuClimaticPICSA.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="mnuClimaticPICSA.Text" xml:space="preserve">
+    <value>PICSA</value>
   </data>
   <data name="mnuClimaticPICSARainfall.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>157, 22</value>
   </data>
   <data name="mnuClimaticPICSARainfall.Text" xml:space="preserve">
-    <value>Rainfall...</value>
+    <value>Rainfall Graph...</value>
   </data>
   <data name="mnuClimaticPICSATemperature.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="mnuClimaticPICSATemperature.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>157, 22</value>
   </data>
   <data name="mnuClimaticPICSATemperature.Text" xml:space="preserve">
     <value>Temperature...</value>
   </data>
   <data name="mnuClimaticPICSACrops.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>157, 22</value>
   </data>
   <data name="mnuClimaticPICSACrops.Text" xml:space="preserve">
     <value>Crops...</value>
+  </data>
+  <data name="mnuCMSAF.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="mnuCMSAF.Text" xml:space="preserve">
+    <value>CM SAF</value>
   </data>
   <data name="mnuClimaticCMSAFPlotRegion.Size" type="System.Drawing.Size, System.Drawing">
     <value>144, 22</value>
   </data>
   <data name="mnuClimaticCMSAFPlotRegion.Text" xml:space="preserve">
     <value>Plot Region...</value>
+  </data>
+  <data name="mnuClimaticModels.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="mnuClimaticModels.Text" xml:space="preserve">
+    <value>Model</value>
   </data>
   <data name="mnuClimaticModelsExtremes.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 22</value>
@@ -1474,6 +1456,15 @@
   </data>
   <data name="mnuClimaticModelsMarkovModelling.Text" xml:space="preserve">
     <value>Markov Modelling...</value>
+  </data>
+  <data name="ToolStripSeparator23.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 6</value>
+  </data>
+  <data name="mnuClimaticSCF.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="mnuClimaticSCF.Text" xml:space="preserve">
+    <value>Seasonal Forecast Support</value>
   </data>
   <data name="mnuClimaticSCFSupportOpenSST.Size" type="System.Drawing.Size, System.Drawing">
     <value>250, 22</value>
@@ -1513,6 +1504,15 @@
   </data>
   <data name="mnuClimaticSCFSupportCumulativeExceedanceGraphs.Text" xml:space="preserve">
     <value>Cumulative/Exceedance Graphs...</value>
+  </data>
+  <data name="mnuClimateMethods.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="mnuClimateMethods.Text" xml:space="preserve">
+    <value>Climate Methods</value>
+  </data>
+  <data name="mnuClimateMethods.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="mnuClimateMethodsDataManipulation.Size" type="System.Drawing.Size, System.Drawing">
     <value>199, 22</value>
@@ -2314,6 +2314,12 @@
   <data name="mnuProcurement.Text" xml:space="preserve">
     <value>Procurement</value>
   </data>
+  <data name="mnuOptionsByContext.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 20</value>
+  </data>
+  <data name="mnuOptionsByContext.Text" xml:space="preserve">
+    <value>Options by Context</value>
+  </data>
   <data name="mnuTools.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 20</value>
   </data>
@@ -2456,7 +2462,7 @@
     <value>210, 6</value>
   </data>
   <data name="mnuPrepareDataFrame.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuPrepareDataFrame.Text" xml:space="preserve">
     <value>Data Frame</value>
@@ -2573,16 +2579,22 @@
     <value>Colour by Property...</value>
   </data>
   <data name="mnuPrepareCheckData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuPrepareCheckData.Text" xml:space="preserve">
     <value>Check Data</value>
   </data>
-  <data name="DuplicatesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuPrepareCheckDataDuplicates.Size" type="System.Drawing.Size, System.Drawing">
     <value>245, 22</value>
   </data>
-  <data name="DuplicatesToolStripMenuItem.Text" xml:space="preserve">
+  <data name="mnuPrepareCheckDataDuplicates.Text" xml:space="preserve">
     <value>Duplicates...</value>
+  </data>
+  <data name="mnuPrepareCheckDataCompareColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 22</value>
+  </data>
+  <data name="mnuPrepareCheckDataCompareColumns.Text" xml:space="preserve">
+    <value>Compare Columns...</value>
   </data>
   <data name="mnuPrepareCheckDataBoxplot.Size" type="System.Drawing.Size, System.Drawing">
     <value>245, 22</value>
@@ -2645,10 +2657,10 @@
     <value>Prepare to Share (sdc package)...</value>
   </data>
   <data name="ToolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 6</value>
+    <value>177, 6</value>
   </data>
   <data name="mnuPrepareColumnCalculate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuPrepareColumnCalculate.Text" xml:space="preserve">
     <value>Column: Calculate</value>
@@ -2708,7 +2720,7 @@
     <value>Row Summary...</value>
   </data>
   <data name="mnuPrepareColumnGenerate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuPrepareColumnGenerate.Text" xml:space="preserve">
     <value>Column: Generate</value>
@@ -2747,7 +2759,7 @@
     <value>Permute Columns...</value>
   </data>
   <data name="mnuPrepareColumnFactor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuPrepareColumnFactor.Text" xml:space="preserve">
     <value>Column: Factor</value>
@@ -2834,7 +2846,7 @@
     <value>Factor Data Frame...</value>
   </data>
   <data name="mnuPrepareColumnText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuPrepareColumnText.Text" xml:space="preserve">
     <value>Column: Text</value>
@@ -2879,7 +2891,7 @@
     <value>Distance...</value>
   </data>
   <data name="mnuPrepareColumnDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuPrepareColumnDate.Text" xml:space="preserve">
     <value>Column: Date</value>
@@ -2927,7 +2939,7 @@
     <value>Use Time...</value>
   </data>
   <data name="mnuPrepareColumnReshape.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuPrepareColumnReshape.Text" xml:space="preserve">
     <value>Column: Reshape</value>
@@ -2993,10 +3005,10 @@
     <value>Transpose...</value>
   </data>
   <data name="ToolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 6</value>
+    <value>177, 6</value>
   </data>
   <data name="mnuPrepareKeysAndLinks.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuPrepareKeysAndLinks.Text" xml:space="preserve">
     <value>Keys and Links</value>
@@ -3032,7 +3044,7 @@
     <value>Add Comment...</value>
   </data>
   <data name="mnuPrepareDataObject.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuPrepareDataObject.Text" xml:space="preserve">
     <value>Data Object</value>
@@ -3116,7 +3128,7 @@
     <value>Delete Metadata...</value>
   </data>
   <data name="mnuPrepareRObjects.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuPrepareRObjects.Text" xml:space="preserve">
     <value>R Objects</value>
@@ -3807,6 +3819,114 @@
   </data>
   <data name="&gt;&gt;splOverall.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="mnuOptionsByContextDefineOptionsByContexts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>249, 22</value>
+  </data>
+  <data name="mnuOptionsByContextDefineOptionsByContexts.Text" xml:space="preserve">
+    <value>Define Options by Context Data...</value>
+  </data>
+  <data name="mnuOptionsByContextPrepare.Size" type="System.Drawing.Size, System.Drawing">
+    <value>249, 22</value>
+  </data>
+  <data name="mnuOptionsByContextPrepare.Text" xml:space="preserve">
+    <value>Prepare</value>
+  </data>
+  <data name="mnuOptionsByContextMergeAdditionalData.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
+  </data>
+  <data name="mnuOptionsByContextMergeAdditionalData.Text" xml:space="preserve">
+    <value>Merge Additional Data...</value>
+  </data>
+  <data name="mnuOptionsByContextDescribe.Size" type="System.Drawing.Size, System.Drawing">
+    <value>249, 22</value>
+  </data>
+  <data name="mnuOptionsByContextDescribe.Text" xml:space="preserve">
+    <value>Describe</value>
+  </data>
+  <data name="mnuOptionsByContextDescribeCompareTwoTreatments.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 22</value>
+  </data>
+  <data name="mnuOptionsByContextDescribeCompareTwoTreatments.Text" xml:space="preserve">
+    <value>Compare Two Options...</value>
+  </data>
+  <data name="mnuOptionsByContextDescribeCompareMultipleTreatments.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuOptionsByContextDescribeCompareMultipleTreatments.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 22</value>
+  </data>
+  <data name="mnuOptionsByContextDescribeCompareMultipleTreatments.Text" xml:space="preserve">
+    <value>Compare Multiple Options...</value>
+  </data>
+  <data name="mnuOptionsByContextCheckData.Size" type="System.Drawing.Size, System.Drawing">
+    <value>249, 22</value>
+  </data>
+  <data name="mnuOptionsByContextCheckData.Text" xml:space="preserve">
+    <value>Check Data</value>
+  </data>
+  <data name="mnuOptionsByContextCheckDataDuplicates.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 22</value>
+  </data>
+  <data name="mnuOptionsByContextCheckDataDuplicates.Text" xml:space="preserve">
+    <value>Duplicates...</value>
+  </data>
+  <data name="mnuOptionsByContextCheckDataCompareColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 22</value>
+  </data>
+  <data name="mnuOptionsByContextCheckDataCompareColumns.Text" xml:space="preserve">
+    <value>Compare Columns...</value>
+  </data>
+  <data name="mnuOptionsByContextModel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>249, 22</value>
+  </data>
+  <data name="mnuOptionsByContextModel.Text" xml:space="preserve">
+    <value>Model</value>
+  </data>
+  <data name="mnuOptionsByContextModelFitModel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuOptionsByContextModelFitModel.Text" xml:space="preserve">
+    <value>Fit Model...</value>
+  </data>
+  <data name="mnuOptionsByContextGeneralFitModel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuOptionsByContextGeneralFitModel.Text" xml:space="preserve">
+    <value>General Fit Model...</value>
+  </data>
+  <data name="mnuOptionsByContextPrepareStack.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
+  </data>
+  <data name="mnuOptionsByContextPrepareStack.Text" xml:space="preserve">
+    <value>Stack...</value>
+  </data>
+  <data name="mnuOptionsByContextPrepareUnstack.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
+  </data>
+  <data name="mnuOptionsByContextPrepareUnstack.Text" xml:space="preserve">
+    <value>Unstack...</value>
+  </data>
+  <data name="ToolStripSeparator47.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 6</value>
+  </data>
+  <data name="mnuOptionsByContextCheckDataOneVariableSummarise.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 22</value>
+  </data>
+  <data name="mnuOptionsByContextCheckDataOneVariableSummarise.Text" xml:space="preserve">
+    <value>One Variable Summarise...</value>
+  </data>
+  <data name="mnuOptionsByContextCheckDataOneVariableGraph.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 22</value>
+  </data>
+  <data name="mnuOptionsByContextCheckDataOneVariableGraph.Text" xml:space="preserve">
+    <value>One Variable Graph...</value>
+  </data>
+  <data name="mnuOptionsByContextCheckDataOneVariableFrequencies.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 22</value>
+  </data>
+  <data name="mnuOptionsByContextCheckDataOneVariableFrequencies.Text" xml:space="preserve">
+    <value>One Variable Frequencies...</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -6685,6 +6805,12 @@
   <data name="&gt;&gt;ToolStripSeparator31.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;mnuClimaticSPI.Name" xml:space="preserve">
+    <value>mnuClimaticSPI</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticSPI.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;mnuClimaticPICSA.Name" xml:space="preserve">
     <value>mnuClimaticPICSA</value>
   </data>
@@ -7525,10 +7651,16 @@
   <data name="&gt;&gt;mnuPrepareCheckData.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DuplicatesToolStripMenuItem.Name" xml:space="preserve">
-    <value>DuplicatesToolStripMenuItem</value>
+  <data name="&gt;&gt;mnuPrepareCheckDataDuplicates.Name" xml:space="preserve">
+    <value>mnuPrepareCheckDataDuplicates</value>
   </data>
-  <data name="&gt;&gt;DuplicatesToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuPrepareCheckDataDuplicates.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuPrepareCheckDataCompareColumns.Name" xml:space="preserve">
+    <value>mnuPrepareCheckDataCompareColumns</value>
+  </data>
+  <data name="&gt;&gt;mnuPrepareCheckDataCompareColumns.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuPrepareCheckDataBoxplot.Name" xml:space="preserve">
@@ -8335,10 +8467,124 @@
   <data name="&gt;&gt;ExportToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuClimaticSPI.Name" xml:space="preserve">
-    <value>mnuClimaticSPI</value>
+  <data name="&gt;&gt;mnuOptionsByContext.Name" xml:space="preserve">
+    <value>mnuOptionsByContext</value>
   </data>
-  <data name="&gt;&gt;mnuClimaticSPI.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuOptionsByContext.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextDefineOptionsByContexts.Name" xml:space="preserve">
+    <value>mnuOptionsByContextDefineOptionsByContexts</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextDefineOptionsByContexts.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextPrepare.Name" xml:space="preserve">
+    <value>mnuOptionsByContextPrepare</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextPrepare.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextMergeAdditionalData.Name" xml:space="preserve">
+    <value>mnuOptionsByContextMergeAdditionalData</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextMergeAdditionalData.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextDescribe.Name" xml:space="preserve">
+    <value>mnuOptionsByContextDescribe</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextDescribe.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextDescribeCompareTwoTreatments.Name" xml:space="preserve">
+    <value>mnuOptionsByContextDescribeCompareTwoTreatments</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextDescribeCompareTwoTreatments.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextDescribeCompareMultipleTreatments.Name" xml:space="preserve">
+    <value>mnuOptionsByContextDescribeCompareMultipleTreatments</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextDescribeCompareMultipleTreatments.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextCheckData.Name" xml:space="preserve">
+    <value>mnuOptionsByContextCheckData</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextCheckData.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextCheckDataDuplicates.Name" xml:space="preserve">
+    <value>mnuOptionsByContextCheckDataDuplicates</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextCheckDataDuplicates.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextCheckDataCompareColumns.Name" xml:space="preserve">
+    <value>mnuOptionsByContextCheckDataCompareColumns</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextCheckDataCompareColumns.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextModel.Name" xml:space="preserve">
+    <value>mnuOptionsByContextModel</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextModel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextModelFitModel.Name" xml:space="preserve">
+    <value>mnuOptionsByContextModelFitModel</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextModelFitModel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextGeneralFitModel.Name" xml:space="preserve">
+    <value>mnuOptionsByContextGeneralFitModel</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextGeneralFitModel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextPrepareStack.Name" xml:space="preserve">
+    <value>mnuOptionsByContextPrepareStack</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextPrepareStack.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextPrepareUnstack.Name" xml:space="preserve">
+    <value>mnuOptionsByContextPrepareUnstack</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextPrepareUnstack.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator47.Name" xml:space="preserve">
+    <value>ToolStripSeparator47</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator47.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextCheckDataOneVariableSummarise.Name" xml:space="preserve">
+    <value>mnuOptionsByContextCheckDataOneVariableSummarise</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextCheckDataOneVariableSummarise.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextCheckDataOneVariableGraph.Name" xml:space="preserve">
+    <value>mnuOptionsByContextCheckDataOneVariableGraph</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextCheckDataOneVariableGraph.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextCheckDataOneVariableFrequencies.Name" xml:space="preserve">
+    <value>mnuOptionsByContextCheckDataOneVariableFrequencies</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsByContextCheckDataOneVariableFrequencies.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuViewOptionsByContextMenu.Name" xml:space="preserve">
+    <value>mnuViewOptionsByContextMenu</value>
+  </data>
+  <data name="&gt;&gt;mnuViewOptionsByContextMenu.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
