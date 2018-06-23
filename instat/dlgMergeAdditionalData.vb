@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Imports RDotNet
 
@@ -37,6 +36,7 @@ Public Class dlgMergeAdditionalData
         SetRCodeforControls(bReset)
         bReset = False
         autoTranslate(Me)
+        TestOkEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -62,6 +62,7 @@ Public Class dlgMergeAdditionalData
         ucrFirstDataFrame.Reset()
         ucrSecondSelector.Reset()
         ucrReceiverSecond.SetMeAsReceiver()
+        ucrInputMergingBy.SetName("")
 
         clsLeftJoin.SetPackageName("dplyr")
         clsLeftJoin.SetRCommand("left_join")
