@@ -34,6 +34,7 @@ Public Class dlgDefineOptionsByContext
         SetRCodeforControls(bReset)
         bReset = False
         autoTranslate(Me)
+        TestOkEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
