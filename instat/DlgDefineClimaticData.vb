@@ -27,6 +27,7 @@ Public Class DlgDefineClimaticData
     Private clsDefaultFunction As New RFunction
     Private clsAnyDuplicatesFunction, clsAddKeyFunction, clsConcFunction, clsGetColFunction As New RFunction
     Private strCurrentDataframeName As String
+    Private bIsUnique As Boolean = True
 
     Private Sub DlgDefineClimaticData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -125,7 +126,7 @@ Public Class DlgDefineClimaticData
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverDate.IsEmpty Then
+        If Not ucrReceiverDate.IsEmpty AndAlso bIsUnique Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -223,13 +224,16 @@ Public Class DlgDefineClimaticData
         If iAnyDuplicated = -1 Then
             ucrInputCheckInput.SetName("Developer error! Could not check uniqueness.")
             ucrInputCheckInput.txtInput.BackColor = Color.Yellow
+            bIsUnique = False
         ElseIf iAnyDuplicated > 0 Then
             MessageBox()
             ucrInputCheckInput.SetName("Column(s) cannot define a key. Entries not unique.")
             ucrInputCheckInput.txtInput.BackColor = Color.LightCoral
+            bIsUnique = False
         Else
-                ucrInputCheckInput.SetName("Column(s) can define a key.")
+            ucrInputCheckInput.SetName("Column(s) can define a key.")
             ucrInputCheckInput.txtInput.BackColor = Color.LightGreen
+            bIsUnique = True
         End If
         TestOKEnabled()
     End Sub
@@ -242,6 +246,7 @@ Public Class DlgDefineClimaticData
         End If
         ucrInputCheckInput.SetName("")
         ucrInputCheckInput.txtInput.BackColor = SystemColors.Window
+        bIsUnique = True
     End Sub
 
     Private Sub ucrReceiverDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlValueChanged, ucrReceiverStationName.ControlValueChanged
