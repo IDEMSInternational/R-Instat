@@ -1959,4 +1959,12 @@ Public Class frmMain
     Private Sub mnuViewOptionsByContextMenu_Click(sender As Object, e As EventArgs) Handles mnuViewOptionsByContextMenu.Click
         clsInstatOptions.SetShowOptionsByContextMenu(Not mnuViewOptionsByContextMenu.Checked)
     End Sub
+
+    Private Sub mnuOptionsByContextDescribeCompareTwoTreatments_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextDescribeCompareTwoTreatments.Click
+        dlgCompareTreatmentLines.ShowDialog()
+    End Sub
+
+    Private Sub mnuOptionsByContextModelFitModel_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextModelFitModel.Click
+        dlgOptionsByContextFitModel.ShowDialog()
+    End Sub
 End Class
