@@ -38,6 +38,7 @@ Partial Class dlgCompareTreatmentLines
         Me.rdoLines = New System.Windows.Forms.RadioButton()
         Me.rdoPoints = New System.Windows.Forms.RadioButton()
         Me.ucrPnlCompareType = New instat.UcrPanel()
+        Me.ucrChkIncludeMeanLine = New instat.ucrCheck()
         Me.ucrChkIncludeSmoothLine = New instat.ucrCheck()
         Me.ucrChkBoxplotOnlyComplete = New instat.ucrCheck()
         Me.ucrInputHlineValue = New instat.ucrInputTextBox()
@@ -59,7 +60,6 @@ Partial Class dlgCompareTreatmentLines
         Me.ucrSelectorPlot = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrSavePlot = New instat.ucrSave()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkIncludeMeanLine = New instat.ucrCheck()
         Me.GroupBox1.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -148,21 +148,31 @@ Partial Class dlgCompareTreatmentLines
         'rdoLines
         '
         resources.ApplyResources(Me.rdoLines, "rdoLines")
+        Me.rdoLines.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoLines.FlatAppearance.BorderSize = 2
+        Me.rdoLines.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoLines.Name = "rdoLines"
-        Me.rdoLines.TabStop = True
         Me.rdoLines.UseVisualStyleBackColor = True
         '
         'rdoPoints
         '
         resources.ApplyResources(Me.rdoPoints, "rdoPoints")
+        Me.rdoPoints.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoPoints.FlatAppearance.BorderSize = 2
+        Me.rdoPoints.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoPoints.Name = "rdoPoints"
-        Me.rdoPoints.TabStop = True
         Me.rdoPoints.UseVisualStyleBackColor = True
         '
         'ucrPnlCompareType
         '
         resources.ApplyResources(Me.ucrPnlCompareType, "ucrPnlCompareType")
         Me.ucrPnlCompareType.Name = "ucrPnlCompareType"
+        '
+        'ucrChkIncludeMeanLine
+        '
+        Me.ucrChkIncludeMeanLine.Checked = False
+        resources.ApplyResources(Me.ucrChkIncludeMeanLine, "ucrChkIncludeMeanLine")
+        Me.ucrChkIncludeMeanLine.Name = "ucrChkIncludeMeanLine"
         '
         'ucrChkIncludeSmoothLine
         '
@@ -319,12 +329,6 @@ Partial Class dlgCompareTreatmentLines
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'ucrChkIncludeMeanLine
-        '
-        Me.ucrChkIncludeMeanLine.Checked = False
-        resources.ApplyResources(Me.ucrChkIncludeMeanLine, "ucrChkIncludeMeanLine")
-        Me.ucrChkIncludeMeanLine.Name = "ucrChkIncludeMeanLine"
-        '
         'dlgCompareTreatmentLines
         '
         resources.ApplyResources(Me, "$this")
@@ -392,9 +396,9 @@ Partial Class dlgCompareTreatmentLines
     Friend WithEvents lblContext3 As Label
     Friend WithEvents ucrInputContext3 As ucrInputComboBox
     Friend WithEvents ucrReceiverContext3 As ucrReceiverSingle
-    Friend WithEvents rdoPoints As RadioButton
-    Friend WithEvents rdoLines As RadioButton
     Friend WithEvents ucrPnlCompareType As UcrPanel
     Friend WithEvents ucrChkIncludeSmoothLine As ucrCheck
     Friend WithEvents ucrChkIncludeMeanLine As ucrCheck
+    Friend WithEvents rdoPoints As RadioButton
+    Friend WithEvents rdoLines As RadioButton
 End Class
