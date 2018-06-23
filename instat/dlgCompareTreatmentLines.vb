@@ -47,10 +47,10 @@ Public Class dlgCompareTreatmentLines
         SetRCodeforControls(bReset)
         bReset = False
         autoTranslate(Me)
+        TestOkEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
-
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         'ucrBase.iHelpTopicID = 
         ucrBase.clsRsyntax.iCallType = 3
@@ -167,6 +167,7 @@ Public Class dlgCompareTreatmentLines
         ucrReceiverContext3.bWithQuotes = False
         ucrReceiverContext3.strSelectorHeading = "Contexts/Options/Blockings"
         ucrReceiverContext3.SetOptionsByContextTypesAllOptionsContextsBlockings()
+        ucrReceiverContext3.SetLinkedDisplayControl(lblContext3)
 
         ucrInputContext3.SetItems({strFacetRow, strFacetCol, strColour, strNone})
         ucrInputContext3.SetDropDownStyleAsNonEditable()
