@@ -127,16 +127,16 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblVariablesToIncludeSecond.Location" type="System.Drawing.Point, System.Drawing">
-    <value>248, 105</value>
+    <value>248, 121</value>
   </data>
   <data name="lblVariablesToIncludeSecond.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 13</value>
+    <value>103, 13</value>
   </data>
   <data name="lblVariablesToIncludeSecond.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>2</value>
   </data>
   <data name="lblVariablesToIncludeSecond.Text" xml:space="preserve">
-    <value>Variables To Include:</value>
+    <value>Variables to Include:</value>
   </data>
   <data name="&gt;&gt;lblVariablesToIncludeSecond.Name" xml:space="preserve">
     <value>lblVariablesToIncludeSecond</value>
@@ -154,13 +154,13 @@
     <value>NoControl</value>
   </data>
   <data name="cmdModify.Location" type="System.Drawing.Point, System.Drawing">
-    <value>296, 333</value>
+    <value>297, 332</value>
   </data>
   <data name="cmdModify.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
   <data name="cmdModify.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>6</value>
   </data>
   <data name="cmdModify.Text" xml:space="preserve">
     <value>Modify</value>
@@ -178,13 +178,13 @@
     <value>1</value>
   </data>
   <data name="ucrInputMergingBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>77, 287</value>
+    <value>72, 286</value>
   </data>
   <data name="ucrInputMergingBy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>294, 40</value>
+    <value>300, 40</value>
   </data>
   <data name="ucrInputMergingBy.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;ucrInputMergingBy.Name" xml:space="preserve">
     <value>ucrInputMergingBy</value>
@@ -208,7 +208,7 @@
     <value>148, 50</value>
   </data>
   <data name="ucrFirstDataFrame.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;ucrFirstDataFrame.Name" xml:space="preserve">
     <value>ucrFirstDataFrame</value>
@@ -229,22 +229,22 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>420, 453</value>
+    <value>420, 424</value>
   </data>
   <data name="lblMergeBy.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lblMergeBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 288</value>
+    <value>12, 289</value>
   </data>
   <data name="lblMergeBy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 13</value>
+    <value>54, 13</value>
   </data>
   <data name="lblMergeBy.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>4</value>
   </data>
   <data name="lblMergeBy.Text" xml:space="preserve">
-    <value>Merge By:</value>
+    <value>Merge by:</value>
   </data>
   <data name="&gt;&gt;lblMergeBy.Name" xml:space="preserve">
     <value>lblMergeBy</value>
@@ -259,7 +259,7 @@
     <value>0</value>
   </data>
   <data name="ucrSecondSelector.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 87</value>
+    <value>10, 86</value>
   </data>
   <data name="ucrSecondSelector.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -268,7 +268,7 @@
     <value>210, 180</value>
   </data>
   <data name="ucrSecondSelector.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;ucrSecondSelector.Name" xml:space="preserve">
     <value>ucrSecondSelector</value>
@@ -283,13 +283,13 @@
     <value>6</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 397</value>
+    <value>10, 364</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -316,7 +316,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverSecond.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 120</value>
+    <value>248, 136</value>
   </data>
   <data name="ucrReceiverSecond.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -325,7 +325,7 @@
     <value>120, 119</value>
   </data>
   <data name="ucrReceiverSecond.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;ucrReceiverSecond.Name" xml:space="preserve">
     <value>ucrReceiverSecond</value>
