@@ -83,7 +83,7 @@ Public Class dlgCalculateTreatmentDifferences
 
         ucrReceiverContexts.Selector = ucrSelectorDifference
         ucrReceiverContexts.SetOptionsByContextTypesAllOptionsContextsBlockings()
-        ucrReceiverContexts.strSelectorHeading = "Contexts/Options/Blockings"
+        ucrReceiverContexts.strSelectorHeading = "Contexts,Options,Blocks"
 
         ucrInputFactorOption1.SetParameter(New RParameter("0", 0))
         ucrInputFactorOption1.SetFactorReceiver(ucrReceiverOption)
