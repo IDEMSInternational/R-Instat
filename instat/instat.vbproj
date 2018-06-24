@@ -335,6 +335,12 @@
     <Compile Include="dlgMergeAdditionalData.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgOptionsByContextBoxplot.Designer.vb">
+      <DependentUpon>dlgOptionsByContextBoxplot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgOptionsByContextBoxplot.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgOptionsByContextFItModel.Designer.vb">
       <DependentUpon>dlgOptionsByContextFItModel.vb</DependentUpon>
     </Compile>
@@ -2600,6 +2606,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOpenNetCDF.sw-KE.resx">
       <DependentUpon>dlgOpenNetCDF.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOptionsByContextBoxplot.resx">
+      <DependentUpon>dlgOptionsByContextBoxplot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOptionsByContextFItModel.resx">
       <DependentUpon>dlgOptionsByContextFItModel.vb</DependentUpon>
