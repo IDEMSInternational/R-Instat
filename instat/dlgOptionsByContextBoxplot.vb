@@ -13,7 +13,6 @@
 '
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
 Imports instat.Translations
 
 Public Class dlgOptionsByContextBoxplot
@@ -27,7 +26,7 @@ Public Class dlgOptionsByContextBoxplot
 
     ' Main functions and operator for ggplot
     Public clsBaseOperator As New ROperator
-    Public clsRggplotFunction As New RFunction
+    Public clsRggPlotFunction As New RFunction
     Public clsRaesGlobalFunction As New RFunction
     Public clsRaesBoxplotFunction As New RFunction
 
@@ -39,8 +38,8 @@ Public Class dlgOptionsByContextBoxplot
     ' Not yet implemented
     ' Additional functions for plot subdialog
     Public clsLabsFunction As New RFunction
-    Public clsXlabsFunction As New RFunction
-    Public clsYlabFunction As New RFunction
+    Public clsXLabsFunction As New RFunction
+    Public clsYLabFunction As New RFunction
     Public clsXScaleContinuousFunction As New RFunction
     Public clsYScaleContinuousFunction As New RFunction
     Public clsThemeFunction As New RFunction
@@ -105,13 +104,13 @@ Public Class dlgOptionsByContextBoxplot
         ucrChkIncludePoints.AddToLinkedControls(ucrInputJitter, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkIncludePoints.AddToLinkedControls(ucrNudTransparency, {True}, bNewLinkedHideIfParameterMissing:=True)
 
+        ucrInputJitter.SetParameter(New RParameter("width", iNewPosition:=4))
         ucrInputJitter.SetLinkedDisplayControl(lblJitter)
         ucrInputJitter.SetValidationTypeAsNumeric()
-        ucrInputJitter.SetParameter(New RParameter("width", iNewPosition:=4))
         ucrInputJitter.AddQuotesIfUnrecognised = False
 
-        ucrNudTransparency.SetLinkedDisplayControl(lblTransparency)
         ucrNudTransparency.SetParameter(New RParameter("alpha", iNewPosition:=1))
+        ucrNudTransparency.SetLinkedDisplayControl(lblTransparency)
         ucrNudTransparency.SetMinMax(0, 1)
         ucrNudTransparency.DecimalPlaces = 2
         ucrNudTransparency.Increment = 0.01
@@ -128,23 +127,23 @@ Public Class dlgOptionsByContextBoxplot
         ucrInputHlineValue.SetValidationTypeAsNumeric()
         ucrInputHlineValue.AddQuotesIfUnrecognised = False
 
+        ucrReceiverContext1.SetParameter(New RParameter("1", iNewPosition:=1))
         ucrReceiverContext1.Selector = ucrSelectorPlot
         ucrReceiverContext1.SetParameterIsString()
-        ucrReceiverContext1.SetParameter(New RParameter("1", iNewPosition:=1))
         ucrReceiverContext1.bWithQuotes = False
         ucrReceiverContext1.strSelectorHeading = "Contexts,Options,Blocks"
         ucrReceiverContext1.SetOptionsByContextTypesAllOptionsContextsBlockings()
 
+        ucrReceiverContext2.SetParameter(New RParameter("2", iNewPosition:=2))
         ucrReceiverContext2.Selector = ucrSelectorPlot
         ucrReceiverContext2.SetParameterIsString()
-        ucrReceiverContext2.SetParameter(New RParameter("2", iNewPosition:=2))
         ucrReceiverContext2.bWithQuotes = False
         ucrReceiverContext2.strSelectorHeading = "Contexts,Options,Blocks"
         ucrReceiverContext2.SetOptionsByContextTypesAllOptionsContextsBlockings()
 
+        ucrReceiverContext3.SetParameter(New RParameter("3", iNewPosition:=3))
         ucrReceiverContext3.Selector = ucrSelectorPlot
         ucrReceiverContext3.SetParameterIsString()
-        ucrReceiverContext3.SetParameter(New RParameter("3", iNewPosition:=3))
         ucrReceiverContext3.bWithQuotes = False
         ucrReceiverContext3.strSelectorHeading = "Contexts,Options,Blocks"
         ucrReceiverContext3.SetOptionsByContextTypesAllOptionsContextsBlockings()
@@ -164,13 +163,6 @@ Public Class dlgOptionsByContextBoxplot
         ucrPnlPlotType.AddFunctionNamesCondition(rdoViolin, "geom_violin")
         ucrPnlPlotType.AddToLinkedControls(ucrChkVarWidth, {rdoBoxplot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
 
-        ucrSavePlot.SetPrefix("boxplot")
-        ucrSavePlot.SetIsComboBox()
-        ucrSavePlot.SetCheckBoxText("Save Graph")
-        ucrSavePlot.SetSaveTypeAsGraph()
-        ucrSavePlot.SetDataFrameSelector(ucrSelectorPlot.ucrAvailableDataFrames)
-        ucrSavePlot.SetAssignToIfUncheckedValue("last_graph")
-
         ucrChkVarWidth.SetParameter(New RParameter("varwidth", 0))
         ucrChkVarWidth.SetText("Variable Width")
         ucrChkVarWidth.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
@@ -187,11 +179,18 @@ Public Class dlgOptionsByContextBoxplot
         ucrChkVerticalXTickMarkers.SetText("Vertical X Tick Markers")
         ucrChkVerticalXTickMarkers.AddParameterPresentCondition(True, "axis.text.x")
         ucrChkVerticalXTickMarkers.AddParameterPresentCondition(False, "axis.text.x", False)
+
+        ucrSavePlot.SetPrefix("boxplot")
+        ucrSavePlot.SetIsComboBox()
+        ucrSavePlot.SetCheckBoxText("Save Graph")
+        ucrSavePlot.SetSaveTypeAsGraph()
+        ucrSavePlot.SetDataFrameSelector(ucrSelectorPlot.ucrAvailableDataFrames)
+        ucrSavePlot.SetAssignToIfUncheckedValue("last_graph")
     End Sub
 
     Private Sub SetDefaults()
         clsBaseOperator = New ROperator
-        clsRggplotFunction = New RFunction
+        clsRggPlotFunction = New RFunction
         clsRaesGlobalFunction = New RFunction
 
         clsBoxplotViolinGeom = New RFunction
@@ -227,12 +226,12 @@ Public Class dlgOptionsByContextBoxplot
         ucrReceiverMeasurement.SetMeAsReceiver()
 
         clsBaseOperator.SetOperation("+")
-        clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
+        clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggPlotFunction, iPosition:=0)
         clsBaseOperator.AddParameter("geomfunc", clsRFunctionParameter:=clsBoxplotViolinGeom, iPosition:=3)
 
-        clsRggplotFunction.SetPackageName("ggplot2")
-        clsRggplotFunction.SetRCommand("ggplot")
-        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesGlobalFunction, iPosition:=1)
+        clsRggPlotFunction.SetPackageName("ggplot2")
+        clsRggPlotFunction.SetRCommand("ggplot")
+        clsRggPlotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesGlobalFunction, iPosition:=1)
 
         clsRaesGlobalFunction.SetPackageName("ggplot2")
         clsRaesGlobalFunction.SetRCommand("aes")
@@ -255,11 +254,11 @@ Public Class dlgOptionsByContextBoxplot
         clsHlineGeom.AddParameter("colour", Chr(34) & "blue" & Chr(34))
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
-        clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
+        clsXLabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         clsXScaleContinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
         clsYScaleContinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
-        clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
+        clsYLabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
 
@@ -276,7 +275,7 @@ Public Class dlgOptionsByContextBoxplot
     Private Sub SetRCodeForControls(bResetControl As Boolean)
         bRCodeUpdated = False
 
-        ucrSelectorPlot.SetRCode(clsRggplotFunction, bResetControl)
+        ucrSelectorPlot.SetRCode(clsRggPlotFunction, bResetControl)
         ucrReceiverMeasurement.SetRCode(clsRaesGlobalFunction, bResetControl)
         ucrReceiverX.SetRCode(clsRaesGlobalFunction, bResetControl)
 
@@ -318,7 +317,7 @@ Public Class dlgOptionsByContextBoxplot
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesGlobalFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsFacetFunction, ucrNewBaseSelector:=ucrSelectorPlot, bReset:=bResetSubdialog)
+        sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesGlobalFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXLabsFunction, clsNewYLabTitleFunction:=clsYLabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsFacetFunction, ucrNewBaseSelector:=ucrSelectorPlot, bReset:=bResetSubdialog)
         'this is a temporary fix because we have facets done on the main dialog
         sdgPlots.tbpFacet.Enabled = False
         sdgPlots.ShowDialog()
@@ -327,7 +326,7 @@ Public Class dlgOptionsByContextBoxplot
     End Sub
 
     Private Sub cmdBoxPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdBoxPlotOptions.Click
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsBoxplotViolinGeom, clsNewGlobalAesFunc:=clsRaesGlobalFunction, clsNewLocalAes:=clsRaesBoxplotFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorPlot, bApplyAesGlobally:=True, bReset:=bResetBoxLayerSubdialog)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggPlotFunction, clsNewGeomFunc:=clsBoxplotViolinGeom, clsNewGlobalAesFunc:=clsRaesGlobalFunction, clsNewLocalAes:=clsRaesBoxplotFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorPlot, bApplyAesGlobally:=True, bReset:=bResetBoxLayerSubdialog)
         sdgLayerOptions.ShowDialog()
         SetRCodeForControls(False)
         bResetBoxLayerSubdialog = False
@@ -390,14 +389,14 @@ Public Class dlgOptionsByContextBoxplot
     End Sub
 
     Private Sub cmdPoints_Click(sender As Object, e As EventArgs) Handles cmdPointOptions.Click
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsJitterGeom, clsNewGlobalAesFunc:=clsRaesGlobalFunction, clsNewLocalAes:=clsRaesBoxplotFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorPlot, bApplyAesGlobally:=True, bReset:=bResetBoxLayerSubdialog)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggPlotFunction, clsNewGeomFunc:=clsJitterGeom, clsNewGlobalAesFunc:=clsRaesGlobalFunction, clsNewLocalAes:=clsRaesBoxplotFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorPlot, bApplyAesGlobally:=True, bReset:=bResetBoxLayerSubdialog)
         sdgLayerOptions.ShowDialog()
         SetRCodeForControls(False)
         bResetBoxLayerSubdialog = False
     End Sub
 
     Private Sub cmdHLineOptions_Click(sender As Object, e As EventArgs) Handles cmdHLineOptions.Click
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsHlineGeom, clsNewGlobalAesFunc:=clsRaesGlobalFunction, clsNewLocalAes:=clsRaesBoxplotFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorPlot, bApplyAesGlobally:=True, bReset:=bResetBoxLayerSubdialog)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggPlotFunction, clsNewGeomFunc:=clsHlineGeom, clsNewGlobalAesFunc:=clsRaesGlobalFunction, clsNewLocalAes:=clsRaesBoxplotFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorPlot, bApplyAesGlobally:=True, bReset:=bResetBoxLayerSubdialog)
         sdgLayerOptions.ShowDialog()
         SetRCodeForControls(False)
         bResetBoxLayerSubdialog = False
