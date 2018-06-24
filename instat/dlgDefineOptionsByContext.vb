@@ -139,6 +139,7 @@ Public Class dlgDefineOptionsByContext
         ucrReceiverContext2.SetRCode(clsTypes, bResetControls)
         ucrReceiverContext3.SetRCode(clsTypes, bResetControls)
         ucrReceiverContext4.SetRCode(clsTypes, bResetControls)
+        ucrReceiverContextOther.SetRCode(clsTypes, bResetControls)
         ucrReceiverMeasurement1.SetRCode(clsTypes, bResetControls)
         ucrReceiverMeasurementOther.SetRCode(clsTypes, bResetControls)
         ucrReceiverID1.SetRCode(clsTypes, bResetControls)
