@@ -200,13 +200,18 @@ Public Class ucrButtons
         If bFirstLoad Then
             SetDefaults()
             bFirstLoad = False
+            If frmMain.clsInstatOptions IsNot Nothing Then
+                strCurrLang = frmMain.clsInstatOptions.strLanguageCultureCode
+            End If
         End If
-        If frmMain.clsInstatOptions.strLanguageCultureCode <> "en-GB" Then
-            cmdHelp.Width = cmdOk.Width / 2
-            cmdLanguage.Visible = True
-        Else
-            cmdHelp.Width = cmdOk.Width
-            cmdLanguage.Visible = False
+        If frmMain.clsInstatOptions IsNot Nothing Then
+            If frmMain.clsInstatOptions.strLanguageCultureCode <> "en-GB" Then
+                cmdHelp.Width = cmdOk.Width / 2
+                cmdLanguage.Visible = True
+            Else
+                cmdHelp.Width = cmdOk.Width
+                cmdLanguage.Visible = False
+            End If
         End If
     End Sub
 
@@ -253,6 +258,8 @@ Public Class ucrButtons
     Private Sub cmdLanguage_Click(sender As Object, e As EventArgs) Handles cmdLanguage.Click
 
         If strCurrLang <> "en-GB" Then
+            strCurrLang = "en-GB"
+        Else
             strCurrLang = frmMain.clsInstatOptions.strLanguageCultureCode
         End If
 
