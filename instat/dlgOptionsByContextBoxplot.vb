@@ -304,7 +304,7 @@ Public Class dlgOptionsByContextBoxplot
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverMeasurement.IsEmpty AndAlso ucrSavePlot.IsComplete Then
+        If Not ucrReceiverMeasurement.IsEmpty AndAlso ucrSavePlot.IsComplete AndAlso (Not ucrChkIncludePoints.Checked OrElse (Not ucrInputJitter.IsEmpty AndAlso ucrNudTransparency.GetText() <> "")) AndAlso (Not ucrChkIncludeHline.Checked OrElse Not ucrInputHlineValue.IsEmpty) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -491,5 +491,9 @@ Public Class dlgOptionsByContextBoxplot
         Else
             UpdateContextParameters()
         End If
+    End Sub
+
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMeasurement.ControlContentsChanged, ucrSavePlot.ControlContentsChanged, ucrChkIncludePoints.ControlContentsChanged, ucrInputJitter.ControlContentsChanged, ucrNudTransparency.ControlContentsChanged, ucrChkIncludeHline.ControlContentsChanged, ucrInputHlineValue.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
