@@ -38,7 +38,7 @@ Public Class Translations
                     mnuTmp = DirectCast(aControl, MenuStrip)
                     translateMenu(mnuTmp.Items, ctrParent)
                 ElseIf TypeOf aControl Is UserControl OrElse TypeOf aControl Is Panel OrElse TypeOf aControl Is GroupBox OrElse TypeOf aControl Is TabControl OrElse TypeOf aControl Is SplitContainer OrElse TypeOf aControl Is TreeView Then
-                    translateEach(aControl.Controls, aControl, res)
+                    translateEach(aControl.Controls, aControl, res, CultureInfo)
                 End If
                 If aControl.Name <> "" Then
                     pntLocation = aControl.Location
