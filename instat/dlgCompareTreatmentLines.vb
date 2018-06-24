@@ -137,14 +137,14 @@ Public Class dlgCompareTreatmentLines
         ucrReceiverContext1.SetParameterIsString()
         ucrReceiverContext1.SetParameter(New RParameter("1", iNewPosition:=1))
         ucrReceiverContext1.bWithQuotes = False
-        ucrReceiverContext1.strSelectorHeading = "Contexts/Options/Blockings"
+        ucrReceiverContext1.strSelectorHeading = "Contexts,Options,Blocks"
         ucrReceiverContext1.SetOptionsByContextTypesAllOptionsContextsBlockings()
 
         ucrReceiverContext2.Selector = ucrSelectorPlot
         ucrReceiverContext2.SetParameterIsString()
         ucrReceiverContext2.SetParameter(New RParameter("2", iNewPosition:=2))
         ucrReceiverContext2.bWithQuotes = False
-        ucrReceiverContext2.strSelectorHeading = "Contexts/Options/Blockings"
+        ucrReceiverContext2.strSelectorHeading = "Contexts,Options,Blocks"
         ucrReceiverContext2.SetOptionsByContextTypesAllOptionsContextsBlockings()
 
         ucrInputContext1.SetItems({strFacetRow, strFacetCol, strNone})
@@ -165,7 +165,7 @@ Public Class dlgCompareTreatmentLines
         ucrReceiverContext3.SetParameterIsString()
         ucrReceiverContext3.SetParameter(New RParameter("3", iNewPosition:=3))
         ucrReceiverContext3.bWithQuotes = False
-        ucrReceiverContext3.strSelectorHeading = "Contexts/Options/Blockings"
+        ucrReceiverContext3.strSelectorHeading = "Contexts,Options,Blocks"
         ucrReceiverContext3.SetOptionsByContextTypesAllOptionsContextsBlockings()
         ucrReceiverContext3.SetLinkedDisplayControl(lblContext3)
 
@@ -309,19 +309,21 @@ Public Class dlgCompareTreatmentLines
         If Not bUpdating Then
             If ucrChangedControl IsNot Nothing Then
                 strChangedValue = ucrChangedControl.GetText()
-                For Each ucrTemp As ucrInputComboBox In {ucrInputContext1, ucrInputContext2, ucrInputContext3}
-                    If ucrTemp.GetText() = strChangedValue AndAlso Not ucrTemp.Equals(ucrChangedControl) Then
-                        bUpdating = True
-                        ucrTemp.SetName(strNone)
-                        bUpdating = False
-                    End If
-                Next
+                If strChangedValue = strColour Then
+                    For Each ucrTemp As ucrInputComboBox In {ucrInputContext1, ucrInputContext2, ucrInputContext3}
+                        If ucrTemp.GetText() = strChangedValue AndAlso Not ucrTemp.Equals(ucrChangedControl) Then
+                            bUpdating = True
+                            ucrTemp.SetName(strNone)
+                            bUpdating = False
+                        End If
+                    Next
+                End If
             End If
             clsCompareLines.clsFacetColOp.ClearParameters()
             clsCompareLines.clsFacetRowOp.ClearParameters()
             clsCompareLines.clsFacetOp.ClearParameters()
             clsCompareLines.clsRFacetFunction.RemoveParameterByName("dir")
-            clsComparePoints.clsRaesGlobalFunction.RemoveParameterByName(strColour)
+            clsComparePoints.clsPointAes.RemoveParameterByName("colour")
 
             If Not ucrReceiverContext1.IsEmpty() Then
                 Select Case ucrInputContext1.GetText()

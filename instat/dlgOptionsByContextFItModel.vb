@@ -83,35 +83,35 @@ Public Class dlgOptionsByContextFitModel
         ucrReceiverContext1.SetParameterIsString()
         ucrReceiverContext1.bWithQuotes = False
         ucrReceiverContext1.Selector = ucrSelectorFitModel
-        ucrReceiverContext1.strSelectorHeading = "Contexts/Options/Blockings"
+        ucrReceiverContext1.strSelectorHeading = "Contexts,Options,Blocks"
 
         ucrReceiverContext2.SetParameter(New RParameter("1", 1))
         ucrReceiverContext2.SetOptionsByContextTypesAllOptionsContextsBlockings()
         ucrReceiverContext2.SetParameterIsString()
         ucrReceiverContext2.bWithQuotes = False
         ucrReceiverContext2.Selector = ucrSelectorFitModel
-        ucrReceiverContext2.strSelectorHeading = "Contexts/Options/Blockings"
+        ucrReceiverContext2.strSelectorHeading = "Contexts,Options,Blocks"
 
         ucrReceiverContext3.SetParameter(New RParameter("2", 2))
         ucrReceiverContext3.SetOptionsByContextTypesAllOptionsContextsBlockings()
         ucrReceiverContext3.SetParameterIsString()
         ucrReceiverContext3.bWithQuotes = False
         ucrReceiverContext3.Selector = ucrSelectorFitModel
-        ucrReceiverContext3.strSelectorHeading = "Contexts/Options/Blockings"
+        ucrReceiverContext3.strSelectorHeading = "Contexts,Options,Blocks"
 
         ucrReceiverContext4.SetParameter(New RParameter("3", 3))
         ucrReceiverContext4.SetOptionsByContextTypesAllOptionsContextsBlockings()
         ucrReceiverContext4.SetParameterIsString()
         ucrReceiverContext4.bWithQuotes = False
         ucrReceiverContext4.Selector = ucrSelectorFitModel
-        ucrReceiverContext4.strSelectorHeading = "Contexts/Options/Blockings"
+        ucrReceiverContext4.strSelectorHeading = "Contexts,Options,Blocks"
 
         ucrReceiverContextOther.SetParameter(New RParameter("2", 2))
         ucrReceiverContextOther.SetOptionsByContextTypesAllOptionsContextsBlockings()
         ucrReceiverContextOther.SetParameterIsString()
         ucrReceiverContextOther.bWithQuotes = False
         ucrReceiverContextOther.Selector = ucrSelectorFitModel
-        ucrReceiverContextOther.strSelectorHeading = "Contexts/Options/Blockings"
+        ucrReceiverContextOther.strSelectorHeading = "Contexts,Options,Blocks"
 
         ucrReceiverOptions.SetParameter(New RParameter("right", 1))
         ucrReceiverOptions.SetOptionsByContextTypesAllOptions()
