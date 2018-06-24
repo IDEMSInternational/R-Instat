@@ -23,7 +23,6 @@ Public Class dlgAddComment
     Private bReset As Boolean = True
 
     Private Sub dlgAddComment_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
