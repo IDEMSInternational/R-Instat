@@ -509,6 +509,8 @@ Partial Class frmMain
         Me.mnuOptionsByContextCheckDataOneVariableFrequencies = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptionsByContextDefineOptionsByContexts = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptionsByContextPrepare = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator48 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuOptionsByContextMergeAdditionalData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptionsByContextPrepareStack = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptionsByContextPrepareUnstack = New System.Windows.Forms.ToolStripMenuItem()
@@ -539,6 +541,7 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
+        Me.mnuOptionsByContextDescribeBoxplot = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3240,9 +3243,19 @@ Partial Class frmMain
         '
         'mnuOptionsByContextPrepare
         '
-        Me.mnuOptionsByContextPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextMergeAdditionalData, Me.mnuOptionsByContextPrepareStack, Me.mnuOptionsByContextPrepareUnstack})
+        Me.mnuOptionsByContextPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions, Me.ToolStripSeparator48, Me.mnuOptionsByContextMergeAdditionalData, Me.mnuOptionsByContextPrepareStack, Me.mnuOptionsByContextPrepareUnstack})
         Me.mnuOptionsByContextPrepare.Name = "mnuOptionsByContextPrepare"
         resources.ApplyResources(Me.mnuOptionsByContextPrepare, "mnuOptionsByContextPrepare")
+        '
+        'mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions
+        '
+        Me.mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions.Name = "mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions"
+        resources.ApplyResources(Me.mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions, "mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions")
+        '
+        'ToolStripSeparator48
+        '
+        Me.ToolStripSeparator48.Name = "ToolStripSeparator48"
+        resources.ApplyResources(Me.ToolStripSeparator48, "ToolStripSeparator48")
         '
         'mnuOptionsByContextMergeAdditionalData
         '
@@ -3261,7 +3274,7 @@ Partial Class frmMain
         '
         'mnuOptionsByContextDescribe
         '
-        Me.mnuOptionsByContextDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextDescribeCompareTwoTreatments, Me.mnuOptionsByContextDescribeCompareMultipleTreatments})
+        Me.mnuOptionsByContextDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextDescribeCompareTwoTreatments, Me.mnuOptionsByContextDescribeCompareMultipleTreatments, Me.mnuOptionsByContextDescribeBoxplot})
         Me.mnuOptionsByContextDescribe.Name = "mnuOptionsByContextDescribe"
         resources.ApplyResources(Me.mnuOptionsByContextDescribe, "mnuOptionsByContextDescribe")
         '
@@ -3466,6 +3479,11 @@ Partial Class frmMain
         Me.ucrOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         resources.ApplyResources(Me.ucrOutput, "ucrOutput")
         Me.ucrOutput.Name = "ucrOutput"
+        '
+        'mnuOptionsByContextDescribeBoxplot
+        '
+        Me.mnuOptionsByContextDescribeBoxplot.Name = "mnuOptionsByContextDescribeBoxplot"
+        resources.ApplyResources(Me.mnuOptionsByContextDescribeBoxplot, "mnuOptionsByContextDescribeBoxplot")
         '
         'frmMain
         '
@@ -4011,4 +4029,7 @@ Partial Class frmMain
     Friend WithEvents mnuOptionsByContextCheckDataOneVariableGraph As ToolStripMenuItem
     Friend WithEvents mnuOptionsByContextCheckDataOneVariableFrequencies As ToolStripMenuItem
     Friend WithEvents mnuViewOptionsByContextMenu As ToolStripMenuItem
+    Friend WithEvents mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator48 As ToolStripSeparator
+    Friend WithEvents mnuOptionsByContextDescribeBoxplot As ToolStripMenuItem
 End Class
