@@ -5493,6 +5493,9 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\zoo_1.8-2.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="static\Library\Options by Context\FUMA.2017.RDS">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
