@@ -335,6 +335,18 @@
     <Compile Include="dlgMergeAdditionalData.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgOptionsByContextBoxplot.Designer.vb">
+      <DependentUpon>dlgOptionsByContextBoxplot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgOptionsByContextBoxplot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgOptionsByContextFItModel.Designer.vb">
+      <DependentUpon>dlgOptionsByContextFItModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgOptionsByContextFItModel.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgParallelCoordinatePlot.Designer.vb">
       <DependentUpon>dlgParallelCoordinatePlot.vb</DependentUpon>
     </Compile>
@@ -2594,6 +2606,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOpenNetCDF.sw-KE.resx">
       <DependentUpon>dlgOpenNetCDF.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOptionsByContextBoxplot.resx">
+      <DependentUpon>dlgOptionsByContextBoxplot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOptionsByContextFItModel.resx">
+      <DependentUpon>dlgOptionsByContextFItModel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgParallelCoordinatePlot.resx">
       <DependentUpon>dlgParallelCoordinatePlot.vb</DependentUpon>
@@ -5526,6 +5544,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\" />
+    <Folder Include="static\Library\Options by Context\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
