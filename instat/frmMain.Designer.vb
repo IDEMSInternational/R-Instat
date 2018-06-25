@@ -517,6 +517,7 @@ Partial Class frmMain
         Me.mnuOptionsByContextDescribe = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptionsByContextDescribeCompareTwoTreatments = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptionsByContextDescribeCompareMultipleTreatments = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOptionsByContextDescribeBoxplot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptionsByContextModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptionsByContextModelFitModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptionsByContextGeneralFitModel = New System.Windows.Forms.ToolStripMenuItem()
@@ -541,7 +542,6 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
-        Me.mnuOptionsByContextDescribeBoxplot = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1483,7 +1483,7 @@ Partial Class frmMain
         '
         'mnuClimaticPrepare
         '
-        Me.mnuClimaticPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCimaticPrepareTransform, Me.ToolStripSeparator37, Me.mnuClimaticPrepareClimaticSummaries, Me.mnuClimaticPrepareStartoftheRains, Me.mnuClimaticPrepareSpells, Me.mnuClimaticPrepareExtremes, Me.mnuClimaticPrepareEndOfRains, Me.ToolStripSeparator46, Me.mnuClimaticPrepareEvapotranspiration, Me.mnuClimaticPrepareSummary, Me.mnuClimaticPrepareNewWorksheet, Me.mnuClimaticPrepareImportDailyData, Me.mnuClimaticPrepareMakeFactor, Me.mnuClimaticPrepareShiftDailyData, Me.mnuClimaticPrepareUnstackDailyData, Me.mnuClimaticPrepareStackDailyData})
+        Me.mnuClimaticPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCimaticPrepareTransform, Me.ToolStripSeparator37, Me.mnuClimaticPrepareClimaticSummaries, Me.mnuClimaticPrepareStartoftheRains, Me.mnuClimaticPrepareEndOfRains, Me.mnuClimaticPrepareSpells, Me.mnuClimaticPrepareExtremes, Me.ToolStripSeparator46, Me.mnuClimaticPrepareEvapotranspiration, Me.mnuClimaticPrepareSummary, Me.mnuClimaticPrepareNewWorksheet, Me.mnuClimaticPrepareImportDailyData, Me.mnuClimaticPrepareMakeFactor, Me.mnuClimaticPrepareShiftDailyData, Me.mnuClimaticPrepareUnstackDailyData, Me.mnuClimaticPrepareStackDailyData})
         Me.mnuClimaticPrepare.Name = "mnuClimaticPrepare"
         resources.ApplyResources(Me.mnuClimaticPrepare, "mnuClimaticPrepare")
         Me.mnuClimaticPrepare.Tag = "Prepare"
@@ -3288,6 +3288,11 @@ Partial Class frmMain
         resources.ApplyResources(Me.mnuOptionsByContextDescribeCompareMultipleTreatments, "mnuOptionsByContextDescribeCompareMultipleTreatments")
         Me.mnuOptionsByContextDescribeCompareMultipleTreatments.Name = "mnuOptionsByContextDescribeCompareMultipleTreatments"
         '
+        'mnuOptionsByContextDescribeBoxplot
+        '
+        Me.mnuOptionsByContextDescribeBoxplot.Name = "mnuOptionsByContextDescribeBoxplot"
+        resources.ApplyResources(Me.mnuOptionsByContextDescribeBoxplot, "mnuOptionsByContextDescribeBoxplot")
+        '
         'mnuOptionsByContextModel
         '
         Me.mnuOptionsByContextModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextModelFitModel, Me.mnuOptionsByContextGeneralFitModel})
@@ -3479,11 +3484,6 @@ Partial Class frmMain
         Me.ucrOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         resources.ApplyResources(Me.ucrOutput, "ucrOutput")
         Me.ucrOutput.Name = "ucrOutput"
-        '
-        'mnuOptionsByContextDescribeBoxplot
-        '
-        Me.mnuOptionsByContextDescribeBoxplot.Name = "mnuOptionsByContextDescribeBoxplot"
-        resources.ApplyResources(Me.mnuOptionsByContextDescribeBoxplot, "mnuOptionsByContextDescribeBoxplot")
         '
         'frmMain
         '
