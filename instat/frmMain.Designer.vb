@@ -154,6 +154,7 @@ Partial Class frmMain
         Me.ToolStripSeparator22 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuViewClimaticMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewProcurementMenu = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuViewOptionsByContextMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator39 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuViewResetToDefaultLayout = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
@@ -498,6 +499,27 @@ Partial Class frmMain
         Me.mnuProcurementUseCRI = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementCalculateCRI = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementUseCRISummariseCRIbyCountry = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOptionsByContext = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOptionsByContextCheckData = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOptionsByContextCheckDataDuplicates = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOptionsByContextCheckDataCompareColumns = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator47 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuOptionsByContextCheckDataOneVariableSummarise = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOptionsByContextCheckDataOneVariableGraph = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOptionsByContextCheckDataOneVariableFrequencies = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOptionsByContextDefineOptionsByContexts = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOptionsByContextPrepare = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator48 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuOptionsByContextMergeAdditionalData = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOptionsByContextPrepareStack = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOptionsByContextPrepareUnstack = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOptionsByContextDescribe = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOptionsByContextDescribeCompareTwoTreatments = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOptionsByContextDescribeCompareMultipleTreatments = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOptionsByContextModel = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOptionsByContextModelFitModel = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOptionsByContextGeneralFitModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTools = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsRunRCode = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsRestartR = New System.Windows.Forms.ToolStripMenuItem()
@@ -519,26 +541,7 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
-        Me.mnuOptionsByContext = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOptionsByContextDefineOptionsByContexts = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOptionsByContextPrepare = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOptionsByContextMergeAdditionalData = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOptionsByContextDescribe = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOptionsByContextDescribeCompareTwoTreatments = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOptionsByContextDescribeCompareMultipleTreatments = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOptionsByContextCheckData = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOptionsByContextCheckDataDuplicates = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOptionsByContextCheckDataCompareColumns = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOptionsByContextModel = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOptionsByContextModelFitModel = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOptionsByContextGeneralFitModel = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOptionsByContextPrepareStack = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOptionsByContextPrepareUnstack = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator47 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuOptionsByContextCheckDataOneVariableSummarise = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOptionsByContextCheckDataOneVariableGraph = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOptionsByContextCheckDataOneVariableFrequencies = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuViewOptionsByContextMenu = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOptionsByContextDescribeBoxplot = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1241,6 +1244,11 @@ Partial Class frmMain
         Me.mnuViewProcurementMenu.Name = "mnuViewProcurementMenu"
         resources.ApplyResources(Me.mnuViewProcurementMenu, "mnuViewProcurementMenu")
         Me.mnuViewProcurementMenu.Tag = ""
+        '
+        'mnuViewOptionsByContextMenu
+        '
+        Me.mnuViewOptionsByContextMenu.Name = "mnuViewOptionsByContextMenu"
+        resources.ApplyResources(Me.mnuViewOptionsByContextMenu, "mnuViewOptionsByContextMenu")
         '
         'ToolStripSeparator39
         '
@@ -3186,6 +3194,116 @@ Partial Class frmMain
         Me.mnuProcurementUseCRISummariseCRIbyCountry.Name = "mnuProcurementUseCRISummariseCRIbyCountry"
         resources.ApplyResources(Me.mnuProcurementUseCRISummariseCRIbyCountry, "mnuProcurementUseCRISummariseCRIbyCountry")
         '
+        'mnuOptionsByContext
+        '
+        Me.mnuOptionsByContext.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextCheckData, Me.mnuOptionsByContextDefineOptionsByContexts, Me.mnuOptionsByContextPrepare, Me.mnuOptionsByContextDescribe, Me.mnuOptionsByContextModel})
+        Me.mnuOptionsByContext.Name = "mnuOptionsByContext"
+        resources.ApplyResources(Me.mnuOptionsByContext, "mnuOptionsByContext")
+        '
+        'mnuOptionsByContextCheckData
+        '
+        Me.mnuOptionsByContextCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextCheckDataDuplicates, Me.mnuOptionsByContextCheckDataCompareColumns, Me.ToolStripSeparator47, Me.mnuOptionsByContextCheckDataOneVariableSummarise, Me.mnuOptionsByContextCheckDataOneVariableGraph, Me.mnuOptionsByContextCheckDataOneVariableFrequencies})
+        Me.mnuOptionsByContextCheckData.Name = "mnuOptionsByContextCheckData"
+        resources.ApplyResources(Me.mnuOptionsByContextCheckData, "mnuOptionsByContextCheckData")
+        '
+        'mnuOptionsByContextCheckDataDuplicates
+        '
+        Me.mnuOptionsByContextCheckDataDuplicates.Name = "mnuOptionsByContextCheckDataDuplicates"
+        resources.ApplyResources(Me.mnuOptionsByContextCheckDataDuplicates, "mnuOptionsByContextCheckDataDuplicates")
+        '
+        'mnuOptionsByContextCheckDataCompareColumns
+        '
+        Me.mnuOptionsByContextCheckDataCompareColumns.Name = "mnuOptionsByContextCheckDataCompareColumns"
+        resources.ApplyResources(Me.mnuOptionsByContextCheckDataCompareColumns, "mnuOptionsByContextCheckDataCompareColumns")
+        '
+        'ToolStripSeparator47
+        '
+        Me.ToolStripSeparator47.Name = "ToolStripSeparator47"
+        resources.ApplyResources(Me.ToolStripSeparator47, "ToolStripSeparator47")
+        '
+        'mnuOptionsByContextCheckDataOneVariableSummarise
+        '
+        Me.mnuOptionsByContextCheckDataOneVariableSummarise.Name = "mnuOptionsByContextCheckDataOneVariableSummarise"
+        resources.ApplyResources(Me.mnuOptionsByContextCheckDataOneVariableSummarise, "mnuOptionsByContextCheckDataOneVariableSummarise")
+        '
+        'mnuOptionsByContextCheckDataOneVariableGraph
+        '
+        Me.mnuOptionsByContextCheckDataOneVariableGraph.Name = "mnuOptionsByContextCheckDataOneVariableGraph"
+        resources.ApplyResources(Me.mnuOptionsByContextCheckDataOneVariableGraph, "mnuOptionsByContextCheckDataOneVariableGraph")
+        '
+        'mnuOptionsByContextCheckDataOneVariableFrequencies
+        '
+        Me.mnuOptionsByContextCheckDataOneVariableFrequencies.Name = "mnuOptionsByContextCheckDataOneVariableFrequencies"
+        resources.ApplyResources(Me.mnuOptionsByContextCheckDataOneVariableFrequencies, "mnuOptionsByContextCheckDataOneVariableFrequencies")
+        '
+        'mnuOptionsByContextDefineOptionsByContexts
+        '
+        Me.mnuOptionsByContextDefineOptionsByContexts.Name = "mnuOptionsByContextDefineOptionsByContexts"
+        resources.ApplyResources(Me.mnuOptionsByContextDefineOptionsByContexts, "mnuOptionsByContextDefineOptionsByContexts")
+        '
+        'mnuOptionsByContextPrepare
+        '
+        Me.mnuOptionsByContextPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions, Me.ToolStripSeparator48, Me.mnuOptionsByContextMergeAdditionalData, Me.mnuOptionsByContextPrepareStack, Me.mnuOptionsByContextPrepareUnstack})
+        Me.mnuOptionsByContextPrepare.Name = "mnuOptionsByContextPrepare"
+        resources.ApplyResources(Me.mnuOptionsByContextPrepare, "mnuOptionsByContextPrepare")
+        '
+        'mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions
+        '
+        Me.mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions.Name = "mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions"
+        resources.ApplyResources(Me.mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions, "mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions")
+        '
+        'ToolStripSeparator48
+        '
+        Me.ToolStripSeparator48.Name = "ToolStripSeparator48"
+        resources.ApplyResources(Me.ToolStripSeparator48, "ToolStripSeparator48")
+        '
+        'mnuOptionsByContextMergeAdditionalData
+        '
+        Me.mnuOptionsByContextMergeAdditionalData.Name = "mnuOptionsByContextMergeAdditionalData"
+        resources.ApplyResources(Me.mnuOptionsByContextMergeAdditionalData, "mnuOptionsByContextMergeAdditionalData")
+        '
+        'mnuOptionsByContextPrepareStack
+        '
+        Me.mnuOptionsByContextPrepareStack.Name = "mnuOptionsByContextPrepareStack"
+        resources.ApplyResources(Me.mnuOptionsByContextPrepareStack, "mnuOptionsByContextPrepareStack")
+        '
+        'mnuOptionsByContextPrepareUnstack
+        '
+        Me.mnuOptionsByContextPrepareUnstack.Name = "mnuOptionsByContextPrepareUnstack"
+        resources.ApplyResources(Me.mnuOptionsByContextPrepareUnstack, "mnuOptionsByContextPrepareUnstack")
+        '
+        'mnuOptionsByContextDescribe
+        '
+        Me.mnuOptionsByContextDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextDescribeCompareTwoTreatments, Me.mnuOptionsByContextDescribeCompareMultipleTreatments, Me.mnuOptionsByContextDescribeBoxplot})
+        Me.mnuOptionsByContextDescribe.Name = "mnuOptionsByContextDescribe"
+        resources.ApplyResources(Me.mnuOptionsByContextDescribe, "mnuOptionsByContextDescribe")
+        '
+        'mnuOptionsByContextDescribeCompareTwoTreatments
+        '
+        Me.mnuOptionsByContextDescribeCompareTwoTreatments.Name = "mnuOptionsByContextDescribeCompareTwoTreatments"
+        resources.ApplyResources(Me.mnuOptionsByContextDescribeCompareTwoTreatments, "mnuOptionsByContextDescribeCompareTwoTreatments")
+        '
+        'mnuOptionsByContextDescribeCompareMultipleTreatments
+        '
+        resources.ApplyResources(Me.mnuOptionsByContextDescribeCompareMultipleTreatments, "mnuOptionsByContextDescribeCompareMultipleTreatments")
+        Me.mnuOptionsByContextDescribeCompareMultipleTreatments.Name = "mnuOptionsByContextDescribeCompareMultipleTreatments"
+        '
+        'mnuOptionsByContextModel
+        '
+        Me.mnuOptionsByContextModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextModelFitModel, Me.mnuOptionsByContextGeneralFitModel})
+        Me.mnuOptionsByContextModel.Name = "mnuOptionsByContextModel"
+        resources.ApplyResources(Me.mnuOptionsByContextModel, "mnuOptionsByContextModel")
+        '
+        'mnuOptionsByContextModelFitModel
+        '
+        Me.mnuOptionsByContextModelFitModel.Name = "mnuOptionsByContextModelFitModel"
+        resources.ApplyResources(Me.mnuOptionsByContextModelFitModel, "mnuOptionsByContextModelFitModel")
+        '
+        'mnuOptionsByContextGeneralFitModel
+        '
+        Me.mnuOptionsByContextGeneralFitModel.Name = "mnuOptionsByContextGeneralFitModel"
+        resources.ApplyResources(Me.mnuOptionsByContextGeneralFitModel, "mnuOptionsByContextGeneralFitModel")
+        '
         'mnuTools
         '
         Me.mnuTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsRunRCode, Me.mnuToolsRestartR, Me.mnuToolsCheckForUpdates, Me.mnuToolsClearOutputWindow, Me.ToolStripSeparator5, Me.mnuToolsSaveCurrentOptions, Me.mnuToolsLoadOptions, Me.mnuToolsOptions})
@@ -3362,110 +3480,10 @@ Partial Class frmMain
         resources.ApplyResources(Me.ucrOutput, "ucrOutput")
         Me.ucrOutput.Name = "ucrOutput"
         '
-        'mnuOptionsByContext
+        'mnuOptionsByContextDescribeBoxplot
         '
-        Me.mnuOptionsByContext.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextCheckData, Me.mnuOptionsByContextDefineOptionsByContexts, Me.mnuOptionsByContextPrepare, Me.mnuOptionsByContextDescribe, Me.mnuOptionsByContextModel})
-        Me.mnuOptionsByContext.Name = "mnuOptionsByContext"
-        resources.ApplyResources(Me.mnuOptionsByContext, "mnuOptionsByContext")
-        '
-        'mnuOptionsByContextDefineOptionsByContexts
-        '
-        Me.mnuOptionsByContextDefineOptionsByContexts.Name = "mnuOptionsByContextDefineOptionsByContexts"
-        resources.ApplyResources(Me.mnuOptionsByContextDefineOptionsByContexts, "mnuOptionsByContextDefineOptionsByContexts")
-        '
-        'mnuOptionsByContextPrepare
-        '
-        Me.mnuOptionsByContextPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextMergeAdditionalData, Me.mnuOptionsByContextPrepareStack, Me.mnuOptionsByContextPrepareUnstack})
-        Me.mnuOptionsByContextPrepare.Name = "mnuOptionsByContextPrepare"
-        resources.ApplyResources(Me.mnuOptionsByContextPrepare, "mnuOptionsByContextPrepare")
-        '
-        'mnuOptionsByContextMergeAdditionalData
-        '
-        Me.mnuOptionsByContextMergeAdditionalData.Name = "mnuOptionsByContextMergeAdditionalData"
-        resources.ApplyResources(Me.mnuOptionsByContextMergeAdditionalData, "mnuOptionsByContextMergeAdditionalData")
-        '
-        'mnuOptionsByContextDescribe
-        '
-        Me.mnuOptionsByContextDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextDescribeCompareTwoTreatments, Me.mnuOptionsByContextDescribeCompareMultipleTreatments})
-        Me.mnuOptionsByContextDescribe.Name = "mnuOptionsByContextDescribe"
-        resources.ApplyResources(Me.mnuOptionsByContextDescribe, "mnuOptionsByContextDescribe")
-        '
-        'mnuOptionsByContextDescribeCompareTwoTreatments
-        '
-        Me.mnuOptionsByContextDescribeCompareTwoTreatments.Name = "mnuOptionsByContextDescribeCompareTwoTreatments"
-        resources.ApplyResources(Me.mnuOptionsByContextDescribeCompareTwoTreatments, "mnuOptionsByContextDescribeCompareTwoTreatments")
-        '
-        'mnuOptionsByContextDescribeCompareMultipleTreatments
-        '
-        resources.ApplyResources(Me.mnuOptionsByContextDescribeCompareMultipleTreatments, "mnuOptionsByContextDescribeCompareMultipleTreatments")
-        Me.mnuOptionsByContextDescribeCompareMultipleTreatments.Name = "mnuOptionsByContextDescribeCompareMultipleTreatments"
-        '
-        'mnuOptionsByContextCheckData
-        '
-        Me.mnuOptionsByContextCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextCheckDataDuplicates, Me.mnuOptionsByContextCheckDataCompareColumns, Me.ToolStripSeparator47, Me.mnuOptionsByContextCheckDataOneVariableSummarise, Me.mnuOptionsByContextCheckDataOneVariableGraph, Me.mnuOptionsByContextCheckDataOneVariableFrequencies})
-        Me.mnuOptionsByContextCheckData.Name = "mnuOptionsByContextCheckData"
-        resources.ApplyResources(Me.mnuOptionsByContextCheckData, "mnuOptionsByContextCheckData")
-        '
-        'mnuOptionsByContextCheckDataDuplicates
-        '
-        Me.mnuOptionsByContextCheckDataDuplicates.Name = "mnuOptionsByContextCheckDataDuplicates"
-        resources.ApplyResources(Me.mnuOptionsByContextCheckDataDuplicates, "mnuOptionsByContextCheckDataDuplicates")
-        '
-        'mnuOptionsByContextCheckDataCompareColumns
-        '
-        Me.mnuOptionsByContextCheckDataCompareColumns.Name = "mnuOptionsByContextCheckDataCompareColumns"
-        resources.ApplyResources(Me.mnuOptionsByContextCheckDataCompareColumns, "mnuOptionsByContextCheckDataCompareColumns")
-        '
-        'mnuOptionsByContextModel
-        '
-        Me.mnuOptionsByContextModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextModelFitModel, Me.mnuOptionsByContextGeneralFitModel})
-        Me.mnuOptionsByContextModel.Name = "mnuOptionsByContextModel"
-        resources.ApplyResources(Me.mnuOptionsByContextModel, "mnuOptionsByContextModel")
-        '
-        'mnuOptionsByContextModelFitModel
-        '
-        Me.mnuOptionsByContextModelFitModel.Name = "mnuOptionsByContextModelFitModel"
-        resources.ApplyResources(Me.mnuOptionsByContextModelFitModel, "mnuOptionsByContextModelFitModel")
-        '
-        'mnuOptionsByContextGeneralFitModel
-        '
-        Me.mnuOptionsByContextGeneralFitModel.Name = "mnuOptionsByContextGeneralFitModel"
-        resources.ApplyResources(Me.mnuOptionsByContextGeneralFitModel, "mnuOptionsByContextGeneralFitModel")
-        '
-        'mnuOptionsByContextPrepareStack
-        '
-        Me.mnuOptionsByContextPrepareStack.Name = "mnuOptionsByContextPrepareStack"
-        resources.ApplyResources(Me.mnuOptionsByContextPrepareStack, "mnuOptionsByContextPrepareStack")
-        '
-        'mnuOptionsByContextPrepareUnstack
-        '
-        Me.mnuOptionsByContextPrepareUnstack.Name = "mnuOptionsByContextPrepareUnstack"
-        resources.ApplyResources(Me.mnuOptionsByContextPrepareUnstack, "mnuOptionsByContextPrepareUnstack")
-        '
-        'ToolStripSeparator47
-        '
-        Me.ToolStripSeparator47.Name = "ToolStripSeparator47"
-        resources.ApplyResources(Me.ToolStripSeparator47, "ToolStripSeparator47")
-        '
-        'mnuOptionsByContextCheckDataOneVariableSummarise
-        '
-        Me.mnuOptionsByContextCheckDataOneVariableSummarise.Name = "mnuOptionsByContextCheckDataOneVariableSummarise"
-        resources.ApplyResources(Me.mnuOptionsByContextCheckDataOneVariableSummarise, "mnuOptionsByContextCheckDataOneVariableSummarise")
-        '
-        'mnuOptionsByContextCheckDataOneVariableGraph
-        '
-        Me.mnuOptionsByContextCheckDataOneVariableGraph.Name = "mnuOptionsByContextCheckDataOneVariableGraph"
-        resources.ApplyResources(Me.mnuOptionsByContextCheckDataOneVariableGraph, "mnuOptionsByContextCheckDataOneVariableGraph")
-        '
-        'mnuOptionsByContextCheckDataOneVariableFrequencies
-        '
-        Me.mnuOptionsByContextCheckDataOneVariableFrequencies.Name = "mnuOptionsByContextCheckDataOneVariableFrequencies"
-        resources.ApplyResources(Me.mnuOptionsByContextCheckDataOneVariableFrequencies, "mnuOptionsByContextCheckDataOneVariableFrequencies")
-        '
-        'mnuViewOptionsByContextMenu
-        '
-        Me.mnuViewOptionsByContextMenu.Name = "mnuViewOptionsByContextMenu"
-        resources.ApplyResources(Me.mnuViewOptionsByContextMenu, "mnuViewOptionsByContextMenu")
+        Me.mnuOptionsByContextDescribeBoxplot.Name = "mnuOptionsByContextDescribeBoxplot"
+        resources.ApplyResources(Me.mnuOptionsByContextDescribeBoxplot, "mnuOptionsByContextDescribeBoxplot")
         '
         'frmMain
         '
@@ -4011,4 +4029,7 @@ Partial Class frmMain
     Friend WithEvents mnuOptionsByContextCheckDataOneVariableGraph As ToolStripMenuItem
     Friend WithEvents mnuOptionsByContextCheckDataOneVariableFrequencies As ToolStripMenuItem
     Friend WithEvents mnuViewOptionsByContextMenu As ToolStripMenuItem
+    Friend WithEvents mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator48 As ToolStripSeparator
+    Friend WithEvents mnuOptionsByContextDescribeBoxplot As ToolStripMenuItem
 End Class
