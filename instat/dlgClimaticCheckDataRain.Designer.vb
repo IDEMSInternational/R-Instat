@@ -34,11 +34,11 @@ Partial Class dlgClimaticCheckDataRain
         Me.lblRainDays = New System.Windows.Forms.Label()
         Me.lblSkewnessWeight = New System.Windows.Forms.Label()
         Me.grpLogicalCalculatedColumns = New System.Windows.Forms.GroupBox()
+        Me.ucrChkLogicalColumns = New instat.ucrCheck()
+        Me.ucrChkCalculatedColumns = New instat.ucrCheck()
         Me.lblCoeff = New System.Windows.Forms.Label()
         Me.ucrNudCoeff = New instat.ucrNud()
         Me.ucrChkOmitZero = New instat.ucrCheck()
-        Me.ucrChkCalculatedColumns = New instat.ucrCheck()
-        Me.ucrChkLogicalColumns = New instat.ucrCheck()
         Me.ucrNudSkewnessWeight = New instat.ucrNud()
         Me.ucrNudWetDays = New instat.ucrNud()
         Me.ucrNudSame = New instat.ucrNud()
@@ -118,6 +118,18 @@ Partial Class dlgClimaticCheckDataRain
         Me.grpLogicalCalculatedColumns.Name = "grpLogicalCalculatedColumns"
         Me.grpLogicalCalculatedColumns.TabStop = False
         '
+        'ucrChkLogicalColumns
+        '
+        Me.ucrChkLogicalColumns.Checked = False
+        resources.ApplyResources(Me.ucrChkLogicalColumns, "ucrChkLogicalColumns")
+        Me.ucrChkLogicalColumns.Name = "ucrChkLogicalColumns"
+        '
+        'ucrChkCalculatedColumns
+        '
+        Me.ucrChkCalculatedColumns.Checked = False
+        resources.ApplyResources(Me.ucrChkCalculatedColumns, "ucrChkCalculatedColumns")
+        Me.ucrChkCalculatedColumns.Name = "ucrChkCalculatedColumns"
+        '
         'lblCoeff
         '
         resources.ApplyResources(Me.lblCoeff, "lblCoeff")
@@ -138,18 +150,6 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrChkOmitZero.Checked = False
         resources.ApplyResources(Me.ucrChkOmitZero, "ucrChkOmitZero")
         Me.ucrChkOmitZero.Name = "ucrChkOmitZero"
-        '
-        'ucrChkCalculatedColumns
-        '
-        Me.ucrChkCalculatedColumns.Checked = False
-        resources.ApplyResources(Me.ucrChkCalculatedColumns, "ucrChkCalculatedColumns")
-        Me.ucrChkCalculatedColumns.Name = "ucrChkCalculatedColumns"
-        '
-        'ucrChkLogicalColumns
-        '
-        Me.ucrChkLogicalColumns.Checked = False
-        resources.ApplyResources(Me.ucrChkLogicalColumns, "ucrChkLogicalColumns")
-        Me.ucrChkLogicalColumns.Name = "ucrChkLogicalColumns"
         '
         'ucrNudSkewnessWeight
         '
