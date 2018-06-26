@@ -48,18 +48,21 @@ Partial Class dlgExportToCPT
         Me.lblLatitude = New System.Windows.Forms.Label()
         Me.lblLongitude = New System.Windows.Forms.Label()
         Me.lblStationLatLon = New System.Windows.Forms.Label()
-        Me.ucrSectorTwoDF = New instat.ucrDataFrame()
-        Me.UcrSaveExportFile = New instat.ucrSave()
+        Me.lblSaveDataTo = New System.Windows.Forms.Label()
+        Me.cmdChooseFile = New System.Windows.Forms.Button()
+        Me.ucrInputFilePath = New instat.ucrInputTextBox()
         Me.ucrReceiverStationElementData = New instat.ucrReceiverSingle()
         Me.UcrReceiverLongitude = New instat.ucrReceiverSingle()
         Me.UcrReceiverLatitude = New instat.ucrReceiverSingle()
         Me.ucrPnlNoOfDF = New instat.UcrPanel()
-        Me.ucrChkLongData = New instat.ucrCheck()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverStationLatLon = New instat.ucrReceiverSingle()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrSelectorExporCPT = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.UcrSelectorByDataFrameAddRemove1 = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.UcrReceiverMultiple1 = New instat.ucrReceiverMultiple()
+        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
         Me.SuspendLayout()
         '
         'rdoTwoDF
@@ -115,17 +118,24 @@ Partial Class dlgExportToCPT
         resources.ApplyResources(Me.lblStationLatLon, "lblStationLatLon")
         Me.lblStationLatLon.Name = "lblStationLatLon"
         '
-        'ucrSectorTwoDF
+        'lblSaveDataTo
         '
-        Me.ucrSectorTwoDF.bDropUnusedFilterLevels = False
-        Me.ucrSectorTwoDF.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSectorTwoDF, "ucrSectorTwoDF")
-        Me.ucrSectorTwoDF.Name = "ucrSectorTwoDF"
+        resources.ApplyResources(Me.lblSaveDataTo, "lblSaveDataTo")
+        Me.lblSaveDataTo.Name = "lblSaveDataTo"
         '
-        'UcrSaveExportFile
+        'cmdChooseFile
         '
-        resources.ApplyResources(Me.UcrSaveExportFile, "UcrSaveExportFile")
-        Me.UcrSaveExportFile.Name = "UcrSaveExportFile"
+        resources.ApplyResources(Me.cmdChooseFile, "cmdChooseFile")
+        Me.cmdChooseFile.Name = "cmdChooseFile"
+        Me.cmdChooseFile.UseVisualStyleBackColor = True
+        '
+        'ucrInputFilePath
+        '
+        Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilePath.IsMultiline = False
+        Me.ucrInputFilePath.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputFilePath, "ucrInputFilePath")
+        Me.ucrInputFilePath.Name = "ucrInputFilePath"
         '
         'ucrReceiverStationElementData
         '
@@ -158,12 +168,6 @@ Partial Class dlgExportToCPT
         '
         resources.ApplyResources(Me.ucrPnlNoOfDF, "ucrPnlNoOfDF")
         Me.ucrPnlNoOfDF.Name = "ucrPnlNoOfDF"
-        '
-        'ucrChkLongData
-        '
-        Me.ucrChkLongData.Checked = False
-        resources.ApplyResources(Me.ucrChkLongData, "ucrChkLongData")
-        Me.ucrChkLongData.Name = "ucrChkLongData"
         '
         'ucrBase
         '
@@ -205,10 +209,42 @@ Partial Class dlgExportToCPT
         resources.ApplyResources(Me.ucrSelectorExporCPT, "ucrSelectorExporCPT")
         Me.ucrSelectorExporCPT.Name = "ucrSelectorExporCPT"
         '
+        'UcrSelectorByDataFrameAddRemove1
+        '
+        Me.UcrSelectorByDataFrameAddRemove1.bDropUnusedFilterLevels = False
+        Me.UcrSelectorByDataFrameAddRemove1.bShowHiddenColumns = False
+        Me.UcrSelectorByDataFrameAddRemove1.bUseCurrentFilter = True
+        resources.ApplyResources(Me.UcrSelectorByDataFrameAddRemove1, "UcrSelectorByDataFrameAddRemove1")
+        Me.UcrSelectorByDataFrameAddRemove1.Name = "UcrSelectorByDataFrameAddRemove1"
+        '
+        'UcrReceiverMultiple1
+        '
+        Me.UcrReceiverMultiple1.frmParent = Me
+        resources.ApplyResources(Me.UcrReceiverMultiple1, "UcrReceiverMultiple1")
+        Me.UcrReceiverMultiple1.Name = "UcrReceiverMultiple1"
+        Me.UcrReceiverMultiple1.Selector = Nothing
+        Me.UcrReceiverMultiple1.strNcFilePath = ""
+        Me.UcrReceiverMultiple1.ucrSelector = Nothing
+        '
+        'RadioButton1
+        '
+        resources.ApplyResources(Me.RadioButton1, "RadioButton1")
+        Me.RadioButton1.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.RadioButton1.FlatAppearance.BorderSize = 2
+        Me.RadioButton1.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.RadioButton1.Name = "RadioButton1"
+        Me.RadioButton1.UseVisualStyleBackColor = True
+        '
         'dlgExportToCPT
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.RadioButton1)
+        Me.Controls.Add(Me.UcrReceiverMultiple1)
+        Me.Controls.Add(Me.UcrSelectorByDataFrameAddRemove1)
+        Me.Controls.Add(Me.cmdChooseFile)
+        Me.Controls.Add(Me.ucrInputFilePath)
+        Me.Controls.Add(Me.lblSaveDataTo)
         Me.Controls.Add(Me.lblStationLatLon)
         Me.Controls.Add(Me.lblLongitude)
         Me.Controls.Add(Me.lblLatitude)
@@ -218,13 +254,10 @@ Partial Class dlgExportToCPT
         Me.Controls.Add(Me.lblStationElement)
         Me.Controls.Add(Me.rdoOneDF)
         Me.Controls.Add(Me.rdoTwoDF)
-        Me.Controls.Add(Me.ucrSectorTwoDF)
-        Me.Controls.Add(Me.UcrSaveExportFile)
         Me.Controls.Add(Me.ucrReceiverStationElementData)
         Me.Controls.Add(Me.UcrReceiverLongitude)
         Me.Controls.Add(Me.UcrReceiverLatitude)
         Me.Controls.Add(Me.ucrPnlNoOfDF)
-        Me.Controls.Add(Me.ucrChkLongData)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiverStationLatLon)
         Me.Controls.Add(Me.ucrReceiverElement)
@@ -244,13 +277,10 @@ Partial Class dlgExportToCPT
     Friend WithEvents ucrReceiverElement As ucrReceiverSingle
     Friend WithEvents ucrReceiverStationLatLon As ucrReceiverSingle
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrChkLongData As ucrCheck
     Friend WithEvents ucrPnlNoOfDF As UcrPanel
     Friend WithEvents UcrReceiverLatitude As ucrReceiverSingle
     Friend WithEvents ucrReceiverStationElementData As ucrReceiverSingle
     Friend WithEvents UcrReceiverLongitude As ucrReceiverSingle
-    Friend WithEvents UcrSaveExportFile As ucrSave
-    Friend WithEvents ucrSectorTwoDF As ucrDataFrame
     Friend WithEvents lblYear As Label
     Friend WithEvents lblStationOneDF As Label
     Friend WithEvents lblStationElement As Label
@@ -260,4 +290,10 @@ Partial Class dlgExportToCPT
     Friend WithEvents lblStationLatLon As Label
     Friend WithEvents lblLongitude As Label
     Friend WithEvents lblLatitude As Label
+    Friend WithEvents lblSaveDataTo As Label
+    Friend WithEvents ucrInputFilePath As ucrInputTextBox
+    Friend WithEvents cmdChooseFile As Button
+    Friend WithEvents UcrSelectorByDataFrameAddRemove1 As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents UcrReceiverMultiple1 As ucrReceiverMultiple
+    Friend WithEvents RadioButton1 As RadioButton
 End Class

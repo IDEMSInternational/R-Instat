@@ -173,41 +173,54 @@ lat_lon_dataframe <- function(datafile){
   return(cbind(lat_lon,station))
 }
 
-output_for_CPT = function(data_name, lat_lon_data, long = TRUE, year_col, sst_cols, station_col = ""){
-  if(missing(data_name) || missing(data_name)) stop("data_name and lat_lon_data should be provided.")
-  if(missing(year_col) || missing(sst_cols)) stop("year_col and sst_cols must be provided.")
-  if(!is.character(year_col) || !is.character(sst_cols)) stop("year_col and sst_cols must be of type character.")
-  if(!all(c(year_col, sst_cols) %in% names(data_name))) stop("Some column(s) are missing in data")
-  my_lat_lon_data <- lat_lon_data
-  row.names(my_lat_lon_data) <- lat_lon_data$station
-  if (long){
-    if(length(sst_cols) != 1) stop("Only one SST column should be provided for long data format.")
-    if(missing(station_col)) stop("station_col must be provided for long data format.")
-    if(!is.character(station_col)) stop("station must be of type character.")
-    if(!all(station_col %in% names(data_name))) stop(station_col,  " is missing in data.")
-    row.names(data_name) = NULL
-    data_name <- droplevels(data_name)
-    ssT_col_names = as.character(levels(data_name[,station_col]))
-    Year = c("LAT","LON")
-    selected_lat_lon = t(my_lat_lon_data[ssT_col_names, c("lat", "lon")])
-    selected_lat_lon = cbind(Year, selected_lat_lon)
-    my_data <- as.matrix(reshape2::dcast(data = data_name, formula = as.formula(paste(year_col, "~station",sep = "")), value.var = sst_cols))
-    my_data = as.data.frame(rbind(selected_lat_lon, my_data))
-  }
-  else{
-    ssT_col_names = sst_cols
-    selected_lat_lon = t(my_lat_lon_data[ssT_col_names, c("lat", "lon")])
-    my_data = data_name[,c(ssT_col_names)]
-    if(length(ssT_col_names)==1){
-      my_data = as.data.frame(my_data)
-      names(my_data) = ssT_col_names
+
+output_CPT <- function(data, lat_lon_data, station_latlondata, latitude, longitude, station, year, element, long.data = TRUE) {
+  
+  if(missing(data)) stop("data should be provided")
+  if(missing(station)) stop("station must be provided")
+  if(missing(year) || missing(element) || missing(latitude) || missing(longitude)) stop("year, element, latitude and longiude must be provided")
+  
+  station_label <- "STN"
+  lat_lon_labels <- c("LAT", "LON")
+  
+  if(missing(lat_lon_data)) {
+    if(long.data) {
+      unstacked_data <- data %>% dplyr::select(!!! quos(station, year, element)) %>% tidyr::spread(key = !! as.name(station), !! as.name(element))
+      names(unstacked_data)[1] <- station_label
+      
+      lat_lon_data <- data %>% dplyr::group_by(!! as.name(station)) %>% dplyr::summarise(latitude = min(!! as.name(latitude)), longitude = min(!! as.name(longitude)))
+      t_lat_lon_data <- t(lat_lon_data)
+      station.names <- as.vector(t_lat_lon_data[1, ])
+      t_lat_lon_data <- data.frame(t_lat_lon_data, stringsAsFactors = FALSE)
+      t_lat_lon_data <- t_lat_lon_data %>% dplyr::slice(-1)
+      names(t_lat_lon_data) <- station.names
+      row.names(t_lat_lon_data) <- lat_lon_labels
+      t_lat_lon_data <- tibble::rownames_to_column(t_lat_lon_data, station_label)
     }
-    my_data = rbind(selected_lat_lon, my_data)
-    Year = c("LAT","LON", as.vector(data_name[,c(year_col)]))
-    my_data = as.data.frame(cbind(Year, my_data))
+    else stop("If all data is in one data frame then must have long.data = TRUE")
   }
-  data.table::setnames(my_data, "Year", "STN")
-  return(my_data)
+  else {
+    if(missing(station_latlondata)) stop("station must be provided for lat_lon_data")
+    t_lat_lon_data <- t(data2_latlon %>% dplyr::select(!!! quos(latitude, longitude)))
+    t_lat_lon_data <- data.frame(t_lat_lon_data, stringsAsFactors = FALSE)
+    names(t_lat_lon_data) <- data2_latlon[[station]]
+    row.names(t_lat_lon_data) <- lat_lon_labels
+    t_lat_lon_data <- tibble::rownames_to_column(t_lat_lon_data, station_label)
+    
+    if(long.data) {
+      unstacked_data <- data %>% dplyr::select(!!! quos(station, year, element)) %>% tidyr::spread(key = !! as.name(station), !! as.name(element))
+      names(unstacked_data)[1] <- station_label
+    }
+    else {
+      # This assumes: first column is year, all other columns are stations
+      # If this shouldn't be assumed then code needs to change
+      unstacked_data <- data
+      names(unstacked_data)[1] <- station_label
+    }
+  }
+  
+  cpt_data <- rbind(t_lat_lon_data, unstacked_data)
+  return(cpt_data)
 }
 
 yday_366 <- function(date) {

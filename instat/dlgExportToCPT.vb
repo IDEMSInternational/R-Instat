@@ -40,7 +40,7 @@ Public Class dlgExportToCPT
         ucrBase.iHelpTopicID = 355
 
         ucrSelectorExporCPT.SetParameter(New RParameter("data"))
-        ucrSelectorExporCPT.SetParameterIsString()
+        ucrSelectorExporCPT.SetParameterIsrfunction()
 
         ucrReceiverStationElementData.Selector = ucrSelectorExporCPT
         ucrReceiverStationElementData.SetParameter(New RParameter("station"))
@@ -82,19 +82,13 @@ Public Class dlgExportToCPT
         ucrChkLongData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkLongData.SetDefaultState("TRUE")
 
-        UcrSaveExportFile.SetParameter(New RParameter("file"))
-        UcrSaveExportFile.SetPrefix("CPT")
-        UcrSaveExportFile.SetSaveTypeAsDataFrame()
-        UcrSaveExportFile.SetDataFrameSelector(ucrSelectorExporCPT.ucrAvailableDataFrames)
-        UcrSaveExportFile.SetLabelText("CPT File Name:")
-        UcrSaveExportFile.SetIsComboBox()
-
-        'clsExportCPT.SetAssignTo(UcrSaveExportFile.GetText, strTempDataframe:=ucrSelectorExporCPT.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=UcrSaveExportFile.GetText)
+        ucrInputFilePath.SetParameter(New RParameter("file", 0))
+        ucrInputFilePath.IsReadOnly = True
 
         ucrPnlNoOfDF.AddRadioButton(rdoTwoDF)
         ucrPnlNoOfDF.AddRadioButton(rdoOneDF)
-        ucrPnlNoOfDF.AddFunctionNamesCondition(rdoOneDF, frmMain.clsRLink.strInstatDataObject & "$output_CPT")
-        ucrPnlNoOfDF.AddFunctionNamesCondition(rdoTwoDF, frmMain.clsRLink.strInstatDataObject & "$output_CPT")
+        ucrPnlNoOfDF.AddParameterPresentCondition(rdoOneDF, "lat_lon_data", False)
+        ucrPnlNoOfDF.AddParameterPresentCondition(rdoTwoDF, "lat_lon_data", True)
 
         ucrPnlNoOfDF.AddToLinkedControls(ucrChkLongData, {rdoTwoDF}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
         'ucrPnlNoOfDF.AddToLinkedControls(ucrReceiverYear, {rdoOneDF, rdoTwoDF}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
@@ -114,14 +108,14 @@ Public Class dlgExportToCPT
         ucrReceiverStationElementData.SetMeAsReceiver()
         ucrSelectorExporCPT.Reset()
         OneOrTwoDF()
+        ucrInputFilePath.Reset()
+        ucrInputFilePath.SetName("")
 
-        clsOutputCPT.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$output_CPT")
+        clsOutputCPT.SetRCommand("output_CPT")
 
         clsExportCPT.SetPackageName("rio")
         clsExportCPT.SetRCommand("export")
-        clsExportCPT.AddParameter("x", clsRFunctionParameter:=clsExportCPT, iPosition:=0)
-        clsExportCPT.AddParameter("file", Chr(34) & UcrSaveExportFile.GetText() & Chr(34), iPosition:=1)
-        clsExportCPT.AddParameter("format", Chr(34) & "csv" & Chr(34))
+        clsExportCPT.AddParameter("x", clsRFunctionParameter:=clsOutputCPT, iPosition:=0)
         clsExportCPT.AddParameter("sep", Chr(34) & "\t" & Chr(34))
         clsExportCPT.AddParameter("quote", "FALSE")
         clsExportCPT.AddParameter("row.names", "FALSE")
@@ -132,18 +126,17 @@ Public Class dlgExportToCPT
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverStationElementData.SetMeAsReceiver()
-        ucrSelectorExporCPT.SetDataframe(ucrReceiverStationElementData.GetDataName())
+        ucrSelectorExporCPT.SetRCode(clsOutputCPT, bReset)
         ucrReceiverStationElementData.SetRCode(clsOutputCPT, bReset)
         ucrReceiverYear.SetRCode(clsOutputCPT, bReset)
         ucrReceiverElement.SetRCode(clsOutputCPT, bReset)
         UcrReceiverLatitude.SetMeAsReceiver()
-        ucrSelectorExporCPT.SetDataframe(UcrReceiverLatitude.GetDataName())
         UcrReceiverLatitude.SetRCode(clsOutputCPT, bReset)
         UcrReceiverLongitude.SetRCode(clsOutputCPT, bReset)
         ucrReceiverStationLatLon.SetRCode(clsOutputCPT, bReset)
         ucrPnlNoOfDF.SetRCode(clsOutputCPT, bReset)
         ucrChkLongData.SetRCode(clsOutputCPT, bReset)
-        UcrSaveExportFile.SetRCode(clsExportCPT, bReset)
+        ucrInputFilePath.SetRCode(clsExportCPT)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -174,7 +167,6 @@ Public Class dlgExportToCPT
 
     Private Sub DataFramePanel()
         If rdoTwoDF.Checked AndAlso (ucrSelectorExporCPT.CurrentReceiver Is Nothing OrElse ucrSelectorExporCPT.CurrentReceiver.bAttachedToPrimaryDataFrame) Then
-            clsOutputCPT.AddParameter("data", Chr(34) & ucrSelectorExporCPT.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
             If ucrChkLongData.Checked Then
                 clsOutputCPT.AddParameter("data", Chr(34) & ucrSelectorExporCPT.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
             Else
@@ -238,25 +230,62 @@ Public Class dlgExportToCPT
         End If
     End Sub
 
-    Private Sub ucrBaseExportToCPT_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-        SetRCodeForControls(True)
-        TestOkEnabled()
-    End Sub
-
     Private Sub ucrChkLong_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrPnlNoOfDF.ControlContentsChanged
         TestOkEnabled()
         OneOrTwoDF()
     End Sub
 
-    Private Sub ucrSelectorExporCPT_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorExporCPT.ControlValueChanged, ucrSectorTwoDF.ControlContentsChanged
+    Private Sub ucrSelectorExporCPT_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorExporCPT.ControlValueChanged
         DataFramePanel()
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrSaveExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles UcrSaveExportFile.ControlContentsChanged, ucrReceiverStationElementData.ControlContentsChanged, ucrReceiverStationLatLon.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, UcrReceiverLatitude.ControlContentsChanged, UcrReceiverLongitude.ControlContentsChanged, ucrChkLongData.ControlContentsChanged
+    Private Sub ucrSaveExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrReceiverStationElementData.ControlContentsChanged, ucrReceiverStationLatLon.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, UcrReceiverLatitude.ControlContentsChanged, UcrReceiverLongitude.ControlContentsChanged
         TestOkEnabled()
         OneOrTwoDF()
         DataFramePanel()
+    End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        frmMain.strSaveFilePath = ucrInputFilePath.GetText()
+        frmMain.clsRecentItems.addToMenu(Replace(ucrInputFilePath.GetText(), "/", "\"))
+    End Sub
+
+    Private Sub cmdEditorSave_Click(sender As Object, e As EventArgs) Handles cmdChooseFile.Click
+        SelectFileToSave()
+    End Sub
+
+    Private Sub ucrInputFilePath_Click(sender As Object, e As EventArgs) Handles ucrInputFilePath.Click
+        If ucrInputFilePath.IsEmpty() Then
+            SelectFileToSave()
+        End If
+    End Sub
+
+    Private Sub SelectFileToSave()
+        Using dlgSave As New SaveFileDialog
+            dlgSave.Title = "Save CPT File"
+            dlgSave.Filter = "txt Data file (*.txt)|*.txt"
+            If ucrInputFilePath.GetText() <> "" Then
+                dlgSave.InitialDirectory = ucrInputFilePath.GetText().Replace("/", "\")
+            Else
+                dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+            End If
+            If dlgSave.ShowDialog() = DialogResult.OK Then
+                ucrInputFilePath.SetName(dlgSave.FileName.Replace("\", "/"))
+            End If
+            TestOkEnabled()
+        End Using
+    End Sub
+
+    Private Sub ucrInputFilePath_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFilePath.ControlContentsChanged
+        TestOkEnabled()
+    End Sub
+
+
+
+    Private Sub ucrBaseExportToCPT_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
     End Sub
 End Class
