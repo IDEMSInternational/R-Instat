@@ -48,7 +48,6 @@ Public Class dlgClimaticBoxPlot
     Private strXAxis As String = "X Axis"
     Private strColour As String = "Colour Axis"
     Private strNone As String = "None"
-    Private strXasFactor As String = "X Axis Factor"
 
     Private bUpdateComboOptions As Boolean = True
     Private bUpdatingParameters As Boolean = False
@@ -177,7 +176,7 @@ Public Class dlgClimaticBoxPlot
         ucrInputStation.SetItems({strXAxis, strColour, strFacetWrap, strFacetRow, strFacetCol, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
 
-        ucrInputYear.SetItems({strXAxis, strXasFactor, strColour, strFacetWrap, strFacetRow, strFacetCol, strNone})
+        ucrInputYear.SetItems({strXAxis, strColour, strFacetWrap, strFacetRow, strFacetCol, strNone})
         ucrInputYear.SetDropDownStyleAsNonEditable()
 
         ucrInputWithinYear.SetItems({strXAxis, strColour, strFacetWrap, strFacetRow, strFacetCol, strNone})
@@ -387,9 +386,6 @@ Public Class dlgClimaticBoxPlot
                         ucrInputTemp.SetName(strNone)
                         bUpdateComboOptions = True
                     End If
-                    If strChangedText = strXasFactor AndAlso ucrInputTemp.GetText = strXAxis OrElse strChangedText = strXAxis AndAlso ucrInputTemp.GetText = strXasFactor Then
-                        ucrInputTemp.SetName(strNone)
-                    End If
                     If strChangedText = strFacetWrap AndAlso ucrInputTemp.GetText = strFacetRow OrElse strChangedText = strFacetRow AndAlso ucrInputTemp.GetText = strFacetWrap OrElse strChangedText = strFacetWrap AndAlso ucrInputTemp.GetText = strFacetCol OrElse strChangedText = strFacetCol AndAlso ucrInputTemp.GetText = strFacetWrap Then
                         ucrInputTemp.SetName(strNone)
                     End If
@@ -406,6 +402,7 @@ Public Class dlgClimaticBoxPlot
         clsRaesFunction.RemoveParameterByName("x")
         clsRaesFunction.RemoveParameterByName("color")
         clsRaesFunction.RemoveParameterByName("fill")
+        clsAsFactorFunction.RemoveParameterByName("x")
 
         For Each ucrInputTemp As ucrInputComboBox In dctComboReceiver.Keys
             clsFacetOp.RemoveParameterByName("wrap" & ucrInputTemp.Name)
@@ -420,13 +417,9 @@ Public Class dlgClimaticBoxPlot
             dctComboReceiver(ucrInputTemp).SetRCode(Nothing)
             If strTemp = strXAxis Then
                 dctComboReceiver(ucrInputTemp).ChangeParameterName("x")
-                dctComboReceiver(ucrInputTemp).SetParameterIncludeArgumentName(True)
-                dctComboReceiver(ucrInputTemp).SetRCode(clsRaesFunction)
-            ElseIf strTemp = strXasFactor Then
-                dctComboReceiver(ucrInputTemp).ChangeParameterName("x")
                 dctComboReceiver(ucrInputTemp).SetParameterIncludeArgumentName(False)
                 dctComboReceiver(ucrInputTemp).SetRCode(clsAsFactorFunction)
-                clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsFactorFunction, iPosition:=1)
+                clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsFactorFunction)
             ElseIf strTemp = strColour Then
                 If rdoJitter.Checked Then
                     dctComboReceiver(ucrInputTemp).ChangeParameterName("color")
