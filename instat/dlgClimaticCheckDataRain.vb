@@ -94,8 +94,6 @@ Public Class dlgClimaticCheckDataRain
         ucrReceiverElement.Selector = ucrSelectorRain
         ucrReceiverElement.SetParameterIsString()
         ucrReceiverElement.bWithQuotes = False
-        ucrReceiverMonth.SetClimaticType("rain")
-        ucrReceiverMonth.bAutoFill = True
 
         ucrNudLarge.SetParameter(New RParameter("right", 1, bNewIncludeArgumentName:=False))
         ucrNudLarge.SetMinMax(iNewMin:=Integer.MinValue, iNewMax:=Integer.MaxValue)
