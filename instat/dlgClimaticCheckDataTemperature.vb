@@ -331,6 +331,7 @@ Public Class dlgClimaticCheckDataTemperature
 
         'Outlier limits combined
         clsOutlierCombinedOperator.SetOperation("|")
+        clsOutlierCombinedOperator.bBrackets = False
 
         'Main calculation filter
         clsCalcFilterFunc.SetRCommand("instat_calculation$new")
@@ -409,6 +410,12 @@ Public Class dlgClimaticCheckDataTemperature
         ucrChkIncludeCalculatedColumns.AddAdditionalCodeParameterPair(clsSameCodeElement2.clsSameCalcFunction, New RParameter("save"), iAdditionalPairNo:=3)
 
         ucrChkIncludeCalculatedColumns.AddAdditionalCodeParameterPair(clsQCDifferenceRCode.clsDiffCalcFunction, New RParameter("save"), iAdditionalPairNo:=4)
+
+        ucrChkIncludeCalculatedColumns.AddAdditionalCodeParameterPair(clsOutlierLimitUpperCalc, New RParameter("save"), iAdditionalPairNo:=5)
+        ucrChkIncludeCalculatedColumns.AddAdditionalCodeParameterPair(clsOutlierLimitLowerCalc, New RParameter("save"), iAdditionalPairNo:=6)
+
+        ucrChkIncludeCalculatedColumns.AddAdditionalCodeParameterPair(clsOutlierLimitUpperCalcTmin, New RParameter("save"), iAdditionalPairNo:=7)
+        ucrChkIncludeCalculatedColumns.AddAdditionalCodeParameterPair(clsOutlierLimitLowerCalcTmin, New RParameter("save"), iAdditionalPairNo:=8)
 
         ucrNudJump.AddAdditionalCodeParameterPair(clsJumpCodeElement2.clsGreaterJumpOperator, (New RParameter("n", 1, bNewIncludeArgumentName:=False)))
         ucrNudSame.AddAdditionalCodeParameterPair(clsSameCodeElement2.clsSameGreaterOperator, (New RParameter("n", 1, bNewIncludeArgumentName:=False)))
