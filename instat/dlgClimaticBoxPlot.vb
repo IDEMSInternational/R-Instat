@@ -23,6 +23,7 @@ Public Class dlgClimaticBoxPlot
     Private clsRaesFunction As New RFunction
     Private clsBaseOperator As New ROperator
     Private clsLocalRaesFunction As New RFunction
+    Private clsXTitleFunction As New RFunction
     Private clsLabsFunction As New RFunction
     Private clsXlabsFunction As New RFunction
     Private clsYlabFunction As New RFunction
@@ -32,7 +33,9 @@ Public Class dlgClimaticBoxPlot
     Private clsFacetOp As New ROperator
     Private clsFacetRowOp As New ROperator
     Private clsFacetColOp As New ROperator
+    Private clsThemeParam As New RParameter
     Private clsThemeFunction As New RFunction
+    Private clsThemeFunc As New RFunction
     Private dctThemeFunctions As Dictionary(Of String, RFunction)
     Private bResetSubdialog As Boolean = True
     Private bResetBoxLayerSubdialog As Boolean = True
@@ -73,9 +76,7 @@ Public Class dlgClimaticBoxPlot
     Private Sub InitialiseDialog()
         Dim clsCoordFlipFunc As New RFunction
         Dim clsCoordFlipParam As New RParameter
-        Dim clsThemeFunc As New RFunction
         Dim clsTextElementFunc As New RFunction
-        Dim clsThemeParam As New RParameter
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         'ucrBase.iHelpTopicID = ""
@@ -267,6 +268,11 @@ Public Class dlgClimaticBoxPlot
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
         clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
+
+        clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunc, bIncludeArgumentName:=False)
+
+        clsXlabsFunction.AddParameter("label", Chr(34) & "" & Chr(34), bIncludeArgumentName:=False)
+        clsBaseOperator.AddParameter("xlab", clsRFunctionParameter:=clsXlabsFunction, bIncludeArgumentName:=False)
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorClimaticBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
