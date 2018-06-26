@@ -25,6 +25,7 @@ Public Class ucrButtons
     Public Event ClickOk(sender As Object, e As EventArgs)
     Public Event ClickReset(sender As Object, e As EventArgs)
     Public Event ClickClose(sender As Object, e As EventArgs)
+    Private strCurrLang As String
 
     Public Sub New()
         ' This call is required by the designer.
@@ -199,6 +200,18 @@ Public Class ucrButtons
         If bFirstLoad Then
             SetDefaults()
             bFirstLoad = False
+            If frmMain.clsInstatOptions IsNot Nothing Then
+                strCurrLang = frmMain.clsInstatOptions.strLanguageCultureCode
+            End If
+        End If
+        If frmMain.clsInstatOptions IsNot Nothing Then
+            If frmMain.clsInstatOptions.strLanguageCultureCode <> "en-GB" Then
+                cmdHelp.Width = cmdOk.Width / 2
+                cmdLanguage.Visible = True
+            Else
+                cmdHelp.Width = cmdOk.Width
+                cmdLanguage.Visible = False
+            End If
         End If
     End Sub
 
@@ -239,6 +252,27 @@ Public Class ucrButtons
             Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpTopicID.ToString())
         Else
             Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
+        End If
+    End Sub
+
+    Private Sub cmdLanguage_Click(sender As Object, e As EventArgs) Handles cmdLanguage.Click
+
+        If strCurrLang <> "en-GB" Then
+            strCurrLang = "en-GB"
+        Else
+            strCurrLang = frmMain.clsInstatOptions.strLanguageCultureCode
+        End If
+
+        Try
+            Dim CultureInfo As New Globalization.CultureInfo(strCurrLang)
+            autoTranslate(Me.ParentForm, CultureInfo)
+        Catch ex As Exception
+            autoTranslate(Me.ParentForm)
+        End Try
+        If cmdLanguage.FlatStyle = FlatStyle.Popup Then
+            cmdLanguage.FlatStyle = FlatStyle.Flat
+        Else
+            cmdLanguage.FlatStyle = FlatStyle.Popup
         End If
     End Sub
 End Class
