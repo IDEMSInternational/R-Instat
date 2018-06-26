@@ -236,3 +236,90 @@ Public Class clsQCAcceptableRange
     End Sub
 End Class
 
+Public Class clsQcOutliers
+    Public clsOutlierUpperLimitCalc, clsOutlierLowerLimitCalc As New RFunction
+    Public clsOutlierUpperLimitFunc, clsOutlierLowerLimitFunc As New RFunction
+    Public clsOutlierUpperOperator, clsOutlierLowerOperator As New ROperator
+    Private clsOutlierLowerList As New RFunction
+    Private clsOutlierUpperList As New RFunction
+    Public clsOutlierLowerLimitTestCalc As New RFunction
+    Public clsOutlierUpperLimitTestCalc As New RFunction
+    Public strUpperTestName As String
+    Public strLowerTestName As String
+    Public strUpperCalcName As String
+    Public strLowerCalcName As String
+
+    Public Sub SetDefaults(strElementName As String)
+        Dim strUpper_Outlier_Limit As String = "upper_outlier_limit_" & strElementName
+        Dim strLower_Outlier_Limit As String = "lower_outlier_limit_" & strElementName
+        Dim strOutlierUpperTestCalcName As String = "upper_outlier_limit_test" & strElementName
+        Dim strOutlierLowerTestCalcName As String = "lower_outlier_limit_test" & strElementName
+
+        clsOutlierUpperOperator.Clear()
+        clsOutlierLowerOperator.Clear()
+        clsOutlierUpperList.Clear()
+        clsOutlierLowerList.Clear()
+
+        strUpperCalcName = strUpper_Outlier_Limit
+        strLowerCalcName = strLower_Outlier_Limit
+
+        strUpperTestName = strOutlierUpperTestCalcName
+        strLowerTestName = strOutlierLowerTestCalcName
+
+        clsOutlierUpperLimitCalc.SetRCommand("instat_calculation$new")
+        clsOutlierUpperLimitCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        clsOutlierUpperLimitCalc.AddParameter("function_exp", clsRFunctionParameter:=clsOutlierUpperLimitFunc, iPosition:=1)
+        clsOutlierUpperLimitCalc.AddParameter("result_name", Chr(34) & strUpperCalcName & Chr(34), iPosition:=4)
+        clsOutlierUpperLimitCalc.SetAssignTo("upper_outlier_limit" & strElementName)
+
+        clsOutlierUpperLimitFunc.AddParameter("bupperlimit", "TRUE")
+        clsOutlierUpperLimitFunc.SetRCommand("summary_outlier_limit")
+        clsOutlierUpperLimitFunc.bToScriptAsRString = True
+
+        clsOutlierLowerLimitCalc.SetRCommand("instat_calculation$new")
+        clsOutlierLowerLimitCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        clsOutlierLowerLimitCalc.AddParameter("function_exp", clsRFunctionParameter:=clsOutlierLowerLimitFunc, iPosition:=1)
+        clsOutlierLowerLimitCalc.AddParameter("result_name", Chr(34) & strLowerCalcName & Chr(34), iPosition:=4)
+        clsOutlierLowerLimitCalc.SetAssignTo("lower_outlier_limit" & strElementName)
+
+        clsOutlierLowerLimitFunc.AddParameter("bupperlimit", "FALSE")
+        clsOutlierLowerLimitFunc.SetRCommand("summary_outlier_limit")
+        clsOutlierLowerLimitFunc.bToScriptAsRString = True
+
+        clsOutlierLowerLimitTestCalc.SetRCommand("instat_calculation$new")
+        clsOutlierLowerLimitTestCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        clsOutlierLowerLimitTestCalc.AddParameter("function_exp", clsROperatorParameter:=clsOutlierLowerOperator, iPosition:=1)
+        clsOutlierLowerLimitTestCalc.AddParameter("sub_calculations", clsRFunctionParameter:=clsOutlierLowerList, iPosition:=2)
+        clsOutlierLowerLimitTestCalc.AddParameter("result_name", Chr(34) & strOutlierLowerTestCalcName & Chr(34), iPosition:=4)
+        clsOutlierLowerLimitTestCalc.SetAssignTo("lower_outlier_limit_test_calculation" & strElementName)
+
+        clsOutlierLowerList.SetRCommand("list")
+        clsOutlierLowerList.AddParameter("sub1", clsRFunctionParameter:=clsOutlierLowerLimitCalc, bIncludeArgumentName:=False)
+
+        clsOutlierLowerOperator.SetOperation("<")
+        clsOutlierLowerOperator.bToScriptAsRString = True
+        clsOutlierLowerOperator.AddParameter("right", strLowerCalcName, iPosition:=1)
+
+        clsOutlierUpperLimitTestCalc.SetRCommand("instat_calculation$new")
+        clsOutlierUpperLimitTestCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        clsOutlierUpperLimitTestCalc.AddParameter("function_exp", clsROperatorParameter:=clsOutlierUpperOperator, iPosition:=1)
+        clsOutlierUpperLimitTestCalc.AddParameter("sub_calculations", clsRFunctionParameter:=clsOutlierUpperList, iPosition:=2)
+        clsOutlierUpperLimitTestCalc.AddParameter("result_name", Chr(34) & strOutlierUpperTestCalcName & Chr(34), iPosition:=4)
+        clsOutlierUpperLimitTestCalc.SetAssignTo("upper_outlier_limit_test_calculation" & strElementName)
+
+        clsOutlierUpperOperator.SetOperation(">")
+        clsOutlierUpperOperator.bToScriptAsRString = True
+        clsOutlierUpperOperator.AddParameter("right", strUpperCalcName, iPosition:=1)
+
+        clsOutlierUpperList.SetRCommand("list")
+        clsOutlierUpperList.AddParameter("sub1", clsRFunctionParameter:=clsOutlierUpperLimitCalc, bIncludeArgumentName:=False)
+    End Sub
+
+    Public Sub SetElementParameters(ucrNewControl As ucrCore, iAdditionalPairNo As Integer, iAdditionalPairNo1 As Integer, iAdditionalPairNo2 As Integer, iAdditionalPairNo3 As Integer)
+        ucrNewControl.AddAdditionalCodeParameterPair(clsOutlierUpperLimitFunc, New RParameter("Temp", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=iAdditionalPairNo)
+        ucrNewControl.AddAdditionalCodeParameterPair(clsOutlierLowerLimitFunc, New RParameter("Temp", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=iAdditionalPairNo1)
+        ucrNewControl.AddAdditionalCodeParameterPair(clsOutlierUpperOperator, New RParameter("Temp", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=iAdditionalPairNo2)
+        ucrNewControl.AddAdditionalCodeParameterPair(clsOutlierLowerOperator, New RParameter("Temp", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=iAdditionalPairNo3)
+    End Sub
+End Class
+
