@@ -33,6 +33,7 @@ Public Class dlgReshapeClimaticData
         SetRCodeforControls(bReset)
         bReset = False
         autoTranslate(Me)
+        TestOkEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -133,7 +134,9 @@ Public Class dlgReshapeClimaticData
 
     Private Sub SetDefaults()
         clsGridtoDataFunc = New RFunction
+
         ucrSelectorReshapeClimaticData.Reset()
+        ucrReceiverYear.SetMeAsReceiver()
 
         clsGridtoDataFunc.SetRCommand("grid2data")
         ucrBase.clsRsyntax.SetBaseRFunction(clsGridtoDataFunc)
@@ -144,6 +147,27 @@ Public Class dlgReshapeClimaticData
     End Sub
 
     Private Sub TestOkEnabled()
+        If rdoYear.Checked Then
+            If Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverMonth.IsEmpty AndAlso Not ucrReceiverDayofYear.IsEmpty Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
+        End If
+        If rdoMonth.Checked Then
+            If Not ucrReceiverYearTwo.IsEmpty AndAlso Not ucrReceiverMonthTwo.IsEmpty AndAlso Not ucrReceiverDayofMonth.IsEmpty Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
+        End If
+        If rdoDay.Checked Then
+            If Not ucrReceiverYearThree.IsEmpty AndAlso Not ucrReceiverMonthThree.IsEmpty AndAlso Not ucrReceiverDayofMonthTwo.IsEmpty Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
+        End If
 
     End Sub
 
@@ -155,9 +179,9 @@ Public Class dlgReshapeClimaticData
     End Sub
 
     Private Sub ucrPnlReshapeClimaticData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlReshapeClimaticData.ControlValueChanged
+
         If rdoYear.Checked Then
             clsGridtoDataFunc.AddParameter("year", Chr(34) & "columns" & Chr(34))
-            ucrReceiverYear.GetVariableNamesAsList()
         Else
             'clsGridtoDataFunc.RemoveParameterByName("year")
         End If
@@ -173,4 +197,5 @@ Public Class dlgReshapeClimaticData
             'clsGridtoDataFunc.RemoveParameterByName("day")
         End If
     End Sub
+
 End Class

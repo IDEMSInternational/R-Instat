@@ -373,6 +373,7 @@ Partial Class frmMain
         Me.ColourByPropertyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataDuplicates = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareCheckDataCompareColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataBoxplot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataOneVariableSummarise = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataOneVariableGraph = New System.Windows.Forms.ToolStripMenuItem()
@@ -518,7 +519,10 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
-        Me.mnuPrepareCheckDataCompareColumns = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticReshape = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReshapeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SummariseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReplaceValuesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1329,7 +1333,7 @@ Partial Class frmMain
         '
         'mnuClimatic
         '
-        Me.mnuClimatic.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFile, Me.ToolStripSeparator18, Me.mnuClimaticDates, Me.mnuClimaticDefineClimaticData, Me.mnuClimaticCheckData, Me.mnuClimaticPrepare, Me.mnuClimdex, Me.ToolStripSeparator30, Me.mnuClimaticDescribe, Me.mnuClimaticSPI, Me.mnuClimaticPICSA, Me.mnuCMSAF, Me.ToolStripSeparator16, Me.mnuClimaticModels, Me.mnuClimaticExamine, Me.mnuClimaticProcess, Me.ToolStripSeparator23, Me.mnuClimaticSCF, Me.mnuClimaticEvaporation, Me.mnuClimaticCrop, Me.mnuClimaticHeatSum, Me.mnuClimateMethods})
+        Me.mnuClimatic.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFile, Me.ToolStripSeparator18, Me.mnuClimaticReshape, Me.mnuClimaticDates, Me.mnuClimaticDefineClimaticData, Me.mnuClimaticCheckData, Me.mnuClimaticPrepare, Me.mnuClimdex, Me.ToolStripSeparator30, Me.mnuClimaticDescribe, Me.mnuClimaticSPI, Me.mnuClimaticPICSA, Me.mnuCMSAF, Me.ToolStripSeparator16, Me.mnuClimaticModels, Me.mnuClimaticExamine, Me.mnuClimaticProcess, Me.ToolStripSeparator23, Me.mnuClimaticSCF, Me.mnuClimaticEvaporation, Me.mnuClimaticCrop, Me.mnuClimaticHeatSum, Me.mnuClimateMethods})
         Me.mnuClimatic.Name = "mnuClimatic"
         resources.ApplyResources(Me.mnuClimatic, "mnuClimatic")
         Me.mnuClimatic.Tag = "Climatic"
@@ -2473,6 +2477,11 @@ Partial Class frmMain
         Me.mnuPrepareCheckDataDuplicates.Name = "mnuPrepareCheckDataDuplicates"
         resources.ApplyResources(Me.mnuPrepareCheckDataDuplicates, "mnuPrepareCheckDataDuplicates")
         '
+        'mnuPrepareCheckDataCompareColumns
+        '
+        Me.mnuPrepareCheckDataCompareColumns.Name = "mnuPrepareCheckDataCompareColumns"
+        resources.ApplyResources(Me.mnuPrepareCheckDataCompareColumns, "mnuPrepareCheckDataCompareColumns")
+        '
         'mnuPrepareCheckDataBoxplot
         '
         Me.mnuPrepareCheckDataBoxplot.Name = "mnuPrepareCheckDataBoxplot"
@@ -3337,10 +3346,26 @@ Partial Class frmMain
         resources.ApplyResources(Me.ucrOutput, "ucrOutput")
         Me.ucrOutput.Name = "ucrOutput"
         '
-        'mnuPrepareCheckDataCompareColumns
+        'mnuClimaticReshape
         '
-        Me.mnuPrepareCheckDataCompareColumns.Name = "mnuPrepareCheckDataCompareColumns"
-        resources.ApplyResources(Me.mnuPrepareCheckDataCompareColumns, "mnuPrepareCheckDataCompareColumns")
+        Me.mnuClimaticReshape.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReshapeToolStripMenuItem, Me.SummariseToolStripMenuItem, Me.ReplaceValuesToolStripMenuItem})
+        Me.mnuClimaticReshape.Name = "mnuClimaticReshape"
+        resources.ApplyResources(Me.mnuClimaticReshape, "mnuClimaticReshape")
+        '
+        'ReshapeToolStripMenuItem
+        '
+        Me.ReshapeToolStripMenuItem.Name = "ReshapeToolStripMenuItem"
+        resources.ApplyResources(Me.ReshapeToolStripMenuItem, "ReshapeToolStripMenuItem")
+        '
+        'SummariseToolStripMenuItem
+        '
+        Me.SummariseToolStripMenuItem.Name = "SummariseToolStripMenuItem"
+        resources.ApplyResources(Me.SummariseToolStripMenuItem, "SummariseToolStripMenuItem")
+        '
+        'ReplaceValuesToolStripMenuItem
+        '
+        Me.ReplaceValuesToolStripMenuItem.Name = "ReplaceValuesToolStripMenuItem"
+        resources.ApplyResources(Me.ReplaceValuesToolStripMenuItem, "ReplaceValuesToolStripMenuItem")
         '
         'frmMain
         '
@@ -3866,4 +3891,8 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticPrepareEvapotranspiration As ToolStripMenuItem
     Friend WithEvents mnuClimaticSPI As ToolStripMenuItem
     Friend WithEvents mnuPrepareCheckDataCompareColumns As ToolStripMenuItem
+    Friend WithEvents mnuClimaticReshape As ToolStripMenuItem
+    Friend WithEvents ReshapeToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SummariseToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ReplaceValuesToolStripMenuItem As ToolStripMenuItem
 End Class
