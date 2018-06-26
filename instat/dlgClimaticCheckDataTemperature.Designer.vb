@@ -44,8 +44,8 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.lblNudRangeElement1Max = New System.Windows.Forms.Label()
         Me.lblNudRangeElement2Max = New System.Windows.Forms.Label()
         Me.ttOutliers = New System.Windows.Forms.ToolTip(Me.components)
-        Me.lblNewColumnName = New System.Windows.Forms.Label()
-        Me.ucrInputNewColumnName = New instat.ucrInputTextBox()
+        Me.lblCoeff = New System.Windows.Forms.Label()
+        Me.ucrNudCoeff = New instat.ucrNud()
         Me.ucrChkIncludeLogicalColumns = New instat.ucrCheck()
         Me.ucrChkIncludeCalculatedColumns = New instat.ucrCheck()
         Me.ucrChkRangeElement2 = New instat.ucrCheck()
@@ -71,6 +71,7 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.ucrSelectorTemperature = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlType = New instat.UcrPanel()
+        Me.grpLogicalCalculatedColumns = New System.Windows.Forms.GroupBox()
         Me.SuspendLayout()
         '
         'lblStation
@@ -184,18 +185,20 @@ Partial Class dlgClimaticCheckDataTemperature
         resources.ApplyResources(Me.lblNudRangeElement2Max, "lblNudRangeElement2Max")
         Me.lblNudRangeElement2Max.Name = "lblNudRangeElement2Max"
         '
-        'lblNewColumnName
+        'lblCoeff
         '
-        resources.ApplyResources(Me.lblNewColumnName, "lblNewColumnName")
-        Me.lblNewColumnName.Name = "lblNewColumnName"
+        resources.ApplyResources(Me.lblCoeff, "lblCoeff")
+        Me.lblCoeff.Name = "lblCoeff"
         '
-        'ucrInputNewColumnName
+        'ucrNudCoeff
         '
-        Me.ucrInputNewColumnName.AddQuotesIfUnrecognised = True
-        resources.ApplyResources(Me.ucrInputNewColumnName, "ucrInputNewColumnName")
-        Me.ucrInputNewColumnName.IsMultiline = False
-        Me.ucrInputNewColumnName.IsReadOnly = False
-        Me.ucrInputNewColumnName.Name = "ucrInputNewColumnName"
+        Me.ucrNudCoeff.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCoeff.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudCoeff, "ucrNudCoeff")
+        Me.ucrNudCoeff.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudCoeff.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCoeff.Name = "ucrNudCoeff"
+        Me.ucrNudCoeff.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkIncludeLogicalColumns
         '
@@ -396,12 +399,18 @@ Partial Class dlgClimaticCheckDataTemperature
         resources.ApplyResources(Me.ucrPnlType, "ucrPnlType")
         Me.ucrPnlType.Name = "ucrPnlType"
         '
+        'grpLogicalCalculatedColumns
+        '
+        resources.ApplyResources(Me.grpLogicalCalculatedColumns, "grpLogicalCalculatedColumns")
+        Me.grpLogicalCalculatedColumns.Name = "grpLogicalCalculatedColumns"
+        Me.grpLogicalCalculatedColumns.TabStop = False
+        '
         'dlgClimaticCheckDataTemperature
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.lblNewColumnName)
-        Me.Controls.Add(Me.ucrInputNewColumnName)
+        Me.Controls.Add(Me.lblCoeff)
+        Me.Controls.Add(Me.ucrNudCoeff)
         Me.Controls.Add(Me.ucrChkIncludeLogicalColumns)
         Me.Controls.Add(Me.ucrChkIncludeCalculatedColumns)
         Me.Controls.Add(Me.ucrChkRangeElement2)
@@ -446,6 +455,7 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.Controls.Add(Me.ucrSelectorTemperature)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrPnlType)
+        Me.Controls.Add(Me.grpLogicalCalculatedColumns)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -500,6 +510,7 @@ Partial Class dlgClimaticCheckDataTemperature
     Friend WithEvents ttOutliers As ToolTip
     Friend WithEvents ucrChkIncludeCalculatedColumns As ucrCheck
     Friend WithEvents ucrChkIncludeLogicalColumns As ucrCheck
-    Friend WithEvents lblNewColumnName As Label
-    Friend WithEvents ucrInputNewColumnName As ucrInputTextBox
+    Friend WithEvents ucrNudCoeff As ucrNud
+    Friend WithEvents lblCoeff As Label
+    Friend WithEvents grpLogicalCalculatedColumns As GroupBox
 End Class

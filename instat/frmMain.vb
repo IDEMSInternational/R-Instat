@@ -1312,7 +1312,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticPICSARainfall_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSARainfall.Click
-        dlgPCSARainfall.ShowDialog()
+        dlgPICSARainfall.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticPICSATemperature_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSATemperature.Click
