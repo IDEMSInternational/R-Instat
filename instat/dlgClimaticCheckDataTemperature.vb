@@ -468,28 +468,36 @@ Public Class dlgClimaticCheckDataTemperature
             clsGroupByMonth.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverMonth.GetVariableNames & ")", iPosition:=1)
             If Not ucrReceiverElement1.IsEmpty() Then
                 clsOutliersElement1.clsOutlierUpperLimitCalc.AddParameter("manipulations", clsRFunctionParameter:=clsListForOutlierManipulations, iPosition:=3)
-                'clsOutlierLimitLowerCalcTmax.AddParameter("manipulations", clsRFunctionParameter:=clsListForOutlierManipulations, iPosition:=3)
+                clsOutliersElement1.clsOutlierUpperLimitTestCalc.AddParameter("manipulations", clsRFunctionParameter:=clsListForOutlierManipulations, iPosition:=3)
+                clsOutliersElement1.clsOutlierLowerLimitCalc.AddParameter("manipulations", clsRFunctionParameter:=clsListForOutlierManipulations, iPosition:=3)
+                clsOutliersElement1.clsOutlierLowerLimitTestCalc.AddParameter("manipulations", clsRFunctionParameter:=clsListForOutlierManipulations, iPosition:=3)
             ElseIf ucrReceiverElement1.IsEmpty() Then
                 clsOutliersElement1.clsOutlierUpperLimitCalc.RemoveParameterByName("manipulations")
-                'clsOutlierLimitUpperCalcTmax.RemoveParameterByName("manipulations")
-                'clsOutlierLimitLowerCalcTmax.RemoveParameterByName("manipulations")
+                clsOutliersElement1.clsOutlierUpperLimitTestCalc.RemoveParameterByName("manipulations")
+                clsOutliersElement1.clsOutlierLowerLimitCalc.RemoveParameterByName("manipulations")
+                clsOutliersElement1.clsOutlierLowerLimitTestCalc.RemoveParameterByName("manipulations")
             End If
             If Not ucrReceiverElement2.IsEmpty() Then
                 clsOutliersElement2.clsOutlierUpperLimitCalc.RemoveParameterByName("manipulations")
-                'clsOutlierLimitUpperCalcTmin.AddParameter("manipulations", clsRFunctionParameter:=clsListForOutlierManipulations, iPosition:=3)
-                'clsOutlierLimitLowerCalcTmin.AddParameter("manipulations", clsRFunctionParameter:=clsListForOutlierManipulations, iPosition:=3)
+                clsOutliersElement2.clsOutlierUpperLimitCalc.AddParameter("manipulations", clsRFunctionParameter:=clsListForOutlierManipulations, iPosition:=3)
+                clsOutliersElement2.clsOutlierUpperLimitTestCalc.AddParameter("manipulations", clsRFunctionParameter:=clsListForOutlierManipulations, iPosition:=3)
+                clsOutliersElement2.clsOutlierLowerLimitCalc.AddParameter("manipulations", clsRFunctionParameter:=clsListForOutlierManipulations, iPosition:=3)
+                clsOutliersElement2.clsOutlierLowerLimitTestCalc.AddParameter("manipulations", clsRFunctionParameter:=clsListForOutlierManipulations, iPosition:=3)
             ElseIf ucrReceiverElement2.IsEmpty Then
                 clsOutliersElement2.clsOutlierUpperLimitCalc.RemoveParameterByName("manipulations")
-                'clsOutlierLimitUpperCalcTmin.RemoveParameterByName("manipulations")
-                ' clsOutlierLimitLowerCalcTmin.RemoveParameterByName("manipulations")
+                clsOutliersElement2.clsOutlierUpperLimitTestCalc.RemoveParameterByName("manipulations")
+                clsOutliersElement2.clsOutlierLowerLimitCalc.RemoveParameterByName("manipulations")
+                clsOutliersElement2.clsOutlierLowerLimitTestCalc.RemoveParameterByName("manipulations")
             End If
         Else
             clsOutliersElement1.clsOutlierUpperLimitCalc.RemoveParameterByName("manipulations")
             clsOutliersElement2.clsOutlierUpperLimitCalc.RemoveParameterByName("manipulations")
-            'clsOutlierLimitUpperCalcTmax.RemoveParameterByName("manipulations")
-            'clsOutlierLimitLowerCalcTmax.RemoveParameterByName("manipulations")
-            ' clsOutlierLimitUpperCalcTmin.RemoveParameterByName("manipulations")
-            ' clsOutlierLimitLowerCalcTmin.RemoveParameterByName("manipulations")
+            clsOutliersElement1.clsOutlierUpperLimitTestCalc.RemoveParameterByName("manipulations")
+            clsOutliersElement2.clsOutlierUpperLimitTestCalc.RemoveParameterByName("manipulations")
+            clsOutliersElement1.clsOutlierLowerLimitCalc.RemoveParameterByName("manipulations")
+            clsOutliersElement2.clsOutlierLowerLimitCalc.RemoveParameterByName("manipulations")
+            clsOutliersElement1.clsOutlierLowerLimitTestCalc.RemoveParameterByName("manipulations")
+            clsOutliersElement2.clsOutlierLowerLimitTestCalc.RemoveParameterByName("manipulations")
         End If
     End Sub
 
