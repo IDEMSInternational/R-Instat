@@ -121,6 +121,10 @@
   <data name="lblLinks.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblLinks.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblLinks.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 15</value>
@@ -149,8 +153,11 @@
   <data name="lblSelectedLink.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblSelectedLink.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblSelectedLink.Location" type="System.Drawing.Point, System.Drawing">
-    <value>196, 28</value>
+    <value>254, 28</value>
   </data>
   <data name="lblSelectedLink.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 13</value>
@@ -176,8 +183,11 @@
   <data name="rdoViewLink.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="rdoViewLink.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoViewLink.Location" type="System.Drawing.Point, System.Drawing">
-    <value>194, 74</value>
+    <value>252, 74</value>
   </data>
   <data name="rdoViewLink.Size" type="System.Drawing.Size, System.Drawing">
     <value>71, 17</value>
@@ -203,8 +213,11 @@
   <data name="rdoDeleteLink.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="rdoDeleteLink.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoDeleteLink.Location" type="System.Drawing.Point, System.Drawing">
-    <value>194, 97</value>
+    <value>252, 97</value>
   </data>
   <data name="rdoDeleteLink.Size" type="System.Drawing.Size, System.Drawing">
     <value>79, 17</value>
@@ -234,10 +247,10 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>422, 191</value>
+    <value>440, 261</value>
   </data>
   <data name="ucrPnlLinks.Location" type="System.Drawing.Point, System.Drawing">
-    <value>184, 66</value>
+    <value>242, 66</value>
   </data>
   <data name="ucrPnlLinks.Size" type="System.Drawing.Size, System.Drawing">
     <value>130, 62</value>
@@ -260,12 +273,11 @@
   <data name="ucrSelectorLinks.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 30</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrSelectorLinks.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrSelectorLinks.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 98</value>
+    <value>136, 117</value>
   </data>
   <data name="ucrSelectorLinks.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -283,7 +295,7 @@
     <value>4</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 134</value>
+    <value>15, 203</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 52</value>
@@ -303,6 +315,9 @@
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -316,7 +331,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverViewLinks.Location" type="System.Drawing.Point, System.Drawing">
-    <value>194, 43</value>
+    <value>252, 43</value>
   </data>
   <data name="ucrReceiverViewLinks.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
