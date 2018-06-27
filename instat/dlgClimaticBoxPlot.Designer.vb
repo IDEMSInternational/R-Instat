@@ -33,16 +33,8 @@ Partial Class dlgClimaticBoxPlot
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblStation = New System.Windows.Forms.Label()
-        Me.ucrChkOmitBelow = New instat.ucrCheck()
-        Me.ucrNudOmitBelow = New instat.ucrNud()
         Me.ucrInputWithinYear = New instat.ucrInputComboBox()
         Me.ucrInputYear = New instat.ucrInputComboBox()
-        Me.ucrInputStation = New instat.ucrInputComboBox()
-        Me.ucrReceiverWithinYear = New instat.ucrReceiverSingle()
-        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
-        Me.ucrReceiverYear = New instat.ucrReceiverSingle()
-        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
-        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrChkVerticalXTickMarkers = New instat.ucrCheck()
         Me.ucrPnlPlots = New instat.UcrPanel()
         Me.ucrBase = New instat.ucrButtons()
@@ -50,6 +42,14 @@ Partial Class dlgClimaticBoxPlot
         Me.ucrChkHorizontalBoxplot = New instat.ucrCheck()
         Me.ucrChkVarWidth = New instat.ucrCheck()
         Me.ucrSelectorClimaticBoxPlot = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrChkOmitBelow = New instat.ucrCheck()
+        Me.ucrNudOmitBelow = New instat.ucrNud()
+        Me.ucrInputStation = New instat.ucrInputComboBox()
+        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
+        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
+        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
+        Me.ucrReceiverYear = New instat.ucrReceiverSingle()
+        Me.ucrReceiverWithinYear = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
         'cmdBoxPlotOptions
@@ -121,22 +121,6 @@ Partial Class dlgClimaticBoxPlot
         resources.ApplyResources(Me.lblStation, "lblStation")
         Me.lblStation.Name = "lblStation"
         '
-        'ucrChkOmitBelow
-        '
-        Me.ucrChkOmitBelow.Checked = False
-        resources.ApplyResources(Me.ucrChkOmitBelow, "ucrChkOmitBelow")
-        Me.ucrChkOmitBelow.Name = "ucrChkOmitBelow"
-        '
-        'ucrNudOmitBelow
-        '
-        Me.ucrNudOmitBelow.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudOmitBelow.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudOmitBelow, "ucrNudOmitBelow")
-        Me.ucrNudOmitBelow.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudOmitBelow.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudOmitBelow.Name = "ucrNudOmitBelow"
-        Me.ucrNudOmitBelow.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'ucrInputWithinYear
         '
         Me.ucrInputWithinYear.AddQuotesIfUnrecognised = True
@@ -150,58 +134,6 @@ Partial Class dlgClimaticBoxPlot
         Me.ucrInputYear.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputYear, "ucrInputYear")
         Me.ucrInputYear.Name = "ucrInputYear"
-        '
-        'ucrInputStation
-        '
-        Me.ucrInputStation.AddQuotesIfUnrecognised = True
-        Me.ucrInputStation.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputStation, "ucrInputStation")
-        Me.ucrInputStation.Name = "ucrInputStation"
-        '
-        'ucrReceiverWithinYear
-        '
-        Me.ucrReceiverWithinYear.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverWithinYear, "ucrReceiverWithinYear")
-        Me.ucrReceiverWithinYear.Name = "ucrReceiverWithinYear"
-        Me.ucrReceiverWithinYear.Selector = Nothing
-        Me.ucrReceiverWithinYear.strNcFilePath = ""
-        Me.ucrReceiverWithinYear.ucrSelector = Nothing
-        '
-        'ucrReceiverElement
-        '
-        Me.ucrReceiverElement.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverElement, "ucrReceiverElement")
-        Me.ucrReceiverElement.Name = "ucrReceiverElement"
-        Me.ucrReceiverElement.Selector = Nothing
-        Me.ucrReceiverElement.strNcFilePath = ""
-        Me.ucrReceiverElement.ucrSelector = Nothing
-        '
-        'ucrReceiverYear
-        '
-        Me.ucrReceiverYear.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverYear, "ucrReceiverYear")
-        Me.ucrReceiverYear.Name = "ucrReceiverYear"
-        Me.ucrReceiverYear.Selector = Nothing
-        Me.ucrReceiverYear.strNcFilePath = ""
-        Me.ucrReceiverYear.ucrSelector = Nothing
-        '
-        'ucrReceiverDate
-        '
-        Me.ucrReceiverDate.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverDate, "ucrReceiverDate")
-        Me.ucrReceiverDate.Name = "ucrReceiverDate"
-        Me.ucrReceiverDate.Selector = Nothing
-        Me.ucrReceiverDate.strNcFilePath = ""
-        Me.ucrReceiverDate.ucrSelector = Nothing
-        '
-        'ucrReceiverStation
-        '
-        Me.ucrReceiverStation.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverStation, "ucrReceiverStation")
-        Me.ucrReceiverStation.Name = "ucrReceiverStation"
-        Me.ucrReceiverStation.Selector = Nothing
-        Me.ucrReceiverStation.strNcFilePath = ""
-        Me.ucrReceiverStation.ucrSelector = Nothing
         '
         'ucrChkVerticalXTickMarkers
         '
@@ -238,31 +170,99 @@ Partial Class dlgClimaticBoxPlot
         '
         'ucrSelectorClimaticBoxPlot
         '
-        'Me.ucrSelectorClimaticBoxPlot.bDropUnusedFilterLevels = False
+        Me.ucrSelectorClimaticBoxPlot.bDropUnusedFilterLevels = False
         Me.ucrSelectorClimaticBoxPlot.bShowHiddenColumns = False
         Me.ucrSelectorClimaticBoxPlot.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorClimaticBoxPlot, "ucrSelectorClimaticBoxPlot")
         Me.ucrSelectorClimaticBoxPlot.Name = "ucrSelectorClimaticBoxPlot"
         '
+        'ucrChkOmitBelow
+        '
+        Me.ucrChkOmitBelow.Checked = False
+        resources.ApplyResources(Me.ucrChkOmitBelow, "ucrChkOmitBelow")
+        Me.ucrChkOmitBelow.Name = "ucrChkOmitBelow"
+        '
+        'ucrNudOmitBelow
+        '
+        Me.ucrNudOmitBelow.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudOmitBelow.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudOmitBelow, "ucrNudOmitBelow")
+        Me.ucrNudOmitBelow.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudOmitBelow.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudOmitBelow.Name = "ucrNudOmitBelow"
+        Me.ucrNudOmitBelow.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputStation
+        '
+        Me.ucrInputStation.AddQuotesIfUnrecognised = True
+        Me.ucrInputStation.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputStation, "ucrInputStation")
+        Me.ucrInputStation.Name = "ucrInputStation"
+        '
+        'ucrReceiverElement
+        '
+        Me.ucrReceiverElement.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverElement, "ucrReceiverElement")
+        Me.ucrReceiverElement.Name = "ucrReceiverElement"
+        Me.ucrReceiverElement.Selector = Nothing
+        Me.ucrReceiverElement.strNcFilePath = ""
+        Me.ucrReceiverElement.ucrSelector = Nothing
+        '
+        'ucrReceiverStation
+        '
+        Me.ucrReceiverStation.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverStation, "ucrReceiverStation")
+        Me.ucrReceiverStation.Name = "ucrReceiverStation"
+        Me.ucrReceiverStation.Selector = Nothing
+        Me.ucrReceiverStation.strNcFilePath = ""
+        Me.ucrReceiverStation.ucrSelector = Nothing
+        '
+        'ucrReceiverDate
+        '
+        Me.ucrReceiverDate.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverDate, "ucrReceiverDate")
+        Me.ucrReceiverDate.Name = "ucrReceiverDate"
+        Me.ucrReceiverDate.Selector = Nothing
+        Me.ucrReceiverDate.strNcFilePath = ""
+        Me.ucrReceiverDate.ucrSelector = Nothing
+        '
+        'ucrReceiverYear
+        '
+        Me.ucrReceiverYear.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverYear, "ucrReceiverYear")
+        Me.ucrReceiverYear.Name = "ucrReceiverYear"
+        Me.ucrReceiverYear.Selector = Nothing
+        Me.ucrReceiverYear.strNcFilePath = ""
+        Me.ucrReceiverYear.ucrSelector = Nothing
+        '
+        'ucrReceiverWithinYear
+        '
+        Me.ucrReceiverWithinYear.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverWithinYear, "ucrReceiverWithinYear")
+        Me.ucrReceiverWithinYear.Name = "ucrReceiverWithinYear"
+        Me.ucrReceiverWithinYear.Selector = Nothing
+        Me.ucrReceiverWithinYear.strNcFilePath = ""
+        Me.ucrReceiverWithinYear.ucrSelector = Nothing
+        '
         'dlgClimaticBoxPlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrReceiverWithinYear)
+        Me.Controls.Add(Me.ucrReceiverYear)
+        Me.Controls.Add(Me.ucrReceiverDate)
+        Me.Controls.Add(Me.ucrReceiverStation)
+        Me.Controls.Add(Me.ucrReceiverElement)
         Me.Controls.Add(Me.ucrChkOmitBelow)
         Me.Controls.Add(Me.ucrNudOmitBelow)
         Me.Controls.Add(Me.ucrInputWithinYear)
         Me.Controls.Add(Me.ucrInputYear)
         Me.Controls.Add(Me.ucrInputStation)
-        Me.Controls.Add(Me.ucrReceiverWithinYear)
         Me.Controls.Add(Me.lblWithinYear)
         Me.Controls.Add(Me.lblElement)
         Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.lblStation)
-        Me.Controls.Add(Me.ucrReceiverElement)
-        Me.Controls.Add(Me.ucrReceiverYear)
-        Me.Controls.Add(Me.ucrReceiverDate)
-        Me.Controls.Add(Me.ucrReceiverStation)
         Me.Controls.Add(Me.ucrChkVerticalXTickMarkers)
         Me.Controls.Add(Me.rdoViolin)
         Me.Controls.Add(Me.rdoJitter)
@@ -295,19 +295,19 @@ Partial Class dlgClimaticBoxPlot
     Friend WithEvents rdoBoxplot As RadioButton
     Friend WithEvents ucrPnlPlots As UcrPanel
     Friend WithEvents ucrChkVerticalXTickMarkers As ucrCheck
-    Friend WithEvents ucrReceiverWithinYear As ucrReceiverSingle
     Friend WithEvents lblWithinYear As Label
     Friend WithEvents lblElement As Label
     Friend WithEvents lblYear As Label
     Friend WithEvents lblDate As Label
     Friend WithEvents lblStation As Label
+    Friend WithEvents ucrInputWithinYear As ucrInputComboBox
+    Friend WithEvents ucrInputYear As ucrInputComboBox
+    Friend WithEvents ucrChkOmitBelow As ucrCheck
+    Friend WithEvents ucrNudOmitBelow As ucrNud
+    Friend WithEvents ucrInputStation As ucrInputComboBox
     Friend WithEvents ucrReceiverElement As ucrReceiverSingle
+    Friend WithEvents ucrReceiverWithinYear As ucrReceiverSingle
     Friend WithEvents ucrReceiverYear As ucrReceiverSingle
     Friend WithEvents ucrReceiverDate As ucrReceiverSingle
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
-    Friend WithEvents ucrInputWithinYear As ucrInputComboBox
-    Friend WithEvents ucrInputYear As ucrInputComboBox
-    Friend WithEvents ucrInputStation As ucrInputComboBox
-    Friend WithEvents ucrChkOmitBelow As ucrCheck
-    Friend WithEvents ucrNudOmitBelow As ucrNud
 End Class
