@@ -374,6 +374,7 @@ Public Class dlgClimaticCheckDataRain
         ucrChkWetDays.AddAdditionalCodeParameterPair(clsListSubCalc, New RParameter("wet_days", strParamValue:=clsCumulativeTestFunc, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrChkOutlier.AddAdditionalCodeParameterPair(clsListSubCalc, New RParameter("outlier", strParamValue:=clsOutlierlimitTestFunc, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrChkCalculatedColumns.AddAdditionalCodeParameterPair(clsCumulativeCalcFunc, New RParameter("save"), iAdditionalPairNo:=1)
+        ucrChkCalculatedColumns.AddAdditionalCodeParameterPair(clsOutlierLimitValueCalcFunc, New RParameter("save"), iAdditionalPairNo:=2)
 
         ucrChkLogicalColumns.AddAdditionalCodeParameterPair(clsSameTestFunc, New RParameter("save"), iAdditionalPairNo:=1)
         ucrChkLogicalColumns.AddAdditionalCodeParameterPair(clsCumulativeTestFunc, New RParameter("save"), iAdditionalPairNo:=2)
