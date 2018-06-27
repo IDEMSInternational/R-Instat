@@ -122,7 +122,7 @@ Public Class dlgClimaticCheckDataRain
         ucrChkOutlier.SetParameter(New RParameter("outlier.limit", strUpperOutlierTest, 1), bNewChangeParameterValue:=False)
         ucrChkOutlier.SetText("Outlier")
 
-        ucrNudCoeff.SetParameter(New RParameter("coeff", 1))
+        ucrNudCoeff.SetParameter(New RParameter("coef", 1))
         ucrNudCoeff.DecimalPlaces = 1
         ucrNudCoeff.Increment = 0.1
         ucrNudCoeff.SetRDefault("1.5")
