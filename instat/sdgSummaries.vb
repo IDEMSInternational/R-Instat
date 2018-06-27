@@ -199,8 +199,8 @@ Public Class sdgSummaries
         ucrChkIncludeMissingOpt.SetText("Inlcude Missing Options")
 
         ucrPnlMissingOptions.SetParameter(New RParameter("na_type", 9))
-        ucrPnlMissingOptions.AddRadioButton(rdoNumber, Chr(34) & "n" & Chr(34))
-        ucrPnlMissingOptions.AddRadioButton(rdoPercentage, Chr(34) & "prop" & Chr(34))
+        ucrPnlMissingOptions.AddRadioButton(rdoNumber, Chr(34) & "'n'" & Chr(34))
+        ucrPnlMissingOptions.AddRadioButton(rdoPercentage, Chr(34) & "'prop'" & Chr(34))
 
         ucrNudPercentage.SetParameter(New RParameter("na_max_prop", 10))
 
