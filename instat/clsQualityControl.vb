@@ -272,8 +272,8 @@ Public Class clsQcOutliers
         clsOutlierUpperLimitCalc.AddParameter("result_name", Chr(34) & strUpperCalcName & Chr(34), iPosition:=4)
         clsOutlierUpperLimitCalc.SetAssignTo("upper_outlier_limit" & strElementName)
 
-        clsOutlierUpperLimitFunc.AddParameter("bupperlimit", "TRUE")
         clsOutlierUpperLimitFunc.SetRCommand("summary_outlier_limit")
+        clsOutlierUpperLimitFunc.AddParameter("bupperlimit", "TRUE")
         clsOutlierUpperLimitFunc.bToScriptAsRString = True
 
         clsOutlierLowerLimitCalc.SetRCommand("instat_calculation$new")
@@ -282,8 +282,8 @@ Public Class clsQcOutliers
         clsOutlierLowerLimitCalc.AddParameter("result_name", Chr(34) & strLowerCalcName & Chr(34), iPosition:=4)
         clsOutlierLowerLimitCalc.SetAssignTo("lower_outlier_limit" & strElementName)
 
-        clsOutlierLowerLimitFunc.AddParameter("bupperlimit", "FALSE")
         clsOutlierLowerLimitFunc.SetRCommand("summary_outlier_limit")
+        clsOutlierLowerLimitFunc.AddParameter("bupperlimit", "FALSE")
         clsOutlierLowerLimitFunc.bToScriptAsRString = True
 
         clsOutlierLowerLimitTestCalc.SetRCommand("instat_calculation$new")
