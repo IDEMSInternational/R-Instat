@@ -147,7 +147,7 @@ Public Class dlgClimaticCheckDataTemperature
         ucrChkOutlier.SetParameter(New RParameter("Combined_outlier", clsOutlierCombinedOperator, 1), bNewChangeParameterValue:=False)
         ucrChkOutlier.SetText("Outlier")
 
-        ucrNudCoeff.SetParameter(New RParameter("coeff"))
+        ucrNudCoeff.SetParameter(New RParameter("coef"))
         ucrNudCoeff.DecimalPlaces = 1
         ucrNudCoeff.Increment = 0.1
 
@@ -316,10 +316,10 @@ Public Class dlgClimaticCheckDataTemperature
         ucrChkSame.AddAdditionalCodeParameterPair(clsListSubCalc, New RParameter("same", strParamValue:=clsSameListSubCalc, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrChkDifference.AddAdditionalCodeParameterPair(clsListSubCalc, New RParameter("diff", strParamValue:=clsQCDifferenceRCode.clsDiffTestFunction, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
 
-        ucrNudCoeff.AddAdditionalCodeParameterPair(clsOutliersElement1.clsOutlierLowerLimitFunc, New RParameter("coeff"), iAdditionalPairNo:=1)
-        ucrNudCoeff.AddAdditionalCodeParameterPair(clsOutliersElement2.clsOutlierLowerLimitFunc, New RParameter("coeff"), iAdditionalPairNo:=2)
-        ucrNudCoeff.AddAdditionalCodeParameterPair(clsOutliersElement1.clsOutlierUpperLimitFunc, New RParameter("coeff"), iAdditionalPairNo:=3)
-        ucrNudCoeff.AddAdditionalCodeParameterPair(clsOutliersElement2.clsOutlierUpperLimitFunc, New RParameter("coeff"), iAdditionalPairNo:=3)
+        ucrNudCoeff.AddAdditionalCodeParameterPair(clsOutliersElement1.clsOutlierLowerLimitFunc, New RParameter("coef"), iAdditionalPairNo:=1)
+        ucrNudCoeff.AddAdditionalCodeParameterPair(clsOutliersElement2.clsOutlierLowerLimitFunc, New RParameter("coef"), iAdditionalPairNo:=2)
+        ucrNudCoeff.AddAdditionalCodeParameterPair(clsOutliersElement1.clsOutlierUpperLimitFunc, New RParameter("coef"), iAdditionalPairNo:=3)
+        ucrNudCoeff.AddAdditionalCodeParameterPair(clsOutliersElement2.clsOutlierUpperLimitFunc, New RParameter("coef"), iAdditionalPairNo:=3)
 
         ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsJumpCodeElement1.clsJumpTestFunction, New RParameter("save"), iAdditionalPairNo:=1)
         ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsJumpCodeElement2.clsJumpTestFunction, New RParameter("save"), iAdditionalPairNo:=2)
