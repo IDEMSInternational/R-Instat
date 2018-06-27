@@ -71,6 +71,8 @@ Public Class dlgClimaticBoxPlot
         bReset = False
         autoTranslate(Me)
         TestOKEnabled()
+
+        SetOptionsButtonstext()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -308,6 +310,7 @@ Public Class dlgClimaticBoxPlot
         SetDefaults()
         SetRCodeForControls(True)
         AutoFill()
+        UpdateParameters()
         TestOKEnabled()
     End Sub
 
@@ -324,25 +327,33 @@ Public Class dlgClimaticBoxPlot
     Private Sub ucrPnlPlots_ControlValueChanged() Handles ucrPnlPlots.ControlValueChanged
         If rdoBoxplot.Checked Then
             clsRgeomPlotFunction.SetRCommand("geom_boxplot")
-            cmdBoxPlotOptions.Text = "Boxplot Options"
             If Not ucrSavePlot.bUserTyped Then
                 ucrSavePlot.SetPrefix("boxplot")
             End If
         ElseIf rdoJitter.Checked Then
             clsRgeomPlotFunction.SetRCommand("geom_jitter")
-            cmdBoxPlotOptions.Text = "Jitter Options"
             If Not ucrSavePlot.bUserTyped Then
                 ucrSavePlot.SetPrefix("jitter")
             End If
         Else
             clsRgeomPlotFunction.SetRCommand("geom_violin")
-            cmdBoxPlotOptions.Text = "Violin Options"
             If Not ucrSavePlot.bUserTyped Then
                 ucrSavePlot.SetPrefix("violin")
             End If
         End If
         UpdateParameters()
         AddRemoveFacets()
+        SetOptionsButtonstext()
+    End Sub
+
+    Private Sub SetOptionsButtonstext()
+        If rdoBoxplot.Checked Then
+            cmdBoxPlotOptions.Text = "Boxplot Options"
+        ElseIf rdoJitter.Checked Then
+            cmdBoxPlotOptions.Text = "Jitter Options"
+        Else
+            cmdBoxPlotOptions.Text = "Violin Options"
+        End If
     End Sub
 
     Private Sub cmdBoxPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdBoxPlotOptions.Click

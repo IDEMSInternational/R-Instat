@@ -264,7 +264,6 @@ Public Class dlgBoxplot
             ucrSaveBoxplot.SetPrefix("boxplot")
             ucrSecondFactorReceiver.ChangeParameterName("fill")
 
-            SetOptionsButtonText()
 
         ElseIf rdoJitter.Checked Then
             clsRgeomPlotFunction.SetRCommand("geom_jitter")
@@ -274,7 +273,6 @@ Public Class dlgBoxplot
             ucrSaveBoxplot.SetPrefix("jitter")
             ucrSecondFactorReceiver.ChangeParameterName("colour")
 
-            SetOptionsButtonText()
 
         Else
             clsRgeomPlotFunction.SetRCommand("geom_violin")
@@ -295,22 +293,9 @@ Public Class dlgBoxplot
             cmdBoxPlotOptions.Text = "Jitter Options"
         Else
             cmdBoxPlotOptions.Text = "Violin Options"
-
-            SetOptionsButtonText()
-
         End If
     End Sub
 
-
-    Private Sub SetOptionsButtonText()
-        If rdoBoxplot.Checked Then
-            cmdBoxPlotOptions.Text = "Boxplot Options"
-        ElseIf rdoJitter.Checked Then
-            cmdBoxPlotOptions.Text = "Jitter Options"
-        Else
-            cmdBoxPlotOptions.Text = "Violin Options"
-        End If
-    End Sub
     Private Sub TempOptionsDisabledInMultipleVariablesCase()
         If ucrVariablesAsFactorForBoxplot.bSingleVariable Then
             cmdBoxPlotOptions.Enabled = True
