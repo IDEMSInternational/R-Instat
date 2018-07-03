@@ -448,17 +448,26 @@ summary_mean <- function (x, add_cols, weights="", na.rm = FALSE, trim = 0, na_t
   }
 }
 
-summary_trimmed_mean <- function (x, add_cols, weights="", na.rm = FALSE, trimmed = 0,...) {
+summary_trimmed_mean <- function (x, add_cols, weights="", na.rm = FALSE, trimmed = 0, na_type = "", ...) {
   if( length(x)==0 || (na.rm && length(x[!is.na(x)])==0) ) return(NA)
+  else {
+    if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else return(mean(x, na.rm = na.rm, trim = trimmed))
+  }
 }
 
-summary_sum <- function (x, na.rm = FALSE,...) {
-  return(sum(x, na.rm = na.rm))
+summary_sum <- function (x, na.rm = FALSE, na_type = "",...) {
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    return(sum(x, na.rm = na.rm))
+  }
 }
 
 summary_count <- function(x,...) {
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
   return(length(x))
+  }
 }
 
 summary_count_missing <- function(x,...) {
