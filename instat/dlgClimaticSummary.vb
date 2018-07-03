@@ -86,14 +86,6 @@ Public Class dlgClimaticSummary
         ucrReceiverWithinYear.Selector = ucrSelectorVariable
         ucrReceiverWithinYear.SetDataType("factor")
 
-        ' summary
-        ucrReceiverElement.SetParameter(New RParameter("columns_to_summarise", 0))
-        ucrReceiverElement.SetParameterIsString()
-        ucrReceiverElement.strSelectorHeading = "Variables"
-        ucrReceiverElement.Selector = ucrSelectorVariable
-        ucrReceiverElement.SetIncludedDataTypes({"numeric"})
-        ucrReceiverElement.bAutoFill = True
-
         ' others
         ucrReceiverDate.SetParameter(New RParameter("date", 1))
         ucrReceiverDate.SetParameterIsString()
@@ -109,6 +101,14 @@ Public Class dlgClimaticSummary
         ucrReceiverDOY.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "doy" & Chr(34)})
         ucrReceiverDOY.bAutoFill = True
         ucrReceiverDOY.strSelectorHeading = "Day Variables"
+
+        ' summary
+        ucrReceiverElement.SetParameter(New RParameter("columns_to_summarise", 0))
+        ucrReceiverElement.SetParameterIsString()
+        ucrReceiverElement.strSelectorHeading = "Variables"
+        ucrReceiverElement.Selector = ucrSelectorVariable
+        ucrReceiverElement.SetIncludedDataTypes({"numeric"})
+        ucrReceiverElement.bAutoFill = True
 
         ' Other checkbox options
         ucrChkStoreResults.SetParameter(New RParameter("store_results", 3))
@@ -158,7 +158,7 @@ Public Class dlgClimaticSummary
 
         bResetSubdialog = True
         ucrSelectorVariable.Reset()
-        ucrReceiverStation.SetMeAsReceiver()
+        ucrReceiverElement.SetMeAsReceiver()
 
         'TODO: this changes to from >= receiver and to <= receiver if annual-variable is checekd.
         clsFromAndToConditionOperator.bToScriptAsRString = True
@@ -168,6 +168,7 @@ Public Class dlgClimaticSummary
         clsDayFilterCalc.AddParameter("calculated_from", clsRFunctionParameter:=clsDayFilterCalcFromConvert, iPosition:=2)
 
         clsFromAndToConditionOperator.SetOperation("&")
+        clsFromAndToConditionOperator.bBrackets = False
         clsFromAndToConditionOperator.AddParameter("from", clsROperatorParameter:=clsFromConditionOperator, iPosition:=0)
         clsFromConditionOperator.SetOperation(">=") ' doy = DOYreceiver in position 0. This is always the case
         clsFromConditionOperator.AddParameter("from", 1, iPosition:=1)
@@ -192,7 +193,6 @@ Public Class dlgClimaticSummary
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
         bResetSubdialog = True
-        ReceiverFocus()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -214,7 +214,7 @@ Public Class dlgClimaticSummary
 
     'TODO: run these things at the correct times
     Public Sub TestOKEnabled()
-        If Not clsSummariesList.clsParameters.Count = 0 AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElement.IsEmpty Then
+        If Not clsSummariesList.clsParameters.Count = 0 AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElement.IsEmpty AndAlso sdgSummaries.bOkEnabled Then
             If rdoAnnual.Checked Then
                 If Not ucrReceiverDOY.IsEmpty AndAlso (Not ucrReceiverYear.IsEmpty OrElse Not ucrReceiverStation.IsEmpty) Then
                     ucrBase.OKEnabled(True)
@@ -236,12 +236,6 @@ Public Class dlgClimaticSummary
             End If
         Else
             ucrBase.OKEnabled(False)
-        End If
-    End Sub
-
-    Private Sub ReceiverFocus()
-        If rdoAnnual.Checked Then
-            ucrReceiverStation.SetMeAsReceiver()
         End If
     End Sub
 
@@ -284,7 +278,6 @@ Public Class dlgClimaticSummary
     End Sub
 
     Private Sub ucrPnlAnnualWithin_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlAnnualWithin.ControlValueChanged
-        ReceiverFocus()
         WithinYearLabelReceiverLocation()
     End Sub
 

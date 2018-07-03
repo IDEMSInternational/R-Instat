@@ -353,13 +353,6 @@ Public Class ucrReceiverMultiple
         lstSelectedVariables.Enabled = Not bFixreceiver
     End Sub
 
-    Public Sub AddItemsWithMetadataProperty(strCurrentDataFrame As String, strProperty As String, strValues As String())
-        If Selector IsNot Nothing Then
-            SetMeAsReceiver()
-            frmMain.clsRLink.SelectColumnsWithMetadataProperty(Me, strCurrentDataFrame, strProperty, strValues)
-        End If
-    End Sub
-
     Public Function GetCurrentItemTypes(Optional bUnique As Boolean = False) As List(Of String)
         Dim clsGetDataType As New RFunction
         Dim strDataTypes As New List(Of String)
