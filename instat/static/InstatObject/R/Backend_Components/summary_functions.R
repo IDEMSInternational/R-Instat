@@ -463,7 +463,7 @@ summary_sum <- function (x, na.rm = FALSE, na_type = "",...) {
   }
 }
 
-summary_count <- function(x,...) {
+summary_count <- function(x, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
   return(length(x))
