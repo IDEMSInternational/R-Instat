@@ -21,6 +21,7 @@ Public Class dlgDefineOptionsByContext
     Private bReset As Boolean = True
     Private clsDefineOptionsByContext As RFunction
     Private clsTypes As RFunction
+    Private bDefaultsSet As Boolean = True
 
     Private Sub dlgDefineOptionsByContext_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -33,6 +34,7 @@ Public Class dlgDefineOptionsByContext
         SetRCodeforControls(bReset)
         bReset = False
         autoTranslate(Me)
+        TestOkEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -113,6 +115,7 @@ Public Class dlgDefineOptionsByContext
     End Sub
 
     Private Sub SetDefaults()
+        bDefaultsSet = False
         clsDefineOptionsByContext = New RFunction
         clsTypes = New RFunction
 
@@ -124,6 +127,7 @@ Public Class dlgDefineOptionsByContext
         clsDefineOptionsByContext.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$define_as_options_by_context")
         clsDefineOptionsByContext.AddParameter("obyc_types", clsRFunctionParameter:=clsTypes, iPosition:=1)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefineOptionsByContext)
+        bDefaultsSet = True
     End Sub
 
     Private Sub SetRCodeforControls(bResetControls As Boolean)
@@ -135,6 +139,7 @@ Public Class dlgDefineOptionsByContext
         ucrReceiverContext2.SetRCode(clsTypes, bResetControls)
         ucrReceiverContext3.SetRCode(clsTypes, bResetControls)
         ucrReceiverContext4.SetRCode(clsTypes, bResetControls)
+        ucrReceiverContextOther.SetRCode(clsTypes, bResetControls)
         ucrReceiverMeasurement1.SetRCode(clsTypes, bResetControls)
         ucrReceiverMeasurementOther.SetRCode(clsTypes, bResetControls)
         ucrReceiverID1.SetRCode(clsTypes, bResetControls)

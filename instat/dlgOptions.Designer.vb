@@ -108,9 +108,10 @@ Partial Class dlgOptions
         Me.rdoDisplayinRViewer = New System.Windows.Forms.RadioButton()
         Me.rdoDisplayinOutputWindow = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGraphDisplay = New instat.UcrPanel()
-        Me.tbpSpecialMenus = New System.Windows.Forms.TabPage()
+        Me.tbpTailoredMenus = New System.Windows.Forms.TabPage()
         Me.ucrChkViewProcurementMenu = New instat.ucrCheck()
         Me.ucrChkViewClimaticMenu = New instat.ucrCheck()
+        Me.ucrChkViewOptionsByContextMenu = New instat.ucrCheck()
         CType(Me.spltControls, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.spltControls.Panel1.SuspendLayout()
         Me.spltControls.Panel2.SuspendLayout()
@@ -132,7 +133,7 @@ Partial Class dlgOptions
         Me.tbpDataView.SuspendLayout()
         Me.tbpWorkingDirectory.SuspendLayout()
         Me.tbpGraphDisplay.SuspendLayout()
-        Me.tbpSpecialMenus.SuspendLayout()
+        Me.tbpTailoredMenus.SuspendLayout()
         Me.SuspendLayout()
         '
         'cmdApply
@@ -201,7 +202,7 @@ Partial Class dlgOptions
         Me.tbcOptions.Controls.Add(Me.tbpDataView)
         Me.tbcOptions.Controls.Add(Me.tbpWorkingDirectory)
         Me.tbcOptions.Controls.Add(Me.tbpGraphDisplay)
-        Me.tbcOptions.Controls.Add(Me.tbpSpecialMenus)
+        Me.tbcOptions.Controls.Add(Me.tbpTailoredMenus)
         resources.ApplyResources(Me.tbcOptions, "tbcOptions")
         Me.tbcOptions.Name = "tbcOptions"
         Me.tbcOptions.SelectedIndex = 0
@@ -641,13 +642,14 @@ Partial Class dlgOptions
         resources.ApplyResources(Me.ucrPnlGraphDisplay, "ucrPnlGraphDisplay")
         Me.ucrPnlGraphDisplay.Name = "ucrPnlGraphDisplay"
         '
-        'tbpSpecialMenus
+        'tbpTailoredMenus
         '
-        Me.tbpSpecialMenus.Controls.Add(Me.ucrChkViewProcurementMenu)
-        Me.tbpSpecialMenus.Controls.Add(Me.ucrChkViewClimaticMenu)
-        resources.ApplyResources(Me.tbpSpecialMenus, "tbpSpecialMenus")
-        Me.tbpSpecialMenus.Name = "tbpSpecialMenus"
-        Me.tbpSpecialMenus.UseVisualStyleBackColor = True
+        Me.tbpTailoredMenus.Controls.Add(Me.ucrChkViewOptionsByContextMenu)
+        Me.tbpTailoredMenus.Controls.Add(Me.ucrChkViewProcurementMenu)
+        Me.tbpTailoredMenus.Controls.Add(Me.ucrChkViewClimaticMenu)
+        resources.ApplyResources(Me.tbpTailoredMenus, "tbpTailoredMenus")
+        Me.tbpTailoredMenus.Name = "tbpTailoredMenus"
+        Me.tbpTailoredMenus.UseVisualStyleBackColor = True
         '
         'ucrChkViewProcurementMenu
         '
@@ -660,6 +662,12 @@ Partial Class dlgOptions
         Me.ucrChkViewClimaticMenu.Checked = False
         resources.ApplyResources(Me.ucrChkViewClimaticMenu, "ucrChkViewClimaticMenu")
         Me.ucrChkViewClimaticMenu.Name = "ucrChkViewClimaticMenu"
+        '
+        'ucrChkViewOptionsByContextMenu
+        '
+        Me.ucrChkViewOptionsByContextMenu.Checked = False
+        resources.ApplyResources(Me.ucrChkViewOptionsByContextMenu, "ucrChkViewOptionsByContextMenu")
+        Me.ucrChkViewOptionsByContextMenu.Name = "ucrChkViewOptionsByContextMenu"
         '
         'dlgOptions
         '
@@ -710,7 +718,7 @@ Partial Class dlgOptions
         Me.tbpWorkingDirectory.PerformLayout()
         Me.tbpGraphDisplay.ResumeLayout(False)
         Me.tbpGraphDisplay.PerformLayout()
-        Me.tbpSpecialMenus.ResumeLayout(False)
+        Me.tbpTailoredMenus.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -783,7 +791,8 @@ Partial Class dlgOptions
     Friend WithEvents lblWaitSeconds As Label
     Friend WithEvents ucrChkShowWaitDialog As ucrCheck
     Friend WithEvents ucrNudWaitSeconds As ucrNud
-    Friend WithEvents tbpSpecialMenus As TabPage
+    Friend WithEvents tbpTailoredMenus As TabPage
     Friend WithEvents ucrChkViewProcurementMenu As ucrCheck
     Friend WithEvents ucrChkViewClimaticMenu As ucrCheck
+    Friend WithEvents ucrChkViewOptionsByContextMenu As ucrCheck
 End Class
