@@ -50,12 +50,12 @@ Partial Class ucrFilter
         Me.cmdRemoveCondition = New System.Windows.Forms.Button()
         Me.lblNewFilterName = New System.Windows.Forms.Label()
         Me.ucrInputFilterName = New instat.ucrInputComboBox()
-        Me.ucrValueForFilter = New instat.ucrInputTextBox()
         Me.ucrFilterPreview = New instat.ucrInputTextBox()
         Me.ucrFilterOperation = New instat.ucrInputComboBox()
         Me.ucrFactorLevels = New instat.ucrFactor()
         Me.ucrFilterByReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorForFitler = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrValueForFilter = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'lblSelectLevels
@@ -126,14 +126,6 @@ Partial Class ucrFilter
         resources.ApplyResources(Me.ucrInputFilterName, "ucrInputFilterName")
         Me.ucrInputFilterName.Name = "ucrInputFilterName"
         '
-        'ucrValueForFilter
-        '
-        Me.ucrValueForFilter.AddQuotesIfUnrecognised = True
-        Me.ucrValueForFilter.IsMultiline = False
-        Me.ucrValueForFilter.IsReadOnly = False
-        resources.ApplyResources(Me.ucrValueForFilter, "ucrValueForFilter")
-        Me.ucrValueForFilter.Name = "ucrValueForFilter"
-        '
         'ucrFilterPreview
         '
         Me.ucrFilterPreview.AddQuotesIfUnrecognised = True
@@ -169,22 +161,30 @@ Partial Class ucrFilter
         '
         'ucrSelectorForFitler
         '
+        Me.ucrSelectorForFitler.bDropUnusedFilterLevels = False
         Me.ucrSelectorForFitler.bShowHiddenColumns = False
         Me.ucrSelectorForFitler.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorForFitler, "ucrSelectorForFitler")
         Me.ucrSelectorForFitler.Name = "ucrSelectorForFitler"
         '
+        'ucrValueForFilter
+        '
+        Me.ucrValueForFilter.AddQuotesIfUnrecognised = True
+        Me.ucrValueForFilter.IsReadOnly = False
+        resources.ApplyResources(Me.ucrValueForFilter, "ucrValueForFilter")
+        Me.ucrValueForFilter.Name = "ucrValueForFilter"
+        '
         'ucrFilter
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrValueForFilter)
         Me.Controls.Add(Me.ucrInputFilterName)
         Me.Controls.Add(Me.lblNewFilterName)
         Me.Controls.Add(Me.cmdRemoveCondition)
         Me.Controls.Add(Me.mcdEditCondition)
         Me.Controls.Add(Me.cmdClearConditions)
         Me.Controls.Add(Me.lblFilterBy)
-        Me.Controls.Add(Me.ucrValueForFilter)
         Me.Controls.Add(Me.ucrFilterPreview)
         Me.Controls.Add(Me.lblFilterPreview)
         Me.Controls.Add(Me.lstFilters)
@@ -211,11 +211,11 @@ Partial Class ucrFilter
     Friend WithEvents lstFilters As ListView
     Friend WithEvents lblFilterPreview As Label
     Friend WithEvents ucrFilterPreview As ucrInputTextBox
-    Friend WithEvents ucrValueForFilter As ucrInputTextBox
     Friend WithEvents lblFilterBy As Label
     Friend WithEvents cmdClearConditions As Button
     Friend WithEvents mcdEditCondition As Button
     Friend WithEvents cmdRemoveCondition As Button
     Friend WithEvents lblNewFilterName As Label
     Friend WithEvents ucrInputFilterName As ucrInputComboBox
+    Friend WithEvents ucrValueForFilter As ucrInputComboBox
 End Class

@@ -60,6 +60,8 @@ Public Class ucrFilter
         ucrFilterPreview.txtInput.ReadOnly = True
         ucrFilterByReceiver.Selector = ucrSelectorForFitler
         ucrFilterOperation.SetItems({"==", "<", "<=", ">", ">=", "!="})
+        ucrValueForFilter.SetItems({"NA"})
+        ucrValueForFilter.SetDropDownStyleAsEditable(True)
         ucrFilterOperation.SetDropDownStyleAsNonEditable()
         ucrFactorLevels.SetAsMultipleSelector()
         ucrFactorLevels.SetReceiver(ucrFilterByReceiver)
@@ -86,22 +88,40 @@ Public Class ucrFilter
     End Sub
 
     Private Sub VariableTypeProperties()
-        Dim bIsFactor As Boolean
+
         If ucrFilterByReceiver.IsEmpty() Then
             ucrValueForFilter.Visible = False
             lblSelectLevels.Visible = False
             ucrFactorLevels.Visible = False
             cmdToggleSelectAll.Visible = False
             ucrFilterOperation.Visible = False
-        Else
-            bIsFactor = ucrFilterByReceiver.strCurrDataType.Contains("factor")
-            lblSelectLevels.Visible = bIsFactor
-            ucrFactorLevels.Visible = bIsFactor
-            cmdToggleSelectAll.Visible = bIsFactor
-            ucrValueForFilter.Visible = Not bIsFactor
-            ucrFilterOperation.Visible = Not bIsFactor
+
+        ElseIf Not ucrFilterByReceiver.IsEmpty Then
+
+            If ucrFilterByReceiver.strCurrDataType.Contains("factor") Then
+                lblSelectLevels.Visible = True
+                ucrFactorLevels.Visible = True
+                cmdToggleSelectAll.Visible = True
+                ucrValueForFilter.Visible = False
+                ucrFilterOperation.Visible = False
+            ElseIf ucrFilterByReceiver.strCurrDataType.Contains("logical") Then
+                lblSelectLevels.Visible = False
+                ucrFactorLevels.Visible = False
+                cmdToggleSelectAll.Visible = False
+                ucrValueForFilter.Visible = True
+                ucrFilterOperation.Visible = True
+                ucrValueForFilter.SetItems({"TRUE", "FALSE", "NA"})
+            Else
+                lblSelectLevels.Visible = False
+                ucrFactorLevels.Visible = False
+                cmdToggleSelectAll.Visible = False
+                ucrValueForFilter.Visible = True
+                ucrFilterOperation.Visible = True
+                ucrValueForFilter.SetItems({"NA"})
+            End If
         End If
-        SetToggleButtonSettings()
+
+            SetToggleButtonSettings()
         CheckAddEnabled()
     End Sub
 
@@ -177,7 +197,7 @@ Public Class ucrFilter
         CheckAddEnabled()
     End Sub
 
-    Private Sub ucrValueForFilter_NameChanged() Handles ucrValueForFilter.NameChanged
+    Private Sub ucrValueForFilter_NameChanged()
         CheckAddEnabled()
     End Sub
 
@@ -217,7 +237,7 @@ Public Class ucrFilter
         End If
     End Sub
 
-    Private Sub ucrValueForFilter_ContentsChanged() Handles ucrValueForFilter.ContentsChanged
+    Private Sub ucrValueForFilter_ContentsChanged() Handles ucrValueForFilter.ControlContentsChanged
         CheckAddEnabled()
     End Sub
 

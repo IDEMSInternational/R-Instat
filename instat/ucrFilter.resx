@@ -267,7 +267,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFilterBy.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="cmdClearConditions.Location" type="System.Drawing.Point, System.Drawing">
     <value>278, 304</value>
@@ -291,7 +291,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdClearConditions.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="mcdEditCondition.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -318,7 +318,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;mcdEditCondition.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="cmdRemoveCondition.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -345,7 +345,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdRemoveCondition.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="lblNewFilterName.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -372,7 +372,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblNewFilterName.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="ucrInputFilterName.Location" type="System.Drawing.Point, System.Drawing">
     <value>96, 364</value>
@@ -393,28 +393,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputFilterName.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrValueForFilter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>490, 40</value>
-  </data>
-  <data name="ucrValueForFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 21</value>
-  </data>
-  <data name="ucrValueForFilter.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;ucrValueForFilter.Name" xml:space="preserve">
-    <value>ucrValueForFilter</value>
-  </data>
-  <data name="&gt;&gt;ucrValueForFilter.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrValueForFilter.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrValueForFilter.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>1</value>
   </data>
   <data name="ucrFilterPreview.Location" type="System.Drawing.Point, System.Drawing">
     <value>96, 337</value>
@@ -530,6 +509,27 @@
   </data>
   <data name="&gt;&gt;ucrSelectorForFitler.ZOrder" xml:space="preserve">
     <value>16</value>
+  </data>
+  <data name="ucrValueForFilter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>530, 40</value>
+  </data>
+  <data name="ucrValueForFilter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 21</value>
+  </data>
+  <data name="ucrValueForFilter.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="&gt;&gt;ucrValueForFilter.Name" xml:space="preserve">
+    <value>ucrValueForFilter</value>
+  </data>
+  <data name="&gt;&gt;ucrValueForFilter.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrValueForFilter.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrValueForFilter.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

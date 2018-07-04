@@ -67,6 +67,7 @@ Public Class dlgDuplicates
         ' for rdoSuccessiveVariables this is ran as a string, it isn't run for rdoSelectedVariables.For rdodataframe this is ran as an r-function so we are doing this manually but passing the parameter in the additional code pair
         ucrSelectorDuplicateswithVariables.SetParameter(New RParameter("x", 0))
         ucrSelectorDuplicateswithVariables.SetParameterIsString()
+        ucrSelectorDuplicateswithVariables.bUseCurrentFilter = False
 
         ucrReceiverForSelectedVariables.SetParameter(New RParameter("x", 0))
         ucrReceiverForSelectedVariables.SetParameterIsRFunction()
