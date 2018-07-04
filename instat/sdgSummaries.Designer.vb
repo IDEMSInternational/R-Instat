@@ -40,8 +40,8 @@ Partial Class sdgSummaries
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgSummaries))
         Me.tbMissingOptions = New System.Windows.Forms.TabPage()
-        Me.ucrNudPercentage = New instat.ucrNud()
         Me.ucrNudNumber = New instat.ucrNud()
+        Me.ucrNudPercentage = New instat.ucrNud()
         Me.lblPercentage = New System.Windows.Forms.Label()
         Me.lblNumber = New System.Windows.Forms.Label()
         Me.rdoPercentage = New System.Windows.Forms.RadioButton()
@@ -131,8 +131,8 @@ Partial Class sdgSummaries
         '
         'tbMissingOptions
         '
-        Me.tbMissingOptions.Controls.Add(Me.ucrNudPercentage)
         Me.tbMissingOptions.Controls.Add(Me.ucrNudNumber)
+        Me.tbMissingOptions.Controls.Add(Me.ucrNudPercentage)
         Me.tbMissingOptions.Controls.Add(Me.lblPercentage)
         Me.tbMissingOptions.Controls.Add(Me.lblNumber)
         Me.tbMissingOptions.Controls.Add(Me.rdoPercentage)
@@ -143,16 +143,6 @@ Partial Class sdgSummaries
         Me.tbMissingOptions.Name = "tbMissingOptions"
         Me.tbMissingOptions.UseVisualStyleBackColor = True
         '
-        'ucrNudPercentage
-        '
-        Me.ucrNudPercentage.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPercentage.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudPercentage, "ucrNudPercentage")
-        Me.ucrNudPercentage.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudPercentage.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPercentage.Name = "ucrNudPercentage"
-        Me.ucrNudPercentage.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'ucrNudNumber
         '
         Me.ucrNudNumber.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
@@ -162,6 +152,16 @@ Partial Class sdgSummaries
         Me.ucrNudNumber.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumber.Name = "ucrNudNumber"
         Me.ucrNudNumber.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudPercentage
+        '
+        Me.ucrNudPercentage.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPercentage.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudPercentage, "ucrNudPercentage")
+        Me.ucrNudPercentage.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudPercentage.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPercentage.Name = "ucrNudPercentage"
+        Me.ucrNudPercentage.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblPercentage
         '
@@ -182,7 +182,9 @@ Partial Class sdgSummaries
         'rdoNumber
         '
         resources.ApplyResources(Me.rdoNumber, "rdoNumber")
+        Me.rdoNumber.Checked = True
         Me.rdoNumber.Name = "rdoNumber"
+        Me.rdoNumber.TabStop = True
         Me.rdoNumber.UseVisualStyleBackColor = True
         '
         'ucrPnlMissingOptions
@@ -747,12 +749,12 @@ Partial Class sdgSummaries
     Friend WithEvents rdoPercentage As RadioButton
     Friend WithEvents rdoNumber As RadioButton
     Friend WithEvents ucrPnlMissingOptions As UcrPanel
-    Friend WithEvents ucrNudPercentage As ucrNud
-    Friend WithEvents ucrNudNumber As ucrNud
     Friend WithEvents lblPercentage As Label
     Friend WithEvents lblNumber As Label
     Friend WithEvents ucrInputCountValue As ucrInputTextBox
     Friend WithEvents ucrInputComboCountTest As ucrInputComboBox
     Friend WithEvents tbModel As TabPage
     Friend WithEvents ucrChkStandardErrorOfMean As ucrCheck
+    Friend WithEvents ucrNudNumber As ucrNud
+    Friend WithEvents ucrNudPercentage As ucrNud
 End Class

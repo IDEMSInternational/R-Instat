@@ -135,8 +135,8 @@ Public Class sdgSummaries
         ucrChkCount.AddToLinkedControls(ucrInputComboCountTest, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="==")
         ucrChkCount.AddToLinkedControls(ucrInputCountValue, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrChkIncludeMissingOpt.AddToLinkedControls(ucrPnlMissingOptions, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlMissingOptions.AddToLinkedControls({ucrNudNumber}, {rdoNumber}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
-        ucrPnlMissingOptions.AddToLinkedControls({ucrNudPercentage}, {rdoPercentage}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrPnlMissingOptions.AddToLinkedControls({ucrNudNumber}, {rdoNumber}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrPnlMissingOptions.AddToLinkedControls({ucrNudPercentage}, {rdoPercentage}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
 
         ucrInputN.SetLinkedDisplayControl(lblInputN)
         ucrNudFraction.SetLinkedDisplayControl(lblFractionTrimmed)
@@ -195,12 +195,12 @@ Public Class sdgSummaries
         ucrChkCount.SetParameter(New RParameter("count_calc", 29), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "count_calc" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkCount.SetText("Count")
 
-        'ucrChkIncludeMissingOpt.SetParameter(New RParameter("na_type"))
         ucrChkIncludeMissingOpt.SetText("Inlcude Missing Options")
+        ucrChkIncludeMissingOpt.AddParameterPresentCondition(True, "na_type")
+        ucrChkIncludeMissingOpt.AddParameterPresentCondition(False, "na_type", False)
 
-        ucrPnlMissingOptions.SetParameter(New RParameter("na_type", 9))
-        ucrPnlMissingOptions.AddRadioButton(rdoNumber, Chr(34) & "'n'" & Chr(34))
-        ucrPnlMissingOptions.AddRadioButton(rdoPercentage, Chr(34) & "'prop'" & Chr(34))
+        ucrPnlMissingOptions.AddRadioButton(rdoNumber)
+        ucrPnlMissingOptions.AddRadioButton(rdoPercentage)
 
         ucrNudPercentage.SetParameter(New RParameter("na_max_prop", 10))
 
@@ -233,9 +233,9 @@ Public Class sdgSummaries
             ucrSelectorSecondVariable.SetDataframe(strDataFrame, False)
         End If
 
-        ucrPnlMissingOptions.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrNudPercentage.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrNudNumber.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkIncludeMissingOpt.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
 
         ucrChkPercentage.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrInputPropValue.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
@@ -336,5 +336,17 @@ Public Class sdgSummaries
         '    Else
         '        clsDefaultFunction.RemoveParameterByName("order_by")
         '    End If
+    End Sub
+
+    Private Sub ucrPnlMissingOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMissingOptions.ControlValueChanged, ucrChkIncludeMissingOpt.ControlValueChanged
+        If ucrChkIncludeMissingOpt.Checked Then
+            If rdoNumber.Checked Then
+                clsDefaultFunction.AddParameter("na_type", Chr(34) & "'n'" & Chr(34), iPosition:=9)
+            Else
+                clsDefaultFunction.AddParameter("na_type", Chr(34) & "'prop'" & Chr(34), iPosition:=9)
+            End If
+        Else
+            clsDefaultFunction.RemoveParameterByName("na_type")
+        End If
     End Sub
 End Class
