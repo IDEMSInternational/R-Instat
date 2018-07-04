@@ -118,34 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ucrNudPercentage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>319, 106</value>
-  </data>
-  <data name="ucrNudPercentage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ucrNudPercentage.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;ucrNudPercentage.Name" xml:space="preserve">
-    <value>ucrNudPercentage</value>
-  </data>
-  <data name="&gt;&gt;ucrNudPercentage.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudPercentage.Parent" xml:space="preserve">
-    <value>tbMissingOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrNudPercentage.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="ucrNudNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>292, 105</value>
+    <value>321, 107</value>
   </data>
   <data name="ucrNudNumber.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrNudNumber.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
@@ -159,6 +138,27 @@
     <value>tbMissingOptions</value>
   </data>
   <data name="&gt;&gt;ucrNudNumber.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrNudPercentage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>321, 107</value>
+  </data>
+  <data name="ucrNudPercentage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudPercentage.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;ucrNudPercentage.Name" xml:space="preserve">
+    <value>ucrNudPercentage</value>
+  </data>
+  <data name="&gt;&gt;ucrNudPercentage.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudPercentage.Parent" xml:space="preserve">
+    <value>tbMissingOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrNudPercentage.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="lblPercentage.AutoSize" type="System.Boolean, mscorlib">
