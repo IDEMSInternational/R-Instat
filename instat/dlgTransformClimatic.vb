@@ -212,10 +212,10 @@ Public Class dlgTransformClimatic
         clsRRaindayMatch.AddParameter("x", clsROperatorParameter:=clsRRaindayAndOperator)
         clsRRaindayAndOperator.SetOperation("&")
         clsRRaindayAndOperator.AddParameter("lower", clsROperatorParameter:=clsRRaindayLowerOperator, iPosition:=0)
-        clsRRaindayLowerOperator.SetOperation(">=")
+        clsRRaindayLowerOperator.SetOperation("<=")
         clsRRaindayLowerOperator.AddParameter("min", 0, iPosition:=1)
         clsRRaindayAndOperator.AddParameter("upper", clsROperatorParameter:=clsRRaindayUpperOperator, iPosition:=0)
-        clsRRaindayUpperOperator.SetOperation("<=")
+        clsRRaindayUpperOperator.SetOperation(">=")
         clsRRaindayUpperOperator.AddParameter("max", 0.85, iPosition:=1)
         clsRRaindayMatch.AddParameter("table", "1", iPosition:=1)
         clsRRaindayMatch.AddParameter("nomatch", "0", iPosition:=2)
@@ -462,8 +462,13 @@ Public Class dlgTransformClimatic
         End If
     End Sub
 
-    Private Sub ucrPnlEvap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlEvap.ControlValueChanged
-        Evaporation()
+    Private Sub ucrReceiverEvap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverEvap.ControlValueChanged
         TestOkEnabled()
+        Evaporation()
+    End Sub
+
+    Private Sub ucrInputEvaporation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputEvaporation.ControlContentsChanged
+        TestOkEnabled()
+        Evaporation()
     End Sub
 End Class
