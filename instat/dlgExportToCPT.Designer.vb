@@ -41,28 +41,28 @@ Partial Class dlgExportToCPT
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgExportToCPT))
         Me.rdoTwoDF = New System.Windows.Forms.RadioButton()
         Me.rdoOneDF = New System.Windows.Forms.RadioButton()
-        Me.lblStationElement = New System.Windows.Forms.Label()
-        Me.lblStationOneDF = New System.Windows.Forms.Label()
-        Me.lblYear = New System.Windows.Forms.Label()
-        Me.lblElement = New System.Windows.Forms.Label()
-        Me.lblLatitude = New System.Windows.Forms.Label()
-        Me.lblLongitude = New System.Windows.Forms.Label()
-        Me.lblStationLatLon = New System.Windows.Forms.Label()
         Me.lblSaveDataTo = New System.Windows.Forms.Label()
         Me.cmdChooseFile = New System.Windows.Forms.Button()
+        Me.lblLatitude = New System.Windows.Forms.Label()
+        Me.lblLongitude = New System.Windows.Forms.Label()
+        Me.lblStationTwoDF = New System.Windows.Forms.Label()
+        Me.lblElement = New System.Windows.Forms.Label()
+        Me.lblYear = New System.Windows.Forms.Label()
+        Me.lblStationOneDF = New System.Windows.Forms.Label()
+        Me.ucrReceiverStationTwoDF = New instat.ucrReceiverSingle()
+        Me.ucrReceiverLongitude = New instat.ucrReceiverSingle()
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
-        Me.ucrReceiverStationElementData = New instat.ucrReceiverSingle()
-        Me.UcrReceiverLongitude = New instat.ucrReceiverSingle()
-        Me.UcrReceiverLatitude = New instat.ucrReceiverSingle()
+        Me.ucrReceiverLatitude = New instat.ucrReceiverSingle()
+        Me.ucrReceiverStationOneDF = New instat.ucrReceiverSingle()
         Me.ucrPnlNoOfDF = New instat.UcrPanel()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrReceiverStationLatLon = New instat.ucrReceiverSingle()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrSelectorExporCPT = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.UcrSelectorByDataFrameAddRemove1 = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.UcrReceiverMultiple1 = New instat.ucrReceiverMultiple()
-        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblOneDF = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.lblTwoDF = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'rdoTwoDF
@@ -83,41 +83,6 @@ Partial Class dlgExportToCPT
         Me.rdoOneDF.Name = "rdoOneDF"
         Me.rdoOneDF.UseVisualStyleBackColor = True
         '
-        'lblStationElement
-        '
-        resources.ApplyResources(Me.lblStationElement, "lblStationElement")
-        Me.lblStationElement.Name = "lblStationElement"
-        '
-        'lblStationOneDF
-        '
-        resources.ApplyResources(Me.lblStationOneDF, "lblStationOneDF")
-        Me.lblStationOneDF.Name = "lblStationOneDF"
-        '
-        'lblYear
-        '
-        resources.ApplyResources(Me.lblYear, "lblYear")
-        Me.lblYear.Name = "lblYear"
-        '
-        'lblElement
-        '
-        resources.ApplyResources(Me.lblElement, "lblElement")
-        Me.lblElement.Name = "lblElement"
-        '
-        'lblLatitude
-        '
-        resources.ApplyResources(Me.lblLatitude, "lblLatitude")
-        Me.lblLatitude.Name = "lblLatitude"
-        '
-        'lblLongitude
-        '
-        resources.ApplyResources(Me.lblLongitude, "lblLongitude")
-        Me.lblLongitude.Name = "lblLongitude"
-        '
-        'lblStationLatLon
-        '
-        resources.ApplyResources(Me.lblStationLatLon, "lblStationLatLon")
-        Me.lblStationLatLon.Name = "lblStationLatLon"
-        '
         'lblSaveDataTo
         '
         resources.ApplyResources(Me.lblSaveDataTo, "lblSaveDataTo")
@@ -129,6 +94,54 @@ Partial Class dlgExportToCPT
         Me.cmdChooseFile.Name = "cmdChooseFile"
         Me.cmdChooseFile.UseVisualStyleBackColor = True
         '
+        'lblLatitude
+        '
+        resources.ApplyResources(Me.lblLatitude, "lblLatitude")
+        Me.lblLatitude.Name = "lblLatitude"
+        '
+        'lblLongitude
+        '
+        resources.ApplyResources(Me.lblLongitude, "lblLongitude")
+        Me.lblLongitude.Name = "lblLongitude"
+        '
+        'lblStationTwoDF
+        '
+        resources.ApplyResources(Me.lblStationTwoDF, "lblStationTwoDF")
+        Me.lblStationTwoDF.Name = "lblStationTwoDF"
+        '
+        'lblElement
+        '
+        resources.ApplyResources(Me.lblElement, "lblElement")
+        Me.lblElement.Name = "lblElement"
+        '
+        'lblYear
+        '
+        resources.ApplyResources(Me.lblYear, "lblYear")
+        Me.lblYear.Name = "lblYear"
+        '
+        'lblStationOneDF
+        '
+        resources.ApplyResources(Me.lblStationOneDF, "lblStationOneDF")
+        Me.lblStationOneDF.Name = "lblStationOneDF"
+        '
+        'ucrReceiverStationTwoDF
+        '
+        Me.ucrReceiverStationTwoDF.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverStationTwoDF, "ucrReceiverStationTwoDF")
+        Me.ucrReceiverStationTwoDF.Name = "ucrReceiverStationTwoDF"
+        Me.ucrReceiverStationTwoDF.Selector = Nothing
+        Me.ucrReceiverStationTwoDF.strNcFilePath = ""
+        Me.ucrReceiverStationTwoDF.ucrSelector = Nothing
+        '
+        'ucrReceiverLongitude
+        '
+        Me.ucrReceiverLongitude.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverLongitude, "ucrReceiverLongitude")
+        Me.ucrReceiverLongitude.Name = "ucrReceiverLongitude"
+        Me.ucrReceiverLongitude.Selector = Nothing
+        Me.ucrReceiverLongitude.strNcFilePath = ""
+        Me.ucrReceiverLongitude.ucrSelector = Nothing
+        '
         'ucrInputFilePath
         '
         Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
@@ -137,32 +150,23 @@ Partial Class dlgExportToCPT
         resources.ApplyResources(Me.ucrInputFilePath, "ucrInputFilePath")
         Me.ucrInputFilePath.Name = "ucrInputFilePath"
         '
-        'ucrReceiverStationElementData
+        'ucrReceiverLatitude
         '
-        Me.ucrReceiverStationElementData.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverStationElementData, "ucrReceiverStationElementData")
-        Me.ucrReceiverStationElementData.Name = "ucrReceiverStationElementData"
-        Me.ucrReceiverStationElementData.Selector = Nothing
-        Me.ucrReceiverStationElementData.strNcFilePath = ""
-        Me.ucrReceiverStationElementData.ucrSelector = Nothing
+        Me.ucrReceiverLatitude.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverLatitude, "ucrReceiverLatitude")
+        Me.ucrReceiverLatitude.Name = "ucrReceiverLatitude"
+        Me.ucrReceiverLatitude.Selector = Nothing
+        Me.ucrReceiverLatitude.strNcFilePath = ""
+        Me.ucrReceiverLatitude.ucrSelector = Nothing
         '
-        'UcrReceiverLongitude
+        'ucrReceiverStationOneDF
         '
-        Me.UcrReceiverLongitude.frmParent = Me
-        resources.ApplyResources(Me.UcrReceiverLongitude, "UcrReceiverLongitude")
-        Me.UcrReceiverLongitude.Name = "UcrReceiverLongitude"
-        Me.UcrReceiverLongitude.Selector = Nothing
-        Me.UcrReceiverLongitude.strNcFilePath = ""
-        Me.UcrReceiverLongitude.ucrSelector = Nothing
-        '
-        'UcrReceiverLatitude
-        '
-        Me.UcrReceiverLatitude.frmParent = Me
-        resources.ApplyResources(Me.UcrReceiverLatitude, "UcrReceiverLatitude")
-        Me.UcrReceiverLatitude.Name = "UcrReceiverLatitude"
-        Me.UcrReceiverLatitude.Selector = Nothing
-        Me.UcrReceiverLatitude.strNcFilePath = ""
-        Me.UcrReceiverLatitude.ucrSelector = Nothing
+        Me.ucrReceiverStationOneDF.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverStationOneDF, "ucrReceiverStationOneDF")
+        Me.ucrReceiverStationOneDF.Name = "ucrReceiverStationOneDF"
+        Me.ucrReceiverStationOneDF.Selector = Nothing
+        Me.ucrReceiverStationOneDF.strNcFilePath = ""
+        Me.ucrReceiverStationOneDF.ucrSelector = Nothing
         '
         'ucrPnlNoOfDF
         '
@@ -173,15 +177,6 @@ Partial Class dlgExportToCPT
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrReceiverStationLatLon
-        '
-        Me.ucrReceiverStationLatLon.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverStationLatLon, "ucrReceiverStationLatLon")
-        Me.ucrReceiverStationLatLon.Name = "ucrReceiverStationLatLon"
-        Me.ucrReceiverStationLatLon.Selector = Nothing
-        Me.ucrReceiverStationLatLon.strNcFilePath = ""
-        Me.ucrReceiverStationLatLon.ucrSelector = Nothing
         '
         'ucrReceiverElement
         '
@@ -209,57 +204,51 @@ Partial Class dlgExportToCPT
         resources.ApplyResources(Me.ucrSelectorExporCPT, "ucrSelectorExporCPT")
         Me.ucrSelectorExporCPT.Name = "ucrSelectorExporCPT"
         '
-        'UcrSelectorByDataFrameAddRemove1
+        'Label1
         '
-        Me.UcrSelectorByDataFrameAddRemove1.bDropUnusedFilterLevels = False
-        Me.UcrSelectorByDataFrameAddRemove1.bShowHiddenColumns = False
-        Me.UcrSelectorByDataFrameAddRemove1.bUseCurrentFilter = True
-        resources.ApplyResources(Me.UcrSelectorByDataFrameAddRemove1, "UcrSelectorByDataFrameAddRemove1")
-        Me.UcrSelectorByDataFrameAddRemove1.Name = "UcrSelectorByDataFrameAddRemove1"
+        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.Name = "Label1"
         '
-        'UcrReceiverMultiple1
+        'lblOneDF
         '
-        Me.UcrReceiverMultiple1.frmParent = Me
-        resources.ApplyResources(Me.UcrReceiverMultiple1, "UcrReceiverMultiple1")
-        Me.UcrReceiverMultiple1.Name = "UcrReceiverMultiple1"
-        Me.UcrReceiverMultiple1.Selector = Nothing
-        Me.UcrReceiverMultiple1.strNcFilePath = ""
-        Me.UcrReceiverMultiple1.ucrSelector = Nothing
+        resources.ApplyResources(Me.lblOneDF, "lblOneDF")
+        Me.lblOneDF.Name = "lblOneDF"
         '
-        'RadioButton1
+        'Label2
         '
-        resources.ApplyResources(Me.RadioButton1, "RadioButton1")
-        Me.RadioButton1.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.RadioButton1.FlatAppearance.BorderSize = 2
-        Me.RadioButton1.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.Label2, "Label2")
+        Me.Label2.Name = "Label2"
+        '
+        'lblTwoDF
+        '
+        resources.ApplyResources(Me.lblTwoDF, "lblTwoDF")
+        Me.lblTwoDF.Name = "lblTwoDF"
         '
         'dlgExportToCPT
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.RadioButton1)
-        Me.Controls.Add(Me.UcrReceiverMultiple1)
-        Me.Controls.Add(Me.UcrSelectorByDataFrameAddRemove1)
+        Me.Controls.Add(Me.lblTwoDF)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.lblOneDF)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.lblStationTwoDF)
+        Me.Controls.Add(Me.ucrReceiverStationTwoDF)
+        Me.Controls.Add(Me.ucrReceiverLongitude)
+        Me.Controls.Add(Me.lblLatitude)
+        Me.Controls.Add(Me.lblLongitude)
         Me.Controls.Add(Me.cmdChooseFile)
         Me.Controls.Add(Me.ucrInputFilePath)
         Me.Controls.Add(Me.lblSaveDataTo)
-        Me.Controls.Add(Me.lblStationLatLon)
-        Me.Controls.Add(Me.lblLongitude)
-        Me.Controls.Add(Me.lblLatitude)
+        Me.Controls.Add(Me.ucrReceiverLatitude)
         Me.Controls.Add(Me.lblElement)
         Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.lblStationOneDF)
-        Me.Controls.Add(Me.lblStationElement)
         Me.Controls.Add(Me.rdoOneDF)
         Me.Controls.Add(Me.rdoTwoDF)
-        Me.Controls.Add(Me.ucrReceiverStationElementData)
-        Me.Controls.Add(Me.UcrReceiverLongitude)
-        Me.Controls.Add(Me.UcrReceiverLatitude)
+        Me.Controls.Add(Me.ucrReceiverStationOneDF)
         Me.Controls.Add(Me.ucrPnlNoOfDF)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.ucrReceiverStationLatLon)
         Me.Controls.Add(Me.ucrReceiverElement)
         Me.Controls.Add(Me.ucrReceiverYear)
         Me.Controls.Add(Me.ucrSelectorExporCPT)
@@ -273,27 +262,27 @@ Partial Class dlgExportToCPT
 
     End Sub
     Friend WithEvents ucrSelectorExporCPT As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrReceiverYear As ucrReceiverSingle
-    Friend WithEvents ucrReceiverElement As ucrReceiverSingle
-    Friend WithEvents ucrReceiverStationLatLon As ucrReceiverSingle
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrPnlNoOfDF As UcrPanel
-    Friend WithEvents UcrReceiverLatitude As ucrReceiverSingle
-    Friend WithEvents ucrReceiverStationElementData As ucrReceiverSingle
-    Friend WithEvents UcrReceiverLongitude As ucrReceiverSingle
-    Friend WithEvents lblYear As Label
-    Friend WithEvents lblStationOneDF As Label
-    Friend WithEvents lblStationElement As Label
     Friend WithEvents rdoOneDF As RadioButton
     Friend WithEvents rdoTwoDF As RadioButton
-    Friend WithEvents lblElement As Label
-    Friend WithEvents lblStationLatLon As Label
-    Friend WithEvents lblLongitude As Label
-    Friend WithEvents lblLatitude As Label
     Friend WithEvents lblSaveDataTo As Label
     Friend WithEvents ucrInputFilePath As ucrInputTextBox
     Friend WithEvents cmdChooseFile As Button
-    Friend WithEvents UcrSelectorByDataFrameAddRemove1 As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents UcrReceiverMultiple1 As ucrReceiverMultiple
-    Friend WithEvents RadioButton1 As RadioButton
+    Friend WithEvents lblLatitude As Label
+    Friend WithEvents ucrReceiverLatitude As ucrReceiverSingle
+    Friend WithEvents lblLongitude As Label
+    Friend WithEvents ucrReceiverLongitude As ucrReceiverSingle
+    Friend WithEvents lblStationTwoDF As Label
+    Friend WithEvents ucrReceiverStationTwoDF As ucrReceiverSingle
+    Friend WithEvents lblElement As Label
+    Friend WithEvents lblYear As Label
+    Friend WithEvents lblStationOneDF As Label
+    Friend WithEvents ucrReceiverStationOneDF As ucrReceiverSingle
+    Friend WithEvents ucrReceiverElement As ucrReceiverSingle
+    Friend WithEvents ucrReceiverYear As ucrReceiverSingle
+    Friend WithEvents lblTwoDF As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents lblOneDF As Label
+    Friend WithEvents Label1 As Label
 End Class

@@ -278,15 +278,6 @@ Partial Class dlgTransformClimatic
         resources.ApplyResources(Me.ucrPnlTransform, "ucrPnlTransform")
         Me.ucrPnlTransform.Name = "ucrPnlTransform"
         '
-        'ucrReceiverData
-        '
-        Me.ucrReceiverData.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverData, "ucrReceiverData")
-        Me.ucrReceiverData.Name = "ucrReceiverData"
-        Me.ucrReceiverData.Selector = Nothing
-        Me.ucrReceiverData.strNcFilePath = ""
-        Me.ucrReceiverData.ucrSelector = Nothing
-        '
         'ucrReceiverStation
         '
         Me.ucrReceiverStation.frmParent = Me
@@ -298,6 +289,7 @@ Partial Class dlgTransformClimatic
         '
         'ucrSelectorTransform
         '
+        Me.ucrSelectorTransform.bDropUnusedFilterLevels = False
         Me.ucrSelectorTransform.bShowHiddenColumns = False
         Me.ucrSelectorTransform.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorTransform, "ucrSelectorTransform")
@@ -320,6 +312,15 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverDate.Selector = Nothing
         Me.ucrReceiverDate.strNcFilePath = ""
         Me.ucrReceiverDate.ucrSelector = Nothing
+        '
+        'ucrReceiverData
+        '
+        Me.ucrReceiverData.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverData, "ucrReceiverData")
+        Me.ucrReceiverData.Name = "ucrReceiverData"
+        Me.ucrReceiverData.Selector = Nothing
+        Me.ucrReceiverData.strNcFilePath = ""
+        Me.ucrReceiverData.ucrSelector = Nothing
         '
         'ucrBase
         '

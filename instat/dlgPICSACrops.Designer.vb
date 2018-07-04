@@ -310,6 +310,7 @@ Partial Class dlgPICSACrops
         '
         'ucrSelectorForCrops
         '
+        Me.ucrSelectorForCrops.bDropUnusedFilterLevels = False
         Me.ucrSelectorForCrops.bShowHiddenColumns = False
         Me.ucrSelectorForCrops.bUseCurrentFilter = True
         Me.ucrSelectorForCrops.Location = New System.Drawing.Point(6, 5)
