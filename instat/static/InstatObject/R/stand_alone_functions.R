@@ -223,12 +223,9 @@ dekade <- function(date) {
 }
 
 pentad <- function(date){
-	year <- as.numeric(format(date, "%Y"))
-	day <- as.numeric(format(date, "%d"))
-  leap_year <- lubridate::leap_year(year)
-  temp_pentad <- ceiling((day - leap_year*(day > 59)) / 5)
-  return(temp_pentad)
-}
+	temp_pentad <- 6*(lubridate::month(date)) - 5 + (lubridate::mday(date) > 5) + (lubridate::mday(date) > 10) + (lubridate::mday(date) > 15) + (lubridate::mday(date) > 20) + (lubridate::mday(date) > 25)
+	return(temp_pentad)	
+ }	 
 
 nc_get_dim_min_max <- function(nc, dimension, time_as_date = TRUE) {
   if(!dimension %in% names(nc$dim)) stop(dimension, " not found in file.")
