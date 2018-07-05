@@ -79,6 +79,7 @@ Public Class DlgDefineClimaticData
         ucrReceiverMonth.Tag = "month"
         ucrReceiverDay.Tag = "day"
         ucrReceiverDOY.Tag = "doy"
+        ucrInputCheckInput.IsReadOnly = True
 
         ucrReceiverDate.SetIncludedDataTypes({"Date"})
         SetRSelector()
