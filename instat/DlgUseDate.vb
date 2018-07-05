@@ -124,7 +124,6 @@ Public Class dlgUseDate
         ucrChkShiftPentadAbbr.SetParameter(New RParameter("pentad_abbr", 17))
         ucrChkShiftPentadAbbr.SetText("")
         ucrChkShiftPentadAbbr.SetRDefault("FALSE")
-        ucrChkShiftPentadAbbr.Enabled = False 'TODO. Temporary
 
         'dekad
         ucrChkShiftDekadNum.SetParameter(New RParameter("dekad_val", 18))
@@ -134,7 +133,6 @@ Public Class dlgUseDate
         ucrChkShiftDekadAbbr.SetParameter(New RParameter("dekad_abbr", 19))
         ucrChkShiftDekadAbbr.SetText("")
         ucrChkShiftDekadAbbr.SetRDefault("FALSE")
-        ucrChkShiftDekadAbbr.Enabled = False 'TODO. Temporary
 
         'quarter
         ucrChkShiftQuarterNum.SetParameter(New RParameter("quarter_val", 20))
@@ -180,6 +178,8 @@ Public Class dlgUseDate
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
+        'ucrInputComboBoxStartingMonth.AddAdditionalCodeParameterPair(clsDefaultFunction, New RParameter("n"), iAdditionalPairNo:=1)
+        'ucrInputComboBoxStartingMonth.SetRCode(clsDefaultFunction, bReset)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
@@ -211,5 +211,4 @@ Public Class dlgUseDate
     Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverUseDate.ControlContentsChanged, ucrChkWeekName.ControlContentsChanged, ucrChkWeekdayNum.ControlContentsChanged, ucrChkWeekNum.ControlContentsChanged, ucrChkShiftPentadNum.ControlContentsChanged, ucrChkWeekAbbr.ControlContentsChanged, ucrChkShiftMonthNum.ControlContentsChanged, ucrChkLeapYearNum.ControlContentsChanged, ucrChkWeekdayName.ControlContentsChanged, ucrChkShiftMonthName.ControlContentsChanged, ucrChkShiftDekadNum.ControlContentsChanged, ucrChkDayInMonthNum.ControlContentsChanged, ucrChkDayInYearNum.ControlContentsChanged, ucrChkWeekdayAbbr.ControlContentsChanged, ucrChkShiftMonthAbbr.ControlContentsChanged, ucrChkShiftDayInYearNum366.ControlContentsChanged, ucrChkShiftYearNum.ControlContentsChanged, ucrChkShiftDayInYearNum366.ControlContentsChanged, ucrChkShiftQuarterNum.ControlContentsChanged, ucrInputComboBoxStartingMonth.ControlContentsChanged
         TestOKEnabled()
     End Sub
-
 End Class
