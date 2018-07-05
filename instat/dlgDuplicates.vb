@@ -109,7 +109,7 @@ Public Class dlgDuplicates
         ucrInputConditions.SetItems(dctConditions)
         ucrInputConditions.SetDropDownStyleAsNonEditable()
 
-        ucrInputComboType.SetParameter(New RParameter("type", 1))
+        ucrInputComboType.SetParameter(New RParameter("type"))
         dctType.Add("Count", Chr(34) & "count" & Chr(34))
         dctType.Add("Index", Chr(34) & "index" & Chr(34))
         ucrInputComboType.SetRDefault(Chr(34) & "count" & Chr(34))
@@ -154,6 +154,7 @@ Public Class dlgDuplicates
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverForSelectedVariables.AddAdditionalCodeParameterPair(clsDuplicated2, New RParameter("x", 1), iAdditionalPairNo:=1)
+        ucrReceiverForSelectedVariables.AddAdditionalCodeParameterPair(clsdupCountIndex, New RParameter("x", 1), iAdditionalPairNo:=2)
         ucrSelectorDuplicateswithVariables.AddAdditionalCodeParameterPair(clsDuplicated2, New RParameter("x", 0), iAdditionalPairNo:=1)
         ucrSelectorDuplicateswithVariables.AddAdditionalCodeParameterPair(clsdupCountIndex, New RParameter("x", 0), iAdditionalPairNo:=2)
         ucrNewColumnName.AddAdditionalRCode(clsDuplicated2, iAdditionalPairNo:=1)
