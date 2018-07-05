@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+Imports instat
 Imports instat.Translations
 Public Class dlgEndOfRainsSeason
     Private bFirstload As Boolean = True
@@ -117,10 +118,6 @@ Public Class dlgEndOfRainsSeason
         ucrChkEndOfSeason.AddToLinkedControls(ucrNudCapacity, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=60)
         ucrChkEndOfSeason.AddToLinkedControls(ucrNudWBLessThan, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.5)
         ucrChkEndOfSeason.AddToLinkedControls(ucrPnlEvaporation, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
-        ucrChkEndOfSeason.AddToLinkedControls(ucrInputSeasonDoy, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="end_season")
-        ucrChkEndOfSeason.AddToLinkedControls(ucrInputEndofSeasonDate, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="end_date")
-        ucrChkEndOfSeason.AddToLinkedControls(ucrInputEndofSeasonOccurence, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="season_status")
-        ucrInputSeasonDoy.SetLinkedDisplayControl(grpEndofSeason)
         ucrPnlEvaporation.SetLinkedDisplayControl(lblEvaporation)
         ucrInputReplaceNA.SetLinkedDisplayControl(lblReplaceNA)
 
@@ -146,7 +143,6 @@ Public Class dlgEndOfRainsSeason
         ucrInputSeasonDoy.SetParameter(New RParameter("result_name", 3))
         ucrInputSeasonDoy.SetName("end_season")
         ucrInputSeasonDoy.SetDataFrameSelector(ucrSelectorForWaterBalance.ucrAvailableDataFrames)
-        'ucrInputSeasonDoy.SetLinkedDisplayControl(grpEndofSeason)
         ucrInputSeasonDoy.SetValidationTypeAsRVariable()
 
 
@@ -157,9 +153,6 @@ Public Class dlgEndOfRainsSeason
         ucrChkEndOfRains.AddToLinkedControls(ucrNudAmount, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
         ucrChkEndOfRains.AddToLinkedControls(ucrNudTotalOverDays, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrChkEndOfRains.AddToLinkedControls(ucrInputEndRainDoy, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="end_rain")
-        ucrChkEndOfRains.AddToLinkedControls(ucrInputEndofRainsDate, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="end_date")
-        ucrChkEndOfRains.AddToLinkedControls(ucrInputEndofRainsOccurence, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="end_rain_status")
-        ucrInputEndRainDoy.SetLinkedDisplayControl(grpEndofRains)
 
         ucrNudAmount.SetParameter(New RParameter("threshold", 1, False))
         ucrNudAmount.SetMinMax() ' min and max
@@ -175,7 +168,6 @@ Public Class dlgEndOfRainsSeason
         ucrInputEndRainDoy.SetName("end_rain_doy")
         ucrInputEndRainDoy.SetValidationTypeAsRVariable()
         ucrInputEndRainDoy.SetDataFrameSelector(ucrSelectorForWaterBalance.ucrAvailableDataFrames)
-        'ucrInputEndRainDoy.SetLinkedDisplayControl(grpEndofRains)
 
         ucrInputEndofRainsDate.SetParameter(New RParameter("result_name", 2))
         ucrInputEndofRainsDate.SetName("end_rain_date")
@@ -184,7 +176,6 @@ Public Class dlgEndOfRainsSeason
 
         ucrChkEndofSeasonDoy.AddToLinkedControls(ucrInputSeasonDoy, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkEndofSeasonDoy.SetText("Day of Year")
-        ucrChkEndofSeasonDoy.SetLinkedDisplayControl(grpEndofSeason)
 
         ucrChkEndofSeasonDate.AddToLinkedControls(ucrInputEndofSeasonDate, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkEndofSeasonDate.SetText("Date")
@@ -194,13 +185,13 @@ Public Class dlgEndOfRainsSeason
 
         ucrChkEndofRainsDoy.AddToLinkedControls(ucrInputEndRainDoy, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkEndofRainsDoy.SetText("Day of Year")
-        'ucrChkEndofRainsDoy.SetLinkedDisplayControl(grpEndofRains)
 
         ucrChkEndofRainsDate.AddToLinkedControls(ucrInputEndofRainsDate, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkEndofRainsDate.SetText("Date")
 
         ucrChkEndofRainsOccurence.AddToLinkedControls(ucrInputEndofRainsOccurence, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkEndofRainsOccurence.SetText("Occurrence")
+        DisplayGroupBoxes()
     End Sub
 
     Private Sub SetDefaults()
@@ -637,6 +628,19 @@ Public Class dlgEndOfRainsSeason
         End If
     End Sub
 
+    Private Sub DisplayGroupBoxes()
+        If ucrChkEndOfRains.Checked Then
+            grpEndofRains.Show()
+        Else
+            grpEndofRains.Hide()
+        End If
+        If ucrChkEndOfSeason.Checked Then
+            grpEndofSeason.Show()
+        Else
+            grpEndofSeason.Hide()
+        End If
+    End Sub
+
     Private Sub DayChange()
         clsWBFirstWaterBalanceMin.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")", iPosition:=3)
         clsWBFirstWaterBalanceMax.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")", iPosition:=3)
@@ -725,5 +729,9 @@ Public Class dlgEndOfRainsSeason
             clsPMaxOperatorMax.RemoveParameterByName("evaporation")
             clsPMaxOperatorMin.RemoveParameterByName("evaporation")
         End If
+    End Sub
+
+    Private Sub ucrChkEndOfRains_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEndOfRains.ControlValueChanged, ucrChkEndOfSeason.ControlValueChanged
+        DisplayGroupBoxes()
     End Sub
 End Class
