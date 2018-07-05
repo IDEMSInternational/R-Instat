@@ -56,6 +56,7 @@ Partial Class ucrFilter
         Me.ucrFilterByReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorForFitler = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrValueForFilter = New instat.ucrInputComboBox()
+        Me.ucrFilterDateTimePicker = New instat.ucrDateTimePicker()
         Me.SuspendLayout()
         '
         'lblSelectLevels
@@ -174,10 +175,18 @@ Partial Class ucrFilter
         resources.ApplyResources(Me.ucrValueForFilter, "ucrValueForFilter")
         Me.ucrValueForFilter.Name = "ucrValueForFilter"
         '
+        'ucrFilterDateTimePicker
+        '
+        resources.ApplyResources(Me.ucrFilterDateTimePicker, "ucrFilterDateTimePicker")
+        Me.ucrFilterDateTimePicker.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrFilterDateTimePicker.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrFilterDateTimePicker.Name = "ucrFilterDateTimePicker"
+        '
         'ucrFilter
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrFilterDateTimePicker)
         Me.Controls.Add(Me.ucrValueForFilter)
         Me.Controls.Add(Me.ucrInputFilterName)
         Me.Controls.Add(Me.lblNewFilterName)
@@ -218,4 +227,5 @@ Partial Class ucrFilter
     Friend WithEvents lblNewFilterName As Label
     Friend WithEvents ucrInputFilterName As ucrInputComboBox
     Friend WithEvents ucrValueForFilter As ucrInputComboBox
+    Friend WithEvents ucrFilterDateTimePicker As ucrDateTimePicker
 End Class

@@ -95,6 +95,7 @@ Public Class ucrFilter
             ucrFactorLevels.Visible = False
             cmdToggleSelectAll.Visible = False
             ucrFilterOperation.Visible = False
+            ucrFilterDateTimePicker.Visible = False
 
         ElseIf Not ucrFilterByReceiver.IsEmpty Then
 
@@ -104,6 +105,7 @@ Public Class ucrFilter
                 cmdToggleSelectAll.Visible = True
                 ucrValueForFilter.Visible = False
                 ucrFilterOperation.Visible = False
+                ucrFilterDateTimePicker.Visible = False
             ElseIf ucrFilterByReceiver.strCurrDataType.Contains("logical") Then
                 lblSelectLevels.Visible = False
                 ucrFactorLevels.Visible = False
@@ -111,6 +113,14 @@ Public Class ucrFilter
                 ucrValueForFilter.Visible = True
                 ucrFilterOperation.Visible = True
                 ucrValueForFilter.SetItems({"TRUE", "FALSE", "NA"})
+                ucrFilterDateTimePicker.Visible = False
+            ElseIf ucrFilterByReceiver.strCurrDataType.Contains("Date") Then
+                lblSelectLevels.Visible = False
+                ucrFactorLevels.Visible = False
+                cmdToggleSelectAll.Visible = False
+                ucrValueForFilter.Visible = False
+                ucrFilterOperation.Visible = True
+                ucrFilterDateTimePicker.Visible = True
             Else
                 lblSelectLevels.Visible = False
                 ucrFactorLevels.Visible = False
@@ -118,10 +128,11 @@ Public Class ucrFilter
                 ucrValueForFilter.Visible = True
                 ucrFilterOperation.Visible = True
                 ucrValueForFilter.SetItems({"NA"})
+                ucrFilterDateTimePicker.Visible = False
             End If
         End If
 
-            SetToggleButtonSettings()
+        SetToggleButtonSettings()
         CheckAddEnabled()
     End Sub
 
@@ -131,6 +142,8 @@ Public Class ucrFilter
                 cmdAddCondition.Enabled = True
             ElseIf (Not ucrFilterOperation.IsEmpty) AndAlso (Not ucrValueForFilter.IsEmpty) Then
                 cmdAddCondition.Enabled = True
+                ' ElseIf (Not ucrFilterOperation.IsEmpty) AndAlso ucrFilterDateTimePicker.DateValue.ToString <> "" Then
+                '  cmdAddCondition.Enabled = True
             Else
                 cmdAddCondition.Enabled = False
             End If
@@ -157,6 +170,8 @@ Public Class ucrFilter
             clsCurrentConditionList.AddParameter("operation", Chr(34) & ucrFilterOperation.GetText() & Chr(34))
             If ucrFilterByReceiver.strCurrDataType = "character" AndAlso ucrValueForFilter.GetText() <> "NA" Then
                 strCondition = Chr(34) & ucrValueForFilter.GetText() & Chr(34)
+                'ElseIf ucrFilterByReceiver.strCurrDataType = "Date" AndAlso ucrFilterDateTimePicker.DateValue.ToString <> "" Then
+                '  strCondition = Chr(34) & ucrFilterDateTimePicker.DateValue.ToString() & Chr(34)
             Else
                 strCondition = ucrValueForFilter.GetText()
             End If
