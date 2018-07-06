@@ -14,6 +14,8 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
+
 Public Class ucrFilter
     Public bFirstLoad As Boolean
     Public clsFilterView As ROperator
@@ -142,8 +144,8 @@ Public Class ucrFilter
                 cmdAddCondition.Enabled = True
             ElseIf (Not ucrFilterOperation.IsEmpty) AndAlso (Not ucrValueForFilter.IsEmpty) Then
                 cmdAddCondition.Enabled = True
-                ' ElseIf (Not ucrFilterOperation.IsEmpty) AndAlso ucrFilterDateTimePicker.DateValue.ToString <> "" Then
-                '  cmdAddCondition.Enabled = True
+            ElseIf (Not ucrFilterOperation.IsEmpty) AndAlso ucrFilterDateTimePicker.Visible = True Then
+                cmdAddCondition.Enabled = True
             Else
                 cmdAddCondition.Enabled = False
             End If
@@ -170,8 +172,9 @@ Public Class ucrFilter
             clsCurrentConditionList.AddParameter("operation", Chr(34) & ucrFilterOperation.GetText() & Chr(34))
             If ucrFilterByReceiver.strCurrDataType = "character" AndAlso ucrValueForFilter.GetText() <> "NA" Then
                 strCondition = Chr(34) & ucrValueForFilter.GetText() & Chr(34)
-                'ElseIf ucrFilterByReceiver.strCurrDataType = "Date" AndAlso ucrFilterDateTimePicker.DateValue.ToString <> "" Then
-                '  strCondition = Chr(34) & ucrFilterDateTimePicker.DateValue.ToString() & Chr(34)
+            ElseIf ucrFilterByReceiver.strCurrDataType = "Date" Then
+                'TODO; this might need to be done in the control i.e ucrDateTimePicker
+                strCondition = Chr(34) & ucrFilterDateTimePicker.dtpDateTime.Value.Year & "/" & ucrFilterDateTimePicker.dtpDateTime.Value.Month & "/" & ucrFilterDateTimePicker.dtpDateTime.Value.Day & Chr(34)
             Else
                 strCondition = ucrValueForFilter.GetText()
             End If
