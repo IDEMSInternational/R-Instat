@@ -717,7 +717,7 @@ Public Class dlgStartofRains
     End Sub
 
     Private Sub CombinedFilter()
-        clsCombineOperator.AddParameter("total_rainfall", clsROperatorParameter:=clsTRCombineOperator, iPosition:=1)
+
         If ucrChkTotalRainfall.Checked Then
             If rdoTRAmount.Checked Then
                 clsCombinedList.RemoveParameterByName("tr_perc_sub")
