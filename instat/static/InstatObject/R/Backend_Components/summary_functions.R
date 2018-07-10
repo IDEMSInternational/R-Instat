@@ -666,10 +666,10 @@ summary_last <- function(x, na.rm = FALSE, na_type = "", order_by = NULL, defaul
 }
 
 # nth function
-summary_nth <- function(x, n, na.rm = FALSE, na_type = "", order_by = NULL, default = default_missing(x), ...) {
+summary_nth <- function(x, nth_value, na.rm = FALSE, na_type = "", order_by = NULL, default = default_missing(x), ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-    return(dplyr::nth(x = x, n = n, order_by = order_by, default = default_missing(x)))
+    return(dplyr::nth(x = x, n = nth_value, order_by = order_by, default = default_missing(x)))
   }
 }
 
