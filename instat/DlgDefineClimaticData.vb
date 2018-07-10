@@ -207,10 +207,10 @@ Public Class DlgDefineClimaticData
     End Sub
 
     Private Sub MessageBox()
-        If ucrReceiverStationName.IsEmpty Then
-            MsgBox("If you have multiple stations, did you forget to add the station column? Otherwise, use the Climatic > Check Data > Duplicates dialog to investigate your duplicate Dates.", MsgBoxStyle.Information, Title:="Key")
+        If Not ucrReceiverStationName.IsEmpty Then
+            MsgBox("You have multiple rows with the same dates in one or more stations.Use the Climatic > Check Data > Duplicates dialog to investigate these issues", MsgBoxStyle.Information, Title:="Key")
         Else
-            MsgBox("Did you forget the station column? Otherwise, use the Climatic > Check Data > Duplicates dialog to investigate your duplicate Dates within Station.", MsgBoxStyle.Information, Title:="Key")
+            MsgBox("You have multiple rows with the same dates. Did you forget to add the station column? Otherwise, use the Climatic > Check Data > Duplicates dialog to investigate these issues.", MsgBoxStyle.Information, Title:="Key")
         End If
     End Sub
 
