@@ -25,8 +25,8 @@ Public Class dlgStartofRains
     Private clsSORFilter, clsSORFilterIfelse, clsSORFilterIsNA As New RFunction
     Private clsLessFilterOperator As New ROperator
     Private clsSORStart, clsSORStatus, clsSORStartIfelse, clsSORIsNA As New RFunction
-    Private clsSORStartSummary As New clsStartOfRains
-    Private clsSORStatusSummary As New clsStartOfRains
+    Private clsSORStartSummary As New clsRains
+    Private clsSORStatusSummary As New clsRains
 
     'Rainy Day classes
     Private clsRDRollingRainDays, clsRDRollingRainDaysFunction, clsRDRollingRainDaysSub As New RFunction
@@ -224,6 +224,7 @@ Public Class dlgStartofRains
         Dim strRollSumRain As String = "roll_sum_Rain"
         Dim strStartDate As String = "start_date"
         Dim strStartStatus As String = "start_status"
+        Dim strStartDoy As String = "start_doy"
 
         clsAddKey.Clear()
         clsAddKeyColName.Clear()
@@ -372,13 +373,15 @@ Public Class dlgStartofRains
         clsSORStart.SetRCommand("instat_calculation$new")
         clsSORStart.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
         clsSORStart.AddParameter("function_exp", clsRFunctionParameter:=clsSORStartIfelse, iPosition:=1)
-        clsSORStart.AddParameter("result_name", Chr(34) & clsSORStartSummary.strStartDoy & Chr(34), iPosition:=3)
+        clsSORStart.AddParameter("result_name", Chr(34) & strStartDoy & Chr(34), iPosition:=3)
         clsSORStart.AddParameter("save", 2, iPosition:=4)
         clsSORStart.SetAssignTo("start_of_rains_start")
 
         clsSORStartSummary.SetDefaults()
-        clsSORStatusSummary.SetDefaults()
+        clsSORStartSummary.clsSORFilterOperator.AddParameter("left", strParameterValue:=strStartDoy, bIncludeArgumentName:=False, iPosition:=0)
 
+        clsSORStatusSummary.SetDefaults()
+        clsSORStatusSummary.clsSORFilterOperator.AddParameter("left", strParameterValue:=strStartDoy, bIncludeArgumentName:=False, iPosition:=0)
         clsSORStatusSummary.clsIsNaIfelse.bToScriptAsRString = True
 
         clsSORStatus.SetRCommand("instat_calculation$new")
@@ -392,7 +395,7 @@ Public Class dlgStartofRains
         clsSORStartIfelse.bToScriptAsRString = True
         clsSORStartIfelse.AddParameter("is.na", clsRFunctionParameter:=clsSORIsNA, bIncludeArgumentName:=False, iPosition:=0)
         clsSORStartIfelse.AddParameter("NA", "NA", bIncludeArgumentName:=False, iPosition:=1)
-        clsSORStartIfelse.AddParameter("start_doy", strParameterValue:=clsSORStartSummary.strStartDoy, bIncludeArgumentName:=False, iPosition:=2)
+        clsSORStartIfelse.AddParameter("start_doy", strParameterValue:=strStartDoy, bIncludeArgumentName:=False, iPosition:=2)
 
         clsSORIsNA.SetRCommand("is.na")
         clsSORIsNA.AddParameter("ifelse", clsRFunctionParameter:=clsSORStartSummary.clsIsNaIfelse, bIncludeArgumentName:=False)
@@ -564,7 +567,7 @@ Public Class dlgStartofRains
         clsFirstDOYPerStationYear.SetRCommand("first")
         clsFirstDOYPerStationYear.AddParameter("default", "NA", iPosition:=1)
         clsFirstDOYPerStationYear.bToScriptAsRString = True
-        clsFirstDOYPerYear.AddParameter("result_name", Chr(34) & clsSORStartSummary.strStartDoy & Chr(34), iPosition:=2)
+        clsFirstDOYPerYear.AddParameter("result_name", Chr(34) & strStartDoy & Chr(34), iPosition:=2)
         clsFirstDOYPerYear.AddParameter("save", 2, iPosition:=6)
         clsFirstDOYPerYear.AddParameter("manipulations", clsRFunctionParameter:=clsManipStartFirstList, iPosition:=7)
         clsFirstDOYPerYear.SetAssignTo("start_of_rains_doy")
