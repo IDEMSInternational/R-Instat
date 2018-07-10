@@ -287,6 +287,9 @@ Public Class dlgEndOfRainsSeason
         clsCombinationBaseList.Clear()
         clsEORFilterList.Clear()
         clsSubCalcList.Clear()
+        clsEndOfRainsFilter.Clear()
+        clsEORStatusFunction.Clear()
+        clsEOREndFunction.Clear()
 
         ucrSelectorForWaterBalance.Reset()
         ucrReceiverRainfall.SetMeAsReceiver()
