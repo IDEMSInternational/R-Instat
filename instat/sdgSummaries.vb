@@ -152,7 +152,7 @@ Public Class sdgSummaries
         ucrNudFraction.Increment = 0.01
         ucrNudFraction.SetRDefault(0)
 
-        ucrInputN.SetParameter(New RParameter("n", 14))
+        ucrInputN.SetParameter(New RParameter("nth_value", 14))
         ucrInputN.AddQuotesIfUnrecognised = False
         ucrInputN.SetValidationTypeAsNumeric()
 
