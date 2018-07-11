@@ -68,6 +68,11 @@ Public Class ucrInputComboBox
         FillItemTypes()
     End Sub
 
+    Public Sub SetItemsTypeAsSurv()
+        strItemsType = "Surv"
+        FillItemTypes()
+    End Sub
+
     Public Sub SetItemsTypeAsTables()
         strItemsType = "Tables"
         FillItemTypes()
@@ -105,6 +110,11 @@ Public Class ucrInputComboBox
                 If ucrDataFrameSelector IsNot Nothing Then
                     cboInput.Items.Clear()
                     cboInput.Items.AddRange(frmMain.clsRLink.GetGraphNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray())
+                End If
+            Case "Surv"
+                If ucrDataFrameSelector IsNot Nothing Then
+                    cboInput.Items.Clear()
+                    cboInput.Items.AddRange(frmMain.clsRLink.GetSurvNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray())
                 End If
             Case "Filters"
                 If ucrDataFrameSelector IsNot Nothing Then
