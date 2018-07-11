@@ -23,6 +23,7 @@ Public Class dlgClimaticBoxPlot
     Private clsRaesFunction As New RFunction
     Private clsBaseOperator As New ROperator
     Private clsLocalRaesFunction As New RFunction
+    Private clsXTitleFunction As New RFunction
     Private clsLabsFunction As New RFunction
     Private clsXlabsFunction As New RFunction
     Private clsYlabFunction As New RFunction
@@ -32,7 +33,9 @@ Public Class dlgClimaticBoxPlot
     Private clsFacetOp As New ROperator
     Private clsFacetRowOp As New ROperator
     Private clsFacetColOp As New ROperator
+    Private clsThemeParam As New RParameter
     Private clsThemeFunction As New RFunction
+    Private clsThemeFunc As New RFunction
     Private dctThemeFunctions As Dictionary(Of String, RFunction)
     Private bResetSubdialog As Boolean = True
     Private bResetBoxLayerSubdialog As Boolean = True
@@ -40,7 +43,9 @@ Public Class dlgClimaticBoxPlot
     Private clsFilteredDataOperator As New ROperator
     Private clsFilterElementOperator As New ROperator
     Private clsFilterElementFunction As New RFunction
+    Private clsAsFactorFunction As New RFunction
 
+    Private strFacetWrap As String = "Facet Wrap"
     Private strFacetRow As String = "Facet Row"
     Private strFacetCol As String = "Facet Column"
     Private strXAxis As String = "X Axis"
@@ -66,14 +71,14 @@ Public Class dlgClimaticBoxPlot
         bReset = False
         autoTranslate(Me)
         TestOKEnabled()
+
+        SetOptionsButtonstext()
     End Sub
 
     Private Sub InitialiseDialog()
         Dim clsCoordFlipFunc As New RFunction
         Dim clsCoordFlipParam As New RParameter
-        Dim clsThemeFunc As New RFunction
         Dim clsTextElementFunc As New RFunction
-        Dim clsThemeParam As New RParameter
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         'ucrBase.iHelpTopicID = ""
@@ -97,7 +102,7 @@ Public Class dlgClimaticBoxPlot
         ucrReceiverStation.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "station" & Chr(34)})
         ucrReceiverStation.bAutoFill = True
         ucrReceiverStation.bWithQuotes = False
-        ucrReceiverWithinYear.SetIncludedDataTypes({"factor"})
+        ucrReceiverStation.SetIncludedDataTypes({"factor"})
         ucrReceiverStation.strSelectorHeading = "Station Variables"
 
         ucrReceiverYear.SetParameterIsString()
@@ -106,7 +111,7 @@ Public Class dlgClimaticBoxPlot
         ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
         ucrReceiverYear.bAutoFill = True
         ucrReceiverYear.bWithQuotes = False
-        ucrReceiverYear.SetIncludedDataTypes({"factor"})
+        ucrReceiverYear.SetIncludedDataTypes({"numeric", "factor"})
         ucrReceiverYear.strSelectorHeading = "Year Variables"
 
         ucrReceiverWithinYear.SetParameter(New RParameter("x", 1))
@@ -118,10 +123,19 @@ Public Class dlgClimaticBoxPlot
         ucrReceiverWithinYear.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrReceiverWithinYear.bAddParameterIfEmpty = True
 
+        ' others
+        ucrReceiverDate.SetParameter(New RParameter("date", 1))
+        ucrReceiverDate.SetParameterIsString()
+        ucrReceiverDate.Selector = ucrSelectorClimaticBoxPlot
+        ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
+        ucrReceiverDate.bAutoFill = True
+        ucrReceiverDate.strSelectorHeading = "Date Variables"
+
         ' summary
-        ucrReceiverElement.SetParameter(New RParameter("y", 1))
+        ucrReceiverElement.SetParameter(New RParameter("y", 0))
         ucrReceiverElement.SetParameterIsString()
         ucrReceiverElement.bWithQuotes = False
+        ucrReceiverElement.bAutoFill = True
         ucrReceiverElement.strSelectorHeading = "Variables"
         ucrReceiverElement.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiverElement.SetIncludedDataTypes({"numeric"})
@@ -138,15 +152,6 @@ Public Class dlgClimaticBoxPlot
         ucrNudOmitBelow.DecimalPlaces = 2
         ucrNudOmitBelow.Increment = 0.1
         ucrChkOmitBelow.AddToLinkedControls(ucrNudOmitBelow, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.85)
-
-        ' others
-        ucrReceiverDate.SetParameter(New RParameter("date", 1))
-        ucrReceiverDate.SetParameterIsString()
-        ucrReceiverDate.Selector = ucrSelectorClimaticBoxPlot
-        ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
-        ucrReceiverDate.bAutoFill = True
-        ucrReceiverDate.strSelectorHeading = "Date Variables"
-
 
         ucrChkVarWidth.SetParameter(New RParameter("varwidth", 0))
         ucrChkVarWidth.SetText("Variable Width")
@@ -171,13 +176,13 @@ Public Class dlgClimaticBoxPlot
         ucrChkVerticalXTickMarkers.SetText("Vertical X Tick Markers")
         ucrChkVerticalXTickMarkers.SetParameter(clsThemeParam, bNewAddRemoveParameter:=True, bNewChangeParameterValue:=False)
 
-        ucrInputStation.SetItems({strXAxis, strColour, strFacetRow, strFacetCol, strNone})
+        ucrInputStation.SetItems({strXAxis, strColour, strFacetWrap, strFacetRow, strFacetCol, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
 
-        ucrInputYear.SetItems({strXAxis, strColour, strFacetRow, strFacetCol, strNone})
+        ucrInputYear.SetItems({strXAxis, strColour, strFacetWrap, strFacetRow, strFacetCol, strNone})
         ucrInputYear.SetDropDownStyleAsNonEditable()
 
-        ucrInputWithinYear.SetItems({strXAxis, strColour, strFacetRow, strFacetCol, strNone})
+        ucrInputWithinYear.SetItems({strXAxis, strColour, strFacetWrap, strFacetRow, strFacetCol, strNone})
         ucrInputWithinYear.SetDropDownStyleAsNonEditable()
 
         ucrSavePlot.SetPrefix("boxplot")
@@ -201,9 +206,9 @@ Public Class dlgClimaticBoxPlot
         clsFilteredDataOperator = New ROperator
         clsFilterElementOperator = New ROperator
         clsFilterElementFunction = New RFunction
+        clsAsFactorFunction = New RFunction
 
         clsFacetFunction.SetPackageName("ggplot2")
-        clsFacetFunction.SetRCommand("facet_grid")
         clsFacetRowOp.SetOperation("+")
         clsFacetRowOp.bBrackets = False
         clsFacetColOp.SetOperation("+")
@@ -211,8 +216,6 @@ Public Class dlgClimaticBoxPlot
         clsFacetOp.SetOperation("~")
         clsFacetOp.bForceIncludeOperation = True
         clsFacetOp.bBrackets = False
-        clsFacetOp.AddParameter("left", clsROperatorParameter:=clsFacetRowOp, iPosition:=0)
-        clsFacetOp.AddParameter("right", clsROperatorParameter:=clsFacetColOp, iPosition:=1)
         clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetOp)
 
         clsFilterElementOperator.SetOperation(">")
@@ -231,7 +234,7 @@ Public Class dlgClimaticBoxPlot
         sdgPlots.Reset()
         bResetSubdialog = True
         bResetBoxLayerSubdialog = True
-        ucrReceiverStation.SetMeAsReceiver()
+        ucrReceiverElement.SetMeAsReceiver()
 
         ucrInputStation.SetText(strNone)
         ucrInputStation.bUpdateRCodeFromControl = True
@@ -252,6 +255,8 @@ Public Class dlgClimaticBoxPlot
         clsRaesFunction.SetRCommand("aes")
         clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
 
+        clsAsFactorFunction.SetRCommand("as.factor")
+
         clsRgeomPlotFunction.SetPackageName("ggplot2")
         clsRgeomPlotFunction.SetRCommand("geom_boxplot")
         clsRgeomPlotFunction.AddParameter("varwidth", "FALSE", iPosition:=0)
@@ -265,6 +270,11 @@ Public Class dlgClimaticBoxPlot
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
         clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
+
+        clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunc, bIncludeArgumentName:=False)
+
+        clsXlabsFunction.AddParameter("label", Chr(34) & "" & Chr(34), bIncludeArgumentName:=False)
+        clsBaseOperator.AddParameter("xlab", clsRFunctionParameter:=clsXlabsFunction, bIncludeArgumentName:=False)
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorClimaticBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
@@ -300,6 +310,7 @@ Public Class dlgClimaticBoxPlot
         SetDefaults()
         SetRCodeForControls(True)
         AutoFill()
+        UpdateParameters()
         TestOKEnabled()
     End Sub
 
@@ -316,24 +327,33 @@ Public Class dlgClimaticBoxPlot
     Private Sub ucrPnlPlots_ControlValueChanged() Handles ucrPnlPlots.ControlValueChanged
         If rdoBoxplot.Checked Then
             clsRgeomPlotFunction.SetRCommand("geom_boxplot")
-            cmdBoxPlotOptions.Text = "Boxplot Options"
             If Not ucrSavePlot.bUserTyped Then
                 ucrSavePlot.SetPrefix("boxplot")
             End If
         ElseIf rdoJitter.Checked Then
             clsRgeomPlotFunction.SetRCommand("geom_jitter")
-            cmdBoxPlotOptions.Text = "Jitter Options"
             If Not ucrSavePlot.bUserTyped Then
                 ucrSavePlot.SetPrefix("jitter")
             End If
         Else
             clsRgeomPlotFunction.SetRCommand("geom_violin")
-            cmdBoxPlotOptions.Text = "Violin Options"
             If Not ucrSavePlot.bUserTyped Then
                 ucrSavePlot.SetPrefix("violin")
             End If
         End If
         UpdateParameters()
+        AddRemoveFacets()
+        SetOptionsButtonstext()
+    End Sub
+
+    Private Sub SetOptionsButtonstext()
+        If rdoBoxplot.Checked Then
+            cmdBoxPlotOptions.Text = "Boxplot Options"
+        ElseIf rdoJitter.Checked Then
+            cmdBoxPlotOptions.Text = "Jitter Options"
+        Else
+            cmdBoxPlotOptions.Text = "Violin Options"
+        End If
     End Sub
 
     Private Sub cmdBoxPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdBoxPlotOptions.Click
@@ -383,6 +403,9 @@ Public Class dlgClimaticBoxPlot
                         ucrInputTemp.SetName(strNone)
                         bUpdateComboOptions = True
                     End If
+                    If strChangedText = strFacetWrap AndAlso ucrInputTemp.GetText = strFacetRow OrElse strChangedText = strFacetRow AndAlso ucrInputTemp.GetText = strFacetWrap OrElse strChangedText = strFacetWrap AndAlso ucrInputTemp.GetText = strFacetCol OrElse strChangedText = strFacetCol AndAlso ucrInputTemp.GetText = strFacetWrap Then
+                        ucrInputTemp.SetName(strNone)
+                    End If
                 Next
             End If
             UpdateParameters()
@@ -396,8 +419,10 @@ Public Class dlgClimaticBoxPlot
         clsRaesFunction.RemoveParameterByName("x")
         clsRaesFunction.RemoveParameterByName("color")
         clsRaesFunction.RemoveParameterByName("fill")
+        clsAsFactorFunction.RemoveParameterByName("x")
 
         For Each ucrInputTemp As ucrInputComboBox In dctComboReceiver.Keys
+            clsFacetOp.RemoveParameterByName("wrap" & ucrInputTemp.Name)
             clsFacetColOp.RemoveParameterByName("col" & ucrInputTemp.Name)
             clsFacetRowOp.RemoveParameterByName("row" & ucrInputTemp.Name)
         Next
@@ -409,8 +434,9 @@ Public Class dlgClimaticBoxPlot
             dctComboReceiver(ucrInputTemp).SetRCode(Nothing)
             If strTemp = strXAxis Then
                 dctComboReceiver(ucrInputTemp).ChangeParameterName("x")
-                dctComboReceiver(ucrInputTemp).SetParameterIncludeArgumentName(True)
-                dctComboReceiver(ucrInputTemp).SetRCode(clsRaesFunction)
+                dctComboReceiver(ucrInputTemp).SetParameterIncludeArgumentName(False)
+                dctComboReceiver(ucrInputTemp).SetRCode(clsAsFactorFunction)
+                clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsFactorFunction)
             ElseIf strTemp = strColour Then
                 If rdoJitter.Checked Then
                     dctComboReceiver(ucrInputTemp).ChangeParameterName("color")
@@ -420,6 +446,9 @@ Public Class dlgClimaticBoxPlot
                     dctComboReceiver(ucrInputTemp).SetParameterIncludeArgumentName(True)
                 End If
                 dctComboReceiver(ucrInputTemp).SetRCode(clsRaesFunction)
+            ElseIf strTemp = strFacetWrap Then
+                dctComboReceiver(ucrInputTemp).ChangeParameterName("wrap" & ucrInputTemp.Name)
+                dctComboReceiver(ucrInputTemp).SetRCode(clsFacetOp)
             ElseIf strTemp = strFacetCol Then
                 dctComboReceiver(ucrInputTemp).ChangeParameterName("col" & ucrInputTemp.Name)
                 dctComboReceiver(ucrInputTemp).SetRCode(clsFacetColOp)
@@ -438,12 +467,13 @@ Public Class dlgClimaticBoxPlot
         AutoFill()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSavePlot.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrSavePlot.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
     Private Sub AddRemoveFacets()
         Dim strText As String
+        Dim bWrap As Boolean = False
         Dim bCol As Boolean = False
         Dim bRow As Boolean = False
 
@@ -451,7 +481,10 @@ Public Class dlgClimaticBoxPlot
             clsBaseOperator.RemoveParameterByName("facets")
             For Each kvpTemp As KeyValuePair(Of ucrInputComboBox, ucrReceiverSingle) In dctComboReceiver
                 strText = kvpTemp.Key.GetText()
-                If strText = strFacetCol OrElse strText = strFacetRow AndAlso Not kvpTemp.Value.IsEmpty Then
+                If strText = strFacetWrap OrElse strText = strFacetCol OrElse strText = strFacetRow AndAlso Not kvpTemp.Value.IsEmpty Then
+                    If strText = strFacetWrap Then
+                        bWrap = True
+                    End If
                     If strText = strFacetCol Then
                         bCol = True
                     End If
@@ -460,18 +493,31 @@ Public Class dlgClimaticBoxPlot
                     End If
                 End If
             Next
-            If bRow OrElse bCol Then
+            If bWrap OrElse bRow OrElse bCol Then
                 clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
+            End If
+            If bWrap Then
+                clsFacetFunction.SetRCommand("facet_wrap")
+                clsFacetOp.AddParameter("wrap", iPosition:=0)
+            Else
+                clsFacetOp.RemoveParameterByName("wrap")
+            End If
+            If bRow OrElse bCol Then
+                clsFacetFunction.SetRCommand("facet_grid")
             End If
             If bRow Then
                 clsFacetOp.AddParameter("left", clsROperatorParameter:=clsFacetRowOp, iPosition:=0)
-            Else
+            ElseIf bCol AndAlso bWrap = False Then
                 clsFacetOp.AddParameter("left", ".", iPosition:=0)
+            Else
+                clsFacetOp.RemoveParameterByName("left")
             End If
             If bCol Then
                 clsFacetOp.AddParameter("right", clsROperatorParameter:=clsFacetColOp, iPosition:=1)
-            Else
+            ElseIf bRow AndAlso bWrap = False Then
                 clsFacetOp.AddParameter("right", ".", iPosition:=1)
+            Else
+                clsFacetOp.RemoveParameterByName("right")
             End If
         End If
     End Sub

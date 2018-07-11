@@ -83,7 +83,7 @@ Partial Class dlgOptionsByContextBoxplot
         Me.grpOptions.Location = New System.Drawing.Point(12, 284)
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.Size = New System.Drawing.Size(502, 196)
-        Me.grpOptions.TabIndex = 21
+        Me.grpOptions.TabIndex = 10
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
         '
@@ -93,7 +93,7 @@ Partial Class dlgOptionsByContextBoxplot
         Me.cmdHLineOptions.Location = New System.Drawing.Point(138, 135)
         Me.cmdHLineOptions.Name = "cmdHLineOptions"
         Me.cmdHLineOptions.Size = New System.Drawing.Size(95, 22)
-        Me.cmdHLineOptions.TabIndex = 28
+        Me.cmdHLineOptions.TabIndex = 11
         Me.cmdHLineOptions.Tag = ""
         Me.cmdHLineOptions.Text = "H Line Options"
         Me.cmdHLineOptions.UseVisualStyleBackColor = True
@@ -104,7 +104,7 @@ Partial Class dlgOptionsByContextBoxplot
         Me.cmdPointOptions.Location = New System.Drawing.Point(138, 57)
         Me.cmdPointOptions.Name = "cmdPointOptions"
         Me.cmdPointOptions.Size = New System.Drawing.Size(95, 22)
-        Me.cmdPointOptions.TabIndex = 27
+        Me.cmdPointOptions.TabIndex = 5
         Me.cmdPointOptions.Tag = ""
         Me.cmdPointOptions.Text = "Point Options"
         Me.cmdPointOptions.UseVisualStyleBackColor = True
@@ -115,7 +115,7 @@ Partial Class dlgOptionsByContextBoxplot
         Me.rdoViolin.Location = New System.Drawing.Point(89, 22)
         Me.rdoViolin.Name = "rdoViolin"
         Me.rdoViolin.Size = New System.Drawing.Size(50, 17)
-        Me.rdoViolin.TabIndex = 21
+        Me.rdoViolin.TabIndex = 2
         Me.rdoViolin.TabStop = True
         Me.rdoViolin.Text = "Violin"
         Me.rdoViolin.UseVisualStyleBackColor = True
@@ -126,7 +126,7 @@ Partial Class dlgOptionsByContextBoxplot
         Me.rdoBoxplot.Location = New System.Drawing.Point(6, 22)
         Me.rdoBoxplot.Name = "rdoBoxplot"
         Me.rdoBoxplot.Size = New System.Drawing.Size(60, 17)
-        Me.rdoBoxplot.TabIndex = 20
+        Me.rdoBoxplot.TabIndex = 3
         Me.rdoBoxplot.TabStop = True
         Me.rdoBoxplot.Text = "Boxplot"
         Me.rdoBoxplot.UseVisualStyleBackColor = True
@@ -136,44 +136,44 @@ Partial Class dlgOptionsByContextBoxplot
         Me.ucrInputJitter.AddQuotesIfUnrecognised = True
         Me.ucrInputJitter.IsMultiline = False
         Me.ucrInputJitter.IsReadOnly = False
-        Me.ucrInputJitter.Location = New System.Drawing.Point(83, 80)
+        Me.ucrInputJitter.Location = New System.Drawing.Point(115, 83)
         Me.ucrInputJitter.Name = "ucrInputJitter"
-        Me.ucrInputJitter.Size = New System.Drawing.Size(49, 21)
-        Me.ucrInputJitter.TabIndex = 19
+        Me.ucrInputJitter.Size = New System.Drawing.Size(50, 21)
+        Me.ucrInputJitter.TabIndex = 7
         '
         'lblJitter
         '
         Me.lblJitter.AutoSize = True
         Me.lblJitter.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblJitter.Location = New System.Drawing.Point(31, 83)
+        Me.lblJitter.Location = New System.Drawing.Point(31, 84)
         Me.lblJitter.Name = "lblJitter"
-        Me.lblJitter.Size = New System.Drawing.Size(29, 13)
-        Me.lblJitter.TabIndex = 18
-        Me.lblJitter.Text = "Jitter"
+        Me.lblJitter.Size = New System.Drawing.Size(32, 13)
+        Me.lblJitter.TabIndex = 6
+        Me.lblJitter.Text = "Jitter:"
         '
         'ucrChkVerticalXTickMarkers
         '
         Me.ucrChkVerticalXTickMarkers.Checked = False
-        Me.ucrChkVerticalXTickMarkers.Location = New System.Drawing.Point(257, 74)
+        Me.ucrChkVerticalXTickMarkers.Location = New System.Drawing.Point(283, 109)
         Me.ucrChkVerticalXTickMarkers.Name = "ucrChkVerticalXTickMarkers"
         Me.ucrChkVerticalXTickMarkers.Size = New System.Drawing.Size(210, 20)
-        Me.ucrChkVerticalXTickMarkers.TabIndex = 17
+        Me.ucrChkVerticalXTickMarkers.TabIndex = 0
         '
         'ucrChkHorizontalBoxplot
         '
         Me.ucrChkHorizontalBoxplot.Checked = False
-        Me.ucrChkHorizontalBoxplot.Location = New System.Drawing.Point(257, 48)
+        Me.ucrChkHorizontalBoxplot.Location = New System.Drawing.Point(283, 83)
         Me.ucrChkHorizontalBoxplot.Name = "ucrChkHorizontalBoxplot"
         Me.ucrChkHorizontalBoxplot.Size = New System.Drawing.Size(210, 20)
-        Me.ucrChkHorizontalBoxplot.TabIndex = 16
+        Me.ucrChkHorizontalBoxplot.TabIndex = 15
         '
         'ucrChkVarWidth
         '
         Me.ucrChkVarWidth.Checked = False
-        Me.ucrChkVarWidth.Location = New System.Drawing.Point(257, 22)
+        Me.ucrChkVarWidth.Location = New System.Drawing.Point(283, 57)
         Me.ucrChkVarWidth.Name = "ucrChkVarWidth"
         Me.ucrChkVarWidth.Size = New System.Drawing.Size(210, 20)
-        Me.ucrChkVarWidth.TabIndex = 15
+        Me.ucrChkVarWidth.TabIndex = 14
         '
         'ucrChkIncludePoints
         '
@@ -181,26 +181,26 @@ Partial Class dlgOptionsByContextBoxplot
         Me.ucrChkIncludePoints.Location = New System.Drawing.Point(6, 57)
         Me.ucrChkIncludePoints.Name = "ucrChkIncludePoints"
         Me.ucrChkIncludePoints.Size = New System.Drawing.Size(178, 20)
-        Me.ucrChkIncludePoints.TabIndex = 1
+        Me.ucrChkIncludePoints.TabIndex = 4
         '
         'ucrInputHlineValue
         '
         Me.ucrInputHlineValue.AddQuotesIfUnrecognised = True
         Me.ucrInputHlineValue.IsMultiline = False
         Me.ucrInputHlineValue.IsReadOnly = False
-        Me.ucrInputHlineValue.Location = New System.Drawing.Point(89, 160)
+        Me.ucrInputHlineValue.Location = New System.Drawing.Point(76, 165)
         Me.ucrInputHlineValue.Name = "ucrInputHlineValue"
         Me.ucrInputHlineValue.Size = New System.Drawing.Size(107, 21)
-        Me.ucrInputHlineValue.TabIndex = 7
+        Me.ucrInputHlineValue.TabIndex = 13
         '
         'lblHlineValue
         '
         Me.lblHlineValue.AutoSize = True
         Me.lblHlineValue.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblHlineValue.Location = New System.Drawing.Point(44, 164)
+        Me.lblHlineValue.Location = New System.Drawing.Point(31, 168)
         Me.lblHlineValue.Name = "lblHlineValue"
         Me.lblHlineValue.Size = New System.Drawing.Size(36, 13)
-        Me.lblHlineValue.TabIndex = 6
+        Me.lblHlineValue.TabIndex = 12
         Me.lblHlineValue.Text = "At Y ="
         '
         'ucrChkIncludeHline
@@ -209,7 +209,7 @@ Partial Class dlgOptionsByContextBoxplot
         Me.ucrChkIncludeHline.Location = New System.Drawing.Point(6, 137)
         Me.ucrChkIncludeHline.Name = "ucrChkIncludeHline"
         Me.ucrChkIncludeHline.Size = New System.Drawing.Size(159, 20)
-        Me.ucrChkIncludeHline.TabIndex = 5
+        Me.ucrChkIncludeHline.TabIndex = 10
         '
         'lblTransparency
         '
@@ -218,7 +218,7 @@ Partial Class dlgOptionsByContextBoxplot
         Me.lblTransparency.Location = New System.Drawing.Point(31, 112)
         Me.lblTransparency.Name = "lblTransparency"
         Me.lblTransparency.Size = New System.Drawing.Size(75, 13)
-        Me.lblTransparency.TabIndex = 2
+        Me.lblTransparency.TabIndex = 8
         Me.lblTransparency.Text = "Transparency:"
         '
         'ucrNudTransparency
@@ -230,7 +230,7 @@ Partial Class dlgOptionsByContextBoxplot
         Me.ucrNudTransparency.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTransparency.Name = "ucrNudTransparency"
         Me.ucrNudTransparency.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudTransparency.TabIndex = 3
+        Me.ucrNudTransparency.TabIndex = 9
         Me.ucrNudTransparency.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrPnlPlotType
@@ -254,7 +254,7 @@ Partial Class dlgOptionsByContextBoxplot
         Me.grpContexts.Location = New System.Drawing.Point(266, 116)
         Me.grpContexts.Name = "grpContexts"
         Me.grpContexts.Size = New System.Drawing.Size(248, 159)
-        Me.grpContexts.TabIndex = 22
+        Me.grpContexts.TabIndex = 5
         Me.grpContexts.TabStop = False
         Me.grpContexts.Text = "Include Contexts"
         '
@@ -358,7 +358,7 @@ Partial Class dlgOptionsByContextBoxplot
         Me.lblXAxis.Location = New System.Drawing.Point(270, 67)
         Me.lblXAxis.Name = "lblXAxis"
         Me.lblXAxis.Size = New System.Drawing.Size(38, 13)
-        Me.lblXAxis.TabIndex = 19
+        Me.lblXAxis.TabIndex = 3
         Me.lblXAxis.Text = "X axis:"
         '
         'lblMeasurement
@@ -368,7 +368,7 @@ Partial Class dlgOptionsByContextBoxplot
         Me.lblMeasurement.Location = New System.Drawing.Point(270, 26)
         Me.lblMeasurement.Name = "lblMeasurement"
         Me.lblMeasurement.Size = New System.Drawing.Size(105, 13)
-        Me.lblMeasurement.TabIndex = 17
+        Me.lblMeasurement.TabIndex = 1
         Me.lblMeasurement.Text = "Measurement Y axis:"
         '
         'cmdBoxPlotOptions
@@ -377,7 +377,7 @@ Partial Class dlgOptionsByContextBoxplot
         Me.cmdBoxPlotOptions.Location = New System.Drawing.Point(10, 208)
         Me.cmdBoxPlotOptions.Name = "cmdBoxPlotOptions"
         Me.cmdBoxPlotOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdBoxPlotOptions.TabIndex = 25
+        Me.cmdBoxPlotOptions.TabIndex = 6
         Me.cmdBoxPlotOptions.Tag = "Boxplot_Options"
         Me.cmdBoxPlotOptions.Text = "Boxplot Options"
         Me.cmdBoxPlotOptions.UseVisualStyleBackColor = True
@@ -388,24 +388,24 @@ Partial Class dlgOptionsByContextBoxplot
         Me.cmdOptions.Location = New System.Drawing.Point(10, 239)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdOptions.TabIndex = 26
+        Me.cmdOptions.TabIndex = 7
         Me.cmdOptions.Tag = "Options"
         Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'ucrSavePlot
         '
-        Me.ucrSavePlot.Location = New System.Drawing.Point(10, 502)
+        Me.ucrSavePlot.Location = New System.Drawing.Point(10, 497)
         Me.ucrSavePlot.Name = "ucrSavePlot"
         Me.ucrSavePlot.Size = New System.Drawing.Size(255, 24)
-        Me.ucrSavePlot.TabIndex = 23
+        Me.ucrSavePlot.TabIndex = 0
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 527)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 526)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 24
+        Me.ucrBase.TabIndex = 1
         '
         'ucrReceiverX
         '
@@ -416,7 +416,7 @@ Partial Class dlgOptionsByContextBoxplot
         Me.ucrReceiverX.Selector = Nothing
         Me.ucrReceiverX.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverX.strNcFilePath = ""
-        Me.ucrReceiverX.TabIndex = 20
+        Me.ucrReceiverX.TabIndex = 4
         Me.ucrReceiverX.ucrSelector = Nothing
         '
         'ucrReceiverMeasurement
@@ -428,7 +428,7 @@ Partial Class dlgOptionsByContextBoxplot
         Me.ucrReceiverMeasurement.Selector = Nothing
         Me.ucrReceiverMeasurement.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverMeasurement.strNcFilePath = ""
-        Me.ucrReceiverMeasurement.TabIndex = 18
+        Me.ucrReceiverMeasurement.TabIndex = 2
         Me.ucrReceiverMeasurement.ucrSelector = Nothing
         '
         'ucrSelectorPlot
@@ -440,13 +440,13 @@ Partial Class dlgOptionsByContextBoxplot
         Me.ucrSelectorPlot.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorPlot.Name = "ucrSelectorPlot"
         Me.ucrSelectorPlot.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorPlot.TabIndex = 16
+        Me.ucrSelectorPlot.TabIndex = 0
         '
         'dlgOptionsByContextBoxplot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(543, 585)
+        Me.ClientSize = New System.Drawing.Size(543, 582)
         Me.Controls.Add(Me.cmdBoxPlotOptions)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrSavePlot)
