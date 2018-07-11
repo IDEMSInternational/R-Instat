@@ -309,15 +309,19 @@ Public Class ucrReceiverSingle
     End Sub
 
     Public Sub CheckAutoFill()
+        Dim ucrCurrentReceiver As ucrReceiver
+
         'TODO When there are receivers with bAttachedToPrimaryDataFrame = False
         '     don't always want to autofill when dataframe is changed.
         '     Something like AndAlso Selector.CurrentReceiver.bAttachedToPrimaryDataFrame
         '     except always want to autofill when resetting regardless of current receiver
         If bAutoFill AndAlso Selector IsNot Nothing AndAlso (Selector.CurrentReceiver Is Nothing OrElse Selector.CurrentReceiver.bAttachedToPrimaryDataFrame) Then
+            ucrCurrentReceiver = Selector.CurrentReceiver
             SetMeAsReceiver()
             If Selector.lstAvailableVariable.Items.Count = 1 Then
                 Add(Selector.lstAvailableVariable.Items(0).Text, Selector.strCurrentDataFrame)
             End If
+            ucrCurrentReceiver.SetMeAsReceiver()
         End If
     End Sub
 
