@@ -25,7 +25,7 @@ Public Class DlgDefineClimaticData
     Dim lstReceivers As New List(Of ucrReceiverSingle)
     Dim lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
     Private clsDefaultFunction As New RFunction
-    Private clsAnyDuplicatesFunction, clsAddKeyFunction, clsConcFunction, clsGetColFunction As New RFunction
+    Private clsAnyDuplicatesFunction, clsConcFunction, clsGetColFunction As New RFunction
     Private strCurrentDataframeName As String
     Private bIsUnique As Boolean = True
 
@@ -87,7 +87,6 @@ Public Class DlgDefineClimaticData
 
     Private Sub SetDefaults()
         clsDefaultFunction = New RFunction
-        clsAddKeyFunction = New RFunction
         clsGetColFunction = New RFunction
         clsAnyDuplicatesFunction = New RFunction
         clsConcFunction = New RFunction
@@ -95,18 +94,14 @@ Public Class DlgDefineClimaticData
         ucrSelectorDefineClimaticData.Reset()
         ucrInputCheckInput.Reset()
         ucrReceiverDate.SetMeAsReceiver()
-        ucrBase.clsRsyntax.ClearCodes()
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$define_as_climatic")
         clsDefaultFunction.AddParameter("types", clsRFunctionParameter:=clsTypesFunction)
+        clsDefaultFunction.AddParameter("key_col_names", clsRFunctionParameter:=clsConcFunction, iPosition:=2)
 
         clsTypesFunction.SetRCommand("c")
 
         clsConcFunction.SetRCommand("c")
-
-        clsAddKeyFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
-        clsAddKeyFunction.AddParameter("data_name", Chr(34) & strCurrentDataframeName & Chr(34), iPosition:=0)
-        clsAddKeyFunction.AddParameter("col_names", clsRFunctionParameter:=clsConcFunction)
 
         clsAnyDuplicatesFunction.SetRCommand("anyDuplicated")
         clsAnyDuplicatesFunction.AddParameter("x", clsRFunctionParameter:=clsGetColFunction)
@@ -115,7 +110,6 @@ Public Class DlgDefineClimaticData
         clsGetColFunction.AddParameter("data_name", Chr(34) & strCurrentDataframeName & Chr(34))
         clsGetColFunction.AddParameter("col_names", clsRFunctionParameter:=clsConcFunction)
 
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsAddKeyFunction)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
         AutoFillReceivers()
         EnableDisableCheckUniqueBtn()
@@ -267,7 +261,6 @@ Public Class DlgDefineClimaticData
 
     Private Sub ucrSelectorDefineClimaticData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDefineClimaticData.ControlValueChanged
         strCurrentDataframeName = ucrSelectorDefineClimaticData.strCurrentDataFrame
-        clsAddKeyFunction.AddParameter("data_name", Chr(34) & strCurrentDataframeName & Chr(34), iPosition:=0)
         clsGetColFunction.AddParameter("data_name", Chr(34) & strCurrentDataframeName & Chr(34), iPosition:=0)
     End Sub
 
