@@ -46,6 +46,7 @@ Public Class dlgSPI
         ucrReceiverData.Selector = ucrSelectorVariable
         ucrReceiverData.bAutoFill = True
         ucrReceiverData.strSelectorHeading = "Variables"
+        ucrReceiverData.SetMeAsReceiver()
 
         ucrReceiverYear.SetParameterIsString()
         ucrReceiverYear.Selector = ucrSelectorVariable
@@ -105,6 +106,7 @@ Public Class dlgSPI
         clsListFunction = New RFunction
 
         ucrSelectorVariable.Reset()
+        ucrReceiverData.SetMeAsReceiver()
 
         clsListFunction.SetRCommand("list")
         clsListFunction.AddParameter("type", Chr(39) & "rectangular" & Chr(39), iPosition:=0)

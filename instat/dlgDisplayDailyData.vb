@@ -59,7 +59,7 @@ Public Class dlgDisplayDailyData
         ucrReceiverStations.Selector = ucrSelectorDisplayDailyClimaticData
         ucrReceiverStations.SetClimaticType("station")
         ucrReceiverStations.bAutoFill = True
-        ucrReceiverStations.SetMeAsReceiver()
+
 
         ucrReceiverYear.SetParameter(New RParameter("year_col", 3))
         ucrReceiverYear.SetParameterIsString()
@@ -85,6 +85,7 @@ Public Class dlgDisplayDailyData
         ucrReceiverElement.SetParameter(New RParameter("climatic_element", 1))
         ucrReceiverElement.SetParameterIsString()
         ucrReceiverElement.Selector = ucrSelectorDisplayDailyClimaticData
+        ucrReceiverElement.SetMeAsReceiver()
 
         ucrReceiverMultipleElements.SetParameter(New RParameter("climatic_element", 1))
         ucrReceiverMultipleElements.SetParameterIsString()
@@ -195,7 +196,7 @@ Public Class dlgDisplayDailyData
         clsConcFunction = New RFunction
 
         ucrSelectorDisplayDailyClimaticData.Reset()
-        ucrReceiverStations.SetMeAsReceiver()
+        ucrReceiverElement.SetMeAsReceiver()
 
         clsConcFunction.SetRCommand("c")
         clsConcFunction.AddParameter("sum", Chr(34) & "sum" & Chr(34), iPosition:=0)

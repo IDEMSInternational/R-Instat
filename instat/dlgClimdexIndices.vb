@@ -70,6 +70,7 @@ Public Class dlgClimdexIndices
         ucrReceiverTmax.SetClimaticType("temp_max")
         ucrReceiverTmax.bAutoFill = True
         ucrReceiverTmax.strSelectorHeading = "Maximum Temperature"
+        ucrReceiverTmax.SetMeAsReceiver()
 
         ucrReceiverTmin.SetParameter(New RParameter("tmin", 1))
         ucrReceiverTmin.SetParameterIsRFunction()
@@ -135,7 +136,7 @@ Public Class dlgClimdexIndices
 
         ucrSelectorClimdex.Reset()
         ucrSelectorClimdex.Focus()
-        ucrReceiverDate.SetMeAsReceiver()
+        ucrReceiverTmax.SetMeAsReceiver()
         ucrChkSave.Checked = True
 
         'Define the default RFunction

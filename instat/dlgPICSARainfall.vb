@@ -80,6 +80,7 @@ Public Class dlgPICSARainfall
         ucrVariablesAsFactorForPicsa.strSelectorHeading = "Varibles"
         ucrVariablesAsFactorForPicsa.SetParameterIsString()
         ucrVariablesAsFactorForPicsa.bWithQuotes = False
+        ucrVariablesAsFactorForPicsa.SetMeAsReceiver()
 
         ucrChkPoints.SetText("Add Points")
         ucrChkPoints.AddParameterPresentCondition(True, "points")
