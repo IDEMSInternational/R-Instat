@@ -867,6 +867,8 @@ Public Class RLink
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_model_names")
                 Case "graph"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_graph_names")
+                Case "surv"
+                    clsGetItems.SetRCommand(strInstatDataObject & "$get_surv_names")
                 Case "dataframe"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_data_names")
                 Case "link"
@@ -1190,6 +1192,26 @@ Public Class RLink
             End If
         End If
         Return lstGraphNames
+    End Function
+
+    Public Function GetSurvNames(Optional strDataFrameName As String = "") As List(Of String)
+        Dim chrSurvNames As CharacterVector
+        Dim lstSurvNames As New List(Of String)
+        Dim clsGetSurvNames As New RFunction
+        Dim expSurvNames As SymbolicExpression
+
+        clsGetSurvNames.SetRCommand(strInstatDataObject & "$get_graph_names")
+        If strDataFrameName <> "" Then
+            clsGetSurvNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+        End If
+        expSurvNames = RunInternalScriptGetValue(clsGetSurvNames.ToScript(), bSilent:=True)
+        If expSurvNames IsNot Nothing AndAlso Not expSurvNames.Type = Internals.SymbolicExpressionType.Null Then
+            chrSurvNames = expSurvNames.AsCharacter()
+            If chrSurvNames.Length > 0 Then
+                lstSurvNames.AddRange(chrSurvNames)
+            End If
+        End If
+        Return lstSurvNames
     End Function
 
     Public Function GetDataType(strDataFrameName As String, strColumnName As String) As String
