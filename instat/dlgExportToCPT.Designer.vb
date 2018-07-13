@@ -39,7 +39,7 @@ Partial Class dlgExportToCPT
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgExportToCPT))
-        Me.rdoTwoDF = New System.Windows.Forms.RadioButton()
+        Me.rdoTwoDFLong = New System.Windows.Forms.RadioButton()
         Me.rdoOneDF = New System.Windows.Forms.RadioButton()
         Me.lblSaveDataTo = New System.Windows.Forms.Label()
         Me.cmdChooseFile = New System.Windows.Forms.Button()
@@ -55,24 +55,24 @@ Partial Class dlgExportToCPT
         Me.ucrReceiverLatitude = New instat.ucrReceiverSingle()
         Me.ucrReceiverStationOneDF = New instat.ucrReceiverSingle()
         Me.ucrPnlNoOfDF = New instat.UcrPanel()
-        Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
-        Me.ucrSelectorExporCPT = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.lblOneDF = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.lblTwoDF = New System.Windows.Forms.Label()
+        Me.ucrSelectorOneDF = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.lblLine = New System.Windows.Forms.Label()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSelectorTwoDF = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.UcrReceiverMultiple1 = New instat.ucrReceiverMultiple()
+        Me.rdoTwoDFWide = New System.Windows.Forms.RadioButton()
         Me.SuspendLayout()
         '
-        'rdoTwoDF
+        'rdoTwoDFLong
         '
-        resources.ApplyResources(Me.rdoTwoDF, "rdoTwoDF")
-        Me.rdoTwoDF.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoTwoDF.FlatAppearance.BorderSize = 2
-        Me.rdoTwoDF.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoTwoDF.Name = "rdoTwoDF"
-        Me.rdoTwoDF.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.rdoTwoDFLong, "rdoTwoDFLong")
+        Me.rdoTwoDFLong.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoTwoDFLong.FlatAppearance.BorderSize = 2
+        Me.rdoTwoDFLong.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoTwoDFLong.Name = "rdoTwoDFLong"
+        Me.rdoTwoDFLong.UseVisualStyleBackColor = True
         '
         'rdoOneDF
         '
@@ -173,11 +173,6 @@ Partial Class dlgExportToCPT
         resources.ApplyResources(Me.ucrPnlNoOfDF, "ucrPnlNoOfDF")
         Me.ucrPnlNoOfDF.Name = "ucrPnlNoOfDF"
         '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
-        '
         'ucrReceiverElement
         '
         Me.ucrReceiverElement.frmParent = Me
@@ -196,42 +191,59 @@ Partial Class dlgExportToCPT
         Me.ucrReceiverYear.strNcFilePath = ""
         Me.ucrReceiverYear.ucrSelector = Nothing
         '
-        'ucrSelectorExporCPT
+        'ucrSelectorOneDF
         '
-        Me.ucrSelectorExporCPT.bDropUnusedFilterLevels = False
-        Me.ucrSelectorExporCPT.bShowHiddenColumns = False
-        Me.ucrSelectorExporCPT.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorExporCPT, "ucrSelectorExporCPT")
-        Me.ucrSelectorExporCPT.Name = "ucrSelectorExporCPT"
+        Me.ucrSelectorOneDF.bDropUnusedFilterLevels = False
+        Me.ucrSelectorOneDF.bShowHiddenColumns = False
+        Me.ucrSelectorOneDF.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorOneDF, "ucrSelectorOneDF")
+        Me.ucrSelectorOneDF.Name = "ucrSelectorOneDF"
         '
-        'Label1
+        'lblLine
         '
-        resources.ApplyResources(Me.Label1, "Label1")
-        Me.Label1.Name = "Label1"
+        resources.ApplyResources(Me.lblLine, "lblLine")
+        Me.lblLine.Name = "lblLine"
         '
-        'lblOneDF
+        'ucrBase
         '
-        resources.ApplyResources(Me.lblOneDF, "lblOneDF")
-        Me.lblOneDF.Name = "lblOneDF"
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
         '
-        'Label2
+        'ucrSelectorTwoDF
         '
-        resources.ApplyResources(Me.Label2, "Label2")
-        Me.Label2.Name = "Label2"
+        Me.ucrSelectorTwoDF.bDropUnusedFilterLevels = False
+        Me.ucrSelectorTwoDF.bShowHiddenColumns = False
+        Me.ucrSelectorTwoDF.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorTwoDF, "ucrSelectorTwoDF")
+        Me.ucrSelectorTwoDF.Name = "ucrSelectorTwoDF"
         '
-        'lblTwoDF
+        'UcrReceiverMultiple1
         '
-        resources.ApplyResources(Me.lblTwoDF, "lblTwoDF")
-        Me.lblTwoDF.Name = "lblTwoDF"
+        Me.UcrReceiverMultiple1.frmParent = Me
+        resources.ApplyResources(Me.UcrReceiverMultiple1, "UcrReceiverMultiple1")
+        Me.UcrReceiverMultiple1.Name = "UcrReceiverMultiple1"
+        Me.UcrReceiverMultiple1.Selector = Nothing
+        Me.UcrReceiverMultiple1.strNcFilePath = ""
+        Me.UcrReceiverMultiple1.ucrSelector = Nothing
+        '
+        'rdoTwoDFWide
+        '
+        resources.ApplyResources(Me.rdoTwoDFWide, "rdoTwoDFWide")
+        Me.rdoTwoDFWide.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoTwoDFWide.FlatAppearance.BorderSize = 2
+        Me.rdoTwoDFWide.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoTwoDFWide.Name = "rdoTwoDFWide"
+        Me.rdoTwoDFWide.UseVisualStyleBackColor = True
         '
         'dlgExportToCPT
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.lblTwoDF)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.lblOneDF)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.rdoTwoDFWide)
+        Me.Controls.Add(Me.UcrReceiverMultiple1)
+        Me.Controls.Add(Me.ucrSelectorTwoDF)
+        Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.lblLine)
         Me.Controls.Add(Me.lblStationTwoDF)
         Me.Controls.Add(Me.ucrReceiverStationTwoDF)
         Me.Controls.Add(Me.ucrReceiverLongitude)
@@ -245,13 +257,12 @@ Partial Class dlgExportToCPT
         Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.lblStationOneDF)
         Me.Controls.Add(Me.rdoOneDF)
-        Me.Controls.Add(Me.rdoTwoDF)
+        Me.Controls.Add(Me.rdoTwoDFLong)
         Me.Controls.Add(Me.ucrReceiverStationOneDF)
         Me.Controls.Add(Me.ucrPnlNoOfDF)
-        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiverElement)
         Me.Controls.Add(Me.ucrReceiverYear)
-        Me.Controls.Add(Me.ucrSelectorExporCPT)
+        Me.Controls.Add(Me.ucrSelectorOneDF)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -261,11 +272,10 @@ Partial Class dlgExportToCPT
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents ucrSelectorExporCPT As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrSelectorOneDF As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrPnlNoOfDF As UcrPanel
     Friend WithEvents rdoOneDF As RadioButton
-    Friend WithEvents rdoTwoDF As RadioButton
+    Friend WithEvents rdoTwoDFLong As RadioButton
     Friend WithEvents lblSaveDataTo As Label
     Friend WithEvents ucrInputFilePath As ucrInputTextBox
     Friend WithEvents cmdChooseFile As Button
@@ -284,5 +294,9 @@ Partial Class dlgExportToCPT
     Friend WithEvents lblTwoDF As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents lblOneDF As Label
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblLine As Label
+    Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrSelectorTwoDF As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents rdoTwoDFWide As RadioButton
+    Friend WithEvents UcrReceiverMultiple1 As ucrReceiverMultiple
 End Class
