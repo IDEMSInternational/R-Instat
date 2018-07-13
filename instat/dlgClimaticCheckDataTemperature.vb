@@ -106,6 +106,7 @@ Public Class dlgClimaticCheckDataTemperature
         ucrReceiverElement1.SetParameter(New RParameter("x", 0, bNewIncludeArgumentName:=False))
         ucrReceiverElement1.SetParameterIsString()
         ucrReceiverElement1.bWithQuotes = False
+        ucrReceiverElement1.SetMeAsReceiver()
 
         ucrReceiverElement2.Selector = ucrSelectorTemperature
         ucrReceiverElement2.SetParameter(New RParameter("x", 1, bNewIncludeArgumentName:=False))
@@ -332,11 +333,11 @@ Public Class dlgClimaticCheckDataTemperature
         ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsQCAcceptableRangeElement1.clsAcceptableRangeTestFunc, New RParameter("save"), iAdditionalPairNo:=6)
         ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsQCAcceptableRangeElement2.clsAcceptableRangeTestFunc, New RParameter("save"), iAdditionalPairNo:=7)
 
-        ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsOutliersElement1.clsOutlierUpperLimitTestCalc, New RParameter("save"), iAdditionalPairNo:=6)
-        ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsOutliersElement1.clsOutlierLowerLimitTestCalc, New RParameter("save"), iAdditionalPairNo:=7)
+        ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsOutliersElement1.clsOutlierUpperLimitTestCalc, New RParameter("save"), iAdditionalPairNo:=8)
+        ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsOutliersElement1.clsOutlierLowerLimitTestCalc, New RParameter("save"), iAdditionalPairNo:=9)
 
-        ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsOutliersElement2.clsOutlierUpperLimitTestCalc, New RParameter("save"), iAdditionalPairNo:=8)
-        ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsOutliersElement2.clsOutlierLowerLimitTestCalc, New RParameter("save"), iAdditionalPairNo:=9)
+        ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsOutliersElement2.clsOutlierUpperLimitTestCalc, New RParameter("save"), iAdditionalPairNo:=10)
+        ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsOutliersElement2.clsOutlierLowerLimitTestCalc, New RParameter("save"), iAdditionalPairNo:=11)
 
         ucrChkIncludeCalculatedColumns.AddAdditionalCodeParameterPair(clsJumpCodeElement2.clsJumpCalcFunction, New RParameter("save"), iAdditionalPairNo:=1)
 
