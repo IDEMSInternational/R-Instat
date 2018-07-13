@@ -99,7 +99,7 @@ Public Class dlgSpells
         ucrInputCondition.SetItems({"<=", "Between", "Outer", ">="})
         ucrInputCondition.SetDropDownStyleAsNonEditable()
 
-        ucrChkConditional.SetText("Conditional on Rain etc at Start of Spell")
+        ucrChkConditional.SetText("Assuming Condition Satified at Start of Each Period")
         ucrChkConditional.AddFunctionNamesCondition({True}, "sub1")
         ucrChkConditional.AddFunctionNamesCondition({False}, "sub1")
 
@@ -201,6 +201,7 @@ Public Class dlgSpells
         clsSpellLength.SetRCommand("instat_calculation$new")
         clsSpellLength.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsSpellLength.AddParameter("result_name", Chr(34) & strDrySpell & Chr(34), iPosition:=2)
+        ' change cumsum to consecutive sum 
         clsSpellLength.AddParameter("function_exp", Chr(34) & "cumsum(" & strRainDay & ")-cummax((" & strRainDay & "==0)*cumsum(" & strRainDay & "))" & Chr(34))
         clsSpellLength.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubSpellLength1, iPosition:=5)
         clsSubSpellLength1.AddParameter("sub1", clsRFunctionParameter:=clsRRainday, bIncludeArgumentName:=False)
