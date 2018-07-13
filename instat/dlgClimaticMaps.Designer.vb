@@ -232,7 +232,7 @@ Partial Class dlgClimaticMaps
         '
         'ucrSave
         '
-        Me.ucrSave.Location = New System.Drawing.Point(9, 348)
+        Me.ucrSave.Location = New System.Drawing.Point(9, 346)
         Me.ucrSave.Name = "ucrSave"
         Me.ucrSave.Size = New System.Drawing.Size(423, 24)
         Me.ucrSave.TabIndex = 18
