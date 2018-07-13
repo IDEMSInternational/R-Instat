@@ -184,7 +184,7 @@ Public Class dlgClimaticCheckDataTemperature
         ucrChkDifference.AddToLinkedControls(ucrNudDifference, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
 
         ucrChkIncludeCalculatedColumns.SetText("Calculated columns")
-        ucrChkIncludeCalculatedColumns.SetParameter(New RParameter("save", 4))
+        ucrChkIncludeCalculatedColumns.SetParameter(New RParameter("save", 5))
         ucrChkIncludeCalculatedColumns.SetValuesCheckedAndUnchecked("2", "0")
 
         ucrChkIncludeLogicalColumns.SetText("Logical columns")
@@ -268,7 +268,7 @@ Public Class dlgClimaticCheckDataTemperature
         clsCalcFilterFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsCalcFilterFunc.AddParameter("result_name", Chr(34) & "QC" & Chr(34))
         clsCalcFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsOrOperator, iPosition:=1)
-        clsCalcFilterFunc.AddParameter("sub_calculations", clsRFunctionParameter:=clsListSubCalc, iPosition:=2)
+        clsCalcFilterFunc.AddParameter("sub_calculations", clsRFunctionParameter:=clsListSubCalc, iPosition:=3)
         clsCalcFilterFunc.SetAssignTo("filter_calculation")
 
         'Logical columns 
@@ -456,7 +456,7 @@ Public Class dlgClimaticCheckDataTemperature
     Private Sub GroupByOptions()
         If Not ucrReceiverStation.IsEmpty Then
             clsGroupByFunc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverStation.GetVariableNames & ")", iPosition:=1)
-            clsCalcFilterFunc.AddParameter("manipulations", clsRFunctionParameter:=clsGroupingListFunc, iPosition:=3)
+            clsCalcFilterFunc.AddParameter("manipulations", clsRFunctionParameter:=clsGroupingListFunc, iPosition:=2)
             clsFilterFunc.AddParameter("manipulations", clsRFunctionParameter:=clsGroupingListFunc, iPosition:=3)
         Else
             clsCalcFilterFunc.RemoveParameterByName("manipulations")
