@@ -1085,3 +1085,23 @@ compare_columns <- function(x, y, use_unique = TRUE, sort_values = TRUE, firstno
     if(display_union) cat(paste0("Union (Values that appear in either column): ", paste0("'", dplyr::union(x, y), "'", collapse = ", ")))
   }
 }
+
+consecutive_sum <- function(x, initial_value = NA){
+  out = x
+  for(i in 1:length(x)){
+    if(!is.na(x[i])){
+    if(x[i] != 0){
+      if(i > 1){
+        out[i]=x[i] + out[i-1]
+    } else{
+        out[i] = x[i] + initial_value
+      }
+    } 
+    }
+  }
+  return(out)
+}
+
+max_consecutive_sum <- function(x){
+  max(consecutive_sum(x, initial_value = 0))
+}
