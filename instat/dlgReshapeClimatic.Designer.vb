@@ -28,23 +28,23 @@ Partial Class dlgReshapeClimaticData
         Me.rdoMonth = New System.Windows.Forms.RadioButton()
         Me.rdoYear = New System.Windows.Forms.RadioButton()
         Me.grpDay = New System.Windows.Forms.GroupBox()
+        Me.lblDayFirst = New System.Windows.Forms.Label()
         Me.lblStationThree = New System.Windows.Forms.Label()
         Me.lblYearThree = New System.Windows.Forms.Label()
         Me.lblMonthThree = New System.Windows.Forms.Label()
+        Me.lblDayLast = New System.Windows.Forms.Label()
         Me.grpMonth = New System.Windows.Forms.GroupBox()
-        Me.lblMonthLast = New System.Windows.Forms.Label()
-        Me.lblMonthFirst = New System.Windows.Forms.Label()
-        Me.lblStationTwo = New System.Windows.Forms.Label()
-        Me.lblYearTwo = New System.Windows.Forms.Label()
-        Me.lblDayofMonth = New System.Windows.Forms.Label()
         Me.grpYear = New System.Windows.Forms.GroupBox()
         Me.lblYearLast = New System.Windows.Forms.Label()
         Me.lblStation = New System.Windows.Forms.Label()
         Me.lblMonth = New System.Windows.Forms.Label()
         Me.lblYearFirst = New System.Windows.Forms.Label()
         Me.lblDayofYear = New System.Windows.Forms.Label()
-        Me.lblDayFirst = New System.Windows.Forms.Label()
-        Me.lblDayLast = New System.Windows.Forms.Label()
+        Me.lblMonthFirst = New System.Windows.Forms.Label()
+        Me.lblStationTwo = New System.Windows.Forms.Label()
+        Me.lblYearTwo = New System.Windows.Forms.Label()
+        Me.lblDayofMonth = New System.Windows.Forms.Label()
+        Me.lblMonthLast = New System.Windows.Forms.Label()
         Me.ucrReceiverStationTwo = New instat.ucrReceiverSingle()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrReceiverFirstYear = New instat.ucrReceiverSingle()
@@ -120,6 +120,11 @@ Partial Class dlgReshapeClimaticData
         Me.grpDay.Name = "grpDay"
         Me.grpDay.TabStop = False
         '
+        'lblDayFirst
+        '
+        resources.ApplyResources(Me.lblDayFirst, "lblDayFirst")
+        Me.lblDayFirst.Name = "lblDayFirst"
+        '
         'lblStationThree
         '
         resources.ApplyResources(Me.lblStationThree, "lblStationThree")
@@ -134,6 +139,11 @@ Partial Class dlgReshapeClimaticData
         '
         resources.ApplyResources(Me.lblMonthThree, "lblMonthThree")
         Me.lblMonthThree.Name = "lblMonthThree"
+        '
+        'lblDayLast
+        '
+        resources.ApplyResources(Me.lblDayLast, "lblDayLast")
+        Me.lblDayLast.Name = "lblDayLast"
         '
         'grpMonth
         '
@@ -151,31 +161,6 @@ Partial Class dlgReshapeClimaticData
         resources.ApplyResources(Me.grpMonth, "grpMonth")
         Me.grpMonth.Name = "grpMonth"
         Me.grpMonth.TabStop = False
-        '
-        'lblMonthLast
-        '
-        resources.ApplyResources(Me.lblMonthLast, "lblMonthLast")
-        Me.lblMonthLast.Name = "lblMonthLast"
-        '
-        'lblMonthFirst
-        '
-        resources.ApplyResources(Me.lblMonthFirst, "lblMonthFirst")
-        Me.lblMonthFirst.Name = "lblMonthFirst"
-        '
-        'lblStationTwo
-        '
-        resources.ApplyResources(Me.lblStationTwo, "lblStationTwo")
-        Me.lblStationTwo.Name = "lblStationTwo"
-        '
-        'lblYearTwo
-        '
-        resources.ApplyResources(Me.lblYearTwo, "lblYearTwo")
-        Me.lblYearTwo.Name = "lblYearTwo"
-        '
-        'lblDayofMonth
-        '
-        resources.ApplyResources(Me.lblDayofMonth, "lblDayofMonth")
-        Me.lblDayofMonth.Name = "lblDayofMonth"
         '
         'grpYear
         '
@@ -218,15 +203,30 @@ Partial Class dlgReshapeClimaticData
         resources.ApplyResources(Me.lblDayofYear, "lblDayofYear")
         Me.lblDayofYear.Name = "lblDayofYear"
         '
-        'lblDayFirst
+        'lblMonthFirst
         '
-        resources.ApplyResources(Me.lblDayFirst, "lblDayFirst")
-        Me.lblDayFirst.Name = "lblDayFirst"
+        resources.ApplyResources(Me.lblMonthFirst, "lblMonthFirst")
+        Me.lblMonthFirst.Name = "lblMonthFirst"
         '
-        'lblDayLast
+        'lblStationTwo
         '
-        resources.ApplyResources(Me.lblDayLast, "lblDayLast")
-        Me.lblDayLast.Name = "lblDayLast"
+        resources.ApplyResources(Me.lblStationTwo, "lblStationTwo")
+        Me.lblStationTwo.Name = "lblStationTwo"
+        '
+        'lblYearTwo
+        '
+        resources.ApplyResources(Me.lblYearTwo, "lblYearTwo")
+        Me.lblYearTwo.Name = "lblYearTwo"
+        '
+        'lblDayofMonth
+        '
+        resources.ApplyResources(Me.lblDayofMonth, "lblDayofMonth")
+        Me.lblDayofMonth.Name = "lblDayofMonth"
+        '
+        'lblMonthLast
+        '
+        resources.ApplyResources(Me.lblMonthLast, "lblMonthLast")
+        Me.lblMonthLast.Name = "lblMonthLast"
         '
         'ucrReceiverStationTwo
         '

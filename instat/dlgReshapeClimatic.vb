@@ -34,6 +34,7 @@ Public Class dlgReshapeClimaticData
         SetRCodeforControls(bReset)
         bReset = False
         autoTranslate(Me)
+        UpdateParameters()
         TestOkEnabled()
     End Sub
 
@@ -75,7 +76,7 @@ Public Class dlgReshapeClimaticData
         ucrReceiverLastYear.SetParameter(New RParameter("last", 5))
         ucrReceiverLastYear.bAutoFill = True
 
-        ucrReceiverDayofYear.SetParameter(New RParameter("day", 1))
+        ucrReceiverDayofYear.SetParameter(New RParameter("", 1))
         ucrReceiverDayofYear.SetParameterIsString()
         ucrReceiverDayofYear.bAutoFill = True
 
@@ -92,7 +93,7 @@ Public Class dlgReshapeClimaticData
         ucrReceiverYearTwo.SetParameterIsString()
         ucrReceiverYearTwo.bAutoFill = True
 
-        ucrReceiverDayofMonth.SetParameter(New RParameter("day", 1))
+        ucrReceiverDayofMonth.SetParameter(New RParameter("", 1))
         ucrReceiverDayofMonth.SetParameterIsString()
         ucrReceiverDayofMonth.bAutoFill = True
 
@@ -134,8 +135,8 @@ Public Class dlgReshapeClimaticData
         ucrPnlReshapeClimaticData.AddToLinkedControls(ucrReceiverStationThree, {rdoDay}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'ucrPnlReshapeClimaticData.AddParameterValuesCondition(rdoYear, "year", Chr(34) & "columns" & Chr(34))
-        'ucrPnlReshapeClimaticData.AddParameterValuesCondition(rdoMonth, "month", Chr(34) & "columns" & Chr(34))
-        'ucrPnlReshapeClimaticData.AddParameterValuesCondition(rdoDay, "day", Chr(34) & "columns" & Chr(34))
+        ucrPnlReshapeClimaticData.AddParameterValuesCondition(rdoMonth, "columns", Chr(34) & "month" & Chr(34))
+        ucrPnlReshapeClimaticData.AddParameterValuesCondition(rdoDay, "columns", Chr(34) & "day" & Chr(34))
 
         ucrReceiverStation.SetLinkedDisplayControl(grpYear)
         ucrReceiverStationTwo.SetLinkedDisplayControl(grpMonth)
@@ -145,7 +146,7 @@ Public Class dlgReshapeClimaticData
         ucrNewDFName.SetSaveTypeAsDataFrame()
         ucrNewDFName.SetCheckBoxText("New Data Frame Name")
         ucrNewDFName.SetDataFrameSelector(ucrSelectorReshapeClimaticData.ucrAvailableDataFrames)
-        'ucrNewDFName.SetAssignToIfUncheckedValue("last_data_frame")
+        ucrNewDFName.SetAssignToIfUncheckedValue("last_data_frame")
 
     End Sub
 
@@ -156,6 +157,10 @@ Public Class dlgReshapeClimaticData
         ucrReceiverFirstYear.SetMeAsReceiver()
         ucrNewDFName.Reset()
         rdoYear.Enabled = False
+
+        'clsGridtoDataFunc.AddParameter("year", Chr(34) & "columns" & Chr(34), iPosition:=3)
+        ' clsGridtoDataFunc.AddParameter("month", Chr(34) & "columns" & Chr(34), iPosition:=2)
+        'clsGridtoDataFunc.AddParameter("day", Chr(34) & "columns" & Chr(34), iPosition:=1)
 
         clsGridtoDataFunc.SetAssignTo(ucrNewDFName.GetText, strTempDataframe:=ucrSelectorReshapeClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
 
@@ -200,25 +205,26 @@ Public Class dlgReshapeClimaticData
     End Sub
 
     Private Sub ucrPnlReshapeClimaticData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlReshapeClimaticData.ControlValueChanged
+        UpdateParameters()
+    End Sub
+
+    Private Sub UpdateParameters()
 
         If rdoYear.Checked Then
             clsGridtoDataFunc.AddParameter("year", Chr(34) & "columns" & Chr(34), iPosition:=3)
-        Else
-            'clsGridtoDataFunc.RemoveParameterByName("year")
         End If
 
         If rdoMonth.Checked Then
             clsGridtoDataFunc.AddParameter("month", Chr(34) & "columns" & Chr(34), iPosition:=2)
-        Else
-            'clsGridtoDataFunc.RemoveParameterByName("month")
+            ucrReceiverDayofMonth.SetParameter(New RParameter("day", 1))
+
+
         End If
 
         If rdoDay.Checked Then
             clsGridtoDataFunc.AddParameter("day", Chr(34) & "columns" & Chr(34), iPosition:=1)
-        Else
-            'clsGridtoDataFunc.RemoveParameterByName("day")
-        End If
 
+        End If
     End Sub
 
     Private Sub ucrSelector_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorReshapeClimaticData.ControlValueChanged
