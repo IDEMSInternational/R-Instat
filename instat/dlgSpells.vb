@@ -19,7 +19,7 @@ Public Class dlgSpells
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private clsAddKey, clsSpellLength, clsMaxValueManipulation, clsSubSpellLength1 As New RFunction
-    Private clsMaxValue, clsMaxValueList, clsMaxValueFunction As New RFunction
+    Private clsMaxValue, clsMaxValueList, clsMaxValueFunction, clsGroupByList As New RFunction
     Private clsDayFromAndTo, clsGroupBy, clsAddKeyColName, clsDayFilterCalcFromConvert, clsDayFilterCalcFromList As New RFunction
     Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator As New ROperator
     Private clsApplyInstatFunction, clsRRainday, clsRRaindayMatch As New RFunction
@@ -178,6 +178,9 @@ Public Class dlgSpells
         clsGroupBy.SetRCommand("instat_calculation$new")
         clsGroupBy.AddParameter("type", Chr(34) & "by" & Chr(34))
         clsGroupBy.SetAssignTo("grouping")
+        clsGroupByList.SetRCommand("list")
+        clsGroupByList.AddParameter("sub1", clsRFunctionParameter:=clsSpellLength, bIncludeArgumentName:=False, iPosition:=0)
+        clsGroupBy.AddParameter("sub_calculation", clsRFunctionParameter:=clsGroupByList, iPosition:=5)
 
         ' rain_day
         clsRRaindayMatch.bToScriptAsRString = True
@@ -203,17 +206,12 @@ Public Class dlgSpells
         clsSpellLength.SetRCommand("instat_calculation$new")
         clsSpellLength.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsSpellLength.AddParameter("result_name", Chr(34) & strDrySpell & Chr(34), iPosition:=2)
-        ' change cumsum to consecutive sum 
         'clsSpellLength.AddParameter("function_exp", Chr(34) & "cumsum(" & strRainDay & ")-cummax((" & strRainDay & "==0)*cumsum(" & strRainDay & "))" & Chr(34))
         clsSpellLength.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubSpellLength1, iPosition:=5)
         clsSubSpellLength1.AddParameter("sub1", clsRFunctionParameter:=clsRRainday, bIncludeArgumentName:=False)
         clsSpellLength.AddParameter("save", 0, iPosition:=6)
         clsSpellLength.SetAssignTo("spell_length")
         clsMaxValueManipulation.SetRCommand("list")
-
-        'spell length manipulation 
-        'clsGroupByList.AddParameter("sub1", clsRFunctionParameter:=clsSpellLength, bIncludeArgumentName:=False, iPosition:=0)
-        'clsGroupBy.AddParameter("sub_calculation", clsRFunctionParameter:=clsGroupByList, iPosition:=5)
 
         ' Additional Checkbox
         'clsAdditionalConditionReplaceFunction.bToScriptAsRString = True
@@ -239,7 +237,6 @@ Public Class dlgSpells
         clsMaxValueFunction.AddParameter("x", strDrySpell)
         clsMaxValue.AddParameter("save", 2, iPosition:=6)
         clsMaxValue.AddParameter("result_name", Chr(34) & ucrInputNewColumnName.GetText() & Chr(34), iPosition:=3)
-        'clsMaxValue.AddParameter("sub_calculations", clsRFunctionParameter:=clsMaxValueList, iPosition:=4)
         clsMaxValue.AddParameter("manipulations", clsRFunctionParameter:=clsMaxValueManipulation, iPosition:=5)
         clsMaxValueManipulation.AddParameter("sub2", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False)
         clsMaxValueManipulation.AddParameter("sub3", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False)
