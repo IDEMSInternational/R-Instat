@@ -316,6 +316,7 @@ Public Class dlgClimaticCheckDataTemperature
         ucrChkJump.AddAdditionalCodeParameterPair(clsListSubCalc, New RParameter("jump", strParamValue:=clsJumpListSubCalc, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrChkSame.AddAdditionalCodeParameterPair(clsListSubCalc, New RParameter("same", strParamValue:=clsSameListSubCalc, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrChkDifference.AddAdditionalCodeParameterPair(clsListSubCalc, New RParameter("diff", strParamValue:=clsQCDifferenceRCode.clsDiffTestFunction, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrChkDifference.AddAdditionalCodeParameterPair(clsListSubCalc, New RParameter("Diff", strParamValue:=clsQCDifferenceRCode.clsDiffCalcFunction, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
 
         ucrNudCoeff.AddAdditionalCodeParameterPair(clsOutliersElement1.clsOutlierLowerLimitFunc, New RParameter("coef"), iAdditionalPairNo:=1)
         ucrNudCoeff.AddAdditionalCodeParameterPair(clsOutliersElement2.clsOutlierLowerLimitFunc, New RParameter("coef"), iAdditionalPairNo:=2)
@@ -513,7 +514,9 @@ Public Class dlgClimaticCheckDataTemperature
             clsRangeOrOp.AddParameter("range1", strParameterValue:=clsQCAcceptableRangeElement1.strTestName, bIncludeArgumentName:=False)
             clsRangeListSubCalc.AddParameter("range1", clsROperatorParameter:=clsQCAcceptableRangeElement1.clsRangeOrOperator, bIncludeArgumentName:=False)
             clsOutlierListSubCalc.AddParameter("upperOutlierCalc1", clsRFunctionParameter:=clsOutliersElement1.clsOutlierUpperLimitTestCalc, bIncludeArgumentName:=False, iPosition:=0)
+            clsOutlierListSubCalc.AddParameter("upperOutlierTest1", clsRFunctionParameter:=clsOutliersElement1.clsOutlierUpperLimitCalc, bIncludeArgumentName:=False, iPosition:=1)
             clsOutlierListSubCalc.AddParameter("lowerOutlierCalc1", clsRFunctionParameter:=clsOutliersElement1.clsOutlierLowerLimitTestCalc, bIncludeArgumentName:=False, iPosition:=3)
+            clsOutlierListSubCalc.AddParameter("lowerOutlierTest1", clsRFunctionParameter:=clsOutliersElement1.clsOutlierLowerLimitCalc, bIncludeArgumentName:=False, iPosition:=4)
             clsOutlierCombinedOperator.AddParameter("upperOutlierTest1", strParameterValue:=clsOutliersElement1.strUpperTestName, bIncludeArgumentName:=False, iPosition:=0)
             clsOutlierCombinedOperator.AddParameter("lowerOutlierTest1", strParameterValue:=clsOutliersElement1.strLowerTestName, bIncludeArgumentName:=False, iPosition:=1)
         Else
@@ -526,7 +529,9 @@ Public Class dlgClimaticCheckDataTemperature
             clsRangeOrOp.RemoveParameterByName("range1")
             clsRangeListSubCalc.RemoveParameterByName("sub1")
             clsOutlierListSubCalc.RemoveParameterByName("upperOutlierCalc1")
+            clsOutlierListSubCalc.RemoveParameterByName("upperOutlierTest1")
             clsOutlierListSubCalc.RemoveParameterByName("lowerOutlierCalc1")
+            clsOutlierListSubCalc.RemoveParameterByName("lowerOutlierTest1")
             clsOutlierCombinedOperator.RemoveParameterByName("upperOutlierTest1")
             clsOutlierCombinedOperator.RemoveParameterByName("lowerOutlierTest1")
         End If
@@ -540,7 +545,9 @@ Public Class dlgClimaticCheckDataTemperature
             clsRange2OrOp.AddParameter("range2", strParameterValue:=clsQCAcceptableRangeElement2.strTestName, bIncludeArgumentName:=False)
             clsRangeListSubCalc.AddParameter("range2", clsROperatorParameter:=clsQCAcceptableRangeElement2.clsRangeOrOperator, bIncludeArgumentName:=False)
             clsOutlierListSubCalc.AddParameter("lowerOutlierCalc2", clsRFunctionParameter:=clsOutliersElement2.clsOutlierLowerLimitTestCalc, bIncludeArgumentName:=False, iPosition:=1)
+            clsOutlierListSubCalc.AddParameter("lowerOutlierTest2", clsRFunctionParameter:=clsOutliersElement2.clsOutlierLowerLimitCalc, bIncludeArgumentName:=False, iPosition:=2)
             clsOutlierListSubCalc.AddParameter("upperOutlierCalc2", clsRFunctionParameter:=clsOutliersElement2.clsOutlierUpperLimitTestCalc, bIncludeArgumentName:=False, iPosition:=4)
+            clsOutlierListSubCalc.AddParameter("upperOutlierTest2", clsRFunctionParameter:=clsOutliersElement2.clsOutlierUpperLimitCalc, bIncludeArgumentName:=False, iPosition:=5)
             clsOutlierCombinedOperator.AddParameter("upperOutlierTest2", clsOutliersElement2.strUpperTestName, bIncludeArgumentName:=False, iPosition:=2)
             clsOutlierCombinedOperator.AddParameter("lowerOutlierTest2", clsOutliersElement2.strLowerTestName, bIncludeArgumentName:=False, iPosition:=3)
         Else
@@ -553,7 +560,9 @@ Public Class dlgClimaticCheckDataTemperature
             clsRange2OrOp.RemoveParameterByName("range2")
             clsRangeListSubCalc.RemoveParameterByName("range2")
             clsOutlierListSubCalc.RemoveParameterByName("lowerOutlierCalc2")
+            clsOutlierListSubCalc.RemoveParameterByName("lowerOutlierTest2")
             clsOutlierListSubCalc.RemoveParameterByName("upperOutlierCalc2")
+            clsOutlierListSubCalc.RemoveParameterByName("upperOutlierTest2")
             clsOutlierCombinedOperator.RemoveParameterByName("upperOutlierTest2")
             clsOutlierCombinedOperator.RemoveParameterByName("lowerOutlierTest2")
         End If
