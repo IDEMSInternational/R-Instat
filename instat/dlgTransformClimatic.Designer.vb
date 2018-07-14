@@ -71,6 +71,8 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrReceiverData = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrChkGroupByYear = New instat.ucrCheck()
+        Me.rdoMultSpells = New System.Windows.Forms.RadioButton()
         Me.grpTransform.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -278,15 +280,6 @@ Partial Class dlgTransformClimatic
         resources.ApplyResources(Me.ucrPnlTransform, "ucrPnlTransform")
         Me.ucrPnlTransform.Name = "ucrPnlTransform"
         '
-        'ucrReceiverData
-        '
-        Me.ucrReceiverData.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverData, "ucrReceiverData")
-        Me.ucrReceiverData.Name = "ucrReceiverData"
-        Me.ucrReceiverData.Selector = Nothing
-        Me.ucrReceiverData.strNcFilePath = ""
-        Me.ucrReceiverData.ucrSelector = Nothing
-        '
         'ucrReceiverStation
         '
         Me.ucrReceiverStation.frmParent = Me
@@ -321,15 +314,42 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverDate.strNcFilePath = ""
         Me.ucrReceiverDate.ucrSelector = Nothing
         '
+        'ucrReceiverData
+        '
+        Me.ucrReceiverData.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverData, "ucrReceiverData")
+        Me.ucrReceiverData.Name = "ucrReceiverData"
+        Me.ucrReceiverData.Selector = Nothing
+        Me.ucrReceiverData.strNcFilePath = ""
+        Me.ucrReceiverData.ucrSelector = Nothing
+        '
         'ucrBase
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrChkGroupByYear
+        '
+        Me.ucrChkGroupByYear.Checked = False
+        resources.ApplyResources(Me.ucrChkGroupByYear, "ucrChkGroupByYear")
+        Me.ucrChkGroupByYear.Name = "ucrChkGroupByYear"
+        '
+        'rdoMultSpells
+        '
+        resources.ApplyResources(Me.rdoMultSpells, "rdoMultSpells")
+        Me.rdoMultSpells.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMultSpells.FlatAppearance.BorderSize = 2
+        Me.rdoMultSpells.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMultSpells.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoMultSpells.Name = "rdoMultSpells"
+        Me.rdoMultSpells.UseVisualStyleBackColor = True
+        '
         'dlgTransformClimatic
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.rdoMultSpells)
+        Me.Controls.Add(Me.ucrChkGroupByYear)
         Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.lblNewColName)
         Me.Controls.Add(Me.ucrInputColName)
@@ -391,4 +411,6 @@ Partial Class dlgTransformClimatic
     Friend WithEvents ucrInputSpellUpper As ucrInputTextBox
     Friend WithEvents ucrInputCondition As ucrInputComboBox
     Friend WithEvents lblCondition As Label
+    Friend WithEvents rdoMultSpells As RadioButton
+    Friend WithEvents ucrChkGroupByYear As ucrCheck
 End Class
