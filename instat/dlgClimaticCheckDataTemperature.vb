@@ -277,7 +277,7 @@ Public Class dlgClimaticCheckDataTemperature
         clsFilterFunc.AddParameter("function_exp", strParameterValue:=Chr(34) & "QC" & Chr(34), iPosition:=1)
         clsFilterFunc.AddParameter("sub_calculations", clsRFunctionParameter:=clsFilterListFunc, iPosition:=2)
         clsFilterFunc.AddParameter("save", "2", iPosition:=3)
-        clsFilterFunc.AddParameter("result_data_frame", Chr(34) & "Filter" & Chr(34), iPosition:=4)
+        clsFilterFunc.AddParameter("result_data_frame", Chr(34) & "QcTemp" & Chr(34), iPosition:=4)
         clsFilterFunc.SetAssignTo("filtered_data")
 
         clsFilterListFunc.SetRCommand("list")
