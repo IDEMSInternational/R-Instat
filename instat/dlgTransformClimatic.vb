@@ -14,11 +14,12 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgTransformClimatic
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Private clsRTransform, clsOverallTransformFunction, clsTransformManipulationsFunc, clsGroupBy, clsReplaceNAasElement, clsRTransformCountSpellSub As New RFunction
+    Private clsRTransform, clsOverallTransformFunction, clsTransformManipulationsFunc, clsGroupByYear, clsGroupByStation, clsReplaceNAasElement, clsRTransformCountSpellSub As New RFunction
 
     'Moving
     Private clsRMovingFunction As New RFunction
@@ -95,6 +96,8 @@ Public Class dlgTransformClimatic
         ucrReceiverData.strSelectorHeading = "Numerics"
         ucrReceiverData.SetIncludedDataTypes({"numeric"})
 
+        ucrChkGroupByYear.SetText("Group by Year")
+
         ' Moving
         ucrInputSum.SetParameter(New RParameter("FUN", 0))
         dctInputSumPairs.Add("Sum", "sum")
@@ -164,7 +167,7 @@ Public Class dlgTransformClimatic
         clsRTransformCountSpellSub = New RFunction
 
         clsRMovingFunction = New RFunction
-        clsGroupBy = New RFunction
+        clsGroupByYear = New RFunction
         clsReplaceNAasElement = New RFunction
         clsRCountFunction = New RFunction
         clsRWaterBalanceFunction = New RFunction
@@ -242,16 +245,22 @@ Public Class dlgTransformClimatic
         clsRWaterBalanceFunction.AddParameter("accumulate", "TRUE", iPosition:=2)
         '"Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText & ", 0), " & ucrNudCapacity.Value & "), Rain, accumulate=TRUE)" & Chr(34))
 
+        ' Group options 
+        clsGroupByYear.SetRCommand("instat_calculation$new")
+        clsGroupByYear.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=0)
+        clsGroupByYear.SetAssignTo("group_by_year")
+
+        clsGroupByStation.SetRCommand("instat_calculation$new")
+        clsGroupByStation.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=0)
+        clsGroupByStation.SetAssignTo("group_by_station")
+
         ' Overall Function
         clsRTransformCountSpellSub.SetRCommand("list")
         clsRTransformCountSpellSub.AddParameter("sub1", clsRFunctionParameter:=clsRRainday, bIncludeArgumentName:=False, iPosition:=0)
 
-        clsGroupBy.SetRCommand("instat_calculation$new")
-        clsGroupBy.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=0)
-        clsGroupBy.SetAssignTo("grouping")
-
         clsTransformManipulationsFunc.SetRCommand("list")
-        clsTransformManipulationsFunc.AddParameter("group_by", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False, iPosition:=0)
+        'clsTransformManipulationsFunc.AddParameter("group_by_year", clsRFunctionParameter:=clsGroupByYear, bIncludeArgumentName:=False, iPosition:=0)
+        'clsTransformManipulationsFunc.AddParameter("group_by_station", clsRFunctionParameter:=clsGroupByStation, bIncludeArgumentName:=False, iPosition:=0)
 
         clsRTransform.SetRCommand("instat_calculation$new")
         clsRTransform.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
@@ -278,6 +287,7 @@ Public Class dlgTransformClimatic
         ucrReceiverData.AddAdditionalCodeParameterPair(clsRWaterBalanceFunction, New RParameter("replace_na", 1, False), iAdditionalPairNo:=4)
 
         ucrPnlTransform.SetRCode(clsRTransform, bReset)
+        ucrChkGroupByYear.SetRCode(clsGroupByYear)
 
         ' Moving
         ucrNudSumOver.SetRCode(clsRMovingFunction, bReset)
@@ -341,7 +351,10 @@ Public Class dlgTransformClimatic
             clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRCountFunction, iPosition:=1)
             clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsRTransformCountSpellSub, iPosition:=4)
         ElseIf rdoSpell.Checked Then
-            clsRTransform.AddParameter("function_exp", Chr(34) & "cumsum(" & strRainDay & ")-cummax((" & strRainDay & "==0)*cumsum(" & strRainDay & "))" & Chr(34), iPosition:=1)
+            ' set ucrrain to rfunction
+            ' change to "consecutive_sum("x = "ucrReceiverData.GetVariables, "initial_value = NA")"
+            ' create new cls for consecutive_sum
+            clsRTransform.AddParameter("function_exp", Chr(34) & "consecutive_sum(x = " & strRainDay & ", initial_value = NA)" & Chr(34), iPosition:=1)
             clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsRTransformCountSpellSub, iPosition:=4)
         ElseIf rdoWaterBalance.Checked Then
             clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRWaterBalanceFunction, iPosition:=1)
@@ -376,11 +389,25 @@ Public Class dlgTransformClimatic
         End Select
     End Sub
 
-    Private Sub GroupByOptions()
-        If Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty Then
-            clsGroupBy.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & "," & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames & ")", iPosition:=3)
+    'change group by to include ucrchkgroupbyyear
+    Private Sub GroupByYear()
+        If ucrChkGroupByYear.Checked() AndAlso Not ucrReceiverYear.IsEmpty Then
+            clsGroupByYear.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & ")", iPosition:=3)
+            clsTransformManipulationsFunc.AddParameter("group_by_year", clsRFunctionParameter:=clsGroupByYear, bIncludeArgumentName:=False, iPosition:=0)
+
         Else
-            clsGroupBy.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & ")", iPosition:=3)
+            clsGroupByYear.RemoveParameterByName("calculated_from")
+            clsTransformManipulationsFunc.RemoveParameterByName("group_by_year")
+        End If
+    End Sub
+
+    Private Sub GroupByStation()
+        If Not ucrReceiverStation.IsEmpty() Then
+            clsGroupByStation.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames & ")", iPosition:=3)
+            clsTransformManipulationsFunc.AddParameter("group_by_station", clsRFunctionParameter:=clsGroupByStation, bIncludeArgumentName:=False, iPosition:=0)
+        Else
+            clsGroupByStation.RemoveParameterByName("calculated_from")
+            clsTransformManipulationsFunc.RemoveParameterByName("group_by_station")
         End If
     End Sub
 
@@ -391,7 +418,7 @@ Public Class dlgTransformClimatic
     Private Sub ucrSelectorTransform_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrSelectorTransform.ControlContentsChanged
         strCurrDataName = Chr(34) & ucrSelectorTransform.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
         RainDays()
-        GroupByOptions()
+        GroupByYear()
     End Sub
 
     Private Sub ucrInputSpellLower_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSpellLower.ControlValueChanged, ucrInputSpellUpper.ControlValueChanged, ucrInputCondition.ControlValueChanged
@@ -403,11 +430,11 @@ Public Class dlgTransformClimatic
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
-        GroupByOptions()
+        GroupByStation()
     End Sub
 
     Private Sub ucrReceiverYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlValueChanged
-        GroupByOptions()
+        GroupByYear()
     End Sub
 
     Private Sub ucrPnlTransform_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrPnlTransform.ControlContentsChanged
@@ -422,5 +449,9 @@ Public Class dlgTransformClimatic
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverData.ControlContentsChanged, ucrNudSumOver.ControlContentsChanged, ucrNudCountOver.ControlContentsChanged, ucrInputSpellLower.ControlContentsChanged, ucrInputSpellUpper.ControlContentsChanged, ucrInputCondition.ControlContentsChanged, ucrInputColName.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged, ucrNudWBCapacity.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrChkGroupByYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkGroupByYear.ControlValueChanged
+        GroupByYear()
     End Sub
 End Class
