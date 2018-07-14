@@ -27,6 +27,7 @@ Public Class dlgSpells
     Private clsAdditionalCondition, clsAdditionalConditionList, clsSubSpellLength2, clsAdditionalConditionReplaceFunction As New RFunction
 
     Private strCurrDataName As String = ""
+    Private strRainDay As String = "rain_day"
 
     Private Sub dlgSpells_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -100,8 +101,9 @@ Public Class dlgSpells
         ucrInputCondition.SetDropDownStyleAsNonEditable()
 
         ucrChkConditional.SetText("Assuming Condition Satified at Start of Each Period")
-        ucrChkConditional.AddFunctionNamesCondition({True}, "sub1")
-        ucrChkConditional.AddFunctionNamesCondition({False}, "sub1")
+        ucrChkConditional.AddFunctionNamesCondition({True}, "0")
+        ucrChkConditional.AddFunctionNamesCondition({False}, "NA")
+        'ucrChkConditional.SetParameter(New RParameter("initial value"))
 
         ucrInputNewColumnName.SetParameter(New RParameter("result_name", 2))
         ucrInputNewColumnName.SetDataFrameSelector(ucrSelectorForSpells.ucrAvailableDataFrames)
@@ -202,27 +204,31 @@ Public Class dlgSpells
         clsSpellLength.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsSpellLength.AddParameter("result_name", Chr(34) & strDrySpell & Chr(34), iPosition:=2)
         ' change cumsum to consecutive sum 
-        clsSpellLength.AddParameter("function_exp", Chr(34) & "cumsum(" & strRainDay & ")-cummax((" & strRainDay & "==0)*cumsum(" & strRainDay & "))" & Chr(34))
+        'clsSpellLength.AddParameter("function_exp", Chr(34) & "cumsum(" & strRainDay & ")-cummax((" & strRainDay & "==0)*cumsum(" & strRainDay & "))" & Chr(34))
         clsSpellLength.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubSpellLength1, iPosition:=5)
         clsSubSpellLength1.AddParameter("sub1", clsRFunctionParameter:=clsRRainday, bIncludeArgumentName:=False)
         clsSpellLength.AddParameter("save", 0, iPosition:=6)
         clsSpellLength.SetAssignTo("spell_length")
         clsMaxValueManipulation.SetRCommand("list")
 
+        'spell length manipulation 
+        'clsGroupByList.AddParameter("sub1", clsRFunctionParameter:=clsSpellLength, bIncludeArgumentName:=False, iPosition:=0)
+        'clsGroupBy.AddParameter("sub_calculation", clsRFunctionParameter:=clsGroupByList, iPosition:=5)
+
         ' Additional Checkbox
-        clsAdditionalConditionReplaceFunction.bToScriptAsRString = True
-        clsAdditionalCondition.SetRCommand("instat_calculation$new")
-        clsAdditionalCondition.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
-        clsAdditionalCondition.AddParameter("function_exp", clsRFunctionParameter:=clsAdditionalConditionReplaceFunction, iPosition:=1)
-        clsAdditionalCondition.AddParameter("result_name", Chr(34) & strRainDay & Chr(34), iPosition:=2)
-        clsAdditionalCondition.AddParameter("save", 0, iPosition:=6)
-        clsAdditionalCondition.SetAssignTo("additional_condition")
-        clsAdditionalConditionReplaceFunction.SetRCommand("replace")
-        clsAdditionalConditionReplaceFunction.AddParameter("x", strRainDay, iPosition:=0)
-        clsAdditionalConditionReplaceFunction.AddParameter("values", "0", iPosition:=2)
-        clsAdditionalConditionList.SetRCommand("list")
-        clsAdditionalConditionList.AddParameter("sub1", clsRFunctionParameter:=clsRRainday)
-        clsAdditionalCondition.AddParameter("sub_calculation", clsRFunctionParameter:=clsAdditionalConditionList)
+        'clsAdditionalConditionReplaceFunction.bToScriptAsRString = True
+        'clsAdditionalCondition.SetRCommand("instat_calculation$new")
+        'clsAdditionalCondition.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        'clsAdditionalCondition.AddParameter("function_exp", clsRFunctionParameter:=clsAdditionalConditionReplaceFunction, iPosition:=1)
+        'clsAdditionalCondition.AddParameter("result_name", Chr(34) & strRainDay & Chr(34), iPosition:=2)
+        'clsAdditionalCondition.AddParameter("save", 0, iPosition:=6)
+        'clsAdditionalCondition.SetAssignTo("additional_condition")
+        'clsAdditionalConditionReplaceFunction.SetRCommand("replace")
+        'clsAdditionalConditionReplaceFunction.AddParameter("x", strRainDay, iPosition:=0)
+        'clsAdditionalConditionReplaceFunction.AddParameter("values", "0", iPosition:=2)
+        'clsAdditionalConditionList.SetRCommand("list")
+        'clsAdditionalConditionList.AddParameter("sub1", clsRFunctionParameter:=clsRRainday)
+        'clsAdditionalCondition.AddParameter("sub_calculation", clsRFunctionParameter:=clsAdditionalConditionList)
 
         'Max Value
         clsMaxValueFunction.bToScriptAsRString = True
@@ -233,9 +239,8 @@ Public Class dlgSpells
         clsMaxValueFunction.AddParameter("x", strDrySpell)
         clsMaxValue.AddParameter("save", 2, iPosition:=6)
         clsMaxValue.AddParameter("result_name", Chr(34) & ucrInputNewColumnName.GetText() & Chr(34), iPosition:=3)
-        clsMaxValue.AddParameter("sub_calculations", clsRFunctionParameter:=clsMaxValueList, iPosition:=4)
+        'clsMaxValue.AddParameter("sub_calculations", clsRFunctionParameter:=clsMaxValueList, iPosition:=4)
         clsMaxValue.AddParameter("manipulations", clsRFunctionParameter:=clsMaxValueManipulation, iPosition:=5)
-        clsMaxValueList.AddParameter("sub1", clsRFunctionParameter:=clsSpellLength, bIncludeArgumentName:=False, iPosition:=0)
         clsMaxValueManipulation.AddParameter("sub2", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False)
         clsMaxValueManipulation.AddParameter("sub3", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False)
         clsMaxValue.SetAssignTo("spells")
@@ -266,7 +271,7 @@ Public Class dlgSpells
         ucrInputSpellLower.SetRCode(clsRRaindayLowerOperator, bReset)
         ucrInputSpellUpper.SetRCode(clsRRaindayUpperOperator, bReset)
         ucrInputNewColumnName.SetRCode(clsMaxValue, bReset)
-        '        ucrChkConditional.SetRCode(clsSubSpellLength1, bReset)
+        'ucrChkConditional.SetRCode(clsSubSpellLength1, bReset)
     End Sub
 
     Private Sub cmdDoyRange_Click(sender As Object, e As EventArgs) Handles cmdDoyRange.Click
@@ -347,9 +352,9 @@ Public Class dlgSpells
 
     Private Sub ucrChkConditional_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkConditional.ControlContentsChanged
         If ucrChkConditional.Checked Then
-            clsSubSpellLength1.AddParameter("sub1", clsRFunctionParameter:=clsAdditionalCondition, bIncludeArgumentName:=False)
+            clsSpellLength.AddParameter("function_exp", Chr(34) & "consecutive_sum(x = " & strRainDay & ", initial_value = 0)" & Chr(34))
         Else
-            clsSubSpellLength1.AddParameter("sub1", clsRFunctionParameter:=clsRRainday, bIncludeArgumentName:=False)
+            clsSpellLength.AddParameter("function_exp", Chr(34) & "consecutive_sum(x =  " & strRainDay & ", initial_value = NA)" & Chr(34))
         End If
         clsSpellLength.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubSpellLength1, iPosition:=5)
     End Sub
