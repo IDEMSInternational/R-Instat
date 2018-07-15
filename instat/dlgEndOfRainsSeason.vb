@@ -105,6 +105,7 @@ Public Class dlgEndOfRainsSeason
         ucrReceiverRainfall.SetClimaticType("rain")
         ucrReceiverRainfall.bAutoFill = True
         ucrReceiverRainfall.strSelectorHeading = "Rain Variables"
+        ucrReceiverRainfall.SetMeAsReceiver()
 
         ucrReceiverYear.Selector = ucrSelectorForWaterBalance
         ucrReceiverYear.SetClimaticType("year")
