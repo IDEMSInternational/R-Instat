@@ -170,6 +170,9 @@ Public Class ucrReceiverMultiple
                 Case "graph"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
                     clsGetVariablesFunc.AddParameter("graph_name", GetVariableNames())
+                Case "surv"
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_surv")
+                    clsGetVariablesFunc.AddParameter("surv_name", GetVariableNames())
                 Case "model"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
                     clsGetVariablesFunc.AddParameter("model_name", GetVariableNames())
@@ -351,13 +354,6 @@ Public Class ucrReceiverMultiple
         AddMultiple(kvpItems)
 
         lstSelectedVariables.Enabled = Not bFixreceiver
-    End Sub
-
-    Public Sub AddItemsWithMetadataProperty(strCurrentDataFrame As String, strProperty As String, strValues As String())
-        If Selector IsNot Nothing Then
-            SetMeAsReceiver()
-            frmMain.clsRLink.SelectColumnsWithMetadataProperty(Me, strCurrentDataFrame, strProperty, strValues)
-        End If
     End Sub
 
     Public Function GetCurrentItemTypes(Optional bUnique As Boolean = False) As List(Of String)

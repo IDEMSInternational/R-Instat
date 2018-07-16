@@ -277,10 +277,12 @@ Public Class dlgBoxplot
             ucrSaveBoxplot.SetPrefix("boxplot")
             ucrSecondFactorReceiver.ChangeParameterName("fill")
             clsCurrGeomFunc = clsBoxplotFunc
+
         ElseIf rdoJitter.Checked Then
             ucrSaveBoxplot.SetPrefix("jitter")
             ucrSecondFactorReceiver.ChangeParameterName("colour")
             clsCurrGeomFunc = clsJitterplotFunc
+
         Else
             ucrSaveBoxplot.SetPrefix("violin")
             ucrSecondFactorReceiver.ChangeParameterName("fill")

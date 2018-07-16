@@ -966,7 +966,7 @@ data_object$set("public", "reorder_columns_in_data", function(col_order) {
     }
   }
   else if(is.character(col_order)) {
-    if(!(setequal(col_order,names(private$data)))) stop("Invalid column order")
+    if(!(dplyr::setequal(col_order,names(private$data)))) stop("Invalid column order")
   }
   else stop("column order must be a numeric or character vector")
   old_metadata <- attributes(private$data)
@@ -1632,8 +1632,9 @@ data_object$set("public", "get_objects", function(object_name, type = "", force_
 data_object$set("public", "get_object_names", function(type = "", as_list = FALSE, excluded_items = c()) {
   if(type == "") out = names(private$objects)
   else {
-    if(type == model_label) out = names(private$objects)[!sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "htmlTable", "ggmultiplot") %in% class(x)))]
-    else if(type == graph_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot") %in% class(x)))]
+    if(type == model_label) out = names(private$objects)[!sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "htmlTable", "Surv") %in% class(x)))]
+    else if(type == graph_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot") %in% class(x)))]
+    else if(type == surv_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("Surv") %in% class(x)))]
     else if(type == table_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("htmlTable", "data.frame", "list") %in% class(x)))]
     else stop("type: ", type, " not recognised")
   }
@@ -2227,8 +2228,10 @@ climatic_type_label = "Climatic_Type"
 # Data frame metadata
 is_climatic_label = "Is_Climatic"
 
-instat_object$set("public","define_as_climatic", function(data_name, types) {
+instat_object$set("public","define_as_climatic", function(data_name, types, key_col_names, key_name) {
+  self$add_key(data_name = data_name, col_names = key_col_names, key_name = key_name)
   self$append_to_dataframe_metadata(data_name, is_climatic_label, TRUE)
+
   for(curr_data_name in self$get_data_names()) {
     if(!self$get_data_objects(data_name)$is_metadata(is_climatic_label)) {
       self$append_to_dataframe_metadata(curr_data_name, is_climatic_label, FALSE)

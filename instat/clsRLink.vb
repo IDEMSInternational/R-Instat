@@ -596,6 +596,7 @@ Public Class RLink
         Dim strCommand As String
 
         expTemp = Nothing
+        'TODO Bug here if strScript is multiple lines. Wrong value will be returned
         strCommand = strVariableName & "<-" & strScript
         If clsEngine IsNot Nothing Then
             Evaluate(strCommand, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
@@ -866,6 +867,8 @@ Public Class RLink
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_model_names")
                 Case "graph"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_graph_names")
+                Case "surv"
+                    clsGetItems.SetRCommand(strInstatDataObject & "$get_surv_names")
                 Case "dataframe"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_data_names")
                 Case "link"
@@ -977,7 +980,7 @@ Public Class RLink
         End If
     End Sub
 
-    Public Sub SelectColumnsWithMetadataProperty(ucrCurrentReceiver As ucrReceiverMultiple, strDataFrameName As String, strProperty As String, strValues As String())
+    Public Sub SelectColumnsWithMetadataProperty(ucrCurrentReceiver As ucrReceiver, strDataFrameName As String, strProperty As String, strValues As String())
         Dim vecColumns As GenericVector
         Dim chrCurrColumns As CharacterVector
         Dim i As Integer
@@ -986,6 +989,7 @@ Public Class RLink
         Dim kvpInclude As KeyValuePair(Of String, String())
         Dim lstItems As New List(Of KeyValuePair(Of String, String))
         Dim expColumns As SymbolicExpression
+        Dim ucrReceiverTempMultiple As ucrReceiverMultiple
 
         kvpInclude = New KeyValuePair(Of String, String())(strProperty, strValues)
         ucrCurrentReceiver.Selector.LoadList()
@@ -1014,8 +1018,15 @@ Public Class RLink
                     For Each strColumn As String In chrCurrColumns
                         lstItems.Add(New KeyValuePair(Of String, String)(strDataFrameName, strColumn))
                     Next
-                    ucrCurrentReceiver.AddMultiple(lstItems.ToArray())
                 Next
+                If TypeOf ucrCurrentReceiver Is ucrReceiverSingle Then
+                    If lstItems.Count > 0 Then
+                        ucrCurrentReceiver.Add(lstItems(0).Value, lstItems(0).Key)
+                    End If
+                ElseIf TypeOf ucrCurrentReceiver Is ucrReceiverMultiple Then
+                    ucrReceiverTempMultiple = DirectCast(ucrCurrentReceiver, ucrReceiverMultiple)
+                    ucrReceiverTempMultiple.AddMultiple(lstItems.ToArray())
+                End If
             End If
         End If
         ucrCurrentReceiver.Selector.LoadList()
@@ -1181,6 +1192,26 @@ Public Class RLink
             End If
         End If
         Return lstGraphNames
+    End Function
+
+    Public Function GetSurvNames(Optional strDataFrameName As String = "") As List(Of String)
+        Dim chrSurvNames As CharacterVector
+        Dim lstSurvNames As New List(Of String)
+        Dim clsGetSurvNames As New RFunction
+        Dim expSurvNames As SymbolicExpression
+
+        clsGetSurvNames.SetRCommand(strInstatDataObject & "$get_graph_names")
+        If strDataFrameName <> "" Then
+            clsGetSurvNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+        End If
+        expSurvNames = RunInternalScriptGetValue(clsGetSurvNames.ToScript(), bSilent:=True)
+        If expSurvNames IsNot Nothing AndAlso Not expSurvNames.Type = Internals.SymbolicExpressionType.Null Then
+            chrSurvNames = expSurvNames.AsCharacter()
+            If chrSurvNames.Length > 0 Then
+                lstSurvNames.AddRange(chrSurvNames)
+            End If
+        End If
+        Return lstSurvNames
     End Function
 
     Public Function GetDataType(strDataFrameName As String, strColumnName As String) As String
