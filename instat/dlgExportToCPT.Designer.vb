@@ -61,7 +61,7 @@ Partial Class dlgExportToCPT
         Me.lblLine = New System.Windows.Forms.Label()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorTwoDF = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.UcrReceiverMultiple1 = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverMultipleStation = New instat.ucrReceiverMultiple()
         Me.rdoTwoDFWide = New System.Windows.Forms.RadioButton()
         Me.SuspendLayout()
         '
@@ -217,14 +217,14 @@ Partial Class dlgExportToCPT
         resources.ApplyResources(Me.ucrSelectorTwoDF, "ucrSelectorTwoDF")
         Me.ucrSelectorTwoDF.Name = "ucrSelectorTwoDF"
         '
-        'UcrReceiverMultiple1
+        'ucrReceiverMultipleStation
         '
-        Me.UcrReceiverMultiple1.frmParent = Me
-        resources.ApplyResources(Me.UcrReceiverMultiple1, "UcrReceiverMultiple1")
-        Me.UcrReceiverMultiple1.Name = "UcrReceiverMultiple1"
-        Me.UcrReceiverMultiple1.Selector = Nothing
-        Me.UcrReceiverMultiple1.strNcFilePath = ""
-        Me.UcrReceiverMultiple1.ucrSelector = Nothing
+        Me.ucrReceiverMultipleStation.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverMultipleStation, "ucrReceiverMultipleStation")
+        Me.ucrReceiverMultipleStation.Name = "ucrReceiverMultipleStation"
+        Me.ucrReceiverMultipleStation.Selector = Nothing
+        Me.ucrReceiverMultipleStation.strNcFilePath = ""
+        Me.ucrReceiverMultipleStation.ucrSelector = Nothing
         '
         'rdoTwoDFWide
         '
@@ -240,7 +240,7 @@ Partial Class dlgExportToCPT
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.rdoTwoDFWide)
-        Me.Controls.Add(Me.UcrReceiverMultiple1)
+        Me.Controls.Add(Me.ucrReceiverMultipleStation)
         Me.Controls.Add(Me.ucrSelectorTwoDF)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblLine)
@@ -298,5 +298,5 @@ Partial Class dlgExportToCPT
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSelectorTwoDF As ucrSelectorByDataFrameAddRemove
     Friend WithEvents rdoTwoDFWide As RadioButton
-    Friend WithEvents UcrReceiverMultiple1 As ucrReceiverMultiple
+    Friend WithEvents ucrReceiverMultipleStation As ucrReceiverMultiple
 End Class

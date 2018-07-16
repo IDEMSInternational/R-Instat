@@ -90,8 +90,11 @@ Public Class dlgExportToCPT
         ucrPnlNoOfDF.AddRadioButton(rdoOneDF)
         ucrPnlNoOfDF.AddParameterPresentCondition(rdoOneDF, "lat_lon_data", False)
         ucrPnlNoOfDF.AddParameterPresentCondition(rdoTwoDFLong, "lat_lon_data", True)
+        ucrPnlNoOfDF.AddParameterPresentCondition(rdoTwoDFWide, "long", True)
 
-        ucrPnlNoOfDF.AddToLinkedControls({ucrReceiverStationTwoDF}, {rdoTwoDFLong}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlNoOfDF.AddToLinkedControls({ucrReceiverStationTwoDF, ucrSelectorTwoDF}, {rdoTwoDFLong, rdoTwoDFWide}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlNoOfDF.AddToLinkedControls({ucrReceiverMultipleStation}, {rdoTwoDFWide}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlNoOfDF.AddToLinkedControls(ucrReceiverElement, {rdoOneDF, rdoTwoDFLong}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
     End Sub
 
@@ -103,7 +106,6 @@ Public Class dlgExportToCPT
         ucrSelectorOneDF.Reset()
         ucrInputFilePath.Reset()
         ucrInputFilePath.SetName("")
-        Labels()
 
         clsOutputCPT.SetRCommand("output_CPT")
 
@@ -199,21 +201,10 @@ Public Class dlgExportToCPT
     Private Sub ucrPnlNoOfDF_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlNoOfDF.ControlContentsChanged
         TestOkEnabled()
         DataFrames()
-        Labels()
     End Sub
 
     Private Sub ucrReceiverStationOneDF_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStationOneDF.ControlValueChanged, ucrReceiverStationTwoDF.ControlValueChanged, ucrReceiverYear.ControlValueChanged, ucrReceiverElement.ControlValueChanged, ucrReceiverLatitude.ControlValueChanged, ucrReceiverLongitude.ControlValueChanged
         TestOkEnabled()
-    End Sub
-
-    Private Sub Labels()
-        If rdoTwoDFLong.Checked Then
-            lblOneDF.Visible = True
-            lblTwoDF.Visible = True
-        Else
-            lblOneDF.Visible = False
-            lblTwoDF.Visible = False
-        End If
     End Sub
 
     Private Sub ucrSelectorExporCPT_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorOneDF.ControlValueChanged
