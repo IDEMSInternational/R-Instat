@@ -321,7 +321,10 @@ Public Class ucrReceiverSingle
             If Selector.lstAvailableVariable.Items.Count = 1 Then
                 Add(Selector.lstAvailableVariable.Items(0).Text, Selector.strCurrentDataFrame)
             End If
-            ucrCurrentReceiver.SetMeAsReceiver()
+
+            If ucrCurrentReceiver IsNot Nothing Then
+                ucrCurrentReceiver.SetMeAsReceiver()
+            End If
         End If
     End Sub
 
