@@ -464,7 +464,7 @@ summary_sum <- function (x, na.rm = FALSE, na_type = "", ...) {
   }
 }
 
-summary_count <- function(x, na.rm = FALSE, ...) {
+summary_count <- function(x, ...) {
   return(length(x))
   }
 
