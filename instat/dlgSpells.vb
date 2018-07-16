@@ -57,6 +57,7 @@ Public Class dlgSpells
         ucrReceiverElement.bAutoFill = True
         ucrReceiverElement.SetDataType("numeric")
         ucrReceiverElement.strSelectorHeading = "Variables"
+        ucrReceiverElement.SetMeAsReceiver()
 
         ucrReceiverStation.SetParameter(New RParameter("station", 1, False))
         ucrReceiverStation.SetParameterIsString()
@@ -141,7 +142,7 @@ Public Class dlgSpells
         clsLessThanOperator.Clear()
 
         ucrSelectorForSpells.Reset()
-        ucrReceiverDate.SetMeAsReceiver()
+        ucrReceiverElement.SetMeAsReceiver()
         ucrInputCondition.SetName("Between")
         ucrInputNewColumnName.SetName("spells")
 

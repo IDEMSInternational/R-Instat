@@ -91,6 +91,7 @@ Public Class dlgEndOfRainsSeason
         ucrReceiverRainfall.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "rain" & Chr(34)})
         ucrReceiverRainfall.bAutoFill = True
         ucrReceiverRainfall.strSelectorHeading = "Rain Variables"
+        ucrReceiverRainfall.SetMeAsReceiver()
 
         ucrReceiverYear.Selector = ucrSelectorForWaterBalance
         ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})

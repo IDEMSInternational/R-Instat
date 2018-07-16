@@ -51,6 +51,7 @@ Public Class dlgInventoryPlot
         ucrReceiverElements.Selector = ucrInventoryPlotSelector
         ucrReceiverElements.SetParameterIsString()
         ucrReceiverElements.strSelectorHeading = "Numerics"
+        ucrReceiverElements.SetMeAsReceiver()
 
         ucrReceiverStation.SetParameter(New RParameter("station_col", 3))
         ucrReceiverStation.Selector = ucrInventoryPlotSelector
@@ -103,7 +104,7 @@ Public Class dlgInventoryPlot
 
         ucrInventoryPlotSelector.Reset()
         ucrSaveGraph.Reset()
-        ucrReceiverDate.SetMeAsReceiver()
+        ucrReceiverElements.SetMeAsReceiver()
 
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot")
         clsDefaultRFunction.AddParameter("coord_flip", "FALSE")

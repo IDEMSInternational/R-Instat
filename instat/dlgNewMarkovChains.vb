@@ -73,6 +73,7 @@ Public Class dlgNewMarkovChains
         ucrReceiverRainfall.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "rain" & Chr(34)})
         ucrReceiverRainfall.bAutoFill = True
         ucrReceiverRainfall.strSelectorHeading = "Numerics"
+        ucrReceiverRainfall.SetMeAsReceiver()
 
         ucrReceiverAdditionalVariables.Selector = ucrSelectorMarkovChains
         ucrBase.iHelpTopicID = 491
@@ -130,6 +131,7 @@ Public Class dlgNewMarkovChains
         nudOrderTo.Value = 2
         nudOrderTo.Value = 0
         chkSaveModel.Enabled = False
+        ucrReceiverRainfall.SetMeAsReceiver()
     End Sub
 
     Private Sub TestOkEnabled()

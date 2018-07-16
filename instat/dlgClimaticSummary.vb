@@ -109,6 +109,7 @@ Public Class dlgClimaticSummary
         ucrReceiverElement.Selector = ucrSelectorVariable
         ucrReceiverElement.SetIncludedDataTypes({"numeric"})
         ucrReceiverElement.bAutoFill = True
+        ucrReceiverElement.SetMeAsReceiver()
 
         ' Other checkbox options
         ucrChkStoreResults.SetParameter(New RParameter("store_results", 3))

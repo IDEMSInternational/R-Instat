@@ -139,6 +139,7 @@ Public Class dlgClimaticBoxPlot
         ucrReceiverElement.strSelectorHeading = "Variables"
         ucrReceiverElement.Selector = ucrSelectorClimaticBoxPlot
         ucrReceiverElement.SetIncludedDataTypes({"numeric"})
+        ucrReceiverElement.SetMeAsReceiver()
 
         dctComboReceiver.Add(ucrInputStation, ucrReceiverStation)
         dctComboReceiver.Add(ucrInputYear, ucrReceiverYear)
