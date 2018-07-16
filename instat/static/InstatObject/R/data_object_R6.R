@@ -2228,8 +2228,9 @@ climatic_type_label = "Climatic_Type"
 is_climatic_label = "Is_Climatic"
 
 instat_object$set("public","define_as_climatic", function(data_name, types, key_col_names, key_name) {
-  self$append_to_dataframe_metadata(data_name, is_climatic_label, TRUE)
   self$add_key(data_name = data_name, col_names = key_col_names, key_name = key_name)
+  self$append_to_dataframe_metadata(data_name, is_climatic_label, TRUE)
+
   for(curr_data_name in self$get_data_names()) {
     if(!self$get_data_objects(data_name)$is_metadata(is_climatic_label)) {
       self$append_to_dataframe_metadata(curr_data_name, is_climatic_label, FALSE)
