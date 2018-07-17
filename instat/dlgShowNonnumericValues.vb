@@ -44,13 +44,13 @@ Public Class dlgShowNonnumericValues
 
         ucrReceiverColumn.SetParameter(New RParameter("x", 1))
         ucrReceiverColumn.SetParameterIsRFunction()
-        ucrReceiverColumn.SetIncludedDataTypes({"character"})
+        ucrReceiverColumn.SetExcludedDataTypes({"numeric"})
 
-        ucrSaveLogicalColumn.SetPrefix("logical")
+        ucrSaveLogicalColumn.SetPrefix("nonnum")
         ucrSaveLogicalColumn.SetSaveTypeAsColumn()
         ucrSaveLogicalColumn.SetDataFrameSelector(ucrSelectorShowNonNumericValues.ucrAvailableDataFrames)
         ucrSaveLogicalColumn.SetIsTextBox()
-        ucrSaveLogicalColumn.SetLabelText("Save Result:")
+        ucrSaveLogicalColumn.SetLabelText("Logical column:")
     End Sub
 
     Private Sub SetDefaults()
