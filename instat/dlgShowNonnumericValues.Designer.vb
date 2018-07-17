@@ -23,34 +23,12 @@ Partial Class dlgShowNonnumericValues
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgShowNonnumericValues))
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectorShowNonNumericValues = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverColumn = New instat.ucrReceiverSingle()
         Me.lblColumn = New System.Windows.Forms.Label()
         Me.ucrSaveLogicalColumn = New instat.ucrSave()
+        Me.ucrReceiverColumn = New instat.ucrReceiverSingle()
+        Me.ucrSelectorShowNonNumericValues = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrSelectorShowNonNumericValues
-        '
-        Me.ucrSelectorShowNonNumericValues.bDropUnusedFilterLevels = False
-        Me.ucrSelectorShowNonNumericValues.bShowHiddenColumns = False
-        Me.ucrSelectorShowNonNumericValues.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorShowNonNumericValues, "ucrSelectorShowNonNumericValues")
-        Me.ucrSelectorShowNonNumericValues.Name = "ucrSelectorShowNonNumericValues"
-        '
-        'ucrReceiverColumn
-        '
-        Me.ucrReceiverColumn.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverColumn, "ucrReceiverColumn")
-        Me.ucrReceiverColumn.Name = "ucrReceiverColumn"
-        Me.ucrReceiverColumn.Selector = Nothing
-        Me.ucrReceiverColumn.strNcFilePath = ""
-        Me.ucrReceiverColumn.ucrSelector = Nothing
         '
         'lblColumn
         '
@@ -61,6 +39,28 @@ Partial Class dlgShowNonnumericValues
         '
         resources.ApplyResources(Me.ucrSaveLogicalColumn, "ucrSaveLogicalColumn")
         Me.ucrSaveLogicalColumn.Name = "ucrSaveLogicalColumn"
+        '
+        'ucrReceiverColumn
+        '
+        Me.ucrReceiverColumn.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverColumn, "ucrReceiverColumn")
+        Me.ucrReceiverColumn.Name = "ucrReceiverColumn"
+        Me.ucrReceiverColumn.Selector = Nothing
+        Me.ucrReceiverColumn.strNcFilePath = ""
+        Me.ucrReceiverColumn.ucrSelector = Nothing
+        '
+        'ucrSelectorShowNonNumericValues
+        '
+        Me.ucrSelectorShowNonNumericValues.bDropUnusedFilterLevels = False
+        Me.ucrSelectorShowNonNumericValues.bShowHiddenColumns = False
+        Me.ucrSelectorShowNonNumericValues.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorShowNonNumericValues, "ucrSelectorShowNonNumericValues")
+        Me.ucrSelectorShowNonNumericValues.Name = "ucrSelectorShowNonNumericValues"
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
         '
         'dlgShowNonnumericValues
         '
