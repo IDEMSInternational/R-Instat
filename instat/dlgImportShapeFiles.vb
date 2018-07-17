@@ -15,9 +15,14 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports System.IO
+
 Public Class dlgImportShapeFiles
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private strFilePath As String = ""
+
+    Private clsReadOGRFunction, clsMergeFunction, clsTidyFunction, clsAsDataFrameFunction As New RFunction
 
     Private Sub dlgImportShapeFiles_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -33,16 +38,101 @@ Public Class dlgImportShapeFiles
         autoTranslate(Me)
         TestOkEnabled()
     End Sub
+
     Private Sub InitialiseDialog()
 
+        'disabled this temporarily
+        cmdLibrary.Enabled = False
+
+        ucrInputFilePath.IsReadOnly = True
+        'ucrSaveDataframeName.SetPrefix("Dataframe")
+        ucrSaveDataframeName.SetSaveTypeAsDataFrame()
+        ucrSaveDataframeName.SetIsTextBox()
+        ucrSaveDataframeName.SetLabelText("Dataframe Name:")
     End Sub
+
     Private Sub SetDefaults()
+        clsReadOGRFunction = New RFunction
+        clsMergeFunction = New RFunction
+        clsTidyFunction = New RFunction
+        clsAsDataFrameFunction = New RFunction
 
+        ucrSaveDataframeName.Reset()
+
+        clsReadOGRFunction.SetPackageName("rgdal")
+        clsReadOGRFunction.SetRCommand("readOGR")
+
+        clsMergeFunction.SetRCommand("merge")
+        clsMergeFunction.AddParameter("tidy", clsRFunctionParameter:=clsTidyFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsMergeFunction.AddParameter("as.data.frame", clsRFunctionParameter:=clsAsDataFrameFunction, iPosition:=1, bIncludeArgumentName:=False)
+
+
+        clsMergeFunction.AddParameter("by.x", Chr(34) & "id" & Chr(34), iPosition:=2)
+        clsMergeFunction.AddParameter("by.y", strParameterValue:=0, iPosition:=3)
+
+        clsTidyFunction.SetPackageName("broom")
+        clsTidyFunction.SetRCommand("tidy")
+        clsTidyFunction.AddParameter("x", clsRFunctionParameter:=clsReadOGRFunction)
+
+
+        clsAsDataFrameFunction.SetRCommand("as.data.frame")
+        clsAsDataFrameFunction.AddParameter("x", clsRFunctionParameter:=clsReadOGRFunction)
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsMergeFunction)
     End Sub
+
+    'Loads the open dialog on load and click
+    Public Sub GetFileFromOpenDialog()
+        Dim strFileName As String = ""
+        Dim strFileExt As String = ""
+        Dim strTemp As String = ""
+
+        Using dlgOpen As New OpenFileDialog
+            dlgOpen.Filter = "All Shape files|*.shp|Shape files|*.shp"
+            dlgOpen.Title = "Import Shape File"
+
+            If dlgOpen.ShowDialog() = DialogResult.OK Then
+
+                If dlgOpen.FileName <> "" Then
+                    strFileName = Path.GetFileNameWithoutExtension(dlgOpen.FileName)
+                    strFilePath = dlgOpen.FileName
+                    strFileExt = Path.GetExtension(strFilePath)
+                    ucrInputFilePath.SetName(Replace(strFilePath, "\", "/"))
+                    If strFileExt = ".shp" Then
+                        ucrSaveDataframeName.SetName(frmMain.clsRLink.MakeValidText(strFileName))
+                        clsReadOGRFunction.AddParameter("dsn", Chr(34) & Replace(strFilePath, "\", "/") & Chr(34))
+                        'clsReadOGRFunction.ToScript(strTemp)
+                        'frmMain.clsRLink.RunScript(strTemp, strComment:="import shape file", bUpdateGrids:=False)
+                    End If
+                End If
+            End If
+        End Using
+    End Sub
+
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrSaveDataframeName.SetRCode(clsMergeFunction, bReset)
+    End Sub
+
+    Private Sub TestOkEnabled()
+        If Not ucrInputFilePath.IsEmpty AndAlso ucrSaveDataframeName.IsComplete Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
 
     End Sub
-    Private Sub TestOkEnabled()
 
+    Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
+        GetFileFromOpenDialog()
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrInputFilePath_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFilePath.ControlContentsChanged, ucrSaveDataframeName.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
