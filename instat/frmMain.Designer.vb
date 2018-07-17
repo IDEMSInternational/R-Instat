@@ -206,9 +206,9 @@ Partial Class frmMain
         Me.ToolStripSeparator37 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticPrepareClimaticSummaries = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareStartoftheRains = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticPrepareEndOfRains = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareSpells = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareExtremes = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticPrepareEndOfRains = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator46 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticPrepareEvapotranspiration = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareSummary = New System.Windows.Forms.ToolStripMenuItem()
@@ -375,6 +375,7 @@ Partial Class frmMain
         Me.mnuPrepareCheckData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataDuplicates = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataCompareColumns = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareCheckDataNoneNumericCases = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataBoxplot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataOneVariableSummarise = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataOneVariableGraph = New System.Windows.Forms.ToolStripMenuItem()
@@ -385,6 +386,7 @@ Partial Class frmMain
         Me.ToolStripSeparator40 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuPreparePrepareToShareJitter = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCheckDataPrePareToShareSdcPackage = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NonToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuPrepareColumnCalculate = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnCalculateCalculations = New System.Windows.Forms.ToolStripMenuItem()
@@ -1508,6 +1510,11 @@ Partial Class frmMain
         Me.mnuClimaticPrepareStartoftheRains.Name = "mnuClimaticPrepareStartoftheRains"
         resources.ApplyResources(Me.mnuClimaticPrepareStartoftheRains, "mnuClimaticPrepareStartoftheRains")
         '
+        'mnuClimaticPrepareEndOfRains
+        '
+        Me.mnuClimaticPrepareEndOfRains.Name = "mnuClimaticPrepareEndOfRains"
+        resources.ApplyResources(Me.mnuClimaticPrepareEndOfRains, "mnuClimaticPrepareEndOfRains")
+        '
         'mnuClimaticPrepareSpells
         '
         Me.mnuClimaticPrepareSpells.Name = "mnuClimaticPrepareSpells"
@@ -1517,11 +1524,6 @@ Partial Class frmMain
         '
         Me.mnuClimaticPrepareExtremes.Name = "mnuClimaticPrepareExtremes"
         resources.ApplyResources(Me.mnuClimaticPrepareExtremes, "mnuClimaticPrepareExtremes")
-        '
-        'mnuClimaticPrepareEndOfRains
-        '
-        Me.mnuClimaticPrepareEndOfRains.Name = "mnuClimaticPrepareEndOfRains"
-        resources.ApplyResources(Me.mnuClimaticPrepareEndOfRains, "mnuClimaticPrepareEndOfRains")
         '
         'ToolStripSeparator46
         '
@@ -2492,7 +2494,7 @@ Partial Class frmMain
         'mnuPrepareCheckData
         '
         Me.mnuPrepareCheckData.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.mnuPrepareCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareCheckDataDuplicates, Me.mnuPrepareCheckDataCompareColumns, Me.mnuPrepareCheckDataBoxplot, Me.mnuPrepareCheckDataOneVariableSummarise, Me.mnuPrepareCheckDataOneVariableGraph, Me.mnuPrepareCheckDataOneWayFrequencies, Me.ToolStripSeparator41, Me.mnuPrepareCheckDataExportOpenRefine, Me.mnuPrepareCheckDataImportOpenRefine, Me.ToolStripSeparator40, Me.mnuPreparePrepareToShareJitter, Me.mnuCheckDataPrePareToShareSdcPackage})
+        Me.mnuPrepareCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareCheckDataDuplicates, Me.mnuPrepareCheckDataCompareColumns, Me.mnuPrepareCheckDataNoneNumericCases, Me.mnuPrepareCheckDataBoxplot, Me.mnuPrepareCheckDataOneVariableSummarise, Me.mnuPrepareCheckDataOneVariableGraph, Me.mnuPrepareCheckDataOneWayFrequencies, Me.ToolStripSeparator41, Me.mnuPrepareCheckDataExportOpenRefine, Me.mnuPrepareCheckDataImportOpenRefine, Me.ToolStripSeparator40, Me.mnuPreparePrepareToShareJitter, Me.mnuCheckDataPrePareToShareSdcPackage, Me.NonToolStripMenuItem})
         Me.mnuPrepareCheckData.Name = "mnuPrepareCheckData"
         resources.ApplyResources(Me.mnuPrepareCheckData, "mnuPrepareCheckData")
         '
@@ -2505,6 +2507,11 @@ Partial Class frmMain
         '
         Me.mnuPrepareCheckDataCompareColumns.Name = "mnuPrepareCheckDataCompareColumns"
         resources.ApplyResources(Me.mnuPrepareCheckDataCompareColumns, "mnuPrepareCheckDataCompareColumns")
+        '
+        'mnuPrepareCheckDataNoneNumericCases
+        '
+        Me.mnuPrepareCheckDataNoneNumericCases.Name = "mnuPrepareCheckDataNoneNumericCases"
+        resources.ApplyResources(Me.mnuPrepareCheckDataNoneNumericCases, "mnuPrepareCheckDataNoneNumericCases")
         '
         'mnuPrepareCheckDataBoxplot
         '
@@ -2555,6 +2562,11 @@ Partial Class frmMain
         '
         resources.ApplyResources(Me.mnuCheckDataPrePareToShareSdcPackage, "mnuCheckDataPrePareToShareSdcPackage")
         Me.mnuCheckDataPrePareToShareSdcPackage.Name = "mnuCheckDataPrePareToShareSdcPackage"
+        '
+        'NonToolStripMenuItem
+        '
+        Me.NonToolStripMenuItem.Name = "NonToolStripMenuItem"
+        resources.ApplyResources(Me.NonToolStripMenuItem, "NonToolStripMenuItem")
         '
         'ToolStripSeparator6
         '
@@ -4032,4 +4044,6 @@ Partial Class frmMain
     Friend WithEvents mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator48 As ToolStripSeparator
     Friend WithEvents mnuOptionsByContextDescribeBoxplot As ToolStripMenuItem
+    Friend WithEvents NonToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuPrepareCheckDataNoneNumericCases As ToolStripMenuItem
 End Class
