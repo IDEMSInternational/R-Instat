@@ -1975,4 +1975,8 @@ Public Class frmMain
     Private Sub mnuOptionsByContextDescribeBoxplot_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextDescribeBoxplot.Click
         dlgOptionsByContextBoxplot.ShowDialog()
     End Sub
+
+    Private Sub mnuPrepareCheckDataNoneNumericCases_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataNoneNumericCases.Click
+        dlgShowNonnumericValues.ShowDialog()
+    End Sub
 End Class
