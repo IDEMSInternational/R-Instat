@@ -375,6 +375,7 @@ Partial Class frmMain
         Me.mnuPrepareCheckData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataDuplicates = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataCompareColumns = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareCheckDataNoneNumericCases = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataBoxplot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataOneVariableSummarise = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataOneVariableGraph = New System.Windows.Forms.ToolStripMenuItem()
@@ -543,7 +544,6 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
-        Me.mnuPrepareCheckDataNoneNumericCases = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -2508,6 +2508,11 @@ Partial Class frmMain
         Me.mnuPrepareCheckDataCompareColumns.Name = "mnuPrepareCheckDataCompareColumns"
         resources.ApplyResources(Me.mnuPrepareCheckDataCompareColumns, "mnuPrepareCheckDataCompareColumns")
         '
+        'mnuPrepareCheckDataNoneNumericCases
+        '
+        Me.mnuPrepareCheckDataNoneNumericCases.Name = "mnuPrepareCheckDataNoneNumericCases"
+        resources.ApplyResources(Me.mnuPrepareCheckDataNoneNumericCases, "mnuPrepareCheckDataNoneNumericCases")
+        '
         'mnuPrepareCheckDataBoxplot
         '
         Me.mnuPrepareCheckDataBoxplot.Name = "mnuPrepareCheckDataBoxplot"
@@ -3491,11 +3496,6 @@ Partial Class frmMain
         Me.ucrOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         resources.ApplyResources(Me.ucrOutput, "ucrOutput")
         Me.ucrOutput.Name = "ucrOutput"
-        '
-        'mnuPrepareCheckDataNoneNumericCases
-        '
-        Me.mnuPrepareCheckDataNoneNumericCases.Name = "mnuPrepareCheckDataNoneNumericCases"
-        resources.ApplyResources(Me.mnuPrepareCheckDataNoneNumericCases, "mnuPrepareCheckDataNoneNumericCases")
         '
         'frmMain
         '
