@@ -133,7 +133,7 @@
     <value>94, 13</value>
   </data>
   <data name="lblColumn.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>1</value>
   </data>
   <data name="lblColumn.Text" xml:space="preserve">
     <value>Character Column:</value>
@@ -157,7 +157,7 @@
     <value>247, 24</value>
   </data>
   <data name="ucrSaveLogicalColumn.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;ucrSaveLogicalColumn.Name" xml:space="preserve">
     <value>ucrSaveLogicalColumn</value>
@@ -190,7 +190,7 @@
     <value>210, 180</value>
   </data>
   <data name="ucrSelectorShowNonNumericValues.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;ucrSelectorShowNonNumericValues.Name" xml:space="preserve">
     <value>ucrSelectorShowNonNumericValues</value>
@@ -211,7 +211,7 @@
     <value>410, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -224,9 +224,6 @@
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>4</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
