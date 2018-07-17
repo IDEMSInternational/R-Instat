@@ -173,6 +173,12 @@
     <Compile Include="dlgAddLink.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgAnonymiseIDColumn.Designer.vb">
+      <DependentUpon>dlgAnonymiseIDColumn.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgAnonymiseIDColumn.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgAutoSaveRecovery.Designer.vb">
       <DependentUpon>dlgAutoSaveRecovery.vb</DependentUpon>
     </Compile>
@@ -2295,6 +2301,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgAddLink.sw-KE.resx">
       <DependentUpon>dlgAddLink.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgAnonymiseIDColumn.resx">
+      <DependentUpon>dlgAnonymiseIDColumn.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgAutoSaveRecovery.resx">
       <DependentUpon>dlgAutoSaveRecovery.vb</DependentUpon>
