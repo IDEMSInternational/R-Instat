@@ -134,7 +134,7 @@ Public Class sdgSummaries
         ucrChkProportion.AddToLinkedControls(ucrChkPercentage, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkCount.AddToLinkedControls(ucrInputComboCountTest, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="==")
         ucrChkCount.AddToLinkedControls(ucrInputCountValue, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
-        ucrChkIncludeMissingOpt.AddToLinkedControls(ucrPnlMissingOptions, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeMissingOpt.AddToLinkedControls(ucrPnlMissingOptions, {True},  bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoNumber)
         ucrPnlMissingOptions.AddToLinkedControls({ucrNudNumber}, {rdoNumber}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrPnlMissingOptions.AddToLinkedControls({ucrNudPercentage}, {rdoPercentage}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
 
@@ -142,6 +142,10 @@ Public Class sdgSummaries
         ucrNudFraction.SetLinkedDisplayControl(lblFractionTrimmed)
         ucrNudNumber.SetLinkedDisplayControl(lblNumber)
         ucrNudPercentage.SetLinkedDisplayControl(lblPercentage)
+
+        ucrPnlMissingOptions.SetParameter(New RParameter("na_type", 9))
+        ucrPnlMissingOptions.AddRadioButton(rdoNumber, Chr(34) & "'n'" & Chr(34))
+        ucrPnlMissingOptions.AddRadioButton(rdoPercentage, Chr(34) & "'prop'" & Chr(34))
 
         ucrChkTrimmedMean.SetParameter(New RParameter("summary_trimmed_mean", 27), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_trimmed_mean" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkTrimmedMean.SetText("Trimmed Mean")
@@ -199,9 +203,6 @@ Public Class sdgSummaries
         ucrChkIncludeMissingOpt.AddParameterPresentCondition(True, "na_type")
         ucrChkIncludeMissingOpt.AddParameterPresentCondition(False, "na_type", False)
 
-        ucrPnlMissingOptions.AddRadioButton(rdoNumber)
-        ucrPnlMissingOptions.AddRadioButton(rdoPercentage)
-
         ucrNudPercentage.SetParameter(New RParameter("na_max_prop", 10))
 
         ucrNudNumber.SetParameter(New RParameter("na_max_n", 11))
@@ -236,6 +237,7 @@ Public Class sdgSummaries
         ucrNudPercentage.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrNudNumber.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrChkIncludeMissingOpt.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrPnlMissingOptions.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
 
         ucrChkPercentage.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrInputPropValue.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
@@ -336,17 +338,5 @@ Public Class sdgSummaries
         '    Else
         '        clsDefaultFunction.RemoveParameterByName("order_by")
         '    End If
-    End Sub
-
-    Private Sub ucrPnlMissingOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMissingOptions.ControlValueChanged, ucrChkIncludeMissingOpt.ControlValueChanged
-        If ucrChkIncludeMissingOpt.Checked Then
-            If rdoNumber.Checked Then
-                clsDefaultFunction.AddParameter("na_type", Chr(34) & "'n'" & Chr(34), iPosition:=9)
-            Else
-                clsDefaultFunction.AddParameter("na_type", Chr(34) & "'prop'" & Chr(34), iPosition:=9)
-            End If
-        Else
-            clsDefaultFunction.RemoveParameterByName("na_type")
-        End If
     End Sub
 End Class
