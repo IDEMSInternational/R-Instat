@@ -42,6 +42,9 @@ Public Class dlgExportToCPT
         ucrSelectorOneDF.SetParameter(New RParameter("data"))
         ucrSelectorOneDF.SetParameterIsrfunction()
 
+        ucrSelectorTwoDF.SetParameter(New RParameter("lat_lon_data"))
+        ucrSelectorTwoDF.SetParameterIsrfunction()
+
         ucrReceiverStationOneDF.Selector = ucrSelectorOneDF
         ucrReceiverStationOneDF.SetParameter(New RParameter("station"))
         ucrReceiverStationOneDF.SetParameterIsString()
@@ -61,40 +64,40 @@ Public Class dlgExportToCPT
         ucrReceiverElement.SetParameterIsString()
         ucrReceiverElement.SetLinkedDisplayControl(lblElement)
 
-        ucrReceiverLatitude.Selector = ucrSelectorOneDF
+        ucrReceiverMultipleStation.Selector = ucrSelectorOneDF
+        ucrReceiverMultipleStation.SetParameter(New RParameter("station"))
+        ucrReceiverMultipleStation.GetVariableNamesAsList()
+
         ucrReceiverLatitude.SetParameter(New RParameter("latitude"))
         ucrReceiverLatitude.SetParameterIsString()
         ucrReceiverLatitude.SetLinkedDisplayControl(lblLatitude)
-        ucrReceiverLatitude.bAttachedToPrimaryDataFrame = False
-        ucrReceiverLatitude.bOnlyLinkedToPrimaryDataFrames = False
 
-        ucrReceiverLongitude.Selector = ucrSelectorOneDF
         ucrReceiverLongitude.SetParameter(New RParameter("longitude"))
         ucrReceiverLongitude.SetParameterIsString()
         ucrReceiverLongitude.SetLinkedDisplayControl(lblLongitude)
-        ucrReceiverLongitude.bAttachedToPrimaryDataFrame = False
-        ucrReceiverLongitude.bOnlyLinkedToPrimaryDataFrames = False
 
-        ucrReceiverStationTwoDF.Selector = ucrSelectorOneDF
+        ucrReceiverStationTwoDF.Selector = ucrSelectorTwoDF
         ucrReceiverStationTwoDF.SetParameter(New RParameter("station_latlondata"))
         ucrReceiverStationTwoDF.SetParameterIsString()
-        ucrReceiverStationTwoDF.SetLinkedDisplayControl(lblStationTwoDF)
         ucrReceiverStationTwoDF.strSelectorHeading = "Numerics"
-        ucrReceiverStationTwoDF.bAttachedToPrimaryDataFrame = False
-        ucrReceiverStationTwoDF.bOnlyLinkedToPrimaryDataFrames = False
 
         ucrInputFilePath.SetParameter(New RParameter("file", 0))
         ucrInputFilePath.IsReadOnly = True
 
-        ucrPnlNoOfDF.AddRadioButton(rdoTwoDFLong)
         ucrPnlNoOfDF.AddRadioButton(rdoOneDF)
+        ucrPnlNoOfDF.AddRadioButton(rdoTwoDFLong)
+        ucrPnlNoOfDF.AddRadioButton(rdoTwoDFWide)
         ucrPnlNoOfDF.AddParameterPresentCondition(rdoOneDF, "lat_lon_data", False)
         ucrPnlNoOfDF.AddParameterPresentCondition(rdoTwoDFLong, "lat_lon_data", True)
-        ucrPnlNoOfDF.AddParameterPresentCondition(rdoTwoDFWide, "long", True)
+        ucrPnlNoOfDF.AddParameterPresentCondition(rdoTwoDFWide, "element", False)
+        ucrPnlNoOfDF.AddParameterPresentCondition(rdoOneDF, "element", True)
+        ucrPnlNoOfDF.AddParameterPresentCondition(rdoTwoDFLong, "element", True)
 
         ucrPnlNoOfDF.AddToLinkedControls({ucrReceiverStationTwoDF, ucrSelectorTwoDF}, {rdoTwoDFLong, rdoTwoDFWide}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlNoOfDF.AddToLinkedControls({ucrReceiverMultipleStation}, {rdoTwoDFWide}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlNoOfDF.AddToLinkedControls(ucrReceiverElement, {rdoOneDF, rdoTwoDFLong}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrReceiverStationTwoDF.SetLinkedDisplayControl(lblStationTwoDF)
+        ucrReceiverStationTwoDF.SetLinkedDisplayControl(lblLine)
 
     End Sub
 
@@ -102,8 +105,9 @@ Public Class dlgExportToCPT
         clsOutputCPT = New RFunction
         clsExportCPT = New RFunction
 
-        ucrReceiverStationOneDF.SetMeAsReceiver()
+        ucrReceiverYear.SetMeAsReceiver()
         ucrSelectorOneDF.Reset()
+        ucrSelectorTwoDF.Reset()
         ucrInputFilePath.Reset()
         ucrInputFilePath.SetName("")
 
@@ -121,13 +125,11 @@ Public Class dlgExportToCPT
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrSelectorOneDF.AddAdditionalCodeParameterPair(clsOutputCPT, New RParameter("lat_lon_data"), iAdditionalPairNo:=1)
-        ucrReceiverStationOneDF.SetMeAsReceiver()
         ucrReceiverStationOneDF.SetRCode(clsOutputCPT, bReset)
         ucrReceiverYear.SetRCode(clsOutputCPT, bReset)
         ucrSelectorOneDF.SetRCode(clsOutputCPT, bReset)
         ucrReceiverElement.SetRCode(clsOutputCPT, bReset)
-        ucrReceiverLatitude.SetMeAsReceiver()
+        ucrReceiverMultipleStation.SetRCode(clsOutputCPT, bReset)
         ucrReceiverLatitude.SetRCode(clsOutputCPT, bReset)
         ucrReceiverLongitude.SetRCode(clsOutputCPT, bReset)
         ucrReceiverStationTwoDF.SetRCode(clsOutputCPT, bReset)
@@ -144,6 +146,12 @@ Public Class dlgExportToCPT
             End If
         ElseIf rdoOneDF.Checked Then
             If Not ucrReceiverStationOneDF.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverElement.IsEmpty AndAlso Not ucrReceiverLatitude.IsEmpty AndAlso Not ucrReceiverLongitude.IsEmpty Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
+        ElseIf rdoTwoDFWide.Checked Then
+            If Not ucrReceiverStationTwoDF.IsEmpty AndAlso Not ucrReceiverMultipleStation.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverLatitude.IsEmpty AndAlso Not ucrReceiverLongitude.IsEmpty Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
@@ -201,26 +209,42 @@ Public Class dlgExportToCPT
     Private Sub ucrPnlNoOfDF_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlNoOfDF.ControlContentsChanged
         TestOkEnabled()
         DataFrames()
+        Selectors()
     End Sub
 
-    Private Sub ucrReceiverStationOneDF_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStationOneDF.ControlValueChanged, ucrReceiverStationTwoDF.ControlValueChanged, ucrReceiverYear.ControlValueChanged, ucrReceiverElement.ControlValueChanged, ucrReceiverLatitude.ControlValueChanged, ucrReceiverLongitude.ControlValueChanged
+    Private Sub ucrReceiverStationOneDF_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStationOneDF.ControlValueChanged, ucrReceiverStationTwoDF.ControlValueChanged, ucrReceiverYear.ControlValueChanged, ucrReceiverElement.ControlValueChanged, ucrReceiverLatitude.ControlValueChanged, ucrReceiverLongitude.ControlValueChanged, ucrReceiverMultipleStation.ControlValueChanged
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrSelectorExporCPT_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorOneDF.ControlValueChanged
+    Private Sub ucrSelectorTwoDF_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorTwoDF.ControlValueChanged
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrSelectorOneDF_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorOneDF.ControlValueChanged
         DataFrames()
     End Sub
 
     Private Sub DataFrames()
         If rdoTwoDFLong.Checked() Then
-            If ucrSelectorOneDF.CurrentReceiver Is Nothing OrElse ucrSelectorOneDF.CurrentReceiver.bAttachedToPrimaryDataFrame Then
-                clsOutputCPT.AddParameter("data", ucrSelectorOneDF.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0)
-            Else
-                clsOutputCPT.AddParameter("lat_lon_data", ucrSelectorOneDF.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-            End If
+            clsOutputCPT.AddParameter("lat_lon_data", ucrSelectorTwoDF.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            clsOutputCPT.AddParameter("long", "TRUE")
+        ElseIf rdoTwoDFWide.Checked() Then
+            clsOutputCPT.AddParameter("lat_lon_data", ucrSelectorTwoDF.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            clsOutputCPT.AddParameter("long", "FALSE")
         ElseIf rdoOneDF.Checked Then
             clsOutputCPT.RemoveParameterByName("lat_lon_data")
-            clsOutputCPT.AddParameter("data", ucrSelectorOneDF.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0)
+            clsOutputCPT.AddParameter("long", "TRUE")
         End If
     End Sub
+
+    Private Sub Selectors()
+        If rdoOneDF.Checked() Then
+            ucrReceiverLatitude.Selector = ucrSelectorOneDF
+            ucrReceiverLongitude.Selector = ucrSelectorOneDF
+        ElseIf rdoTwoDFLong.Checked() OrElse rdoTwoDFWide.Checked() Then
+            ucrReceiverLatitude.Selector = ucrSelectorTwoDF
+            ucrReceiverLongitude.Selector = ucrSelectorTwoDF
+        End If
+    End Sub
+
 End Class
