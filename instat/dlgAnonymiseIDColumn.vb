@@ -35,6 +35,7 @@ Public Class dlgAnonymiseIDColumn
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim dctAlgorithm As New Dictionary(Of String, String)
         ucrReceiverIDColumn.Selector = ucrSelectorAnonymiseIDColumn
         ucrSelectorAnonymiseIDColumn.bUseCurrentFilter = False
 
@@ -42,6 +43,19 @@ Public Class dlgAnonymiseIDColumn
         ucrReceiverIDColumn.SetParameterIsRFunction()
 
         ucrInputTextSalt.SetParameter(New RParameter("salt", 1))
+
+        ucrInputAlgorithm.SetParameter(New RParameter("algo", 1))
+        dctAlgorithm.Add("md5", Chr(34) & "md5" & Chr(34))
+        dctAlgorithm.Add("sha1", Chr(34) & "sha1" & Chr(34))
+        dctAlgorithm.Add("crc32", Chr(34) & "crc32" & Chr(34))
+        dctAlgorithm.Add("sha256", Chr(34) & "sha256" & Chr(34))
+        dctAlgorithm.Add("sha512", Chr(34) & "sha512" & Chr(34))
+        dctAlgorithm.Add("xxhash32", Chr(34) & "xxhash32" & Chr(34))
+        dctAlgorithm.Add("xxhash64", Chr(34) & "xxhash64" & Chr(34))
+        dctAlgorithm.Add("murmur32", Chr(34) & "murmur32" & Chr(34))
+        ucrInputAlgorithm.SetItems(dctAlgorithm)
+        ucrInputAlgorithm.SetDropDownStyleAsNonEditable()
+        ucrInputAlgorithm.SetRDefault(Chr(34) & "md5" & Chr(34))
 
         ucrSaveAnonymisedColumn.SetPrefix("Hash")
         ucrSaveAnonymisedColumn.SetSaveTypeAsColumn()
