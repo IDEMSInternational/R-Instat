@@ -173,6 +173,12 @@
     <Compile Include="dlgAddLink.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgAnonymiseIDColumn.Designer.vb">
+      <DependentUpon>dlgAnonymiseIDColumn.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgAnonymiseIDColumn.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgAutoSaveRecovery.Designer.vb">
       <DependentUpon>dlgAutoSaveRecovery.vb</DependentUpon>
     </Compile>
@@ -219,6 +225,12 @@
       <DependentUpon>dlgClimaticCheckDataTemperature.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgClimaticCheckDataTemperature.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgClimaticLengthOfSeason.Designer.vb">
+      <DependentUpon>dlgClimaticLengthOfSeason.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticLengthOfSeason.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgClimaticMaps.Designer.vb">
@@ -2296,6 +2308,9 @@
     <EmbeddedResource Include="dlgAddLink.sw-KE.resx">
       <DependentUpon>dlgAddLink.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgAnonymiseIDColumn.resx">
+      <DependentUpon>dlgAnonymiseIDColumn.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgAutoSaveRecovery.resx">
       <DependentUpon>dlgAutoSaveRecovery.vb</DependentUpon>
     </EmbeddedResource>
@@ -2403,6 +2418,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgClimaticCheckDataTemperature.sw-KE.resx">
       <DependentUpon>dlgClimaticCheckDataTemperature.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticLengthOfSeason.resx">
+      <DependentUpon>dlgClimaticLengthOfSeason.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgClimaticMaps.resx">
       <DependentUpon>dlgClimaticMaps.vb</DependentUpon>
