@@ -20,8 +20,9 @@ Imports System.IO
 Public Class dlgImportShapeFiles
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private bFromLibrary As Boolean = False
     Private strFilePath As String = ""
-
+    Private strLibraryPath As String = Path.Combine(frmMain.strStaticPath, "Library", "Climatic", "Shapefiles/")
     Private clsReadOGRFunction, clsMergeFunction, clsTidyFunction, clsAsDataFrameFunction As New RFunction
 
     Private Sub dlgImportShapeFiles_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -41,14 +42,11 @@ Public Class dlgImportShapeFiles
 
     Private Sub InitialiseDialog()
 
-        'disabled this temporarily
-        cmdLibrary.Enabled = False
-
         ucrInputFilePath.IsReadOnly = True
-        'ucrSaveDataframeName.SetPrefix("Dataframe")
         ucrSaveDataframeName.SetSaveTypeAsDataFrame()
         ucrSaveDataframeName.SetIsTextBox()
         ucrSaveDataframeName.SetLabelText("Dataframe Name:")
+
     End Sub
 
     Private Sub SetDefaults()
@@ -81,7 +79,6 @@ Public Class dlgImportShapeFiles
         ucrBase.clsRsyntax.SetBaseRFunction(clsMergeFunction)
     End Sub
 
-    'Loads the open dialog on load and click
     Public Sub GetFileFromOpenDialog()
         Dim strFileName As String = ""
         Dim strFileExt As String = ""
@@ -90,6 +87,14 @@ Public Class dlgImportShapeFiles
         Using dlgOpen As New OpenFileDialog
             dlgOpen.Filter = "All Shape files|*.shp|Shape files|*.shp"
             dlgOpen.Title = "Import Shape File"
+
+            If bFromLibrary Then
+                dlgOpen.InitialDirectory = Path.GetDirectoryName(Replace(strLibraryPath, "/", "\"))
+            ElseIf Not ucrInputFilePath.IsEmpty() Then
+                dlgOpen.InitialDirectory = Path.GetDirectoryName(Replace(ucrInputFilePath.GetText(), "/", "\"))
+            Else
+                dlgOpen.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+            End If
 
             If dlgOpen.ShowDialog() = DialogResult.OK Then
 
@@ -101,8 +106,6 @@ Public Class dlgImportShapeFiles
                     If strFileExt = ".shp" Then
                         ucrSaveDataframeName.SetName(frmMain.clsRLink.MakeValidText(strFileName))
                         clsReadOGRFunction.AddParameter("dsn", Chr(34) & Replace(strFilePath, "\", "/") & Chr(34))
-                        'clsReadOGRFunction.ToScript(strTemp)
-                        'frmMain.clsRLink.RunScript(strTemp, strComment:="import shape file", bUpdateGrids:=False)
                     End If
                 End If
             End If
@@ -120,6 +123,12 @@ Public Class dlgImportShapeFiles
             ucrBase.OKEnabled(False)
         End If
 
+    End Sub
+
+    Private Sub cmdLibrary_Click(sender As Object, e As EventArgs) Handles cmdLibrary.Click
+        bFromLibrary = True
+        GetFileFromOpenDialog()
+        bFromLibrary = False
     End Sub
 
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
