@@ -221,6 +221,12 @@
     <Compile Include="dlgClimaticCheckDataTemperature.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgClimaticLengthOfSeason.Designer.vb">
+      <DependentUpon>dlgClimaticLengthOfSeason.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticLengthOfSeason.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgClimaticMaps.Designer.vb">
       <DependentUpon>dlgClimaticMaps.vb</DependentUpon>
     </Compile>
@@ -2403,6 +2409,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgClimaticCheckDataTemperature.sw-KE.resx">
       <DependentUpon>dlgClimaticCheckDataTemperature.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticLengthOfSeason.resx">
+      <DependentUpon>dlgClimaticLengthOfSeason.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgClimaticMaps.resx">
       <DependentUpon>dlgClimaticMaps.vb</DependentUpon>
