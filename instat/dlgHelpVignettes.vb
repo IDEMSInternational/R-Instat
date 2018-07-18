@@ -16,6 +16,7 @@
 
 Imports RDotNet
 Imports instat.Translations
+Imports instat
 
 Public Class dlgHelpVignettes
     Private bFirstload As Boolean = True
@@ -33,13 +34,13 @@ Public Class dlgHelpVignettes
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
-        TestOkEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
         Dim clsGetPackages As New RFunction
         Dim expPackageNames As SymbolicExpression
         Dim chrPackageNames As CharacterVector
+        ucrBase.clsRsyntax.iCallType = 2
 
         ucrPnlHelpVignettes.AddRadioButton(rdoHelp)
         ucrPnlHelpVignettes.AddRadioButton(rdoVignettes)
@@ -47,10 +48,8 @@ Public Class dlgHelpVignettes
         ucrPnlHelpVignettes.AddFunctionNamesCondition(rdoHelp, "help")
         ucrPnlHelpVignettes.AddFunctionNamesCondition(rdoVignettes, "browseVignettes")
 
-        ucrPnlHelpVignettes.AddToLinkedControls(ucrInputFunctionName, {rdoHelp}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlHelpVignettes.AddToLinkedControls(ucrInputFunctionName, {rdoHelp}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedDisabledIfParameterMissing:=True)
         ucrInputFunctionName.SetLinkedDisplayControl(lblFunctionName)
-
-        ucrInputFunctionName.SetParameter(New RParameter("topic", 0))
 
         clsGetPackages.SetRCommand("get_installed_packages_with_data")
         expPackageNames = frmMain.clsRLink.RunInternalScriptGetValue(clsGetPackages.ToScript(), bSilent:=True)
@@ -74,8 +73,10 @@ Public Class dlgHelpVignettes
 
         clsHelpFunction.SetPackageName("utils")
         clsHelpFunction.SetRCommand("help")
-        clsHelpFunction.AddParameter("help_type", Chr(34) & "html" & Chr(34))
 
+        clsHelpFunction.AddParameter("package", Chr(34) & "datasets" & Chr(34))
+
+        clsVignettesFunction.SetPackageName("utils")
         clsVignettesFunction.SetRCommand("browseVignettes")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsHelpFunction)
@@ -83,13 +84,8 @@ Public Class dlgHelpVignettes
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrInputComboPackage.AddAdditionalCodeParameterPair(clsVignettesFunction, New RParameter("package", 0), iAdditionalPairNo:=1)
-        ucrInputFunctionName.SetRCode(clsHelpFunction, bReset)
         ucrInputComboPackage.SetRCode(clsHelpFunction, bReset)
         ucrPnlHelpVignettes.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-    End Sub
-
-    Private Sub TestOkEnabled()
-
     End Sub
 
     Private Sub ucrPnlHelpVignettes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlHelpVignettes.ControlValueChanged
@@ -100,9 +96,16 @@ Public Class dlgHelpVignettes
         End If
     End Sub
 
+    Private Sub ucrInputFunctionName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFunctionName.ControlValueChanged, ucrPnlHelpVignettes.ControlValueChanged
+        If rdoHelp.Checked AndAlso Not ucrInputFunctionName.IsEmpty Then
+            clsHelpFunction.AddParameter("topic", Chr(34) & ucrInputFunctionName.GetText & Chr(34), iPosition:=0)
+        Else
+            clsHelpFunction.RemoveParameterByName("topic")
+        End If
+    End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
-        TestOkEnabled()
     End Sub
 End Class

@@ -39,22 +39,22 @@ Partial Class dlgHelpVignettes
         Me.ucrInputComboPackage.Location = New System.Drawing.Point(111, 58)
         Me.ucrInputComboPackage.Name = "ucrInputComboPackage"
         Me.ucrInputComboPackage.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputComboPackage.TabIndex = 0
+        Me.ucrInputComboPackage.TabIndex = 4
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(2, 145)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 1
+        Me.ucrBase.TabIndex = 7
         '
         'lblPackage
         '
         Me.lblPackage.AutoSize = True
-        Me.lblPackage.Location = New System.Drawing.Point(23, 61)
+        Me.lblPackage.Location = New System.Drawing.Point(23, 62)
         Me.lblPackage.Name = "lblPackage"
         Me.lblPackage.Size = New System.Drawing.Size(84, 13)
-        Me.lblPackage.TabIndex = 2
+        Me.lblPackage.TabIndex = 3
         Me.lblPackage.Text = "Package Name:"
         '
         'rdoHelp
@@ -68,7 +68,7 @@ Partial Class dlgHelpVignettes
         Me.rdoHelp.Location = New System.Drawing.Point(130, 12)
         Me.rdoHelp.Name = "rdoHelp"
         Me.rdoHelp.Size = New System.Drawing.Size(91, 27)
-        Me.rdoHelp.TabIndex = 4
+        Me.rdoHelp.TabIndex = 1
         Me.rdoHelp.TabStop = True
         Me.rdoHelp.Text = "Help"
         Me.rdoHelp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -85,7 +85,7 @@ Partial Class dlgHelpVignettes
         Me.rdoVignettes.Location = New System.Drawing.Point(218, 12)
         Me.rdoVignettes.Name = "rdoVignettes"
         Me.rdoVignettes.Size = New System.Drawing.Size(91, 27)
-        Me.rdoVignettes.TabIndex = 5
+        Me.rdoVignettes.TabIndex = 2
         Me.rdoVignettes.TabStop = True
         Me.rdoVignettes.Text = "Vignettes"
         Me.rdoVignettes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -96,7 +96,7 @@ Partial Class dlgHelpVignettes
         Me.ucrPnlHelpVignettes.Location = New System.Drawing.Point(101, 8)
         Me.ucrPnlHelpVignettes.Name = "ucrPnlHelpVignettes"
         Me.ucrPnlHelpVignettes.Size = New System.Drawing.Size(231, 36)
-        Me.ucrPnlHelpVignettes.TabIndex = 3
+        Me.ucrPnlHelpVignettes.TabIndex = 0
         '
         'ucrInputFunctionName
         '
@@ -111,10 +111,10 @@ Partial Class dlgHelpVignettes
         'lblFunctionName
         '
         Me.lblFunctionName.AutoSize = True
-        Me.lblFunctionName.Location = New System.Drawing.Point(24, 106)
+        Me.lblFunctionName.Location = New System.Drawing.Point(26, 105)
         Me.lblFunctionName.Name = "lblFunctionName"
         Me.lblFunctionName.Size = New System.Drawing.Size(82, 13)
-        Me.lblFunctionName.TabIndex = 7
+        Me.lblFunctionName.TabIndex = 5
         Me.lblFunctionName.Text = "Function Name:"
         '
         'dlgHelpVignettes
