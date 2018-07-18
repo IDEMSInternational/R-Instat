@@ -375,7 +375,7 @@ Partial Class frmMain
         Me.mnuPrepareCheckData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataDuplicates = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataCompareColumns = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPrepareCheckDataNoneNumericCases = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareCheckDataNonNumericCases = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataBoxplot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataOneVariableSummarise = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataOneVariableGraph = New System.Windows.Forms.ToolStripMenuItem()
@@ -544,6 +544,7 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
+        Me.ToolStripSeparator49 = New System.Windows.Forms.ToolStripSeparator()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -2494,7 +2495,7 @@ Partial Class frmMain
         'mnuPrepareCheckData
         '
         Me.mnuPrepareCheckData.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.mnuPrepareCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareCheckDataDuplicates, Me.mnuPrepareCheckDataCompareColumns, Me.mnuPrepareCheckDataNoneNumericCases, Me.mnuPrepareCheckDataBoxplot, Me.mnuPrepareCheckDataOneVariableSummarise, Me.mnuPrepareCheckDataOneVariableGraph, Me.mnuPrepareCheckDataOneWayFrequencies, Me.ToolStripSeparator41, Me.mnuPrepareCheckDataExportOpenRefine, Me.mnuPrepareCheckDataImportOpenRefine, Me.ToolStripSeparator40, Me.mnuPreparePrepareToShareJitter, Me.mnuCheckDataPrePareToShareSdcPackage, Me.NonToolStripMenuItem})
+        Me.mnuPrepareCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareCheckDataDuplicates, Me.mnuPrepareCheckDataCompareColumns, Me.mnuPrepareCheckDataNonNumericCases, Me.ToolStripSeparator49, Me.mnuPrepareCheckDataBoxplot, Me.mnuPrepareCheckDataOneVariableSummarise, Me.mnuPrepareCheckDataOneVariableGraph, Me.mnuPrepareCheckDataOneWayFrequencies, Me.ToolStripSeparator41, Me.mnuPrepareCheckDataExportOpenRefine, Me.mnuPrepareCheckDataImportOpenRefine, Me.ToolStripSeparator40, Me.mnuPreparePrepareToShareJitter, Me.mnuCheckDataPrePareToShareSdcPackage, Me.NonToolStripMenuItem})
         Me.mnuPrepareCheckData.Name = "mnuPrepareCheckData"
         resources.ApplyResources(Me.mnuPrepareCheckData, "mnuPrepareCheckData")
         '
@@ -2508,10 +2509,10 @@ Partial Class frmMain
         Me.mnuPrepareCheckDataCompareColumns.Name = "mnuPrepareCheckDataCompareColumns"
         resources.ApplyResources(Me.mnuPrepareCheckDataCompareColumns, "mnuPrepareCheckDataCompareColumns")
         '
-        'mnuPrepareCheckDataNoneNumericCases
+        'mnuPrepareCheckDataNonNumericCases
         '
-        Me.mnuPrepareCheckDataNoneNumericCases.Name = "mnuPrepareCheckDataNoneNumericCases"
-        resources.ApplyResources(Me.mnuPrepareCheckDataNoneNumericCases, "mnuPrepareCheckDataNoneNumericCases")
+        Me.mnuPrepareCheckDataNonNumericCases.Name = "mnuPrepareCheckDataNonNumericCases"
+        resources.ApplyResources(Me.mnuPrepareCheckDataNonNumericCases, "mnuPrepareCheckDataNonNumericCases")
         '
         'mnuPrepareCheckDataBoxplot
         '
@@ -3497,6 +3498,11 @@ Partial Class frmMain
         resources.ApplyResources(Me.ucrOutput, "ucrOutput")
         Me.ucrOutput.Name = "ucrOutput"
         '
+        'ToolStripSeparator49
+        '
+        Me.ToolStripSeparator49.Name = "ToolStripSeparator49"
+        resources.ApplyResources(Me.ToolStripSeparator49, "ToolStripSeparator49")
+        '
         'frmMain
         '
         resources.ApplyResources(Me, "$this")
@@ -4045,5 +4051,6 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator48 As ToolStripSeparator
     Friend WithEvents mnuOptionsByContextDescribeBoxplot As ToolStripMenuItem
     Friend WithEvents NonToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents mnuPrepareCheckDataNoneNumericCases As ToolStripMenuItem
+    Friend WithEvents mnuPrepareCheckDataNonNumericCases As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator49 As ToolStripSeparator
 End Class
