@@ -329,6 +329,12 @@
     <Compile Include="dlgEvapotranspiration.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgHelpVignettes.Designer.vb">
+      <DependentUpon>dlgHelpVignettes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgHelpVignettes.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgHypothesisTestsCalculator.Designer.vb">
       <DependentUpon>dlgHypothesisTestsCalculator.vb</DependentUpon>
     </Compile>
@@ -2582,6 +2588,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFrequency.sw-KE.resx">
       <DependentUpon>dlgFrequency.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgHelpVignettes.resx">
+      <DependentUpon>dlgHelpVignettes.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgHypothesisTestsCalculator.resx">
       <DependentUpon>dlgHypothesisTestsCalculator.vb</DependentUpon>
