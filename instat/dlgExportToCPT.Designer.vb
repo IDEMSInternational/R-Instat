@@ -49,6 +49,11 @@ Partial Class dlgExportToCPT
         Me.lblElement = New System.Windows.Forms.Label()
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lblStationOneDF = New System.Windows.Forms.Label()
+        Me.lblLine = New System.Windows.Forms.Label()
+        Me.rdoTwoDFWide = New System.Windows.Forms.RadioButton()
+        Me.ucrReceiverMultipleStation = New instat.ucrReceiverMultiple()
+        Me.ucrSelectorTwoDF = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverStationTwoDF = New instat.ucrReceiverSingle()
         Me.ucrReceiverLongitude = New instat.ucrReceiverSingle()
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
@@ -58,11 +63,7 @@ Partial Class dlgExportToCPT
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrSelectorOneDF = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.lblLine = New System.Windows.Forms.Label()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectorTwoDF = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverMultipleStation = New instat.ucrReceiverMultiple()
-        Me.rdoTwoDFWide = New System.Windows.Forms.RadioButton()
+        Me.lblMultStations = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'rdoTwoDFLong
@@ -123,6 +124,42 @@ Partial Class dlgExportToCPT
         '
         resources.ApplyResources(Me.lblStationOneDF, "lblStationOneDF")
         Me.lblStationOneDF.Name = "lblStationOneDF"
+        '
+        'lblLine
+        '
+        resources.ApplyResources(Me.lblLine, "lblLine")
+        Me.lblLine.Name = "lblLine"
+        '
+        'rdoTwoDFWide
+        '
+        resources.ApplyResources(Me.rdoTwoDFWide, "rdoTwoDFWide")
+        Me.rdoTwoDFWide.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoTwoDFWide.FlatAppearance.BorderSize = 2
+        Me.rdoTwoDFWide.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoTwoDFWide.Name = "rdoTwoDFWide"
+        Me.rdoTwoDFWide.UseVisualStyleBackColor = True
+        '
+        'ucrReceiverMultipleStation
+        '
+        Me.ucrReceiverMultipleStation.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverMultipleStation, "ucrReceiverMultipleStation")
+        Me.ucrReceiverMultipleStation.Name = "ucrReceiverMultipleStation"
+        Me.ucrReceiverMultipleStation.Selector = Nothing
+        Me.ucrReceiverMultipleStation.strNcFilePath = ""
+        Me.ucrReceiverMultipleStation.ucrSelector = Nothing
+        '
+        'ucrSelectorTwoDF
+        '
+        Me.ucrSelectorTwoDF.bDropUnusedFilterLevels = False
+        Me.ucrSelectorTwoDF.bShowHiddenColumns = False
+        Me.ucrSelectorTwoDF.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorTwoDF, "ucrSelectorTwoDF")
+        Me.ucrSelectorTwoDF.Name = "ucrSelectorTwoDF"
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
         '
         'ucrReceiverStationTwoDF
         '
@@ -199,46 +236,16 @@ Partial Class dlgExportToCPT
         resources.ApplyResources(Me.ucrSelectorOneDF, "ucrSelectorOneDF")
         Me.ucrSelectorOneDF.Name = "ucrSelectorOneDF"
         '
-        'lblLine
+        'lblMultStations
         '
-        resources.ApplyResources(Me.lblLine, "lblLine")
-        Me.lblLine.Name = "lblLine"
-        '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrSelectorTwoDF
-        '
-        Me.ucrSelectorTwoDF.bDropUnusedFilterLevels = False
-        Me.ucrSelectorTwoDF.bShowHiddenColumns = False
-        Me.ucrSelectorTwoDF.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorTwoDF, "ucrSelectorTwoDF")
-        Me.ucrSelectorTwoDF.Name = "ucrSelectorTwoDF"
-        '
-        'ucrReceiverMultipleStation
-        '
-        Me.ucrReceiverMultipleStation.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverMultipleStation, "ucrReceiverMultipleStation")
-        Me.ucrReceiverMultipleStation.Name = "ucrReceiverMultipleStation"
-        Me.ucrReceiverMultipleStation.Selector = Nothing
-        Me.ucrReceiverMultipleStation.strNcFilePath = ""
-        Me.ucrReceiverMultipleStation.ucrSelector = Nothing
-        '
-        'rdoTwoDFWide
-        '
-        resources.ApplyResources(Me.rdoTwoDFWide, "rdoTwoDFWide")
-        Me.rdoTwoDFWide.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoTwoDFWide.FlatAppearance.BorderSize = 2
-        Me.rdoTwoDFWide.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoTwoDFWide.Name = "rdoTwoDFWide"
-        Me.rdoTwoDFWide.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.lblMultStations, "lblMultStations")
+        Me.lblMultStations.Name = "lblMultStations"
         '
         'dlgExportToCPT
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblMultStations)
         Me.Controls.Add(Me.rdoTwoDFWide)
         Me.Controls.Add(Me.ucrReceiverMultipleStation)
         Me.Controls.Add(Me.ucrSelectorTwoDF)
@@ -299,4 +306,5 @@ Partial Class dlgExportToCPT
     Friend WithEvents ucrSelectorTwoDF As ucrSelectorByDataFrameAddRemove
     Friend WithEvents rdoTwoDFWide As RadioButton
     Friend WithEvents ucrReceiverMultipleStation As ucrReceiverMultiple
+    Friend WithEvents lblMultStations As Label
 End Class

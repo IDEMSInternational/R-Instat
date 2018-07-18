@@ -67,6 +67,7 @@ Public Class dlgExportToCPT
         ucrReceiverMultipleStation.Selector = ucrSelectorOneDF
         ucrReceiverMultipleStation.SetParameter(New RParameter("station"))
         ucrReceiverMultipleStation.GetVariableNamesAsList()
+        ucrReceiverMultipleStation.SetLinkedDisplayControl(lblMultStations)
 
         ucrReceiverLatitude.SetParameter(New RParameter("latitude"))
         ucrReceiverLatitude.SetParameterIsString()
@@ -95,7 +96,7 @@ Public Class dlgExportToCPT
 
         ucrPnlNoOfDF.AddToLinkedControls({ucrReceiverStationTwoDF, ucrSelectorTwoDF}, {rdoTwoDFLong, rdoTwoDFWide}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlNoOfDF.AddToLinkedControls({ucrReceiverMultipleStation}, {rdoTwoDFWide}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlNoOfDF.AddToLinkedControls(ucrReceiverElement, {rdoOneDF, rdoTwoDFLong}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlNoOfDF.AddToLinkedControls({ucrReceiverElement, ucrReceiverStationOneDF}, {rdoOneDF, rdoTwoDFLong}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverStationTwoDF.SetLinkedDisplayControl(lblStationTwoDF)
         ucrReceiverStationTwoDF.SetLinkedDisplayControl(lblLine)
 
@@ -128,6 +129,7 @@ Public Class dlgExportToCPT
         ucrReceiverStationOneDF.SetRCode(clsOutputCPT, bReset)
         ucrReceiverYear.SetRCode(clsOutputCPT, bReset)
         ucrSelectorOneDF.SetRCode(clsOutputCPT, bReset)
+        ucrSelectorTwoDF.SetRCode(clsOutputCPT, bReset)
         ucrReceiverElement.SetRCode(clsOutputCPT, bReset)
         ucrReceiverMultipleStation.SetRCode(clsOutputCPT, bReset)
         ucrReceiverLatitude.SetRCode(clsOutputCPT, bReset)
