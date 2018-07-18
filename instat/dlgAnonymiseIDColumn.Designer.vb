@@ -92,9 +92,9 @@ Partial Class dlgAnonymiseIDColumn
         Me.lblSalt.AutoSize = True
         Me.lblSalt.Location = New System.Drawing.Point(269, 126)
         Me.lblSalt.Name = "lblSalt"
-        Me.lblSalt.Size = New System.Drawing.Size(28, 13)
+        Me.lblSalt.Size = New System.Drawing.Size(107, 13)
         Me.lblSalt.TabIndex = 3
-        Me.lblSalt.Text = "Salt:"
+        Me.lblSalt.Text = "Random String (Salt):"
         '
         'dlgAnonymiseIDColumn
         '
