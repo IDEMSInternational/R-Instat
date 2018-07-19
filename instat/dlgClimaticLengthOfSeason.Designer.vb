@@ -41,7 +41,7 @@ Partial Class dlgClimaticLengthOfSeason
         'lblStartofRains
         '
         Me.lblStartofRains.AutoSize = True
-        Me.lblStartofRains.Location = New System.Drawing.Point(304, 31)
+        Me.lblStartofRains.Location = New System.Drawing.Point(300, 31)
         Me.lblStartofRains.Name = "lblStartofRains"
         Me.lblStartofRains.Size = New System.Drawing.Size(32, 13)
         Me.lblStartofRains.TabIndex = 1
@@ -50,7 +50,7 @@ Partial Class dlgClimaticLengthOfSeason
         'lblStartofRainsLogical
         '
         Me.lblStartofRainsLogical.AutoSize = True
-        Me.lblStartofRainsLogical.Location = New System.Drawing.Point(303, 86)
+        Me.lblStartofRainsLogical.Location = New System.Drawing.Point(300, 86)
         Me.lblStartofRainsLogical.Name = "lblStartofRainsLogical"
         Me.lblStartofRainsLogical.Size = New System.Drawing.Size(44, 13)
         Me.lblStartofRainsLogical.TabIndex = 3
@@ -59,7 +59,7 @@ Partial Class dlgClimaticLengthOfSeason
         'lblEndofRains
         '
         Me.lblEndofRains.AutoSize = True
-        Me.lblEndofRains.Location = New System.Drawing.Point(304, 136)
+        Me.lblEndofRains.Location = New System.Drawing.Point(299, 136)
         Me.lblEndofRains.Name = "lblEndofRains"
         Me.lblEndofRains.Size = New System.Drawing.Size(29, 13)
         Me.lblEndofRains.TabIndex = 5
@@ -68,7 +68,7 @@ Partial Class dlgClimaticLengthOfSeason
         'lblEndofRainsLogical
         '
         Me.lblEndofRainsLogical.AutoSize = True
-        Me.lblEndofRainsLogical.Location = New System.Drawing.Point(304, 182)
+        Me.lblEndofRainsLogical.Location = New System.Drawing.Point(299, 182)
         Me.lblEndofRainsLogical.Name = "lblEndofRainsLogical"
         Me.lblEndofRainsLogical.Size = New System.Drawing.Size(41, 13)
         Me.lblEndofRainsLogical.TabIndex = 7
