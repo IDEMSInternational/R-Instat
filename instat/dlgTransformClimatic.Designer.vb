@@ -52,11 +52,13 @@ Partial Class dlgTransformClimatic
         Me.lblNewColName = New System.Windows.Forms.Label()
         Me.lblCountOver = New System.Windows.Forms.Label()
         Me.grpTransform = New System.Windows.Forms.GroupBox()
+        Me.lblRowsMultSpells = New System.Windows.Forms.Label()
         Me.lblCondition = New System.Windows.Forms.Label()
         Me.lblWBEvaporation = New System.Windows.Forms.Label()
         Me.lblWBCapacity = New System.Windows.Forms.Label()
         Me.rdoMultSpells = New System.Windows.Forms.RadioButton()
         Me.ucrChkGroupByYear = New instat.ucrCheck()
+        Me.ucrNudMultSpells = New instat.ucrNud()
         Me.ucrInputSpellUpper = New instat.ucrInputTextBox()
         Me.ucrInputCondition = New instat.ucrInputComboBox()
         Me.ucrInputEvaporation = New instat.ucrInputTextBox()
@@ -73,8 +75,6 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverData = New instat.ucrReceiverSingle()
         Me.ucrSelectorTransform = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblRowsMultSpells = New System.Windows.Forms.Label()
-        Me.ucrNudMultSpells = New instat.ucrNud()
         Me.grpTransform.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -185,6 +185,12 @@ Partial Class dlgTransformClimatic
         Me.grpTransform.Name = "grpTransform"
         Me.grpTransform.TabStop = False
         '
+        'lblRowsMultSpells
+        '
+        resources.ApplyResources(Me.lblRowsMultSpells, "lblRowsMultSpells")
+        Me.lblRowsMultSpells.Name = "lblRowsMultSpells"
+        Me.lblRowsMultSpells.Tag = "Rows_to_Take_Over:"
+        '
         'lblCondition
         '
         resources.ApplyResources(Me.lblCondition, "lblCondition")
@@ -218,6 +224,16 @@ Partial Class dlgTransformClimatic
         Me.ucrChkGroupByYear.Checked = False
         resources.ApplyResources(Me.ucrChkGroupByYear, "ucrChkGroupByYear")
         Me.ucrChkGroupByYear.Name = "ucrChkGroupByYear"
+        '
+        'ucrNudMultSpells
+        '
+        Me.ucrNudMultSpells.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMultSpells.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudMultSpells, "ucrNudMultSpells")
+        Me.ucrNudMultSpells.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMultSpells.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMultSpells.Name = "ucrNudMultSpells"
+        Me.ucrNudMultSpells.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrInputSpellUpper
         '
@@ -348,22 +364,6 @@ Partial Class dlgTransformClimatic
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        '
-        'lblRowsMultSpells
-        '
-        resources.ApplyResources(Me.lblRowsMultSpells, "lblRowsMultSpells")
-        Me.lblRowsMultSpells.Name = "lblRowsMultSpells"
-        Me.lblRowsMultSpells.Tag = "Rows_to_Take_Over:"
-        '
-        'ucrNudMultSpells
-        '
-        Me.ucrNudMultSpells.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMultSpells.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudMultSpells, "ucrNudMultSpells")
-        Me.ucrNudMultSpells.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudMultSpells.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMultSpells.Name = "ucrNudMultSpells"
-        Me.ucrNudMultSpells.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'dlgTransformClimatic
         '
