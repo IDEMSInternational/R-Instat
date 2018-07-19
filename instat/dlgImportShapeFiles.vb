@@ -15,26 +15,34 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgPCSARainfall
-    Public bFirstLoad As Boolean = True
-    Private Sub dlgPCSARainfall_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
+Public Class dlgImportShapeFiles
+    Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+
+    Private Sub dlgImportShapeFiles_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
-        TestOKEnabled()
+
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        autoTranslate(Me)
+        TestOkEnabled()
     End Sub
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 118
-    End Sub
-
-    Private Sub TestOKEnabled()
 
     End Sub
-
     Private Sub SetDefaults()
-        TestOKEnabled()
+
+    End Sub
+    Private Sub SetRCodeForControls(bReset As Boolean)
+
+    End Sub
+    Private Sub TestOkEnabled()
+
     End Sub
 End Class

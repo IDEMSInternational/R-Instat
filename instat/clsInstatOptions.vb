@@ -37,6 +37,7 @@ Imports RDotNet
     Public bIncludeCommentDefault As Nullable(Of Boolean) 'sets the default for comments on the dialog
     Public bShowProcurementMenu As Nullable(Of Boolean)
     Public bShowClimaticMenu As Nullable(Of Boolean)
+    Public bShowOptionsByContextMenu As Nullable(Of Boolean)
     Public iDigits As Nullable(Of Integer)
     Public bShowSignifStars As Nullable(Of Boolean)
     Public bChangeDataFrame As Nullable(Of Boolean)
@@ -53,6 +54,7 @@ Imports RDotNet
         bIncludeCommentDefault = clsInstatOptionsDefaults.DEFAULTbIncludeCommentDefault
         bShowClimaticMenu = clsInstatOptionsDefaults.DEFAULTbShowClimaticMenu
         bShowProcurementMenu = clsInstatOptionsDefaults.DEFAULTbShowProcurementMenu
+        bShowOptionsByContextMenu = clsInstatOptionsDefaults.DEFAULTbShowOptionsByContextMenu
         fntOutput = clsInstatOptionsDefaults.DEFAULTfntOutput
         clrOutput = clsInstatOptionsDefaults.DEFAULTclrOutput
         fntComment = clsInstatOptionsDefaults.DEFAULTfntComment
@@ -177,6 +179,12 @@ Imports RDotNet
             SetIncludeCommentByDefault(bIncludeCommentDefault)
         Else
             SetIncludeCommentByDefault(clsInstatOptionsDefaults.DEFAULTbIncludeCommentDefault)
+        End If
+
+        If bShowOptionsByContextMenu.HasValue Then
+            SetShowOptionsByContextMenu(bShowOptionsByContextMenu)
+        Else
+            SetShowOptionsByContextMenu(clsInstatOptionsDefaults.DEFAULTbShowOptionsByContextMenu)
         End If
 
         If bShowProcurementMenu.HasValue Then
@@ -378,6 +386,11 @@ Imports RDotNet
     Public Sub SetShowClimaticMenu(bNewShowClimaticMenu As Boolean)
         bShowClimaticMenu = bNewShowClimaticMenu
         frmMain.SetShowClimaticMenu(bNewShowClimaticMenu)
+    End Sub
+
+    Public Sub SetShowOptionsByContextMenu(bNewShowOptionsByContextMenu As Boolean)
+        bShowOptionsByContextMenu = bNewShowOptionsByContextMenu
+        frmMain.SetShowOptionsByContextMenu(bNewShowOptionsByContextMenu)
     End Sub
 
     Public Sub SetIncludeRDefaultParameters(bNewInclude As Boolean)
