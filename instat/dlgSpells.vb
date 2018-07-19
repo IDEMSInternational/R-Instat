@@ -352,12 +352,12 @@ Public Class dlgSpells
     Private Sub ucrChkConditional_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkConditional.ControlContentsChanged
         If ucrChkConditional.Checked Then
             clsSpellLength.AddParameter("function_exp", Chr(34) & "consecutive_sum(x = " & strRainDay & ", initial_value = 0)" & Chr(34))
-            clsGroupBy.AddParameter("sub_calculation", clsRFunctionParameter:=clsSpellOrGroupList, iPosition:=5)
-            clsMaxValue.RemoveParameterByName("sub_calculation")
-        Else
-            clsSpellLength.AddParameter("function_exp", Chr(34) & "consecutive_sum(x =  " & strRainDay & ", initial_value = NA)" & Chr(34))
             clsMaxValue.AddParameter("sub_calculation", clsRFunctionParameter:=clsSpellOrGroupList, iPosition:=5)
             clsGroupBy.RemoveParameterByName("sub_calculation")
+        Else
+            clsSpellLength.AddParameter("function_exp", Chr(34) & "consecutive_sum(x =  " & strRainDay & ", initial_value = NA)" & Chr(34))
+            clsGroupBy.AddParameter("sub_calculation", clsRFunctionParameter:=clsSpellOrGroupList, iPosition:=5)
+            clsMaxValue.RemoveParameterByName("sub_calculation")
         End If
     End Sub
 
