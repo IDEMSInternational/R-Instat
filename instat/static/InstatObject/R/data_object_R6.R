@@ -2150,8 +2150,6 @@ data_object$set("public","split_date", function(col_name = "", year = FALSE, lea
     if(self$is_climatic_data()) self$set_climatic_types(types = c(doy = col_name))
   }
   
- 
-  
   if(quarter_val){
     if(s_shift){
       s_quarter_val_vector <- lubridate::quarter(col_data, with_year = with_year, fiscal_start = s_start_month)
@@ -2169,8 +2167,7 @@ data_object$set("public","split_date", function(col_name = "", year = FALSE, lea
 	dekad_val_vector <- ((as.numeric(dekade(col_data))) - (s_start_month - 1)*3) %% 36
 	dekad_val_vector <- ifelse(dekad_val_vector == 0, 36, dekad_val_vector)
     col_name <- next_default_item(prefix = "dekad", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = dekad_val_vector)
-  }
+    self$add_columns_to_data(col_name = col_name, col_data = dekad_val_vector)  }
 
   if(dekad_abbr){
   	  month_abbr_vector <- forcats::fct_shift(f = (lubridate::month(col_data, label = TRUE)), n = (s_start_month - 1))
@@ -2189,7 +2186,7 @@ data_object$set("public","split_date", function(col_name = "", year = FALSE, lea
   }
 
   if(pentad_abbr){
-	month_name_vector <- forcats::fct_shift(f = (lubridate::month(col_data, label = TRUE, abbr = FALSE)), n = (s_start_month - 1))
+	month_abbr_vector <- forcats::fct_shift(f = (lubridate::month(col_data, label = TRUE, abbr = FALSE)), n = (s_start_month - 1))
 	pentad_val_vector <- ((as.integer(pentad(col_data))) - (s_start_month - 1)*6) %% 72
 	pentad_val_vector <- ifelse(pentad_val_vector == 0, 72, pentad_val_vector)
 	pentad_abbr_vector <- paste(month_abbr_vector, pentad_val_vector, sep = "")
