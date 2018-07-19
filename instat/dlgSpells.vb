@@ -19,7 +19,7 @@ Public Class dlgSpells
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private clsAddKey, clsSpellLength, clsMaxValueManipulation, clsSubSpellLength1 As New RFunction
-    Private clsMaxValue, clsMaxValueList, clsMaxValueFunction, clsGroupByList As New RFunction
+    Private clsMaxValue, clsMaxValueList, clsMaxValueFunction, clsSpellOrGroupList As New RFunction
     Private clsDayFromAndTo, clsGroupBy, clsAddKeyColName, clsDayFilterCalcFromConvert, clsDayFilterCalcFromList As New RFunction
     Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator As New ROperator
     Private clsApplyInstatFunction, clsRRainday, clsRRaindayMatch As New RFunction
@@ -178,9 +178,9 @@ Public Class dlgSpells
         clsGroupBy.SetRCommand("instat_calculation$new")
         clsGroupBy.AddParameter("type", Chr(34) & "by" & Chr(34))
         clsGroupBy.SetAssignTo("grouping")
-        clsGroupByList.SetRCommand("list")
-        clsGroupByList.AddParameter("sub1", clsRFunctionParameter:=clsSpellLength, bIncludeArgumentName:=False, iPosition:=0)
-        clsGroupBy.AddParameter("sub_calculation", clsRFunctionParameter:=clsGroupByList, iPosition:=5)
+
+        clsSpellOrGroupList.SetRCommand("list")
+        clsSpellOrGroupList.AddParameter("sub1", clsRFunctionParameter:=clsSpellLength, bIncludeArgumentName:=False, iPosition:=0)
 
         ' rain_day
         clsRRaindayMatch.bToScriptAsRString = True
@@ -240,6 +240,8 @@ Public Class dlgSpells
         clsMaxValue.AddParameter("manipulations", clsRFunctionParameter:=clsMaxValueManipulation, iPosition:=5)
         clsMaxValueManipulation.AddParameter("sub2", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False)
         clsMaxValueManipulation.AddParameter("sub3", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False)
+
+        clsMaxValue.AddParameter("sub_calculation", clsRFunctionParameter:=clsSpellOrGroupList, iPosition:=5)
         clsMaxValue.SetAssignTo("spells")
 
         clsApplyInstatFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
@@ -350,12 +352,12 @@ Public Class dlgSpells
     Private Sub ucrChkConditional_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkConditional.ControlContentsChanged
         If ucrChkConditional.Checked Then
             clsSpellLength.AddParameter("function_exp", Chr(34) & "consecutive_sum(x = " & strRainDay & ", initial_value = 0)" & Chr(34))
-            clsGroupBy.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubSpellLength1)
-            clsSpellLength.RemoveParameterByName("sub_calculations")
+            clsGroupBy.AddParameter("sub_calculation", clsRFunctionParameter:=clsSpellOrGroupList, iPosition:=5)
+            clsMaxValue.RemoveParameterByName("sub_calculation")
         Else
             clsSpellLength.AddParameter("function_exp", Chr(34) & "consecutive_sum(x =  " & strRainDay & ", initial_value = NA)" & Chr(34))
-            clsSpellLength.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubSpellLength1, iPosition:=5)
-            clsGroupBy.RemoveParameterByName("sub_calculations")
+            clsMaxValue.AddParameter("sub_calculation", clsRFunctionParameter:=clsSpellOrGroupList, iPosition:=5)
+            clsGroupBy.RemoveParameterByName("sub_calculation")
         End If
     End Sub
 
