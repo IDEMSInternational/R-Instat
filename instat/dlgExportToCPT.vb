@@ -66,7 +66,7 @@ Public Class dlgExportToCPT
 
         ucrReceiverMultipleStation.Selector = ucrSelectorOneDF
         ucrReceiverMultipleStation.SetParameter(New RParameter("station"))
-        ucrReceiverMultipleStation.GetVariableNamesAsList()
+        ucrReceiverMultipleStation.GetVariableNames()
         ucrReceiverMultipleStation.SetLinkedDisplayControl(lblMultStations)
 
         ucrReceiverLatitude.SetParameter(New RParameter("latitude"))
