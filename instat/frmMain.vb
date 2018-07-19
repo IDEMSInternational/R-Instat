@@ -1976,7 +1976,7 @@ Public Class frmMain
         dlgOptionsByContextBoxplot.ShowDialog()
     End Sub
 
-    Private Sub mnuPrepareCheckDataNoneNumericCases_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataNoneNumericCases.Click
-        dlgShowNonnumericValues.ShowDialog()
+    Private Sub mnuPrepareCheckDataNonNumericCases_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataNonNumericCases.Click
+        dlgFindNonnumericValues.ShowDialog()
     End Sub
 End Class

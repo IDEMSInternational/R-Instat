@@ -389,10 +389,10 @@
     <Compile Include="dlgReshapeClimatic.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgShowNonnumericValues.Designer.vb">
-      <DependentUpon>dlgShowNonnumericValues.vb</DependentUpon>
+    <Compile Include="dlgFindNonnumericValues.Designer.vb">
+      <DependentUpon>dlgFindNonnumericValues.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgShowNonnumericValues.vb">
+    <Compile Include="dlgFindNonnumericValues.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgSPI.Designer.vb">
@@ -2697,8 +2697,8 @@
     <EmbeddedResource Include="dlgRugPlot.sw-KE.resx">
       <DependentUpon>dlgRugPlot.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgShowNonnumericValues.resx">
-      <DependentUpon>dlgShowNonnumericValues.vb</DependentUpon>
+    <EmbeddedResource Include="dlgFindNonnumericValues.resx">
+      <DependentUpon>dlgFindNonnumericValues.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSpells.sw-KE.resx">
       <DependentUpon>dlgSpells.vb</DependentUpon>
