@@ -292,7 +292,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoMoving.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 15</value>
+    <value>114, 15</value>
   </data>
   <data name="rdoMoving.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 28</value>
@@ -334,7 +334,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoCount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>116, 15</value>
+    <value>23, 15</value>
   </data>
   <data name="rdoCount.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 28</value>

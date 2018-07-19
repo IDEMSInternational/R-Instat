@@ -53,18 +53,19 @@ Public Class dlgTransformClimatic
         ucrBase.iHelpTopicID = 358
 
         'Overall Panel
-        ucrPnlTransform.AddRadioButton(rdoMoving)
         ucrPnlTransform.AddRadioButton(rdoCount)
+        ucrPnlTransform.AddRadioButton(rdoMoving)
         ucrPnlTransform.AddRadioButton(rdoSpell)
         ucrPnlTransform.AddRadioButton(rdoMultSpells)
         ucrPnlTransform.AddRadioButton(rdoWaterBalance)
 
-        ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoMoving, "function_exp", "rollapply")
-        ucrPnlTransform.AddParameterPresentCondition(rdoMoving, "sub_calculations", False)
         ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoCount, "function_exp", "rollapply")
         ucrPnlTransform.AddParameterPresentCondition(rdoCount, "sub_calculations", True)
+        ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoMoving, "function_exp", "rollapply")
+        ucrPnlTransform.AddParameterPresentCondition(rdoMoving, "sub_calculations", False)
         ucrPnlTransform.AddParameterIsStringCondition(rdoSpell, "function_exp")
         ucrPnlTransform.AddParameterIsStringCondition(rdoMultSpells, "function_exp")
+        ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoMultSpells, "function_exp", "rollapply")
         ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoWaterBalance, "function_exp", "Reduce")
 
         'ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoMoving, "sub1", "instat_calculation$new", False) ' clsRRainday
@@ -107,6 +108,7 @@ Public Class dlgTransformClimatic
         dctInputSumPairs.Add("Maximum", "max")
         dctInputSumPairs.Add("Minimum", "min")
         dctInputSumPairs.Add("Mean", "(mean)")
+        dctInputSumPairs.Add("Median", "median")
         ucrInputSum.SetItems(dctInputSumPairs)
         ucrInputSum.SetDropDownStyleAsNonEditable()
         ucrInputSum.SetLinkedDisplayControl(lblSumOver)
@@ -163,7 +165,7 @@ Public Class dlgTransformClimatic
         ucrPnlTransform.AddToLinkedControls({ucrNudCountOver}, {rdoCount}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
         ucrPnlTransform.AddToLinkedControls({ucrInputCondition}, {rdoCount, rdoSpell, rdoMultSpells}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Between")
         ucrInputCondition.AddToLinkedControls(ucrInputSpellUpper, {"<=", "Between", ">="}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.85)
-        ucrInputCondition.AddToLinkedControls(ucrInputSpellLower, {"Between"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrInputCondition.AddToLinkedControls(ucrInputSpellLower, {"Between"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
 
         ucrPnlTransform.AddToLinkedControls({ucrNudMultSpells}, {rdoMultSpells}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=21)
 
@@ -391,10 +393,13 @@ Public Class dlgTransformClimatic
             MovingColNames()
         ElseIf rdoCount.Checked Then
             ucrInputColName.SetName("count")
+            ucrInputSpellLower.SetDefaultState("1")
         ElseIf rdoSpell.Checked Then
             ucrInputColName.SetName("spell")
+            ucrInputSpellLower.SetDefaultState("0")
         ElseIf rdoMultSpells.Checked Then
             ucrInputColName.SetName("spells")
+            ucrInputSpellLower.SetDefaultState("0")
         ElseIf rdoWaterBalance.Checked Then
             ucrInputColName.SetName("water")
         End If
@@ -410,6 +415,8 @@ Public Class dlgTransformClimatic
                 ucrInputColName.SetName("moving_min")
             Case "Mean"
                 ucrInputColName.SetName("moving_mean")
+            Case "Median"
+                ucrInputColName.SetName("moving_median")
             Case Else
                 ucrInputColName.SetName("moving")
         End Select
