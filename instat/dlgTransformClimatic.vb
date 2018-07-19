@@ -239,7 +239,7 @@ Public Class dlgTransformClimatic
         clsRollConsecutiveSumFunction.AddParameter("width", 21, iPosition:=1)
         clsRollConsecutiveSumFunction.AddParameter("FUN", "max_consecutive_sum")
         clsRollConsecutiveSumFunction.AddParameter("fill", "NA")
-        clsRollConsecutiveSumFunction.AddParameter("data", " & strRainDay & ")
+        clsRollConsecutiveSumFunction.AddParameter("data", strRainDay)
 
         ' Moving
         clsRMovingFunction.bToScriptAsRString = True
@@ -288,7 +288,7 @@ Public Class dlgTransformClimatic
         clsRTransform.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRMovingFunction, iPosition:=1) ' changes depending on the rdo
         clsRTransform.AddParameter("result_name", Chr(34) & "moving_sum" & Chr(34), iPosition:=2)
-        clsRTransform.AddParameter("manipulations", clsRFunctionParameter:=clsTransformManipulationsFunc, iPosition:=5)
+        'clsRTransform.AddParameter("manipulations", clsRFunctionParameter:=clsTransformManipulationsFunc, iPosition:=5)
         clsRTransform.AddParameter("save", 2, iPosition:=6)
         clsRTransform.SetAssignTo("transform_calculation")
 
@@ -331,7 +331,7 @@ Public Class dlgTransformClimatic
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverData.IsEmpty AndAlso Not ucrInputColName.IsEmpty AndAlso ((rdoMoving.Checked AndAlso Not ucrInputSum.IsEmpty AndAlso ucrNudSumOver.GetText <> "") OrElse (rdoCount.Checked AndAlso ucrNudCountOver.GetText <> "" AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty AndAlso Not ucrInputCondition.IsEmpty) OrElse (rdoSpell.Checked AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty AndAlso Not ucrInputCondition.IsEmpty) OrElse (rdoWaterBalance.Checked AndAlso Not ucrInputEvaporation.IsEmpty AndAlso ucrNudWBCapacity.GetText <> "")) Then
+        If Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverData.IsEmpty AndAlso Not ucrInputColName.IsEmpty AndAlso ((rdoMoving.Checked AndAlso Not ucrInputSum.IsEmpty AndAlso ucrNudSumOver.GetText <> "") OrElse (rdoCount.Checked AndAlso ucrNudCountOver.GetText <> "" AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty AndAlso Not ucrInputCondition.IsEmpty) OrElse (rdoSpell.Checked AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty AndAlso Not ucrInputCondition.IsEmpty) OrElse (rdoMultSpells.Checked AndAlso ucrNudMultSpells.GetText <> "" AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty AndAlso Not ucrInputCondition.IsEmpty) OrElse (rdoWaterBalance.Checked AndAlso Not ucrInputEvaporation.IsEmpty AndAlso ucrNudWBCapacity.GetText <> "")) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -346,7 +346,6 @@ Public Class dlgTransformClimatic
 
     Private Sub InputConditionOptions()
         Select Case ucrInputCondition.GetText
-            ' include mult spells here 
             Case "<="
                 clsRRaindayAndOperator.RemoveParameterByName("upper")
                 clsRRaindayUpperOperator.RemoveParameterByName("max")
@@ -394,6 +393,8 @@ Public Class dlgTransformClimatic
             ucrInputColName.SetName("count")
         ElseIf rdoSpell.Checked Then
             ucrInputColName.SetName("spell")
+        ElseIf rdoMultSpells.Checked Then
+            ucrInputColName.SetName("spells")
         ElseIf rdoWaterBalance.Checked Then
             ucrInputColName.SetName("water")
         End If
@@ -419,7 +420,7 @@ Public Class dlgTransformClimatic
         If ucrChkGroupByYear.Checked() AndAlso Not ucrReceiverYear.IsEmpty Then
             clsGroupByYear.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & ")", iPosition:=3)
             clsTransformManipulationsFunc.AddParameter("group_by_year", clsRFunctionParameter:=clsGroupByYear, bIncludeArgumentName:=False, iPosition:=0)
-
+            clsRTransform.AddParameter("manipulations", clsRFunctionParameter:=clsTransformManipulationsFunc, iPosition:=5)
         Else
             clsGroupByYear.RemoveParameterByName("calculated_from")
             clsTransformManipulationsFunc.RemoveParameterByName("group_by_year")
@@ -430,6 +431,7 @@ Public Class dlgTransformClimatic
         If Not ucrReceiverStation.IsEmpty() Then
             clsGroupByStation.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames & ")", iPosition:=3)
             clsTransformManipulationsFunc.AddParameter("group_by_station", clsRFunctionParameter:=clsGroupByStation, bIncludeArgumentName:=False, iPosition:=0)
+            clsRTransform.AddParameter("manipulations", clsRFunctionParameter:=clsTransformManipulationsFunc, iPosition:=5)
         Else
             clsGroupByStation.RemoveParameterByName("calculated_from")
             clsTransformManipulationsFunc.RemoveParameterByName("group_by_station")
