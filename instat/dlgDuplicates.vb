@@ -73,6 +73,7 @@ Public Class dlgDuplicates
         ucrReceiverForSelectedVariables.SetParameterIsRFunction()
         ucrReceiverForSelectedVariables.Selector = ucrSelectorDuplicateswithVariables
         ucrReceiverForSelectedVariables.SetLinkedDisplayControl(lblVariablesToDuplicate)
+        ucrReceiverForSelectedVariables.bUseFilteredData = False
 
         ttDuplicates.SetToolTip(rdoAllDuplicateCases, "All cases are given as being duplicate rows")
         ttDuplicates.SetToolTip(rdoDuplicatesOnly, "The first occurrence is not indicated, but further instances are considered duplicates")
@@ -83,6 +84,7 @@ Public Class dlgDuplicates
         ucrReceiverForSuccessiveValues.SetParameterIsRFunction()
         ucrReceiverForSuccessiveValues.Selector = ucrSelectorDuplicateswithVariables
         ucrReceiverForSuccessiveValues.SetLinkedDisplayControl(lblSelectedVariable)
+        ucrReceiverForSuccessiveValues.bUseFilteredData = False
 
         ucrChkOmitValues.SetText("Omit Value(s)")
         ucrChkOmitValues.AddParameterValuesCondition(False, "ignore", "NULL", True)
