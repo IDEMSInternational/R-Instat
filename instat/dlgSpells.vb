@@ -350,11 +350,13 @@ Public Class dlgSpells
     Private Sub ucrChkConditional_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkConditional.ControlContentsChanged
         If ucrChkConditional.Checked Then
             clsSpellLength.AddParameter("function_exp", Chr(34) & "consecutive_sum(x = " & strRainDay & ", initial_value = 0)" & Chr(34))
-            'move sub_calc = spells 
+            clsGroupBy.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubSpellLength1)
+            clsSpellLength.RemoveParameterByName("sub_calculations")
         Else
             clsSpellLength.AddParameter("function_exp", Chr(34) & "consecutive_sum(x =  " & strRainDay & ", initial_value = NA)" & Chr(34))
+            clsSpellLength.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubSpellLength1, iPosition:=5)
+            clsGroupBy.RemoveParameterByName("sub_calculations")
         End If
-        clsSpellLength.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubSpellLength1, iPosition:=5)
     End Sub
 
     Private Sub ucrSelectorForSpells_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrSelectorForSpells.ControlContentsChanged
