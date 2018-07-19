@@ -140,7 +140,7 @@ Public Class dlgTransformClimatic
 
         ' mult Spells 
         ucrNudMultSpells.SetParameter(New RParameter("width", 1))
-        ucrNudMultSpells.SetMinMax(1, 366)
+        ucrNudMultSpells.SetMinMax(1, 21)
         ucrNudMultSpells.Increment = 1
         ucrNudMultSpells.SetLinkedDisplayControl(lblRowsMultSpells)
 
@@ -159,13 +159,14 @@ Public Class dlgTransformClimatic
         ucrInputColName.SetParameter(New RParameter("result_name", 2))
         ucrInputColName.SetName("moving_sum")
 
+        ucrPnlTransform.AddToLinkedControls({ucrNudCountOver}, {rdoCount}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
+        ucrPnlTransform.AddToLinkedControls({ucrInputCondition}, {rdoCount, rdoSpell, rdoMultSpells}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Between")
+
         ucrPnlTransform.AddToLinkedControls(ucrInputSum, {rdoMoving}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Sum")
         ucrPnlTransform.AddToLinkedControls(ucrNudSumOver, {rdoMoving}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
 
-        ucrPnlTransform.AddToLinkedControls({ucrNudCountOver}, {rdoCount}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
-        ucrPnlTransform.AddToLinkedControls({ucrInputCondition}, {rdoCount, rdoSpell, rdoMultSpells}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Between")
         ucrInputCondition.AddToLinkedControls(ucrInputSpellUpper, {"<=", "Between", ">="}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.85)
-        ucrInputCondition.AddToLinkedControls(ucrInputSpellLower, {"Between"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
+        ucrInputCondition.AddToLinkedControls(ucrInputSpellLower, {"Between"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
 
         ucrPnlTransform.AddToLinkedControls({ucrNudMultSpells}, {rdoMultSpells}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=21)
 
@@ -370,36 +371,39 @@ Public Class dlgTransformClimatic
     End Sub
 
     Private Sub ucrPnlTransform_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransform.ControlValueChanged
-        If rdoMoving.Checked Then
-            clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRMovingFunction, iPosition:=1)
-            clsRTransform.RemoveParameterByName("sub_calculations")
-        ElseIf rdoCount.Checked Then
+        If rdoCount.Checked Then
             clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRCountFunction, iPosition:=1)
             clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsRTransformCountSpellSub, iPosition:=4)
+            clsRTransform.RemoveParameterByName("calculated_from")
+        ElseIf rdoMoving.Checked Then
+            clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRMovingFunction, iPosition:=1)
+            clsRTransform.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames & ")", iPosition:=3)
+            clsRTransform.RemoveParameterByName("sub_calculations")
         ElseIf rdoSpell.Checked Then
             clsRTransform.AddParameter("function_exp", Chr(34) & "consecutive_sum(x = " & strRainDay & ", initial_value = NA)" & Chr(34), iPosition:=1)
             clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsRTransformCountSpellSub, iPosition:=4)
+            clsRTransform.RemoveParameterByName("calculated_from")
         ElseIf rdoMultSpells.Checked Then
             clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRollConsecutiveSumFunction, iPosition:=1)
             clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsRTransformCountSpellSub, iPosition:=4)
+            clsRTransform.RemoveParameterByName("calculated_from")
         ElseIf rdoWaterBalance.Checked Then
             clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRWaterBalanceFunction, iPosition:=1)
             clsRTransform.RemoveParameterByName("sub_calculations")
+            clsRTransform.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames & ")", iPosition:=3)
         End If
     End Sub
 
     Private Sub SetAssignName()
-        If rdoMoving.Checked Then
-            MovingColNames()
-        ElseIf rdoCount.Checked Then
+        If rdoCount.Checked Then
             ucrInputColName.SetName("count")
-            ucrInputSpellLower.SetDefaultState("1")
+        ElseIf rdoMoving.Checked Then
+            MovingColNames()
         ElseIf rdoSpell.Checked Then
             ucrInputColName.SetName("spell")
             ucrInputSpellLower.SetDefaultState("0")
         ElseIf rdoMultSpells.Checked Then
             ucrInputColName.SetName("spells")
-            ucrInputSpellLower.SetDefaultState("0")
         ElseIf rdoWaterBalance.Checked Then
             ucrInputColName.SetName("water")
         End If
