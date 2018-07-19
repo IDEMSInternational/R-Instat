@@ -20,12 +20,11 @@ Public Class dlgTransformClimatic
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private clsRTransform, clsOverallTransformFunction, clsTransformManipulationsFunc, clsGroupByYear, clsGroupByStation, clsReplaceNAasElement, clsRTransformCountSpellSub As New RFunction
-
     'Moving
     Private clsRMovingFunction As New RFunction
 
     'Count and Spells
-    Private clsRRainday, clsRRaindayMatch, clsRCountFunction As New RFunction
+    Private clsRRainday, clsRRaindayMatch, clsRCountFunction, clsRollConsecutiveSumFunction As New RFunction
     Private clsRRaindayAndOperator, clsRRaindayLowerOperator, clsRRaindayUpperOperator, clsRCountOperator As New ROperator
 
     ' Water Balance
@@ -57,6 +56,7 @@ Public Class dlgTransformClimatic
         ucrPnlTransform.AddRadioButton(rdoMoving)
         ucrPnlTransform.AddRadioButton(rdoCount)
         ucrPnlTransform.AddRadioButton(rdoSpell)
+        ucrPnlTransform.AddRadioButton(rdoMultSpells)
         ucrPnlTransform.AddRadioButton(rdoWaterBalance)
 
         ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoMoving, "function_exp", "rollapply")
@@ -64,6 +64,7 @@ Public Class dlgTransformClimatic
         ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoCount, "function_exp", "rollapply")
         ucrPnlTransform.AddParameterPresentCondition(rdoCount, "sub_calculations", True)
         ucrPnlTransform.AddParameterIsStringCondition(rdoSpell, "function_exp")
+        ucrPnlTransform.AddParameterIsStringCondition(rdoMultSpells, "function_exp")
         ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoWaterBalance, "function_exp", "Reduce")
 
         'ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoMoving, "sub1", "instat_calculation$new", False) ' clsRRainday
@@ -87,6 +88,8 @@ Public Class dlgTransformClimatic
         ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
         ucrReceiverDate.bAutoFill = True
         ucrReceiverDate.strSelectorHeading = "Date Variables"
+
+        ucrChkGroupByYear.SetText("Group by Year")
 
         ucrReceiverData.SetParameter(New RParameter("data", 0, bNewIncludeArgumentName:=False))
         ucrReceiverData.SetParameterIsString()
@@ -133,6 +136,12 @@ Public Class dlgTransformClimatic
         ucrInputSpellUpper.SetValidationTypeAsNumeric()
         ucrInputSpellUpper.AddQuotesIfUnrecognised = False
 
+        ' mult Spells 
+        ucrNudMultSpells.SetParameter(New RParameter("width", 1))
+        ucrNudMultSpells.SetMinMax(1, 366)
+        ucrNudMultSpells.Increment = 1
+        ucrNudMultSpells.SetLinkedDisplayControl(lblRowsMultSpells)
+
         ' Water Balance
         ucrNudWBCapacity.SetParameter(New RParameter("capacity", 1), False)
         ucrNudWBCapacity.SetMinMax(1, Integer.MaxValue)
@@ -152,9 +161,11 @@ Public Class dlgTransformClimatic
         ucrPnlTransform.AddToLinkedControls(ucrNudSumOver, {rdoMoving}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
 
         ucrPnlTransform.AddToLinkedControls({ucrNudCountOver}, {rdoCount}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
-        ucrPnlTransform.AddToLinkedControls({ucrInputCondition}, {rdoCount, rdoSpell}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Between")
-        ucrInputCondition.AddToLinkedControls(ucrInputSpellLower, {"<=", "Between", ">="}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
-        ucrInputCondition.AddToLinkedControls(ucrInputSpellUpper, {"Between"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.85)
+        ucrPnlTransform.AddToLinkedControls({ucrInputCondition}, {rdoCount, rdoSpell, rdoMultSpells}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Between")
+        ucrInputCondition.AddToLinkedControls(ucrInputSpellUpper, {"<=", "Between", ">="}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrInputCondition.AddToLinkedControls(ucrInputSpellLower, {"Between"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.85)
+
+        ucrPnlTransform.AddToLinkedControls({ucrNudMultSpells}, {rdoMultSpells}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=21)
 
         ucrPnlTransform.AddToLinkedControls(ucrInputEvaporation, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
         ucrPnlTransform.AddToLinkedControls(ucrNudWBCapacity, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=60)
@@ -219,6 +230,17 @@ Public Class dlgTransformClimatic
         ' Spell
         ' this is run as a string Chr(34) & "cumsum(" & strRainDay & ")-cummax((" & strRainDay & "==0)*cumsum(" & strRainDay & "))" & Chr(34))
 
+        'Multiple Spells 
+        'zoo::rollapply(data = dodoma$Rain, width = 30, FUN = max_consecutive_sum, fill = NA, align="left")
+        clsRollConsecutiveSumFunction.bToScriptAsRString = True
+        clsRollConsecutiveSumFunction.SetPackageName("zoo")
+        clsRollConsecutiveSumFunction.SetRCommand("rollapply")
+        clsRollConsecutiveSumFunction.AddParameter("align", Chr(39) & "left" & Chr(39))
+        clsRollConsecutiveSumFunction.AddParameter("width", 21, iPosition:=1)
+        clsRollConsecutiveSumFunction.AddParameter("FUN", "max_consecutive_sum")
+        clsRollConsecutiveSumFunction.AddParameter("fill", "NA")
+        clsRollConsecutiveSumFunction.AddParameter("data", " & strRainDay & ")
+
         ' Moving
         clsRMovingFunction.bToScriptAsRString = True
         clsRMovingFunction.SetPackageName("zoo")
@@ -277,7 +299,6 @@ Public Class dlgTransformClimatic
         'Base Function
         ucrBase.clsRsyntax.SetBaseRFunction(clsOverallTransformFunction)
 
-        ' InputConditionOptions()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -293,6 +314,9 @@ Public Class dlgTransformClimatic
         ucrNudSumOver.SetRCode(clsRMovingFunction, bReset)
         ucrInputSum.SetRCode(clsRMovingFunction, bReset)
         ucrReceiverData.SetRCode(clsRMovingFunction, bReset)
+
+        'mult spells
+        ucrNudMultSpells.SetRCode(clsRollConsecutiveSumFunction, bReset)
 
         ' Count
         ucrNudCountOver.SetRCode(clsRCountFunction, bReset)
@@ -322,11 +346,12 @@ Public Class dlgTransformClimatic
 
     Private Sub InputConditionOptions()
         Select Case ucrInputCondition.GetText
+            ' include mult spells here 
             Case "<="
                 clsRRaindayAndOperator.RemoveParameterByName("upper")
                 clsRRaindayUpperOperator.RemoveParameterByName("max")
                 clsRRaindayAndOperator.AddParameter("lower", clsROperatorParameter:=clsRRaindayLowerOperator, iPosition:=0)
-                clsRRaindayLowerOperator.AddParameter("min", ucrInputSpellLower.GetText, iPosition:=1)
+                clsRRaindayLowerOperator.AddParameter("min", ucrInputSpellUpper.GetText, iPosition:=1)
                 clsRCountOperator.AddParameter("x", clsROperatorParameter:=clsRRaindayLowerOperator, iPosition:=0)
             Case "Between" ' match(Rain>=LEFT & Rain<=RIGHT, 1, nomatch = 0)
                 clsRRaindayAndOperator.AddParameter("lower", clsROperatorParameter:=clsRRaindayLowerOperator, iPosition:=0)
@@ -338,7 +363,7 @@ Public Class dlgTransformClimatic
                 clsRRaindayAndOperator.RemoveParameterByName("lower")
                 clsRRaindayLowerOperator.RemoveParameterByName("min")
                 clsRRaindayAndOperator.AddParameter("upper", clsROperatorParameter:=clsRRaindayUpperOperator, iPosition:=0)
-                clsRRaindayUpperOperator.AddParameter("max", ucrInputSpellLower.GetText, iPosition:=1)
+                clsRRaindayUpperOperator.AddParameter("max", ucrInputSpellUpper.GetText, iPosition:=1)
                 clsRCountOperator.AddParameter("x", clsROperatorParameter:=clsRRaindayUpperOperator, iPosition:=0)
         End Select
     End Sub
@@ -351,10 +376,10 @@ Public Class dlgTransformClimatic
             clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRCountFunction, iPosition:=1)
             clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsRTransformCountSpellSub, iPosition:=4)
         ElseIf rdoSpell.Checked Then
-            ' set ucrrain to rfunction
-            ' change to "consecutive_sum("x = "ucrReceiverData.GetVariables, "initial_value = NA")"
-            ' create new cls for consecutive_sum
             clsRTransform.AddParameter("function_exp", Chr(34) & "consecutive_sum(x = " & strRainDay & ", initial_value = NA)" & Chr(34), iPosition:=1)
+            clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsRTransformCountSpellSub, iPosition:=4)
+        ElseIf rdoMultSpells.Checked Then
+            clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRollConsecutiveSumFunction, iPosition:=1)
             clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsRTransformCountSpellSub, iPosition:=4)
         ElseIf rdoWaterBalance.Checked Then
             clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRWaterBalanceFunction, iPosition:=1)

@@ -52,27 +52,29 @@ Partial Class dlgTransformClimatic
         Me.lblNewColName = New System.Windows.Forms.Label()
         Me.lblCountOver = New System.Windows.Forms.Label()
         Me.grpTransform = New System.Windows.Forms.GroupBox()
+        Me.lblCondition = New System.Windows.Forms.Label()
+        Me.lblWBEvaporation = New System.Windows.Forms.Label()
+        Me.lblWBCapacity = New System.Windows.Forms.Label()
+        Me.rdoMultSpells = New System.Windows.Forms.RadioButton()
+        Me.ucrChkGroupByYear = New instat.ucrCheck()
         Me.ucrInputSpellUpper = New instat.ucrInputTextBox()
         Me.ucrInputCondition = New instat.ucrInputComboBox()
         Me.ucrInputEvaporation = New instat.ucrInputTextBox()
-        Me.lblCondition = New System.Windows.Forms.Label()
-        Me.lblWBEvaporation = New System.Windows.Forms.Label()
         Me.ucrInputSpellLower = New instat.ucrInputTextBox()
         Me.ucrNudSumOver = New instat.ucrNud()
-        Me.lblWBCapacity = New System.Windows.Forms.Label()
         Me.ucrNudWBCapacity = New instat.ucrNud()
         Me.ucrInputSum = New instat.ucrInputComboBox()
         Me.ucrNudCountOver = New instat.ucrNud()
         Me.ucrInputColName = New instat.ucrInputTextBox()
         Me.ucrPnlTransform = New instat.UcrPanel()
-        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
-        Me.ucrSelectorTransform = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
+        Me.ucrReceiverYear = New instat.ucrReceiverSingle()
+        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrReceiverData = New instat.ucrReceiverSingle()
+        Me.ucrSelectorTransform = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkGroupByYear = New instat.ucrCheck()
-        Me.rdoMultSpells = New System.Windows.Forms.RadioButton()
+        Me.lblRowsMultSpells = New System.Windows.Forms.Label()
+        Me.ucrNudMultSpells = New instat.ucrNud()
         Me.grpTransform.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -163,6 +165,8 @@ Partial Class dlgTransformClimatic
         '
         'grpTransform
         '
+        Me.grpTransform.Controls.Add(Me.ucrNudMultSpells)
+        Me.grpTransform.Controls.Add(Me.lblRowsMultSpells)
         Me.grpTransform.Controls.Add(Me.ucrInputSpellUpper)
         Me.grpTransform.Controls.Add(Me.lblSumRows)
         Me.grpTransform.Controls.Add(Me.ucrInputCondition)
@@ -180,6 +184,40 @@ Partial Class dlgTransformClimatic
         resources.ApplyResources(Me.grpTransform, "grpTransform")
         Me.grpTransform.Name = "grpTransform"
         Me.grpTransform.TabStop = False
+        '
+        'lblCondition
+        '
+        resources.ApplyResources(Me.lblCondition, "lblCondition")
+        Me.lblCondition.Name = "lblCondition"
+        Me.lblCondition.Tag = "Condition:"
+        '
+        'lblWBEvaporation
+        '
+        resources.ApplyResources(Me.lblWBEvaporation, "lblWBEvaporation")
+        Me.lblWBEvaporation.Name = "lblWBEvaporation"
+        Me.lblWBEvaporation.Tag = "Evaporation"
+        '
+        'lblWBCapacity
+        '
+        resources.ApplyResources(Me.lblWBCapacity, "lblWBCapacity")
+        Me.lblWBCapacity.Name = "lblWBCapacity"
+        Me.lblWBCapacity.Tag = "Capacity"
+        '
+        'rdoMultSpells
+        '
+        resources.ApplyResources(Me.rdoMultSpells, "rdoMultSpells")
+        Me.rdoMultSpells.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMultSpells.FlatAppearance.BorderSize = 2
+        Me.rdoMultSpells.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMultSpells.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoMultSpells.Name = "rdoMultSpells"
+        Me.rdoMultSpells.UseVisualStyleBackColor = True
+        '
+        'ucrChkGroupByYear
+        '
+        Me.ucrChkGroupByYear.Checked = False
+        resources.ApplyResources(Me.ucrChkGroupByYear, "ucrChkGroupByYear")
+        Me.ucrChkGroupByYear.Name = "ucrChkGroupByYear"
         '
         'ucrInputSpellUpper
         '
@@ -204,18 +242,6 @@ Partial Class dlgTransformClimatic
         resources.ApplyResources(Me.ucrInputEvaporation, "ucrInputEvaporation")
         Me.ucrInputEvaporation.Name = "ucrInputEvaporation"
         '
-        'lblCondition
-        '
-        resources.ApplyResources(Me.lblCondition, "lblCondition")
-        Me.lblCondition.Name = "lblCondition"
-        Me.lblCondition.Tag = "Condition:"
-        '
-        'lblWBEvaporation
-        '
-        resources.ApplyResources(Me.lblWBEvaporation, "lblWBEvaporation")
-        Me.lblWBEvaporation.Name = "lblWBEvaporation"
-        Me.lblWBEvaporation.Tag = "Evaporation"
-        '
         'ucrInputSpellLower
         '
         Me.ucrInputSpellLower.AddQuotesIfUnrecognised = True
@@ -233,12 +259,6 @@ Partial Class dlgTransformClimatic
         Me.ucrNudSumOver.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSumOver.Name = "ucrNudSumOver"
         Me.ucrNudSumOver.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblWBCapacity
-        '
-        resources.ApplyResources(Me.lblWBCapacity, "lblWBCapacity")
-        Me.lblWBCapacity.Name = "lblWBCapacity"
-        Me.lblWBCapacity.Tag = "Capacity"
         '
         'ucrNudWBCapacity
         '
@@ -280,21 +300,14 @@ Partial Class dlgTransformClimatic
         resources.ApplyResources(Me.ucrPnlTransform, "ucrPnlTransform")
         Me.ucrPnlTransform.Name = "ucrPnlTransform"
         '
-        'ucrReceiverStation
+        'ucrReceiverDate
         '
-        Me.ucrReceiverStation.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverStation, "ucrReceiverStation")
-        Me.ucrReceiverStation.Name = "ucrReceiverStation"
-        Me.ucrReceiverStation.Selector = Nothing
-        Me.ucrReceiverStation.strNcFilePath = ""
-        Me.ucrReceiverStation.ucrSelector = Nothing
-        '
-        'ucrSelectorTransform
-        '
-        Me.ucrSelectorTransform.bShowHiddenColumns = False
-        Me.ucrSelectorTransform.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorTransform, "ucrSelectorTransform")
-        Me.ucrSelectorTransform.Name = "ucrSelectorTransform"
+        Me.ucrReceiverDate.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverDate, "ucrReceiverDate")
+        Me.ucrReceiverDate.Name = "ucrReceiverDate"
+        Me.ucrReceiverDate.Selector = Nothing
+        Me.ucrReceiverDate.strNcFilePath = ""
+        Me.ucrReceiverDate.ucrSelector = Nothing
         '
         'ucrReceiverYear
         '
@@ -305,14 +318,14 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverYear.strNcFilePath = ""
         Me.ucrReceiverYear.ucrSelector = Nothing
         '
-        'ucrReceiverDate
+        'ucrReceiverStation
         '
-        Me.ucrReceiverDate.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverDate, "ucrReceiverDate")
-        Me.ucrReceiverDate.Name = "ucrReceiverDate"
-        Me.ucrReceiverDate.Selector = Nothing
-        Me.ucrReceiverDate.strNcFilePath = ""
-        Me.ucrReceiverDate.ucrSelector = Nothing
+        Me.ucrReceiverStation.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverStation, "ucrReceiverStation")
+        Me.ucrReceiverStation.Name = "ucrReceiverStation"
+        Me.ucrReceiverStation.Selector = Nothing
+        Me.ucrReceiverStation.strNcFilePath = ""
+        Me.ucrReceiverStation.ucrSelector = Nothing
         '
         'ucrReceiverData
         '
@@ -323,26 +336,34 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverData.strNcFilePath = ""
         Me.ucrReceiverData.ucrSelector = Nothing
         '
+        'ucrSelectorTransform
+        '
+        Me.ucrSelectorTransform.bDropUnusedFilterLevels = False
+        Me.ucrSelectorTransform.bShowHiddenColumns = False
+        Me.ucrSelectorTransform.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorTransform, "ucrSelectorTransform")
+        Me.ucrSelectorTransform.Name = "ucrSelectorTransform"
+        '
         'ucrBase
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'ucrChkGroupByYear
+        'lblRowsMultSpells
         '
-        Me.ucrChkGroupByYear.Checked = False
-        resources.ApplyResources(Me.ucrChkGroupByYear, "ucrChkGroupByYear")
-        Me.ucrChkGroupByYear.Name = "ucrChkGroupByYear"
+        resources.ApplyResources(Me.lblRowsMultSpells, "lblRowsMultSpells")
+        Me.lblRowsMultSpells.Name = "lblRowsMultSpells"
+        Me.lblRowsMultSpells.Tag = "Rows_to_Take_Over:"
         '
-        'rdoMultSpells
+        'ucrNudMultSpells
         '
-        resources.ApplyResources(Me.rdoMultSpells, "rdoMultSpells")
-        Me.rdoMultSpells.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoMultSpells.FlatAppearance.BorderSize = 2
-        Me.rdoMultSpells.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoMultSpells.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoMultSpells.Name = "rdoMultSpells"
-        Me.rdoMultSpells.UseVisualStyleBackColor = True
+        Me.ucrNudMultSpells.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMultSpells.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudMultSpells, "ucrNudMultSpells")
+        Me.ucrNudMultSpells.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMultSpells.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMultSpells.Name = "ucrNudMultSpells"
+        Me.ucrNudMultSpells.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'dlgTransformClimatic
         '
@@ -413,4 +434,6 @@ Partial Class dlgTransformClimatic
     Friend WithEvents lblCondition As Label
     Friend WithEvents rdoMultSpells As RadioButton
     Friend WithEvents ucrChkGroupByYear As ucrCheck
+    Friend WithEvents ucrNudMultSpells As ucrNud
+    Friend WithEvents lblRowsMultSpells As Label
 End Class
