@@ -23,67 +23,34 @@ Partial Class dlgClimaticBoxPlot
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgClimaticBoxPlot))
-        Me.lblXVariable = New System.Windows.Forms.Label()
-        Me.grpLayout = New System.Windows.Forms.GroupBox()
-        Me.rdoDataThenYear = New System.Windows.Forms.RadioButton()
-        Me.rdoYearThenData = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlLayoutOptions = New instat.UcrPanel()
         Me.cmdBoxPlotOptions = New System.Windows.Forms.Button()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.rdoViolin = New System.Windows.Forms.RadioButton()
         Me.rdoJitter = New System.Windows.Forms.RadioButton()
         Me.rdoBoxplot = New System.Windows.Forms.RadioButton()
-        Me.grpFacets = New System.Windows.Forms.GroupBox()
-        Me.ucrReceiver2ndFacet = New instat.ucrReceiverSingle()
-        Me.ucrReceiverFacetBy = New instat.ucrReceiverSingle()
-        Me.ucrChkMargins = New instat.ucrCheck()
-        Me.lblSecondFacet = New System.Windows.Forms.Label()
-        Me.lblFacetBy = New System.Windows.Forms.Label()
+        Me.lblWithinYear = New System.Windows.Forms.Label()
+        Me.lblElement = New System.Windows.Forms.Label()
+        Me.lblYear = New System.Windows.Forms.Label()
+        Me.lblDate = New System.Windows.Forms.Label()
+        Me.lblStation = New System.Windows.Forms.Label()
+        Me.ucrInputWithinYear = New instat.ucrInputComboBox()
+        Me.ucrInputYear = New instat.ucrInputComboBox()
         Me.ucrChkVerticalXTickMarkers = New instat.ucrCheck()
-        Me.ucrVariablesAsFactorForClimaticBoxplot = New instat.ucrVariablesAsFactor()
         Me.ucrPnlPlots = New instat.UcrPanel()
-        Me.ucrReceiverXVariable = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSavePlot = New instat.ucrSave()
         Me.ucrChkHorizontalBoxplot = New instat.ucrCheck()
         Me.ucrChkVarWidth = New instat.ucrCheck()
         Me.ucrSelectorClimaticBoxPlot = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.grpLayout.SuspendLayout()
-        Me.grpFacets.SuspendLayout()
+        Me.ucrChkOmitBelow = New instat.ucrCheck()
+        Me.ucrNudOmitBelow = New instat.ucrNud()
+        Me.ucrInputStation = New instat.ucrInputComboBox()
+        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
+        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
+        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
+        Me.ucrReceiverYear = New instat.ucrReceiverSingle()
+        Me.ucrReceiverWithinYear = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
-        '
-        'lblXVariable
-        '
-        resources.ApplyResources(Me.lblXVariable, "lblXVariable")
-        Me.lblXVariable.Name = "lblXVariable"
-        '
-        'grpLayout
-        '
-        Me.grpLayout.Controls.Add(Me.rdoDataThenYear)
-        Me.grpLayout.Controls.Add(Me.rdoYearThenData)
-        Me.grpLayout.Controls.Add(Me.ucrPnlLayoutOptions)
-        resources.ApplyResources(Me.grpLayout, "grpLayout")
-        Me.grpLayout.Name = "grpLayout"
-        Me.grpLayout.TabStop = False
-        '
-        'rdoDataThenYear
-        '
-        resources.ApplyResources(Me.rdoDataThenYear, "rdoDataThenYear")
-        Me.rdoDataThenYear.Name = "rdoDataThenYear"
-        Me.rdoDataThenYear.TabStop = True
-        Me.rdoDataThenYear.UseVisualStyleBackColor = True
-        '
-        'rdoYearThenData
-        '
-        resources.ApplyResources(Me.rdoYearThenData, "rdoYearThenData")
-        Me.rdoYearThenData.Name = "rdoYearThenData"
-        Me.rdoYearThenData.TabStop = True
-        Me.rdoYearThenData.UseVisualStyleBackColor = True
-        '
-        'ucrPnlLayoutOptions
-        '
-        resources.ApplyResources(Me.ucrPnlLayoutOptions, "ucrPnlLayoutOptions")
-        Me.ucrPnlLayoutOptions.Name = "ucrPnlLayoutOptions"
         '
         'cmdBoxPlotOptions
         '
@@ -129,50 +96,44 @@ Partial Class dlgClimaticBoxPlot
         Me.rdoBoxplot.TabStop = True
         Me.rdoBoxplot.UseVisualStyleBackColor = True
         '
-        'grpFacets
+        'lblWithinYear
         '
-        Me.grpFacets.Controls.Add(Me.ucrReceiver2ndFacet)
-        Me.grpFacets.Controls.Add(Me.ucrReceiverFacetBy)
-        Me.grpFacets.Controls.Add(Me.ucrChkMargins)
-        Me.grpFacets.Controls.Add(Me.lblSecondFacet)
-        Me.grpFacets.Controls.Add(Me.lblFacetBy)
-        resources.ApplyResources(Me.grpFacets, "grpFacets")
-        Me.grpFacets.Name = "grpFacets"
-        Me.grpFacets.TabStop = False
+        resources.ApplyResources(Me.lblWithinYear, "lblWithinYear")
+        Me.lblWithinYear.Name = "lblWithinYear"
         '
-        'ucrReceiver2ndFacet
+        'lblElement
         '
-        Me.ucrReceiver2ndFacet.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiver2ndFacet, "ucrReceiver2ndFacet")
-        Me.ucrReceiver2ndFacet.Name = "ucrReceiver2ndFacet"
-        Me.ucrReceiver2ndFacet.Selector = Nothing
-        Me.ucrReceiver2ndFacet.strNcFilePath = ""
-        Me.ucrReceiver2ndFacet.ucrSelector = Nothing
+        resources.ApplyResources(Me.lblElement, "lblElement")
+        Me.lblElement.Name = "lblElement"
         '
-        'ucrReceiverFacetBy
+        'lblYear
         '
-        Me.ucrReceiverFacetBy.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverFacetBy, "ucrReceiverFacetBy")
-        Me.ucrReceiverFacetBy.Name = "ucrReceiverFacetBy"
-        Me.ucrReceiverFacetBy.Selector = Nothing
-        Me.ucrReceiverFacetBy.strNcFilePath = ""
-        Me.ucrReceiverFacetBy.ucrSelector = Nothing
+        resources.ApplyResources(Me.lblYear, "lblYear")
+        Me.lblYear.Name = "lblYear"
         '
-        'ucrChkMargins
+        'lblDate
         '
-        Me.ucrChkMargins.Checked = False
-        resources.ApplyResources(Me.ucrChkMargins, "ucrChkMargins")
-        Me.ucrChkMargins.Name = "ucrChkMargins"
+        resources.ApplyResources(Me.lblDate, "lblDate")
+        Me.lblDate.Name = "lblDate"
         '
-        'lblSecondFacet
+        'lblStation
         '
-        resources.ApplyResources(Me.lblSecondFacet, "lblSecondFacet")
-        Me.lblSecondFacet.Name = "lblSecondFacet"
+        resources.ApplyResources(Me.lblStation, "lblStation")
+        Me.lblStation.Name = "lblStation"
         '
-        'lblFacetBy
+        'ucrInputWithinYear
         '
-        resources.ApplyResources(Me.lblFacetBy, "lblFacetBy")
-        Me.lblFacetBy.Name = "lblFacetBy"
+        Me.ucrInputWithinYear.AddQuotesIfUnrecognised = True
+        Me.ucrInputWithinYear.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputWithinYear, "ucrInputWithinYear")
+        Me.ucrInputWithinYear.Name = "ucrInputWithinYear"
+        '
+        'ucrInputYear
+        '
+        Me.ucrInputYear.AddQuotesIfUnrecognised = True
+        Me.ucrInputYear.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputYear, "ucrInputYear")
+        Me.ucrInputYear.Name = "ucrInputYear"
         '
         'ucrChkVerticalXTickMarkers
         '
@@ -180,29 +141,10 @@ Partial Class dlgClimaticBoxPlot
         resources.ApplyResources(Me.ucrChkVerticalXTickMarkers, "ucrChkVerticalXTickMarkers")
         Me.ucrChkVerticalXTickMarkers.Name = "ucrChkVerticalXTickMarkers"
         '
-        'ucrVariablesAsFactorForClimaticBoxplot
-        '
-        Me.ucrVariablesAsFactorForClimaticBoxplot.frmParent = Me
-        resources.ApplyResources(Me.ucrVariablesAsFactorForClimaticBoxplot, "ucrVariablesAsFactorForClimaticBoxplot")
-        Me.ucrVariablesAsFactorForClimaticBoxplot.Name = "ucrVariablesAsFactorForClimaticBoxplot"
-        Me.ucrVariablesAsFactorForClimaticBoxplot.Selector = Nothing
-        Me.ucrVariablesAsFactorForClimaticBoxplot.strNcFilePath = ""
-        Me.ucrVariablesAsFactorForClimaticBoxplot.ucrSelector = Nothing
-        Me.ucrVariablesAsFactorForClimaticBoxplot.ucrVariableSelector = Nothing
-        '
         'ucrPnlPlots
         '
         resources.ApplyResources(Me.ucrPnlPlots, "ucrPnlPlots")
         Me.ucrPnlPlots.Name = "ucrPnlPlots"
-        '
-        'ucrReceiverXVariable
-        '
-        Me.ucrReceiverXVariable.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverXVariable, "ucrReceiverXVariable")
-        Me.ucrReceiverXVariable.Name = "ucrReceiverXVariable"
-        Me.ucrReceiverXVariable.Selector = Nothing
-        Me.ucrReceiverXVariable.strNcFilePath = ""
-        Me.ucrReceiverXVariable.ucrSelector = Nothing
         '
         'ucrBase
         '
@@ -228,27 +170,106 @@ Partial Class dlgClimaticBoxPlot
         '
         'ucrSelectorClimaticBoxPlot
         '
+        Me.ucrSelectorClimaticBoxPlot.bDropUnusedFilterLevels = False
         Me.ucrSelectorClimaticBoxPlot.bShowHiddenColumns = False
         Me.ucrSelectorClimaticBoxPlot.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorClimaticBoxPlot, "ucrSelectorClimaticBoxPlot")
         Me.ucrSelectorClimaticBoxPlot.Name = "ucrSelectorClimaticBoxPlot"
         '
+        'ucrChkOmitBelow
+        '
+        Me.ucrChkOmitBelow.Checked = False
+        resources.ApplyResources(Me.ucrChkOmitBelow, "ucrChkOmitBelow")
+        Me.ucrChkOmitBelow.Name = "ucrChkOmitBelow"
+        '
+        'ucrNudOmitBelow
+        '
+        Me.ucrNudOmitBelow.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudOmitBelow.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudOmitBelow, "ucrNudOmitBelow")
+        Me.ucrNudOmitBelow.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudOmitBelow.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudOmitBelow.Name = "ucrNudOmitBelow"
+        Me.ucrNudOmitBelow.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputStation
+        '
+        Me.ucrInputStation.AddQuotesIfUnrecognised = True
+        Me.ucrInputStation.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputStation, "ucrInputStation")
+        Me.ucrInputStation.Name = "ucrInputStation"
+        '
+        'ucrReceiverElement
+        '
+        Me.ucrReceiverElement.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverElement, "ucrReceiverElement")
+        Me.ucrReceiverElement.Name = "ucrReceiverElement"
+        Me.ucrReceiverElement.Selector = Nothing
+        Me.ucrReceiverElement.strNcFilePath = ""
+        Me.ucrReceiverElement.ucrSelector = Nothing
+        '
+        'ucrReceiverStation
+        '
+        Me.ucrReceiverStation.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverStation, "ucrReceiverStation")
+        Me.ucrReceiverStation.Name = "ucrReceiverStation"
+        Me.ucrReceiverStation.Selector = Nothing
+        Me.ucrReceiverStation.strNcFilePath = ""
+        Me.ucrReceiverStation.ucrSelector = Nothing
+        '
+        'ucrReceiverDate
+        '
+        Me.ucrReceiverDate.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverDate, "ucrReceiverDate")
+        Me.ucrReceiverDate.Name = "ucrReceiverDate"
+        Me.ucrReceiverDate.Selector = Nothing
+        Me.ucrReceiverDate.strNcFilePath = ""
+        Me.ucrReceiverDate.ucrSelector = Nothing
+        '
+        'ucrReceiverYear
+        '
+        Me.ucrReceiverYear.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverYear, "ucrReceiverYear")
+        Me.ucrReceiverYear.Name = "ucrReceiverYear"
+        Me.ucrReceiverYear.Selector = Nothing
+        Me.ucrReceiverYear.strNcFilePath = ""
+        Me.ucrReceiverYear.ucrSelector = Nothing
+        '
+        'ucrReceiverWithinYear
+        '
+        Me.ucrReceiverWithinYear.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverWithinYear, "ucrReceiverWithinYear")
+        Me.ucrReceiverWithinYear.Name = "ucrReceiverWithinYear"
+        Me.ucrReceiverWithinYear.Selector = Nothing
+        Me.ucrReceiverWithinYear.strNcFilePath = ""
+        Me.ucrReceiverWithinYear.ucrSelector = Nothing
+        '
         'dlgClimaticBoxPlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrReceiverWithinYear)
+        Me.Controls.Add(Me.ucrReceiverYear)
+        Me.Controls.Add(Me.ucrReceiverDate)
+        Me.Controls.Add(Me.ucrReceiverStation)
+        Me.Controls.Add(Me.ucrReceiverElement)
+        Me.Controls.Add(Me.ucrChkOmitBelow)
+        Me.Controls.Add(Me.ucrNudOmitBelow)
+        Me.Controls.Add(Me.ucrInputWithinYear)
+        Me.Controls.Add(Me.ucrInputYear)
+        Me.Controls.Add(Me.ucrInputStation)
+        Me.Controls.Add(Me.lblWithinYear)
+        Me.Controls.Add(Me.lblElement)
+        Me.Controls.Add(Me.lblYear)
+        Me.Controls.Add(Me.lblDate)
+        Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrChkVerticalXTickMarkers)
-        Me.Controls.Add(Me.grpFacets)
-        Me.Controls.Add(Me.ucrVariablesAsFactorForClimaticBoxplot)
         Me.Controls.Add(Me.rdoViolin)
         Me.Controls.Add(Me.rdoJitter)
         Me.Controls.Add(Me.rdoBoxplot)
         Me.Controls.Add(Me.ucrPnlPlots)
         Me.Controls.Add(Me.cmdBoxPlotOptions)
         Me.Controls.Add(Me.cmdOptions)
-        Me.Controls.Add(Me.grpLayout)
-        Me.Controls.Add(Me.lblXVariable)
-        Me.Controls.Add(Me.ucrReceiverXVariable)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSavePlot)
         Me.Controls.Add(Me.ucrChkHorizontalBoxplot)
@@ -258,10 +279,6 @@ Partial Class dlgClimaticBoxPlot
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgClimaticBoxPlot"
-        Me.grpLayout.ResumeLayout(False)
-        Me.grpLayout.PerformLayout()
-        Me.grpFacets.ResumeLayout(False)
-        Me.grpFacets.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -271,24 +288,26 @@ Partial Class dlgClimaticBoxPlot
     Friend WithEvents ucrChkVarWidth As ucrCheck
     Friend WithEvents ucrSelectorClimaticBoxPlot As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents lblXVariable As Label
-    Friend WithEvents ucrReceiverXVariable As ucrReceiverSingle
-    Friend WithEvents grpLayout As GroupBox
     Friend WithEvents cmdBoxPlotOptions As Button
     Friend WithEvents cmdOptions As Button
     Friend WithEvents rdoViolin As RadioButton
     Friend WithEvents rdoJitter As RadioButton
     Friend WithEvents rdoBoxplot As RadioButton
     Friend WithEvents ucrPnlPlots As UcrPanel
-    Friend WithEvents rdoYearThenData As RadioButton
-    Friend WithEvents ucrPnlLayoutOptions As UcrPanel
-    Friend WithEvents rdoDataThenYear As RadioButton
-    Friend WithEvents ucrVariablesAsFactorForClimaticBoxplot As ucrVariablesAsFactor
-    Friend WithEvents grpFacets As GroupBox
-    Friend WithEvents ucrReceiver2ndFacet As ucrReceiverSingle
-    Friend WithEvents ucrReceiverFacetBy As ucrReceiverSingle
-    Friend WithEvents ucrChkMargins As ucrCheck
-    Friend WithEvents lblSecondFacet As Label
-    Friend WithEvents lblFacetBy As Label
     Friend WithEvents ucrChkVerticalXTickMarkers As ucrCheck
+    Friend WithEvents lblWithinYear As Label
+    Friend WithEvents lblElement As Label
+    Friend WithEvents lblYear As Label
+    Friend WithEvents lblDate As Label
+    Friend WithEvents lblStation As Label
+    Friend WithEvents ucrInputWithinYear As ucrInputComboBox
+    Friend WithEvents ucrInputYear As ucrInputComboBox
+    Friend WithEvents ucrChkOmitBelow As ucrCheck
+    Friend WithEvents ucrNudOmitBelow As ucrNud
+    Friend WithEvents ucrInputStation As ucrInputComboBox
+    Friend WithEvents ucrReceiverElement As ucrReceiverSingle
+    Friend WithEvents ucrReceiverWithinYear As ucrReceiverSingle
+    Friend WithEvents ucrReceiverYear As ucrReceiverSingle
+    Friend WithEvents ucrReceiverDate As ucrReceiverSingle
+    Friend WithEvents ucrReceiverStation As ucrReceiverSingle
 End Class
