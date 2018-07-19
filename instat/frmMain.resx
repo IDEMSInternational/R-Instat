@@ -2542,11 +2542,14 @@
   <data name="mnuPrepareCheckDataCompareColumns.Text" xml:space="preserve">
     <value>Compare Columns...</value>
   </data>
-  <data name="mnuPrepareCheckDataNoneNumericCases.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuPrepareCheckDataNonNumericCases.Size" type="System.Drawing.Size, System.Drawing">
     <value>245, 22</value>
   </data>
-  <data name="mnuPrepareCheckDataNoneNumericCases.Text" xml:space="preserve">
-    <value>None Numeric Cases...</value>
+  <data name="mnuPrepareCheckDataNonNumericCases.Text" xml:space="preserve">
+    <value>Non-numeric Cases...</value>
+  </data>
+  <data name="ToolStripSeparator49.Size" type="System.Drawing.Size, System.Drawing">
+    <value>242, 6</value>
   </data>
   <data name="mnuPrepareCheckDataBoxplot.Size" type="System.Drawing.Size, System.Drawing">
     <value>245, 22</value>
@@ -7696,10 +7699,10 @@
   <data name="&gt;&gt;mnuPrepareCheckDataCompareColumns.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuPrepareCheckDataNoneNumericCases.Name" xml:space="preserve">
-    <value>mnuPrepareCheckDataNoneNumericCases</value>
+  <data name="&gt;&gt;mnuPrepareCheckDataNonNumericCases.Name" xml:space="preserve">
+    <value>mnuPrepareCheckDataNonNumericCases</value>
   </data>
-  <data name="&gt;&gt;mnuPrepareCheckDataNoneNumericCases.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuPrepareCheckDataNonNumericCases.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuPrepareCheckDataBoxplot.Name" xml:space="preserve">
@@ -8643,6 +8646,12 @@
   </data>
   <data name="&gt;&gt;ExportToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator49.Name" xml:space="preserve">
+    <value>ToolStripSeparator49</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator49.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>frmMain</value>
