@@ -51,7 +51,7 @@ Public Class dlgSpells
 
         ' Setting receivers
         ucrReceiverElement.SetParameter(New RParameter("rain", 0))
-        ucrReceiverElement.SetParameterIsRFunction()
+        ucrReceiverElement.SetParameterIsString()
         ucrReceiverElement.bWithQuotes = False
         ucrReceiverElement.Selector = ucrSelectorForSpells
         'ucrReceiverElement.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "rain" & Chr(34)})
