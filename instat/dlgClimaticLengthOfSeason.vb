@@ -20,7 +20,7 @@ Public Class dlgClimaticLengthOfSeason
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
 
-
+    Private clsLengthOfSeasonFunction As New RFunction
     Private Sub dlgClimaticLengthOfSeason_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -37,14 +37,24 @@ Public Class dlgClimaticLengthOfSeason
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrSelectorLengthofSeason = ucrReceiverStartofRains.Selector
-        ucrSelectorLengthofSeason = ucrReceiverStartofRainsLogical.Selector
-        ucrSelectorLengthofSeason = ucrReceiverEndofRains.Selector
-        ucrSelectorLengthofSeason = ucrReceiverEndofRainsLogical.Selector
+        ucrReceiverStartofRains.Selector = ucrSelectorLengthofSeason
+        ucrReceiverStartofRainsLogical.Selector = ucrSelectorLengthofSeason
+        ucrReceiverEndofRains.Selector = ucrSelectorLengthofSeason
+        ucrReceiverEndofRainsLogical.Selector = ucrSelectorLengthofSeason
 
+        ucrChkLengthofSeason.AddToLinkedControls(ucrInputLengthofSeason, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkLengthofSeason.SetText("Length of Season")
+        ucrInputLengthofSeason.SetName("Length")
+
+        ucrChkType.AddToLinkedControls(ucrInputTextType, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkType.SetText("Occurence")
+        ucrInputTextType.SetName("Type")
     End Sub
 
     Private Sub SetDefaults()
+
+        ucrSelectorLengthofSeason.Reset()
+        ucrReceiverStartofRains.SetMeAsReceiver()
 
     End Sub
 
