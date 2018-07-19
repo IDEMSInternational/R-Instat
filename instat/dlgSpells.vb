@@ -101,8 +101,8 @@ Public Class dlgSpells
         ucrInputCondition.SetDropDownStyleAsNonEditable()
 
         ucrChkConditional.SetText("Assuming Condition Satified at Start of Each Period")
-        ucrChkConditional.AddFunctionNamesCondition({True}, "0")
-        ucrChkConditional.AddFunctionNamesCondition({False}, "NA")
+        'ucrChkConditional.AddFunctionNamesCondition({True}, "0")
+        'ucrChkConditional.AddFunctionNamesCondition({False}, "NA")
         'ucrChkConditional.SetParameter(New RParameter("initial value"))
 
         ucrInputNewColumnName.SetParameter(New RParameter("result_name", 2))
