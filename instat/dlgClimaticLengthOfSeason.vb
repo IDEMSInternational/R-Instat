@@ -79,12 +79,12 @@ Public Class dlgClimaticLengthOfSeason
 
         ucrInputTextType.SetParameter(New RParameter("result_name", 2))
         ucrInputTextType.SetDataFrameSelector(ucrSelectorLengthofSeason.ucrAvailableDataFrames)
-        ucrInputTextType.SetName("Type")
+        ucrInputTextType.SetName("length_status")
     End Sub
 
     Private Sub SetDefaults()
         Dim strLengthName As String = "length"
-        Dim strTypeName As String = "type"
+        Dim strTypeName As String = "length_status"
 
         clsLengthOfSeasonFunction.Clear()
         clsCombinationCalcFunction.Clear()
