@@ -43,7 +43,7 @@ Partial Class dlgHelpVignettes
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(2, 145)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 145)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 7
@@ -65,7 +65,7 @@ Partial Class dlgHelpVignettes
         Me.rdoHelp.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoHelp.Location = New System.Drawing.Point(130, 12)
+        Me.rdoHelp.Location = New System.Drawing.Point(132, 12)
         Me.rdoHelp.Name = "rdoHelp"
         Me.rdoHelp.Size = New System.Drawing.Size(91, 27)
         Me.rdoHelp.TabIndex = 1
@@ -82,7 +82,7 @@ Partial Class dlgHelpVignettes
         Me.rdoVignettes.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoVignettes.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoVignettes.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoVignettes.Location = New System.Drawing.Point(218, 12)
+        Me.rdoVignettes.Location = New System.Drawing.Point(220, 12)
         Me.rdoVignettes.Name = "rdoVignettes"
         Me.rdoVignettes.Size = New System.Drawing.Size(91, 27)
         Me.rdoVignettes.TabIndex = 2
@@ -93,7 +93,7 @@ Partial Class dlgHelpVignettes
         '
         'ucrPnlHelpVignettes
         '
-        Me.ucrPnlHelpVignettes.Location = New System.Drawing.Point(101, 8)
+        Me.ucrPnlHelpVignettes.Location = New System.Drawing.Point(103, 8)
         Me.ucrPnlHelpVignettes.Name = "ucrPnlHelpVignettes"
         Me.ucrPnlHelpVignettes.Size = New System.Drawing.Size(231, 36)
         Me.ucrPnlHelpVignettes.TabIndex = 0
@@ -121,7 +121,7 @@ Partial Class dlgHelpVignettes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(415, 202)
+        Me.ClientSize = New System.Drawing.Size(436, 207)
         Me.Controls.Add(Me.lblFunctionName)
         Me.Controls.Add(Me.ucrInputFunctionName)
         Me.Controls.Add(Me.rdoHelp)
