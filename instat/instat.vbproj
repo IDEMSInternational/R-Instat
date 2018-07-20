@@ -257,6 +257,12 @@
     <Compile Include="dlgClimSoft.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCompare.Designer.vb">
+      <DependentUpon>dlgCompare.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCompare.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCompareColumns.Designer.vb">
       <DependentUpon>dlgCompareColumns.vb</DependentUpon>
     </Compile>
@@ -2478,6 +2484,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCombineText.sw-KE.resx">
       <DependentUpon>dlgCombineText.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCompare.resx">
+      <DependentUpon>dlgCompare.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCompareColumns.resx">
       <DependentUpon>dlgCompareColumns.vb</DependentUpon>
