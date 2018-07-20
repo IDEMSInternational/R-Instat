@@ -20,8 +20,8 @@ Public Class dlgClimaticLengthOfSeason
     Private bReset As Boolean = True
     Private strCurrDataName As String = ""
 
-    Private clsLengthOfSeasonFunction, clsApplyInstatCalcFunction, clsCombinationCalcFunction, clsStartEndStatusFunction, clsIfElseFunction, clsCombinationListFunction As New RFunction
-    Private clsMinusOpertor, clsAndOperator As New ROperator
+    Private clsLengthOfSeasonFunction, clsApplyInstatCalcFunction, clsCombinationCalcFunction, clsStartEndStatusFunction, clsIfElseFunction, clsIsNAFunction, clsCombinationListFunction As New RFunction
+    Private clsMinusOpertor, clsAndOperator, clsOROperator As New ROperator
     Private Sub dlgClimaticLengthOfSeason_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -61,7 +61,6 @@ Public Class dlgClimaticLengthOfSeason
         ucrReceiverEndofRainsLogical.bWithQuotes = False
         ucrReceiverEndofRainsLogical.Selector = ucrSelectorLengthofSeason
 
-
         ucrChkLengthofSeason.AddParameterPresentCondition(True, "sub1", True)
         ucrChkLengthofSeason.AddParameterPresentCondition(False, "sub1", False)
         ucrChkLengthofSeason.AddToLinkedControls(ucrInputLengthofSeason, {True}, bNewLinkedHideIfParameterMissing:=True)
@@ -91,9 +90,13 @@ Public Class dlgClimaticLengthOfSeason
         clsApplyInstatCalcFunction.Clear()
         clsStartEndStatusFunction.Clear()
         clsCombinationListFunction.Clear()
+        clsIsNAFunction.Clear()
+
 
         clsMinusOpertor.Clear()
         clsAndOperator.Clear()
+        clsOROperator.Clear()
+
 
         ucrSelectorLengthofSeason.Reset()
         ucrReceiverStartofRains.SetMeAsReceiver()
@@ -119,14 +122,17 @@ Public Class dlgClimaticLengthOfSeason
 
         clsIfElseFunction.SetPackageName("dplyr")
         clsIfElseFunction.SetRCommand("if_else")
-        clsIfElseFunction.AddParameter("and", clsROperatorParameter:=clsAndOperator, bIncludeArgumentName:=False, iPosition:=0)
-        clsIfElseFunction.AddParameter("true", "TRUE", iPosition:=1)
-        clsIfElseFunction.AddParameter("false", "FALSE", iPosition:=2)
-        clsIfElseFunction.AddParameter("missing", "NA", iPosition:=3)
+        clsIfElseFunction.AddParameter("is.na", clsRFunctionParameter:=clsIsNAFunction, bIncludeArgumentName:=False, iPosition:=0)
+        clsIfElseFunction.AddParameter("NA", "NA", bIncludeArgumentName:=False, iPosition:=1)
+        clsIfElseFunction.AddParameter("and", clsROperatorParameter:=clsAndOperator, bIncludeArgumentName:=False, iPosition:=2)
         clsIfElseFunction.bToScriptAsRString = True
 
         clsAndOperator.SetOperation("&")
-        clsAndOperator.bToScriptAsRString = False
+
+        clsIsNAFunction.SetRCommand("is.na")
+        clsIsNAFunction.AddParameter("or", clsROperatorParameter:=clsOROperator, bIncludeArgumentName:=False)
+
+        clsOROperator.SetOperation("|")
 
         'combination calculation
         clsCombinationCalcFunction.SetRCommand("instat_calculation$new")
@@ -147,6 +153,9 @@ Public Class dlgClimaticLengthOfSeason
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrReceiverStartofRainsLogical.AddAdditionalCodeParameterPair(clsOROperator, New RParameter("start_status", 0), iAdditionalPairNo:=1)
+        ucrReceiverEndofRainsLogical.AddAdditionalCodeParameterPair(clsOROperator, New RParameter("end_status", 1), iAdditionalPairNo:=1)
+
         ucrReceiverStartofRains.SetRCode(clsMinusOpertor, bReset)
         ucrReceiverEndofRains.SetRCode(clsMinusOpertor, bReset)
         ucrReceiverStartofRainsLogical.SetRCode(clsAndOperator, bReset)
