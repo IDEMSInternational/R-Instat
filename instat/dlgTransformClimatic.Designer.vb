@@ -52,13 +52,13 @@ Partial Class dlgTransformClimatic
         Me.lblNewColName = New System.Windows.Forms.Label()
         Me.lblCountOver = New System.Windows.Forms.Label()
         Me.grpTransform = New System.Windows.Forms.GroupBox()
+        Me.rdoEvapVariable = New System.Windows.Forms.RadioButton()
+        Me.rdoEvapValue = New System.Windows.Forms.RadioButton()
         Me.lblRowsMultSpells = New System.Windows.Forms.Label()
         Me.lblCondition = New System.Windows.Forms.Label()
         Me.lblWBEvaporation = New System.Windows.Forms.Label()
         Me.lblWBCapacity = New System.Windows.Forms.Label()
         Me.rdoMultSpells = New System.Windows.Forms.RadioButton()
-        Me.rdoEvapValue = New System.Windows.Forms.RadioButton()
-        Me.rdoEvapVariable = New System.Windows.Forms.RadioButton()
         Me.ucrChkGroupByYear = New instat.ucrCheck()
         Me.ucrReceiverEvap = New instat.ucrReceiverSingle()
         Me.ucrNudMultSpells = New instat.ucrNud()
@@ -193,6 +193,20 @@ Partial Class dlgTransformClimatic
         Me.grpTransform.Name = "grpTransform"
         Me.grpTransform.TabStop = False
         '
+        'rdoEvapVariable
+        '
+        resources.ApplyResources(Me.rdoEvapVariable, "rdoEvapVariable")
+        Me.rdoEvapVariable.Name = "rdoEvapVariable"
+        Me.rdoEvapVariable.TabStop = True
+        Me.rdoEvapVariable.UseVisualStyleBackColor = True
+        '
+        'rdoEvapValue
+        '
+        resources.ApplyResources(Me.rdoEvapValue, "rdoEvapValue")
+        Me.rdoEvapValue.Name = "rdoEvapValue"
+        Me.rdoEvapValue.TabStop = True
+        Me.rdoEvapValue.UseVisualStyleBackColor = True
+        '
         'lblRowsMultSpells
         '
         resources.ApplyResources(Me.lblRowsMultSpells, "lblRowsMultSpells")
@@ -226,20 +240,6 @@ Partial Class dlgTransformClimatic
         Me.rdoMultSpells.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.rdoMultSpells.Name = "rdoMultSpells"
         Me.rdoMultSpells.UseVisualStyleBackColor = True
-        '
-        'rdoEvapValue
-        '
-        resources.ApplyResources(Me.rdoEvapValue, "rdoEvapValue")
-        Me.rdoEvapValue.Name = "rdoEvapValue"
-        Me.rdoEvapValue.TabStop = True
-        Me.rdoEvapValue.UseVisualStyleBackColor = True
-        '
-        'rdoEvapVariable
-        '
-        resources.ApplyResources(Me.rdoEvapVariable, "rdoEvapVariable")
-        Me.rdoEvapVariable.Name = "rdoEvapVariable"
-        Me.rdoEvapVariable.TabStop = True
-        Me.rdoEvapVariable.UseVisualStyleBackColor = True
         '
         'ucrChkGroupByYear
         '
