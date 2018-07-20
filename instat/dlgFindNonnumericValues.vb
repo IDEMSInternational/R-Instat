@@ -16,7 +16,7 @@
 
 Imports instat.Translations
 
-Public Class dlgShowNonnumericValues
+Public Class dlgFindNonnumericValues
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
 
