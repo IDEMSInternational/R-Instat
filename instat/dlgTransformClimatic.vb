@@ -408,7 +408,6 @@ Public Class dlgTransformClimatic
             clsRTransform.RemoveParameterByName("calculated_from")
         ElseIf rdoMoving.Checked Then
             clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRMovingFunction, iPosition:=1)
-            clsRTransform.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames & ")", iPosition:=3)
             clsRTransform.RemoveParameterByName("sub_calculations")
         ElseIf rdoSpell.Checked Then
             clsRTransform.AddParameter("function_exp", Chr(34) & "consecutive_sum(x = " & strRainDay & ", initial_value = NA)" & Chr(34), iPosition:=1)
@@ -420,7 +419,6 @@ Public Class dlgTransformClimatic
             clsRTransform.RemoveParameterByName("calculated_from")
         ElseIf rdoWaterBalance.Checked Then
             clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRWaterBalanceFunction, iPosition:=1)
-            'clsRTransform.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames & ")")
             clsRTransform.RemoveParameterByName("sub_calculations")
         End If
     End Sub
@@ -481,6 +479,19 @@ Public Class dlgTransformClimatic
 
     Private Sub RainDays()
         clsRRainday.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames() & ")", iPosition:=3)
+        clsRTransform.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames & ")", iPosition:=3)
+    End Sub
+
+    Private Sub Evaporation()
+        If rdoEvapValue.Checked Then
+            clsRTransform.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames & ")")
+            clsPMaxOperatorMax.AddParameter("evaporation.value", 5, iPosition:=1, bIncludeArgumentName:=False)
+        ElseIf rdoEvapVariable.Checked Then
+            clsRTransform.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames & ", " & strCurrDataName & "=" & ucrReceiverEvap.GetVariableNames & ")")
+            clsReduceOpEvapValue.SetOperation("-")
+            clsRWaterBalanceFunction.AddParameter("replace_na", clsROperatorParameter:=clsReduceOpEvapValue, iPosition:=1, bIncludeArgumentName:=False)
+            clsPMaxOperatorMax.RemoveParameterByName("evaporation.value")
+        End If
     End Sub
 
     Private Sub ucrSelectorTransform_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrSelectorTransform.ControlContentsChanged
@@ -495,8 +506,9 @@ Public Class dlgTransformClimatic
         InputConditionOptions()
     End Sub
 
-    Private Sub ucrReceiverData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlValueChanged
+    Private Sub ucrReceiverData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlValueChanged, ucrReceiverEvap.ControlValueChanged
         RainDays()
+        Evaporation()
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
@@ -523,22 +535,6 @@ Public Class dlgTransformClimatic
 
     Private Sub ucrChkGroupByYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkGroupByYear.ControlValueChanged
         GroupByYear()
-    End Sub
-
-    Private Sub Evaporation()
-        If rdoEvapValue.Checked Then
-            clsRTransform.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames & ")")
-            clsPMaxOperatorMax.AddParameter("evaporation.value", 5, iPosition:=1, bIncludeArgumentName:=False)
-        ElseIf rdoEvapVariable.Checked Then
-            clsRTransform.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames & ", " & strCurrDataName & "=" & ucrReceiverEvap.GetVariableNames & ")")
-            clsReduceOpEvapValue.SetOperation("-")
-            clsRWaterBalanceFunction.AddParameter("replace_na", clsROperatorParameter:=clsReduceOpEvapValue, iPosition:=1, bIncludeArgumentName:=False)
-            clsPMaxOperatorMax.RemoveParameterByName("evaporation.value")
-        End If
-    End Sub
-
-    Private Sub ucrReceiverEvap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverEvap.ControlValueChanged
-        Evaporation()
     End Sub
 
     Private Sub ucrInputEvaporation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputEvaporation.ControlContentsChanged
