@@ -19,7 +19,7 @@ Partial Class ucrFilter
     Inherits System.Windows.Forms.UserControl
 
     'UserControl overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -36,7 +36,7 @@ Partial Class ucrFilter
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrFilter))
         Me.lblSelectLevels = New System.Windows.Forms.Label()
@@ -50,12 +50,13 @@ Partial Class ucrFilter
         Me.cmdRemoveCondition = New System.Windows.Forms.Button()
         Me.lblNewFilterName = New System.Windows.Forms.Label()
         Me.ucrInputFilterName = New instat.ucrInputComboBox()
-        Me.ucrValueForFilter = New instat.ucrInputTextBox()
         Me.ucrFilterPreview = New instat.ucrInputTextBox()
         Me.ucrFilterOperation = New instat.ucrInputComboBox()
         Me.ucrFactorLevels = New instat.ucrFactor()
         Me.ucrFilterByReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorForFitler = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrValueForFilter = New instat.ucrInputComboBox()
+        Me.ucrFilterDateTimePicker = New instat.ucrDateTimePicker()
         Me.SuspendLayout()
         '
         'lblSelectLevels
@@ -126,14 +127,6 @@ Partial Class ucrFilter
         resources.ApplyResources(Me.ucrInputFilterName, "ucrInputFilterName")
         Me.ucrInputFilterName.Name = "ucrInputFilterName"
         '
-        'ucrValueForFilter
-        '
-        Me.ucrValueForFilter.AddQuotesIfUnrecognised = True
-        Me.ucrValueForFilter.IsMultiline = False
-        Me.ucrValueForFilter.IsReadOnly = False
-        resources.ApplyResources(Me.ucrValueForFilter, "ucrValueForFilter")
-        Me.ucrValueForFilter.Name = "ucrValueForFilter"
-        '
         'ucrFilterPreview
         '
         Me.ucrFilterPreview.AddQuotesIfUnrecognised = True
@@ -169,22 +162,38 @@ Partial Class ucrFilter
         '
         'ucrSelectorForFitler
         '
+        Me.ucrSelectorForFitler.bDropUnusedFilterLevels = False
         Me.ucrSelectorForFitler.bShowHiddenColumns = False
         Me.ucrSelectorForFitler.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorForFitler, "ucrSelectorForFitler")
         Me.ucrSelectorForFitler.Name = "ucrSelectorForFitler"
         '
+        'ucrValueForFilter
+        '
+        Me.ucrValueForFilter.AddQuotesIfUnrecognised = True
+        Me.ucrValueForFilter.IsReadOnly = False
+        resources.ApplyResources(Me.ucrValueForFilter, "ucrValueForFilter")
+        Me.ucrValueForFilter.Name = "ucrValueForFilter"
+        '
+        'ucrFilterDateTimePicker
+        '
+        resources.ApplyResources(Me.ucrFilterDateTimePicker, "ucrFilterDateTimePicker")
+        Me.ucrFilterDateTimePicker.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrFilterDateTimePicker.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrFilterDateTimePicker.Name = "ucrFilterDateTimePicker"
+        '
         'ucrFilter
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrFilterDateTimePicker)
+        Me.Controls.Add(Me.ucrValueForFilter)
         Me.Controls.Add(Me.ucrInputFilterName)
         Me.Controls.Add(Me.lblNewFilterName)
         Me.Controls.Add(Me.cmdRemoveCondition)
         Me.Controls.Add(Me.mcdEditCondition)
         Me.Controls.Add(Me.cmdClearConditions)
         Me.Controls.Add(Me.lblFilterBy)
-        Me.Controls.Add(Me.ucrValueForFilter)
         Me.Controls.Add(Me.ucrFilterPreview)
         Me.Controls.Add(Me.lblFilterPreview)
         Me.Controls.Add(Me.lstFilters)
@@ -211,11 +220,12 @@ Partial Class ucrFilter
     Friend WithEvents lstFilters As ListView
     Friend WithEvents lblFilterPreview As Label
     Friend WithEvents ucrFilterPreview As ucrInputTextBox
-    Friend WithEvents ucrValueForFilter As ucrInputTextBox
     Friend WithEvents lblFilterBy As Label
     Friend WithEvents cmdClearConditions As Button
     Friend WithEvents mcdEditCondition As Button
     Friend WithEvents cmdRemoveCondition As Button
     Friend WithEvents lblNewFilterName As Label
     Friend WithEvents ucrInputFilterName As ucrInputComboBox
+    Friend WithEvents ucrValueForFilter As ucrInputComboBox
+    Friend WithEvents ucrFilterDateTimePicker As ucrDateTimePicker
 End Class
