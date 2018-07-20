@@ -214,7 +214,7 @@ Public Class ucrFilter
         CheckAddEnabled()
     End Sub
 
-    Private Sub ucrValueForFilter_NameChanged()
+    Private Sub ucrValueForFilter_NameChanged() Handles ucrValueForFilter.NameChanged
         CheckAddEnabled()
     End Sub
 
