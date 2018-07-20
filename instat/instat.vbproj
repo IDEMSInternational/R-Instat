@@ -154,7 +154,7 @@
     <Compile Include="clsQualityControl.vb" />
     <Compile Include="clsRCodeStructure.vb" />
     <Compile Include="clsRegressionDefaults.vb" />
-    <Compile Include="clsStartOfRains.vb" />
+    <Compile Include="clsRains.vb" />
     <Compile Include="dlgAddComment.Designer.vb">
       <DependentUpon>dlgAddComment.vb</DependentUpon>
     </Compile>
@@ -171,6 +171,12 @@
       <DependentUpon>dlgAddLink.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgAddLink.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgAnonymiseIDColumn.Designer.vb">
+      <DependentUpon>dlgAnonymiseIDColumn.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgAnonymiseIDColumn.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgAutoSaveRecovery.Designer.vb">
@@ -219,6 +225,18 @@
       <DependentUpon>dlgClimaticCheckDataTemperature.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgClimaticCheckDataTemperature.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgClimaticLengthOfSeason.Designer.vb">
+      <DependentUpon>dlgClimaticLengthOfSeason.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticLengthOfSeason.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgClimaticMaps.Designer.vb">
+      <DependentUpon>dlgClimaticMaps.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticMaps.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgClimaticSummary.Designer.vb">
@@ -323,10 +341,22 @@
     <Compile Include="dlgEvapotranspiration.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgHelpVignettes.Designer.vb">
+      <DependentUpon>dlgHelpVignettes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgHelpVignettes.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgHypothesisTestsCalculator.Designer.vb">
       <DependentUpon>dlgHypothesisTestsCalculator.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgHypothesisTestsCalculator.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgImportShapeFiles.Designer.vb">
+      <DependentUpon>dlgImportShapeFiles.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgImportShapeFiles.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgMergeAdditionalData.Designer.vb">
@@ -357,6 +387,12 @@
       <DependentUpon>dlgReshapeClimatic.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgReshapeClimatic.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgFindNonnumericValues.Designer.vb">
+      <DependentUpon>dlgFindNonnumericValues.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgFindNonnumericValues.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgSPI.Designer.vb">
@@ -2278,6 +2314,9 @@
     <EmbeddedResource Include="dlgAddLink.sw-KE.resx">
       <DependentUpon>dlgAddLink.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgAnonymiseIDColumn.resx">
+      <DependentUpon>dlgAnonymiseIDColumn.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgAutoSaveRecovery.resx">
       <DependentUpon>dlgAutoSaveRecovery.vb</DependentUpon>
     </EmbeddedResource>
@@ -2385,6 +2424,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgClimaticCheckDataTemperature.sw-KE.resx">
       <DependentUpon>dlgClimaticCheckDataTemperature.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticLengthOfSeason.resx">
+      <DependentUpon>dlgClimaticLengthOfSeason.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticMaps.resx">
+      <DependentUpon>dlgClimaticMaps.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgClimaticSummary.resx">
       <DependentUpon>dlgClimaticSummary.vb</DependentUpon>
@@ -2562,6 +2607,9 @@
     <EmbeddedResource Include="dlgFrequency.sw-KE.resx">
       <DependentUpon>dlgFrequency.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgHelpVignettes.resx">
+      <DependentUpon>dlgHelpVignettes.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgHypothesisTestsCalculator.resx">
       <DependentUpon>dlgHypothesisTestsCalculator.vb</DependentUpon>
     </EmbeddedResource>
@@ -2576,6 +2624,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgImportOpenRefine.sw-KE.resx">
       <DependentUpon>dlgImportOpenRefine.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgImportShapeFiles.resx">
+      <DependentUpon>dlgImportShapeFiles.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgInfill.sw-KE.resx">
       <DependentUpon>dlgInfill.vb</DependentUpon>
@@ -2645,6 +2696,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRugPlot.sw-KE.resx">
       <DependentUpon>dlgRugPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgFindNonnumericValues.resx">
+      <DependentUpon>dlgFindNonnumericValues.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSpells.sw-KE.resx">
       <DependentUpon>dlgSpells.vb</DependentUpon>
