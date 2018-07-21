@@ -1,3 +1,3 @@
-﻿Public Class dlgImportToCMSAF
+﻿Public Class dlgExportToCMSAF
 
 End Class
