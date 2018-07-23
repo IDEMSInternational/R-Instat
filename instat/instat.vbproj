@@ -365,10 +365,10 @@
     <Compile Include="dlgImportShapeFiles.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgImportToCMSAF.Designer.vb">
-      <DependentUpon>dlgImportToCMSAF.vb</DependentUpon>
+    <Compile Include="dlgExportToCMSAF.Designer.vb">
+      <DependentUpon>dlgExportToCMSAF.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgImportToCMSAF.vb">
+    <Compile Include="dlgExportToCMSAF.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgMergeAdditionalData.Designer.vb">
@@ -2643,8 +2643,8 @@
     <EmbeddedResource Include="dlgImportShapeFiles.resx">
       <DependentUpon>dlgImportShapeFiles.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgImportToCMSAF.resx">
-      <DependentUpon>dlgImportToCMSAF.vb</DependentUpon>
+    <EmbeddedResource Include="dlgExportToCMSAF.resx">
+      <DependentUpon>dlgExportToCMSAF.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgInfill.sw-KE.resx">
       <DependentUpon>dlgInfill.vb</DependentUpon>
