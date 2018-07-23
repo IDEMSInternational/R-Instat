@@ -23,8 +23,8 @@ Public Class clsQCJumpRCode
     Public strCalcName As String
 
     Public Sub SetDefaults(strElementName As String)
-        Dim strlargest_jump As String = "Jump" & strElementName
-        Dim strjump_test As String = "jump" & strElementName
+        Dim strlargestJump As String = "Jump" & strElementName
+        Dim strJumpTest As String = "jump" & strElementName
 
         clsLagFunction = New RFunction
         clsAbsLagFunction = New RFunction
@@ -65,14 +65,14 @@ Public Class clsQCJumpRCode
         clsPmaxFunction.AddParameter("na.rm", "TRUE", iPosition:=2)
         clsPmaxFunction.bToScriptAsRString = True
 
-        strCalcName = strlargest_jump
+        strCalcName = strlargestJump
         clsJumpCalcFunction.SetRCommand("instat_calculation$new")
         clsJumpCalcFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsJumpCalcFunction.AddParameter("function_exp", clsRFunctionParameter:=clsPmaxFunction, iPosition:=1)
         clsJumpCalcFunction.AddParameter("result_name", Chr(34) & strCalcName & Chr(34), iPosition:=4)
         clsJumpCalcFunction.SetAssignTo("largest_jump" & strElementName)
 
-        strTestName = strjump_test
+        strTestName = strJumpTest
         clsJumpListFunc.SetRCommand("list")
         clsJumpListFunc.AddParameter("sub1", clsRFunctionParameter:=clsJumpCalcFunction, bIncludeArgumentName:=False)
         clsJumpTestFunction.SetRCommand("instat_calculation$new")
@@ -84,7 +84,7 @@ Public Class clsQCJumpRCode
 
         clsGreaterJumpOperator.SetOperation(">")
         clsGreaterJumpOperator.bToScriptAsRString = True
-        clsGreaterJumpOperator.AddParameter("left", strParameterValue:=strlargest_jump, iPosition:=0)
+        clsGreaterJumpOperator.AddParameter("left", strParameterValue:=strlargestJump, iPosition:=0)
     End Sub
 
     Public Sub SetElementParameters(ucrNewControl As ucrCore, iAdditionalPairNo1 As Integer, iAdditionalPairNo2 As Integer, iAdditionalPairNo3 As Integer, iAdditionalPairNo4 As Integer)
@@ -109,8 +109,8 @@ Public Class clsQCSameRCode
 
     Public Sub SetDefaults(strElementName As String)
         Dim strLengths As String = "lengths"
-        Dim strlargest_Same As String = "Same" & strElementName
-        Dim strSame_test As String = "same" & strElementName
+        Dim strlargestSame As String = "Same" & strElementName
+        Dim strSameTest As String = "same" & strElementName
 
         clsRepFunc = New RFunction
         clsRleFunc = New RFunction
@@ -130,7 +130,7 @@ Public Class clsQCSameRCode
         clsDollarOperator.AddParameter("left", bIncludeArgumentName:=False, clsRFunctionParameter:=clsRleFunc, iPosition:=0)
         clsDollarOperator.AddParameter("right", strParameterValue:=strLengths, bIncludeArgumentName:=False, iPosition:=1)
 
-        strCalcName = strlargest_Same
+        strCalcName = strlargestSame
         clsSameCalcFunction.SetRCommand("instat_calculation$new")
         clsSameCalcFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsSameCalcFunction.AddParameter("function_exp", clsRFunctionParameter:=clsRepFunc, iPosition:=1)
@@ -138,7 +138,7 @@ Public Class clsQCSameRCode
         clsSameCalcFunction.SetAssignTo("largest_same" & strElementName)
         clsRepFunc.bToScriptAsRString = True
 
-        strTestName = strSame_test
+        strTestName = strSameTest
         clsSameListFunc.SetRCommand("list")
         clsSameListFunc.AddParameter("sub1", clsRFunctionParameter:=clsSameCalcFunction, bIncludeArgumentName:=False)
 
@@ -151,7 +151,7 @@ Public Class clsQCSameRCode
 
         clsSameGreaterOperator.SetOperation(">=")
         clsSameGreaterOperator.bToScriptAsRString = True
-        clsSameGreaterOperator.AddParameter("left", bIncludeArgumentName:=False, strParameterValue:=strlargest_Same, iPosition:=0)
+        clsSameGreaterOperator.AddParameter("left", bIncludeArgumentName:=False, strParameterValue:=strlargestSame, iPosition:=0)
     End Sub
 
     Public Sub SetElementParameters(ucrNewControl As ucrCore, iAdditionalPairNo As Integer)
@@ -166,7 +166,6 @@ Public Class clsQCDifferenceRCode
     Public strTestName As String
 
     Public Sub SetDefaults()
-
         Dim strDiffCalc As String = "Diff"
         Dim strDiffTest As String = "diff"
 
@@ -250,18 +249,18 @@ Public Class clsQcOutliers
     Public strLowerCalcName As String
 
     Public Sub SetDefaults(strElementName As String)
-        Dim strUpper_Outlier_Limit As String = "upper_outlier_limit_" & strElementName
-        Dim strLower_Outlier_Limit As String = "lower_outlier_limit_" & strElementName
-        Dim strOutlierUpperTestCalcName As String = "upper_outlier_limit_test" & strElementName
-        Dim strOutlierLowerTestCalcName As String = "lower_outlier_limit_test" & strElementName
+        Dim strUpperOutlierLimit As String = "Ulim" & strElementName
+        Dim strLowerOutlierLimit As String = "Llim" & strElementName
+        Dim strOutlierUpperTestCalcName As String = "ulim" & strElementName
+        Dim strOutlierLowerTestCalcName As String = "llim" & strElementName
 
         clsOutlierUpperOperator.Clear()
         clsOutlierLowerOperator.Clear()
         clsOutlierUpperList.Clear()
         clsOutlierLowerList.Clear()
 
-        strUpperCalcName = strUpper_Outlier_Limit
-        strLowerCalcName = strLower_Outlier_Limit
+        strUpperCalcName = strUpperOutlierLimit
+        strLowerCalcName = strLowerOutlierLimit
 
         strUpperTestName = strOutlierUpperTestCalcName
         strLowerTestName = strOutlierLowerTestCalcName
