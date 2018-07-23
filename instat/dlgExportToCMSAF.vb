@@ -43,6 +43,9 @@ Public Class dlgExportToCMSAF
         ucrReceiverLatitude.Selector = ucrSelectorImportToCMSAF
         ucrReceiverElement.Selector = ucrSelectorImportToCMSAF
 
+        ucrSelectorImportToCMSAF.SetParameter(New RParameter("x", 0))
+        ucrSelectorImportToCMSAF.SetParameterIsrfunction()
+
         ucrReceiverStation.SetParameter(New RParameter("station_name ", 0))
         ucrReceiverStation.SetParameterIsRFunction()
         ucrReceiverStation.SetClimaticType("station")
@@ -50,8 +53,7 @@ Public Class dlgExportToCMSAF
 
         ucrReceiverDate.SetParameter(New RParameter("date", 1))
         ucrReceiverDate.SetParameterIsRFunction()
-        ucrReceiverDate.SetClimaticType("date")
-        ucrReceiverDate.bAutoFill = True
+
 
         ucrReceiverLongitude.SetParameter(New RParameter("lon", 2))
         ucrReceiverLongitude.SetParameterIsRFunction()
@@ -108,19 +110,25 @@ Public Class dlgExportToCMSAF
         ucrReceiverLatitude.SetRCode(clsAsDataFrameFunction, bReset)
         ucrReceiverElement.SetRCode(clsAsDataFrameFunction, bReset)
         ucrInputExportFile.SetRCode(clsExportFunction, bReset)
+        ucrReceiverDate.SetRCode(clsAsDataFrameFunction, bReset)
+        ucrSelectorImportToCMSAF.SetRCode(clsAsDataFrameFunction, bReset)
     End Sub
 
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
-        Dim dlgSave As New SaveFileDialog
 
-        dlgSave.Title = "Export R Objects"
-        dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-        dlgSave.Filter = "Serialized R Objects (*.rds)|*.rds"
-        If dlgSave.ShowDialog = DialogResult.OK Then
-            If dlgSave.FileName <> "" Then
-                ucrInputExportFile.SetName(Path.GetFullPath(dlgSave.FileName).ToString.Replace("\", "/"))
+        Using dlgSave As New SaveFileDialog
+            dlgSave.Title = "Save Data File"
+            dlgSave.Filter = "RDS Data file (*.RDS)|*.RDS"
+            If ucrInputExportFile.GetText() <> "" Then
+                dlgSave.InitialDirectory = ucrInputExportFile.GetText().Replace("/", "\")
+            Else
+                dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
             End If
-        End If
+            If dlgSave.ShowDialog() = DialogResult.OK Then
+                ucrInputExportFile.SetName(dlgSave.FileName.Replace("\", "/"))
+            End If
+
+        End Using
     End Sub
 
     Private Sub TestOkEnabled()
