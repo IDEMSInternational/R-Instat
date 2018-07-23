@@ -105,6 +105,7 @@ Public Class dlgSPI
         clsListFunction = New RFunction
 
         ucrSelectorVariable.Reset()
+        ucrReceiverData.SetMeAsReceiver()
 
         clsListFunction.SetRCommand("list")
         clsListFunction.AddParameter("type", Chr(39) & "rectangular" & Chr(39), iPosition:=0)

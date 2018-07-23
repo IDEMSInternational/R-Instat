@@ -21,6 +21,11 @@ Public Class ucrReceiverSingle
     Public strCurrDataType As String
     Public Event WithMeSelectionChanged(ucrChangedReceiver As ucrReceiverSingle)
     Public bAutoFill As Boolean = False
+    'We have not added this to multiple receiver because we have no case yet that we want not to print graph
+    Public bPrintGraph As Boolean = True
+    'If True variable will be assigned to e.g. DF.x instead of x (where DF is strDataFrameName and x is receiver value)
+    'This is useful e.g. to ensure uniqueness when a dialog uses multiple data frames
+    Public bIncludeDataFrameInAssignment As Boolean = False
 
     Public Sub New()
         ' This call is required by the designer.
@@ -202,6 +207,9 @@ Public Class ucrReceiverSingle
                 Case "graph"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
                     clsGetVariablesFunc.AddParameter("graph_name", GetVariableNames())
+                    If Not bPrintGraph Then
+                        clsGetVariablesFunc.AddParameter("print_graph", "FALSE")
+                    End If
                 Case "model"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
                     clsGetVariablesFunc.AddParameter("model_name", GetVariableNames())
@@ -217,7 +225,11 @@ Public Class ucrReceiverSingle
             End Select
 
             'TODO make this an option set in Options menu
-            clsGetVariablesFunc.SetAssignTo(txtReceiverSingle.Text)
+            If bIncludeDataFrameInAssignment AndAlso strDataFrameName <> "" Then
+                clsGetVariablesFunc.SetAssignTo(strDataFrameName & "." & txtReceiverSingle.Text)
+            Else
+                clsGetVariablesFunc.SetAssignTo(txtReceiverSingle.Text)
+            End If
             Return clsGetVariablesFunc
         Else
             Return clsGetVariablesFunc
@@ -297,14 +309,21 @@ Public Class ucrReceiverSingle
     End Sub
 
     Public Sub CheckAutoFill()
+        Dim ucrCurrentReceiver As ucrReceiver
+
         'TODO When there are receivers with bAttachedToPrimaryDataFrame = False
         '     don't always want to autofill when dataframe is changed.
         '     Something like AndAlso Selector.CurrentReceiver.bAttachedToPrimaryDataFrame
         '     except always want to autofill when resetting regardless of current receiver
         If bAutoFill AndAlso Selector IsNot Nothing AndAlso (Selector.CurrentReceiver Is Nothing OrElse Selector.CurrentReceiver.bAttachedToPrimaryDataFrame) Then
+            ucrCurrentReceiver = Selector.CurrentReceiver
             SetMeAsReceiver()
             If Selector.lstAvailableVariable.Items.Count = 1 Then
                 Add(Selector.lstAvailableVariable.Items(0).Text, Selector.strCurrentDataFrame)
+            End If
+
+            If ucrCurrentReceiver IsNot Nothing Then
+                ucrCurrentReceiver.SetMeAsReceiver()
             End If
         End If
     End Sub

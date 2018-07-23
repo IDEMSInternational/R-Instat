@@ -45,7 +45,7 @@ Public Class dlgRestrict
     End Sub
 
     Private Sub dlgRestrict_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'autoTranslate(Me)
+        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
