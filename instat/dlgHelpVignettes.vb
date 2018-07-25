@@ -52,7 +52,7 @@ Public Class dlgHelpVignettes
         ucrInputFunctionName.SetLinkedDisplayControl(lblFunctionName)
 
         clsGetPackages.SetRCommand("get_installed_packages_with_data")
-        expPackageNames = frmMain.clsRLink.RunInternalScriptGetValue(clsGetPackages.ToScript(), bSilent:=True)
+        expPackageNames = frmMain.clsRLink.RunInternalScriptGetValue(clsGetPackages.ToScript(),bSeparateThread:=False, bSilent:=True)
         If expPackageNames IsNot Nothing AndAlso expPackageNames.Type <> Internals.SymbolicExpressionType.Null Then
             chrPackageNames = expPackageNames.AsCharacter
             strAvailablePackages = chrPackageNames.ToArray
@@ -79,6 +79,7 @@ Public Class dlgHelpVignettes
         clsVignettesFunction.SetPackageName("utils")
         clsVignettesFunction.SetRCommand("browseVignettes")
 
+        ucrBase.clsRsyntax.bSeparateThread = False
         ucrBase.clsRsyntax.SetBaseRFunction(clsHelpFunction)
     End Sub
 
