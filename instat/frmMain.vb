@@ -1908,16 +1908,4 @@ Public Class frmMain
     Private Sub mnuPrepareCheckDataCompareColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataCompareColumns.Click
         dlgCompareColumns.ShowDialog()
     End Sub
-
-    Private Sub ReshapeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReshapeToolStripMenuItem.Click
-        dlgReshapeClimaticData.ShowDialog()
-    End Sub
-
-    Private Sub SummariseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SummariseToolStripMenuItem.Click
-        dlgOneVariableSummarise.ShowDialog()
-    End Sub
-
-    Private Sub ReplaceValuesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReplaceValuesToolStripMenuItem.Click
-        dlgReplaceValues.ShowDialog()
-    End Sub
 End Class
