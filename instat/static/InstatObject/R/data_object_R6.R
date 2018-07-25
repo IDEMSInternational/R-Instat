@@ -2055,102 +2055,16 @@ data_object$set("public","set_contrasts_of_factor", function(col_name, new_contr
 )
 
 #This method gets a date column and extracts part of the information such as year, month, week, weekday etc(depending on which parameters are set) and creates their respective new column(s)
-data_object$set("public","split_date", function(col_name = "", week = FALSE, month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, year = FALSE, day = FALSE, day_in_month = FALSE, day_in_year = FALSE, leap_year = FALSE, day_in_year_366 = FALSE, dekade = FALSE, pentad = FALSE, quarter = FALSE, s_quarter = FALSE, with_year = FALSE, s_doy = FALSE, s_year = FALSE, s_start_day_in_month = 1, s_start_month = 8) {
+data_object$set("public","split_date", function(col_name = "", year = FALSE, leap_year = FALSE,  month_val = FALSE, month_abbr = FALSE, month_name = FALSE, week_val = FALSE, week_abbr = FALSE, week_name = FALSE,  weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE,  day = FALSE, day_in_month = FALSE, day_in_year = FALSE, day_in_year_366 = FALSE, pentad_val = FALSE, pentad_abbr = FALSE,  dekad_val = FALSE, dekad_abbr = FALSE, quarter_val = FALSE, quarter_abbr = FALSE, with_year = FALSE, s_start_month = 1, s_start_day_in_month = 1) {
   col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
   if(!lubridate::is.Date(col_data)) stop("This column must be a date or time!")
-  if(day) {
-    day_vector <- lubridate::day(col_data)
-	  col_name <- next_default_item(prefix = "day", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = day_vector)
-  }
-  if(week) {
-    week_vector <- as.integer(lubridate::week(col_data))
-	  col_name <- next_default_item(prefix = "week", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = week_vector)
-  }
-  if(weekday_val) {
-    weekday_val_vector <- as.integer(lubridate::wday(col_data))
-	  col_name <- next_default_item(prefix = "weekday_val", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = weekday_val_vector)
-  }
-  if(weekday_abbr) {
-    weekday_abbr_vector <- lubridate::wday(col_data, label = TRUE)
-	  col_name <- next_default_item(prefix = "weekday_abbr", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = weekday_abbr_vector)
-  }
-  if(weekday_name) {
-    weekday_name_vector <- lubridate::wday(col_data, label = TRUE, abbr = FALSE)
-	  col_name <- next_default_item(prefix = "weekday_name", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = weekday_name_vector)
-  }
-  if(month_val) {
-    month_val_vector <- as.integer(lubridate::month(col_data))
-    col_name <- next_default_item(prefix = "month_val", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = month_val_vector)
-  }
-  if(month_abbr) {
-    month_abbr_vector <- lubridate::month(col_data, label = TRUE)
-	  col_name <- next_default_item(prefix = "month_abbr", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = month_abbr_vector)
-  }
-  if(month_name) {
-    month_name_vector <- lubridate::month(col_data, label = TRUE, abbr = FALSE)
-	  col_name <- next_default_item(prefix = "month_name", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = month_name_vector)
-  }
-  if(year) {
-    year_vector <- lubridate::year(col_data)
-	  col_name <- next_default_item(prefix = "year", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = year_vector)
-    if(self$is_climatic_data()) self$set_climatic_types(types = c(year = col_name))
-  }
-  if(day_in_month) {
-    day_in_month_vector <- as.integer(lubridate::mday(col_data))
-	  col_name <- next_default_item(prefix = "day_in_month", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = day_in_month_vector)
-	}
-	if(day_in_year) {
-    day_in_year_vector <- as.integer(lubridate::yday(col_data))
-	  col_name <- next_default_item(prefix = "doy_365", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = day_in_year_vector)
-    if(self$is_climatic_data()) self$set_climatic_types(types = c(doy = col_name))
-  }
-  if(day_in_year_366) {
-    day_in_year_366_vector <- as.integer(yday_366(col_data))
-    col_name <- next_default_item(prefix = "doy", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = day_in_year_366_vector)
-    if(self$is_climatic_data()) self$set_climatic_types(types = c(doy = col_name))
-  }
-  if(dekade) {
-    dekade_vector <- as.integer(dekade(col_data))
-    col_name <- next_default_item(prefix = "dekad", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = dekade_vector)
-  }
-  if(pentad) {
-    pentad_vector <- as.integer(pentad(col_data))
-    col_name <- next_default_item(prefix = "pentad", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = pentad_vector)
-  }
-  if(quarter){
-      quarter_vector <- lubridate::quarter(col_data, with_year = with_year)
-      col_name <- next_default_item(prefix = "quarter", existing_names = self$get_column_names(), include_index = FALSE)
-      self$add_columns_to_data(col_name = col_name, col_data = quarter_vector)
-    }
-   if(s_quarter){                         
-      s_quarter_vector <- lubridate::quarter(col_data, with_year = with_year, fiscal_start = s_start_month)
-      col_name <- next_default_item(prefix = "s_quarter", existing_names = self$get_column_names(), include_index = FALSE)
-      self$add_columns_to_data(col_name = col_name, col_data = s_quarter_vector)
-  }
-	if(leap_year) {
-    leap_year_vector <- lubridate::leap_year(col_data)
-	  col_name <- next_default_item(prefix = "leap_year", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = leap_year_vector)
-	}
-  if(s_doy || s_year) {
+  
+  s_shift <- s_start_day_in_month > 1 || s_start_month > 1
+  
+  if(s_shift){
     if(s_start_month %% 1 != 0 || s_start_month < 1 || s_start_month > 12) stop("shift_start_month must be an integer between 1 and 12. ", s_start_month, " is invalid.")
     # TODO better checks on day in relation to month selected
     if(s_start_day_in_month %% 1 != 0 || s_start_day_in_month < 1 || s_start_day_in_month > 31) stop("shift_start_day_in_month must be an integer between 1 and 31. ", s_start_day_in_month, " is invalid.")
-    if(s_start_day_in_month == 1 && s_start_month == 1) stop("shift year must start after 1 Jan.")
     # using a leap year as year to ensure consistent day of year across years
     s_start_day <- lubridate::yday(as.Date(paste("2000", s_start_month, s_start_day_in_month), format = "%Y %m %d"))
     if(is.na(s_start_day)) stop("Could not identify starting day for shift year with shift_start_month = ", s_start_month, " and shift_start_day = ", s_start_day_in_month)
@@ -2165,16 +2079,126 @@ data_object$set("public","split_date", function(col_name = "", week = FALSE, mon
     temp_s_doy[temp_s_doy < 1] <- temp_s_doy[temp_s_doy < 1] + 366
     s_year_labs <- c(min(year_col) -1, sort(unique(year_col)))
     names(s_year_labs) <- paste(s_year_labs, s_year_labs + 1, sep = "-")
-    if(s_doy) {
-      col_name <- next_default_item(prefix = "s_doy", existing_names = self$get_column_names(), include_index = FALSE)
-      self$add_columns_to_data(col_name = col_name, col_data = temp_s_doy)
-      self$append_to_variables_metadata(col_names = col_name, property = label_label, new_val = paste("Shifted day of year by", (s_start_day - 1), "days"))
-    }
-    if(s_year) {
+  }
+
+  if(leap_year) {
+    leap_year_vector <- lubridate::leap_year(col_data)
+    col_name <- next_default_item(prefix = "leap_year", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = leap_year_vector)
+  }
+  
+  if(year) {
+    if(s_shift){
       col_name <- next_default_item(prefix = "s_year", existing_names = self$get_column_names(), include_index = FALSE)
       self$add_columns_to_data(col_name = col_name, col_data = temp_s_year)
       self$append_to_variables_metadata(col_names = col_name, property = label_label, new_val = paste("Shifted year starting",s_start_day_in_month,month.name[s_start_month]))
+    }else{
+      year_vector <- lubridate::year(col_data)
+      col_name <- next_default_item(prefix = "year", existing_names = self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name = col_name, col_data = year_vector)
+      if(self$is_climatic_data()) self$set_climatic_types(types = c(year = col_name))
     }
+  }
+
+  #TODO. Shifting of month
+   if(month_val) {
+    month_val_vector <- as.integer(lubridate::month(col_data))
+    col_name <- next_default_item(prefix = "month_val", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = month_val_vector)
+  }
+  if(month_abbr) {
+    month_abbr_vector <- lubridate::month(col_data, label = TRUE)
+    col_name <- next_default_item(prefix = "month_abbr", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = month_abbr_vector)
+  }
+  if(month_name) {
+    month_name_vector <- lubridate::month(col_data, label = TRUE, abbr = FALSE)
+    col_name <- next_default_item(prefix = "month_name", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = month_name_vector)
+  }
+  
+  if(day) {
+    day_vector <- lubridate::day(col_data)
+    col_name <- next_default_item(prefix = "day", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = day_vector)
+  }
+  
+  if(day_in_month) {
+    day_in_month_vector <- as.integer(lubridate::mday(col_data))
+    col_name <- next_default_item(prefix = "day_in_month", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = day_in_month_vector)
+  }
+  
+  if(day_in_year_366) {
+    if(s_shift){
+      col_name <- next_default_item(prefix = "s_doy", existing_names = self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name = col_name, col_data = temp_s_doy)
+      self$append_to_variables_metadata(col_names = col_name, property = label_label, new_val = paste("Shifted day of year by", (s_start_day - 1), "days"))
+    }else{
+      day_in_year_366_vector <- as.integer(yday_366(col_data))
+      col_name <- next_default_item(prefix = "doy", existing_names = self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name = col_name, col_data = day_in_year_366_vector)
+      if(self$is_climatic_data()) self$set_climatic_types(types = c(doy = col_name))
+    }
+  }
+  
+  if(day_in_year) {
+    day_in_year_vector <- as.integer(lubridate::yday(col_data))
+    col_name <- next_default_item(prefix = "doy_365", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = day_in_year_vector)
+    if(self$is_climatic_data()) self$set_climatic_types(types = c(doy = col_name))
+  }
+  
+ 
+  
+  if(quarter_val){
+    if(s_shift){
+      if(s_start_month %% 1 != 0 || s_start_month < 1 || s_start_month > 12) stop("shift_start_month must be an integer between 1 and 12. ", s_start_month, " is invalid.")
+      s_quarter_val_vector <- lubridate::quarter(col_data, with_year = with_year, fiscal_start = s_start_month)
+      col_name <- next_default_item(prefix = "s_quarter", existing_names = self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name = col_name, col_data = s_quarter_val_vector)
+    } else{
+      quarter_val_vector <- lubridate::quarter(col_data, with_year = with_year)
+      col_name <- next_default_item(prefix = "quarter", existing_names = self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name = col_name, col_data = quarter_val_vector)
+    }
+  }
+  
+  if(dekad_val) {
+    # TODO. shift function when s_start_month > 1
+    dekad_val_vector <- as.integer(dekade(col_data))
+    col_name <- next_default_item(prefix = "dekad", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = dekad_val_vector)
+  }
+  
+  if(pentad_val) {
+    # TODO. shift function when s_start_month > 1
+    pentad_val_vector <- as.integer(pentad(col_data))
+    col_name <- next_default_item(prefix = "pentad", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = pentad_val_vector)
+  }
+  
+  if(week_val) {
+    week_Val_vector <- as.integer(lubridate::week(col_data))
+	  col_name <- next_default_item(prefix = "week_val", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = week_Val_vector)
+  }
+  #TODO. Week abbrv and week name
+  
+  if(weekday_val) {
+    weekday_val_vector <- as.integer(lubridate::wday(col_data))
+	  col_name <- next_default_item(prefix = "weekday_val", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = weekday_val_vector)
+  }
+  if(weekday_abbr) {
+    weekday_abbr_vector <- lubridate::wday(col_data, label = TRUE)
+	  col_name <- next_default_item(prefix = "weekday_abbr", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = weekday_abbr_vector)
+  }
+  if(weekday_name) {
+    weekday_name_vector <- lubridate::wday(col_data, label = TRUE, abbr = FALSE)
+	  col_name <- next_default_item(prefix = "weekday_name", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = weekday_name_vector)
   }
  }
 )
