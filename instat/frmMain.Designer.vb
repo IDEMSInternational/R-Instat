@@ -186,6 +186,10 @@ Partial Class frmMain
         Me.ToolStripSeparator15 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticFileExportToCPT = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator18 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuClimaticReshape = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReshapeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SummariseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReplaceValuesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticDates = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticDatesGenerateDates = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticDatesMakeDate = New System.Windows.Forms.ToolStripMenuItem()
@@ -519,10 +523,6 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
-        Me.mnuClimaticReshape = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ReshapeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SummariseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ReplaceValuesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1384,6 +1384,27 @@ Partial Class frmMain
         '
         Me.ToolStripSeparator18.Name = "ToolStripSeparator18"
         resources.ApplyResources(Me.ToolStripSeparator18, "ToolStripSeparator18")
+        '
+        'mnuClimaticReshape
+        '
+        Me.mnuClimaticReshape.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReshapeToolStripMenuItem, Me.SummariseToolStripMenuItem, Me.ReplaceValuesToolStripMenuItem})
+        Me.mnuClimaticReshape.Name = "mnuClimaticReshape"
+        resources.ApplyResources(Me.mnuClimaticReshape, "mnuClimaticReshape")
+        '
+        'ReshapeToolStripMenuItem
+        '
+        resources.ApplyResources(Me.ReshapeToolStripMenuItem, "ReshapeToolStripMenuItem")
+        Me.ReshapeToolStripMenuItem.Name = "ReshapeToolStripMenuItem"
+        '
+        'SummariseToolStripMenuItem
+        '
+        Me.SummariseToolStripMenuItem.Name = "SummariseToolStripMenuItem"
+        resources.ApplyResources(Me.SummariseToolStripMenuItem, "SummariseToolStripMenuItem")
+        '
+        'ReplaceValuesToolStripMenuItem
+        '
+        Me.ReplaceValuesToolStripMenuItem.Name = "ReplaceValuesToolStripMenuItem"
+        resources.ApplyResources(Me.ReplaceValuesToolStripMenuItem, "ReplaceValuesToolStripMenuItem")
         '
         'mnuClimaticDates
         '
@@ -3345,27 +3366,6 @@ Partial Class frmMain
         Me.ucrOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         resources.ApplyResources(Me.ucrOutput, "ucrOutput")
         Me.ucrOutput.Name = "ucrOutput"
-        '
-        'mnuClimaticReshape
-        '
-        Me.mnuClimaticReshape.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReshapeToolStripMenuItem, Me.SummariseToolStripMenuItem, Me.ReplaceValuesToolStripMenuItem})
-        Me.mnuClimaticReshape.Name = "mnuClimaticReshape"
-        resources.ApplyResources(Me.mnuClimaticReshape, "mnuClimaticReshape")
-        '
-        'ReshapeToolStripMenuItem
-        '
-        Me.ReshapeToolStripMenuItem.Name = "ReshapeToolStripMenuItem"
-        resources.ApplyResources(Me.ReshapeToolStripMenuItem, "ReshapeToolStripMenuItem")
-        '
-        'SummariseToolStripMenuItem
-        '
-        Me.SummariseToolStripMenuItem.Name = "SummariseToolStripMenuItem"
-        resources.ApplyResources(Me.SummariseToolStripMenuItem, "SummariseToolStripMenuItem")
-        '
-        'ReplaceValuesToolStripMenuItem
-        '
-        Me.ReplaceValuesToolStripMenuItem.Name = "ReplaceValuesToolStripMenuItem"
-        resources.ApplyResources(Me.ReplaceValuesToolStripMenuItem, "ReplaceValuesToolStripMenuItem")
         '
         'frmMain
         '
