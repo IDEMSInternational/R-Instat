@@ -107,8 +107,6 @@ Public Class dlgTransformClimatic
         ucrReceiverEvap.strSelectorHeading = "Numerics"
         ucrReceiverEvap.SetIncludedDataTypes({"numeric"})
 
-        ucrChkGroupByYear.SetText("Group by Year")
-
         ' Moving
         ucrInputSum.SetParameter(New RParameter("FUN", 0))
         dctInputSumPairs.Add("Sum", "sum")
