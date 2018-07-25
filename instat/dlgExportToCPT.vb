@@ -98,7 +98,7 @@ Public Class dlgExportToCPT
         ucrPnlNoOfDF.AddToLinkedControls({ucrReceiverMultipleStation}, {rdoTwoDFWide}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlNoOfDF.AddToLinkedControls({ucrReceiverElement, ucrReceiverStationOneDF}, {rdoOneDF, rdoTwoDFLong}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverStationTwoDF.SetLinkedDisplayControl(lblStationTwoDF)
-        ucrReceiverStationTwoDF.SetLinkedDisplayControl(lblLine)
+        ucrSelectorTwoDF.SetLinkedDisplayControl(lblLine)
 
     End Sub
 
