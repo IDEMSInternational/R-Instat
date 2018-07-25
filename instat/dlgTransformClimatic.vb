@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgTransformClimatic
     Private bFirstload As Boolean = True
@@ -30,9 +31,11 @@ Public Class dlgTransformClimatic
     ' Water Balance
     Private clsPMinFunctionMax, clsPMaxFunctionMax, clsRWaterBalanceFunction As New RFunction
     Private clsPMaxOperatorMax As New ROperator
+    Private clsReduceOpEvapValue As New ROperator
 
     Private strCurrDataName As String = ""
     Private strRainDay As String = "rain_day"
+
 
     Private Sub dlgTransformClimatic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -95,6 +98,13 @@ Public Class dlgTransformClimatic
         ucrReceiverData.strSelectorHeading = "Numerics"
         ucrReceiverData.SetIncludedDataTypes({"numeric"})
 
+        ucrReceiverEvap.Selector = ucrSelectorTransform
+        ucrReceiverEvap.SetParameter(New RParameter("right", 1, bNewIncludeArgumentName:=False))
+        ucrReceiverEvap.SetParameterIsString()
+        ucrReceiverEvap.bWithQuotes = False
+        ucrReceiverEvap.strSelectorHeading = "Numerics"
+        ucrReceiverEvap.SetIncludedDataTypes({"numeric"})
+
         ' Moving
         ucrInputSum.SetParameter(New RParameter("FUN", 0))
         dctInputSumPairs.Add("Sum", "sum")
@@ -136,10 +146,15 @@ Public Class dlgTransformClimatic
         ucrNudWBCapacity.Increment = 10
         ucrNudWBCapacity.SetLinkedDisplayControl(lblWBCapacity)
 
-        ucrInputEvaporation.SetParameter(New RParameter("evaporation", 1), False)
         ucrInputEvaporation.SetValidationTypeAsNumeric()
         ucrInputEvaporation.AddQuotesIfUnrecognised = False
-        ucrInputEvaporation.SetLinkedDisplayControl(lblWBEvaporation)
+        ucrInputEvaporation.SetParameter(New RParameter("evaporation.value", 1, False))
+
+        ucrPnlEvap.AddRadioButton(rdoEvapValue)
+        ucrPnlEvap.AddRadioButton(rdoEvapVariable)
+        ucrPnlEvap.AddToLinkedControls(ucrInputEvaporation, {rdoEvapValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
+        ucrPnlEvap.AddToLinkedControls(ucrReceiverEvap, {rdoEvapVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
+        ucrPnlEvap.SetLinkedDisplayControl(lblWBEvaporation)
 
         ' Save Options
         ucrInputColName.SetParameter(New RParameter("result_name", 2))
@@ -153,8 +168,9 @@ Public Class dlgTransformClimatic
         ucrInputCondition.AddToLinkedControls(ucrInputSpellLower, {"<=", "Between", ">="}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrInputCondition.AddToLinkedControls(ucrInputSpellUpper, {"Between"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.85)
 
-        ucrPnlTransform.AddToLinkedControls(ucrInputEvaporation, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
+        ucrPnlTransform.AddToLinkedControls(ucrPnlEvap, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
         ucrPnlTransform.AddToLinkedControls(ucrNudWBCapacity, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=60)
+
     End Sub
 
     Private Sub SetDefaults()
@@ -179,6 +195,7 @@ Public Class dlgTransformClimatic
         clsPMinFunctionMax = New RFunction
         clsPMaxFunctionMax = New RFunction
         clsPMaxOperatorMax = New ROperator
+        clsReduceOpEvapValue.Clear()
 
         ucrSelectorTransform.Reset()
         ucrReceiverData.SetMeAsReceiver()
@@ -195,10 +212,10 @@ Public Class dlgTransformClimatic
         clsRRaindayMatch.AddParameter("x", clsROperatorParameter:=clsRRaindayAndOperator)
         clsRRaindayAndOperator.SetOperation("&")
         clsRRaindayAndOperator.AddParameter("lower", clsROperatorParameter:=clsRRaindayLowerOperator, iPosition:=0)
-        clsRRaindayLowerOperator.SetOperation(">=")
+        clsRRaindayLowerOperator.SetOperation("<=")
         clsRRaindayLowerOperator.AddParameter("min", 0, iPosition:=1)
         clsRRaindayAndOperator.AddParameter("upper", clsROperatorParameter:=clsRRaindayUpperOperator, iPosition:=0)
-        clsRRaindayUpperOperator.SetOperation("<=")
+        clsRRaindayUpperOperator.SetOperation(">=")
         clsRRaindayUpperOperator.AddParameter("max", 0.85, iPosition:=1)
         clsRRaindayMatch.AddParameter("table", "1", iPosition:=1)
         clsRRaindayMatch.AddParameter("nomatch", "0", iPosition:=2)
@@ -235,7 +252,7 @@ Public Class dlgTransformClimatic
         clsPMaxFunctionMax.AddParameter("calculation", clsROperatorParameter:=clsPMaxOperatorMax, iPosition:=0, bIncludeArgumentName:=False)
         clsPMaxOperatorMax.SetOperation("-")
         clsPMaxOperatorMax.AddParameter("first", "x + y", iPosition:=0)
-        clsPMaxOperatorMax.AddParameter("evaporation", 5, iPosition:=1, bIncludeArgumentName:=False)
+        'clsPMaxOperatorMax.AddParameter("evaporation", 5, iPosition:=1, bIncludeArgumentName:=False)
         clsPMaxFunctionMax.AddParameter("0", 0, iPosition:=1, bIncludeArgumentName:=False)
         clsPMinFunctionMax.AddParameter("capacity", 60, iPosition:=1, bIncludeArgumentName:=False)
         clsRWaterBalanceFunction.AddParameter("replace_na", iPosition:=1, bIncludeArgumentName:=False)
@@ -276,6 +293,7 @@ Public Class dlgTransformClimatic
         ucrReceiverData.AddAdditionalCodeParameterPair(clsRRaindayLowerOperator, New RParameter("rain", 0), iAdditionalPairNo:=2)
         ucrReceiverData.AddAdditionalCodeParameterPair(clsRRaindayUpperOperator, New RParameter("rain", 0), iAdditionalPairNo:=3)
         ucrReceiverData.AddAdditionalCodeParameterPair(clsRWaterBalanceFunction, New RParameter("replace_na", 1, False), iAdditionalPairNo:=4)
+        ucrReceiverData.AddAdditionalCodeParameterPair(clsReduceOpEvapValue, New RParameter("left", 0, False), iAdditionalPairNo:=5)
 
         ucrPnlTransform.SetRCode(clsRTransform, bReset)
 
@@ -291,13 +309,14 @@ Public Class dlgTransformClimatic
 
         ' Water Balance
         ucrInputEvaporation.SetRCode(clsPMaxOperatorMax, bReset)
+        ucrReceiverEvap.SetRCode(clsReduceOpEvapValue, bReset)
         ucrNudWBCapacity.SetRCode(clsPMinFunctionMax, bReset)
 
         ucrInputColName.SetRCode(clsRTransform, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverData.IsEmpty AndAlso Not ucrInputColName.IsEmpty AndAlso ((rdoMoving.Checked AndAlso Not ucrInputSum.IsEmpty AndAlso ucrNudSumOver.GetText <> "") OrElse (rdoCount.Checked AndAlso ucrNudCountOver.GetText <> "" AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty AndAlso Not ucrInputCondition.IsEmpty) OrElse (rdoSpell.Checked AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty AndAlso Not ucrInputCondition.IsEmpty) OrElse (rdoWaterBalance.Checked AndAlso Not ucrInputEvaporation.IsEmpty AndAlso ucrNudWBCapacity.GetText <> "")) Then
+        If Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverData.IsEmpty AndAlso Not ucrInputColName.IsEmpty AndAlso ((rdoMoving.Checked AndAlso Not ucrInputSum.IsEmpty AndAlso ucrNudSumOver.GetText <> "") OrElse (rdoCount.Checked AndAlso ucrNudCountOver.GetText <> "" AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty AndAlso Not ucrInputCondition.IsEmpty) OrElse (rdoSpell.Checked AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty AndAlso Not ucrInputCondition.IsEmpty) OrElse (rdoWaterBalance.Checked AndAlso ucrNudWBCapacity.GetText <> "" AndAlso ((rdoEvapValue.Checked AndAlso Not ucrInputEvaporation.IsEmpty) OrElse (rdoEvapVariable.Checked AndAlso Not ucrReceiverEvap.IsEmpty)))) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -361,6 +380,10 @@ Public Class dlgTransformClimatic
         End If
     End Sub
 
+    Private Sub lblYear_Click(sender As Object, e As EventArgs) Handles lblYear.Click
+
+    End Sub
+
     Private Sub MovingColNames()
         Select Case ucrInputSum.GetText
             Case "Sum"
@@ -420,7 +443,32 @@ Public Class dlgTransformClimatic
         TestOkEnabled()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverData.ControlContentsChanged, ucrNudSumOver.ControlContentsChanged, ucrNudCountOver.ControlContentsChanged, ucrInputSpellLower.ControlContentsChanged, ucrInputSpellUpper.ControlContentsChanged, ucrInputCondition.ControlContentsChanged, ucrInputColName.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged, ucrNudWBCapacity.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverData.ControlContentsChanged, ucrNudSumOver.ControlContentsChanged, ucrNudCountOver.ControlContentsChanged, ucrInputSpellLower.ControlContentsChanged, ucrInputSpellUpper.ControlContentsChanged, ucrInputCondition.ControlContentsChanged, ucrInputColName.ControlContentsChanged, ucrNudWBCapacity.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrPnlEvap_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlEvap.ControlContentsChanged
+        Evaporation()
+        TestOkEnabled()
+    End Sub
+
+    Private Sub Evaporation()
+        If rdoEvapValue.Checked Then
+            clsPMaxOperatorMax.AddParameter("evaporation.value", 5, iPosition:=1, bIncludeArgumentName:=False)
+        ElseIf rdoEvapVariable.Checked Then
+            clsReduceOpEvapValue.SetOperation("-")
+            clsRWaterBalanceFunction.AddParameter("replace_na", clsROperatorParameter:=clsReduceOpEvapValue, iPosition:=1, bIncludeArgumentName:=False)
+            clsPMaxOperatorMax.RemoveParameterByName("evaporation.value")
+        End If
+    End Sub
+
+    Private Sub ucrReceiverEvap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverEvap.ControlValueChanged
+        TestOkEnabled()
+        Evaporation()
+    End Sub
+
+    Private Sub ucrInputEvaporation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputEvaporation.ControlContentsChanged
+        TestOkEnabled()
+        Evaporation()
     End Sub
 End Class
