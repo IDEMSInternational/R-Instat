@@ -178,7 +178,7 @@ Public Class dlgReshapeClimaticData
         rdoYear.Enabled = False
 
         clsGridtoDataFunc.SetAssignTo(ucrNewDFName.GetText, strTempDataframe:=ucrSelectorReshapeClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        clsGridtoDataFunc.AddParameter("year", Chr(34) & "columns" & Chr(34), iPosition:=3)
+        clsGridtoDataFunc.AddParameter("month", Chr(34) & "columns" & Chr(34), iPosition:=3)
 
         clsGridtoDataFunc.SetRCommand("grid2data")
         ucrBase.clsRsyntax.SetBaseRFunction(clsGridtoDataFunc)
@@ -220,6 +220,11 @@ Public Class dlgReshapeClimaticData
         TestOkEnabled()
     End Sub
 
+    Private Sub NewDefaultName()
+        If (Not ucrNewDFName.bUserTyped) AndAlso ucrSelectorReshapeClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+            ucrNewDFName.SetPrefix(ucrSelectorReshapeClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        End If
+    End Sub
     Private Sub ucrPnlReshapeClimaticData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlReshapeClimaticData.ControlValueChanged, ucrReceiverMonth.ControlValueChanged, ucrReceiverDayofMonth.ControlValueChanged, ucrReceiverDayofYear.ControlValueChanged, ucrReceiverMonthTwo.ControlValueChanged, ucrReceiverYear.ControlValueChanged, ucrReceiverYearTwo.ControlValueChanged
         UpdateParameters()
     End Sub
@@ -246,4 +251,7 @@ Public Class dlgReshapeClimaticData
         TestOkEnabled()
     End Sub
 
+    Private Sub ucrSelectorReshapeClimaticData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorReshapeClimaticData.ControlValueChanged
+        NewDefaultName()
+    End Sub
 End Class
