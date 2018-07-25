@@ -463,6 +463,7 @@ Public Class dlgTransformClimatic
         Else
             clsGroupByYear.RemoveParameterByName("calculated_from")
             clsTransformManipulationsFunc.RemoveParameterByName("group_by_year")
+            clsRTransform.RemoveParameterByName("manipulations")
         End If
     End Sub
 
@@ -474,6 +475,7 @@ Public Class dlgTransformClimatic
         Else
             clsGroupByStation.RemoveParameterByName("calculated_from")
             clsTransformManipulationsFunc.RemoveParameterByName("group_by_station")
+            clsRTransform.RemoveParameterByName("manipulations")
         End If
     End Sub
 
