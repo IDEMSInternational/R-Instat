@@ -134,16 +134,16 @@ Public Class dlgReshapeClimaticData
         ucrPnlReshapeClimaticData.AddToLinkedControls(ucrReceiverLastDay, {rdoDay}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlReshapeClimaticData.AddParameterValuesCondition(rdoYear, "year", Chr(34) & "columns" & Chr(34))
-        ' ucrPnlReshapeClimaticData.AddParameterValuesCondition(rdoYear, "month", Chr(34) & "columns" & Chr(34), False)
-        'ucrPnlReshapeClimaticData.AddParameterValuesCondition(rdoYear, "day", Chr(34) & "columns" & Chr(34), False)
+        ucrPnlReshapeClimaticData.AddParameterValuesCondition(rdoYear, "month", Chr(34) & "columns" & Chr(34), False)
+        ucrPnlReshapeClimaticData.AddParameterValuesCondition(rdoYear, "day", Chr(34) & "columns" & Chr(34), False)
 
         ucrPnlReshapeClimaticData.AddParameterValuesCondition(rdoMonth, "month", Chr(34) & "columns" & Chr(34))
-        '        ucrPnlReshapeClimaticData.AddParameterValuesCondition(rdoMonth, "year", Chr(34) & "columns" & Chr(34), False)
-        '       ucrPnlReshapeClimaticData.AddParameterValuesCondition(rdoMonth, "day", Chr(34) & "columns" & Chr(34), False)
+        ucrPnlReshapeClimaticData.AddParameterValuesCondition(rdoMonth, "year", Chr(34) & "columns" & Chr(34), False)
+        ucrPnlReshapeClimaticData.AddParameterValuesCondition(rdoMonth, "day", Chr(34) & "columns" & Chr(34), False)
 
         ucrPnlReshapeClimaticData.AddParameterValuesCondition(rdoDay, "day", Chr(34) & "columns" & Chr(34))
-        'ucrPnlReshapeClimaticData.AddParameterValuesCondition(rdoDay, "month", Chr(34) & "columns" & Chr(34), False)
-        'ucrPnlReshapeClimaticData.AddParameterValuesCondition(rdoDay, "year", Chr(34) & "columns" & Chr(34), False)
+        ucrPnlReshapeClimaticData.AddParameterValuesCondition(rdoDay, "month", Chr(34) & "columns" & Chr(34), False)
+        ucrPnlReshapeClimaticData.AddParameterValuesCondition(rdoDay, "year", Chr(34) & "columns" & Chr(34), False)
 
         ucrReceiverStation.SetLinkedDisplayControl(lblStation)
         ucrReceiverFirstYear.SetLinkedDisplayControl(lblYearFirst)
@@ -165,7 +165,7 @@ Public Class dlgReshapeClimaticData
         ucrNewDFName.SetSaveTypeAsDataFrame()
         ucrNewDFName.SetCheckBoxText("New Data Frame Name")
         ucrNewDFName.SetDataFrameSelector(ucrSelectorReshapeClimaticData.ucrAvailableDataFrames)
-        'ucrNewDFName.SetAssignToIfUncheckedValue("last_data_frame")
+        ucrNewDFName.SetAssignToIfUncheckedValue("last_data_frame")
 
     End Sub
 
@@ -175,11 +175,10 @@ Public Class dlgReshapeClimaticData
         ucrSelectorReshapeClimaticData.Reset()
         ucrReceiverStation.SetMeAsReceiver()
         ucrNewDFName.Reset()
-        rdoYear.Enabled = True
+        rdoYear.Enabled = False
 
         clsGridtoDataFunc.SetAssignTo(ucrNewDFName.GetText, strTempDataframe:=ucrSelectorReshapeClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         clsGridtoDataFunc.AddParameter("year", Chr(34) & "columns" & Chr(34), iPosition:=3)
-        UpdateParameters()
 
         clsGridtoDataFunc.SetRCommand("grid2data")
         ucrBase.clsRsyntax.SetBaseRFunction(clsGridtoDataFunc)
