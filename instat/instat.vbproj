@@ -257,6 +257,12 @@
     <Compile Include="dlgClimSoft.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCompare.Designer.vb">
+      <DependentUpon>dlgCompare.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCompare.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCompareColumns.Designer.vb">
       <DependentUpon>dlgCompareColumns.vb</DependentUpon>
     </Compile>
@@ -357,6 +363,12 @@
       <DependentUpon>dlgImportShapeFiles.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgImportShapeFiles.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgExportToCMSAF.Designer.vb">
+      <DependentUpon>dlgExportToCMSAF.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportToCMSAF.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgMergeAdditionalData.Designer.vb">
@@ -2479,6 +2491,9 @@
     <EmbeddedResource Include="dlgCombineText.sw-KE.resx">
       <DependentUpon>dlgCombineText.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCompare.resx">
+      <DependentUpon>dlgCompare.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgCompareColumns.resx">
       <DependentUpon>dlgCompareColumns.vb</DependentUpon>
     </EmbeddedResource>
@@ -2627,6 +2642,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgImportShapeFiles.resx">
       <DependentUpon>dlgImportShapeFiles.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportToCMSAF.resx">
+      <DependentUpon>dlgExportToCMSAF.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgInfill.sw-KE.resx">
       <DependentUpon>dlgInfill.vb</DependentUpon>
