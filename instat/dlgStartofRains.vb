@@ -374,7 +374,6 @@ Public Class dlgStartofRains
         clsSORStart.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
         clsSORStart.AddParameter("function_exp", clsRFunctionParameter:=clsSORStartIfelse, iPosition:=1)
         clsSORStart.AddParameter("save", 2, iPosition:=4)
-        clsSORStart.AddParameter("result_name", Chr(34) & strStartDoy & Chr(34), iPosition:=3)
         clsSORStart.SetAssignTo("start_of_rains_start")
 
         clsSORStartSummary.SetDefaults()
@@ -627,6 +626,7 @@ Public Class dlgStartofRains
 
         ucrNudThreshold.AddAdditionalCodeParameterPair(clsRainCombineOperator, New RParameter("rain_threshold", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrNudDPRainPeriod.AddAdditionalCodeParameterPair(clsDPOverallIntervalFunctionOperatorRight, ucrNudDPRainPeriod.GetParameter(), iAdditionalPairNo:=1)
+        ucrInputNewDoyColumnName.AddAdditionalCodeParameterPair(clsSORStart, New RParameter("result_name", 3), iAdditionalPairNo:=1)
 
         ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
         ucrChkAsDoy.SetRCode(clsListSubCalc, bReset)
