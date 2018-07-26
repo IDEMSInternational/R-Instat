@@ -87,14 +87,14 @@ Public Class dlgAnonymiseIDColumn
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverIDColumn.IsEmpty AndAlso Not ucrInputTextSalt.IsEmpty AndAlso ucrSaveAnonymisedColumn.IsComplete Then
+        If Not ucrReceiverIDColumn.IsEmpty AndAlso ucrSaveAnonymisedColumn.IsComplete Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub ucrReceiverIDColumn_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverIDColumn.ControlContentsChanged, ucrInputTextSalt.ControlContentsChanged, ucrSaveAnonymisedColumn.ControlContentsChanged
+    Private Sub ucrReceiverIDColumn_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverIDColumn.ControlContentsChanged, ucrSaveAnonymisedColumn.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
