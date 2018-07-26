@@ -23,7 +23,7 @@ Public Class dlgImportShapeFiles
     Private bFromLibrary As Boolean = False
     Private strFilePath As String = ""
     Private strLibraryPath As String = Path.Combine(frmMain.strStaticPath, "Library", "Climatic", "Shapefiles/")
-    Private clsReadOGRFunction, clsMergeFunction, clsTidyFunction, clsAsDataFrameFunction As New RFunction
+    Private clsReadShapeFiles As New RFunction
 
     Private Sub dlgImportShapeFiles_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -50,33 +50,15 @@ Public Class dlgImportShapeFiles
     End Sub
 
     Private Sub SetDefaults()
-        clsReadOGRFunction = New RFunction
-        clsMergeFunction = New RFunction
-        clsTidyFunction = New RFunction
-        clsAsDataFrameFunction = New RFunction
+        clsReadShapeFiles = New RFunction
 
         ucrSaveDataframeName.Reset()
 
-        clsReadOGRFunction.SetPackageName("rgdal")
-        clsReadOGRFunction.SetRCommand("readOGR")
+        clsReadShapeFiles.SetPackageName("sf")
+        clsReadShapeFiles.SetRCommand("st_read")
+        clsReadShapeFiles.AddParameter("quiet", "TRUE", iPosition:=1)
 
-        clsMergeFunction.SetRCommand("merge")
-        clsMergeFunction.AddParameter("tidy", clsRFunctionParameter:=clsTidyFunction, iPosition:=0, bIncludeArgumentName:=False)
-        clsMergeFunction.AddParameter("as.data.frame", clsRFunctionParameter:=clsAsDataFrameFunction, iPosition:=1, bIncludeArgumentName:=False)
-
-
-        clsMergeFunction.AddParameter("by.x", Chr(34) & "id" & Chr(34), iPosition:=2)
-        clsMergeFunction.AddParameter("by.y", strParameterValue:=0, iPosition:=3)
-
-        clsTidyFunction.SetPackageName("broom")
-        clsTidyFunction.SetRCommand("tidy")
-        clsTidyFunction.AddParameter("x", clsRFunctionParameter:=clsReadOGRFunction)
-
-
-        clsAsDataFrameFunction.SetRCommand("as.data.frame")
-        clsAsDataFrameFunction.AddParameter("x", clsRFunctionParameter:=clsReadOGRFunction)
-
-        ucrBase.clsRsyntax.SetBaseRFunction(clsMergeFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsReadShapeFiles)
     End Sub
 
     Public Sub GetFileFromOpenDialog()
@@ -105,7 +87,7 @@ Public Class dlgImportShapeFiles
                     ucrInputFilePath.SetName(Replace(strFilePath, "\", "/"))
                     If strFileExt = ".shp" Then
                         ucrSaveDataframeName.SetName(frmMain.clsRLink.MakeValidText(strFileName))
-                        clsReadOGRFunction.AddParameter("dsn", Chr(34) & Replace(strFilePath, "\", "/") & Chr(34))
+                        clsReadShapeFiles.AddParameter("dsn", Chr(34) & Replace(strFilePath, "\", "/") & Chr(34))
                     End If
                 End If
             End If
@@ -113,7 +95,7 @@ Public Class dlgImportShapeFiles
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrSaveDataframeName.SetRCode(clsMergeFunction, bReset)
+        ucrSaveDataframeName.SetRCode(clsReadShapeFiles, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
