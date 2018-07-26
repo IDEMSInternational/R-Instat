@@ -1205,4 +1205,20 @@ Public Class ucrCalculator
     Private Sub cmdNA_Click(sender As Object, e As EventArgs) Handles cmdNA.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("NA")
     End Sub
+
+    Private Sub cmdWhich_Click(sender As Object, e As EventArgs) Handles cmdWhich.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("which(x= , arr.ind = FALSE, useNames = TRUE)", 35)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("which()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdIn_Click(sender As Object, e As EventArgs) Handles cmdIn.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("%in%")
+    End Sub
+
+    Private Sub cmdDoubleSqrBrackets_Click(sender As Object, e As EventArgs) Handles cmdDoubleSqrBrackets.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("[[]]", 2)
+    End Sub
 End Class
