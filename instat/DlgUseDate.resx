@@ -159,6 +159,303 @@
   <data name="s.ColumnCount" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
+  <data name="&gt;&gt;lblShiftYear.Name" xml:space="preserve">
+    <value>lblShiftYear</value>
+  </data>
+  <data name="&gt;&gt;lblShiftYear.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblShiftYear.Parent" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="&gt;&gt;lblShiftYear.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftPentadAbbr.Name" xml:space="preserve">
+    <value>ucrChkShiftPentadAbbr</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftPentadAbbr.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftPentadAbbr.Parent" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftPentadAbbr.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftYearNum.Name" xml:space="preserve">
+    <value>ucrChkShiftYearNum</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftYearNum.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftYearNum.Parent" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftYearNum.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftDekadAbbr.Name" xml:space="preserve">
+    <value>ucrChkShiftDekadAbbr</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftDekadAbbr.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftDekadAbbr.Parent" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftDekadAbbr.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftMonthAbbr.Name" xml:space="preserve">
+    <value>ucrChkShiftMonthAbbr</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftMonthAbbr.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftMonthAbbr.Parent" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftMonthAbbr.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;lblShiftAbbr.Name" xml:space="preserve">
+    <value>lblShiftAbbr</value>
+  </data>
+  <data name="&gt;&gt;lblShiftAbbr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblShiftAbbr.Parent" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="&gt;&gt;lblShiftAbbr.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftMonthName.Name" xml:space="preserve">
+    <value>ucrChkShiftMonthName</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftMonthName.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftMonthName.Parent" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftMonthName.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftDekadNum.Name" xml:space="preserve">
+    <value>ucrChkShiftDekadNum</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftDekadNum.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftDekadNum.Parent" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftDekadNum.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;lblShift.Name" xml:space="preserve">
+    <value>lblShift</value>
+  </data>
+  <data name="&gt;&gt;lblShift.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblShift.Parent" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="&gt;&gt;lblShift.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;lblShiftMonth.Name" xml:space="preserve">
+    <value>lblShiftMonth</value>
+  </data>
+  <data name="&gt;&gt;lblShiftMonth.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblShiftMonth.Parent" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="&gt;&gt;lblShiftMonth.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;lblShiftDekad.Name" xml:space="preserve">
+    <value>lblShiftDekad</value>
+  </data>
+  <data name="&gt;&gt;lblShiftDekad.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblShiftDekad.Parent" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="&gt;&gt;lblShiftDekad.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftMonthNum.Name" xml:space="preserve">
+    <value>ucrChkShiftMonthNum</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftMonthNum.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftMonthNum.Parent" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftMonthNum.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;lblShiftNumeric.Name" xml:space="preserve">
+    <value>lblShiftNumeric</value>
+  </data>
+  <data name="&gt;&gt;lblShiftNumeric.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblShiftNumeric.Parent" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="&gt;&gt;lblShiftNumeric.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;lblShiftDayInYear366.Name" xml:space="preserve">
+    <value>lblShiftDayInYear366</value>
+  </data>
+  <data name="&gt;&gt;lblShiftDayInYear366.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblShiftDayInYear366.Parent" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="&gt;&gt;lblShiftDayInYear366.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftPentadNum.Name" xml:space="preserve">
+    <value>ucrChkShiftPentadNum</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftPentadNum.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftPentadNum.Parent" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftPentadNum.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftDayInYearNum366.Name" xml:space="preserve">
+    <value>ucrChkShiftDayInYearNum366</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftDayInYearNum366.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftDayInYearNum366.Parent" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftDayInYearNum366.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;lblShiftPentad.Name" xml:space="preserve">
+    <value>lblShiftPentad</value>
+  </data>
+  <data name="&gt;&gt;lblShiftPentad.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblShiftPentad.Parent" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="&gt;&gt;lblShiftPentad.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;lblDayInYear.Name" xml:space="preserve">
+    <value>lblDayInYear</value>
+  </data>
+  <data name="&gt;&gt;lblDayInYear.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblDayInYear.Parent" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="&gt;&gt;lblDayInYear.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDayInYearNum.Name" xml:space="preserve">
+    <value>ucrChkDayInYearNum</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDayInYearNum.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDayInYearNum.Parent" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDayInYearNum.ZOrder" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;lblShiftQuarter.Name" xml:space="preserve">
+    <value>lblShiftQuarter</value>
+  </data>
+  <data name="&gt;&gt;lblShiftQuarter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblShiftQuarter.Parent" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="&gt;&gt;lblShiftQuarter.ZOrder" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftQuarterNum.Name" xml:space="preserve">
+    <value>ucrChkShiftQuarterNum</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftQuarterNum.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftQuarterNum.Parent" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftQuarterNum.ZOrder" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftQuarterAbbr.Name" xml:space="preserve">
+    <value>ucrChkShiftQuarterAbbr</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftQuarterAbbr.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftQuarterAbbr.Parent" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShiftQuarterAbbr.ZOrder" xml:space="preserve">
+    <value>21</value>
+  </data>
+  <data name="s.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 41</value>
+  </data>
+  <data name="s.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="s.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="s.RowCount" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="s.Size" type="System.Drawing.Size, System.Drawing">
+    <value>477, 133</value>
+  </data>
+  <data name="s.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;s.Name" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="&gt;&gt;s.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;s.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
+  </data>
+  <data name="&gt;&gt;s.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="s.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lblShiftYear" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftPentadAbbr" Row="2" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftYearNum" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftDekadAbbr" Row="2" RowSpan="1" Column="7" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftMonthAbbr" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblShiftAbbr" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftMonthName" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftDekadNum" Row="1" RowSpan="1" Column="7" ColumnSpan="1" /&gt;&lt;Control Name="lblShift" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblShiftMonth" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblShiftDekad" Row="0" RowSpan="1" Column="7" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftMonthNum" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblShiftNumeric" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblShiftDayInYear366" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftPentadNum" Row="1" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftDayInYearNum366" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="lblShiftPentad" Row="0" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="lblDayInYear" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkDayInYearNum" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="lblShiftQuarter" Row="0" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftQuarterNum" Row="1" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftQuarterAbbr" Row="2" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Absolute,47,Absolute,54,Absolute,63,Absolute,64,Absolute,58,Absolute,59,Absolute,62" /&gt;&lt;Rows Styles="AutoSize,0,Absolute,31,Absolute,31,Absolute,31" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
   <data name="lblShiftYear.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>None</value>
   </data>
@@ -814,39 +1111,6 @@ Year (365)</value>
   <data name="&gt;&gt;ucrChkShiftQuarterAbbr.ZOrder" xml:space="preserve">
     <value>21</value>
   </data>
-  <data name="s.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 41</value>
-  </data>
-  <data name="s.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="s.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="s.RowCount" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="s.Size" type="System.Drawing.Size, System.Drawing">
-    <value>477, 133</value>
-  </data>
-  <data name="s.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;s.Name" xml:space="preserve">
-    <value>s</value>
-  </data>
-  <data name="&gt;&gt;s.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;s.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
-  </data>
-  <data name="&gt;&gt;s.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="s.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lblShiftYear" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftPentadAbbr" Row="2" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftYearNum" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftDekadAbbr" Row="2" RowSpan="1" Column="7" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftMonthAbbr" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblShiftAbbr" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftMonthName" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftDekadNum" Row="1" RowSpan="1" Column="7" ColumnSpan="1" /&gt;&lt;Control Name="lblShift" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblShiftMonth" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblShiftDekad" Row="0" RowSpan="1" Column="7" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftMonthNum" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblShiftNumeric" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblShiftDayInYear366" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftPentadNum" Row="1" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftDayInYearNum366" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="lblShiftPentad" Row="0" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="lblDayInYear" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkDayInYearNum" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="lblShiftQuarter" Row="0" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftQuarterNum" Row="1" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkShiftQuarterAbbr" Row="2" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Absolute,47,Absolute,54,Absolute,63,Absolute,64,Absolute,58,Absolute,59,Absolute,62" /&gt;&lt;Rows Styles="AutoSize,0,Absolute,31,Absolute,31,Absolute,31" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
   <data name="ucrChkDayInMonthNum.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>None</value>
   </data>
@@ -912,6 +1176,207 @@ Year (365)</value>
   </data>
   <data name="tblLayoutOthers.ColumnCount" type="System.Int32, mscorlib">
     <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeekName.Name" xml:space="preserve">
+    <value>ucrChkWeekName</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeekName.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeekName.Parent" xml:space="preserve">
+    <value>tblLayoutOthers</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeekName.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblDayInMonth.Name" xml:space="preserve">
+    <value>lblDayInMonth</value>
+  </data>
+  <data name="&gt;&gt;lblDayInMonth.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblDayInMonth.Parent" xml:space="preserve">
+    <value>tblLayoutOthers</value>
+  </data>
+  <data name="&gt;&gt;lblDayInMonth.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeekAbbr.Name" xml:space="preserve">
+    <value>ucrChkWeekAbbr</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeekAbbr.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeekAbbr.Parent" xml:space="preserve">
+    <value>tblLayoutOthers</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeekAbbr.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeekdayName.Name" xml:space="preserve">
+    <value>ucrChkWeekdayName</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeekdayName.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeekdayName.Parent" xml:space="preserve">
+    <value>tblLayoutOthers</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeekdayName.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;lblLeapYear.Name" xml:space="preserve">
+    <value>lblLeapYear</value>
+  </data>
+  <data name="&gt;&gt;lblLeapYear.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblLeapYear.Parent" xml:space="preserve">
+    <value>tblLayoutOthers</value>
+  </data>
+  <data name="&gt;&gt;lblLeapYear.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeekdayAbbr.Name" xml:space="preserve">
+    <value>ucrChkWeekdayAbbr</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeekdayAbbr.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeekdayAbbr.Parent" xml:space="preserve">
+    <value>tblLayoutOthers</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeekdayAbbr.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeekNum.Name" xml:space="preserve">
+    <value>ucrChkWeekNum</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeekNum.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeekNum.Parent" xml:space="preserve">
+    <value>tblLayoutOthers</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeekNum.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;lblAbbr.Name" xml:space="preserve">
+    <value>lblAbbr</value>
+  </data>
+  <data name="&gt;&gt;lblAbbr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblAbbr.Parent" xml:space="preserve">
+    <value>tblLayoutOthers</value>
+  </data>
+  <data name="&gt;&gt;lblAbbr.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;lblName.Name" xml:space="preserve">
+    <value>lblName</value>
+  </data>
+  <data name="&gt;&gt;lblName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblName.Parent" xml:space="preserve">
+    <value>tblLayoutOthers</value>
+  </data>
+  <data name="&gt;&gt;lblName.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeekdayNum.Name" xml:space="preserve">
+    <value>ucrChkWeekdayNum</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeekdayNum.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeekdayNum.Parent" xml:space="preserve">
+    <value>tblLayoutOthers</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeekdayNum.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;lblWeekDay.Name" xml:space="preserve">
+    <value>lblWeekDay</value>
+  </data>
+  <data name="&gt;&gt;lblWeekDay.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblWeekDay.Parent" xml:space="preserve">
+    <value>tblLayoutOthers</value>
+  </data>
+  <data name="&gt;&gt;lblWeekDay.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;lblWeek.Name" xml:space="preserve">
+    <value>lblWeek</value>
+  </data>
+  <data name="&gt;&gt;lblWeek.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblWeek.Parent" xml:space="preserve">
+    <value>tblLayoutOthers</value>
+  </data>
+  <data name="&gt;&gt;lblWeek.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;lblNumeric.Name" xml:space="preserve">
+    <value>lblNumeric</value>
+  </data>
+  <data name="&gt;&gt;lblNumeric.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblNumeric.Parent" xml:space="preserve">
+    <value>tblLayoutOthers</value>
+  </data>
+  <data name="&gt;&gt;lblNumeric.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLeapYearNum.Name" xml:space="preserve">
+    <value>ucrChkLeapYearNum</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLeapYearNum.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLeapYearNum.Parent" xml:space="preserve">
+    <value>tblLayoutOthers</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLeapYearNum.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="tblLayoutOthers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 17</value>
+  </data>
+  <data name="tblLayoutOthers.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="tblLayoutOthers.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="tblLayoutOthers.RowCount" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="tblLayoutOthers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>354, 131</value>
+  </data>
+  <data name="tblLayoutOthers.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;tblLayoutOthers.Name" xml:space="preserve">
+    <value>tblLayoutOthers</value>
+  </data>
+  <data name="&gt;&gt;tblLayoutOthers.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tblLayoutOthers.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
+  </data>
+  <data name="&gt;&gt;tblLayoutOthers.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tblLayoutOthers.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="ucrChkWeekName" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblDayInMonth" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkDayInMonthNum" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkWeekAbbr" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkWeekdayName" Row="3" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="lblLeapYear" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkWeekdayAbbr" Row="2" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkWeekNum" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblAbbr" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblName" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkWeekdayNum" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="lblWeekDay" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="lblWeek" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblNumeric" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkLeapYearNum" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Absolute,71,Absolute,71,Absolute,72,Absolute,76" /&gt;&lt;Rows Styles="AutoSize,0,Absolute,31,Absolute,31,Absolute,31" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="ucrChkWeekName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>None</value>
@@ -1335,39 +1800,6 @@ Month</value>
   <data name="&gt;&gt;ucrChkLeapYearNum.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
-  <data name="tblLayoutOthers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 17</value>
-  </data>
-  <data name="tblLayoutOthers.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="tblLayoutOthers.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="tblLayoutOthers.RowCount" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="tblLayoutOthers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>354, 131</value>
-  </data>
-  <data name="tblLayoutOthers.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;tblLayoutOthers.Name" xml:space="preserve">
-    <value>tblLayoutOthers</value>
-  </data>
-  <data name="&gt;&gt;tblLayoutOthers.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tblLayoutOthers.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
-  </data>
-  <data name="&gt;&gt;tblLayoutOthers.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tblLayoutOthers.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="ucrChkWeekName" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblDayInMonth" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkDayInMonthNum" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkWeekAbbr" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkWeekdayName" Row="3" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="lblLeapYear" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkWeekdayAbbr" Row="2" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkWeekNum" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblAbbr" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblName" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkWeekdayNum" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="lblWeekDay" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="lblWeek" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblNumeric" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ucrChkLeapYearNum" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Absolute,71,Absolute,71,Absolute,72,Absolute,76" /&gt;&lt;Rows Styles="AutoSize,0,Absolute,31,Absolute,31,Absolute,31" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
   <data name="ucrInputComboBoxStartingMonth.Location" type="System.Drawing.Point, System.Drawing">
     <value>85, 15</value>
   </data>
@@ -1399,10 +1831,10 @@ Month</value>
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>505, 608</value>
+    <value>505, 612</value>
   </data>
   <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 383</value>
+    <value>10, 390</value>
   </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
     <value>486, 158</value>
@@ -1423,7 +1855,7 @@ Month</value>
     <value>0</value>
   </data>
   <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 204</value>
+    <value>10, 200</value>
   </data>
   <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>486, 187</value>
@@ -1444,7 +1876,7 @@ Month</value>
     <value>1</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 549</value>
+    <value>15, 558</value>
   </data>
   <data name="ucrBase.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
