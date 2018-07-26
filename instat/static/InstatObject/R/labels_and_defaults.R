@@ -60,6 +60,7 @@ overall_label="[Overall]"
 model_label="model"
 graph_label="graph"
 table_label="table"
+surv_label="surv"
 
 #link labels
 keyed_link_label="keyed_link"
