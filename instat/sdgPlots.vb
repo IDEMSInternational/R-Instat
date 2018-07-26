@@ -89,7 +89,7 @@ Public Class sdgPlots
         ucrChkIncludeFacets.AddParameterPresentCondition(False, "facets", False)
 
         ucrChkMargin.SetText("Margins")
-        ucrChkMargin.SetParameter(New RParameter("margins"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=False)
+        ucrChkMargin.SetParameter(New RParameter("margins", 2), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=False)
         ucrChkMargin.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkMargin.SetRDefault("FALSE")
 
@@ -99,18 +99,18 @@ Public Class sdgPlots
         'ucrChkNoOfRowsOrColumns.AddParameterPresentCondition(False, {"ncol", "nrow"}, False)
         ucrChkNoOfRowsOrColumns.SetText("Fixed Number of Rows")
 
-        ucrNudNumberofRows.SetParameter(New RParameter("nrow"))
+        ucrNudNumberofRows.SetParameter(New RParameter("nrow", 6))
         ucrNudNumberofRows.bAddRemoveParameter = False
 
         ucrChkFreeScalesX.SetText("Free Scales X")
-        ucrChkFreeScalesX.SetParameter(New RParameter("scales"))
+        ucrChkFreeScalesX.SetParameter(New RParameter("scales", 4))
         ucrChkFreeScalesX.AddParameterValuesCondition(True, "scales", {Chr(34) & "free" & Chr(34), Chr(34) & "free_x" & Chr(34)})
         ucrChkFreeScalesX.AddParameterValuesCondition(False, "scales", {Chr(34) & "free" & Chr(34), Chr(34) & "free_x" & Chr(34)}, False)
         ucrChkFreeScalesX.bChangeParameterValue = False
         ucrChkFreeScalesX.bAddRemoveParameter = False
 
         ucrChkFreeScalesY.SetText("Free Scales Y")
-        ucrChkFreeScalesY.SetParameter(New RParameter("scales"))
+        ucrChkFreeScalesY.SetParameter(New RParameter("scales", 5))
         ucrChkFreeScalesY.AddParameterValuesCondition(True, "scales", {Chr(34) & "free" & Chr(34), Chr(34) & "free_y" & Chr(34)})
         ucrChkFreeScalesY.AddParameterValuesCondition(False, "scales", {Chr(34) & "free" & Chr(34), Chr(34) & "free_y" & Chr(34)}, False)
         ucrChkFreeScalesY.bChangeParameterValue = False
@@ -119,12 +119,12 @@ Public Class sdgPlots
         'TODO space can be either: "fixed", "free", "free_x", "free_y"
         '     currently only implemented "free" or "fixed"
         ucrChkFreeSpace.SetText("Free Space")
-        ucrChkFreeSpace.SetParameter(New RParameter("space"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=False, strNewValueIfChecked:=Chr(34) & "free" & Chr(34), strNewValueIfUnchecked:=Chr(34) & "fixed" & Chr(34))
+        ucrChkFreeSpace.SetParameter(New RParameter("space", 3), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=False, strNewValueIfChecked:=Chr(34) & "free" & Chr(34), strNewValueIfUnchecked:=Chr(34) & "fixed" & Chr(34))
         ucrChkFreeSpace.SetRDefault(Chr(34) & "fixed" & Chr(34))
         ucrChkFreeSpace.AddToLinkedControls(ucrChkNoOfRowsOrColumns, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkLabeler.SetText("Include Variable Name in Labels")
-        ucrChkLabeler.SetParameter(New RParameter("labeller"))
+        ucrChkLabeler.SetParameter(New RParameter("labeller", 7))
         ucrChkLabeler.AddParameterValuesCondition(True, "labeller", "label_both")
         ucrChkLabeler.AddParameterValuesCondition(False, "labeller", "label_value", False)
         ucrChkLabeler.SetValuesCheckedAndUnchecked("label_both", "label_value")
@@ -133,7 +133,7 @@ Public Class sdgPlots
 
         'Not setting parameter to write because of complex conditions for adding/removing this parameter
         'Conditions in place for reading function
-        ucrPnlHorizonatalVertical.SetParameter(New RParameter("dir"))
+        ucrPnlHorizonatalVertical.SetParameter(New RParameter("dir", 1))
         ucrPnlHorizonatalVertical.bChangeParameterValue = False
         ucrPnlHorizonatalVertical.AddRadioButton(rdoVertical)
         ucrPnlHorizonatalVertical.AddRadioButton(rdoHorizontal)
@@ -257,7 +257,7 @@ Public Class sdgPlots
             clsFacetVariablesOperator = New ROperator("~")
         End If
         clsFacetVariablesOperator.bForceIncludeOperation = True
-        clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetVariablesOperator)
+        clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetVariablesOperator, iPosition:=0)
         If clsNewLabsFunction IsNot Nothing Then
             clsLabsFunction = clsNewLabsFunction
         Else
