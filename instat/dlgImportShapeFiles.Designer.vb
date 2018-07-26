@@ -25,15 +25,15 @@ Partial Class dlgImportShapeFiles
         Me.lblFile = New System.Windows.Forms.Label()
         Me.cmdBrowse = New System.Windows.Forms.Button()
         Me.cmdLibrary = New System.Windows.Forms.Button()
+        Me.ucrSaveDataframeName = New instat.ucrSave()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
-        Me.ucrSaveDataframeName = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'lblFile
         '
         Me.lblFile.AutoSize = True
-        Me.lblFile.Location = New System.Drawing.Point(18, 32)
+        Me.lblFile.Location = New System.Drawing.Point(37, 32)
         Me.lblFile.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblFile.Name = "lblFile"
         Me.lblFile.Size = New System.Drawing.Size(38, 20)
@@ -60,12 +60,20 @@ Partial Class dlgImportShapeFiles
         Me.cmdLibrary.Text = "From Library"
         Me.cmdLibrary.UseVisualStyleBackColor = True
         '
+        'ucrSaveDataframeName
+        '
+        Me.ucrSaveDataframeName.Location = New System.Drawing.Point(37, 92)
+        Me.ucrSaveDataframeName.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrSaveDataframeName.Name = "ucrSaveDataframeName"
+        Me.ucrSaveDataframeName.Size = New System.Drawing.Size(405, 37)
+        Me.ucrSaveDataframeName.TabIndex = 4
+        '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(6, 238)
+        Me.ucrBase.Location = New System.Drawing.Point(22, 154)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(615, 80)
+        Me.ucrBase.Size = New System.Drawing.Size(596, 80)
         Me.ucrBase.TabIndex = 5
         '
         'ucrInputFilePath
@@ -73,25 +81,17 @@ Partial Class dlgImportShapeFiles
         Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
         Me.ucrInputFilePath.IsMultiline = False
         Me.ucrInputFilePath.IsReadOnly = False
-        Me.ucrInputFilePath.Location = New System.Drawing.Point(66, 28)
+        Me.ucrInputFilePath.Location = New System.Drawing.Point(81, 28)
         Me.ucrInputFilePath.Margin = New System.Windows.Forms.Padding(14, 18, 14, 18)
         Me.ucrInputFilePath.Name = "ucrInputFilePath"
-        Me.ucrInputFilePath.Size = New System.Drawing.Size(291, 32)
+        Me.ucrInputFilePath.Size = New System.Drawing.Size(395, 35)
         Me.ucrInputFilePath.TabIndex = 1
-        '
-        'ucrSaveDataframeName
-        '
-        Me.ucrSaveDataframeName.Location = New System.Drawing.Point(22, 185)
-        Me.ucrSaveDataframeName.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.ucrSaveDataframeName.Name = "ucrSaveDataframeName"
-        Me.ucrSaveDataframeName.Size = New System.Drawing.Size(405, 37)
-        Me.ucrSaveDataframeName.TabIndex = 4
         '
         'dlgImportShapeFiles
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(658, 340)
+        Me.ClientSize = New System.Drawing.Size(634, 254)
         Me.Controls.Add(Me.ucrSaveDataframeName)
         Me.Controls.Add(Me.cmdLibrary)
         Me.Controls.Add(Me.ucrBase)
