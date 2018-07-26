@@ -373,15 +373,13 @@ Public Class dlgStartofRains
         clsSORStart.SetRCommand("instat_calculation$new")
         clsSORStart.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
         clsSORStart.AddParameter("function_exp", clsRFunctionParameter:=clsSORStartIfelse, iPosition:=1)
-        clsSORStart.AddParameter("result_name", Chr(34) & strStartDoy & Chr(34), iPosition:=3)
         clsSORStart.AddParameter("save", 2, iPosition:=4)
+        clsSORStart.AddParameter("result_name", Chr(34) & strStartDoy & Chr(34), iPosition:=3)
         clsSORStart.SetAssignTo("start_of_rains_start")
 
         clsSORStartSummary.SetDefaults()
-        clsSORStartSummary.clsSORFilterOperator.AddParameter("left", strParameterValue:=strStartDoy, bIncludeArgumentName:=False, iPosition:=0)
 
         clsSORStatusSummary.SetDefaults()
-        clsSORStatusSummary.clsSORFilterOperator.AddParameter("left", strParameterValue:=strStartDoy, bIncludeArgumentName:=False, iPosition:=0)
         clsSORStatusSummary.clsIsNaIfelse.bToScriptAsRString = True
 
         clsSORStatus.SetRCommand("instat_calculation$new")
@@ -395,7 +393,7 @@ Public Class dlgStartofRains
         clsSORStartIfelse.bToScriptAsRString = True
         clsSORStartIfelse.AddParameter("is.na", clsRFunctionParameter:=clsSORIsNA, bIncludeArgumentName:=False, iPosition:=0)
         clsSORStartIfelse.AddParameter("NA", "NA", bIncludeArgumentName:=False, iPosition:=1)
-        clsSORStartIfelse.AddParameter("start_doy", strParameterValue:=strStartDoy, bIncludeArgumentName:=False, iPosition:=2)
+
 
         clsSORIsNA.SetRCommand("is.na")
         clsSORIsNA.AddParameter("ifelse", clsRFunctionParameter:=clsSORStartSummary.clsIsNaIfelse, bIncludeArgumentName:=False)
@@ -843,6 +841,12 @@ Public Class dlgStartofRains
         Else
             clsListSubCalc.RemoveParameterByName("sub1")
         End If
+    End Sub
+
+    Private Sub ucrInputNewDoyColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputNewDoyColumnName.ControlValueChanged
+        clsSORStartIfelse.AddParameter("start_doy", strParameterValue:=ucrInputNewDoyColumnName.GetText, bIncludeArgumentName:=False, iPosition:=2)
+        clsSORStartSummary.clsSORFilterOperator.AddParameter("left", strParameterValue:=ucrInputNewDoyColumnName.GetText, bIncludeArgumentName:=False, iPosition:=0)
+        clsSORStatusSummary.clsSORFilterOperator.AddParameter("left", strParameterValue:=ucrInputNewDoyColumnName.GetText, bIncludeArgumentName:=False, iPosition:=0)
     End Sub
 
     Private Sub ucrChkStatus_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStatus.ControlValueChanged
