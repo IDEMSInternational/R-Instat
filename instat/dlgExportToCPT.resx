@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblSaveDataTo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblSaveDataTo.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 408</value>
@@ -139,6 +143,9 @@
   </data>
   <data name="&gt;&gt;lblSaveDataTo.ZOrder" xml:space="preserve">
     <value>16</value>
+  </data>
+  <data name="cmdChooseFile.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cmdChooseFile.Location" type="System.Drawing.Point, System.Drawing">
     <value>342, 465</value>
@@ -164,6 +171,9 @@
   <data name="&gt;&gt;cmdChooseFile.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
+  <data name="lblLatitude.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblLatitude.Location" type="System.Drawing.Point, System.Drawing">
     <value>294, 273</value>
   </data>
@@ -187,6 +197,9 @@
   </data>
   <data name="&gt;&gt;lblLatitude.ZOrder" xml:space="preserve">
     <value>12</value>
+  </data>
+  <data name="lblLongitude.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblLongitude.Location" type="System.Drawing.Point, System.Drawing">
     <value>295, 336</value>
@@ -212,6 +225,9 @@
   <data name="&gt;&gt;lblLongitude.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
+  <data name="lblStationTwoDF.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblStationTwoDF.Location" type="System.Drawing.Point, System.Drawing">
     <value>295, 395</value>
   </data>
@@ -235,6 +251,9 @@
   </data>
   <data name="&gt;&gt;lblStationTwoDF.ZOrder" xml:space="preserve">
     <value>9</value>
+  </data>
+  <data name="lblElement.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblElement.Location" type="System.Drawing.Point, System.Drawing">
     <value>295, 179</value>
@@ -260,6 +279,9 @@
   <data name="&gt;&gt;lblElement.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
+  <data name="lblYear.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblYear.Location" type="System.Drawing.Point, System.Drawing">
     <value>295, 56</value>
   </data>
@@ -283,6 +305,9 @@
   </data>
   <data name="&gt;&gt;lblYear.ZOrder" xml:space="preserve">
     <value>19</value>
+  </data>
+  <data name="lblStationOneDF.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblStationOneDF.Location" type="System.Drawing.Point, System.Drawing">
     <value>295, 120</value>
@@ -308,6 +333,9 @@
   <data name="&gt;&gt;lblStationOneDF.ZOrder" xml:space="preserve">
     <value>20</value>
   </data>
+  <data name="lblMultStations.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblMultStations.Location" type="System.Drawing.Point, System.Drawing">
     <value>294, 120</value>
   </data>
@@ -332,105 +360,41 @@
   <data name="&gt;&gt;lblMultStations.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>456, 549</value>
-  </data>
-  <data name="lblSaveFile.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblSaveFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 470</value>
-  </data>
-  <data name="lblSaveFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 13</value>
-  </data>
-  <data name="lblSaveFile.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
-  </data>
-  <data name="lblSaveFile.Text" xml:space="preserve">
-    <value>Save File As:</value>
-  </data>
-  <data name="&gt;&gt;lblSaveFile.Name" xml:space="preserve">
-    <value>lblSaveFile</value>
-  </data>
-  <data name="&gt;&gt;lblSaveFile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSaveFile.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblSaveFile.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lblLine.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblLine.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 244</value>
-  </data>
-  <data name="lblLine.Size" type="System.Drawing.Size, System.Drawing">
-    <value>421, 13</value>
-  </data>
-  <data name="lblLine.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
-  </data>
-  <data name="lblLine.Text" xml:space="preserve">
-    <value>_____________________________________________________________________</value>
-  </data>
-  <data name="&gt;&gt;lblLine.Name" xml:space="preserve">
-    <value>lblLine</value>
-  </data>
-  <data name="&gt;&gt;lblLine.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblLine.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblLine.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="rdoTwoDFWide.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+  <data name="rdoOneDF.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
   </data>
-  <data name="rdoTwoDFWide.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+  <data name="rdoOneDF.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
-  <data name="rdoTwoDFWide.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="rdoOneDF.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="rdoTwoDFWide.Location" type="System.Drawing.Point, System.Drawing">
-    <value>298, 8</value>
+  <data name="rdoOneDF.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 8</value>
   </data>
-  <data name="rdoTwoDFWide.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="rdoOneDF.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 27</value>
   </data>
-  <data name="rdoTwoDFWide.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
+  <data name="rdoOneDF.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
   </data>
-  <data name="rdoTwoDFWide.Text" xml:space="preserve">
-    <value>Two Data Frames Wide</value>
+  <data name="rdoOneDF.Text" xml:space="preserve">
+    <value>One Data Frame</value>
   </data>
-  <data name="rdoTwoDFWide.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="rdoOneDF.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
-  <data name="&gt;&gt;rdoTwoDFWide.Name" xml:space="preserve">
-    <value>rdoTwoDFWide</value>
+  <data name="&gt;&gt;rdoOneDF.Name" xml:space="preserve">
+    <value>rdoOneDF</value>
   </data>
-  <data name="&gt;&gt;rdoTwoDFWide.Type" xml:space="preserve">
+  <data name="&gt;&gt;rdoOneDF.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rdoTwoDFWide.Parent" xml:space="preserve">
+  <data name="&gt;&gt;rdoOneDF.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;rdoTwoDFWide.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;rdoOneDF.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="rdoTwoDFLong.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -468,41 +432,110 @@
   <data name="&gt;&gt;rdoTwoDFLong.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="rdoOneDF.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+  <data name="rdoTwoDFWide.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
   </data>
-  <data name="rdoOneDF.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+  <data name="rdoTwoDFWide.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
-  <data name="rdoOneDF.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="rdoTwoDFWide.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="rdoOneDF.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 8</value>
+  <data name="rdoTwoDFWide.Location" type="System.Drawing.Point, System.Drawing">
+    <value>298, 8</value>
   </data>
-  <data name="rdoOneDF.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="rdoTwoDFWide.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 27</value>
   </data>
-  <data name="rdoOneDF.TabIndex" type="System.Int32, mscorlib">
-    <value>25</value>
+  <data name="rdoTwoDFWide.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
   </data>
-  <data name="rdoOneDF.Text" xml:space="preserve">
-    <value>One Data Frame</value>
+  <data name="rdoTwoDFWide.Text" xml:space="preserve">
+    <value>Two Data Frames Wide</value>
   </data>
-  <data name="rdoOneDF.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="rdoTwoDFWide.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
-  <data name="&gt;&gt;rdoOneDF.Name" xml:space="preserve">
-    <value>rdoOneDF</value>
+  <data name="&gt;&gt;rdoTwoDFWide.Name" xml:space="preserve">
+    <value>rdoTwoDFWide</value>
   </data>
-  <data name="&gt;&gt;rdoOneDF.Type" xml:space="preserve">
+  <data name="&gt;&gt;rdoTwoDFWide.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rdoOneDF.Parent" xml:space="preserve">
+  <data name="&gt;&gt;rdoTwoDFWide.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;rdoOneDF.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;rdoTwoDFWide.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblLine.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblLine.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblLine.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 244</value>
+  </data>
+  <data name="lblLine.Size" type="System.Drawing.Size, System.Drawing">
+    <value>415, 13</value>
+  </data>
+  <data name="lblLine.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
+  <data name="lblLine.Text" xml:space="preserve">
+    <value>____________________________________________________________________</value>
+  </data>
+  <data name="&gt;&gt;lblLine.Name" xml:space="preserve">
+    <value>lblLine</value>
+  </data>
+  <data name="&gt;&gt;lblLine.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblLine.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblLine.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblSaveFile.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSaveFile.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSaveFile.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 470</value>
+  </data>
+  <data name="lblSaveFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 13</value>
+  </data>
+  <data name="lblSaveFile.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="lblSaveFile.Text" xml:space="preserve">
+    <value>Save File As:</value>
+  </data>
+  <data name="&gt;&gt;lblSaveFile.Name" xml:space="preserve">
+    <value>lblSaveFile</value>
+  </data>
+  <data name="&gt;&gt;lblSaveFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSaveFile.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblSaveFile.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>456, 549</value>
   </data>
   <data name="ucrSelectorTwoDF.Location" type="System.Drawing.Point, System.Drawing">
     <value>18, 269</value>
@@ -670,7 +703,7 @@
     <value>7, 3</value>
   </data>
   <data name="ucrPnlNoOfDF.Size" type="System.Drawing.Size, System.Drawing">
-    <value>418, 36</value>
+    <value>437, 36</value>
   </data>
   <data name="ucrPnlNoOfDF.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -758,6 +791,9 @@
   </data>
   <data name="&gt;&gt;ucrSelectorOneDF.ZOrder" xml:space="preserve">
     <value>25</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>

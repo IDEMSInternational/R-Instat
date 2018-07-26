@@ -48,6 +48,11 @@ Partial Class dlgExportToCPT
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lblStationOneDF = New System.Windows.Forms.Label()
         Me.lblMultStations = New System.Windows.Forms.Label()
+        Me.rdoOneDF = New System.Windows.Forms.RadioButton()
+        Me.rdoTwoDFLong = New System.Windows.Forms.RadioButton()
+        Me.rdoTwoDFWide = New System.Windows.Forms.RadioButton()
+        Me.lblLine = New System.Windows.Forms.Label()
+        Me.lblSaveFile = New System.Windows.Forms.Label()
         Me.ucrReceiverMultipleStation = New instat.ucrReceiverMultiple()
         Me.ucrSelectorTwoDF = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
@@ -60,11 +65,6 @@ Partial Class dlgExportToCPT
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrSelectorOneDF = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.rdoOneDF = New System.Windows.Forms.RadioButton()
-        Me.rdoTwoDFLong = New System.Windows.Forms.RadioButton()
-        Me.rdoTwoDFWide = New System.Windows.Forms.RadioButton()
-        Me.lblLine = New System.Windows.Forms.Label()
-        Me.lblSaveFile = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblSaveDataTo
@@ -112,6 +112,46 @@ Partial Class dlgExportToCPT
         '
         resources.ApplyResources(Me.lblMultStations, "lblMultStations")
         Me.lblMultStations.Name = "lblMultStations"
+        '
+        'rdoOneDF
+        '
+        resources.ApplyResources(Me.rdoOneDF, "rdoOneDF")
+        Me.rdoOneDF.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoOneDF.FlatAppearance.BorderSize = 2
+        Me.rdoOneDF.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoOneDF.Name = "rdoOneDF"
+        Me.rdoOneDF.TabStop = True
+        Me.rdoOneDF.UseVisualStyleBackColor = True
+        '
+        'rdoTwoDFLong
+        '
+        resources.ApplyResources(Me.rdoTwoDFLong, "rdoTwoDFLong")
+        Me.rdoTwoDFLong.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoTwoDFLong.FlatAppearance.BorderSize = 2
+        Me.rdoTwoDFLong.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoTwoDFLong.Name = "rdoTwoDFLong"
+        Me.rdoTwoDFLong.TabStop = True
+        Me.rdoTwoDFLong.UseVisualStyleBackColor = True
+        '
+        'rdoTwoDFWide
+        '
+        resources.ApplyResources(Me.rdoTwoDFWide, "rdoTwoDFWide")
+        Me.rdoTwoDFWide.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoTwoDFWide.FlatAppearance.BorderSize = 2
+        Me.rdoTwoDFWide.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoTwoDFWide.Name = "rdoTwoDFWide"
+        Me.rdoTwoDFWide.TabStop = True
+        Me.rdoTwoDFWide.UseVisualStyleBackColor = True
+        '
+        'lblLine
+        '
+        resources.ApplyResources(Me.lblLine, "lblLine")
+        Me.lblLine.Name = "lblLine"
+        '
+        'lblSaveFile
+        '
+        resources.ApplyResources(Me.lblSaveFile, "lblSaveFile")
+        Me.lblSaveFile.Name = "lblSaveFile"
         '
         'ucrReceiverMultipleStation
         '
@@ -209,46 +249,6 @@ Partial Class dlgExportToCPT
         Me.ucrSelectorOneDF.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorOneDF, "ucrSelectorOneDF")
         Me.ucrSelectorOneDF.Name = "ucrSelectorOneDF"
-        '
-        'rdoOneDF
-        '
-        resources.ApplyResources(Me.rdoOneDF, "rdoOneDF")
-        Me.rdoOneDF.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoOneDF.FlatAppearance.BorderSize = 2
-        Me.rdoOneDF.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoOneDF.Name = "rdoOneDF"
-        Me.rdoOneDF.TabStop = True
-        Me.rdoOneDF.UseVisualStyleBackColor = True
-        '
-        'rdoTwoDFLong
-        '
-        resources.ApplyResources(Me.rdoTwoDFLong, "rdoTwoDFLong")
-        Me.rdoTwoDFLong.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoTwoDFLong.FlatAppearance.BorderSize = 2
-        Me.rdoTwoDFLong.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoTwoDFLong.Name = "rdoTwoDFLong"
-        Me.rdoTwoDFLong.TabStop = True
-        Me.rdoTwoDFLong.UseVisualStyleBackColor = True
-        '
-        'rdoTwoDFWide
-        '
-        resources.ApplyResources(Me.rdoTwoDFWide, "rdoTwoDFWide")
-        Me.rdoTwoDFWide.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoTwoDFWide.FlatAppearance.BorderSize = 2
-        Me.rdoTwoDFWide.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoTwoDFWide.Name = "rdoTwoDFWide"
-        Me.rdoTwoDFWide.TabStop = True
-        Me.rdoTwoDFWide.UseVisualStyleBackColor = True
-        '
-        'lblLine
-        '
-        resources.ApplyResources(Me.lblLine, "lblLine")
-        Me.lblLine.Name = "lblLine"
-        '
-        'lblSaveFile
-        '
-        resources.ApplyResources(Me.lblSaveFile, "lblSaveFile")
-        Me.lblSaveFile.Name = "lblSaveFile"
         '
         'dlgExportToCPT
         '
