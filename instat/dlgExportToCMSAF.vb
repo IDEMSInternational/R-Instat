@@ -98,9 +98,9 @@ Public Class dlgExportToCMSAF
         clsExportFunction.SetRCommand("export")
         clsExportFunction.AddParameter("x", clsRFunctionParameter:=clsAsDataFrameFunction, bIncludeArgumentName:=False, iPosition:=0)
 
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsAsDataFrameFunction, iPosition:=0)
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsAssignOperator, iPosition:=1)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsExportFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsAsDataFrameFunction)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsAssignOperator, iPosition:=0)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsExportFunction, iPosition:=1)
     End Sub
 
     Private Sub SetRCodeForControls(bRese As Boolean)
