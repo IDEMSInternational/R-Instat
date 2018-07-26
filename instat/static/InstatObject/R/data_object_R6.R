@@ -2127,13 +2127,13 @@ data_object$set("public","split_date", function(col_name = "", year = FALSE, lea
     col_name <- next_default_item(prefix = "day_in_month", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = day_in_month_vector)
   }
-  
+
   if(day_in_year_366) {
     if(s_shift){
       col_name <- next_default_item(prefix = "s_doy", existing_names = self$get_column_names(), include_index = FALSE)
       self$add_columns_to_data(col_name = col_name, col_data = temp_s_doy)
       self$append_to_variables_metadata(col_names = col_name, property = label_label, new_val = paste("Shifted day of year by", (s_start_day - 1), "days"))
-	  if(self$is_climatic_data()) self$set_climatic_types(types = c(s_doy = col_name))
+	  
     }else{
       day_in_year_366_vector <- as.integer(yday_366(col_data))
       col_name <- next_default_item(prefix = "doy", existing_names = self$get_column_names(), include_index = FALSE)
