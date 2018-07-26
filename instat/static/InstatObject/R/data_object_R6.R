@@ -2186,7 +2186,7 @@ data_object$set("public","split_date", function(col_name = "", year = FALSE, lea
   }
 
   if(pentad_abbr){
-	month_abbr_vector <- forcats::fct_shift(f = (lubridate::month(col_data, label = TRUE, abbr = FALSE)), n = (s_start_month - 1))
+	month_abbr_vector <- forcats::fct_shift(f = (lubridate::month(col_data, label = TRUE)), n = (s_start_month - 1))
 	pentad_val_vector <- ((as.integer(pentad(col_data))) - (s_start_month - 1)*6) %% 72
 	pentad_val_vector <- ifelse(pentad_val_vector == 0, 72, pentad_val_vector)
 	pentad_abbr_vector <- paste(month_abbr_vector, pentad_val_vector, sep = "")
