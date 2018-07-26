@@ -1087,7 +1087,11 @@ compare_columns <- function(x, y, use_unique = TRUE, sort_values = TRUE, firstno
 }
 
 hashed_id <- function(x, salt, algo = "crc32") {
-  y <- paste(x, salt)
+  if (missing(salt)){
+      y <- x
+    }else{
+      y <- paste(x, salt)
+    }
   y <- sapply(y, function(X) digest::digest(X, algo = algo))
   as.character(y)
 }
