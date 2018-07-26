@@ -123,6 +123,14 @@ Public Class sdgPlots
         ucrChkFreeSpace.SetRDefault(Chr(34) & "fixed" & Chr(34))
         ucrChkFreeSpace.AddToLinkedControls(ucrChkNoOfRowsOrColumns, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
+        ucrChkLabeler.SetText("Include Variable Name in Labels")
+        ucrChkLabeler.SetParameter(New RParameter("labeller"))
+        ucrChkLabeler.AddParameterValuesCondition(True, "labeller", "label_both")
+        ucrChkLabeler.AddParameterValuesCondition(False, "labeller", "label_value", False)
+        ucrChkLabeler.SetValuesCheckedAndUnchecked("label_both", "label_value")
+        ucrChkLabeler.SetRDefault("label_value")
+
+
         'Not setting parameter to write because of complex conditions for adding/removing this parameter
         'Conditions in place for reading function
         ucrPnlHorizonatalVertical.SetParameter(New RParameter("dir"))
@@ -141,7 +149,7 @@ Public Class sdgPlots
         ucrChkIncludeFacets.AddToLinkedControls(ucrChkFreeScalesX, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkIncludeFacets.AddToLinkedControls(ucrChkFreeScalesY, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkIncludeFacets.AddToLinkedControls(ucrChkFreeSpace, {True}, bNewLinkedHideIfParameterMissing:=True)
-
+        ucrChkIncludeFacets.AddToLinkedControls(ucrChkLabeler, {True}, bNewLinkedHideIfParameterMissing:=True)
         'layers tab 
 
         'titles tab
@@ -276,6 +284,7 @@ Public Class sdgPlots
         ucrChkFreeScalesX.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
         ucrChkFreeScalesY.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
         ucrNudNumberofRows.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkLabeler.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
         ucrChkIncludeFacets.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
 
         'axis controls
