@@ -56,7 +56,7 @@ Partial Class dlgImportShapeFiles
         Me.cmdLibrary.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.cmdLibrary.Name = "cmdLibrary"
         Me.cmdLibrary.Size = New System.Drawing.Size(112, 35)
-        Me.cmdLibrary.TabIndex = 4
+        Me.cmdLibrary.TabIndex = 3
         Me.cmdLibrary.Text = "From Library"
         Me.cmdLibrary.UseVisualStyleBackColor = True
         '
@@ -66,7 +66,7 @@ Partial Class dlgImportShapeFiles
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(615, 80)
-        Me.ucrBase.TabIndex = 3
+        Me.ucrBase.TabIndex = 5
         '
         'ucrInputFilePath
         '
@@ -85,7 +85,7 @@ Partial Class dlgImportShapeFiles
         Me.ucrSaveDataframeName.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrSaveDataframeName.Name = "ucrSaveDataframeName"
         Me.ucrSaveDataframeName.Size = New System.Drawing.Size(405, 37)
-        Me.ucrSaveDataframeName.TabIndex = 6
+        Me.ucrSaveDataframeName.TabIndex = 4
         '
         'dlgImportShapeFiles
         '
