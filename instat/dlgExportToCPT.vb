@@ -66,7 +66,7 @@ Public Class dlgExportToCPT
 
         ucrReceiverMultipleStation.Selector = ucrSelectorOneDF
         ucrReceiverMultipleStation.SetParameter(New RParameter("station"))
-        ucrReceiverMultipleStation.GetVariableNames()
+        ucrReceiverMultipleStation.SetParameterIsString()
         ucrReceiverMultipleStation.SetLinkedDisplayControl(lblMultStations)
 
         ucrReceiverLatitude.SetParameter(New RParameter("latitude"))
@@ -88,11 +88,15 @@ Public Class dlgExportToCPT
         ucrPnlNoOfDF.AddRadioButton(rdoOneDF)
         ucrPnlNoOfDF.AddRadioButton(rdoTwoDFLong)
         ucrPnlNoOfDF.AddRadioButton(rdoTwoDFWide)
+        ucrPnlNoOfDF.AddParameterPresentCondition(rdoOneDF, "element", True)
+        'ucrPnlNoOfDF.AddParameterPresentCondition(rdoOneDF, "station_latlondata", False)
         ucrPnlNoOfDF.AddParameterPresentCondition(rdoOneDF, "lat_lon_data", False)
+        ucrPnlNoOfDF.AddParameterPresentCondition(rdoTwoDFLong, "element", True)
+        'ucrPnlNoOfDF.AddParameterPresentCondition(rdoTwoDFLong, "station_latlondata", True)
         ucrPnlNoOfDF.AddParameterPresentCondition(rdoTwoDFLong, "lat_lon_data", True)
         ucrPnlNoOfDF.AddParameterPresentCondition(rdoTwoDFWide, "element", False)
-        ucrPnlNoOfDF.AddParameterPresentCondition(rdoOneDF, "element", True)
-        ucrPnlNoOfDF.AddParameterPresentCondition(rdoTwoDFLong, "element", True)
+        'ucrPnlNoOfDF.AddParameterPresentCondition(rdoTwoDFWide, "station_latlondata", True)
+        ucrPnlNoOfDF.AddParameterPresentCondition(rdoTwoDFWide, "lat_lon_data", True)
 
         ucrPnlNoOfDF.AddToLinkedControls({ucrReceiverStationTwoDF, ucrSelectorTwoDF}, {rdoTwoDFLong, rdoTwoDFWide}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlNoOfDF.AddToLinkedControls({ucrReceiverMultipleStation}, {rdoTwoDFWide}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -202,7 +206,7 @@ Public Class dlgExportToCPT
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrBaseExportToCPT_ClickReset(sender As Object, e As EventArgs)
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
@@ -218,24 +222,17 @@ Public Class dlgExportToCPT
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrSelectorTwoDF_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorTwoDF.ControlValueChanged
-        TestOkEnabled()
-    End Sub
-
-    Private Sub ucrSelectorOneDF_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorOneDF.ControlValueChanged
-        DataFrames()
+    Private Sub ucrSelectorOneDF_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorOneDF.ControlValueChanged, ucrSelectorTwoDF.ControlValueChanged
+        Selectors()
     End Sub
 
     Private Sub DataFrames()
-        If rdoTwoDFLong.Checked() Then
-            clsOutputCPT.AddParameter("lat_lon_data", ucrSelectorTwoDF.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-            clsOutputCPT.AddParameter("long", "TRUE")
+        If rdoOneDF.Checked Then
+            clsOutputCPT.AddParameter("long.data", "TRUE")
+        ElseIf rdoTwoDFLong.Checked() Then
+            clsOutputCPT.AddParameter("long.data", "TRUE")
         ElseIf rdoTwoDFWide.Checked() Then
-            clsOutputCPT.AddParameter("lat_lon_data", ucrSelectorTwoDF.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-            clsOutputCPT.AddParameter("long", "FALSE")
-        ElseIf rdoOneDF.Checked Then
-            clsOutputCPT.RemoveParameterByName("lat_lon_data")
-            clsOutputCPT.AddParameter("long", "TRUE")
+            clsOutputCPT.AddParameter("long.data", "FALSE")
         End If
     End Sub
 

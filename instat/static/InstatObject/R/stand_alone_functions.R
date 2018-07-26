@@ -184,17 +184,14 @@ output_CPT <- function(data, lat_lon_data, station_latlondata, latitude, longitu
   
   if(missing(lat_lon_data)) {
     if(long.data) {
-      unstacked_data <- data %>% select(!!! quos(station, year, element)) %>% spread(key = !! as.name(station), !! as.name(element))
-      names(unstacked_data)[1] <- station_label
+      data <- data %>% dplyr::select(!!! quos(station, year, element, latitude, longitude))
+      names(data)[1] <- "station"
+      names(data)[2] <- "year"
+      names(data)[3] <- "element"
+      names(data)[4] <- "latitude"
+      names(data)[5] <- "longitude"
       
-      lat_lon_data <- data %>% group_by(!! as.name(station)) %>% summarise(latitude = min(!! as.name(latitude)), longitude = min(!! as.name(longitude)))
-      t_lat_lon_data <- t(lat_lon_data)
-      station.names <- as.vector(t_lat_lon_data[1, ])
-      t_lat_lon_data <- data.frame(t_lat_lon_data, stringsAsFactors = FALSE)
-      t_lat_lon_data <- t_lat_lon_data %>% dplyr::slice(-1)
-      names(t_lat_lon_data) <- station.names
-      row.names(t_lat_lon_data) <- lat_lon_labels
-      t_lat_lon_data <- tibble::rownames_to_column(t_lat_lon_data, station_label)
+      data <- data %>% dplyr::filter(!is.na(station))
     }
     else stop("If all data is in one data frame then must have long.data = TRUE")
   }
@@ -202,37 +199,51 @@ output_CPT <- function(data, lat_lon_data, station_latlondata, latitude, longitu
     if(missing(station_latlondata)) stop("station must be provided for lat_lon_data")
     
     if(long.data) {
-      t_lat_lon_data <- t(lat_lon_data %>% select(!!! quos(latitude, longitude)))
-      t_lat_lon_data <- data.frame(t_lat_lon_data, stringsAsFactors = FALSE)
-      names(t_lat_lon_data) <- lat_lon_data[[station]]
-      row.names(t_lat_lon_data) <- lat_lon_labels
-      t_lat_lon_data <- tibble::rownames_to_column(t_lat_lon_data, station_label)
+      yearly_data <- data %>% dplyr::select(!!! quos(station, year, element))
+      names(yearly_data)[1] <-  "station"
+      names(yearly_data)[2] <-  "year"
+      names(yearly_data)[3] <-  "element"
       
-      unstacked_data <- data %>% select(!!! quos(station, year, element)) %>% spread(key = !! as.name(station), !! as.name(element))
-      names(unstacked_data)[1] <- station_label
+      lat_lon_data <- lat_lon_data %>% dplyr::select(!!! quos(station_latlondata, latitude, longitude))
+      names(lat_lon_data)[1] <- "station"
+      names(lat_lon_data)[2] <- "latitude"
+      names(lat_lon_data)[3] <- "longitude"
+      
+      data <- merge(yearly_data, lat_lon_data, by =  "station")
     }
     else {
-      # This assumes: first column is year, all other columns are stations
-      # If this shouldn't be assumed then code needs to change
+      stations <- data.frame(data[station])
+      year <- data_unstacked %>% dplyr::select(!!! quos(year))
+      data <- data.frame(year, stations)
+      stacked_data <- reshape2::melt(data, id.vars=c("year"))
+      names(stacked_data)[2] <-  "station"
+      names(stacked_data)[3] <- "element"
       
-      stations <- data[station]
-      year <- data %>% dplyr::select(!!! quos(year)) 
-      unstacked_data <- data.frame(year, stations)
-      names(unstacked_data)[1] <- station_label
+      lat_lon_data <- lat_lon_data %>% dplyr::select(!!! quos(station_latlondata, latitude, longitude))
+      names(lat_lon_data)[1] <- "station"
+      names(lat_lon_data)[2] <- "latitude"
+      names(lat_lon_data)[3] <- "longitude"
       
-      t_lat_lon_data <- t(data2_latlon %>% select(Lat, Lon))
-      t_lat_lon_data <- data.frame(t_lat_lon_data, stringsAsFactors = FALSE)
-      names(t_lat_lon_data) <- lat_lon_data[[station_latlondata]]
-      row.names(t_lat_lon_data) <- lat_lon_labels
-      t_lat_lon_data <- tibble::rownames_to_column(t_lat_lon_data, station_label)
+      data <- merge(stacked_data, lat_lon_data, by = "station")
       
     }
   }
   
+  unstacked_data <- data %>% dplyr::select(station, year, element) %>% tidyr::spread(key = station, element)
+  names(unstacked_data)[1] <- station_label
+  
+  lat_lon_data <- data %>% dplyr::group_by(station) %>% dplyr::summarise(latitude = min(latitude), longitude = min(longitude))
+  t_lat_lon_data <- t(lat_lon_data)
+  station.names <- as.vector(t_lat_lon_data[1, ])
+  t_lat_lon_data <- data.frame(t_lat_lon_data, stringsAsFactors = FALSE)
+  t_lat_lon_data <- t_lat_lon_data %>% dplyr::slice(-1)
+  names(t_lat_lon_data) <- station.names
+  row.names(t_lat_lon_data) <- lat_lon_labels
+  t_lat_lon_data <- tibble::rownames_to_column(t_lat_lon_data, station_label)
+  
   cpt_data <- rbind(t_lat_lon_data, unstacked_data)
   return(cpt_data)
 }
-
 
 yday_366 <- function(date) {
   temp_doy <- lubridate::yday(date)
