@@ -1991,4 +1991,8 @@ Public Class frmMain
     Private Sub mnuClimaticReshapeandExamineOneVariableSummarize_Click(sender As Object, e As EventArgs) Handles mnuClimaticReshapeandExamineOneVariableSummarize.Click
         dlgOneVariableSummarise.ShowDialog()
     End Sub
+
+    Private Sub mnuPrepareShare_Click(sender As Object, e As EventArgs) Handles mnuPrepareShare.Click
+        dlgAnonymiseIDColumn.ShowDialog()
+    End Sub
 End Class
