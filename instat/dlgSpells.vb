@@ -279,8 +279,10 @@ Public Class dlgSpells
         UpdateDayFilterPreview()
     End Sub
 
+    'ucrInputSpellLower.Text <> "" AndAlso ((ucrInputCondition.GetText = "Between" AndAlso ucrInputSpellUpper.Text <> "") OrElse ucrInputCondition.GetText <> "Between") 
+
     Private Sub TestOKEnabled()
-        If Not ucrReceiverElement.IsEmpty AndAlso Not ucrInputNewColumnName.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso ucrInputSpellLower.Text <> "" AndAlso ((ucrInputCondition.GetText = "Between" AndAlso ucrInputSpellUpper.Text <> "") OrElse ucrInputCondition.GetText <> "Between") Then
+        If Not ucrReceiverElement.IsEmpty AndAlso Not ucrInputNewColumnName.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputCondition.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -300,11 +302,11 @@ Public Class dlgSpells
     Private Sub ucrInputSpellLower_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSpellLower.ControlValueChanged, ucrInputSpellUpper.ControlValueChanged, ucrInputCondition.ControlValueChanged
         Select Case ucrInputCondition.GetText
             Case "<="
-                ucrInputSpellUpper.Visible = False
+                ucrInputSpellLower.Visible = False
                 clsRRaindayAndOperator.RemoveParameterByName("upper")
                 clsRRaindayUpperOperator.RemoveParameterByName("max")
                 clsRRaindayAndOperator.AddParameter("lower", clsROperatorParameter:=clsRRaindayLowerOperator, iPosition:=0)
-                clsRRaindayLowerOperator.AddParameter("min", ucrInputSpellLower.GetText, iPosition:=1)
+                clsRRaindayLowerOperator.AddParameter("min", ucrInputSpellUpper.GetText, iPosition:=1)
                 clsRRaindayOperator.AddParameter("x", clsROperatorParameter:=clsRRaindayLowerOperator, iPosition:=0)
             Case "Between" ' match(Rain>=LEFT & Rain<=RIGHT, 1, nomatch = 0)
                 ucrInputSpellUpper.Visible = True
@@ -319,11 +321,11 @@ Public Class dlgSpells
                 clsRRaindayAndOperator.AddParameter("lower", clsROperatorParameter:=clsLessThanOperator, iPosition:=1)
                 clsRRaindayOperator.AddParameter("x", clsROperatorParameter:=clsRRaindayAndOperator, iPosition:=2)
             Case Else
-                ucrInputSpellUpper.Visible = False
+                ucrInputSpellLower.Visible = False
                 clsRRaindayAndOperator.RemoveParameterByName("lower")
                 clsRRaindayLowerOperator.RemoveParameterByName("min")
                 clsRRaindayAndOperator.AddParameter("upper", clsROperatorParameter:=clsRRaindayUpperOperator, iPosition:=0)
-                clsRRaindayUpperOperator.AddParameter("max", ucrInputSpellLower.GetText, iPosition:=1)
+                clsRRaindayUpperOperator.AddParameter("max", ucrInputSpellUpper.GetText, iPosition:=1)
                 clsRRaindayOperator.AddParameter("x", clsROperatorParameter:=clsRRaindayUpperOperator, iPosition:=0)
         End Select
     End Sub
