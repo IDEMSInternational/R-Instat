@@ -650,35 +650,23 @@ summary_cov <- function(x, y, na.rm = FALSE, na_type = "", method = c("pearson",
 }
 }
 # first function
-summary_first <- function(x, na.rm = FALSE, na_type = "", order_by = NULL, default = default_missing(x), ...) {
-  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
+summary_first <- function(x, order_by = NULL, default = default_missing(x), ...) {
     return(dplyr::first(x = x, order_by = order_by, default = default))
-  }
 }
 
 # last function
-summary_last <- function(x, na.rm = FALSE, na_type = "", order_by = NULL, default = default_missing(x), ...) {
-  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
-    return(dplyr::last(x = x, order_by = order_by, default = default))
-  }
+summary_last <- function(x, order_by = NULL, default = default_missing(x), ...) {
+     return(dplyr::last(x = x, order_by = order_by, default = default))
 }
 
 # nth function
-summary_nth <- function(x, nth_value, na.rm = FALSE, na_type = "", order_by = NULL, default = default_missing(x), ...) {
-  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
+summary_nth <- function(x, nth_value, order_by = NULL, default = default_missing(x), ...) {
     return(dplyr::nth(x = x, n = nth_value, order_by = order_by, default = default_missing(x)))
-  }
 }
 
 # n_distinct function
-summary_n_distinct<- function(x, na.rm = FALSE, na_type = "", ...) {
-  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
+summary_n_distinct<- function(x, na.rm = FALSE, ...) {
     return(dplyr::n_distinct(x = x, na.rm = na.rm))
-  }
 }
 
 #Proportions functions
