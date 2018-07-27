@@ -79,7 +79,6 @@ Public Class dlgExportToCPT
         ucrReceiverLongitude.SetParameterIsString()
         ucrReceiverLongitude.SetLinkedDisplayControl(lblLongitude)
         ucrReceiverLongitude.SetClimaticType("longitude")
-
         ucrReceiverLongitude.bAutoFill = True
 
         ucrReceiverStationTwoDF.Selector = ucrSelectorTwoDF
