@@ -49,15 +49,15 @@ Public Class dlgExportToCPT
         ucrReceiverStationOneDF.SetParameter(New RParameter("station"))
         ucrReceiverStationOneDF.SetParameterIsString()
         ucrReceiverStationOneDF.SetLinkedDisplayControl(lblStationOneDF)
-        'ucrReceiverStationElementData.SetClimaticType("station")
-        'ucrReceiverStationElementData.bAutoFill = True
+        ucrReceiverStationOneDF.SetClimaticType("station")
+        ucrReceiverStationOneDF.bAutoFill = True
 
         ucrReceiverYear.Selector = ucrSelectorOneDF
         ucrReceiverYear.SetParameter(New RParameter("year"))
         ucrReceiverYear.SetParameterIsString()
         ucrReceiverYear.SetLinkedDisplayControl(lblYear)
-        'ucrReceiverYear.SetClimaticType("year")
-        'ucrReceiverYear.bAutoFill = True
+        ucrReceiverYear.SetClimaticType("year")
+        ucrReceiverYear.bAutoFill = True
 
         ucrReceiverElement.Selector = ucrSelectorOneDF
         ucrReceiverElement.SetParameter(New RParameter("element"))
@@ -72,15 +72,21 @@ Public Class dlgExportToCPT
         ucrReceiverLatitude.SetParameter(New RParameter("latitude"))
         ucrReceiverLatitude.SetParameterIsString()
         ucrReceiverLatitude.SetLinkedDisplayControl(lblLatitude)
+        ucrReceiverLatitude.SetClimaticType("latitude")
+        ucrReceiverLatitude.bAutoFill = True
 
         ucrReceiverLongitude.SetParameter(New RParameter("longitude"))
         ucrReceiverLongitude.SetParameterIsString()
         ucrReceiverLongitude.SetLinkedDisplayControl(lblLongitude)
+        ucrReceiverLongitude.SetClimaticType("longitude")
+        ucrReceiverLongitude.bAutoFill = True
 
         ucrReceiverStationTwoDF.Selector = ucrSelectorTwoDF
         ucrReceiverStationTwoDF.SetParameter(New RParameter("station_latlondata"))
         ucrReceiverStationTwoDF.SetParameterIsString()
         ucrReceiverStationTwoDF.strSelectorHeading = "Numerics"
+        ucrReceiverStationTwoDF.SetClimaticType("station")
+        ucrReceiverStationTwoDF.bAutoFill = True
 
         ucrInputFilePath.SetParameter(New RParameter("file", 0))
         ucrInputFilePath.IsReadOnly = True
