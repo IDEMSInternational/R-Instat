@@ -17,7 +17,7 @@
 Imports instat.Translations
 Public Class dlgStartofRains
     Private clsRainyDays, clsRainyDaysFunction, clsFirstDOYPerYear, clsFirstDatePerYear, clsCombinationCalc, clsCombinationManipList, clsCombinationSubCalcList, clsListSubCalc, clsManipStartFirstList, clsManipulationFirstDOYPerYear, clsCombinedFilter, clsCombinedList As New RFunction
-    Private clsDayFromAndTo, clsGroupByStation, clsGroupByStationYear, clsListToTalRain, clsAddKey, clsAddKeyColName, clsApplyInstatFunction, clsFirstDOYPerStationYear, clsFirstDate As New RFunction
+    Private clsDayFromAndTo, clsGroupByStation, clsGroupByStationYear, clsListToTalRain, clsApplyInstatFunction, clsFirstDOYPerStationYear, clsFirstDate As New RFunction
     Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator, clsRainyDaysOperator, clsCombineOperator, clsRainCombineOperator, clsTRCombineOperator, clsRDCombineOperator, clsDSCombineOperator, clsDPCombineOperator As New ROperator
     Private clsDayFilterCalcFromConvert, clsDayFilterCalcFromList As New RFunction
     'Total Rainfall classes
@@ -226,8 +226,7 @@ Public Class dlgStartofRains
         Dim strStartStatus As String = "start_status"
         Dim strStartDoy As String = "start_doy"
 
-        clsAddKey.Clear()
-        clsAddKeyColName.Clear()
+
         clsDayFromAndTo.Clear()
         clsDayFromAndToOperator.Clear()
         clsGroupByStation.Clear()
@@ -281,12 +280,6 @@ Public Class dlgStartofRains
 
         ucrReceiverRainfall.SetMeAsReceiver()
         ucrSelectorForStartofRains.Reset()
-
-        ' Adding a key
-        clsAddKey.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
-        clsAddKey.AddParameter("col_name", clsRFunctionParameter:=clsAddKeyColName)
-        clsAddKey.AddParameter("data_name", strCurrDataName, iPosition:=0)
-        clsAddKeyColName.SetRCommand("c")
 
         clsDayFilterCalcFromConvert = New RFunction
         clsDayFilterCalcFromConvert.SetRCommand("calc_from_convert")
@@ -634,8 +627,6 @@ Public Class dlgStartofRains
         ucrChkAsDate.SetRCode(clsListSubCalc, bReset)
         ucrNudThreshold.SetRCode(clsRainyDaysOperator, bReset)
 
-        ucrReceiverStation.SetRCode(clsAddKeyColName, bReset)
-        ucrSelectorForStartofRains.SetRCode(clsAddKey, bReset)
         ucrReceiverDate.SetRCode(clsFirstDate, bReset)
         ucrInputNewDoyColumnName.SetRCode(clsFirstDOYPerYear, bReset)
         ucrInputNewDateColumnName.SetRCode(clsFirstDatePerYear, bReset)
@@ -713,10 +704,6 @@ Public Class dlgStartofRains
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        frmMain.clsRLink.RunScript(clsAddKey.ToScript, strComment:="Start of Rains: Defining column(s) as key")
-    End Sub
-
     Private Sub CombinedFilter()
 
         If ucrChkTotalRainfall.Checked Then
@@ -760,7 +747,6 @@ Public Class dlgStartofRains
 
     Private Sub DayBoundaries()
         clsSORFilter.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")", iPosition:=3)
-        clsAddKeyColName.AddParameter("date", ucrReceiverDate.GetVariableNames(), bIncludeArgumentName:=False, iPosition:=0)
     End Sub
 
     Private Sub RainDays()
