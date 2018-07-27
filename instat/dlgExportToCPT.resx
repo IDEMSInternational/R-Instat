@@ -370,7 +370,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoOneDF.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 8</value>
+    <value>18, 7</value>
   </data>
   <data name="rdoOneDF.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 27</value>
@@ -406,7 +406,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoTwoDFLong.Location" type="System.Drawing.Point, System.Drawing">
-    <value>158, 8</value>
+    <value>158, 7</value>
   </data>
   <data name="rdoTwoDFLong.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 27</value>
@@ -442,7 +442,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoTwoDFWide.Location" type="System.Drawing.Point, System.Drawing">
-    <value>298, 8</value>
+    <value>298, 7</value>
   </data>
   <data name="rdoTwoDFWide.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 27</value>
