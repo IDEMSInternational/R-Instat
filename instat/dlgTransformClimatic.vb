@@ -471,6 +471,7 @@ Public Class dlgTransformClimatic
 
     Private Sub Evaporation()
         If rdoEvapValue.Checked Then
+            ucrReceiverData.SetMeAsReceiver()
             clsRTransform.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames & ")")
             clsPMaxOperatorMax.AddParameter("evaporation.value", 5, iPosition:=1, bIncludeArgumentName:=False)
         ElseIf rdoEvapVariable.Checked Then
