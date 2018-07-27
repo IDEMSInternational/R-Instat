@@ -109,6 +109,9 @@ Public Class dlgSpells
         ucrInputNewColumnName.SetDataFrameSelector(ucrSelectorForSpells.ucrAvailableDataFrames)
         ucrInputNewColumnName.SetName("spells")
 
+        ucrInputCondition.AddToLinkedControls(ucrInputSpellUpper, {"<=", "Between", "Outer", ">="}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.85)
+        ucrInputCondition.AddToLinkedControls(ucrInputSpellLower, {"Between", "Outer"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+
         ucrInputFilterPreview.IsReadOnly = True
     End Sub
 
@@ -147,6 +150,8 @@ Public Class dlgSpells
         ucrInputCondition.SetName("Between")
         ucrInputNewColumnName.SetName("spells")
         ucrChkConditional.Checked = False
+        ucrInputSpellLower.SetName(0)
+        ucrInputSpellUpper.SetName(0.85)
 
         ' key
         clsAddKey.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
