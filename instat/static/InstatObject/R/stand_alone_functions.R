@@ -1085,3 +1085,13 @@ compare_columns <- function(x, y, use_unique = TRUE, sort_values = TRUE, firstno
     if(display_union) cat(paste0("Union (Values that appear in either column): ", paste0("'", dplyr::union(x, y), "'", collapse = ", ")))
   }
 }
+
+hashed_id <- function(x, salt, algo = "crc32") {
+  if (missing(salt)){
+      y <- x
+    }else{
+      y <- paste(x, salt)
+    }
+  y <- sapply(y, function(X) digest::digest(X, algo = algo))
+  as.character(y)
+}
