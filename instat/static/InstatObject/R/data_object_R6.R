@@ -2133,7 +2133,7 @@ data_object$set("public","split_date", function(col_name = "", year = FALSE, lea
       col_name <- next_default_item(prefix = "s_doy", existing_names = self$get_column_names(), include_index = FALSE)
       self$add_columns_to_data(col_name = col_name, col_data = temp_s_doy)
       self$append_to_variables_metadata(col_names = col_name, property = label_label, new_val = paste("Shifted day of year by", (s_start_day - 1), "days"))
-	  
+	  if(self$is_climatic_data()) self$set_climatic_types(types = c(s_doy = col_name))
     }else{
       day_in_year_366_vector <- as.integer(yday_366(col_data))
       col_name <- next_default_item(prefix = "doy", existing_names = self$get_column_names(), include_index = FALSE)
@@ -2228,6 +2228,7 @@ rain_day_label="rain_day"
 rain_day_lag_label="rain_day_lag"
 date_label="date"
 doy_label="doy"
+s_doy_label = "s_doy"
 year_label="year"
 year_month_label="year_month"
 date_time_label="date_time"
@@ -2260,7 +2261,7 @@ sunshine_hours_label="sunshine_hours"
 radiation_label="radiation"
 cloud_cover_label="cloud_cover"
 
-all_climatic_column_types <- c(rain_label, rain_day_label, rain_day_lag_label, date_label, doy_label, year_label, year_month_label, date_time_label, dos_label, season_label, month_label, day_label, dm_label, time_label, station_label, date_asstring_label, temp_min_label, temp_max_label, temp_air_label, temp_range_label, wet_buld_label, dry_bulb_label, evaporation_label, element_factor_label, identifier_label, capacity_label, wind_speed_label, wind_direction_label, lat_label, lon_label, alt_label, season_station_label, date_station_label, sunshine_hours_label, radiation_label, cloud_cover_label)
+all_climatic_column_types <- c(rain_label, rain_day_label, rain_day_lag_label, date_label, doy_label, s_doy_label, year_label, year_month_label, date_time_label, dos_label, season_label, month_label, day_label, dm_label, time_label, station_label, date_asstring_label, temp_min_label, temp_max_label, temp_air_label, temp_range_label, wet_buld_label, dry_bulb_label, evaporation_label, element_factor_label, identifier_label, capacity_label, wind_speed_label, wind_direction_label, lat_label, lon_label, alt_label, season_station_label, date_station_label, sunshine_hours_label, radiation_label, cloud_cover_label)
 
 # Column metadata
 climatic_type_label = "Climatic_Type"
