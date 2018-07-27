@@ -469,7 +469,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblNewColName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 411</value>
+    <value>7, 411</value>
   </data>
   <data name="lblNewColName.Size" type="System.Drawing.Size, System.Drawing">
     <value>101, 13</value>
@@ -574,7 +574,7 @@
     <value>0</value>
   </data>
   <data name="ucrChkGroupByYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 258</value>
+    <value>10, 258</value>
   </data>
   <data name="ucrChkGroupByYear.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -595,7 +595,7 @@
     <value>1</value>
   </data>
   <data name="ucrInputColName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>131, 409</value>
+    <value>111, 409</value>
   </data>
   <data name="ucrInputColName.Size" type="System.Drawing.Size, System.Drawing">
     <value>181, 21</value>
@@ -643,7 +643,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 20</value>
+    <value>137, 20</value>
   </data>
   <data name="ucrReceiverDate.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -667,7 +667,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverYear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 20</value>
+    <value>137, 20</value>
   </data>
   <data name="ucrReceiverYear.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -691,7 +691,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverStation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 20</value>
+    <value>137, 20</value>
   </data>
   <data name="ucrReceiverStation.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -715,7 +715,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 20</value>
+    <value>137, 20</value>
   </data>
   <data name="ucrReceiverData.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -733,7 +733,7 @@
     <value>14</value>
   </data>
   <data name="ucrSelectorTransform.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 61</value>
+    <value>10, 61</value>
   </data>
   <data name="ucrSelectorTransform.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -757,7 +757,7 @@
     <value>15</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 437</value>
+    <value>10, 437</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>402, 52</value>
@@ -1204,7 +1204,7 @@
     <value>19</value>
   </data>
   <data name="grpTransform.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 286</value>
+    <value>10, 284</value>
   </data>
   <data name="grpTransform.Size" type="System.Drawing.Size, System.Drawing">
     <value>376, 106</value>
