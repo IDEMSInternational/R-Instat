@@ -146,6 +146,7 @@ Public Class dlgSpells
         ucrReceiverDate.SetMeAsReceiver()
         ucrInputCondition.SetName("Between")
         ucrInputNewColumnName.SetName("spells")
+        ucrChkConditional.Checked = False
 
         ' key
         clsAddKey.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
@@ -270,7 +271,7 @@ Public Class dlgSpells
         ucrInputSpellLower.SetRCode(clsRRaindayLowerOperator, bReset)
         ucrInputSpellUpper.SetRCode(clsRRaindayUpperOperator, bReset)
         ucrInputNewColumnName.SetRCode(clsMaxValue, bReset)
-        'ucrChkConditional.SetRCode(clsSubSpellLength1, bReset)
+        'ucrChkConditional.SetRCode(clsSpellLength, bReset)
     End Sub
 
     Private Sub cmdDoyRange_Click(sender As Object, e As EventArgs) Handles cmdDoyRange.Click
@@ -279,10 +280,8 @@ Public Class dlgSpells
         UpdateDayFilterPreview()
     End Sub
 
-    'ucrInputSpellLower.Text <> "" AndAlso ((ucrInputCondition.GetText = "Between" AndAlso ucrInputSpellUpper.Text <> "") OrElse ucrInputCondition.GetText <> "Between") 
-
     Private Sub TestOKEnabled()
-        If Not ucrReceiverElement.IsEmpty AndAlso Not ucrInputNewColumnName.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputCondition.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty Then
+        If Not ucrReceiverElement.IsEmpty AndAlso Not ucrInputNewColumnName.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso ((ucrInputCondition.GetText = "Between" AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = "Outer" AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = "<=" AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = ">=" AndAlso Not ucrInputSpellUpper.IsEmpty)) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
