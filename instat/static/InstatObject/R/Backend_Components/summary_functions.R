@@ -448,212 +448,282 @@ summary_mean <- function (x, add_cols, weights="", na.rm = FALSE, trim = 0, na_t
   }
 }
 
-summary_trimmed_mean <- function (x, add_cols, weights="", na.rm = FALSE, trimmed = 0,...) {
+summary_trimmed_mean <- function (x, add_cols, weights="", na.rm = FALSE, trimmed = 0, na_type = "", ...) {
   if( length(x)==0 || (na.rm && length(x[!is.na(x)])==0) ) return(NA)
-  else return(mean(x, na.rm = na.rm, trim = trimmed))
+  else {
+    if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else 
+    return(mean(x, na.rm = na.rm, trim = trimmed))
+  }
 }
 
-summary_sum <- function (x, na.rm = FALSE,...) {
-  return(sum(x, na.rm = na.rm))
+summary_sum <- function (x, na.rm = FALSE, na_type = "", ...) {
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    return(sum(x, na.rm = na.rm))
+  }
 }
 
-summary_count <- function(x,...) {
+summary_count <- function(x, ...) {
   return(length(x))
-}
+  }
 
-summary_count_missing <- function(x,...) {
+
+summary_count_missing <- function(x, ...) {
   return(sum(is.na(x)))
 }
 
-summary_count_non_missing <- function(x,...) {
+summary_count_non_missing <- function(x, ...) {
   return(sum(!is.na(x)))
 }
 
-summary_sd <- function(x, na.rm = FALSE,...) {
-  return(sd(x,na.rm = na.rm))
+summary_sd <- function(x, na.rm = FALSE, na_type = "", ...) {
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+    else{
+      return(sd(x,na.rm = na.rm))
+    }
 }
 
-summary_var <- function(x, na.rm = FALSE,...) {
-  return(var(x,na.rm = na.rm))
+summary_var <- function(x, na.rm = FALSE, na_type = "", ...) {
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    return(var(x,na.rm = na.rm))
+  }
 }
 
-summary_max <- function (x, na.rm = FALSE,...) {
+summary_max <- function (x, na.rm = FALSE, na_type = "", ...) {
   #TODO This prevents warning and -Inf being retured. Is this desirable?
   if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)) return(NA)
-  else return(max(x, na.rm = na.rm))
-} 
+    if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    return(max(x, na.rm = na.rm))
+  } 
+}
 
-summary_min <- function (x, na.rm = FALSE,...) {
+summary_min <- function (x, na.rm = FALSE, na_type = "", ...) {
   #TODO This prevents warning and Inf being retured. Is this desirable?
   if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)) return(NA)
-  else return(min(x, na.rm = na.rm))
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    return(min(x, na.rm = na.rm))
 } 
-
+}
 # get the range of the data
-summary_range <- function(x, na.rm = FALSE, ...) {
-  return(max(x, na.rm = na.rm) - min(x, na.rm = na.rm))
+summary_range <- function(x, na.rm = FALSE, na_type = "", ...) {
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    return(max(x, na.rm = na.rm) - min(x, na.rm = na.rm))
+  }
 }
 
 # median function
-summary_median <- function(x, na.rm = FALSE, ...) {
-  return(median(x, na.rm = na.rm))
+summary_median <- function(x, na.rm = FALSE, na_type = "", ...) {
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    return(median(x, na.rm = na.rm))
+  }
 }
 
 # quantile function
-summary_quantile <- function(x, na.rm = FALSE, probs, ...) {
+summary_quantile <- function(x, na.rm = FALSE, probs, na_type = "", ...) {
   if(!na.rm && anyNA(x)) return(NA)
   # This prevents multiple values being returned
-  else return(quantile(x, na.rm = na.rm, probs = probs)[[1]])
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    return(quantile(x, na.rm = na.rm, probs = probs)[[1]])
+  }
 }
 
 # lower quartile function
-lower_quartile <- function(x, na.rm = FALSE, ...) {
-  return(summary_quantile(x, na.rm = na.rm, probs = 0.25))
+lower_quartile <- function(x, na.rm = FALSE, na_type = "", ...) {
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    return(summary_quantile(x, na.rm = na.rm, probs = 0.25))
+  }
 }
 
 # upper quartile function
-upper_quartile <- function(x, na.rm = FALSE, ...) {
-  return(summary_quantile(x, na.rm = na.rm, probs = 0.75))
+upper_quartile <- function(x, na.rm = FALSE, na_type = "", ...) {
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    return(summary_quantile(x, na.rm = na.rm, probs = 0.75))
+  }
 }
 
 # Skewness e1071 function
-summary_skewness <- function(x, na.rm = FALSE, type = 2, ...) {
-  return(e1071::skewness(x, na.rm = na.rm, type = type))
+summary_skewness <- function(x, na.rm = FALSE, type = 2, na_type = "", ...) {
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    return(e1071::skewness(x, na.rm = na.rm, type = type))
+  }
 }
 
 # skewness mc function
-summary_skewness_mc <- function(x, na.rm = FALSE, ...) {
+summary_skewness_mc <- function(x, na.rm = FALSE, na_type = "", ...) {
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
   return(robustbase::mc(x, na.rm = na.rm))
+  }
 }
 
 # skewness outlier limit function
-summary_outlier_limit <- function(x, coef = 1.5, bupperlimit = TRUE, bskewedcalc = FALSE, skewnessweight = 4, na.rm = TRUE, ...){ 
-  
-  quart <- quantile(x, na.rm = na.rm)
-  Q1 <- quart[[2]]
-  Q3 <- quart[[4]]
-  IQR <- Q3 - Q1
-  MC <- 0
-  if(bskewedcalc){
-    MC <- robustbase::mc(x, na.rm = na.rm)
-  }
-  if(bupperlimit){
-    Q3 + coef*exp(skewnessweight*MC)*IQR
-  } else {
-    Q1 - coef*exp(-skewnessweight*MC)*IQR
-  }
+summary_outlier_limit <- function(x, coef = 1.5, bupperlimit = TRUE, bskewedcalc = FALSE, skewnessweight = 4, na.rm = TRUE, na_type = "", ...){ 
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+      else{
+      quart <- quantile(x, na.rm = na.rm)
+      Q1 <- quart[[2]]
+      Q3 <- quart[[4]]
+      IQR <- Q3 - Q1
+      MC <- 0
+      if(bskewedcalc){
+        MC <- robustbase::mc(x, na.rm = na.rm)
+      }
+      if(bupperlimit){
+        Q3 + coef*exp(skewnessweight*MC)*IQR
+      } else {
+        Q1 - coef*exp(-skewnessweight*MC)*IQR
+      }
+      }
 }
 
 # kurtosis function
-summary_kurtosis <- function(x, na.rm = FALSE, type = 2, ...) {
-  return(e1071::kurtosis(x, na.rm = na.rm, type = type))
+summary_kurtosis <- function(x, na.rm = FALSE, type = 2, na_type = "", ...) {
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+      return(e1071::kurtosis(x, na.rm = na.rm, type = type))
+  }
 }
 
 # Coefficient of Variation function
-summary_coef_var <- function(x, ...) {
-  return(summary_sd(x) / summary_mean(x))
+summary_coef_var <- function(x, na.rm = FALSE, na_type = "", ...) {
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+      return(summary_sd(x) / summary_mean(x))
+  }
 }
 
 # median absolute deviation function
-summary_median_absolute_deviation <- function(x, constant = 1.4826, na.rm = FALSE, low = FALSE, high = FALSE, ...) {
-  return(stats::mad(x, constant = constant, na.rm = na.rm, low = low, high = high))  
+summary_median_absolute_deviation <- function(x, constant = 1.4826, na.rm = FALSE, na_type = "", low = FALSE, high = FALSE, ...) {
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    return(stats::mad(x, constant = constant, na.rm = na.rm, low = low, high = high))  
+  }
 }
 
 # Qn function
-summary_Qn <- function(x, constant = 2.21914, finite.corr = missing(constant), na.rm = FALSE, ...) {
+summary_Qn <- function(x, constant = 2.21914, finite.corr = missing(constant), na.rm = FALSE, na_type = "", ...) {
   if(!na.rm && anyNA(x)) return(NA)
   else {
-    x <- x[!is.na(x)]
+    if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+    else{
+      x <- x[!is.na(x)]
     return(robustbase::Qn(x, constant = constant, finite.corr = finite.corr))
+  }
   }
 }
 
 # Sn function
-summary_Sn <- function(x, constant = 1.1926, finite.corr = missing(constant), na.rm = FALSE, ...) {
+summary_Sn <- function(x, constant = 1.1926, finite.corr = missing(constant), na.rm = FALSE, na_type = "", ...) {
   if(!na.rm && anyNA(x)) return(NA)
   else {
-    x <- x[!is.na(x)]
+    if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+    else{
+      x <- x[!is.na(x)]
     return(robustbase::Qn(x, constant = constant, finite.corr = finite.corr))
+  }
   }
 }
 
 # cor function
-summary_cor <- function(x, y, method = c("pearson", "kendall", "spearman"), use = c( "everything", "all.obs", "complete.obs", "na.or.complete", "pairwise.complete.obs"), ...) {
-  return(cor(x = x, y = y, use = use, method = method))
+summary_cor <- function(x, y, na.rm = FALSE, na_type = "", method = c("pearson", "kendall", "spearman"), use = c( "everything", "all.obs", "complete.obs", "na.or.complete", "pairwise.complete.obs"), ...) {
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    return(cor(x = x, y = y, use = use, method = method))
+  }
 }
 
 # cov function
-summary_cov <- function(x, y, method = c("pearson", "kendall", "spearman"), use = c( "everything", "all.obs", "complete.obs", "na.or.complete", "pairwise.complete.obs"), ...) {
-  return(cov(x = x, y = y, use = use, method = method))
+summary_cov <- function(x, y, na.rm = FALSE, na_type = "", method = c("pearson", "kendall", "spearman"), use = c( "everything", "all.obs", "complete.obs", "na.or.complete", "pairwise.complete.obs"), ...) {
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    return(cov(x = x, y = y, use = use, method = method))
 }
-
+}
 # first function
 summary_first <- function(x, order_by = NULL, default = default_missing(x), ...) {
-  return(dplyr::first(x = x, order_by = order_by, default = default))
+    return(dplyr::first(x = x, order_by = order_by, default = default))
 }
 
 # last function
 summary_last <- function(x, order_by = NULL, default = default_missing(x), ...) {
-  return(dplyr::last(x = x, order_by = order_by, default = default))
+     return(dplyr::last(x = x, order_by = order_by, default = default))
 }
 
 # nth function
-summary_nth <- function(x, n, order_by = NULL, default = default_missing(x), ...) {
-  return(dplyr::nth(x = x, n = n, order_by = order_by, default = default_missing(x)))
+summary_nth <- function(x, nth_value, order_by = NULL, default = default_missing(x), ...) {
+    return(dplyr::nth(x = x, n = nth_value, order_by = order_by, default = default_missing(x)))
 }
 
 # n_distinct function
 summary_n_distinct<- function(x, na.rm = FALSE, ...) {
-  return(dplyr::n_distinct(x = x, na.rm = na.rm))
+    return(dplyr::n_distinct(x = x, na.rm = na.rm))
 }
 
 #Proportions functions
-proportion_calc <- function(x, prop_test = "==", prop_value, As_percentage = FALSE, na.rm = FALSE,... ){ 
-  if(!na.rm){
-    if(sum(is.na(x)) > 0) return(NA)
-    y <- x[eval(parse(text = paste("x", prop_value, sep = prop_test)))]
-    if(!As_percentage){
-      return(round(length(y)/length(x),digits = 2))
+proportion_calc <- function(x, prop_test = "==", prop_value, As_percentage = FALSE, na.rm = FALSE, na_type = "", ... ){ 
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+      if(!na.rm){
+        if(sum(is.na(x)) > 0) return(NA)
+        y <- x[eval(parse(text = paste("x", prop_value, sep = prop_test)))]
+        if(!As_percentage){
+          return(round(length(y)/length(x),digits = 2))
+          }
+        else {
+          return(round((length(y)/length(x)*100),digits = 2 ))
+          }  
       }
-    else {
-      return(round((length(y)/length(x)*100),digits = 2 ))
-      }  
-  }
-  else {
-    remove.na <- na.omit(x)
-    y <- remove.na[eval(parse(text = paste("remove.na", prop_value, sep = prop_test)))]
-    if (!As_percentage){
-      return(round(length(y)/length(remove.na), digits = 2))
-      }
-    else{
-      return(round(length(y)/length(remove.na)*100, digits = 2 ))
-      }
+      else {
+        remove.na <- na.omit(x)
+        y <- remove.na[eval(parse(text = paste("remove.na", prop_value, sep = prop_test)))]
+        if (!As_percentage){
+          return(round(length(y)/length(remove.na), digits = 2))
+          }
+        else{
+          return(round(length(y)/length(remove.na)*100, digits = 2 ))
+          }
   }
 }
-
+}
 #count function
-count_calc <- function(x, count_test = "==", count_value, na.rm = FALSE, ...){ 
-  if (!na.rm){
-    if (sum(is.na(x)) > 0) return(NA)
-    return(length(x[eval(parse(text = paste("x", count_value, sep = count_test)))]))
-  }
+count_calc <- function(x, count_test = "==", count_value, na.rm = FALSE, na_type = "", ...){ 
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-    y <- na.omit(x)
-    return(length(y[eval(parse(text = paste("y", count_value, sep = count_test)))]))
+      if (!na.rm){
+        if (sum(is.na(x)) > 0) return(NA)
+        return(length(x[eval(parse(text = paste("x", count_value, sep = count_test)))]))
+      }
+      else{
+          y <- na.omit(x)
+        return(length(y[eval(parse(text = paste("y", count_value, sep = count_test)))]))
+  }
   }
 }
 
 #standard error of mean function
 
-standard_error_mean <- function(x, na.rm = FALSE, ...){
-  if (!na.rm){
-    if(sum(is.na(x) > 0)) return(NA)
-     return(sd(x)/sqrt(length(x)))
-  }
-  else{
-    y <- na.omit(x)
-    return(sd(y)/sqrt(length(y)))
-  }
+standard_error_mean <- function(x, na.rm = FALSE, na_type = "", ...){
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+      else{
+      if (!na.rm){
+        if(sum(is.na(x) > 0)) return(NA)
+         return(sd(x)/sqrt(length(x)))
+      }
+      else{
+        y <- na.omit(x)
+        return(sd(y)/sqrt(length(y)))
+      }
+      }
 }
 
 
