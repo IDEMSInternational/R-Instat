@@ -118,7 +118,7 @@ Public Class dlgExportToCMSAF
 
         Using dlgSave As New SaveFileDialog
             dlgSave.Title = "Save Data File"
-            dlgSave.Filter = "RDS Data file (*.RDS)|*.RDS"
+            dlgSave.Filter = "RDS Data file (*.Rdata)|*.Rdata"
             If ucrInputExportFile.GetText() <> "" Then
                 dlgSave.InitialDirectory = ucrInputExportFile.GetText().Replace("/", "\")
             Else
