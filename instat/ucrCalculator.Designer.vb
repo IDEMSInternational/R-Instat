@@ -140,6 +140,7 @@ Partial Class ucrCalculator
         Me.cmdCountstrings = New System.Windows.Forms.Button()
         Me.cmdLocate = New System.Windows.Forms.Button()
         Me.grpLogical = New System.Windows.Forms.GroupBox()
+        Me.cmdNA = New System.Windows.Forms.Button()
         Me.cmdNear = New System.Windows.Forms.Button()
         Me.cmdBetween = New System.Windows.Forms.Button()
         Me.cmdIsFalse = New System.Windows.Forms.Button()
@@ -213,7 +214,9 @@ Partial Class ucrCalculator
         Me.ucrInputTryMessage = New instat.ucrInputTextBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
-        Me.cmdNA = New System.Windows.Forms.Button()
+        Me.cmdWhich = New System.Windows.Forms.Button()
+        Me.cmdIn = New System.Windows.Forms.Button()
+        Me.cmdDoubleSqrBrackets = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -919,6 +922,9 @@ Partial Class ucrCalculator
         '
         'grpLogical
         '
+        Me.grpLogical.Controls.Add(Me.cmdDoubleSqrBrackets)
+        Me.grpLogical.Controls.Add(Me.cmdIn)
+        Me.grpLogical.Controls.Add(Me.cmdWhich)
         Me.grpLogical.Controls.Add(Me.cmdNA)
         Me.grpLogical.Controls.Add(Me.cmdNear)
         Me.grpLogical.Controls.Add(Me.cmdBetween)
@@ -951,6 +957,12 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.grpLogical, "grpLogical")
         Me.grpLogical.Name = "grpLogical"
         Me.grpLogical.TabStop = False
+        '
+        'cmdNA
+        '
+        resources.ApplyResources(Me.cmdNA, "cmdNA")
+        Me.cmdNA.Name = "cmdNA"
+        Me.cmdNA.UseVisualStyleBackColor = True
         '
         'cmdNear
         '
@@ -1425,6 +1437,7 @@ Partial Class ucrCalculator
         '
         'ucrSelectorForCalculations
         '
+        Me.ucrSelectorForCalculations.bDropUnusedFilterLevels = False
         Me.ucrSelectorForCalculations.bShowHiddenColumns = False
         Me.ucrSelectorForCalculations.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorForCalculations, "ucrSelectorForCalculations")
@@ -1439,11 +1452,23 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.strNcFilePath = ""
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
-        'cmdNA
+        'cmdWhich
         '
-        resources.ApplyResources(Me.cmdNA, "cmdNA")
-        Me.cmdNA.Name = "cmdNA"
-        Me.cmdNA.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdWhich, "cmdWhich")
+        Me.cmdWhich.Name = "cmdWhich"
+        Me.cmdWhich.UseVisualStyleBackColor = True
+        '
+        'cmdIn
+        '
+        resources.ApplyResources(Me.cmdIn, "cmdIn")
+        Me.cmdIn.Name = "cmdIn"
+        Me.cmdIn.UseVisualStyleBackColor = True
+        '
+        'cmdDoubleSqrBrackets
+        '
+        resources.ApplyResources(Me.cmdDoubleSqrBrackets, "cmdDoubleSqrBrackets")
+        Me.cmdDoubleSqrBrackets.Name = "cmdDoubleSqrBrackets"
+        Me.cmdDoubleSqrBrackets.UseVisualStyleBackColor = True
         '
         'ucrCalculator
         '
@@ -1657,4 +1682,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdMode As Button
     Friend WithEvents Button1 As Button
     Friend WithEvents cmdNA As Button
+    Friend WithEvents cmdIn As Button
+    Friend WithEvents cmdWhich As Button
+    Friend WithEvents cmdDoubleSqrBrackets As Button
 End Class

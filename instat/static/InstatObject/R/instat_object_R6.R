@@ -495,8 +495,9 @@ instat_object$set("public", "get_objects", function(data_name, object_name, incl
 instat_object$set("public", "get_object_names", function(data_name, include_overall = TRUE, include, exclude, type = "", include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
   if(type == "") overall_object_names = names(private$.objects)
   else {
-    if(type == model_label) overall_object_names = names(private$.objects)[!sapply(private$.objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "htmlTable") %in% class(x)))]
-    else if(type == graph_label) overall_object_names = names(private$.objects)[sapply(private$.objects, function(x) any(c("ggplot", "gg", "gtable", "grob") %in% class(x)))]
+    if(type == model_label) overall_object_names = names(private$.objects)[!sapply(private$.objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "htmlTable", "Surv") %in% class(x)))]
+    else if(type == graph_label) overall_object_names = names(private$.objects)[sapply(private$.objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot") %in% class(x)))]
+    else if(type == surv_label) overall_object_names = names(private$.objects)[sapply(private$.objects, function(x) any(c("Surv") %in% class(x)))]
     else if(type == table_label) overall_object_names = names(private$.objects)[sapply(private$.objects, function(x) any(c("htmlTable") %in% class(x)))]
     else stop("type: ", type, " not recognised")
   }
@@ -611,6 +612,21 @@ instat_object$set("public", "get_graphs", function(data_name, graph_name, includ
 
 instat_object$set("public", "get_graph_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
   self$get_object_names(data_name = data_name, include_overall = include_overall, include, exclude, type = graph_label, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items)
+}
+)
+
+instat_object$set("public", "add_surv", function(data_name, surv, surv_name) {
+  self$add_object(data_name = data_name, object =surv, object_name =surv_name)
+}
+)
+
+instat_object$set("public", "get_surv", function(data_name, surv_name, include_overall = TRUE, force_as_list = FALSE) {
+  self$get_objects(data_name = data_name, object_name = surv_name, include_overall = include_overall, type = surv_label, force_as_list = force_as_list)
+}
+)
+
+instat_object$set("public", "get_surv_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
+  self$get_object_names(data_name = data_name, include_overall = include_overall, include, exclude, type = surv_label, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items)
 }
 )
 
@@ -1150,8 +1166,8 @@ instat_object$set("public","create_factor_data_frame", function(data_name, facto
 }
 )
 
-instat_object$set("public","split_date", function(data_name, col_name = "", year = FALSE, day = FALSE, week = FALSE,  month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, day_in_month = FALSE, day_in_year = FALSE,  leap_year = FALSE, day_in_year_366 = FALSE, dekade = FALSE, pentad = FALSE, quarter = FALSE, s_quarter = FALSE, with_year = FALSE,  s_doy = FALSE, s_year = FALSE, s_start_day_in_month = 1, s_start_month = 8) {
-  self$get_data_objects(data_name)$split_date(col_name = col_name , week = week, month_val = month_val,  month_abbr = month_abbr, month_name = month_name, weekday_val = weekday_val, weekday_abbr = weekday_abbr,  weekday_name =  weekday_name, day = day, year = year, day_in_month = day_in_month, day_in_year = day_in_year,  leap_year =  leap_year, day_in_year_366 = day_in_year_366, dekade = dekade, pentad = pentad, quarter = quarter, s_quarter = s_quarter, with_year = with_year, s_doy = s_doy, s_year = s_year, s_start_day_in_month = s_start_day_in_month, s_start_month = s_start_month)
+instat_object$set("public","split_date", function(data_name, col_name = "", year = FALSE, leap_year = FALSE,  month_val = FALSE, month_abbr = FALSE, month_name = FALSE, week_val = FALSE, week_abbr = FALSE, week_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE,  day = FALSE, day_in_month = FALSE, day_in_year = FALSE, day_in_year_366 = FALSE, pentad_val = FALSE, pentad_abbr = FALSE, dekad_val = FALSE, dekad_abbr = FALSE, quarter_val = FALSE, quarter_abbr = FALSE, with_year = FALSE, s_start_month = 1, s_start_day_in_month = 1) {
+  self$get_data_objects(data_name)$split_date(col_name = col_name , year = year, leap_year =  leap_year, month_val = month_val, month_abbr = month_abbr, month_name = month_name, week_val = week_val, week_abbr = week_abbr, week_name = week_name,  weekday_val = weekday_val, weekday_abbr = weekday_abbr,  weekday_name =  weekday_name, day = day,  day_in_month = day_in_month, day_in_year = day_in_year,   day_in_year_366 = day_in_year_366, pentad_val = pentad_val, pentad_abbr = pentad_abbr, dekad_val = dekad_val, dekad_abbr = dekad_abbr, quarter_val = quarter_val,  quarter_abbr = quarter_abbr, with_year = with_year, s_start_month = s_start_month, s_start_day_in_month = s_start_day_in_month)
 }
 )
 
