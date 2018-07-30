@@ -146,7 +146,7 @@ Public Class dlgSpells
         clsLessThanOperator.Clear()
 
         ucrSelectorForSpells.Reset()
-        ucrReceiverDate.SetMeAsReceiver()
+        ucrReceiverElement.SetMeAsReceiver()
         ucrInputCondition.SetName("Between")
         ucrInputNewColumnName.SetName("spells")
         ucrChkConditional.Checked = False
