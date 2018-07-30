@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgSpells
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Private clsAddKey, clsSpellLength, clsMaxValueManipulation, clsSubSpellLength1 As New RFunction
+    Private clsSpellLength, clsMaxValueManipulation, clsSubSpellLength1 As New RFunction
     Private clsMaxValue, clsMaxValueList, clsMaxValueFunction, clsSpellOrGroupList As New RFunction
     Private clsDayFromAndTo, clsGroupBy, clsAddKeyColName, clsDayFilterCalcFromConvert, clsDayFilterCalcFromList As New RFunction
     Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator As New ROperator
@@ -123,7 +123,6 @@ Public Class dlgSpells
         clsMaxValueManipulation.Clear()
         clsDayFromAndTo.Clear()
         clsGroupBy.Clear()
-        clsAddKey.Clear()
         clsAddKeyColName.Clear()
         clsRRainday.Clear()
         clsSpellLength.Clear()
@@ -154,9 +153,6 @@ Public Class dlgSpells
         ucrInputSpellUpper.SetName(0.85)
 
         ' key
-        clsAddKey.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
-        clsAddKey.AddParameter("col_names", clsRFunctionParameter:=clsAddKeyColName)
-        clsAddKeyColName.SetRCommand("c")
 
         clsDayFilterCalcFromConvert = New RFunction
         clsDayFilterCalcFromConvert.SetRCommand("calc_from_convert")
@@ -266,8 +262,6 @@ Public Class dlgSpells
         ucrInputSpellUpper.AddAdditionalCodeParameterPair(clsGreaterThanOperator, New RParameter("left", 1), iAdditionalPairNo:=1)
         ucrInputSpellLower.AddAdditionalCodeParameterPair(clsLessThanOperator, New RParameter("left", 1), iAdditionalPairNo:=1)
 
-
-        ucrSelectorForSpells.SetRCode(clsAddKey, bReset)
         ucrReceiverStation.SetRCode(clsAddKeyColName, bReset)
         ucrReceiverDate.SetRCode(clsAddKeyColName, bReset)
 
@@ -297,10 +291,6 @@ Public Class dlgSpells
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
-    End Sub
-
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        frmMain.clsRLink.RunScript(clsAddKey.ToScript, strComment:="Spells: Defining column(s) as key")
     End Sub
 
     Private Sub InputConditionOptions()
