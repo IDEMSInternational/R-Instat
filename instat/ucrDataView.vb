@@ -687,7 +687,8 @@ Public Class ucrDataView
         clsAssignOperator.AddParameter("left", grdCurrSheet.Name, iPosition:=0)
         clsAssignOperator.AddParameter("right", clsRFunctionParameter:=clsGetDataFrame, iPosition:=1)
         clsViewDataFrame.AddParameter("x", grdCurrSheet.Name)
-        RunScriptFromDataView(clsViewDataFrame.ToScript, strComment:="Right Click Menu: View R Data Frame", bSeparateThread:=False)
+        RunScriptFromDataView(clsAssignOperator.ToScript, strComment:="Right Click Menu: View R Data Frame", bSeparateThread:=False)
+        RunScriptFromDataView(clsViewDataFrame.ToScript, bSeparateThread:=False)
     End Sub
 
     'Private Sub mnuConvertDate_Click(sender As Object, e As EventArgs)
