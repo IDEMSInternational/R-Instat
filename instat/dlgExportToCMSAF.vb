@@ -83,7 +83,7 @@ Public Class dlgExportToCMSAF
         ucrSelectorImportToCMSAF.Reset()
         ucrInputExportFile.SetName("")
 
-        clsAsDataFrameFunction.SetRCommand("as.data.frame")
+        clsAsDataFrameFunction.SetRCommand("data.frame")
         clsAsDataFrameFunction.SetAssignTo("x")
 
         clsAtrributesFunction.SetRCommand("attr")
