@@ -38,6 +38,7 @@ Partial Class ucrCalculator
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrCalculator))
         Me.lblExpression = New System.Windows.Forms.Label()
         Me.chkSaveResultInto = New System.Windows.Forms.CheckBox()
@@ -140,6 +141,9 @@ Partial Class ucrCalculator
         Me.cmdCountstrings = New System.Windows.Forms.Button()
         Me.cmdLocate = New System.Windows.Forms.Button()
         Me.grpLogical = New System.Windows.Forms.GroupBox()
+        Me.cmdDoubleSqrBrackets = New System.Windows.Forms.Button()
+        Me.cmdIn = New System.Windows.Forms.Button()
+        Me.cmdWhich = New System.Windows.Forms.Button()
         Me.cmdNA = New System.Windows.Forms.Button()
         Me.cmdNear = New System.Windows.Forms.Button()
         Me.cmdBetween = New System.Windows.Forms.Button()
@@ -209,14 +213,14 @@ Partial Class ucrCalculator
         Me.cmdAcos = New System.Windows.Forms.Button()
         Me.cmdCos = New System.Windows.Forms.Button()
         Me.cmdSqrt = New System.Windows.Forms.Button()
+        Me.cmdTrue = New System.Windows.Forms.Button()
+        Me.cmdFalse = New System.Windows.Forms.Button()
+        Me.ttCalculator = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSaveResultInto = New instat.ucrInputComboBox()
         Me.ucrInputTryMessage = New instat.ucrInputTextBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
-        Me.cmdWhich = New System.Windows.Forms.Button()
-        Me.cmdIn = New System.Windows.Forms.Button()
-        Me.cmdDoubleSqrBrackets = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -922,6 +926,8 @@ Partial Class ucrCalculator
         '
         'grpLogical
         '
+        Me.grpLogical.Controls.Add(Me.cmdFalse)
+        Me.grpLogical.Controls.Add(Me.cmdTrue)
         Me.grpLogical.Controls.Add(Me.cmdDoubleSqrBrackets)
         Me.grpLogical.Controls.Add(Me.cmdIn)
         Me.grpLogical.Controls.Add(Me.cmdWhich)
@@ -957,6 +963,24 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.grpLogical, "grpLogical")
         Me.grpLogical.Name = "grpLogical"
         Me.grpLogical.TabStop = False
+        '
+        'cmdDoubleSqrBrackets
+        '
+        resources.ApplyResources(Me.cmdDoubleSqrBrackets, "cmdDoubleSqrBrackets")
+        Me.cmdDoubleSqrBrackets.Name = "cmdDoubleSqrBrackets"
+        Me.cmdDoubleSqrBrackets.UseVisualStyleBackColor = True
+        '
+        'cmdIn
+        '
+        resources.ApplyResources(Me.cmdIn, "cmdIn")
+        Me.cmdIn.Name = "cmdIn"
+        Me.cmdIn.UseVisualStyleBackColor = True
+        '
+        'cmdWhich
+        '
+        resources.ApplyResources(Me.cmdWhich, "cmdWhich")
+        Me.cmdWhich.Name = "cmdWhich"
+        Me.cmdWhich.UseVisualStyleBackColor = True
         '
         'cmdNA
         '
@@ -1413,6 +1437,18 @@ Partial Class ucrCalculator
         Me.cmdSqrt.Name = "cmdSqrt"
         Me.cmdSqrt.UseVisualStyleBackColor = True
         '
+        'cmdTrue
+        '
+        resources.ApplyResources(Me.cmdTrue, "cmdTrue")
+        Me.cmdTrue.Name = "cmdTrue"
+        Me.cmdTrue.UseVisualStyleBackColor = True
+        '
+        'cmdFalse
+        '
+        resources.ApplyResources(Me.cmdFalse, "cmdFalse")
+        Me.cmdFalse.Name = "cmdFalse"
+        Me.cmdFalse.UseVisualStyleBackColor = True
+        '
         'ucrInputCalOptions
         '
         Me.ucrInputCalOptions.AddQuotesIfUnrecognised = True
@@ -1452,32 +1488,14 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.strNcFilePath = ""
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
-        'cmdWhich
-        '
-        resources.ApplyResources(Me.cmdWhich, "cmdWhich")
-        Me.cmdWhich.Name = "cmdWhich"
-        Me.cmdWhich.UseVisualStyleBackColor = True
-        '
-        'cmdIn
-        '
-        resources.ApplyResources(Me.cmdIn, "cmdIn")
-        Me.cmdIn.Name = "cmdIn"
-        Me.cmdIn.UseVisualStyleBackColor = True
-        '
-        'cmdDoubleSqrBrackets
-        '
-        resources.ApplyResources(Me.cmdDoubleSqrBrackets, "cmdDoubleSqrBrackets")
-        Me.cmdDoubleSqrBrackets.Name = "cmdDoubleSqrBrackets"
-        Me.cmdDoubleSqrBrackets.UseVisualStyleBackColor = True
-        '
         'ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.grpLogical)
         Me.Controls.Add(Me.grpSummary)
-        Me.Controls.Add(Me.grpProbabilty)
         Me.Controls.Add(Me.grpMaths)
+        Me.Controls.Add(Me.grpProbabilty)
         Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.grpStrings)
         Me.Controls.Add(Me.grpDates)
@@ -1685,4 +1703,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdIn As Button
     Friend WithEvents cmdWhich As Button
     Friend WithEvents cmdDoubleSqrBrackets As Button
+    Friend WithEvents cmdFalse As Button
+    Friend WithEvents cmdTrue As Button
+    Friend WithEvents ttCalculator As ToolTip
 End Class

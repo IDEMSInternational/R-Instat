@@ -64,6 +64,8 @@ Public Class ucrCalculator
         cmdIsTrue.Enabled = False
         cmdIsFalse.Enabled = False
         bControlsInitialised = True
+        ttCalculator.SetToolTip(cmdRound, "round(x) to round to whole numbers, round(x,2) to round to 2 decimal places, round(x,-2) to round to the nearest 100")
+        ttCalculator.SetToolTip(cmdSiginf, "signif(x,3) to round to 3 significant figures")
     End Sub
 
     Public Sub Reset()
@@ -142,7 +144,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdGreater_Click(sender As Object, e As EventArgs) Handles cmdGreater.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(">")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" > ")
     End Sub
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
@@ -150,7 +152,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdLesser_Click(sender As Object, e As EventArgs) Handles cmdLesser.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("<")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" < ")
     End Sub
 
     Private Sub cmdComma_Click(sender As Object, e As EventArgs) Handles cmdComma.Click
@@ -412,11 +414,11 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdLesserOrEqualsTo_Click(sender As Object, e As EventArgs) Handles cmdLesserOrEqualsTo.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("<=")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" <= ")
     End Sub
 
     Private Sub cmdGreaterOrEqualsTo_Click(sender As Object, e As EventArgs) Handles cmdGreaterOrEqualsTo.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(">=")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" >= ")
     End Sub
 
     Private Sub cmdModulas_Click(sender As Object, e As EventArgs) Handles cmdModulas.Click
@@ -1220,5 +1222,13 @@ Public Class ucrCalculator
 
     Private Sub cmdDoubleSqrBrackets_Click(sender As Object, e As EventArgs) Handles cmdDoubleSqrBrackets.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("[[]]", 2)
+    End Sub
+
+    Private Sub cmdTrue_Click(sender As Object, e As EventArgs) Handles cmdTrue.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("TRUE")
+    End Sub
+
+    Private Sub cmdFalse_Click(sender As Object, e As EventArgs) Handles cmdFalse.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("FALSE")
     End Sub
 End Class
