@@ -20,7 +20,7 @@ Public Class dlgSpells
     Private bReset As Boolean = True
     Private clsSpellLength, clsMaxValueManipulation, clsSubSpellLength1 As New RFunction
     Private clsMaxValue, clsMaxValueList, clsMaxValueFunction, clsSpellOrGroupList As New RFunction
-    Private clsDayFromAndTo, clsGroupBy, clsAddKeyColName, clsDayFilterCalcFromConvert, clsDayFilterCalcFromList As New RFunction
+    Private clsDayFromAndTo, clsGroupBy, clsDayFilterCalcFromConvert, clsDayFilterCalcFromList As New RFunction
     Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator As New ROperator
     Private clsApplyInstatFunction, clsRRainday, clsRRaindayMatch As New RFunction
     Private clsRRaindayOperator, clsRRaindayAndOperator, clsRRaindayLowerOperator, clsRRaindayUpperOperator, clsAdditionalConditionReplaceOperator, clsAdditionalConditionReplaceOperator2, clsGreaterThanOperator, clsLessThanOperator As New ROperator
@@ -123,7 +123,6 @@ Public Class dlgSpells
         clsMaxValueManipulation.Clear()
         clsDayFromAndTo.Clear()
         clsGroupBy.Clear()
-        clsAddKeyColName.Clear()
         clsRRainday.Clear()
         clsSpellLength.Clear()
         clsMaxValue.Clear()
@@ -261,9 +260,6 @@ Public Class dlgSpells
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsLessThanOperator, New RParameter("rain", 0), iAdditionalPairNo:=3)
         ucrInputSpellUpper.AddAdditionalCodeParameterPair(clsGreaterThanOperator, New RParameter("left", 1), iAdditionalPairNo:=1)
         ucrInputSpellLower.AddAdditionalCodeParameterPair(clsLessThanOperator, New RParameter("left", 1), iAdditionalPairNo:=1)
-
-        ucrReceiverStation.SetRCode(clsAddKeyColName, bReset)
-        ucrReceiverDate.SetRCode(clsAddKeyColName, bReset)
 
         ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
         ucrReceiverElement.SetRCode(clsRRaindayUpperOperator, bReset)
