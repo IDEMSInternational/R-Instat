@@ -38,6 +38,7 @@ Public Class ucrDataView
     Private clsFreezeColumns As New RFunction
     Private clsUnfreezeColumns As New RFunction
     Private clsViewDataFrame As New RFunction
+    Private clsAssignOperator As New ROperator
     Private clsGetDataFrame As New RFunction
     Private clsConvertOrderedFactor As New RFunction
     Private clsFilterApplied As New RFunction
@@ -85,6 +86,7 @@ Public Class ucrDataView
         clsFilterApplied.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$filter_applied")
         clsHideDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_dataframe_metadata")
         clsViewDataFrame.SetRCommand("View")
+        clsAssignOperator.SetOperation("<-")
         UpdateRFunctionDataFrameParameters()
     End Sub
 
@@ -682,8 +684,9 @@ Public Class ucrDataView
     End Sub
 
     Private Sub ViewSheet_Click(sender As Object, e As EventArgs) Handles ViewSheet.Click
-        clsViewDataFrame.AddParameter("x", clsRFunctionParameter:=clsGetDataFrame)
-        clsViewDataFrame.AddParameter("title", Chr(34) & grdCurrSheet.Name & Chr(34))
+        clsAssignOperator.AddParameter("left", grdCurrSheet.Name, iPosition:=0)
+        clsAssignOperator.AddParameter("right", clsRFunctionParameter:=clsGetDataFrame, iPosition:=1)
+        clsViewDataFrame.AddParameter("x", grdCurrSheet.Name)
         RunScriptFromDataView(clsViewDataFrame.ToScript, strComment:="Right Click Menu: View R Data Frame", bSeparateThread:=False)
     End Sub
 
