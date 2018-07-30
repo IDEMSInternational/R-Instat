@@ -1975,4 +1975,32 @@ Public Class frmMain
     Private Sub mnuOptionsByContextDescribeBoxplot_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextDescribeBoxplot.Click
         dlgOptionsByContextBoxplot.ShowDialog()
     End Sub
+
+    Private Sub mnuPrepareCheckDataNonNumericCases_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataNonNumericCases.Click
+        dlgFindNonnumericValues.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticReshapeandExamineNonNumericCases_Click(sender As Object, e As EventArgs) Handles mnuClimaticReshapeandExamineNonNumericCases.Click
+        dlgFindNonnumericValues.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticReshapeandExamineReplaceValues_Click(sender As Object, e As EventArgs) Handles mnuClimaticReshapeandExamineReplaceValues.Click
+        dlgReplaceValues.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticReshapeandExamineOneVariableSummarize_Click(sender As Object, e As EventArgs) Handles mnuClimaticReshapeandExamineOneVariableSummarize.Click
+        dlgOneVariableSummarise.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareShare_Click(sender As Object, e As EventArgs) Handles mnuPrepareShare.Click
+        dlgAnonymiseIDColumn.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticPrepareLengthOfSeason_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareLengthOfSeason.Click
+        dlgClimaticLengthOfSeason.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticPrepareCompare_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareCompare.Click
+        dlgCompare.ShowDialog()
+    End Sub
 End Class
