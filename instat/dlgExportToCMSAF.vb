@@ -132,12 +132,20 @@ Public Class dlgExportToCMSAF
     End Sub
 
     Private Sub TestOkEnabled()
-
+        If Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverLatitude.IsEmpty AndAlso Not ucrReceiverLongitude.IsEmpty AndAlso Not ucrReceiverElement.IsEmpty AndAlso Not ucrInputExportFile.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrReceiverDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged, ucrReceiverLongitude.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrInputExportFile.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
