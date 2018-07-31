@@ -43,7 +43,7 @@ Partial Class dlgModelling
         Me.cmdDiv = New System.Windows.Forms.Button()
         Me.cmdDoubleBracket = New System.Windows.Forms.Button()
         Me.cmdClear = New System.Windows.Forms.Button()
-        Me.cmdZero = New System.Windows.Forms.Button()
+        Me.cmdSquareBrackets = New System.Windows.Forms.Button()
         Me.cmdMinus = New System.Windows.Forms.Button()
         Me.grpFirstCalc = New System.Windows.Forms.GroupBox()
         Me.cmdTry = New System.Windows.Forms.Button()
@@ -208,11 +208,11 @@ Partial Class dlgModelling
         Me.cmdClear.Name = "cmdClear"
         Me.cmdClear.UseVisualStyleBackColor = True
         '
-        'cmdZero
+        'cmdSquareBrackets
         '
-        resources.ApplyResources(Me.cmdZero, "cmdZero")
-        Me.cmdZero.Name = "cmdZero"
-        Me.cmdZero.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdSquareBrackets, "cmdSquareBrackets")
+        Me.cmdSquareBrackets.Name = "cmdSquareBrackets"
+        Me.cmdSquareBrackets.UseVisualStyleBackColor = True
         '
         'cmdMinus
         '
@@ -231,7 +231,7 @@ Partial Class dlgModelling
         Me.grpFirstCalc.Controls.Add(Me.cmdDiv)
         Me.grpFirstCalc.Controls.Add(Me.cmdDoubleBracket)
         Me.grpFirstCalc.Controls.Add(Me.cmdClear)
-        Me.grpFirstCalc.Controls.Add(Me.cmdZero)
+        Me.grpFirstCalc.Controls.Add(Me.cmdSquareBrackets)
         Me.grpFirstCalc.Controls.Add(Me.cmdMinus)
         resources.ApplyResources(Me.grpFirstCalc, "grpFirstCalc")
         Me.grpFirstCalc.Name = "grpFirstCalc"
@@ -473,7 +473,7 @@ Partial Class dlgModelling
     Friend WithEvents cmdDiv As Button
     Friend WithEvents cmdDoubleBracket As Button
     Friend WithEvents cmdClear As Button
-    Friend WithEvents cmdZero As Button
+    Friend WithEvents cmdSquareBrackets As Button
     Friend WithEvents cmdMinus As Button
     Friend WithEvents ucrSaveResult As ucrSave
     Friend WithEvents ucrInputTryMessage As ucrInputTextBox
