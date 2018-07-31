@@ -20,7 +20,7 @@ Imports instat
 
     Public Class sdgThemesSub
     Public bControlsInitialised As Boolean = False
-    Private clsTheme, clsElementPlotTitle, clsAxesTitles, clsXElementTitle, clsYElementTitle, clsAllLabels, clsXAxisLables, clsYAxisLabels, clsAllTickMarks, clsXAxisTickMarks, clsYAxisTickMarks, clsUnitAxisTickLength, clsAllAxisLines, clsXAxisLine, clsYAxisLine As New RFunction
+    Private clsThemesFunction, clsElementPlotTitle, clsAxesTitles, clsXElementTitle, clsYElementTitle, clsAllLabels, clsXAxisLables, clsYAxisLabels, clsAllTickMarks, clsXAxisTickMarks, clsYAxisTickMarks, clsUnitAxisTickLength, clsAllAxisLines, clsXAxisLine, clsYAxisLine As New RFunction
     Private clsAllPanelGrid, clsPanelGridMajor, clsPanelGridMinor, clsPanelBackground, clsPanelBorder As New RFunction
     Private clsBaseOperator As New ROperator
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
@@ -58,13 +58,9 @@ Imports instat
         'ucrChkAllLabels.AddToLinkedControls(ucrThemeAxesTickLabels, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
     End Sub
 
-    Public Sub SetDefaults()
-
-    End Sub
-
     Public Sub SetRCode()
         'Theme command 
-        clsTheme = New RFunction
+        clsThemesFunction = New RFunction
         'Titles
         clsElementPlotTitle = New RFunction
         clsAxesTitles = New RFunction
@@ -100,16 +96,23 @@ Imports instat
         Dim clsElementBorder As New RFunction
         Dim clsElementPanelBackGround As New RFunction
         Dim clsElementPlotBackground As New RFunction
+    End Sub
 
+    Public Sub SetRCode(clsBaseOperator As ROperator, clsNewThemesFunction As RFunction, dctNewThemeFunctions As Dictionary(Of String, RFunction), Optional bReset As Boolean = False)
 
+        If Not bControlsInitialised Then
+            InitialiseControls()
+        End If
 
-
-        clsThemeFunction = clsNewThemeFunction
+        clsThemesFunction = clsNewThemesFunction
         ' The position MUST be larger than the position of the theme_* argument
         ' Otherwise the choice of theme will overwrite the options selected here.
         ' Currently set to large value as no reason this cannot be at the end currently
-        clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=100)
+        clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemesFunction, iPosition:=100)
         dctThemeFunctions = dctNewThemeFunctions
+
+        Dim clsElementLegendText As New RFunction
+        Dim clsElementLegendTitle As New RFunction
 
         dctThemeFunctions.TryGetValue("plot.title", clsElementPlotTitle)
         dctThemeFunctions.TryGetValue("axis.title", clsAxesTitles)
@@ -136,8 +139,8 @@ Imports instat
         dctThemeFunctions.TryGetValue("panel.grid.major", clsElementPanelGridMajor)
         dctThemeFunctions.TryGetValue("panel.grid.minor", clsElementPanelGridMinor)
 
-        ucrPanelBackground.SetRCodeForControl("panel.background", clsElementPanelBackGround, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrPlotBackground.SetRCodeForControl("plot.background", clsElementPlotBackground, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrPanelBackground.SetRCodeForControl("panel.background", clsElementPanelBackGround, clsNewThemeFunction:=clsThemesFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrPlotBackground.SetRCodeForControl("plot.background", clsElementPlotBackground, clsNewThemeFunction:=clsThemesFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
     End Sub
 
