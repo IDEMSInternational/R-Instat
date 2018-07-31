@@ -23,9 +23,9 @@ Public Class clsInstatOptionsDefaults
     Public Shared ReadOnly DEFAULTbShowOptionsByContextMenu As Boolean = True
     Public Shared ReadOnly DEFAULTfntOutput As Font = New Font(FontFamily.GenericMonospace, 11, FontStyle.Regular)
     Public Shared ReadOnly DEFAULTclrOutput As Color = Color.Blue
-    Public Shared ReadOnly DEFAULTfntComment As Font = New Font(FontFamily.GenericSansSerif, 11, FontStyle.Regular)
+    Public Shared ReadOnly DEFAULTfntComment As Font = New Font("Calibri", 13, FontStyle.Regular)
     Public Shared ReadOnly DEFAULTclrComment As Color = Color.Green
-    Public Shared ReadOnly DEFAULTfntScript As Font = New Font(FontFamily.GenericSansSerif, 11, FontStyle.Regular)
+    Public Shared ReadOnly DEFAULTfntScript As Font = New Font("Calibri", 13, FontStyle.Regular)
     Public Shared ReadOnly DEFAULTclrScript As Color = Color.Black
     Public Shared ReadOnly DEFAULTfntEditor As Font = New Font(FontFamily.GenericSansSerif, 10, FontStyle.Regular)
     Public Shared ReadOnly DEFAULTclrEditor As Color = Color.Black
