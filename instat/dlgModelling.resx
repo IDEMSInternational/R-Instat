@@ -424,7 +424,7 @@
     <value>6</value>
   </data>
   <data name="grpStats.Location" type="System.Drawing.Point, System.Drawing">
-    <value>301, 66</value>
+    <value>291, 68</value>
   </data>
   <data name="grpStats.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -723,34 +723,34 @@
   <data name="&gt;&gt;cmdClear.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="cmdZero.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="cmdSquareBrackets.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="cmdZero.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cmdSquareBrackets.Location" type="System.Drawing.Point, System.Drawing">
     <value>37, 74</value>
   </data>
-  <data name="cmdZero.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="cmdSquareBrackets.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
   </data>
-  <data name="cmdZero.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cmdSquareBrackets.Size" type="System.Drawing.Size, System.Drawing">
     <value>29, 30</value>
   </data>
-  <data name="cmdZero.TabIndex" type="System.Int32, mscorlib">
+  <data name="cmdSquareBrackets.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="cmdZero.Text" xml:space="preserve">
+  <data name="cmdSquareBrackets.Text" xml:space="preserve">
     <value>[ ]</value>
   </data>
-  <data name="&gt;&gt;cmdZero.Name" xml:space="preserve">
-    <value>cmdZero</value>
+  <data name="&gt;&gt;cmdSquareBrackets.Name" xml:space="preserve">
+    <value>cmdSquareBrackets</value>
   </data>
-  <data name="&gt;&gt;cmdZero.Type" xml:space="preserve">
+  <data name="&gt;&gt;cmdSquareBrackets.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cmdZero.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmdSquareBrackets.Parent" xml:space="preserve">
     <value>grpFirstCalc</value>
   </data>
-  <data name="&gt;&gt;cmdZero.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cmdSquareBrackets.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="cmdMinus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -949,7 +949,7 @@
     <value>1</value>
   </data>
   <data name="grpextRemes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>306, 66</value>
+    <value>292, 68</value>
   </data>
   <data name="grpextRemes.Size" type="System.Drawing.Size, System.Drawing">
     <value>155, 51</value>
@@ -1096,7 +1096,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdloglm.Location" type="System.Drawing.Point, System.Drawing">
-    <value>142, 12</value>
+    <value>142, 14</value>
   </data>
   <data name="cmdloglm.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -1493,6 +1493,9 @@
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>18</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
