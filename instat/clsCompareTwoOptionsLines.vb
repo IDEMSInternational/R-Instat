@@ -188,11 +188,11 @@ Public Class clsCompareTwoOptionsLines
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
     End Sub
 
-    Public Sub SetRCodeforControls(ucrSelectorPlot As ucrSelectorByDataFrameAddRemove, ucrReceiverOption As ucrReceiverSingle, ucrReceiverID As ucrReceiverSingle, ucrReceiverMeasurement As ucrReceiverSingle, ucrInputFactorOption1 As ucrInputFactorLevels, ucrInputFactorOption2 As ucrInputFactorLevels, ucrChkColourByDifference As ucrCheck, ucrChkIncludeBoxplot As ucrCheck, ucrNudTransparency As ucrNud, ucrChkBoxplotOnlyComplete As ucrCheck, ucrChkHline As ucrCheck, ucrInputHlineValue As ucrInputTextBox, bResetControls As Boolean)
+    Public Sub SetRCodeforControls(ucrSelectorPlot As ucrSelectorByDataFrameAddRemove, ucrReceiverOption As ucrReceiverSingle, ucrReceiverID As ucrReceiverSingle, ucrReceiverMeasurement As ucrReceiverSingle, ucrInputFactorOption1 As ucrInputFactorLevels, ucrInputFactorOption2 As ucrInputFactorLevels, ucrChkColourByDifference As ucrCheck, ucrChkIncludeBoxplot As ucrCheck, ucrNudTransparency As ucrNud, ucrChkBoxplotOnlyComplete As ucrCheck, ucrChkHline As ucrCheck, ucrInputHlineValue As ucrInputTextBox, ucrSavePlot As ucrSave, ucrReceiverContext1 As ucrReceiverSingle, ucrReceiverContext2 As ucrReceiverSingle, ucrReceiverContext3 As ucrReceiverSingle, ucrChkSmoothLine As ucrCheck, ucrChkIncludeMeanLine As ucrCheck, bResetControls As Boolean)
         ucrSelectorPlot.AddAdditionalCodeParameterPair(clsPipeOperator, ucrSelectorPlot.GetParameter(), iAdditionalPairNo:=1)
-        ucrReceiverOption.AddAdditionalCodeParameterPair(clsRaesGlobalFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=1)
-        ucrReceiverOption.AddAdditionalCodeParameterPair(clsFilterInOperator, New RParameter("0", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
-        ucrReceiverID.AddAdditionalCodeParameterPair(clsRaesLineFunction, New RParameter("group", iNewPosition:=0), iAdditionalPairNo:=1)
+        ucrReceiverOption.AddAdditionalCodeParameterPair(clsRaesGlobalFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=2)
+        ucrReceiverOption.AddAdditionalCodeParameterPair(clsFilterInOperator, New RParameter("0", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
+        ucrReceiverID.AddAdditionalCodeParameterPair(clsRaesLineFunction, New RParameter("group", iNewPosition:=0), iAdditionalPairNo:=2)
 
         ucrReceiverMeasurement.SetRCode(clsRaesGlobalFunction, bResetControls)
         ucrReceiverOption.SetRCode(clsDCastFormula, bResetControls)
@@ -207,5 +207,6 @@ Public Class clsCompareTwoOptionsLines
         ucrChkBoxplotOnlyComplete.SetRCode(clsFilterMissingOperator, bResetControls)
         ucrChkHline.SetRCode(clsBaseOperator, bResetControls)
         ucrInputHlineValue.SetRCode(clsHlineGeom, bResetControls)
+        ucrSavePlot.SetRCode(clsBaseOperator, bResetControls)
     End Sub
 End Class
