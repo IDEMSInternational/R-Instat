@@ -21,6 +21,7 @@ Public Class dlgDefineOptionsByContext
     Private bReset As Boolean = True
     Private clsDefineOptionsByContext As RFunction
     Private clsTypes As RFunction
+    Private bDefaultsSet As Boolean = True
 
     Private Sub dlgDefineOptionsByContext_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -33,9 +34,17 @@ Public Class dlgDefineOptionsByContext
         SetRCodeforControls(bReset)
         bReset = False
         autoTranslate(Me)
+        TestOkEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
+        'TODO not yet implemented
+        lblKeyColumns.Hide()
+        ucrInputKeyCheck.Hide()
+        ucrInputKeyColumns.Hide()
+        lblKeyCheck.Hide()
+        cmdModify.Hide()
+
         ucrSelectorOptionsByContext.SetParameterIsString()
         ucrSelectorOptionsByContext.SetParameter(New RParameter("data_name", 0))
 
@@ -93,9 +102,20 @@ Public Class dlgDefineOptionsByContext
         ucrReceiverIDOther.SetParameterIsString()
         ucrReceiverIDOther.SetParameter(New RParameter("id_other", 11))
         ucrReceiverIDOther.bExcludeFromSelector = True
+
+        ucrReceiverBlocking1.Selector = ucrSelectorOptionsByContext
+        ucrReceiverBlocking1.SetParameterIsString()
+        ucrReceiverBlocking1.SetParameter(New RParameter("blocking_1", 12))
+        ucrReceiverBlocking1.bExcludeFromSelector = True
+
+        ucrReceiverBlockingOther.Selector = ucrSelectorOptionsByContext
+        ucrReceiverBlockingOther.SetParameterIsString()
+        ucrReceiverBlockingOther.SetParameter(New RParameter("blocking_other", 13))
+        ucrReceiverBlockingOther.bExcludeFromSelector = True
     End Sub
 
     Private Sub SetDefaults()
+        bDefaultsSet = False
         clsDefineOptionsByContext = New RFunction
         clsTypes = New RFunction
 
@@ -107,6 +127,7 @@ Public Class dlgDefineOptionsByContext
         clsDefineOptionsByContext.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$define_as_options_by_context")
         clsDefineOptionsByContext.AddParameter("obyc_types", clsRFunctionParameter:=clsTypes, iPosition:=1)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefineOptionsByContext)
+        bDefaultsSet = True
     End Sub
 
     Private Sub SetRCodeforControls(bResetControls As Boolean)
@@ -118,10 +139,13 @@ Public Class dlgDefineOptionsByContext
         ucrReceiverContext2.SetRCode(clsTypes, bResetControls)
         ucrReceiverContext3.SetRCode(clsTypes, bResetControls)
         ucrReceiverContext4.SetRCode(clsTypes, bResetControls)
+        ucrReceiverContextOther.SetRCode(clsTypes, bResetControls)
         ucrReceiverMeasurement1.SetRCode(clsTypes, bResetControls)
         ucrReceiverMeasurementOther.SetRCode(clsTypes, bResetControls)
         ucrReceiverID1.SetRCode(clsTypes, bResetControls)
         ucrReceiverIDOther.SetRCode(clsTypes, bResetControls)
+        ucrReceiverBlocking1.SetRCode(clsTypes, bResetControls)
+        ucrReceiverBlockingOther.SetRCode(clsTypes, bResetControls)
 
         SetColumnStructureInReceiver()
     End Sub
@@ -156,6 +180,9 @@ Public Class dlgDefineOptionsByContext
 
             ucrReceiverID1.AddItemsWithMetadataProperty(ucrSelectorOptionsByContext.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "O_by_C_Type", {"id_1_label"})
             ucrReceiverIDOther.AddItemsWithMetadataProperty(ucrSelectorOptionsByContext.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "O_by_C_Type", {"id_other_label"})
+
+            ucrReceiverBlocking1.AddItemsWithMetadataProperty(ucrSelectorOptionsByContext.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "O_by_C_Type", {"blocking_1_label"})
+            ucrReceiverBlockingOther.AddItemsWithMetadataProperty(ucrSelectorOptionsByContext.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "O_by_C_Type", {"blocking_other_label"})
 
             ucrReceiverOption1.SetMeAsReceiver()
         End If
