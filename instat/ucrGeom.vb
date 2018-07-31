@@ -172,7 +172,7 @@ Public Class ucrGeom
         'layer params
 
         'These are the list of parameters on the documentation, some may have more options than what we have here which am yet to find out
-        clsgeom_statsummary.AddLayerParameter("fun.data", "list", Chr(34) & "mean_cl_boot" & Chr(34), lstParameterStrings:={Chr(34) & "mean_sdl" & Chr(34), Chr(34) & "mean_cl_boot" & Chr(34)})
+        clsgeom_statsummary.AddLayerParameter("fun.data", "editablelist", Chr(34) & "mean_cl_boot" & Chr(34), lstParameterStrings:={Chr(34) & "mean_sdl" & Chr(34), Chr(34) & "mean_cl_boot" & Chr(34)})
         clsgeom_statsummary.AddLayerParameter("fun.y", "list", Chr(34) & "mean" & Chr(34), lstParameterStrings:={Chr(34) & "median" & Chr(34), Chr(34) & "mean" & Chr(34)})
         clsgeom_statsummary.AddLayerParameter("fun.ymin", "list", Chr(34) & "min" & Chr(34), lstParameterStrings:={Chr(34) & "min" & Chr(34)})
         clsgeom_statsummary.AddLayerParameter("fun.ymax", "list", Chr(34) & "max" & Chr(34), lstParameterStrings:={Chr(34) & "max" & Chr(34)})
