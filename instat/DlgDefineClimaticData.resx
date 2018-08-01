@@ -125,9 +125,58 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>464, 480</value>
+    <value>464, 510</value>
+  </data>
+  <data name="ucrInputCheckInput.Location" type="System.Drawing.Point, System.Drawing">
+    <value>113, 425</value>
+  </data>
+  <data name="ucrInputCheckInput.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 21</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrInputCheckInput.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrInputCheckInput.Name" xml:space="preserve">
+    <value>ucrInputCheckInput</value>
+  </data>
+  <data name="&gt;&gt;ucrInputCheckInput.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputCheckInput.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputCheckInput.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cmdCheckUnique.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdCheckUnique.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 423</value>
+  </data>
+  <data name="cmdCheckUnique.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 23</value>
+  </data>
+  <data name="cmdCheckUnique.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="cmdCheckUnique.Text" xml:space="preserve">
+    <value>Check Unique</value>
+  </data>
+  <data name="&gt;&gt;cmdCheckUnique.Name" xml:space="preserve">
+    <value>cmdCheckUnique</value>
+  </data>
+  <data name="&gt;&gt;cmdCheckUnique.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdCheckUnique.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmdCheckUnique.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="lblStationName.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -158,7 +207,6 @@
   <data name="ucrReceiverStationName.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 37</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrReceiverStationName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
@@ -202,7 +250,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpStation.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="lblDOY.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -481,16 +529,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpDateTime.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 421</value>
+    <value>13, 452</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>423, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -502,7 +550,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="ucrSelectorDefineClimaticData.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 2</value>
@@ -526,7 +574,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorDefineClimaticData.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -970,6 +1018,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpElements.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
 </root>
