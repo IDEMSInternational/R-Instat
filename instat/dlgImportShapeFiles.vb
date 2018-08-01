@@ -52,7 +52,7 @@ Public Class dlgImportShapeFiles
     Private Sub SetDefaults()
         clsReadShapeFiles = New RFunction
 
-        ucrSaveDataframeName.Reset()
+        ucrSaveDataframeName.SetName("")
 
         clsReadShapeFiles.SetPackageName("sf")
         clsReadShapeFiles.SetRCommand("st_read")
