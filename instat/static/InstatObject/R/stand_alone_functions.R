@@ -1120,6 +1120,94 @@ compare_columns <- function(x, y, use_unique = TRUE, sort_values = TRUE, firstno
   }
 }
 
+#' Converting wide (grid) format of daily data into long format
+#' @param x Input data frame
+#' @param day string indicating either the name of the column containing day
+#'   values (as numbers) or "columns" to indicate each day is in seperate
+#'   columns
+#' @param month string indicating either the name of the column containing month
+#'   values (as numbers) or "columns" to indicate each month is in seperate
+#'   columns
+#' @param year string indicating either the name of the column containing year
+#'   values (as numbers) or "columns" to indicate each year is in seperate
+#'   columns
+#' @param first string indicating the first wide column to be gathered
+#' @param last string indicating the last wide column to be gathered
+#' @param sortcols (optional) non-date columns to be sorted on in the output 
+#' @export
+#' @examples
+#' yearcol<-data.frame(month=rep(1:12,times=c(31,29,31,30,31,30,31,31,30,31,30,31)),
+#' day=c(1:31,1:29,1:31,1:30,1:31,1:30,1:31,1:31,1:30,1:31,1:30,1:31),
+#' X2000=rnorm(366),X2001=rnorm(366),X2002=rnorm(366),X2003=rnorm(366))
+#' grid2data(yearcol,day="day",month="month",year="columns",first="X2000",last="X2003")
+
+grid2data <- function(x, day, month, year, first, last, sortcols = NULL){
+  #require(dplyr)
+  #require(reshape2)
+  colnums<-which(colnames(x)%in%c(first,last))
+  if(length(colnums)<2){stop("Check names of first and last column")}
+  
+  if(day!="columns"&month!="columns"&year!="columns"){
+    stop("day OR month OR year must be set equal to 'columns'")
+  }
+  
+  if(sum(c(day=="columns",month=="columns",year=="columns"))>1){
+    stop("cannot set more than one attribute to 'columns'")
+  }
+  
+  if(day=="columns"){
+    if(!month%in%colnames(x)){stop("Check name of month column")}
+    if(!year%in%colnames(x)){stop("Check name of year column")}  
+    
+    y<-data.frame(month=x[,month],year=x[,year],x[,colnums[1]:colnums[2]])
+    if(ncol(y)!=33){stop("Number of day columns not equal to 31")}
+    
+    y<-data.frame(y,x[,!(colnames(x)%in%c(month,year,colnames(y)))])
+    
+    y<-reshape2::melt(y,measure.vars=colnames(y)[3:33],value.name ="value",variable.name="day")
+    
+    y$day<-as.numeric(gsub("[^0-9\\.]", "",  y$day) )
+    if(any(is.na(y$day))){stop("Day values not recognised")}
+  }
+  
+  
+  if(year=="columns"){
+    if(!month%in%colnames(x)){stop("Check name of month column")}
+    if(!day%in%colnames(x)){stop("Check name of day column")}  
+    y<-data.frame(month=x[,month],day=x[,day],x[,colnums[1]:colnums[2]])
+    maxyear<-ncol(y)
+    
+    y<-data.frame(y,x[,!(colnames(x)%in%c(month,year,colnames(y)))])
+    
+    y<-reshape2::melt(y,measure.vars=colnames(y)[3:maxyear],value.name ="value",variable.name="year")
+    
+    y$year<-as.numeric(gsub("[^0-9\\.]", "",  y$year) )
+    if(any(is.na(y$year))){stop("Year values not recognised")}
+  }
+  
+  
+  if(month=="columns"){
+    if(!day%in%colnames(x)){stop("Check name of day column")}
+    if(!year%in%colnames(x)){stop("Check name of year column")}  
+    y<-data.frame(day=x[,day],year=x[,year],x[,colnums[1]:colnums[2]])
+    if(ncol(y)!=14){stop("Number of month columns not equal to 12")}
+    
+    y<-data.frame(y,x[,!(colnames(x)%in%c(month,year,colnames(y)))])
+    colnames(y)[3:14]<-paste("X",1:12,sep="")
+    y<-reshape2::melt(y,measure.vars=colnames(y)[3:14],value.name ="value",variable.name="month")
+    
+    y$month<-as.numeric(gsub("[^0-9\\.]", "",  y$month) )
+  }
+  
+  y$Date<-as.Date(paste(y$year,y$month,y$day,sep="/"))
+  
+  y<-subset(y,is.na(Date)==FALSE)
+  if(length(sortcols)==0){ y<-y[order(y$Date),] }
+  if(length(sortcols)>0){ y<-y[order(y[,sortcols],y$Date),] }
+  rownames(y)<-NULL
+  return(y)
+  
+
 hashed_id <- function(x, salt, algo = "crc32") {
   if (missing(salt)){
       y <- x
@@ -1128,4 +1216,5 @@ hashed_id <- function(x, salt, algo = "crc32") {
     }
   y <- sapply(y, function(X) digest::digest(X, algo = algo))
   as.character(y)
+
 }
