@@ -377,6 +377,12 @@
     <Compile Include="dlgMergeAdditionalData.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgModelling.Designer.vb">
+      <DependentUpon>dlgModelling.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgModelling.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgOptionsByContextBoxplot.Designer.vb">
       <DependentUpon>dlgOptionsByContextBoxplot.vb</DependentUpon>
     </Compile>
@@ -2657,6 +2663,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMergeAdditionalData.resx">
       <DependentUpon>dlgMergeAdditionalData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgModelling.resx">
+      <DependentUpon>dlgModelling.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgNewMarkovChains.sw-KE.resx">
       <DependentUpon>dlgNewMarkovChains.vb</DependentUpon>
