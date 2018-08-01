@@ -34,7 +34,6 @@ Public Class dlgExportDataset
         SetRCodeForControls(bReset)
         bReset = False
         TestOkEnabled()
-        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

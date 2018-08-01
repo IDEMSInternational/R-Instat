@@ -21,7 +21,7 @@ Public Class dlgCountinFactor
     Private clsDefaultFunction As New RFunction
 
     Private Sub dlgCountinFactor_Load(sender As Object, e As EventArgs) Handles Me.Load
-        'autoTranslate(Me)
+        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
