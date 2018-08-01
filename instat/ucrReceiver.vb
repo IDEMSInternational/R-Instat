@@ -375,6 +375,8 @@ Public Class ucrReceiver
                 strItemsParameterNameInRFunction = "graph_name"
             Case "model"
                 strItemsParameterNameInRFunction = "model_name"
+            Case "surv"
+                strItemsParameterNameInRFunction = "surv_name"
             Case "table"
                 strItemsParameterNameInRFunction = "table_name"
             Case "filter"
@@ -496,6 +498,38 @@ Public Class ucrReceiver
         AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & strTemp & Chr(34)})
     End Sub
 
+    Public Sub SetOptionsByContextType(strSingleType As String, Optional strQuotes As String = Chr(34))
+        AddIncludedMetadataProperty("O_by_C_Type", {strQuotes & strSingleType & strQuotes})
+    End Sub
+
+    Public Sub SetOptionsByContextTypes(strTemp() As String)
+        AddIncludedMetadataProperty("O_by_C_Type", strTemp)
+    End Sub
+
+    Public Sub SetOptionsByContextTypesAllMeasurements()
+        AddIncludedMetadataProperty("O_by_C_Type", {Chr(34) & "measurement_1" & Chr(34), Chr(34) & "measurement_other" & Chr(34)})
+    End Sub
+
+    Public Sub SetOptionsByContextTypesAllIDs()
+        AddIncludedMetadataProperty("O_by_C_Type", {Chr(34) & "id_1" & Chr(34), Chr(34) & "id_other" & Chr(34)})
+    End Sub
+
+    Public Sub SetOptionsByContextTypesAllContexts()
+        AddIncludedMetadataProperty("O_by_C_Type", {Chr(34) & "context_1" & Chr(34), Chr(34) & "context_2" & Chr(34), Chr(34) & "context_3" & Chr(34), Chr(34) & "context_4" & Chr(34), Chr(34) & "context_other" & Chr(34)})
+    End Sub
+
+    Public Sub SetOptionsByContextTypesAllOptions()
+        AddIncludedMetadataProperty("O_by_C_Type", {Chr(34) & "option_1" & Chr(34), Chr(34) & "option_other" & Chr(34)})
+    End Sub
+
+    Public Sub SetOptionsByContextTypesAllBlockings()
+        AddIncludedMetadataProperty("O_by_C_Type", {Chr(34) & "blocking_1" & Chr(34), Chr(34) & "blocking_other" & Chr(34)})
+    End Sub
+
+    Public Sub SetOptionsByContextTypesAllOptionsContextsBlockings()
+        AddIncludedMetadataProperty("O_by_C_Type", {Chr(34) & "option_1" & Chr(34), Chr(34) & "option_other" & Chr(34), Chr(34) & "context_1" & Chr(34), Chr(34) & "context_2" & Chr(34), Chr(34) & "context_3" & Chr(34), Chr(34) & "context_4" & Chr(34), Chr(34) & "context_other" & Chr(34), Chr(34) & "blocking_1" & Chr(34), Chr(34) & "blocking_other" & Chr(34)})
+    End Sub
+
     Public Overridable Property Selector As ucrSelector
         Get
             Return ucrSelector
@@ -516,4 +550,11 @@ Public Class ucrReceiver
     Public Overridable Function GetItemsDataFrames() As List(Of String)
         Return New List(Of String)
     End Function
+
+    Public Sub AddItemsWithMetadataProperty(strCurrentDataFrame As String, strProperty As String, strValues As String())
+        If Selector IsNot Nothing Then
+            SetMeAsReceiver()
+            frmMain.clsRLink.SelectColumnsWithMetadataProperty(Me, strCurrentDataFrame, strProperty, strValues)
+        End If
+    End Sub
 End Class
