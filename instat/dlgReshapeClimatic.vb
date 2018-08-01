@@ -21,7 +21,6 @@ Public Class dlgReshapeClimaticData
     Private bReset As Boolean = True
     Private clsGridtoDataFunc As New RFunction
 
-
     Private Sub dlgReshapeClimaticData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -34,6 +33,7 @@ Public Class dlgReshapeClimaticData
         bReset = False
         autoTranslate(Me)
         TestOkEnabled()
+        ReopenDialog()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -81,6 +81,7 @@ Public Class dlgReshapeClimaticData
         'ucrReceiverMonth.bAutoFill = True
 
         ucrReceiverStation.SetParameter(New RParameter("sortcols", 6))
+        ucrReceiverStation.SetClimaticType("station")
         ucrReceiverStation.SetParameterIsString()
         ucrReceiverStation.bAutoFill = True
 
@@ -95,11 +96,11 @@ Public Class dlgReshapeClimaticData
 
         ucrReceiverFirstMonth.SetParameter(New RParameter("first", 4))
         ucrReceiverFirstMonth.SetParameterIsString()
-        ucrReceiverFirstMonth.bAutoFill = True
+
 
         ucrReceiverLastMonth.SetParameter(New RParameter("last", 5))
         ucrReceiverLastMonth.SetParameterIsString()
-        ucrReceiverLastMonth.bAutoFill = True
+
 
         'rdoDay
         'ucrReceiverYearTwo.SetParameter(New RParameter(""))
@@ -108,11 +109,11 @@ Public Class dlgReshapeClimaticData
 
         ucrReceiverFirstDay.SetParameter(New RParameter("first", 4))
         ucrReceiverFirstDay.SetParameterIsString()
-        ucrReceiverFirstDay.bAutoFill = True
+
 
         ucrReceiverLastDay.SetParameter(New RParameter("last", 5))
         ucrReceiverLastDay.SetParameterIsString()
-        ucrReceiverLastDay.bAutoFill = True
+
 
         'ucrReceiverMonthTwo.SetParameter(New RParameter(""))
         'ucrReceiverMonthTwo.SetParameterIsString()
@@ -213,7 +214,6 @@ Public Class dlgReshapeClimaticData
 
     End Sub
 
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeforControls(True)
@@ -225,8 +225,16 @@ Public Class dlgReshapeClimaticData
             ucrNewDFName.SetPrefix(ucrSelectorReshapeClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         End If
     End Sub
+
     Private Sub ucrPnlReshapeClimaticData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlReshapeClimaticData.ControlValueChanged, ucrReceiverMonth.ControlValueChanged, ucrReceiverDayofMonth.ControlValueChanged, ucrReceiverDayofYear.ControlValueChanged, ucrReceiverMonthTwo.ControlValueChanged, ucrReceiverYear.ControlValueChanged, ucrReceiverYearTwo.ControlValueChanged
         UpdateParameters()
+    End Sub
+
+    Private Sub ReopenDialog()
+        ucrReceiverFirstMonth.Clear()
+        ucrReceiverLastMonth.Clear()
+        ucrReceiverFirstDay.Clear()
+        ucrReceiverLastDay.Clear()
     End Sub
 
     Private Sub UpdateParameters()
@@ -247,7 +255,7 @@ Public Class dlgReshapeClimaticData
 
     End Sub
 
-    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewDFName.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged, ucrReceiverYearTwo.ControlContentsChanged, ucrReceiverFirstYear.ControlContentsChanged, ucrReceiverLastYear.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverYearTwo.ControlContentsChanged, ucrReceiverFirstMonth.ControlContentsChanged, ucrReceiverLastMonth.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrReceiverMonthTwo.ControlContentsChanged, ucrReceiverDayofYear.ControlContentsChanged, ucrReceiverDayofMonth.ControlContentsChanged, ucrReceiverFirstDay.ControlContentsChanged, ucrReceiverLastDay.ControlContentsChanged
+    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewDFName.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged, ucrReceiverYearTwo.ControlContentsChanged, ucrReceiverFirstYear.ControlContentsChanged, ucrReceiverLastYear.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverYearTwo.ControlContentsChanged, ucrReceiverFirstMonth.ControlContentsChanged, ucrReceiverLastMonth.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrReceiverMonthTwo.ControlContentsChanged, ucrReceiverDayofYear.ControlContentsChanged, ucrReceiverDayofMonth.ControlContentsChanged, ucrReceiverFirstDay.ControlContentsChanged, ucrReceiverLastDay.ControlContentsChanged, ucrPnlReshapeClimaticData.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
