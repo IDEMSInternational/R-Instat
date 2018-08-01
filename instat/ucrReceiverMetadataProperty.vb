@@ -76,7 +76,7 @@ Public Class ucrReceiverMetadataProperty
             If ctrActive.Equals(ucrInputCboParamValue) Then
                 If clsLayerParam.strLayerParameterDataType = "boolean" Then
                     ucrInputCboParamValue.SetItems({"TRUE", "FALSE"}, bAddConditions:=True, bAddQuotes:=False)
-                ElseIf clsLayerParam.strLayerParameterDataType = "list" Then
+                ElseIf clsLayerParam.strLayerParameterDataType = "list" OrElse clsLayerParam.strLayerParameterDataType = "editablelist" Then
                     If clsLayerParam.lstParameterStrings IsNot Nothing AndAlso clsLayerParam.lstParameterStrings.Count > 0 Then
                         ucrInputCboParamValue.SetItems(clsLayerParam.lstParameterStrings, bAddConditions:=True, bAddQuotes:=False)
                     Else
