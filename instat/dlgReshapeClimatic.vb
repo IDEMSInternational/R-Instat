@@ -64,35 +64,27 @@ Public Class dlgReshapeClimaticData
         ucrReceiverLastDay.Selector = ucrSelectorReshapeClimaticData
 
         'rdoYear
-        ucrReceiverFirstYear.SetParameterIsString()
         ucrReceiverFirstYear.SetParameter(New RParameter("first", 4))
-        ucrReceiverFirstYear.bAutoFill = True
+        ucrReceiverFirstYear.SetParameterIsString()
 
-        ucrReceiverLastYear.SetParameterIsString()
         ucrReceiverLastYear.SetParameter(New RParameter("last", 5))
-        ucrReceiverLastYear.bAutoFill = True
+        ucrReceiverLastYear.SetParameterIsString()
 
         'ucrReceiverDayofYear.SetParameter(New RParameter(""))
         'ucrReceiverDayofYear.SetParameterIsString()
-        'ucrReceiverDayofYear.bAutoFill = True
 
         'ucrReceiverMonth.SetParameter(New RParameter(""))
         'ucrReceiverMonth.SetParameterIsString()
-        'ucrReceiverMonth.bAutoFill = True
 
         ucrReceiverStation.SetParameter(New RParameter("sortcols", 6))
-        ucrReceiverStation.SetClimaticType("station")
         ucrReceiverStation.SetParameterIsString()
-        ucrReceiverStation.bAutoFill = True
 
         'rdoMonth
         'ucrReceiverYear.SetParameter(New RParameter(""))
         'ucrReceiverYear.SetParameterIsString()
-        'ucrReceiverYear.bAutoFill = True
 
         'ucrReceiverDayofMonth.SetParameter(New RParameter(""))
         'ucrReceiverDayofMonth.SetParameterIsString()
-        'ucrReceiverDayofMonth.bAutoFill = True
 
         ucrReceiverFirstMonth.SetParameter(New RParameter("first", 4))
         ucrReceiverFirstMonth.SetParameterIsString()
@@ -105,7 +97,6 @@ Public Class dlgReshapeClimaticData
         'rdoDay
         'ucrReceiverYearTwo.SetParameter(New RParameter(""))
         'ucrReceiverYearTwo.SetParameterIsString()
-        'ucrReceiverYearTwo.bAutoFill = True
 
         ucrReceiverFirstDay.SetParameter(New RParameter("first", 4))
         ucrReceiverFirstDay.SetParameterIsString()
@@ -114,10 +105,8 @@ Public Class dlgReshapeClimaticData
         ucrReceiverLastDay.SetParameter(New RParameter("last", 5))
         ucrReceiverLastDay.SetParameterIsString()
 
-
         'ucrReceiverMonthTwo.SetParameter(New RParameter(""))
         'ucrReceiverMonthTwo.SetParameterIsString()
-        'ucrReceiverMonthTwo.bAutoFill = True
 
         ucrPnlReshapeClimaticData.AddToLinkedControls(ucrReceiverFirstYear, {rdoYear}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlReshapeClimaticData.AddToLinkedControls(ucrReceiverLastYear, {rdoYear}, bNewLinkedHideIfParameterMissing:=True)

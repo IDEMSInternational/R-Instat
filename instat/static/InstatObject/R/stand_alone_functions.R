@@ -1207,6 +1207,7 @@ grid2data <- function(x, day, month, year, first, last, sortcols = NULL){
   rownames(y)<-NULL
   return(y)
   
+  }
 
 hashed_id <- function(x, salt, algo = "crc32") {
   if (missing(salt)){
