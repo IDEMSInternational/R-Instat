@@ -67,7 +67,7 @@ Public Class dlgImportShapeFiles
         Dim strTemp As String = ""
 
         Using dlgOpen As New OpenFileDialog
-            dlgOpen.Filter = "All Shape files|*.shp|Shape files|*.shp"
+            dlgOpen.Filter = "All Shape files|*.shp;*.dbf"
             dlgOpen.Title = "Import Shape File"
 
             If bFromLibrary Then
@@ -85,7 +85,7 @@ Public Class dlgImportShapeFiles
                     strFilePath = dlgOpen.FileName
                     strFileExt = Path.GetExtension(strFilePath)
                     ucrInputFilePath.SetName(Replace(strFilePath, "\", "/"))
-                    If strFileExt = ".shp" Then
+                    If strFileExt = ".shp" OrElse strFileExt = ".dbf" Then
                         ucrSaveDataframeName.SetName(frmMain.clsRLink.MakeValidText(strFileName))
                         clsReadShapeFiles.AddParameter("dsn", Chr(34) & Replace(strFilePath, "\", "/") & Chr(34))
                     End If
