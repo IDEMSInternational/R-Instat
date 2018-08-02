@@ -53,6 +53,8 @@ Public Class dlgExportToCMSAF
 
         ucrReceiverDate.SetParameter(New RParameter("date", 1))
         ucrReceiverDate.SetParameterIsRFunction()
+        ucrReceiverDate.SetClimaticType("date")
+        ucrReceiverDate.bAutoFill = True
 
 
         ucrReceiverLongitude.SetParameter(New RParameter("lon", 2))
