@@ -72,7 +72,6 @@ Public Class dlgExportToCMSAF
     End Sub
 
     Private Sub SetDefaults()
-        Dim strSIS As String = "SIS"
 
         clsAsDataFrameFunction = New RFunction
         clsAtrributesFunction = New RFunction
@@ -94,7 +93,6 @@ Public Class dlgExportToCMSAF
 
         clsAssignOperator.SetOperation("<-")
         clsAssignOperator.AddParameter("left", clsRFunctionParameter:=clsAtrributesFunction, iPosition:=0)
-        clsAssignOperator.AddParameter("right", strParameterValue:=Chr(34) & strSIS & Chr(34), iPosition:=1)
 
         clsExportFunction.SetPackageName("rio")
         clsExportFunction.SetRCommand("export")
@@ -131,6 +129,11 @@ Public Class dlgExportToCMSAF
             End If
 
         End Using
+    End Sub
+
+    Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlValueChanged
+        'This parameter is being added manually here because we are setting it elsewhere as an Rfunction.
+        clsAssignOperator.AddParameter("SIS", ucrReceiverElement.GetVariableNames, bIncludeArgumentName:=False, iPosition:=1)
     End Sub
 
     Private Sub TestOkEnabled()
