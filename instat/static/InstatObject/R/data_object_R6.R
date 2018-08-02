@@ -2027,6 +2027,8 @@ data_object$set("public","make_date_yeardoy", function(year, doy, year_format = 
     if(is.factor(year_col)) {
       year_col <- as.numeric(levels(year_col))[year_col]
     }
+    #Replacing day 60 with 0 for non-leap years.This will result into NA dates
+    doy_col[(!lubridate::leap_year(year_col)) & doy_col == 60] <- 0
     doy_col[(!lubridate::leap_year(year_col)) & doy_col > 60] <- doy_col[(!lubridate::leap_year(year_col)) & doy_col > 60] - 1
   }
   return(temp_date <- as.Date(paste(year_col, doy_col), format = paste(year_format, doy_format)))
