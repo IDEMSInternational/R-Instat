@@ -1120,94 +1120,224 @@ compare_columns <- function(x, y, use_unique = TRUE, sort_values = TRUE, firstno
   }
 }
 
-#' Converting wide (grid) format of daily data into long format
+#' Converting grid (wide) format daily climatic data into tidy (long format) data
 #' @param x Input data frame
-#' @param day string indicating either the name of the column containing day
-#'   values (as numbers) or "columns" to indicate each day is in seperate
-#'   columns
-#' @param month string indicating either the name of the column containing month
-#'   values (as numbers) or "columns" to indicate each month is in seperate
-#'   columns
-#' @param year string indicating either the name of the column containing year
-#'   values (as numbers) or "columns" to indicate each year is in seperate
-#'   columns
-#' @param first string indicating the first wide column to be gathered
-#' @param last string indicating the last wide column to be gathered
-#' @param sortcols (optional) non-date columns to be sorted on in the output 
+#' @param format Either "years", "months" or "days" to indicate what the stacking columns represent
+#' @param day the name of the column containing day of month values (if format != "days")
+#' @param month the name of the column containing month values (if format != "months")
+#' @param year the name of the column containing year values (required if format != "years")
+#' @param stack_cols a character vector of columns to stack
+#' if format == "days" 31 columns (in order) for each day of the month are expected
+#' if format == "months" 12 columns (in order) for each month are expected
+#' if format == "years" any number of year columns can be given. These should be named with format "Xyyyy"
+#' where "X" is any character and "yyyy" is the year
+#' @param station (optional) when format = "days" or "months" the name of a station column can be given
+#' when the data is for multiple stations
+#' @param element (optional) when format = "days" or "months" the name of an element column can be given
+#' when the data is for multiple elements
+#' @param element_name (optional) if data is for single element, element_name is the name of the column containing
+#' the values. Default is "value". Ignored if element not missing.
 #' @export
 #' @examples
-#' yearcol<-data.frame(month=rep(1:12,times=c(31,29,31,30,31,30,31,31,30,31,30,31)),
+#' yearcol <- data.frame(month=rep(1:12,times=c(31,29,31,30,31,30,31,31,30,31,30,31)),
 #' day=c(1:31,1:29,1:31,1:30,1:31,1:30,1:31,1:31,1:30,1:31,1:30,1:31),
 #' X2000=rnorm(366),X2001=rnorm(366),X2002=rnorm(366),X2003=rnorm(366))
 #' grid2data(yearcol,day="day",month="month",year="columns",first="X2000",last="X2003")
 
-grid2data <- function(x, day, month, year, first, last, sortcols = NULL){
-  #require(dplyr)
-  #require(reshape2)
-  colnums<-which(colnames(x)%in%c(first,last))
-  if(length(colnums)<2){stop("Check names of first and last column")}
+tidy_climatic_data <- function(x, format, stack_cols, day, month, year, station, element, element_name = "value") {
   
-  if(day!="columns"&month!="columns"&year!="columns"){
-    stop("day OR month OR year must be set equal to 'columns'")
+  if(!format %in% c("days", "months", "years")) stop("format must be either 'days', 'months' or 'years'")
+  if(!all(stack_cols %in% names(x))) stop("Some of the stack_cols were not found in x.")
+  if(!all(sapply(x[, stack_cols], is.numeric))) stop("All stack_cols must be numeric\nThe following stack_cols are not numeric: ", paste(stack_cols[!sapply(x[, stack_cols], is.numeric)], collapse = ","))
+  if(!missing(day) && !day %in% names(x)) stop("day column not found in x.")
+  if(!missing(month) && !month %in% names(x)) stop("month column not found in x.")
+  if(!missing(year) && !year %in% names(x)) stop("year column not found in x.")
+  if(!missing(station) && !station %in% names(x)) stop("station column not found in x.")
+  if(!missing(element) && !element %in% names(x)) stop("element column not found in x.")
+  
+  # check day column is valid (if specified)
+  if(!missing(day)) {
+    day_data <- x[[day]]
+    if(anyNA(day_data)) stop("day column contains: ", sum(is.na(day_data)), " missing values")
+    if(!is.numeric(day_data)) stop("day column must be numeric")
+    invalid_day <- (day_data < 1 | day_data > 31 | (day_data %% 1) != 0)
+    if(any(invalid_day)) {
+      invalid_values <- unique(day_data[invalid_day])
+      stop("day column contains the following invalid values: ", paste(invalid_values, collapse = ",")) 
+    }
   }
   
-  if(sum(c(day=="columns",month=="columns",year=="columns"))>1){
-    stop("cannot set more than one attribute to 'columns'")
+  # check month column is valid (if specified)
+  if(!missing(month)) {
+    month_data <- x[[month]]
+    # Initialise no month format
+    month_format <- ""
+    if(anyNA(month_data)) stop("month column contains: ", sum(is.na(month_data)), " missing values")
+    if(is.numeric(month_data)) {
+      invalid_month <- (month_data < 1 | month_data > 12 | (month_data %% 1) != 0)
+      if(any(invalid_month)) {
+        invalid_values <- unique(month_data[invalid_month])
+        stop("month column contains the following invalid values: ", paste(invalid_values, collapse = ",")) 
+      }
+      # Month format will be used in as.Date()
+      month_format <- "%m"
+    }
+    else {
+      # Convert to title case to match month.name and month.abb
+      month_data_title <- stringr::str_to_title(month_data)
+      if(all(month_data_title %in% month.abb)) month_format <- "%b"
+      else if(all(month_data_title %in% month.name)) month_format <- "%B"
+      if(month_format == "") {
+        invalid_short <- unique(month_data[!month_data_title %in% month.abb])
+        invalid_long <- unique(month_data[!month_data_title %in% month.name])
+        if(length(invalid_short) < 12) {
+          stop("Some month values were not unrecognised.\nIf specifying short names the following are invalid: ", paste(invalid_short, collapse = ", "), "\nAlternatively use a numeric month column.")
+        }
+        else if(length(invalid_long) < 12) {
+          stop("Some month values were not unrecognised.\nIf specifying long names the following are invalid: ", paste(invalid_long, collapse = ", "), "\nAlternatively use a numeric month column.")
+        }
+        else stop("No values in the month column were recognised.\nUse either\n short names: ", paste(month.abb, collapse = ", "), "\nlong names: ", paste(month.name, collapse = ", "), "\nor numbers 1 to 12.")
+      }
+      # Put title case months into the data as this will be needed to make the date column
+      x[[month]] <- month_data_title 
+    }
   }
   
-  if(day=="columns"){
-    if(!month%in%colnames(x)){stop("Check name of month column")}
-    if(!year%in%colnames(x)){stop("Check name of year column")}  
+  # check year column is valid (if specified)
+  if(!missing(year)) {
+    year_data <- x[[year]]
+    if(anyNA(year_data)) stop("year column contains: ", sum(is.na(year_data)), " missing values")
+    if(!is.numeric(year_data)) stop("year column must be numeric")
     
-    y<-data.frame(month=x[,month],year=x[,year],x[,colnums[1]:colnums[2]])
-    if(ncol(y)!=33){stop("Number of day columns not equal to 31")}
-    
-    y<-data.frame(y,x[,!(colnames(x)%in%c(month,year,colnames(y)))])
-    
-    y<-reshape2::melt(y,measure.vars=colnames(y)[3:33],value.name ="value",variable.name="day")
-    
-    y$day<-as.numeric(gsub("[^0-9\\.]", "",  y$day) )
-    if(any(is.na(y$day))){stop("Day values not recognised")}
+    year_format <- ""
+    if(all(stringr::str_length(year_data) == 4)) year_format <- "%Y"
+    else if(all(stringr::str_length(year_data) == 2)) year_format <- "%y"
+    if(year_format == "") {
+      invalid_short <- unique(year_data[stringr::str_length(year_data) != 2])
+      invalid_long <- unique(year_data[stringr::str_length(year_data) != 4])
+      if(length(invalid_short) < length(year_data) && length(invalid_short) < length(invalid_long)) {
+        stop("Some year values were not recognised.\nIf specifying four digit years the following are invalid: ", paste(invalid_long, collapse = ", "), "\nYear column must be contain either all four digit or all two digit values.")
+      }
+      else if(length(invalid_long) < length(year_data) && length(invalid_long) < length(invalid_short)) {
+        stop("Some year values were not recognised.\nIf specifying two digit years the following are invalid: ", paste(invalid_short, collapse = ", "), "\nYear column must be contain either all four digit or all two digit values.")
+      }
+      else stop("No values in the year column were recognised\nYear column must contain either all four digit or all two digit values.")
+    }
   }
   
-  
-  if(year=="columns"){
-    if(!month%in%colnames(x)){stop("Check name of month column")}
-    if(!day%in%colnames(x)){stop("Check name of day column")}  
-    y<-data.frame(month=x[,month],day=x[,day],x[,colnums[1]:colnums[2]])
-    maxyear<-ncol(y)
+  if(format == "days") {
     
-    y<-data.frame(y,x[,!(colnames(x)%in%c(month,year,colnames(y)))])
+    # month column required in this case
+    if(missing(month)) stop("month column is required when format == 'days'")
     
-    y<-reshape2::melt(y,measure.vars=colnames(y)[3:maxyear],value.name ="value",variable.name="year")
+    # year column required in this case
+    if(missing(year)) stop("year column is required when format == 'days'")
     
-    y$year<-as.numeric(gsub("[^0-9\\.]", "",  y$year) )
-    if(any(is.na(y$year))){stop("Year values not recognised")}
+    # stack column checks
+    if(length(stack_cols) != 31) stop("You have specified: ", length(stack_cols), " stack columns\nThere must be exactly 31 stack columns when format == 'days'")
+    
+    # This ensures all other columns are dropped
+    y <- data.frame(month = x[[month]], year = x[[year]], x[ , stack_cols])
+    if(!missing(station)) y$station <- x[[station]]
+    if(!missing(element)) y$element <- x[[element]]
+    # In case element_name is the name of an existing column in y
+    if(element_name %in% names(y)) element_name <- next_default_item(prefix = element_name, existing_names = names(y))
+    y <- reshape2::melt(y, measure.vars = stack_cols, value.name = element_name, variable.name = "day")
+    
+    # This assumes stack_cols are in the correct order i.e. 1 - 31
+    y$day <- as.numeric(y$day)
+    
+    y$date <- as.Date(paste(y$year, y$month, y$day), format = paste(year_format, month_format, "%d"))
+    
+    # standard format of slowest varying structure variables first (station then date) followed by measurements
+    if(!missing(station)) z <- data.frame(station = y$station, date = y$date)
+    else z <- data.frame(date = y$date)
+    z[[element_name]] <- y[[element_name]]
+    
+    if(!missing(element)) z$element <- y$element
   }
-  
-  
-  if(month=="columns"){
-    if(!day%in%colnames(x)){stop("Check name of day column")}
-    if(!year%in%colnames(x)){stop("Check name of year column")}  
-    y<-data.frame(day=x[,day],year=x[,year],x[,colnums[1]:colnums[2]])
-    if(ncol(y)!=14){stop("Number of month columns not equal to 12")}
+  else if(format == "months") {
+    # month column required in this case
+    if(missing(day)) stop("day column is required when format == 'months'")
     
-    y<-data.frame(y,x[,!(colnames(x)%in%c(month,year,colnames(y)))])
-    colnames(y)[3:14]<-paste("X",1:12,sep="")
-    y<-reshape2::melt(y,measure.vars=colnames(y)[3:14],value.name ="value",variable.name="month")
+    # year column required in this case
+    if(missing(year)) stop("year column is required when format == 'months'")
     
-    y$month<-as.numeric(gsub("[^0-9\\.]", "",  y$month) )
+    # stack column checks
+    if(length(stack_cols) != 12) stop("You have specified: ", length(stack_cols), " stack columns\nThere must be exactly 12 stack columns when format == 'months'")
+    
+    # This ensures all other columns are dropped
+    y <- data.frame(day = x[[day]], year = x[[year]], x[ , stack_cols])
+    if(!missing(station)) y$station <- x[[station]]
+    if(!missing(element)) y$element <- x[[element]]
+    # In case element_name is the name of an existing column in y
+    if(element_name %in% names(y)) element_name <- next_default_item(prefix = element_name, existing_names = names(y))
+    y <- reshape2::melt(y, measure.vars = stack_cols, value.name = element_name, variable.name = "month")
+    
+    # This assumes stack_cols are in the correct order i.e. 1 - 12
+    y$month <- as.numeric(y$month)
+    
+    y$date <- as.Date(paste(y$year, y$month, y$day), format = paste(year_format, month_format, "%d"))
+    
+    # standard format of slowest varying structure variables first (station then date) followed by measurements
+    if(!missing(station)) z <- data.frame(station = y$station, date = y$date)
+    else z <- data.frame(date = y$date)
+    z[[element_name]] <- y[[element_name]]
+    
+    if(!missing(element)) z$element <- y$element
   }
+  # if(year=="columns"){
+  #   if(!month%in%colnames(x)){stop("Check name of month column")}
+  #   if(!day%in%colnames(x)){stop("Check name of day column")}  
+  #   y<-data.frame(month=x[,month],day=x[,day],x[,colnums[1]:colnums[2]])
+  #   maxyear<-ncol(y)
+  #   
+  #   y<-data.frame(y,x[,!(colnames(x)%in%c(month,year,colnames(y)))])
+  #   
+  #   y<-reshape2::melt(y,measure.vars=colnames(y)[3:maxyear],value.name ="value",variable.name="year")
+  #   
+  #   y$year<-as.numeric(gsub("[^0-9\\.]", "",  y$year) )
+  #   if(any(is.na(y$year))){stop("Year values not recognised")}
+  # }
+  # 
+  # 
+  # if(month=="columns"){
+  #   if(!day%in%colnames(x)){stop("Check name of day column")}
+  #   if(!year%in%colnames(x)){stop("Check name of year column")}  
+  #   y<-data.frame(day=x[,day],year=x[,year],x[,colnums[1]:colnums[2]])
+  #   if(ncol(y)!=14){stop("Number of month columns not equal to 12")}
+  #   
+  #   y<-data.frame(y,x[,!(colnames(x)%in%c(month,year,colnames(y)))])
+  #   colnames(y)[3:14]<-paste("X",1:12,sep="")
+  #   y<-reshape2::melt(y,measure.vars=colnames(y)[3:14],value.name ="value",variable.name="month")
+  #   
+  #   y$month<-as.numeric(gsub("[^0-9\\.]", "",  y$month) )
+  # }
+  # 
+  # y$Date<-as.Date(paste(y$year,y$month,y$day,sep="/"))
   
-  y$Date<-as.Date(paste(y$year,y$month,y$day,sep="/"))
+  # y<-subset(y,is.na(Date)==FALSE)
+  # if(length(sortcols)==0){ y<-y[order(y$Date),] }
+  # if(length(sortcols)>0){ y<-y[order(y[,sortcols],y$Date),] }
+  # rownames(y)<-NULL
   
-  y<-subset(y,is.na(Date)==FALSE)
-  if(length(sortcols)==0){ y<-y[order(y$Date),] }
-  if(length(sortcols)>0){ y<-y[order(y[,sortcols],y$Date),] }
-  rownames(y)<-NULL
-  return(y)
+  # TODO possibly check if any non missing values in element column(s) of missing dates
+  # This could indicate data entry issue or incorrect use of the function
+  # These could be reported or left in. If left in - original columns would be useful for reference
+  z <- dplyr::filter(z, !is.na(date))
   
+  # If data contains multiple elements, unstack the element column
+  if(!missing(element)) {
+    #TODO need to check station, date duplicates as this will mess the unstacking
+    if(!missing(station)) f <- as.formula("station + date ~ element")
+    else f <- as.formula("date ~ element")
+    z <- reshape2::dcast(z, ... ~ element, value.var = element_name)
   }
+  if(!missing(station)) z <- z %>% dplyr::group_by(station)
+  z <- z %>% dplyr::arrange(date, .by_group = TRUE) %>% dplyr::ungroup()
+  
+  return(z)
+}
 
 hashed_id <- function(x, salt, algo = "crc32") {
   if (missing(salt)){
