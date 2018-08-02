@@ -24,6 +24,7 @@ Public Class ucrFilter
     Public Event FilterChanged()
     Public strDefaultColumn = ""
     Public strDefaultDataFrame = ""
+    Public strCondition As String
 
     Public Sub New()
         ' This call is required by the designer.
@@ -64,6 +65,8 @@ Public Class ucrFilter
         ucrValueForFilter.SetItems({"NA"})
         ucrValueForFilter.SetDropDownStyleAsEditable(True)
         ucrFilterOperation.SetDropDownStyleAsNonEditable()
+        ucrInputDateNA.SetItems({"NA"})
+        ucrInputDateNA.SetDropDownStyleAsEditable(True)
         ucrFactorLevels.SetAsMultipleSelector()
         ucrFactorLevels.SetReceiver(ucrFilterByReceiver)
         ucrFactorLevels.SetIncludeLevels(False)
@@ -97,6 +100,7 @@ Public Class ucrFilter
             cmdToggleSelectAll.Visible = False
             ucrFilterOperation.Visible = False
             ucrFilterDateTimePicker.Visible = False
+            ucrInputDateNA.Visible = False
 
         ElseIf Not ucrFilterByReceiver.IsEmpty Then
 
@@ -107,6 +111,7 @@ Public Class ucrFilter
                 ucrValueForFilter.Visible = False
                 ucrFilterOperation.Visible = False
                 ucrFilterDateTimePicker.Visible = False
+                ucrInputDateNA.Visible = False
             ElseIf ucrFilterByReceiver.strCurrDataType.Contains("logical") Then
                 lblSelectLevels.Visible = False
                 ucrFactorLevels.Visible = False
@@ -115,6 +120,7 @@ Public Class ucrFilter
                 ucrFilterOperation.Visible = True
                 ucrValueForFilter.SetItems({"TRUE", "FALSE", "NA"})
                 ucrFilterDateTimePicker.Visible = False
+                ucrInputDateNA.Visible = False
             ElseIf ucrFilterByReceiver.strCurrDataType.Contains("Date") Then
                 lblSelectLevels.Visible = False
                 ucrFactorLevels.Visible = False
@@ -122,6 +128,7 @@ Public Class ucrFilter
                 ucrValueForFilter.Visible = False
                 ucrFilterOperation.Visible = True
                 ucrFilterDateTimePicker.Visible = True
+                ucrInputDateNA.Visible = True
             Else
                 lblSelectLevels.Visible = False
                 ucrFactorLevels.Visible = False
@@ -130,6 +137,7 @@ Public Class ucrFilter
                 ucrFilterOperation.Visible = True
                 ucrValueForFilter.SetItems({"NA"})
                 ucrFilterDateTimePicker.Visible = False
+                ucrInputDateNA.Visible = False
             End If
         End If
 
@@ -157,7 +165,6 @@ Public Class ucrFilter
         Dim clsCurrentConditionView As New ROperator
         Dim clsCurrentConditionList As New RFunction
         Dim lviCondition As ListViewItem
-        Dim strCondition As String
 
         clsCurrentConditionList.SetRCommand("list")
         clsCurrentConditionView.AddParameter(iPosition:=0, strParameterValue:=ucrFilterByReceiver.GetVariableNames(False))
@@ -172,10 +179,17 @@ Public Class ucrFilter
             If ucrFilterByReceiver.strCurrDataType = "character" AndAlso ucrValueForFilter.GetText() <> "NA" Then
                 strCondition = Chr(34) & ucrValueForFilter.GetText() & Chr(34)
             ElseIf ucrFilterByReceiver.strCurrDataType = "Date" Then
-                'TODO; this might need to be done in the control i.e ucrDateTimePicker
-                strCondition = Chr(34) & ucrFilterDateTimePicker.dtpDateTime.Value.Year & "/" & ucrFilterDateTimePicker.dtpDateTime.Value.Month & "/" & ucrFilterDateTimePicker.dtpDateTime.Value.Day & Chr(34)
+                DateOptions()
+                'If Not ucrInputDateNA.IsEmpty Then
+                '    strCondition = Chr(34) & ucrInputDateNA.GetText() & Chr(34)
+                '    ucrFilterDateTimePicker.Enabled = False
+                'Else
+                '    'TODO; this might need to be done in the control i.e ucrDateTimePicker
+                '    strCondition = Chr(34) & ucrFilterDateTimePicker.dtpDateTime.Value.Year & "/" & ucrFilterDateTimePicker.dtpDateTime.Value.Month & "/" & ucrFilterDateTimePicker.dtpDateTime.Value.Day & Chr(34)
+                '    ucrInputDateNA.Enabled = False
+                'End If
             Else
-                strCondition = ucrValueForFilter.GetText()
+                    strCondition = ucrValueForFilter.GetText()
             End If
         End If
         clsCurrentConditionView.AddParameter(strParameterValue:=strCondition.Replace(Chr(34), Chr(39)))
@@ -192,6 +206,7 @@ Public Class ucrFilter
         lstFilters.Columns(1).Width = -2
         ucrFilterPreview.SetName(clsFilterView.ToScript())
         ucrFilterByReceiver.Clear()
+        ucrInputDateNA.ClearConditions()
         RaiseEvent FilterChanged()
         CheckAddEnabled()
     End Sub
@@ -273,6 +288,17 @@ Public Class ucrFilter
 
     Public Sub SetDefaultColumn(strColumn As String)
         strDefaultColumn = strColumn
+    End Sub
+
+    Private Sub DateOptions()
+        If Not ucrInputDateNA.IsEmpty Then
+            strCondition = Chr(34) & ucrInputDateNA.GetText() & Chr(34)
+            ucrFilterDateTimePicker.Enabled = False
+        Else
+            'TODO; this might need to be done in the control i.e ucrDateTimePicker
+            strCondition = Chr(34) & ucrFilterDateTimePicker.dtpDateTime.Value.Year & "/" & ucrFilterDateTimePicker.dtpDateTime.Value.Month & "/" & ucrFilterDateTimePicker.dtpDateTime.Value.Day & Chr(34)
+            ucrInputDateNA.Enabled = False
+        End If
     End Sub
 
     Public Sub SetDefaultDataFrame(strDataFrame As String)
