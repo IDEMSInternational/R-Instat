@@ -1137,6 +1137,10 @@ compare_columns <- function(x, y, use_unique = TRUE, sort_values = TRUE, firstno
 #' when the data is for multiple elements
 #' @param element_name (optional) if data is for single element, element_name is the name of the column containing
 #' the values. Default is "value". Ignored if element not missing.
+#' @param ignore_invalid If TRUE, rows with non missing element values on invalid dates e.g. 31 Sep or 29 Feb in non leap years, will be removed.
+#' If FALSE (the default) an error will be given with details of where the values occur.
+#' Strongly recommended to first run with FALSE and then TRUE after examining or correcting any issues.
+#' @param silent If TRUE, rows with non missing element values on invalid dates will not be reported.
 #' @export
 #' @examples
 #' yearcol <- data.frame(month=rep(1:12,times=c(31,29,31,30,31,30,31,31,30,31,30,31)),
@@ -1144,7 +1148,7 @@ compare_columns <- function(x, y, use_unique = TRUE, sort_values = TRUE, firstno
 #' X2000=rnorm(366),X2001=rnorm(366),X2002=rnorm(366),X2003=rnorm(366))
 #' grid2data(yearcol,day="day",month="month",year="columns",first="X2000",last="X2003")
 
-tidy_climatic_data <- function(x, format, stack_cols, day, month, year, station, element, element_name = "value") {
+tidy_climatic_data <- function(x, format, stack_cols, day, month, year, station, element, element_name = "value", ignore_invalid = FALSE, silent = FALSE) {
   
   if(!format %in% c("days", "months", "years")) stop("format must be either 'days', 'months' or 'years'")
   if(!all(stack_cols %in% names(x))) stop("Some of the stack_cols were not found in x.")
@@ -1249,12 +1253,38 @@ tidy_climatic_data <- function(x, format, stack_cols, day, month, year, station,
     
     y$date <- as.Date(paste(y$year, y$month, y$day), format = paste(year_format, month_format, "%d"))
     
+    # TODO possibly check if any non missing values in element column(s) of missing dates
+    # This could indicate data entry issue or incorrect use of the function
+    # These could be reported or left in. If left in - original columns would be useful for reference
+    invalid_ind <- is.na(y$date) & !is.na(y[[element_name]])
+    if(sum(invalid_ind) > 0) {
+      cat("There are: ", sum(invalid_ind), " measurement values on invalid dates.\n")
+      if(!silent) {
+        invalid_days <- y$day[invalid_ind]
+        invalid_months <- y$month[invalid_ind]
+        invalid_years <- y$year[invalid_ind]
+        invalid_measurements <- y[[element_name]][invalid_ind]
+        if(!missing(station)) {
+          invalid_stations <- y$station[invalid_ind]
+          exp <- paste(sapply(1:sum(invalid_ind), function(i) paste("Station:", invalid_stations[i], "Year:", invalid_years[i], "Month:", invalid_months[i], "Day:", invalid_days[i], "Value:", invalid_measurements[i])), collapse = "\n")
+        }
+        else {
+          exp <- paste(sapply(1:sum(invalid_ind), function(i) paste("Year:", invalid_years[i], "Month:", invalid_months[i], "Day:", invalid_days[i], "Value:", invalid_measurements[i])), collapse = "\n")
+        }
+        cat(exp)
+        cat("\n")
+      }
+      if(ignore_invalid) cat("Warning: These values have been removed.\n")
+      else stop("There are: ", sum(invalid_ind), " measurement values on invalid dates. Correct these or specify ignore_invalid = TRUE. See output for more details.")
+    }
     # standard format of slowest varying structure variables first (station then date) followed by measurements
     if(!missing(station)) z <- data.frame(station = y$station, date = y$date)
     else z <- data.frame(date = y$date)
     z[[element_name]] <- y[[element_name]]
     
     if(!missing(element)) z$element <- y$element
+    
+    z <- dplyr::filter(z, !is.na(date))
   }
   else if(format == "months") {
     # month column required in this case
@@ -1320,11 +1350,6 @@ tidy_climatic_data <- function(x, format, stack_cols, day, month, year, station,
   # if(length(sortcols)==0){ y<-y[order(y$Date),] }
   # if(length(sortcols)>0){ y<-y[order(y[,sortcols],y$Date),] }
   # rownames(y)<-NULL
-  
-  # TODO possibly check if any non missing values in element column(s) of missing dates
-  # This could indicate data entry issue or incorrect use of the function
-  # These could be reported or left in. If left in - original columns would be useful for reference
-  z <- dplyr::filter(z, !is.na(date))
   
   # If data contains multiple elements, unstack the element column
   if(!missing(element)) {
