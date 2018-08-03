@@ -83,6 +83,7 @@ Public Class ucrFilter
 
     Private Sub SetDefaults()
         ucrFilterOperation.SetName("==")
+        ucrInputDateNA.SetName("")
         ucrFilterByReceiver.SetMeAsReceiver()
         VariableTypeProperties()
     End Sub
@@ -179,17 +180,14 @@ Public Class ucrFilter
             If ucrFilterByReceiver.strCurrDataType = "character" AndAlso ucrValueForFilter.GetText() <> "NA" Then
                 strCondition = Chr(34) & ucrValueForFilter.GetText() & Chr(34)
             ElseIf ucrFilterByReceiver.strCurrDataType = "Date" Then
-                DateOptions()
-                'If Not ucrInputDateNA.IsEmpty Then
-                '    strCondition = Chr(34) & ucrInputDateNA.GetText() & Chr(34)
-                '    ucrFilterDateTimePicker.Enabled = False
-                'Else
-                '    'TODO; this might need to be done in the control i.e ucrDateTimePicker
-                '    strCondition = Chr(34) & ucrFilterDateTimePicker.dtpDateTime.Value.Year & "/" & ucrFilterDateTimePicker.dtpDateTime.Value.Month & "/" & ucrFilterDateTimePicker.dtpDateTime.Value.Day & Chr(34)
-                '    ucrInputDateNA.Enabled = False
-                'End If
+                If Not ucrInputDateNA.IsEmpty AndAlso ucrInputDateNA.GetText = "NA" Then
+                    strCondition = Chr(34) & ucrInputDateNA.GetText() & Chr(34)
+                ElseIf ucrInputDateNA.IsEmpty Then
+                    'TODO; this might need to be done in the control i.e ucrDateTimePicker
+                    strCondition = Chr(34) & ucrFilterDateTimePicker.dtpDateTime.Value.Year & "/" & ucrFilterDateTimePicker.dtpDateTime.Value.Month & "/" & ucrFilterDateTimePicker.dtpDateTime.Value.Day & Chr(34)
+                End If
             Else
-                    strCondition = ucrValueForFilter.GetText()
+                strCondition = ucrValueForFilter.GetText()
             End If
         End If
         clsCurrentConditionView.AddParameter(strParameterValue:=strCondition.Replace(Chr(34), Chr(39)))
@@ -206,7 +204,6 @@ Public Class ucrFilter
         lstFilters.Columns(1).Width = -2
         ucrFilterPreview.SetName(clsFilterView.ToScript())
         ucrFilterByReceiver.Clear()
-        ucrInputDateNA.ClearConditions()
         RaiseEvent FilterChanged()
         CheckAddEnabled()
     End Sub
@@ -290,18 +287,8 @@ Public Class ucrFilter
         strDefaultColumn = strColumn
     End Sub
 
-    Private Sub DateOptions()
-        If Not ucrInputDateNA.IsEmpty Then
-            strCondition = Chr(34) & ucrInputDateNA.GetText() & Chr(34)
-            ucrFilterDateTimePicker.Enabled = False
-        Else
-            'TODO; this might need to be done in the control i.e ucrDateTimePicker
-            strCondition = Chr(34) & ucrFilterDateTimePicker.dtpDateTime.Value.Year & "/" & ucrFilterDateTimePicker.dtpDateTime.Value.Month & "/" & ucrFilterDateTimePicker.dtpDateTime.Value.Day & Chr(34)
-            ucrInputDateNA.Enabled = False
-        End If
-    End Sub
-
     Public Sub SetDefaultDataFrame(strDataFrame As String)
         strDefaultDataFrame = strDataFrame
     End Sub
+
 End Class
