@@ -209,10 +209,12 @@ Partial Class frmMain
         Me.mnuClimaticCheckDataQCTemperatures = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepare = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCimaticPrepareTransform = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticPrepareCompare = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator37 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticPrepareClimaticSummaries = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareStartoftheRains = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareEndOfRains = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticPrepareLengthOfSeason = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareSpells = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareExtremes = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator46 = New System.Windows.Forms.ToolStripSeparator()
@@ -393,7 +395,7 @@ Partial Class frmMain
         Me.ToolStripSeparator40 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuPreparePrepareToShareJitter = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCheckDataPrePareToShareSdcPackage = New System.Windows.Forms.ToolStripMenuItem()
-        Me.NonToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareCheckDataAnonymiseIDColumn = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuPrepareColumnCalculate = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnCalculateCalculations = New System.Windows.Forms.ToolStripMenuItem()
@@ -478,7 +480,6 @@ Partial Class frmMain
         Me.mnuPrepareRObjectsRename = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareRObjectsReorder = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareRObjectsDelete = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPrepareShare = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurement = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementDefineData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementPrepare = New System.Windows.Forms.ToolStripMenuItem()
@@ -552,8 +553,6 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
-        Me.mnuClimaticPrepareLengthOfSeason = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticPrepareCompare = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1536,6 +1535,11 @@ Partial Class frmMain
         Me.mnuCimaticPrepareTransform.Name = "mnuCimaticPrepareTransform"
         resources.ApplyResources(Me.mnuCimaticPrepareTransform, "mnuCimaticPrepareTransform")
         '
+        'mnuClimaticPrepareCompare
+        '
+        resources.ApplyResources(Me.mnuClimaticPrepareCompare, "mnuClimaticPrepareCompare")
+        Me.mnuClimaticPrepareCompare.Name = "mnuClimaticPrepareCompare"
+        '
         'ToolStripSeparator37
         '
         Me.ToolStripSeparator37.Name = "ToolStripSeparator37"
@@ -1555,6 +1559,11 @@ Partial Class frmMain
         '
         Me.mnuClimaticPrepareEndOfRains.Name = "mnuClimaticPrepareEndOfRains"
         resources.ApplyResources(Me.mnuClimaticPrepareEndOfRains, "mnuClimaticPrepareEndOfRains")
+        '
+        'mnuClimaticPrepareLengthOfSeason
+        '
+        Me.mnuClimaticPrepareLengthOfSeason.Name = "mnuClimaticPrepareLengthOfSeason"
+        resources.ApplyResources(Me.mnuClimaticPrepareLengthOfSeason, "mnuClimaticPrepareLengthOfSeason")
         '
         'mnuClimaticPrepareSpells
         '
@@ -2410,7 +2419,7 @@ Partial Class frmMain
         '
         'mnuPrepare
         '
-        Me.mnuPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareDataFrame, Me.mnuPrepareCheckData, Me.ToolStripSeparator6, Me.mnuPrepareColumnCalculate, Me.mnuPrepareColumnGenerate, Me.mnuPrepareColumnFactor, Me.mnuPrepareColumnText, Me.mnuPrepareColumnDate, Me.mnuPrepareColumnReshape, Me.ToolStripSeparator7, Me.mnuPrepareKeysAndLinks, Me.mnuPrepareDataObject, Me.mnuPrepareRObjects, Me.mnuPrepareShare})
+        Me.mnuPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareDataFrame, Me.mnuPrepareCheckData, Me.ToolStripSeparator6, Me.mnuPrepareColumnCalculate, Me.mnuPrepareColumnGenerate, Me.mnuPrepareColumnFactor, Me.mnuPrepareColumnText, Me.mnuPrepareColumnDate, Me.mnuPrepareColumnReshape, Me.ToolStripSeparator7, Me.mnuPrepareKeysAndLinks, Me.mnuPrepareDataObject, Me.mnuPrepareRObjects})
         Me.mnuPrepare.Name = "mnuPrepare"
         resources.ApplyResources(Me.mnuPrepare, "mnuPrepare")
         Me.mnuPrepare.Tag = "Prepare"
@@ -2535,7 +2544,7 @@ Partial Class frmMain
         'mnuPrepareCheckData
         '
         Me.mnuPrepareCheckData.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.mnuPrepareCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareCheckDataDuplicates, Me.mnuPrepareCheckDataCompareColumns, Me.mnuPrepareCheckDataNonNumericCases, Me.ToolStripSeparator49, Me.mnuPrepareCheckDataBoxplot, Me.mnuPrepareCheckDataOneVariableSummarise, Me.mnuPrepareCheckDataOneVariableGraph, Me.mnuPrepareCheckDataOneWayFrequencies, Me.ToolStripSeparator41, Me.mnuPrepareCheckDataExportOpenRefine, Me.mnuPrepareCheckDataImportOpenRefine, Me.ToolStripSeparator40, Me.mnuPreparePrepareToShareJitter, Me.mnuCheckDataPrePareToShareSdcPackage, Me.NonToolStripMenuItem})
+        Me.mnuPrepareCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareCheckDataDuplicates, Me.mnuPrepareCheckDataCompareColumns, Me.mnuPrepareCheckDataNonNumericCases, Me.ToolStripSeparator49, Me.mnuPrepareCheckDataBoxplot, Me.mnuPrepareCheckDataOneVariableSummarise, Me.mnuPrepareCheckDataOneVariableGraph, Me.mnuPrepareCheckDataOneWayFrequencies, Me.ToolStripSeparator41, Me.mnuPrepareCheckDataExportOpenRefine, Me.mnuPrepareCheckDataImportOpenRefine, Me.ToolStripSeparator40, Me.mnuPreparePrepareToShareJitter, Me.mnuCheckDataPrePareToShareSdcPackage, Me.mnuPrepareCheckDataAnonymiseIDColumn})
         Me.mnuPrepareCheckData.Name = "mnuPrepareCheckData"
         resources.ApplyResources(Me.mnuPrepareCheckData, "mnuPrepareCheckData")
         '
@@ -2609,10 +2618,10 @@ Partial Class frmMain
         resources.ApplyResources(Me.mnuCheckDataPrePareToShareSdcPackage, "mnuCheckDataPrePareToShareSdcPackage")
         Me.mnuCheckDataPrePareToShareSdcPackage.Name = "mnuCheckDataPrePareToShareSdcPackage"
         '
-        'NonToolStripMenuItem
+        'mnuPrepareCheckDataAnonymiseIDColumn
         '
-        Me.NonToolStripMenuItem.Name = "NonToolStripMenuItem"
-        resources.ApplyResources(Me.NonToolStripMenuItem, "NonToolStripMenuItem")
+        Me.mnuPrepareCheckDataAnonymiseIDColumn.Name = "mnuPrepareCheckDataAnonymiseIDColumn"
+        resources.ApplyResources(Me.mnuPrepareCheckDataAnonymiseIDColumn, "mnuPrepareCheckDataAnonymiseIDColumn")
         '
         'ToolStripSeparator6
         '
@@ -3096,11 +3105,6 @@ Partial Class frmMain
         resources.ApplyResources(Me.mnuPrepareRObjectsDelete, "mnuPrepareRObjectsDelete")
         Me.mnuPrepareRObjectsDelete.Tag = "Delete..."
         '
-        'mnuPrepareShare
-        '
-        Me.mnuPrepareShare.Name = "mnuPrepareShare"
-        resources.ApplyResources(Me.mnuPrepareShare, "mnuPrepareShare")
-        '
         'mnuProcurement
         '
         Me.mnuProcurement.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementDefineData, Me.mnuProcurementPrepare, Me.mnuProcurementDescribe, Me.MappingToolStripMenuItem, Me.mnuProcurementModel, Me.ToolStripSeparator45, Me.mnuProcurementDefineRedFlags, Me.mnuProcurementUseCRI})
@@ -3547,16 +3551,6 @@ Partial Class frmMain
         Me.ucrOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         resources.ApplyResources(Me.ucrOutput, "ucrOutput")
         Me.ucrOutput.Name = "ucrOutput"
-        '
-        'mnuClimaticPrepareLengthOfSeason
-        '
-        Me.mnuClimaticPrepareLengthOfSeason.Name = "mnuClimaticPrepareLengthOfSeason"
-        resources.ApplyResources(Me.mnuClimaticPrepareLengthOfSeason, "mnuClimaticPrepareLengthOfSeason")
-        '
-        'mnuClimaticPrepareCompare
-        '
-        resources.ApplyResources(Me.mnuClimaticPrepareCompare, "mnuClimaticPrepareCompare")
-        Me.mnuClimaticPrepareCompare.Name = "mnuClimaticPrepareCompare"
         '
         'frmMain
         '
@@ -4105,7 +4099,7 @@ Partial Class frmMain
     Friend WithEvents mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator48 As ToolStripSeparator
     Friend WithEvents mnuOptionsByContextDescribeBoxplot As ToolStripMenuItem
-    Friend WithEvents NonToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuPrepareCheckDataAnonymiseIDColumn As ToolStripMenuItem
     Friend WithEvents mnuPrepareCheckDataNonNumericCases As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator49 As ToolStripSeparator
     Friend WithEvents mnuClimaticReshapeandExamine As ToolStripMenuItem
@@ -4114,7 +4108,6 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticReshapeandExamineReplaceValues As ToolStripMenuItem
     Friend WithEvents mnuClimaticReshapeandExamineOneVariableSummarize As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator50 As ToolStripSeparator
-    Friend WithEvents mnuPrepareShare As ToolStripMenuItem
     Friend WithEvents mnuClimaticPrepareLengthOfSeason As ToolStripMenuItem
     Friend WithEvents mnuClimaticPrepareCompare As ToolStripMenuItem
 End Class
