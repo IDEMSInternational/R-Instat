@@ -101,9 +101,6 @@ Public Class dlgSpells
         ucrInputCondition.SetDropDownStyleAsNonEditable()
 
         ucrChkConditional.SetText("Assuming Condition Satified at Start of Each Period")
-        'ucrChkConditional.AddFunctionNamesCondition({True}, "0")
-        'ucrChkConditional.AddFunctionNamesCondition({False}, "NA")
-        'ucrChkConditional.SetParameter(New RParameter("initial value"))
 
         ucrInputNewColumnName.SetParameter(New RParameter("result_name", 2))
         ucrInputNewColumnName.SetDataFrameSelector(ucrSelectorForSpells.ucrAvailableDataFrames)
@@ -147,7 +144,6 @@ Public Class dlgSpells
         ucrReceiverElement.SetMeAsReceiver()
         ucrInputCondition.SetName("Between")
         ucrInputNewColumnName.SetName("spells")
-        ucrChkConditional.Checked = False
         ucrInputSpellLower.SetName(0)
         ucrInputSpellUpper.SetName(0.85)
 
