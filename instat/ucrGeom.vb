@@ -1161,8 +1161,6 @@ Public Class ucrGeom
         'Adding layer parameters
         clsgeom_sf.AddLayerParameter("geom", "list", Chr(34) & "area" & Chr(34), lstParameterStrings:={Chr(34) & "area" & Chr(34), Chr(34) & "bar" & Chr(34), Chr(34) & "blank" & Chr(34), Chr(34) & "col" & Chr(34), Chr(34) & "contour" & Chr(34), Chr(34) & "crossbar" & Chr(34), Chr(34) & "density" & Chr(34), Chr(34) & "density_2d" & Chr(34), Chr(34) & "density2d" & Chr(34), Chr(34) & "errorbar" & Chr(34), Chr(34) & "hex" & Chr(34), Chr(34) & "line" & Chr(34), Chr(34) & "linerange" & Chr(34), Chr(34) & "path" & Chr(34), Chr(34) & "point" & Chr(34), Chr(34) & "pointrange" & Chr(34), Chr(34) & "polygon" & Chr(34), Chr(34) & "quantile" & Chr(34), Chr(34) & "raster" & Chr(34), Chr(34) & "ribbon" & Chr(34), Chr(34) & "rug" & Chr(34), Chr(34) & "smooth" & Chr(34), Chr(34) & "step" & Chr(34), Chr(34) & "tile" & Chr(34)})
         clsgeom_sf.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "identity" & Chr(34)})
-        clsgeom_sf.AddLayerParameter("xlim", "numeric", "0", lstParameterStrings:=({"1", "-180", "180"}))
-        clsgeom_sf.AddLayerParameter("ylim", "numeric", "0", lstParameterStrings:=({"1", "-90", "90"}))
         clsgeom_sf.AddLayerParameter("expand", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
         clsgeom_sf.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_sf.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
