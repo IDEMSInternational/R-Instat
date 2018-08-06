@@ -2003,4 +2003,8 @@ Public Class frmMain
     Private Sub mnuPrepareCheckDataAnonymiseIDColumn_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataAnonymiseIDColumn.Click
         dlgAnonymiseIDColumn.ShowDialog()
     End Sub
+
+    Private Sub mnuClimaticFileImportShapeFile_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportShapeFile.Click
+        dlgImportShapeFiles.ShowDialog()
+    End Sub
 End Class
