@@ -529,7 +529,6 @@ summary_range <- function(x, na.rm = FALSE, na_type = "", ...) {
 }
 
 # median function
-# spatstat::weighted.median()
 summary_median <- function(x, na.rm = FALSE, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
@@ -680,17 +679,29 @@ summary_Sn <- function(x, constant = 1.1926, finite.corr = missing(constant), na
 summary_cor <- function(x, y, na.rm = FALSE, na_type = "", method = c("pearson", "kendall", "spearman"), use = c( "everything", "all.obs", "complete.obs", "na.or.complete", "pairwise.complete.obs"), ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-    return(cor(x = x, y = y, use = use, method = method))
+		return(cor(x = x, y = y, use = use, method = method))		
   }
 }
 
-# cov function
+# cov function 
 summary_cov <- function(x, y, na.rm = FALSE, na_type = "", method = c("pearson", "kendall", "spearman"), use = c( "everything", "all.obs", "complete.obs", "na.or.complete", "pairwise.complete.obs"), ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-    return(cov(x = x, y = y, use = use, method = method))
+	if (missing(weights)) {
+      return(cov(x = x, y = y, use = use, method = method))
+    }
+    if (length(weights) != length(x)) 
+      stop("'x' and 'weights' must have the same length")
+    w <- as.double(weights)
+    if (na.rm) {
+      i <- !is.na(x)
+      weights <- weights[i]
+      x <- x[i]
+    }
+    (sum(weights * x * y)/sum(weights)) - (Weighted.Desc.Stat::w.mean(x, weights) * Weighted.Desc.Stat::w.mean(y, weights))
+  }
 }
-}
+
 # first function
 summary_first <- function(x, order_by = NULL, default = default_missing(x), ...) {
     return(dplyr::first(x = x, order_by = order_by, default = default))
