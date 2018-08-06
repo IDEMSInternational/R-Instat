@@ -159,6 +159,33 @@ Public Class ucrGeom
         Dim clsgeom_violin As New Geoms
         Dim clsgeom_vline As New Geoms
 
+        Dim clsgeom_sf As New Geoms
+
+
+
+        clsgeom_sf.SetGeomName("geom_sf")
+
+        clsgeom_sf.AddAesParameter("geometry", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_sf.AddAesParameter("shape", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_sf.AddAesParameter("colour", strIncludedDataTypes:={"numeric", "factor"})
+        clsgeom_sf.AddAesParameter("size", strIncludedDataTypes:={"numeric", "factor"})
+
+        'Adding layer parameters
+        clsgeom_sf.AddLayerParameter("geom", "list", Chr(34) & "area" & Chr(34), lstParameterStrings:={Chr(34) & "area" & Chr(34), Chr(34) & "bar" & Chr(34), Chr(34) & "blank" & Chr(34), Chr(34) & "col" & Chr(34), Chr(34) & "contour" & Chr(34), Chr(34) & "crossbar" & Chr(34), Chr(34) & "density" & Chr(34), Chr(34) & "density_2d" & Chr(34), Chr(34) & "density2d" & Chr(34), Chr(34) & "errorbar" & Chr(34), Chr(34) & "hex" & Chr(34), Chr(34) & "line" & Chr(34), Chr(34) & "linerange" & Chr(34), Chr(34) & "path" & Chr(34), Chr(34) & "point" & Chr(34), Chr(34) & "pointrange" & Chr(34), Chr(34) & "polygon" & Chr(34), Chr(34) & "quantile" & Chr(34), Chr(34) & "raster" & Chr(34), Chr(34) & "ribbon" & Chr(34), Chr(34) & "rug" & Chr(34), Chr(34) & "smooth" & Chr(34), Chr(34) & "step" & Chr(34), Chr(34) & "tile" & Chr(34)})
+        'clsgeom_sf.AddLayerParameter("position", "list", Chr(34) & "" & Chr(34), lstParameterStrings:={Chr(34) & "" & Chr(34), Chr(34) & "" & Chr(34)})
+        'clsgeom_sf.AddLayerParameter("xlim")
+        'clsgeom_sf.AddLayerParameter("ylim")
+        clsgeom_sf.AddLayerParameter("expand", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_sf.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_sf.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_sf.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_sf.AddLayerParameter("crs", "numeric", "1")
+        'clsgeom_sf.AddLayerParameter("datum", "numeric", "1")
+        clsgeom_sf.AddLayerParameter("ndiscr", "numeric", "1")
+        lstAllGeoms.Add(clsgeom_sf)
+
+
+
         'Global comments:
         'WARNING: Most of the comments describing the parameters have been copied from the ggplot2 documentation: http://docs.ggplot2.org/current/
         'Warning: cannot use default values like NULL in the specification of our aesthetics as parameters (fill, colour, ...) as running a command like "ggplot(survey, aes(x="",y=Yield)) + geom_boxplot(colour = NULL)" will give an error (Error: Aesthetics must be either length 1 or the same as the data (4): colour). 
