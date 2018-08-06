@@ -281,7 +281,7 @@ nc_get_dim_min_max <- function(nc, dimension, time_as_date = TRUE) {
   return(bounds)
 }
 
-nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = TRUE, boundary = NULL, lon_points = NULL, lat_points = NULL, id_points = NULL, show_requested_points = TRUE) {
+nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = TRUE, boundary = NULL, lon_points = NULL, lat_points = NULL, id_points = NULL, show_requested_points = TRUE, great_circle_dist = TRUE) {
   if(sum(is.null(lon_points), is.null(lat_points)) == 1) stop("You must specificy both lon_points and lat_points")
   has_points <- (sum(is.null(lon_points), is.null(lat_points)) == 0)
   if(has_points && length(lon_points) != length(lat_points)) stop("lon_points and lat_points have unequal lengths.")
@@ -364,7 +364,7 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
       curr_count <- count
       curr_dim_values <- dim_values
       xy_possible <- expand.grid(xs, ys)
-      point_ind <- which.min(sp::spDistsN1(pts = as.matrix(xy_possible), pt = c(lon_points[i], lat_points[i]), longlat = TRUE))
+      point_ind <- which.min(sp::spDistsN1(pts = as.matrix(xy_possible), pt = c(lon_points[i], lat_points[i]), longlat = great_circle_dist))
       x_ind <- which(xs == xy_possible[point_ind, 1])[1]
       curr_start[1] <- x_ind
       curr_count[1]  <- 1

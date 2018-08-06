@@ -105,6 +105,10 @@ Public Class sdgOpenNetCDF
         ucrChkIncludeRequestedPoints.SetText("Include requested points in data (if specified)")
         ucrChkIncludeRequestedPoints.SetRDefault("TRUE")
 
+        ucrChkGreatCircleDist.SetParameter(New RParameter("great_circle_dist", 10))
+        ucrChkGreatCircleDist.SetText("Use Great Circle (WGS84 ellipsoid) distance for nearest points")
+        ucrChkGreatCircleDist.SetRDefault("TRUE")
+
         ucrReceiverPointsX.Selector = ucrSelectorPoints
         ucrReceiverPointsY.Selector = ucrSelectorPoints
         ucrReceiverPointsID.Selector = ucrSelectorPoints
@@ -311,6 +315,7 @@ Public Class sdgOpenNetCDF
         ucrChkKeepRawTime.SetRCode(clsImportNetcdfFunction, bReset, bCloneIfNeeded:=True)
         ucrChkIncludeMetadata.SetRCode(clsImportNetcdfFunction, bReset, bCloneIfNeeded:=True)
         ucrChkIncludeRequestedPoints.SetRCode(clsImportNetcdfFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkGreatCircleDist.SetRCode(clsImportNetcdfFunction, bReset, bCloneIfNeeded:=True)
 
         ucrPnlLocation.SetRCode(clsImportNetcdfFunction, bReset, bCloneIfNeeded:=True)
 
