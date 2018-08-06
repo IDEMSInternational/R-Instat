@@ -473,7 +473,6 @@ summary_count <- function(x, ...) {
   return(length(x))
   }
 
-
 summary_count_missing <- function(x, ...) {
   return(sum(is.na(x)))
 }
@@ -482,7 +481,7 @@ summary_count_non_missing <- function(x, ...) {
   return(sum(!is.na(x)))
 }
 
-summary_sd <- function(x, na.rm = FALSE, na_type = "", ...) {
+summary_sd <- function(x, na.rm = FALSE, weights = "", na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
     else{
 		if (missing(weights)) 
@@ -492,7 +491,7 @@ summary_sd <- function(x, na.rm = FALSE, na_type = "", ...) {
 		}  
 }
 
-summary_var <- function(x, na.rm = FALSE, na_type = "", ...) {
+summary_var <- function(x, na.rm = FALSE, weights = "", na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
 	else{
 		if (missing(weights)) 
@@ -529,7 +528,7 @@ summary_range <- function(x, na.rm = FALSE, na_type = "", ...) {
 }
 
 # median function
-summary_median <- function(x, na.rm = FALSE, na_type = "", ...) {
+summary_median <- function(x, na.rm = FALSE, weights = "", na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
 	if(missing(weights))
@@ -540,7 +539,7 @@ summary_median <- function(x, na.rm = FALSE, na_type = "", ...) {
 }
 
 # quantile function
-summary_quantile <- function(x, na.rm = FALSE, probs, na_type = "", ...) {
+summary_quantile <- function(x, na.rm = FALSE, weights = "", probs, na_type = "", ...) {
   if(!na.rm && anyNA(x)) return(NA)
   # This prevents multiple values being returned
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
@@ -616,7 +615,7 @@ summary_outlier_limit <- function(x, coef = 1.5, bupperlimit = TRUE, bskewedcalc
 }
 
 # kurtosis function
-summary_kurtosis <- function(x, na.rm = FALSE, type = 2, na_type = "", ...) {
+summary_kurtosis <- function(x, na.rm = FALSE, weights = "", type = 2, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
 	if (missing(weights)) {
@@ -635,10 +634,21 @@ summary_kurtosis <- function(x, na.rm = FALSE, type = 2, na_type = "", ...) {
 }
 
 # Coefficient of Variation function
-summary_coef_var <- function(x, na.rm = FALSE, na_type = "", ...) {
+summary_coef_var <- function(x, na.rm = FALSE, weights = "", na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-      return(summary_sd(x) / summary_mean(x))
+    if (missing(weights)) {
+		return(summary_sd(x) / summary_mean(x))
+    }
+    if (length(weights) != length(x)) 
+      stop("'x' and 'weights' must have the same length")
+    w <- as.double(weights)
+    if (na.rm) {
+      i <- !is.na(x)
+      weights <- weights[i]
+      x <- x[i]
+    }
+    Weighted.Desc.Stat::w.sd(x, weights)/Weighted.Desc.Stat::w.mean(x, weights)
   }
 }
 
@@ -684,7 +694,7 @@ summary_cor <- function(x, y, na.rm = FALSE, na_type = "", method = c("pearson",
 }
 
 # cov function 
-summary_cov <- function(x, y, na.rm = FALSE, na_type = "", method = c("pearson", "kendall", "spearman"), use = c( "everything", "all.obs", "complete.obs", "na.or.complete", "pairwise.complete.obs"), ...) {
+summary_cov <- function(x, y, na.rm = FALSE, weights = "", na_type = "", method = c("pearson", "kendall", "spearman"), use = c( "everything", "all.obs", "complete.obs", "na.or.complete", "pairwise.complete.obs"), ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
 	if (missing(weights)) {
