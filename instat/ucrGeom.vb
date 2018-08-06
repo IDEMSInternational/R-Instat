@@ -14,8 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
-
 Public Class ucrGeom
     'Ucr Geom is used to select the geom that will be used for a specific graph/layer. It is used in ucrGeomListWithAes and ucrLayerParameters both ucr's of sdgLayerOptions. 
     'It stores the definition of the different Geoms, using instances of clsGeom, including their R names, the relevant/available parameters and their description (type of values, values, default, ...).
@@ -151,6 +149,7 @@ Public Class ucrGeom
         Dim clsgeom_ribbon As New Geoms
         Dim clsgeom_rug As New Geoms
         Dim clsgeom_segment As New Geoms
+        Dim clsgeom_sf As New Geoms
         Dim clsgeom_smooth As New Geoms
         Dim clsgeom_spoke As New Geoms
         Dim clsgeom_step As New Geoms
@@ -158,32 +157,6 @@ Public Class ucrGeom
         Dim clsgeom_tile As New Geoms
         Dim clsgeom_violin As New Geoms
         Dim clsgeom_vline As New Geoms
-
-        Dim clsgeom_sf As New Geoms
-
-
-
-        clsgeom_sf.SetGeomName("geom_sf")
-        clsgeom_sf.AddAesParameter("geometry", strIncludedDataTypes:={"numeric"})
-        clsgeom_sf.AddAesParameter("shape", strIncludedDataTypes:={"numeric"})
-        clsgeom_sf.AddAesParameter("colour", strIncludedDataTypes:={"factor"})
-        clsgeom_sf.AddAesParameter("size", strIncludedDataTypes:={"factor"})
-
-        'Adding layer parameters
-        clsgeom_sf.AddLayerParameter("geom", "list", Chr(34) & "area" & Chr(34), lstParameterStrings:={Chr(34) & "area" & Chr(34), Chr(34) & "bar" & Chr(34), Chr(34) & "blank" & Chr(34), Chr(34) & "col" & Chr(34), Chr(34) & "contour" & Chr(34), Chr(34) & "crossbar" & Chr(34), Chr(34) & "density" & Chr(34), Chr(34) & "density_2d" & Chr(34), Chr(34) & "density2d" & Chr(34), Chr(34) & "errorbar" & Chr(34), Chr(34) & "hex" & Chr(34), Chr(34) & "line" & Chr(34), Chr(34) & "linerange" & Chr(34), Chr(34) & "path" & Chr(34), Chr(34) & "point" & Chr(34), Chr(34) & "pointrange" & Chr(34), Chr(34) & "polygon" & Chr(34), Chr(34) & "quantile" & Chr(34), Chr(34) & "raster" & Chr(34), Chr(34) & "ribbon" & Chr(34), Chr(34) & "rug" & Chr(34), Chr(34) & "smooth" & Chr(34), Chr(34) & "step" & Chr(34), Chr(34) & "tile" & Chr(34)})
-        clsgeom_sf.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "identity" & Chr(34)})
-        clsgeom_sf.AddLayerParameter("xlim", "numeric", "0")
-        clsgeom_sf.AddLayerParameter("ylim", "numeric", "0")
-        clsgeom_sf.AddLayerParameter("expand", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
-        clsgeom_sf.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
-        clsgeom_sf.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
-        clsgeom_sf.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
-        clsgeom_sf.AddLayerParameter("crs", "numeric", "1")
-        'clsgeom_sf.AddLayerParameter("datum", "numeric", "1")
-        clsgeom_sf.AddLayerParameter("ndiscr", "numeric", "1")
-        lstAllGeoms.Add(clsgeom_sf)
-
-
 
         'Global comments:
         'WARNING: Most of the comments describing the parameters have been copied from the ggplot2 documentation: http://docs.ggplot2.org/current/
@@ -1178,6 +1151,28 @@ Public Class ucrGeom
         clsgeom_segment.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
 
         lstAllGeoms.Add(clsgeom_segment)
+
+        clsgeom_sf.SetGeomName("geom_sf")
+        clsgeom_sf.AddAesParameter("geometry", strIncludedDataTypes:={"numeric"})
+        clsgeom_sf.AddAesParameter("shape", strIncludedDataTypes:={"factor"})
+        clsgeom_sf.AddAesParameter("colour", strIncludedDataTypes:={"numeric", "factor"})
+        clsgeom_sf.AddAesParameter("size", strIncludedDataTypes:={"numeric"})
+        clsgeom_sf.AddAesParameter("fill", strIncludedDataTypes:={"factor"})
+        'Adding layer parameters
+        clsgeom_sf.AddLayerParameter("geom", "list", Chr(34) & "area" & Chr(34), lstParameterStrings:={Chr(34) & "area" & Chr(34), Chr(34) & "bar" & Chr(34), Chr(34) & "blank" & Chr(34), Chr(34) & "col" & Chr(34), Chr(34) & "contour" & Chr(34), Chr(34) & "crossbar" & Chr(34), Chr(34) & "density" & Chr(34), Chr(34) & "density_2d" & Chr(34), Chr(34) & "density2d" & Chr(34), Chr(34) & "errorbar" & Chr(34), Chr(34) & "hex" & Chr(34), Chr(34) & "line" & Chr(34), Chr(34) & "linerange" & Chr(34), Chr(34) & "path" & Chr(34), Chr(34) & "point" & Chr(34), Chr(34) & "pointrange" & Chr(34), Chr(34) & "polygon" & Chr(34), Chr(34) & "quantile" & Chr(34), Chr(34) & "raster" & Chr(34), Chr(34) & "ribbon" & Chr(34), Chr(34) & "rug" & Chr(34), Chr(34) & "smooth" & Chr(34), Chr(34) & "step" & Chr(34), Chr(34) & "tile" & Chr(34)})
+        clsgeom_sf.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "identity" & Chr(34)})
+        clsgeom_sf.AddLayerParameter("xlim", "numeric", "0", lstParameterStrings:=({"1", "-180", "180"}))
+        clsgeom_sf.AddLayerParameter("ylim", "numeric", "0", lstParameterStrings:=({"1", "-90", "90"}))
+        clsgeom_sf.AddLayerParameter("expand", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_sf.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_sf.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_sf.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_sf.AddLayerParameter("crs", "numeric", "1")
+        'TODO we are not sure what this can take. Needs to be looked at more closely
+        'clsgeom_sf.AddLayerParameter("datum", "numeric", "1")
+        clsgeom_sf.AddLayerParameter("ndiscr", "list", "NULL", lstParameterStrings:={"NA", "NULL"})
+        lstAllGeoms.Add(clsgeom_sf)
+
 
         clsgeom_smooth.strGeomName = "geom_smooth"
         ' mandatory
