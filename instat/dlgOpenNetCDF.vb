@@ -103,6 +103,9 @@ Public Class dlgOpenNetCDF
         strLong = ""
         rdoShort.Checked = True
 
+        ucrInputFilePath.SetName("")
+        ucrInputFileDetails.SetName("")
+
         clsImportNetcdfFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_NetCDF")
         clsImportNetcdfFunction.AddParameter("nc", clsRFunctionParameter:=clsNcOpenFunction, iPosition:=0)
 
