@@ -107,6 +107,8 @@ Public Class sdgOpenNetCDF
 
         ucrReceiverPointsX.Selector = ucrSelectorPoints
         ucrReceiverPointsY.Selector = ucrSelectorPoints
+        ucrReceiverPointsID.Selector = ucrSelectorPoints
+        ucrReceiverPointsID.SetLinkedDisplayControl(lblPointsID)
 
         ucrPnlLocation.AddRadioButton(rdoRange)
         ucrPnlLocation.AddRadioButton(rdoPoints)
@@ -125,6 +127,7 @@ Public Class sdgOpenNetCDF
 
         ucrPnlLocation.AddToLinkedControls(ucrReceiverPointsX, {rdoPoints}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlLocation.AddToLinkedControls(ucrReceiverPointsY, {rdoPoints}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlLocation.AddToLinkedControls(ucrReceiverPointsID, {rdoPoints}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlLocation.AddToLinkedControls(ucrInputPointX, {rdoSinglePoint}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlLocation.AddToLinkedControls(ucrInputPointY, {rdoSinglePoint}, bNewLinkedHideIfParameterMissing:=True)
@@ -336,13 +339,14 @@ Public Class sdgOpenNetCDF
         clsAsDateMax.AddParameter("format", Chr(34) & "%Y-%m-%d" & Chr(34), iPosition:=1)
     End Sub
 
-    Private Sub ucrPnlLocation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlLocation.ControlValueChanged, ucrInputPointX.ControlValueChanged, ucrInputPointY.ControlValueChanged, ucrReceiverPointsX.ControlValueChanged, ucrReceiverPointsY.ControlValueChanged
+    Private Sub ucrPnlLocation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlLocation.ControlValueChanged, ucrInputPointX.ControlValueChanged, ucrInputPointY.ControlValueChanged, ucrReceiverPointsX.ControlValueChanged, ucrReceiverPointsY.ControlValueChanged, ucrReceiverPointsID.ControlValueChanged
         SetLocationParameters()
     End Sub
 
     Private Sub SetLocationParameters()
         'TODO If x or y are not detected 
         If Not bUpdating Then
+            clsImportNetcdfFunction.RemoveParameterByName("id_points")
             If rdoRange.Checked Then
                 If dctAxesNames.ContainsKey("X") Then
                     clsBoundaryListFunction.AddParameter(dctAxesNames("X"), clsRFunctionParameter:=clsXLimitsFunction)
@@ -362,6 +366,7 @@ Public Class sdgOpenNetCDF
                 If rdoPoints.Checked Then
                     clsImportNetcdfFunction.AddParameter("lon_points", clsRFunctionParameter:=ucrReceiverPointsX.GetVariables())
                     clsImportNetcdfFunction.AddParameter("lat_points", clsRFunctionParameter:=ucrReceiverPointsY.GetVariables())
+                    clsImportNetcdfFunction.AddParameter("id_points", clsRFunctionParameter:=ucrReceiverPointsID.GetVariables())
                 Else
                     clsImportNetcdfFunction.AddParameter("lon_points", ucrInputPointX.GetText())
                     clsImportNetcdfFunction.AddParameter("lat_points", ucrInputPointY.GetText())

@@ -27,6 +27,8 @@ Partial Class sdgOpenNetCDF
         Me.tbSubset = New System.Windows.Forms.TabPage()
         Me.ucrSelectorPoints = New instat.ucrSelectorByDataFrameAddRemove()
         Me.grpLocation = New System.Windows.Forms.GroupBox()
+        Me.lblPointsID = New System.Windows.Forms.Label()
+        Me.ucrReceiverPointsID = New instat.ucrReceiverSingle()
         Me.rdoSinglePoint = New System.Windows.Forms.RadioButton()
         Me.rdoPoints = New System.Windows.Forms.RadioButton()
         Me.rdoRange = New System.Windows.Forms.RadioButton()
@@ -115,6 +117,8 @@ Partial Class sdgOpenNetCDF
         '
         'grpLocation
         '
+        Me.grpLocation.Controls.Add(Me.lblPointsID)
+        Me.grpLocation.Controls.Add(Me.ucrReceiverPointsID)
         Me.grpLocation.Controls.Add(Me.rdoSinglePoint)
         Me.grpLocation.Controls.Add(Me.rdoPoints)
         Me.grpLocation.Controls.Add(Me.rdoRange)
@@ -136,6 +140,20 @@ Partial Class sdgOpenNetCDF
         resources.ApplyResources(Me.grpLocation, "grpLocation")
         Me.grpLocation.Name = "grpLocation"
         Me.grpLocation.TabStop = False
+        '
+        'lblPointsID
+        '
+        resources.ApplyResources(Me.lblPointsID, "lblPointsID")
+        Me.lblPointsID.Name = "lblPointsID"
+        '
+        'ucrReceiverPointsID
+        '
+        Me.ucrReceiverPointsID.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverPointsID, "ucrReceiverPointsID")
+        Me.ucrReceiverPointsID.Name = "ucrReceiverPointsID"
+        Me.ucrReceiverPointsID.Selector = Nothing
+        Me.ucrReceiverPointsID.strNcFilePath = ""
+        Me.ucrReceiverPointsID.ucrSelector = Nothing
         '
         'rdoSinglePoint
         '
@@ -468,4 +486,6 @@ Partial Class sdgOpenNetCDF
     Friend WithEvents rdoPoints As RadioButton
     Friend WithEvents rdoRange As RadioButton
     Friend WithEvents ucrChkIncludeRequestedPoints As ucrCheck
+    Friend WithEvents lblPointsID As Label
+    Friend WithEvents ucrReceiverPointsID As ucrReceiverSingle
 End Class
