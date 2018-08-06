@@ -1046,6 +1046,12 @@
   <data name="OpenNetCDFToolStripMenuItem.Text" xml:space="preserve">
     <value>Open NetCDF...</value>
   </data>
+  <data name="mnuClimaticFileImportShapeFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 22</value>
+  </data>
+  <data name="mnuClimaticFileImportShapeFile.Text" xml:space="preserve">
+    <value>Import Shape Files...</value>
+  </data>
   <data name="mnuClimateFileClimSoft.Size" type="System.Drawing.Size, System.Drawing">
     <value>215, 22</value>
   </data>
@@ -1211,6 +1217,15 @@
   <data name="mnuCimaticPrepareTransform.Text" xml:space="preserve">
     <value>Transform...</value>
   </data>
+  <data name="mnuClimaticPrepareCompare.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuClimaticPrepareCompare.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="mnuClimaticPrepareCompare.Text" xml:space="preserve">
+    <value>Compare...</value>
+  </data>
   <data name="ToolStripSeparator37.Size" type="System.Drawing.Size, System.Drawing">
     <value>186, 6</value>
   </data>
@@ -1231,6 +1246,12 @@
   </data>
   <data name="mnuClimaticPrepareEndOfRains.Text" xml:space="preserve">
     <value>End of Rains...</value>
+  </data>
+  <data name="mnuClimaticPrepareLengthOfSeason.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="mnuClimaticPrepareLengthOfSeason.Text" xml:space="preserve">
+    <value>Length of Season...</value>
   </data>
   <data name="mnuClimaticPrepareSpells.Size" type="System.Drawing.Size, System.Drawing">
     <value>189, 22</value>
@@ -2647,11 +2668,11 @@
   <data name="mnuCheckDataPrePareToShareSdcPackage.Text" xml:space="preserve">
     <value>Prepare to Share (sdc package)...</value>
   </data>
-  <data name="NonToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuPrepareCheckDataAnonymiseIDColumn.Size" type="System.Drawing.Size, System.Drawing">
     <value>245, 22</value>
   </data>
-  <data name="NonToolStripMenuItem.Text" xml:space="preserve">
-    <value>non</value>
+  <data name="mnuPrepareCheckDataAnonymiseIDColumn.Text" xml:space="preserve">
+    <value>Anonymise ID Column...</value>
   </data>
   <data name="mnuPrepareCheckData.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 22</value>
@@ -6757,6 +6778,12 @@
   <data name="&gt;&gt;mnuCimaticPrepareTransform.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;mnuClimaticPrepareCompare.Name" xml:space="preserve">
+    <value>mnuClimaticPrepareCompare</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticPrepareCompare.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;ToolStripSeparator37.Name" xml:space="preserve">
     <value>ToolStripSeparator37</value>
   </data>
@@ -6779,6 +6806,12 @@
     <value>mnuClimaticPrepareEndOfRains</value>
   </data>
   <data name="&gt;&gt;mnuClimaticPrepareEndOfRains.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticPrepareLengthOfSeason.Name" xml:space="preserve">
+    <value>mnuClimaticPrepareLengthOfSeason</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticPrepareLengthOfSeason.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuClimaticPrepareSpells.Name" xml:space="preserve">
@@ -7843,10 +7876,10 @@
   <data name="&gt;&gt;mnuCheckDataPrePareToShareSdcPackage.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;NonToolStripMenuItem.Name" xml:space="preserve">
-    <value>NonToolStripMenuItem</value>
+  <data name="&gt;&gt;mnuPrepareCheckDataAnonymiseIDColumn.Name" xml:space="preserve">
+    <value>mnuPrepareCheckDataAnonymiseIDColumn</value>
   </data>
-  <data name="&gt;&gt;NonToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuPrepareCheckDataAnonymiseIDColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator6.Name" xml:space="preserve">
@@ -8723,6 +8756,12 @@
     <value>ExportToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;ExportToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticFileImportShapeFile.Name" xml:space="preserve">
+    <value>mnuClimaticFileImportShapeFile</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticFileImportShapeFile.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
