@@ -43,9 +43,6 @@ Public Class dlgExportToCMSAF
         ucrReceiverLatitude.Selector = ucrSelectorImportToCMSAF
         ucrReceiverElement.Selector = ucrSelectorImportToCMSAF
 
-        ucrSelectorImportToCMSAF.SetParameter(New RParameter("x", 0))
-        ucrSelectorImportToCMSAF.SetParameterIsrfunction()
-
         ucrReceiverStation.SetParameter(New RParameter("station_name ", 0))
         ucrReceiverStation.SetParameterIsRFunction()
         ucrReceiverStation.SetClimaticType("station")
@@ -111,7 +108,6 @@ Public Class dlgExportToCMSAF
         ucrReceiverElement.SetRCode(clsAsDataFrameFunction, bReset)
         ucrInputExportFile.SetRCode(clsExportFunction, bReset)
         ucrReceiverDate.SetRCode(clsAsDataFrameFunction, bReset)
-        ucrSelectorImportToCMSAF.SetRCode(clsAsDataFrameFunction, bReset)
     End Sub
 
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
