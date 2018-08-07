@@ -29,7 +29,10 @@ Public Class dlgClimaticMaps
     Private clsRFacetFunction As New RFunction
     Private clsThemeFunction As New RFunction
     Private dctThemeFunctions As Dictionary(Of String, RFunction)
+    Private clsLocalRaesFunction As New RFunction
     Private bResetSubdialog As Boolean = True
+    Private bResetSFLayerSubdialog As Boolean = True
+
 
     Private Sub dlgClimaticMaps_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -79,6 +82,7 @@ Public Class dlgClimaticMaps
         ucrReceiverFill.SetMeAsReceiver()
         ucrSaveMap.Reset()
         bResetSubdialog = True
+        bResetSFLayerSubdialog = True
 
         clsGgplotFunction.SetPackageName("ggplot2")
         clsGgplotFunction.SetRCommand("ggplot")
@@ -104,13 +108,13 @@ Public Class dlgClimaticMaps
         clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
-
+        clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
 
         clsGGplotOperator.SetAssignTo("last_map", strTempDataframe:=ucrSelectorClimaticMaps.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_map")
         ucrBase.clsRsyntax.SetBaseROperator(clsGGplotOperator)
     End Sub
 
-    Private Sub cmdMapOptions_Click(sender As Object, e As EventArgs) Handles cmdMapOptions.Click
+    Private Sub cmdMapOptions_Click(sender As Object, e As EventArgs) Handles cmdPlotOptions.Click
         sdgPlots.SetRCode(clsGGplotOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsAesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrSelectorClimaticMaps, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
@@ -120,6 +124,17 @@ Public Class dlgClimaticMaps
         ucrSelectorClimaticMaps.SetRCode(clsGeomSfFunction, bReset)
         ucrReceiverFill.SetRCode(clsAesFunction, bReset)
         ucrSaveMap.SetRCode(clsGGplotOperator, bReset)
+    End Sub
+
+    Private Sub cmdSFOptions_Click(sender As Object, e As EventArgs) Handles cmdSFOptions.Click
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsGeomSfFunction, clsNewGlobalAesFunc:=clsAesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=False, ucrNewBaseSelector:=ucrSelectorClimaticMaps, bApplyAesGlobally:=True, bReset:=bResetSFLayerSubdialog)
+        sdgLayerOptions.ShowDialog()
+        bResetSFLayerSubdialog = False
+        For Each clsParam In clsAesFunction.clsParameters
+            If clsParam.strArgumentName = "fill" Then
+                ucrReceiverFill.Add(clsParam.strArgumentValue)
+            End If
+        Next
     End Sub
 
     Private Sub TestOkEnabled()
