@@ -41,24 +41,43 @@ Partial Class dlgMakeDate
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgMakeDate))
         Me.grpTwoColumns = New System.Windows.Forms.GroupBox()
+        Me.ucrChkTwoDigitYear = New instat.ucrCheck()
+        Me.ucrNudCutoff = New instat.ucrNud()
         Me.lblCutOffTwo = New System.Windows.Forms.Label()
+        Me.ucrInputComboBoxMonthTwo = New instat.ucrInputComboBox()
         Me.lblYearTwo = New System.Windows.Forms.Label()
+        Me.ucrReceiverYearTwo = New instat.ucrReceiverSingle()
         Me.lblDayofYear = New System.Windows.Forms.Label()
+        Me.ucrReceiverDayTwo = New instat.ucrReceiverSingle()
         Me.grpSingleColumn = New System.Windows.Forms.GroupBox()
+        Me.ucrDtpSpecifyOrigin = New instat.ucrDateTimePicker()
         Me.grpFormatField = New System.Windows.Forms.GroupBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.UcrInputComboBox1 = New instat.ucrInputComboBox()
+        Me.UcrInputComboBox2 = New instat.ucrInputComboBox()
+        Me.UcrInputComboBox3 = New instat.ucrInputComboBox()
+        Me.UcrInputComboBox4 = New instat.ucrInputComboBox()
         Me.rdoSpecifyFormat = New System.Windows.Forms.RadioButton()
         Me.rdoOrigin = New System.Windows.Forms.RadioButton()
         Me.rdoDefaultFormat = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlFormat = New instat.UcrPanel()
+        Me.ucrReceiverForDate = New instat.ucrReceiverSingle()
+        Me.ucrInputFormat = New instat.ucrInputComboBox()
+        Me.ucrInputOrigin = New instat.ucrInputComboBox()
         Me.grpThreeColumns = New System.Windows.Forms.GroupBox()
-        Me.lblYearOption = New System.Windows.Forms.Label()
-        Me.lblMonthOption = New System.Windows.Forms.Label()
+        Me.lblYearFormat = New System.Windows.Forms.Label()
+        Me.lblMonthFormat = New System.Windows.Forms.Label()
+        Me.ucrInputMonthOption = New instat.ucrInputComboBox()
+        Me.ucrInputYearOption = New instat.ucrInputComboBox()
         Me.lblDayofMonth = New System.Windows.Forms.Label()
         Me.lblMonthThree = New System.Windows.Forms.Label()
         Me.lblYearThree = New System.Windows.Forms.Label()
+        Me.ucrReceiverYearThree = New instat.ucrReceiverSingle()
+        Me.ucrReceiverDayThree = New instat.ucrReceiverSingle()
+        Me.ucrReceiverMonthThree = New instat.ucrReceiverSingle()
         Me.rdoThreeColumns = New System.Windows.Forms.RadioButton()
         Me.rdoTwoColumns = New System.Windows.Forms.RadioButton()
         Me.rdoSingleColumn = New System.Windows.Forms.RadioButton()
@@ -68,27 +87,20 @@ Partial Class dlgMakeDate
         Me.ttMakeDate = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrPnlDate = New instat.UcrPanel()
         Me.ucrSaveDate = New instat.ucrSave()
-        Me.ucrDtpSpecifyOrigin = New instat.ucrDateTimePicker()
-        Me.UcrInputComboBox1 = New instat.ucrInputComboBox()
-        Me.UcrInputComboBox2 = New instat.ucrInputComboBox()
-        Me.UcrInputComboBox3 = New instat.ucrInputComboBox()
-        Me.UcrInputComboBox4 = New instat.ucrInputComboBox()
-        Me.ucrPnlFormat = New instat.UcrPanel()
-        Me.ucrReceiverForDate = New instat.ucrReceiverSingle()
-        Me.ucrInputFormat = New instat.ucrInputComboBox()
-        Me.ucrInputOrigin = New instat.ucrInputComboBox()
-        Me.ucrChkTwoDigitYear = New instat.ucrCheck()
-        Me.ucrNudCutoff = New instat.ucrNud()
-        Me.ucrInputComboBoxMonthTwo = New instat.ucrInputComboBox()
-        Me.ucrReceiverYearTwo = New instat.ucrReceiverSingle()
-        Me.ucrReceiverDayTwo = New instat.ucrReceiverSingle()
-        Me.ucrInputMonthOption = New instat.ucrInputComboBox()
-        Me.ucrInputYearOption = New instat.ucrInputComboBox()
-        Me.ucrReceiverYearThree = New instat.ucrReceiverSingle()
-        Me.ucrReceiverDayThree = New instat.ucrReceiverSingle()
-        Me.ucrReceiverMonthThree = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorMakeDate = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrInputMonthThree = New instat.ucrInputTextBox()
+        Me.rdoMonthColumn = New System.Windows.Forms.RadioButton()
+        Me.rdoMonthValue = New System.Windows.Forms.RadioButton()
+        Me.rdoYearValue = New System.Windows.Forms.RadioButton()
+        Me.rdoYearColumn = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlYearType = New instat.UcrPanel()
+        Me.ucrPnlMonthType = New instat.UcrPanel()
+        Me.ucrInputYearThree = New instat.ucrInputTextBox()
+        Me.rdoDayValue = New System.Windows.Forms.RadioButton()
+        Me.rdoDayColumn = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlDayType = New instat.UcrPanel()
+        Me.ucrInputDayThree = New instat.ucrInputTextBox()
         Me.grpTwoColumns.SuspendLayout()
         Me.grpSingleColumn.SuspendLayout()
         Me.grpFormatField.SuspendLayout()
@@ -110,20 +122,61 @@ Partial Class dlgMakeDate
         Me.grpTwoColumns.Name = "grpTwoColumns"
         Me.grpTwoColumns.TabStop = False
         '
+        'ucrChkTwoDigitYear
+        '
+        Me.ucrChkTwoDigitYear.Checked = False
+        resources.ApplyResources(Me.ucrChkTwoDigitYear, "ucrChkTwoDigitYear")
+        Me.ucrChkTwoDigitYear.Name = "ucrChkTwoDigitYear"
+        '
+        'ucrNudCutoff
+        '
+        Me.ucrNudCutoff.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCutoff.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudCutoff, "ucrNudCutoff")
+        Me.ucrNudCutoff.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudCutoff.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCutoff.Name = "ucrNudCutoff"
+        Me.ucrNudCutoff.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'lblCutOffTwo
         '
         resources.ApplyResources(Me.lblCutOffTwo, "lblCutOffTwo")
         Me.lblCutOffTwo.Name = "lblCutOffTwo"
+        '
+        'ucrInputComboBoxMonthTwo
+        '
+        Me.ucrInputComboBoxMonthTwo.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboBoxMonthTwo.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComboBoxMonthTwo, "ucrInputComboBoxMonthTwo")
+        Me.ucrInputComboBoxMonthTwo.Name = "ucrInputComboBoxMonthTwo"
         '
         'lblYearTwo
         '
         resources.ApplyResources(Me.lblYearTwo, "lblYearTwo")
         Me.lblYearTwo.Name = "lblYearTwo"
         '
+        'ucrReceiverYearTwo
+        '
+        Me.ucrReceiverYearTwo.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverYearTwo, "ucrReceiverYearTwo")
+        Me.ucrReceiverYearTwo.Name = "ucrReceiverYearTwo"
+        Me.ucrReceiverYearTwo.Selector = Nothing
+        Me.ucrReceiverYearTwo.strNcFilePath = ""
+        Me.ucrReceiverYearTwo.ucrSelector = Nothing
+        '
         'lblDayofYear
         '
         resources.ApplyResources(Me.lblDayofYear, "lblDayofYear")
         Me.lblDayofYear.Name = "lblDayofYear"
+        '
+        'ucrReceiverDayTwo
+        '
+        Me.ucrReceiverDayTwo.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverDayTwo, "ucrReceiverDayTwo")
+        Me.ucrReceiverDayTwo.Name = "ucrReceiverDayTwo"
+        Me.ucrReceiverDayTwo.Selector = Nothing
+        Me.ucrReceiverDayTwo.strNcFilePath = ""
+        Me.ucrReceiverDayTwo.ucrSelector = Nothing
         '
         'grpSingleColumn
         '
@@ -139,6 +192,13 @@ Partial Class dlgMakeDate
         resources.ApplyResources(Me.grpSingleColumn, "grpSingleColumn")
         Me.grpSingleColumn.Name = "grpSingleColumn"
         Me.grpSingleColumn.TabStop = False
+        '
+        'ucrDtpSpecifyOrigin
+        '
+        resources.ApplyResources(Me.ucrDtpSpecifyOrigin, "ucrDtpSpecifyOrigin")
+        Me.ucrDtpSpecifyOrigin.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrDtpSpecifyOrigin.MinDate = New Date(1753, 2, 1, 0, 0, 0, 0)
+        Me.ucrDtpSpecifyOrigin.Name = "ucrDtpSpecifyOrigin"
         '
         'grpFormatField
         '
@@ -174,6 +234,34 @@ Partial Class dlgMakeDate
         resources.ApplyResources(Me.Label4, "Label4")
         Me.Label4.Name = "Label4"
         '
+        'UcrInputComboBox1
+        '
+        Me.UcrInputComboBox1.AddQuotesIfUnrecognised = True
+        Me.UcrInputComboBox1.IsReadOnly = False
+        resources.ApplyResources(Me.UcrInputComboBox1, "UcrInputComboBox1")
+        Me.UcrInputComboBox1.Name = "UcrInputComboBox1"
+        '
+        'UcrInputComboBox2
+        '
+        Me.UcrInputComboBox2.AddQuotesIfUnrecognised = True
+        Me.UcrInputComboBox2.IsReadOnly = False
+        resources.ApplyResources(Me.UcrInputComboBox2, "UcrInputComboBox2")
+        Me.UcrInputComboBox2.Name = "UcrInputComboBox2"
+        '
+        'UcrInputComboBox3
+        '
+        Me.UcrInputComboBox3.AddQuotesIfUnrecognised = True
+        Me.UcrInputComboBox3.IsReadOnly = False
+        resources.ApplyResources(Me.UcrInputComboBox3, "UcrInputComboBox3")
+        Me.UcrInputComboBox3.Name = "UcrInputComboBox3"
+        '
+        'UcrInputComboBox4
+        '
+        Me.UcrInputComboBox4.AddQuotesIfUnrecognised = True
+        Me.UcrInputComboBox4.IsReadOnly = False
+        resources.ApplyResources(Me.UcrInputComboBox4, "UcrInputComboBox4")
+        Me.UcrInputComboBox4.Name = "UcrInputComboBox4"
+        '
         'rdoSpecifyFormat
         '
         resources.ApplyResources(Me.rdoSpecifyFormat, "rdoSpecifyFormat")
@@ -195,10 +283,48 @@ Partial Class dlgMakeDate
         Me.rdoDefaultFormat.TabStop = True
         Me.rdoDefaultFormat.UseVisualStyleBackColor = True
         '
+        'ucrPnlFormat
+        '
+        resources.ApplyResources(Me.ucrPnlFormat, "ucrPnlFormat")
+        Me.ucrPnlFormat.Name = "ucrPnlFormat"
+        '
+        'ucrReceiverForDate
+        '
+        Me.ucrReceiverForDate.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverForDate, "ucrReceiverForDate")
+        Me.ucrReceiverForDate.Name = "ucrReceiverForDate"
+        Me.ucrReceiverForDate.Selector = Nothing
+        Me.ucrReceiverForDate.strNcFilePath = ""
+        Me.ucrReceiverForDate.ucrSelector = Nothing
+        '
+        'ucrInputFormat
+        '
+        Me.ucrInputFormat.AddQuotesIfUnrecognised = True
+        Me.ucrInputFormat.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputFormat, "ucrInputFormat")
+        Me.ucrInputFormat.Name = "ucrInputFormat"
+        '
+        'ucrInputOrigin
+        '
+        Me.ucrInputOrigin.AddQuotesIfUnrecognised = True
+        Me.ucrInputOrigin.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputOrigin, "ucrInputOrigin")
+        Me.ucrInputOrigin.Name = "ucrInputOrigin"
+        '
         'grpThreeColumns
         '
-        Me.grpThreeColumns.Controls.Add(Me.lblYearOption)
-        Me.grpThreeColumns.Controls.Add(Me.lblMonthOption)
+        Me.grpThreeColumns.Controls.Add(Me.ucrInputDayThree)
+        Me.grpThreeColumns.Controls.Add(Me.rdoDayValue)
+        Me.grpThreeColumns.Controls.Add(Me.rdoDayColumn)
+        Me.grpThreeColumns.Controls.Add(Me.ucrPnlDayType)
+        Me.grpThreeColumns.Controls.Add(Me.ucrInputYearThree)
+        Me.grpThreeColumns.Controls.Add(Me.rdoYearValue)
+        Me.grpThreeColumns.Controls.Add(Me.rdoYearColumn)
+        Me.grpThreeColumns.Controls.Add(Me.rdoMonthValue)
+        Me.grpThreeColumns.Controls.Add(Me.rdoMonthColumn)
+        Me.grpThreeColumns.Controls.Add(Me.ucrInputMonthThree)
+        Me.grpThreeColumns.Controls.Add(Me.lblYearFormat)
+        Me.grpThreeColumns.Controls.Add(Me.lblMonthFormat)
         Me.grpThreeColumns.Controls.Add(Me.ucrInputMonthOption)
         Me.grpThreeColumns.Controls.Add(Me.ucrInputYearOption)
         Me.grpThreeColumns.Controls.Add(Me.lblDayofMonth)
@@ -207,19 +333,35 @@ Partial Class dlgMakeDate
         Me.grpThreeColumns.Controls.Add(Me.ucrReceiverYearThree)
         Me.grpThreeColumns.Controls.Add(Me.ucrReceiverDayThree)
         Me.grpThreeColumns.Controls.Add(Me.ucrReceiverMonthThree)
+        Me.grpThreeColumns.Controls.Add(Me.ucrPnlYearType)
+        Me.grpThreeColumns.Controls.Add(Me.ucrPnlMonthType)
         resources.ApplyResources(Me.grpThreeColumns, "grpThreeColumns")
         Me.grpThreeColumns.Name = "grpThreeColumns"
         Me.grpThreeColumns.TabStop = False
         '
-        'lblYearOption
+        'lblYearFormat
         '
-        resources.ApplyResources(Me.lblYearOption, "lblYearOption")
-        Me.lblYearOption.Name = "lblYearOption"
+        resources.ApplyResources(Me.lblYearFormat, "lblYearFormat")
+        Me.lblYearFormat.Name = "lblYearFormat"
         '
-        'lblMonthOption
+        'lblMonthFormat
         '
-        resources.ApplyResources(Me.lblMonthOption, "lblMonthOption")
-        Me.lblMonthOption.Name = "lblMonthOption"
+        resources.ApplyResources(Me.lblMonthFormat, "lblMonthFormat")
+        Me.lblMonthFormat.Name = "lblMonthFormat"
+        '
+        'ucrInputMonthOption
+        '
+        Me.ucrInputMonthOption.AddQuotesIfUnrecognised = True
+        Me.ucrInputMonthOption.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMonthOption, "ucrInputMonthOption")
+        Me.ucrInputMonthOption.Name = "ucrInputMonthOption"
+        '
+        'ucrInputYearOption
+        '
+        Me.ucrInputYearOption.AddQuotesIfUnrecognised = True
+        Me.ucrInputYearOption.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputYearOption, "ucrInputYearOption")
+        Me.ucrInputYearOption.Name = "ucrInputYearOption"
         '
         'lblDayofMonth
         '
@@ -235,6 +377,33 @@ Partial Class dlgMakeDate
         '
         resources.ApplyResources(Me.lblYearThree, "lblYearThree")
         Me.lblYearThree.Name = "lblYearThree"
+        '
+        'ucrReceiverYearThree
+        '
+        Me.ucrReceiverYearThree.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverYearThree, "ucrReceiverYearThree")
+        Me.ucrReceiverYearThree.Name = "ucrReceiverYearThree"
+        Me.ucrReceiverYearThree.Selector = Nothing
+        Me.ucrReceiverYearThree.strNcFilePath = ""
+        Me.ucrReceiverYearThree.ucrSelector = Nothing
+        '
+        'ucrReceiverDayThree
+        '
+        Me.ucrReceiverDayThree.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverDayThree, "ucrReceiverDayThree")
+        Me.ucrReceiverDayThree.Name = "ucrReceiverDayThree"
+        Me.ucrReceiverDayThree.Selector = Nothing
+        Me.ucrReceiverDayThree.strNcFilePath = ""
+        Me.ucrReceiverDayThree.ucrSelector = Nothing
+        '
+        'ucrReceiverMonthThree
+        '
+        Me.ucrReceiverMonthThree.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverMonthThree, "ucrReceiverMonthThree")
+        Me.ucrReceiverMonthThree.Name = "ucrReceiverMonthThree"
+        Me.ucrReceiverMonthThree.Selector = Nothing
+        Me.ucrReceiverMonthThree.strNcFilePath = ""
+        Me.ucrReceiverMonthThree.ucrSelector = Nothing
         '
         'rdoThreeColumns
         '
@@ -291,151 +460,6 @@ Partial Class dlgMakeDate
         resources.ApplyResources(Me.ucrSaveDate, "ucrSaveDate")
         Me.ucrSaveDate.Name = "ucrSaveDate"
         '
-        'ucrDtpSpecifyOrigin
-        '
-        resources.ApplyResources(Me.ucrDtpSpecifyOrigin, "ucrDtpSpecifyOrigin")
-        Me.ucrDtpSpecifyOrigin.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
-        Me.ucrDtpSpecifyOrigin.MinDate = New Date(1753, 2, 1, 0, 0, 0, 0)
-        Me.ucrDtpSpecifyOrigin.Name = "ucrDtpSpecifyOrigin"
-        '
-        'UcrInputComboBox1
-        '
-        Me.UcrInputComboBox1.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox1.IsReadOnly = False
-        resources.ApplyResources(Me.UcrInputComboBox1, "UcrInputComboBox1")
-        Me.UcrInputComboBox1.Name = "UcrInputComboBox1"
-        '
-        'UcrInputComboBox2
-        '
-        Me.UcrInputComboBox2.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox2.IsReadOnly = False
-        resources.ApplyResources(Me.UcrInputComboBox2, "UcrInputComboBox2")
-        Me.UcrInputComboBox2.Name = "UcrInputComboBox2"
-        '
-        'UcrInputComboBox3
-        '
-        Me.UcrInputComboBox3.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox3.IsReadOnly = False
-        resources.ApplyResources(Me.UcrInputComboBox3, "UcrInputComboBox3")
-        Me.UcrInputComboBox3.Name = "UcrInputComboBox3"
-        '
-        'UcrInputComboBox4
-        '
-        Me.UcrInputComboBox4.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox4.IsReadOnly = False
-        resources.ApplyResources(Me.UcrInputComboBox4, "UcrInputComboBox4")
-        Me.UcrInputComboBox4.Name = "UcrInputComboBox4"
-        '
-        'ucrPnlFormat
-        '
-        resources.ApplyResources(Me.ucrPnlFormat, "ucrPnlFormat")
-        Me.ucrPnlFormat.Name = "ucrPnlFormat"
-        '
-        'ucrReceiverForDate
-        '
-        Me.ucrReceiverForDate.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverForDate, "ucrReceiverForDate")
-        Me.ucrReceiverForDate.Name = "ucrReceiverForDate"
-        Me.ucrReceiverForDate.Selector = Nothing
-        Me.ucrReceiverForDate.strNcFilePath = ""
-        Me.ucrReceiverForDate.ucrSelector = Nothing
-        '
-        'ucrInputFormat
-        '
-        Me.ucrInputFormat.AddQuotesIfUnrecognised = True
-        Me.ucrInputFormat.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputFormat, "ucrInputFormat")
-        Me.ucrInputFormat.Name = "ucrInputFormat"
-        '
-        'ucrInputOrigin
-        '
-        Me.ucrInputOrigin.AddQuotesIfUnrecognised = True
-        Me.ucrInputOrigin.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputOrigin, "ucrInputOrigin")
-        Me.ucrInputOrigin.Name = "ucrInputOrigin"
-        '
-        'ucrChkTwoDigitYear
-        '
-        Me.ucrChkTwoDigitYear.Checked = False
-        resources.ApplyResources(Me.ucrChkTwoDigitYear, "ucrChkTwoDigitYear")
-        Me.ucrChkTwoDigitYear.Name = "ucrChkTwoDigitYear"
-        '
-        'ucrNudCutoff
-        '
-        Me.ucrNudCutoff.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudCutoff.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudCutoff, "ucrNudCutoff")
-        Me.ucrNudCutoff.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudCutoff.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudCutoff.Name = "ucrNudCutoff"
-        Me.ucrNudCutoff.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputComboBoxMonthTwo
-        '
-        Me.ucrInputComboBoxMonthTwo.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboBoxMonthTwo.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputComboBoxMonthTwo, "ucrInputComboBoxMonthTwo")
-        Me.ucrInputComboBoxMonthTwo.Name = "ucrInputComboBoxMonthTwo"
-        '
-        'ucrReceiverYearTwo
-        '
-        Me.ucrReceiverYearTwo.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverYearTwo, "ucrReceiverYearTwo")
-        Me.ucrReceiverYearTwo.Name = "ucrReceiverYearTwo"
-        Me.ucrReceiverYearTwo.Selector = Nothing
-        Me.ucrReceiverYearTwo.strNcFilePath = ""
-        Me.ucrReceiverYearTwo.ucrSelector = Nothing
-        '
-        'ucrReceiverDayTwo
-        '
-        Me.ucrReceiverDayTwo.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverDayTwo, "ucrReceiverDayTwo")
-        Me.ucrReceiverDayTwo.Name = "ucrReceiverDayTwo"
-        Me.ucrReceiverDayTwo.Selector = Nothing
-        Me.ucrReceiverDayTwo.strNcFilePath = ""
-        Me.ucrReceiverDayTwo.ucrSelector = Nothing
-        '
-        'ucrInputMonthOption
-        '
-        Me.ucrInputMonthOption.AddQuotesIfUnrecognised = True
-        Me.ucrInputMonthOption.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMonthOption, "ucrInputMonthOption")
-        Me.ucrInputMonthOption.Name = "ucrInputMonthOption"
-        '
-        'ucrInputYearOption
-        '
-        Me.ucrInputYearOption.AddQuotesIfUnrecognised = True
-        Me.ucrInputYearOption.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputYearOption, "ucrInputYearOption")
-        Me.ucrInputYearOption.Name = "ucrInputYearOption"
-        '
-        'ucrReceiverYearThree
-        '
-        Me.ucrReceiverYearThree.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverYearThree, "ucrReceiverYearThree")
-        Me.ucrReceiverYearThree.Name = "ucrReceiverYearThree"
-        Me.ucrReceiverYearThree.Selector = Nothing
-        Me.ucrReceiverYearThree.strNcFilePath = ""
-        Me.ucrReceiverYearThree.ucrSelector = Nothing
-        '
-        'ucrReceiverDayThree
-        '
-        Me.ucrReceiverDayThree.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverDayThree, "ucrReceiverDayThree")
-        Me.ucrReceiverDayThree.Name = "ucrReceiverDayThree"
-        Me.ucrReceiverDayThree.Selector = Nothing
-        Me.ucrReceiverDayThree.strNcFilePath = ""
-        Me.ucrReceiverDayThree.ucrSelector = Nothing
-        '
-        'ucrReceiverMonthThree
-        '
-        Me.ucrReceiverMonthThree.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverMonthThree, "ucrReceiverMonthThree")
-        Me.ucrReceiverMonthThree.Name = "ucrReceiverMonthThree"
-        Me.ucrReceiverMonthThree.Selector = Nothing
-        Me.ucrReceiverMonthThree.strNcFilePath = ""
-        Me.ucrReceiverMonthThree.ucrSelector = Nothing
-        '
         'ucrBase
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
@@ -443,15 +467,116 @@ Partial Class dlgMakeDate
         '
         'ucrSelectorMakeDate
         '
+        Me.ucrSelectorMakeDate.bDropUnusedFilterLevels = False
         Me.ucrSelectorMakeDate.bShowHiddenColumns = False
         Me.ucrSelectorMakeDate.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorMakeDate, "ucrSelectorMakeDate")
         Me.ucrSelectorMakeDate.Name = "ucrSelectorMakeDate"
         '
+        'ucrInputMonthThree
+        '
+        Me.ucrInputMonthThree.AddQuotesIfUnrecognised = True
+        Me.ucrInputMonthThree.IsMultiline = False
+        Me.ucrInputMonthThree.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMonthThree, "ucrInputMonthThree")
+        Me.ucrInputMonthThree.Name = "ucrInputMonthThree"
+        '
+        'rdoMonthColumn
+        '
+        resources.ApplyResources(Me.rdoMonthColumn, "rdoMonthColumn")
+        Me.rdoMonthColumn.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMonthColumn.FlatAppearance.BorderSize = 2
+        Me.rdoMonthColumn.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMonthColumn.Name = "rdoMonthColumn"
+        Me.rdoMonthColumn.TabStop = True
+        Me.rdoMonthColumn.UseVisualStyleBackColor = True
+        '
+        'rdoMonthValue
+        '
+        resources.ApplyResources(Me.rdoMonthValue, "rdoMonthValue")
+        Me.rdoMonthValue.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMonthValue.FlatAppearance.BorderSize = 2
+        Me.rdoMonthValue.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMonthValue.Name = "rdoMonthValue"
+        Me.rdoMonthValue.TabStop = True
+        Me.rdoMonthValue.UseVisualStyleBackColor = True
+        '
+        'rdoYearValue
+        '
+        resources.ApplyResources(Me.rdoYearValue, "rdoYearValue")
+        Me.rdoYearValue.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoYearValue.FlatAppearance.BorderSize = 2
+        Me.rdoYearValue.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoYearValue.Name = "rdoYearValue"
+        Me.rdoYearValue.TabStop = True
+        Me.rdoYearValue.UseVisualStyleBackColor = True
+        '
+        'rdoYearColumn
+        '
+        resources.ApplyResources(Me.rdoYearColumn, "rdoYearColumn")
+        Me.rdoYearColumn.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoYearColumn.FlatAppearance.BorderSize = 2
+        Me.rdoYearColumn.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoYearColumn.Name = "rdoYearColumn"
+        Me.rdoYearColumn.TabStop = True
+        Me.rdoYearColumn.UseVisualStyleBackColor = True
+        '
+        'ucrPnlYearType
+        '
+        resources.ApplyResources(Me.ucrPnlYearType, "ucrPnlYearType")
+        Me.ucrPnlYearType.Name = "ucrPnlYearType"
+        '
+        'ucrPnlMonthType
+        '
+        resources.ApplyResources(Me.ucrPnlMonthType, "ucrPnlMonthType")
+        Me.ucrPnlMonthType.Name = "ucrPnlMonthType"
+        '
+        'ucrInputYearThree
+        '
+        Me.ucrInputYearThree.AddQuotesIfUnrecognised = True
+        Me.ucrInputYearThree.IsMultiline = False
+        Me.ucrInputYearThree.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputYearThree, "ucrInputYearThree")
+        Me.ucrInputYearThree.Name = "ucrInputYearThree"
+        '
+        'rdoDayValue
+        '
+        resources.ApplyResources(Me.rdoDayValue, "rdoDayValue")
+        Me.rdoDayValue.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDayValue.FlatAppearance.BorderSize = 2
+        Me.rdoDayValue.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDayValue.Name = "rdoDayValue"
+        Me.rdoDayValue.TabStop = True
+        Me.rdoDayValue.UseVisualStyleBackColor = True
+        '
+        'rdoDayColumn
+        '
+        resources.ApplyResources(Me.rdoDayColumn, "rdoDayColumn")
+        Me.rdoDayColumn.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDayColumn.FlatAppearance.BorderSize = 2
+        Me.rdoDayColumn.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDayColumn.Name = "rdoDayColumn"
+        Me.rdoDayColumn.TabStop = True
+        Me.rdoDayColumn.UseVisualStyleBackColor = True
+        '
+        'ucrPnlDayType
+        '
+        resources.ApplyResources(Me.ucrPnlDayType, "ucrPnlDayType")
+        Me.ucrPnlDayType.Name = "ucrPnlDayType"
+        '
+        'ucrInputDayThree
+        '
+        Me.ucrInputDayThree.AddQuotesIfUnrecognised = True
+        Me.ucrInputDayThree.IsMultiline = False
+        Me.ucrInputDayThree.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputDayThree, "ucrInputDayThree")
+        Me.ucrInputDayThree.Name = "ucrInputDayThree"
+        '
         'dlgMakeDate
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.grpThreeColumns)
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.grpFormats)
         Me.Controls.Add(Me.rdoThreeColumns)
@@ -461,7 +586,6 @@ Partial Class dlgMakeDate
         Me.Controls.Add(Me.ucrSaveDate)
         Me.Controls.Add(Me.grpSingleColumn)
         Me.Controls.Add(Me.grpTwoColumns)
-        Me.Controls.Add(Me.grpThreeColumns)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSelectorMakeDate)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -493,8 +617,8 @@ Partial Class dlgMakeDate
     Friend WithEvents ucrReceiverYearTwo As ucrReceiverSingle
     Friend WithEvents lblDayofYear As Label
     Friend WithEvents ucrReceiverDayTwo As ucrReceiverSingle
-    Friend WithEvents lblYearOption As Label
-    Friend WithEvents lblMonthOption As Label
+    Friend WithEvents lblYearFormat As Label
+    Friend WithEvents lblMonthFormat As Label
     Friend WithEvents ucrInputMonthOption As ucrInputComboBox
     Friend WithEvents ucrInputYearOption As ucrInputComboBox
     Friend WithEvents lblDayofMonth As Label
@@ -530,4 +654,16 @@ Partial Class dlgMakeDate
     Friend WithEvents cmdHelp As Button
     Friend WithEvents ttMakeDate As ToolTip
     Friend WithEvents ucrDtpSpecifyOrigin As ucrDateTimePicker
+    Friend WithEvents ucrInputMonthThree As ucrInputTextBox
+    Friend WithEvents ucrInputYearThree As ucrInputTextBox
+    Friend WithEvents rdoYearValue As RadioButton
+    Friend WithEvents rdoYearColumn As RadioButton
+    Friend WithEvents rdoMonthValue As RadioButton
+    Friend WithEvents rdoMonthColumn As RadioButton
+    Friend WithEvents ucrPnlYearType As UcrPanel
+    Friend WithEvents ucrPnlMonthType As UcrPanel
+    Friend WithEvents ucrInputDayThree As ucrInputTextBox
+    Friend WithEvents rdoDayValue As RadioButton
+    Friend WithEvents rdoDayColumn As RadioButton
+    Friend WithEvents ucrPnlDayType As UcrPanel
 End Class
