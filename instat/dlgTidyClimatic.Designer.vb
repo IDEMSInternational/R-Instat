@@ -37,8 +37,8 @@ Partial Class dlgTidyClimaticData
         Me.lblElementName = New System.Windows.Forms.Label()
         Me.lblColumnstoStack = New System.Windows.Forms.Label()
         Me.lblElement = New System.Windows.Forms.Label()
+        Me.ucrTextBoxElementName = New instat.ucrInputTextBox()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
-        Me.ucrReceiverElementName = New instat.ucrReceiverSingle()
         Me.ucrReceiverMultipleStack = New instat.ucrReceiverMultiple()
         Me.ucrReceiverDayofYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
@@ -138,6 +138,14 @@ Partial Class dlgTidyClimaticData
         resources.ApplyResources(Me.lblElement, "lblElement")
         Me.lblElement.Name = "lblElement"
         '
+        'ucrTextBoxElementName
+        '
+        Me.ucrTextBoxElementName.AddQuotesIfUnrecognised = True
+        Me.ucrTextBoxElementName.IsMultiline = False
+        Me.ucrTextBoxElementName.IsReadOnly = False
+        resources.ApplyResources(Me.ucrTextBoxElementName, "ucrTextBoxElementName")
+        Me.ucrTextBoxElementName.Name = "ucrTextBoxElementName"
+        '
         'ucrReceiverElement
         '
         Me.ucrReceiverElement.frmParent = Me
@@ -146,15 +154,6 @@ Partial Class dlgTidyClimaticData
         Me.ucrReceiverElement.Selector = Nothing
         Me.ucrReceiverElement.strNcFilePath = ""
         Me.ucrReceiverElement.ucrSelector = Nothing
-        '
-        'ucrReceiverElementName
-        '
-        Me.ucrReceiverElementName.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverElementName, "ucrReceiverElementName")
-        Me.ucrReceiverElementName.Name = "ucrReceiverElementName"
-        Me.ucrReceiverElementName.Selector = Nothing
-        Me.ucrReceiverElementName.strNcFilePath = ""
-        Me.ucrReceiverElementName.ucrSelector = Nothing
         '
         'ucrReceiverMultipleStack
         '
@@ -255,11 +254,11 @@ Partial Class dlgTidyClimaticData
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrTextBoxElementName)
         Me.Controls.Add(Me.lblElement)
         Me.Controls.Add(Me.lblColumnstoStack)
         Me.Controls.Add(Me.lblElementName)
         Me.Controls.Add(Me.ucrReceiverElement)
-        Me.Controls.Add(Me.ucrReceiverElementName)
         Me.Controls.Add(Me.ucrReceiverMultipleStack)
         Me.Controls.Add(Me.ucrReceiverDayofYear)
         Me.Controls.Add(Me.lblMonth)
@@ -318,6 +317,6 @@ Partial Class dlgTidyClimaticData
     Friend WithEvents lblColumnstoStack As Label
     Friend WithEvents lblElementName As Label
     Friend WithEvents ucrReceiverElement As ucrReceiverSingle
-    Friend WithEvents ucrReceiverElementName As ucrReceiverSingle
     Friend WithEvents ucrReceiverMultipleStack As ucrReceiverMultiple
+    Friend WithEvents ucrTextBoxElementName As ucrInputTextBox
 End Class
