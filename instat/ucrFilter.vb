@@ -67,6 +67,7 @@ Public Class ucrFilter
         ucrFilterOperation.SetDropDownStyleAsNonEditable()
         ucrInputDateNA.SetItems({"NA"})
         ucrInputDateNA.SetDropDownStyleAsEditable(True)
+        ucrInputDateNA.SetLinkedDisplayControl(lblNADates)
         ucrFactorLevels.SetAsMultipleSelector()
         ucrFactorLevels.SetReceiver(ucrFilterByReceiver)
         ucrFactorLevels.SetIncludeLevels(False)
@@ -180,9 +181,9 @@ Public Class ucrFilter
             If ucrFilterByReceiver.strCurrDataType = "character" AndAlso ucrValueForFilter.GetText() <> "NA" Then
                 strCondition = Chr(34) & ucrValueForFilter.GetText() & Chr(34)
             ElseIf ucrFilterByReceiver.strCurrDataType = "Date" Then
-                If Not ucrInputDateNA.IsEmpty AndAlso ucrInputDateNA.GetText = "NA" Then
-                    strCondition = Chr(34) & ucrInputDateNA.GetText() & Chr(34)
-                ElseIf ucrInputDateNA.IsEmpty Then
+                If Not ucrInputDateNA.IsEmpty Then
+                    strCondition = ucrInputDateNA.GetText()
+                Else
                     'TODO; this might need to be done in the control i.e ucrDateTimePicker
                     strCondition = Chr(34) & ucrFilterDateTimePicker.dtpDateTime.Value.Year & "/" & ucrFilterDateTimePicker.dtpDateTime.Value.Month & "/" & ucrFilterDateTimePicker.dtpDateTime.Value.Day & Chr(34)
                 End If

@@ -58,6 +58,7 @@ Partial Class ucrFilter
         Me.ucrValueForFilter = New instat.ucrInputComboBox()
         Me.ucrFilterDateTimePicker = New instat.ucrDateTimePicker()
         Me.ucrInputDateNA = New instat.ucrInputComboBox()
+        Me.lblNADates = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblSelectLevels
@@ -190,10 +191,16 @@ Partial Class ucrFilter
         resources.ApplyResources(Me.ucrInputDateNA, "ucrInputDateNA")
         Me.ucrInputDateNA.Name = "ucrInputDateNA"
         '
+        'lblNADates
+        '
+        resources.ApplyResources(Me.lblNADates, "lblNADates")
+        Me.lblNADates.Name = "lblNADates"
+        '
         'ucrFilter
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblNADates)
         Me.Controls.Add(Me.ucrInputDateNA)
         Me.Controls.Add(Me.ucrFilterDateTimePicker)
         Me.Controls.Add(Me.ucrValueForFilter)
@@ -238,4 +245,5 @@ Partial Class ucrFilter
     Friend WithEvents ucrValueForFilter As ucrInputComboBox
     Friend WithEvents ucrFilterDateTimePicker As ucrDateTimePicker
     Friend WithEvents ucrInputDateNA As ucrInputComboBox
+    Friend WithEvents lblNADates As Label
 End Class
