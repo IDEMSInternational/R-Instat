@@ -38,7 +38,6 @@ Public Class dlgTidyClimaticData
         bReset = False
         autoTranslate(Me)
         TestOkEnabled()
-        ReopenDialog()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -55,7 +54,6 @@ Public Class dlgTidyClimaticData
         ucrReceiverStation.Selector = ucrSelectorTidyClimaticData
         ucrReceiverMultipleStack.Selector = ucrSelectorTidyClimaticData
         ucrReceiverElement.Selector = ucrSelectorTidyClimaticData
-        ucrReceiverElementName.Selector = ucrSelectorTidyClimaticData
 
         ucrReceiverYear.Selector = ucrSelectorTidyClimaticData
         ucrReceiverYearTwo.Selector = ucrSelectorTidyClimaticData
@@ -76,8 +74,7 @@ Public Class dlgTidyClimaticData
         ucrReceiverElement.SetParameter(New RParameter("element", 7))
         ucrReceiverElement.SetParameterIsString()
 
-        ucrReceiverElementName.SetParameter(New RParameter("element_name", 8))
-        ucrReceiverElementName.SetParameterIsString()
+        ucrTextBoxElementName.SetParameter(New RParameter("element_name", 8))
 
         'rdoYear
         ucrReceiverDayofYear.SetParameter(New RParameter("day", 3))
@@ -125,7 +122,7 @@ Public Class dlgTidyClimaticData
         ucrReceiverMonthTwo.SetLinkedDisplayControl(lblMonthTwo)
 
         ucrReceiverElement.SetLinkedDisplayControl(lblElement)
-        ucrReceiverElementName.SetLinkedDisplayControl(lblElementName)
+        ucrTextBoxElementName.SetLinkedDisplayControl(lblElementName)
 
         ucrNewDFName.SetIsComboBox()
         ucrNewDFName.SetSaveTypeAsDataFrame()
@@ -219,10 +216,10 @@ Public Class dlgTidyClimaticData
     Private Sub ShowElementReceivers()
         If rdoYear.Checked Then
             ucrReceiverElement.Visible = False
-            ucrReceiverElementName.Visible = False
+            ucrTextBoxElementName.Visible = False
         Else
             ucrReceiverElement.Visible = True
-            ucrReceiverElementName.Visible = True
+            ucrTextBoxElementName.Visible = True
         End If
     End Sub
 
