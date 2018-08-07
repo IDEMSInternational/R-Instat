@@ -49,16 +49,14 @@ Partial Class ucrFilter
         Me.mcdEditCondition = New System.Windows.Forms.Button()
         Me.cmdRemoveCondition = New System.Windows.Forms.Button()
         Me.lblNewFilterName = New System.Windows.Forms.Label()
+        Me.ucrFilterDateTimePicker = New instat.ucrDateTimePicker()
+        Me.ucrValueForFilter = New instat.ucrInputComboBox()
         Me.ucrInputFilterName = New instat.ucrInputComboBox()
         Me.ucrFilterPreview = New instat.ucrInputTextBox()
         Me.ucrFilterOperation = New instat.ucrInputComboBox()
         Me.ucrFactorLevels = New instat.ucrFactor()
         Me.ucrFilterByReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorForFitler = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrValueForFilter = New instat.ucrInputComboBox()
-        Me.ucrFilterDateTimePicker = New instat.ucrDateTimePicker()
-        Me.ucrInputDateNA = New instat.ucrInputComboBox()
-        Me.lblNADates = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblSelectLevels
@@ -122,6 +120,20 @@ Partial Class ucrFilter
         resources.ApplyResources(Me.lblNewFilterName, "lblNewFilterName")
         Me.lblNewFilterName.Name = "lblNewFilterName"
         '
+        'ucrFilterDateTimePicker
+        '
+        resources.ApplyResources(Me.ucrFilterDateTimePicker, "ucrFilterDateTimePicker")
+        Me.ucrFilterDateTimePicker.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrFilterDateTimePicker.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrFilterDateTimePicker.Name = "ucrFilterDateTimePicker"
+        '
+        'ucrValueForFilter
+        '
+        Me.ucrValueForFilter.AddQuotesIfUnrecognised = True
+        Me.ucrValueForFilter.IsReadOnly = False
+        resources.ApplyResources(Me.ucrValueForFilter, "ucrValueForFilter")
+        Me.ucrValueForFilter.Name = "ucrValueForFilter"
+        '
         'ucrInputFilterName
         '
         Me.ucrInputFilterName.AddQuotesIfUnrecognised = True
@@ -170,38 +182,10 @@ Partial Class ucrFilter
         resources.ApplyResources(Me.ucrSelectorForFitler, "ucrSelectorForFitler")
         Me.ucrSelectorForFitler.Name = "ucrSelectorForFitler"
         '
-        'ucrValueForFilter
-        '
-        Me.ucrValueForFilter.AddQuotesIfUnrecognised = True
-        Me.ucrValueForFilter.IsReadOnly = False
-        resources.ApplyResources(Me.ucrValueForFilter, "ucrValueForFilter")
-        Me.ucrValueForFilter.Name = "ucrValueForFilter"
-        '
-        'ucrFilterDateTimePicker
-        '
-        resources.ApplyResources(Me.ucrFilterDateTimePicker, "ucrFilterDateTimePicker")
-        Me.ucrFilterDateTimePicker.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
-        Me.ucrFilterDateTimePicker.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
-        Me.ucrFilterDateTimePicker.Name = "ucrFilterDateTimePicker"
-        '
-        'ucrInputDateNA
-        '
-        Me.ucrInputDateNA.AddQuotesIfUnrecognised = True
-        Me.ucrInputDateNA.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputDateNA, "ucrInputDateNA")
-        Me.ucrInputDateNA.Name = "ucrInputDateNA"
-        '
-        'lblNADates
-        '
-        resources.ApplyResources(Me.lblNADates, "lblNADates")
-        Me.lblNADates.Name = "lblNADates"
-        '
         'ucrFilter
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.lblNADates)
-        Me.Controls.Add(Me.ucrInputDateNA)
         Me.Controls.Add(Me.ucrFilterDateTimePicker)
         Me.Controls.Add(Me.ucrValueForFilter)
         Me.Controls.Add(Me.ucrInputFilterName)
@@ -244,6 +228,4 @@ Partial Class ucrFilter
     Friend WithEvents ucrInputFilterName As ucrInputComboBox
     Friend WithEvents ucrValueForFilter As ucrInputComboBox
     Friend WithEvents ucrFilterDateTimePicker As ucrDateTimePicker
-    Friend WithEvents ucrInputDateNA As ucrInputComboBox
-    Friend WithEvents lblNADates As Label
 End Class
