@@ -1981,33 +1981,6 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
 }
 )
 
-data_object$set("public","make_date_yearmonthday", function(year, month, day, year_format = "%Y", month_format = "%m", day_format = "%d") {
-  year_col <- self$get_columns_from_data(year, use_current_filter = FALSE)
-  month_col <- self$get_columns_from_data(month, use_current_filter = FALSE)
-  day_col <- self$get_columns_from_data(day, use_current_filter = FALSE)
-  if(missing(year_format)) {
-    year_counts <- stringr::str_count(year)
-    if(anyDuplicated(year_counts) != 0) stop("Year column has inconsistent year formats")
-    else {
-      year_length <- year_counts[1]
-      if(year_length == 2) year_format = "%y"
-      else if(year_length == 4) year_format = "%Y"
-      else stop("Cannot detect year format with ", year_length, " digits.")
-    }
-  }
-  if(missing(month_format)) {
-    if(all(month %in% month.name)) month_format = "%B"
-    else if(all(month %in% month.abb)) month_format = "%b"
-    else if(all(month %in% 1:12)) month_format = "%m"
-    else stop("Cannot detect month format")
-  }
-  if(missing(day_format)) {
-    #TODO
-  }
-  return(as.Date(paste(year_col, month_col, day_col), format = paste(year_format, month_format, day_format)))
-}
-)
-
 data_object$set("public","make_date_yearmonthday", function(year, month, day, f_year, f_month, f_day, year_format = "%Y", month_format = "%m") {
   if(!missing(year)) year_col <- self$get_columns_from_data(year, use_current_filter = FALSE)
   else if(!missing(f_year)) year_col <- f_year
@@ -2036,6 +2009,33 @@ data_object$set("public","make_date_yearmonthday", function(year, month, day, f_
     else stop("Cannot detect month format")
   }
   return(as.Date(paste(year_col, month_col, day_col), format = paste(year_format, month_format, "%d")))
+}
+)
+
+# Not sure if doy_format should be a parameter? There seems to only be one format for it.
+data_object$set("public","make_date_yeardoy", function(year, doy, year_format = "%Y", doy_format = "%j", doy_typical_length = "366") {
+  year_col <- self$get_columns_from_data(year, use_current_filter = FALSE)
+  doy_col <- self$get_columns_from_data(doy, use_current_filter = FALSE)
+  
+  if(missing(year_format)) {
+    year_counts <- str_count(year)
+    if(anyDuplicated(year_counts) != 0) stop("Year column has inconsistent year formats")
+    else {
+      year_length <- year_counts[1]
+      if(year_length == 2) year_format = "%y"
+      else if(year_length == 4) year_format = "%Y"
+      else stop("Cannot detect year format with ", year_length, " digits.")
+    }
+  }
+  if(doy_typical_length == "366") {
+    if(is.factor(year_col)) {
+      year_col <- as.numeric(levels(year_col))[year_col]
+    }
+    #Replacing day 60 with 0 for non-leap years.This will result into NA dates
+    doy_col[(!lubridate::leap_year(year_col)) & doy_col == 60] <- 0
+    doy_col[(!lubridate::leap_year(year_col)) & doy_col > 60] <- doy_col[(!lubridate::leap_year(year_col)) & doy_col > 60] - 1
+  }
+  return(temp_date <- as.Date(paste(year_col, doy_col), format = paste(year_format, doy_format)))
 }
 )
 
