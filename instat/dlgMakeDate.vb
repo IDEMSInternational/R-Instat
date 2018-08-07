@@ -180,14 +180,31 @@ Public Class dlgMakeDate
         ucrReceiverDayTwo.SetParameterIsString()
 
         'rdoYearMonthDay
+        ucrPnlYearType.AddRadioButton(rdoYearColumn)
+        ucrPnlYearType.AddRadioButton(rdoYearValue)
+        ucrPnlYearType.AddParameterPresentCondition(rdoYearColumn, "year")
+        ucrPnlYearType.AddParameterPresentCondition(rdoYearColumn, "f_year")
+
+        ucrPnlYearType.AddToLinkedControls(ucrReceiverYearThree, {rdoYearColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlYearType.AddToLinkedControls(ucrInputYearThree, {rdoYearValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
         ucrReceiverYearThree.SetParameter(New RParameter("year", 3))
         ucrReceiverYearThree.SetParameterIsString()
+
+        ucrInputYearThree.SetParameter(New RParameter("f_year", 6))
+        ucrInputYearThree.SetValidationTypeAsNumeric()
 
         ucrReceiverMonthThree.SetParameter(New RParameter("month", 2))
         ucrReceiverMonthThree.SetParameterIsString()
 
+        ucrInputMonthThree.SetParameter(New RParameter("f_month", 5))
+        ucrInputMonthThree.SetValidationTypeAsNumeric()
+
         ucrReceiverDayThree.SetParameter(New RParameter("day", 1))
         ucrReceiverDayThree.SetParameterIsString()
+
+        ucrInputDayThree.SetParameter(New RParameter("f_day", 4))
+        ucrInputDayThree.SetValidationTypeAsNumeric()
 
         ucrSelectorMakeDate.SetParameter(New RParameter("data_name", 0))
         ucrSelectorMakeDate.SetParameterIsString()
@@ -233,10 +250,12 @@ Public Class dlgMakeDate
         ucrPnlDate.AddToLinkedControls(ucrReceiverDayThree, {rdoThreeColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverDayThree.SetLinkedDisplayControl(lblDayofMonth)
         ucrPnlDate.AddToLinkedControls(ucrInputYearOption, {rdoThreeColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="4 Digit")
-        ucrInputYearOption.SetLinkedDisplayControl(lblYearOption)
+        ucrInputYearOption.SetLinkedDisplayControl(lblYearFormat)
         ucrPnlDate.AddToLinkedControls(ucrInputMonthOption, {rdoThreeColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Numeric")
-        ucrInputMonthOption.SetLinkedDisplayControl(lblMonthOption)
+        ucrInputMonthOption.SetLinkedDisplayControl(lblMonthFormat)
         ucrReceiverYearThree.SetLinkedDisplayControl(grpThreeColumns)
+
+        ucrPnlDate.AddToLinkedControls(ucrPnlYearType, {rdoThreeColumns}, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoYearColumn)
 
         'TODO - To be linked uplater with the ucrinputFomat
         'ucrChkMore.SetText("More")
@@ -270,7 +289,6 @@ Public Class dlgMakeDate
         clsDateFunction.SetRCommand("as.Date")
         clsMakeYearDay.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_date_yeardoy")
         clsMakeYearMonthDay.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_date_yearmonthday")
-        clsMakeYearMonthDay.AddParameter("day_format", Chr(34) & "%d" & Chr(34))
         clsMakeYearDay.AddParameter("year_format", Chr(34) & "%Y" & Chr(34))
         clsDateFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverForDate.GetVariables())
         clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsDefaultDate)
@@ -297,11 +315,16 @@ Public Class dlgMakeDate
 
         ucrReceiverDayTwo.SetRCode(clsMakeYearDay, bReset)
         ucrReceiverYearTwo.SetRCode(clsMakeYearDay, bReset)
+
         ucrReceiverYearThree.SetRCode(clsMakeYearMonthDay, bReset)
+        ucrInputDayThree.SetRCode(clsMakeYearMonthDay, bReset)
         ucrReceiverMonthThree.SetRCode(clsMakeYearMonthDay, bReset)
         ucrReceiverDayThree.SetRCode(clsMakeYearMonthDay, bReset)
         ucrSelectorMakeDate.SetRCode(clsMakeYearMonthDay, bReset)
         ucrSelectorMakeDate.SetRCode(clsMakeYearDay, bReset)
+
+        ucrPnlYearType.SetRCode(clsMakeYearMonthDay, bReset)
+
         GroupBoxDisplayOnReopen()
     End Sub
 
