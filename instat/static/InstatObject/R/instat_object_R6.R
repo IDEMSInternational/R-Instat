@@ -1106,8 +1106,8 @@ instat_object$set("public","graph_one_variable", function(data_name, columns, nu
 }
 )
 
-instat_object$set("public","make_date_yearmonthday", function(data_name, year, month, day, year_format = "%Y", month_format = "%m", day_format = "%d") {
-  self$get_data_objects(data_name)$make_date_yearmonthday(year = year, month = month, day = day, year_format = year_format, month_format = month_format, day_format = day_format)
+instat_object$set("public","make_date_yearmonthday", function(data_name, year, month, day, f_year, f_month, f_day, year_format = "%Y", month_format = "%m") {
+  self$get_data_objects(data_name)$make_date_yearmonthday(year = year, month = month, day = day, f_year = f_year, f_month = f_month, f_day = f_day, year_format = year_format, month_format = month_format)
 }
 )
 
