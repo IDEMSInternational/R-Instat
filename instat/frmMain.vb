@@ -1992,15 +1992,19 @@ Public Class frmMain
         dlgOneVariableSummarise.ShowDialog()
     End Sub
 
-    Private Sub mnuPrepareShare_Click(sender As Object, e As EventArgs) Handles mnuPrepareShare.Click
-        dlgAnonymiseIDColumn.ShowDialog()
-    End Sub
-
     Private Sub mnuClimaticPrepareLengthOfSeason_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareLengthOfSeason.Click
         dlgClimaticLengthOfSeason.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticPrepareCompare_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareCompare.Click
         dlgCompare.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareCheckDataAnonymiseIDColumn_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataAnonymiseIDColumn.Click
+        dlgAnonymiseIDColumn.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticFileImportShapeFile_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportShapeFile.Click
+        dlgImportShapeFiles.ShowDialog()
     End Sub
 End Class
