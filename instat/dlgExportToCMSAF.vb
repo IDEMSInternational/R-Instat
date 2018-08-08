@@ -129,8 +129,7 @@ Public Class dlgExportToCMSAF
     End Sub
 
     Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlValueChanged
-        'This parameter is being added manually here because we are setting it elsewhere as an Rfunction.
-        'clsAssignOperator.AddParameter("SIS", ucrReceiverElement.GetVariableNames, bIncludeArgumentName:=False, iPosition:=1)
+        clsAsDataFrameFunction.AddParameter(strParameterName:=ucrReceiverElement.GetVariableNames(bWithQuotes:=False), clsRFunctionParameter:=ucrReceiverElement.GetVariables, iPosition:=4)
     End Sub
 
     Private Sub TestOkEnabled()
