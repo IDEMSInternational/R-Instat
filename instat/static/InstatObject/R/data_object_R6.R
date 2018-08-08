@@ -1176,6 +1176,8 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
           }
           new_col <- as.numeric(curr_labels[as.character(curr_col)])
         }
+        # This ensures that integer columns get type changed to numeric (not done by sjlabelled::as_numeric)
+        else if(is.integer(curr_col)) new_col <- as.numeric(curr_col)
         else new_col <- sjlabelled::as_numeric(curr_col, keep.labels = keep.labels)
       }
     }
