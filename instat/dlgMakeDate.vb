@@ -229,8 +229,6 @@ Public Class dlgMakeDate
         ucrPnlDate.AddToLinkedControls(ucrInputComboBoxMonthTwo, {rdoTwoColumns}, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="366")
 
         'when rdoThreeColumn is checked
-        ucrPnlDate.AddToLinkedControls(ucrInputYearOption, {rdoThreeColumns}, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="4 Digit")
-        ucrPnlDate.AddToLinkedControls(ucrInputMonthOption, {rdoThreeColumns}, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Numeric")
         ucrPnlDate.AddToLinkedControls(ucrPnlYearType, {rdoThreeColumns}, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoYearColumn)
         ucrPnlDate.AddToLinkedControls(ucrPnlMonthType, {rdoThreeColumns}, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoMonthColumn)
         ucrPnlDate.AddToLinkedControls(ucrPnlDayType, {rdoThreeColumns}, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoDayColumn)
@@ -266,9 +264,11 @@ Public Class dlgMakeDate
         ucrInputOrigin.Reset()
 
         clsMakeYearDay.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_date_yeardoy")
+        clsMakeYearDay.AddParameter("year_format", Chr(34) & "%Y" & Chr(34))
 
         clsMakeYearMonthDay.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_date_yearmonthday")
-        clsMakeYearDay.AddParameter("year_format", Chr(34) & "%Y" & Chr(34))
+        clsMakeYearMonthDay.AddParameter("year_format", Chr(34) & "%Y" & Chr(34))
+        clsMakeYearMonthDay.AddParameter("month_format", Chr(34) & "%m" & Chr(34))
 
         clsDateFunction.SetRCommand("as.Date")
         clsDateFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverForDate.GetVariables())
