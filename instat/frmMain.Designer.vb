@@ -209,10 +209,12 @@ Partial Class frmMain
         Me.mnuClimaticCheckDataQCTemperatures = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepare = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCimaticPrepareTransform = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticPrepareCompare = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator37 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticPrepareClimaticSummaries = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareStartoftheRains = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareEndOfRains = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticPrepareLengthOfSeason = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareSpells = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareExtremes = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator46 = New System.Windows.Forms.ToolStripSeparator()
@@ -393,7 +395,7 @@ Partial Class frmMain
         Me.ToolStripSeparator40 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuPreparePrepareToShareJitter = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCheckDataPrePareToShareSdcPackage = New System.Windows.Forms.ToolStripMenuItem()
-        Me.NonToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareCheckDataAnonymiseIDColumn = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuPrepareColumnCalculate = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnCalculateCalculations = New System.Windows.Forms.ToolStripMenuItem()
@@ -551,6 +553,7 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
+        Me.mnuClimaticFileImportShapeFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1373,7 +1376,7 @@ Partial Class frmMain
         '
         'mnuClimaticFile
         '
-        Me.mnuClimaticFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFileOpensst, Me.mnuClimaticFileImportGriddedData, Me.OpenNetCDFToolStripMenuItem, Me.mnuClimateFileClimSoft, Me.mnuClimaticFileCliData, Me.ToolStripSeparator15, Me.mnuClimaticFileExportToCPT})
+        Me.mnuClimaticFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFileOpensst, Me.mnuClimaticFileImportGriddedData, Me.OpenNetCDFToolStripMenuItem, Me.mnuClimaticFileImportShapeFile, Me.mnuClimateFileClimSoft, Me.mnuClimaticFileCliData, Me.ToolStripSeparator15, Me.mnuClimaticFileExportToCPT})
         Me.mnuClimaticFile.Name = "mnuClimaticFile"
         resources.ApplyResources(Me.mnuClimaticFile, "mnuClimaticFile")
         '
@@ -1523,7 +1526,7 @@ Partial Class frmMain
         '
         'mnuClimaticPrepare
         '
-        Me.mnuClimaticPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCimaticPrepareTransform, Me.ToolStripSeparator37, Me.mnuClimaticPrepareClimaticSummaries, Me.mnuClimaticPrepareStartoftheRains, Me.mnuClimaticPrepareEndOfRains, Me.mnuClimaticPrepareSpells, Me.mnuClimaticPrepareExtremes, Me.ToolStripSeparator46, Me.mnuClimaticPrepareEvapotranspiration, Me.mnuClimaticPrepareSummary, Me.mnuClimaticPrepareNewWorksheet, Me.mnuClimaticPrepareImportDailyData, Me.mnuClimaticPrepareMakeFactor, Me.mnuClimaticPrepareShiftDailyData, Me.mnuClimaticPrepareUnstackDailyData, Me.mnuClimaticPrepareStackDailyData})
+        Me.mnuClimaticPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCimaticPrepareTransform, Me.mnuClimaticPrepareCompare, Me.ToolStripSeparator37, Me.mnuClimaticPrepareClimaticSummaries, Me.mnuClimaticPrepareStartoftheRains, Me.mnuClimaticPrepareEndOfRains, Me.mnuClimaticPrepareLengthOfSeason, Me.mnuClimaticPrepareSpells, Me.mnuClimaticPrepareExtremes, Me.ToolStripSeparator46, Me.mnuClimaticPrepareEvapotranspiration, Me.mnuClimaticPrepareSummary, Me.mnuClimaticPrepareNewWorksheet, Me.mnuClimaticPrepareImportDailyData, Me.mnuClimaticPrepareMakeFactor, Me.mnuClimaticPrepareShiftDailyData, Me.mnuClimaticPrepareUnstackDailyData, Me.mnuClimaticPrepareStackDailyData})
         Me.mnuClimaticPrepare.Name = "mnuClimaticPrepare"
         resources.ApplyResources(Me.mnuClimaticPrepare, "mnuClimaticPrepare")
         Me.mnuClimaticPrepare.Tag = "Prepare"
@@ -1532,6 +1535,11 @@ Partial Class frmMain
         '
         Me.mnuCimaticPrepareTransform.Name = "mnuCimaticPrepareTransform"
         resources.ApplyResources(Me.mnuCimaticPrepareTransform, "mnuCimaticPrepareTransform")
+        '
+        'mnuClimaticPrepareCompare
+        '
+        resources.ApplyResources(Me.mnuClimaticPrepareCompare, "mnuClimaticPrepareCompare")
+        Me.mnuClimaticPrepareCompare.Name = "mnuClimaticPrepareCompare"
         '
         'ToolStripSeparator37
         '
@@ -1552,6 +1560,11 @@ Partial Class frmMain
         '
         Me.mnuClimaticPrepareEndOfRains.Name = "mnuClimaticPrepareEndOfRains"
         resources.ApplyResources(Me.mnuClimaticPrepareEndOfRains, "mnuClimaticPrepareEndOfRains")
+        '
+        'mnuClimaticPrepareLengthOfSeason
+        '
+        Me.mnuClimaticPrepareLengthOfSeason.Name = "mnuClimaticPrepareLengthOfSeason"
+        resources.ApplyResources(Me.mnuClimaticPrepareLengthOfSeason, "mnuClimaticPrepareLengthOfSeason")
         '
         'mnuClimaticPrepareSpells
         '
@@ -2532,7 +2545,7 @@ Partial Class frmMain
         'mnuPrepareCheckData
         '
         Me.mnuPrepareCheckData.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.mnuPrepareCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareCheckDataDuplicates, Me.mnuPrepareCheckDataCompareColumns, Me.mnuPrepareCheckDataNonNumericCases, Me.ToolStripSeparator49, Me.mnuPrepareCheckDataBoxplot, Me.mnuPrepareCheckDataOneVariableSummarise, Me.mnuPrepareCheckDataOneVariableGraph, Me.mnuPrepareCheckDataOneWayFrequencies, Me.ToolStripSeparator41, Me.mnuPrepareCheckDataExportOpenRefine, Me.mnuPrepareCheckDataImportOpenRefine, Me.ToolStripSeparator40, Me.mnuPreparePrepareToShareJitter, Me.mnuCheckDataPrePareToShareSdcPackage, Me.NonToolStripMenuItem})
+        Me.mnuPrepareCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareCheckDataDuplicates, Me.mnuPrepareCheckDataCompareColumns, Me.mnuPrepareCheckDataNonNumericCases, Me.ToolStripSeparator49, Me.mnuPrepareCheckDataBoxplot, Me.mnuPrepareCheckDataOneVariableSummarise, Me.mnuPrepareCheckDataOneVariableGraph, Me.mnuPrepareCheckDataOneWayFrequencies, Me.ToolStripSeparator41, Me.mnuPrepareCheckDataExportOpenRefine, Me.mnuPrepareCheckDataImportOpenRefine, Me.ToolStripSeparator40, Me.mnuPreparePrepareToShareJitter, Me.mnuCheckDataPrePareToShareSdcPackage, Me.mnuPrepareCheckDataAnonymiseIDColumn})
         Me.mnuPrepareCheckData.Name = "mnuPrepareCheckData"
         resources.ApplyResources(Me.mnuPrepareCheckData, "mnuPrepareCheckData")
         '
@@ -2606,10 +2619,10 @@ Partial Class frmMain
         resources.ApplyResources(Me.mnuCheckDataPrePareToShareSdcPackage, "mnuCheckDataPrePareToShareSdcPackage")
         Me.mnuCheckDataPrePareToShareSdcPackage.Name = "mnuCheckDataPrePareToShareSdcPackage"
         '
-        'NonToolStripMenuItem
+        'mnuPrepareCheckDataAnonymiseIDColumn
         '
-        Me.NonToolStripMenuItem.Name = "NonToolStripMenuItem"
-        resources.ApplyResources(Me.NonToolStripMenuItem, "NonToolStripMenuItem")
+        Me.mnuPrepareCheckDataAnonymiseIDColumn.Name = "mnuPrepareCheckDataAnonymiseIDColumn"
+        resources.ApplyResources(Me.mnuPrepareCheckDataAnonymiseIDColumn, "mnuPrepareCheckDataAnonymiseIDColumn")
         '
         'ToolStripSeparator6
         '
@@ -3540,6 +3553,11 @@ Partial Class frmMain
         resources.ApplyResources(Me.ucrOutput, "ucrOutput")
         Me.ucrOutput.Name = "ucrOutput"
         '
+        'mnuClimaticFileImportShapeFile
+        '
+        Me.mnuClimaticFileImportShapeFile.Name = "mnuClimaticFileImportShapeFile"
+        resources.ApplyResources(Me.mnuClimaticFileImportShapeFile, "mnuClimaticFileImportShapeFile")
+        '
         'frmMain
         '
         resources.ApplyResources(Me, "$this")
@@ -4087,7 +4105,7 @@ Partial Class frmMain
     Friend WithEvents mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator48 As ToolStripSeparator
     Friend WithEvents mnuOptionsByContextDescribeBoxplot As ToolStripMenuItem
-    Friend WithEvents NonToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuPrepareCheckDataAnonymiseIDColumn As ToolStripMenuItem
     Friend WithEvents mnuPrepareCheckDataNonNumericCases As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator49 As ToolStripSeparator
     Friend WithEvents mnuClimaticReshapeandExamine As ToolStripMenuItem
@@ -4096,4 +4114,7 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticReshapeandExamineReplaceValues As ToolStripMenuItem
     Friend WithEvents mnuClimaticReshapeandExamineOneVariableSummarize As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator50 As ToolStripSeparator
+    Friend WithEvents mnuClimaticPrepareLengthOfSeason As ToolStripMenuItem
+    Friend WithEvents mnuClimaticPrepareCompare As ToolStripMenuItem
+    Friend WithEvents mnuClimaticFileImportShapeFile As ToolStripMenuItem
 End Class
