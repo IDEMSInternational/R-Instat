@@ -193,7 +193,7 @@ Public Class dlgMakeDate
         ucrReceiverMonthThree.SetParameterIsString()
 
         ucrInputMonthThree.SetParameter(New RParameter("f_month", 5))
-        ucrInputMonthThree.SetValidationTypeAsNumeric()
+        ucrInputMonthThree.SetValidationTypeAsNumeric(dcmMin:=1, dcmMax:=12)
 
         ucrPnlDayType.AddRadioButton(rdoDayColumn)
         ucrPnlDayType.AddRadioButton(rdoDayValue)
@@ -206,7 +206,7 @@ Public Class dlgMakeDate
         ucrReceiverDayThree.SetParameterIsString()
 
         ucrInputDayThree.SetParameter(New RParameter("f_day", 4))
-        ucrInputDayThree.SetValidationTypeAsNumeric()
+        ucrInputDayThree.SetValidationTypeAsNumeric(dcmMin:=1, dcmMax:=31)
 
         ucrSelectorMakeDate.SetParameter(New RParameter("data_name", 0))
         ucrSelectorMakeDate.SetParameterIsString()
@@ -482,8 +482,8 @@ Public Class dlgMakeDate
             ElseIf rdoMonthValue.Checked Then
                 ucrInputMonthOption.SetName("Numeric")
             End If
-            ucrInputMonthOption.Enabled = (rdoMonthColumn.Checked)
         End If
+        ucrInputMonthOption.Enabled = (rdoMonthColumn.Checked)
     End Sub
 
     Private Sub ucrPnlDayType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDayType.ControlValueChanged
