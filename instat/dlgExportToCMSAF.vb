@@ -61,8 +61,8 @@ Public Class dlgExportToCMSAF
         ucrReceiverLatitude.SetParameter(New RParameter("lat", 3))
         ucrReceiverLatitude.SetParameterIsRFunction()
 
-        ucrReceiverElement.SetParameter(New RParameter("SIS", 4))
-        ucrReceiverElement.SetParameterIsRFunction()
+        ucrReceiverElement.SetParameter(New RParameter("element", 4, bNewIncludeArgumentName:=False))
+        ucrReceiverElement.SetParameterIsString()
 
         ucrInputExportFile.SetParameter(New RParameter("file", 1))
         ucrInputExportFile.IsReadOnly = True
@@ -106,7 +106,7 @@ Public Class dlgExportToCMSAF
         ucrReceiverDate.SetRCode(clsAsDataFrameFunction, bReset)
         ucrReceiverLongitude.SetRCode(clsAsDataFrameFunction, bReset)
         ucrReceiverLatitude.SetRCode(clsAsDataFrameFunction, bReset)
-        ucrReceiverElement.SetRCode(clsAsDataFrameFunction, bReset)
+        ucrReceiverElement.SetRCode(clsAssignOperator, bReset)
         ucrInputExportFile.SetRCode(clsExportFunction, bReset)
         ucrReceiverDate.SetRCode(clsAsDataFrameFunction, bReset)
     End Sub
@@ -130,7 +130,7 @@ Public Class dlgExportToCMSAF
 
     Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlValueChanged
         'This parameter is being added manually here because we are setting it elsewhere as an Rfunction.
-        clsAssignOperator.AddParameter("SIS", ucrReceiverElement.GetVariableNames, bIncludeArgumentName:=False, iPosition:=1)
+        'clsAssignOperator.AddParameter("SIS", ucrReceiverElement.GetVariableNames, bIncludeArgumentName:=False, iPosition:=1)
     End Sub
 
     Private Sub TestOkEnabled()
