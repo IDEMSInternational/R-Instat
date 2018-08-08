@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblYAxisTitleSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>289, 89</value>
+    <value>172, 69</value>
   </data>
   <data name="lblYAxisTitleSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>30, 13</value>
@@ -145,10 +145,10 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblYAxisTitleSize.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>grpYAxisLabels</value>
   </data>
   <data name="&gt;&gt;lblYAxisTitleSize.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>1</value>
   </data>
   <data name="lblYInStepsOf.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -157,7 +157,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblYInStepsOf.Location" type="System.Drawing.Point, System.Drawing">
-    <value>328, 111</value>
+    <value>292, 22</value>
   </data>
   <data name="lblYInStepsOf.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 13</value>
@@ -175,10 +175,10 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblYInStepsOf.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>grpYAxisLabels</value>
   </data>
   <data name="&gt;&gt;lblYInStepsOf.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>6</value>
   </data>
   <data name="lblYFrom.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -187,7 +187,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblYFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>172, 113</value>
+    <value>63, 22</value>
   </data>
   <data name="lblYFrom.Size" type="System.Drawing.Size, System.Drawing">
     <value>33, 13</value>
@@ -205,10 +205,10 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblYFrom.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>grpYAxisLabels</value>
   </data>
   <data name="&gt;&gt;lblYFrom.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>2</value>
   </data>
   <data name="lblYTo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -217,7 +217,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblYTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>250, 112</value>
+    <value>179, 22</value>
   </data>
   <data name="lblYTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 13</value>
@@ -235,10 +235,10 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblYTo.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>grpYAxisLabels</value>
   </data>
   <data name="&gt;&gt;lblYTo.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>5</value>
   </data>
   <data name="lblXTo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -247,7 +247,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblXTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 165</value>
+    <value>179, 20</value>
   </data>
   <data name="lblXTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 13</value>
@@ -265,10 +265,10 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblXTo.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>grpXAxisLabels</value>
   </data>
   <data name="&gt;&gt;lblXTo.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="lblXFrom.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -277,7 +277,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblXFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>173, 166</value>
+    <value>63, 20</value>
   </data>
   <data name="lblXFrom.Size" type="System.Drawing.Size, System.Drawing">
     <value>33, 13</value>
@@ -295,10 +295,10 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblXFrom.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>grpXAxisLabels</value>
   </data>
   <data name="&gt;&gt;lblXFrom.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>1</value>
   </data>
   <data name="lblXInStepsOf.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -307,7 +307,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblXInStepsOf.Location" type="System.Drawing.Point, System.Drawing">
-    <value>330, 165</value>
+    <value>292, 20</value>
   </data>
   <data name="lblXInStepsOf.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 13</value>
@@ -325,13 +325,13 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblXInStepsOf.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>grpXAxisLabels</value>
   </data>
   <data name="&gt;&gt;lblXInStepsOf.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="ucrInputXInStepsOf.Location" type="System.Drawing.Point, System.Drawing">
-    <value>393, 161</value>
+    <value>356, 18</value>
   </data>
   <data name="ucrInputXInStepsOf.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 21</value>
@@ -346,13 +346,13 @@
     <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ucrInputXInStepsOf.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>grpXAxisLabels</value>
   </data>
   <data name="&gt;&gt;ucrInputXInStepsOf.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>3</value>
   </data>
   <data name="ucrInputXTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>276, 162</value>
+    <value>208, 18</value>
   </data>
   <data name="ucrInputXTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 21</value>
@@ -367,13 +367,13 @@
     <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ucrInputXTo.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>grpXAxisLabels</value>
   </data>
   <data name="&gt;&gt;ucrInputXTo.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>5</value>
   </data>
   <data name="ucrInputYInStepsOf.Location" type="System.Drawing.Point, System.Drawing">
-    <value>391, 108</value>
+    <value>357, 19</value>
   </data>
   <data name="ucrInputYInStepsOf.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 21</value>
@@ -388,13 +388,13 @@
     <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ucrInputYInStepsOf.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>grpYAxisLabels</value>
   </data>
   <data name="&gt;&gt;ucrInputYInStepsOf.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>7</value>
   </data>
   <data name="ucrInputXFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 162</value>
+    <value>102, 18</value>
   </data>
   <data name="ucrInputXFrom.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 21</value>
@@ -409,13 +409,13 @@
     <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ucrInputXFrom.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>grpXAxisLabels</value>
   </data>
   <data name="&gt;&gt;ucrInputXFrom.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="ucrInputYTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>275, 109</value>
+    <value>210, 19</value>
   </data>
   <data name="ucrInputYTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 21</value>
@@ -430,13 +430,13 @@
     <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ucrInputYTo.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>grpYAxisLabels</value>
   </data>
   <data name="&gt;&gt;ucrInputYTo.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="ucrInputYFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>202, 109</value>
+    <value>102, 19</value>
   </data>
   <data name="ucrInputYFrom.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 21</value>
@@ -451,13 +451,13 @@
     <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ucrInputYFrom.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>grpYAxisLabels</value>
   </data>
   <data name="&gt;&gt;ucrInputYFrom.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>0</value>
   </data>
   <data name="ucrNudXaxisLabelSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>404, 135</value>
+    <value>277, 55</value>
   </data>
   <data name="ucrNudXaxisLabelSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -472,13 +472,13 @@
     <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ucrNudXaxisLabelSize.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>grpXAxisLabels</value>
   </data>
   <data name="&gt;&gt;ucrNudXaxisLabelSize.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>4</value>
   </data>
   <data name="ucrNudXAxisAngle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>141, 138</value>
+    <value>102, 55</value>
   </data>
   <data name="ucrNudXAxisAngle.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -493,34 +493,13 @@
     <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ucrNudXAxisAngle.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>grpXAxisLabels</value>
   </data>
   <data name="&gt;&gt;ucrNudXAxisAngle.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="ucrNudYAxisLabelsSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>525, 86</value>
-  </data>
-  <data name="ucrNudYAxisLabelsSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 20</value>
-  </data>
-  <data name="ucrNudYAxisLabelsSize.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;ucrNudYAxisLabelsSize.Name" xml:space="preserve">
-    <value>ucrNudYAxisLabelsSize</value>
-  </data>
-  <data name="&gt;&gt;ucrNudYAxisLabelsSize.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudYAxisLabelsSize.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrNudYAxisLabelsSize.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>6</value>
   </data>
   <data name="ucrNudYAxisTitleSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>321, 86</value>
+    <value>210, 62</value>
   </data>
   <data name="ucrNudYAxisTitleSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -535,244 +514,13 @@
     <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ucrNudYAxisTitleSize.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>grpYAxisLabels</value>
   </data>
   <data name="&gt;&gt;ucrNudYAxisTitleSize.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="ucrChkAddLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 190</value>
-  </data>
-  <data name="ucrChkAddLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 20</value>
-  </data>
-  <data name="ucrChkAddLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddLabel.Name" xml:space="preserve">
-    <value>ucrChkAddLabel</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddLabel.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddLabel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddLabel.ZOrder" xml:space="preserve">
-    <value>17</value>
-  </data>
-  <data name="ucrChkXaxisLabelSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>241, 138</value>
-  </data>
-  <data name="ucrChkXaxisLabelSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 20</value>
-  </data>
-  <data name="ucrChkXaxisLabelSize.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrChkXaxisLabelSize.Name" xml:space="preserve">
-    <value>ucrChkXaxisLabelSize</value>
-  </data>
-  <data name="&gt;&gt;ucrChkXaxisLabelSize.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkXaxisLabelSize.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkXaxisLabelSize.ZOrder" xml:space="preserve">
-    <value>18</value>
-  </data>
-  <data name="ucrInputSubFootNote.Location" type="System.Drawing.Point, System.Drawing">
-    <value>141, 242</value>
-  </data>
-  <data name="ucrInputSubFootNote.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 21</value>
-  </data>
-  <data name="ucrInputSubFootNote.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrInputSubFootNote.Name" xml:space="preserve">
-    <value>ucrInputSubFootNote</value>
-  </data>
-  <data name="&gt;&gt;ucrInputSubFootNote.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputSubFootNote.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputSubFootNote.ZOrder" xml:space="preserve">
-    <value>19</value>
-  </data>
-  <data name="ucrInputFootNote.Location" type="System.Drawing.Point, System.Drawing">
-    <value>141, 215</value>
-  </data>
-  <data name="ucrInputFootNote.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 21</value>
-  </data>
-  <data name="ucrInputFootNote.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrInputFootNote.Name" xml:space="preserve">
-    <value>ucrInputFootNote</value>
-  </data>
-  <data name="&gt;&gt;ucrInputFootNote.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputFootNote.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputFootNote.ZOrder" xml:space="preserve">
-    <value>20</value>
-  </data>
-  <data name="ucrChkSubFootNote.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 243</value>
-  </data>
-  <data name="ucrChkSubFootNote.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
-  </data>
-  <data name="ucrChkSubFootNote.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSubFootNote.Name" xml:space="preserve">
-    <value>ucrChkSubFootNote</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSubFootNote.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSubFootNote.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSubFootNote.ZOrder" xml:space="preserve">
-    <value>21</value>
-  </data>
-  <data name="ucrInputYAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>141, 85</value>
-  </data>
-  <data name="ucrInputYAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
-  </data>
-  <data name="ucrInputYAxisTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrInputYAxisTitle.Name" xml:space="preserve">
-    <value>ucrInputYAxisTitle</value>
-  </data>
-  <data name="&gt;&gt;ucrInputYAxisTitle.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputYAxisTitle.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputYAxisTitle.ZOrder" xml:space="preserve">
-    <value>22</value>
-  </data>
-  <data name="ucrChkFootNote.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 216</value>
-  </data>
-  <data name="ucrChkFootNote.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
-  </data>
-  <data name="ucrChkFootNote.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrChkFootNote.Name" xml:space="preserve">
-    <value>ucrChkFootNote</value>
-  </data>
-  <data name="&gt;&gt;ucrChkFootNote.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkFootNote.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkFootNote.ZOrder" xml:space="preserve">
-    <value>23</value>
-  </data>
-  <data name="ucrChkXaxisAngle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 138</value>
-  </data>
-  <data name="ucrChkXaxisAngle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
-  </data>
-  <data name="ucrChkXaxisAngle.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrChkXaxisAngle.Name" xml:space="preserve">
-    <value>ucrChkXaxisAngle</value>
-  </data>
-  <data name="&gt;&gt;ucrChkXaxisAngle.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkXaxisAngle.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkXaxisAngle.ZOrder" xml:space="preserve">
-    <value>24</value>
-  </data>
-  <data name="ucrSpecifyXAxisTickMarks.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 164</value>
-  </data>
-  <data name="ucrSpecifyXAxisTickMarks.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 20</value>
-  </data>
-  <data name="ucrSpecifyXAxisTickMarks.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrSpecifyXAxisTickMarks.Name" xml:space="preserve">
-    <value>ucrSpecifyXAxisTickMarks</value>
-  </data>
-  <data name="&gt;&gt;ucrSpecifyXAxisTickMarks.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrSpecifyXAxisTickMarks.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrSpecifyXAxisTickMarks.ZOrder" xml:space="preserve">
-    <value>25</value>
-  </data>
-  <data name="ucrSpecifyYAxisTickMarks.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 112</value>
-  </data>
-  <data name="ucrSpecifyYAxisTickMarks.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 20</value>
-  </data>
-  <data name="ucrSpecifyYAxisTickMarks.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrSpecifyYAxisTickMarks.Name" xml:space="preserve">
-    <value>ucrSpecifyYAxisTickMarks</value>
-  </data>
-  <data name="&gt;&gt;ucrSpecifyYAxisTickMarks.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrSpecifyYAxisTickMarks.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrSpecifyYAxisTickMarks.ZOrder" xml:space="preserve">
-    <value>26</value>
-  </data>
-  <data name="ucrChkYAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 86</value>
-  </data>
-  <data name="ucrChkYAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
-  </data>
-  <data name="ucrChkYAxisTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrChkYAxisTitle.Name" xml:space="preserve">
-    <value>ucrChkYAxisTitle</value>
-  </data>
-  <data name="&gt;&gt;ucrChkYAxisTitle.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkYAxisTitle.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkYAxisTitle.ZOrder" xml:space="preserve">
-    <value>27</value>
+    <value>3</value>
   </data>
   <data name="ucrChkAddTerciles.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 60</value>
+    <value>15, 42</value>
   </data>
   <data name="ucrChkAddTerciles.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -787,13 +535,13 @@
     <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ucrChkAddTerciles.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>TabPage3</value>
   </data>
   <data name="&gt;&gt;ucrChkAddTerciles.ZOrder" xml:space="preserve">
-    <value>28</value>
+    <value>2</value>
   </data>
   <data name="ucrChkAddMedian.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 34</value>
+    <value>15, 68</value>
   </data>
   <data name="ucrChkAddMedian.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -808,34 +556,13 @@
     <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ucrChkAddMedian.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>TabPage3</value>
   </data>
   <data name="&gt;&gt;ucrChkAddMedian.ZOrder" xml:space="preserve">
-    <value>29</value>
-  </data>
-  <data name="ucrChkYAxisLabelsSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>393, 86</value>
-  </data>
-  <data name="ucrChkYAxisLabelsSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 20</value>
-  </data>
-  <data name="ucrChkYAxisLabelsSize.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;ucrChkYAxisLabelsSize.Name" xml:space="preserve">
-    <value>ucrChkYAxisLabelsSize</value>
-  </data>
-  <data name="&gt;&gt;ucrChkYAxisLabelsSize.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkYAxisLabelsSize.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkYAxisLabelsSize.ZOrder" xml:space="preserve">
-    <value>30</value>
-  </data>
   <data name="ucrChkAddMean.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 8</value>
+    <value>15, 16</value>
   </data>
   <data name="ucrChkAddMean.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -850,13 +577,13 @@
     <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ucrChkAddMean.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>TabPage3</value>
   </data>
   <data name="&gt;&gt;ucrChkAddMean.ZOrder" xml:space="preserve">
-    <value>31</value>
+    <value>0</value>
   </data>
   <data name="ucrSdgPICSARainfalbuttons.Location" type="System.Drawing.Point, System.Drawing">
-    <value>229, 274</value>
+    <value>209, 472</value>
   </data>
   <data name="ucrSdgPICSARainfalbuttons.Size" type="System.Drawing.Size, System.Drawing">
     <value>142, 30</value>
@@ -874,7 +601,694 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSdgPICSARainfalbuttons.ZOrder" xml:space="preserve">
-    <value>32</value>
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;grpAxes.Name" xml:space="preserve">
+    <value>grpAxes</value>
+  </data>
+  <data name="&gt;&gt;grpAxes.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpAxes.Parent" xml:space="preserve">
+    <value>TabPage1</value>
+  </data>
+  <data name="&gt;&gt;grpAxes.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;grpGraphTitles.Name" xml:space="preserve">
+    <value>grpGraphTitles</value>
+  </data>
+  <data name="&gt;&gt;grpGraphTitles.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpGraphTitles.Parent" xml:space="preserve">
+    <value>TabPage1</value>
+  </data>
+  <data name="&gt;&gt;grpGraphTitles.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="TabPage1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>571, 436</value>
+  </data>
+  <data name="TabPage1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="TabPage1.Text" xml:space="preserve">
+    <value>Titles </value>
+  </data>
+  <data name="&gt;&gt;TabPage1.Name" xml:space="preserve">
+    <value>TabPage1</value>
+  </data>
+  <data name="&gt;&gt;TabPage1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TabPage1.Parent" xml:space="preserve">
+    <value>tbPICSA</value>
+  </data>
+  <data name="&gt;&gt;TabPage1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;grpXAxisLabels.Name" xml:space="preserve">
+    <value>grpXAxisLabels</value>
+  </data>
+  <data name="&gt;&gt;grpXAxisLabels.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpXAxisLabels.Parent" xml:space="preserve">
+    <value>TabPage2</value>
+  </data>
+  <data name="&gt;&gt;grpXAxisLabels.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;grpYAxisLabels.Name" xml:space="preserve">
+    <value>grpYAxisLabels</value>
+  </data>
+  <data name="&gt;&gt;grpYAxisLabels.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpYAxisLabels.Parent" xml:space="preserve">
+    <value>TabPage2</value>
+  </data>
+  <data name="&gt;&gt;grpYAxisLabels.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="TabPage2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabPage2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>571, 436</value>
+  </data>
+  <data name="TabPage2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="TabPage2.Text" xml:space="preserve">
+    <value>Labels </value>
+  </data>
+  <data name="&gt;&gt;TabPage2.Name" xml:space="preserve">
+    <value>TabPage2</value>
+  </data>
+  <data name="&gt;&gt;TabPage2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TabPage2.Parent" xml:space="preserve">
+    <value>tbPICSA</value>
+  </data>
+  <data name="&gt;&gt;TabPage2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="TabPage3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabPage3.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>571, 436</value>
+  </data>
+  <data name="TabPage3.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="TabPage3.Text" xml:space="preserve">
+    <value>Lines</value>
+  </data>
+  <data name="&gt;&gt;TabPage3.Name" xml:space="preserve">
+    <value>TabPage3</value>
+  </data>
+  <data name="&gt;&gt;TabPage3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TabPage3.Parent" xml:space="preserve">
+    <value>tbPICSA</value>
+  </data>
+  <data name="&gt;&gt;TabPage3.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="TabPage4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabPage4.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>571, 436</value>
+  </data>
+  <data name="TabPage4.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="TabPage4.Text" xml:space="preserve">
+    <value>Panel</value>
+  </data>
+  <data name="&gt;&gt;TabPage4.Name" xml:space="preserve">
+    <value>TabPage4</value>
+  </data>
+  <data name="&gt;&gt;TabPage4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TabPage4.Parent" xml:space="preserve">
+    <value>tbPICSA</value>
+  </data>
+  <data name="&gt;&gt;TabPage4.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tbPICSA.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 4</value>
+  </data>
+  <data name="tbPICSA.Size" type="System.Drawing.Size, System.Drawing">
+    <value>579, 462</value>
+  </data>
+  <data name="tbPICSA.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="&gt;&gt;tbPICSA.Name" xml:space="preserve">
+    <value>tbPICSA</value>
+  </data>
+  <data name="&gt;&gt;tbPICSA.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbPICSA.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tbPICSA.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 22</value>
+  </data>
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 13</value>
+  </data>
+  <data name="Label1.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Title:</value>
+  </data>
+  <data name="&gt;&gt;Label1.Name" xml:space="preserve">
+    <value>Label1</value>
+  </data>
+  <data name="&gt;&gt;Label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
+    <value>grpGraphTitles</value>
+  </data>
+  <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrInputGraphTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>63, 19</value>
+  </data>
+  <data name="ucrInputGraphTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 21</value>
+  </data>
+  <data name="ucrInputGraphTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphTitle.Name" xml:space="preserve">
+    <value>ucrInputGraphTitle</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphTitle.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphTitle.Parent" xml:space="preserve">
+    <value>grpGraphTitles</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphTitle.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lblSubTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSubTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSubTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 51</value>
+  </data>
+  <data name="lblSubTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 13</value>
+  </data>
+  <data name="lblSubTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="lblSubTitle.Text" xml:space="preserve">
+    <value>Sub Title:</value>
+  </data>
+  <data name="&gt;&gt;lblSubTitle.Name" xml:space="preserve">
+    <value>lblSubTitle</value>
+  </data>
+  <data name="&gt;&gt;lblSubTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSubTitle.Parent" xml:space="preserve">
+    <value>grpGraphTitles</value>
+  </data>
+  <data name="&gt;&gt;lblSubTitle.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrInputGraphSubTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>63, 48</value>
+  </data>
+  <data name="ucrInputGraphSubTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 21</value>
+  </data>
+  <data name="ucrInputGraphSubTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphSubTitle.Name" xml:space="preserve">
+    <value>ucrInputGraphSubTitle</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphSubTitle.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphSubTitle.Parent" xml:space="preserve">
+    <value>grpGraphTitles</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphSubTitle.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="lblCaption.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblCaption.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblCaption.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 79</value>
+  </data>
+  <data name="lblCaption.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 13</value>
+  </data>
+  <data name="lblCaption.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="lblCaption.Text" xml:space="preserve">
+    <value>Caption:</value>
+  </data>
+  <data name="&gt;&gt;lblCaption.Name" xml:space="preserve">
+    <value>lblCaption</value>
+  </data>
+  <data name="&gt;&gt;lblCaption.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblCaption.Parent" xml:space="preserve">
+    <value>grpGraphTitles</value>
+  </data>
+  <data name="&gt;&gt;lblCaption.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrInputGraphcCaption.Location" type="System.Drawing.Point, System.Drawing">
+    <value>63, 75</value>
+  </data>
+  <data name="ucrInputGraphcCaption.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 21</value>
+  </data>
+  <data name="ucrInputGraphcCaption.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphcCaption.Name" xml:space="preserve">
+    <value>ucrInputGraphcCaption</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphcCaption.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphcCaption.Parent" xml:space="preserve">
+    <value>grpGraphTitles</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphcCaption.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;Label1.Name" xml:space="preserve">
+    <value>Label1</value>
+  </data>
+  <data name="&gt;&gt;Label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
+    <value>grpGraphTitles</value>
+  </data>
+  <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblCaption.Name" xml:space="preserve">
+    <value>lblCaption</value>
+  </data>
+  <data name="&gt;&gt;lblCaption.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblCaption.Parent" xml:space="preserve">
+    <value>grpGraphTitles</value>
+  </data>
+  <data name="&gt;&gt;lblCaption.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphcCaption.Name" xml:space="preserve">
+    <value>ucrInputGraphcCaption</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphcCaption.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphcCaption.Parent" xml:space="preserve">
+    <value>grpGraphTitles</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphcCaption.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;lblSubTitle.Name" xml:space="preserve">
+    <value>lblSubTitle</value>
+  </data>
+  <data name="&gt;&gt;lblSubTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSubTitle.Parent" xml:space="preserve">
+    <value>grpGraphTitles</value>
+  </data>
+  <data name="&gt;&gt;lblSubTitle.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphTitle.Name" xml:space="preserve">
+    <value>ucrInputGraphTitle</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphTitle.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphTitle.Parent" xml:space="preserve">
+    <value>grpGraphTitles</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphTitle.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphSubTitle.Name" xml:space="preserve">
+    <value>ucrInputGraphSubTitle</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphSubTitle.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphSubTitle.Parent" xml:space="preserve">
+    <value>grpGraphTitles</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphSubTitle.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="grpGraphTitles.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 10</value>
+  </data>
+  <data name="grpGraphTitles.Size" type="System.Drawing.Size, System.Drawing">
+    <value>275, 110</value>
+  </data>
+  <data name="grpGraphTitles.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="grpGraphTitles.Text" xml:space="preserve">
+    <value>Graph</value>
+  </data>
+  <data name="&gt;&gt;grpGraphTitles.Name" xml:space="preserve">
+    <value>grpGraphTitles</value>
+  </data>
+  <data name="&gt;&gt;grpGraphTitles.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpGraphTitles.Parent" xml:space="preserve">
+    <value>TabPage1</value>
+  </data>
+  <data name="&gt;&gt;grpGraphTitles.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblXAxis.Name" xml:space="preserve">
+    <value>lblXAxis</value>
+  </data>
+  <data name="&gt;&gt;lblXAxis.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblXAxis.Parent" xml:space="preserve">
+    <value>grpAxes</value>
+  </data>
+  <data name="&gt;&gt;lblXAxis.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblYAxis.Name" xml:space="preserve">
+    <value>lblYAxis</value>
+  </data>
+  <data name="&gt;&gt;lblYAxis.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblYAxis.Parent" xml:space="preserve">
+    <value>grpAxes</value>
+  </data>
+  <data name="&gt;&gt;lblYAxis.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrInputXAxisTitle.Name" xml:space="preserve">
+    <value>ucrInputXAxisTitle</value>
+  </data>
+  <data name="&gt;&gt;ucrInputXAxisTitle.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputXAxisTitle.Parent" xml:space="preserve">
+    <value>grpAxes</value>
+  </data>
+  <data name="&gt;&gt;ucrInputXAxisTitle.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrInputYAxisTitle.Name" xml:space="preserve">
+    <value>ucrInputYAxisTitle</value>
+  </data>
+  <data name="&gt;&gt;ucrInputYAxisTitle.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputYAxisTitle.Parent" xml:space="preserve">
+    <value>grpAxes</value>
+  </data>
+  <data name="&gt;&gt;ucrInputYAxisTitle.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="grpAxes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 141</value>
+  </data>
+  <data name="grpAxes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>275, 85</value>
+  </data>
+  <data name="grpAxes.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="grpAxes.Text" xml:space="preserve">
+    <value>Axes</value>
+  </data>
+  <data name="&gt;&gt;grpAxes.Name" xml:space="preserve">
+    <value>grpAxes</value>
+  </data>
+  <data name="&gt;&gt;grpAxes.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpAxes.Parent" xml:space="preserve">
+    <value>TabPage1</value>
+  </data>
+  <data name="&gt;&gt;grpAxes.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblXAxis.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblXAxis.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblXAxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 22</value>
+  </data>
+  <data name="lblXAxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 13</value>
+  </data>
+  <data name="lblXAxis.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="lblXAxis.Text" xml:space="preserve">
+    <value>X-Axis Title:</value>
+  </data>
+  <data name="&gt;&gt;lblXAxis.Name" xml:space="preserve">
+    <value>lblXAxis</value>
+  </data>
+  <data name="&gt;&gt;lblXAxis.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblXAxis.Parent" xml:space="preserve">
+    <value>grpAxes</value>
+  </data>
+  <data name="&gt;&gt;lblXAxis.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblYAxis.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblYAxis.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblYAxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 51</value>
+  </data>
+  <data name="lblYAxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 13</value>
+  </data>
+  <data name="lblYAxis.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="lblYAxis.Text" xml:space="preserve">
+    <value>Y-Axis Title:</value>
+  </data>
+  <data name="&gt;&gt;lblYAxis.Name" xml:space="preserve">
+    <value>lblYAxis</value>
+  </data>
+  <data name="&gt;&gt;lblYAxis.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblYAxis.Parent" xml:space="preserve">
+    <value>grpAxes</value>
+  </data>
+  <data name="&gt;&gt;lblYAxis.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrInputXAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>73, 19</value>
+  </data>
+  <data name="ucrInputXAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 21</value>
+  </data>
+  <data name="ucrInputXAxisTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;ucrInputXAxisTitle.Name" xml:space="preserve">
+    <value>ucrInputXAxisTitle</value>
+  </data>
+  <data name="&gt;&gt;ucrInputXAxisTitle.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputXAxisTitle.Parent" xml:space="preserve">
+    <value>grpAxes</value>
+  </data>
+  <data name="&gt;&gt;ucrInputXAxisTitle.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrInputYAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>73, 48</value>
+  </data>
+  <data name="ucrInputYAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 21</value>
+  </data>
+  <data name="ucrInputYAxisTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;ucrInputYAxisTitle.Name" xml:space="preserve">
+    <value>ucrInputYAxisTitle</value>
+  </data>
+  <data name="&gt;&gt;ucrInputYAxisTitle.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputYAxisTitle.Parent" xml:space="preserve">
+    <value>grpAxes</value>
+  </data>
+  <data name="&gt;&gt;ucrInputYAxisTitle.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="grpYAxisLabels.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 130</value>
+  </data>
+  <data name="grpYAxisLabels.Size" type="System.Drawing.Size, System.Drawing">
+    <value>419, 111</value>
+  </data>
+  <data name="grpYAxisLabels.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="grpYAxisLabels.Text" xml:space="preserve">
+    <value>Y-Axis</value>
+  </data>
+  <data name="&gt;&gt;grpYAxisLabels.Name" xml:space="preserve">
+    <value>grpYAxisLabels</value>
+  </data>
+  <data name="&gt;&gt;grpYAxisLabels.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpYAxisLabels.Parent" xml:space="preserve">
+    <value>TabPage2</value>
+  </data>
+  <data name="&gt;&gt;grpYAxisLabels.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblXAxisAngle.Name" xml:space="preserve">
+    <value>lblXAxisAngle</value>
+  </data>
+  <data name="&gt;&gt;lblXAxisAngle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblXAxisAngle.Parent" xml:space="preserve">
+    <value>grpXAxisLabels</value>
+  </data>
+  <data name="&gt;&gt;lblXAxisAngle.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="grpXAxisLabels.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 8</value>
+  </data>
+  <data name="grpXAxisLabels.Size" type="System.Drawing.Size, System.Drawing">
+    <value>419, 91</value>
+  </data>
+  <data name="grpXAxisLabels.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="grpXAxisLabels.Text" xml:space="preserve">
+    <value>X-Axis</value>
+  </data>
+  <data name="&gt;&gt;grpXAxisLabels.Name" xml:space="preserve">
+    <value>grpXAxisLabels</value>
+  </data>
+  <data name="&gt;&gt;grpXAxisLabels.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpXAxisLabels.Parent" xml:space="preserve">
+    <value>TabPage2</value>
+  </data>
+  <data name="&gt;&gt;grpXAxisLabels.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblXAxisAngle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblXAxisAngle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>63, 55</value>
+  </data>
+  <data name="lblXAxisAngle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 13</value>
+  </data>
+  <data name="lblXAxisAngle.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="lblXAxisAngle.Text" xml:space="preserve">
+    <value>Angle:</value>
+  </data>
+  <data name="&gt;&gt;lblXAxisAngle.Name" xml:space="preserve">
+    <value>lblXAxisAngle</value>
+  </data>
+  <data name="&gt;&gt;lblXAxisAngle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblXAxisAngle.Parent" xml:space="preserve">
+    <value>grpXAxisLabels</value>
+  </data>
+  <data name="&gt;&gt;lblXAxisAngle.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -883,7 +1297,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>590, 316</value>
+    <value>601, 505</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>

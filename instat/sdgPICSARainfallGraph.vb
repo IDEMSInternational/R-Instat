@@ -84,4 +84,6 @@ Public Class sdgPICSARainfallGraph
         ucrChkYAxisTitle.SetRCode(clsBaseOperator, bReset)
         ucrInputYAxisTitle.SetRCode(clsYlabFunc, bReset)
     End Sub
+
+
 End Class
