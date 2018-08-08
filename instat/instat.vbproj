@@ -341,12 +341,6 @@
     <Compile Include="dlgDefineRedFlags.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgEvapotranspiration.Designer.vb">
-      <DependentUpon>dlgEvapotranspiration.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgEvapotranspiration.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgHelpVignettes.Designer.vb">
       <DependentUpon>dlgHelpVignettes.vb</DependentUpon>
     </Compile>
@@ -767,10 +761,10 @@
     <Compile Include="dlgViewGraph.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <Compile Include="dlgEvapotranspiration.Designer.vb">
+      <DependentUpon>dlgEvapotranspiration.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form1.vb">
+    <Compile Include="dlgEvapotranspiration.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmGraphDisplay.Designer.vb">
@@ -2601,9 +2595,6 @@
     <EmbeddedResource Include="dlgEnter.sw-KE.resx">
       <DependentUpon>dlgEnter.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgEvapotranspiration.resx">
-      <DependentUpon>dlgEvapotranspiration.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgExportGraphAsImage.sw-KE.resx">
       <DependentUpon>dlgExportGraphAsImage.vb</DependentUpon>
     </EmbeddedResource>
@@ -3260,6 +3251,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgColumnStructures.sw-KE.resx">
       <DependentUpon>dlgColumnStructures.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgEvapotranspiration.resx">
+      <DependentUpon>dlgEvapotranspiration.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmGraphDisplay.resx">
       <DependentUpon>frmGraphDisplay.vb</DependentUpon>
