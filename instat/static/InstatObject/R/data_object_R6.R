@@ -1128,8 +1128,8 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
       tmp_attr <- get_column_attributes(curr_col)
     }
     if(!is.null(factor_values) && is.factor(curr_col) && to_type %in% c("integer", "numeric")) {
-      if(factor_values == "force_ordinals") curr_col <- as.numeric(curr_col)
-      else if(factor_values == "force_values") curr_col <- as.numeric(levels(curr_col))[curr_col]
+      if(factor_values == "force_ordinals") new_col <- as.numeric(curr_col)
+      else if(factor_values == "force_values") new_col <- as.numeric(levels(curr_col))[curr_col]
       else stop("If specified, 'factor_values' must be either 'force_ordinals' or 'force_values'")
     }
     else if(to_type %in% c("factor", "ordered_factor")) {
@@ -1160,7 +1160,7 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
     }
     else if(to_type == "numeric") {
       if(ignore_labels) {
-        new_col <- sjlabelled::as_numeric(curr_col, keep.labels = keep.labels)
+        new_col <- as.numeric(curr_col)
       }
       else {
         if(self$is_variables_metadata(labels_label, col_name) && !is.numeric(curr_col)) {
@@ -1176,6 +1176,8 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
           }
           new_col <- as.numeric(curr_labels[as.character(curr_col)])
         }
+        # This ensures that integer columns get type changed to numeric (not done by sjlabelled::as_numeric)
+        else if(is.integer(curr_col)) new_col <- as.numeric(curr_col)
         else new_col <- sjlabelled::as_numeric(curr_col, keep.labels = keep.labels)
       }
     }
