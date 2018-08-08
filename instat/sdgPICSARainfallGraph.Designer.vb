@@ -38,24 +38,39 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrInputYFrom = New instat.ucrInputTextBox()
         Me.ucrNudXaxisLabelSize = New instat.ucrNud()
         Me.ucrNudXAxisAngle = New instat.ucrNud()
-        Me.ucrNudYAxisLabelsSize = New instat.ucrNud()
         Me.ucrNudYAxisTitleSize = New instat.ucrNud()
-        Me.ucrChkAddLabel = New instat.ucrCheck()
-        Me.ucrChkXaxisLabelSize = New instat.ucrCheck()
-        Me.ucrInputSubFootNote = New instat.ucrInputTextBox()
-        Me.ucrInputFootNote = New instat.ucrInputTextBox()
-        Me.ucrChkSubFootNote = New instat.ucrCheck()
-        Me.ucrInputYAxisTitle = New instat.ucrInputTextBox()
-        Me.ucrChkFootNote = New instat.ucrCheck()
-        Me.ucrChkXaxisAngle = New instat.ucrCheck()
-        Me.ucrSpecifyXAxisTickMarks = New instat.ucrCheck()
-        Me.ucrSpecifyYAxisTickMarks = New instat.ucrCheck()
-        Me.ucrChkYAxisTitle = New instat.ucrCheck()
         Me.ucrChkAddTerciles = New instat.ucrCheck()
         Me.ucrChkAddMedian = New instat.ucrCheck()
-        Me.ucrChkYAxisLabelsSize = New instat.ucrCheck()
         Me.ucrChkAddMean = New instat.ucrCheck()
         Me.ucrSdgPICSARainfalbuttons = New instat.ucrButtonsSubdialogue()
+        Me.tbPICSA = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.ucrInputGraphTitle = New instat.ucrInputTextBox()
+        Me.lblSubTitle = New System.Windows.Forms.Label()
+        Me.ucrInputGraphSubTitle = New instat.ucrInputTextBox()
+        Me.lblCaption = New System.Windows.Forms.Label()
+        Me.ucrInputGraphcCaption = New instat.ucrInputTextBox()
+        Me.grpGraphTitles = New System.Windows.Forms.GroupBox()
+        Me.grpAxes = New System.Windows.Forms.GroupBox()
+        Me.lblXAxis = New System.Windows.Forms.Label()
+        Me.lblYAxis = New System.Windows.Forms.Label()
+        Me.ucrInputXAxisTitle = New instat.ucrInputTextBox()
+        Me.ucrInputYAxisTitle = New instat.ucrInputTextBox()
+        Me.grpYAxisLabels = New System.Windows.Forms.GroupBox()
+        Me.grpXAxisLabels = New System.Windows.Forms.GroupBox()
+        Me.lblXAxisAngle = New System.Windows.Forms.Label()
+        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.tbPICSA.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
+        Me.TabPage3.SuspendLayout()
+        Me.grpGraphTitles.SuspendLayout()
+        Me.grpAxes.SuspendLayout()
+        Me.grpYAxisLabels.SuspendLayout()
+        Me.grpXAxisLabels.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblYAxisTitleSize
@@ -161,16 +176,6 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrNudXAxisAngle.Name = "ucrNudXAxisAngle"
         Me.ucrNudXAxisAngle.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrNudYAxisLabelsSize
-        '
-        Me.ucrNudYAxisLabelsSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudYAxisLabelsSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudYAxisLabelsSize, "ucrNudYAxisLabelsSize")
-        Me.ucrNudYAxisLabelsSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudYAxisLabelsSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudYAxisLabelsSize.Name = "ucrNudYAxisLabelsSize"
-        Me.ucrNudYAxisLabelsSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'ucrNudYAxisTitleSize
         '
         Me.ucrNudYAxisTitleSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
@@ -180,78 +185,6 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrNudYAxisTitleSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudYAxisTitleSize.Name = "ucrNudYAxisTitleSize"
         Me.ucrNudYAxisTitleSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkAddLabel
-        '
-        Me.ucrChkAddLabel.Checked = False
-        resources.ApplyResources(Me.ucrChkAddLabel, "ucrChkAddLabel")
-        Me.ucrChkAddLabel.Name = "ucrChkAddLabel"
-        '
-        'ucrChkXaxisLabelSize
-        '
-        Me.ucrChkXaxisLabelSize.Checked = False
-        resources.ApplyResources(Me.ucrChkXaxisLabelSize, "ucrChkXaxisLabelSize")
-        Me.ucrChkXaxisLabelSize.Name = "ucrChkXaxisLabelSize"
-        '
-        'ucrInputSubFootNote
-        '
-        Me.ucrInputSubFootNote.AddQuotesIfUnrecognised = True
-        Me.ucrInputSubFootNote.IsMultiline = False
-        Me.ucrInputSubFootNote.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSubFootNote, "ucrInputSubFootNote")
-        Me.ucrInputSubFootNote.Name = "ucrInputSubFootNote"
-        '
-        'ucrInputFootNote
-        '
-        Me.ucrInputFootNote.AddQuotesIfUnrecognised = True
-        Me.ucrInputFootNote.IsMultiline = False
-        Me.ucrInputFootNote.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputFootNote, "ucrInputFootNote")
-        Me.ucrInputFootNote.Name = "ucrInputFootNote"
-        '
-        'ucrChkSubFootNote
-        '
-        Me.ucrChkSubFootNote.Checked = False
-        resources.ApplyResources(Me.ucrChkSubFootNote, "ucrChkSubFootNote")
-        Me.ucrChkSubFootNote.Name = "ucrChkSubFootNote"
-        '
-        'ucrInputYAxisTitle
-        '
-        Me.ucrInputYAxisTitle.AddQuotesIfUnrecognised = True
-        Me.ucrInputYAxisTitle.IsMultiline = False
-        Me.ucrInputYAxisTitle.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputYAxisTitle, "ucrInputYAxisTitle")
-        Me.ucrInputYAxisTitle.Name = "ucrInputYAxisTitle"
-        '
-        'ucrChkFootNote
-        '
-        Me.ucrChkFootNote.Checked = False
-        resources.ApplyResources(Me.ucrChkFootNote, "ucrChkFootNote")
-        Me.ucrChkFootNote.Name = "ucrChkFootNote"
-        '
-        'ucrChkXaxisAngle
-        '
-        Me.ucrChkXaxisAngle.Checked = False
-        resources.ApplyResources(Me.ucrChkXaxisAngle, "ucrChkXaxisAngle")
-        Me.ucrChkXaxisAngle.Name = "ucrChkXaxisAngle"
-        '
-        'ucrSpecifyXAxisTickMarks
-        '
-        Me.ucrSpecifyXAxisTickMarks.Checked = False
-        resources.ApplyResources(Me.ucrSpecifyXAxisTickMarks, "ucrSpecifyXAxisTickMarks")
-        Me.ucrSpecifyXAxisTickMarks.Name = "ucrSpecifyXAxisTickMarks"
-        '
-        'ucrSpecifyYAxisTickMarks
-        '
-        Me.ucrSpecifyYAxisTickMarks.Checked = False
-        resources.ApplyResources(Me.ucrSpecifyYAxisTickMarks, "ucrSpecifyYAxisTickMarks")
-        Me.ucrSpecifyYAxisTickMarks.Name = "ucrSpecifyYAxisTickMarks"
-        '
-        'ucrChkYAxisTitle
-        '
-        Me.ucrChkYAxisTitle.Checked = False
-        resources.ApplyResources(Me.ucrChkYAxisTitle, "ucrChkYAxisTitle")
-        Me.ucrChkYAxisTitle.Name = "ucrChkYAxisTitle"
         '
         'ucrChkAddTerciles
         '
@@ -265,12 +198,6 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.ucrChkAddMedian, "ucrChkAddMedian")
         Me.ucrChkAddMedian.Name = "ucrChkAddMedian"
         '
-        'ucrChkYAxisLabelsSize
-        '
-        Me.ucrChkYAxisLabelsSize.Checked = False
-        resources.ApplyResources(Me.ucrChkYAxisLabelsSize, "ucrChkYAxisLabelsSize")
-        Me.ucrChkYAxisLabelsSize.Name = "ucrChkYAxisLabelsSize"
-        '
         'ucrChkAddMean
         '
         Me.ucrChkAddMean.Checked = False
@@ -282,49 +209,191 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.ucrSdgPICSARainfalbuttons, "ucrSdgPICSARainfalbuttons")
         Me.ucrSdgPICSARainfalbuttons.Name = "ucrSdgPICSARainfalbuttons"
         '
+        'tbPICSA
+        '
+        Me.tbPICSA.Controls.Add(Me.TabPage1)
+        Me.tbPICSA.Controls.Add(Me.TabPage2)
+        Me.tbPICSA.Controls.Add(Me.TabPage3)
+        Me.tbPICSA.Controls.Add(Me.TabPage4)
+        resources.ApplyResources(Me.tbPICSA, "tbPICSA")
+        Me.tbPICSA.Name = "tbPICSA"
+        Me.tbPICSA.SelectedIndex = 0
+        '
+        'TabPage1
+        '
+        Me.TabPage1.Controls.Add(Me.grpAxes)
+        Me.TabPage1.Controls.Add(Me.grpGraphTitles)
+        resources.ApplyResources(Me.TabPage1, "TabPage1")
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Controls.Add(Me.grpXAxisLabels)
+        Me.TabPage2.Controls.Add(Me.grpYAxisLabels)
+        resources.ApplyResources(Me.TabPage2, "TabPage2")
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'TabPage3
+        '
+        Me.TabPage3.Controls.Add(Me.ucrChkAddMean)
+        Me.TabPage3.Controls.Add(Me.ucrChkAddMedian)
+        Me.TabPage3.Controls.Add(Me.ucrChkAddTerciles)
+        resources.ApplyResources(Me.TabPage3, "TabPage3")
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.Name = "Label1"
+        '
+        'ucrInputGraphTitle
+        '
+        Me.ucrInputGraphTitle.AddQuotesIfUnrecognised = True
+        Me.ucrInputGraphTitle.IsMultiline = False
+        Me.ucrInputGraphTitle.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputGraphTitle, "ucrInputGraphTitle")
+        Me.ucrInputGraphTitle.Name = "ucrInputGraphTitle"
+        '
+        'lblSubTitle
+        '
+        resources.ApplyResources(Me.lblSubTitle, "lblSubTitle")
+        Me.lblSubTitle.Name = "lblSubTitle"
+        '
+        'ucrInputGraphSubTitle
+        '
+        Me.ucrInputGraphSubTitle.AddQuotesIfUnrecognised = True
+        Me.ucrInputGraphSubTitle.IsMultiline = False
+        Me.ucrInputGraphSubTitle.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputGraphSubTitle, "ucrInputGraphSubTitle")
+        Me.ucrInputGraphSubTitle.Name = "ucrInputGraphSubTitle"
+        '
+        'lblCaption
+        '
+        resources.ApplyResources(Me.lblCaption, "lblCaption")
+        Me.lblCaption.Name = "lblCaption"
+        '
+        'ucrInputGraphcCaption
+        '
+        Me.ucrInputGraphcCaption.AddQuotesIfUnrecognised = True
+        Me.ucrInputGraphcCaption.IsMultiline = False
+        Me.ucrInputGraphcCaption.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputGraphcCaption, "ucrInputGraphcCaption")
+        Me.ucrInputGraphcCaption.Name = "ucrInputGraphcCaption"
+        '
+        'grpGraphTitles
+        '
+        Me.grpGraphTitles.Controls.Add(Me.Label1)
+        Me.grpGraphTitles.Controls.Add(Me.lblCaption)
+        Me.grpGraphTitles.Controls.Add(Me.ucrInputGraphcCaption)
+        Me.grpGraphTitles.Controls.Add(Me.lblSubTitle)
+        Me.grpGraphTitles.Controls.Add(Me.ucrInputGraphTitle)
+        Me.grpGraphTitles.Controls.Add(Me.ucrInputGraphSubTitle)
+        resources.ApplyResources(Me.grpGraphTitles, "grpGraphTitles")
+        Me.grpGraphTitles.Name = "grpGraphTitles"
+        Me.grpGraphTitles.TabStop = False
+        '
+        'grpAxes
+        '
+        Me.grpAxes.Controls.Add(Me.lblXAxis)
+        Me.grpAxes.Controls.Add(Me.lblYAxis)
+        Me.grpAxes.Controls.Add(Me.ucrInputXAxisTitle)
+        Me.grpAxes.Controls.Add(Me.ucrInputYAxisTitle)
+        resources.ApplyResources(Me.grpAxes, "grpAxes")
+        Me.grpAxes.Name = "grpAxes"
+        Me.grpAxes.TabStop = False
+        '
+        'lblXAxis
+        '
+        resources.ApplyResources(Me.lblXAxis, "lblXAxis")
+        Me.lblXAxis.Name = "lblXAxis"
+        '
+        'lblYAxis
+        '
+        resources.ApplyResources(Me.lblYAxis, "lblYAxis")
+        Me.lblYAxis.Name = "lblYAxis"
+        '
+        'ucrInputXAxisTitle
+        '
+        Me.ucrInputXAxisTitle.AddQuotesIfUnrecognised = True
+        Me.ucrInputXAxisTitle.IsMultiline = False
+        Me.ucrInputXAxisTitle.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputXAxisTitle, "ucrInputXAxisTitle")
+        Me.ucrInputXAxisTitle.Name = "ucrInputXAxisTitle"
+        '
+        'ucrInputYAxisTitle
+        '
+        Me.ucrInputYAxisTitle.AddQuotesIfUnrecognised = True
+        Me.ucrInputYAxisTitle.IsMultiline = False
+        Me.ucrInputYAxisTitle.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputYAxisTitle, "ucrInputYAxisTitle")
+        Me.ucrInputYAxisTitle.Name = "ucrInputYAxisTitle"
+        '
+        'grpYAxisLabels
+        '
+        Me.grpYAxisLabels.Controls.Add(Me.ucrInputYFrom)
+        Me.grpYAxisLabels.Controls.Add(Me.lblYAxisTitleSize)
+        Me.grpYAxisLabels.Controls.Add(Me.lblYFrom)
+        Me.grpYAxisLabels.Controls.Add(Me.ucrNudYAxisTitleSize)
+        Me.grpYAxisLabels.Controls.Add(Me.ucrInputYTo)
+        Me.grpYAxisLabels.Controls.Add(Me.lblYTo)
+        Me.grpYAxisLabels.Controls.Add(Me.lblYInStepsOf)
+        Me.grpYAxisLabels.Controls.Add(Me.ucrInputYInStepsOf)
+        resources.ApplyResources(Me.grpYAxisLabels, "grpYAxisLabels")
+        Me.grpYAxisLabels.Name = "grpYAxisLabels"
+        Me.grpYAxisLabels.TabStop = False
+        '
+        'grpXAxisLabels
+        '
+        Me.grpXAxisLabels.Controls.Add(Me.lblXAxisAngle)
+        Me.grpXAxisLabels.Controls.Add(Me.lblXFrom)
+        Me.grpXAxisLabels.Controls.Add(Me.ucrInputXFrom)
+        Me.grpXAxisLabels.Controls.Add(Me.ucrInputXInStepsOf)
+        Me.grpXAxisLabels.Controls.Add(Me.ucrNudXaxisLabelSize)
+        Me.grpXAxisLabels.Controls.Add(Me.ucrInputXTo)
+        Me.grpXAxisLabels.Controls.Add(Me.ucrNudXAxisAngle)
+        Me.grpXAxisLabels.Controls.Add(Me.lblXInStepsOf)
+        Me.grpXAxisLabels.Controls.Add(Me.lblXTo)
+        resources.ApplyResources(Me.grpXAxisLabels, "grpXAxisLabels")
+        Me.grpXAxisLabels.Name = "grpXAxisLabels"
+        Me.grpXAxisLabels.TabStop = False
+        '
+        'lblXAxisAngle
+        '
+        resources.ApplyResources(Me.lblXAxisAngle, "lblXAxisAngle")
+        Me.lblXAxisAngle.Name = "lblXAxisAngle"
+        '
+        'TabPage4
+        '
+        resources.ApplyResources(Me.TabPage4, "TabPage4")
+        Me.TabPage4.Name = "TabPage4"
+        Me.TabPage4.UseVisualStyleBackColor = True
+        '
         'sdgPICSARainfallGraph
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrInputXInStepsOf)
-        Me.Controls.Add(Me.ucrInputXTo)
-        Me.Controls.Add(Me.ucrInputYInStepsOf)
-        Me.Controls.Add(Me.ucrInputXFrom)
-        Me.Controls.Add(Me.ucrInputYTo)
-        Me.Controls.Add(Me.lblXInStepsOf)
-        Me.Controls.Add(Me.ucrInputYFrom)
-        Me.Controls.Add(Me.lblXFrom)
-        Me.Controls.Add(Me.lblYInStepsOf)
-        Me.Controls.Add(Me.lblXTo)
-        Me.Controls.Add(Me.lblYFrom)
-        Me.Controls.Add(Me.lblYTo)
-        Me.Controls.Add(Me.ucrNudXaxisLabelSize)
-        Me.Controls.Add(Me.ucrNudXAxisAngle)
-        Me.Controls.Add(Me.ucrNudYAxisLabelsSize)
-        Me.Controls.Add(Me.ucrNudYAxisTitleSize)
-        Me.Controls.Add(Me.lblYAxisTitleSize)
-        Me.Controls.Add(Me.ucrChkAddLabel)
-        Me.Controls.Add(Me.ucrChkXaxisLabelSize)
-        Me.Controls.Add(Me.ucrInputSubFootNote)
-        Me.Controls.Add(Me.ucrInputFootNote)
-        Me.Controls.Add(Me.ucrChkSubFootNote)
-        Me.Controls.Add(Me.ucrInputYAxisTitle)
-        Me.Controls.Add(Me.ucrChkFootNote)
-        Me.Controls.Add(Me.ucrChkXaxisAngle)
-        Me.Controls.Add(Me.ucrSpecifyXAxisTickMarks)
-        Me.Controls.Add(Me.ucrSpecifyYAxisTickMarks)
-        Me.Controls.Add(Me.ucrChkYAxisTitle)
-        Me.Controls.Add(Me.ucrChkAddTerciles)
-        Me.Controls.Add(Me.ucrChkAddMedian)
-        Me.Controls.Add(Me.ucrChkYAxisLabelsSize)
-        Me.Controls.Add(Me.ucrChkAddMean)
+        Me.Controls.Add(Me.tbPICSA)
         Me.Controls.Add(Me.ucrSdgPICSARainfalbuttons)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgPICSARainfallGraph"
+        Me.tbPICSA.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
+        Me.TabPage2.ResumeLayout(False)
+        Me.TabPage3.ResumeLayout(False)
+        Me.grpGraphTitles.ResumeLayout(False)
+        Me.grpGraphTitles.PerformLayout()
+        Me.grpAxes.ResumeLayout(False)
+        Me.grpAxes.PerformLayout()
+        Me.grpYAxisLabels.ResumeLayout(False)
+        Me.grpYAxisLabels.PerformLayout()
+        Me.grpXAxisLabels.ResumeLayout(False)
+        Me.grpXAxisLabels.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
@@ -332,21 +401,10 @@ Partial Class sdgPICSARainfallGraph
     Friend WithEvents ucrChkAddMean As ucrCheck
     Friend WithEvents ucrChkAddMedian As ucrCheck
     Friend WithEvents ucrChkAddTerciles As ucrCheck
-    Friend WithEvents ucrChkYAxisTitle As ucrCheck
-    Friend WithEvents ucrInputYAxisTitle As ucrInputTextBox
     Friend WithEvents lblYAxisTitleSize As Label
     Friend WithEvents ucrNudYAxisTitleSize As ucrNud
-    Friend WithEvents ucrChkXaxisAngle As ucrCheck
     Friend WithEvents ucrNudXAxisAngle As ucrNud
-    Friend WithEvents ucrChkXaxisLabelSize As ucrCheck
     Friend WithEvents ucrNudXaxisLabelSize As ucrNud
-    Friend WithEvents ucrChkAddLabel As ucrCheck
-    Friend WithEvents ucrChkFootNote As ucrCheck
-    Friend WithEvents ucrInputFootNote As ucrInputTextBox
-    Friend WithEvents ucrChkSubFootNote As ucrCheck
-    Friend WithEvents ucrInputSubFootNote As ucrInputTextBox
-    Friend WithEvents ucrSpecifyYAxisTickMarks As ucrCheck
-    Friend WithEvents ucrSpecifyXAxisTickMarks As ucrCheck
     Friend WithEvents ucrInputYInStepsOf As ucrInputTextBox
     Friend WithEvents ucrInputYTo As ucrInputTextBox
     Friend WithEvents ucrInputYFrom As ucrInputTextBox
@@ -359,6 +417,24 @@ Partial Class sdgPICSARainfallGraph
     Friend WithEvents ucrInputXFrom As ucrInputTextBox
     Friend WithEvents ucrInputXTo As ucrInputTextBox
     Friend WithEvents ucrInputXInStepsOf As ucrInputTextBox
-    Friend WithEvents ucrChkYAxisLabelsSize As ucrCheck
-    Friend WithEvents ucrNudYAxisLabelsSize As ucrNud
+    Friend WithEvents tbPICSA As TabControl
+    Friend WithEvents TabPage1 As TabPage
+    Friend WithEvents TabPage2 As TabPage
+    Friend WithEvents TabPage3 As TabPage
+    Friend WithEvents ucrInputGraphTitle As ucrInputTextBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents ucrInputGraphSubTitle As ucrInputTextBox
+    Friend WithEvents lblSubTitle As Label
+    Friend WithEvents grpAxes As GroupBox
+    Friend WithEvents lblXAxis As Label
+    Friend WithEvents lblYAxis As Label
+    Friend WithEvents ucrInputXAxisTitle As ucrInputTextBox
+    Friend WithEvents ucrInputYAxisTitle As ucrInputTextBox
+    Friend WithEvents grpGraphTitles As GroupBox
+    Friend WithEvents lblCaption As Label
+    Friend WithEvents ucrInputGraphcCaption As ucrInputTextBox
+    Friend WithEvents grpYAxisLabels As GroupBox
+    Friend WithEvents grpXAxisLabels As GroupBox
+    Friend WithEvents lblXAxisAngle As Label
+    Friend WithEvents TabPage4 As TabPage
 End Class
