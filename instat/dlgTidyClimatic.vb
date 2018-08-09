@@ -21,14 +21,10 @@ Public Class dlgTidyClimaticData
     Private bReset As Boolean = True
     Private clsTidyClimaticFunction As New RFunction
 
-    Private iReceiverMaxY As Integer
-    Private iReceiverLabelMaxY As Integer
     Private iTextBoxMaxY As Integer
 
     Private Sub dlgReshapeClimaticData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
-            iReceiverMaxY = ucrReceiverMultipleStack.Location.Y
-            iReceiverLabelMaxY = lblColumnstoStack.Location.Y
             iTextBoxMaxY = grpElements.Location.Y
             InitialiseDialog()
             bFirstLoad = False
@@ -43,7 +39,7 @@ Public Class dlgTidyClimaticData
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.iCallType = 0
+        'ucrBase.clsRsyntax.iCallType = 0
 
         ucrPnlReshapeClimaticData.AddRadioButton(rdoYear)
         ucrPnlReshapeClimaticData.AddRadioButton(rdoMonth)
@@ -59,11 +55,7 @@ Public Class dlgTidyClimaticData
 
         ucrReceiverYear.Selector = ucrSelectorTidyClimaticData
         ucrReceiverYearTwo.Selector = ucrSelectorTidyClimaticData
-
-        'ucrReceiverMonth.Selector = ucrSelectorTidyClimaticData
         ucrReceiverMonthTwo.Selector = ucrSelectorTidyClimaticData
-
-        'ucrReceiverDayofYear.Selector = ucrSelectorTidyClimaticData
         ucrReceiverDayofMonth.Selector = ucrSelectorTidyClimaticData
 
         ucrReceiverMultipleStack.SetParameter(New RParameter("stack_cols", 2))
@@ -80,11 +72,6 @@ Public Class dlgTidyClimaticData
         ucrTextBoxElementName.SetRDefault("value")
 
         'rdoYear
-        'ucrReceiverDayofYear.SetParameter(New RParameter("day", 3))
-        'ucrReceiverDayofYear.SetParameterIsString()
-
-        'ucrReceiverMonth.SetParameter(New RParameter("month", 4))
-        'ucrReceiverMonth.SetParameterIsString()
 
         'rdoMonth
         ucrReceiverYear.SetParameter(New RParameter("year", 5))
@@ -104,15 +91,12 @@ Public Class dlgTidyClimaticData
         ucrChkIgnoreInvalid.SetParameter(New RParameter("ignore_invalid", 9))
         ucrChkIgnoreInvalid.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkIgnoreInvalid.SetRDefault("FALSE")
-        ucrChkIgnoreInvalid.SetText("Ignore Invalid")
+        ucrChkIgnoreInvalid.SetText("Ignore values on invalid dates")
 
         ucrChkSilent.SetParameter(New RParameter("silent", 10))
-        ucrChkSilent.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkSilent.SetValuesCheckedAndUnchecked("FALSE", "TRUE")
         ucrChkSilent.SetRDefault("FALSE")
-        ucrChkSilent.SetText("Silent")
-
-        'ucrPnlReshapeClimaticData.AddToLinkedControls(ucrReceiverMonth, {rdoYear}, bNewLinkedHideIfParameterMissing:=True)
-        'ucrPnlReshapeClimaticData.AddToLinkedControls(ucrReceiverDayofYear, {rdoYear}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkSilent.SetText("Display details of warnings and errors")
 
         ucrPnlReshapeClimaticData.AddToLinkedControls(ucrReceiverYear, {rdoMonth}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlReshapeClimaticData.AddToLinkedControls(ucrReceiverDayofMonth, {rdoMonth}, bNewLinkedHideIfParameterMissing:=True)
@@ -125,8 +109,6 @@ Public Class dlgTidyClimaticData
         ucrPnlReshapeClimaticData.AddParameterValuesCondition(rdoDay, "format", Chr(34) & "days" & Chr(34))
 
         ucrReceiverStation.SetLinkedDisplayControl(lblStation)
-        'ucrReceiverMonth.SetLinkedDisplayControl(lblMonth)
-        'ucrReceiverDayofYear.SetLinkedDisplayControl(lblDayofYear)
 
         ucrReceiverYear.SetLinkedDisplayControl(lblYear)
         ucrReceiverDayofMonth.SetLinkedDisplayControl(lblDayofMonth)
@@ -203,7 +185,7 @@ Public Class dlgTidyClimaticData
     Private Sub ucrPnlReshapeClimaticData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlReshapeClimaticData.ControlValueChanged, ucrReceiverMonthTwo.ControlValueChanged, ucrReceiverYear.ControlValueChanged, ucrReceiverYearTwo.ControlValueChanged
         UpdateParameters()
         ShowReceivers()
-        MultipleStackElementLocation()
+        ElementGroupLocation()
         ColumnstoStackText()
     End Sub
 
@@ -245,15 +227,22 @@ Public Class dlgTidyClimaticData
         End If
     End Sub
 
-    Private Sub MultipleStackElementLocation()
+    Private Sub ElementGroupLocation()
         If rdoYear.Checked Then
-            lblColumnstoStack.Location = New Point(lblColumnstoStack.Location.X, iReceiverLabelMaxY / 1.4)
-            ucrReceiverMultipleStack.Location = New Point(ucrReceiverMultipleStack.Location.X, iReceiverMaxY / 1.35)
-            grpElements.Location = New Point(grpElements.Location.X, iTextBoxMaxY / 2.0)
+            grpElements.Location = New Point(grpElements.Location.X, iTextBoxMaxY / 1.5)
         Else
-            lblColumnstoStack.Location = New Point(lblColumnstoStack.Location.X, iReceiverLabelMaxY)
-            ucrReceiverMultipleStack.Location = New Point(ucrReceiverMultipleStack.Location.X, iReceiverMaxY)
             grpElements.Location = New Point(grpElements.Location.X, iTextBoxMaxY)
+        End If
+    End Sub
+
+    Private Sub ElementAddRemoveParam()
+        clsTidyClimaticFunction.RemoveParameterByName("element_name")
+
+        If Not ucrReceiverElement.IsEmpty Then
+            ucrTextBoxElementName.Enabled = False
+        Else
+            clsTidyClimaticFunction.AddParameter("element_name", Chr(34) & ucrTextBoxElementName.GetText & Chr(34), iPosition:=8)
+            ucrTextBoxElementName.Enabled = True
         End If
     End Sub
 
@@ -263,5 +252,9 @@ Public Class dlgTidyClimaticData
 
     Private Sub ucrSelectorReshapeClimaticData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorTidyClimaticData.ControlValueChanged
         NewDefaultName()
+    End Sub
+
+    Private Sub ucrTextBoxElementName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrTextBoxElementName.ControlValueChanged, ucrReceiverElement.ControlValueChanged
+        ElementAddRemoveParam()
     End Sub
 End Class
