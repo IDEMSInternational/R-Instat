@@ -72,6 +72,7 @@ Public Class dlgTidyClimaticData
         ucrTextBoxElementName.SetRDefault("value")
 
         'rdoYear
+        'TODO; Receivers for Station, Month and Day might be added later for the "Year Columns" format.
 
         'rdoMonth
         ucrReceiverYear.SetParameter(New RParameter("year", 5))
