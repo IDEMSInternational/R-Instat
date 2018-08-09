@@ -262,7 +262,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblYearTwo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>276, 133</value>
+    <value>279, 210</value>
   </data>
   <data name="lblYearTwo.Size" type="System.Drawing.Size, System.Drawing">
     <value>29, 13</value>
@@ -292,7 +292,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblMonthTwo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>276, 187</value>
+    <value>279, 258</value>
   </data>
   <data name="lblMonthTwo.Size" type="System.Drawing.Size, System.Drawing">
     <value>37, 13</value>
@@ -322,7 +322,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>276, 133</value>
+    <value>279, 210</value>
   </data>
   <data name="lblYear.Size" type="System.Drawing.Size, System.Drawing">
     <value>29, 13</value>
@@ -352,7 +352,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDayofMonth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>276, 187</value>
+    <value>279, 258</value>
   </data>
   <data name="lblDayofMonth.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 13</value>
@@ -382,7 +382,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblStation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>276, 85</value>
+    <value>279, 307</value>
   </data>
   <data name="lblStation.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 13</value>
@@ -442,7 +442,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblColumnstoStack.Location" type="System.Drawing.Point, System.Drawing">
-    <value>277, 366</value>
+    <value>279, 85</value>
   </data>
   <data name="lblColumnstoStack.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 13</value>
@@ -475,13 +475,13 @@
     <value>6, 85</value>
   </data>
   <data name="lblMultipleElement.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 13</value>
+    <value>50, 13</value>
   </data>
   <data name="lblMultipleElement.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
   </data>
   <data name="lblMultipleElement.Text" xml:space="preserve">
-    <value>Multiple Elements</value>
+    <value>Elements</value>
   </data>
   <data name="&gt;&gt;lblMultipleElement.Name" xml:space="preserve">
     <value>lblMultipleElement</value>
@@ -499,7 +499,7 @@
     <value>12, 301</value>
   </data>
   <data name="ucrChkIgnoreInvalid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>207, 20</value>
   </data>
   <data name="ucrChkIgnoreInvalid.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
@@ -520,7 +520,7 @@
     <value>12, 335</value>
   </data>
   <data name="ucrChkSilent.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>207, 20</value>
   </data>
   <data name="ucrChkSilent.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -598,10 +598,10 @@
     <value>0</value>
   </data>
   <data name="grpElements.Location" type="System.Drawing.Point, System.Drawing">
-    <value>279, 228</value>
+    <value>281, 355</value>
   </data>
   <data name="grpElements.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 132</value>
+    <value>133, 132</value>
   </data>
   <data name="grpElements.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
@@ -619,7 +619,7 @@
     <value>0</value>
   </data>
   <data name="ucrReceiverMultipleStack.Location" type="System.Drawing.Point, System.Drawing">
-    <value>279, 384</value>
+    <value>281, 103</value>
   </data>
   <data name="ucrReceiverMultipleStack.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -643,7 +643,7 @@
     <value>4</value>
   </data>
   <data name="ucrReceiverMonthTwo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>279, 205</value>
+    <value>282, 276</value>
   </data>
   <data name="ucrReceiverMonthTwo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -667,7 +667,7 @@
     <value>6</value>
   </data>
   <data name="ucrReceiverYearTwo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>279, 151</value>
+    <value>282, 228</value>
   </data>
   <data name="ucrReceiverYearTwo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -691,7 +691,7 @@
     <value>9</value>
   </data>
   <data name="ucrReceiverDayofMonth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>279, 205</value>
+    <value>282, 276</value>
   </data>
   <data name="ucrReceiverDayofMonth.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -736,7 +736,7 @@
     <value>12</value>
   </data>
   <data name="ucrReceiverYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>279, 151</value>
+    <value>282, 228</value>
   </data>
   <data name="ucrReceiverYear.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -805,7 +805,7 @@
     <value>20</value>
   </data>
   <data name="ucrReceiverStation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>279, 103</value>
+    <value>282, 325</value>
   </data>
   <data name="ucrReceiverStation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
