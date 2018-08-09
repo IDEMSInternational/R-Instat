@@ -22,9 +22,6 @@ Public Class dlgPICSARainfall
     Private clsRaesFunction As New RFunction
     Private clsBaseOperator As New ROperator
     Private bReset As Boolean = True
-    Private clsLabsFunction As New RFunction
-    Private clsXlabsFunction As New RFunction
-    Private clsYlabFunction As New RFunction
     Private clsXScalecontinuousFunction As New RFunction
     Private clsYScalecontinuousFunction As New RFunction
     Private clsRFacetFunction As New RFunction
@@ -36,6 +33,10 @@ Public Class dlgPICSARainfall
     Private clsGeomPoint As New RFunction
     Private clsPointsFunc As New RFunction
     Private clsPointsParam As New RParameter
+    Private clsYLabFunction, clsXLabFunction, clsLabsFunction As RFunction
+    Private clsXAxisLabels, clsYAxisLabels As New RFunction
+    Private clsMeanLine, clsMedianLine, clsTretile As New RFunction
+    Private clsPnlBackgroundFunction, clsPnlGridLinesFunction As RFunction
 
     Private Sub dlgPCSARainfall_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -129,12 +130,12 @@ Public Class dlgPICSARainfall
         clsBaseOperator.AddParameter(clsPointsParam)
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
-        clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
-        clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
+        clsXLabFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
+        clsYLabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
         clsYScalecontinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
-        clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
+        clsXAxisLabels = GgplotDefaults.clsDefaultThemeFunction
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction
         clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
