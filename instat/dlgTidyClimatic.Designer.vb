@@ -28,7 +28,7 @@ Partial Class dlgTidyClimaticData
         Me.rdoMonth = New System.Windows.Forms.RadioButton()
         Me.rdoYear = New System.Windows.Forms.RadioButton()
         Me.lblYearTwo = New System.Windows.Forms.Label()
-        Me.lblMonthTwo = New System.Windows.Forms.Label()
+        Me.lblMonth = New System.Windows.Forms.Label()
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lblDayofMonth = New System.Windows.Forms.Label()
         Me.lblStation = New System.Windows.Forms.Label()
@@ -40,7 +40,7 @@ Partial Class dlgTidyClimaticData
         Me.ucrTextBoxElementName = New instat.ucrInputTextBox()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrReceiverMultipleStack = New instat.ucrReceiverMultiple()
-        Me.ucrReceiverMonthTwo = New instat.ucrReceiverSingle()
+        Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
         Me.ucrReceiverYearTwo = New instat.ucrReceiverSingle()
         Me.ucrReceiverDayofMonth = New instat.ucrReceiverSingle()
         Me.ucrNewDFName = New instat.ucrSave()
@@ -94,10 +94,10 @@ Partial Class dlgTidyClimaticData
         resources.ApplyResources(Me.lblYearTwo, "lblYearTwo")
         Me.lblYearTwo.Name = "lblYearTwo"
         '
-        'lblMonthTwo
+        'lblMonth
         '
-        resources.ApplyResources(Me.lblMonthTwo, "lblMonthTwo")
-        Me.lblMonthTwo.Name = "lblMonthTwo"
+        resources.ApplyResources(Me.lblMonth, "lblMonth")
+        Me.lblMonth.Name = "lblMonth"
         '
         'lblYear
         '
@@ -167,14 +167,14 @@ Partial Class dlgTidyClimaticData
         Me.ucrReceiverMultipleStack.strNcFilePath = ""
         Me.ucrReceiverMultipleStack.ucrSelector = Nothing
         '
-        'ucrReceiverMonthTwo
+        'ucrReceiverMonth
         '
-        Me.ucrReceiverMonthTwo.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverMonthTwo, "ucrReceiverMonthTwo")
-        Me.ucrReceiverMonthTwo.Name = "ucrReceiverMonthTwo"
-        Me.ucrReceiverMonthTwo.Selector = Nothing
-        Me.ucrReceiverMonthTwo.strNcFilePath = ""
-        Me.ucrReceiverMonthTwo.ucrSelector = Nothing
+        Me.ucrReceiverMonth.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverMonth, "ucrReceiverMonth")
+        Me.ucrReceiverMonth.Name = "ucrReceiverMonth"
+        Me.ucrReceiverMonth.Selector = Nothing
+        Me.ucrReceiverMonth.strNcFilePath = ""
+        Me.ucrReceiverMonth.ucrSelector = Nothing
         '
         'ucrReceiverYearTwo
         '
@@ -261,9 +261,9 @@ Partial Class dlgTidyClimaticData
         Me.Controls.Add(Me.lblColumnstoStack)
         Me.Controls.Add(Me.ucrReceiverMultipleStack)
         Me.Controls.Add(Me.lblStation)
-        Me.Controls.Add(Me.ucrReceiverMonthTwo)
+        Me.Controls.Add(Me.ucrReceiverMonth)
         Me.Controls.Add(Me.lblYearTwo)
-        Me.Controls.Add(Me.lblMonthTwo)
+        Me.Controls.Add(Me.lblMonth)
         Me.Controls.Add(Me.ucrReceiverYearTwo)
         Me.Controls.Add(Me.ucrReceiverDayofMonth)
         Me.Controls.Add(Me.lblYear)
@@ -297,8 +297,8 @@ Partial Class dlgTidyClimaticData
     Friend WithEvents rdoYear As RadioButton
     Friend WithEvents ucrPnlReshapeClimaticData As UcrPanel
     Friend WithEvents lblYearTwo As Label
-    Friend WithEvents lblMonthTwo As Label
-    Friend WithEvents ucrReceiverMonthTwo As ucrReceiverSingle
+    Friend WithEvents lblMonth As Label
+    Friend WithEvents ucrReceiverMonth As ucrReceiverSingle
     Friend WithEvents lblDayofMonth As Label
     Friend WithEvents ucrReceiverYearTwo As ucrReceiverSingle
     Friend WithEvents ucrNewDFName As ucrSave

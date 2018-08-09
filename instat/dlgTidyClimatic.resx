@@ -285,34 +285,34 @@
   <data name="&gt;&gt;lblYearTwo.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="lblMonthTwo.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblMonth.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblMonthTwo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblMonth.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblMonthTwo.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblMonth.Location" type="System.Drawing.Point, System.Drawing">
     <value>279, 258</value>
   </data>
-  <data name="lblMonthTwo.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblMonth.Size" type="System.Drawing.Size, System.Drawing">
     <value>37, 13</value>
   </data>
-  <data name="lblMonthTwo.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblMonth.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name="lblMonthTwo.Text" xml:space="preserve">
+  <data name="lblMonth.Text" xml:space="preserve">
     <value>Month</value>
   </data>
-  <data name="&gt;&gt;lblMonthTwo.Name" xml:space="preserve">
-    <value>lblMonthTwo</value>
+  <data name="&gt;&gt;lblMonth.Name" xml:space="preserve">
+    <value>lblMonth</value>
   </data>
-  <data name="&gt;&gt;lblMonthTwo.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblMonth.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblMonthTwo.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblMonth.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;lblMonthTwo.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblMonth.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="lblYear.AutoSize" type="System.Boolean, mscorlib">
@@ -642,28 +642,28 @@
   <data name="&gt;&gt;ucrReceiverMultipleStack.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="ucrReceiverMonthTwo.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrReceiverMonth.Location" type="System.Drawing.Point, System.Drawing">
     <value>282, 276</value>
   </data>
-  <data name="ucrReceiverMonthTwo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ucrReceiverMonth.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="ucrReceiverMonthTwo.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrReceiverMonth.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 20</value>
   </data>
-  <data name="ucrReceiverMonthTwo.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrReceiverMonth.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverMonthTwo.Name" xml:space="preserve">
-    <value>ucrReceiverMonthTwo</value>
+  <data name="&gt;&gt;ucrReceiverMonth.Name" xml:space="preserve">
+    <value>ucrReceiverMonth</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverMonthTwo.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverMonth.Type" xml:space="preserve">
     <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverMonthTwo.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverMonth.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverMonthTwo.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverMonth.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="ucrReceiverYearTwo.Location" type="System.Drawing.Point, System.Drawing">
