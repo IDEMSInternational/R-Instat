@@ -204,8 +204,7 @@ Public Class sdgPICSARainfallGraph
         dctThemeFunctions.TryGetValue("panel.background", clsElementPanelBackGround)
         dctThemeFunctions.TryGetValue("panel.border", clsElementBorder)
 
-        ucrNudXAxisAngle.SetRCodeForControl
-
+        ucrNudXAxisAngle.SetRCode(clsXElementLabels, bCloneIfNeeded:=True)
         'ucrNudXAxisAngle.SetRCode(clsXElementLabels) clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
         clsXLabFunction = clsNewXLabsTitleFunction
