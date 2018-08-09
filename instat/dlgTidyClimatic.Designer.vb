@@ -27,7 +27,6 @@ Partial Class dlgTidyClimaticData
         Me.rdoDay = New System.Windows.Forms.RadioButton()
         Me.rdoMonth = New System.Windows.Forms.RadioButton()
         Me.rdoYear = New System.Windows.Forms.RadioButton()
-        Me.lblYearTwo = New System.Windows.Forms.Label()
         Me.lblMonth = New System.Windows.Forms.Label()
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lblDayofMonth = New System.Windows.Forms.Label()
@@ -35,13 +34,14 @@ Partial Class dlgTidyClimaticData
         Me.lblElementName = New System.Windows.Forms.Label()
         Me.lblColumnstoStack = New System.Windows.Forms.Label()
         Me.lblMultipleElement = New System.Windows.Forms.Label()
-        Me.ucrChkIgnoreInvalid = New instat.ucrCheck()
-        Me.ucrChkSilent = New instat.ucrCheck()
+        Me.grpElements = New System.Windows.Forms.GroupBox()
+        Me.lblOr = New System.Windows.Forms.Label()
         Me.ucrTextBoxElementName = New instat.ucrInputTextBox()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
+        Me.ucrChkIgnoreInvalid = New instat.ucrCheck()
+        Me.ucrChkSilent = New instat.ucrCheck()
         Me.ucrReceiverMultipleStack = New instat.ucrReceiverMultiple()
         Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
-        Me.ucrReceiverYearTwo = New instat.ucrReceiverSingle()
         Me.ucrReceiverDayofMonth = New instat.ucrReceiverSingle()
         Me.ucrNewDFName = New instat.ucrSave()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
@@ -49,9 +49,9 @@ Partial Class dlgTidyClimaticData
         Me.ucrSelectorTidyClimaticData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.grpElements = New System.Windows.Forms.GroupBox()
-        Me.lblOr = New System.Windows.Forms.Label()
+        Me.grpOptions = New System.Windows.Forms.GroupBox()
         Me.grpElements.SuspendLayout()
+        Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblColumnPer
@@ -89,11 +89,6 @@ Partial Class dlgTidyClimaticData
         Me.rdoYear.TabStop = True
         Me.rdoYear.UseVisualStyleBackColor = True
         '
-        'lblYearTwo
-        '
-        resources.ApplyResources(Me.lblYearTwo, "lblYearTwo")
-        Me.lblYearTwo.Name = "lblYearTwo"
-        '
         'lblMonth
         '
         resources.ApplyResources(Me.lblMonth, "lblMonth")
@@ -129,17 +124,21 @@ Partial Class dlgTidyClimaticData
         resources.ApplyResources(Me.lblMultipleElement, "lblMultipleElement")
         Me.lblMultipleElement.Name = "lblMultipleElement"
         '
-        'ucrChkIgnoreInvalid
+        'grpElements
         '
-        Me.ucrChkIgnoreInvalid.Checked = False
-        resources.ApplyResources(Me.ucrChkIgnoreInvalid, "ucrChkIgnoreInvalid")
-        Me.ucrChkIgnoreInvalid.Name = "ucrChkIgnoreInvalid"
+        Me.grpElements.Controls.Add(Me.lblOr)
+        Me.grpElements.Controls.Add(Me.lblElementName)
+        Me.grpElements.Controls.Add(Me.ucrTextBoxElementName)
+        Me.grpElements.Controls.Add(Me.lblMultipleElement)
+        Me.grpElements.Controls.Add(Me.ucrReceiverElement)
+        resources.ApplyResources(Me.grpElements, "grpElements")
+        Me.grpElements.Name = "grpElements"
+        Me.grpElements.TabStop = False
         '
-        'ucrChkSilent
+        'lblOr
         '
-        Me.ucrChkSilent.Checked = False
-        resources.ApplyResources(Me.ucrChkSilent, "ucrChkSilent")
-        Me.ucrChkSilent.Name = "ucrChkSilent"
+        resources.ApplyResources(Me.lblOr, "lblOr")
+        Me.lblOr.Name = "lblOr"
         '
         'ucrTextBoxElementName
         '
@@ -158,6 +157,18 @@ Partial Class dlgTidyClimaticData
         Me.ucrReceiverElement.strNcFilePath = ""
         Me.ucrReceiverElement.ucrSelector = Nothing
         '
+        'ucrChkIgnoreInvalid
+        '
+        Me.ucrChkIgnoreInvalid.Checked = False
+        resources.ApplyResources(Me.ucrChkIgnoreInvalid, "ucrChkIgnoreInvalid")
+        Me.ucrChkIgnoreInvalid.Name = "ucrChkIgnoreInvalid"
+        '
+        'ucrChkSilent
+        '
+        Me.ucrChkSilent.Checked = False
+        resources.ApplyResources(Me.ucrChkSilent, "ucrChkSilent")
+        Me.ucrChkSilent.Name = "ucrChkSilent"
+        '
         'ucrReceiverMultipleStack
         '
         Me.ucrReceiverMultipleStack.frmParent = Me
@@ -175,15 +186,6 @@ Partial Class dlgTidyClimaticData
         Me.ucrReceiverMonth.Selector = Nothing
         Me.ucrReceiverMonth.strNcFilePath = ""
         Me.ucrReceiverMonth.ucrSelector = Nothing
-        '
-        'ucrReceiverYearTwo
-        '
-        Me.ucrReceiverYearTwo.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverYearTwo, "ucrReceiverYearTwo")
-        Me.ucrReceiverYearTwo.Name = "ucrReceiverYearTwo"
-        Me.ucrReceiverYearTwo.Selector = Nothing
-        Me.ucrReceiverYearTwo.strNcFilePath = ""
-        Me.ucrReceiverYearTwo.ucrSelector = Nothing
         '
         'ucrReceiverDayofMonth
         '
@@ -235,36 +237,25 @@ Partial Class dlgTidyClimaticData
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'grpElements
+        'grpOptions
         '
-        Me.grpElements.Controls.Add(Me.lblOr)
-        Me.grpElements.Controls.Add(Me.lblElementName)
-        Me.grpElements.Controls.Add(Me.ucrTextBoxElementName)
-        Me.grpElements.Controls.Add(Me.lblMultipleElement)
-        Me.grpElements.Controls.Add(Me.ucrReceiverElement)
-        resources.ApplyResources(Me.grpElements, "grpElements")
-        Me.grpElements.Name = "grpElements"
-        Me.grpElements.TabStop = False
-        '
-        'lblOr
-        '
-        resources.ApplyResources(Me.lblOr, "lblOr")
-        Me.lblOr.Name = "lblOr"
+        Me.grpOptions.Controls.Add(Me.ucrChkIgnoreInvalid)
+        Me.grpOptions.Controls.Add(Me.ucrChkSilent)
+        resources.ApplyResources(Me.grpOptions, "grpOptions")
+        Me.grpOptions.Name = "grpOptions"
+        Me.grpOptions.TabStop = False
         '
         'dlgTidyClimaticData
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.grpElements)
-        Me.Controls.Add(Me.ucrChkIgnoreInvalid)
-        Me.Controls.Add(Me.ucrChkSilent)
         Me.Controls.Add(Me.lblColumnstoStack)
         Me.Controls.Add(Me.ucrReceiverMultipleStack)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrReceiverMonth)
-        Me.Controls.Add(Me.lblYearTwo)
         Me.Controls.Add(Me.lblMonth)
-        Me.Controls.Add(Me.ucrReceiverYearTwo)
         Me.Controls.Add(Me.ucrReceiverDayofMonth)
         Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.ucrNewDFName)
@@ -284,6 +275,7 @@ Partial Class dlgTidyClimaticData
         Me.Name = "dlgTidyClimaticData"
         Me.grpElements.ResumeLayout(False)
         Me.grpElements.PerformLayout()
+        Me.grpOptions.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -296,11 +288,9 @@ Partial Class dlgTidyClimaticData
     Friend WithEvents rdoMonth As RadioButton
     Friend WithEvents rdoYear As RadioButton
     Friend WithEvents ucrPnlReshapeClimaticData As UcrPanel
-    Friend WithEvents lblYearTwo As Label
     Friend WithEvents lblMonth As Label
     Friend WithEvents ucrReceiverMonth As ucrReceiverSingle
     Friend WithEvents lblDayofMonth As Label
-    Friend WithEvents ucrReceiverYearTwo As ucrReceiverSingle
     Friend WithEvents ucrNewDFName As ucrSave
     Friend WithEvents lblYear As Label
     Friend WithEvents ucrReceiverYear As ucrReceiverSingle
@@ -317,4 +307,5 @@ Partial Class dlgTidyClimaticData
     Friend WithEvents ucrChkSilent As ucrCheck
     Friend WithEvents grpElements As GroupBox
     Friend WithEvents lblOr As Label
+    Friend WithEvents grpOptions As GroupBox
 End Class
