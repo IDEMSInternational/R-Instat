@@ -131,7 +131,7 @@ Public Class dlgTidyClimaticData
         clsTidyClimaticFunction = New RFunction
 
         ucrSelectorTidyClimaticData.Reset()
-        ucrReceiverStation.SetMeAsReceiver()
+        ucrReceiverMultipleStack.SetMeAsReceiver()
         ucrNewDFName.Reset()
 
         clsTidyClimaticFunction.SetAssignTo(ucrNewDFName.GetText, strTempDataframe:=ucrSelectorTidyClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
