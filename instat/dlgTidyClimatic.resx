@@ -526,10 +526,10 @@
     <value>452, 578</value>
   </data>
   <data name="ucrChkIgnoreInvalid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 19</value>
+    <value>8, 19</value>
   </data>
   <data name="ucrChkIgnoreInvalid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 20</value>
+    <value>209, 20</value>
   </data>
   <data name="ucrChkIgnoreInvalid.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
@@ -547,10 +547,10 @@
     <value>0</value>
   </data>
   <data name="ucrChkSilent.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 53</value>
+    <value>8, 53</value>
   </data>
   <data name="ucrChkSilent.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 20</value>
+    <value>209, 20</value>
   </data>
   <data name="ucrChkSilent.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -571,7 +571,7 @@
     <value>10, 289</value>
   </data>
   <data name="grpOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 96</value>
+    <value>223, 83</value>
   </data>
   <data name="grpOptions.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
