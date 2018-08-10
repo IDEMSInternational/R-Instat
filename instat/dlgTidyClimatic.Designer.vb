@@ -38,6 +38,7 @@ Partial Class dlgTidyClimaticData
         Me.lblOr = New System.Windows.Forms.Label()
         Me.ucrTextBoxElementName = New instat.ucrInputTextBox()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
+        Me.grpOptions = New System.Windows.Forms.GroupBox()
         Me.ucrChkIgnoreInvalid = New instat.ucrCheck()
         Me.ucrChkSilent = New instat.ucrCheck()
         Me.ucrReceiverMultipleStack = New instat.ucrReceiverMultiple()
@@ -49,7 +50,6 @@ Partial Class dlgTidyClimaticData
         Me.ucrSelectorTidyClimaticData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.grpOptions = New System.Windows.Forms.GroupBox()
         Me.grpElements.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -157,6 +157,14 @@ Partial Class dlgTidyClimaticData
         Me.ucrReceiverElement.strNcFilePath = ""
         Me.ucrReceiverElement.ucrSelector = Nothing
         '
+        'grpOptions
+        '
+        Me.grpOptions.Controls.Add(Me.ucrChkIgnoreInvalid)
+        Me.grpOptions.Controls.Add(Me.ucrChkSilent)
+        resources.ApplyResources(Me.grpOptions, "grpOptions")
+        Me.grpOptions.Name = "grpOptions"
+        Me.grpOptions.TabStop = False
+        '
         'ucrChkIgnoreInvalid
         '
         Me.ucrChkIgnoreInvalid.Checked = False
@@ -236,14 +244,6 @@ Partial Class dlgTidyClimaticData
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        '
-        'grpOptions
-        '
-        Me.grpOptions.Controls.Add(Me.ucrChkIgnoreInvalid)
-        Me.grpOptions.Controls.Add(Me.ucrChkSilent)
-        resources.ApplyResources(Me.grpOptions, "grpOptions")
-        Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.TabStop = False
         '
         'dlgTidyClimaticData
         '

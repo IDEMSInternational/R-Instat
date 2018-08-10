@@ -174,7 +174,7 @@ Public Class dlgTidyClimaticData
 
     Private Sub NewDefaultName()
         If (Not ucrNewDFName.bUserTyped) AndAlso ucrSelectorTidyClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-            ucrNewDFName.SetName(ucrSelectorTidyClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_tidy")
+            ucrNewDFName.SetPrefix(ucrSelectorTidyClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_tidy")
         End If
     End Sub
 
