@@ -36,11 +36,11 @@ Partial Class dlgTidyClimaticData
         Me.lblMultipleElement = New System.Windows.Forms.Label()
         Me.grpElements = New System.Windows.Forms.GroupBox()
         Me.lblOr = New System.Windows.Forms.Label()
-        Me.ucrTextBoxElementName = New instat.ucrInputTextBox()
-        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
         Me.ucrChkIgnoreInvalid = New instat.ucrCheck()
         Me.ucrChkSilent = New instat.ucrCheck()
+        Me.ucrTextBoxElementName = New instat.ucrInputTextBox()
+        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrReceiverMultipleStack = New instat.ucrReceiverMultiple()
         Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
         Me.ucrReceiverDayofMonth = New instat.ucrReceiverSingle()
@@ -140,23 +140,6 @@ Partial Class dlgTidyClimaticData
         resources.ApplyResources(Me.lblOr, "lblOr")
         Me.lblOr.Name = "lblOr"
         '
-        'ucrTextBoxElementName
-        '
-        Me.ucrTextBoxElementName.AddQuotesIfUnrecognised = True
-        Me.ucrTextBoxElementName.IsMultiline = False
-        Me.ucrTextBoxElementName.IsReadOnly = False
-        resources.ApplyResources(Me.ucrTextBoxElementName, "ucrTextBoxElementName")
-        Me.ucrTextBoxElementName.Name = "ucrTextBoxElementName"
-        '
-        'ucrReceiverElement
-        '
-        Me.ucrReceiverElement.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverElement, "ucrReceiverElement")
-        Me.ucrReceiverElement.Name = "ucrReceiverElement"
-        Me.ucrReceiverElement.Selector = Nothing
-        Me.ucrReceiverElement.strNcFilePath = ""
-        Me.ucrReceiverElement.ucrSelector = Nothing
-        '
         'grpOptions
         '
         Me.grpOptions.Controls.Add(Me.ucrChkIgnoreInvalid)
@@ -176,6 +159,23 @@ Partial Class dlgTidyClimaticData
         Me.ucrChkSilent.Checked = False
         resources.ApplyResources(Me.ucrChkSilent, "ucrChkSilent")
         Me.ucrChkSilent.Name = "ucrChkSilent"
+        '
+        'ucrTextBoxElementName
+        '
+        Me.ucrTextBoxElementName.AddQuotesIfUnrecognised = True
+        Me.ucrTextBoxElementName.IsMultiline = False
+        Me.ucrTextBoxElementName.IsReadOnly = False
+        resources.ApplyResources(Me.ucrTextBoxElementName, "ucrTextBoxElementName")
+        Me.ucrTextBoxElementName.Name = "ucrTextBoxElementName"
+        '
+        'ucrReceiverElement
+        '
+        Me.ucrReceiverElement.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverElement, "ucrReceiverElement")
+        Me.ucrReceiverElement.Name = "ucrReceiverElement"
+        Me.ucrReceiverElement.Selector = Nothing
+        Me.ucrReceiverElement.strNcFilePath = ""
+        Me.ucrReceiverElement.ucrSelector = Nothing
         '
         'ucrReceiverMultipleStack
         '

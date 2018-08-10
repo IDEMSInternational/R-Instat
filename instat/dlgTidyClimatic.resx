@@ -516,14 +516,50 @@
   <data name="&gt;&gt;ucrTextBoxElementName.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+  <data name="ucrReceiverElement.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 98</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>452, 578</value>
+  <data name="ucrReceiverElement.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverElement.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverElement.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverElement.Name" xml:space="preserve">
+    <value>ucrReceiverElement</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverElement.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverElement.Parent" xml:space="preserve">
+    <value>grpElements</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverElement.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="grpElements.Location" type="System.Drawing.Point, System.Drawing">
+    <value>269, 356</value>
+  </data>
+  <data name="grpElements.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 132</value>
+  </data>
+  <data name="grpElements.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="&gt;&gt;grpElements.Name" xml:space="preserve">
+    <value>grpElements</value>
+  </data>
+  <data name="&gt;&gt;grpElements.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpElements.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpElements.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="ucrChkIgnoreInvalid.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 19</value>
@@ -591,29 +627,14 @@
   <data name="&gt;&gt;grpOptions.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="ucrReceiverMultipleStack.Location" type="System.Drawing.Point, System.Drawing">
-    <value>282, 98</value>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
   </data>
-  <data name="ucrReceiverMultipleStack.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrReceiverMultipleStack.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 100</value>
-  </data>
-  <data name="ucrReceiverMultipleStack.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverMultipleStack.Name" xml:space="preserve">
-    <value>ucrReceiverMultipleStack</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverMultipleStack.Type" xml:space="preserve">
-    <value>instat.ucrReceiverMultiple, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverMultipleStack.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverMultipleStack.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>452, 578</value>
   </data>
   <data name="ucrReceiverMonth.Location" type="System.Drawing.Point, System.Drawing">
     <value>282, 276</value>
@@ -664,7 +685,7 @@
     <value>7</value>
   </data>
   <data name="ucrNewDFName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 494</value>
+    <value>10, 494</value>
   </data>
   <data name="ucrNewDFName.Size" type="System.Drawing.Size, System.Drawing">
     <value>307, 24</value>
@@ -730,7 +751,7 @@
     <value>15</value>
   </data>
   <data name="ucrSelectorTidyClimaticData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 85</value>
+    <value>10, 85</value>
   </data>
   <data name="ucrSelectorTidyClimaticData.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -778,7 +799,7 @@
     <value>18</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 524</value>
+    <value>10, 524</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 52</value>
@@ -798,6 +819,9 @@
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>19</value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -810,49 +834,28 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ucrReceiverElement.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 98</value>
+  <data name="ucrReceiverMultipleStack.Location" type="System.Drawing.Point, System.Drawing">
+    <value>282, 98</value>
   </data>
-  <data name="ucrReceiverElement.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ucrReceiverMultipleStack.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="ucrReceiverElement.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
+  <data name="ucrReceiverMultipleStack.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 100</value>
   </data>
-  <data name="ucrReceiverElement.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
+  <data name="ucrReceiverMultipleStack.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverElement.Name" xml:space="preserve">
-    <value>ucrReceiverElement</value>
+  <data name="&gt;&gt;ucrReceiverMultipleStack.Name" xml:space="preserve">
+    <value>ucrReceiverMultipleStack</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverElement.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;ucrReceiverMultipleStack.Type" xml:space="preserve">
+    <value>instat.ucrReceiverMultiple, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverElement.Parent" xml:space="preserve">
-    <value>grpElements</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverElement.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="grpElements.Location" type="System.Drawing.Point, System.Drawing">
-    <value>269, 356</value>
-  </data>
-  <data name="grpElements.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 132</value>
-  </data>
-  <data name="grpElements.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
-  </data>
-  <data name="&gt;&gt;grpElements.Name" xml:space="preserve">
-    <value>grpElements</value>
-  </data>
-  <data name="&gt;&gt;grpElements.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpElements.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverMultipleStack.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;grpElements.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;ucrReceiverMultipleStack.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
 </root>

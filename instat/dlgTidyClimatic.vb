@@ -23,7 +23,7 @@ Public Class dlgTidyClimaticData
 
     Private iTextBoxMaxY As Integer
 
-    Private Sub dlgReshapeClimaticData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgTidyClimaticData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             iTextBoxMaxY = grpElements.Location.Y
             InitialiseDialog()
@@ -102,6 +102,10 @@ Public Class dlgTidyClimaticData
 
         ucrPnlReshapeClimaticData.AddToLinkedControls(ucrReceiverMonth, {rdoDay}, bNewLinkedHideIfParameterMissing:=True)
 
+        ucrPnlReshapeClimaticData.AddToLinkedControls(ucrReceiverYear, {rdoDay, rdoMonth}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlReshapeClimaticData.AddToLinkedControls(ucrReceiverElement, {rdoDay, rdoMonth}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlReshapeClimaticData.AddToLinkedControls(ucrReceiverStation, {rdoDay, rdoMonth}, bNewLinkedHideIfParameterMissing:=True)
+
         ucrPnlReshapeClimaticData.AddParameterValuesCondition(rdoYear, "format", Chr(34) & "years" & Chr(34))
         ucrPnlReshapeClimaticData.AddParameterValuesCondition(rdoMonth, "format", Chr(34) & "months" & Chr(34))
         ucrPnlReshapeClimaticData.AddParameterValuesCondition(rdoDay, "format", Chr(34) & "days" & Chr(34))
@@ -116,9 +120,9 @@ Public Class dlgTidyClimaticData
         ucrReceiverElement.SetLinkedDisplayControl(lblMultipleElement)
         ucrTextBoxElementName.SetLinkedDisplayControl(lblElementName)
 
-        ucrNewDFName.SetIsComboBox()
+        ucrNewDFName.SetIsTextBox()
         ucrNewDFName.SetSaveTypeAsDataFrame()
-        ucrNewDFName.SetCheckBoxText("New Data Frame Name")
+        ucrNewDFName.SetLabelText("New Data Frame Name:")
         ucrNewDFName.SetDataFrameSelector(ucrSelectorTidyClimaticData.ucrAvailableDataFrames)
 
     End Sub
@@ -180,14 +184,12 @@ Public Class dlgTidyClimaticData
 
     Private Sub ucrPnlReshapeClimaticData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlReshapeClimaticData.ControlValueChanged
         UpdateParameters()
-        ShowReceivers()
+        ShowOr()
         ElementGroupLocation()
         ColumnstoStackText()
     End Sub
 
     Private Sub UpdateParameters()
-
-        clsTidyClimaticFunction.RemoveParameterByName("format")
 
         If rdoYear.Checked Then
             clsTidyClimaticFunction.AddParameter("format", Chr(34) & "years" & Chr(34), iPosition:=1)
@@ -199,17 +201,11 @@ Public Class dlgTidyClimaticData
 
     End Sub
 
-    Private Sub ShowReceivers()
+    Private Sub ShowOr()
         If rdoYear.Checked Then
-            ucrReceiverYear.Visible = False
-            ucrReceiverElement.Visible = False
-            ucrReceiverStation.Visible = False
             lblOr.Visible = False
             ucrReceiverMultipleStack.SetMeAsReceiver()
         Else
-            ucrReceiverYear.Visible = True
-            ucrReceiverElement.Visible = True
-            ucrReceiverStation.Visible = True
             lblOr.Visible = True
         End If
     End Sub
