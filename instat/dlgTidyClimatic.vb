@@ -133,8 +133,8 @@ Public Class dlgTidyClimaticData
         ucrSelectorTidyClimaticData.Reset()
         ucrReceiverMultipleStack.SetMeAsReceiver()
         ucrNewDFName.Reset()
+        NewDefaultName()
 
-        ucrNewDFName.SetPrefix(ucrSelectorTidyClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_tidy")
         clsTidyClimaticFunction.AddParameter("format", Chr(34) & "years" & Chr(34), iPosition:=3)
 
         clsTidyClimaticFunction.SetRCommand("tidy_climatic_data")
