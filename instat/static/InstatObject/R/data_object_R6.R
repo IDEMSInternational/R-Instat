@@ -1128,8 +1128,8 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
       tmp_attr <- get_column_attributes(curr_col)
     }
     if(!is.null(factor_values) && is.factor(curr_col) && to_type %in% c("integer", "numeric")) {
-      if(factor_values == "force_ordinals") curr_col <- as.numeric(curr_col)
-      else if(factor_values == "force_values") curr_col <- as.numeric(levels(curr_col))[curr_col]
+      if(factor_values == "force_ordinals") new_col <- as.numeric(curr_col)
+      else if(factor_values == "force_values") new_col <- as.numeric(levels(curr_col))[curr_col]
       else stop("If specified, 'factor_values' must be either 'force_ordinals' or 'force_values'")
     }
     else if(to_type %in% c("factor", "ordered_factor")) {
@@ -1160,7 +1160,7 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
     }
     else if(to_type == "numeric") {
       if(ignore_labels) {
-        new_col <- sjlabelled::as_numeric(curr_col, keep.labels = keep.labels)
+        new_col <- as.numeric(curr_col)
       }
       else {
         if(self$is_variables_metadata(labels_label, col_name) && !is.numeric(curr_col)) {
@@ -1176,6 +1176,8 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
           }
           new_col <- as.numeric(curr_labels[as.character(curr_col)])
         }
+        # This ensures that integer columns get type changed to numeric (not done by sjlabelled::as_numeric)
+        else if(is.integer(curr_col)) new_col <- as.numeric(curr_col)
         else new_col <- sjlabelled::as_numeric(curr_col, keep.labels = keep.labels)
       }
     }
@@ -1981,13 +1983,20 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
 }
 )
 
-data_object$set("public","make_date_yearmonthday", function(year, month, day, year_format = "%Y", month_format = "%m", day_format = "%d") {
-  year_col <- self$get_columns_from_data(year, use_current_filter = FALSE)
-  month_col <- self$get_columns_from_data(month, use_current_filter = FALSE)
-  day_col <- self$get_columns_from_data(day, use_current_filter = FALSE)
+data_object$set("public","make_date_yearmonthday", function(year, month, day, f_year, f_month, f_day, year_format = "%Y", month_format = "%m") {
+  if(!missing(year)) year_col <- self$get_columns_from_data(year, use_current_filter = FALSE)
+  else if(!missing(f_year)) year_col <- f_year
+  else stop("One of year or f_year must be specified.")
+  if(!missing(month)) month_col <- self$get_columns_from_data(month, use_current_filter = FALSE)
+  else if(!missing(f_month)) month_col <- f_month
+  else stop("One of month or f_month must be specified.")
+  if(!missing(day)) day_col <- self$get_columns_from_data(day, use_current_filter = FALSE)
+  else if(!missing(f_day)) day_col <- f_day
+  else stop("One of day or f_day must be specified.")
+  
   if(missing(year_format)) {
-    year_counts <- stringr::str_count(year)
-    if(anyDuplicated(year_counts) != 0) stop("Year column has inconsistent year formats")
+    year_counts <- stringr::str_count(year_col)
+    if(length(unique(year_counts)) > 1) stop("Year column has inconsistent year formats")
     else {
       year_length <- year_counts[1]
       if(year_length == 2) year_format = "%y"
@@ -1996,15 +2005,12 @@ data_object$set("public","make_date_yearmonthday", function(year, month, day, ye
     }
   }
   if(missing(month_format)) {
-    if(all(month %in% month.name)) month_format = "%B"
-    else if(all(month %in% month.abb)) month_format = "%b"
-    else if(all(month %in% 1:12)) month_format = "%m"
+    if(all(month_col %in% 1:12)) month_format = "%m"
+    else if(all(month_col %in% month.abb)) month_format = "%b"
+    else if(all(month_col %in% month.name)) month_format = "%B"
     else stop("Cannot detect month format")
   }
-  if(missing(day_format)) {
-    #TODO
-  }
-  return(as.Date(paste(year_col, month_col, day_col), format = paste(year_format, month_format, day_format)))
+  return(as.Date(paste(year_col, month_col, day_col), format = paste(year_format, month_format, "%d")))
 }
 )
 

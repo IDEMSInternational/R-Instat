@@ -1106,8 +1106,8 @@ instat_object$set("public","graph_one_variable", function(data_name, columns, nu
 }
 )
 
-instat_object$set("public","make_date_yearmonthday", function(data_name, year, month, day, year_format = "%Y", month_format = "%m", day_format = "%d") {
-  self$get_data_objects(data_name)$make_date_yearmonthday(year = year, month = month, day = day, year_format = year_format, month_format = month_format, day_format = day_format)
+instat_object$set("public","make_date_yearmonthday", function(data_name, year, month, day, f_year, f_month, f_day, year_format = "%Y", month_format = "%m") {
+  self$get_data_objects(data_name)$make_date_yearmonthday(year = year, month = month, day = day, f_year = f_year, f_month = f_month, f_day = f_day, year_format = year_format, month_format = month_format)
 }
 )
 
@@ -1186,7 +1186,7 @@ instat_object$set("public","make_inventory_plot", function(data_name, date_col, 
 }
 )
 
-instat_object$set("public", "import_NetCDF", function(nc, name, only_data_vars = TRUE, keep_raw_time = TRUE, include_metadata = TRUE, boundary, lon_points = NULL, lat_points = NULL, show_requested_points = TRUE) {
+instat_object$set("public", "import_NetCDF", function(nc, name, only_data_vars = TRUE, keep_raw_time = TRUE, include_metadata = TRUE, boundary, lon_points = NULL, lat_points = NULL, id_points = NULL, show_requested_points = TRUE, great_circle_dist = TRUE) {
   if(only_data_vars) {
     all_var_names <- ncdf4.helpers::nc.get.variable.list(nc)
   }
@@ -1219,12 +1219,11 @@ instat_object$set("public", "import_NetCDF", function(nc, name, only_data_vars =
     else curr_boundary <- NULL
     curr_name <- make.names(curr_name)
     curr_name <- next_default_item(curr_name, self$get_data_names(), include_index = FALSE)
-    data_list[[curr_name]] <- nc_as_data_frame(nc, var_groups[[i]], keep_raw_time = keep_raw_time, include_metadata = include_metadata, boundary = curr_boundary, lon_points = lon_points, lat_points = lat_points, show_requested_points = show_requested_points)
+    data_list[[curr_name]] <- nc_as_data_frame(nc, var_groups[[i]], keep_raw_time = keep_raw_time, include_metadata = include_metadata, boundary = curr_boundary, lon_points = lon_points, lat_points = lat_points, id_points = id_points, show_requested_points = show_requested_points, great_circle_dist = great_circle_dist)
     tmp_list <- list()
     tmp_list[[curr_name]] <- data_list[[curr_name]]
     data_names <- c(data_names, curr_name)
     self$import_data(data_tables = tmp_list)
-    self$add_key(curr_name, dim_groups[[i]])
   }
   for(i in seq_along(data_names)) {
     for(j in seq_along(data_names)) {
