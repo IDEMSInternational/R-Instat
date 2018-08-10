@@ -69,7 +69,7 @@ Public Class dlgTidyClimaticData
         ucrReceiverElement.SetParameterIsString()
 
         ucrTextBoxElementName.SetParameter(New RParameter("element_name", 8))
-        ucrTextBoxElementName.SetRDefault("value")
+        ucrTextBoxElementName.SetRDefault(Chr(34) & "value" & Chr(34))
         ucrTextBoxElementName.SetValidationTypeAsRVariable()
 
         'rdoYear
