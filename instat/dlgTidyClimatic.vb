@@ -152,15 +152,13 @@ Public Class dlgTidyClimaticData
             Else
                 ucrBase.OKEnabled(False)
             End If
-        End If
-        If rdoMonth.Checked Then
+        ElseIf rdoMonth.Checked Then
             If Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverMultipleStack.IsEmpty AndAlso Not ucrReceiverDayofMonth.IsEmpty AndAlso ucrNewDFName.IsComplete Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
             End If
-        End If
-        If rdoDay.Checked Then
+        ElseIf rdoDay.Checked Then
             If Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverMonth.IsEmpty AndAlso Not ucrReceiverMultipleStack.IsEmpty AndAlso ucrNewDFName.IsComplete Then
                 ucrBase.OKEnabled(True)
             Else
@@ -187,6 +185,7 @@ Public Class dlgTidyClimaticData
         ShowOr()
         ElementGroupLocation()
         ColumnstoStackText()
+        ChangeCurrentReceiver()
     End Sub
 
     Private Sub UpdateParameters()
@@ -204,7 +203,6 @@ Public Class dlgTidyClimaticData
     Private Sub ShowOr()
         If rdoYear.Checked Then
             lblOr.Visible = False
-            ucrReceiverMultipleStack.SetMeAsReceiver()
         Else
             lblOr.Visible = True
         End If
@@ -235,6 +233,14 @@ Public Class dlgTidyClimaticData
         Else
             clsTidyClimaticFunction.AddParameter("element_name", Chr(34) & ucrTextBoxElementName.GetText & Chr(34), iPosition:=8)
             ucrTextBoxElementName.Enabled = True
+        End If
+    End Sub
+
+    Private Sub ChangeCurrentReceiver()
+        Dim CurrReceiver = ucrSelectorTidyClimaticData.CurrentReceiver
+
+        If (CurrReceiver Is ucrReceiverDayofMonth AndAlso Not rdoMonth.Checked) OrElse (CurrReceiver Is ucrReceiverMonth AndAlso Not rdoDay.Checked) OrElse (rdoYear.Checked) Then
+            ucrReceiverMultipleStack.SetMeAsReceiver()
         End If
     End Sub
 
