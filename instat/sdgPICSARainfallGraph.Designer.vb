@@ -45,6 +45,8 @@ Partial Class sdgPICSARainfallGraph
         Me.tbPICSA = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.grpAxes = New System.Windows.Forms.GroupBox()
+        Me.ucrChkRemoveYAxisTitle = New instat.ucrCheck()
+        Me.ucrChkRemoveXAxisTitle = New instat.ucrCheck()
         Me.UcrNudXAxisTitleSzie = New instat.ucrNud()
         Me.UcrNudYAxisTitleSzie = New instat.ucrNud()
         Me.UcrChkYAxisTitleSzie = New instat.ucrCheck()
@@ -94,8 +96,7 @@ Partial Class sdgPICSARainfallGraph
         Me.UcrChkPnlBackgroundLineType = New instat.ucrCheck()
         Me.UcrChkPnlBackgroundFill = New instat.ucrCheck()
         Me.ucrChkPnlBackgroundColour = New instat.ucrCheck()
-        Me.ucrChkRemoveXAxisTitle = New instat.ucrCheck()
-        Me.ucrChkRemoveYAxisTitle = New instat.ucrCheck()
+        Me.grpyAxisTitle = New System.Windows.Forms.GroupBox()
         Me.tbPICSA.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.grpAxes.SuspendLayout()
@@ -107,6 +108,7 @@ Partial Class sdgPICSARainfallGraph
         Me.TabPage4.SuspendLayout()
         Me.grpGridLines.SuspendLayout()
         Me.grpPnlBackground.SuspendLayout()
+        Me.grpyAxisTitle.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblYInStepsOf
@@ -252,6 +254,7 @@ Partial Class sdgPICSARainfallGraph
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.grpyAxisTitle)
         Me.TabPage1.Controls.Add(Me.grpAxes)
         Me.TabPage1.Controls.Add(Me.grpGraphTitles)
         resources.ApplyResources(Me.TabPage1, "TabPage1")
@@ -260,19 +263,26 @@ Partial Class sdgPICSARainfallGraph
         '
         'grpAxes
         '
-        Me.grpAxes.Controls.Add(Me.ucrChkRemoveYAxisTitle)
         Me.grpAxes.Controls.Add(Me.ucrChkRemoveXAxisTitle)
         Me.grpAxes.Controls.Add(Me.UcrNudXAxisTitleSzie)
-        Me.grpAxes.Controls.Add(Me.UcrNudYAxisTitleSzie)
-        Me.grpAxes.Controls.Add(Me.UcrChkYAxisTitleSzie)
         Me.grpAxes.Controls.Add(Me.UcrChkXAxisTitleSzie)
         Me.grpAxes.Controls.Add(Me.lblXAxis)
-        Me.grpAxes.Controls.Add(Me.lblYAxis)
         Me.grpAxes.Controls.Add(Me.ucrInputXAxisTitle)
-        Me.grpAxes.Controls.Add(Me.ucrInputYAxisTitle)
         resources.ApplyResources(Me.grpAxes, "grpAxes")
         Me.grpAxes.Name = "grpAxes"
         Me.grpAxes.TabStop = False
+        '
+        'ucrChkRemoveYAxisTitle
+        '
+        Me.ucrChkRemoveYAxisTitle.Checked = False
+        resources.ApplyResources(Me.ucrChkRemoveYAxisTitle, "ucrChkRemoveYAxisTitle")
+        Me.ucrChkRemoveYAxisTitle.Name = "ucrChkRemoveYAxisTitle"
+        '
+        'ucrChkRemoveXAxisTitle
+        '
+        Me.ucrChkRemoveXAxisTitle.Checked = False
+        resources.ApplyResources(Me.ucrChkRemoveXAxisTitle, "ucrChkRemoveXAxisTitle")
+        Me.ucrChkRemoveXAxisTitle.Name = "ucrChkRemoveXAxisTitle"
         '
         'UcrNudXAxisTitleSzie
         '
@@ -662,17 +672,16 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.ucrChkPnlBackgroundColour, "ucrChkPnlBackgroundColour")
         Me.ucrChkPnlBackgroundColour.Name = "ucrChkPnlBackgroundColour"
         '
-        'ucrChkRemoveXAxisTitle
+        'grpyAxisTitle
         '
-        Me.ucrChkRemoveXAxisTitle.Checked = False
-        resources.ApplyResources(Me.ucrChkRemoveXAxisTitle, "ucrChkRemoveXAxisTitle")
-        Me.ucrChkRemoveXAxisTitle.Name = "ucrChkRemoveXAxisTitle"
-        '
-        'ucrChkRemoveYAxisTitle
-        '
-        Me.ucrChkRemoveYAxisTitle.Checked = False
-        resources.ApplyResources(Me.ucrChkRemoveYAxisTitle, "ucrChkRemoveYAxisTitle")
-        Me.ucrChkRemoveYAxisTitle.Name = "ucrChkRemoveYAxisTitle"
+        Me.grpyAxisTitle.Controls.Add(Me.lblYAxis)
+        Me.grpyAxisTitle.Controls.Add(Me.ucrChkRemoveYAxisTitle)
+        Me.grpyAxisTitle.Controls.Add(Me.ucrInputYAxisTitle)
+        Me.grpyAxisTitle.Controls.Add(Me.UcrChkYAxisTitleSzie)
+        Me.grpyAxisTitle.Controls.Add(Me.UcrNudYAxisTitleSzie)
+        resources.ApplyResources(Me.grpyAxisTitle, "grpyAxisTitle")
+        Me.grpyAxisTitle.Name = "grpyAxisTitle"
+        Me.grpyAxisTitle.TabStop = False
         '
         'sdgPICSARainfallGraph
         '
@@ -699,6 +708,8 @@ Partial Class sdgPICSARainfallGraph
         Me.TabPage4.ResumeLayout(False)
         Me.grpGridLines.ResumeLayout(False)
         Me.grpPnlBackground.ResumeLayout(False)
+        Me.grpyAxisTitle.ResumeLayout(False)
+        Me.grpyAxisTitle.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -776,4 +787,5 @@ Partial Class sdgPICSARainfallGraph
     Friend WithEvents UcrChkTitleSize As ucrCheck
     Friend WithEvents ucrChkRemoveYAxisTitle As ucrCheck
     Friend WithEvents ucrChkRemoveXAxisTitle As ucrCheck
+    Friend WithEvents grpyAxisTitle As GroupBox
 End Class
