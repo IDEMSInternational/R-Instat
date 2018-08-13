@@ -29,7 +29,8 @@ instat_object <- R6::R6Class("instat_object",
                            .objects = list(),
                            .links = list(),
                            .data_objects_changed = FALSE,
-                           .database_connection = NULL
+                           .database_connection = NULL,
+                           .last_graph = NULL
                          ),
                          active = list(
                            data_objects_changed = function(new_value) {
@@ -143,15 +144,7 @@ instat_object$set("public", "import_RDS", function(data_RDS, keep_existing = TRU
       }
       new_links_list <- data_RDS$get_links()
       for(data_obj_name in data_RDS$get_data_names()) {
-        # fix for loading instat objects created before comments where added
-        # In older objects "include_comments" is not an argument to data_clone
-        # data_clone now contains ... argument so further changes to data object structure will not require similar fixes
-        if("set_comments" %in% names(data_RDS$get_data_objects(data_obj_name))) {
-          data_obj_clone <- data_RDS$get_data_objects(data_obj_name)$data_clone(include_objects = include_objects, include_metadata = include_metadata, include_logs = include_logs, include_filters = include_filters, include_calculations = include_calculations, include_comments = include_comments)
-        }
-        else {
-          data_obj_clone <- data_RDS$get_data_objects(data_obj_name)$data_clone(include_objects = include_objects, include_metadata = include_metadata, include_logs = include_logs, include_filters = include_filters, include_calculations = include_calculations)
-        }
+        data_obj_clone <- self$clone_data_object(data_RDS$get_data_objects(data_obj_name), include_objects = include_objects, include_metadata = include_metadata, include_logs = include_logs, include_filters = include_filters, include_calculations = include_calculations, include_comments = include_comments)
         if(data_obj_name %in% self$get_data_names() && !overwrite_existing) {
           new_name <- next_default_item(data_obj_name, self$get_data_names())
           data_obj_clone$append_to_metadata(data_name_label, new_name)
@@ -196,6 +189,41 @@ instat_object$set("public", "import_RDS", function(data_RDS, keep_existing = TRU
     self$import_data(data_tables = list(data_RDS = data_RDS))
   }
   else stop("Cannot import an objects of class", paste(class(data_RDS), collapse = ","))
+}
+)
+
+instat_object$set("public", "clone_data_object", function(curr_data_object, include_objects = TRUE, include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_calculations = TRUE, include_comments = TRUE, ...) {
+  curr_names <- names(curr_data_object)
+  if("get_data_frame" %in% curr_names) new_data <- curr_data_object$get_data_frame(use_current_filter = TRUE)
+  else stop("Cannot import data. No 'get_data_frame' method.")
+  if("get_metadata" %in% curr_names) new_data_name <- curr_data_object$get_metadata(data_name_label)
+  if(include_objects && "get_objects" %in% curr_names) new_objects <- curr_data_object$get_objects()
+  else new_objects <- list()
+  if(include_filters && "get_filter" %in% curr_names) new_filters <- lapply(curr_data_object$get_filter(), function(x) x$data_clone())
+  else new_filters <- list()
+  if(include_calculations && "get_calculations" %in% curr_names) new_calculations <- lapply(curr_data_object$get_calculations(), function(x) x$data_clone())
+  else new_calculations <- list()
+  if(include_comments && "get_comments" %in% curr_names) new_comments <- lapply(curr_data_object$get_comments(), function(x) x$data_clone())
+  else new_comments <- list()
+  if("get_keys" %in% curr_names) new_keys <- curr_data_object$get_keys()
+  else new_keys <- list()
+  
+  new_data_object <- data_object$new(data = new_data, data_name = new_data_name, filters = new_filters, objects = new_objects, calculations = new_calculations, keys = new_keys, comments = new_comments, keep_attributes = include_metadata)
+  if(include_logs && "get_changes" %in% curr_names) {
+    new_changes <- curr_data_object$get_changes()
+  }
+  else new_changes <- list()
+  new_data_object$set_changes(new_changes)
+  if(include_filters && "current_filter" %in% curr_names) new_data_object$current_filter <- curr_data_object$get_current_filter()
+  else new_data_object$remove_current_filter()
+  if(!include_metadata) {
+    new_data_object$clear_metadata()
+    new_data_object$clear_variables_metadata()
+  }
+  new_data_object$data_changed <- TRUE
+  new_data_object$metadata_changed <- TRUE
+  new_data_object$variables_metadata_changed <- TRUE
+  return(new_data_object)
 }
 )
 
@@ -545,6 +573,9 @@ instat_object$set("public", "delete_objects", function(data_name, object_names) 
     private$.objects[names(private$.objects) == object_names] <- NULL
   }
   else self$get_data_objects(data_name)$delete_objects(object_names = object_names)
+  if(!is.null(private$.last_graph) && length(private$.last_graph) == 2 && private$.last_graph[1] == data_name && private$.last_graph[2] %in% object_names) {
+    private$.last_graph <- NULL
+  }
 }
 )
 
@@ -602,6 +633,8 @@ instat_object$set("public", "get_from_model", function(data_name, model_name, va
 
 instat_object$set("public", "add_graph", function(data_name, graph, graph_name) {
   self$add_object(data_name = data_name, object = graph, object_name = graph_name)
+  last_graph_name <- self$get_data_objects(data_name)$get_last_graph_name()
+  if(!is.null(last_graph_name)) private$.last_graph <- c(data_name, last_graph_name)
 }
 )
 
@@ -612,6 +645,13 @@ instat_object$set("public", "get_graphs", function(data_name, graph_name, includ
 
 instat_object$set("public", "get_graph_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
   self$get_object_names(data_name = data_name, include_overall = include_overall, include, exclude, type = graph_label, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items)
+}
+)
+
+instat_object$set("public", "get_last_graph", function(print_graph = TRUE) {
+  if(!is.null(private$.last_graph) && length(private$.last_graph) == 2) {
+    self$get_objects(data_name = private$.last_graph[1], object_name = private$.last_graph[2], type = graph_label, print_graph = print_graph)
+  }
 }
 )
 
@@ -799,6 +839,7 @@ instat_object$set("public", "delete_dataframes", function(data_names) {
       #TODO Should we be able to disable links instead of deleting?
       self$remove_link(link_name)
     }
+    if(!is.null(private$.last_graph) && private$.last_graph[1] %in% data_names) private$.last_graph <- NULL
   }
 } 
 )
