@@ -1085,41 +1085,38 @@
   <data name="ToolStripSeparator18.Size" type="System.Drawing.Size, System.Drawing">
     <value>209, 6</value>
   </data>
-  <data name="ReshapeDataToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="ReshapeDataToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuClimaticTidyandExamineTidyData.Size" type="System.Drawing.Size, System.Drawing">
     <value>211, 22</value>
   </data>
-  <data name="ReshapeDataToolStripMenuItem.Text" xml:space="preserve">
-    <value>Reshape Data...</value>
+  <data name="mnuClimaticTidyandExamineTidyData.Text" xml:space="preserve">
+    <value>Tidy Data...</value>
   </data>
-  <data name="mnuClimaticReshapeandExamineNonNumericCases.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuClimaticTidyandExamineNonNumericCases.Size" type="System.Drawing.Size, System.Drawing">
     <value>211, 22</value>
   </data>
-  <data name="mnuClimaticReshapeandExamineNonNumericCases.Text" xml:space="preserve">
+  <data name="mnuClimaticTidyandExamineNonNumericCases.Text" xml:space="preserve">
     <value>Non-numeric Cases...</value>
   </data>
-  <data name="mnuClimaticReshapeandExamineReplaceValues.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuClimaticTidyandExamineReplaceValues.Size" type="System.Drawing.Size, System.Drawing">
     <value>211, 22</value>
   </data>
-  <data name="mnuClimaticReshapeandExamineReplaceValues.Text" xml:space="preserve">
+  <data name="mnuClimaticTidyandExamineReplaceValues.Text" xml:space="preserve">
     <value>Replace Values...</value>
   </data>
   <data name="ToolStripSeparator50.Size" type="System.Drawing.Size, System.Drawing">
     <value>208, 6</value>
   </data>
-  <data name="mnuClimaticReshapeandExamineOneVariableSummarize.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuClimaticTidyandExamineOneVariableSummarize.Size" type="System.Drawing.Size, System.Drawing">
     <value>211, 22</value>
   </data>
-  <data name="mnuClimaticReshapeandExamineOneVariableSummarize.Text" xml:space="preserve">
+  <data name="mnuClimaticTidyandExamineOneVariableSummarize.Text" xml:space="preserve">
     <value>One Variable Summarise...</value>
   </data>
-  <data name="mnuClimaticReshapeandExamine.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuClimaticTidyandExamine.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 22</value>
   </data>
-  <data name="mnuClimaticReshapeandExamine.Text" xml:space="preserve">
-    <value>Reshape and Examine</value>
+  <data name="mnuClimaticTidyandExamine.Text" xml:space="preserve">
+    <value>Tidy and Examine</value>
   </data>
   <data name="mnuClimaticDatesGenerateDates.Size" type="System.Drawing.Size, System.Drawing">
     <value>182, 22</value>
@@ -6616,6 +6613,12 @@
   <data name="&gt;&gt;OpenNetCDFToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;mnuClimaticFileImportShapeFile.Name" xml:space="preserve">
+    <value>mnuClimaticFileImportShapeFile</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticFileImportShapeFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;mnuClimateFileClimSoft.Name" xml:space="preserve">
     <value>mnuClimateFileClimSoft</value>
   </data>
@@ -6646,28 +6649,28 @@
   <data name="&gt;&gt;ToolStripSeparator18.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuClimaticReshapeandExamine.Name" xml:space="preserve">
-    <value>mnuClimaticReshapeandExamine</value>
+  <data name="&gt;&gt;mnuClimaticTidyandExamine.Name" xml:space="preserve">
+    <value>mnuClimaticTidyandExamine</value>
   </data>
-  <data name="&gt;&gt;mnuClimaticReshapeandExamine.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuClimaticTidyandExamine.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ReshapeDataToolStripMenuItem.Name" xml:space="preserve">
-    <value>ReshapeDataToolStripMenuItem</value>
+  <data name="&gt;&gt;mnuClimaticTidyandExamineTidyData.Name" xml:space="preserve">
+    <value>mnuClimaticTidyandExamineTidyData</value>
   </data>
-  <data name="&gt;&gt;ReshapeDataToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuClimaticTidyandExamineTidyData.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuClimaticReshapeandExamineNonNumericCases.Name" xml:space="preserve">
-    <value>mnuClimaticReshapeandExamineNonNumericCases</value>
+  <data name="&gt;&gt;mnuClimaticTidyandExamineNonNumericCases.Name" xml:space="preserve">
+    <value>mnuClimaticTidyandExamineNonNumericCases</value>
   </data>
-  <data name="&gt;&gt;mnuClimaticReshapeandExamineNonNumericCases.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuClimaticTidyandExamineNonNumericCases.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuClimaticReshapeandExamineReplaceValues.Name" xml:space="preserve">
-    <value>mnuClimaticReshapeandExamineReplaceValues</value>
+  <data name="&gt;&gt;mnuClimaticTidyandExamineReplaceValues.Name" xml:space="preserve">
+    <value>mnuClimaticTidyandExamineReplaceValues</value>
   </data>
-  <data name="&gt;&gt;mnuClimaticReshapeandExamineReplaceValues.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuClimaticTidyandExamineReplaceValues.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator50.Name" xml:space="preserve">
@@ -6676,10 +6679,10 @@
   <data name="&gt;&gt;ToolStripSeparator50.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuClimaticReshapeandExamineOneVariableSummarize.Name" xml:space="preserve">
-    <value>mnuClimaticReshapeandExamineOneVariableSummarize</value>
+  <data name="&gt;&gt;mnuClimaticTidyandExamineOneVariableSummarize.Name" xml:space="preserve">
+    <value>mnuClimaticTidyandExamineOneVariableSummarize</value>
   </data>
-  <data name="&gt;&gt;mnuClimaticReshapeandExamineOneVariableSummarize.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuClimaticTidyandExamineOneVariableSummarize.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuClimaticDates.Name" xml:space="preserve">
@@ -8756,12 +8759,6 @@
     <value>ExportToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;ExportToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuClimaticFileImportShapeFile.Name" xml:space="preserve">
-    <value>mnuClimaticFileImportShapeFile</value>
-  </data>
-  <data name="&gt;&gt;mnuClimaticFileImportShapeFile.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
