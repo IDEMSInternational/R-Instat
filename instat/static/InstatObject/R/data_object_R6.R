@@ -63,7 +63,8 @@ data_object <- R6::R6Class("data_object",
                            .current_filter = list(),
                            .data_changed = FALSE,
                            .metadata_changed = FALSE, 
-                           .variables_metadata_changed = FALSE 
+                           .variables_metadata_changed = FALSE,
+                           .last_graph = NULL
                           ),
                           active = list(
                             data_changed = function(new_value) {
@@ -1614,6 +1615,9 @@ data_object$set("public", "add_object", function(object, object_name) {
   if(object_name %in% names(private$objects)) message("An object called ", object_name, " already exists. It will be replaced.")
   private$objects[[object_name]] <- object
   self$append_to_changes(list(Added_object, object_name))
+  if(any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot") %in% class(object))) {
+    private$.last_graph <- object_name
+  }
 }
 )
 
@@ -1654,6 +1658,18 @@ data_object$set("public", "get_object_names", function(type = "", as_list = FALS
 }
 )
 
+data_object$set("public", "get_last_graph_name", function() {
+  return(private$.last_graph)
+}
+)
+
+data_object$set("public", "get_last_graph", function() {
+  if(!is.null(private$.last_graph)) {
+    self$get_objects(object_name = private$.last_graph, type = graph_label)
+  }
+}
+)
+
 data_object$set("public", "rename_object", function(object_name, new_name) {
   if(!object_name %in% names(private$objects)) stop(object_name, " not found in objects list")
   if(new_name %in% names(private$objects)) stop(new_name, " is already an object name. Cannot rename ", object_name, " to ", new_name)
@@ -1664,6 +1680,9 @@ data_object$set("public", "rename_object", function(object_name, new_name) {
 data_object$set("public", "delete_objects", function(object_names) {
   if(!all(object_names %in% names(private$objects))) stop("Not all object_names found in objects list")
   private$objects[names(private$objects) == object_names] <- NULL
+  if(!is.null(private$.last_graph) && private$.last_graph %in% object_names) {
+    private$.last_graph <- NULL
+  }
 }
 )
 
