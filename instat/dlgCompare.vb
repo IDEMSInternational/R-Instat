@@ -21,8 +21,17 @@ Public Class dlgCompare
     Private bReset As Boolean = True
 
 
+    Private iReceiverSateliteY As Integer
+    Private iReceiverLabelSateliteY As Integer
+    Private iReceiverStationY As Integer
+    Private iReceiverLabelStationY As Integer
+
     Private Sub dlgCompare_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
+            iReceiverSateliteY = ucrReceiverSateliteElement.Location.Y
+            iReceiverLabelSateliteY = lblSateliteElement.Location.Y
+            iReceiverStationY = ucrReceiverStationElement.Location.Y
+            iReceiverLabelStationY = lblStationElement.Location.Y
             InitialiseDialog()
             bFirstLoad = False
         End If
@@ -37,6 +46,19 @@ Public Class dlgCompare
 
     Private Sub InitialiseDialog()
 
+        ucrPnlCompare.AddRadioButton(rdoAnomalies)
+        ucrPnlCompare.AddRadioButton(rdoDifferences)
+
+        ucrPnlCompare.AddToLinkedControls(ucrReceiverStationElement, {rdoDifferences, rdoAnomalies}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlCompare.AddToLinkedControls(ucrReceiverSateliteElement, {rdoDifferences, rdoAnomalies}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlCompare.AddToLinkedControls(ucrReceiverStation, {rdoAnomalies}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlCompare.AddToLinkedControls(ucrReceiverWithinYear, {rdoAnomalies}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlCompare.AddToLinkedControls(ucrSaveBias, {rdoDifferences}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlCompare.AddToLinkedControls(ucrSaveAbsDev, {rdoDifferences}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlCompare.AddToLinkedControls(ucrSaveSateliteAnomalies, {rdoAnomalies}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlCompare.AddToLinkedControls(ucrSaveStationAnomalies, {rdoAnomalies}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+
+
         ucrSelectorCompare.SetParameter(New RParameter("", 0))
         ucrSelectorCompare.SetParameterIsrfunction()
 
@@ -49,15 +71,6 @@ Public Class dlgCompare
         ucrReceiverStation.SetIncludedDataTypes({"factor"})
         ucrReceiverStation.strSelectorHeading = "Station Variables"
 
-        ucrReceiverYear.SetParameterIsString()
-        ucrReceiverYear.SetParameter(New RParameter(""))
-        ucrReceiverYear.Selector = ucrSelectorCompare
-        ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
-        ucrReceiverYear.bAutoFill = True
-        ucrReceiverYear.bWithQuotes = False
-        ucrReceiverYear.SetIncludedDataTypes({"numeric", "factor"})
-        ucrReceiverYear.strSelectorHeading = "Year Variables"
-
         ucrReceiverWithinYear.SetParameter(New RParameter("", 1))
         ucrReceiverWithinYear.SetParameterIsString()
         ucrReceiverWithinYear.bWithQuotes = False
@@ -65,15 +78,6 @@ Public Class dlgCompare
         ucrReceiverWithinYear.Selector = ucrSelectorCompare
         ucrReceiverWithinYear.SetIncludedDataTypes({"factor"})
 
-        ' others
-        ucrReceiverDate.SetParameter(New RParameter("date", 1))
-        ucrReceiverDate.SetParameterIsString()
-        ucrReceiverDate.Selector = ucrSelectorCompare
-        ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
-        ucrReceiverDate.bAutoFill = True
-        ucrReceiverDate.strSelectorHeading = "Date Variables"
-
-        ' summary
         ucrReceiverSateliteElement.SetParameter(New RParameter("", 0))
         ucrReceiverSateliteElement.SetParameterIsString()
         ucrReceiverSateliteElement.bWithQuotes = False
@@ -90,8 +94,8 @@ Public Class dlgCompare
         ucrReceiverStationElement.Selector = ucrSelectorCompare
         ucrReceiverStationElement.SetIncludedDataTypes({"numeric"})
 
-        ucrChkDifference.SetText("Difference")
-        ucrChkAbsoluteDifference.SetText("Absolute Difference")
+        ucrChkMovingAverage.SetText("Moving Average")
+        ucrChkMovingAverage.Enabled = False
 
         ucrSaveBias.SetPrefix("bias")
         ucrSaveBias.SetIsComboBox()
@@ -105,6 +109,26 @@ Public Class dlgCompare
         ucrSaveAbsDev.SetSaveTypeAsColumn()
         ucrSaveAbsDev.SetDataFrameSelector(ucrSelectorCompare.ucrAvailableDataFrames)
 
+
+        ucrSaveSateliteAnomalies.SetPrefix("satelite_anomalies")
+        ucrSaveSateliteAnomalies.SetIsTextBox()
+        ucrSaveSateliteAnomalies.SetLabelText("Satelite Anomalies")
+        ucrSaveSateliteAnomalies.SetSaveTypeAsColumn()
+        ucrSaveSateliteAnomalies.SetDataFrameSelector(ucrSelectorCompare.ucrAvailableDataFrames)
+
+        ucrSaveStationAnomalies.SetPrefix("station_anomalies")
+        ucrSaveStationAnomalies.SetIsTextBox()
+        ucrSaveStationAnomalies.SetLabelText("Station Anomalies")
+        ucrSaveStationAnomalies.SetSaveTypeAsColumn()
+        ucrSaveStationAnomalies.SetDataFrameSelector(ucrSelectorCompare.ucrAvailableDataFrames)
+
+        ucrReceiverStation.SetLinkedDisplayControl(lblStation)
+        ucrReceiverWithinYear.SetLinkedDisplayControl(lblWithinYear)
+        ucrReceiverSateliteElement.SetLinkedDisplayControl(lblSateliteElement)
+        ucrReceiverStationElement.SetLinkedDisplayControl(lblStationElement)
+
+        ucrChkMovingAverage.AddToLinkedControls(ucrNudMovingAverage, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+
     End Sub
 
     Private Sub SetDefaults()
@@ -116,7 +140,7 @@ Public Class dlgCompare
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverSateliteElement.IsEmpty AndAlso Not ucrReceiverStationElement.IsEmpty AndAlso (ucrChkAbsoluteDifference.Checked OrElse ucrChkDifference.Checked) Then
+        If Not ucrReceiverSateliteElement.IsEmpty AndAlso Not ucrReceiverStationElement.IsEmpty AndAlso (ucrChkMovingAverage.Checked) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -134,4 +158,21 @@ Public Class dlgCompare
         TestOkEnabled()
     End Sub
 
+    Private Sub ElementsLabelReceiverLocation()
+        If rdoDifferences.Checked Then
+            lblSateliteElement.Location = New Point(lblSateliteElement.Location.X, iReceiverLabelSateliteY / 2.0)
+            lblStationElement.Location = New Point(lblStationElement.Location.X, iReceiverLabelStationY / 1.7)
+            ucrReceiverSateliteElement.Location = New Point(ucrReceiverSateliteElement.Location.X, iReceiverSateliteY / 1.85)
+            ucrReceiverStationElement.Location = New Point(ucrReceiverStationElement.Location.X, iReceiverStationY / 1.6)
+        Else
+            lblSateliteElement.Location = New Point(lblSateliteElement.Location.X, iReceiverLabelSateliteY)
+            ucrReceiverSateliteElement.Location = New Point(ucrReceiverSateliteElement.Location.X, iReceiverSateliteY)
+            lblStationElement.Location = New Point(lblStationElement.Location.X, iReceiverLabelStationY)
+            ucrReceiverStationElement.Location = New Point(ucrReceiverStationElement.Location.X, iReceiverStationY)
+        End If
+    End Sub
+
+    Private Sub ucrPnlCompare_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlCompare.ControlValueChanged
+        ElementsLabelReceiverLocation()
+    End Sub
 End Class
