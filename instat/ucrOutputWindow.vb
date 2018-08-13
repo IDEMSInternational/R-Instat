@@ -15,8 +15,6 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.ComponentModel
-Imports System.Globalization
-Imports System.Threading
 Imports instat.Translations
 
 Public Class ucrOutputWindow
@@ -88,5 +86,17 @@ Public Class ucrOutputWindow
                 End If
             End If
         Next
+    End Sub
+
+    Private Sub clearRTB_Click(sender As Object, e As EventArgs) Handles clearRTB.Click
+        Dim rstResponse As DialogResult
+        If String.IsNullOrEmpty(ucrRichTextBox.rtbOutput.Selection.Text) Then
+            rstResponse = MessageBox.Show("Are you sure you want to clear the Output Window?", "Clear Output Window", MessageBoxButtons.YesNo)
+            If rstResponse = DialogResult.Yes Then
+                ucrRichTextBox.rtbOutput.Document.Blocks.Clear()
+            End If
+        Else
+            ucrRichTextBox.rtbOutput.Selection.Text = ""
+        End If
     End Sub
 End Class
