@@ -43,12 +43,12 @@ Partial Class ucrOutputWindow
         Me.CopyRTB = New System.Windows.Forms.ToolStripMenuItem()
         Me.CopyImageRTB = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.deleteRTB = New System.Windows.Forms.ToolStripMenuItem()
         Me.clearRTB = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
         Me.ucrWPFrtfElementHost = New System.Windows.Forms.Integration.ElementHost()
         Me.ucrRichTextBox = New instat.ucrWPFRichTextBox()
-        Me.deleteRTB = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuContextRTB.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
         Me.SuspendLayout()
@@ -58,30 +58,36 @@ Partial Class ucrOutputWindow
         Me.mnuContextRTB.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.mnuContextRTB.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyRTB, Me.CopyImageRTB, Me.ToolStripSeparator1, Me.deleteRTB, Me.clearRTB})
         Me.mnuContextRTB.Name = "mnuContextRTB"
-        Me.mnuContextRTB.Size = New System.Drawing.Size(199, 163)
+        Me.mnuContextRTB.Size = New System.Drawing.Size(206, 163)
         '
         'CopyRTB
         '
         Me.CopyRTB.Name = "CopyRTB"
-        Me.CopyRTB.Size = New System.Drawing.Size(198, 30)
+        Me.CopyRTB.Size = New System.Drawing.Size(205, 30)
         Me.CopyRTB.Text = "Copy RichText"
         '
         'CopyImageRTB
         '
         Me.CopyImageRTB.Enabled = False
         Me.CopyImageRTB.Name = "CopyImageRTB"
-        Me.CopyImageRTB.Size = New System.Drawing.Size(198, 30)
+        Me.CopyImageRTB.Size = New System.Drawing.Size(205, 30)
         Me.CopyImageRTB.Text = "Copy Image"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(195, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(202, 6)
+        '
+        'deleteRTB
+        '
+        Me.deleteRTB.Name = "deleteRTB"
+        Me.deleteRTB.Size = New System.Drawing.Size(205, 30)
+        Me.deleteRTB.Text = "Delete Selected"
         '
         'clearRTB
         '
         Me.clearRTB.Name = "clearRTB"
-        Me.clearRTB.Size = New System.Drawing.Size(198, 30)
+        Me.clearRTB.Size = New System.Drawing.Size(205, 30)
         Me.clearRTB.Text = "Clear"
         '
         'lblHeader
@@ -125,12 +131,6 @@ Partial Class ucrOutputWindow
         Me.ucrWPFrtfElementHost.TabIndex = 0
         Me.ucrWPFrtfElementHost.Text = "ucrWPFrtfElementHost"
         Me.ucrWPFrtfElementHost.Child = Me.ucrRichTextBox
-        '
-        'deleteRTB
-        '
-        Me.deleteRTB.Name = "deleteRTB"
-        Me.deleteRTB.Size = New System.Drawing.Size(198, 30)
-        Me.deleteRTB.Text = "Delete"
         '
         'ucrOutputWindow
         '
