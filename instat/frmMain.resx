@@ -2197,18 +2197,6 @@
   <data name="mnuTbPaste.Text" xml:space="preserve">
     <value>&amp;Paste</value>
   </data>
-  <data name="mnuTbDelete.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="mnuTbDelete.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 34</value>
-  </data>
-  <data name="mnuTbDelete.Text" xml:space="preserve">
-    <value>&amp;Delete</value>
-  </data>
-  <data name="mnuTbDelete.ToolTipText" xml:space="preserve">
-    <value>Clear Output Window</value>
-  </data>
   <data name="separator1.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 37</value>
   </data>
@@ -7463,12 +7451,6 @@
     <value>mnuTbPaste</value>
   </data>
   <data name="&gt;&gt;mnuTbPaste.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuTbDelete.Name" xml:space="preserve">
-    <value>mnuTbDelete</value>
-  </data>
-  <data name="&gt;&gt;mnuTbDelete.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;separator1.Name" xml:space="preserve">

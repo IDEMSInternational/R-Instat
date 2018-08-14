@@ -693,10 +693,6 @@ Public Class frmMain
         dlgTransformText.ShowDialog()
     End Sub
 
-    Private Sub mnuTbDelete_Click(sender As Object, e As EventArgs) Handles mnuTbDelete.Click
-        mnuToolsClearOutputWindow_Click(sender, e)
-    End Sub
-
     Private Sub mnuEditSelectAll_Click(sender As Object, e As EventArgs) Handles mnuEditSelectAll.Click
         If ctrActive IsNot Nothing Then
             If ctrActive.Equals(ucrDataViewer) Then
