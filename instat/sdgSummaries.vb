@@ -121,7 +121,7 @@ Public Class sdgSummaries
         ucrChkPercentile.SetParameter(New RParameter("summary_quantile", 27), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_quantile" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkPercentile.SetText("Percentile")
 
-        ucrInputPercentile.SetParameter(New RParameter("probs", 7))
+        ucrInputPercentile.SetParameter(New RParameter("probs", 12))
         ucrInputPercentile.SetValidationTypeAsNumeric(dcmMin:=0, dcmMax:=1)
         ucrInputPercentile.AddQuotesIfUnrecognised = False
 
@@ -134,27 +134,33 @@ Public Class sdgSummaries
         ucrChkProportion.AddToLinkedControls(ucrChkPercentage, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkCount.AddToLinkedControls(ucrInputComboCountTest, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="==")
         ucrChkCount.AddToLinkedControls(ucrInputCountValue, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
-        ucrChkIncludeMissingOpt.AddToLinkedControls(ucrPnlMissingOptions, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlMissingOptions.AddToLinkedControls({ucrNudNumber}, {rdoNumber}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlMissingOptions.AddToLinkedControls({ucrNudPercentage}, {rdoPercentage}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeMissingOpt.AddToLinkedControls(ucrPnlMissingOptions, {True},  bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoNumber)
+        ucrPnlMissingOptions.AddToLinkedControls({ucrNudNumber}, {rdoNumber}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrPnlMissingOptions.AddToLinkedControls({ucrNudPercentage}, {rdoPercentage}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
 
         ucrInputN.SetLinkedDisplayControl(lblInputN)
         ucrNudFraction.SetLinkedDisplayControl(lblFractionTrimmed)
+        ucrNudNumber.SetLinkedDisplayControl(lblNumber)
+        ucrNudPercentage.SetLinkedDisplayControl(lblPercentage)
+
+        ucrPnlMissingOptions.SetParameter(New RParameter("na_type", 9))
+        ucrPnlMissingOptions.AddRadioButton(rdoNumber, Chr(34) & "'n'" & Chr(34))
+        ucrPnlMissingOptions.AddRadioButton(rdoPercentage, Chr(34) & "'prop'" & Chr(34))
 
         ucrChkTrimmedMean.SetParameter(New RParameter("summary_trimmed_mean", 27), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_trimmed_mean" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkTrimmedMean.SetText("Trimmed Mean")
 
-        ucrNudFraction.SetParameter(New RParameter("trimmed", 5))
+        ucrNudFraction.SetParameter(New RParameter("trimmed", 13))
         ucrNudFraction.Maximum = 0.5
         ucrNudFraction.DecimalPlaces = 2
         ucrNudFraction.Increment = 0.01
         ucrNudFraction.SetRDefault(0)
 
-        ucrInputN.SetParameter(New RParameter("n", 6))
+        ucrInputN.SetParameter(New RParameter("nth_value", 14))
         ucrInputN.AddQuotesIfUnrecognised = False
         ucrInputN.SetValidationTypeAsNumeric()
 
-        ucrInputComboPropTest.SetParameter(New RParameter("prop_test", 7))
+        ucrInputComboPropTest.SetParameter(New RParameter("prop_test", 9))
         Dim dctProportionTest As New Dictionary(Of String, String)
         dctProportionTest.Add("<", Chr(34) & "'<'" & Chr(34))
         dctProportionTest.Add("<=", Chr(34) & "'<='" & Chr(34))
@@ -168,7 +174,7 @@ Public Class sdgSummaries
         ucrInputPropValue.SetValidationTypeAsNumeric()
         ucrInputPropValue.AddQuotesIfUnrecognised = False
 
-        ucrInputComboCountTest.SetParameter(New RParameter("count_test", 7))
+        ucrInputComboCountTest.SetParameter(New RParameter("count_test", 11))
         Dim dctCountTest As New Dictionary(Of String, String)
         dctCountTest.Add("<", Chr(34) & "'<'" & Chr(34))
         dctCountTest.Add("<=", Chr(34) & "'<='" & Chr(34))
@@ -178,14 +184,14 @@ Public Class sdgSummaries
         ucrInputComboCountTest.SetItems(dctCountTest)
         ucrInputComboCountTest.SetDropDownStyleAsNonEditable()
 
-        ucrInputCountValue.SetParameter(New RParameter("count_value", 8))
+        ucrInputCountValue.SetParameter(New RParameter("count_value", 10))
         ucrInputCountValue.SetValidationTypeAsNumeric()
         ucrInputCountValue.AddQuotesIfUnrecognised = False
 
         ucrChkProportion.SetParameter(New RParameter("proportion_calc", 28), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "proportion_calc" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkProportion.SetText("Proportion")
 
-        ucrChkPercentage.SetParameter(New RParameter("As_percentage", 9))
+        ucrChkPercentage.SetParameter(New RParameter("As_percentage", 7))
         ucrChkPercentage.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkPercentage.SetRDefault("FALSE")
         ucrChkPercentage.SetText("As Percentage")
@@ -194,19 +200,18 @@ Public Class sdgSummaries
         ucrChkCount.SetText("Count")
 
         ucrChkIncludeMissingOpt.SetText("Inlcude Missing Options")
+        ucrChkIncludeMissingOpt.AddParameterPresentCondition(True, "na_type")
+        ucrChkIncludeMissingOpt.AddParameterPresentCondition(False, "na_type", False)
 
-        ucrPnlMissingOptions.AddRadioButton(rdoNumber)
-        ucrPnlMissingOptions.AddRadioButton(rdoPercentage)
+        ucrNudPercentage.SetParameter(New RParameter("na_max_prop", 10))
 
-        ucrNudPercentage.SetLinkedDisplayControl(lblPercentage)
-        ucrNudNumber.SetLinkedDisplayControl(lblNumber)
+        ucrNudNumber.SetParameter(New RParameter("na_max_n", 11))
 
         ucrChkStandardErrorOfMean.SetParameter(New RParameter("standard_error_mean", 30), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "standard_error_mean" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkStandardErrorOfMean.SetText("Standard Error of the Mean")
 
         lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkUpperQuartile, ucrChkLowerQuartile, ucrChkMedianAbsoluteDeviation, ucrChkKurtosis, ucrChkCoefficientOfVariation, ucrChkSkewness, ucrChkMc, ucrChkQn, ucrChkSn, ucrChkCorrelations, ucrChkCovariance, ucrChkFirst, ucrChkLast, ucrChknth, ucrChkn_distinct, ucrChkTrimmedMean, ucrChkPercentile, ucrChkProportion, ucrChkCount, ucrChkStandardErrorOfMean})
-        'TODO: This needs modifying summaries functions to allow this options to be implemented.
-        tbMissingOptions.Enabled = False
+
         For Each ctrTemp As ucrCheck In lstCheckboxes
             ctrTemp.SetParameterIncludeArgumentName(False)
             ctrTemp.SetRDefault(Chr(34) & Chr(34))
@@ -229,6 +234,11 @@ Public Class sdgSummaries
             ucrSelectorSecondVariable.SetDataframe(strDataFrame, False)
         End If
 
+        ucrNudPercentage.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudNumber.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkIncludeMissingOpt.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrPnlMissingOptions.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+
         ucrChkPercentage.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrInputPropValue.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrInputComboPropTest.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
@@ -237,6 +247,7 @@ Public Class sdgSummaries
         ucrInputPercentile.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrNudFraction.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrInputN.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+
         ucrChkCount.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkProportion.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkPercentile.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
