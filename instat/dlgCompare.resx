@@ -314,10 +314,10 @@
     <value>6</value>
   </data>
   <data name="ucrChkAbsDev.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 370</value>
+    <value>11, 349</value>
   </data>
   <data name="ucrChkAbsDev.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>121, 20</value>
   </data>
   <data name="ucrChkAbsDev.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -335,7 +335,7 @@
     <value>0</value>
   </data>
   <data name="ucrChkBias.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 333</value>
+    <value>10, 312</value>
   </data>
   <data name="ucrChkBias.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -356,7 +356,7 @@
     <value>1</value>
   </data>
   <data name="ucrInputAbsDev.Location" type="System.Drawing.Point, System.Drawing">
-    <value>117, 370</value>
+    <value>137, 349</value>
   </data>
   <data name="ucrInputAbsDev.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -377,7 +377,7 @@
     <value>2</value>
   </data>
   <data name="ucrInputBias.Location" type="System.Drawing.Point, System.Drawing">
-    <value>117, 332</value>
+    <value>140, 311</value>
   </data>
   <data name="ucrInputBias.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -467,7 +467,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>424, 468</value>
+    <value>424, 446</value>
   </data>
   <data name="ucrReceiverStation.Location" type="System.Drawing.Point, System.Drawing">
     <value>262, 202</value>
@@ -542,7 +542,7 @@
     <value>16</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 412</value>
+    <value>10, 390</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 52</value>
@@ -585,6 +585,9 @@
   </data>
   <data name="&gt;&gt;ucrSelectorCompare.ZOrder" xml:space="preserve">
     <value>18</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
