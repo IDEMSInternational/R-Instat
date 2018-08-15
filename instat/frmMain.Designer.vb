@@ -553,6 +553,7 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
+        Me.mnuClimaticTidyandExamineMerge = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1427,7 +1428,7 @@ Partial Class frmMain
         '
         'mnuClimaticTidyandExamine
         '
-        Me.mnuClimaticTidyandExamine.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticTidyandExamineTidyData, Me.mnuClimaticTidyandExamineNonNumericCases, Me.mnuClimaticTidyandExamineReplaceValues, Me.ToolStripSeparator50, Me.mnuClimaticTidyandExamineOneVariableSummarize})
+        Me.mnuClimaticTidyandExamine.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticTidyandExamineTidyData, Me.mnuClimaticTidyandExamineNonNumericCases, Me.mnuClimaticTidyandExamineReplaceValues, Me.mnuClimaticTidyandExamineMerge, Me.ToolStripSeparator50, Me.mnuClimaticTidyandExamineOneVariableSummarize})
         Me.mnuClimaticTidyandExamine.Name = "mnuClimaticTidyandExamine"
         resources.ApplyResources(Me.mnuClimaticTidyandExamine, "mnuClimaticTidyandExamine")
         '
@@ -3549,6 +3550,11 @@ Partial Class frmMain
         resources.ApplyResources(Me.ucrOutput, "ucrOutput")
         Me.ucrOutput.Name = "ucrOutput"
         '
+        'mnuClimaticTidyandExamineMerge
+        '
+        Me.mnuClimaticTidyandExamineMerge.Name = "mnuClimaticTidyandExamineMerge"
+        resources.ApplyResources(Me.mnuClimaticTidyandExamineMerge, "mnuClimaticTidyandExamineMerge")
+        '
         'frmMain
         '
         resources.ApplyResources(Me, "$this")
@@ -4107,4 +4113,5 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticPrepareLengthOfSeason As ToolStripMenuItem
     Friend WithEvents mnuClimaticPrepareCompare As ToolStripMenuItem
     Friend WithEvents mnuClimaticFileImportShapeFile As ToolStripMenuItem
+    Friend WithEvents mnuClimaticTidyandExamineMerge As ToolStripMenuItem
 End Class
