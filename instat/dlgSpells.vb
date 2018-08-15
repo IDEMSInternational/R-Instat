@@ -103,7 +103,7 @@ Public Class dlgSpells
 
         ucrChkConditional.SetText("Assuming Condition Satified at Start of Each Period")
         ucrChkConditional.SetParameter(New RParameter("initial_value"))
-        ucrChkConditional.SetValuesCheckedAndUnchecked("NA", "0")
+        ucrChkConditional.SetValuesCheckedAndUnchecked("0", "NA")
 
         ucrInputNewColumnName.SetParameter(New RParameter("result_name", 2))
         ucrInputNewColumnName.SetDataFrameSelector(ucrSelectorForSpells.ucrAvailableDataFrames)
