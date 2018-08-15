@@ -94,6 +94,17 @@ Public Class GgplotDefaults
         End Get
     End Property
 
+    Public Shared ReadOnly Property clsYScaleDateFunction As RFunction
+        Get
+            Dim clsYlabScalesDateTempFunc As New RFunction
+
+            clsYlabScalesDateTempFunc.SetPackageName("ggplot2")
+            clsYlabScalesDateTempFunc.SetRCommand("scale_y_date")
+
+            Return clsYlabScalesDateTempFunc
+        End Get
+    End Property
+
     Public Shared ReadOnly Property clsFacetFunction As RFunction
         Get
             Dim clsFacetTempFunc As New RFunction
@@ -250,9 +261,11 @@ Public Class GgplotDefaults
     Public Shared ReadOnly Property dctColour As Dictionary(Of String, String)
         Get
             Dim dctTempColour As New Dictionary(Of String, String)
+            dctTempColour.Add("White", Chr(34) & "white" & Chr(34))
             dctTempColour.Add("Black", Chr(34) & "black" & Chr(34))
             dctTempColour.Add("Red", Chr(34) & "red" & Chr(34))
             dctTempColour.Add("Blue", Chr(34) & "blue" & Chr(34))
+            dctTempColour.Add("Light-Blue", Chr(34) & "lightblue" & Chr(34))
             dctTempColour.Add("Grey", Chr(34) & "grey" & Chr(34))
             dctTempColour.Add("Yellow", Chr(34) & "yellow" & Chr(34))
             dctTempColour.Add("Yellow-Green", Chr(34) & "yellowgreen" & Chr(34))
