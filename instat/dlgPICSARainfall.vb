@@ -110,7 +110,8 @@ Public Class dlgPICSARainfall
 
         Dim clsPanelBackgroundElementRect As New RFunction
         Dim clsXElementLabels As New RFunction
-        Dim clsPanelGridElementLine As New RFunction
+        Dim clsPanelGridMajorElementLine As New RFunction
+        Dim clsPanelGridMinorElementLine As New RFunction
         Dim clsPanelBorderElementRect As New RFunction
 
         ucrPICSARainfallSelector.Reset()
@@ -155,10 +156,16 @@ Public Class dlgPICSARainfall
             clsThemeFunction.AddParameter("panel.background", clsRFunctionParameter:=clsPanelBackgroundElementRect)
         End If
 
-        If dctThemeFunctions.TryGetValue("panel.grid", clsPanelGridElementLine) Then
-            clsPanelGridElementLine.AddParameter("colour", Chr(34) & "lightblue" & Chr(34))
-            clsPanelGridElementLine.AddParameter("linetype", Chr(34) & "longdash" & Chr(34))
-            clsThemeFunction.AddParameter("panel.grid", clsRFunctionParameter:=clsPanelGridElementLine)
+        If dctThemeFunctions.TryGetValue("panel.grid.major", clsPanelGridMajorElementLine) Then
+            clsPanelGridMajorElementLine.AddParameter("colour", Chr(34) & "lightblue" & Chr(34))
+            clsPanelGridMajorElementLine.AddParameter("linetype", Chr(34) & "longdash" & Chr(34))
+            clsThemeFunction.AddParameter("panel.grid.major", clsRFunctionParameter:=clsPanelGridMajorElementLine)
+        End If
+
+        If dctThemeFunctions.TryGetValue("panel.grid.minor", clsPanelGridMinorElementLine) Then
+            clsPanelGridMajorElementLine.AddParameter("colour", Chr(34) & "lightblue" & Chr(34))
+            clsPanelGridMajorElementLine.AddParameter("linetype", Chr(34) & "longdash" & Chr(34))
+            clsThemeFunction.AddParameter("panel.grid.minor", clsRFunctionParameter:=clsPanelGridMinorElementLine)
         End If
 
         If dctThemeFunctions.TryGetValue("panel.border", clsPanelBorderElementRect) Then
