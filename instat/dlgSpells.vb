@@ -23,6 +23,7 @@ Public Class dlgSpells
     Private clsDayFromAndTo, clsGroupBy, clsDayFilterCalcFromConvert, clsDayFilterCalcFromList As New RFunction
     Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator As New ROperator
     Private clsApplyInstatFunction, clsRRainday, clsRRaindayMatch As New RFunction
+    Private clsConsecutiveSum As New RFunction
     Private clsRRaindayOperator, clsRRaindayAndOperator, clsRRaindayLowerOperator, clsRRaindayUpperOperator, clsAdditionalConditionReplaceOperator, clsAdditionalConditionReplaceOperator2, clsGreaterThanOperator, clsLessThanOperator As New ROperator
     Private clsAdditionalCondition, clsAdditionalConditionList, clsSubSpellLength2, clsAdditionalConditionReplaceFunction As New RFunction
 
@@ -101,6 +102,8 @@ Public Class dlgSpells
         ucrInputCondition.SetDropDownStyleAsNonEditable()
 
         ucrChkConditional.SetText("Assuming Condition Satified at Start of Each Period")
+        ucrChkConditional.SetParameter(New RParameter("initial_value"))
+        ucrChkConditional.SetValuesCheckedAndUnchecked("NA", "0")
 
         ucrInputNewColumnName.SetParameter(New RParameter("result_name", 2))
         ucrInputNewColumnName.SetDataFrameSelector(ucrSelectorForSpells.ucrAvailableDataFrames)
@@ -241,6 +244,9 @@ Public Class dlgSpells
         clsMaxValue.AddParameter("sub_calculation", clsRFunctionParameter:=clsSpellOrGroupList, iPosition:=5)
         clsMaxValue.SetAssignTo("spells")
 
+        clsConsecutiveSum.SetRCommand("consecutive_sum")
+        clsConsecutiveSum.AddParameter("x", " & strRainDay & ")
+
         clsApplyInstatFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsApplyInstatFunction.AddParameter("calc", clsRFunctionParameter:=clsMaxValue, iPosition:=0)
         clsApplyInstatFunction.AddParameter("display", "FALSE", iPosition:=1)
@@ -262,7 +268,7 @@ Public Class dlgSpells
         ucrInputSpellLower.SetRCode(clsRRaindayLowerOperator, bReset)
         ucrInputSpellUpper.SetRCode(clsRRaindayUpperOperator, bReset)
         ucrInputNewColumnName.SetRCode(clsMaxValue, bReset)
-        'ucrChkConditional.SetRCode(clsSpellLength, bReset)
+        ucrChkConditional.SetRCode(clsConsecutiveSum, bReset)
     End Sub
 
     Private Sub cmdDoyRange_Click(sender As Object, e As EventArgs) Handles cmdDoyRange.Click
@@ -343,11 +349,11 @@ Public Class dlgSpells
 
     Private Sub ucrChkConditional_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkConditional.ControlContentsChanged
         If ucrChkConditional.Checked Then
-            clsSpellLength.AddParameter("function_exp", Chr(34) & "consecutive_sum(x = " & strRainDay & ", initial_value = 0)" & Chr(34))
+            clsSpellLength.AddParameter("function_exp", clsRFunctionParameter:=clsConsecutiveSum)
             clsMaxValue.AddParameter("sub_calculation", clsRFunctionParameter:=clsSpellOrGroupList, iPosition:=5)
             clsGroupBy.RemoveParameterByName("sub_calculation")
         Else
-            clsSpellLength.AddParameter("function_exp", Chr(34) & "consecutive_sum(x =  " & strRainDay & ", initial_value = NA)" & Chr(34))
+            clsSpellLength.AddParameter("function_exp", clsRFunctionParameter:=clsConsecutiveSum)
             clsGroupBy.AddParameter("sub_calculation", clsRFunctionParameter:=clsSpellOrGroupList, iPosition:=5)
             clsMaxValue.RemoveParameterByName("sub_calculation")
         End If
