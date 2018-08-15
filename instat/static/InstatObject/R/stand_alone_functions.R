@@ -1131,4 +1131,5 @@ hashed_id <- function(x, salt, algo = "crc32") {
     }
   y <- sapply(y, function(X) digest::digest(X, algo = algo))
   as.character(y)
+
 }

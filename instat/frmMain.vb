@@ -693,10 +693,6 @@ Public Class frmMain
         dlgTransformText.ShowDialog()
     End Sub
 
-    Private Sub mnuTbDelete_Click(sender As Object, e As EventArgs) Handles mnuTbDelete.Click
-        mnuToolsClearOutputWindow_Click(sender, e)
-    End Sub
-
     Private Sub mnuEditSelectAll_Click(sender As Object, e As EventArgs) Handles mnuEditSelectAll.Click
         If ctrActive IsNot Nothing Then
             If ctrActive.Equals(ucrDataViewer) Then
@@ -1980,15 +1976,15 @@ Public Class frmMain
         dlgFindNonnumericValues.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticReshapeandExamineNonNumericCases_Click(sender As Object, e As EventArgs) Handles mnuClimaticReshapeandExamineNonNumericCases.Click
+    Private Sub mnuClimaticTidyandExamineNonNumericCases_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineNonNumericCases.Click
         dlgFindNonnumericValues.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticReshapeandExamineReplaceValues_Click(sender As Object, e As EventArgs) Handles mnuClimaticReshapeandExamineReplaceValues.Click
+    Private Sub mnuClimaticTidyandExamineReplaceValues_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineReplaceValues.Click
         dlgReplaceValues.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticReshapeandExamineOneVariableSummarize_Click(sender As Object, e As EventArgs) Handles mnuClimaticReshapeandExamineOneVariableSummarize.Click
+    Private Sub mnuClimaticTidyandExamineOneVariableSummarize_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineOneVariableSummarize.Click
         dlgOneVariableSummarise.ShowDialog()
     End Sub
 
@@ -2006,5 +2002,9 @@ Public Class frmMain
 
     Private Sub mnuClimaticFileImportShapeFile_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportShapeFile.Click
         dlgImportShapeFiles.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticTidyandExamineTidyData_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineTidyData.Click
+        dlgTidyClimaticData.ShowDialog()
     End Sub
 End Class
