@@ -2007,4 +2007,8 @@ Public Class frmMain
     Private Sub mnuClimaticTidyandExamineTidyData_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineTidyData.Click
         dlgTidyClimaticData.ShowDialog()
     End Sub
+
+    Private Sub mnuClimaticTidyandExamineMerge_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineMerge.Click
+        dlgMerge.ShowDialog()
+    End Sub
 End Class
