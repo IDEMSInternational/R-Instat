@@ -104,6 +104,7 @@ Public Class dlgSpells
         ucrChkConditional.SetText("Assuming Condition Satified at Start of Each Period")
         ucrChkConditional.SetParameter(New RParameter("initial_value"))
         ucrChkConditional.SetValuesCheckedAndUnchecked("0", "NA")
+        ucrChkConditional.SetRDefault("NA")
 
         ucrInputNewColumnName.SetParameter(New RParameter("result_name", 2))
         ucrInputNewColumnName.SetDataFrameSelector(ucrSelectorForSpells.ucrAvailableDataFrames)
@@ -206,7 +207,7 @@ Public Class dlgSpells
         clsSpellLength.SetRCommand("instat_calculation$new")
         clsSpellLength.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsSpellLength.AddParameter("result_name", Chr(34) & strDrySpell & Chr(34), iPosition:=2)
-        clsSpellLength.AddParameter("function_exp", Chr(34) & "consecutive_sum(x =  " & strRainDay & ", initial_value = NA)" & Chr(34))
+        clsSpellLength.AddParameter("function_exp", clsRFunctionParameter:=clsConsecutiveSum)
         clsSpellLength.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubSpellLength1, iPosition:=5)
         clsSubSpellLength1.AddParameter("sub1", clsRFunctionParameter:=clsRRainday, bIncludeArgumentName:=False)
         clsSpellLength.AddParameter("save", 0, iPosition:=6)
@@ -244,8 +245,9 @@ Public Class dlgSpells
         clsMaxValue.AddParameter("sub_calculation", clsRFunctionParameter:=clsSpellOrGroupList, iPosition:=5)
         clsMaxValue.SetAssignTo("spells")
 
+        clsConsecutiveSum.bToScriptAsRString = True
         clsConsecutiveSum.SetRCommand("consecutive_sum")
-        clsConsecutiveSum.AddParameter("x", " & strRainDay & ")
+        clsConsecutiveSum.AddParameter("x", strRainDay)
 
         clsApplyInstatFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsApplyInstatFunction.AddParameter("calc", clsRFunctionParameter:=clsMaxValue, iPosition:=0)
@@ -349,11 +351,9 @@ Public Class dlgSpells
 
     Private Sub ucrChkConditional_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkConditional.ControlContentsChanged
         If ucrChkConditional.Checked Then
-            clsSpellLength.AddParameter("function_exp", clsRFunctionParameter:=clsConsecutiveSum)
             clsMaxValue.AddParameter("sub_calculation", clsRFunctionParameter:=clsSpellOrGroupList, iPosition:=5)
             clsGroupBy.RemoveParameterByName("sub_calculation")
         Else
-            clsSpellLength.AddParameter("function_exp", clsRFunctionParameter:=clsConsecutiveSum)
             clsGroupBy.AddParameter("sub_calculation", clsRFunctionParameter:=clsSpellOrGroupList, iPosition:=5)
             clsMaxValue.RemoveParameterByName("sub_calculation")
         End If
