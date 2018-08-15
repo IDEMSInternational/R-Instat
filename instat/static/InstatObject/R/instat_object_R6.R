@@ -29,7 +29,8 @@ instat_object <- R6::R6Class("instat_object",
                            .objects = list(),
                            .links = list(),
                            .data_objects_changed = FALSE,
-                           .database_connection = NULL
+                           .database_connection = NULL,
+                           .last_graph = NULL
                          ),
                          active = list(
                            data_objects_changed = function(new_value) {
@@ -143,15 +144,7 @@ instat_object$set("public", "import_RDS", function(data_RDS, keep_existing = TRU
       }
       new_links_list <- data_RDS$get_links()
       for(data_obj_name in data_RDS$get_data_names()) {
-        # fix for loading instat objects created before comments where added
-        # In older objects "include_comments" is not an argument to data_clone
-        # data_clone now contains ... argument so further changes to data object structure will not require similar fixes
-        if("set_comments" %in% names(data_RDS$get_data_objects(data_obj_name))) {
-          data_obj_clone <- data_RDS$get_data_objects(data_obj_name)$data_clone(include_objects = include_objects, include_metadata = include_metadata, include_logs = include_logs, include_filters = include_filters, include_calculations = include_calculations, include_comments = include_comments)
-        }
-        else {
-          data_obj_clone <- data_RDS$get_data_objects(data_obj_name)$data_clone(include_objects = include_objects, include_metadata = include_metadata, include_logs = include_logs, include_filters = include_filters, include_calculations = include_calculations)
-        }
+        data_obj_clone <- self$clone_data_object(data_RDS$get_data_objects(data_obj_name), include_objects = include_objects, include_metadata = include_metadata, include_logs = include_logs, include_filters = include_filters, include_calculations = include_calculations, include_comments = include_comments)
         if(data_obj_name %in% self$get_data_names() && !overwrite_existing) {
           new_name <- next_default_item(data_obj_name, self$get_data_names())
           data_obj_clone$append_to_metadata(data_name_label, new_name)
@@ -196,6 +189,41 @@ instat_object$set("public", "import_RDS", function(data_RDS, keep_existing = TRU
     self$import_data(data_tables = list(data_RDS = data_RDS))
   }
   else stop("Cannot import an objects of class", paste(class(data_RDS), collapse = ","))
+}
+)
+
+instat_object$set("public", "clone_data_object", function(curr_data_object, include_objects = TRUE, include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_calculations = TRUE, include_comments = TRUE, ...) {
+  curr_names <- names(curr_data_object)
+  if("get_data_frame" %in% curr_names) new_data <- curr_data_object$get_data_frame(use_current_filter = TRUE)
+  else stop("Cannot import data. No 'get_data_frame' method.")
+  if("get_metadata" %in% curr_names) new_data_name <- curr_data_object$get_metadata(data_name_label)
+  if(include_objects && "get_objects" %in% curr_names) new_objects <- curr_data_object$get_objects()
+  else new_objects <- list()
+  if(include_filters && "get_filter" %in% curr_names) new_filters <- lapply(curr_data_object$get_filter(), function(x) x$data_clone())
+  else new_filters <- list()
+  if(include_calculations && "get_calculations" %in% curr_names) new_calculations <- lapply(curr_data_object$get_calculations(), function(x) x$data_clone())
+  else new_calculations <- list()
+  if(include_comments && "get_comments" %in% curr_names) new_comments <- lapply(curr_data_object$get_comments(), function(x) x$data_clone())
+  else new_comments <- list()
+  if("get_keys" %in% curr_names) new_keys <- curr_data_object$get_keys()
+  else new_keys <- list()
+  
+  new_data_object <- data_object$new(data = new_data, data_name = new_data_name, filters = new_filters, objects = new_objects, calculations = new_calculations, keys = new_keys, comments = new_comments, keep_attributes = include_metadata)
+  if(include_logs && "get_changes" %in% curr_names) {
+    new_changes <- curr_data_object$get_changes()
+  }
+  else new_changes <- list()
+  new_data_object$set_changes(new_changes)
+  if(include_filters && "current_filter" %in% curr_names) new_data_object$current_filter <- curr_data_object$get_current_filter()
+  else new_data_object$remove_current_filter()
+  if(!include_metadata) {
+    new_data_object$clear_metadata()
+    new_data_object$clear_variables_metadata()
+  }
+  new_data_object$data_changed <- TRUE
+  new_data_object$metadata_changed <- TRUE
+  new_data_object$variables_metadata_changed <- TRUE
+  return(new_data_object)
 }
 )
 
@@ -545,6 +573,9 @@ instat_object$set("public", "delete_objects", function(data_name, object_names) 
     private$.objects[names(private$.objects) == object_names] <- NULL
   }
   else self$get_data_objects(data_name)$delete_objects(object_names = object_names)
+  if(!is.null(private$.last_graph) && length(private$.last_graph) == 2 && private$.last_graph[1] == data_name && private$.last_graph[2] %in% object_names) {
+    private$.last_graph <- NULL
+  }
 }
 )
 
@@ -602,6 +633,8 @@ instat_object$set("public", "get_from_model", function(data_name, model_name, va
 
 instat_object$set("public", "add_graph", function(data_name, graph, graph_name) {
   self$add_object(data_name = data_name, object = graph, object_name = graph_name)
+  last_graph_name <- self$get_data_objects(data_name)$get_last_graph_name()
+  if(!is.null(last_graph_name)) private$.last_graph <- c(data_name, last_graph_name)
 }
 )
 
@@ -612,6 +645,13 @@ instat_object$set("public", "get_graphs", function(data_name, graph_name, includ
 
 instat_object$set("public", "get_graph_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
   self$get_object_names(data_name = data_name, include_overall = include_overall, include, exclude, type = graph_label, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items)
+}
+)
+
+instat_object$set("public", "get_last_graph", function(print_graph = TRUE) {
+  if(!is.null(private$.last_graph) && length(private$.last_graph) == 2) {
+    self$get_objects(data_name = private$.last_graph[1], object_name = private$.last_graph[2], type = graph_label, print_graph = print_graph)
+  }
 }
 )
 
@@ -799,6 +839,7 @@ instat_object$set("public", "delete_dataframes", function(data_names) {
       #TODO Should we be able to disable links instead of deleting?
       self$remove_link(link_name)
     }
+    if(!is.null(private$.last_graph) && private$.last_graph[1] %in% data_names) private$.last_graph <- NULL
   }
 } 
 )
@@ -1106,8 +1147,8 @@ instat_object$set("public","graph_one_variable", function(data_name, columns, nu
 }
 )
 
-instat_object$set("public","make_date_yearmonthday", function(data_name, year, month, day, year_format = "%Y", month_format = "%m", day_format = "%d") {
-  self$get_data_objects(data_name)$make_date_yearmonthday(year = year, month = month, day = day, year_format = year_format, month_format = month_format, day_format = day_format)
+instat_object$set("public","make_date_yearmonthday", function(data_name, year, month, day, f_year, f_month, f_day, year_format = "%Y", month_format = "%m") {
+  self$get_data_objects(data_name)$make_date_yearmonthday(year = year, month = month, day = day, f_year = f_year, f_month = f_month, f_day = f_day, year_format = year_format, month_format = month_format)
 }
 )
 
@@ -1670,6 +1711,252 @@ instat_object$set("public", "crops_definitions", function(data_name, year, stati
       prop_table_split <- split(prop_table_unstacked, prop_table_unstacked[[plant_length_name]])
       return(prop_table_split)
     }
+  }
+}
+)
+
+#' Converting grid (wide) format daily climatic data into tidy (long format) data
+#' @param x Input data frame
+#' @param format Either "years", "months" or "days" to indicate what the stacking columns represent
+#' @param day the name of the column containing day of month values (if format != "days")
+#' @param month the name of the column containing month values (if format != "months")
+#' @param year the name of the column containing year values (required if format != "years")
+#' @param stack_years when format = "years" stack_years specifies the years. Must be same length as stack_cols
+#' If not specified, the function will try to determine the years using the format "Xyyyy" where "X" is any character and "yyyy" is the year.
+#' @param stack_cols a character vector of columns to stack
+#' if format == "days" 31 columns (in order) for each day of the month are expected
+#' if format == "months" 12 columns (in order) for each month are expected
+#' if format == "years" any number of year columns can be given. These should be named with format "Xyyyy"
+#' where "X" is any character and "yyyy" is the year
+#' @param station (optional) when format = "days" or "months" the name of a station column can be given
+#' when the data is for multiple stations
+#' @param element (optional) when format = "days" or "months" the name of an element column can be given
+#' when the data is for multiple elements
+#' @param element_name (optional) if data is for single element, element_name is the name of the column containing
+#' the values. Default is "value". Ignored if element not missing.
+#' @param ignore_invalid If TRUE, rows with non missing element values on invalid dates e.g. 31 Sep or 29 Feb in non leap years, will be removed.
+#' If FALSE (the default) an error will be given with details of where the values occur.
+#' Strongly recommended to first run with FALSE and then TRUE after examining or correcting any issues.
+#' @param silent If TRUE, rows with non missing element values on invalid dates will not be reported.
+#' @param new_name Name for the new data frame.
+#' @export
+#' @examples
+#' yearcols <- data.frame(month = rep(1:12, times = c(31,29,31,30,31,30,31,31,30,31,30,31)),
+#' day = c(1:31,1:29,1:31,1:30,1:31,1:30,1:31,1:31,1:30,1:31,1:30,1:31),
+#' X2000 = rnorm(366), X2001 = rnorm(366), X2002 = rnorm(366), X2003 = rnorm(366))
+#' yearcols[60,4:6] <- NA
+#' tidy_climatic_data(x = yearcols, format = "years", stack_cols = c("X2000", "X2001", "X2002", "X2003"), element_name = "tmin")
+
+instat_object$set("public","tidy_climatic_data", function(x, format, stack_cols, day, month, year, stack_years, station, element, element_name = "value", ignore_invalid = FALSE, silent = FALSE, new_name) {
+  
+  if(!format %in% c("days", "months", "years")) stop("format must be either 'days', 'months' or 'years'")
+  if(!all(stack_cols %in% names(x))) stop("Some of the stack_cols were not found in x.")
+  if(!all(sapply(x[, stack_cols], is.numeric))) stop("All stack_cols must be numeric\nThe following stack_cols are not numeric: ", paste(stack_cols[!sapply(x[, stack_cols], is.numeric)], collapse = ","))
+  if(!missing(day) && !day %in% names(x)) stop("day column not found in x.")
+  if(!missing(month) && !month %in% names(x)) stop("month column not found in x.")
+  if(!missing(year) && !year %in% names(x)) stop("year column not found in x.")
+  if(!missing(station) && !station %in% names(x)) stop("station column not found in x.")
+  if(!missing(element) && !element %in% names(x)) stop("element column not found in x.")
+  
+  # check day column is valid (if specified)
+  if(!missing(day)) {
+    day_data <- x[[day]]
+    if(anyNA(day_data)) stop("day column contains: ", sum(is.na(day_data)), " missing values")
+    if(!is.numeric(day_data)) stop("day column must be numeric")
+    invalid_day <- (day_data < 1 | day_data > 31 | (day_data %% 1) != 0)
+    if(any(invalid_day)) {
+      invalid_values <- unique(day_data[invalid_day])
+      stop("day column contains the following invalid values: ", paste(invalid_values, collapse = ",")) 
+    }
+  }
+  
+  # check month column is valid (if specified)
+  if(!missing(month)) {
+    month_data <- x[[month]]
+    # Initialise no month format
+    month_format <- ""
+    if(anyNA(month_data)) stop("month column contains: ", sum(is.na(month_data)), " missing values")
+    if(is.numeric(month_data)) {
+      invalid_month <- (month_data < 1 | month_data > 12 | (month_data %% 1) != 0)
+      if(any(invalid_month)) {
+        invalid_values <- unique(month_data[invalid_month])
+        stop("month column contains the following invalid values: ", paste(invalid_values, collapse = ",")) 
+      }
+      # Month format will be used in as.Date()
+      month_format <- "%m"
+    }
+    else {
+      # Convert to title case to match month.name and month.abb
+      month_data_title <- stringr::str_to_title(month_data)
+      if(all(month_data_title %in% month.abb)) month_format <- "%b"
+      else if(all(month_data_title %in% month.name)) month_format <- "%B"
+      if(month_format == "") {
+        invalid_short <- unique(month_data[!month_data_title %in% month.abb])
+        invalid_long <- unique(month_data[!month_data_title %in% month.name])
+        if(length(invalid_short) < 12) {
+          stop("Some month values were not unrecognised.\nIf specifying short names the following are invalid: ", paste(invalid_short, collapse = ", "), "\nAlternatively use a numeric month column.")
+        }
+        else if(length(invalid_long) < 12) {
+          stop("Some month values were not unrecognised.\nIf specifying full names the following are invalid: ", paste(invalid_long, collapse = ", "), "\nAlternatively use a numeric month column.")
+        }
+        else stop("No values in the month column were recognised.\nUse either\n short names: ", paste(month.abb, collapse = ", "), "\nfukk names: ", paste(month.name, collapse = ", "), "\nor numbers 1 to 12.")
+      }
+      # Put title case months into the data as this will be needed to make the date column
+      x[[month]] <- month_data_title 
+    }
+  }
+  
+  # check year column is valid (if specified)
+  if(!missing(year)) {
+    year_data <- x[[year]]
+    if(anyNA(year_data)) stop("year column contains: ", sum(is.na(year_data)), " missing values")
+    if(!is.numeric(year_data)) stop("year column must be numeric")
+    
+    year_format <- ""
+    if(all(stringr::str_length(year_data) == 4)) year_format <- "%Y"
+    else if(all(stringr::str_length(year_data) == 2)) year_format <- "%y"
+    else {
+      stop("Inconsistent values found in year column. Year column must be column of four digit years or column of two digit years")
+    }
+  }
+  
+  
+  if(format == "days") {
+    
+    # month column required in this case
+    if(missing(month)) stop("month column is required when format == 'days'")
+    
+    # year column required in this case
+    if(missing(year)) stop("year column is required when format == 'days'")
+    
+    # stack column checks
+    if(length(stack_cols) != 31) stop("You have specified: ", length(stack_cols), " stack columns\nThere must be exactly 31 stack columns when format == 'days'")
+    
+    # This ensures all other columns are dropped
+    y <- data.frame(year = x[[year]], month = x[[month]], x[ , stack_cols])
+    if(!missing(station)) y$station <- x[[station]]
+    if(!missing(element)) y$element <- x[[element]]
+    # In case element_name is the name of an existing column in y
+    if(element_name %in% names(y)) element_name <- next_default_item(prefix = element_name, existing_names = names(y))
+    y <- reshape2::melt(y, measure.vars = stack_cols, value.name = element_name, variable.name = "day")
+    
+    # This assumes stack_cols are in the correct order i.e. 1 - 31
+    y$day <- as.numeric(y$day)
+    
+    y$date <- as.Date(paste(y$year, y$month, y$day), format = paste(year_format, month_format, "%d"))
+  }
+  else if(format == "months") {
+    
+    # month column required in this case
+    if(missing(day)) stop("day column is required when format == 'months'")
+    
+    # year column required in this case
+    if(missing(year)) stop("year column is required when format == 'months'")
+    
+    # stack column checks
+    if(length(stack_cols) != 12) stop("You have specified: ", length(stack_cols), " stack columns\nThere must be exactly 12 stack columns when format == 'months'")
+    
+    # This ensures all other columns are dropped
+    y <- data.frame(year = x[[year]], day = x[[day]], x[ , stack_cols])
+    if(!missing(station)) y$station <- x[[station]]
+    if(!missing(element)) y$element <- x[[element]]
+    # In case element_name is the name of an existing column in y
+    if(element_name %in% names(y)) element_name <- next_default_item(prefix = element_name, existing_names = names(y))
+    y <- reshape2::melt(y, measure.vars = stack_cols, value.name = element_name, variable.name = "month")
+    
+    # This assumes stack_cols are in the correct order i.e. 1 - 12
+    y$month <- as.numeric(y$month)
+    
+    y$date <- as.Date(paste(y$year, y$month, y$day), format = paste(year_format, "%m", "%d"))
+  }
+  else if(format == "years") {
+    
+    if(nrow(x) != 366) stop("data must have exactly 366 rows when format = 'years'")
+    
+    if(!missing(stack_years) && length(year_list) != length(stack_cols)) stop("stack_years must be the same length as stack_cols")
+    
+    if(missing(stack_years)) {
+      # Remove first character and convert to numeric
+      stack_years <- as.numeric(stringr::str_sub(stack_cols, 2))
+      invalid_ind <- is.na(stack_years) | stringr::str_length(stack_years) != 4
+      if(any(invalid_ind)) {
+        cat("Unrecognised year columns:", paste(stack_years[invalid_ind], collapse = ", "))
+        stop("Cannot determine year of some columns. Year columns must be named with format 'Xyyyy' where X is any character and yyyy is the year.")
+      }
+    }
+    x$doy <- 1:366
+    # This ensures all other columns are dropped
+    y <- data.frame(doy = x$doy, x[ , stack_cols])
+    if(!missing(station)) y$station <- x[[station]]
+    if(!missing(element)) y$element <- x[[element]]
+    # In case element_name is the name of an existing column in y
+    if(element_name %in% names(y)) element_name <- next_default_item(prefix = element_name, existing_names = names(y))
+    y <- reshape2::melt(y, measure.vars = stack_cols, value.name = element_name, variable.name = "year")
+    
+    # This assumes stack_cols and stack_years are in the same order
+    y$year <- plyr::mapvalues(y$year, stack_cols, stack_years)
+    y$year <- as.numeric(levels(y$year))[y$year]
+    
+    #Replacing day 60 with 0 for non-leap years.This will result into NA dates
+    y$doy[(!lubridate::leap_year(y$year)) & y$doy == 60] <- 0
+    y$doy[(!lubridate::leap_year(y$year)) & y$doy > 60] <- y$doy[(!lubridate::leap_year(y$year)) & y$doy > 60] - 1
+    y$date <- as.Date(paste(y$year, y$doy), format = paste("%Y", "%j"))
+    # Put day 0 back as 60 as needed in error displaying
+    y$doy[y$doy == 0] <- 60
+  }
+  
+  # check if there are any non missing values on missing dates
+  # this is a problem as missing dates are invalid dates so should not have values
+  invalid_ind <- is.na(y$date) & !is.na(y[[element_name]])
+  if(sum(invalid_ind) > 0) {
+    cat("There are:", sum(invalid_ind), "measurement values on invalid dates.\n")
+    if(!silent) {
+      invalid_data <- dplyr::filter(y, invalid_ind)
+      if(format == "days" || format == "months") {
+        invalid_data_display <- invalid_data %>% select(year, month, day)
+        if(!missing(station)) {
+          invalid_data_display <- data.frame(station = invalid_data$station, invalid_data_display)
+        }
+        if(!missing(element)) {
+          invalid_data_display <- data.frame(element = invalid_data$element, invalid_data_display)
+        }
+      }
+      else {
+        invalid_data_display <- invalid_data %>% select(year, doy)
+      }
+      invalid_data_display[[element_name]] <- invalid_data[[element_name]]
+      print(invalid_data_display, row.names = FALSE)
+    }
+    continue <- TRUE
+    if(ignore_invalid) cat("Warning: These rows have been removed.\n")
+    else {
+      # Not stop here for that output can be displayed by R-Instat
+      cat("There are:", sum(invalid_ind), "measurement values on invalid dates. Correct these or specify ignore_invalid = TRUE to ignore them. See output for more details.")
+      continue <- FALSE
+    }
+  }
+  
+  if(continue) {
+    # Standard format of slowest varying structure variables first (station then date) followed by measurements
+    if(!missing(station) && format != "years") z <- data.frame(station = y$station, date = y$date)
+    else z <- data.frame(date = y$date)
+    z[[element_name]] <- y[[element_name]]
+    
+    if(!missing(element) && format != "years") z$element <- y$element
+    
+    z <- dplyr::filter(z, !is.na(date))
+    
+    # If data contains multiple elements, unstack the element column
+    if(!missing(element) && format != "years") {
+      z <- reshape2::dcast(z, ... ~ element, value.var = element_name)
+    }
+    if(!missing(station) && format != "years") z <- z %>% dplyr::group_by(station) %>% dplyr::arrange(date, .by_group = TRUE) %>% ungroup()
+    else z <- z %>% dplyr::arrange(date)
+    
+    if(missing(new_name) || new_name == "") new_name <- next_default_item("data", existing_names = self$get_data_names())
+    data_list <- list(z)
+    names(data_list) <- new_name
+    self$import_data(data_tables=data_list)
   }
 }
 )
