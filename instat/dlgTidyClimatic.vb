@@ -40,7 +40,7 @@ Public Class dlgTidyClimaticData
     End Sub
 
     Private Sub InitialiseDialog()
-        'ucrBase.clsRsyntax.iCallType = 0
+        ucrBase.clsRsyntax.iCallType = 2
 
         ucrPnlReshapeClimaticData.AddRadioButton(rdoYear)
         ucrPnlReshapeClimaticData.AddRadioButton(rdoMonth)
@@ -120,11 +120,8 @@ Public Class dlgTidyClimaticData
         ucrReceiverElement.SetLinkedDisplayControl(lblMultipleElement)
         ucrTextBoxElementName.SetLinkedDisplayControl(lblElementName)
 
-        ucrNewDFName.SetIsTextBox()
-        ucrNewDFName.SetSaveTypeAsDataFrame()
-        ucrNewDFName.SetLabelText("New Data Frame Name:")
-        ucrNewDFName.SetDataFrameSelector(ucrSelectorTidyClimaticData.ucrAvailableDataFrames)
-
+        ucrInputNewDataFrame.SetParameter(New RParameter("new_name", iNewPosition:=12))
+        ucrInputNewDataFrame.SetDefaultTypeAsDataFrame()
     End Sub
 
     Private Sub SetDefaults()
@@ -132,34 +129,36 @@ Public Class dlgTidyClimaticData
 
         ucrSelectorTidyClimaticData.Reset()
         ucrReceiverMultipleStack.SetMeAsReceiver()
-        ucrNewDFName.Reset()
-        NewDefaultName()
+        ucrInputNewDataFrame.Reset()
 
         clsTidyClimaticFunction.AddParameter("format", Chr(34) & "years" & Chr(34), iPosition:=3)
 
-        clsTidyClimaticFunction.SetRCommand("tidy_climatic_data")
+        clsTidyClimaticFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$tidy_climatic_data")
         ucrBase.clsRsyntax.SetBaseRFunction(clsTidyClimaticFunction)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        If bReset Then
+            NewDefaultName()
+        End If
     End Sub
 
     Private Sub TestOkEnabled()
         If rdoYear.Checked Then
-            If Not ucrReceiverMultipleStack.IsEmpty AndAlso ucrNewDFName.IsComplete Then
+            If Not ucrReceiverMultipleStack.IsEmpty AndAlso Not ucrInputNewDataFrame.IsEmpty() Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
             End If
         ElseIf rdoMonth.Checked Then
-            If Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverMultipleStack.IsEmpty AndAlso Not ucrReceiverDayofMonth.IsEmpty AndAlso ucrNewDFName.IsComplete Then
+            If Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverMultipleStack.IsEmpty AndAlso Not ucrReceiverDayofMonth.IsEmpty AndAlso Not ucrInputNewDataFrame.IsEmpty() Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
             End If
         ElseIf rdoDay.Checked Then
-            If Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverMonth.IsEmpty AndAlso Not ucrReceiverMultipleStack.IsEmpty AndAlso ucrNewDFName.IsComplete Then
+            If Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverMonth.IsEmpty AndAlso Not ucrReceiverMultipleStack.IsEmpty AndAlso Not ucrInputNewDataFrame.IsEmpty() Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
@@ -175,8 +174,8 @@ Public Class dlgTidyClimaticData
     End Sub
 
     Private Sub NewDefaultName()
-        If (Not ucrNewDFName.bUserTyped) AndAlso ucrSelectorTidyClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-            ucrNewDFName.SetPrefix(ucrSelectorTidyClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_tidy")
+        If (Not ucrInputNewDataFrame.bUserTyped) AndAlso ucrSelectorTidyClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+            ucrInputNewDataFrame.SetPrefix(ucrSelectorTidyClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_tidy")
         End If
     End Sub
 
@@ -244,7 +243,7 @@ Public Class dlgTidyClimaticData
         End If
     End Sub
 
-    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewDFName.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrReceiverDayofMonth.ControlContentsChanged, ucrPnlReshapeClimaticData.ControlContentsChanged, ucrReceiverMultipleStack.ControlContentsChanged
+    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrReceiverDayofMonth.ControlContentsChanged, ucrPnlReshapeClimaticData.ControlContentsChanged, ucrReceiverMultipleStack.ControlContentsChanged, ucrInputNewDataFrame.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
