@@ -19,7 +19,7 @@ Imports instat.Translations
 Public Class sdgPICSARainfallGraph
     Private bControlsInitialised As Boolean = False
     Public clsBaseOperator As ROperator
-    Public clsLabsFunction As RFunction
+    Public clsLabsFunction, clsXLabsFunction, clsYLabsFunction As RFunction
     Public clsXScalecontinuousFunction, clsYScalecontinuousFunction As New RFunction
     Public clsXScalecontinuousSeqFunction, clsYScalecontinuousSeqFunction As New RFunction
     Public clsYScaleDateFunction As New RFunction
@@ -40,7 +40,6 @@ Public Class sdgPICSARainfallGraph
     'Private clsPnlBackgroundElementRect As New RFunction
     Private clsPanelBackgroundElementRect As New RFunction
     Private clsPanelBorderElementRect As New RFunction
-    Private clsElementBorder As New RFunction
     Private dctLabelForDays As New Dictionary(Of String, RFunction)
 
     Private Sub sdgPICSARainfallGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -50,13 +49,28 @@ Public Class sdgPICSARainfallGraph
     Public Sub InitialiseControls()
 
         ' Titles 
-        UcrChkXAxisTitle.SetText("Change Title")
-        UcrChkXAxisTitle.SetParameter(New RParameter("x"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        ucrInputXAxisTitle.SetParameter(New RParameter("x"))
+        ucrPnlXAxisTitle.AddRadioButton(rdoAutoXAxis)
+        ucrPnlXAxisTitle.AddRadioButton(rdoRemoveXAxisTitle)
+        ucrPnlXAxisTitle.AddRadioButton(rdoChangeXAxisTitle)
+        ucrPnlXAxisTitle.AddParameterPresentCondition(rdoAutoXAxis, "label", False)
+        ucrPnlXAxisTitle.AddParameterPresentCondition(rdoRemoveXAxisTitle, "label", True)
+        ucrPnlXAxisTitle.AddParameterValuesCondition(rdoRemoveXAxisTitle, "label", Chr(34) & Chr(34), True)
+        ucrPnlXAxisTitle.AddParameterPresentCondition(rdoChangeXAxisTitle, "label", True)
+        ucrPnlXAxisTitle.AddParameterValuesCondition(rdoChangeXAxisTitle, "label", Chr(34) & Chr(34), False)
+        ucrPnlXAxisTitle.AddToLinkedControls(ucrInputXAxisTitle, {rdoChangeXAxisTitle}, bNewLinkedHideIfParameterMissing:=True)
 
-        UcrChkYAxisTitle.SetText("Change Title")
-        UcrChkYAxisTitle.SetParameter(New RParameter("y"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        ucrInputYAxisTitle.SetParameter(New RParameter("y"))
+        UcrPnlYAxisTitle.AddRadioButton(rdoAutoYAxis)
+        UcrPnlYAxisTitle.AddRadioButton(rdoRemoveYAxisTitle)
+        UcrPnlYAxisTitle.AddRadioButton(rdoChangeYAxisTitle)
+        UcrPnlYAxisTitle.AddParameterPresentCondition(rdoAutoYAxis, "label", False)
+        UcrPnlYAxisTitle.AddParameterPresentCondition(rdoRemoveYAxisTitle, "label", True)
+        UcrPnlYAxisTitle.AddParameterValuesCondition(rdoRemoveYAxisTitle, "label", Chr(34) & Chr(34), True)
+        UcrPnlYAxisTitle.AddParameterPresentCondition(rdoChangeYAxisTitle, "label", True)
+        UcrPnlYAxisTitle.AddParameterValuesCondition(rdoChangeYAxisTitle, "label", Chr(34) & Chr(34), False)
+        UcrPnlYAxisTitle.AddToLinkedControls(ucrInputYAxisTitle, {rdoChangeYAxisTitle}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrInputXAxisTitle.SetParameter(New RParameter("label"))
+        ucrInputYAxisTitle.SetParameter(New RParameter("label"))
 
         UcrChkTitle.SetText("Add Graph Title")
         UcrChkTitle.SetParameter(New RParameter("title"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
@@ -73,8 +87,6 @@ Public Class sdgPICSARainfallGraph
         UcrChkTitle.AddToLinkedControls(ucrInputGraphTitle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         UcrChkSubTitle.AddToLinkedControls(ucrInputGraphSubTitle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         UcrChkCaption.AddToLinkedControls(ucrInputGraphcCaption, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        UcrChkXAxisTitle.AddToLinkedControls(ucrInputXAxisTitle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        UcrChkYAxisTitle.AddToLinkedControls(ucrInputYAxisTitle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         UcrChkTitleSize.SetText("Size")
         UcrChkTitleSize.SetParameter(New RParameter("size"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
@@ -105,14 +117,6 @@ Public Class sdgPICSARainfallGraph
         UcrNudYAxisTitleSzie.SetParameter(New RParameter("size"))
         UcrNudYAxisTitleSzie.Increment = 0.1
         UcrNudYAxisTitleSzie.Minimum = 0
-
-        ' to remove x-axis title we have scale_x_continuous(name = "")
-        ucrChkRemoveXAxisTitle.SetText("Remove Title")
-        ucrChkRemoveXAxisTitle.SetParameter(New RParameter("name"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-
-        ' to remove y-axis title we have scale_y_continuous(name = "")
-        ucrChkRemoveYAxisTitle.SetText("Remove Title")
-        ucrChkRemoveYAxisTitle.SetParameter(New RParameter("name"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         UcrChkTitleSize.AddToLinkedControls(UcrNudTitleSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         UcrChkSubTitleSize.AddToLinkedControls(UcrNudSubTitleSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -214,6 +218,32 @@ Public Class sdgPICSARainfallGraph
         UcrInputMajorGridLineLinetype.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineType))
         UcrInputMajorGridLineLinetype.SetDropDownStyleAsNonEditable()
 
+        UcrChkMajorGridLineSize.SetText("Size")
+        UcrChkMajorGridLineSize.SetParameter(New RParameter("size"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        UcrNudMajorGridLineSize.SetParameter(New RParameter("size"))
+        UcrNudMajorGridLineSize.Increment = 0.1
+        UcrNudMajorGridLineSize.DecimalPlaces = 1
+        UcrNudMajorGridLineSize.Minimum = 0
+
+        UcrChkMinorGridLineColour.SetText("Colour")
+        UcrChkMinorGridLineColour.SetParameter(New RParameter("colour"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        UcrInputMinorGridLineColour.SetParameter(New RParameter("colour"))
+        UcrInputMinorGridLineColour.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
+        UcrInputMinorGridLineColour.SetDropDownStyleAsNonEditable()
+
+        UcrChkMinorGridLineType.SetText("Line Type")
+        UcrChkMinorGridLineType.SetParameter(New RParameter("linetype"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        UcrInputMinorGridLineTpe.SetParameter(New RParameter("linetype"))
+        UcrInputMinorGridLineTpe.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineType))
+        UcrInputMinorGridLineTpe.SetDropDownStyleAsNonEditable()
+
+        UcrChkMinorGridLineSize.SetText("Size")
+        UcrChkMinorGridLineSize.SetParameter(New RParameter("size"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        UcrNudMinorGridLineSize.SetParameter(New RParameter("size"))
+        UcrNudMinorGridLineSize.Increment = 0.1
+        UcrNudMinorGridLineSize.DecimalPlaces = 1
+        UcrNudMinorGridLineSize.Minimum = 0
+
         ucrChkBorderColour.SetText("Colour")
         ucrChkBorderColour.SetParameter(New RParameter("colour"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         UcrInputBorderColour.SetParameter(New RParameter("colour"))
@@ -225,6 +255,13 @@ Public Class sdgPICSARainfallGraph
         UcrInputBorderLinetype.SetParameter(New RParameter("linetype"))
         UcrInputBorderLinetype.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineType))
         UcrInputBorderLinetype.SetDropDownStyleAsNonEditable()
+
+        UcrChkBorderSize.SetText("Size")
+        UcrChkBorderSize.SetParameter(New RParameter("size"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        UcrNudBorderSize.SetParameter(New RParameter("size"))
+        UcrNudBorderSize.Increment = 0.1
+        UcrNudBorderSize.DecimalPlaces = 1
+        UcrNudBorderSize.Minimum = 0
 
         ucrChkPnlBackgroundColour.AddToLinkedControls(UcrInputPnlBackgroundColour, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         UcrChkPnlBackgroundFill.AddToLinkedControls(UcrInputPnlBackgroundFill, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -241,6 +278,7 @@ Public Class sdgPICSARainfallGraph
 
         ucrChkBorderColour.AddToLinkedControls(UcrInputBorderColour, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkBorderLineType.AddToLinkedControls(UcrInputBorderLinetype, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        UcrChkBorderSize.AddToLinkedControls(UcrNudBorderSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ' Line tab 
         ucrChkAddMean.SetText("Add Mean")
@@ -252,7 +290,7 @@ Public Class sdgPICSARainfallGraph
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewYScalecontinuousFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsFunction As RFunction = Nothing, Optional clsNewYLabsFunction As RFunction = Nothing, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewYScalecontinuousFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional bReset As Boolean = False)
         clsBaseOperator = clsNewOperator
 
         If Not bControlsInitialised Then
@@ -328,10 +366,19 @@ Public Class sdgPICSARainfallGraph
         UcrChkMinorGridLineSize.SetRCode(clsElementPanelGridMinor, bCloneIfNeeded:=True)
         UcrNudMinorGridLineSize.SetRCode(clsElementPanelGridMinor, bCloneIfNeeded:=True)
 
+        ucrChkBorderColour.SetRCode(clsPanelBorderElementRect, bCloneIfNeeded:=True)
+        ucrChkBorderColour.SetRCode(clsPanelBorderElementRect, bCloneIfNeeded:=True)
+        ucrChkBorderLineType.SetRCode(clsPanelBorderElementRect, bCloneIfNeeded:=True)
+        UcrInputBorderLinetype.SetRCode(clsPanelBorderElementRect, bCloneIfNeeded:=True)
+        UcrChkBorderSize.SetRCode(clsPanelBorderElementRect, bCloneIfNeeded:=True)
+        UcrNudBorderSize.SetRCode(clsPanelBorderElementRect, bCloneIfNeeded:=True)
+
 
         ' other functions 
 
         clsLabsFunction = clsNewLabsFunction
+        clsXLabsFunction = clsNewXLabsFunction
+        clsYLabsFunction = clsNewYLabsFunction
         clsXScalecontinuousFunction = clsNewXScalecontinuousFunction
         clsYScalecontinuousFunction = clsNewYScalecontinuousFunction
         clsYScaleDateFunction = clsNewYScaleDateFunction
@@ -393,9 +440,6 @@ Public Class sdgPICSARainfallGraph
         ucrInputYTo.SetRCode(clsYScalecontinuousSeqFunction, bReset, bCloneIfNeeded:=True)
         ucrInputYInStepsOf.SetRCode(clsYScalecontinuousSeqFunction, bReset, bCloneIfNeeded:=True)
 
-        ucrChkRemoveXAxisTitle.SetRCode(clsXScalecontinuousFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkRemoveXAxisTitle.SetRCode(clsYScalecontinuousFunction, bReset, bCloneIfNeeded:=True)
-
         ' Graph Titles 
         If clsNewLabsFunction IsNot Nothing Then
             clsLabsFunction = clsNewLabsFunction
@@ -403,17 +447,30 @@ Public Class sdgPICSARainfallGraph
             clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         End If
 
+        If clsNewXLabsFunction IsNot Nothing Then
+            clsXLabsFunction = clsNewXLabsFunction
+        Else
+            clsXLabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
+        End If
+
+        If clsNewYLabsFunction IsNot Nothing Then
+            clsYLabsFunction = clsNewYLabsFunction
+        Else
+            clsYLabsFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
+        End If
+
         ucrInputGraphTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputGraphSubTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputGraphcCaption.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputYAxisTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputXAxisTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
 
         UcrChkTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
         UcrChkSubTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
         UcrChkCaption.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
-        UcrChkXAxisTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
-        UcrChkYAxisTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
+
+        ucrPnlXAxisTitle.SetRCode(clsXLabsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputXAxisTitle.SetRCode(clsXLabsFunction, bReset, bCloneIfNeeded:=True)
+        UcrPnlYAxisTitle.SetRCode(clsYLabsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputYAxisTitle.SetRCode(clsYLabsFunction, bReset, bCloneIfNeeded:=True)
 
         If clsNewYScaleDateFunction IsNot Nothing Then
             clsYScaleDateFunction = clsNewYScaleDateFunction
@@ -421,12 +478,18 @@ Public Class sdgPICSARainfallGraph
             clsYScaleDateFunction = GgplotDefaults.clsYScaleDateFunction.Clone()
         End If
 
+        ' scale_y_date function is used for the days lables - this function has been included in GGplot defaults 
+        ' scale_y_date(date_label = %d %b) - for day/month option
+        ' scale_y_date(date_label = %j) - for day option - however this gives the day number like so 01-366, which isn't great 
+        ' so maybe when day option is selected we could remove the code instead 
         ucrChkLabelForDays.SetRCode(clsYScaleDateFunction, bCloneIfNeeded:=True)
         ucrInputLabelForDays.SetRCode(clsYScaleDateFunction, bCloneIfNeeded:=True)
 
         bRCodeSet = True
         AddRemoveTheme()
         AddRemoveLabs()
+        AddRemoveXLabs()
+        AddRemoveYLabs()
         AddRemoveSpecifyXAxisTickMarks()
         AddRemoveSpecifyYAxisTickMarks()
     End Sub
@@ -444,7 +507,7 @@ Public Class sdgPICSARainfallGraph
 
     Private Sub AddRemoveLabs()
         If bRCodeSet Then
-            If Not ucrInputGraphTitle.IsEmpty() OrElse Not ucrInputGraphSubTitle.IsEmpty() OrElse Not ucrInputGraphcCaption.IsEmpty() OrElse Not ucrInputXAxisTitle.IsEmpty() OrElse Not ucrInputYAxisTitle.IsEmpty() Then
+            If Not ucrInputGraphTitle.IsEmpty() OrElse Not ucrInputGraphSubTitle.IsEmpty() OrElse Not ucrInputGraphcCaption.IsEmpty() Then
                 clsBaseOperator.AddParameter("labs", clsRFunctionParameter:=clsLabsFunction)
             Else
                 clsBaseOperator.RemoveParameterByName("labs")
@@ -452,19 +515,68 @@ Public Class sdgPICSARainfallGraph
         End If
     End Sub
 
+    Private Sub AddRemoveXLabs()
+        If bRCodeSet Then
+            If rdoRemoveXAxisTitle.Checked OrElse (rdoChangeXAxisTitle.Checked AndAlso Not ucrInputXAxisTitle.IsEmpty()) Then
+                clsBaseOperator.AddParameter("lab", clsRFunctionParameter:=clsXLabsFunction)
+            Else
+                clsBaseOperator.RemoveParameterByName("lab")
+            End If
+        End If
+    End Sub
+
+    Private Sub AddRemoveYLabs()
+        If bRCodeSet Then
+            If Not rdoRemoveYAxisTitle.Checked OrElse (rdoChangeYAxisTitle.Checked AndAlso Not ucrInputYAxisTitle.IsEmpty()) Then
+                clsBaseOperator.AddParameter("lab", clsRFunctionParameter:=clsYLabsFunction)
+            Else
+                clsBaseOperator.RemoveParameterByName("lab")
+            End If
+        End If
+    End Sub
+
+    Private Sub SetXLabel()
+        If bRCodeSet Then
+            If rdoAutoXAxis.Checked Then
+                clsXLabsFunction.RemoveParameterByName("label")
+            ElseIf rdoRemoveXAxisTitle.Checked Then
+                clsXLabsFunction.AddParameter("label", Chr(34) & Chr(34))
+            Else
+                clsXLabsFunction.AddParameter("label", Chr(34) & ucrInputXAxisTitle.GetText() & Chr(34))
+            End If
+            AddRemoveXLabs()
+        End If
+    End Sub
+
+    Private Sub SetYLabel()
+        If bRCodeSet Then
+            If rdoAutoYAxis.Checked Then
+                clsYLabsFunction.RemoveParameterByName("label")
+            ElseIf rdoRemoveYAxisTitle.Checked Then
+                clsYLabsFunction.AddParameter("label", Chr(34) & Chr(34))
+            Else
+                clsYLabsFunction.AddParameter("label", Chr(34) & ucrInputYAxisTitle.GetText() & Chr(34))
+            End If
+            AddRemoveYLabs()
+        End If
+    End Sub
+
+    Private Sub ucrPnlXAxisTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlXAxisTitle.ControlValueChanged, ucrInputXAxisTitle.ControlValueChanged
+        SetXLabel()
+    End Sub
+
+    Private Sub ucrPnlYAxisTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles UcrPnlYAxisTitle.ControlValueChanged, ucrInputYAxisTitle.ControlValueChanged
+        SetYLabel()
+    End Sub
+
     Private Sub AddRemoveSpecifyXAxisTickMarks()
         If bRCodeSet Then
             If ucrChkSpecifyXAxisTickMarks.Checked AndAlso Not ucrInputXTo.IsEmpty AndAlso Not ucrInputXFrom.IsEmpty AndAlso Not ucrInputXInStepsOf.IsEmpty Then
                 clsBaseOperator.AddParameter("scale_x_continuous", clsRFunctionParameter:=clsXScalecontinuousFunction)
                 clsXScalecontinuousFunction.AddParameter("breaks", clsRFunctionParameter:=clsXScalecontinuousSeqFunction)
-                clsXScalecontinuousFunction.RemoveParameterByName("name")
-            ElseIf ucrChkRemoveXAxisTitle.Checked() Then
-                clsBaseOperator.AddParameter("scale_x_continuous", clsRFunctionParameter:=clsXScalecontinuousFunction)
-                clsXScalecontinuousFunction.AddParameter("name", " "" ")
-                clsXScalecontinuousFunction.RemoveParameterByName("breaks")
+
             Else
                 clsXScalecontinuousFunction.RemoveParameterByName("breaks")
-                clsXScalecontinuousFunction.RemoveParameterByName("name")
                 clsBaseOperator.RemoveParameterByName("scale_x_continuous")
             End If
         End If
@@ -475,18 +587,14 @@ Public Class sdgPICSARainfallGraph
             If ucrChkSpecifyYAxisTickMarks.Checked AndAlso Not ucrInputYTo.IsEmpty AndAlso Not ucrInputYFrom.IsEmpty AndAlso Not ucrInputYInStepsOf.IsEmpty Then
                 clsBaseOperator.AddParameter("scale_y_continuous", clsRFunctionParameter:=clsYScalecontinuousFunction)
                 clsYScalecontinuousFunction.AddParameter("breaks", clsRFunctionParameter:=clsYScalecontinuousSeqFunction)
-            ElseIf ucrChkRemoveYAxisTitle.Checked() Then
-                clsYScalecontinuousFunction.AddParameter("name", " "" ")
-                clsBaseOperator.AddParameter("scale_y_continuous", clsRFunctionParameter:=clsYScalecontinuousFunction)
             Else
                 clsYScalecontinuousFunction.RemoveParameterByName("breaks")
-                clsYScalecontinuousFunction.RemoveParameterByName("name")
                 clsBaseOperator.RemoveParameterByName("scale_x_continuous")
             End If
         End If
     End Sub
 
-    Private Sub ucrInputGraphTitle_ControlValueChanged() Handles ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged, ucrInputGraphcCaption.ControlValueChanged, ucrInputXAxisTitle.ControlValueChanged, ucrInputYAxisTitle.ControlValueChanged
+    Private Sub ucrInputGraphTitle_ControlValueChanged() Handles ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged, ucrInputGraphcCaption.ControlValueChanged
         AddRemoveLabs()
     End Sub
 
@@ -563,7 +671,7 @@ Public Class sdgPICSARainfallGraph
     End Sub
 
     Private Sub AddRemovePanelGridMajor()
-        If (UcrChkMajorGridLineColour.Checked AndAlso Not UcrInputMajorGridLineColour.IsEmpty()) OrElse (UcrChkMajorGridLinetype.Checked AndAlso Not UcrInputMajorGridLineLinetype.IsEmpty()) Then
+        If (UcrChkMajorGridLineColour.Checked AndAlso Not UcrInputMajorGridLineColour.IsEmpty()) OrElse (UcrChkMajorGridLinetype.Checked AndAlso Not UcrInputMajorGridLineLinetype.IsEmpty()) OrElse (UcrChkMajorGridLineSize.Checked AndAlso UcrNudMajorGridLineSize.GetText <> "") Then
             clsThemeFunction.AddParameter("panel.grid.major", clsRFunctionParameter:=clsElementPanelGridMajor)
         Else
             clsThemeFunction.RemoveParameterByName("panel.grid.major")
@@ -572,7 +680,7 @@ Public Class sdgPICSARainfallGraph
     End Sub
 
     Private Sub AddRemovePanelGridMinor()
-        If (UcrChkMinorGridLineColour.Checked AndAlso Not UcrInputMinorGridLineColour.IsEmpty()) OrElse (UcrChkMinorGridLineType.Checked AndAlso Not UcrInputMinorGridLineTpe.IsEmpty()) Then
+        If (UcrChkMinorGridLineColour.Checked AndAlso Not UcrInputMinorGridLineColour.IsEmpty()) OrElse (UcrChkMinorGridLineType.Checked AndAlso Not UcrInputMinorGridLineTpe.IsEmpty()) OrElse (UcrChkMinorGridLineSize.Checked AndAlso UcrNudMinorGridLineSize.GetText <> "") Then
             clsThemeFunction.AddParameter("panel.grid.minor", clsRFunctionParameter:=clsElementPanelGridMinor)
         Else
             clsThemeFunction.RemoveParameterByName("panel.grid.minor")
@@ -581,7 +689,7 @@ Public Class sdgPICSARainfallGraph
     End Sub
 
     Private Sub AddRemovePanelBorder()
-        If (ucrChkBorderColour.Checked AndAlso Not UcrInputBorderColour.IsEmpty()) OrElse (ucrChkBorderLineType.Checked AndAlso Not UcrInputBorderLinetype.IsEmpty()) Then
+        If (ucrChkBorderColour.Checked AndAlso Not UcrInputBorderColour.IsEmpty()) OrElse (ucrChkBorderLineType.Checked AndAlso Not UcrInputBorderLinetype.IsEmpty()) OrElse (UcrChkBorderSize.Checked AndAlso UcrNudBorderSize.GetText <> "") Then
             clsThemeFunction.AddParameter("panel.border", clsRFunctionParameter:=clsPanelBorderElementRect)
         Else
             clsThemeFunction.RemoveParameterByName("panel.border")
@@ -593,12 +701,12 @@ Public Class sdgPICSARainfallGraph
         AddRemovePanelBackground()
     End Sub
 
-    Private Sub UcrChkGridLineColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles UcrChkMajorGridLineColour.ControlValueChanged, UcrChkMajorGridLinetype.ControlValueChanged
+    Private Sub UcrChkMajorGridLineColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles UcrChkMajorGridLineColour.ControlValueChanged, UcrChkMajorGridLinetype.ControlValueChanged, UcrChkMajorGridLineSize.ControlValueChanged
         AddRemovePanelGridMajor()
     End Sub
 
-    Private Sub UcrChkBorderColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBorderColour.ControlValueChanged, ucrChkBorderLineType.ControlValueChanged
-        AddRemovePanelBorder()
+    Private Sub UcrChkMinorGridLineColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles UcrChkMinorGridLineColour.ControlValueChanged, UcrChkMinorGridLineType.ControlValueChanged, UcrChkMinorGridLineSize.ControlValueChanged
+        AddRemovePanelGridMinor()
     End Sub
 
     Private Sub UcrChkTitleSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles UcrChkTitleSize.ControlValueChanged
@@ -629,11 +737,17 @@ Public Class sdgPICSARainfallGraph
         AddRemoveAngleSizeYAxis()
     End Sub
 
-    Private Sub ucrChkRemoveXAxisTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRemoveXAxisTitle.ControlValueChanged, ucrChkSpecifyXAxisTickMarks.ControlValueChanged
+    Private Sub ucrInputGraphTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputYAxisTitle.ControlValueChanged, ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged, ucrInputGraphcCaption.ControlValueChanged, ucrInputXAxisTitle.ControlValueChanged
+
+    End Sub
+
+
+
+    Private Sub ucrChkRemoveXAxisTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSpecifyXAxisTickMarks.ControlValueChanged
         AddRemoveSpecifyXAxisTickMarks()
     End Sub
 
-    Private Sub ucrChkRemoveYAxisTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRemoveYAxisTitle.ControlValueChanged, ucrChkSpecifyYAxisTickMarks.ControlValueChanged
+    Private Sub ucrChkRemoveYAxisTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSpecifyYAxisTickMarks.ControlValueChanged
         AddRemoveSpecifyYAxisTickMarks()
     End Sub
 
@@ -643,5 +757,9 @@ Public Class sdgPICSARainfallGraph
 
     Private Sub ucrInputYFrom_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputYFrom.ControlContentsChanged, ucrInputYFrom.ControlContentsChanged, ucrInputYInStepsOf.ControlContentsChanged
         AddRemoveSpecifyYAxisTickMarks()
+    End Sub
+
+    Private Sub ucrChkBorderColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBorderColour.ControlValueChanged, ucrChkBorderLineType.ControlValueChanged, UcrChkBorderSize.ControlValueChanged
+        AddRemovePanelBorder()
     End Sub
 End Class
