@@ -281,16 +281,18 @@ nc_get_dim_min_max <- function(nc, dimension, time_as_date = TRUE) {
   return(bounds)
 }
 
-nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = TRUE, boundary = NULL, lon_points = NULL, lat_points = NULL, show_requested_points = TRUE) {
+nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = TRUE, boundary = NULL, lon_points = NULL, lat_points = NULL, id_points = NULL, show_requested_points = TRUE, great_circle_dist = TRUE) {
   if(sum(is.null(lon_points), is.null(lat_points)) == 1) stop("You must specificy both lon_points and lat_points")
   has_points <- (sum(is.null(lon_points), is.null(lat_points)) == 0)
   if(has_points && length(lon_points) != length(lat_points)) stop("lon_points and lat_points have unequal lengths.")
+  if(has_points && !is.null(id_points) && length(id_points) != length(lat_points)) stop("id_points (if specified) must have the same length as lon_points and lat_points.")
   dim_names <- ncdf4.helpers::nc.get.dim.names(nc, vars[1])
   dim_values <- list()
   requested_points_added <- FALSE
   for(dim_name in dim_names) {
     #why no wrapper for this in ncdf4.helper?
-    dim_values[[dim_name]] <- nc$dim[[dim_name]]$vals
+    #(as.numeric ensures vectors no not have array class)
+    dim_values[[dim_name]] <- as.numeric(nc$dim[[dim_name]]$vals)
     #This is not recommended but appears in tutorials
     #ncdf4::ncvar_get(nc, dim_name)
   }
@@ -362,7 +364,7 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
       curr_count <- count
       curr_dim_values <- dim_values
       xy_possible <- expand.grid(xs, ys)
-      point_ind <- which.min(sp::spDistsN1(pts = as.matrix(xy_possible), pt = c(lon_points[i], lat_points[i]), longlat = TRUE))
+      point_ind <- which.min(sp::spDistsN1(pts = as.matrix(xy_possible), pt = c(lon_points[i], lat_points[i]), longlat = great_circle_dist))
       x_ind <- which(xs == xy_possible[point_ind, 1])[1]
       curr_start[1] <- x_ind
       curr_count[1]  <- 1
@@ -374,6 +376,7 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
       if(show_requested_points) {
         curr_dim_values[[paste0("requested_", x_var)]] <- lon_points[i]
         curr_dim_values[[paste0("requested_", y_var)]] <- lat_points[i]
+        if(!is.null(id_points)) curr_dim_values[["requested_id"]] <- id_points[i]
         requested_points_added <- TRUE
       }
       
@@ -393,7 +396,7 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
   var_data_list <- list()
   for(i in seq_along(start_list)) {
     curr_dim_values <- dim_values_list[[i]]
-    curr_var_data <- expand.grid(curr_dim_values, KEEP.OUT.ATTRS = FALSE)
+    curr_var_data <- expand.grid(curr_dim_values, KEEP.OUT.ATTRS = FALSE, stringsAsFactors = FALSE)
     for(j in seq_along(curr_var_data)) {
       attr(curr_var_data[[j]], "dim") <- NULL
     }
@@ -1128,4 +1131,5 @@ hashed_id <- function(x, salt, algo = "crc32") {
     }
   y <- sapply(y, function(X) digest::digest(X, algo = algo))
   as.character(y)
+
 }
