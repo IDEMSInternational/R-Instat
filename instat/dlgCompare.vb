@@ -49,22 +49,23 @@ Public Class dlgCompare
     End Sub
 
     Private Sub InitialiseDialog()
-        'TODO:This is really temporary as setting conditions properly will be done once anomalies option is working
-        'rdoAnomalies.Enabled = False
-        ucrPnlCompare.bAllowNonConditionValues = True
 
         ucrPnlCompare.AddRadioButton(rdoDifferences)
         ucrPnlCompare.AddRadioButton(rdoAnomalies)
         ucrPnlCompare.AddParameterPresentCondition(rdoDifferences, "sub1")
+        ucrPnlCompare.AddParameterPresentCondition(rdoAnomalies, "sub1", False)
 
         ucrSelectorCompare.SetParameter(New RParameter("", 0))
         ucrSelectorCompare.SetParameterIsrfunction()
 
-        ucrReceiverSateliteElement.SetParameter(New RParameter("satelite_element", 0, bNewIncludeArgumentName:=False))
-        ucrReceiverSateliteElement.SetParameterIsString()
-        ucrReceiverSateliteElement.bWithQuotes = False
-        ucrReceiverSateliteElement.Selector = ucrSelectorCompare
-        ucrReceiverSateliteElement.SetDataType("numeric")
+        ucrReceiverStation.SetParameterIsString()
+        ucrReceiverStation.Selector = ucrSelectorCompare
+        ucrReceiverStation.SetClimaticType("station")
+        'ucrReceiverStation.bAutoFill = True
+
+        ucrReceiverWithinYear.SetParameterIsString()
+        ucrReceiverWithinYear.bWithQuotes = False
+        ucrReceiverWithinYear.Selector = ucrSelectorCompare
 
         ucrReceiverStationElement.SetParameter(New RParameter("station_element", 1, bNewIncludeArgumentName:=False))
         ucrReceiverStationElement.SetParameterIsString()
@@ -72,25 +73,22 @@ Public Class dlgCompare
         ucrReceiverStationElement.Selector = ucrSelectorCompare
         ucrReceiverStationElement.SetDataType("numeric")
 
-        ucrReceiverStation.SetParameterIsString()
-        ucrReceiverStation.Selector = ucrSelectorCompare
-        ucrReceiverStation.SetClimaticType("station")
-        ucrReceiverStation.bAutoFill = True
-        ucrReceiverStation.bWithQuotes = False
-
-        ucrReceiverWithinYear.SetParameter(New RParameter("", 1))
-        ucrReceiverWithinYear.SetParameterIsString()
-        ucrReceiverWithinYear.bWithQuotes = False
-        ucrReceiverWithinYear.Selector = ucrSelectorCompare
+        ucrReceiverSateliteElement.SetParameter(New RParameter("satelite_element", 0, bNewIncludeArgumentName:=False))
+        ucrReceiverSateliteElement.SetParameterIsString()
+        ucrReceiverSateliteElement.bWithQuotes = False
+        ucrReceiverSateliteElement.Selector = ucrSelectorCompare
+        ucrReceiverSateliteElement.SetDataType("numeric")
 
         ucrChkMovingAverage.SetText("Moving Average")
+        'TODO:This is temporarily disabled!
+        ucrChkMovingAverage.Checked = True
+        ucrChkMovingAverage.Enabled = False
+        ucrNudMovingAverage.Enabled = False
 
-        ucrChkBias.AddParameterPresentCondition(True, "sub1", True)
-        ucrChkBias.AddParameterPresentCondition(False, "sub1", False)
+        ucrChkBias.SetParameter(New RParameter("sub1", clsBiasCalculation, 0, bNewIncludeArgumentName:=False), False)
         ucrChkBias.SetText("Bias")
 
-        ucrChkAbsDev.AddParameterPresentCondition(True, "sub2", True)
-        ucrChkAbsDev.AddParameterPresentCondition(False, "sub2", False)
+        ucrChkAbsDev.SetParameter(New RParameter("sub2", clsAbsDevCalculation, 1, bNewIncludeArgumentName:=False), False)
         ucrChkAbsDev.SetText("Absolute deviation")
 
         ucrPnlCompare.AddToLinkedControls(ucrReceiverStation, {rdoAnomalies}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
@@ -98,9 +96,8 @@ Public Class dlgCompare
         ucrPnlCompare.AddToLinkedControls(ucrInputSateliteAnomalies, {rdoAnomalies}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlCompare.AddToLinkedControls(ucrInputStationAnomalies, {rdoAnomalies}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkBias.AddToLinkedControls(ucrInputBias, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkBias.AddToLinkedControls(ucrInputBias, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkBias.AddToLinkedControls(ucrInputBias, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkBias.AddToLinkedControls(ucrInputBias, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrChkBias.AddToLinkedControls(ucrInputBias, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrChkAbsDev.AddToLinkedControls(ucrInputAbsDev, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlCompare.AddToLinkedControls(ucrChkBias, {rdoDifferences}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlCompare.AddToLinkedControls(ucrChkAbsDev, {rdoDifferences}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
@@ -143,6 +140,13 @@ Public Class dlgCompare
         clsCombinedCalculation.Clear()
         clsRunInstatCalculation.Clear()
 
+        clsSateliteAnomalies.Clear()
+        clsStationAnomalies.Clear()
+        clsSateliteMeanFunction.Clear()
+        clsStationMeanFunction.Clear()
+        clsListManipulation.Clear()
+        clsStationMinusOperator.Clear()
+
         ucrSelectorCompare.Reset()
         ucrReceiverSateliteElement.SetMeAsReceiver()
 
@@ -179,6 +183,7 @@ Public Class dlgCompare
         clsCombinedCalculation.AddParameter("sub_calculation", clsRFunctionParameter:=clsListFunction, iPosition:=2)
 
         clsListFunction.SetRCommand("list")
+        clsListFunction.AddParameter("sub1", clsRFunctionParameter:=clsBiasCalculation, bIncludeArgumentName:=False, iPosition:=0)
 
         'Anomalies calculations
         clsSateliteAnomalies.SetRCommand("instat_calculation$new")
@@ -254,8 +259,12 @@ Public Class dlgCompare
             Else
                 bOkEnabled = False
             End If
-        Else
-            bOkEnabled = True
+        ElseIf rdoAnomalies.Checked Then
+            If Not ucrReceiverSateliteElement.IsEmpty AndAlso Not ucrReceiverStationElement.IsEmpty AndAlso Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverWithinYear.IsEmpty AndAlso Not ucrInputSateliteAnomalies.IsEmpty AndAlso Not ucrInputStationAnomalies.IsEmpty Then
+                bOkEnabled = True
+            Else
+                bOkEnabled = False
+            End If
         End If
         ucrBase.OKEnabled(bOkEnabled)
     End Sub
@@ -304,27 +313,11 @@ Public Class dlgCompare
         strCurrDataName = Chr(34) & ucrSelectorCompare.strCurrentDataFrame & Chr(34)
     End Sub
 
-    Private Sub ucrChkBias_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBias.ControlValueChanged
-        If ucrChkBias.Checked Then
-            clsListFunction.AddParameter("sub1", clsRFunctionParameter:=clsBiasCalculation, bIncludeArgumentName:=False, iPosition:=0)
-        Else
-            clsListFunction.RemoveParameterByName("sub1")
-        End If
-    End Sub
-
-    Private Sub ucrChkAbsDev_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAbsDev.ControlValueChanged
-        If ucrChkAbsDev.Checked Then
-            clsListFunction.AddParameter("sub2", clsRFunctionParameter:=clsAbsDevCalculation, bIncludeArgumentName:=False, iPosition:=1)
-        Else
-            clsListFunction.RemoveParameterByName("sub2")
-        End If
-    End Sub
-
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrReceiverWithinYear.ControlValueChanged
         clsGroupByStationDOY.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames & "," & strCurrDataName & "=" & ucrReceiverWithinYear.GetVariableNames & ")", iPosition:=3)
     End Sub
 
-    Private Sub ucrReceiverSateliteElement_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkBias.ControlContentsChanged, ucrChkAbsDev.ControlContentsChanged, ucrInputBias.ControlContentsChanged, ucrInputAbsDev.ControlContentsChanged, ucrPnlCompare.ControlContentsChanged
+    Private Sub ucrReceiverSateliteElement_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSateliteElement.ControlContentsChanged, ucrReceiverStationElement.ControlContentsChanged, ucrChkBias.ControlContentsChanged, ucrChkAbsDev.ControlContentsChanged, ucrInputBias.ControlContentsChanged, ucrInputAbsDev.ControlContentsChanged, ucrPnlCompare.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged, ucrReceiverWithinYear.ControlContentsChanged, ucrInputSateliteAnomalies.ControlContentsChanged, ucrInputStationAnomalies.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
