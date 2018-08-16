@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class dlgTidyClimaticData
+Partial Class dlgTidyDailyData
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,7 +22,7 @@ Partial Class dlgTidyClimaticData
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgTidyClimaticData))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgTidyDailyData))
         Me.lblColumnPer = New System.Windows.Forms.Label()
         Me.rdoDay = New System.Windows.Forms.RadioButton()
         Me.rdoMonth = New System.Windows.Forms.RadioButton()
@@ -254,7 +254,7 @@ Partial Class dlgTidyClimaticData
         resources.ApplyResources(Me.lblNewDataFrameName, "lblNewDataFrameName")
         Me.lblNewDataFrameName.Name = "lblNewDataFrameName"
         '
-        'dlgTidyClimaticData
+        'dlgTidyDailyData
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -282,7 +282,7 @@ Partial Class dlgTidyClimaticData
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgTidyClimaticData"
+        Me.Name = "dlgTidyDailyData"
         Me.grpElements.ResumeLayout(False)
         Me.grpElements.PerformLayout()
         Me.grpOptions.ResumeLayout(False)

@@ -16,14 +16,14 @@
 
 Imports instat.Translations
 
-Public Class dlgTidyClimaticData
+Public Class dlgTidyDailyData
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsTidyClimaticFunction As New RFunction
 
     Private iTextBoxMaxY As Integer
 
-    Private Sub dlgTidyClimaticData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgTidyDailyData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             iTextBoxMaxY = grpElements.Location.Y
             InitialiseDialog()
