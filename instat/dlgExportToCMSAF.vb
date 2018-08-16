@@ -43,9 +43,6 @@ Public Class dlgExportToCMSAF
         ucrReceiverLatitude.Selector = ucrSelectorImportToCMSAF
         ucrReceiverElement.Selector = ucrSelectorImportToCMSAF
 
-        ucrSelectorImportToCMSAF.SetParameter(New RParameter("x", 0))
-        ucrSelectorImportToCMSAF.SetParameterIsrfunction()
-
         ucrReceiverStation.SetParameter(New RParameter("station_name ", 0))
         ucrReceiverStation.SetParameterIsRFunction()
         ucrReceiverStation.SetClimaticType("station")
@@ -63,8 +60,8 @@ Public Class dlgExportToCMSAF
         ucrReceiverLatitude.SetParameter(New RParameter("lat", 3))
         ucrReceiverLatitude.SetParameterIsRFunction()
 
-        ucrReceiverElement.SetParameter(New RParameter("SIS", 4))
-        ucrReceiverElement.SetParameterIsRFunction()
+        ucrReceiverElement.SetParameter(New RParameter("element", 4, bNewIncludeArgumentName:=False))
+        ucrReceiverElement.SetParameterIsString()
 
         ucrInputExportFile.SetParameter(New RParameter("file", 1))
         ucrInputExportFile.IsReadOnly = True
@@ -108,10 +105,9 @@ Public Class dlgExportToCMSAF
         ucrReceiverDate.SetRCode(clsAsDataFrameFunction, bReset)
         ucrReceiverLongitude.SetRCode(clsAsDataFrameFunction, bReset)
         ucrReceiverLatitude.SetRCode(clsAsDataFrameFunction, bReset)
-        ucrReceiverElement.SetRCode(clsAsDataFrameFunction, bReset)
+        ucrReceiverElement.SetRCode(clsAssignOperator, bReset)
         ucrInputExportFile.SetRCode(clsExportFunction, bReset)
         ucrReceiverDate.SetRCode(clsAsDataFrameFunction, bReset)
-        ucrSelectorImportToCMSAF.SetRCode(clsAsDataFrameFunction, bReset)
     End Sub
 
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
@@ -131,9 +127,8 @@ Public Class dlgExportToCMSAF
         End Using
     End Sub
 
-    Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlValueChanged
-        'This parameter is being added manually here because we are setting it elsewhere as an Rfunction.
-        clsAssignOperator.AddParameter("SIS", ucrReceiverElement.GetVariableNames, bIncludeArgumentName:=False, iPosition:=1)
+    Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlValueChanged, ucrSelectorImportToCMSAF.ControlValueChanged
+        'clsAsDataFrameFunction.AddParameter(strParameterName:=ucrReceiverElement.GetVariableNames(bWithQuotes:=False), clsRFunctionParameter:=ucrReceiverElement.GetVariables, iPosition:=4)
     End Sub
 
     Private Sub TestOkEnabled()

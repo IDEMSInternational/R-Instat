@@ -24,7 +24,10 @@ Public Class ucrDayOfYear
     Private bParameterIsString As Boolean = False
     ' If True uses 29 February is included and 31 December = 366
     ' Otherwise 29 February is not included and 31 December = 365
+    ' TODO Not all features inplemented for b366DayOfYear = False
     Private b366DayOfYear As Boolean = True
+    ' The start day for the doy column, usually 1 unless a shifted doy e.g. doy shifted to 1 February has iStartDay = 32
+    Private iStartDay As Integer = 1
     Private dtbMonths As DataTable
     Private strMonthsFull As String()
     Private strMonthsAbbreviated As String()
@@ -94,6 +97,10 @@ Public Class ucrDayOfYear
         bParameterIsNumber = False
     End Sub
 
+    Public Sub SetStartDay(iNewStartDay As Integer)
+        iStartDay = iNewStartDay
+    End Sub
+
     ' Returns a string to be used as the parameter value, depending on the options set e.g. 366 or "31 December" or "31/12"
     Public Function GetValue() As String
         If bParameterIsNumber Then
@@ -111,6 +118,7 @@ Public Class ucrDayOfYear
         Dim dtTemp As Date
         Dim iMonth As Integer
         Dim iDay As Integer
+        Dim iDoy As Integer
 
         If b366DayOfYear Then
             iYear = 2000
@@ -121,7 +129,9 @@ Public Class ucrDayOfYear
             Try
                 If Integer.TryParse(ucrInputMonth.GetValue(), iMonth) AndAlso Integer.TryParse(ucrInputDay.GetValue(), iDay) Then
                     dtTemp = New Date(year:=iYear, month:=ucrInputMonth.GetValue() + 1, day:=ucrInputDay.GetValue())
-                    Return dtTemp.DayOfYear
+                    iDoy = dtTemp.DayOfYear
+                    iDoy = ModPos(iDoy - iStartDay + 1, If(b366DayOfYear, 366, 365))
+                    Return iDoy
                 End If
             Catch ex As Exception
                 MsgBox("Developer error: Invalid month and/or day value. For control: " & Name & ".")
@@ -261,6 +271,7 @@ Public Class ucrDayOfYear
         End If
         If bSuccess Then
             Try
+                iDoy = ModPos(iDoy + iStartDay - 1, If(b366DayOfYear, 366, 365))
                 dtTemp = New Date(year:=iYear, month:=1, day:=1).AddDays(iDoy - 1)
                 bUpdate = False
                 ucrInputDay.SetName(dtTemp.Day)
@@ -278,4 +289,17 @@ Public Class ucrDayOfYear
     Public Sub SetValue(iDay As Integer, iMonth As Integer)
 
     End Sub
+
+    ' This is just x Mod m but this ensures positive (or non negative for bExcludeZero = False) is always returned
+    Private Function ModPos(x As Integer, m As Integer, Optional bExcludeZero As Boolean = True) As Integer
+        Dim y As Integer
+
+        y = ((x Mod m) + m) Mod m
+        If bExcludeZero Then
+            If y = 0 Then
+                y = m
+            End If
+        End If
+        Return y
+    End Function
 End Class
