@@ -1905,6 +1905,7 @@ instat_object$set("public","tidy_climatic_data", function(x, format, stack_cols,
     y$doy[y$doy == 0] <- 60
   }
   
+  continue <- TRUE
   # check if there are any non missing values on missing dates
   # this is a problem as missing dates are invalid dates so should not have values
   invalid_ind <- is.na(y$date) & !is.na(y[[element_name]])
@@ -1927,7 +1928,6 @@ instat_object$set("public","tidy_climatic_data", function(x, format, stack_cols,
       invalid_data_display[[element_name]] <- invalid_data[[element_name]]
       print(invalid_data_display, row.names = FALSE)
     }
-    continue <- TRUE
     if(ignore_invalid) cat("Warning: These rows have been removed.\n")
     else {
       # Not stop here for that output can be displayed by R-Instat
