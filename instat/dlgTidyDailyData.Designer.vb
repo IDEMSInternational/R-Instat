@@ -46,7 +46,7 @@ Partial Class dlgTidyDailyData
         Me.ucrReceiverDayofMonth = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrPnlReshapeClimaticData = New instat.UcrPanel()
-        Me.ucrSelectorTidyClimaticData = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSelectorTidyDailyData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputNewDataFrame = New instat.ucrInputTextBox()
@@ -219,13 +219,13 @@ Partial Class dlgTidyDailyData
         resources.ApplyResources(Me.ucrPnlReshapeClimaticData, "ucrPnlReshapeClimaticData")
         Me.ucrPnlReshapeClimaticData.Name = "ucrPnlReshapeClimaticData"
         '
-        'ucrSelectorTidyClimaticData
+        'ucrSelectorTidyDailyData
         '
-        Me.ucrSelectorTidyClimaticData.bDropUnusedFilterLevels = False
-        Me.ucrSelectorTidyClimaticData.bShowHiddenColumns = False
-        Me.ucrSelectorTidyClimaticData.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorTidyClimaticData, "ucrSelectorTidyClimaticData")
-        Me.ucrSelectorTidyClimaticData.Name = "ucrSelectorTidyClimaticData"
+        Me.ucrSelectorTidyDailyData.bDropUnusedFilterLevels = False
+        Me.ucrSelectorTidyDailyData.bShowHiddenColumns = False
+        Me.ucrSelectorTidyDailyData.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorTidyDailyData, "ucrSelectorTidyDailyData")
+        Me.ucrSelectorTidyDailyData.Name = "ucrSelectorTidyDailyData"
         '
         'ucrReceiverStation
         '
@@ -276,7 +276,7 @@ Partial Class dlgTidyDailyData
         Me.Controls.Add(Me.rdoYear)
         Me.Controls.Add(Me.ucrPnlReshapeClimaticData)
         Me.Controls.Add(Me.lblColumnPer)
-        Me.Controls.Add(Me.ucrSelectorTidyClimaticData)
+        Me.Controls.Add(Me.ucrSelectorTidyDailyData)
         Me.Controls.Add(Me.ucrReceiverStation)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -292,7 +292,7 @@ Partial Class dlgTidyDailyData
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrSelectorTidyClimaticData As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectorTidyDailyData As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblColumnPer As Label
     Friend WithEvents rdoDay As RadioButton
     Friend WithEvents rdoMonth As RadioButton

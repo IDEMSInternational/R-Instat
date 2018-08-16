@@ -46,17 +46,17 @@ Public Class dlgTidyDailyData
         ucrPnlReshapeClimaticData.AddRadioButton(rdoMonth)
         ucrPnlReshapeClimaticData.AddRadioButton(rdoDay)
 
-        ucrSelectorTidyClimaticData.SetParameter(New RParameter("x", 0))
-        ucrSelectorTidyClimaticData.SetParameterIsrfunction()
+        ucrSelectorTidyDailyData.SetParameter(New RParameter("x", 0))
+        ucrSelectorTidyDailyData.SetParameterIsrfunction()
 
 
-        ucrReceiverStation.Selector = ucrSelectorTidyClimaticData
-        ucrReceiverMultipleStack.Selector = ucrSelectorTidyClimaticData
-        ucrReceiverElement.Selector = ucrSelectorTidyClimaticData
+        ucrReceiverStation.Selector = ucrSelectorTidyDailyData
+        ucrReceiverMultipleStack.Selector = ucrSelectorTidyDailyData
+        ucrReceiverElement.Selector = ucrSelectorTidyDailyData
 
-        ucrReceiverYear.Selector = ucrSelectorTidyClimaticData
-        ucrReceiverMonth.Selector = ucrSelectorTidyClimaticData
-        ucrReceiverDayofMonth.Selector = ucrSelectorTidyClimaticData
+        ucrReceiverYear.Selector = ucrSelectorTidyDailyData
+        ucrReceiverMonth.Selector = ucrSelectorTidyDailyData
+        ucrReceiverDayofMonth.Selector = ucrSelectorTidyDailyData
 
         ucrReceiverMultipleStack.SetParameter(New RParameter("stack_cols", 2))
         ucrReceiverMultipleStack.SetParameterIsString()
@@ -127,7 +127,7 @@ Public Class dlgTidyDailyData
     Private Sub SetDefaults()
         clsTidyClimaticFunction = New RFunction
 
-        ucrSelectorTidyClimaticData.Reset()
+        ucrSelectorTidyDailyData.Reset()
         ucrReceiverMultipleStack.SetMeAsReceiver()
         ucrInputNewDataFrame.Reset()
 
@@ -174,8 +174,8 @@ Public Class dlgTidyDailyData
     End Sub
 
     Private Sub NewDefaultName()
-        If (Not ucrInputNewDataFrame.bUserTyped) AndAlso ucrSelectorTidyClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-            ucrInputNewDataFrame.SetPrefix(ucrSelectorTidyClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_tidy")
+        If (Not ucrInputNewDataFrame.bUserTyped) AndAlso ucrSelectorTidyDailyData.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+            ucrInputNewDataFrame.SetPrefix(ucrSelectorTidyDailyData.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_tidy")
         End If
     End Sub
 
@@ -236,7 +236,7 @@ Public Class dlgTidyDailyData
     End Sub
 
     Private Sub ChangeCurrentReceiver()
-        Dim CurrReceiver = ucrSelectorTidyClimaticData.CurrentReceiver
+        Dim CurrReceiver = ucrSelectorTidyDailyData.CurrentReceiver
 
         If (CurrReceiver Is ucrReceiverDayofMonth AndAlso Not rdoMonth.Checked) OrElse (CurrReceiver Is ucrReceiverMonth AndAlso Not rdoDay.Checked) OrElse (rdoYear.Checked) Then
             ucrReceiverMultipleStack.SetMeAsReceiver()
@@ -247,7 +247,7 @@ Public Class dlgTidyDailyData
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrSelectorReshapeClimaticData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorTidyClimaticData.ControlValueChanged
+    Private Sub ucrSelectorTidyDailyData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorTidyDailyData.ControlValueChanged
         NewDefaultName()
     End Sub
 
