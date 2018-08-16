@@ -738,28 +738,28 @@
   <data name="&gt;&gt;ucrPnlReshapeClimaticData.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
-  <data name="ucrSelectorTidyClimaticData.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrSelectorTidyDailyData.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 85</value>
   </data>
-  <data name="ucrSelectorTidyClimaticData.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ucrSelectorTidyDailyData.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="ucrSelectorTidyClimaticData.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrSelectorTidyDailyData.Size" type="System.Drawing.Size, System.Drawing">
     <value>210, 180</value>
   </data>
-  <data name="ucrSelectorTidyClimaticData.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrSelectorTidyDailyData.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;ucrSelectorTidyClimaticData.Name" xml:space="preserve">
-    <value>ucrSelectorTidyClimaticData</value>
+  <data name="&gt;&gt;ucrSelectorTidyDailyData.Name" xml:space="preserve">
+    <value>ucrSelectorTidyDailyData</value>
   </data>
-  <data name="&gt;&gt;ucrSelectorTidyClimaticData.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrSelectorTidyDailyData.Type" xml:space="preserve">
     <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrSelectorTidyClimaticData.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrSelectorTidyDailyData.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrSelectorTidyClimaticData.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrSelectorTidyDailyData.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
   <data name="ucrReceiverStation.Location" type="System.Drawing.Point, System.Drawing">
@@ -811,10 +811,10 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Tidy Climatic Data</value>
+    <value>Tidy Daily Data</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>dlgTidyClimaticData</value>
+    <value>dlgTidyDailyData</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
