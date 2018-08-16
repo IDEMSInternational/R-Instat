@@ -125,18 +125,18 @@ Public Class dlgExportToCMSAF
     Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlValueChanged, ucrSelectorImportToCMSAF.ControlValueChanged
         Dim strPreviousElement As String = ""
 
+        For Each clsTempParam In clsDataFrameFunction.clsParameters
+            If Not {"station_name", "date", "lon", "lat"}.Contains(clsTempParam.strArgumentName) Then
+                strPreviousElement = clsTempParam.strArgumentName
+                Exit For
+            End If
+        Next
+        If strPreviousElement <> "" Then
+            clsDataFrameFunction.RemoveParameterByName(strPreviousElement)
+        End If
+
         If Not ucrReceiverElement.IsEmpty() Then
             clsDataFrameFunction.AddParameter(strParameterName:=ucrReceiverElement.GetVariableNames(bWithQuotes:=False), clsRFunctionParameter:=ucrReceiverElement.GetVariables, iPosition:=4)
-        Else
-            For Each clsTempParam In clsDataFrameFunction.clsParameters
-                If Not {"station_name", "date", "lon", "lat"}.Contains(clsTempParam.strArgumentName) Then
-                    strPreviousElement = clsTempParam.strArgumentName
-                    Exit For
-                End If
-            Next
-            If strPreviousElement <> "" Then
-                clsDataFrameFunction.RemoveParameterByName(strPreviousElement)
-            End If
         End If
     End Sub
 
