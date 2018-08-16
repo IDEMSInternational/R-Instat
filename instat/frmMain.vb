@@ -2011,4 +2011,8 @@ Public Class frmMain
     Private Sub mnuClimaticTidyandExamineMerge_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineMerge.Click
         dlgMerge.ShowDialog()
     End Sub
+
+    Private Sub mnuTbLastGraph_Click(sender As Object, e As EventArgs) Handles mnuTbLastGraph.Click
+        clsRLink.ViewLastGraph()
+    End Sub
 End Class
