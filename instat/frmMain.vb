@@ -2004,8 +2004,8 @@ Public Class frmMain
         dlgImportShapeFiles.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticTidyandExamineTidyData_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineTidyData.Click
-        dlgTidyClimaticData.ShowDialog()
+    Private Sub mnuClimaticTidyandExamineTidyDailyData_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineTidyDailyData.Click
+        dlgTidyDailyData.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticTidyandExamineMerge_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineMerge.Click

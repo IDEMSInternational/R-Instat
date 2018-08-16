@@ -573,6 +573,15 @@
   <data name="&gt;&gt;ucrInputNewDataFrame.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ucrChkIgnoreInvalid.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 19</value>
+  </data>
+  <data name="ucrChkIgnoreInvalid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 20</value>
+  </data>
+  <data name="ucrChkIgnoreInvalid.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
   <data name="&gt;&gt;ucrChkIgnoreInvalid.Name" xml:space="preserve">
     <value>ucrChkIgnoreInvalid</value>
   </data>
@@ -584,6 +593,15 @@
   </data>
   <data name="&gt;&gt;ucrChkIgnoreInvalid.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="ucrChkSilent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 53</value>
+  </data>
+  <data name="ucrChkSilent.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 20</value>
+  </data>
+  <data name="ucrChkSilent.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
   </data>
   <data name="&gt;&gt;ucrChkSilent.Name" xml:space="preserve">
     <value>ucrChkSilent</value>
@@ -811,10 +829,10 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Tidy Climatic Data</value>
+    <value>Tidy Daily Data</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>dlgTidyClimaticData</value>
+    <value>dlgTidyDailyData</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -863,47 +881,5 @@
   </data>
   <data name="&gt;&gt;grpElements.ZOrder" xml:space="preserve">
     <value>3</value>
-  </data>
-  <data name="ucrChkIgnoreInvalid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 19</value>
-  </data>
-  <data name="ucrChkIgnoreInvalid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 20</value>
-  </data>
-  <data name="ucrChkIgnoreInvalid.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
-  <data name="&gt;&gt;ucrChkIgnoreInvalid.Name" xml:space="preserve">
-    <value>ucrChkIgnoreInvalid</value>
-  </data>
-  <data name="&gt;&gt;ucrChkIgnoreInvalid.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkIgnoreInvalid.Parent" xml:space="preserve">
-    <value>grpOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkIgnoreInvalid.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrChkSilent.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 53</value>
-  </data>
-  <data name="ucrChkSilent.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 20</value>
-  </data>
-  <data name="ucrChkSilent.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSilent.Name" xml:space="preserve">
-    <value>ucrChkSilent</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSilent.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSilent.Parent" xml:space="preserve">
-    <value>grpOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSilent.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
 </root>
