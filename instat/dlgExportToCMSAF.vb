@@ -19,9 +19,9 @@ Imports instat.Translations
 Public Class dlgExportToCMSAF
     Dim bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-
-    Private clsAsDataFrameFunction, clsAtrributesFunction, clsExportFunction As New RFunction
+    Private clsDataFrameFunction, clsAtrributesFunction, clsSaveFunction As New RFunction
     Private clsAssignOperator As New ROperator
+
     Private Sub dlgExportToCMSAF_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -53,65 +53,61 @@ Public Class dlgExportToCMSAF
         ucrReceiverDate.SetClimaticType("date")
         ucrReceiverDate.bAutoFill = True
 
-
         ucrReceiverLongitude.SetParameter(New RParameter("lon", 2))
         ucrReceiverLongitude.SetParameterIsRFunction()
 
         ucrReceiverLatitude.SetParameter(New RParameter("lat", 3))
         ucrReceiverLatitude.SetParameterIsRFunction()
 
-        ucrReceiverElement.SetParameter(New RParameter("element", 4, bNewIncludeArgumentName:=False))
+        ucrReceiverElement.SetParameter(New RParameter("right", 1, bNewIncludeArgumentName:=False))
         ucrReceiverElement.SetParameterIsString()
 
         ucrInputExportFile.SetParameter(New RParameter("file", 1))
         ucrInputExportFile.IsReadOnly = True
-
     End Sub
 
     Private Sub SetDefaults()
 
-        clsAsDataFrameFunction = New RFunction
+        clsDataFrameFunction = New RFunction
         clsAtrributesFunction = New RFunction
-        clsExportFunction = New RFunction
+        clsSaveFunction = New RFunction
 
         clsAssignOperator = New ROperator
 
         ucrBase.clsRsyntax.ClearCodes()
-        ucrReceiverElement.SetMeAsReceiver()
         ucrSelectorImportToCMSAF.Reset()
+        ucrReceiverElement.SetMeAsReceiver()
         ucrInputExportFile.SetName("")
 
-        clsAsDataFrameFunction.SetRCommand("data.frame")
-        clsAsDataFrameFunction.SetAssignTo("x")
+        clsDataFrameFunction.SetRCommand("data.frame")
 
         clsAtrributesFunction.SetRCommand("attr")
-        clsAtrributesFunction.AddParameter("x", clsRFunctionParameter:=clsAsDataFrameFunction, bIncludeArgumentName:=False, iPosition:=0)
-        clsAtrributesFunction.AddParameter("element_name", Chr(34) & "element_name" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
+        clsAtrributesFunction.AddParameter("x", clsRFunctionParameter:=clsDataFrameFunction, iPosition:=0)
+        clsAtrributesFunction.AddParameter("which", Chr(34) & "element_name" & Chr(34), iPosition:=1)
 
         clsAssignOperator.SetOperation("<-")
         clsAssignOperator.AddParameter("left", clsRFunctionParameter:=clsAtrributesFunction, iPosition:=0)
 
-        clsExportFunction.SetPackageName("rio")
-        clsExportFunction.SetRCommand("export")
-        clsExportFunction.AddParameter("x", clsRFunctionParameter:=clsAsDataFrameFunction, bIncludeArgumentName:=False, iPosition:=0)
+        clsSaveFunction.SetRCommand("save")
+        clsSaveFunction.AddParameter("x", clsRFunctionParameter:=clsDataFrameFunction, bIncludeArgumentName:=False, iPosition:=0)
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsAsDataFrameFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDataFrameFunction)
         ucrBase.clsRsyntax.AddToAfterCodes(clsAssignOperator, iPosition:=0)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsExportFunction, iPosition:=1)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsSaveFunction, iPosition:=1)
     End Sub
 
-    Private Sub SetRCodeForControls(bRese As Boolean)
-        ucrReceiverStation.SetRCode(clsAsDataFrameFunction, bReset)
-        ucrReceiverDate.SetRCode(clsAsDataFrameFunction, bReset)
-        ucrReceiverLongitude.SetRCode(clsAsDataFrameFunction, bReset)
-        ucrReceiverLatitude.SetRCode(clsAsDataFrameFunction, bReset)
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrReceiverStation.SetRCode(clsDataFrameFunction, bReset)
+        ucrReceiverDate.SetRCode(clsDataFrameFunction, bReset)
+        ucrReceiverLongitude.SetRCode(clsDataFrameFunction, bReset)
+        ucrReceiverLatitude.SetRCode(clsDataFrameFunction, bReset)
         ucrReceiverElement.SetRCode(clsAssignOperator, bReset)
-        ucrInputExportFile.SetRCode(clsExportFunction, bReset)
-        ucrReceiverDate.SetRCode(clsAsDataFrameFunction, bReset)
+        ucrInputExportFile.SetRCode(clsSaveFunction, bReset)
+        ucrReceiverDate.SetRCode(clsDataFrameFunction, bReset)
+        DataFrameAssignTo()
     End Sub
 
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
-
         Using dlgSave As New SaveFileDialog
             dlgSave.Title = "Save Data File"
             dlgSave.Filter = "RDS Data file (*.Rdata)|*.Rdata"
@@ -123,12 +119,25 @@ Public Class dlgExportToCMSAF
             If dlgSave.ShowDialog() = DialogResult.OK Then
                 ucrInputExportFile.SetName(dlgSave.FileName.Replace("\", "/"))
             End If
-
         End Using
     End Sub
 
     Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlValueChanged, ucrSelectorImportToCMSAF.ControlValueChanged
-        'clsAsDataFrameFunction.AddParameter(strParameterName:=ucrReceiverElement.GetVariableNames(bWithQuotes:=False), clsRFunctionParameter:=ucrReceiverElement.GetVariables, iPosition:=4)
+        Dim strPreviousElement As String = ""
+
+        If Not ucrReceiverElement.IsEmpty() Then
+            clsDataFrameFunction.AddParameter(strParameterName:=ucrReceiverElement.GetVariableNames(bWithQuotes:=False), clsRFunctionParameter:=ucrReceiverElement.GetVariables, iPosition:=4)
+        Else
+            For Each clsTempParam In clsDataFrameFunction.clsParameters
+                If Not {"station_name", "date", "lon", "lat"}.Contains(clsTempParam.strArgumentName) Then
+                    strPreviousElement = clsTempParam.strArgumentName
+                    Exit For
+                End If
+            Next
+            If strPreviousElement <> "" Then
+                clsDataFrameFunction.RemoveParameterByName(strPreviousElement)
+            End If
+        End If
     End Sub
 
     Private Sub TestOkEnabled()
@@ -147,5 +156,17 @@ Public Class dlgExportToCMSAF
 
     Private Sub ucrReceiverDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged, ucrReceiverLongitude.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrInputExportFile.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrSelectorImportToCMSAF_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorImportToCMSAF.ControlValueChanged
+        DataFrameAssignTo()
+    End Sub
+
+    Private Sub DataFrameAssignTo()
+        If ucrSelectorImportToCMSAF.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+            clsDataFrameFunction.SetAssignTo(ucrSelectorImportToCMSAF.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        Else
+            clsDataFrameFunction.RemoveAssignTo()
+        End If
     End Sub
 End Class
