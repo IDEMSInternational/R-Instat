@@ -693,10 +693,6 @@ Public Class frmMain
         dlgTransformText.ShowDialog()
     End Sub
 
-    Private Sub mnuTbDelete_Click(sender As Object, e As EventArgs) Handles mnuTbDelete.Click
-        mnuToolsClearOutputWindow_Click(sender, e)
-    End Sub
-
     Private Sub mnuEditSelectAll_Click(sender As Object, e As EventArgs) Handles mnuEditSelectAll.Click
         If ctrActive IsNot Nothing Then
             If ctrActive.Equals(ucrDataViewer) Then
@@ -1980,20 +1976,16 @@ Public Class frmMain
         dlgFindNonnumericValues.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticReshapeandExamineNonNumericCases_Click(sender As Object, e As EventArgs) Handles mnuClimaticReshapeandExamineNonNumericCases.Click
+    Private Sub mnuClimaticTidyandExamineNonNumericCases_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineNonNumericCases.Click
         dlgFindNonnumericValues.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticReshapeandExamineReplaceValues_Click(sender As Object, e As EventArgs) Handles mnuClimaticReshapeandExamineReplaceValues.Click
+    Private Sub mnuClimaticTidyandExamineReplaceValues_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineReplaceValues.Click
         dlgReplaceValues.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticReshapeandExamineOneVariableSummarize_Click(sender As Object, e As EventArgs) Handles mnuClimaticReshapeandExamineOneVariableSummarize.Click
+    Private Sub mnuClimaticTidyandExamineOneVariableSummarize_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineOneVariableSummarize.Click
         dlgOneVariableSummarise.ShowDialog()
-    End Sub
-
-    Private Sub mnuPrepareShare_Click(sender As Object, e As EventArgs) Handles mnuPrepareShare.Click
-        dlgAnonymiseIDColumn.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticPrepareLengthOfSeason_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareLengthOfSeason.Click
@@ -2002,5 +1994,29 @@ Public Class frmMain
 
     Private Sub mnuClimaticPrepareCompare_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareCompare.Click
         dlgCompare.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareCheckDataAnonymiseIDColumn_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataAnonymiseIDColumn.Click
+        dlgAnonymiseIDColumn.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticFileImportShapeFile_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportShapeFile.Click
+        dlgImportShapeFiles.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticTidyandExamineTidyDailyData_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineTidyDailyData.Click
+        dlgTidyDailyData.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticTidyandExamineMerge_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineMerge.Click
+        dlgMerge.ShowDialog()
+    End Sub
+
+    Private Sub mnuTbLastGraph_Click(sender As Object, e As EventArgs) Handles mnuTbLastGraph.Click
+        clsRLink.ViewLastGraph()
+    End Sub
+
+    Private Sub mnuClimaticCMSAFExporttoCMSAFRToolbox_Click(sender As Object, e As EventArgs) Handles mnuClimaticCMSAFExporttoCMSAFRToolbox.Click
+        dlgExportToCMSAF.ShowDialog()
     End Sub
 End Class

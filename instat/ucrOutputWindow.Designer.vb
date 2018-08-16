@@ -39,46 +39,56 @@ Partial Class ucrOutputWindow
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.ucrWPFrtfElementHost = New System.Windows.Forms.Integration.ElementHost()
-        Me.ucrRichTextBox = New instat.ucrWPFRichTextBox()
         Me.mnuContextRTB = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.CopyRTB = New System.Windows.Forms.ToolStripMenuItem()
         Me.CopyImageRTB = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.deleteRTB = New System.Windows.Forms.ToolStripMenuItem()
+        Me.clearRTB = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
+        Me.ucrWPFrtfElementHost = New System.Windows.Forms.Integration.ElementHost()
+        Me.ucrRichTextBox = New instat.ucrWPFRichTextBox()
         Me.mnuContextRTB.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
         Me.SuspendLayout()
         '
-        'ucrWPFrtfElementHost
-        '
-        Me.ucrWPFrtfElementHost.ContextMenuStrip = Me.mnuContextRTB
-        Me.ucrWPFrtfElementHost.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrWPFrtfElementHost.Location = New System.Drawing.Point(3, 23)
-        Me.ucrWPFrtfElementHost.Name = "ucrWPFrtfElementHost"
-        Me.ucrWPFrtfElementHost.Size = New System.Drawing.Size(716, 236)
-        Me.ucrWPFrtfElementHost.TabIndex = 0
-        Me.ucrWPFrtfElementHost.Text = "ucrWPFrtfElementHost"
-        Me.ucrWPFrtfElementHost.Child = Me.ucrRichTextBox
-        '
         'mnuContextRTB
         '
-        Me.mnuContextRTB.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyRTB, Me.CopyImageRTB})
+        Me.mnuContextRTB.ImageScalingSize = New System.Drawing.Size(24, 24)
+        Me.mnuContextRTB.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyRTB, Me.CopyImageRTB, Me.ToolStripSeparator1, Me.deleteRTB, Me.clearRTB})
         Me.mnuContextRTB.Name = "mnuContextRTB"
-        Me.mnuContextRTB.Size = New System.Drawing.Size(150, 48)
+        Me.mnuContextRTB.Size = New System.Drawing.Size(206, 163)
         '
         'CopyRTB
         '
         Me.CopyRTB.Name = "CopyRTB"
-        Me.CopyRTB.Size = New System.Drawing.Size(149, 22)
+        Me.CopyRTB.Size = New System.Drawing.Size(205, 30)
         Me.CopyRTB.Text = "Copy RichText"
         '
         'CopyImageRTB
         '
         Me.CopyImageRTB.Enabled = False
         Me.CopyImageRTB.Name = "CopyImageRTB"
-        Me.CopyImageRTB.Size = New System.Drawing.Size(149, 22)
+        Me.CopyImageRTB.Size = New System.Drawing.Size(205, 30)
         Me.CopyImageRTB.Text = "Copy Image"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(202, 6)
+        '
+        'deleteRTB
+        '
+        Me.deleteRTB.Name = "deleteRTB"
+        Me.deleteRTB.Size = New System.Drawing.Size(205, 30)
+        Me.deleteRTB.Text = "Delete Selected"
+        '
+        'clearRTB
+        '
+        Me.clearRTB.Name = "clearRTB"
+        Me.clearRTB.Size = New System.Drawing.Size(205, 30)
+        Me.clearRTB.Text = "Clear"
         '
         'lblHeader
         '
@@ -86,9 +96,10 @@ Partial Class ucrOutputWindow
         Me.lblHeader.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.lblHeader.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblHeader.Location = New System.Drawing.Point(3, 0)
+        Me.lblHeader.Location = New System.Drawing.Point(4, 0)
+        Me.lblHeader.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblHeader.Name = "lblHeader"
-        Me.lblHeader.Size = New System.Drawing.Size(716, 20)
+        Me.lblHeader.Size = New System.Drawing.Size(1075, 31)
         Me.lblHeader.TabIndex = 6
         Me.lblHeader.Text = "Output Window"
         Me.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -101,20 +112,34 @@ Partial Class ucrOutputWindow
         Me.tlpTableContainer.Controls.Add(Me.lblHeader, 0, 0)
         Me.tlpTableContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tlpTableContainer.Location = New System.Drawing.Point(0, 0)
+        Me.tlpTableContainer.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.tlpTableContainer.Name = "tlpTableContainer"
         Me.tlpTableContainer.RowCount = 2
-        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31.0!))
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.tlpTableContainer.Size = New System.Drawing.Size(722, 262)
+        Me.tlpTableContainer.Size = New System.Drawing.Size(1083, 403)
         Me.tlpTableContainer.TabIndex = 7
+        '
+        'ucrWPFrtfElementHost
+        '
+        Me.ucrWPFrtfElementHost.ContextMenuStrip = Me.mnuContextRTB
+        Me.ucrWPFrtfElementHost.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrWPFrtfElementHost.Location = New System.Drawing.Point(4, 36)
+        Me.ucrWPFrtfElementHost.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrWPFrtfElementHost.Name = "ucrWPFrtfElementHost"
+        Me.ucrWPFrtfElementHost.Size = New System.Drawing.Size(1075, 362)
+        Me.ucrWPFrtfElementHost.TabIndex = 0
+        Me.ucrWPFrtfElementHost.Text = "ucrWPFrtfElementHost"
+        Me.ucrWPFrtfElementHost.Child = Me.ucrRichTextBox
         '
         'ucrOutputWindow
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.tlpTableContainer)
+        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "ucrOutputWindow"
-        Me.Size = New System.Drawing.Size(722, 262)
+        Me.Size = New System.Drawing.Size(1083, 403)
         Me.mnuContextRTB.ResumeLayout(False)
         Me.tlpTableContainer.ResumeLayout(False)
         Me.ResumeLayout(False)
@@ -128,4 +153,7 @@ Partial Class ucrOutputWindow
     Friend WithEvents CopyImageRTB As ToolStripMenuItem
     Friend WithEvents lblHeader As Label
     Friend WithEvents tlpTableContainer As TableLayoutPanel
+    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents clearRTB As ToolStripMenuItem
+    Friend WithEvents deleteRTB As ToolStripMenuItem
 End Class
