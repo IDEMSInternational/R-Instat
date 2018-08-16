@@ -401,10 +401,10 @@
     <Compile Include="dlgParallelCoordinatePlot.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgTidyClimatic.Designer.vb">
-      <DependentUpon>dlgTidyClimatic.vb</DependentUpon>
+    <Compile Include="dlgTidyDailyData.Designer.vb">
+      <DependentUpon>dlgTidyDailyData.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgTidyClimatic.vb">
+    <Compile Include="dlgTidyDailyData.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgFindNonnumericValues.Designer.vb">
@@ -2521,8 +2521,14 @@
     <EmbeddedResource Include="dlgCopyDataFrame.resx">
       <DependentUpon>dlgCopyDataFrame.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgCopySheet.resx" />
-    <EmbeddedResource Include="dlgCopySheet.sw-KE.resx" />
+    <EmbeddedResource Include="dlgCopySheet.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>dlgCopySheet.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCopySheet.sw-KE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>dlgCopySheet.sw-KE.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgCorruptionDescribe.sw-KE.resx">
       <DependentUpon>dlgCorruptionDescribe.vb</DependentUpon>
     </EmbeddedResource>
@@ -2715,8 +2721,8 @@
     <EmbeddedResource Include="dlgRenameDataFrame.resx">
       <DependentUpon>dlgRenameDataFrame.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgTidyClimatic.resx">
-      <DependentUpon>dlgTidyClimatic.vb</DependentUpon>
+    <EmbeddedResource Include="dlgTidyDailyData.resx">
+      <DependentUpon>dlgTidyDailyData.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRowNamesOrNumbers.sw-KE.resx">
       <DependentUpon>dlgRowNamesOrNumbers.vb</DependentUpon>
@@ -4383,10 +4389,22 @@
     <None Include="Resources\output2.png" />
     <None Include="Resources\reset.png" />
     <None Include="Resources\resetlayout.png" />
+    <None Include="Resources\openfromfile2.png" />
+    <None Include="Resources\copy2.png" />
+    <None Include="Resources\paste2.png" />
+    <None Include="Resources\dialog2.png" />
+    <None Include="Resources\dataframe2.png" />
+    <None Include="Resources\output3.png" />
+    <None Include="Resources\reset2.png" />
+    <None Include="Resources\reset3.png" />
+    <None Include="Resources\help2.png" />
+    <None Include="Resources\lastgraph.png" />
     <Content Include="Resources\rinstat_icon_Hih_icon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\script.png" />
+    <None Include="Resources\save2.png" />
+    <None Include="Resources\script2.png" />
     <Content Include="static\InstatObject\R\Backend_Components\link.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

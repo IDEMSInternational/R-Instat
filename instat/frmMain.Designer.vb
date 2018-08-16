@@ -189,9 +189,10 @@ Partial Class frmMain
         Me.mnuClimaticFileExportToCPT = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator18 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticTidyandExamine = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticTidyandExamineTidyData = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticTidyandExamineTidyDailyData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticTidyandExamineNonNumericCases = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticTidyandExamineReplaceValues = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticTidyandExamineMerge = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator50 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticTidyandExamineOneVariableSummarize = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticDates = New System.Windows.Forms.ToolStripMenuItem()
@@ -338,6 +339,7 @@ Partial Class frmMain
         Me.mnuTbLog = New System.Windows.Forms.ToolStripButton()
         Me.mnuTbResetLayout = New System.Windows.Forms.ToolStripButton()
         Me.separator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuTbLastGraph = New System.Windows.Forms.ToolStripButton()
         Me.mnuTbHelp = New System.Windows.Forms.ToolStripButton()
         Me.mnuBar = New System.Windows.Forms.MenuStrip()
         Me.mnuFile = New System.Windows.Forms.ToolStripMenuItem()
@@ -545,12 +547,12 @@ Partial Class frmMain
         Me.splOverall = New System.Windows.Forms.SplitContainer()
         Me.splExtraWindows = New System.Windows.Forms.SplitContainer()
         Me.splMetadata = New System.Windows.Forms.SplitContainer()
+        Me.splLogScript = New System.Windows.Forms.SplitContainer()
+        Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrColumnMeta = New instat.ucrColumnMetadata()
         Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
-        Me.splLogScript = New System.Windows.Forms.SplitContainer()
         Me.ucrLogWindow = New instat.ucrLog()
         Me.ucrScriptWindow = New instat.ucrScript()
-        Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
         Me.stsStrip.SuspendLayout()
@@ -1427,14 +1429,14 @@ Partial Class frmMain
         '
         'mnuClimaticTidyandExamine
         '
-        Me.mnuClimaticTidyandExamine.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticTidyandExamineTidyData, Me.mnuClimaticTidyandExamineNonNumericCases, Me.mnuClimaticTidyandExamineReplaceValues, Me.ToolStripSeparator50, Me.mnuClimaticTidyandExamineOneVariableSummarize})
+        Me.mnuClimaticTidyandExamine.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticTidyandExamineTidyDailyData, Me.mnuClimaticTidyandExamineNonNumericCases, Me.mnuClimaticTidyandExamineReplaceValues, Me.mnuClimaticTidyandExamineMerge, Me.ToolStripSeparator50, Me.mnuClimaticTidyandExamineOneVariableSummarize})
         Me.mnuClimaticTidyandExamine.Name = "mnuClimaticTidyandExamine"
         resources.ApplyResources(Me.mnuClimaticTidyandExamine, "mnuClimaticTidyandExamine")
         '
-        'mnuClimaticTidyandExamineTidyData
+        'mnuClimaticTidyandExamineTidyDailyData
         '
-        Me.mnuClimaticTidyandExamineTidyData.Name = "mnuClimaticTidyandExamineTidyData"
-        resources.ApplyResources(Me.mnuClimaticTidyandExamineTidyData, "mnuClimaticTidyandExamineTidyData")
+        Me.mnuClimaticTidyandExamineTidyDailyData.Name = "mnuClimaticTidyandExamineTidyDailyData"
+        resources.ApplyResources(Me.mnuClimaticTidyandExamineTidyDailyData, "mnuClimaticTidyandExamineTidyDailyData")
         '
         'mnuClimaticTidyandExamineNonNumericCases
         '
@@ -1445,6 +1447,11 @@ Partial Class frmMain
         '
         Me.mnuClimaticTidyandExamineReplaceValues.Name = "mnuClimaticTidyandExamineReplaceValues"
         resources.ApplyResources(Me.mnuClimaticTidyandExamineReplaceValues, "mnuClimaticTidyandExamineReplaceValues")
+        '
+        'mnuClimaticTidyandExamineMerge
+        '
+        Me.mnuClimaticTidyandExamineMerge.Name = "mnuClimaticTidyandExamineMerge"
+        resources.ApplyResources(Me.mnuClimaticTidyandExamineMerge, "mnuClimaticTidyandExamineMerge")
         '
         'ToolStripSeparator50
         '
@@ -2161,7 +2168,7 @@ Partial Class frmMain
         Me.Tool_strip.BackColor = System.Drawing.SystemColors.ControlLightLight
         Me.Tool_strip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.Tool_strip.ImageScalingSize = New System.Drawing.Size(30, 30)
-        Me.Tool_strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTbOpen, Me.mnuTbOpenFromLibrary, Me.mnuTbSave, Me.toolStripSeparator, Me.mnuTbCopy, Me.mnuTbPaste, Me.separator1, Me.mnuTbEditLastDialog, Me.mnuTbLast10Dialogs, Me.separator2, Me.mnuTbDataView, Me.mnuTbOutput, Me.mnuTbColumnMetadata, Me.mnuTbLog, Me.mnuTbResetLayout, Me.separator3, Me.mnuTbHelp})
+        Me.Tool_strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTbOpen, Me.mnuTbOpenFromLibrary, Me.mnuTbSave, Me.toolStripSeparator, Me.mnuTbCopy, Me.mnuTbPaste, Me.separator1, Me.mnuTbEditLastDialog, Me.mnuTbLast10Dialogs, Me.mnuTbLastGraph, Me.separator2, Me.mnuTbDataView, Me.mnuTbOutput, Me.mnuTbColumnMetadata, Me.mnuTbLog, Me.mnuTbResetLayout, Me.separator3, Me.mnuTbHelp})
         resources.ApplyResources(Me.Tool_strip, "Tool_strip")
         Me.Tool_strip.Name = "Tool_strip"
         Me.Tool_strip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
@@ -2169,7 +2176,7 @@ Partial Class frmMain
         'mnuTbOpen
         '
         Me.mnuTbOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.mnuTbOpen.Image = Global.instat.My.Resources.Resources.openfromfile
+        Me.mnuTbOpen.Image = Global.instat.My.Resources.Resources.openfromfile2
         resources.ApplyResources(Me.mnuTbOpen, "mnuTbOpen")
         Me.mnuTbOpen.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
         Me.mnuTbOpen.Name = "mnuTbOpen"
@@ -2185,6 +2192,7 @@ Partial Class frmMain
         'mnuTbSave
         '
         Me.mnuTbSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.mnuTbSave.Image = Global.instat.My.Resources.Resources.save2
         resources.ApplyResources(Me.mnuTbSave, "mnuTbSave")
         Me.mnuTbSave.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
         Me.mnuTbSave.Name = "mnuTbSave"
@@ -2197,6 +2205,7 @@ Partial Class frmMain
         'mnuTbCopy
         '
         Me.mnuTbCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.mnuTbCopy.Image = Global.instat.My.Resources.Resources.copy2
         resources.ApplyResources(Me.mnuTbCopy, "mnuTbCopy")
         Me.mnuTbCopy.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
         Me.mnuTbCopy.Name = "mnuTbCopy"
@@ -2205,6 +2214,7 @@ Partial Class frmMain
         '
         Me.mnuTbPaste.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         resources.ApplyResources(Me.mnuTbPaste, "mnuTbPaste")
+        Me.mnuTbPaste.Image = Global.instat.My.Resources.Resources.paste2
         Me.mnuTbPaste.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
         Me.mnuTbPaste.Name = "mnuTbPaste"
         '
@@ -2216,7 +2226,7 @@ Partial Class frmMain
         'mnuTbEditLastDialog
         '
         Me.mnuTbEditLastDialog.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.mnuTbEditLastDialog.Image = Global.instat.My.Resources.Resources.lastdialog
+        Me.mnuTbEditLastDialog.Image = Global.instat.My.Resources.Resources.dialog2
         resources.ApplyResources(Me.mnuTbEditLastDialog, "mnuTbEditLastDialog")
         Me.mnuTbEditLastDialog.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
         Me.mnuTbEditLastDialog.Name = "mnuTbEditLastDialog"
@@ -2249,7 +2259,7 @@ Partial Class frmMain
         '
         Me.mnuTbDataView.CheckOnClick = True
         Me.mnuTbDataView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.mnuTbDataView.Image = Global.instat.My.Resources.Resources.dataview
+        Me.mnuTbDataView.Image = Global.instat.My.Resources.Resources.dataframe2
         resources.ApplyResources(Me.mnuTbDataView, "mnuTbDataView")
         Me.mnuTbDataView.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
         Me.mnuTbDataView.Name = "mnuTbDataView"
@@ -2258,7 +2268,7 @@ Partial Class frmMain
         '
         Me.mnuTbOutput.CheckOnClick = True
         Me.mnuTbOutput.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.mnuTbOutput.Image = Global.instat.My.Resources.Resources.output2
+        Me.mnuTbOutput.Image = Global.instat.My.Resources.Resources.output3
         resources.ApplyResources(Me.mnuTbOutput, "mnuTbOutput")
         Me.mnuTbOutput.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
         Me.mnuTbOutput.Name = "mnuTbOutput"
@@ -2276,7 +2286,7 @@ Partial Class frmMain
         '
         Me.mnuTbLog.CheckOnClick = True
         Me.mnuTbLog.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.mnuTbLog.Image = Global.instat.My.Resources.Resources.scriptwindow
+        Me.mnuTbLog.Image = Global.instat.My.Resources.Resources.script2
         resources.ApplyResources(Me.mnuTbLog, "mnuTbLog")
         Me.mnuTbLog.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
         Me.mnuTbLog.Name = "mnuTbLog"
@@ -2284,7 +2294,7 @@ Partial Class frmMain
         'mnuTbResetLayout
         '
         Me.mnuTbResetLayout.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.mnuTbResetLayout.Image = Global.instat.My.Resources.Resources.resetlayout
+        Me.mnuTbResetLayout.Image = Global.instat.My.Resources.Resources.reset3
         resources.ApplyResources(Me.mnuTbResetLayout, "mnuTbResetLayout")
         Me.mnuTbResetLayout.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
         Me.mnuTbResetLayout.Name = "mnuTbResetLayout"
@@ -2294,9 +2304,17 @@ Partial Class frmMain
         Me.separator3.Name = "separator3"
         resources.ApplyResources(Me.separator3, "separator3")
         '
+        'mnuTbLastGraph
+        '
+        Me.mnuTbLastGraph.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.mnuTbLastGraph.Image = Global.instat.My.Resources.Resources.lastgraph
+        resources.ApplyResources(Me.mnuTbLastGraph, "mnuTbLastGraph")
+        Me.mnuTbLastGraph.Name = "mnuTbLastGraph"
+        '
         'mnuTbHelp
         '
         Me.mnuTbHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.mnuTbHelp.Image = Global.instat.My.Resources.Resources.help2
         resources.ApplyResources(Me.mnuTbHelp, "mnuTbHelp")
         Me.mnuTbHelp.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
         Me.mnuTbHelp.Name = "mnuTbHelp"
@@ -3478,18 +3496,6 @@ Partial Class frmMain
         Me.splMetadata.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splMetadata.Panel2.Controls.Add(Me.ucrDataFrameMeta)
         '
-        'ucrColumnMeta
-        '
-        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrColumnMeta, "ucrColumnMeta")
-        Me.ucrColumnMeta.Name = "ucrColumnMeta"
-        '
-        'ucrDataFrameMeta
-        '
-        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrDataFrameMeta, "ucrDataFrameMeta")
-        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
-        '
         'splLogScript
         '
         Me.splLogScript.BackColor = System.Drawing.Color.LightGray
@@ -3506,19 +3512,6 @@ Partial Class frmMain
         Me.splLogScript.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splLogScript.Panel2.Controls.Add(Me.ucrScriptWindow)
         '
-        'ucrLogWindow
-        '
-        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrLogWindow, "ucrLogWindow")
-        Me.ucrLogWindow.Name = "ucrLogWindow"
-        '
-        'ucrScriptWindow
-        '
-        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrScriptWindow, "ucrScriptWindow")
-        Me.ucrScriptWindow.Name = "ucrScriptWindow"
-        Me.ucrScriptWindow.Tag = "Script_Window"
-        '
         'splDataOutput
         '
         Me.splDataOutput.BackColor = System.Drawing.Color.LightGray
@@ -3534,6 +3527,31 @@ Partial Class frmMain
         '
         Me.splDataOutput.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splDataOutput.Panel2.Controls.Add(Me.ucrOutput)
+        '
+        'ucrColumnMeta
+        '
+        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrColumnMeta, "ucrColumnMeta")
+        Me.ucrColumnMeta.Name = "ucrColumnMeta"
+        '
+        'ucrDataFrameMeta
+        '
+        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrDataFrameMeta, "ucrDataFrameMeta")
+        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
+        '
+        'ucrLogWindow
+        '
+        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrLogWindow, "ucrLogWindow")
+        Me.ucrLogWindow.Name = "ucrLogWindow"
+        '
+        'ucrScriptWindow
+        '
+        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrScriptWindow, "ucrScriptWindow")
+        Me.ucrScriptWindow.Name = "ucrScriptWindow"
+        Me.ucrScriptWindow.Tag = "Script_Window"
         '
         'ucrDataViewer
         '
@@ -4099,7 +4117,7 @@ Partial Class frmMain
     Friend WithEvents mnuPrepareCheckDataNonNumericCases As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator49 As ToolStripSeparator
     Friend WithEvents mnuClimaticTidyandExamine As ToolStripMenuItem
-    Friend WithEvents mnuClimaticTidyandExamineTidyData As ToolStripMenuItem
+    Friend WithEvents mnuClimaticTidyandExamineTidyDailyData As ToolStripMenuItem
     Friend WithEvents mnuClimaticTidyandExamineNonNumericCases As ToolStripMenuItem
     Friend WithEvents mnuClimaticTidyandExamineReplaceValues As ToolStripMenuItem
     Friend WithEvents mnuClimaticTidyandExamineOneVariableSummarize As ToolStripMenuItem
@@ -4107,4 +4125,6 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticPrepareLengthOfSeason As ToolStripMenuItem
     Friend WithEvents mnuClimaticPrepareCompare As ToolStripMenuItem
     Friend WithEvents mnuClimaticFileImportShapeFile As ToolStripMenuItem
+    Friend WithEvents mnuClimaticTidyandExamineMerge As ToolStripMenuItem
+    Friend WithEvents mnuTbLastGraph As ToolStripButton
 End Class
