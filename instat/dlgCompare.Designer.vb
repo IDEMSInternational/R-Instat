@@ -36,12 +36,16 @@ Partial Class dlgCompare
         Me.ucrNudMovingAverage = New instat.ucrNud()
         Me.ucrPnlCompare = New instat.UcrPanel()
         Me.ucrChkMovingAverage = New instat.ucrCheck()
-        Me.ucrReceiverWithinYear = New instat.ucrReceiverSingle()
-        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
-        Me.ucrReceiverStationElement = New instat.ucrReceiverSingle()
-        Me.ucrReceiverSateliteElement = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorCompare = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrInputStationAnomalies = New instat.ucrInputTextBox()
+        Me.ucrInputSateliteAnomalies = New instat.ucrInputTextBox()
+        Me.lblSateliteAnomalies = New System.Windows.Forms.Label()
+        Me.lblStationAnomalies = New System.Windows.Forms.Label()
+        Me.ucrReceiverSateliteElement = New instat.ucrReceiverSingle()
+        Me.ucrReceiverStationElement = New instat.ucrReceiverSingle()
+        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
+        Me.ucrReceiverWithinYear = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
         'lblStation
@@ -133,42 +137,6 @@ Partial Class dlgCompare
         resources.ApplyResources(Me.ucrChkMovingAverage, "ucrChkMovingAverage")
         Me.ucrChkMovingAverage.Name = "ucrChkMovingAverage"
         '
-        'ucrReceiverWithinYear
-        '
-        Me.ucrReceiverWithinYear.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverWithinYear, "ucrReceiverWithinYear")
-        Me.ucrReceiverWithinYear.Name = "ucrReceiverWithinYear"
-        Me.ucrReceiverWithinYear.Selector = Nothing
-        Me.ucrReceiverWithinYear.strNcFilePath = ""
-        Me.ucrReceiverWithinYear.ucrSelector = Nothing
-        '
-        'ucrReceiverStation
-        '
-        Me.ucrReceiverStation.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverStation, "ucrReceiverStation")
-        Me.ucrReceiverStation.Name = "ucrReceiverStation"
-        Me.ucrReceiverStation.Selector = Nothing
-        Me.ucrReceiverStation.strNcFilePath = ""
-        Me.ucrReceiverStation.ucrSelector = Nothing
-        '
-        'ucrReceiverStationElement
-        '
-        Me.ucrReceiverStationElement.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverStationElement, "ucrReceiverStationElement")
-        Me.ucrReceiverStationElement.Name = "ucrReceiverStationElement"
-        Me.ucrReceiverStationElement.Selector = Nothing
-        Me.ucrReceiverStationElement.strNcFilePath = ""
-        Me.ucrReceiverStationElement.ucrSelector = Nothing
-        '
-        'ucrReceiverSateliteElement
-        '
-        Me.ucrReceiverSateliteElement.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverSateliteElement, "ucrReceiverSateliteElement")
-        Me.ucrReceiverSateliteElement.Name = "ucrReceiverSateliteElement"
-        Me.ucrReceiverSateliteElement.Selector = Nothing
-        Me.ucrReceiverSateliteElement.strNcFilePath = ""
-        Me.ucrReceiverSateliteElement.ucrSelector = Nothing
-        '
         'ucrBase
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
@@ -182,10 +150,82 @@ Partial Class dlgCompare
         resources.ApplyResources(Me.ucrSelectorCompare, "ucrSelectorCompare")
         Me.ucrSelectorCompare.Name = "ucrSelectorCompare"
         '
+        'ucrInputStationAnomalies
+        '
+        Me.ucrInputStationAnomalies.AddQuotesIfUnrecognised = True
+        Me.ucrInputStationAnomalies.IsMultiline = False
+        Me.ucrInputStationAnomalies.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputStationAnomalies, "ucrInputStationAnomalies")
+        Me.ucrInputStationAnomalies.Name = "ucrInputStationAnomalies"
+        '
+        'ucrInputSateliteAnomalies
+        '
+        Me.ucrInputSateliteAnomalies.AddQuotesIfUnrecognised = True
+        Me.ucrInputSateliteAnomalies.IsMultiline = False
+        Me.ucrInputSateliteAnomalies.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputSateliteAnomalies, "ucrInputSateliteAnomalies")
+        Me.ucrInputSateliteAnomalies.Name = "ucrInputSateliteAnomalies"
+        '
+        'lblSateliteAnomalies
+        '
+        resources.ApplyResources(Me.lblSateliteAnomalies, "lblSateliteAnomalies")
+        Me.lblSateliteAnomalies.Name = "lblSateliteAnomalies"
+        '
+        'lblStationAnomalies
+        '
+        resources.ApplyResources(Me.lblStationAnomalies, "lblStationAnomalies")
+        Me.lblStationAnomalies.Name = "lblStationAnomalies"
+        '
+        'ucrReceiverSateliteElement
+        '
+        Me.ucrReceiverSateliteElement.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverSateliteElement, "ucrReceiverSateliteElement")
+        Me.ucrReceiverSateliteElement.Name = "ucrReceiverSateliteElement"
+        Me.ucrReceiverSateliteElement.Selector = Nothing
+        Me.ucrReceiverSateliteElement.strNcFilePath = ""
+        Me.ucrReceiverSateliteElement.ucrSelector = Nothing
+        '
+        'ucrReceiverStationElement
+        '
+        Me.ucrReceiverStationElement.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverStationElement, "ucrReceiverStationElement")
+        Me.ucrReceiverStationElement.Name = "ucrReceiverStationElement"
+        Me.ucrReceiverStationElement.Selector = Nothing
+        Me.ucrReceiverStationElement.strNcFilePath = ""
+        Me.ucrReceiverStationElement.ucrSelector = Nothing
+        '
+        'ucrReceiverStation
+        '
+        Me.ucrReceiverStation.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverStation, "ucrReceiverStation")
+        Me.ucrReceiverStation.Name = "ucrReceiverStation"
+        Me.ucrReceiverStation.Selector = Nothing
+        Me.ucrReceiverStation.strNcFilePath = ""
+        Me.ucrReceiverStation.ucrSelector = Nothing
+        '
+        'ucrReceiverWithinYear
+        '
+        Me.ucrReceiverWithinYear.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverWithinYear, "ucrReceiverWithinYear")
+        Me.ucrReceiverWithinYear.Name = "ucrReceiverWithinYear"
+        Me.ucrReceiverWithinYear.Selector = Nothing
+        Me.ucrReceiverWithinYear.strNcFilePath = ""
+        Me.ucrReceiverWithinYear.ucrSelector = Nothing
+        '
         'dlgCompare
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrReceiverWithinYear)
+        Me.Controls.Add(Me.ucrReceiverStation)
+        Me.Controls.Add(Me.ucrReceiverStationElement)
+        Me.Controls.Add(Me.ucrReceiverSateliteElement)
+        Me.Controls.Add(Me.lblStationAnomalies)
+        Me.Controls.Add(Me.lblSateliteAnomalies)
+        Me.Controls.Add(Me.ucrInputStationAnomalies)
+        Me.Controls.Add(Me.ucrInputSateliteAnomalies)
+        Me.Controls.Add(Me.lblStationElement)
+        Me.Controls.Add(Me.lblSateliteElement)
         Me.Controls.Add(Me.ucrChkAbsDev)
         Me.Controls.Add(Me.ucrChkBias)
         Me.Controls.Add(Me.ucrInputAbsDev)
@@ -196,13 +236,7 @@ Partial Class dlgCompare
         Me.Controls.Add(Me.ucrPnlCompare)
         Me.Controls.Add(Me.ucrChkMovingAverage)
         Me.Controls.Add(Me.lblWithinYear)
-        Me.Controls.Add(Me.ucrReceiverWithinYear)
-        Me.Controls.Add(Me.lblStationElement)
-        Me.Controls.Add(Me.lblSateliteElement)
         Me.Controls.Add(Me.lblStation)
-        Me.Controls.Add(Me.ucrReceiverStation)
-        Me.Controls.Add(Me.ucrReceiverStationElement)
-        Me.Controls.Add(Me.ucrReceiverSateliteElement)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSelectorCompare)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -216,14 +250,10 @@ Partial Class dlgCompare
 
     Friend WithEvents ucrSelectorCompare As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrReceiverSateliteElement As ucrReceiverSingle
-    Friend WithEvents ucrReceiverStation As ucrReceiverSingle
-    Friend WithEvents ucrReceiverStationElement As ucrReceiverSingle
     Friend WithEvents lblStationElement As Label
     Friend WithEvents lblSateliteElement As Label
     Friend WithEvents lblStation As Label
     Friend WithEvents lblWithinYear As Label
-    Friend WithEvents ucrReceiverWithinYear As ucrReceiverSingle
     Friend WithEvents ucrChkMovingAverage As ucrCheck
     Friend WithEvents rdoAnomalies As RadioButton
     Friend WithEvents rdoDifferences As RadioButton
@@ -233,4 +263,12 @@ Partial Class dlgCompare
     Friend WithEvents ucrChkBias As ucrCheck
     Friend WithEvents ucrInputAbsDev As ucrInputTextBox
     Friend WithEvents ucrInputBias As ucrInputTextBox
+    Friend WithEvents ucrInputStationAnomalies As ucrInputTextBox
+    Friend WithEvents ucrInputSateliteAnomalies As ucrInputTextBox
+    Friend WithEvents lblSateliteAnomalies As Label
+    Friend WithEvents lblStationAnomalies As Label
+    Friend WithEvents ucrReceiverSateliteElement As ucrReceiverSingle
+    Friend WithEvents ucrReceiverWithinYear As ucrReceiverSingle
+    Friend WithEvents ucrReceiverStation As ucrReceiverSingle
+    Friend WithEvents ucrReceiverStationElement As ucrReceiverSingle
 End Class
