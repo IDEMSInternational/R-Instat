@@ -2015,4 +2015,8 @@ Public Class frmMain
     Private Sub mnuTbLastGraph_Click(sender As Object, e As EventArgs) Handles mnuTbLastGraph.Click
         clsRLink.ViewLastGraph()
     End Sub
+
+    Private Sub mnuClimaticCMSAFExporttoCMSAFRToolbox_Click(sender As Object, e As EventArgs) Handles mnuClimaticCMSAFExporttoCMSAFRToolbox.Click
+        dlgExportToCMSAF.ShowDialog()
+    End Sub
 End Class
