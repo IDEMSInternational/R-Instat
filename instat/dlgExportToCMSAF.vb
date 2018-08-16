@@ -22,7 +22,6 @@ Public Class dlgExportToCMSAF
 
     Private clsAsDataFrameFunction, clsAtrributesFunction, clsExportFunction As New RFunction
     Private clsAssignOperator As New ROperator
-    Private strCurrentDaframe As String
     Private Sub dlgExportToCMSAF_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -83,7 +82,7 @@ Public Class dlgExportToCMSAF
         ucrInputExportFile.SetName("")
 
         clsAsDataFrameFunction.SetRCommand("data.frame")
-        clsAsDataFrameFunction.SetAssignTo(strCurrentDaframe)
+        clsAsDataFrameFunction.SetAssignTo("x")
 
         clsAtrributesFunction.SetRCommand("attr")
         clsAtrributesFunction.AddParameter("x", clsRFunctionParameter:=clsAsDataFrameFunction, bIncludeArgumentName:=False, iPosition:=0)
@@ -128,8 +127,8 @@ Public Class dlgExportToCMSAF
         End Using
     End Sub
 
-    Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlValueChanged
-        clsAsDataFrameFunction.AddParameter(strParameterName:=ucrReceiverElement.GetVariableNames(bWithQuotes:=False), clsRFunctionParameter:=ucrReceiverElement.GetVariables, iPosition:=4)
+    Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlValueChanged, ucrSelectorImportToCMSAF.ControlValueChanged
+        'clsAsDataFrameFunction.AddParameter(strParameterName:=ucrReceiverElement.GetVariableNames(bWithQuotes:=False), clsRFunctionParameter:=ucrReceiverElement.GetVariables, iPosition:=4)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -138,10 +137,6 @@ Public Class dlgExportToCMSAF
         Else
             ucrBase.OKEnabled(False)
         End If
-    End Sub
-
-    Private Sub ucrSelectorImportToCMSAF_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorImportToCMSAF.ControlValueChanged
-        strCurrentDaframe = ucrSelectorImportToCMSAF.strCurrentDataFrame
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
