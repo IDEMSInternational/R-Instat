@@ -27,6 +27,7 @@ Public Class dlgTransformClimatic
     'Count and Spells
     Private clsRRainday, clsRRaindayMatch, clsRCountFunction, clsRollConsecutiveSumFunction As New RFunction
     Private clsRRaindayAndOperator, clsRRaindayLowerOperator, clsRRaindayUpperOperator, clsRCountOperator As New ROperator
+    Private clsGreaterThanOperator, clsLessThanOperator As New ROperator
 
     ' Water Balance
     Private clsPMinFunctionMax, clsPMaxFunctionMax, clsRWaterBalanceFunction As New RFunction
@@ -132,7 +133,7 @@ Public Class dlgTransformClimatic
         ucrNudCountOver.SetLinkedDisplayControl(lblCountOver)
 
         ' Count and Spell
-        ucrInputCondition.SetItems({"<=", "Between", ">="})
+        ucrInputCondition.SetItems({"<=", "Between", ">=", "Outer"})
         ucrInputCondition.SetDropDownStyleAsNonEditable()
 
         ucrInputSpellLower.SetParameter(New RParameter("min", 1))
@@ -170,8 +171,8 @@ Public Class dlgTransformClimatic
         ucrPnlTransform.AddToLinkedControls(ucrInputSum, {rdoMoving}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Sum")
         ucrPnlTransform.AddToLinkedControls(ucrNudSumOver, {rdoMoving}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
 
-        ucrInputCondition.AddToLinkedControls(ucrInputSpellUpper, {"<=", "Between", ">="}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.85)
-        ucrInputCondition.AddToLinkedControls(ucrInputSpellLower, {"Between"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrInputCondition.AddToLinkedControls(ucrInputSpellUpper, {"<=", "Between", ">=", "Outer"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.85)
+        ucrInputCondition.AddToLinkedControls(ucrInputSpellLower, {"Between", "Outer"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
 
         ucrPnlTransform.AddToLinkedControls({ucrNudMultSpells}, {rdoMultSpells}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=21)
 
@@ -209,6 +210,8 @@ Public Class dlgTransformClimatic
         clsPMaxFunctionMax = New RFunction
         clsPMaxOperatorMax = New ROperator
         clsReduceOpEvapValue.Clear()
+        clsGreaterThanOperator.Clear()
+        clsLessThanOperator.Clear()
 
         ucrSelectorTransform.Reset()
         ucrReceiverData.SetMeAsReceiver()
@@ -232,6 +235,9 @@ Public Class dlgTransformClimatic
         clsRRaindayUpperOperator.AddParameter("max", 0.85, iPosition:=1)
         clsRRaindayMatch.AddParameter("table", "1", iPosition:=1)
         clsRRaindayMatch.AddParameter("nomatch", "0", iPosition:=2)
+
+        clsGreaterThanOperator.SetOperation(">")
+        clsLessThanOperator.SetOperation("<")
 
         ' Count
         clsRCountFunction.bToScriptAsRString = True
@@ -326,6 +332,10 @@ Public Class dlgTransformClimatic
         ucrReceiverData.AddAdditionalCodeParameterPair(clsRRaindayUpperOperator, New RParameter("rain", 0), iAdditionalPairNo:=3)
         ucrReceiverData.AddAdditionalCodeParameterPair(clsRWaterBalanceFunction, New RParameter("replace_na", 1, False), iAdditionalPairNo:=4)
         ucrReceiverData.AddAdditionalCodeParameterPair(clsReduceOpEvapValue, New RParameter("left", 0, False), iAdditionalPairNo:=5)
+        ucrReceiverData.AddAdditionalCodeParameterPair(clsGreaterThanOperator, New RParameter("rain", 0), iAdditionalPairNo:=6)
+        ucrReceiverData.AddAdditionalCodeParameterPair(clsLessThanOperator, New RParameter("rain", 0), iAdditionalPairNo:=7)
+        ucrInputSpellUpper.AddAdditionalCodeParameterPair(clsGreaterThanOperator, New RParameter("left", 1), iAdditionalPairNo:=1)
+        ucrInputSpellLower.AddAdditionalCodeParameterPair(clsLessThanOperator, New RParameter("left", 1), iAdditionalPairNo:=1)
 
         ucrPnlTransform.SetRCode(clsTransformCheck, bReset)
         ucrChkGroupByYear.SetRCode(clsTransformManipulationsFunc, bReset)
@@ -352,7 +362,7 @@ Public Class dlgTransformClimatic
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverData.IsEmpty AndAlso Not ucrInputColName.IsEmpty AndAlso ((rdoCount.Checked AndAlso ucrNudCountOver.GetText <> "" AndAlso ((ucrInputCondition.GetText = "Between" AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = "<=" AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = ">=" AndAlso Not ucrInputSpellUpper.IsEmpty))) OrElse (rdoMoving.Checked AndAlso Not ucrInputSum.IsEmpty AndAlso ucrNudSumOver.GetText <> "") OrElse (rdoSpell.Checked AndAlso ((ucrInputCondition.GetText = "Between" AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = "<=" AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = ">=" AndAlso Not ucrInputSpellUpper.IsEmpty))) OrElse (rdoMultSpells.Checked AndAlso ucrNudMultSpells.GetText <> "" AndAlso ((ucrInputCondition.GetText = "Between" AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = "<=" AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = ">=" AndAlso Not ucrInputSpellUpper.IsEmpty))) OrElse (rdoWaterBalance.Checked AndAlso ucrNudWBCapacity.GetText <> "" AndAlso ((rdoEvapValue.Checked AndAlso Not ucrInputEvaporation.IsEmpty) OrElse (rdoEvapVariable.Checked AndAlso Not ucrReceiverEvap.IsEmpty)))) Then
+        If Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverData.IsEmpty AndAlso Not ucrInputColName.IsEmpty AndAlso ((rdoCount.Checked AndAlso ucrNudCountOver.GetText <> "" AndAlso ((ucrInputCondition.GetText = "Between" AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = "<=" AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = ">=" AndAlso Not ucrInputSpellUpper.IsEmpty))) OrElse (rdoMoving.Checked AndAlso Not ucrInputSum.IsEmpty AndAlso ucrNudSumOver.GetText <> "") OrElse (rdoSpell.Checked AndAlso ((ucrInputCondition.GetText = "Between" AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = "Outer" AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = "<=" AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = ">=" AndAlso Not ucrInputSpellUpper.IsEmpty))) OrElse (rdoMultSpells.Checked AndAlso ucrNudMultSpells.GetText <> "" AndAlso ((ucrInputCondition.GetText = "Between" AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = "<=" AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = ">=" AndAlso Not ucrInputSpellUpper.IsEmpty))) OrElse (rdoWaterBalance.Checked AndAlso ucrNudWBCapacity.GetText <> "" AndAlso ((rdoEvapValue.Checked AndAlso Not ucrInputEvaporation.IsEmpty) OrElse (rdoEvapVariable.Checked AndAlso Not ucrReceiverEvap.IsEmpty)))) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -379,7 +389,12 @@ Public Class dlgTransformClimatic
                 clsRRaindayAndOperator.AddParameter("upper", clsROperatorParameter:=clsRRaindayUpperOperator, iPosition:=0)
                 clsRRaindayUpperOperator.AddParameter("max", ucrInputSpellUpper.GetText, iPosition:=1)
                 clsRCountOperator.AddParameter("x", clsROperatorParameter:=clsRRaindayAndOperator, iPosition:=0)
-            Case Else
+            Case "Outer"
+                ucrInputSpellLower.Visible = True
+                clsRRaindayAndOperator.AddParameter("upper", clsROperatorParameter:=clsGreaterThanOperator, iPosition:=0)
+                clsRRaindayAndOperator.AddParameter("lower", clsROperatorParameter:=clsLessThanOperator, iPosition:=1)
+                clsRCountOperator.AddParameter("x", clsROperatorParameter:=clsRRaindayAndOperator, iPosition:=2)
+            Case ">="
                 clsRRaindayAndOperator.RemoveParameterByName("lower")
                 clsRRaindayLowerOperator.RemoveParameterByName("min")
                 clsRRaindayAndOperator.AddParameter("upper", clsROperatorParameter:=clsRRaindayUpperOperator, iPosition:=0)
