@@ -401,10 +401,10 @@
     <Compile Include="dlgParallelCoordinatePlot.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgTidyClimatic.Designer.vb">
-      <DependentUpon>dlgTidyClimatic.vb</DependentUpon>
+    <Compile Include="dlgTidyDailyData.Designer.vb">
+      <DependentUpon>dlgTidyDailyData.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgTidyClimatic.vb">
+    <Compile Include="dlgTidyDailyData.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgFindNonnumericValues.Designer.vb">
@@ -2715,8 +2715,8 @@
     <EmbeddedResource Include="dlgRenameDataFrame.resx">
       <DependentUpon>dlgRenameDataFrame.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgTidyClimatic.resx">
-      <DependentUpon>dlgTidyClimatic.vb</DependentUpon>
+    <EmbeddedResource Include="dlgTidyDailyData.resx">
+      <DependentUpon>dlgTidyDailyData.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRowNamesOrNumbers.sw-KE.resx">
       <DependentUpon>dlgRowNamesOrNumbers.vb</DependentUpon>
