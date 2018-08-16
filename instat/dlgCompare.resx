@@ -320,7 +320,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSateliteAnomalies.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 314</value>
+    <value>12, 315</value>
   </data>
   <data name="lblSateliteAnomalies.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 13</value>
@@ -350,7 +350,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblStationAnomalies.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 351</value>
+    <value>12, 347</value>
   </data>
   <data name="lblStationAnomalies.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 13</value>
@@ -380,7 +380,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>424, 446</value>
+    <value>424, 431</value>
   </data>
   <data name="ucrReceiverStationElement.Location" type="System.Drawing.Point, System.Drawing">
     <value>261, 153</value>
@@ -455,7 +455,7 @@
     <value>3</value>
   </data>
   <data name="ucrInputStationAnomalies.Location" type="System.Drawing.Point, System.Drawing">
-    <value>137, 349</value>
+    <value>107, 343</value>
   </data>
   <data name="ucrInputStationAnomalies.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -476,7 +476,7 @@
     <value>6</value>
   </data>
   <data name="ucrInputSateliteAnomalies.Location" type="System.Drawing.Point, System.Drawing">
-    <value>140, 311</value>
+    <value>109, 311</value>
   </data>
   <data name="ucrInputSateliteAnomalies.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -497,10 +497,10 @@
     <value>7</value>
   </data>
   <data name="ucrChkAbsDev.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 349</value>
+    <value>10, 343</value>
   </data>
   <data name="ucrChkAbsDev.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 20</value>
+    <value>135, 20</value>
   </data>
   <data name="ucrChkAbsDev.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -539,7 +539,7 @@
     <value>11</value>
   </data>
   <data name="ucrInputAbsDev.Location" type="System.Drawing.Point, System.Drawing">
-    <value>137, 349</value>
+    <value>145, 343</value>
   </data>
   <data name="ucrInputAbsDev.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -560,7 +560,7 @@
     <value>12</value>
   </data>
   <data name="ucrInputBias.Location" type="System.Drawing.Point, System.Drawing">
-    <value>140, 311</value>
+    <value>145, 311</value>
   </data>
   <data name="ucrInputBias.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -581,7 +581,7 @@
     <value>13</value>
   </data>
   <data name="ucrNudMovingAverage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>135, 280</value>
+    <value>175, 280</value>
   </data>
   <data name="ucrNudMovingAverage.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -626,7 +626,7 @@
     <value>10, 280</value>
   </data>
   <data name="ucrChkMovingAverage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>144, 20</value>
   </data>
   <data name="ucrChkMovingAverage.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -644,7 +644,7 @@
     <value>18</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 390</value>
+    <value>10, 373</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 52</value>
@@ -687,9 +687,6 @@
   </data>
   <data name="&gt;&gt;ucrSelectorCompare.ZOrder" xml:space="preserve">
     <value>22</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

@@ -49,11 +49,10 @@ Public Class dlgCompare
     End Sub
 
     Private Sub InitialiseDialog()
-
         ucrPnlCompare.AddRadioButton(rdoDifferences)
         ucrPnlCompare.AddRadioButton(rdoAnomalies)
-        ucrPnlCompare.AddParameterPresentCondition(rdoDifferences, "sub1")
-        ucrPnlCompare.AddParameterPresentCondition(rdoAnomalies, "sub1", False)
+        ucrPnlCompare.AddParameterPresentCondition(rdoDifferences, "manipulations", False)
+        ucrPnlCompare.AddParameterPresentCondition(rdoAnomalies, "manipulations")
 
         ucrSelectorCompare.SetParameter(New RParameter("", 0))
         ucrSelectorCompare.SetParameterIsrfunction()
@@ -72,16 +71,17 @@ Public Class dlgCompare
         ucrReceiverStationElement.bWithQuotes = False
         ucrReceiverStationElement.Selector = ucrSelectorCompare
         ucrReceiverStationElement.SetDataType("numeric")
+        ucrReceiverStationElement.strSelectorHeading = "Numerics"
 
         ucrReceiverSateliteElement.SetParameter(New RParameter("satelite_element", 0, bNewIncludeArgumentName:=False))
         ucrReceiverSateliteElement.SetParameterIsString()
         ucrReceiverSateliteElement.bWithQuotes = False
         ucrReceiverSateliteElement.Selector = ucrSelectorCompare
         ucrReceiverSateliteElement.SetDataType("numeric")
+        ucrReceiverSateliteElement.strSelectorHeading = "Numerics"
 
         ucrChkMovingAverage.SetText("Moving Average")
         'TODO:This is temporarily disabled!
-        ucrChkMovingAverage.Checked = True
         ucrChkMovingAverage.Enabled = False
         ucrNudMovingAverage.Enabled = False
 
@@ -113,27 +113,30 @@ Public Class dlgCompare
 
         ucrInputBias.SetParameter(New RParameter("result_name", 2))
         ucrInputBias.SetDataFrameSelector(ucrSelectorCompare.ucrAvailableDataFrames)
-        ucrInputBias.SetName("bias")
+        ucrInputBias.SetDefaultTypeAsColumn()
+        ucrInputBias.SetPrefix("bias")
 
         ucrInputAbsDev.SetParameter(New RParameter("result_name", 2))
         ucrInputAbsDev.SetDataFrameSelector(ucrSelectorCompare.ucrAvailableDataFrames)
-        ucrInputAbsDev.SetName("absdev1")
-
+        ucrInputAbsDev.SetDefaultTypeAsColumn()
+        ucrInputAbsDev.SetPrefix("absdev")
 
         ucrInputSateliteAnomalies.SetParameter(New RParameter("result_name", 2))
         ucrInputSateliteAnomalies.SetDataFrameSelector(ucrSelectorCompare.ucrAvailableDataFrames)
-        ucrInputSateliteAnomalies.SetName("satellite_anom")
+        ucrInputSateliteAnomalies.SetDefaultTypeAsColumn()
+        ucrInputSateliteAnomalies.SetPrefix("satellite_anom")
 
         ucrInputStationAnomalies.SetParameter(New RParameter("result_name", 2))
         ucrInputStationAnomalies.SetDataFrameSelector(ucrSelectorCompare.ucrAvailableDataFrames)
-        ucrInputStationAnomalies.SetName("anom")
+        ucrInputStationAnomalies.SetDefaultTypeAsColumn()
+        ucrInputStationAnomalies.SetPrefix("station_anom")
     End Sub
 
     Private Sub SetDefaults()
-        clsBiasCalculation.Clear()
+        'clsBiasCalculation.Clear()
         clsDiffOperator.Clear()
         clsListFunction.Clear()
-        clsAbsDevCalculation.Clear()
+        'clsAbsDevCalculation.Clear()
         clsGroupByStationDOY.Clear()
         clsMinusOperator.Clear()
         clsAbsDevFunction.Clear()
@@ -158,7 +161,7 @@ Public Class dlgCompare
         clsBiasCalculation.SetRCommand("instat_calculation$new")
         clsBiasCalculation.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsBiasCalculation.AddParameter("function_exp", clsROperatorParameter:=clsDiffOperator, iPosition:=1)
-        clsBiasCalculation.AddParameter("result_name", Chr(34) & "bias1" & Chr(34), iPosition:=2)
+        clsBiasCalculation.AddParameter("result_name", Chr(34) & "bias" & Chr(34), iPosition:=2)
         clsBiasCalculation.AddParameter("save", 2, iPosition:=2)
         clsBiasCalculation.SetAssignTo("bias_calculation")
 
@@ -168,7 +171,7 @@ Public Class dlgCompare
         clsAbsDevCalculation.SetRCommand("instat_calculation$new")
         clsAbsDevCalculation.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsAbsDevCalculation.AddParameter("function_exp", clsRFunctionParameter:=clsAbsDevFunction, iPosition:=1)
-        clsAbsDevCalculation.AddParameter("result_name", Chr(34) & "absdev1" & Chr(34), iPosition:=2)
+        clsAbsDevCalculation.AddParameter("result_name", Chr(34) & "absdev" & Chr(34), iPosition:=2)
         clsAbsDevCalculation.AddParameter("save", 2, iPosition:=2)
         clsAbsDevCalculation.SetAssignTo("absdev_calculation ")
 
@@ -181,9 +184,13 @@ Public Class dlgCompare
         clsCombinedCalculation.SetRCommand("instat_calculation$new")
         clsCombinedCalculation.AddParameter("type", Chr(34) & "combination" & Chr(34), iPosition:=0)
         clsCombinedCalculation.AddParameter("sub_calculation", clsRFunctionParameter:=clsListFunction, iPosition:=2)
+        clsCombinedCalculation.SetAssignTo("combined_calculation")
 
         clsListFunction.SetRCommand("list")
         clsListFunction.AddParameter("sub1", clsRFunctionParameter:=clsBiasCalculation, bIncludeArgumentName:=False, iPosition:=0)
+        clsListFunction.AddParameter("sub2", clsRFunctionParameter:=clsAbsDevCalculation, bIncludeArgumentName:=False, iPosition:=1)
+
+        clsListManipulation.SetRCommand("list")
 
         'Anomalies calculations
         clsSateliteAnomalies.SetRCommand("instat_calculation$new")
@@ -203,7 +210,7 @@ Public Class dlgCompare
         clsStationAnomalies.SetRCommand("instat_calculation$new")
         clsStationAnomalies.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsStationAnomalies.AddParameter("function_exp", clsROperatorParameter:=clsStationMinusOperator, iPosition:=1)
-        clsStationAnomalies.AddParameter("result_name", Chr(34) & "anom" & Chr(34), iPosition:=2)
+        clsStationAnomalies.AddParameter("result_name", Chr(34) & "station_anom" & Chr(34), iPosition:=2)
         clsStationAnomalies.AddParameter("save", 2, iPosition:=2)
         clsStationAnomalies.SetAssignTo("station_anomalies")
 
@@ -213,9 +220,6 @@ Public Class dlgCompare
 
         clsStationMeanFunction.SetRCommand("mean")
         clsStationMeanFunction.AddParameter("na.rm", "TRUE", iPosition:=1)
-
-        clsListManipulation.SetRCommand("list")
-        clsListManipulation.AddParameter("group_by", clsRFunctionParameter:=clsGroupByStationDOY, bIncludeArgumentName:=False)
 
         'Run Calculations
         clsRunInstatCalculation.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
@@ -240,7 +244,7 @@ Public Class dlgCompare
         ucrChkAbsDev.SetRCode(clsListFunction, bReset)
         ucrInputBias.SetRCode(clsBiasCalculation, bReset)
         ucrInputAbsDev.SetRCode(clsAbsDevCalculation, bReset)
-        ucrPnlCompare.SetRCode(clsListFunction, bReset)
+        ucrPnlCompare.SetRCode(clsCombinedCalculation, bReset)
         ucrInputSateliteAnomalies.SetRCode(clsSateliteAnomalies, bReset)
         ucrInputStationAnomalies.SetRCode(clsStationAnomalies, bReset)
     End Sub
@@ -260,9 +264,15 @@ Public Class dlgCompare
                 bOkEnabled = False
             End If
         ElseIf rdoAnomalies.Checked Then
-            If Not ucrReceiverSateliteElement.IsEmpty AndAlso Not ucrReceiverStationElement.IsEmpty AndAlso Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverWithinYear.IsEmpty AndAlso Not ucrInputSateliteAnomalies.IsEmpty AndAlso Not ucrInputStationAnomalies.IsEmpty Then
+            If Not ucrReceiverSateliteElement.IsEmpty AndAlso Not ucrReceiverStationElement.IsEmpty AndAlso Not ucrInputSateliteAnomalies.IsEmpty AndAlso Not ucrInputStationAnomalies.IsEmpty Then
                 bOkEnabled = True
             Else
+                bOkEnabled = False
+            End If
+            If Not ucrReceiverStation.IsEmpty AndAlso ucrReceiverWithinYear.IsEmpty Then
+                bOkEnabled = False
+            End If
+            If ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverWithinYear.IsEmpty Then
                 bOkEnabled = False
             End If
         End If
@@ -289,8 +299,15 @@ Public Class dlgCompare
         End If
     End Sub
 
+    Private Sub setCurrentReceiver()
+        If rdoDifferences.Checked Then
+            ucrReceiverSateliteElement.SetMeAsReceiver()
+        End If
+    End Sub
+
     Private Sub ucrPnlCompare_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlCompare.ControlValueChanged
         'ElementsLabelReceiverLocation()
+        setCurrentReceiver()
         If rdoAnomalies.Checked Then
             clsCombinedCalculation.AddParameter("manipulations", clsRFunctionParameter:=clsListManipulation, iPosition:=1)
             clsListFunction.AddParameter("sub3", clsRFunctionParameter:=clsSateliteAnomalies, bIncludeArgumentName:=False, iPosition:=2)
@@ -314,10 +331,19 @@ Public Class dlgCompare
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrReceiverWithinYear.ControlValueChanged
-        clsGroupByStationDOY.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames & "," & strCurrDataName & "=" & ucrReceiverWithinYear.GetVariableNames & ")", iPosition:=3)
+        If Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverWithinYear.IsEmpty Then
+            clsGroupByStationDOY.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames & "," & strCurrDataName & "=" & ucrReceiverWithinYear.GetVariableNames & ")", iPosition:=3)
+        Else
+            clsGroupByStationDOY.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverWithinYear.GetVariableNames, iPosition:=3)
+        End If
+        If Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverWithinYear.IsEmpty Then
+            clsListManipulation.AddParameter("group_by", clsRFunctionParameter:=clsGroupByStationDOY, bIncludeArgumentName:=False)
+        Else
+            clsListManipulation.RemoveParameterByName("group_by")
+        End If
     End Sub
 
-    Private Sub ucrReceiverSateliteElement_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSateliteElement.ControlContentsChanged, ucrReceiverStationElement.ControlContentsChanged, ucrChkBias.ControlContentsChanged, ucrChkAbsDev.ControlContentsChanged, ucrInputBias.ControlContentsChanged, ucrInputAbsDev.ControlContentsChanged, ucrPnlCompare.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged, ucrReceiverWithinYear.ControlContentsChanged, ucrInputSateliteAnomalies.ControlContentsChanged, ucrInputStationAnomalies.ControlContentsChanged
+    Private Sub ucrReceiverSateliteElement_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSateliteElement.ControlContentsChanged, ucrReceiverStationElement.ControlContentsChanged, ucrChkBias.ControlContentsChanged, ucrChkAbsDev.ControlContentsChanged, ucrInputBias.ControlContentsChanged, ucrInputAbsDev.ControlContentsChanged, ucrPnlCompare.ControlContentsChanged, ucrInputSateliteAnomalies.ControlContentsChanged, ucrInputStationAnomalies.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged, ucrReceiverWithinYear.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
