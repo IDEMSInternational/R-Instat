@@ -37,7 +37,6 @@ Partial Class dlgCompare
         Me.ucrReceiverSateliteElement = New instat.ucrReceiverSingle()
         Me.ucrInputStationAnomalies = New instat.ucrInputTextBox()
         Me.ucrInputSateliteAnomalies = New instat.ucrInputTextBox()
-        Me.ucrChkAbsDev = New instat.ucrCheck()
         Me.ucrChkBias = New instat.ucrCheck()
         Me.ucrInputAbsDev = New instat.ucrInputTextBox()
         Me.ucrInputBias = New instat.ucrInputTextBox()
@@ -46,6 +45,7 @@ Partial Class dlgCompare
         Me.ucrChkMovingAverage = New instat.ucrCheck()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorCompare = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrChkAbsDev = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblStation
@@ -150,12 +150,6 @@ Partial Class dlgCompare
         resources.ApplyResources(Me.ucrInputSateliteAnomalies, "ucrInputSateliteAnomalies")
         Me.ucrInputSateliteAnomalies.Name = "ucrInputSateliteAnomalies"
         '
-        'ucrChkAbsDev
-        '
-        Me.ucrChkAbsDev.Checked = False
-        resources.ApplyResources(Me.ucrChkAbsDev, "ucrChkAbsDev")
-        Me.ucrChkAbsDev.Name = "ucrChkAbsDev"
-        '
         'ucrChkBias
         '
         Me.ucrChkBias.Checked = False
@@ -212,6 +206,12 @@ Partial Class dlgCompare
         resources.ApplyResources(Me.ucrSelectorCompare, "ucrSelectorCompare")
         Me.ucrSelectorCompare.Name = "ucrSelectorCompare"
         '
+        'ucrChkAbsDev
+        '
+        Me.ucrChkAbsDev.Checked = False
+        resources.ApplyResources(Me.ucrChkAbsDev, "ucrChkAbsDev")
+        Me.ucrChkAbsDev.Name = "ucrChkAbsDev"
+        '
         'dlgCompare
         '
         resources.ApplyResources(Me, "$this")
@@ -259,7 +259,6 @@ Partial Class dlgCompare
     Friend WithEvents rdoDifferences As RadioButton
     Friend WithEvents ucrPnlCompare As UcrPanel
     Friend WithEvents ucrNudMovingAverage As ucrNud
-    Friend WithEvents ucrChkAbsDev As ucrCheck
     Friend WithEvents ucrChkBias As ucrCheck
     Friend WithEvents ucrInputAbsDev As ucrInputTextBox
     Friend WithEvents ucrInputBias As ucrInputTextBox
@@ -271,4 +270,5 @@ Partial Class dlgCompare
     Friend WithEvents ucrReceiverWithinYear As ucrReceiverSingle
     Friend WithEvents ucrReceiverStationElement As ucrReceiverSingle
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
+    Friend WithEvents ucrChkAbsDev As ucrCheck
 End Class
