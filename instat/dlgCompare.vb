@@ -19,7 +19,6 @@ Imports instat.Translations
 Public Class dlgCompare
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private strCurrDataName As String
 
     Private iReceiverSateliteY As Integer
     Private iReceiverLabelSateliteY As Integer
@@ -27,7 +26,7 @@ Public Class dlgCompare
     Private iReceiverLabelStationY As Integer
     'Difference
     Private clsBiasCalculation, clsListFunction, clsAbsDevCalculation, clsAbsDevFunction, clsCombinedCalculation, clsRunInstatCalculation As New RFunction
-    Private clsGroupByStationDOY As New RFunction
+    Private clsGroupByStationWithinYear As New RFunction
     Private clsDiffOperator, clsMinusOperator As New ROperator
 
     'Anomalies
@@ -60,7 +59,7 @@ Public Class dlgCompare
         ucrReceiverStation.SetParameterIsString()
         ucrReceiverStation.Selector = ucrSelectorCompare
         ucrReceiverStation.SetClimaticType("station")
-        'ucrReceiverStation.bAutoFill = True
+        ucrReceiverStation.bAutoFill = True
 
         ucrReceiverWithinYear.SetParameterIsString()
         ucrReceiverWithinYear.bWithQuotes = False
@@ -137,7 +136,7 @@ Public Class dlgCompare
         clsDiffOperator.Clear()
         clsListFunction.Clear()
         'clsAbsDevCalculation.Clear()
-        clsGroupByStationDOY.Clear()
+        clsGroupByStationWithinYear.Clear()
         clsMinusOperator.Clear()
         clsAbsDevFunction.Clear()
         clsCombinedCalculation.Clear()
@@ -154,9 +153,9 @@ Public Class dlgCompare
         ucrReceiverSateliteElement.SetMeAsReceiver()
 
         'group_by_station_day_of_year
-        clsGroupByStationDOY.SetRCommand("instat_calculation$new")
-        clsGroupByStationDOY.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=0)
-        clsGroupByStationDOY.SetAssignTo("grouping")
+        clsGroupByStationWithinYear.SetRCommand("instat_calculation$new")
+        clsGroupByStationWithinYear.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=0)
+        clsGroupByStationWithinYear.SetAssignTo("grouping")
 
         clsBiasCalculation.SetRCommand("instat_calculation$new")
         clsBiasCalculation.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
@@ -250,29 +249,20 @@ Public Class dlgCompare
     End Sub
 
     Private Sub TestOkEnabled()
-        Dim bOkEnabled As Boolean
+        Dim bOkEnabled As Boolean = True
+
         If rdoDifferences.Checked Then
             If Not ucrReceiverSateliteElement.IsEmpty AndAlso Not ucrReceiverStationElement.IsEmpty AndAlso (ucrChkBias.Checked OrElse ucrChkAbsDev.Checked) Then
-                If ucrChkBias.Checked AndAlso ucrInputBias.IsEmpty Then
+                If (ucrChkBias.Checked AndAlso ucrInputBias.IsEmpty) OrElse (ucrChkAbsDev.Checked AndAlso ucrInputAbsDev.IsEmpty) Then
                     bOkEnabled = False
-                ElseIf ucrChkAbsDev.Checked AndAlso ucrInputAbsDev.IsEmpty Then
-                    bOkEnabled = False
-                Else
-                    bOkEnabled = True
                 End If
             Else
                 bOkEnabled = False
             End If
         ElseIf rdoAnomalies.Checked Then
-            If Not ucrReceiverSateliteElement.IsEmpty AndAlso Not ucrReceiverStationElement.IsEmpty AndAlso Not ucrInputSateliteAnomalies.IsEmpty AndAlso Not ucrInputStationAnomalies.IsEmpty Then
-                bOkEnabled = True
-            Else
+            If ucrReceiverWithinYear.IsEmpty OrElse (ucrReceiverSateliteElement.IsEmpty AndAlso ucrReceiverStationElement.IsEmpty()) Then
                 bOkEnabled = False
-            End If
-            If Not ucrReceiverStation.IsEmpty AndAlso ucrReceiverWithinYear.IsEmpty Then
-                bOkEnabled = False
-            End If
-            If ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverWithinYear.IsEmpty Then
+            ElseIf (Not ucrReceiverSateliteElement.IsEmpty AndAlso ucrInputSateliteAnomalies.IsEmpty) OrElse (Not ucrReceiverStationElement.IsEmpty AndAlso ucrInputStationAnomalies.IsEmpty) Then
                 bOkEnabled = False
             End If
         End If
@@ -299,15 +289,21 @@ Public Class dlgCompare
         End If
     End Sub
 
-    Private Sub setCurrentReceiver()
+    Private Sub SetCurrentReceiver()
+        Dim ucrCurrentReceiver As ucrReceiver = Nothing
+
         If rdoDifferences.Checked Then
-            ucrReceiverSateliteElement.SetMeAsReceiver()
+            If ucrSelectorCompare.CurrentReceiver IsNot Nothing Then
+                ucrCurrentReceiver = ucrSelectorCompare.CurrentReceiver
+            End If
+            If ucrCurrentReceiver Is Nothing OrElse ucrCurrentReceiver.Equals(ucrReceiverStation) OrElse ucrCurrentReceiver.Equals(ucrReceiverWithinYear) Then
+                ucrReceiverSateliteElement.SetMeAsReceiver()
+            End If
         End If
     End Sub
 
     Private Sub ucrPnlCompare_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlCompare.ControlValueChanged
-        'ElementsLabelReceiverLocation()
-        setCurrentReceiver()
+        SetCurrentReceiver()
         If rdoAnomalies.Checked Then
             clsCombinedCalculation.AddParameter("manipulations", clsRFunctionParameter:=clsListManipulation, iPosition:=1)
             clsListFunction.AddParameter("sub3", clsRFunctionParameter:=clsSateliteAnomalies, bIncludeArgumentName:=False, iPosition:=2)
@@ -320,24 +316,30 @@ Public Class dlgCompare
     End Sub
 
     Private Sub ucrReceiverSateliteElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSateliteElement.ControlValueChanged, ucrReceiverStationElement.ControlValueChanged
+        Dim strCurrDataName As String
+
+        strCurrDataName = Chr(34) & ucrSelectorCompare.strCurrentDataFrame & Chr(34)
+
         clsBiasCalculation.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverSateliteElement.GetVariableNames & "," & strCurrDataName & "=" & ucrReceiverStationElement.GetVariableNames & ")", iPosition:=3)
         clsAbsDevCalculation.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverSateliteElement.GetVariableNames & "," & strCurrDataName & "=" & ucrReceiverStationElement.GetVariableNames & ")", iPosition:=3)
         clsSateliteAnomalies.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverSateliteElement.GetVariableNames & ")", iPosition:=3)
         clsStationAnomalies.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverStationElement.GetVariableNames & ")", iPosition:=3)
     End Sub
 
-    Private Sub ucrSelectorCompare_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorCompare.ControlValueChanged
-        strCurrDataName = Chr(34) & ucrSelectorCompare.strCurrentDataFrame & Chr(34)
-    End Sub
-
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrReceiverWithinYear.ControlValueChanged
+        Dim strCurrDataName As String
+
+        strCurrDataName = Chr(34) & ucrSelectorCompare.strCurrentDataFrame & Chr(34)
+
         If Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverWithinYear.IsEmpty Then
-            clsGroupByStationDOY.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames & "," & strCurrDataName & "=" & ucrReceiverWithinYear.GetVariableNames & ")", iPosition:=3)
+            clsGroupByStationWithinYear.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames & "," & strCurrDataName & "=" & ucrReceiverWithinYear.GetVariableNames & ")", iPosition:=3)
+        ElseIf Not ucrReceiverWithinYear.IsEmpty Then
+            clsGroupByStationWithinYear.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverWithinYear.GetVariableNames & ")", iPosition:=3)
         Else
-            clsGroupByStationDOY.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverWithinYear.GetVariableNames, iPosition:=3)
+            clsGroupByStationWithinYear.RemoveParameterByName("calculated_from")
         End If
-        If Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverWithinYear.IsEmpty Then
-            clsListManipulation.AddParameter("group_by", clsRFunctionParameter:=clsGroupByStationDOY, bIncludeArgumentName:=False)
+        If Not ucrReceiverStation.IsEmpty OrElse Not ucrReceiverWithinYear.IsEmpty Then
+            clsListManipulation.AddParameter("group_by", clsRFunctionParameter:=clsGroupByStationWithinYear, bIncludeArgumentName:=False)
         Else
             clsListManipulation.RemoveParameterByName("group_by")
         End If
