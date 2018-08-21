@@ -2004,11 +2004,19 @@ Public Class frmMain
         dlgImportShapeFiles.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticTidyandExamineTidyData_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineTidyData.Click
-        dlgTidyClimaticData.ShowDialog()
+    Private Sub mnuClimaticTidyandExamineTidyDailyData_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineTidyDailyData.Click
+        dlgTidyDailyData.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticTidyandExamineMerge_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineMerge.Click
         dlgMerge.ShowDialog()
+    End Sub
+
+    Private Sub mnuTbLastGraph_Click(sender As Object, e As EventArgs) Handles mnuTbLastGraph.Click
+        clsRLink.ViewLastGraph()
+    End Sub
+
+    Private Sub mnuClimaticCMSAFExporttoCMSAFRToolbox_Click(sender As Object, e As EventArgs) Handles mnuClimaticCMSAFExporttoCMSAFRToolbox.Click
+        dlgExportToCMSAF.ShowDialog()
     End Sub
 End Class
