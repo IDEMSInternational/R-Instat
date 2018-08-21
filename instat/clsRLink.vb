@@ -1438,4 +1438,11 @@ Public Class RLink
         bInstatObjectExists = True
         RunScript(clsCreateIO.ToScript(), strComment:="Creating New Instat Object")
     End Sub
+
+    Public Sub ViewLastGraph()
+        Dim clsLastGraph As New RFunction
+
+        clsLastGraph.SetRCommand(strInstatDataObject & "$get_last_graph")
+        RunScript(clsLastGraph.ToScript(), strComment:="View last graph", bSeparateThread:=False)
+    End Sub
 End Class
