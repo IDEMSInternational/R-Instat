@@ -415,6 +415,7 @@ Public Class ucrSave
         ' sdgSaveColumnPosition.SetRCode()
         sdgSaveColumnPosition.ShowDialog()
 
+    End Sub
     Public Sub SetGlobalDataName(strNewGlobalDataName As String)
         strGlobalDataName = strNewGlobalDataName
         UpdateAssignTo()
