@@ -22,9 +22,13 @@ Public Class dlgTidyDailyData
     Private clsTidyClimaticFunction As New RFunction
 
     Private iTextBoxMaxY As Integer
+    Private iReceiverMaxY As Integer
+    Private iReceiverLabelMaxY As Integer
 
     Private Sub dlgTidyDailyData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
+            iReceiverMaxY = ucrReceiverStation.Location.Y
+            iReceiverLabelMaxY = lblStation.Location.Y
             iTextBoxMaxY = grpElements.Location.Y
             InitialiseDialog()
             bFirstLoad = False
@@ -103,8 +107,6 @@ Public Class dlgTidyDailyData
         ucrPnlReshapeClimaticData.AddToLinkedControls(ucrReceiverMonth, {rdoDay}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlReshapeClimaticData.AddToLinkedControls(ucrReceiverYear, {rdoDay, rdoMonth}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlReshapeClimaticData.AddToLinkedControls(ucrReceiverElement, {rdoDay, rdoMonth}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlReshapeClimaticData.AddToLinkedControls(ucrReceiverStation, {rdoDay, rdoMonth}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlReshapeClimaticData.AddParameterValuesCondition(rdoYear, "format", Chr(34) & "years" & Chr(34))
         ucrPnlReshapeClimaticData.AddParameterValuesCondition(rdoMonth, "format", Chr(34) & "months" & Chr(34))
@@ -181,8 +183,7 @@ Public Class dlgTidyDailyData
 
     Private Sub ucrPnlReshapeClimaticData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlReshapeClimaticData.ControlValueChanged
         UpdateParameters()
-        ShowOr()
-        ElementGroupLocation()
+        ElementGroupStationLocation()
         ColumnstoStackText()
         ChangeCurrentReceiver()
     End Sub
@@ -199,14 +200,6 @@ Public Class dlgTidyDailyData
 
     End Sub
 
-    Private Sub ShowOr()
-        If rdoYear.Checked Then
-            lblOr.Visible = False
-        Else
-            lblOr.Visible = True
-        End If
-    End Sub
-
     Private Sub ColumnstoStackText()
         If rdoYear.Checked Then
             lblColumnstoStack.Text = "Year Columns:"
@@ -217,10 +210,14 @@ Public Class dlgTidyDailyData
         End If
     End Sub
 
-    Private Sub ElementGroupLocation()
+    Private Sub ElementGroupStationLocation()
         If rdoYear.Checked Then
-            grpElements.Location = New Point(grpElements.Location.X, iTextBoxMaxY / 1.5)
+            ucrReceiverStation.Location = New Point(ucrReceiverStation.Location.X, iReceiverMaxY / 1.42)
+            lblStation.Location = New Point(lblStation.Location.X, iReceiverLabelMaxY / 1.45)
+            grpElements.Location = New Point(grpElements.Location.X, iTextBoxMaxY / 1.38)
         Else
+            ucrReceiverStation.Location = New Point(ucrReceiverStation.Location.X, iReceiverMaxY)
+            lblStation.Location = New Point(lblStation.Location.X, iReceiverLabelMaxY)
             grpElements.Location = New Point(grpElements.Location.X, iTextBoxMaxY)
         End If
     End Sub
@@ -238,7 +235,7 @@ Public Class dlgTidyDailyData
     Private Sub ChangeCurrentReceiver()
         Dim CurrReceiver = ucrSelectorTidyDailyData.CurrentReceiver
 
-        If (CurrReceiver Is ucrReceiverDayofMonth AndAlso Not rdoMonth.Checked) OrElse (CurrReceiver Is ucrReceiverMonth AndAlso Not rdoDay.Checked) OrElse (rdoYear.Checked) Then
+        If (CurrReceiver Is ucrReceiverDayofMonth AndAlso Not rdoMonth.Checked) OrElse (CurrReceiver Is ucrReceiverMonth AndAlso Not rdoDay.Checked) Then
             ucrReceiverMultipleStack.SetMeAsReceiver()
         End If
     End Sub
