@@ -118,89 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="tbpPenmanMonteith.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="tbpPenmanMonteith.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tbpPenmanMonteith.Size" type="System.Drawing.Size, System.Drawing">
-    <value>390, 252</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="tbpPenmanMonteith.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="tbpPenmanMonteith.Text" xml:space="preserve">
-    <value>Penman-Monteith</value>
-  </data>
-  <data name="&gt;&gt;tbpPenmanMonteith.Name" xml:space="preserve">
-    <value>tbpPenmanMonteith</value>
-  </data>
-  <data name="&gt;&gt;tbpPenmanMonteith.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbpPenmanMonteith.Parent" xml:space="preserve">
-    <value>tbpEvapotranspiration</value>
-  </data>
-  <data name="&gt;&gt;tbpPenmanMonteith.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tbpHargreaves.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tbpHargreaves.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tbpHargreaves.Size" type="System.Drawing.Size, System.Drawing">
-    <value>390, 252</value>
-  </data>
-  <data name="tbpHargreaves.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tbpHargreaves.Text" xml:space="preserve">
-    <value>Hargreaves</value>
-  </data>
-  <data name="&gt;&gt;tbpHargreaves.Name" xml:space="preserve">
-    <value>tbpHargreaves</value>
-  </data>
-  <data name="&gt;&gt;tbpHargreaves.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbpHargreaves.Parent" xml:space="preserve">
-    <value>tbpEvapotranspiration</value>
-  </data>
-  <data name="&gt;&gt;tbpHargreaves.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tbpEvapotranspiration.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 2</value>
-  </data>
-  <data name="tbpEvapotranspiration.Size" type="System.Drawing.Size, System.Drawing">
-    <value>398, 278</value>
-  </data>
-  <data name="tbpEvapotranspiration.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;tbpEvapotranspiration.Name" xml:space="preserve">
-    <value>tbpEvapotranspiration</value>
-  </data>
-  <data name="&gt;&gt;tbpEvapotranspiration.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbpEvapotranspiration.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tbpEvapotranspiration.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 284</value>
+    <value>21, 396</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 52</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -214,7 +138,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -223,13 +147,14 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>410, 339</value>
+    <value>471, 450</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Evapotraspiration</value>
+    <value>Evapotranspiration</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>dlgEvapotranspiration</value>
