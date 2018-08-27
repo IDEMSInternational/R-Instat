@@ -500,6 +500,7 @@ Partial Class dlgEndOfRainsSeason
         'ucrChkEndofSeasonOccurence
         '
         Me.ucrChkEndofSeasonOccurence.Checked = False
+        Me.ucrChkEndofSeasonOccurence.Enabled = False
         Me.ucrChkEndofSeasonOccurence.Location = New System.Drawing.Point(264, 20)
         Me.ucrChkEndofSeasonOccurence.Name = "ucrChkEndofSeasonOccurence"
         Me.ucrChkEndofSeasonOccurence.Size = New System.Drawing.Size(87, 20)
@@ -508,6 +509,7 @@ Partial Class dlgEndOfRainsSeason
         'ucrChkEndofSeasonDate
         '
         Me.ucrChkEndofSeasonDate.Checked = False
+        Me.ucrChkEndofSeasonDate.Enabled = False
         Me.ucrChkEndofSeasonDate.Location = New System.Drawing.Point(133, 20)
         Me.ucrChkEndofSeasonDate.Name = "ucrChkEndofSeasonDate"
         Me.ucrChkEndofSeasonDate.Size = New System.Drawing.Size(52, 20)
@@ -534,6 +536,7 @@ Partial Class dlgEndOfRainsSeason
         'ucrInputEndofSeasonDate
         '
         Me.ucrInputEndofSeasonDate.AddQuotesIfUnrecognised = True
+        Me.ucrInputEndofSeasonDate.Enabled = False
         Me.ucrInputEndofSeasonDate.IsMultiline = False
         Me.ucrInputEndofSeasonDate.IsReadOnly = False
         Me.ucrInputEndofSeasonDate.Location = New System.Drawing.Point(189, 20)
@@ -544,6 +547,7 @@ Partial Class dlgEndOfRainsSeason
         'ucrInputEndofSeasonOccurence
         '
         Me.ucrInputEndofSeasonOccurence.AddQuotesIfUnrecognised = True
+        Me.ucrInputEndofSeasonOccurence.Enabled = False
         Me.ucrInputEndofSeasonOccurence.IsMultiline = False
         Me.ucrInputEndofSeasonOccurence.IsReadOnly = False
         Me.ucrInputEndofSeasonOccurence.Location = New System.Drawing.Point(352, 19)
