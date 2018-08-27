@@ -21,7 +21,7 @@ Public Class dlgEndOfRainsSeason
     Private strReplaceNAMin As String = "rain_NA_as_0"
     Private strReplaceNAMax As String = "rain_NA_as_60"
     Private strEvapReplaceNA As String = "evap_NA_as_value"
-    Private clsAddKey, clsAddKeyColName, clsGroupByStationYear, clsGroupByStation, clsDayFromAndTo As New RFunction
+    Private clsGroupByStationYear, clsGroupByStation, clsDayFromAndTo As New RFunction
     Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator, clsWaterBalanceOperator, clsDifferenceOperation As New ROperator
     Private clsDayFilterCalcFromConvert, clsDayFilterCalcFromList As New RFunction
     '60
@@ -239,8 +239,6 @@ Public Class dlgEndOfRainsSeason
         Dim strEndSeason As String = "end_season"
         Dim strEndSeasonStatus As String = "end_seasonl"
 
-        clsAddKey.Clear()
-        clsAddKeyColName.Clear()
         clsGroupByStationYear.Clear()
         clsGroupByStation.Clear()
         clsDayFromAndTo.Clear()
@@ -308,12 +306,6 @@ Public Class dlgEndOfRainsSeason
 
         ucrSelectorForWaterBalance.Reset()
         ucrReceiverRainfall.SetMeAsReceiver()
-
-        'Add Key
-        clsAddKey.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
-        clsAddKey.AddParameter("col_name", clsRFunctionParameter:=clsAddKeyColName)
-        clsAddKeyColName.SetRCommand("c")
-        clsAddKey.AddParameter("data_name", strCurrDataName)
 
         'group by
         clsGroupByStationYear.SetRCommand("instat_calculation$new")
@@ -712,8 +704,6 @@ Public Class dlgEndOfRainsSeason
         clsEndRainBase.AddParameter("display", "FALSE")
         clsEndRainBase.AddParameter("calc", clsRFunctionParameter:=clsCombinationBase)
 
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsAddKey, iPosition:=0)
-
         ucrBase.clsRsyntax.SetBaseRFunction(clsEndRainBase)
     End Sub
 
@@ -752,9 +742,7 @@ Public Class dlgEndOfRainsSeason
         'ucrInputSum.SetRCode(clsMatchFun, bReset)
         'ucrInputColName.SetRCode(clsRWater_bal, bReset)
 
-        ucrReceiverStation.SetRCode(clsAddKeyColName, bReset)
         ucrReceiverDate.SetRCode(clsLastDateFunction, bReset)
-        ucrSelectorForWaterBalance.SetRCode(clsAddKey, bReset)
         ucrReceiverEvaporation.SetRCode(clsEvaporationReplaceNAFunc, bReset)
         ucrInputReplaceNA.SetRCode(clsEvaporationReplaceNAFunc, bReset)
 
@@ -824,7 +812,6 @@ Public Class dlgEndOfRainsSeason
         clsWBFirstWaterBalanceMax.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")", iPosition:=3)
         clsEndRainLastInstance.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")", iPosition:=3)
         clsEndOfRainsDateFunction.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDate.GetVariableNames() & ")", iPosition:=3)
-        clsAddKeyColName.AddParameter("Date", ucrReceiverDate.GetVariableNames(), iPosition:=0)
         clsEndOfRainsFilter.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")", iPosition:=2)
         clsEndOfSeasonFilter.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")", iPosition:=2)
     End Sub
