@@ -309,6 +309,7 @@ Public Class ucrReceiverSingle
     End Sub
 
     Public Sub CheckAutoFill()
+
         'TODO When there are receivers with bAttachedToPrimaryDataFrame = False
         '     don't always want to autofill when dataframe is changed.
         '     Something like AndAlso Selector.CurrentReceiver.bAttachedToPrimaryDataFrame
@@ -323,7 +324,8 @@ Public Class ucrReceiverSingle
 
     Private Sub ParentForm_Shown()
         If bFirstShown Then
-            CheckAutoFill()
+            'This is not needed probably
+            'CheckAutoFill()
             bFirstShown = False
         End If
     End Sub

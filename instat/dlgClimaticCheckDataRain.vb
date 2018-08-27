@@ -203,8 +203,7 @@ Public Class dlgClimaticCheckDataRain
         clsRainFilterFunc.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
         clsRainFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsOrOperator, iPosition:=1)
         clsRainFilterFunc.AddParameter("sub_calculations", clsRFunctionParameter:=clsListSubCalc, iPosition:=2)
-        'clsRainFilterFunc.AddParameter("manipulations", clsRFunctionParameter:=clsManipList, iPosition:=3)
-        clsRainFilterFunc.AddParameter("result_data_frame", Chr(34) & "Rainfall_Filter" & Chr(34), iPosition:=4)
+        clsRainFilterFunc.AddParameter("result_data_frame", Chr(34) & "qcRain" & Chr(34), iPosition:=4)
         clsRainFilterFunc.AddParameter("save", 2, iPosition:=5)
         clsRainFilterFunc.SetAssignTo("rainfall_filter")
 
@@ -234,35 +233,40 @@ Public Class dlgClimaticCheckDataRain
         'Same
         clsGreaterOperator.SetOperation(">")
         clsGreaterOperator.AddParameter("y", "0", iPosition:=1, bIncludeArgumentName:=False)
+
         clsAndOperator.SetOperation("&")
         clsAndOperator.bBrackets = False
         clsAndOperator.bToScriptAsRString = True
-        clsAndOperator.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsGreaterOperator, iPosition:=0)
-        clsAndOperator.AddParameter("right", bIncludeArgumentName:=False, clsRFunctionParameter:=clsRepFunc, iPosition:=1)
+        clsAndOperator.AddParameter("left", clsROperatorParameter:=clsGreaterSameOperator, iPosition:=0)
+        clsAndOperator.AddParameter("right", clsROperatorParameter:=clsGreaterOperator, iPosition:=1)
+
         clsGreaterSameOperator.SetOperation(">=")
-        clsGreaterSameOperator.bBrackets = False
-        clsGreaterSameOperator.bToScriptAsRString = True
         clsGreaterSameOperator.AddParameter("left", bIncludeArgumentName:=False, strParameterValue:=strSameCalc, iPosition:=0)
+
         clsAsNumericFunc.SetRCommand("as.numeric")
+
         clsRleFunc.SetRCommand("rle")
         clsRleFunc.AddParameter("numeric", bIncludeArgumentName:=False, clsRFunctionParameter:=clsAsNumericFunc, iPosition:=0)
+
         clsDollarOperator.SetOperation("$")
         clsDollarOperator.bSpaceAroundOperation = False
         clsDollarOperator.AddParameter("left", bIncludeArgumentName:=False, clsRFunctionParameter:=clsRleFunc, iPosition:=0)
         clsDollarOperator.AddParameter("right", bIncludeArgumentName:=False, strParameterValue:=strLengths, iPosition:=1)
+
         clsRepFunc.SetRCommand("rep")
         clsRepFunc.AddParameter("first", bIncludeArgumentName:=False, clsROperatorParameter:=clsDollarOperator, iPosition:=0)
         clsRepFunc.AddParameter("second", bIncludeArgumentName:=False, clsROperatorParameter:=clsDollarOperator, iPosition:=1)
+        clsRepFunc.bToScriptAsRString = True
 
         clsSameCalcFunc.SetRCommand("instat_calculation$new")
         clsSameCalcFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
-        clsSameCalcFunc.AddParameter("function_exp", clsROperatorParameter:=clsAndOperator, iPosition:=1)
+        clsSameCalcFunc.AddParameter("function_exp", clsRFunctionParameter:=clsRepFunc, iPosition:=1)
         clsSameCalcFunc.AddParameter("result_name", Chr(34) & strSameCalc & Chr(34))
         clsSameCalcFunc.SetAssignTo("same_calculation")
 
         clsSameTestFunc.SetRCommand("instat_calculation$new")
         clsSameTestFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
-        clsSameTestFunc.AddParameter("function_exp", clsROperatorParameter:=clsGreaterSameOperator, iPosition:=1)
+        clsSameTestFunc.AddParameter("function_exp", clsROperatorParameter:=clsAndOperator, iPosition:=1)
         clsSameTestFunc.AddParameter("sub_calculations", clsRFunctionParameter:=clsSameList, iPosition:=2)
         clsSameTestFunc.AddParameter("result_name", Chr(34) & strSameTestCalc & Chr(34))
         clsSameTestFunc.SetAssignTo("same_test_calculation")

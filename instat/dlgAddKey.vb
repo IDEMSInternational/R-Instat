@@ -42,6 +42,7 @@ Public Class dlgAddKey
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 504
+        ucrInputCheckInput.IsReadOnly = True
 
         ucrSelectorKeyColumns.SetParameter(New RParameter("data_name", 0))
         ucrSelectorKeyColumns.SetParameterIsString()
