@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgClimaticMaps
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsGgplotFunction, clsGeomSfFunction, clsGeomPointFunction, clsAesFunction As RFunction
+    Private clsGgplotFunction, clsGeomSfFunction, clsGeomPointFunction, clsSfAesFunction, clsGeomPointAesFunction As RFunction
     Private clsGGplotOperator As New ROperator
 
     Private clsLabsFunction As New RFunction
@@ -50,67 +50,57 @@ Public Class dlgClimaticMaps
     End Sub
 
     Private Sub InitialiseDialog()
-
         ucrBase.clsRsyntax.iCallType = 3
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+
+        ucrSelectorOutline.SetParameter(New RParameter("data", 0))
+        ucrSelectorOutline.SetParameterIsrfunction()
+
+        ucrSelectorStation.SetParameter(New RParameter("data", 0))
+        ucrSelectorStation.SetParameterIsrfunction()
 
         ucrReceiverFill.SetParameter(New RParameter("fill", 0))
-        ucrReceiverFill.Selector = ucrSelectorClimaticMaps
+        ucrReceiverFill.Selector = ucrSelectorOutline
         ucrReceiverFill.SetParameterIsRFunction()
-        ucrReceiverFill.bAttachedToPrimaryDataFrame = False
-        ucrReceiverFill.bOnlyLinkedToPrimaryDataFrames = False
-        ucrReceiverFill.bIncludeDataFrameInAssignment = True
 
-        UcrReceiverLon.SetParameter(New RParameter("x", 0))
-        UcrReceiverLon.Selector = ucrSelectorClimaticMaps
-        UcrReceiverLon.SetParameterIsRFunction()
-        UcrReceiverLon.bAttachedToPrimaryDataFrame = False
-        UcrReceiverLon.bOnlyLinkedToPrimaryDataFrames = False
-        UcrReceiverLon.bIncludeDataFrameInAssignment = True
+        ucrReceiverLongitude.SetParameter(New RParameter("x", 0))
+        ucrReceiverLongitude.Selector = ucrSelectorStation
+        ucrReceiverLongitude.SetParameterIsRFunction()
 
-        UcrReceiverLat.SetParameter(New RParameter("y", 1))
-        UcrReceiverLat.Selector = ucrSelectorClimaticMaps
-        UcrReceiverLat.SetParameterIsRFunction()
-        UcrReceiverLat.bAttachedToPrimaryDataFrame = False
-        UcrReceiverLat.bOnlyLinkedToPrimaryDataFrames = False
-        UcrReceiverLat.bIncludeDataFrameInAssignment = True
+        ucrReceiverLatitude.SetParameter(New RParameter("y", 1))
+        ucrReceiverLatitude.Selector = ucrSelectorStation
+        ucrReceiverLatitude.SetParameterIsRFunction()
 
-        UcrReceiverColor.SetParameter(New RParameter("color", 2))
-        UcrReceiverColor.Selector = ucrSelectorClimaticMaps
-        UcrReceiverColor.SetParameterIsRFunction()
-        UcrReceiverColor.bAttachedToPrimaryDataFrame = False
-        UcrReceiverColor.bOnlyLinkedToPrimaryDataFrames = False
-        UcrReceiverColor.bIncludeDataFrameInAssignment = True
+        ucrReceiverShape.SetParameter(New RParameter("shape", 2))
+        ucrReceiverShape.Selector = ucrSelectorStation
+        ucrReceiverShape.SetParameterIsRFunction()
 
-        UcrReceiverShape.SetParameter(New RParameter("shape", 3))
-        UcrReceiverShape.Selector = ucrSelectorClimaticMaps
-        UcrReceiverShape.SetParameterIsRFunction()
-        UcrReceiverShape.bAttachedToPrimaryDataFrame = False
-        UcrReceiverShape.bOnlyLinkedToPrimaryDataFrames = False
-        UcrReceiverShape.bIncludeDataFrameInAssignment = True
-
-
+        ucrReceiverColor.SetParameter(New RParameter("color", 3))
+        ucrReceiverColor.Selector = ucrSelectorStation
+        ucrReceiverColor.SetParameterIsRFunction()
 
         ucrSaveMap.SetPrefix("Map")
         ucrSaveMap.SetSaveTypeAsGraph()
         ucrSaveMap.SetIsComboBox()
         ucrSaveMap.SetCheckBoxText("Save Map")
         ucrSaveMap.SetAssignToIfUncheckedValue("last_map")
-        ucrSaveMap.SetDataFrameSelector(ucrSelectorClimaticMaps.ucrAvailableDataFrames)
+        ucrSaveMap.SetDataFrameSelector(ucrSelectorOutline.ucrAvailableDataFrames)
 
     End Sub
 
     Private Sub SetDefaults()
         clsGeomSfFunction = New RFunction
         clsGgplotFunction = New RFunction
-        clsAesFunction = New RFunction
+        clsSfAesFunction = New RFunction
         clsGeomPointFunction = New RFunction
-
-
+        clsGeomPointAesFunction = New RFunction
 
         clsGGplotOperator = New ROperator
 
-        ucrSelectorClimaticMaps.Reset()
+        ucrSelectorOutline.Reset()
         ucrReceiverFill.SetMeAsReceiver()
+        ucrSelectorStation.Reset()
+        ucrReceiverLongitude.SetMeAsReceiver()
         ucrSaveMap.Reset()
         bResetSubdialog = True
         bResetSFLayerSubdialog = True
@@ -120,70 +110,97 @@ Public Class dlgClimaticMaps
 
         clsGeomSfFunction.SetPackageName("ggplot2")
         clsGeomSfFunction.SetRCommand("geom_sf")
-        clsGeomSfFunction.AddParameter("aes", clsRFunctionParameter:=clsAesFunction, bIncludeArgumentName:=False, iPosition:=1)
+        clsGeomSfFunction.AddParameter("aes", clsRFunctionParameter:=clsSfAesFunction, bIncludeArgumentName:=False, iPosition:=1)
 
-        clsAesFunction.SetPackageName("ggplot2")
-        clsAesFunction.SetRCommand("aes")
+        clsSfAesFunction.SetPackageName("ggplot2")
+        clsSfAesFunction.SetRCommand("aes")
+
+        clsGeomPointFunction.SetPackageName("ggplot2")
+        clsGeomPointFunction.SetRCommand("geom_point")
+        clsGeomPointFunction.AddParameter("aes", clsRFunctionParameter:=clsGeomPointAesFunction, bIncludeArgumentName:=False, iPosition:=1)
+
+        clsGeomPointAesFunction.SetPackageName("ggplot2")
+        clsGeomPointAesFunction.SetRCommand("aes")
 
         clsGGplotOperator.SetOperation("+")
         clsGGplotOperator.AddParameter("ggplot", clsRFunctionParameter:=clsGgplotFunction, bIncludeArgumentName:=False, iPosition:=0)
         clsGGplotOperator.AddParameter("geom_sf", clsRFunctionParameter:=clsGeomSfFunction, bIncludeArgumentName:=False, iPosition:=1)
-        clsGGplotOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPointFunction, bIncludeArgumentName:=False, iPosition:=2)
 
-        clsGGplotOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
-        clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
-        clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
-        clsXScaleContinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
-        clsYScaleContinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
-        clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
-        clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
-        clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()
-        dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
-        clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
+        'clsGGplotOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
+        'clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
+        'clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
+        'clsXScaleContinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
+        'clsYScaleContinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
+        'clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
+        'clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
+        'clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()
+        'dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
+        'clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
 
-        clsGGplotOperator.SetAssignTo("last_map", strTempDataframe:=ucrSelectorClimaticMaps.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_map")
+        clsGGplotOperator.SetAssignTo("last_map", strTempDataframe:=ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_map")
         ucrBase.clsRsyntax.SetBaseROperator(clsGGplotOperator)
     End Sub
 
     Private Sub cmdMapOptions_Click(sender As Object, e As EventArgs) Handles cmdPlotOptions.Click
-        sdgPlots.SetRCode(clsGGplotOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsAesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrSelectorClimaticMaps, bReset:=bResetSubdialog)
-        sdgPlots.ShowDialog()
-        bResetSubdialog = False
+        'sdgPlots.SetRCode(clsGGplotOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsAesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrSelectorClimaticMaps, bReset:=bResetSubdialog)
+        'sdgPlots.ShowDialog()
+        'bResetSubdialog = False
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrSelectorClimaticMaps.SetRCode(clsGeomSfFunction, bReset)
-        ucrReceiverFill.SetRCode(clsAesFunction, bReset)
+        ucrSelectorOutline.SetRCode(clsGeomSfFunction, bReset)
+        ucrReceiverFill.SetRCode(clsSfAesFunction, bReset)
         ucrSaveMap.SetRCode(clsGGplotOperator, bReset)
-    End Sub
-
-    Private Sub UcrReceiverColor_Load(sender As Object, e As EventArgs) Handles UcrReceiverShape.Load
-
-    End Sub
-
-    Private Sub LabelLon_Click(sender As Object, e As EventArgs) Handles LabelLon.Click
-
+        ucrSelectorStation.SetRCode(clsGeomPointFunction, bReset)
+        ucrReceiverLongitude.SetRCode(clsGeomPointAesFunction, bReset)
+        ucrReceiverLatitude.SetRCode(clsGeomPointAesFunction, bReset)
+        ucrReceiverShape.SetRCode(clsGeomPointAesFunction, bReset)
+        ucrReceiverColor.SetRCode(clsGeomPointAesFunction, bReset)
     End Sub
 
     Private Sub cmdSFOptions_Click(sender As Object, e As EventArgs) Handles cmdSFOptions.Click
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsGeomSfFunction, clsNewGlobalAesFunc:=clsAesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=False, ucrNewBaseSelector:=ucrSelectorClimaticMaps, bApplyAesGlobally:=True, bReset:=bResetSFLayerSubdialog)
-        sdgLayerOptions.ShowDialog()
-        bResetSFLayerSubdialog = False
-        For Each clsParam In clsAesFunction.clsParameters
-            If clsParam.strArgumentName = "fill" Then
-                ucrReceiverFill.Add(clsParam.strArgumentValue)
-            End If
-        Next
+        'sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsGeomSfFunction, clsNewGlobalAesFunc:=clsAesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=False, ucrNewBaseSelector:=ucrSelectorClimaticMaps, bApplyAesGlobally:=True, bReset:=bResetSFLayerSubdialog)
+        'sdgLayerOptions.ShowDialog()
+        'bResetSFLayerSubdialog = False
+        'For Each clsParam In clsAesFunction.clsParameters
+        '    If clsParam.strArgumentName = "fill" Then
+        '        ucrReceiverFill.Add(clsParam.strArgumentValue)
+        '    End If
+        'Next
     End Sub
 
     Private Sub TestOkEnabled()
-
+        Dim bOkEnabled As Boolean
+        If Not ucrReceiverFill.IsEmpty AndAlso ucrSaveMap.IsComplete Then
+            bOkEnabled = True
+            If Not ucrReceiverLongitude.IsEmpty AndAlso ucrReceiverLatitude.IsEmpty Then
+                bOkEnabled = False
+            ElseIf ucrReceiverLongitude.IsEmpty AndAlso Not ucrReceiverLatitude.IsEmpty Then
+                bOkEnabled = False
+            Else
+                bOkEnabled = True
+            End If
+        Else
+            bOkEnabled = False
+        End If
+        ucrBase.OKEnabled(bOkEnabled)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
+    End Sub
 
+    Private Sub ucrReceiverLatitude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLatitude.ControlValueChanged, ucrReceiverLongitude.ControlValueChanged
+        If Not ucrReceiverLatitude.IsEmpty AndAlso Not ucrReceiverLongitude.IsEmpty Then
+            clsGGplotOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPointFunction, bIncludeArgumentName:=False, iPosition:=2)
+        Else
+            clsGGplotOperator.RemoveParameterByName("geom_point")
+        End If
+    End Sub
+
+    Private Sub ucrReceiverFill_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFill.ControlContentsChanged, ucrReceiverLongitude.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged, ucrSaveMap.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
