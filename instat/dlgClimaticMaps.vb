@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgClimaticMaps
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsGgplotFunction, clsGeomSfFunction, clsAesFunction As RFunction
+    Private clsGgplotFunction, clsGeomSfFunction, clsGeomPointFunction, clsAesFunction As RFunction
     Private clsGGplotOperator As New ROperator
 
     Private clsLabsFunction As New RFunction
@@ -51,15 +51,43 @@ Public Class dlgClimaticMaps
 
     Private Sub InitialiseDialog()
 
-        ucrReceiverFill.Selector = ucrSelectorClimaticMaps
         ucrBase.clsRsyntax.iCallType = 3
 
-        ucrSelectorClimaticMaps.SetParameter(New RParameter("data", 0))
-        ucrSelectorClimaticMaps.SetParameterIsrfunction()
-
         ucrReceiverFill.SetParameter(New RParameter("fill", 0))
+        ucrReceiverFill.Selector = ucrSelectorClimaticMaps
         ucrReceiverFill.SetParameterIsRFunction()
-        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        ucrReceiverFill.bAttachedToPrimaryDataFrame = False
+        ucrReceiverFill.bOnlyLinkedToPrimaryDataFrames = False
+        ucrReceiverFill.bIncludeDataFrameInAssignment = True
+
+        UcrReceiverLon.SetParameter(New RParameter("x", 0))
+        UcrReceiverLon.Selector = ucrSelectorClimaticMaps
+        UcrReceiverLon.SetParameterIsRFunction()
+        UcrReceiverLon.bAttachedToPrimaryDataFrame = False
+        UcrReceiverLon.bOnlyLinkedToPrimaryDataFrames = False
+        UcrReceiverLon.bIncludeDataFrameInAssignment = True
+
+        UcrReceiverLat.SetParameter(New RParameter("y", 1))
+        UcrReceiverLat.Selector = ucrSelectorClimaticMaps
+        UcrReceiverLat.SetParameterIsRFunction()
+        UcrReceiverLat.bAttachedToPrimaryDataFrame = False
+        UcrReceiverLat.bOnlyLinkedToPrimaryDataFrames = False
+        UcrReceiverLat.bIncludeDataFrameInAssignment = True
+
+        UcrReceiverColor.SetParameter(New RParameter("color", 2))
+        UcrReceiverColor.Selector = ucrSelectorClimaticMaps
+        UcrReceiverColor.SetParameterIsRFunction()
+        UcrReceiverColor.bAttachedToPrimaryDataFrame = False
+        UcrReceiverColor.bOnlyLinkedToPrimaryDataFrames = False
+        UcrReceiverColor.bIncludeDataFrameInAssignment = True
+
+        UcrReceiverShape.SetParameter(New RParameter("shape", 3))
+        UcrReceiverShape.Selector = ucrSelectorClimaticMaps
+        UcrReceiverShape.SetParameterIsRFunction()
+        UcrReceiverShape.bAttachedToPrimaryDataFrame = False
+        UcrReceiverShape.bOnlyLinkedToPrimaryDataFrames = False
+        UcrReceiverShape.bIncludeDataFrameInAssignment = True
+
 
 
         ucrSaveMap.SetPrefix("Map")
@@ -75,6 +103,9 @@ Public Class dlgClimaticMaps
         clsGeomSfFunction = New RFunction
         clsGgplotFunction = New RFunction
         clsAesFunction = New RFunction
+        clsGeomPointFunction = New RFunction
+
+
 
         clsGGplotOperator = New ROperator
 
@@ -96,8 +127,8 @@ Public Class dlgClimaticMaps
 
         clsGGplotOperator.SetOperation("+")
         clsGGplotOperator.AddParameter("ggplot", clsRFunctionParameter:=clsGgplotFunction, bIncludeArgumentName:=False, iPosition:=0)
-        clsGGplotOperator.AddParameter("geom_sf1", clsRFunctionParameter:=clsGeomSfFunction, bIncludeArgumentName:=False, iPosition:=1)
-
+        clsGGplotOperator.AddParameter("geom_sf", clsRFunctionParameter:=clsGeomSfFunction, bIncludeArgumentName:=False, iPosition:=1)
+        clsGGplotOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPointFunction, bIncludeArgumentName:=False, iPosition:=2)
 
         clsGGplotOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -124,6 +155,14 @@ Public Class dlgClimaticMaps
         ucrSelectorClimaticMaps.SetRCode(clsGeomSfFunction, bReset)
         ucrReceiverFill.SetRCode(clsAesFunction, bReset)
         ucrSaveMap.SetRCode(clsGGplotOperator, bReset)
+    End Sub
+
+    Private Sub UcrReceiverColor_Load(sender As Object, e As EventArgs) Handles UcrReceiverShape.Load
+
+    End Sub
+
+    Private Sub LabelLon_Click(sender As Object, e As EventArgs) Handles LabelLon.Click
+
     End Sub
 
     Private Sub cmdSFOptions_Click(sender As Object, e As EventArgs) Handles cmdSFOptions.Click

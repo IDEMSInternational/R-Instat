@@ -32,9 +32,9 @@ Partial Class dlgClimaticMaps
         Me.ucrSelectorClimaticMaps = New instat.ucrSelectorByDataFrameAddRemove()
         Me.UcrReceiverLon = New instat.ucrReceiverSingle()
         Me.UcrReceiverLat = New instat.ucrReceiverSingle()
-        Me.UcrReceiverColor = New instat.ucrReceiverSingle()
+        Me.UcrReceiverShape = New instat.ucrReceiverSingle()
         Me.LabelLon = New System.Windows.Forms.Label()
-        Me.UcrReceiverSingle1 = New instat.ucrReceiverSingle()
+        Me.UcrReceiverColor = New instat.ucrReceiverSingle()
         Me.Labellat = New System.Windows.Forms.Label()
         Me.labelShape = New System.Windows.Forms.Label()
         Me.LabelColor = New System.Windows.Forms.Label()
@@ -143,38 +143,38 @@ Partial Class dlgClimaticMaps
         Me.UcrReceiverLat.TabIndex = 10
         Me.UcrReceiverLat.ucrSelector = Nothing
         '
-        'UcrReceiverColor
+        'UcrReceiverShape
         '
-        Me.UcrReceiverColor.frmParent = Me
-        Me.UcrReceiverColor.Location = New System.Drawing.Point(618, 223)
-        Me.UcrReceiverColor.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverColor.Name = "UcrReceiverColor"
-        Me.UcrReceiverColor.Selector = Nothing
-        Me.UcrReceiverColor.Size = New System.Drawing.Size(111, 31)
-        Me.UcrReceiverColor.strNcFilePath = ""
-        Me.UcrReceiverColor.TabIndex = 11
-        Me.UcrReceiverColor.ucrSelector = Nothing
+        Me.UcrReceiverShape.frmParent = Me
+        Me.UcrReceiverShape.Location = New System.Drawing.Point(618, 223)
+        Me.UcrReceiverShape.Margin = New System.Windows.Forms.Padding(0)
+        Me.UcrReceiverShape.Name = "UcrReceiverShape"
+        Me.UcrReceiverShape.Selector = Nothing
+        Me.UcrReceiverShape.Size = New System.Drawing.Size(111, 31)
+        Me.UcrReceiverShape.strNcFilePath = ""
+        Me.UcrReceiverShape.TabIndex = 11
+        Me.UcrReceiverShape.ucrSelector = Nothing
         '
         'LabelLon
         '
         Me.LabelLon.AutoSize = True
         Me.LabelLon.Location = New System.Drawing.Point(624, 72)
         Me.LabelLon.Name = "LabelLon"
-        Me.LabelLon.Size = New System.Drawing.Size(49, 20)
+        Me.LabelLon.Size = New System.Drawing.Size(40, 20)
         Me.LabelLon.TabIndex = 12
-        Me.LabelLon.Text = "Long:"
+        Me.LabelLon.Text = "Lon:"
         '
-        'UcrReceiverSingle1
+        'UcrReceiverColor
         '
-        Me.UcrReceiverSingle1.frmParent = Me
-        Me.UcrReceiverSingle1.Location = New System.Drawing.Point(618, 282)
-        Me.UcrReceiverSingle1.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverSingle1.Name = "UcrReceiverSingle1"
-        Me.UcrReceiverSingle1.Selector = Nothing
-        Me.UcrReceiverSingle1.Size = New System.Drawing.Size(111, 31)
-        Me.UcrReceiverSingle1.strNcFilePath = ""
-        Me.UcrReceiverSingle1.TabIndex = 15
-        Me.UcrReceiverSingle1.ucrSelector = Nothing
+        Me.UcrReceiverColor.frmParent = Me
+        Me.UcrReceiverColor.Location = New System.Drawing.Point(618, 282)
+        Me.UcrReceiverColor.Margin = New System.Windows.Forms.Padding(0)
+        Me.UcrReceiverColor.Name = "UcrReceiverColor"
+        Me.UcrReceiverColor.Selector = Nothing
+        Me.UcrReceiverColor.Size = New System.Drawing.Size(111, 31)
+        Me.UcrReceiverColor.strNcFilePath = ""
+        Me.UcrReceiverColor.TabIndex = 15
+        Me.UcrReceiverColor.ucrSelector = Nothing
         '
         'Labellat
         '
@@ -211,9 +211,9 @@ Partial Class dlgClimaticMaps
         Me.Controls.Add(Me.LabelColor)
         Me.Controls.Add(Me.labelShape)
         Me.Controls.Add(Me.Labellat)
-        Me.Controls.Add(Me.UcrReceiverSingle1)
-        Me.Controls.Add(Me.LabelLon)
         Me.Controls.Add(Me.UcrReceiverColor)
+        Me.Controls.Add(Me.LabelLon)
+        Me.Controls.Add(Me.UcrReceiverShape)
         Me.Controls.Add(Me.UcrReceiverLat)
         Me.Controls.Add(Me.UcrReceiverLon)
         Me.Controls.Add(Me.cmdSFOptions)
@@ -245,10 +245,10 @@ Partial Class dlgClimaticMaps
     Friend WithEvents cmdSFOptions As Button
     Friend WithEvents cmdMapOptions As Button
     Friend WithEvents LabelLon As Label
-    Friend WithEvents UcrReceiverColor As ucrReceiverSingle
+    Friend WithEvents UcrReceiverShape As ucrReceiverSingle
     Friend WithEvents UcrReceiverLat As ucrReceiverSingle
     Friend WithEvents UcrReceiverLon As ucrReceiverSingle
-    Friend WithEvents UcrReceiverSingle1 As ucrReceiverSingle
+    Friend WithEvents UcrReceiverColor As ucrReceiverSingle
     Friend WithEvents LabelColor As Label
     Friend WithEvents labelShape As Label
     Friend WithEvents Labellat As Label
