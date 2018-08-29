@@ -145,7 +145,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblTmax.ZOrder" xml:space="preserve">
-    <value>32</value>
+    <value>30</value>
   </data>
   <data name="lblTmin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -172,16 +172,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblTmin.ZOrder" xml:space="preserve">
-    <value>30</value>
+    <value>28</value>
   </data>
   <data name="lblHumidityMax.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lblHumidityMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>302, 244</value>
+    <value>302, 240</value>
   </data>
   <data name="lblHumidityMax.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 13</value>
+    <value>78, 17</value>
   </data>
   <data name="lblHumidityMax.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -199,16 +199,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblHumidityMax.ZOrder" xml:space="preserve">
-    <value>28</value>
+    <value>26</value>
   </data>
   <data name="lblHumidityMin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lblHumidityMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>302, 289</value>
+    <value>302, 285</value>
   </data>
   <data name="lblHumidityMin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 12</value>
+    <value>71, 17</value>
   </data>
   <data name="lblHumidityMin.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -226,13 +226,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblHumidityMin.ZOrder" xml:space="preserve">
-    <value>26</value>
+    <value>24</value>
   </data>
   <data name="lblTimeStep.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lblTimeStep.Location" type="System.Drawing.Point, System.Drawing">
-    <value>60, 336</value>
+    <value>15, 336</value>
   </data>
   <data name="lblTimeStep.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 20</value>
@@ -253,13 +253,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblTimeStep.ZOrder" xml:space="preserve">
-    <value>24</value>
+    <value>22</value>
   </data>
   <data name="lblCrop.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lblCrop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 523</value>
+    <value>12, 523</value>
   </data>
   <data name="lblCrop.Size" type="System.Drawing.Size, System.Drawing">
     <value>31, 20</value>
@@ -280,7 +280,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblCrop.ZOrder" xml:space="preserve">
-    <value>23</value>
+    <value>21</value>
   </data>
   <data name="lblDate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -307,7 +307,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblDate.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>18</value>
+  </data>
+  <data name="ucrChkInterpMissingEntries.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 64</value>
+  </data>
+  <data name="ucrChkInterpMissingEntries.Size" type="System.Drawing.Size, System.Drawing">
+    <value>168, 20</value>
+  </data>
+  <data name="ucrChkInterpMissingEntries.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
   <data name="&gt;&gt;ucrChkInterpMissingEntries.Name" xml:space="preserve">
     <value>ucrChkInterpMissingEntries</value>
@@ -320,6 +329,15 @@
   </data>
   <data name="&gt;&gt;ucrChkInterpMissingEntries.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="ucrChkInterpMissingDays.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 26</value>
+  </data>
+  <data name="ucrChkInterpMissingDays.Size" type="System.Drawing.Size, System.Drawing">
+    <value>168, 20</value>
+  </data>
+  <data name="ucrChkInterpMissingDays.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="&gt;&gt;ucrChkInterpMissingDays.Name" xml:space="preserve">
     <value>ucrChkInterpMissingDays</value>
@@ -355,7 +373,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpMissingDataOpts.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>17</value>
   </data>
   <data name="lblMissingMethod.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -465,113 +483,11 @@
   <data name="&gt;&gt;lblMaxPerctMissindData.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;lblCloudCover.Name" xml:space="preserve">
-    <value>lblCloudCover</value>
-  </data>
-  <data name="&gt;&gt;lblCloudCover.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblCloudCover.Parent" xml:space="preserve">
-    <value>grpSolar</value>
-  </data>
-  <data name="&gt;&gt;lblCloudCover.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;lblSunshineHrs.Name" xml:space="preserve">
-    <value>lblSunshineHrs</value>
-  </data>
-  <data name="&gt;&gt;lblSunshineHrs.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSunshineHrs.Parent" xml:space="preserve">
-    <value>grpSolar</value>
-  </data>
-  <data name="&gt;&gt;lblSunshineHrs.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="grpSolar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>240, 463</value>
-  </data>
-  <data name="grpSolar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 80</value>
-  </data>
-  <data name="grpSolar.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="grpSolar.Text" xml:space="preserve">
-    <value>Solar</value>
-  </data>
-  <data name="&gt;&gt;grpSolar.Name" xml:space="preserve">
-    <value>grpSolar</value>
-  </data>
-  <data name="&gt;&gt;grpSolar.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpSolar.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpSolar.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="lblCloudCover.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblCloudCover.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 14</value>
-  </data>
-  <data name="lblCloudCover.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 25</value>
-  </data>
-  <data name="lblCloudCover.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="lblCloudCover.Text" xml:space="preserve">
-    <value>Cloud Cover</value>
-  </data>
-  <data name="&gt;&gt;lblCloudCover.Name" xml:space="preserve">
-    <value>lblCloudCover</value>
-  </data>
-  <data name="&gt;&gt;lblCloudCover.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblCloudCover.Parent" xml:space="preserve">
-    <value>grpSolar</value>
-  </data>
-  <data name="&gt;&gt;lblCloudCover.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lblSunshineHrs.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblSunshineHrs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 42</value>
-  </data>
-  <data name="lblSunshineHrs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 23</value>
-  </data>
-  <data name="lblSunshineHrs.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="lblSunshineHrs.Text" xml:space="preserve">
-    <value>Sunshine Hours</value>
-  </data>
-  <data name="&gt;&gt;lblSunshineHrs.Name" xml:space="preserve">
-    <value>lblSunshineHrs</value>
-  </data>
-  <data name="&gt;&gt;lblSunshineHrs.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSunshineHrs.Parent" xml:space="preserve">
-    <value>grpSolar</value>
-  </data>
-  <data name="&gt;&gt;lblSunshineHrs.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="lblSolar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lblSolar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 469</value>
+    <value>12, 469</value>
   </data>
   <data name="lblSolar.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 18</value>
@@ -621,6 +537,15 @@
   <data name="&gt;&gt;lblRadiation.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
+  <data name="ucrChkWind.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 43</value>
+  </data>
+  <data name="ucrChkWind.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="ucrChkWind.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;ucrChkWind.Name" xml:space="preserve">
     <value>ucrChkWind</value>
   </data>
@@ -633,6 +558,21 @@
   <data name="&gt;&gt;ucrChkWind.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="lblWindSpeed.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblWindSpeed.Location" type="System.Drawing.Point, System.Drawing">
+    <value>109, 24</value>
+  </data>
+  <data name="lblWindSpeed.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 15</value>
+  </data>
+  <data name="lblWindSpeed.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblWindSpeed.Text" xml:space="preserve">
+    <value>WindSpeed:</value>
+  </data>
   <data name="&gt;&gt;lblWindSpeed.Name" xml:space="preserve">
     <value>lblWindSpeed</value>
   </data>
@@ -644,6 +584,18 @@
   </data>
   <data name="&gt;&gt;lblWindSpeed.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="ucrReceiverWindSpeed.Location" type="System.Drawing.Point, System.Drawing">
+    <value>111, 42</value>
+  </data>
+  <data name="ucrReceiverWindSpeed.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverWindSpeed.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverWindSpeed.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;ucrReceiverWindSpeed.Name" xml:space="preserve">
     <value>ucrReceiverWindSpeed</value>
@@ -680,33 +632,6 @@
   </data>
   <data name="&gt;&gt;grpWindSpeed.ZOrder" xml:space="preserve">
     <value>10</value>
-  </data>
-  <data name="lblWindSpeed.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblWindSpeed.Location" type="System.Drawing.Point, System.Drawing">
-    <value>109, 24</value>
-  </data>
-  <data name="lblWindSpeed.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 15</value>
-  </data>
-  <data name="lblWindSpeed.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="lblWindSpeed.Text" xml:space="preserve">
-    <value>WindSpeed:</value>
-  </data>
-  <data name="&gt;&gt;lblWindSpeed.Name" xml:space="preserve">
-    <value>lblWindSpeed</value>
-  </data>
-  <data name="&gt;&gt;lblWindSpeed.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblWindSpeed.Parent" xml:space="preserve">
-    <value>grpWindSpeed</value>
-  </data>
-  <data name="&gt;&gt;lblWindSpeed.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="rdoHargreavesSamani.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -864,51 +789,6 @@
   <data name="&gt;&gt;ucrNudMaxMissingData.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="ucrChkWind.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 43</value>
-  </data>
-  <data name="ucrChkWind.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
-  </data>
-  <data name="ucrChkWind.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrChkWind.Name" xml:space="preserve">
-    <value>ucrChkWind</value>
-  </data>
-  <data name="&gt;&gt;ucrChkWind.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkWind.Parent" xml:space="preserve">
-    <value>grpWindSpeed</value>
-  </data>
-  <data name="&gt;&gt;ucrChkWind.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrReceiverWindSpeed.Location" type="System.Drawing.Point, System.Drawing">
-    <value>111, 42</value>
-  </data>
-  <data name="ucrReceiverWindSpeed.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrReceiverWindSpeed.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
-  </data>
-  <data name="ucrReceiverWindSpeed.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverWindSpeed.Name" xml:space="preserve">
-    <value>ucrReceiverWindSpeed</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverWindSpeed.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverWindSpeed.Parent" xml:space="preserve">
-    <value>grpWindSpeed</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverWindSpeed.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="ucrInputSolar.Location" type="System.Drawing.Point, System.Drawing">
     <value>97, 466</value>
   </data>
@@ -937,28 +817,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>503, 640</value>
-  </data>
-  <data name="ucrPnlWindSpeed.Location" type="System.Drawing.Point, System.Drawing">
-    <value>751, 230</value>
-  </data>
-  <data name="ucrPnlWindSpeed.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 64</value>
-  </data>
-  <data name="ucrPnlWindSpeed.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlWindSpeed.Name" xml:space="preserve">
-    <value>ucrPnlWindSpeed</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlWindSpeed.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlWindSpeed.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlWindSpeed.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>476, 640</value>
   </data>
   <data name="ucrInputCrop.Location" type="System.Drawing.Point, System.Drawing">
     <value>97, 520</value>
@@ -979,7 +838,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputCrop.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>15</value>
   </data>
   <data name="ucrNewColName.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 555</value>
@@ -1000,7 +859,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrNewColName.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>16</value>
   </data>
   <data name="ucrReceiverDate.Location" type="System.Drawing.Point, System.Drawing">
     <value>302, 79</value>
@@ -1024,7 +883,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverDate.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>19</value>
   </data>
   <data name="ucrPnlMethod.Location" type="System.Drawing.Point, System.Drawing">
     <value>130, 10</value>
@@ -1045,7 +904,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrPnlMethod.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>20</value>
   </data>
   <data name="ucrInputTimeStep.Location" type="System.Drawing.Point, System.Drawing">
     <value>121, 335</value>
@@ -1066,7 +925,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputTimeStep.ZOrder" xml:space="preserve">
-    <value>25</value>
+    <value>23</value>
   </data>
   <data name="ucrReceiverHumidityMin.Location" type="System.Drawing.Point, System.Drawing">
     <value>302, 304</value>
@@ -1090,7 +949,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverHumidityMin.ZOrder" xml:space="preserve">
-    <value>27</value>
+    <value>25</value>
   </data>
   <data name="ucrReceiverHumidityMax.Location" type="System.Drawing.Point, System.Drawing">
     <value>302, 259</value>
@@ -1114,7 +973,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverHumidityMax.ZOrder" xml:space="preserve">
-    <value>29</value>
+    <value>27</value>
   </data>
   <data name="ucrReceiverTmin.Location" type="System.Drawing.Point, System.Drawing">
     <value>302, 124</value>
@@ -1138,7 +997,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverTmin.ZOrder" xml:space="preserve">
-    <value>31</value>
+    <value>29</value>
   </data>
   <data name="ucrReceiverTmax.Location" type="System.Drawing.Point, System.Drawing">
     <value>302, 169</value>
@@ -1162,7 +1021,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverTmax.ZOrder" xml:space="preserve">
-    <value>33</value>
+    <value>31</value>
   </data>
   <data name="ucrSelectorEvapotranspiration.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 65</value>
@@ -1186,7 +1045,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorEvapotranspiration.ZOrder" xml:space="preserve">
-    <value>34</value>
+    <value>32</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 583</value>
@@ -1207,10 +1066,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>35</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+    <value>33</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -1247,47 +1103,5 @@
   </data>
   <data name="&gt;&gt;ucrReceiverRadiation.ZOrder" xml:space="preserve">
     <value>14</value>
-  </data>
-  <data name="ucrChkInterpMissingEntries.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 64</value>
-  </data>
-  <data name="ucrChkInterpMissingEntries.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 20</value>
-  </data>
-  <data name="ucrChkInterpMissingEntries.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;ucrChkInterpMissingEntries.Name" xml:space="preserve">
-    <value>ucrChkInterpMissingEntries</value>
-  </data>
-  <data name="&gt;&gt;ucrChkInterpMissingEntries.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkInterpMissingEntries.Parent" xml:space="preserve">
-    <value>grpMissingDataOpts</value>
-  </data>
-  <data name="&gt;&gt;ucrChkInterpMissingEntries.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrChkInterpMissingDays.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 26</value>
-  </data>
-  <data name="ucrChkInterpMissingDays.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 20</value>
-  </data>
-  <data name="ucrChkInterpMissingDays.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;ucrChkInterpMissingDays.Name" xml:space="preserve">
-    <value>ucrChkInterpMissingDays</value>
-  </data>
-  <data name="&gt;&gt;ucrChkInterpMissingDays.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkInterpMissingDays.Parent" xml:space="preserve">
-    <value>grpMissingDataOpts</value>
-  </data>
-  <data name="&gt;&gt;ucrChkInterpMissingDays.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
 </root>
