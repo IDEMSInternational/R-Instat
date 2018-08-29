@@ -35,9 +35,6 @@ Partial Class dlgEvapotranspiration
         Me.lblMaxMissingDays = New System.Windows.Forms.Label()
         Me.lblMaxDurationMissingData = New System.Windows.Forms.Label()
         Me.lblMaxPerctMissindData = New System.Windows.Forms.Label()
-        Me.grpSolar = New System.Windows.Forms.GroupBox()
-        Me.lblCloudCover = New System.Windows.Forms.Label()
-        Me.lblSunshineHrs = New System.Windows.Forms.Label()
         Me.lblSolar = New System.Windows.Forms.Label()
         Me.lblRadiation = New System.Windows.Forms.Label()
         Me.grpWindSpeed = New System.Windows.Forms.GroupBox()
@@ -52,7 +49,6 @@ Partial Class dlgEvapotranspiration
         Me.ucrReceiverWindSpeed = New instat.ucrReceiverSingle()
         Me.ucrInputSolar = New instat.ucrInputComboBox()
         Me.ucrReceiverRadiation = New instat.ucrReceiverSingle()
-        Me.ucrPnlWindSpeed = New instat.UcrPanel()
         Me.ucrInputCrop = New instat.ucrInputComboBox()
         Me.ucrNewColName = New instat.ucrSave()
         Me.ucrChkInterpMissingEntries = New instat.ucrCheck()
@@ -67,7 +63,6 @@ Partial Class dlgEvapotranspiration
         Me.ucrSelectorEvapotranspiration = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpMissingDataOpts.SuspendLayout()
-        Me.grpSolar.SuspendLayout()
         Me.grpWindSpeed.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -133,24 +128,6 @@ Partial Class dlgEvapotranspiration
         '
         resources.ApplyResources(Me.lblMaxPerctMissindData, "lblMaxPerctMissindData")
         Me.lblMaxPerctMissindData.Name = "lblMaxPerctMissindData"
-        '
-        'grpSolar
-        '
-        Me.grpSolar.Controls.Add(Me.lblCloudCover)
-        Me.grpSolar.Controls.Add(Me.lblSunshineHrs)
-        resources.ApplyResources(Me.grpSolar, "grpSolar")
-        Me.grpSolar.Name = "grpSolar"
-        Me.grpSolar.TabStop = False
-        '
-        'lblCloudCover
-        '
-        resources.ApplyResources(Me.lblCloudCover, "lblCloudCover")
-        Me.lblCloudCover.Name = "lblCloudCover"
-        '
-        'lblSunshineHrs
-        '
-        resources.ApplyResources(Me.lblSunshineHrs, "lblSunshineHrs")
-        Me.lblSunshineHrs.Name = "lblSunshineHrs"
         '
         'lblSolar
         '
@@ -263,11 +240,6 @@ Partial Class dlgEvapotranspiration
         Me.ucrReceiverRadiation.Selector = Nothing
         Me.ucrReceiverRadiation.strNcFilePath = ""
         Me.ucrReceiverRadiation.ucrSelector = Nothing
-        '
-        'ucrPnlWindSpeed
-        '
-        resources.ApplyResources(Me.ucrPnlWindSpeed, "ucrPnlWindSpeed")
-        Me.ucrPnlWindSpeed.Name = "ucrPnlWindSpeed"
         '
         'ucrInputCrop
         '
@@ -382,8 +354,6 @@ Partial Class dlgEvapotranspiration
         Me.Controls.Add(Me.ucrInputSolar)
         Me.Controls.Add(Me.lblRadiation)
         Me.Controls.Add(Me.ucrReceiverRadiation)
-        Me.Controls.Add(Me.grpSolar)
-        Me.Controls.Add(Me.ucrPnlWindSpeed)
         Me.Controls.Add(Me.ucrInputCrop)
         Me.Controls.Add(Me.ucrNewColName)
         Me.Controls.Add(Me.grpMissingDataOpts)
@@ -408,7 +378,6 @@ Partial Class dlgEvapotranspiration
         Me.MinimizeBox = False
         Me.Name = "dlgEvapotranspiration"
         Me.grpMissingDataOpts.ResumeLayout(False)
-        Me.grpSolar.ResumeLayout(False)
         Me.grpWindSpeed.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -447,14 +416,10 @@ Partial Class dlgEvapotranspiration
     Friend WithEvents ucrChkWind As ucrCheck
     Friend WithEvents lblWindSpeed As Label
     Friend WithEvents ucrReceiverWindSpeed As ucrReceiverSingle
-    Friend WithEvents grpSolar As GroupBox
-    Friend WithEvents lblCloudCover As Label
-    Friend WithEvents lblSunshineHrs As Label
     Friend WithEvents ucrInputSolar As ucrInputComboBox
     Friend WithEvents lblSolar As Label
     Friend WithEvents ucrReceiverRadiation As ucrReceiverSingle
     Friend WithEvents lblRadiation As Label
-    Friend WithEvents ucrPnlWindSpeed As UcrPanel
     Friend WithEvents rdoHargreavesSamani As RadioButton
     Friend WithEvents rdoPenmanMonteith As RadioButton
 End Class
