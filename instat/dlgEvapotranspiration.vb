@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 
 Public Class dlgEvapotranspiration
@@ -67,17 +66,17 @@ Public Class dlgEvapotranspiration
 
         ucrReceiverDate.SetParameter(New RParameter("x", 0))
         ucrReceiverDate.SetParameterIsRFunction()
-        'ucrReceiverDate.SetClimaticType("date")
+        ucrReceiverDate.SetClimaticType("date")
         ucrReceiverDate.bAutoFill = True
 
         ucrReceiverTmax.SetParameter(New RParameter("Tmax", 3))
         ucrReceiverTmax.SetParameterIsRFunction()
-        'ucrReceiverTmax.SetClimaticType("temp_max")
+        ucrReceiverTmax.SetClimaticType("temp_max")
         ucrReceiverTmax.bAutoFill = True
 
         ucrReceiverTmin.SetParameter(New RParameter("Tmin", 3))
         ucrReceiverTmin.SetParameterIsRFunction()
-        'ucrReceiverTmin.SetClimaticType("temp_min")
+        ucrReceiverTmin.SetClimaticType("temp_min")
         ucrReceiverTmin.bAutoFill = True
 
         ucrReceiverHumidityMax.SetParameter(New RParameter("RHmax", 4))
@@ -90,12 +89,12 @@ Public Class dlgEvapotranspiration
 
         ucrReceiverRadiation.SetParameter(New RParameter("n", 6))
         ucrReceiverRadiation.SetParameterIsRFunction()
-        'ucrReceiverRadiation.SetClimaticType("sunshine_hours")
+        ucrReceiverRadiation.SetClimaticType("sunshine_hours")
         ucrReceiverRadiation.bAutoFill = True
 
         ucrReceiverWindSpeed.SetParameter(New RParameter("u2", 7))
         ucrReceiverWindSpeed.SetParameterIsRFunction()
-        'ucrReceiverWindSpeed.SetClimaticType("wind_speed")
+        ucrReceiverWindSpeed.SetClimaticType("wind_speed")
         ucrReceiverWindSpeed.bAutoFill = True
 
         ucrInputTimeStep.SetParameter(New RParameter("ts", 2))
@@ -364,7 +363,7 @@ Public Class dlgEvapotranspiration
             Case "sunshine hours"
                 ucrReceiverRadiation.SetParameter(New RParameter("n", 6))
                 ucrReceiverRadiation.SetParameterIsRFunction()
-                'ucrReceiverRadiation.SetClimaticType("sunshine_hours")
+                ucrReceiverRadiation.SetClimaticType("sunshine_hours")
                 ucrReceiverRadiation.bAutoFill = True
                 clsVarnamesVectorPM.AddParameter("n", Chr(34) & "n" & Chr(34), bIncludeArgumentName:=False)
                 clsVarnamesVectorPM.RemoveParameterByName("Rs")
@@ -372,7 +371,7 @@ Public Class dlgEvapotranspiration
             Case "data"
                 ucrReceiverRadiation.SetParameter(New RParameter("Rs", 6))
                 ucrReceiverRadiation.SetParameterIsRFunction()
-                'ucrReceiverRadiation.SetClimaticType("radiation")
+                ucrReceiverRadiation.SetClimaticType("radiation")
                 ucrReceiverRadiation.bAutoFill = True
                 clsVarnamesVectorPM.AddParameter("Rs", Chr(34) & "Rs" & Chr(34), bIncludeArgumentName:=False)
                 clsVarnamesVectorPM.RemoveParameterByName("n")
@@ -380,7 +379,7 @@ Public Class dlgEvapotranspiration
             Case "cloud"
                 ucrReceiverRadiation.SetParameter(New RParameter("Cd", 6))
                 ucrReceiverRadiation.SetParameterIsRFunction()
-                'ucrReceiverRadiation.SetClimaticType("cloud_cover")
+                ucrReceiverRadiation.SetClimaticType("cloud_cover")
                 ucrReceiverRadiation.bAutoFill = True
                 clsVarnamesVectorPM.AddParameter("Cd", Chr(34) & "Cd" & Chr(34), bIncludeArgumentName:=False)
                 clsVarnamesVectorPM.RemoveParameterByName("n")
