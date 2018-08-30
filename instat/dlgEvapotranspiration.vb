@@ -22,6 +22,7 @@ Public Class dlgEvapotranspiration
     Private bResetSubdialog As Boolean = False
     Private iBasicHeight As Integer
     Private iBaseMaxY As Integer
+    Private iSaveMaxY As Integer
     Private clsETPenmanMonteith, clsHargreavesSamani, clsDataFunctionPM, clsDataFunctionHS, clsDataFunction, clsReadInputs, clsVector, clsMissingDataVector, clsVarnamesVectorPM, clsVarnamesVectorHS, clsLibraryEvap As New RFunction
     Private clsDayFunc, clsMonthFunc, clsYearFunc As New RFunction
     Private clsBaseOperator, clsDailyOperatorHS As New ROperator
@@ -30,6 +31,7 @@ Public Class dlgEvapotranspiration
         If bFirstload Then
             iBasicHeight = Me.Height
             iBaseMaxY = ucrBase.Location.Y
+            iSaveMaxY = ucrNewColName.Location.Y
             InitialiseDialog()
             bFirstload = False
         End If
@@ -335,10 +337,12 @@ Public Class dlgEvapotranspiration
         If rdoPenmanMonteith.Checked Then
             Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
+            ucrNewColName.Location = New Point(ucrNewColName.Location.X, iSaveMaxY)
         ElseIf rdoHargreavesSamani.Checked Then
             ucrReceiverDate.SetMeAsReceiver()
-            Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight * 0.84)
-            ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.23)
+            Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight * 0.9)
+            ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.15)
+            ucrNewColName.Location = New Point(ucrNewColName.Location.X, iSaveMaxY / 1.183)
         End If
     End Sub
 
