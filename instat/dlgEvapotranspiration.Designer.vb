@@ -31,6 +31,8 @@ Partial Class dlgEvapotranspiration
         Me.lblCrop = New System.Windows.Forms.Label()
         Me.lblDate = New System.Windows.Forms.Label()
         Me.grpMissingDataOpts = New System.Windows.Forms.GroupBox()
+        Me.ucrChkInterpMissingEntries = New instat.ucrCheck()
+        Me.ucrChkInterpMissingDays = New instat.ucrCheck()
         Me.lblMissingMethod = New System.Windows.Forms.Label()
         Me.lblMaxMissingDays = New System.Windows.Forms.Label()
         Me.lblMaxDurationMissingData = New System.Windows.Forms.Label()
@@ -38,21 +40,19 @@ Partial Class dlgEvapotranspiration
         Me.lblSolar = New System.Windows.Forms.Label()
         Me.lblRadiation = New System.Windows.Forms.Label()
         Me.grpWindSpeed = New System.Windows.Forms.GroupBox()
+        Me.ucrChkWind = New instat.ucrCheck()
         Me.lblWindSpeed = New System.Windows.Forms.Label()
+        Me.ucrReceiverWindSpeed = New instat.ucrReceiverSingle()
         Me.rdoHargreavesSamani = New System.Windows.Forms.RadioButton()
         Me.rdoPenmanMonteith = New System.Windows.Forms.RadioButton()
         Me.ucrNudMaxDurationMissingData = New instat.ucrNud()
         Me.ucrNudMaxMissingDays = New instat.ucrNud()
         Me.ucrInputMissingMethod = New instat.ucrInputComboBox()
         Me.ucrNudMaxMissingData = New instat.ucrNud()
-        Me.ucrChkWind = New instat.ucrCheck()
-        Me.ucrReceiverWindSpeed = New instat.ucrReceiverSingle()
         Me.ucrInputSolar = New instat.ucrInputComboBox()
         Me.ucrReceiverRadiation = New instat.ucrReceiverSingle()
         Me.ucrInputCrop = New instat.ucrInputComboBox()
         Me.ucrNewColName = New instat.ucrSave()
-        Me.ucrChkInterpMissingEntries = New instat.ucrCheck()
-        Me.ucrChkInterpMissingDays = New instat.ucrCheck()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrPnlMethod = New instat.UcrPanel()
         Me.ucrInputTimeStep = New instat.ucrInputComboBox()
@@ -109,6 +109,18 @@ Partial Class dlgEvapotranspiration
         Me.grpMissingDataOpts.Name = "grpMissingDataOpts"
         Me.grpMissingDataOpts.TabStop = False
         '
+        'ucrChkInterpMissingEntries
+        '
+        Me.ucrChkInterpMissingEntries.Checked = False
+        resources.ApplyResources(Me.ucrChkInterpMissingEntries, "ucrChkInterpMissingEntries")
+        Me.ucrChkInterpMissingEntries.Name = "ucrChkInterpMissingEntries"
+        '
+        'ucrChkInterpMissingDays
+        '
+        Me.ucrChkInterpMissingDays.Checked = False
+        resources.ApplyResources(Me.ucrChkInterpMissingDays, "ucrChkInterpMissingDays")
+        Me.ucrChkInterpMissingDays.Name = "ucrChkInterpMissingDays"
+        '
         'lblMissingMethod
         '
         resources.ApplyResources(Me.lblMissingMethod, "lblMissingMethod")
@@ -148,10 +160,25 @@ Partial Class dlgEvapotranspiration
         Me.grpWindSpeed.Name = "grpWindSpeed"
         Me.grpWindSpeed.TabStop = False
         '
+        'ucrChkWind
+        '
+        Me.ucrChkWind.Checked = False
+        resources.ApplyResources(Me.ucrChkWind, "ucrChkWind")
+        Me.ucrChkWind.Name = "ucrChkWind"
+        '
         'lblWindSpeed
         '
         resources.ApplyResources(Me.lblWindSpeed, "lblWindSpeed")
         Me.lblWindSpeed.Name = "lblWindSpeed"
+        '
+        'ucrReceiverWindSpeed
+        '
+        Me.ucrReceiverWindSpeed.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverWindSpeed, "ucrReceiverWindSpeed")
+        Me.ucrReceiverWindSpeed.Name = "ucrReceiverWindSpeed"
+        Me.ucrReceiverWindSpeed.Selector = Nothing
+        Me.ucrReceiverWindSpeed.strNcFilePath = ""
+        Me.ucrReceiverWindSpeed.ucrSelector = Nothing
         '
         'rdoHargreavesSamani
         '
@@ -210,21 +237,6 @@ Partial Class dlgEvapotranspiration
         Me.ucrNudMaxMissingData.Name = "ucrNudMaxMissingData"
         Me.ucrNudMaxMissingData.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrChkWind
-        '
-        Me.ucrChkWind.Checked = False
-        resources.ApplyResources(Me.ucrChkWind, "ucrChkWind")
-        Me.ucrChkWind.Name = "ucrChkWind"
-        '
-        'ucrReceiverWindSpeed
-        '
-        Me.ucrReceiverWindSpeed.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverWindSpeed, "ucrReceiverWindSpeed")
-        Me.ucrReceiverWindSpeed.Name = "ucrReceiverWindSpeed"
-        Me.ucrReceiverWindSpeed.Selector = Nothing
-        Me.ucrReceiverWindSpeed.strNcFilePath = ""
-        Me.ucrReceiverWindSpeed.ucrSelector = Nothing
-        '
         'ucrInputSolar
         '
         Me.ucrInputSolar.AddQuotesIfUnrecognised = True
@@ -252,18 +264,6 @@ Partial Class dlgEvapotranspiration
         '
         resources.ApplyResources(Me.ucrNewColName, "ucrNewColName")
         Me.ucrNewColName.Name = "ucrNewColName"
-        '
-        'ucrChkInterpMissingEntries
-        '
-        Me.ucrChkInterpMissingEntries.Checked = False
-        resources.ApplyResources(Me.ucrChkInterpMissingEntries, "ucrChkInterpMissingEntries")
-        Me.ucrChkInterpMissingEntries.Name = "ucrChkInterpMissingEntries"
-        '
-        'ucrChkInterpMissingDays
-        '
-        Me.ucrChkInterpMissingDays.Checked = False
-        resources.ApplyResources(Me.ucrChkInterpMissingDays, "ucrChkInterpMissingDays")
-        Me.ucrChkInterpMissingDays.Name = "ucrChkInterpMissingDays"
         '
         'ucrReceiverDate
         '
