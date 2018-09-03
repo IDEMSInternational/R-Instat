@@ -281,6 +281,12 @@
     <Compile Include="dlgCompareTreatmentLines.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgConversions.Designer.vb">
+      <DependentUpon>dlgConversions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgConversions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCopyDataFrame.Designer.vb">
       <DependentUpon>dlgCopyDataFrame.vb</DependentUpon>
     </Compile>
@@ -2517,6 +2523,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgContrasts.sw-KE.resx">
       <DependentUpon>dlgContrasts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgConversions.resx">
+      <DependentUpon>dlgConversions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCopyDataFrame.resx">
       <DependentUpon>dlgCopyDataFrame.vb</DependentUpon>
