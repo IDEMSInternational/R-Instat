@@ -65,10 +65,14 @@ Public Class dlgClimaticMaps
 
         ucrReceiverLongitude.SetParameter(New RParameter("x", 0))
         ucrReceiverLongitude.Selector = ucrSelectorStation
+        ucrReceiverLongitude.SetIncludedDataTypes({"numeric"})
+        ucrReceiverLongitude.strSelectorHeading = "Numerics"
         ucrReceiverLongitude.SetParameterIsRFunction()
 
         ucrReceiverLatitude.SetParameter(New RParameter("y", 1))
         ucrReceiverLatitude.Selector = ucrSelectorStation
+        ucrReceiverLatitude.SetIncludedDataTypes({"numeric"})
+        ucrReceiverLatitude.strSelectorHeading = "Numerics"
         ucrReceiverLatitude.SetParameterIsRFunction()
 
         ucrReceiverShape.SetParameter(New RParameter("shape", 2))
