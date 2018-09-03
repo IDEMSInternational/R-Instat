@@ -16,7 +16,6 @@
 
 Imports RDotNet
 Imports instat.Translations
-Imports instat
 
 Public Class dlgHelpVignettes
     Private bFirstload As Boolean = True
@@ -41,6 +40,7 @@ Public Class dlgHelpVignettes
         Dim expPackageNames As SymbolicExpression
         Dim chrPackageNames As CharacterVector
         ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.clsRsyntax.bSeparateThread = False
 
         ucrPnlHelpVignettes.AddRadioButton(rdoHelp)
         ucrPnlHelpVignettes.AddRadioButton(rdoVignettes)
@@ -71,6 +71,8 @@ Public Class dlgHelpVignettes
         clsHelpFunction = New RFunction
         clsVignettesFunction = New RFunction
 
+        ucrInputFunctionName.SetName("")
+
         clsHelpFunction.SetPackageName("utils")
         clsHelpFunction.SetRCommand("help")
 
@@ -79,7 +81,6 @@ Public Class dlgHelpVignettes
         clsVignettesFunction.SetPackageName("utils")
         clsVignettesFunction.SetRCommand("browseVignettes")
 
-        ucrBase.clsRsyntax.bSeparateThread = False
         ucrBase.clsRsyntax.SetBaseRFunction(clsHelpFunction)
     End Sub
 
