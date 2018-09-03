@@ -325,7 +325,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDecimal.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 327</value>
+    <value>10, 327</value>
   </data>
   <data name="lblDecimal.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 13</value>
@@ -415,7 +415,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoVariable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>149, 342</value>
+    <value>10, 310</value>
   </data>
   <data name="rdoVariable.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 17</value>
@@ -445,7 +445,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>149, 315</value>
+    <value>10, 283</value>
   </data>
   <data name="rdoValue.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 17</value>
@@ -562,7 +562,7 @@
     <value>419, 463</value>
   </data>
   <data name="ucrInputLatitude.Location" type="System.Drawing.Point, System.Drawing">
-    <value>218, 315</value>
+    <value>80, 283</value>
   </data>
   <data name="ucrInputLatitude.Size" type="System.Drawing.Size, System.Drawing">
     <value>67, 21</value>
@@ -583,7 +583,7 @@
     <value>7</value>
   </data>
   <data name="ucrPnlLatitude.Location" type="System.Drawing.Point, System.Drawing">
-    <value>145, 315</value>
+    <value>10, 283</value>
   </data>
   <data name="ucrPnlLatitude.Size" type="System.Drawing.Size, System.Drawing">
     <value>67, 44</value>
@@ -673,7 +673,7 @@
     <value>14</value>
   </data>
   <data name="ucrSaveConversions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 371</value>
+    <value>10, 371</value>
   </data>
   <data name="ucrSaveConversions.Size" type="System.Drawing.Size, System.Drawing">
     <value>230, 24</value>
@@ -736,7 +736,7 @@
     <value>20</value>
   </data>
   <data name="ucrInputElement.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 283</value>
+    <value>10, 283</value>
   </data>
   <data name="ucrInputElement.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 21</value>
@@ -859,7 +859,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverLatitude.Location" type="System.Drawing.Point, System.Drawing">
-    <value>218, 342</value>
+    <value>80, 310</value>
   </data>
   <data name="ucrReceiverLatitude.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>

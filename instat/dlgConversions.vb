@@ -244,20 +244,22 @@ Public Class dlgConversions
     End Sub
 
     Private Sub ucrPnlLatitude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlLatitude.ControlValueChanged
-        If rdoVariable.Checked Then
-            ucrReceiverLatitude.SetMeAsReceiver()
-        ElseIf rdoValue.Checked Then
-            ucrReceiverDate.SetMeAsReceiver()
+        If rdoDayLength.Checked Then
+            If rdoVariable.Checked Then
+                ucrReceiverLatitude.SetMeAsReceiver()
+            ElseIf rdoValue.Checked Then
+                ucrReceiverDate.SetMeAsReceiver()
+            End If
         End If
     End Sub
 
     Private Sub ucrPnlConversions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlConversions.ControlValueChanged
-        If rdoUnits.Checked Then
-            SetBaseFunction()
-            ucrReceiverElement.SetMeAsReceiver()
-        ElseIf rdoDayLength.Checked Then
+        If rdoDayLength.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsDayLengthFunction)
             ucrReceiverDate.SetMeAsReceiver()
+        ElseIf rdoUnits.Checked Then
+            SetBaseFunction()
+            ucrReceiverElement.SetMeAsReceiver()
         End If
     End Sub
 
