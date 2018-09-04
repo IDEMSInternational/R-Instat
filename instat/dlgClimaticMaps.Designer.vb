@@ -53,7 +53,6 @@ Partial Class dlgClimaticMaps
         '
         'cmdPlotOptions
         '
-        Me.cmdPlotOptions.Enabled = False
         Me.cmdPlotOptions.Location = New System.Drawing.Point(14, 339)
         Me.cmdPlotOptions.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.cmdPlotOptions.Name = "cmdPlotOptions"
