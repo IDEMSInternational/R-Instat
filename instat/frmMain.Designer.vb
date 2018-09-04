@@ -1614,8 +1614,8 @@ Partial Class frmMain
         '
         'mnuClimaticPrepareEvapotranspiration
         '
-        resources.ApplyResources(Me.mnuClimaticPrepareEvapotranspiration, "mnuClimaticPrepareEvapotranspiration")
         Me.mnuClimaticPrepareEvapotranspiration.Name = "mnuClimaticPrepareEvapotranspiration"
+        resources.ApplyResources(Me.mnuClimaticPrepareEvapotranspiration, "mnuClimaticPrepareEvapotranspiration")
         '
         'mnuClimaticPrepareSummary
         '
