@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class dlgMapOption
+Partial Class sdgMapOption
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,8 +22,8 @@ Partial Class dlgMapOption
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgMapOption))
-        Me.ucrBase = New instat.ucrButtons()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgMapOption))
+        Me.ucrBase = New instat.ucrButtonsSubdialogue()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -31,7 +31,7 @@ Partial Class dlgMapOption
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'dlgMapOption
+        'sdgMapOption
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -39,10 +39,10 @@ Partial Class dlgMapOption
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgMapOption"
+        Me.Name = "sdgMapOption"
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrBase As ucrButtonsSubdialogue
 End Class
