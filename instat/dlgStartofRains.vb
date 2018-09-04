@@ -540,7 +540,7 @@ Public Class dlgStartofRains
         clsRDCombineOperator.AddParameter("rd_min", 1, iPosition:=1)
 
         ' run if chkDS is checked
-        clsDSCombineOperator.SetOperation("<")
+        clsDSCombineOperator.SetOperation("<=")
         clsDSCombineOperator.AddParameter("ds_left", strDrySpell, iPosition:=0)
         clsDSCombineOperator.AddParameter("ds_max", 9, iPosition:=1)
 
