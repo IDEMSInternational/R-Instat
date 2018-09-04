@@ -377,10 +377,10 @@
     <Compile Include="dlgExportToCMSAF.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgMapOption.Designer.vb">
-      <DependentUpon>dlgMapOption.vb</DependentUpon>
+    <Compile Include="sdgMapOption.Designer.vb">
+      <DependentUpon>sdgMapOption.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgMapOption.vb">
+    <Compile Include="sdgMapOption.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgMergeAdditionalData.Designer.vb">
@@ -2679,8 +2679,8 @@
     <EmbeddedResource Include="dlgMakeDate.sw-KE.resx">
       <DependentUpon>dlgMakeDate.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgMapOption.resx">
-      <DependentUpon>dlgMapOption.vb</DependentUpon>
+    <EmbeddedResource Include="sdgMapOption.resx">
+      <DependentUpon>sdgMapOption.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMerge.sw-KE.resx">
       <DependentUpon>dlgMerge.vb</DependentUpon>
