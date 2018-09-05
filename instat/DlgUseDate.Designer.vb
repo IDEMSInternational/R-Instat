@@ -61,6 +61,7 @@ Partial Class dlgUseDate
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorUseDate = New instat.ucrSelectorByDataFrameAddRemove()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lblShifted = New System.Windows.Forms.Label()
         Me.lblDayinYear366 = New System.Windows.Forms.Label()
         Me.ucrChkShiftPentadAbbr = New instat.ucrCheck()
         Me.lblShiftYear = New System.Windows.Forms.Label()
@@ -84,6 +85,7 @@ Partial Class dlgUseDate
         Me.ucrChkShiftDayInYearNum366 = New instat.ucrCheck()
         Me.ucrChkShiftPentadNum = New instat.ucrCheck()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.ucrChkShiftYearName = New instat.ucrCheck()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -212,6 +214,8 @@ Partial Class dlgUseDate
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.ucrChkShiftYearName)
+        Me.GroupBox1.Controls.Add(Me.lblShifted)
         Me.GroupBox1.Controls.Add(Me.lblDayinYear366)
         Me.GroupBox1.Controls.Add(Me.ucrChkShiftPentadAbbr)
         Me.GroupBox1.Controls.Add(Me.ucrInputComboBoxStartingMonth)
@@ -239,6 +243,11 @@ Partial Class dlgUseDate
         resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
+        '
+        'lblShifted
+        '
+        resources.ApplyResources(Me.lblShifted, "lblShifted")
+        Me.lblShifted.Name = "lblShifted"
         '
         'lblDayinYear366
         '
@@ -383,6 +392,12 @@ Partial Class dlgUseDate
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         '
+        'ucrChkShiftYearName
+        '
+        resources.ApplyResources(Me.ucrChkShiftYearName, "ucrChkShiftYearName")
+        Me.ucrChkShiftYearName.Checked = False
+        Me.ucrChkShiftYearName.Name = "ucrChkShiftYearName"
+        '
         'dlgUseDate
         '
         resources.ApplyResources(Me, "$this")
@@ -451,4 +466,6 @@ Partial Class dlgUseDate
     Friend WithEvents lblShiftMonth As Label
     Friend WithEvents lblShiftPentad As Label
     Friend WithEvents lblDayinYear366 As Label
+    Friend WithEvents lblShifted As Label
+    Friend WithEvents ucrChkShiftYearName As ucrCheck
 End Class
