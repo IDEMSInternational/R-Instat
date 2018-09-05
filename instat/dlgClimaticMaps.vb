@@ -130,22 +130,22 @@ Public Class dlgClimaticMaps
         clsGGplotOperator.AddParameter("ggplot", clsRFunctionParameter:=clsGgplotFunction, bIncludeArgumentName:=False, iPosition:=0)
         clsGGplotOperator.AddParameter("geom_sf", clsRFunctionParameter:=clsGeomSfFunction, bIncludeArgumentName:=False, iPosition:=1)
 
-        'clsGGplotOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
-        'clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
-        'clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
-        'clsXScaleContinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
-        'clsYScaleContinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
-        'clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
-        'clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
-        'clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()
-        'dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
-        'clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
+        clsGGplotOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
+        clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
+        clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
+        clsXScaleContinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
+        clsYScaleContinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
+        clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
+        clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
+        clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()
+        dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
+        clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
 
         clsGGplotOperator.SetAssignTo("last_map", strTempDataframe:=ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_map")
         ucrBase.clsRsyntax.SetBaseROperator(clsGGplotOperator)
     End Sub
 
-    Private Sub cmdMapOptions_Click(sender As Object, e As EventArgs) Handles cmdPlotOptions.Click
+    Private Sub cmdPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdPlotOptions.Click
         sdgPlots.SetRCode(clsGGplotOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsSfAesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrSelectorOutline, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
