@@ -88,12 +88,12 @@ Public Class sdgSaveColumnPosition
 
     Private Sub Controls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumnPosition.ControlValueChanged, ucrReceiverColumn.ControlValueChanged
         PositionOfDuplicatedColumn()
-        If ucrReceiverColumn.GetVariableNames() <> strDefaultCol Then
-            bUserSelected = True
-        Else
-            bUserSelected = False
-        End If
-        bUserSelected = True
+        'If ucrReceiverColumn.GetVariableNames() <> strDefaultCol Then
+        '    bUserSelected = True
+        'Else
+        '    bUserSelected = False
+        'End If
+        bUserSelected = False
     End Sub
 
     'TODO. Can this be done implictly by the panel control ?
