@@ -111,13 +111,13 @@ Public Class dlgPolynomials
 
     Private Sub SetNewColumName()
         If ucrNudDegree.Value = 1 Then
-            ucrSavePoly.SetAssignToBooleans(bTempAssignToIsPrefix:=False)
+            ucrSavePoly.SetbAssignToIsPrefix(bTempAssignToIsPrefix:=False)
             ucrSavePoly.SetLabelText("New Column Name:")
             If Not ucrSavePoly.bUserTyped Then
                 ucrSavePoly.SetPrefix("poly")
             End If
         Else
-            ucrSavePoly.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
+            ucrSavePoly.SetbAssignToIsPrefix(bTempAssignToIsPrefix:=True)
             ucrSavePoly.SetLabelText("Prefix for New Columns:")
             ucrSavePoly.SetPrefix("")
             If Not ucrSavePoly.bUserTyped Then

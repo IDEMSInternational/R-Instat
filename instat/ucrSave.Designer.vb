@@ -43,6 +43,7 @@ Partial Class ucrSave
         Me.lblSaveText = New System.Windows.Forms.Label()
         Me.ucrInputComboSave = New instat.ucrInputComboBox()
         Me.ucrInputTextSave = New instat.ucrInputTextBox()
+        Me.cmdOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'ucrChkSave
@@ -71,10 +72,17 @@ Partial Class ucrSave
         Me.ucrInputTextSave.IsReadOnly = False
         Me.ucrInputTextSave.Name = "ucrInputTextSave"
         '
+        'cmdOptions
+        '
+        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.UseVisualStyleBackColor = True
+        '
         'ucrSave
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrInputTextSave)
         Me.Controls.Add(Me.ucrInputComboSave)
         Me.Controls.Add(Me.lblSaveText)
@@ -89,4 +97,5 @@ Partial Class ucrSave
     Friend WithEvents lblSaveText As Label
     Friend WithEvents ucrInputComboSave As ucrInputComboBox
     Friend WithEvents ucrInputTextSave As ucrInputTextBox
+    Friend WithEvents cmdOptions As Button
 End Class

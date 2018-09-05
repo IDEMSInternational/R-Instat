@@ -96,7 +96,7 @@ Public Class dlgSPI
         ucrSaveIndex.SetDataFrameSelector(ucrSelectorVariable.ucrAvailableDataFrames)
         ucrSaveIndex.SetLabelText("Save Index into:")
         ucrSaveIndex.SetIsTextBox()
-        ucrSaveIndex.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
+        ucrSaveIndex.SetbAssignToIsPrefix(bTempAssignToIsPrefix:=True)
     End Sub
 
     Private Sub SetDefaults()
