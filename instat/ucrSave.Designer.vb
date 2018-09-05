@@ -43,6 +43,7 @@ Partial Class ucrSave
         Me.lblSaveText = New System.Windows.Forms.Label()
         Me.ucrInputComboSave = New instat.ucrInputComboBox()
         Me.ucrInputTextSave = New instat.ucrInputTextBox()
+        Me.btnColumnPosition = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'ucrChkSave
@@ -71,6 +72,12 @@ Partial Class ucrSave
         Me.ucrInputTextSave.IsReadOnly = False
         Me.ucrInputTextSave.Name = "ucrInputTextSave"
         '
+        'btnColumnPosition
+        '
+        resources.ApplyResources(Me.btnColumnPosition, "btnColumnPosition")
+        Me.btnColumnPosition.Name = "btnColumnPosition"
+        Me.btnColumnPosition.UseVisualStyleBackColor = True
+        '
         'ucrSave
         '
         resources.ApplyResources(Me, "$this")
@@ -79,6 +86,7 @@ Partial Class ucrSave
         Me.Controls.Add(Me.ucrInputComboSave)
         Me.Controls.Add(Me.lblSaveText)
         Me.Controls.Add(Me.ucrChkSave)
+        Me.Controls.Add(Me.btnColumnPosition)
         Me.Name = "ucrSave"
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -89,4 +97,5 @@ Partial Class ucrSave
     Friend WithEvents lblSaveText As Label
     Friend WithEvents ucrInputComboSave As ucrInputComboBox
     Friend WithEvents ucrInputTextSave As ucrInputTextBox
+    Friend WithEvents btnColumnPosition As Button
 End Class
