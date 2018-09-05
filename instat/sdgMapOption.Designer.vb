@@ -68,7 +68,7 @@ Partial Class sdgMapOption
         '
         'ucrInputLatMax
         '
-        Me.ucrInputLatMax.AddQuotesIfUnrecognised = True
+        Me.ucrInputLatMax.AddQuotesIfUnrecognised = False
         Me.ucrInputLatMax.IsMultiline = False
         Me.ucrInputLatMax.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputLatMax, "ucrInputLatMax")
@@ -76,7 +76,7 @@ Partial Class sdgMapOption
         '
         'ucrInputLongMax
         '
-        Me.ucrInputLongMax.AddQuotesIfUnrecognised = True
+        Me.ucrInputLongMax.AddQuotesIfUnrecognised = False
         Me.ucrInputLongMax.IsMultiline = False
         Me.ucrInputLongMax.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputLongMax, "ucrInputLongMax")
@@ -84,7 +84,7 @@ Partial Class sdgMapOption
         '
         'ucrInputLatMin
         '
-        Me.ucrInputLatMin.AddQuotesIfUnrecognised = True
+        Me.ucrInputLatMin.AddQuotesIfUnrecognised = False
         Me.ucrInputLatMin.IsMultiline = False
         Me.ucrInputLatMin.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputLatMin, "ucrInputLatMin")
@@ -92,7 +92,7 @@ Partial Class sdgMapOption
         '
         'ucrInputLongMin
         '
-        Me.ucrInputLongMin.AddQuotesIfUnrecognised = True
+        Me.ucrInputLongMin.AddQuotesIfUnrecognised = False
         Me.ucrInputLongMin.IsMultiline = False
         Me.ucrInputLongMin.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputLongMin, "ucrInputLongMin")
