@@ -173,6 +173,11 @@ Public Class dlgClimaticMaps
         'Next
     End Sub
 
+    Private Sub cmdMapOptions_Click_1(sender As Object, e As EventArgs) Handles cmdMapOptions.Click
+        sdgMapOption.SetRCode(clsBaseOperator:=clsGGplotOperator, clsXlim:=, clsylim:=, bReset:=bReset)
+        sdgMapOption.ShowDialog()
+    End Sub
+
     Private Sub TestOkEnabled()
         Dim bOkEnabled As Boolean
         If Not ucrReceiverFill.IsEmpty AndAlso ucrSaveMap.IsComplete Then
