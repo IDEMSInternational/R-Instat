@@ -281,6 +281,12 @@
     <Compile Include="dlgCompareTreatmentLines.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgConversions.Designer.vb">
+      <DependentUpon>dlgConversions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgConversions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCopyDataFrame.Designer.vb">
       <DependentUpon>dlgCopyDataFrame.vb</DependentUpon>
     </Compile>
@@ -369,6 +375,12 @@
       <DependentUpon>dlgExportToCMSAF.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgExportToCMSAF.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgMapOption.Designer.vb">
+      <DependentUpon>sdgMapOption.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgMapOption.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgMergeAdditionalData.Designer.vb">
@@ -2518,6 +2530,9 @@
     <EmbeddedResource Include="dlgContrasts.sw-KE.resx">
       <DependentUpon>dlgContrasts.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgConversions.resx">
+      <DependentUpon>dlgConversions.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgCopyDataFrame.resx">
       <DependentUpon>dlgCopyDataFrame.vb</DependentUpon>
     </EmbeddedResource>
@@ -2663,6 +2678,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMakeDate.sw-KE.resx">
       <DependentUpon>dlgMakeDate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgMapOption.resx">
+      <DependentUpon>sdgMapOption.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMerge.sw-KE.resx">
       <DependentUpon>dlgMerge.vb</DependentUpon>
